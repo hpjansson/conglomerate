@@ -1,5 +1,9 @@
 2004-02-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xsl.xds
+
+	Fixed the nsURI and xml:lang attributes
+
 	* relax-ng.xds
 
 	Fixed the nsURI attribute
