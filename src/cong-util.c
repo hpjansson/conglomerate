@@ -354,7 +354,7 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 					     xml_doc);
 
 		if (dtd_ptr->name) {
-			xmlFree (dtd_ptr->name);
+			xmlFree ((char*)dtd_ptr->name);
 		}
 		dtd_ptr->name = xmlStrdup(root_element);
 

@@ -49,7 +49,7 @@ static void visit_node(xmlNodePtr node) {
 			gchar *new_name = g_utf8_strdown (node->name, -1);
 
 			g_message("Converting <%s> to <%s>", node->name, new_name);
-			xmlFree(node->name);
+			xmlFree ((char*)node->name);
 			node->name = new_name;
 		}
 	}

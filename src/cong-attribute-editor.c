@@ -285,7 +285,7 @@ cong_bind_check_button (GtkCheckButton *check_button,
 			const gchar *attribute_value_unchecked,
 			const gchar *attribute_value_checked)
 {
-	CongAttributeWrapperRadioButton* wrapper = cong_attribute_wrapper_check_button_new ( doc,
+	CongAttributeWrapperCheckButton* wrapper = cong_attribute_wrapper_check_button_new ( doc,
 											     node,
 											     attribute_name,
 											     NULL,

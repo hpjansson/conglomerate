@@ -157,8 +157,8 @@ generate_gc_for_col (const GdkColor *col)
 
 	gc = gdk_gc_new(cong_gui_get_a_window()->window);
 	gdk_gc_copy(gc, cong_gui_get_a_window()->style->white_gc);
-	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, col, FALSE, TRUE);
-	gdk_gc_set_foreground(gc, col);	
+	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, (GdkColor*)col, FALSE, TRUE);
+	gdk_gc_set_foreground(gc, (GdkColor*)col);	
 
 	return gc;
 }
@@ -333,7 +333,7 @@ cong_dispspec_element_tagname(CongDispspecElement* element)
 const gchar*
 cong_dispspec_element_username(CongDispspecElement* element)
 {
-	gchar *result;
+	const gchar *result;
 	g_return_val_if_fail(element, NULL);
 
 	result = find_best_string_for_language (element->hash_of_language_to_user_name);

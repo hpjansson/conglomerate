@@ -93,7 +93,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 		
 		g_object_set_data (G_OBJECT(menu_item),
 				   "attr_value",
-				   enum_ptr->name);
+				   (gpointer)enum_ptr->name);
 		
 		gtk_menu_shell_append(GTK_MENU_SHELL(PRIVATE(attribute_editor_enumeration)->menu), 
 				      menu_item);
