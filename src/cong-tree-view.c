@@ -219,6 +219,9 @@ cong_tree_view_new (CongDocument *doc,
 					  details->gtk_tree_view);
 
 	}
+
+	/* Set up for cleanup: */
+	
 	
 	/* Show the tree view: */
 	gtk_widget_show(GTK_WIDGET(details->gtk_tree_view));
@@ -230,10 +233,13 @@ void cong_tree_view_free(CongTreeView *tree_view)
 {
 	g_return_if_fail(tree_view);
 
+	g_message ("cong_tree_view_free");
+
 	/* FIXME: should we delete the widgetry as well? */
 	/* FIXME: should we unref the tree store? */
 
-	cong_document_unregister_view( tree_view->view.doc, CONG_VIEW(tree_view) );
+	cong_document_unregister_view( CONG_DOCUMENT (tree_view->view.doc), 
+				       CONG_VIEW(tree_view) );
 
 	g_free(tree_view->view.klass);
 	g_free(tree_view);

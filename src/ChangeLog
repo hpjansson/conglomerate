@@ -1,5 +1,9 @@
 2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c, cong-tree-view.c, select.c
+
+	Cleanup fixes
+	
 	* cong-document.c, cong-document.h, cong-file-properties.c, cong-util.h, cursor.c
 
 	Document cleanup fixes; beginnings of CongDocument support for attaching a DTD to a document

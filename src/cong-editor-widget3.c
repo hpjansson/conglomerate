@@ -241,6 +241,13 @@ cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *wi
 							   CongEditorNode *editor_node);
 #endif
 
+/* Declarations of the GObject handlers: */
+static void
+cong_editor_widget3_finalize (GObject *object);
+
+static void
+cong_editor_widget3_dispose (GObject *object);
+
 /* Declarations of the GtkWidget event handlers: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
 static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, gpointer user_data);
@@ -344,6 +351,8 @@ GNOME_CLASS_BOILERPLATE(CongEditorWidget3,
 static void
 cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
 {
+	G_OBJECT_CLASS (klass)->finalize = cong_editor_widget3_finalize;
+	G_OBJECT_CLASS (klass)->dispose = cong_editor_widget3_dispose;
 }
 
 static void
@@ -715,6 +724,50 @@ render_area (CongEditorArea *area,
 	cong_editor_area_recursive_render (area,
 					   (GdkRectangle*)user_data);
 #endif
+}
+
+/* Definitions of the GObject handlers: */
+static void
+cong_editor_widget3_finalize (GObject *object)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (object);
+
+	g_message ("cong_editor_widget3_finalize");
+	
+	g_free (editor_widget->private);
+	editor_widget->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+cong_editor_widget3_dispose (GObject *object)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (object);
+
+	g_message ("cong_editor_widget3_dispose");
+
+	g_assert (editor_widget->private);
+
+	if (PRIVATE (editor_widget)->doc) {
+		g_object_unref (G_OBJECT (PRIVATE (editor_widget)->doc));
+		PRIVATE (editor_widget)->doc = NULL;
+	}
+
+
+	/* FIXME: need to clean up this lot! */
+#if 0
+	GHashTable *hash_of_node_to_editor_mapping;
+
+	CongEditorArea *root_area;
+	CongEditorAreaFlowHolder *root_flow_holder;
+	CongEditorChildPolicy *root_child_policy;
+
+	GdkGC *test_gc;
+#endif
+
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
 /* Definitions of the GtkWidget event handlers: */

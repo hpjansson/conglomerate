@@ -68,8 +68,15 @@ void gtk_selection_add_handler(GtkWidget            *widget,
 
 void 
 cong_selection_free (CongSelection *selection)
-{
-	g_assert_not_reached(); /* UNWRITTEN */
+{	
+	if (selection->gc_valid) {
+		g_object_unref (G_OBJECT (selection->gc_valid));
+		selection->gc_valid = NULL;
+	} 
+	if (selection->gc_invalid) {
+		g_object_unref (G_OBJECT (selection->gc_invalid));
+		selection->gc_invalid = NULL;
+	}
 }
 
 void 
