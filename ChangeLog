@@ -3,6 +3,7 @@
 	* configure.in
 	 - Support for gconf schema install
 	 - Updated gtk-doc tools
+	 - Added GTK_DOC_CHECK
 
 2003-12-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
