@@ -4,5 +4,10 @@
 ## #files #generated #by #./autogen.sh
 Makefile
 Makefile.in
+dispspec.xds
+docbook.xds
+forrest-document.xds
+kernel-traffic-newsletter.xds
+xhtml1-strict.xds
 ## #other #files
 ##
