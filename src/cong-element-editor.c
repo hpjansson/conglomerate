@@ -32,6 +32,28 @@ CongNodePtr cong_element_editor_get_node(CongElementEditor *element_editor)
 	return element_editor->node;
 }
 
+void cong_element_editor_recursive_delete(CongElementEditor *element_editor)
+{
+	g_return_if_fail(element_editor);
+
+	g_assert(element_editor->klass);
+	g_assert(element_editor->klass->on_recursive_delete);
+
+	return element_editor->klass->on_recursive_delete(element_editor);
+}
+
+
+gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
+{
+	g_return_val_if_fail(element_editor, FALSE);
+	g_return_val_if_fail(event, FALSE);
+
+	g_assert(element_editor->klass);
+	g_assert(element_editor->klass->on_document_event);
+
+	return element_editor->klass->on_document_event(element_editor, event);	
+}
+
 void cong_element_editor_get_size_requisition(CongElementEditor *element_editor)
 {
 	g_return_if_fail(element_editor);

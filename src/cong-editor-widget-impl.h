@@ -71,19 +71,12 @@ struct CongElementEditorClass
 {
 	/* Methods? */
 	const gchar *name;
+	void (*on_recursive_delete)(CongElementEditor *element_editor);
+	gboolean (*on_document_event)(CongElementEditor *element_editor, CongDocumentEvent *event);
 	void (*get_size_requisition)(CongElementEditor *element_editor);
 	void (*allocate_child_space)(CongElementEditor *element_editor);
 	void (*recursive_render)(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 	void (*on_button_press)(CongElementEditor *element_editor, GdkEventButton *event);
-#if 0
-	render
-
-	get_requisition
-	
-	handle clicks
-
-	process MVC messages
-#endif
 };
 
 void cong_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
@@ -113,6 +106,8 @@ struct CongEditorWidgetView
 #define GET_DETAILS(editor_widget) ((CongEditorWidgetDetails*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
 
 CongNodePtr cong_element_editor_get_node(CongElementEditor *element_editor);
+void cong_element_editor_recursive_delete(CongElementEditor *element_editor);
+gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
 void cong_element_editor_get_size_requisition(CongElementEditor *element_editor);
 void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 					gint x,

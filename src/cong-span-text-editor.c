@@ -31,6 +31,8 @@ struct CongSpanTextEditor
 
 };
 
+static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor);
+static gboolean span_text_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
 static void span_text_editor_get_size_requisition(CongElementEditor *element_editor);
 static void span_text_editor_allocate_child_space(CongElementEditor *element_editor);
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
@@ -39,11 +41,26 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 static CongElementEditorClass span_text_editor_class =
 {
 	"span_text_editor",
+	span_text_editor_on_recursive_delete,
+	span_text_editor_on_document_event,
 	span_text_editor_get_size_requisition,
 	span_text_editor_allocate_child_space,
 	span_text_editor_recursive_render,
 	span_text_editor_on_button_press
 };
+
+static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor)
+{
+	/* FIXME: unimplemented */
+
+}
+
+
+static gboolean span_text_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
+{
+	/* FIXME: unimplemented */
+	return FALSE;	
+}
 
 static void span_text_editor_get_size_requisition(CongElementEditor *element_editor)
 {

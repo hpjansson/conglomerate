@@ -3,6 +3,10 @@ creating ChangeLog
 
         * cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-editor-widget-impl.h, cong-span-text-editor.c
 
+	Further development
+
+        * cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-editor-widget-impl.h, cong-span-text-editor.c
+
 	Initial imports
 	
 2002-11-19 David Malcolm

@@ -24,6 +24,9 @@
 
 #include "global.h"
 #include "cong-editor-widget-impl.h"
+#include <eel/eel-gdk-extensions.h>
+
+static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node);
 
 #define V_SPACING (4)
 #define H_SPACING (4)
@@ -37,8 +40,12 @@ struct CongSectionHeadEditor
 	gboolean expanded;
 
 	GList *list_of_child; /* of type element editor */
+
+	GdkRectangle title_bar_window_rect;
 };
 
+static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor);
+static gboolean section_head_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
 static void section_head_editor_get_size_requisition(CongElementEditor *element_editor);
 static void section_head_editor_allocate_child_space(CongElementEditor *element_editor);
 static void section_head_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
@@ -47,11 +54,140 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 static CongElementEditorClass section_head_editor_class =
 {
 	"section_head_editor",
+	section_head_editor_on_recursive_delete,
+	section_head_editor_on_document_event,
 	section_head_editor_get_size_requisition,
 	section_head_editor_allocate_child_space,
 	section_head_editor_recursive_render,
 	section_head_on_button_press
 };
+
+static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor)
+{
+	/* FIXME: unimplemented */
+}
+
+static gboolean section_head_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
+{
+	CongEditorWidget *editor_widget = element_editor->widget;
+	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	GList *iter;
+
+	g_return_val_if_fail(event, FALSE);
+
+	switch (event->type) {
+	default: g_assert_not_reached();
+	case CONG_DOCUMENT_EVENT_MAKE_ORPHAN:
+		
+		/* Search for the node amongst the (direct) children; if found, then delete that child.  Otherwise,
+		   pass the message on to all children? */
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if (child_editor->node == event->data.make_orphan.node) {
+				cong_element_editor_recursive_delete(child_editor);
+				section_head->list_of_child = g_list_delete_link(section_head->list_of_child, iter);
+
+				cong_editor_widget_force_layout_update(editor_widget);
+
+				return TRUE;
+			} else {
+				/* Recurse: */
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+		
+	case CONG_DOCUMENT_EVENT_ADD_AFTER:
+		/* If the sibling is in our list, add it to our children in the correct place; otherwise delegate to children: */
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if (child_editor->node == event->data.add_after.older_sibling) {
+
+				CongEditorWidget *child_editor = create_child(section_head, event->data.add_after.node);
+
+				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter->next, child_editor);
+
+				cong_editor_widget_force_layout_update(editor_widget);
+
+				return TRUE;
+			} else {
+				/* Recurse: */
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+
+	case CONG_DOCUMENT_EVENT_ADD_BEFORE:
+		/* If the sibling is in our list, add it to our children in the correct place; otherwise delegate to children: */
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if (child_editor->node == event->data.add_before.younger_sibling) {
+
+				CongEditorWidget *child_editor = create_child(section_head, event->data.add_before.node);
+
+				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter, child_editor);
+
+				cong_editor_widget_force_layout_update(editor_widget);
+
+				return TRUE;
+			} else {
+				/* Recurse: */
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+		
+	case CONG_DOCUMENT_EVENT_SET_PARENT:
+		/* If this is the parent, add it to the children (at the end); otherwise delegate to children: */
+		if (element_editor->node == event->data.set_parent.adoptive_parent) {
+			CongEditorWidget *child_editor = create_child(section_head, event->data.set_parent.node);
+					
+			section_head->list_of_child = g_list_append(section_head->list_of_child, child_editor);
+			
+			cong_editor_widget_force_layout_update(editor_widget);
+			
+			return TRUE;
+		} else {
+			for (iter = section_head->list_of_child; iter; iter=iter->next) {
+				CongElementEditor *child_editor = iter->data;
+				g_assert(child_editor);
+				
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+
+	case CONG_DOCUMENT_EVENT_SET_TEXT:
+		/* Delegate to children: */
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if (cong_element_editor_on_document_event(child_editor, event)) {
+				return TRUE;
+			}			
+		}
+
+		break;
+	}
+
+	return FALSE;
+}
 
 static void section_head_editor_get_size_requisition(CongElementEditor *element_editor)
 {
@@ -64,13 +200,15 @@ static void section_head_editor_get_size_requisition(CongElementEditor *element_
 	requisition->width = 100; /* for now */
 	requisition->height = TITLE_HEIGHT + 1 + V_SPACING;
 
-	for (iter = section_head->list_of_child; iter; iter=iter->next) {
-		CongElementEditor *child_editor = iter->data;
-		g_assert(child_editor);
-
-		cong_element_editor_get_size_requisition(child_editor);
-		requisition->height += child_editor->requisition.height;
-	}	
+	if (section_head->expanded) {
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+			
+			cong_element_editor_get_size_requisition(child_editor);
+			requisition->height += child_editor->requisition.height;
+		} 
+	}
 }
 
 static void section_head_editor_allocate_child_space(CongElementEditor *element_editor)
@@ -80,6 +218,11 @@ static void section_head_editor_allocate_child_space(CongElementEditor *element_
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkRectangle free_rectangle;
+
+	section_head->title_bar_window_rect.x = element_editor->window_area.x;
+	section_head->title_bar_window_rect.y = element_editor->window_area.y;
+	section_head->title_bar_window_rect.width = element_editor->window_area.width;
+	section_head->title_bar_window_rect.height = TITLE_HEIGHT;
 
 	free_rectangle.x = element_editor->window_area.x+1+H_SPACING;
 	free_rectangle.y = element_editor->window_area.y+TITLE_HEIGHT;
@@ -235,18 +378,68 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	section_head->expanded = !section_head->expanded;
+	/* Test to see if the header bar was clicked: */
+	if ( eel_rectangle_contains(&section_head->title_bar_window_rect, 
+				    event->x,
+				    event->y) ){
+		section_head->expanded = !section_head->expanded;
 
-#if 0
-	gtk_widget_queue_draw_area(GTK_WIDGET(editor_widget),
-				   gint x,
-				   gint y,
-				   gint width,
-				   gint height);
-#else
-	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));
-#endif
+		cong_editor_widget_force_layout_update(editor_widget);
 
+	} else {
+		/* See if a child is "under" this event; delegate to the child: */
+
+		GList *iter;
+
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if ( eel_rectangle_contains(&child_editor->window_area, 
+						    event->x,
+						    event->y) ){
+				cong_element_editor_on_button_press(child_editor, event);
+			}
+		}
+	}
+
+}
+
+static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node)
+{
+	CongEditorWidget *editor_widget;
+	CongDocument *doc;
+	CongDispspec *ds;
+	enum CongNodeType node_type = cong_node_type(child_node);
+	const char *name = xml_frag_name_nice(child_node);
+
+	editor_widget = section_head->element_editor.widget;
+	doc = cong_editor_widget_get_document(editor_widget);
+	ds = cong_document_get_dispspec(doc);
+
+	if (node_type == CONG_NODE_TYPE_ELEMENT) {
+		CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+		
+		if (element) {
+			if (cong_dispspec_element_is_structural(element)) {
+				return cong_section_head_editor_new(editor_widget, child_node);
+				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
+				
+			} else if (cong_dispspec_element_is_span(element) ||
+				   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
+				
+				return cong_span_text_editor_new(editor_widget, child_node);
+				
+			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
+				/* unwritten */
+			}
+		}	
+	} else if (node_type == CONG_NODE_TYPE_TEXT) {
+		return cong_span_text_editor_new(editor_widget, child_node);
+	}
+
+	
+	return NULL;
 
 }
 
@@ -267,36 +460,12 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
       	this_node = cong_element_editor_get_node( CONG_ELEMENT_EDITOR(section_head) );
 	for ( child_node = cong_node_first_child(this_node); child_node; child_node = cong_node_next(child_node))
 	{
-		enum CongNodeType node_type = cong_node_type(child_node);
-		const char *name = xml_frag_name_nice(child_node);
 		CongElementEditor *child = NULL;
 		gboolean collapsed_child = FALSE;
 
 		/* g_message("Examining frag %s\n",name); */
 
-		if (node_type == CONG_NODE_TYPE_ELEMENT)
-		{
-			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
-
-			if (element) {
-				if (cong_dispspec_element_is_structural(element)) {
-					child = cong_section_head_editor_new(editor_widget, child_node);
-					collapsed_child = cong_dispspec_element_collapseto(element);
-
-				} else if (cong_dispspec_element_is_span(element) ||
-					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
-					
-					child = cong_span_text_editor_new(editor_widget, child_node);
-
-				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
-					/* unwritten */
-				}
-			}
-		}
-		else if (node_type == CONG_NODE_TYPE_TEXT)
-		{
-			child = cong_span_text_editor_new(editor_widget, child_node);
-		}
+		child = create_child(section_head, child_node);
 
 		if (child) {
 			section_head->list_of_child = g_list_append(section_head->list_of_child, child);

@@ -54,6 +54,8 @@ static void on_document_coarse_update(CongView *view)
 static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 {
 	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidgetDetails* details;
+	CongDocumentEvent event;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -63,14 +65,19 @@ static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	details = GET_DETAILS(editor_widget_view->widget);
 
-	/* FIXME: unimplemented */
+	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
+	event.data.make_orphan.node = node;
+	cong_element_editor_on_document_event(details->root_editor, &event);
 
 }
 
 static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
 {
 	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidgetDetails* details;
+	CongDocumentEvent event;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -81,13 +88,25 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	details = GET_DETAILS(editor_widget_view->widget);
 
-	/* FIXME: unimplemented */
+	/* Synthesise a "make orphan" event: */
+	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
+	event.data.make_orphan.node = node;
+	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	/* Send the rest of the event: */
+	event.type = CONG_DOCUMENT_EVENT_ADD_AFTER;
+	event.data.add_after.node = node;
+	event.data.add_after.older_sibling = older_sibling;
+	cong_element_editor_on_document_event(details->root_editor, &event);
 }
 
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidgetDetails* details;
+	CongDocumentEvent event;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -98,14 +117,26 @@ static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNo
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	details = GET_DETAILS(editor_widget_view->widget);
 
-	/* FIXME: unimplemented */
+	/* Synthesise a "make orphan" event: */
+	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
+	event.data.make_orphan.node = node;
+	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	/* Send the rest of the event: */
+	event.type = CONG_DOCUMENT_EVENT_ADD_BEFORE;
+	event.data.add_before.node = node;
+	event.data.add_before.younger_sibling = younger_sibling;
+	cong_element_editor_on_document_event(details->root_editor, &event);
 
 }
 
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidgetDetails* details;
+	CongDocumentEvent event;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -116,14 +147,26 @@ static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNo
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	details = GET_DETAILS(editor_widget_view->widget);
 
-	/* FIXME: unimplemented */
+	/* Synthesise a "make orphan" event: */
+	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
+	event.data.make_orphan.node = node;
+	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	/* Send the rest of the event: */
+	event.type = CONG_DOCUMENT_EVENT_SET_PARENT;
+	event.data.set_parent.node = node;
+	event.data.set_parent.adoptive_parent = adoptive_parent;
+	cong_element_editor_on_document_event(details->root_editor, &event);
 
 }
 
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
 {
 	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidgetDetails* details;
+	CongDocumentEvent event;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -134,8 +177,12 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	details = GET_DETAILS(editor_widget_view->widget);
 
-	/* FIXME: unimplemented */
+	event.type = CONG_DOCUMENT_EVENT_SET_TEXT;
+	event.data.set_text.node = node;
+	event.data.set_text.new_content = new_content;
+	cong_element_editor_on_document_event(details->root_editor, &event);
 
 }
 
@@ -449,3 +496,20 @@ CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget)
 	return details->view->view.doc;
 }
 
+void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget)
+{
+	CongEditorWidgetDetails *details;
+
+	g_return_if_fail(editor_widget);
+
+	details = GET_DETAILS(editor_widget);
+
+	/* Recursively update all the size requisitions: */
+	cong_element_editor_get_size_requisition(details->root_editor);
+
+	gtk_widget_set_size_request(GTK_WIDGET(editor_widget),
+				    details->root_editor->requisition.width,
+				    details->root_editor->requisition.height);
+
+	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));
+}
