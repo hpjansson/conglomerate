@@ -309,7 +309,7 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 
 	g_message("text_importer_action_callback");
 
-	if (cong_ui_load_imported_file_content(uri, &buffer, &size)) {
+	if (cong_ui_load_imported_file_content(uri, &buffer, &size, toplevel_window)) {
 		xmlNodePtr root_node;
 
 		g_assert(buffer);
@@ -357,7 +357,7 @@ void sourcecode_importer_action_callback(CongImporter *importer, const gchar *ur
 
 	g_message("sourcecode_importer_action_callback");
 
-	if (cong_ui_load_imported_file_content(uri, &buffer, &size)) {
+	if (cong_ui_load_imported_file_content(uri, &buffer, &size, toplevel_window)) {
 		g_assert(buffer);
 
 		/* Build up the document and its content: */

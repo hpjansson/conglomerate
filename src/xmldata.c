@@ -1676,63 +1676,6 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementT
 	return list;
 }
 
-/*
-  Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
- */
-void xml_tag_remove(CongDocument *doc, CongNodePtr x)
-{
-	CongNodePtr n0;
-	CongNodePtr n0_next;
-
-	g_return_if_fail(x);
-
-	/* GREP FOR MVC */
-
-#if 1
-	for (n0 = x->children; n0; n0 = n0_next) {
-		n0_next = n0->next;
-		
-		cong_document_node_add_before(doc, n0, x);
-	}
-
-	cong_document_node_make_orphan(doc, x);
-
-	cong_document_node_recursive_delete (doc, x);
-#else
-	n0 = cong_node_first_child(x);
-
-	if (n0) {
-		n0->prev = x->prev;
-	}
-
-	if (NULL==x->prev) {
-		x->parent->children = n0;
-	} else {
-		x->prev->next = n0;
-	}
-
-	for (; n0->next; n0 = n0->next) {
-		n0->parent = x->parent;
-	}
-	n0->parent = x->parent;
-
-	n0->next = x->next;
-	if (x->next) {
-		x->next->prev = n0;
-	} else {
-		x->parent->last = n0;
-	}
-	
-	x->next = NULL;
-	x->prev = NULL;
-	x->parent = NULL;
-	x->children = NULL;
-	x->last = NULL;
-
-	xmlFreeNode(x);
-#endif
-}
-
 GnomeVFSResult
 cong_xml_save_to_vfs(xmlDocPtr doc_ptr, 
 		     GnomeVFSURI *file_uri,	

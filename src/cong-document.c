@@ -443,7 +443,7 @@ cong_document_get_filename(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_error_split_uri(uri, &filename, &path);
+		cong_util_split_uri(uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -478,7 +478,7 @@ cong_document_get_parent_uri(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_error_split_uri(uri, &filename, &path);
+		cong_util_split_uri(uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -896,7 +896,8 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 
 	cong_document_begin_edit(doc);
 
-	xml_tag_remove(doc, x); /* this is now a compound operation */
+	cong_util_remove_tag (doc, 
+			      x); /* this is now a compound operation */
 
 	cong_document_merge_adjacent_text_children_of_node (doc, 
 							    parent);
@@ -1299,7 +1300,8 @@ void cong_document_delete_range (CongDocument *doc,
 						 loc1.node);
 
 		/* FIXME: should this be a cong_document_node_recursive_delete instead? */
-		xml_tag_remove(doc, loc1.node);
+		cong_util_remove_tag (doc, 
+				      loc1.node);
 	}
 
 	/* --- Processing for single node (loc0.node == loc1.node) --- */
@@ -1353,7 +1355,8 @@ void cong_document_delete_range (CongDocument *doc,
 			CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Deletion of a single non-textual node");
 #else
 			/* what should happen to cursor? */
-			xml_tag_remove(doc, loc0.node);
+			cong_util_remove_tag (doc, 
+					      loc0.node);
 #endif
 		}
 	}

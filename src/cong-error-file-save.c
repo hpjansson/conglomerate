@@ -14,40 +14,9 @@
 
 #include "global.h"
 #include "cong-error-dialog.h"
+#include "cong-util.h"
 
 /* FIXME: i18n! */
-
-void
-cong_error_split_uri(const GnomeVFSURI* uri, gchar** filename_alone, gchar** path)
-{
-	GnomeVFSURI* parent_uri;
-
-	g_return_if_fail(uri);
-	g_return_if_fail(filename_alone);
-	g_return_if_fail(path);
-
-	parent_uri = gnome_vfs_uri_get_parent(uri);
-
-	*filename_alone=gnome_vfs_uri_extract_short_name(uri);
-
-#if 1
-	/* This version seems better when dealing with e.g. http and ftp methods etc: */
-	if (parent_uri) {
-
-		*path=gnome_vfs_uri_to_string(parent_uri,
-					      GNOME_VFS_URI_HIDE_USER_NAME|GNOME_VFS_URI_HIDE_PASSWORD);
-	} else {
-		*path=g_strdup("");
-	}
-#else
-	/* This version seems better when dealing with the "file" method; perhaps we should have a conditional here? */ 
-	*path=gnome_vfs_uri_extract_dirname(uri);
-#endif
-
-	gnome_vfs_uri_unref(parent_uri);
-
-}
-
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 
 					     const GnomeVFSURI* file_uri, 
@@ -67,7 +36,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 
 	app_name = cong_error_get_appname();
 
-	cong_error_split_uri(file_uri, &filename_alone, &path);
+	cong_util_split_uri (file_uri, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);

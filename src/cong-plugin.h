@@ -224,7 +224,7 @@ void cong_importer_invoke(CongImporter *importer, const gchar *filename, const g
 gboolean cong_exporter_supports_document(CongExporter *exporter, CongDocument *doc);
 void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window);
 gchar *cong_exporter_get_preferred_uri(CongExporter *exporter);
-void cong_exporter_set_preferred_ui(CongExporter *exporter, const gchar *uri);
+void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri);
 
 #if ENABLE_PRINTING
 gboolean cong_print_method_supports_document(CongPrintMethod *print_method, CongDocument *doc);
@@ -251,6 +251,16 @@ xmlDocPtr cong_ui_parse_buffer(const char* buffer,
 xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 				const gchar *stylesheet_filename,
 				GtkWindow *toplevel_window);
+
+void cong_ui_transform_doc_to_uri(CongDocument *doc,
+				  const gchar *stylesheet_filename,
+				  const gchar *uri,
+				  GtkWindow *toplevel_window);
+
+gboolean cong_ui_load_imported_file_content(const gchar *uri,
+					    char** buffer,
+					    GnomeVFSFileSize* size,
+					    GtkWindow *parent_window);
 
 void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
 						  CongDocument *doc, 

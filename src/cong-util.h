@@ -129,6 +129,18 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 			    const xmlChar *ExternalID, 
 			    const xmlChar *SystemID);
 
+void
+cong_util_split_uri (const GnomeVFSURI* uri, 
+		     gchar** filename_alone, 
+		     gchar** path);
+
+/*
+  Function to remove a node "tag" from the tree; all its children become children of tag's parents in the natural place in the tree.
+ */
+void 
+cong_util_remove_tag (CongDocument *doc, 
+		      CongNodePtr tag);
+
 G_END_DECLS
 
 #endif

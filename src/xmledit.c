@@ -10,6 +10,7 @@
 #include "cong-dispspec.h"
 #include "cong-app.h"
 #include "cong-selection.h"
+#include "cong-range.h"
 #include "cong-error-dialog.h"
 
 /* --- Cut/copy/paste --- */

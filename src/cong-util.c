@@ -395,3 +395,96 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 	return xml_dtd;
 }
 
+
+void
+cong_util_split_uri (const GnomeVFSURI* uri, 
+		     gchar** filename_alone, 
+		     gchar** path)
+{
+	GnomeVFSURI* parent_uri;
+
+	g_return_if_fail(uri);
+	g_return_if_fail(filename_alone);
+	g_return_if_fail(path);
+
+	parent_uri = gnome_vfs_uri_get_parent(uri);
+
+	*filename_alone=gnome_vfs_uri_extract_short_name(uri);
+
+#if 1
+	/* This version seems better when dealing with e.g. http and ftp methods etc: */
+	if (parent_uri) {
+
+		*path=gnome_vfs_uri_to_string(parent_uri,
+					      GNOME_VFS_URI_HIDE_USER_NAME|GNOME_VFS_URI_HIDE_PASSWORD);
+	} else {
+		*path=g_strdup("");
+	}
+#else
+	/* This version seems better when dealing with the "file" method; perhaps we should have a conditional here? */ 
+	*path=gnome_vfs_uri_extract_dirname(uri);
+#endif
+
+	gnome_vfs_uri_unref(parent_uri);
+
+}
+
+/*
+  Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
+ */
+void 
+cong_util_remove_tag (CongDocument *doc, 
+		      CongNodePtr x)
+{
+	CongNodePtr n0;
+	CongNodePtr n0_next;
+
+	g_return_if_fail(x);
+
+	/* GREP FOR MVC */
+
+#if 1
+	for (n0 = x->children; n0; n0 = n0_next) {
+		n0_next = n0->next;
+		
+		cong_document_node_add_before(doc, n0, x);
+	}
+
+	cong_document_node_make_orphan(doc, x);
+
+	cong_document_node_recursive_delete (doc, x);
+#else
+	n0 = cong_node_first_child(x);
+
+	if (n0) {
+		n0->prev = x->prev;
+	}
+
+	if (NULL==x->prev) {
+		x->parent->children = n0;
+	} else {
+		x->prev->next = n0;
+	}
+
+	for (; n0->next; n0 = n0->next) {
+		n0->parent = x->parent;
+	}
+	n0->parent = x->parent;
+
+	n0->next = x->next;
+	if (x->next) {
+		x->next->prev = n0;
+	} else {
+		x->parent->last = n0;
+	}
+	
+	x->next = NULL;
+	x->prev = NULL;
+	x->parent = NULL;
+	x->children = NULL;
+	x->last = NULL;
+
+	xmlFreeNode(x);
+#endif
+}
+

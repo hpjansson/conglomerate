@@ -15,6 +15,7 @@
 #include "global.h"
 #include <libgnome/libgnome.h>
 #include "cong-error-dialog.h"
+#include "cong-util.h"
 
 void
 cong_error_split_filename(const gchar* filename, gchar** filename_alone, gchar** path)
@@ -66,7 +67,7 @@ cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, gboolea
 
 	app_name = cong_error_get_appname();
 
-	cong_error_split_uri(file_uri, &filename_alone, &path);
+	cong_util_split_uri(file_uri, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
@@ -160,7 +161,7 @@ cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_w
 	g_return_val_if_fail(file_uri, NULL);
 	g_return_val_if_fail(GNOME_VFS_OK!=vfs_result, NULL);
 
-	cong_error_split_uri(file_uri, &filename_alone, &path);
+	cong_util_split_uri(file_uri, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);

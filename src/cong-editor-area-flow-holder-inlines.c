@@ -31,6 +31,8 @@
 #include "cong-editor-child-policy-inline.h"
 #include "cong-editor-line-fragments.h"
 
+#include "cong-document.h"
+
 #define DEBUG_LINE_FLOWS 0
 
 

@@ -42,6 +42,8 @@ cong_primary_window_update_title (CongPrimaryWindow *primary_window);
 GtkWindow*
 cong_primary_window_get_toplevel (CongPrimaryWindow *primary_window);
 
+gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window);
+
 G_END_DECLS
 
 #endif

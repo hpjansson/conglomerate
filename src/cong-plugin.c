@@ -28,6 +28,7 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
+#include "cong-primary-window.h"
 #include "cong-app.h"
 #include "cong-util.h"
 

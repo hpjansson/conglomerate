@@ -27,6 +27,7 @@
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
+#include "cong-editor-area-flow-holder.h"
 
 #define DEBUG_LINE 0
 

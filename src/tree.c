@@ -10,6 +10,7 @@
 #include "cong-dialog.h"
 #include "cong-view.h"
 #include "cong-app.h"
+#include "cong-util.h"
 
 /* the popup items have the data "popup_data_item" set on them: */
 

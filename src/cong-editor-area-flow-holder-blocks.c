@@ -145,8 +145,6 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
-	const GtkRequisition *child_req;
-
 	CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks = CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS(area);
 
 	if (PRIVATE(area_flow_holder_blocks)->outer_compose) {
