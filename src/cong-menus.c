@@ -59,7 +59,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 0
+#define ENABLE_DEBUG_MENU 1
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
@@ -1221,6 +1221,35 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 	g_free(glade_filename);
 }
 
+
+static gchar*
+get_test_fragment(CongPrimaryWindow *primary_window)
+{
+#if 1
+	return g_strdup("foo<emphasis>Hello world</emphasis>bar");
+#else
+	return g_strdup("foo<some-random-unknown-tag>Hello world</some-random-unknown-tag>bar");
+#endif
+}
+
+void menu_callback_debug_insert_xml_fragment(gpointer callback_data,
+					     guint callback_action,
+					     GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+	g_assert(doc);
+
+	gchar *source_fragment = get_test_fragment(primary_window);
+	g_assert(source_fragment);
+
+	cong_document_paste_text (doc, 
+				  &cong_document_get_cursor(doc)->location, 
+				  source_fragment);
+	
+	g_free(source_fragment);
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1347,6 +1376,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Document Signal Log"),           NULL, menu_callback_debug_document_signal_log, 0, NULL },	
 	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
 	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
+	{ N_("/Debug/Insert XML Fragment"),           NULL, menu_callback_debug_insert_xml_fragment, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },

@@ -455,7 +455,7 @@ void cong_node_free(CongNodePtr node)
 	xmlFreeNode(node);
 }
 
-
+#if 0
 void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 {
 	CongNodePtr iter, next;
@@ -481,8 +481,9 @@ void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 
 	cong_node_free(node);
 }
+#endif
 
-static void
+void
 cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)
 {
 	CongNodePtr iter;
@@ -502,6 +503,8 @@ CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 	cong_node_recursive_set_doc(new_node, node->doc);
 
 	/* FIXME: this is an evil hack, and this whole function should be deprecated */
+
+	return new_node;
 }
 
 /* Tree manipulation: */

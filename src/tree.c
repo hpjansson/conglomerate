@@ -135,13 +135,13 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
 
 	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
 	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
 	cong_document_begin_edit(doc);
-	cong_node_recursive_delete(doc, tag);
+	cong_document_node_recursive_delete(doc, tag);
 	cong_document_end_edit(doc);
 
 	return(TRUE);
@@ -152,7 +152,7 @@ gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
 	/* GREP FOR MVC */
 
-	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
 	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
 	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 

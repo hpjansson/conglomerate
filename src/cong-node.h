@@ -123,8 +123,12 @@ CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attrib
 void cong_node_self_test(CongNodePtr node);
 void cong_node_self_test_recursive(CongNodePtr node);
 
-void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node);
-CongNodePtr cong_node_recursive_dup(CongNodePtr node);
+void
+cong_node_recursive_set_doc (CongNodePtr node, 
+			     xmlDocPtr xml_doc);
+
+CongNodePtr
+cong_node_recursive_dup (CongNodePtr node);
 
 /* Method to test if it's safe to recurse over the children of this node.  It's generally not a good idea to recurse over the children of an entity reference.  
    FIXME: why? 

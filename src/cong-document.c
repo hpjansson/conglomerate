@@ -991,6 +991,27 @@ gboolean cong_document_for_each_node(CongDocument *doc, CongDocumentRecursionCal
 						    0);
 }
 
+gboolean
+cong_document_for_each_child_of_node (CongDocument *doc, 
+				      CongNodePtr parent, 
+				      CongDocumentRecursionCallback callback, 
+				      gpointer callback_data)
+{
+	CongNodePtr child_iter;
+
+	g_return_val_if_fail (doc, TRUE);
+	g_return_val_if_fail (parent, TRUE);
+	g_return_val_if_fail (callback, TRUE);
+
+	for (child_iter = parent->children; child_iter; child_iter=child_iter->next) {
+		if ((*callback)(doc, child_iter, callback_data, 0)) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 static gboolean merge_adjacent_text_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
 	/* We have to "look behind" at the previous sibling, since the iteration moes forward: */
@@ -1021,6 +1042,86 @@ void cong_document_merge_adjacent_text_nodes(CongDocument *doc)
 	cong_document_for_each_node (doc, merge_adjacent_text_callback, NULL);
 
 	cong_document_end_edit (doc);
+
+}
+
+void 
+cong_document_merge_adjacent_text_children_of_node (CongDocument *doc, 
+						    CongNodePtr parent)
+{
+	g_return_if_fail (doc);
+	g_return_if_fail (parent);
+
+	cong_document_begin_edit (doc);
+
+	cong_document_for_each_child_of_node (doc, parent, merge_adjacent_text_callback, NULL);
+
+	cong_document_end_edit (doc);
+}
+
+void 
+cong_document_node_recursive_delete (CongDocument *doc, 
+				     CongNodePtr node)
+{
+	CongNodePtr iter, next;
+
+	CONG_NODE_SELF_TEST(node);
+
+	iter = node->children; 
+
+	while (iter) {
+		next = iter->next;
+
+		CONG_NODE_SELF_TEST(iter);
+		
+		cong_document_node_recursive_delete(doc, iter);
+
+		iter = next;
+	}
+
+	g_assert(node->children==NULL);
+	g_assert(node->last==NULL);
+
+	cong_document_node_make_orphan(doc, node);
+
+	cong_node_free(node);
+}
+CongNodePtr
+cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
+					       const gchar *source_fragment)
+{
+	gchar *fake_document;
+	xmlDocPtr xml_doc;
+	CongNodePtr result;
+
+	g_return_val_if_fail (doc, NULL);
+	g_return_val_if_fail (source_fragment, NULL);
+
+	fake_document = g_strdup_printf ("<?xml version=\"1.0\"?>\n<placeholder>%s</placeholder>", source_fragment);
+	
+	g_message (fake_document);
+	
+	xml_doc = xmlParseMemory (fake_document, 
+				  strlen(fake_document));
+
+	g_assert(xml_doc);
+	g_assert(xml_doc->children);
+	g_assert(cong_node_is_tag (xml_doc->children, "placeholder"));
+
+	result = cong_node_recursive_dup (xml_doc->children);
+
+	g_assert(cong_node_is_tag (result, "placeholder"));
+		
+	cong_node_recursive_set_doc (result, 
+				     cong_document_get_xml (doc));	
+
+	xmlFreeDoc (xml_doc);
+
+	g_free (fake_document);
+
+	g_assert(cong_node_is_tag (result, "placeholder"));
+	
+	return result;
 
 }
 

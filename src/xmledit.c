@@ -47,7 +47,10 @@ void cong_document_cut_selection(CongDocument *doc)
 
 	if (cong_location_equals(&selection->loc0, &selection->loc1)) return;
 	
-	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+	if (cong_app_singleton()->clipboard) {
+		cong_document_node_recursive_delete (NULL, 
+						     cong_app_singleton()->clipboard);
+	}
 	
 	t = cong_node_new_element(NULL, "dummy", doc);
 
@@ -85,7 +88,8 @@ void cong_document_copy_selection(CongDocument *doc)
 	/* GREP FOR MVC */
 
 	if (cong_app_singleton()->clipboard) {
-		cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+		cong_document_node_recursive_delete (NULL, 
+						     cong_app_singleton()->clipboard);
 	}
 
 	t = cong_node_new_element(NULL, "dummy", doc);
@@ -181,6 +185,62 @@ void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget)
 
 	cong_location_nullify(&selection->loc0);
 	cong_location_nullify(&selection->loc1);
+}
+
+void 
+cong_document_paste_text (CongDocument *doc, 
+			  CongLocation *insert_loc, 
+			  const gchar *source_fragment)
+{
+	CongNodePtr new_nodes; 
+	CongNodePtr node_after;
+	CongNodePtr iter, iter_next;
+
+	g_return_if_fail (doc);
+	g_return_if_fail (insert_loc);
+	g_return_if_fail (source_fragment);
+	g_return_if_fail (insert_loc->node);	
+
+	new_nodes = cong_document_make_nodes_from_source_fragment (doc, 
+								   source_fragment);
+	cong_document_begin_edit (doc);
+
+	/* We will add the children of new_node in place, then delete the placeholder parent, then merge adjacent text nodes if necessary. */
+
+	/* Calculate insertion point, splitting text nodes if necessary: */
+	if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
+
+		if (0==insert_loc->byte_offset) {
+			node_after = insert_loc->node;
+		} else if (!cong_location_get_unichar(insert_loc)) {
+		        node_after = cong_location_xml_frag_next(insert_loc);
+		} else {
+			/* Split data node */
+			cong_location_xml_frag_data_nice_split2(doc, insert_loc);
+			
+			node_after = cong_location_xml_frag_next(insert_loc);
+		}
+	} else {
+		g_assert_not_reached();
+	}
+
+	/* Add the new nodes: */
+	for (iter = new_nodes->children; iter; iter = iter_next) {
+		iter_next = iter->next;
+
+		cong_document_node_add_before(doc, iter, node_after);		
+	}
+	
+	/* Delete the placeholder parent: */
+	cong_document_node_recursive_delete (doc, 
+					     new_nodes);
+
+	/* Merge adjacent text nodes: */
+	cong_document_merge_adjacent_text_children_of_node (doc, 
+							    node_after->parent);
+
+	cong_document_end_edit (doc);
+
 }
 
 extern char *ilogo_xpm[];
