@@ -1,0 +1,11 @@
+--- doc/reference/Makefile.in.tarball	2003-10-08 14:56:58.000000000 +0000
++++ doc/reference/Makefile.in	2003-10-08 14:58:17.000000000 +0000
+@@ -391,7 +391,7 @@
+ install-data: install-data-am
+ 
+ install-am: all-am
+-	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
++	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am
+ install: install-am
+ uninstall-am:
+ uninstall: uninstall-am
