@@ -26,9 +26,11 @@ conglomerate_SOURCES =      \
   cong-graph.h              \
   cong-location.h           \
   cong-node.h               \
+  cong-overview-view.h      \
   cong-parser-error.h       \
   cong-plugin.h             \
   cong-progress-checklist.h \
+  cong-tree-view.h          \
   cong-view.h               \
   fo.h                      \
   cong-debug-log-view.c     \
@@ -57,6 +59,7 @@ conglomerate_SOURCES =      \
   cong-location.c           \
   cong-menus.c              \
   cong-node-properties-dialog.c \
+  cong-overview-view.c      \
   cong-parser-error.c       \
   cong-plugin.c             \
   cong-primary-window.c     \

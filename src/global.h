@@ -80,11 +80,6 @@ CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window
 void cong_primary_window_update_title(CongPrimaryWindow *primary_window);
 GtkWindow *cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window);
 
-CongTreeView *cong_tree_view_new(CongDocument *doc);
-void cong_tree_view_free(CongTreeView *tree_view);
-GtkWidget* cong_tree_view_get_widget(CongTreeView *tree_view);
-GtkTreeStore* cong_tree_view_get_tree_store(CongTreeView *tree_view);
-
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);

@@ -33,6 +33,7 @@
 #include "cong-dialog.h"
 #include "cong-plugin.h"
 #include "cong-app.h"
+#include "cong-overview-view.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -74,7 +75,7 @@ struct CongPrimaryWindow
 
 /*  	GtkWidget *w; */
 
-	CongTreeView *cong_tree_view;
+	CongTreeView *cong_overview_view;
 	GtkWidget *cong_editor_widget;
 
 	GtkWidget *window, *menus;
@@ -406,7 +407,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gtk_widget_show(w1);
 
 	if (primary_window->doc) {
-		g_assert(primary_window->cong_tree_view);
+		g_assert(primary_window->cong_overview_view);
 		g_assert(primary_window->cong_editor_widget);
 
 		/* --- Notebook to appear in the sidebar: --- */
@@ -430,7 +431,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 					 );
 		
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-						      cong_tree_view_get_widget(primary_window->cong_tree_view));
+						      cong_tree_view_get_widget(primary_window->cong_overview_view));
 		
 		/* --- Bookmark view --- */
 #if 0
@@ -519,7 +520,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 		primary_window->doc = doc;
 		cong_document_ref(doc);
 
-		primary_window->cong_tree_view = cong_tree_view_new(doc);
+		primary_window->cong_overview_view = cong_overview_view_new (doc);
 #if 0
 		primary_window->cong_editor_widget = gtk_calendar_new();
 #else
@@ -546,10 +547,10 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 	g_return_if_fail(primary_window);
 
 	if (primary_window->doc) {
-		cong_tree_view_free(primary_window->cong_tree_view);
+		cong_tree_view_free(primary_window->cong_overview_view);
 		cong_document_unref(primary_window->doc);
 	} else {
-		g_assert(primary_window->cong_tree_view==NULL);
+		g_assert(primary_window->cong_overview_view==NULL);
 	}
 
 	the_app.primary_windows = g_list_remove(the_app.primary_windows, primary_window);	

@@ -86,7 +86,6 @@ typedef struct CongFont CongFont;
 typedef struct CongCursor CongCursor;
 typedef struct CongSelection CongSelection;
 typedef struct CongPrimaryWindow CongPrimaryWindow;
-typedef struct CongTreeView CongTreeView;
 typedef struct CongEditorView CongEditorView;
 typedef struct CongSpanEditor CongSpanEditor; 
 
