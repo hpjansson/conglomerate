@@ -44,7 +44,7 @@ build-stamp: patch config.status
 
 	# Commands to compile the package.
 	$(MAKE)
-	# `cd doc/C ; ./manpage.make`, asume that manual is up-to-date
+	# `cd doc/C ; ./manpage.make` # manual should up-to-date
 	cp src/conglomerate src/conglomerate-dbg
 
 	touch build-stamp
@@ -55,7 +55,7 @@ clean: unpatch
 	dh_testroot
 	rm -f build-stamp
 
-	# Add here commands to clean up after the build process.
+	# Commands to clean up after the build process.
 	-$(MAKE) distclean
 	rm -f doc/C/conglomerate-C.omf.out
 	rm -f intltool-extract intltool-merge intltool-update
