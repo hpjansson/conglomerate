@@ -57,6 +57,10 @@ struct CongEditorAreaContainerClass
 	void (*add_child) ( CongEditorAreaContainer *area_container,
 			    CongEditorArea *child);
 
+	void (*add_child_after) ( CongEditorAreaContainer *area_container,
+				  CongEditorArea *new_child,
+				  CongEditorArea *relative_to);
+
 	void (*remove_child) ( CongEditorAreaContainer *area_container,
 			       CongEditorArea *child);
 
@@ -77,6 +81,11 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 void
 cong_editor_area_container_add_child (CongEditorAreaContainer *area_container,
 				      CongEditorArea *child);
+
+void
+cong_editor_area_container_add_child_after (CongEditorAreaContainer *area_container,
+					    CongEditorArea *new_child,
+					    CongEditorArea *relative_to);
 
 void
 cong_editor_area_container_remove_child (CongEditorAreaContainer *area_container,

@@ -113,15 +113,19 @@ struct CongEditorWidget3Details
 #define LOG_EDITOR_NODES 1
 #if LOG_EDITOR_NODES
 #define LOG_EDITOR_NODE1(x) g_message(x)
+#define LOG_EDITOR_NODE2(x, a) g_message((x), (a))
 #else
 #define LOG_EDITOR_NODE1(x) ((void)0)
+#define LOG_EDITOR_NODE2(x, a) ((void)0)
 #endif
 
 #define LOG_EDITOR_AREAS 1
 #if LOG_EDITOR_AREAS
-#define LOG_EDITOR_AREA1(x) g_message(x)
+#define LOG_EDITOR_AREA1(x) g_message((x))
+#define LOG_EDITOR_AREA2(x, a) g_message((x), (a))
 #else
 #define LOG_EDITOR_AREA1(x) ((void)0)
+#define LOG_EDITOR_AREA2(x, a) ((void)0)
 #endif
 
 /* Declarations of misc stuff: */
@@ -132,11 +136,6 @@ render_area (CongEditorArea *area,
 static void 
 populate_widget3(CongEditorWidget3 *widget);
 
-#if 0
-static void 
-create_areas(CongEditorWidget3 *widget);
-#endif
-
 static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
 		    CongNodePtr node);		    
@@ -146,20 +145,22 @@ recursive_remove_nodes(CongEditorWidget3 *widget,
 		       CongNodePtr node);
 
 
-#if 1
 static void 
 create_areas(CongEditorWidget3 *widget,
 	     CongNodePtr node);
 static void 
 destroy_areas(CongEditorWidget3 *widget,
 	      CongNodePtr node);
-#else
 
-static void 
-recursive_create_areas(CongEditorWidget3 *widget,
-		       CongNodePtr node,
-		       CongEditorArea *parent_area);
-#endif
+CongEditorArea*
+cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
+						      CongEditorNode *editor_node);
+CongEditorArea*
+cong_editor_widget3_get_parent_insertion_area_for_editor_node (CongEditorWidget3 *widget,
+							      CongEditorNode *editor_node);
+CongEditorArea*
+cong_editor_widget3_get_child_insertion_area_for_editor_node (CongEditorWidget3 *widget,
+							      CongEditorNode *editor_node);
 
 /* Declarations of the GtkWidget event handlers: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
@@ -916,7 +917,15 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 
 	doc = cong_editor_widget3_get_document(widget);
 
-	LOG_EDITOR_NODE1("recursive_add_nodes");
+#if LOG_EDITOR_NODES
+	{
+		gchar *node_desc = cong_node_debug_description(node);
+
+		LOG_EDITOR_NODE2("recursive_add_nodes: %s", node_desc);
+
+		g_free(node_desc);
+	}
+#endif
 
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 
@@ -1036,7 +1045,15 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 	CongEditorNode *editor_node;
 	CongNodePtr iter;
 
-	LOG_EDITOR_NODE1("recursive_remove_nodes");
+#if LOG_EDITOR_NODES
+	{
+		gchar *node_desc = cong_node_debug_description(node);
+
+		LOG_EDITOR_NODE2("recursive_remove_nodes: %s", node_desc);
+
+		g_free(node_desc);
+	}
+#endif
 
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 
@@ -1067,54 +1084,104 @@ create_areas(CongEditorWidget3 *widget,
 	     CongNodePtr node)
 {
 	CongEditorWidget3Details *details = GET_DETAILS(widget);
-	CongEditorNode *editor_node;
-	CongEditorArea *this_area;
+	CongEditorNode *editor_node = NULL;
+	CongEditorArea *this_area = NULL;
 	CongEditorArea *parent_insertion_area = NULL;
+	CongEditorNode *older_sibling_node = NULL;
+	CongEditorArea *older_sibling_primary_area = NULL;
 
-	LOG_EDITOR_AREA1("create_areas");
+#if LOG_EDITOR_AREAS
+	{
+		gchar *node_desc = cong_node_debug_description(node);
+
+		LOG_EDITOR_AREA2("create_areas for %s", node_desc);
+		
+		g_free(node_desc);
+	}
+#endif
 
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node);
-	this_area = cong_editor_node_generate_area (editor_node);
 
-	g_hash_table_insert (details->hash_of_editor_node_to_primary_area,
-			     editor_node,
-			     this_area);
-
-	if (node->parent) {
-		CongEditorNode *parent_editor_node;
+	/* Generate the area for this node: */
+	{
+		this_area = cong_editor_node_generate_area (editor_node);
 		
-		parent_editor_node = cong_editor_widget3_get_editor_node (widget,
-									  node->parent);
-		
-		/* What is the parent's child insertion area? */
-		parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
-							     parent_editor_node);
-
-	} else {
-
-		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-		parent_insertion_area = details->root_area;
-
+		g_hash_table_insert (details->hash_of_editor_node_to_primary_area,
+				     editor_node,
+				     this_area);
 	}
 
-	g_hash_table_insert (details->hash_of_editor_node_to_parent_insertion_area,
-			     editor_node,
-			     parent_insertion_area);
+	/* Determine where the parent area where the new area should be inserted: */
+	{
+		if (node->parent) {
+			CongEditorNode *parent_editor_node;
+			
+			parent_editor_node = cong_editor_widget3_get_editor_node (widget,
+										  node->parent);
+			
+			/* What is the parent's child insertion area? */
+			parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
+								     parent_editor_node);
+			
+		} else {
+			/* Root of the document; insert below the widget's root_area: */
+			g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
+			parent_insertion_area = details->root_area;
+			
+		}
 
-	if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
-
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
-						this_area,
-						FALSE,
-						FALSE,
-						0);
-	} else {
-		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
-						      this_area);
+		g_hash_table_insert (details->hash_of_editor_node_to_parent_insertion_area,
+				     editor_node,
+				     parent_insertion_area);
+		
+		g_assert(parent_insertion_area);
 	}
 
-	if (node->children) {
+	/* Do the insertion, respecting position WRT any siblings: */
+	{
+		if (node->prev) {
+			/* Insert this area relative to an area already present in the parent's insertion area: */
+			older_sibling_node = cong_editor_widget3_get_editor_node (widget,
+										  node->prev);
+			g_assert(older_sibling_node);
+			
+			older_sibling_primary_area = cong_editor_widget3_get_primary_area_for_editor_node (widget,
+													   older_sibling_node);
+			g_assert(older_sibling_primary_area);
+
+			if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
+				cong_editor_area_composer_pack_after (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
+								       this_area,
+								       older_sibling_primary_area,
+								       FALSE,
+								       FALSE,
+								       0);
+			} else {
+				cong_editor_area_container_add_child_after (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
+									    this_area,
+									    older_sibling_primary_area);
+			}
+			
+		} else {
+			/* Insert this area after any already present in the parent's insertion area: */
+			if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
+				
+				cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
+								this_area,
+								FALSE,
+								FALSE,
+								0);
+			} else {
+				cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
+								      this_area);
+			}
+		}
+	}
+
+	/* If this node can ever have children, we need to add a container for them:
+	   FIXME:  slightly hackish test */
+	if (IS_CONG_EDITOR_AREA_CONTAINER(this_area) ) {
 		CongEditorArea *vcomposer;
 
 		vcomposer = cong_editor_area_composer_new (widget,
@@ -1139,7 +1206,15 @@ destroy_areas(CongEditorWidget3 *widget,
 	CongEditorArea *this_area;
 	CongEditorArea *parent_insertion_area;
 
-	LOG_EDITOR_AREA1("destroy_areas");
+#if LOG_EDITOR_AREAS
+	{
+		gchar *node_desc = cong_node_debug_description(node);
+
+		LOG_EDITOR_AREA2("destroy_areas for %s", node_desc);
+		
+		g_free(node_desc);
+	}
+#endif
 
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node);
@@ -1148,8 +1223,8 @@ destroy_areas(CongEditorWidget3 *widget,
 					 editor_node);
 
 	if (node->parent) {
-		parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_parent_insertion_area,
-							     editor_node);
+		parent_insertion_area = cong_editor_widget3_get_parent_insertion_area_for_editor_node (widget,
+												       editor_node);
 	} else {
 		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
 		parent_insertion_area = details->root_area;
@@ -1171,3 +1246,47 @@ destroy_areas(CongEditorWidget3 *widget,
 #endif
 }
 
+CongEditorArea*
+cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
+						      CongEditorNode *editor_node)
+{
+	CongEditorWidget3Details *details;
+
+	g_return_val_if_fail (widget, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	details = GET_DETAILS(widget);
+
+	return g_hash_table_lookup (details->hash_of_editor_node_to_primary_area,
+				    editor_node);
+}
+
+CongEditorArea*
+cong_editor_widget3_get_parent_insertion_area_for_editor_node (CongEditorWidget3 *widget,
+							       CongEditorNode *editor_node)
+{
+	CongEditorWidget3Details *details;
+
+	g_return_val_if_fail (widget, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	details = GET_DETAILS(widget);
+
+	return g_hash_table_lookup (details->hash_of_editor_node_to_parent_insertion_area,
+				    editor_node);
+}
+
+CongEditorArea*
+cong_editor_widget3_get_child_insertion_area_for_editor_node (CongEditorWidget3 *widget,
+							      CongEditorNode *editor_node)
+{
+	CongEditorWidget3Details *details;
+
+	g_return_val_if_fail (widget, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	details = GET_DETAILS(widget);
+
+	return g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
+				    editor_node);
+}

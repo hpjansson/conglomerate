@@ -64,6 +64,10 @@ static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
 static void
+add_child_after (CongEditorAreaContainer *area_container,
+		 CongEditorArea *new_child,
+		 CongEditorArea *relative_to);
+static void
 remove_child (CongEditorAreaContainer *area_container,
 	      CongEditorArea *child);
 
@@ -85,6 +89,7 @@ cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+	container_klass->add_child_after = add_child_after;
 	container_klass->remove_child = remove_child;
 }
 
@@ -152,6 +157,70 @@ cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
 
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
 										 child);
+
+	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
+}
+
+static gint 
+find_area (gconstpointer *a,
+	   gconstpointer *b)
+{
+	CongEditorAreaComposerChildDetails *a_details;
+	CongEditorAreaComposerChildDetails *b_details;
+
+#if 1
+	a_details = (CongEditorAreaComposerChildDetails *)a;
+	b_details = (CongEditorAreaComposerChildDetails *)b;
+#else
+	a_details = (CongEditorAreaComposerChildDetails *)a->data;
+	b_details = (CongEditorAreaComposerChildDetails *)b->data;
+#endif
+
+	return (a_details->child) - (b_details->child);
+}
+
+void
+cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
+				      CongEditorArea *new_child,
+				      CongEditorArea *ooh_relative_to,
+				      gboolean expand,
+				      gboolean fill,
+				      guint extra_padding)
+{
+	GList *position = NULL;
+	CongEditorAreaComposerChildDetails *child_details;
+	
+	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(new_child));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(ooh_relative_to));
+
+	for (position = PRIVATE(area_composer)->list_of_child_details; position; position = position->next) {
+		CongEditorAreaComposerChildDetails *position_details = (CongEditorAreaComposerChildDetails*)(position->data);
+		if (position_details->child == ooh_relative_to) {
+			break;
+		}
+	}
+
+	if (NULL==position) {
+		g_error("cong_editor_area_composer_pack_after: relative position not found");
+	}
+
+	g_object_ref (G_OBJECT(new_child));
+
+	child_details = g_new0(CongEditorAreaComposerChildDetails,1);
+
+	child_details->child = new_child;
+	child_details->expand = expand;
+	child_details->fill = fill;
+	child_details->extra_padding = extra_padding;
+
+	/* Don't store result; we don't need to update the head of the list: */
+	g_list_insert_before (PRIVATE(area_composer)->list_of_child_details,
+			      position->next,
+			      child_details);
+	
+	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
+										 new_child);
 
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
@@ -345,6 +414,22 @@ add_child ( CongEditorAreaContainer *area_container,
 					TRUE,
 					TRUE,
 					0);
+	
+}
+
+static void
+add_child_after ( CongEditorAreaContainer *area_container,
+		  CongEditorArea *new_child,
+		  CongEditorArea *relative_to)
+{
+	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
+	
+	cong_editor_area_composer_pack_after (area_composer,
+					      new_child,
+					      relative_to,
+					      TRUE,
+					      TRUE,
+					      0);
 	
 }
 

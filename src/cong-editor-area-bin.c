@@ -51,6 +51,10 @@ static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
 static void
+add_child_after (CongEditorAreaContainer *area_container,
+		 CongEditorArea *new_child,
+		 CongEditorArea *relative_to);
+static void
 remove_child (CongEditorAreaContainer *area_container,
 	      CongEditorArea *child);
 
@@ -71,6 +75,7 @@ cong_editor_area_bin_class_init (CongEditorAreaBinClass *klass)
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+	container_klass->add_child_after = add_child_after;
 	container_klass->remove_child = remove_child;
 
 }
@@ -182,6 +187,14 @@ add_child (CongEditorAreaContainer *area_container,
 
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (area_container,
 										 child);
+}
+
+static void
+add_child_after (CongEditorAreaContainer *area_container,
+		 CongEditorArea *new_child,
+		 CongEditorArea *relative_to)
+{
+	g_error("cong_editor_area_bin::add_child_after called; meaningless for a bin");
 }
 
 static void

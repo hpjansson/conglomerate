@@ -44,6 +44,7 @@ struct CongEditorAreaContainerDetails
 
 /* Method implementation prototypes: */
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child_after);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, remove_child);
 
 
@@ -69,6 +70,10 @@ cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
 					      add_child);
+
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_editor_area_container,
+					      add_child_after);
 
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
@@ -108,8 +113,8 @@ void
 cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 				       CongEditorArea *child)
 {
-	g_return_if_fail (area_container);
-	g_return_if_fail (child);
+	g_return_if_fail (IS_CONG_EDITOR_AREA(area_container));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
 
 #if 0
 	g_return_if_fail (NULL!= cong_editor_area_get_parent (child));
@@ -119,6 +124,27 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 			      area_container,
 			      add_child, 
 			      (area_container, child));
+
+	cong_editor_area_container_children_changed ( area_container);
+}
+
+void
+cong_editor_area_container_add_child_after ( CongEditorAreaContainer *area_container,
+					     CongEditorArea *new_child,
+					     CongEditorArea *relative_to)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA_CONTAINER(area_container));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(new_child));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(relative_to));
+
+#if 0
+	g_return_if_fail (NULL!= cong_editor_area_get_parent (child));
+#endif
+
+	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CONTAINER_CLASS,
+			      area_container,
+			      add_child_after, 
+			      (area_container, new_child, relative_to));
 
 	cong_editor_area_container_children_changed ( area_container);
 }
