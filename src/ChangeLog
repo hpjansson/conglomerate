@@ -1,3 +1,13 @@
+2003-06-25 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c
+
+	Minor cleanups of code layout to match rest of style, made UTF8-safe, fixed a string copy bug
+
+	* cong-menus.c
+
+	Added Jeff Martin to the credits in the About box; fixed spelling of Steinar's name
+	
 2003-06-25 Jeff Martin <jeff@custommonkey.org>
 	
 	* cong-dispspec.c

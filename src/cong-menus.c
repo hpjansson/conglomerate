@@ -1207,11 +1207,12 @@ static void menu_callback_about(gpointer callback_data,
 	gchar* authors[] = {"Hans Petter Jansson", 
 			    "David Malcolm", 
 			    "Joakim Ziegler", 
-			    "Steiner Bang", 
+			    "Steinar Bang", 
 			    "Geert Stappers", 
 			    "Brent Hendricks", 
 			    "Doug Daniels", 
 			    "Dmitry Mastrukov", 
+			    "Jeff Martin", 
 			    NULL};
 
 	gchar* documenters[] = { NULL };
