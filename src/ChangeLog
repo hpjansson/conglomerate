@@ -1,4 +1,26 @@
 creating ChangeLog
+2002-11-14 David Malcolm
+
+	* cong-primary-window.c, global.h, main.c
+
+	More test menu items
+
+	* cong-tree-view.c, dispspec.c, position.c, xmledit.c, xmlview.c
+
+	Oprimisations
+	
+2002-11-14 Doug Daniels/Brent Hendricks
+
+	* cong-document.c, cong-primary-window.c, save.c, global.h
+
+	Fixes for "File->Save As" and "File->Save"
+	
+2002-11-14 Geert Stappers
+
+	* cong-primary-window.c
+	
+	Version support in "About" dialog
+	
 2002-11-13 David Malcolm
 
 	* fo-parser-result.c, fo-print-context.c, fo-rect.c, fo-solver-result.c, fo-tests.c, fo.h

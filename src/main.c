@@ -10,6 +10,8 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 
+#define STYLESHEET_PATH "/usr/share/sgml/docbkxsl/"
+
 #if 0
 #include <libgtkhtml/gtkhtml.h>
 #endif
@@ -302,6 +304,7 @@ void test_transform(CongPrimaryWindow *primary_window,
 
 	/* Hackish test of libxslt */
 	xsltStylesheetPtr xsl;
+	xmlDocPtr input_clone;
 	xmlDocPtr result;
 
 #if 0
@@ -327,8 +330,16 @@ void test_transform(CongPrimaryWindow *primary_window,
 		return;
 	}
 
-	result = xsltApplyStylesheet(xsl, cong_document_get_xml(doc), NULL);
+	/* DHM 14/11/2002:  document nodes seemed to being corrupted when applying the stylesheet.
+	   So We now work with a clone of the document
+	*/
+	input_clone = xmlCopyDoc(cong_document_get_xml(doc), TRUE);
+	g_assert(input_clone);
+
+	result = xsltApplyStylesheet(xsl, input_clone, NULL);
 	g_assert(result);
+
+	xmlFreeDoc(input_clone);
 
 	if (result->children==NULL) {
 		gchar *why_failed = g_strdup_printf("There was a problem applying the stylesheet file");
@@ -358,13 +369,14 @@ void test_transform(CongPrimaryWindow *primary_window,
 #endif
 }
 
-#define STYLESHEET_PATH "/home/david/Extraction/docbook-xsl-1.57.0/"
-
-#if 0
-#define DOCBOOK_TO_HTML_STYLESHEET_FILE (STYLESHEET_PATH "html/chunk.xsl")
+#if 1
+#define DOCBOOK_TO_HTML_STYLESHEET_FILE (STYLESHEET_PATH "html/docbook.xsl")
 #else
 #define DOCBOOK_TO_HTML_STYLESHEET_FILE ("../examples/test-docbook-to-html.xsl")
 #endif
+#define DOCBOOK_TO_XHTML_STYLESHEET_FILE (STYLESHEET_PATH "xhtml/docbook.xsl")
+#define DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE (STYLESHEET_PATH "htmlhelp/htmlhelp.xsl")
+#define DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE (STYLESHEET_PATH "javahelp/javahelp.xsl")
 #define DOCBOOK_TO_FO_STYLESHEET_FILE (STYLESHEET_PATH "fo/docbook.xsl")
 
 void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
@@ -374,7 +386,27 @@ void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
 	test_transform(callback_data,
 		       DOCBOOK_TO_HTML_STYLESHEET_FILE);
 }
-
+void menu_callback_test_transform_docbook_to_xhtml(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget)
+{
+	test_transform(callback_data,
+		       DOCBOOK_TO_XHTML_STYLESHEET_FILE);
+}
+void menu_callback_test_transform_docbook_to_html_help(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget)
+{
+	test_transform(callback_data,
+		       DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE);
+}
+void menu_callback_test_transform_docbook_to_javahelp(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget)
+{
+	test_transform(callback_data,
+		       DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE);
+}
 void menu_callback_test_transform_docbook_to_fo(gpointer callback_data,
 				  guint callback_action,
 				  GtkWidget *widget)
@@ -413,17 +445,32 @@ void menu_callback_test_preview_fo(gpointer callback_data,
 	GnomePrintMaster *gpm;
 	GnomePrintContext *gpc;
 	GtkWidget *preview_widget;
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc;
 
 	gpm = gnome_print_master_new ();
 	gpc = gnome_print_master_get_context (gpm);
 #if 1
+
+#if 1
+	/* Grab XML from document; assume it's FO for now: */
+	doc = cong_primary_window_get_document(primary_window);
+	g_return_if_fail(doc);
+
+
+	xml_doc = cong_document_get_xml(doc);
+#else
+	/* Load a hardcoded file off my hardddrive (to make it easier to test): */
 	xml_doc = xmlParseFile("/home/david/coding/conge-cvs-dhm3/conge/examples/test-fo.xml");
+#endif
 	g_assert(xml_doc);
-	
+
+	/* Render the FO document to gnome_print: */
 	cong_gnome_print_render_xslfo(xml_doc, gpm);
 	
 	xmlFreeDoc(xml_doc);
 #else
+	/* Just render some test stuff: */
 	my_draw (gpc);
 #endif
 
