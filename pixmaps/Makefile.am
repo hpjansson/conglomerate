@@ -26,6 +26,7 @@ pixmap_DATA = cong-docbook-set-16.png \
 	cong-numbered-list-16.png \
 	cong-list-item-16.png \
 	cong-definition-list-16.png \
-	cong-code-fragment-16.png
+	cong-code-fragment-16.png \
+	ChangeLog
 
 EXTRA_DIST = $(pixmap_DATA)
