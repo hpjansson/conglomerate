@@ -25,6 +25,8 @@
  */
 
 #include "global.h"
+#include "cong-plugin.h"
+#include "cong-error-dialog.h"
 
 #if 0
 struct DocBookAuthorInfo
