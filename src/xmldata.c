@@ -136,15 +136,51 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 
 }
 
-gboolean cong_node_is_tag(CongNodePtr node, const CongXMLChar *tagname)
+gboolean 
+cong_node_is_tag (CongNodePtr node, 
+		  const gchar *xmlns,
+		  const gchar *tagname)
 {
 	/* FIXME: what about namespaces? */
 
 	g_return_val_if_fail(node, FALSE);
 	g_return_val_if_fail(tagname, FALSE);
 
-	return 0==strcmp(tagname, node->name);
+	if (node->type==XML_ELEMENT_NODE) {
+		const gchar *node_xmlns = cong_node_get_xmlns (node);
+
+		if (xmlns) {
+			if (node_xmlns) {
+				if (0!=strcmp(xmlns, node_xmlns)) {
+					return FALSE;
+				}
+			} else {
+				return FALSE;
+			}
+		} else {
+			if (node_xmlns) {
+				return FALSE;
+			}
+		}
+		
+		return 0==strcmp(tagname, node->name);
+	}
+
+	return FALSE;
 }
+
+const gchar*
+cong_node_get_xmlns (CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+	
+	if (node->ns) {
+		return node->ns->prefix;
+	} else {
+		return NULL;
+	}
+}
+
 
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node)
@@ -872,6 +908,27 @@ void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
 	xmlUnsetProp(node, name);
 }
 
+/* Utilities: */
+CongNodePtr cong_node_get_child_by_name (CongNodePtr node, 
+					 const gchar *xmlns, 
+					 const gchar *tagname)
+{
+	CongNodePtr iter;
+
+	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail(tagname, NULL);
+
+	for (iter=node->children; iter; iter=iter->next) {
+		if (cong_node_is_tag (iter, xmlns, tagname)) {
+			return iter;
+		}
+	}
+
+	return NULL;
+}
+
+
+/* Other stuff: */
 const gchar *xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;

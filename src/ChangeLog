@@ -1,3 +1,9 @@
+2003-08-14  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-node.h, plugin-lists-node-element-listitem.c, plugin-website.c, xmldata.c
+
+	Added namespace support to cong_node_is_tag, plus some other utility functions on nodes
+
 2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, cong-document.c, cong-document.h, cong-editor-node-comment.c, cong-editor-node-text.c, cong-location.c, cong-location.h, cong-menus.c, cong-node.h, cong-primary-window.c, cong-span-text-editor.c, cursor.c, global.h, main.c, popup.c, select.c, tree.c, xmldata.c, xmledit.c

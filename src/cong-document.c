@@ -1408,7 +1408,7 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	
 	g_assert(xml_doc);
 	g_assert(xml_doc->children);
-	g_assert(cong_node_is_tag (xml_doc->children, "placeholder"));
+	g_assert(cong_node_is_tag (xml_doc->children, NULL, "placeholder"));
 
 	result = cong_node_recursive_dup (xml_doc->children);
 		
@@ -1418,7 +1418,7 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	xmlFreeDoc (xml_doc);
 	g_free (fake_document);
 
-	g_assert(cong_node_is_tag (result, "placeholder"));
+	g_assert(cong_node_is_tag (result, NULL, "placeholder"));
 	
 	return result;
 

@@ -103,9 +103,14 @@ enum CongNodeType cong_node_type(CongNodePtr node);
 
 /** 
     Handy method for deciding if you've found a tag with the given name, as opposed to text nodes, comments, tags with other names etc.
-    Ignores namespaces at the moment...
 */
-gboolean cong_node_is_tag(CongNodePtr node, const CongXMLChar *tagname);
+gboolean 
+cong_node_is_tag (CongNodePtr node, 
+		  const gchar *xmlns, 
+		  const gchar *tagname);
+
+const gchar*
+cong_node_get_xmlns (CongNodePtr node);
 
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node);
@@ -198,5 +203,8 @@ void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
 void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value);
 void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name);
+
+/* Utilities: */
+CongNodePtr cong_node_get_child_by_name (CongNodePtr node, const gchar *xmlns, const gchar *tagname);
 
 #endif
