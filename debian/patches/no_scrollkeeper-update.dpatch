@@ -14,8 +14,8 @@ fi
 patch_opts="${patch_opts:--f --no-backup-if-mismatch}"
 
 case "$1" in
-       -patch) patch $patch_opts -p0 < $0;;
-       -unpatch) patch $patch_opts -p0 -R < $0;;
+       -patch) patch $patch_opts -p1 < $0;;
+       -unpatch) patch $patch_opts -p1 -R < $0;;
         *)
                 echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
                 exit 1;;
@@ -24,8 +24,9 @@ esac
 exit 0
 
 @DPATCH@
---- omf.make.tarball	2004-01-16
-+++ omf.make	2004-01-16
+diff -urNad src/conglomerate-0.7.11/omf.make conglomerate-0.7.11/omf.make
+--- src/conglomerate-0.7.11/omf.make	2004-01-18
++++ conglomerate-0.7.11/omf.make	2004-01-18
 @@ -42,7 +42,7 @@
  	for file in $(omfincfile); do \
  		$(INSTALL_DATA) $(srcdir)/$$file $(DESTDIR)$(docdir)/$$file; \
