@@ -17,7 +17,7 @@
 
 <refnamediv>
 <refname>conglomerate</refname>
-<refpurpose>a XML editor</refpurpose>
+<refpurpose>an XML editor</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -29,12 +29,12 @@
 
 <refsect1><title>Description</title>
 <para>
-<command>conglomerate</command> is a XML editor.
+<command>conglomerate</command> is an XML editor.
 This manual page is about technical issues of it.
-There is userfriendly documentation in gnome help.
+There is user-friendly documentation in gnome help.
 FIXME
   tell how to get that documentation
-( the userfriendly documentation already exsists )
+( the user-friendly documentation already exists )
 FIXME
 </para>
 
@@ -48,7 +48,7 @@ display spec files (.XDS)  FIXME
 </para>
 
 <para>
-XML files on which conglomerate depends.  FIXME
+XML files which conglomerate depends on.  FIXME
 </para>
 
 </refsect1>
@@ -56,19 +56,19 @@ XML files on which conglomerate depends.  FIXME
 
 <refsect1><title>Bugs</title>
 <para>
-We like, as much as you, as few as possible bugs in
+We like, as much as you, as few bugs as possible in
 <command>conglomerate</command>.
 If you find a bug in 
 <command>conglomerate</command>
 report it at
 <ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=conglomerate" />.
 If it is already reported, update the bugreport.
-So we known that a the bug did bite again.
+So we know that the bug did bite again.
 </para>
 
 <para>
-There is no garantee how much it will effect our priorty,
-but a bug that is unknown to us, will never get attention nor get sqaushed.
+There is no guarantee how much it will effect our priority,
+but a bug that is unknown to us, will never get attention nor get squashed.
 </para>
 
 </refsect1>
