@@ -404,20 +404,6 @@ get_text_cache_input (CongEditorNodeText *editor_node_text)
 	return cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
 }
 
-gboolean
-cong_selection_is_valid (CongSelection *selection)
-{
-	g_return_val_if_fail (selection, FALSE);
-
-	if (selection->loc0.node) {
-		if (selection->loc1.node) {
-			return (selection->loc0.node->parent == selection->loc1.node->parent);
-		}
-	}
-	
-	return FALSE;
-}
-
 gchar*
 generate_markup (CongEditorNodeText *editor_node_text)
 {

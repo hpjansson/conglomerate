@@ -1,5 +1,13 @@
 2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-app.c, cong-app.h, cong-document.c, cong-document.h, cong-editor-node-comment.c, cong-editor-node-text.c, cong-location.c, cong-location.h, cong-menus.c, cong-node.h, cong-primary-window.c, cong-span-text-editor.c, cursor.c, global.h, main.c, popup.c, select.c, tree.c, xmldata.c, xmledit.c
+
+	Big clipboard cleanup: now represented as a source string, rather than as CongNodePtr
+
+	* cong-range.h, cong-selection.h, cong-range.c, Makefile.am
+
+	New files:  big tidy up of CongSelection using a new CongRange type
+
 	* cong-editor-area-flow-holder-blocks.c
 
 	Fixed a bug in the inline-splitting code

@@ -457,33 +457,113 @@ void cong_node_free(CongNodePtr node)
 	xmlFreeNode(node);
 }
 
-#if 0
-void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
+gchar*
+cong_node_generate_source (CongNodePtr node)
 {
-	CongNodePtr iter, next;
+	xmlBufferPtr xml_buffer;
+	gchar *result;
 
-	CONG_NODE_SELF_TEST(node);
+	g_return_val_if_fail (node, NULL);
 
-	iter = node->children; 
 
-	while (iter) {
-		next = iter->next;
+	g_assert (node->doc);
 
-		CONG_NODE_SELF_TEST(iter);
-		
-		cong_node_recursive_delete(doc, iter);
+	xml_buffer = xmlBufferCreate();
 
-		iter = next;
+	xmlNodeDump (xml_buffer,
+		     node->doc,
+		     node,
+		     0,
+		     FALSE);
+
+	result = g_strdup (xmlBufferContent (xml_buffer));
+
+	xmlBufferFree (xml_buffer);
+
+	return result;
+}
+
+gchar*
+cong_node_generate_source_from_byte_offset (CongNodePtr node,
+					    int start_byte_offset)
+{
+	if (node->content) {
+		g_assert (start_byte_offset<=strlen(node->content));
+
+		return cong_node_generate_source_between_byte_offsets (node,
+								       start_byte_offset,
+								       strlen(node->content));
+
+	} else {
+		return g_strdup("");
+	}
+}
+
+/* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, up to the byte offset into the UTF-8: 
+   FIXME: specify the end-point more precisely
+ */
+gchar*
+cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
+					     int end_byte_offset)
+{
+	if (node->content) {
+		g_assert (end_byte_offset<=strlen(node->content));
+
+		return cong_node_generate_source_between_byte_offsets (node,
+								       0,
+								       end_byte_offset);
+
+	} else {
+		return g_strdup("");
+	}
+}
+
+/* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, between the given byte offset into the UTF-8: 
+   FIXME: specify the end-point more precisely
+ */
+gchar*
+cong_node_generate_source_between_byte_offsets (CongNodePtr node,
+						int start_byte_offset,
+						int end_byte_offset)
+{
+	gchar *result;
+	gchar *clipped_content;
+
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (start_byte_offset<=end_byte_offset, NULL);
+
+	g_assert (node->doc);
+
+	if (node->content) {
+		g_assert (start_byte_offset<=strlen(node->content));
+		g_assert (end_byte_offset<=strlen(node->content));
+	} else {
+		return g_strdup("");
 	}
 
-	g_assert(node->children==NULL);
-	g_assert(node->last==NULL);
+	clipped_content = g_strndup (node->content + start_byte_offset, end_byte_offset - start_byte_offset);
 
-	cong_document_node_make_orphan(doc, node);
+	g_message("clipped content = \"%s\"", clipped_content);
 
-	cong_node_free(node);
+	switch (node->type) {
+	default: g_assert_not_reached();
+	case XML_TEXT_NODE:
+		result = xmlEncodeSpecialChars(node->doc, clipped_content);
+		break;
+
+	case XML_COMMENT_NODE:
+		result = g_strdup_printf("<!--%s-->" , clipped_content);
+		break;
+	}
+
+	g_assert(result);
+
+	g_message("result =\"%s\"", result);
+
+	g_free (clipped_content);
+
+	return result;
 }
-#endif
 
 void
 cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)

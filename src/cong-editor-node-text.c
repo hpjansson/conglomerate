@@ -34,6 +34,7 @@
 #include "cong-editor-line-fragments.h"
 #include "cong-font.h"
 #include "cong-editor-area-text-fragment.h"
+#include "cong-selection.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -260,25 +261,28 @@ generate_block_area (CongEditorNode *editor_node)
 	
 }
 
+#if 1
 gboolean
 cong_selection_get_start_byte_offset (CongSelection *selection, 
 				      CongNodePtr node,
 				      gint *output);
 gboolean
 cong_selection_get_end_byte_offset (CongSelection *selection, 
-				      CongNodePtr node,
-				      gint *output);
+				    CongNodePtr node,
+				    gint *output);
 gboolean
 cong_selection_get_start_byte_offset (CongSelection *selection, 
 				      CongNodePtr node,
 				      gint *output)
 {
-	if (NULL==selection->loc0.node) {
+	CongLocation* loc = cong_selection_get_ordered_start (selection);
+
+	if (NULL==loc->node) {
 		return FALSE;
 	}
 
-	if (selection->loc0.node == node) {
-		*output = selection->loc0.byte_offset;
+	if (loc->node == node) {
+		*output = loc->byte_offset;
 		return TRUE;
 
 	} else {
@@ -289,14 +293,16 @@ cong_selection_get_start_byte_offset (CongSelection *selection,
 gboolean
 cong_selection_get_end_byte_offset (CongSelection *selection, 
 				    CongNodePtr node,
-				      gint *output)
+				    gint *output)
 {
-	if (NULL==selection->loc1.node) {
+	CongLocation* loc = cong_selection_get_ordered_end (selection);
+
+	if (NULL==loc->node) {
 		return FALSE;
 	}
 
-	if (selection->loc1.node == node) {
-		*output = selection->loc1.byte_offset;
+	if (loc->node == node) {
+		*output = loc->byte_offset;
 		return TRUE;
 
 	} else {
@@ -304,6 +310,7 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 	}
 
 }
+#endif
 
 static CongEditorLineFragments*
 generate_line_areas_recursive (CongEditorNode *editor_node,
@@ -569,8 +576,8 @@ on_signal_button_press (CongEditorArea *editor_area,
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
 						
-						cong_location_copy(&selection->loc0, &start_of_word);
-						cong_location_copy(&selection->loc1, &end_of_word);
+						cong_selection_set_logical_start(selection, &start_of_word);
+						cong_selection_set_logical_end(selection, &end_of_word);
 						cong_location_copy(&cursor->location, &end_of_word);
 					}						
 				
@@ -664,6 +671,7 @@ get_text_cache_input (CongEditorNodeText *editor_node_text)
 	return cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
 }
 
+#if 0
 gboolean
 cong_selection_is_valid (CongSelection *selection)
 {
@@ -677,6 +685,7 @@ cong_selection_is_valid (CongSelection *selection)
 	
 	return FALSE;
 }
+#endif
 
 gchar*
 generate_markup (CongEditorNodeText *editor_node_text)

@@ -349,7 +349,9 @@ int main( int   argc,
 
 	insert_element_init();
 
+#if 0
 	cong_app_singleton()->clipboard = NULL;
+#endif
 
 #if 1
 	/* 

@@ -25,10 +25,12 @@
 #include "global.h"
 #include "cong-app.h"
 
+#define PRIVATE(x) ((x)->private)
+
 /* Internal data structure declarations: */
 struct CongAppPrivate
 {
-	int dummy;
+	gchar *clipboard; /* can be NULL to signify nothing in clipboard*/
 };
 
 
@@ -69,21 +71,35 @@ cong_app_destroy_singleton(void)
 }
 
 
-#if 0
 const gchar*
 cong_app_get_clipboard (CongApp *app)
 {
+	g_return_val_if_fail (app, NULL);
 
-#error
+	return PRIVATE(app)->clipboard;
 }
 
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text)
 {
-#error
+	g_return_if_fail (app);
+	/* text is allowed to be NULL */
+
+	if (PRIVATE(app)->clipboard) {
+		g_free(PRIVATE(app)->clipboard);
+	}
+
+	if (text) {
+		PRIVATE(app)->clipboard = g_strdup(text);
+	} else {
+		PRIVATE(app)->clipboard = NULL;
+	}
+
+	g_message("Clipboard set to \"%s\"", text);
+
+	/* emit signals? */
 }
-#endif
 
 /* Internal function definitions: */
 static CongApp*

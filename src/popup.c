@@ -274,7 +274,7 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 {
 	g_assert(doc);
 	
-	cong_document_paste_selection(doc, widget);
+	cong_document_paste_clipboard_or_selection(doc, widget);
 	return TRUE;
 }
 

@@ -71,10 +71,6 @@ cong_location_get_utf8_pointer(const CongLocation *loc);
 CongNodePtr
 cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc);
 
-/* "insertion" must be a UTF-8 string */
-void
-cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* insertion);
-
 void
 cong_location_del_next_char(CongDocument *doc, const CongLocation *loc);
 
@@ -138,6 +134,13 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 			       CongDocument *doc,
 			       CongLocation *output_start_of_word,
 			       CongLocation *output_end_of_word);
-
+gboolean
+cong_location_calc_prev_text_node (const CongLocation *input_loc, 
+				   CongDispspec *dispspec,
+				   CongLocation *output_loc);
+gboolean
+cong_location_calc_next_text_node (const CongLocation *input_loc,
+				   CongDispspec *dispspec,
+				   CongLocation *output_loc);
 
 #endif

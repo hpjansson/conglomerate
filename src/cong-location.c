@@ -134,7 +134,8 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 enum CongNodeType
 cong_location_node_type(const CongLocation *loc)
 {
-	g_return_val_if_fail(loc != NULL, 0);
+	g_return_val_if_fail(loc, CONG_NODE_TYPE_UNKNOWN);
+	g_return_val_if_fail(loc->node, CONG_NODE_TYPE_UNKNOWN);
 
 	return cong_node_type(loc->node);
 }
@@ -700,3 +701,22 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 		return FALSE;
 	}
 }
+
+#if 0
+gboolean
+cong_location_calc_prev_text_node (const CongLocation *input_loc, 
+				   CongDispspec *dispspec,
+				   CongLocation *output_loc)
+{
+#error
+}
+
+gboolean
+cong_location_calc_next_text_node (const CongLocation *input_loc,
+				   CongDispspec *dispspec,
+				   CongLocation *output_loc)
+{
+#error
+}
+#endif
+

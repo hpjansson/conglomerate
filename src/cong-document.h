@@ -209,17 +209,38 @@ cong_document_get_language_for_node(CongDocument *doc,
 				    CongNodePtr node);
 
 /* Various UI hooks: */
-void cong_document_cut_selection(CongDocument *doc);
-void cong_document_copy_selection(CongDocument *doc);
-void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget);
+void
+cong_document_cut_selection (CongDocument *doc);
 
 void
-cong_document_paste_text (CongDocument *doc, 
-			  CongLocation *insert_loc, 
-			  const gchar *source_fragment);
+cong_document_copy_selection (CongDocument *doc);
+
+void 
+cong_document_paste_clipboard_or_selection (CongDocument *doc, 
+					    GtkWidget *widget);
 
 void
-cong_document_view_source(CongDocument *doc);
+cong_document_paste_source_at (CongDocument *doc, 
+			       CongLocation *insert_loc, 
+			       const gchar *source_fragment);
+
+void
+cong_document_paste_source_under (CongDocument *doc, 
+				  CongNodePtr relative_to_node,
+				  const gchar *source_fragment);
+
+void
+cong_document_paste_source_before (CongDocument *doc, 
+				   CongNodePtr relative_to_node,
+				   const gchar *source_fragment);
+
+void
+cong_document_paste_source_after (CongDocument *doc, 
+				  CongNodePtr relative_to_node,
+				  const gchar *source_fragment);
+
+void
+cong_document_view_source (CongDocument *doc);
 
 /* Handy ways to traverse the document, with a callback: */
 
@@ -227,11 +248,12 @@ cong_document_view_source(CongDocument *doc);
 typedef gboolean (*CongDocumentRecursionCallback)(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level);
 
 /* Return TRUE if the traversal was stopped prematurely */
-gboolean cong_document_for_each_node (CongDocument *doc, 
-				      CongDocumentRecursionCallback callback, 
-				      gpointer callback_data);
+gboolean
+cong_document_for_each_node (CongDocument *doc, 
+			     CongDocumentRecursionCallback callback, 
+			     gpointer callback_data);
 
-/* This one doesn't recurse; it merely visits the direct descendents of parent */
+/* This one doesn't recurse; it merely visits the direct dsescendents of parent */
 gboolean 
 cong_document_for_each_child_of_node (CongDocument *doc, 
 				      CongNodePtr parent, 
@@ -239,7 +261,7 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 				      gpointer callback_data);
 
 /* Handy utilities for manipulating the document: */
-void 
+void
 cong_document_merge_adjacent_text_nodes (CongDocument *doc);
 
 void
@@ -249,7 +271,16 @@ cong_document_merge_adjacent_text_children_of_node (CongDocument *doc,
 void cong_document_node_recursive_delete (CongDocument *doc, 
 					  CongNodePtr node);
 
-/* Tries to parse the source fragment, places the result under a <placeholder> tag, which is returned, or NULL on error */
+void cong_document_delete_range (CongDocument *doc, 
+				 CongRange *range);
+
+/* "insertion" must be a UTF-8 string; the location must be within a text or comment node */
+void
+cong_document_insert_text (CongDocument *doc, 
+			   CongLocation *loc, 
+			   const gchar* insertion);
+
+/* Tries to parse the source fragment, places the result under a <placeholder> tag, which is returned */
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment);
@@ -279,7 +310,6 @@ CongNodePtr
 cong_document_node_split2 (CongDocument *doc, 
 			   CongNodePtr s, 
 			   int c);
-
 
 
 G_END_DECLS

@@ -244,7 +244,7 @@ gint toolbar_callback_paste(GtkWidget *w, gpointer data)
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	cong_document_paste_selection(doc, w);
+	cong_document_paste_clipboard_or_selection(doc, w);
 
 	return TRUE;
 }

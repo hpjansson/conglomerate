@@ -64,33 +64,30 @@ gint cong_cursor_blink(gpointer data)
 	return(TRUE);
 }
 
-gint cong_cursor_data_insert(CongCursor *curs, char *s)
+void 
+cong_cursor_data_insert (CongCursor *curs, 
+			 const gchar *text)
 {
 	CongDocument *doc;
+#if 0
 	int len;
+#endif
 
-	g_return_val_if_fail(curs, 0);
-	g_return_val_if_fail(s, 0);
+	g_return_if_fail(curs);
+	g_return_if_fail(text);
 
 	doc = curs->doc;
 
-	len = strlen(s);
-
-	if (!cong_location_exists(&curs->location)) return(0);
-	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
-
-#if 1
-	cong_location_insert_chars(doc, &curs->location, s);
-#else
-	n = curs->t->child;
-	n->data = realloc(n->data, (n->size + 1) + len);
-
-	memmove(n->data + curs->c + len, n->data + curs->c, (n->size + 1) - curs->c);
-	memcpy(n->data + curs->c, s, len);
-	n->size += len;
-	curs->c += len;
+#if 0
+	len = strlen(text);
 #endif
-	return(1);
+
+	if (!cong_location_exists(&curs->location)) return;
+	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return;
+
+	cong_document_insert_text (doc, 
+				   &curs->location, 
+				   text);
 }
 
 

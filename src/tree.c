@@ -146,19 +146,22 @@ tree_cut_update_location_callback (CongDocument *doc,
 gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
-	CongDispspec *ds;
+	gchar *source;
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 
-	ds = cong_document_get_dispspec(doc);
-
 	/* GREP FOR MVC */
-
+#if 1
+	source = cong_node_generate_source(tag);
+	cong_app_set_clipboard (cong_app_singleton(),
+				source);
+	g_free(source);
+#else
 	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
 
 	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
-	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
+#endif
 
 	cong_document_begin_edit(doc);
 
@@ -167,6 +170,7 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 					 tag);
 
 	cong_document_node_recursive_delete(doc, tag);
+
 	cong_document_end_edit(doc);
 
 	return(TRUE);
@@ -177,39 +181,39 @@ gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
 	/* GREP FOR MVC */
 
+#if 1
+	gchar *source;
+
+	source = cong_node_generate_source(tag);
+	cong_app_set_clipboard (cong_app_singleton(),
+				cong_node_generate_source(tag));	
+	g_free(source);
+#else
 	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
 	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
-	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
+#endif
 
 	return(TRUE);
 }
-
 
 gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 	CongDispspec *ds;
-
-	CongNodePtr new_copy;
+	const gchar *clipboard_source;
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 
 	ds = cong_document_get_dispspec(doc);
 
-	if (!cong_app_singleton()->clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
-
-	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
-
-	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
-
-	CONG_NODE_SELF_TEST(new_copy);
-
-	cong_document_begin_edit(doc);
-	cong_document_node_set_parent(doc, new_copy,tag);
-	cong_document_end_edit(doc);
+	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
+						   
+	if (clipboard_source) {
+		cong_document_paste_source_under (doc,
+						  tag,
+						  clipboard_source);
+	}
 
 	return(TRUE);
 }
@@ -219,26 +223,20 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 	CongDispspec *ds;
-
-	CongNodePtr new_copy;
+	const gchar *clipboard_source;
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 
 	ds = cong_document_get_dispspec(doc);
-	if (!cong_app_singleton()->clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
 
-	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
-
-	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
-
-	CONG_NODE_SELF_TEST(new_copy);
-
-	cong_document_begin_edit(doc);
-	cong_document_node_add_before(doc, new_copy,tag);
-	cong_document_end_edit(doc);
+	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
+						   
+	if (clipboard_source) {
+		cong_document_paste_source_before (doc,
+						   tag,
+						   clipboard_source);
+	}
 	
 	return(TRUE);
 }
@@ -248,27 +246,20 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 	CongDispspec *ds;
-
-	CongNodePtr new_copy;
+	const gchar *clipboard_source;
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 
 	ds = cong_document_get_dispspec(doc);
 
-	if (!cong_app_singleton()->clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
-
-	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
-
-	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
-
-	CONG_NODE_SELF_TEST(new_copy);
-
-	cong_document_begin_edit(doc);
-	cong_document_node_add_after(doc, new_copy,tag);
-	cong_document_end_edit(doc);
+	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
+						   
+	if (clipboard_source) {
+		cong_document_paste_source_after (doc,
+						  tag,
+						  clipboard_source);
+	}
 	
 	return(TRUE);
 }

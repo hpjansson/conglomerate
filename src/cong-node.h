@@ -156,6 +156,36 @@ CongNodePtr cong_node_new_text_len(const gchar *text, int len, CongDocument *doc
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void cong_node_free(CongNodePtr node);
 
+
+/* Generate XML source as a UTF8 string: */
+gchar*
+cong_node_generate_source (CongNodePtr node);
+
+/* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, from the byte offset into the UTF-8: */
+gchar*
+cong_node_generate_source_from_byte_offset (CongNodePtr node, 
+					    int byte_offset);
+
+/* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, up to the byte offset into the UTF-8: 
+   FIXME: specify the end-point more precisely
+ */
+gchar*
+cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
+					     int byte_offset);
+
+/* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, between the given byte offset into the UTF-8: 
+   FIXME: specify the end-point more precisely
+ */
+gchar*
+cong_node_generate_source_between_byte_offsets (CongNodePtr node,
+						int start_byte_offset,
+						int end_byte_offset);
+
+gboolean
+cong_node_is_descendant_of (CongNodePtr node,
+			    CongNodePtr potential_ancestor);
+
+
 /* 
    Direct tree manipulation; these functions are "private" and should only be called by the cong_document_ versions below, which send notifications
    to views of the document.

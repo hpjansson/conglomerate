@@ -38,6 +38,8 @@ G_BEGIN_DECLS
 #include "cong-node.h"
 #include "cong-location.h"
 
+typedef struct CongRange CongRange;
+
 struct CongCursor
 {
 	/* Visual representation */
@@ -45,7 +47,7 @@ struct CongCursor
 
 	gboolean on;
 
-	/* Conceptual location */
+	/* Conceptual location at which stuff will be inserted i.e. the byte_offset is the offset of the character immediately following the caret. So it's zero for the beginning of the text */
 	CongLocation location;
 
 	guint timeout_id;
@@ -53,15 +55,6 @@ struct CongCursor
 	CongDocument *doc;
 };
 
-
-struct CongSelection
-{
-	GdkGC *gc_valid; /* corresponds to value gc_0 in old implementation */
-	GdkGC *gc_invalid;   /* corresponds to value gc_3 in old implementation */
-
-	CongLocation loc0;
-	CongLocation loc1;
-};
 
 enum CongFontRole
 {
@@ -142,7 +135,8 @@ void cong_cursor_init(CongCursor *curs, CongDocument *doc);
 void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
-gint cong_cursor_data_insert(CongCursor *curs, char *s);
+void cong_cursor_data_insert (CongCursor *curs, 
+			      const gchar *s);
 int cong_cursor_paragraph_insert(CongCursor *curs);
 gboolean cong_cursor_calc_prev_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
 gboolean cong_cursor_calc_next_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
@@ -151,13 +145,6 @@ void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_home(CongCursor *curs, CongDocument *doc);
 void cong_cursor_end(CongCursor *curs, CongDocument *doc);
-
-/* Selection methods: */
-void cong_selection_init(CongSelection *selection);
-void cong_selection_import(CongSelection *selection, GtkWidget* widget);
-void cong_selection_draw(CongSelection *selection, CongCursor *curs);
-void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs);
-void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs);
 
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);

@@ -29,7 +29,7 @@
 #include "cong-error-dialog.h"
 #include "cong-font.h"
 #include "cong-app.h"
-#include "cong-text-cache.h"
+#include "cong-selection.h"
 
 #if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
@@ -743,7 +743,7 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 	GtkWidget *w = GTK_WIDGET(editor_widget);
 	CongDocument *doc = cong_editor_widget2_get_document(editor_widget);
-	const CongSelection *selection = cong_document_get_selection(doc);
+	CongSelection *selection = cong_document_get_selection(doc);
 	const CongCursor *cursor = cong_document_get_cursor(doc);
 	gboolean got_selection_start_byte_offset = FALSE;
 	gboolean got_selection_end_byte_offset = FALSE;
@@ -758,12 +758,12 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 	int offset_x = element_editor->window_area.x + H_SPACING;
 	int y = element_editor->window_area.y;
 
-	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1)) {
-		g_assert(cong_node_type(selection->loc0.node)==CONG_NODE_TYPE_TEXT);
-		g_assert(cong_node_type(selection->loc1.node)==CONG_NODE_TYPE_TEXT);
+	if (cong_location_exists(cong_selection_get_logical_start(selection)) && cong_location_exists(cong_selection_get_logical_end(selection))) {
+		g_assert(cong_node_type(cong_selection_get_logical_start(selection)->node)==CONG_NODE_TYPE_TEXT);
+		g_assert(cong_node_type(cong_selection_get_logical_end(selection)->node)==CONG_NODE_TYPE_TEXT);
 
-		got_selection_start_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc0, &selection_start_byte_offset);
-		got_selection_end_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc1, &selection_end_byte_offset);
+		got_selection_start_byte_offset = get_stripped_byte_offset_at_location(span_text, cong_selection_get_logical_start(selection), &selection_start_byte_offset);
+		got_selection_end_byte_offset = get_stripped_byte_offset_at_location(span_text, cong_selection_get_logical_end(selection), &selection_end_byte_offset);
 
 		if (selection_end_byte_offset<selection_start_byte_offset) {
 			int tmp = selection_end_byte_offset;
@@ -839,10 +839,10 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 				GdkGC *selection_gc;
 				int start_x, end_x;
 
-				if (cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1)) {
-					selection_gc = selection->gc_valid;
+				if (cong_location_parent(cong_selection_get_logical_start(selection)) == cong_location_parent(cong_selection_get_logical_end(selection))) {
+					selection_gc = cong_selection_legacy_get_gc_valid(selection);
 				} else {
-					selection_gc = selection->gc_invalid;
+					selection_gc = cong_selection_legacy_get_gc_invalid(selection);
 				}
 
 				/* Check that the selection is to be rendered on this layout_line: */
@@ -1059,8 +1059,8 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 					cong_location_calc_tag_start(&click_location, &tag_start);
 					cong_location_calc_tag_end(&click_location, &tag_end);
 						
-					cong_location_copy(&selection->loc0, &start_of_tag);
-					cong_location_copy(&selection->loc1, &end_of_tag);
+					cong_location_copy(cong_selection_get_start(selection), &start_of_tag);
+					cong_location_copy(cong_selection_get_end(selection), &end_of_tag);
 					cong_location_copy(&cursor->location, &end_of_tag);
 				
 					cong_document_on_selection_change(doc);
@@ -1081,16 +1081,14 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 				if (get_click_location(span_text_editor, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
 						
-						cong_location_copy(&selection->loc0, &start_of_word);
-						cong_location_copy(&selection->loc1, &end_of_word);
+						cong_selection_set_logical_start(selection, &start_of_word);
+						cong_selection_set_logical_end(selection, &end_of_word);
 						cong_location_copy(&cursor->location, &end_of_word);
 					}						
-
 					cong_document_begin_edit (doc);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
 					cong_document_end_edit (doc);
-
 				}
 			}
 			return;
@@ -1106,9 +1104,11 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 					cong_document_begin_edit (doc);	
 					cong_selection_start_from_curs(selection, cursor);
 					cong_selection_end_from_curs(selection, cursor);
+
+					cong_document_begin_edit (doc);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
-					cong_document_end_edit (doc);						
+					cong_document_end_edit (doc);
 				}
 			}
 
@@ -1162,7 +1162,7 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 			cong_document_begin_edit (doc);
 			cong_document_on_selection_change(doc);
 			cong_document_on_cursor_change(doc);			
-			cong_document_end_edit (doc);
+			cong_document_end_edit (doc);					
 
 			return;
 		}
@@ -1393,7 +1393,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	
 #if 0
 	case GDK_BackSpace:
-		if (selection->loc0.node) {
+		if (cong_selection_get_start()->node) {
 			cong_document_delete_selection(doc);
 		} else {
 			cong_cursor_del_prev_char(cursor, doc);
@@ -1401,7 +1401,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 		break;
 	
 	case GDK_Delete:
-		if (selection->loc0.node) {
+		if (cong_selection_get_start()->node) {
 			cong_document_delete_selection(doc);
 		} else {
 			cong_cursor_del_next_char(cursor, doc);

@@ -438,7 +438,7 @@ static void menu_callback_paste(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget)
 {
-	dispatch_document_command2(cong_document_paste_selection, callback_data, widget);
+	dispatch_document_command2(cong_document_paste_clipboard_or_selection, callback_data, widget);
 }
 
 static void menu_callback_view_source(gpointer callback_data,
@@ -1244,9 +1244,9 @@ void menu_callback_debug_insert_xml_fragment(gpointer callback_data,
 	source_fragment = get_test_fragment(primary_window);
 	g_assert(source_fragment);
 
-	cong_document_paste_text (doc, 
-				  &cong_document_get_cursor(doc)->location, 
-				  source_fragment);
+	cong_document_paste_source_at (doc, 
+				       &cong_document_get_cursor(doc)->location, 
+				       source_fragment);
 	
 	g_free(source_fragment);
 }

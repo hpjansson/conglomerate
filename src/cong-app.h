@@ -52,8 +52,6 @@ struct CongApp
 
 	GtkTooltips *tooltips;
 
-	CongNodePtr clipboard;
-
 	CongAppPrivate *private;
 };
 
@@ -67,17 +65,12 @@ cong_app_construct_singleton(void);
 void
 cong_app_destroy_singleton(void);
 
-
-#if 0
 const gchar*
 cong_app_get_clipboard (CongApp *app);
 
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text);
-#endif
-
-
 
 G_END_DECLS
 
