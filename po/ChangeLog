@@ -1,3 +1,8 @@
+2003-10-27  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in
+	fresh generated, this will effect several PO files
+
 2003-10-27  Danilo Šegan  <dsegan@gmx.net>
 
 	* sr.po, sr@Latn.po: Updated Serbian translation.
