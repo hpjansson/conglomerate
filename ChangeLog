@@ -3,6 +3,7 @@
 	* Makefile.am
 
 	dispspecs is a new directory
+	version bump to 0.7.12pre1
 
 	* configure.in
 
