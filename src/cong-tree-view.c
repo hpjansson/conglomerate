@@ -42,17 +42,22 @@
 
 typedef struct CongTreeViewDetails
 {
-	/* the treeview widget has the userdata "cong_tree_view" set on it */
-	GtkTreeView *gtk_tree_view;
-	GtkTreeStore *gtk_tree_store;
-
+	/* Creation parameters: */
 	CongTreeViewNodeFilter node_filter;
 	CongTreeViewNodeCreationCallback node_creation_callback;
 	CongTreeViewPixbufCallback pixbuf_callback; /* can be NULL */
 	gpointer user_data;
 
+	/* the treeview widget has the userdata "cong_tree_view" set on it */
+	GtkTreeView *gtk_tree_view;
+	GtkTreeStore *gtk_tree_store;
+	
+	/* need some kind of search structure - mapping from nodes to GtkTreeIter; the GtkTreeStore class guarantees persisntant validity of a GtkTreeIter provided the node remains valid */
+	GTree *search_structure;
+
 } CongTreeViewDetails;
 
+#if 1
 struct search_struct
 {
 	CongNodePtr node;
@@ -61,135 +66,20 @@ struct search_struct
 	
 	GtkTreeIter *tree_iter;
 };
+#endif
 
 /* Internal function prototypes: */
-static void
-set_pixbuf (GtkTreeViewColumn *tree_column,
-	    GtkCellRenderer   *cell,
-	    GtkTreeModel      *model,
-	    GtkTreeIter       *iter,
-	    gpointer           user_data);
+static gint 
+tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
-static void populate_tree_store_recursive(CongTreeView *cong_tree_view,
-					  CongNodePtr node, 
-					  GtkTreeIter* tree_iter);
+static gboolean 
+node_search_callback(GtkTreeModel *model,
+		     GtkTreePath *path,
+		     GtkTreeIter *iter,
+		     gpointer data);
 
-/* Internal function implementations: */
-/* the treeview widget has the userdata "cong_tree_view" set on it */
-static gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
-{
-	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(widget));
-
-	if (event->type == GDK_BUTTON_PRESS)
-	{
-		GdkEventButton *bevent = (GdkEventButton *) event;
-		if (bevent->button != 3) return(FALSE);
-		
- 		/* printf("button 3\n"); */
- 		{
-			GtkTreePath* path;
-			if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
-							    bevent->x,
-							    bevent->y,
-							    &path,
-							    NULL,
-							    NULL, 
-							    NULL)
-			     ) { 
-				CongTreeView *cong_tree_view;
-				GtkTreeModel* tree_model;
-				GtkTreeIter iter;
-
-				cong_tree_view = g_object_get_data(G_OBJECT(widget),
-								   "cong_tree_view");
-				g_assert(cong_tree_view);
-
-				tree_model = GTK_TREE_MODEL(cong_tree_view_get_tree_store(cong_tree_view));
-#if 0
-				gchar* msg = gtk_tree_path_to_string(path);
-				printf("right-click on path \"%s\"\n",msg);
-				g_free(msg);
-#endif
-		    
-				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
-					CongNodePtr node;
-					GtkWidget* menu;
-					CongDocument* doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
-					
-					gtk_tree_model_get(tree_model, &iter, CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node, -1);
-					gtk_tree_model_get(tree_model, &iter, CONG_TREE_VIEW_TREE_MODEL_DOC_COLUMN, &doc, -1);
-					
-#if 0
-					{
-						gchar *desc = cong_node_debug_description (node);
-						g_message ("got node \"%s\"\n",desc);
-						g_free (desc);
-					}
-#endif
-					
-					menu = cong_ui_popup_init(doc, 
-								  node, 
-								  parent_window);
-					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
-						       bevent->time);		      
-				}
-				
-				
-				gtk_tree_path_free(path);		  
-			}
-
- 		}
-
-		return(TRUE);
-	}
-
-	return(FALSE);
-}
-
-static gboolean search_for_node(GtkTreeModel *model,
-				GtkTreePath *path,
-				GtkTreeIter *iter,
-				gpointer data)
-{
-	struct search_struct* search = (struct search_struct*)data;
-	CongNodePtr this_node;
-	
-	g_assert(model);
-	g_assert(path);
-	g_assert(iter);
-	g_assert(search);
-
-	gtk_tree_model_get(model,
-			   iter,
-			   CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN,
-			   &this_node,
-			   -1);
-
-	if (this_node==search->node) {
-		search->found_it = TRUE;
-		*search->tree_iter = *iter;
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-
-}
-
-static gboolean get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter)
-{
-	/* FIXME: this is O(n), it ought to be O(1), by adding some kind of search structure */
-	struct search_struct search;
-	
-	search.node = node;
-	search.found_it = FALSE;
-	search.tree_iter = tree_iter;
-
-	gtk_tree_model_foreach(GTK_TREE_MODEL(tree_view_details->gtk_tree_store),
-			       search_for_node,
-			       &search);
-
-	return search.found_it;
-}
+static gboolean 
+get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter);
 
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
@@ -201,320 +91,21 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
-/* Definitions of the handler functions: */
-static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_make_orphan\n");
-	#endif
-
-	if (before_change) {
-		return;
-	}
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-	if ( get_iter_for_node(cong_tree_view->private, node, &tree_iter) ) {
-		
-		/* Remove this branch of the tree: */
-		gtk_tree_store_remove(cong_tree_view->private->gtk_tree_store, &tree_iter);
-		
-	}
-}
-
-static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter_sibling;
-	GtkTreeIter tree_iter_parent;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-	g_return_if_fail(older_sibling);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_after\n");
-	#endif
-
-	if (before_change) {
-		return;
-	}
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
-
-		if ( get_iter_for_node(cong_tree_view->private, older_sibling->parent, &tree_iter_parent) ) {
-	
-			/* Perhaps the older sibling isn't in the overview; find youngest older sibling that actually appears in view: */
-			while (!cong_tree_view_should_show_node(cong_tree_view, older_sibling)) {
-				older_sibling = older_sibling->prev;
-				
-				if (NULL==older_sibling) {
-					/* None of the siblings should appear in view; add as first child of parent: */
-					/* FIXME: what if parent shouldn't appear? */
-					GtkTreeIter new_tree_iter;
-					gtk_tree_store_prepend(cong_tree_view->private->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
-				
-					populate_tree_store_recursive(cong_tree_view, node, &new_tree_iter);					
-					return;
-				}
-			}
-
-			g_assert(cong_tree_view_should_show_node(cong_tree_view, older_sibling));
-			
-			if ( get_iter_for_node(cong_tree_view->private, older_sibling, &tree_iter_sibling) ) {
-				
-				GtkTreeIter new_tree_iter;
-				gtk_tree_store_insert_after(cong_tree_view->private->gtk_tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
-				
-				populate_tree_store_recursive(cong_tree_view, node, &new_tree_iter);
-			}
-		}
-	}
-}
-
-static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter_sibling;
-	GtkTreeIter tree_iter_parent;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-	g_return_if_fail(younger_sibling);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_before\n");
-	#endif
-
-	if (before_change) {
-		return;
-	}
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
-
-		if ( get_iter_for_node(cong_tree_view->private, younger_sibling->parent, &tree_iter_parent) ) {
-
-			/* Perhaps the younger sibling isn't in the overview; find oldest younger sibling that actually appears in view: */
-			while (!cong_tree_view_should_show_node(cong_tree_view, younger_sibling)) {
-				younger_sibling = younger_sibling->next;
-				
-				if (NULL==younger_sibling) {
-					/* None of the siblings should appear in view; add as final child of parent: */
-					/* FIXME: what if parent shouldn't appear? */
-					GtkTreeIter new_tree_iter;
-					gtk_tree_store_append(cong_tree_view->private->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
-				
-					populate_tree_store_recursive(cong_tree_view, node, &new_tree_iter);					
-					return;
-				}
-			}
-
-			g_assert(cong_tree_view_should_show_node(cong_tree_view, younger_sibling));			
-
-			if ( get_iter_for_node(cong_tree_view->private, younger_sibling, &tree_iter_sibling) ) {
-				
-				GtkTreeIter new_tree_iter;
-				gtk_tree_store_insert_before(cong_tree_view->private->gtk_tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
-				
-				populate_tree_store_recursive(cong_tree_view, node, &new_tree_iter);
-			}
-		}
-	}
-}
-
-static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter_node;
-	GtkTreeIter tree_iter_parent;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-	g_return_if_fail(adoptive_parent);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_parent\n");
-	#endif
-
-	if (before_change) {
-		return;
-	}
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
-		if ( get_iter_for_node(cong_tree_view->private, node, &tree_iter_node) ) {
-			/* Remove this branch of the tree: */
-			gtk_tree_store_remove(cong_tree_view->private->gtk_tree_store, &tree_iter_node);
-		}
-		
-		if ( get_iter_for_node(cong_tree_view->private, adoptive_parent, &tree_iter_parent) ) {
-			GtkTreeIter new_tree_iter;
-			gtk_tree_store_append(cong_tree_view->private->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
-			
-			populate_tree_store_recursive(cong_tree_view, node, &new_tree_iter);
-		}
-	}
-
-}
-
-static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-	g_return_if_fail(new_content);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_text\n");
-	#endif
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-	/* FIXME: Potentially we need to regenerate all text in the tree, due to XPath concerns... */
-
-	/* For now, just regenerate the text for this node: */
-	if ( get_iter_for_node(cong_tree_view->private, node, &tree_iter) ) {
-		PRIVATE(cong_tree_view)->node_creation_callback (cong_tree_view,
-								 &tree_iter,
-								 node,
-								 PRIVATE(cong_tree_view)->user_data);
-	}
-}
-
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
-{
-	/* UNWRITTEN */
-}
-
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
-{
-	/* UNWRITTEN */
-}
-
-static void on_selection_change(CongView *view)
-{
-}
-
-static void on_cursor_change(CongView *view)
-{
-}
-
-#if 0
-CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
-{
-	for ( ; x; x = cong_node_next(x))
-	{
-		enum CongNodeType node_type = cong_node_type(x);
-		const gchar *xmlns = cong_node_xmlns(x);
-		const gchar *name = xml_frag_name_nice(x);
-		CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-		if (element) {
-			if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element)) {
-				return(cong_node_prev(x));
-			}
-
-			if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
-				return(cong_node_prev(x));
-			}
-		}
-	}
-
-	return(x);
-}
-#endif
-
 static void
 set_pixbuf (GtkTreeViewColumn *tree_column,
 	    GtkCellRenderer   *cell,
 	    GtkTreeModel      *model,
 	    GtkTreeIter       *iter,
-	    gpointer           user_data)
-{
-#if 1
-	CongTreeView *cong_tree_view = user_data;	
-	CongNodePtr node = NULL;
-	enum CongNodeType node_type;
-	GdkPixbuf *pixbuf = NULL;
-	
-	g_assert (cong_tree_view);
-	g_assert (PRIVATE(cong_tree_view)->pixbuf_callback);
+	    gpointer           user_data);
 
-       	gtk_tree_model_get (model, 
-			    iter, 
-			    CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node, 
-			    -1);
-	if (NULL==node) {
-		return;
-	}
+static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
+					CongNodePtr node, 
+					GtkTreeIter* tree_iter);
 
-	pixbuf = PRIVATE(cong_tree_view)->pixbuf_callback (cong_tree_view, 
-							   node, 
-							   PRIVATE(cong_tree_view)->user_data);
+static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
+					     CongNodePtr node);
 
-	g_object_set (GTK_CELL_RENDERER (cell), "pixbuf", pixbuf, NULL);
-	if (pixbuf) {
-		g_object_unref (pixbuf);
-	}
-#endif
-}
-
-static void populate_tree_store_recursive(CongTreeView *cong_tree_view,
-					  CongNodePtr node, 
-					  GtkTreeIter* tree_iter)
-{
-	CongDocument *doc;
-	CongDispspec *ds;
-	CongNodePtr child_node;
-
-	g_return_if_fail(cong_tree_view);
-	g_return_if_fail(node);
-	g_return_if_fail(tree_iter);
-
-	g_assert(cong_tree_view_should_show_node(cong_tree_view,node));
-
-	doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
-	ds = cong_view_get_dispspec(CONG_VIEW(cong_tree_view));
-
-	gtk_tree_store_set (PRIVATE(cong_tree_view)->gtk_tree_store, 
-			    tree_iter,
-			    CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, node,
-			    CONG_TREE_VIEW_TREE_MODEL_DOC_COLUMN, doc,
-			    -1);
-
-	g_assert(PRIVATE(cong_tree_view)->node_creation_callback);
-	PRIVATE(cong_tree_view)->node_creation_callback (cong_tree_view,
-							 tree_iter,
-							 node,
-							 PRIVATE(cong_tree_view)->user_data);
-
-	/* Recurse through the children: */
-	for (child_node=node->children; child_node; child_node=child_node->next) {
-		if (cong_tree_view_should_show_node(cong_tree_view,
-						    child_node)) {
-			GtkTreeIter child_tree_iter;
-			gtk_tree_store_append (cong_tree_view->private->gtk_tree_store, &child_tree_iter, tree_iter);
-
-			populate_tree_store_recursive(cong_tree_view,
-						      child_node, 
-						      &child_tree_iter);
-		}
-	}
-}
-
+/* Exported function implementations: */
 CongTreeView *
 cong_tree_view_new (CongDocument *doc,
 		    gboolean use_markup,
@@ -539,7 +130,7 @@ cong_tree_view_new (CongDocument *doc,
 	cong_tree_view = g_new0(CongTreeView, 1);
 	details = g_new0(CongTreeViewDetails,1);
 	
-	cong_tree_view->private = details;
+	PRIVATE(cong_tree_view) = details;
 	
 	details->node_filter = node_filter;
 	details->node_creation_callback = node_creation_callback;
@@ -610,7 +201,7 @@ cong_tree_view_new (CongDocument *doc,
 	cong_tree_view_populate_tree(cong_tree_view);
 #else
 	gtk_tree_store_append (details->gtk_tree_store, &root_iter, NULL);  /* Acquire a top-level iterator */
-	populate_tree_store_recursive(cong_tree_view, (CongNodePtr)cong_document_get_xml(doc), &root_iter);
+	recursive_add_to_tree_store(cong_tree_view, (CongNodePtr)cong_document_get_xml(doc), &root_iter);
 #endif
 
 	gtk_widget_show(GTK_WIDGET(details->gtk_tree_view));
@@ -658,4 +249,477 @@ cong_tree_view_get_tree_store (CongTreeView *tree_view)
 	g_return_val_if_fail(tree_view, NULL);
 
 	return tree_view->private->gtk_tree_store;
+}
+
+
+
+/* Internal function implementations: */
+/* the treeview widget has the userdata "cong_tree_view" set on it */
+static gint 
+tree_popup_show(GtkWidget *widget, GdkEvent *event)
+{
+	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(widget));
+
+	if (event->type == GDK_BUTTON_PRESS)
+	{
+		GdkEventButton *bevent = (GdkEventButton *) event;
+		if (bevent->button != 3) return(FALSE);
+		
+ 		/* printf("button 3\n"); */
+ 		{
+			GtkTreePath* path;
+			if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
+							    bevent->x,
+							    bevent->y,
+							    &path,
+							    NULL,
+							    NULL, 
+							    NULL)
+			     ) { 
+				CongTreeView *cong_tree_view;
+				GtkTreeModel* tree_model;
+				GtkTreeIter iter;
+
+				cong_tree_view = g_object_get_data(G_OBJECT(widget),
+								   "cong_tree_view");
+				g_assert(cong_tree_view);
+
+				tree_model = GTK_TREE_MODEL(cong_tree_view_get_tree_store(cong_tree_view));
+#if 0
+				gchar* msg = gtk_tree_path_to_string(path);
+				printf("right-click on path \"%s\"\n",msg);
+				g_free(msg);
+#endif
+		    
+				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
+					CongNodePtr node;
+					GtkWidget* menu;
+					CongDocument* doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
+					
+					gtk_tree_model_get(tree_model, &iter, CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node, -1);
+					gtk_tree_model_get(tree_model, &iter, CONG_TREE_VIEW_TREE_MODEL_DOC_COLUMN, &doc, -1);
+					
+#if 0
+					{
+						gchar *desc = cong_node_debug_description (node);
+						g_message ("got node \"%s\"\n",desc);
+						g_free (desc);
+					}
+#endif
+					
+					menu = cong_ui_popup_init(doc, 
+								  node, 
+								  parent_window);
+					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
+						       bevent->time);		      
+				}
+				
+				
+				gtk_tree_path_free(path);		  
+			}
+
+ 		}
+
+		return(TRUE);
+	}
+
+	return(FALSE);
+}
+
+static gboolean 
+node_search_callback (GtkTreeModel *model,
+		      GtkTreePath *path,
+		      GtkTreeIter *iter,
+		      gpointer data)
+{
+	struct search_struct* search = (struct search_struct*)data;
+	CongNodePtr this_node;
+	
+	g_assert(model);
+	g_assert(path);
+	g_assert(iter);
+	g_assert(search);
+
+	gtk_tree_model_get(model,
+			   iter,
+			   CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN,
+			   &this_node,
+			   -1);
+
+	if (this_node==search->node) {
+		search->found_it = TRUE;
+		*search->tree_iter = *iter;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+
+}
+
+static gboolean 
+get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter)
+{
+	/* FIXME: this is O(n), it ought to be O(1), by adding some kind of search structure */
+	struct search_struct search;
+	
+	search.node = node;
+	search.found_it = FALSE;
+	search.tree_iter = tree_iter;
+
+	gtk_tree_model_foreach(GTK_TREE_MODEL(tree_view_details->gtk_tree_store),
+			       node_search_callback,
+			       &search);
+
+	return search.found_it;
+}
+
+/* Definitions of the handler functions: */
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
+{
+	CongTreeView *cong_tree_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_make_orphan\n");
+	#endif
+
+	if (before_change) {
+		return;
+	}
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	recursive_remove_from_tree_store(cong_tree_view, node);
+}
+
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling)
+{
+	CongTreeView *cong_tree_view;
+	GtkTreeIter tree_iter_sibling;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(older_sibling);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_after\n");
+	#endif
+
+	if (before_change) {
+		return;
+	}
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
+
+		if ( get_iter_for_node(PRIVATE(cong_tree_view), older_sibling->parent, &tree_iter_parent) ) {
+	
+			/* Perhaps the older sibling isn't in the overview; find youngest older sibling that actually appears in view: */
+			while (!cong_tree_view_should_show_node(cong_tree_view, older_sibling)) {
+				older_sibling = older_sibling->prev;
+				
+				if (NULL==older_sibling) {
+					/* None of the siblings should appear in view; add as first child of parent: */
+					/* FIXME: what if parent shouldn't appear? */
+					GtkTreeIter new_tree_iter;
+					gtk_tree_store_prepend(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+				
+					recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);					
+					return;
+				}
+			}
+
+			g_assert(cong_tree_view_should_show_node(cong_tree_view, older_sibling));
+			
+			if ( get_iter_for_node(PRIVATE(cong_tree_view), older_sibling, &tree_iter_sibling) ) {
+				
+				GtkTreeIter new_tree_iter;
+				gtk_tree_store_insert_after(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
+				
+				recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);
+			}
+		}
+	}
+}
+
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	CongTreeView *cong_tree_view;
+	GtkTreeIter tree_iter_sibling;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(younger_sibling);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_before\n");
+	#endif
+
+	if (before_change) {
+		return;
+	}
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
+
+		if ( get_iter_for_node(PRIVATE(cong_tree_view), younger_sibling->parent, &tree_iter_parent) ) {
+
+			/* Perhaps the younger sibling isn't in the overview; find oldest younger sibling that actually appears in view: */
+			while (!cong_tree_view_should_show_node(cong_tree_view, younger_sibling)) {
+				younger_sibling = younger_sibling->next;
+				
+				if (NULL==younger_sibling) {
+					/* None of the siblings should appear in view; add as final child of parent: */
+					/* FIXME: what if parent shouldn't appear? */
+					GtkTreeIter new_tree_iter;
+					gtk_tree_store_append(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+				
+					recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);					
+					return;
+				}
+			}
+
+			g_assert(cong_tree_view_should_show_node(cong_tree_view, younger_sibling));			
+
+			if ( get_iter_for_node(PRIVATE(cong_tree_view), younger_sibling, &tree_iter_sibling) ) {
+				
+				GtkTreeIter new_tree_iter;
+				gtk_tree_store_insert_before(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
+				
+				recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);
+			}
+		}
+	}
+}
+
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	CongTreeView *cong_tree_view;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(adoptive_parent);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_parent\n");
+	#endif
+
+	if (before_change) {
+		return;
+	}
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (cong_tree_view_should_show_node(cong_tree_view, node)) {
+		recursive_remove_from_tree_store(cong_tree_view, node);
+
+		if ( get_iter_for_node(PRIVATE(cong_tree_view), adoptive_parent, &tree_iter_parent) ) {
+			GtkTreeIter new_tree_iter;
+			gtk_tree_store_append(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+			
+			recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);
+		}
+	}
+
+}
+
+static void regenerate_data_for_node(CongTreeView *cong_tree_view, CongNodePtr node)
+{
+	GtkTreeIter tree_iter;
+
+	/* FIXME: Potentially we need to regenerate all text in the tree, due to XPath concerns... */
+
+	/* For now, just regenerate the text for this node: */
+	if ( get_iter_for_node(PRIVATE(cong_tree_view), node, &tree_iter) ) {
+		PRIVATE(cong_tree_view)->node_creation_callback (cong_tree_view,
+								 &tree_iter,
+								 node,
+								 PRIVATE(cong_tree_view)->user_data);
+	}
+}
+
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
+{
+	CongTreeView *cong_tree_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_text\n");
+	#endif
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (!before_change) {
+		regenerate_data_for_node(cong_tree_view, node);
+	}
+}
+
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	CongTreeView *cong_tree_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_attribute\n");
+	#endif
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (!before_event) {
+		regenerate_data_for_node(cong_tree_view, node);
+	}
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	CongTreeView *cong_tree_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_remove_attribute\n");
+	#endif
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	if (!before_event) {
+		regenerate_data_for_node(cong_tree_view, node);
+	}
+}
+
+static void on_selection_change(CongView *view)
+{
+}
+
+static void on_cursor_change(CongView *view)
+{
+}
+
+#if 0
+CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
+{
+	for ( ; x; x = cong_node_next(x))
+	{
+		enum CongNodeType node_type = cong_node_type(x);
+		const gchar *xmlns = cong_node_xmlns(x);
+		const gchar *name = xml_frag_name_nice(x);
+		CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+
+		if (element) {
+			if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element)) {
+				return(cong_node_prev(x));
+			}
+
+			if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
+				return(cong_node_prev(x));
+			}
+		}
+	}
+
+	return(x);
+}
+#endif
+
+static void
+set_pixbuf (GtkTreeViewColumn *tree_column,
+	    GtkCellRenderer   *cell,
+	    GtkTreeModel      *model,
+	    GtkTreeIter       *iter,
+	    gpointer           user_data)
+{
+	CongTreeView *cong_tree_view = user_data;	
+	CongNodePtr node = NULL;
+	enum CongNodeType node_type;
+	GdkPixbuf *pixbuf = NULL;
+	
+	g_assert (cong_tree_view);
+	g_assert (PRIVATE(cong_tree_view)->pixbuf_callback);
+
+       	gtk_tree_model_get (model, 
+			    iter, 
+			    CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node, 
+			    -1);
+	if (NULL==node) {
+		return;
+	}
+
+	pixbuf = PRIVATE(cong_tree_view)->pixbuf_callback (cong_tree_view, 
+							   node, 
+							   PRIVATE(cong_tree_view)->user_data);
+
+	g_object_set (GTK_CELL_RENDERER (cell), "pixbuf", pixbuf, NULL);
+	if (pixbuf) {
+		g_object_unref (pixbuf);
+	}
+}
+
+static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
+					  CongNodePtr node, 
+					  GtkTreeIter* tree_iter)
+{
+	CongDocument *doc;
+	CongDispspec *ds;
+	CongNodePtr child_node;
+
+	g_return_if_fail(cong_tree_view);
+	g_return_if_fail(node);
+	g_return_if_fail(tree_iter);
+
+	g_assert(cong_tree_view_should_show_node(cong_tree_view,node));
+
+	doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
+	ds = cong_view_get_dispspec(CONG_VIEW(cong_tree_view));
+
+	gtk_tree_store_set (PRIVATE(cong_tree_view)->gtk_tree_store, 
+			    tree_iter,
+			    CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, node,
+			    CONG_TREE_VIEW_TREE_MODEL_DOC_COLUMN, doc,
+			    -1);
+
+	g_assert(PRIVATE(cong_tree_view)->node_creation_callback);
+	PRIVATE(cong_tree_view)->node_creation_callback (cong_tree_view,
+							 tree_iter,
+							 node,
+							 PRIVATE(cong_tree_view)->user_data);
+
+	/* Recurse through the children: */
+	for (child_node=node->children; child_node; child_node=child_node->next) {
+		if (cong_tree_view_should_show_node(cong_tree_view,
+						    child_node)) {
+			GtkTreeIter child_tree_iter;
+			gtk_tree_store_append (PRIVATE(cong_tree_view)->gtk_tree_store, &child_tree_iter, tree_iter);
+
+			recursive_add_to_tree_store(cong_tree_view,
+						    child_node, 
+						    &child_tree_iter);
+		}
+	}
+}
+
+static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
+					     CongNodePtr node)
+{
+	GtkTreeIter tree_iter_node;
+
+	g_return_if_fail(cong_tree_view);
+	g_return_if_fail(node);
+
+	/* FIXME: write this! */
+	if ( get_iter_for_node(PRIVATE(cong_tree_view), node, &tree_iter_node) ) {
+		/* Remove this branch of the tree: */
+		gtk_tree_store_remove(PRIVATE(cong_tree_view)->gtk_tree_store, &tree_iter_node);
+	}		
 }

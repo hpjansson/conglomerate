@@ -1,3 +1,9 @@
+2003-07-10  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-tree-view.c
+
+	Tidy up and bug fixes for shared tree view code
+
 2003-07-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dom-view.c, cong-overview-view.c, cong-tree-view.c, cong-tree-view.h
