@@ -210,9 +210,11 @@ cong_text_cache_set_input_attributes (CongTextCache* text_cache,
 				      PangoAttrList *attr_list)
 {
 	g_return_if_fail (text_cache);
-	g_return_if_fail (attr_list);
 
-	pango_attr_list_ref (attr_list);
+	if (attr_list) {
+		pango_attr_list_ref (attr_list);
+	}
+
 	if (text_cache->input_attr_list) {
 		pango_attr_list_unref (text_cache->input_attr_list);
 	}
