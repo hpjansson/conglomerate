@@ -1,3 +1,10 @@
+2004-01-29  David Hoover  <karma@deadmoose.com>
+
+	* README.xml
+
+	Whitespace issues (mainly "<foo>bar</foo>leg", rather than
+	"<foo>bar</foo> leg")
+
 2004-01-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am

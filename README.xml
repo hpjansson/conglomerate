@@ -4,7 +4,7 @@
 <article>
 	<sect1>
 		<title>About Conglomerate</title>
-		<para>This is a work-in-progress version of the Conglomerate editor. It is based on structural document markup with XML. </para>
+		<para>This is a work-in-progress version of the Conglomerate editor. It is based on structural document markup with XML.</para>
 	</sect1>
 	<sect1>
 		<title>Compiling</title>
@@ -17,7 +17,7 @@
 			</step>
 			<step><programlisting><command>make install</command></programlisting></step>
 		</procedure>
-		<para>If you're compiling from CVS, you will need the <application>gnome-common</application>module from GNOME CVS installed. Then type</para>
+		<para>If you're compiling from CVS, you will need the <application>gnome-common</application> module from GNOME CVS installed. Then type</para>
 		<procedure>
 			<step><programlisting><command>./autogen.sh</command>
 			which generates and runs
@@ -28,7 +28,7 @@
 			</step>
 			<step><programlisting>make install</programlisting></step>
 		</procedure>
-		<para>and see what happens. This should produce an executable called <application>conglomerate</application>in the <filename>src</filename>directory. Typing <command>make install</command>installs the program and its data files into a hopefully sensible location. </para>
+		<para>and see what happens. This should produce an executable called <application>conglomerate</application> in the <filename>src</filename> directory. Typing <command>make install</command> installs the program and its data files into a hopefully sensible location. </para>
 		<para>On some systems, example given Red Hat 8, you have to type</para>
 		<procedure>
 			<step><programlisting><command>libtoolize --automake</command></programlisting></step>
@@ -40,7 +40,7 @@
 			<title>Debian</title>
 			<para>If you want to make a debian package from the tarbal, type</para>
 			<para><command>fakeroot dpkg-buildpackage -uc -us</command></para>
-			<para>and when you have a deb-src line in <filename>/etc/apt/source</filename>type</para>
+			<para>and when you have a deb-src line in <filename>/etc/apt/source</filename> type</para>
 			 <para><command>apt-get source -b conglomerate</command></para>
 		</sect2>
 		<sect2>
@@ -54,8 +54,8 @@
 	</sect1>
 	<sect1>
 		<title>Running</title>
-		<para>Currently you need to install <application>conglomerate</application>for it to work (so that it can find its data files)</para>
-		<para>Conglomerate needs two files to be able to run and display something. The first is an XML file (if it uses a DTD, this should be locatable as referred from the XML file - there will be no validation done, and DTD-less documents are fine). The second is a &quot;displayspec&quot;, illustrated by <filename>readme.xds</filename>in the <filename>examples</filename>directory. This specifies how the tags are rendered.</para>
+		<para>Currently you need to install <application>conglomerate</application> for it to work (so that it can find its data files)</para>
+		<para>Conglomerate needs two files to be able to run and display something. The first is an XML file (if it uses a DTD, this should be locatable as referred from the XML file - there will be no validation done, and DTD-less documents are fine). The second is a &quot;displayspec&quot;, illustrated by <filename>readme.xds</filename> in the <filename>examples</filename> directory. This specifies how the tags are rendered.</para>
 		<para>There are two ways to load a document into Conglomerate. One is by specifying the XML on the commandline, like this:</para>
 		<para><command>conglomerate readme.xml</command></para>
 		<para>The other is by using the GUI open dialogs. The readme example used above is located in the examples directory, from the package root.</para>
