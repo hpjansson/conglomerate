@@ -194,7 +194,7 @@ xmlDocPtr make_article(const xmlChar *title)
 		    xmlNewDocNode(xml_doc,
 				  NULL,
 				  "para",
-				  "")
+				  _("Text of the article goes here"))
 		    );
 
 	return xml_doc;
@@ -247,7 +247,7 @@ xmlDocPtr make_book(const xmlChar *title)
 		    xmlNewDocNode(xml_doc,
 				  NULL,
 				  "para",
-				  "")
+				  _("Text of the first chapter goes here"))
 		    );
 
 	return xml_doc;
@@ -296,7 +296,7 @@ void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssist
 {
 	xmlDocPtr xml_doc;
 
-	xml_doc = make_set(_("Untitled Set"));
+	xml_doc = make_set(_("Untitled Set of Documents"));
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
 						   cong_new_file_assistant_get_toplevel(assistant));

@@ -517,8 +517,11 @@ static gboolean span_text_editor_on_document_event(CongElementEditor *element_ed
 		/* These messages go direct from the widget to the relevant element editor: */
 		if (!event->before_event) {
 			regenerate_plaintext(span_text);			
-		
-			/* hackish redraw: */
+
+			/* Ensure layout is regenerated: */
+			cong_editor_widget_force_layout_update(element_editor->widget);
+
+			/* And force a redraw for good measure: */
 			gtk_widget_queue_draw(GTK_WIDGET(element_editor->widget));		
 			
 			return TRUE;

@@ -99,7 +99,7 @@ http://www.conglomerate.org/
 
 The latest updates are available through anonymous CVS:
 
-cvs -z3 -d :ext:anonymous@cvs.copyleft.no:/cvs checkout conge
+cvs -z3 -d :ext:anoncvs@cvs.copyleft.no:/cvs checkout conge
 
 CVS is also web-browsable:
 

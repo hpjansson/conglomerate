@@ -320,7 +320,9 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("configure_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG3("configure_event_handler; w/h = %i,%i", event->width, event->height);
+ 
+ 	cong_element_editor_get_size_requisition(details->root_editor, event->width);
 
 	/* Pass all of the allocation to root editor; this will recursively allocate space to its children: */
 	cong_element_editor_set_allocation(details->root_editor, 
@@ -376,6 +378,26 @@ static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpoint
 
 	return TRUE;
 }
+
+static void size_request_handler(GtkWidget *widget,
+ 				 GtkRequisition *requisition,
+ 				 gpointer user_data)
+{
+ 	CongDocument *doc;
+ 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(widget);
+ 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+ 
+ 	CONG_EDITOR_WIDGET_DEBUG_MSG1("size_request_handler");
+ 
+ 	g_assert(widget);
+ 	g_assert(requisition);
+ 
+ 	cong_element_editor_get_size_requisition(details->root_editor, widget->allocation.width);
+ 
+ 	requisition->width = details->root_editor->requisition.width;
+ 	requisition->height = details->root_editor->requisition.height;
+}
+ 
 
 #if 0
 void recursively_populate_ui(CongEditorView *editor_view,
@@ -590,6 +612,10 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 				 "key_press_event",
 				 (GtkSignalFunc) key_press_event_handler, 
 				 NULL);
+	gtk_signal_connect(GTK_OBJECT(widget),
+ 			   "size-request",
+ 			   (GtkSignalFunc) size_request_handler,
+ 			   NULL);
 
 	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
 
@@ -641,13 +667,19 @@ void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget)
 	details = GET_DETAILS(editor_widget);
 
 	/* Recursively update all the size requisitions: */
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("cong_editor_widget_force_layout_update");
+ 
+#if 1
+ 	gtk_widget_queue_resize(GTK_WIDGET(editor_widget));
+#else
 	cong_element_editor_get_size_requisition(details->root_editor, GTK_WIDGET(editor_widget)->allocation.width);
 
 	gtk_widget_set_size_request(GTK_WIDGET(editor_widget),
 				    details->root_editor->requisition.width,
 				    details->root_editor->requisition.height);
-
+	
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));
+#endif
 }
 
 /* Internal utility functions: */

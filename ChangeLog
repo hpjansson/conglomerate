@@ -1,3 +1,9 @@
+2003-06-03  David Malcolm <david@davemalcolm.demon.co.uk>
+		
+	* configure.in:  Changed version number from 0.5.0 to 0.5.1
+
+	* README:  Fixed details of anonymous CVS access
+	
 2003-05-09  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am: added 'dh_make' generated files
@@ -22,8 +28,6 @@
 	* TODO: Deprecated the file in favour of Bugzilla
 
 	* configure.in:  Bumped version to 0.5.0; added libgnome-print-2.0 dependency
-
-	
 	
 2003-04-30  David Malcolm <david@davemalcolm.demon.co.uk>
 

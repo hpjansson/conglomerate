@@ -1,5 +1,9 @@
 2003-06-05 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget.c, cong-menus.c, cong-span-text-editor.c, plugin-docbook.c, 
+
+	Fix for sizing bug, changed year of copyright in About box; added boilerplate text to DocBook files generated with File->New
+	
 	* cong-menus.c
 
 	Disabled debug menus

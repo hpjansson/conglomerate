@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-06-05 17:07+0000\n"
+"POT-Creation-Date: 2003-06-06 13:07+0000\n"
 "PO-Revision-Date: 2003-04-29 10:53CET\n"
 "Last-Translator: Quique <quique@sindominio.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -769,9 +769,10 @@ msgid "translator_credits"
 msgstr "Quique <quique@sindominio.net>"
 
 #: src/cong-menus.c:1141
+#, fuzzy
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
-"(C) 2002 David Malcolm"
+"(C) 2003 David Malcolm"
 msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2002 David Malcolm"
@@ -1068,8 +1069,16 @@ msgstr ""
 msgid "XML Editor"
 msgstr "Editor XML"
 
+#: src/plugin-docbook.c:197
+msgid "Text of the article goes here"
+msgstr ""
+
 #: src/plugin-docbook.c:207
 msgid "Untitled Article"
+msgstr ""
+
+#: src/plugin-docbook.c:250
+msgid "Text of the first chapter goes here"
 msgstr ""
 
 #: src/plugin-docbook.c:260
@@ -1077,7 +1086,7 @@ msgid "Untitled Book"
 msgstr ""
 
 #: src/plugin-docbook.c:299
-msgid "Untitled Set"
+msgid "Untitled Set of Documents"
 msgstr ""
 
 #: src/plugin-docbook.c:460
