@@ -48,7 +48,7 @@ void cong_document_cut_selection(CongDocument *doc)
 	
 	if (the_globals.clipboard) cong_node_recursive_delete(NULL, the_globals.clipboard);
 	
-	t = cong_node_new_element("dummy");
+	t = cong_node_new_element("dummy", doc);
 
 	cong_selection_reparent_all(selection, doc, t);
 	
@@ -87,7 +87,7 @@ void cong_document_copy_selection(CongDocument *doc)
 		cong_node_recursive_delete(NULL, the_globals.clipboard);
 	}
 
-	t = cong_node_new_element("dummy");
+	t = cong_node_new_element("dummy", doc);
 
 	cong_selection_reparent_all(selection, doc, t);
 	the_globals.clipboard = cong_node_recursive_dup(t);

@@ -629,6 +629,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 					      "docbook-article-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_article,
+					      "cong-docbook-article",
 					      "article");
 	cong_plugin_register_document_factory(plugin, 
 					      _("DocBook Book"), 
@@ -636,6 +637,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 					      "docbook-book-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_book,
+					      "cong-docbook-book",
 					      "book");
 	cong_plugin_register_document_factory(plugin, 
 					      _("DocBook Set"), 
@@ -643,6 +645,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 					      "docbook-set-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_set,
+					      "cong-docbook-set",
 					      "set");	
 
 	cong_plugin_register_importer(plugin, 

@@ -1,4 +1,33 @@
+2003-06-13 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am
+
+	Added cong-node-properties-dialog.c
+
+	* cong-debug-log-view.c, cong-document.c, cong-document.h, cong-dom-view.c, cong-editor-widget.c, cong-menus.c, cong-node-properties-dialog.c, cong-source-view.c, cong-tree-view.c, cong-view.h, global.h, 
+
+	Added attribute display to some views, and messages relating to attributes to the MVC framework; editing functionality in the node properties dialog.
+
+	* cong-dispspec.c, cong-file-new.c, cong-plugin.c, cong-plugin.h, main.c, plugin-docbook.c, plugin-tests.c, 
+
+	Generalisation of icon support; plugin factories can now have icons displayed in the File->New assistant
+
+	* cong-node.h, select.c, tree.c, xmldata.c, xmledit.c
+
+	Ensure that new nodes have the xml_doc set up correctly (fixes some DTD problems)
+
+	* cursor.c
+
+	Fix for bug #114960
+
+	* plugin-validate.c
+
+	Bug now listed as bug #113758
+
+	* popup.c
+
+	Fixed a bug where removing a span tag didn't trigger an MVC update
+	
 2003-06-10 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c

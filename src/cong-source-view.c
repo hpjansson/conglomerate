@@ -33,6 +33,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -178,6 +180,47 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	}
 }
 
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	CongSourceView *source_view;
+	GtkTreeIter tree_iter;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
+
+	#if DEBUG_SOURCE_VIEW
+	g_message("CongSourceView - on_document_node_set_attribute\n");
+	#endif
+
+	source_view = CONG_SOURCE_VIEW(view);
+
+	if (!before_event) {
+		regenerate_text_buffer(source_view);
+	}
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	CongSourceView *source_view;
+	GtkTreeIter tree_iter;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	#if DEBUG_SOURCE_VIEW
+	g_message("CongSourceView - on_document_node_remove_attribute\n");
+	#endif
+
+	source_view = CONG_SOURCE_VIEW(view);
+
+	if (!before_event) {
+		regenerate_text_buffer(source_view);
+	}
+}
+
 static void on_selection_change(CongView *view)
 {
 }
@@ -208,6 +251,8 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
+	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
 

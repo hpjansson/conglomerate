@@ -569,6 +569,79 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	cong_document_set_modified(doc, TRUE);
 }
 
+void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_set_attribute\n");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_attribute);
+		view->klass->on_document_node_set_attribute(view, TRUE, node, name, value);
+	}
+
+	/* Make the change: */
+	cong_node_private_set_attribute(node, name, value);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_attribute);
+		view->klass->on_document_node_set_attribute(view, FALSE, node, name, value);
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_remove_attribute\n");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_remove_attribute);
+		view->klass->on_document_node_remove_attribute(view, TRUE, node, name);
+	}
+
+	/* Make the change: */
+	cong_node_private_remove_attribute(node, name);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_remove_attribute);
+		view->klass->on_document_node_remove_attribute(view, FALSE, node, name);
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
 void cong_document_on_selection_change(CongDocument *doc)
 {
 	GList *iter;

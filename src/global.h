@@ -93,6 +93,9 @@ GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 GtkWidget *cong_dom_view_new(CongDocument *doc);
 GtkWidget *cong_source_view_new(CongDocument *doc);
 GtkWidget *cong_debug_log_view_new(CongDocument *doc);
+GtkWidget *cong_node_properties_dialog_new(CongDocument *doc, 
+					   CongNodePtr node, 
+					   GtkWindow *parent_window);
 
 GtkWidget* cong_gui_get_a_window(void);
 
@@ -377,6 +380,13 @@ cong_utils_get_norman_walsh_stylesheet_path(void);
 
 gchar*
 cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path);
+
+/**
+   Icon loading; take an icon basename e.g. "cong-docbook-set", convert to a filename and load it.
+ */
+GdkPixbuf *cong_util_load_icon(const gchar *icon_basename);
+
+void cong_util_append(gchar **string, const gchar *to_add);
 
 
 /* macro adapted from libxml's error.c; surely this exists in GLib somewhere? */

@@ -77,6 +77,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -162,6 +164,50 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	g_free(cleaned_text);
 }
 
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	CongDebugLogView *debug_log_view;
+	GtkTreeIter tree_iter_node;
+	GtkTreeIter tree_iter_parent;
+	gchar *node_name;
+	gchar *extra_info;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
+
+	debug_log_view = CONG_DEBUG_LOG_VIEW(view);
+
+	node_name = cong_node_get_path(node);
+	extra_info = g_strdup_printf("%s=\"%s\"", name, value);
+
+	debug_low_view_add_message(debug_log_view, "Set attribute", before_event, node_name, extra_info);
+
+	g_free(node_name);
+	g_free(extra_info);
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	CongDebugLogView *debug_log_view;
+	GtkTreeIter tree_iter_node;
+	GtkTreeIter tree_iter_parent;
+	gchar *node_name;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	debug_log_view = CONG_DEBUG_LOG_VIEW(view);
+
+	node_name = cong_node_get_path(node);
+
+	debug_low_view_add_message(debug_log_view, "Remove attribute", before_event, node_name, name);
+
+	g_free(node_name);
+}
+
 static void on_selection_change(CongView *view)
 {
 	CongDebugLogView *debug_log_view;
@@ -211,6 +257,8 @@ GtkWidget *cong_debug_log_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
+	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
 

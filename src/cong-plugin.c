@@ -68,6 +68,10 @@ struct CongDocumentFactory
 
 	CongDocumentFactoryPageCreationCallback page_creation_callback;
 	CongDocumentFactoryActionCallback action_callback;
+
+	gchar *icon;
+	GdkPixbuf *icon16;
+
 	gpointer user_data;
 };
 
@@ -237,6 +241,7 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 							   const gchar *id,
 							   CongDocumentFactoryPageCreationCallback page_creation_callback,
 							   CongDocumentFactoryActionCallback action_callback,
+							   const gchar *icon,
 							   gpointer user_data)
 {
 	CongDocumentFactory *factory;
@@ -247,6 +252,7 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	g_return_val_if_fail(id, NULL);
 	g_return_val_if_fail(page_creation_callback, NULL);
 	g_return_val_if_fail(action_callback, NULL);
+	/* icon is allowed to be NULL */
 
 	factory = g_new0(CongDocumentFactory,1);
 
@@ -256,6 +262,10 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	factory->functionality.functionality_id = g_strdup(id);
 	factory->page_creation_callback = page_creation_callback;
 	factory->action_callback = action_callback;
+	if (icon) {
+		factory->icon = g_strdup(icon);
+		factory->icon16 = cong_util_load_icon(icon);
+	}
 	factory->user_data = user_data;
 
 	/* Add to plugin's list: */
@@ -571,6 +581,18 @@ void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, 
 	g_assert(factory->action_callback);
 
 	factory->action_callback(factory, assistant, factory->user_data);
+}
+
+GdkPixbuf *cong_document_factory_get_icon(CongDocumentFactory *factory)
+{
+	g_return_val_if_fail(factory, NULL);
+
+	if (factory->icon16) {
+		g_object_ref(G_OBJECT(factory->icon16));
+		return factory->icon16;
+	} else {
+		return NULL;
+	}
 }
 
 /* Implementation of CongImporter: */

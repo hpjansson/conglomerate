@@ -260,6 +260,7 @@ void cong_node_self_test(CongNodePtr node)
 
 	g_return_if_fail(node);
 
+	g_assert(node->doc);
 
 	if (node->content) {
 		g_assert(g_utf8_validate(node->content,-1,NULL));
@@ -369,23 +370,25 @@ gboolean cong_node_should_recurse(CongNodePtr node)
 }
 
 /* Construction: */
-CongNodePtr cong_node_new_element(const char *tagname)
+CongNodePtr cong_node_new_element(const char *tagname, CongDocument *doc)
 {
 	g_return_val_if_fail(tagname, NULL);
+	g_return_val_if_fail(doc, NULL);
 
-	return xmlNewNode(NULL, tagname); /* FIXME: audit the character types here */
+	return xmlNewDocNode(cong_document_get_xml(doc), NULL, tagname, NULL); /* FIXME: audit the character types here */
 }
 
-CongNodePtr cong_node_new_text(const char *text)
+CongNodePtr cong_node_new_text(const char *text, CongDocument *doc)
 {
-	return cong_node_new_text_len(text, strlen(text));
+	return cong_node_new_text_len(text, strlen(text),doc);
 }
 
-CongNodePtr cong_node_new_text_len(const char *text, int len)
+CongNodePtr cong_node_new_text_len(const char *text, int len, CongDocument *doc)
 {
 	g_return_val_if_fail(text, NULL);
+	g_return_val_if_fail(doc, NULL);
 
-	return xmlNewTextLen(text, len); /* FIXME: audit the character types here */
+	return xmlNewDocTextLen(cong_document_get_xml(doc), text, len); /* FIXME: audit the character types here */
 }
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
@@ -661,6 +664,23 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 	xmlNodeSetContent(node, new_content);
 }
 
+void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
+
+	xmlSetProp(node, name, value);
+}
+
+void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
+{
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	xmlUnsetProp(node, name);
+}
+
 const gchar *xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;
@@ -736,6 +756,7 @@ GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail( cong_node_type(node) == CONG_NODE_TYPE_TEXT, NULL);
 
 	/*  we should be at text node.  grab span element above */
 	if (node->parent) {
@@ -830,7 +851,7 @@ gboolean xml_add_required_children(CongDocument *doc, CongNodePtr node) {
 		node->children = NULL;
 
 		/*  add a text node */
-		new_node = cong_node_new_text("");
+		new_node = cong_node_new_text("", doc);
 		cong_document_node_set_parent(doc, new_node, node);
 	}
 
@@ -1028,7 +1049,7 @@ static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementConte
 		case XML_ELEMENT_CONTENT_PCDATA: 
 			/*  create a text node, add it */
 			g_print("xml_add_required_content: adding new text node under node %s\n", node->name);
-			new_node = cong_node_new_text("");
+			new_node = cong_node_new_text("", cong_doc);
 			cong_document_node_set_parent(cong_doc, new_node, node);
 			return TRUE;
 		case XML_ELEMENT_CONTENT_ELEMENT: 
@@ -1037,7 +1058,7 @@ static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementConte
 			
 			/*  create the element and add it */
 			g_print("xml_add_required_content: adding new node %s under node %s\n", content->name, node->name);
-			new_node = cong_node_new_element(content->name);
+			new_node = cong_node_new_element(content->name, cong_doc);
 			cong_document_node_set_parent(cong_doc, new_node, node);
 			
 			/*  recur on the new node to add anything it needs */
@@ -1116,7 +1137,7 @@ static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlEleme
 	g_return_val_if_fail(element_name, FALSE);
 
 	/*  add the element */
-	new_node = cong_node_new_element(element_name);
+	new_node = cong_node_new_element(element_name, cong_doc);
 	cong_document_node_set_parent(cong_doc, new_node, node);
 	
 	/*  free the returned string */
@@ -1140,7 +1161,7 @@ static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementCo
 	if (content->type == XML_ELEMENT_CONTENT_PCDATA) {
 		/*  create a text node, add it */
 		g_print("xml_add_optional_text_nodes: adding new text node under node %s\n", node->name);
-		new_node = cong_node_new_text("");
+		new_node = cong_node_new_text("", cong_doc);
 		cong_document_node_set_parent(cong_doc, new_node, node);
 		return TRUE;
 	}

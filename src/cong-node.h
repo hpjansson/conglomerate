@@ -140,9 +140,9 @@ gboolean cong_node_should_recurse(CongNodePtr node);
 int cong_node_get_length(CongNodePtr node); /* get length of content; does not include the zero terminator (to correspond to the TTREE size field) */
 
 /* Construction: */
-CongNodePtr cong_node_new_element(const char *tagname);
-CongNodePtr cong_node_new_text(const char *text);
-CongNodePtr cong_node_new_text_len(const char *text, int len); /* FIXME: what character type ? */
+CongNodePtr cong_node_new_element(const char *tagname, CongDocument *doc);
+CongNodePtr cong_node_new_text(const char *text, CongDocument *doc);
+CongNodePtr cong_node_new_text_len(const char *text, int len, CongDocument *doc); /* FIXME: what character type ? */
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void cong_node_free(CongNodePtr node);
@@ -157,5 +157,7 @@ void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling);
 void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling);
 void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
+void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value);
+void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name);
 
 #endif

@@ -58,6 +58,32 @@ struct CongNewFileAssistant
 	GHashTable *hash_table_of_factory_to_page;
 };
 
+static void
+set_pixbuf (GtkTreeViewColumn *tree_column,
+	    GtkCellRenderer   *cell,
+	    GtkTreeModel      *model,
+	    GtkTreeIter       *iter,
+	    gpointer           user_data)
+{
+	GdkPixbuf *pixbuf = NULL;
+	CongDocumentFactory *factory;
+	
+       	gtk_tree_model_get (model, iter, 
+			    NEWDOCTYPELIST_FACTORY_COLUMN, &factory,
+			    -1);
+	if (NULL==factory) {
+		return;
+	}
+
+	pixbuf = cong_document_factory_get_icon(factory);
+
+	g_object_set (GTK_CELL_RENDERER (cell), "pixbuf", pixbuf, NULL);
+	
+	if (pixbuf) {
+		g_object_unref (pixbuf);
+	}
+}
+
 gboolean first_page_of_factory_back(GnomeDruidPage *druidpage,
 				    GtkWidget *widget,
 				    gpointer user_data)
@@ -175,15 +201,29 @@ GtkWidget *make_type_selection_widget(CongNewFileAssistant *assistant)
 	/* Populate the list based on the plugins: */
 	cong_plugin_manager_for_each_document_factory(the_globals.plugin_manager, add_factory_callback, assistant);
 
-	renderer = gtk_cell_renderer_text_new ();
 
-	column = gtk_tree_view_column_new_with_attributes (_("File Type"), renderer,
-							   "text", NEWDOCTYPELIST_NAME_COLUMN,
-							   NULL);
+	/* The "File Type" column: */
+	column = gtk_tree_view_column_new();
+	gtk_tree_view_column_set_title(column, _("File Type"));
+
+	/* Add a pixbuf-renderer to the column: */
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+ 	gtk_tree_view_column_set_cell_data_func (column, renderer, set_pixbuf, NULL, NULL);
+
+	/* Add a text renderer to the column: */
+	renderer = gtk_cell_renderer_text_new ();		
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes(column,
+					    renderer,
+					    "text", NEWDOCTYPELIST_NAME_COLUMN,
+					    NULL);
 
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (assistant->list_view), column);
 
+	/* The "Description" column: */
+	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Description"), renderer,
 							   "text", NEWDOCTYPELIST_DESCRIPTION_COLUMN,
 							   NULL);
@@ -257,6 +297,7 @@ gboolean second_page_next(GnomeDruidPage *druidpage,
 				  cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
 
 			/* go to final page: */
+			assistant->previous_page = druidpage;
 			gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->final_page));
 		}
 

@@ -97,7 +97,41 @@ gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri)
 	return uri_string;
 }
 
+GdkPixbuf *cong_util_load_icon(const gchar *icon_basename)
+{
+	gchar *filename;
+	gchar *full_path;
+	GdkPixbuf *pixbuf;
 
+	g_return_val_if_fail(icon_basename, NULL);
+
+	filename = g_strdup_printf("%s-16.png", icon_basename);
+	full_path = gnome_program_locate_file(the_globals.gnome_program,
+					      GNOME_FILE_DOMAIN_APP_PIXMAP,
+					      filename,
+					      FALSE,
+					      NULL);
+	pixbuf = gdk_pixbuf_new_from_file(full_path, NULL);
+	
+	g_free(full_path);
+	g_free(filename);
+
+	return pixbuf;
+}
+
+void cong_util_append(gchar **string, const gchar *to_add)
+{
+	gchar *new_string;
+
+	g_return_if_fail(string);
+	g_return_if_fail(*string);
+	g_return_if_fail(to_add);
+
+	new_string = g_strdup_printf("%s%s", *string, to_add);
+	g_free(*string);
+
+	*string = new_string;
+}
 
 /*
 #define AUTOGENERATE_DS
@@ -363,6 +397,10 @@ int main( int   argc,
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 	textdomain(GETTEXT_PACKAGE);
+
+#if 0
+	g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL);
+#endif
 
 	the_globals.gnome_program = gnome_program_init(PACKAGE_NAME, PACKAGE_VERSION,
 						       LIBGNOMEUI_MODULE,

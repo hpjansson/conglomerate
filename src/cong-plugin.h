@@ -62,6 +62,7 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 							   const gchar *id,
 							   CongDocumentFactoryPageCreationCallback page_creation_callback,
 							   CongDocumentFactoryActionCallback action_callback,
+							   const gchar *icon,
 							   gpointer user_data);
 CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
 					    const gchar *name, 
@@ -139,6 +140,7 @@ gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const 
 
 void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
 void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
+GdkPixbuf *cong_document_factory_get_icon(CongDocumentFactory *factory);
 
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
 void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window);

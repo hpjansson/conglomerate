@@ -177,8 +177,26 @@ static gchar *get_text_for_node(CongNodePtr node)
 		text = g_strdup(_("UNKNOWN"));
 		break;
 	case CONG_NODE_TYPE_ELEMENT: 
-		text = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>", colour_string, cong_node_name(node));
-		/* FIXME: display any attributes */
+		{
+#if 1
+			xmlAttrPtr attr_iter;
+			const gchar* attname_col = cong_ui_get_colour_string(CONG_NODE_TYPE_ATTRIBUTE);
+			const gchar* attval_col = string_colour_string;
+
+			text = g_strdup_printf("<span foreground=\"%s\">&lt;%s", colour_string, cong_node_name(node));
+			
+			/* Add attributes (if any): */
+			for (attr_iter = node->properties; attr_iter; attr_iter=attr_iter->next) {
+				gchar *attribute = g_strdup_printf(" <span foreground=\"%s\">%s=<span foreground=\"%s\">\"%s\"</span></span>",attname_col, attr_iter->name, attval_col, attr_iter->children->content);
+				cong_util_append(&text, attribute);
+				g_free(attribute);
+			}
+			cong_util_append(&text, "&gt;</span>");
+#else
+			text = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>", colour_string, cong_node_name(node));
+#endif
+
+		}
 		break;
 	case CONG_NODE_TYPE_ATTRIBUTE:
 		text = g_strdup_printf("ATTRIBUTE");
@@ -382,6 +400,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -509,10 +529,28 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	}
 }
 
+static void regenerate_text_for_node(CongDOMView *dom_view, CongNodePtr node)
+{
+	GtkTreeIter tree_iter;
+
+	if ( get_iter_for_node(dom_view->private, node, &tree_iter) ) {
+		gchar *text = NULL;
+
+		text = get_text_for_node(node);
+		g_assert(text);
+
+		gtk_tree_store_set(dom_view->private->tree_store, 
+				   &tree_iter,
+				   CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT, text,
+				   -1);
+
+		g_free(text);
+	}
+}
+
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
 {
-	CongDOMView *test_view;
-	GtkTreeIter tree_iter;
+	CongDOMView *dom_view;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -526,23 +564,52 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 		return;
 	}
 
-	test_view = CONG_DOM_VIEW(view);
+	dom_view = CONG_DOM_VIEW(view);
 
-	if ( get_iter_for_node(test_view->private, node, &tree_iter) ) {
-		gchar *text = NULL;
+	regenerate_text_for_node(dom_view, node);
+}
 
-		g_assert(cong_node_type(node) == CONG_NODE_TYPE_TEXT);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	CongDOMView *dom_view;
 
-		text = get_text_for_node(node);
-		g_assert(text);
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
 
-		gtk_tree_store_set(test_view->private->tree_store, 
-				   &tree_iter,
-				   CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT, text,
-				   -1);
+	#if DEBUG_DOM_VIEW
+	g_message("CongDOMView - on_document_node_set_attribute\n");
+	#endif
 
-		g_free(text);
+	if (before_event) {
+		return;
 	}
+
+	dom_view = CONG_DOM_VIEW(view);
+
+	regenerate_text_for_node(dom_view, node);      
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	CongDOMView *dom_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	#if DEBUG_DOM_VIEW
+	g_message("CongDOMView - on_document_node_remove_attribute\n");
+	#endif
+
+	if (before_event) {
+		return;
+	}
+
+	dom_view = CONG_DOM_VIEW(view);
+
+	regenerate_text_for_node(dom_view, node);
 }
 
 static void on_selection_change(CongView *view)
@@ -578,6 +645,8 @@ GtkWidget *cong_dom_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
+	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
 

@@ -33,6 +33,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -235,6 +237,16 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	if (!before_event) {
 		CONG_EDITOR_VIEW_SELF_TEST(details);
 	}
+}
+
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	/* UNWRITTEN */
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	/* UNWRITTEN */
 }
 
 static void on_selection_change(CongView *view)
@@ -567,6 +579,8 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
+	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
 

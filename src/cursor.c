@@ -143,7 +143,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	   We need to create an new <para> node as a sibling of the other para, and move the second text node
 	   to below it.
 	*/
-	new_element = cong_node_new_element(tagname);
+	new_element = cong_node_new_element(tagname, doc);
 
 	cong_document_node_add_after(doc, new_element, t->parent);
 	cong_document_node_set_parent(doc, curs->location.node, new_element);
@@ -166,10 +166,11 @@ void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 		return;
 	}
 	
- 	cong_location_calc_prev_char(&curs->location, cong_document_get_dispspec(doc), &prev_char);
-	cong_location_copy(&curs->location, &prev_char);
-
-	cong_location_del_next_char(doc, &curs->location);
+ 	if (cong_location_calc_prev_char(&curs->location, cong_document_get_dispspec(doc), &prev_char)) {
+		cong_location_copy(&curs->location, &prev_char);
+		
+		cong_location_del_next_char(doc, &curs->location);
+	}
 }
 
 

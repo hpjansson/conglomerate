@@ -54,6 +54,7 @@ conge_SOURCES =             \
   cong-graph.c              \
   cong-location.c           \
   cong-menus.c              \
+  cong-node-properties-dialog.c \
   cong-parser-error.c       \
   cong-plugin.c             \
   cong-primary-window.c     \

@@ -329,6 +329,7 @@ gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 					      "tests-unicode-character-reference-factory",
 					      factory_page_creation_callback_unicode,
 					      factory_action_callback_unicode,
+					      NULL,
 					      NULL);
 	return TRUE;
 }

@@ -698,8 +698,9 @@ cong_dispspec_element_get_icon(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element, NULL);
 
-	
-	g_object_ref(G_OBJECT(element->icon16));
+	if (element->icon16) {
+		g_object_ref(G_OBJECT(element->icon16));
+	}
 	return element->icon16;
 }
 
@@ -972,23 +973,8 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 	{
 		xmlChar* prop = xmlGetProp(xml_element, "icon");
 		if (prop) {
-			gchar *filename = g_strdup_printf("%s-16.png", prop);
-			gchar *full_path = gnome_program_locate_file(the_globals.gnome_program,
-								     GNOME_FILE_DOMAIN_APP_PIXMAP,
-								     filename,
-								     FALSE,
-								     NULL);
+			element->icon16 = cong_util_load_icon(prop);
 
-			DS_DEBUG_MSG3("Trying to loading icon for <%s> from \"%s\"", element->tagname, full_path);
-			
-			element->icon16 = gdk_pixbuf_new_from_file(full_path, NULL);
-			
-			if (NULL==element->icon16) {
-				DS_DEBUG_MSG2("Failed to load icon from \"%s\"", full_path);
-			}
-			
-			g_free(full_path);
-			g_free(filename);
 			xmlFree(prop);
 		}
 	}

@@ -46,9 +46,9 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 	len3 = cong_node_get_length(s) - c1;
 
 	/* Make split representation */
-	d1 = cong_node_new_text_len(xml_frag_data_nice(s), len1); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
-	d2 = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2);
-	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3);
+	d1 = cong_node_new_text_len(xml_frag_data_nice(s), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
+	d2 = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2, doc);
+	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3, doc);
 
 	/* Link it in */
 	cong_document_node_add_after(doc, d1, s);
@@ -79,20 +79,20 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
 	len2 = cong_node_get_length(s) - len1;
 
 	if (!len1 && !len2) {
-		d = cong_node_new_text("");
+		d = cong_node_new_text("", doc);
 	} else if (!len1) {
-		d = cong_node_new_text("");
+		d = cong_node_new_text("", doc);
 
 		/* Link it in */
 		cong_document_node_add_before(doc, d,s);
 		return(d);
 	} else if (!len2) {
-		d = cong_node_new_text("");
+		d = cong_node_new_text("", doc);
 	} else {
 		xmlChar* new_text = g_strndup(s->content, len1); /* FIXME:  char type conversion? */
 
 		/* Make split representation */
-		d = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2); /* FIXME: check char ptr arithmetic; UTF8? */
+		d = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2, doc); /* FIXME: check char ptr arithmetic; UTF8? */
 
 		/* Shrink original node */
 		cong_document_node_set_text(doc, s, new_text);

@@ -151,7 +151,7 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 	printf("Inserting tag (%s).\n", tag->data);
 #endif
 
-	new_element = cong_node_new_element(cong_dispspec_element_tagname(element));
+	new_element = cong_node_new_element(cong_dispspec_element_tagname(element), doc);
 	if (!cong_selection_reparent_all(selection, doc, new_element)) {
 		cong_node_free(new_element);
 	}
@@ -310,7 +310,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 					 make_menu_item(_("Remove span tag"), 
 							NULL, /* FIXME: we ought to have a tip for this */
 							NULL), /* FIXME: we ought to have a icon for this */
-					 NULL, 
+					 doc, 
 					 NULL,
 					 NULL,
 					 parent_window);		

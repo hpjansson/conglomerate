@@ -65,7 +65,7 @@ static void on_validation_warning(void *ctx,
 
 static void on_details(gpointer data)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Can't supply details about validation failure");
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, "Can't supply details about validation failure", 113758);
 }
 
 static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)

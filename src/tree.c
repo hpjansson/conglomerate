@@ -29,18 +29,18 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 
 	/* Text node before new element */
-	text_node = cong_node_new_text(" ");
+	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_add_after(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(label);
+	new_node = cong_node_new_element(label, doc);
 	cong_document_node_add_after(doc, new_node, text_node);
 
 	/*  add any necessary sub elements it needs */
 	xml_add_required_children(doc, new_node);
 
 	/* Text node after new element */
-	text_node = cong_node_new_text(" ");
+	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_add_after(doc, text_node, new_node);
 
 	return(TRUE);
@@ -63,18 +63,18 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 
 	/* Text node before new element */
-	text_node = cong_node_new_text(" ");
+	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_set_parent(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(label);
+	new_node = cong_node_new_element(label, doc);
 	cong_document_node_set_parent(doc, new_node, tag);
 
 	/*  add any necessary sub elements it needs */
 	xml_add_required_children(doc, new_node);
 
 	/* Text node after new element */
-	text_node = cong_node_new_text(" ");
+	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_set_parent(doc, text_node, tag);
 
 	return(TRUE);
@@ -83,133 +83,20 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
-	CongDispspec *ds;
-	GtkWidget *dialog, *vbox;
-	GtkWidget *notebook;
-	CongDialogContent *dialog_content;
-	CongDialogCategory *category_xpath;
-	CongDialogCategory *category_dtdschema;
-	CongDialogCategory *category_custom;
-	xmlElementPtr xml_element;
+	GtkWidget *properties_dialog;
 	GtkWindow *parent_window;
-	gchar *xpath;
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 
-	ds = cong_document_get_dispspec(doc);
-
 	parent_window = g_object_get_data(G_OBJECT(widget),
 					  "parent_window");
 
-	/* FIXME: Test implementation: */
-	dialog = gtk_dialog_new_with_buttons(_("Placeholder Properties Dialog"),
-					     parent_window,
-					     GTK_DIALOG_MODAL,
-					     GTK_STOCK_OK, GTK_RESPONSE_OK,
-					     NULL);
-					
-	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+	properties_dialog = cong_node_properties_dialog_new(doc, tag, parent_window);
 
-	vbox = GTK_DIALOG(dialog)->vbox;
-
-	notebook = gtk_notebook_new();
-	gtk_box_pack_start(GTK_BOX(vbox), notebook, FALSE, FALSE, 0);	
-
-	dialog_content = cong_dialog_content_new(TRUE);
-	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),
-				 cong_dialog_content_get_widget(dialog_content),
-				 gtk_label_new(_("Advanced"))
-				 );
-
-	category_xpath = cong_dialog_content_add_category(dialog_content, 
-							  _("Location"));
-	xpath = cong_node_get_path(tag);
-	cong_dialog_category_add_field(category_xpath, _("XPath"), gtk_label_new(xpath));
-	g_free(xpath);
-
-	
-
-	xml_element = xml_get_dtd_element(doc, tag);
-
-	if (xml_element) {
-		xmlAttributePtr attr;
-		category_dtdschema = cong_dialog_content_add_category(dialog_content, 
-								      _("Properties from DTD/schema"));
-
-		for (attr=xml_element->attributes; attr; attr=attr->nexth) {
-			switch (attr->atype) {
-			default: g_assert_not_reached();
-			case XML_ATTRIBUTE_CDATA:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("CDATA"));
-				break;
-				
-			case XML_ATTRIBUTE_ID:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("ID"));
-				break;
-				
-			case XML_ATTRIBUTE_IDREF:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("IDREF"));
-				break;
-				
-			case XML_ATTRIBUTE_IDREFS:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("IDREFS"));
-				break;
-
-			case XML_ATTRIBUTE_ENTITY:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("ENTITY"));
-				break;
-				
-			case XML_ATTRIBUTE_ENTITIES:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("ENTITIES"));
-				break;
-				
-			case XML_ATTRIBUTE_NMTOKEN:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("NMTOKEN"));
-				break;
-				
-			case XML_ATTRIBUTE_NMTOKENS:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("NMTOKENS"));
-				break;
-				
-			case XML_ATTRIBUTE_ENUMERATION:
-				{
-					GtkWidget *option_menu = gtk_option_menu_new();
-					GtkWidget *menu = gtk_menu_new();
-					xmlEnumerationPtr enum_ptr;
-
-					for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
-						gtk_menu_shell_append(GTK_MENU_SHELL(menu), 
-								      gtk_menu_item_new_with_label(enum_ptr->name));
-					}
-
-					gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), 
-								 menu);
-
-					cong_dialog_category_add_field(category_dtdschema, 
-								       attr->name, 
-								       option_menu);
-				}
-				break;
-
-			case XML_ATTRIBUTE_NOTATION:
-				cong_dialog_category_add_field(category_dtdschema, attr->name, gtk_label_new("NOTATION"));
-				break;
-			}
-			
-
-
-		}
-	}
-
-	category_custom = cong_dialog_content_add_category(dialog_content, 
-							   _("Custom Properties"));
-
-
-	gtk_widget_show_all (dialog);
-
-	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
+	/* FIXME:  Make this modeless */
+	gtk_dialog_run(GTK_DIALOG(properties_dialog));
+	gtk_widget_destroy(properties_dialog);
 
 	return TRUE;
 }

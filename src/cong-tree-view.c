@@ -200,6 +200,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_change, C
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -386,6 +388,16 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 	cong_tree_view = CONG_TREE_VIEW(view);
 
 	/* FIXME: Potentially we need to regenerate all text in the tree, due to XPath concerns... */
+}
+
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	/* UNWRITTEN */
+}
+
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
+{
+	/* UNWRITTEN */
 }
 
 static void on_selection_change(CongView *view)
@@ -686,6 +698,8 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 	cong_tree_view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	cong_tree_view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	cong_tree_view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	cong_tree_view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
+	cong_tree_view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	cong_tree_view->view.klass->on_selection_change = on_selection_change;
 	cong_tree_view->view.klass->on_cursor_change = on_cursor_change;
 

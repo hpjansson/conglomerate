@@ -60,8 +60,11 @@ extern char *ilogo_xpm[];
 
 GtkWidget* make_uneditable_text(const gchar* text)
 {
-#if 0
-	return gtk_label_new(text);
+#if 1
+	GtkWidget *widget = gtk_label_new(text);
+	gtk_label_set_justify(GTK_LABEL(widget), GTK_JUSTIFY_LEFT);
+	gtk_label_set_line_wrap(GTK_LABEL(widget), TRUE);
+	return widget;
 #else
 	GtkEntry *entry = GTK_ENTRY(gtk_entry_new());
 
@@ -248,9 +251,13 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 	xmlDocPtr xml_doc;
 	CongDispspec* ds;
 	GtkWidget *dialog;
-	CongDialogContent *content;
+	GtkNotebook *notebook;
+	CongDialogContent *basic_content;
 	CongDialogCategory *general_category;
 	CongDialogCategory *doctype_category;
+	CongDialogContent *advanced_content;
+	CongDialogCategory *header_category;
+	CongDialogCategory *dtd_category;
 	gchar *filename, *path;
 
 	g_return_val_if_fail(doc, NULL);
@@ -267,9 +274,10 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
 
-	content = cong_dialog_content_new(FALSE);
-	general_category = cong_dialog_content_add_category(content, _("General"));
-	doctype_category = cong_dialog_content_add_category(content, _("Type"));
+	/* Basic content: */
+	basic_content = cong_dialog_content_new(TRUE);
+	general_category = cong_dialog_content_add_category(basic_content, _("General"));
+	doctype_category = cong_dialog_content_add_category(basic_content, _("Type"));
 
 	filename = cong_document_get_filename(doc);
 	path = cong_document_get_parent_uri(doc);
@@ -284,8 +292,60 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 	g_free(filename);
 	g_free(path);
 
+	/* Advanced content: */
+	advanced_content = cong_dialog_content_new(TRUE);
+	header_category = cong_dialog_content_add_category(advanced_content, _("XML Header"));
+	dtd_category = cong_dialog_content_add_category(advanced_content, _("Document Type Declaration"));
+
+	cong_dialog_category_add_field(header_category, _("Version"), make_uneditable_text(xml_doc->version));
+
+	{
+		const gchar *encoding_text = xml_doc->encoding;
+		if (NULL==encoding_text) {
+			encoding_text = _("Unspecified");
+		}
+		cong_dialog_category_add_field(header_category, _("Encoding"), make_uneditable_text(encoding_text));	
+	}
+	cong_dialog_category_add_field(header_category, _("Standalone"), make_uneditable_text(xml_doc->standalone?"yes":"no"));
+
+	if (xml_doc->extSubset) {
+		const gchar *ExternalID = xml_doc->extSubset->ExternalID;
+		const gchar *SystemID = xml_doc->extSubset->SystemID;
+		if (NULL==ExternalID) {
+			ExternalID=_("None");
+		}
+		if (NULL==SystemID) {
+			SystemID=_("None");
+		}
+		cong_dialog_category_add_field(dtd_category, _("External ID"), make_uneditable_text(ExternalID));
+		cong_dialog_category_add_field(dtd_category, _("System ID"), make_uneditable_text(SystemID));
+	} else {
+		cong_dialog_category_add_selflabelled_field(dtd_category, gtk_label_new(_("No External Subset")));
+	}
+
+	if (xml_doc->intSubset) {
+	} else {
+	}
+
+	struct _xmlDtd  *extSubset;	/* the document external subset */
+	struct _xmlDtd  *intSubset;	/* the document internal subset */
+
+#if 1
+	notebook = GTK_NOTEBOOK(gtk_notebook_new());
+	
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+			   GTK_WIDGET(notebook));
+
+	gtk_notebook_append_page(notebook,
+				 cong_dialog_content_get_widget(basic_content),
+				 gtk_label_new(_("Basic")));
+	gtk_notebook_append_page(notebook,
+				 cong_dialog_content_get_widget(advanced_content),
+				 gtk_label_new(_("Advanced")));
+#else
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
 			   cong_dialog_content_get_widget(content));
+#endif
 
 	gtk_widget_show_all(dialog);
 
