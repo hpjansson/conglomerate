@@ -6,12 +6,48 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 
+gboolean
+cong_location_is_valid(const CongLocation *loc)
+{
+	enum CongNodeType type;
+	
+	g_return_val_if_fail(loc != NULL, FALSE);
+
+	if (loc->node==NULL) {
+		return (loc->byte_offset==0);
+	} else {
+		type = cong_location_node_type(loc);
+
+		switch (type) {
+		default: g_assert_not_reached();
+
+		case CONG_NODE_TYPE_UNKNOWN:
+		case CONG_NODE_TYPE_ELEMENT:
+			return (loc->byte_offset==0);
+	
+		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_COMMENT:
+			{	   
+				/* Test that the byte offset is at the start of a character, in range, etc... */
+				if (loc->byte_offset<0) {
+					return FALSE;
+				}
+
+				/* FIXME: add more tests here */
+				
+				return TRUE;
+			}			
+		}
+	}
+}
+
 void
 cong_location_nullify(CongLocation *loc)
 {
 	g_return_if_fail(loc != NULL);
 	
 	loc->node=NULL;
+	loc->byte_offset=0; /* for good measure */
 }
 
 void
@@ -28,10 +64,19 @@ void
 cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int offset)
 {
 	g_return_if_fail(loc != NULL);
+	g_assert(node);
 	g_return_if_fail(node != NULL);
+
+	/* FIXME: 
+	   We can do some self-testing here.
+	   Test that the node is of a sane type for there to be an offset i.e. text or a comment.
+	   Test that the byte offset is at the start of a character, in range, etc...
+	 */
 	
 	loc->node=node;
 	loc->byte_offset=offset;
+
+	g_assert(cong_location_is_valid(loc));
 }
 
 void
@@ -42,11 +87,19 @@ cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glon
 	g_return_if_fail(loc);
 	g_return_if_fail(node);
 
+	/* FIXME: 
+	   We can do some self-testing here.
+	   Test that the node is of a sane type for there to be an offset i.e. text or a comment.
+	   Test that the char offset is in range, etc...
+	 */
+
 	result_pos = g_utf8_offset_to_pointer(node->content, char_offset);
 	g_assert(result_pos);
 	
 	loc->node = node;
 	loc->byte_offset = result_pos - (gchar*)node->content;
+
+	g_assert(cong_location_is_valid(loc));
 }
 
 
@@ -64,6 +117,9 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 {
 	g_return_val_if_fail(loc0 != NULL, FALSE);
 	g_return_val_if_fail(loc1 != NULL, FALSE);
+
+	g_assert(cong_location_is_valid(loc0));
+	g_assert(cong_location_is_valid(loc1));
 	
 	if (loc0->node == loc1->node) {
 		if (loc0->byte_offset == loc1->byte_offset) {

@@ -32,8 +32,14 @@
 typedef struct _CongLocation
 {
 	CongNodePtr node;
-	int byte_offset; /* byte offset, not a character offset */
+	int byte_offset; /* byte offset, not a character offset; required to be zero for nodes for which the offset is meaningless */
 } CongLocation;
+
+/**
+   Selftest routine:
+*/
+gboolean
+cong_location_is_valid(const CongLocation *loc);
 
 void
 cong_location_nullify(CongLocation *loc);

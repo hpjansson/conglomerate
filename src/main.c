@@ -16,6 +16,35 @@
 #include <libgtkhtml/gtkhtml.h>
 #endif
 
+gchar* cong_util_cleanup_text(const xmlChar *text) {
+	gchar *buffer = g_malloc((strlen(text)*3)+1); /* for safety's sake */
+	gchar *dst = buffer;
+
+	/* FIXME: this is broken; we need to have real UTF8 support here... */
+
+	while (*text) {
+		switch (*text) {
+		default:
+			*(dst++) = *text;
+			break;
+		case '\n':
+			*(dst++) = '\\';
+			*(dst++) = 'n';
+			break;
+		case '\t':
+			*(dst++) = '\\';
+			*(dst++) = 't';
+			break;
+		}
+
+		text++;
+	}
+
+	*(dst++) = '\0';
+
+	return buffer;
+}
+
 const gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void)
 {
@@ -270,15 +299,6 @@ int main( int   argc,
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
 	textdomain(GETTEXT_PACKAGE);
 
-
-#if 0
-	/* THIS SHOULD NEVER BE ENABLED IN CVS: */
-
-	setenv("XML_CATALOG_FILES", "file:///home/david/garnome/etc/xml/catalog", TRUE);
-#endif
-
-
-#if 1
 	the_globals.gnome_program = gnome_program_init(PACKAGE_NAME, PACKAGE_VERSION,
 						       LIBGNOMEUI_MODULE,
 						       argc,argv,
@@ -286,9 +306,6 @@ int main( int   argc,
 						       _("XML Editor"),
 						       GNOME_PARAM_APP_DATADIR, DATADIR,
 						       NULL);
-#else
-	gtk_init(&argc, &argv);
-#endif
 
 	/* Set up usage of GConf: */
 	the_globals.gconf_client = gconf_client_get_default();

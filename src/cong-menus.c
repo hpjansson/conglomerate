@@ -1067,6 +1067,40 @@ void menu_callback_debug_progress_checklist(gpointer callback_data,
 	
 }
 
+void menu_callback_debug_document_message_log(gpointer callback_data,
+					      guint callback_action,
+					      GtkWidget *widget)
+{
+	GtkWidget *window;
+	GtkWidget *log_view;
+
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	window = gnome_app_new(PACKAGE_NAME,
+			       "Message Log - Conglomerate");
+	log_view = cong_debug_log_view_new(doc);
+
+	gnome_app_set_contents(GNOME_APP(window), log_view);
+
+	/* Set up the window nicely: */
+	{	
+		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
+		
+		gtk_window_set_icon(GTK_WINDOW(window),
+				    icon_pixbuf);
+
+		gdk_pixbuf_unref(icon_pixbuf);
+
+	}
+
+	gtk_window_set_default_size(GTK_WINDOW(window),
+				    500,
+				    400);
+
+	gtk_widget_show(GTK_WIDGET(window));
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1161,6 +1195,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/DTD"),             NULL, menu_callback_debug_dtd, 0, NULL },
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
+	{ N_("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },

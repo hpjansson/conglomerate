@@ -101,6 +101,14 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 
 }
 
+/* Method for getting an XPath to the node: */
+gchar *cong_node_get_path(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return xmlGetNodePath(node);
+}
+
 static const gchar* node_type_names[CONG_NODE_TYPE_NUM]=
 {
 	"CONG_NODE_TYPE_UNKNOWN",

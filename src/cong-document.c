@@ -132,21 +132,13 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	cong_cursor_init(&doc->curs, doc);
 	cong_selection_init(&doc->selection);
 
+#if 0
 	doc->curs.set = 0;
-#if !USE_CONG_EDITOR_WIDGET
-	doc->curs.xed = 0;
-#endif
 	doc->curs.w = 0;
-#if !USE_CONG_EDITOR_WIDGET
-	doc->selection.xed = 0;
 #endif
 
-#if 1
 	cong_location_nullify(&doc->selection.loc0);
 	cong_location_nullify(&doc->selection.loc1);
-#else
-	doc->selection.t0 = doc->selection.t1 = 0;
-#endif
 
 	return doc;
 }
@@ -374,7 +366,9 @@ void cong_document_coarse_update(CongDocument *doc)
 	g_message("cong_document_coarse_update\n");
 	#endif
 
+#if 0
 	doc->curs.w = NULL; /* should this be part of the editor_view ? */
+#endif
 
 	/* Notify listeners: */
 	for (iter = doc->views; iter; iter = g_list_next(iter) ) {

@@ -835,9 +835,9 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 				int start_x, end_x;
 
 				if (cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1)) {
-					selection_gc = selection->gc_0;
+					selection_gc = selection->gc_valid;
 				} else {
-					selection_gc = selection->gc_3;
+					selection_gc = selection->gc_invalid;
 				}
 
 				/* Check that the selection is to be rendered on this layout_line: */
@@ -1415,7 +1415,6 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 		break;
 	}
 
-	cong_cursor_on(cursor);
 	cong_document_on_cursor_change(doc);	
 
 }

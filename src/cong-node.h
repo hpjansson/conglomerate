@@ -83,6 +83,9 @@ CongNodePtr cong_node_parent(CongNodePtr node);
 
 enum CongNodeType cong_node_type(CongNodePtr node);
 
+/* Method for getting an XPath to the node: */
+gchar *cong_node_get_path(CongNodePtr node);
+
 /* Handy debug method for writing log info: */
 const gchar *cong_node_type_description(enum CongNodeType node_type);
 

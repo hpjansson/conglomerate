@@ -1,5 +1,13 @@
 2003-04-28  David Malcolm
 
+	* dispspec.c -> cong-dispspec.c
+	* new_doc.c -> cong-file-new.c
+	* open.c -> cong-file-open.c
+	* save.c -> cong-file-save.c
+	* cong-test-view -> cong-dom-view.c (along with a rename of symbols e.g. CongTestView has becomes CongDOMView)
+	* cong-debug-log-view.c: new file	
+	* Makefile.am, cong-document.c, cong-location.c, cong-location.h, cong-menus.c, cong-node.h, cong-primary-window.c, cong-span-text-editor.c, cursor.c, global.h, main.c, popup.c, position.c, select.c, xmldata.c, xmledit.c, xmlview.c: Big purge of old code, lots of cleanups, bugfixes etc
+
 	* Makefile.am, cong-file-print.c, cong-menus.c, cong-plugin.c, cong-plugin.h, cong-progress-checklist.c, fo-parser-result.c, fo-print-context.c, fo-rect.c, fo.h, global.h, main.c, plugin-docbook.c
 
 	Added printing support

@@ -14,12 +14,6 @@ void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs)
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
 
-#if !USE_CONG_EDITOR_WIDGET
-	selection->xed = curs->xed;
-#endif
-	selection->x0 = selection->x1 = curs->x;
-	selection->y0 = selection->y1 = curs->y;
-
 	cong_location_copy(&selection->loc0, &curs->location);
 	cong_location_copy(&selection->loc1, &curs->location);
 }
@@ -30,124 +24,8 @@ void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs)
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
 
-	selection->x1 = curs->x;
-	selection->y1 = curs->y;
 	cong_location_copy(&selection->loc1, &curs->location);
 }
-
-
-#if !USE_CONG_EDITOR_WIDGET
-void cong_selection_draw(CongSelection *selection, CongCursor *curs)
-{
-	int x0, y0, x1, y1;
-	GdkGC *gc;
-	CongLayoutLine *l;
-
-	g_assert(selection!=NULL);
-	g_assert(curs!=NULL);
-
-	if (!curs->xed) return;
-	
-	/* Determine selection's usefulness code */
-	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
-	    cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))
-		gc = selection->gc_0;
-	else
-		gc = selection->gc_3;
-
-	/* Find start/end x, y */
-
-	if (selection->y0 == selection->y1)
-	{
-		y0 = selection->y0;
-		y1 = selection->y1;
-/*		y1 += f_asc + f_desc; */
-
-		if (selection->x0 <= selection->x1)
-		{
-			x0 = selection->x0;
-			x1 = selection->x1;
-		}
-		else
-		{
-			x0 = selection->x1;
-			x1 = selection->x0;
-		}
-	}
-	else if (selection->y0 < selection->y1)
-	{
-		y0 = selection->y0;
-		y1 = selection->y1;
-		x0 = selection->x0;
-		x1 = selection->x1;
-	}
-	else
-	{
-		y0 = selection->y1;
-		y1 = selection->y0;
-		x0 = selection->x1;
-		x1 = selection->x0;
-	}
-
-	/* Find first line */
-#if 1
-	l = cong_layout_cache_get_line_by_y_coord(&curs->xed->layout_cache, y0+1);
-	/* FIXME: check the boundary conditions are exactly correct! */
-#else
-	for (l = curs->xed->lines->child; l && l->next; l = l->next)
-	{
-#ifndef RELEASE
-		printf("[%d : %d]\n", y0, (int) *((int *) l->child->next->next->data));
-#endif
-		if ((int) *((int *) l->child->next->next->data) > y0)
-		{
-			/* Found the right line */
-			break;
-		}
-	}
-#endif
-
-	/* Draw all lines but last */
-
-	for (; y0 != y1 && l; )
-	{
-#ifndef RELEASE
-		printf("D");
-#endif
-		y0 = cong_layout_line_get_prev(l) ? cong_layout_line_get_second_y(cong_layout_line_get_prev(l)) : 0;
-		if (y0 == y1) break;
-		gdk_draw_rectangle(curs->xed->p, gc, 1,
-				   x0, y0, curs->xed->w->allocation.width - x0,
-				   l ? cong_layout_line_get_second_y(l) - y0 :
-				   curs->xed->w->allocation.height - y0);
-
-		l = cong_layout_line_get_next(l);
-		x0 = 0;
-	}
-
-	/* Draw last line */
-
-#ifndef RELEASE
-	printf("X");
-#endif
-
-#if 1
-	gdk_draw_rectangle(curs->xed->p, gc, 1,
-			   x0, y0, x1 - x0, 
-			   l ? cong_layout_line_get_second_y(l) - y0 /* == y1 */ - (cong_layout_line_get_next(l) ? 4 : 0) :
-			   curs->xed->w->allocation.height - y0);
-#else	
-	gdk_draw_rectangle(curs->xed->p, gc, 1,
-			   x0, y0, x1 - x0, 
-			   l ? (int) *((int *) l->child->next->next->data) - y0 /* == y1 */ - (l->next ? 4 : 0) :
-			   curs->xed->w->allocation.height - y0);
-#endif
-
-#ifndef RELEASE
-	printf("\n");
-#endif
-}
-#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 /* Splits a data node in 3 and returns pointer to the middle one */
 CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1)
@@ -498,29 +376,17 @@ void cong_selection_init(CongSelection *selection)
 
 	window = cong_gui_get_a_window();
 	
-	selection->gc_0 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection->gc_0, window->style->white_gc);
+	selection->gc_valid = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_valid, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffffd0);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection->gc_0, &gcol);
+	gdk_gc_set_foreground(selection->gc_valid, &gcol);
 
-	selection->gc_1 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection->gc_1, window->style->white_gc);
-	col_to_gcol(&gcol, 0x00ffffb0);
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection->gc_1, &gcol);
-	
-	selection->gc_2 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection->gc_2, window->style->white_gc);
-	col_to_gcol(&gcol, 0x00ffff90);
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection->gc_2, &gcol);
-	
-	selection->gc_3 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection->gc_3, window->style->white_gc);
+	selection->gc_invalid = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_invalid, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffd0d0);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection->gc_3, &gcol);
+	gdk_gc_set_foreground(selection->gc_invalid, &gcol);
 
 #if 0	
 void gtk_selection_add_handler(GtkWidget            *widget, 

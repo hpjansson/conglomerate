@@ -35,7 +35,6 @@ enum
 
 #define NEW_LOOK 1
 #define PRINT_TESTS 0
-#define USE_CONG_EDITOR_WIDGET 1
 
 #include <libgnomeprint/gnome-print.h>
 #if PRINT_TESTS
@@ -51,230 +50,15 @@ enum
 #include "cong-node.h"
 #include "cong-location.h"
 
-GtkWidget*
-cong_span_editor_get_widget(CongSpanEditor *xed);
-
-#if 0
-GdkFont*
-cong_span_editor_get_font(CongSpanEditor *xed);
-#endif
-
-CongDispspec*
-cong_span_editor_get_dispspec(CongSpanEditor *xed);
-
-/*
-  Code to handle cached layout information.  Stored during rendering, used 
-  when handling cursor movement.
- */
-
-typedef struct CongLayoutCache
-{
-	struct CongLayoutLine *first_line;
-	struct CongLayoutLine *last_line;
-
-} CongLayoutCache;
-
-typedef struct CongLayoutLine
-{
-	struct CongLayoutLine *next;
-	struct CongLayoutLine *prev;
-
-	/* Data set by add_line: */
-	CongNodePtr tt;
-	int i;  /* c_given */
-	
-	/* Data set by add stuff: */
-	gboolean got_rest_of_data;
-	int pos_y;
-	CongNodePtr x;
-	int draw_char;  /* Seems to be unused */
-
-} CongLayoutLine;
-
-void
-cong_layout_cache_init(CongLayoutCache *layout_cache);
-
-void
-cong_layout_cache_clear(CongLayoutCache *layout_cache);
-
-CongLayoutLine*
-cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y);
-
-CongLayoutLine*
-cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i);
-
-CongLayoutLine*
-cong_layout_cache_get_last_line(CongLayoutCache *layout_cache);
-
-CongLayoutLine*
-cong_layout_line_get_next(CongLayoutLine *line);
-
-CongLayoutLine*
-cong_layout_line_get_prev(CongLayoutLine *line);
-
-int
-cong_layout_line_get_second_y(CongLayoutLine *line);
-
-CongNodePtr
-cong_layout_line_get_node(CongLayoutLine *line);
-
-CongNodePtr
-cong_layout_line_get_node_last(CongLayoutLine *line);
-
-int
-cong_layout_line_get_c_given(CongLayoutLine *line);
-
-
-/*
-  The tag stack.  Used for rendering the nested underlinings for span tags.
- */
-typedef struct CongLayoutStackEntry
-{
-	char *text;
-	int line;
-	int pos_x;
-	CongNodePtr x;
-	int lev;
-	struct CongLayoutStackEntry *above;
-	struct CongLayoutStackEntry *below;
-
-} CongLayoutStackEntry;
-
-typedef struct CongLayoutStack
-{
-	CongLayoutStackEntry *bottom;
-	
-} CongLayoutStack;
-
-CongLayoutStackEntry*
-cong_layout_stack_top(CongLayoutStack *layout_stack);
-
-CongLayoutStackEntry*
-cong_layout_stack_bottom(CongLayoutStack *layout_stack);
-
-void
-cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int line, int pos_x, CongNodePtr x, int lev);
-
-
-
-/* gets the next entry i.e. the entry above, heading from bottom to top */
-CongLayoutStackEntry*
-cong_layout_stack_entry_next(CongLayoutStackEntry *entry);
-
-/* gets the parent entry i.e. the entry below */
-CongLayoutStackEntry*
-cong_layout_stack_entry_below(CongLayoutStackEntry *entry);
-
-/* Various access methods: */
-int cong_layout_stack_entry_get_line(CongLayoutStackEntry *entry);
-int cong_layout_stack_entry_get_pos_x(CongLayoutStackEntry *entry);
-#if 0
-TTREE *cong_layout_stack_entry_get_ttree_x(CongLayoutStackEntry *entry);
-#endif
-int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry);
-
-
-#if !USE_CONG_EDITOR_WIDGET
-/* modes:
- * 
- * 0 = calculate height only
- * 1 = draw and calculate height
- *
- */
-enum CongDrawMode
-{
-	CONG_DRAW_MODE_CALCULATE_HEIGHT,
-	CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW
-};
-
-#define CONG_SPAN_EDITOR(x) ((CongSpanEditor*)(x))
-
-struct CongSpanEditor
-{
-	CongView view;
-
-	/* Display information */
-
-	GtkWidget *e;  /* Eventbox */
-	GtkWidget *w;  /* Drawing area */
-	GdkPixmap *p;  /* Backing pixmap */
-
-	CongDispspec *displayspec;
-	CongDocument *doc;
-	
-	int tag_height;
-	
-	int initial;
-	int already_asked_for_size;
-
-	/* Drawing information (temporary) */
-	enum CongDrawMode mode;
-
-	CongNodePtr draw_x;      /* XML node currently at */
-
-	CongNodePtr draw_x_prev;
-	int draw_char_prev;
-
-	int draw_line;      /* Line to draw at (in display) */
-	int draw_char;      /* Char to begin drawing (in node) */
-	int draw_pos_x;     /* Pixel to start drawing at */
-	int draw_pos_y;     /* Y position to start drawing at */
-	int draw_tag_max;
-
-
-	/* Data content */
-
-	CongNodePtr x;
-
-	CongLayoutCache layout_cache;
-	CongLayoutStack layout_stack;
-
-	/* Cursor information */
-#if 0
-	TTREE *curs_x;      /* XML node currently at */
-#endif
-	int curs_char;      /* Cursor positioned after this char (in node) */
-
-};
-#endif /* #if !USE_CONG_EDITOR_WIDGET */
-
-struct pos
-{
-	int x, y;
-	int x_find;
-
-	int line;
-	CongNodePtr node;
-	CongNodePtr node_last;
-	CongNodePtr node_find;
-
-	int c, c_given;
-	int space;  /* 0 = have no space, 1 = have space */
-
-	int word_width;
-	
-	int mode;  /* 0 = not found, 1 = found */
-};
-
-
-
 struct CongCursor
 {
 	/* Visual representation */
-#if !USE_CONG_EDITOR_WIDGET
-	CongSpanEditor *xed;
-#endif
-
-	GtkWidget *w;
 	GdkGC *gc;
-	int x, y;
-	int line;
+
 	int on;
 
 	/* Conceptual location */
 	CongLocation location;
-
-	int set;
 
 	guint timeout_id;
 
@@ -284,12 +68,8 @@ struct CongCursor
 
 struct CongSelection
 {
-#if !USE_CONG_EDITOR_WIDGET
-	CongSpanEditor *xed;
-#endif
-	GdkGC *gc_0, *gc_1, *gc_2, *gc_3;  /* 0 is brightest, 3 is darkest */
-
-	int x0, y0, x1, y1;
+	GdkGC *gc_valid; /* corresponds to value gc_0 in old implementation */
+	GdkGC *gc_invalid;   /* corresponds to value gc_3 in old implementation */
 
 	CongLocation loc0;
 	CongLocation loc1;
@@ -321,34 +101,16 @@ CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 
-GtkWidget *cong_test_view_new(CongDocument *doc);
+/* Various view subclasses: */
+GtkWidget *cong_dom_view_new(CongDocument *doc);
 GtkWidget *cong_source_view_new(CongDocument *doc);
+GtkWidget *cong_debug_log_view_new(CongDocument *doc);
 
-#if 1
 GtkWidget* cong_gui_get_a_window(void);
-#else
-GtkWidget* cong_gui_get_window(struct cong_gui* gui);
-GtkWidget* cong_gui_get_popup(struct cong_gui* gui);
-void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup);
-GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui);
-GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui);
-GtkTreeView* cong_gui_get_tree_view(struct cong_gui* gui);
-GtkWidget* cong_gui_get_root(struct cong_gui* gui);
-void cong_gui_destroy_tree_store(struct cong_gui* gui);
-#endif
 
 gint cong_cursor_blink();
-int login();
+
 void new_document(GtkWindow *parent_window);
-int find_document();
-int find_documentmetacaps();
-int submit_do();
-int gui_window_login_make(char **user_s, char **pass_s);
-
-CongSpanEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec);
-
-CongFont*
-cong_span_editor_get_font(CongSpanEditor *xed, enum CongFontRole role);
 
 gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag);
 gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag);
@@ -361,12 +123,6 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
-
-#if !USE_CONG_EDITOR_WIDGET
-struct pos *pos_physical_to_logical(struct CongSpanEditor *xed, int x, int y);
-struct pos *pos_logical_to_physical(struct CongSpanEditor *xed, CongNodePtr node, int c);
-struct pos *pos_logical_to_physical_new(struct CongSpanEditor *xed, CongLocation *loc);
-#endif
 
 CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1);
 CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
@@ -382,17 +138,11 @@ GList* xml_get_valid_children(CongDispspec* ds, CongNodePtr node, enum CongEleme
 GList* xml_get_valid_previous_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
 GList* xml_get_valid_next_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
 
-#if 0
-TTREE *get_upper_section(TTREE *x);
-#endif
-
 char *tag_new_pick();
 
 void open_document(GtkWindow *parent_window);
 gint save_document(CongDocument *doc, GtkWindow *parent_window);
 gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
-
-
 
 gchar *cong_get_file_name(const gchar *title, 
 			  const gchar *filename,
@@ -402,37 +152,28 @@ char *pick_structural_tag(CongDispspec *ds);
 
 void open_document_do(const gchar *doc_name, GtkWindow *parent_window);
 
-/* DHM: My new stuff goes here for now: */
 #define UNUSED_VAR(x)
 
 int gui_window_new_document_make();
 
-struct xview *xmlview_new(CongDocument *doc);
-void xmlview_destroy(int free_xml);
-
 void col_to_gcol(GdkColor *gcol, unsigned int col);
-void cong_span_editor_redraw(CongSpanEditor *xed);
 
+/* Cursor methods: */
 void cong_cursor_init(CongCursor *curs, CongDocument *doc);
 void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
-#if !USE_CONG_EDITOR_WIDGET
-void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int y);
-#endif
 gint cong_cursor_data_insert(CongCursor *curs, char *s);
 int cong_cursor_paragraph_insert(CongCursor *curs);
 gboolean cong_cursor_calc_prev_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
 gboolean cong_cursor_calc_next_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
-#if !USE_CONG_EDITOR_WIDGET
-void cong_cursor_prev_line(CongCursor *curs, CongSpanEditor *xed);
-#endif
 void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed);
 void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_home(CongCursor *curs, CongDocument *doc);
 void cong_cursor_end(CongCursor *curs, CongDocument *doc);
 
+/* Selection methods: */
 void cong_selection_init(CongSelection *selection);
 void cong_selection_import(CongSelection *selection, GtkWidget* widget);
 void cong_selection_draw(CongSelection *selection, CongCursor *curs);
@@ -609,6 +350,11 @@ xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 					 int value);
 
 /* Handy utility functions: */
+
+/**
+   Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
+ */
+gchar* cong_util_cleanup_text(const xmlChar *text);
 
 /**
    Dave Malcolm:

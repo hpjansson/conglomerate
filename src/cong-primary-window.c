@@ -74,11 +74,7 @@ struct CongPrimaryWindow
 /*  	GtkWidget *w; */
 
 	CongTreeView *cong_tree_view;
-#if USE_CONG_EDITOR_WIDGET
 	GtkWidget *cong_editor_widget;
-#else
-	CongEditorView *cong_editor_view;
-#endif
 
 	GtkWidget *window, *menus;
 	GtkToolbar *toolbar;
@@ -410,11 +406,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	if (primary_window->doc) {
 		g_assert(primary_window->cong_tree_view);
-#if USE_CONG_EDITOR_WIDGET
 		g_assert(primary_window->cong_editor_widget);
-#else
-		g_assert(primary_window->cong_editor_view);
-#endif
 
 		/* --- Notebook to appear in the sidebar: --- */
 		sidebar_notebook = gtk_notebook_new();
@@ -449,7 +441,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	
 		/* --- Raw XML view --- */
 		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 cong_test_view_new(primary_window->doc),
+					 cong_dom_view_new(primary_window->doc),
 					 gtk_label_new("Raw XML")
 					 );
 
@@ -460,14 +452,9 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(primary_window->scroller), GTK_POLICY_AUTOMATIC,
 					       GTK_POLICY_ALWAYS);
 		
-#if USE_CONG_EDITOR_WIDGET
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
 						      GTK_WIDGET(primary_window->cong_editor_widget));
 		gtk_widget_show(primary_window->cong_editor_widget);
-#else
-		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
-						      cong_editor_view_get_widget(primary_window->cong_editor_view));
-#endif
 		
 		
 		/* TEMPORARY: Set white background */
@@ -484,10 +471,6 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		for (i = 0; i < 5; i++) {
 			style->bg[i] = gcol;
 		}
-		
-#if !USE_CONG_EDITOR_WIDGET
-		xv_style_r(primary_window->scroller, style);
-#endif
 		
 		gtk_widget_show(primary_window->scroller);
 	} /* if (primary_window->doc) { */
@@ -536,14 +519,10 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 		cong_document_ref(doc);
 
 		primary_window->cong_tree_view = cong_tree_view_new(doc);
-#if USE_CONG_EDITOR_WIDGET
 #if 0
 		primary_window->cong_editor_widget = gtk_calendar_new();
 #else
 		primary_window->cong_editor_widget = cong_editor_widget_new(doc);
-#endif
-#else
-		primary_window->cong_editor_view = cong_editor_view_new(doc);
 #endif
 	}
 
@@ -565,11 +544,12 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
-	cong_tree_view_free(primary_window->cong_tree_view);
-#if !USE_CONG_EDITOR_WIDGET
-	cong_editor_view_free(primary_window->cong_editor_view);
-#endif
-	cong_document_unref(primary_window->doc);
+	if (primary_window->doc) {
+		cong_tree_view_free(primary_window->cong_tree_view);
+		cong_document_unref(primary_window->doc);
+	} else {
+		g_assert(primary_window->cong_tree_view==NULL);
+	}
 
 	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);	
 

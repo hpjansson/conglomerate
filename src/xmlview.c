@@ -9,7 +9,8 @@
 #include "cong-dispspec.h"
 #include "cong-eel.h"
 
-#if !USE_CONG_EDITOR_WIDGET
+/* This file is mostly dead code from old editor widget; I'm keeping it for now because it has some Bonobo code...: */
+#if 0
 
 GtkStyle *style_white;
 
@@ -23,7 +24,7 @@ struct CongEditorView
 	GtkWidget *root;
 	GtkWidget *inner;
 };
-#endif /* #if !USE_CONG_EDITOR_WIDGET */
+#endif
 
 #if 0
 /* Avoid introducing an eel dependency for now by copying the code from eel-gdk-extensions.c and making the functions static: */
@@ -107,7 +108,7 @@ void draw_blended_line(GtkWidget *w,
 	gdk_gc_unref(gc);
 }
 
-#if !USE_CONG_EDITOR_WIDGET
+#if 0
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
   We have a CongSectionHead which stores relevant data; the vbox title widgets store pointers to this as userdata.
@@ -1437,4 +1438,4 @@ GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view)
 	return editor_view->root;
 }
 
-#endif /* #if !USE_CONG_EDITOR_WIDGET */
+#endif
