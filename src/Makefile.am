@@ -10,7 +10,8 @@ printing_sources = \
   fo-print-context.c 	    \
   fo-rect.c                 \
   fo-solver-result.c        \
-  fo-tests.c
+  fo-tests.c                \
+  $(NULL)
 else
 printing_sources = 
 endif
@@ -272,9 +273,12 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 	$(PRINTING_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
-	-DPKGDATADIR=\""$(pkgdatadir)"\"
+	-DPKGDATADIR=\""$(pkgdatadir)"\" \
+	$(NULL)
+
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(PRINTING_LIBS) \
-	$(GTKSOURCEVIEW_LIBS)
+	$(GTKSOURCEVIEW_LIBS) \
+	$(NULL)
 
 ## reminder: include Makefile.win into the dist.tar.gz
