@@ -1,3 +1,7 @@
+2003-10-28  Jordi Mallach  <jordi@sindominio.net>
+
+	* configure.in (ALL_LINGUAS): Added "ca" (Catalan).
+
 2003-10-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in
