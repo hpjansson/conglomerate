@@ -1,5 +1,9 @@
 2003-06-09 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-tree-view.c, cong-view.c, cong-view.h
+
+	Big rewrite of Overview
+
 	* Applied patch by Chris Wareham <chris.wareham@iosystems.co.uk> to fix build on NetBSD (with minor indentation cleanups)
 	
 2003-06-05 David Malcolm <david@davemalcolm.demon.co.uk>

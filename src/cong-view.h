@@ -104,4 +104,7 @@ struct CongDocumentEvent
 CongDocument*
 cong_view_get_document(CongView *view);
 
+CongDispspec*
+cong_view_get_dispspec(CongView *view);
+
 #endif

@@ -32,3 +32,11 @@ cong_view_get_document(CongView *view)
 
 	return view->doc;
 }
+
+CongDispspec*
+cong_view_get_dispspec(CongView *view)
+{
+	g_return_val_if_fail(view, NULL);
+
+	return cong_document_get_dispspec(view->doc);
+}
