@@ -34,12 +34,13 @@ struct CongTextCacheSpan
 {
 	int original_first_byte_offset; /* offset into the text within the string */
 	int stripped_first_byte_offset; /* offset into the stripped plaintext cache */
-	int byte_count; /* number of bytes within the stripped plaintext cache */
+	int stripped_byte_count; /* number of bytes within the stripped plaintext cache */
 };
 
 struct CongTextCache
 {
 	gboolean strip_whitespace;
+	gchar *unstripped_string; /* only useful for debugging at the moment */
 	gchar *stripped_string;
 	GList *list_of_span;
 };
@@ -48,7 +49,7 @@ struct CongTextCache
 static CongTextCacheSpan* 
 cong_text_cache_span_new(int original_first_byte_offset,
 			 int stripped_first_byte_offset,
-			 int byte_count);
+			 int stripped_byte_count);
 
 static CongTextCacheSpan *
 get_text_span_at_stripped_byte_offset (CongTextCache *text_cache, 
@@ -104,6 +105,12 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 {
 	g_return_if_fail (text_cache);
 	g_return_if_fail (input_string);
+
+	if (text_cache->unstripped_string) {
+		g_free (text_cache->unstripped_string);
+	}
+
+	text_cache->unstripped_string = g_strdup (input_string);
 
 	if (text_cache->stripped_string) {
 		g_free (text_cache->stripped_string);
@@ -269,13 +276,13 @@ cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_ca
 /* Internal function definitions: */
 static CongTextCacheSpan* 
 cong_text_cache_span_new(int original_first_byte_offset,
-			 int stripped_first_byte_offset,
-			 int byte_count)
+			 int stripped_first_byte_offset,			 
+			 int stripped_byte_count)
 {
 	CongTextCacheSpan *text_span = g_new0(CongTextCacheSpan,1);
 	text_span->original_first_byte_offset = original_first_byte_offset;
 	text_span->stripped_first_byte_offset = stripped_first_byte_offset;
-	text_span->byte_count = byte_count;
+	text_span->stripped_byte_count = stripped_byte_count;
 
 	return text_span;
 }
@@ -295,7 +302,7 @@ get_text_span_at_stripped_byte_offset (CongTextCache *text_cache,
 		
 		g_assert(byte_offset >= text_span->stripped_first_byte_offset);
 
-		if (byte_offset < (text_span->stripped_first_byte_offset + text_span->byte_count) ) {
+		if (byte_offset < (text_span->stripped_first_byte_offset + text_span->stripped_byte_count) ) {
 			return text_span;
 		}
 	}
@@ -316,9 +323,14 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 		CongTextCacheSpan *text_span = iter->data;
 		g_assert(text_span);
 
-		g_assert(byte_offset >= text_span->original_first_byte_offset);
+		if (byte_offset < text_span->original_first_byte_offset) {
+			/* Then we are within the stripped region of whitespace at the end of the prior text span: */
+			g_assert (iter->prev);
+			g_assert (iter->prev->data);
+			return 	(CongTextCacheSpan *)iter->prev->data;
+		}
 
-		if (byte_offset < (text_span->original_first_byte_offset + text_span->byte_count) ) {
+		if (byte_offset < (text_span->original_first_byte_offset + text_span->stripped_byte_count) ) {
 			return text_span;
 		}
 	}
