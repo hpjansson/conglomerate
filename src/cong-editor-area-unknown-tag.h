@@ -56,11 +56,11 @@ cong_editor_area_unknown_tag_get_type (void);
 CongEditorArea*
 cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_tag,
 					CongEditorWidget3 *editor_widget,
-					const gchar *tagname);
+					CongNodePtr node);
 
 CongEditorArea*
 cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,
-				  const gchar *tagname);
+				  CongNodePtr node);
 
 G_END_DECLS
 

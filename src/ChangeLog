@@ -1,3 +1,9 @@
+2004-07-12  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-editor-area-unknown-tag.c, cong-editor-area-unknown-tag.h, cong-editor-node-element-unknown.c:
+
+	Add attribute and namespace information to the unknown element display in main editing widget.
+
 2004-07-07  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* main.c, cong-app.c : Use popt context to parse command

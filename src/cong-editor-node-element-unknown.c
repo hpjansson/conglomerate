@@ -117,7 +117,7 @@ generate_block_area (CongEditorNode *editor_node)
 	g_return_val_if_fail (editor_node, NULL);
 
 	new_area = cong_editor_area_unknown_tag_new (cong_editor_node_get_widget (editor_node),
-						     cong_editor_node_get_node (editor_node)->name);
+						     cong_editor_node_get_node (editor_node));
 
 	cong_editor_area_connect_node_signals (new_area,
 					       editor_node);
