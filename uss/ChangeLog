@@ -3,12 +3,15 @@
 	* mkcvstarball
 	Minor changes
 
+	* mkpotfilesin
+	Contains executable code, it even works fine!
+
 2003-10-26  Geert Stappers <stappers@stappers.nl>
 
 	* ckgtkdocincludes, mkgtkdocoverrides
 	Executable from top source directory
 
-	* mkpotfiles.in
+	* mkpotfilesin
 	New file, contains only a skeleton
 
 2003-10-25  Geert Stappers <stappers@stappers.nl>

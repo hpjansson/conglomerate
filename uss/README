@@ -29,4 +29,4 @@ Generates doc/reference/conglomerate-overrides.txt - input file for gtk-doc
 Updates doc/reference/conglomerate-sections.txt - input file for gtk-doc
 
 * mkpotfilesin
-Makes a new po/POTFILES.in
+Makes a new po/POTFILES.in, run this script once in a while.
