@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xmledit.c
+
+	Removed dead code from clipboard functions
+
 	* cong-document.c, cong-location.c, cong-node.c, cong-node.h, cursor.c, xmldata.c
 
 	Added function to determine valid cursor locations (prior to adding comment editing support)

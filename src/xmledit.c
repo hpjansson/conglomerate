@@ -39,7 +39,6 @@ void selection_cursor_unset(CongDocument *doc)
 
 void cong_document_cut_selection(CongDocument *doc)
 {
-	CongNodePtr t;
 	CongSelection *selection;
 	CongCursor *curs;
 	CongRange *ordered_range; 
@@ -64,7 +63,6 @@ void cong_document_cut_selection(CongDocument *doc)
 
 	cong_document_begin_edit (doc);
 
-#if 1
 	source = cong_range_generate_source (ordered_range);
 	cong_app_set_clipboard (cong_app_singleton(),
 				source);
@@ -73,24 +71,6 @@ void cong_document_cut_selection(CongDocument *doc)
 
 	cong_document_delete_range (doc, 
 				    ordered_range);
-#else	
-	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
-
-	if (cong_location_equals(&selection->loc0, &selection->loc1)) return;
-	
-	if (cong_app_singleton()->clipboard) {
-		cong_document_node_recursive_delete (NULL, 
-						     cong_app_singleton()->clipboard);
-	}
-	
-	t = cong_node_new_element(NULL, "dummy", doc);
-
-	cong_selection_reparent_all(selection, doc, t);
-	
-	cong_document_node_make_orphan(doc, t);
-
-	cong_app_singleton()->clipboard = t;
-#endif
 
 	selection_cursor_unset(doc);
 
@@ -99,11 +79,6 @@ void cong_document_cut_selection(CongDocument *doc)
 
 void cong_document_copy_selection(CongDocument *doc)
 {
-	CongNodePtr t;
-	CongNodePtr t0 = NULL;
-	CongNodePtr t_next = NULL;
-	int replace_xed = 0;
-
 	CongSelection *selection;
 	CongCursor *curs;
 
@@ -125,30 +100,9 @@ void cong_document_copy_selection(CongDocument *doc)
 
 	/* GREP FOR MVC */
 	cong_document_begin_edit (doc);
-#if 1
+
 	cong_app_set_clipboard (cong_app_singleton(),
 				cong_range_generate_source (cong_selection_get_ordered_range (selection)));
-#else
-	if (cong_app_singleton()->clipboard) {
-		cong_document_node_recursive_delete (NULL, 
-						     cong_app_singleton()->clipboard);
-	}
-
-	t = cong_node_new_element(NULL, "dummy", doc);
-
-	cong_selection_reparent_all(selection, doc, t);
-	cong_app_singleton()->clipboard = cong_node_recursive_dup(t);
-
-	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
-
-	for (t0 = cong_node_first_child(t); t0; t0 = t_next) {
-		t_next = t0->next;
-		cong_document_node_add_before(doc, t0, t);
-	}
-
-	cong_document_node_make_orphan(doc,t);
-	cong_node_free(t);
-#endif
 
 	selection_cursor_unset(doc);
 	cong_document_end_edit (doc);
@@ -157,12 +111,6 @@ void cong_document_copy_selection(CongDocument *doc)
 
 void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *widget)
 {
-	CongNodePtr t;
-	CongNodePtr t0 = NULL;
-	CongNodePtr t1 = NULL;
-	CongNodePtr clip;
-	CongNodePtr t_next;
-
 	CongDispspec *ds;
 	CongSelection *selection;
 	CongCursor *curs;
@@ -184,61 +132,9 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 #endif
 
 	/* GREP FOR MVC */
-#if 1
 	cong_document_paste_source_at (doc, 
 				       &curs->location, 
 				       cong_app_get_clipboard(cong_app_singleton()));
-#else
-
-	if (!cong_app_singleton()->clipboard->children) return;
-	
-	if (cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return;
-	
-	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
-	{
-		if (!curs->location.byte_offset)
-		{
-			t0 = cong_location_xml_frag_prev(&curs->location);
-			t1 = cong_location_node(&curs->location);
-		}
-		else if (!cong_location_get_unichar(&curs->location))
-		{
-			t0 = cong_location_node(&curs->location);
-			t1 = cong_location_xml_frag_next(&curs->location);
-		}
-		else
-		{
-			/* Split data node */
-			cong_location_xml_frag_data_nice_split2(doc, &curs->location);
-
-			curs->location.byte_offset = 0;
-			t0 = cong_location_node(&curs->location);
-			t1 = cong_location_xml_frag_next(&curs->location);
-			if (cong_location_xml_frag_next(&curs->location)) {
-				curs->location.node = cong_location_xml_frag_next(&curs->location);
-			}
-		}
-	}
-	else t0 = cong_location_node(&curs->location);
-
-
-	/* FIXME:  does this leak "clip": */
-	clip = cong_node_recursive_dup(cong_app_singleton()->clipboard);
-
-	t = cong_node_first_child(clip);
-
-	if (!t) return;
-	
-	for (; t; t = t_next) {
-		t_next = t->next;
-		cong_document_node_add_before(doc, t, t1);
-	}
-
-	cong_selection_nullify (selection);
-	/* FIXME: need to notify document! */
-
-	cong_document_end_edit (doc);
-#endif
 }
 
 void 
