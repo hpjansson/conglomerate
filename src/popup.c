@@ -593,7 +593,6 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc,
 							GtkWindow *parent_window) 
 {
 	GList *list;
-	GtkWidget *popup;
 
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
@@ -601,15 +600,22 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc,
 	list = cong_document_get_valid_new_next_sibling_elements (doc, 
 								  node, 
 								  CONG_ELEMENT_TYPE_STRUCTURAL);
-	popup = structural_tag_popup_init(doc, 
-					  callback, 
-					  node, 
-					  list,
-					  parent_window);
-	
-	g_list_free(list);
 
-	return popup;
+	if (list) {
+		GtkWidget *popup;
+
+		popup = structural_tag_popup_init(doc, 
+						  callback, 
+						  node, 
+						  list,
+						  parent_window);
+		
+		g_list_free(list);
+		
+		return popup;
+	} else {
+		return NULL;
+	}
 }
 					 
 static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
@@ -618,7 +624,6 @@ static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
 							    GtkWindow *parent_window) 
 {
 	GList *list;
-	GtkWidget *popup;
 
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
@@ -627,15 +632,21 @@ static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
 							   node, 
 							   CONG_ELEMENT_TYPE_STRUCTURAL);
 
-	popup = structural_tag_popup_init(doc, 
-					  callback, 
-					  node, 
-					  list,
-					  parent_window);
-	
-	g_list_free(list);
+	if (list) {
+		GtkWidget *popup;
 
-	return popup;
+		popup = structural_tag_popup_init(doc, 
+						  callback, 
+						  node, 
+						  list,
+						  parent_window);
+		
+		g_list_free(list);
+
+		return popup;
+	} else {
+		return NULL;
+	}
 }
 
 
@@ -860,7 +871,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 			      GtkWindow *parent_window)
 {
 	GtkMenu *tpopup;
-	GtkWidget *item, *w0, *sub_popup;
+/* 	GtkWidget *w0; */
 	CongDispspec *ds;
 
 	g_assert(doc);				
@@ -971,36 +982,55 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 
 	add_menu_separator(GTK_MENU(tpopup));
 
-	item = add_item_to_popup(tpopup,
-				 make_menu_item(_("New sub-element"),
-						NULL, /* FIXME:  ought to have a tooltip */
-						NULL), /* FIXME:  ought to have an icon */
-				 doc,
-				 NULL,
-				 node,
-				 parent_window);
-	
-	sub_popup = new_sub_element_structural_tag_popup_init(doc, 
-							      tree_new_sub_element, 
-							      node, 
-							      parent_window);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+	/* The "New Sub-element" submenu: */
+	{
+		GtkWidget *item;
+		GtkWidget *sub_popup;
 
-	
-	item = add_item_to_popup(tpopup,
-				 make_menu_item(_("New sibling"),
-						NULL, /* FIXME:  ought to have a tooltip */
-						NULL), /* FIXME:  ought to have an icon */
-				 doc,
-				 NULL,
-				 node,
-				 parent_window);
+		item = add_item_to_popup(tpopup,
+					 make_menu_item(_("New sub-element"),
+							NULL, /* FIXME:  ought to have a tooltip */
+							NULL), /* FIXME:  ought to have an icon */
+					 doc,
+					 NULL,
+					 node,
+					 parent_window);
+		
+		sub_popup = new_sub_element_structural_tag_popup_init(doc, 
+								      tree_new_sub_element, 
+								      node, 
+								      parent_window);
+		if (sub_popup) {
+			gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+		} else {
+			gtk_widget_set_sensitive (item, FALSE);
+		}
+	}
+		
+	/* The "New sibling" submenu: */
+	{
+		GtkWidget *item;
+		GtkWidget *sub_popup;
 
-	sub_popup = new_sibling_structural_tag_popup_init(doc, 
-							  tree_new_sibling, 
-							  node, 
-							  parent_window);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+		item = add_item_to_popup(tpopup,
+					 make_menu_item(_("New sibling"),
+							NULL, /* FIXME:  ought to have a tooltip */
+							NULL), /* FIXME:  ought to have an icon */
+					 doc,
+					 NULL,
+					 node,
+					 parent_window);
+		
+		sub_popup = new_sibling_structural_tag_popup_init(doc, 
+								  tree_new_sibling, 
+								  node, 
+								  parent_window);
+		if (sub_popup) {
+			gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+		} else {
+			gtk_widget_set_sensitive (item, FALSE);
+		}
+	}
 
 	/* Add any plugin tools for this node: */
 	{
