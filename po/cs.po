@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-23 19:32+0200\n"
-"PO-Revision-Date: 2003-09-25 03:01+0200\n"
+"POT-Creation-Date: 2003-10-01 11:21+0200\n"
+"PO-Revision-Date: 2003-10-01 16:00+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1169
-#: src/cong-primary-window.c:364 src/cong-primary-window.c:366
-#: src/cong-primary-window.c:600 src/cong-primary-window.c:602
-#: src/cong-primary-window.c:608
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1190
+#: src/cong-primary-window.c:399 src/cong-primary-window.c:401
+#: src/cong-primary-window.c:633 src/cong-primary-window.c:635
+#: src/cong-primary-window.c:641
 msgid "Conglomerate XML Editor"
 msgstr "Editor XML Conglomerate"
 
@@ -42,7 +42,9 @@ msgstr "Možnosti"
 msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
-msgstr "<small>Co je rozsah textu? Tuto stranu můžete použít pro popsání toho, jak se text týká různých typů počítačových systémů.</small>"
+msgstr ""
+"<small>Co je rozsah textu? Tuto stranu můžete použít pro popsání toho, jak "
+"se text týká různých typů počítačových systémů.</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -50,7 +52,7 @@ msgstr "Jazyk"
 
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:745
+#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:823
 msgid "Properties"
 msgstr "Vlastnosti"
 
@@ -80,7 +82,8 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
-"Tato strana drží místo. Časem budete moci používat tuto stranu pro práci s jednoduchými informacemi DocBooku o sledování verzí.\n"
+"Tato strana drží místo. Časem budete moci používat tuto stranu pro práci s "
+"jednoduchými informacemi DocBooku o sledování verzí.\n"
 "\n"
 "Je to uvedeno v Bugzille jako chyba #122538"
 
@@ -145,11 +148,42 @@ msgstr "a, b, c, ..."
 msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
+#: glade/string_selection_dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/string_selection_dialog.glade.h:2
+msgid "label"
+msgstr "jmenovka"
+
+#: glade/string_selection_dialog.glade.h:3
+msgid "string_selection_dialog"
+msgstr "dialog_výběru_řetězce"
+
 #: src/cong-app.c:122
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: src/cong-attribute-editor-enumeration.c:88
+#: src/cong-attribute-editor-cdata.c:179
+#: src/cong-attribute-editor-enumeration.c:175
+#: src/cong-attribute-wrapper.c:171 src/cong-node-properties-dialog.c:387
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Nastavit atribut \"%s\" na \"%s\""
+
+#: src/cong-attribute-editor-cdata.c:215 src/cong-node-properties-dialog.c:438
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "Přidat atribut \"%s\""
+
+#: src/cong-attribute-editor-cdata.c:251
+#: src/cong-attribute-editor-enumeration.c:178
+#: src/cong-attribute-wrapper.c:206 src/cong-node-properties-dialog.c:475
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Odstranit atribut \"%s\""
+
+#: src/cong-attribute-editor-enumeration.c:89
 msgid "(unspecified)"
 msgstr "(neurčeno)"
 
@@ -167,19 +201,24 @@ msgstr "Uložit změny do dokumentu \"%s\" před zavřením?"
 msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
-msgstr "Pokud dokument zavřete bez uložení, budou změny za posledních %li hodin zahozeny."
+msgstr ""
+"Pokud dokument zavřete bez uložení, budou změny za posledních %li hodin "
+"zahozeny."
 
 #: src/cong-dialog.c:253
 #, c-format
 msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
-msgstr "Pokud dokument zavřete bez uložení, budou změny za posledních %li minut zahozeny."
+msgstr ""
+"Pokud dokument zavřete bez uložení, budou změny za posledních %li minut "
+"zahozeny."
 
 #: src/cong-dialog.c:255
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
-msgstr "Pokud dokument zavřete bez uložení, budou změny za poslední minutu zahozeny."
+msgstr ""
+"Pokud dokument zavřete bez uložení, budou změny za poslední minutu zahozeny."
 
 #: src/cong-dialog.c:300
 #, c-format
@@ -208,20 +247,20 @@ msgstr "Conglomerate nemohl číst svůj registr typů dokumentů."
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate se pokusil podívat na všechny soubory v daném umístění."
 
-#: src/cong-dispspec.c:543
+#: src/cong-dispspec.c:554
 msgid "unnamed"
 msgstr "nepojmenovaný"
 
-#: src/cong-dispspec.c:556
+#: src/cong-dispspec.c:567
 msgid "No description available."
 msgstr "Popis není k dispozici"
 
-#: src/cong-dispspec.c:1399
+#: src/cong-dispspec.c:1430
 msgid "(xpath failed)"
 msgstr "(xpath selhalo)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec.c:1444
+#: src/cong-dispspec.c:1475
 msgid "<untitled>"
 msgstr "<nepojmenovaný>"
 
@@ -328,7 +367,8 @@ msgstr "Došlo k neočekávané interní chybě."
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
-msgstr "Zkuste to znovu. Pokud to znovu selže, ohlaste chybu u správce této aplikace."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, ohlaste chybu u správce této aplikace."
 
 #: src/cong-error-file-open.c:227
 msgid "There is no file with that name at that location."
@@ -341,7 +381,9 @@ msgid ""
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste napsali název souboru správě. Nezapomeňte, že velikost písmen je důležitá (\"MůjSoubor\" není to samé jako \"MŮJSOUBOR\" nebo \"můjsoubor\").\n"
+"(i) Zkuste zkontrolovat, že jste napsali název souboru správě. Nezapomeňte, "
+"že velikost písmen je důležitá (\"MůjSoubor\" není to samé jako \"MŮJSOUBOR"
+"\" nebo \"můjsoubor\").\n"
 "(ii) Zkuste hledat svůj soubor pomocí nástroje pro hledání."
 
 #: src/cong-error-file-open.c:229 src/cong-error-file-open.c:238
@@ -360,7 +402,9 @@ msgid ""
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" nebo \"MŮJADRESÁŘ\").\n"
+"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
+"velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" "
+"nebo \"MŮJADRESÁŘ\").\n"
 "(ii) Zkuste váš soubor hledat pomocí nástroje pro hledání."
 
 #. FIXME: need some thought about the messages for this
@@ -373,7 +417,9 @@ msgstr "Umístění \"%s\" nepodporuje čtení souborů."
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
-msgstr "Zkuste soubor načíst z jiného umístění. Pokud si myslíte, že byste měli být schopni číst tento soubor, kontaktujte svého správce systému."
+msgstr ""
+"Zkuste soubor načíst z jiného umístění. Pokud si myslíte, že byste měli být "
+"schopni číst tento soubor, kontaktujte svého správce systému."
 
 #: src/cong-error-file-open.c:264
 msgid "There were problems reading the content of the file."
@@ -382,7 +428,8 @@ msgstr "Při čtení obsahu souboru se vyskytly problémy."
 #: src/cong-error-file-open.c:265 src/cong-error-file-open.c:283
 #: src/cong-error-file-open.c:322
 msgid "Try again.  If it fails again, contact your system administrator."
-msgstr "Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
 
 #: src/cong-error-file-open.c:274
 msgid "The contents of the file seem to be corrupt."
@@ -391,7 +438,8 @@ msgstr "Obsah souboru je zřejmě poškozen."
 #: src/cong-error-file-open.c:275
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
-msgstr "Zkuste to znovu. Pokud to znovu selže, zkuste najít záložní kopii souboru."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, zkuste najít záložní kopii souboru."
 
 #: src/cong-error-file-open.c:282 src/cong-error-file-open.c:321
 msgid "There were problems reading the contents of the file."
@@ -408,7 +456,9 @@ msgid ""
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP\").\n"
+"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
+"velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP"
+"\").\n"
 "(ii) Zkuste váš soubor hledat pomocí nástroje pro hledání."
 
 #: src/cong-error-file-open.c:303
@@ -428,7 +478,9 @@ msgstr "Systém se pokouší pracovat s příliš mnoha soubory zároveň."
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
-msgstr "Zkuste to znovu. Pokud to znovu selže, zkuste zavřít nepotřebné aplikace nebo kontaktujte svého správce systému."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, zkuste zavřít nepotřebné aplikace "
+"nebo kontaktujte svého správce systému."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-open.c:329
@@ -468,7 +520,8 @@ msgstr "Systém se k danému umístění nemohl přihlásit."
 
 #: src/cong-error-file-open.c:382 src/cong-error-file-open.c:392
 msgid "Try again. If it fails again, contact your system administrator."
-msgstr "Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, kontaktujte svého správce systému."
 
 #: src/cong-error-file-open.c:391 src/cong-error-file-save.c:325
 msgid "The location was too busy."
@@ -479,12 +532,13 @@ msgstr "Umístění bylo příliš používané."
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "Při přístupu k \"%2$s\" byla ohlášena chyba \"%1$s\""
 
-# FIXME: Virtual File System
 #: src/cong-error-file-open.c:436
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
-"Filing System."
-msgstr "Program neočekávaně obdržel chybovou zprávu z virtuálního systému souborů GNOME."
+"File System."
+msgstr ""
+"Program neočekávaně obdržel chybovou zprávu z virtuálního systému souborů "
+"GNOME."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: src/cong-error-file-save.c:48
@@ -505,7 +559,9 @@ msgid ""
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" nebo \"MŮJADRESÁŘ\").\n"
+"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
+"velikost písmen je důležitá(\"MůjAdresář\" není to samé jako \"můjadresář\" "
+"nebo \"MŮJADRESÁŘ\").\n"
 "(ii) Zkuste ukládat do jiného umístění."
 
 #. FIXME: need some thought about the messages for this
@@ -525,7 +581,8 @@ msgstr "Při zápisu obsahu souboru se vyskytly problémy."
 
 #: src/cong-error-file-save.c:122
 msgid "Try again.  If it fails again, try saving to a different location."
-msgstr "Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného adresáře."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného adresáře."
 
 #: src/cong-error-file-save.c:151
 #, c-format
@@ -537,7 +594,9 @@ msgstr "Velikost souboru by byla %s, ale zařízení má kapacitu jen %s."
 #: src/cong-error-file-save.c:157
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
-msgstr "Soubor je příliš velký na to, aby se vešel na zařízení (velikost souboru by byla %s)"
+msgstr ""
+"Soubor je příliš velký na to, aby se vešel na zařízení (velikost souboru by "
+"byla %s)"
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:165
@@ -552,7 +611,8 @@ msgstr "Zkuste soubor uložit do jiného umístění."
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
-msgstr "Velikost souboru by byla %s, ale na daném zařízení máte jen %s volných."
+msgstr ""
+"Velikost souboru by byla %s, ale na daném zařízení máte jen %s volných."
 
 #. Can't get at the free space for the device or "volume":
 #: src/cong-error-file-save.c:201
@@ -560,18 +620,23 @@ msgstr "Velikost souboru by byla %s, ale na daném zařízení máte jen %s voln
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
-msgstr "Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení (velikost souboru by byla %s)."
+msgstr ""
+"Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení "
+"(velikost souboru by byla %s)."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:209
 msgid "The file is too big to fit in the remaining space on the device."
-msgstr "Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení."
+msgstr ""
+"Soubor je příliš velký na to, aby se vešel do zbývajícího místa na zařízení."
 
 #: src/cong-error-file-save.c:218
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
-msgstr "Zkuste soubor uložit do jiného umístění nebo udělat více místa přesunem nepotřebných souborů z daného zařízení do koše."
+msgstr ""
+"Zkuste soubor uložit do jiného umístění nebo udělat více místa přesunem "
+"nepotřebných souborů z daného zařízení do koše."
 
 #: src/cong-error-file-save.c:239
 msgid ""
@@ -580,7 +645,9 @@ msgid ""
 "\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
-"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP\").\n"
+"(i) Zkuste zkontrolovat, že jste umístění napsali správně. Nezapomeňte, že "
+"velikost písmen je důležitá(\"http\" není to samé jako \"Http\" nebo \"HTTP"
+"\").\n"
 "(ii) Zkuste ukládat do jiného umístění."
 
 #: src/cong-error-file-save.c:253
@@ -591,7 +658,9 @@ msgstr "Nemáte oprávnění zapisovat do daného umístění."
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
-msgstr "Zkuste ukládat do jiného umístění nebo požádejte svého správce systému, aby vám přidělil oprávnění."
+msgstr ""
+"Zkuste ukládat do jiného umístění nebo požádejte svého správce systému, aby "
+"vám přidělil oprávnění."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:268
@@ -609,7 +678,9 @@ msgstr "Musíte ukládat do souboru v adresáři, ne přímo do adresáře."
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
-msgstr "Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste ukládat do jiného umístění."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste "
+"ukládat do jiného umístění."
 
 #: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
 msgid ""
@@ -618,11 +689,13 @@ msgid ""
 "another location."
 msgstr ""
 "(i) Zkuste zkontrolovat, že jste umístění napsali správně.\n"
-"(ii) Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste ukládat do jiného umístění."
+"(ii) Zkuste to znovu. Pokud to znovu selže, server je možná vypnut; zkuste "
+"ukládat do jiného umístění."
 
 #: src/cong-error-file-save.c:317 src/cong-error-file-save.c:326
 msgid "Try again. If it fails again, try saving to another location."
-msgstr "Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného umístění."
+msgstr ""
+"Zkuste to znovu. Pokud to znovu selže, zkuste ukládat do jiného umístění."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:333
@@ -700,13 +773,13 @@ msgstr "Možnosti exportu"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
 #: src/cong-file-properties.c:102 src/cong-file-properties.c:106
-#: src/cong-menus.c:403 src/cong-node-properties-dialog.c:465
+#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:543
 msgid "Name"
 msgstr "Název"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:231
 #: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:410 src/cong-parser-error.c:231
+#: src/cong-menus.c:426 src/cong-parser-error.c:259
 msgid "Description"
 msgstr "Popis"
 
@@ -717,7 +790,8 @@ msgstr "Conglomerate nemůže exportovat \"%s\""
 
 #: src/cong-file-export.c:380
 msgid "None of Conglomerate's plugins know how to export files of that type."
-msgstr "Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
+msgstr ""
+"Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
 
 #: src/cong-file-import.c:64
 msgid "Import file..."
@@ -763,9 +837,11 @@ msgid ""
 msgstr ""
 "Tento asistent vás provede vytvářením nového souboru.\n"
 "\n"
-"Jsou k dispozici různé typy souborů a Conglomerate možná bude moci dodat \"základní\" obsah za vás.\n"
+"Jsou k dispozici různé typy souborů a Conglomerate možná bude moci dodat "
+"\"základní\" obsah za vás.\n"
 "\n"
-"Doufáme, že v budoucích verzích Conglomerate budete moci vytvářet \"šablony dokumentů\", a přidat je do tohoto systému."
+"Doufáme, že v budoucích verzích Conglomerate budete moci vytvářet \"šablony "
+"dokumentů\", a přidat je do tohoto systému."
 
 #: src/cong-file-new.c:419
 msgid "What type of file would you like to create?"
@@ -781,19 +857,25 @@ msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
 "keep it."
-msgstr "Conglomerate nyní má informace, které potřebuje pro vytvoření dokumentu. Vytvořte je stisknutím \"Použít\". Pokud si dokument chcete ponechat, budete jej muset uložit."
+msgstr ""
+"Conglomerate nyní má informace, které potřebuje pro vytvoření dokumentu. "
+"Vytvořte je stisknutím \"Použít\". Pokud si dokument chcete ponechat, budete "
+"jej muset uložit."
 
 #: src/cong-file-open.c:53
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
-msgstr "Interní struktura dokumentu neodpovídá žádnému typu známému v Conglomerate."
+msgstr ""
+"Interní struktura dokumentu neodpovídá žádnému typu známému v Conglomerate."
 
 #: src/cong-file-open.c:54
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
-msgstr "Můžete Conglomerate přinutit k načtení dokumentu kliknutím na tlačítko \"Vnutit\" níže, ale výsledek možná nebude ideální."
+msgstr ""
+"Můžete Conglomerate přinutit k načtení dokumentu kliknutím na tlačítko "
+"\"Vnutit\" níže, ale výsledek možná nebude ideální."
 
 #: src/cong-file-open.c:55
 msgid "Force"
@@ -820,7 +902,7 @@ msgstr "Metoda tisku:"
 msgid "Print Options"
 msgstr "Možnosti tisku"
 
-#: src/cong-file-print.c:311 src/cong-menus.c:700
+#: src/cong-file-print.c:311 src/cong-menus.c:716
 msgid "Print Preview"
 msgstr "Náhled před tiskem"
 
@@ -831,7 +913,8 @@ msgstr "Conglomerate nemůže vytisknout \"%s\""
 
 #: src/cong-file-print.c:324
 msgid "None of Conglomerate's plugins know how to print files of that type."
-msgstr "Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
+msgstr ""
+"Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
 
 #: src/cong-file-properties.c:51 src/cong-file-properties.c:54
 msgid "None"
@@ -849,7 +932,7 @@ msgstr "Systémové ID"
 msgid "Type"
 msgstr "Typ"
 
-#: src/cong-file-properties.c:103 src/cong-node-properties-dialog.c:246
+#: src/cong-file-properties.c:103 src/cong-node-properties-dialog.c:247
 msgid "Location"
 msgstr "Umístění"
 
@@ -894,7 +977,10 @@ msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "following information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
-msgstr "Dokument neurčuje externí DTD, ale Conglomerate si myslí, že odpovídají následující informace. Určete tuto informaci v dokumentu explicitně kliknutím na \"Asociovat tuto DTD\"."
+msgstr ""
+"Dokument neurčuje externí DTD, ale Conglomerate si myslí, že odpovídají "
+"následující informace. Určete tuto informaci v dokumentu explicitně "
+"kliknutím na \"Asociovat tuto DTD\"."
 
 #: src/cong-file-properties.c:174
 msgid "No External Subset"
@@ -904,8 +990,8 @@ msgstr "Žádná externí podmnožina"
 msgid "Basic"
 msgstr "Základní"
 
-#: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:700
-#: src/cong-node-properties-dialog.c:783
+#: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:778
+#: src/cong-node-properties-dialog.c:861
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -913,78 +999,78 @@ msgstr "Pokročilé"
 msgid "Save XML as..."
 msgstr "Uložit XML jako..."
 
-#: src/cong-location.c:744
+#: src/cong-location.c:783
 msgid "Calculating document start"
 msgstr "Počítám začátek dokumentu"
 
-#: src/cong-location.c:756
+#: src/cong-location.c:795
 msgid "Calculating line start"
 msgstr "Počítám začátek řádku"
 
-#: src/cong-location.c:769
+#: src/cong-location.c:808
 msgid "Calculating document end"
 msgstr "Počítám konec dokumentu"
 
-#: src/cong-location.c:782
+#: src/cong-location.c:821
 msgid "Calculating line end"
 msgstr "Počítám konec řádku"
 
-#: src/cong-location.c:795
+#: src/cong-location.c:834
 msgid "Calculating previous page"
 msgstr "Počítám předchozí stránku"
 
-#: src/cong-location.c:808
+#: src/cong-location.c:847
 msgid "Calculating next page"
 msgstr "Počítám následující stránku"
 
-#: src/cong-menus.c:91 src/cong-menus.c:163 src/cong-menus.c:197
+#: src/cong-menus.c:93 src/cong-menus.c:165 src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
 msgstr "Vybraná položka menu ještě nebyla implementována."
 
-#: src/cong-menus.c:373
+#: src/cong-menus.c:389
 msgid "Document Types"
 msgstr "Typy dokumentů"
 
-#: src/cong-menus.c:477
+#: src/cong-menus.c:493
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate nemůže otevřít výsledek transformace"
 
-#: src/cong-menus.c:535 src/cong-plugin.c:1018
+#: src/cong-menus.c:551 src/cong-plugin.c:1018
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Při čtení souboru stylesheetu \"%s\" se vyskytl problém"
 
-#: src/cong-menus.c:538 src/cong-menus.c:562 src/cong-plugin.c:1021
+#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1021
 #: src/cong-plugin.c:1045
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate nemohl transformovat tento dokument"
 
-#: src/cong-menus.c:559 src/cong-plugin.c:1042
+#: src/cong-menus.c:575 src/cong-plugin.c:1042
 msgid "There was a problem applying the stylesheet file"
 msgstr "Při použití souboru stylesheetu se vyskytl problém"
 
-#: src/cong-menus.c:1012
+#: src/cong-menus.c:1028
 msgid "Test Progress Checklist"
 msgstr "Otestovat zaškrtávací pole průběhu"
 
-#: src/cong-menus.c:1016
+#: src/cong-menus.c:1032
 #, c-format
 msgid "This is stage %i"
 msgstr "Toto je krok %i"
 
-#: src/cong-menus.c:1072
+#: src/cong-menus.c:1077
 msgid "Message Log - Conglomerate"
 msgstr "Záznam zpráv - Conglomerate"
 
-#: src/cong-menus.c:1084
+#: src/cong-menus.c:1089
 msgid "Signal Log - Conglomerate"
 msgstr "Záznam signálů - Conglomerate"
 
-#: src/cong-menus.c:1167
+#: src/cong-menus.c:1188
 msgid "translator_credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
-#: src/cong-menus.c:1171
+#: src/cong-menus.c:1192
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
@@ -992,227 +1078,236 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
 
-#: src/cong-menus.c:1172
+#: src/cong-menus.c:1193
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: svobodný editor XML přívětivý k uživatelům"
 
-#: src/cong-menus.c:1207 src/cong-menus.c:1286
+#: src/cong-menus.c:1228 src/cong-menus.c:1306
 msgid "/_File"
 msgstr "/_Soubor"
 
-#: src/cong-menus.c:1208 src/cong-menus.c:1287
+#: src/cong-menus.c:1229 src/cong-menus.c:1307
 msgid "/File/_New..."
 msgstr "/Soubor/_Nový..."
 
-#: src/cong-menus.c:1209 src/cong-menus.c:1288
+#: src/cong-menus.c:1230 src/cong-menus.c:1308
 msgid "/File/_Open..."
 msgstr "/Soubor/_Otevřít..."
 
-#: src/cong-menus.c:1210 src/cong-menus.c:1215 src/cong-menus.c:1220
-#: src/cong-menus.c:1223 src/cong-menus.c:1226 src/cong-menus.c:1228
-#: src/cong-menus.c:1289 src/cong-menus.c:1291
+#: src/cong-menus.c:1231 src/cong-menus.c:1236 src/cong-menus.c:1241
+#: src/cong-menus.c:1244 src/cong-menus.c:1247 src/cong-menus.c:1249
+#: src/cong-menus.c:1309 src/cong-menus.c:1311
 msgid "/File/"
 msgstr "/Soubor/"
 
-#: src/cong-menus.c:1211
+#: src/cong-menus.c:1232
 msgid "/File/_Save"
 msgstr "/Soubor/_Uložit"
 
-#: src/cong-menus.c:1212
+#: src/cong-menus.c:1233
 msgid "/File/Save _As..."
 msgstr "/Soubor/Uložit _jako..."
 
-#: src/cong-menus.c:1213
+#: src/cong-menus.c:1234
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Soubor/Uložit _kopii..."
 
-#: src/cong-menus.c:1216
+#: src/cong-menus.c:1237
 msgid "/File/Print Previe_w..."
 msgstr "/Soubor/Ná_hled před tiskem..."
 
-#: src/cong-menus.c:1217
+#: src/cong-menus.c:1238
 msgid "/File/_Print..."
 msgstr "/Soubor/Vy_tisknout..."
 
-#: src/cong-menus.c:1221
+#: src/cong-menus.c:1242
 msgid "/File/_Revert"
 msgstr "/Soubor/V_rátit"
 
-#: src/cong-menus.c:1224 src/cong-menus.c:1290
+#: src/cong-menus.c:1245 src/cong-menus.c:1310
 msgid "/File/_Import..."
 msgstr "/Soubor/_Importovat..."
 
-#: src/cong-menus.c:1225
+#: src/cong-menus.c:1246
 msgid "/File/_Export..."
 msgstr "/Soubor/_Exportovat..."
 
-#: src/cong-menus.c:1227
+#: src/cong-menus.c:1248
 msgid "/File/Proper_ties"
 msgstr "/Soubor/_Vlastnosti"
 
-#: src/cong-menus.c:1229 src/cong-menus.c:1292
+#: src/cong-menus.c:1250 src/cong-menus.c:1312
 msgid "/File/_Close"
 msgstr "/Soubor/_Zavřít"
 
-#: src/cong-menus.c:1230 src/cong-menus.c:1293
+#: src/cong-menus.c:1251 src/cong-menus.c:1313
 msgid "/File/_Quit"
 msgstr "/Soubor/U_končit"
 
-#: src/cong-menus.c:1232
+#: src/cong-menus.c:1253
 msgid "/_Edit"
 msgstr "/_Úpravy"
 
-#: src/cong-menus.c:1234
+#: src/cong-menus.c:1254
 msgid "/Edit/_Undo"
 msgstr "/Úpravy/_Zpět"
 
-#: src/cong-menus.c:1235
+#: src/cong-menus.c:1255
 msgid "/Edit/_Redo"
 msgstr "/Úpravy/Z_novu"
 
-#: src/cong-menus.c:1236 src/cong-menus.c:1241 src/cong-menus.c:1247
-#: src/cong-menus.c:1249
+#: src/cong-menus.c:1256 src/cong-menus.c:1260 src/cong-menus.c:1266
+#: src/cong-menus.c:1268
 msgid "/Edit/"
 msgstr "/Úpravy/"
 
-#: src/cong-menus.c:1238
+#: src/cong-menus.c:1257
 msgid "/Edit/Cu_t"
 msgstr "/Úpravy/_Vyjmout"
 
-#: src/cong-menus.c:1239
+#: src/cong-menus.c:1258
 msgid "/Edit/_Copy"
 msgstr "/Úpravy/_Kopírovat"
 
-#: src/cong-menus.c:1240
+#: src/cong-menus.c:1259
 msgid "/Edit/_Paste"
 msgstr "/Úpravy/V_ložit"
 
-#: src/cong-menus.c:1243
+#: src/cong-menus.c:1262
 msgid "/Edit/_Find..."
 msgstr "/Úpravy/_Hledat..."
 
-#: src/cong-menus.c:1244
+#: src/cong-menus.c:1263
 msgid "/Edit/Find Ne_xt"
 msgstr "/Úpravy/Hledat ná_sledující"
 
-#: src/cong-menus.c:1245
+#: src/cong-menus.c:1264
 msgid "/Edit/Find Pre_vious"
 msgstr "/Úpravy/Hledat _předchozí"
 
-#: src/cong-menus.c:1246
+#: src/cong-menus.c:1265
 msgid "/Edit/R_eplace..."
 msgstr "/Úpravy/Nah_radit..."
 
-#: src/cong-menus.c:1248
+#: src/cong-menus.c:1267
 msgid "/Edit/_Insert..."
 msgstr "/Úpravy/V_ložit..."
 
-#: src/cong-menus.c:1251
+#: src/cong-menus.c:1270
 msgid "/Edit/View _Source"
 msgstr "/Úpravy/Zobrazit _zdroj"
 
-#: src/cong-menus.c:1254 src/cong-menus.c:1296
+#: src/cong-menus.c:1273 src/cong-menus.c:1316
 msgid "/Debug"
 msgstr "/Ladění"
 
-#: src/cong-menus.c:1255 src/cong-menus.c:1297
+#: src/cong-menus.c:1274 src/cong-menus.c:1317
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr "/Ladění/Začít test systému hlášení chyb..."
 
-#: src/cong-menus.c:1256 src/cong-menus.c:1298
+#: src/cong-menus.c:1275 src/cong-menus.c:1318
 msgid "/Debug/Document Types"
 msgstr "/Ladění/Typy dokumentů"
 
-#: src/cong-menus.c:1257
+#: src/cong-menus.c:1276
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Ladění/Transformovat DocBook do HTML"
 
-#: src/cong-menus.c:1258
+#: src/cong-menus.c:1277
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Ladění/Transformovat DocBook do XHTML"
 
-#: src/cong-menus.c:1259
+#: src/cong-menus.c:1278
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Ladění/Transformovat DocBook do nápovědy HTML"
 
-#: src/cong-menus.c:1260
+#: src/cong-menus.c:1279
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Ladění/Transformovat DocBook do nápovědy Java"
 
-#: src/cong-menus.c:1261
+#: src/cong-menus.c:1280
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Ladění/Transformovat DocBook do FO"
 
-#: src/cong-menus.c:1263
+#: src/cong-menus.c:1282
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Ladění/Náhled XSL:FO"
 
-#: src/cong-menus.c:1265
+#: src/cong-menus.c:1284
 msgid "/Debug/DTD"
 msgstr "/Ladění/DTD"
 
-#: src/cong-menus.c:1266 src/cong-menus.c:1299
+#: src/cong-menus.c:1285 src/cong-menus.c:1319
 msgid "/Debug/Dialog"
 msgstr "/Ladění/Dialog"
 
-#: src/cong-menus.c:1267 src/cong-menus.c:1300
+#: src/cong-menus.c:1286 src/cong-menus.c:1320
 msgid "/Debug/Progress Checklist"
 msgstr "/Ladění/Zaškrtávací seznam průběhu"
 
-#: src/cong-menus.c:1268
+#: src/cong-menus.c:1287
 msgid "/Debug/Document Message Log"
 msgstr "/Ladění/Záznam zpráv dokumentu"
 
-#: src/cong-menus.c:1269
+#: src/cong-menus.c:1288
 msgid "/Debug/Document Signal Log"
 msgstr "/Ladění/Záznam signálů dokumentu"
 
-#: src/cong-menus.c:1270 src/cong-menus.c:1301
+#: src/cong-menus.c:1289 src/cong-menus.c:1321
 msgid "/Debug/Information Alert"
 msgstr "/Ladění/Upozornění na informaci"
 
-#: src/cong-menus.c:1271 src/cong-menus.c:1302
+#: src/cong-menus.c:1290 src/cong-menus.c:1322
 msgid "/Debug/Glade Test"
 msgstr "/Ladění/Test Glade"
 
-#: src/cong-menus.c:1272
+#: src/cong-menus.c:1291
 msgid "/Debug/Insert XML Fragment"
 msgstr "/Ladění/Vložit fragment XML"
 
-#: src/cong-menus.c:1275
+#: src/cong-menus.c:1292
+msgid "/Debug/Command Test"
+msgstr "/Ladění/Test příkazů"
+
+#: src/cong-menus.c:1295
 msgid "/_Tools"
 msgstr "/_Nástroje"
 
-#: src/cong-menus.c:1277 src/cong-menus.c:1305
+#: src/cong-menus.c:1297 src/cong-menus.c:1325
 msgid "/_Help"
 msgstr "/Nápo_věda"
 
-#: src/cong-menus.c:1278 src/cong-menus.c:1306
+#: src/cong-menus.c:1298 src/cong-menus.c:1326
 msgid "/Help/_Contents"
 msgstr "/Nápověda/_Obsah"
 
-#: src/cong-menus.c:1279 src/cong-menus.c:1307
+#: src/cong-menus.c:1299 src/cong-menus.c:1327
 msgid "/Help/_About"
 msgstr "/Nápověda/O _aplikaci"
 
-#: src/cong-node-properties-dialog.c:253
+#: src/cong-node-properties-dialog.c:254
 msgid "XPath"
 msgstr "XPath"
 
-#: src/cong-node-properties-dialog.c:444
+#: src/cong-node-properties-dialog.c:336
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "Přejmenovat atribut \"%s\" na \"%s\""
+
+#: src/cong-node-properties-dialog.c:522
 msgid "Raw Attributes"
 msgstr "Přímo atributy"
 
-#: src/cong-node-properties-dialog.c:477
+#: src/cong-node-properties-dialog.c:555
 msgid "Value"
 msgstr "Hodnota"
 
-#: src/cong-node-properties-dialog.c:566
+#: src/cong-node-properties-dialog.c:644
 #, c-format
 msgid "Attributes for <tt>%s</tt> tags"
 msgstr "Atributy pro tagy <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:692 src/cong-node-properties-dialog.c:778
+#: src/cong-node-properties-dialog.c:770 src/cong-node-properties-dialog.c:856
 msgid "DTD"
 msgstr "DTD"
 
@@ -1220,28 +1315,31 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Neznámá data"
 
-#: src/cong-parser-error.c:155
+#: src/cong-parser-error.c:171
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Chyby při zpracovávání %s"
 
-#: src/cong-parser-error.c:226
+#: src/cong-parser-error.c:254
 msgid "Line Number"
 msgstr "Číslo řádku"
 
-#: src/cong-parser-error.c:288
+#: src/cong-parser-error.c:316
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s nerozumí internímu formátu souboru."
 
-#: src/cong-parser-error.c:296
+#: src/cong-parser-error.c:324
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
 "We hope to fix these problems in a later release."
-msgstr "Conglomerate v současné době vyžaduje, aby dokumenty byly \"well-formed\"; má mnohem přísnější pravidla než většina WWW prohlížečů. Také zatím nepodporuje SGML. Doufáme, že tyto problém v pozdější verzi opravíme."
+msgstr ""
+"Conglomerate v současné době vyžaduje, aby dokumenty byly \"well-formed\"; "
+"má mnohem přísnější pravidla než většina WWW prohlížečů. Také zatím "
+"nepodporuje SGML. Doufáme, že tyto problém v pozdější verzi opravíme."
 
-#: src/cong-parser-error.c:297
+#: src/cong-parser-error.c:325
 msgid "Show Details"
 msgstr "Zobrazit detaily"
 
@@ -1249,43 +1347,51 @@ msgstr "Zobrazit detaily"
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate nemohl najít informace o zobrazování nového souboru"
 
-#: src/cong-primary-window.c:240 src/cong-primary-window.c:241
+#: src/cong-primary-window.c:260 src/cong-primary-window.c:261
 msgid "Open document"
 msgstr "Otevřít dokument"
 
-#: src/cong-primary-window.c:249 src/cong-primary-window.c:250
+#: src/cong-primary-window.c:269 src/cong-primary-window.c:270
 msgid "Save document as..."
 msgstr "Uložit dokument jako..."
 
-#: src/cong-primary-window.c:257 src/cong-primary-window.c:258
+#: src/cong-primary-window.c:277 src/cong-primary-window.c:278
+msgid "Undo"
+msgstr "Zpět"
+
+#: src/cong-primary-window.c:284 src/cong-primary-window.c:285
+msgid "Redo"
+msgstr "Znovu"
+
+#: src/cong-primary-window.c:292 src/cong-primary-window.c:293
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: src/cong-primary-window.c:264 src/cong-primary-window.c:265
+#: src/cong-primary-window.c:299 src/cong-primary-window.c:300
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: src/cong-primary-window.c:271 src/cong-primary-window.c:272
+#: src/cong-primary-window.c:306 src/cong-primary-window.c:307
 msgid "Paste"
 msgstr "Vložit"
 
-#: src/cong-primary-window.c:442
+#: src/cong-primary-window.c:475
 msgid "Overview"
 msgstr "Přehled"
 
-#: src/cong-primary-window.c:452
+#: src/cong-primary-window.c:485
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/cong-primary-window.c:460
+#: src/cong-primary-window.c:493
 msgid "Raw XML"
 msgstr "Přímo XML"
 
-#: src/cong-primary-window.c:518
+#: src/cong-primary-window.c:551
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 
-#: src/cong-primary-window.c:600
+#: src/cong-primary-window.c:633
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
@@ -1311,20 +1417,22 @@ msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it."
-msgstr "Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, ale nenainstalovali. Zkuste jej nainstalovat."
+msgstr ""
+"Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, "
+"ale nenainstalovali. Zkuste jej nainstalovat."
 
-#: src/plugin-cleanup-source.c:391
+#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:456
 msgid "Cleanup XML Source"
 msgstr "Vyčistit zdroj XML"
 
-#: src/plugin-cleanup-source.c:392 src/plugin-cleanup-source.c:395
-#: src/plugin-cleanup-source.c:396
+#: src/plugin-cleanup-source.c:457 src/plugin-cleanup-source.c:460
+#: src/plugin-cleanup-source.c:461
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 msgstr "Vyčistí zdroj XML dokumentu, takže se snadno čte v editoru zdroje."
 
-#: src/plugin-cleanup-source.c:394
+#: src/plugin-cleanup-source.c:459
 msgid "_Clean the XML Source"
 msgstr "_Vyčistit zdroj XML"
 
@@ -1336,7 +1444,9 @@ msgstr "Exportovat jako XML \"s malými písmeny\""
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
-msgstr "Exportuje jako soubor XML a převádí všechny tagy a atributy v dokumentu na malá písmena. Užitečné při práci se zděděnými dokumenty SGML."
+msgstr ""
+"Exportuje jako soubor XML a převádí všechny tagy a atributy v dokumentu na "
+"malá písmena. Užitečné při práci se zděděnými dokumenty SGML."
 
 #: src/plugin-docbook.c:191
 msgid "Text of the article goes here"
@@ -1386,7 +1496,8 @@ msgstr "Článek DocBook"
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
-msgstr "Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
+msgstr ""
+"Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
 
 #: src/plugin-docbook.c:1249
 msgid "DocBook Book"
@@ -1420,7 +1531,9 @@ msgstr "Exportovat DocBook jako HTML"
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
-msgstr "Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto souboru DocBook"
+msgstr ""
+"Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto "
+"souboru DocBook"
 
 #: src/plugin-docbook.c:1292
 msgid "Export DocBook as PDF"
@@ -1430,7 +1543,9 @@ msgstr "Exportovat DocBook jako PDF"
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
-msgstr "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto souboru DocBook"
+msgstr ""
+"Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto "
+"souboru DocBook"
 
 #: src/plugin-docbook.c:1300
 msgid "Export DocBook as XSL:FO"
@@ -1440,7 +1555,9 @@ msgstr "Exportovat DocBook jako XSL:FO"
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
-msgstr "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
+msgstr ""
+"Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z "
+"tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
 
 #: src/plugin-docbook.c:1309
 msgid "Print DocBook"
@@ -1507,7 +1624,8 @@ msgstr "Automaticky generovaný typ dokumentu založený na %s"
 #, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
-msgstr "Tato specifikace zobrazování Conglomerate byla automaticky vygenerována z %s"
+msgstr ""
+"Tato specifikace zobrazování Conglomerate byla automaticky vygenerována z %s"
 
 #: src/plugin-dtd.c:156
 msgid "Convert DTD into a Conglomerate Display Specification"
@@ -1515,7 +1633,8 @@ msgstr "Převést DTD do specifikace zobrazování Conglomerate"
 
 #: src/plugin-dtd.c:157
 msgid "Import a DTD file, creating a Conglomerate display specification file."
-msgstr "Importovat soubor DTD a vytvořit soubor specifikace zobrazování Conglomerate."
+msgstr ""
+"Importovat soubor DTD a vytvořit soubor specifikace zobrazování Conglomerate."
 
 #: src/plugin-dtd.c:164
 msgid "Convert DTD into a Relax NG schema"
@@ -1586,7 +1705,9 @@ msgstr "Vypsat specifikaci zobrazování"
 msgid ""
 "Writes the current display spec into a display spec xml file. This file can "
 "then be customized by the conglomerate user"
-msgstr "Zapíše aktuální specifikaci zobrazování do souboru xml specifikace zobrazování. Tento soubor pak může uživatel conglomerate upravit"
+msgstr ""
+"Zapíše aktuální specifikaci zobrazování do souboru xml specifikace "
+"zobrazování. Tento soubor pak může uživatel conglomerate upravit"
 
 #: src/plugin-save-dispspec.c:132
 msgid "_Dump Display Spec"
@@ -1630,7 +1751,9 @@ msgstr "Importovat soubor SGML a převést jej do XML."
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
 "replaced with some useful options"
-msgstr "Toto je zástupný ovládací prvek kalendáře; drží tu místo a bude časem nahrazen užitečnými možnostmi"
+msgstr ""
+"Toto je zástupný ovládací prvek kalendáře; drží tu místo a bude časem "
+"nahrazen užitečnými možnostmi"
 
 #: src/plugin-tests.c:133 src/plugin-tests.c:212
 #, c-format
@@ -1645,7 +1768,8 @@ msgstr "Odkaz na znaky Unicode"
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
-msgstr "Vytvořit tabulku vypisující část sady znaků Unicode jako článek DocBook"
+msgstr ""
+"Vytvořit tabulku vypisující část sady znaků Unicode jako článek DocBook"
 
 #: src/plugin-validate.c:96
 #, c-format
@@ -1656,7 +1780,9 @@ msgstr "Nemůže být zkontrolována platnost dokumentu \"%s\"."
 msgid ""
 "In a future version of Conglomerate we may have a feature that lets you "
 "attach a document type to a document."
-msgstr "V budoucí verzi Conglomerate možná budeme mít funkci, která vás nechá přiřadit k dokumentu jeho typ."
+msgstr ""
+"V budoucí verzi Conglomerate možná budeme mít funkci, která vás nechá "
+"přiřadit k dokumentu jeho typ."
 
 #: src/plugin-validate.c:123
 #, c-format
@@ -1685,7 +1811,9 @@ msgstr "Ověřit platnost dokumentu"
 msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
-msgstr "Zkontroluje, jestli je dokument \"platný\", tj. jestli odpovídá sadě pravidel určených odpovídajícím typem dokumentu nebo schématem"
+msgstr ""
+"Zkontroluje, jestli je dokument \"platný\", tj. jestli odpovídá sadě "
+"pravidel určených odpovídajícím typem dokumentu nebo schématem"
 
 #: src/plugin-validate.c:168
 msgid "_Validate Document"
@@ -1731,62 +1859,64 @@ msgstr "Element šablony XSL"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Element pro zobrazení pravidel šablon ve stylesheetu XSL"
 
-#: src/popup.c:123
+#: src/popup.c:124
 msgid "(no description available)"
 msgstr "(popis není k dispozici)"
 
-#: src/popup.c:340
+#: src/popup.c:341
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:898
+#: src/popup.c:899
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:908
+#: src/popup.c:909
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:916
+#: src/popup.c:917
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:927
+#: src/popup.c:928
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:958
+#: src/popup.c:959
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:966
+#: src/popup.c:967
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:974
+#: src/popup.c:975
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:991
+#: src/popup.c:992
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1016
+#: src/popup.c:1017
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
 #: src/xmldata.c:400
 #, c-format
 msgid ""
-"The element \"%s\" requires a child to be valid.  Please choose one of the "
+"The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
-msgstr "Aby byl element \"%s\" platný, vyžaduje potomka. Vyberte prosím jeden z následujících typů potomků."
+msgstr ""
+"Aby byl element \"%s\" platný, vyžaduje potomka. Vyberte prosím jeden z "
+"následujících typů potomků."
 
 #. select a dialog element
 #: src/xmldata.c:404
 msgid "Required Children Choices"
 msgstr "Vyžadované volby potomků"
 
-#: src/xmledit.c:436
+#: src/xmledit.c:332
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
