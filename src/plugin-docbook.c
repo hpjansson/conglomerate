@@ -1073,6 +1073,95 @@ GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_
 	return glade_xml_get_widget(xml, "common_dialog");
 }
 
+GtkWidget* docbook_orderedlist_properties_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+	GtkWidget *notebook1;
+
+	g_message("docbook_orderedlist_properties_factory_method");
+
+	g_return_val_if_fail(custom_property_dialog, NULL);
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
+						   GNOME_FILE_DOMAIN_APP_DATADIR,
+						   "conglomerate/glade/docbook-orderedlist-properties.glade",
+						   FALSE,
+						   NULL);
+
+	global_glade_doc_ptr = doc;
+	global_glade_node_ptr = node;
+
+	xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	g_free(glade_filename);
+
+	/* Wire stuff up: */
+	{
+		/* The numeration radio buttons: */
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "arabic")),
+					doc,
+					node,
+					"numeration",
+					"arabic");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "loweralpha")),
+					doc,
+					node,
+					"numeration",
+					"loweralpha");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "lowerroman")),
+					doc,
+					node,
+					"numeration",
+					"lowerroman");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperalpha")),
+					doc,
+					node,
+					"numeration",
+					"upperalpha");
+		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperroman")),
+					doc,
+					node,
+					"numeration",
+					"upperroman");
+		
+		/* The checkboxes: */
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "inheritnum")),
+					doc,
+					node,
+					"inheritnum",
+					"ignore",
+					"inherit");
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "spacing")),
+					doc,
+					node,
+					"spacing",
+					"normal",
+					"compact");
+		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "continuation")),
+					doc,
+					node,
+					"continuation",
+					"restart",
+					"continues");
+		
+	}
+	
+	/* Add the advanced properties tab: */
+	notebook1 = glade_xml_get_widget(xml, "notebook1");
+	cong_ui_append_advanced_node_properties_page(GTK_NOTEBOOK(notebook1),
+						     doc, 
+						     node);
+	
+	return glade_xml_get_widget(xml, "common_dialog");
+}
+
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
@@ -1161,6 +1250,13 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 						    _("Provides a Properties dialog for most DocBook nodes"),
 						    "docbook-generic-node-properties",
 						    docbook_generic_node_factory_method,
+						    NULL);
+
+	cong_plugin_register_custom_property_dialog(plugin,
+						    _("<orderedlist> property dialog"), 
+						    _("Provides a Properties dialog for the <orderedlist> tag"),
+						    "docbook-orderedlist-properties",
+						    docbook_orderedlist_properties_factory_method,
 						    NULL);
 
 	return TRUE;

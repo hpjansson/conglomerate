@@ -1,5 +1,9 @@
 2003-09-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-docbook.c
+
+	Added custom property dialog for the orderedlist tag
+	
 	* cong-attribute-editor.c, cong-attribute-editor.h
 
 	Added ability to bind GtkWidgets to XML attributes
