@@ -27,15 +27,15 @@ dispspec_DATA = \
 
 #@INTLTOOL_XML_RULE@
 
+# a strange file in this directory
+release_dtd = release.dtd
 
 # bugzilla #122011
 dtddir = $(pkgdatadir)/dtd
 dtd_DATA = \
 	xds.dtd \
+	$(release_dtd) \
 	$(NULL)
-
-# a strange file in this directory
-dtd_DATA += release.dtd
 
 EXTRA_DIST = \
 	$(dispspec_DATA) \
