@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-08-21 06:55+0200\n"
-"PO-Revision-Date: 2004-08-21 06:59+0200\n"
+"POT-Creation-Date: 2004-09-08 01:54+0200\n"
+"PO-Revision-Date: 2004-09-08 01:55+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgid "Options"
 msgstr "Options"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
-#: src/cong-node-properties-dialog.c:1285
+#: src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
 msgstr "Expert"
 
@@ -121,7 +121,7 @@ msgstr "Nom"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
-#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1247
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
 msgid "Properties"
 msgstr "Propriétés"
 
@@ -400,18 +400,21 @@ msgstr ""
 "vous ne l'avez pas installé. Essayez de l'installer. Si vous avez changé le "
 "chemin par défaut des fichiers de spécification, vérifiez qu'il est correct."
 
-#: src/cong-attribute-editor-cdata.c:218 src/cong-node-properties-dialog.c:470
+#: src/cong-attribute-editor-cdata.c:218
+#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Ajouter l'attribut  \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244 src/cong-attribute-editor.c:266
+#: src/cong-attribute-editor-cdata.c:244
+#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-editor.c:267
 #: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Supprimer l'attribut \"%s\""
 
-#: src/cong-attribute-editor-enumeration.c:106
+#: src/cong-attribute-editor-enumeration.c:121
 msgid "(unspecified)"
 msgstr "(non spécifié)"
 
@@ -511,7 +514,26 @@ msgstr "Ukrainien"
 msgid "No Language"
 msgstr "Aucune langue spécifiée"
 
-#: src/cong-attribute-editor.c:263 src/cong-attribute-wrapper.c:248
+#. are there mem leaks here
+#: src/cong-attribute-editor-nmtoken.c:210
+#, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Impossible de donner à l'attribut \"%s\" la valeur \"%s\""
+
+#: src/cong-attribute-editor-nmtoken.c:222
+msgid "The attribute value must be an XML name token."
+msgstr "La valeur de l'attribut doit être un symbole de nom XML"
+
+#: src/cong-attribute-editor-nmtoken.c:223
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr "Les symboles de nom XML ne peuvent contenir que des caractères "
+"alphanumériques et/ou des idéogrammes, ainsi les symboles _, -, . et :. Ils ne "
+"doivent contenir aucun espace."
+
+#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
 #: src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
@@ -724,15 +746,15 @@ msgstr "_Tout Remplacer"
 msgid "Find"
 msgstr "Rechercher"
 
-#: src/cong-editor-node-text.c:975
+#: src/cong-editor-node-text.c:984
 msgid "Select word"
 msgstr "Sélectionner un mot"
 
-#: src/cong-editor-node-text.c:1000
+#: src/cong-editor-node-text.c:1009
 msgid "Move cursor"
 msgstr "Déplacer le curseur"
 
-#: src/cong-editor-node-text.c:1086
+#: src/cong-editor-node-text.c:1095
 msgid "Drag out selection"
 msgstr "Déplacer la sélection"
 
@@ -1608,11 +1630,11 @@ msgid "Proper_ties"
 msgstr "Proprié_tés"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1533 src/cong-menus.c:1755
+#: src/cong-menus.c:1533 src/cong-menus.c:1756
 msgid "_Undo"
 msgstr "_Annuler"
 
-#: src/cong-menus.c:1534 src/cong-menus.c:1765
+#: src/cong-menus.c:1534 src/cong-menus.c:1766
 msgid "_Redo"
 msgstr "_Rétablir"
 
@@ -1652,12 +1674,12 @@ msgstr "_Insérer..."
 msgid "View _Source"
 msgstr "_Voir le source"
 
-#: src/cong-menus.c:1751
+#: src/cong-menus.c:1752
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Annuler : %s"
 
-#: src/cong-menus.c:1761
+#: src/cong-menus.c:1762
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Rétablir : %s"
@@ -1720,7 +1742,7 @@ msgid "Content model for <tt>%s</tt> elements"
 msgstr "Modèle de contenu pour les éléments <tt>%s</tt>"
 
 #: src/cong-node-properties-dialog.c:1185
-#: src/cong-node-properties-dialog.c:1280
+#: src/cong-node-properties-dialog.c:1316
 msgid "DTD"
 msgstr "DTD"
 
