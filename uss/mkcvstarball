@@ -22,8 +22,11 @@ else
     configure.in.tm > configure.in
 fi
 
-# make the tarball and check it
+# regenerate the makefile
+# (needed to create "pre" in the tarball name)
 ./autogen.sh
+
+# make the tarball and check it
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck
 if [ $? -ne 0 ]
 then
