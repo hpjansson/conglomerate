@@ -141,6 +141,12 @@ cong_document_paste_source_at (CongDocument *doc,
 
 	new_nodes = cong_document_make_nodes_from_source_fragment (doc, 
 								   source_fragment);
+
+	if (NULL==new_nodes) {
+		/* FIXME: need some kind of error reporting? */
+		return;
+	}
+
 	cong_document_begin_edit (doc);
 
 	/* We will add the children of new_node in place, then delete the placeholder parent, then merge adjacent text nodes if necessary. */

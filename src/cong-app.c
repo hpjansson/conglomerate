@@ -33,7 +33,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
-
+#define CORRECT_CLIPBOARD 1
 #define TEST_BIG_FONTS 0
 
 #define PRIVATE(x) ((x)->private)
@@ -51,7 +51,9 @@ struct CongAppPrivate
 	GtkTooltips *tooltips;
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
 
+#if !CORRECT_CLIPBOARD
 	gchar *clipboard; /* can be NULL to signify nothing in clipboard*/
+#endif
 };
 
 
@@ -143,18 +145,43 @@ cong_app_post_init_hack (CongApp *app)
 const gchar*
 cong_app_get_clipboard (CongApp *app)
 {
+#if CORRECT_CLIPBOARD
+	GtkClipboard* clipboard;
+#endif
+
 	g_return_val_if_fail (app, NULL);
 
+#if CORRECT_CLIPBOARD
+	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
+	return gtk_clipboard_wait_for_text (clipboard);
+
+#else
 	return PRIVATE(app)->clipboard;
+#endif
 }
 
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text)
 {
+#if CORRECT_CLIPBOARD
+	GtkClipboard* clipboard;
+#endif
 	g_return_if_fail (app);
 	/* text is allowed to be NULL */
 
+#if CORRECT_CLIPBOARD
+	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+	
+	if (text) {
+		/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
+		gtk_clipboard_set_text (clipboard, text, -1);
+	} else {
+		/* FIXME: should this happen? */
+	}
+#else
 	if (PRIVATE(app)->clipboard) {
 		g_free(PRIVATE(app)->clipboard);
 	}
@@ -164,6 +191,7 @@ cong_app_set_clipboard (CongApp *app,
 	} else {
 		PRIVATE(app)->clipboard = NULL;
 	}
+#endif
 
 	g_message("Clipboard set to \"%s\"", text);
 

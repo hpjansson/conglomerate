@@ -1147,7 +1147,12 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	xml_doc = xmlParseMemory (fake_document, 
 				  strlen(fake_document));
 	
-	g_assert(xml_doc);
+	if (NULL==xml_doc) {
+		/* Then the parsing failed: */
+		g_free (fake_document);
+		return NULL;
+	}
+
 	g_assert(xml_doc->children);
 	g_assert(cong_node_is_tag (xml_doc->children, NULL, "placeholder"));
 

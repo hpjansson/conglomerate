@@ -1,3 +1,9 @@
+2003-10-09  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c, cong-document.c, xmledit.c
+
+	Use the X CLIPBOARD for clipboard handling, rather than an internal buffer
+
 2003-10-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, cong-dispspec.c, cong-editor-area-entity-decl.c, cong-editor-area-entity-ref.c, cong-editor-area-span-tag.c, cong-editor-area-structural.c, cong-editor-area-unknown-tag.c, cong-editor-node-comment.c, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.c, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-open.c, cong-menus.c, cong-modification-set-dtd-ptr.c, cong-node-properties-dialog.c, cong-plugin.c, cong-primary-window.c, cong-util.c, main.c, plugin-doc-from-xds.c, plugin-docbook.c, plugin-lists-area-listitem.c, plugin-lists-node-element-listitem.c, popup.c
