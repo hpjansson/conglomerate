@@ -43,7 +43,13 @@ else
   ;;
   *\.*\.*-*)
    regular_release_changes
-   dch -v ${1} # set version and current date
+   # set version and current date
+   VERSION=${1}
+   RFC2822DATE=$(date -R)
+   mv debian/changelog debian/changelog.orig
+   sed -e "1s/\(.*\) (\(.*\)) \(.*\)/\1 ($VERSION) \3/" \
+       -e "1,/ -- /s/>  .*/>  $RFC2822DATE/" \
+       debian/changelog.orig > debian/changelog
    # plus a clean up
    rm debian/changelog.orig
    rm debian/control.orig
