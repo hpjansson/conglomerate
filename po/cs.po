@@ -8,17 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-07 14:17+0100\n"
-"PO-Revision-Date: 2004-02-07 17:13+0100\n"
+"POT-Creation-Date: 2004-02-23 03:08+0100\n"
+"PO-Revision-Date: 2004-02-23 09:11+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1225
-#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
-#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1252
+#: src/cong-primary-window.c:615 src/cong-primary-window.c:771
+#: src/cong-primary-window.c:773 src/cong-primary-window.c:779
 msgid "Conglomerate XML Editor"
 msgstr "Editor XML Conglomerate"
 
@@ -39,7 +39,7 @@ msgid "Options"
 msgstr "Možnosti"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1063
-#: src/cong-node-properties-dialog.c:1147
+#: src/cong-node-properties-dialog.c:1146
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -47,13 +47,13 @@ msgstr "Pokročilé"
 msgid "Basic"
 msgstr "Základní"
 
-#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:288
-#: src/cong-file-export.c:307 src/cong-file-new.c:291
-#: src/cong-file-print.c:254 src/cong-menus.c:460 src/cong-parser-error.c:271
+#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:289
+#: src/cong-file-export.c:305 src/cong-file-new.c:291
+#: src/cong-file-print.c:252 src/cong-parser-error.c:271
 msgid "Description"
 msgstr "Popis"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:743
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:742
 msgid "Document Type Declaration"
 msgstr "Deklarace typu dokumentu"
 
@@ -65,8 +65,8 @@ msgstr "Kódování"
 msgid "External ID"
 msgstr "Externí ID"
 
-#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:254
-#: src/cong-file-print.c:221
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:252
+#: src/cong-file-print.c:219
 msgid "General"
 msgstr "Obecné"
 
@@ -78,9 +78,8 @@ msgstr "Umístění"
 msgid "Modified"
 msgstr "Změněn"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-file-export.c:306
-#: src/cong-file-print.c:253 src/cong-menus.c:453
-#: src/cong-node-properties-dialog.c:527
+#: glade/cong-file-properties.glade.h:10 src/cong-file-export.c:304
+#: src/cong-file-print.c:251 src/cong-node-properties-dialog.c:527
 msgid "Name"
 msgstr "Název"
 
@@ -88,7 +87,7 @@ msgstr "Název"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
-#: src/cong-node-properties-dialog.c:1109
+#: src/cong-node-properties-dialog.c:1108
 msgid "Properties"
 msgstr "Vlastnosti"
 
@@ -161,7 +160,7 @@ msgstr "label_xml_standalone"
 msgid "label_xml_version"
 msgstr "label_xml_version"
 
-#: glade/cong-find-replace.glade.h:1 glade/string_selection_dialog.glade.h:1
+#: glade/cong-find-replace.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -321,31 +320,31 @@ msgstr "Parametry vytváření"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:731
+#: glade/plugin-random.glade.h:3 src/cong-document.c:730
 msgid "Document Type"
 msgstr "Typ dokumentu"
 
-#: glade/string_selection_dialog.glade.h:2
+#: glade/string_selection_dialog.glade.h:1
 msgid "label"
 msgstr "jmenovka"
 
-#: glade/string_selection_dialog.glade.h:3
+#: glade/string_selection_dialog.glade.h:2
 msgid "string_selection_dialog"
 msgstr "dialog_výběru_řetězce"
 
-#: src/cong-app.c:801
+#: src/cong-app.c:803
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: src/cong-app.c:931
+#: src/cong-app.c:933
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate nemohl načíst žádný soubor xds"
 
-#: src/cong-app.c:933
+#: src/cong-app.c:935
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 
-#: src/cong-app.c:935
+#: src/cong-app.c:937
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -430,13 +429,13 @@ msgstr "Změny za posledních %li minut budou zahozeny."
 msgid "Changes from the past minute will be discarded."
 msgstr "Změny za poslední minutu budou zahozeny."
 
-#: src/cong-dispspec-element.c:534 src/cong-dispspec-element.c:570
+#: src/cong-dispspec-element.c:535 src/cong-dispspec-element.c:571
 #: src/cong-xpath-expression.c:207
 msgid "(xpath failed)"
 msgstr "(xpath selhalo)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:616
+#: src/cong-dispspec-element.c:617
 msgid "<untitled>"
 msgstr "<nepojmenovaný>"
 
@@ -448,11 +447,11 @@ msgstr "Conglomerate nemohl číst svůj registr typů dokumentů."
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate se pokusil podívat na všechny soubory v daném umístění."
 
-#: src/cong-dispspec-registry.c:266 src/cong-file-new.c:271
+#: src/cong-dispspec-registry.c:267 src/cong-file-new.c:271
 msgid "File Type"
 msgstr "Typ souboru"
 
-#: src/cong-dispspec-registry.c:277
+#: src/cong-dispspec-registry.c:278
 msgid "Coverage"
 msgstr "Pokrytí"
 
@@ -464,80 +463,80 @@ msgstr "nepojmenovaný"
 msgid "No description available."
 msgstr "Popis není k dispozici"
 
-#: src/cong-document.c:695
+#: src/cong-document.c:694
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Atribut \"%s\""
 
-#: src/cong-document.c:702
+#: src/cong-document.c:701
 #, c-format
 msgid "Text \"%s\""
 msgstr "Text \"%s\""
 
-#: src/cong-document.c:708
+#: src/cong-document.c:707
 msgid "Character Data"
 msgstr "Znaková data"
 
-#: src/cong-document.c:711
+#: src/cong-document.c:710
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Odkaz na entitu \"%s\""
 
-#: src/cong-document.c:714
+#: src/cong-document.c:713
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entita \"%s\""
 
-#: src/cong-document.c:717
+#: src/cong-document.c:716
 msgid "XML Processing Instruction"
 msgstr "Instrukce zpracování XML"
 
-#: src/cong-document.c:722
+#: src/cong-document.c:721
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Komentář \"%s\""
 
-#: src/cong-document.c:728
+#: src/cong-document.c:727
 msgid "Document"
 msgstr "Dokument"
 
-#: src/cong-document.c:734
+#: src/cong-document.c:733
 msgid "Document Fragment"
 msgstr "Fragment dokumentu"
 
-#: src/cong-document.c:737
+#: src/cong-document.c:736
 msgid "Notation"
 msgstr "Zápis"
 
-#: src/cong-document.c:740
+#: src/cong-document.c:739
 msgid "HTML Document"
 msgstr "Dokument HTML"
 
-#: src/cong-document.c:746
+#: src/cong-document.c:745
 msgid "Element Declaration"
 msgstr "Deklarace elementu"
 
-#: src/cong-document.c:749
+#: src/cong-document.c:748
 msgid "Attribute Declaration"
 msgstr "Deklarace atributu"
 
-#: src/cong-document.c:752
+#: src/cong-document.c:751
 msgid "Entity Declaration"
 msgstr "Deklarace entity"
 
-#: src/cong-document.c:755
+#: src/cong-document.c:754
 msgid "Namespace Declaration"
 msgstr "Deklarace prostoru jmen"
 
-#: src/cong-document.c:758
+#: src/cong-document.c:757
 msgid "XInclude Start"
 msgstr "Začátek XInclude"
 
-#: src/cong-document.c:761
+#: src/cong-document.c:760
 msgid "XInclude End"
 msgstr "Konec XInclude"
 
-#: src/cong-document.c:1448
+#: src/cong-document.c:1447
 #, c-format
 msgid "Select %s"
 msgstr "Vybrat %s"
@@ -556,39 +555,39 @@ msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:882
+#: src/cong-editor-node-text.c:883
 msgid "Select word"
 msgstr "Vybrat slovo"
 
-#: src/cong-editor-node-text.c:907
+#: src/cong-editor-node-text.c:908
 msgid "Move cursor"
 msgstr "Přesunout kurzor"
 
-#: src/cong-editor-node-text.c:991
+#: src/cong-editor-node-text.c:992
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
-#: src/cong-editor-widget3.c:256
+#: src/cong-editor-widget3.c:258
 msgid "Expander Size"
 msgstr "Velikost rozbalovače"
 
-#: src/cong-editor-widget3.c:257
+#: src/cong-editor-widget3.c:259
 msgid "Size of the expander arrow"
 msgstr "Velikost šipky rozbalovače"
 
-#: src/cong-editor-widget3.c:631
+#: src/cong-editor-widget3.c:633
 msgid "Input Method"
 msgstr "Vstupní metoda"
 
-#: src/cong-editor-widget3.c:734 src/cong-editor-widget3.c:1265
+#: src/cong-editor-widget3.c:736 src/cong-editor-widget3.c:1267
 msgid "Typing"
 msgstr "Psaní"
 
-#: src/cong-editor-widget3.c:1166
+#: src/cong-editor-widget3.c:1168
 msgid "Cursor Movement"
 msgstr "Pohyb kurzoru"
 
-#: src/cong-editor-widget3.c:1206 src/cong-editor-widget3.c:1219
+#: src/cong-editor-widget3.c:1208 src/cong-editor-widget3.c:1221
 msgid "Delete Selection"
 msgstr "Odstranit výběr"
 
@@ -1060,52 +1059,52 @@ msgstr "<small>(Popis není k dispozici)</small>"
 msgid "Select file to export to"
 msgstr "Zvolte soubor, do kterého exportovat"
 
-#: src/cong-file-export.c:233
+#: src/cong-file-export.c:231
 #, c-format
 msgid "Export \"%s\""
 msgstr "Exportovat \"%s\""
 
-#: src/cong-file-export.c:238
+#: src/cong-file-export.c:236
 msgid "Export"
 msgstr "Export"
 
-#: src/cong-file-export.c:289
+#: src/cong-file-export.c:287
 msgid "Exporter:"
 msgstr "Exportér:"
 
-#: src/cong-file-export.c:291
+#: src/cong-file-export.c:289
 msgid "File:"
 msgstr "Soubor:"
 
-#: src/cong-file-export.c:298
+#: src/cong-file-export.c:296
 msgid "Export Options"
 msgstr "Možnosti exportu"
 
-#: src/cong-file-export.c:379
+#: src/cong-file-export.c:377
 #, c-format
 msgid "Conglomerate cannot export \"%s\""
 msgstr "Conglomerate nemůže exportovat \"%s\""
 
-#: src/cong-file-export.c:382
+#: src/cong-file-export.c:380
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr ""
 "Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
 
-#: src/cong-file-import.c:68
+#: src/cong-file-import.c:69
 msgid "Import file..."
 msgstr "Importovat soubor..."
 
 #. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:102
+#: src/cong-file-import.c:103
 msgid "Could not import the file."
 msgstr "Nemohu importovat soubor."
 
-#: src/cong-file-import.c:103
+#: src/cong-file-import.c:104
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr "Žádný zásuvný modul Conglomerate neví, jak načíst soubory typu \"%s\""
 
-#: src/cong-file-import.c:104
+#: src/cong-file-import.c:105
 msgid "FIXME"
 msgstr "FIXME"
 
@@ -1114,12 +1113,11 @@ msgstr "FIXME"
 msgid "Creating a new file (%s)"
 msgstr "Vytvářím nový soubor (%s)"
 
-#. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:471 src/cong-file-new.c:478 src/cong-file-new.c:503
+#: src/cong-file-new.c:478 src/cong-file-new.c:501 src/cong-file-new.c:526
 msgid "Creating a new file"
 msgstr "Vytvářím nový soubor"
 
-#: src/cong-file-new.c:479
+#: src/cong-file-new.c:502
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1137,16 +1135,16 @@ msgstr ""
 "Doufáme, že v budoucích verzích Conglomerate budete moci vytvářet \"šablony "
 "dokumentů\", a přidat je do tohoto systému."
 
-#: src/cong-file-new.c:492
+#: src/cong-file-new.c:515
 msgid "What type of file would you like to create?"
 msgstr "Jaký typ souboru byste chtěli vytvořit?"
 
-#: src/cong-file-new.c:494
+#: src/cong-file-new.c:517
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Zvýrazněte jednu z položek v seznamu a pokračujte zvolením \"Vpřed\""
 
-#: src/cong-file-new.c:504
+#: src/cong-file-new.c:527
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1179,33 +1177,33 @@ msgstr "Vnutit"
 msgid "Select an XML document"
 msgstr "Zvolte dokument XML"
 
-#: src/cong-file-print.c:199
+#: src/cong-file-print.c:197
 #, c-format
 msgid "Print \"%s\""
 msgstr "Vytisknout \"%s\""
 
-#: src/cong-file-print.c:205
+#: src/cong-file-print.c:203
 msgid "Print"
 msgstr "Vytisknout"
 
-#: src/cong-file-print.c:237
+#: src/cong-file-print.c:235
 msgid "Print Method:"
 msgstr "Metoda tisku:"
 
-#: src/cong-file-print.c:245
+#: src/cong-file-print.c:243
 msgid "Print Options"
 msgstr "Možnosti tisku"
 
-#: src/cong-file-print.c:323 src/cong-menus.c:750
+#: src/cong-file-print.c:321 src/cong-menus.c:675
 msgid "Print Preview"
 msgstr "Náhled před tiskem"
 
-#: src/cong-file-print.c:333
+#: src/cong-file-print.c:331
 #, c-format
 msgid "Conglomerate cannot print \"%s\""
 msgstr "Conglomerate nemůže vytisknout \"%s\""
 
-#: src/cong-file-print.c:336
+#: src/cong-file-print.c:334
 msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
 "Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
@@ -1256,7 +1254,7 @@ msgstr "Odstranit DTD"
 msgid "Associate with DTD"
 msgstr "Přiřadit DTD"
 
-#: src/cong-file-save.c:52
+#: src/cong-file-save.c:53
 msgid "Save XML as..."
 msgstr "Uložit XML jako..."
 
@@ -1276,54 +1274,50 @@ msgstr "Počítám předchozí stránku"
 msgid "Calculating next page"
 msgstr "Počítám následující stránku"
 
-#: src/cong-menus.c:98 src/cong-menus.c:170 src/cong-menus.c:204
+#: src/cong-menus.c:99 src/cong-menus.c:171 src/cong-menus.c:205
 msgid "The selected menu item has not yet been implemented."
 msgstr "Vybraná položka menu ještě nebyla implementována."
 
-#: src/cong-menus.c:423
-msgid "Document Types"
-msgstr "Typy dokumentů"
-
-#: src/cong-menus.c:527
+#: src/cong-menus.c:452
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate nemůže otevřít výsledek transformace"
 
-#: src/cong-menus.c:585 src/cong-plugin.c:469
+#: src/cong-menus.c:510 src/cong-plugin.c:477
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Při čtení souboru stylesheetu \"%s\" se vyskytl problém"
 
-#: src/cong-menus.c:588 src/cong-menus.c:612 src/cong-plugin.c:472
-#: src/cong-plugin.c:496
+#: src/cong-menus.c:513 src/cong-menus.c:537 src/cong-plugin.c:480
+#: src/cong-plugin.c:504
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate nemohl transformovat tento dokument"
 
-#: src/cong-menus.c:609 src/cong-plugin.c:493
+#: src/cong-menus.c:534 src/cong-plugin.c:501
 msgid "There was a problem applying the stylesheet file"
 msgstr "Při použití souboru stylesheetu se vyskytl problém"
 
-#: src/cong-menus.c:1062
+#: src/cong-menus.c:987
 msgid "Test Progress Checklist"
 msgstr "Otestovat zaškrtávací pole průběhu"
 
-#: src/cong-menus.c:1066
+#: src/cong-menus.c:991
 #, c-format
 msgid "This is stage %i"
 msgstr "Toto je krok %i"
 
-#: src/cong-menus.c:1111
+#: src/cong-menus.c:1036
 msgid "Message Log - Conglomerate"
 msgstr "Záznam zpráv - Conglomerate"
 
-#: src/cong-menus.c:1123
+#: src/cong-menus.c:1048
 msgid "Signal Log - Conglomerate"
 msgstr "Záznam signálů - Conglomerate"
 
-#: src/cong-menus.c:1223
+#: src/cong-menus.c:1250
 msgid "translator_credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
-#: src/cong-menus.c:1227
+#: src/cong-menus.c:1254
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1331,210 +1325,210 @@ msgstr ""
 "© 1999 Hans Petter Jansson\n"
 "© 2004 David Malcolm"
 
-#: src/cong-menus.c:1228
+#: src/cong-menus.c:1255
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: svobodný editor XML přívětivý k uživatelům"
 
-#: src/cong-menus.c:1271 src/cong-menus.c:1349
+#: src/cong-menus.c:1298 src/cong-menus.c:1377
 msgid "/_File"
 msgstr "/_Soubor"
 
-#: src/cong-menus.c:1272 src/cong-menus.c:1350
+#: src/cong-menus.c:1299 src/cong-menus.c:1378
 msgid "/File/_New..."
 msgstr "/Soubor/_Nový..."
 
-#: src/cong-menus.c:1273 src/cong-menus.c:1351
+#: src/cong-menus.c:1300 src/cong-menus.c:1379
 msgid "/File/_Open..."
 msgstr "/Soubor/_Otevřít..."
 
-#: src/cong-menus.c:1274 src/cong-menus.c:1279 src/cong-menus.c:1284
-#: src/cong-menus.c:1287 src/cong-menus.c:1290 src/cong-menus.c:1292
-#: src/cong-menus.c:1352 src/cong-menus.c:1354
+#: src/cong-menus.c:1301 src/cong-menus.c:1306 src/cong-menus.c:1311
+#: src/cong-menus.c:1314 src/cong-menus.c:1317 src/cong-menus.c:1319
+#: src/cong-menus.c:1380 src/cong-menus.c:1382
 msgid "/File/"
 msgstr "/Soubor/"
 
-#: src/cong-menus.c:1275
+#: src/cong-menus.c:1302
 msgid "/File/_Save"
 msgstr "/Soubor/_Uložit"
 
-#: src/cong-menus.c:1276
+#: src/cong-menus.c:1303
 msgid "/File/Save _As..."
 msgstr "/Soubor/Uložit _jako..."
 
-#: src/cong-menus.c:1277
+#: src/cong-menus.c:1304
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Soubor/Uložit _kopii..."
 
-#: src/cong-menus.c:1280
+#: src/cong-menus.c:1307
 msgid "/File/Print Previe_w..."
 msgstr "/Soubor/Ná_hled před tiskem..."
 
-#: src/cong-menus.c:1281
+#: src/cong-menus.c:1308
 msgid "/File/_Print..."
 msgstr "/Soubor/Vy_tisknout..."
 
-#: src/cong-menus.c:1285
+#: src/cong-menus.c:1312
 msgid "/File/_Revert"
 msgstr "/Soubor/V_rátit"
 
-#: src/cong-menus.c:1288 src/cong-menus.c:1353
+#: src/cong-menus.c:1315 src/cong-menus.c:1381
 msgid "/File/_Import..."
 msgstr "/Soubor/_Importovat..."
 
-#: src/cong-menus.c:1289
+#: src/cong-menus.c:1316
 msgid "/File/_Export..."
 msgstr "/Soubor/_Exportovat..."
 
-#: src/cong-menus.c:1291
+#: src/cong-menus.c:1318
 msgid "/File/Proper_ties"
 msgstr "/Soubor/_Vlastnosti"
 
-#: src/cong-menus.c:1293 src/cong-menus.c:1355
+#: src/cong-menus.c:1320 src/cong-menus.c:1383
 msgid "/File/_Close"
 msgstr "/Soubor/_Zavřít"
 
-#: src/cong-menus.c:1294 src/cong-menus.c:1356
+#: src/cong-menus.c:1321 src/cong-menus.c:1384
 msgid "/File/_Quit"
 msgstr "/Soubor/U_končit"
 
-#: src/cong-menus.c:1296
+#: src/cong-menus.c:1323 src/cong-menus.c:1386
 msgid "/_Edit"
 msgstr "/_Úpravy"
 
-#: src/cong-menus.c:1297
+#: src/cong-menus.c:1324
 msgid "/Edit/_Undo"
 msgstr "/Úpravy/_Zpět"
 
-#: src/cong-menus.c:1298
+#: src/cong-menus.c:1325
 msgid "/Edit/_Redo"
 msgstr "/Úpravy/Z_novu"
 
-#: src/cong-menus.c:1299 src/cong-menus.c:1303 src/cong-menus.c:1309
-#: src/cong-menus.c:1311
+#: src/cong-menus.c:1326 src/cong-menus.c:1330 src/cong-menus.c:1336
+#: src/cong-menus.c:1338 src/cong-menus.c:1341
 msgid "/Edit/"
 msgstr "/Úpravy/"
 
-#: src/cong-menus.c:1300
+#: src/cong-menus.c:1327
 msgid "/Edit/Cu_t"
 msgstr "/Úpravy/_Vyjmout"
 
-#: src/cong-menus.c:1301
+#: src/cong-menus.c:1328
 msgid "/Edit/_Copy"
 msgstr "/Úpravy/_Kopírovat"
 
-#: src/cong-menus.c:1302
+#: src/cong-menus.c:1329
 msgid "/Edit/_Paste"
 msgstr "/Úpravy/V_ložit"
 
-#: src/cong-menus.c:1305
+#: src/cong-menus.c:1332
 msgid "/Edit/_Find..."
 msgstr "/Úpravy/_Hledat..."
 
-#: src/cong-menus.c:1306
+#: src/cong-menus.c:1333
 msgid "/Edit/Find Ne_xt"
 msgstr "/Úpravy/Hledat ná_sledující"
 
-#: src/cong-menus.c:1307
+#: src/cong-menus.c:1334
 msgid "/Edit/Find Pre_vious"
 msgstr "/Úpravy/Hledat _předchozí"
 
-#: src/cong-menus.c:1308
+#: src/cong-menus.c:1335
 msgid "/Edit/R_eplace..."
 msgstr "/Úpravy/Nah_radit..."
 
-#: src/cong-menus.c:1310
+#: src/cong-menus.c:1337
 msgid "/Edit/_Insert..."
 msgstr "/Úpravy/V_ložit..."
 
-#: src/cong-menus.c:1313
+#: src/cong-menus.c:1340
 msgid "/Edit/View _Source"
 msgstr "/Úpravy/Zobrazit _zdroj"
 
-#: src/cong-menus.c:1316 src/cong-menus.c:1359
+#: src/cong-menus.c:1342 src/cong-menus.c:1387
+msgid "/Edit/Prefere_nces"
+msgstr "/Úpravy/Nas_tavení"
+
+#: src/cong-menus.c:1345
 msgid "/Debug"
 msgstr "/Ladění"
 
-#: src/cong-menus.c:1317 src/cong-menus.c:1360
+#: src/cong-menus.c:1346
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr "/Ladění/Začít test systému hlášení chyb..."
 
-#: src/cong-menus.c:1318 src/cong-menus.c:1361
-msgid "/Debug/Document Types"
-msgstr "/Ladění/Typy dokumentů"
-
-#: src/cong-menus.c:1319
+#: src/cong-menus.c:1347
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Ladění/Transformovat DocBook do HTML"
 
-#: src/cong-menus.c:1320
+#: src/cong-menus.c:1348
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Ladění/Transformovat DocBook do XHTML"
 
-#: src/cong-menus.c:1321
+#: src/cong-menus.c:1349
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Ladění/Transformovat DocBook do nápovědy HTML"
 
-#: src/cong-menus.c:1322
+#: src/cong-menus.c:1350
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Ladění/Transformovat DocBook do nápovědy Java"
 
-#: src/cong-menus.c:1323
+#: src/cong-menus.c:1351
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Ladění/Transformovat DocBook do FO"
 
-#: src/cong-menus.c:1325
+#: src/cong-menus.c:1353
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Ladění/Náhled XSL:FO"
 
-#: src/cong-menus.c:1327
+#: src/cong-menus.c:1355
 msgid "/Debug/DTD"
 msgstr "/Ladění/DTD"
 
-#: src/cong-menus.c:1328 src/cong-menus.c:1362
+#: src/cong-menus.c:1356
 msgid "/Debug/Dialog"
 msgstr "/Ladění/Dialog"
 
-#: src/cong-menus.c:1329 src/cong-menus.c:1363
+#: src/cong-menus.c:1357
 msgid "/Debug/Progress Checklist"
 msgstr "/Ladění/Zaškrtávací seznam průběhu"
 
-#: src/cong-menus.c:1330
+#: src/cong-menus.c:1358
 msgid "/Debug/Document Message Log"
 msgstr "/Ladění/Záznam zpráv dokumentu"
 
-#: src/cong-menus.c:1331
+#: src/cong-menus.c:1359
 msgid "/Debug/Document Signal Log"
 msgstr "/Ladění/Záznam signálů dokumentu"
 
-#: src/cong-menus.c:1332 src/cong-menus.c:1364
+#: src/cong-menus.c:1360
 msgid "/Debug/Information Alert"
 msgstr "/Ladění/Upozornění na informaci"
 
-#: src/cong-menus.c:1333 src/cong-menus.c:1365
+#: src/cong-menus.c:1361
 msgid "/Debug/Glade Test"
 msgstr "/Ladění/Test Glade"
 
-#: src/cong-menus.c:1334
+#: src/cong-menus.c:1362
 msgid "/Debug/Insert XML Fragment"
 msgstr "/Ladění/Vložit fragment XML"
 
-#: src/cong-menus.c:1335
+#: src/cong-menus.c:1363
 msgid "/Debug/Command Test"
 msgstr "/Ladění/Test příkazů"
 
-#: src/cong-menus.c:1338
+#: src/cong-menus.c:1366
 msgid "/_Tools"
 msgstr "/_Nástroje"
 
-#: src/cong-menus.c:1340 src/cong-menus.c:1368
+#: src/cong-menus.c:1368 src/cong-menus.c:1399
 msgid "/_Help"
 msgstr "/Nápo_věda"
 
-#: src/cong-menus.c:1341 src/cong-menus.c:1369
+#: src/cong-menus.c:1369 src/cong-menus.c:1400
 msgid "/Help/_Contents"
 msgstr "/Nápověda/_Obsah"
 
-#: src/cong-menus.c:1342 src/cong-menus.c:1370
+#: src/cong-menus.c:1370 src/cong-menus.c:1401
 msgid "/Help/_About"
 msgstr "/Nápověda/O _aplikaci"
 
@@ -1596,7 +1590,7 @@ msgid "Content model for <tt>%s</tt> elements"
 msgstr "Model obsahu pro elementy <tt>%s</tt>"
 
 #: src/cong-node-properties-dialog.c:1055
-#: src/cong-node-properties-dialog.c:1142
+#: src/cong-node-properties-dialog.c:1141
 msgid "DTD"
 msgstr "DTD"
 
@@ -1636,86 +1630,90 @@ msgstr ""
 msgid "Show Details"
 msgstr "Zobrazit detaily"
 
-#: src/cong-plugin.c:397 src/cong-plugin.c:433
+#: src/cong-plugin.c:405 src/cong-plugin.c:441
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate nemohl najít informace o zobrazování nového souboru"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:832
+#: src/cong-plugin.c:840
 #, c-format
 msgid "<%s> property dialog"
 msgstr "Dialog vlastností <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:835
+#: src/cong-plugin.c:843
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Poskytuje dialog Vlastnosti pro element <%s>"
 
-#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
+#: src/cong-primary-window.c:316 src/cong-primary-window.c:317
 msgid "Open document"
 msgstr "Otevřít dokument"
 
-#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
+#: src/cong-primary-window.c:324 src/cong-primary-window.c:325
 msgid "New document"
 msgstr "Nový dokument"
 
-#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
+#: src/cong-primary-window.c:343 src/cong-primary-window.c:344
 msgid "Save document"
 msgstr "Uložit dokument"
 
-#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
+#: src/cong-primary-window.c:351 src/cong-primary-window.c:352
 msgid "Undo"
 msgstr "Zpět"
 
-#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
+#: src/cong-primary-window.c:358 src/cong-primary-window.c:359
 msgid "Redo"
 msgstr "Znovu"
 
-#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
+#: src/cong-primary-window.c:377 src/cong-primary-window.c:378 src/tree.c:164
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
+#: src/cong-primary-window.c:384 src/cong-primary-window.c:385
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
-#: src/xmledit.c:166
+#: src/cong-primary-window.c:391 src/cong-primary-window.c:392
+#: src/xmledit.c:157
 msgid "Paste"
 msgstr "Vložit"
 
-#: src/cong-primary-window.c:520
+#: src/cong-primary-window.c:521
 msgid "Overview"
 msgstr "Přehled"
 
-#: src/cong-primary-window.c:530
+#: src/cong-primary-window.c:531
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/cong-primary-window.c:539
+#: src/cong-primary-window.c:540
 msgid "Raw XML"
 msgstr "Přímo XML"
 
-#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
+#: src/cong-primary-window.c:672 src/cong-primary-window.c:691
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 
-#: src/cong-primary-window.c:770
+#: src/cong-primary-window.c:771
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
 
-#: src/cong-util.c:317 src/plugin-docbook.c:1015
+#: src/cong-util.c:322 src/plugin-docbook.c:1015
 msgid "Printing XSL Formatting Objects"
 msgstr "Tisk formátovacích objektů XSL"
 
-#: src/cong-util.c:361
+#: src/cong-util.c:366
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Toto bude časem výsledek cong_util_print_xslfo"
 
-#: src/cursor.c:99
+#: src/cong-util.c:998
+msgid "(no description available)"
+msgstr "(popis není k dispozici)"
+
+#: src/cursor.c:100
 #, c-format
 msgid "Split <%s> element"
 msgstr "Rozdělit element <%s>"
@@ -2170,70 +2168,67 @@ msgstr "Element šablony XSL"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Element pro zobrazení pravidel šablon ve stylesheetu XSL"
 
-#: src/popup.c:131
-msgid "(no description available)"
-msgstr "(popis není k dispozici)"
-
-#: src/popup.c:184
+#: src/popup.c:275
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Použít tag span: %s"
 
-#: src/popup.c:265
+#: src/popup.c:356
 msgid "Remove Span Tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:373
+#: src/popup.c:455
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:954
+#: src/popup.c:972
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:964
+#: src/popup.c:982
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:972
+#: src/popup.c:990
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:983
+#: src/popup.c:1001
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:1014
+#: src/popup.c:1034
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:1022
+#: src/popup.c:1043
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:1030
+#: src/popup.c:1052
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:1047
+#: src/popup.c:1071
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1072
+#: src/popup.c:1087
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
-#: src/tree.c:42
+#: src/tree.c:35
 #, c-format
 msgid "Insert sibling: %s"
 msgstr "Vložit sourozence: %s"
 
-#: src/tree.c:90
+#: src/tree.c:75
 #, c-format
 msgid "Insert child: %s"
 msgstr "Vložit potomka: %s"
 
-#: src/xmldata.c:446
+#. create description for dialog
+#: src/xmldata.c:461
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -2242,26 +2237,33 @@ msgstr ""
 "Aby byl element \"%s\" platný, vyžaduje potomka. Vyberte prosím jeden z "
 "následujících typů potomků."
 
+#. FIXME: put in a better description for the name
 #. select a dialog element
-#: src/xmldata.c:450
+#: src/xmldata.c:466
 msgid "Required Children Choices"
 msgstr "Vyžadované volby potomků"
 
-#: src/xmledit.c:244
+#: src/xmledit.c:235
 msgid "Paste Under"
 msgstr "Vložit pod"
 
-#: src/xmledit.c:287
+#: src/xmledit.c:278
 msgid "Paste Before"
 msgstr "Vložit před"
 
-#: src/xmledit.c:329
+#: src/xmledit.c:320
 msgid "Paste After"
 msgstr "Vložit za"
 
-#: src/xmledit.c:368
+#: src/xmledit.c:359
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
+
+#~ msgid "Document Types"
+#~ msgstr "Typy dokumentů"
+
+#~ msgid "/Debug/Document Types"
+#~ msgstr "/Ladění/Typy dokumentů"
 
 #~ msgid "Calculating document start"
 #~ msgstr "Počítám začátek dokumentu"
