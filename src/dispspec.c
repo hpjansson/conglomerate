@@ -11,6 +11,8 @@
 #include <ttree.h>
 #include <xml.h>
 
+#include <libxml/tree.h>
+#include <libxml/debugXML.h>
 #include "global.h"
 
 
@@ -43,7 +45,10 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt);
 
-CongDispspec* cong_dispspec_new_from_file(const char *name)
+CongDispspecElement*
+cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element);
+
+CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 {
 	CongDispspec* ds;
 
@@ -69,6 +74,44 @@ CongDispspec* cong_dispspec_new_from_file(const char *name)
 
 	return ds;
 }
+
+CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
+{
+	CongDispspec* ds;
+
+	xmlDocPtr doc = xmlParseFile(name);
+	xmlDebugDumpDocument(stdout,doc);
+
+	ds = g_new0(CongDispspec,1);
+
+	/* Convert the XML into our internal representation: */
+	if (doc->children)
+	{
+		if (doc->children) {
+			/* doc->children->name should equal "dispspec"*/
+			xmlNodePtr cur;
+
+			for (cur = doc->children->children; cur; cur=cur->next) {
+				/* Locate the <element-list> tag: */
+				if (0==strcmp(cur->name,"element-list")) {
+
+					xmlNodePtr xml_element;
+					for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
+						CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
+						
+						cong_dispspec_add_element(ds,element);
+					}
+
+				}
+			}
+		}
+	}	
+
+	xmlFreeDoc(doc);
+
+	return ds;	
+}
+
 
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 {
@@ -447,6 +490,7 @@ cong_dispspec_lookup_element(CongDispspec *ds, const char* tagname)
 	CongDispspecElement* element = ds->first;
 
 	while (element) {
+		g_assert(element->tagname);
 		if (0==strcmp(element->tagname,tagname)) {
 			return element;
 		}
@@ -559,3 +603,90 @@ cong_dispspec_element_new_from_ttree(TTREE* tt)
 	return element;
 }
 
+CongDispspecElement*
+cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element)
+{
+	CongDispspecElement* element;
+
+	g_message("got xml element\n");
+
+	element = g_new0(CongDispspecElement,1);
+
+	/* Extract tagname: */
+	{
+		xmlChar* tag = xmlGetProp(xml_element, "tag");
+		if (tag) {
+			element->tagname = g_strdup(tag);			
+		} else {
+			element->tagname = g_strdup("unknown-tag");
+		}
+	}
+
+	/* Extract username: */
+	{
+		xmlNodePtr child;
+
+		for (child = xml_element->children; child; child=child->next) {
+			if (0==strcmp(child->name,"name")) {
+				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
+				if (str) {
+					element->username = g_strdup(str);					
+				}
+			}
+		}
+		
+		if (NULL==element->username) {
+			element->username = g_strdup(element->tagname);
+		}
+	}
+
+	/* Extract type: */
+	{
+		xmlChar* type = xmlGetProp(xml_element,"type");
+
+		element->type = CONG_ELEMENT_TYPE_UNKNOWN;			
+		
+		if (type) {
+			if (0==strcmp(type,"structural")) {
+				element->type = CONG_ELEMENT_TYPE_STRUCTURAL;			
+			} else if (0==strcmp(type,"span")) {
+				element->type = CONG_ELEMENT_TYPE_SPAN;			
+			} else if (0==strcmp(type,"insert")) {
+				element->type = CONG_ELEMENT_TYPE_INSERT;			
+			}
+		}
+	}
+
+	/* Extract collapseto: */
+	{
+		xmlNodePtr child;
+
+		for (child = xml_element->children; child; child=child->next) {
+			if (0==strcmp(child->name,"collapseto")) {
+				element->collapseto = TRUE;
+			}
+		}
+	}
+
+	/* Extract colour: */
+	{
+		xmlChar* col_text = xmlGetProp(xml_element,"color");
+		unsigned int col;
+
+		if (col_text) {
+			col = get_rgb_hex(col_text);
+		} else {
+			col = 0x00ffffff;  /* White is default */
+		}
+
+		col_to_gcol(&element->col, col);
+
+		/* We don't make any attempt to share GCs between different elements for now */
+		element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+		gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
+		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
+		gdk_gc_set_foreground(element->gc, &element->col);
+	}
+
+	return element;
+}

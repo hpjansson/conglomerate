@@ -12,7 +12,7 @@ int open_document_do(const char *doc_name, const char *ds_name)
 	TTREE *xml_in;
 	FILE *xml_f;
 
-	the_globals.ds = cong_dispspec_new_from_file(ds_name);
+	the_globals.ds = cong_dispspec_new_from_ds_file(ds_name);
 	if (the_globals.ds==NULL) {
 	  return(TRUE);  /* Invalid displayspec. */	  
 	}

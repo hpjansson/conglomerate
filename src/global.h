@@ -336,7 +336,8 @@ int open_document_do(const char *doc_name, const char *ds_name);
 int gui_window_new_document_make();
 void xmlview_destroy(int free_xml);
 
-CongDispspec* cong_dispspec_new_from_file(const char *name);
+CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
+CongDispspec* cong_dispspec_new_from_xds_file(const char *name);
 void cong_dispspec_delete(CongDispspec *dispspec);
 
 char *cong_dispspec_name_name_get(TTREE *t);

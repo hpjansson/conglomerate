@@ -172,14 +172,14 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	TTREE *xml_in;
 	FILE *xml_f;
 
-	the_globals.ds = cong_dispspec_new_from_file(ds_name);
+	the_globals.ds = cong_dispspec_new_from_xds_file(ds_name);
 	if (!the_globals.ds) {
 	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
 	  return(TRUE);  /* Invalid displayspec. */
 	}
 
-	/* Use libxml to load the doc: */
 #if 0
+	/* Use libxml to load the doc: */
 	{
 	  #if 1
 	  // Use special DocBook loader for DocBook; should handle SGML better...
@@ -191,6 +191,7 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	  xml_in = convert_libxml_to_ttree_doc(doc);
 	}
 #else
+	/* Use the flux loaders to load the doc: */
 	xml_f = fopen(doc_name, "rt");
 	if (!xml_f) {
 	  g_warning("Problem opening doc file \"%s\"\n", doc_name);
@@ -228,12 +229,12 @@ gint test_open(GtkWidget *w, gpointer data)
 	doc_name = get_file_name("Select an XML document");
 	if (!doc_name) return(TRUE);
 
-	ds_name = get_file_name("Select a matching displayspec");
+	ds_name = get_file_name("Select a matching XDS displayspec");
 	if (!ds_name) return(TRUE);
 
 	test_open_do(doc_name, ds_name);
 #else
-	test_open_do("../examples/readme.xml", "../examples/readme.ds");
+	test_open_do("../examples/readme.xml", "../examples/readme.xds");
 #endif
 	return(TRUE);
 }
