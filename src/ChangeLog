@@ -1,5 +1,9 @@
 2003-08-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c, cong-text-cache.c, cong-text-cache.h
+
+	Rendering of the selection
+	
 	* cong-editor-area-text-fragment.c, cong-editor-area-text-fragment.h
 
 	Text fragments are now implemented directly in terms of PangoLayoutLines

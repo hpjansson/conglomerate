@@ -70,6 +70,11 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
 							  int stripped_byte_offset,
 							  int *original_byte_offset);
 
+gboolean
+cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,
+							  int original_byte_offset,
+							  int *stripped_byte_offset);
+
 G_END_DECLS
 
 #endif

@@ -54,6 +54,10 @@ static CongTextCacheSpan *
 get_text_span_at_stripped_byte_offset (CongTextCache *text_cache, 
 				       int byte_offset);
 
+static CongTextCacheSpan *
+get_text_span_at_original_byte_offset (CongTextCache *text_cache, 
+				       int byte_offset);
+
 /* Exported function definitions: */
 CongTextCache*
 cong_text_cache_new (gboolean strip_whitespace,
@@ -219,11 +223,36 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
 	if (text_span) {
 		*original_byte_offset = text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset);
 
+#if 0
 		g_message("stripped byte offset %i -> original offset %i", stripped_byte_offset, *original_byte_offset);
+#endif
 		return TRUE;
 	}
 
 	return FALSE;
+}
+
+gboolean
+cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,
+							  int original_byte_offset,
+							  int *stripped_byte_offset)
+{
+	CongTextCacheSpan *text_span;
+
+	g_return_val_if_fail(text_cache, FALSE);
+	g_return_val_if_fail(stripped_byte_offset, FALSE);
+
+	text_span = get_text_span_at_original_byte_offset(text_cache, original_byte_offset);
+	
+	if (text_span) {
+		*stripped_byte_offset = text_span->stripped_first_byte_offset + (original_byte_offset - text_span->original_first_byte_offset);
+
+#if 0
+		g_message("original byte offset %i -> stripped offset %i", original_byte_offset, *stripped_byte_offset);
+#endif
+		return TRUE;
+	}
+
 }
 
 
@@ -257,6 +286,29 @@ get_text_span_at_stripped_byte_offset (CongTextCache *text_cache,
 		g_assert(byte_offset >= text_span->stripped_first_byte_offset);
 
 		if (byte_offset < (text_span->stripped_first_byte_offset + text_span->byte_count) ) {
+			return text_span;
+		}
+	}
+
+	return NULL;
+}
+
+static CongTextCacheSpan *
+get_text_span_at_original_byte_offset (CongTextCache *text_cache, 
+				       int byte_offset)
+{
+	GList *iter;
+
+	g_return_val_if_fail(text_cache, NULL);
+	
+	/* Scan through the text spans, looking for the byte offset: */
+	for (iter = text_cache->list_of_span; iter; iter = iter->next) {
+		CongTextCacheSpan *text_span = iter->data;
+		g_assert(text_span);
+
+		g_assert(byte_offset >= text_span->original_first_byte_offset);
+
+		if (byte_offset < (text_span->original_first_byte_offset + text_span->byte_count) ) {
 			return text_span;
 		}
 	}
