@@ -1,3 +1,10 @@
+2003-03-05  Geert Stappers  <stappers@stappers.nl>
+
+	* Makefile.am
+
+	Gnome libraries are designed for DATADIR/pixmaps/PACKAGE_NAME,
+	not DATADIR/PACKAGE_NAME/pixmaps
+
 2003-02-19  Geert Stappers  <stappers@stappers.nl>
 
 	* ilogo100.xpm
