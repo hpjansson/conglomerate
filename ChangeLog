@@ -1,3 +1,8 @@
+2004-06-14  David Malcolm  <dmalcolm@redhat.com>
+
+	* conglomerate.spec.in: Added pixmaps/conglomerate/*.png
+	as suggested by Nickolay V. Shmyrev in http://lists.copyleft.no/pipermail/conglomerate-devel/2004-June/002764.html
+	
 2004-06-08  David Malcolm  <dmalcolm@redhat.com>
 
 	* configure.in: Applied fix for bug 143937 by 
