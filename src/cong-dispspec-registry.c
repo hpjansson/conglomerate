@@ -64,16 +64,12 @@ visit_func(const gchar *rel_path,
 	return TRUE;
 }
 
-CongDispspecRegistry*
-cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window)
+/* Add all disspecs found in directory to an existing DispspecRegistry */
+void
+cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_directory, GtkWindow *toplevel_window, gboolean raise_errors)
 {
-	CongDispspecRegistry* registry;
 	GnomeVFSResult vfs_result;
 	struct LoadingDetails details;
-
-	g_return_val_if_fail(xds_directory, NULL);
-
-	registry = g_new0(CongDispspecRegistry,1);
 
 	details.registry=registry;
 	details.path_uri=gnome_vfs_uri_new(xds_directory);
@@ -85,7 +81,7 @@ cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_windo
 					       visit_func,
 					       (gpointer)&details);
 
-	if (vfs_result!=GNOME_VFS_OK) {
+	if (raise_errors && vfs_result!=GNOME_VFS_OK) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
 										      _("Conglomerate could not read its registry of document types."),
 										      xds_directory,
@@ -95,13 +91,23 @@ cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_windo
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 
 		gnome_vfs_uri_unref(details.path_uri);
-
-		g_free(registry);
-		
-		return NULL;
 	}
 
 	gnome_vfs_uri_unref(details.path_uri);
+}	
+
+/* Create a new DispspecRegistry.
+   If a directory is specified, read disppsec files from it and insert them into registry.  If not, returned registry is empty. */
+CongDispspecRegistry*
+cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window)
+{
+	CongDispspecRegistry* registry;
+
+	registry = g_new0(CongDispspecRegistry,1);
+
+	if (xds_directory != NULL) {
+		cong_dispspec_registry_add_dir (registry, xds_directory, toplevel_window, 1);
+	}
 
 	return registry;
 }

@@ -31,6 +31,8 @@
 #include "cong-document.h"
 #include "cong-font.h"
 
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "cong-fake-plugin-hooks.h"
 
 #define CORRECT_CLIPBOARD 1
@@ -309,55 +311,69 @@ static gboolean
 cong_app_private_load_displayspecs (CongApp *app,
 				    GtkWindow *toplevel_window)
 {
-#if 1
-	gchar*      xds_directory = gnome_program_locate_file(PRIVATE(app)->gnome_program,
-							      GNOME_FILE_DOMAIN_APP_DATADIR,
-							      "dispspecs",
-							      FALSE,
-							      NULL);
-#else
-	gchar* current_dir = g_get_current_dir();
-	gchar* xds_directory = g_strdup_printf(DATADIR"/conge/dispspecs",current_dir);
-	g_free(current_dir);
-#endif
+	GSList *ds_path_list;
+	GSList *path;
 
-	g_message(PKGDATADIR);
+	/* Create new empty registry */
+	PRIVATE(app)->ds_registry = cong_dispspec_registry_new(NULL, toplevel_window);
+	if (PRIVATE(app)->ds_registry==NULL) {
+		return FALSE;
+	}
+	
+	/* Dispspec search goes from the start of the list to the end, so
+	   we need to load in the most-trusted sources first */
 
-	if (xds_directory) {
-		g_message("Loading xds files from \"%s\"\n", xds_directory);
-		PRIVATE(app)->ds_registry = cong_dispspec_registry_new(xds_directory, toplevel_window);
+	/* Load gconf-specified directories */
 
-		/* If no xds files were found, perhaps the program hasn't been installed yet (merely built): */
-		if (cong_dispspec_registry_get_num(PRIVATE(app)->ds_registry)==0) {
-
-			gchar *why_failed = g_strdup_printf(_("Conglomerate could not load any xds files from the directory \"%s\""), xds_directory);
-			GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-								  _("Conglomerate could not find any descriptions of document types."),
-								  why_failed,
-								  _("If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it."));
-			g_free(why_failed);
-			cong_error_dialog_run(GTK_DIALOG(dialog));
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-			return FALSE;
+	ds_path_list = gconf_client_get_list(PRIVATE(app)->gconf_client,
+					     "/apps/conglomerate/dispspec-paths",
+					     GCONF_VALUE_STRING,
+					     NULL);
+	
+	if (ds_path_list == NULL) {
+		/* Fallback in the case where there is nothing in GConf.
+		   Look in application default directory for dispspecs. */
+		gchar* xds_directory
+			= gnome_program_locate_file(PRIVATE(app)->gnome_program,
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "dispspecs",
+						    FALSE,
+						    NULL);
+		ds_path_list = g_slist_append (ds_path_list, (gpointer)xds_directory);
+	}
+		
+	/* Now run through the path list in order, adding dispspecs to
+	   the registry from each dir. */
+	path = ds_path_list;
+	while (path != NULL) {
+		if (path->data != NULL) {
+			gchar *realpath;
+			realpath = gnome_vfs_expand_initial_tilde((char *)(path->data));
+			g_message("Loading xds files from \"%s\"\n", realpath);
+			cong_dispspec_registry_add_dir(PRIVATE(app)->ds_registry, realpath, toplevel_window, 0);
+			g_free (realpath);
 		}
+		path = g_slist_next(path);
+	}
+	g_slist_free (ds_path_list);
+	
+	/* If no xds files were found anywhere, perhaps the program
+	   hasn't been installed yet (merely built): */
+	if (cong_dispspec_registry_get_num(PRIVATE(app)->ds_registry)==0) {
 		
-		g_free(xds_directory);
-		
-		if (PRIVATE(app)->ds_registry==NULL) {
-			return FALSE;
-		}
-		
-		cong_dispspec_registry_dump(PRIVATE(app)->ds_registry);
-	} else {
+		gchar *why_failed = g_strdup_printf(_("Conglomerate could not load any xds files"));
 		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-							  "Conglomerate could not find its registry of document types.",
-							  "You must run the program from the \"src\" directory used to build it.",
-							  "This is a known problem and will be fixed.");
+							  _("Conglomerate could not find any descriptions of document types."),
+							  why_failed,
+							  _("If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it.  If you have changed the default setting for the display spec path, please double check that as well."));
+		g_free(why_failed);
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		return FALSE;
 	}
-
+		
+	cong_dispspec_registry_dump(PRIVATE(app)->ds_registry);
+	
 	return TRUE;
 }
 

@@ -1,6 +1,13 @@
+2003-10-26  Boris Goldowsky  <boris@alum.mit.edu>
+ 
+	* cong-app.c, cong-dispspec-registry.c, cong-dispspec-registry.h
+ 
+	If there is a gconf key specifying dispspec directories, 
+	load them from there instead of using application's default directory. 
+
 2003-10-25  Robert Varga <frozenfingers@xs4all.ro>
 
-        * cong-location.h
+	* cong-location.h
        
 	gtk-doc comments.
 	
