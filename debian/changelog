@@ -1,11 +1,13 @@
 conglomerate (0.7.14-4.1) UNRELEASED; urgency=low
 
   * expecting new upstream version
+    - ships with a Linda override file
   * rules:
     - other way to skip generation of gtkdoc
     - install the ChangeLog from the src directory
+    - install the Linda override file
 
- -- Geert Stappers <stappers@stappers.nl>  Fri, 20 Aug 2004 13:57:27 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 30 Aug 2004 14:09:40 +0200
 
 conglomerate (0.7.14-4) unstable; urgency=low
 

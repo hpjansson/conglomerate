@@ -103,6 +103,7 @@ install-arch: build-arch
 	install -m 755 src/conglomerate $(CURDIR)/debian/conglomerate/usr/bin/conglomerate
 
 	install -m 644 debian/conglomerate.lintian-override $(CURDIR)/debian/conglomerate/usr/share/lintian/overrides/conglomerate
+	install -m 644 debian/conglomerate.linda-override $(CURDIR)/debian/conglomerate/usr/share/linda/overrides/conglomerate
 
 	# and for the debug package conglomerate-dbg
 	install -m 755 src/conglomerate-dbg $(CURDIR)/debian/conglomerate-dbg/usr/bin/conglomerate-dbg

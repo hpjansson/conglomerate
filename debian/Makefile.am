@@ -19,6 +19,7 @@ debian_DISTS = \
 # package related files
 pkg_DISTS = \
     conglomerate.dirs \
+    conglomerate.linda-override \
     conglomerate.lintian-override \
     conglomerate.postinst \
     conglomerate.prerm \
