@@ -2,6 +2,7 @@
 _Name=Conglomerate XML Editor
 _Comment=Edit XML files
 Exec=conglomerate %U
+Icon=conglomerate-icon-16.png
 Terminal=0
 Type=Application
 Categories=Application;Office;TextEditor;

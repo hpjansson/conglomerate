@@ -2,5 +2,12 @@
 
 	* Makefile.am
 
+	Added conglomerate-icon-16.png.
+	Please update bugzilla #115930 when you change the image
+
+2003-06-25  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am
+
 	Created this ChangeLog, a place to tell about "pixmaps"
 
