@@ -247,6 +247,21 @@ cong_util_make_file_filter (const gchar *name,
 			    const gchar* mime_type);
 
 
+gint 
+cong_util_get_byte_offset (const gchar *string, 
+			   gint char_offset);
+
+typedef struct CongWord CongWord;
+struct CongWord
+{
+	int start_byte_offset;
+	int length_in_bytes;
+};
+
+GList*
+cong_util_get_words (PangoLanguage *language,
+		     const gchar *string);
+
 G_END_DECLS
 
 #endif

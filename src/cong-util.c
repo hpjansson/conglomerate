@@ -743,7 +743,7 @@ cong_element_description_new (const gchar *ns_uri,
 
 	element_desc = g_new0 (CongElementDescription, 1);
 
-	if (element_desc->ns_uri) {
+	if (ns_uri) {
 		element_desc->ns_uri = g_strdup (ns_uri);
 	}
 	element_desc->local_name = g_strdup (local_name);
@@ -869,7 +869,7 @@ cong_element_description_matches_node (const CongElementDescription *element_des
 	}
 
 	if (node->ns) {
-		return 0==strcmp(node->ns->href, element_desc->ns_uri);
+		return cong_util_ns_uri_equality (node->ns->href, element_desc->ns_uri);
 	} else {
 		return (NULL == element_desc->ns_uri);
 	}
@@ -1348,7 +1348,9 @@ make_element_description_list_callback (CongDocument *doc, CongNodePtr node, gpo
 		GList *iter = *list;
 
 		while (iter) {
-			if (cong_element_description_matches_node ((const CongElementDescription*)iter->data,
+			const CongElementDescription *element_desc = (const CongElementDescription*)iter->data;
+
+			if (cong_element_description_matches_node (element_desc,
 								   node)) {
 				/* Got a match; bail out: */
 				return FALSE;
@@ -1654,3 +1656,78 @@ cong_util_run_add_dtd_dialog (CongDocument *doc,
 	}
 }
 
+
+gint 
+cong_util_get_byte_offset (const gchar *string, 
+			   gint char_offset)
+{
+	const gchar *result_pos;
+
+	g_return_val_if_fail (string, 0);
+	g_return_val_if_fail (char_offset>=0, 0);
+
+	result_pos = g_utf8_offset_to_pointer(string, char_offset);
+	g_assert(result_pos);
+
+	return result_pos - string;
+}
+
+GList*
+cong_util_get_words (PangoLanguage *language,
+		     const gchar *string)
+{
+	GList *result = NULL;
+	PangoLogAttr *pango_log_attrs = NULL;
+	int attrs_len = 0;
+	int start_of_word_char_index;
+
+	g_return_val_if_fail (string, NULL);
+
+	attrs_len = g_utf8_strlen (string,-1)+1;
+	pango_log_attrs = g_new (PangoLogAttr, attrs_len);
+	
+	pango_get_log_attrs (string,
+			     strlen(string), /* length in bytes */
+			     -1,
+			     language,
+			     pango_log_attrs,
+			     attrs_len);
+
+	start_of_word_char_index = 0;
+
+	while (start_of_word_char_index < attrs_len) {
+		/* Find start of word: */
+		if (!pango_log_attrs[start_of_word_char_index].is_word_start) {
+			start_of_word_char_index++;
+		} else {
+			int length = 1;
+
+			while (start_of_word_char_index+length < attrs_len) {
+				/* Find end of word: */
+				if (!pango_log_attrs[start_of_word_char_index + length].is_word_end) {
+				       length++;
+				} else {
+					/* Got a word: */
+					CongWord *new_word = g_new0 (CongWord, 1);
+					new_word->start_byte_offset = cong_util_get_byte_offset (string, 
+												 start_of_word_char_index);
+					new_word->length_in_bytes = cong_util_get_byte_offset (string, 
+											       start_of_word_char_index+length) - new_word->start_byte_offset;
+					result = g_list_append (result,
+								new_word);
+					start_of_word_char_index+=length;
+					length = 0;
+					break;
+				}
+			}
+
+			/* Finish outer loop if no word found: */
+			if (length>0) {
+				break;
+			}
+			
+		}
+	}
+
+	return result;
+}
