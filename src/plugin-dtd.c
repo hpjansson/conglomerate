@@ -393,6 +393,8 @@ cong_dtd2rng_converter_should_element_have_define (CongDTD2RNGConverter *convert
 xmlDocPtr
 cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 {
+	xmlNodePtr choice_node;
+
 	g_return_val_if_fail (converter, NULL);
 
 
@@ -419,7 +421,6 @@ cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 						       converter->xml_ns,
 						       "start",
 						       NULL);
-		xmlNodePtr choice_node;
 
 		xmlAddChild (converter->grammar_node,
 			     converter->start_node);

@@ -1,3 +1,9 @@
+2004-03-02  Geert Stappers <stappers@stappers.nl>
+
+	* plugin-dtd.c
+
+	Fixed C99ism build problem on gcc-2.95.4
+
 2004-03-01  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-dispspec-element.c, cong-dispspec.c, cong-document.c, cong-document.h, cong-marshal.c, cong-marshal.h, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-source-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h, plugin-docbook.c, plugin-lists-node-element-listitem.c
