@@ -1,5 +1,9 @@
 2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-edit-find-and-replace.c, cong-edit-find-and-replace.h, Makefile.am
+
+	New files
+
 	* cong-file-properties.c, cong-util.c, cong-util.h
 
 	Moved cong_util_load_glade_file into correct file; fixed comments

@@ -36,6 +36,7 @@ conglomerate_SOURCES =      \
   cong-document.h           \
   cong-document-traversal.h \
   cong-dtd.h                \
+  cong-edit-find-and-replace.h \
   cong-editor-area.h        \
   cong-editor-area-bin.h    \
   cong-editor-area-border.h \
@@ -138,6 +139,7 @@ conglomerate_SOURCES =      \
   cong-document-traversal.c \
   cong-dom-view.c           \
   cong-dtd.c                \
+  cong-edit-find-and-replace.c \
   cong-editor-area.c        \
   cong-editor-area-bin.c    \
   cong-editor-area-border.c \
