@@ -104,10 +104,12 @@ cong_document_end_command (doc, cmd);
     <xi:include href="xml/cong-editor-area-container.xml"/>
     <xi:include href="xml/cong-editor-area-entity-decl.xml"/>
     <xi:include href="xml/cong-editor-area-entity-ref.xml"/>
+    <xi:include href="xml/cong-editor-area-expander.xml"/>
     <xi:include href="xml/cong-editor-area-flow-holder-blocks.xml"/>
     <xi:include href="xml/cong-editor-area-flow-holder-inlines.xml"/>
     <xi:include href="xml/cong-editor-area-flow-holder-single.xml"/>
     <xi:include href="xml/cong-editor-area-flow-holder.xml"/>
+    <xi:include href="xml/cong-editor-area-labelled.xml"/>
     <xi:include href="xml/cong-editor-area-line.xml"/>
     <xi:include href="xml/cong-editor-area-pixbuf.xml"/>
     <xi:include href="xml/cong-editor-area-spacer.xml"/>
@@ -133,6 +135,7 @@ cong_document_end_command (doc, cmd);
     <title>Plugins</title>
     <xi:include href="xml/cong-plugin.xml"/>
     <xi:include href="xml/cong-fake-plugin-hooks.xml"/>
+    <xi:include href="xml/plugin-admonition-node-element.xml"/>
     <xi:include href="xml/plugin-lists-area-listitem.xml"/>
     <xi:include href="xml/plugin-lists-node-element-listitem.xml"/>
     <xi:include href="xml/plugin-paragraph-area-paragraph.xml"/>
@@ -149,6 +152,7 @@ cong_document_end_command (doc, cmd);
     <xi:include href="xml/cong-attribute-wrapper-radio-button.xml"/>
     <xi:include href="xml/cong-dialog.xml"/>
     <xi:include href="xml/cong-eel.xml"/>
+    <xi:include href="xml/cong-eel-graphic-effects.xml"/>
     <xi:include href="xml/cong-enum-mapping.xml"/>
     <xi:include href="xml/cong-error-dialog.xml"/>
     <xi:include href="xml/cong-util.xml"/>
