@@ -1,3 +1,9 @@
+2004-01-14  Jeff Martin <jeff@custommonkey.org>
+	
+	* Makefile.am
+
+	Add cong_element_map_ref.xml, conventions.xml, doc_type_support.xml, global.ent, glossary.xml, notice_fdl.xml, notice_gpl.xml, row_xml_lang_attrib.xml, tbl_element_attrib.xml to list of entities
+
 2004-01-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* conglomerate.xml

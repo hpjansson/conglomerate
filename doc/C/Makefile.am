@@ -7,7 +7,9 @@ docname = conglomerate
 lang = C
 omffile = conglomerate-C.omf
 omfincfile = faq.xml
-entities = 
+entities = global.ent cong_element_map_ref.xml conventions.xml \
+	doc_type_support.xml glossary.xml notice_fdl.xml notice_gpl.xml \
+	row_xml_lang_attrib.xml tbl_element_attrib.xml xds_dtd_def.xml
 
 include $(top_srcdir)/xmldocs.make
 
