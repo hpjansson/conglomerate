@@ -36,7 +36,7 @@
 
 /* Include GnomePrint headers; these will eventually only be required by part of the interface */
 #include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-job.h>
 
 G_BEGIN_DECLS
 

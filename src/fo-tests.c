@@ -13,7 +13,7 @@
 #include "global.h"
 #include "fo.h"
 
-void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm)
+void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintJob *gpm)
 {
 	GnomePrintContext *gpc;
 	FoPrintContext *fpc;
@@ -23,7 +23,7 @@ void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm)
 	g_return_if_fail(xml_doc);
 	g_return_if_fail(gpm);
 
-	gpc = gnome_print_master_get_context (gpm);
+	gpc = gnome_print_job_get_context (gpm);
 
 	fpc = fo_print_context_new_from_gnome_print(gpc);
 
