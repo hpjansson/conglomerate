@@ -46,6 +46,7 @@ conglomerate_SOURCES =      \
   cong-editor-node-element-unknown.h \
   cong-editor-node-text.h        \
   cong-editor-node-unimplemented.h \
+  cong-editor-widget.h	\
   cong-editor-widget3-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
