@@ -402,7 +402,7 @@ generate_source_fragment_from_selection_doc (xmlDocPtr xml_doc,
 	g_assert (xml_doc);
 	g_assert (IS_CONG_DOCUMENT (target_doc));
 
-	/* FIXME:  
+	/* FIXME:  Bugzilla #130445
 	   Eventually we may want to do transformations/conversions based on the DOCTYPE of the input xml_doc and the type of the target CongDocument.
 
 	   For now we just strip off the headers and get at the content inside the top-level <xml-fragment> element:
@@ -463,7 +463,7 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 			}
 		}
 		
-		/* FIXME: eventually try HTML, and perhaps arbitrary plugins: */
+		/* FIXME: Bugzilla #130447 : eventually try HTML, and perhaps arbitrary plugins: */
 		
 		/* Try text: */
 		{
@@ -509,6 +509,7 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 #endif
 }
 
+/* FIXME: Bugzilla bug #130440:  Offer HTML as a selection format as well */
 enum CongTargetTypes {
 	CONG_TARGET_TYPE_TEXT,
 	CONG_TARGET_TYPE_XML
@@ -568,7 +569,7 @@ generate_xml_for_selection (const gchar* xml_fragment,
 	dtd_public_identifier = cong_document_get_dtd_public_identifier(source_doc);
 	
 	if (dtd_public_identifier) {
-		/* FIXME: add a DOCTYPE declaration if available */
+		/* FIXME: Bugzilla bug #130443 add a DOCTYPE declaration if available */
 		return g_strdup_printf ("<?xml version=\"1.0\" ?>\n"
 					"<xml-fragment>%s</xml-fragment>", xml_fragment);
 	} else {
@@ -597,6 +598,8 @@ generate_text_for_selection (CongApp *app,
 	g_free (doc_source);
 	
 	if (xml_doc_input) {
+
+		/* FIXME:  Bugzilla bug #130442: perhaps we should choose a stylesheet based on source doc type */
 		xml_doc_result = xsltApplyStylesheet (PRIVATE(app)->xsl_selection_to_text, xml_doc_input, NULL);
 		xmlFreeDoc (xml_doc_input);
 

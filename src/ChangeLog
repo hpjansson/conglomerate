@@ -2,6 +2,10 @@
 
 	* cong-app.c
 
+	Added references to the various Bugzilla bugs for the various FIXMEs to be deferred to the 1.0.0 milestone
+
+	* cong-app.c
+
 	Load and parse selection-handling stylesheet once, rather than every time a selection changes
 
 	* cong-app.c, cong-app.h
