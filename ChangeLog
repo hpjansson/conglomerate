@@ -1,3 +1,9 @@
+2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Increased version number to 0.7.5
+
 2003-10-04  Geert Stappers  <stappers@stappers.nl>
 
 	* configure.in: support for deb/patches
