@@ -16,4 +16,14 @@ Generates the README file.
 * mkcvstarball
 A `make dist` plus upload to a public place.
 
+* checkincludes
+Checks that all the header files have corresponding xi:includes in doc/reference/conglomerate-docs.sgml
 
+* mktypes
+Generates doc/reference/conglomerate.types - input file for gtk-doc
+
+* mkoverrides
+Generates doc/reference/conglomerate-overrides.txt - input file for gtk-doc
+
+* fixsections
+Updates doc/reference/conglomerate-sections.txt - input file for gtk-doc

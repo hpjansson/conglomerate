@@ -1,3 +1,9 @@
+2003-10-23  Robert Varga <frozenfingers@xs4all.nl>
+
+	* Makefile.am:
+	
+	Removed included shell scripts; replaced by actual scripts in uss.
+
 2003-10-19  Robert Varga <frozenfingers@xs4all.nl>
 
 	* Makefile.am

@@ -54,7 +54,7 @@ GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
 # If you need to override some of the declarations, place them in the
 # $(DOC_MODULE)-overrides.txt file and uncomment the second line here.
 DOC_OVERRIDES =
-# DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
+DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 
 
 
@@ -90,32 +90,7 @@ all-local: html-build.stamp
 
 scan-build.stamp: $(HFILE_GLOB)
 	@echo '*** Building conglomerate.types ***'
-	@echo '#include "global.h"' > conglomerate.types
-	for i in $(top_srcdir)/src/*.h ; do \
-	    if [[  $$i != "$(top_srcdir)/src/cong-editor-widget3-impl.h" && $$i != "$(top_srcdir)/src/global.h" ]] ; then \
-		echo "#include \"`basename $$i`\"" >> conglomerate.types ; \
-	    fi ; \
-	done
-	echo >> conglomerate.types
-# here we have a hack that outputs cong_editor_widget3_get_type istead of cong_editor_widget_get_type
-# (found in cong-editor-widget.h)
-# also, we ignore cong-editor-widget3-impl.h and global.h
-	for i in $(top_srcdir)/src/*.h ; do \
-	    if [[ $$i != "$(top_srcdir)/src/cong-editor-widget3-impl.h" && $$i != "$(top_srcdir)/src/global.h" ]] ; \
-	    then \
-		A=`grep 'get_type' $$i | grep -v '#define'` ; \
-		if [[ $$A != "" ]] ; \
-		then \
-		    B=`echo $$A | sed '{s/\ .void.;//g}'` ; \
-		    if [[ $$B = "cong_editor_widget_get_type" ]] ; \
-		    then \
-			echo 'cong_editor_widget3_get_type' >> conglomerate.types ; \
-		    else \
-			echo $$B >> conglomerate.types ; \
-		    fi ; \
-		fi ; \
-	    fi ; \
-	done
+	../../uss/mktypes $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate.types'
 	@echo '*** Scanning header files ***'
 	if grep -l '^..*$$' $(srcdir)/$(DOC_MODULE).types > /dev/null ; then \
 	    CC="$(GTKDOC_CC)" LD="$(GTKDOC_LD)" CFLAGS="$(GTKDOC_CFLAGS)" LDFLAGS="$(GTKDOC_LIBS)" gtkdoc-scangobj $(SCANOBJ_OPTIONS) --module=$(DOC_MODULE) --output-dir=$(srcdir) ;\
@@ -127,6 +102,8 @@ scan-build.stamp: $(HFILE_GLOB)
 	fi
 	cd $(srcdir) && \
 	  gtkdoc-scan --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) --ignore-headers="$(IGNORE_HFILES)" $(SCAN_OPTIONS) $(EXTRA_HFILES)
+	@echo '*** Building conglomerate-overrides.txt ***'
+	../../uss/mkoverrides $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt'
 	touch scan-build.stamp
 
 $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES): scan-build.stamp
@@ -137,56 +114,8 @@ $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES): scan-build.stamp
 tmpl-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_OVERRIDES)
 	@echo '*** Rebuilding template files ***'
 	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE)
-	@echo '*** Building conglomerate-overrides.txt ***'
-	@test -e $(srcdir)/conglomerate-overrides.txt && rm -f $(srcdir)/conglomerate-overrides.txt ; \
-	let CONGOBJNUM=0 ; \
-	for i in $(top_srcdir)/src/*.h ; \
-	do \
-	    ibase=`basename $$i` ; \
-	    if [[ $$ibase != "global.h" && $$ibase != "*.h" && $$ibase != "cong-editor-widget3-impl.h" ]] ; \
-	    then \
-		if [[ `grep -c 'get_type' $$i` -ne 0 ]] ; \
-		then \
-		    A=`grep -e 'get_type' $$i | grep -v '#define'` ; \
-		    B=$${A%%_get_type (void);} ; \
-		    C=`echo $$B | sed -e {s/_//g}` ; \
-		    D=`grep -i "struct $$C" $$i | grep -v "Class" | grep -v "Details" | grep -v "typedef" | sed {s/struct\ //1}` ; \
-		    if [[ $$D != "" ]] ; \
-		    then \
-			echo '<STRUCT>' >> $(srcdir)/conglomerate-overrides.txt ; \
-			echo '<NAME>'$$D'</NAME>' >> $(srcdir)/conglomerate-overrides.txt ; \
-			echo '</STRUCT>' >> $(srcdir)/conglomerate-overrides.txt ; \
-			echo 'Adding '$$D ; \
-			let CONGOBJNUM+=1 ; \
-		    fi ; \
-		fi ; \
-	    fi ; \
-	done ; \
-	echo "*** $$CONGOBJNUM object declarations found ***"
 	@echo '*** Adding object declarations to conglomerate-sections.txt ***'
-	mv $(srcdir)/conglomerate-sections.txt $(srcdir)/conglomerate-sections.txt.template
-	@FILE_LINE= ; \
-	let CONGOBJNUM=0 ; \
-	CONG_SECTIONS=`cat $(srcdir)/conglomerate-sections.txt.template` ; \
-	for line in $$CONG_SECTIONS ; \
-	do \
-	    [[ `echo "$$line" | grep "<FILE>"` != "" ]] && FILE_LINE=`echo "$$line" | grep "<FILE>"` ; \
-	    A=`expr match "$$line" '.*_TYPE'` ; \
-	    if [[ $$A != "0" ]] ; \
-	    then \
-		FILENAME=$(top_srcdir)/src/`echo $$FILE_LINE | sed {s/\<FILE\>//g} | sed {s/\<.FILE\>//g}`.h ; \
-		OBJNAME=`echo $$line | sed {s/_//g} | sed {s/TYPE//g}` ; \
-		D=`grep -i "<.*>$$OBJNAME<.*>" $(srcdir)/conglomerate-overrides.txt | sed {s/\<NAME\>//g} | sed {s/\<.*NAME\>//g}` ; \
-		echo '<TITLE>'$$D'</TITLE>' >> $(srcdir)/conglomerate-sections.txt ; \
-		echo $$D >> $(srcdir)/conglomerate-sections.txt ; \
-		echo 'Adding '$$D ; \
-		let CONGOBJNUM+=1 ; \
-	    else \
-		echo $$line >> $(srcdir)/conglomerate-sections.txt ; \
-	    fi ; \
-	done ; \
-	echo '*** Added '$$CONGOBJNUM' objects to conglomerate-sections.txt ***'
-	rm -f $(srcdir)/conglomerate-sections.txt.template
+	../../uss/fixsections $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt' $(top_srcdir)'/doc/reference/conglomerate-sections.txt'
 	touch tmpl-build.stamp
 
 tmpl.stamp: tmpl-build.stamp
