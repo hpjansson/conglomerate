@@ -1,5 +1,9 @@
 2003-09-06  David Malcolm
 
+	* relax-ng.xds
+
+	Added attribute and value tags
+
 	* relax-ng.xds, Makefile.am
 
 	New file: dispspec for RELAX NG schema
