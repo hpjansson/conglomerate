@@ -106,7 +106,7 @@ node_filter (CongTreeView *cong_tree_view,
 	     CongNodePtr node,
 	     gpointer user_data)
 {
-	enum CongNodeType node_type;
+	CongNodeType node_type;
 
 	g_return_val_if_fail(cong_tree_view, FALSE);
 	g_return_val_if_fail(node, FALSE);
@@ -180,7 +180,7 @@ node_creation_callback (CongTreeView *cong_tree_view,
 			gpointer user_data)
 {
 	GtkTreeStore *gtk_tree_store;
-	enum CongNodeType node_type;
+	CongNodeType node_type;
 	CongDocument *doc;
 	CongDispspec *ds;
 
@@ -289,7 +289,7 @@ GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 			    CongNodePtr node,
 			    gpointer user_data)
 {
-	enum CongNodeType node_type;
+	CongNodeType node_type;
 
 	g_return_val_if_fail (cong_tree_view, NULL);
 	g_return_val_if_fail (node, NULL);

@@ -97,6 +97,7 @@ cong_attribute_wrapper_check_button_instance_init (CongAttributeWrapperCheckButt
  * @attribute_value_checked:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *attribute_wrapper,
@@ -145,6 +146,7 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
  * @attribute_value_checked:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_new ( CongDocument *doc,

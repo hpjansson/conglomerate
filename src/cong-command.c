@@ -92,6 +92,7 @@ cong_command_instance_init (CongCommand *node)
  * @consolidation_id:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommand*
 cong_command_construct (CongCommand *command,
@@ -117,6 +118,7 @@ cong_command_construct (CongCommand *command,
  * @consolidation_id:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommand*
 cong_command_private_new (CongDocument *doc,
@@ -134,6 +136,7 @@ cong_command_private_new (CongDocument *doc,
  * @command:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_command_get_document (CongCommand *command)
@@ -148,6 +151,7 @@ cong_command_get_document (CongCommand *command)
  * @command:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_command_get_description (CongCommand *command)
@@ -162,6 +166,7 @@ cong_command_get_description (CongCommand *command)
  * @command:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_command_get_consolidation_id (CongCommand *command)
@@ -661,6 +666,7 @@ cong_command_add_node_recursive_delete (CongCommand *cmd,
  * @cursor:
  *
  * TODO: Write me
+ * Returns:
  */
 const CongLocation*
 cong_cursor_get_location (const CongCursor *cursor)
@@ -1100,6 +1106,7 @@ cong_command_add_nullify_selection (CongCommand *cmd)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd, 
@@ -1279,6 +1286,7 @@ cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd,
  * @new_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_command_can_add_reparent_selection (CongCommand *cmd,
@@ -1303,13 +1311,14 @@ cong_command_can_add_reparent_selection (CongCommand *cmd,
 /**
  * cong_command_add_reparent_selection:
  * @cmd:
- * @new_parent:
+ * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_command_add_reparent_selection (CongCommand *cmd, 
-				     CongNodePtr new_parent)
+				     CongNodePtr node)
 {
 	CongDocument *doc;
 	CongSelection *selection;
@@ -1321,7 +1330,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 	CongLocation new_selection_end;
 
 	g_return_val_if_fail (IS_CONG_COMMAND(cmd), NULL);
-	g_return_val_if_fail (new_parent, NULL);
+	g_return_val_if_fail (node, NULL);
 
 	doc = cong_command_get_document (cmd);
 	selection = cong_document_get_selection (doc);
@@ -1340,7 +1349,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 	cong_location_copy (&new_selection_start, ordered_start);
 	cong_location_copy (&new_selection_end, ordered_end);
 
-	CONG_NODE_SELF_TEST(new_parent);
+	CONG_NODE_SELF_TEST(node);
 
 	/* --- Processing for multiple nodes --- */
 	if (loc0.node != loc1.node)
@@ -1368,10 +1377,10 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 
 		/* Position new_parent within the tree: */
 		if (prev_node) {
-			cong_command_add_node_add_after(cmd, new_parent, prev_node);
+			cong_command_add_node_add_after(cmd, node, prev_node);
 			CONG_NODE_SELF_TEST(prev_node);
 		} else {
-			cong_command_add_node_set_parent(cmd, new_parent, loc0.node->parent);
+			cong_command_add_node_set_parent(cmd, node, loc0.node->parent);
 		}
 
 		/* Reparent, first & middle */
@@ -1379,12 +1388,12 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 			iter_next = iter->next;
 
 			CONG_NODE_SELF_TEST(iter);
-			CONG_NODE_SELF_TEST(new_parent);
+			CONG_NODE_SELF_TEST(node);
 
-			cong_command_add_node_set_parent(cmd, iter, new_parent);			
+			cong_command_add_node_set_parent(cmd, iter, node);			
 
 			CONG_NODE_SELF_TEST(iter);
-			CONG_NODE_SELF_TEST(new_parent);
+			CONG_NODE_SELF_TEST(node);
 		}
 
 		/* Split, last */
@@ -1398,7 +1407,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 		new_selection_end.byte_offset = 0;
 
 		/* Reparent, last */
-		cong_command_add_node_set_parent(cmd, loc1.node, new_parent);
+		cong_command_add_node_set_parent(cmd, loc1.node, node);
 
 		cong_command_add_selection_change (cmd,
 						   &new_selection_start,
@@ -1431,12 +1440,12 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 		
 		/* Position new_parent where the selection was: */
 		if (loc0.node->prev) {
-			cong_command_add_node_add_after(cmd, new_parent, loc0.node->prev);
+			cong_command_add_node_add_after(cmd, node, loc0.node->prev);
 		} else {
-			cong_command_add_node_set_parent(cmd, new_parent, loc0.node->parent);
+			cong_command_add_node_set_parent(cmd, node, loc0.node->parent);
 		}
 		/* Move the selection below new_parent: */
-		cong_command_add_node_set_parent(cmd, cong_selection_get_ordered_start (selection)->node, new_parent);
+		cong_command_add_node_set_parent(cmd, cong_selection_get_ordered_start (selection)->node, node);
 
 		cong_command_add_selection_change (cmd,
 						   &new_selection_start,
@@ -1445,7 +1454,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 		cong_document_end_edit(doc);
 
 		/* Return node before new_parent's new position (I think): */
-		return new_parent->prev;
+		return node->prev;
 	}
 }
 
@@ -1495,6 +1504,7 @@ split3_location_callback (CongDocument *doc,
  * @c1:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_command_add_node_split3 (CongCommand *cmd, 

@@ -22,19 +22,21 @@
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
  */
 
+#include "cong-dispspec-element.h"
+
 #ifndef __CONG_DISPSPEC_H__
 #define __CONG_DISPSPEC_H__
 
 G_BEGIN_DECLS
 
-enum CongDocumentModelType
+typedef enum 
 {
 	CONG_DOCUMENT_MODE_TYPE_DTD,
 	CONG_DOCUMENT_MODE_TYPE_W3C_XML_SCHEMA,
 	CONG_DOCUMENT_MODE_TYPE_RELAX_NG_SCHEMA,
 
 	NUM_CONG_DOCUMENT_MODEL_TYPES
-};
+} CongDocumentModelType;
 
 typedef struct CongSerialisationFormat CongSerialisationFormat;
 typedef struct CongExternalDocumentModel CongExternalDocumentModel;
@@ -95,7 +97,7 @@ cong_dispspec_matches_filename_extension (const CongDispspec *ds,
 
 const CongExternalDocumentModel*
 cong_dispspec_get_external_document_model (const CongDispspec *ds,
-					   enum CongDocumentModelType model_type);
+					   CongDocumentModelType model_type);
 
 /**
  *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
@@ -113,7 +115,7 @@ CongDispspecElement*
 cong_dispspec_lookup_node (const CongDispspec *ds, 
 			   CongNodePtr node);
 
-enum CongElementType
+CongElementType
 cong_dispspec_type (CongDispspec *ds, 
 		    const gchar* ns_uri, 
 		    const gchar* local_name);
@@ -144,7 +146,7 @@ cong_dispspec_get_element (CongDispspec *ds,
 
 /* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, CongDispspecGCUsage usage);
 #else
 #if 0
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);

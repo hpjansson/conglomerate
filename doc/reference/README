@@ -1,4 +1,3 @@
-
 In this directory you find GTK-doc files.
 This README tells more about the files.
 The important part is what files need maintaince and how.
@@ -22,14 +21,12 @@ conglomerate-docs.sgml
  the reference to the corresponding xml file to/from conglomerate-docs.sgml.
 
 conglomerate-overrides.txt
- function unknown, FIXME when time permits.
- the file is updated by uss/mkgtkdocoverrides
+ Contains description of structures which description should be overrriden
+ because there not much information in sources.  Lists the data types that gtkdoc doesn't notice.
+
 
 conglomerate.types
  Lists the header files to be parsed for objects, and the object _get_type() functions.
-
-conglomerate-overrides.txt
- Lists the data types that gtkdoc doesn't notice.
 
 conglomerate-sections.txt
  The template files in the tmpl directory are generated from this.
@@ -46,8 +43,8 @@ version.xml.in
 version.xml
  The conglomerate version number, used in the docs.
 
-other files:
- please help
-
-Documentation to gtkdoc usage
- URL: FIXME
+gtk-doc usage:  
+ Documentation to gtkdoc installed with gtk-doc, look for
+ it in your default documentation directory, for example,  
+ /usr/share/doc/gtk-doc-1.2/
+ 

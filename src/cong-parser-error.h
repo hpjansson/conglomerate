@@ -6,15 +6,15 @@
 G_BEGIN_DECLS
 
 /* Towards improved error handling: */
-enum CongIssueType
+typedef enum
 {
 	CONG_ISSUE_ERROR,
 	CONG_ISSUE_WARNING
-};
+} CongIssueType;
 
 typedef struct CongParserIssue
 {
-	enum CongIssueType type;
+	CongIssueType type;
 	gchar *filename;
 	int linenum;
 	gchar *description;
@@ -36,7 +36,7 @@ cong_ui_parse_buffer (const char* buffer,
 		      const gchar *string_uri,
 		      GtkWindow *parent_window);
 
-void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description);
+void cong_parser_result_add_issue(CongParserResult *result, CongIssueType type, int linenum, gchar *description);
 
 GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result);
 

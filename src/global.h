@@ -61,32 +61,9 @@ G_BEGIN_DECLS
 #include "cong-node.h"
 #include "cong-location.h"
 
-enum CongWhitespaceHandling {
-	CONG_WHITESPACE_NORMALIZE,
-	CONG_WHITESPACE_PRESERVE
-};
-
-
 typedef struct CongRange CongRange;
 
-struct CongCursor
-{
-	/* Visual representation */
-	GdkGC *gc;
-
-	gboolean on;
-
-	/* Conceptual location at which stuff will be inserted i.e. the byte_offset is the offset of the character immediately following the caret. So it's zero for the beginning of the text */
-	CongLocation location;
-
-	guint timeout_id;
-
-	CongDocument *doc;
-};
-
-
-enum CongFontRole
-{
+typedef enum {
 	CONG_FONT_ROLE_BODY_TEXT,
 	CONG_FONT_ROLE_SPAN_TAG,
 	CONG_FONT_ROLE_TITLE_TEXT,
@@ -94,17 +71,16 @@ enum CongFontRole
 	/* replaces: f, fm, ft in order */
 
 	CONG_FONT_ROLE_NUM
-};
+} CongFontRole;
 
-enum CongDispspecGCUsage
-{
+typedef enum {
 	CONG_DISPSPEC_GC_USAGE_BOLD_LINE,
 	CONG_DISPSPEC_GC_USAGE_DIM_LINE,
 	CONG_DISPSPEC_GC_USAGE_BACKGROUND,
 	CONG_DISPSPEC_GC_USAGE_TEXT,
 
 	CONG_DISPSPEC_GC_USAGE_NUM
-};
+} CongDispspecGCUsage;
 
 
 typedef struct CongPlugin CongPlugin;
@@ -124,6 +100,21 @@ typedef struct CongServiceDocTool CongServiceDocTool;
 typedef struct CongServiceNodeTool CongServiceNodeTool;
 
 typedef struct CongServiceNodePropertyDialog CongServiceNodePropertyDialog;
+
+struct CongCursor
+{
+	/* Visual representation */
+	GdkGC *gc;
+
+	gboolean on;
+
+	/* Conceptual location at which stuff will be inserted i.e. the byte_offset is the offset of the character immediately following the caret. So it's zero for the beginning of the text */
+	CongLocation location;
+
+	guint timeout_id;
+
+	CongDocument *doc;
+};
 
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);

@@ -97,7 +97,7 @@ cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
  *
  * TODO: Write me
  */
-enum CongElementType
+CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
 {
 	g_return_val_if_fail (element, CONG_ELEMENT_TYPE_UNKNOWN);

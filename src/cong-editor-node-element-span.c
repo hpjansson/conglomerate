@@ -48,7 +48,7 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 			       gint line_width,
 			       gint initial_indent);
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type(CongEditorNode *editor_node);
 
 /* Extra stuff: */
@@ -278,7 +278,7 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 	return result;
 }
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type(CongEditorNode *editor_node)
 {
 	return CONG_FLOW_TYPE_INLINE;

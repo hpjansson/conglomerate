@@ -112,6 +112,7 @@ cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementListitem*
 cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *editor_node_element_listitem,
@@ -138,6 +139,7 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_listitem_new (CongEditorWidget3* widget,

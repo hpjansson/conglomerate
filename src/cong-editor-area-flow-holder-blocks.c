@@ -219,7 +219,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	CongEditorNode *iter;
 	GList *list_of_removed_nodes = NULL;
 
-	enum CongFlowType flow_type;
+	CongFlowType flow_type;
 
 	flow_type = cong_editor_node_get_flow_type (editor_node);
 

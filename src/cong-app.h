@@ -53,41 +53,12 @@ int
 cong_app_post_init_hack (CongApp *app);
 
 
-/**
- * cong_app_get_clipboard_xml_source:
- * @app: the #CongApp
- * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
- * @target_doc: the #CongDocument into which the source is to be pasted
- * 
- * This function interrogates the appropriate clipboard and attempts to get the content
- * in the best possible format for the target document.  It may attempt to do conversions,
- * for example, converting <li> elements into <listitem> when pasting HTML into a DocBook document.
- *
- * Returns: a newly-allocated UTF-8 fragment of XML source, wrapped in a <placeholder> element,
- * suitable for parsing and adding to the document (which must then be freed using g_free) or NULL
- */
 gchar*
 cong_app_get_clipboard_xml_source (CongApp *app,
 				   GdkAtom selection,
 				   CongDocument *target_doc);
 
 
-/**
- * cong_app_set_clipboard_from_xml_fragment:
- * @app: the #CongApp
- * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
- * @xml_fragment: a fragment of XML source
- * @source_doc: the #CongDocument from which the source has been cut
- * 
- * This function takes the XML source and attempts to place it into the appropriate clipboard.  It will attempt to make it 
- * available in a number of formats, and in the best possible way for each format.  It may attempt to do conversions when it does 
- * this, e.g. generating pretty versions of bulleted lists for text, or converting to an HTML representation
- * where appropriate.
- *
- * The XML form of the source is not converted, but is wrapped in an <xml-fragment> top-level element and given a DOCTYPE declaration if available in the source document.
- * So it should be well-formed, but not valid.
- * Haven't yet specified what happens to entities.
- */
 void
 cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 					  GdkAtom selection,
@@ -102,7 +73,7 @@ cong_app_get_tooltips (CongApp *app);
 
 CongFont*
 cong_app_get_font (CongApp *app,
-		   enum CongFontRole role);
+		   CongFontRole role);
 
 CongPluginManager*
 cong_app_get_plugin_manager (CongApp *app);

@@ -55,7 +55,7 @@ cong_attribute_wrapper_check_button_get_type (void);
 
 /* it's legitimate for attr to be NULL */
 CongAttributeWrapperCheckButton*
-cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *attribute_wrapper_check_button,
+cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *attribute_wrapper,
 					       CongDocument *doc,
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,

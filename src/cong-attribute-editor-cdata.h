@@ -29,22 +29,22 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongAttributeEditorCDATA CongAttributeEditorCDATA;
-typedef struct CongAttributeEditorCDATAClass CongAttributeEditorCDATAClass;
-typedef struct CongAttributeEditorCDATADetails CongAttributeEditorCDATADetails;
+typedef struct _CongAttributeEditorCDATA CongAttributeEditorCDATA;
+typedef struct _CongAttributeEditorCDATAClass CongAttributeEditorCDATAClass;
+typedef struct _CongAttributeEditorCDATADetails CongAttributeEditorCDATADetails;
 
 #define CONG_ATTRIBUTE_EDITOR_CDATA_TYPE	      (cong_attribute_editor_cdata_get_type ())
 #define CONG_ATTRIBUTE_EDITOR_CDATA(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCDATA)
 #define CONG_ATTRIBUTE_EDITOR_CDATA_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, CongAttributeEditorCDATAClass)
 #define IS_CONG_ATTRIBUTE_EDITOR_CDATA(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_CDATA_TYPE)
 
-struct CongAttributeEditorCDATA
+struct _CongAttributeEditorCDATA
 {
 	CongAttributeEditor attribute_editor;
 	CongAttributeEditorCDATADetails *private;
 };
 
-struct CongAttributeEditorCDATAClass
+struct _CongAttributeEditorCDATAClass
 {
 	CongAttributeEditorClass attribute_editor_klass;
 };

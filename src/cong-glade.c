@@ -42,7 +42,6 @@ CongNodePtr global_glade_node_ptr = NULL;
 
 /**
  * cong_util_load_glade_file:
- *
  * @filename:  Datadir-relative path of the file, e.g. "conglomerate/glade/my-file.glade"
  * @root:  The root widget to be created, or NULL for all of them
  * @doc:  The #CongDocument to be available to custom widgets, or NULL
@@ -55,10 +54,7 @@ CongNodePtr global_glade_node_ptr = NULL;
  * wire themselves up properly.
  *
  * Returns: a freshly-loaded #GladeXML interface; client must unref it.
- *
  */
-
-
 GladeXML*
 cong_util_load_glade_file (const gchar *filename,
 			   const gchar *root,
@@ -170,6 +166,7 @@ cong_bind_check_button (GtkCheckButton *check_button,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 create_cdata_editor (GladeXML *xml,
@@ -221,6 +218,7 @@ create_cdata_editor (GladeXML *xml,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 create_lang_editor (GladeXML *xml,

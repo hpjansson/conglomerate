@@ -25,6 +25,8 @@
 #ifndef __CONG_DTD_H__
 #define __CONG_DTD_H__
 
+#include "cong-dispspec-element.h"
+
 G_BEGIN_DECLS
 
 /* Callback for traversing DTD elements: */
@@ -56,7 +58,7 @@ cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
  * 
  * Returns: 
  */
-enum CongElementType
+CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element);
 
 /**

@@ -1,3 +1,9 @@
+2004-06-21 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cgtkdocincludes
+	
+	Update check for moving to external entities
+	
 2004-05-05  Geert Stappers <stappers@stappers.nl>
 
 	* mkcvstarball

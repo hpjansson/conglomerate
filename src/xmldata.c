@@ -29,8 +29,8 @@ static void xml_get_or_content_list(xmlElementContentPtr content, GList* list);
 static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, const xmlChar **list, int *len, int max);
 static gint wrap_xml_valid_get_valid_elements(CongDocument *doc, xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max);
 static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, 
-						      gint elements_length, enum CongElementType tag_type);
-static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementType tag_type);
+						      gint elements_length, CongElementType tag_type);
+static GList* xml_get_elements_from_dispspec(CongDispspec* ds, CongElementType tag_type);
 
 
 /* Other stuff: */
@@ -337,12 +337,13 @@ cong_command_add_required_sub_elements (CongCommand *cmd,
 	}
 }
 
-/**
+/*
  * Adds required children from an
  * input content model.
  *
  * Returns whether all required content was added
  */
+ 
 static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd, 
 							   xmlElementContentPtr content, 
 							   xmlNodePtr node) 
@@ -407,13 +408,14 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
 	}
 }
 
-/**
+/*
  * Allows the user to select between a set
  * of choices for a required content element.
  * Adds that choice to the node.
  *
  * Returns whether the choice was correctly selected and added
  */
+ 
 static gboolean
 cong_command_add_xml_add_required_content_choice (CongCommand *cmd, 
 						  xmlElementContentPtr content, 
@@ -491,13 +493,14 @@ cong_command_add_xml_add_required_content_choice (CongCommand *cmd,
 }
 	
  
-/**
+/*
  * Adds an optional text node when it
  * conforms to the content model, such that
  * the user may type.
  *
- * @return whether a text node has been added
+ * Return whether a text node has been added
  */
+ 
 static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node) {
 	xmlNodePtr new_node;
 	CongDocument *cong_doc;
@@ -685,7 +688,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
 GList*
 cong_document_get_valid_new_child_elements (CongDocument *doc,
 					    CongNodePtr node, 
-					    enum CongElementType tag_type)
+					    CongElementType tag_type)
 {
 	const xmlChar *elements[MAX_ELEMENTS];
 	gint result;
@@ -728,7 +731,7 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 GList* 
 cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 						       CongNodePtr node, 
-						       enum CongElementType tag_type)
+						       CongElementType tag_type)
 {
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
@@ -766,7 +769,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 GList* 
 cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
 						   CongNodePtr node, 
-						   enum CongElementType tag_type)
+						   CongElementType tag_type)
 {
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
@@ -799,7 +802,7 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
  */
 gboolean
 should_include_element (CongDispspecElement *element,
-			enum CongElementType tag_type )
+			CongElementType tag_type )
 {
 	g_return_val_if_fail (element, FALSE);
 
@@ -834,7 +837,7 @@ should_include_element (CongDispspecElement *element,
  * 
  * Returns:
  */
-static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, gint elements_length, enum CongElementType tag_type) {
+static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, gint elements_length, CongElementType tag_type) {
 	CongDispspecElement *element;
 	GList *list = NULL;
 	gint i;
@@ -865,7 +868,7 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 struct add_element_data
 {
 	GList *list;
-	enum CongElementType tag_type;
+	CongElementType tag_type;
 };
 
 static void
@@ -895,7 +898,7 @@ add_element_cb (CongDispspec *ds,
  */
 static GList* 
 xml_get_elements_from_dispspec (CongDispspec* ds,
-				enum CongElementType tag_type)
+				CongElementType tag_type)
 {
 
 	struct add_element_data add_element_data;

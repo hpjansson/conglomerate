@@ -308,12 +308,11 @@ calc_requisition (CongEditorArea *area,
 }
 
 /**
- * allocate_child_space
- * @area CongEditorArea for parent span element
+ * allocate_child_space:
+ * @area: CongEditorArea for parent span element
  *
  * Given area allocated for span element, allocate two subareas (its inner_bin and its title).
  * 
- * Returns: void
  */
 static void
 allocate_child_space (CongEditorArea *area)

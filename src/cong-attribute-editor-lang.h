@@ -54,7 +54,7 @@ GType
 cong_attribute_editor_lang_get_type (void);
 
 CongAttributeEditor*
-cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_cdata,
+cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_lang,
 				       CongDocument *doc,
 				       CongNodePtr node,
 				       xmlNs *ns_ptr,

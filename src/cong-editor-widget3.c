@@ -702,7 +702,7 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
  * TODO: Write me
  */
 const gchar*
-cong_flow_type_get_debug_string(enum CongFlowType flow_type)
+cong_flow_type_get_debug_string(CongFlowType flow_type)
 {
 	switch (flow_type) {
 	default: g_assert_not_reached();
@@ -1670,7 +1670,7 @@ create_areas(CongEditorWidget3 *widget,
 {
 	CongEditorChildPolicy *parents_child_policy = NULL;
 	CongEditorChildPolicy *this_child_policy = NULL;
-	enum CongFlowType flow_type;
+	CongFlowType flow_type;
 	CongNodePtr node = cong_editor_node_get_node (editor_node);
 
 #if LOG_EDITOR_AREAS

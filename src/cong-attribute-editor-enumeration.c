@@ -78,6 +78,7 @@ cong_attribute_editor_enumeration_instance_init (CongAttributeEditorENUMERATION 
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeEditor*
 cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
@@ -141,6 +142,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,

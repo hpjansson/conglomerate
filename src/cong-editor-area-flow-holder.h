@@ -73,7 +73,7 @@ cong_editor_area_flow_holder_remove_areas_for_node (CongEditorAreaFlowHolder *ar
 
 CongEditorAreaFlowHolder*
 cong_editor_area_flow_holder_manufacture (CongEditorWidget3 *editor_widget,
-					  enum CongFlowType flow_type);
+					  CongFlowType flow_type);
 
 
 G_END_DECLS

@@ -70,7 +70,7 @@ cong_location_exists(const CongLocation *loc);
 gboolean
 cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
 
-enum CongNodeType
+CongNodeType
 cong_location_node_type(const CongLocation *loc);
 
 gunichar

@@ -123,6 +123,7 @@ cong_app_private_insert_element_init (CongApp *app);
  * cong_app_singleton:
  *
  * TODO: Write me
+ * Returns:
  */
 CongApp*
 cong_app_singleton (void)
@@ -169,6 +170,7 @@ cong_app_destroy_singleton(void)
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 int
 cong_app_post_init_hack (CongApp *app)
@@ -303,6 +305,7 @@ debug_target_list (GtkClipboard *clipboard,
  * @length:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 convert_ucs2_to_utf8 (guchar *data,
@@ -321,6 +324,7 @@ convert_ucs2_to_utf8 (guchar *data,
  * @length:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 convert_utf8_string (guchar *data, 
@@ -357,6 +361,7 @@ convert_text_xml (guchar *data,
  * @length:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 convert_text_html (guchar *data, 
@@ -470,6 +475,7 @@ debug_well_known_targets (GtkClipboard *clipboard)
  * @n_targets:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_eel_gtk_clipboard_wait_for_targets (GtkClipboard  *clipboard, 
@@ -525,11 +531,17 @@ generate_source_fragment_from_selection_doc (xmlDocPtr xml_doc,
 
 /**
  * cong_app_get_clipboard_xml_source:
- * @app:
- * @selection:
- * @target_doc:
+ * @app: the #CongApp
+ * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
+ * @target_doc: the #CongDocument into which the source is to be pasted
+ * 
+ * This function interrogates the appropriate clipboard and attempts to get the content
+ * in the best possible format for the target document.  It may attempt to do conversions,
+ * for example, converting &lt;li&gt; elements into &lt;listitem&gt; when pasting HTML into a DocBook document.
  *
- * TODO: Write me
+ * Returns: a newly-allocated UTF-8 fragment of XML source, wrapped in a &lt;placeholder&gt; element,
+ * suitable for parsing and adding to the document (which must then be freed using g_free) or NULL
+ * Returns: 
  */
 gchar*
 cong_app_get_clipboard_xml_source (CongApp *app,
@@ -781,12 +793,19 @@ regenerate_selection (CongApp *app,
 
 /**
  * cong_app_set_clipboard_from_xml_fragment:
- * @app:
- * @selection:
- * @xml_fragment:
- * @source_doc:
+ * @app: the #CongApp
+ * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
+ * @xml_fragment: a fragment of XML source
+ * @source_doc: the #CongDocument from which the source has been cut
+ * 
+ * This function takes the XML source and attempts to place it into the appropriate clipboard.  It will attempt to make it 
+ * available in a number of formats, and in the best possible way for each format.  It may attempt to do conversions when it does 
+ * this, e.g. generating pretty versions of bulleted lists for text, or converting to an HTML representation
+ * where appropriate.
  *
- * TODO: Write me
+ * The XML form of the source is not converted, but is wrapped in an &lt;xml-fragment&gt; top-level element and given a DOCTYPE declaration if available in the source document.
+ * So it should be well-formed, but not valid.
+ * Haven't yet specified what happens to entities.
  */
 void
 cong_app_set_clipboard_from_xml_fragment (CongApp *app,
@@ -833,6 +852,7 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeProgram*
 cong_app_get_gnome_program (CongApp *app)
@@ -847,6 +867,7 @@ cong_app_get_gnome_program (CongApp *app)
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkTooltips*
 cong_app_get_tooltips (CongApp *app)
@@ -862,10 +883,11 @@ cong_app_get_tooltips (CongApp *app)
  * @role:
  *
  * TODO: Write me
+ * Returns:
  */
 CongFont*
 cong_app_get_font (CongApp *app,
-		   enum CongFontRole role)
+		   CongFontRole role)
 {
 	g_return_val_if_fail (app, NULL);
 	g_return_val_if_fail (role<CONG_FONT_ROLE_NUM, NULL);
@@ -878,6 +900,7 @@ cong_app_get_font (CongApp *app,
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 CongPluginManager*
 cong_app_get_plugin_manager (CongApp *app)
@@ -892,6 +915,7 @@ cong_app_get_plugin_manager (CongApp *app)
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecRegistry*
 cong_app_get_dispspec_registry (CongApp *app)
@@ -906,6 +930,7 @@ cong_app_get_dispspec_registry (CongApp *app)
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 GConfClient*
 cong_app_get_gconf_client (CongApp *app)
@@ -920,6 +945,7 @@ cong_app_get_gconf_client (CongApp *app)
  * @app:
  *
  * TODO: Write me
+ * Returns:
  */
 const GList*
 cong_app_get_language_list (CongApp *app)

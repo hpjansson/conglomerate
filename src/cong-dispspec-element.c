@@ -45,9 +45,9 @@ struct CongDispspecElement
 
 	gchar *icon_name;
 	GdkPixbuf *icon16;
-	enum CongWhitespaceHandling whitespace;
+	CongWhitespaceHandling whitespace;
 
-	enum CongElementType type;
+	CongElementType type;
 	gboolean collapseto;
 
 #if NEW_LOOK
@@ -197,7 +197,7 @@ unsigned int hacked_cols[3][CONG_DISPSPEC_GC_USAGE_NUM] =
 	{ 0x632829, 0x632829, 0x632829, 0x632829 }
 };
 
-static void get_col(GdkColor *dst, const GdkColor *src, enum CongDispspecGCUsage usage)
+static void get_col(GdkColor *dst, const GdkColor *src, CongDispspecGCUsage usage)
 {
 	/* pick one of the test colour tables based on a dodgy hashing of the source colour: */
 	col_to_gcol(dst, hacked_cols[(src->red>>8)%2][usage]);
@@ -209,6 +209,7 @@ static void get_col(GdkColor *dst, const GdkColor *src, enum CongDispspecGCUsage
  * @col:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC*
 generate_gc_for_col (const GdkColor *col)
@@ -284,20 +285,22 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 
 /* Exported functions: */
 
-/* Construction  */
-/**
+/** 
  * cong_dispspec_element_new:
- * @ns_uri:
- * @local_name:
+ * @ns_uri: the URI of the namespace, or NULL
+ * @local_name: the local name for the new element; must be non-NULL
  * @type:
- * @autogenerate_username:
+ * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
+ * using "header capitalisation"
  *
- * TODO: Write me
- */
+ * Constructs a new #CongDispspecElement, initialising fields to sane defaults.
+ *
+ * Returns: a freshly allocated #CongDispspecElement 
+ **/
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* ns_uri, 
 			   const gchar* local_name, 
-			   enum CongElementType type,
+			   CongElementType type,
 			   gboolean autogenerate_username)
 {
 	CongDispspecElement* element;
@@ -390,11 +393,11 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	/* FIXME:  do we need to remove from the list? */
 }
 
-/**
+/** 
  * cong_dispspec_element_get_ns_uri:
- * @element:
- *
- * TODO: Write me
+ * @element: the element in question
+ * 
+ * Returns: the namespace URI for this kind of element, or NULL if none
  */
 const gchar*
 cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
@@ -406,9 +409,9 @@ cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
 
 /**
  * cong_dispspec_element_get_local_name:
- * @element:
- *
- * TODO: Write me
+ * @element: the element in question
+ * 
+ * Returns: the local name (relative to its namespace, if any) for this kind of element
  */
 const gchar*
 cong_dispspec_element_get_local_name(CongDispspecElement* element)
@@ -423,6 +426,7 @@ cong_dispspec_element_get_local_name(CongDispspecElement* element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_element_username(CongDispspecElement* element)
@@ -444,6 +448,7 @@ cong_dispspec_element_username(CongDispspecElement* element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_element_get_description(CongDispspecElement *element)
@@ -458,6 +463,7 @@ cong_dispspec_element_get_description(CongDispspecElement *element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf*
 cong_dispspec_element_get_icon(CongDispspecElement *element)
@@ -472,10 +478,13 @@ cong_dispspec_element_get_icon(CongDispspecElement *element)
 
 /**
  * cong_dispspec_element_get_value_for_key:
- * @key:
- * @element:
- *
- * TODO: Write me
+ * @key: the key
+ * @element:  the dispspec element
+ * 
+ * Dispspec elements support a list of key/value string pairs; this is intended as a mechanism
+ * to allow plugins to have arbitrary data whilst having a DTD for xds files.
+ * 
+ * Returns:  the value, if found, or NULL if not present.
  */
 const gchar*
 cong_dispspec_element_get_value_for_key (const gchar *key, 
@@ -493,8 +502,9 @@ cong_dispspec_element_get_value_for_key (const gchar *key,
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
-enum CongElementType
+CongElementType
 cong_dispspec_element_type(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
@@ -504,11 +514,12 @@ cong_dispspec_element_type(CongDispspecElement *element)
 
 /**
  * cong_dispspec_element_get_whitespace:
- * @element:
+ * @element:  The element of the display spec
  *
- * TODO: Write me
+ * Get the #CongWhitespaceHandling behaviour for this element
+ * Returns:  
  */
-enum CongWhitespaceHandling
+CongWhitespaceHandling
 cong_dispspec_element_get_whitespace (CongDispspecElement *element)
 {
 	g_return_val_if_fail (element, CONG_WHITESPACE_NORMALIZE);
@@ -518,14 +529,14 @@ cong_dispspec_element_get_whitespace (CongDispspecElement *element)
 
 /**
  * cong_dispspec_element_set_whitespace:
- * @element:
- * @whitespace:
+ * @element:  The element of the display spec
+ * @whitespace: The new value for whitespace handling
  *
- * TODO: Write me
+ * Set the #CongWhitespaceHandling behaviour for this element
  */
 void
 cong_dispspec_element_set_whitespace (CongDispspecElement *element,
-				      enum CongWhitespaceHandling whitespace)
+				      CongWhitespaceHandling whitespace)
 {	
 	g_return_if_fail (element);
 
@@ -537,6 +548,7 @@ cong_dispspec_element_set_whitespace (CongDispspecElement *element,
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dispspec_element_collapseto(CongDispspecElement *element)
@@ -549,6 +561,7 @@ cong_dispspec_element_collapseto(CongDispspecElement *element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dispspec_element_is_structural(CongDispspecElement *element)
@@ -567,6 +580,7 @@ cong_dispspec_element_is_structural(CongDispspecElement *element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dispspec_element_is_span(CongDispspecElement *element)
@@ -587,9 +601,10 @@ cong_dispspec_element_is_span(CongDispspecElement *element)
  * @usage:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage)
+cong_dispspec_element_gc(CongDispspecElement *element, CongDispspecGCUsage usage)
 {
 	g_return_val_if_fail(element, NULL);
 	g_return_val_if_fail(usage<CONG_DISPSPEC_GC_USAGE_NUM, NULL);
@@ -603,9 +618,10 @@ cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage 
  * @usage:
  *
  * TODO: Write me
+ * Returns:
  */
 const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage)
+cong_dispspec_element_col(CongDispspecElement *element, CongDispspecGCUsage usage)
 {
 	g_return_val_if_fail(element, NULL);
 	g_return_val_if_fail(usage<CONG_DISPSPEC_GC_USAGE_NUM, NULL);
@@ -614,12 +630,7 @@ cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage
 }
 
 #else
-/**
- * cong_dispspec_element_gc:
- * @element:
- *
- * TODO: Write me
- */
+
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element)
 {
@@ -628,12 +639,6 @@ cong_dispspec_element_gc(CongDispspecElement *element)
 	return element->gc;
 }
 
-/**
- * cong_dispspec_element_col:
- * @element:
- *
- * TODO: Write me
- */
 const GdkColor*
 cong_dispspec_element_col(CongDispspecElement *element)
 {
@@ -648,6 +653,7 @@ cong_dispspec_element_col(CongDispspecElement *element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element)
@@ -662,6 +668,7 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
  * @header_info:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo *header_info)
@@ -683,6 +690,7 @@ cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeade
  * @x:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
@@ -784,6 +792,7 @@ cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
  * @x:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x)
@@ -817,9 +826,10 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
  * @role:
  *
  * TODO: Write me
+ * Returns:
  */
 CongFont*
-cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role)
+cong_dispspec_element_get_font(CongDispspecElement *element, CongFontRole role)
 {
 	g_return_val_if_fail(element, NULL);
 	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
@@ -834,6 +844,7 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_element_get_editor_service_id(CongDispspecElement *element)
@@ -848,6 +859,7 @@ cong_dispspec_element_get_editor_service_id(CongDispspecElement *element)
  * @element:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *element)
@@ -859,9 +871,11 @@ cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *elemen
 
 /**
  * cong_dispspec_element_from_xml:
- * @xml_element:
+ * @xml_element:  the element within the XML document
  *
- * TODO: Write me
+ * Create an #CongDispspecElement from an xds XML representation
+ *
+ * Returns: a newly-created #CongDispspecElement
  */
 CongDispspecElement*
 cong_dispspec_element_from_xml (xmlNodePtr xml_element)
@@ -953,10 +967,12 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 
 /**
  * cong_dispspec_element_to_xml:
- * @element:
- * @xml_doc:
+ * @element:  the dispspec element we are adding
+ * @xml_doc:  the XML document we are creating
  *
- * TODO: Write me
+ * Create an element tag suitable for adding to an element-list tag within an xds XML document.
+ *
+ * Returns: a newly-created #xmlNodePtr
  */
 xmlNodePtr
 cong_dispspec_element_to_xml (const CongDispspecElement *element,

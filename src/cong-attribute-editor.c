@@ -105,6 +105,7 @@ cong_attribute_editor_instance_init (CongAttributeEditor *attribute_editor)
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeEditor*
 cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
@@ -143,6 +144,7 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor)
@@ -157,6 +159,7 @@ cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor)
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
@@ -171,6 +174,7 @@ cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlAttributePtr
 cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
@@ -185,6 +189,7 @@ cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlNs *
 cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
@@ -199,6 +204,7 @@ cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
@@ -213,6 +219,7 @@ cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
  * @attribute_editor:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor)
@@ -235,7 +242,6 @@ cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor
  * function is proposed to use on updates of UI in various 
  * implementaion of CongAttributeEditor.
  */
-
 void
 cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, const gchar *new_attr_value) {
 
@@ -293,6 +299,7 @@ cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, cons
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 cong_attribute_editor_new (CongDocument *doc,

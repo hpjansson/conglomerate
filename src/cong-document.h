@@ -22,6 +22,8 @@
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
  */
 
+#include "cong-dispspec-element.h"
+
 #ifndef __CONG_DOCUMENT_H__
 #define __CONG_DOCUMENT_H__
 
@@ -510,15 +512,15 @@ cong_document_get_dtd_element (CongDocument *cong_doc,
 GList* 
 cong_document_get_valid_new_child_elements (CongDocument *doc,
 					    CongNodePtr node, 
-					    enum CongElementType tag_type);
+					    CongElementType tag_type);
 GList* 
 cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 						       CongNodePtr node, 
-						       enum CongElementType tag_type);
+						       CongElementType tag_type);
 GList* 
 cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
 						   CongNodePtr node, 
-						   enum CongElementType tag_type);
+						   CongElementType tag_type);
 
 /**
  * cong_document_node_can_be_deleted:

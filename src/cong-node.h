@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-enum CongNodeType
+typedef enum
 {
 	CONG_NODE_TYPE_UNKNOWN,
 
@@ -53,25 +53,18 @@ enum CongNodeType
 	CONG_NODE_TYPE_XINCLUDE_END,
 
 	CONG_NODE_TYPE_NUM
-};
+}  CongNodeType;
 
-
-enum CongElementType
+typedef enum 
 {
-	CONG_ELEMENT_TYPE_STRUCTURAL,
-	CONG_ELEMENT_TYPE_SPAN,
-	CONG_ELEMENT_TYPE_INSERT,
+	CONG_FLOW_TYPE_BLOCK,
+	CONG_FLOW_TYPE_INLINE
+} CongFlowType;
 
-	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
-
-	/* Other types?  Table? Plugin widget/Bonobo control? */
-
-	CONG_ELEMENT_TYPE_PLUGIN,
-
-	CONG_ELEMENT_TYPE_UNKNOWN,
-
-	CONG_ELEMENT_TYPE_ALL
-};
+typedef enum  {
+	CONG_WHITESPACE_NORMALIZE,
+	CONG_WHITESPACE_PRESERVE
+} CongWhitespaceHandling;
 
 typedef struct CongDocument CongDocument;
 typedef struct CongView CongView;
@@ -97,7 +90,7 @@ CongNodePtr cong_node_next(CongNodePtr node);
 CongNodePtr cong_node_first_child(CongNodePtr node);
 CongNodePtr cong_node_parent(CongNodePtr node);
 
-enum CongNodeType cong_node_type(CongNodePtr node);
+CongNodeType cong_node_type(CongNodePtr node);
 
 /** 
  * cong_node_is_element:
@@ -223,7 +216,7 @@ cong_node_get_path (CongNodePtr node);
 /* Handy debug methods for writing log info: */
 gchar *cong_node_debug_description(CongNodePtr node);
 
-const gchar *cong_node_type_description(enum CongNodeType node_type);
+const gchar *cong_node_type_description(CongNodeType node_type);
 
 /* Methods for accessing attribute values: */
 
@@ -401,7 +394,7 @@ cong_node_get_child_by_name (CongNodePtr node,
 CongNodePtr 
 cong_node_get_first_text_node_descendant (CongNodePtr node);
 
-enum CongWhitespaceHandling
+CongWhitespaceHandling
 cong_node_get_whitespace_handling (CongDocument *doc,
 				   CongNodePtr text_node);
 
@@ -434,16 +427,6 @@ cong_node_should_be_visible_in_editor (CongNodePtr node);
 gboolean
 cong_node_is_valid_cursor_location (CongNodePtr node);
 
-/**
- * cong_node_supports_byte_offsets:
- * @node:  a node to be tested
- *
- * The function determines if #CongLocation objects that reference this node can have meaningful byte offsets
- *
- * Only TEXT and COMMENT nodes can currently have meaningful byte offsets.
- * 
- * Returns: a #gboolean which is TRUE iff #CongLocations that reference this node can have a meaningful byte offset 
- */
 gboolean
 cong_node_supports_byte_offsets (CongNodePtr node);
 
@@ -453,17 +436,6 @@ cong_node_can_be_cut (CongNodePtr node);
 gboolean
 cong_node_can_be_copied (CongNodePtr node);
 
-/**
- * cong_node_get_ordering:
- * @n0:  first node to be compared
- * @n1:  second node to be compared
- *
- * This functions compares the location of two nodes in the xml tree and returns a numeric comparsion representing
- * their locations in a depth-first traversal.
- *
- * Returns: negative if n0 is reached before n1, zero if they are the same node, positive if n0 is reached after n1
- * 
- */
 int 
 cong_node_get_ordering (CongNodePtr n0,
 			CongNodePtr n1);
@@ -479,77 +451,21 @@ typedef gboolean
 		      gpointer user_data);
 		      
 
-/**
- * cong_node_calc_first_node_in_subtree_satisfying:
- *
- * @node: the top of the subtree
- * @predicate: the #CongNodePredicate to test nodes for
- * @user_data: user-supplied data passed to the predicate
- *
- * Finds the first node in a depth-first traversal of the subtree below this node
- * that satisfies the predicate.
- *
- * Note that @node is the initial node of the tree (and hence is tested first)
- *
- * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
- */
 CongNodePtr
 cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
 						 CongNodePredicate predicate,
 						 gpointer user_data);
 
-/**
- * cong_node_calc_final_node_in_subtree_satisfying:
- *
- * @node: the top of the subtree
- * @predicate: the #CongNodePredicate to test nodes for
- * @user_data: user-supplied data passed to the predicate
- *
- * Finds the final node in a depth-first traversal of the subtree below this node
- * that satisfies the predicate.
- *
- * Note that @node is the initial node of the tree (and hence is tested last)
- *
- * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
- */
 CongNodePtr
 cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node, 
 						 CongNodePredicate predicate,
 						 gpointer user_data);
 
-/**
- * cong_node_calc_prev_node_satisfying:
- *
- * @node: the start of the search
- * @predicate: the #CongNodePredicate to test nodes for
- * @user_data: user-supplied data passed to the predicate
- *
- * Finds the first preceding node relative to the input that satisfies the predicate,
- * in an imagined depth-first traversal of the document.  Includes ancestors.
- *
- * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
- */
 CongNodePtr
 cong_node_calc_prev_node_satisfying (CongNodePtr node, 
 				     CongNodePredicate predicate,
 				     gpointer user_data);
 
-/**
- * cong_node_calc_next_node_satisfying:
- *
- * @node: the start of the search
- * @predicate: the #CongNodePredicate to test nodes for
- * @user_data: user-supplied data passed to the predicate
- *
- * Finds the first following node relative to the input that satisfies the predicate,
- * in an imagined depth-first traversal of the document.   Includes ancestors.
- *
- * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
- */
 CongNodePtr
 cong_node_calc_next_node_satisfying (CongNodePtr node,
 				     CongNodePredicate predicate,

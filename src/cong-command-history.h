@@ -38,9 +38,6 @@ G_BEGIN_DECLS
 
 typedef struct CongCommandHistoryDetails CongCommandHistoryDetails;
 
-
-/**
- */
 struct CongCommandHistory
 {
 	GObject object;

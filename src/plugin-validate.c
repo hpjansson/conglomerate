@@ -169,7 +169,7 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 								 why_failed,
 								 _("You can fix this by adding a Document Type Declaration (DTD) to the document"),
 								 _("_Add a DTD"),
-								 _("_Cancel"),
+								 GTK_STOCK_CANCEL,
 								 TRUE,
 								 on_add_dtd,
 								 primary_window);

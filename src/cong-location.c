@@ -20,7 +20,7 @@
 gboolean
 cong_location_is_valid(const CongLocation *loc)
 {
-	enum CongNodeType type;
+	CongNodeType type;
 	
 	g_return_val_if_fail(loc != NULL, FALSE);
 
@@ -227,7 +227,7 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
  *
  * TODO: Write me
  */
-enum CongNodeType
+CongNodeType
 cong_location_node_type(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc, CONG_NODE_TYPE_UNKNOWN);

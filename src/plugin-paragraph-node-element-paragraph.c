@@ -63,18 +63,19 @@ cong_editor_node_element_paragraph_instance_init (CongEditorNodeElementParagraph
 /**
  * cong_editor_node_element_paragraph_construct:
  * @editor_node_element_paragraph:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementParagraph*
 cong_editor_node_element_paragraph_construct (CongEditorNodeElementParagraph *editor_node_element_paragraph,
-					      CongEditorWidget3 *editor_widget,
+					      CongEditorWidget3 *widget,
 					      CongTraversalNode *traversal_node)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_paragraph),
-					    editor_widget,
+					    widget,
 					    traversal_node);
 
 	return editor_node_element_paragraph;
@@ -86,6 +87,7 @@ cong_editor_node_element_paragraph_construct (CongEditorNodeElementParagraph *ed
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_paragraph_new (CongEditorWidget3* widget,

@@ -28,7 +28,7 @@
  * TODO: Write me
  */
 void 
-cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
+cong_parser_result_add_issue(CongParserResult *result, CongIssueType type, int linenum, gchar *description)
 {
 	CongParserIssue *issue;
 
@@ -61,7 +61,7 @@ CongParserResult *global_parser_result=NULL;
  * TODO: Write me
  */
 void 
-on_issue(CongParserResult *result, enum CongIssueType type, xmlParserCtxtPtr ctxt, gchar* description)
+on_issue(CongParserResult *result, CongIssueType type, xmlParserCtxtPtr ctxt, gchar* description)
 {
 	g_return_if_fail(description);
 

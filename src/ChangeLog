@@ -1,3 +1,8 @@
+2004-06-23 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	Changes in LOTS of files to cleanup gtk-doc usage and 
+	suppress gtk-doc warnings.	    
+
 2004-06-21  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-file-properties.c, cong-util.c, cong-util.h, plugin-validate.c

@@ -38,12 +38,12 @@ typedef struct CongEditorAreaUnderlineDetails CongEditorAreaUnderlineDetails;
 #define CONG_EDITOR_AREA_UNDERLINE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_UNDERLINE_TYPE, CongEditorAreaUnderlineClass)
 #define IS_CONG_EDITOR_AREA_UNDERLINE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_UNDERLINE_TYPE)
 
-enum CongEditorAreaUnderlineStyle {
+typedef enum  {
 	CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_START,
 	CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_END,
 	CONG_EDITOR_AREA_UNDERLINE_STYLE_SPELLING_ERROR,
 	CONG_EDITOR_AREA_UNDERLINE_STYLE_GRAMMAR_ERROR
-};
+} CongEditorAreaUnderlineStyle;
 
 struct CongEditorAreaUnderline
 {
@@ -63,11 +63,11 @@ cong_editor_area_underline_get_type (void);
 CongEditorArea*
 cong_editor_area_underline_construct (CongEditorAreaUnderline *area_underline,
 				      CongEditorWidget3 *editor_widget,
-				      enum CongEditorAreaUnderlineStyle style);
+				      CongEditorAreaUnderlineStyle style);
 
 CongEditorArea*
 cong_editor_area_underline_new (CongEditorWidget3 *editor_widget,
-				enum CongEditorAreaUnderlineStyle style);
+				CongEditorAreaUnderlineStyle style);
 
 G_END_DECLS
 

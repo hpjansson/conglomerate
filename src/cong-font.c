@@ -142,7 +142,7 @@ cong_font_draw_string_slow(GdkDrawable *drawable,
 			   const gchar *text,
 			   gint x,
 			   gint y,
-			   enum CongFontYPos y_pos)
+			   CongFontYPos y_pos)
 {
 	gint adjusted_y;
 	gint text_height;

@@ -28,7 +28,7 @@
 /**
    An enum for describing the meaning of a y coordinate when rendering text.
  */
-enum CongFontYPos {
+typedef enum {
 	
 	/* Render so that the Y coord is the ascent of the text: */
 	CONG_FONT_Y_POS_TOP,
@@ -38,7 +38,7 @@ enum CongFontYPos {
 
 	/* Render so that the Y coord is the baseline of the text: */
 	CONG_FONT_Y_POS_BASELINE,
-};
+} CongFontYPos;
 
 CongFont*
 cong_font_load(const gchar *font_name);
@@ -65,7 +65,7 @@ cong_font_draw_string_slow(GdkDrawable *drawable,
 			   const gchar *text,
 			   gint x,
 			   gint y,
-			   enum CongFontYPos y_pos);
+			   CongFontYPos y_pos);
 
 /**
    Get the width of a string rendered in the font in pixels

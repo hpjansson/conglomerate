@@ -90,6 +90,7 @@ cong_editor_area_paragraph_instance_init (CongEditorAreaParagraph *area_paragrap
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_paragraph_construct (CongEditorAreaParagraph *area_paragraph,
@@ -110,6 +111,7 @@ cong_editor_area_paragraph_construct (CongEditorAreaParagraph *area_paragraph,
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_paragraph_new (CongEditorWidget3 *editor_widget)

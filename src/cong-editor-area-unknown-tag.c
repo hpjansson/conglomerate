@@ -90,7 +90,7 @@ cong_editor_area_unknown_tag_instance_init (CongEditorAreaUnknownTag *area_unkno
 }
 
 const gchar*
-cong_ui_get_colour_string(enum CongNodeType type);
+cong_ui_get_colour_string(CongNodeType type);
 
 /* Exported function definitions: */
 /**

@@ -27,23 +27,27 @@
 
 G_BEGIN_DECLS
 
-/** 
- * cong_dispspec_element_new:
- * @ns_uri: the URI of the namespace, or NULL
- * @local_name: the local name for the new element; must be non-NULL
- * @type:
- * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
- * using "header capitalisation"
- *
- * Constructs a new #CongDispspecElement, initialising fields to sane defaults.
- *
- * Returns: a freshly allocated #CongDispspecElement 
- *
- **/
+typedef enum 
+{
+	CONG_ELEMENT_TYPE_STRUCTURAL,
+	CONG_ELEMENT_TYPE_SPAN,
+	CONG_ELEMENT_TYPE_INSERT,
+
+	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
+
+	/* Other types?  Table? Plugin widget/Bonobo control? */
+
+	CONG_ELEMENT_TYPE_PLUGIN,
+
+	CONG_ELEMENT_TYPE_UNKNOWN,
+
+	CONG_ELEMENT_TYPE_ALL
+} CongElementType;
+
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* ns_uri, 
 			   const gchar* local_name,
-			   enum CongElementType type,
+			   CongElementType type,
 			   gboolean autogenerate_username);
 
 /* Destruction  */
@@ -51,23 +55,9 @@ void
 cong_dispspec_element_destroy (CongDispspecElement *element); 
 
 
-/** 
- * cong_dispspec_element_get_ns_uri:
- * @element: the element in question
- * 
- * Returns: the namespace URI for this kind of element, or NULL if none
- *
- */
 const gchar*
 cong_dispspec_element_get_ns_uri (CongDispspecElement *element); 
 
-/**
- * cong_dispspec_element_get_local_name:
- * @element: the element in question
- * 
- * Returns: the local name (relative to its namespace, if any) for this kind of element
- *
- */
 const char*
 cong_dispspec_element_get_local_name (CongDispspecElement *element);
 
@@ -85,17 +75,6 @@ cong_dispspec_element_get_description(CongDispspecElement *element);
 GdkPixbuf*
 cong_dispspec_element_get_icon(CongDispspecElement *element);
 
-/**
- * cong_dispspec_element_get_value_for_key:
- *
- * @key: the key
- * @element:  the dispspec element
- * 
- * Dispspec elements support a list of key/value string pairs; this is intended as a mechanism
- * to allow plugins to have arbitrary data whilst having a DTD for xds files.
- * 
- * Returns:  the value, if found, or NULL if not present.
- */
 const gchar*
 cong_dispspec_element_get_value_for_key (const gchar *key, 
 					 const CongDispspecElement *element);
@@ -103,30 +82,16 @@ cong_dispspec_element_get_value_for_key (const gchar *key,
 const char*
 cong_dispspec_element_name_name_get(CongDispspecElement* element);
 
-enum CongElementType
+CongElementType
 cong_dispspec_element_type(CongDispspecElement *element);
 
 
-/**
- * cong_dispspec_element_get_whitespace:
- * @element:  The element of the display spec
- *
- * Get the #CongWhitespaceHandling behaviour for this element
- * Returns:  
- */
-enum CongWhitespaceHandling
+CongWhitespaceHandling
 cong_dispspec_element_get_whitespace (CongDispspecElement *element);
 
-/**
- * cong_dispspec_element_set_whitespace:
- * @element:  The element of the display spec
- * @whitespace: The new value for whitespace handling
- *
- * Set the #CongWhitespaceHandling behaviour for this element
- */
 void
 cong_dispspec_element_set_whitespace (CongDispspecElement *element,
-				      enum CongWhitespaceHandling whitespace);
+				      CongWhitespaceHandling whitespace);
 
 gboolean
 cong_dispspec_element_collapseto(CongDispspecElement *element);
@@ -142,10 +107,10 @@ cong_dispspec_element_color(CongDispspecElement *element);
 
 #if NEW_LOOK
 GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage);
+cong_dispspec_element_gc(CongDispspecElement *element, CongDispspecGCUsage usage);
 
 const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage);
+cong_dispspec_element_col(CongDispspecElement *element, CongDispspecGCUsage usage);
 #else
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element);
@@ -170,7 +135,7 @@ gchar*
 cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x);
 
 CongFont*
-cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
+cong_dispspec_element_get_font(CongDispspecElement *element, CongFontRole role);
 
 const gchar*
 cong_dispspec_element_get_editor_service_id(CongDispspecElement *element);
@@ -178,30 +143,10 @@ cong_dispspec_element_get_editor_service_id(CongDispspecElement *element);
 const gchar*
 cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *element);
 
-/**
- * cong_dispspec_element_to_xml:
- *
- * @element:  the dispspec element we are adding
- * @xml_doc:  the XML document we are creating
- *
- * Create an element tag suitable for adding to an element-list tag within an xds XML document.
- *
- * Returns: a newly-created #xmlNodePtr
- */
 xmlNodePtr
 cong_dispspec_element_to_xml (const CongDispspecElement *element,
 			      xmlDocPtr xml_doc);
 
-/**
- * cong_dispspec_element_from_xml:
- *
- * @xml_element:  the element within the XML document
- *
- * Create an #CongDispspecElement from an xds XML representation
- *
- * Returns: a newly-created #CongDispspecElement
- *
- */
 CongDispspecElement*
 cong_dispspec_element_from_xml (xmlNodePtr xml_element);
 

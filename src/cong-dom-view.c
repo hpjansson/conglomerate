@@ -44,7 +44,7 @@ static gchar*
 clean_text(const gchar* txt);
 
 const gchar*
-cong_ui_get_colour_string(enum CongNodeType type);
+cong_ui_get_colour_string(CongNodeType type);
 
 static gchar*
 get_text_for_node(CongNodePtr node);
@@ -149,7 +149,7 @@ clean_text(const gchar* txt)
  * TODO: Write me
  */
 const gchar*
-cong_ui_get_colour_string(enum CongNodeType type)
+cong_ui_get_colour_string(CongNodeType type)
 {
 	/* FIXME: this should be linked to the theme and/or the GtkSourceView settings */
 
@@ -203,7 +203,7 @@ cong_ui_get_colour_string(enum CongNodeType type)
 static gchar*
 get_text_for_node(CongNodePtr node)
 {
-	enum CongNodeType node_type;
+	CongNodeType node_type;
 	const gchar *colour_string;
 	const gchar *string_colour_string;
 	gchar *text = NULL;

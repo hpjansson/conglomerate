@@ -34,6 +34,7 @@ struct CongDialogCategory
  * @within_notebook:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDialogContent *
 cong_dialog_content_new(gboolean within_notebook)
@@ -59,6 +60,7 @@ cong_dialog_content_new(gboolean within_notebook)
  * @dialog_content:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_dialog_content_get_widget(CongDialogContent *dialog_content)
@@ -74,6 +76,7 @@ cong_dialog_content_get_widget(CongDialogContent *dialog_content)
  * @title:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDialogCategory *
 cong_dialog_content_add_category(CongDialogContent *dialog_content, const gchar *title)
@@ -199,6 +202,7 @@ cong_dialog_category_add_selflabelled_field (CongDialogCategory *category,
  * @tertiary_text:
  *
  * TODO: Write me
+ * Returns:
  */
 static gchar*
 make_dialog_message(const gchar* primary_text, 
@@ -230,6 +234,7 @@ make_dialog_message(const gchar* primary_text,
  * @tertiary_text:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_alert_content_new(const gchar* stock_icon,
@@ -276,6 +281,7 @@ cong_alert_content_new(const gchar* stock_icon,
  * @seconds_since_last_save_or_load:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog *
 cong_dialog_save_confirmation_alert_new(GtkWindow *parent, 
@@ -341,6 +347,7 @@ cong_dialog_save_confirmation_alert_new(GtkWindow *parent,
  * @seconds_since_last_save_or_load:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog *
 cong_dialog_revert_confirmation_alert_new(GtkWindow *parent, 
@@ -402,6 +409,7 @@ cong_dialog_revert_confirmation_alert_new(GtkWindow *parent,
  * @message:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog *
 cong_dialog_information_alert_new(GtkWindow *parent, 

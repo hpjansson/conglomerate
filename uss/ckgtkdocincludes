@@ -12,5 +12,5 @@ do
     NAMETOCHECK1=`basename $HEADERFILE`
     NAMETOCHECK=${NAMETOCHECK1%%.h}
 #    echo $NAMETOCHECK
-    test `grep -c $NAMETOCHECK $CDOCS` -eq "0" && echo $NAMETOCHECK not found
+    test `grep -c \&$NAMETOCHECK\; $CDOCS` -eq "0" && echo $NAMETOCHECK not found
 done 

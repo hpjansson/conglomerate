@@ -80,6 +80,7 @@ cong_command_history_instance_init (CongCommandHistory *history)
  * @command_history:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommandHistory*
 cong_command_history_construct (CongCommandHistory *command_history)
@@ -91,6 +92,7 @@ cong_command_history_construct (CongCommandHistory *command_history)
  * cong_command_history_new:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommandHistory*
 cong_command_history_new (void)
@@ -137,6 +139,7 @@ cong_command_history_add_command (CongCommandHistory *command_history,
  * @command_history:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_command_history_can_undo (CongCommandHistory *command_history)
@@ -151,6 +154,7 @@ cong_command_history_can_undo (CongCommandHistory *command_history)
  * @command_history:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_command_history_can_redo (CongCommandHistory *command_history)
@@ -230,6 +234,7 @@ cong_command_history_redo (CongCommandHistory *command_history)
  * @command_history:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommand*
 cong_command_history_get_next_undo_command (CongCommandHistory *command_history)
@@ -248,6 +253,7 @@ cong_command_history_get_next_undo_command (CongCommandHistory *command_history)
  * @command_history:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommand*
 cong_command_history_get_next_redo_command (CongCommandHistory *command_history)

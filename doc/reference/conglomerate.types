@@ -1,6 +1,7 @@
 #include "global.h"
 #include "cong-app.h"
 #include "cong-attribute-editor-cdata.h"
+#include "cong-attribute-editor-lang.h"
 #include "cong-attribute-editor-enumeration.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-wrapper-check-button.h"
@@ -92,6 +93,7 @@
 
 cong_attribute_editor_cdata_get_type
 cong_attribute_editor_enumeration_get_type
+cong_attribute_editor_lang_get_type
 cong_attribute_editor_get_type
 cong_attribute_wrapper_check_button_get_type
 cong_attribute_wrapper_radio_button_get_type

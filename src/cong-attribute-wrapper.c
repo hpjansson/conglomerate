@@ -103,6 +103,7 @@ cong_attribute_wrapper_instance_init (CongAttributeWrapper *attribute_wrapper)
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeWrapper*
 cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
@@ -141,6 +142,7 @@ cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_attribute_wrapper_get_document (CongAttributeWrapper *attribute_wrapper)
@@ -155,6 +157,7 @@ cong_attribute_wrapper_get_document (CongAttributeWrapper *attribute_wrapper)
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_attribute_wrapper_get_node (CongAttributeWrapper *attribute_wrapper)
@@ -169,6 +172,7 @@ cong_attribute_wrapper_get_node (CongAttributeWrapper *attribute_wrapper)
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlAttributePtr
 cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper)
@@ -183,6 +187,7 @@ cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper)
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlNs *
 cong_attribute_wrapper_get_ns (CongAttributeWrapper *attribute_wrapper)
@@ -197,6 +202,7 @@ cong_attribute_wrapper_get_ns (CongAttributeWrapper *attribute_wrapper)
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_attribute_wrapper_get_attribute_name (CongAttributeWrapper *attribute_wrapper)
@@ -211,6 +217,7 @@ cong_attribute_wrapper_get_attribute_name (CongAttributeWrapper *attribute_wrapp
  * @attribute_wrapper:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_attribute_wrapper_get_attribute_value (CongAttributeWrapper *attribute_wrapper)
@@ -361,7 +368,7 @@ on_remove_attribute (CongDocument *doc,
 
 /**
  * cong_attribute_wrapper_bind_to_widget:
- * @attribute_wrapper:
+ * @wrapper:
  * @widget:
  *
  * TODO: Write me

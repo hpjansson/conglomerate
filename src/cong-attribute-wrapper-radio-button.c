@@ -95,6 +95,7 @@ cong_attribute_wrapper_radio_button_instance_init (CongAttributeWrapperRadioButt
  * @attribute_value:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *attribute_wrapper,
@@ -139,6 +140,7 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
  * @attribute_value:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_new ( CongDocument *doc,

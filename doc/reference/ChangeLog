@@ -1,3 +1,13 @@
+2004-06-23 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* README: Update.
+
+	* conglomerate-sections.txt, conglomerate-types.txt:
+	* conglomerate-overrides.txt: Update for recent sources.
+
+	* conglomerate-docs.sgml: XInclude replaced with external
+	entities. This is common practice of gtk-doc usage.
+
 2003-12-22  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am:

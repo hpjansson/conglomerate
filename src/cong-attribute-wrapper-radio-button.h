@@ -55,7 +55,7 @@ cong_attribute_wrapper_radio_button_get_type (void);
 
 /* it's legitimate for attr to be NULL */
 CongAttributeWrapperRadioButton*
-cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *attribute_wrapper_radio_button,
+cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *attribute_wrapper,
 					       CongDocument *doc,
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,

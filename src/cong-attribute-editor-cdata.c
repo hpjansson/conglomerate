@@ -28,7 +28,7 @@
 
 #define PRIVATE(x) ((x)->private)
 
-struct CongAttributeEditorCDATADetails
+struct _CongAttributeEditorCDATADetails
 {
 	GtkBox *hbox;
 	GtkEntry *entry;
@@ -86,6 +86,7 @@ cong_attribute_editor_cdata_instance_init (CongAttributeEditorCDATA *area)
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeEditor*
 cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_editor_cdata,
@@ -163,6 +164,7 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 cong_attribute_editor_cdata_new (CongDocument *doc,

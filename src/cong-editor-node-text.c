@@ -108,7 +108,7 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 			       gint line_width,
 			       gint initial_indent);
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type (CongEditorNode *editor_node);
 
 /* FIXME:  We probably shouldn't have every text node in the doc listening to every text node change... probably should allow for a dispatch mechanism within the widget */
@@ -215,7 +215,7 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 #if 0
 	gchar *markup;	
 #endif
-	enum CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_widget3_get_document (editor_widget),
+	CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_widget3_get_document (editor_widget),
 										    cong_traversal_node_get_node (traversal_node));
 
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_text),
@@ -1083,7 +1083,7 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	return FALSE;
 }
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type(CongEditorNode *editor_node)
 {
 	return CONG_FLOW_TYPE_INLINE;

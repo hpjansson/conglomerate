@@ -83,12 +83,12 @@ visit_func(const gchar *rel_path,
  * @registry:
  * @xds_directory:
  * @toplevel_window:
- * @raise_errors:
+ * @raise_errs:
  *
  * TODO: Write me
  */
 void
-cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_directory, GtkWindow *toplevel_window, gboolean raise_errors)
+cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_directory, GtkWindow *toplevel_window, gboolean raise_errs)
 {
 	GnomeVFSResult vfs_result;
 	struct LoadingDetails details;
@@ -103,7 +103,7 @@ cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_
 					       visit_func,
 					       (gpointer)&details);
 
-	if (raise_errors && vfs_result!=GNOME_VFS_OK) {
+	if (raise_errs && vfs_result!=GNOME_VFS_OK) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
 										      _("Conglomerate could not read its registry of document types."),
 										      xds_directory,
@@ -126,6 +126,7 @@ cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_
  * @toplevel_window:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecRegistry*
 cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window)
@@ -158,6 +159,7 @@ cong_dispspec_registry_free(CongDispspecRegistry* registry)
  * @registry:
  *
  * TODO: Write me
+ * Returns:
  */
 unsigned int
 cong_dispspec_registry_get_num(CongDispspecRegistry* registry)
@@ -173,6 +175,7 @@ cong_dispspec_registry_get_num(CongDispspecRegistry* registry)
  * @i:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec*
 cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i)
@@ -370,7 +373,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
 /**
  * cong_dispspec_registry_get_appropriate_dispspec:
  * @registry:
- * @xml_doc:
+ * @doc:
  * @filename_extension:
  * 
  * Routine to figure out an appropriate dispspec for use with this file.
@@ -382,7 +385,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
  */
 CongDispspec*
 cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 
-						 xmlDocPtr xml_doc,
+						 xmlDocPtr doc,
 						 const gchar *filename_extension)
 {
 #if 0
@@ -391,13 +394,13 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 #endif
 
 	g_return_val_if_fail (registry,NULL);
-	g_return_val_if_fail (xml_doc,NULL);
+	g_return_val_if_fail (doc,NULL);
 
 	/* Check for a DTD match: */
-	if (xml_doc->extSubset) {
+	if (doc->extSubset) {
 
 		/* Check for matching PUBLIC ID: */
-		if (xml_doc->extSubset->ExternalID) {
+		if (doc->extSubset->ExternalID) {
 			int i;
 
 			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
@@ -407,8 +410,8 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 
 				if (dtd) {
 					if (cong_external_document_model_get_public_id (dtd)) {
-						if (0==strcmp (xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
-							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID);
+						if (0==strcmp (doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", doc->extSubset->ExternalID);
 							return ds;
 						}
 					}
@@ -417,8 +420,8 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 		}
 
 		/* Check for matching SYSTEM ID: */
-		if (xml_doc->extSubset->SystemID) {
-			const unsigned char *sysID = xml_doc->extSubset->SystemID;
+		if (doc->extSubset->SystemID) {
+			const unsigned char *sysID = doc->extSubset->SystemID;
 			int i;
 			
 			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
@@ -456,7 +459,7 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 		for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
 			coverage_array[i].ds = cong_dispspec_registry_get (registry, i);
 			coverage_array[i].coverage = cong_dispspec_calculate_coverage (coverage_array[i].ds,
-										       xml_doc);
+										       doc);
 			g_message ("coverage of %s = %f", 
 				   cong_dispspec_get_name (coverage_array[i].ds), 
 				   coverage_array[i].coverage);
@@ -495,7 +498,7 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	}
 #else
 	/* Otherwise, check for a matching top-level element:*/
-	if (get_toplevel_tag(xml_doc, &toplevel_xmlns, &toplevel_tag)) {
+	if (get_toplevel_tag(doc, &toplevel_xmlns, &toplevel_tag)) {
 		int i;
 		
 		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);

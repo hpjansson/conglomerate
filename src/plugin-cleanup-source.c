@@ -310,7 +310,7 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 			g_assert(node->parent);
 			
 			{
-				enum CongNodeType parent_type = cong_node_type (node->parent);
+				CongNodeType parent_type = cong_node_type (node->parent);
 				if (parent_type!=CONG_NODE_TYPE_DOCUMENT) {
 					add_indentation_and_cr_nodes (doc, 
 								      node,

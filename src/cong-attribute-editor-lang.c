@@ -116,10 +116,10 @@ cong_attribute_editor_lang_instance_init (CongAttributeEditorLang *attribute_edi
  * @doc:
  * @node:
  * @ns_ptr:
- * @attribute_name:
  * @attr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongAttributeEditor*
 cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_lang,
@@ -200,6 +200,7 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
  * @attr: Pointer to attribute
  *
  * TODO: Creates editor of language-based attribute
+ * Returns:
  */
 GtkWidget*
 cong_attribute_editor_lang_new (CongDocument *doc,

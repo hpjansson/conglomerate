@@ -68,7 +68,7 @@ struct CongEditorNodeDetails
 	gboolean is_selected;
 };
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type(CongEditorNode *editor_node);
 
 #if 0
@@ -154,7 +154,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 {
 	CongDocument *doc;
 	CongNodePtr xml_node;
-	enum CongNodeType type;
+	CongNodeType type;
 
 	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (widget), NULL);
 	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node), NULL);
@@ -479,10 +479,10 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
  *
  * TODO: Write me
  */
-enum CongFlowType
+CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 {
-	enum CongFlowType flow_type;
+	CongFlowType flow_type;
 		
 	g_return_val_if_fail (editor_node, CONG_FLOW_TYPE_BLOCK);
 
@@ -742,7 +742,7 @@ cong_editor_node_set_parents_child_policy (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->parents_child_policy = child_policy;
 }
 
-static enum CongFlowType
+static CongFlowType
 get_flow_type(CongEditorNode *editor_node)
 {
 	return CONG_FLOW_TYPE_BLOCK;

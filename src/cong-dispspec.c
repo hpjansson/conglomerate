@@ -51,7 +51,7 @@ struct CongSerialisationFormat
 
 struct CongExternalDocumentModel
 {
-	enum CongDocumentModelType model_type;
+	CongDocumentModelType model_type;
 	gchar *public_id;
 	gchar *system_id;
 };
@@ -177,7 +177,7 @@ cong_serialisation_format_new (const gchar *extension)
 }
 
 static CongExternalDocumentModel*
-cong_external_document_model_new (enum CongDocumentModelType model_type,
+cong_external_document_model_new (CongDocumentModelType model_type,
 				  const gchar *public_id,
 				  const gchar *system_id)
 {
@@ -572,7 +572,7 @@ cong_dispspec_matches_filename_extension (const CongDispspec *ds,
  */
 const CongExternalDocumentModel*
 cong_dispspec_get_external_document_model (const CongDispspec *ds,
-					   enum CongDocumentModelType model_type)
+					   CongDocumentModelType model_type)
 {
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(model_type<NUM_CONG_DOCUMENT_MODEL_TYPES, NULL);
@@ -654,7 +654,7 @@ cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
  *
  * TODO: Write me
  */
-enum CongElementType
+CongElementType
 cong_dispspec_type (CongDispspec *ds, 
 		    const gchar* ns_uri, 
 		    const gchar* local_name)
@@ -803,7 +803,7 @@ cong_dispspec_get_element (CongDispspec *ds,
 /* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
 #if 0
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage)
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, CongDispspecGCUsage usage)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, );
 
@@ -942,16 +942,17 @@ cong_dispspec_element_collapse (CongDispspec *ds,
  * cong_dispspec_element_span:
  * @ds:
  * @ns_uri:
- * @name:
+ * @local_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dispspec_element_span (CongDispspec *ds, 
 			    const gchar *ns_uri, 
-			    const char *name)
+			    const char *local_name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, local_name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -1199,7 +1200,7 @@ parse_external_document_model (CongDispspec *ds,
 	type = cong_node_get_attribute (node, NULL, "type");
 
 	if (type) {
-		enum CongDocumentModelType model_type = cong_enum_mapping_lookup (document_model_enum_mapping,
+		CongDocumentModelType model_type = cong_enum_mapping_lookup (document_model_enum_mapping,
 										  sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
 										  "type",
 										  CONG_DOCUMENT_MODE_TYPE_DTD);
@@ -1353,7 +1354,7 @@ add_xml_for_document_models (xmlDocPtr xml_doc,
 		     node_document_models);
 	
 	for (i=0; i<NUM_CONG_DOCUMENT_MODEL_TYPES; i++) {
-		enum CongDocumentModelType model_type = (enum CongDocumentModelType)i;
+		CongDocumentModelType model_type = (CongDocumentModelType)i;
 
 		const CongExternalDocumentModel* model = cong_dispspec_get_external_document_model (dispspec,
 												    model_type);

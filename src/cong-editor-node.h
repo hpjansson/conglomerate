@@ -80,7 +80,7 @@ struct CongEditorNodeClass
 
 	void (*line_regeneration_required) (CongEditorNode *editor_node);
 	
-	enum CongFlowType (*get_flow_type) (CongEditorNode *editor_node);
+	 CongFlowType (*get_flow_type) (CongEditorNode *editor_node);
 };
 
 GType
@@ -146,7 +146,7 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 void
 cong_editor_node_line_regeneration_required (CongEditorNode *editor_node);
 
-enum CongFlowType
+CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);
 
 /**
