@@ -4,15 +4,6 @@
 #  Copyright 2003 by Geert Stappers under the terms of GPL v2.0
 #
 
-#
-if [ -d debian ]
-then
-  echo There is already a debian directory
-  echo assuming there is no need to run this script
-  echo gonna exit it
-  echo mayby you want to do \`debian/rules binary\`
-  exit 1
-fi
 
 if [ "G${0}" != "Gdeb/build" ]
 then
@@ -32,18 +23,42 @@ DEBIAN_FILES="rules control changelog copyright docs compat
  conglomerate.menu conglomerate_icon.xpm
  NEWS watch"
 
-echo coping  deb directory into debian
-mkdir -p debian
-for DF in ${DEBIAN_FILES}
-do
-  cp deb/${DF} debian
-done
+#
+if [ ! -f debian/control ]
+then
+  echo coping  deb directory into debian
+  mkdir -p debian
+  for DF in ${DEBIAN_FILES}
+  do
+    cp deb/${DF} debian
+  done
+fi
+
+#
+if [ ! -x debian/rules ]
+then
+  chmod +x debian/rules
+fi
 
 # assuming the user has debian development stuff installed
 # ( this is the place where a test on such executables should done )
 
+
+#
+if [ $# > 1 ]
+then
+  # the only supported parameter.
+  dch -v "$1" "New upstream release."
+fi
+
 echo gonna build the package
-debian/rules binary
+if [ ! -f build-stamp ]
+then
+  dpkg-buildpackage -uc -us
+else
+  debian/rules binary
+fi
+
 
 echo one directory level up, are these .deb files:
 ls -ltr ../*.deb
