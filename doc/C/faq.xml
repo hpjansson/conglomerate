@@ -84,6 +84,7 @@
 				<answer>
 					<para>A display specification is an XML document used by Conglomerate to hold information about how Conglomerate should display a document and how elements are to be edited. </para>
 					<para>It is designed to work alongside DTDs or XSchema files to provide information which is more specific to Conglomerate. For example, it can suggest icons that should be used for a particular XML tag. </para>
+					<para>The Conglomerate website has a <ulink url="xds/index.html">list of display specifications</ulink>. This list is generated from a recent version of the data in CVS.</para>
 				</answer>
 			</qandaentry>
 			<qandaentry>
