@@ -11,5 +11,4 @@ EXTRA_DIST = BUGS	\
   intltool-update.in	\
   omf.make              \
   xmldocs.make          \
-  intltool-modules/XML/Parser/Style/OrigTree.pm \
   $(NULL)
