@@ -1029,18 +1029,48 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 }
 
 gboolean
+cong_node_should_be_visible_in_editor (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+
+	if (cong_node_type (node) == CONG_NODE_TYPE_TEXT) {
+		xmlElementPtr dtd_entry;
+
+		/* If the DTD doesn't allow #PCDATA in this node and it only
+		   contains whitespace we should ignore it (if it does it
+		   shouldn't validate we should add an error marked element).
+		*/
+		dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
+		if (dtd_entry) {
+			if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
+				return TRUE;
+			} else if (!cong_util_is_pure_whitespace (node->content)) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		} else {
+			return TRUE;
+		}
+	} else {
+		return TRUE;
+	}
+}
+
+gboolean
 cong_node_is_valid_cursor_location (CongNodePtr node)
 {
 	g_return_val_if_fail (node, FALSE);
 
-#if 1
-	/* For now: */
-	return (node->type == XML_TEXT_NODE);
-#else
-	/* Eventually allow comment editing: */
-	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
-#endif
-	
+	switch (node->type) {
+	default: return FALSE;
+	case XML_TEXT_NODE:
+		return cong_node_should_be_visible_in_editor (node);
+		
+	case XML_COMMENT_NODE:
+		/* Eventually allow comment editing: */		
+		return FALSE;
+	}
 }
 
 gboolean

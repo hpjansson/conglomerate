@@ -1,5 +1,9 @@
 2003-12-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c, cong-node.c, cong-node.h
+
+	Moved detection of unneccesary whitespace TEXT nodes into a new function; used it for handling cursor movement to skip these nodes
+
 	* cong-editor-area-flow-holder-blocks.c, cong-editor-widget3.c
 
 	Fixes for bug #123367 by Anders Petersson <demitar@worldforge.org>

@@ -212,6 +212,20 @@ enum CongWhitespaceHandling
 cong_node_get_whitespace_handling (CongDocument *doc,
 				   CongNodePtr text_node);
 
+/**
+ * cong_node_should_be_visible_in_editor:
+ * @node:  a node to be tested
+ *
+ * The function detemines if the node ought to be visible in the main editor view.
+ *
+ * As described in bug #123367, TEXT nodes that are either empty or purely whitespace
+ * should only appear in the main editor view if the DTD allows PCDATA at the location in the
+ * document.  Otherwise the text is probably merely formatting to prettify the source view. *
+ *
+ * Returns: a #gboolean which is TRUE iff the node ought to be visible in the main editor view
+ */
+gboolean
+cong_node_should_be_visible_in_editor (CongNodePtr node);
 
 /**
  * cong_node_is_valid_cursor_location:
