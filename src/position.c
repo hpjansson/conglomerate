@@ -165,7 +165,7 @@ cong_layout_cache_get_last_line(CongLayoutCache *layout_cache)
 
 void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 {
-	char *data;
+	const char *data;
 	UNUSED_VAR(int word_x_offset = 0)
 	UNUSED_VAR(int i_last_space = 0)
 	int i;
@@ -254,6 +254,8 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 		{
 			node_prev = pos->node;  /* Backup for later */
 
+			/* XML_TAG_EMPTY isn't supported by my parser */
+#if 0
 			if (xml_frag_type(pos->node) == XML_TAG_EMPTY &&
 					!strcasecmp("p", xml_frag_name_nice(pos->node)))
 			{
@@ -263,9 +265,11 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 				else pos->c = 0;
 				return;
 			}
+			else 
+#endif
 
-			else if (xml_frag_type(pos->node) == XML_TAG_SPAN &&
-							 !strcasecmp("table", xml_frag_name_nice(pos->node)))
+			if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT &&
+			    !strcasecmp("table", xml_frag_name_nice(pos->node)))
 			{
 /*				
 				pos->node = node_prev2;
@@ -279,14 +283,16 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 
 			/* If spanning tag... */
 
-			else if (xml_frag_type(pos->node) == XML_TAG_SPAN)
+			else if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT)
 			{
 				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(pos->node)))
 				{
 					pos->node = node_prev2;
-					if (xml_frag_type(pos->node) == XML_DATA) 
+					if (cong_node_type(pos->node) == CONG_NODE_TYPE_TEXT) {
 						pos->c = strlen(xml_frag_data_nice(pos->node));
-					else pos->c = 0;
+					} else {
+						pos->c = 0;
+					}
 					return;
 				}
 				else if (cong_node_first_child(pos->node))
@@ -310,7 +316,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 
 			/* If data fragment... */
 
-			if (xml_frag_type(pos->node) == XML_DATA)
+			if (cong_node_type(pos->node) == CONG_NODE_TYPE_TEXT)
 			{
 				/* Do data */
 
@@ -353,7 +359,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 	}
 	while (pos->node);
 
-  pos->node = node_prev;
+	pos->node = node_prev;
 }
 
 
@@ -406,7 +412,7 @@ struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
 
 void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 {
-	char *data;
+	const char *data;
 	int word_x_offset = 0;
 	int i;
 
@@ -520,6 +526,8 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 		{
 			node_prev = pos->node;  /* Backup for later */
 
+			/* XML_TAG_EMPTY is never output by my parser */
+#if 0
 			if (xml_frag_type(pos->node) == XML_TAG_EMPTY &&
 					!strcasecmp("p", xml_frag_name_nice(pos->node)))
 			{
@@ -527,8 +535,9 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 				pos->x = 0;
 				pos->word_width = 0;
 			}
-			
-			else if (xml_frag_type(pos->node) == XML_TAG_SPAN &&
+			else 
+#endif
+			if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT &&
 					     !strcasecmp("table", xml_frag_name_nice(pos->node)))
 			{
 				pos->line += 2;
@@ -538,8 +547,8 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 			
 			/* If spanning tag... */
 
-			else if (xml_frag_type(pos->node) == XML_TAG_SPAN &&
-					     cong_node_first_child(pos->node))
+			else if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT &&
+				 cong_node_first_child(pos->node))
 			{
 				/* Go down */
 #ifndef RELEASE
@@ -551,7 +560,7 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 
 			/* If data fragment... */
 
-			if (xml_frag_type(pos->node) == XML_DATA)
+			if (cong_node_type(pos->node) == CONG_NODE_TYPE_TEXT)
 			{
 				/* Do data */
 
@@ -600,11 +609,12 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 	while (pos->node);
 
 	pos->x += pos->word_width;
-  pos->node = node_prev;
+	pos->node = node_prev;
 	
 #ifndef RELEASE
 	printf("[Q]");
 #endif	
+
 }
 
 

@@ -592,6 +592,10 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 
 static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
+
   TTREE *dummy;                                                                 
 	                                                                                
 	#ifndef RELEASE                                                                 
@@ -614,7 +618,11 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 	 *   ttree_branch_remove(dummy);                                                   
 	 * */                                                                              
 	  xed_paste(the_globals.curs.w, the_globals.curs.xed);                                                  
+
+#endif /* #if NEW_XML_IMPLEMENTATION */
+
 	  return(TRUE);  
+
 }
 
 
@@ -783,7 +791,7 @@ void stack_print(CongLayoutStackEntry *t)
 
 #define DEBUG_STACK 0
 
-void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, CongNodePtr x, int lev)
+void cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int line, int pos_x, CongNodePtr x, int lev)
 {
 	CongLayoutStackEntry *top_entry;
 	CongLayoutStackEntry *new_entry;
@@ -831,7 +839,7 @@ void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, in
 #endif
 }
 
-void xed_stack_push(CongXMLEditor *xed, char *s, CongNodePtr x, gboolean new_line)
+void xed_stack_push(CongXMLEditor *xed, const char *s, CongNodePtr x, gboolean new_line)
 {
 	int line, pos_x;
 	int lev = 0;
@@ -1338,7 +1346,7 @@ void xed_str_micro_put(CongXMLEditor *xed, char *s)
 char *xed_word(CongNodePtr x, CongXMLEditor *xed, gboolean *spc_before, gboolean *spc_after)
 {
 	UNUSED_VAR(int i)
-	char *p0, *p1;
+	const char *p0, *p1;
 
 	if (*spc_after) { *spc_before = TRUE; *spc_after = FALSE; }
 	else *spc_before = FALSE;
@@ -1398,7 +1406,8 @@ void xed_word_rewind(CongXMLEditor *xed)
 
 int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 {
-	char *p0, *p1, *word;
+	const char *p0, *p1;
+	char *word;
 	int width;
 
  	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
@@ -1408,11 +1417,11 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 
 	for ( ; x; x = cong_node_next(x))
 	{
-		if (xml_frag_type(x) == XML_TAG_SPAN)
+		if (cong_node_type(x) == CONG_NODE_TYPE_ELEMENT)
 		{
 			return(xed_word_first_would_wrap(x, xed));
 		}
-		else if (xml_frag_type(x) == XML_DATA)
+		else if (cong_node_type(x) == CONG_NODE_TYPE_TEXT)
 		{
 			/* Isolate first word */
 			
@@ -1446,7 +1455,7 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 			}
 		}
 	}
-	
+
 	return(0);
 }
 
@@ -1580,6 +1589,10 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 
 int xed_xml_depth(CongNodePtr x)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return 0;
+#else
 	int d = 0, d_max = 0;
 
 	x = cong_node_first_child(x);
@@ -1596,6 +1609,8 @@ int xed_xml_depth(CongNodePtr x)
 	}
 
 	return(d_max + 1);
+#endif  /* #if NEW_XML_IMPLEMENTATION */
+
 }
 
 
@@ -1603,6 +1618,10 @@ int xed_xml_depth(CongNodePtr x)
 
 int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return 0;
+#else
 	int d = 0, d_max = 0;
 
 	for (d = d_max = 0; x; x = cong_node_next(x))
@@ -1617,6 +1636,7 @@ int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 	}
 	
 	return(d_max + 1);
+#endif
 }
 
 
@@ -1714,10 +1734,10 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 
 	for (; x; )
 	{
-		int type = xml_frag_type(x);
-		char *name = xml_frag_name_nice(x);
+		enum CongNodeType node_type = cong_node_type(x);
+		const char *name = xml_frag_name_nice(x);
 
-		if (type == XML_TAG_SPAN && cong_dispspec_element_span(xed->displayspec, name) &&
+		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_span(xed->displayspec, name) &&
 				strcasecmp("table", name))
 		{
 			draw_tag_lev_new = xed_xml_content_tag(xed, x);
@@ -1726,7 +1746,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 				draw_tag_lev = draw_tag_lev_new;
 			}
 		}
-		else if (type == XML_DATA)
+		else if (node_type == CONG_NODE_TYPE_TEXT)
 		{
 #if DEBUG_STACK
 			printf("Data node, x = %d.\n", xed->draw_pos_x);
@@ -1749,6 +1769,9 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 				continue;
 			}
 		}
+
+		/* FIXME:  XML_TAG_EMPTY is never output by my parser rewrite, which is probably why the para stuff doesn't work properly */
+#if 0
 		else if (type == XML_TAG_EMPTY && CONG_ELEMENT_TYPE_PARAGRAPH==cong_dispspec_type(ds, name))
 		{
 			/* Paragraph. Implies linewrap */
@@ -1786,7 +1809,8 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 			draw_tag_lev = 0;
 			cong_layout_stack_compress(&xed->layout_stack);
 		}
-		else if (type == XML_TAG_SPAN && !strcasecmp("table", name))
+#endif
+		else if (node_type == CONG_NODE_TYPE_ELEMENT && !strcasecmp("table", name))
 		{
 			/* TABLE. Identifier on separate line */
 
@@ -1914,10 +1938,14 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 
 	for (x = xed->x; x; x = cong_node_next(x))
 	{
+#if 1
+		enum CongNodeType node_type = cong_node_type(x);
+#else
 		int type = xml_frag_type(x);
-		char *name = xml_frag_name_nice(x);
+#endif
+		const char *name = xml_frag_name_nice(x);
 
-		if (type == XML_TAG_SPAN && strcasecmp("table", name)) {
+		if (node_type == CONG_NODE_TYPE_ELEMENT && strcasecmp("table", name)) {
 			if (cong_dispspec_element_span(xed->displayspec, name) /* ||
 										  cong_dispspec_element_insert(xed->displayspec, name) */ ) {
 				draw_tag_lev_new = xed_xml_content_tag(xed, x);
@@ -1927,12 +1955,15 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			}
 			else if (cong_dispspec_element_structural(xed->displayspec, name)) break;
 		}
-		else if (type == XML_DATA)
+		else if (node_type == CONG_NODE_TYPE_TEXT)
 		{
 			if (xed_xml_content_data_root(xed, x, draw_tag_lev)) { 
 				draw_tag_lev = 0;
 			}
 		}
+
+		/* FIXME:  the new parser doesn't support XML_TAG_EMPTY; this might explain the para bugs */
+#if 0
 		else if (type == XML_TAG_EMPTY && CONG_ELEMENT_TYPE_PARAGRAPH==cong_dispspec_type(ds, name))
 		{
 			/* Linewrap */
@@ -1969,7 +2000,8 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			xed->draw_tag_max = 0;
 			draw_tag_lev = 0;
 		}
-		else if (type == XML_TAG_SPAN && !strcasecmp("table", name))
+#endif
+		else if (node_type == CONG_NODE_TYPE_ELEMENT && !strcasecmp("table", name))
 		{
 			/* TABLE. Identifier on separate line */
 
@@ -2069,6 +2101,9 @@ void xed_cutcopy_update(struct curs* curs)
 
 gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongNodePtr t;
 	int replace_xed = 0;
 
@@ -2110,6 +2145,7 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	selection_curs_unset();
 
 	xed_cutcopy_update(curs);
+#endif
 
 	return(TRUE);
 }
@@ -2117,6 +2153,9 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
 	int replace_xed = 0;
@@ -2172,6 +2211,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 #endif
 
 	xed_cutcopy_update(curs);
+#endif
 
 	return(TRUE);
 }
@@ -2179,6 +2219,9 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
 	CongNodePtr t1 = NULL;
@@ -2202,7 +2245,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	
 	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
-	if (cong_location_frag_type(&curs->location) == XML_DATA)
+	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
 	{
 		if (!curs->location.char_loc)
 		{
@@ -2249,6 +2292,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	cong_location_nullify(&selection->loc1);
 
 	xed_redraw(curs->xed);
+#endif
 	return(TRUE);
 }
 

@@ -16,8 +16,11 @@ void tree_coarse_update_of_view()
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 }
 
-gint tree_new_sibling(GtkWidget *widget, TTREE *tag)
+gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	TTREE *n0, *n1, *n2;
 	char *s;
 
@@ -42,13 +45,17 @@ gint tree_new_sibling(GtkWidget *widget, TTREE *tag)
 	tag->next = n0;
 
 	tree_coarse_update_of_view();
+#endif
 
 	return(TRUE);
 }
 
 
-gint tree_new_sub_element(GtkWidget *widget, TTREE *tag)
+gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	TTREE *n0, *n1;
 	char *s;
 
@@ -67,34 +74,44 @@ gint tree_new_sub_element(GtkWidget *widget, TTREE *tag)
 	ttree_node_add(n0, " ", 1);
 
 	tree_coarse_update_of_view();
+#endif
 
 	return(TRUE);
 }
 
 
-gint tree_cut(GtkWidget *widget, TTREE *tag)
+gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	the_globals.clipboard = ttree_branch_dup(tag);
 	ttree_branch_remove(tag);
 
 	tree_coarse_update_of_view();
-
+#endif
 	return(TRUE);
 }
 
 
-gint tree_copy(GtkWidget *widget, TTREE *tag)
+gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	the_globals.clipboard = ttree_branch_dup(tag);
-	
+#endif	
 	return(TRUE);
 }
 
 
 gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
@@ -114,13 +131,16 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 
 	tree_coarse_update_of_view();
-
+#endif
 	return(TRUE);
 }
 
 
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
@@ -146,13 +166,16 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 	
 	tree_coarse_update_of_view();
-
+#endif
 	return(TRUE);
 }
 
 
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
@@ -173,7 +196,7 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 	
 	tree_coarse_update_of_view();
-
+#endif
 	return(TRUE);
 }
 

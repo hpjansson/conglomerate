@@ -800,22 +800,24 @@ GtkWidget *xv_section_tail(CongDispspec *ds, CongNodePtr x)
 	return(line);
 }
 
-TTREE *xv_editor_elements_skip(TTREE *x, CongDispspec *ds)
+CongNodePtr xv_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 {
-	UNUSED_VAR(TTREE *x0);
-
-	for ( ; x; x = xml_frag_next(x))
+	for ( ; x; x = cong_node_next(x))
 	{
+#if 1
+		enum CongNodeType node_type = cong_node_type(x);
+#else
 		int type = xml_frag_type(x);
-		char *name = xml_frag_name_nice(x);
+#endif
+		const char *name = xml_frag_name_nice(x);
 
-		if (type == XML_TAG_SPAN && cong_dispspec_element_structural(ds, name))
+		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
 		{
-			return(xml_frag_prev(x));
+			return(cong_node_prev(x));
 		}
 
 		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
-			return(xml_frag_prev(x));
+			return(cong_node_prev(x));
 		}
 	}
 
@@ -1027,14 +1029,22 @@ GtkWidget *xv_element_new(CongDocument *doc,
 	x = cong_node_first_child(x);
 	if (!x) return(0);
 
-	for ( ; x; x = cong_node_next(x))
+	for ( ; x; )
 	{
+#if 1
+		enum CongNodeType node_type = cong_node_type(x);
+#else
 		int type = xml_frag_type(x);
-		char *name = xml_frag_name_nice(x);
+#endif
+		const char *name = xml_frag_name_nice(x);
 
 		/* g_message("Examining frag %s\n",name); */
 
+#if 1
+		if (node_type == CONG_NODE_TYPE_ELEMENT)
+#else
 		if (type == XML_TAG_SPAN)
+#endif
 		{
 			if (cong_dispspec_element_structural(ds, name))
 			{
@@ -1122,7 +1132,11 @@ GtkWidget *xv_element_new(CongDocument *doc,
 #endif
 			}
 		}
+#if 1
+		else if (node_type == CONG_NODE_TYPE_TEXT)
+#else
 		else if (type == XML_DATA)
+#endif
 		{
 			/* New editor window */
 
@@ -1135,6 +1149,10 @@ GtkWidget *xv_element_new(CongDocument *doc,
 			
 			x = xv_editor_elements_skip(x, ds);
 		}
+
+		if (x) {
+			x = cong_node_next(x);
+		}
 	}
 
 	xv_style_r(sub, style_white);
@@ -1144,6 +1162,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 	gtk_tree_item_expand(GTK_TREE_ITEM(glaebb_item));
 #endif
 	return(root);
+
 }
 
 struct xview *xmlview_new(CongDocument *doc)
@@ -1215,26 +1234,26 @@ struct xview *xmlview_new(CongDocument *doc)
 #if 1
 	gtk_widget_show(xv->w);
 #endif
-	
 
-#if 0
-	x = cong_node_first_child(cong_document_get_root(doc));  /* Don't ignore root element */
-#else
-	x = cong_node_first_child(cong_document_get_root(doc)->child);  /* Root node specific */
+#if 1
+	/* Don't ignore root element: */
+	x = cong_document_get_root(doc);
+#else	
+	/* Ignore root element: */
+	x = cong_node_first_child(cong_document_get_root(doc));
 #endif
 
 	for ( ; x; x = cong_node_next(x))
 	{
-	  int type = xml_frag_type(x);
-	  char *name = xml_frag_name_nice(x);
+		enum CongNodeType type = cong_node_type(x);
 
-	  g_message("examining frag \"%s\"\n",name);
+		const char *name = xml_frag_name_nice(x);
+
+		g_message("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
-		if (type == XML_TAG_SPAN && cong_dispspec_element_structural(displayspec, name))
+		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{
 			/* New element */
-
-#if 1
 			GtkWidget* head = xv_section_head(displayspec, x);
 
 			gtk_box_pack_start(GTK_BOX(xv->w), head, TRUE, TRUE, 0);
@@ -1244,23 +1263,9 @@ struct xview *xmlview_new(CongDocument *doc)
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);
 			gtk_box_pack_start(GTK_BOX(head), w, FALSE, TRUE, 0);
-#else
-			w = xv_section_head(displayspec, x);
-
-			gtk_box_pack_start(GTK_BOX(xv->w), w, TRUE, TRUE, 0);
-			
-#if 1
-			xv_element_new(x, displayspec, xv->w, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
-#else
-			xv_element_new(x, displayspec, xv->w, 0, glaebb_tree);
-#endif
-
-			w = xv_section_tail(displayspec, x);
-			xv_style_r(w, style_white);
-			gtk_box_pack_start(GTK_BOX(xv->w), w, FALSE, TRUE, 0);
-#endif
 		}
 	}
+
 
 #if 1
 	printf("removed call to gtk_tree_item_expand\n");
@@ -1268,9 +1273,7 @@ struct xview *xmlview_new(CongDocument *doc)
 	gtk_tree_item_expand(GTK_TREE_ITEM(xv->tree));
 #endif
 	
-#if 1
 	gtk_widget_show_all(xv->w);
-#endif
 	
 	return(xv);
 }

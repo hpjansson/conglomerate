@@ -8,12 +8,11 @@
 #include <xml.h>
 #include "global.h"
 
-#if 1
 static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
-#else
-static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
-#endif
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	TTREE *dummy, *n, *r;
 
 #ifndef RELEASE
@@ -22,20 +21,12 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 	
 	dummy = ttree_node_add(0, "d", 1);
 	n = ttree_node_add(dummy, "tag_span", 8);
-#if 1
 	ttree_node_add(n, cong_dispspec_element_tagname(element), strlen(cong_dispspec_element_tagname(element))+1);
-#else
-	ttree_node_add(n, tag->data, tag->size);
-#endif
 	n->parent = 0;
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
 
-#if 1
 	if (the_globals.selection.loc0.tt_loc == the_globals.curs.xed->x)
-#else
-	if (the_globals.selection.t0 == the_globals.curs.xed->x)
-#endif
 	{
 		r = selection_reparent_all(&the_globals.selection, n);
 		if (r) the_globals.curs.xed->x = r;
@@ -45,6 +36,7 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 
 	xed_redraw(the_globals.curs.xed);
 	the_globals.curs.xed = 0;
+#endif
 
 	return(TRUE);
 }
@@ -107,45 +99,48 @@ void popup_init()
 
 void popup_tag_remove_inner()
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	TTREE *n0;
 
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
-#if 1
 	if (!cong_location_exists(&the_globals.curs.location)) return;
-#else
-	if (!the_globals.curs.t) return;
-#endif
 
 	n0 = xml_inner_span_element(ds, the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
+#endif
 }
 
 void popup_tag_remove_outer()
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	TTREE *n0;
 
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
-#if 1
 	if (!cong_location_exists(&the_globals.curs.location)) return;
-#else
-	if (!the_globals.curs.t) return;
-#endif
 	
 	n0 = xml_outer_span_element(ds, the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
+#endif
 }
 
 
 void popup_build(CongXMLEditor *xed)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	GtkWidget *item, *w0;
 #if 1
 	CongDispspecElement *n0;
@@ -242,6 +237,8 @@ void popup_build(CongXMLEditor *xed)
 		}
 	}
 #endif
+
+#endif
 }
 
 
@@ -302,11 +299,7 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 	return(FALSE);
 }
 
-#if 1
-GtkWidget* tpopup_init(TTREE *x)
-#else
-void tpopup_init(GtkWidget *treeitem, TTREE *x)
-#endif
+GtkWidget* tpopup_init(CongNodePtr x)
 {
 	GtkWidget *item, *tpopup, *w0;
 

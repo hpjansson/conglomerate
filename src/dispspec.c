@@ -422,7 +422,7 @@ cong_dispspec_get_description(const CongDispspec *ds)
 }
 
 
-gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name)
+gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -434,7 +434,7 @@ gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name)
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -446,7 +446,7 @@ gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_span(CongDispspec *ds, char *name)
+gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -458,7 +458,7 @@ gboolean cong_dispspec_element_span(CongDispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name)
+gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -506,7 +506,7 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
   gcol->red = (col >> 8) & 0xff00;
 }
 
-char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
+const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
 	if (element) {

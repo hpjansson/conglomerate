@@ -1,6 +1,12 @@
 creating ChangeLog
 2002-10-18 David Malcolm
 
+	* cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, main.c, open.c, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Porting from Flux to libxml2
+	
+2002-10-18 David Malcolm
+
 	* cursor.c, dispspec.c, global.h, main.c, position.c, xmledit.c, xmlview.c
 
 	Font cleanup

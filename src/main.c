@@ -285,6 +285,7 @@ cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* 
 
 int test_open_do(const char *doc_name, const char *ds_name)
 {
+#if !NEW_XML_IMPLEMENTATION
 	char *p;
 	TTREE *xml_in;
 	FILE *xml_f;
@@ -389,6 +390,8 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds));
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 #endif
+
+#endif 
 
 	return (TRUE);
 }
@@ -628,8 +631,6 @@ cong_font_delete(CongFont *font)
 
 void fonts_load()
 {
-#if 1
-
 #ifdef WINDOWS_BUILD                                                            
 	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
 	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TAG] = cong_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
@@ -645,28 +646,6 @@ void fonts_load()
 	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT]->asc -= 4;                                                                  
 	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG]asc -= 8;                                                                  
 #endif     
-
-#else
-#ifdef WINDOWS_BUILD                                                            
-	  the_globals.f = gdk_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
-	  the_globals.ft = gdk_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
-	  the_globals.fm = gdk_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");           
-#else                                                                           
-	  the_globals.f = gdk_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");        
-	  the_globals.ft = gdk_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");       
-	  the_globals.fm = gdk_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-iso8859-1");            
-#endif                                                                          
-	                                                                                
-	  gdk_string_extents(the_globals.f, font_chars, 0, 0, 0, &the_globals.f_asc, &the_globals.f_desc);                  
-	  gdk_string_extents(the_globals.fm, font_chars, 0, 0, 0, &the_globals.fm_asc, &the_globals.fm_desc);               
-	  gdk_string_extents(the_globals.ft, font_chars, 0, 0, 0, &the_globals.ft_asc, &the_globals.ft_desc);               
-	                                                                                
-#ifdef WINDOWS_BUILD                                                            
-	  the_globals.f_asc -= 2;                                                                   
-	  the_globals.ft_asc -= 4;                                                                  
-	  the_globals.fm_asc -= 8;                                                                  
-#endif     
-#endif
 }
 
 

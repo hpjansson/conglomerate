@@ -164,6 +164,10 @@ void selection_draw(struct selection* selection, struct curs* curs)
 /* Splits a data node in 3 and returns pointer to the middle one */
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return NULL;
+#else
 	TTREE *dummy, *d1, *d2, *d3;
 	UNUSED_VAR(TTREE *n0)
 	UNUSED_VAR(TTREE *n1)
@@ -229,6 +233,7 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 	free(s);
 
 	return(d2);
+#endif
 }
 
 
@@ -236,6 +241,10 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return NULL;
+#else
 	TTREE *dummy, *d;
 	int len1, len2;
 
@@ -328,11 +337,16 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 	d->parent = s->parent;
 
 	return(s);
+#endif
 }
 
 
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return NULL;
+#else
 	CongLocation loc0, loc1;
 	CongNodePtr n0, n1, n2;
 	UNUSED_VAR(int len)
@@ -477,6 +491,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		
 		return(loc0.tt_loc->parent->parent->prev);
 	}
+#endif
 }
 
 void selection_init(struct selection* selection)

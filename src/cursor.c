@@ -152,13 +152,8 @@ gint curs_data_insert(struct curs* curs, char *s)
 
 	len = strlen(s);
 
-#if 1
 	if (!cong_location_exists(&curs->location)) return(0);
-	if (cong_location_frag_type(&curs->location) != XML_DATA) return(0);
-#else
-	if (!curs->t) return(0);
-	if (xml_frag_type(curs->t) != XML_DATA) return(0);
-#endif
+	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
 
 #if 1
 	cong_location_insert_chars(&curs->location, s);
@@ -187,13 +182,8 @@ int curs_paragraph_insert(struct curs* curs)
 	
 	if (!curs->xed) return(0);
 
-#if 1
 	if (!cong_location_exists(&curs->location)) return(0);
-	if (cong_location_frag_type(&curs->location) != XML_DATA) return(0);
-#else	
-	if (!curs->t) return(0);
-	if (xml_frag_type(curs->t) != XML_DATA) return(0);
-#endif
+	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
 
 	g_assert(curs->xed);
 	ds = curs->xed->displayspec;
@@ -253,13 +243,8 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 	
 	if (!curs->xed) return;
 
-#if 1
 	n = curs->location.tt_loc;
-	if (cong_location_frag_type(&curs->location) == XML_DATA && curs->location.char_loc) { curs->location.char_loc--; return; }
-#else
-	n = curs->t;
-	if (xml_frag_type(n) == XML_DATA && curs->c) { curs->c--; return; }
-#endif
+	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && curs->location.char_loc) { curs->location.char_loc--; return; }
 
 	do
 	{
@@ -268,8 +253,8 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 		
 		for ( ; n; )
 		{
-			if (xml_frag_type(n) == XML_DATA) break;
-			else if (xml_frag_type(n) == XML_TAG_SPAN)
+			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
 			{
 				if (!strcmp(cong_node_name(n), "table")) break;
 				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
@@ -292,7 +277,7 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 		}
 
 		if (!n) n = n0;
-		else if (xml_frag_type(n) == XML_DATA) break;
+		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
 
 		while (n)
 		{
@@ -324,21 +309,12 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 	
 	if (!curs->xed) return;
 
-#if 1
 	n = curs->location.tt_loc;
-	if (cong_location_frag_type(&curs->location) == XML_DATA && cong_location_get_char(&curs->location)!='\0')
+	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && cong_location_get_char(&curs->location)!='\0')
 	{ 
 		curs->location.char_loc++; 
 		return; 
 	}
-#else
-	n = curs->t;
-	if (xml_frag_type(n) == XML_DATA && *(xml_frag_data_nice(n) + curs->c))
-	{ 
-		curs->c++; 
-		return; 
-	}
-#endif
 
 	do
 	{
@@ -347,8 +323,8 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 
 		for ( ; n; )
 		{
-			if (xml_frag_type(n) == XML_DATA) break;
-			else if (xml_frag_type(n) == XML_TAG_SPAN)
+			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
 			{				 
 				if (!strcmp(cong_node_name(n), "table")) break;
 				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
@@ -371,7 +347,7 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 		}
 
 		if (!n) n = n0;
-		else if (xml_frag_type(n) == XML_DATA) break;
+		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
 
 		while (n)
 		{

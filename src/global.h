@@ -25,6 +25,16 @@ enum
 #define NEW_LOOK 0
 #define NEW_XML_IMPLEMENTATION 0
 
+enum CongNodeType
+{
+	CONG_NODE_TYPE_UNKNOWN,
+	CONG_NODE_TYPE_ELEMENT,
+	CONG_NODE_TYPE_TEXT,
+	CONG_NODE_TYPE_COMMENT,
+
+	CONG_NODE_TYPE_NUM
+};
+
 #if NEW_XML_IMPLEMENTATION
 typedef xmlNodePtr CongNodePtr;
 
@@ -42,6 +52,11 @@ typedef TTREE* CongNodePtr;
 #define cong_node_first_child(t) xml_frag_enter(t)
 #define cong_node_parent(t) xml_frag_exit(t)
 #endif
+
+enum CongNodeType cong_node_type(CongNodePtr node);
+
+/* Handy debug method for writing log info: */
+const gchar *cong_node_type_description(enum CongNodeType node_type);
 
 enum CongElementType
 {
@@ -86,8 +101,8 @@ cong_location_exists(CongLocation *loc);
 gboolean
 cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
 
-int
-cong_location_frag_type(CongLocation *loc);
+enum CongNodeType
+cong_location_node_type(CongLocation *loc);
 
 char
 cong_location_get_char(CongLocation *loc);
@@ -121,8 +136,14 @@ cong_location_copy(CongLocation *dst, const CongLocation *src);
  */
 typedef struct _CongDocument CongDocument;
 
+#if NEW_XML_IMPLEMENTATION
+/* takes ownership of xml_doc */
+CongDocument*
+cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds);
+#else
 CongDocument*
 cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds);
+#endif
 
 void
 cong_document_delete(CongDocument *doc);
@@ -266,7 +287,7 @@ CongLayoutStackEntry*
 cong_layout_stack_bottom(CongLayoutStack *layout_stack);
 
 void
-cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, CongNodePtr x, int lev);
+cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int line, int pos_x, CongNodePtr x, int lev);
 
 
 
@@ -305,16 +326,9 @@ struct CongXMLEditor
 	GtkWidget *e;  /* Eventbox */
 	GtkWidget *w;  /* Drawing area */
 	GdkPixmap *p;  /* Backing pixmap */
-#if 0
-	GdkFont *f, *fm;
-#endif
 
 	CongDispspec *displayspec;
 	
-#if 0
-	int f_asc, f_desc;
-	int fm_asc, fm_desc;
-#endif
 	int tag_height;
 	
 	int initial;
@@ -437,12 +451,7 @@ struct cong_globals
 	struct curs curs;
 	struct selection selection;
 
-#if 1
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
-#else
-	GdkFont *f, *fm, *ft;
-	int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
-#endif
 
 	GdkGC *insert_element_gc;
 
@@ -499,10 +508,10 @@ CongXMLEditor *xmledit_new();
 CongFont*
 cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role);
 
-gint tree_new_sibling(GtkWidget *widget, TTREE *tag);
-gint tree_new_sub_element(GtkWidget *widget, TTREE *tag);
-gint tree_cut(GtkWidget *widget, TTREE *tag);
-gint tree_copy(GtkWidget *widget, TTREE *tag);
+gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag);
+gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag);
+gint tree_cut(GtkWidget *widget, CongNodePtr tag);
+gint tree_copy(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
@@ -517,8 +526,8 @@ gint select_vector(GtkWidget *w);
 
 gint xed_insert_table(GtkWidget *w, struct CongXMLEditor *xed);
 
-char *xml_frag_data_nice(CongNodePtr x);
-char *xml_frag_name_nice(CongNodePtr x);
+const char *xml_frag_data_nice(CongNodePtr x);
+const char *xml_frag_name_nice(CongNodePtr x);
 
 #if 0
 SOCK *server_login();
@@ -534,7 +543,7 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
 TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x);
 TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x);
-char *xml_fetch_clean_data(TTREE *x);
+char *xml_fetch_clean_data(CongNodePtr x);
 
 TTREE *get_upper_section(TTREE *x);
 
@@ -587,12 +596,12 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGC
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
 #endif
-char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
+const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
 
-gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name);
-gboolean cong_dispspec_element_span(CongDispspec *ds, char *name);
-gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name);
+gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name);
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name);
+gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name);
+gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name);
 
 enum CongElementType
 cong_dispspec_type(CongDispspec *ds, const char* tagname);
@@ -686,11 +695,7 @@ void popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void popup_build(CongXMLEditor *xed);
 void popup_init();
 
-#if 1
-GtkWidget* tpopup_init(TTREE *x);
-#else
-void tpopup_init(GtkWidget *treeitem, TTREE *x);
-#endif
+GtkWidget* tpopup_init(CongNodePtr x);
 gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);

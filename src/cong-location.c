@@ -46,6 +46,16 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 }
 
 
+#if 0
+#if NEW_XML_IMPLEMENTATION
+int cong_location_frag_type(CongLocation *loc)
+{
+	g_return_val_if_fail(loc != NULL, 0);
+	g_return_val_if_fail(loc->tt_loc != NULL, 0);
+	
+	return XML_DATA;
+}
+#else
 int cong_location_frag_type(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, 0);
@@ -53,24 +63,39 @@ int cong_location_frag_type(CongLocation *loc)
 	
 	return xml_frag_type(loc->tt_loc);
 }
+#endif
+#endif
+
+enum CongNodeType
+cong_location_node_type(CongLocation *loc)
+{
+	g_return_val_if_fail(loc != NULL, 0);
+
+	return cong_node_type(loc->tt_loc);
+}
 
 char cong_location_get_char(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, '\0');
 	g_return_val_if_fail(loc->tt_loc != NULL, '\0');
-	g_return_val_if_fail(cong_location_frag_type(loc) == XML_DATA, '\0');
+	g_return_val_if_fail(cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT, '\0');
 	
 	return *(xml_frag_data_nice(loc->tt_loc) + loc->char_loc);
 }
 
-TTREE*
+CongNodePtr
 cong_location_xml_frag_data_nice_split2(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(cong_location_exists(loc), NULL);
-	g_return_val_if_fail( (cong_location_frag_type(loc) == XML_DATA), NULL);
+	g_return_val_if_fail( (cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT), NULL);
 	
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return NULL;
+#else
 	return xml_frag_data_nice_split2(loc->tt_loc, loc->char_loc);
+#endif
 }
 
 void
@@ -80,11 +105,14 @@ cong_location_insert_chars(CongLocation *loc, const char* s)
 	int len;
 
 	g_return_if_fail(cong_location_exists(loc));
-	g_return_if_fail(cong_location_frag_type(loc) == XML_DATA);
+	g_return_if_fail(cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT);
 	g_return_if_fail(s!=NULL);
 
 	len = strlen(s);
-	
+
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else	
 	n = loc->tt_loc->child;
 	n->data = realloc(n->data, (n->size + 1) + len);
 	
@@ -92,12 +120,17 @@ cong_location_insert_chars(CongLocation *loc, const char* s)
 	memcpy(n->data + loc->char_loc, s, len);
 	n->size += len;
 	loc->char_loc += len;
+#endif
 }
 
 void
 cong_location_del_next_char(CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
+
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 
 	if (cong_location_get_char(loc))
 	{
@@ -109,6 +142,7 @@ cong_location_del_next_char(CongLocation *loc)
 	else if (loc->tt_loc->next && xml_frag_type(loc->tt_loc->next) == XML_TAG_EMPTY) {
 		ttree_branch_remove(loc->tt_loc->next);	
 	}
+#endif
 }
 
 CongNodePtr

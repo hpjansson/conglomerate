@@ -491,14 +491,16 @@ void force_load(gpointer data)
 void open_document_do(const gchar* doc_name)
 {
 	char *p;
+#if !NEW_XML_IMPLEMENTATION
 	TTREE *xml_in;
+#endif
 	FILE *xml_f;
 	CongDispspec *ds;
+	CongDocument *cong_doc;
+	xmlDocPtr doc = NULL;
 
 	/* Use libxml to load the doc: */
 	{
-		xmlDocPtr doc=NULL;
-
 		GnomeVFSURI* file_uri = gnome_vfs_uri_new(doc_name);
 
 		/* Load using GnomeVFS: */
@@ -568,14 +570,23 @@ void open_document_do(const gchar* doc_name)
 
 		gnome_vfs_uri_unref(file_uri);
 		
+		#if !NEW_XML_IMPLEMENTATION
 		xml_in = convert_libxml_to_ttree_doc(doc);
 
 		xmlFreeDoc(doc);
+		#endif /* #if NEW_XML_IMPLEMENTATION */
 	}
 
 	g_assert(ds);
-	
-	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds));
+#if NEW_XML_IMPLEMENTATION
+	cong_doc = cong_document_new_from_xmldoc(doc, ds); /* takes ownership of doc */
+#else	
+	cong_doc = cong_document_new_from_ttree(xml_in, ds);
+#endif
+
+	g_assert(cong_doc);
+
+	the_globals.xv = xmlview_new(cong_doc);
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 }
