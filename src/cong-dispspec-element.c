@@ -63,6 +63,8 @@ struct CongDispspecElement
 	gchar *editor_service_id;
 	gchar *property_dialog_service_id;
 
+	gboolean should_spellcheck;
+
 	GHashTable *key_value_hash;
 };
 
@@ -328,6 +330,8 @@ cong_dispspec_element_new (const gchar* ns_uri,
 	}
 
 	element->type = type;
+
+	element->should_spellcheck = TRUE;
 
 	/* Extract colour: */
 	{
@@ -1037,4 +1041,12 @@ cong_dispspec_element_make_element_description (const CongDispspecElement *ds_el
 
 	return cong_element_description_new (ds_element->ns_uri,
 					     ds_element->local_name);
+}
+
+gboolean
+cong_dispspec_element_should_spellcheck (const CongDispspecElement *ds_element)
+{
+	g_return_val_if_fail (ds_element, FALSE);
+
+	return ds_element->should_spellcheck;
 }

@@ -1,3 +1,9 @@
+2004-07-06  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h, cong-document.c, cong-util.c, cong-util.h, gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h, gxx-undefine-shared-macros.h
+
+	Added a spellcheck attribute to dispspec elements; implemented the previously-stubbed function cong_document_should_spellcheck_node to use this
+
 2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-node-text.c: 

@@ -64,6 +64,20 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
     } \
   }
 
+#define GXX_STRUCT_ATTRIBUTE_BOOLEAN(attr_name, member_name, is_required, default_value) \
+  { \
+    xmlChar *xml_value = xmlGetProp (xml_node, attr_name); \
+    if (xml_value) { \
+      inst->member_name = cong_util_string_to_bool (xml_value, default_value); \
+      xmlFree (xml_value); \
+    } else {\
+      if (is_required) { \
+        g_warning ("Missing attribute \"%s\" within <%s>", attr_name, tag_name); \
+      } \
+      inst->member_name = default_value; \
+    } \
+  }
+
 #define GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT(child_name, member_name, fn_name_frag, is_required) \
   { \
     xmlNodePtr child; \

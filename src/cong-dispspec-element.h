@@ -153,6 +153,9 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element);
 CongElementDescription*
 cong_dispspec_element_make_element_description (const CongDispspecElement *ds_element);
 
+gboolean
+cong_dispspec_element_should_spellcheck (const CongDispspecElement *ds_element);
+
 G_END_DECLS
 
 #endif

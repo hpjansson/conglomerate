@@ -23,5 +23,6 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
 #define GXX_STRUCT_ATTRIBUTE_INT(attr_name, member_name, is_required)
 #define GXX_STRUCT_ATTRIBUTE_STRING(attr_name, member_name, is_required, default_value)
 #define GXX_STRUCT_ATTRIBUTE_ENUM(attr_name, member_name, is_required, default_value, enum_mapping)
+#define GXX_STRUCT_ATTRIBUTE_BOOLEAN(attr_name, member_name, is_required, default_value)
 #define GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT(child_name, member_name, fn_name_frag, is_required)
 #define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hashing_attribute_ns_uri, hash_table_member_name)

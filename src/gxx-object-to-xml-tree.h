@@ -76,6 +76,11 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
     xmlNewProp (xml_node, attr_name, attr_value); \
   }
 
+#define GXX_STRUCT_ATTRIBUTE_BOOLEAN(attr_name, member_name, is_required, default_value) \
+  { \
+    xmlNewProp (xml_node, attr_name, cong_util_bool_to_string (inst->member_name)); \
+  }
+
 #define GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT(child_name, member_name, fn_name_frag, is_required) \
   { \
     if (inst->member_name) { \

@@ -17,6 +17,9 @@ GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR("element", CongDispspecElement, dispsp
      GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA("short-desc", "lang", XML_XML_NAMESPACE, hash_of_language_to_short_desc)
 
      GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT("header-info", header_info, header_info, FALSE)
+
+     GXX_STRUCT_ATTRIBUTE_BOOLEAN("spellcheck", should_spellcheck, FALSE, TRUE)
+
 GXX_STRUCT_END_ELEMENT()
 
 GXX_STRUCT_BEGIN_ELEMENT("header-info", CongDispspecElementHeaderInfo, header_info)

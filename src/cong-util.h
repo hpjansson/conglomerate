@@ -267,6 +267,13 @@ cong_util_spellcheck_word (PangoLanguage *language,
 			   const gchar *string,
 			   const CongWord *word);
 
+gboolean
+cong_util_string_to_bool (const gchar *string,
+			  gboolean default_value);
+
+const gchar*
+cong_util_bool_to_string (gboolean value);
+
 G_END_DECLS
 
 #endif

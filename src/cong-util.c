@@ -1743,3 +1743,26 @@ cong_util_spellcheck_word (PangoLanguage *language,
 
 	return TRUE; /* for now */
 }
+
+gboolean
+cong_util_string_to_bool (const gchar *string, 
+			  gboolean default_value)
+{
+	g_return_val_if_fail (string, default_value);
+
+	if (0==strcmp(string, "yes")) {
+		return TRUE;
+	}
+	if (0==strcmp(string, "no")) {
+		return FALSE;
+	}
+	return default_value;
+}
+
+const gchar*
+cong_util_bool_to_string (gboolean value)
+{
+	return value?"yes":"no";
+}
+		
+

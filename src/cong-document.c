@@ -1722,10 +1722,34 @@ gboolean
 cong_document_should_spellcheck_node (CongDocument *doc, 
 				      CongNodePtr node)
 {
+	CongDispspecElement *ds_element;
+
 	g_return_val_if_fail(doc, FALSE);
 	g_return_val_if_fail(node, FALSE);
 
-	return TRUE; /* for now */
+	/* Always spellcheck inside comments? */
+	if (cong_node_type (node)==CONG_NODE_TYPE_COMMENT) {
+		return TRUE;
+	}
+
+	/* Traverse up the tree until you find an element: */
+	while (cong_node_type (node)!=CONG_NODE_TYPE_ELEMENT) {
+		node=node->parent;
+
+		if (node==NULL) {
+			return FALSE;
+		}
+	}
+
+	ds_element = cong_document_get_dispspec_element_for_node (doc, node);
+
+	if (ds_element) {
+		return cong_dispspec_element_should_spellcheck (ds_element);
+	} else {
+		/* If no dispspec, then don't spellcheck: */
+		return FALSE;
+	}
+
 }
 
 
