@@ -7,6 +7,13 @@ SOURCE_DIR=$1
 # DEST_OVERRIDES=../doc/reference/conglomerate-overrides.txt
 DEST_OVERRIDES=$2
 
+if [ $# -lt 3 ]
+then
+	# probably no parameters supplied, setting them
+	SOURCE_DIR=src
+	DEST_OVERRIDES=doc/reference/conglomerate-overrides.txt
+fi
+
 # Remove the old overrides file, because we generate a new one, in case objects got added/removed from the sources
 test -e $DEST_OVERRIDES && rm -f $DEST_OVERRIDES
 
