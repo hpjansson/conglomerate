@@ -25,6 +25,20 @@ conglomerate-overrides.txt
  because there not much information in sources.
  Lists the data types that gtkdoc doesn't notice.
 
+conglomerate.args
+ purpose not known FIXME
+
+conglomerate.hierarchy
+ purpose not known FIXME
+
+conglomerate.interfaces
+ purpose not known FIXME
+
+conglomerate.prerequisites
+ purpose not known FIXME
+
+conglomerate.signals
+ purpose not known FIXME
 
 conglomerate.types
  Lists the header files to be parsed for objects,
@@ -38,6 +52,9 @@ conglomerate-decl.txt
  
 conglomerate-decl-list.txt
  Used by gtkdoc to generate conglomerate-sections.txt.
+
+conglomerate-undocumented.txt
+ purpose not known FIXME
 
 version.xml.in
  Input for version.xml.
