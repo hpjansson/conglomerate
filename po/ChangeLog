@@ -1,3 +1,11 @@
+2004-07-19  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	Regenerated, with uss/mkpotfilesin version 1.7,
+	this will effect the .po files.
+	glade/custom-element.glade was added.
+	Thanks to Marcel Telka.
+
 2004-07-10  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated by Daniel van Eeden.

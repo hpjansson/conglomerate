@@ -12,6 +12,7 @@ glade/cong-file-import.glade
 glade/cong-file-properties.glade
 glade/cong-find-replace.glade
 glade/cong-preferences.glade
+glade/custom-element.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade
 glade/docbook-ulink-properties.glade
