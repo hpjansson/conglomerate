@@ -1,9 +1,9 @@
-2004-02-22  Geert Stappers <stappers@stappers.nl>
+2004-02-24  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.win
 
 	Added the first two comment lines, hoping it does block anything,
-	otherwise we will make a README_Makefile.win
+	otherwise we will make a README_Makefile.win.
 
 	* Makefile.am
 
