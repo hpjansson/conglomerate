@@ -90,7 +90,7 @@ all-local: html-build.stamp
 
 scan-build.stamp: $(HFILE_GLOB)
 	@echo '*** Building conglomerate.types ***'
-	../../uss/mktypes $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate.types'
+	../../uss/mkgtkdoctypes $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate.types'
 	@echo '*** Scanning header files ***'
 	if grep -l '^..*$$' $(srcdir)/$(DOC_MODULE).types > /dev/null ; then \
 	    CC="$(GTKDOC_CC)" LD="$(GTKDOC_LD)" CFLAGS="$(GTKDOC_CFLAGS)" LDFLAGS="$(GTKDOC_LIBS)" gtkdoc-scangobj $(SCANOBJ_OPTIONS) --module=$(DOC_MODULE) --output-dir=$(srcdir) ;\
@@ -103,7 +103,7 @@ scan-build.stamp: $(HFILE_GLOB)
 	cd $(srcdir) && \
 	  gtkdoc-scan --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) --ignore-headers="$(IGNORE_HFILES)" $(SCAN_OPTIONS) $(EXTRA_HFILES)
 	@echo '*** Building conglomerate-overrides.txt ***'
-	../../uss/mkoverrides $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt'
+	../../uss/mkgtkdocoverrides $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt'
 	touch scan-build.stamp
 
 $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES): scan-build.stamp
@@ -115,7 +115,7 @@ tmpl-build.stamp: $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections
 	@echo '*** Rebuilding template files ***'
 	cd $(srcdir) && gtkdoc-mktmpl --module=$(DOC_MODULE)
 	@echo '*** Adding object declarations to conglomerate-sections.txt ***'
-	../../uss/fixsections $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt' $(top_srcdir)'/doc/reference/conglomerate-sections.txt'
+	../../uss/mkgtkdocsections $(top_srcdir)'/src' $(top_srcdir)'/doc/reference/conglomerate-overrides.txt' $(top_srcdir)'/doc/reference/conglomerate-sections.txt'
 	touch tmpl-build.stamp
 
 tmpl.stamp: tmpl-build.stamp

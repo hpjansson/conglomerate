@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Checks that all the header files have a xml correspondent in doc/reference/conglomerate-docs.sgml 
+
+# path including conglomerate-docs.sgml
+CDOCS=../doc/reference/conglomerate-docs.sgml
+# path to the sources
+SOURCE_DIR=../src
+
+for HEADERFILE in $SOURCE_DIR/*.h
+do
+    NAMETOCHECK1=`basename $HEADERFILE`
+    NAMETOCHECK=${NAMETOCHECK1%%.h}
+#    echo $NAMETOCHECK
+    test `grep -c $NAMETOCHECK $CDOCS` -eq "0" && echo $NAMETOCHECK not found
+done 

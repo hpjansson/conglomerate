@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# source dir = path to the header files
+# SOURCE_DIR=../src
+SOURCE_DIR=$1
+# source file: path including conglomerate-overrides.txt
+# SOURCE_OVERRIDES=../doc/reference/conglomerate-overrides.txt
+SOURCE_OVERRIDES=$2
+# dest output = path including conglomerate-sections.txt
+# DEST_SECTIONS=../doc/reference/conglomerate-sections.txt
+DEST_SECTIONS=$3
+
+FILE_LINE=
+CONG_SECTIONS=`cat $DEST_SECTIONS`
+# Now that we have the file's contents, delete the file
+test -e $DEST_SECTIONS && rm -f $DEST_SECTIONS
+let OBJNUM=0
+for LINE in $CONG_SECTIONS
+do
+	[[ `echo "$LINE" | grep "<FILE>"` != "" ]] && FILE_LINE=`echo "$LINE" | grep "<FILE>"`
+	A=`expr match "$LINE" '.*_TYPE'`
+	if [[ $A != "0" ]]
+	then
+		FILENAME=$SOURCE_DIR/`echo $FILE_LINE | sed {s/\<FILE\>//g} | sed {s/\<.FILE\>//g}`.h
+		OBJNAME=`echo $LINE | sed {s/_//g} | sed {s/TYPE//g}`
+		D=`grep -i "<.*>$OBJNAME<.*>" $SOURCE_OVERRIDES | sed {s/\<NAME\>//g} | sed {s/\<.*NAME\>//g}`
+		echo '<TITLE>'$D'</TITLE>' >> $DEST_SECTIONS
+		echo $D >> $DEST_SECTIONS
+		echo 'Added '$D
+		let OBJNUM+=1
+	else
+		echo $LINE >> $DEST_SECTIONS
+	fi
+done
+echo 'Added '$OBJNUM' objects to conglomerate-sections.txt'
