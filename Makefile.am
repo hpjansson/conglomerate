@@ -9,6 +9,7 @@ EXTRA_DIST = BUGS	\
   deb/rules		\
   documentation/CodingStyle        \
   documentation/VersionNumbering   \
+  documentation/ContribDemo      \
   documentation/CompileIssues      \
   documentation/faq.xml		\
   examples/ChangeLog                 \
