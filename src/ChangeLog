@@ -1,3 +1,9 @@
+2004-02-23  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* popup.c
+
+	More cleanups of the popup marshalling code
+
 2004-02-22  Geert Stappers <stappers@stappers.nl>
 
 	* cong-edit-preferences.c

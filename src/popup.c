@@ -24,6 +24,24 @@
 
 /* Callback marshallers for the various UI hooks: */
 static gint
+callback_marshaller_Document (GtkWidget *widget, 
+			      gpointer user_data)
+{
+	CongDocument *doc = CONG_DOCUMENT (user_data);
+	CongUICallback_Document wrapped_callback;
+
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+	wrapped_callback = g_object_get_data(G_OBJECT(widget),
+					     "wrapped_callback");
+	g_assert (wrapped_callback);
+
+	wrapped_callback (doc);
+
+	return TRUE;
+}
+
+static gint
 callback_marshaller_Document_Node_ParentWindow (GtkWidget *widget, 
 						gpointer user_data)
 {
@@ -78,6 +96,27 @@ callback_marshaller_Document_DispspecElement_Node (GtkWidget *widget,
 }
 
 /* Implementations: */
+GtkMenuItem* 
+cong_menu_item_attach_callback_Document (GtkMenuItem *item,
+					 CongUICallback_Document callback,
+					 CongDocument *doc)
+{
+	g_return_val_if_fail (item, NULL);
+	g_return_val_if_fail (callback, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+
+	g_object_set_data (G_OBJECT(item),
+			   "wrapped_callback",
+			   callback);
+
+	gtk_signal_connect (GTK_OBJECT(item),
+			    "activate",
+			    GTK_SIGNAL_FUNC(callback_marshaller_Document), 
+			    doc);
+	return item;
+}
+
+
 GtkMenuItem*
 cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
 							   CongUICallback_Document_Node_ParentWindow callback,
@@ -371,22 +410,6 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr
 	return TRUE;
 }
 
-static gint editor_popup_callback_cut(GtkWidget *widget, CongDocument *doc)
-{
-	g_assert(doc);
-	
-	cong_document_cut_selection(doc);
-	return TRUE;
-}
-
-static gint editor_popup_callback_copy(GtkWidget *widget, CongDocument *doc)
-{
-	g_assert(doc);
-	
-	cong_document_copy_selection(doc);
-	return TRUE;
-}
-
 static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 {
 	g_assert(doc);
@@ -452,15 +475,17 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 	
 	/* Fixed editing tools */
 	item = cong_util_make_stock_menu_item (GTK_STOCK_CUT);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(editor_popup_callback_cut), doc);
+	cong_menu_item_attach_callback_Document (item,
+						 cong_document_cut_selection,
+						 doc);
 	cong_menu_add_item (GTK_MENU (cong_app_singleton()->popup),
 			    item,
 			    cong_range_can_be_cut(range));
 
 	item = cong_util_make_stock_menu_item (GTK_STOCK_COPY);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(editor_popup_callback_copy), doc);
+	cong_menu_item_attach_callback_Document (item,
+						 cong_document_copy_selection,
+						 doc);
 	cong_menu_add_item (GTK_MENU (cong_app_singleton()->popup),
 			    item,
 			    cong_range_can_be_copied(range));
