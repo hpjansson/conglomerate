@@ -340,7 +340,7 @@ regenerate_output_text (CongTextCache *text_cache)
 		int stripped_byte_offset_start_of_span = 0;
 		
 		g_assert (NULL==text_cache->output_string);
-		text_cache->output_string = g_malloc((strlen(text_cache->input_string)*8)+1);
+		text_cache->output_string = g_malloc( strlen(text_cache->input_string) + 1);
 		
 		dst = text_cache->output_string;
 		
@@ -358,7 +358,7 @@ regenerate_output_text (CongTextCache *text_cache)
 					/* Add stuff to the list of spans */
 					text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 									      stripped_byte_offset_start_of_span,
-									      (dst-text_cache->output_string) - stripped_byte_offset_start_of_span);
+									      (dst - text_cache->output_string) - stripped_byte_offset_start_of_span);
 					text_cache->list_of_span = g_list_append(text_cache->list_of_span, 
 										 text_span);
 
@@ -368,8 +368,8 @@ regenerate_output_text (CongTextCache *text_cache)
 				
 				if (last_char_was_space) {
 					/* We're starting what will be a new span; record where we've got to: */
-					original_byte_offset_start_of_span = (src-text_cache->input_string); 
-					stripped_byte_offset_start_of_span = (dst-text_cache->output_string);
+					original_byte_offset_start_of_span = (src - text_cache->input_string); 
+					stripped_byte_offset_start_of_span = (dst - text_cache->output_string);
 				}
 				
 				/* Write character as utf-8 into buffer: */
@@ -385,7 +385,14 @@ regenerate_output_text (CongTextCache *text_cache)
 			/* Add stuff to the list of spans */
 			text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 							      stripped_byte_offset_start_of_span,
-							      (dst-text_cache->output_string) - stripped_byte_offset_start_of_span);
+							      (dst - text_cache->output_string) - stripped_byte_offset_start_of_span);
+			text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
+								  text_span);
+		} else {
+			/* Last span tag should always point to end */
+			text_span = cong_text_cache_span_new (src - text_cache->input_string,
+							      dst - text_cache->output_string,
+							      0);
 			text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
 								  text_span);
 		}
@@ -408,8 +415,8 @@ regenerate_output_text (CongTextCache *text_cache)
 
 #if DEBUG_TEXT_STRIPPING
 	{
-		gchar *cleaned_input = cong_util_cleanup_text(input_string);
-		gchar *cleaned_output = cong_util_cleanup_text(text_cache->stripped_string);
+		gchar *cleaned_input = cong_util_cleanup_text(text_cache->input_string);
+		gchar *cleaned_output = cong_util_cleanup_text(text_cache->output_string);
 
 		g_message("stripped \"%s\" into \"%s\"", cleaned_input, cleaned_output);
 
@@ -423,11 +430,11 @@ regenerate_output_text (CongTextCache *text_cache)
 			CongTextCacheSpan *text_span = iter->data;
 			g_assert(text_span);
 
-			g_printf ("[%i->%i/%i->%i)", 
+			g_message ("[%i->%i/%i->%i)", 
 				  text_span->original_first_byte_offset, text_span->original_first_byte_offset+text_span->stripped_byte_count,
 				  text_span->stripped_first_byte_offset, text_span->stripped_first_byte_offset+text_span->stripped_byte_count);
 		}		
-		g_printf("\n");
+		g_message("\n");
 	}
 #endif
 }
