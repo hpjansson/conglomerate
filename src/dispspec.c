@@ -29,7 +29,7 @@ struct CongDispspecElement
 	struct CongDispspecElement* next;	
 };
 
-struct _cong_dispspec
+struct CongDispspec
 {
 	/* New implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
@@ -38,14 +38,14 @@ struct _cong_dispspec
 
 void cong_dispspec_init(TTREE *ds);
 
-void cong_dispspec_add_element(cong_dispspec* ds, CongDispspecElement* element);
+void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
 
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt);
 
-cong_dispspec* cong_dispspec_new_from_file(const char *name)
+CongDispspec* cong_dispspec_new_from_file(const char *name)
 {
-	cong_dispspec* ds;
+	CongDispspec* ds;
 
 	TTREE* tt = ttree_load((char*)name);
 	if (!tt) {
@@ -53,7 +53,7 @@ cong_dispspec* cong_dispspec_new_from_file(const char *name)
 		return NULL;  /* Invalid displayspec. */
 	}
 
-	ds = g_new0(cong_dispspec,1);
+	ds = g_new0(CongDispspec,1);
 
 	/* Convert the tree into the new representation: */
 	{
@@ -70,7 +70,7 @@ cong_dispspec* cong_dispspec_new_from_file(const char *name)
 	return ds;
 }
 
-void cong_dispspec_add_element(cong_dispspec* ds, CongDispspecElement* element)
+void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 {
 	g_return_if_fail(ds);
 	g_return_if_fail(element);
@@ -87,7 +87,7 @@ void cong_dispspec_add_element(cong_dispspec* ds, CongDispspecElement* element)
 	ds->last = element;
 }
 
-void cong_dispspec_delete(cong_dispspec *dispspec)
+void cong_dispspec_delete(CongDispspec *dispspec)
 {
   g_assert(0);
 }
@@ -117,7 +117,7 @@ TTREE *get_upper_section(TTREE *x)
 #endif
 
 
-gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name)
+gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -129,7 +129,7 @@ gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name)
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -141,7 +141,7 @@ gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name)
+gboolean cong_dispspec_element_span(CongDispspec *ds, char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -153,7 +153,7 @@ gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name)
 }
 
 
-gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name)
+gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
@@ -212,7 +212,7 @@ char *cong_dispspec_name_name_get(TTREE *t)
 }
 
 
-GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog)
+GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
 
@@ -224,7 +224,7 @@ GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog)
 }
 
 
-GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog)
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, TTREE *x, int tog)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
 
@@ -442,7 +442,7 @@ cong_dispspec_ttree_colour_get(TTREE* tt)
   We now use the CongDispspecElement structs, rather than using TTREE data
  */
 CongDispspecElement*
-cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname)
+cong_dispspec_lookup_element(CongDispspec *ds, const char* tagname)
 {
 	CongDispspecElement* element = ds->first;
 
@@ -458,7 +458,7 @@ cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname)
 }
 
 CongDispspecElement*
-cong_dispspec_get_first_element(cong_dispspec *ds)
+cong_dispspec_get_first_element(CongDispspec *ds)
 {
 	return ds->first;
 }
@@ -490,8 +490,6 @@ cong_dispspec_element_next(CongDispspecElement* element)
 enum CongElementType
 cong_dispspec_element_type(CongDispspecElement *element)
 {
-	TTREE *n0;
-	
 	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
 
 	return element->type;
@@ -531,8 +529,6 @@ cong_dispspec_element_is_span(CongDispspecElement *element)
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element)
 {
-	TTREE* n1;
-	
 	g_return_val_if_fail(element, NULL);
 
 	return element->gc;

@@ -165,7 +165,7 @@ static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, Gt
   return TRUE;
 }
 
-GtkWidget *xv_section_head(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_section_head(CongDispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *vbox, *title;
@@ -271,7 +271,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 }
 
 
-GtkWidget *xv_fragment_head(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_fragment_head(CongDispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *title;
@@ -321,7 +321,7 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *
 }
 
 
-GtkWidget *xv_fragment_tail(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_fragment_tail(CongDispspec *ds, TTREE *x)
 {
         UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -431,7 +431,7 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *g
 }
 
 
-GtkWidget *xv_section_vline(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_section_vline(CongDispspec *ds, TTREE *x)
 {
 	GtkWidget *line;
 
@@ -449,7 +449,7 @@ GtkWidget *xv_section_vline(cong_dispspec *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_vline_and_space(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_section_vline_and_space(CongDispspec *ds, TTREE *x)
 {
 	GtkWidget *line;
 
@@ -467,7 +467,7 @@ GtkWidget *xv_section_vline_and_space(cong_dispspec *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_data(TTREE *x, cong_dispspec *ds, int collapsed)
+GtkWidget *xv_section_data(TTREE *x, CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	struct xed *xed;
@@ -496,7 +496,7 @@ GtkWidget *xv_section_data(TTREE *x, cong_dispspec *ds, int collapsed)
 }
 
 
-GtkWidget *xv_section_tail(cong_dispspec *ds, TTREE *x)
+GtkWidget *xv_section_tail(CongDispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -515,7 +515,7 @@ GtkWidget *xv_section_tail(cong_dispspec *ds, TTREE *x)
 	return(line);
 }
 
-TTREE *xv_editor_elements_skip(TTREE *x, cong_dispspec *ds)
+TTREE *xv_editor_elements_skip(TTREE *x, CongDispspec *ds)
 {
 	UNUSED_VAR(TTREE *x0);
 
@@ -547,7 +547,7 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
-GtkWidget *xv_element_new(TTREE *x, cong_dispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
+GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
 	UNUSED_VAR(GdkGCValues     gc_values)
@@ -694,7 +694,7 @@ GtkWidget *xv_element_new(TTREE *x, cong_dispspec *ds, GtkWidget *root, int coll
 	return(root);
 }
 
-struct xview *xmlview_new(cong_document *doc, cong_dispspec *displayspec)
+struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 {
 	struct xview *xv;
 	GdkColor gcol;

@@ -37,7 +37,7 @@ enum CongElementType
 	CONG_ELEMENT_TYPE_UNKNOWN
 };
 
-typedef struct _cong_dispspec cong_dispspec;
+typedef struct CongDispspec CongDispspec;
 typedef struct CongDispspecElement CongDispspecElement;
 
 
@@ -120,7 +120,7 @@ struct xed
   GdkPixmap *p;  /* Backing pixmap */
 	GdkFont *f, *fm;
 
-  cong_dispspec *displayspec;
+  CongDispspec *displayspec;
 	
 	int f_asc, f_desc;
 	int fm_asc, fm_desc;
@@ -237,7 +237,7 @@ struct cong_globals
   GdkGC *insert_element_gc;
   int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
   
-  cong_dispspec *ds;
+  CongDispspec *ds;
 
   TTREE *vect_global;
   TTREE *medias_global;
@@ -297,7 +297,7 @@ gint xed_insert_table(GtkWidget *w, struct xed *xed);
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
-struct xview *xmlview_new(cong_document *doc, cong_dispspec *displayspec);
+struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec);
 
 #if 0
 SOCK *server_login();
@@ -336,25 +336,25 @@ int open_document_do(const char *doc_name, const char *ds_name);
 int gui_window_new_document_make();
 void xmlview_destroy(int free_xml);
 
-cong_dispspec* cong_dispspec_new_from_file(const char *name);
-void cong_dispspec_delete(cong_dispspec *dispspec);
+CongDispspec* cong_dispspec_new_from_file(const char *name);
+void cong_dispspec_delete(CongDispspec *dispspec);
 
 char *cong_dispspec_name_name_get(TTREE *t);
-GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog);
-GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog);
+GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, TTREE *x, int tog);
 char *cong_dispspec_name_get(TTREE *x);
 
-gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name);
-gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name);
-gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name);
-gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name);
+gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name);
+gboolean cong_dispspec_element_span(CongDispspec *ds, char *name);
+gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name);
 
 /* New API for getting at elements within a dispspec */
 CongDispspecElement*
-cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname);
+cong_dispspec_lookup_element(CongDispspec *ds, const char* tagname);
 
 CongDispspecElement*
-cong_dispspec_get_first_element(cong_dispspec *ds);
+cong_dispspec_get_first_element(CongDispspec *ds);
 
 /** Get the tagname in a parser-friendly form */
 const char*

@@ -459,7 +459,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, struct x
 }
 
 
-struct xed *xmledit_new(TTREE *x, cong_dispspec *displayspec)
+struct xed *xmledit_new(TTREE *x, CongDispspec *displayspec)
 {
         UNUSED_VAR(GdkCursor* cursor)
 	struct xed *xed;
