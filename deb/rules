@@ -60,12 +60,6 @@ clean: unpatch
 	rm -f intltool-extract intltool-merge intltool-update
 	rm -f po/.intltool-merge-cache
 	rm -f conglomerate
-ifneq "$(wildcard /usr/share/misc/config.sub)" ""
-	cp -f /usr/share/misc/config.sub config.sub
-endif
-ifneq "$(wildcard /usr/share/misc/config.guess)" ""
-	cp -f /usr/share/misc/config.guess config.guess
-endif
 
 	dh_clean
 

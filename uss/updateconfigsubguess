@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# how to update config.sub and config.guess
+# updated version of these files in the tarball
+# makes it easy to compile them on the many architectures
+#
