@@ -296,7 +296,10 @@ static void menu_callback_file_save(gpointer callback_data,
 				    guint callback_action,
 				    GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = primary_window->doc;
+
+	save_document(doc);
 }
 
 static void menu_callback_file_save_as(gpointer callback_data,
@@ -305,16 +308,8 @@ static void menu_callback_file_save_as(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = primary_window->doc;
-	const char *doc_name;
 
-	g_return_if_fail(doc);
-
-	doc_name = get_file_name("Save XML as...");
-	if (!doc_name) {
-		return;
-	}
-	
-	cong_document_save(doc, doc_name);
+	save_document_as(doc);
 }
 
 static void menu_callback_file_save_copy(gpointer callback_data,
@@ -500,8 +495,11 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
 	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
 	{ "/Tests/Transform DocBook to HTML",       NULL, menu_callback_test_transform_docbook_to_html, 0, NULL },
-#if PRINT_TESTS
+	{ "/Tests/Transform DocBook to XHTML",       NULL, menu_callback_test_transform_docbook_to_xhtml, 0, NULL },
+	{ "/Tests/Transform DocBook to HTML Help",       NULL, menu_callback_test_transform_docbook_to_html_help, 0, NULL },
+	{ "/Tests/Transform DocBook to Java Help",       NULL, menu_callback_test_transform_docbook_to_javahelp, 0, NULL },
 	{ "/Tests/Transform DocBook to FO",       NULL, menu_callback_test_transform_docbook_to_fo, 0, NULL },
+#if PRINT_TESTS
 	{ "/Tests/Preview XSL:FO",       NULL, menu_callback_test_preview_fo, 0, NULL },
 #endif /* #if PRINT_TESTS */
 	{ "/Tests/DTD",             NULL, menu_callback_test_dtd, 0, NULL },

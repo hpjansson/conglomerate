@@ -135,6 +135,18 @@ cong_document_get_filename(CongDocument *doc)
 }
 
 gchar*
+cong_document_get_full_uri(CongDocument *doc) {
+	g_return_val_if_fail(doc, NULL);
+
+	if (doc->url) {
+		return g_strdup(doc->url);
+	}
+	else {
+		return NULL;
+	}		    
+}
+
+gchar*
 cong_document_get_parent_uri(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
@@ -236,7 +248,11 @@ cong_document_save(CongDocument *doc, const char* filename)
 
 		return;
 	}
-	
+
+	cong_document_set_url(doc, filename);
+
+	cong_document_set_modified(doc, FALSE);
+
 	gnome_vfs_uri_unref(file_uri);
 }
 
@@ -269,6 +285,22 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 
 	g_assert(doc->primary_window==NULL);
 	doc->primary_window = window;
+}
+
+void 
+cong_document_set_url(CongDocument *doc, const gchar *url) 
+{
+	g_return_if_fail(doc);
+
+	if (doc->url) {
+		g_free(doc->url);
+	}
+	doc->url = g_strdup(url);
+
+	/* get at primary window; set title */
+	if (doc->primary_window) {
+		cong_primary_window_update_title(doc->primary_window);
+	}
 }
 
 #define DEBUG_MVC 1

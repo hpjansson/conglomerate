@@ -94,7 +94,7 @@ const gchar *cong_node_type_description(enum CongNodeType node_type);
 
 /* Methods for accessing attribute values: */
 CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attribute_name);
-/* caller responsible for frreing; will be NULL if not found in node and no default in DTD available */
+/* caller responsible for freeing; will be NULL if not found in node and no default in DTD available */
 
 /* Selftest methods: */
 void cong_node_self_test(CongNodePtr node);
@@ -206,6 +206,10 @@ cong_document_get_filename(CongDocument *doc);
 /* caller is responsible for freeeing */
 
 gchar*
+cong_document_get_full_uri(CongDocument *doc);
+/* caller is responsible for freeeing */
+
+gchar*
 cong_document_get_parent_uri(CongDocument *doc);
 /* caller is responsible for freeeing */
 
@@ -220,6 +224,9 @@ cong_document_set_modified(CongDocument *doc, gboolean modified);
 
 void
 cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window);
+
+void 
+cong_document_set_url(CongDocument *doc, const gchar *url);
 
 /* MVC-related methods on the document: */
 void cong_document_coarse_update(CongDocument *doc);
@@ -653,9 +660,10 @@ GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSi
 #endif
 
 void open_document(void);
-#if 0
-gint save_document(GtkWidget *w, gpointer data);
-#endif
+gint save_document(CongDocument *doc);
+gint save_document_as(CongDocument *doc);
+
+
 
 const char *get_file_name(char *title);
 char *pick_structural_tag(CongDispspec *ds);
@@ -774,7 +782,7 @@ CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element);
 
 gchar*
-cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x);
+cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x);
 
 CongFont*
 cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
@@ -986,14 +994,23 @@ void test_document_types_wrap(GtkWidget *widget, gpointer data);
 void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
 						  guint callback_action,
 						  GtkWidget *widget);
+void menu_callback_test_transform_docbook_to_xhtml(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget);
+void menu_callback_test_transform_docbook_to_html_help(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget);
+void menu_callback_test_transform_docbook_to_javahelp(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget);
 void menu_callback_test_transform_docbook_to_fo(gpointer callback_data,
 						guint callback_action,
 						GtkWidget *widget);
-#if PRINT_TESTS
 void menu_callback_test_preview_fo(gpointer callback_data,
-				  guint callback_action,
-				  GtkWidget *widget);
+				   guint callback_action,
+				   GtkWidget *widget);
 
+#if PRINT_TESTS
 void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm);
 #endif
 void menu_callback_test_dtd(gpointer callback_data,

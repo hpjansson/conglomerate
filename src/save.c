@@ -31,14 +31,41 @@ gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	return save_document_as(doc);
+}
+
+gint save_document_as(CongDocument *doc) 
+{
 	const char *doc_name;
 
 	g_return_val_if_fail(doc, FALSE);
 
 	doc_name = get_file_name("Save XML as...");
-	if (!doc_name) return(TRUE);
+	if (!doc_name) {
+		return TRUE;
+	}
 	
 	cong_document_save(doc, doc_name);
+	
+	return TRUE;
+}
 
-	return(TRUE);
+gint save_document(CongDocument *doc) 
+{
+	gchar *doc_name;
+
+	g_return_val_if_fail(doc, FALSE);
+
+	doc_name = cong_document_get_full_uri(doc);
+
+	if (!doc_name) {
+		return save_document_as(doc);
+	}
+
+	cong_document_save(doc, doc_name);
+	
+	g_free(doc_name);
+
+	return TRUE;
 }
