@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-15 David Malcolm
+
+	* cong-dialog.c, cong-document.c, cong-error-dialog.c, cong-primary-window.c, global.h
+
+	Dialog refactoring
+	
 2002-11-15 Doug Daniels/Brent Hendricks
 
 	* cong-primary-window.c

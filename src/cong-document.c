@@ -21,6 +21,7 @@ struct CongDocument
 	CongSelection selection;
 
 	gboolean modified; /* has the document been modified since it was last loaded/saved? */
+	GTimeVal time_of_last_save;
 
 	/* We have an SDI interface, so there should be just one primary window associated with each doc.
 	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
@@ -40,6 +41,8 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	doc->xml_doc = xml_doc;
 	doc->ds = ds;
 	doc->url = g_strdup(url);
+
+	g_get_current_time(&doc->time_of_last_save);
 
 	#if TEST_VIEW
 	{
@@ -253,6 +256,8 @@ cong_document_save(CongDocument *doc, const char* filename)
 
 	cong_document_set_modified(doc, FALSE);
 
+	g_get_current_time(&doc->time_of_last_save);
+
 	gnome_vfs_uri_unref(file_uri);
 }
 
@@ -301,6 +306,14 @@ cong_document_set_url(CongDocument *doc, const gchar *url)
 	if (doc->primary_window) {
 		cong_primary_window_update_title(doc->primary_window);
 	}
+}
+
+glong
+cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
+{
+	g_return_val_if_fail(doc, 0);
+
+	return doc->time_of_last_save.tv_sec;
 }
 
 #define DEBUG_MVC 1

@@ -228,6 +228,9 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window);
 void 
 cong_document_set_url(CongDocument *doc, const gchar *url);
 
+glong
+cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
+
 /* MVC-related methods on the document: */
 void cong_document_coarse_update(CongDocument *doc);
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
@@ -960,6 +963,24 @@ void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *t
 
 /* Method to add right-side labelled controls usch as check boxes and radio buttons: */
 void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, GtkWidget *widget);
+
+/* Function to manufacture the "content area" of a dialog */
+GtkWidget* 
+cong_alert_content_new(const gchar* stock_icon,
+		       const gchar* primary_text, 
+		       const gchar* secondary_text, 
+		       const gchar* tertiary_text);
+
+enum CongSaveConfirmationResult
+{
+	CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE = 1,
+	CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING,
+	CONG_SAVE_CONFIRMATION_RESULT_CANCEL,
+};
+
+GtkDialog *cong_dialog_save_confirmation_alert_new(GtkWindow *parent, 
+						   const gchar *document_name,
+						   glong seconds_since_last_save_or_load);
 
 /* cong-dispspec-registry */
 CongDispspecRegistry*

@@ -246,28 +246,14 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 
 	/* See if document was modified */
 	if (cong_document_is_modified(primary_window->doc)) {
-		GtkWidget *dialog, *label;
 		gint result; 
-		gchar *label_text;
+		GtkWidget *dialog;
+		GTimeVal current_time;
+		g_get_current_time(&current_time);
 
-		dialog = gtk_dialog_new_with_buttons("Save changes?",
-						     GTK_WINDOW(primary_window->window),
-						     GTK_DIALOG_MODAL,
-						     GTK_STOCK_YES,
-						     GTK_RESPONSE_YES,
-						     GTK_STOCK_NO,
-						     GTK_RESPONSE_NO,
-						     GTK_STOCK_CANCEL,
-						     GTK_RESPONSE_CANCEL,
-						     NULL);
-
-		gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
-		label_text = g_strdup_printf("The document %s has been modified.\nWould you like to save your changes?", cong_document_get_filename(primary_window->doc));
-		label = gtk_label_new(label_text);
-		g_free(label_text);
-
-		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), label);
-		gtk_widget_show_all(dialog);
+		dialog = GTK_WIDGET( cong_dialog_save_confirmation_alert_new(GTK_WINDOW(primary_window->window),
+									     cong_document_get_filename(primary_window->doc),
+									     current_time.tv_sec - cong_document_get_seconds_since_last_save_or_load(primary_window->doc)));
 
 		/* Bring the modified buffer to the top */
 		gtk_window_present(GTK_WINDOW(primary_window->window));
@@ -278,10 +264,16 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 
 		result = gtk_dialog_run (GTK_DIALOG (dialog));
 
-		if (result == GTK_RESPONSE_YES) {
+		switch (result) {
+		default: g_assert_not_reached();
+		case CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE:
 			save_document(primary_window->doc);
-		}
-		else if (result == GTK_RESPONSE_CANCEL) {
+			break;
+
+		case CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING:
+			break;
+			
+		case CONG_SAVE_CONFIRMATION_RESULT_CANCEL:
 			gtk_widget_destroy (dialog);
 			return FALSE;
 		}
@@ -615,9 +607,7 @@ void destroy( GtkWidget *widget,
 
 void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 {
-	GtkWidget *w0, *w1, *w2, *w3, *logo;
-	GdkPixmap *p;
-	GdkBitmap *mask;
+	GtkWidget *w1, *w2;
 	GdkColor gcol;
 	GtkStyle *style;
 	GtkItemFactory *item_factory;

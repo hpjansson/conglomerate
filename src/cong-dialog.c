@@ -114,3 +114,113 @@ void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, G
 	gtk_container_add(GTK_CONTAINER(category->inner_vbox), widget);
 }
 
+static gchar*
+make_dialog_message(const gchar* primary_text, 
+		    const gchar* secondary_text, 
+		    const gchar* tertiary_text)
+{
+	g_return_val_if_fail(primary_text, NULL);
+	g_return_val_if_fail(secondary_text, NULL);
+
+	if (tertiary_text) {
+		return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s\n\n%s", primary_text, secondary_text, tertiary_text);
+	} else {
+		return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s", primary_text, secondary_text);
+	}
+}
+
+
+GtkWidget* 
+cong_alert_content_new(const gchar* stock_icon,
+		       const gchar* primary_text, 
+		       const gchar* secondary_text, 
+		       const gchar* tertiary_text)
+{
+	GtkWidget *hbox1;
+	GtkWidget *image1;
+	GtkWidget *label1;
+	gchar* msg;
+
+	g_return_val_if_fail(stock_icon, NULL);
+	g_return_val_if_fail(primary_text, NULL);
+	g_return_val_if_fail(secondary_text, NULL);
+
+	msg = make_dialog_message(primary_text, secondary_text, tertiary_text);
+	
+	hbox1 = gtk_hbox_new (FALSE, 12);
+	gtk_widget_show (hbox1);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox1), 6);
+	
+	image1 = gtk_image_new_from_stock (stock_icon, GTK_ICON_SIZE_DIALOG);
+	gtk_widget_show (image1);
+	gtk_box_pack_start (GTK_BOX (hbox1), image1, TRUE, TRUE, 0);
+	gtk_misc_set_alignment (GTK_MISC (image1), 0.5, 0);
+	
+	label1 = gtk_label_new (msg);
+	gtk_widget_show (label1);
+	gtk_box_pack_start (GTK_BOX (hbox1), label1, FALSE, FALSE, 0);
+	gtk_label_set_use_markup (GTK_LABEL(label1), TRUE);
+	gtk_label_set_justify (GTK_LABEL (label1), GTK_JUSTIFY_LEFT);
+	gtk_label_set_line_wrap (GTK_LABEL (label1), TRUE);
+	gtk_misc_set_alignment (GTK_MISC (label1), 0.5, 0);
+	
+	g_free(msg);
+
+	return hbox1;
+}
+
+GtkDialog *cong_dialog_save_confirmation_alert_new(GtkWindow *parent, 
+						   const gchar *document_name,
+						   glong seconds_since_last_save_or_load)
+{
+	GtkWidget *dialog, *content;
+	gchar *primary_text, *secondary_text;
+	glong minutes;
+
+	g_return_val_if_fail(document_name, NULL);
+
+	dialog = gtk_dialog_new_with_buttons(NULL, /* empty title string */
+					     parent,
+					     GTK_DIALOG_MODAL,
+
+					     "_Close without Saving",
+					     CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING,
+
+					     GTK_STOCK_CANCEL,
+					     CONG_SAVE_CONFIRMATION_RESULT_CANCEL,
+
+					     GTK_STOCK_SAVE,
+					     CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE,
+
+					     NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog),
+					CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE);
+					
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+
+	primary_text = g_strdup_printf("Save changes to document \"%s\" before closing?", document_name);
+
+	minutes = seconds_since_last_save_or_load/60;
+
+	if (minutes>120) {
+		secondary_text = g_strdup_printf("If you close without saving, changes from the past %li hours will be discarded.", (minutes/60));
+	} else if (minutes>1) {
+		secondary_text = g_strdup_printf("If you close without saving, changes from the past %li minutes will be discarded.", minutes);
+	} else {
+		secondary_text = g_strdup_printf("If you close without saving, changes from the past minute will be discarded.");
+	}
+
+	content = cong_alert_content_new(GTK_STOCK_DIALOG_WARNING,
+					 primary_text, 
+					 secondary_text, 
+					 NULL);
+
+
+	g_free(primary_text);
+	g_free(secondary_text);
+
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), content);
+	gtk_widget_show_all(dialog);
+
+	return GTK_DIALOG(dialog);
+}
