@@ -2,8 +2,8 @@
 
 	* cong-dom-view.c, cong-editor-area-container.c,
 	cong-editor-area-unknown-tag.c, cong-editor-widget3.c,
-	cong-menus.c, cong-overview-view.c, cong-tree-view.c, 
-	popup.c:
+	cong-menus.c, cong-overview-view.c, cong-plugin.h,
+	cong-tree-view.c, popup.c:
 	
 	Adding and correcting elements for doc.
 	
