@@ -6,6 +6,9 @@ EXTRA_DIST = BUGS	\
   intltool-merge.in	\
   intltool-update.in	\
   deb/Readme		\
+  deb/changelog		\
+  deb/control		\
+  deb/copyright		\
   deb/rules		\
   documentation/CodingStyle        \
   documentation/VersionNumbering   \

@@ -1,0 +1,12 @@
+Source: conglomerate
+Section: unknown
+Priority: optional
+Maintainer: Geert Stappers <Geert.Stappers@xs4all.nl>
+Build-Depends: debhelper (>> 4.0.0)
+Standards-Version: 3.5.8
+
+Package: conglomerate
+Architecture: any
+Depends: ${shlibs:Depends} ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

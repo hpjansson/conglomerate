@@ -1,5 +1,9 @@
 2003-05-09  Geert Stappers <Geert.Stappers@xs4all.nl>
 
+	* Makefile.am: added 'dh_make' generated files
+
+2003-05-09  Geert Stappers <Geert.Stappers@xs4all.nl>
+
 	* Makefile.am: using the complete example directory,
 	instead of single files
 
