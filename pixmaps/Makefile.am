@@ -3,7 +3,7 @@ dtidir = $(datadir)/pixmaps
 dti_DATA = conglomerate-icon-16.png
 
 # application icons
-appiconsdir = $(pkgdatadir)/icons
+appiconsdir = $(pkgdatadir)/pixmaps
 appicons_DATA = \
 	conglomerate-icon-32.png \
 	cong-docbook-set-16.png \
