@@ -54,6 +54,7 @@ conglomerate_SOURCES =      \
   cong-plugin.h             \
   cong-primary-window.h     \
   cong-progress-checklist.h \
+  cong-text-cache.h         \
   cong-tree-view.h          \
   cong-view.h               \
   fo.h                      \
@@ -114,6 +115,7 @@ conglomerate_SOURCES =      \
   cong-section-head-editor.c \
   cong-source-view.c        \
   cong-span-text-editor.c   \
+  cong-text-cache.c         \
   cong-tree-view.c          \
   cong-view.c               \
   icon_assemble.c           \
