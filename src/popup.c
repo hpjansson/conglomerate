@@ -562,7 +562,10 @@ add_comment_menu_items (GtkMenu *tpopup,
 	GtkMenuItem *item;
 
 	switch (cong_node_type (node)) {
+	case CONG_NODE_TYPE_DOCUMENT:
 		/* FIXME: should look through the various node types here; I suspect not all are appropriate */
+		break;
+
 	default:
 		/* Convert to comment: */
 		{
