@@ -5,6 +5,8 @@ EXTRA_DIST = BUGS	\
   intltool-extract.in	\
   intltool-merge.in	\
   intltool-update.in	\
+  omf.make              \
+  xmldocs.make          \
   deb/Readme		\
   deb/build		\
   deb/changelog		\
