@@ -856,6 +856,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	GdkColor gcol;
 	GtkStyle *style;
 	GtkItemFactory *item_factory;
+	GtkWidget *sidebar_notebook;
 	gchar *title, *filename;
 	int i;
 
@@ -928,17 +929,42 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	g_return_if_fail(primary_window->cong_editor_view);
 #endif
 
+	/* --- Notebook to appear in the sidebar: --- */
+	sidebar_notebook = gtk_notebook_new();
+	gtk_widget_show(sidebar_notebook);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
+
+	gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
+
 	/* --- Tree view --- */
 
 	w2 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_paned_add1(GTK_PANED(w1), w2);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_usize(GTK_WIDGET(w2), 100, 0);
 	gtk_widget_show(w2);
 
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 w2,
+				 gtk_label_new("Overview")
+				 );
+
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
 					      cong_tree_view_get_widget(primary_window->cong_tree_view));
+
+	/* --- Bookmark view --- */
+#if 0
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 cong_bookmark_view_new(primary_window->doc),
+				 gtk_label_new("Bookmarks")
+				 );
+#endif
+	
+	/* --- Raw XML view --- */
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 cong_test_view_new(primary_window->doc),
+				 gtk_label_new("Raw XML")
+				 );
 
 
 #if 0	
