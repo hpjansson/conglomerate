@@ -1,6 +1,77 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+10-12-03
+Conglomerate 0.7.7 - "Who Frobnicates the Frobnicators?" Released
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+Numerous bugs have been fixed in this release, together with some visual
+improvements. However, Conglomerate is still UNSTABLE, and not yet ready
+for heavy-duty production use. I used it to write these release notes in
+DocBook without having to resort to Emacs, and had a single crash during
+a half-hour editing period. Notable remaining problems are lack of
+speed, inability to deal with external entities, and crashes when
+nesting certain elements inside certain other elements.
+
+Please test the new code as we work towards stabilising things towards a
+0.8.0 release. You can download it frmo the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+
+Enhancements
+      * Experimental GUI code to use the new GTK File Choser dialog
+        (currently needs manually enabling) (Me)
+        
+      * Big rewrite of display specifications for document types.
+        Support for localising XML element names and descriptions, using
+        the xml:lang attribute and intltool; numerous other improvements
+        (Me)
+        
+      * Ignore unnecessary whitespace text nodes in main editor view -
+        Fix for bug #123367 by Anders Petersson giving a big visual
+        enhancement ; fixed cursor movement to skip over them (me)
+        
+      * Updated translations - ca (Jordi Mallach), de (Christian
+        Neumair), es (Francisco Javier F. Serrador), nl (Jeroen van der
+        Vegt), pt (Duarte Loreto)
+        
+
+Fixes
+      * Fix for bug 123065 (open using empty window instead of whole new
+        window) (Robert Varga)
+        
+      * Portability improvements (Duraid Madina, Pav Lucistnik)
+        
+      * Get strings from immodule as UTF8, notify immodule of focus
+        in/out (bug 125993) (Yukihiro Nakai)
+        
+      * Fixed unref of NULL uri (bug #126231) (Paul Smith)
+        
+      * Various GUI sensitivity fixes (Paul Smith)
+        
+      * Rewrie of intenals of text normalisation to supoprt Pango
+        attributes in preparation for proper support of "pre-edit"
+        strings from GTK input methods (me) 
+        
+      * Fixed loading from GnomeVFS with a relative path (Robert Varga)
+        
+      * Fix for bug #127026 (crash when using cut from popup menu) (me)
+        
+      * Changed CTRL+SHIFT+S to Save As instead of Save a Copy (Michael
+        Terry)
+        
+      * Force span tag to be wide enough to accommodate its title.
+        Center contents. (Boris Goldowsky)
+        
+
+
+________________________________________________________________________
+-- 
+David Malcolm
+www.conglomerate.org
+
 30-10-03
 Conglomerate 0.7.6 - "It Looks Like You're Writing A <letter>"
 Released
