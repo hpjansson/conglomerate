@@ -4,6 +4,7 @@ data/conglomerate.desktop.in
 glade/cong-file-import.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade
+glade/string_selection_dialog.glade
 src/auth_off.c
 src/auth_on.c
 src/cong-app.c

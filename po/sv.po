@@ -7,18 +7,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-09-28 23:13+0200\n"
-"PO-Revision-Date: 2003-09-28 23:15+0200\n"
+"POT-Creation-Date: 2003-09-30 00:04+0200\n"
+"PO-Revision-Date: 2003-09-30 00:05+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1169
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1190
 #: src/cong-primary-window.c:364 src/cong-primary-window.c:366
-#: src/cong-primary-window.c:600 src/cong-primary-window.c:602
-#: src/cong-primary-window.c:608
+#: src/cong-primary-window.c:598 src/cong-primary-window.c:600
+#: src/cong-primary-window.c:606
 msgid "Conglomerate XML Editor"
 msgstr "XML-redigeraren Conglomerate"
 
@@ -149,6 +149,18 @@ msgstr "a, b, c, ..."
 msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
+#: glade/string_selection_dialog.glade.h:1
+msgid "*"
+msgstr ""
+
+#: glade/string_selection_dialog.glade.h:2
+msgid "label"
+msgstr ""
+
+#: glade/string_selection_dialog.glade.h:3
+msgid "string_selection_dialog"
+msgstr ""
+
 #: src/cong-app.c:122
 msgid "XML Editor"
 msgstr "XML-redigerare"
@@ -226,12 +238,12 @@ msgstr "namnlös"
 msgid "No description available."
 msgstr "Ingen beskrivning tillgänglig."
 
-#: src/cong-dispspec.c:1410
+#: src/cong-dispspec.c:1430
 msgid "(xpath failed)"
 msgstr "(xpath misslyckades)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec.c:1455
+#: src/cong-dispspec.c:1475
 msgid "<untitled>"
 msgstr "<namnlös>"
 
@@ -509,7 +521,7 @@ msgstr "Felet \"%s\" rapporterades vid åtkomst av \"%s\""
 #: src/cong-error-file-open.c:436
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
-"Filing System."
+"File System."
 msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
@@ -746,13 +758,13 @@ msgstr "Exportalternativ"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
 #: src/cong-file-properties.c:102 src/cong-file-properties.c:106
-#: src/cong-menus.c:403 src/cong-node-properties-dialog.c:465
+#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:465
 msgid "Name"
 msgstr "Namn"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:231
 #: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:410 src/cong-parser-error.c:259
+#: src/cong-menus.c:426 src/cong-parser-error.c:259
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -879,7 +891,7 @@ msgstr "Utskriftsmetod:"
 msgid "Print Options"
 msgstr "Utskriftsalternativ"
 
-#: src/cong-file-print.c:311 src/cong-menus.c:700
+#: src/cong-file-print.c:311 src/cong-menus.c:716
 msgid "Print Preview"
 msgstr "Förhandsgranska"
 
@@ -977,80 +989,80 @@ msgstr "Avancerat"
 msgid "Save XML as..."
 msgstr "Spara XML som..."
 
-#: src/cong-location.c:789
+#: src/cong-location.c:783
 msgid "Calculating document start"
 msgstr "Beräknar dokumentbörjan"
 
-#: src/cong-location.c:801
+#: src/cong-location.c:795
 msgid "Calculating line start"
 msgstr "Beräknar radbörjan"
 
-#: src/cong-location.c:814
+#: src/cong-location.c:808
 msgid "Calculating document end"
 msgstr "Beräknar dokumentslut"
 
-#: src/cong-location.c:827
+#: src/cong-location.c:821
 msgid "Calculating line end"
 msgstr "Berknar radslut"
 
-#: src/cong-location.c:840
+#: src/cong-location.c:834
 msgid "Calculating previous page"
 msgstr "Beräknar föregående sida"
 
-#: src/cong-location.c:853
+#: src/cong-location.c:847
 msgid "Calculating next page"
 msgstr "Beräknar nästa sida"
 
-#: src/cong-menus.c:91 src/cong-menus.c:163 src/cong-menus.c:197
+#: src/cong-menus.c:93 src/cong-menus.c:165 src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
 msgstr "Den valda menyposten har inte implementerats än."
 
-#: src/cong-menus.c:373
+#: src/cong-menus.c:389
 msgid "Document Types"
 msgstr "Dokumenttyper"
 
-#: src/cong-menus.c:477
+#: src/cong-menus.c:493
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate kan inte öppna resultatet av transformeringen"
 
-#: src/cong-menus.c:535 src/cong-plugin.c:1018
+#: src/cong-menus.c:551 src/cong-plugin.c:1018
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Ett fel inträffade vid läsning av stilmallsfilen \"%s\""
 
-#: src/cong-menus.c:538 src/cong-menus.c:562 src/cong-plugin.c:1021
+#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1021
 #: src/cong-plugin.c:1045
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate kunde inte transformera dokumentet"
 
-#: src/cong-menus.c:559 src/cong-plugin.c:1042
+#: src/cong-menus.c:575 src/cong-plugin.c:1042
 msgid "There was a problem applying the stylesheet file"
 msgstr "Ett fel inträffade vid tillämpning av stilmallsfilen"
 
-#: src/cong-menus.c:1012
+#: src/cong-menus.c:1028
 msgid "Test Progress Checklist"
 msgstr "Testa förloppskontrollista"
 
-#: src/cong-menus.c:1016
+#: src/cong-menus.c:1032
 #, c-format
 msgid "This is stage %i"
 msgstr "Detta är steg %i"
 
-#: src/cong-menus.c:1072
+#: src/cong-menus.c:1077
 msgid "Message Log - Conglomerate"
 msgstr "Meddelandelogg - Conglomerate"
 
-#: src/cong-menus.c:1084
+#: src/cong-menus.c:1089
 msgid "Signal Log - Conglomerate"
 msgstr "Signallogg - Conglomerate"
 
-#: src/cong-menus.c:1167
+#: src/cong-menus.c:1188
 msgid "translator_credits"
 msgstr ""
 "Christian Rose\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/cong-menus.c:1171
+#: src/cong-menus.c:1192
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
@@ -1058,206 +1070,210 @@ msgstr ""
 "© 1999 Hans Petter Jansson\n"
 "© 2003 David Malcolm"
 
-#: src/cong-menus.c:1172
+#: src/cong-menus.c:1193
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: en fri, användarvänlig XML-redigerare"
 
-#: src/cong-menus.c:1207 src/cong-menus.c:1286
+#: src/cong-menus.c:1228 src/cong-menus.c:1306
 msgid "/_File"
 msgstr "/_Arkiv"
 
-#: src/cong-menus.c:1208 src/cong-menus.c:1287
+#: src/cong-menus.c:1229 src/cong-menus.c:1307
 msgid "/File/_New..."
 msgstr "/Arkiv/_Nytt..."
 
-#: src/cong-menus.c:1209 src/cong-menus.c:1288
+#: src/cong-menus.c:1230 src/cong-menus.c:1308
 msgid "/File/_Open..."
 msgstr "/Arkiv/_Öppna..."
 
-#: src/cong-menus.c:1210 src/cong-menus.c:1215 src/cong-menus.c:1220
-#: src/cong-menus.c:1223 src/cong-menus.c:1226 src/cong-menus.c:1228
-#: src/cong-menus.c:1289 src/cong-menus.c:1291
+#: src/cong-menus.c:1231 src/cong-menus.c:1236 src/cong-menus.c:1241
+#: src/cong-menus.c:1244 src/cong-menus.c:1247 src/cong-menus.c:1249
+#: src/cong-menus.c:1309 src/cong-menus.c:1311
 msgid "/File/"
 msgstr "/Arkiv/"
 
-#: src/cong-menus.c:1211
+#: src/cong-menus.c:1232
 msgid "/File/_Save"
 msgstr "/Arkiv/_Spara"
 
-#: src/cong-menus.c:1212
+#: src/cong-menus.c:1233
 msgid "/File/Save _As..."
 msgstr "/Arkiv/Spara so_m..."
 
-#: src/cong-menus.c:1213
+#: src/cong-menus.c:1234
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Arkiv/Spa_ra en kopia..."
 
-#: src/cong-menus.c:1216
+#: src/cong-menus.c:1237
 msgid "/File/Print Previe_w..."
 msgstr "/Arkiv/Förhands_granska..."
 
-#: src/cong-menus.c:1217
+#: src/cong-menus.c:1238
 msgid "/File/_Print..."
 msgstr "/Arkiv/Skriv _ut..."
 
-#: src/cong-menus.c:1221
+#: src/cong-menus.c:1242
 msgid "/File/_Revert"
 msgstr "/Arkiv/_Återgå"
 
-#: src/cong-menus.c:1224 src/cong-menus.c:1290
+#: src/cong-menus.c:1245 src/cong-menus.c:1310
 msgid "/File/_Import..."
 msgstr "/Arkiv/_Importera..."
 
-#: src/cong-menus.c:1225
+#: src/cong-menus.c:1246
 msgid "/File/_Export..."
 msgstr "/Arkiv/_Exportera..."
 
-#: src/cong-menus.c:1227
+#: src/cong-menus.c:1248
 msgid "/File/Proper_ties"
 msgstr "/Arkiv/Egens_kaper"
 
-#: src/cong-menus.c:1229 src/cong-menus.c:1292
+#: src/cong-menus.c:1250 src/cong-menus.c:1312
 msgid "/File/_Close"
 msgstr "/Arkiv/S_täng"
 
-#: src/cong-menus.c:1230 src/cong-menus.c:1293
+#: src/cong-menus.c:1251 src/cong-menus.c:1313
 msgid "/File/_Quit"
 msgstr "/Arkiv/_Avsluta"
 
-#: src/cong-menus.c:1232
+#: src/cong-menus.c:1253
 msgid "/_Edit"
 msgstr "/_Redigera"
 
-#: src/cong-menus.c:1234
+#: src/cong-menus.c:1254
 msgid "/Edit/_Undo"
 msgstr "/Redigera/_Ångra"
 
-#: src/cong-menus.c:1235
+#: src/cong-menus.c:1255
 msgid "/Edit/_Redo"
 msgstr "/Redigera/_Gör om"
 
-#: src/cong-menus.c:1236 src/cong-menus.c:1241 src/cong-menus.c:1247
-#: src/cong-menus.c:1249
+#: src/cong-menus.c:1256 src/cong-menus.c:1260 src/cong-menus.c:1266
+#: src/cong-menus.c:1268
 msgid "/Edit/"
 msgstr "/Redigera/"
 
-#: src/cong-menus.c:1238
+#: src/cong-menus.c:1257
 msgid "/Edit/Cu_t"
 msgstr "/Redigera/Klipp _ut"
 
-#: src/cong-menus.c:1239
+#: src/cong-menus.c:1258
 msgid "/Edit/_Copy"
 msgstr "/Redigera/_Kopiera"
 
-#: src/cong-menus.c:1240
+#: src/cong-menus.c:1259
 msgid "/Edit/_Paste"
 msgstr "/Redigera/Klistra _in"
 
-#: src/cong-menus.c:1243
+#: src/cong-menus.c:1262
 msgid "/Edit/_Find..."
 msgstr "/Redigera/_Sök..."
 
-#: src/cong-menus.c:1244
+#: src/cong-menus.c:1263
 msgid "/Edit/Find Ne_xt"
 msgstr "/Redigera/Sök n_ästa"
 
-#: src/cong-menus.c:1245
+#: src/cong-menus.c:1264
 msgid "/Edit/Find Pre_vious"
 msgstr "/Redigera/Sök före_gående"
 
-#: src/cong-menus.c:1246
+#: src/cong-menus.c:1265
 msgid "/Edit/R_eplace..."
 msgstr "/Redigera/_Ersätt..."
 
-#: src/cong-menus.c:1248
+#: src/cong-menus.c:1267
 msgid "/Edit/_Insert..."
 msgstr "/Redigera/_Infoga..."
 
-#: src/cong-menus.c:1251
+#: src/cong-menus.c:1270
 msgid "/Edit/View _Source"
 msgstr "/Redigera/Visa _källa"
 
-#: src/cong-menus.c:1254 src/cong-menus.c:1296
+#: src/cong-menus.c:1273 src/cong-menus.c:1316
 msgid "/Debug"
 msgstr "/Felsök"
 
-#: src/cong-menus.c:1255 src/cong-menus.c:1297
+#: src/cong-menus.c:1274 src/cong-menus.c:1317
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr "/Felsök/Påbörja självtest av felrapporteringssystem..."
 
-#: src/cong-menus.c:1256 src/cong-menus.c:1298
+#: src/cong-menus.c:1275 src/cong-menus.c:1318
 msgid "/Debug/Document Types"
 msgstr "/Felsök/Dokumenttyper"
 
-#: src/cong-menus.c:1257
+#: src/cong-menus.c:1276
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Felsök/Transformera DocBook till HTML"
 
-#: src/cong-menus.c:1258
+#: src/cong-menus.c:1277
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Felsök/Transformera DocBook till XHTML"
 
-#: src/cong-menus.c:1259
+#: src/cong-menus.c:1278
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Felsök/Transformera DocBook till HTML-hjälp"
 
-#: src/cong-menus.c:1260
+#: src/cong-menus.c:1279
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Felsök/Transformera DocBook till Java-hjälp"
 
-#: src/cong-menus.c:1261
+#: src/cong-menus.c:1280
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Felsök/Transformera DocBook till FO"
 
-#: src/cong-menus.c:1263
+#: src/cong-menus.c:1282
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Felsök/Förhandsgranska XSL:FO"
 
-#: src/cong-menus.c:1265
+#: src/cong-menus.c:1284
 msgid "/Debug/DTD"
 msgstr "/Felsök/DTD"
 
-#: src/cong-menus.c:1266 src/cong-menus.c:1299
+#: src/cong-menus.c:1285 src/cong-menus.c:1319
 msgid "/Debug/Dialog"
 msgstr "/Felsök/Dialogfönster"
 
-#: src/cong-menus.c:1267 src/cong-menus.c:1300
+#: src/cong-menus.c:1286 src/cong-menus.c:1320
 msgid "/Debug/Progress Checklist"
 msgstr "/Felsök/Förloppskontrollista"
 
-#: src/cong-menus.c:1268
+#: src/cong-menus.c:1287
 msgid "/Debug/Document Message Log"
 msgstr "/Felsök/Dokumentmeddelandelogg"
 
-#: src/cong-menus.c:1269
+#: src/cong-menus.c:1288
 msgid "/Debug/Document Signal Log"
 msgstr "/Felsök/Dokumentsignalslogg"
 
-#: src/cong-menus.c:1270 src/cong-menus.c:1301
+#: src/cong-menus.c:1289 src/cong-menus.c:1321
 msgid "/Debug/Information Alert"
 msgstr "/Felsök/Informationsvarning"
 
-#: src/cong-menus.c:1271 src/cong-menus.c:1302
+#: src/cong-menus.c:1290 src/cong-menus.c:1322
 msgid "/Debug/Glade Test"
 msgstr "/Felsök/Glade-test"
 
-#: src/cong-menus.c:1272
+#: src/cong-menus.c:1291
 msgid "/Debug/Insert XML Fragment"
 msgstr "/Felsök/Infoga XML-fragment"
 
-#: src/cong-menus.c:1275
+#: src/cong-menus.c:1292
+msgid "/Debug/Command Test"
+msgstr "/Felsök/Kommandotest"
+
+#: src/cong-menus.c:1295
 msgid "/_Tools"
 msgstr "/Verkty_g"
 
-#: src/cong-menus.c:1277 src/cong-menus.c:1305
+#: src/cong-menus.c:1297 src/cong-menus.c:1325
 msgid "/_Help"
 msgstr "/_Hjälp"
 
-#: src/cong-menus.c:1278 src/cong-menus.c:1306
+#: src/cong-menus.c:1298 src/cong-menus.c:1326
 msgid "/Help/_Contents"
 msgstr "/Hjälp/_Innehåll"
 
-#: src/cong-menus.c:1279 src/cong-menus.c:1307
+#: src/cong-menus.c:1299 src/cong-menus.c:1327
 msgid "/Help/_About"
 msgstr "/Hjälp/_Om"
 
@@ -1338,23 +1354,23 @@ msgstr "Kopiera"
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/cong-primary-window.c:442
+#: src/cong-primary-window.c:440
 msgid "Overview"
 msgstr "Översikt"
 
-#: src/cong-primary-window.c:452
+#: src/cong-primary-window.c:450
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: src/cong-primary-window.c:460
+#: src/cong-primary-window.c:458
 msgid "Raw XML"
 msgstr "Rå XML"
 
-#: src/cong-primary-window.c:518
+#: src/cong-primary-window.c:516
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Välkommen tillbaka till den mycket fördröjda redigeraren Conglomerate."
 
-#: src/cong-primary-window.c:600
+#: src/cong-primary-window.c:598
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (ändrad) - %s"
@@ -1385,12 +1401,12 @@ msgstr ""
 "Om du ser detta fel är det sannolikt att du byggt Conglomerate men inte "
 "installerat det. Försök installera det."
 
-#: src/plugin-cleanup-source.c:391
+#: src/plugin-cleanup-source.c:392
 msgid "Cleanup XML Source"
 msgstr "Städa XML-källkod"
 
-#: src/plugin-cleanup-source.c:392 src/plugin-cleanup-source.c:395
-#: src/plugin-cleanup-source.c:396
+#: src/plugin-cleanup-source.c:393 src/plugin-cleanup-source.c:396
+#: src/plugin-cleanup-source.c:397
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1398,7 +1414,7 @@ msgstr ""
 "Städar upp XML-källkoden för dokumentet så att den är enkel att läsa i en "
 "kodredigerare."
 
-#: src/plugin-cleanup-source.c:394
+#: src/plugin-cleanup-source.c:395
 msgid "_Clean the XML Source"
 msgstr "_Städa XML-källkoden"
 
@@ -1557,6 +1573,8 @@ msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr ""
+"Befordrar ett DocBook-avsnitt till en högre organisatorisk nivå inom "
+"dokumentet"
 
 #: src/plugin-docbook.c:1336
 msgid "Promote"
@@ -1565,7 +1583,7 @@ msgstr "Befordra"
 #: src/plugin-docbook.c:1337 src/plugin-docbook.c:1338
 msgid ""
 "Promote the section to a higher organisational level within the document"
-msgstr ""
+msgstr "Befordra avsnittet till en högre organisatorisk nivå inom dokumentet"
 
 #: src/plugin-docbook.c:1344
 msgid "Demote Section"
@@ -1575,6 +1593,8 @@ msgstr "Degradera avsnitt"
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
+"Degraderar ett DocBook-avsnitt till en lägre organisatorisk nivå inom "
+"dokumentet"
 
 #: src/plugin-docbook.c:1347
 msgid "Demote"
@@ -1582,7 +1602,7 @@ msgstr "Degradera"
 
 #: src/plugin-docbook.c:1348 src/plugin-docbook.c:1349
 msgid "Demote the section to a lower organisational level within the document"
-msgstr ""
+msgstr "Degradera avsnittet till en lägre organisatorisk nivå inom dokumentet"
 
 #: src/plugin-dtd.c:80
 #, c-format
@@ -1594,14 +1614,16 @@ msgstr "Automatgenererad dokumenttyp baserad på %s"
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
+"Denna Conglomerate-displayspecifikation genererades automatiskt från %s"
 
 #: src/plugin-dtd.c:156
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr ""
+msgstr "Konvertera DTD till Conglomerate-displayspecifikation"
 
 #: src/plugin-dtd.c:157
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr ""
+"Importera en DTD-fil och skapa en Conglomerate-displayspecifikationsfil."
 
 #: src/plugin-dtd.c:164
 msgid "Convert DTD into a Relax NG schema"
@@ -1613,11 +1635,11 @@ msgstr ""
 
 #: src/plugin-dtd.c:172
 msgid "Convert DTD into W3C XML Schema"
-msgstr ""
+msgstr "Konvertera DTD till W3C XML-schema"
 
 #: src/plugin-dtd.c:173
 msgid "Import a DTD file, converting it into a W3C XML Schema."
-msgstr ""
+msgstr "Importera en DTD-fil och konvertera det till ett W3C XML-schema."
 
 #: src/plugin-dtd.c:180
 msgid "Convert DTD into a Schematron file"
@@ -1817,54 +1839,54 @@ msgstr "XSL-mallelement"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 
-#: src/popup.c:123
+#: src/popup.c:124
 msgid "(no description available)"
 msgstr "(ingen beskrivning tillgänglig)"
 
-#: src/popup.c:340
+#: src/popup.c:341
 msgid "Remove span tag"
 msgstr "Ta bort spanntagg"
 
-#: src/popup.c:898
+#: src/popup.c:899
 msgid "Delete this item"
 msgstr "Ta bort detta objekt"
 
-#: src/popup.c:908
+#: src/popup.c:909
 msgid "Add text node after"
 msgstr "Lägg till textnod efter"
 
-#: src/popup.c:916
+#: src/popup.c:917
 msgid "Add text node before"
 msgstr "Lägg till textnod före"
 
-#: src/popup.c:927
+#: src/popup.c:928
 msgid "Set the text"
 msgstr "Ställ in texten"
 
-#: src/popup.c:958
+#: src/popup.c:959
 msgid "Paste into"
 msgstr "Klistra in i"
 
-#: src/popup.c:966
+#: src/popup.c:967
 msgid "Paste before"
 msgstr "Klistra in före"
 
-#: src/popup.c:974
+#: src/popup.c:975
 msgid "Paste after"
 msgstr "Klistra in efter"
 
-#: src/popup.c:991
+#: src/popup.c:992
 msgid "New sub-element"
 msgstr "Nytt underelement"
 
-#: src/popup.c:1016
+#: src/popup.c:1017
 msgid "New sibling"
 msgstr ""
 
 #: src/xmldata.c:400
 #, c-format
 msgid ""
-"The element \"%s\" requires a child to be valid.  Please choose one of the "
+"The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
 msgstr ""
 
@@ -1873,9 +1895,14 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Nödvändiga barnval"
 
-#: src/xmledit.c:436
+#: src/xmledit.c:332
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
+
+#~ msgid ""
+#~ "The program unexpectedly received an error report from the GNOME Virtual "
+#~ "Filing System."
+#~ msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #~ msgid "Attributes for %s tags"
 #~ msgstr "Attribut för %s-taggar"
@@ -1901,11 +1928,6 @@ msgstr "Källkodsvy - Conglomerate"
 #~ "Highlight one of the items in the list and select \"Forward\" to continue."
 #~ msgstr ""
 #~ "Markera ett av objekten i listan och välj \"Framåt\" för att fortsätta."
-
-#~ msgid ""
-#~ "The program unexpectedly received an error report from the GNOME Virtual "
-#~ "File System."
-#~ msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #~ msgid "Creating a new file..."
 #~ msgstr "Skapar en ny fil..."
