@@ -1,3 +1,9 @@
+2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* gxx-impl-object-to-xml-tree.c
+
+	New file that implements helper functions for object->XML code
+
 2003-11-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, Makefile.am, cong-dispspec-element-gxx.h, cong-dispspec-element.c, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h, gxx-undefine-shared-macros.h

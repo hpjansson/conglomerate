@@ -215,6 +215,7 @@ conglomerate_SOURCES =      \
   cong-util.c               \
   cong-vfs.c                \
   cong-view.c               \
+  gxx-impl-object-to-xml-tree.c \
   icon_assemble.c           \
   icon_connect.c            \
   icon_new.c                \
