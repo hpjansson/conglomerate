@@ -395,7 +395,7 @@ void
 cong_command_add_node_free (CongCommand *cmd,
 			    CongNodePtr node)
 {
-	g_assert_not_reached();
+	/* FIXME: unwritten */
 }
 
 /* Adding Compound modifications: */
@@ -479,7 +479,7 @@ cong_command_for_each_location (CongCommand *cmd,
 	cong_location_copy (&old_logical_sel_end, cong_selection_get_logical_end (cong_document_get_selection (doc)));
 
 	cong_location_copy (&new_cursor_location, &old_cursor_location);
-	cong_location_copy (&new_logical_sel_end, &old_logical_sel_start);
+	cong_location_copy (&new_logical_sel_start, &old_logical_sel_start);
 	cong_location_copy (&new_logical_sel_end, &old_logical_sel_end);
 
 #if 0

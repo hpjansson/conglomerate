@@ -1,5 +1,9 @@
 2003-10-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* comg-command.c
+
+	Fixed a typo, and removed an assertion
+	
 	* cong-modification.h
 
 	Diabled bad declarations
