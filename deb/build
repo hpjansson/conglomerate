@@ -48,12 +48,51 @@ fi
 # assuming the user has debian development stuff installed
 # ( this is the place where a test on such executables should done )
 
+update()
+# changes in 'debian' should go back into 'deb'
+{
+  echo update
+}
+
+diffgz()
+# generate the  .diff.gz
+{
+  CWD=$(basename $(pwd) )
+  ( cd .. ; dpkg-source -b ${CWD} )
+}
 
 #
 if [ $# > 1 ]
 then
-  # the only supported parameter.
-  dch -v "$1" "New upstream release."
+  case $1 in
+  version*)
+    echo version
+    dch -v "$1" "New upstream release."
+  ;;
+  update*)
+    echo generating deb.update
+    update > deb.update
+    exit
+  ;;
+  changes*)
+    echo generating _arch.changes
+    dpkg-genchanges
+    exit
+  ;;
+  diff*)
+    echo generating .diff.gz
+    diffgz
+    exit
+  ;;
+  sign*)
+    echo do debrsign manual
+    exit
+  ;;
+  h*)
+    echo version=x.y.z update changes diff sign help
+    exit
+  ;;
+  esac
 fi
 
 echo gonna build the package
@@ -69,20 +108,3 @@ echo one directory level up, are these .deb files:
 ls -ltr ../*.deb
 
 # end of script
-
-exit
-
-## below stuff from the old "polish" script
-# generate  the .diff.gz
-CWD=$(basename $(pwd) )
-( cd .. ; dpkg-source -b ${CWD} )
-
-
-#
-dpkg-genchanges
-
-#
-echo do debrsign manual
-
-
-# end of file
