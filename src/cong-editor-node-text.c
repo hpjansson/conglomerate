@@ -492,11 +492,20 @@ cong_selection_get_start_byte_offset (CongSelection *selection,
 	g_assert (output);
 
 	start_loc = cong_selection_get_ordered_start (selection);
+	g_assert (start_loc);
 
 	if (NULL==start_loc->node) {
 		return FALSE;
 	}
 
+	/* Suppress g_return_if_fail inside cong_node_get_ordering for bug #130236 */
+	if (start_loc->node->parent==NULL && cong_node_type (start_loc->node)!=CONG_NODE_TYPE_DOCUMENT) {
+		return FALSE;
+	}
+	if (node->parent==NULL && cong_node_type (node)!=CONG_NODE_TYPE_DOCUMENT) {
+		return FALSE;
+	}
+	
 	if (start_loc->node == node) {
 		*output = start_loc->byte_offset;
 		return TRUE;
@@ -536,6 +545,14 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 	end_loc = cong_selection_get_ordered_end (selection);
 
 	if (NULL==end_loc->node) {
+		return FALSE;
+	}
+
+	/* Suppress g_return_if_fail inside cong_node_get_ordering for bug #130236 */
+	if (end_loc->node->parent==NULL && cong_node_type (end_loc->node)!=CONG_NODE_TYPE_DOCUMENT) {
+		return FALSE;
+	}
+	if (node->parent==NULL && cong_node_type (node)!=CONG_NODE_TYPE_DOCUMENT) {
 		return FALSE;
 	}
 
