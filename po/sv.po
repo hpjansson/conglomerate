@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-10-09 00:34+0200\n"
-"PO-Revision-Date: 2003-10-09 00:35+0200\n"
+"POT-Creation-Date: 2003-10-14 12:52+0200\n"
+"PO-Revision-Date: 2003-10-14 12:53+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgid "Continue numbering from previous list"
 msgstr "Fortsätt numrering från föregående lista"
 
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
-#: src/cong-error-file-open.c:448
+#: src/cong-error-file-open.c:449
 msgid "Details"
 msgstr "Detaljer"
 
@@ -161,20 +161,20 @@ msgstr "etikett"
 msgid "string_selection_dialog"
 msgstr "strängvalsdialog"
 
-#: src/cong-app.c:239
+#: src/cong-app.c:267
 msgid "XML Editor"
 msgstr "XML-redigerare"
 
-#: src/cong-app.c:305
+#: src/cong-app.c:333
 #, c-format
 msgid "Conglomerate could not load any xds files from the directory \"%s\""
 msgstr "Conglomerate kunde inte läsa in några xds-filer från katalogen \"%s\""
 
-#: src/cong-app.c:307
+#: src/cong-app.c:335
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate kunde inte hitta några beskrivningar av dokumenttyper."
 
-#: src/cong-app.c:309
+#: src/cong-app.c:337
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it."
@@ -357,11 +357,11 @@ msgstr ""
 "Ett GError inträffade. Felrapporten var:\n"
 "<i>%s</i>"
 
-#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:445
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
 msgstr "Ett oväntat fel inträffade."
 
-#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:446
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
 msgstr "Klicka på knappen \"Detaljer\" för mer information."
 
@@ -392,22 +392,22 @@ msgid "Conglomerate could not run the Search Tool.\n"
 msgstr "Conglomerate kunde inte köra sökverktyget.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
-#: src/cong-error-file-open.c:79
+#: src/cong-error-file-open.c:82
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
 msgstr "%s kan inte läsa \"%s\" från %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-open.c:82
+#: src/cong-error-file-open.c:85
 #, c-format
 msgid "%s could not read \"%s\" from %s."
 msgstr "%s kunde inte läsa \"%s\" från %s."
 
-#: src/cong-error-file-open.c:202 src/cong-error-file-save.c:80
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
 msgstr "Ett oväntat internt fel inträffade."
 
-#: src/cong-error-file-open.c:203 src/cong-error-file-save.c:81
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
@@ -415,11 +415,11 @@ msgstr ""
 "Försök igen. Om det misslyckas igen bör du felrapportera detta till den "
 "ansvarige för detta program."
 
-#: src/cong-error-file-open.c:229
+#: src/cong-error-file-open.c:234
 msgid "There is no file with that name at that location."
 msgstr "Det finns ingen fil med det namnet på den platsen."
 
-#: src/cong-error-file-open.c:230
+#: src/cong-error-file-open.c:235
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
 "capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
@@ -431,16 +431,16 @@ msgstr ""
 "\" eller \"minfil\").\n"
 "(ii) Prova att använda sökverktyget för att hitta din fil."
 
-#: src/cong-error-file-open.c:231 src/cong-error-file-open.c:240
-#: src/cong-error-file-open.c:295 src/cong-error-file-open.c:336
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
 msgid "Search"
 msgstr "Sök"
 
-#: src/cong-error-file-open.c:238 src/cong-error-file-save.c:98
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
 msgid "The location does not exist."
 msgstr "Platsen finns inte."
 
-#: src/cong-error-file-open.c:239
+#: src/cong-error-file-open.c:244
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -453,12 +453,12 @@ msgstr ""
 "(ii) Prova att använda sökverktyget för att hitta din fil."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-open.c:252
+#: src/cong-error-file-open.c:257
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
 msgstr "Platsen \"%s\" stöder inte läsande av filer."
 
-#: src/cong-error-file-open.c:256
+#: src/cong-error-file-open.c:261
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
@@ -466,36 +466,36 @@ msgstr ""
 "Försök att läsa in en fil från en annan plats. Om du tror att du borde kunna "
 "läsa denna fil bör du kontakta din systemadministratör."
 
-#: src/cong-error-file-open.c:266
+#: src/cong-error-file-open.c:271
 msgid "There were problems reading the content of the file."
 msgstr "Det förekom problem vid läsning av den filens innehåll."
 
-#: src/cong-error-file-open.c:267 src/cong-error-file-open.c:285
-#: src/cong-error-file-open.c:324
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
 "Försök igen. Om det misslyckas igen bör du kontakta din systemadministratör."
 
-#: src/cong-error-file-open.c:276
+#: src/cong-error-file-open.c:281
 msgid "The contents of the file seem to be corrupt."
 msgstr "Innehållet i filen verkar vara trasigt."
 
-#: src/cong-error-file-open.c:277
+#: src/cong-error-file-open.c:282
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 "Försök igen. Om det misslyckas igen bör du leta efter en säkerhetskopia av "
 "filen."
 
-#: src/cong-error-file-open.c:284 src/cong-error-file-open.c:323
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
 msgid "There were problems reading the contents of the file."
 msgstr "Det förekom problem vid läsning av filens innehåll."
 
-#: src/cong-error-file-open.c:293 src/cong-error-file-save.c:239
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
 msgid "The system does not recognise that as a valid location."
 msgstr "Systemet godtar inte det som en giltig plats."
 
-#: src/cong-error-file-open.c:294
+#: src/cong-error-file-open.c:299
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -507,20 +507,20 @@ msgstr ""
 "\"HTTP\").\n"
 "(ii) Prova att använda sökverktyget för att hitta din fil."
 
-#: src/cong-error-file-open.c:305
+#: src/cong-error-file-open.c:310
 msgid "You do not have permission to read that file."
 msgstr "Du har inte rättigheter att läsa den filen."
 
-#: src/cong-error-file-open.c:306
+#: src/cong-error-file-open.c:311
 msgid "Try asking your system administrator to give you permission."
 msgstr "Försök be din systemadministratör att ge dig rättigheter."
 
-#: src/cong-error-file-open.c:313 src/cong-error-file-save.c:262
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
 msgid "The system is trying to operate on too many files at once."
 msgstr "Systemet försöker operera på för många filer samtidigt."
 
-#: src/cong-error-file-open.c:314 src/cong-error-file-open.c:348
-#: src/cong-error-file-save.c:263 src/cong-error-file-save.c:282
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
@@ -529,30 +529,30 @@ msgstr ""
 "eller kontakta din systemadministratör."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-open.c:331
+#: src/cong-error-file-open.c:336
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
 msgstr "\"%s\" är en katalog och inte en fil."
 
-#: src/cong-error-file-open.c:335
+#: src/cong-error-file-open.c:340
 msgid "Try using the Search Tool to find your file."
 msgstr "Försök att använda sökverktyget för att hitta din fil."
 
-#: src/cong-error-file-open.c:347 src/cong-error-file-save.c:281
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
 msgid "The system ran out of memory."
 msgstr "Systemets minne tog slut."
 
-#: src/cong-error-file-open.c:356 src/cong-error-file-open.c:365
-#: src/cong-error-file-open.c:374 src/cong-error-file-save.c:290
-#: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
 msgid "The server could not be contacted."
 msgstr "Servern kunde inte kontaktas."
 
-#: src/cong-error-file-open.c:357
+#: src/cong-error-file-open.c:362
 msgid "Try again.  If it fails again, the server may be down."
 msgstr "Försök igen. Om det misslyckas igen kan servern vara nere."
 
-#: src/cong-error-file-open.c:366 src/cong-error-file-open.c:375
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
@@ -560,43 +560,44 @@ msgstr ""
 "(i) Prova att kontrollera att du stavade platsen korrekt.\n"
 "(ii) Försök igen. Om det misslyckas igen kan servern vara nere."
 
-#: src/cong-error-file-open.c:383 src/cong-error-file-save.c:317
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
 msgid "The system could not login to the location."
 msgstr "Systemet kunde inte logga in till platsen."
 
-#: src/cong-error-file-open.c:384 src/cong-error-file-open.c:394
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
 "Försök igen. Om det misslyckas igen bör du kontakta din systemadministratör."
 
-#: src/cong-error-file-open.c:393 src/cong-error-file-save.c:326
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
 msgid "The location was too busy."
 msgstr "Platsen var för upptagen."
 
-#: src/cong-error-file-open.c:432
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "Felet \"%s\" rapporterades vid åtkomst av \"%s\""
 
-#: src/cong-error-file-open.c:438
+#: src/cong-error-file-open.c:439
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
 msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
-#: src/cong-error-file-save.c:49
+#: src/cong-error-file-save.c:51
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
 msgstr "%s kan inte spara \"%s\" till %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-save.c:52
+#: src/cong-error-file-save.c:54
 #, c-format
 msgid "%s could not save \"%s\" to %s."
 msgstr "%s kunde inte spara \"%s\" till %s."
 
-#: src/cong-error-file-save.c:99
+#: src/cong-error-file-save.c:101
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
 "that capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -609,26 +610,26 @@ msgstr ""
 "(ii) Prova att spara på en annan plats."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:107 src/cong-error-file-save.c:226
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
 msgstr "Platsen \"%s\" stöder inte skrivandet av filer."
 
-#: src/cong-error-file-save.c:111 src/cong-error-file-save.c:230
-#: src/cong-error-file-save.c:338
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
 msgid "Try saving to a different location."
 msgstr "Försök att spara på en annan plats."
 
-#: src/cong-error-file-save.c:122
+#: src/cong-error-file-save.c:124
 msgid "There were problems writing the content of the file."
 msgstr "Det förekom problem vid skrivandet av innehåll för den filen."
 
-#: src/cong-error-file-save.c:123
+#: src/cong-error-file-save.c:125
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr ""
 "Försök igen. Om det misslyckas igen bör du prova att spara på en annan plats."
 
-#: src/cong-error-file-save.c:152
+#: src/cong-error-file-save.c:154
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
@@ -636,22 +637,22 @@ msgstr ""
 "Storleken på filen skulle bli %s, men enheten har endast kapacitet för %s."
 
 #. Can't get at the capacity for the device or "volume":
-#: src/cong-error-file-save.c:158
+#: src/cong-error-file-save.c:160
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
 "Filen är för stor för att rymmas på enheten (filstorleken skulle bli %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:166
+#: src/cong-error-file-save.c:168
 msgid "The file is too big to fit on the device."
 msgstr "Filen är för stor för att få plats på enheten."
 
-#: src/cong-error-file-save.c:175
+#: src/cong-error-file-save.c:177
 msgid "Try saving the file to a different location."
 msgstr "Försök spara filen på en annan plats."
 
-#: src/cong-error-file-save.c:196
+#: src/cong-error-file-save.c:198
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
@@ -659,7 +660,7 @@ msgstr ""
 "Storleken på filen skulle bli %s, men du har endast %s ledigt på den enheten."
 
 #. Can't get at the free space for the device or "volume":
-#: src/cong-error-file-save.c:202
+#: src/cong-error-file-save.c:204
 #, c-format
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
@@ -669,11 +670,11 @@ msgstr ""
 "(filstorleken skulle bli %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:210
+#: src/cong-error-file-save.c:212
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr "Filen är för stor för att rymmas i återstående utrymme på enheten."
 
-#: src/cong-error-file-save.c:219
+#: src/cong-error-file-save.c:221
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
@@ -681,7 +682,7 @@ msgstr ""
 "Försök spara filen på en annan plats, eller skapa mer utrymme genom att "
 "flytta oönskade filer från den enheten till papperskorgen."
 
-#: src/cong-error-file-save.c:240
+#: src/cong-error-file-save.c:242
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -693,11 +694,11 @@ msgstr ""
 "\"HTTP\").\n"
 "(ii) Prova att spara på en annan plats."
 
-#: src/cong-error-file-save.c:254
+#: src/cong-error-file-save.c:256
 msgid "You do not have permission to write to that location."
 msgstr "Du har inte rättigheter att skriva till den platsen."
 
-#: src/cong-error-file-save.c:255
+#: src/cong-error-file-save.c:257
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
@@ -706,12 +707,12 @@ msgstr ""
 "rättigheter."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-save.c:269
+#: src/cong-error-file-save.c:271
 #, c-format
 msgid "\"%s\" is a directory."
 msgstr "\"%s\" är en katalog."
 
-#: src/cong-error-file-save.c:273
+#: src/cong-error-file-save.c:275
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
@@ -719,7 +720,7 @@ msgstr ""
 "Du måste spara till en fil inuti en katalog, istället för till själva "
 "katalogen."
 
-#: src/cong-error-file-save.c:291
+#: src/cong-error-file-save.c:293
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
@@ -727,7 +728,7 @@ msgstr ""
 "Försök igen. Om det mislyckas igen kan servern vara nere. Försök spara till "
 "en annan plats."
 
-#: src/cong-error-file-save.c:300 src/cong-error-file-save.c:309
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to "
@@ -737,48 +738,48 @@ msgstr ""
 "(ii) Försök igen. Om det misslyckas igen kan servern vara nere. Prova att "
 "spara på en annan plats."
 
-#: src/cong-error-file-save.c:318 src/cong-error-file-save.c:327
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
 msgid "Try again. If it fails again, try saving to another location."
 msgstr ""
 "Försök igen. Om det misslyckas igen bör du försöka spara till en annan plats."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:334
+#: src/cong-error-file-save.c:336
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
 msgstr "Platsen \"%s\" tillåter endast att filer läses, inte att de skrivs."
 
 #. FIXME: need to think more about these messages
-#: src/cong-error-file-save.c:346
+#: src/cong-error-file-save.c:348
 #, c-format
 msgid "The name \"%s\" is too long for the location to manage."
 msgstr "Namnet \"%s\" är för långt för att platsen ska kunna hantera det."
 
-#: src/cong-error-file-save.c:350
+#: src/cong-error-file-save.c:352
 msgid "Try again with a shorter file name."
 msgstr "Försök igen med ett kortare filnamn."
 
 #. 5 megabytes, for a test
-#: src/cong-error-tests.c:17
+#: src/cong-error-tests.c:16
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
 msgstr "Testar Arkiv->Öppna-misslyckande för \"%s\" med resultatet %s"
 
-#: src/cong-error-tests.c:23
+#: src/cong-error-tests.c:22
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
 msgstr "Testar Arkiv->Spara-misslyckande för \"%s\" med resultatet %s"
 
-#: src/cong-error-tests.c:29
+#: src/cong-error-tests.c:28
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
 msgstr "Testar allmänt fel \"%s\" med resultatet %s"
 
-#: src/cong-error-tests.c:32
+#: src/cong-error-tests.c:31
 msgid "Conglomerate is simulating the failure of a generic file operation."
 msgstr "Conglomerate simulerar misslyckandet av en allmän filåtgärd."
 
-#: src/cong-error-tests.c:35
+#: src/cong-error-tests.c:34
 msgid "This dialog was generated by the automated testing routine"
 msgstr "Detta dialogfönster genererades av den automatiserade testrutinen"
 
@@ -824,7 +825,7 @@ msgstr "Namn"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:232
 #: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:426 src/cong-parser-error.c:259
+#: src/cong-menus.c:426 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -930,7 +931,7 @@ msgstr ""
 msgid "Force"
 msgstr "Tvinga"
 
-#: src/cong-file-open.c:195
+#: src/cong-file-open.c:168
 msgid "Select an XML document"
 msgstr "Välj ett XML-dokument"
 
@@ -1383,21 +1384,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Okända data"
 
-#: src/cong-parser-error.c:171
+#: src/cong-parser-error.c:177
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Tolkningsfel vid inläsning av %s"
 
-#: src/cong-parser-error.c:254
+#: src/cong-parser-error.c:185
+msgid "_Retry"
+msgstr "_Försök igen"
+
+#: src/cong-parser-error.c:264
 msgid "Line Number"
 msgstr "Radnummer"
 
-#: src/cong-parser-error.c:316
+#: src/cong-parser-error.c:326
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s förstår inte det interna formatet för filen."
 
-#: src/cong-parser-error.c:324
+#: src/cong-parser-error.c:334
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1407,7 +1412,7 @@ msgstr ""
 "mycket striktare regler än de flesta webbläsare. Det stöder dessutom ännu "
 "inte SGML. Vi hoppas kunna åtgärda dessa problem i en senare utgåva."
 
-#: src/cong-parser-error.c:325
+#: src/cong-parser-error.c:335
 msgid "Show Details"
 msgstr "Visa detaljer"
 
@@ -1441,7 +1446,7 @@ msgid "Copy"
 msgstr "Kopiera"
 
 #: src/cong-primary-window.c:342 src/cong-primary-window.c:343
-#: src/xmledit.c:149
+#: src/xmledit.c:155
 msgid "Paste"
 msgstr "Klistra in"
 
@@ -2006,21 +2011,24 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Nödvändiga barnval"
 
-#: src/xmledit.c:227
+#: src/xmledit.c:233
 msgid "Paste Under"
 msgstr "Klistra in under"
 
-#: src/xmledit.c:270
+#: src/xmledit.c:276
 msgid "Paste Before"
 msgstr "Klistra in före"
 
-#: src/xmledit.c:312
+#: src/xmledit.c:318
 msgid "Paste After"
 msgstr "Klistra in efter"
 
-#: src/xmledit.c:351
+#: src/xmledit.c:357
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
+
+#~ msgid "Retry"
+#~ msgstr "Försök igen"
 
 #~ msgid "_Undo"
 #~ msgstr "_Ångra"
@@ -2171,9 +2179,6 @@ msgstr "Källkodsvy - Conglomerate"
 
 #~ msgid "_Print..."
 #~ msgstr "Skriv _ut..."
-
-#~ msgid "_Revert"
-#~ msgstr "_Återgå"
 
 #~ msgid "Proper_ties"
 #~ msgstr "Egens_kaper"
