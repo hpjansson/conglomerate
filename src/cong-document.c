@@ -12,6 +12,7 @@
 #include "cong-command.h"
 #include "cong-command-history.h"
 #include "cong-marshal.h"
+#include "cong-vfs.h"
 
 static void
 cong_document_finalize (GObject *object);
@@ -438,7 +439,7 @@ cong_document_get_filename(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_util_split_uri(uri, &filename, &path);
+		cong_vfs_split_uri (uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -473,7 +474,7 @@ cong_document_get_parent_uri(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_util_split_uri(uri, &filename, &path);
+		cong_vfs_split_uri (uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -530,9 +531,9 @@ cong_document_save(CongDocument *doc,
 
 	file_uri = gnome_vfs_uri_new(filename);
 	
-	vfs_result = cong_xml_save_to_vfs(PRIVATE(doc)->xml_doc, 
-					  file_uri,	
-					  &file_size);
+	vfs_result = cong_vfs_save_xml_to_uri (PRIVATE(doc)->xml_doc, 
+					       file_uri,	
+					       &file_size);
 
 	if (vfs_result != GNOME_VFS_OK) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,

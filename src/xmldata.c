@@ -12,6 +12,8 @@
 #include "cong-util.h"
 #include "cong-command.h"
 
+#include "cong-vfs.h"
+
 #define DEBUG_VALID_INSERTIONS 0
 
 char fake_data[] = "";
@@ -815,58 +817,6 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementT
 	}
 	
 	return list;
-}
-
-GnomeVFSResult
-cong_xml_save_to_vfs(xmlDocPtr doc_ptr, 
-		     GnomeVFSURI *file_uri,	
-		     GnomeVFSFileSize *output_file_size)
-{
-	xmlChar* mem;
-	int size;
-	GnomeVFSResult vfs_result;
-	GnomeVFSHandle *vfs_handle;
-	GnomeVFSFileSize written_size;
-
-	g_return_val_if_fail(doc_ptr, GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(file_uri, GNOME_VFS_ERROR_BAD_PARAMETERS);
-	g_return_val_if_fail(output_file_size, GNOME_VFS_ERROR_BAD_PARAMETERS);
-
-	/* Dump to a memory buffer. then write out buffer to GnomeVFS: */
-	xmlDocDumpMemory(doc_ptr,
-			 &mem,
-			 &size);
-	g_assert(mem);
-	g_assert(size>0);
-
-	*output_file_size = size;
-
-	vfs_result = gnome_vfs_create_uri(&vfs_handle,
-					  file_uri,
-					  GNOME_VFS_OPEN_WRITE,
-					  FALSE,
-					  0644
-					);
-
-	if (vfs_result != GNOME_VFS_OK) {
-		return vfs_result;
-	}
-
-	vfs_result = gnome_vfs_write(vfs_handle,
-				     mem,
-				     *output_file_size,
-				     &written_size);
-
-	if (vfs_result != GNOME_VFS_OK) {
-		gnome_vfs_close(vfs_handle);
-		return vfs_result;
-	}
-
-	g_assert(*output_file_size == written_size);
-
-	vfs_result = gnome_vfs_close(vfs_handle);
-
-	return vfs_result;
 }
 
 /* Extensions to libxml: */

@@ -35,6 +35,7 @@
 #include "cong-app.h"
 #include "cong-eel.h"
 #include <glade/glade-xml.h>
+#include "cong-vfs.h"
 
 CongImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,

@@ -29,12 +29,6 @@ G_BEGIN_DECLS
 
 /* Handy utility functions: */
 
-GnomeVFSResult
-cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
-
-GnomeVFSResult
-cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
-
 gboolean 
 cong_util_is_docbook (CongDocument *doc);
 
@@ -52,13 +46,6 @@ cong_util_is_pure_whitespace (const gchar *utf8_text);
  */
 gchar* 
 cong_util_cleanup_text (const xmlChar *text);
-
-
-/**
-   Convert a URI into a POSIX, path, assuming that this is valid: 
-*/
-gchar*
-cong_util_get_local_path_from_uri (GnomeVFSURI *uri);
 
 /**
  * cong_utils_get_norman_walsh_stylesheet_path:
@@ -149,11 +136,6 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 			    const xmlChar *root_element,
 			    const xmlChar *ExternalID, 
 			    const xmlChar *SystemID);
-
-void
-cong_util_split_uri (const GnomeVFSURI* uri, 
-		     gchar** filename_alone, 
-		     gchar** path);
 
 /* Dodgy hack to do lines that blend to white: */
 void 

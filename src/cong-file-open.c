@@ -11,6 +11,7 @@
 #include "cong-app.h"
 #include "cong-primary-window.h"
 #include <unistd.h> /* for chdir */
+#include "cong-vfs.h"
 
 /* Data and callback for handling the forced loading of a file, autogenerating a dispspec: */
 struct force_dialog

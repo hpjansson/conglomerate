@@ -28,6 +28,7 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 #include "cong-document.h"
+#include "cong-vfs.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -88,9 +89,9 @@ static void convert_case_exporter_action_callback(CongExporter *exporter, CongDo
 		GnomeVFSResult vfs_result;
 		GnomeVFSFileSize file_size;
 	
-		vfs_result = cong_xml_save_to_vfs(doc_ptr, 
-						  file_uri,	
-						  &file_size);
+		vfs_result = cong_vfs_save_xml_to_uri (doc_ptr, 
+						       file_uri,	
+						       &file_size);
 		
 		if (vfs_result != GNOME_VFS_OK) {
 			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,

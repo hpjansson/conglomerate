@@ -1,5 +1,9 @@
 2003-10-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-registry.c, cong-document.c, cong-error-file-open.c, cong-error-file-save.c, cong-file-import.c, cong-file-open.c, cong-plugin.c, cong-util.c, cong-util.h, global.h, plugin-convert-case.c, plugin-dtd.c, plugin-website.c, xmldata.c
+
+	Isolated dependencies on GnomeVFS, most things now use cong-vfs
+	
 	* cong-vfs.c, cong-vfs.h, Makefile.am
 
 	New files:  Handling of URIs moved into a single place

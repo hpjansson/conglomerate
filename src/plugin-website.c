@@ -32,6 +32,7 @@
 #include "cong-dialog.h"
 #include "cong-primary-window.h"
 #include "cong-util.h"
+#include "cong-vfs.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -313,8 +314,8 @@ static gboolean generate_html(CongDependencyNode *node, GError **error)
 	g_return_val_if_fail (node, FALSE);
 	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-	output_filename = cong_util_get_local_path_from_uri(node_from_content->base.uri);
-	input_filename = cong_util_get_local_path_from_uri(node_from_content->src_uri);
+	output_filename = cong_vfs_get_local_path_from_uri (node_from_content->base.uri);
+	input_filename = cong_vfs_get_local_path_from_uri (node_from_content->src_uri);
 
 	result = cong_transform_easy(input_filename,
 				     output_filename,

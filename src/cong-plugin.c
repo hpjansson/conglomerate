@@ -31,6 +31,7 @@
 #include "cong-primary-window.h"
 #include "cong-app.h"
 #include "cong-util.h"
+#include "cong-vfs.h"
 
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
@@ -1079,9 +1080,9 @@ void cong_ui_transform_doc_to_uri(CongDocument *doc,
 	if (doc_ptr) {
 		file_uri = gnome_vfs_uri_new(uri);
 	
-		vfs_result = cong_xml_save_to_vfs(doc_ptr, 
-						  file_uri,	
-						  &file_size);
+		vfs_result = cong_vfs_save_xml_to_uri (doc_ptr, 
+						       file_uri,	
+						       &file_size);
 		
 		if (vfs_result != GNOME_VFS_OK) {
 			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,

@@ -8,7 +8,6 @@
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnomevfs/gnome-vfs.h>
 #include <gconf/gconf-client.h>
 
 G_BEGIN_DECLS
@@ -162,33 +161,6 @@ query_for_forced_dispspec (gchar *what_failed,
 			   GtkWindow* parent_window,
 			   const gchar *filename_extension);
 
-/**
- * cong_vfs_new_buffer_from_file
- * @filename:
- * @buffer:
- * @size:
- * 
- * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
- * (I believe that CVS gnome-vfs has a routine gnome_vfs_read_entire_file that does this)
- * 
- * Returns:
- */
-GnomeVFSResult
-cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
-
-/**
- * cong_vfs_new_buffer_from_uri
- * @uri:
- * @buffer:
- * @size:
- * 
- * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
- * 
- * Returns:
-*/
-GnomeVFSResult
-cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
-
 /* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data);
@@ -247,11 +219,6 @@ cong_ui_file_export(CongDocument *doc,
 GtkWidget*
 cong_file_properties_dialog_new (CongDocument *doc, 
 				 GtkWindow *parent_window);
-
-GnomeVFSResult
-cong_xml_save_to_vfs(xmlDocPtr doc_ptr, 
-		     GnomeVFSURI *file_uri,	
-		     GnomeVFSFileSize *output_file_size);
 
 /* Extensions to libxml: */
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,

@@ -31,6 +31,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#include "cong-vfs.h"
 #include "cong-util.h"
 #include "cong-dtd.h"
 
@@ -215,7 +216,7 @@ load_dtd (const gchar *uri,
 	g_return_val_if_fail(uri, NULL);
 
 	vfs_uri = gnome_vfs_uri_new(uri);
-	local_path = cong_util_get_local_path_from_uri(vfs_uri);
+	local_path = cong_vfs_get_local_path_from_uri (vfs_uri);
 	gnome_vfs_uri_unref(vfs_uri);
 
 	dtd = xmlIOParseDTD(NULL, 

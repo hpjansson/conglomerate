@@ -8,6 +8,9 @@
 #include "cong-error-dialog.h"
 #include "cong-app.h"
 
+/* FIXME: eventually abstract this into cong-vfs */
+#include <libgnomevfs/gnome-vfs.h>
+
 struct CongDispspecRegistry
 {
 	int num;

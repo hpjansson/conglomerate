@@ -15,6 +15,7 @@
 #include "global.h"
 #include "cong-error-dialog.h"
 #include "cong-util.h"
+#include "cong-vfs.h"
 
 /* FIXME: i18n! */
 GtkDialog*
@@ -36,7 +37,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 
 	app_name = cong_error_get_appname();
 
-	cong_util_split_uri (file_uri, &filename_alone, &path);
+	cong_vfs_split_uri (file_uri, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
