@@ -567,6 +567,18 @@ void open_document_do(const gchar* doc_name)
 		}
 
 		gnome_vfs_uri_unref(file_uri);
+
+		if (doc->intSubset) {
+			xmlDebugDumpDTD(stdout,  doc->intSubset);
+		} else {
+			printf("NULL interior subset DTD\n");
+		}
+		if (doc->extSubset) {
+			xmlDebugDumpDTD(stdout,  doc->extSubset);
+		} else {
+			printf("NULL exterior subset DTD\n");
+		}
+
 		
 		xml_in = convert_libxml_to_ttree_doc(doc);
 

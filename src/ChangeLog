@@ -1,13 +1,19 @@
 creating ChangeLog
+2002-10-17 David Malcolm
+
+	* dispspec.c, global.h, xmlview.c
+
+	Header info merging (in the new look); tree now coloured according to dispspec
+	
 2002-10-16 David Malcolm
 
-	dispspec.c, global.h, xmledit.c, xmlview.c
+	* dispspec.c, global.h, xmledit.c, xmlview.c
 	
-	New look code, to mimic Joakim's mockup.
+	New look, to mimic Joakim's mockup.
 	
 2002-10-15 David Malcolm
 
-	cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+	* cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
 
 	Converting TTREE* to CongNodePtr where appropriate.
 	

@@ -44,7 +44,7 @@ fi
 
 am_opt="--include-deps --add-missing"
 
-aclocal $ACLOCAL_FLAGS
+aclocal -I /home/david/garnome/share/aclocal
 
 # optionally feature autoheader
 (autoheader --version)  < /dev/null > /dev/null 2>&1 && autoheader
