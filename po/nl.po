@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 23:49+0000\n"
+"POT-Creation-Date: 2003-11-02 15:44+0000\n"
 "PO-Revision-Date: 2003-10-02 21:30+0100\n"
 "Last-Translator: Elros Cyriatan <cyriatan@fastmail.fm>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
-#: src/cong-primary-window.c:441 src/cong-primary-window.c:443
-#: src/cong-primary-window.c:704 src/cong-primary-window.c:706
-#: src/cong-primary-window.c:712
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1191
+#: src/cong-primary-window.c:482 src/cong-primary-window.c:484
+#: src/cong-primary-window.c:745 src/cong-primary-window.c:747
+#: src/cong-primary-window.c:753
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-Editor"
 
@@ -933,13 +933,13 @@ msgstr "Exporteer opties"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
 #: src/cong-file-properties.c:103 src/cong-file-properties.c:107
-#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
+#: src/cong-menus.c:421 src/cong-node-properties-dialog.c:507
 msgid "Name"
 msgstr "Naam"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:232
 #: src/cong-file-print.c:242 src/cong-file-properties.c:108
-#: src/cong-menus.c:426 src/cong-parser-error.c:269
+#: src/cong-menus.c:428 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Beschrijving"
 
@@ -1070,7 +1070,7 @@ msgstr "Afdrukmethode:"
 msgid "Print Options"
 msgstr "Afdrukopties"
 
-#: src/cong-file-print.c:311 src/cong-menus.c:716
+#: src/cong-file-print.c:311 src/cong-menus.c:718
 msgid "Print Preview"
 msgstr "Afdrukvoorbeeld"
 
@@ -1201,58 +1201,58 @@ msgstr "Bezig met berekenen vorige pagina"
 msgid "Calculating next page"
 msgstr "Bezig met berekenen volgende pagina"
 
-#: src/cong-menus.c:93 src/cong-menus.c:165 src/cong-menus.c:199
+#: src/cong-menus.c:95 src/cong-menus.c:167 src/cong-menus.c:201
 msgid "The selected menu item has not yet been implemented."
 msgstr "Het geselecteerde menu-onderdeel is nog niet geïmplementeerd."
 
-#: src/cong-menus.c:389
+#: src/cong-menus.c:391
 msgid "Document Types"
 msgstr "Documentsoorten"
 
-#: src/cong-menus.c:493
+#: src/cong-menus.c:495
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate kan het resultaat van de transformatie niet openen"
 
-#: src/cong-menus.c:551 src/cong-plugin.c:1019
+#: src/cong-menus.c:553 src/cong-plugin.c:1019
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Er was een probleem bij het lezen van het stijlblad-bestand \"%s\""
 
-#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1022
+#: src/cong-menus.c:556 src/cong-menus.c:580 src/cong-plugin.c:1022
 #: src/cong-plugin.c:1046
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate kon het document niet transformeren"
 
-#: src/cong-menus.c:575 src/cong-plugin.c:1043
+#: src/cong-menus.c:577 src/cong-plugin.c:1043
 msgid "There was a problem applying the stylesheet file"
 msgstr "Er was een probleem bij het toepassen van het stijlblad"
 
-#: src/cong-menus.c:1028
+#: src/cong-menus.c:1030
 msgid "Test Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1032
+#: src/cong-menus.c:1034
 #, c-format
 msgid "This is stage %i"
 msgstr "Dit is niveau %i"
 
-#: src/cong-menus.c:1077
+#: src/cong-menus.c:1079
 #, fuzzy
 msgid "Message Log - Conglomerate"
 msgstr "berichtenarchief - conglomerate"
 
-#: src/cong-menus.c:1089
+#: src/cong-menus.c:1091
 #, fuzzy
 msgid "Signal Log - Conglomerate"
 msgstr "berichtenarchief - conglomerate"
 
-#: src/cong-menus.c:1187
+#: src/cong-menus.c:1189
 msgid "translator_credits"
 msgstr ""
 "Mark van den Borre \n"
 "Elros Cyriatan"
 
-#: src/cong-menus.c:1191
+#: src/cong-menus.c:1193
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
@@ -1260,241 +1260,241 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
 
-#: src/cong-menus.c:1192
+#: src/cong-menus.c:1194
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: een vrije, gebruiksvriendelijke XML bewerker"
 
-#: src/cong-menus.c:1232 src/cong-menus.c:1310
+#: src/cong-menus.c:1237 src/cong-menus.c:1315
 #, fuzzy
 msgid "/_File"
 msgstr "_bestand"
 
-#: src/cong-menus.c:1233 src/cong-menus.c:1311
+#: src/cong-menus.c:1238 src/cong-menus.c:1316
 #, fuzzy
 msgid "/File/_New..."
 msgstr "/bestand/_nieuw"
 
-#: src/cong-menus.c:1234 src/cong-menus.c:1312
+#: src/cong-menus.c:1239 src/cong-menus.c:1317
 #, fuzzy
 msgid "/File/_Open..."
 msgstr "/bestand/_open..."
 
-#: src/cong-menus.c:1235 src/cong-menus.c:1240 src/cong-menus.c:1245
-#: src/cong-menus.c:1248 src/cong-menus.c:1251 src/cong-menus.c:1253
-#: src/cong-menus.c:1313 src/cong-menus.c:1315
+#: src/cong-menus.c:1240 src/cong-menus.c:1245 src/cong-menus.c:1250
+#: src/cong-menus.c:1253 src/cong-menus.c:1256 src/cong-menus.c:1258
+#: src/cong-menus.c:1318 src/cong-menus.c:1320
 #, fuzzy
 msgid "/File/"
 msgstr "/bestand/"
 
-#: src/cong-menus.c:1236
+#: src/cong-menus.c:1241
 #, fuzzy
 msgid "/File/_Save"
 msgstr "/bestand/op_slaan"
 
-#: src/cong-menus.c:1237
+#: src/cong-menus.c:1242
 #, fuzzy
 msgid "/File/Save _As..."
 msgstr "/bestand/opslaan_als..."
 
-#: src/cong-menus.c:1238
+#: src/cong-menus.c:1243
 #, fuzzy
 msgid "/File/Sa_ve a Copy..."
 msgstr "/bestand/e_xemplaar opslaan..."
 
-#: src/cong-menus.c:1241
+#: src/cong-menus.c:1246
 #, fuzzy
 msgid "/File/Print Previe_w..."
 msgstr "/bestand/afdruk_voorbeeld..."
 
-#: src/cong-menus.c:1242
+#: src/cong-menus.c:1247
 #, fuzzy
 msgid "/File/_Print..."
 msgstr "/bestand/af_drukken..."
 
-#: src/cong-menus.c:1246
+#: src/cong-menus.c:1251
 #, fuzzy
 msgid "/File/_Revert"
 msgstr "/bestand/he_rstellen"
 
-#: src/cong-menus.c:1249 src/cong-menus.c:1314
+#: src/cong-menus.c:1254 src/cong-menus.c:1319
 #, fuzzy
 msgid "/File/_Import..."
 msgstr "/bestand/_importeren..."
 
-#: src/cong-menus.c:1250
+#: src/cong-menus.c:1255
 #, fuzzy
 msgid "/File/_Export..."
 msgstr "/bestand/_exporteren..."
 
-#: src/cong-menus.c:1252
+#: src/cong-menus.c:1257
 #, fuzzy
 msgid "/File/Proper_ties"
 msgstr "/bestand/ei_genschappen"
 
-#: src/cong-menus.c:1254 src/cong-menus.c:1316
+#: src/cong-menus.c:1259 src/cong-menus.c:1321
 #, fuzzy
 msgid "/File/_Close"
 msgstr "/bestand/sl_uiten"
 
-#: src/cong-menus.c:1255 src/cong-menus.c:1317
+#: src/cong-menus.c:1260 src/cong-menus.c:1322
 #, fuzzy
 msgid "/File/_Quit"
 msgstr "/bestand/afslui_ten"
 
-#: src/cong-menus.c:1257
+#: src/cong-menus.c:1262
 #, fuzzy
 msgid "/_Edit"
 msgstr "/b_ewerken"
 
-#: src/cong-menus.c:1258
+#: src/cong-menus.c:1263
 #, fuzzy
 msgid "/Edit/_Undo"
 msgstr "/bewerken/_ongedaan maken"
 
-#: src/cong-menus.c:1259
+#: src/cong-menus.c:1264
 #, fuzzy
 msgid "/Edit/_Redo"
 msgstr "/bewerken/_redo"
 
-#: src/cong-menus.c:1260 src/cong-menus.c:1264 src/cong-menus.c:1270
-#: src/cong-menus.c:1272
+#: src/cong-menus.c:1265 src/cong-menus.c:1269 src/cong-menus.c:1275
+#: src/cong-menus.c:1277
 #, fuzzy
 msgid "/Edit/"
 msgstr "/bewerken/"
 
-#: src/cong-menus.c:1261
+#: src/cong-menus.c:1266
 #, fuzzy
 msgid "/Edit/Cu_t"
 msgstr "/bewerken/_knippen"
 
-#: src/cong-menus.c:1262
+#: src/cong-menus.c:1267
 #, fuzzy
 msgid "/Edit/_Copy"
 msgstr "/bewerken/k_opiëren"
 
-#: src/cong-menus.c:1263
+#: src/cong-menus.c:1268
 #, fuzzy
 msgid "/Edit/_Paste"
 msgstr "/bewerken/_plakken"
 
-#: src/cong-menus.c:1266
+#: src/cong-menus.c:1271
 #, fuzzy
 msgid "/Edit/_Find..."
 msgstr "/bewerken/_zoeken..."
 
-#: src/cong-menus.c:1267
+#: src/cong-menus.c:1272
 #, fuzzy
 msgid "/Edit/Find Ne_xt"
 msgstr "/bewerken/_volgende zoeken"
 
-#: src/cong-menus.c:1268
+#: src/cong-menus.c:1273
 #, fuzzy
 msgid "/Edit/Find Pre_vious"
 msgstr "/bewerken/v_orige zoeken"
 
-#: src/cong-menus.c:1269
+#: src/cong-menus.c:1274
 #, fuzzy
 msgid "/Edit/R_eplace..."
 msgstr "/bewerken/ve_rvangen"
 
-#: src/cong-menus.c:1271
+#: src/cong-menus.c:1276
 #, fuzzy
 msgid "/Edit/_Insert..."
 msgstr "/bewerken/_invoegen..."
 
-#: src/cong-menus.c:1274
+#: src/cong-menus.c:1279
 #, fuzzy
 msgid "/Edit/View _Source"
 msgstr "/bewerken/_bron bekijken"
 
-#: src/cong-menus.c:1277 src/cong-menus.c:1320
+#: src/cong-menus.c:1282 src/cong-menus.c:1325
 msgid "/Debug"
 msgstr ""
 
-#: src/cong-menus.c:1278 src/cong-menus.c:1321
+#: src/cong-menus.c:1283 src/cong-menus.c:1326
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr ""
 
-#: src/cong-menus.c:1279 src/cong-menus.c:1322
+#: src/cong-menus.c:1284 src/cong-menus.c:1327
 #, fuzzy
 msgid "/Debug/Document Types"
 msgstr "document-types"
 
-#: src/cong-menus.c:1280
+#: src/cong-menus.c:1285
 msgid "/Debug/Transform DocBook to HTML"
 msgstr ""
 
-#: src/cong-menus.c:1281
+#: src/cong-menus.c:1286
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr ""
 
-#: src/cong-menus.c:1282
+#: src/cong-menus.c:1287
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr ""
 
-#: src/cong-menus.c:1283
+#: src/cong-menus.c:1288
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr ""
 
-#: src/cong-menus.c:1284
+#: src/cong-menus.c:1289
 msgid "/Debug/Transform DocBook to FO"
 msgstr ""
 
-#: src/cong-menus.c:1286
+#: src/cong-menus.c:1291
 #, fuzzy
 msgid "/Debug/Preview XSL:FO"
 msgstr "XSL:FO afdrukken"
 
-#: src/cong-menus.c:1288
+#: src/cong-menus.c:1293
 msgid "/Debug/DTD"
 msgstr ""
 
-#: src/cong-menus.c:1289 src/cong-menus.c:1323
+#: src/cong-menus.c:1294 src/cong-menus.c:1328
 msgid "/Debug/Dialog"
 msgstr ""
 
-#: src/cong-menus.c:1290 src/cong-menus.c:1324
+#: src/cong-menus.c:1295 src/cong-menus.c:1329
 msgid "/Debug/Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1291
+#: src/cong-menus.c:1296
 msgid "/Debug/Document Message Log"
 msgstr ""
 
-#: src/cong-menus.c:1292
+#: src/cong-menus.c:1297
 msgid "/Debug/Document Signal Log"
 msgstr ""
 
-#: src/cong-menus.c:1293 src/cong-menus.c:1325
+#: src/cong-menus.c:1298 src/cong-menus.c:1330
 msgid "/Debug/Information Alert"
 msgstr ""
 
-#: src/cong-menus.c:1294 src/cong-menus.c:1326
+#: src/cong-menus.c:1299 src/cong-menus.c:1331
 msgid "/Debug/Glade Test"
 msgstr ""
 
-#: src/cong-menus.c:1295
+#: src/cong-menus.c:1300
 msgid "/Debug/Insert XML Fragment"
 msgstr ""
 
-#: src/cong-menus.c:1296
+#: src/cong-menus.c:1301
 #, fuzzy
 msgid "/Debug/Command Test"
 msgstr "document-types"
 
-#: src/cong-menus.c:1299
+#: src/cong-menus.c:1304
 msgid "/_Tools"
 msgstr "/_Gereedschap"
 
-#: src/cong-menus.c:1301 src/cong-menus.c:1329
+#: src/cong-menus.c:1306 src/cong-menus.c:1334
 msgid "/_Help"
 msgstr "/_Hulp"
 
-#: src/cong-menus.c:1302 src/cong-menus.c:1330
+#: src/cong-menus.c:1307 src/cong-menus.c:1335
 msgid "/Help/_Contents"
 msgstr "/Hulp/_Inhoud"
 
-#: src/cong-menus.c:1303 src/cong-menus.c:1331
+#: src/cong-menus.c:1308 src/cong-menus.c:1336
 msgid "/Help/_About"
 msgstr "/Hulp/_Over"
 
@@ -1564,54 +1564,54 @@ msgstr "Details Tonen"
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate kan geen scherminformatie vinden voor het nieuwe bestand"
 
-#: src/cong-primary-window.c:286 src/cong-primary-window.c:287
+#: src/cong-primary-window.c:313 src/cong-primary-window.c:314
 msgid "Open document"
 msgstr "Document openen"
 
-#: src/cong-primary-window.c:300 src/cong-primary-window.c:301
+#: src/cong-primary-window.c:330 src/cong-primary-window.c:331
 #, fuzzy
 msgid "Save document"
 msgstr "Document opslaan als ..."
 
-#: src/cong-primary-window.c:308 src/cong-primary-window.c:309
+#: src/cong-primary-window.c:338 src/cong-primary-window.c:339
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
+#: src/cong-primary-window.c:345 src/cong-primary-window.c:346
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
+#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:175
 #: src/xmledit.c:44
 msgid "Cut"
 msgstr "Knippen"
 
-#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
+#: src/cong-primary-window.c:371 src/cong-primary-window.c:372
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/cong-primary-window.c:348 src/cong-primary-window.c:349
+#: src/cong-primary-window.c:378 src/cong-primary-window.c:379
 #: src/xmledit.c:161
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/cong-primary-window.c:517
+#: src/cong-primary-window.c:558
 msgid "Overview"
 msgstr "Overzicht"
 
-#: src/cong-primary-window.c:527
+#: src/cong-primary-window.c:568
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: src/cong-primary-window.c:535
+#: src/cong-primary-window.c:576
 msgid "Raw XML"
 msgstr "Pure XML"
 
-#: src/cong-primary-window.c:592 src/cong-primary-window.c:622
+#: src/cong-primary-window.c:633 src/cong-primary-window.c:663
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welkom bij de Conglomerate editor"
 
-#: src/cong-primary-window.c:704
+#: src/cong-primary-window.c:745
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (bijgewerkt) - %s"

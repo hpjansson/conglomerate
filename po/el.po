@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 23:49+0000\n"
+"POT-Creation-Date: 2003-11-02 15:44+0000\n"
 "PO-Revision-Date: 2003-10-12 20:08+0300\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
-#: src/cong-primary-window.c:441 src/cong-primary-window.c:443
-#: src/cong-primary-window.c:704 src/cong-primary-window.c:706
-#: src/cong-primary-window.c:712
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1191
+#: src/cong-primary-window.c:482 src/cong-primary-window.c:484
+#: src/cong-primary-window.c:745 src/cong-primary-window.c:747
+#: src/cong-primary-window.c:753
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate Επεξεργαστής XML"
 
@@ -925,13 +925,13 @@ msgstr "Επιλογές εξαγωγής"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
 #: src/cong-file-properties.c:103 src/cong-file-properties.c:107
-#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
+#: src/cong-menus.c:421 src/cong-node-properties-dialog.c:507
 msgid "Name"
 msgstr "Όνομα"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:232
 #: src/cong-file-print.c:242 src/cong-file-properties.c:108
-#: src/cong-menus.c:426 src/cong-parser-error.c:269
+#: src/cong-menus.c:428 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -1061,7 +1061,7 @@ msgstr "Μέθοδος εκτύπωσης:"
 msgid "Print Options"
 msgstr "Επιλογές εκτύπωσης"
 
-#: src/cong-file-print.c:311 src/cong-menus.c:716
+#: src/cong-file-print.c:311 src/cong-menus.c:718
 msgid "Print Preview"
 msgstr "Προεπισκόπηση Εκτύπωσης"
 
@@ -1191,54 +1191,54 @@ msgstr "Υπολογισμός προηγούμενης σελίδας"
 msgid "Calculating next page"
 msgstr "Υπολογισμός επόμενης σελίδας"
 
-#: src/cong-menus.c:93 src/cong-menus.c:165 src/cong-menus.c:199
+#: src/cong-menus.c:95 src/cong-menus.c:167 src/cong-menus.c:201
 msgid "The selected menu item has not yet been implemented."
 msgstr "Το επιλεγμένο αντικείμενο μενού δεν έχει ακόμα εφαρμοστεί."
 
-#: src/cong-menus.c:389
+#: src/cong-menus.c:391
 msgid "Document Types"
 msgstr "Τύποι εγγράφου"
 
-#: src/cong-menus.c:493
+#: src/cong-menus.c:495
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Το Conglomerate δεν μπορεί να ανοίξει το αποτέλεσμα της μετατροπής"
 
-#: src/cong-menus.c:551 src/cong-plugin.c:1019
+#: src/cong-menus.c:553 src/cong-plugin.c:1019
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Υπήρξε πρόβλημα ανάγνωσης του αρχείου stylesheet \"%s\""
 
-#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1022
+#: src/cong-menus.c:556 src/cong-menus.c:580 src/cong-plugin.c:1022
 #: src/cong-plugin.c:1046
 msgid "Conglomerate could not transform the document"
 msgstr "Το Conglomerate δεν μπορεί να μετατρέψει το έγγραφο"
 
-#: src/cong-menus.c:575 src/cong-plugin.c:1043
+#: src/cong-menus.c:577 src/cong-plugin.c:1043
 msgid "There was a problem applying the stylesheet file"
 msgstr "Υπήρξε πρόβλημα εφαρμογής του αρχείου stylesheet"
 
-#: src/cong-menus.c:1028
+#: src/cong-menus.c:1030
 msgid "Test Progress Checklist"
 msgstr "Λίστα ελέγχου προόδου δοκιμής"
 
-#: src/cong-menus.c:1032
+#: src/cong-menus.c:1034
 #, c-format
 msgid "This is stage %i"
 msgstr "Αυτό είναι το βήμα %i"
 
-#: src/cong-menus.c:1077
+#: src/cong-menus.c:1079
 msgid "Message Log - Conglomerate"
 msgstr "Μήνυμα καταγραφής - Conglomerate"
 
-#: src/cong-menus.c:1089
+#: src/cong-menus.c:1091
 msgid "Signal Log - Conglomerate"
 msgstr "Σήμα καταγραφής - Conglomerate"
 
-#: src/cong-menus.c:1187
+#: src/cong-menus.c:1189
 msgid "translator_credits"
 msgstr "Κώστας Παπαδήμας <pkst@gnome.org> , 2003"
 
-#: src/cong-menus.c:1191
+#: src/cong-menus.c:1193
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
@@ -1246,211 +1246,211 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
 
-#: src/cong-menus.c:1192
+#: src/cong-menus.c:1194
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: ένας ελεύθερος, φιλικός στον χρήστη επεξεργαστής XML"
 
-#: src/cong-menus.c:1232 src/cong-menus.c:1310
+#: src/cong-menus.c:1237 src/cong-menus.c:1315
 msgid "/_File"
 msgstr "/_Αρχείο"
 
-#: src/cong-menus.c:1233 src/cong-menus.c:1311
+#: src/cong-menus.c:1238 src/cong-menus.c:1316
 msgid "/File/_New..."
 msgstr "/Αρχείο/_Νέο..."
 
-#: src/cong-menus.c:1234 src/cong-menus.c:1312
+#: src/cong-menus.c:1239 src/cong-menus.c:1317
 msgid "/File/_Open..."
 msgstr "/Αρχείο/Άνοι_γμα..."
 
-#: src/cong-menus.c:1235 src/cong-menus.c:1240 src/cong-menus.c:1245
-#: src/cong-menus.c:1248 src/cong-menus.c:1251 src/cong-menus.c:1253
-#: src/cong-menus.c:1313 src/cong-menus.c:1315
+#: src/cong-menus.c:1240 src/cong-menus.c:1245 src/cong-menus.c:1250
+#: src/cong-menus.c:1253 src/cong-menus.c:1256 src/cong-menus.c:1258
+#: src/cong-menus.c:1318 src/cong-menus.c:1320
 msgid "/File/"
 msgstr "/Αρχείο/"
 
-#: src/cong-menus.c:1236
+#: src/cong-menus.c:1241
 msgid "/File/_Save"
 msgstr "/Αρχείο/Αποθήκευ_ση"
 
-#: src/cong-menus.c:1237
+#: src/cong-menus.c:1242
 msgid "/File/Save _As..."
 msgstr "/Αρχείο/Αποθήκευση _ως..."
 
-#: src/cong-menus.c:1238
+#: src/cong-menus.c:1243
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Αρχείο/Απο_θήκευση αντιγράφου..."
 
-#: src/cong-menus.c:1241
+#: src/cong-menus.c:1246
 msgid "/File/Print Previe_w..."
 msgstr "/Αρχείο/Προε_πισκόπηση εκτύπωσης..."
 
-#: src/cong-menus.c:1242
+#: src/cong-menus.c:1247
 msgid "/File/_Print..."
 msgstr "/Αρχείο/Ε_κτύπωση..."
 
-#: src/cong-menus.c:1246
+#: src/cong-menus.c:1251
 msgid "/File/_Revert"
 msgstr "/Αρχείο/Επαναφο_ρά"
 
-#: src/cong-menus.c:1249 src/cong-menus.c:1314
+#: src/cong-menus.c:1254 src/cong-menus.c:1319
 msgid "/File/_Import..."
 msgstr "/Αρχείο/Ε_ισαγωγή..."
 
-#: src/cong-menus.c:1250
+#: src/cong-menus.c:1255
 msgid "/File/_Export..."
 msgstr "/Αρχείο/_Εξαγωγή..."
 
-#: src/cong-menus.c:1252
+#: src/cong-menus.c:1257
 msgid "/File/Proper_ties"
 msgstr "/Αρχείο/Ιδιότ_ητες"
 
-#: src/cong-menus.c:1254 src/cong-menus.c:1316
+#: src/cong-menus.c:1259 src/cong-menus.c:1321
 msgid "/File/_Close"
 msgstr "/Αρχείο/_Κλείσιμο"
 
-#: src/cong-menus.c:1255 src/cong-menus.c:1317
+#: src/cong-menus.c:1260 src/cong-menus.c:1322
 msgid "/File/_Quit"
 msgstr "/Αρχείο/Έ_ξοδος"
 
-#: src/cong-menus.c:1257
+#: src/cong-menus.c:1262
 msgid "/_Edit"
 msgstr "/_Επεξεργασία"
 
-#: src/cong-menus.c:1258
+#: src/cong-menus.c:1263
 msgid "/Edit/_Undo"
 msgstr "/Επεξεργασία/Α_ναίρεση"
 
-#: src/cong-menus.c:1259
+#: src/cong-menus.c:1264
 msgid "/Edit/_Redo"
 msgstr "/Επεξεργασία/Ακύ_ρωση αναίρεσης"
 
-#: src/cong-menus.c:1260 src/cong-menus.c:1264 src/cong-menus.c:1270
-#: src/cong-menus.c:1272
+#: src/cong-menus.c:1265 src/cong-menus.c:1269 src/cong-menus.c:1275
+#: src/cong-menus.c:1277
 msgid "/Edit/"
 msgstr "/Επεξεργασία/"
 
-#: src/cong-menus.c:1261
+#: src/cong-menus.c:1266
 msgid "/Edit/Cu_t"
 msgstr "/Επεξεργασία/Απο_κοπή"
 
-#: src/cong-menus.c:1262
+#: src/cong-menus.c:1267
 msgid "/Edit/_Copy"
 msgstr "/Επεξεργασία/Αντι_γραφή"
 
-#: src/cong-menus.c:1263
+#: src/cong-menus.c:1268
 msgid "/Edit/_Paste"
 msgstr "/Επεξεργασία/Επικό_λληση"
 
-#: src/cong-menus.c:1266
+#: src/cong-menus.c:1271
 msgid "/Edit/_Find..."
 msgstr "/Επεξεργασία/Εύ_ρεση..."
 
-#: src/cong-menus.c:1267
+#: src/cong-menus.c:1272
 msgid "/Edit/Find Ne_xt"
 msgstr "/Επεξεργασία/Εύρεση επομέ_νου"
 
-#: src/cong-menus.c:1268
+#: src/cong-menus.c:1273
 msgid "/Edit/Find Pre_vious"
 msgstr "/Επεξεργασία/Εύρεση _προηγουμένου"
 
-#: src/cong-menus.c:1269
+#: src/cong-menus.c:1274
 msgid "/Edit/R_eplace..."
 msgstr "/Επεξεργασία/Αν_τικατάσταση..."
 
-#: src/cong-menus.c:1271
+#: src/cong-menus.c:1276
 msgid "/Edit/_Insert..."
 msgstr "/Επεξεργασία/Ε_ισαγωγή..."
 
-#: src/cong-menus.c:1274
+#: src/cong-menus.c:1279
 msgid "/Edit/View _Source"
 msgstr "/Επεξεργασία/Προβολή πη_γής"
 
-#: src/cong-menus.c:1277 src/cong-menus.c:1320
+#: src/cong-menus.c:1282 src/cong-menus.c:1325
 msgid "/Debug"
 msgstr "/Εκσφαλμάτωση"
 
-#: src/cong-menus.c:1278 src/cong-menus.c:1321
+#: src/cong-menus.c:1283 src/cong-menus.c:1326
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr ""
 "/Εκσφαλμάτωση/Εκκίνηση αυτοδιάγνωσης του συστήματος αναφοράς σφάλματος..."
 
-#: src/cong-menus.c:1279 src/cong-menus.c:1322
+#: src/cong-menus.c:1284 src/cong-menus.c:1327
 msgid "/Debug/Document Types"
 msgstr "/Εκσφαλμάτωση/Τύποι εγγράφου"
 
-#: src/cong-menus.c:1280
+#: src/cong-menus.c:1285
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε HTML"
 
-#: src/cong-menus.c:1281
+#: src/cong-menus.c:1286
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε XHTML"
 
-#: src/cong-menus.c:1282
+#: src/cong-menus.c:1287
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε Βοήθεια HTML"
 
-#: src/cong-menus.c:1283
+#: src/cong-menus.c:1288
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε Βοήθεια Java"
 
-#: src/cong-menus.c:1284
+#: src/cong-menus.c:1289
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε FO"
 
-#: src/cong-menus.c:1286
+#: src/cong-menus.c:1291
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Εκσφαλμάτωση/Προεπισκόπηση XSL:FO"
 
-#: src/cong-menus.c:1288
+#: src/cong-menus.c:1293
 msgid "/Debug/DTD"
 msgstr "/Εκσφαλμάτωση/DTD"
 
-#: src/cong-menus.c:1289 src/cong-menus.c:1323
+#: src/cong-menus.c:1294 src/cong-menus.c:1328
 msgid "/Debug/Dialog"
 msgstr "/Εκσφαλμάτωση/Διάλογος"
 
-#: src/cong-menus.c:1290 src/cong-menus.c:1324
+#: src/cong-menus.c:1295 src/cong-menus.c:1329
 msgid "/Debug/Progress Checklist"
 msgstr "/Εκσφαλμάτωση/Λίστα ελέγχου προόδου"
 
-#: src/cong-menus.c:1291
+#: src/cong-menus.c:1296
 msgid "/Debug/Document Message Log"
 msgstr "/Εκσφαλμάτωση/Καταγραφή μηνύματος εγγράφου"
 
-#: src/cong-menus.c:1292
+#: src/cong-menus.c:1297
 msgid "/Debug/Document Signal Log"
 msgstr "/Εκσφαλμάτωση/Καταγραφή σήματος εγγράφου"
 
-#: src/cong-menus.c:1293 src/cong-menus.c:1325
+#: src/cong-menus.c:1298 src/cong-menus.c:1330
 msgid "/Debug/Information Alert"
 msgstr "/Εκσφαλμάτωση/Ειδοποίηση πληροφορίας"
 
-#: src/cong-menus.c:1294 src/cong-menus.c:1326
+#: src/cong-menus.c:1299 src/cong-menus.c:1331
 msgid "/Debug/Glade Test"
 msgstr "/Εκσφαλμάτωση/Δοκιμή Glade"
 
-#: src/cong-menus.c:1295
+#: src/cong-menus.c:1300
 msgid "/Debug/Insert XML Fragment"
 msgstr "/Εκσφαλμάτωση/Εισαγωγή κομματιού XML"
 
-#: src/cong-menus.c:1296
+#: src/cong-menus.c:1301
 msgid "/Debug/Command Test"
 msgstr "/Εκσφαλμάτωση/Δοκιμή εντολής"
 
-#: src/cong-menus.c:1299
+#: src/cong-menus.c:1304
 msgid "/_Tools"
 msgstr "/Ε_ργαλεία"
 
-#: src/cong-menus.c:1301 src/cong-menus.c:1329
+#: src/cong-menus.c:1306 src/cong-menus.c:1334
 msgid "/_Help"
 msgstr "/_Βοήθεια"
 
-#: src/cong-menus.c:1302 src/cong-menus.c:1330
+#: src/cong-menus.c:1307 src/cong-menus.c:1335
 msgid "/Help/_Contents"
 msgstr "/Βοήθεια/_Περιεχόμενα"
 
-#: src/cong-menus.c:1303 src/cong-menus.c:1331
+#: src/cong-menus.c:1308 src/cong-menus.c:1336
 msgid "/Help/_About"
 msgstr "/Βοήθεια/Πε_ρί"
 
@@ -1522,54 +1522,54 @@ msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 "Το Conglomerate δεν μπορεί να βρεί πληροφορίες εμφάνισης για το νέο αρχείο"
 
-#: src/cong-primary-window.c:286 src/cong-primary-window.c:287
+#: src/cong-primary-window.c:313 src/cong-primary-window.c:314
 msgid "Open document"
 msgstr "Άνοιγμα εγγράφου"
 
-#: src/cong-primary-window.c:300 src/cong-primary-window.c:301
+#: src/cong-primary-window.c:330 src/cong-primary-window.c:331
 #, fuzzy
 msgid "Save document"
 msgstr "Αποθήκευση εγγράφου ως..."
 
-#: src/cong-primary-window.c:308 src/cong-primary-window.c:309
+#: src/cong-primary-window.c:338 src/cong-primary-window.c:339
 msgid "Undo"
 msgstr "Αναίρεση"
 
-#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
+#: src/cong-primary-window.c:345 src/cong-primary-window.c:346
 msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
 
-#: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
+#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:175
 #: src/xmledit.c:44
 msgid "Cut"
 msgstr "Αποκοπή"
 
-#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
+#: src/cong-primary-window.c:371 src/cong-primary-window.c:372
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: src/cong-primary-window.c:348 src/cong-primary-window.c:349
+#: src/cong-primary-window.c:378 src/cong-primary-window.c:379
 #: src/xmledit.c:161
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: src/cong-primary-window.c:517
+#: src/cong-primary-window.c:558
 msgid "Overview"
 msgstr "Επισκόπηση"
 
-#: src/cong-primary-window.c:527
+#: src/cong-primary-window.c:568
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: src/cong-primary-window.c:535
+#: src/cong-primary-window.c:576
 msgid "Raw XML"
 msgstr "Raw XML"
 
-#: src/cong-primary-window.c:592 src/cong-primary-window.c:622
+#: src/cong-primary-window.c:633 src/cong-primary-window.c:663
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Καλώς ήλθατε στον επεξεργαστή Conglomerate."
 
-#: src/cong-primary-window.c:704
+#: src/cong-primary-window.c:745
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (τροποποιήθηκε) - %s"
