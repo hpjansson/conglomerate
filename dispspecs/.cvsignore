@@ -5,10 +5,18 @@
 Makefile
 Makefile.in
 ## #files #generated #by #a #build
+cnxml.xds
 dispspec.xds
 docbook.xds
 forrest-document.xds
 kernel-traffic-newsletter.xds
+opml.xds
+readme.xds
+relax-ng.xds
+teixlite.xds
+website-layout.xds
+website-webpage.xds
 xhtml1-strict.xds
+xsl.xds
 ## #other #files
 ##
