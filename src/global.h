@@ -10,6 +10,9 @@
 #include <libgnomeui/libgnomeui.h>
 #include <gconf/gconf-client.h>
 
+/* We include GnomeVFS stuff here to try to alleviate build problems on Fink: */
+#include <libgnomevfs/gnome-vfs.h>
+
 G_BEGIN_DECLS
 
 #define CONG_GCONF_PATH "/apps/conglomerate/"

@@ -103,7 +103,7 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 	CongDispspec *ds;
 	CongSelection *selection;
 	CongCursor *curs;
-	gchar *source_fragment;
+	const gchar *source_fragment;
 
 	g_return_if_fail(doc);
 

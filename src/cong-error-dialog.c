@@ -347,7 +347,7 @@ cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_win
 	g_return_val_if_fail(standard_error, NULL);
 	g_return_val_if_fail(argv, NULL);
 
-	command_line  = g_strjoinv(" ", argv);
+	command_line  = g_strjoinv(" ", (gchar**)argv);
 
 	dialog = cong_error_dialog_new_from_shell_command_failure_with_command_line(parent_window,
 										    what_failed,

@@ -1,5 +1,9 @@
 2003-12-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-error-dialog.c, cong-modification-set-dtd-ptr.c, global.h, xmledit.c
+
+	Fix more warnings
+
 	* cong-location.c
 
 	Fixed a const-ness warning; added additional checks on CongLocation validity
