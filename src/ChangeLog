@@ -1,3 +1,8 @@
+2004-10-11 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-file-save.c: Ask for replace of existing file.
+	Fix for bug #154844.
+
 2004-10-10  Dave Malcolm  <dmalcolm@redhat.com>
 
 	* cong-plugin.c: 
