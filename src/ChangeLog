@@ -1,5 +1,9 @@
 2003-09-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-editor.c, cong-attribute-editor.h
+
+	Moved all document notifications and filtering to base class
+
 	* cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, Makefile.am, cong-attribute-editor.c, cong-attribute-editor.h
 
 	Added new file for editing ENUMERATION attributes; moved code into it and reworked as a cong_attribute_editor subclass

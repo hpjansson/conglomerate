@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-attribute-editor-enumeration.h"
+#include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -34,16 +35,10 @@ struct CongAttributeEditorENUMERATIONDetails
 };
 
 static void
-on_set_attribute (CongDocument *doc, 
-		  CongNodePtr node, 
-		  const xmlChar *name, 
-		  const xmlChar *value, 
-		  CongAttributeEditorENUMERATION *attribute_editor_enumeration);
+set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
-on_remove_attribute (CongDocument *doc, 
-		     CongNodePtr node, 
-		     const xmlChar *name,
-		     CongAttributeEditorENUMERATION *attribute_editor_enumeration);
+remove_attribute_handler (CongAttributeEditor *attribute_editor);
+
 static void
 on_option_menu_changed (GtkOptionMenu *option_menu,
 			CongAttributeEditorENUMERATION *attribute_editor_enumeration);
@@ -57,6 +52,10 @@ GNOME_CLASS_BOILERPLATE(CongAttributeEditorENUMERATION,
 static void
 cong_attribute_editor_enumeration_class_init (CongAttributeEditorENUMERATIONClass *klass)
 {
+	CongAttributeEditorClass *editor_klass = CONG_ATTRIBUTE_EDITOR_CLASS (klass);
+
+	editor_klass->set_attribute_handler = set_attribute_handler;
+	editor_klass->remove_attribute_handler = remove_attribute_handler;
 }
 
 static void
@@ -102,17 +101,6 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu), 
 				 PRIVATE(attribute_editor_enumeration)->menu);
 	
-	/* Disconnect this: */
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_set_attribute",
-				G_CALLBACK(on_set_attribute),
-				attribute_editor_enumeration);
-	/* Disconnect this: */
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_remove_attribute",
-				G_CALLBACK(on_remove_attribute),
-				attribute_editor_enumeration);
-	
 	g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->option_menu),
 				"changed",
 				G_CALLBACK(on_option_menu_changed),
@@ -143,33 +131,19 @@ cong_attribute_editor_enumeration_new (CongDocument *doc,
 
 /* Internal function definitions: */
 static void
-on_set_attribute (CongDocument *doc, 
-		  CongNodePtr node, 
-		  const xmlChar *name, 
-		  const xmlChar *value, 
-		  CongAttributeEditorENUMERATION *attribute_editor_enumeration)
+set_attribute_handler (CongAttributeEditor *attribute_editor)
 {
 	/* FIXME */
 }
 
 static void
-on_remove_attribute (CongDocument *doc, 
-		     CongNodePtr node, 
-		     const xmlChar *name,
-		     CongAttributeEditorENUMERATION *attribute_editor_enumeration)	     
+remove_attribute_handler (CongAttributeEditor *attribute_editor)
 {
-	if (doc == cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration))) {
-		if (node == cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration))) {
-			xmlAttributePtr attr = cong_attribute_editor_get_attribute (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-			g_assert (attr);
-
-			if (0 == strcmp(name, attr->name)) {
-				/* The initial item is the "unspecified" one: */
-				gtk_option_menu_set_history (GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu),
-							     0);
-			}
-		}
-	}
+	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION (attribute_editor);
+	
+	/* The initial item is the "unspecified" one: */
+	gtk_option_menu_set_history (GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu),
+				     0);
 }
 
 static void

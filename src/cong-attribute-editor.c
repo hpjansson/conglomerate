@@ -26,6 +26,7 @@
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
 #include "cong-attribute-editor-enumeration.h"
+#include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -42,20 +43,23 @@ struct CongAttributeEditorDetails
 	CongNodePtr node;
 	const gchar *attribute_name;
 	xmlAttributePtr attr; /* can be NULL */
+
+	gulong handler_id_node_set_attribute;
+	gulong handler_id_node_remove_attribute;
 };
 
 /* Internal function declarations: */
-
-/* CDATA support: */
-/* ID support: */
-/* IDREF support: */
-/* IDREFS support: */
-/* ENTITY support: */
-/* ENTITIES support: */
-/* NMTOKEN support: */
-/* NMTOKENS support: */
-/* ENUMERATION support: */
-/* NOTATION support: */
+static void
+on_set_attribute (CongDocument *doc, 
+		  CongNodePtr node, 
+		  const xmlChar *name, 
+		  const xmlChar *value, 
+		  CongAttributeEditor *attribute_editor);
+static void
+on_remove_attribute (CongDocument *doc, 
+		     CongNodePtr node, 
+		     const xmlChar *name,
+		     CongAttributeEditor *attribute_editor);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongAttributeEditor, 
@@ -63,9 +67,18 @@ GNOME_CLASS_BOILERPLATE(CongAttributeEditor,
 			GtkHBox,
 			GTK_TYPE_HBOX);
 
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_editor, set_attribute_handler);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_attribute_editor, remove_attribute_handler);
+
 static void
 cong_attribute_editor_class_init (CongAttributeEditorClass *klass)
 {
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_attribute_editor,
+					      set_attribute_handler);
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_attribute_editor,
+					      remove_attribute_handler);
 }
 
 static void
@@ -90,6 +103,19 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
 	PRIVATE(attribute_editor)->attr = attr;
 
+	/* FIXME: disconnect this: */
+	/* FIXME: disconnect this: */
+
+	PRIVATE(attribute_editor)->handler_id_node_set_attribute = g_signal_connect_after (G_OBJECT(doc),
+											   "node_set_attribute",
+											   G_CALLBACK(on_set_attribute),
+											   attribute_editor);
+
+	PRIVATE(attribute_editor)->handler_id_node_remove_attribute = g_signal_connect_after (G_OBJECT(doc),
+											      "node_remove_attribute",
+											      G_CALLBACK(on_remove_attribute),
+											      attribute_editor);
+	
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor);
 }
 
@@ -227,14 +253,35 @@ CongNodePtr global_glade_node_ptr = NULL;
 
 
 /* Internal function definitions: */
-/* ID support: */
-/* IDREF support: */
-/* IDREFS support: */
-/* ENTITY support: */
-/* ENTITIES support: */
-/* NMTOKEN support: */
-/* NMTOKENS support: */
+static void
+on_set_attribute (CongDocument *doc, 
+		  CongNodePtr node, 
+		  const xmlChar *name, 
+		  const xmlChar *value, 
+		  CongAttributeEditor *attribute_editor)
+{
+	if (node == cong_attribute_editor_get_node (attribute_editor)) {
+		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
+			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,
+					      attribute_editor,
+					      set_attribute_handler, 
+					      (attribute_editor));
+		}
+	}
+}
 
-/* ENUMERATION support: */
-
-/* NOTATION support: */
+static void
+on_remove_attribute (CongDocument *doc, 
+		     CongNodePtr node, 
+		     const xmlChar *name,
+		     CongAttributeEditor *attribute_editor)
+{
+	if (node == cong_attribute_editor_get_node (attribute_editor)) {
+		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
+			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,
+					      attribute_editor,
+					      remove_attribute_handler,
+					      (attribute_editor));
+		}
+	}
+}

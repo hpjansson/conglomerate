@@ -36,16 +36,9 @@ struct CongAttributeEditorCDATADetails
 };
 
 static void
-on_set_attribute (CongDocument *doc, 
-		  CongNodePtr node, 
-		  const xmlChar *name, 
-		  const xmlChar *value, 
-		  CongAttributeEditorCDATA *attribute_editor_cdata);
+set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
-on_remove_attribute (CongDocument *doc, 
-		     CongNodePtr node, 
-		     const xmlChar *name,
-		     CongAttributeEditorCDATA *attribute_editor_cdata);
+remove_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
 on_text_entry_changed (GtkEditable *editable,
 		       CongAttributeEditorCDATA *attribute_editor_cdata);
@@ -68,6 +61,10 @@ GNOME_CLASS_BOILERPLATE(CongAttributeEditorCDATA,
 static void
 cong_attribute_editor_cdata_class_init (CongAttributeEditorCDATAClass *klass)
 {
+	CongAttributeEditorClass *editor_klass = CONG_ATTRIBUTE_EDITOR_CLASS (klass);
+
+	editor_klass->set_attribute_handler = set_attribute_handler;
+	editor_klass->remove_attribute_handler = remove_attribute_handler;
 }
 
 static void
@@ -109,17 +106,6 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 	do_refresh (attribute_editor_cdata);
 
 	gtk_widget_show (GTK_WIDGET(PRIVATE(attribute_editor_cdata)->hbox));
-
-	/* FIXME: disconnect this: */
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_set_attribute",
-				G_CALLBACK(on_set_attribute),
-				attribute_editor_cdata);
-	/* FIXME: disconnect this: */
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_remove_attribute",
-				G_CALLBACK(on_remove_attribute),
-				attribute_editor_cdata);
 
 	g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
 				"changed",
@@ -168,22 +154,15 @@ cong_attribute_editor_cdata_new (CongDocument *doc,
 
 /* Internal function definitions: */
 static void
-on_set_attribute (CongDocument *doc, 
-		  CongNodePtr node, 
-		  const xmlChar *name, 
-		  const xmlChar *value, 
-		  CongAttributeEditorCDATA *attribute_editor_cdata)
+set_attribute_handler (CongAttributeEditor *attribute_editor)
 {
-	do_refresh (attribute_editor_cdata);
+	do_refresh (CONG_ATTRIBUTE_EDITOR_CDATA(attribute_editor));
 }
 
 static void
-on_remove_attribute (CongDocument *doc, 
-		     CongNodePtr node, 
-		     const xmlChar *name,
-		     CongAttributeEditorCDATA *attribute_editor_cdata)
+remove_attribute_handler (CongAttributeEditor *attribute_editor)
 {
-	do_refresh (attribute_editor_cdata);
+	do_refresh (CONG_ATTRIBUTE_EDITOR_CDATA(attribute_editor));
 }
 
 static void

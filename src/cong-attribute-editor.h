@@ -49,6 +49,9 @@ struct CongAttributeEditor
 struct CongAttributeEditorClass
 {
 	GtkHBoxClass klass;
+
+	void (*set_attribute_handler) (CongAttributeEditor *attribute_editor);
+	void (*remove_attribute_handler) (CongAttributeEditor *attribute_editor);
 };
 
 GType
