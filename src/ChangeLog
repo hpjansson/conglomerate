@@ -1,3 +1,8 @@
+2004-03-02  Geert Stappers <stappers@stappers.nl>
+
+	* cong-primary-window.c, cong-util.c, plugin-admonition-node-element.c
+	  The icons are now in DATADIR/pixmaps/conglomerate
+
 2004-03-05  Toshio Kuratomi <toshio@tiki-lounge.com>
 	Changes to fix Bug #135345
 	* cong-app.c: Use GNOME_PROGRAM_STANDARD_PROPERTIES to pull in

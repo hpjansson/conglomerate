@@ -621,7 +621,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gtk_window_set_default_icon_from_file(
 		gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 					   GNOME_FILE_DOMAIN_APP_PIXMAP,
-					   "conglomerate-icon-32.png", FALSE, 
+					   "conglomerate/conglomerate-icon-32.png", FALSE, 
 					   NULL), 
 		NULL);
 

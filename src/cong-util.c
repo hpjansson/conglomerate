@@ -241,7 +241,7 @@ cong_util_load_icon (const gchar *icon_basename)
 
 	g_return_val_if_fail(icon_basename, NULL);
 
-	filename = g_strdup_printf("%s-16.png", icon_basename);
+	filename = g_strdup_printf("conglomerate/%s-16.png", icon_basename);
 	full_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 					       GNOME_FILE_DOMAIN_APP_PIXMAP,
 					       filename,
