@@ -1,0 +1,90 @@
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+          "/usr/share/sgml/docbook/dtd/xml/4.1.2/docbookx.dtd">
+<!--
+#
+# (C) 2003 Geert Stappers <stappers@stappers.nl>
+#
+# Released under the terms of GPL,
+# see the file COPYING for complete text.
+# 
+-->
+<refentry id="conglomerate">
+
+<refmeta>
+<refentrytitle>conglomerate</refentrytitle>
+<manvolnum>1</manvolnum>
+</refmeta>
+
+<refnamediv>
+<refname>conglomerate</refname>
+<refpurpose>a XML editor</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>/usr/bin/conglomerate</command>
+<arg choice="opt" rep="repeat">XML-file</arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1><title>Description</title>
+<para>
+<command>conglomerate</command> is a XML editor.
+This manual page is about technical issues of it.
+There is userfriendly documentation in gnome help.
+FIXME
+  tell how to get that documentation
+( the userfriendly documentation already exsists )
+FIXME
+</para>
+
+</refsect1>
+
+
+<refsect1><title>Files</title>
+
+<para>
+display spec files (.XDS)  FIXME
+</para>
+
+<para>
+XML files on which conglomerate depends.  FIXME
+</para>
+
+</refsect1>
+
+
+<refsect1><title>Bugs</title>
+<para>
+We like, as much as you, as few as possible bugs in
+<command>conglomerate</command>.
+If you find a bug in 
+<command>conglomerate</command>
+report it at
+<ulink url="http://bugzilla.gnome.org" />.
+If it is already reported, update the bugreport.
+So we known that a the bug did bite again.
+</para>
+
+<para>
+There is no garantee how much it will effect our priorty,
+but a bug that is unknown to us, will never get attention nor get sqaushed.
+</para>
+
+</refsect1>
+
+<refsect1><title>Authors</title>
+<para>
+This manual page has been written by
+ <author>
+  <firstname>Geert</firstname>
+  <surname>Stappers</surname>
+  <!--
+  <email>Stappers@Stappers.nl</email>
+  -->
+ </author>
+ .
+</para>
+</refsect1>
+
+</refentry>
