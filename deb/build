@@ -26,8 +26,8 @@ DEBIAN_FILES="rules control changelog copyright docs compat
 #
 if [ ! -f debian/control ]
 then
-  # directories that we will use
   mkdir -p debian/patches
+  # directories that we will use
   echo coping  deb directory into debian
   for DF in ${DEBIAN_FILES}
   do
@@ -41,6 +41,8 @@ fi
 if [ ! -x debian/rules ]
 then
   chmod +x debian/rules
+  # that is usefull when you take the diff.gz to an other system
+  # with `patch`, which doesn't set the execute bits.
 fi
 
 # assuming the user has debian development stuff installed
