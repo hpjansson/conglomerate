@@ -235,6 +235,64 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 									      primary_window);
 }
 
+
+gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
+{
+	g_assert(primary_window);
+
+	/* If there's no document, you're free to close */
+	if (!primary_window->doc)
+		return TRUE;
+
+	/* See if document was modified */
+	if (cong_document_is_modified(primary_window->doc)) {
+		GtkWidget *dialog, *label;
+		gint result; 
+		gchar *label_text;
+
+		dialog = gtk_dialog_new_with_buttons("Save changes?",
+						     GTK_WINDOW(primary_window->window),
+						     GTK_DIALOG_MODAL,
+						     GTK_STOCK_YES,
+						     GTK_RESPONSE_YES,
+						     GTK_STOCK_NO,
+						     GTK_RESPONSE_NO,
+						     GTK_STOCK_CANCEL,
+						     GTK_RESPONSE_CANCEL,
+						     NULL);
+
+		gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
+		label_text = g_strdup_printf("The document %s has been modified.\nWould you like to save your changes?", cong_document_get_filename(primary_window->doc));
+		label = gtk_label_new(label_text);
+		g_free(label_text);
+
+		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), label);
+		gtk_widget_show_all(dialog);
+
+		/* Bring the modified buffer to the top */
+		gtk_window_present(GTK_WINDOW(primary_window->window));
+
+		/* Put the dialog back on top of the window and make
+		   sure it has focus */
+		gtk_window_present(GTK_WINDOW(dialog));
+
+		result = gtk_dialog_run (GTK_DIALOG (dialog));
+
+		if (result == GTK_RESPONSE_YES) {
+			save_document(primary_window->doc);
+		}
+		else if (result == GTK_RESPONSE_CANCEL) {
+			gtk_widget_destroy (dialog);
+			return FALSE;
+		}
+
+		gtk_widget_destroy (dialog);
+	}
+	
+	return TRUE;
+}
+
+
 /* Handy routines for implementing menu callbacks: */
 void unimplemented_menu_item(gpointer callback_data,
 			     guint callback_action,
@@ -408,10 +466,36 @@ static void menu_callback_file_properties(gpointer callback_data,
 static void menu_callback_file_close(gpointer data, guint
 				     callback_action, GtkWidget
 				     *widget) {
-	/* Need to prompt to save any unsaved data in the current
-	   document */
-	gtk_widget_destroy(((struct CongPrimaryWindow*)data)->window);
+	if (cong_primary_window_can_close((struct CongPrimaryWindow*)data)) {
+		gtk_widget_destroy(((struct CongPrimaryWindow*)data)->window);
+	}
 }
+
+static void menu_callback_file_quit(gpointer data, guint
+				    callback_action, GtkWidget
+				    *widget) {
+
+	GList *current;
+	gboolean canceled = FALSE;
+
+	current = g_list_first(the_globals.primary_windows);
+
+	while (current) {
+		if (!cong_primary_window_can_close((struct CongPrimaryWindow*)(current->data))) {
+			canceled = TRUE;
+			break;
+		}
+		current = g_list_next(current);
+	}
+	
+	if (!canceled) {
+		/* FIXME: This is probably leaking memory by not
+		   freeing the primary windows...*/
+		gtk_main_quit();
+	}
+}
+
+
 
 /* Callbacks for "Edit" menu: */
 static void menu_callback_cut(gpointer callback_data,
@@ -473,7 +557,7 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/File/Proper_ties",     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
 	{ "/File/_Close",         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
-	{ "/File/_Quit",         "<control>Q", gtk_main_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
+	{ "/File/_Quit",         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 	{ "/_Edit",                 NULL, 0, 0, "<Branch>" },
 	{ "/Edit/_Undo",              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
@@ -514,18 +598,15 @@ gint delete_event( GtkWidget *widget,
 		   GdkEvent  *event,
 		   gpointer   data )
 {
-	/* This path to window deletion is accessed by a window
-	   manager delete_event. This is where we should prompt the user to save
-	   any unsaved information in the document */
-	g_print ("delete event occurred\n");
-	return(FALSE);
+	/* If the window can't close, return TRUE so the callback chain
+	   ends here */
+	return ! cong_primary_window_can_close((CongPrimaryWindow *)data);
 }
 
 
 void destroy( GtkWidget *widget,
 	      gpointer   data )
 {
-	g_print("destroy event occurred\n");
 	cong_primary_window_free((CongPrimaryWindow *)data);
 	if (g_list_length(the_globals.primary_windows) == 0) {		
 		gtk_main_quit();

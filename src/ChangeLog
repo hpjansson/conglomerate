@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-15 Doug Daniels/Brent Hendricks
+
+	* cong-primary-window.c
+
+	Save confirmation alert
+	
 2002-11-14 David Malcolm
 
 	* cong-primary-window.c, global.h, main.c
@@ -7,7 +13,7 @@ creating ChangeLog
 
 	* cong-tree-view.c, dispspec.c, position.c, xmledit.c, xmlview.c
 
-	Oprimisations
+	Optimisations
 	
 2002-11-14 Doug Daniels/Brent Hendricks
 
