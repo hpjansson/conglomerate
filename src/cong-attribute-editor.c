@@ -41,7 +41,7 @@ struct CongAttributeEditorDetails
 {
 	CongDocument *doc;
 	CongNodePtr node;
-	const gchar *attribute_name;
+	gchar *attribute_name;
 	xmlAttributePtr attr; /* can be NULL */
 
 	gulong handler_id_node_set_attribute;
@@ -49,6 +49,12 @@ struct CongAttributeEditorDetails
 };
 
 /* Internal function declarations: */
+static void
+finalize (GObject *object);
+
+static void
+dispose (GObject *object);
+
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
@@ -79,6 +85,9 @@ cong_attribute_editor_class_init (CongAttributeEditorClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_attribute_editor,
 					      remove_attribute_handler);
+
+	G_OBJECT_CLASS (klass)->finalize = finalize;
+	G_OBJECT_CLASS (klass)->dispose = dispose;
 }
 
 static void
@@ -102,9 +111,6 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 	PRIVATE(attribute_editor)->node = node;
 	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
 	PRIVATE(attribute_editor)->attr = attr;
-
-	/* FIXME: disconnect this: */
-	/* FIXME: disconnect this: */
 
 	PRIVATE(attribute_editor)->handler_id_node_set_attribute = g_signal_connect_after (G_OBJECT(doc),
 											   "node_set_attribute",
@@ -254,12 +260,46 @@ CongNodePtr global_glade_node_ptr = NULL;
 
 /* Internal function definitions: */
 static void
+finalize (GObject *object)
+{
+	CongAttributeEditor *attribute_editor = CONG_ATTRIBUTE_EDITOR(object);
+	
+	g_free (attribute_editor->private);
+	attribute_editor->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+dispose (GObject *object)
+{
+	CongAttributeEditor *attribute_editor = CONG_ATTRIBUTE_EDITOR(object);
+
+	if (PRIVATE(attribute_editor)->doc) {
+	
+		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_editor)->doc),
+					     PRIVATE(attribute_editor)->handler_id_node_set_attribute);
+		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_editor)->doc),
+					     PRIVATE(attribute_editor)->handler_id_node_remove_attribute);
+		
+		g_object_unref (G_OBJECT (PRIVATE(attribute_editor)->doc));
+		PRIVATE(attribute_editor)->doc = NULL;
+		
+		g_free (PRIVATE(attribute_editor)->attribute_name);
+	}
+		
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+}
+
+static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
 		  const xmlChar *name, 
 		  const xmlChar *value, 
 		  CongAttributeEditor *attribute_editor)
 {
+	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));
+
 	if (node == cong_attribute_editor_get_node (attribute_editor)) {
 		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
 			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,
@@ -276,6 +316,8 @@ on_remove_attribute (CongDocument *doc,
 		     const xmlChar *name,
 		     CongAttributeEditor *attribute_editor)
 {
+	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));
+
 	if (node == cong_attribute_editor_get_node (attribute_editor)) {
 		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
 			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,

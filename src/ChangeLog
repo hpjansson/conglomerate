@@ -1,5 +1,9 @@
 2003-09-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-editor.c
+
+	Should now clean up properly
+
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-editor.c, cong-attribute-editor.h
 
 	Moved all document notifications and filtering to base class
