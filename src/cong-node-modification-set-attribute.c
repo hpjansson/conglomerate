@@ -31,6 +31,7 @@
 
 struct CongNodeModificationSetAttributeDetails
 {
+	gchar *ns_prefix;
 	gchar *name;
 	gchar *value;
 	gchar *old_value; /* can be NULL */
@@ -75,16 +76,26 @@ CongNodeModificationSetAttribute*
 cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute *node_modification_set_attribute,
 						CongDocument *doc,
 						CongNodePtr node,
+						xmlNs *namespace,
 						const xmlChar *name, 
 						const xmlChar *value)
 {
+	struct CongNodeModificationSetAttributeDetails *private;
+
+	private = PRIVATE(node_modification_set_attribute);
+
 	cong_node_modification_construct (CONG_NODE_MODIFICATION(node_modification_set_attribute),
 					  doc,
 					  node);
 
-	PRIVATE(node_modification_set_attribute)->name = g_strdup (name);
-	PRIVATE(node_modification_set_attribute)->value = g_strdup (value);
-	PRIVATE(node_modification_set_attribute)->old_value = cong_node_get_attribute (node, name);
+	if (namespace != NULL) {
+		private->ns_prefix = g_strdup(namespace->prefix);
+	} else {
+		private->ns_prefix = NULL;
+	}
+	private->name = g_strdup (name);
+	private->value = g_strdup (value);
+	private->old_value = cong_node_get_attribute (node, namespace, name);
 
 	return node_modification_set_attribute;
 }
@@ -92,12 +103,14 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 CongModification*
 cong_node_modification_set_attribute_new (CongDocument *doc,
 					  CongNodePtr node,
+					  xmlNs *namespace,
 					  const xmlChar *name, 
 					  const xmlChar *value)
 {
 	return CONG_MODIFICATION(cong_node_modification_set_attribute_construct (CONG_NODE_MODIFICATION_SET_ATTRIBUTE(g_object_new (CONG_NODE_MODIFICATION_SET_ATTRIBUTE_TYPE, NULL)),
 										 doc,
 										 node,
+										 namespace,
 										 name,
 										 value));
 }
@@ -122,25 +135,33 @@ static void
 dispose (GObject *object)
 {
 	CongNodeModificationSetAttribute *node_modification_set_attribute = CONG_NODE_MODIFICATION_SET_ATTRIBUTE (object);
+	struct CongNodeModificationSetAttributeDetails *private;
 
 #if DEBUG_MODIFICATION_LIFETIMES
 	g_message ("CongNodeModificationSetAttribute::dispose");
 #endif
 
 	g_assert (node_modification_set_attribute->private);
-	
+
+	private = PRIVATE(node_modification_set_attribute);
+
 	/* Cleanup: */
-	if (PRIVATE(node_modification_set_attribute)->name) {
-		g_free (PRIVATE(node_modification_set_attribute)->name);
-		PRIVATE(node_modification_set_attribute)->name = NULL;
+	if (private->ns_prefix) {
+		g_free (private->ns_prefix);
+		private->ns_prefix = NULL;
 	}
-	if (PRIVATE(node_modification_set_attribute)->value) {
-		g_free (PRIVATE(node_modification_set_attribute)->value);
-		PRIVATE(node_modification_set_attribute)->value = NULL;
+
+	if (private->name) {
+		g_free (private->name);
+		private->name = NULL;
 	}
-	if (PRIVATE(node_modification_set_attribute)->old_value) {
-		g_free (PRIVATE(node_modification_set_attribute)->old_value);
-		PRIVATE(node_modification_set_attribute)->old_value = NULL;
+	if (private->value) {
+		g_free (private->value);
+		private->value = NULL;
+	}
+	if (private->old_value) {
+		g_free (private->old_value);
+		private->old_value = NULL;
 	}
 
 	/* Call the parent method: */		
@@ -150,21 +171,30 @@ dispose (GObject *object)
 static void
 undo (CongModification *modification)
 {
-	CongNodeModificationSetAttribute *node_modification_set_attribute = CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification);
+	struct CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	xmlNs *namespace = NULL;
+
+	if(private->ns_prefix != NULL) {
+		namespace = cong_node_get_ns_for_prefix(node, 
+					    private->ns_prefix);
+	}
+
 	cong_document_begin_edit (doc);
-	
-	if (PRIVATE(node_modification_set_attribute)->old_value) {
+
+	if (private->old_value) {
 		cong_document_private_node_set_attribute (doc,
 							  node,
-							  PRIVATE(node_modification_set_attribute)->name,
-							  PRIVATE(node_modification_set_attribute)->old_value);
+							  namespace,
+							  private->name,
+							  private->old_value);
 	} else {
 		cong_document_private_node_remove_attribute (doc,
 							     node,
-							     PRIVATE(node_modification_set_attribute)->name);
+							     namespace,
+							     private->name);
 	}
 	
 	cong_document_end_edit (doc);
@@ -173,16 +203,23 @@ undo (CongModification *modification)
 static void
 redo (CongModification *modification)
 {
-	CongNodeModificationSetAttribute *node_modification_set_attribute = CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification);
+	struct CongNodeModificationSetAttributeDetails *private = PRIVATE(CONG_NODE_MODIFICATION_SET_ATTRIBUTE (modification));
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
+	xmlNs *namespace = NULL;
+
+	if(private->ns_prefix != NULL) {
+		namespace = cong_node_get_ns_for_prefix(node, 
+						private->ns_prefix);
+	}
 
 	cong_document_begin_edit (doc);
 	
 	cong_document_private_node_set_attribute (doc,
 						  node,
-						  PRIVATE(node_modification_set_attribute)->name,
-						  PRIVATE(node_modification_set_attribute)->value);
+						  namespace,
+						  private->name,
+						  private->value);
 	
 	cong_document_end_edit (doc);
 }

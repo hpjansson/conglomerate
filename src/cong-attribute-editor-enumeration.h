@@ -56,11 +56,13 @@ CongAttributeEditor*
 cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
 					     CongDocument *doc,
 					     CongNodePtr node,
+					     xmlNs *namespace,
 					     const gchar *attribute_name,
 					     xmlAttributePtr attr);
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,
+				       xmlNs *namespace,
 				       const gchar *attribute_name,
 				       xmlAttributePtr attr);
 G_END_DECLS

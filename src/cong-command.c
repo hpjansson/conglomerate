@@ -336,6 +336,7 @@ cong_command_add_node_set_text (CongCommand *cmd,
 void 
 cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
+				     xmlNs *namespace,
 				     const xmlChar *name, 
 				     const xmlChar *value)
 {
@@ -345,6 +346,7 @@ cong_command_add_node_set_attribute (CongCommand *cmd,
 
 	modification = cong_node_modification_set_attribute_new (cong_command_get_document(cmd),
 								 node,
+								 namespace,
 								 name,
 								 value);
 	cong_command_add_modification (cmd,
@@ -355,6 +357,7 @@ cong_command_add_node_set_attribute (CongCommand *cmd,
 void 
 cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
+					xmlNs *namespace,
 					const xmlChar *name)
 {
 	CongModification *modification;
@@ -363,6 +366,7 @@ cong_command_add_node_remove_attribute (CongCommand *cmd,
 
 	modification = cong_node_modification_remove_attribute_new (cong_command_get_document(cmd),
 								    node,
+								    namespace,
 								    name);
 
 	cong_command_add_modification (cmd,

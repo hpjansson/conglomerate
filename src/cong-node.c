@@ -30,6 +30,8 @@
 #include "cong-util.h"
 #include "cong-dtd.h"
 
+#include <string.h>
+
 #define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 0
 #if LOG_CONG_NODE_PRIVATE_MODIFICATIONS
 #define LOG_NODE_PRIVATE_MODIFICATION(x) g_message(x)
@@ -262,6 +264,40 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
 			    prefix);
 }
 
+xmlNsPtr cong_node_get_attr_namespace(CongNodePtr node, 
+				      const char *qualified_name, 
+				      const char **output_name)
+{
+	g_return_val_if_fail(node != NULL, NULL);
+	g_return_val_if_fail(qualified_name != NULL, NULL);
+	g_return_val_if_fail(output_name != NULL, NULL);
+
+	/* get namespace prefix */
+		
+	*output_name = strchr(qualified_name, ':');
+
+	if(*output_name == NULL) {
+		*output_name = qualified_name;
+		return NULL;
+	} else {
+		gchar *prefix;
+		xmlNsPtr ns;
+
+		prefix = g_strndup(qualified_name, 
+				   (*output_name) - qualified_name);
+
+		/* go after the colon. */
+		(*output_name) ++;
+
+		ns = cong_node_get_ns_for_prefix(node,
+						 prefix);
+
+		g_free(prefix);
+
+		return ns;
+	}	
+}
+
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node)
 {
@@ -383,12 +419,47 @@ const gchar *cong_node_type_description(enum CongNodeType node_type)
 }
 
 /* Methods for accessing attribute values: */
-CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attribute_name)
+CongXMLChar* cong_node_get_attribute(CongNodePtr node,
+				     xmlNs* namespace, 
+				     const CongXMLChar* local_attribute_name)
 {
 	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(attribute_name, NULL);
+	g_return_val_if_fail(local_attribute_name, NULL);
+	
+	if(namespace == NULL) {
+		return xmlGetNoNsProp(node, local_attribute_name);
+	} else {
+		return xmlGetNsProp(node, local_attribute_name, namespace->href);
+	}
+}
 
-	return xmlGetProp(node, attribute_name);
+gboolean cong_node_has_attribute(CongNodePtr node,
+				 xmlNs* namespace, 
+				 const CongXMLChar* local_attribute_name)
+{
+	g_return_val_if_fail(node, FALSE);
+	g_return_val_if_fail(local_attribute_name, FALSE);
+	
+	if(namespace == NULL) {
+		xmlAttr *attr = xmlHasProp(node, local_attribute_name);
+
+		/* now check, if there is any namespace,
+		 * if there is a prefix. */
+		if (attr == NULL) {
+			return FALSE;
+		} else if (attr->ns != NULL &&
+			   attr->ns->prefix != NULL) {
+			if (strcmp(attr->ns->prefix, "") == 0) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		} else {
+			return TRUE;
+		}
+	} else {		
+		return xmlHasNsProp(node, local_attribute_name, namespace->href) != NULL;
+	}
 }
 
 void cong_node_self_test(CongNodePtr node)
@@ -1117,27 +1188,38 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 	update_entities (node);
 }
 
-void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value)
+void cong_node_private_set_attribute(CongNodePtr node,
+				     xmlNs *namespace, 
+				     const xmlChar *local_attribute_name,
+				     const xmlChar *value)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_attribute");
 
 	g_return_if_fail(node);
-	g_return_if_fail(name);
+	g_return_if_fail(local_attribute_name);
 	g_return_if_fail(value);
-
-	xmlSetProp(node, name, value);
+	
+	if(namespace == NULL)
+		xmlSetProp(node, local_attribute_name, value);
+	else
+		xmlSetNsProp(node, namespace, local_attribute_name, value);
 
 	update_entities (node);
 }
 
-void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
+void cong_node_private_remove_attribute(CongNodePtr node, 
+					xmlNs *namespace,
+					const xmlChar *local_attribute_name)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_remove_attribute");
 
 	g_return_if_fail(node);
-	g_return_if_fail(name);
+	g_return_if_fail(local_attribute_name);
 
-	xmlUnsetProp(node, name);
+	if(namespace == NULL)
+		xmlUnsetProp(node, local_attribute_name);
+	else
+		xmlUnsetNsProp(node, namespace, local_attribute_name);
 
 	update_entities (node);
 }

@@ -964,7 +964,7 @@ parse_external_document_model (CongDispspec *ds,
 	gchar *type;
 
 	DS_DEBUG_MSG1("got external-document-model\n");
-	type = cong_node_get_attribute (node, "type");
+	type = cong_node_get_attribute (node, NULL, "type");
 
 	if (type) {
 		enum CongDocumentModelType model_type = cong_enum_mapping_lookup (document_model_enum_mapping,

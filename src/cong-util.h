@@ -265,7 +265,6 @@ cong_element_description_get_qualified_name (const CongElementDescription *eleme
 void
 cong_element_description_list_free (GList *list_of_element_desc);
 
-
 /**
  * cong_util_modal_element_selection_dialog:
  *
@@ -301,6 +300,21 @@ cong_util_make_menu_item_for_element_desc (const CongElementDescription *element
 
 GtkWidget*
 cong_util_add_menu_separator (GtkMenu *menu);
+
+
+/**
+ * cong_util_attribute_name_qualified
+ *
+ * @namespace: Namespace of attribute (can be NULL).
+ * @local_attribute_name: Local name of attribute.
+ *
+ * Returns: 
+ */
+char *
+cong_util_get_qualified_attribute_name(const xmlNs *namespace,
+				       const xmlChar *local_attribute_name);
+
+
 
 G_END_DECLS
 

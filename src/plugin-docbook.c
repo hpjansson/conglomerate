@@ -1119,26 +1119,31 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodeProperty
 		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "arabic")),
 					doc,
 					node,
+					NULL,
 					"numeration",
 					"arabic");
 		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "loweralpha")),
 					doc,
 					node,
+					NULL,
 					"numeration",
 					"loweralpha");
 		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "lowerroman")),
 					doc,
 					node,
+					NULL,
 					"numeration",
 					"lowerroman");
 		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperalpha")),
 					doc,
 					node,
+					NULL,
 					"numeration",
 					"upperalpha");
 		cong_bind_radio_button (GTK_RADIO_BUTTON (glade_xml_get_widget(xml, "upperroman")),
 					doc,
 					node,
+					NULL,
 					"numeration",
 					"upperroman");
 		
@@ -1146,18 +1151,21 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodeProperty
 		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "inheritnum")),
 					doc,
 					node,
+					NULL,
 					"inheritnum",
 					"ignore",
 					"inherit");
 		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "spacing")),
 					doc,
 					node,
+					NULL,
 					"spacing",
 					"normal",
 					"compact");
 		cong_bind_check_button (GTK_CHECK_BUTTON (glade_xml_get_widget(xml, "continuation")),
 					doc,
 					node,
+					NULL,
 					"continuation",
 					"restart",
 					"continues");
@@ -1176,7 +1184,7 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodeProperty
 static void
 open_ulink_in_browser (CongNodePtr node)
 {
-	gchar *url = cong_node_get_attribute (node, "url");
+	gchar *url = cong_node_get_attribute (node, NULL, "url");
 
 	if (url) {	
 		/* FIXME: should we have some error handling? */
@@ -1248,7 +1256,7 @@ node_filter_browse_url (CongServiceNodeTool *node_tool,
 	if (cong_node_is_element (node,
 				  NULL,
 				  "ulink")) {
-		gchar *url = cong_node_get_attribute (node, "url");
+		gchar *url = cong_node_get_attribute (node, NULL, "url");
 		
 		if (url) {
 			g_free (url);

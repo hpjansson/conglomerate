@@ -58,6 +58,7 @@ CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *attribute_wrapper_check_button,
 					       CongDocument *doc,
 					       CongNodePtr node,
+					       xmlNs *namespace,
 					       const gchar *attribute_name,
 					       xmlAttributePtr attr,
 					       GtkCheckButton *check_button,
@@ -67,6 +68,7 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
 CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_new ( CongDocument *doc,
 					  CongNodePtr node,
+					  xmlNs *namespace,
 					  const gchar *attribute_name,
 					  xmlAttributePtr attr,
 					  GtkCheckButton *check_button,

@@ -35,6 +35,7 @@ struct CongAttributeWrapperDetails
 	CongDocument *doc;
 	CongNodePtr node;
 	gchar *attribute_name;
+	xmlNs *namespace;
 	xmlAttributePtr attr; /* can be NULL */
 
 	gulong handler_id_node_set_attribute;
@@ -51,12 +52,14 @@ dispose (GObject *object);
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
+		  const xmlNs *namespace,
 		  const xmlChar *name, 
 		  const xmlChar *value, 
 		  CongAttributeWrapper *attribute_wrapper);
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
+		     const xmlNs *namespace,
 		     const xmlChar *name,
 		     CongAttributeWrapper *attribute_wrapper);
 
@@ -93,6 +96,7 @@ CongAttributeWrapper*
 cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
 				  CongDocument *doc,
 				  CongNodePtr node,
+				  xmlNs *namespace,
 				  const gchar *attribute_name,
 				  xmlAttributePtr attr)
 {
@@ -104,6 +108,8 @@ cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
 	PRIVATE(attribute_wrapper)->node = node;
 	PRIVATE(attribute_wrapper)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
 	PRIVATE(attribute_wrapper)->attr = attr;
+
+	PRIVATE(attribute_wrapper)->namespace = namespace;
 
 	PRIVATE(attribute_wrapper)->handler_id_node_set_attribute = g_signal_connect_after (G_OBJECT(doc),
 											   "node_set_attribute",
@@ -142,6 +148,14 @@ cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper)
 	return PRIVATE(attribute_wrapper)->attr;
 }
 
+xmlNs *
+cong_attribute_wrapper_get_namespace (CongAttributeWrapper *attribute_wrapper)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper), NULL);
+
+	return PRIVATE(attribute_wrapper)->namespace;	
+}
+
 const gchar*
 cong_attribute_wrapper_get_attribute_name (CongAttributeWrapper *attribute_wrapper)
 {
@@ -156,6 +170,7 @@ cong_attribute_wrapper_get_attribute_value (CongAttributeWrapper *attribute_wrap
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper), NULL);
 
 	return cong_node_get_attribute (PRIVATE(attribute_wrapper)->node, 
+					PRIVATE(attribute_wrapper)->namespace,
 					PRIVATE(attribute_wrapper)->attribute_name);
 }
 
@@ -166,6 +181,7 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 	CongDocument *doc = cong_attribute_wrapper_get_document (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
+	xmlNs *namespace = cong_attribute_wrapper_get_namespace (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_value);
 
@@ -177,6 +193,7 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 
 	cong_command_add_node_set_attribute (cmd,
 					     node,
+					     namespace,
 					     attribute_name,
 					     new_value);
 	cong_document_end_command (doc,
@@ -189,6 +206,7 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 	CongDocument *doc = cong_attribute_wrapper_get_document (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
+	xmlNs *namespace = cong_attribute_wrapper_get_namespace (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
@@ -200,6 +218,7 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 
 	cong_command_add_node_remove_attribute (cmd,
 						node,
+						namespace,
 						attribute_name);
 	cong_document_end_command (doc,
 				   cmd);
@@ -241,11 +260,14 @@ dispose (GObject *object)
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
+		  const xmlNs *namespace,
 		  const xmlChar *name, 
 		  const xmlChar *value, 
 		  CongAttributeWrapper *attribute_wrapper)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
+
+	/* FIXME: this seems to ignore the "namespace" parameter */
 
 	if (node == cong_attribute_wrapper_get_node (attribute_wrapper)) {
 		if (0 == strcmp(name, cong_attribute_wrapper_get_attribute_name (attribute_wrapper))) {
@@ -260,10 +282,13 @@ on_set_attribute (CongDocument *doc,
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
+		     const xmlNs *namespace,
 		     const xmlChar *name,
 		     CongAttributeWrapper *attribute_wrapper)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
+
+	/* FIXME: this seems to ignore the "namespace" parameter */
 
 	if (node == cong_attribute_wrapper_get_node (attribute_wrapper)) {
 		if (0 == strcmp(name, cong_attribute_wrapper_get_attribute_name (attribute_wrapper))) {

@@ -87,6 +87,7 @@ CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *attribute_wrapper,
 					       CongDocument *doc,
 					       CongNodePtr node,
+					       xmlNs *namespace,
 					       const gchar *attribute_name,
 					       xmlAttributePtr attr,
 					       GtkRadioButton *radio_button,
@@ -97,6 +98,7 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 	cong_attribute_wrapper_construct (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper),
 					  doc,
 					  node,
+					  namespace,
 					  attribute_name,
 					  attr);
 
@@ -116,6 +118,7 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 					  CongNodePtr node,
+					  xmlNs *namespace,
 					  const gchar *attribute_name,
 					  xmlAttributePtr attr,
 					  GtkRadioButton *radio_button,
@@ -124,6 +127,7 @@ cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 	return cong_attribute_wrapper_radio_button_construct (g_object_new (CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON_TYPE, NULL),
 							      doc,
 							      node,
+							      namespace,
 							      attribute_name,
 							      attr,
 							      radio_button,

@@ -31,6 +31,7 @@
 
 struct CongNodeModificationRemoveAttributeDetails
 {
+	gchar *ns_prefix;
 	gchar *name;
 	gchar *old_value; /* can be NULL */
 };
@@ -74,14 +75,23 @@ CongNodeModificationRemoveAttribute*
 cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAttribute *node_modification_remove_attribute,
 						   CongDocument *doc,
 						   CongNodePtr node,
+						   xmlNs *namespace,
 						   const gchar *name)
 {
+	struct CongNodeModificationRemoveAttributeDetails *private = 
+		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (node_modification_remove_attribute));
+
 	cong_node_modification_construct (CONG_NODE_MODIFICATION(node_modification_remove_attribute),
-					  doc,
+					  doc,					  
 					  node);
 
-	PRIVATE(node_modification_remove_attribute)->name = g_strdup (name);
-	PRIVATE(node_modification_remove_attribute)->old_value = cong_node_get_attribute (node, name);
+	if (namespace != NULL) {
+		private->ns_prefix = g_strdup(namespace->prefix);
+	} else {
+		private->ns_prefix = NULL;
+	}
+	private->name = g_strdup (name);
+	private->old_value = cong_node_get_attribute (node, namespace, name);
 
 	return node_modification_remove_attribute;
 }
@@ -89,11 +99,13 @@ cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAtt
 CongModification*
 cong_node_modification_remove_attribute_new (CongDocument *doc,
 					     CongNodePtr node,
+					     xmlNs *namespace,
 					     const gchar *name)
 {
 	return CONG_MODIFICATION(cong_node_modification_remove_attribute_construct (CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE(g_object_new (CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE_TYPE, NULL)),
 										    doc,
 										    node,
+										    namespace,
 										    name));
 }
 
@@ -116,22 +128,27 @@ finalize (GObject *object)
 static void
 dispose (GObject *object)
 {
-	CongNodeModificationRemoveAttribute *node_modification_remove_attribute = CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (object);
-
+	struct CongNodeModificationRemoveAttributeDetails *private = 
+		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (object));
+	
 #if DEBUG_MODIFICATION_LIFETIMES
 	g_message ("CongNodeModificationRemoveAttribute::dispose");
 #endif
 
-	g_assert (node_modification_remove_attribute->private);
+	g_assert (private);
 	
 	/* Cleanup: */
-	if (PRIVATE(node_modification_remove_attribute)->name) {
-		g_free (PRIVATE(node_modification_remove_attribute)->name);
-		PRIVATE(node_modification_remove_attribute)->name = NULL;
+	if (private->ns_prefix) {
+		g_free (private->ns_prefix);
+		private->ns_prefix = NULL;
 	}
-	if (PRIVATE(node_modification_remove_attribute)->old_value) {
-		g_free (PRIVATE(node_modification_remove_attribute)->old_value);
-		PRIVATE(node_modification_remove_attribute)->old_value = NULL;
+	if (private->name) {
+		g_free (private->name);
+		private->name = NULL;
+	}
+	if (private->old_value) {
+		g_free (private->old_value);
+		private->old_value = NULL;
 	}
 
 	/* Call the parent method: */		
@@ -141,18 +158,26 @@ dispose (GObject *object)
 static void
 undo (CongModification *modification)
 {
-	CongNodeModificationRemoveAttribute *node_modification_remove_attribute = CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification);
+	struct CongNodeModificationRemoveAttributeDetails *private = 
+		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification));
 
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
+	xmlNs *namespace = NULL;
+
+	if (private->ns_prefix != NULL) {		
+		namespace = cong_node_get_ns_for_prefix(node, 
+							private->ns_prefix);
+	}
 
 	cong_document_begin_edit (doc);
-	
-	if (PRIVATE(node_modification_remove_attribute)->old_value) {
+
+	if (private->old_value) {
 		cong_document_private_node_set_attribute (doc,
 							  node,
-							  PRIVATE(node_modification_remove_attribute)->name,
-							  PRIVATE(node_modification_remove_attribute)->old_value);
+							  namespace,
+							  private->name,
+							  private->old_value);
 	}
 	
 	cong_document_end_edit (doc);
@@ -161,17 +186,25 @@ undo (CongModification *modification)
 static void
 redo (CongModification *modification)
 {
-	CongNodeModificationRemoveAttribute *node_modification_remove_attribute = CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification);
+	struct CongNodeModificationRemoveAttributeDetails *private = 
+		PRIVATE(CONG_NODE_MODIFICATION_REMOVE_ATTRIBUTE (modification));
 
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
+	xmlNs *namespace = NULL;
+
+	if (private->ns_prefix != NULL) {		
+		namespace = cong_node_get_ns_for_prefix(node, 
+							private->ns_prefix);
+	}
 
 	cong_document_begin_edit (doc);
 	
-	if (PRIVATE(node_modification_remove_attribute)->old_value) {
+	if (private->old_value) {
 		cong_document_private_node_remove_attribute (doc,
 							     node,
-							     PRIVATE(node_modification_remove_attribute)->name);
+							     namespace,
+							     private->name);
 	}
 	
 	cong_document_end_edit (doc);

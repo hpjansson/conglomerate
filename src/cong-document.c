@@ -47,10 +47,10 @@ static void
 cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
 
 static void
-cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value);
 
 static void
-cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
+cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *namespace, const xmlChar *name);
 
 static void
 cong_document_handle_selection_change(CongDocument *doc);
@@ -234,18 +234,18 @@ cong_document_class_init (CongDocumentClass *klass)
 						    G_SIGNAL_RUN_LAST,
 						    G_STRUCT_OFFSET(CongDocumentClass, node_set_attribute),
 						    NULL, NULL,
-						    cong_cclosure_marshal_VOID__CONGNODEPTR_STRING_STRING,
+						    cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING_STRING,
 						    G_TYPE_NONE, 
-						    3, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
+						    4, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 
 	signals[NODE_REMOVE_ATTRIBUTE] = g_signal_new ("node_remove_attribute",
 						       CONG_DOCUMENT_TYPE,
 						       G_SIGNAL_RUN_LAST,
 						       G_STRUCT_OFFSET(CongDocumentClass, node_remove_attribute),
 						       NULL, NULL,
-						       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
+						       cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING,
 						       G_TYPE_NONE, 
-						       2, G_TYPE_POINTER, G_TYPE_STRING);
+						       3, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING);
 
 	signals[SELECTION_CHANGE] = g_signal_new ("selection_change",
 						  CONG_DOCUMENT_TYPE,
@@ -1043,7 +1043,11 @@ void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, co
 		       new_content);
 }
 
-void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+void cong_document_private_node_set_attribute(CongDocument *doc, 
+					      CongNodePtr node, 
+					      xmlNs *namespace,
+					      const xmlChar *name, 
+					      const xmlChar *value)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1060,11 +1064,15 @@ void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr nod
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_SET_ATTRIBUTE], 0,
 		       node,
+		       namespace,
 		       name,
 		       value);
 }
 
-void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
+void cong_document_private_node_remove_attribute(CongDocument *doc, 
+						 CongNodePtr node, 
+						 xmlNs *namespace,
+						 const xmlChar *name)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1080,6 +1088,7 @@ void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr 
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_REMOVE_ATTRIBUTE], 0,
 		       node,
+		       namespace,
 		       name);
 }
 
@@ -1910,7 +1919,11 @@ cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xm
 }
 
 static void
-cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+cong_document_handle_node_set_attribute(CongDocument *doc, 
+					CongNodePtr node, 
+					xmlNs *namespace,
+					const xmlChar *name, 
+					const xmlChar *value)
 {
 	GList *iter;
 
@@ -1929,12 +1942,17 @@ cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, con
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_set_attribute) {
-			view->klass->on_document_node_set_attribute(view, TRUE, node, name, value);
+			view->klass->on_document_node_set_attribute(view, 
+								    TRUE, 
+								    node, 
+								    namespace,
+								    name, 
+								    value);
 		}
 	}
 
 	/* Make the change: */
-	cong_node_private_set_attribute(node, name, value);
+	cong_node_private_set_attribute(node, namespace, name, value);
 
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
@@ -1942,7 +1960,12 @@ cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, con
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_set_attribute) {
-			view->klass->on_document_node_set_attribute(view, FALSE, node, name, value);
+			view->klass->on_document_node_set_attribute(view, 
+								    FALSE, 
+								    node, 
+								    namespace,
+								    name, 
+								    value);
 		}
 	}
 
@@ -1950,7 +1973,10 @@ cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, con
 }
 
 static void
-cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
+cong_document_handle_node_remove_attribute(CongDocument *doc, 
+					   CongNodePtr node, 
+					   xmlNs *namespace,
+					   const xmlChar *name)
 {
 	GList *iter;
 
@@ -1968,12 +1994,16 @@ cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, 
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_remove_attribute) {
-			view->klass->on_document_node_remove_attribute(view, TRUE, node, name);
+			view->klass->on_document_node_remove_attribute(view, 
+								       TRUE, 
+								       node, 
+								       namespace,
+								       name);
 		}
 	}
 
 	/* Make the change: */
-	cong_node_private_remove_attribute(node, name);
+	cong_node_private_remove_attribute(node, namespace, name);
 
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
@@ -1981,7 +2011,11 @@ cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, 
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_remove_attribute) {
-			view->klass->on_document_node_remove_attribute(view, FALSE, node, name);
+			view->klass->on_document_node_remove_attribute(view, 
+								       FALSE, 
+								       node, 
+								       namespace,
+								       name);
 		}
 	}
 

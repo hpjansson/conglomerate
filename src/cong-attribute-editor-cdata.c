@@ -78,6 +78,7 @@ CongAttributeEditor*
 cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_editor_cdata,
 				       CongDocument *doc,
 				       CongNodePtr node,
+				       xmlNs *namespace,
 				       const gchar *attribute_name,
 				       xmlAttributePtr attr)
 {
@@ -87,6 +88,7 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 	cong_attribute_editor_construct (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata),
 					 doc,
 					 node,
+					 namespace,
 					 attribute_name,
 					 attr);
 
@@ -142,6 +144,7 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 GtkWidget*
 cong_attribute_editor_cdata_new (CongDocument *doc,
 				 CongNodePtr node,
+				 xmlNs *namespace,
 				 const gchar *attribute_name,
 				 xmlAttributePtr attr)
 {
@@ -149,6 +152,7 @@ cong_attribute_editor_cdata_new (CongDocument *doc,
 			   (g_object_new (CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, NULL),
 			    doc,
 			    node,
+			    namespace,
 			    attribute_name,
 			    attr));			   
 }
@@ -173,6 +177,7 @@ on_text_entry_changed (GtkEditable *editable,
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
+	xmlNs *namespace = cong_attribute_editor_get_namespace (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
 	const gchar *value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry));
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, value);
@@ -185,6 +190,7 @@ on_text_entry_changed (GtkEditable *editable,
 
 	cong_command_add_node_set_attribute (cmd,
 					     node,
+					     namespace,
 					     attribute_name,
 					     value);
 	cong_document_end_command (doc,
@@ -198,6 +204,7 @@ on_add_button (GtkButton *button,
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
+	xmlNs *namespace = cong_attribute_editor_get_namespace (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
 	gchar *desc = g_strdup_printf ( _("Add attribute \"%s\""), attribute_name);
 
@@ -209,6 +216,7 @@ on_add_button (GtkButton *button,
 
 	cong_command_add_node_set_attribute (cmd,
 					     node,
+					     namespace,
 					     attribute_name,
 					     "");
 	cong_document_end_command (doc,
@@ -222,6 +230,7 @@ on_delete_button (GtkButton *button,
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
+	xmlNs *namespace = cong_attribute_editor_get_namespace (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
@@ -233,6 +242,7 @@ on_delete_button (GtkButton *button,
 
 	cong_command_add_node_remove_attribute (cmd,
 						node,
+						namespace,
 						attribute_name);
 	cong_document_end_command (doc,
 				   cmd);

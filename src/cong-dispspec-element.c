@@ -691,7 +691,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   			if (0==strcmp(child->name,"property-dialog")) {
   				DS_DEBUG_MSG1("got property-dialog\n");
 				
-				element->property_dialog_service_id = cong_node_get_attribute(child, "service-id");
+				element->property_dialog_service_id = cong_node_get_attribute(child, NULL, "service-id");
   			}
 
 			/* Handle "key-value-list": */
@@ -705,8 +705,8 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 						DS_DEBUG_MSG1("got key-value-pair\n");
 						
 						g_hash_table_insert (element->key_value_hash,
-								     cong_node_get_attribute (key_value_iter, "key"),
-								     cong_node_get_attribute (key_value_iter, "value"));
+								     cong_node_get_attribute (key_value_iter, NULL, "key"),
+								     cong_node_get_attribute (key_value_iter, NULL, "value"));
 					}
 				}
 		            	

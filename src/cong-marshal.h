@@ -76,6 +76,23 @@ cong_cclosure_marshal_VOID__CONGNODEPTR_STRING_STRING (GClosure     *closure,
 						       gpointer      invocation_hint,
 						       gpointer      marshal_data);
 
+extern void
+cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING (GClosure     *closure,
+							GValue       *return_value,
+							guint         n_param_values,
+							const GValue *param_values,
+							gpointer      invocation_hint,
+							gpointer      marshal_data);
+
+
+extern void
+cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING_STRING (GClosure     *closure,
+							       GValue       *return_value,
+							       guint         n_param_values,
+							       const GValue *param_values,
+							       gpointer      invocation_hint,
+							       gpointer      marshal_data);
+
 
 extern void
 cong_cclosure_marshal_VOID__STRING_STRING_STRING (GClosure     *closure,

@@ -164,12 +164,14 @@ cong_command_add_node_set_text (CongCommand *cmd,
 void 
 cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
+				     xmlNs *namespace,
 				     const xmlChar *name, 
 				     const xmlChar *value);
 
 void 
 cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
+					xmlNs *namespace,
 					const xmlChar *name);
 	
 void 

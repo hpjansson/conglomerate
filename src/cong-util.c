@@ -1044,3 +1044,19 @@ cong_util_add_menu_separator (GtkMenu *menu)
 
 	return item;
 }
+
+char *
+cong_util_get_qualified_attribute_name(const xmlNs *namespace,
+				       const xmlChar *local_attribute_name)
+{
+	g_return_val_if_fail(local_attribute_name != NULL, NULL);
+
+	if(namespace == NULL ||
+	   namespace->prefix == NULL ||
+	   namespace->prefix[0] == '\0')
+		return g_strdup(local_attribute_name);
+
+	return g_strdup_printf("%s:%s",
+			       namespace->prefix,
+			       local_attribute_name);
+}
