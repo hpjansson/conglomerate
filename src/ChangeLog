@@ -1,3 +1,11 @@
+2004-11-18  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* plugin-table.c: 
+
+	Refinements to the plugin: supplied better boilerplate for the 3
+	editor area subclasses; <tgroup>, <row> and <entry> elements now
+	appear respectively as red, green and blue dashed boxes.
+
 2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-object.c: 
