@@ -1,4 +1,6 @@
-SUBDIRS = src po data doc examples pixmaps glade
+SUBDIRS = src po data doc examples pixmaps glade deb
+
+NULL =
 
 EXTRA_DIST = BUGS	\
   .diffexclude		\
@@ -8,13 +10,4 @@ EXTRA_DIST = BUGS	\
   intltool-update.in	\
   omf.make              \
   xmldocs.make          \
-  deb/Readme		\
-  deb/build		\
-  deb/changelog		\
-  deb/conglomerate.menu	\
-  deb/control		\
-  deb/copyright		\
-  deb/docs		\
-  deb/polish		\
-  deb/rules		\
-  deb/watch
+  $(NULL)

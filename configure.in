@@ -134,6 +134,7 @@ AC_OUTPUT(Makefile
 	  conglomerate.spec
           po/Makefile.in
 	  data/Makefile
+	  deb/Makefile
 	  doc/Makefile
 	  doc/devel/Makefile
 	  doc/C/Makefile

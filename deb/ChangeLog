@@ -1,0 +1,7 @@
+2003-09-22  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+	New file, the Debian packaging stuff has now it own Makefile.am.
+
+	* ChangeLog
+	The deb directory was missing this file.
