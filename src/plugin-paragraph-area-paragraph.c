@@ -127,11 +127,5 @@ render_self (CongEditorArea *area,
 			    rect->width-3,
 			    rect->height-3);
 
-	switch (cong_editor_area_get_state (area)) {
-	default: break;
-	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
-		cong_editor_area_debug_render_area (area,
-						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
-		break;
-	}
+	cong_editor_area_debug_render_state (area);
 }

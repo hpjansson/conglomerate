@@ -169,13 +169,7 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect)
 {
-	switch (cong_editor_area_get_state (area)) {
-	default: break;
-	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
-		cong_editor_area_debug_render_area (area,
-						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
-		break;
-	}
+	cong_editor_area_debug_render_state (area);
 }
 
 static gint

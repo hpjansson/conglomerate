@@ -390,6 +390,20 @@ cong_editor_area_debug_render_area (CongEditorArea *area,
 			    PRIVATE(area)->window_area.height-1);
 }
 
+void
+cong_editor_area_debug_render_state (CongEditorArea *area)
+{
+	switch (cong_editor_area_get_state (area)) {
+	default: break;
+	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
+		cong_editor_area_debug_render_area (area,
+						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
+		break;
+	}
+
+}
+
+
 /* CongEditorArea methods: */
 CongEditorArea*
 cong_editor_area_get_parent (CongEditorArea *area)

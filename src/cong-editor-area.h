@@ -141,6 +141,9 @@ void
 cong_editor_area_debug_render_area (CongEditorArea *area,
 				    GdkGC *gc);
 
+void
+cong_editor_area_debug_render_state (CongEditorArea *area);
+
 /* CongEditorArea methods: */
 CongEditorArea*
 cong_editor_area_get_parent (CongEditorArea *area);

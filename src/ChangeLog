@@ -1,3 +1,9 @@
+2003-10-20  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-labelled.c, cong-editor-area-span-tag.c, cong-editor-area-structural.c, cong-editor-area-unknown-tag.c, cong-editor-area.c, cong-editor-area.h, plugin-paragraph-area-paragraph.c
+
+	Moved the copy-and-pasted area state debugging code into a utility function
+
 2003-10-20  David Hoover <karma@deadmoose.com>
  
  	* cong-file-save.c, cong-primary-window.c, global.h
