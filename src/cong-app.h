@@ -78,7 +78,7 @@ cong_app_get_clipboard_xml_source (CongApp *app,
  * cong_app_set_clipboard_from_xml_fragment:
  * @app: the #CongApp
  * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
- * @xml_fragment: a fragment of XML source, or NULL if there's no content
+ * @xml_fragment: a fragment of XML source
  * @source_doc: the #CongDocument from which the source has been cut
  * 
  * This function takes the XML source and attempts to place it into the appropriate clipboard.  It will attempt to make it 

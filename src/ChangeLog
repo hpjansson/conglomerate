@@ -1,3 +1,9 @@
+2003-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c, cong-app.h
+
+	Big rewrite of selection handling: now attempts to intelligently offer and receive data in both text and XML formats, fixing bug #129731
+
 2003-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, tree.c, xmledit.c

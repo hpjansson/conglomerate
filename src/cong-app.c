@@ -35,11 +35,22 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#include <libxslt/xsltInternals.h>
+#include <libxslt/transform.h>
+
 #define TEST_BIG_FONTS 0
 
 #define PRIVATE(x) ((x)->private)
 
 /* Internal data structure declarations: */
+typedef struct CongSelectionData CongSelectionData;
+
+struct CongSelectionData
+{
+	gchar *utf8_xml_buffer;
+	gchar *utf8_text;
+};
+
 struct CongAppPrivate
 {
 	GnomeProgram *gnome_program;
@@ -53,7 +64,11 @@ struct CongAppPrivate
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
 
 	const GList *language_list;
+
+	CongSelectionData clipboard_selection;
+	CongSelectionData primary_selection;
 };
+
 
 
 CongApp *the_singleton_app = NULL;
@@ -375,6 +390,30 @@ cong_eel_gtk_clipboard_wait_for_targets (GtkClipboard  *clipboard,
   return result;
 }
 
+static gchar*
+generate_source_fragment_from_selection_doc (xmlDocPtr xml_doc,
+					     CongDocument *target_doc)
+{
+	xmlNodePtr iter;
+
+	g_assert (xml_doc);
+	g_assert (IS_CONG_DOCUMENT (target_doc));
+
+	/* FIXME:  
+	   Eventually we may want to do transformations/conversions based on the DOCTYPE of the input xml_doc and the type of the target CongDocument.
+
+	   For now we just strip off the headers and get at the content inside the top-level <xml-fragment> element:
+	*/
+	for (iter=xml_doc->children;iter;iter=iter->next) {
+		if (cong_node_type (iter)==CONG_NODE_TYPE_ELEMENT) {
+			/* This is the top-level element; we expect it to be an <xml-fragment>: */
+			return cong_node_generate_child_source (iter);
+		}
+	}
+
+	return NULL;
+}
+
 gchar*
 cong_app_get_clipboard_xml_source (CongApp *app,
 				   GdkAtom selection,
@@ -389,6 +428,57 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 	g_return_val_if_fail (IS_CONG_DOCUMENT (target_doc), NULL);
 
 	clipboard = gtk_clipboard_get (selection);
+
+	/* Try XML, then text: */
+	{
+		/* Try XML: */
+		{
+			GtkSelectionData *selection_data = gtk_clipboard_wait_for_contents (clipboard,
+											    gdk_atom_intern ("text/xml", FALSE));
+			
+			if (selection_data) {
+				/* Parse, potentially convert to another XML format, then output in the desired form: */
+				xmlDocPtr xml_doc = xmlParseMemory (selection_data->data,
+								    selection_data->length);
+
+				gtk_selection_data_free (selection_data);
+
+				if (xml_doc) {
+					gchar *source_fragment = generate_source_fragment_from_selection_doc (xml_doc,
+													      target_doc);
+					xmlFreeDoc (xml_doc);
+
+					if (source_fragment) {
+						g_message ("Got clipboard data as XML: \"%s\"", source_fragment);
+						return source_fragment;
+					} else {
+						g_message ("Failed to generate source fragment from selected XML");
+					}
+				} else {
+					g_message ("Parsing of XML from selection failed");
+				}	
+			}
+		}
+		
+		/* FIXME: eventually try HTML, and perhaps arbitrary plugins: */
+		
+		/* Try text: */
+		{
+			gchar *raw_text = gtk_clipboard_wait_for_text (clipboard);
+
+			if (raw_text) {			
+				/* Need to escape any text: */
+				gchar *escaped_text = g_markup_escape_text (raw_text, strlen(raw_text));
+				
+				g_free (raw_text);
+
+				g_message ("Got clipboard data as text \"%s\"", escaped_text);
+				return escaped_text;
+			}			
+		}
+	}
+
+	return NULL;
 
 #if 0
 	if (cong_eel_gtk_clipboard_wait_for_targets (clipboard,
@@ -407,63 +497,217 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 	} else {
 		return NULL;
 	}
-#else
+#endif
+
+#if 0
 
 	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
 	return gtk_clipboard_wait_for_text (clipboard);
 #endif
 }
 
-#if 1
+enum CongTargetTypes {
+	CONG_TARGET_TYPE_TEXT,
+	CONG_TARGET_TYPE_XML
+};
+
+static const GtkTargetEntry selection_targets[] = 
+{
+	{"UTF8_STRING", 0, CONG_TARGET_TYPE_TEXT},
+	{"text/xml", 0, CONG_TARGET_TYPE_XML},
+};
+
+static void 
+clipboard_get_cb (GtkClipboard *clipboard,
+		  GtkSelectionData *selection_data,
+		  guint info,
+		  gpointer user_data_or_owner)
+{
+	CongSelectionData *cong_selection = (CongSelectionData*)user_data_or_owner;
+
+	switch (info) {
+	default: g_assert_not_reached();
+	case CONG_TARGET_TYPE_TEXT:
+		g_message ("Providing text for selection: \"%s\"", cong_selection->utf8_text);
+		gtk_selection_data_set (selection_data,
+					gdk_atom_intern ("UTF8_STRING", FALSE),
+					8,
+					cong_selection->utf8_text,
+					strlen (cong_selection->utf8_text));
+		break;
+	case CONG_TARGET_TYPE_XML:
+		g_message ("Providing XML data for selection: \"%s\"", cong_selection->utf8_xml_buffer);
+		gtk_selection_data_set (selection_data,
+					gdk_atom_intern ("text/xml", FALSE),
+					8,
+					cong_selection->utf8_xml_buffer,
+					strlen (cong_selection->utf8_xml_buffer));
+		break;
+	}
+}
+
+static void
+clipboard_clear_cb (GtkClipboard *clipboard,
+		    gpointer user_data_or_owner)
+{
+}
+
+static gchar*
+generate_xml_for_selection (const gchar* xml_fragment,
+			    CongDocument *source_doc)
+{
+	const CongXMLChar* dtd_public_identifier;
+
+	g_assert (xml_fragment);
+	g_assert (IS_CONG_DOCUMENT (source_doc));
+
+
+	dtd_public_identifier = cong_document_get_dtd_public_identifier(source_doc);
+	
+	if (dtd_public_identifier) {
+		/* FIXME: add a DOCTYPE declaration if available */
+		return g_strdup_printf ("<?xml version=\"1.0\" ?>\n"
+					"<xml-fragment>%s</xml-fragment>", xml_fragment);
+	} else {
+		return g_strdup_printf ("<?xml version=\"1.0\" ?>\n"
+					"<xml-fragment>%s</xml-fragment>", xml_fragment);
+	}
+}
+
+static gchar*
+generate_text_for_selection (const gchar* xml_fragment,
+			     CongDocument *source_doc)
+{
+	gchar *doc_source;
+	xmlDocPtr xml_doc_input;
+	xmlDocPtr xml_doc_result;
+
+	g_assert (xml_fragment);
+	g_assert (IS_CONG_DOCUMENT (source_doc));
+
+	doc_source = g_strdup_printf ("<?xml version=\"1.0\"?>\n<placeholder>%s</placeholder>", xml_fragment);
+	
+	xml_doc_input = xmlParseMemory (doc_source, 
+					strlen(doc_source));
+	g_free (doc_source);
+	
+	if (xml_doc_input) {
+		xsltStylesheetPtr xsl;
+		
+		/* FIXME: amortize the parsing... */
+		gchar *stylesheet_file = gnome_program_locate_file (PRIVATE(cong_app_singleton())->gnome_program,
+								    GNOME_FILE_DOMAIN_APP_DATADIR,
+								    "stylesheets/selection-to-text.xsl",
+								    FALSE,
+								    NULL);
+
+		xsl = xsltParseStylesheetFile (stylesheet_file);
+		if (xsl==NULL) {
+			g_warning ("Couldn't parse stylesheet %s", stylesheet_file);
+			g_free (stylesheet_file);
+			xmlFreeDoc (xml_doc_input);
+			return NULL;
+		}
+		g_free (stylesheet_file);
+		
+		xml_doc_result = xsltApplyStylesheet(xsl, xml_doc_input, NULL);
+		xmlFreeDoc (xml_doc_input);
+		xsltFreeStylesheet (xsl);
+
+		if (xml_doc_result) {
+			gchar *result;
+			/* The stylesheet outputs as text, so we should have a single TEXT node directly below the document containing the text: */
+			g_assert (xml_doc_result->children);
+			g_assert (xml_doc_result->children == xml_doc_result->last);
+			g_assert (xml_doc_result->children->type == XML_TEXT_NODE);
+
+			result = g_strdup (xml_doc_result->children->content);		
+
+			xmlFreeDoc (xml_doc_result);
+
+			return result;
+		}		
+	}
+
+	return NULL;
+}
+
+
+static void
+regenerate_selection (CongSelectionData *cong_selection,
+		      const gchar* xml_fragment,
+		      CongDocument *source_doc)
+{
+	g_assert (cong_selection);
+	g_assert (xml_fragment);
+	g_assert (IS_CONG_DOCUMENT (source_doc));
+
+	/* Regenerate XML: */
+	{
+		if (cong_selection->utf8_xml_buffer) {
+			g_free (cong_selection->utf8_xml_buffer);
+		}
+
+		cong_selection->utf8_xml_buffer = generate_xml_for_selection (xml_fragment, source_doc);
+	}
+
+	/* Regenerate textual version: */
+	{
+		if (cong_selection->utf8_text) {
+			g_free (cong_selection->utf8_text);
+		}
+
+		cong_selection->utf8_text = generate_text_for_selection (xml_fragment, source_doc);
+
+		/* FIXME: reduce debug spew as well! */
+	}
+}
+
+
+
 void
 cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 					  GdkAtom selection,
 					  const gchar* xml_fragment,
 					  CongDocument *source_doc)
 {
-	GtkClipboard* clipboard;
+	GtkClipboard *clipboard;
+	CongSelectionData *cong_selection;
 
 	g_return_if_fail (app);
 	g_return_if_fail ((selection == GDK_SELECTION_CLIPBOARD)||(selection == GDK_SELECTION_PRIMARY));
+	g_return_if_fail (xml_fragment);
 	g_return_if_fail (IS_CONG_DOCUMENT (source_doc));
 
 	clipboard = gtk_clipboard_get (selection);
-	
-	if (xml_fragment) {
-		/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
-		gtk_clipboard_set_text (clipboard, xml_fragment, -1);
+
+#if 1
+	if (selection==GDK_SELECTION_CLIPBOARD) {
+		cong_selection = &(PRIVATE(app)->clipboard_selection);
 	} else {
-		/* FIXME: should this happen? */
+		cong_selection = &(PRIVATE(app)->primary_selection);
 	}
+
+	/* For now we build all possible types in advance and store, ready to be supply whatever is requested.  Eventually we might try to be smarter about this: */
+	regenerate_selection (cong_selection,
+			      xml_fragment,
+			      source_doc);
+
+	gtk_clipboard_set_with_data (clipboard,
+				     selection_targets,
+				     G_N_ELEMENTS (selection_targets),
+				     clipboard_get_cb,
+				     clipboard_clear_cb,
+				     cong_selection);
+#else
+	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
+	gtk_clipboard_set_text (clipboard, xml_fragment, -1);
+#endif
 
 	g_message("Clipboard set to \"%s\"", xml_fragment);
 
 	/* emit signals? */
 }
-#else
-void
-cong_app_set_clipboard (CongApp *app, 
-			const gchar* text)
-{
-	GtkClipboard* clipboard;
-
-	g_return_if_fail (app);
-	/* text is allowed to be NULL */
-
-	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	
-	if (text) {
-		/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
-		gtk_clipboard_set_text (clipboard, text, -1);
-	} else {
-		/* FIXME: should this happen? */
-	}
-
-	g_message("Clipboard set to \"%s\"", text);
-
-	/* emit signals? */
-}
-#endif
 
 GnomeProgram*
 cong_app_get_gnome_program (CongApp *app)
