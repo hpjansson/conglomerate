@@ -1,3 +1,12 @@
+2003-07-19  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* conglomerate-C.omf
+	Removed the hard coded path.
+
+	* README
+	Removed the hard coded path reminder.
+	Made reference to scrollkeeper and omf.
+
 2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* faq.xml

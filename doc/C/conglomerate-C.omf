@@ -23,7 +23,7 @@
       user's guide
     </type>
     <format mime="text/xml" dtd="-//OASIS//DTD DocBook XML V4.1.2//EN"/>
-    <identifier url="file:/usr/local/share/gnome/help/conglomerate/C/conglomerate.xml"/>
+    <identifier url="file:$(docdir)/$(docname).xml"/>
     <language code="C"/>
     <relation seriesid="f5d6fa86-81fc-11d7-8b4e-e2011117e491"/>
     <rights type="GNU FDL" license.version="1.1" holder="----"/>
