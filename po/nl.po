@@ -4,13 +4,14 @@
 # Mark Van den Borre <mark@markvdb.be>, 2003
 # Elros Cyriatan <cyriatan@fastmail.fm>, 2003
 # A.J. van der Vegt <A.J.vanderVegt@ITS.TUDelft.nl>
+# Daniel van Eeden <daniel_e@dds.nl>, 2004
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-15 21:45+0000\n"
-"PO-Revision-Date: 2004-01-11 23:04+0100\n"
+"POT-Creation-Date: 2004-01-17 03:18+0100\n"
+"PO-Revision-Date: 2004-01-17 13:45+0100\n"
 "Last-Translator: Daniel van Eeden <daniel_e@dds.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +19,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:599 src/cong-primary-window.c:755
-#: src/cong-primary-window.c:757 src/cong-primary-window.c:763
+#: src/cong-primary-window.c:610 src/cong-primary-window.c:766
+#: src/cong-primary-window.c:768 src/cong-primary-window.c:774
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-Editor"
 
@@ -557,27 +558,27 @@ msgstr "Aanwijzer verplaatsen"
 msgid "Drag out selection"
 msgstr "Selectie eruit slepen"
 
-#: src/cong-editor-widget3.c:305
+#: src/cong-editor-widget3.c:253
 msgid "Expander Size"
 msgstr "Openklapper-grootte"
 
-#: src/cong-editor-widget3.c:306
+#: src/cong-editor-widget3.c:254
 msgid "Size of the expander arrow"
 msgstr "Grootte van de openklap pijl"
 
-#: src/cong-editor-widget3.c:687
+#: src/cong-editor-widget3.c:628
 msgid "Input Method"
 msgstr "Invoermethode:"
 
-#: src/cong-editor-widget3.c:789 src/cong-editor-widget3.c:1320
+#: src/cong-editor-widget3.c:730 src/cong-editor-widget3.c:1261
 msgid "Typing"
 msgstr "Aan het tikken"
 
-#: src/cong-editor-widget3.c:1221
+#: src/cong-editor-widget3.c:1162
 msgid "Cursor Movement"
 msgstr "Beweging van aanwijzer"
 
-#: src/cong-editor-widget3.c:1261 src/cong-editor-widget3.c:1274
+#: src/cong-editor-widget3.c:1202 src/cong-editor-widget3.c:1215
 msgid "Delete Selection"
 msgstr "Selectie verwijderen"
 
@@ -1639,53 +1640,57 @@ msgstr "<%s> Eigenschappen-dialoogvenster"
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Voorziet een Eigenschappen-dialoogvenster voor het <%s> item"
 
-#: src/cong-primary-window.c:313 src/cong-primary-window.c:314
+#: src/cong-primary-window.c:314 src/cong-primary-window.c:315
 msgid "Open document"
 msgstr "Document openen"
 
-#: src/cong-primary-window.c:330 src/cong-primary-window.c:331
+#: src/cong-primary-window.c:322 src/cong-primary-window.c:323
+msgid "New document"
+msgstr "Nieuw document"
+
+#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
 msgid "Save document"
 msgstr "Document opslaan"
 
-#: src/cong-primary-window.c:338 src/cong-primary-window.c:339
+#: src/cong-primary-window.c:349 src/cong-primary-window.c:350
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/cong-primary-window.c:345 src/cong-primary-window.c:346
+#: src/cong-primary-window.c:356 src/cong-primary-window.c:357
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:178
+#: src/cong-primary-window.c:375 src/cong-primary-window.c:376 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Knippen"
 
-#: src/cong-primary-window.c:371 src/cong-primary-window.c:372
+#: src/cong-primary-window.c:382 src/cong-primary-window.c:383
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/cong-primary-window.c:378 src/cong-primary-window.c:379
+#: src/cong-primary-window.c:389 src/cong-primary-window.c:390
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/cong-primary-window.c:510
+#: src/cong-primary-window.c:521
 msgid "Overview"
 msgstr "Overzicht"
 
-#: src/cong-primary-window.c:520
+#: src/cong-primary-window.c:531
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: src/cong-primary-window.c:529
+#: src/cong-primary-window.c:540
 msgid "Raw XML"
 msgstr "Pure XML"
 
-#: src/cong-primary-window.c:656 src/cong-primary-window.c:675
+#: src/cong-primary-window.c:667 src/cong-primary-window.c:686
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welkom bij de Conglomerate editor"
 
-#: src/cong-primary-window.c:755
+#: src/cong-primary-window.c:766
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (bijgewerkt) - %s"
