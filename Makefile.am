@@ -12,3 +12,10 @@ EXTRA_DIST = BUGS	\
   omf.make              \
   xmldocs.make          \
   $(NULL)
+
+## # when we switch to automake1.7, we will need this:
+##distuninstallcheck_listfiles = find . \
+##   -type f -print | \
+##   grep -v '^\./var/scrollkeeper' | \
+##   grep -v '^\./share/gnome/help/conglomerate/C/faq.xml'
+## # but it will need more to get a fine `make distcheck`
