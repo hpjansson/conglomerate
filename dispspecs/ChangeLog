@@ -1,3 +1,9 @@
+2004-10-20  David Malcolm  <dmalcolm@redhat.com>
+
+	* docbook.xds.in: 
+
+	Added <computeroutput> element
+
 2004-10-19  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* kernel-traffic.xds.in : Warn translator about possible bug.

@@ -571,6 +571,11 @@
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
+		<element localName="computeroutput" whitespace="preserve" type="span" color="a0b0c0">
+			<_name>Computer Output</_name>
+			<property-dialog service-id="docbook-generic-node-properties"/>
+		</element>
+
 		<element localName="cmdsynopsis" type="structural" color="a0b0c0">
 			<_name>Command Synopsis</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
