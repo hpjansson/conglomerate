@@ -1,4 +1,26 @@
 creating ChangeLog
+2002-08-26 David Malcolm
+
+	* cong-dispspec-registry.c
+
+	New file:  manages a registry of all known dispspecs so that the app can guess at dispspecs as documents are loaded
+	
+	* Makefile
+
+	Added cong-dispspec-registry.c
+
+	* cong-error-dialog.c, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c
+
+	Added "convenience buttons" to some dialogs
+
+	* dispspec.c, global.h, main.c, open.c
+
+	The app now has a registry of dispspecs and automatically chooses one when a document is opened.
+
+	* popup.c, xmledit.c, xmlview.c
+
+	Minor cleanups
+	
 2002-08-25 David Malcolm
 
 	* cong-error-file-open.c
