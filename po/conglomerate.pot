@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-24 08:52+0000\n"
+"POT-Creation-Date: 2003-07-31 15:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1245
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1247
 #: src/cong-primary-window.c:380 src/cong-primary-window.c:382
 #: src/cong-primary-window.c:680 src/cong-primary-window.c:682
 #: src/cong-primary-window.c:688
@@ -82,20 +82,20 @@ msgstr ""
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr ""
 
-#: src/cong-dispspec.c:422
+#: src/cong-dispspec.c:424
 msgid "unnamed"
 msgstr ""
 
-#: src/cong-dispspec.c:435
+#: src/cong-dispspec.c:437
 msgid "No description available."
 msgstr ""
 
-#: src/cong-dispspec.c:1087
+#: src/cong-dispspec.c:1092
 msgid "(xpath failed)"
 msgstr ""
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec.c:1132
+#: src/cong-dispspec.c:1137
 msgid "<untitled>"
 msgstr ""
 
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: src/cong-file-export.c:253 src/cong-file-print.c:214 src/cong-menus.c:286
+#: src/cong-file-export.c:253 src/cong-file-print.c:214 src/cong-menus.c:288
 msgid "General"
 msgstr ""
 
@@ -551,14 +551,14 @@ msgstr ""
 msgid "Export Options"
 msgstr ""
 
-#: src/cong-file-export.c:305 src/cong-file-print.c:241 src/cong-menus.c:292
-#: src/cong-menus.c:296 src/cong-menus.c:512
+#: src/cong-file-export.c:305 src/cong-file-print.c:241 src/cong-menus.c:294
+#: src/cong-menus.c:298 src/cong-menus.c:514
 #: src/cong-node-properties-dialog.c:530
 msgid "Name"
 msgstr ""
 
 #: src/cong-file-export.c:306 src/cong-file-new.c:228
-#: src/cong-file-print.c:242 src/cong-menus.c:297 src/cong-menus.c:519
+#: src/cong-file-print.c:242 src/cong-menus.c:299 src/cong-menus.c:521
 #: src/cong-parser-error.c:231
 msgid "Description"
 msgstr ""
@@ -590,8 +590,7 @@ msgstr ""
 msgid "FIXME"
 msgstr ""
 
-#. There's more than one valid importer...
-#: src/cong-file-import.c:108
+#: src/cong-file-import.c:109
 msgid ""
 "More than one importer can handle that file type; the selection dialog has "
 "yet to be implemented.  You will have to use the first one that the plugin "
@@ -676,7 +675,7 @@ msgstr ""
 msgid "Print Options"
 msgstr ""
 
-#: src/cong-file-print.c:311 src/cong-menus.c:806
+#: src/cong-file-print.c:311 src/cong-menus.c:808
 msgid "Print Preview"
 msgstr ""
 
@@ -717,319 +716,319 @@ msgstr ""
 msgid "Calculating next page"
 msgstr ""
 
-#: src/cong-menus.c:91 src/cong-menus.c:163 src/cong-menus.c:196
+#: src/cong-menus.c:91 src/cong-menus.c:163 src/cong-menus.c:197
 msgid "The selected menu item has not yet been implemented."
 msgstr ""
 
-#: src/cong-menus.c:275 src/cong-node-properties-dialog.c:674
+#: src/cong-menus.c:277 src/cong-node-properties-dialog.c:674
 msgid "Properties"
 msgstr ""
 
-#: src/cong-menus.c:287
+#: src/cong-menus.c:289
 msgid "Type"
 msgstr ""
 
-#: src/cong-menus.c:293 src/cong-node-properties-dialog.c:251
+#: src/cong-menus.c:295 src/cong-node-properties-dialog.c:251
 msgid "Location"
 msgstr ""
 
-#: src/cong-menus.c:294
+#: src/cong-menus.c:296
 msgid "Modified"
 msgstr ""
 
-#: src/cong-menus.c:304
+#: src/cong-menus.c:306
 msgid "XML Header"
 msgstr ""
 
-#: src/cong-menus.c:305
+#: src/cong-menus.c:307
 msgid "Document Type Declaration"
 msgstr ""
 
-#: src/cong-menus.c:307
+#: src/cong-menus.c:309
 msgid "Version"
 msgstr ""
 
-#: src/cong-menus.c:312
+#: src/cong-menus.c:314
 msgid "Unspecified"
 msgstr ""
 
-#: src/cong-menus.c:314
+#: src/cong-menus.c:316
 msgid "Encoding"
 msgstr ""
 
-#: src/cong-menus.c:316
+#: src/cong-menus.c:318
 msgid "Standalone"
 msgstr ""
 
-#: src/cong-menus.c:322 src/cong-menus.c:325
+#: src/cong-menus.c:324 src/cong-menus.c:327
 msgid "None"
 msgstr ""
 
-#: src/cong-menus.c:327
+#: src/cong-menus.c:329
 msgid "External ID"
 msgstr ""
 
-#: src/cong-menus.c:328
+#: src/cong-menus.c:330
 msgid "System ID"
 msgstr ""
 
-#: src/cong-menus.c:330
+#: src/cong-menus.c:332
 msgid "No External Subset"
 msgstr ""
 
-#: src/cong-menus.c:345
+#: src/cong-menus.c:347
 msgid "Basic"
 msgstr ""
 
-#: src/cong-menus.c:348 src/cong-node-properties-dialog.c:631
+#: src/cong-menus.c:350 src/cong-node-properties-dialog.c:631
 msgid "Advanced"
 msgstr ""
 
-#: src/cong-menus.c:482
+#: src/cong-menus.c:484
 msgid "Document Types"
 msgstr ""
 
-#: src/cong-menus.c:584
+#: src/cong-menus.c:586
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr ""
 
-#: src/cong-menus.c:641 src/cong-plugin.c:936
+#: src/cong-menus.c:643 src/cong-plugin.c:936
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 
-#: src/cong-menus.c:644 src/cong-menus.c:668 src/cong-plugin.c:939
+#: src/cong-menus.c:646 src/cong-menus.c:670 src/cong-plugin.c:939
 #: src/cong-plugin.c:963
 msgid "Conglomerate could not transform the document"
 msgstr ""
 
-#: src/cong-menus.c:665 src/cong-plugin.c:960
+#: src/cong-menus.c:667 src/cong-plugin.c:960
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 
-#: src/cong-menus.c:1118
+#: src/cong-menus.c:1120
 msgid "Test Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1122
+#: src/cong-menus.c:1124
 #, c-format
 msgid "This is stage %i"
 msgstr ""
 
-#: src/cong-menus.c:1178
+#: src/cong-menus.c:1180
 msgid "Message Log - Conglomerate"
 msgstr ""
 
-#: src/cong-menus.c:1190
+#: src/cong-menus.c:1192
 msgid "Signal Log - Conglomerate"
 msgstr ""
 
-#: src/cong-menus.c:1243
+#: src/cong-menus.c:1245
 msgid "translator_credits"
 msgstr ""
 
-#: src/cong-menus.c:1247
+#: src/cong-menus.c:1249
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
 msgstr ""
 
-#: src/cong-menus.c:1248
+#: src/cong-menus.c:1250
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr ""
 
-#: src/cong-menus.c:1283 src/cong-menus.c:1361
+#: src/cong-menus.c:1285 src/cong-menus.c:1363
 msgid "/_File"
 msgstr ""
 
-#: src/cong-menus.c:1284 src/cong-menus.c:1362
+#: src/cong-menus.c:1286 src/cong-menus.c:1364
 msgid "/File/_New..."
 msgstr ""
 
-#: src/cong-menus.c:1285 src/cong-menus.c:1363
+#: src/cong-menus.c:1287 src/cong-menus.c:1365
 msgid "/File/_Open..."
 msgstr ""
 
-#: src/cong-menus.c:1286 src/cong-menus.c:1291 src/cong-menus.c:1296
-#: src/cong-menus.c:1299 src/cong-menus.c:1302 src/cong-menus.c:1304
-#: src/cong-menus.c:1364 src/cong-menus.c:1366
+#: src/cong-menus.c:1288 src/cong-menus.c:1293 src/cong-menus.c:1298
+#: src/cong-menus.c:1301 src/cong-menus.c:1304 src/cong-menus.c:1306
+#: src/cong-menus.c:1366 src/cong-menus.c:1368
 msgid "/File/"
 msgstr ""
 
-#: src/cong-menus.c:1287
+#: src/cong-menus.c:1289
 msgid "/File/_Save"
 msgstr ""
 
-#: src/cong-menus.c:1288
+#: src/cong-menus.c:1290
 msgid "/File/Save _As..."
 msgstr ""
 
-#: src/cong-menus.c:1289
+#: src/cong-menus.c:1291
 msgid "/File/Sa_ve a Copy..."
 msgstr ""
 
-#: src/cong-menus.c:1292
+#: src/cong-menus.c:1294
 msgid "/File/Print Previe_w..."
 msgstr ""
 
-#: src/cong-menus.c:1293
+#: src/cong-menus.c:1295
 msgid "/File/_Print..."
 msgstr ""
 
-#: src/cong-menus.c:1297
+#: src/cong-menus.c:1299
 msgid "/File/_Revert"
 msgstr ""
 
-#: src/cong-menus.c:1300 src/cong-menus.c:1365
+#: src/cong-menus.c:1302 src/cong-menus.c:1367
 msgid "/File/_Import..."
 msgstr ""
 
-#: src/cong-menus.c:1301
+#: src/cong-menus.c:1303
 msgid "/File/_Export..."
 msgstr ""
 
-#: src/cong-menus.c:1303
+#: src/cong-menus.c:1305
 msgid "/File/Proper_ties"
 msgstr ""
 
-#: src/cong-menus.c:1305 src/cong-menus.c:1367
+#: src/cong-menus.c:1307 src/cong-menus.c:1369
 msgid "/File/_Close"
 msgstr ""
 
-#: src/cong-menus.c:1306 src/cong-menus.c:1368
+#: src/cong-menus.c:1308 src/cong-menus.c:1370
 msgid "/File/_Quit"
 msgstr ""
 
-#: src/cong-menus.c:1308
+#: src/cong-menus.c:1310
 msgid "/_Edit"
 msgstr ""
 
-#: src/cong-menus.c:1310
+#: src/cong-menus.c:1312
 msgid "/Edit/_Undo"
 msgstr ""
 
-#: src/cong-menus.c:1311
+#: src/cong-menus.c:1313
 msgid "/Edit/_Redo"
 msgstr ""
 
-#: src/cong-menus.c:1312 src/cong-menus.c:1317 src/cong-menus.c:1323
-#: src/cong-menus.c:1325
+#: src/cong-menus.c:1314 src/cong-menus.c:1319 src/cong-menus.c:1325
+#: src/cong-menus.c:1327
 msgid "/Edit/"
 msgstr ""
 
-#: src/cong-menus.c:1314
+#: src/cong-menus.c:1316
 msgid "/Edit/Cu_t"
 msgstr ""
 
-#: src/cong-menus.c:1315
+#: src/cong-menus.c:1317
 msgid "/Edit/_Copy"
 msgstr ""
 
-#: src/cong-menus.c:1316
+#: src/cong-menus.c:1318
 msgid "/Edit/_Paste"
 msgstr ""
 
-#: src/cong-menus.c:1319
+#: src/cong-menus.c:1321
 msgid "/Edit/_Find..."
 msgstr ""
 
-#: src/cong-menus.c:1320
+#: src/cong-menus.c:1322
 msgid "/Edit/Find Ne_xt"
 msgstr ""
 
-#: src/cong-menus.c:1321
+#: src/cong-menus.c:1323
 msgid "/Edit/Find Pre_vious"
 msgstr ""
 
-#: src/cong-menus.c:1322
+#: src/cong-menus.c:1324
 msgid "/Edit/R_eplace..."
 msgstr ""
 
-#: src/cong-menus.c:1324
+#: src/cong-menus.c:1326
 msgid "/Edit/_Insert..."
 msgstr ""
 
-#: src/cong-menus.c:1327
+#: src/cong-menus.c:1329
 msgid "/Edit/View _Source"
 msgstr ""
 
-#: src/cong-menus.c:1330 src/cong-menus.c:1371
+#: src/cong-menus.c:1332 src/cong-menus.c:1373
 msgid "/Debug"
 msgstr ""
 
-#: src/cong-menus.c:1331 src/cong-menus.c:1372
+#: src/cong-menus.c:1333 src/cong-menus.c:1374
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr ""
 
-#: src/cong-menus.c:1332 src/cong-menus.c:1373
+#: src/cong-menus.c:1334 src/cong-menus.c:1375
 msgid "/Debug/Document Types"
 msgstr ""
 
-#: src/cong-menus.c:1333
+#: src/cong-menus.c:1335
 msgid "/Debug/Transform DocBook to HTML"
 msgstr ""
 
-#: src/cong-menus.c:1334
+#: src/cong-menus.c:1336
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr ""
 
-#: src/cong-menus.c:1335
+#: src/cong-menus.c:1337
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr ""
 
-#: src/cong-menus.c:1336
+#: src/cong-menus.c:1338
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr ""
 
-#: src/cong-menus.c:1337
+#: src/cong-menus.c:1339
 msgid "/Debug/Transform DocBook to FO"
 msgstr ""
 
-#: src/cong-menus.c:1339
+#: src/cong-menus.c:1341
 msgid "/Debug/Preview XSL:FO"
 msgstr ""
 
-#: src/cong-menus.c:1341
+#: src/cong-menus.c:1343
 msgid "/Debug/DTD"
 msgstr ""
 
-#: src/cong-menus.c:1342 src/cong-menus.c:1374
+#: src/cong-menus.c:1344 src/cong-menus.c:1376
 msgid "/Debug/Dialog"
 msgstr ""
 
-#: src/cong-menus.c:1343 src/cong-menus.c:1375
+#: src/cong-menus.c:1345 src/cong-menus.c:1377
 msgid "/Debug/Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1344
+#: src/cong-menus.c:1346
 msgid "/Debug/Document Message Log"
 msgstr ""
 
-#: src/cong-menus.c:1345
+#: src/cong-menus.c:1347
 msgid "/Debug/Document Signal Log"
 msgstr ""
 
-#: src/cong-menus.c:1346 src/cong-menus.c:1376
+#: src/cong-menus.c:1348 src/cong-menus.c:1378
 msgid "/Debug/Information Alert"
 msgstr ""
 
-#: src/cong-menus.c:1347 src/cong-menus.c:1377
+#: src/cong-menus.c:1349 src/cong-menus.c:1379
 msgid "/Debug/Glade Test"
 msgstr ""
 
-#: src/cong-menus.c:1350
+#: src/cong-menus.c:1352
 msgid "/_Tools"
 msgstr ""
 
-#: src/cong-menus.c:1352 src/cong-menus.c:1380
+#: src/cong-menus.c:1354 src/cong-menus.c:1382
 msgid "/_Help"
 msgstr ""
 
-#: src/cong-menus.c:1353 src/cong-menus.c:1381
+#: src/cong-menus.c:1355 src/cong-menus.c:1383
 msgid "/Help/_Contents"
 msgstr ""
 
-#: src/cong-menus.c:1354 src/cong-menus.c:1382
+#: src/cong-menus.c:1356 src/cong-menus.c:1384
 msgid "/Help/_About"
 msgstr ""
 
@@ -1138,30 +1137,30 @@ msgstr ""
 msgid "Dummy element for tag <%s>"
 msgstr ""
 
-#: src/cong-util.c:225 src/plugin-docbook.c:568
+#: src/cong-util.c:219 src/plugin-docbook.c:568
 msgid "Printing XSL Formatting Objects"
 msgstr ""
 
-#: src/cong-util.c:269
+#: src/cong-util.c:263
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr ""
 
-#: src/main.c:188
+#: src/main.c:196
 #, c-format
 msgid "Conglomerate could not load any xds files from the directory \"%s\""
 msgstr ""
 
-#: src/main.c:190
+#: src/main.c:198
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr ""
 
-#: src/main.c:192
+#: src/main.c:200
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it."
 msgstr ""
 
-#: src/main.c:307
+#: src/main.c:323
 msgid "XML Editor"
 msgstr ""
 
@@ -1384,6 +1383,42 @@ msgstr ""
 
 #: src/plugin-lists.c:237
 msgid "An editor node for visualising a member of a list"
+msgstr ""
+
+#: src/plugin-paragraph.c:58
+msgid "Paragraph"
+msgstr ""
+
+#: src/plugin-paragraph.c:59
+msgid "An editor node for visualising a paragraph"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:129
+msgid "Dump Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:130 src/plugin-save-dispspec.c:133
+#: src/plugin-save-dispspec.c:134
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:132
+msgid "_Dump Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:140
+msgid "Edit Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:141 src/plugin-save-dispspec.c:144
+#: src/plugin-save-dispspec.c:145
+msgid "Opens the current display spec as a conglomerate document."
+msgstr ""
+
+#: src/plugin-save-dispspec.c:143
+msgid "_Edit Display Spec"
 msgstr ""
 
 #: src/plugin-sgml.c:35
