@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-21 15:37-0400\n"
-"PO-Revision-Date: 2004-10-21 15:29-0400\n"
+"POT-Creation-Date: 2004-11-02 15:25-0500\n"
+"PO-Revision-Date: 2004-11-02 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,10 +65,9 @@ msgid "Conglomerate Display Specification"
 msgstr "Conglomerate Display Specification"
 
 #: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
-#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
-#: src/cong-edit-preferences.c:271 src/cong-file-export.c:339
-#: src/cong-file-new.c:363 src/cong-file-print.c:250
-#: src/cong-parser-error.c:320
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:250
+#: src/cong-file-export.c:339 src/cong-file-new.c:363
+#: src/cong-file-print.c:250 src/cong-parser-error.c:320
 msgid "Description"
 msgstr "Description"
 
@@ -111,8 +110,8 @@ msgid "Metadata"
 msgstr "Metadata"
 
 #: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:338
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
 #: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Name"
@@ -976,10 +975,10 @@ msgstr "&quot;Kernel Traffic&quot; Newsletter"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid ""
-"A newletter tracking the technical development of a project within the Free/"
+"A newsletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
 msgstr ""
-"A newletter tracking the technical development of a project within the Free/"
+"A newsletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:4
@@ -1801,20 +1800,20 @@ msgstr "Changes from the past %li minutes will be discarded."
 msgid "Changes from the past minute will be discarded."
 msgstr "Changes from the past minute will be discarded."
 
-#: src/cong-dispspec.c:501
+#: src/cong-dispspec.c:513
 msgid "unnamed"
 msgstr "unnamed"
 
-#: src/cong-dispspec.c:521
+#: src/cong-dispspec.c:536
 msgid "No description available."
 msgstr "No description available."
 
-#: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
+#: src/cong-dispspec-element.c:705 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath failed)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:771
+#: src/cong-dispspec-element.c:741
 msgid "<untitled>"
 msgstr "<untitled>"
 
@@ -2814,11 +2813,11 @@ msgid "Proper_ties"
 msgstr "Proper_ties"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1543 src/cong-menus.c:1769
+#: src/cong-menus.c:1543 src/cong-menus.c:1768
 msgid "_Undo"
 msgstr "_Undo"
 
-#: src/cong-menus.c:1544 src/cong-menus.c:1779
+#: src/cong-menus.c:1544 src/cong-menus.c:1778
 msgid "_Redo"
 msgstr "_Redo"
 
@@ -2858,12 +2857,12 @@ msgstr "_Insert..."
 msgid "View _Source"
 msgstr "View _Source"
 
-#: src/cong-menus.c:1765
+#: src/cong-menus.c:1764
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Undo: %s"
 
-#: src/cong-menus.c:1775
+#: src/cong-menus.c:1774
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Redo: %s"
