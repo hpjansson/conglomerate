@@ -1,5 +1,12 @@
 2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
+       * conglomerate.pot:
+       Added this automatic generated file into CVS.
+       It goes into the PACKAGE-VERSION.tar.gz by `make dist`.
+       I think it is updated instead of generated.
+
+2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
+
        * es.po:
        Changed odd looking '" %" \n "s"' into '" " \n "%s"'
        ( the '%s' is now on the same line )
