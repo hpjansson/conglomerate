@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-15 21:45+0000\n"
-"PO-Revision-Date: 2004-01-10 03:20+0100\n"
+"POT-Creation-Date: 2004-01-18 14:57+0100\n"
+"PO-Revision-Date: 2004-01-18 14:57+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:599 src/cong-primary-window.c:755
-#: src/cong-primary-window.c:757 src/cong-primary-window.c:763
+#: src/cong-primary-window.c:610 src/cong-primary-window.c:766
+#: src/cong-primary-window.c:768 src/cong-primary-window.c:774
 msgid "Conglomerate XML Editor"
 msgstr "Uređivač XML-a Konglomerat"
 
@@ -298,8 +298,8 @@ msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
 msgstr ""
-"<small>Neke primene DocBook-a dozvoljavaju da se ponašanje veza prilagodi "
-"ovim atributom „type“. </small>"
+"<small>Neke primene DocBook-a dozvoljavaju da se ponašanje veza prilagodi ovim "
+"atributom „type“. </small>"
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
@@ -386,8 +386,8 @@ msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
-"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li časova će "
-"biti zanemarene."
+"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li časova će biti "
+"zanemarene."
 
 # bug: plural-forms
 #: src/cong-dialog.c:253
@@ -396,8 +396,8 @@ msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
 msgstr ""
-"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li minuta će "
-"biti zanemarene."
+"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li minuta će biti "
+"zanemarene."
 
 # bug: plural-forms
 #: src/cong-dialog.c:255
@@ -566,27 +566,27 @@ msgstr "Pomerite kurzor"
 msgid "Drag out selection"
 msgstr "Izvuci izabrano"
 
-#: src/cong-editor-widget3.c:305
+#: src/cong-editor-widget3.c:253
 msgid "Expander Size"
 msgstr "Veličina razgranika"
 
-#: src/cong-editor-widget3.c:306
+#: src/cong-editor-widget3.c:254
 msgid "Size of the expander arrow"
 msgstr "Veličina strelice razgranika"
 
-#: src/cong-editor-widget3.c:687
+#: src/cong-editor-widget3.c:628
 msgid "Input Method"
 msgstr "Način unosa"
 
-#: src/cong-editor-widget3.c:789 src/cong-editor-widget3.c:1320
+#: src/cong-editor-widget3.c:730 src/cong-editor-widget3.c:1261
 msgid "Typing"
 msgstr "Kucanje"
 
-#: src/cong-editor-widget3.c:1221
+#: src/cong-editor-widget3.c:1162
 msgid "Cursor Movement"
 msgstr "Kretanje kurzora"
 
-#: src/cong-editor-widget3.c:1261 src/cong-editor-widget3.c:1274
+#: src/cong-editor-widget3.c:1202 src/cong-editor-widget3.c:1215
 msgid "Delete Selection"
 msgstr "Obriši izabrano"
 
@@ -1625,53 +1625,57 @@ msgstr "Osobine za <%s>"
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Obezbeđuje prozorče sa osobinama za element <%s>"
 
-#: src/cong-primary-window.c:313 src/cong-primary-window.c:314
+#: src/cong-primary-window.c:314 src/cong-primary-window.c:315
 msgid "Open document"
 msgstr "Otvori dokument"
 
-#: src/cong-primary-window.c:330 src/cong-primary-window.c:331
+#: src/cong-primary-window.c:322 src/cong-primary-window.c:323
+msgid "New document"
+msgstr "Novi dokument"
+
+#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
 msgid "Save document"
 msgstr "Sačuvaj dokument"
 
-#: src/cong-primary-window.c:338 src/cong-primary-window.c:339
+#: src/cong-primary-window.c:349 src/cong-primary-window.c:350
 msgid "Undo"
 msgstr "Opozovi"
 
-#: src/cong-primary-window.c:345 src/cong-primary-window.c:346
+#: src/cong-primary-window.c:356 src/cong-primary-window.c:357
 msgid "Redo"
 msgstr "Ponovi"
 
-#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:178
+#: src/cong-primary-window.c:375 src/cong-primary-window.c:376 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Iseci"
 
-#: src/cong-primary-window.c:371 src/cong-primary-window.c:372
+#: src/cong-primary-window.c:382 src/cong-primary-window.c:383
 msgid "Copy"
 msgstr "Umnoži"
 
-#: src/cong-primary-window.c:378 src/cong-primary-window.c:379
+#: src/cong-primary-window.c:389 src/cong-primary-window.c:390
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Ubaci"
 
-#: src/cong-primary-window.c:510
+#: src/cong-primary-window.c:521
 msgid "Overview"
 msgstr "Kratak pregled"
 
-#: src/cong-primary-window.c:520
+#: src/cong-primary-window.c:531
 msgid "Bookmarks"
 msgstr "Obeleživači"
 
-#: src/cong-primary-window.c:529
+#: src/cong-primary-window.c:540
 msgid "Raw XML"
 msgstr "Čist XML"
 
-#: src/cong-primary-window.c:656 src/cong-primary-window.c:675
+#: src/cong-primary-window.c:667 src/cong-primary-window.c:686
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Dobrodošli u mnogo zakasneli uređivač Konglomerat."
 
-#: src/cong-primary-window.c:755
+#: src/cong-primary-window.c:766
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (izmenjen) — %s"
