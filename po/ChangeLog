@@ -1,6 +1,13 @@
 2004-12-05  Geert Stappers  <stappers@stappers.nl>
 
 	* POTFILES.in:
+	Regenerated, with uss/mkpotfilesin version 1.10,
+	the 'added every C source' algorimte is replaced
+	by "intltool-update" code.
+
+2004-12-05  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
 	src/cong-stylesheet.c was added.
 	Thanks to Marcel Telka.
 
