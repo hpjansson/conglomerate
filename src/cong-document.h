@@ -81,8 +81,9 @@ struct CongDocumentClass
 			    CongNodePtr younger_sibling);
 
 	void (*node_set_parent) (CongDocument *doc, 
-			    CongNodePtr node, 
-			    CongNodePtr adoptive_parent); /* added to end of child list */
+				 CongNodePtr node, 
+				 CongNodePtr adoptive_parent,
+				 gboolean add_to_end);
 
 	void (*node_set_text) (CongDocument *doc, 
 			  CongNodePtr node, 
@@ -346,7 +347,10 @@ gboolean cong_document_is_within_edit(CongDocument *doc);
 void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node);
 void cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
 void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
-void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_document_private_node_set_parent (CongDocument *doc, 
+					    CongNodePtr node, 
+					    CongNodePtr adoptive_parent,
+					    gboolean add_to_end); /* adds to either the end (TRUE) or the start (FALSE) */
 void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
 void cong_document_private_tag_remove(CongDocument *doc, CongNodePtr x);
 void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node,  xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);

@@ -306,6 +306,9 @@ CongNodePtr
 cong_node_new_text_len (const gchar *text, 
 			int len, 
 			CongDocument *doc); /* FIXME: what character type ? */
+CongNodePtr
+cong_node_new_comment (const gchar *comment, 
+		       CongDocument *doc);
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void 
@@ -368,7 +371,7 @@ cong_node_is_descendant_of (CongNodePtr node,
 void cong_node_private_make_orphan(CongNodePtr node);
 void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling);
 void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling);
-void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
 void cong_node_private_set_attribute(CongNodePtr node,
 				     xmlNs *ns_ptr, 

@@ -73,7 +73,7 @@ struct CongViewClass
 	void (*on_document_node_make_orphan)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 	void (*on_document_node_add_after)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 	void (*on_document_node_add_before)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
-	void (*on_document_node_set_parent)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+	void (*on_document_node_set_parent)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 	void (*on_document_node_set_text)(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 	void (*on_document_node_set_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
 	void (*on_document_node_remove_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
@@ -118,6 +118,7 @@ struct CongDocumentEvent
 		struct set_parent {
 			CongNodePtr node;
 			CongNodePtr adoptive_parent;
+			gboolean add_to_end;
 		} set_parent;
 		struct set_text {
 			CongNodePtr node;

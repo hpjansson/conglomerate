@@ -42,7 +42,7 @@ static void
 cong_document_handle_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
 
 static void
-cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent);
+cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 
 static void
 cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
@@ -219,9 +219,9 @@ cong_document_class_init (CongDocumentClass *klass)
 						 G_SIGNAL_RUN_LAST,
 						 G_STRUCT_OFFSET(CongDocumentClass, node_set_parent),
 						 NULL, NULL,
-						 cong_cclosure_marshal_VOID__POINTER_POINTER,
+						 cong_cclosure_marshal_VOID__POINTER_POINTER_BOOLEAN,
 						 G_TYPE_NONE, 
-						 2, G_TYPE_POINTER, G_TYPE_POINTER);
+						 3, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_BOOLEAN);
 	
 	signals[NODE_SET_TEXT] = g_signal_new ("node_set_text",
 					       CONG_DOCUMENT_TYPE,
@@ -360,7 +360,6 @@ cong_document_construct (CongDocument *doc,
 
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (xml_doc, NULL);
-	g_return_val_if_fail (ds, NULL);
 
 	PRIVATE(doc)->xml_doc = xml_doc;
 	PRIVATE(doc)->ds = ds;
@@ -1257,11 +1256,15 @@ cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongN
  * @doc:
  * @node:
  * @adoptive_parent:
+ * @add_to_end:  if TRUE, add the node to the end of the parent's list; if FALSE add to the start
  *
  * TODO: Write me
  */
 void 
-cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+cong_document_private_node_set_parent (CongDocument *doc, 
+				       CongNodePtr node, 
+				       CongNodePtr adoptive_parent,
+				       gboolean add_to_end)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1276,7 +1279,8 @@ cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongN
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_SET_PARENT], 0,
 		       node,
-		       adoptive_parent);
+		       adoptive_parent,
+		       add_to_end);
 }
 
 /**
@@ -2300,7 +2304,7 @@ cong_document_handle_node_add_before(CongDocument *doc, CongNodePtr node, CongNo
 }
 
 static void
-cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end)
 {
 	GList *iter;
 
@@ -2317,13 +2321,13 @@ cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNo
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_set_parent) {
-			view->klass->on_document_node_set_parent(view, TRUE, node, adoptive_parent);
+			view->klass->on_document_node_set_parent(view, TRUE, node, adoptive_parent, add_to_end);
 		}
 	}
 
 	/* Make the change: */
 	PRIVATE(doc)->num_nodes_valid = FALSE;
-	cong_node_private_set_parent(node, adoptive_parent);
+	cong_node_private_set_parent(node, adoptive_parent, add_to_end);
 
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
@@ -2331,7 +2335,7 @@ cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNo
 		
 		g_assert(view->klass);
 		if (view->klass->on_document_node_set_parent) {
-			view->klass->on_document_node_set_parent(view, FALSE, node, adoptive_parent);
+			view->klass->on_document_node_set_parent(view, FALSE, node, adoptive_parent, add_to_end);
 		}
 	}
 

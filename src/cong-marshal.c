@@ -125,7 +125,46 @@ cong_cclosure_marshal_VOID__POINTER_POINTER (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,STRING (cong.marshal:12) */
+/* VOID:POINTER,POINTER,BOOLEAN (cong.marshal:12) */
+void
+cong_cclosure_marshal_VOID__POINTER_POINTER_BOOLEAN (GClosure     *closure,
+                                                     GValue       *return_value,
+                                                     guint         n_param_values,
+                                                     const GValue *param_values,
+                                                     gpointer      invocation_hint,
+                                                     gpointer      marshal_data)
+{
+  typedef void (*GMarshalFunc_VOID__POINTER_POINTER_BOOLEAN) (gpointer     data1,
+                                                              gpointer     arg_1,
+                                                              gpointer     arg_2,
+                                                              gboolean     arg_3,
+                                                              gpointer     data2);
+  register GMarshalFunc_VOID__POINTER_POINTER_BOOLEAN callback;
+  register GCClosure *cc = (GCClosure*) closure;
+  register gpointer data1, data2;
+
+  g_return_if_fail (n_param_values == 4);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+  callback = (GMarshalFunc_VOID__POINTER_POINTER_BOOLEAN) (marshal_data ? marshal_data : cc->callback);
+
+  callback (data1,
+            g_marshal_value_peek_pointer (param_values + 1),
+            g_marshal_value_peek_pointer (param_values + 2),
+            g_marshal_value_peek_boolean (param_values + 3),
+            data2);
+}
+
+/* VOID:POINTER,STRING (cong.marshal:15) */
 void
 cong_cclosure_marshal_VOID__POINTER_STRING (GClosure     *closure,
                                             GValue       *return_value,
@@ -162,7 +201,7 @@ cong_cclosure_marshal_VOID__POINTER_STRING (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,POINTER,STRING (cong.marshal:15) */
+/* VOID:POINTER,POINTER,STRING (cong.marshal:18) */
 void
 cong_cclosure_marshal_VOID__POINTER_POINTER_STRING (GClosure     *closure,
                                                     GValue       *return_value,
@@ -201,7 +240,7 @@ cong_cclosure_marshal_VOID__POINTER_POINTER_STRING (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,POINTER,STRING,STRING (cong.marshal:18) */
+/* VOID:POINTER,POINTER,STRING,STRING (cong.marshal:21) */
 void
 cong_cclosure_marshal_VOID__POINTER_POINTER_STRING_STRING (GClosure     *closure,
                                                            GValue       *return_value,
@@ -242,7 +281,7 @@ cong_cclosure_marshal_VOID__POINTER_POINTER_STRING_STRING (GClosure     *closure
             data2);
 }
 
-/* VOID:STRING,STRING,STRING (cong.marshal:20) */
+/* VOID:STRING,STRING,STRING (cong.marshal:23) */
 void
 cong_cclosure_marshal_VOID__STRING_STRING_STRING (GClosure     *closure,
                                                   GValue       *return_value,

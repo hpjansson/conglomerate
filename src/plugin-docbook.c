@@ -765,11 +765,13 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					if (current_sect) {
 						cong_document_private_node_set_parent (doc, 
 									       current_list,
-									       current_sect);
+									       current_sect,
+										       TRUE);
 					} else {
 						cong_document_private_node_set_parent (doc, 
 									       current_list, 
-									       root_node);
+									       root_node,
+										       TRUE);
 					}
 				}
 
@@ -779,15 +781,18 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					
 				cong_document_private_node_set_parent (doc, 
 							       listitem,
-							       current_list);
+							       current_list,
+								       TRUE);
 
 				cong_document_private_node_set_parent (doc, 							       
-							       para,
-							       listitem);
+								       para,
+								       listitem,
+								       TRUE);
 
 				cong_document_private_node_set_parent (doc,
 							       text_node,
- 							       para);
+ 							       para,
+								       TRUE);
 			} else {
 				CongNodePtr text_node;
 
@@ -816,15 +821,18 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					
 					cong_document_private_node_set_parent (doc, 
 								       current_sect, 
-								       root_node);
+								       root_node,
+									       TRUE);
 					
 					cong_document_private_node_set_parent (doc, 
 								       title,
-								       current_sect);
+								       current_sect,
+									       TRUE);
 					
 					cong_document_private_node_set_parent (doc, 							       
 								       text_node,
-								       title);
+								       title,
+									       TRUE);
 				} else {
 					/* FIXME: spot text of the form: "fubar: more text"; turn it into a <formalpara> tag instead */
 					CongNodePtr para_node;
@@ -835,15 +843,18 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					if (current_sect) {
 						cong_document_private_node_set_parent (doc, 
 									       para_node, 
-									       current_sect);
+									       current_sect,
+										       TRUE);
 					} else {
 						cong_document_private_node_set_parent (doc, 
 									       para_node, 
-									       root_node);
+									       root_node,
+										       TRUE);
 					}
 					cong_document_private_node_set_parent (doc, 
 								       text_node, 
-								       para_node);
+								       para_node,
+									       TRUE);
 				}
 			}
 		}

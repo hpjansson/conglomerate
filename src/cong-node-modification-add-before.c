@@ -208,7 +208,8 @@ undo (CongModification *modification)
 		} else {
 			cong_document_private_node_set_parent (doc, 
 							       node, 
-							       PRIVATE(node_modification_add_before)->former_parent);
+							       PRIVATE(node_modification_add_before)->former_parent,
+							       TRUE);
 		}
 	} else {
 		cong_document_private_node_make_orphan (doc, 
@@ -240,7 +241,8 @@ redo (CongModification *modification)
 	} else {
 		cong_document_private_node_set_parent (doc, 
 						       node, 
-						       PRIVATE(node_modification_add_before)->new_parent);
+						       PRIVATE(node_modification_add_before)->new_parent,
+						       TRUE);
 	}
 
 	cong_document_end_edit (doc);

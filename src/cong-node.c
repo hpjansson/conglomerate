@@ -876,6 +876,16 @@ cong_node_new_text_len (const char *text,
 	return xmlNewDocTextLen(cong_document_get_xml(doc), text, len); /* FIXME: audit the character types here */
 }
 
+CongNodePtr
+cong_node_new_comment (const gchar *comment, 
+		       CongDocument *doc)
+{
+	g_return_val_if_fail (comment, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	return xmlNewDocComment(cong_document_get_xml(doc), comment);
+}
+
 /* Destruction: (the node has to have been unlinked from the tree already): */
 
 /**
@@ -1427,7 +1437,7 @@ cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
  * TODO: Write me
  */
 void 
-cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
+cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_parent");
 
@@ -1441,14 +1451,26 @@ cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 	cong_node_private_make_orphan(node);
 
 #if 1
-	if (adoptive_parent->last) {
-		cong_node_private_add_after(node, adoptive_parent->last);
+	if (add_to_end) {
+		if (adoptive_parent->last) {
+			cong_node_private_add_after(node, adoptive_parent->last);
+		} else {
+			g_assert(adoptive_parent->children == NULL);
+			
+			adoptive_parent->children = node;
+			adoptive_parent->last = node;
+			node->parent = adoptive_parent;
+		}
 	} else {
-		g_assert(adoptive_parent->children == NULL);
-
-		adoptive_parent->children = node;
-		adoptive_parent->last = node;
-		node->parent = adoptive_parent;
+		if (adoptive_parent->children) {
+			cong_node_private_add_before(node, adoptive_parent->children);
+		} else {
+			g_assert(adoptive_parent->last == NULL);
+			
+			adoptive_parent->children = node;
+			adoptive_parent->last = node;
+			node->parent = adoptive_parent;
+		}
 	}
 
 	update_entities (node);
@@ -1456,8 +1478,13 @@ cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 	/* Postconditions: */
 	{
 		g_assert(node->parent == adoptive_parent);
-		g_assert(adoptive_parent->last == node);
-		g_assert(node->next == NULL);
+		if (add_to_end) {
+			g_assert(adoptive_parent->last == node);
+			g_assert(node->next == NULL);
+		} else {
+			g_assert(adoptive_parent->children == node);
+			g_assert(node->prev == NULL);
+		}
 		CONG_NODE_SELF_TEST(node);
 		CONG_NODE_SELF_TEST(adoptive_parent);
 	}

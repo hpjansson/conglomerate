@@ -186,7 +186,8 @@ undo (CongModification *modification)
 			/* This will add it as the youngest child; hence we had to store the former younger sibling rather than the former older one: */
 			cong_document_private_node_set_parent (doc, 
 							       node, 
-							       PRIVATE(node_modification_make_orphan)->former_parent);
+							       PRIVATE(node_modification_make_orphan)->former_parent,
+							       TRUE);
 		}
 	} else {
 		cong_document_private_node_make_orphan (doc, 

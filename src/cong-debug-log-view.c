@@ -182,7 +182,8 @@ void
 log_set_parent (CongDebugLogViewDetails *details, 
 		gboolean before_event, 
 		CongNodePtr node, 
-		CongNodePtr adoptive_parent) 
+		CongNodePtr adoptive_parent,
+		gboolean add_to_end) 
 { 
 	debug_log_view_details_add_message(details, "Set parent", before_event, "", "");
 }
@@ -302,7 +303,7 @@ log_cursor_change (CongDebugLogViewDetails *details,
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
@@ -358,7 +359,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	log_add_before (details, before_event, node, younger_sibling);
 }
 
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end)
 {
 	CongDebugLogView *debug_log_view;
 	CongDebugLogViewDetails* details;
@@ -371,7 +372,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	details = debug_log_view->private;
 	g_assert(details);
 
-	log_set_parent (details, before_event, node, adoptive_parent);
+	log_set_parent (details, before_event, node, adoptive_parent, add_to_end);
 }
 
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
@@ -604,11 +605,12 @@ static void on_signal_add_before_notify_before (CongDocument *doc,
 static void on_signal_set_parent_notify_before (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr adoptive_parent, 
+						gboolean add_to_end,
 					 gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
 
-	log_set_parent (details, TRUE, node, adoptive_parent);
+	log_set_parent (details, TRUE, node, adoptive_parent, add_to_end);
 }
 
 static void on_signal_set_text_notify_before (CongDocument *doc, 
@@ -710,11 +712,12 @@ static void on_signal_add_before_notify_after (CongDocument *doc,
 static void on_signal_set_parent_notify_after (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr adoptive_parent, 
+					       gboolean add_to_end,
 					 gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
 
-	log_set_parent (details, FALSE, node, adoptive_parent);
+	log_set_parent (details, FALSE, node, adoptive_parent, add_to_end);
 }
 
 static void on_signal_set_text_notify_after (CongDocument *doc, 

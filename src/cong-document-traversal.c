@@ -97,6 +97,7 @@ static void
 on_signal_set_parent_notify_before (CongDocument *doc, 
 				    CongNodePtr node, 
 				    CongNodePtr adoptive_parent, 
+				    gboolean add_to_end,
 				    gpointer user_data);
 
 /* Callbacks attached after the default handler: */
@@ -114,6 +115,7 @@ static void
 on_signal_set_parent_notify_after (CongDocument *doc, 
 				   CongNodePtr node, 
 				   CongNodePtr adoptive_parent, 
+				   gboolean add_to_end,
 				   gpointer user_data);
 
 
@@ -817,6 +819,7 @@ static void
 on_signal_set_parent_notify_before (CongDocument *doc, 
 				    CongNodePtr node, 
 				    CongNodePtr adoptive_parent, 
+				    gboolean add_to_end,				    
 				    gpointer user_data)
 {
 	CongDocumentTraversal *doc_traversal = CONG_DOCUMENT_TRAVERSAL (user_data);
@@ -835,9 +838,9 @@ on_signal_set_parent_notify_before (CongDocument *doc,
 
 /* Callbacks attached after the default handler: */
 static void on_signal_add_after_notify_after (CongDocument *doc, 
-				       CongNodePtr node, 
-				       CongNodePtr older_sibling, 
-				       gpointer user_data)
+					      CongNodePtr node, 
+					      CongNodePtr older_sibling, 
+					      gpointer user_data)
 {
 	CongDocumentTraversal *doc_traversal = CONG_DOCUMENT_TRAVERSAL (user_data);
 	g_assert (node);
@@ -864,9 +867,10 @@ static void on_signal_add_before_notify_after (CongDocument *doc,
 }
 
 static void on_signal_set_parent_notify_after (CongDocument *doc, 
-					CongNodePtr node, 
-					CongNodePtr adoptive_parent, 
-					gpointer user_data)
+					       CongNodePtr node, 
+					       CongNodePtr adoptive_parent, 
+					       gboolean add_to_end,					      
+					       gpointer user_data)
 {	
 	CongDocumentTraversal *doc_traversal = CONG_DOCUMENT_TRAVERSAL (user_data);
 	g_assert (node);
