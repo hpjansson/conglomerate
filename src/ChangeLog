@@ -1,3 +1,9 @@
+2003-10-06  Robert Varga
+
+	* cong-util.c, cong-util.h and main.c
+	Moved cong_vfs_read_bytes, cong_vfs_new_buffer_from_file and
+	cong_vfs_new_buffer_from_uri to make gtk-doc generation possible.
+
 2003-10-05  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-command-history.c, cong-document.c

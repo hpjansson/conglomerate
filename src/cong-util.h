@@ -29,6 +29,12 @@ G_BEGIN_DECLS
 
 /* Handy utility functions: */
 
+GnomeVFSResult
+cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
+
+GnomeVFSResult
+cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
+
 gboolean 
 cong_util_is_docbook (CongDocument *doc);
 
