@@ -103,6 +103,18 @@ cong_new_file_assistant_set_page (CongNewFileAssistant *assistant,
 GtkWindow*
 cong_new_file_assistant_get_toplevel (CongNewFileAssistant *assistant);
 
+/* A way to associate data with a factory for a particular instance of the assistant; 
+   useful for storing custom pages of the GUI for retrieval during the action callback */
+void
+cong_new_file_assistant_set_data_for_factory (CongNewFileAssistant *assistant,
+					      CongServiceDocumentFactory *document_factory,
+					      gpointer factory_data,
+					      void (*free_func) (gpointer factory_data));
+
+gpointer
+cong_new_file_assistant_get_data_for_factory (CongNewFileAssistant *assistant,
+					      CongServiceDocumentFactory *document_factory);
+
 
 G_END_DECLS
 

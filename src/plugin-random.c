@@ -33,6 +33,7 @@
 #include "cong-dispspec-element.h"
 #include "cong-dispspec-registry.h"
 #include "cong-dtd.h"
+#include "cong-eel.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -40,13 +41,8 @@
 #define LOG_RANDOM2(x, a)    (g_message ((x), (a)))
 #define LOG_RANDOM3(x, a, b) (g_message ((x), (a), (b)))
 
-struct RandomCreationInfo
-{
-	CongDispspec *dispspec;
-	gboolean ensure_valid;
-	int depth;
-	GRand *random;
-};
+typedef struct RandomGUI RandomGUI;
+typedef struct RandomCreationInfo RandomCreationInfo;
 
 struct RandomGUI
 {
@@ -57,9 +53,42 @@ struct RandomGUI
 	GtkMenu *dispspec_menu;
 };
 
+struct RandomCreationInfo
+{
+	CongDispspec *dispspec;
+	gboolean ensure_valid;
+	int depth;
+	GRand *random;
+};
+
+/* GUI functions */
+static CongDispspec*
+random_gui_get_selected_dispspec (RandomGUI *random_gui)
+{
+	GtkMenuItem *selected_menu_item;
+
+	g_assert (random_gui);
+	g_assert (random_gui->dispspec_option_menu);
+
+	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (random_gui->dispspec_option_menu);
+	g_assert (selected_menu_item);
+	
+	return (CongDispspec*)g_object_get_data (G_OBJECT (selected_menu_item),
+						 "dispspec");
+}
+
+static gint
+random_gui_get_depth (RandomGUI *random_gui)
+{
+	g_assert (random_gui);
+	g_assert (random_gui->xml);
+	
+	return gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (glade_xml_get_widget (random_gui->xml, "spinbutton_depth")));	
+}
+
 static void
-add_option_for_dispspec (struct RandomGUI *random_gui,
-			 CongDispspec *dispspec)
+random_gui_add_option_for_dispspec (RandomGUI *random_gui,
+				    CongDispspec *dispspec)
 {
 	GtkMenuItem *menu_item;
 
@@ -77,36 +106,51 @@ add_option_for_dispspec (struct RandomGUI *random_gui,
 			   dispspec);
 }
 
+static void
+free_gui (gpointer factory_data)
+{
+	RandomGUI *random_gui;
+
+	g_assert (factory_data);
+
+	random_gui = (RandomGUI*)factory_data;
+
+	g_object_unref (G_OBJECT (random_gui->xml));
+	g_free (random_gui);	
+}
+
 void factory_page_creation_callback_random(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
-	struct RandomGUI random_gui;
+	RandomGUI *random_gui;
 #if 0
 	g_message("factory_page_creation_callback_random");
 #endif
+
+	random_gui = g_new0 (RandomGUI, 1);
 	
-	random_gui.xml = cong_util_load_glade_file ("glade/plugin-random.glade",
-						    "middle_page",
-						    NULL,
-						    NULL);
+	random_gui->xml = cong_util_load_glade_file ("glade/plugin-random.glade",
+						     "middle_page",
+						     NULL,
+						     NULL);
 	
-	random_gui.middle_page = glade_xml_get_widget (random_gui.xml, "middle_page");
+	random_gui->middle_page = glade_xml_get_widget (random_gui->xml, "middle_page");
 	
 	
-	random_gui.page = cong_new_file_assistant_new_page (assistant, 
+	random_gui->page = cong_new_file_assistant_new_page (assistant, 
 							    factory, 
 							    TRUE,
 							    TRUE);	
 
-	gnome_druid_page_standard_append_item (GNOME_DRUID_PAGE_STANDARD(random_gui.page),
+	gnome_druid_page_standard_append_item (GNOME_DRUID_PAGE_STANDARD(random_gui->page),
 					       _("What kind of random XML document would you like to create?"),
-					       random_gui.middle_page,
+					       random_gui->middle_page,
 					       "");
 
-	random_gui.dispspec_option_menu = GTK_OPTION_MENU (glade_xml_get_widget (random_gui.xml, "optionmenu_doctype"));
-	random_gui.dispspec_menu = GTK_MENU (gtk_menu_new());
-	gtk_option_menu_set_menu (random_gui.dispspec_option_menu,
-				  GTK_WIDGET (random_gui.dispspec_menu));
-	gtk_widget_show (GTK_WIDGET (random_gui.dispspec_menu));
+	random_gui->dispspec_option_menu = GTK_OPTION_MENU (glade_xml_get_widget (random_gui->xml, "optionmenu_doctype"));
+	random_gui->dispspec_menu = GTK_MENU (gtk_menu_new());
+	gtk_option_menu_set_menu (random_gui->dispspec_option_menu,
+				  GTK_WIDGET (random_gui->dispspec_menu));
+	gtk_widget_show (GTK_WIDGET (random_gui->dispspec_menu));
 
 	/* Generate the available document types from the dispspecs that are known */
 	{
@@ -116,25 +160,28 @@ void factory_page_creation_callback_random(CongServiceDocumentFactory *factory, 
 		ds_registry = cong_app_get_dispspec_registry (cong_app_singleton ());;
 		
 		for (i=0; i<cong_dispspec_registry_get_num (ds_registry); i++) {			
-			add_option_for_dispspec (&random_gui,
-						 cong_dispspec_registry_get (ds_registry, i));
+			random_gui_add_option_for_dispspec (random_gui,
+							    cong_dispspec_registry_get (ds_registry, i));
 		}
 
-		gtk_option_menu_set_history (random_gui.dispspec_option_menu,
+		gtk_option_menu_set_history (random_gui->dispspec_option_menu,
 					     0);
 	}
 
-	/* FIXME: this will leak various things stored in random_gui */
+	cong_new_file_assistant_set_data_for_factory (assistant,
+						      factory,
+						      random_gui,
+						      free_gui);
 }
 
 static void
-populate_element (struct RandomCreationInfo *rci,
+populate_element (RandomCreationInfo *rci,
 		  xmlDocPtr xml_doc,
 		  xmlNodePtr xml_node,
 		  int depth);
 
 gboolean
-generate_bool_for_opt (struct RandomCreationInfo *rci)
+generate_bool_for_opt (RandomCreationInfo *rci)
 {
 	g_assert (rci);
 
@@ -142,7 +189,7 @@ generate_bool_for_opt (struct RandomCreationInfo *rci)
 }
 
 gint
-generate_count_for_mult (struct RandomCreationInfo *rci)
+generate_count_for_mult (RandomCreationInfo *rci)
 {
 	g_assert (rci);
 
@@ -152,7 +199,7 @@ generate_count_for_mult (struct RandomCreationInfo *rci)
 }
 
 gint
-generate_count_for_plus (struct RandomCreationInfo *rci)
+generate_count_for_plus (RandomCreationInfo *rci)
 {
 	g_assert (rci);
 
@@ -162,7 +209,7 @@ generate_count_for_plus (struct RandomCreationInfo *rci)
 }
 
 gint
-generate_count_for_ocur (struct RandomCreationInfo *rci,
+generate_count_for_ocur (RandomCreationInfo *rci,
 			 xmlElementContentOccur ocur)
 {
 	g_assert (rci);
@@ -208,8 +255,82 @@ cong_dtd_generate_source_for_content (xmlElementContentPtr content)
 }
 #endif
 
+gunichar
+random_unichar (RandomCreationInfo *rci)
+{
+	/* FIXME: probably should have a smarter system... */
+	gunichar result;
+
+	/* Have a high chance of spaces, to create word-breaking opportunities: */
+	if (0==g_rand_int_range (rci->random, 0, 10)) {
+		return ' ';
+	}
+	
+	while (1) {
+		result = g_rand_int_range (rci->random, 1, 65535);
+
+		if (g_unichar_isdefined (result)) {
+			if (!g_unichar_iscntrl (result)) {
+
+#define UNICODE_VALID(Char)                   \
+    ((Char) < 0x110000 &&                     \
+     (((Char) & 0xFFFFF800) != 0xD800) &&     \
+     ((Char) < 0xFDD0 || (Char) > 0xFDEF) &&  \
+     ((Char) & 0xFFFE) != 0xFFFE)
+
+				if (UNICODE_VALID (result)) {
+					return result;
+				}
+			}
+		}
+	}
+}
+
+gchar*
+random_text (RandomCreationInfo *rci)
+{
+	/* FIXME: should we translate the various strings in this function? */
+	switch (g_rand_int_range (rci->random, 0, 3)) {
+	default: g_assert_not_reached ();
+	case 0:
+		return g_strdup ("the quick brown fox jumps over the lazy dog");
+
+	case 1:
+		return g_strdup ("lore ipsum");
+
+	case 2:
+		/* Generate an entirely random unicode string: */
+		{
+			#define MAX_LENGTH (50)
+			gint count = g_rand_int_range (rci->random, 1, MAX_LENGTH);
+			gint i;
+			gunichar tmp_str[MAX_LENGTH+1];
+			gchar *utf8_text;
+
+			for (i=0;i<count;i++) {
+				tmp_str[i]= random_unichar (rci);
+			}
+			tmp_str[i]=0;
+
+			utf8_text = g_ucs4_to_utf8 (tmp_str,
+						    count,
+						    NULL,
+						    NULL,
+						    NULL);
+
+			if (g_utf8_validate (utf8_text, -1, NULL)) {
+				return utf8_text;
+			} else {
+				g_free (utf8_text);
+				return g_strdup ("fubar");
+			}
+
+		}
+	}
+}
+
 static void
-populate_element_from_content (struct RandomCreationInfo *rci,
+populate_element_from_content (RandomCreationInfo *rci,
 			       xmlDocPtr xml_doc,
 			       xmlNodePtr xml_node,
 			       int depth,
@@ -234,8 +355,11 @@ populate_element_from_content (struct RandomCreationInfo *rci,
 		default: g_assert_not_reached ();
 		case XML_ELEMENT_CONTENT_PCDATA:
 			{
+				gchar *text = random_text (rci);
 				xmlNodePtr child_node = xmlNewDocText (xml_doc,
-								       "the quick brown fox jumps over the lazy dog");
+								       text);
+				g_free (text);
+
 				xmlAddChild (xml_node, 
 					     child_node);
 			}
@@ -288,7 +412,7 @@ populate_element_from_content (struct RandomCreationInfo *rci,
 }
 
 static void
-populate_element_from_dtd (struct RandomCreationInfo *rci,
+populate_element_from_dtd (RandomCreationInfo *rci,
 			   xmlDocPtr xml_doc,
 			   xmlNodePtr xml_node,
 			   int depth,
@@ -330,7 +454,7 @@ populate_element_from_dtd (struct RandomCreationInfo *rci,
 }
 
 static void
-populate_element (struct RandomCreationInfo *rci,
+populate_element (RandomCreationInfo *rci,
 		  xmlDocPtr xml_doc,
 		  xmlNodePtr xml_node,
 		  int depth)
@@ -381,7 +505,7 @@ populate_element (struct RandomCreationInfo *rci,
 }
 
 static xmlDocPtr
-make_random_doc (struct RandomCreationInfo *rci)
+make_random_doc (RandomCreationInfo *rci)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -426,11 +550,21 @@ make_random_doc (struct RandomCreationInfo *rci)
 
 void factory_action_callback_random(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
-	struct RandomCreationInfo rci;
+	RandomCreationInfo rci;
 	xmlDocPtr xml_doc;
+	RandomGUI *gui;
 
+	gui = (RandomGUI*)cong_new_file_assistant_get_data_for_factory (assistant,
+									factory);
+	g_assert (gui);
+
+#if 1
+	rci.dispspec = random_gui_get_selected_dispspec (gui);
+	rci.depth = random_gui_get_depth (gui);
+#else
 	rci.dispspec = cong_dispspec_registry_get (cong_app_get_dispspec_registry (cong_app_singleton ()), 1); /* FIXME */
 	rci.depth = 10; /* FIXME */
+#endif
 	rci.random = g_rand_new ();
 
 	xml_doc = make_random_doc (&rci);

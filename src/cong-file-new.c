@@ -31,8 +31,18 @@
 #include "cong-service-document-factory.h"
 #include "cong-app.h"
 
+#include "cong-primary-window.h"
+
 #define DEBUG_FILE_NEW_ASSISTANT 1
 
+typedef struct PerFactoryData PerFactoryData;
+
+/* Data stored per-factory by each assistant */
+struct PerFactoryData
+{
+	gpointer data;
+	void (*free_func) (gpointer data);
+};
 
 enum
 {
@@ -60,6 +70,7 @@ struct CongNewFileAssistant
 
 	/* Mapping from factories to pages; the "first" page for each factory, actually the third page within the druid */
 	GHashTable *hash_table_of_factory_to_page;
+	GHashTable *hash_table_of_factory_to_data;
 };
 
 static void
@@ -168,6 +179,51 @@ GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 	return GTK_WINDOW(assistant->window);
 }
 
+void
+cong_new_file_assistant_set_data_for_factory (CongNewFileAssistant *assistant,
+					      CongServiceDocumentFactory *document_factory,
+					      gpointer factory_data,
+					      void (*free_func) (gpointer factory_data))
+{
+	PerFactoryData *per_factory_data;
+
+	g_return_if_fail (assistant);
+	g_return_if_fail (IS_CONG_SERVICE_DOCUMENT_FACTORY (document_factory));
+
+
+	/* Add space for the per-factory data: */
+	per_factory_data = g_hash_table_lookup (assistant->hash_table_of_factory_to_data, 
+						document_factory);
+	g_assert (per_factory_data);
+
+	/* Free existing data if necessary: */
+	if (per_factory_data->data) {
+		if (per_factory_data->free_func) {
+			(per_factory_data->free_func) (per_factory_data->data);
+		}
+	}
+
+	per_factory_data->data = factory_data;
+	per_factory_data->free_func = free_func;
+}
+
+gpointer
+cong_new_file_assistant_get_data_for_factory (CongNewFileAssistant *assistant,
+					      CongServiceDocumentFactory *document_factory)
+{
+	PerFactoryData *per_factory_data;
+
+	g_return_val_if_fail (assistant, NULL);
+	g_return_val_if_fail (IS_CONG_SERVICE_DOCUMENT_FACTORY (document_factory), NULL);
+
+	per_factory_data = g_hash_table_lookup (assistant->hash_table_of_factory_to_data, 
+						document_factory);
+	g_assert (per_factory_data);
+
+	return per_factory_data->data;
+}
+
+/* Internal functions: */
 static void add_factory_callback(CongServiceDocumentFactory *factory, gpointer user_data)
 {	
 	CongNewFileAssistant *assistant = user_data;
@@ -383,10 +439,23 @@ gboolean final_page_finish(GnomeDruidPage *druidpage,
 	return TRUE;
 }
 
-static void add_pages_for_factory_callback(CongServiceDocumentFactory *factory, gpointer user_data)
+static void
+add_pages_for_factory_callback (CongServiceDocumentFactory *factory, 
+				gpointer user_data)
 {
 	CongNewFileAssistant *assistant = user_data;
+	PerFactoryData *per_factory_data; 
 
+
+	/* Add space for the per-factory data: */
+	per_factory_data = g_new0 (PerFactoryData, 1);
+
+	g_hash_table_insert (assistant->hash_table_of_factory_to_data, 
+			     factory, 
+			     per_factory_data);
+	/* FIXME: we currently don't clean this up, or call the free func */
+
+	/* Invoke the callback to create pages: */
 	cong_document_factory_invoke_page_creation_callback(factory, assistant);
 }
 
@@ -445,6 +514,8 @@ void new_document(GtkWindow *parent_window)
 	   at the creation of the druid, rather than "on-demand".
 	 */
 	assistant->hash_table_of_factory_to_page = g_hash_table_new(g_direct_hash, g_direct_equal);
+	assistant->hash_table_of_factory_to_data = g_hash_table_new (g_direct_hash, 
+								     g_direct_equal);
 	cong_plugin_manager_for_each_document_factory (cong_app_get_plugin_manager (cong_app_singleton()), 
 						       add_pages_for_factory_callback, 
 						       assistant);
