@@ -234,23 +234,149 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 									      primary_window);
 }
 
-void unimplemented_menu_item(GtkWidget *widget, gpointer data)
+/* Handy routines for implementing menu callbacks: */
+void unimplemented_menu_item(gpointer callback_data,
+			     guint callback_action,
+			     GtkWidget *widget)
 {
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
 }
 
+static void dispatch_span_editor_command(void (*span_editor_command)(CongSpanEditor *span_editor), gpointer callback_data)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongCursor *cursor;
+
+	g_assert(span_editor_command);
+	g_assert(primary_window);
+
+	g_return_if_fail(primary_window->doc);
+
+	cursor = cong_document_get_cursor(primary_window->doc);
+
+	g_assert(cursor);
+
+	(*span_editor_command)(cursor->xed);	
+}
+
+static void dispatch_span_editor_command2(void (*span_editor_command)(CongSpanEditor *span_editor, GtkWidget *widget), gpointer callback_data, GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongCursor *cursor;
+
+	g_assert(span_editor_command);
+	g_assert(primary_window);
+
+	g_return_if_fail(primary_window->doc);
+
+	cursor = cong_document_get_cursor(primary_window->doc);
+
+	g_assert(cursor);
+
+	(*span_editor_command)(cursor->xed, widget);	
+}
+
+/* Callbacks for "File" menu: */
+static void menu_callback_file_new(gpointer callback_data,
+				   guint callback_action,
+				   GtkWidget *widget)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+static void menu_callback_file_save(gpointer callback_data,
+				    guint callback_action,
+				    GtkWidget *widget)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+static void menu_callback_file_save_as(gpointer callback_data,
+				       guint callback_action,
+				       GtkWidget *widget)
+{
+	/* this has been implemented; need to figure out the exact wiring */
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+static void menu_callback_file_save_copy(gpointer callback_data,
+					 guint callback_action,
+					 GtkWidget *widget)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+static void menu_callback_file_revert(gpointer callback_data,
+				      guint callback_action,
+				      GtkWidget *widget)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+static void menu_callback_file_properties(gpointer callback_data,
+					  guint callback_action,
+					  GtkWidget *widget)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+/* Callbacks for "Edit" menu: */
+static void menu_callback_cut(gpointer callback_data,
+			      guint callback_action,
+			      GtkWidget *widget)
+{
+	dispatch_span_editor_command(cong_span_editor_cut, callback_data);
+}
+
+static void menu_callback_copy(gpointer callback_data,
+			       guint callback_action,
+			       GtkWidget *widget)
+{
+	dispatch_span_editor_command(cong_span_editor_copy, callback_data);
+}
+
+static void menu_callback_paste(gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	dispatch_span_editor_command2(cong_span_editor_paste, callback_data, widget);
+}
+
+/* Callbacks for "Help" menu: */
+static void menu_callback_about(gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
+	const gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
+
+	GtkWidget *about = gnome_about_new("Conglomerate",
+					   NULL, /* const gchar *version, */
+					   "(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm",
+					   "Conglomerate will be a user-friendly XML editor for GNOME",
+					   authors,
+					   NULL, /*  const gchar **documenters, */
+					   NULL, /*  const gchar *translator_credits, */
+					   logo_pixbuf);
+	gdk_pixbuf_unref(logo_pixbuf);
+
+	gtk_dialog_run(GTK_DIALOG(about));
+
+}
+
+/* The menus: */
 static GtkItemFactoryEntry menu_items[] =
 {
 	{ "/_File",             NULL, NULL, 0, "<Branch>" },
-	{ "/File/_New...",       NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_NEW },
+	{ "/File/_New...",       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
 	{ "/File/_Open...",      NULL, open_document_wrap, 0, "<StockItem>", GTK_STOCK_OPEN },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/_Save",           "<control>S", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_SAVE },
+	{ "/File/_Save",           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
 	{ "/File/Save _As...",     NULL, save_document_wrap, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
-	{ "/File/Sa_ve a Copy...", "<shift><control>S", unimplemented_menu_item, 0, "<Item>" },
-	{ "/File/_Revert",         NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
+	{ "/File/Sa_ve a Copy...", "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+	{ "/File/_Revert",         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/Proper_ties",     NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ "/File/Proper_ties",     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
 	{ "/File/_Close",         "<control>W", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_CLOSE },
 	{ "/File/_Quit",         "<control>Q", gtk_main_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
@@ -259,9 +385,9 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Edit/_Undo",              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
 	{ "/Edit/_Redo",              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
 	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
-	{ "/Edit/Cu_t",              "<control>X", xed_cut_wrap, 0, "<StockItem>", GTK_STOCK_CUT },
-	{ "/Edit/_Copy",             "<control>C", xed_copy_wrap, 0, "<StockItem>", GTK_STOCK_COPY },
-	{ "/Edit/_Paste",            "<control>V", xed_paste_wrap, 0, "<StockItem>", GTK_STOCK_PASTE },
+	{ "/Edit/Cu_t",              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
+	{ "/Edit/_Copy",             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
+	{ "/Edit/_Paste",            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
 	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
 	{ "/Edit/_Find...",         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
 	{ "/Edit/Find Ne_xt",       "<control>G", unimplemented_menu_item, 0, "<Item>" },
@@ -278,7 +404,7 @@ static GtkItemFactoryEntry menu_items[] =
 
 	{ "/_Help",        NULL, NULL, 0, "<Branch>" },
 	{ "/Help/_Contents", "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
-	{ "/Help/_About",    NULL, unimplemented_menu_item, 0, "<Item>" }
+	{ "/Help/_About",    NULL, menu_callback_about, 0, "<Item>" }
 
 };
 
@@ -348,7 +474,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	primary_window->accel = gtk_accel_group_new();
 	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", primary_window->accel);
 	gtk_item_factory_create_items(item_factory, sizeof(menu_items) / sizeof(menu_items[0]),
-																menu_items, NULL);
+				      menu_items, primary_window);
 	gtk_window_add_accel_group(GTK_WINDOW(primary_window->window), primary_window->accel);
 
 	primary_window->menus = gtk_item_factory_get_widget(item_factory, "<main>");

@@ -173,19 +173,22 @@ void popup_build(CongSpanEditor *xed)
 	
 	/* Fixed editing tools */
 
-	item = gtk_menu_item_new_with_label("Cut");
+	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_CUT,
+						  NULL); 
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(xed_cut), xed);
 	gtk_widget_show(item);
 
-	item = gtk_menu_item_new_with_label("Copy");
+	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY,
+						  NULL); 
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(xed_copy), xed);
 	gtk_widget_show(item);
 	
-	item = gtk_menu_item_new_with_label("Paste");
+	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE,
+						  NULL);
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(xed_paste), xed);

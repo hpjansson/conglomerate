@@ -2190,7 +2190,13 @@ void xed_cutcopy_update(CongCursor *curs)
 	}
 }
 
-gint xed_cut(GtkWidget *widget, CongSpanEditor *xed_disabled)
+gint xed_cut(GtkWidget *widget, CongSpanEditor *xed)
+{
+	cong_span_editor_cut(xed);
+	return TRUE;
+}
+
+void cong_span_editor_cut(CongSpanEditor *span_editor)
 {
 	CongNodePtr t;
 	int replace_xed = 0;
@@ -2199,19 +2205,19 @@ gint xed_cut(GtkWidget *widget, CongSpanEditor *xed_disabled)
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(xed_disabled);
-	doc = xed_disabled->doc;
+	g_assert(span_editor);
+	doc = span_editor->doc;
 	g_assert(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
 
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
-				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
+				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return;
 
-	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
+	if (cong_location_equals(&selection->loc0, &selection->loc1)) return;
 	
 	if (the_globals.clipboard) cong_node_recursive_delete(NULL, the_globals.clipboard);
 	
@@ -2237,12 +2243,16 @@ gint xed_cut(GtkWidget *widget, CongSpanEditor *xed_disabled)
 	selection_cursor_unset(doc);
 
 	xed_cutcopy_update(curs);
-
-	return(TRUE);
 }
 
 
-gint xed_copy(GtkWidget *widget, CongSpanEditor *xed_disabled)
+gint xed_copy(GtkWidget *widget, CongSpanEditor *xed)
+{
+	cong_span_editor_copy(xed);
+	return TRUE;
+}
+
+void cong_span_editor_copy(CongSpanEditor *span_editor)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2253,20 +2263,20 @@ gint xed_copy(GtkWidget *widget, CongSpanEditor *xed_disabled)
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(xed_disabled);
-	doc = xed_disabled->doc;
+	g_assert(span_editor);
+	doc = span_editor->doc;
 	g_assert(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
 
 	
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
-				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
+				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return;
 
-	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
+	if (cong_location_equals(&selection->loc0, &selection->loc1)) return;
 
 	/* GREP FOR MVC */
 
@@ -2303,11 +2313,16 @@ gint xed_copy(GtkWidget *widget, CongSpanEditor *xed_disabled)
 
 	xed_cutcopy_update(curs);
 
-	return(TRUE);
 }
 
 
-gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
+gint xed_paste(GtkWidget *widget, CongSpanEditor *xed)
+{
+	cong_span_editor_paste(xed, widget);
+	return TRUE;
+}
+
+void cong_span_editor_paste(CongSpanEditor *span_editor, GtkWidget *widget)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2320,14 +2335,14 @@ gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(xed_disabled);
-	doc = xed_disabled->doc;
+	g_assert(span_editor);
+	doc = span_editor->doc;
 	g_assert(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
 
 	ds = curs->xed->displayspec;
 
@@ -2336,12 +2351,12 @@ gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
 	if (!the_globals.clipboard)
 	{
 		cong_selection_import(selection, widget);
-		return(TRUE);
+		return;
 	}
 
-	if (!the_globals.clipboard->children) return(TRUE);
+	if (!the_globals.clipboard->children) return;
 	
-	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return;
 	
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
 	{
@@ -2374,7 +2389,7 @@ gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
 
 	t = cong_node_first_child(clip);
 
-	if (!t) return(TRUE);
+	if (!t) return;
 	
 	for (; t; t = t_next) {
 		t_next = t->next;
@@ -2386,7 +2401,6 @@ gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
 
 	xed_redraw(curs->xed);
 
-	return(TRUE);
 }
 
 
