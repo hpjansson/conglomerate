@@ -20,6 +20,7 @@ dispspec_DATA 	 = \
 	website-webpage.xds \
 	xsl.xds
 
+dtddir 	 = $(datadir)/conglomerate/dtd
 dtd_DATA	= xds.dtd
 
 EXTRA_DIST = $(example_DATA)	\

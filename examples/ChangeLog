@@ -1,3 +1,9 @@
+2003-09-03  David Malcolm
+
+	* Makefile.am
+
+	Fixed the dtd stuff by supplying an install path
+
 2003-09-02  Geert Stappers
 
 	* Makefile.am
