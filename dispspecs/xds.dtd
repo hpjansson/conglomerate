@@ -93,6 +93,7 @@
    %element.att;
    type                ( plugin | embed-external-file | span | structural )              #REQUIRED
    service-id           NMTOKEN                                                          #IMPLIED
+   spellcheck                ( yes | no ) #IMPLIED
 >
 
 <!-- ===================================================================== -->
