@@ -279,6 +279,7 @@ cong_app_new (int   argc,
 							  GNOME_PARAM_HUMAN_READABLE_NAME,
 							  _("XML Editor"),
 							  GNOME_PARAM_APP_DATADIR, PKGDATADIR,
+							  /* GSt: bugzilla # 128544 reminder */
 							  NULL);
 
 	/* Set up usage of GConf: */
