@@ -1,4 +1,43 @@
 creating ChangeLog
+2002-08-08  David Malcolm
+
+	* dispspec.c, new_doc.c:
+
+	Ported usage of GTK_WINDOW_DIALOG to GTK_WINDOW_TOPLEVEL for GTK 2
+
+	* dispspec.c:
+
+	Added some debug logging
+
+	* main.c:
+
+	Ported toolbar and accelerator code to GTK 2
+
+	* open.c:
+
+	Added some simple error reporting.
+
+	* tchoice.c:
+
+	Hacked away innards; does not compile under GTK2 but appears to be unused
+
+	* xmledit.c:
+
+	Removed call to gtk_signal_handlers_destroy
+
+	* xmlview.c:
+
+	Added define of GTK_ENABLE_BROKEN to support legacy GtkTree code
+	
+	* Makefile:
+
+	Changed from gtk-config to pkg-config
+	
+	* README:
+
+	Updated build instructions and changed various URLs from styx.net to copyleft.no
+
+	
 2000-01-08  Hans Petter Jansson  
 
 	* cursor.c, position.c:
