@@ -390,11 +390,11 @@ static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data
 {
 	const CongXMLChar* dtd_public_id = cong_document_get_dtd_public_identifier(doc);
 	
-	g_message(dtd_public_id);
-	
 	if (NULL==dtd_public_id) {
 		return FALSE;
 	}
+
+	g_message(dtd_public_id);
 
 	/* Only relevant for Doctype with public ID = "" */
 	if (0==strcmp(dtd_public_id,"-//Norman Walsh//DTD Website Layout V2.4.0//EN")) {

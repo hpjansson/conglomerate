@@ -1,3 +1,10 @@
+2003-07-02 Wastl <wastl@wastl.net>
+
+	* plugin-website.c
+
+	Putting a g_message below the if.
+	See http://bugzilla.gnome.org/show_bug.cgi?id=116017 for details
+
 2003-06-29 Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* cong-menus.c
