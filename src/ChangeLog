@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-11-20 David Malcolm
 
+	* cong-plugin.c, plugin-docbook.c
+
+	Moved common UI stuff
+	
 	* global.h
 
 	CongEditorWidget support

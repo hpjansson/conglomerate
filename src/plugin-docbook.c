@@ -26,88 +26,6 @@
 
 #include "global.h"
 
-void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc)
-{
-	CongDocument *cong_doc;
-	CongDispspec *ds;
-	
-	g_return_if_fail(xml_doc);
-
-	ds = get_appropriate_dispspec(xml_doc);
-
-	if (ds == NULL) {
-		GtkDialog* dialog;
-		gchar *what_failed;
-		gchar *why_failed;
-		gchar *suggestions;
-		
-		what_failed = g_strdup_printf("Conglomerate could not create the file");
-		why_failed = g_strdup_printf("Conglomerate could not find display information for the new file");
-		suggestions = g_strdup_printf("There may a problem with your installation, or a bug in the importer");
-		
-		dialog = cong_error_dialog_new(what_failed,
-					       why_failed,
-					       suggestions);
-		g_free(what_failed);
-		g_free(why_failed);
-		g_free(suggestions);		
-	
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		xmlFreeDoc(xml_doc);
-		return;
-	}
-	
-	g_assert(xml_doc);
-	g_assert(ds);
-
-	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
-
-	cong_primary_window_new(cong_doc);
-}
-
-void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc)
-{
-	CongDocument *cong_doc;
-	CongDispspec *ds;
-	
-	g_return_if_fail(xml_doc);
-
-	ds = get_appropriate_dispspec(xml_doc);
-
-	if (ds == NULL) {
-		GtkDialog* dialog;
-		gchar *what_failed;
-		gchar *why_failed;
-		gchar *suggestions;
-		
-		what_failed = g_strdup_printf("Conglomerate could not import the file");
-		why_failed = g_strdup_printf("Conglomerate could not find display information for the new file");
-		suggestions = g_strdup_printf("There may a problem with your installation, or a bug in the importer");
-		
-		dialog = cong_error_dialog_new(what_failed,
-					       why_failed,
-					       suggestions);
-		g_free(what_failed);
-		g_free(why_failed);
-		g_free(suggestions);		
-	
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		xmlFreeDoc(xml_doc);
-		return;
-	}
-	
-	g_assert(xml_doc);
-	g_assert(ds);
-
-	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
-
-	cong_primary_window_new(cong_doc);
-}
-
 #if 0
 struct DocBookAuthorInfo
 {
@@ -267,36 +185,6 @@ void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssist
 	xml_doc = make_set("Untitled Set");
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc);	
-}
-
-/* Handy methods for "Import" methods; doing the necessary UI hooks: */
-gboolean cong_ui_load_imported_file_content(const gchar *uri,
-					    char** buffer,
-					    GnomeVFSFileSize* size)
-{
-	GnomeVFSResult vfs_result;
-
-	g_return_val_if_fail(uri, FALSE);
-	g_return_val_if_fail(buffer, FALSE);
-	g_return_val_if_fail(size, FALSE);
-
-	vfs_result = cong_vfs_new_buffer_from_file(uri, buffer, size);
-	
-	if (vfs_result!=GNOME_VFS_OK) {
-		GnomeVFSURI* file_uri = gnome_vfs_uri_new(uri);
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(file_uri, vfs_result);
-		
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		gnome_vfs_uri_unref(file_uri);
-		
-		return FALSE;
-	}
-	
-	g_assert(*buffer);
-
-	return TRUE;
 }
 
 gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
