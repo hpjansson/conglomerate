@@ -21,6 +21,8 @@ conglomerate_SOURCES =      \
   cong-attribute-wrapper.h   \
   cong-attribute-wrapper-check-button.h \
   cong-attribute-wrapper-radio-button.h \
+  cong-command.h            \
+  cong-command-history.h    \
   cong-dialog.h             \
   cong-dispspec.h           \
   cong-dispspec-registry.h  \
@@ -93,6 +95,8 @@ conglomerate_SOURCES =      \
   cong-attribute-wrapper.c   \
   cong-attribute-wrapper-check-button.c \
   cong-attribute-wrapper-radio-button.c \
+  cong-command.c            \
+  cong-command-history.c    \
   cong-debug-log-view.c     \
   cong-dialog.c             \
   cong-dispspec.c           \

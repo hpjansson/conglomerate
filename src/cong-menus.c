@@ -35,6 +35,8 @@
 #include "cong-progress-checklist.h"
 #include "cong-app.h"
 #include "cong-util.h"
+#include "cong-command.h"
+#include "cong-command-history.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -59,7 +61,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 0
+#define ENABLE_DEBUG_MENU 1
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
@@ -309,6 +311,20 @@ static void menu_callback_file_quit(gpointer callback_data,
 
 
 /* Callbacks for "Edit" menu: */
+static void menu_callback_undo (gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	dispatch_document_command(cong_document_undo, callback_data);
+}
+
+static void menu_callback_redo (gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	dispatch_document_command(cong_document_redo, callback_data);
+}
+
 static void menu_callback_cut(gpointer callback_data,
 			      guint callback_action,
 			      GtkWidget *widget)
@@ -1143,6 +1159,22 @@ void menu_callback_debug_insert_xml_fragment(gpointer callback_data,
 	g_free(source_fragment);
 }
 
+void menu_callback_debug_command_test (gpointer callback_data,
+				       guint callback_action,
+				       GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	CongCommand* cmd = cong_command_new (doc,
+					     "test command");
+
+	cong_document_add_command (doc,
+				   cmd);
+
+	g_object_unref (G_OBJECT (cmd));
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1230,11 +1262,9 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 	{ N_("/_Edit"),                 NULL, 0, 0, "<Branch>" },
-#if ENABLE_UNIMPLEMENTED_MENUS
-	{ N_("/Edit/_Undo"),              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
-	{ N_("/Edit/_Redo"),              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
+	{ N_("/Edit/_Undo"),              "<control>Z", menu_callback_undo, 0, "<StockItem>", GTK_STOCK_UNDO },
+	{ N_("/Edit/_Redo"),              "<shift><control>Z", menu_callback_redo, 0, "<StockItem>", GTK_STOCK_REDO },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
-#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
 	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
 	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
@@ -1270,6 +1300,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
 	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
 	{ N_("/Debug/Insert XML Fragment"),           NULL, menu_callback_debug_insert_xml_fragment, 0, NULL },	
+	{ N_("/Debug/Command Test"),           NULL, menu_callback_debug_command_test, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },

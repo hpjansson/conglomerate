@@ -9,7 +9,8 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-util.h"
 #include "cong-primary-window.h"
-
+#include "cong-command.h"
+#include "cong-command-history.h"
 #include "cong-marshal.h"
 
 static void
@@ -100,6 +101,8 @@ struct CongDocumentDetails
 
 	gboolean modified; /* has the document been modified since it was last loaded/saved? */
 	GTimeVal time_of_last_save;
+
+	CongCommandHistory *history;
 
 	/* We have an SDI interface, so there should be just one primary window associated with each doc.
 	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
@@ -361,6 +364,8 @@ cong_document_construct (CongDocument *doc,
 
 	cong_util_set_cursor_to_first_text_descendant (doc,
 						       (CongNodePtr)PRIVATE(doc)->xml_doc);
+
+	PRIVATE(doc)->history = cong_command_history_new();
 
 	return doc;
 }
@@ -1573,6 +1578,46 @@ cong_document_get_dtd_element (CongDocument *cong_doc,
 
 	return elemDecl;
 }
+
+CongCommandHistory*
+cong_document_get_command_history (CongDocument *doc)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT(doc), NULL);
+
+	return PRIVATE(doc)->history;
+}
+
+void
+cong_document_add_command (CongDocument *doc,
+			   CongCommand *command)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+	g_return_if_fail (IS_CONG_COMMAND(command));
+
+	cong_command_history_add_command (PRIVATE(doc)->history,
+					  command);
+}
+
+void
+cong_document_undo (CongDocument *doc)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+
+	g_message ("cong_document_redo");
+
+	cong_command_history_undo (PRIVATE(doc)->history);
+}
+
+void
+cong_document_redo (CongDocument *doc)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+
+	g_message ("cong_document_redo");
+
+	cong_command_history_redo (PRIVATE(doc)->history);
+}
+
 
 /* Internal function definitions: */
 static void

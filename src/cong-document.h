@@ -39,6 +39,12 @@ G_BEGIN_DECLS
 typedef struct CongDocumentClass CongDocumentClass;
 typedef struct CongDocumentDetails CongDocumentDetails;
 
+typedef struct CongCommand CongCommand;
+typedef struct CongCommandClass CongCommandClass;
+
+typedef struct CongCommandHistory CongCommandHistory;
+typedef struct CongCommandHistoryClass CongCommandHistoryClass;
+
 struct CongDocument
 {
 	GObject object;
@@ -230,7 +236,21 @@ PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node);
 
+
+CongCommandHistory*
+cong_document_get_command_history (CongDocument *doc);
+
+void
+cong_document_add_command (CongDocument *doc,
+			   CongCommand *command);
+
 /* Various UI hooks: */
+void
+cong_document_undo (CongDocument *doc);
+
+void
+cong_document_redo (CongDocument *doc);
+
 void
 cong_document_cut_selection (CongDocument *doc);
 
