@@ -1,6 +1,14 @@
 2003-08-08  Geert Stappers  <stappers@stappers.nl>
 
       * POTFILES.in:
+      Added src/cong-range.c.
+
+      * conglomerate.pot, es.po, ru.po:
+      Regenerated
+
+2003-08-08  Geert Stappers  <stappers@stappers.nl>
+
+      * POTFILES.in:
       Added src/cong-editor-area-entity-decl.c,
       src/cong-editor-area-entity-ref.c, src/cong-editor-area-line.c,
       src/cong-editor-area-text-comment.c,
