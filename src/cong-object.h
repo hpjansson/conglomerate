@@ -116,10 +116,10 @@ cong_object_debug_for_each_instance (GType type,
 /* Macros for defining GObject subclasses: */
 #define CONG_DEFINE_CLASS_BEGIN(MyClass, my_class, MY_CLASS, BaseClass, BASE_CLASS_TYPE) \
   CONG_DEFINE_CLASS_DECLARE_FUNCTIONS(my_class) \
-  GNOME_CLASS_BOILERPLATE(MyClass, my_class, BaseClass, BASE_CLASS_TYPE) \
+  G_DEFINE_TYPE(MyClass, my_class, BASE_CLASS_TYPE) \
   \
   static void \
-  my_class##_instance_init (MyClass *obj) \
+  my_class##_init (MyClass *obj) \
   { \
     obj->priv = g_new0 (MyClass##Private, 1); \
     CONG_OBJECT_DEBUG_INSTANCE_INIT( G_OBJECT(obj), my_class##_get_type()); \
@@ -132,7 +132,7 @@ cong_object_debug_for_each_instance (GType type,
 	g_assert (my_obj->priv); \
 	g_free (my_obj->priv); \
 	my_obj->priv = NULL; \
-	G_OBJECT_CLASS (parent_class)->finalize (object); \
+	G_OBJECT_CLASS (my_class##_parent_class)->finalize (object); \
   } \
   static void \
   my_class##_class_init (MyClass##Class *klass) \
@@ -145,10 +145,10 @@ cong_object_debug_for_each_instance (GType type,
 
 #define CONG_DEFINE_CLASS_PUBLIC_DATA(MyClass, my_class, MY_CLASS, BaseClass, BASE_CLASS_TYPE, ClassInitCodeFragment) \
   CONG_DEFINE_CLASS_DECLARE_FUNCTIONS(my_class) \
-  GNOME_CLASS_BOILERPLATE(MyClass, my_class, BaseClass, BASE_CLASS_TYPE) \
+  G_DEFINE_TYPE(MyClass, my_class, BASE_CLASS_TYPE) \
 \
   static void \
-  my_class##_instance_init (MyClass *obj) \
+  my_class##_init (MyClass *obj) \
   { \
   CONG_OBJECT_DEBUG_INSTANCE_INIT (G_OBJECT (obj), my_class##_get_type() ); \
   } \
@@ -157,7 +157,7 @@ cong_object_debug_for_each_instance (GType type,
   { \
   	/*MyClass *my_obj = MY_CLASS(object);*/ \
         CONG_OBJECT_DEBUG_FINALIZE (object, my_class##_get_type()); \
-	G_OBJECT_CLASS (parent_class)->finalize (object); \
+	G_OBJECT_CLASS (my_class##_parent_class)->finalize (object); \
   } \
   static void \
   my_class##_class_init (MyClass##Class *klass) \
@@ -167,8 +167,12 @@ cong_object_debug_for_each_instance (GType type,
         ClassInitCodeFragment \
   };
 
+#define CONG_CALL_PARENT(my_class, parent_class_cast, name, args)		\
+	((parent_class_cast(my_class##_parent_class)->name != NULL) ?		\
+	 parent_class_cast(my_class##_parent_class)->name args : (void)0)
+
 #define CONG_DEFINE_EMPTY_DISPOSE(my_class) \
-  static void my_class##_dispose (GObject *object) {GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));}
+  static void my_class##_dispose (GObject *object) {CONG_CALL_PARENT (my_class, G_OBJECT_CLASS, dispose, (object));}
 
 #define CONG_DEFINE_CLASS(MyClass, my_class, MY_CLASS, BaseClass, BASE_CLASS_TYPE) \
   CONG_DEFINE_CLASS_BEGIN(MyClass, my_class, MY_CLASS, BaseClass, BASE_CLASS_TYPE) \
@@ -180,8 +184,8 @@ cong_object_debug_for_each_instance (GType type,
      { \
 	  MyClass *my_object = MY_CLASS (object);
 
-#define CONG_OBJECT_IMPLEMENT_DISPOSE_END() \
-       GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object)); \
+#define CONG_OBJECT_IMPLEMENT_DISPOSE_END(my_class) \
+       CONG_CALL_PARENT (my_class, G_OBJECT_CLASS, dispose, (object)); \
      }
 
 void

@@ -63,8 +63,8 @@ dispose (GObject *object);
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info);
+listitem_create_areas (CongEditorNode *editor_node,
+		       const CongAreaCreationInfo *creation_info);
 #else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
@@ -78,9 +78,9 @@ static void
 on_label_changed (CongEditorNodeElementListitem *listitem,
 		  gpointer user_data);
 
-CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_EDITOR_NODE_DECLARE_HOOKS(listitem)
 CONG_DEFINE_CLASS_BEGIN(CongEditorNodeElementListitem, cong_editor_node_element_listitem, CONG_EDITOR_NODE_ELEMENT_LISTITEM, CongEditorNodeElement, CONG_EDITOR_NODE_ELEMENT_TYPE )
-     CONG_EDITOR_NODE_CONNECT_HOOKS
+     CONG_EDITOR_NODE_CONNECT_HOOKS(listitem)
      signals[LABEL_CHANGED] = g_signal_new ("label_changed",
 					    CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE,
 					    G_SIGNAL_RUN_FIRST,
@@ -93,7 +93,7 @@ CONG_DEFINE_CLASS_END()
 CONG_EDITOR_NODE_IMPLEMENT_NEW(element_listitem)
      /*CONG_EDITOR_NODE_IMPLEMENT_EMPTY_DISPOSE(element_listitem) */
 CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_CREATION_HOOK_SPECIAL(Listitem, listitem, CONG_EDITOR_NODE_ELEMENT_LISTITEM)
-CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+     CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK(listitem)
 
 /* Exported function definitions: */
 
@@ -424,11 +424,11 @@ cong_editor_node_element_listitem_dispose (GObject *object)
 	}
 
 	/* Call the parent method: */		
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+	CONG_CALL_PARENT (cong_editor_node_element_listitem, G_OBJECT_CLASS, dispose, (object));
 }
 
 static CongEditorArea*
-create_block_area (CongEditorNodeElementListitem *editor_node_element_listitem)
+listitem_create_block_area (CongEditorNodeElementListitem *editor_node_element_listitem)
 {
 	CongEditorNode *editor_node = CONG_EDITOR_NODE (editor_node_element_listitem);
 	CongEditorArea *block_area = cong_editor_area_listitem_new (cong_editor_node_get_widget (editor_node),

@@ -60,14 +60,14 @@ CONG_EDITOR_NODE_IMPLEMENT_EMPTY_DISPOSE(document)
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+document_create_areas (CongEditorNode *editor_node,
+		       const CongAreaCreationInfo *creation_info)
 {
 	cong_editor_node_empty_create_area (editor_node,
 					    creation_info,
 					    TRUE);
 }
-CONG_EDITOR_NODE_DEFINE_EMPTY_AREA_REGENERATION_HOOK
+CONG_EDITOR_NODE_DEFINE_EMPTY_AREA_REGENERATION_HOOK(document)
 #else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)

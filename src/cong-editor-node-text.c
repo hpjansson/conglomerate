@@ -83,7 +83,7 @@ struct CongEditorNodeTextSelectionState
 #endif
 };
 
-CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_EDITOR_NODE_DECLARE_HOOKS(text)
 
 #if 0
 static enum CongFlowType
@@ -227,7 +227,7 @@ CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_BEGIN(Text, text, CONG_EDITOR_NODE_TEXT) \
 				     PRIVATE(editor_node_text)->handler_id_node_set_text);	
 	g_signal_handler_disconnect (G_OBJECT(cong_editor_node_get_document(CONG_EDITOR_NODE(object))),
 				     PRIVATE(editor_node_text)->handler_id_selection_change);	
-CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END()
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END(text)
 
 /**
  * cong_editor_node_text_convert_original_byte_offset_to_stripped:
@@ -422,9 +422,9 @@ cong_editor_node_text_calc_down (CongEditorNodeText *editor_node_text,
 }
 
 #if 1
-static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+static void
+text_create_areas (CongEditorNode *editor_node,
+		   const CongAreaCreationInfo *creation_info)
 {
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
@@ -507,9 +507,9 @@ create_areas (CongEditorNode *editor_node,
 
 }
 gboolean
-needs_area_regeneration (CongEditorNode *editor_node,
-			 const CongAreaCreationGeometry *old_creation_geometry,
-			 const CongAreaCreationGeometry *new_creation_geometry)
+text_needs_area_regeneration (CongEditorNode *editor_node,
+			      const CongAreaCreationGeometry *old_creation_geometry,
+			      const CongAreaCreationGeometry *new_creation_geometry)
 {	
 	if (old_creation_geometry->area_line==new_creation_geometry->area_line) {
 		if (old_creation_geometry->line_width==new_creation_geometry->line_width) {

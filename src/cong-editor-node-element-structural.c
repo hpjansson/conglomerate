@@ -39,24 +39,23 @@ struct CongEditorNodeElementStructuralDetails
 	int dummy;
 };
 
-CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_EDITOR_NODE_DECLARE_HOOKS(structural)
 
 /* Declarations of the CongEditorArea event handlers: */
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeElementStructural, 
-			cong_editor_node_element_structural,
-			CongEditorNodeElement,
-			CONG_EDITOR_NODE_ELEMENT_TYPE );
+G_DEFINE_TYPE(CongEditorNodeElementStructural, 
+	      cong_editor_node_element_structural,
+	      CONG_EDITOR_NODE_ELEMENT_TYPE );
 
 static void
 cong_editor_node_element_structural_class_init (CongEditorNodeElementStructuralClass *klass)
 {
-	CONG_EDITOR_NODE_CONNECT_HOOKS
+	CONG_EDITOR_NODE_CONNECT_HOOKS(structural)
 }
 
 static void
-cong_editor_node_element_structural_instance_init (CongEditorNodeElementStructural *node_element_structural)
+cong_editor_node_element_structural_init (CongEditorNodeElementStructural *node_element_structural)
 {
 	node_element_structural->private = g_new0(CongEditorNodeElementStructuralDetails,1);
 }
@@ -106,8 +105,8 @@ cong_editor_node_element_structural_new (CongEditorWidget3* widget,
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+structural_create_areas (CongEditorNode *editor_node,
+			 const CongAreaCreationInfo *creation_info)
 {
 	CongEditorArea *block_area;
 	CongDispspecElement *ds_element;
@@ -139,7 +138,7 @@ create_areas (CongEditorNode *editor_node,
 					    TRUE);
 }
 
-CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK(structural)
 
 #else
 static CongEditorArea*

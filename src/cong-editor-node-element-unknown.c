@@ -37,22 +37,21 @@ struct CongEditorNodeElementUnknownDetails
 	int dummy;
 };
 
-CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_EDITOR_NODE_DECLARE_HOOKS(unknown)
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeElementUnknown, 
-			cong_editor_node_element_unknown,
-			CongEditorNodeElement,
-			CONG_EDITOR_NODE_ELEMENT_TYPE );
+G_DEFINE_TYPE(CongEditorNodeElementUnknown, 
+	      cong_editor_node_element_unknown,
+	      CONG_EDITOR_NODE_ELEMENT_TYPE );
 
 static void
 cong_editor_node_element_unknown_class_init (CongEditorNodeElementUnknownClass *klass)
 {
-	CONG_EDITOR_NODE_CONNECT_HOOKS
+	CONG_EDITOR_NODE_CONNECT_HOOKS(unknown)
 }
 
 static void
-cong_editor_node_element_unknown_instance_init (CongEditorNodeElementUnknown *node_element_unknown)
+cong_editor_node_element_unknown_init (CongEditorNodeElementUnknown *node_element_unknown)
 {
 	node_element_unknown->private = g_new0(CongEditorNodeElementUnknownDetails,1);
 }
@@ -103,8 +102,8 @@ cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+unknown_create_areas (CongEditorNode *editor_node,
+		      const CongAreaCreationInfo *creation_info)
 {
 	CongEditorArea *block_area;
 
@@ -122,7 +121,7 @@ create_areas (CongEditorNode *editor_node,
 					    block_area,
 					    TRUE);
 }
-CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK(unknown)
 
 #else
 static CongEditorArea*

@@ -1,3 +1,18 @@
+2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-comment.c, cong-editor-node-document.c,
+	cong-editor-node-dtd.c, cong-editor-node-element-structural.c,
+	cong-editor-node-element-unknown.c,
+	cong-editor-node-entity-decl.c, cong-editor-node-entity-ref.c,
+	cong-editor-node-text.c, cong-editor-node-unimplemented.c,
+	cong-editor-node.h, cong-object.h,
+	plugin-admonition-node-element.c,
+	plugin-lists-node-element-listitem.c:
+
+	Fixed the GObject boilerplate macros to allow more than one
+	CongEditorNode subclass to be declared/defined within a single
+	source file.
+
 2004-11-05 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
  
 	* cong-editor-line-manager-simple.c: Quick-fix to

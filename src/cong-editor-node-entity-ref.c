@@ -38,7 +38,7 @@ struct CongEditorNodeEntityRefDetails
 	int dummy;
 };
 
-CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_EDITOR_NODE_DECLARE_HOOKS(entity_ref)
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityRef, 
@@ -49,7 +49,7 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityRef,
 static void
 cong_editor_node_entity_ref_class_init (CongEditorNodeEntityRefClass *klass)
 {
-	CONG_EDITOR_NODE_CONNECT_HOOKS
+	CONG_EDITOR_NODE_CONNECT_HOOKS(entity_ref)
 }
 
 static void
@@ -101,8 +101,8 @@ cong_editor_node_entity_ref_new (CongEditorWidget3 *widget,
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+entity_ref_create_areas (CongEditorNode *editor_node,
+			 const CongAreaCreationInfo *creation_info)
 {
 	CongEditorArea *block_area;
 	gchar *title;
@@ -154,7 +154,7 @@ create_areas (CongEditorNode *editor_node,
 					    TRUE);	
 }
 
-CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK(entity_ref)
 
 #else
 static CongEditorArea*

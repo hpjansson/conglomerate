@@ -86,12 +86,12 @@ CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_BEGIN(Comment, comment, CONG_EDITOR_NODE_COMM
 	     cong_text_cache_free (PRIVATE(editor_node_comment)->text_cache);
 	     PRIVATE(editor_node_comment)->text_cache = NULL;
      }
-CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END()
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END(comment)
 
 #if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+comment_create_areas (CongEditorNode *editor_node,
+		      const CongAreaCreationInfo *creation_info)
 {
 	CongEditorNodeComment *node_comment = CONG_EDITOR_NODE_COMMENT(editor_node);
 
@@ -108,7 +108,7 @@ create_areas (CongEditorNode *editor_node,
 	/* FIXME: should we attach signals, or store the area anywhere? */
 }
 
-CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK(comment)
 
 #else
 static CongEditorArea*

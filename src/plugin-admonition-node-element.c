@@ -46,7 +46,7 @@ static GdkPixbuf*
 load_icon (const gchar *icon_filename);
 
 static CongEditorArea*
-create_block_area (CongEditorNodeElementAdmonition *editor_node_element_admonition)
+admonition_create_block_area (CongEditorNodeElementAdmonition *editor_node_element_admonition)
 {
 	CongEditorArea *area_label;
 	GdkPixbuf* pixbuf;
