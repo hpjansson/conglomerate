@@ -906,6 +906,14 @@ struct CongDocumentEvent
 
 void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node);
 
+/* UI routines for invocation by menus/toolbars: */
+void
+cong_ui_file_import(GtkWindow *toplevel_window);
+
+void
+cong_ui_file_export(CongDocument *doc,
+		    GtkWindow *toplevel_window);
+
 /* Extensions to libxml: */
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 					 const xmlChar *name,

@@ -1,7 +1,7 @@
 creating ChangeLog
 2003-04-08 David Malcolm
 
-	* cong-menus.c
+	* cong-menus.c, global.h
 
 	Bulk of import/export UI moved into new files
 	
