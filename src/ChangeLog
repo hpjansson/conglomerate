@@ -1,4 +1,12 @@
+2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-menus.c
+
+	Updated year of copyright in About dialog
+
 2003-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	--- Version 0.7.10 ---
 
 	* cong-editor-area-flow-holder-blocks.c
 

@@ -1190,7 +1190,7 @@ static void menu_callback_about(gpointer callback_data,
   
  	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
  					   PACKAGE_VERSION,
- 					   _("(C) 1999 Hans Petter Jansson\n(C) 2003 David Malcolm"),
+ 					   _("(C) 1999 Hans Petter Jansson\n(C) 2004 David Malcolm"),
  					   _("Conglomerate: a free, user-friendly XML editor"),
  					   (const char **)authors,
  					   (const char **)documenters,
