@@ -47,13 +47,16 @@ clean:
 
 	# Add here commands to clean up after the build process.
 	-$(MAKE) distclean
+	rm -f doc/C/conglomerate-C.omf.out
+	rm -f intltool-extract intltool-merge intltool-update
+	rm -f po/.intltool-merge-cache
+	rm -f conglomerate
 ifneq "$(wildcard /usr/share/misc/config.sub)" ""
 	cp -f /usr/share/misc/config.sub config.sub
 endif
 ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 	cp -f /usr/share/misc/config.guess config.guess
 endif
-
 
 	dh_clean
 
@@ -62,7 +65,6 @@ install: build
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
-	dh_installman doc/C/conglomerate.1
 
 	# using src/Makefile to get files into the package
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
@@ -89,7 +91,7 @@ binary-arch: build install
 #	dh_installinit
 #	dh_installcron
 #	dh_installinfo
-	dh_installman
+	dh_installman doc/C/conglomerate.1
 	dh_link
 	dh_strip
 	dh_compress

@@ -1,3 +1,19 @@
+conglomerate (0.7.1-2) unstable; urgency=medium
+
+  * Right sequence for setup on gconf (closes: #208794)
+
+  * debian/rules tuned.
+   - remove generated files that survive a 'make distclean'
+   - call install manpage only once
+
+  * debian/control:
+   - a debhelper version that will install debian NEWS fille.
+   - Standard version 3.6.1 ( instead of 3.6.1.0 )
+
+  * Trimmed debian/changelog file.
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri,  5 Sep 2003 23:33:37 +0000
+
 conglomerate (0.7.1-1) unstable; urgency=low
 
   * new upstream version
@@ -29,20 +45,34 @@ conglomerate (0.5.4-1) experimental; urgency=low
 
  -- Sven Luther <luther@debian.org>  Wed, 25 Jun 2003 16:55:10 +0200
 
+conglomerate (0.5.4-0.1) experimental; urgency=low
+
+  * new upstream version is scheduled as 0.5.4
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Wed, 25 Jun 2003 11:31:13 +0200
+
 conglomerate (0.5.3-1) experimental; urgency=low
 
   * New upstream release.
 
  -- Sven Luther <luther@debian.org>  Fri, 13 Jun 2003 21:09:25 +0200
 
+conglomerate (0.5.3-0.1) experimental; urgency=low
+
+  * new upstream version ( the debian/watch file works  ;- )
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 14 Jun 2003 18:56:12 +0200
+
+conglomerate (0.5.2-0.2) experimental; urgency=low
+
+  * added debian/watch file
+
+  * added reference to debian bug #164127, an RFP
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 14 Jun 2003 18:29:49 +0200
+
 conglomerate (0.5.2-1) experimental; urgency=low
 
   * Initial Experimental Release. 
 
  -- Sven Luther <luther@debian.org>  Wed, 11 Jun 2003 18:35:31 +0200
-
-conglomerate (0.5.0-1) unstable; urgency=low
-
-  * never release into offical debian archives.
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri,  9 May 2003 14:56:44 +0200
