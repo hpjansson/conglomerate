@@ -2101,9 +2101,6 @@ void xed_cutcopy_update(struct curs* curs)
 
 gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongNodePtr t;
 	int replace_xed = 0;
 
@@ -2117,15 +2114,26 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
 	
-	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
+	if (the_globals.clipboard) cong_node_recursive_delete(the_globals.clipboard);
 	
-	t = ttree_node_add(0, "tag_span", 8);
-	ttree_node_add(t, "dummy", 5);
+	t = cong_node_new_element("dummy");
 
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	
 	selection_reparent_all(selection, t);
 
+#if NEW_XML_IMPLEMENTATION
+	if (t->prev)
+	{
+		if (replace_xed) curs->xed->x = t->prev;
+	}
+	else
+	{
+		curs->xed->x = t->next;
+	}
+	
+	cong_node_make_orphan(t);
+#else
 	if (t->prev)
 	{
 		t->prev->next = t->next;
@@ -2139,13 +2147,13 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	
 	if (t->next) t->next->prev = t->prev;
 	t->prev = t->next = t->parent = 0;
+#endif
 
 	the_globals.clipboard = t;
 
 	selection_curs_unset();
 
 	xed_cutcopy_update(curs);
-#endif
 
 	return(TRUE);
 }
@@ -2155,6 +2163,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
+	CongNodePtr t_next = NULL;
 	int replace_xed = 0;
 
 	struct selection* selection = &the_globals.selection;
@@ -2173,19 +2182,26 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 		cong_node_recursive_delete(the_globals.clipboard);
 	}
 
-#if 1
 	t = cong_node_new_element("dummy");
-#else
-	t = ttree_node_add(0, "tag_span", 8);
-	ttree_node_add(t, "dummy", 5);
-#endif
 
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	selection_reparent_all(selection, t);
 	the_globals.clipboard = cong_node_recursive_dup(t);
 
+	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
+
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+	if (replace_xed) {
+		curs->xed->x = t->prev;
+	}
+
+	for (t0 = cong_node_first_child(t); t0; t0 = t_next) {
+		t_next = t0->next;
+		cong_node_add_before(t0, t);
+	}
+
+	cong_node_make_orphan(t);
+	cong_node_free(t);
 #else
 	if (t->child->child)
 	{
@@ -2212,14 +2228,16 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	t->prev = 0;
 
 	ttree_branch_remove(t);
+#endif
+
 	selection_curs_unset();
 
 #ifndef RELEASE	
 	if (t0) ttree_fsave(t0->parent->parent->parent, stdout);
 #endif
 
+
 	xed_cutcopy_update(curs);
-#endif
 
 	return(TRUE);
 }
@@ -2231,6 +2249,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	CongNodePtr t0 = NULL;
 	CongNodePtr t1 = NULL;
 	CongNodePtr clip;
+	CongNodePtr t_next;
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
@@ -2249,9 +2268,10 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	}
 
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+	if (!the_globals.clipboard->children) return(TRUE);
 #else
 	if (!the_globals.clipboard->child || !the_globals.clipboard->child->child) return(TRUE);
+#endif
 	
 	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
@@ -2279,12 +2299,21 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 		}
 	}
 	else t0 = cong_location_node(&curs->location);
-	
-	clip = ttree_branch_dup(the_globals.clipboard);
-	t = clip->child->child;
+
+
+	/* FIXME:  does this leak "clip": */
+	clip = cong_node_recursive_dup(the_globals.clipboard);
+
+	t = cong_node_first_child(clip);
 
 	if (!t) return(TRUE);
 	
+#if NEW_XML_IMPLEMENTATION
+	for (; t; t = t_next) {
+		t_next = t->next;
+		cong_node_add_before(t,t1);
+	}
+#else
 	t->prev = t0;
 	if (t0) t0->next = t;
 	else curs->location.tt_loc->parent->child = t;
@@ -2297,12 +2326,13 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	t->next = t1;
 	if (t1) t1->prev = t;
+#endif
 
 	cong_location_nullify(&selection->loc0);
 	cong_location_nullify(&selection->loc1);
 
 	xed_redraw(curs->xed);
-#endif
+
 	return(TRUE);
 }
 
