@@ -8,6 +8,9 @@
 	* sync
 	New script, to get the release modifications upstream
 
+	* Makefile.am
+	The sync script should make it into the tarball
+
 2004-01-19  Geert Stappers <stappers@stapers.nl>
 
 	* release
