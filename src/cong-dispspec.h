@@ -39,9 +39,11 @@ cong_dispspec_get_name(const CongDispspec *ds);
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
-#if 0
-char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
-#endif
+/**
+ *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
+ */
+GdkPixbuf*
+cong_dispspec_get_icon(const CongDispspec *ds);
 
 #if NEW_LOOK
 enum CongDispspecGCUsage
@@ -84,6 +86,11 @@ cong_dispspec_get_first_element(CongDispspec *ds);
 CongDispspecElement*
 cong_dispspec_get_paragraph(CongDispspec *ds);
 
+
+/*******************************
+   cong_dispspec_element stuff: 
+*******************************/
+
 /** Get the tagname in a parser-friendly form */
 const char*
 cong_dispspec_element_tagname(CongDispspecElement* element);
@@ -91,6 +98,16 @@ cong_dispspec_element_tagname(CongDispspecElement* element);
 /** Get the name in a user-friendly form */
 const char*
 cong_dispspec_element_username(CongDispspecElement* element);
+
+/** Get a short user-friendly description of the element */
+const gchar*
+cong_dispspec_element_get_description(CongDispspecElement* element);
+
+/**
+ *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
+ */
+GdkPixbuf*
+cong_dispspec_element_get_icon(CongDispspecElement *element);
 
 const char*
 cong_dispspec_element_name_name_get(CongDispspecElement* element);

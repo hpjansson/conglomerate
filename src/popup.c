@@ -9,11 +9,18 @@
 #include "cong-document.h"
 #include "cong-view.h"
 
-static GtkWidget* add_item_to_popup(GtkMenu *menu, 
-				    const gchar *label,
+static GtkMenuItem* make_menu_item(const gchar *label,
+				   const gchar *tip,
+				   GdkPixbuf *pixbuf);
+
+
+static GtkMenuItem* make_menu_item_for_dispspec_element(CongDispspecElement *element);
+
+static GtkWidget* add_item_to_popup(GtkMenu *menu,
+				    GtkMenuItem *item, 
 				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
 				    gpointer popup_data_item,
-				    CongNodePtr x,
+				    CongNodePtr callback_data,
 				    GtkWindow *parent_window);
 
 static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds, 
@@ -32,6 +39,9 @@ static GtkWidget *structural_tag_popup_init(CongDispspec *ds,
 					    CongNodePtr x, 
 					    GList *list,
 					    GtkWindow *parent_window);
+
+static GList *sort_menu(GList *list_of_dispspec_element);
+
 
 static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds, 
 							gint (*callback)(GtkWidget *widget, CongNodePtr tag),
@@ -52,6 +62,58 @@ void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node)
 
 	g_message("do_node_heading_context_menu");
 }
+
+static GtkMenuItem* make_menu_item(const gchar *label,
+				   const gchar *tip,
+				   GdkPixbuf *pixbuf)
+{
+	GtkWidget *item;
+
+	g_return_val_if_fail(label, NULL);
+
+	item = gtk_image_menu_item_new_with_label (label);
+
+	if (pixbuf) {
+		GtkWidget *image = gtk_image_new_from_pixbuf(pixbuf);
+		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), image);
+		gtk_widget_show(image);
+	}
+
+	if (tip) {
+		gtk_tooltips_set_tip(the_globals.tooltips,
+				     GTK_WIDGET(item),
+				     tip,
+				     tip);
+	}
+
+	return GTK_MENU_ITEM(item);
+}
+
+static GtkMenuItem* make_menu_item_for_dispspec_element(CongDispspecElement *element)
+{
+	GtkMenuItem *item;
+	GdkPixbuf *pixbuf;
+	const gchar *tip;
+
+	g_return_val_if_fail(element, NULL);
+
+	pixbuf = cong_dispspec_element_get_icon(element);
+	tip = cong_dispspec_element_get_description(element);
+
+	if (NULL==tip) {
+		tip = _("(no description available)");
+	}
+	
+	item = make_menu_item(cong_dispspec_element_username(element),
+			      tip,
+			      pixbuf);
+	if (pixbuf) {
+		g_object_unref(G_OBJECT(pixbuf));
+	}
+
+	return item;
+}
+
 
 
 /*
@@ -189,7 +251,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 {
 	GtkWidget *item, *w0, *sub_popup;
 	CongDispspec *dispspec;
-	CongDispspecElement *n0;
+	CongDispspecElement *dispspec_element;
 	CongCursor *cursor;
 	GList *span_tags_list;
 	
@@ -241,7 +303,9 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 		gtk_widget_show(item);
 		
 		item = add_item_to_popup(GTK_MENU(the_globals.popup), 
-					 "Remove span tag", 
+					 make_menu_item(_("Remove span tag"), 
+							NULL, /* FIXME: we ought to have a tip for this */
+							NULL), /* FIXME: we ought to have a icon for this */
 					 NULL, 
 					 NULL, 
 					 NULL,
@@ -271,15 +335,17 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 	/* Build list of dynamic tag insertion tools */
 	/*  build the list of valid inline tags here */
 	
-	for (n0 = cong_dispspec_get_first_element(dispspec); n0; n0 = cong_dispspec_element_next(n0))
+	for (dispspec_element = cong_dispspec_get_first_element(dispspec); dispspec_element; dispspec_element = cong_dispspec_element_next(dispspec_element))
 	{
-		if (cong_dispspec_element_is_span(n0))
+		if (cong_dispspec_element_is_span(dispspec_element))
 		{
-			item = gtk_menu_item_new_with_label(cong_dispspec_element_username(n0));
+			item = GTK_WIDGET(make_menu_item_for_dispspec_element(dispspec_element));
+			/* FIXME: perhaps we should composite a "deletion" icon to the element's icon? */
+
 			gtk_menu_append(GTK_MENU(the_globals.popup), item);
-			
+
 			gtk_signal_connect(GTK_OBJECT(item), "activate",
-					   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), n0);
+					   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), dispspec_element);
 			
 			g_object_set_data(G_OBJECT(item),
 					  "doc",
@@ -330,17 +396,17 @@ gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 #endif
 		    
 				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
-					CongNodePtr tt;
+					CongNodePtr node;
 					GtkWidget* menu;
 					CongDocument* doc;
 					
-					gtk_tree_model_get(tree_model, &iter, TREEVIEW_NODE_COLUMN, &tt, -1);
-					gtk_tree_model_get(tree_model, &iter, TREEVIEW_DOC_COLUMN, &doc, -1);
+					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, &node, -1);
+					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_DOC_COLUMN, &doc, -1);
 					
-					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), tt));
+					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), node));
 					
 					menu = tree_popup_init(cong_tree_view, 
-							       tt, 
+							       node, 
 							       parent_window);
 					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
 						       bevent->time);		      
@@ -359,28 +425,34 @@ gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 }
 
 /* the popup items have the data "cong_tree_view" set on them: */
-static GtkWidget* add_item_to_popup(GtkMenu *menu,
-				    const gchar *label,
+static GtkWidget *add_item_to_popup(GtkMenu *menu,
+				    GtkMenuItem *item, 
 				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
 				    gpointer popup_data_item,
-				    CongNodePtr x,
+				    CongNodePtr callback_data,
 				    GtkWindow *parent_window)
 {
-	GtkWidget *item = gtk_menu_item_new_with_label(label);
-	gtk_menu_append(menu, item);
+	g_return_val_if_fail(menu, NULL);
+	g_return_val_if_fail(item, NULL);
+
 	if (func != NULL) {
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC(func), x);
+		gtk_signal_connect(GTK_OBJECT(item), 
+				   "activate",
+				   GTK_SIGNAL_FUNC(func), 
+				   callback_data);
 	}
+
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), GTK_WIDGET(item));
+	
 	g_object_set_data(G_OBJECT(item),
 			  "popup_data_item",
 			  popup_data_item);
 	g_object_set_data(G_OBJECT(item),
 			  "parent_window",
 			  parent_window);
-	gtk_widget_show(item);
+	gtk_widget_show(GTK_WIDGET(item));
 
-	return item;
+	return GTK_WIDGET(item);
 }
 
 static GtkWidget* add_stock_item_to_popup(GtkMenu *menu,
@@ -414,8 +486,7 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds,
 					      GList *list,
 					      GtkWindow *parent_window) 
 {
-	GtkWidget *popup, *item;
-	CongNodePtr node;
+	GtkWidget *popup;
 	GList *current;
 
 
@@ -424,10 +495,11 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds,
 
 	for (current = g_list_last(list); current; current = g_list_previous(current)) {
 		
-		node = (CongNodePtr)(current->data);
+		CongNodePtr node = (CongNodePtr)(current->data);
+		CongDispspecElement *element = cong_dispspec_lookup_node(ds, node);
 
 		add_item_to_popup(GTK_MENU(popup),
-				  cong_dispspec_name_get(ds, node),
+				  make_menu_item_for_dispspec_element(element), /* FIXME: should we composite a deletion icon onto the pixbuf? */
 				  callback,
 				  (gpointer)doc,
 				  node,
@@ -437,6 +509,50 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds,
 	gtk_widget_show(popup);
 	return popup;
 }
+
+static gint my_compare_func(gconstpointer a, gconstpointer b)
+{
+	CongDispspecElement *elem_a;
+	CongDispspecElement *elem_b;
+	const gchar *name_a;
+	const gchar *name_b;
+	gchar *folded_a;
+	gchar *folded_b;
+	gint result;
+
+	elem_a = (CongDispspecElement*)a;
+	elem_b = (CongDispspecElement*)b;
+
+	name_a = cong_dispspec_element_username(elem_a);
+	if (NULL==name_a) {
+		name_a = cong_dispspec_element_tagname(elem_a);
+	}
+	name_b = cong_dispspec_element_username(elem_b);
+	if (NULL==name_b) {
+		name_b = cong_dispspec_element_tagname(elem_b);
+	}
+
+	g_assert(name_a);
+	g_assert(name_b);
+
+	g_message("comparing \"%s\" and \"%s\"", name_a, name_b);
+
+	folded_a = g_utf8_casefold(name_a,-1);
+	folded_b = g_utf8_casefold(name_b,-1);
+	result = g_utf8_collate(folded_a, folded_b);
+
+	g_free(folded_a);
+	g_free(folded_b);
+
+	return result;
+}
+
+
+static GList *sort_menu(GList *list_of_dispspec_element)
+{
+	/* Sort the list into alphabetical order or user-visible names: */
+	return g_list_sort(list_of_dispspec_element, my_compare_func);
+}
 					 
 static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds, 
 							gint (*callback)(GtkWidget *widget, CongNodePtr tag),
@@ -445,6 +561,9 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds,
 							GtkWindow *parent_window) 
 {
 	GList *list = xml_get_valid_next_sibling(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+
+	list = sort_menu(list);
+
 	GtkWidget *popup = structural_tag_popup_init(ds, 
 						     callback, 
 						     cong_tree_view, 
@@ -464,6 +583,9 @@ static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds,
 							    GtkWindow *parent_window) 
 {
 	GList *list = xml_get_valid_children(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+
+	list = sort_menu(list);
+
 	GtkWidget *popup = structural_tag_popup_init(ds, 
 						     callback, 
 						     cong_tree_view, 
@@ -481,29 +603,31 @@ static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds,
 static GtkWidget *structural_tag_popup_init(CongDispspec *ds, 
 					    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
 					    CongTreeView *cong_tree_view,
-					    CongNodePtr x, 
+					    CongNodePtr node, 
 					    GList *list,
 					    GtkWindow *parent_window)
 {
 	GtkWidget *popup, *item;
-	CongDispspecElement *n0;
+/* 	CongDispspecElement *n0; */
 	GList *current;
-	int i;
+/* 	int i; */
 
 	popup = gtk_menu_new();
 	gtk_menu_set_title(GTK_MENU(popup), "Sub menu");
 	
 	for (current = g_list_first(list); current; current = g_list_next(current)) {
+
+		CongDispspecElement *element = (CongDispspecElement *)(current->data);
 		
 		item = add_item_to_popup(GTK_MENU(popup),
-					 cong_dispspec_element_username((CongDispspecElement *)(current->data)),
+					 make_menu_item_for_dispspec_element(element),
 					 callback,
 					 (gpointer)cong_tree_view,
-					 x,
+					 node,
 					 parent_window);
 		g_object_set_data(G_OBJECT(item),
 				  "label",
-				  (gpointer)(cong_dispspec_element_tagname((CongDispspecElement *)(current->data))));
+				  (gpointer)(cong_dispspec_element_tagname(element)));
 
 	}
 
@@ -557,19 +681,25 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view,
 				x,
 				parent_window);
 	add_item_to_popup(tpopup,
-			  _("Paste into"),
+			  make_menu_item(_("Paste into"),
+					 NULL, /* FIXME:  ought to have a tooltip */
+					 NULL), /* FIXME:  ought to have an icon */
 			  tree_paste_under,
 			  cong_tree_view,
 			  x,
 			  parent_window);
 	add_item_to_popup(tpopup,
-			  _("Paste before"),
+			  make_menu_item(_("Paste before"),
+					 NULL, /* FIXME:  ought to have a tooltip */
+					 NULL), /* FIXME:  ought to have an icon */
 			  tree_paste_before,
 			  cong_tree_view,
 			  x,
 			  parent_window);
 	add_item_to_popup(tpopup,
-			  _("Paste after"),
+			  make_menu_item(_("Paste after"),
+					 NULL, /* FIXME:  ought to have a tooltip */
+					 NULL), /* FIXME:  ought to have an icon */
 			  tree_paste_after,
 			  cong_tree_view,
 			  x,
@@ -584,7 +714,9 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view,
 	gtk_widget_show(item);
 
 	item = add_item_to_popup(tpopup,
-				 _("New sub-element"),
+				 make_menu_item(_("New sub-element"),
+						NULL, /* FIXME:  ought to have a tooltip */
+						NULL), /* FIXME:  ought to have an icon */
 				 NULL,
 				 cong_tree_view,
 				 x,
@@ -595,7 +727,9 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view,
 
 	
 	item = add_item_to_popup(tpopup,
-				 _("New sibling"),
+				 make_menu_item(_("New sibling"),
+						NULL, /* FIXME:  ought to have a tooltip */
+						NULL), /* FIXME:  ought to have an icon */
 				 NULL,
 				 cong_tree_view,
 				 x,

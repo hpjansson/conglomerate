@@ -58,9 +58,14 @@ cong_utils_get_norman_walsh_stylesheet_path(void)
 	return "/usr/share/sgml/docbkxsl/";
 #endif
 
-#if 1
+#if 0
 	/* Value that works for Dave Malcolm on Red Hat 8: */
 	return "/usr/share/sgml/docbook/xsl-stylesheets-1.50.0-3/";
+#endif
+
+#if 1
+	/* Value that works for Dave Malcolm on Red Hat 9: */
+	return "/usr/share/sgml/docbook/xsl-stylesheets/";
 #endif
 }
 
@@ -376,6 +381,8 @@ int main( int   argc,
 
 	fonts_load();
 	editor_popup_init(NULL); /* FIXME */
+
+	the_globals.tooltips = gtk_tooltips_new();
 
 	cong_primary_window_new(NULL);
 	

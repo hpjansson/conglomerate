@@ -18,9 +18,11 @@
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
 #define DS_DEBUG_MSG2(x, a) g_message((x), (a))
+#define DS_DEBUG_MSG2(x, a, b) g_message((x), (a), (b))
 #else
 #define DS_DEBUG_MSG1(x)    ((void)0)
 #define DS_DEBUG_MSG2(x, a) ((void)0)
+#define DS_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
 struct CongDispspecElementHeaderInfo
@@ -31,8 +33,10 @@ struct CongDispspecElementHeaderInfo
 
 struct CongDispspecElement
 {
-	char* tagname;
-	char* username;
+	gchar *tagname;
+	gchar *username;
+	gchar *short_desc;
+	GdkPixbuf *icon;
 
 	enum CongElementType type;
 	gboolean collapseto;
@@ -61,8 +65,9 @@ struct CongDispspec
 	/* We also store a tree of elements, for fast lookup by name: */ 
 	GTree *tree;
 
-	gchar* name;
-	gchar* desc;
+	gchar *name;
+	gchar *desc;
+	GdkPixbuf *icon;
 
 	CongDispspecElement *paragraph;
 };
@@ -395,24 +400,6 @@ void cong_dispspec_delete(CongDispspec *dispspec)
 	g_assert(0);
 }
 
-#if 0
-TTREE *get_upper_section(TTREE *x)
-{
-  TTREE *t, *r = 0;
-  char *name;
-  
-  for (t = r = x; t; t = xml_frag_exit(t))
-    {
-      name = xml_frag_name_nice(t);
-      if (!name) return(r);
-      if (!strcasecmp("section", name)) r = t;
-      else if (r != x) return(r);
-    }
-  
-  return(x);
-}
-#endif
-
 const gchar*
 cong_dispspec_get_name(const CongDispspec *ds)
 {
@@ -438,6 +425,8 @@ cong_dispspec_get_description(const CongDispspec *ds)
 	}
 }
 
+/* FIXME: These should be deprecated: */
+#if 1
 gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
@@ -484,6 +473,7 @@ gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name)
 
 	return (CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element));
 }
+#endif
 
 enum CongElementType
 cong_dispspec_type(CongDispspec *ds, const char* tagname)
@@ -532,6 +522,18 @@ const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
 	return(xml_frag_name_nice(x));
 }
 
+GdkPixbuf*
+cong_dispspec_get_icon(const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds, NULL);
+
+	if (ds->icon) {
+		g_object_ref(G_OBJECT(ds->icon));
+	}
+	return ds->icon;
+}
+
+
 #if 0
 char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
 {
@@ -579,65 +581,6 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
 	} else {
 		return NULL;
 	}
-}
-#endif
-
-
-#if 0
-void cong_dispspec_init(TTREE *ds)
-{
-  TTREE *n0, *n1, *n2, *n3;
-  GdkGC *gc;
-  GdkColor gcol;
-  
-  for (n0 = ds->child; n0; n0 = n0->next)
-    {
-      gc = 0;
-      
-      /* Tag has colour specification? */
-      n1 = ttree_node_find1(n0, "color", 5, 0);
-      if (!n1) n1 = ttree_node_find1(n0, "colour", 6, 0);
-      
-      if (n1 && n1->child)
-	{
-	  /* Try to find an already allocated GC for the colour */
-	  for (n2 = ds->child; n2 != n0; n2 = n2->next)
-	    {
-	      n3 = ttree_node_find1(n2, "color", 5, 0);
-	      if (!n3) n3 = ttree_node_find1(n2, "colour", 6, 0);
-	      
-	      if (n3 && n3->child)
-		{
-		  if (!strcasecmp(n1->child->data, n3->child->data))
-		    {
-		      gc = (GdkGC *) *((GdkGC **) n3->child->child->data);
-		      break;
-		    }
-		}
-	    }
-	  
-	  /* Found a colour allocated earlier? */
-	  
-	  if (gc)
-	    {
-	      ttree_node_add(n1->child, (unsigned char *) &gc, sizeof(GdkGC *));
-	    }
-	  else
-	    {
-				/* No, allocate */
-	      
-	      gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-	      gdk_gc_copy(gc, cong_gui_get_window(&the_gui)->style->white_gc);
-	      col_to_gcol(&gcol, get_rgb_hex(n1->child->data));
-	      gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
-	      gdk_gc_set_foreground(gc, &gcol);
-#if 0
-	      gdk_rgb_gc_set_foreground(gc, get_rgb_hex(n1->child->data));
-#endif
-	      ttree_node_add(n1->child, (unsigned char *) &gc, sizeof(GdkGC *));
-	    }
-	}
-    }
 }
 #endif
 
@@ -722,7 +665,11 @@ cong_dispspec_get_paragraph(CongDispspec *ds)
 	return ds->paragraph;
 }
 
-const char*
+/*******************************
+   cong_dispspec_element stuff: 
+*******************************/
+
+const gchar*
 cong_dispspec_element_tagname(CongDispspecElement* element)
 {
 	g_return_val_if_fail(element, NULL);
@@ -730,12 +677,30 @@ cong_dispspec_element_tagname(CongDispspecElement* element)
 	return element->tagname;
 }
 
-const char*
+const gchar*
 cong_dispspec_element_username(CongDispspecElement* element)
 {
 	g_return_val_if_fail(element, NULL);
 
 	return element->username;
+}
+
+const gchar*
+cong_dispspec_element_get_description(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element,NULL);
+
+	return element->short_desc;
+}
+
+GdkPixbuf*
+cong_dispspec_element_get_icon(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	
+	g_object_ref(G_OBJECT(element->icon));
+	return element->icon;
 }
 
 CongDispspecElement*
@@ -1003,6 +968,29 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
   		}
   	}
 
+	/* Extract pixbuf: */
+	{
+		xmlChar* prop = xmlGetProp(xml_element, "icon");
+		if (prop) {
+			gchar *full_path = gnome_program_locate_file(the_globals.gnome_program,
+								     GNOME_FILE_DOMAIN_APP_PIXMAP,
+								     prop,
+								     FALSE,
+								     NULL);
+
+			DS_DEBUG_MSG3("Trying to loading icon for <%s> from \"%s\"", element->tagname, full_path);
+			
+			element->icon = gdk_pixbuf_new_from_file(full_path, NULL);
+			
+			if (NULL==element->icon) {
+				DS_DEBUG_MSG2("Failed to load icon from \"%s\"", full_path);
+			}
+			
+			g_free(full_path);
+			xmlFree(prop);
+		}
+	}
+
   	/* Process children: */
   	{
   		xmlNodePtr child;
@@ -1013,6 +1001,14 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
   				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
   				if (str) {
   					element->username = g_strdup(str);					
+  				}
+  			}
+
+  			/* Extract short-desc: */
+  			if (0==strcmp(child->name,"short-desc")) {
+  				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
+  				if (str) {
+  					element->short_desc = g_strdup(str);
   				}
   			}
 

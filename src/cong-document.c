@@ -4,6 +4,7 @@
 #include "cong-document.h"
 #include "cong-view.h"
 #include "cong-error-dialog.h"
+#include "cong-dispspec.h"
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
@@ -197,6 +198,15 @@ cong_document_get_dispspec(CongDocument *doc)
 	g_return_val_if_fail(doc, NULL);
 
 	return doc->ds;
+}
+
+CongDispspecElement*
+cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
+{
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	return cong_dispspec_lookup_node(doc->ds, node);
 }
 
 gchar*

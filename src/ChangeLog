@@ -1,4 +1,14 @@
-2003-03-26 David Malcolm <david@davemalcolm.demon.co.uk>
+2003-06-04 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c, cong-dispspec.h, cong-document.c, cong-document.h, cong-editor-widget.c, cong-tree-view.c, cong-view.h, global.h, main.c, popup.c, 
+
+	Dispspecs and dispspec elements can now have icons, which will appear in the various popup menus and in the tree view; begun to clean up the "Overview" code; ported stylesheet path to Red Hat 9; structural tag popup menus are now alphabetically sorted.
+	
+	* cong-view.c, Makefile.am
+
+	New file
+	
+2003-05-26 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dom-view.c
 
@@ -16,7 +26,7 @@
 
 	Properties dialog now can show XPath of the node
 
-2003-03-25 David Malcolm <david@davemalcolm.demon.co.uk>
+2003-05-25 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am, cong-dispspec-registry.c, cong-document.c, cong-error-dialog.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-file-open.c, cong-menus.c, cong-parser-error.c, cong-plugin.c, global.h, main.c, plugin-conert-case.c, plugin-sgml.c, plugin-website.c
 

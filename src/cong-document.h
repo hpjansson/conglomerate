@@ -51,6 +51,9 @@ cong_document_get_root(CongDocument *doc);
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc);
 
+CongDispspecElement*
+cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node);
+
 gchar*
 cong_document_get_filename(CongDocument *doc);
 /* caller is responsible for freeeing */

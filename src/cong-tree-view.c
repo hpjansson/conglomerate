@@ -84,7 +84,7 @@ static gboolean search_for_node(GtkTreeModel *model,
 
 	gtk_tree_model_get(model,
 			   iter,
-			   TREEVIEW_NODE_COLUMN,
+			   CONG_OVERVIEW_TREEMODEL_NODE_COLUMN,
 			   &this_node,
 			   -1);
 
@@ -296,6 +296,33 @@ CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 	return(x);
 }
 
+static void
+set_pixbuf (GtkTreeViewColumn *tree_column,
+	    GtkCellRenderer   *cell,
+	    GtkTreeModel      *model,
+	    GtkTreeIter       *iter,
+	    gpointer           user_data)
+{
+	CongTreeView *tree_view = user_data;	
+	CongNodePtr node;
+	GdkPixbuf *pixbuf;
+	CongDispspecElement *element;
+	
+       	gtk_tree_model_get (model, iter, 
+			    CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, &node, 
+			    -1);
+	g_assert(node);
+
+	element = cong_document_get_dispspec_element_for_node(cong_view_get_document(CONG_VIEW(tree_view)), node);
+
+	pixbuf = cong_dispspec_element_get_icon(element);
+
+	g_object_set (GTK_CELL_RENDERER (cell), "pixbuf", pixbuf, NULL);
+	if (pixbuf) {
+		g_object_unref (pixbuf);
+	}
+}
+
 void cong_tree_view_recursive_populate(CongDocument *doc, 
 				       CongNodePtr x, 
 				       gboolean collapsed, 
@@ -310,6 +337,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 
 	CongDispspecElement *element;
 
+	GdkPixbuf *pixbuf;
 	gchar *text;
 
 	ds = cong_document_get_dispspec(doc);
@@ -321,11 +349,10 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 
 	gtk_tree_store_set (store, &new_tree_iter,
-			    TREEVIEW_TITLE_COLUMN, text,
-			    TREEVIEW_NODE_COLUMN, x,
-			    TREEVIEW_DOC_COLUMN, doc,
+			    CONG_OVERVIEW_TREEMODEL_TITLE_COLUMN, text,
+			    CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, x,
+			    CONG_OVERVIEW_TREEMODEL_DOC_COLUMN, doc,
 			    -1);
-
 	g_free(text);
 	/* FIXME:  this will fail to update when the text is edited */
 
@@ -340,7 +367,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 		gchar *col_string = get_col_string(col);
 
 		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_FOREGROUND_COLOR_COLUMN, col_string,
+				    CONG_OVERVIEW_TREEMODEL_FOREGROUND_COLOR_COLUMN, col_string,
 				    -1);
 
 		g_free(col_string);
@@ -349,7 +376,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 #if 0 /* NEW_LOOK */
 		col_string = get_col_string( cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND) );
 		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_BACKGROUND_COLOR_COLUMN, col_string,
+				    CONG_OVERVIEW_TREEMODEL_BACKGROUND_COLOR_COLUMN, col_string,
 				    -1);
 
 		g_free(col_string);
@@ -358,7 +385,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 	} else {
 		/* Use red for "tag not found" errors: */ 
 		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_FOREGROUND_COLOR_COLUMN, "#ff0000", 
+				    CONG_OVERVIEW_TREEMODEL_FOREGROUND_COLOR_COLUMN, "#ff0000", 
 				    -1);
 	}
 
@@ -431,10 +458,10 @@ void cong_tree_view_populate_tree(CongTreeView *tree_view)
 
 	gtk_tree_store_append (tree_view->gtk_tree_store, &root_iter, NULL);  /* Acquire a top-level iterator */
 	gtk_tree_store_set (tree_view->gtk_tree_store, &root_iter,
-			    TREEVIEW_TITLE_COLUMN, filename,
-			    TREEVIEW_NODE_COLUMN, cong_document_get_root(doc),
-			    TREEVIEW_DOC_COLUMN, doc,
-			    /* TREEVIEW_COLOR_COLUMN, g_strdup_printf("#305050"), */
+			    CONG_OVERVIEW_TREEMODEL_TITLE_COLUMN, filename,
+			    CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, cong_document_get_root(doc),
+			    CONG_OVERVIEW_TREEMODEL_DOC_COLUMN, doc,
+			    /* CONG_OVERVIEW_TREEMODEL_COLOR_COLUMN, g_strdup_printf("#305050"), */
 			    -1);
 	/* FIXME: What colour should the Document node be? */
 
@@ -483,7 +510,7 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 
 	cong_document_register_view( doc, CONG_VIEW(tree_view) );
 
-        tree_view->gtk_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
+        tree_view->gtk_tree_store = gtk_tree_store_new (CONG_OVERVIEW_TREEMODEL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 
 	tree_view->gtk_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(tree_view->gtk_tree_store)));
 
@@ -491,15 +518,23 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 			  "cong_tree_view",
 			  tree_view);
 
-	renderer = gtk_cell_renderer_text_new ();
+	/* A single-columned treeview: */
+	column = gtk_tree_view_column_new();
 
-	/* Create a column, associating the "text" attribute of the
-	 * cell_renderer to the first column of the model */
-	column = gtk_tree_view_column_new_with_attributes (_("Element"), renderer,
-							   "text", TREEVIEW_TITLE_COLUMN,
-							   "foreground", TREEVIEW_FOREGROUND_COLOR_COLUMN,
-							   "background", TREEVIEW_BACKGROUND_COLOR_COLUMN,
-							   NULL);
+	/* Add a pixbuf-renderer to the column: */
+	renderer = gtk_cell_renderer_pixbuf_new ();		
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+ 	gtk_tree_view_column_set_cell_data_func (column, renderer, set_pixbuf, tree_view, NULL);
+
+	/* Add a text renderer to the column: */
+	renderer = gtk_cell_renderer_text_new ();		
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_set_attributes(column,
+					    renderer,
+					    "text", CONG_OVERVIEW_TREEMODEL_TITLE_COLUMN,
+					    "foreground", CONG_OVERVIEW_TREEMODEL_FOREGROUND_COLOR_COLUMN,
+					    "background", CONG_OVERVIEW_TREEMODEL_BACKGROUND_COLOR_COLUMN,
+					    NULL);
 
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view->gtk_tree_view), column);

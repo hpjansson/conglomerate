@@ -62,6 +62,7 @@ conge_SOURCES =             \
   cong-source-view.c        \
   cong-span-text-editor.c   \
   cong-tree-view.c          \
+  cong-view.c               \
   icon_assemble.c           \
   icon_connect.c            \
   icon_new.c                \

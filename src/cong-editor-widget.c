@@ -521,7 +521,7 @@ void populate_widget(CongEditorWidget *widget)
 
 		CONG_EDITOR_WIDGET_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
-		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
+		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_type(displayspec, name)==CONG_ELEMENT_TYPE_STRUCTURAL)
 		{
 			section_head = CONG_SECTION_HEAD_EDITOR(cong_section_head_editor_new(widget, x));
 			details->root_editor = CONG_ELEMENT_EDITOR(section_head);

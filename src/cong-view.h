@@ -100,4 +100,8 @@ struct CongDocumentEvent
 	} data;
 };
 
+
+CongDocument*
+cong_view_get_document(CongView *view);
+
 #endif

@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-06-04  David Malcolm
+
+	* docbook.xds
+
+	Added "icon" attribute to most tags; added names to many tags.
+
 2003-05-26  David Malcolm
 
 	* docbook.xds
