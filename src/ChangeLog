@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node.c
+
+	Self-test now handles children of an entity reference correctly
+
 	* cong-editor-area-text-fragment.c, cong-editor-node-text.c
 
 	Initial attempt to do prelighting of text fragments
