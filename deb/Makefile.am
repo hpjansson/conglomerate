@@ -6,6 +6,8 @@
 
 NULL =
 
+SUBDIRS = patches
+
 # files for building the Debian package
 debian_DISTS = \
     changelog \

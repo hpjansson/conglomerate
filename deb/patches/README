@@ -1,0 +1,19 @@
+Patches that you make on each packages release.
+
+Name convention:
+
+ Pddd[path-[path-]]file.name
+
+Where ddd are three digits. 'P' is mandority prefix.
+
+
+
+Creating the patch file:
+
+  cp path/file.name path/file.name.tarball
+  vi path/file.name
+  diff -u path/file.name.tarball path/file.name > debian/patches/Pdddpath-file.name
+
+or for new files:
+
+  diff -Nu /dev/null path/file.name > debian/patches/Pdddpath-file.name

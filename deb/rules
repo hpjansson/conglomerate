@@ -25,7 +25,7 @@ endif
 
 config.status: configure
 	dh_testdir
-	# Add here commands to configure the package.
+	# Commands to configure the package.
 	./configure --host=$(DEB_HOST_GNU_TYPE) \
 	--build=$(DEB_BUILD_GNU_TYPE) \
 	--prefix=/usr --mandir=\$${prefix}/share/man \
@@ -39,16 +39,25 @@ build: build-stamp
 build-stamp:  config.status
 	dh_testdir
 
-	# Add here commands to compile the package.
+	# Commands to compile the package.
 	$(MAKE)
 	# `cd doc/C ; ./manpage.make`, asume that manual is up-to-date
 
 	touch build-stamp
 
+
+# apply patches
+patch-stamp: debian/patches/P00000patch-stamp
+	pfs=`ls debian/patches/P*` ; \
+	for pf in $$pfs ; do \
+	  patch --forward --silent < $$pf ; \
+	done
+
 clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp 
+	#rm -f build-stamp patch-stamp
+	rm -f build-stamp # run 'patch-stamp' only once
 
 	# Add here commands to clean up after the build process.
 	-$(MAKE) distclean

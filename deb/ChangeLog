@@ -1,3 +1,11 @@
+2003-10-04  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am: 'patches' is a new subdirectory
+
+	* build: copy the patch files into debian dir
+
+	* rules: apply the patches
+
 2003-09-22  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

@@ -1,0 +1,4 @@
+2003-10-04 Geert Stappers <stappers@stappers.nl>
+
+	* ChangeLog, README, Makefile.am, .cvsignore, P00000patch-stamp
+	and P000omf.make: All new files.
