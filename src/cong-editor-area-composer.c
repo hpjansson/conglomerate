@@ -47,10 +47,10 @@ struct CongEditorAreaComposerChildDetails
 };
 
 /* Method implementation prototypes: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -233,61 +233,68 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 
 
 /* Method implementation definitions: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area);
-	GtkRequisition result;
+	gint result;
 	GList *iter;
 	int child_count = 0;
 	gint extra_padding = 0;
 
-	result.width = 0;
-	result.height = 0;
+	result = 0;
 
-	/* Get size requisition for all kids, add in the appropriate axis: */
-	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
-		CongEditorAreaComposerChildDetails *child_details;
-		CongEditorArea *child;
-		const GtkRequisition *child_req;
-
-		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
-		child = CONG_EDITOR_AREA(child_details->child);
-		g_assert (child);
-
-		extra_padding += child_details->extra_padding;
-
-		child_req = cong_editor_area_get_requisition (child,
-							      width_hint);
-		g_assert(child_req);		
-
-		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			result.width += child_req->width;
-			if (result.height<child_req->height) {
-				result.height = child_req->height;
-			}
-		} else {
-			result.height += child_req->height;
-			if (result.width<child_req->width) {
-				result.width = child_req->width;
-			}
+	if (orientation == PRIVATE(area_composer)->orientation) {
+		/* Then we're getting the req along the "important" axis; it's the sum of all the kids plus any padding etc: */
+		for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+			CongEditorAreaComposerChildDetails *child_details;
+			CongEditorArea *child;
+			guint child_req;
+			
+			child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+			child = CONG_EDITOR_AREA(child_details->child);
+			g_assert (child);
+			
+			extra_padding += child_details->extra_padding;
+			
+			child_req = cong_editor_area_get_requisition (child,
+								      orientation,
+								      width_hint);
+			
+			result += child_req;
+			
+			child_count++;
 		}
 		
-		child_count++;
-	}
-
-	if (child_count>1) {
-		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			result.width += (PRIVATE(area_composer)->spacing * (child_count-1)) + extra_padding;
-		} else {
-			result.height += (PRIVATE(area_composer)->spacing * (child_count-1)) + extra_padding;
+		if (child_count>1) {
+			result += (PRIVATE(area_composer)->spacing * (child_count-1)) + extra_padding;
 		}		
+		
+	} else {
+		/* Then we're getting the req along the "lesser" axis; it's merely the maximal req of any kid in this dimension: */
+		for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+			CongEditorAreaComposerChildDetails *child_details;
+			CongEditorArea *child;
+			guint child_req;
+			
+			child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+			child = CONG_EDITOR_AREA(child_details->child);
+			g_assert (child);
+			
+			child_req = cong_editor_area_get_requisition (child,
+								      orientation,
+								      width_hint);
+			if (result<child_req) {
+				result = child_req;
+			}
+			
+			child_count++;
+		}
 	}
 
-	output->width = result.width;
-	output->height = result.height;
+	return result;
 }
 
 static void
@@ -298,7 +305,17 @@ allocate_child_space (CongEditorArea *area)
 	gint x;
 	gint y;
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
-	const GtkRequisition *this_req = cong_editor_area_get_cached_requisition (area);
+#if 0
+	guint this_width = rect->width;
+	guint this_height = rect->height;
+#else
+	guint this_width = cong_editor_area_get_requisition (area, 
+							     GTK_ORIENTATION_HORIZONTAL,
+							     rect->width);
+	guint this_height = cong_editor_area_get_requisition (area, 
+							      GTK_ORIENTATION_VERTICAL,
+							      rect->width);
+#endif
 	gint total_surplus_space = 0;
 	gint surplus_space_per_expandable_child = 0;
 	guint num_expandable_children = 0;
@@ -321,9 +338,9 @@ allocate_child_space (CongEditorArea *area)
 		}
 		
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			total_surplus_space = rect->width - this_req->width;
+			total_surplus_space = rect->width - this_width;
 		} else {
-			total_surplus_space = rect->height - this_req->height;
+			total_surplus_space = rect->height - this_height;
 		}
 		
 		if (total_surplus_space<0) {
@@ -338,12 +355,21 @@ allocate_child_space (CongEditorArea *area)
 		}
 	}
 
+#if 1
+	g_message("-->%ccomposer giving children an alloc of (%i,%i); surplus space=%i (%i per expandable child)",
+		  ((PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL)?'h':'v'),
+		  this_width,
+		  this_height,
+		  total_surplus_space,
+		  surplus_space_per_expandable_child);
+#endif
 
 	/* Second pass: allocate all the space: */
 	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
 		CongEditorAreaComposerChildDetails *child_details;
 		CongEditorArea *child;
-		const GtkRequisition *child_req;
+		guint child_req_width;
+		guint child_req_height;
 		int child_width;
 		int child_height;
 		int extra_offset;
@@ -351,15 +377,15 @@ allocate_child_space (CongEditorArea *area)
 		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
 		child = CONG_EDITOR_AREA(child_details->child);
 
-		child_req = cong_editor_area_get_cached_requisition (child);
-		g_assert(child_req);
+		child_req_width = cong_editor_area_get_requisition (child, GTK_ORIENTATION_HORIZONTAL, this_width);
+		child_req_height = cong_editor_area_get_requisition (child, GTK_ORIENTATION_VERTICAL, this_width);
 
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			child_width = child_req->width;
+			child_width = child_req_width;
 			child_height = rect->height;
 		} else {
 			child_width = rect->width;
-			child_height = child_req->height;
+			child_height = child_req_height;
 		}
 		extra_offset = child_details->extra_padding;
 
@@ -375,6 +401,16 @@ allocate_child_space (CongEditorArea *area)
 			}
 		}
 
+#if 1
+		g_message("-->%ccomposer giving %s child with cached req (%i,%i) an alloc of (%i,%i)",
+			  ((PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL)?'h':'v'),
+			  (child_details->expand?"expandable":"non-expandable"),
+			  child_req_width,
+			  child_req_height,
+			  child_width,
+			  child_height);
+#endif
+
 		cong_editor_area_set_allocation (child,
 						 x,
 						 y,
@@ -382,9 +418,9 @@ allocate_child_space (CongEditorArea *area)
 						 child_height);
 		
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			x += child_req->width + PRIVATE(area_composer)->spacing + extra_offset;
+			x += child_req_width + PRIVATE(area_composer)->spacing + extra_offset;
 		} else {
-			y += child_req->height + PRIVATE(area_composer)->spacing + extra_offset;
+			y += child_req_height + PRIVATE(area_composer)->spacing + extra_offset;
 		}
 	}
 }

@@ -31,8 +31,9 @@
 #define PRIVATE(x) ((x)->private)
 
 #define DEBUG_REQUISITIONS 0
-#define DEBUG_ALLOCATIONS 0
-#define DEBUG_RENDER_ALLOCATIONS 1
+#define DEBUG_ALLOCATIONS 1
+#define DEBUG_RENDER_ALLOCATIONS 0
+#define DEBUG_RENDERING 1
 
 enum {
 	BUTTON_PRESS_EVENT,
@@ -50,6 +51,13 @@ enum {
 
 static guint signals[LAST_SIGNAL] = {0};
 
+typedef struct RequisitionCache
+{
+	gboolean requisition_cache_valid;
+	guint last_calculated_requisition;
+	int cached_width_hint;
+} RequisitionCache;
+
 struct CongEditorAreaDetails
 {
 	CongEditorWidget3 *editor_widget;
@@ -59,15 +67,13 @@ struct CongEditorAreaDetails
 	gboolean is_hidden;
 	GdkRectangle window_area; /* allocated area in window space */
 
-	gboolean requisition_cache_valid;
-
-	GtkRequisition last_calculated_requisition;
-	int cached_width_hint;
+	RequisitionCache requisition_cache[2];
 };
 
 /* Signal handler declarations: */
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  GtkOrientation orientation,
 				  gpointer user_data);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
@@ -143,9 +149,9 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 							 G_SIGNAL_RUN_FIRST,
 							 0, /* G_STRUCT_OFFSET(CongEditorAreaClass, flush_requisition_cache), */
 							 NULL, NULL,
-							 g_cclosure_marshal_VOID__VOID,
+							 g_cclosure_marshal_VOID__ENUM,
 							 G_TYPE_NONE, 
-							 0);
+							 1, GTK_TYPE_ORIENTATION);
 
 }
 
@@ -205,15 +211,20 @@ cong_editor_area_get_window_coords (CongEditorArea *area)
 	return &PRIVATE(area)->window_area;
 }
 
-const GtkRequisition*
+guint
 cong_editor_area_get_requisition (CongEditorArea *area,
+				  GtkOrientation orientation,
 				  int width_hint)
 {
+	RequisitionCache *cache;
+
 	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
 
+	cache = &PRIVATE(area)->requisition_cache[orientation];
+
 	/* If not up-to-date, call fn to regenerate cache: */
-	if ( (width_hint!=PRIVATE(area)->cached_width_hint) 
-	     || (!PRIVATE(area)->requisition_cache_valid) ) {
+	if ( (width_hint!=cache->cached_width_hint) 
+	     || (!cache->requisition_cache_valid) ) {
 		
 #if DEBUG_REQUISITIONS
 		g_message("cong_editor_area_get_requisition:  recalcing cache on %s with width_hint %i", 
@@ -221,24 +232,30 @@ cong_editor_area_get_requisition (CongEditorArea *area,
 			  width_hint);
 #endif
 
-		cong_editor_area_calc_requisition (area, 
-						   width_hint,
-						   &PRIVATE(area)->last_calculated_requisition);
+		cache->last_calculated_requisition = cong_editor_area_calc_requisition (area, 
+											orientation,
+											width_hint
+											);
 
-		PRIVATE(area)->cached_width_hint = width_hint;
+		cache->cached_width_hint = width_hint;
 
-		PRIVATE(area)->requisition_cache_valid = TRUE;
+		cache->requisition_cache_valid = TRUE;
 	}
 
-	return &PRIVATE(area)->last_calculated_requisition;
+	return cache->last_calculated_requisition;
 }
 
-const GtkRequisition*
-cong_editor_area_get_cached_requisition (CongEditorArea *area)
+gint
+cong_editor_area_get_cached_requisition (CongEditorArea *area,
+					 GtkOrientation orientation)
 {
+	RequisitionCache *cache;
+
 	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
 
-	return &PRIVATE(area)->last_calculated_requisition;
+	cache = &PRIVATE(area)->requisition_cache[orientation];
+
+	return cache->last_calculated_requisition;
 }
 
 
@@ -317,6 +334,15 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 		}
 #endif
 
+#if DEBUG_RENDERING
+		g_message("%s::render_self(%i,%i,%i,%i)",
+			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area)), 
+			  intersected_area.x,
+			  intersected_area.y,
+			  intersected_area.width,
+			  intersected_area.height);
+#endif
+
 		/* Render self: */
 		CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
 				      area,
@@ -381,17 +407,17 @@ cong_editor_area_on_key_press (CongEditorArea *editor_area,
 	return result;
 }
 
-void 
+guint
 cong_editor_area_calc_requisition (CongEditorArea *editor_area, 
-				   int width_hint,
-				   GtkRequisition *output)
+				   GtkOrientation orientation,
+				   int width_hint)
 {
 	g_return_if_fail (editor_area);
 
-	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
-			      editor_area,
-			      calc_requisition, 
-			      (editor_area, width_hint, output));
+	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
+						       editor_area,
+						       calc_requisition, 
+						       (editor_area, orientation, width_hint));
 }
 
 void 
@@ -441,20 +467,26 @@ cong_editor_area_queue_redraw (CongEditorArea *editor_area)
 }
 
 void
-cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area)
+cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area,
+					  GtkOrientation orientation)
 {
+	RequisitionCache *cache;
+
 	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
+
+	cache = &PRIVATE(editor_area)->requisition_cache[orientation];
 	
-	if (PRIVATE(editor_area)->requisition_cache_valid) {
+	if (cache->requisition_cache_valid) {
 
 #if DEBUG_REQUISITIONS
 		g_message("flush_requisition_cache called on a valid cache (%s)", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)));
 #endif
 
-		PRIVATE(editor_area)->requisition_cache_valid = FALSE;
+		cache->requisition_cache_valid = FALSE;
 		
 		g_signal_emit (G_OBJECT(editor_area),
-			       signals[FLUSH_REQUISITION_CACHE], 0);
+			       signals[FLUSH_REQUISITION_CACHE], 0,
+			       orientation);
 	}
 }
 
@@ -649,6 +681,7 @@ cong_editor_area_protected_set_parent (CongEditorArea *area,
 /* Signal handler definitions: */
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  GtkOrientation orientation,
 				  gpointer user_data)
 {
 	CongEditorArea *fake_parent_area = CONG_EDITOR_AREA(user_data);
@@ -660,5 +693,7 @@ on_child_flush_requisition_cache (CongEditorArea *child_area,
 	g_return_if_fail (IS_CONG_EDITOR_AREA(child_area) );
 	
 	/* One of children has changed its requisition; so must we: */
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area));
+	/* FIXME: we flush our cache in both axes, just to be sure... */
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area), GTK_ORIENTATION_VERTICAL);
 }

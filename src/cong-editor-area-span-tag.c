@@ -62,10 +62,10 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -306,23 +306,18 @@ render_self (CongEditorArea *area,
 #endif
 }
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
-	const GtkRequisition *child_req;
-	
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(area);
 
 	g_assert (PRIVATE(span_tag)->span_vcompose);
 		 
-	child_req = cong_editor_area_get_requisition (PRIVATE(span_tag)->span_vcompose,
-						      width_hint);
-	g_assert(child_req);
-		
-	output->width = child_req->width;
-	output->height = child_req->height;
+	return cong_editor_area_get_requisition (PRIVATE(span_tag)->span_vcompose,
+						 orientation,
+						 width_hint);
 }
 
 static void

@@ -34,10 +34,10 @@ struct CongEditorAreaBorderDetails
 };
 
 /* Method implementation prototypes: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -91,31 +91,28 @@ cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 }
 
 /* Method implementation definitions: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
-	const GtkRequisition *child_req = NULL;
-
 	CongEditorAreaBorder *border = CONG_EDITOR_AREA_BORDER(area);
 	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area);
 	CongEditorArea *child;
+	gint border_pixels = (2 * PRIVATE(border)->pixels);
+	gint child_req;
 
 	child = cong_editor_area_bin_get_child(bin);
 
 	if (child) {
-
 		child_req = cong_editor_area_get_requisition (child,
+							      orientation,
 							      width_hint);
-		g_assert(child_req);
-		
-		output->width = child_req->width + (2 * PRIVATE(border)->pixels);
-		output->height = child_req->height + (2 * PRIVATE(border)->pixels);
 	} else {
-		output->width = (2 * PRIVATE(border)->pixels);
-		output->height = (2 * PRIVATE(border)->pixels);
+		child_req = 0;
 	}
+
+	return child_req + border_pixels;
 }
 
 static void

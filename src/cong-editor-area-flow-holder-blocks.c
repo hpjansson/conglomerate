@@ -39,10 +39,10 @@ struct CongEditorAreaFlowHolderBlocksDetails
 };
 
 /* Method implementation prototypes: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -139,10 +139,10 @@ cong_editor_area_flow_holder_get_child_flow_holder_for_node (CongEditorAreaFlowH
 }
 
 /* Method implementation definitions: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
 	const GtkRequisition *child_req;
 
@@ -150,12 +150,11 @@ calc_requisition (CongEditorArea *area,
 
 	if (PRIVATE(area_flow_holder_blocks)->outer_compose) {
 
-		child_req = cong_editor_area_get_requisition (CONG_EDITOR_AREA(PRIVATE(area_flow_holder_blocks)->outer_compose),
-							      width_hint);
-		g_assert(child_req);
-		
-		output->width = child_req->width;
-		output->height = child_req->height;
+		return cong_editor_area_get_requisition (CONG_EDITOR_AREA(PRIVATE(area_flow_holder_blocks)->outer_compose),
+							 orientation,
+							 width_hint);
+	} else {
+		return 0;
 	}
 }
 

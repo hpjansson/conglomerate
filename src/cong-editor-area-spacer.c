@@ -36,10 +36,10 @@ struct CongEditorAreaSpacerDetails
 };
 
 /* Method implementation prototypes: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaSpacer, 
@@ -94,18 +94,16 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 }
 
 /* Method implementation definitions: */
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
 	CongEditorAreaSpacer *area_spacer = CONG_EDITOR_AREA_SPACER(area);
-	
-	if (PRIVATE(area_spacer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-		output->width = PRIVATE(area_spacer)->spacing;
-		output->height = 0;
+
+	if (PRIVATE(area_spacer)->orientation == orientation) {
+		return PRIVATE(area_spacer)->spacing;
 	} else {
-		output->width = 0;
-		output->height = PRIVATE(area_spacer)->spacing;
+		return 0;
 	}
 }

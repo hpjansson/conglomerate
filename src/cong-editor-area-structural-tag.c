@@ -59,10 +59,10 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -237,15 +237,22 @@ render_self (CongEditorArea *area,
 	CongDispspecElement *ds_element = PRIVATE(area_structural_tag)->ds_element;
 	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
 	GdkWindow *window = cong_editor_area_get_gdk_window(area);
+#if 0
 	const GtkRequisition *title_req;
+#endif
 	gint title_bar_height;
 
 	gboolean expanded = TRUE;
 
+#if 1
+	title_bar_height = cong_editor_area_get_cached_requisition (PRIVATE(area_structural_tag)->title_vcompose,
+								    GTK_ORIENTATION_VERTICAL);
+#else
 	title_req = cong_editor_area_get_cached_requisition (PRIVATE(area_structural_tag)->title_vcompose);
 	g_assert(title_req);
 
 	title_bar_height = title_req->height;
+#endif
 
 	gc = cong_dispspec_element_gc (ds_element,
 				       CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
@@ -307,40 +314,27 @@ render_self (CongEditorArea *area,
 	}
 }
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
-#if 0
-	gint width;
-#endif
-	const GtkRequisition *title_req;
-	const GtkRequisition *inner_req;
-
-	CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
-
-	title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose,
-						      width_hint-1);
-	g_assert(title_req);
-	
-	inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
-						      width_hint-1);
-	g_assert(inner_req);
-
-#if 0
-	width = 0;
-
-	if (width < title_req->width) {
-		width = title_req->width;
+	if (orientation==GTK_ORIENTATION_HORIZONTAL) {
+		return width_hint;
+	} else {
+		gint title_req;
+		gint inner_req;
+		
+		CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
+		
+		title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose,
+							      orientation,
+							      width_hint-1);
+		inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
+							      orientation,
+							      width_hint-1);
+		return title_req + inner_req+3;	
 	}
-	if (width < inner_req->width) {
-		width = inner_req->width;
-	}
-#endif
-
-	output->width = width_hint;
-	output->height = title_req->height + inner_req->height+3;
 }
 
 static void
@@ -348,25 +342,25 @@ allocate_child_space (CongEditorArea *area)
 {
 	CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
-	const GtkRequisition *title_req;
+	guint title_req_height;
 
 	PRIVATE(structural_tag)->title_vcompose;
 	PRIVATE(structural_tag)->inner_bin;
 
-	title_req = cong_editor_area_get_cached_requisition (PRIVATE(structural_tag)->title_vcompose);
-	g_assert(title_req);
+	title_req_height = cong_editor_area_get_cached_requisition (PRIVATE(structural_tag)->title_vcompose,
+								    GTK_ORIENTATION_VERTICAL);
 
 	cong_editor_area_set_allocation (PRIVATE(structural_tag)->title_vcompose,
 					 rect->x+1,
 					 rect->y+1,
 					 rect->width-1,
-					 title_req->height);
+					 title_req_height);
 
 	cong_editor_area_set_allocation (PRIVATE(structural_tag)->inner_bin,
 					 rect->x+1,
-					 rect->y+2+title_req->height,
+					 rect->y+2+title_req_height,
 					 rect->width-1,
-					 rect->height-(3+title_req->height));
+					 rect->height-(3+title_req_height));
 }
 
 static CongEditorArea*

@@ -54,6 +54,7 @@ handle_children_changed (CongEditorAreaContainer* area_container);
 
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  GtkOrientation orientation,
 				  gpointer user_data);
 
 /* GObject boilerplate stuff: */
@@ -178,7 +179,8 @@ cong_editor_area_container_children_changed ( CongEditorAreaContainer *area_cont
 	g_signal_emit (G_OBJECT(area_container),
 		       signals[CHILDREN_CHANGED], 0);
 
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_VERTICAL);
 }
 
 /* Protected:  For implementing subclasses */
@@ -202,11 +204,13 @@ cong_editor_area_container_protected_postprocess_add_non_internal_child (CongEdi
 static void 
 handle_children_changed (CongEditorAreaContainer* area_container)
 {
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));	
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_VERTICAL);
 }
 
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  GtkOrientation orientation,
 				  gpointer user_data)
 {
 	CongEditorAreaContainer *area_container = CONG_EDITOR_AREA_CONTAINER(user_data);
@@ -218,5 +222,6 @@ on_child_flush_requisition_cache (CongEditorArea *child_area,
 	g_return_if_fail (IS_CONG_EDITOR_AREA(child_area) );
 	
 	/* One of children has changed its requisition; so must we: */
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_VERTICAL);
 }

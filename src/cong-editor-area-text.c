@@ -43,10 +43,10 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -153,7 +153,8 @@ cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 			       -1);
 
 	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_VERTICAL);
 }
 
 void
@@ -168,7 +169,8 @@ cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
 				 -1);
 
 	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
-	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_HORIZONTAL);
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_VERTICAL);
 }
 
 gboolean
@@ -207,8 +209,12 @@ render_self (CongEditorArea *area,
 				rect->width * PANGO_SCALE);
 
 #if 0
-	cong_editor_area_debug_render_area (area,
-					    PRIVATE(area_text)->gc);
+	g_message("rendering text \"%s\" at (%i,%i,%i,%i)",
+		  "fubar",
+		  rect->x,
+		  rect->y,
+		  rect->width,
+		  rect->height);
 #endif
 
 	gdk_draw_layout (window, 
@@ -218,11 +224,12 @@ render_self (CongEditorArea *area,
 			 PRIVATE(area_text)->pango_layout);
 }
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
+	gint width, height;
 	CongEditorAreaText *area_text = CONG_EDITOR_AREA_TEXT(area);
 
 	/* Try the suggested width; calculate how high that makes you want to be: */
@@ -230,12 +237,18 @@ calc_requisition (CongEditorArea *area,
 				width_hint*PANGO_SCALE);
 
 	pango_layout_get_pixel_size (PRIVATE(area_text)->pango_layout,
-				     &output->width,
-				     &output->height);	
+				     &width,
+				     &height);	
 
-	/* Shrink to size of width hint if above it: */
-	if (output->width>width_hint) {
-		output->width = width_hint;
+	if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+		/* Shrink to size of width hint if above it: */
+		if (width>width_hint) {
+			return width_hint;
+		} else {
+			return width;
+		}
+	} else {
+		return height;
 	}
 }
 

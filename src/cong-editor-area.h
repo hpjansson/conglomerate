@@ -57,9 +57,9 @@ struct CongEditorAreaClass
 	void (*render_self) (CongEditorArea *area,
 			     const GdkRectangle *widget_rect);
 
-	void (*calc_requisition) (CongEditorArea *area, 
-				  int width_hint,
-				  GtkRequisition *output);
+	gint (*calc_requisition) (CongEditorArea *area, 
+				  GtkOrientation orientation,
+				  int width_hint);
 
 	void (*allocate_child_space) (CongEditorArea *area);
 
@@ -85,7 +85,8 @@ struct CongEditorAreaClass
 			      GdkEventKey *event);
 
 	/* Signal emission hooks: */
-	void (*flush_requisition_cache) (CongEditorArea *area);
+	void (*flush_requisition_cache) (CongEditorArea *area,
+					 GtkOrientation orientation);
 };
 
 GType
@@ -107,19 +108,22 @@ cong_editor_area_is_hidden (CongEditorArea *area);
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area);
 
-const GtkRequisition*
+guint
 cong_editor_area_get_requisition (CongEditorArea *area,
+				  GtkOrientation orientation,
 				  int width_hint);
 
-const GtkRequisition*
-cong_editor_area_get_cached_requisition (CongEditorArea *area);
+gint
+cong_editor_area_get_requisition_width (CongEditorArea *area,
+					int width_hint);
 
-#if 0
-void 
-cong_editor_area_set_requisition (CongEditorArea *area,
-				  gint width,
-				  gint height);
-#endif
+gint
+cong_editor_area_get_requisition_height (CongEditorArea *area,
+					 int width_hint);
+
+gint
+cong_editor_area_get_cached_requisition (CongEditorArea *area,
+					 GtkOrientation orientation);
 
 void 
 cong_editor_area_debug_render_area (CongEditorArea *area,
@@ -145,10 +149,18 @@ gboolean
 cong_editor_area_on_key_press (CongEditorArea *editor_area, 
 			       GdkEventKey *event);
 
-void 
+guint
 cong_editor_area_calc_requisition (CongEditorArea *editor_area, 
-				   int width_hint,
-				   GtkRequisition *output);
+				   GtkOrientation orientation,
+				   int width_hint);
+
+gint
+cong_editor_area_calc_requisition_width (CongEditorArea *editor_area, 
+					 int width_hint);
+
+gint
+cong_editor_area_calc_requisition_height (CongEditorArea *editor_area, 
+					  int width_hint);
 
 void 
 cong_editor_area_set_allocation (CongEditorArea *editor_area,
@@ -161,7 +173,8 @@ void
 cong_editor_area_queue_redraw (CongEditorArea *editor_area);
 
 void
-cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area);
+cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area,
+					  GtkOrientation orientation);
 
 /* Iterate over all children of this area, even "internal" ones.
  * Return value: the child that stopped the traveral, of NULL if none did

@@ -40,10 +40,10 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output);
+		  GtkOrientation orientation,
+		  int width_hint);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaUnderline, 
@@ -152,13 +152,16 @@ render_self (CongEditorArea *area,
 	}
 }
 
-static void 
+static gint
 calc_requisition (CongEditorArea *area, 
-		  int width_hint,
-		  GtkRequisition *output)
+		  GtkOrientation orientation,
+		  int width_hint)
 {
 	CongEditorAreaUnderline *area_underline = CONG_EDITOR_AREA_UNDERLINE(area);
 
-	output->width = 0;
-	output->height = 5;
+	if (orientation==GTK_ORIENTATION_HORIZONTAL) {
+		return 0;
+	} else {
+		return 5;
+	}
 }

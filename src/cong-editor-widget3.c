@@ -255,6 +255,7 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
 /* Declarations of CongEditorArea event handlers: */
 static void
 on_root_requisition_change (CongEditorArea *child_area,
+			    GtkOrientation orientation,
 			    gpointer user_data);
 
 /* Implementations of public functions: */
@@ -636,23 +637,27 @@ static void size_request_handler(GtkWidget *widget,
 {
  	CongDocument *doc;
  	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
-	const GtkRequisition* req;
+	GtkRequisition root_req;
  
  	LOG_GTK_WIDGET_SIGNAL1("size_request_handler");
 
  	g_assert(widget);
  	g_assert(requisition);
 
-	req = cong_editor_area_get_requisition (PRIVATE(editor_widget)->root_area,
-						widget->allocation.width); 
+	root_req.width = cong_editor_area_get_requisition (PRIVATE(editor_widget)->root_area,
+							   GTK_ORIENTATION_HORIZONTAL,
+							   widget->allocation.width); 
+	root_req.height = cong_editor_area_get_requisition (PRIVATE(editor_widget)->root_area,
+							    GTK_ORIENTATION_VERTICAL,
+							    widget->allocation.width); 
 
 	/* Only request up to the width you've already been allocated; don't grow in width unless your container gives you more room. */
-	if (req->width > widget->allocation.width) {
+	if (root_req.width > widget->allocation.width) {
 		requisition->width = widget->allocation.width;
 	} else {
-		requisition->width = req->width;
+		requisition->width = root_req.width;
 	}
- 	requisition->height = req->height;
+ 	requisition->height = root_req.height;
 }
 
 /* Definitions of the CongDocument event handlers: */
@@ -942,6 +947,7 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
 /* Definitions of CongEditorArea event handlers: */
 static void
 on_root_requisition_change (CongEditorArea *child_area,
+			    GtkOrientation orientation,
 			    gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data);
