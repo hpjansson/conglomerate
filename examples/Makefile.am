@@ -22,6 +22,7 @@ dispspec_DATA 	 = \
 	xhtml1-strict.xds
 	xsl.xds
 
+# bugzilla #122011
 dtddir 	 = $(datadir)/conglomerate/dtd
 dtd_DATA	= xds.dtd
 
