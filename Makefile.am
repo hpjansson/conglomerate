@@ -2,6 +2,7 @@ SUBDIRS = src po data doc examples pixmaps glade
 
 EXTRA_DIST = BUGS	\
   .diffexclude		\
+  conglomerate.spec	\
   intltool-extract.in	\
   intltool-merge.in	\
   intltool-update.in	\

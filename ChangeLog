@@ -1,3 +1,11 @@
+2003-08-18  Michael Rasmussen <mir@datanom.net>
+
+	* conglomerate.spec
+	A new file. It is for RPM packaging.
+
+	* Makefile.am
+	The new file should go into the distribution tarball.
+
 2003-08-10  Geert Stappers <stappers@stappers.nl>
 
 	* configure.in
