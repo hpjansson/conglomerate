@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+#  Script to start build a debian package
+#  Copyright 2003 by Geert Stappers under the terms of GPL v2.0
+#
+
+#
+if [ -d debian ]
+then
+  echo There is already a debian directory
+  echo assuming there is no need to run this script
+  echo gonna exit it
+  echo mayby you want to do \`debian/rules binary\`
+  exit 1
+fi
+
+if [ "G${0}" != "Gdeb/build" ]
+then
+  echo We expect you to run this script as \`deb/build\`
+  echo  to make sure you are in the toplevel directory of this project.
+  exit 1
+fi
+
+if [ ! -x ./configure ]
+then
+  echo assuming you did a fresh CVS checkout
+  echo gonna run \`./autogen.sh\` for you
+  ./autogen.sh
+fi
+
+echo coping the deb directory into debian
+cp -a deb debian
+
+# assuming the user has debian development stuff installed
+# ( this is place where a test on such executables should done )
+
+echo gonna build the package
+dpkg-buildpackage -rfakeroot -us -uc
+
+echo one directory level up, are these .deb files:
+ls -ltr ../*.deb
+
+# end of script

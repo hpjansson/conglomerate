@@ -6,6 +6,7 @@ EXTRA_DIST = BUGS	\
   intltool-merge.in	\
   intltool-update.in	\
   deb/Readme		\
+  deb/build		\
   deb/changelog		\
   deb/control		\
   deb/copyright		\

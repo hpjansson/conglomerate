@@ -51,6 +51,13 @@ to build a Windows version for a long time; please contact the development list
 (see below) if you attempt this to let us know how you get on.
 
 
+If you want to make a debian package from the tarbal or CVS type
+
+   deb/build
+
+
+
+
 Running
 -------
 
