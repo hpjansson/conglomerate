@@ -29,15 +29,19 @@ conglomerate_SOURCES =      \
   cong-editor-area-flow-holder-blocks.h \
   cong-editor-area-flow-holder-inlines.h \
   cong-editor-area-flow-holder-single.h \
+  cong-editor-area-line.h \
   cong-editor-area-pixbuf.h \
   cong-editor-area-spacer.h \
   cong-editor-area-text.h   \
+  cong-editor-area-text-fragment.h   \
   cong-editor-area-span-tag.h \
   cong-editor-area-structural-tag.h \
   cong-editor-area-underline.h \
   cong-editor-area-unknown-tag.h   \
   cong-editor-child-policy.h \
   cong-editor-child-policy-flow-holder.h \
+  cong-editor-child-policy-inline.h \
+  cong-editor-line-fragments.h \
   cong-editor-node.h        \
   cong-editor-node-document.h \
   cong-editor-node-element.h \
@@ -85,15 +89,19 @@ conglomerate_SOURCES =      \
   cong-editor-area-flow-holder-blocks.c \
   cong-editor-area-flow-holder-inlines.c \
   cong-editor-area-flow-holder-single.c \
+  cong-editor-area-line.c \
   cong-editor-area-pixbuf.c \
   cong-editor-area-spacer.c \
   cong-editor-area-text.c   \
+  cong-editor-area-text-fragment.c   \
   cong-editor-area-span-tag.c \
   cong-editor-area-structural-tag.c \
   cong-editor-area-underline.c \
   cong-editor-area-unknown-tag.c   \
   cong-editor-child-policy.c \
   cong-editor-child-policy-flow-holder.c \
+  cong-editor-child-policy-inline.c \
+  cong-editor-line-fragments.c \
   cong-editor-node.c        \
   cong-editor-node-document.c \
   cong-editor-node-element.c \

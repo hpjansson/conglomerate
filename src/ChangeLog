@@ -1,3 +1,9 @@
+2003-08-01  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-line.c, cong-editor-area-line.h, cong-editor-area-text-fragment.c, cong-editor-area-text-fragment.h, cong-editor-child-policy-inline.c, cong-editor-child-policy-inline.h, cong-editor-line-fragments.c, cong-editor-line-fragments.h, Makefile.am
+
+	New files:  new implementation of text, to support inline blocks having underlines
+
 2003-07-31  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-file-import.c, cong-menus.c, plugin-dtd.c
