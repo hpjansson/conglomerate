@@ -1,6 +1,23 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+Conglomerate 0.7.3, announced september 23th 2003
+  
+ - Optimisations:  cursor movement and mouse dragging are now
+ significantly faster for large documents, other operations should be
+ slightly less chuggy than before.  (me)
+ - Fix for bug 114670 (opening files from the command line) (Varga
+ Robert)
+ - Removed lots of dead code (me)
+ - Updated README, now as a DocBook file (me)
+ - Added userinput and command as span tags to the DocBook display
+ specification
+ - Added "sr", "sr@Latn" translations (Danilo Segan)
+ - Added "sv" translation (Christian Rose)
+ --
+ David Malcolm
+ www.conglomerate.org
+ 
 Version 0.7.2 announced september 18th 2003
 
 Enhancements
