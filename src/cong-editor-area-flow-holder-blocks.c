@@ -263,7 +263,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 				if (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(editor_node_prev)) {
 					/* Then we've found an inline flow to add ourselves to: */
 					child_flow_holder = cong_editor_area_flow_holder_get_child_flow_holder_for_node (area_flow_holder_blocks,
-															 doc_node->prev);
+															 cong_editor_node_get_node (editor_node_prev));
 					g_assert(child_flow_holder);
 				}
 			} else {
@@ -271,7 +271,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 					if (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(editor_node_next)) {
 						/* then add ourselves in front of this node in its inline flow */
 						child_flow_holder = cong_editor_area_flow_holder_get_child_flow_holder_for_node (area_flow_holder_blocks,
-																 doc_node->next);
+																 cong_editor_node_get_node (editor_node_next));
 						g_assert(child_flow_holder);
 					}
 				}

@@ -1,5 +1,9 @@
 2003-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-blocks.c
+
+	Fix for bug #130724 (crash on loading examples/test-docbook.c)
+
 	* cong-editor-node.c
 
 	Fixed copy & paste typo in cong_editor_node_get_next
