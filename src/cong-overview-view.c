@@ -45,19 +45,53 @@ GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 			    CongNodePtr node,
 			    gpointer user_data);
 
+static void
+on_doc_set_url (CongDocument *doc,
+		const gchar *new_url,
+		gpointer user_data);
+
+static void
+on_widget_destroy (GtkWidget *widget,
+		   gpointer user_data);
+
+
+typedef struct CongOverviewDetails CongOverviewDetails;
+
+struct CongOverviewDetails
+{
+	CongTreeView *tree_view;
+	CongDocument *doc;
+	gulong sigid_set_url;
+};
+
 /* Exported function implementations: */
 CongTreeView*
 cong_overview_view_new (CongDocument *doc)
 {
+	CongOverviewDetails *overview_details;
+
 	g_return_val_if_fail (doc, NULL);
+
+	overview_details = g_new0 (CongOverviewDetails,1);
 	
-	return cong_tree_view_new (doc,
-				   FALSE,
-				   node_filter,
-				   node_creation_callback,
-				   pixbuf_callback,
-				   NULL				   
-				   );
+	overview_details->tree_view = cong_tree_view_new (doc,
+							  FALSE,
+							  node_filter,
+							  node_creation_callback,
+							  pixbuf_callback,
+							  NULL);
+
+	overview_details->doc = doc;
+	g_object_ref (G_OBJECT (doc));
+	overview_details->sigid_set_url = g_signal_connect_after (G_OBJECT (doc),
+								  "set_url",
+								  G_CALLBACK (on_doc_set_url),
+								  overview_details);
+	g_signal_connect_after (G_OBJECT (cong_tree_view_get_widget (overview_details->tree_view)),
+				"destroy",
+				G_CALLBACK (on_widget_destroy),
+				overview_details);
+	return overview_details->tree_view;
 }
 
 /* Internal function implementations: */
@@ -277,4 +311,31 @@ GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 	}
 
 	return NULL;
+}
+
+static void
+on_doc_set_url (CongDocument *doc,
+		const gchar *new_url,
+		gpointer user_data)
+{
+	CongOverviewDetails *overview_details = (CongOverviewDetails*)user_data;
+	g_assert (IS_CONG_DOCUMENT (doc));
+	g_assert (new_url);
+
+	/* Update root: */
+	cong_tree_view_protected_force_node_update (overview_details->tree_view,
+						    (CongNodePtr)cong_document_get_xml (doc));
+}
+
+static void
+on_widget_destroy (GtkWidget *widget,
+		   gpointer user_data)
+{
+	CongOverviewDetails *overview_details = (CongOverviewDetails*)user_data;
+
+	g_signal_handler_disconnect (G_OBJECT (overview_details->doc),
+				     overview_details->sigid_set_url);
+	g_object_unref (G_OBJECT (overview_details->doc));
+
+	g_free (overview_details);
 }

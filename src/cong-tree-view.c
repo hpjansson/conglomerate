@@ -104,6 +104,10 @@ get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkT
 static CongNodePtr
 get_node_for_iter(CongTreeViewDetails *tree_view_details, GtkTreeIter* tree_iter);
 
+static void 
+regenerate_data_for_node (CongTreeView *cong_tree_view, 
+			  CongNodePtr node);
+
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
@@ -314,6 +318,13 @@ cong_tree_view_protected_get_tree_store (CongTreeView *tree_view)
 	return tree_view->private->gtk_tree_store;
 }
 
+void
+cong_tree_view_protected_force_node_update (CongTreeView *tree_view,
+					    CongNodePtr node)
+{
+	regenerate_data_for_node (tree_view, 
+				  node);
+}
 
 
 /* Internal function implementations: */

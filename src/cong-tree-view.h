@@ -80,6 +80,10 @@ cong_tree_view_get_selected_node (CongTreeView *cong_tree_view);
 GtkTreeStore* 
 cong_tree_view_protected_get_tree_store (CongTreeView *tree_view);
 
+void
+cong_tree_view_protected_force_node_update (CongTreeView *tree_view,
+					    CongNodePtr node);
+
 enum
 {
 	/* Set by the base tree view: */

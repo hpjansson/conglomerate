@@ -1,3 +1,9 @@
+2003-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-overview-view.c, cong-tree-view.c, cong-tree-view.h
+
+	Update root of Overview tree when URL changes, fixing bug #130728
+
 2003-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-document.c, cong-document.h, cong-file-properties.c
