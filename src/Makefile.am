@@ -44,6 +44,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-text-comment.h   \
   cong-editor-area-text-fragment.h   \
   cong-editor-area-span-tag.h \
+  cong-editor-area-structural.h \
   cong-editor-area-structural-tag.h \
   cong-editor-area-underline.h \
   cong-editor-area-unknown-tag.h   \
@@ -117,6 +118,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-text-comment.c   \
   cong-editor-area-text-fragment.c   \
   cong-editor-area-span-tag.c \
+  cong-editor-area-structural.c \
   cong-editor-area-structural-tag.c \
   cong-editor-area-underline.c \
   cong-editor-area-unknown-tag.c   \
