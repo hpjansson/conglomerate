@@ -118,7 +118,7 @@ static GSList* get_template_paths(CongPlugin* plugin)
 	gconf_client = cong_app_get_gconf_client(cong_app_singleton());
 	gconf_key = cong_plugin_get_gconf_key(plugin, "template-paths");
 
-	g_message("key: %s", gconf_key);
+	/* g_message("key: %s", gconf_key); */
 
 	template_paths = gconf_client_get_list(gconf_client,
 		gconf_key, GCONF_VALUE_STRING, NULL);
@@ -225,7 +225,7 @@ static void visit_paths(GSList* paths, GnomeVFSDirectoryVisitFunc visit_path,
 		gchar* absolute_path;
 		absolute_path = gnome_vfs_expand_initial_tilde(path->data);
 
-		g_message("loading templates from %s", absolute_path);
+		/* g_message("loading templates from %s", absolute_path); */
 
 		((CongTemplate*)data)->dir = absolute_path;
 

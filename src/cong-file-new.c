@@ -34,7 +34,7 @@
 #include "cong-primary-window.h"
 #include "cong-plugin-manager.h"
 
-#define DEBUG_FILE_NEW_ASSISTANT 1
+#define DEBUG_FILE_NEW_ASSISTANT 0
 
 typedef struct PerFactoryData PerFactoryData;
 

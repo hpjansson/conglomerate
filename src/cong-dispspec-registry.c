@@ -214,12 +214,12 @@ cong_dispspec_registry_dump(CongDispspecRegistry* registry)
 {
 	int i;
 
-	printf("CongDispspecRegistry contains %i dispspec(s)\n", registry->num);
+	g_message ("CongDispspecRegistry contains %i dispspec(s)\n", registry->num);
 
 	for (i=0;i<registry->num;i++) {
 		CongDispspec* ds = registry->array[i];
 		
-		printf("ds[%i] = \"%s\"\n", i, cong_dispspec_get_name(ds));
+		g_message ("ds[%i] = \"%s\"\n", i, cong_dispspec_get_name(ds));
 	}
 }
 

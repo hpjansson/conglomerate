@@ -458,7 +458,7 @@ cong_editor_node_needs_area_regeneration (CongEditorNode *editor_node,
 	result = TRUE;
 #endif
 
-#if 1
+#if 0
 	{
 		gchar *desc = cong_node_debug_description (cong_editor_node_get_node (editor_node));
 

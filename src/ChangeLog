@@ -1,5 +1,17 @@
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-registry.c: Tidied up debug log code
+
+	* cong-app.c: ditto
+
+	* plugin-templates.c: ditto
+
+	* cong-file-new.c: ditto
+
+	* cong-editor-node.c: ditto
+
+	* cong-editor-line-manager.c: ditto
+
 	* cong-editor-node-element-span.c: Clean-up of code, plus a dummy
 	implementation of needs_area_regeneration
 

@@ -508,7 +508,7 @@ cong_editor_line_manager_handle_width_change (CongEditorLineManager *line_manage
 
 	g_return_if_fail (IS_CONG_EDITOR_LINE_MANAGER (line_manager));
 	
-	g_message ("cong_editor_line_manager_handle_width_change - WRITEME!");
+	/* g_message ("cong_editor_line_manager_handle_width_change"); */
 
 	/* Potentially any/all of the editor nodes might want to regenerate their areas */
 

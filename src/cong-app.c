@@ -1101,7 +1101,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 		if (path->data != NULL) {
 			gchar *realpath;
 			realpath = gnome_vfs_expand_initial_tilde((char *)(path->data));
-			g_message("Loading xds files from \"%s\"\n", realpath);
+			/* g_message("Loading xds files from \"%s\"\n", realpath); */
 			cong_dispspec_registry_add_dir(PRIVATE(app)->ds_registry, realpath, toplevel_window, 0);
 			g_free (realpath);
 		}
@@ -1139,7 +1139,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 		return FALSE;
 	}
 		
-	cong_dispspec_registry_dump(PRIVATE(app)->ds_registry);
+	/* cong_dispspec_registry_dump(PRIVATE(app)->ds_registry); */
 	
 	return TRUE;
 }
