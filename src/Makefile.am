@@ -1,12 +1,6 @@
 
 NULL =
 
-## for bugzilla 134747 and 123003
-##CFLAGS += -Wall
-##if ENABLE_WERROR
-##  CFLAGS += -Werror
-##endif
-
 bin_PROGRAMS = conglomerate
 
 if ENABLE_PRINTING
@@ -328,7 +322,8 @@ conglomerate_SOURCES =      \
   main.c		    \
   $(printing_sources)
 
-INCLUDES = $(CONGLOMERATE_CFLAGS) \
+INCLUDES = $(BASE_CFLAGS) \
+	$(CONGLOMERATE_CFLAGS) \
 	$(PRINTING_CFLAGS) \
 	$(LIBFO_CFLAGS) \
 	$(SEWFOX_CFLAGS) \

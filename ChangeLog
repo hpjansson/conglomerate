@@ -1,3 +1,7 @@
+2004-06-17  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* configure.in: Fixed option for -Werror (see bug 134747)
+
 2004-06-14  David Malcolm  <dmalcolm@redhat.com>
 
 	* conglomerate.spec.in: Added pixmaps/conglomerate/*.png
