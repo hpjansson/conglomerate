@@ -130,16 +130,45 @@ cong_xml_editor_get_font(CongXMLEditor *xed);
 CongDispspec*
 cong_xml_editor_get_dispspec(CongXMLEditor *xed);
 
+/*
+  Code to handle cached layout information.  Stored during rendering, used 
+  when handling cursor movement.
+ */
+
+#define NEW_LAYOUT_IMPLEMENTATION 1
+
 typedef struct CongLayoutCache
 {
+#if NEW_LAYOUT_IMPLEMENTATION
+	struct CongLayoutLine *first_line;
+	struct CongLayoutLine *last_line;
+#else
 	TTREE *draw_line_t;
 	TTREE *lines;
+#endif
 
 } CongLayoutCache;
 
+#if NEW_LAYOUT_IMPLEMENTATION
 typedef struct CongLayoutLine
 {
+	struct CongLayoutLine *next;
+	struct CongLayoutLine *prev;
+
+	/* Data set by add_line: */
+	TTREE *tt;
+	int i;  /* c_given */
+	
+	/* Data set by add stuff: */
+	gboolean got_rest_of_data;
+	int pos_y;
+	TTREE *x;
+	int draw_char;  /* Seems to be unused */
+
 } CongLayoutLine;
+#else
+typedef TTREE CongLayoutLine;
+#endif
 
 void
 cong_layout_cache_init(CongLayoutCache *layout_cache);
@@ -147,15 +176,37 @@ cong_layout_cache_init(CongLayoutCache *layout_cache);
 void
 cong_layout_cache_clear(CongLayoutCache *layout_cache);
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y);
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i);
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_last_line(CongLayoutCache *layout_cache);
 
+CongLayoutLine*
+cong_layout_line_get_next(CongLayoutLine *line);
+
+CongLayoutLine*
+cong_layout_line_get_prev(CongLayoutLine *line);
+
+int
+cong_layout_line_get_second_y(CongLayoutLine *line);
+
+TTREE*
+cong_layout_line_get_node(CongLayoutLine *line);
+
+TTREE*
+cong_layout_line_get_node_last(CongLayoutLine *line);
+
+int
+cong_layout_line_get_c_given(CongLayoutLine *line);
+
+
+/*
+  The tag stack.  Used for rendering the nested underlinings for span tags.
+ */
 #define NEW_STACK_IMPLEMENTATION 1
 
 #if NEW_STACK_IMPLEMENTATION

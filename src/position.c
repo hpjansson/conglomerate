@@ -11,16 +11,37 @@
 #include <xml.h>
 #include "global.h"
 
+#if NEW_LAYOUT_IMPLEMENTATION
+void
+cong_layout_line_free(CongLayoutLine *line)
+{
+	g_return_if_fail(line);
+
+	g_free(line);
+}
+#endif
+
 void
 cong_layout_cache_init(CongLayoutCache *layout_cache)
 {
 	g_return_if_fail(layout_cache);
 
+#if NEW_LAYOUT_IMPLEMENTATION
+	while (layout_cache->first_line) {
+		CongLayoutLine *next = layout_cache->first_line->next;
+		
+		cong_layout_line_free(layout_cache->first_line);
+
+		layout_cache->first_line=next;		
+	}
+	layout_cache->last_line=NULL;
+#else
 	if (layout_cache->lines) {
 		ttree_branch_remove(layout_cache->lines);
 	}
 
 	layout_cache->lines = ttree_node_add(0, "lines", 5);
+#endif
 }
 
 void
@@ -28,6 +49,16 @@ cong_layout_cache_clear(CongLayoutCache *layout_cache)
 {
 	g_return_if_fail(layout_cache);
 
+#if NEW_LAYOUT_IMPLEMENTATION
+	while (layout_cache->first_line) {
+		CongLayoutLine *next = layout_cache->first_line->next;
+		
+		cong_layout_line_free(layout_cache->first_line);
+
+		layout_cache->first_line=next;		
+	}
+	layout_cache->last_line=NULL;
+#else
 	if (layout_cache->lines)
 	{
 #if 0
@@ -37,16 +68,27 @@ cong_layout_cache_clear(CongLayoutCache *layout_cache)
 		ttree_branch_remove(layout_cache->lines);
 		layout_cache->lines = ttree_node_add(0, "lines", 5);
 	}
+#endif
 }
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y)
 {
-	TTREE *l;
+	CongLayoutLine *l;
 
 	/* Find line by y coord */
 	g_return_val_if_fail(layout_cache, NULL);
 
+#if NEW_LAYOUT_IMPLEMENTATION
+	for (l = layout_cache->first_line; l->next; l = l->next)
+	{
+		if (cong_layout_line_get_second_y(l) >= y)
+		{
+			/* Found the right line */
+			break;
+		}
+	}
+#else
 	g_assert(layout_cache->lines);
 	g_assert(layout_cache->lines->child);
 
@@ -58,35 +100,55 @@ cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y)
 			break;
 		}
 	}
+#endif
 
 	return l;
 }
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i)
 {
-	TTREE *l;
+	CongLayoutLine *l;
 
 	g_return_val_if_fail(layout_cache, NULL);
 	g_return_val_if_fail(i>=0, NULL);
 
+#if NEW_LAYOUT_IMPLEMENTATION
+	for (l = layout_cache->first_line; i && l->next; i--) {
+		l = l->next;
+	}
+#else
 	g_assert(layout_cache->lines);
 	g_assert(layout_cache->lines->child);
 
 	for (l = layout_cache->lines->child; i && l->next; i--) {
 		l = l->next;
 	}
+#endif
 
 	return l;
 }
 
-TTREE*
+CongLayoutLine*
 cong_layout_cache_get_last_line(CongLayoutCache *layout_cache)
 {	
-	TTREE *t;
+	CongLayoutLine *t;
 
 	g_return_val_if_fail(layout_cache, NULL);
 
+#if NEW_LAYOUT_IMPLEMENTATION
+	#if 1
+	t = layout_cache->last_line;
+	#else
+	if (NULL==layout_cache->first_line) {
+		return NULL;
+	}
+
+	for (t = layout_cache->first_line; t->next; t = t->next) {
+		/* empty */
+	}
+	#endif
+#else
 	t = layout_cache->lines;
 	if (!t || !t->child) return(0);
 	t = t->child;
@@ -94,6 +156,7 @@ cong_layout_cache_get_last_line(CongLayoutCache *layout_cache)
 	for (t = layout_cache->lines; t->next; t = t->next) {
 		/* empty */
 	}
+#endif
 
 	return(t);
 }
@@ -294,7 +357,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
 {
 	struct pos *pos;
-	TTREE *l;
+	CongLayoutLine *l;
 
 	/* Basic init */
 
@@ -314,9 +377,15 @@ struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
 
 	l = cong_layout_cache_get_line_by_y_coord(&xed->layout_cache, y);
 
+#if 1
+	pos->node = cong_layout_line_get_node(l);
+	pos->node_last = cong_layout_line_get_node_last(l);
+	pos->c_given = cong_layout_line_get_c_given(l);
+#else
 	pos->node = (TTREE *) *((TTREE **) l->child->data);
 	pos->node_last = (TTREE *) *((TTREE **) l->child->next->next->next->data);
 	pos->c_given = (int) *((int *) l->child->next->data);
+#endif
 
 	/* Traverse it */
 	
@@ -535,7 +604,7 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 struct pos *pos_logical_to_physical(CongXMLEditor *xed, CongNodePtr node, int c)
 {
 	struct pos *pos;
-	TTREE *l;
+	CongLayoutLine *l;
 	int i;
 
 	/* Basic init */
@@ -562,11 +631,15 @@ struct pos *pos_logical_to_physical(CongXMLEditor *xed, CongNodePtr node, int c)
 
 	g_assert(l);
 	
-	if (l->prev) {
+	if (cong_layout_line_get_prev(l)) {
+#if 1
+		pos->y = cong_layout_line_get_second_y(cong_layout_line_get_prev(l));
+#else
 		g_assert(l->prev->child);
 		g_assert(l->prev->child->next);
 		g_assert(l->prev->child->next->next);
 		pos->y = (int) *((int *) l->prev->child->next->next->data);
+#endif
 	} else {
 		pos->y = 0;
 	}

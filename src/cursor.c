@@ -367,7 +367,7 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 
 	if (n)
 	{
-	  cong_location_set(&curs->location, n, 0);
+		cong_location_set(&curs->location, n, 0);
 	}
 }
 
@@ -375,7 +375,7 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
-	TTREE *l;
+	CongLayoutLine *l;
 	
 	g_assert(curs!=NULL);
 	
@@ -393,7 +393,11 @@ void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
 
 	if (!l) return;
 
+#if 1
+	curs->y = cong_layout_line_get_second_y(l);
+#else
 	curs->y = (int) *((int *) l->child->next->next->data);
+#endif
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
 #if 1
@@ -409,7 +413,7 @@ void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
 void curs_next_line(struct curs* curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
-	TTREE *l;
+	CongLayoutLine *l;
 
 	g_assert(curs!=NULL);
 
@@ -422,12 +426,20 @@ void curs_next_line(struct curs* curs, CongXMLEditor *xed)
 #endif
 
 	if (!l) return;
+#if 1
+	l = cong_layout_line_get_next(l);
+#else
 	l = l->next;
+#endif
 	if (!l) return;
 
 	curs->line++;
 
+#if 1
+	curs->y = cong_layout_line_get_second_y(l) - 1;
+#else
 	curs->y = (int) *((int *) l->child->next->next->data) - 1;
+#endif
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
 #if 1

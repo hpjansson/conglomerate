@@ -38,7 +38,7 @@ void selection_draw(struct selection* selection, struct curs* curs)
 {
 	int x0, y0, x1, y1;
 	GdkGC *gc;
-	TTREE *l;
+	CongLayoutLine *l;
 
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
@@ -111,13 +111,29 @@ void selection_draw(struct selection* selection, struct curs* curs)
 #ifndef RELEASE
 		printf("D");
 #endif
+#if 1
+		y0 = cong_layout_line_get_prev(l) ? cong_layout_line_get_second_y(cong_layout_line_get_prev(l)) : 0;
+#else
 		y0 = l->prev ? (int) *((int *) l->prev->child->next->next->data) : 0;
+#endif
 		if (y0 == y1) break;
+#if 1
 		gdk_draw_rectangle(curs->xed->p, gc, 1,
-											 x0, y0, curs->xed->w->allocation.width - x0,
-											 l ? (int) *((int *) l->child->next->next->data) - y0 :
-											    curs->xed->w->allocation.height - y0);
+				   x0, y0, curs->xed->w->allocation.width - x0,
+				   l ? cong_layout_line_get_second_y(l) - y0 :
+				   curs->xed->w->allocation.height - y0);
+#else
+		gdk_draw_rectangle(curs->xed->p, gc, 1,
+				   x0, y0, curs->xed->w->allocation.width - x0,
+				   l ? (int) *((int *) l->child->next->next->data) - y0 :
+				   curs->xed->w->allocation.height - y0);
+#endif
+
+#if 1
+		l = cong_layout_line_get_next(l);
+#else
 		l = l->next;
+#endif
 		x0 = 0;
 	}
 
@@ -126,11 +142,18 @@ void selection_draw(struct selection* selection, struct curs* curs)
 #ifndef RELEASE
 	printf("X");
 #endif
-	
+
+#if 1
 	gdk_draw_rectangle(curs->xed->p, gc, 1,
-										 x0, y0, x1 - x0, 
-										 l ? (int) *((int *) l->child->next->next->data) - y0 /* == y1 */ - (l->next ? 4 : 0) :
-										     curs->xed->w->allocation.height - y0);
+			   x0, y0, x1 - x0, 
+			   l ? cong_layout_line_get_second_y(l) - y0 /* == y1 */ - (cong_layout_line_get_next(l) ? 4 : 0) :
+			   curs->xed->w->allocation.height - y0);
+#else	
+	gdk_draw_rectangle(curs->xed->p, gc, 1,
+			   x0, y0, x1 - x0, 
+			   l ? (int) *((int *) l->child->next->next->data) - y0 /* == y1 */ - (l->next ? 4 : 0) :
+			   curs->xed->w->allocation.height - y0);
+#endif
 
 #ifndef RELEASE
 	printf("\n");
