@@ -19,5 +19,6 @@ ltmain.sh
 stamp-h
 stamp-h.in
 ## #other #files
+build-stamp
 debian
 ##
