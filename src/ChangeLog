@@ -1,5 +1,9 @@
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-line-manager-simple.c: removed HACKED_WIDTH;
+	replaced with calls to a function that gets the allocated width of
+	the relevant CongEditorAreaLines
+
 	* cong-editor-area.h: added functions to get allocated width and
 	height of an area
 

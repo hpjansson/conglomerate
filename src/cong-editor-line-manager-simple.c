@@ -32,7 +32,6 @@
 
 #include "cong-eel.h"
 
-#define HACKED_WIDTH (150)
 static CongEditorLineIter*
 make_iter (CongEditorLineManager *line_manager);
 
@@ -128,6 +127,13 @@ cong_editor_line_manager_simple_new (CongEditorWidget3 *widget,
 										    area_lines));
 }
 
+/* Get the currently allocated width of the enclosing CongEditorAreaLines */
+static guint
+get_allocated_width (CongEditorLineManagerSimple *simple)
+{
+	return cong_editor_area_get_allocation_width (CONG_EDITOR_AREA (PRIVATE (simple)->area_lines));
+}
+
 
 static CongEditorLineIter*
 make_iter (CongEditorLineManager *line_manager)
@@ -147,7 +153,7 @@ begin_line (CongEditorLineManager *line_manager,
 	CongEditorLineIterSimple *line_iter_simple = CONG_EDITOR_LINE_ITER_SIMPLE (line_iter);
 
 	new_line = CONG_EDITOR_AREA_LINE (cong_editor_area_line_new (cong_editor_line_manager_get_widget (line_manager),
-								     HACKED_WIDTH)); /* FIXME */
+								     get_allocated_width (simple)));
 	if (line_iter_simple->current_line) {
 		line_iter_simple->current_prev_line = line_iter_simple->current_line;
 	}
@@ -305,12 +311,12 @@ static gint
 get_line_width (CongEditorLineManager *line_manager,
 		CongEditorLineIter *line_iter)
 {
-#if 0
 	CongEditorLineManagerSimple *simple = CONG_EDITOR_LINE_MANAGER_SIMPLE (line_manager);
+#if 0
 	CongEditorLineIterSimple *line_iter_simple = CONG_EDITOR_LINE_ITER_SIMPLE (line_iter);
 #endif
 
-	return HACKED_WIDTH; /* FIXME */
+	return get_allocated_width (simple);
 }
 
 static gint
