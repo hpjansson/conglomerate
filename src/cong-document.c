@@ -291,10 +291,10 @@ cong_document_save(CongDocument *doc,
 					  &file_size);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(toplevel_window,
-									   file_uri, 
-									   vfs_result, 
-									   &file_size);
+		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
+										 file_uri, 
+										 vfs_result, 
+										 &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));

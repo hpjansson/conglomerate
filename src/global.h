@@ -361,8 +361,14 @@ xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 
 /**
    Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
- */
+*/
 gchar* cong_util_cleanup_text(const xmlChar *text);
+
+
+/**
+   Convert a URI into a POSIX, path, assuming that this is valid: 
+*/
+gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri);
 
 /**
    Dave Malcolm:

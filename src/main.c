@@ -69,6 +69,27 @@ cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 	return g_strdup_printf("%s%s",cong_utils_get_norman_walsh_stylesheet_path(), stylesheet_relative_path);
 }
 
+/* Convert a URI into a POSIX, path, assuming that this is valid: */
+gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri)
+{
+	gchar *uri_string;
+
+	g_return_val_if_fail(uri, NULL);
+
+	uri_string = gnome_vfs_uri_to_string(uri, 
+					     (GNOME_VFS_URI_HIDE_USER_NAME
+					      |GNOME_VFS_URI_HIDE_PASSWORD
+					      |GNOME_VFS_URI_HIDE_HOST_NAME
+					      |GNOME_VFS_URI_HIDE_HOST_PORT
+					      |GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD
+					      |GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER)
+					     );
+
+	g_message("got \"%s\"",uri_string);
+	return uri_string;
+}
+
+
 
 /*
 #define AUTOGENERATE_DS

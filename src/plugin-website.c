@@ -296,26 +296,6 @@ static GnomeVFSURI *content_make_src_uri(WebsiteContent *content, GenerateWebsit
 	return gnome_vfs_uri_append_file_name(workspace->src_uri, content->src_page);
 }
 
-/* Convert a URI into a POSIX, path, assuming that this is valid: */
-gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri)
-{
-	gchar *uri_string;
-
-	g_return_val_if_fail(uri, NULL);
-
-	uri_string = gnome_vfs_uri_to_string(uri, 
-					     (GNOME_VFS_URI_HIDE_USER_NAME
-					      |GNOME_VFS_URI_HIDE_PASSWORD
-					      |GNOME_VFS_URI_HIDE_HOST_NAME
-					      |GNOME_VFS_URI_HIDE_HOST_PORT
-					      |GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD
-					      |GNOME_VFS_URI_HIDE_FRAGMENT_IDENTIFIER)
-					     );
-
-	g_message("got \"%s\"",uri_string);
-	return uri_string;
-}
-
 static gboolean generate_html(CongDependencyNode *node, GError **error)
 {
 	CongDependencyNodeTransformWebsiteContent *node_from_content = (CongDependencyNodeTransformWebsiteContent*)(node);

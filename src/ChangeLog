@@ -1,3 +1,13 @@
+2003-03-25 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am, cong-dispspec-registry.c, cong-document.c, cong-error-dialog.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-file-open.c, cong-menus.c, cong-parser-error.c, cong-plugin.c, global.h, main.c, plugin-conert-case.c, plugin-sgml.c, plugin-website.c
+
+	Lots of improvements to error handling
+	
+	* cong-parser-error.h
+
+	New file (towards better error handling)
+	
 2003-05-15 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c, cong-dispspec.h

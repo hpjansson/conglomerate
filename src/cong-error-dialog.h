@@ -20,7 +20,7 @@ G_BEGIN_DECLS
 
    Although these have a "cong" prefix, I hope to eventually factor these out into a useful library for other apps to use (the prefix will then get changed).
    
-   The intention is to make it really easy to get good error dialogs.  Hence the parent_window parameter is required, in order to set things up niceky with the window manager.
+   The intention is to make it really easy to get good error dialogs.  Hence the parent_window parameter is required, in order to set things up nicely with the window manager.
 */
 
 /**
@@ -66,16 +66,16 @@ cong_error_get_appname(void);
  * Routine to manufacture an error dialog for unimplemented functionality
  */
 GtkDialog*
-cong_error_dialog_new_unimplemented(GtkWindow *parent_window,
-				    const gchar* what_failed, 
-				    const char* filename, 
-				    int linenum);
+cong_error_dialog_new_from_unimplemented_feature(GtkWindow *parent_window,
+						 const gchar* what_failed, 
+						 const char* filename, 
+						 int linenum);
 
 /**
  * Routine to manufacture an error dialog for unimplemented functionality for when you have a Bugzilla bug ID
  */
 GtkDialog*
-cong_error_dialog_new_unimplemented_with_bugzilla_id(GtkWindow *parent_window,
+cong_error_dialog_new_from_unimplemented_feature_with_bugzilla_id(GtkWindow *parent_window,
 						     const gchar* what_failed, 
 						     const char* filename, 
 						     int linenum,
@@ -84,8 +84,38 @@ cong_error_dialog_new_unimplemented_with_bugzilla_id(GtkWindow *parent_window,
 
 #define CONG_BUGZILLA_URL ("http://bugzilla.gnome.org")
 
-#define CONG_DO_UNIMPLEMENTED_DIALOG(parent_window, what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented((parent_window), (what_failed), __FILE__, __LINE__)))
-#define CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(parent_window, what_failed, bugzilla_id) (cong_error_dialog_do(cong_error_dialog_new_unimplemented_with_bugzilla_id((parent_window), (what_failed), __FILE__, __LINE__, CONG_BUGZILLA_URL, (bugzilla_id))))
+#define CONG_DO_UNIMPLEMENTED_DIALOG(parent_window, what_failed) (cong_error_dialog_do(cong_error_dialog_new_from_unimplemented_feature((parent_window), (what_failed), __FILE__, __LINE__)))
+#define CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(parent_window, what_failed, bugzilla_id) (cong_error_dialog_do(cong_error_dialog_new_from_unimplemented_feature_with_bugzilla_id((parent_window), (what_failed), __FILE__, __LINE__, CONG_BUGZILLA_URL, (bugzilla_id))))
+
+/**
+ * Routine to manufacture an error dialog for when some arbitrary operation fails but you have a GError available to you
+ */
+GtkDialog*
+cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
+				  const gchar *what_failed,
+				  const char *details,
+				  GError *error);
+
+/**
+ * Routine to manufacture an error dialog for when some shell operation fails, when you have access to the stderr output in the form of a string.
+ */
+GtkDialog*
+cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *parent_window,
+								   const gchar *what_failed,
+								   gint exit_status,
+								   const gchar *standard_error,
+								   const gchar *command_line);
+
+/**
+ * Routine to manufacture an error dialog for when some shell operation fails, when you have access to the stderr output in the form of a string.
+ * argv is a NULL terminated array of strings.
+ */
+GtkDialog*
+cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_window,
+							   const gchar *what_failed,
+							   gint exit_status,
+							   const gchar *standard_error,
+							   const gchar **argv);
 
 /**
  * Routine to manufacture a "what failed" string for when File->Open fails.
@@ -100,25 +130,25 @@ cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri,
  * @vfs_uri:  the URI from which you tried to open the file.
  */
 GtkDialog*
-cong_error_dialog_new_file_open_failed(GtkWindow *parent_window,
-				       const GnomeVFSURI* file_uri, 
-				       gboolean transient, 
-				       const gchar* why_failed, 
-				       const gchar* suggestions);
+cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
+					     const GnomeVFSURI* file_uri, 
+					     gboolean transient, 
+					     const gchar* why_failed, 
+					     const gchar* suggestions);
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
  * @vfs_uri:  the URI to which you tried to save the file.
  */
 GtkDialog*
-cong_error_dialog_new_file_open_failed_with_convenience(GtkWindow *parent_window,
-							const GnomeVFSURI* file_uri, 
-							gboolean transient, 
-							const gchar* why_failed, 
-							const gchar* suggestions,
-							const gchar* convenience_label,
-							void (*convenience_action)(gpointer data),
-							gpointer convenience_data);
+cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_window,
+							      const GnomeVFSURI* file_uri, 
+							      gboolean transient, 
+							      const gchar* why_failed, 
+							      const gchar* suggestions,
+							      const gchar* convenience_label,
+							      void (*convenience_action)(gpointer data),
+							      gpointer convenience_data);
 
 
 /**
@@ -127,9 +157,9 @@ cong_error_dialog_new_file_open_failed_with_convenience(GtkWindow *parent_window
  * @vfs_result: the error code that occurred.
  */
 GtkDialog*
-cong_error_dialog_new_file_open_failed_from_vfs_result(GtkWindow *parent_window,
-						       const GnomeVFSURI* file_uri, 
-						       GnomeVFSResult vfs_result);
+cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
+							     const GnomeVFSURI* file_uri, 
+							     GnomeVFSResult vfs_result);
 
 
 /**
@@ -139,10 +169,10 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(GtkWindow *parent_window,
  * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
  */
 GtkDialog*
-cong_error_dialog_new_file_save_failed(GtkWindow *parent_window,
-				       const GnomeVFSURI* file_uri, 
-				       GnomeVFSResult vfs_result, 
-				       const GnomeVFSFileSize* file_size);
+cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
+					     const GnomeVFSURI* file_uri, 
+					     GnomeVFSResult vfs_result, 
+					     const GnomeVFSFileSize* file_size);
 
 /**
  * Routine to manufacture an error dialog for when some file operation fails that doesn't fall into one of the categories above.
@@ -150,12 +180,11 @@ cong_error_dialog_new_file_save_failed(GtkWindow *parent_window,
  * @vfs_uri:  the URI from which you tried to access file.
  */
 GtkDialog*
-cong_error_dialog_new_file_operation_failed(GtkWindow *parent_window,
-					    const gchar *what_failed,
-					    const GnomeVFSURI *file_uri, 
-					    GnomeVFSResult vfs_result, 
-					    const gchar *technical_details);
-
+cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
+						  const gchar *what_failed,
+						  const GnomeVFSURI *file_uri, 
+						  GnomeVFSResult vfs_result, 
+						  const gchar *technical_details);
 /** 
  * A bunch of self-tests.
  */

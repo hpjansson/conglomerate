@@ -35,57 +35,6 @@ gchar *cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
 	return return_val;
 }
 
-static void on_details(gpointer data)
-{
-	GtkWidget *details_dialog = data;
-	gtk_dialog_run(GTK_DIALOG(details_dialog));
-	gtk_widget_destroy(details_dialog);
-}
-
-/**
- * Routine to manufacture an error dialog for when some arbitrary operation fails but you have a GError available to you
- */
-GtkDialog*
-cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
-				  const gchar *what_failed,
-				  const char *details,
-				  GError *error)
-{
-	GtkDialog *dialog;
-	GtkDialog *details_dialog;
-	gchar *secondary_text;
-	gchar *technical_details;
-
-	g_return_val_if_fail(what_failed,NULL);
-	g_return_val_if_fail(details,NULL);
-	g_return_val_if_fail(error,NULL);
-
-	/* Manufacture a dialog that is displayed if the user requests further details: */
-	secondary_text = g_strdup_printf(_("An error was reported whilst attempting the operation \"%s\""), 
-					 details
-					 );
-	technical_details = g_strdup_printf(_("A GError occurred; the error report was:\n<i>%s</i>"),
-					    error->message);
-	details_dialog = cong_error_dialog_new(toplevel_window,
-					       what_failed, 
-					       secondary_text, 
-					       technical_details);
-
-	dialog = cong_error_dialog_new_with_convenience(toplevel_window,
-
-							what_failed,							
-							_("An unexpected error occurred."),
-							_("For more information, click on the \"Details\" button."),
-							
-							_("Details"),
-							on_details,
-							
-							details_dialog);
-	/* FIXME: this will leak the details dialog */
-
-	return dialog;
-}
-
 gboolean sgml_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
@@ -130,6 +79,9 @@ void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, con
 	GError *error = NULL; 
 	gboolean result;
 
+/* 	gchar * posix_name = cong_util_get_local_path_from_uri(GnomeVFSURI *uri); */
+ 
+
 	g_message("sgml_importer_action_callback");
 
 	argv[0] = "sgml2xml";
@@ -170,15 +122,12 @@ void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, con
 	if (exit_status) {
 		gchar *what_failed = cong_ui_make_what_failed_string_for_import(uri);
 
-		GtkDialog *dialog = cong_error_dialog_new_with_convenience(toplevel_window,
 
-									   what_failed,
-									   _("An error occurred whilst using the sgml2xml tool."),									     
-									   _("Click on the \"Details\" button to get more information"),
-
-									   _("Details"),
-									   on_details,
-									   standard_error);
+		GtkDialog* dialog = cong_error_dialog_new_from_shell_command_failure_with_argv(toplevel_window,
+											       what_failed,
+											       exit_status,
+											       standard_error,
+											       argv);
 		g_free(what_failed);
 
 		cong_error_dialog_run(dialog);

@@ -25,6 +25,7 @@ conge_SOURCES =             \
   cong-graph.h              \
   cong-location.h           \
   cong-node.h               \
+  cong-parser-error.h       \
   cong-plugin.h             \
   cong-progress-checklist.h \
   cong-view.h               \

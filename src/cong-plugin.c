@@ -887,10 +887,10 @@ void cong_ui_transform_doc_to_uri(CongDocument *doc,
 						  &file_size);
 		
 		if (vfs_result != GNOME_VFS_OK) {
-			GtkDialog* dialog = cong_error_dialog_new_file_save_failed(toplevel_window,
-										   file_uri, 
-										   vfs_result, 
-										   &file_size);
+			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
+											 file_uri, 
+											 vfs_result, 
+											 &file_size);
 			
 			cong_error_dialog_run(GTK_DIALOG(dialog));
 			gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -918,9 +918,9 @@ gboolean cong_ui_load_imported_file_content(const gchar *uri,
 	
 	if (vfs_result!=GNOME_VFS_OK) {
 		GnomeVFSURI* file_uri = gnome_vfs_uri_new(uri);
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(parent_window,
-											   file_uri, 
-											   vfs_result);
+		GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result(parent_window,
+												 file_uri, 
+												 vfs_result);
 		
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));

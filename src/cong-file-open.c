@@ -78,9 +78,9 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 			GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file(doc_name, &buffer, &size);
 
 			if (vfs_result!=GNOME_VFS_OK) {
-				GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(parent_window,
-													   file_uri, 
-													   vfs_result);
+				GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result(parent_window,
+														 file_uri, 
+														 vfs_result);
 			
 				cong_error_dialog_run(GTK_DIALOG(dialog));
 				gtk_widget_destroy(GTK_WIDGET(dialog));

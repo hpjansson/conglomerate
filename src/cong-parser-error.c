@@ -6,32 +6,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-document.h"
 #include "cong-error-dialog.h"
-
-
-/* Towards improved error handling: */
-enum CongIssueType
-{
-	CONG_ISSUE_ERROR,
-	CONG_ISSUE_WARNING
-};
-
-typedef struct CongParserIssue
-{
-	enum CongIssueType type;
-	gchar *filename;
-	int linenum;
-	gchar *description;
-} CongParserIssue;
-
-typedef struct CongParserResult
-{
-	GnomeVFSURI *file_uri;
-	const char *buffer;
-	GnomeVFSFileSize size;
-	GSList *issues; /* list of CongParserIssues */
-
-	GtkWindow *parent_window;
-} CongParserResult;
+#include "cong-parser-error.h"
 
 void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
 {
@@ -115,7 +90,7 @@ enum
 
 typedef struct CongErrorReport
 {
-	CongParserResult *result;
+	CongParserResult *parser_result;
 	GtkListStore *store;
 	GtkTextBuffer *text_buffer;
 	GtkWidget *text_view;
@@ -132,7 +107,7 @@ void  on_row_activated(GtkTreeView *treeview,
 	GtkTreeIter tree_iter;
 	GtkTextIter text_iter;
 
-	printf("on_row_activated\n");
+	g_message("on_row_activated\n");
 
 	if ( gtk_tree_model_get_iter(GTK_TREE_MODEL(report->store), &tree_iter, arg1) ) {
 
@@ -156,10 +131,8 @@ void  on_row_activated(GtkTreeView *treeview,
 	}
 }
 
-void on_parser_error_details(gpointer data)
+GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 {
-	CongParserResult *result = (CongParserResult*)data;
-
 	GtkWidget *dialog;
 	gchar *title, *filename;
 	GtkWidget *text_view;
@@ -172,18 +145,19 @@ void on_parser_error_details(gpointer data)
 	GtkCellRenderer *text_renderer;
 	CongErrorReport report;
 
-	printf("on_parser_error_details\n");
 
-	g_assert(result);
-	g_assert(result->file_uri);
+	g_return_val_if_fail(parser_result, NULL);
 
-	filename = gnome_vfs_uri_extract_short_name(result->file_uri);
+	g_assert(parser_result);
+	g_assert(parser_result->file_uri);
+
+	filename = gnome_vfs_uri_extract_short_name(parser_result->file_uri);
 	title = g_strdup_printf(_("Parse errors loading %s"), filename);
 
 	g_free(filename);
 
 	dialog = gtk_dialog_new_with_buttons(title,
-					     result->parent_window,
+					     parser_result->parent_window,
 					     0,
 					     GTK_STOCK_OK,
 					     GTK_RESPONSE_OK,
@@ -197,7 +171,7 @@ void on_parser_error_details(gpointer data)
 	text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
 
 #if 1
-	gtk_text_buffer_set_text (text_buffer, result->buffer, result->size);
+	gtk_text_buffer_set_text (text_buffer, parser_result->buffer, parser_result->size);
 #else
 	gtk_text_buffer_set_text (text_buffer, "Hello, this is some text", -1);
 #endif
@@ -220,7 +194,7 @@ void on_parser_error_details(gpointer data)
 
 	/* Populate the store: */
 	{
-		GSList *iter = result->issues;
+		GSList *iter = parser_result->issues;
 		
 		while (iter) {
 			GtkTreeIter tree_iter;
@@ -260,7 +234,7 @@ void on_parser_error_details(gpointer data)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (error_list_view), column);
 
 
-	report.result = result;
+	report.parser_result = parser_result;
 	report.store = store;
 	report.text_buffer = text_buffer;
 	report.text_view = text_view;
@@ -287,11 +261,19 @@ void on_parser_error_details(gpointer data)
 
 
 	gtk_widget_show_all(dialog);
-#if 1
+
+	return GTK_DIALOG(dialog);
+}
+
+void on_parser_error_details(gpointer data)
+{
+	GtkDialog * dialog;
+
+	g_message("on_parser_error_details");
+
+	dialog = cong_parser_result_dialog_new((CongParserResult*)data);
 	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
-#endif
-	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
 static GtkDialog*
@@ -306,14 +288,14 @@ cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file
 
 	g_assert(parser_result);
 
-	dialog =  cong_error_dialog_new_file_open_failed_with_convenience(parser_result->parent_window,
-									  file_uri, 
-									  FALSE,
-									  why_failed,
-									  _("Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."),
-									  _("Show Details"),
-									  on_parser_error_details,
-									  parser_result);
+	dialog =  cong_error_dialog_new_from_file_open_failure_with_convenience(parser_result->parent_window,
+										file_uri, 
+										FALSE,
+										why_failed,
+										_("Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."),
+										_("Show Details"),
+										on_parser_error_details,
+										parser_result);
 
 	g_free(why_failed);
 	g_free(app_name);

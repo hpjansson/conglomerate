@@ -49,10 +49,10 @@ cong_error_split_uri(const GnomeVFSURI* uri, gchar** filename_alone, gchar** pat
 }
 
 GtkDialog*
-cong_error_dialog_new_file_save_failed(GtkWindow *parent_window, 
-				       const GnomeVFSURI* file_uri, 
-				       GnomeVFSResult vfs_result, 
-				       const GnomeVFSFileSize* file_size)
+cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 
+					     const GnomeVFSURI* file_uri, 
+					     GnomeVFSResult vfs_result, 
+					     const GnomeVFSFileSize* file_size)
 {
 	GtkDialog* dialog = NULL;
 	gchar* app_name;
