@@ -1,5 +1,9 @@
 2004-06-11  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-node-properties-dialog.c: 
+
+	Fixed warning
+
 	* cong-source-view.c, cong-util.h, plugin-relaxng.c: 
 
 	Generalised source view code to support any kind of textual
