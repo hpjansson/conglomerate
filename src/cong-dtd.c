@@ -254,12 +254,9 @@ element_callback_visit_cross_references (xmlElementPtr dtd_element,
 
 	g_assert (cb_data->dtd_element);
 
-	/* Don't count the element itself */
-	if (cb_data->dtd_element!=dtd_element) {
-		if (dtd_element->content) {
-			visit_element_references_for_content_subtree (dtd_element->content,
-								      cb_data);
-		}
+	if (dtd_element->content) {
+		visit_element_references_for_content_subtree (dtd_element->content,
+							      cb_data);
 	}
 }
 

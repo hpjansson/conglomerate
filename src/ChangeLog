@@ -1,3 +1,9 @@
+2004-03-04  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dtd.c
+
+	Removed unnecessary test that stopped detecting nested cross-references to elements in a DTD, fixing bug #136209 part (i)
+
 2004-03-03  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-document.c, cong-document.h, cong-location.c, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-source-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h
