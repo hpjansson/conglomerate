@@ -1,3 +1,9 @@
+2003-07-23  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* global.h, main.c
+
+	Fixed the Norman Walsh stylesheet lookup to use the XML catalog based upon a patch by Varga Robert
+
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-tree-view.c

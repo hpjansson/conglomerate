@@ -333,19 +333,12 @@ gchar* cong_util_cleanup_text(const xmlChar *text);
 gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri);
 
 /**
-   Dave Malcolm:
    Norman Walsh's stylesheets for DocBook seem to be present on every modern Linux
-   distribution I've tried.  Unfortunately, there doesn't yet seem to
-   be a standard about where they should be installed.
+   distribution I've tried.  
 
-   The functions are currently hardcoded to assume Red Hat 8, and can be hacked to support SuSE 7.1
-
-   If you have another Linux distro, or one of the BSDs, or Solaris etc, then please let the conglomerate-devel mailing list
-   know where the standard location is (hopefully we can agree on a standard for this!)
-
-   These functions hide this problem:
+   These functions attempt to use the local catalog to find them.
 */
-const gchar*
+gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void);
 
 gchar*

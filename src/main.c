@@ -3,6 +3,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
+#include <libxml/globals.h>
+#include <libxml/catalog.h>
+
 #include "global.h"
 #include "cong-dialog.h"
 #include "cong-error-dialog.h"
@@ -61,33 +64,40 @@ gchar* cong_util_cleanup_text(const xmlChar *src_text) {
 	return buffer;
 }
 
-const gchar*
+gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void)
 {
-	/* FIXME:  This is currently a nasty hack; how should we set this up so it "just works"? */
+       /* This should be changed if another catalog is in use, i guess */
+       xmlChar *resolved_path = NULL;
+       xmlCatalogPtr cat = NULL;
 
-#if 0
-	/* Value that worked for Dave Malcolm on SuSE 7.1: */
-	return "/usr/share/sgml/docbkxsl/";
-#endif
+       cat = xmlLoadACatalog ("/etc/xml/catalog");
 
-#if 0
-	/* Value that works for Dave Malcolm on Red Hat 8: */
-	return "/usr/share/sgml/docbook/xsl-stylesheets-1.50.0-3/";
-#endif
+       resolved_path = xmlACatalogResolveURI (cat,
+					      "http://docbook.sourceforge.net/release/xsl/current/");
 
-#if 1
-	/* Value that works for Dave Malcolm on Red Hat 9: */
-	return "/usr/share/sgml/docbook/xsl-stylesheets/";
-#endif
+       xmlFreeCatalog (cat);
+
+       g_message ("Norman Walsh XSL path: %s", resolved_path);
+
+       return resolved_path;
 }
 
 gchar*
 cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 {
+	xmlChar *path;
+	gchar *result;
+
 	g_return_val_if_fail(stylesheet_relative_path, NULL);
 
-	return g_strdup_printf("%s%s",cong_utils_get_norman_walsh_stylesheet_path(), stylesheet_relative_path);
+	path = cong_utils_get_norman_walsh_stylesheet_path();
+
+	result = g_strdup_printf("%s%s", path, stylesheet_relative_path);
+
+	xmlFree (path);
+
+	return result;
 }
 
 /* Convert a URI into a POSIX, path, assuming that this is valid: */
