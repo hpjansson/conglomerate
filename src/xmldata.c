@@ -121,6 +121,17 @@ GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 	while( (cong_node_type(node) == CONG_NODE_TYPE_ELEMENT) && 
 	       (cong_dispspec_element_span(ds, cong_node_xmlns(node), cong_node_name(node)) ) ) {
 
+		/* Don't list root element, in case in happens to be a span-type one; this should help prevent its removal (fix for bug #125720): */
+		{
+			if (node->parent) {
+				if (cong_node_type (node->parent) == CONG_NODE_TYPE_DOCUMENT) {
+					/* Finish the traversal without adding this node: */
+					return list;
+				}
+			}
+		}
+
+
 		/*  prepend node to list */
 		list = g_list_prepend(list, (gpointer *) node);
 

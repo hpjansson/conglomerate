@@ -2,6 +2,10 @@
 
 	* xmldata.c
 
+	Fix for bug #125720 (crash on deleting nothing)
+
+	* xmldata.c
+
 	Fix for bug #124508 (crash on inserting sibling)
 
 	* cong-editor-area-composer.c, cong-editor-area-composer.h, cong-editor-area-entity-decl.c, cong-editor-area-entity-ref.c, cong-editor-area-flow-holder-blocks.c, cong-editor-area-flow-holder-inlines.c, cong-editor-area-labelled.c, cong-editor-area-line.c, cong-editor-area-structural.c
