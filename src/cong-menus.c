@@ -373,7 +373,7 @@ static void menu_callback_file_export(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	/* FIXME: this option should be disabled if there are no importers installed */
+	/* FIXME: this option should be disabled if there are no exporters installed */
 
 	g_return_if_fail(doc);
 
