@@ -41,8 +41,13 @@ struct CongSourceCleanupOptions
 };
 
 void 
+cong_command_add_cleanup_source (CongCommand *command,
+				 const CongSourceCleanupOptions *options);
+
+void 
 cong_util_cleanup_source (CongDocument *doc, 
 			  const CongSourceCleanupOptions *options);
+
 
 G_END_DECLS
 

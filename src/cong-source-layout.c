@@ -373,13 +373,13 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 }
 
 void 
-cong_util_cleanup_source (CongDocument *doc, 
-			  const CongSourceCleanupOptions *options)
+cong_command_add_cleanup_source (CongCommand *command,
+				 const CongSourceCleanupOptions *options)
 {
+	CongDocument *doc;
 	CongSourceCleanupData cleanup_data;
-
-	g_return_if_fail(doc);
-	g_return_if_fail(options);
+	
+	doc = cong_command_get_document (command);
 
 	/* FIXME: knowledge about where whitespace should be preserved? */
  	/* Traverse the document:
@@ -388,10 +388,7 @@ cong_util_cleanup_source (CongDocument *doc,
 	*/
 
 	cleanup_data.options = options;
-
-	cleanup_data.cmd = cong_document_begin_command (doc,
-							_("Cleanup XML Source"),
-							NULL);
+	cleanup_data.cmd = command;
 
 	/* Stage 1:  strip out all non-significant whitespace: */
 	cong_document_for_each_node (doc, strip_whitespace_callback, &cleanup_data);
@@ -401,8 +398,25 @@ cong_util_cleanup_source (CongDocument *doc,
 
 	/* Stage 3: merge adjacent text nodes: */
 	cong_command_add_merge_adjacent_text_nodes (cleanup_data.cmd);
+}
+
+void 
+cong_util_cleanup_source (CongDocument *doc, 
+			  const CongSourceCleanupOptions *options)
+{
+	CongCommand *command;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(options);
+
+	command = cong_document_begin_command (doc,
+					       _("Cleanup XML Source"),
+					       NULL);
+
+	cong_command_add_cleanup_source (command,
+					 options);
 
 	cong_document_end_command (doc,
-				   cleanup_data.cmd);
+				   command);
 }
 
