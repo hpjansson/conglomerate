@@ -124,10 +124,16 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
 	CongDispspec *ds = g_object_get_data(G_OBJECT(vbox), "dispspec");
 
-#if NEW_LOOK
 	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongFont *title_font;
+
+	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 	g_assert(element);
 
+ 	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
+	g_assert(title_font);
+
+#if NEW_LOOK
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 	g_assert(gc);
 
@@ -165,16 +171,16 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	title_text = cong_dispspec_get_section_header_text(ds,x);
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
 	gdk_draw_string(w->window,
-			the_globals.ft,
+			title_font->gdk_font,
 			gc, 
-			H_SPACING + H_INDENT, 2 + the_globals.ft_asc,
+			H_SPACING + H_INDENT, 2 + title_font->asc,
 			title_text);
 	g_free(title_text);
 
 	/* FIXME:  this will fail to update when the text is edited */
 	
 #else	
-	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
+	str_width = gdk_string_width(title_font->gdk_font, xml_frag_name_nice(x));
 	str_width = str_width > 300 ? str_width : 300;
 
 	
@@ -233,7 +239,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 
 	}
 	/* Section identifier */
-	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
+	gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 4, 2 + title_font->asc,
 									cong_dispspec_name_get(ds, x));
 
 	/* Metadata indicator */
@@ -242,9 +248,9 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	n0 = ttree_branch_walk_str(n0, "tag_span metadata");
 	if (n0)
 	{
-		gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 
-				w->allocation.width - 4 - gdk_string_width(the_globals.ft, "meta"),
-				2 + the_globals.ft_asc, "meta");
+		gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 
+				w->allocation.width - 4 - gdk_string_width(title_font->gdk_font, "meta"),
+				2 + title_font->asc, "meta");
 	}
 
 	/* Medios indicator */
@@ -253,10 +259,10 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	n0 = ttree_branch_walk_str(n0, "tag_span metadata tag_span metadata.sourceset");
 	if (n0)
 	{
-		gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 
-				w->allocation.width - 4 - gdk_string_width(the_globals.ft, "meta") -
-				10 - gdk_string_width(the_globals.ft, "fuentes"),
-				2 + the_globals.ft_asc, "fuentes");
+		gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 
+				w->allocation.width - 4 - gdk_string_width(title_font->gdk_font, "meta") -
+				10 - gdk_string_width(title_font->gdk_font, "fuentes"),
+				2 + title_font->asc, "fuentes");
 	}
 #endif
 
@@ -315,6 +321,15 @@ GtkWidget *xv_section_head(CongDispspec *ds, CongNodePtr x)
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *vbox, *title;
 
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongFont *title_font;
+
+	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_assert(element);
+
+ 	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
+	g_assert(title_font);
+
 	vbox = gtk_vbox_new(FALSE, 0);
 	title = gtk_drawing_area_new();
 
@@ -323,7 +338,7 @@ GtkWidget *xv_section_head(CongDispspec *ds, CongNodePtr x)
 	g_object_set_data(G_OBJECT(title), "vbox", vbox);
 
 	gtk_box_pack_start(GTK_BOX(vbox), title, TRUE, TRUE, 0);
-	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, the_globals.ft_asc + the_globals.ft_desc + 4 /* up and down borders */ + 4 /* space below */);
+	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, title_font->asc + title_font->desc + 4 /* up and down borders */ + 4 /* space below */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
 			   (GtkSignalFunc) xv_section_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
@@ -351,11 +366,18 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 	int i;
 
 	CongDispspec *ds = g_object_get_data(G_OBJECT(w), "dispspec");
-	
-#if NEW_LOOK
+
 	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongFont *title_font;
+
+	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 	g_assert(element);
 
+ 	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
+	g_assert(title_font);
+
+	
+#if NEW_LOOK
 	/* Top: */
 	draw_blended_line(w,
 			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
@@ -388,13 +410,13 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 	/* Render the text: */
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
 	gdk_draw_string(w->window,
-			the_globals.ft,
+			title_font->gdk_font,
 			gc, 
-			H_SPACING + H_INDENT, 2 + the_globals.ft_asc,
+			H_SPACING + H_INDENT, 2 + title_font->asc,
 			cong_dispspec_element_username(element));
 
 #else
-	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
+	str_width = gdk_string_width(title_font->gdk_font, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
 	gc = cong_dispspec_gc_get(ds, cong_node_parent(x), 0);
@@ -459,7 +481,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 
 	/* Section identifier */
 
-	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
+	gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 4, 2 + title_font->asc,
 									cong_dispspec_name_get(ds, x));
 #endif
 	
@@ -472,10 +494,19 @@ GtkWidget *xv_fragment_head(CongDispspec *ds, CongNodePtr x)
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *title;
 
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongFont *title_font;
+
+	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_assert(element);
+
+ 	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
+	g_assert(title_font);
+
 	title = gtk_drawing_area_new();
 	g_object_set_data(G_OBJECT(title), "dispspec", ds);
 
-	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, the_globals.ft_asc + the_globals.ft_desc + 4 /* framing and inside space */ + 4 /* below space */);
+	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, title_font->asc + title_font->desc + 4 /* framing and inside space */ + 4 /* below space */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
 			   (GtkSignalFunc) xv_fragment_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",

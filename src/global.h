@@ -63,6 +63,8 @@ typedef struct CongDispspecElement CongDispspecElement;
 typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
 typedef struct CongDispspecRegistry CongDispspecRegistry;
 
+typedef struct CongFont CongFont;
+
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
  */
@@ -142,8 +144,10 @@ typedef struct CongXMLEditor CongXMLEditor;
 GtkWidget*
 cong_xml_editor_get_widget(CongXMLEditor *xed);
 
+#if 0
 GdkFont*
 cong_xml_editor_get_font(CongXMLEditor *xed);
+#endif
 
 CongDispspec*
 cong_xml_editor_get_dispspec(CongXMLEditor *xed);
@@ -301,12 +305,16 @@ struct CongXMLEditor
 	GtkWidget *e;  /* Eventbox */
 	GtkWidget *w;  /* Drawing area */
 	GdkPixmap *p;  /* Backing pixmap */
+#if 0
 	GdkFont *f, *fm;
+#endif
 
 	CongDispspec *displayspec;
 	
+#if 0
 	int f_asc, f_desc;
 	int fm_asc, fm_desc;
+#endif
 	int tag_height;
 	
 	int initial;
@@ -404,6 +412,24 @@ struct selection
 	CongLocation loc1;
 };
 
+enum CongFontRole
+{
+	CONG_FONT_ROLE_BODY_TEXT,
+	CONG_FONT_ROLE_SPAN_TAG,
+	CONG_FONT_ROLE_TITLE_TEXT,
+
+	/* replaces: f, fm, ft in order */
+
+	CONG_FONT_ROLE_NUM
+};
+
+struct CongFont
+{
+	GdkFont *gdk_font;
+	int asc;
+	int desc;
+	
+};
 
 struct cong_globals
 {
@@ -411,9 +437,14 @@ struct cong_globals
 	struct curs curs;
 	struct selection selection;
 
+#if 1
+	CongFont *fonts[CONG_FONT_ROLE_NUM];
+#else
 	GdkFont *f, *fm, *ft;
-	GdkGC *insert_element_gc;
 	int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
+#endif
+
+	GdkGC *insert_element_gc;
 
 #if 0
   TTREE *vect_global;
@@ -441,6 +472,12 @@ struct cong_globals
 extern struct cong_globals the_globals;
 extern struct cong_gui the_gui;
 
+CongFont*
+cong_font_new(const gchar *font_name);
+
+void
+cong_font_delete(CongFont *font);
+
 GtkWidget* cong_gui_get_window(struct cong_gui* gui);
 GtkWidget* cong_gui_get_popup(struct cong_gui* gui);
 void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup);
@@ -458,6 +495,9 @@ int find_documentmetacaps();
 int submit_do();
 int gui_window_login_make(char **user_s, char **pass_s);
 CongXMLEditor *xmledit_new();
+
+CongFont*
+cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role);
 
 gint tree_new_sibling(GtkWidget *widget, TTREE *tag);
 gint tree_new_sub_element(GtkWidget *widget, TTREE *tag);
@@ -616,6 +656,9 @@ cong_dispspec_element_header_info(CongDispspecElement *element);
 
 gchar*
 cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x);
+
+CongFont*
+cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_xml_editor_redraw(CongXMLEditor *xed);

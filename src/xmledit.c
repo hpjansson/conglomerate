@@ -623,6 +623,8 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
         UNUSED_VAR(GdkCursor* cursor)
 	CongXMLEditor *xed;
 	UNUSED_VAR(int sig)
+
+	CongFont *font;
 	
 	xed = malloc(sizeof(*xed));
 	memset(xed, 0, sizeof(*xed));
@@ -697,6 +699,7 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
 	gtk_widget_set(xed->w, "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(xed->w, "can_default", (gboolean) TRUE, 0);
 	
+#if 0
 	xed->f = the_globals.f;
 	xed->fm = the_globals.fm;
 
@@ -704,10 +707,14 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
 	xed->f_desc = the_globals.f_desc;
 	xed->fm_asc = the_globals.fm_asc;
 	xed->fm_desc = the_globals.fm_desc;
+#endif
 
-	xed->tag_height = (xed->fm_asc + xed->fm_desc) / 2;
+	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	g_assert(font);
+
+	xed->tag_height = (font->asc + font->desc) / 2;
 	if (xed->tag_height < 3) xed->tag_height = 3;
-	xed->tag_height += (xed->fm_asc + xed->fm_desc) / 2;
+	xed->tag_height += (font->asc + font->desc) / 2;
 
 	/* g_message("xed used to clone the TTREE for the displayspec; it now shares it\n"); */
 	xed->displayspec = displayspec;
@@ -715,22 +722,42 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
 	return(xed);
 }
 
+CongFont*
+cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role)
+{
+	g_return_val_if_fail(xed, NULL);
+	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
+
+	/* fonts are currently a property of the app: */
+	return the_globals.fonts[role];
+}
+
 
 void xed_char_put_at_curs(CongXMLEditor *xed, char c)
 {
 	GdkGC *gc;
+	CongFont *font;
+
+	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(font);
+
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
 	
-	gdk_draw_text(xed->p, xed->f, gc, 0, 10, &c, 1);
+	gdk_draw_text(xed->p, font->gdk_font, gc, 0, 10, &c, 1);
 }
 
 
 void xed_str_put(CongXMLEditor *xed, char *s)
 {
 	GdkGC *gc;
+	CongFont *font;
+
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
 
-	gdk_draw_string(xed->p, xed->f, gc, 
+	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(font);
+
+	gdk_draw_string(xed->p, font->gdk_font, gc, 
 			xed->draw_pos_x,
 			xed->draw_pos_y, 
 			s);
@@ -1079,6 +1106,15 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 
 	UNUSED_VAR(int eol = 0)
 
+	CongFont *body_font;
+	CongFont *span_font;
+
+	body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
+	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	g_assert(span_font);
+
 #if 0
 	printf("xed_xml_tags_draw_eol\n");
 #endif
@@ -1090,7 +1126,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 
 	t = cong_layout_stack_top(&xed->layout_stack);
 
-	draw_pos_y = xed->draw_pos_y + xed->f_desc + 3;
+	draw_pos_y = xed->draw_pos_y + body_font->desc + 3;
 
 	draw_pos_y += draw_tag_lev * xed->tag_height;
 
@@ -1101,7 +1137,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 		x1 = xed->w->allocation.width;
 		width = x1 - x0;
 
-		draw_pos_y = cong_layout_stack_entry_get_lev(t) * xed->tag_height + xed->draw_pos_y + xed->f_desc + 3;
+		draw_pos_y = cong_layout_stack_entry_get_lev(t) * xed->tag_height + xed->draw_pos_y + body_font->desc + 3;
 
 		y = draw_pos_y;
 
@@ -1113,15 +1149,15 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
+			text_width = gdk_string_width(span_font->gdk_font, get_uistring_for_stack_entry(ds, t));
 			if (text_width < width - 6)
 			{
-				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
+				text_y = y + (span_font->asc + span_font->desc) / 2;
 				
 				/* Draw text and lines */
 				
 				gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
-				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
+				gdk_draw_string(xed->p, span_font->gdk_font, gc, x0 + 1 + (width - text_width) / 2,
 												text_y, get_uistring_for_stack_entry(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
@@ -1138,7 +1174,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 	/* Draw all tags spanning the whole line */
 
 	if (t) {
-		draw_pos_y = cong_layout_stack_entry_get_lev(t) * xed->tag_height + xed->draw_pos_y + xed->f_desc + 3;
+		draw_pos_y = cong_layout_stack_entry_get_lev(t) * xed->tag_height + xed->draw_pos_y + body_font->desc + 3;
 	}
 
 #if 0	
@@ -1167,14 +1203,14 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
+			text_width = gdk_string_width(span_font->gdk_font, get_uistring_for_stack_entry(ds, t));
 			if (text_width < width - 6)
 			{
-				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
+				text_y = y + (span_font->asc + span_font->desc) / 2;
 
 				/* Draw text and lines */
 				
-				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
+				gdk_draw_string(xed->p, span_font->gdk_font, gc, x0 + 1 + (width - text_width) / 2,
 												text_y, get_uistring_for_stack_entry(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
@@ -1183,8 +1219,8 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 		}
 	}
 	
-	if (xed->draw_pos_y + xed->f_desc + 3 + (xed->draw_tag_max * xed->tag_height) > draw_pos_y)
-		xed->draw_pos_y += xed->f_desc + 3 + (xed->draw_tag_max * xed->tag_height);
+	if (xed->draw_pos_y + body_font->desc + 3 + (xed->draw_tag_max * xed->tag_height) > draw_pos_y)
+		xed->draw_pos_y += body_font->desc + 3 + (xed->draw_tag_max * xed->tag_height);
 	else
 		xed->draw_pos_y = draw_pos_y;
 }
@@ -1203,6 +1239,15 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 
 	CongDispspec *ds = xed->displayspec;
 
+	CongFont *body_font;
+	CongFont *span_font;
+
+ 	body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
+	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	g_assert(span_font);
+
 #if 0
 	printf("xed_xml_tags_draw_eot\n");
 #endif
@@ -1218,7 +1263,7 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 
 	/* Draw tag on top of stack */
 
-	draw_pos_y = xed->draw_pos_y + xed->f_desc + 3 + (xed->tag_height * draw_tag_lev);
+	draw_pos_y = xed->draw_pos_y + body_font->desc + 3 + (xed->tag_height * draw_tag_lev);
 
 	t = cong_layout_stack_top(&xed->layout_stack);
 	line = cong_layout_stack_entry_get_line(t);
@@ -1250,15 +1295,15 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 
 		/* Insert text if it fits */
 
-		text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
+		text_width = gdk_string_width(span_font->gdk_font, get_uistring_for_stack_entry(ds, t));
 		if (text_width < width - 6)
 		{
-			text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
+			text_y = y + (span_font->asc + span_font->desc) / 2;
 			
 			/* Draw text and lines */
 			
 			if (line == xed->draw_line) gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
-			gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
+			gdk_draw_string(xed->p, span_font->gdk_font, gc, x0 + 1 + (width - text_width) / 2,
 					text_y, get_uistring_for_stack_entry(ds, t));
 			gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 			gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
@@ -1279,9 +1324,14 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 void xed_str_micro_put(CongXMLEditor *xed, char *s)
 {
 	GdkGC *gc;
-	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
+	CongFont *span_font;
 
-	gdk_draw_string(xed->p, xed->fm, gc, 0, 30, s);
+	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
+	
+	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	g_assert(span_font);
+
+	gdk_draw_string(xed->p, span_font->gdk_font, gc, 0, 30, s);
 }
 
 
@@ -1351,6 +1401,9 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 	char *p0, *p1, *word;
 	int width;
 
+ 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
 	x = cong_node_first_child(x);
 
 	for ( ; x; x = cong_node_next(x))
@@ -1381,7 +1434,7 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 				
 				/* Get width of word */
 				word = strndup(p0, p1 - p0);
-				width = gdk_string_width(xed->f, word);
+				width = gdk_string_width(body_font->gdk_font, word);
 				free(word);
 
 				/* Does it fit? */
@@ -1408,6 +1461,9 @@ int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 	gboolean spc_before = FALSE;
 	gboolean spc_after = FALSE;
 
+ 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
 #if 0	
 	xed->draw_char = 0;
 #endif
@@ -1417,9 +1473,9 @@ int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 	for (word = xed_word(x, xed, &spc_before, &spc_after); word; word = xed_word(x, xed, &spc_before, &spc_after))
 	{
 		/* Get width of word */
-		width = gdk_string_width(xed->f, word);
+		width = gdk_string_width(body_font->gdk_font, word);
 		if (spc_before && xed->draw_pos_x > 1) {
-			width += gdk_char_width(xed->f, ' ');
+			width += gdk_char_width(body_font->gdk_font, ' ');
 		}
 
 		/* Does it fit? */
@@ -1436,20 +1492,20 @@ int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 		/* Draw and move pen */
 
 		if (spc_before && xed->draw_pos_x > 1) {
-			xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+			xed->draw_pos_x += gdk_char_width(body_font->gdk_font, ' ');
 		}
 		if (xed->mode == CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW) {
 			xed_str_put(xed, word);
 		}
 
-		width = gdk_string_width(xed->f, word);
+		width = gdk_string_width(body_font->gdk_font, word);
 		xed->draw_pos_x += width;  /* NOTE: Causes tag misalignment? (Nah...) */
 		free(word);
 	}
 #if DEBUG_STACK
 	printf("[Data] draw_pos_x == %d.\n", xed->draw_pos_x);
 #endif
-	if (spc_before) xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+	if (spc_before) xed->draw_pos_x += gdk_char_width(body_font->gdk_font, ' ');
 	return(0);
 }
 
@@ -1464,6 +1520,9 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 	gboolean spc_before = FALSE;
 	gboolean spc_after = FALSE;
 
+ 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
 	xed->draw_char = 0;
 
 	/* Lay out text */
@@ -1471,9 +1530,9 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 	for (word = xed_word(x, xed, &spc_before, &spc_after); word; word = xed_word(x, xed, &spc_before, &spc_after))
 	{
 		/* Get width of word */
-		width = gdk_string_width(xed->f, word);
+		width = gdk_string_width(body_font->gdk_font, word);
 		if (spc_before && xed->draw_pos_x > 1) {
-			width += gdk_char_width(xed->f, ' ');
+			width += gdk_char_width(body_font->gdk_font, ' ');
 		}
 
 		/* Does it fit? */
@@ -1486,7 +1545,7 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
@@ -1498,19 +1557,19 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 		/* Draw and move pen */
 
 		if (spc_before && xed->draw_pos_x > 1) {
-			xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+			xed->draw_pos_x += gdk_char_width(body_font->gdk_font, ' ');
 		}
 		if (xed->mode == CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW) {
 			xed_str_put(xed, word);
 		}
 
-		width = gdk_string_width(xed->f, word);
+		width = gdk_string_width(body_font->gdk_font, word);
 		xed->draw_pos_x += width;  /* NOTE: Causes tag misalignment? (Nah...) */
 		free(word);
 	}
 
 	if (spc_before && xed->draw_pos_x > 1) {
-		xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+		xed->draw_pos_x += gdk_char_width(body_font->gdk_font, ' ');
 	}
 	return(wrap);
 }
@@ -1612,6 +1671,8 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 	int draw_tag_lev_new;
 	int width;
 	CongDispspec *ds = xed->displayspec;
+ 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
 
 #if 0
 	draw_tag_lev = xed_xml_depth(x) - 1;
@@ -1682,7 +1743,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 				xed->draw_pos_x = 1;                       /* Start at left margin */
 				xed->draw_tag_max = 0;
 
-				xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+				xed->draw_pos_y += body_font->asc;             /* Super-baseline text */
 				draw_tag_lev = 0;
 				cong_layout_stack_compress(&xed->layout_stack);
 				continue;
@@ -1721,7 +1782,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;             /* Super-baseline text */
 			draw_tag_lev = 0;
 			cong_layout_stack_compress(&xed->layout_stack);
 		}
@@ -1750,7 +1811,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 			
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 			
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
@@ -1758,13 +1819,13 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 
 			/* Draw table thing */
 			
-			width = gdk_string_width(xed->f, "[TABLE]");
+			width = gdk_string_width(body_font->gdk_font, "[TABLE]");
 			if (xed->mode == CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW)
 			{
 				gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
-						   TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
-						   xed->f_asc + xed->f_desc + 2);
-				gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
+						   TRUE, 2, xed->draw_pos_y - body_font->asc - 1, xed->w->allocation.width - 4,
+						   body_font->asc + body_font->desc + 2);
+				gdk_draw_string(xed->p, body_font->gdk_font, xed->w->style->fg_gc[GTK_STATE_NORMAL],
 						(xed->w->allocation.width - width) / 2,
 						xed->draw_pos_y, "[TABLE]");
 			}
@@ -1777,7 +1838,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 			
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
@@ -1817,6 +1878,9 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	int width;
 	CongDispspec *ds = xed->displayspec;
 
+ 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(body_font);
+
 #if 0
 	printf("xed_xml_content_draw\n");
 #endif
@@ -1830,7 +1894,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	xed->draw_x_prev = 0;
 	xed->draw_char_prev = 0;
 	xed->draw_char = 0;
-	xed->draw_pos_y = xed->f_asc;
+	xed->draw_pos_y = body_font->asc;
 
 	/* We start inside a parent element, which hopefully is structural. */
 	
@@ -1899,7 +1963,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 			
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
@@ -1931,7 +1995,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 			
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
@@ -1939,13 +2003,13 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 
 			/* Draw table thing */
 			
-			width = gdk_string_width(xed->f, "[TABLE]");
+			width = gdk_string_width(body_font->gdk_font, "[TABLE]");
 			if (xed->mode == CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW)
 			{
 				gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
-						   TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
-						   xed->f_asc + xed->f_desc + 2);
-				gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
+						   TRUE, 2, xed->draw_pos_y - body_font->asc - 1, xed->w->allocation.width - 4,
+						   body_font->asc + body_font->desc + 2);
+				gdk_draw_string(xed->p, body_font->gdk_font, xed->w->style->fg_gc[GTK_STATE_NORMAL],
 						(xed->w->allocation.width - width) / 2,
 						xed->draw_pos_y, "[TABLE]");
 			}
@@ -1958,7 +2022,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			
 			add_stuff_then_add_line(xed, xed->draw_pos_y, x, xed->draw_char, xed->draw_x_prev, xed->draw_char_prev);
 
-			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
+			xed->draw_pos_y += body_font->asc;         /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;

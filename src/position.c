@@ -170,6 +170,9 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 	UNUSED_VAR(int i_last_space = 0)
 	int i;
 
+	CongFont *font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(font);
+
 	for (i = pos->c_given, data = xml_frag_data_nice(pos->node); data[i]; )
 	{
 		if (pos->x + pos->word_width >= pos->x_find)
@@ -205,7 +208,7 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 #ifndef RELEASE
 			fputc(' ', stdout);
 #endif
-			pos->x += gdk_char_width(xed->f, ' ');
+			pos->x += gdk_char_width(font->gdk_font, ' ');
 			pos->space = 0;
 			continue;
 		}
@@ -214,7 +217,7 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 #ifndef RELEASE			
 			fputc(data[i], stdout);
 #endif			
-			pos->word_width += gdk_char_width(xed->f, data[i]);
+			pos->word_width += gdk_char_width(font->gdk_font, data[i]);
 		}
 
 		i++;
@@ -407,6 +410,10 @@ void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 	int word_x_offset = 0;
 	int i;
 
+	CongFont *font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	g_assert(font);
+
+
 	if (pos->node == pos->node_find && !pos->c) 
 	{
 		pos->x += pos->word_width;
@@ -457,7 +464,7 @@ void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 #ifndef RELEASE
 			fputc(' ', stdout);
 #endif			
-			if (pos->x > 1) pos->x += gdk_char_width(xed->f, ' ');  /* pos->word_width? */
+			if (pos->x > 1) pos->x += gdk_char_width(font->gdk_font, ' ');  /* pos->word_width? */
 			pos->space = 0;
 			if (pos->mode == 1) return;
 			continue;
@@ -467,7 +474,7 @@ void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 #ifndef RELEASE
 			fputc(data[i], stdout);
 #endif			
-			pos->word_width += gdk_char_width(xed->f, data[i]);
+			pos->word_width += gdk_char_width(font->gdk_font, data[i]);
 		}
 
 		i++;

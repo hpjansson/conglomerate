@@ -603,8 +603,50 @@ char font_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     "abcdefghijklmnopqrstuvwxyz"
                     "0123456789!@\"'/()[]{}*&#~";
 
+CongFont*
+cong_font_load(const gchar *font_name)
+{
+	CongFont *font;
+	g_return_val_if_fail(font_name, NULL);
+
+	font = g_new0(CongFont,1);
+
+	font->gdk_font = gdk_font_load(font_name);
+	g_assert(font->gdk_font);
+
+	gdk_string_extents(font->gdk_font, font_chars, 0, 0, 0, &font->asc, &font->desc);                  
+
+	return font;	
+}
+
+void
+cong_font_delete(CongFont *font)
+{
+	g_assert(0);
+}
+
+
 void fonts_load()
 {
+#if 1
+
+#ifdef WINDOWS_BUILD                                                            
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TAG] = cong_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");           
+#else                                                                           
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");        
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");       
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-iso8859-1");            
+#endif                                                                         
+
+#ifdef WINDOWS_BUILD                                                            
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT]->asc -= 2;                                                                   
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT]->asc -= 4;                                                                  
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG]asc -= 8;                                                                  
+#endif     
+
+#else
 #ifdef WINDOWS_BUILD                                                            
 	  the_globals.f = gdk_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
 	  the_globals.ft = gdk_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
@@ -624,6 +666,7 @@ void fonts_load()
 	  the_globals.ft_asc -= 4;                                                                  
 	  the_globals.fm_asc -= 8;                                                                  
 #endif     
+#endif
 }
 
 

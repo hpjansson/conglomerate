@@ -12,23 +12,33 @@
 
 void curs_on(struct curs* curs)
 {
-	g_assert(curs!=NULL);
+	CongFont *font;
 
-	if (curs->w)
-	  gdk_draw_line(curs->w->window, curs->gc, curs->x - 1 + 1, curs->y - 4,
-								  curs->x - 1 + 1, curs->y + the_globals.f_asc + the_globals.f_desc + 4);
+	g_return_if_fail(curs!=NULL);
+
+	font = the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT];
+	g_assert(font);
+
+	if (curs->w) {
+		gdk_draw_line(curs->w->window, curs->gc, curs->x - 1 + 1, curs->y - 4,
+			      curs->x - 1 + 1, curs->y + font->asc + font->desc + 4);
+	}
 }
 
 
 void curs_off(struct curs* curs)
 {
 	GdkRectangle r;
+	CongFont *font;
 
-	g_assert(curs!=NULL);
+	g_return_if_fail(curs!=NULL);
+
+	font = the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT];
+	g_assert(font);
 
 	r.x = curs->x - 1 + 1;
 	r.y = curs->y - 4;
-	r.height = the_globals.f_asc + the_globals.f_desc + 9;
+	r.height = font->asc + font->desc + 9;
 	r.width = 1;
 	if (curs->w) gtk_widget_draw(curs->w, &r);
 }

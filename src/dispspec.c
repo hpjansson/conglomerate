@@ -959,6 +959,16 @@ cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x)
 	}
 }
 
+CongFont*
+cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role)
+{
+	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
+
+	/* fonts are currently a property of the app: */
+	return the_globals.fonts[role];
+
+}
 
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt)
