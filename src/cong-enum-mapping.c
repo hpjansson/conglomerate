@@ -49,3 +49,21 @@ cong_enum_mapping_lookup (const CongEnumMapping *enum_mapping,
 	return default_value;	
 }
 
+const gchar*
+cong_enum_mapping_lookup_string (const CongEnumMapping *enum_mapping,
+				 guint num_values,
+				 guint value)
+{
+	guint i;
+
+	g_return_val_if_fail (enum_mapping, NULL);
+
+	for (i=0;i<num_values;i++) {
+		if (enum_mapping[i].numeric_value==value) {
+			return enum_mapping[i].text_value;
+		}
+	}
+
+	/* Unrecognised value: */
+	return NULL;	
+}

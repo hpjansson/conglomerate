@@ -35,11 +35,18 @@ struct CongEnumMapping
 	guint numeric_value;
 };
 
+/* String->Enum value */
 guint
 cong_enum_mapping_lookup (const CongEnumMapping *enum_mapping,
 			  guint num_values,
 			  const gchar *text_value,
 			  guint default_value);
+
+/* Enum value->String */
+const gchar*
+cong_enum_mapping_lookup_string (const CongEnumMapping *enum_mapping,
+				 guint num_values,
+				 guint value);
 
 G_END_DECLS
 

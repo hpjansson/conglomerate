@@ -148,6 +148,10 @@ static void
 add_xml_for_metadata (xmlDocPtr xml_doc, 
 		      CongNodePtr root, 
 		      CongDispspec *dispspec);
+static void
+add_xml_for_document_models (xmlDocPtr xml_doc, 
+			     CongNodePtr root, 
+			     CongDispspec *dispspec);
 static void 
 add_xml_for_element (xmlDocPtr xml_doc, 
 		     CongNodePtr element_list, 
@@ -414,6 +418,8 @@ xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
 	
 	/* Add the metadata node: */
 	add_xml_for_metadata(xml_doc, root_node, dispspec);
+
+	add_xml_for_document_models (xml_doc, root_node, dispspec);
 	
 	/* The <element-list> node: */
 	{
@@ -434,6 +440,8 @@ xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
 			}
 		}	
 	}		
+
+	/* FIXME: add <document-template> if necessary */
 
 	return xml_doc;	
 }
@@ -1479,6 +1487,56 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 	
 	/* FIXME: we can't yet save the icon name */
 
+}
+
+static void
+add_xml_for_document_models (xmlDocPtr xml_doc, 
+			     CongNodePtr root, 
+			     CongDispspec *dispspec)
+{
+	CongNodePtr node_document_models;
+	int i;
+	
+	node_document_models = xmlNewDocNode(xml_doc,
+					     NULL,
+					     "document-models",
+					     NULL);			
+	xmlAddChild (root, 
+		     node_document_models);
+	
+	for (i=0; i<NUM_CONG_DOCUMENT_MODEL_TYPES; i++) {
+		enum CongDocumentModelType model_type = (enum CongDocumentModelType)i;
+		const CongExternalDocumentModel* model = cong_dispspec_get_external_document_model (dispspec,
+												    model_type);
+
+		if (model) {
+			CongNodePtr node_document_model;
+		
+			node_document_model = xmlNewDocNode (xml_doc,
+							     NULL,
+							     "external-document-model",
+							     NULL); 
+			xmlAddChild (node_document_models,
+				     node_document_model);
+
+			xmlSetProp (node_document_model,
+				    "type",
+				    cong_enum_mapping_lookup_string (document_model_enum_mapping,
+								     sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
+								     model_type)
+				    );
+			if (model->public_id) {
+				xmlSetProp (node_document_model,
+					    "public-id",
+					    model->public_id);
+			}
+			if (model->system_id) {
+				xmlSetProp (node_document_model,
+					    "system-id",
+					    model->system_id);
+			}
+		}		
+	}
 }
 
 static void add_xml_for_element (xmlDocPtr xml_doc, 

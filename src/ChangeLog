@@ -1,5 +1,9 @@
 2003-09-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c, cong-enum-mapping.c, cong-enum-mapping.h
+
+	Added output of document model info to the CongDispsepc->XML generator
+
 	* cong-dispspec.c, cong-dispspec.h, global.h, plugin-lists-node-element-listitem.c
 
 	Added support for document models (including DTDs) to dispspecs
