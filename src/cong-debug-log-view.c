@@ -10,6 +10,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-view.h"
+#include "cong-util.h"
 
 #define DEBUG_DEBUG_LOG_VIEW 0
 

@@ -34,6 +34,7 @@
 #include "cong-plugin.h"
 #include "cong-progress-checklist.h"
 #include "cong-app.h"
+#include "cong-util.h"
 
 #if 1
 #include <libgnome/libgnome.h>

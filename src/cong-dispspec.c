@@ -20,6 +20,7 @@
 #include "cong-app.h"
 #include "cong-eel.h"
 #include "cong-dtd.h"
+#include "cong-util.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))

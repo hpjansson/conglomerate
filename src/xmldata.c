@@ -9,10 +9,11 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-util.h"
 
 char fake_data[] = "";
 
-#define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 1
+#define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 0
 #if LOG_CONG_NODE_PRIVATE_MODIFICATIONS
 #define LOG_NODE_PRIVATE_MODIFICATION(x) g_message(x)
 #else
@@ -411,7 +412,7 @@ CongNodePtr cong_node_new_element(const gchar *xmlns, const gchar *tagname, Cong
 
 CongNodePtr cong_node_new_element_from_dispspec(CongDispspecElement *element, CongDocument *doc)
 {
-	gchar *xmlns;
+	const gchar *xmlns;
 
 	g_return_val_if_fail (element, NULL);
 	g_return_val_if_fail (doc, NULL);

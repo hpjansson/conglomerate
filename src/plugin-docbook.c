@@ -31,7 +31,7 @@
 #include "cong-document.h"
 #include <glade/glade.h>
 #include "cong-app.h"
-
+#include "cong-util.h"
 #include "cong-fake-plugin-hooks.h"
 
 #if 0

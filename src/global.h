@@ -249,55 +249,6 @@ typedef struct CongEditorArea CongEditorArea;
 typedef struct CongEditorNode CongEditorNode;
 
 
-/* PLUGIN INTERFACE: 
-   These types are fully opaque, to try to minimise ABI issues.
-*/
-typedef struct CongPlugin CongPlugin;
-typedef struct CongPluginManager CongPluginManager;
-
-typedef struct CongFunctionality CongFunctionality;
-#define CONG_FUNCTIONALITY(x) ((CongFunctionality*)(x))
-
-/* The following are all castable to CongFunctionality: */
-typedef struct CongDocumentFactory CongDocumentFactory;
-typedef struct CongImporter CongImporter;
-typedef struct CongExporter CongExporter;
-#if ENABLE_PRINTING
-typedef struct CongPrintMethod CongPrintMethod;
-#endif
-typedef struct CongThumbnailer CongThumbnailer;
-typedef struct CongPluginEditorElement CongPluginEditorElement;
-typedef struct CongTool CongTool;
-typedef struct CongCustomPropertyDialog CongCustomPropertyDialog;
-
-/* The File->New GUI: */
-typedef struct CongNewFileAssistant CongNewFileAssistant;
-
-
-/* Function pointers to be exposed by .so/.dll files: */
-typedef gboolean (*CongPluginCallbackInit)(CongPlugin *plugin); /* exposed as "plugin_init"? */
-typedef gboolean (*CongPluginCallbackUninit)(CongPlugin *plugin); /* exposed as "plugin_uninit"? */
-typedef gboolean (*CongPluginCallbackRegister)(CongPlugin *plugin); /* exposed as "plugin_register"? */
-typedef gboolean (*CongPluginCallbackConfigure)(CongPlugin *plugin);  /* exposed as "plugin_configure"? legitimate for it not to be present */
-
-/* Function pointers that are registered by plugins: */
-typedef void (*CongDocumentFactoryPageCreationCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
-typedef void (*CongDocumentFactoryActionCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
-typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
-typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
-typedef gboolean (*CongExporterDocumentFilter)(CongExporter *exporter, CongDocument *doc, gpointer user_data);
-typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
-typedef gboolean (*CongToolDocumentFilter)(CongTool *tool, CongDocument *doc, gpointer user_data);
-typedef void (*CongToolActionCallback)(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data);
-typedef GtkWidget* (*CongCustomPropertyFactoryMethod)(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node);
-
-#if ENABLE_PRINTING
-typedef gboolean (*CongPrintMethodDocumentFilter)(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data);
-typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
-#endif
-
-typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget2 *editor_widget, CongNodePtr node, gpointer user_data);
-
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
 
@@ -318,72 +269,5 @@ cong_xml_save_to_vfs(xmlDocPtr doc_ptr,
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 					 const xmlChar *name,
 					 int value);
-
-/* Handy utility functions: */
-
-/**
-   Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
-*/
-gchar* cong_util_cleanup_text(const xmlChar *text);
-
-
-/**
-   Convert a URI into a POSIX, path, assuming that this is valid: 
-*/
-gchar *cong_util_get_local_path_from_uri(GnomeVFSURI *uri);
-
-/**
-   Norman Walsh's stylesheets for DocBook seem to be present on every modern Linux
-   distribution I've tried.  
-
-   These functions attempt to use the local catalog to find them.
-*/
-gchar*
-cong_utils_get_norman_walsh_stylesheet_path(void);
-
-gchar*
-cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path);
-
-/**
-   Icon loading; take an icon basename e.g. "cong-docbook-set", convert to a filename and load it.
- */
-GdkPixbuf *cong_util_load_icon(const gchar *icon_basename);
-
-void cong_util_append(gchar **string, const gchar *to_add);
-
-#if ENABLE_PRINTING
-void cong_util_print_xslfo (GtkWindow *toplevel_window, 
-			    GnomePrintContext *gpc, 
-			    xmlDocPtr xml_doc);
-#endif
-
-/* macro adapted from libxml's error.c; surely this exists in GLib somewhere? */
-#define CONG_GET_VAR_STR(msg, str) {				\
-    int       size;						\
-    int       chars;						\
-    char      *larger;						\
-    va_list   ap;						\
-								\
-    str = (gchar *)g_malloc(150);				\
-								\
-    size = 150;							\
-								\
-    while (1) {							\
-	va_start(ap, msg);					\
-  	chars = vsnprintf(str, size, msg, ap);			\
-	va_end(ap);						\
-	if ((chars > -1) && (chars < size))			\
-	    break;						\
-	if (chars > -1)						\
-	    size += chars + 1;					\
-	else							\
-	    size += 100;					\
-	if ((larger = (char *) g_realloc(str, size)) == NULL) { \
-	    g_free(str);					\
-	    return;						\
-	}							\
-	str = larger;						\
-    }								\
-}
 
 G_END_DECLS

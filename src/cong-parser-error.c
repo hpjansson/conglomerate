@@ -7,6 +7,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-parser-error.h"
+#include "cong-util.h"
 
 void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
 {

@@ -31,6 +31,8 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#include "cong-util.h"
+
 static xmlDtdPtr load_dtd(const gchar *uri, GtkWindow *toplevel_window)
 {
 	xmlDtdPtr dtd;

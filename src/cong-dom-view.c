@@ -26,6 +26,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-tree-view.h"
+#include "cong-util.h"
 
 /* Internal function prototypes: */
 static gboolean 
