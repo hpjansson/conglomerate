@@ -1,3 +1,9 @@
+2004-01-30  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Post-release version bump to 0.7.12
+
 2004-01-29  David Hoover  <karma@deadmoose.com>
 
 	* README.xml
