@@ -170,40 +170,6 @@ cong_eel_gdk_rgb_to_color_spec (const guint32 color)
 	return g_strdup_printf ("#%06X", (guint) (color & 0xFFFFFF));
 }
 
-/**
- * cong_eel_option_menu_get_selected_menu_item:
- * @option_menu:
- *
- * TODO: Write me
- * Returns:
- */
-GtkMenuItem* 
-cong_eel_option_menu_get_selected_menu_item(GtkOptionMenu *option_menu)
-{
-	gint selected_index;
-	GList *list_of_menu_items;
-	GtkMenuItem *selected_menu_item;
-
-	g_return_val_if_fail (option_menu, NULL);
-
-	selected_index = gtk_option_menu_get_history (option_menu);
-
-	if (selected_index==-1) {
-		/* Nothing selected: */
-		return NULL;
-	}
-
-	list_of_menu_items = gtk_container_get_children (GTK_CONTAINER(gtk_option_menu_get_menu(option_menu)));
-	g_assert(list_of_menu_items);
-
-	selected_menu_item = g_list_nth_data (list_of_menu_items, selected_index);
-
-	g_list_free (list_of_menu_items);
-
-	return selected_menu_item;
-
-}
-
 static gchar* 
 cong_eel_utf8_capitalise(const gchar *str)
 {

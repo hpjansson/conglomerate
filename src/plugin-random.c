@@ -50,8 +50,8 @@ struct RandomGUI
 	GnomeDruidPageStandard *page;
 	GladeXML *xml;
 	GtkWidget *middle_page;
-	GtkOptionMenu *dispspec_option_menu;
-	GtkMenu *dispspec_menu;
+	GtkWidget *combo_box;
+	GPtrArray *combo_array;
 };
 
 struct RandomCreationInfo
@@ -66,16 +66,14 @@ struct RandomCreationInfo
 static CongDispspec*
 random_gui_get_selected_dispspec (RandomGUI *random_gui)
 {
-	GtkMenuItem *selected_menu_item;
-
+	gint selected;
 	g_assert (random_gui);
-	g_assert (random_gui->dispspec_option_menu);
+	g_assert (random_gui->combo_box);
 
-	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (random_gui->dispspec_option_menu);
-	g_assert (selected_menu_item);
-	
-	return (CongDispspec*)g_object_get_data (G_OBJECT (selected_menu_item),
-						 "dispspec");
+	selected = gtk_combo_box_get_active( GTK_COMBO_BOX(random_gui->combo_box) );
+	g_return_val_if_fail (selected != -1, NULL);
+	return (CongDispspec*)g_ptr_array_index (random_gui->combo_array, selected );
+
 }
 
 static gint
@@ -91,20 +89,12 @@ static void
 random_gui_add_option_for_dispspec (RandomGUI *random_gui,
 				    CongDispspec *dispspec)
 {
-	GtkMenuItem *menu_item;
-
 	g_assert (random_gui);
 	g_assert (dispspec);
 
-	menu_item = GTK_MENU_ITEM (gtk_menu_item_new_with_label ( cong_dispspec_get_name (dispspec)));
-	gtk_widget_show (GTK_WIDGET (menu_item));
-	
-	gtk_menu_shell_append (GTK_MENU_SHELL (random_gui->dispspec_menu),
-			       GTK_WIDGET (menu_item));
-	
-	g_object_set_data (G_OBJECT (menu_item),
-			   "dispspec",
-			   dispspec);
+	gtk_combo_box_append_text (GTK_COMBO_BOX (random_gui->combo_box),
+				   cong_dispspec_get_name (dispspec) );
+	g_ptr_array_add (random_gui->combo_array, (gpointer) dispspec);
 }
 
 static void
@@ -115,6 +105,9 @@ free_gui (gpointer factory_data)
 	g_assert (factory_data);
 
 	random_gui = (RandomGUI*)factory_data;
+
+	if ( random_gui->combo_array )
+		g_ptr_array_free (random_gui->combo_array, FALSE);
 
 	g_object_unref (G_OBJECT (random_gui->xml));
 	g_free (random_gui);	
@@ -156,12 +149,21 @@ factory_page_creation_callback_random(CongServiceDocumentFactory *factory, CongN
 					       random_gui->middle_page,
 					       "");
 
-	random_gui->dispspec_option_menu = GTK_OPTION_MENU (glade_xml_get_widget (random_gui->xml, "optionmenu_doctype"));
-	random_gui->dispspec_menu = GTK_MENU (gtk_menu_new());
-	gtk_option_menu_set_menu (random_gui->dispspec_option_menu,
-				  GTK_WIDGET (random_gui->dispspec_menu));
-	gtk_widget_show (GTK_WIDGET (random_gui->dispspec_menu));
-
+	/*
+	 * In order to get the combo box to work in its "simple" mode - i.e.
+	 * without having to create a list store - I seem to have to have at
+	 * least one "items" entry in Glade. So we delete it here. Which is
+	 * plain ugly. Is there a way to tell glade that we want the "simple"
+	 * form of the GtkComboBox widget? Aha. I can hack the glade file so that
+	 * it has an items property for the widget, but that the contents are
+	 * empty. This could be fragile (I don't know what glade will do it saves
+         * the file), so I leave in the "dummy-item" which we have to delete.
+         * Doug Burke
+	 */
+	random_gui->combo_box = glade_xml_get_widget (random_gui->xml, "combobox_doctype");
+	gtk_combo_box_remove_text (GTK_COMBO_BOX(random_gui->combo_box), 0 );
+	random_gui->combo_array = g_ptr_array_new ();
+	
 	/* Generate the available document types from the dispspecs that are known */
 	{
 		unsigned int i;	
@@ -174,8 +176,9 @@ factory_page_creation_callback_random(CongServiceDocumentFactory *factory, CongN
 							    cong_dispspec_registry_get (ds_registry, i));
 		}
 
-		gtk_option_menu_set_history (random_gui->dispspec_option_menu,
-					     0);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(random_gui->combo_box), 0);
+		gtk_widget_show (random_gui->combo_box);
+
 	}
 
 	cong_new_file_assistant_set_data_for_factory (assistant,

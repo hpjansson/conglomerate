@@ -47,24 +47,23 @@ typedef struct CongPrintDialogDetails
 	gboolean got_any_print_methods;
 
 	GtkDialog *dialog;
-	GtkOptionMenu *select_print_method_option_menu;
+	GtkWidget *combo_box;
+	GPtrArray *combo_array;
 	GtkWidget *select_print_method_menu;
 } CongPrintDialogDetails;
 
 static CongServicePrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog_details)
 {
-	GtkMenuItem* selected_menu_item;
-
+	gint selected;
 	g_return_val_if_fail(dialog_details, NULL);
 
-	/* Which plugin has been selected? */
-	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (dialog_details->select_print_method_option_menu);
-			
-	if (selected_menu_item) {
-		return (CongServicePrintMethod*)g_object_get_data(G_OBJECT(selected_menu_item),
-							"print_method");
-	} else {
+	selected = gtk_combo_box_get_active( GTK_COMBO_BOX(dialog_details->combo_box) );
+
+	/* can selected ever be -1 here? */
+	if ( selected == -1 ) {
 		return NULL;
+	} else {
+		return (CongServicePrintMethod*)g_ptr_array_index (dialog_details->combo_array, selected);
 	}
 }
 
@@ -72,18 +71,16 @@ static void add_print_method_to_menu(CongServicePrintMethod *print_method, gpoin
 {
 	CongPrintDialogDetails *dialog_details = (CongPrintDialogDetails*)user_data;
 
-	if (cong_print_method_supports_document(print_method, dialog_details->doc)) {
-		GtkWidget *menu = dialog_details->select_print_method_menu;
-		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_service_get_name(CONG_SERVICE(print_method))));
+	if (cong_print_method_supports_document (print_method, dialog_details->doc)) {
 
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
-				      GTK_WIDGET(menu_item));
-		
-		g_object_set_data(G_OBJECT(menu_item),
-				  "print_method",
-				  print_method);
+		/* g_message ("adding print method to menu - %s", cong_service_get_name (CONG_SERVICE (print_method)) ); */
 
+		gtk_combo_box_append_text (GTK_COMBO_BOX (dialog_details->combo_box),
+					   cong_service_get_name(CONG_SERVICE(print_method)) );
+
+		g_ptr_array_add (dialog_details->combo_array, (gpointer) print_method);
 		dialog_details->got_any_print_methods = TRUE;
+
 	}
 }
 
@@ -124,10 +121,11 @@ static void monitor_print_method(CongPrintDialogDetails *dialog_details)
 }
 #endif
 
-static void on_print_method_selection_changed(GtkOptionMenu *optionmenu,
+static void on_print_method_selection_changed(GtkWidget *combo_box,
 					  gpointer user_data)
 {
 #if 0
+	/* NOTE: this would need to be changed since we now use a ComboBox for the menu */
 	GtkWidget* menu = gtk_option_menu_get_menu(optionmenu);
 	CongPrintDialogDetails *details = user_data;
 #endif
@@ -220,20 +218,20 @@ cong_document_print_dialog_new (CongDocument *doc,
 
 	/* Set up print_method selection option menu: */
 	{
-		dialog_details->select_print_method_option_menu = GTK_OPTION_MENU(gtk_option_menu_new());
-		dialog_details->select_print_method_menu = gtk_menu_new();
-		gtk_option_menu_set_menu(dialog_details->select_print_method_option_menu,
-					 dialog_details->select_print_method_menu);
-		
-		cong_plugin_manager_for_each_print_method (cong_app_get_plugin_manager (cong_app_singleton ()), 
-							   add_print_method_to_menu, 
+		dialog_details->combo_box = gtk_combo_box_new_text();
+		dialog_details->combo_array = g_ptr_array_new ();
+
+		cong_plugin_manager_for_each_print_method (cong_app_get_plugin_manager (cong_app_singleton()),
+							   add_print_method_to_menu,
 							   dialog_details);
-		gtk_option_menu_set_history(dialog_details->select_print_method_option_menu,0);
+
+		gtk_combo_box_set_active (GTK_COMBO_BOX(dialog_details->combo_box), 0);
+
 	}
 
 	cong_dialog_category_add_field (general_category, 
 					_("Print Method:"), 
-					GTK_WIDGET(dialog_details->select_print_method_option_menu),
+					GTK_WIDGET(dialog_details->combo_box),
 					TRUE);
 
 #if 0
@@ -242,7 +240,7 @@ cong_document_print_dialog_new (CongDocument *doc,
 
 	print_method_category = cong_dialog_content_add_category(content, _("Print Options"));
 
-	g_signal_connect(dialog_details->select_print_method_option_menu,
+	g_signal_connect(dialog_details->combo_box,
 			 "changed",
 			 G_CALLBACK(on_print_method_selection_changed),
 			 dialog_details);
@@ -263,6 +261,23 @@ cong_document_print_dialog_new (CongDocument *doc,
 			  dialog_details);
 
 	return dialog;
+}
+
+static void
+cong_document_print_dialog_delete (GtkWidget *dialog)
+{
+	CongPrintDialogDetails *dialog_details;
+	g_assert (dialog);
+
+	dialog_details = g_object_get_data (G_OBJECT(dialog),
+					    "dialog_details");
+	g_assert (dialog_details);
+
+	if ( dialog_details->combo_array )
+		g_ptr_array_free (dialog_details->combo_array, FALSE);
+
+	gtk_widget_destroy (dialog);
+	g_free (dialog_details);
 }
 
 static void
@@ -338,8 +353,7 @@ do_ui_file_print(CongDocument *doc,
 		gtk_widget_destroy(GTK_WIDGET(error_dialog));
 	}
 
-	gtk_widget_destroy(dialog);
-	g_free(dialog_details);
+	cong_document_print_dialog_delete (dialog);
 }
 
 

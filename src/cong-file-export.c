@@ -43,8 +43,8 @@ typedef struct CongExportDialogDetails
 
 	GtkDialog *dialog;
 	GtkEntry *filename_entry;
-	GtkWidget *select_exporter_menu;
-	GtkOptionMenu *select_exporter_option_menu;
+	GtkWidget *combo_box;
+	GPtrArray *combo_array;
 	GtkLabel *description;
 	guint connection_id;
 	GtkWidget *option_holder;
@@ -56,19 +56,18 @@ typedef struct CongExportDialogDetails
 
 static CongServiceExporter* get_selected_exporter(CongExportDialogDetails *dialog_details)
 {
-	GtkMenuItem* selected_menu_item;
+	gint selected;
+	g_return_val_if_fail (dialog_details, NULL);
 
-	g_return_val_if_fail(dialog_details, NULL);
+	selected = gtk_combo_box_get_active( GTK_COMBO_BOX(dialog_details->combo_box) );
 
-	/* Which plugin has been selected? */
-	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (dialog_details->select_exporter_option_menu);
-			
-	if (selected_menu_item) {
-		return (CongServiceExporter*)g_object_get_data(G_OBJECT(selected_menu_item),
-							"exporter");
-	} else {
+	/* can selected ever be -1 here? */
+	if ( selected == -1 ) {
 		return NULL;
+	} else {
+		return (CongServiceExporter*)g_ptr_array_index (dialog_details->combo_array, selected);
 	}
+
 }
 
 static void add_exporter_to_menu(CongServiceExporter *exporter, gpointer user_data)
@@ -77,17 +76,12 @@ static void add_exporter_to_menu(CongServiceExporter *exporter, gpointer user_da
 
 	if (cong_exporter_supports_document(exporter, dialog_details->doc)) {
 
-		GtkWidget *menu = dialog_details->select_exporter_menu;
+		/* g_message( "adding exporter to menu - %s", cong_service_get_name(CONG_SERVICE(exporter)) ); */
 
-		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_service_get_name(CONG_SERVICE(exporter))));
+		gtk_combo_box_append_text (GTK_COMBO_BOX (dialog_details->combo_box),
+					   cong_service_get_name(CONG_SERVICE(exporter)) );
 
-		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
-				      GTK_WIDGET(menu_item));
-		
-		g_object_set_data(G_OBJECT(menu_item),
-				  "exporter",
-				  exporter);
-
+		g_ptr_array_add (dialog_details->combo_array, (gpointer) exporter);
 		dialog_details->got_any_exporters = TRUE;
 	}
 }
@@ -181,7 +175,7 @@ static void setup_options(CongExportDialogDetails *dialog_details)
 	}
 }
 
-static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
+static void on_exporter_selection_changed(GtkWidget *combo_box,
 					  gpointer user_data)
 {
 	CongExportDialogDetails *details = user_data;
@@ -231,6 +225,20 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	}
 }
 
+/*
+ * The change to use a GtkComboBox rather than a GtkOptionMenu
+ * means that a GPtrArray is used to store the exporter information,
+ * rather than the old scheme of storing this information in the
+ * option menu itself (or rather the GtkMenuItem). It means that
+ * the CongExportDialogDetails structure now needs to be
+ * explicitly cleaned up (in order to free up the GPtrArray).
+ *
+ * The use of the GtkComboBox probably does not preclude the old style,
+ * it is just that I find this way easier.
+ *
+ * Doug.
+ */
+
 static GtkWidget *cong_document_export_dialog_new(CongDocument *doc, 
 						  GtkWindow *parent_window)
 {
@@ -274,14 +282,15 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 
 	/* Set up exporter selection option menu: */
 	{
-		dialog_details->select_exporter_option_menu = GTK_OPTION_MENU(gtk_option_menu_new());
-		dialog_details->select_exporter_menu = gtk_menu_new();
-		gtk_option_menu_set_menu(dialog_details->select_exporter_option_menu,
-					 dialog_details->select_exporter_menu);
-		
-		cong_plugin_manager_for_each_exporter(cong_app_get_plugin_manager (cong_app_singleton()), add_exporter_to_menu, dialog_details);
+		dialog_details->combo_box = gtk_combo_box_new_text();
+		dialog_details->combo_array = g_ptr_array_new ();
 
-		gtk_option_menu_set_history(dialog_details->select_exporter_option_menu,0);
+		cong_plugin_manager_for_each_exporter (cong_app_get_plugin_manager (cong_app_singleton()),
+						       add_exporter_to_menu,
+						       dialog_details);
+
+		gtk_combo_box_set_active (GTK_COMBO_BOX(dialog_details->combo_box), 0);
+
 	}
 
 	dialog_details->description = GTK_LABEL(gtk_label_new(NULL));
@@ -305,7 +314,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 		gtk_box_pack_start(GTK_BOX(hbox), select_filename_button, FALSE, FALSE,0);
 	}
 
-	cong_dialog_category_add_field(general_category, _("Exporter:"), GTK_WIDGET(dialog_details->select_exporter_option_menu), FALSE);
+	cong_dialog_category_add_field(general_category, _("Exporter:"), GTK_WIDGET(dialog_details->combo_box), FALSE);
 	cong_dialog_category_add_field(general_category, "", GTK_WIDGET(dialog_details->description), FALSE);
 	cong_dialog_category_add_field(general_category, _("File:"), hbox, TRUE);
 
@@ -322,7 +331,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 		setup_options(dialog_details);
 	}
 
-	g_signal_connect(dialog_details->select_exporter_option_menu,
+	g_signal_connect(dialog_details->combo_box,
 			 "changed",
 			 G_CALLBACK(on_exporter_selection_changed),
 			 dialog_details);
@@ -343,6 +352,23 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 			  dialog_details);
 
 	return dialog;
+}
+
+static void
+cong_document_export_dialog_delete (GtkWidget *dialog)
+{
+	CongExportDialogDetails *dialog_details;
+	g_assert (dialog);
+
+	dialog_details = g_object_get_data (G_OBJECT(dialog),
+					    "dialog_details");
+	g_assert (dialog_details);
+
+	if ( dialog_details->combo_array )
+		g_ptr_array_free (dialog_details->combo_array, FALSE);
+
+	gtk_widget_destroy (dialog);
+	g_free (dialog_details);
 }
 
 /**
@@ -418,7 +444,6 @@ cong_ui_hook_file_export (CongDocument *doc,
 	}
 
 	/* FIXME: Somewhat hackish cleanup: */
-	gtk_widget_destroy(dialog);
+	cong_document_export_dialog_delete (dialog);
 
-	g_free(dialog_details);
 }

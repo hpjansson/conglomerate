@@ -150,10 +150,6 @@ g_assert (CONG_EEL_ACCESS_METHOD (class_cast_macro, object, method) != NULL)
 (CONG_EEL_ACCESS_METHOD (class_cast_macro, object, method) ? 0 :                   \
 	CONG_EEL_INVOKE_METHOD (class_cast_macro, object, method, parameters))
 
-
-/* This isn't from eel, but perhaps should be: */
-GtkMenuItem*        cong_eel_option_menu_get_selected_menu_item (GtkOptionMenu *option_menu);
-
 /* This isn't from eel, but perhaps should be: */
 /* 
    Routines that take an xml tag or attribute name e.g. <conditional-page-master-reference>, split it into words, and apply the given capitalisation (see the GNOME HIG for descriptions of capitalisation) 
