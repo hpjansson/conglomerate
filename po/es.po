@@ -580,8 +580,8 @@ msgstr "No se ha podido importar el fichero."
 #, fuzzy
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr ""
-"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo \"%"
-"s\""
+"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo"
+" \"%s\""
 
 #: src/cong-file-import.c:56
 msgid "Import file..."
@@ -596,8 +596,8 @@ msgstr "No se ha podido importar el fichero."
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr ""
-"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo \"%"
-"s\""
+"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo"
+" \"%s\""
 
 #: src/cong-file-import.c:90
 msgid "FIXME"
@@ -708,8 +708,8 @@ msgstr "No se ha podido importar el fichero."
 #, fuzzy
 msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
-"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo \"%"
-"s\""
+"Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo"
+" \"%s\""
 
 #: src/cong-file-save.c:50
 #, fuzzy
