@@ -1,5 +1,9 @@
 2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c: 
+
+	Call the various new functions to spellcheck appropriately (when they are fully implemented)
+
 	* cong-util.c, cong-util.h:
 
 	Added function cong_util_spellcheck_word

@@ -1182,12 +1182,14 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 
 		/* Spellcheck hack: */
 		{
-			if (TRUE) {
+			CongDocument *doc = cong_editor_node_get_document (CONG_EDITOR_NODE (editor_node_text));
+
+			if (cong_document_should_spellcheck_node (doc, this_node)) {
 				PangoLanguage *language;
 				GList *list_of_words;
 				GList *iter;
 
-				language = cong_document_get_language_for_node (cong_editor_node_get_document (CONG_EDITOR_NODE (editor_node_text)), 
+				language = cong_document_get_language_for_node (doc, 
 										this_node);
 
 				list_of_words = cong_util_get_words (language,
@@ -1195,10 +1197,13 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				for (iter = list_of_words; iter; iter=iter->next) {
 					CongWord *word = (CongWord*)iter->data;
 
-					/* FIXME: actually spellcheck the words, and only highlight the ones that are errors: */
-					add_attrs_for_error (attr_list,
-							     word->start_byte_offset,
-							     word->start_byte_offset+word->length_in_bytes);
+					if (cong_util_spellcheck_word (language,
+								       this_node->content,
+								       word)) {
+						add_attrs_for_error (attr_list,
+								     word->start_byte_offset,
+								     word->start_byte_offset+word->length_in_bytes);
+					}									   
 				}
 			}
 		}
