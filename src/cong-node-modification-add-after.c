@@ -31,7 +31,13 @@
 
 struct CongNodeModificationAddAfterDetails
 {
-	CongNodePtr older_sibling;
+	/* Redo info: */
+	CongNodePtr new_parent;
+	CongNodePtr new_older_sibling;
+
+	/* Undo info: */
+	CongNodePtr former_parent;
+	CongNodePtr former_older_sibling;
 };
 
 /* Internal function declarations: */
@@ -79,8 +85,22 @@ cong_node_modification_add_after_construct (CongNodeModificationAddAfter *node_m
 					  doc,
 					  node);
 
-	PRIVATE(node_modification_add_after)->older_sibling = older_sibling;
+	PRIVATE(node_modification_add_after)->new_older_sibling = older_sibling;
 	cong_document_node_ref (doc, older_sibling);
+
+	if (older_sibling->parent) {
+		PRIVATE(node_modification_add_after)->new_parent = older_sibling->parent;
+		cong_document_node_ref (doc, PRIVATE(node_modification_add_after)->new_parent);
+	}
+
+	if (node->parent) {
+		PRIVATE(node_modification_add_after)->former_parent = node->parent;
+		cong_document_node_ref (doc, PRIVATE(node_modification_add_after)->former_parent);		
+	}
+	if (node->next) {
+		PRIVATE(node_modification_add_after)->former_older_sibling = node->next;
+		cong_document_node_ref (doc, PRIVATE(node_modification_add_after)->former_older_sibling);		
+	}
 
 	return node_modification_add_after;
 }
@@ -116,6 +136,7 @@ static void
 dispose (GObject *object)
 {
 	CongNodeModificationAddAfter *node_modification_add_after = CONG_NODE_MODIFICATION_ADD_AFTER (object);
+	CongDocument *doc = cong_modification_get_document(CONG_MODIFICATION(node_modification_add_after));
 
 #if DEBUG_MODIFICATION_LIFETIMES
 	g_message ("CongNodeModificationAddAfter::dispose");
@@ -124,11 +145,26 @@ dispose (GObject *object)
 	g_assert (node_modification_add_after->private);
 	
 	/* Cleanup: */
-	if (PRIVATE(node_modification_add_after)->older_sibling) {
+	if (PRIVATE(node_modification_add_after)->new_older_sibling) {
 		
-		cong_document_node_unref (cong_modification_get_document(CONG_MODIFICATION(node_modification_add_after)),
-					  PRIVATE(node_modification_add_after)->older_sibling);
-		PRIVATE(node_modification_add_after)->older_sibling = NULL;
+		cong_document_node_unref (doc,
+					  PRIVATE(node_modification_add_after)->new_older_sibling);
+		PRIVATE(node_modification_add_after)->new_older_sibling = NULL;
+	}
+	if (PRIVATE(node_modification_add_after)->new_parent) {
+		cong_document_node_unref (doc, 
+					  PRIVATE(node_modification_add_after)->new_parent);
+		PRIVATE(node_modification_add_after)->new_parent = NULL;
+	}
+	if (PRIVATE(node_modification_add_after)->former_parent) {
+		cong_document_node_unref (doc, 
+					  PRIVATE(node_modification_add_after)->former_parent);		
+		PRIVATE(node_modification_add_after)->former_parent = NULL;
+	}
+	if (PRIVATE(node_modification_add_after)->former_older_sibling) {
+		cong_document_node_unref (doc, 
+					PRIVATE(node_modification_add_after)->former_older_sibling);		
+		PRIVATE(node_modification_add_after)->former_older_sibling = NULL;
 	}
 
 	/* Call the parent method: */		
@@ -139,17 +175,50 @@ static void
 undo (CongModification *modification)
 {
 	CongNodeModificationAddAfter *node_modification_add_after = CONG_NODE_MODIFICATION_ADD_AFTER (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle undo */
-	g_assert_not_reached();
+	cong_document_begin_edit (doc);
+
+	if (PRIVATE(node_modification_add_after)->former_parent) {
+		if (PRIVATE(node_modification_add_after)->former_older_sibling) {
+			cong_document_node_add_after (doc, 
+						       node, 
+						       PRIVATE(node_modification_add_after)->former_older_sibling);
+		} else {
+			cong_document_node_set_parent (doc, 
+						       node, 
+						       PRIVATE(node_modification_add_after)->former_parent);
+		}
+	} else {
+		cong_document_node_make_orphan (doc, 
+						node);
+	}
+
+	cong_document_end_edit (doc);
 }
 
 static void
 redo (CongModification *modification)
 {
 	CongNodeModificationAddAfter *node_modification_add_after = CONG_NODE_MODIFICATION_ADD_AFTER (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle redo */
-	g_assert_not_reached();
+	g_assert (PRIVATE(node_modification_add_after)->new_parent);
+	
+	cong_document_begin_edit (doc);
+
+	if (PRIVATE(node_modification_add_after)->new_older_sibling) {
+		cong_document_node_add_after (doc, 
+					       node, 
+					       PRIVATE(node_modification_add_after)->new_older_sibling);
+	} else {
+		cong_document_node_set_parent (doc, 
+					       node, 
+					       PRIVATE(node_modification_add_after)->new_parent);
+	}
+
+	cong_document_end_edit (doc);
 }
 
