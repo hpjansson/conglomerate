@@ -1,3 +1,7 @@
+2004-07-07  Estêvão Samuel Procópio  <tevaum@ig.com.br>
+
+	* configure.in: Added pt_BR to ALL_LINGUAS
+
 2004-07-02  Geert Stappers <stappers@stappers.nl>
 
 	* config.guess & config.sub: updated
