@@ -296,6 +296,10 @@ void main_load_plugins(void)
 	register_plugin("paragraph",
 			plugin_paragraph_plugin_register,
 			plugin_paragraph_plugin_configure);
+
+	register_plugin("save-dispspec",
+			plugin_save_dispspec_plugin_register,
+			plugin_save_dispspec_plugin_configure);
 }
 
 int main( int   argc,
