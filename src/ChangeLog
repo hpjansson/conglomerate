@@ -1,3 +1,7 @@
+2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-traversal-node.c: Removed some debug spewage
+
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-line-manager-simple.c: removed HACKED_WIDTH;

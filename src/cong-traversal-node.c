@@ -261,7 +261,7 @@ cong_traversal_node_is_referenced_entity_decl (CongTraversalNode *traversal_node
 
 	if (cong_node_type (cong_traversal_node_get_node (traversal_node))==CONG_NODE_TYPE_ENTITY_DECL) {
  		if (cong_node_type (cong_traversal_node_get_node (cong_traversal_node_get_parent (traversal_node)))==CONG_NODE_TYPE_ENTITY_REF) {
-			g_message ("got a referenced entity decl");
+			/* g_message ("got a referenced entity decl"); */
 			return TRUE;
 		}
 	}
