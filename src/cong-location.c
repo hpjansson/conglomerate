@@ -35,6 +35,12 @@ cong_location_is_valid(const CongLocation *loc)
 				}
 
 				/* FIXME: add more tests here */
+				g_assert (loc->node->content);
+
+				/* The cursor is allowed to be one byte beyond the end of the content, but no further: */
+				if (loc->byte_offset>strlen(loc->node->content)) {
+					return FALSE;
+				}
 				
 				return TRUE;
 			}			
@@ -337,8 +343,8 @@ cong_location_del_next_char (CongDocument *doc,
 	if (cong_location_get_unichar(loc))
 	{
 		gchar *new_text;
-		gchar *next_char;
-		gchar *char_after_next;
+		const gchar *next_char;
+		const gchar *char_after_next;
 
 		new_text = xmlStrndup(xml_frag_data_nice(loc->node), loc->byte_offset);
 		CONG_VALIDATE_UTF8(new_text);

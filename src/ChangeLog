@@ -1,5 +1,9 @@
 2003-12-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-location.c
+
+	Fixed a const-ness warning; added additional checks on CongLocation validity
+
 	* cong-attribute-editor-enumeration.c, cong-attribute-editor.c, cong-dispspec-element.c, cong-editor-area-expander.c, cong-util.c, plugin-convert-case.c
 
 	Casting away constness for fix a slew of warnings.
