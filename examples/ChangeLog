@@ -1,3 +1,9 @@
+2003-10-16  David Malcolm
+
+	* docbook.xds
+
+	Support for admonition tags, and for tables, and custom property dialog for <ulink> tags
+
 2003-10-11  Geert Stappers  <stappers@stappers.nl>
 
 	* Makefile.am
