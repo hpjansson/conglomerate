@@ -1,7 +1,7 @@
 2004-03-13  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
-	defined NULL
+	defined NULL, for easier adding new files
 
 2004-03-12  David Malcolm <david@davemalcolm.demon.co.uk>
 

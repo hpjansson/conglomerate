@@ -8,7 +8,8 @@ example_DATA 	 = \
 	readme.xml \
 	test-docbook.xml \
 	test-entities.xml \
-	test-table.xml
+	test-table.xml \
+	$(NULL)
 
 #@INTLTOOL_XML_RULE@
 
