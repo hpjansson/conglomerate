@@ -2,6 +2,10 @@
 
 	* xds.dtd
 
+	Made tag attribute REQUIRED
+
+	* xds.dtd
+
 	Changed xml:lang attribute to be CDATA (to allow sr@Latn); make it optional to support untranslated strings
 
 	* dispspec.xds, docbook.xds, forrest-document.xds, kernel-traffic-newsletter.xds, xhtml1-strict.xds

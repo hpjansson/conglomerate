@@ -62,7 +62,7 @@
 <!ENTITY % element.att
 "  
    ns                  NMTOKEN                                                           #IMPLIED
-   tag                 ID                                                                #IMPLIED
+   tag                 ID                                                                #REQUIRED
    icon                CDATA                                                             #IMPLIED
    whitespace          (normalize | preserve)                                            'normalize'
 
