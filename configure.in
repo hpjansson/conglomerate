@@ -55,8 +55,8 @@ AC_ARG_ENABLE(printing, [  --enable-printing      build with printing support [d
                                                                                                
 if test x$enable_printing = xauto || test x$enable_printing = xyes ; then
    PKG_CHECK_MODULES(PRINTING, \
-		    libgnomeprint-2.0 >= $LIBGNOMEPRINT_REQUIRED \
-		    libgnomeprintui-2.0 >= $LIBGNOMEPRINTUI_REQUIRED, \
+		    libgnomeprint-2.2 >= $LIBGNOMEPRINT_REQUIRED \
+		    libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED, \
 		    have_printing=yes, have_printing=no)
    if test x"$have_printing" = "xyes"; then
          enable_printing=yes

@@ -77,7 +77,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongExporterFpiFilter fpi_filter,
+					    CongExporterDocumentFilter doc_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data);
 #if ENABLE_PRINTING
@@ -85,7 +85,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongPrintMethodFpiFilter fpi_filter,
+					    CongPrintMethodDocumentFilter doc_filter,
 					    CongPrintMethodActionCallback action_callback,
 					    gpointer user_data);
 #endif
@@ -155,13 +155,13 @@ GdkPixbuf *cong_document_factory_get_icon(CongDocumentFactory *factory);
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
 void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window);
 
-gboolean cong_exporter_supports_fpi(CongExporter *exporter, const gchar *fpi);
+gboolean cong_exporter_supports_document(CongExporter *exporter, CongDocument *doc);
 void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window);
 gchar *cong_exporter_get_preferred_uri(CongExporter *exporter);
 void cong_exporter_set_preferred_ui(CongExporter *exporter, const gchar *uri);
 
 #if ENABLE_PRINTING
-gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi);
+gboolean cong_print_method_supports_document(CongPrintMethod *print_method, CongDocument *doc);
 void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window);
 #endif
 
@@ -221,6 +221,10 @@ gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
 /* plugin-empty.c: */
 gboolean plugin_empty_plugin_register(CongPlugin *plugin);
 gboolean plugin_empty_plugin_configure(CongPlugin *plugin);
+
+/* plugin-fo.c: */
+gboolean plugin_fo_plugin_register(CongPlugin *plugin);
+gboolean plugin_fo_plugin_configure(CongPlugin *plugin);
 
 /* plugin-lists.c: */
 gboolean plugin_lists_plugin_register(CongPlugin *plugin);

@@ -13,6 +13,13 @@
 #include "cong-font.h"
 #include "cong-app.h"
 
+#if 0
+/* FIXME: use xmlroff eventually */
+#include <xmlroff/result-to-fo.h>
+#else
+#include "fo.h"
+#endif
+
 gchar* cong_util_cleanup_text(const xmlChar *src_text) {
 	gchar *buffer;
 	gchar *src;
@@ -133,6 +140,97 @@ void cong_util_append(gchar **string, const gchar *to_add)
 
 	*string = new_string;
 }
+
+#if ENABLE_PRINTING
+void cong_util_print_xslfo(GtkWindow *toplevel_window, 
+			   GnomePrintContext *gpc,
+			   xmlDocPtr xml_doc)
+{
+	g_return_if_fail(gpc);
+	g_return_if_fail(xml_doc);
+
+#if 0
+	{
+		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
+		FoDoc *fo_doc;
+		FoFo *fo_tree;
+		FoArea *area_tree;
+		GError *error = NULL;
+
+		fo_doc = fo_doc_gp_new ();
+
+		/* FIXME:  need some way to pass our gpc or job to the FoDoc constructor; would a config do it? */
+
+		fo_xml_doc_to_fo_and_area_trees (xml_doc,
+						 fo_doc,
+						 &fo_tree,
+						 &area_tree,
+						 0, /* gint debug_level */,
+						 &error);
+
+		/* FIXME: error handling! */
+	}
+#else
+
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, _("Printing XSL Formatting Objects"), 108468);
+
+#if 0
+	{
+		FoPrintContext *fpc;
+		FoParserResult *parser_result;
+		FoSolverResult *solver_result;
+		
+		fpc = fo_print_context_new_from_gnome_print(gpc);
+		
+		parser_result = fo_parser_result_new_from_xmldoc(xml_doc);
+		
+		if (parser_result) {
+			
+#if 1
+			/* View solver result: */
+			solver_result = fo_solver_result_new_from_parser_result(parser_result);
+			
+			if (solver_result) {
+				fo_solver_result_render(solver_result, fpc);
+				
+				fo_solver_result_delete(solver_result);
+			}
+#else
+			/* View parser result: */
+			fo_parser_result_test_render(parser_result, fpc);
+#endif
+			
+			fo_parser_result_delete(parser_result);
+			
+		}
+		
+		fo_print_context_delete(fpc);
+	}
+#else
+	/* Some test code: */
+	{
+		GnomeFont *font;
+		font = gnome_font_find_closest ("Helvetica", 12);
+		
+		gnome_print_beginpage (gpc, "1");
+		
+		gnome_print_setfont (gpc, font);
+		gnome_print_moveto (gpc, 100, 400);
+		gnome_print_show (gpc, _("This will eventually be the result from cong_util_print_xslfo"));
+		
+		gnome_print_moveto (gpc, 100, 200);
+		gnome_print_lineto (gpc, 200, 200);
+		gnome_print_stroke (gpc);
+		
+		gnome_print_showpage (gpc);
+	}
+#endif
+#endif
+
+
+}
+#endif
+
 
 /*
 #define AUTOGENERATE_DS
@@ -362,6 +460,10 @@ void main_load_plugins(void)
 	register_plugin("empty",
 			plugin_empty_plugin_register,
 			plugin_empty_plugin_configure);
+
+	register_plugin("fo",
+			plugin_fo_plugin_register,
+			plugin_fo_plugin_configure);
 
 	register_plugin("lists",
 			plugin_lists_plugin_register,

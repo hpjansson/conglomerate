@@ -26,7 +26,7 @@ G_BEGIN_DECLS
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-job.h>
 #endif
 
 #if 1
@@ -290,14 +290,14 @@ typedef void (*CongDocumentFactoryPageCreationCallback)(CongDocumentFactory *fac
 typedef void (*CongDocumentFactoryActionCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
 typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
-typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
+typedef gboolean (*CongExporterDocumentFilter)(CongExporter *exporter, CongDocument *doc, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongToolDocumentFilter)(CongTool *tool, CongDocument *doc, gpointer user_data);
 typedef void (*CongToolActionCallback)(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data);
 typedef GtkWidget* (*CongCustomPropertyFactoryMethod)(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node);
 
 #if ENABLE_PRINTING
-typedef gboolean (*CongPrintMethodFpiFilter)(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data);
+typedef gboolean (*CongPrintMethodDocumentFilter)(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data);
 typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
 #endif
 
@@ -367,6 +367,11 @@ GdkPixbuf *cong_util_load_icon(const gchar *icon_basename);
 
 void cong_util_append(gchar **string, const gchar *to_add);
 
+#if ENABLE_PRINTING
+void cong_util_print_xslfo (GtkWindow *toplevel_window, 
+			    GnomePrintContext *gpc, 
+			    xmlDocPtr xml_doc);
+#endif
 
 /* macro adapted from libxml's error.c; surely this exists in GLib somewhere? */
 #define CONG_GET_VAR_STR(msg, str) {				\

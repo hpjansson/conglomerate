@@ -1,3 +1,7 @@
+2003-07-04  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in:  Changed from libgnomeprint-2.0 and libgnomeprintui-2.0 to libgnomeprint-2.2 and libgnomeprintui-2.2
+	
 2003-07-03 Jeff Martin <jeff@custommonkey.org>
 
 	* Makefile.am & configure.in

@@ -33,14 +33,20 @@
 #include "cong-dialog.h"
 #include "cong-plugin.h"
 #include "cong-eel.h"
+#include "cong-app.h"
 
 #if ENABLE_PRINTING
-#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-job.h>
+#include <libgnomeprintui/gnome-print-job-preview.h>
 
 typedef struct CongPrintDialogDetails
 {
+	CongDocument *doc;
+	gboolean got_any_print_methods;
+
 	GtkDialog *dialog;
 	GtkOptionMenu *select_print_method_option_menu;
+	GtkWidget *select_print_method_menu;
 } CongPrintDialogDetails;
 
 static CongPrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog_details)
@@ -62,22 +68,21 @@ static CongPrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog
 
 static void add_print_method_to_menu(CongPrintMethod *print_method, gpointer user_data)
 {
-#if 0
-	if (cong_print_method_supports_fpi(print_method, fpi)) {
+	CongPrintDialogDetails *dialog_details = (CongPrintDialogDetails*)user_data;
+
+	if (cong_print_method_supports_document(print_method, dialog_details->doc)) {
+		GtkWidget *menu = dialog_details->select_print_method_menu;
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(print_method))));
+
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
+				      GTK_WIDGET(menu_item));
+		
+		g_object_set_data(G_OBJECT(menu_item),
+				  "print_method",
+				  print_method);
+
+		dialog_details->got_any_print_methods = TRUE;
 	}
-#endif
-
-	GtkWidget *menu = user_data;
-	GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(print_method))));
-
-	/* FIXME: should check for an appropriate FPI */
-
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
-			      GTK_WIDGET(menu_item));
-
-	g_object_set_data(G_OBJECT(menu_item),
-			  "print_method",
-			  print_method);
 }
 
 static void monitor_print_method(CongPrintDialogDetails *dialog_details)
@@ -174,7 +179,6 @@ static GtkWidget *cong_document_print_dialog_new(CongDocument *doc,
 	CongDialogCategory *general_category;
 	CongDialogCategory *print_method_category;
 	gchar *title, *filename;
-	GtkWidget *select_print_method_menu;
 	CongPrintDialogDetails *dialog_details;
 	
 
@@ -188,6 +192,8 @@ static GtkWidget *cong_document_print_dialog_new(CongDocument *doc,
 	title = g_strdup_printf(_("Print \"%s\""), filename);
 
 	dialog_details = g_new0(CongPrintDialogDetails,1);
+
+	dialog_details->doc = doc;
 
 	dialog = gtk_dialog_new_with_buttons(_("Print"),
 					     parent_window,
@@ -210,17 +216,19 @@ static GtkWidget *cong_document_print_dialog_new(CongDocument *doc,
 	/* Set up print_method selection option menu: */
 	{
 		dialog_details->select_print_method_option_menu = GTK_OPTION_MENU(gtk_option_menu_new());
-		select_print_method_menu = gtk_menu_new();
+		dialog_details->select_print_method_menu = gtk_menu_new();
 		gtk_option_menu_set_menu(dialog_details->select_print_method_option_menu,
-					 select_print_method_menu);
+					 dialog_details->select_print_method_menu);
 		
-		cong_plugin_manager_for_each_print_method(the_globals.plugin_manager, add_print_method_to_menu, select_print_method_menu);
+		cong_plugin_manager_for_each_print_method(the_app.plugin_manager, add_print_method_to_menu, dialog_details);
 		gtk_option_menu_set_history(dialog_details->select_print_method_option_menu,0);
 	}
 
 	cong_dialog_category_add_field(general_category, _("Print Method:"), GTK_WIDGET(dialog_details->select_print_method_option_menu));
 
+#if 0
 	monitor_print_method(dialog_details);
+#endif
 
 	print_method_category = cong_dialog_content_add_category(content, _("Print Options"));
 
@@ -244,8 +252,6 @@ static GtkWidget *cong_document_print_dialog_new(CongDocument *doc,
 			  "dialog_details",
 			  dialog_details);
 
-	gtk_widget_show_all(dialog);
-
 	return dialog;
 }
 
@@ -263,54 +269,66 @@ do_ui_file_print(CongDocument *doc,
 	dialog = cong_document_print_dialog_new(doc,
 						toplevel_window);
 
-	result = gtk_dialog_run(GTK_DIALOG(dialog));
 
 	dialog_details = g_object_get_data( G_OBJECT(dialog),
 					    "dialog_details");
 	g_assert(dialog_details);
 
-	switch (result) {
-	default: /* Do nothing; dialog was cancelled */
-		break;
+	if (dialog_details->got_any_print_methods) {
+		gtk_widget_show_all(dialog);
 
-	case GTK_RESPONSE_OK:
-		{
-			CongPrintMethod* print_method;
+		result = gtk_dialog_run(GTK_DIALOG(dialog));
 
-			/* Which plugin has been selected? */
-			print_method = get_selected_print_method(dialog_details);
-			if (print_method) {
-				GnomePrintMaster *gpm;
-				GnomePrintContext *gpc;
-				GtkWidget *preview_widget;
 
-				g_message("Print_Method invoked: \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(print_method)));
-
-				gpm = gnome_print_master_new ();
-				gpc = gnome_print_master_get_context (gpm);
-
-				cong_print_method_invoke(print_method, 
-							 doc, 
-							 gpc,
-							 toplevel_window);
-
-				gnome_print_master_close (gpm);
-
-				preview_widget = gnome_print_master_preview_new (gpm, _("Print Preview"));
-				gtk_widget_show(preview_widget);
+		
+		switch (result) {
+		default: /* Do nothing; dialog was cancelled */
+			break;
+			
+		case GTK_RESPONSE_OK:
+			{
+				CongPrintMethod* print_method;
+				
+				/* Which plugin has been selected? */
+				print_method = get_selected_print_method(dialog_details);
+				if (print_method) {
+					GnomePrintJob *gpj;
+					GnomePrintContext *gpc;
+					GtkWidget *preview_widget;
+					
+					g_message("Print_Method invoked: \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(print_method)));
+					
+					gpj = gnome_print_job_new (NULL); /* FIXME: provide an option to use a non-default config */
+					gpc = gnome_print_job_get_context (gpj);
+					
+					cong_print_method_invoke(print_method, 
+								 doc, 
+								 gpc,
+								 toplevel_window);
+					
+					gnome_print_job_close (gpj);
+					
+					preview_widget = gnome_print_job_preview_new (gpj, _("Print Preview"));
+					gtk_widget_show(preview_widget);
+				}
 			}
+			break;
 		}
-		break;
+
+	} else {
+		/* No print methods were found that can handle this document: */
+		gchar *filename = cong_document_get_filename(doc);
+		gchar *what_failed = g_strdup_printf(_("Conglomerate cannot print \"%s\""), filename);
+		GtkDialog* error_dialog = cong_error_dialog_new(toplevel_window,
+								what_failed, 
+								_("None of Conglomerate's plugins know how to print files of that type."),
+								_(""));
+
+		gtk_dialog_run(error_dialog);
+		gtk_widget_destroy(GTK_WIDGET(error_dialog));
 	}
 
-#if 0
-	/* FIXME: Somewhat hackish cleanup: */
-	gconf_client_notify_remove(the_globals.gconf_client,
-				   dialog_details->connection_id);
-#endif
-
 	gtk_widget_destroy(dialog);
-
 	g_free(dialog_details);
 }
 

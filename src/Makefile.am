@@ -86,6 +86,7 @@ conglomerate_SOURCES =      \
   plugin-convert-case.c     \
   plugin-docbook.c          \
   plugin-empty.c            \
+  plugin-fo.c               \
   plugin-lists.c            \
   plugin-sgml.c             \
   plugin-tests.c            \

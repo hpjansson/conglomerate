@@ -27,8 +27,8 @@
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
-#include "fo.h"
 #include "cong-progress-checklist.h"
+#include "cong-document.h"
 #include <glade/glade.h>
 #include "cong-app.h"
 
@@ -126,6 +126,32 @@ void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNe
 						      user_data);
 	}
 #endif
+}
+
+static gboolean is_docbook(CongDocument *doc) 
+{
+	const CongXMLChar* dtd_public_id;
+
+	g_return_val_if_fail(doc, FALSE);
+
+	dtd_public_id = cong_document_get_dtd_public_identifier(doc);
+	
+	if (NULL==dtd_public_id) {
+		return FALSE;
+	}
+
+	/* FIXME: we may want to add more public IDs here */
+	if (0==strcmp(dtd_public_id, "-//OASIS//DTD DocBook XML V4.1.2//EN")) {
+		return TRUE;
+	} 
+
+	/* FIXME:  this has been used by some of the GNOME docs; e.g. the GNOME accessibility guide; is it correct? */
+	if (0==strcmp(dtd_public_id, "-//OASIS/DTD DocBookXML V4.1.2//EN")) {
+		return TRUE;
+	}
+
+
+	return FALSE;
 }
 
 /**
@@ -413,12 +439,12 @@ void sourcecode_importer_action_callback(CongImporter *importer, const gchar *ur
 	}
 }
 
-gboolean docbook_exporter_fpi_filter(CongExporter *exporter, const gchar *fpi, gpointer user_data)
+gboolean docbook_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
-	g_return_val_if_fail(fpi, FALSE);
+	g_return_val_if_fail(doc, FALSE);
 
-	return TRUE; /* for now */
+	return is_docbook(doc);
 }
 
 void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
@@ -515,12 +541,12 @@ void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, cons
 }
 
 #if ENABLE_PRINTING
-gboolean docbook_print_method_fpi_filter(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data)
+gboolean docbook_print_method_document_filter(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
-	g_return_val_if_fail(fpi, FALSE);
+	g_return_val_if_fail(doc, FALSE);
 
-	return TRUE; /* for now */
+	return is_docbook(doc);
 }
 
 void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
@@ -555,61 +581,10 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
 
-		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, _("Printing XSL Formatting Objects"), 108468);
+		cong_util_print_xslfo(toplevel_window, 
+				      gpc, 
+				      fo_doc);
 
-#if 0
-		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
-		{
-			FoPrintContext *fpc;
-			FoParserResult *parser_result;
-			FoSolverResult *solver_result;
-
-			fpc = fo_print_context_new_from_gnome_print(gpc);
-
-			parser_result = fo_parser_result_new_from_xmldoc(fo_doc);
-			
-			if (parser_result) {
-				
-#if 1
-				/* View solver result: */
-				solver_result = fo_solver_result_new_from_parser_result(parser_result);
-				
-				if (solver_result) {
-					fo_solver_result_render(solver_result, fpc);
-					
-					fo_solver_result_delete(solver_result);
-				}
-#else
-				/* View parser result: */
-				fo_parser_result_test_render(parser_result, fpc);
-#endif
-				
-				fo_parser_result_delete(parser_result);
-				
-			}
-
-			fo_print_context_delete(fpc);
-		}
-#else
-		/* Some test code: */
-		{
-			GnomeFont *font;
-			font = gnome_font_find_closest ("Helvetica", 12);
-			
-			gnome_print_beginpage (gpc, "1");
-			
-			gnome_print_setfont (gpc, font);
-			gnome_print_moveto (gpc, 100, 400);
-			gnome_print_show (gpc, _("This will eventually be the text from DocBook print method"));
-			
-			gnome_print_moveto (gpc, 100, 200);
-			gnome_print_lineto (gpc, 200, 200);
-			gnome_print_stroke (gpc);
-			
-			gnome_print_showpage (gpc);
-		}
-#endif
-		
 		xmlFreeDoc(fo_doc);
 	}
 
@@ -788,25 +763,25 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 
 	cong_plugin_register_exporter(plugin, 
 				      _("Export DocBook as HTML"), 
-				      "",
+				      _("Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook file"),
 				      "docbook-HTML-export",
-				      docbook_exporter_fpi_filter,
+				      docbook_exporter_document_filter,
 				      html_exporter_action_callback,
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
 				      _("Export DocBook as PDF"), 
-				      "",
+				      _("Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook file"),
 				      "docbook-PDF-export",
-				      docbook_exporter_fpi_filter,
+				      docbook_exporter_document_filter,
 				      pdf_exporter_action_callback,
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
 				      _("Export DocBook as XSL:FO"),
-				      "",
+				      _("Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this DocBook file that can be printed or converted to PDF at a later date"),
 				      "docbook-XSLFO-export",
-				      docbook_exporter_fpi_filter,
+				      docbook_exporter_document_filter,
 				      fo_exporter_action_callback,
 				      NULL);
 
@@ -815,7 +790,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 					  _("Print DocBook"),
 					  "",
 					  "docbook-print",
-					  docbook_print_method_fpi_filter,
+					  docbook_print_method_document_filter,
 					  docbook_print_method_action_callback,
 					  NULL);
 #endif

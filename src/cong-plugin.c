@@ -91,7 +91,7 @@ struct CongExporter
 {
 	CongFunctionality functionality; /* base class */
 
-	CongExporterFpiFilter fpi_filter;
+	CongExporterDocumentFilter doc_filter;
 	CongExporterActionCallback action_callback;
 	gpointer user_data;
 };
@@ -101,7 +101,7 @@ struct CongPrintMethod
 {
 	CongFunctionality functionality; /* base class */
 
-	CongPrintMethodFpiFilter fpi_filter;
+	CongPrintMethodDocumentFilter doc_filter;
 	CongPrintMethodActionCallback action_callback;
 	gpointer user_data;
 };
@@ -342,7 +342,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongExporterFpiFilter fpi_filter,
+					    CongExporterDocumentFilter doc_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data)
 {
@@ -352,7 +352,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
 	g_return_val_if_fail(id, NULL);
-	g_return_val_if_fail(fpi_filter, NULL);
+	g_return_val_if_fail(doc_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
         exporter = g_new0(CongExporter,1);
@@ -361,7 +361,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	exporter->functionality.name = g_strdup(name);
 	exporter->functionality.description = g_strdup(description);
 	exporter->functionality.functionality_id = g_strdup(id);
-	exporter->fpi_filter = fpi_filter;
+	exporter->doc_filter = doc_filter;
 	exporter->action_callback = action_callback;
 	exporter->user_data = user_data;
 
@@ -376,7 +376,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongPrintMethodFpiFilter fpi_filter,
+					    CongPrintMethodDocumentFilter doc_filter,
 					    CongPrintMethodActionCallback action_callback,
 					    gpointer user_data)
 {
@@ -386,7 +386,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
 	g_return_val_if_fail(id, NULL);
-	g_return_val_if_fail(fpi_filter, NULL);
+	g_return_val_if_fail(doc_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
         print_method = g_new0(CongPrintMethod,1);
@@ -395,7 +395,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 	print_method->functionality.name = g_strdup(name);
 	print_method->functionality.description = g_strdup(description);
 	print_method->functionality.functionality_id = g_strdup(id);
-	print_method->fpi_filter = fpi_filter;
+	print_method->doc_filter = doc_filter;
 	print_method->action_callback = action_callback;
 	print_method->user_data = user_data;
 
@@ -680,14 +680,14 @@ void cong_importer_invoke(CongImporter *importer, const gchar *filename, const g
 }
 
 /* Implementation of CongExporter: */
-gboolean cong_exporter_supports_fpi(CongExporter *exporter, const gchar *fpi)
+gboolean cong_exporter_supports_document(CongExporter *exporter, CongDocument *doc)
 {
 	g_return_val_if_fail(exporter, FALSE);
-	g_return_val_if_fail(fpi, FALSE);
+	g_return_val_if_fail(doc, FALSE);
 
-	g_assert(exporter->fpi_filter);
+	g_assert(exporter->doc_filter);
 
-	return exporter->fpi_filter(exporter, fpi, exporter->user_data);
+	return exporter->doc_filter(exporter, doc, exporter->user_data);
 }
 
 void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
@@ -738,14 +738,14 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 
 #if ENABLE_PRINTING
 /* Implementation of CongPrintMethod: */
-gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi)
+gboolean cong_print_method_supports_document(CongPrintMethod *print_method, CongDocument *doc)
 {
 	g_return_val_if_fail(print_method, FALSE);
-	g_return_val_if_fail(fpi, FALSE);
+	g_return_val_if_fail(doc, FALSE);
 
-	g_assert(print_method->fpi_filter);
+	g_assert(print_method->doc_filter);
 
-	return print_method->fpi_filter(print_method, fpi, print_method->user_data);
+	return print_method->doc_filter(print_method, doc, print_method->user_data);
 }
 
 void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)

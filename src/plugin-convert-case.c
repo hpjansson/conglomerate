@@ -27,13 +27,14 @@
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
+#include "cong-document.h"
 
-static gboolean convert_case_exporter_fpi_filter(CongExporter *exporter, const gchar *fpi, gpointer user_data)
+static gboolean convert_case_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
-	g_return_val_if_fail(fpi, FALSE);
+	g_return_val_if_fail(doc, FALSE);
 
-	return TRUE;
+	return FALSE;
 }
 
 static void visit_node(xmlNodePtr node) {
@@ -114,7 +115,7 @@ gboolean plugin_convert_case_plugin_register(CongPlugin *plugin)
 				      _("Export as \"lower case\" XML"),
 				      _("Exports as an XML file, converting all the tags and attributes in the document to lowercase.  Useful when working with legacy SGML documents."),
 				      "convert-case-export",
-				      convert_case_exporter_fpi_filter,
+				      convert_case_exporter_document_filter,
 				      convert_case_exporter_action_callback,
 				      NULL);
 	return TRUE;

@@ -37,10 +37,17 @@
 
 typedef struct CongExportDialogDetails
 {
+	CongDocument *doc;
+
 	GtkDialog *dialog;
 	GtkEntry *filename_entry;
+	GtkWidget *select_exporter_menu;
 	GtkOptionMenu *select_exporter_option_menu;
+	GtkLabel *description;
 	guint connection_id;
+
+	gboolean got_any_exporters;
+
 } CongExportDialogDetails;
 
 static CongExporter* get_selected_exporter(CongExportDialogDetails *dialog_details)
@@ -62,22 +69,23 @@ static CongExporter* get_selected_exporter(CongExportDialogDetails *dialog_detai
 
 static void add_exporter_to_menu(CongExporter *exporter, gpointer user_data)
 {
-#if 0
-	if (cong_exporter_supports_fpi(exporter, fpi)) {
+	CongExportDialogDetails *dialog_details = (CongExportDialogDetails*)user_data;
+
+	if (cong_exporter_supports_document(exporter, dialog_details->doc)) {
+
+		GtkWidget *menu = dialog_details->select_exporter_menu;
+
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(exporter))));
+
+		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
+				      GTK_WIDGET(menu_item));
+		
+		g_object_set_data(G_OBJECT(menu_item),
+				  "exporter",
+				  exporter);
+
+		dialog_details->got_any_exporters = TRUE;
 	}
-#endif
-
-	GtkWidget *menu = user_data;
-	GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(exporter))));
-
-	/* FIXME: should check for an appropriate FPI */
-
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
-			      GTK_WIDGET(menu_item));
-
-	g_object_set_data(G_OBJECT(menu_item),
-			  "exporter",
-			  exporter);
 }
 
 static void gconf_notify_func(GConfClient *client,
@@ -132,6 +140,27 @@ static void monitor_exporter(CongExportDialogDetails *dialog_details)
 	}
 }
 
+static void setup_description(CongExportDialogDetails *dialog_details)
+{
+	CongExporter* exporter = get_selected_exporter(dialog_details);
+	const gchar *desc;
+	gchar *text;
+
+	g_assert(dialog_details);
+	g_assert(exporter);
+
+	desc = cong_functionality_get_description(CONG_FUNCTIONALITY(exporter));
+
+	if (desc) {
+		gchar * text = g_strdup_printf("<small>%s</small>", desc);
+		gtk_label_set_markup(dialog_details->description, text);
+		g_free(text);
+
+	} else {
+		gtk_label_set_markup(dialog_details->description, _("<small>(No description available)</small>"));
+	}
+}
+
 static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 					  gpointer user_data)
 {
@@ -146,6 +175,8 @@ static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 
 	/* Monitor new plugin; set up stuff accordingly: */
 	monitor_exporter(details);
+
+	setup_description(details);
 }
 
 static void on_select_filename_button_clicked(GtkButton *button,
@@ -188,7 +219,6 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	CongDialogCategory *exporter_category;
 	gchar *filename, *title;
 	GtkWidget *hbox, *select_filename_button;
-	GtkWidget *select_exporter_menu;
 	CongExportDialogDetails *dialog_details;
 	
 
@@ -202,6 +232,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	title = g_strdup_printf(_("Export \"%s\""), filename);
 
 	dialog_details = g_new0(CongExportDialogDetails,1);
+	dialog_details->doc = doc;
 
 	dialog = gtk_dialog_new_with_buttons(_("Export"),
 					     parent_window,
@@ -224,13 +255,17 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	/* Set up exporter selection option menu: */
 	{
 		dialog_details->select_exporter_option_menu = GTK_OPTION_MENU(gtk_option_menu_new());
-		select_exporter_menu = gtk_menu_new();
+		dialog_details->select_exporter_menu = gtk_menu_new();
 		gtk_option_menu_set_menu(dialog_details->select_exporter_option_menu,
-					 select_exporter_menu);
+					 dialog_details->select_exporter_menu);
 		
-		cong_plugin_manager_for_each_exporter(the_app.plugin_manager, add_exporter_to_menu, select_exporter_menu);
+		cong_plugin_manager_for_each_exporter(the_app.plugin_manager, add_exporter_to_menu, dialog_details);
+
 		gtk_option_menu_set_history(dialog_details->select_exporter_option_menu,0);
 	}
+
+	dialog_details->description = GTK_LABEL(gtk_label_new(NULL));
+	gtk_label_set_line_wrap(dialog_details->description, TRUE);
 
 	/* Set up filename entry widgetry: */
 	{
@@ -251,9 +286,13 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	}
 
 	cong_dialog_category_add_field(general_category, _("Exporter:"), GTK_WIDGET(dialog_details->select_exporter_option_menu));
+	cong_dialog_category_add_field(general_category, "", GTK_WIDGET(dialog_details->description));
 	cong_dialog_category_add_field(general_category, _("File:"), hbox);
 
-	monitor_exporter(dialog_details);
+	if (dialog_details->got_any_exporters) {
+		monitor_exporter(dialog_details);
+		setup_description(dialog_details);
+	}
 
 	exporter_category = cong_dialog_content_add_category(content, _("Export Options"));
 
@@ -277,8 +316,6 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 			  "dialog_details",
 			  dialog_details);
 
-	gtk_widget_show_all(dialog);
-
 	return dialog;
 }
 
@@ -296,42 +333,59 @@ cong_ui_file_export(CongDocument *doc,
 	dialog = cong_document_export_dialog_new(doc,
 						 toplevel_window);
 
-	result = gtk_dialog_run(GTK_DIALOG(dialog));
-
 	dialog_details = g_object_get_data( G_OBJECT(dialog),
 					    "dialog_details");
 	g_assert(dialog_details);
 
-	switch (result) {
-	default: /* Do nothing; dialog was cancelled */
-		break;
+	if (dialog_details->got_any_exporters) {
+		gtk_widget_show_all(dialog);
 
-	case GTK_RESPONSE_OK:
-		{
-			CongExporter* exporter;
+		result = gtk_dialog_run(GTK_DIALOG(dialog));
 
-			/* Which plugin has been selected? */
-			exporter = get_selected_exporter(dialog_details);
-			if (exporter) {
-				gchar *export_uri = cong_exporter_get_preferred_uri(exporter);
-				g_message("Exporter invoked: \"%s\" to \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(exporter)), export_uri);
 
-				cong_exporter_invoke(exporter, 
-						     doc, 
-						     export_uri,
-						     toplevel_window);
-
-				g_free(export_uri);
-
+		switch (result) {
+		default: /* Do nothing; dialog was cancelled */
+			break;
+			
+		case GTK_RESPONSE_OK:
+			{
+				CongExporter* exporter;
+				
+				/* Which plugin has been selected? */
+				exporter = get_selected_exporter(dialog_details);
+				if (exporter) {
+					gchar *export_uri = cong_exporter_get_preferred_uri(exporter);
+					g_message("Exporter invoked: \"%s\" to \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(exporter)), export_uri);
+					
+					cong_exporter_invoke(exporter, 
+							     doc, 
+							     export_uri,
+							     toplevel_window);
+					
+					g_free(export_uri);
+					
+				}
 			}
+			break;
 		}
-		break;
+
+		/* FIXME: Somewhat hackish cleanup: */
+		gconf_client_notify_remove(the_app.gconf_client,
+					   dialog_details->connection_id);
+	} else {
+		/* There are no plugins which can handle this document: */
+		gchar *filename = cong_document_get_filename(doc);
+		gchar *what_failed = g_strdup_printf(_("Conglomerate cannot export \"%s\""), filename);
+		GtkDialog* error_dialog = cong_error_dialog_new(toplevel_window,
+								what_failed, 
+								_("None of Conglomerate's plugins know how to export files of that type."),
+								_(""));
+
+		gtk_dialog_run(error_dialog);
+		gtk_widget_destroy(GTK_WIDGET(error_dialog));
 	}
 
 	/* FIXME: Somewhat hackish cleanup: */
-	gconf_client_notify_remove(the_app.gconf_client,
-				   dialog_details->connection_id);
-
 	gtk_widget_destroy(dialog);
 
 	g_free(dialog_details);

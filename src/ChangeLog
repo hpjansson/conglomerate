@@ -1,5 +1,17 @@
-2003-07-04 David Malcolm <david@davemalcolm.demon.co.uk>
+2003-07-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin_fo.c
+
+	New file
+
+	* Makefile.am, main.c, 
+
+	Added plugin-fo.c
+
+	* cong-file-export.c, cong-file-print.c, cong-plugin.c, cong-plugin.h, global.h, plugin-convert-case.c
+
+	Only show the exporters and print methods that are relevant to the current document; port to v2.2 of the GNOME Print API (GnomePrintJob replacesGnmePrintMaster); pass document rather than FPI to the filter methods; disabled the case conversion plugin.
+	
 	* cong-app.h
 
 	New file
