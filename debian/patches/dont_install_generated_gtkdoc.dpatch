@@ -26,19 +26,14 @@ esac
 exit 0
 
 @DPATCH@
---- doc/reference/Makefile.in.tarball	2004-01-07 16:16:39.000000000 +0100
-+++ doc/reference/Makefile.in	2004-01-08 00:09:15.000000000 +0100
-@@ -259,11 +259,11 @@
- install-data: install-data-am
+--- doc/reference/Makefile.in.tarball	2004-01-11 17:41:11.000000000 +0100
++++ doc/reference/Makefile.in	2004-01-11 17:52:58.000000000 +0100
+@@ -288,7 +288,7 @@
  
- install-am: all-am
--	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
-+	echo " ## no" @$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
- install: install-am
- uninstall-am:
+ installdirs:
+ 
+-install: install-am
++install: Makefile  # infact we don't want an install
+ install-exec: install-exec-am
+ install-data: install-data-am
  uninstall: uninstall-am
--all-am: Makefile all-local
-+all-am: Makefile
- all-redirect: all-am
- install-strip:
- 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
