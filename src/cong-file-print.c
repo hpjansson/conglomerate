@@ -344,8 +344,8 @@ do_ui_file_print(CongDocument *doc,
 
 
 void
-cong_ui_file_print_preview(CongDocument *doc,
-			   GtkWindow *toplevel_window)
+cong_ui_hook_file_print_preview (CongDocument *doc,
+				 GtkWindow *toplevel_window)
 {
 	do_ui_file_print(doc,
 			 toplevel_window,
@@ -353,8 +353,8 @@ cong_ui_file_print_preview(CongDocument *doc,
 }
 
 void
-cong_ui_file_print(CongDocument *doc,
-		    GtkWindow *toplevel_window)
+cong_ui_hook_file_print (CongDocument *doc,
+			 GtkWindow *toplevel_window)
 {
 	do_ui_file_print(doc,
 			 toplevel_window,

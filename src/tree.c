@@ -17,11 +17,10 @@
 
 /* the popup items have the data "popup_data_item" set on them: */
 
-#if 1
 void 
-tree_new_sibling (CongDocument *doc,
-		  CongDispspecElement *ds_element,
-		  CongNodePtr node)
+cong_ui_hook_tree_new_sibling (CongDocument *doc,
+			       CongDispspecElement *ds_element,
+			       CongNodePtr node)
 {
 	CongNodePtr new_node;
 
@@ -59,9 +58,9 @@ tree_new_sibling (CongDocument *doc,
 }
 
 void
-tree_new_sub_element (CongDocument *doc,
-		      CongDispspecElement *ds_element,
-		      CongNodePtr node)
+cong_ui_hook_tree_new_sub_element (CongDocument *doc,
+				   CongDispspecElement *ds_element,
+				   CongNodePtr node)
 {
 	CongNodePtr new_node;
 
@@ -96,94 +95,11 @@ tree_new_sub_element (CongDocument *doc,
 
 	cong_document_end_edit(doc);
 }
-#else
-gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
-{
-	CongDocument *doc;
 
-	CongNodePtr new_node;
-	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
-							 "element");
-
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
-	
-
-	/* GREP FOR MVC */
-	cong_document_begin_edit(doc);
-
-	{
-		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (element));
-		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
-		g_free (desc);
-
-		/* New element */
-		new_node = cong_node_new_element_from_dispspec(element, doc);
-		cong_command_add_node_add_after(cmd, new_node, tag);
-
-		/*  add any necessary sub elements it needs */
-		cong_command_add_xml_add_required_children (cmd, 
-							    new_node);
-		
-		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-								      new_node);
-
-		cong_document_end_command (doc, cmd);		
-	}
-
-	cong_document_end_edit(doc);
-
-
-
-	return(TRUE);
-}
-
-
-gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
-{
-	CongDocument *doc;
-
-	CongNodePtr new_node;
-	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
-							 "element");
-
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
-
-	/* GREP FOR MVC */
-	cong_document_begin_edit(doc);
-
-	{
-		gchar *desc = g_strdup_printf (_("Insert child: %s"), cong_dispspec_element_username (element));
-		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
-		g_free (desc);
-
-		/* New element */
-		new_node = cong_node_new_element_from_dispspec(element, doc);
-		cong_command_add_node_set_parent (cmd, new_node, tag);
-
-		/*  add any necessary sub elements it needs */
-		cong_command_add_xml_add_required_children (cmd, 
-							    new_node);
-		
-		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-								      new_node);
-
-		cong_document_end_command (doc, cmd);
-	}
-
-	cong_document_end_edit(doc);
-
-	return(TRUE);
-}
-#endif
-
-#if 0
 void
-tree_properties (CongDocument *doc,
-		 CongNodePtr node,
-		 GtkWindow *parent_window)
-
+cong_ui_hook_tree_properties (CongDocument *doc,
+			      CongNodePtr node,
+			      GtkWindow *parent_window)
 {
 	GtkWidget *properties_dialog;
 
@@ -202,32 +118,6 @@ tree_properties (CongDocument *doc,
 	gtk_widget_destroy(properties_dialog);
 #endif
 }
-#else
-gint tree_properties(GtkWidget *widget, CongNodePtr tag)
-{
-	CongDocument *doc;
-	GtkWidget *properties_dialog;
-	GtkWindow *parent_window;
-
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
-
-	parent_window = g_object_get_data(G_OBJECT(widget),
-					  "parent_window");
-
-	properties_dialog = cong_node_properties_dialog_new(doc, tag, parent_window);
-
-#if 1
-	gtk_widget_show (properties_dialog);
-#else
-	/* FIXME:  Make this modeless */
-	gtk_dialog_run(GTK_DIALOG(properties_dialog));
-	gtk_widget_destroy(properties_dialog);
-#endif
-
-	return TRUE;
-}
-#endif
 
 
 static gboolean
@@ -248,16 +138,18 @@ tree_cut_update_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
-gint tree_cut(GtkWidget *widget, CongNodePtr tag)
+void 
+cong_ui_hook_tree_cut (CongDocument *doc,
+		       CongNodePtr node,
+		       GtkWindow *parent_window)
 {
-	CongDocument *doc;
 	gchar *source;
 
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
 
 	/* GREP FOR MVC */
-	source = cong_node_generate_source(tag);
+	source = cong_node_generate_source(node);
 
 	/* FIXME: set clipboard state within command? */
 	cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
@@ -273,47 +165,47 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 		cong_command_for_each_location (cmd, 
 						tree_cut_update_location_callback,
-						tag);
+						node);
 		
-		cong_command_add_node_recursive_delete(cmd, tag);
+		cong_command_add_node_recursive_delete(cmd, node);
 
 		cong_document_end_command (doc, cmd);
 	}
 
 	cong_document_end_edit(doc);
-
-	return(TRUE);
 }
 
 
-gint tree_copy(GtkWidget *widget, CongNodePtr tag)
+void 
+cong_ui_hook_tree_copy (CongDocument *doc,
+			CongNodePtr node,
+			GtkWindow *parent_window)
 {
-	/* GREP FOR MVC */
-
-	CongDocument *doc;
 	gchar *source;
 
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
 
-	source = cong_node_generate_source(tag);
+	/* GREP FOR MVC */
+
+	source = cong_node_generate_source(node);
 	cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
 						  GDK_SELECTION_CLIPBOARD,
 						  source,
 						  doc);	
 	g_free(source);
-
-	return(TRUE);
 }
 
-gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
+void 
+cong_ui_hook_tree_paste_under (CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window)
 {
-	CongDocument *doc;
 	CongDispspec *ds;
 	const gchar *clipboard_source;
 
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
 
 	ds = cong_document_get_dispspec(doc);
 
@@ -322,22 +214,22 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_under (doc,
-						  tag,
+						  node,
 						  clipboard_source);
 	}
-
-	return(TRUE);
 }
 
 
-gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
+void
+cong_ui_hook_tree_paste_before (CongDocument *doc,
+				CongNodePtr node,
+				GtkWindow *parent_window)
 {
-	CongDocument *doc;
 	CongDispspec *ds;
 	const gchar *clipboard_source;
 
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
 
 	ds = cong_document_get_dispspec(doc);
 
@@ -346,22 +238,22 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_before (doc,
-						   tag,
+						   node,
 						   clipboard_source);
 	}
-	
-	return(TRUE);
 }
 
 
-gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
+void
+cong_ui_hook_tree_paste_after (CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window)
 {
-	CongDocument *doc;
 	CongDispspec *ds;
 	const gchar *clipboard_source;
 
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
 
 	ds = cong_document_get_dispspec(doc);
 
@@ -370,10 +262,7 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_after (doc,
-						  tag,
+						  node,
 						  clipboard_source);
 	}
-	
-	return(TRUE);
 }
-

@@ -51,7 +51,7 @@ GtkMenuItem*
 cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
 							   CongUICallback_Document_Node_ParentWindow callback,
 							   CongDocument *doc,
-							   CongNodePtr callback_data,
+							   CongNodePtr node,
 							   GtkWindow *parent_window);
 
 GtkMenuItem* 
@@ -59,7 +59,7 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
 							      CongUICallback_Document_DispspecElement_Node callback,
 							      CongDocument *doc,
 							      CongDispspecElement *ds_element,
-							      CongNodePtr callback_data);
+							      CongNodePtr node);
 /*
  * Simple utility function.
  * Adds the item to the menu with appropriate sensitivity, and ensures that the item is "shown"
@@ -69,29 +69,66 @@ cong_menu_add_item (GtkMenu *menu,
 		    GtkMenuItem *item,
 		    gboolean is_sensitive);
 
-/* UI Hooks: */
-void 
-tree_new_sibling (CongDocument *doc,
-		  CongDispspecElement *ds_element,
-		  CongNodePtr node);
-void
-tree_new_sub_element (CongDocument *doc,
-		      CongDispspecElement *ds_element,
-		      CongNodePtr node);
+/*
+ *
+ * UI routines for invocation by menus/toolbars: 
+ *
+ */
 
-#if 0
+/** UI Hooks with clean marshalling: **/
+
+/* File menu hooks: */
 void
-tree_properties (CongDocument *doc,
-		 CongNodePtr node,
-		 GtkWindow *parent_window);
-#else
-gint tree_properties(GtkWidget *widget, CongNodePtr tag);
+cong_ui_hook_file_import (GtkWindow *toplevel_window);
+
+void
+cong_ui_hook_file_export (CongDocument *doc,
+			  GtkWindow *toplevel_window);
+
+#if ENABLE_PRINTING
+void
+cong_ui_hook_file_print_preview (CongDocument *doc,
+				 GtkWindow *toplevel_window);
+void
+cong_ui_hook_file_print (CongDocument *doc,
+			 GtkWindow *toplevel_window);
 #endif
-gint tree_cut(GtkWidget *widget, CongNodePtr tag);
-gint tree_copy(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
+
+/* Tree editing hooks: */
+void 
+cong_ui_hook_tree_new_sibling (CongDocument *doc,
+			       CongDispspecElement *ds_element,
+			       CongNodePtr node);
+void
+cong_ui_hook_tree_new_sub_element (CongDocument *doc,
+				   CongDispspecElement *ds_element,
+				   CongNodePtr node);
+void
+cong_ui_hook_tree_properties (CongDocument *doc,
+			      CongNodePtr node,
+			      GtkWindow *parent_window);
+void 
+cong_ui_hook_tree_cut (CongDocument *doc,
+		       CongNodePtr node,
+		       GtkWindow *parent_window);
+void
+cong_ui_hook_tree_copy (CongDocument *doc,
+			CongNodePtr node,
+			GtkWindow *parent_window);
+void
+cong_ui_hook_tree_paste_under (CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window);
+void
+cong_ui_hook_tree_paste_before (CongDocument *doc,
+				CongNodePtr node,
+				GtkWindow *parent_window);
+void
+cong_ui_hook_tree_paste_after (CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window);
+
+/** Legacy UI Hooks without clean marshalling (to be cleanup up eventually): **/
 
 /* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
@@ -141,29 +178,6 @@ void menu_callback_debug_dialog(gpointer callback_data,
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
 
-/* UI routines for invocation by menus/toolbars: */
-void
-cong_ui_file_import (GtkWindow *toplevel_window);
-
-void
-cong_ui_file_export (CongDocument *doc,
-		     GtkWindow *toplevel_window);
-
-#if ENABLE_PRINTING
-void
-cong_ui_file_print_preview (CongDocument *doc,
-			    GtkWindow *toplevel_window);
-void
-cong_ui_file_print (CongDocument *doc,
-		    GtkWindow *toplevel_window);
-#endif
-
-
-GtkWidget*
-cong_file_properties_dialog_new (CongDocument *doc, 
-				 GtkWindow *parent_window);
-
-
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void editor_popup_init();
@@ -186,6 +200,10 @@ void new_document(GtkWindow *parent_window);
 int gui_window_new_document_make();
 
 GtkWidget* cong_gui_get_a_window(void);
+
+GtkWidget*
+cong_file_properties_dialog_new (CongDocument *doc, 
+				 GtkWindow *parent_window);
 
 G_END_DECLS
 

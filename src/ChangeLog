@@ -1,5 +1,9 @@
 2004-02-11  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-file-export.c, cong-file-import.c, cong-file-print.c, cong-menus.c, cong-ui-hooks.h, popup.c, tree.c
+
+	The various tree operations now use sane marshallers
+
 	* popup.c
 
 	More cleanups: making it easier to get rid of the final traces of GObject hackery

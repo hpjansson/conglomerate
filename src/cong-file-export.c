@@ -320,8 +320,8 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 
 
 void
-cong_ui_file_export(CongDocument *doc,
-		    GtkWindow *toplevel_window)
+cong_ui_hook_file_export (CongDocument *doc,
+			  GtkWindow *toplevel_window)
 {
 	GtkWidget *dialog;
 	gint result;

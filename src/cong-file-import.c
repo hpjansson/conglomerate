@@ -61,7 +61,7 @@ static void add_importer_to_list(CongServiceImporter *importer, gpointer user_da
 }
 
 void
-cong_ui_file_import(GtkWindow *toplevel_window)
+cong_ui_hook_file_import (GtkWindow *toplevel_window)
 {
 	gchar *filename;
 

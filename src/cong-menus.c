@@ -215,7 +215,7 @@ static void menu_callback_file_import(gpointer callback_data,
 
 	/* FIXME: this option should be disabled if there are no importers installed */
 
-	cong_ui_file_import(cong_primary_window_get_toplevel(primary_window));
+	cong_ui_hook_file_import (cong_primary_window_get_toplevel (primary_window));
 }
 
 static void menu_callback_file_export(gpointer callback_data,
@@ -227,8 +227,8 @@ static void menu_callback_file_export(gpointer callback_data,
 
 	/* FIXME: this option should be disabled if there are no exporters installed that are appropriate for this FPI */
 
-	cong_ui_file_export(doc,
-			    cong_primary_window_get_toplevel(primary_window));
+	cong_ui_hook_file_export (doc,
+				  cong_primary_window_get_toplevel (primary_window));
 }
 
 #if ENABLE_PRINTING
@@ -241,8 +241,8 @@ static void menu_callback_file_print_preview(gpointer callback_data,
 
 	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
 
-	cong_ui_file_print_preview(doc,
-				   cong_primary_window_get_toplevel(primary_window));
+	cong_ui_hook_file_print_preview (doc,
+					 cong_primary_window_get_toplevel (primary_window));
 }
 
 static void menu_callback_file_print(gpointer callback_data,
@@ -254,8 +254,8 @@ static void menu_callback_file_print(gpointer callback_data,
 
 	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
 
-	cong_ui_file_print(doc,
-			   cong_primary_window_get_toplevel(primary_window));
+	cong_ui_hook_file_print (doc,
+				 cong_primary_window_get_toplevel (primary_window));
 }
 #endif /* #if ENABLE_PRINTING */
 
