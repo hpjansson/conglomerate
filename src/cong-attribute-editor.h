@@ -120,6 +120,7 @@ cong_attribute_editor_entities_new (CongDocument *doc,
 				    CongNodePtr node,
 				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
+#if 0
 GtkWidget*
 cong_attribute_editor_nmtoken_new (CongDocument *doc,
 				   CongNodePtr node,
@@ -130,6 +131,8 @@ cong_attribute_editor_nmtokens_new (CongDocument *doc,
 				    CongNodePtr node,
 				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
+#endif
+
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,

@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
+#include "cong-attribute-editor-nmtoken.h"
 #include "cong-eel.h"
 #include "cong-util.h"
 #include "cong-command.h"
@@ -327,6 +328,7 @@ cong_attribute_editor_new (CongDocument *doc,
 						        ns_ptr,
 							attr->name,
 							attr);
+
 	case XML_ATTRIBUTE_ID:
 		/* FIXME: extend NMTOKEN thing */
 		return gtk_label_new("ID");
@@ -348,8 +350,12 @@ cong_attribute_editor_new (CongDocument *doc,
 		return gtk_label_new("ENTITIES");
 		
 	case XML_ATTRIBUTE_NMTOKEN:
-		/* FIXME: should use a text entry; similar to the raw editor thing, but with validation */
-		return gtk_label_new("NMTOKEN");
+		/* FIXME: should this be a sub-class of the cdata editor? */
+		return cong_attribute_editor_nmtoken_new (doc,
+							  node,
+							  ns_ptr,
+							  attr->name,
+							  attr);
 		
 	case XML_ATTRIBUTE_NMTOKENS:
 		/* FIXME: use a list view, with buttons to add and delete? */

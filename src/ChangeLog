@@ -1,3 +1,15 @@
+2004-08-30  Douflas Burke <dburke@cfa.harvard.edu>
+
+	* Makefile.am, cong-attribute-editor.c, cong-attribute-editor.h
+
+	Added support for NMTOKEN attributes.
+
+	* cong-attribute-editor-nmtoken.c, cong-attribute-editor-nmtoken.h
+
+	New files: provide an editor for NMTOKEN attributes. The
+	code is copied from cong-attribute-editor-cdata.c rather
+	than written properly.
+	
 2004-08-30  Douglas Burke <dburke@cfa.harvard.edu>
 
 	* cong-attribute-editor-enumeration.c

@@ -36,6 +36,7 @@ conglomerate_SOURCES =      \
   cong-attribute-editor-lang.c	\
   cong-attribute-editor-lang.h	\
   cong-attribute-editor-enumeration.h \
+  cong-attribute-editor-nmtoken.h \
   cong-attribute-wrapper.h   \
   cong-attribute-wrapper-check-button.h \
   cong-attribute-wrapper-radio-button.h \
@@ -155,6 +156,7 @@ conglomerate_SOURCES =      \
   cong-attribute-editor.c   \
   cong-attribute-editor-cdata.c \
   cong-attribute-editor-enumeration.c \
+  cong-attribute-editor-nmtoken.c \
   cong-attribute-wrapper.c   \
   cong-attribute-wrapper-check-button.c \
   cong-attribute-wrapper-radio-button.c \
