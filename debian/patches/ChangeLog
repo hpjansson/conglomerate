@@ -3,6 +3,9 @@
 	* next
 	New script
 
+	* release
+	Avoid expanding of the *.*.*-*
+
 2004-02-09  Geert Stappers <stappers@stappers.nl>
 
 	* release
