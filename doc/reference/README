@@ -16,5 +16,10 @@ Makefile.in
 Makefile
  Should not need further explainion
 
+conglomerate-docs.sgml
+ The reference index. This file has to be maintained by hand,
+ so when you add/remove a *.h file from the source, please add/remove
+ the reference to the corresponding xml file to/from conglomerate-docs.sgml.
+
 other files:
  please help

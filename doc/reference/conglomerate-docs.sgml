@@ -166,4 +166,9 @@ cong_document_end_command (doc, cmd);
     <xi:include href="xml/global.xml"/>
     <xi:include href="xml/cong-vfs.xml"/>
   </chapter>
+  
+  <chapter>
+    <title>Object Tree</title>
+    <xi:include href="xml/tree_index.sgml"/>
+  </chapter>
 </book>
