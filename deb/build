@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 #  Script to start build a debian package
+#  and other functions to keep the package up-to-date
+#
 #  Copyright 2003 by Geert Stappers under the terms of GPL v2.0
 #
 
@@ -52,16 +54,15 @@ update()
 # changes in 'debian' should go back into 'deb'
 {
   echo apply this diff file as
-  echo  patch -p0 < deb.update
+  echo  "patch -p0 < deb.update"
   for DF in $( cd debian ; find . -type f | sed -e 's@^\./@@' )
   do
-   if [ ! -f deb/$DF ]
+   if [ -f deb/$DF ]
    then
-     diff -uN debian/$DF deb/$DF | \
-     sed -e 'sG^-\(.*\)G+\1G' -e 'sS^+-- S--- S'
-   else
      diff -uN deb/$DF debian/$DF | \
      sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
+   else
+     diff -uN /dev/null debian/$DF | sed -e 'sS^\+\+\+ debian/S+++ deb/S'
    fi
    if [ ! -s debian/$DF ]
    then
