@@ -51,19 +51,16 @@ fi
 update()
 # changes in 'debian' should go back into 'deb'
 {
-  NEWFILES=""
-  set +x
   for DF in $( cd debian ; find . -type f | sed -e 's@^\./@@' )
   do
-    echo $DF
-    if [ ! -f deb/$DF ]
-    then
-     # a new file in the debian directory
-     diff -uN /dev/null debian/$DF | sed -e 'sS^\+\+\+ debian/S+++ deb/S'
-    else
-     diff -u deb/$DF debian/$DF | \
+   if [ ! -f deb/$DF ]
+   then
+     diff -uN deb/$DF debian/$DF # | \
+     # sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
+   else
+     diff -uN deb/$DF debian/$DF | \
      sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
-    fi
+   fi
   done
 }
 
