@@ -1,3 +1,8 @@
+2004-11-05  Geert Stappers  <stappers@stappers.nl>
+
+	* NEWS: reduced annouces to two, so next relaese can ship with tree.
+	* configure.in: Post-release version bump to 0.9.1
+
 	--- 0.9.0 ---
 
 2005-02-13  David Malcolm  <dmalcolm@redhat.com>
