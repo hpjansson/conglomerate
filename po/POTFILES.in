@@ -124,6 +124,7 @@ src/fo-print-context.c
 src/fo-rect.c
 src/fo-solver-result.c
 src/fo-tests.c
+src/gxx-impl-object-to-xml-tree.c
 src/icon_assemble.c
 src/icon_connect.c
 src/icon_new.c
