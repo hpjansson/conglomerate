@@ -10,6 +10,9 @@ From toplevel directory you can say: `uss/scriptname`.
 Available scripts:
 ==================
 
+* autogen.sh
+Run autogen.sh with the preferred options of upstream programmers
+
 * genreadme
 Generates the README file.
 
