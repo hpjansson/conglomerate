@@ -1,3 +1,8 @@
+2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* configure.in:  Made gtk-doc usage default to "auto", rather than "no", fixing
+	a problem with "make distcheck"	
+
 2004-06-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* autogen.sh: Always use -Werror when building from CVS

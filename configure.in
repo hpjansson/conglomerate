@@ -245,10 +245,16 @@ AC_SUBST(BASE_CFLAGS)
 
 ##################################################
 # Check for gtk-doc.
-#  see also
-#  http://bugzilla.gnome.org/show_bug.cgi?id=131600
+#
+# Dave Malcolm 2004019:  In theory, we could replace the check below with
+# GTK_DOC_CHECK([1.0])
+# However, this breaks "make distcheck" on my machine (FC2) as it defaults to configuring gtk-doc as disabled
+#
+# "make distcheck" does a "make dist" inside its test tree which requires
+# gtk-doc to be enabled (in doc/reference/Makefile.am), and it configured that tree without mentioning gtk-doc
+# Hence gtk-doc needs to be enabled by default
+# 
 ##################################################
-##GTK_DOC_CHECK
 
 AC_ARG_WITH(html-dir, [  --with-html-dir=PATH path to installed docs ])
 
@@ -270,8 +276,16 @@ else
   GTKDOC=false
 fi
 
-dnl Let people enable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=no]], enable_gtk_doc="$enableval", enable_gtk_doc=no)
+dnl Let people disable the gtk-doc stuff.
+AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=auto]], enable_gtk_doc="$enableval", enable_gtk_doc=auto)
+
+if test x$enable_gtk_doc = xauto ; then
+  if test x$GTKDOC = xtrue ; then
+    enable_gtk_doc=yes
+  else
+    enable_gtk_doc=no 
+  fi
+fi
 
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
