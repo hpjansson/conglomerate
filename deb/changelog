@@ -1,3 +1,47 @@
+conglomerate (0.7.0-1) unstable; urgency=low
+
+  * Danish translation (Michael Rasmussen)
+
+  * Dutch translation (Mark Van den Borre)
+
+  * Improvements to core architecture (Dave Malcolm)
+        - Most important structs are now GObjects
+        - MVC framework now uses GObjects signals
+        - MVC framework allows updates to be amortized,
+	  allowed a big optimisation of the "View Source" feature.
+
+  * Complete rewrite of the main editor control: (Dave Malcolm)
+        - Fixes numerous bugs
+        - In theory, now supports all possible XML
+        - Should be more maintainable than old implementation
+        - Support for plugin rendering of tags:
+	  initial support for various types of list tag and for paragraphs.
+        - Various usability fixes:
+	  typing now works a lot more like a regular word-processor.
+
+  * Better support for namespaces (Dave Malcolm)
+
+  * Complete rewrite of clipboard, fixing various bugs (Dave Malcolm)
+
+  * Online help, integrated with Scrollkeeper/Yelp (Jeff Martin)
+
+  * Reimplementation of tree views,
+  with big optimisations to the change-notification handling. (Dave Malcolm)
+
+  * Adjacent text nodes get merged where necessary. (Dave Malcolm)
+
+  * Stylesheets are now located using the XML catalog (Varga Robert)
+
+  * Improvements to automatic generation of display specs (Jeff Martin)
+
+  * Support for the Kernel Cousin newsletter format (Dave Malcolm)
+
+  * Various bug-fixes (Dave Malcolm)
+
+  * Debian package into "unstable" (closes: #197049 )
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri, 29 Aug 2003 21:04:53 +0200
+
 conglomerate (0.5.4-0.2) experimental; urgency=low
 
   * new stuff in CVS

@@ -11,6 +11,7 @@ EXTRA_DIST = BUGS	\
   deb/Readme		\
   deb/build		\
   deb/changelog		\
+  deb/conglomerate.menu	\
   deb/control		\
   deb/copyright		\
   deb/docs		\
