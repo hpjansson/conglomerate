@@ -1,3 +1,16 @@
+conglomerate (0.5.0-4) unstable; urgency=low
+
+  * Tell the user that there about eighty errors to come
+  * reversed not using /home/david/test.xml for the test
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 10 May 2003 13:26:05 +0200
+
+conglomerate (0.5.0-3) unstable; urgency=low
+
+  * not using /home/david/test.xml for the test
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 10 May 2003 08:38:32 +0200
+
 conglomerate (0.5.0-2) unstable; urgency=low
 
   * debian/rules didn't put files in the package
