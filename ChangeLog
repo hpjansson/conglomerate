@@ -1,5 +1,9 @@
 2002-12-12  Geert Stappers <Geert.Stappers@xs4all.nl>
 
+	* configure.in: increment of minor versionnumber
+
+2002-12-12  Geert Stappers <Geert.Stappers@xs4all.nl>
+
 	* documention/ContribDemo: new file
 
 	* .diffexclude: new file
