@@ -1,5 +1,10 @@
 2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c: 
+
+	Disabled debug code that was spewing out the XML representation of
+	the GUI
+
 	* cong-menus.c: 
 
 	Moved the Homepage action from the context menu (where it had been

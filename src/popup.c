@@ -1142,8 +1142,9 @@ cong_ui_popup_init (CongDocument *doc,
 	gtk_ui_manager_insert_action_group (cong_primary_window_get_ui_manager (primary_window), 
 					    s_action_group,
 					    0);
-	
+#if 0	
 	g_message (gtk_ui_manager_get_ui (cong_primary_window_get_ui_manager (primary_window)));
+#endif
 }
 
 void
