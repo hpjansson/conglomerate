@@ -29,6 +29,7 @@
 #include "cong-document.h"
 #include "cong-text-cache.h"
 #include "cong-glade.h"
+#include "cong-spell.h"
 
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
@@ -1742,10 +1743,10 @@ cong_util_spellcheck_word (PangoLanguage *language,
 	g_message ("Spellchecking: language=\"%s\" string=\"%s\" offset:%i ,length:%i", pango_language_to_string(language), string, word->start_byte_offset, word->length_in_bytes);
 #endif
 
-#if 0
-	return TRUE; /* for now */
+#if ENABLE_ENCHANT
+	return cong_is_word_misspelt(string, word);
 #else
-	return FALSE; /* for now */
+	return FALSE;
 #endif
 }
 

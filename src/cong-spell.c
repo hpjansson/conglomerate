@@ -19,8 +19,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
- * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
+ * Authors: David Malcolm <david@davemalcolm.demon.co.uk>,
+ * Jeff Martin <jeff@custommonkey.org>
  */
 
 #include "global.h"
+#include "cong-util.h"
 #include "cong-spell.h"
+
+#if ENABLE_ENCHANT
+#include <enchant.h>
+
+EnchantDict *dict;
+
+void create_dict()
+{
+	EnchantBroker * broker;
+	
+	broker = enchant_broker_init();
+	dict = enchant_broker_request_dict(broker, "en_GB");
+}
+
+gboolean cong_is_word_misspelt (const gchar* string, const CongWord* word)
+{
+	if(!dict)
+	{
+		create_dict();
+	}
+
+	return enchant_dict_check(dict, string + word->start_byte_offset,
+			word->length_in_bytes);
+}
+#endif

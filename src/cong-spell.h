@@ -27,6 +27,7 @@
 
 G_BEGIN_DECLS
 
+gboolean cong_is_word_misspelt(const gchar* string, const CongWord *word);
 
 G_END_DECLS
 

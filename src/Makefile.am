@@ -333,6 +333,7 @@ INCLUDES = $(BASE_CFLAGS) \
 	$(LIBFO_CFLAGS) \
 	$(SEWFOX_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
+	$(ENCHANT_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)/conglomerate"\" \
@@ -345,6 +346,7 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(LIBFO_LIBS) \
 	$(SEWFOX_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
+	$(ENCHANT_LIBS) \
 	$(NULL)
 
 EXTRA_DIST = Makefile.win cong.marshal marshal.make
