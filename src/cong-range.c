@@ -178,8 +178,19 @@ cong_range_make_ordered (CongRange *range)
 
 	} else {
 		/* Non-equal node ptrs: swap node ptrs if necessary*/
+		CongNodePtr iter;
 
-		/* FIXME: unwritten */
+		for (iter = range->loc0.node; iter && iter != range->loc1.node; iter = iter->next) ;
+		
+		if (NULL==iter)
+		{
+			/* Swap the node ptrs: */
+			CongLocation tmp;
+
+			cong_location_copy(&tmp, &range->loc0);
+			cong_location_copy(&range->loc0, &range->loc1);
+			cong_location_copy(&range->loc1, &tmp);
+		}
 	}
 	
 }

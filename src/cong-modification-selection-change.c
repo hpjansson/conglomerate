@@ -159,7 +159,7 @@ undo (CongModification *modification)
 	cong_selection_set_logical_end (selection,
 					&PRIVATE(modification_selection_change)->old_logical_end);
 
-	cong_document_on_selection_change (doc);
+	cong_document_private_on_selection_change (doc);
 	
 	cong_document_end_edit (doc);
 }
@@ -178,7 +178,7 @@ redo (CongModification *modification)
 	cong_selection_set_logical_end (selection,
 					&PRIVATE(modification_selection_change)->new_logical_end);
 
-	cong_document_on_selection_change (doc);
+	cong_document_private_on_selection_change (doc);
 	
 	cong_document_end_edit (doc);
 }

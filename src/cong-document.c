@@ -314,6 +314,8 @@ cong_document_construct (CongDocument *doc,
 			 CongDispspec *ds, 
 			 const gchar *url)
 {
+	CongNodePtr initial_cursor_node;
+
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (xml_doc, NULL);
 	g_return_val_if_fail (ds, NULL);
@@ -357,13 +359,12 @@ cong_document_construct (CongDocument *doc,
 	cong_cursor_init(&PRIVATE(doc)->cursor, doc);
 	PRIVATE(doc)->selection = cong_selection_new();
 
-#if 0
-	PRIVATE(doc)->curs.set = 0;
-	PRIVATE(doc)->curs.w = 0;
-#endif
-
-	cong_util_set_cursor_to_first_text_descendant (doc,
-						       (CongNodePtr)PRIVATE(doc)->xml_doc);
+	initial_cursor_node = cong_node_get_first_text_node_descendant ((CongNodePtr)PRIVATE(doc)->xml_doc);
+	
+	if (initial_cursor_node) {
+		cong_location_set_to_start_of_node (&PRIVATE(doc)->cursor.location,
+						    initial_cursor_node);
+	}
 
 	PRIVATE(doc)->history = cong_command_history_new();
 
@@ -709,10 +710,10 @@ gboolean cong_document_is_within_edit(CongDocument *doc)
 }
 
 
-void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
+void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 #if DEBUG_MVC
-	g_message("cong_document_node_make_orphan");
+	g_message("cong_document_private_node_make_orphan");
 #endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -725,13 +726,13 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	}
 }
 
-void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
+void cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_add_after");
+	g_message("cong_document_private_node_add_after");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -743,13 +744,13 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 		       older_sibling);
 }
 
-void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
+void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_add_before");
+	g_message("cong_document_private_node_add_before");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -761,13 +762,13 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 		       younger_sibling);
 }
 
-void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_parent");
+	g_message("cong_document_private_node_set_parent");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -779,14 +780,14 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 		       adoptive_parent);
 }
 
-void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 	g_return_if_fail(new_content);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_text");
+	g_message("cong_document_private_node_set_text");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -798,7 +799,7 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 		       new_content);
 }
 
-void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -806,7 +807,7 @@ void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const
 	g_return_if_fail(value);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_attribute");
+	g_message("cong_document_private_node_set_attribute");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -819,14 +820,14 @@ void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const
 		       value);
 }
 
-void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
+void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 	g_return_if_fail(name);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_remove_attribute");
+	g_message("cong_document_private_node_remove_attribute");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -838,14 +839,14 @@ void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, co
 		       name);
 }
 
-void cong_document_on_selection_change(CongDocument *doc)
+void cong_document_private_on_selection_change(CongDocument *doc)
 {
 	GList *iter;
 
 	g_return_if_fail(doc);
 
 	#if DEBUG_MVC
-	g_message("cong_document_on_selection_change");
+	g_message("cong_document_private_on_selection_change");
 	#endif
 
 	g_assert (cong_document_is_within_edit(doc));
@@ -865,7 +866,7 @@ void cong_document_on_selection_change(CongDocument *doc)
 	}
 }
 
-void cong_document_on_cursor_change(CongDocument *doc)
+void cong_document_private_on_cursor_change(CongDocument *doc)
 {
 	GList *iter;
 
@@ -873,7 +874,7 @@ void cong_document_on_cursor_change(CongDocument *doc)
 
 #if 0
 	#if DEBUG_MVC
-	g_message("cong_document_node_on_cursor_change");
+	g_message("cong_document_private_node_on_cursor_change");
 	#endif
 #endif
 
@@ -906,7 +907,7 @@ cong_document_set_external_dtd (CongDocument *doc,
 
 #if 0
 	#if DEBUG_MVC
-	g_message("cong_document_node_on_cursor_change");
+	g_message("cong_document_set_external_dtd");
 	#endif
 #endif
 
@@ -924,7 +925,7 @@ cong_document_set_external_dtd (CongDocument *doc,
 /* end of MVC user hooks */
 
 
-
+#if !SUPPORT_UNDO
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 {
 	CongNodePtr parent;
@@ -948,6 +949,7 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 
 	cong_document_end_edit(doc);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 void cong_document_register_view(CongDocument *doc, CongView *view)
 {
@@ -992,6 +994,7 @@ cong_document_get_language_for_node(CongDocument *doc,
 	return NULL; /* for now */
 }
 
+#if !SUPPORT_UNDO
 void
 cong_document_delete_selection (CongDocument *doc)
 {
@@ -1014,6 +1017,7 @@ cong_document_delete_selection (CongDocument *doc)
 
 	cong_document_end_edit (doc);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 static gboolean 
 cong_document_for_each_node_recurse (CongDocument *doc, 
@@ -1080,6 +1084,7 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 	return FALSE;
 }
 
+#if !SUPPORT_UNDO
 static gboolean
 merge_text_update_location_callback (CongDocument *doc,
 				     CongLocation *location, 
@@ -1160,7 +1165,9 @@ cong_document_merge_adjacent_text_children_of_node (CongDocument *doc,
 
 	cong_document_end_edit (doc);
 }
+#endif /* #if !SUPPORT_UNDO */
 
+#if !SUPPORT_UNDO
 void 
 cong_document_node_recursive_delete (CongDocument *doc, 
 				     CongNodePtr node)
@@ -1407,7 +1414,9 @@ void cong_document_delete_range (CongDocument *doc,
 
 	cong_document_end_edit (doc);
 }
+#endif /* #if !SUPPORT_UNDO */
 
+#if !SUPPORT_UNDO
 void
 cong_document_insert_text (CongDocument *doc, 
 			   CongLocation *loc, 
@@ -1442,6 +1451,7 @@ cong_document_insert_text (CongDocument *doc,
 	loc->byte_offset += byte_length;		
 	CONG_VALIDATE_UTF8(loc->node->content+loc->byte_offset);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
@@ -1479,6 +1489,7 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 
 }
 
+#if !SUPPORT_UNDO
 void
 cong_document_for_each_location (CongDocument *doc, 
 				 CongUpdateLocationCallback callback, 
@@ -1529,6 +1540,7 @@ cong_document_for_each_location (CongDocument *doc,
 		cong_document_on_selection_change (doc);
 	}
 }
+#endif /* #if !SUPPORT_UNDO */
 
 xmlElementPtr 
 cong_document_get_dtd_element (CongDocument *cong_doc, 
@@ -2082,6 +2094,9 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 	g_message("cong_document_handle_set_external_dtd");
 	#endif
 
+#if SUPPORT_UNDO
+	g_message ("FIXME: undo/redo not implemented for set_external_dtd");
+#else
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
 		CongView *view = CONG_VIEW(iter->data);
@@ -2103,8 +2118,8 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 		/* Remove any existing DTD: */
 		{
 			if (xml_doc->extSubset) {
-				cong_document_node_make_orphan (doc,
-								(xmlNodePtr)xml_doc->extSubset);
+				cong_document_private_node_make_orphan (doc,
+									(xmlNodePtr)xml_doc->extSubset);
 
 				cong_document_node_recursive_delete (doc, 
 								     (xmlNodePtr)xml_doc->extSubset);
@@ -2122,13 +2137,13 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 			
 			if (dtd_ptr) {			
 				if (xml_doc->children) {
-					cong_document_node_add_before (doc,
-								       (xmlNodePtr)dtd_ptr,
-								       (xmlNodePtr)xml_doc->children);
+					cong_document_private_node_add_before (doc,
+									       (xmlNodePtr)dtd_ptr,
+									       (xmlNodePtr)xml_doc->children);
 				} else {
-					cong_document_node_set_parent (doc,
-								       (xmlNodePtr)dtd_ptr,
-								       (xmlNodePtr)xml_doc);
+					cong_document_private_node_set_parent (doc,
+									       (xmlNodePtr)dtd_ptr,
+									       (xmlNodePtr)xml_doc);
 				}
 				
 				/* Ensure the DTD ptr is still set up within the xml_doc; the tree manipulation seems to make it lose the extSubset pointer: */
@@ -2153,6 +2168,7 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 								   system_id);
 		}
 	}
+#endif
 
 }
 

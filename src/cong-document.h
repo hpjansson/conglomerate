@@ -223,19 +223,19 @@ void cong_document_begin_edit(CongDocument *doc);
 void cong_document_end_edit(CongDocument *doc);
 gboolean cong_document_is_within_edit(CongDocument *doc);
 
-/* MVC: Change signals on the document: */
-void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
-void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
-void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
-void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
-void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
-void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value);
-void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
-void cong_document_on_selection_change(CongDocument *doc);
-void cong_document_on_cursor_change(CongDocument *doc);
+/* MVC: Atomic change signals on the document; only CongModification subclasses should call these directly: */
+void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node);
+void cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
+void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
+void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
+void cong_document_private_tag_remove(CongDocument *doc, CongNodePtr x);
+void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
+void cong_document_private_on_selection_change(CongDocument *doc);
+void cong_document_private_on_cursor_change(CongDocument *doc);
 void 
-cong_document_set_external_dtd (CongDocument *doc,
+cong_document_private_set_external_dtd (CongDocument *doc,
 				const xmlChar *root_element,
 				const xmlChar *ExternalID, 
 				const xmlChar *SystemID);

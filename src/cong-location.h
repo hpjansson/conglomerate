@@ -143,4 +143,12 @@ cong_location_calc_next_text_node (const CongLocation *input_loc,
 				   CongDispspec *dispspec,
 				   CongLocation *output_loc);
 
+void
+cong_location_copy_with_ref (CongDocument *doc, 
+			     CongLocation *dst,
+			     const CongLocation *src);
+void
+cong_location_nullify_with_ref (CongDocument *doc, 
+				CongLocation *loc);
+
 #endif

@@ -182,17 +182,17 @@ undo (CongModification *modification)
 
 	if (PRIVATE(node_modification_add_after)->former_parent) {
 		if (PRIVATE(node_modification_add_after)->former_older_sibling) {
-			cong_document_node_add_after (doc, 
-						       node, 
-						       PRIVATE(node_modification_add_after)->former_older_sibling);
+			cong_document_private_node_add_after (doc, 
+							      node, 
+							      PRIVATE(node_modification_add_after)->former_older_sibling);
 		} else {
-			cong_document_node_set_parent (doc, 
-						       node, 
-						       PRIVATE(node_modification_add_after)->former_parent);
+			cong_document_private_node_set_parent (doc, 
+							       node, 
+							       PRIVATE(node_modification_add_after)->former_parent);
 		}
 	} else {
-		cong_document_node_make_orphan (doc, 
-						node);
+		cong_document_private_node_make_orphan (doc, 
+							node);
 	}
 
 	cong_document_end_edit (doc);
@@ -210,13 +210,13 @@ redo (CongModification *modification)
 	cong_document_begin_edit (doc);
 
 	if (PRIVATE(node_modification_add_after)->new_older_sibling) {
-		cong_document_node_add_after (doc, 
-					       node, 
-					       PRIVATE(node_modification_add_after)->new_older_sibling);
+		cong_document_private_node_add_after (doc, 
+						      node, 
+						      PRIVATE(node_modification_add_after)->new_older_sibling);
 	} else {
-		cong_document_node_set_parent (doc, 
-					       node, 
-					       PRIVATE(node_modification_add_after)->new_parent);
+		cong_document_private_node_set_parent (doc, 
+						       node, 
+						       PRIVATE(node_modification_add_after)->new_parent);
 	}
 
 	cong_document_end_edit (doc);

@@ -727,6 +727,7 @@ static GtkWidget *structural_tag_popup_init(CongDocument *doc,
 	return popup;
 }
 
+#if 0
 static gchar*
 get_text (GtkWindow *parent_window,
 	  const gchar *initial_text) 
@@ -857,6 +858,7 @@ debug_set_text (CongDocument *doc,
 
 	g_free (new_text);
 }
+#endif
 
 static void
 invoke_node_tool (CongDocument *doc,

@@ -68,22 +68,23 @@ gint cong_cursor_blink(gpointer data)
 
 
 	cong_document_begin_edit(curs->doc);
-	cong_document_on_cursor_change(curs->doc);
+	cong_document_private_on_cursor_change(curs->doc);
 	cong_document_end_edit(curs->doc);
 	
 	return(TRUE);
 }
 
+#if !SUPPORT_UNDO
 void 
 cong_cursor_data_insert (CongCursor *curs, 
 			 const gchar *text)
 {
 	CongDocument *doc;
-#if 0
+#if 0cursor
 	int len;
 #endif
 
-	g_return_if_fail(curs);
+ 	g_return_if_fail(curs);
 	g_return_if_fail(text);
 
 	doc = curs->doc;
@@ -102,7 +103,7 @@ cong_cursor_data_insert (CongCursor *curs,
 				   &curs->location, 
 				   text);
 }
-
+#endif /* #if !SUPPORT_UNDO */
 
 int cong_cursor_paragraph_insert(CongCursor *curs)
 {
@@ -125,6 +126,49 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 
 	cong_document_begin_edit (doc);
 
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf (_("Split %s tag"), tagname);
+		CongCommand *cmd = cong_command_new (doc, desc);
+		CongLocation new_cursor_loc;
+
+		t = cong_command_add_xml_frag_data_nice_split2 (cmd, 
+								&curs->location);
+		
+		cong_location_set_node_and_byte_offset (&new_cursor_loc, 
+							t->next, 
+							0);
+
+		cong_command_add_cursor_change (cmd,
+						&new_cursor_loc);
+
+		/* Assume that we've just split up a text node below a <para> node below some parent into two
+		   text nodes below that para.
+		   We need to create an new <para> node as a sibling of the other para, and move the second text node
+		   and all the rest of the siblings to below it.
+		*/
+		new_element = cong_node_new_element(xmlns, tagname, doc);
+
+		cong_command_add_node_add_after (cmd, 
+						 new_element, 
+						 t->parent);
+
+		/* Move the second text node and all successive siblings; this should deal with inline tags further in the para: */
+		for (iter = curs->location.node; iter; iter = next) {
+			next = iter->next;
+			cong_command_add_node_set_parent (cmd, 
+							  iter, 
+							  new_element);
+		}
+		
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));		
+	}
+#else
+
+
 	t = cong_location_xml_frag_data_nice_split2(doc, &curs->location);
 	cong_location_set_node_and_byte_offset(&curs->location,t->next,0);
 
@@ -142,6 +186,8 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 		next = iter->next;
 		cong_document_node_set_parent(doc, iter, new_element);
 	}
+
+#endif
 
 	cong_document_end_edit (doc);
 

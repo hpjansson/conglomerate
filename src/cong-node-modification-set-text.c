@@ -150,9 +150,9 @@ undo (CongModification *modification)
 
 	cong_document_begin_edit (doc);
 
-	cong_document_node_set_text (doc,
-				     node,
-				     PRIVATE (node_modification_set_text)->old_content);
+	cong_document_private_node_set_text (doc,
+					     node,
+					     PRIVATE (node_modification_set_text)->old_content);
 	cong_document_end_edit (doc);
 }
 
@@ -165,9 +165,9 @@ redo (CongModification *modification)
 
 	cong_document_begin_edit (doc);
 
-	cong_document_node_set_text (doc,
-				     node,
-				     PRIVATE (node_modification_set_text)->new_content);
+	cong_document_private_node_set_text (doc,
+					     node,
+					     PRIVATE (node_modification_set_text)->new_content);
 	cong_document_end_edit (doc);
 }
 

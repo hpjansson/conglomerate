@@ -579,6 +579,8 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 				const char* buffer,
 				GnomeVFSFileSize size)
 {
+	/* Note: this routine uses the private CongDocument methods which are normally reserved for the undo/redo system.
+	   It is safe here, since we are not interacting with that - the document has only just been created. */
 	g_return_if_fail (doc);
 	g_return_if_fail (root_node);
 	g_return_if_fail (buffer);
@@ -671,11 +673,11 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					
 					
 					if (current_sect) {
-						cong_document_node_set_parent (doc, 
+						cong_document_private_node_set_parent (doc, 
 									       current_list,
 									       current_sect);
 					} else {
-						cong_document_node_set_parent (doc, 
+						cong_document_private_node_set_parent (doc, 
 									       current_list, 
 									       root_node);
 					}
@@ -685,15 +687,15 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 
 				para = cong_node_new_element(NULL, "para", doc);
 					
-				cong_document_node_set_parent (doc, 
+				cong_document_private_node_set_parent (doc, 
 							       listitem,
 							       current_list);
 
-				cong_document_node_set_parent (doc, 							       
+				cong_document_private_node_set_parent (doc, 							       
 							       para,
 							       listitem);
 
-				cong_document_node_set_parent (doc,
+				cong_document_private_node_set_parent (doc,
 							       text_node,
  							       para);
 			} else {
@@ -722,15 +724,15 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					
 					title = cong_node_new_element(NULL, "title", doc);
 					
-					cong_document_node_set_parent (doc, 
+					cong_document_private_node_set_parent (doc, 
 								       current_sect, 
 								       root_node);
 					
-					cong_document_node_set_parent (doc, 
+					cong_document_private_node_set_parent (doc, 
 								       title,
 								       current_sect);
 					
-					cong_document_node_set_parent (doc, 							       
+					cong_document_private_node_set_parent (doc, 							       
 								       text_node,
 								       title);
 				} else {
@@ -741,15 +743,15 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 					para_node = cong_node_new_element(NULL, "para", doc);				
 					
 					if (current_sect) {
-						cong_document_node_set_parent (doc, 
+						cong_document_private_node_set_parent (doc, 
 									       para_node, 
 									       current_sect);
 					} else {
-						cong_document_node_set_parent (doc, 
+						cong_document_private_node_set_parent (doc, 
 									       para_node, 
 									       root_node);
 					}
-					cong_document_node_set_parent (doc, 
+					cong_document_private_node_set_parent (doc, 
 								       text_node, 
 								       para_node);
 				}
@@ -764,7 +766,7 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 		CongNodePtr text_node = cong_node_new_text (buffer, 
 							    doc);
 		
-		cong_document_node_set_parent (doc, 
+		cong_document_private_node_set_parent (doc, 
 					       text_node, 
 					       root_node);
 	}

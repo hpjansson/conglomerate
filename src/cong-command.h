@@ -30,6 +30,15 @@
 
 G_BEGIN_DECLS
 
+/* Favoured API hook for creating commands: */
+CongCommand*
+cong_begin_command (CongDocument *doc,
+		    const gchar *description);
+
+/* Favoured API hook for finishing command creation: */
+void
+cong_end_command (CongCommand *cmd);
+
 #define DEBUG_COMMAND_LIFETIMES 0
 
 #define CONG_COMMAND_TYPE	  (cong_command_get_type ())
@@ -189,6 +198,9 @@ cong_command_add_node_split3 (CongCommand *cmd,
 			      CongNodePtr node, 
 			      int c0, 
 			      int c1);
+void
+cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
+						      CongNodePtr node);
 
 G_END_DECLS
 

@@ -7,6 +7,7 @@
 #include "cong-dispspec.h"
 #include "cong-error-dialog.h"
 #include "cong-util.h"
+#include "cong-command.h"
 
  
 gboolean
@@ -163,6 +164,7 @@ cong_location_get_utf8_pointer(const CongLocation *loc)
 }
 
 
+#if !SUPPORT_UNDO
 CongNodePtr
 cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc)
 {
@@ -176,7 +178,9 @@ cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *l
 					  loc->node, 
 					  loc->byte_offset);
 }
+#endif /* #if !SUPPORT_UNDO */
 
+#if !SUPPORT_UNDO
 void
 cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* insertion)
 {
@@ -211,6 +215,7 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* in
 	loc->byte_offset += byte_length;		
 	CONG_VALIDATE_UTF8(loc->node->content+loc->byte_offset);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 static gboolean
 has_same_namespace (CongNodePtr n1,
@@ -260,6 +265,45 @@ cong_node_is_pure_whitespace_text_node (CongNodePtr node)
 	return FALSE;
 }
 
+#if SUPPORT_UNDO
+static void
+merge_tags (CongCommand *cmd,
+	    CongNodePtr predator,
+	    CongNodePtr victim)
+{
+	CongDocument *doc;
+	CongNodePtr iter, next;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	g_return_if_fail (predator);
+	g_return_if_fail (victim);
+
+	doc = cong_command_get_document (cmd);
+
+	g_message("merging <%s> tags", predator->name);
+
+	cong_document_begin_edit (doc);
+	
+	/* Move all children of victim into predator: */
+	for (iter=victim->children; iter; iter = next) {
+		next = iter->next;
+		
+		cong_command_add_node_set_parent (cmd,
+						  iter,
+						  predator);
+	}
+	
+	/* Merge any text nodes as necessary: */
+	cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+							       predator);
+
+	/* Victim is now empty; remove it and delete it: */
+	cong_command_add_node_recursive_delete (cmd, 
+						victim);
+
+	cong_document_end_edit (doc);
+}
+#else
 static void
 merge_tags (CongDocument *doc,
 	    CongNodePtr predator,
@@ -294,6 +338,7 @@ merge_tags (CongDocument *doc,
 
 	cong_document_end_edit (doc);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 static void
 handle_tag_merging (CongDocument *doc,
@@ -309,7 +354,30 @@ handle_tag_merging (CongDocument *doc,
 				if (cong_node_is_same_tag (node, 
 							   node->next->next)) {
 					if (cong_node_is_pure_whitespace_text_node (node->next)) {
+#if SUPPORT_UNDO
+						CongCommand *cmd = cong_command_new (doc, _("Merge tags"));
+
 						cong_document_begin_edit (doc);
+
+
+						/* Do the merge: */
+						merge_tags (cmd,
+							    node,
+							    node->next->next);
+
+						g_message ("deleting intermediate whitespace");
+
+						/* Delete the intermediate whitespace (NB this pointer should still be valid): */
+						cong_command_add_node_recursive_delete (cmd, 
+											node->next);
+						
+						cong_document_end_edit (doc);
+						
+						cong_document_add_command (doc, cmd);
+						g_object_unref (G_OBJECT (cmd));
+#else
+						cong_document_begin_edit (doc);
+
 
 						/* Do the merge: */
 						merge_tags (doc,
@@ -323,6 +391,7 @@ handle_tag_merging (CongDocument *doc,
 										     node->next);
 						
 						cong_document_end_edit (doc);
+#endif
 					}
 				}				
 			}
@@ -330,16 +399,28 @@ handle_tag_merging (CongDocument *doc,
 			/* Handle the case of two adjacent, identical tags: */
 			if (cong_node_is_same_tag (node, 
 						   node->next)) {
+
+#if SUPPORT_UNDO
+				CongCommand *cmd = cong_command_new (doc, _("Merge tags"));
+				
+				/* Do the merge: */
+				merge_tags (cmd,
+					    node,
+					    node->next);
+
+				cong_document_add_command (doc, cmd);
+				g_object_unref (G_OBJECT (cmd));
+#else
 				/* Do the merge: */
 				merge_tags (doc,
 					    node,
 					    node->next);
+#endif
 			}			
 		}
 	}
 
 }
-		     
 
 void
 cong_location_del_next_char (CongDocument *doc, 
@@ -369,9 +450,20 @@ cong_location_del_next_char (CongDocument *doc,
 			CONG_VALIDATE_UTF8(new_text);
 		}
 
+#if SUPPORT_UNDO
+		{
+			CongCommand *cmd = cong_command_new (doc, _("Delete character"));
+
+			cong_command_add_node_set_text(cmd, loc->node, new_text);
+			
+			cong_document_add_command (doc, cmd);
+			g_object_unref (G_OBJECT (cmd));
+		}
+#else
 		cong_document_begin_edit (doc);
 		cong_document_node_set_text(doc, loc->node, new_text);
 		cong_document_end_edit (doc);
+#endif
 
 		xmlFree(new_text);
 	} else {
@@ -940,4 +1032,37 @@ cong_location_calc_next_text_node (const CongLocation *input_loc,
 #error
 }
 #endif
+
+void
+cong_location_copy_with_ref (CongDocument *doc, 
+			     CongLocation *dst,
+			     const CongLocation *src)
+{
+	CongNodePtr old_node;
+
+	old_node = dst->node;
+
+	cong_location_copy (dst, src);
+
+	if (dst->node) {
+		cong_document_node_ref (doc, dst->node);
+	}
+
+	if (old_node) {
+		cong_document_node_unref (doc, old_node);
+	}
+}
+
+void
+cong_location_nullify_with_ref (CongDocument *doc, 
+				CongLocation *loc)
+{
+	CongNodePtr old_node;
+
+	if (loc->node) {
+		cong_document_node_unref (doc, loc->node);
+	}
+
+	cong_location_nullify (loc);
+}
 

@@ -188,6 +188,7 @@ cong_selection_set_logical_end (CongSelection *selection,
 }
 
 #if 1
+#if !SUPPORT_UNDO
 struct split3_userdata
 {
 	CongNodePtr s;
@@ -285,9 +286,11 @@ cong_document_node_split3 (CongDocument *doc,
 
 	return(d2);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 
 /* Splits a data node in 2 and returns pointer to first one */
+#if !SUPPORT_UNDO
 CongNodePtr
 cong_document_node_split2 (CongDocument *doc, 
 			   CongNodePtr s, 
@@ -336,6 +339,7 @@ cong_document_node_split2 (CongDocument *doc,
 
 	return(s);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 
 /*
@@ -344,6 +348,7 @@ cong_document_node_split2 (CongDocument *doc,
   The selection is extracted (splitting text nodes at the front and rear if necessary), and then reparented below the second
   node, which is inserted into the position formerly occupied by the selection.
  */
+#if !SUPPORT_UNDO
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p)
 {
 	CongLocation loc0, loc1;
@@ -482,7 +487,9 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 		return p->prev;
 	}
 }
+#endif /* #if !SUPPORT_UNDO */
 
+#if !SUPPORT_UNDO
 void cong_selection_delete(CongSelection *selection, CongDocument *doc)
 {
 	cong_document_delete_range (doc, 
@@ -490,6 +497,7 @@ void cong_selection_delete(CongSelection *selection, CongDocument *doc)
 
 	cong_selection_nullify (selection);
 }
+#endif /* #if !SUPPORT_UNDO */
 
 void cong_selection_import(CongSelection *selection, GtkWidget* widget)
 {

@@ -137,7 +137,7 @@ dispose (GObject *object)
 	}
 	if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
 		cong_document_node_unref (doc, 
-					PRIVATE(node_modification_make_orphan)->former_older_sibling);		
+					  PRIVATE(node_modification_make_orphan)->former_older_sibling);		
 		PRIVATE(node_modification_make_orphan)->former_older_sibling = NULL;
 	}
 
@@ -156,17 +156,17 @@ undo (CongModification *modification)
 
 	if (PRIVATE(node_modification_make_orphan)->former_parent) {
 		if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
-			cong_document_node_add_after (doc, 
-						       node, 
-						       PRIVATE(node_modification_make_orphan)->former_older_sibling);
+			cong_document_private_node_add_after (doc, 
+							      node, 
+							      PRIVATE(node_modification_make_orphan)->former_older_sibling);
 		} else {
-			cong_document_node_set_parent (doc, 
-						       node, 
-						       PRIVATE(node_modification_make_orphan)->former_parent);
+			cong_document_private_node_set_parent (doc, 
+							       node, 
+							       PRIVATE(node_modification_make_orphan)->former_parent);
 		}
 	} else {
-		cong_document_node_make_orphan (doc, 
-						node);
+		cong_document_private_node_make_orphan (doc, 
+							node);
 	}
 
 	cong_document_end_edit (doc);
@@ -181,8 +181,8 @@ redo (CongModification *modification)
 
 	cong_document_begin_edit (doc);
 
-	cong_document_node_make_orphan (doc, 
-					node);
+	cong_document_private_node_make_orphan (doc, 
+						node);
 
 	cong_document_end_edit (doc);
 }

@@ -10,15 +10,24 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-util.h"
+#include "cong-command.h"
 
 #define DEBUG_VALID_INSERTIONS 0
 
 char fake_data[] = "";
 
+#if SUPPORT_UNDO
+static gboolean cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node);
+static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
+static gboolean cong_command_add_xml_add_required_content(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
+static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
+#else
 static gboolean xml_add_required_sub_elements(CongDocument *cong_doc, CongNodePtr node);
 static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
+#endif
+
 static void xml_get_or_content_list(xmlElementContentPtr content, GList* list);
 static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, const xmlChar **list, int *len, int max);
 static gint wrap_xml_valid_get_valid_elements(CongDocument *doc, xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max);
@@ -179,6 +188,303 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
  * node passed is now valid under a DTD.  If no DTD exists,
  * this will return FALSE.
  */
+#if SUPPORT_UNDO
+gboolean cong_command_add_xml_add_required_children(CongCommand *cmd, CongNodePtr node) {
+	gboolean success;
+	xmlNodePtr new_node;
+	CongDocument *doc;
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+	g_return_val_if_fail (node, FALSE);
+
+	doc = cong_command_get_document (cmd);
+
+	success = cong_command_add_xml_add_required_sub_elements(cmd, node);
+	/*  if we fail, probably b/c of no DTD, */
+	/*  clean up the inside of the node  */
+	/*  and just toss in a text node */
+	if (! success) {
+		/*  free all children of the node */
+		if (node->children != NULL) {
+			g_assert(0); /* FIXME:  need to signal this to the MVC framework */
+			xmlFreeNodeList(node->children);
+		}
+		
+		/*  set the node to empty */
+		node->children = NULL;
+
+		/*  add a text node */
+		new_node = cong_node_new_text("", doc);
+		cong_command_add_node_set_parent(cmd, new_node, node);
+	}
+
+	return success;
+}
+		
+/**
+ * Helper function to add the required children
+ * to a node.
+ *
+ * Returns whether the node is now valid
+ */
+static gboolean cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node) {
+	xmlDocPtr doc;
+	xmlElementPtr elemDecl = NULL;
+	xmlElementContentPtr content;
+	const xmlChar *name;
+	const xmlChar *prefix = NULL;
+	gboolean extsubset = FALSE;
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+	g_return_val_if_fail (node, FALSE);
+
+	/*  check that node has embedded document */
+	g_return_val_if_fail (node->doc, FALSE);
+
+	/*  set document */
+	doc = node->doc;
+	
+	/*  check that document has DTD */
+	g_return_val_if_fail(doc->intSubset || doc->extSubset, FALSE);
+
+	/*  if this is not an element node, it has no children */
+	if (node->type != XML_ELEMENT_NODE) { return TRUE; }
+
+	/*  ensure element has a name */
+	g_return_val_if_fail(node->name, FALSE);
+
+	/*
+	 * Fetch the declaration for the qualified name.
+	 */
+	if ((node->ns != NULL) && (node->ns->prefix != NULL)) {
+		prefix = node->ns->prefix;
+	}
+	
+	/*  search the internal subset DTD for a description of this elemenet */
+	if (prefix != NULL) {
+		elemDecl = xmlGetDtdQElementDesc(doc->intSubset,
+						 node->name, prefix);
+	}
+	
+	/*  if that didn't work, try the external subset */
+	if ((elemDecl == NULL) && (doc->extSubset != NULL)) {
+	    elemDecl = xmlGetDtdQElementDesc(doc->extSubset,
+		                             node->name, prefix);
+	    if (elemDecl != NULL) {
+		    extsubset = TRUE;
+	    }
+	}
+
+	/*
+	 * If the qualified name didn't work, try the
+	 * non-qualified name.
+	 * Fetch the declaration for the non qualified name
+	 * This is "non-strict" validation should be done on the
+	 * full QName but in that case being flexible makes sense.
+	 */
+	if (elemDecl == NULL) {
+		elemDecl = xmlGetDtdElementDesc(doc->intSubset, node->name);
+	}
+
+	if ((elemDecl == NULL) && (doc->extSubset != NULL)) {
+		elemDecl = xmlGetDtdElementDesc(doc->extSubset, node->name);
+		if (elemDecl != NULL) {
+			extsubset = TRUE;
+		}
+	}
+
+	/*  if it's still null, give up */
+	g_return_val_if_fail(elemDecl, FALSE);
+
+	switch (elemDecl->etype) {
+	case XML_ELEMENT_TYPE_UNDEFINED:
+		return FALSE;
+		
+	case XML_ELEMENT_TYPE_EMPTY:
+		/*  doesn't need any elements */
+		return TRUE;
+	case XML_ELEMENT_TYPE_ANY:
+		/*  free-for-all!  no elements required. */
+		return TRUE;
+	case XML_ELEMENT_TYPE_MIXED:
+		/*  fall through to element case */
+	case XML_ELEMENT_TYPE_ELEMENT:
+		/*  get the content pointer */
+		content = elemDecl->content;
+		
+		g_return_val_if_fail(content, FALSE);
+
+		return cong_command_add_xml_add_required_content(cmd, content, node);
+	default:
+		g_print("Invalid Element type: %d\n", elemDecl->etype);
+		return FALSE;
+	}
+}
+
+/**
+ * Adds required children from an
+ * input content model.
+ *
+ * Returns whether all required content was added
+ */
+static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd, 
+							   xmlElementContentPtr content, 
+							   xmlNodePtr node) 
+{
+	xmlNodePtr new_node;
+	CongDocument *cong_doc;
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+
+	cong_doc = cong_command_get_document (cmd);
+	
+	/*  if we require an occurrence of this node */
+	if ((content->ocur == XML_ELEMENT_CONTENT_ONCE) || (content->ocur == XML_ELEMENT_CONTENT_PLUS)) {
+		switch(content->type) {
+		case XML_ELEMENT_CONTENT_PCDATA: 
+			/*  create a text node, add it */
+			g_print("xml_add_required_content: adding new text node under node %s\n", node->name);
+			new_node = cong_node_new_text("", cong_doc);
+			cong_command_add_node_set_parent(cmd, new_node, node);
+			return TRUE;
+		case XML_ELEMENT_CONTENT_ELEMENT: 
+			/*  ensure the element has a name */
+			g_return_val_if_fail(content->name, FALSE);
+			
+			/*  create the element and add it */
+			g_print("xml_add_required_content: adding new node %s under node %s\n", content->name, node->name);
+			new_node = cong_node_new_element(content->prefix, content->name, cong_doc);
+			cong_command_add_node_set_parent(cmd, new_node, node);
+			
+			/*  recur on the new node to add anything it needs */
+			return cong_command_add_xml_add_required_sub_elements(cmd, new_node);
+
+		case XML_ELEMENT_CONTENT_SEQ: 
+			/*  seq -- add the first of the list, and */
+			/*  recur on rest */
+			if (!cong_command_add_xml_add_required_content(cmd, content->c1, node)) {
+				return FALSE;
+			}
+			
+			return cong_command_add_xml_add_required_content(cmd, content->c2, node);
+		case XML_ELEMENT_CONTENT_OR:
+			return cong_command_add_xml_add_required_content_choice(cmd, content, node);
+		default:
+			g_print("xml_add_required_content: Invalid content type: %d\n", content->type);
+			return FALSE;
+		}
+	}
+	/* for ? and * add only text nodes */
+	else if ((content->ocur == XML_ELEMENT_CONTENT_OPT) || (content->ocur == XML_ELEMENT_CONTENT_MULT)) {
+		/* we want to insert any text nodes */
+		cong_command_add_xml_add_optional_text_nodes(cmd, content, node);
+		return TRUE;
+	}
+	else {
+		g_print("xml_add_required_content: Invalid content occurrence value: %d\n", content->type);
+		return FALSE;
+	}
+}
+
+/**
+ * Allows the user to select between a set
+ * of choices for a required content element.
+ * Adds that choice to the node.
+ *
+ * Returns whether the choice was correctly selected and added
+ */
+static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node) {
+	GString *description;
+	GList *list = NULL;
+	CongNodePtr new_node;
+	const xmlChar *names[256];
+	gchar *element_name;
+	gint i, response, size, length;
+	CongDocument *cong_doc;
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+
+	cong_doc = cong_command_get_document (cmd);
+
+	/*  get potential children for this content element */
+	size = 0;
+	length = xmlValidGetPotentialChildren(content, names, &size, 256);
+	if (length == -1) {
+		return FALSE;
+	}
+
+	/*  turn array into a GList to pass to a dialog */
+	for (i = 0; i < length; i++) {
+		list = g_list_prepend(list, (gpointer)(names[i]));
+	}
+	
+	/*  sort the list in alphabetical order */
+	list = g_list_sort(list, (GCompareFunc) strcmp );
+
+	/*  create description for dialog */
+	description = g_string_new("");
+	g_string_printf(description, _("The element \"%s\" requires a child to be valid. Please choose one of the following child types."), /* FIXME Bz 123253 */
+			node->name);
+	
+	/*  select a dialog element */
+	element_name = string_selection_dialog(_("Required Children Choices"), description->str, list);
+
+	/*  free the string and the list */
+	g_string_free(description, FALSE);
+	g_list_free(list);
+
+	/*  if user didn't respond, return false */
+	g_return_val_if_fail(element_name, FALSE);
+
+	/*  add the element */
+	/* FIXME:  we need to supply the correct namespace; need to provide ds element rather than a mere string... Hack to NULL ns for now :-( */
+	new_node = cong_node_new_element(NULL, element_name, cong_doc);
+	cong_command_add_node_set_parent(cmd, new_node, node);
+	
+	/*  free the returned string */
+	g_free(element_name);
+
+	/*  recur on the new node to add anything it needs */
+	return cong_command_add_xml_add_required_sub_elements(cmd, new_node);
+}
+	
+ 
+/**
+ * Adds an optional text node when it
+ * conforms to the content model, such that
+ * the user may type.
+ *
+ * @return whether a text node has been added
+ */
+static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node) {
+	xmlNodePtr new_node;
+	CongDocument *cong_doc;
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+
+	cong_doc = cong_command_get_document (cmd);
+
+	if (content->type == XML_ELEMENT_CONTENT_PCDATA) {
+		/*  create a text node, add it */
+		g_print("xml_add_optional_text_nodes: adding new text node under node %s\n", node->name);
+		new_node = cong_node_new_text("", cong_doc);
+		cong_command_add_node_set_parent(cmd, new_node, node);
+		return TRUE;
+	}
+	else if (content->type == XML_ELEMENT_CONTENT_OR) {
+		/*  if we add a text node in this or, quit recurring through it */
+		if (cong_command_add_xml_add_optional_text_nodes(cmd, content->c1, node)) {
+			return TRUE;
+		}
+		/*  otherwise, keep search for a text node */
+		else {
+			return cong_command_add_xml_add_optional_text_nodes(cmd, content->c2, node);
+		}
+	}
+
+	return FALSE;
+}
+#else
 gboolean xml_add_required_children(CongDocument *doc, CongNodePtr node) {
 	gboolean success;
 	xmlNodePtr new_node;
@@ -453,7 +759,7 @@ static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementCo
 
 	return FALSE;
 }
-
+#endif
 /**** end of the add_required stuff ****/
 
 /**

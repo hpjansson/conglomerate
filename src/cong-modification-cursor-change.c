@@ -147,7 +147,7 @@ undo (CongModification *modification)
 	cong_location_copy (&cursor->location,
 			    &PRIVATE(modification_cursor_change)->old_location);
 
-	cong_document_on_cursor_change (doc);
+	cong_document_private_on_cursor_change (doc);
 	
 	cong_document_end_edit (doc);
 }
@@ -164,7 +164,7 @@ redo (CongModification *modification)
 	cong_location_copy (&cursor->location,
 			    &PRIVATE(modification_cursor_change)->new_location);
 
-	cong_document_on_cursor_change (doc);
+	cong_document_private_on_cursor_change (doc);
 	
 	cong_document_end_edit (doc);
 }

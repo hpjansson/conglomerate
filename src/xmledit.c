@@ -15,7 +15,7 @@
 #include "cong-command.h"
 
 /* --- Cut/copy/paste --- */
-
+#if !SUPPORT_UNDO
 void selection_cursor_unset(CongDocument *doc)
 {
 	CongCursor *cursor;
@@ -37,6 +37,7 @@ void selection_cursor_unset(CongDocument *doc)
 	cong_document_end_edit (doc);
 
 }
+#endif /* #if !SUPPORT_UNDO */
 
 void cong_document_cut_selection(CongDocument *doc)
 {

@@ -320,6 +320,7 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
 }
 #endif
 
+#if !SUPPORT_UNDO
 void
 cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
 					       CongNodePtr node)
@@ -343,6 +344,7 @@ cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
 		cong_document_end_edit (doc);		
 	}
 }
+#endif /* #if !SUPPORT_UNDO */
 
 /**
    Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
@@ -468,6 +470,7 @@ cong_util_split_uri (const GnomeVFSURI* uri,
 /*
   Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
  */
+#if !SUPPORT_UNDO
 void 
 cong_util_remove_tag (CongDocument *doc, 
 		      CongNodePtr x)
@@ -523,6 +526,7 @@ cong_util_remove_tag (CongDocument *doc,
 	xmlFreeNode(x);
 #endif
 }
+#endif /* #if !SUPPORT_UNDO */
 
 /* Dodgy blend func: */
 static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)

@@ -63,6 +63,37 @@ struct CongCommandDetails
 };
 
 /* Exported function definitions: */
+CongCommand*
+cong_begin_command (CongDocument *doc,
+		    const gchar *description)
+{
+	CongCommand *cmd;
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT(doc), NULL);
+	g_return_val_if_fail (description, NULL);
+
+	cmd = cong_command_new (doc, description);
+
+	cong_document_begin_edit (doc);
+
+	return cmd;
+}
+
+void
+cong_end_command (CongCommand *cmd)
+{
+	CongDocument *doc;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	doc = cong_command_get_document (cmd);
+
+	cong_document_end_edit (doc);
+
+	cong_document_add_command (doc, cmd);
+	g_object_unref (G_OBJECT (cmd));
+}
+
 GNOME_CLASS_BOILERPLATE(CongCommand, 
 			cong_command,
 			GObject,
@@ -1270,4 +1301,33 @@ cong_command_add_remove_tag (CongCommand *cmd,
 	cong_command_add_node_recursive_delete (cmd, node);
 
 	cong_document_end_edit (doc);
+}
+
+void
+cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
+						      CongNodePtr node)
+{
+	CongDocument *doc;
+	CongNodePtr cursor_node;
+
+	g_return_if_fail (IS_CONG_COMMAND (cmd));
+	g_return_if_fail (node);
+
+	doc = cong_command_get_document (cmd);
+
+	cursor_node = cong_node_get_first_text_node_descendant (node);
+	
+	if (cursor_node) {
+		CongLocation new_location;
+
+		cong_document_begin_edit (doc);
+
+		cong_location_set_to_start_of_node (&new_location,
+						    cursor_node);
+
+		cong_command_add_cursor_change (cmd,
+						&new_location);
+
+		cong_document_end_edit (doc);		
+	}
 }

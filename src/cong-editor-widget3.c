@@ -1252,7 +1252,9 @@ key_press_event_handler (GtkWidget *w,
 		break;
 	}
 
+#if !SUPPORT_UNDO
 	cong_document_on_cursor_change(doc);	
+#endif
 
 	cong_document_end_edit (doc);
 

@@ -149,10 +149,10 @@ undo (CongModification *modification)
 	cong_document_begin_edit (doc);
 	
 	if (PRIVATE(node_modification_remove_attribute)->old_value) {
-		cong_document_node_set_attribute (doc,
-						  node,
-						  PRIVATE(node_modification_remove_attribute)->name,
-						  PRIVATE(node_modification_remove_attribute)->old_value);
+		cong_document_private_node_set_attribute (doc,
+							  node,
+							  PRIVATE(node_modification_remove_attribute)->name,
+							  PRIVATE(node_modification_remove_attribute)->old_value);
 	}
 	
 	cong_document_end_edit (doc);
@@ -169,9 +169,9 @@ redo (CongModification *modification)
 	cong_document_begin_edit (doc);
 	
 	if (PRIVATE(node_modification_remove_attribute)->old_value) {
-		cong_document_node_remove_attribute (doc,
-						     node,
-						     PRIVATE(node_modification_remove_attribute)->name);
+		cong_document_private_node_remove_attribute (doc,
+							     node,
+							     PRIVATE(node_modification_remove_attribute)->name);
 	}
 	
 	cong_document_end_edit (doc);

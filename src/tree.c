@@ -11,6 +11,7 @@
 #include "cong-view.h"
 #include "cong-app.h"
 #include "cong-util.h"
+#include "cong-command.h"
 
 /* the popup items have the data "popup_data_item" set on them: */
 
@@ -32,10 +33,30 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
 	
-	
+
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (element));
+		CongCommand *cmd = cong_begin_command (doc, desc);
+		g_free (desc);
+
+		/* New element */
+		new_node = cong_node_new_element_from_dispspec(element, doc);
+		cong_command_add_node_add_after(cmd, new_node, tag);
+
+		/*  add any necessary sub elements it needs */
+		cong_command_add_xml_add_required_children (cmd, 
+							    new_node);
+		
+		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+								      new_node);
+
+		cong_end_command (cmd);		
+	}
+#else	
 	/* New element */
 	new_node = cong_node_new_element_from_dispspec(element, doc);
 	cong_document_node_add_after(doc, new_node, tag);
@@ -45,8 +66,9 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 	cong_util_set_cursor_to_first_text_descendant (doc, 
 						       new_node);
-
+#endif
 	cong_document_end_edit(doc);
+
 
 
 	return(TRUE);
@@ -74,6 +96,27 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf (_("Insert child: %s"), cong_dispspec_element_username (element));
+		CongCommand *cmd = cong_command_new (doc, desc);
+		g_free (desc);
+
+		/* New element */
+		new_node = cong_node_new_element_from_dispspec(element, doc);
+		cong_command_add_node_set_parent (cmd, new_node, tag);
+
+		/*  add any necessary sub elements it needs */
+		cong_command_add_xml_add_required_children (cmd, 
+							    new_node);
+		
+		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+								      new_node);
+
+		cong_document_add_command (doc, cmd);
+		g_object_unref (G_OBJECT (cmd));
+	}
+#else	
 	/* New element */
 	new_node = cong_node_new_element_from_dispspec(element, doc);
 	cong_document_node_set_parent(doc, new_node, tag);
@@ -83,7 +126,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	cong_util_set_cursor_to_first_text_descendant (doc, 
 						       new_node);
-
+#endif
 	cong_document_end_edit(doc);
 
 	return(TRUE);
@@ -133,7 +176,6 @@ tree_cut_update_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
-
 gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
@@ -143,24 +185,34 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	g_assert(doc);
 
 	/* GREP FOR MVC */
-#if 1
 	source = cong_node_generate_source(tag);
+
+	/* FIXME: set clipboard state within command? */
 	cong_app_set_clipboard (cong_app_singleton(),
 				source);
 	g_free(source);
-#else
-	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
-
-	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
-#endif
 
 	cong_document_begin_edit(doc);
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_begin_command (doc, _("Cut"));
+
+		cong_command_for_each_location (cmd, 
+						tree_cut_update_location_callback,
+						tag);
+		
+		cong_command_add_node_recursive_delete(cmd, tag);
+
+		cong_end_command (cmd);
+	}
+#else	
 	cong_document_for_each_location (doc, 
 					 tree_cut_update_location_callback,
 					 tag);
 
 	cong_document_node_recursive_delete(doc, tag);
+#endif
 
 	cong_document_end_edit(doc);
 
