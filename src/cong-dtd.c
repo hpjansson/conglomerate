@@ -25,6 +25,39 @@
 #include "global.h"
 #include "cong-dtd.h"
 
+/* Internal types: */
+struct dtd_callback_marshall
+{
+	CongDtdElementCallback callback;
+	gpointer user_data;
+};
+
+/* Internal function declarations: */
+static void
+element_callback_marshall (void *payload, 
+			   void *data,
+			   xmlChar * name);
+
+/* Exported function definitions: */
+void
+cong_dtd_for_each_element (xmlDtdPtr dtd,
+			   CongDtdElementCallback callback,
+			   gpointer user_data)
+{
+	struct dtd_callback_marshall marshall;
+
+	g_return_if_fail (dtd);
+	g_return_if_fail (callback);
+
+	marshall.callback = callback;
+	marshall.user_data = user_data;
+
+	xmlHashScan (dtd->elements, 
+		     element_callback_marshall, 
+		     &marshall);
+
+}
+
 enum CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
 {
@@ -64,5 +97,20 @@ cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 	}
 
 	return FALSE;
+}
+
+/* Internal function definitions: */
+static void
+element_callback_marshall (void *payload, 
+			   void *data,
+			   xmlChar * name)
+{
+	struct dtd_callback_marshall* marshall = (struct dtd_callback_marshall*)data;
+
+	g_assert (marshall);
+	g_assert (marshall->callback);
+
+	(marshall->callback) ((xmlElementPtr)payload,
+			      marshall->user_data);
 }
 

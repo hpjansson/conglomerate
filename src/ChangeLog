@@ -1,5 +1,9 @@
 2003-09-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dtd.c, cong-dtd.h
+
+	Added easy traversal routine for DTD elements
+	
 	* cong-file-import.c
 
 	Fix for bux #118769 - a new dialog to select importers if more than one is applicable

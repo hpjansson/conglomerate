@@ -27,6 +27,15 @@
 
 G_BEGIN_DECLS
 
+/* Callback for traversing DTD elements: */
+typedef void (*CongDtdElementCallback) (xmlElementPtr dtd_element,
+					gpointer user_data);
+
+void
+cong_dtd_for_each_element (xmlDtdPtr dtd,
+			   CongDtdElementCallback callback,
+			   gpointer user_data);
+
 /**
  * Given a DTD element, make a guess as to an appropriate xds element type.
  * Useful when autogenerating CongDispspec from DTD files
