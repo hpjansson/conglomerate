@@ -371,7 +371,7 @@
 		</element>
 		<element tag="orderedlist" type="structural" color="a0b0c0" icon="cong-numbered-list">
 			<name locale="en">List (ordered)</name>
-			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<property-dialog plugin-id="docbook-orderedlist-properties"/>
 		</element>
 
 		<element tag="listitem" type="plugin" plugin-id="listitem" color="a0b0c0" icon="cong-list-item">

@@ -1,3 +1,9 @@
+2003-09-04  David Malcolm
+
+	* docbook.xds
+
+	Added custom property dialog for <orderedlist>
+
 2003-09-03  David Malcolm
 
 	* Makefile.am
