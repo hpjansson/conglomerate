@@ -117,7 +117,7 @@ GdkPixbuf *cong_util_load_icon(const gchar *icon_basename)
 	g_return_val_if_fail(icon_basename, NULL);
 
 	filename = g_strdup_printf("%s-16.png", icon_basename);
-	full_path = gnome_program_locate_file(the_app.gnome_program,
+	full_path = gnome_program_locate_file(cong_app_singleton()->gnome_program,
 					      GNOME_FILE_DOMAIN_APP_PIXMAP,
 					      filename,
 					      FALSE,
@@ -341,11 +341,11 @@ void insert_element_init()
 {
 	GdkColor gcol;
 
-	the_app.insert_element_gc = gdk_gc_new(cong_gui_get_a_window()->window);
-	gdk_gc_copy(the_app.insert_element_gc, cong_gui_get_a_window()->style->white_gc);
+	cong_app_singleton()->insert_element_gc = gdk_gc_new(cong_gui_get_a_window()->window);
+	gdk_gc_copy(cong_app_singleton()->insert_element_gc, cong_gui_get_a_window()->style->white_gc);
 	col_to_gcol(&gcol, 0x00e0e0e0);
 	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(the_app.insert_element_gc, &gcol);
+	gdk_gc_set_foreground(cong_app_singleton()->insert_element_gc, &gcol);
 }
 
 
@@ -357,13 +357,13 @@ void insert_element_init()
 void fonts_load()
 {
 #if 1
-	  the_app.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
-	  the_app.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
-	  the_app.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 8");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 8");
 #else
-	  the_app.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
-	  the_app.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
-	  the_app.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 6");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
+	  cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 6");
 #endif
 }
 
@@ -384,7 +384,7 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 gboolean main_load_displayspecs(GtkWindow *toplevel_window)
 {
 #if 1
-	gchar*      xds_directory = gnome_program_locate_file(the_app.gnome_program,
+	gchar*      xds_directory = gnome_program_locate_file(cong_app_singleton()->gnome_program,
 							      GNOME_FILE_DOMAIN_APP_DATADIR,
 							      "conglomerate/dispspecs",
 							      FALSE,
@@ -399,10 +399,10 @@ gboolean main_load_displayspecs(GtkWindow *toplevel_window)
 
 	if (xds_directory) {
 		g_message("Loading xds files from \"%s\"\n", xds_directory);
-		the_app.ds_registry = cong_dispspec_registry_new(xds_directory, toplevel_window);
+		cong_app_singleton()->ds_registry = cong_dispspec_registry_new(xds_directory, toplevel_window);
 
 		/* If no xds files were found, perhaps the program hasn't been installed yet (merely built): */
-		if (cong_dispspec_registry_get_num(the_app.ds_registry)==0) {
+		if (cong_dispspec_registry_get_num(cong_app_singleton()->ds_registry)==0) {
 
 			gchar *why_failed = g_strdup_printf(_("Conglomerate could not load any xds files from the directory \"%s\""), xds_directory);
 			GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
@@ -417,11 +417,11 @@ gboolean main_load_displayspecs(GtkWindow *toplevel_window)
 		
 		g_free(xds_directory);
 		
-		if (the_app.ds_registry==NULL) {
+		if (cong_app_singleton()->ds_registry==NULL) {
 			return FALSE;
 		}
 		
-		cong_dispspec_registry_dump(the_app.ds_registry);
+		cong_dispspec_registry_dump(cong_app_singleton()->ds_registry);
 	} else {
 		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
 							  "Conglomerate could not find its registry of document types.",
@@ -442,9 +442,9 @@ void register_plugin(const gchar *id,
 	g_return_if_fail(id);
 	g_return_if_fail(register_callback);
 
-	g_assert(the_app.plugin_manager);
+	g_assert(cong_app_singleton()->plugin_manager);
 
-	cong_plugin_manager_register(the_app.plugin_manager,
+	cong_plugin_manager_register(cong_app_singleton()->plugin_manager,
 				     id,
 				     register_callback, 
 				     configure_callback);
@@ -516,25 +516,21 @@ int main( int   argc,
 	g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL);
 #endif
 
-	the_app.gnome_program = gnome_program_init(PACKAGE_NAME, PACKAGE_VERSION,
-						       LIBGNOMEUI_MODULE,
-						       argc,argv,
-						       GNOME_PARAM_HUMAN_READABLE_NAME,
-						       _("XML Editor"),
-						       GNOME_PARAM_APP_DATADIR, DATADIR,
-						       NULL);
+	cong_app_construct_singleton();
 
-	/* Set up usage of GConf: */
-	the_app.gconf_client = gconf_client_get_default();
-	gconf_client_add_dir(the_app.gconf_client,
-			     "/apps/conglomerate",
-			     GCONF_CLIENT_PRELOAD_NONE,
-			     NULL);
+	/* Set up the GnomeProgram: */
+	cong_app_singleton()->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
+								  LIBGNOMEUI_MODULE,
+								  argc,argv,
+								  GNOME_PARAM_HUMAN_READABLE_NAME,
+								  _("XML Editor"),
+								  GNOME_PARAM_APP_DATADIR, DATADIR,
+								  NULL);
 
 	fonts_load();
 	editor_popup_init(NULL); /* FIXME */
 
-	the_app.tooltips = gtk_tooltips_new();
+	cong_app_singleton()->tooltips = gtk_tooltips_new();
 
 	cong_primary_window_new(NULL);
 	
@@ -551,12 +547,12 @@ int main( int   argc,
 	   Load all the plugins.  We do this after loading the xds files in case some of the plugins want to operate on the registry
 	   of displayspecs
 	 */
-	the_app.plugin_manager = cong_plugin_manager_new();
+	cong_app_singleton()->plugin_manager = cong_plugin_manager_new();
 	main_load_plugins();
 
 	insert_element_init();
 
-	the_app.clipboard = NULL;
+	cong_app_singleton()->clipboard = NULL;
 
 #if 1
 	/* 
@@ -569,7 +565,12 @@ int main( int   argc,
 	}
 #endif
 
+
+	/* The main loop: */
 	gtk_main();
+
+	/* Cleanup: */
+	cong_app_destroy_singleton();
 
 	return(0);
 }

@@ -128,8 +128,8 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-	if (the_app.clipboard) cong_node_recursive_delete(NULL, the_app.clipboard);
-	the_app.clipboard = cong_node_recursive_dup(tag);
+	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
 	cong_node_recursive_delete(doc, tag);
 
 	return(TRUE);
@@ -140,8 +140,8 @@ gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
 	/* GREP FOR MVC */
 
-	if (the_app.clipboard) cong_node_recursive_delete(NULL, the_app.clipboard);
-	the_app.clipboard = cong_node_recursive_dup(tag);
+	if (cong_app_singleton()->clipboard) cong_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
+	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
 
 	return(TRUE);
 }
@@ -159,13 +159,13 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 
 	ds = cong_document_get_dispspec(doc);
 
-	if (!the_app.clipboard) return(TRUE);
+	if (!cong_app_singleton()->clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_app.clipboard), xml_frag_name_nice(the_app.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
 
-	CONG_NODE_SELF_TEST(the_app.clipboard);
+	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
-	new_copy = cong_node_recursive_dup(the_app.clipboard);
+	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
 
 	CONG_NODE_SELF_TEST(new_copy);
 
@@ -186,13 +186,13 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	g_assert(doc);
 
 	ds = cong_document_get_dispspec(doc);
-	if (!the_app.clipboard) return(TRUE);
+	if (!cong_app_singleton()->clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_app.clipboard), xml_frag_name_nice(the_app.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
 
-	CONG_NODE_SELF_TEST(the_app.clipboard);
+	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
-	new_copy = cong_node_recursive_dup(the_app.clipboard);
+	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
 
 	CONG_NODE_SELF_TEST(new_copy);
 
@@ -214,13 +214,13 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 
 	ds = cong_document_get_dispspec(doc);
 
-	if (!the_app.clipboard) return(TRUE);
+	if (!cong_app_singleton()->clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_app.clipboard), xml_frag_name_nice(the_app.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(cong_app_singleton()->clipboard), xml_frag_name_nice(cong_app_singleton()->clipboard))) return(TRUE);
 
-	CONG_NODE_SELF_TEST(the_app.clipboard);
+	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
-	new_copy = cong_node_recursive_dup(the_app.clipboard);
+	new_copy = cong_node_recursive_dup(cong_app_singleton()->clipboard);
 
 	CONG_NODE_SELF_TEST(new_copy);
 

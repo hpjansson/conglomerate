@@ -72,7 +72,7 @@ static GtkMenuItem* make_menu_item(const gchar *label,
 	}
 
 	if (tip) {
-		gtk_tooltips_set_tip(the_app.tooltips,
+		gtk_tooltips_set_tip(cong_app_singleton()->tooltips,
 				     GTK_WIDGET(item),
 				     tip,
 				     tip);
@@ -209,14 +209,14 @@ void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 
 void editor_popup_init(CongDocument *doc)
 {
-	if (the_app.popup) gtk_widget_destroy(the_app.popup);
-	the_app.popup = gtk_menu_new();
+	if (cong_app_singleton()->popup) gtk_widget_destroy(cong_app_singleton()->popup);
+	cong_app_singleton()->popup = gtk_menu_new();
 
-	g_object_set_data(G_OBJECT(the_app.popup),
+	g_object_set_data(G_OBJECT(cong_app_singleton()->popup),
 			  "doc",
 			  doc);
 
-	gtk_menu_set_title(GTK_MENU(the_app.popup), "Editing menu");
+	gtk_menu_set_title(GTK_MENU(cong_app_singleton()->popup), "Editing menu");
 }
 
 static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr node_ptr)
@@ -265,7 +265,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 	dispspec = cong_document_get_dispspec(doc);
 	cursor = cong_document_get_cursor(doc);
 
-	if (the_app.popup) gtk_widget_destroy(the_app.popup);
+	if (cong_app_singleton()->popup) gtk_widget_destroy(cong_app_singleton()->popup);
 	editor_popup_init(doc);
 	
 #ifndef RELEASE
@@ -276,21 +276,21 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_CUT,
 						  NULL); 
-	gtk_menu_append(GTK_MENU(the_app.popup), item);
+	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_cut), doc);
 	gtk_widget_show(item);
 
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY,
 						  NULL); 
-	gtk_menu_append(GTK_MENU(the_app.popup), item);
+	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_copy), doc);
 	gtk_widget_show(item);
 	
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE,
 						  NULL);
-	gtk_menu_append(GTK_MENU(the_app.popup), item);
+	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
@@ -302,12 +302,12 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 		item = gtk_menu_item_new();
 		w0 = gtk_hseparator_new();
 		gtk_container_add(GTK_CONTAINER(item), w0);
-		gtk_menu_append(GTK_MENU(the_app.popup), item);
+		gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 		gtk_widget_set_sensitive(item, 0);
 		gtk_widget_show(w0);
 		gtk_widget_show(item);
 		
-		item = add_item_to_popup(GTK_MENU(the_app.popup), 
+		item = add_item_to_popup(GTK_MENU(cong_app_singleton()->popup), 
 					 make_menu_item(_("Remove span tag"), 
 							NULL, /* FIXME: we ought to have a tip for this */
 							NULL), /* FIXME: we ought to have a icon for this */
@@ -329,7 +329,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 	g_list_free(span_tags_list);
 	
 	
-	add_menu_separator(GTK_MENU(the_app.popup));
+	add_menu_separator(GTK_MENU(cong_app_singleton()->popup));
 
 	/* Build list of dynamic tag insertion tools */
 	/*  build the list of valid inline tags here */
@@ -345,7 +345,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 			item = GTK_WIDGET(make_menu_item_for_dispspec_element(dispspec_element));
 			/* FIXME: perhaps we should composite an "add" icon to the element's icon? */
 
-			gtk_menu_append(GTK_MENU(the_app.popup), item);
+			gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 
 			gtk_signal_connect(GTK_OBJECT(item), "activate",
 					   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), dispspec_element);

@@ -70,7 +70,7 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 
 		/* Construct a list of importers that can handle this mimetype: */
-		cong_plugin_manager_for_each_importer(the_app.plugin_manager, add_importer_to_list, &data);
+		cong_plugin_manager_for_each_importer(cong_app_singleton()->plugin_manager, add_importer_to_list, &data);
 
 		/* OK:  there are three cases:
 		   (i) if no importers can handle this mimetype; then tell the user and give them the option of cancelling or forcing the use of a plugin (with a dialog to choose)

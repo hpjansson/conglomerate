@@ -105,7 +105,7 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 			return;
 		}
 
-		ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, doc);
+		ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, doc);
 
 		if (ds==NULL) {
 			gchar *what_failed;

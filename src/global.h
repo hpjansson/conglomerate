@@ -298,10 +298,6 @@ typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, Con
 
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
-
-/* All the globals go in a CongApp structure: */
-extern struct CongApp the_app;
-
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
 

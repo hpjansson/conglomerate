@@ -35,6 +35,7 @@ conglomerate_SOURCES =      \
   cong-tree-view.h          \
   cong-view.h               \
   fo.h                      \
+  cong-app.c                \
   cong-debug-log-view.c     \
   cong-dialog.c             \
   cong-dispspec.c           \

@@ -1,3 +1,13 @@
+2003-07-11  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c, Makefile.am
+
+	New file
+
+	* cong-app.h, cong-dispspec.c, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-open.c, cong-menus.c, cong-node-properties.c, cong-plugin.c, cong-primary-window.c, cong-span-text-editor.c, global.h, main.c, plugin-docbook.c, popup.c, tree.c, xmledit.c
+
+	Made the CongApp singleton dynamically allocated
+
 2003-07-10  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-tree-view.c

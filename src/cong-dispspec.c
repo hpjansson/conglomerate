@@ -1144,7 +1144,7 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
 
 	/* fonts are currently a property of the app: */
-	return the_app.fonts[role];
+	return cong_app_singleton()->fonts[role];
 
 }
 

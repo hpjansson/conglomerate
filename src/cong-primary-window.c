@@ -97,9 +97,9 @@ GtkWidget* cong_gui_get_a_window(void)
 	CongPrimaryWindow *primary_window;
 
 	/* A window _must_ exist for this to work: */
-	if (the_app.primary_windows) {
+	if (cong_app_singleton()->primary_windows) {
 
-		primary_window = the_app.primary_windows->data;
+		primary_window = cong_app_singleton()->primary_windows->data;
 
 		g_assert(primary_window->window);
 
@@ -328,7 +328,7 @@ void destroy( GtkWidget *widget,
 	      gpointer   data )
 {
 	cong_primary_window_free((CongPrimaryWindow *)data);
-	if (g_list_length(the_app.primary_windows) == 0) {		
+	if (g_list_length(cong_app_singleton()->primary_windows) == 0) {		
 		gtk_main_quit();
 	}
 }
@@ -532,7 +532,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
 	gtk_widget_show(GTK_WIDGET(primary_window->window));
 
-	the_app.primary_windows = g_list_prepend(the_app.primary_windows, primary_window);
+	cong_app_singleton()->primary_windows = g_list_prepend(cong_app_singleton()->primary_windows, primary_window);
 
 	if (doc) {
 		cong_document_set_primary_window(doc, primary_window);	
@@ -553,7 +553,7 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 		g_assert(primary_window->cong_overview_view==NULL);
 	}
 
-	the_app.primary_windows = g_list_remove(the_app.primary_windows, primary_window);	
+	cong_app_singleton()->primary_windows = g_list_remove(cong_app_singleton()->primary_windows, primary_window);	
 
 	g_free(primary_window);
 }

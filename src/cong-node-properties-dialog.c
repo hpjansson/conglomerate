@@ -654,7 +654,7 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 
 			/* Is there a plugin for this type of node? */
 			if (plugin_id) {
-				CongCustomPropertyDialog *dialog_factory = cong_plugin_manager_locate_custom_property_dialog_by_id(the_app.plugin_manager, plugin_id);
+				CongCustomPropertyDialog *dialog_factory = cong_plugin_manager_locate_custom_property_dialog_by_id(cong_app_singleton()->plugin_manager, plugin_id);
 
 				if (dialog_factory) {
 					GtkWidget *dialog = cong_custom_property_dialog_make(dialog_factory, doc, node);

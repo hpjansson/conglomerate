@@ -27,6 +27,9 @@
 
 G_BEGIN_DECLS
 
+typedef struct CongApp CongApp;
+typedef struct CongAppPrivate CongAppPrivate;
+
 struct CongApp
 {
 	GnomeProgram *gnome_program;
@@ -39,8 +42,6 @@ struct CongApp
 
 	GdkGC *insert_element_gc;
 
-	CongNodePtr clipboard;
-
 	CongDispspecRegistry* ds_registry;
 
 	GtkWidget *popup;
@@ -48,7 +49,32 @@ struct CongApp
 	GConfClient* gconf_client;
 
 	GtkTooltips *tooltips;
+
+	CongNodePtr clipboard;
+
+	CongAppPrivate *private;
 };
+
+/* Accessing the singleton; (asserts internally that it has been constructed): */
+CongApp*
+cong_app_singleton(void);
+
+void
+cong_app_construct_singleton(void);
+
+void
+cong_app_destroy_singleton(void);
+
+
+#if 0
+const gchar*
+cong_app_get_clipboard (CongApp *app);
+
+void
+cong_app_set_clipboard (CongApp *app, 
+			const gchar* text);
+#endif
+
 
 
 G_END_DECLS
