@@ -9,8 +9,10 @@ and CVS checkout compile issues
 Common compile issues
 ---------------------
 
-A 2.95 version of GCC fails when building the source.
-Use a more recent compiler.
+If you get 
+  cong-primary-window.c: In function `cong_primary_window_make_gui':
+  cong-primary-window.c:412: error: `gettext' undeclared (first use in this function)
+Then install the 'gettext' package.
 
 Tarbal compile issues
 ---------------------
