@@ -1,3 +1,13 @@
+2003-07-24  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c
+
+	Fixed a memory leak
+
+	* plugin-paragraph-area-paragraph.c, plugin-paragraph-area-paragraph.h, plugin-paragraph-node-element-paragraph.c, plugin-paragraph-node-element-paragraph.h, plugin-paragraph.c, Makefile.am
+
+	New files: plugin paragraph renderer
+	
 2003-07-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.h, cong-editor-widget3.c, cong-plugin.c, cong-plugin.h, plugin-lists.c

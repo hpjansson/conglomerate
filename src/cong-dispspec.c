@@ -275,6 +275,8 @@ GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** 
 
 	*ds = cong_dispspec_new_from_xds_buffer(buffer, size);
 
+	g_free (buffer);
+
 	return vfs_result;	
 }
 
