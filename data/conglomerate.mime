@@ -1,2 +1,6 @@
 text/x-xds
 	ext: xds
+text/x-xsl
+	ext: xsl
+text/x-nrg
+	ext: rng

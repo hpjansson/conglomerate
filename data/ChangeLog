@@ -1,3 +1,9 @@
+2003-12-11  Robert Varga <frozenfingers@xs4all.nl>
+
+	* conglomerate.keys.in, conglomerate.mime
+	
+	Added text/x-rng mime type and application binding.
+
 2003-12-05  Robert Varga <frozenfingers@xs4all.nl>
 
 	* conglomerate.keys.in, coglomerate.mime
