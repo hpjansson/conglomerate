@@ -1,3 +1,9 @@
+2004-02-04  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* teixlite.xds
+
+	Initial version of dispspec for TEI Lite, by Roberto Rosselli Del Turco
+
 2004-02-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* dispspec-template.xds
