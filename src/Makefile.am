@@ -51,6 +51,7 @@ conge_SOURCES =             \
   cong-menus.c              \
   cong-plugin.c             \
   cong-primary-window.c     \
+  cong-progress-checklist.c \
   cong-section-head-editor.c \
   cong-source-view.c        \
   cong-span-text-editor.c   \
