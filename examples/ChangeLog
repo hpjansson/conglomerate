@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm
 
+	* xhtml1-strict.xds
+
+	Make the heading tags structural rather than spans
+
 	* docbook.xds
 
 	Make <programlisting> preserve whitespace

@@ -180,25 +180,25 @@
 		<element tag="div" type="span">
 			<name locale="en">Div</name>
 		</element>
-		<element tag="h1" type="span">
+		<element tag="h1" type="structural">
 			<name locale="en">H1</name>
 		</element>
-		<element tag="h2" type="span">
+		<element tag="h2" type="structural">
 			<name locale="en">H2</name>
 		</element>
-		<element tag="h3" type="span">
+		<element tag="h3" type="structural">
 			<name locale="en">H3</name>
 		</element>
-		<element tag="h4" type="span">
+		<element tag="h4" type="structural">
 			<name locale="en">H4</name>
 		</element>
-		<element tag="h5" type="span">
+		<element tag="h5" type="structural">
 			<name locale="en">H5</name>
 		</element>
-		<element tag="h6" type="span">
+		<element tag="h6" type="structural">
 			<name locale="en">H6</name>
 		</element>
-		<element tag="hr" type="span">
+		<element tag="hr" type="structural">
 			<name locale="en">Horizontal Rule</name>
 		</element>
 		<element tag="p" type="structural">
