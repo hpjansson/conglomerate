@@ -88,12 +88,12 @@ enum
 static void 
 populate_dispspec_tree (CongPreferencesDialogDetails *dialog_details)
 {
-	g_assert (dialog_details);
-
 	GtkTreeView* tree_view;
 	GtkListStore *store;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
+
+	g_assert (dialog_details);
 
 	tree_view = GTK_TREE_VIEW (glade_xml_get_widget (dialog_details->xml, "treeview_dispspecs"));
 
