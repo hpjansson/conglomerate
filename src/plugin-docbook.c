@@ -351,33 +351,22 @@ factory_action_callback_set(CongServiceDocumentFactory *factory, CongNewFileAssi
 						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
-/**
- * text_importer_mime_filter:
- * @importer:
- * @mime_type:
- * @user_data:
- *
- * TODO: Write me
- */
-gboolean 
-text_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+static GtkFileFilter*
+text_importer_filter_factory_callback (CongServiceImporter *importer)
 {
-	g_return_val_if_fail(importer, FALSE);
-	g_return_val_if_fail(mime_type, FALSE);
+	GtkFileFilter *filter;
 
-	if (0==strcmp(mime_type,"text/plain")) {
-		return TRUE;
-	} else if (0==strcmp(mime_type,"text/x-readme")) {
-		return TRUE;
-	} else if (0==strcmp(mime_type,"text/x-install")) {
-		return TRUE;
-	} else if (0==strcmp(mime_type,"text/x-copying")) {
-		return TRUE;
-	} else if (0==strcmp(mime_type,"application/octet-stream")) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
+	g_return_val_if_fail (importer, NULL);
+
+	filter = cong_service_importer_make_basic_filter (importer);
+
+	gtk_file_filter_add_mime_type (filter, "text/plain");
+	gtk_file_filter_add_mime_type (filter, "text/x-readme");
+	gtk_file_filter_add_mime_type (filter, "text/x-install");
+	gtk_file_filter_add_mime_type (filter, "text/x-copying");
+	gtk_file_filter_add_mime_type (filter, "application/octet-stream");
+
+	return filter;
 }
 
 /* Internal stuff for the text importer: */
@@ -1615,7 +1604,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 				      _("Import text as a DocBook article"), 
 				      _("Import a plain text file into the \"DocBook\" format, as an article."),
 				      "docbook-plaintext-import",
-				      text_importer_mime_filter,
+				      text_importer_filter_factory_callback,
 				      text_importer_action_callback,
 				      NULL);
 

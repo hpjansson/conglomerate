@@ -45,25 +45,18 @@ cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
 	return return_val;
 }
 
-/**
- * sgml_importer_mime_filter:
- * @importer:
- * @mime_type:
- * @user_data:
- *
- * TODO: Write me
- */
-gboolean 
-sgml_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+GtkFileFilter*
+sgml_importer_filter_factory_callback (CongServiceImporter *importer)
 {
-	g_return_val_if_fail(importer, FALSE);
-	g_return_val_if_fail(mime_type, FALSE);
+	GtkFileFilter *filter;
 
-	if (0==strcmp(mime_type,"text/sgml")) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
+	g_return_val_if_fail (importer, NULL);
+
+	filter = cong_service_importer_make_basic_filter (importer);
+
+	gtk_file_filter_add_mime_type (filter, "text/sgml");
+
+	return filter;
 }
 
 #if 0
@@ -215,7 +208,7 @@ plugin_sgml_plugin_register(CongPlugin *plugin)
 				      _("Import SGML"), 
 				      _("Import an SGML file, converting to XML."),
 				      "sgml-import",
-				      sgml_importer_mime_filter,
+				      sgml_importer_filter_factory_callback,
 				      sgml_importer_action_callback,
 				      NULL);
 	return TRUE;

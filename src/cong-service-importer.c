@@ -27,7 +27,7 @@
 
 struct CongServiceImporterPrivate
 {
-	CongServiceImporterMimeFilter mime_filter;
+	CongServiceImporterMakeFilterCallback filter_factory_callback;
 	CongServiceImporterActionCallback action_callback;
 	gpointer user_data;
 };
@@ -51,7 +51,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 				 const gchar *name, 
 				 const gchar *description,
 				 const gchar *id,
-				 CongServiceImporterMimeFilter mime_filter,
+				 CongServiceImporterMakeFilterCallback filter_factory_callback,
 				 CongServiceImporterActionCallback action_callback,
 				 gpointer user_data)
 {
@@ -59,7 +59,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 	g_return_val_if_fail (name, NULL);
 	g_return_val_if_fail (description, NULL);
 	g_return_val_if_fail (id, NULL);
-	g_return_val_if_fail (mime_filter, NULL);
+	g_return_val_if_fail (filter_factory_callback, NULL);
 	g_return_val_if_fail (action_callback, NULL);
 
 	cong_service_construct (CONG_SERVICE (importer),
@@ -67,7 +67,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 				description,
 				id);
 		
-	PRIVATE (importer)->mime_filter = mime_filter;
+	PRIVATE (importer)->filter_factory_callback = filter_factory_callback;
 	PRIVATE (importer)->action_callback = action_callback;
 	PRIVATE (importer)->user_data = user_data;
 
@@ -76,24 +76,19 @@ cong_service_importer_construct (CongServiceImporter *importer,
 
 /* Implementation of CongServiceImporter: */
 /**
- * cong_importer_supports_mime_type:
- * @importer:
- * @mime_type:
+ * cong_importer_make_file_filter:
+ * @importer: the importer
  *
- * TODO: Write me
+ * Run this importer's callback to create a GtkFileFilter for the File->Importer dialog
  */
-gboolean 
-cong_importer_supports_mime_type(CongServiceImporter *importer, const gchar *mime_type)
+GtkFileFilter*
+cong_importer_make_file_filter (CongServiceImporter *importer)
 {
-	g_return_val_if_fail (IS_CONG_SERVICE_IMPORTER (importer), FALSE);
-	g_return_val_if_fail (mime_type, FALSE);
+	g_return_val_if_fail (IS_CONG_SERVICE_IMPORTER (importer), NULL);
 
-	g_assert (PRIVATE (importer)->mime_filter);
+	g_assert (PRIVATE (importer)->filter_factory_callback);
 
-	return PRIVATE (importer)->mime_filter (importer, 
-						mime_type, 
-						PRIVATE (importer)->user_data);
-
+	return PRIVATE (importer)->filter_factory_callback (importer);
 }
 
 /**
@@ -106,7 +101,10 @@ cong_importer_supports_mime_type(CongServiceImporter *importer, const gchar *mim
  * TODO: Write me
  */
 void 
-cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
+cong_importer_invoke (CongServiceImporter *importer, 
+		      const gchar *filename, 
+		      const gchar *mime_type, 
+		      GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_IMPORTER (importer));
 	g_return_if_fail (filename);
@@ -118,4 +116,26 @@ cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, const
 						    filename, 
 						    mime_type, 
 						    PRIVATE (importer)->user_data, toplevel_window);
+}
+
+
+/**
+ * cong_importer_make_basic_file_filter:
+ * @importer: the importer
+ *
+ * Utility function for writing implementations of the filter factory callback.
+ * Creates a file filter with the name set to the description text of the importer.
+ */
+GtkFileFilter*
+cong_service_importer_make_basic_filter (CongServiceImporter *importer)
+{
+	GtkFileFilter *filter;
+	
+	g_return_val_if_fail (IS_CONG_SERVICE_IMPORTER (importer), NULL);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter,
+				  cong_service_get_description ( CONG_SERVICE(importer)));
+
+	return filter;
 }

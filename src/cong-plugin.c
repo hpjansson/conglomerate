@@ -1025,8 +1025,8 @@ CongServiceImporter*
 cong_plugin_register_importer (CongPlugin *plugin, 
 			       const gchar *name, 
 			       const gchar *description,
-			       const gchar *service_id,
-			       CongServiceImporterMimeFilter mime_filter,
+			       const gchar *service_id,	
+			       CongServiceImporterMakeFilterCallback filter_factory_callback,
 			       CongServiceImporterActionCallback action_callback,
 			       gpointer user_data)
 {
@@ -1036,14 +1036,14 @@ cong_plugin_register_importer (CongPlugin *plugin,
 	g_return_val_if_fail (name, NULL);
 	g_return_val_if_fail (description, NULL);
 	g_return_val_if_fail (service_id, NULL);
-	g_return_val_if_fail (mime_filter, NULL);
+	g_return_val_if_fail (filter_factory_callback, NULL);
 	g_return_val_if_fail (action_callback, NULL);
 
         importer = cong_service_importer_construct (g_object_new (CONG_SERVICE_IMPORTER_TYPE, NULL),
 						    name,
 						    description,
 						    service_id,
-						    mime_filter,
+						    filter_factory_callback,
 						    action_callback,
 						    user_data);
 

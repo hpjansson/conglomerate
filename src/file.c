@@ -16,12 +16,29 @@
  * 
  * TODO: Write me
  */
+
 gchar*
 cong_get_file_name (const gchar *title, 
 		    const gchar *filename,
 		    GtkWindow *parent_window,
 		    CongFileChooserAction cong_action,
 		    GList *list_of_filters)
+{
+	return cong_get_file_name_with_filter (title, 
+					       filename,
+					       parent_window,
+					       cong_action,
+					       list_of_filters,
+					       NULL);
+}
+
+gchar*
+cong_get_file_name_with_filter (const gchar *title, 
+				const gchar *filename,
+				GtkWindow *parent_window,
+				CongFileChooserAction cong_action,
+				GList *list_of_filters,
+				GtkFileFilter **output_filter)
 {
 	gchar *result = NULL;
 	GtkWidget *dialog;
@@ -57,25 +74,17 @@ cong_get_file_name (const gchar *title,
 		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog),
 					     GTK_FILE_FILTER (iter->data));
 	}
-#if 0
-	GtkFileFilter *filter = gtk_file_filter_new ();
-	gtk_file_filter_set_name (filter, "All Files");
-	gtk_file_filter_add_pattern (filter, "*");
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), filter);
 
-	GtkFileFilter *test_filter = gtk_file_filter_new ();
-	gtk_file_filter_set_name (test_filter, "My Test Filter");
-	gtk_file_filter_add_mime_type (test_filter, "text/xml");
-	gtk_file_filter_add_mime_type (test_filter, "x-directory/normal");
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog), 
-				     test_filter);
-	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), 
-				     test_filter);
-#endif
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
 		result = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-	}
-	
+
+		if (output_filter) {
+			GtkFileFilter *filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (dialog));
+			g_assert (GTK_IS_FILE_FILTER (filter));
+			*output_filter = filter;
+		}
+	}	
+
 	gtk_widget_destroy (dialog);
 	
 	return result;

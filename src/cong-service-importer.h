@@ -40,10 +40,8 @@ CONG_DECLARE_CLASS_END ()
 
 
 /* Function pointers that are registered by plugins: */
-typedef gboolean
-(*CongServiceImporterMimeFilter) (CongServiceImporter *importer, 
-				  const gchar *mime_type, 
-				  gpointer user_data);
+typedef GtkFileFilter*
+(*CongServiceImporterMakeFilterCallback) (CongServiceImporter *importer);
 typedef void 
 (*CongServiceImporterActionCallback) (CongServiceImporter *importer, 
 				      const gchar *uri, 
@@ -56,7 +54,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 				 const gchar *name, 
 				 const gchar *description,
 				 const gchar *id,
-				 CongServiceImporterMimeFilter mime_filter,
+				 CongServiceImporterMakeFilterCallback filter_factory_callback,
 				 CongServiceImporterActionCallback action_callback,
 				 gpointer user_data);
 
@@ -65,13 +63,12 @@ cong_plugin_register_importer (CongPlugin *plugin,
 			       const gchar *name, 
 			       const gchar *description,
 			       const gchar *id,
-			       CongServiceImporterMimeFilter mime_filter,
+			       CongServiceImporterMakeFilterCallback filter_factory_callback,
 			       CongServiceImporterActionCallback action_callback,
 			       gpointer user_data);
 
-gboolean
-cong_importer_supports_mime_type (CongServiceImporter *importer, 
-				  const gchar *mime_type);
+GtkFileFilter*
+cong_importer_make_file_filter (CongServiceImporter *importer);
 
 void 
 cong_importer_invoke (CongServiceImporter *importer, 
@@ -85,6 +82,9 @@ cong_plugin_for_each_importer (CongPlugin *plugin,
 			       (*callback) (CongServiceImporter *importer, 
 					    gpointer user_data), 
 			       gpointer user_data);
+
+GtkFileFilter* 
+cong_service_importer_make_basic_filter (CongServiceImporter *importer);
 
 
 G_END_DECLS

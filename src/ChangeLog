@@ -1,5 +1,8 @@
 2004-06-20  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-file-import.c, cong-file-selection.h, cong-plugin.c, cong-service-importer.c, cong-service-importer.h, file.c, plugin-docbook.c, plugin-dtd.c, plugin-sgml.c:
+
+	Big overhail of File->Import UI, making use of GtkFileFilter (see bug #144713)
 
 	* cong-file-export.c, cong-file-import.c, cong-file-open.c, cong-file-save.c, cong-file-selection.h, file.c, plugin-save-dispspec.c
 

@@ -40,6 +40,14 @@ cong_get_file_name (const gchar *title,
 		    CongFileChooserAction action,
 		    GList *list_of_filters);
 
+gchar*
+cong_get_file_name_with_filter (const gchar *title, 
+				const gchar *filename,
+				GtkWindow *parent_window,
+				CongFileChooserAction action,
+				GList *list_of_filters,
+				GtkFileFilter **output_filter);
+
 GList*
 cong_file_selection_make_xml_filter_list (void);
 

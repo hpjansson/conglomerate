@@ -56,25 +56,18 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 					  gpointer user_data);
 
 /* Plugin hooks: */
-/**
- * dtd_importer_mime_filter:
- * @importer:
- * @mime_type:
- * @user_data:
- *
- * TODO: Write me
- */
-gboolean 
-dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+static GtkFileFilter*
+dtd_importer_filter_factory_callback (CongServiceImporter *importer)
 {
-	g_return_val_if_fail(importer, FALSE);
-	g_return_val_if_fail(mime_type, FALSE);
+	GtkFileFilter *filter;
 
-	if (0==strcmp(mime_type,"text/x-dtd")) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
+	g_return_val_if_fail (importer, NULL);
+
+	filter = cong_service_importer_make_basic_filter (importer);
+
+	gtk_file_filter_add_mime_type (filter, "text/x-dtd");
+
+	return filter;
 }
 
 /**
@@ -221,7 +214,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Convert DTD into a Conglomerate Display Specification"), 
 				      _("Import a DTD file, creating a Conglomerate display specification file."),
 				      "dtd-to-xds-import",
-				      dtd_importer_mime_filter,
+				      dtd_importer_filter_factory_callback,
 				      dtd_to_xds_importer_action_callback,
 				      NULL);
 
@@ -229,7 +222,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Convert DTD into a Relax NG schema"), 
 				      _("Import a DTD file, converting it into a RELAX NG Schema."),
 				      "dtd-to-rng-import",
-				      dtd_importer_mime_filter,
+				      dtd_importer_filter_factory_callback,
 				      dtd_to_rng_importer_action_callback,
 				      NULL);
 
@@ -237,7 +230,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Convert DTD into W3C XML Schema"), 
 				      _("Import a DTD file, converting it into a W3C XML Schema."),
 				      "dtd-to-w3c-xml-schema-import",
-				      dtd_importer_mime_filter,
+				      dtd_importer_filter_factory_callback,
 				      dtd_to_w3c_xml_schema_importer_action_callback,
 				      NULL);
 	
@@ -245,7 +238,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Convert DTD into a Schematron file"), 
 				      _("Import a DTD file, converting it into a Schematron Schema."),
 				      "dtd-to-schematron-import",
-				      dtd_importer_mime_filter,
+				      dtd_importer_filter_factory_callback,
 				      dtd_to_schematron_importer_action_callback,
 				      NULL);
 	
@@ -253,7 +246,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Convert DTD into an Examplotron file"), 
 				      _("Import a DTD file, converting it into an Examplotron Schema."),
 				      "dtd-to-examplotron-import",
-				      dtd_importer_mime_filter,
+				      dtd_importer_filter_factory_callback,
 				      dtd_to_examplotron_importer_action_callback,
 				      NULL);
 	
