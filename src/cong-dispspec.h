@@ -108,6 +108,14 @@ cong_dispspec_get_external_document_model (const CongDispspec *ds,
 GdkPixbuf*
 cong_dispspec_get_icon(const CongDispspec *ds);
 
+void
+cong_dispspec_for_each_typical_prefix (const CongDispspec *ds,
+				       void
+				       (*callback) (const CongDispspec *ds,
+						    const gchar *prefix, /* can be NULL */
+						    gpointer user_data),
+				       gpointer user_data);
+
 /* Getting at elements within a dispspec */
 CongDispspecElement*
 cong_dispspec_lookup_element (const CongDispspec *ds, 

@@ -1,3 +1,9 @@
+2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c, cong-dispspec.h: 
+
+	Added support for <typical-prefix> element
+
 2004-07-16  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-file-properties.c:

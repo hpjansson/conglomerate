@@ -78,6 +78,8 @@ struct CongDispspec
 	gchar *filename_extension;
 	GdkPixbuf *icon;
 
+	GList *list_of_typical_prefix; /* list of gchar* */
+
 	xmlNodePtr template;
 };
 
@@ -444,6 +446,22 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
 			xmlSetProp (element_list, "nsURI", dispspec->ns_uri);
 		}
 
+		/* Typical prefixes: */
+		{
+			GList *iter;
+			for (iter = dispspec->list_of_typical_prefix; iter; iter=iter->next) {
+				const gchar* prefix = (const gchar*)(iter->data);
+				CongNodePtr prefix_node = xmlNewDocNode (xml_doc,
+									 NULL,
+									 "typical-prefix",
+									 NULL);			
+				xmlAddChild (element_list, prefix_node);
+				if (prefix) {
+					xmlSetProp (prefix_node, "prefix", prefix);
+				}
+			}
+		}
+
 		/* The elements: */
 		{
 			GList *iter;
@@ -634,6 +652,34 @@ cong_dispspec_get_icon(const CongDispspec *ds)
 	}
 	return ds->icon;
 }
+
+/**
+ * cong_dispspec_for_each_typical_prefix:
+ * @ds:
+ * @callback: function to be called for each typical prefix used by the namespace of this ds (if any)
+ *
+ * Iterates over all prefixes typically used for the namespace of this dispspec (if any).
+ * Note that NULL is a valid value for the prefix, meaning that using the default namespace is typical.
+ */
+void
+cong_dispspec_for_each_typical_prefix (const CongDispspec *ds,
+				       void
+				       (*callback) (const CongDispspec *ds,
+						    const gchar *prefix, /* can be NULL */
+						    gpointer user_data),
+				       gpointer user_data)
+{
+	GList *iter;
+
+	g_return_if_fail (ds);
+	g_return_if_fail (callback);
+	
+	for (iter = ds->list_of_typical_prefix; iter; iter=iter->next) {
+		(*callback) (ds, (const gchar*)(iter->data), user_data);
+	}
+
+}
+
 
 /* Getting at elements within a dispspec */
 /**
@@ -1111,14 +1157,14 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 		xmlNodePtr xml_dispspec;
 
 		for (xml_dispspec=doc->children; xml_dispspec; xml_dispspec = xml_dispspec->next) {
-			if (0==strcmp(xml_dispspec->name,"dispspec")) {
+			if (cong_node_is_element (xml_dispspec, NULL, "dispspec")) {
 
 				xmlNodePtr cur;
 				
 				DS_DEBUG_MSG1("got dispspec\n");
 
 				for (cur = xml_dispspec->children; cur; cur=cur->next) {
-					if (0==strcmp(cur->name,"element-list")) {
+					if (cong_node_is_element (cur, NULL, "element-list")) {
 						
 						xmlNodePtr xml_element;
 						DS_DEBUG_MSG1("got element-list\n");
@@ -1126,8 +1172,14 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 						ds->ns_uri = cong_node_get_attribute (cur, NULL, "nsURI");
 
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
-							if(xml_element->type==XML_ELEMENT_NODE)
-							{
+							if (cong_node_is_element ( xml_element, NULL, "typical-prefix")) {
+								gchar *attr = cong_node_get_attribute (xml_element, NULL, "prefix");
+
+								ds->list_of_typical_prefix = g_list_append (ds->list_of_typical_prefix,
+													    attr);
+							}
+
+							if (cong_node_is_element ( xml_element, NULL, "element")) {
 								CongDispspecElement* element = cong_dispspec_element_from_xml (ds,
 															       xml_element);
 								
@@ -1135,13 +1187,13 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 							}
 						}
 						
-					} else if (0==strcmp(cur->name,"metadata")) {
+					} else if (cong_node_is_element (cur, NULL, "metadata")) {
 						parse_metadata(ds, doc, cur);
-					} else if  (0==strcmp(cur->name,"serialisation")) {
+					} else if  (cong_node_is_element (cur, NULL, "serialisation")) {
 						parse_serialisation (ds, doc, cur);
-					} else if (0==strcmp(cur->name,"document-models")) {
+					} else if (cong_node_is_element (cur, NULL, "document-models")) {
 						parse_document_models(ds, doc, cur);
-					} else if (0==strcmp(cur->name, "document-template")) {
+					} else if (cong_node_is_element (cur, NULL,  "document-template")) {
 						parse_template(ds, cur);
 					}
 				}
