@@ -7,4 +7,5 @@ Makefile.in
 .deps #a #directory
 ## #other #files
 conglomerate
+conglomerate-dbg
 ##

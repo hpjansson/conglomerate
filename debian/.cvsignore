@@ -4,5 +4,7 @@ conglomerate
 conglomerate.postinst.debhelper
 conglomerate.postrm.debhelper
 conglomerate.substvars
+conglomerate-dbg
+conglomerate-dbg.substvars
 files
 patched
