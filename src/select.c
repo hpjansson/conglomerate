@@ -257,13 +257,13 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 
 	/* --- Processing for multiple nodes --- */
 
-	if (selection->loc0.tt_loc != selection->loc1.tt_loc)
+	if (selection->loc0.node != selection->loc1.node)
 	{
 		CongNodePtr prev_node;
 	
 		/* Selection is valid, now order first/last nodes */
 		
-		for (n0 = selection->loc0.tt_loc; n0 && n0 != selection->loc1.tt_loc; n0 = n0->next) ;
+		for (n0 = selection->loc0.node; n0 && n0 != selection->loc1.node; n0 = n0->next) ;
 		
 		if (!n0)
 		{
@@ -278,17 +278,17 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 
 		/* Split, first */
 
-		if (loc0.char_loc && cong_node_type(loc0.tt_loc) == CONG_NODE_TYPE_TEXT)
+		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
 		{
 			prev_node = cong_location_xml_frag_data_nice_split2(doc, &loc0);
 			g_assert(prev_node);
 
-			loc0.tt_loc = selection->loc0.tt_loc = prev_node->next;
+			loc0.node = selection->loc0.node = prev_node->next;
 		} else {
-			prev_node = loc0.tt_loc;
+			prev_node = loc0.node;
 		}
 		
-		selection->loc0.char_loc = 0;
+		selection->loc0.byte_offset = 0;
 
 		/* prev_node holds the previous node */
 
@@ -297,11 +297,11 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 			cong_document_node_add_after(doc, p, prev_node);
 			CONG_NODE_SELF_TEST(prev_node);
 		} else {
-			cong_document_node_set_parent(doc, p, loc0.tt_loc->parent);
+			cong_document_node_set_parent(doc, p, loc0.node->parent);
 		}
 
 		/* Reparent, first & middle */
-		for (n0 = loc0.tt_loc; n0 != loc1.tt_loc; n0 = n2) {
+		for (n0 = loc0.node; n0 != loc1.node; n0 = n2) {
 			n2 = n0->next;
 
 			CONG_NODE_SELF_TEST(n0);
@@ -315,26 +315,26 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 
 		/* Split, last */
 
-		if (loc1.char_loc && cong_node_type(loc1.tt_loc) == CONG_NODE_TYPE_TEXT)
+		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
 		{
-			loc1.tt_loc = cong_location_xml_frag_data_nice_split2(doc, &loc1);
-			selection->loc1.tt_loc = loc1.tt_loc->next;
+			loc1.node = cong_location_xml_frag_data_nice_split2(doc, &loc1);
+			selection->loc1.node = loc1.node->next;
 		}
 
-		selection->loc1.char_loc = 0;
+		selection->loc1.byte_offset = 0;
 
 		/* Reparent, last */
-		cong_document_node_set_parent(doc, loc1.tt_loc, p);
+		cong_document_node_set_parent(doc, loc1.node, p);
 		
 		return(prev_node);
 	}
 
-	/* --- Processing for single node (loc0.tt_loc == loc1.tt_loc) --- */
+	/* --- Processing for single node (loc0.node == loc1.node) --- */
 
 	else
 	{
 		/* Sort out the ordering: */
-		if (selection->loc0.char_loc < selection->loc1.char_loc)
+		if (selection->loc0.byte_offset < selection->loc1.byte_offset)
 		{
 			cong_location_copy(&loc0,&selection->loc0);
 			cong_location_copy(&loc1,&selection->loc1);
@@ -345,26 +345,26 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 			cong_location_copy(&loc1,&selection->loc0);
 		}
 
-		if (cong_node_type(loc0.tt_loc) == CONG_NODE_TYPE_TEXT)
+		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
 		{
-			if (loc0.char_loc == loc1.char_loc) return(0); /* The end is the beginning is the end */
+			if (loc0.byte_offset == loc1.byte_offset) return(0); /* The end is the beginning is the end */
 			
-			loc0.tt_loc = loc1.tt_loc = xml_frag_data_nice_split3(doc, loc0.tt_loc, loc0.char_loc, loc1.char_loc);
-			selection->loc0.tt_loc = loc0.tt_loc;
-			selection->loc1.tt_loc = loc0.tt_loc->next;
+			loc0.node = loc1.node = xml_frag_data_nice_split3(doc, loc0.node, loc0.byte_offset, loc1.byte_offset);
+			selection->loc0.node = loc0.node;
+			selection->loc1.node = loc0.node->next;
 		}
 
-		selection->loc0.char_loc = 0;
-		selection->loc1.char_loc = 0;
+		selection->loc0.byte_offset = 0;
+		selection->loc1.byte_offset = 0;
 		
 		/* Position p where the selection was: */
-		if (loc0.tt_loc->prev) {
-			cong_document_node_add_after(doc, p, loc0.tt_loc->prev);
+		if (loc0.node->prev) {
+			cong_document_node_add_after(doc, p, loc0.node->prev);
 		} else {
-			cong_document_node_set_parent(doc, p, loc0.tt_loc->parent);
+			cong_document_node_set_parent(doc, p, loc0.node->parent);
 		}
 		/* Move the selection below p: */
-		cong_document_node_set_parent(doc, selection->loc0.tt_loc, p);
+		cong_document_node_set_parent(doc, selection->loc0.node, p);
 
 		/* Return node before p's new position (I think): */
 		return p->prev;

@@ -434,8 +434,8 @@ static gboolean get_location_at_stripped_byte_offset(CongSpanTextEditor *span_te
 	text_span = get_text_span_at_stripped_byte_offset(span_text_editor, byte_offset);
 	
 	if (text_span) {
-		location->tt_loc = text_span->text_node;
-		location->char_loc = text_span->original_first_byte_offset + (byte_offset - text_span->stripped_first_byte_offset);
+		location->node = text_span->text_node;
+		location->byte_offset = text_span->original_first_byte_offset + (byte_offset - text_span->stripped_first_byte_offset);
 		return TRUE;
 	}
 
@@ -456,8 +456,8 @@ static gboolean get_stripped_byte_offset_at_location(CongSpanTextEditor *span_te
 		CongTextSpan *text_span = iter->data;
 		g_assert(text_span);
 		
-		if (text_span->text_node==location->tt_loc) {
-			if (location->char_loc < text_span->original_first_byte_offset) {
+		if (text_span->text_node==location->node) {
+			if (location->byte_offset < text_span->original_first_byte_offset) {
 				/* Then the location is between the last span and this span; it's probably a whitespace
 				   character that isn't directly represented within the plaintext cache.
 				   The trailing character of the last span should be whitespace, so it's a good candidate for the return
@@ -470,9 +470,9 @@ static gboolean get_stripped_byte_offset_at_location(CongSpanTextEditor *span_te
 				return TRUE;
 			}
 
-			if (location->char_loc < text_span->original_first_byte_offset + text_span->byte_count) {
+			if (location->byte_offset < text_span->original_first_byte_offset + text_span->byte_count) {
 				/* Found the text span: */
-				*byte_offset = text_span->stripped_first_byte_offset + (location->char_loc - text_span->original_first_byte_offset);
+				*byte_offset = text_span->stripped_first_byte_offset + (location->byte_offset - text_span->original_first_byte_offset);
 				return TRUE;
 			}
 		}
@@ -754,8 +754,8 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 	int y = element_editor->window_area.y;
 
 	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1)) {
-		g_assert(cong_node_type(selection->loc0.tt_loc)==CONG_NODE_TYPE_TEXT);
-		g_assert(cong_node_type(selection->loc1.tt_loc)==CONG_NODE_TYPE_TEXT);
+		g_assert(cong_node_type(selection->loc0.node)==CONG_NODE_TYPE_TEXT);
+		g_assert(cong_node_type(selection->loc1.node)==CONG_NODE_TYPE_TEXT);
 
 		got_selection_start_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc0, &selection_start_byte_offset);
 		got_selection_end_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc1, &selection_end_byte_offset);

@@ -225,7 +225,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 #else
 	/* Dodgy hack for now: */
 #if 1
-	tagname = cong_node_name(curs->location.tt_loc->parent);
+	tagname = cong_node_name(curs->location.node->parent);
 #else
 	tagname = "para";
 #endif
@@ -251,7 +251,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	new_element = cong_node_new_element(tagname);
 
 	cong_document_node_add_after(doc, new_element, t->parent);
-	cong_document_node_set_parent(doc, curs->location.tt_loc, new_element);
+	cong_document_node_set_parent(doc, curs->location.node, new_element);
 
 	/* FIXME:  
 	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
@@ -276,10 +276,23 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 	
-	n = input_loc->tt_loc;
-	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && input_loc->char_loc) { 
-		cong_location_set(output_loc, input_loc->tt_loc, input_loc->char_loc-1);
-		return TRUE; 
+	n = input_loc->node;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && input_loc->byte_offset) { 
+
+		gchar *this_char;
+		gchar *prev_char;
+
+		g_assert(input_loc->node);
+		g_assert(input_loc->node->content);
+		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+
+		this_char = input_loc->node->content+input_loc->byte_offset;
+		prev_char = g_utf8_find_prev_char(input_loc->node->content, this_char);
+		g_assert(prev_char);
+
+		cong_location_set(output_loc,input_loc->node, prev_char - (gchar*)input_loc->node->content);
+
+		return TRUE;
 	}
 
 	do
@@ -349,11 +362,23 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 	g_return_val_if_fail(output_loc, FALSE);
 	
 
-	n = input_loc->tt_loc;
-	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && cong_location_get_char(input_loc)!='\0')
+	n = input_loc->node;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && cong_location_get_unichar(input_loc))
 	{ 
-		cong_location_set(output_loc,input_loc->tt_loc, input_loc->char_loc+1); 
-		return; 
+		gchar *this_char;
+		gchar *next_char;
+
+		g_assert(input_loc->node);
+		g_assert(input_loc->node->content);
+		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+
+		this_char = input_loc->node->content+input_loc->byte_offset;
+		next_char = g_utf8_find_next_char(this_char, NULL);
+		g_assert(next_char);
+
+		cong_location_set(output_loc,input_loc->node, next_char - (gchar*)input_loc->node->content);
+
+		return TRUE; 
 	}
 
 	do

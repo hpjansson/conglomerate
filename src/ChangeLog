@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-04-02 David Malcolm
+
+	* cong-editor-widget.c, cong-location.c, cong-span-text-editor.c, cursor.c, global.h, popup.c, select.c, xmldata.c, xmledit.c
+
+	CongLocation and UTF-8 cleanup
+	
 2003-04-01 David Malcolm
 
 	* cong-span-text-editor.c, cursor.c, global.h

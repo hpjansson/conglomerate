@@ -134,6 +134,11 @@ void cong_node_self_test(CongNodePtr node)
 
 	g_return_if_fail(node);
 
+
+	if (node->content) {
+		g_assert(g_utf8_validate(node->content,-1,NULL));
+	}
+
 	if (node->prev) {
 		g_assert(node->prev->next==node);
 		g_assert(node->prev->parent == node->parent);
@@ -494,7 +499,7 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 	xmlNodeSetContent(node, new_content);
 }
 
-const char *xml_frag_data_nice(CongNodePtr x)
+const gchar *xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;
 	
@@ -507,7 +512,7 @@ const char *xml_frag_data_nice(CongNodePtr x)
 }
 
 
-const char *xml_frag_name_nice(CongNodePtr x)
+const gchar *xml_frag_name_nice(CongNodePtr x)
 {
 	const char *s;
 	

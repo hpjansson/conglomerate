@@ -40,6 +40,12 @@ enum
 #include <libgnomeprint/gnome-print-master.h>
 #endif
 
+#if 1
+#define CONG_VALIDATE_UTF8(str) (g_assert(g_utf8_validate((str), -1, NULL)))
+#else
+#define CONG_VALIDATE_UTF8(str) ((void)0)
+#endif
+
 enum CongNodeType
 {
 	CONG_NODE_TYPE_UNKNOWN,
@@ -141,16 +147,17 @@ void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
 
 /**
-   Struct representing a location within a document, with both a node ptr and a character offset into the text.
+   Struct representing a location within a document, with both a node ptr and a byte offset into the text.
+   The text is stored as UTF-8, and the offset is a byte offset, not a character offset.
  */
 typedef struct _CongLocation
 {
-	CongNodePtr tt_loc;
-	int char_loc;
+	CongNodePtr node;
+	int byte_offset; /* byte offset, not a character offset */
 } CongLocation;
 
 void
-cong_location_set(CongLocation *loc, CongNodePtr tt, int offset);
+cong_location_set(CongLocation *loc, CongNodePtr node, int byte_offset);
 
 void
 cong_location_nullify(CongLocation *loc);
@@ -164,14 +171,18 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
 enum CongNodeType
 cong_location_node_type(const CongLocation *loc);
 
-char
-cong_location_get_char(const CongLocation *loc);
+gunichar
+cong_location_get_unichar(const CongLocation *loc);
+
+gchar*
+cong_location_get_utf8_pointer(const CongLocation *loc);
 
 CongNodePtr
 cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc);
 
+/* "insertion" must be a UTF-8 string */
 void
-cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s);
+cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* insertion);
 
 void
 cong_location_del_next_char(CongDocument *doc, const CongLocation *loc);

@@ -366,10 +366,10 @@ static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpoint
 
 	CONG_EDITOR_WIDGET_DEBUG_MSG1("key_press_event_handler");
 
-	g_return_val_if_fail(cursor->location.tt_loc, FALSE);
+	g_return_val_if_fail(cursor->location.node, FALSE);
 
 	/* Get element for cursor location; get it to handle the message: */
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget, cursor->location.tt_loc);
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget, cursor->location.node);
 	g_assert(element_editor);
 
 	cong_element_editor_on_key_press(element_editor, event);

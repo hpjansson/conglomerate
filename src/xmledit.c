@@ -2375,12 +2375,12 @@ void cong_document_paste(CongDocument *doc, GtkWidget *widget)
 	
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
 	{
-		if (!curs->location.char_loc)
+		if (!curs->location.byte_offset)
 		{
 			t0 = cong_location_xml_frag_prev(&curs->location);
 			t1 = cong_location_node(&curs->location);
 		}
-		else if (!cong_location_get_char(&curs->location))
+		else if (!cong_location_get_unichar(&curs->location))
 		{
 			t0 = cong_location_node(&curs->location);
 			t1 = cong_location_xml_frag_next(&curs->location);
@@ -2390,10 +2390,12 @@ void cong_document_paste(CongDocument *doc, GtkWidget *widget)
 			/* Split data node */
 			cong_location_xml_frag_data_nice_split2(doc, &curs->location);
 
-			curs->location.char_loc = 0;
+			curs->location.byte_offset = 0;
 			t0 = cong_location_node(&curs->location);
 			t1 = cong_location_xml_frag_next(&curs->location);
-			if (cong_location_xml_frag_next(&curs->location)) curs->location.tt_loc = cong_location_xml_frag_next(&curs->location);
+			if (cong_location_xml_frag_next(&curs->location)) {
+				curs->location.node = cong_location_xml_frag_next(&curs->location);
+			}
 		}
 	}
 	else t0 = cong_location_node(&curs->location);

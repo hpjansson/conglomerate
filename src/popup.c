@@ -235,7 +235,7 @@ void editor_popup_build(CongDocument *doc)
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	span_tags_list = xml_all_span_elements(dispspec, cursor->location.tt_loc);
+	span_tags_list = xml_all_span_elements(dispspec, cursor->location.node);
 
 	if (span_tags_list != NULL)
 	{
