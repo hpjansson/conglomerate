@@ -13,6 +13,12 @@
 #include "global.h"
 #include "cong-dispspec.h"
 
+#include <stdio.h>
+#include <glib.h>
+#include <libxml/parser.h>
+#include "cong-node.h"
+
+
 #define SUPPORT_OLD_LOADERS 0
 
 #if 0
@@ -318,63 +324,6 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 	}
 }
 	
-static void recurse_doc(CongDispspec *ds, xmlNodePtr node);
- 
-/*
-  A way of automatically generating a dispspec from a loaded xml document.
-
-  Currently it merely creates a structural entry for each unique tag found, with a random colour
- */
-CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc)
-{
-	CongDispspec* ds;
-	xmlNodePtr node;
-
-	ds = g_new0(CongDispspec,1);
-
-	ds->tree = g_tree_new(tree_compare_func);
-
-	for (node = doc->children; node; node=node->next) {
-		recurse_doc(ds, node);
-	}
-
-	return ds;	
-}
-
-static void recurse_doc(CongDispspec *ds, xmlNodePtr node)
-{
-	switch (node->type) {
-	case XML_ELEMENT_NODE:
-		{
-			/* Look for this tag: */
-			if (NULL==cong_dispspec_lookup_element(ds, node->name)) {
-
-				/* Tag not found, add it to the dispspec as a strucutral element: */
-				CongDispspecElement* element;
-
-				DS_DEBUG_MSG2("Adding <%s> to dispspec\n",node->name);
-
-				element = cong_dispspec_element_new(node->name, CONG_ELEMENT_TYPE_STRUCTURAL);
-				cong_dispspec_add_element(ds, element);
-			}
-			
-			/* Recursively process children */
-			if ((node->children != NULL) && (node->type != XML_ENTITY_REF_NODE)) {
-				xmlNodePtr child = node->children;
-				while (child != NULL) {
-					recurse_doc(ds, child);
-					child = child->next;
-				}
-			}
-		}
-		break;
-		
-	default:
-		break;
-	};
-}
-
-
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 {
 	g_return_if_fail(ds);
@@ -1081,3 +1030,234 @@ cong_dispspec_element_new(const char* tagname, enum CongElementType type)
 	return element;
 }
 
+
+/* ######################### Dispspec from xml ########################### */
+
+
+static int
+can_contain_pcdata (xmlElementContentPtr content)
+{
+
+  if (content)
+    {
+      switch (content->type)
+	{
+	case XML_ELEMENT_CONTENT_PCDATA:
+	  return 1;
+	}
+
+      return can_contain_pcdata (content->c1)
+	|| can_contain_pcdata (content->c2);
+    }
+  else
+    {
+      return 0;
+    }
+}
+
+static void
+handle_elements_from_dtd (void *payload, void *ds, xmlChar * name)
+{
+	xmlElementPtr element;
+	CongDispspec *dispspec;
+
+	dispspec = (CongDispspec *) ds;
+	element = (xmlElementPtr) payload;
+
+	g_assert (element);
+
+	if (!element->content || can_contain_pcdata (element->content))
+	{
+		CongDispspecElement *ds_element =
+			cong_dispspec_element_new (name,
+				CONG_ELEMENT_TYPE_SPAN);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+	else
+	{
+		CongDispspecElement *ds_element =
+			cong_dispspec_element_new (name,
+				CONG_ELEMENT_TYPE_STRUCTURAL);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+
+}
+
+static gboolean
+contains_text (xmlChar * string)
+{
+  int i;
+  for (i = 0; i < strlen (string); i++)
+    {
+      if (string[i] != ' ' && string[i] != '\n' && string[i] != '\t'
+	  && string[i] != '\r')
+	{
+	  return TRUE;
+	}
+    }
+  return FALSE;
+}
+
+static void
+promote_element (CongDispspec * dispspec, CongDispspecElement * element,
+		 xmlNodePtr node)
+{
+
+	if(!strcmp(element->tagname, xmlDocGetRootElement(node->doc)->name))
+	{
+		return;
+	}
+
+	switch (cong_dispspec_type (dispspec, node->parent->name))
+	{
+		case CONG_ELEMENT_TYPE_SPAN:
+		{
+			if (strstr (xmlNodeGetContent (node), "\n"))
+			{
+				if (contains_text (xmlNodeGetContent (node)))
+				{
+					CongDispspecElement *ds_element =
+					cong_dispspec_element_new (node->parent->name,
+					CONG_ELEMENT_TYPE_PARAGRAPH);
+					g_assert (ds_element);
+					cong_dispspec_add_element (dispspec, ds_element);
+				}
+				else
+				{
+					CongDispspecElement *ds_element =
+					cong_dispspec_element_new (node->parent->name,
+					CONG_ELEMENT_TYPE_STRUCTURAL);
+					g_assert (ds_element);
+					cong_dispspec_add_element (dispspec, ds_element);
+				}
+			}
+			break;
+		}
+		case CONG_ELEMENT_TYPE_STRUCTURAL:
+		{
+			if (contains_text (xmlNodeGetContent (node)))
+			{
+				CongDispspecElement *ds_element =
+				cong_dispspec_element_new (node->parent->name,
+				CONG_ELEMENT_TYPE_PARAGRAPH);
+				g_assert (ds_element);
+				cong_dispspec_add_element (dispspec, ds_element);
+			}
+			break;
+		}
+	}
+}
+
+static void
+handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
+{
+  CongDispspecElement *element;
+  g_assert (dispspec);
+  g_assert (dispspec->tree);
+
+  if (cur)
+    {
+      if (xmlNodeIsText (cur))
+	{
+	  element =
+	    cong_dispspec_lookup_element (dispspec, cur->parent->name);
+	  if (element)
+	    {
+	      promote_element (dispspec, element, cur);
+	    }
+	  else if (contains_text (xmlNodeGetContent (cur)))
+	    {
+	      if (strstr (xmlNodeGetContent (cur), "\n"))
+		{
+		  CongDispspecElement *ds_element =
+		    cong_dispspec_element_new (cur->parent->name,
+					       CONG_ELEMENT_TYPE_PARAGRAPH);
+		  g_assert (ds_element);
+		  cong_dispspec_add_element (dispspec, ds_element);
+		}
+	      else
+		{
+		  CongDispspecElement *ds_element =
+		    cong_dispspec_element_new (cur->parent->name,
+					       CONG_ELEMENT_TYPE_SPAN);
+		  g_assert (ds_element);
+		  cong_dispspec_add_element (dispspec, ds_element);
+		}
+	    }
+	  else
+	    {
+	      CongDispspecElement *ds_element =
+		cong_dispspec_element_new (cur->parent->name,
+					   CONG_ELEMENT_TYPE_STRUCTURAL);
+	      g_assert (ds_element);
+	      cong_dispspec_add_element (dispspec, ds_element);
+	    }
+	}
+    }
+
+  cur = cur->xmlChildrenNode;
+
+  while (cur != NULL)
+    {
+      handle_elements_from_xml (dispspec, cur);
+      cur = cur->next;
+    }
+  return;
+}
+
+static void
+xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
+{
+	if (doc)
+	{
+		CongDispspecElement *ds_element =
+			cong_dispspec_element_new (
+				xmlDocGetRootElement(doc)->name,
+				CONG_ELEMENT_TYPE_STRUCTURAL);
+		g_assert (ds_element);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+
+	if (dtd)
+	{
+		xmlHashScan (dtd->elements, handle_elements_from_dtd, dispspec);
+	}
+
+	if (doc)
+	{
+		dispspec->name = doc->URL;
+		handle_elements_from_xml (dispspec, xmlDocGetRootElement (doc));
+	}
+}
+
+static xmlDtdPtr
+load_dtd (xmlDocPtr doc)
+{
+	if (doc->intSubset)
+	{
+		return xmlParseDTD (doc->intSubset->SystemID, doc->intSubset->SystemID);
+	}
+	else
+	{
+		if (doc->extSubset)
+		{
+			return xmlParseDTD (doc->extSubset->SystemID,
+				doc->extSubset->SystemID);
+		}
+	}
+	return NULL;
+}
+
+
+CongDispspec *
+cong_dispspec_new_from_xml_file (xmlDocPtr doc)
+{
+	CongDispspec *dispspec;
+
+	dispspec = g_new0 (CongDispspec, 1);
+	dispspec->tree = g_tree_new (tree_compare_func);
+
+	xml_to_dispspec (dispspec, doc, load_dtd (doc));
+
+	return dispspec;
+}

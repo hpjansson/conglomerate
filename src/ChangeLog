@@ -1,3 +1,11 @@
+2003-06-25 Jeff Martin <jeff@custommonkey.org>
+	
+	* cong-dispspec.c
+
+	Re-implemented cong_dispspec_new_from_xml_file to generate a dispspec
+	from a dtd if one exists. Attempt to guess element types based on
+	the content of existing xml nodes.
+
 2003-06-24 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am, main.c
