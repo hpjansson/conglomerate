@@ -206,7 +206,7 @@ void gui_window_main_make()
 	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", accel);
 	gtk_item_factory_create_items(item_factory, sizeof(menu_items) / sizeof(menu_items[0]),
 																menu_items, NULL);
-	gtk_accel_group_attach(accel, GTK_OBJECT(window));
+	gtk_window_add_accel_group(GTK_WINDOW(window), accel);
 
 	menus = gtk_item_factory_get_widget(item_factory, "<main>");
 	gtk_box_pack_start(GTK_BOX(w2), menus, TRUE, TRUE, 0);
@@ -218,10 +218,8 @@ void gui_window_main_make()
 	gtk_frame_set_shadow_type(GTK_FRAME(w3), GTK_SHADOW_OUT);
 	gtk_box_pack_start(GTK_BOX(w2), w3, FALSE, TRUE, 0);
 	gtk_widget_show(w3);
-	
-	toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_ICONS);
-	gtk_toolbar_set_space_size(GTK_TOOLBAR(toolbar), 16);
-	gtk_toolbar_set_space_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_SPACE_LINE);
+
+	toolbar = gtk_toolbar_new();
 	gtk_container_add(GTK_CONTAINER(w3), toolbar);
 	gtk_widget_show(toolbar);
 
