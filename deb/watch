@@ -1,9 +1,0 @@
-# watch file,  `man uscan` for more information
-version=2
- 
-# the URLs below where found after following
-#  http://sourceforge.net/project/showfiles.php?group_id=82766
-http://heanet.dl.sourceforge.net/sourceforge/conglomerate/conglomerate-(.*)\.tar\.gz
-#previous#http://belnet.dl.sourceforge.net/sourceforge/conglomerate/conglomerate-(.*)\.tar\.gz
-
-# end of file

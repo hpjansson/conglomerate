@@ -1,7 +1,0 @@
-?package(conglomerate):\
-  needs=X11\
-  section=Apps/Editors\
-  title="Conglomerate XML editor"\
-  icon="/usr/share/pixmaps/conglomerate_icon.xpm"\
-  command="/usr/bin/conglomerate"
-
