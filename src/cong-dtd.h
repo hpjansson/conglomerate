@@ -36,6 +36,17 @@ cong_dtd_for_each_element (xmlDtdPtr dtd,
 			   CongDtdElementCallback callback,
 			   gpointer user_data);
 
+/* Callback for traversing DTD attributes: */
+typedef void (*CongDtdAttributeCallback) (xmlElementPtr dtd_element,
+					  xmlAttributePtr attr,
+					  gpointer user_data);
+					  
+
+void 
+cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
+			     CongDtdAttributeCallback callback,
+			     gpointer user_data);
+
 /**
  * Given a DTD element, make a guess as to an appropriate xds element type.
  * Useful when autogenerating CongDispspec from DTD files

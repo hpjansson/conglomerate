@@ -58,6 +58,24 @@ cong_dtd_for_each_element (xmlDtdPtr dtd,
 
 }
 
+void 
+cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
+			     CongDtdAttributeCallback callback,
+			     gpointer user_data)
+{
+	xmlAttributePtr attr;
+
+	g_return_if_fail (dtd_element);
+	g_return_if_fail (callback);
+
+	for (attr=dtd_element->attributes; attr; attr=attr->nexth) {
+		(*callback) (dtd_element,
+			     attr,
+			     user_data);
+	}
+}
+
+
 enum CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
 {
