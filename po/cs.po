@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-19 10:40+0200\n"
-"PO-Revision-Date: 2004-10-19 14:57+0200\n"
+"POT-Creation-Date: 2004-10-21 10:40+0200\n"
+"PO-Revision-Date: 2004-10-21 16:47+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1446
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
 #: src/cong-primary-window.c:547 src/cong-primary-window.c:732
 #: src/cong-primary-window.c:734 src/cong-primary-window.c:740
 msgid "Conglomerate XML Editor"
@@ -66,7 +66,7 @@ msgstr "Specifikace zobrazování Conglomerate"
 
 #: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
 #: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
-#: src/cong-edit-preferences.c:271 src/cong-file-export.c:341
+#: src/cong-edit-preferences.c:271 src/cong-file-export.c:339
 #: src/cong-file-new.c:363 src/cong-file-print.c:250
 #: src/cong-parser-error.c:320
 msgid "Description"
@@ -105,13 +105,13 @@ msgstr "Seznam elementů XML"
 msgid "List of file types for this type of document"
 msgstr "Seznam typů souborů pro tento typ dokumentu"
 
-#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:94
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
 msgid "Metadata"
 msgstr "Metadata"
 
-#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:96
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
 #: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:338
 #: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Název"
@@ -148,7 +148,9 @@ msgstr "Odkaz na URL (třeba na WWW stránky)"
 msgid ""
 "A book, with a title, and perhaps with some bibliographical material, in "
 "addition to the actual content of the book."
-msgstr "Kniha s názvem a možná bibliografickým materiálem spolu s vlastním obsahem knihy."
+msgstr ""
+"Kniha s názvem a možná bibliografickým materiálem spolu s vlastním obsahem "
+"knihy."
 
 #: dispspecs/docbook.xds.in.h:3
 msgid "A brief description of the version of a document."
@@ -287,285 +289,292 @@ msgid "Command Synopsis"
 msgstr "Souhrn příkazu"
 
 #: dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "Výstup počítače"
+
+#: dispspecs/docbook.xds.in.h:38
 msgid "Copyright"
 msgstr "Copyright"
 
-#: dispspecs/docbook.xds.in.h:38
+#: dispspecs/docbook.xds.in.h:39
 msgid "Copyright Holder"
 msgstr "Držitel copyrightu"
 
-#: dispspecs/docbook.xds.in.h:39
+#: dispspecs/docbook.xds.in.h:40
 msgid "Corporate Name"
 msgstr "Název společnosti"
 
-#: dispspecs/docbook.xds.in.h:40
+#: dispspecs/docbook.xds.in.h:41
 msgid "Cross-reference"
 msgstr "Křížový odkaz"
 
-#: dispspecs/docbook.xds.in.h:41
+#: dispspecs/docbook.xds.in.h:42
 msgid "Date"
 msgstr "Datum"
 
-#: dispspecs/docbook.xds.in.h:42
+#: dispspecs/docbook.xds.in.h:43
 msgid "Date of Publication"
 msgstr "Datum vydání"
 
-#: dispspecs/docbook.xds.in.h:43
+#: dispspecs/docbook.xds.in.h:44
 msgid "Defined terms"
 msgstr "Definované pojmy"
 
-#: dispspecs/docbook.xds.in.h:44 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
 #: dispspecs/xhtml1-strict.xds.in.h:19
 msgid "Definition"
 msgstr "Definice"
 
-#: dispspecs/docbook.xds.in.h:45
+#: dispspecs/docbook.xds.in.h:46
 msgid "DocBook"
 msgstr "DocBook"
 
-#: dispspecs/docbook.xds.in.h:46
+#: dispspecs/docbook.xds.in.h:47
 msgid ""
 "DocBook is a document type that broadly corresponds to what most people "
 "think of as \"a book\"; it is well-suited for writing books and articles, "
 "for both print and web-based publication."
-msgstr "DocBook je typ dokumentu, který zhruba odpovídá tomu, co většina lidí považuje za \"knihu\"; je vhodný pro psaní knih a článků, publikovaných tiskem i na WWW."
+msgstr ""
+"DocBook je typ dokumentu, který zhruba odpovídá tomu, co většina lidí "
+"považuje za \"knihu\"; je vhodný pro psaní knih a článků, publikovaných "
+"tiskem i na WWW."
 
-#: dispspecs/docbook.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:48
 msgid "Edition"
 msgstr "Vydání"
 
-#: dispspecs/docbook.xds.in.h:48
+#: dispspecs/docbook.xds.in.h:49
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:11
 msgid "Editor"
 msgstr "Redaktor"
 
-#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/docbook.xds.in.h:50
 msgid "Email Address"
 msgstr "E-mailová adresa"
 
-#: dispspecs/docbook.xds.in.h:50 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:13
 #: dispspecs/xhtml1-strict.xds.in.h:24
 msgid "Emphasis"
 msgstr "Zvýraznění"
 
-#: dispspecs/docbook.xds.in.h:51
+#: dispspecs/docbook.xds.in.h:52
 msgid "Entry"
 msgstr "Položka"
 
-#: dispspecs/docbook.xds.in.h:52
+#: dispspecs/docbook.xds.in.h:53
 msgid "Environment Variable"
 msgstr "Proměnná prostředí"
 
-#: dispspecs/docbook.xds.in.h:53
+#: dispspecs/docbook.xds.in.h:54
 msgid "Example (formal)"
 msgstr "Příklad (formální)"
 
-#: dispspecs/docbook.xds.in.h:54
+#: dispspecs/docbook.xds.in.h:55
 msgid "Example (informal)"
 msgstr "Příklad (neformální)"
 
-#: dispspecs/docbook.xds.in.h:55 dispspecs/forrest-document.xds.in.h:14
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
 msgid "Figure"
 msgstr "Obrázek"
 
-#: dispspecs/docbook.xds.in.h:56
+#: dispspecs/docbook.xds.in.h:57
 msgid "Figure (informal)"
 msgstr "Obrázek (neformální)"
 
-#: dispspecs/docbook.xds.in.h:57
+#: dispspecs/docbook.xds.in.h:58
 msgid "Filename"
 msgstr "Název souboru"
 
-#: dispspecs/docbook.xds.in.h:58
+#: dispspecs/docbook.xds.in.h:59
 msgid "First Name"
 msgstr "Křestní jméno"
 
-#: dispspecs/docbook.xds.in.h:59
+#: dispspecs/docbook.xds.in.h:60
 msgid "First Term"
 msgstr "První termín"
 
-#: dispspecs/docbook.xds.in.h:60
+#: dispspecs/docbook.xds.in.h:61
 msgid "Footnote"
 msgstr "Poznámka pod čarou"
 
-#: dispspecs/docbook.xds.in.h:61
+#: dispspecs/docbook.xds.in.h:62
 msgid "Free-floating Heading"
 msgstr "Volně plovoucí nadpis"
 
-#: dispspecs/docbook.xds.in.h:62
+#: dispspecs/docbook.xds.in.h:63
 msgid "Function"
 msgstr "Funkce"
 
 #. various related localNames need to be added
-#: dispspecs/docbook.xds.in.h:64
+#: dispspecs/docbook.xds.in.h:65
 msgid "Function Synopsis"
 msgstr "Souhrn funkce"
 
-#: dispspecs/docbook.xds.in.h:65
+#: dispspecs/docbook.xds.in.h:66
 msgid "GUI Button"
 msgstr "GUI tlačítko"
 
-#: dispspecs/docbook.xds.in.h:66
+#: dispspecs/docbook.xds.in.h:67
 msgid "GUI Label"
 msgstr "GUI popisek"
 
-#: dispspecs/docbook.xds.in.h:67
+#: dispspecs/docbook.xds.in.h:68
 msgid "GUI Menu"
 msgstr "GUI menu"
 
-#: dispspecs/docbook.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:69
 msgid "GUI Menu Item"
 msgstr "GUI položka menu"
 
-#: dispspecs/docbook.xds.in.h:69
+#: dispspecs/docbook.xds.in.h:70
 msgid "GUI Submenu"
 msgstr "GUI podmenu"
 
-#: dispspecs/docbook.xds.in.h:70
+#: dispspecs/docbook.xds.in.h:71
 msgid "Glossary"
 msgstr "Slovník pojmů"
 
-#: dispspecs/docbook.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:72
 msgid "Glossary Entry"
 msgstr "Položka slovníku pojmů"
 
-#: dispspecs/docbook.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:73
 msgid "Graphic"
 msgstr "Grafika"
 
-#: dispspecs/docbook.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:74
 msgid "ISBN"
 msgstr "ISBN"
 
-#: dispspecs/docbook.xds.in.h:74
+#: dispspecs/docbook.xds.in.h:75
 msgid "ISSN"
 msgstr "ISSN"
 
-#: dispspecs/docbook.xds.in.h:75
+#: dispspecs/docbook.xds.in.h:76
 msgid "Image Data"
 msgstr "Data obrázku"
 
-#: dispspecs/docbook.xds.in.h:76
+#: dispspecs/docbook.xds.in.h:77
 msgid "Image Object"
 msgstr "Objekt obrázku"
 
-#: dispspecs/docbook.xds.in.h:77
+#: dispspecs/docbook.xds.in.h:78
 msgid "Important"
 msgstr "Důležité"
 
-#: dispspecs/docbook.xds.in.h:78
+#: dispspecs/docbook.xds.in.h:79
 msgid "Index Term"
 msgstr "Položka rejstříku"
 
-#: dispspecs/docbook.xds.in.h:79 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:19
 msgid "Introduction"
 msgstr "Úvod"
 
-#: dispspecs/docbook.xds.in.h:80
+#: dispspecs/docbook.xds.in.h:81
 msgid "Key Caption"
 msgstr "Hlavní nadpis"
 
-#: dispspecs/docbook.xds.in.h:81
+#: dispspecs/docbook.xds.in.h:82
 msgid "Legal Notice"
 msgstr "Právní upozornění"
 
-#: dispspecs/docbook.xds.in.h:82
+#: dispspecs/docbook.xds.in.h:83
 msgid "List (itemised)"
 msgstr "Seznam (s položkami)"
 
-#: dispspecs/docbook.xds.in.h:83 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:23
 #: dispspecs/xhtml1-strict.xds.in.h:47
 msgid "List (ordered)"
 msgstr "Seznam (seřazený)"
 
-#: dispspecs/docbook.xds.in.h:84
+#: dispspecs/docbook.xds.in.h:85
 msgid "List (simple)"
 msgstr "Seznam (jednoduchý)"
 
-#: dispspecs/docbook.xds.in.h:85
+#: dispspecs/docbook.xds.in.h:86
 msgid "List (terms and definitions)"
 msgstr "Seznam (pojmy a deifnice)"
 
-#: dispspecs/docbook.xds.in.h:86
+#: dispspecs/docbook.xds.in.h:87
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:25
 #: dispspecs/xhtml1-strict.xds.in.h:49
 msgid "List Item"
 msgstr "Položka seznamu"
 
-#: dispspecs/docbook.xds.in.h:87
+#: dispspecs/docbook.xds.in.h:88
 msgid "List Member"
 msgstr "Položka seznamu"
 
-#: dispspecs/docbook.xds.in.h:88
+#: dispspecs/docbook.xds.in.h:89
 msgid "Literal"
 msgstr "Literál"
 
-#: dispspecs/docbook.xds.in.h:89
+#: dispspecs/docbook.xds.in.h:90
 msgid "Media Object"
 msgstr "Objekt médií"
 
-#: dispspecs/docbook.xds.in.h:90
+#: dispspecs/docbook.xds.in.h:91
 msgid "Menu Choice"
 msgstr "Výběr v menu"
 
-#: dispspecs/docbook.xds.in.h:91
+#: dispspecs/docbook.xds.in.h:92
 msgid "Meta-information about a Reference Page"
 msgstr "Metainformace o stránce s referencemi"
 
-#: dispspecs/docbook.xds.in.h:92
+#: dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
 msgstr "Metainformace o knize"
 
-#: dispspecs/docbook.xds.in.h:93
+#: dispspecs/docbook.xds.in.h:94
 msgid "Meta-information for an article"
 msgstr "metainformace o článku"
 
-#: dispspecs/docbook.xds.in.h:95
+#: dispspecs/docbook.xds.in.h:96
 msgid "Miscellaneous Bibliographic Information"
 msgstr "Různé bibliografické informace"
 
-#: dispspecs/docbook.xds.in.h:97
+#: dispspecs/docbook.xds.in.h:98
 msgid "Name, purpose and classification about a Reference Page"
 msgstr "Název, účel a klasifikace o stránce s referencemi"
 
-#: dispspecs/docbook.xds.in.h:98
+#: dispspecs/docbook.xds.in.h:99
 msgid "Naming"
 msgstr "Pojmenovávání"
 
-#: dispspecs/docbook.xds.in.h:99 dispspecs/forrest-document.xds.in.h:29
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
 msgid "Note"
 msgstr "Poznámka"
 
-#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
 #: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
 msgid "Paragraph"
 msgstr "Odstavec"
 
-#: dispspecs/docbook.xds.in.h:101
+#: dispspecs/docbook.xds.in.h:102
 msgid "Paragraph (titled)"
 msgstr "Odstavec (s nadpisem)"
 
-#: dispspecs/docbook.xds.in.h:102
+#: dispspecs/docbook.xds.in.h:103
 msgid "Part"
 msgstr "Část"
 
-#: dispspecs/docbook.xds.in.h:103
+#: dispspecs/docbook.xds.in.h:104
 msgid "Preface"
 msgstr "Předmluva"
 
-#: dispspecs/docbook.xds.in.h:104
+#: dispspecs/docbook.xds.in.h:105
 msgid "Printing History"
 msgstr "Historie tisku"
 
-#: dispspecs/docbook.xds.in.h:105
+#: dispspecs/docbook.xds.in.h:106
 msgid "Procedure"
 msgstr "Procedura"
 
-#: dispspecs/docbook.xds.in.h:106
+#: dispspecs/docbook.xds.in.h:107
 msgid "Product Name"
 msgstr "Název produktu"
 
@@ -577,234 +586,234 @@ msgstr "Název produktu"
 #. Could also do with a verbatim flag which respects carriage returns...
 #. Even better would be to invoke a Scintilla control and have syntax highlighting!
 #.
-#: dispspecs/docbook.xds.in.h:115
+#: dispspecs/docbook.xds.in.h:116
 msgid "Program Listing"
 msgstr "Výpis programu"
 
-#: dispspecs/docbook.xds.in.h:116
+#: dispspecs/docbook.xds.in.h:117
 msgid "Prompt"
 msgstr "Výzva"
 
-#: dispspecs/docbook.xds.in.h:117
+#: dispspecs/docbook.xds.in.h:118
 msgid "Publisher"
 msgstr "Vydavatel"
 
-#: dispspecs/docbook.xds.in.h:118
+#: dispspecs/docbook.xds.in.h:119
 msgid "Publisher Name"
 msgstr "Název vydavatele"
 
-#: dispspecs/docbook.xds.in.h:119
+#: dispspecs/docbook.xds.in.h:120
 msgid "Purpose"
 msgstr "Účel"
 
-#: dispspecs/docbook.xds.in.h:120
+#: dispspecs/docbook.xds.in.h:121
 msgid "Question"
 msgstr "Otázka"
 
-#: dispspecs/docbook.xds.in.h:121
+#: dispspecs/docbook.xds.in.h:122
 msgid "Question-and-Answer"
 msgstr "Otázka a odpověď"
 
-#: dispspecs/docbook.xds.in.h:122
+#: dispspecs/docbook.xds.in.h:123
 msgid "Question-and-Answer Set"
 msgstr "Množina otázek a odpovědí"
 
-#: dispspecs/docbook.xds.in.h:123
+#: dispspecs/docbook.xds.in.h:124
 msgid "Question-and-Answer Subset"
 msgstr "Podmnožina otázek a odpovědí"
 
-#: dispspecs/docbook.xds.in.h:124
+#: dispspecs/docbook.xds.in.h:125
 msgid "Quote"
 msgstr "Citát"
 
-#: dispspecs/docbook.xds.in.h:125
+#: dispspecs/docbook.xds.in.h:126
 msgid "Reference"
 msgstr "Odkaz"
 
-#: dispspecs/docbook.xds.in.h:126
+#: dispspecs/docbook.xds.in.h:127
 msgid "Reference Page"
 msgstr "Stránka s odkazy"
 
-#: dispspecs/docbook.xds.in.h:127
+#: dispspecs/docbook.xds.in.h:128
 msgid "Release Information"
 msgstr "Informace o vydání"
 
-#: dispspecs/docbook.xds.in.h:128
+#: dispspecs/docbook.xds.in.h:129
 msgid "Replaceable Text"
 msgstr "Nahraditelný text"
 
-#: dispspecs/docbook.xds.in.h:129
+#: dispspecs/docbook.xds.in.h:130
 msgid "Revision"
 msgstr "Revize"
 
-#: dispspecs/docbook.xds.in.h:130
+#: dispspecs/docbook.xds.in.h:131
 msgid "Revision History"
 msgstr "Historie revizí"
 
-#: dispspecs/docbook.xds.in.h:131
+#: dispspecs/docbook.xds.in.h:132
 msgid "Revision Remark"
 msgstr "Poznámka o revizi"
 
-#: dispspecs/docbook.xds.in.h:132
+#: dispspecs/docbook.xds.in.h:133
 msgid "SGML Tag"
 msgstr "Tag SGML"
 
-#: dispspecs/docbook.xds.in.h:133
+#: dispspecs/docbook.xds.in.h:134
 msgid "Screen"
 msgstr "Obrazovka"
 
-#: dispspecs/docbook.xds.in.h:134
+#: dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
 msgstr "Snímek obrazovky"
 
-#: dispspecs/docbook.xds.in.h:135 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:29
 msgid "Section"
 msgstr "Oddíl"
 
-#: dispspecs/docbook.xds.in.h:136
+#: dispspecs/docbook.xds.in.h:137
 msgid "Section (level 5)"
 msgstr "Oddíl (úroveň 5)"
 
-#: dispspecs/docbook.xds.in.h:137
+#: dispspecs/docbook.xds.in.h:138
 msgid "Set"
 msgstr "Sada"
 
-#: dispspecs/docbook.xds.in.h:138
+#: dispspecs/docbook.xds.in.h:139
 msgid "Step"
 msgstr "Krok"
 
-#: dispspecs/docbook.xds.in.h:139
+#: dispspecs/docbook.xds.in.h:140
 msgid "Structure Name"
 msgstr "Název struktury"
 
-#: dispspecs/docbook.xds.in.h:140
+#: dispspecs/docbook.xds.in.h:141
 msgid "Subsection"
 msgstr "Podsekce"
 
-#: dispspecs/docbook.xds.in.h:141
+#: dispspecs/docbook.xds.in.h:142
 msgid "Subsection (level 3)"
 msgstr "Podsekce (úroveň 3)"
 
-#: dispspecs/docbook.xds.in.h:142
+#: dispspecs/docbook.xds.in.h:143
 msgid "Subsection (level 4)"
 msgstr "Podsekce (úroveň 4)"
 
-#: dispspecs/docbook.xds.in.h:143
+#: dispspecs/docbook.xds.in.h:144
 msgid "Substeps"
 msgstr "Podkroky"
 
-#: dispspecs/docbook.xds.in.h:144
+#: dispspecs/docbook.xds.in.h:145
 msgid "Subsubsection"
 msgstr "Podpodsekce"
 
-#: dispspecs/docbook.xds.in.h:145 dispspecs/forrest-document.xds.in.h:37
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
 msgid "Subtitle"
 msgstr "Podtitul"
 
-#: dispspecs/docbook.xds.in.h:146
+#: dispspecs/docbook.xds.in.h:147
 msgid "Surname"
 msgstr "Příjmení"
 
-#: dispspecs/docbook.xds.in.h:147
+#: dispspecs/docbook.xds.in.h:148
 msgid "Symbol"
 msgstr "Symbol"
 
-#: dispspecs/docbook.xds.in.h:148
+#: dispspecs/docbook.xds.in.h:149
 msgid "Synopsis (syntax)"
 msgstr "Souhrn (syntaxe)"
 
-#: dispspecs/docbook.xds.in.h:149
+#: dispspecs/docbook.xds.in.h:150
 msgid "Table (informal)"
 msgstr "Tabulka (neformální)"
 
-#: dispspecs/docbook.xds.in.h:150 dispspecs/xhtml1-strict.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
 msgid "Table Body"
 msgstr "Tělo tabulky"
 
-#: dispspecs/docbook.xds.in.h:151
+#: dispspecs/docbook.xds.in.h:152
 msgid "Table Column Specification"
 msgstr "Specifikace sloupce tabulky"
 
-#: dispspecs/docbook.xds.in.h:152
+#: dispspecs/docbook.xds.in.h:153
 msgid "Table Entry"
 msgstr "Položka tabulky"
 
-#: dispspecs/docbook.xds.in.h:153
+#: dispspecs/docbook.xds.in.h:154
 msgid "Table Entry (subtable)"
 msgstr "Položka tabulky (podtabulka)"
 
-#: dispspecs/docbook.xds.in.h:154 dispspecs/xhtml1-strict.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
 msgid "Table Footer"
 msgstr "Patička tabulky"
 
-#: dispspecs/docbook.xds.in.h:155
+#: dispspecs/docbook.xds.in.h:156
 msgid "Table Group"
 msgstr "Skupina tabulek"
 
-#: dispspecs/docbook.xds.in.h:156 dispspecs/xhtml1-strict.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
 msgid "Table Header"
 msgstr "Hlavička tabulky"
 
-#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
 msgid "Table Row"
 msgstr "Řádek tabulky"
 
-#: dispspecs/docbook.xds.in.h:158
+#: dispspecs/docbook.xds.in.h:159
 msgid "Term"
 msgstr "Pojem"
 
-#: dispspecs/docbook.xds.in.h:159
+#: dispspecs/docbook.xds.in.h:160
 msgid "Text Object"
 msgstr "Objekt textu"
 
-#: dispspecs/docbook.xds.in.h:160
+#: dispspecs/docbook.xds.in.h:161
 msgid "The International Standard Book Number of a document."
 msgstr "International Standard Book Number dokumentu."
 
-#: dispspecs/docbook.xds.in.h:161
+#: dispspecs/docbook.xds.in.h:162
 msgid "The International Standard Serial Number of a periodical."
 msgstr "International Standard Serial Number časopisu."
 
-#: dispspecs/docbook.xds.in.h:162
+#: dispspecs/docbook.xds.in.h:163
 msgid "The first place where a word or term occurs in a particular context"
 msgstr "První místo, kde se slovo nebo pojem objevuje v určitém kontextu"
 
-#: dispspecs/docbook.xds.in.h:163
+#: dispspecs/docbook.xds.in.h:164
 msgid "The name of a function, subroutine or procedure"
 msgstr "Název funkce, subrutiny nebo procedury"
 
-#: dispspecs/docbook.xds.in.h:164
+#: dispspecs/docbook.xds.in.h:165
 msgid "The printed text on a particular key on a keyboard"
 msgstr "Text na konkrétní klávese na klávesnici"
 
-#: dispspecs/docbook.xds.in.h:165
+#: dispspecs/docbook.xds.in.h:166
 msgid "Tip"
 msgstr "Tip"
 
-#: dispspecs/docbook.xds.in.h:166 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:32
 #: dispspecs/xhtml1-strict.xds.in.h:76
 msgid "Title"
 msgstr "Název"
 
-#: dispspecs/docbook.xds.in.h:167
+#: dispspecs/docbook.xds.in.h:168
 msgid "Title Citation"
 msgstr "Citace názvu"
 
-#: dispspecs/docbook.xds.in.h:168
+#: dispspecs/docbook.xds.in.h:169
 msgid "URL Link"
 msgstr "Odkaz na URL"
 
-#: dispspecs/docbook.xds.in.h:169
+#: dispspecs/docbook.xds.in.h:170
 msgid "User Input"
 msgstr "Vstup uživatele"
 
-#: dispspecs/docbook.xds.in.h:170 dispspecs/forrest-document.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
 msgid "Warning"
 msgstr "Varování"
 
-#: dispspecs/docbook.xds.in.h:171
+#: dispspecs/docbook.xds.in.h:172
 msgid "Year"
 msgstr "Rok"
 
@@ -834,7 +843,7 @@ msgstr "Definovaný pojem"
 msgid "Definition list"
 msgstr "Seznam definic"
 
-#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:981
+#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:988
 msgid "Document"
 msgstr "Dokument"
 
@@ -942,7 +951,11 @@ msgid ""
 "software documentation for use with the Apache projects. It is an XML-"
 "compliant DTD and it's maintained by the Apache XML project. See http://xml."
 "apache.org/forrest ."
-msgstr "Tato DTD byla vyvinuta pro tvorbu jednoduchého, ale mocného typu dokumentu pro dokumentaci software používanou v projektech Apache. Je to DTD vyhovující XML a spravuje ji projekt Apache XML. Viz http://xml.apache.org/forrest ."
+msgstr ""
+"Tato DTD byla vyvinuta pro tvorbu jednoduchého, ale mocného typu dokumentu "
+"pro dokumentaci software používanou v projektech Apache. Je to DTD "
+"vyhovující XML a spravuje ji projekt Apache XML. Viz http://xml.apache.org/"
+"forrest ."
 
 #: dispspecs/forrest-document.xds.in.h:45
 #: glade/cong-file-properties.glade.h:14
@@ -963,7 +976,8 @@ msgstr "Novinky &quot;Kernel Traffic&quot;"
 msgid ""
 "A newletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
-msgstr "Novinky sledující technický vývoj projektu ve světě Free/Open Source Software"
+msgstr ""
+"Novinky sledující technický vývoj projektu ve světě Free/Open Source Software"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:4
 msgid "Block Quote"
@@ -1297,7 +1311,7 @@ msgstr "Pokročilé"
 msgid "Basic"
 msgstr "Základní"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
 msgid "Document Type Declaration"
 msgstr "Deklarace typu dokumentu"
 
@@ -1553,7 +1567,7 @@ msgstr "Parametry vytváření"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:984
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
 msgid "Document Type"
 msgstr "Typ dokumentu"
 
@@ -1817,80 +1831,80 @@ msgstr "Typ souboru"
 msgid "Coverage"
 msgstr "Pokrytí"
 
-#: src/cong-document.c:649
+#: src/cong-document.c:651
 msgid "(Untitled)"
 msgstr "(Nepojmenovaný)"
 
-#: src/cong-document.c:948
+#: src/cong-document.c:955
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Atribut \"%s\""
 
-#: src/cong-document.c:955
+#: src/cong-document.c:962
 #, c-format
 msgid "Text \"%s\""
 msgstr "Text \"%s\""
 
-#: src/cong-document.c:961
+#: src/cong-document.c:968
 msgid "Character Data"
 msgstr "Znaková data"
 
-#: src/cong-document.c:964
+#: src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Odkaz na entitu \"%s\""
 
-#: src/cong-document.c:967
+#: src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entita \"%s\""
 
-#: src/cong-document.c:970
+#: src/cong-document.c:977
 msgid "XML Processing Instruction"
 msgstr "Instrukce zpracování XML"
 
-#: src/cong-document.c:975
+#: src/cong-document.c:982
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Komentář \"%s\""
 
-#: src/cong-document.c:987
+#: src/cong-document.c:994
 msgid "Document Fragment"
 msgstr "Fragment dokumentu"
 
-#: src/cong-document.c:990
+#: src/cong-document.c:997
 msgid "Notation"
 msgstr "Zápis"
 
-#: src/cong-document.c:993
+#: src/cong-document.c:1000
 msgid "HTML Document"
 msgstr "Dokument HTML"
 
-#: src/cong-document.c:999
+#: src/cong-document.c:1006
 msgid "Element Declaration"
 msgstr "Deklarace elementu"
 
-#: src/cong-document.c:1002
+#: src/cong-document.c:1009
 msgid "Attribute Declaration"
 msgstr "Deklarace atributu"
 
-#: src/cong-document.c:1005
+#: src/cong-document.c:1012
 msgid "Entity Declaration"
 msgstr "Deklarace entity"
 
-#: src/cong-document.c:1008
+#: src/cong-document.c:1015
 msgid "Namespace Declaration"
 msgstr "Deklarace prostoru jmen"
 
-#: src/cong-document.c:1011
+#: src/cong-document.c:1018
 msgid "XInclude Start"
 msgstr "Začátek XInclude"
 
-#: src/cong-document.c:1014
+#: src/cong-document.c:1021
 msgid "XInclude End"
 msgstr "Konec XInclude"
 
-#: src/cong-document.c:2173
+#: src/cong-document.c:2180
 #, c-format
 msgid "Select %s"
 msgstr "Vybrat %s"
@@ -2433,21 +2447,11 @@ msgstr "Soubor:"
 msgid "Export Options"
 msgstr "Možnosti exportu"
 
-#: src/cong-file-export.c:425
-#, c-format
-msgid "Conglomerate cannot export \"%s\""
-msgstr "Conglomerate nemůže exportovat \"%s\""
-
-#: src/cong-file-export.c:429
-msgid "None of Conglomerate's plugins know how to export files of this type."
-msgstr ""
-"Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
-
-#: src/cong-file-export.c:462
+#: src/cong-file-export.c:431
 msgid "No output file specified"
 msgstr "Nezadán výstupní soubor"
 
-#: src/cong-file-export.c:463
+#: src/cong-file-export.c:432
 msgid "Please specify a file name."
 msgstr "Zadejte prosím název souboru."
 
@@ -2521,7 +2525,7 @@ msgstr ""
 msgid "Force"
 msgstr "Vnutit"
 
-#: src/cong-file-open.c:210
+#: src/cong-file-open.c:218
 msgid "Select an XML document"
 msgstr "Zvolte dokument XML"
 
@@ -2542,7 +2546,7 @@ msgstr "Metoda tisku:"
 msgid "Print Options"
 msgstr "Možnosti tisku"
 
-#: src/cong-file-print.c:336 src/cong-menus.c:729
+#: src/cong-file-print.c:336 src/cong-menus.c:727
 msgid "Print Preview"
 msgstr "Náhled před tiskem"
 
@@ -2648,7 +2652,7 @@ msgstr "Počítám následující stránku"
 msgid "The selected menu item has not yet been implemented."
 msgstr "Vybraná položka menu ještě nebyla implementována."
 
-#: src/cong-menus.c:465
+#: src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate nemůže otevřít výsledek transformace"
 
@@ -2658,42 +2662,42 @@ msgstr "Conglomerate nemůže otevřít výsledek transformace"
 #. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
 #. * file. It would be nice to make the URL an actual link but that is a lot more work.
 #.
-#: src/cong-menus.c:530 src/cong-plugin.c:734
+#: src/cong-menus.c:528 src/cong-plugin.c:734
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Při čtení souboru stylesheetu \"%s\" se vyskytl problém"
 
-#: src/cong-menus.c:533 src/cong-menus.c:557 src/cong-plugin.c:736
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-plugin.c:736
 #: src/cong-plugin.c:799
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate nemohl transformovat tento dokument"
 
-#: src/cong-menus.c:554
+#: src/cong-menus.c:552
 msgid "There was a problem applying the stylesheet file"
 msgstr "Při použití souboru stylesheetu se vyskytl problém"
 
-#: src/cong-menus.c:1115
+#: src/cong-menus.c:1113
 msgid "Test Progress Checklist"
 msgstr "Otestovat zaškrtávací pole průběhu"
 
-#: src/cong-menus.c:1119
+#: src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
 msgstr "Toto je krok %i"
 
-#: src/cong-menus.c:1170
+#: src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
 msgstr "Záznam zpráv - Conglomerate"
 
-#: src/cong-menus.c:1189
+#: src/cong-menus.c:1187
 msgid "Signal Log - Conglomerate"
 msgstr "Záznam signálů - Conglomerate"
 
-#: src/cong-menus.c:1429
+#: src/cong-menus.c:1427
 msgid "translator_credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
-#: src/cong-menus.c:1448
+#: src/cong-menus.c:1446
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -2701,163 +2705,163 @@ msgstr ""
 "© 1999 Hans Petter Jansson\n"
 "© 2004 David Malcolm"
 
-#: src/cong-menus.c:1449
+#: src/cong-menus.c:1447
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: svobodný editor XML přívětivý k uživatelům"
 
 #. Menus:
-#: src/cong-menus.c:1483
+#: src/cong-menus.c:1481
 msgid "_File"
 msgstr "_Soubor"
 
-#: src/cong-menus.c:1484
+#: src/cong-menus.c:1482
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: src/cong-menus.c:1489
+#: src/cong-menus.c:1487
 msgid "_Help"
 msgstr "Nápo_věda"
 
 #. Sub-menus:
-#: src/cong-menus.c:1492 src/popup.c:1099
+#: src/cong-menus.c:1490 src/popup.c:1099
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/cong-menus.c:1493 src/popup.c:1113
+#: src/cong-menus.c:1491 src/popup.c:1113
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
-#: src/cong-menus.c:1494
+#: src/cong-menus.c:1492
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1497
+#: src/cong-menus.c:1495
 msgid "_New..."
 msgstr "_Nový..."
 
-#: src/cong-menus.c:1498
+#: src/cong-menus.c:1496
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: src/cong-menus.c:1499
+#: src/cong-menus.c:1497
 msgid "_Import..."
 msgstr "_Importovat..."
 
-#: src/cong-menus.c:1500
+#: src/cong-menus.c:1498
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: src/cong-menus.c:1501
+#: src/cong-menus.c:1499
 msgid "_Quit"
 msgstr "U_končit"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1505
+#: src/cong-menus.c:1503
 msgid "Prefere_nces"
 msgstr "Nas_tavení"
 
 #. Actions found in Help menu:
-#: src/cong-menus.c:1518
+#: src/cong-menus.c:1516
 msgid "_Contents"
 msgstr "_Obsah"
 
-#: src/cong-menus.c:1519
+#: src/cong-menus.c:1517
 msgid "_Homepage"
 msgstr "_Domovská stránka"
 
-#: src/cong-menus.c:1520
+#: src/cong-menus.c:1518
 msgid "_About"
 msgstr "O _aplikaci"
 
-#: src/cong-menus.c:1526
+#: src/cong-menus.c:1524
 msgid "_Tools"
 msgstr "_Nástroje"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1530
+#: src/cong-menus.c:1528
 msgid "_Save"
 msgstr "_Uložit"
 
-#: src/cong-menus.c:1531
+#: src/cong-menus.c:1529
 msgid "Save _as..."
 msgstr "Uložit _jako..."
 
-#: src/cong-menus.c:1532
+#: src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
 msgstr "Uložit _kopii..."
 
-#: src/cong-menus.c:1534
+#: src/cong-menus.c:1532
 msgid "Print Previe_w..."
 msgstr "Ná_hled před tiskem..."
 
-#: src/cong-menus.c:1535
+#: src/cong-menus.c:1533
 msgid "_Print"
 msgstr "Vy_tisknout"
 
-#: src/cong-menus.c:1538
+#: src/cong-menus.c:1536
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: src/cong-menus.c:1540
+#: src/cong-menus.c:1538
 msgid "_Export..."
 msgstr "_Exportovat..."
 
-#: src/cong-menus.c:1541
+#: src/cong-menus.c:1539
 msgid "Proper_ties"
 msgstr "_Vlastnosti"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1545 src/cong-menus.c:1768
+#: src/cong-menus.c:1543 src/cong-menus.c:1769
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: src/cong-menus.c:1546 src/cong-menus.c:1778
+#: src/cong-menus.c:1544 src/cong-menus.c:1779
 msgid "_Redo"
 msgstr "Zn_ovu"
 
-#: src/cong-menus.c:1547
+#: src/cong-menus.c:1545
 msgid "Cu_t"
 msgstr "_Vyjmout"
 
-#: src/cong-menus.c:1548 src/popup.c:755 src/popup.c:1051
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1051
 msgid "_Copy"
 msgstr "_Kopírovat"
 
-#: src/cong-menus.c:1549 src/popup.c:769
+#: src/cong-menus.c:1547 src/popup.c:769
 msgid "_Paste"
 msgstr "V_ložit"
 
-#: src/cong-menus.c:1550
+#: src/cong-menus.c:1548
 msgid "_Find..."
 msgstr "_Hledat..."
 
-#: src/cong-menus.c:1551
+#: src/cong-menus.c:1549
 msgid "Find Ne_xt"
 msgstr "Hledat _následující"
 
-#: src/cong-menus.c:1552
+#: src/cong-menus.c:1550
 msgid "Find Pre_vious"
 msgstr "Hledat _předchozí"
 
-#: src/cong-menus.c:1553
+#: src/cong-menus.c:1551
 msgid "R_eplace..."
 msgstr "Nah_radit..."
 
-#: src/cong-menus.c:1555
+#: src/cong-menus.c:1553
 msgid "_Insert..."
 msgstr "V_ložit..."
 
-#: src/cong-menus.c:1556
+#: src/cong-menus.c:1554
 msgid "View _Source"
 msgstr "Zobrazit _zdroj"
 
-#: src/cong-menus.c:1764
+#: src/cong-menus.c:1765
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Zpět: %s"
 
-#: src/cong-menus.c:1774
+#: src/cong-menus.c:1775
 #, c-format
 msgid "_Redo: %s"
 msgstr "Zn_ovu: %s"
@@ -3666,6 +3670,14 @@ msgstr "Vložit za"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
+
+#~ msgid "Conglomerate cannot export \"%s\""
+#~ msgstr "Conglomerate nemůže exportovat \"%s\""
+
+#~ msgid ""
+#~ "None of Conglomerate's plugins know how to export files of this type."
+#~ msgstr ""
+#~ "Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
 
 #~ msgid "Delete this item"
 #~ msgstr "Odstranit tuto položku"
