@@ -1,6 +1,72 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+17-02-04
+Conglomerate 0.7.12 Released
+============================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced!
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+Enhancements
+      * New translations: Croatian (hr) (Robert Sedak), Japanese (ja)
+        (Mitsuru Oka)
+
+      * Updated translations: Albanian (sq) (Laurent Dhima), Serbian
+        (sr.po, sr@Latn.po) (Danilo Šegan), nl (Daniel van Eeden), Czech
+        (cs) (Miloslav Trmac), Greek (el) ( Kostas Papadimas), German
+        (de) (Christian Neumair), Croatian (hr) (Robert Sedak)
+
+      * Added preliminary support for the TEI Lite format (Roberto
+        Rosselli Del Turco)
+
+      * Big fix of XML namespace handling. Dispspecs now refer to
+        elements using a namespace URI (if any) and the local name
+        within that namespace. Element-matching code now uses namespaces
+        rather than prefixes in various places, including the XSL-FO and
+        RELAX NG plugins, which should lead to more robust handling of
+        arbitrary documents. (me) 
+
+      * When determining which dispspec to use, calculate coverage of
+        the document elements and pick the best (above a certain
+        threshold percentage) (me)
+
+      * New dialog for selecting which child element to insert when a
+        DTD requires such a choice. The new dialog lists both the XML
+        names and the translated names with icons where available (me)
+
+      * Added a workaround for bug #124507 which pops up a dialog
+        explaining what the problem is and tells you which elements are
+        causing it. The problem elements will not appear in the editor
+        widget. The dialog repeats every time the document is editor,
+        but this is better behaviour than a silent crash :-) (me)
+
+
+Fixes
+      * Reorganised source tree so that the xds files live in their own
+        "dispspecs" subdirectory, rather than sharing the "examples"
+        folder with the sample instance documents (Geert Stappers)
+
+      * Tidying up of plugin management code to use Service IDs to
+        identify instances and GType to identify classes (me)
+
+      * Big warning fix, should now compile cleanly on "-Wall -Werror"
+        (me)
+
+      * Big cleanup of the insides of the popup context menu, replacing
+        lots of obcure hackery with a more maintainable system. (me)
+
+-- 
+David Malcolm
+
 30-01-04
 Conglomerate 0.7.11 Released
 ============================
