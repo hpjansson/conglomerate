@@ -757,7 +757,7 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
 CongPrimaryWindow*
 cong_document_get_primary_window(CongDocument *doc)
 {
-	g_return_if_fail(doc);
+	g_return_val_if_fail(doc, NULL);
 	return PRIVATE(doc)->primary_window;
 }
 
@@ -923,7 +923,7 @@ cong_document_get_node_name (CongDocument *doc,
 static gboolean 
 node_count_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
-	((int*)user_data)++;
+	(*((int*)user_data))++;
 
 	return FALSE;		
 }
@@ -2588,6 +2588,6 @@ cong_document_handle_set_url (CongDocument *doc,
 CongFindDialogData *
 cong_document_get_find_dialog_data  (CongDocument *doc)
 { 
-       g_return_if_fail(doc);
+       g_return_val_if_fail(doc, NULL);
        return PRIVATE (doc)->find_data;
 }

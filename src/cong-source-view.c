@@ -419,9 +419,9 @@ cong_source_view_new_full (CongDocument *doc,
 GtkWidget*
 cong_source_view_new (CongDocument *doc)
 {
-	cong_source_view_new_full (doc,
-				   "text/xml",
-				   regenerate_source);
+	return cong_source_view_new_full (doc,
+					  "text/xml",
+					  regenerate_source);
 }
 
 

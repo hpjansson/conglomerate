@@ -13,6 +13,7 @@
 #include "cong-range.h"
 #include "cong-error-dialog.h"
 #include "cong-command.h"
+#include "cong-util.h"
 
 /* --- Cut/copy/paste --- */
 /**

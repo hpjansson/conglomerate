@@ -35,6 +35,8 @@
 #include "cong-util.h"
 #include "cong-edit-find-and-replace.h"
 #include "cong-selection.h"
+#include "cong-primary-window.h"
+#include "cong-command.h"
 
 #define CONG_RESPONSE_FIND		101
 #define CONG_RESPONSE_REPLACE		102
@@ -75,6 +77,8 @@ dialog_replace_destroyed (GtkObject *obj,  void *user_data)
         g_object_unref (G_OBJECT ((*data)->doc));
 	g_free (*data);
 	*data = NULL;
+
+	return FALSE;
 }
 
 
@@ -728,7 +732,6 @@ static void
 dlg_find_button_pressed (CongDialogReplace *dialog)
 {
 	const gchar* search_string = NULL;
-	gboolean found;
 	CongCursor *cursor;
 	CongLocation result;
 	CongFindDialogData *data;
@@ -793,7 +796,6 @@ replace_dlg_replace_button_pressed (CongDialogReplace *dialog)
 	CongCursor *cursor;
 
 	CongRange *ordered_range;
-	CongLocation string_start;
 	CongLocation result;
 
 	CongCommand *cmd;

@@ -427,7 +427,7 @@ cong_selection_get_selected_text (CongDocument *doc)
    CongSelection *selection;
    CongCursor *curs;
 
-   g_return_if_fail(doc);
+   g_return_val_if_fail(doc, NULL);
  
    selection = cong_document_get_selection(doc);
    curs = cong_document_get_cursor(doc);

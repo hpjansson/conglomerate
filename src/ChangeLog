@@ -1,3 +1,9 @@
+2004-06-17  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* xmledit.c, select.c, cong-source-view.c, cong-edit-find-and-replace.c, cong-document.c: 
+
+	Warning fixes
+
 2004-06-17 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-attribute-editor.c
