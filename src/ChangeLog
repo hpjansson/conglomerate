@@ -1,5 +1,9 @@
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-text-fragment.c
+
+	Allow clicking beyond the end of the fragment of text, to make it easy to select past the end of a line (bug #121066)
+	
 	* cong-editor-area-line.c
 
 	Make final subarea of line take remaining horizontal allocation

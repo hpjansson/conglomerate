@@ -129,9 +129,18 @@ cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_te
 	g_return_val_if_fail (IS_CONG_EDITOR_AREA_TEXT_FRAGMENT(area_text_fragment), NULL);
 
 	line = pango_layout_get_line (PRIVATE(area_text_fragment)->pango_layout,
-						       PRIVATE(area_text_fragment)->line_index);
+				      PRIVATE(area_text_fragment)->line_index);
 
 	return line;
+}
+
+
+gboolean
+cong_editor_area_text_fragment_is_final_line (CongEditorAreaTextFragment *area_text_fragment)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA_TEXT_FRAGMENT(area_text_fragment), FALSE);
+	
+	return ((PRIVATE(area_text_fragment)->line_index+1) == pango_layout_get_line_count (PRIVATE(area_text_fragment)->pango_layout));
 }
 
 gboolean
@@ -151,10 +160,22 @@ cong_editor_area_text_fragment_x_to_index (CongEditorAreaTextFragment *area_text
 	rect = cong_editor_area_get_window_coords (CONG_EDITOR_AREA(area_text_fragment));
 	line = cong_editor_area_text_get_pango_layout_line (area_text_fragment);
 
-	return pango_layout_line_x_to_index (line,
-					     (x - rect->x) * PANGO_SCALE,
-					     index_,
-					     trailing);
+	if ( pango_layout_line_x_to_index (line,
+					   (x - rect->x) * PANGO_SCALE,
+					   index_,
+					   trailing)) {
+		return TRUE;
+	} else {
+		/* Location is outside the PangoLayoutLine; are we before or after the line? */
+		/* FIXME: for now, assume after:
+		 */
+		g_message ("assuming after line");
+
+		*index_ = line->start_index + line->length;
+		*trailing = 0;
+		
+		return TRUE;
+	}
 }
 
 #if 0
@@ -196,7 +217,9 @@ render_self (CongEditorArea *area,
 											    cursor->location.byte_offset,
 											    &cursor_stripped_offset)) {
 				if (cursor_stripped_offset >= line->start_index) {
-					if (cursor_stripped_offset < line->start_index+line->length) {
+					if ( (cursor_stripped_offset < line->start_index+line->length) 
+					     || ((cursor_stripped_offset == line->start_index+line->length) 
+						 && cong_editor_area_text_fragment_is_final_line (area_text_fragment))) {
 						
 						pango_layout_line_index_to_x(line,
 									     cursor_stripped_offset,
@@ -204,13 +227,9 @@ render_self (CongEditorArea *area,
 									     &cursor_x);	
 						cursor_x /= PANGO_SCALE;
 						cursor_x += rect->x;						
-						got_cursor_x = TRUE;
-						
+						got_cursor_x = TRUE;						
 					}
 				}
-			} else {
-				cursor_x = rect->x + rect->width-1; 
-				got_cursor_x = TRUE;
 			}
 
 			if (got_cursor_x) {
