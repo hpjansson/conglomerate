@@ -1,3 +1,9 @@
+2004-01-09  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Split ENABLE_LIBFO out from ENABLE_PRINTING to allow print plugins that work in other ways; added more configuration summary information; added separator comments
+
 2004-01-08  Geert Stappers <stappers@stappers.nl>
 
 	* NEWS

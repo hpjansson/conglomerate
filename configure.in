@@ -45,6 +45,8 @@ LIBFO_REQUIRED=0.2.3
 GCONF2_REQUIRED=1.2.0
 GTKSOURCEVIEW_REQUIRED=0.6
 
+dnl --- Fundamentals ---
+
 PKG_CHECK_MODULES(CONGLOMERATE,		\
   gconf-2.0 >= $GCONF2_REQUIRED		\
   libxml-2.0 >= $LIBXML_REQUIRED	\
@@ -57,6 +59,7 @@ PKG_CHECK_MODULES(CONGLOMERATE,		\
 AC_SUBST(CONGLOMERATE_LIBS)
 AC_SUBST(CONGLOMERATE_CFLAGS)
 
+dnl --- Printing support ---
 
 AC_MSG_CHECKING([whether to build with printing support])
 AC_ARG_ENABLE(printing, [  --enable-printing      build with printing support [default=no]], enable_printing="$enableval", enable_printing=no)
@@ -64,8 +67,7 @@ AC_ARG_ENABLE(printing, [  --enable-printing      build with printing support [d
 if test x$enable_printing = xauto || test x$enable_printing = xyes ; then
    PKG_CHECK_MODULES(PRINTING, \
 		    libgnomeprint-2.2 >= $LIBGNOMEPRINT_REQUIRED \
-		    libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED \
-		    libfo-0.2 >= $LIBFO_REQUIRED, \
+		    libgnomeprintui-2.2 >= $LIBGNOMEPRINTUI_REQUIRED, \
 		    have_printing=yes, have_printing=no)
    if test x"$have_printing" = "xyes"; then
          enable_printing=yes
@@ -85,6 +87,36 @@ AM_CONDITIONAL(ENABLE_PRINTING, test x$enable_printing = xyes)
 AC_SUBST(PRINTING_CFLAGS)
 AC_SUBST(PRINTING_LIBS)
 AC_MSG_RESULT($enable_printing)
+
+dnl --- libfo support ---
+
+AC_MSG_CHECKING([whether to build with libfo support])
+AC_ARG_ENABLE(libfo, [  --enable-libfo      build with libfo support [default=no]], enable_libfo="$enableval", enable_libfo=no)
+                                                                                               
+if test x$enable_libfo = xauto || test x$enable_libfo = xyes ; then
+   PKG_CHECK_MODULES(LIBFO, \
+		    libfo-0.2 >= $LIBFO_REQUIRED, \
+		    have_libfo=yes, have_libfo=no)
+   if test x"$have_libfo" = "xyes"; then
+         enable_libfo=yes
+	 LIBFO_CFLAGS="$LIBFO_CFLAGS -DENABLE_LIBFO"
+   else
+         enable_libfo=no 
+	 LIBFO_CFLAGS=
+	 LIBFO_LIBS=
+   fi
+else
+   enable_libfo=no         
+   LIBFO_CFLAGS=
+   LIBFO_LIBS=
+fi
+
+AM_CONDITIONAL(ENABLE_LIBFO, test x$enable_libfo = xyes)
+AC_SUBST(LIBFO_CFLAGS)
+AC_SUBST(LIBFO_LIBS)
+AC_MSG_RESULT($enable_libfo)
+
+dnl --- GtkSourceView support ---
 
 AC_MSG_CHECKING([whether to build with GtkSourceView support])
 AC_ARG_ENABLE(gtksourceview, [  --enable-gtksourceview      build with GtkSourceView support [default=yes]], enable_gtksourceview="$enableval", enable_gtksourceview=yes)
@@ -249,6 +281,8 @@ conglomerate-$VERSION:
  
                            GConf: ${enable_gconf}
                   gtk_doc enable: ${enable_gtk_doc}
+                 printing enable: ${enable_printing}
+                    libfo enable: ${enable_libfo}
             gtksourceview enable: ${enable_gtksourceview}
 "
 
