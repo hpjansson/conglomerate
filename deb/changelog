@@ -1,9 +1,10 @@
-conglomerate (0.7.5-2) UNRELEASED; urgency=low
+conglomerate (0.7.5-3) UNRELEASED; urgency=low
 
   * work in progress
 
   * upstream:
-  application icons placed in /usr/share/conglomerate/pixmaps (closes: #208984)
+   - application icons placed in /usr/share/conglomerate/pixmaps (closes: #208984)
+   - improved font loading (closes: #217321)
 
   * rules:
    - noted that patches can be done by `dbs` or `dpatch`

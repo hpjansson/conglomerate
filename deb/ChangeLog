@@ -3,6 +3,9 @@
 	* build:
 	filtering the package direcorty out of the update.
 
+	* changelog:
+	progress on the font loading.
+
 2003-10-17  Geert Stappers <stappers@stappers.nl>
 
 	* changelog up to date for next release
