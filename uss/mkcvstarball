@@ -1,22 +1,7 @@
 #!/bin/bash
 
-patched_make_distcheck ()
-{
-# there something wrong with write permission on a computer of gst
-# this patch should be removed
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck &
-sleep 15 # guessed time for make dist
-sleep 30 # guessed time for a far amount of building
-chmod -R +w conglomerate-0.?.*
-wait
-ST=$?
-echo $ST
-return $ST
-}
-
 ./autogen.sh
-# GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck
-patched_make_distcheck
+GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck
 if [ $? -ne 0 ]
 then
  echo make distcheck failed
