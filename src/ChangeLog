@@ -1,3 +1,11 @@
+2004-08-12  Geert Stappers  <stappers@stappers.nl>
+
+	*  plugin-docbook.c
+
+	(#149305)
+
+	(#149307)
+
 2004-08-08  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* popup.c: 
