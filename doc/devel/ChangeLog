@@ -1,0 +1,7 @@
+2003-07-07 Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* CodingStyle, CompileIssues, ContribDemo, VersionNumbering,
+	ChangeLog, Makefile.am, README
+
+	Created this directory with the above files
+	They came from the old documentation directory.

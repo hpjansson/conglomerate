@@ -1,3 +1,11 @@
+2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* faq.xml
+	Moved from old documentation directory into here.
+
+	* Makefile.am 
+	Told that there is a faq.xml for the distribution.
+
 2003-07-03  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* ChangeLog

@@ -128,6 +128,7 @@ AC_OUTPUT(Makefile
           po/Makefile.in
 	  data/Makefile
 	  doc/Makefile
+	  doc/devel/Makefile
 	  doc/C/Makefile
 	  glade/Makefile
 	  pixmaps/Makefile

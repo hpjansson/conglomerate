@@ -1,3 +1,6 @@
+more_C_docs = \
+  faq.xml
+
 figdir = figures
 docname = conglomerate
 lang = C

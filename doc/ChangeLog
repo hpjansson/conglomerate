@@ -1,3 +1,8 @@
+2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am
+	Added the devel directory.
+
 2003-07-03  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* ChangeLog

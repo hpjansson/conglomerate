@@ -13,10 +13,4 @@ EXTRA_DIST = BUGS	\
   deb/control		\
   deb/copyright		\
   deb/rules		\
-  deb/watch		\
-  documentation/README        \
-  documentation/CodingStyle        \
-  documentation/VersionNumbering   \
-  documentation/ContribDemo      \
-  documentation/CompileIssues      \
-  documentation/faq.xml
+  deb/watch

@@ -40,9 +40,12 @@
 docdir = $(datadir)/gnome/help/$(docname)/$(lang)
 
 # **************  You should not have to edit below this line  *******************
+# ** GSt did ... 
+#   more C docs was added
+
 xml_files = $(entities) $(docname).xml
 
-EXTRA_DIST = $(xml_files) $(omffile)
+EXTRA_DIST = $(xml_files) $(omffile) $(more_C_docs)
 CLEANFILES = omf_timestamp
 
 # If the following file is in a subdir (like help/) you need to add that to the path

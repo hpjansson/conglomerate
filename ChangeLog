@@ -1,4 +1,10 @@
-2003-06-25  Geert Stappers <Geert.Stappers@xs4all.nl>
+2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am, configure.in
+	Moving documention/faq.xml into doc/C/faq.xml
+	and other files from documentation/ into doc/devel/
+
+2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am
 	The omf.make and xmldocs.make should go into the distribution
