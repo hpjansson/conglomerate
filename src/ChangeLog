@@ -1,3 +1,14 @@
+2003-04-26  David Malcolm 
+
+	* cong-error-dialog.c:
+
+	Made error dialogs better-behaved under Metacity.
+
+	* cong-menus.c, global.h, cong-primary-window.c, main.c, plugin-docbook.c
+
+	Location of Norman Walsh's stylesheets is less hardcoded than before; improvements to the document-less window case; load dispspecs and examples from global conge datadir (adapted from a patch dated 2003-04-03 by Dmitry G. Mastrukov <dmitry@taurussoft.org>); try to interpret final command-line argument as the URI of a file to be loaded.
+
+
 creating ChangeLog
 2003-04-16 David Malcolm
 

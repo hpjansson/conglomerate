@@ -94,18 +94,22 @@ struct CongPrimaryWindow
 };
 
 #if 1
-GtkWidget* cong_gui_get_a_window()
+GtkWidget* cong_gui_get_a_window(void)
 {
 	CongPrimaryWindow *primary_window;
 
 	/* A window _must_ exist for this to work: */
-	g_assert(the_globals.primary_windows);
+	if (the_globals.primary_windows) {
 
-	primary_window = the_globals.primary_windows->data;
+		primary_window = the_globals.primary_windows->data;
 
-	g_assert(primary_window->window);
+		g_assert(primary_window->window);
 
-	return GTK_WIDGET(primary_window->window);
+		return GTK_WIDGET(primary_window->window);
+	} else {
+		/* No primary windows exist: */
+		return NULL;
+	}
 }
 #else
 GtkWidget* cong_gui_get_window(struct cong_gui* gui)
@@ -228,36 +232,38 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 				 GTK_SIGNAL_FUNC(toolbar_callback_open),
 				 primary_window,
 				 -1);
-	gtk_toolbar_insert_stock(primary_window->toolbar, 
-				 GTK_STOCK_SAVE_AS,
-				 _("Save document as..."),
-				 _("Save document as..."), 
-				 GTK_SIGNAL_FUNC(toolbar_callback_save_as),
-				 primary_window,
-				 -1);
-	gtk_toolbar_append_space(primary_window->toolbar);
-	gtk_toolbar_insert_stock(primary_window->toolbar, 
-				 GTK_STOCK_CUT,
-				 _("Cut"),
-				 _("Cut"), 
-				 GTK_SIGNAL_FUNC(toolbar_callback_cut),
-				 primary_window,
-				 -1);
-	gtk_toolbar_insert_stock(primary_window->toolbar, 
-				 GTK_STOCK_COPY,
-				 _("Copy"),
-				 _("Copy"), 
-				 GTK_SIGNAL_FUNC(toolbar_callback_copy),
-				 primary_window,
-				 -1);
-	gtk_toolbar_insert_stock(primary_window->toolbar, 
-				 GTK_STOCK_PASTE,
-				 _("Paste"),
-				 _("Paste"), 
-				 GTK_SIGNAL_FUNC(toolbar_callback_paste),
-				 primary_window,
-				 -1);
 
+	if (primary_window->doc) {
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_SAVE_AS,
+					 _("Save document as..."),
+					 _("Save document as..."), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_save_as),
+					 primary_window,
+					 -1);
+		gtk_toolbar_append_space(primary_window->toolbar);
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_CUT,
+					 _("Cut"),
+					 _("Cut"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_cut),
+					 primary_window,
+					 -1);
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_COPY,
+					 _("Copy"),
+					 _("Copy"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_copy),
+					 primary_window,
+					 -1);
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_PASTE,
+					 _("Paste"),
+					 _("Paste"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_paste),
+					 primary_window,
+					 -1);
+	}
 }
 
 gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
@@ -265,8 +271,9 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 	g_assert(primary_window);
 
 	/* If there's no document, you're free to close */
-	if (!primary_window->doc)
+	if (!primary_window->doc) {
 		return TRUE;
+	}
 
 	/* See if document was modified */
 	if (cong_document_is_modified(primary_window->doc)) {
@@ -401,109 +408,94 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
 	gtk_widget_show(w1);
 
-	g_return_if_fail(primary_window->cong_tree_view);
+	if (primary_window->doc) {
+		g_assert(primary_window->cong_tree_view);
 #if USE_CONG_EDITOR_WIDGET
-	g_return_if_fail(primary_window->cong_editor_widget);
+		g_assert(primary_window->cong_editor_widget);
 #else
-	g_return_if_fail(primary_window->cong_editor_view);
+		g_assert(primary_window->cong_editor_view);
 #endif
 
-	/* --- Notebook to appear in the sidebar: --- */
-	sidebar_notebook = gtk_notebook_new();
-	gtk_widget_show(sidebar_notebook);
-	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
+		/* --- Notebook to appear in the sidebar: --- */
+		sidebar_notebook = gtk_notebook_new();
+		gtk_widget_show(sidebar_notebook);
+		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
 
-	gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
+		gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
 
-	/* --- Tree view --- */
+		/* --- Tree view --- */
+		
+		w2 = gtk_scrolled_window_new(NULL, NULL);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
+		gtk_widget_set_usize(GTK_WIDGET(w2), 100, 0);
+		gtk_widget_show(w2);
 
-	w2 = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(GTK_WIDGET(w2), 100, 0);
-	gtk_widget_show(w2);
-
-	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-				 w2,
-				 gtk_label_new("Overview")
-				 );
-
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-					      cong_tree_view_get_widget(primary_window->cong_tree_view));
-
-	/* --- Bookmark view --- */
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 w2,
+					 gtk_label_new("Overview")
+					 );
+		
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
+						      cong_tree_view_get_widget(primary_window->cong_tree_view));
+		
+		/* --- Bookmark view --- */
 #if 0
-	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-				 cong_bookmark_view_new(primary_window->doc),
-				 gtk_label_new("Bookmarks")
-				 );
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 cong_bookmark_view_new(primary_window->doc),
+					 gtk_label_new("Bookmarks")
+					 );
 #endif
 	
-	/* --- Raw XML view --- */
-	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-				 cong_test_view_new(primary_window->doc),
-				 gtk_label_new("Raw XML")
-				 );
+		/* --- Raw XML view --- */
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 cong_test_view_new(primary_window->doc),
+					 gtk_label_new("Raw XML")
+					 );
 
+		/* --- Scrolling area --- */
+		primary_window->scroller = gtk_scrolled_window_new(NULL, NULL);
+		gtk_paned_add2(GTK_PANED(w1), primary_window->scroller);
 
-#if 0	
-	/* --- TEMPORARY: Custom style --- */
-
-	style = gtk_widget_get_default_style();
-	style = gtk_style_copy(style);
-	for (i = 0; i < 5; i++)
-	{
-		gcol.red = 0xffff;
-		gcol.blue = 0xffff;
-		gcol.green = 0x0000;
-		style->bg[i] = gcol;
-	}
-#endif
-
-	/* --- Scrolling area --- */
-
-	primary_window->scroller = gtk_scrolled_window_new(NULL, NULL);
-	gtk_paned_add2(GTK_PANED(w1), primary_window->scroller);
-
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(primary_window->scroller), GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_ALWAYS);
-
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(primary_window->scroller), GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_ALWAYS);
+		
 #if USE_CONG_EDITOR_WIDGET
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
-					      GTK_WIDGET(primary_window->cong_editor_widget));
-	gtk_widget_show(primary_window->cong_editor_widget);
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
+						      GTK_WIDGET(primary_window->cong_editor_widget));
+		gtk_widget_show(primary_window->cong_editor_widget);
 #else
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
-					      cong_editor_view_get_widget(primary_window->cong_editor_view));
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
+						      cong_editor_view_get_widget(primary_window->cong_editor_view));
 #endif
+		
+		
+		/* TEMPORARY: Set white background */
+		
+		gcol.blue = 0xffff;
+		gcol.green = 0xffff;
+		gcol.red = 0xffff;
+		
+		style = gtk_widget_get_default_style();
+		style = gtk_style_copy(style);
+		
+		gdk_colormap_alloc_color(primary_window->window->style->colormap, &gcol, 0, 1);
 	
-	
-	/* TEMPORARY: Set white background */
-	
-	gcol.blue = 0xffff;
-	gcol.green = 0xffff;
-	gcol.red = 0xffff;
-	
-	style = gtk_widget_get_default_style();
-	style = gtk_style_copy(style);
-
-	gdk_colormap_alloc_color(primary_window->window->style->colormap, &gcol, 0, 1);
-
-	for (i = 0; i < 5; i++) {
-		style->bg[i] = gcol;
-	}
-
+		for (i = 0; i < 5; i++) {
+			style->bg[i] = gcol;
+		}
+		
 #if !USE_CONG_EDITOR_WIDGET
-	xv_style_r(primary_window->scroller, style);
+		xv_style_r(primary_window->scroller, style);
 #endif
-
-	gtk_widget_show(primary_window->scroller);
-
+		
+		gtk_widget_show(primary_window->scroller);
+	} /* if (primary_window->doc) { */
 
 	/* --- Main window -> vbox -> hbox --- */
 	primary_window->status = gtk_statusbar_new();
 	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->status);
-
+		
 	/* --- Putting it together --- */
 
 	primary_window->status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(primary_window->status), 
@@ -519,7 +511,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 		} else {
 
-			status_text = g_strdup(_("Welcome to the much-too-early Conglomerate editor."));	
+			status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
 
 		}
 
@@ -539,32 +531,31 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	CongPrimaryWindow *primary_window = g_new0(CongPrimaryWindow, 1);
 
-	primary_window->doc = doc;
-	cong_document_ref(doc);
+	if (doc) {
+		primary_window->doc = doc;
+		cong_document_ref(doc);
 
-	primary_window->cong_tree_view = cong_tree_view_new(doc);
+		primary_window->cong_tree_view = cong_tree_view_new(doc);
 #if USE_CONG_EDITOR_WIDGET
 #if 0
-	primary_window->cong_editor_widget = gtk_calendar_new();
+		primary_window->cong_editor_widget = gtk_calendar_new();
 #else
-	primary_window->cong_editor_widget = cong_editor_widget_new(doc);
+		primary_window->cong_editor_widget = cong_editor_widget_new(doc);
 #endif
 #else
-	primary_window->cong_editor_view = cong_editor_view_new(doc);
+		primary_window->cong_editor_view = cong_editor_view_new(doc);
 #endif
+	}
 
 	cong_primary_window_make_gui(primary_window);
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
 	gtk_widget_show(GTK_WIDGET(primary_window->window));
 
-#if 0
-	primary_window->xv = xmlview_new(doc);
-#endif
-
-
 	the_globals.primary_windows = g_list_prepend(the_globals.primary_windows, primary_window);
 
-	cong_document_set_primary_window(doc, primary_window);	
+	if (doc) {
+		cong_document_set_primary_window(doc, primary_window);	
+	}
 
 	return primary_window;
 	

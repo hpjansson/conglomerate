@@ -520,6 +520,8 @@ void debug_transform(CongPrimaryWindow *primary_window,
 	xmlDocPtr result;
 	GtkWindow *parent_window;
 
+	g_return_if_fail(stylesheet_filename);
+
 
 	parent_window = cong_primary_window_get_toplevel(primary_window);
 #if 0
@@ -531,7 +533,14 @@ void debug_transform(CongPrimaryWindow *primary_window,
 
 	g_return_if_fail(doc);
 
-	xsl = xsltParseStylesheetFile(stylesheet_filename);
+	{
+		gchar* stylesheet_path = cong_utils_get_norman_walsh_stylesheet(stylesheet_filename);
+		g_assert(stylesheet_path);
+
+		xsl = xsltParseStylesheetFile(stylesheet_filename);
+
+		g_free(stylesheet_path);
+	}
 
 	if (NULL==xsl) {
 		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",stylesheet_filename);
@@ -586,15 +595,11 @@ void debug_transform(CongPrimaryWindow *primary_window,
 #endif
 }
 
-#if 1
-#define DOCBOOK_TO_HTML_STYLESHEET_FILE (STYLESHEET_PATH "html/docbook.xsl")
-#else
-#define DOCBOOK_TO_HTML_STYLESHEET_FILE ("../examples/test-docbook-to-html.xsl")
-#endif
-#define DOCBOOK_TO_XHTML_STYLESHEET_FILE (STYLESHEET_PATH "xhtml/docbook.xsl")
-#define DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE (STYLESHEET_PATH "htmlhelp/htmlhelp.xsl")
-#define DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE (STYLESHEET_PATH "javahelp/javahelp.xsl")
-#define DOCBOOK_TO_FO_STYLESHEET_FILE (STYLESHEET_PATH "fo/docbook.xsl")
+#define DOCBOOK_TO_HTML_STYLESHEET_FILE ("html/docbook.xsl")
+#define DOCBOOK_TO_XHTML_STYLESHEET_FILE ("xhtml/docbook.xsl")
+#define DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE ("htmlhelp/htmlhelp.xsl")
+#define DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE ("javahelp/javahelp.xsl")
+#define DOCBOOK_TO_FO_STYLESHEET_FILE ("fo/docbook.xsl")
 
 void menu_callback_debug_transform_docbook_to_html(gpointer callback_data,
 				  guint callback_action,
@@ -1069,8 +1074,8 @@ static void menu_callback_about(gpointer callback_data,
 }
 
 
-/* The menus: */
-static GtkItemFactoryEntry menu_items[] =
+/* The menus, for a window that contains a document: */
+static GtkItemFactoryEntry menu_items_with_doc[] =
 {
 	{ N_("/_File"),             NULL, NULL, 0, "<Branch>" },
 	{ N_("/File/_New..."),       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
@@ -1127,7 +1132,35 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/Debug/DTD"),             NULL, menu_callback_debug_dtd, 0, NULL },
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
-#endif
+#endif /* #if ENABLE_DEBUG_MENU */
+
+	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
+	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
+#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
+	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
+
+};
+
+/* The menus, for a window that doesn't contain a document (i.e. the initial window, when launching the application): */
+static GtkItemFactoryEntry menu_items_without_doc[] =
+{
+	{ N_("/_File"),             NULL, NULL, 0, "<Branch>" },
+	{ N_("/File/_New..."),       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
+	{ N_("/File/_Open..."),      NULL, menu_callback_file_open, 0, "<StockItem>", GTK_STOCK_OPEN },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/_Import..."),           NULL, menu_callback_file_import, 0, "<Item>" },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/_Close"),         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
+	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
+
+#if ENABLE_DEBUG_MENU
+	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
+	{ N_("/Debug/Error"),           NULL, menu_callback_debug_error, 0, NULL },
+	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
+	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
+	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
+#endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 #if ENABLE_UNIMPLEMENTED_MENUS
@@ -1143,8 +1176,15 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 	g_return_if_fail(item_factory);
 	g_return_if_fail(primary_window);
 
-	gtk_item_factory_create_items(item_factory, 
-				      sizeof(menu_items) / sizeof(menu_items[0]),
-				      menu_items, 
-				      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
+	if (cong_primary_window_get_document(primary_window)) {
+		gtk_item_factory_create_items(item_factory, 
+					      sizeof(menu_items_with_doc) / sizeof(menu_items_with_doc[0]),
+					      menu_items_with_doc, 
+					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
+	} else {
+		gtk_item_factory_create_items(item_factory, 
+					      sizeof(menu_items_without_doc) / sizeof(menu_items_without_doc[0]),
+					      menu_items_without_doc, 
+					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
+	}
 }

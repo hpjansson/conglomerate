@@ -423,16 +423,23 @@ gboolean docbook_exporter_fpi_filter(CongExporter *exporter, const gchar *fpi, g
 
 void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
+	gchar *stylesheet_path;
+
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
 	g_message("html_exporter_action_callback");
+	
+	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("html/docbook.xsl");
+	g_assert(stylesheet_path);
 
 	cong_ui_transform_doc_to_uri(doc,
-				     (STYLESHEET_PATH "html/docbook.xsl"),
+				     stylesheet_path,
 				     uri,
 				     toplevel_window);
+
+	g_free(stylesheet_path);
 }
 
 void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
@@ -441,12 +448,16 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 	GtkWidget *progress_checklist_dialog;
 	CongProgressChecklist *progress_checklist;
 	xmlDocPtr fo_doc;
+	gchar *stylesheet_path;
 
 	g_message("pdf_exporter_action_callback");
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
 	g_return_if_fail(uri);
+
+	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
+	g_assert(stylesheet_path);
 
 	progress_checklist_dialog = cong_progress_checklist_dialog_new("Exporting PDF file", toplevel_window);
 	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
@@ -459,13 +470,15 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 	gtk_widget_show(progress_checklist_dialog);
 
 	fo_doc = cong_ui_transform_doc(doc,
-				       (STYLESHEET_PATH "fo/docbook.xsl"),
+				       stylesheet_path,
 				       toplevel_window);
+
+	g_free(stylesheet_path);
 
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
 
-		CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Converting XSL Formatting Objects to PDF");
+		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Converting XSL Formatting Objects to PDF", 108467);
 		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
 		
 		xmlFreeDoc(fo_doc);
@@ -482,16 +495,23 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 
 void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
+	gchar *stylesheet_path;
+
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
 	g_message("fo_exporter_action_callback");
 
+	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
+	g_assert(stylesheet_path);
+
 	cong_ui_transform_doc_to_uri(doc,
-				     (STYLESHEET_PATH "fo/docbook.xsl"),
+				     stylesheet_path,
 				     uri,
 				     toplevel_window);
+
+	g_free(stylesheet_path);
 }
 
 

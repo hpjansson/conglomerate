@@ -13,7 +13,6 @@
 
 G_BEGIN_DECLS
 
-#define STYLESHEET_PATH "/usr/share/sgml/docbkxsl/"
 #define CONG_GCONF_PATH "/apps/conglomerate/"
 
 #define RELEASE 1
@@ -606,5 +605,26 @@ cong_xml_save_to_vfs(xmlDocPtr doc_ptr,
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 					 const xmlChar *name,
 					 int value);
+
+/* Handy utility functions: */
+
+/**
+   Dave Malcolm:
+   Norman Walsh's stylesheets for DocBook seem to be present on every modern Linux
+   distribution I've tried.  Unfortunately, there doesn't yet seem to
+   be a standard about where they should be installed.
+
+   The functions are currently hardcoded to assume Red Hat 8, and can be hacked to support SuSE 7.1
+
+   If you have another Linux distro, or one of the BSDs, or Solaris etc, then please let the conglomerate-devel mailing list
+   know where the standard location is (hopefully we can agree on a standard for this!)
+
+   These functions hide this problem:
+*/
+const gchar*
+cong_utils_get_norman_walsh_stylesheet_path(void);
+
+gchar*
+cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path);
 
 G_END_DECLS

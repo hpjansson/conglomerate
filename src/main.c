@@ -16,8 +16,30 @@
 #include <libgtkhtml/gtkhtml.h>
 #endif
 
-void get_example(GtkWidget *w, gpointer data);
-gint set_vectors(GtkWidget *w, gpointer data);
+const gchar*
+cong_utils_get_norman_walsh_stylesheet_path(void)
+{
+	/* FIXME:  This is currently a nasty hack; how should we set this up so it "just works"? */
+
+#if 0
+	/* Value that worked for Dave Malcolm on SuSE 7.1: */
+	return "/usr/share/sgml/docbkxsl/";
+#endif
+
+#if 1
+	/* Value that works for Dave Malcolm on Red Hat 8: */
+	return "/usr/share/sgml/docbook/xsl-stylesheets-1.50.0-3/";
+#endif
+}
+
+gchar*
+cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
+{
+	g_return_val_if_fail(stylesheet_relative_path, NULL);
+
+	return g_strdup_printf("%s%s",cong_utils_get_norman_walsh_stylesheet_path(), stylesheet_relative_path);
+}
+
 
 /*
 #define AUTOGENERATE_DS
@@ -164,12 +186,12 @@ gboolean main_load_displayspecs(void)
 #if 0
 	gchar*      xds_directory = gnome_program_locate_file(the_gui.gnome_program,
 							      GNOME_FILE_DOMAIN_APP_DATADIR,
-							      "dispspec",
+							      "conge/dispspecs",
 							      FALSE,
 							      NULL);
 #else
 	gchar* current_dir = g_get_current_dir();
-	gchar* xds_directory = g_strdup_printf("%s/../examples",current_dir);
+	gchar* xds_directory = g_strdup_printf(DATADIR"/conge/dispspecs",current_dir);
 	g_free(current_dir);
 #endif
 
@@ -272,36 +294,13 @@ int main( int   argc,
 	fonts_load();
 	editor_popup_init(NULL); /* FIXME */
 
-#if 0
-	the_globals.pango_context = pango_context_new();
-
-	pango_context_set_font_map( gdk_pango_context_get(), /*  the_globals.pango_context, */
-				    pango_ft2_font_map_for_display() );
-#endif
-
-
-#if 0
-	the_globals.pango_font_description = pango_font_description_new();
-
-	pango_font_description_set_family(the_globals.pango_font_description,
-					  "sans");
-	pango_font_description_set_size(the_globals.pango_font_description,
-			       PANGO_SCALE*12);
-
-	pango_context_set_font_description(the_globals.pango_context,
-					   the_globals.pango_font_description);
-
-
-	the_globals.pango_font = pango_context_load_font(the_globals.pango_context,
-							 the_globals.pango_font_description);
-
-	g_assert(the_globals.pango_font);
-#endif
-	
 	cong_primary_window_new(NULL);
-
-
+	
 	/* Load all the displayspec (xds) files: */
+	/* 
+	   FIXME: currently this function requires a primary window to exist, so it can manipulate graphics contexts... 
+	   Ideally we would only create a "document-less" window if no file was specified on the command line.
+	*/
 	if (!main_load_displayspecs()) {
 		return 1;
 	}
@@ -317,11 +316,17 @@ int main( int   argc,
 
 	the_globals.clipboard = NULL;
 
-	/* --- */
-#if 0	
-	if (argc > 2) open_document_do(argv[1], argv[2]);
+#if 1
+	/* 
+	   If we have any arguments, interpret the final one as the name of a file to be opened: 
+
+	   FIXME: should we use popt?
+	*/
+	if (argc > 1) {
+		open_document_do(argv[argc-1], NULL);
+	}
 #endif
-	
+
 	gtk_main();
 
 	return(0);
