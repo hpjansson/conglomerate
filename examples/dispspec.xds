@@ -32,6 +32,10 @@
     <element tag="element-list" type="structural">
       <name>List of XML Elements</name>
     </element>
+    <element tag="format" type="structural">
+      <name>Format</name>
+      <header-info xpath="concat(&quot;filename extension &quot;, @extension)"/>
+    </element>
     <element tag="gui" type="structural">
       <name>GUI</name>
     </element>
@@ -44,6 +48,10 @@
     <element tag="name" type="structural">
       <name>Name</name>
       <short-desc>Name of an XML element</short-desc>
+    </element>
+    <element tag="serialisation" type="structural">
+      <name>Serialisation Type List</name>
+      <short-desc>List of file types for this type of document</short-desc>
     </element>
     <element tag="short-desc" type="structural">
       <name>Short Description</name>

@@ -1,3 +1,9 @@
+2003-10-20  Boris Goldowsky <bgoldowsky@rcn.com>
+
+	* dispspec.xds
+
+	Added <format> and <serialisation> tags
+
 2003-10-16  David Malcolm
 
 	* docbook.xds
