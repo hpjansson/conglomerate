@@ -55,7 +55,9 @@ If you want to make a debian package from the tarbal or CVS type
 
    deb/build
 
+and when you have a deb-src line in /etc/apt/source type
 
+   apt-get source -b conglomerate
 
 
 Running
