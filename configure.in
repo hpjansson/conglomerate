@@ -200,6 +200,7 @@ dnl --- Output ---
 AC_OUTPUT(Makefile 
 	  conglomerate.spec
           po/Makefile.in
+	  data/conglomerate.keys
 	  data/conglomerate.schemas
 	  data/Makefile
 	  deb/Makefile

@@ -1,5 +1,6 @@
 Makefile
 Makefile.in
 conglomerate.desktop
+conglomerate.keys
 conglomerate.schema
 conglomerate.schemas

@@ -1,3 +1,8 @@
+2003-11-23  Geert Stappers  <stappers@stappers.nl>
+
+	* configure.in
+	generate data/conglomerate.keys.
+
 2003-11-14  Geert Stappers  <stappers@stappers.nl>
 
 	* config.guess and config.sub
