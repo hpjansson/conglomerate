@@ -19,18 +19,24 @@ Conglomerate is going to be a GNOME 2 application and we use various GNOME
 components.  Hence you'll need a reasonably up-to-date install of GNOME 2 to
 build it.
 
+  ./configure
+  make
+
 If you're compiling from CVS, type
 
-  ./autogen.sh
-
-Next type
-
+  ./autogen.sh   		# generate and run ./configure
   make
 
 and see what happens. This should produce an executable called "conge" in
 the src/ current directory.
 
-Currently you need to run conge from "src" directory for it to work.
+On some systems, example given Red Hat 8, you have to type
+
+   libtoolize --automake
+   ./configure
+   make
+
+
 
 In theory, compiling on Windows should be equally simple, if you're using Cygwin
 (http://www.cygnus.com/cygwin/). The process is basically the same as on Unix.
@@ -41,6 +47,8 @@ to build a Windows version for a long time; please contact the development list
 
 Running
 -------
+
+Currently you need to run conge from "src" directory for it to work.
 
 (Dave Malcolm 20 October 2002:  the text in this section is out of date; need to rewrite!!!)
 
