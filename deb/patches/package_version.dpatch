@@ -1,40 +1,63 @@
-#!/bin/sh
-# debian/patches/package_version.dpatch
+#!/bin/sh -e
+## debian/patches/package_version.dpatch by Geert Stappers
 # 
 
 #  All lines beginning with `## DP:' are a description of the patch.
-## DP: Show inside program which Debian version it is.
+## DP: Show inside the program which Debian package version it is.
+## DP: For 4.3.2-1 it does `sed -e 's/4.3.2/4.3.2debian1/'`.
 
 VERSION=$( dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
 VERSION=$( echo $VERSION | sed -e 's/-/debian/')
 
-# File to dpatch:
-FTDP=src/cong-menus.c
-# modifing config.h could effect other files, at least for make.
+# File to dpatch
+FTDP=./src/cong-menus.c
+# modifing ./config.h could effect other files, at least for make.
 
-# String to replace
+# String to replace, as a regular expression in double quotes
 STR="PACKAGE_VERSION"
+#  that is what upstream provides
 
-# modified
+# modified version string, this will be the substitute.
 MOD="\"\\\n${VERSION}\""
+#  it is the version prefixed with an new line and surrounded by double quoutes
 
-if [ $# -ne 1 ]; then
-    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+
+#-------------------------------------------------------------
+# contact upstream if you need to change below these lines ---
+#-------------------------------------------------------------
+
+if [ $# -lt 1 ]; then
+    echo >&2 "$(basename $0): script expects needs an argument"
     exit 1
 fi
 
 case "$1" in
   -patch)
-    sed -e "s/${STR}/${MOD}/" ${FTDP} > ${FTDP}.modified
-    mv ${FTDP}.modified ${FTDP}
+    if [ $( sed -ne "/${STR}/p" ${FTDP} | wc -l ) -gt 0 ]
+    then
+      sed -e "s/${STR}/${MOD}/" ${FTDP} > ${FTDP}.modified
+      mv ${FTDP}.modified ${FTDP}
+    else
+      echo "$(basename $0): could not find"
+      echo "${STR}"
+      echo "in ${FTDP}, did not patch."
+      exit 1
+    fi
   ;;
   -unpatch)
-    # test if $MOD is in $FTDP    FIXME
-    sed -e "s/${MOD}/${STR}/" ${FTDP} > ${FTDP}.modified
-    mv ${FTDP}.modified ${FTDP}
+    if [ $( sed -ne "/${MOD}/p" ${FTDP} | wc -l ) -gt 0 ]
+    then
+      sed -e "s/${MOD}/${STR}/" ${FTDP} > ${FTDP}.modified
+      mv ${FTDP}.modified ${FTDP}
+    else
+      echo "$(basename $0): could not find"
+      echo "${MOD}"
+      echo "in ${FTDP}, did not patch."
+      exit 1
+    fi
   ;;
   *)
-    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+    echo >&2 "$(basename $0): script expects -patch|-unpatch as argument"
     exit 1
   ;;
 esac

@@ -1,3 +1,12 @@
+2003-11-24 Geert Stappers <stappers@stappers.nl>
+
+	* package_version.dpatch:
+	Replaced $DL with the regular /.
+	dpatch 2.0.0 compliant.
+
+	* 49_*:
+	dpatch 2.0.0 compliant.
+
 2003-11-19 Geert Stappers <stappers@stappers.nl>
 
 	* package_version.dpatch:
