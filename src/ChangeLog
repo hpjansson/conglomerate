@@ -1,5 +1,9 @@
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.h, cong-util.h
+
+	Formating fixes for gtkdoc
+
 	* cong-text-cache.c
 
 	Allow going one character beyond the end of buffer, to allow for sane cursor movement (bug #121066 again)

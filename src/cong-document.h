@@ -102,21 +102,33 @@ cong_document_construct (CongDocument *doc,
 			 CongDispspec *ds, 
 			 const gchar *url);
 
-/* takes ownership of xml_doc; the new CongDocument is created with a reference count of 1; any views constructed of the document will increment its reference count */
+/**
+ * cong_document_new_from_xmldoc:
+ * @xmldoc:  The #xmlDocPtr which the #CongDocument is to wrap.  It takes ownership of it.
+ *
+ * @ds:
+ *
+ * @url:
+ *
+ * The new CongDocument is created with a reference count of 1; 
+ * any views constructed of the document will increment its reference count 
+ *
+ * Returns: the new #CongDocument
+ */
 CongDocument*
 cong_document_new_from_xmldoc (xmlDocPtr xml_doc, 
 			       CongDispspec *ds, 
 			       const gchar *url);
 
-#if 0
-/* FIXME: eventually this will be a GObject, and the ref/unref functions will be redundant: */
-void
-cong_document_ref(CongDocument *doc);
-
-void
-cong_document_unref(CongDocument *doc);
-#endif
-
+/**
+ * cong_document_get_xml:
+ * @doc:  The #CongDocument.
+ *
+ * Retrieve the #xmlDocPtr wrapped by a #CongDocument.  You should not attempt to modify it directly, but instead
+ * use methods of the #CongDocument
+ *
+ * Returns: the #xmlDocPtr wrapped by the #CongDocument
+ */
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc);
 

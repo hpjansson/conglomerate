@@ -36,8 +36,14 @@ gboolean
 cong_util_is_pure_whitespace (const gchar *utf8_text);
 
 /**
-   Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
-*/
+ * cong_util_cleanup_text:
+ *
+ * @text:  input xml text
+ *
+ * Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into visible characters.
+ *
+ * Returns: a freshly-allocated string, with all tabs and carriage returns turned into their printf equivalents
+ */
 gchar* 
 cong_util_cleanup_text (const xmlChar *text);
 
@@ -49,11 +55,12 @@ gchar*
 cong_util_get_local_path_from_uri (GnomeVFSURI *uri);
 
 /**
-   Norman Walsh's stylesheets for DocBook seem to be present on every modern Linux
-   distribution I've tried.  
-
-   These functions attempt to use the local catalog to find them.
-*/
+ * cong_utils_get_norman_walsh_stylesheet_path:
+ *
+ *  Try to locate Norman Walsh's stylesheets for DocBook using the local catalog to find them.
+ *
+ * Returns:  a string containing the path (which the caller must delete), or NULL
+ */
 gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void);
 
@@ -115,7 +122,11 @@ cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
 					       CongNodePtr node);
 
 /**
-   Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
+ * cong_util_make_dtd:
+ *
+ * Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree
+ *
+ * Returns: the #xmlDtdPtr that was assigned
  */
 xmlDtdPtr
 cong_util_make_dtd (xmlDocPtr xml_doc,
@@ -124,10 +135,13 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 		    const xmlChar *SystemID);
 
 /**
-   Make DTD declaration, assigns it to the given document, and add it to the tree.
-
-   Call cong_document_set_external_dtd instead if you want notifications to work.
-*/
+ * cong_util_add_external_dtd:
+ *
+ * Make DTD declaration, assigns it to the given document, and add it to the tree.
+ * Call cong_document_set_external_dtd() instead if you want notifications to work.
+ *
+ * Returns: the #xmlDtdPtr that was assigned
+ */
 xmlDtdPtr 
 cong_util_add_external_dtd (xmlDocPtr xml_doc, 
 			    const xmlChar *root_element,
@@ -139,8 +153,10 @@ cong_util_split_uri (const GnomeVFSURI* uri,
 		     gchar** filename_alone, 
 		     gchar** path);
 
-/*
-  Function to remove a node "tag" from the tree; all its children become children of tag's parents in the natural place in the tree.
+/**
+ * cong_util_remove_tag:
+ *
+ * Function to remove a node "tag" from the tree; all its children become children of tag's parents in the natural place in the tree.
  */
 void 
 cong_util_remove_tag (CongDocument *doc, 
