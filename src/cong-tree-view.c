@@ -45,6 +45,8 @@
 
 typedef struct CongTreeViewDetails
 {
+	CongPrimaryWindow *primary_window;
+
 	/* Creation parameters: */
 	CongTreeViewNodeFilter node_filter;
 	CongTreeViewNodeCreationCallback node_creation_callback;
@@ -152,7 +154,9 @@ cong_tree_view_new (CongDocument *doc,
 		    CongTreeViewNodeFilter node_filter,
 		    CongTreeViewNodeCreationCallback node_creation_callback,
 		    CongTreeViewPixbufCallback pixbuf_callback, /* can be NULL */
-		    gpointer user_data)
+		    gpointer user_data,
+ 		    CongPrimaryWindow *primary_window /* temporary, whilst the new popup menu is hooked up */
+		    )
 {
 	CongTreeView *cong_tree_view;
 	CongTreeViewDetails *details;
@@ -175,6 +179,7 @@ cong_tree_view_new (CongDocument *doc,
 	details->node_creation_callback = node_creation_callback;
 	details->pixbuf_callback = pixbuf_callback;
 	details->user_data = user_data;
+	details->primary_window = primary_window;
 
 	details->search_structure = g_tree_new_full (key_compare_func,
 						     NULL,
@@ -402,7 +407,8 @@ on_widget_destroy_event (GtkWidget *widget,
 
 /* the treeview widget has the userdata "cong_tree_view" set on it */
 static gint 
-tree_popup_show(GtkWidget *widget, GdkEvent *event)
+tree_popup_show (GtkWidget *widget, 
+		 GdkEvent *event)
 {
 	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(widget));
 
@@ -439,7 +445,6 @@ tree_popup_show(GtkWidget *widget, GdkEvent *event)
 		    
 				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
 					CongNodePtr node;
-					GtkWidget* menu;
 					CongDocument* doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
 					
 					gtk_tree_model_get(tree_model, &iter, CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node, -1);
@@ -452,12 +457,19 @@ tree_popup_show(GtkWidget *widget, GdkEvent *event)
 						g_free (desc);
 					}
 #endif
-					
-					menu = cong_ui_popup_init(doc, 
-								  node, 
-								  parent_window);
-					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
-						       bevent->time);		      
+
+					cong_document_begin_edit (doc);
+					/* FIXME: this adds a selection command: */
+					cong_document_select_node (doc,
+								   node);
+					cong_ui_popup_init(doc, 
+							   node, 
+							   parent_window,
+							   PRIVATE(cong_tree_view)->primary_window);
+					cong_ui_show_context_menu (PRIVATE(cong_tree_view)->primary_window,
+								   bevent->button,
+								   bevent->time);
+					cong_document_end_edit (doc);
 				}
 				
 				

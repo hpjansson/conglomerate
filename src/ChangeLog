@@ -1,3 +1,14 @@
+2004-08-13  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dom-view.c, cong-editor-area.c, cong-editor-node-text.c,
+	cong-editor-widget.h, cong-editor-widget3.c, cong-menus.c,
+	cong-overview-view.c, cong-overview-view.h, cong-primary-window.c,
+	cong-primary-window.h, cong-tree-view.c, cong-tree-view.h,
+	cong-ui-hooks.h, cong-util.c, cong-util.h, global.h, popup.c,
+	tree.c: 
+
+	First pass at a port of the context menu to the GtkAction API
+
 2004-08-12  Geert Stappers  <stappers@stappers.nl>
 
 	*  plugin-docbook.c
@@ -82,7 +93,6 @@
 	of cong_document_get_root(cong_doc); to get linked
 	with debug menu enabled.
 
->>>>>>> 1.671
 2004-07-26  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-menus.c: 

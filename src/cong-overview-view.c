@@ -28,6 +28,7 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
 #include "cong-tree-view.h"
+#include "cong-overview-view.h"
 
 /* Internal function prototypes: */
 static gboolean 
@@ -73,7 +74,8 @@ struct CongOverviewDetails
  * Returns:
  */
 CongTreeView*
-cong_overview_view_new (CongDocument *doc)
+cong_overview_view_new (CongDocument *doc,
+			CongPrimaryWindow *primary_window)
 {
 	CongOverviewDetails *overview_details;
 
@@ -86,7 +88,8 @@ cong_overview_view_new (CongDocument *doc)
 							  node_filter,
 							  node_creation_callback,
 							  pixbuf_callback,
-							  NULL);
+							  NULL,
+							  primary_window);
 
 	overview_details->doc = doc;
 	g_object_ref (G_OBJECT (doc));

@@ -42,9 +42,8 @@ typedef void
 						 CongNodePtr node);
 
 typedef void 
-(*CongUICallback_Document_ElementDescription_Node) (CongDocument *doc,
-						    CongElementDescription *element_desc,
-						    CongNodePtr node);
+(*CongUICallback_Document_ElementDescription_SelectedNode) (CongDocument *doc,
+							    CongElementDescription *element_desc);
 
 /* Functions to hook up the callback types to a GtkMenuItem */
 GtkMenuItem* 
@@ -67,19 +66,13 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
 							      CongNodePtr node);
 
 GtkMenuItem* 
-cong_menu_item_attach_callback_Document_ElementDescription_Node (GtkMenuItem *item, 
-								 CongUICallback_Document_ElementDescription_Node callback,
-								 CongDocument *doc,
-								 CongElementDescription *element_desc,
-								 CongNodePtr node);
-/*
- * Simple utility function.
- * Adds the item to the menu with appropriate sensitivity, and ensures that the item is "shown"
- */
-GtkMenuItem* 
-cong_menu_add_item (GtkMenu *menu,
-		    GtkMenuItem *item,
-		    gboolean is_sensitive);
+cong_menu_item_attach_callback_Document_ElementDescription_SelectedNode (GtkMenuItem *item, 
+									 CongUICallback_Document_ElementDescription_SelectedNode callback,
+									 CongDocument *doc,
+									 CongElementDescription *element_desc);
+void
+cong_menu_add_item (const gchar *parent_ui_path,
+		    GtkAction *action);
 
 /*
  *
@@ -114,12 +107,10 @@ cong_ui_hook_edit_preferences (GtkWindow *toplevel_window);
 /* Tree editing hooks: */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,
-			       CongElementDescription *element_desc,
-			       CongNodePtr node);
+			       CongElementDescription *element_desc);
 void
 cong_ui_hook_tree_new_sub_element (CongDocument *doc,
-				   CongElementDescription *element_desc,
-				   CongNodePtr node);
+				   CongElementDescription *element_desc);
 void
 cong_ui_hook_tree_properties (CongDocument *doc,
 			      CongNodePtr node,
@@ -219,8 +210,15 @@ void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void editor_popup_init();
 
 /* Popup (context) menus for tree view and for section headings: */
-GtkWidget* cong_ui_popup_init(CongDocument *doc, CongNodePtr node, GtkWindow *parent_window);
-
+void 
+cong_ui_popup_init (CongDocument *doc, 
+		    CongNodePtr node, 
+		    GtkWindow *parent_window,
+		    CongPrimaryWindow *primary_window);
+void
+cong_ui_show_context_menu (CongPrimaryWindow *primary_window,
+			   guint button,
+			   guint32 activate_time);
 
 char *tag_new_pick();
 

@@ -1473,6 +1473,7 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 #if ENABLE_DEBUG_MENU
 	{ "DebugMenu", NULL, "Debug" },
 #endif
+	{ "ContextMenu", NULL, ("Context Menu") },
 	{ "HelpMenu", NULL, N_("_Help") },
 
 
@@ -1635,10 +1636,12 @@ static const gchar *ui_description =
 "    </menu>"
 "    <menu action='HelpMenu'>"
 "      <menuitem action='Contents'/>"
-"      <menuitem action='Homepage'/>"
 "      <menuitem action='About'/>"
 "    </menu>"
 "  </menubar>"
+"  <popup action='ContextMenu'>"
+"      <menuitem action='Homepage'/>"
+"  </popup>"
 "  <toolbar name='MainToolBar'>"
 "      <toolitem action='New'/>"
 "      <toolitem action='Open'/>"

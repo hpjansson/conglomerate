@@ -58,7 +58,8 @@ get_text_for_node(CongNodePtr node);
  * Returns:
  */
 GtkWidget *
-cong_dom_view_new (CongDocument *doc)
+cong_dom_view_new (CongDocument *doc,
+		   CongPrimaryWindow *primary_window)
 {
 	CongTreeView *cong_tree_view;
 	GtkScrolledWindow *scrolled_window;
@@ -70,7 +71,8 @@ cong_dom_view_new (CongDocument *doc)
 					     node_filter,
 					     node_creation_callback,
 					     NULL,
-					     NULL				   
+					     NULL,
+					     primary_window
 					     );
 
 	

@@ -61,7 +61,8 @@ cong_tree_view_new (CongDocument *doc,
 		    CongTreeViewNodeFilter node_filter,
 		    CongTreeViewNodeCreationCallback node_creation_callback,
 		    CongTreeViewPixbufCallback pixbuf_callback, /* can be NULL */
-		    gpointer user_data
+		    gpointer user_data,
+ 		    CongPrimaryWindow *primary_window /* temporary, whilst the new popup menu is hooked up */
 		    );
 
 void 

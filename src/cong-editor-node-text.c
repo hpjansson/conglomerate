@@ -1037,9 +1037,11 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 	case 3:
 		/* Right mouse button for most users:  Context menu: */
-		editor_popup_build(editor_widget, parent_window);
-		editor_popup_show(cong_app_singleton()->popup, event);
-		
+		editor_popup_build (editor_widget, 
+				    parent_window);
+		cong_ui_show_context_menu (cong_editor_widget_get_primary_window(editor_widget),
+					   event->button,
+					   event->time);
 		return TRUE;
 	}
 

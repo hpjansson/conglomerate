@@ -1215,17 +1215,21 @@ on_signal_button_press_for_area_with_node (CongEditorArea *editor_area,
 
 	case 3: /* Normally the right mouse button: */
 		{
-			GtkWidget* menu;
+			cong_document_begin_edit (doc);
 
-			menu = cong_ui_popup_init(doc, 
-						  cong_editor_node_get_node (editor_node),
-						  GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget))));
-			gtk_menu_popup (GTK_MENU(menu), 
-					NULL, 
-					NULL, 
-					NULL, 
-					NULL, event->button,
-					event->time);		      
+			/*#error*/
+			/* FIXME: this adds a selection command: */
+			cong_document_select_node (doc,
+						   cong_editor_node_get_node (editor_node));
+			cong_ui_popup_init(doc, 
+					   cong_editor_node_get_node (editor_node),
+					   GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget))),
+					   cong_editor_widget_get_primary_window(editor_widget) );
+			cong_ui_show_context_menu (cong_editor_widget_get_primary_window(editor_widget),
+						   event->button,
+						   event->time);
+
+			cong_document_end_edit (doc);
 		}
 		return TRUE;
 	}		

@@ -69,19 +69,21 @@ get_element_name(CongDocument* doc)
  * cong_ui_hook_tree_new_sibling:
  * @doc:
  * @ds_element:
- * @node:
  *
  * TODO: Write me
  */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,
-			       CongElementDescription *element_desc,
-			       CongNodePtr node)
+			       CongElementDescription *element_desc)
 {
+	CongNodePtr node;
 	CongNodePtr new_node;
 	CongDispspec *ds;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
+
 	g_return_if_fail (node);
 
 	ds = cong_document_get_default_dispspec(doc);
@@ -150,19 +152,21 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
  * cong_ui_hook_tree_new_sub_element:
  * @doc:
  * @ds_element:
- * @node:
  *
  * TODO: Write me
  */
 void
 cong_ui_hook_tree_new_sub_element (CongDocument *doc,
-				   CongElementDescription *element_desc,
-				   CongNodePtr node)
+				   CongElementDescription *element_desc)
 {
+	CongNodePtr node;
 	CongNodePtr new_node;
 	CongDispspec *ds;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
+
 	g_return_if_fail (node);
 
 	ds = cong_document_get_default_dispspec(doc);

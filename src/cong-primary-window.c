@@ -383,7 +383,8 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 				 );
 	
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-					      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
+					      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc,
+												 primary_window)));
 	
 	/* --- Bookmark view --- */
 #if 0
@@ -396,16 +397,18 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 	
 	/* --- Raw XML view --- */
 	LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
-	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-				 cong_dom_view_new(primary_window->doc),
-				 gtk_label_new(_("Raw XML"))
-				 );
+	gtk_notebook_append_page (GTK_NOTEBOOK(sidebar_notebook),
+				  cong_dom_view_new(primary_window->doc,
+						    primary_window),
+				  gtk_label_new(_("Raw XML"))
+				  );
 	
 		/* Set up the editor_widget v3: */
 #if ENABLE_MAIN_WIDGET
 	{
 		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
-		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
+		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc,
+									      primary_window);
 		
 		/* --- Scrolling area for editor widget 3--- */
 		primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
@@ -430,7 +433,8 @@ static void
 add_tree_layout_for_doc (CongPrimaryWindow *primary_window, 
 			 CongDocument *doc)
 {
-	GtkWidget *widget = cong_dom_view_new(primary_window->doc);
+	GtkWidget *widget = cong_dom_view_new (primary_window->doc,
+					       primary_window);
 	gnome_app_set_contents(GNOME_APP(primary_window->window),widget);
 }
 

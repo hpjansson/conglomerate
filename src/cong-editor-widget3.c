@@ -65,6 +65,8 @@ struct CongEditorWidget3Details
 {
 	CongDocument *doc;
 
+	CongPrimaryWindow *primary_window;
+
 	GHashTable *hash_of_traversal_node_to_editor_node;
 
 	CongEditorArea *root_area;
@@ -313,11 +315,14 @@ cong_eel_disconnect_all_with_data (gpointer instance,
  */
 CongEditorWidget3*
 cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
-			       CongDocument *doc)
+			       CongDocument *doc,
+			       CongPrimaryWindow *primary_window)
 {
 	PRIVATE(editor_widget)->doc = doc;
 
 	g_object_ref(G_OBJECT(doc));
+
+	PRIVATE(editor_widget)->primary_window = primary_window;
 
 #if 1
 	/* FIXME: need to clean up properly: */
@@ -436,12 +441,14 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
  * Returns:
  */
 GtkWidget* 
-cong_editor_widget3_new(CongDocument *doc)
+cong_editor_widget3_new(CongDocument *doc,
+			CongPrimaryWindow *primary_window)
 {
 	g_return_val_if_fail(doc, NULL);
 
 	return GTK_WIDGET( cong_editor_widget3_construct (g_object_new (CONG_EDITOR_WIDGET3_TYPE, NULL),
-							  doc)
+							  doc,
+							  primary_window)
 			   );
 }
 
@@ -1897,3 +1904,9 @@ cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *wi
 								editor_node));
 }
 #endif
+
+CongPrimaryWindow*
+cong_editor_widget_get_primary_window(CongEditorWidget3 *editor_widget)
+{
+	return PRIVATE(editor_widget)->primary_window;
+}

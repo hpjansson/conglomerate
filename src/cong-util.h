@@ -222,15 +222,17 @@ cong_util_make_menu_item (const gchar *label,
 GtkMenuItem* 
 cong_util_make_stock_menu_item (const gchar *stock_id);
 
-GtkMenuItem* 
-cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element);
+GtkAction* 
+cong_util_make_action_for_dispspec_element (const gchar* action_prefix,
+					    CongDispspecElement *element);
 
-GtkMenuItem* 
-cong_util_make_menu_item_for_element_desc (const CongElementDescription *element_desc,
-					   CongDocument *doc);
+GtkAction* 
+cong_util_make_action_for_element_desc (const gchar* action_prefix,
+					const CongElementDescription *element_desc,
+					CongDocument *doc);
 
-GtkWidget*
-cong_util_add_menu_separator (GtkMenu *menu);
+void
+cong_util_add_menu_separator (const gchar *parent_ui_path);
 
 
 char *
@@ -273,6 +275,13 @@ cong_util_string_to_bool (const gchar *string,
 
 const gchar*
 cong_util_bool_to_string (gboolean value);
+
+
+GtkAction*
+cong_action_new (const gchar *name,
+		 const gchar *label,
+		 const gchar *tooltip,
+		 GdkPixbuf *pixbuf);
 
 G_END_DECLS
 

@@ -1438,21 +1438,44 @@ cong_util_make_stock_menu_item (const gchar *stock_id)
 								 NULL));
 }
 
+static gchar*
+make_action_name (const gchar *action_prefix,
+		  const gchar *ns_uri,
+		  const gchar *local_name)
+{
+	g_assert (action_prefix);
+	g_assert (local_name);
+
+	if (ns_uri) {
+		return g_strdup_printf ("%s-<%s xmlns=\"%s\">", action_prefix, local_name, ns_uri);
+	} else {
+		return g_strdup_printf ("%s-<%s>", action_prefix, local_name);
+	}
+}
+
 /**
- * cong_util_make_menu_item_for_dispspec_element:
+ * cong_util_make_action_for_dispspec_element:
+ * @action_prefix:
  * @element:
  *
  * TODO: Write me
  * Returns:
  */
-GtkMenuItem* 
-cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element)
+GtkAction* 
+cong_util_make_action_for_dispspec_element (const gchar* action_prefix,
+					    CongDispspecElement *element)
 {
-	GtkMenuItem *item;
+	gchar *action_name;
+	GtkAction *action;
 	GdkPixbuf *pixbuf;
 	const gchar *tip;
 
+	g_return_val_if_fail (action_prefix, NULL);
 	g_return_val_if_fail (element, NULL);
+
+	action_name = make_action_name (action_prefix,
+					cong_dispspec_element_get_ns_uri (element),
+					cong_dispspec_element_get_local_name (element));
 
 	pixbuf = cong_dispspec_element_get_icon (element);
 	tip = cong_dispspec_element_get_description (element);
@@ -1461,61 +1484,73 @@ cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element)
 		tip = _("(no description available)");
 	}
 	
-	item = cong_util_make_menu_item (cong_dispspec_element_username (element),
-					 tip,
-					 pixbuf);
+	action = cong_action_new (action_name,
+				  cong_dispspec_element_username (element),
+				  tip,
+				  pixbuf);
+	g_free (action_name);
 	if (pixbuf) {
 		g_object_unref (G_OBJECT (pixbuf));
 	}
 
-	return item;
+	return action;
 }
 
 /**
- * cong_util_make_menu_item_for_element_desc:
+ * cong_util_make_action_for_element_desc:
+ * @action_prefix:
  * @element_desc:
  * @doc:
  *
  * TODO: Write me
  * Returns:
  */
-GtkMenuItem* 
-cong_util_make_menu_item_for_element_desc (const CongElementDescription *element_desc,
-					   CongDocument *doc)
+GtkAction* 
+cong_util_make_action_for_element_desc (const gchar* action_prefix,
+					const CongElementDescription *element_desc,
+					CongDocument *doc)
 {
 	CongDispspecElement* ds_element;
 
+	g_return_val_if_fail (action_prefix, NULL);
 	g_assert (element_desc);
 	g_assert (IS_CONG_DOCUMENT (doc));
 
 	ds_element = cong_element_description_get_dispspec_element_for_doc (element_desc,
 									    doc);
 	if (ds_element) {
-		return cong_util_make_menu_item_for_dispspec_element (ds_element);
+		return cong_util_make_action_for_dispspec_element (action_prefix,
+								   ds_element);
 	} else {
-
+		gchar *action_name = make_action_name (action_prefix,
+						       element_desc->ns_uri,
+						       element_desc->local_name);
 		gchar *username = cong_element_description_make_user_name (element_desc,
 									   NULL);
 
-		GtkMenuItem *item = cong_util_make_menu_item (username,
-							      NULL,
-							      NULL);
+		GtkAction *action = cong_action_new (action_name,
+						     username,
+						     NULL,
+						     NULL);
 		g_free (username);
+		g_free (action_name);
 
-		return item;
+		return action;
 	}
 }
 
 /**
  * cong_util_add_menu_separator:
- * @menu:
+ * @parent_ui_path:
  *
  * TODO: Write me
- * Returns:
  */
-GtkWidget*
-cong_util_add_menu_separator (GtkMenu *menu)
+void
+cong_util_add_menu_separator (const gchar *parent_ui_path)
 {
+#if 1
+	g_message ("writeme! cong_util_add_menu_separator");
+#else
 	GtkWidget *item = gtk_menu_item_new ();
 	GtkWidget *w0 = gtk_hseparator_new ();
 	gtk_container_add (GTK_CONTAINER (item), 
@@ -1528,6 +1563,7 @@ cong_util_add_menu_separator (GtkMenu *menu)
 	gtk_widget_show (item);
 
 	return item;
+#endif
 }
 
 /**

@@ -149,7 +149,10 @@ void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 
 /* Various view subclasses: */
-GtkWidget *cong_dom_view_new(CongDocument *doc);
+GtkWidget*
+cong_dom_view_new (CongDocument *doc,
+		   CongPrimaryWindow *primary_window);
+
 GtkWidget *cong_source_view_new(CongDocument *doc);
 GtkWidget *cong_debug_message_log_view_new(CongDocument *doc);
 GtkWidget *cong_debug_signal_log_view_new(CongDocument *doc);

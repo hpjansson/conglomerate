@@ -30,7 +30,8 @@
 G_BEGIN_DECLS
 
 CongTreeView *
-cong_overview_view_new (CongDocument *doc);
+cong_overview_view_new (CongDocument *doc,
+			CongPrimaryWindow *primary_window);
 
 G_END_DECLS
 

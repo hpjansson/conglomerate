@@ -86,10 +86,12 @@ cong_editor_widget3_get_type (void);
 
 CongEditorWidget3*
 cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
-			       CongDocument *doc);
+			       CongDocument *doc,
+			       CongPrimaryWindow *primary_window);
 
 GtkWidget*
-cong_editor_widget3_new(CongDocument *doc);
+cong_editor_widget3_new(CongDocument *doc,
+			CongPrimaryWindow *primary_window);
 
 CongDocument*
 cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget);
@@ -159,6 +161,10 @@ cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
 				      gchar **output_string, 
 				      PangoAttrList **output_pango_attr_list,
 				      gint *output_cursor_pos);
+
+/* This function exists so that the popup menu can be rebuilt the hackish way; it can disappear after the GtkAction code is completed */
+CongPrimaryWindow*
+cong_editor_widget_get_primary_window(CongEditorWidget3 *editor_widget);
 
 G_END_DECLS
 
