@@ -4,7 +4,11 @@
     <name>Conglomerate Display Specification</name>
     <description>Information that tells Conglomerate how to display a particular type of file.</description>
   </metadata>
+  <serialisation>
+    <format extension="xds"/>
+  </serialisation>
   <document-models>
+	<external-document-model type="dtd" public-id="-//Conglomerate//Conglomerate Display Specification V0.1.0//EN"/>
   </document-models>
   <element-list>
     <element tag="collapseto" type="structural">

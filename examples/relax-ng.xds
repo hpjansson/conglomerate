@@ -4,6 +4,9 @@
 			<name>RELAX NG</name>
 			<description>RELAX NG is a schema language i.e. a language for describing the strucutre of an XML document.</description>
 		</metadata>
+		<serialisation>
+			<format extension="rng"/>
+		</serialisation>
 		<document-models>
 		</document-models>
 		<element-list>

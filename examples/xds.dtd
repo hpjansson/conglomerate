@@ -1,7 +1,7 @@
 <!--
 @root dispspec
 -->
-<!ELEMENT dispspec ( metadata, document-models, element-list, document-template?, gui? ) >
+<!ELEMENT dispspec ( metadata, serialisation?, document-models, element-list, document-template?, gui? ) >
 
 <!ELEMENT element ( name?, short-desc?, header-info?, collapseto?, property-dialog? )>
 <!ATTLIST element 
@@ -24,6 +24,13 @@
 >
 
 <!ELEMENT metadata ( name, description ) >
+
+<!ELEMENT serialisation ( format+) >
+
+<!ELEMENT format EMPTY >
+<!ATTLIST format
+   extension  NMTOKEN  #REQUIRED 
+>
 
 <!ELEMENT document-models (external-document-model*) >
 <!ELEMENT external-document-model EMPTY >

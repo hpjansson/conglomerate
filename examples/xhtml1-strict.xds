@@ -4,6 +4,9 @@
 		<name>XHTML 1.0 (strict)</name>
 		<description>The strict XML version of HTML </description>
 	</metadata>
+	<serialisation>
+		<format extension="html"/>
+	</serialisation>
 	<document-models>
 		<external-document-model type="dtd" public-id="-//W3C//DTD XHTML 1.0 Strict//EN" system-id="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
 	</document-models>

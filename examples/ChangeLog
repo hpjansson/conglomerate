@@ -1,3 +1,9 @@
+2003-09-11  David Malcolm
+
+	* dispspec.xds, relax-ng.xds, xds.dtd, xhtml1-strict.xds
+
+	File format extension support; a formal Public ID for the dispspec DTD
+
 2003-09-09  David Malcolm
 
 	* Makefile.am, xhtml1-strict.xds
