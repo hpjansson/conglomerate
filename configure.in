@@ -19,8 +19,8 @@ dnl AM_ACLOCAL_INCLUDE(macros)
 AC_SUBST(VERSION)
 AC_SUBST(PACKAGE)
 
-AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+AC_DEFINE_UNQUOTED(VERSION, "$VERSION", [Package version])
+AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE", [Package name])
 
 AC_C_CONST
 AC_ISC_POSIX
@@ -32,7 +32,7 @@ AM_PROG_LIBTOOL
 
 GETTEXT_PACKAGE=conge
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
 ALL_LINGUAS="ru"
 
@@ -42,13 +42,21 @@ AC_PROG_INTLTOOL
 dnl --- Package configuration ---
 
 LIBXML_REQUIRED=2.0.0
+LIBXSLT_REQUIRED=1.0.0
 GNOMEUI_REQUIRED=2.0.0
 BONOBOUI_REQUIRED=1.0.0
+EEL_REQUIRED=2.0.0
 
-PKG_CHECK_MODULES(ALL,                     \
-  libxml-2.0 >= $LIBXML_REQUIRED           \
-  libbonoboui-2.0 > $BONOBOUI_REQUIRED     \
-  libgnomeui-2.0 > $GNOMEUI_REQUIRED)
+PKG_CHECK_MODULES(CONGLOMERATE,		\
+  libxml-2.0 >= $LIBXML_REQUIRED	\
+  libxslt >= $LIBXSLT_REQUIRED		\
+  libbonoboui-2.0 > $BONOBOUI_REQUIRED	\
+  libgnomeui-2.0 > $GNOMEUI_REQUIRED	\
+  eel-2.0 >= $EEL_REQUIRED)
+
+AC_SUBST(CONGLOMERATE_LIBS)
+AC_SUBST(CONGLOMERATE_CFLAGS)
+
 
 dnl --- General compilation options ---
 
@@ -94,14 +102,6 @@ fi
 dnl --- Set compiler flags ---
 
 BASE_CFLAGS="$BASE_CFLAGS -Wall"
-
-CONGLOMERATE_LIBS="$BASE_LIBS `pkg-config --libs gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0 eel-2.0`"
-CONGLOMERATE_CFLAGS="$BASE_CFLAGS `pkg-config --cflags gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0 eel-2.0`"
-
-dnl --- Output ---
-
-AC_SUBST(CONGLOMERATE_LIBS)
-AC_SUBST(CONGLOMERATE_CFLAGS)
 
 dnl --- Output ---
 
