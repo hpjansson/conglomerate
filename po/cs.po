@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-20 19:03+0200\n"
-"PO-Revision-Date: 2004-08-20 22:35+0200\n"
+"POT-Creation-Date: 2004-09-05 11:04+0200\n"
+"PO-Revision-Date: 2004-09-05 15:20+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,11 +32,7 @@ msgid ""
 "specification (called dispspec, or .xds) files, in addition to the standard "
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
-msgstr ""
-"Seznam vlastních adresářů, kde má Conglomerate hledat soubory se "
-"specifikacemi zobrazování (nazývané dispspec nebo .xds) navíc k standardní "
-"cestě instalace. Když jsou načítány dokumenty, hledá se odpovídající dispsec "
-"v těchto adresářích a použije se soubor první odpovídající dispspec."
+msgstr "Seznam vlastních adresářů, kde má Conglomerate hledat soubory se specifikacemi zobrazování (nazývané dispspec nebo .xds) navíc k standardní cestě instalace. Když jsou načítány dokumenty, hledá se odpovídající dispspec v těchto adresářích a použije se soubor první odpovídající dispspec."
 
 #: data/conglomerate.schemas.in.h:2
 msgid ""
@@ -69,7 +65,7 @@ msgid "Options"
 msgstr "Možnosti"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
-#: src/cong-node-properties-dialog.c:1285
+#: src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -119,7 +115,7 @@ msgstr "Název"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
-#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1247
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
 msgid "Properties"
 msgstr "Vlastnosti"
 
@@ -397,18 +393,21 @@ msgstr ""
 "ale nenainstalovali. Zkuste jej nainstalovat. Pokud jste změnili implicitní "
 "nastaven9 specifikací zobrazení, zkontrolujte je prosím také."
 
-#: src/cong-attribute-editor-cdata.c:218 src/cong-node-properties-dialog.c:470
+#: src/cong-attribute-editor-cdata.c:218
+#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Přidat atribut \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244 src/cong-attribute-editor.c:266
+#: src/cong-attribute-editor-cdata.c:244
+#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-editor.c:267
 #: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Odstranit atribut \"%s\""
 
-#: src/cong-attribute-editor-enumeration.c:106
+#: src/cong-attribute-editor-enumeration.c:121
 msgid "(unspecified)"
 msgstr "(neurčeno)"
 
@@ -508,7 +507,24 @@ msgstr "Ukrajinština"
 msgid "No Language"
 msgstr "Žádný jazyk"
 
-#: src/cong-attribute-editor.c:263 src/cong-attribute-wrapper.c:248
+#. are there mem leaks here
+#: src/cong-attribute-editor-nmtoken.c:210
+#, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Nemohu nastavit atribut \"%s\" na \"%s\""
+
+#: src/cong-attribute-editor-nmtoken.c:222
+msgid "The attribute value must be an XML name token."
+msgstr "Hodnota atributu musí být atom názvu v XML."
+
+#: src/cong-attribute-editor-nmtoken.c:223
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr "Atomy názvu v XML mohou obsahovat jen alfanumerické nebo ideografické znaky a interpunkci _,-, ., a :. Nemohou obsahovat mezery."
+
+#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
 #: src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
@@ -708,15 +724,15 @@ msgstr "Nahradit _vše"
 msgid "Find"
 msgstr "Hledat"
 
-#: src/cong-editor-node-text.c:975
+#: src/cong-editor-node-text.c:984
 msgid "Select word"
 msgstr "Vybrat slovo"
 
-#: src/cong-editor-node-text.c:1000
+#: src/cong-editor-node-text.c:1009
 msgid "Move cursor"
 msgstr "Přesunout kurzor"
 
-#: src/cong-editor-node-text.c:1086
+#: src/cong-editor-node-text.c:1095
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
@@ -896,7 +912,7 @@ msgstr ""
 
 #: src/cong-error-file-open.c:346 src/cong-error-file-open.c:385
 msgid "There were problems reading the contents of the file."
-msgstr "Při čtění obsahu souboru se vyskytly problémy."
+msgstr "Při čtení obsahu souboru se vyskytly problémy."
 
 #: src/cong-error-file-open.c:355 src/cong-error-file-save.c:251
 msgid "The system does not recognise that as a valid location."
@@ -1563,11 +1579,11 @@ msgid "Proper_ties"
 msgstr "_Vlastnosti"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1533 src/cong-menus.c:1755
+#: src/cong-menus.c:1533 src/cong-menus.c:1756
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: src/cong-menus.c:1534 src/cong-menus.c:1765
+#: src/cong-menus.c:1534 src/cong-menus.c:1766
 msgid "_Redo"
 msgstr "Zn_ovu"
 
@@ -1607,12 +1623,12 @@ msgstr "V_ložit..."
 msgid "View _Source"
 msgstr "Zobrazit _zdroj"
 
-#: src/cong-menus.c:1751
+#: src/cong-menus.c:1752
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Zpět: %s"
 
-#: src/cong-menus.c:1761
+#: src/cong-menus.c:1762
 #, c-format
 msgid "_Redo: %s"
 msgstr "Zn_ovu: %s"
@@ -1675,7 +1691,7 @@ msgid "Content model for <tt>%s</tt> elements"
 msgstr "Model obsahu pro elementy <tt>%s</tt>"
 
 #: src/cong-node-properties-dialog.c:1185
-#: src/cong-node-properties-dialog.c:1280
+#: src/cong-node-properties-dialog.c:1316
 msgid "DTD"
 msgstr "DTD"
 
