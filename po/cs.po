@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-21 14:09+0200\n"
+"POT-Creation-Date: 2004-06-22 09:27-0400\n"
 "PO-Revision-Date: 2004-06-21 17:25+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -118,8 +118,8 @@ msgstr "Název"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
-#: src/cong-node-properties-dialog.c:1246
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1246
 msgid "Properties"
 msgstr "Vlastnosti"
 
@@ -144,11 +144,11 @@ msgstr "Verze"
 msgid "XML Header"
 msgstr "Hlavička XML"
 
-#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:185
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:184
 msgid "_Associate this DTD"
 msgstr "_Přiřadit tuto DTD"
 
-#: glade/cong-find-replace.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -314,6 +314,25 @@ msgstr "URL"
 msgid "_Test this Link"
 msgstr "O_testovat tento odkaz"
 
+#: glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr ""
+
+#: glade/plugin-arbitrary.glade.h:3
+#, fuzzy
+msgid "Namespace URI"
+msgstr "Prostor jmen"
+
+#: glade/plugin-arbitrary.glade.h:4
+#, fuzzy
+msgid "Preview"
+msgstr "Náhled před tiskem"
+
+#: glade/plugin-arbitrary.glade.h:6
+#, fuzzy
+msgid "Top-level Element"
+msgstr "Element šablony XSL"
+
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
 msgstr "Parametry vytváření"
@@ -366,6 +385,105 @@ msgstr "Odstranit atribut \"%s\""
 #: src/cong-attribute-editor-enumeration.c:105
 msgid "(unspecified)"
 msgstr "(neurčeno)"
+
+#: src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:51
+#, fuzzy
+msgid "Danish"
+msgstr "Detaily"
+
+#: src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:63
+#, fuzzy
+msgid "Dutch"
+msgstr "Hloubka"
+
+#: src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:159
+#, fuzzy
+msgid "No Language"
+msgstr "Jazyk"
 
 #: src/cong-attribute-editor.c:257 src/cong-attribute-wrapper.c:241
 #: src/cong-node-properties-dialog.c:424
@@ -1185,23 +1303,23 @@ msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
 "Žádný zásuvný modul Conglomerate neví, jak tisknout soubory tohoto typu."
 
-#: src/cong-file-properties.c:106
+#: src/cong-file-properties.c:105
 msgid "Yes"
 msgstr "Ano"
 
-#: src/cong-file-properties.c:106
+#: src/cong-file-properties.c:105
 msgid "No"
 msgstr "Ne"
 
-#: src/cong-file-properties.c:125 src/cong-file-properties.c:128
+#: src/cong-file-properties.c:124 src/cong-file-properties.c:127
 msgid "None"
 msgstr "Žádný"
 
-#: src/cong-file-properties.c:166
+#: src/cong-file-properties.c:165
 msgid "_Remove this DTD"
 msgstr "_Odstranit tuto DTD"
 
-#: src/cong-file-properties.c:191
+#: src/cong-file-properties.c:190
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1211,27 +1329,27 @@ msgstr ""
 "informace výše. Určete tuto informaci v dokumentu explicitně kliknutím na "
 "\"Asociovat tuto DTD\"."
 
-#: src/cong-file-properties.c:200
+#: src/cong-file-properties.c:199
 msgid "No External Subset"
 msgstr "Žádná externí podmnožina"
 
-#: src/cong-file-properties.c:202
+#: src/cong-file-properties.c:201 src/plugin-validate.c:171
 msgid "_Add a DTD"
 msgstr "_Přidat DTD"
 
-#: src/cong-file-properties.c:273 src/cong-file-properties.c:275
+#: src/cong-file-properties.c:272 src/cong-file-properties.c:274
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: src/cong-file-properties.c:286
+#: src/cong-file-properties.c:285
 msgid "Unspecified"
 msgstr "Neurčeno"
 
-#: src/cong-file-properties.c:361
+#: src/cong-file-properties.c:360
 msgid "Remove DTD"
 msgstr "Odstranit DTD"
 
-#: src/cong-file-properties.c:378
+#: src/cong-file-properties.c:377 src/cong-util.c:1373
 msgid "Associate with DTD"
 msgstr "Přiřadit DTD"
 
@@ -1686,17 +1804,26 @@ msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
 
-#: src/cong-util.c:349 src/plugin-docbook.c:1195
+#: src/cong-util.c:355 src/plugin-docbook.c:1195
 msgid "Printing XSL Formatting Objects"
 msgstr "Tisk formátovacích objektů XSL"
 
-#: src/cong-util.c:393
+#: src/cong-util.c:399
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Toto bude časem výsledek cong_util_print_xslfo"
 
-#: src/cong-util.c:1210
+#: src/cong-util.c:1216
 msgid "(no description available)"
 msgstr "(popis není k dispozici)"
+
+#: src/cong-util.c:1362
+msgid "DTD files"
+msgstr ""
+
+#: src/cong-util.c:1365
+#, fuzzy
+msgid "Select a DTD"
+msgstr "Vybrat %s"
 
 #: src/cursor.c:128
 #, c-format
@@ -1714,6 +1841,20 @@ msgstr "Upozornění"
 #: src/plugin-admonition.c:76
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "Uzel editoru pro zobrazení tipů, varování atd"
+
+#: src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr ""
+
+#: src/plugin-arbitrary.c:269
+#, fuzzy
+msgid "Empty XML Document"
+msgstr "Dokument HTML"
+
+#: src/plugin-arbitrary.c:270
+#, fuzzy
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "Vytvořit dokument XML obsahující náhodný obsah."
 
 #: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:452
 msgid "Cleanup XML Source"
@@ -2086,43 +2227,31 @@ msgid ""
 msgstr ""
 "Vytvořit tabulku vypisující část sady znaků Unicode jako článek DocBook"
 
-#: src/plugin-validate.c:98
+#: src/plugin-validate.c:163
 #, c-format
 msgid "The document \"%s\" cannot be checked for validity."
 msgstr "Nemůže být zkontrolována platnost dokumentu \"%s\"."
 
-#: src/plugin-validate.c:105
+#: src/plugin-validate.c:170
 msgid ""
-"In a future version of Conglomerate we may have a feature that lets you "
-"attach a document type to a document."
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
-"V budoucí verzi Conglomerate možná budeme mít funkci, která vás nechá "
-"přiřadit k dokumentu jeho typ."
 
-#: src/plugin-validate.c:125
-#, c-format
-msgid "The document \"%s\" is not valid."
-msgstr "Dokument \"%s\" není platný."
+#: src/plugin-validate.c:172
+msgid "_Cancel"
+msgstr ""
 
-#: src/plugin-validate.c:132
-msgid "Click on the \"Details\" button for more information."
-msgstr "Pro více informací klikněte na tlačítko \"Detaily\"."
-
-#: src/plugin-validate.c:133 src/plugin-website.c:480
-msgid "_Details"
-msgstr "_Detaily"
-
-#: src/plugin-validate.c:149
+#: src/plugin-validate.c:215
 #, c-format
 msgid "The document \"%s\" is valid."
 msgstr "Dokument \"%s\" je platný."
 
-#: src/plugin-validate.c:176
+#: src/plugin-validate.c:247
 msgid "Validate Document"
 msgstr "Ověřit platnost dokumentu"
 
-#: src/plugin-validate.c:177 src/plugin-validate.c:180
-#: src/plugin-validate.c:181
+#: src/plugin-validate.c:248 src/plugin-validate.c:251
+#: src/plugin-validate.c:252
 msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
@@ -2130,7 +2259,7 @@ msgstr ""
 "Zkontroluje, jestli je dokument \"platný\", tj. jestli odpovídá sadě "
 "pravidel určených odpovídajícím typem dokumentu nebo schématem"
 
-#: src/plugin-validate.c:179
+#: src/plugin-validate.c:250
 msgid "_Validate Document"
 msgstr "_Ověřit platnost dokumentu"
 
@@ -2153,6 +2282,10 @@ msgstr "Jeden z kroků ohlásil chybu."
 #: src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
 msgstr "Pro více informací klikněte na tlačítko \"Detaily\""
+
+#: src/plugin-website.c:480
+msgid "_Details"
+msgstr "_Detaily"
 
 #: src/plugin-website.c:507
 msgid "Generate website"
@@ -2281,6 +2414,19 @@ msgstr "Vložit za"
 #: src/xmledit.c:395
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
+
+#~ msgid ""
+#~ "In a future version of Conglomerate we may have a feature that lets you "
+#~ "attach a document type to a document."
+#~ msgstr ""
+#~ "V budoucí verzi Conglomerate možná budeme mít funkci, která vás nechá "
+#~ "přiřadit k dokumentu jeho typ."
+
+#~ msgid "The document \"%s\" is not valid."
+#~ msgstr "Dokument \"%s\" není platný."
+
+#~ msgid "Click on the \"Details\" button for more information."
+#~ msgstr "Pro více informací klikněte na tlačítko \"Detaily\"."
 
 #~ msgid "Could not import the file."
 #~ msgstr "Nemohu importovat soubor."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-18 16:10+0000\n"
+"POT-Creation-Date: 2004-06-22 09:27-0400\n"
 "PO-Revision-Date: 2004-03-16 07:35+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderlinux@netscape.net>\n"
 "Language-Team: Punjabi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1497
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1499
 #: src/cong-primary-window.c:783 src/cong-primary-window.c:966
 #: src/cong-primary-window.c:968 src/cong-primary-window.c:974
 msgid "Conglomerate XML Editor"
@@ -73,13 +73,13 @@ msgid "Basic"
 msgstr "ਮੂਲ"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:352
-#: src/cong-edit-preferences.c:136 src/cong-file-export.c:302
+#: src/cong-edit-preferences.c:137 src/cong-file-export.c:303
 #: src/cong-file-new.c:357 src/cong-file-print.c:252
 #: src/cong-parser-error.c:325
 msgid "Description"
 msgstr "ਵਰਨਣ"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:899
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:905
 msgid "Document Type Declaration"
 msgstr "ਦਸਤਾਵੇਜ਼ ਕਿਸਮ ਐਲਾਨ"
 
@@ -91,7 +91,7 @@ msgstr "ੲਿੰਕੋਡਿੰਗ"
 msgid "External ID"
 msgstr "ਬਾਹਰੀ  ID"
 
-#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:249
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:250
 #: src/cong-file-print.c:219
 msgid "General"
 msgstr "ਸਧਾਰਣ"
@@ -104,8 +104,8 @@ msgstr "ਸਥਿਤੀ"
 msgid "Modified"
 msgstr "ਸੋਧਿਅਾ"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:128
-#: src/cong-file-export.c:301 src/cong-file-print.c:251
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:129
+#: src/cong-file-export.c:302 src/cong-file-print.c:251
 #: src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "ਨਾਉਂ"
@@ -113,8 +113,8 @@ msgstr "ਨਾਉਂ"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
-#: src/cong-node-properties-dialog.c:1246
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1246
 msgid "Properties"
 msgstr "ਵਿਸ਼ੋਸ਼ਤਾਵਾਂ"
 
@@ -143,7 +143,7 @@ msgstr "XML ਸਿਰਲੇਖ"
 msgid "_Associate this DTD"
 msgstr "ਇਸ DTD ਨੂੰ ਜੋੜੋ"
 
-#: glade/cong-find-replace.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -156,12 +156,12 @@ msgstr "/ਸੋਧ/ ਅੱਗੇ ਲੱਭੋ"
 msgid "Match _entire word only"
 msgstr ""
 
-#: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:186
-#: src/cong-edit-find-and-replace.c:831 src/cong-edit-find-and-replace.c:845
+#: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
+#: src/cong-edit-find-and-replace.c:832 src/cong-edit-find-and-replace.c:846
 msgid "Replace"
 msgstr "ਹਟਾੳੁ"
 
-#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:903
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:904
 #, fuzzy
 msgid "Replace All"
 msgstr "ਹਟਾੳੁ"
@@ -315,6 +315,25 @@ msgstr "URL"
 msgid "_Test this Link"
 msgstr "ਇਸ ਸੰਬੰਧ ਦੀ ਜਾਂਚ ਕਰੋ"
 
+#: glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr ""
+
+#: glade/plugin-arbitrary.glade.h:3
+#, fuzzy
+msgid "Namespace URI"
+msgstr "ਹਟਾੳੁ"
+
+#: glade/plugin-arbitrary.glade.h:4
+#, fuzzy
+msgid "Preview"
+msgstr "ਛਾਪੇ ਦੀ ਅਸਲ ਦਿਖ"
+
+#: glade/plugin-arbitrary.glade.h:6
+#, fuzzy
+msgid "Top-level Element"
+msgstr "XSL ਨਮੂਨਾ ਅੰਸ਼"
+
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
 msgstr "ਪੈਦਾ ਕਰਨ ਵਾਲੇ ਪੈਰਾਮੀਟਰ"
@@ -323,7 +342,7 @@ msgstr "ਪੈਦਾ ਕਰਨ ਵਾਲੇ ਪੈਰਾਮੀਟਰ"
 msgid "Depth"
 msgstr "ਡੂੰਘਾਈ"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:887
+#: glade/plugin-random.glade.h:3 src/cong-document.c:893
 msgid "Document Type"
 msgstr "ਦਸਤਾਵੇਜ਼  ਕਿਸਮ"
 
@@ -353,28 +372,125 @@ msgstr ""
 "ਕੀਤਾ।ਇਸ ਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਤੁਸੀਂ ਅੰਦਾਜਨ ਰਸਤਾ ਦਿਖਾਉਣ ਲਈ ਆਪਣੇ-ਆਪ ਨਿਯੁਕਤੀਆਂ "
 "ਤਬਦੀਲ ਕਰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਉਹਨਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।"
 
-#: src/cong-attribute-editor-cdata.c:204
-#: src/cong-attribute-editor-enumeration.c:204
-#: src/cong-attribute-wrapper.c:241 src/cong-node-properties-dialog.c:424
-#, c-format
-msgid "Set attribute \"%s\" to \"%s\""
-msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ \"%s\" ਨਿਯੁਕਤ ਕਰੋ"
-
-#: src/cong-attribute-editor-cdata.c:230 src/cong-node-properties-dialog.c:470
+#: src/cong-attribute-editor-cdata.c:216 src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਜੋੜੋ"
 
-#: src/cong-attribute-editor-cdata.c:256
-#: src/cong-attribute-editor-enumeration.c:207
+#: src/cong-attribute-editor-cdata.c:242 src/cong-attribute-editor.c:260
 #: src/cong-attribute-wrapper.c:272 src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਮਿਟਾਓ"
 
-#: src/cong-attribute-editor-enumeration.c:103
+#: src/cong-attribute-editor-enumeration.c:105
 msgid "(unspecified)"
 msgstr "(ਬਿਨਾ ਨਿਰਧਾਰਤ ਕੀਤੇ)"
+
+#: src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:51
+#, fuzzy
+msgid "Danish"
+msgstr "ਵਿਸਥਾਰ"
+
+#: src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:63
+#, fuzzy
+msgid "Dutch"
+msgstr "ਡੂੰਘਾਈ"
+
+#: src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:159
+#, fuzzy
+msgid "No Language"
+msgstr "ਭਾਸ਼ਾ"
+
+#: src/cong-attribute-editor.c:257 src/cong-attribute-wrapper.c:241
+#: src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ \"%s\" ਨਿਯੁਕਤ ਕਰੋ"
 
 #: src/cong-dialog.c:295
 msgid "_Close without Saving"
@@ -457,80 +573,80 @@ msgstr "ਨਾੳੁ ਬਿਨਾ"
 msgid "No description available."
 msgstr "ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ।"
 
-#: src/cong-document.c:851
+#: src/cong-document.c:857
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ \"%s\""
 
-#: src/cong-document.c:858
+#: src/cong-document.c:864
 #, c-format
 msgid "Text \"%s\""
 msgstr "ਪਾਠ \"%s\""
 
-#: src/cong-document.c:864
+#: src/cong-document.c:870
 msgid "Character Data"
 msgstr "ਕਰੈਕਟਰ ਡੈਟਾ"
 
-#: src/cong-document.c:867
+#: src/cong-document.c:873
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "ਅੰਸ਼ \"%s\" ਨੂੰ ਹਵਾਲਾ"
 
-#: src/cong-document.c:870
+#: src/cong-document.c:876
 #, c-format
 msgid "Entity \"%s\""
 msgstr "ਅੰਸ਼  \"%s\""
 
-#: src/cong-document.c:873
+#: src/cong-document.c:879
 msgid "XML Processing Instruction"
 msgstr "XML ਕ੍ਰਿਆਤਮਕ ਹਦਾਇਤਾਂ"
 
-#: src/cong-document.c:878
+#: src/cong-document.c:884
 #, c-format
 msgid "Comment \"%s\""
 msgstr "ਟਿੱਪਣੀ \"%s\""
 
-#: src/cong-document.c:884
+#: src/cong-document.c:890
 msgid "Document"
 msgstr "ਦਸਤਾਵੇਜ਼"
 
-#: src/cong-document.c:890
+#: src/cong-document.c:896
 msgid "Document Fragment"
 msgstr "ਦਸਤਾਵੇਜ਼  ਹਿੱਸਾ"
 
-#: src/cong-document.c:893
+#: src/cong-document.c:899
 msgid "Notation"
 msgstr "ਸੰਕੇਤ-ਚਿੰਨ"
 
-#: src/cong-document.c:896
+#: src/cong-document.c:902
 msgid "HTML Document"
 msgstr "HTML ਦਸਤਾਵੇਜ਼ "
 
-#: src/cong-document.c:902
+#: src/cong-document.c:908
 msgid "Element Declaration"
 msgstr "ਭਾਗ ਐਲਾਨ"
 
-#: src/cong-document.c:905
+#: src/cong-document.c:911
 msgid "Attribute Declaration"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਦਾ ਐਲਾਨ"
 
-#: src/cong-document.c:908
+#: src/cong-document.c:914
 msgid "Entity Declaration"
 msgstr "ਭਾਗ ਦਾ ਐਲਾਨ"
 
-#: src/cong-document.c:911
+#: src/cong-document.c:917
 msgid "Namespace Declaration"
 msgstr "ਨਾਉਂ-ਜਗਾ ਦਾ ਐਲਾਨ"
 
-#: src/cong-document.c:914
+#: src/cong-document.c:920
 msgid "XInclude Start"
 msgstr "X ਆਰੰਭ ਸ਼ਾਮਿਲ ਕਰਦੀ ਹੈ"
 
-#: src/cong-document.c:917
+#: src/cong-document.c:923
 msgid "XInclude End"
 msgstr "X ਅੰਤ ਸ਼ਾਮਿਲ ਕਰਦੀ ਹੈ"
 
-#: src/cong-document.c:1880
+#: src/cong-document.c:1886
 #, c-format
 msgid "Select %s"
 msgstr "%s ਚੁਣੋ"
@@ -544,18 +660,18 @@ msgstr "ਅਣਜਾਣਾ"
 msgid "Text:"
 msgstr "ਪਾਠ"
 
-#: src/cong-edit-find-and-replace.c:97
+#: src/cong-edit-find-and-replace.c:98
 #, fuzzy, c-format
 msgid "The text \"%s\" was not found."
 msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਨਹੀਂ ਹੈ।"
 
-#: src/cong-edit-find-and-replace.c:199
+#: src/cong-edit-find-and-replace.c:200
 #, fuzzy
 msgid "Replace _All"
 msgstr "ਹਟਾੳੁ"
 
-#: src/cong-edit-find-and-replace.c:306 src/cong-edit-find-and-replace.c:756
-#: src/cong-edit-find-and-replace.c:954 src/cong-edit-find-and-replace.c:995
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:757
+#: src/cong-edit-find-and-replace.c:955 src/cong-edit-find-and-replace.c:996
 msgid "Find"
 msgstr "ਲੱਭੋ"
 
@@ -1041,54 +1157,39 @@ msgstr "(ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ)"
 msgid "Select file to export to"
 msgstr "ਭੇਜਣ ਲਈ ਫਾਈਲ ਚੁਣੋ"
 
-#: src/cong-file-export.c:228
+#: src/cong-file-export.c:229
 #, c-format
 msgid "Export \"%s\""
 msgstr "\"%s\" ਭੇਜੋ"
 
-#: src/cong-file-export.c:233
+#: src/cong-file-export.c:234
 msgid "Export"
 msgstr "ਭੇਜਣਾ"
 
-#: src/cong-file-export.c:284
+#: src/cong-file-export.c:285
 msgid "Exporter:"
 msgstr "ਭੇਜਣ ਵਾਲਾ:"
 
-#: src/cong-file-export.c:286
+#: src/cong-file-export.c:287
 msgid "File:"
 msgstr "ਫਾਈਲ:"
 
-#: src/cong-file-export.c:293
+#: src/cong-file-export.c:294
 msgid "Export Options"
 msgstr "ਭੇਜਣ ਲੲੀ ਚੋਣ"
 
-#: src/cong-file-export.c:380
+#: src/cong-file-export.c:381
 #, c-format
 msgid "Conglomerate cannot export \"%s\""
 msgstr "ਇਕਤ੍ਰਤਾ \"%s\" ਭੇਜ ਨਹੀਂ ਸਕਿਆ"
 
-#: src/cong-file-export.c:383
+#: src/cong-file-export.c:384
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr "ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਉਸ ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਭੇਜਣਾ ਹੈ।"
 
-#: src/cong-file-import.c:75
+#: src/cong-file-import.c:80
 msgid "Import file..."
 msgstr "ਫਾਈਲ ਲਿਅਾੳੁ"
-
-#. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:109
-msgid "Could not import the file."
-msgstr " ਫਾਈਲ ਨੂੰ ਲਿਅਾ ਨਹੀ ਸਕਿਅਾ।"
-
-#: src/cong-file-import.c:110
-#, c-format
-msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-msgstr ""
-"ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ \"%s\" ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਸਥਾਪਿਤ ਕਰਨਾ ਹੈ।"
-
-#: src/cong-file-import.c:111
-msgid "FIXME"
-msgstr "ਮੈਨੂੰ ਠੀਕ ਕਰੋ"
 
 #: src/cong-file-new.c:166
 #, c-format
@@ -1174,7 +1275,7 @@ msgstr "ਛਾਪਣ ਦੇ ਢੰਗ"
 msgid "Print Options"
 msgstr "ਛਾਪਣ ਦੀ ਚੋਣ"
 
-#: src/cong-file-print.c:321 src/cong-menus.c:779
+#: src/cong-file-print.c:321 src/cong-menus.c:781
 msgid "Print Preview"
 msgstr "ਛਾਪੇ ਦੀ ਅਸਲ ਦਿਖ"
 
@@ -1218,7 +1319,7 @@ msgstr ""
 msgid "No External Subset"
 msgstr "ਕੋਈ ਬਾਹਰੀ ਉਪ ਸਮੂਹ ਨਹੀਂ"
 
-#: src/cong-file-properties.c:201
+#: src/cong-file-properties.c:201 src/plugin-validate.c:171
 msgid "_Add a DTD"
 msgstr "ਇਕ DTD ਜੋੜੋ"
 
@@ -1235,7 +1336,7 @@ msgstr "ਬਿਨਾਂ ਬਿਆਨ ਕੀਤੇ"
 msgid "Remove DTD"
 msgstr "DTD ਹਟਾਓ"
 
-#: src/cong-file-properties.c:377
+#: src/cong-file-properties.c:377 src/cong-util.c:1373
 msgid "Associate with DTD"
 msgstr "DTD ਨਾਲ ਮਿਲਾਓ"
 
@@ -1259,50 +1360,50 @@ msgstr "ਪਹਿਲੇ ਸਫ਼ਾ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
 msgid "Calculating next page"
 msgstr "ਅਗਲੇ ਸਫ਼ਾ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
 
-#: src/cong-menus.c:115 src/cong-menus.c:187 src/cong-menus.c:221
+#: src/cong-menus.c:115 src/cong-menus.c:187 src/cong-menus.c:222
 msgid "The selected menu item has not yet been implemented."
 msgstr "ਚੁਣੇ ਹੋਏ ਸੂਚੀ ਅੰਗ ਹੁਣ ਤਕ ਲਾਗੂ ਨਹੀਂ ਕੀਤੇ।"
 
-#: src/cong-menus.c:499
+#: src/cong-menus.c:501
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "ਇਕਤ੍ਰਤਾ ਬਦਲਾਓ ਦਾ ਨਤੀਜਾ ਨਹੀ ਖੋਲ ਸਕੀ"
 
-#: src/cong-menus.c:564 src/cong-plugin.c:641
+#: src/cong-menus.c:566 src/cong-plugin.c:642
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "ਉਥੇ stylesheet ਫਾਈਲ \"%s\" ਪੜਨ ਵਿਚ ਗਲਤੀ ਸੀ"
 
-#: src/cong-menus.c:567 src/cong-menus.c:591 src/cong-plugin.c:644
-#: src/cong-plugin.c:668
+#: src/cong-menus.c:569 src/cong-menus.c:593 src/cong-plugin.c:645
+#: src/cong-plugin.c:669
 msgid "Conglomerate could not transform the document"
 msgstr "ਇਕਤ੍ਰਤਾ ਦਸਤਾਵੇਜ਼  ਨੂੰ ਬਦਲ ਨਹੀ ਸਕੀ"
 
-#: src/cong-menus.c:588 src/cong-plugin.c:665
+#: src/cong-menus.c:590 src/cong-plugin.c:666
 msgid "There was a problem applying the stylesheet file"
 msgstr "ਉਥੇ stylesheet ਫਾਈਲ ਲਾਗੂ ਕਰਨ ਦੀ ਗਲਤੀ ਸੀ"
 
-#: src/cong-menus.c:1172
+#: src/cong-menus.c:1174
 msgid "Test Progress Checklist"
 msgstr "ਤਰਕੀ ਜਾਂਚ ਲੜੀ ਦਾ ਪਰੀਖਣ ਕਰੋ"
 
-#: src/cong-menus.c:1176
+#: src/cong-menus.c:1178
 #, c-format
 msgid "This is stage %i"
 msgstr "ਇਹ ਸਥਿਤੀ  %i ਹੈ"
 
-#: src/cong-menus.c:1229
+#: src/cong-menus.c:1231
 msgid "Message Log - Conglomerate"
 msgstr "ਸੰਦੇਸ਼ ਰੋਜਨਾਮਚਾ - ਇਕਤ੍ਰਤਾ"
 
-#: src/cong-menus.c:1250
+#: src/cong-menus.c:1252
 msgid "Signal Log - Conglomerate"
 msgstr "ਸੰਕੇਤ ਰੋਜਨਾਮਚਾ - ਇਕਤ੍ਰਤਾ"
 
-#: src/cong-menus.c:1495
+#: src/cong-menus.c:1497
 msgid "translator_credits"
 msgstr "ਜਸਵਿੰਦਰ ਸਿੰਘ ਫੂਲੇਵਾਲਾ (jaswinderlinux@netscape.net)"
 
-#: src/cong-menus.c:1499
+#: src/cong-menus.c:1501
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1310,215 +1411,215 @@ msgstr ""
 "ਹੱਕ ਰਾਖਵੇ ਹਨ (C) ੧੯੯੯ ਹੰਸ ਪੀਟਰ ਜਾਨਸਨ\n"
 "ਹੱਕ ਰਾਖਵੇ ਹਨ (C) ੨੦੦੪ ਡੇਵਿਡ ਮਲਕਾਮ"
 
-#: src/cong-menus.c:1500
+#: src/cong-menus.c:1502
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "ਇਕਤ੍ਰਤਾ: ਇਕ ਮੁਫਤ,ਉਪਯੋਗੀ ਸਮਰਥਕ XML ਸੋਧਕ"
 
-#: src/cong-menus.c:1545 src/cong-menus.c:1625
+#: src/cong-menus.c:1547 src/cong-menus.c:1627
 msgid "/_File"
 msgstr "/ਫਾਈਲ"
 
-#: src/cong-menus.c:1546 src/cong-menus.c:1626
+#: src/cong-menus.c:1548 src/cong-menus.c:1628
 msgid "/File/_New..."
 msgstr "/ਫਾਈਲ/ ਨਵੀਂ ਼਼"
 
-#: src/cong-menus.c:1547 src/cong-menus.c:1627
+#: src/cong-menus.c:1549 src/cong-menus.c:1629
 msgid "/File/_Open..."
 msgstr "/ਫਾਈਲ/ ਖੋਲੋ੏ ਼਼"
 
-#: src/cong-menus.c:1548 src/cong-menus.c:1553 src/cong-menus.c:1558
-#: src/cong-menus.c:1561 src/cong-menus.c:1564 src/cong-menus.c:1566
-#: src/cong-menus.c:1628 src/cong-menus.c:1630
+#: src/cong-menus.c:1550 src/cong-menus.c:1555 src/cong-menus.c:1560
+#: src/cong-menus.c:1563 src/cong-menus.c:1566 src/cong-menus.c:1568
+#: src/cong-menus.c:1630 src/cong-menus.c:1632
 msgid "/File/"
 msgstr "/ਫਾਈਲ/"
 
-#: src/cong-menus.c:1549
+#: src/cong-menus.c:1551
 msgid "/File/_Save"
 msgstr "/ਫਾਈਲ/ ਸੰਭਾਲੋ"
 
-#: src/cong-menus.c:1550
+#: src/cong-menus.c:1552
 msgid "/File/Save _As..."
 msgstr "/ਫਾਈਲ/ ਇਸ ਤਰਾਂ ਸੰਭਾਲੋ"
 
-#: src/cong-menus.c:1551
+#: src/cong-menus.c:1553
 msgid "/File/Sa_ve a Copy..."
 msgstr "/ਫਾਈਲ/ ਨਕਲ ਸੰਭਾਲੋ"
 
-#: src/cong-menus.c:1554
+#: src/cong-menus.c:1556
 msgid "/File/Print Previe_w..."
 msgstr "/ਫਾਈਲ/ ਛਾਪੇ ਦੀ ਅਸਲੀ ਦਿਖ"
 
-#: src/cong-menus.c:1555
+#: src/cong-menus.c:1557
 msgid "/File/_Print..."
 msgstr "/ਫਾਈਲ/ ਛਾਪਾ"
 
-#: src/cong-menus.c:1559
+#: src/cong-menus.c:1561
 msgid "/File/_Revert"
 msgstr "/ਫਾਈਲ/ ਮੁੜ"
 
-#: src/cong-menus.c:1562 src/cong-menus.c:1629
+#: src/cong-menus.c:1564 src/cong-menus.c:1631
 msgid "/File/_Import..."
 msgstr "/ਫਾਈਲ/ ਲਿਅਾੳੁ ਼਼"
 
-#: src/cong-menus.c:1563
+#: src/cong-menus.c:1565
 msgid "/File/_Export..."
 msgstr "/ਫਾਈਲ/ ਭੇਜੋ ਼਼਼"
 
-#: src/cong-menus.c:1565
+#: src/cong-menus.c:1567
 msgid "/File/Proper_ties"
 msgstr "/ਫਾਈਲ/ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ"
 
-#: src/cong-menus.c:1567 src/cong-menus.c:1631
+#: src/cong-menus.c:1569 src/cong-menus.c:1633
 msgid "/File/_Close"
 msgstr "/ਫਾਈਲ/ ਬੰਦ ਕਰੋ"
 
-#: src/cong-menus.c:1568 src/cong-menus.c:1632
+#: src/cong-menus.c:1570 src/cong-menus.c:1634
 msgid "/File/_Quit"
 msgstr "/ਫਾਈਲ/ ਬਾਹਰ"
 
-#: src/cong-menus.c:1570 src/cong-menus.c:1634
+#: src/cong-menus.c:1572 src/cong-menus.c:1636
 msgid "/_Edit"
 msgstr "/ਸੋਧ/"
 
-#: src/cong-menus.c:1571
+#: src/cong-menus.c:1573
 msgid "/Edit/_Undo"
 msgstr "/ਸੋਧ/ ਰੱਦ ਕਰਨਾ"
 
-#: src/cong-menus.c:1572
+#: src/cong-menus.c:1574
 msgid "/Edit/_Redo"
 msgstr "/ਸੋਧ/ ਦੁਹਰਾਈ"
 
-#: src/cong-menus.c:1573 src/cong-menus.c:1577 src/cong-menus.c:1583
-#: src/cong-menus.c:1585 src/cong-menus.c:1588
+#: src/cong-menus.c:1575 src/cong-menus.c:1579 src/cong-menus.c:1584
+#: src/cong-menus.c:1587 src/cong-menus.c:1590
 msgid "/Edit/"
 msgstr "/ਸੋਧ/"
 
-#: src/cong-menus.c:1574
+#: src/cong-menus.c:1576
 msgid "/Edit/Cu_t"
 msgstr "/ਸੋਧ/ ਕੱਟਣਾ"
 
-#: src/cong-menus.c:1575
+#: src/cong-menus.c:1577
 msgid "/Edit/_Copy"
 msgstr "/ਸੋਧ/ ਨਕਲ"
 
-#: src/cong-menus.c:1576
+#: src/cong-menus.c:1578
 msgid "/Edit/_Paste"
 msgstr "/ਸੋਧ/ ਚਿਪਕਾਓ"
 
-#: src/cong-menus.c:1579
+#: src/cong-menus.c:1580
 msgid "/Edit/_Find..."
 msgstr "/ਸੋਧ/ ਲੱਭੋ"
 
-#: src/cong-menus.c:1580
+#: src/cong-menus.c:1581
 msgid "/Edit/Find Ne_xt"
 msgstr "/ਸੋਧ/ ਅੱਗੇ ਲੱਭੋ"
 
-#: src/cong-menus.c:1581
+#: src/cong-menus.c:1582
 msgid "/Edit/Find Pre_vious"
 msgstr "/ਸੋਧ/ ਪਿੱਛੇ ਲੱਭੋ"
 
-#: src/cong-menus.c:1582
+#: src/cong-menus.c:1583
 msgid "/Edit/R_eplace..."
 msgstr "/ਸੋਧ/ ਤਬਦੀਲ ਼਼"
 
-#: src/cong-menus.c:1584
+#: src/cong-menus.c:1586
 msgid "/Edit/_Insert..."
 msgstr "/ਸੋਧ/ ਵਿਚਕਾਰ ਼਼"
 
-#: src/cong-menus.c:1587
+#: src/cong-menus.c:1589
 msgid "/Edit/View _Source"
 msgstr "/ਸੋਧ/ ਸਰੋਤ ਵੇਖੋ"
 
-#: src/cong-menus.c:1589 src/cong-menus.c:1635
+#: src/cong-menus.c:1591 src/cong-menus.c:1637
 msgid "/Edit/Prefere_nces"
 msgstr ""
 
-#: src/cong-menus.c:1592
+#: src/cong-menus.c:1594
 msgid "/Debug"
 msgstr "/ਡੀਬੱਗ"
 
-#: src/cong-menus.c:1593
+#: src/cong-menus.c:1595
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr "/ਡੀਬੱਗ/ ਗਲਤੀ ਸੰਪਾਦਕ ਸਿਸਟਮ ਦੀ ਸ੍ਵੈ ਜਾਂਚ ਸ਼ੁਰੂ ਕਰੋ"
 
-#: src/cong-menus.c:1594
+#: src/cong-menus.c:1596
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ HTML ਵਿੱਚ ਬਦਲੋ"
 
-#: src/cong-menus.c:1595
+#: src/cong-menus.c:1597
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ XHTML ਵਿੱਚ ਬਦਲੋ"
 
-#: src/cong-menus.c:1596
+#: src/cong-menus.c:1598
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/ਡੀਬੱਗ/  DocBook ਤੋਂ HTML ਸਹਾੲਿਤਾ ਵਿੱਚ ਬਦਲੋ"
 
-#: src/cong-menus.c:1597
+#: src/cong-menus.c:1599
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ Java ਸਹਾੲਿਤਾ ਵਿੱਚ ਬਦਲੋ"
 
-#: src/cong-menus.c:1598
+#: src/cong-menus.c:1600
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ FO ਬਦਲੋ"
 
-#: src/cong-menus.c:1600
+#: src/cong-menus.c:1602
 msgid "/Debug/Preview XSL:FO"
 msgstr "/ਡੀਬੱਗ/ ਅਸਲੀ ਦਿਖ XSL:FO"
 
-#: src/cong-menus.c:1602
+#: src/cong-menus.c:1604
 msgid "/Debug/DTD"
 msgstr "/ਡੀਬੱਗ/ DTD"
 
-#: src/cong-menus.c:1603
+#: src/cong-menus.c:1605
 msgid "/Debug/Dialog"
 msgstr "/ਡੀਬੱਗ/ ਤਖਤੀ"
 
-#: src/cong-menus.c:1604
+#: src/cong-menus.c:1606
 msgid "/Debug/Progress Checklist"
 msgstr "/ਡੀਬੱਗ/ ਉਨੱਤੀ ਜਾਂਚ ਲੜੀ"
 
-#: src/cong-menus.c:1605
+#: src/cong-menus.c:1607
 msgid "/Debug/Document Message Log"
 msgstr "/ਡੀਬੱਗ/ ਦਸਤਾਵੇਜ਼  ਸੰਦੇਸ਼ ਰੋਜ਼ਨਾਮਚਾ"
 
-#: src/cong-menus.c:1606
+#: src/cong-menus.c:1608
 msgid "/Debug/Document Signal Log"
 msgstr "/ਡੀਬੱਗ/ ਦਸਤਾਵੇਜ਼  ਸੰਕੇਤ ਰੋਜ਼ਨਾਮਚਾ"
 
-#: src/cong-menus.c:1607
+#: src/cong-menus.c:1609
 msgid "/Debug/Information Alert"
 msgstr "/ਡੀਬੱਗ/ ਸੂਚਨਾ ਚੇਤਾਵਨੀ"
 
-#: src/cong-menus.c:1608
+#: src/cong-menus.c:1610
 msgid "/Debug/Glade Test"
 msgstr "/ਡੀਬੱਗ/ ਰਸਤਾ ਜਾਂਚ"
 
-#: src/cong-menus.c:1609
+#: src/cong-menus.c:1611
 msgid "/Debug/Insert XML Fragment"
 msgstr "/ਡੀਬੱਗ/ XML ਹਿਸਾ ਦਿੳੁ"
 
-#: src/cong-menus.c:1610
+#: src/cong-menus.c:1612
 msgid "/Debug/Command Test"
 msgstr "/ਡੀਬੱਗ/ ਕਮਾਂਡ ਜਾਂਚ"
 
-#: src/cong-menus.c:1613
+#: src/cong-menus.c:1615
 msgid "/_Tools"
 msgstr "/ਸੰਦ"
 
-#: src/cong-menus.c:1615 src/cong-menus.c:1647
+#: src/cong-menus.c:1617 src/cong-menus.c:1649
 msgid "/_Help"
 msgstr "/ਸਹਾੲਿਤਾ"
 
-#: src/cong-menus.c:1616 src/cong-menus.c:1648
+#: src/cong-menus.c:1618 src/cong-menus.c:1650
 msgid "/Help/_Contents"
 msgstr "/ਸਹਾੲਿਤਾ/ ਭਾਗ"
 
-#: src/cong-menus.c:1617 src/cong-menus.c:1649
+#: src/cong-menus.c:1619 src/cong-menus.c:1651
 #, fuzzy
 msgid "/Help/_Homepage"
 msgstr "/ਸਹਾੲਿਤਾ/ ਭਾਗ"
 
-#: src/cong-menus.c:1618 src/cong-menus.c:1650
+#: src/cong-menus.c:1620 src/cong-menus.c:1652
 msgid "/Help/_About"
 msgstr "/ਸਹਾੲਿਤਾ/ ੲਿਸ ਬਾਰੇ "
 
@@ -1621,18 +1722,18 @@ msgstr ""
 msgid "Show Details"
 msgstr "ਵਿਸਥਾਰ ਦਿਖਾਓ"
 
-#: src/cong-plugin.c:553 src/cong-plugin.c:596
+#: src/cong-plugin.c:554 src/cong-plugin.c:597
 msgid "Conglomerate could not find display information for the new file"
 msgstr "ਇਕਤ੍ਰਤਾ ਨਵੀਂ ਫਾਈਲ ਵਾਸਤੇ ਦਿਖਾਉਣ ਵਾਲੀ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲੱਭ ਸਕਿਆ"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1122
+#: src/cong-plugin.c:1123
 #, c-format
 msgid "<%s> property dialog"
 msgstr "<%s> ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1125
+#: src/cong-plugin.c:1126
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "<%s>ਅੰਸ਼ ਵਾਸਤੇ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ ਦਿਓ"
@@ -1692,22 +1793,36 @@ msgstr "ਜਿਆਦਾ ਵਕਫੇ ਵਾਲੇ, ਇਕਤ੍ਰ ਕਰਨ ਵ
 msgid "%s (modified) - %s"
 msgstr "%s(ਤਬਦੀਲ ਹੋਈ) - %s"
 
-#: src/cong-util.c:394 src/plugin-docbook.c:1206
+#: src/cong-util.c:355 src/plugin-docbook.c:1195
 msgid "Printing XSL Formatting Objects"
 msgstr "ਮਿਟਾਉਣ ਵਾਲੇ XSL ਪਦਾਰਥ ਛਾਪੋ    "
 
-#: src/cong-util.c:438
+#: src/cong-util.c:399
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "ਇਹ ਸੰਭਾਵੀ ਹੀ cong_util_print_xslfo ਦਾ ਨਤੀਜਾ ਹੋਵੇਗਾ"
 
-#: src/cong-util.c:1255
+#: src/cong-util.c:1216
 msgid "(no description available)"
 msgstr "(ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ)"
+
+#: src/cong-util.c:1362
+msgid "DTD files"
+msgstr ""
+
+#: src/cong-util.c:1365
+#, fuzzy
+msgid "Select a DTD"
+msgstr "%s ਚੁਣੋ"
 
 #: src/cursor.c:128
 #, fuzzy, c-format
 msgid "Split <%s> element"
 msgstr "ਹਿੱਸਾ %s ਬਟਨ "
+
+#: src/file.c:98
+#, fuzzy
+msgid "XML Files"
+msgstr "XML ਫਾਈਲ ਸੋਧੋ"
 
 #: src/plugin-admonition.c:75
 msgid "Admonition"
@@ -1716,6 +1831,20 @@ msgstr "ਚੇਤਾਵਨੀ"
 #: src/plugin-admonition.c:76
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "ਸੰਕੇਤ, ਸੂਚਨਾਵਾਂ ਆਦਿ ਦੇਖਣ ਲਈ ਸੋਧਕ ਮੂਲ"
+
+#: src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr ""
+
+#: src/plugin-arbitrary.c:269
+#, fuzzy
+msgid "Empty XML Document"
+msgstr "HTML ਦਸਤਾਵੇਜ਼ "
+
+#: src/plugin-arbitrary.c:270
+#, fuzzy
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "XML ਦਸਤਾਵੇਜ਼  ਬਣਾਉ ਜਿਸ ਵਿਚ ਬੇਤਰਤੀਬ ਸੰਖੇਪ ਹੋਣ।"
 
 #: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:452
 msgid "Cleanup XML Source"
@@ -1764,86 +1893,86 @@ msgstr "ਬਿਨਾ ਨਾਉਂ ਤੋਂ ਕਿਤਾਬ"
 msgid "Untitled Set of Documents"
 msgstr "ਬਿਨਾ ਨਾਉਂ ਤੋਂ ਦਸਤਾਵੇਜ਼ਾ ਦਾ ਸਮੂਹ"
 
-#: src/plugin-docbook.c:1091
+#: src/plugin-docbook.c:1080
 msgid "Exporting PDF file"
 msgstr "PDF ਫਾਈਲ ਭੇਜਣਾ"
 
-#: src/plugin-docbook.c:1095 src/plugin-docbook.c:1204
+#: src/plugin-docbook.c:1084 src/plugin-docbook.c:1193
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "DocBook ਨੂੰ ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਵਿਚ ਬਦਲਣਾ"
 
-#: src/plugin-docbook.c:1097
+#: src/plugin-docbook.c:1086
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਨੂੰ PDF ਫਾਈਲ ਵਾਂਗ ਤਰਤੀਬ ਦਿਓ"
 
-#: src/plugin-docbook.c:1110 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1099 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਨੂੰ  PDF ਵਿਚ ਬਦਲਣਾ"
 
-#: src/plugin-docbook.c:1200
+#: src/plugin-docbook.c:1189
 msgid "Printing DocBook file"
 msgstr "DocBook ਫਾਈਲ ਛਾਪੋ"
 
-#: src/plugin-docbook.c:1590
+#: src/plugin-docbook.c:1579
 msgid "DocBook Article"
 msgstr "DocBook  ਲੇਖ"
 
-#: src/plugin-docbook.c:1591
+#: src/plugin-docbook.c:1580
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ, ਸ਼ਾਇਦ ਵੈਬਸਾਈਟ ਜਾਂ ਰਸਾਲੇ ਵਾਸਤੇ ਅੰਸ਼ ਬਣਾਓ"
 
-#: src/plugin-docbook.c:1598
+#: src/plugin-docbook.c:1587
 msgid "DocBook Book"
 msgstr "DocBook ਕਿਤਾਬ"
 
-#: src/plugin-docbook.c:1599
+#: src/plugin-docbook.c:1588
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ ਇਕ ਕਿਤਾਬ ਬਣਾਓ"
 
-#: src/plugin-docbook.c:1606
+#: src/plugin-docbook.c:1595
 msgid "DocBook Set"
 msgstr "DocBook ਸਮੂਹ"
 
-#: src/plugin-docbook.c:1607
+#: src/plugin-docbook.c:1596
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ ਸੰਬੰਧਿਤ ਕਿਤਾਬਾਂ ਦੇ ਸਮੂਹ ਬਣਾਓ"
 
-#: src/plugin-docbook.c:1615
+#: src/plugin-docbook.c:1604
 msgid "Import text as a DocBook article"
 msgstr "DocBook ਭਾਗ ਵਾਂਗ ਪਾਠ ਲਿਅਾੳੁ"
 
-#: src/plugin-docbook.c:1616
+#: src/plugin-docbook.c:1605
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "ਇਕ ਹਿਸੇ ਵਾਂਗ ਸਮਤਲ ਪਾਠ ਨੂੰ \"DocBook\" ਬਣਤਰ ਵਿਚ ਲਿਅਾੳੁ"
 
-#: src/plugin-docbook.c:1633
+#: src/plugin-docbook.c:1622
 msgid "Export DocBook as HTML"
 msgstr "HTML ਵਾਂਗ DocBook ਭੇਜੋ"
 
-#: src/plugin-docbook.c:1634
+#: src/plugin-docbook.c:1623
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr "DocBook ਫਾਈਲ ਤੋਂ ਵੈਬ ਸਫ਼ਾ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ"
 
-#: src/plugin-docbook.c:1641
+#: src/plugin-docbook.c:1630
 msgid "Export DocBook as PDF"
 msgstr "PDF ਵਾਂਗ DocBook ਭੇਜੋ"
 
-#: src/plugin-docbook.c:1642
+#: src/plugin-docbook.c:1631
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
 "DocBook ਫਾਈਲ ਤੋਂ PDF ਫਾਈਲ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ"
 
-#: src/plugin-docbook.c:1649
+#: src/plugin-docbook.c:1638
 msgid "Export DocBook as XSL:FO"
 msgstr "XSL:FO ਵਾਂਗ DocBook ਭੇਜੋ"
 
-#: src/plugin-docbook.c:1650
+#: src/plugin-docbook.c:1639
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1851,107 +1980,107 @@ msgstr ""
 "DocBook ਫਾਈਲ ਤੋਂ XSL:FO ਫਾਈਲ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ,"
 "ਜਿਹਡ਼ੀ ਬਾਅਦ ਵਿੱਚ PDF ਵਿਚ ਛਾਪੀ ਜਾਂ ਬਦਲੀ ਜਾ ਸਕਦੀ ਹੈ"
 
-#: src/plugin-docbook.c:1658
+#: src/plugin-docbook.c:1647
 msgid "Print DocBook"
 msgstr "DocBook ਛਾਪੋ"
 
-#: src/plugin-docbook.c:1667
+#: src/plugin-docbook.c:1656
 msgid "Generic DocBook property dialog"
 msgstr "ਆਮ DocBook ਵਿਸ਼ੇਸ਼ਤਾ ਤਖਤੀ"
 
-#: src/plugin-docbook.c:1668
+#: src/plugin-docbook.c:1657
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "ਜਿਆਦਾਤਰ DocBook ਮੂਲਾਂ ਵਾਸਤੇ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ ਵਖਾੳੁ"
 
-#: src/plugin-docbook.c:1686 src/plugin-docbook.c:1689 src/plugin-html.c:136
+#: src/plugin-docbook.c:1675 src/plugin-docbook.c:1678 src/plugin-html.c:136
 #: src/plugin-html.c:139
 msgid "Open Link in Browser"
 msgstr ""
 
-#: src/plugin-docbook.c:1698
+#: src/plugin-docbook.c:1687
 msgid "Promote Section"
 msgstr "ਭਾਗ ਦਾ ਦਰਜਾ ਵਧਾਉ"
 
-#: src/plugin-docbook.c:1699
+#: src/plugin-docbook.c:1688
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ DocBook ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਉਚੇ ਦਰਜੇ ਤਕ ਵਧਾਓ"
 
-#: src/plugin-docbook.c:1701 src/plugin-html.c:147 src/plugin-html.c:150
+#: src/plugin-docbook.c:1690 src/plugin-html.c:147 src/plugin-html.c:150
 msgid "Promote"
 msgstr "ਦਰਜਾ ਵਧਾਉ"
 
-#: src/plugin-docbook.c:1702 src/plugin-docbook.c:1703
+#: src/plugin-docbook.c:1691 src/plugin-docbook.c:1692
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਉਚੇ ਦਰਜੇ ਤਕ ਵਧਾਓ"
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1698
 msgid "Demote Section"
 msgstr "ਭਾਗ ਦਾ ਦਰਜਾ ਘਟਾਓ"
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1699
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ DocBook ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਛੋਟੇ ਦਰਜੇ ਤਕ ਘਟਾਓ"
 
-#: src/plugin-docbook.c:1712 src/plugin-html.c:158 src/plugin-html.c:161
+#: src/plugin-docbook.c:1701 src/plugin-html.c:158 src/plugin-html.c:161
 msgid "Demote"
 msgstr "ਦਰਜਾ ਘਟਾਓ"
 
-#: src/plugin-docbook.c:1713 src/plugin-docbook.c:1714
+#: src/plugin-docbook.c:1702 src/plugin-docbook.c:1703
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਛੋਟੇ ਦਰਜੇ ਤਕ ਘਟਾਓ"
 
-#: src/plugin-dtd.c:100
+#: src/plugin-dtd.c:93
 #, c-format
 msgid "Autogenerated document type based on %s"
 msgstr "%s ਤੇ ਆਧਾਰਿਤ ਸ੍ਵੈ ਪੈਦਾਇਸ਼ੀ ਦਸਤਾਵੇਜ਼  ਕਿਸਮ"
 
-#: src/plugin-dtd.c:101
+#: src/plugin-dtd.c:94
 #, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr "ਇਹ ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਨਿਰਧਾਰਣ ਆਪਣੇ ਆਪ  %s ਤੋਂ ਪੈਦਾ ਹੋਇਆ ਸੀ"
 
-#: src/plugin-dtd.c:221
+#: src/plugin-dtd.c:214
 msgid "Convert DTD into a Conglomerate Display Specification"
 msgstr "DTD ਨੂੰ ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਨਿਰਧਾਰਣ ਵਿਚ ਬਦਲੋ"
 
-#: src/plugin-dtd.c:222
+#: src/plugin-dtd.c:215
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr "ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਬਿਆਨ ਕਰਨ ਵਾਲੀ ਫਾਈਲ ਬਣਾ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
 
-#: src/plugin-dtd.c:229
+#: src/plugin-dtd.c:222
 msgid "Convert DTD into a Relax NG schema"
 msgstr "DTD ਨੂੰ Relax NG ਬਣਤਰ ਵਿਚ ਬਦਲੋ"
 
-#: src/plugin-dtd.c:230
+#: src/plugin-dtd.c:223
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
 msgstr "RELAX NG ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ  ਦਿੳੁ"
 
-#: src/plugin-dtd.c:237
+#: src/plugin-dtd.c:230
 msgid "Convert DTD into W3C XML Schema"
 msgstr "DTD ਨੂੰ W3C XML ਬਣਤਰ ਵਿਚ ਬਦਲੋ"
 
-#: src/plugin-dtd.c:238
+#: src/plugin-dtd.c:231
 msgid "Import a DTD file, converting it into a W3C XML Schema."
 msgstr "W3C XML ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
 
-#: src/plugin-dtd.c:245
+#: src/plugin-dtd.c:238
 msgid "Convert DTD into a Schematron file"
 msgstr "DTD ਨੂੰ Schematron ਫਾਈਲ ਵਿਚ ਬਦਲੋ"
 
-#: src/plugin-dtd.c:246
+#: src/plugin-dtd.c:239
 msgid "Import a DTD file, converting it into a Schematron Schema."
 msgstr "Schematron ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
 
-#: src/plugin-dtd.c:253
+#: src/plugin-dtd.c:246
 msgid "Convert DTD into an Examplotron file"
 msgstr "DTD ਨੂੰ Examplotron ਫਾਈਲ ਵਿਚ ਬਦਲੋ"
 
-#: src/plugin-dtd.c:254
+#: src/plugin-dtd.c:247
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "Examplotron ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
 
@@ -1983,15 +2112,15 @@ msgstr "ਪੈਰਾ"
 msgid "An editor node for visualising a paragraph"
 msgstr "ਪੈਰੇ ਨੂੰ ਦੇਖਣ ਲਈ ਮੂਲ ਸੰਪਾਦਕ"
 
-#: src/plugin-random.c:154
+#: src/plugin-random.c:155
 msgid "What kind of random XML document would you like to create?"
 msgstr "ਤੁਸੀਂ ਕਿਹੜੀ ਕਿਸਮ ਦਾ ਬੇਤਰਤੀਬ XML ਦਸਤਾਵੇਜ਼  ਬਣਾਉਣਾ ਪਸੰਦ ਕਰਦੇ ਹੋ"
 
-#: src/plugin-random.c:668
+#: src/plugin-random.c:669
 msgid "Random Document"
 msgstr "ਬੇਤਰਤੀਬ ਦਸਤਾਵੇਜ਼ "
 
-#: src/plugin-random.c:669
+#: src/plugin-random.c:670
 msgid "Create an XML document containing random content."
 msgstr "XML ਦਸਤਾਵੇਜ਼  ਬਣਾਉ ਜਿਸ ਵਿਚ ਬੇਤਰਤੀਬ ਸੰਖੇਪ ਹੋਣ।"
 
@@ -2007,12 +2136,12 @@ msgstr ""
 msgid "Display the compact syntax form of a RELAX NG schema"
 msgstr ""
 
-#: src/plugin-save-dispspec.c:147
+#: src/plugin-save-dispspec.c:148
 msgid "Dump Display Spec"
 msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਇਕਤ੍ਰ ਕਰੋ"
 
-#: src/plugin-save-dispspec.c:148 src/plugin-save-dispspec.c:151
-#: src/plugin-save-dispspec.c:152
+#: src/plugin-save-dispspec.c:149 src/plugin-save-dispspec.c:152
+#: src/plugin-save-dispspec.c:153
 msgid ""
 "Writes the current display spec into a display spec xml file. This file can "
 "then be customized by the conglomerate user"
@@ -2020,20 +2149,20 @@ msgstr ""
 "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ xml ਫਾਈਲ ਵਿਚ ਮੌਜੂਦ ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਲਿਖੋ। ਤਦ ਇਹ ਫਾਈਲ ਇਕਤ੍ਰਤਾ ਉਪਯੋਗੀ ਦੁਆਰਾ "
 "ਬਦਲੀ ਜਾ ਸਕਦੀ ਹੈ"
 
-#: src/plugin-save-dispspec.c:150
+#: src/plugin-save-dispspec.c:151
 msgid "_Dump Display Spec"
 msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਇਕਤ੍ਰ ਕਰੋ"
 
-#: src/plugin-save-dispspec.c:158
+#: src/plugin-save-dispspec.c:159
 msgid "Edit Display Spec"
 msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਸੋਧੋ"
 
-#: src/plugin-save-dispspec.c:159 src/plugin-save-dispspec.c:162
-#: src/plugin-save-dispspec.c:163
+#: src/plugin-save-dispspec.c:160 src/plugin-save-dispspec.c:163
+#: src/plugin-save-dispspec.c:164
 msgid "Opens the current display spec as a conglomerate document."
 msgstr "ਇਕਤ੍ਰ ਦਸਤਾਵੇਜ਼  ਵਾਂਗ ਮੌਜੂਦ ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਖੋਲਦਾ ਹੈ।"
 
-#: src/plugin-save-dispspec.c:161
+#: src/plugin-save-dispspec.c:162
 msgid "_Edit Display Spec"
 msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਸੋਧੋ"
 
@@ -2042,19 +2171,19 @@ msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਸੋਧੋ"
 msgid "Conglomerate could not import the file \"%s\""
 msgstr "ਇਕਤ੍ਰਤਾ,ਫਾਈਲ \"%s\" ਨਹੀਂ ਭੇਜ ਸਕੀ"
 
-#: src/plugin-sgml.c:142
+#: src/plugin-sgml.c:135
 msgid "Attempting to run the sgml2xml tool"
 msgstr "sgml2xml ਸੰਦ ਚਲਾਉਣ ਲਈ ਯਤਨ"
 
-#: src/plugin-sgml.c:197
+#: src/plugin-sgml.c:190
 msgid "Importing SGML"
 msgstr "SGML ਭੇਜਣਾ"
 
-#: src/plugin-sgml.c:215
+#: src/plugin-sgml.c:208
 msgid "Import SGML"
 msgstr "SGML ਭੇਜੋ"
 
-#: src/plugin-sgml.c:216
+#: src/plugin-sgml.c:209
 msgid "Import an SGML file, converting to XML."
 msgstr "XML ਵਿਚ ਬਦਲਣ ਵਾਸਤੇ SGML ਫਾਈਲ ਭੇਜੋ।"
 
@@ -2081,43 +2210,31 @@ msgid ""
 "article"
 msgstr "ਇਕ ਸਾਰਣੀ ਬਣਾਓ ਜਿਹੜੀ DocBook ਲੇਖ ਵਾਗੂੰ ਯੂਨੀਕੋਡ ਅੱਖਰ ਸਮੂਹ ਦੇ ਭਾਗ ਨੂੰ ਦਿਖਾਵੇ"
 
-#: src/plugin-validate.c:98
+#: src/plugin-validate.c:163
 #, c-format
 msgid "The document \"%s\" cannot be checked for validity."
 msgstr "ਯੋਗਤਾ ਵਾਸਤੇ ਦਸਤਾਵੇਜ਼  \"%s\" ਦੀ ਜਾਂਚ ਨਹੀਂ ਹੋ ਸਕੀ।"
 
-#: src/plugin-validate.c:105
+#: src/plugin-validate.c:170
 msgid ""
-"In a future version of Conglomerate we may have a feature that lets you "
-"attach a document type to a document."
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
-"ਇਕਤ੍ਰ ਕਰਨ ਦੇ ਆਉਣ ਵਾਲੇ ਵਰਜਨ ਵਿਚ ਸਾਡੇ ਕੋਲ ਇਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੋਵੇਗੀ ਜੋ ਤੁਹਾਨੂੰ ਦਸਤਾਵੇਜ਼ ਕਿਸਮ ਨੂੰ "
-"ਦਸਤਾਵੇਜ਼ ਨਾਲ ਜੋੜਨ ਦੇਵੇਗੀ।"
 
-#: src/plugin-validate.c:125
-#, c-format
-msgid "The document \"%s\" is not valid."
-msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਨਹੀਂ ਹੈ।"
+#: src/plugin-validate.c:172
+msgid "_Cancel"
+msgstr ""
 
-#: src/plugin-validate.c:132
-msgid "Click on the \"Details\" button for more information."
-msgstr "ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
-
-#: src/plugin-validate.c:133 src/plugin-website.c:480
-msgid "_Details"
-msgstr "ਵਿਸਥਾਰ"
-
-#: src/plugin-validate.c:149
+#: src/plugin-validate.c:215
 #, c-format
 msgid "The document \"%s\" is valid."
 msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਹੈ।"
 
-#: src/plugin-validate.c:176
+#: src/plugin-validate.c:247
 msgid "Validate Document"
 msgstr "ਯੋਗ ਠਹਿਰਾਇਆ ਦਸਤਾਵੇਜ਼"
 
-#: src/plugin-validate.c:177 src/plugin-validate.c:180
-#: src/plugin-validate.c:181
+#: src/plugin-validate.c:248 src/plugin-validate.c:251
+#: src/plugin-validate.c:252
 msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
@@ -2125,7 +2242,7 @@ msgstr ""
 "ਜਾਂਚ ਕਰੋ ਕਿ ਕੀ ਇਹ ਦਸਤਾਵੇਜ਼  \"ਯੋਗ\" ਹੈ,ਕੀ ਇਹ ਅਨੁਕੂਲ ਦਸਤਾਵੇਜ਼  ਕਿਸਮ ਜਾਂ ਬਣਤਰ ਦੁਆਰਾ ਦਿਤੇ "
 "ਕਾਨੂੰਨਾਂ ਦੇ ਸਮੂਹਾਂ ਦੀ ਤੁਲਣਾ ਕਰਦਾ ਹੈ।"
 
-#: src/plugin-validate.c:179
+#: src/plugin-validate.c:250
 msgid "_Validate Document"
 msgstr "ਯੋਗ ਠਹਿਰਾਇਆ ਦਸਤਾਵੇਜ਼"
 
@@ -2148,6 +2265,10 @@ msgstr "ਕੋਈ ਇਕ ਸਥਿਤੀ ਗਲਤੀ ਦਰਸਾਉਂਦੀ �
 #: src/plugin-website.c:479
 msgid "Click on the \"Details\" button for more information"
 msgstr "ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
+
+#: src/plugin-website.c:480
+msgid "_Details"
+msgstr "ਵਿਸਥਾਰ"
 
 #: src/plugin-website.c:507
 msgid "Generate website"
@@ -2274,6 +2395,30 @@ msgstr "ਪਿਛੋਂ ਚਿਪਕਾਓ"
 #: src/xmledit.c:395
 msgid "Source View - Conglomerate"
 msgstr "ਸ੍ਰੋਤ ਦ੍ਰਿਸ਼ ਇਕਤ੍ਰ ਕਰਨਾ"
+
+#~ msgid "Could not import the file."
+#~ msgstr " ਫਾਈਲ ਨੂੰ ਲਿਅਾ ਨਹੀ ਸਕਿਅਾ।"
+
+#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+#~ msgstr ""
+#~ "ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ \"%s\" ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਸਥਾਪਿਤ ਕਰਨਾ "
+#~ "ਹੈ।"
+
+#~ msgid "FIXME"
+#~ msgstr "ਮੈਨੂੰ ਠੀਕ ਕਰੋ"
+
+#~ msgid ""
+#~ "In a future version of Conglomerate we may have a feature that lets you "
+#~ "attach a document type to a document."
+#~ msgstr ""
+#~ "ਇਕਤ੍ਰ ਕਰਨ ਦੇ ਆਉਣ ਵਾਲੇ ਵਰਜਨ ਵਿਚ ਸਾਡੇ ਕੋਲ ਇਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੋਵੇਗੀ ਜੋ ਤੁਹਾਨੂੰ ਦਸਤਾਵੇਜ਼ ਕਿਸਮ ਨੂੰ "
+#~ "ਦਸਤਾਵੇਜ਼ ਨਾਲ ਜੋੜਨ ਦੇਵੇਗੀ।"
+
+#~ msgid "The document \"%s\" is not valid."
+#~ msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਨਹੀਂ ਹੈ।"
+
+#~ msgid "Click on the \"Details\" button for more information."
+#~ msgstr "ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
 
 #~ msgid ""
 #~ "This is a placeholder page.  Eventually you will be able to edit the "
