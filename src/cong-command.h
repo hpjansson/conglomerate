@@ -78,7 +78,7 @@ cong_command_undo (CongCommand *command);
 void
 cong_command_redo (CongCommand *command);
 
-/* Modification: */
+/* Adding Atomic Modifications: */
 void
 cong_command_add_modification (CongCommand *cmd,
 			       CongModification *modification);
@@ -119,10 +119,13 @@ cong_command_add_node_remove_attribute (CongCommand *cmd,
 					const xmlChar *name);
 	
 void 
-cong_command_add_selection_change (CongCommand *cmd);
+cong_command_add_selection_change (CongCommand *cmd,
+				   const CongLocation *new_logical_start,
+				   const CongLocation *new_logical_end);
 
 void 
-cong_command_add_cursor_change (CongCommand *cmd);
+cong_command_add_cursor_change (CongCommand *cmd,
+				const CongLocation *new_location);
 
 void 
 cong_command_add_set_external_dtd (CongCommand *cmd,
@@ -130,7 +133,55 @@ cong_command_add_set_external_dtd (CongCommand *cmd,
 				   const gchar* public_id,
 				   const gchar* system_id);
 
+void 
+cong_command_add_set_clipboard (CongCommand *cmd,
+				const gchar* clipboard_source);
 
+/* Adding Compound Modifications: */
+void
+cong_command_add_node_recursive_delete (CongCommand *cmd,
+					CongNodePtr node);
+
+
+/* Invoke the callback for the cursor and selection locations; allowing you to do something sane with them when manipulating the tree */
+void
+cong_command_for_each_location (CongCommand *cmd, 
+				CongUpdateLocationCallback callback, 
+				gpointer user_data);
+void 
+cong_command_add_delete_range (CongCommand *cmd,
+			       CongRange *range);
+
+void 
+cong_command_add_delete_selection (CongCommand *cmd);
+
+void 
+cong_command_add_insert_text_at_cursor (CongCommand *cmd, 
+					const gchar *string);
+
+void 
+cong_command_add_nullify_cursor (CongCommand *cmd);
+
+void 
+cong_command_add_nullify_selection (CongCommand *cmd);
+
+CongNodePtr
+cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd, 
+					     const CongLocation *loc);
+
+void
+cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd);
+
+void
+cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd, 
+						       CongNodePtr node);
+
+gboolean
+cong_command_can_add_reparent_selection (CongCommand *cmd);
+
+void
+cong_command_add_reparent_selection (CongCommand *cmd, 
+				     CongNodePtr node);
 
 G_END_DECLS
 
