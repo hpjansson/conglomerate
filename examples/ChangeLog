@@ -1,3 +1,9 @@
+2003-09-22  David Malcolm
+
+	* docbook.xds
+
+	Added <userinput> and <command> as span tags
+	
 2003-09-18  David Malcolm
 
 	* xhtml1-strict.xds

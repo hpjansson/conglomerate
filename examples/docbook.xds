@@ -635,6 +635,15 @@
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
+		<element tag="userinput" type="span" color="a0b0c0">
+			<name locale="en">User Input</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="command" type="span" color="a0b0c0">
+			<name locale="en">Command</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+
 		<!-- etc -->
 
 	</element-list>
