@@ -1,3 +1,9 @@
+2004-03-08  Geert Stappers <stappers@stappers.nl>
+
+	* cong-file-export.c, cong-file-properties.c
+
+	C99ismes removed, now it compiles on gcc 2.95
+
 2004-03-08  David Hoover <karma@deadmoose.com>
 
 	* cong-dom-view.c, cong-error-dialog.c, cong-file-export.c, cong-file-properties.c

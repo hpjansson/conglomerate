@@ -143,6 +143,8 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 	GtkButton *button_dtd;
 	GtkLabel *label_dtd_notes;
 
+	gchar * text;
+
 	g_assert (dialog_details);
 	g_assert (dialog_details->xml);
 	g_assert (IS_CONG_DOCUMENT (doc));
@@ -176,7 +178,6 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 								       CONG_DOCUMENT_MODE_TYPE_DTD);
 		
 		if (model_dtd) {
-			gchar * text;
 			gtk_button_set_label (button_dtd,
 					      _("_Associate this DTD"));
 			set_dtd_info (dialog_details->xml,

@@ -146,13 +146,14 @@ static void setup_description(CongExportDialogDetails *dialog_details)
 {
 	CongServiceExporter* exporter = get_selected_exporter(dialog_details);
 	const gchar *desc;
+	gchar * text;
 
 	g_assert(dialog_details);
 	g_assert(exporter);
 
 	desc = cong_service_get_description(CONG_SERVICE(exporter));
 
-	gchar * text = g_strdup_printf("<small>%s</small>", 
+	text = g_strdup_printf("<small>%s</small>", 
                                        (desc ? desc : _("(No description available)")));
 	gtk_label_set_markup(dialog_details->description, text);
 	g_free(text);
