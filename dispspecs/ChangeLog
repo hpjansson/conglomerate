@@ -1,3 +1,9 @@
+2004-10-27  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* kernel-traffic-letter.xds.in: 
+
+	Corrected misspelled newletter vs newsletter in description
+
 2004-10-20  David Malcolm  <dmalcolm@redhat.com>
 
 	* docbook.xds.in: 
