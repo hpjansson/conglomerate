@@ -1,3 +1,7 @@
+2004-06-23  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* plugin-random.c: Namespace fixes
+
 2004-06-23 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	Changes in LOTS of files to cleanup gtk-doc usage and 

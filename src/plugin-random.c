@@ -556,11 +556,18 @@ populate_element (RandomCreationInfo *rci,
 										  num_elements));
 			g_assert (ds_element);
 
-			g_assert (NULL==cong_dispspec_element_get_ns_uri (ds_element));
 			child_node = xmlNewDocNode (xml_doc,
-						    NULL, /* fixme: namespaces! */
+						    NULL,
 						    cong_dispspec_element_get_local_name (ds_element),
 						    "");
+			if (cong_dispspec_element_get_ns_uri (ds_element)) {
+				xmlNsPtr xml_ns = xmlNewNs (child_node, 
+							    cong_dispspec_element_get_ns_uri (ds_element),
+							    NULL);
+				xmlSetNs (child_node, 
+					  xml_ns);	
+			}
+
 			xmlAddChild (xml_node,
 				     child_node);
 			
@@ -595,12 +602,17 @@ make_random_doc (RandomCreationInfo *rci)
 
 	xml_doc = xmlNewDoc ("1.0");
 
-	/* FIXME: support namespaces! */
-	g_assert (NULL==cong_dispspec_element_get_ns_uri (ds_element_root));
 	root_node = xmlNewDocNode (xml_doc,
 				   NULL, /* xmlNsPtr ns, */
 				   root_element,
 				   NULL);
+	if (cong_dispspec_element_get_ns_uri (ds_element_root)) {
+		xmlNsPtr xml_ns = xmlNewNs (root_node, 
+					    cong_dispspec_element_get_ns_uri (ds_element_root),
+					    NULL);
+		xmlSetNs (root_node, 
+			  xml_ns);	
+	}
 	xmlDocSetRootElement (xml_doc,
 			      root_node);
 
