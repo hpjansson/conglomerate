@@ -1,3 +1,9 @@
+2003-08-11  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* popup.c
+
+	Added some simple test routines to the tree popups; disabled in default state.
+
 2003-08-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-document.c, cong-document.h, cong-node.h, tree.c, xmldata.c, xmledit.c, cong-menus.c
