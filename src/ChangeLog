@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-11-20 David Malcolm
 
+	* global.h
+
+	CongEditorWidget support
+
         * cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-editor-widget-impl.h, cong-span-text-editor.c
 
 	Further development

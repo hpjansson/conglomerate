@@ -1157,5 +1157,52 @@ struct CongGlobals
 
 extern struct CongGlobals the_globals;
 
+/* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
+typedef GtkDrawingArea CongEditorWidget;
+
+GtkWidget *cong_editor_widget_new(CongDocument *doc);
+CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget);
+void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget);
+#define CONG_EDITOR_WIDGET(x) ((CongEditorWidget*)(x))
+
+typedef struct CongDocumentEvent CongDocumentEvent;
+
+enum CongDocumentEventType
+{
+	CONG_DOCUMENT_EVENT_MAKE_ORPHAN,
+	CONG_DOCUMENT_EVENT_ADD_AFTER,
+	CONG_DOCUMENT_EVENT_ADD_BEFORE,
+	CONG_DOCUMENT_EVENT_SET_PARENT,
+	CONG_DOCUMENT_EVENT_SET_TEXT,
+};
+
+struct CongDocumentEvent
+{
+	enum CongDocumentEventType type;
+
+	union
+	{
+		struct make_orphan {
+			CongNodePtr node;
+		} make_orphan;
+		struct add_after {
+			CongNodePtr node;
+			CongNodePtr older_sibling;
+		} add_after;
+		struct add_before {
+			CongNodePtr node;
+			CongNodePtr younger_sibling;
+		} add_before;
+		struct set_parent {
+			CongNodePtr node;
+			CongNodePtr adoptive_parent;
+		} set_parent;
+		struct set_text {
+			CongNodePtr node;
+			const xmlChar *new_content;
+		} set_text;
+	} data;
+};
+
 
 G_END_DECLS
