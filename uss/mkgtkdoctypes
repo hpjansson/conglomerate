@@ -1,11 +1,21 @@
 #!/bin/bash
 
 # source dir = the path to the header files
-# SOURCE_DIR=../src
 SOURCE_DIR=$1
 # output file = the path including conglomerate.types
-# DEST_TYPES=../doc/reference/conglomerate.types
 DEST_TYPES=$2
+
+# no args => default paths from top
+if [ $# -ne 2 ]
+then
+    SOURCE_DIR=src
+    DEST_TYPES=doc/reference/conglomerate.types
+fi
+
+# copy the old $DEST_TYPES to $DEST_TYPES.bak
+[ -e $DEST_TYPES ] && mv $DEST_TYPES $DEST_TYPES.bak
+
+echo '*** Generating conglomerate.types ***'
 
 echo '#include "global.h"' > $DEST_TYPES
 for HEADERFILE in $SOURCE_DIR/*.h

@@ -1,19 +1,48 @@
 #!/bin/bash
 
 # source dir = path to the header files
-# SOURCE_DIR=../src
 SOURCE_DIR=$1
+# destination dir
+DEST_DIR=$2
 # source file: path including conglomerate-overrides.txt
-# SOURCE_OVERRIDES=../doc/reference/conglomerate-overrides.txt
-SOURCE_OVERRIDES=$2
+SOURCE_OVERRIDES=$3
 # dest output = path including conglomerate-sections.txt
-# DEST_SECTIONS=../doc/reference/conglomerate-sections.txt
-DEST_SECTIONS=$3
+DEST_SECTIONS=$4
+
+# In the case that we are not called with exactly 3 arguments
+# default the paths from top conglomerate dir
+if [ $# -ne 4 ]
+then
+    SOURCE_DIR=src
+    DEST_DIR=doc/reference
+    SOURCE_OVERRIDES=doc/reference/conglomerate-overrides.txt
+    DEST_SECTIONS=doc/reference/conglomerate-sections.txt
+fi
+
+WORK_DIR=$PWD
+
+[ -e $DEST_SECTIONS ] && mv $DEST_SECTIONS $DEST_SECTIONS.bak
+
+cd $DEST_DIR
+# assumes SOURCE_DIR is relative
+gtkdoc-scan --module=conglomerate --source-dir=$WORK_DIR/$SOURCE_DIR --ignore-headers=""
+cd $WORK_DIR
+
+# check for gtkdoc-scan output
+if [ ! -e $DEST_SECTIONS ]
+then
+    echo '*** ERROR: conglomerate-sections.txt not found. ***'
+    echo '*** please report this to frozenfingers@xs4all.nl ***'
+    exit 1
+fi
+
+echo '*** Generating conglomerate-sections.txt ***'
 
 FILE_LINE=
 CONG_SECTIONS=`cat $DEST_SECTIONS`
 # Now that we have the file's contents, delete the file
 test -e $DEST_SECTIONS && rm -f $DEST_SECTIONS
+
 let OBJNUM=0
 for LINE in $CONG_SECTIONS
 do
@@ -29,6 +58,11 @@ do
 		echo 'Added '$D
 		let OBJNUM+=1
 	else
+	    # preserve empty lines
+		if [[ $LINE = '<SECTION>' ]]
+		then
+		    echo >> $DEST_SECTIONS
+		fi
 		echo $LINE >> $DEST_SECTIONS
 	fi
 done

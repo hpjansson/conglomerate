@@ -7,15 +7,16 @@ SOURCE_DIR=$1
 # DEST_OVERRIDES=../doc/reference/conglomerate-overrides.txt
 DEST_OVERRIDES=$2
 
-if [ $# -lt 3 ]
+if [ $# -ne 2 ]
 then
 	# probably no parameters supplied, setting them
 	SOURCE_DIR=src
 	DEST_OVERRIDES=doc/reference/conglomerate-overrides.txt
 fi
 
-# Remove the old overrides file, because we generate a new one, in case objects got added/removed from the sources
-test -e $DEST_OVERRIDES && rm -f $DEST_OVERRIDES
+[ -e $DEST_OVERRIDES ] && mv $DEST_OVERRIDES $DEST_OVERRIDES.bak
+
+echo '*** Generating conglomerate-overrides.txt ***'
 
 # get_types
 # note that cong-editor-widget3-impl.h conflicts with other headers (generating duplicate

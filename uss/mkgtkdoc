@@ -7,7 +7,6 @@
 ######################################################
 # VARIABLES
 # All paths are relative to the main conglomerate dir
-# except for 
 ######################################################
 
 # the directory containing the C sources
@@ -21,29 +20,56 @@ WORK_DIR=$PWD
 CONGLOMERATE_TYPES=conglomerate.types
 CONGLOMERATE_OVERRIDES=conglomerate-overrides.txt
 CONGLOMERATE_SECTIONS=conglomerate-sections.txt
+
 # Sometimes we have ChangeLog, sometimes Changelog
 CHANGELOG=ChangeLog
-
 # ChangeLog output
 CHANGELOG_DATE=`date +%F`
 # is a name necessary in the ChangeLog?
 CHANGELOG_EMAIL='Robert Varga <frozenfingersxs4all.nl>'
-CHANGELOG_FILES='conglomerate.types, conglomerate-overrides.txt, conglomerate-sections.txt:'
-CHANGELOG_NOTICE='uss/mkgtkdoc: Syncronized with source'
 
-UPDATE_FALSE=F
-UPDATE_TRUE=T
-UPDATE_DOCS=$UPDATE_FALSE
-# UPDATE_MESSAGE=
+update_gtkdoc_changelog(){
+    
+    CHANGELOG_FILE=$1
+    CHANGELOG_NOTICE=$2
 
+    mv $DEST_DIR/$CHANGELOG $DEST_DIR/$CHANGELOG.tmp
+    echo `date +%F`'  '$CHANGELOG_EMAIL > $DEST_DIR/$CHANGELOG
+    echo >> $DEST_DIR/$CHANGELOG
+    echo -e '\t* '$CHANGELOG_FILE':' >> $DEST_DIR/$CHANGELOG
+    echo -e '\t'$CHANGELOG_NOTICE >> $DEST_DIR/$CHANGELOG
+    echo >> $DEST_DIR/$CHANGELOG
+    cat $DEST_DIR/$CHANGELOG.tmp >> $DEST_DIR/$CHANGELOG
+    rm -f $DEST_DIR/$CHANGELOG.tmp
 
-#######################################
+    echo -e '\a*** '$CHANGELOG' updated ***'
 
-uss/mkgtkdocoverrides
-uss/mkgtkdocsections
-uss/mkgtkdoctypes
-# hoping the sequence is the smart one FIXME
+}
 
-###
-# wish:
-# update of doc/reference/ChangeLog FIXME
+######################################
+
+uss/mkgtkdoctypes $SOURCE_DIR $DEST_DIR/$CONGLOMERATE_TYPES 
+
+if [ `diff $DEST_DIR/$CONGLOMERATE_TYPES $DEST_DIR/$CONGLOMERATE_TYPES.bak | wc -l` -ne 0 ]
+then
+    # update ChangeLog
+    update_gtkdoc_changelog 'conglomerate.types' 'Syncronized with source by uss/mkgtkdoctypes $version: 1.1$'
+fi
+
+uss/mkgtkdocoverrides $SOURCE_DIR $DEST_DIR/$CONGLOMERATE_OVERRIDES
+
+if [ `diff $DEST_DIR/$CONGLOMERATE_OVERRIDES $DEST_DIR/$CONGLOMERATE_OVERRIDES.bak | wc -l` -ne 0 ]
+then
+    # update ChangeLog
+    update_gtkdoc_changelog 'conglomerate-overrides.txt' 'Syncronized with source by uss/mkgtkdocoverrides $version: 1.1$'
+fi
+
+uss/mkgtkdocsections $SOURCE_DIR $DEST_DIR $DEST_DIR/$CONGLOMERATE_OVERRIDES $DEST_DIR/$CONGLOMERATE_SECTIONS
+
+if [ `diff $DEST_DIR/$CONGLOMERATE_SECTIONS $DEST_DIR/$CONGLOMERATE_SECTIONS.bak | wc -l` -ne 0 ]
+then
+    # update ChangeLog
+    update_gtkdoc_changelog 'conglomerate-sections.txt' 'Syncronized with source by uss/mkgtkdocsections $version: 1.3$'
+fi
+
+rm -f $DEST_DIR/*.bak

@@ -1,3 +1,8 @@
+2003-10-01  Robert Varga <frozenfingers@xs4all.nl>
+
+	* mkgtkdoc, mkgtkdoctypes, mkgtkdocoverrides, mkgtkdocsections:
+	Scripts work "Geert"-style, various fixes.
+	
 2003-10-27  Geert Stappers <stappers@stappers.nl>
 
 	* mkgtkdoc
