@@ -100,7 +100,9 @@ GList*
 cong_file_selection_make_xml_filter_list (void)
 {
 	GList *list = NULL;
-	GtkFileFilter *test_filter = gtk_file_filter_new ();
+	GtkFileFilter *test_filter;
+
+	test_filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (test_filter, _("XML Files"));
 	gtk_file_filter_add_mime_type (test_filter, "text/xml");
 	gtk_file_filter_add_mime_type (test_filter, "x-directory/normal");
@@ -110,6 +112,13 @@ cong_file_selection_make_xml_filter_list (void)
 	gtk_file_filter_add_pattern (test_filter, "*.xsl");
 
 	list = g_list_append(list, test_filter);
+
+#if 1
+	test_filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (test_filter, _("All Files"));
+	gtk_file_filter_add_pattern (test_filter, "*");
+	list = g_list_append(list, test_filter);
+#endif
 
  	return list;	
 }
