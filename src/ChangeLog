@@ -1,3 +1,9 @@
+2003-10-25  Robert Varga <frozenfingers@xs4all.ro>
+
+        * cong-location.h
+       
+	gtk-doc comments.
+	
 2003-10-24  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
 
 	* cong-location.c
