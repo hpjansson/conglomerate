@@ -1574,37 +1574,6 @@ cong_document_get_dtd_element (CongDocument *cong_doc,
 	return elemDecl;
 }
 
-GList* 
-cong_document_get_valid_new_child_elements (CongDocument *doc,
-					    CongNodePtr node, 
-					    enum CongElementType tag_type)
-{
-	return xml_get_valid_children (cong_document_get_dispspec(doc), 
-				       node, 
-				       tag_type);
-}
-
-GList* 
-cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
-						       CongNodePtr node, 
-						       enum CongElementType tag_type)
-{
-	return xml_get_valid_previous_sibling (cong_document_get_dispspec(doc), 
-					       node, 
-					       tag_type);
-}
-
-GList* 
-cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
-						   CongNodePtr node, 
-						   enum CongElementType tag_type)
-{
-	return xml_get_valid_next_sibling (cong_document_get_dispspec(doc), 
-					   node, 
-					   tag_type);
-}
-
-
 /* Internal function definitions: */
 static void
 cong_document_finalize (GObject *object)

@@ -19,7 +19,7 @@ static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementConte
 static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
 static void xml_get_or_content_list(xmlElementContentPtr content, GList* list);
 static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, const xmlChar **list, int *len, int max);
-static gint wrap_xml_valid_get_valid_elements(xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max);
+static gint wrap_xml_valid_get_valid_elements(CongDocument *doc, xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max);
 static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, 
 						      gint elements_length, enum CongElementType tag_type);
 static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementType tag_type);
@@ -460,13 +460,18 @@ static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementCo
  *
  * Otherwise, behaves the same as xmlValidGetPotentialChildren.
  */
-static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, const xmlChar **list,
-						     gint *len, gint max) {
+static gint 
+xml_valid_get_potential_element_children(xmlElementContent *ctree, 
+					 const xmlChar **list,
+					 gint *len, 
+					 gint max) {
     gint i;
 
     if ((ctree == NULL) || (list == NULL) || (len == NULL))
         return(-1);
-    if (*len >= max) return(*len);
+
+    g_return_val_if_fail (*len >=0, 0);
+    g_return_val_if_fail (*len < max, max);
 
     switch (ctree->type) {
     case XML_ELEMENT_CONTENT_PCDATA: 
@@ -496,8 +501,14 @@ static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, c
  * xmlValidGetValidElements parameter structure cannot handle this case.
  *
  * Otherwise, behaves the same as xmlValidGetValidElements.
+ * Being rewritten: now uses CongDocument, so may be able to get at DTD information even if none attached...
  */
-static gint wrap_xml_valid_get_valid_elements(xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max) 
+static gint 
+wrap_xml_valid_get_valid_elements (CongDocument *doc, 
+				   xmlNode *parent, 
+				   xmlNode *next_sibling, 
+				   const xmlChar ** elements, 
+				   gint max)
 {
 	xmlElement *element_desc;
 	gint nb_elements, i;
@@ -524,44 +535,46 @@ static gint wrap_xml_valid_get_valid_elements(xmlNode *parent, xmlNode *next_sib
 
 	/*  if no children under parent, use xmlValidGetPotentialChildren */
 	if (parent->children == NULL) {
-		/*  try to find the element description for the parent */
-		/*  internal subset */
-		element_desc = xmlGetDtdElementDesc(parent->doc->intSubset,
-						    parent->name);
-		/*  if that failed, try external subset */
-		if ((element_desc == NULL) && (parent->doc->extSubset != NULL)) {
-			element_desc = xmlGetDtdElementDesc(parent->doc->extSubset,
-							    parent->name);
-		}
-		/*  if we still failed, give up */
-		g_return_val_if_fail(element_desc, -1);
-		
-		/*  get potential children */
-		nb_elements = xml_valid_get_potential_element_children(element_desc->content,
-								       elements, &nb_elements, max);
+		element_desc = cong_document_get_dtd_element (doc, 
+							      parent);
 
+		/*  if we still failed, give up */
+		if (element_desc) {
+			/*  get potential children */
+			nb_elements = 0;
+			nb_elements = xml_valid_get_potential_element_children(element_desc->content,
+									       elements, 
+									       &nb_elements, 
+									       max);
+		} else {
+			return -1;
+		}
 	}
 	else {
 		/*  if we're inserting after the last child */
 		if (next_sibling == NULL) {
-			nb_elements = xmlValidGetValidElements(parent->last, NULL, elements, max);
-		}
-		else {
-			nb_elements = xmlValidGetValidElements(next_sibling->prev, next_sibling, elements, max);
+			nb_elements = xmlValidGetValidElements (parent->last, 
+								NULL, 
+								elements, 
+								max);
+		} else {
+			nb_elements = xmlValidGetValidElements (next_sibling->prev, 
+								next_sibling, 
+								elements, 
+								max);
 		}
 	}
 
 	return nb_elements;
 }
-		
-	
+
 
 #if 0
-/* make this a function of the dispspec!?  make it match the naming guidelines!
-etc for all the other functione below
-do it either using GList or a callback, rather than nasty bounded arrays
-*/
+/* do all this using GList or a callback, rather than nasty bounded arrays */
 #endif
+
+
+#define MAX_ELEMENTS 256
 
 /**
  * Get the set of valid children for a node.  If the document
@@ -571,22 +584,30 @@ do it either using GList or a callback, rather than nasty bounded arrays
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * @param ds CongDispsec* display spec
  * @param node CongNodePtr node for which to get valid children
  * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
  * @return GList of CongDispspecElement
  */
-GList* xml_get_valid_children(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type) 
+GList*
+cong_document_get_valid_new_child_elements (CongDocument *doc,
+					    CongNodePtr node, 
+					    enum CongElementType tag_type)
 {
-	const xmlChar  *elements[256];
+	const xmlChar *elements[MAX_ELEMENTS];
 	gint result;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
 
-	result = wrap_xml_valid_get_valid_elements(node, node->last, elements, 256);
-	if (result != -1) {
-		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
-	}
-	else {
-		return xml_get_elements_from_dispspec(ds, tag_type);
+	switch (cong_node_type(node)) {
+	default: return NULL;
+	case CONG_NODE_TYPE_ELEMENT:
+		result = wrap_xml_valid_get_valid_elements(doc, node, node->last, elements, MAX_ELEMENTS);
+		if (result != -1) {
+			g_assert (result<=MAX_ELEMENTS);
+			return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
+		}
+		else {
+			return xml_get_elements_from_dispspec(ds, tag_type);
+		}
 	}
 }
 
@@ -599,17 +620,22 @@ GList* xml_get_valid_children(CongDispspec* ds, CongNodePtr node, enum CongEleme
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * @param ds CongDispsec* display spec
  * @param node CongNodePtr node for which to get valid previous siblings
  * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
  * @return GList of CongDispspecElement
  */
-GList* xml_get_valid_previous_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type) {
-	const xmlChar  *elements[256];
+GList* 
+cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
+						       CongNodePtr node, 
+						       enum CongElementType tag_type)
+{
+	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
+	CongDispspec *ds = cong_document_get_dispspec(doc); 
 	
-	result = wrap_xml_valid_get_valid_elements(node->parent, node, elements, 256);
+	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node, elements, MAX_ELEMENTS);
 	if (result != -1) {
+		g_assert (result<=MAX_ELEMENTS);
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
@@ -630,12 +656,18 @@ GList* xml_get_valid_previous_sibling(CongDispspec* ds, CongNodePtr node, enum C
  * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
  * @return GList of CongDispspecElement
  */
-GList* xml_get_valid_next_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type) {
-	const xmlChar  *elements[256];
+GList* 
+cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
+						   CongNodePtr node, 
+						   enum CongElementType tag_type)
+{
+	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
+	CongDispspec *ds = cong_document_get_dispspec(doc); 
 		
-	result = wrap_xml_valid_get_valid_elements(node->parent, node->next, elements, 256);
+	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node->next, elements, MAX_ELEMENTS);
 	if (result != -1) {
+		g_assert (result<=MAX_ELEMENTS);
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
