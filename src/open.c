@@ -48,5 +48,6 @@ gint open_document(GtkWidget *w, gpointer data)
 	ds_name = get_file_name("Select a matching displayspec");
 	if (!ds_name) return(TRUE);
 
+	open_document_do(doc_name, ds_name);
 	return(TRUE);
 }
