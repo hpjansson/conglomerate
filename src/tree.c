@@ -12,7 +12,7 @@ void tree_coarse_update_of_view()
 {
 	cong_document *doc = the_globals.xv->doc;
 	xmlview_destroy(FALSE);
-	the_globals.xv = xmlview_new(doc, the_globals.ds);
+	the_globals.xv = xmlview_new(doc);
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 }
 
@@ -20,8 +20,11 @@ gint tree_new_sibling(GtkWidget *widget, TTREE *tag)
 {
 	TTREE *n0, *n1, *n2;
 	char *s;
+
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
-	s = pick_structural_tag();
+	s = pick_structural_tag(ds);
 	if (!s) return(TRUE);
 
 	n0 = ttree_node_add(tag->parent, "data", 4);
@@ -49,7 +52,10 @@ gint tree_new_sub_element(GtkWidget *widget, TTREE *tag)
 	TTREE *n0, *n1;
 	char *s;
 
-	s = pick_structural_tag();
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
+
+	s = pick_structural_tag(ds);
 	if (!s) return(TRUE);
 	
 	n0 = ttree_node_add(tag->child, "tag_span", 8);
@@ -89,9 +95,12 @@ gint tree_copy(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 {
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
+
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	the_globals.clipboard->prev = 0;
 	the_globals.clipboard->next = tag->child->child;
@@ -112,9 +121,12 @@ gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 {
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
+
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	if (tag->prev)
 	{
@@ -141,9 +153,12 @@ gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_after(GtkWidget *widget, TTREE *tag)
 {
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
+
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	if (tag->next)
 	{

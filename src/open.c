@@ -82,6 +82,7 @@ void open_document_do(const gchar* doc_name)
 	char *p;
 	TTREE *xml_in;
 	FILE *xml_f;
+	CongDispspec *ds;
 
 	/* Use libxml to load the doc: */
 	{
@@ -133,13 +134,13 @@ void open_document_do(const gchar* doc_name)
 		
 		xml_in = convert_libxml_to_ttree_doc(doc);
 
-		the_globals.ds = get_appropriate_dispspec(doc);
+		ds = get_appropriate_dispspec(doc);
 
 		xmlFreeDoc(doc);
 	}
 
 
-	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in), the_globals.ds);
+	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds));
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 }

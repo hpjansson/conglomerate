@@ -18,6 +18,7 @@ GtkStyle *style_white;
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
   We store a boolean "expanded" data on the vbox.
+  We also store a "dispspec" ptr to the dispspec on the vbox.
   We store a ptr to the vbox within the title/GtkDrawingArea called "vbox" so it can query this when it draws itself.
   Probably would be cleaner to have a new widget subclass...
  */
@@ -30,6 +31,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 
 	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
 	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
+	CongDispspec *ds = g_object_get_data(G_OBJECT(vbox), "dispspec");
 	
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 300 ? str_width : 300;
@@ -37,7 +39,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	
 	str_width = w->allocation.width - 4;
 	
-	gc = cong_dispspec_gc_get(the_globals.ds, x, 0);
+	gc = cong_dispspec_gc_get(ds, x, 0);
 	if (!gc) gc = w->style->black_gc;
 	
 	/* Fill the header box */
@@ -91,7 +93,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	}
 	/* Section identifier */
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
-									cong_dispspec_name_get(x));
+									cong_dispspec_name_get(ds, x));
 
 	/* Metadata indicator */
 	
@@ -175,6 +177,7 @@ GtkWidget *xv_section_head(CongDispspec *ds, TTREE *x)
 	title = gtk_drawing_area_new();
 
 	g_object_set_data(G_OBJECT(vbox), "expanded", GINT_TO_POINTER(1));
+	g_object_set_data(G_OBJECT(vbox), "dispspec", ds);
 	g_object_set_data(G_OBJECT(title), "vbox", vbox);
 
 	gtk_box_pack_start(GTK_BOX(vbox), title, TRUE, TRUE, 0);
@@ -194,16 +197,23 @@ GtkWidget *xv_section_head(CongDispspec *ds, TTREE *x)
 }
 
 
+/* 
+   The fragment head:
+
+   Currently just a GtkDrawingArea widget, with a "dispspec" field of data.  Probably should be a subclass.   
+*/
 static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x)
 {
 	GdkGC *gc;
 	int str_width;
 	int i;
+
+	CongDispspec *ds = g_object_get_data(G_OBJECT(w), "dispspec");
 	
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
-	gc = cong_dispspec_gc_get(the_globals.ds, xml_frag_exit(x), 0);
+	gc = cong_dispspec_gc_get(ds, xml_frag_exit(x), 0);
 	if (!gc) gc = w->style->black_gc;
 
 	/* Fill the header box */
@@ -266,7 +276,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 	/* Section identifier */
 
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
-									cong_dispspec_name_get(x));
+									cong_dispspec_name_get(ds, x));
 	
 	return(TRUE);
 }
@@ -278,6 +288,8 @@ GtkWidget *xv_fragment_head(CongDispspec *ds, TTREE *x)
 	GtkWidget *title;
 
 	title = gtk_drawing_area_new();
+	g_object_set_data(G_OBJECT(title), "dispspec", ds);
+
 	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, the_globals.ft_asc + the_globals.ft_desc + 4 /* framing and inside space */ + 4 /* below space */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
 										 (GtkSignalFunc) xv_fragment_head_expose, x);
@@ -647,7 +659,7 @@ GtkWidget *xv_section_embedded(TTREE * x,CongDispspec *ds, int collapsed)
 
 }
 
-GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
+GtkWidget *xv_element_new(cong_document *doc, TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
 	UNUSED_VAR(GdkGCValues     gc_values)
@@ -666,8 +678,9 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 #if 1
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 	gtk_tree_store_set (store, &new_tree_iter,
-			    TREEVIEW_TITLE_COLUMN, cong_dispspec_name_get(x),
+			    TREEVIEW_TITLE_COLUMN, cong_dispspec_name_get(ds, x),
 			    TREEVIEW_TTREE_COLUMN, x,
+			    TREEVIEW_DOC_COLUMN, doc,
 			    -1);
 #else
 	glaebb_tree = 0;
@@ -719,11 +732,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 #endif
 					
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
-#if 1
-					sub = xv_element_new(x, ds, root, 1, store, &new_tree_iter);
-#else
-					sub = xv_element_new(x, ds, root, 1, glaebb_tree);
-#endif
+					sub = xv_element_new(doc, x, ds, root, 1, store, &new_tree_iter);
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
 				}
 				else
@@ -745,11 +754,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 					xv_style_r(hbox, style_white);
 					poot = xv_section_head(ds, x);
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
-#if 1
-					sub = xv_element_new(x, ds, poot, 0, store, &new_tree_iter);
-#else
-					sub = xv_element_new(x, ds, poot, 0, glaebb_tree);
-#endif
+					sub = xv_element_new(doc, x, ds, poot, 0, store, &new_tree_iter);
 
 
 					sub = xv_section_tail(ds, x);
@@ -824,7 +829,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 	return(root);
 }
 
-struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
+struct xview *xmlview_new(cong_document *doc)
 {
 	struct xview *xv;
 	GdkColor gcol;
@@ -832,12 +837,15 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 	int i;
 	TTREE *x;
 
+	CongDispspec *displayspec;
+
 	GtkTreeIter root_iter;
 
 	g_message("xmlview_new called\n");
 
 	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(displayspec, NULL);
+	
+	displayspec = cong_document_get_dispspec(doc);
 	
 	the_globals.curs.set = 0;
 	the_globals.curs.xed = 0;
@@ -873,6 +881,7 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
 			    TREEVIEW_TITLE_COLUMN, "Document",
 			    TREEVIEW_TTREE_COLUMN, cong_document_get_root(doc),
+			    TREEVIEW_DOC_COLUMN, doc,
 			    -1);
 #else
 	xv->tree = gtk_tree_item_new_with_label("Document");
@@ -911,7 +920,7 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 
 			gtk_box_pack_start(GTK_BOX(xv->w), head, TRUE, TRUE, 0);
 			
-			xv_element_new(x, displayspec, head, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
+			xv_element_new(doc, x, displayspec, head, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
 
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);

@@ -108,6 +108,9 @@ void popup_init()
 void popup_tag_remove_inner()
 {
 	TTREE *n0;
+
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
 #if 1
 	if (!cong_location_exists(&the_globals.curs.location)) return;
@@ -115,7 +118,7 @@ void popup_tag_remove_inner()
 	if (!the_globals.curs.t) return;
 #endif
 
-	n0 = xml_inner_span_element(the_globals.curs.location.tt_loc);
+	n0 = xml_inner_span_element(ds, the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
@@ -124,6 +127,9 @@ void popup_tag_remove_inner()
 void popup_tag_remove_outer()
 {
 	TTREE *n0;
+
+	cong_document *doc = the_globals.xv->doc;
+	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
 #if 1
 	if (!cong_location_exists(&the_globals.curs.location)) return;
@@ -131,7 +137,7 @@ void popup_tag_remove_outer()
 	if (!the_globals.curs.t) return;
 #endif
 	
-	n0 = xml_outer_span_element(the_globals.curs.location.tt_loc);
+	n0 = xml_outer_span_element(ds, the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
@@ -175,7 +181,7 @@ void popup_build(struct xed *xed)
 										 GTK_SIGNAL_FUNC(xed_paste), xed);
 	gtk_widget_show(item);
 
-	if (/* the_globals.curs.set && */ the_globals.curs.location.tt_loc && xml_inner_span_element(the_globals.curs.location.tt_loc))
+	if (/* the_globals.curs.set && */ the_globals.curs.location.tt_loc && xml_inner_span_element(xed->displayspec, the_globals.curs.location.tt_loc))
 	{
 	  item = gtk_menu_item_new();
 	  w0 = gtk_hseparator_new();
@@ -208,7 +214,7 @@ void popup_build(struct xed *xed)
 
 	/* Build list of dynamic tag insertion tools */
 #if 1
-	for (n0 = cong_dispspec_get_first_element(the_globals.ds); n0; n0 = cong_dispspec_element_next(n0))
+	for (n0 = cong_dispspec_get_first_element(xed->displayspec); n0; n0 = cong_dispspec_element_next(n0))
 	{
 		if (cong_dispspec_element_is_span(n0))
 		{
@@ -270,10 +276,12 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
  		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
  		      TTREE* tt;
  		      GtkWidget* menu;
+		      cong_document* doc;
  
  		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_TTREE_COLUMN, &tt, -1);
+ 		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_DOC_COLUMN, &doc, -1);
  
- 		      printf("got node \"%s\"\n",cong_dispspec_name_get(tt));
+ 		      printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), tt));
  
  		      menu = tpopup_init(tt);
  		      gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,

@@ -284,10 +284,11 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	char *p;
 	TTREE *xml_in;
 	FILE *xml_f;
+	CongDispspec *ds;
 
 #ifndef AUTOGENERATE_DS
 	GnomeVFSURI *uri = gnome_vfs_uri_new(ds_name);
-	GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri, &the_globals.ds);
+	GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri, &ds);
 	if (vfs_result!=GNOME_VFS_OK) {
 		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(uri, vfs_result);
 			
@@ -353,7 +354,7 @@ int test_open_do(const char *doc_name, const char *ds_name)
 
 #ifdef AUTOGENERATE_DS
 		/* Autogenerate the ds: */
-		the_globals.ds = cong_dispspec_new_from_xml_file(doc);
+		ds = cong_dispspec_new_from_xml_file(doc);
 #endif
 
 		xml_in = convert_libxml_to_ttree_doc(doc);
@@ -381,7 +382,7 @@ int test_open_do(const char *doc_name, const char *ds_name)
 #if 0
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), do_ttree_test(xml_in), FALSE, FALSE, 0);
 #else
-	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in), the_globals.ds);
+	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds));
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 #endif
 
@@ -822,7 +823,7 @@ void gui_window_main_make()
 	gtk_widget_show(w2);
 
 #if 1
-        gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+        gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER);
 
 	gui->global_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(gui->global_tree_store)));
 

@@ -69,7 +69,7 @@ char *xml_fetch_clean_data(TTREE *x)
 }
 
 
-TTREE *xml_inner_span_element(TTREE *x)
+TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x)
 {
 	if (x->parent) x = x->parent;
 	else return(0);
@@ -77,14 +77,14 @@ TTREE *xml_inner_span_element(TTREE *x)
 	if (x->parent) x = x->parent;
 	else return(0);
 
-	if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(the_globals.ds, x->child->data))
+	if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data))
 		return(x);
 
 	return(0);
 }
 
 
-TTREE *xml_outer_span_element(TTREE *x)
+TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x)
 {
 	TTREE *n0 = 0;
 	
@@ -96,7 +96,7 @@ TTREE *xml_outer_span_element(TTREE *x)
 
 	for (;;)
 	{
-	  if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(the_globals.ds, x->child->data))
+	  if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data))
 		  n0 = x;
 		else break;
 		

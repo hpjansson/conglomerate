@@ -238,7 +238,7 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -262,7 +262,7 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 
 		while (n)
 		{
-			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_prev(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}
@@ -316,7 +316,7 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{				 
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -340,7 +340,7 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 
 		while (n)
 		{
-			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_next(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}

@@ -129,7 +129,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 
 			else if (xml_frag_type(pos->node) == XML_TAG_SPAN)
 			{
-				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(pos->node)))
+				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(pos->node)))
 				{
 					pos->node = node_prev2;
 					if (xml_frag_type(pos->node) == XML_DATA) 
@@ -188,7 +188,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 		
 		while (pos->node)
 		{
-			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(pos->node)))
+			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(pos->node)))
 			{ pos->node = 0; break; }
 				
 			node_prev = pos->node;

@@ -728,7 +728,12 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 	UNUSED_VAR(int line)
 	int x0, x1, width, text_width;
 	int y, text_y;
+	
+	CongDispspec *ds = xed->displayspec;
+
 	UNUSED_VAR(int eol = 0)
+
+		
 
 
 	l = xed_line_last(xed);
@@ -761,7 +766,7 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(t));
+			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
 			if (text_width < width - 6)
 			{
 				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -770,7 +775,7 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 				
 				gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
 				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-												text_y, cong_dispspec_name_name_get(t));
+												text_y, cong_dispspec_name_name_get(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 				gdk_draw_line(xed->p, gc, x1, y, x1, y - 2);
@@ -815,7 +820,7 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(t));
+			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
 			if (text_width < width - 6)
 			{
 				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -823,7 +828,7 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 				/* Draw text and lines */
 				
 				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-												text_y, cong_dispspec_name_name_get(t));
+												text_y, cong_dispspec_name_name_get(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 			}
@@ -847,6 +852,8 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 	int x0, x1, width, text_width;
 	int y, text_y;
 	UNUSED_VAR(unsigned int col)
+
+	CongDispspec *ds = xed->displayspec;
 
 	/* --- Set drawing style --- */
 #if 0
@@ -883,14 +890,14 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 #if 0
 	if (x1 > x0) { x1 -= 4; width -= 4; }
 #endif
-	if (mode == 1 && (gc = cong_dispspec_name_gc_get(xed->displayspec, t, 0)))
+	if (mode == 1 && (gc = cong_dispspec_name_gc_get(ds, t, 0)))
 	{
 	  UNUSED_VAR(TTREE *n0)
 	  UNUSED_VAR(TTREE *n1)
 
 		/* Insert text if it fits */
 
-		text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(t));
+		text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
 		if (text_width < width - 6)
 		{
 			text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -899,7 +906,7 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 			
 			if (line == xed->draw_line) gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
 			gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-											text_y, cong_dispspec_name_name_get(t));
+											text_y, cong_dispspec_name_name_get(ds, t));
 			gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 			gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 			gdk_draw_line(xed->p, gc, x1, y, x1, y - 2);
@@ -1632,7 +1639,7 @@ void xed_cutcopy_update(struct curs* curs)
 	{
 		cong_document* doc = the_globals.xv->doc;
 		xmlview_destroy(FALSE);
-		the_globals.xv = xmlview_new(doc, the_globals.ds);
+		the_globals.xv = xmlview_new(doc);
 	}
 	else
 	{
@@ -1755,8 +1762,11 @@ gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
+	CongDispspec *ds;
 	
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+
+	ds = curs->xed->displayspec;
 
 	if (!the_globals.clipboard)
 	{
@@ -1766,7 +1776,7 @@ gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
 
 	if (!the_globals.clipboard->child || !the_globals.clipboard->child->child) return(TRUE);
 	
-	if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	if (cong_location_frag_type(&curs->location) == XML_DATA)
 	{

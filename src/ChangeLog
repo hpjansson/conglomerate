@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-09-18 David Malcolm
+
+	* cong-document.c, cursor.c, dispspec.c, global.h, main.c, open.c, popup.c, position.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Moved dispspec from the_globals into each document, fixing many (but not all) bugs when working with multiple documents of different types.
+	
 2002-08-26 David Malcolm
 
 	* cong-dispspec-registry.c

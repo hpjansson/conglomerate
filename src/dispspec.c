@@ -394,10 +394,9 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
   gcol->red = (col >> 8) & 0xff00;
 }
 
-
-char *cong_dispspec_name_get(TTREE *x)
+char *cong_dispspec_name_get(CongDispspec *ds, TTREE *x)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(the_globals.ds, xml_frag_name_nice(x));
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
 	if (element) {
 		return (char*)cong_dispspec_element_username(element);
 	}
@@ -405,17 +404,15 @@ char *cong_dispspec_name_get(TTREE *x)
 	return(xml_frag_name_nice(x));
 }
 
-
-char *cong_dispspec_name_name_get(TTREE *t)
+char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(the_globals.ds, t->data);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
 	if (element) {
 		return (char*)cong_dispspec_element_username(element);
 	}
   
 	return(t->data);
 }
-
 
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog)
 {
@@ -512,8 +509,8 @@ void tag_new_picked(GtkWidget *w, char *name)
 
 GtkWidget *pickstruct;
 
-
-char *pick_structural_tag()
+#if 1
+char *pick_structural_tag(CongDispspec *ds)
 {
   GtkWidget *w0, *w1;
   CongDispspecElement *n0;
@@ -535,7 +532,7 @@ char *pick_structural_tag()
   gtk_widget_show(w0);
 
   /* Window -> vbox -> buttons */
-  for (n0 = cong_dispspec_get_first_element(the_globals.ds); n0; n0 = cong_dispspec_element_next(n0)) {
+  for (n0 = cong_dispspec_get_first_element(ds); n0; n0 = cong_dispspec_element_next(n0)) {
 	  if (cong_dispspec_element_is_structural(n0)) {
 		  w1 = gtk_button_new_with_label(cong_dispspec_element_username(n0));
 		  gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
@@ -549,7 +546,7 @@ char *pick_structural_tag()
 	gtk_widget_destroy(pickstruct);
   return(tag_picked_name);
 }
-
+#endif
 
 
 #ifdef WINDOWS_BUILD

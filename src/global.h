@@ -15,6 +15,7 @@ enum
 {
 	TREEVIEW_TITLE_COLUMN,
 	TREEVIEW_TTREE_COLUMN,
+	TREEVIEW_DOC_COLUMN,
 	TREEVIEW_N_COLUMNS
 };
 
@@ -100,13 +101,16 @@ cong_location_copy(cong_location *dst, const cong_location *src);
 typedef struct _cong_document cong_document;
 
 cong_document*
-cong_document_new_from_ttree(TTREE *tt);
+cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds);
 
 void
 cong_document_delete(cong_document *doc);
 
 TTREE*
 cong_document_get_root(cong_document *doc);
+
+CongDispspec*
+cong_document_get_dispspec(cong_document *doc);
 
 void
 cong_document_save(cong_document *doc, const char* filename);
@@ -238,8 +242,6 @@ struct cong_globals
   GdkFont *f, *fm, *ft;
   GdkGC *insert_element_gc;
   int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
-  
-  CongDispspec *ds;
 
   TTREE *vect_global;
   TTREE *medias_global;
@@ -302,8 +304,6 @@ gint xed_insert_table(GtkWidget *w, struct xed *xed);
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
-struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec);
-
 #if 0
 SOCK *server_login();
 #endif
@@ -316,8 +316,8 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
 
 TTREE *selection_reparent_all(struct selection* selection, TTREE *p);
-TTREE *xml_inner_span_element(TTREE *x);
-TTREE *xml_outer_span_element(TTREE *x);
+TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x);
+TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x);
 char *xml_fetch_clean_data(TTREE *x);
 
 TTREE *get_upper_section(TTREE *x);
@@ -331,7 +331,7 @@ gint open_document(GtkWidget *w, gpointer data);
 gint save_document(GtkWidget *w, gpointer data);
 
 const char *get_file_name(char *title);
-char *pick_structural_tag();
+char *pick_structural_tag(CongDispspec *ds);
 
 void open_document_do(const gchar *doc_name);
 
@@ -339,6 +339,8 @@ void open_document_do(const gchar *doc_name);
 #define UNUSED_VAR(x)
 
 int gui_window_new_document_make();
+
+struct xview *xmlview_new(cong_document *doc);
 void xmlview_destroy(int free_xml);
 
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
@@ -352,10 +354,10 @@ cong_dispspec_get_name(const CongDispspec *ds);
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
-char *cong_dispspec_name_name_get(TTREE *t);
+char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, TTREE *x, int tog);
-char *cong_dispspec_name_get(TTREE *x);
+char *cong_dispspec_name_get(CongDispspec *ds, TTREE *x);
 
 gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
 gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name);
