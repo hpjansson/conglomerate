@@ -14,6 +14,7 @@ debian_DISTS = \
     conglomerate_icon.xpm \
     control \
     copyright \
+    docs \
     rules \
     watch \
     $(NULL)
