@@ -85,15 +85,6 @@
 		<element tag="cnxn" type="span" color="a0b0c0">
 			<name locale="en">cnxn</name>
 		</element>
-
-		<element tag="cite" type="span" color="a0b0c0">
-			<name locale="en">cite</name>
-		</element>
-
-		<element tag="codeline" type="span" color="a0b0c0">
-			<name locale="en">codeline</name>
-		</element>
-
 	</element-list>
 
 </dispspec>

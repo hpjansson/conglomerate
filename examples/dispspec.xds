@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<!DOCTYPE dispspec SYSTEM "xds.dtd">
 <dispspec>
   <metadata>
     <name>Conglomerate Display Specification</name>
     <description>Information that tells Conglomerate how to display a particular type of file.</description>
   </metadata>
+  <document-models>
+  </document-models>
   <element-list>
     <element tag="collapseto" type="structural">
       <name>Collapseto</name>
@@ -50,8 +51,10 @@
     <dispspec>
       <metadata>
         <name>New Conglomerate Display Specification</name>
-	<desc/>
+	<description/>
       </metadata>
+      <document-models>
+      </document-models>
       <element-list>
       </element-list>
     </dispspec>

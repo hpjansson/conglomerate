@@ -5,15 +5,14 @@
 		<name>&quot;Kernel Traffic&quot; Newsletter</name>
 		<description>A newletter tracking the technical development of a project within the Free/Open Source Software world</description>
 	</metadata>
-	
-	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
-
+	<document-models>
+	</document-models>
 	<element-list>
 			
 		<element tag="kc" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 			<name locale="en">Kernel Cousin Newsletter</name>
 			<header-info xpath="concat(normalize-space(child::title/text()), &quot; #&quot;, normalize-space(child::issue/@num))"></header-info>
+			<collapseto></collapseto>
 		</element>
 
 		<element tag="kcref" type="structural" color="a0b0c0">
@@ -161,8 +160,8 @@
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
-			<collapseto></collapseto>
 			<name locale="en">Title</name>
+			<collapseto></collapseto>
 		</element>
 
 
@@ -187,7 +186,6 @@
 
 	</element-list>
 
-	<gui>
-	</gui>
+	<gui/>
 
 </dispspec>

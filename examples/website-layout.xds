@@ -8,6 +8,7 @@
 	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
+	<document-models/>
 
 	<element-list>
 			
@@ -58,7 +59,6 @@
 
 	</element-list>
 
-	<gui>
-	</gui>
+	<gui/>
 
 </dispspec>

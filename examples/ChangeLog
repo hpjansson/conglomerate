@@ -1,5 +1,9 @@
 2003-09-08  David Malcolm
 
+	* cnxml.xds, dispspec.xds, docbook.xds, kernel-traffic-newsletter.xds, readme.xds, relax-ng.xds, website-layout.xds, website-webpage.xds, xsl.xds
+
+	Fixed validation errors
+
 	* xds.dtd
 
 	<element-list> can now contain zero or more <element> tags, rather than one or more

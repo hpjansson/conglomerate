@@ -32,13 +32,13 @@
 
 				At the moment, only a single tag is supported (i.e. no lists).
 			-->
-			<header-info tag="title"></header-info>
 			<name locale="en">Book</name>
+			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="bookinfo" type="structural" color="a0b0c0" icon="cong-metadata">
-			<header-info tag="title"></header-info>
 			<name locale="en">Book Information</name>
+			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -52,13 +52,13 @@
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
-			<collapseto></collapseto>
 			<name locale="en">Title</name>
+			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="subtitle" type="structural" color="a0b0c0" icon="cong-title">
-			<collapseto></collapseto>
 			<name locale="en">Subtitle</name>
+			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="authorgroup" type="structural" color="a0b0c0" icon="cong-wrapper">
@@ -148,14 +148,14 @@
 		</element>
 
 		<element tag="qandaset" type="structural" color="a0b0c0" icon="cong-faq">
-			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Set</name>
+			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="qandadiv" type="structural" color="a0b0c0" icon="cong-wrapper">
-			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Subset</name>
+			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -165,14 +165,14 @@
 		</element>
 
 		<element tag="question" type="structural" color="a0b0c0" icon="cong-question">
-			<collapseto></collapseto>
 			<name locale="en">Question</name>
+			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="answer" type="structural" color="a0b0c0" icon="cong-answer">
-			<collapseto></collapseto>
 			<name locale="en">Answer</name>
+			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -232,7 +232,7 @@
 		</element>
 		<element tag="sect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection</name>
-			<short-desc>A subsection within an <element>sect1</element>.</short-desc>
+			<short-desc>A subsection within a section</short-desc>
 			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
@@ -385,8 +385,8 @@
 		</element>
 
 		<element tag="member" type="structural" color="a0b0c0" icon="cong-list-item">
-			<collapseto></collapseto>
 			<name locale="en">List Member</name>
+			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -639,7 +639,6 @@
 
 	</element-list>
 
-	<gui>
-	</gui>
+	<gui/>
 
 </dispspec>

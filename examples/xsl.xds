@@ -1,10 +1,11 @@
+<?xml version="1.0"?>
 <dispspec>
 
 	<metadata>
 		<name>XSL stylesheet</name>
 		<description>An XSL stylesheet describes a way of transforming a document of one type into one in another form.   For example, it might describe a way of converting DocBook files into HTML web pages.</description>
 	</metadata>
-
+	<document-models/>
 	<element-list>
 		<element tag="stylesheet" type="structural" color="a0b0c0">
 			<name locale="en">Stylesheet</name>
