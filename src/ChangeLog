@@ -1,5 +1,9 @@
 2003-09-21  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* main.c
+
+	Applied patch by Varga Robert to fix bug #114670
+
 	* cong-editor-area.c
 
 	Optimisation of size allocations by not visiting parts of the area tree that haven't changed size (see bug #122360)

@@ -48,7 +48,19 @@ cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileS
 	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
 	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
 
-	uri = gnome_vfs_uri_new(filename);
+	/* it seems that GnomeVFS works with absolute paths, so
+	   if the filename is not absolute, build it */
+	if (!g_path_is_absolute (filename)){
+		gchar *absolute_path = g_strconcat (g_get_current_dir(), GNOME_VFS_URI_PATH_STR, filename, NULL);
+
+		uri = gnome_vfs_uri_new (absolute_path);
+
+		g_free (absolute_path);
+
+	} else {
+
+		uri = gnome_vfs_uri_new (filename);
+	}
 
 	vfs_result = cong_vfs_new_buffer_from_uri(uri, buffer, size);
 
