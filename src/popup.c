@@ -1020,23 +1020,6 @@ structural_tag_popup_init (const gchar *label,
 	g_free (submenu_ui_path);
 }
 
-static void
-make_element_submenu (const gchar *action_prefix,
-		      const gchar *label,
-		      CongUICallback_Document_ElementDescription_SelectedNode callback,
-		      CongDocument *doc,
-		      GList *list_of_element_desc,
-		      CongPrimaryWindow *primary_window)
-{
-	/* add UI stuff */
-	structural_tag_popup_init (label,
-				   action_prefix,
-				   callback, 
-				   doc, 
-				   list_of_element_desc,
-				   primary_window);
-}
-
 /**
  * cong_ui_popup_init:
  * @doc:
@@ -1149,12 +1132,12 @@ cong_ui_popup_init (CongDocument *doc,
 		GList *list_of_element_desc = cong_document_get_valid_new_child_elements (doc,
 											  node, 
 											  CONG_ELEMENT_TYPE_STRUCTURAL);
-		make_element_submenu ("NewSubelement",
-				      _("New sub-element"),
-				      cong_ui_hook_tree_new_sub_element,
-				      doc,
-				      list_of_element_desc,
-				      primary_window);
+		structural_tag_popup_init (_("New sub-element"),
+					   "NewSubelement",
+					   cong_ui_hook_tree_new_sub_element,
+					   doc,
+					   list_of_element_desc,
+					   primary_window);
 		cong_element_description_list_free (list_of_element_desc);
 	}
 		
@@ -1163,12 +1146,12 @@ cong_ui_popup_init (CongDocument *doc,
 		GList *list_of_element_desc = cong_document_get_valid_new_next_sibling_elements (doc, 
 												 node, 
 												 CONG_ELEMENT_TYPE_STRUCTURAL);
-		make_element_submenu ("NewSibling",
-				      _("New sibling"),
-				      cong_ui_hook_tree_new_sibling,
-				      doc,
-				      list_of_element_desc,
-				      primary_window);
+		structural_tag_popup_init (_("New sibling"),
+					   "NewSibling",
+					   cong_ui_hook_tree_new_sibling,
+					   doc,
+					   list_of_element_desc,
+					   primary_window);
 		cong_element_description_list_free (list_of_element_desc);
 	}
 
