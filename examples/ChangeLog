@@ -1,3 +1,10 @@
+2003-09-02  Geert Stappers
+
+	* Makefile.am
+
+	Ugly hack to get DTD for xds files into the dist tarball.
+	(dtd's should be installed in some way )
+
 2003-09-02  Jeff Martin
 
 	* xds.dtd
