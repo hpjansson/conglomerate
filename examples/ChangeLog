@@ -1,3 +1,9 @@
+2003-09-15  David Malcolm
+
+	* xhtml1-strict.xds
+
+	Big reorganisation
+
 2003-09-11  David Malcolm
 
 	* dispspec.xds, relax-ng.xds, xds.dtd, xhtml1-strict.xds
