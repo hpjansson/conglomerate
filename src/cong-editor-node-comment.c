@@ -352,7 +352,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 			return TRUE;
 		}
 	} else if (event->button == 3) {
-		editor_popup_build(doc, parent_window);
+		editor_popup_build(editor_widget, parent_window);
 		editor_popup_show(cong_app_singleton()->popup, event);
 
 		return TRUE;

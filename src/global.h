@@ -147,7 +147,6 @@ cong_cursor_get_location (const CongCursor *cursor);
 
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
-void editor_popup_build(CongDocument *doc, GtkWindow *parent_window);
 void editor_popup_init();
 
 /* Popup (context) menus for tree view and for section headings: */

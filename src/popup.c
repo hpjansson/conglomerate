@@ -298,16 +298,18 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 }
 
 
-void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
+void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_window)
 {
 	GtkWidget *item, *w0, *sub_popup;
 	CongDispspec *dispspec;
 	CongDispspecElement *dispspec_element;
 	CongCursor *cursor;
 	GList *span_tags_list;
+	CongDocument *doc;
 	
-	g_return_if_fail(doc);
+	g_return_if_fail(IS_CONG_EDITOR_WIDGET3 (editor_widget));
 
+	doc = cong_editor_widget3_get_document (editor_widget);
 	dispspec = cong_document_get_dispspec(doc);
 	cursor = cong_document_get_cursor(doc);
 
@@ -379,7 +381,9 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 
 	/* Build list of dynamic tag insertion tools */
 	/*  build the list of valid inline tags here */
-	span_tags_list = xml_all_valid_span_elements(dispspec, cursor->location.node);
+	span_tags_list = cong_document_get_valid_new_child_elements (doc,
+								     cursor->location.node->parent,
+								     CONG_ELEMENT_TYPE_SPAN);
 	span_tags_list = sort_menu(span_tags_list);
 
 	if (span_tags_list) {
@@ -404,6 +408,9 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 	}
 
 	g_list_free(span_tags_list);
+
+	cong_editor_widget3_add_popup_items (editor_widget,
+					     GTK_MENU(cong_app_singleton()->popup));
 }
 
 /*
@@ -1091,7 +1098,7 @@ gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *
 
 	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "conglomerate/glade/string_selection_dialog.glade",
+						    "glade/string_selection_dialog.glade",
 						    FALSE,
 						    NULL);
 

@@ -144,6 +144,14 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 const gchar*
 cong_flow_type_get_debug_string(enum CongFlowType flow_type);
 
+void 
+editor_popup_build (CongEditorWidget3 *editor_widget, 
+		    GtkWindow *parent_window);
+
+void
+cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
+				     GtkMenu *menu);
+
 G_END_DECLS
 
 #endif

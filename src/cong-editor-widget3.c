@@ -44,6 +44,7 @@
 #include "cong-command.h"
 
 #define SHOW_CURSOR_SPEW 0
+#define DEBUG_IM_CONTEXT 0
 
 /* 
    The notes below are no longer true; see notes about entities in header file.
@@ -120,6 +121,9 @@ struct CongEditorWidget3Details
 	CongNodePtr selected_xml_node;
 
 	GdkGC *test_gc;
+
+	GtkIMContext *im_context;
+	gboolean need_im_reset;
 };
 
 
@@ -253,12 +257,33 @@ cong_editor_widget3_finalize (GObject *object);
 static void
 cong_editor_widget3_dispose (GObject *object);
 
+/* IM Context Callbacks
+ */
+static void     
+commit_cb               (GtkIMContext *context,
+			 const gchar  *str,
+			 CongEditorWidget3     *editor_widget);
+static void     
+preedit_changed_cb      (GtkIMContext *context,
+			 CongEditorWidget3     *editor_widget);
+static gboolean 
+retrieve_surrounding_cb (GtkIMContext *context,
+			 CongEditorWidget3     *editor_widget);
+static gboolean 
+delete_surrounding_cb   (GtkIMContext *context,
+			 gint          offset,
+			 gint          n_chars,
+			 CongEditorWidget3     *editor_widget);
+
 /* Declarations of the GtkWidget event handlers: */
+static void   realize  (GtkWidget        *widget);
+static void   unrealize (GtkWidget        *widget);
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
 static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, gpointer user_data);
 static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, gpointer user_data);
 static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event, gpointer user_data);
 static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data);
+static gboolean key_release_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data);
 static void size_request_handler(GtkWidget *widget,
  				 GtkRequisition *requisition,
  				 gpointer user_data);
@@ -361,6 +386,8 @@ cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
 	G_OBJECT_CLASS (klass)->finalize = cong_editor_widget3_finalize;
 	G_OBJECT_CLASS (klass)->dispose = cong_editor_widget3_dispose;
 
+	widget_class->realize = realize;
+	widget_class->unrealize = unrealize;
 
 #define _EXPANDER_SIZE 10
     
@@ -451,6 +478,10 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 				 "key_press_event",
 				 (GtkSignalFunc) key_press_event_handler, 
 				 NULL);
+	gtk_signal_connect_after(GTK_OBJECT(editor_widget), 
+				 "key_release_event",
+				 (GtkSignalFunc) key_release_event_handler, 
+				 NULL);
 	gtk_signal_connect(GTK_OBJECT(editor_widget),
  			   "size-request",
  			   (GtkSignalFunc) size_request_handler,
@@ -460,6 +491,20 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	gtk_widget_set(GTK_WIDGET(editor_widget), "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(GTK_WIDGET(editor_widget), "can_default", (gboolean) TRUE, 0);
+
+	/* Set up GTK Input Method support: */
+	{
+		PRIVATE(editor_widget)->im_context = gtk_im_multicontext_new ();
+		
+		g_signal_connect (PRIVATE(editor_widget)->im_context, "commit",
+				  G_CALLBACK (commit_cb), editor_widget);
+		g_signal_connect (PRIVATE(editor_widget)->im_context, "preedit_changed",
+				  G_CALLBACK (preedit_changed_cb), editor_widget);
+		g_signal_connect (PRIVATE(editor_widget)->im_context, "retrieve_surrounding",
+				  G_CALLBACK (retrieve_surrounding_cb), editor_widget);
+		g_signal_connect (PRIVATE(editor_widget)->im_context, "delete_surrounding",
+				  G_CALLBACK (delete_surrounding_cb), editor_widget);
+	}
 
 	/* Set up root area: */
 	{
@@ -812,6 +857,27 @@ cong_flow_type_get_debug_string(enum CongFlowType flow_type)
 	}
 }
 
+void
+cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
+				     GtkMenu *menu)
+{
+	GtkWidget *submenu_item;
+	GtkWidget *submenu_menu;
+
+	submenu_item = gtk_menu_item_new_with_label ( _("Input Method"));
+	submenu_menu = gtk_menu_new ();
+
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM(submenu_item), submenu_menu);
+
+	gtk_im_multicontext_append_menuitems (GTK_IM_MULTICONTEXT (PRIVATE (editor_widget)->im_context),
+					      GTK_MENU_SHELL (submenu_menu));
+
+	gtk_menu_shell_append  (GTK_MENU_SHELL (menu), submenu_item);
+
+	gtk_widget_show (submenu_item);
+	gtk_widget_show (submenu_menu);
+}
+
 /* Internal function implementations: */
 /* Definitions of misc stuff: */
 static void 
@@ -831,6 +897,8 @@ cong_editor_widget3_finalize (GObject *object)
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (object);
 
 	g_message ("cong_editor_widget3_finalize");
+
+	g_object_unref (G_OBJECT (PRIVATE(editor_widget)->im_context));
 	
 	g_free (editor_widget->private);
 	editor_widget->private = NULL;
@@ -871,8 +939,124 @@ cong_editor_widget3_dispose (GObject *object)
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
+/* IM Context Callbacks
+ */
+static void     
+commit_cb (GtkIMContext *context,
+	   const gchar  *str,
+	   CongEditorWidget3     *editor_widget)
+{
+	CongCommand *cmd;
+	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
+	CongCursor *cursor = cong_document_get_cursor (doc);
+	CongSelection *selection = cong_document_get_selection  (doc);
+	gchar *utf8_string;
+
+	/*
+	  According to this mail message:
+	  http://mail.gnome.org/archives/gtk-list/2002-June/msg00105.html
+
+	  the string is in the locale encoding, rather than in UTF8, and must be converted.
+	*/
+	utf8_string = g_locale_to_utf8 (str,
+					-1,
+					NULL,
+					NULL,
+					NULL);
+
+#if DEBUG_IM_CONTEXT
+	g_message ("commit_cb: \"%s\" -> \"%s\"", str, utf8_string);
+#endif
+
+	cmd = cong_document_begin_command (doc, 
+					   _("Typing"),
+					   "cong-typing");
+	
+	/* Do we have a selection? */
+	if (cong_selection_get_logical_end(selection)->node) {
+		
+		/* Either we have an individual selected node, or a range of text.  In the latter case, we should delete it: */
+		if (cong_node_is_valid_cursor_location (cong_selection_get_logical_end(selection)->node)) {
+			cong_command_add_delete_selection (cmd);
+		}
+	}
+
+	cong_command_add_insert_text_at_cursor (cmd, utf8_string);
+	cong_command_add_nullify_selection (cmd);
+	
+	cong_document_end_command (doc,
+				   cmd);
+
+	g_free (utf8_string);
+}
+
+static void     
+preedit_changed_cb (GtkIMContext *context,
+		    CongEditorWidget3     *editor_widget)
+{
+	gchar *preedit_string;
+	PangoAttrList *preedit_pango_attr_list;
+	gint preedit_cursor_pos;
+
+	gtk_im_context_get_preedit_string (PRIVATE(editor_widget)->im_context,
+					   &preedit_string,
+					   &preedit_pango_attr_list,
+					   &preedit_cursor_pos);
+
+#if DEBUG_IM_CONTEXT
+	g_message ("preedit_changed_cb: preedit string is: \"%s\"", preedit_string);
+#endif
+
+	g_free (preedit_string);
+	pango_attr_list_unref (preedit_pango_attr_list);
+}
+
+static gboolean 
+retrieve_surrounding_cb (GtkIMContext *context,
+			 CongEditorWidget3     *editor_widget)
+{
+#if DEBUG_IM_CONTEXT
+	g_message ("retrieve_surrounding_cb");
+#endif
+
+	return FALSE;
+}
+
+static gboolean 
+delete_surrounding_cb (GtkIMContext *context,
+		       gint          offset,
+		       gint          n_chars,
+		       CongEditorWidget3     *editor_widget)
+{
+#if DEBUG_IM_CONTEXT
+	g_message ("delete_surrounding_cb");
+#endif
+
+	return FALSE;
+}
+
 /* Definitions of the GtkWidget event handlers: */
 /* Event handlers for widget: */
+static void   realize  (GtkWidget        *widget)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
+
+	gtk_im_context_set_client_window (PRIVATE(editor_widget)->im_context, widget->window);
+
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, realize, (widget));
+}
+
+static void   unrealize (GtkWidget        *widget)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
+
+	gtk_im_context_set_client_window (PRIVATE(editor_widget)->im_context, NULL);  
+
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, unrealize, (widget));
+}
+
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data)
 {
 	CongDocument *doc;
@@ -1153,7 +1337,10 @@ key_press_event_handler (GtkWidget *w,
 	selection = cong_document_get_selection(doc);
 	g_assert(selection);
 
-	cong_document_begin_edit (doc);
+	if (gtk_im_context_filter_keypress (PRIVATE (editor_widget)->im_context, event)) {
+		PRIVATE (editor_widget)->need_im_reset = TRUE;
+		return TRUE;
+	}
 
 	switch (event->keyval)
 	{
@@ -1253,6 +1440,7 @@ key_press_event_handler (GtkWidget *w,
 		break;
 	
 	default:
+#if 0
 		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
 			CongCommand *cmd = cong_document_begin_command (doc, 
@@ -1273,12 +1461,31 @@ key_press_event_handler (GtkWidget *w,
 			cong_document_end_command (doc,
 						   cmd);
 		}
+#endif
 		break;
 	}
 
-	cong_document_end_edit (doc);
-
 	return TRUE;
+}
+
+static gboolean 
+key_release_event_handler (GtkWidget *w, 
+			 GdkEventKey *event, 
+			 gpointer user_data)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (w);
+	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
+	CongCursor *cursor = cong_document_get_cursor (doc);
+	CongSelection *selection = cong_document_get_selection  (doc);
+
+	LOG_GTK_WIDGET_SIGNAL1("key_release_event_handler");
+
+	if (gtk_im_context_filter_keypress (PRIVATE (editor_widget)->im_context, event)) {
+		PRIVATE (editor_widget)->need_im_reset = TRUE;
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void size_request_handler(GtkWidget *widget,
