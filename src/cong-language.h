@@ -67,15 +67,15 @@ cong_per_language_data_new_from_xml (xmlDocPtr xml_doc,
 				     CongNodePtr parent_node,
 				     const gchar *ns_uri,
 				     const gchar *element_name,
-				     gpointer (make_data_callback) (xmlDocPtr xml_doc, CongNodePtr node),
+				     gpointer (make_data_callback) (xmlDocPtr xml_doc, 
+								    CongNodePtr node),
 				     GDestroyNotify value_destroy_func);
 
 void
 cong_per_language_data_to_xml (CongPerLanguageData *per_language,
 			       CongNodePtr parent_node,
-			       const gchar *ns_uri,
-			       const gchar *element_name,
-			       CongNodePtr (make_node_callback) (gpointer data));
+			       CongNodePtr (make_node_callback) (xmlDocPtr xml_doc,
+								 gpointer data));
 
 
 G_END_DECLS

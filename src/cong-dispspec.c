@@ -1441,10 +1441,23 @@ cong_external_document_model_get_system_id (const CongExternalDocumentModel* mod
 }
 
 static CongNodePtr 
-make_string_node_callback (gpointer data)
+make_name_node_callback (xmlDocPtr xml_doc,
+			 gpointer data)
 {
-	g_assert (0);
-	return NULL;
+	return cong_node_new_element_full_with_content (xml_doc, 
+							NULL,
+							"name",
+							data);
+}
+
+static CongNodePtr 
+make_desc_node_callback (xmlDocPtr xml_doc,
+			 gpointer data)
+{
+	return cong_node_new_element_full_with_content (xml_doc, 
+							NULL,
+							"description",
+							data);
 }
 
 /* Subroutines for converting a CongDispspec to XML XDS: */
@@ -1462,33 +1475,10 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 
 	cong_per_language_data_to_xml (dispspec->per_lang_name,
 				       metadata,
-				       NULL,
-				       "name",
-				       make_string_node_callback);
+				       make_name_node_callback);
 	cong_per_language_data_to_xml (dispspec->per_lang_desc,
 				       metadata,
-				       NULL,
-				       "description",
-				       make_string_node_callback);
-#if 0
-	if (dispspec->name) {
-		
-		xmlAddChild (metadata, 
-			     xmlNewDocRawNode (xml_doc,
-					       NULL,
-					       "name",
-					       dispspec->name)
-			     ); 
-	}
-	if (dispspec->desc) {
-		xmlAddChild (metadata, 
-			     xmlNewDocRawNode (xml_doc,
-					       NULL,
-					       "description",
-					       dispspec->desc)
-			     );
-	}
-#endif
+				       make_desc_node_callback);
 	
 	/* FIXME: we can't yet save the icon name */
 

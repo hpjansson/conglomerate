@@ -155,13 +155,62 @@ cong_per_language_data_new_from_xml (xmlDocPtr xml_doc,
 	return per_lang;
 }
 
+struct data_to_xml_data
+{
+	CongNodePtr parent_node;
+	CongNodePtr (*make_node_callback) (xmlDocPtr xml_doc,
+					   gpointer data);
+};
+
+static void
+data_to_xml_cb (gpointer key,
+		gpointer value,
+		gpointer user_data)
+{
+	struct data_to_xml_data *cb_data = user_data;
+	CongNodePtr new_node;
+
+	g_assert (cb_data->parent_node);
+	g_assert (cb_data->make_node_callback);
+
+	new_node = cb_data->make_node_callback (cb_data->parent_node->doc,
+						value);
+
+	xmlAddChild (cb_data->parent_node, 
+		     new_node);
+
+	if (key) {
+		xmlNsPtr ns;
+
+		ns = xmlSearchNsByHref (cb_data->parent_node->doc, 
+					new_node, 
+					XML_XML_NAMESPACE);
+		if (ns == NULL) {
+			g_warning ("FIXME couldn't find namespace %s ", XML_XML_NAMESPACE);
+		}
+		xmlSetNsProp (new_node,
+			      ns,
+			      "lang", 
+			      key);
+	}
+
+}
+
 void
 cong_per_language_data_to_xml (CongPerLanguageData *per_language,
 			       CongNodePtr parent_node,
-			       const gchar *ns_uri,
-			       const gchar *element_name,
-			       CongNodePtr (make_node_callback) (gpointer data))
+			       CongNodePtr (make_node_callback) (xmlDocPtr xml_doc,
+								 gpointer data))
 {
-	g_assert (0);
+	struct data_to_xml_data cb_data;
+	g_return_if_fail (per_language);
+	g_return_if_fail (parent_node);
+	
+	cb_data.parent_node = parent_node;
+	cb_data.make_node_callback = make_node_callback;
+
+	g_hash_table_foreach (per_language->hash_table,
+			      data_to_xml_cb,
+			      &cb_data);
 }
 
