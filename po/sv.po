@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-09-20 18:08+0200\n"
-"PO-Revision-Date: 2003-09-20 18:09+0200\n"
+"POT-Creation-Date: 2003-09-21 00:45+0200\n"
+"PO-Revision-Date: 2003-09-21 00:47+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -44,6 +44,8 @@ msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
 msgstr ""
+"<small>Vad är omfattningen av texten? Du kan använda denna sida för att ange "
+"textens relevans till olika typer av datorsystem.</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -70,6 +72,10 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122536"
 msgstr ""
+"Detta är en platshållarsida. Så småningom kommer du att kunna redigera "
+"språket för texten här.\n"
+"\n"
+"Detta finns i Bugzilla som bugg #122536"
 
 #: glade/docbook-common-properties.glade.h:9
 msgid ""
@@ -78,6 +84,10 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
+"Detta är en platshållarsida. Så småningom kommer du att kunna använda denna "
+"sida för att manipulera DocBooks enkla versionsspårningsinformation.\n"
+"\n"
+"Detta finns i Bugzilla som bugg #122538"
 
 #: glade/docbook-common-properties.glade.h:12
 msgid "_Architecture"
@@ -105,7 +115,7 @@ msgstr "A, B, C, ..."
 
 #: glade/docbook-orderedlist-properties.glade.h:3
 msgid "Continue numbering from previous list"
-msgstr ""
+msgstr "Fortsätt numrering från föregående lista"
 
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
 #: src/cong-error-file-open.c:446
@@ -118,7 +128,7 @@ msgstr "I, II, III, ..."
 
 #: glade/docbook-orderedlist-properties.glade.h:6
 msgid "Inherit numbering from surrounding lists"
-msgstr ""
+msgstr "Ärv numrering från omgivande listor"
 
 #: glade/docbook-orderedlist-properties.glade.h:7
 msgid "Minimise vertical space"
@@ -155,7 +165,7 @@ msgstr "S_täng utan att spara"
 #: src/cong-dialog.c:246
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "Spara ändringar i dokumentet \"%s\" innan avslut?"
 
 #: src/cong-dialog.c:251
 #, c-format
@@ -163,6 +173,8 @@ msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
+"Om du stänger utan att spara kommer ändringar från de senaste %li timmarna "
+"att kastas."
 
 #: src/cong-dialog.c:253
 #, c-format
@@ -170,38 +182,42 @@ msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
 msgstr ""
+"Om du stänger utan att spara kommer ändringar från de senaste %li minuterna "
+"att kastas."
 
 #: src/cong-dialog.c:255
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
+"Om du stänger utan att spara kommer ändringar från den senaste minuten att "
+"kastas."
 
 #: src/cong-dialog.c:300
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr ""
+msgstr "Återställ osparade ändringar i dokumentet \"%s\"?"
 
 #: src/cong-dialog.c:305
 #, c-format
 msgid "Changes from the past %li hours will be discarded."
-msgstr ""
+msgstr "Ändringar från de senaste %li timmarna kommer att kastas."
 
 #: src/cong-dialog.c:307
 #, c-format
 msgid "Changes from the past %li minutes will be discarded."
-msgstr ""
+msgstr "Ändringar från de senaste %li minuterna kommer att kastas."
 
 #: src/cong-dialog.c:309
 msgid "Changes from the past minute will be discarded."
-msgstr ""
+msgstr "Ändringar från den senaste minuten kommer att kastas."
 
 #: src/cong-dispspec-registry.c:87
 msgid "Conglomerate could not read its registry of document types."
-msgstr ""
+msgstr "Conglomerate kunde inte läsa sitt register med dokumenttyper."
 
 #: src/cong-dispspec-registry.c:90
 msgid "Conglomerate attempted to look at all the files in the location."
-msgstr ""
+msgstr "Conglomerate försökte att titta på alla filer på platsen."
 
 #: src/cong-dispspec.c:543
 msgid "unnamed"
@@ -213,7 +229,7 @@ msgstr "Ingen beskrivning tillgänglig."
 
 #: src/cong-dispspec.c:1399
 msgid "(xpath failed)"
-msgstr ""
+msgstr "(xpath misslyckades)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
 #: src/cong-dispspec.c:1444
@@ -227,22 +243,22 @@ msgstr "OKÄND"
 #: src/cong-dom-view.c:237
 #, c-format
 msgid "Text: \"<span foreground=\"%s\">%s</span>\""
-msgstr ""
+msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
 
 #: src/cong-dom-view.c:254
 #, c-format
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-msgstr ""
+msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
-msgstr ""
+msgstr "Om du är en programmerar är problemet i filen %s på rad %i\n"
 
 #: src/cong-error-dialog.c:184
 msgid "That feature has not yet been implemented.  Sorry."
-msgstr ""
+msgstr "Den funktionen har inte implementerats än. Tyvärr."
 
 #: src/cong-error-dialog.c:202
 #, c-format
@@ -251,6 +267,9 @@ msgid ""
 "\n"
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
 msgstr ""
+"Den funktionen har inte implementerats än. Tyvärr.\n"
+"\n"
+"Detta är ett känt problem. Det är bugg #%i i felrapporteringssystemet vid %s"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-dialog.c:248
@@ -264,6 +283,8 @@ msgid ""
 "A GError occurred; the error report was:\n"
 "<i>%s</i>"
 msgstr ""
+"Ett GError inträffade. Felrapporten var:\n"
+"<i>%s</i>"
 
 #: src/cong-error-dialog.c:261 src/cong-error-file-open.c:443
 msgid "An unexpected error occurred."
@@ -271,16 +292,19 @@ msgstr "Ett oväntat fel inträffade."
 
 #: src/cong-error-dialog.c:262 src/cong-error-file-open.c:444
 msgid "For more information, click on the \"Details\" button."
-msgstr ""
+msgstr "Klicka på knappen \"Detaljer\" för mer information."
 
 #. Add upper content:
 #: src/cong-error-dialog.c:300
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred whilst running this system command:\n"
 "\n"
 "<tt>%s</tt>"
-msgstr "Ett fel uppstod vid körning av det valda kommandot."
+msgstr ""
+"Ett fel inträffade vid körning av detta systemkommando:\n"
+"\n"
+"<tt>%s</tt>"
 
 #: src/cong-error-dialog.c:301
 #, c-format
@@ -288,37 +312,41 @@ msgid ""
 "The error number reported was %d.  Below is the error text that was output "
 "by the command."
 msgstr ""
+"Felnumret som rapporterades var %d. Nedan är feltexten som kommandot gav som "
+"utdata."
 
 #. FIXME: ought to set up the parent window properly
 #: src/cong-error-file-open.c:52
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr ""
+msgstr "Conglomerate kunde inte köra sökverktyget.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: src/cong-error-file-open.c:77
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot read \"%s\" from %s."
-msgstr "Kunde inte läsa data från standard in."
+msgstr "%s kan inte läsa \"%s\" från %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-open.c:80
-#, fuzzy, c-format
+#, c-format
 msgid "%s could not read \"%s\" from %s."
-msgstr "Kunde inte läsa data från standard in."
+msgstr "%s kunde inte läsa \"%s\" från %s."
 
 #: src/cong-error-file-open.c:200 src/cong-error-file-save.c:79
 msgid "An unexpected internal error occurred."
-msgstr ""
+msgstr "Ett oväntat internt fel inträffade."
 
 #: src/cong-error-file-open.c:201 src/cong-error-file-save.c:80
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du felrapportera detta till den "
+"ansvarige för detta program."
 
 #: src/cong-error-file-open.c:227
 msgid "There is no file with that name at that location."
-msgstr ""
+msgstr "Det finns ingen fil med det namnet på den platsen."
 
 #: src/cong-error-file-open.c:228
 msgid ""
@@ -335,7 +363,7 @@ msgstr "Sök"
 
 #: src/cong-error-file-open.c:236 src/cong-error-file-save.c:97
 msgid "The location does not exist."
-msgstr ""
+msgstr "Platsen finns inte."
 
 #: src/cong-error-file-open.c:237
 msgid ""
@@ -349,7 +377,7 @@ msgstr ""
 #: src/cong-error-file-open.c:250
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
-msgstr ""
+msgstr "Platsen \"%s\" stöder inte läsande av filer."
 
 #: src/cong-error-file-open.c:254
 msgid ""
@@ -359,30 +387,32 @@ msgstr ""
 
 #: src/cong-error-file-open.c:264
 msgid "There were problems reading the content of the file."
-msgstr ""
+msgstr "Det förekom problem vid läsning av den filens innehåll."
 
 #: src/cong-error-file-open.c:265 src/cong-error-file-open.c:283
 #: src/cong-error-file-open.c:322
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du kontakta din systemadministratör."
 
 #: src/cong-error-file-open.c:274
 msgid "The contents of the file seem to be corrupt."
-msgstr ""
+msgstr "Innehållet i filen verkar vara trasigt."
 
 #: src/cong-error-file-open.c:275
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du leta efter en säkerhetskopia av "
+"filen."
 
 #: src/cong-error-file-open.c:282 src/cong-error-file-open.c:321
 msgid "There were problems reading the contents of the file."
-msgstr ""
+msgstr "Det förekom problem vid läsning av filens innehåll."
 
 #: src/cong-error-file-open.c:291 src/cong-error-file-save.c:238
-#, fuzzy
 msgid "The system does not recognise that as a valid location."
-msgstr "Denna fil slutar inte med en giltig filändelse\n"
+msgstr "Systemet godtar inte det som en giltig plats."
 
 #: src/cong-error-file-open.c:292
 msgid ""
@@ -394,15 +424,15 @@ msgstr ""
 
 #: src/cong-error-file-open.c:303
 msgid "You do not have permission to read that file."
-msgstr ""
+msgstr "Du har inte rättigheter att läsa den filen."
 
 #: src/cong-error-file-open.c:304
 msgid "Try asking your system administrator to give you permission."
-msgstr ""
+msgstr "Försök be din systemadministratör att ge dig rättigheter."
 
 #: src/cong-error-file-open.c:311 src/cong-error-file-save.c:261
 msgid "The system is trying to operate on too many files at once."
-msgstr ""
+msgstr "Systemet försöker operera på för många filer samtidigt."
 
 #: src/cong-error-file-open.c:312 src/cong-error-file-open.c:346
 #: src/cong-error-file-save.c:262 src/cong-error-file-save.c:281
@@ -410,29 +440,28 @@ msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du försöka stänga oönskade program "
+"eller kontakta din systemadministratör."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-open.c:329
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
-msgstr ""
+msgstr "\"%s\" är en katalog och inte en fil."
 
 #: src/cong-error-file-open.c:333
 msgid "Try using the Search Tool to find your file."
-msgstr ""
+msgstr "Försök att använda sökverktyget för att hitta din fil."
 
 #: src/cong-error-file-open.c:345 src/cong-error-file-save.c:280
 msgid "The system ran out of memory."
-msgstr ""
+msgstr "Systemets minne tog slut."
 
 #: src/cong-error-file-open.c:354 src/cong-error-file-open.c:363
 #: src/cong-error-file-open.c:372 src/cong-error-file-save.c:289
 #: src/cong-error-file-save.c:298 src/cong-error-file-save.c:307
-#, fuzzy
 msgid "The server could not be contacted."
-msgstr ""
-"Programmet %s kunde inte hittas.\n"
-"\n"
+msgstr "Servern kunde inte kontaktas."
 
 #: src/cong-error-file-open.c:355
 msgid "Try again.  If it fails again, the server may be down."
@@ -471,13 +500,13 @@ msgstr ""
 #: src/cong-error-file-save.c:48
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
-msgstr ""
+msgstr "%s kan inte spara \"%s\" till %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-save.c:51
-#, fuzzy, c-format
+#, c-format
 msgid "%s could not save \"%s\" to %s."
-msgstr "Kunde inte spara filen \"%s\"."
+msgstr "%s kunde inte spara \"%s\" till %s."
 
 #: src/cong-error-file-save.c:98
 msgid ""
@@ -491,16 +520,16 @@ msgstr ""
 #: src/cong-error-file-save.c:106 src/cong-error-file-save.c:225
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
-msgstr ""
+msgstr "Platsen \"%s\" stöder inte skrivandet av filer."
 
 #: src/cong-error-file-save.c:110 src/cong-error-file-save.c:229
 #: src/cong-error-file-save.c:337
 msgid "Try saving to a different location."
-msgstr ""
+msgstr "Försök att spara på en annan plats."
 
 #: src/cong-error-file-save.c:121
 msgid "There were problems writing the content of the file."
-msgstr ""
+msgstr "Det förekom problem vid skrivandet av innehåll för den filen."
 
 #: src/cong-error-file-save.c:122
 msgid "Try again.  If it fails again, try saving to a different location."
@@ -521,7 +550,7 @@ msgstr ""
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:165
 msgid "The file is too big to fit on the device."
-msgstr ""
+msgstr "Filen är för stor för att få plats på enheten."
 
 #: src/cong-error-file-save.c:174
 #, fuzzy
@@ -1809,6 +1838,45 @@ msgstr ""
 #: src/xmledit.c:436
 msgid "Source View - Conglomerate"
 msgstr ""
+
+#~ msgid ""
+#~ "What is the scope of the text? You can use this page to specify the "
+#~ "relevancy of the text to different  types of computer system."
+#~ msgstr ""
+#~ "Vad är omfattningen av texten? Du kan använda denna sida för att ange "
+#~ "textens relevans till olika typer av datorsystem."
+
+#~ msgid ""
+#~ "<small>What is the scope of the text? You can use this page to specify "
+#~ "the relevancy of the text to different types of computer systems.</small>"
+#~ msgstr ""
+#~ "<small>Vad är omfattningen av texten? Du kan använda denna sida för att "
+#~ "ange textens relevans till olika typer av datorsystem.</small>"
+
+#~ msgid ""
+#~ "What is the scope of the text? You can use this page to specify the "
+#~ "relevancy of the text to different types of computer systems."
+#~ msgstr ""
+#~ "Vad är omfattningen av texten? Du kan använda denna sida för att ange "
+#~ "textens relevans till olika typer av datorsystem."
+
+#~ msgid "Unnamed"
+#~ msgstr "Namnlös"
+
+#~ msgid "Text: \"%s\""
+#~ msgstr "Text: \"%s\""
+
+#~ msgid "Text: "
+#~ msgstr "Text: "
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Text:"
+#~ msgstr "Text:"
+
+#~ msgid "&lt;!-- %s --&gt;"
+#~ msgstr "&lt;!-- %s --&gt;"
 
 #~ msgid "XML editor"
 #~ msgstr "XML-redigerare"
