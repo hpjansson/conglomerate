@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE glossary PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>
+<!-- This is the glossary database. Insert glossary items in alphabetical order. -->
+<glossary><?dbfo glossterm-width="blocks" ?>
+    <glossdiv>
+        <title>A</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>B</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>C</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>D</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>E</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>F</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>G</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>H</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>I</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>J</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>K</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>L</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>M</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>N</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>O</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>P</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>Q</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>R</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>S</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>T</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>U</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>V</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>W</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>X</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>Y</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+    <glossdiv>
+        <title>Z</title>
+        <glossentry>
+            <glossterm>Term</glossterm>
+            <acronym>Acronym</acronym>
+            <glossdef>
+                <para>Full definition of the term.</para>
+            </glossdef>
+        </glossentry>
+    </glossdiv>
+</glossary>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "/home/sean/apps/oxygen/docbook/dtd/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "resources/global.ent">
+%global_entities;
+]>-->
+<appendix id="display_spec_element_map_ref">
+    <title id="display_spec_element_map_ref.title">XDS Element Mapping Reference</title>
+    <para>text</para>
+    <sect1 id="map_to_docbook">
+        <title id="map_to_docbook.title">Map to Docbook</title>
+        <para>
+            <xref linkend="tbl_cong2dbmap"/> describes the name mapping used by
+            &app; Display Specification for Docbook V4.1.2 XML Documents.</para>
+        <para>Only names that are different to those commonly recognised as
+            elements in Docbook are listed. All other elements are considered
+            unaltered by &app;.</para>
+        <table id="tbl_cong2dbmap">
+            <title>title</title>
+            <tgroup cols="2">
+                <thead>
+                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                </thead>
+                
+                <tbody>
+                    <row><entry>collumn</entry><entry>collumn</entry></row>
+                </tbody>
+            </tgroup>
+            
+        </table>
+        
+    </sect1>
+    <sect1>
+        <title>Map to Relax NG</title>
+        <para>text</para>
+    </sect1>
+</appendix>

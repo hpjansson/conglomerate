@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE informaltable PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table that defines the attributes for:
+  element, plugin-element, span-element, structural-element.-->
+<!-- Reuse by inclusion with &tbl_element_attrib; entity reference -->
+<informaltable>
+    <tgroup cols="3">
+        <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+                <entry>Description</entry>
+            </row>
+        </thead>
+        <tbody>
+            <row>
+                <entry>color</entry>
+                <entry>Hex Value</entry>
+                <entry>Use hexadecimal notation for the combination of Red, Green, and Blue color
+                    values (<acronym>RGB</acronym>). The lowest value that can be given to one light
+                    source is 0 (hex #00). The highest value is 255 (hex #FF).</entry>
+            </row>
+            <row>
+                <entry>filename-xpath</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>icon</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>ns</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>plugin-id</entry>
+                <entry>value</entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>tag</entry>
+                <entry>external element name</entry>
+                <entry>The name of an element declared by the DTD specified in <link
+                        endterm="external-document-model.title" linkend="external-document-model"/>.</entry>
+            </row>
+            <row>
+                <entry>type</entry>
+                <entry>
+                    <para>embedded-external-file</para>
+                    <para>paragraph</para>
+                    <para>plugin</para>
+                    <para>span</para>
+                    <para>structural</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+            <row>
+                <entry>whitepace</entry>
+                <entry>
+                    <para>normalize</para>
+                    <para>preserve</para>
+                </entry>
+                <entry>desc</entry>
+            </row>
+        </tbody>
+    </tgroup>
+</informaltable>

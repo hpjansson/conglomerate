@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE row PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<!-- This document provide a table row that defines the xml:lang attribute used by:
+ description, name, short-desc -->
+<!-- Reuse by inclusion with &row_xml_lang_attrib; entity reference -->
+<row>
+    <entry>xml:lang</entry>
+    <entry>en</entry>
+    <entry>Language localization</entry>
+</row>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<appendix id="doc_type_support">
+    <title id="doc_type_support.title">Supported XML Document Types</title>
+    <para>The &app; project aims to provide support for the editing of a wide range of XML
+        documents. During developed three levels of support are recognized:</para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link linkend="supported_docs" endterm="supported_docs.title"/>. </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>. </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>. We hope to add
+                support in the future (patches welcome!). </para>
+        </listitem>
+    </itemizedlist>
+    <table id="tbl_doc_support">
+        <title>Summary of Supported XML Document Types</title>
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Document Type</entry>
+                    <entry>Status</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <link linkend="docbook_xml" endterm="docbook_xml.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="xhtml_strict" endterm="xhtml_strict.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="kernel_traffic" endterm="kernel_traffic.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="supported_docs" endterm="supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="relax_ng" endterm="relax_ng.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="xslfo" endterm="xslfo.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="partial_supported_docs" endterm="partial_supported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="css" endterm="css.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="openoffice" endterm="openoffice.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <link linkend="openebook" endterm="openebook.title"/>
+                    </entry>
+                    <entry>
+                        <link linkend="unsupported_docs" endterm="unsupported_docs.title"/>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect1 id="supported_docs">
+        <title id="supported_docs.title">Supported</title>
+        <para>Following is an introduction to the XML Document Types &quot;supported&quot;
+            by the &appfull;.</para>
+        <sect2 id="docbook_xml">
+            <title id="docbook_xml.title">Docbook XML 4.1.2</title>
+            <para>The first XML document type to be supported by
+                <application>&app;</application> is Docbook XML. Docbook XML is a standards
+                based application of XML that offers a markup vocabulary that is particularly well
+                suited to the semantic description of content related computer hardware and software.</para>
+            <para>Numerous free and open source software projects have adopted Docbook XML as their
+                standard for content authoring and storage. Most significantly the two leading free
+                desktop environments <ulink url="&gnomehome;">GNOME</ulink> and <ulink url="&kdehome;">KDE</ulink>.</para>
+            <para>The official release of the Docbook XML Document Type Definition (DTD) is
+                available at <ulink url="&oasisopen;">OASIS</ulink>. Development is conducted at
+                the <ulink url="&docbookdev;">Docbook Open Repository</ulink>.</para>
+            <para>There are two references of note that will get you started with Docbook and its usage:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="&docbooktdg;">Docbook: The Definitive Guide</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="&docbookxsl;">Docbook XSL: The Complete Guide</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>Docbook is used throughout the user manual to explain and illustrate the
+                functionality of the <application>&appfull;</application>.</para>
+        </sect2>
+        <sect2 id="xhtml_strict">
+            <title id="xhtml_strict.title">XHTML (strict)</title>
+            <para>
+                <acronym>XHTML</acronym> stands for EXtensible HyperText Markup Language which is
+                aimed to replace HTML. It looks almost identical to HTML 4.01, but is stricter and
+                cleaner because XHTML is HTML defined as an XML application.</para>
+            <para>
+                <acronym>XHTML</acronym> is a <ulink url="&w3cxhtml;">W3C Recommendation</ulink>.</para>
+            <para>The following online resource will be helpful in geting you started with <acronym>XHTML</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="&w3schools;">W3 Schools</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2 id="kernel_traffic">
+            <title id="kernel_traffic.title">&quot;Kernel Traffic&quot; newsetter format</title>
+            <para>The &quot;Kernel Trafffic&quot; news letter is a HTML format used by the
+                    <ulink url="&kerneltraffic;">Kernel Traffic Web Site</ulink>. The news
+                letter tracks the technical development of various projects of the <ulink
+                url="&freesw;">Free</ulink> and Open Source world.</para>
+        </sect2>
+    </sect1>
+    <sect1 id="partial_supported_docs">
+        <title id="partial_supported_docs.title">Partially Supported</title>
+        <para>Following is an introduction to the XML Document Types &quot;partially
+            supported&quot; by the &appfull;.</para>
+        <sect2 id="relax_ng">
+            <title id="relax_ng.title">Relax NG</title>
+            <para>RELAX NG is a schema language for <acronym>XML</acronym>. The RELAX NG
+                specifications have been developed within <ulink url="&oasisopen;">OASIS</ulink>
+                by the <ulink url="&relaxngtc;">RELAX NG Technical Committee</ulink>.</para>
+            <para>The following online resources will be helpful in geting you started with
+                    <acronym>Relax NG</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="&relaxng;">relaxng.org</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="&zvonorg;">zvon.org</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2 id="xslfo">
+            <title id="xslfo.title">XSL-FO</title>
+            <para>
+                <acronym>XSL-FO</acronym> is a language for formatting <acronym>XML</acronym> data.
+                The acronym stands for Extensible Stylesheet Language Formatting Objects.
+                <acronym>XSL-FO</acronym> is a part of the the Extensible Stylesheet Language Family
+                (<acronym>XSL</acronym>) of <ulink url="&w3cxsl;">W3C Recommendations</ulink>.</para>
+            <para>The following online resources will be helpful in geting you started with <acronym>XSL-FO</acronym>:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="&w3schools;">W3 Schools</ulink>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <ulink url="&zvonorg;">zvon.org</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+    <sect1 id="unsupported_docs">
+        <title id="unsupported_docs.title">Unsupported</title>
+        <para>Following is an introduction to the XML Document Types &quot;unsupported&quot;
+            by the &appfull;.</para>
+        <sect2 id="css">
+            <title id="css.title">Cascading Style Sheets</title>
+            <para> Text</para>
+        </sect2>
+        <sect2 id="openoffice">
+            <title id="openoffice.title">OpenOffice.org File Format</title>
+            <para>
+                <ulink url="&oo;">OpenOffice.org</ulink> is both an open-source application and
+                project. It is <ulink url="&freesw;">free</ulink>. The product is a
+                multi-platform office productivity suite compatible with all major file formats. The
+                    <ulink url="&ooxmlform;">OpenOffice.org XML project</ulink> develops the
+                OpenOffice.org XML File Format, as well as the necessary implementation for the
+                OpenOffice.org application.</para>
+            <para>The OpenOffice.org XML project has contributed the OpenOffice.org XML File Format
+                to <ulink url="&oasisopen;">OASIS</ulink> where the <ulink
+                    url="&ooxmlformtc;">OASIS Open Office XML Format Technical Committee</ulink>
+                works on creating an open XML file format for office documents, using the
+                OpenOffice.org format as a base. The best way to get started with this format is by
+                visiting the <ulink url="&ooxmlform;">OpenOffice.org XML project</ulink>.</para>
+        </sect2>
+        <sect2 id="openebook">
+            <title id="openebook.title">Open eBook Publication Structure</title>
+            <para>text</para>
+        </sect2>
+    </sect1>
+</appendix>

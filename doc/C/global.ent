@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- everything internal to Conglomerate goes here -->
+<!ENTITY appversion "V0.7.10">
+<!ENTITY manrevision "V0.0.1">
+<!ENTITY date "January 2004">
+<!ENTITY app "Conglomerate">
+<!ENTITY appfull "Conglomerate XML Editor">
+<!ENTITY bugs "http://www.conglomerate.org/bugs.php">
+<!ENTITY apphome "http://www.conglomerate.org/">
+<!ENTITY appdownload "http://www.conglomerate.org/download.php/">
+<!ENTITY cvshome "http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;cvsroot=/cvs/gnome&amp;module=default">
+<!ENTITY tarball "http://sourceforge.net/project/showfiles.php?group_id=82766">
+<!ENTITY devmail "http://lists.copyleft.no/mailman/listinfo/conglomerate-devel/">
+<!ENTITY bugmail "http://lists.copyleft.no/mailman/listinfo/conglomerate-auto/">
+
+    <!-- start resources -->
+    <!ENTITY noticefdl SYSTEM "notice_fdl.xml">
+    <!ENTITY noticegpl SYSTEM "notice_gpl.xml">
+    <!ENTITY conventions SYSTEM "conventions.xml">
+    <!-- end resources -->
+    
+    <!-- start reusable instances -->
+    <!ENTITY tbl_element_attrib SYSTEM "tbl_element_attrib.xml">
+    <!ENTITY row_xml_lang_attrib SYSTEM "row_xml_lang_attrib.xml">
+    <!-- end reusable instances -->
+    
+    <!-- start appendixes -->
+    <!ENTITY doctype_supp SYSTEM "doc_type_support.xml">
+    <!ENTITY xds_ele_ref SYSTEM "cong_element_map_ref.xml">
+    <!ENTITY xds_dtd_def SYSTEM "xds_dtd_def.xml">
+    <!-- end appendixes -->
+    
+<!-- everything external to Conglomerate goes here -->
+
+<!ENTITY i10n "http://developer.gnome.org/projects/gtp/">
+<!ENTITY gplhome "http://www.gnu.org/copyleft/gpl.html">
+<!ENTITY gfdlhome "http://www.gnu.org/licenses/fdl.html">
+<!ENTITY freesw "http://www.gnu.org/philosophy/free-sw.html">
+<!ENTITY gnomehome "http://www.gnome.org">
+<!ENTITY kdehome "http://www.kde.org">
+<!ENTITY docbook "http://www.docbook.org">
+<!ENTITY docbooktdg "http://www.docbook.org/tdg/en/html/docbook.html">
+<!ENTITY docbookxsl "http://www.sagehill.net/docbookxsl/index.html">
+<!ENTITY docbookdev "http://docbook.sourceforge.net">
+<!ENTITY oasisopen "http://www.oasis-open.org/">
+<!ENTITY sfnet "http://www.sourceforge.net/">
+<!ENTITY kerneltraffic "http://kt.zork.net/">
+
+<!ENTITY w3c "http://www.w3.org/">
+<!ENTITY w3cxhtml "http://www.w3.org/TR/xhtml1/">
+<!ENTITY w3cxml "http://www.w3.org/TR/xhtml1/">
+<!ENTITY w3cxsl "http://www.w3.org/Style/XSL/">
+<!ENTITY relaxng "http://www.relaxng.org/">
+<!ENTITY relaxngtc "http://www.oasis-open.org/committees/relax-ng/">
+<!ENTITY oo "http://www.openoffice.org/">
+<!ENTITY ooxmlform "http://xml.openoffice.org/">
+<!ENTITY ooxmlformtc "http://xml.openoffice.org/">
+
+<!ENTITY w3schools "http://www.w3schools.com/">
+<!ENTITY zvonorg "http://www.zvon.org/">
