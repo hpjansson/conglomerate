@@ -1,3 +1,9 @@
+2004-02-19  Geert Stappers <stapppers@stappers.nl>
+
+	* ilogo.c
+
+	Updated with the new logo, fixes bugzilla #134749.
+
 2004-02-18  Geert Stappers <stapppers@stappers.nl>
 
 	* Makefile.am

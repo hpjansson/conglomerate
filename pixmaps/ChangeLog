@@ -4,6 +4,11 @@
 
 	New file, with the new logo. It is a blow-up of ../src/ilogo.c
 
+	* conglomerate-icon-16.png & conglomerate-icon-32.png
+
+	Fresh generated from ilogo100.xpm
+	(saved as ilogo100.png in Gimp, resized with convert from imagemagick)
+
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am, cong-caution-48.png, cong-important-48.png, cong-note-48.png, cong-tip-48.png, cong-warning-48.png
