@@ -178,8 +178,9 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 			desc = g_strdup_printf ( _("Delete attribute \"%s\""), attr->name);
 		}
 
-		cmd = cong_command_new (doc,
-					desc);
+		cmd = cong_document_begin_command (doc,
+						   desc,
+						   NULL);
 
 		if (new_attr_value) {
 			cong_command_add_node_set_attribute (cmd, 
@@ -192,11 +193,8 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 								attr->name);
 		}
 
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));		
-
 	}
 #else
 

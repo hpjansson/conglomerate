@@ -60,6 +60,7 @@ struct CongCommandDetails
 {
 	CongDocument *doc;
 	gchar *description;
+	gchar *consolidation_id;
 
 	GList *list_of_modification;
 };
@@ -84,21 +85,27 @@ cong_command_instance_init (CongCommand *node)
 CongCommand*
 cong_command_construct (CongCommand *command,
 			CongDocument *doc,
-			const gchar *description)
+			const gchar *description,
+			const gchar *consolidation_id)
 {
 	PRIVATE(command)->doc = doc;
 	PRIVATE(command)->description = g_strdup (description);
+	if (consolidation_id) {
+		PRIVATE(command)->consolidation_id = g_strdup (consolidation_id);
+	}
 
 	return command;
 }
 
 CongCommand*
-cong_command_new (CongDocument *doc,
-		  const gchar *description)
+cong_command_private_new (CongDocument *doc,
+			  const gchar *description,
+			  const gchar *consolidation_id)
 {
 	return cong_command_construct (CONG_COMMAND(g_object_new (CONG_COMMAND_TYPE, NULL)),
 				       doc,
-				       description);
+				       description,
+				       consolidation_id);
 }
 
 CongDocument*

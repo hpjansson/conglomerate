@@ -170,8 +170,9 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 #if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_value);
 
-	CongCommand *cmd = cong_command_new (doc,
-					     desc);
+	CongCommand *cmd = cong_document_begin_command (doc,
+							desc,
+							NULL);
 
 	g_free (desc);
 
@@ -179,10 +180,8 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 					     node,
 					     attribute_name,
 					     new_value);
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));				       
 #else
 	cong_document_begin_edit (doc);
 	
@@ -205,18 +204,17 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 #if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
-	CongCommand *cmd = cong_command_new (doc,
-					     desc);
+	CongCommand *cmd = cong_document_begin_command (doc,
+							desc,
+							NULL);
 
 	g_free (desc);
 
 	cong_command_add_node_remove_attribute (cmd,
 						node,
 						attribute_name);
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));				       
 #else
 	cong_document_begin_edit (doc);
 	

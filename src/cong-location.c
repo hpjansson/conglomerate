@@ -355,10 +355,7 @@ handle_tag_merging (CongDocument *doc,
 							   node->next->next)) {
 					if (cong_node_is_pure_whitespace_text_node (node->next)) {
 #if SUPPORT_UNDO
-						CongCommand *cmd = cong_command_new (doc, _("Merge tags"));
-
-						cong_document_begin_edit (doc);
-
+						CongCommand *cmd = cong_document_begin_command (doc, _("Merge tags"), NULL);
 
 						/* Do the merge: */
 						merge_tags (cmd,
@@ -371,10 +368,7 @@ handle_tag_merging (CongDocument *doc,
 						cong_command_add_node_recursive_delete (cmd, 
 											node->next);
 						
-						cong_document_end_edit (doc);
-						
-						cong_document_add_command (doc, cmd);
-						g_object_unref (G_OBJECT (cmd));
+						cong_document_end_command (doc, cmd);
 #else
 						cong_document_begin_edit (doc);
 
@@ -401,15 +395,14 @@ handle_tag_merging (CongDocument *doc,
 						   node->next)) {
 
 #if SUPPORT_UNDO
-				CongCommand *cmd = cong_command_new (doc, _("Merge tags"));
+				CongCommand *cmd = cong_document_begin_command (doc, _("Merge tags"), NULL);
 				
 				/* Do the merge: */
 				merge_tags (cmd,
 					    node,
 					    node->next);
 
-				cong_document_add_command (doc, cmd);
-				g_object_unref (G_OBJECT (cmd));
+				cong_document_end_command (doc, cmd);
 #else
 				/* Do the merge: */
 				merge_tags (doc,
@@ -452,12 +445,13 @@ cong_location_del_next_char (CongDocument *doc,
 
 #if SUPPORT_UNDO
 		{
-			CongCommand *cmd = cong_command_new (doc, _("Delete character"));
+			CongCommand *cmd = cong_document_begin_command (doc, 
+									_("Delete character"), 
+									"cong-delete-character");
 
 			cong_command_add_node_set_text(cmd, loc->node, new_text);
 			
-			cong_document_add_command (doc, cmd);
-			g_object_unref (G_OBJECT (cmd));
+			cong_document_end_command (doc, cmd);
 		}
 #else
 		cong_document_begin_edit (doc);

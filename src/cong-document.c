@@ -103,6 +103,7 @@ struct CongDocumentDetails
 	GTimeVal time_of_last_save;
 
 	CongCommandHistory *history;
+	CongCommand *current_command;
 
 	/* We have an SDI interface, so there should be just one primary window associated with each doc.
 	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
@@ -668,14 +669,18 @@ cong_document_node_unref (CongDocument *doc,
 
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
-			     const gchar *description)
+			     const gchar *description,
+			     const gchar *consolidation_id)
 {
 	CongCommand *cmd;
 
 	g_return_val_if_fail (IS_CONG_DOCUMENT(doc), NULL);
 	g_return_val_if_fail (description, NULL);
+	g_return_val_if_fail (NULL==PRIVATE(doc)->current_command, NULL);
 
-	cmd = cong_command_new (doc, description);
+	cmd = cong_command_private_new (doc, description, consolidation_id);
+	
+	PRIVATE(doc)->current_command = cmd;
 
 	cong_document_begin_edit (doc);
 
@@ -686,15 +691,17 @@ void
 cong_document_end_command (CongDocument *doc,
 			   CongCommand *cmd)
 {
-	CongDocument *doc;
-
 	g_return_if_fail (IS_CONG_DOCUMENT(doc));
 	g_return_if_fail (IS_CONG_COMMAND(cmd));
 	g_return_if_fail (doc == cong_command_get_document (cmd));
+	g_return_if_fail (cmd==PRIVATE(doc)->current_command);
 
 	cong_document_end_edit (doc);
 
-	cong_document_add_command (doc, cmd);
+	PRIVATE(doc)->current_command = NULL;
+
+	cong_command_history_add_command (PRIVATE(doc)->history,
+					  cmd);
 	g_object_unref (G_OBJECT (cmd));
 }
 
@@ -1654,16 +1661,6 @@ cong_document_get_command_history (CongDocument *doc)
 	return PRIVATE(doc)->history;
 }
 
-void
-cong_document_add_command (CongDocument *doc,
-			   CongCommand *command)
-{
-	g_return_if_fail (IS_CONG_DOCUMENT(doc));
-	g_return_if_fail (IS_CONG_COMMAND(command));
-
-	cong_command_history_add_command (PRIVATE(doc)->history,
-					  command);
-}
 
 void
 cong_document_undo (CongDocument *doc)

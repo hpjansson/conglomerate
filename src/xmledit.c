@@ -69,7 +69,7 @@ void cong_document_cut_selection(CongDocument *doc)
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Cut"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"), NULL);
 
 		cong_app_set_clipboard (cong_app_singleton(),
 					source);
@@ -78,10 +78,8 @@ void cong_document_cut_selection(CongDocument *doc)
 		cong_command_add_delete_range (cmd,
 					       ordered_range);
 		
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));
 	}
 #else
 	cong_app_set_clipboard (cong_app_singleton(),
@@ -191,7 +189,7 @@ cong_document_paste_source_at (CongDocument *doc,
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Paste"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Paste"), NULL);
 
 		/* Calculate insertion point, splitting text nodes if necessary: */
 		if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
@@ -244,12 +242,8 @@ cong_document_paste_source_at (CongDocument *doc,
 		/* Delete the placeholder parent: */
 		cong_command_add_node_recursive_delete (cmd, 
 							new_nodes);
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));
-
-		
 	}
 #else
 	/* Calculate insertion point, splitting text nodes if necessary: */
@@ -323,7 +317,7 @@ cong_document_paste_source_under (CongDocument *doc,
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Paste Under"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Paste Under"), NULL);
 
 		/* Add the new nodes: */
 		for (iter = new_nodes->children; iter; iter = iter_next) {
@@ -342,10 +336,8 @@ cong_document_paste_source_under (CongDocument *doc,
 		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
 								       relative_to_node);
 
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));		
 	}
 #else
 
@@ -388,7 +380,7 @@ cong_document_paste_source_before (CongDocument *doc,
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Paste Before"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Paste Before"), NULL);
 
 		/* Add the new nodes: */
 		for (iter = new_nodes->children; iter; iter = iter_next) {
@@ -406,10 +398,8 @@ cong_document_paste_source_before (CongDocument *doc,
 		/* Merge adjacent text nodes: */
 		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
 								       relative_to_node->parent);
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));		
 	}
 #else
 	/* Add the new nodes: */
@@ -451,7 +441,7 @@ cong_document_paste_source_after (CongDocument *doc,
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Paste After"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Paste After"), NULL);
 
 
 		/* Add the new nodes: */
@@ -473,10 +463,8 @@ cong_document_paste_source_after (CongDocument *doc,
 		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
 								       relative_to_node->parent);
 
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));
 	}
 #else
 	/* Add the new nodes: */

@@ -337,8 +337,9 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 					      attr_name,
 					      arg2);
 
-		CongCommand *cmd = cong_command_new (doc,
-						     desc);
+		CongCommand *cmd = cong_document_begin_command (doc,
+								desc,
+								NULL);
 
 		cong_command_add_node_remove_attribute (cmd,
 							view->node,
@@ -347,11 +348,8 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 						     view->node,
 						     arg2,
 						     attr_value);
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));				       
-
 #else
 		cong_document_begin_edit(doc);
 
@@ -388,17 +386,16 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 					      attr_name,
 					      arg2);
 
-		CongCommand *cmd = cong_command_new (doc,
-						     desc);
+		CongCommand *cmd = cong_document_begin_command (doc,
+								desc,
+								NULL);
 
 		cong_command_add_node_set_attribute (cmd,
 						     view->node,
 						     attr_name,
 						     arg2);
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));				       
 	}
 #else
 	cong_document_begin_edit (doc);
@@ -438,17 +435,16 @@ static void on_add_attribute(GtkButton *button,
 		gchar *desc = g_strdup_printf(_("Add attribute \"%s\""),
 					      attr_name);
 
-		CongCommand *cmd = cong_command_new (doc,
-						     desc);
+		CongCommand *cmd = cong_document_begin_command (doc,
+								desc,
+								NULL);
 
 		cong_command_add_node_set_attribute (cmd,
 						     view->node,
 						     attr_name,
 						     "");
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));				       
 	}
 #else
 	cong_document_begin_edit(doc);
@@ -475,16 +471,15 @@ static void on_delete_attribute(GtkButton *button,
 		gchar *desc = g_strdup_printf(_("Delete attribute \"%s\""),
 					      attr_name);
 
-		CongCommand *cmd = cong_command_new (doc,
-						     desc);
+		CongCommand *cmd = cong_document_begin_command (doc,
+								desc,
+								NULL);
 
 		cong_command_add_node_remove_attribute (cmd,
 							view->node,
 							attr_name);
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));				       
 #else
 		cong_document_begin_edit(doc);
 		cong_document_node_remove_attribute(doc, view->node, attr_name);

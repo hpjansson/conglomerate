@@ -748,7 +748,8 @@ on_signal_button_press (CongEditorArea *editor_area,
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
 						CongCommand *cmd = cong_document_begin_command (doc,
-												_("Select word"));
+												_("Select word"),
+												NULL);
 
 						cong_command_add_selection_change (cmd,										   
 										   &start_of_word,
@@ -787,7 +788,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 #if SUPPORT_UNDO
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {
-					CongCommand *cmd = cong_document_begin_command (doc, _("Move cursor"));
+					CongCommand *cmd = cong_document_begin_command (doc, _("Move cursor"), NULL);
 
 					cong_command_add_selection_change (cmd,
 									   &new_location,
@@ -850,8 +851,9 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 				event->y, 
 				&new_location)) {
 #if SUPPORT_UNDO
-		CongCommand *cmd = cong_document_begin_command (doc, _("Drag out selection"));
-		
+		CongCommand *cmd = cong_document_begin_command (doc, 
+								_("Drag out selection"), 
+								"cong-drag-selection");		
 		cong_command_add_cursor_change (cmd,
 						&new_location);
 		cong_command_add_selection_change (cmd, 

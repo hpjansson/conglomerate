@@ -130,7 +130,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 #if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Split %s tag"), tagname);
-		CongCommand *cmd = cong_command_new (doc, desc);
+		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
 		CongLocation new_cursor_loc;
 
 		t = cong_command_add_xml_frag_data_nice_split2 (cmd, 
@@ -162,10 +162,8 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 							  new_element);
 		}
 		
-		cong_document_add_command (doc,
+		cong_document_end_command (doc,
 					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));		
 	}
 #else
 

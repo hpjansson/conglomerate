@@ -1,3 +1,9 @@
+2003-10-04  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-wrapper.c, cong-command.c, cong-command.h, cong-document.c, cong-document.h, cong-editor-node-text.c, cong-editor-widget3.c, cong-location.c, cong-menus.c, cong-node-properties-dialog.c, cursor.c, plugin-cleanup-source.c, popup.c, tree.c, xmledit.c
+
+	Moved everything over to new begin_command/end_command API with hook to consolidate multiple small commands into one entry in undo/redo history (not yet implemented)
+	
 2003-10-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-command.c, cong-command.h, cong-document.c, cong-document.h, cong-editor-node-text.c, tree.c

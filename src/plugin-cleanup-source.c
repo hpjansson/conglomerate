@@ -394,10 +394,9 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 	cleanup_data.options = options;
 
 #if SUPPORT_UNDO
-	cleanup_data.cmd = cong_command_new (doc,
-					     _("Cleanup XML Source"));
-
-	cong_document_begin_edit (doc);
+	cleanup_data.cmd = cong_document_begin_command (doc,
+							_("Cleanup XML Source"),
+							NULL);
 
 	/* Stage 1:  strip out all non-significant whitespace: */
 	cong_document_for_each_node (doc, strip_whitespace_callback, &cleanup_data);
@@ -408,13 +407,8 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 	/* Stage 3: merge adjacent text nodes: */
 	cong_command_add_merge_adjacent_text_nodes (cleanup_data.cmd);
 
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cleanup_data.cmd);
-
-	g_object_unref (G_OBJECT (cleanup_data.cmd));				       
-
-	cong_document_end_edit (doc);
-	
 #else
 	/* Allow views to amortise updates: */
 	cong_document_begin_edit (doc);

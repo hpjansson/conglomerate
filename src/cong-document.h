@@ -219,6 +219,8 @@ cong_document_node_unref (CongDocument *doc,
  * @doc: The #CongDocument upon which the command is to act.
  * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
  * widget
+ * @consolidation_id: A string ID (or NULL) for this command to allow multiple similar commands to be consolidated into 
+ * a single command.  For example, multiple characters being typed at the keboard can be merged into a single "Typing" command.
  * 
  * Begins creating a named command which will act upon the document.  You can then add modifications to this command,
  * and then finish with a call to cong_document_end_command()
@@ -228,7 +230,8 @@ cong_document_node_unref (CongDocument *doc,
  */
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
-			     const gchar *description);
+			     const gchar *description,
+			     const gchar *consolidation_id);
 
 /**
  * cong_document_end_command:
@@ -299,10 +302,6 @@ cong_document_get_language_for_node(CongDocument *doc,
 
 CongCommandHistory*
 cong_document_get_command_history (CongDocument *doc);
-
-void
-cong_document_add_command (CongDocument *doc,
-			   CongCommand *command);
 
 /* Various UI hooks: */
 void

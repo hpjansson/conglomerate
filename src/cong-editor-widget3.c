@@ -1110,12 +1110,12 @@ key_press_event_handler (GtkWidget *w,
 				/* Are we moving the cursor, or dragging out a selection? */
 
 #if SUPPORT_UNDO
-				CongCommand *cmd = cong_command_new (doc, _("Cursor Movement"));
+				CongCommand *cmd = cong_document_begin_command (doc, 
+										_("Cursor Movement"),
+										"cong-cursor-movement");
 				CongLocation new_selection_start;
 				CongLocation new_selection_end;
 				
-				cong_document_begin_edit (doc);	
-
 				/* Move the cursor to the new location: */
 				cong_command_add_cursor_change (cmd,
 								&target_location);
@@ -1142,12 +1142,8 @@ key_press_event_handler (GtkWidget *w,
 								   &new_selection_start,
 								   &new_selection_end);
 
-				cong_document_add_command (doc,
+				cong_document_end_command (doc,
 							   cmd);
-				
-				g_object_unref (G_OBJECT (cmd));
-				cong_document_end_edit (doc);	
-
 #else
 				/* Move the cursor to the new location: */
 				cong_location_copy(&cursor->location, &target_location);
@@ -1182,12 +1178,12 @@ key_press_event_handler (GtkWidget *w,
 	case GDK_BackSpace:
 		if (cong_selection_get_logical_end(selection)->node) {
 #if SUPPORT_UNDO
-			CongCommand *cmd = cong_command_new (doc, _("Delete Selection"));
+			CongCommand *cmd = cong_document_begin_command (doc, 
+									_("Delete Selection"), 
+									"cong-delete");
 			cong_command_add_delete_selection (cmd);
-			cong_document_add_command (doc,
+			cong_document_end_command (doc,
 						   cmd);
-			
-			g_object_unref (G_OBJECT (cmd));
 #else
 			cong_document_delete_selection(doc);
 #endif
@@ -1199,12 +1195,12 @@ key_press_event_handler (GtkWidget *w,
 	case GDK_Delete:
 		if (cong_selection_get_logical_end(selection)->node) {
 #if SUPPORT_UNDO
-			CongCommand *cmd = cong_command_new (doc, _("Delete Selection"));
+			CongCommand *cmd = cong_document_begin_command (doc, 
+									_("Delete Selection"),
+									"cong-delete");
 			cong_command_add_delete_selection (cmd);
-			cong_document_add_command (doc,
-						   cmd);
-			
-			g_object_unref (G_OBJECT (cmd));
+			cong_document_end_command (doc,
+						   cmd);			
 #else
 			cong_document_delete_selection(doc);
 #endif
@@ -1226,7 +1222,9 @@ key_press_event_handler (GtkWidget *w,
 		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
 #if SUPPORT_UNDO
-			CongCommand *cmd = cong_command_new (doc, _("Typing"));
+			CongCommand *cmd = cong_document_begin_command (doc, 
+									_("Typing"),
+									"cong-typing");
 
                         if (cong_selection_get_logical_end(selection)->node) {
 				cong_command_add_delete_selection (cmd);
@@ -1234,10 +1232,8 @@ key_press_event_handler (GtkWidget *w,
 			cong_command_add_insert_text_at_cursor (cmd, event->string);
 			cong_command_add_nullify_selection (cmd);
 
-			cong_document_add_command (doc,
+			cong_document_end_command (doc,
 						   cmd);
-			
-			g_object_unref (G_OBJECT (cmd));
 #else
                         if (cong_selection_get_logical_end(selection)->node) {
                                 cong_document_delete_selection(doc);

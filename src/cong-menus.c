@@ -1155,13 +1155,12 @@ void menu_callback_debug_command_test (gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	CongCommand* cmd = cong_command_new (doc,
-					     "test command");
+	CongCommand* cmd = cong_document_begin_command (doc,
+							"test command",
+							NULL);
 
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));
 }
 
 /* Callbacks for "Help" menu: */

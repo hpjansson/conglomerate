@@ -178,8 +178,9 @@ on_text_entry_changed (GtkEditable *editable,
 	const gchar *value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry));
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, value);
 
-	CongCommand *cmd = cong_command_new (doc,
-					     desc);
+	CongCommand *cmd = cong_document_begin_command (doc,
+							desc,
+							NULL);
 
 	g_free (desc);
 
@@ -187,10 +188,8 @@ on_text_entry_changed (GtkEditable *editable,
 					     node,
 					     attribute_name,
 					     value);
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));				       
 #else
 	cong_document_begin_edit (doc);
 	
@@ -214,8 +213,9 @@ on_add_button (GtkButton *button,
 #if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Add attribute \"%s\""), attribute_name);
 
-	CongCommand *cmd = cong_command_new (doc,
-					     desc);
+	CongCommand *cmd = cong_document_begin_command (doc,
+							desc,
+							NULL);
 
 	g_free (desc);
 
@@ -223,10 +223,8 @@ on_add_button (GtkButton *button,
 					     node,
 					     attribute_name,
 					     "");
-	cong_document_add_command (doc,
-				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));				       
+	cong_document_end_command (doc,
+				    cmd);
 #else
 	cong_document_begin_edit (cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata)));
 	
@@ -250,18 +248,17 @@ on_delete_button (GtkButton *button,
 #if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
-	CongCommand *cmd = cong_command_new (doc,
-					     desc);
+	CongCommand *cmd = cong_document_begin_command (doc,
+							desc,
+							NULL);
 
 	g_free (desc);
 
 	cong_command_add_node_remove_attribute (cmd,
 						node,
 						attribute_name);
-	cong_document_add_command (doc,
+	cong_document_end_command (doc,
 				   cmd);
-
-	g_object_unref (G_OBJECT (cmd));				       
 #else
 	cong_document_begin_edit (doc);
 	
