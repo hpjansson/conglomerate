@@ -1,5 +1,9 @@
 2003-08-05  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-entity-ref.c, cong-editor-area-entity-ref.h, cong-editor-node-entity-ref.c, cong-editor-node-entity-ref.h, Makefile.am
+
+	New files: Rendering of entity references
+
 	* cong-editor-area-text-fragment.c, cong-editor-node.c, cong-editor-widget3.c, cong-eel.c, cong-eel.h, cong-text-cache.c
 
 	More work on comments and entities
