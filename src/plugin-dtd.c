@@ -43,7 +43,8 @@ load_dtd (const gchar *uri,
 	  GtkWindow *toplevel_window);
 
 static xmlDocPtr
-make_rng_from_dtd (xmlDtdPtr dtd);
+make_rng_from_dtd (xmlDtdPtr dtd,
+		   GList *list_of_start_elements);
 
 static void
 element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
@@ -53,10 +54,6 @@ static void
 attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 					  xmlAttributePtr attr,
 					  gpointer user_data);
-
-static void
-add_content_subtree_to_rng (CongNodePtr node_parent,
-			    xmlElementContentPtr content);
 
 /* Plugin hooks: */
 gboolean dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
@@ -108,11 +105,12 @@ void dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gc
 
 	g_message("dtd_to_rng_importer_action_callback");
 
-#if 1
 	dtd = load_dtd(uri, toplevel_window);
 
 	if (dtd) {
-		xmlDocPtr xml_doc = make_rng_from_dtd(dtd);
+		GList *list_of_start_elements = cong_dtd_guess_start_elements (dtd);
+		xmlDocPtr xml_doc = make_rng_from_dtd (dtd,
+						       list_of_start_elements);
 
 		/* Free up the DTD: */
 		xmlFreeDtd(dtd);
@@ -121,10 +119,6 @@ void dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gc
 		cong_ui_new_document_from_imported_xml(xml_doc,
 						       toplevel_window);
 	}
-#else
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Importing DTD as RELAX NG Schema", 118768);
-#endif
-
 }
 
 void dtd_to_w3c_xml_schema_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
@@ -229,92 +223,360 @@ load_dtd (const gchar *uri,
 	return dtd;
 }
 
-static xmlDocPtr
-make_rng_from_dtd (xmlDtdPtr dtd)
+/* Data stored by the DTD->RNG converter: */
+typedef struct CongDTD2RNGConverter CongDTD2RNGConverter;
+struct CongDTD2RNGConverter
 {
+	xmlDtdPtr dtd;
+	GList *list_of_start_elements;
+
 	xmlDocPtr xml_doc;
-	CongNodePtr root_node;
+	xmlNodePtr grammar_node;
 	xmlNsPtr xml_ns;
+	xmlNodePtr start_node;
+};
+
+CongDTD2RNGConverter*
+cong_dtd2rng_converter_new (xmlDtdPtr dtd,
+			    GList *list_of_start_elements);
+
+void
+cong_dtd2rng_converter_free (CongDTD2RNGConverter *converter);
+
+gboolean
+cong_dtd2rng_converter_is_start_element (CongDTD2RNGConverter *converter,
+					 xmlElementPtr dtd_element);
+
+guint
+cong_dtd2rng_converter_get_element_ref_count (CongDTD2RNGConverter *converter,
+					      xmlElementPtr dtd_element);
+
+gboolean
+cong_dtd2rng_converter_should_element_have_define (CongDTD2RNGConverter *converter,
+						   xmlElementPtr dtd_element);
+
+xmlDocPtr
+cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter);
+
+void
+cong_dtd2rng_converter_add_element_or_ref (CongDTD2RNGConverter *converter,
+					   xmlElementPtr dtd_element,
+					   xmlNodePtr parent_node);
+
+void
+cong_dtd2rng_converter_add_rng_element_ref (CongDTD2RNGConverter *converter,
+					    xmlElementPtr dtd_element,
+					    xmlNodePtr parent_node);
+
+void
+cong_dtd2rng_converter_add_rng_element_inline (CongDTD2RNGConverter *converter,
+					       xmlElementPtr dtd_element,
+					       xmlNodePtr parent_node);
+
+static void
+add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
+			    CongNodePtr node_parent,
+			    xmlElementContentPtr content);
+
+
+/****/
+
+static xmlDocPtr
+make_rng_from_dtd (xmlDtdPtr dtd,
+		   GList *list_of_root_elements)
+{
+	xmlDocPtr result;
+	CongDTD2RNGConverter* converter = cong_dtd2rng_converter_new (dtd,
+								      list_of_root_elements);
+
+	result = cong_dtd2rng_converter_make_schema (converter);
+	
+	cong_dtd2rng_converter_free (converter);
+
+	return result;
+}
+
+
+
+/* Implementation of CongDTD2RNGConverter: */
+
+CongDTD2RNGConverter*
+cong_dtd2rng_converter_new (xmlDtdPtr dtd,
+			    GList *list_of_start_elements)
+{
+	CongDTD2RNGConverter *converter;
 
 	g_return_val_if_fail (dtd, NULL);
+	g_return_val_if_fail (list_of_start_elements, NULL);
+
+	converter = g_new0 (CongDTD2RNGConverter, 1);
+
+	converter->dtd = dtd;
+	converter->list_of_start_elements = list_of_start_elements;
+
+	return converter;
+}
+
+void
+cong_dtd2rng_converter_free (CongDTD2RNGConverter *converter)
+{
+	g_free (converter);
+}
+
+gboolean
+cong_dtd2rng_converter_is_start_element (CongDTD2RNGConverter *converter,
+					 xmlElementPtr dtd_element)
+{
+	GList *iter;
+
+	g_return_val_if_fail (converter, FALSE);
+	g_return_val_if_fail (dtd_element, FALSE);
+
+	for (iter=converter->list_of_start_elements; iter; iter=iter->next) {
+		if (iter->data==dtd_element) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+/*
+  Count references; they can happen in the main DTD, or in the <start> element (if any):
+*/
+guint
+cong_dtd2rng_converter_get_element_ref_count (CongDTD2RNGConverter *converter,
+					      xmlElementPtr dtd_element)
+{
+	guint num_element_references;
+
+	g_return_val_if_fail (converter, 0);
+	g_return_val_if_fail (dtd_element, 0);
+
+	num_element_references = cong_dtd_count_references_to_element (converter->dtd,
+									     dtd_element);
+	if (cong_dtd2rng_converter_is_start_element (converter,
+						     dtd_element)) {
+		if (dtd_element->name) { g_message ("%s is start element", dtd_element->name); }
+		num_element_references++;
+	}
+
+	if (dtd_element->name) { g_message ("%s has %i refs", dtd_element->name, num_element_references); }
+
+	return num_element_references;
+}
+
+
+/* 
+   Elements need to be wrapped with a define if they are referenced more than once (or if the
+   user has requested a flat schema?)
+*/
+gboolean
+cong_dtd2rng_converter_should_element_have_define (CongDTD2RNGConverter *converter,
+						   xmlElementPtr dtd_element)
+{
+	guint ref_count;
+
+	g_return_val_if_fail (converter, FALSE);
+	g_return_val_if_fail (dtd_element, FALSE);
+
+	ref_count = cong_dtd2rng_converter_get_element_ref_count (converter,
+								  dtd_element);
+
+	if (ref_count>1) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+xmlDocPtr
+cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
+{
+	g_return_val_if_fail (converter, NULL);
 
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	converter->xml_doc = xmlNewDoc("1.0");
 	
-	root_node = xmlNewDocNode(xml_doc,
-				  NULL, /* xmlNsPtr ns, */
-				  "grammar",
-				  NULL);
+	converter->grammar_node = xmlNewDocNode (converter->xml_doc,
+						 NULL, /* xmlNsPtr ns, */
+						 "grammar",
+						 NULL);
+	converter->xml_ns = xmlNewNs (converter->grammar_node, 
+				      RELAX_NG_NS_URI, 
+				      NULL);
+	xmlSetNs (converter->grammar_node, 
+		  converter->xml_ns);
+	
+	xmlDocSetRootElement (converter->xml_doc,
+			      converter->grammar_node);
 
-	xml_ns = xmlNewNs (root_node, 
-			   RELAX_NG_NS_URI, 
-			   NULL);
-	xmlSetNs (root_node, 
-		  xml_ns);
-	
-	xmlDocSetRootElement(xml_doc,
-			     root_node);
+	/* The <start> element: */
+	{
+		GList *iter;
+		converter->start_node = xmlNewDocNode (converter->xml_doc,
+						       converter->xml_ns,
+						       "start",
+						       NULL);
+		xmlNodePtr choice_node;
 
-	/* FIXME: The start tag? */
+		xmlAddChild (converter->grammar_node,
+			     converter->start_node);
+
+		/* List must be non-empty: */
+		g_assert (converter->list_of_start_elements);
+
+		/* If list contains more than one start, add a <choice> element: */
+		if (converter->list_of_start_elements->next) {
+			choice_node = xmlNewDocNode (converter->xml_doc,
+						     converter->xml_ns,
+						     "choice",
+						     NULL);
+			xmlAddChild (converter->start_node,
+				     choice_node);
+		} else {
+			choice_node = converter->start_node;
+		}
+		
+
+		for (iter=converter->list_of_start_elements;iter;iter=iter->next) {
+			xmlElementPtr dtd_element = (xmlElementPtr)(iter->data);
+
+			/* Add elements either directly or by ref: */
+			cong_dtd2rng_converter_add_element_or_ref (converter,
+								   dtd_element,
+								   choice_node);
+		}
+	}
+
 	
-	/* Add <define> tags for all the elements and attributes: */
-	cong_dtd_for_each_element (dtd,
+	/* Add <define> tags for all the attributes, and for all element which appear more than once in the content model: */
+	cong_dtd_for_each_element (converter->dtd,
 				   element_callback_generate_rng_from_dtd,
-				   root_node);
-	return xml_doc;	
+				   converter);
 
+	return converter->xml_doc;	
+
+}
+
+
+static void
+element_reference_callback_add_comment (xmlDtdPtr dtd,
+					xmlElementPtr dtd_element,
+					xmlElementContentPtr content,
+					gpointer user_data)
+{
+	CongNodePtr xml_node = (CongNodePtr)user_data;
+
+	xmlAddChild (xml_node,
+		     xmlNewDocComment (xml_node->doc,
+				       "element is cross-referenced"));
+}
+
+/* Adds the element either via a ref, or directly inline, depending on whether its referenced elsewhere or not: */
+void
+cong_dtd2rng_converter_add_element_or_ref (CongDTD2RNGConverter *converter,
+					   xmlElementPtr dtd_element,
+					   xmlNodePtr parent_node)
+{
+	if (cong_dtd2rng_converter_should_element_have_define (converter,
+							       dtd_element)) {
+		cong_dtd2rng_converter_add_rng_element_ref (converter,
+							    dtd_element,
+							    parent_node);
+	} else {
+		/* This is the only place where this element is used in the DTD; put it inline here for a Russian-Doll effect: */
+		cong_dtd2rng_converter_add_rng_element_inline (converter,
+							       dtd_element,
+							       parent_node);
+	}
+}
+
+
+/* Add a <ref name="foobar"> tag: */
+void
+cong_dtd2rng_converter_add_rng_element_ref (CongDTD2RNGConverter *converter,
+					    xmlElementPtr dtd_element,
+					    xmlNodePtr parent_node)
+{
+	CongNodePtr node_ref = xmlNewDocNode(parent_node->doc,
+					     converter->xml_ns, 
+					     "ref",
+					     NULL);
+	xmlAddChild (parent_node, 
+		     node_ref);
+	
+	xmlSetProp (node_ref,
+		    "name",
+		    dtd_element->name);
+}
+
+/* Create a RELAX NG <element>, either somewhere inside a content model, or inside a <define> element */
+void
+cong_dtd2rng_converter_add_rng_element_inline (CongDTD2RNGConverter *converter,
+					       xmlElementPtr dtd_element,
+					       xmlNodePtr parent_node)
+{
+	CongNodePtr node_element = xmlNewDocNode(parent_node->doc,
+						 converter->xml_ns,
+						 "element",
+						 NULL);
+	xmlAddChild (parent_node, 
+		     node_element);
+	
+	xmlSetProp (node_element,
+		    "name",
+		    dtd_element->name);
+	
+	/* set up the content model */
+	{
+		cong_dtd_for_each_attribute (dtd_element,
+					     attribute_callback_generate_rng_from_dtd,
+					     node_element);
+		
+		if (dtd_element->content) {
+			add_content_subtree_to_rng (converter,
+						    node_element,
+						    dtd_element->content);
+		}
+	}
 }
 
 static void
 element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 					gpointer user_data)
 {
-	CongNodePtr root_node = (CongNodePtr)user_data;
-	CongNodePtr node_define;
-	xmlNsPtr xml_ns;
+	CongDTD2RNGConverter *converter = (CongDTD2RNGConverter*)user_data;
 
-	xml_ns = xmlSearchNsByHref (root_node->doc,
-				    root_node,
-				    RELAX_NG_NS_URI);
-	g_assert (xml_ns);
+	/* Create a <define> for every element referenced more than once in the document: */
+	if (cong_dtd2rng_converter_should_element_have_define (converter,
+							       dtd_element)) {
+		CongNodePtr node_define;
 
-	node_define = xmlNewDocNode(root_node->doc,
-				    xml_ns,
-				    "define",
-				    NULL);			
-	xmlAddChild (root_node, 
-		     node_define);
-
-	xmlSetProp (node_define,
-		    "name",
-		    dtd_element->name);
-
-	/* Create the <element> tag: */
-	{
-		CongNodePtr node_element = xmlNewDocNode(root_node->doc,
-							 xml_ns,
-							 "element",
-							 NULL);
-		xmlAddChild (node_define, 
-			     node_element);
-
-		xmlSetProp (node_element,
+		node_define = xmlNewDocNode (converter->xml_doc,
+					     converter->xml_ns,
+					     "define",
+					     NULL);			
+		xmlAddChild (converter->grammar_node, 
+			     node_define);
+		
+		xmlSetProp (node_define,
 			    "name",
 			    dtd_element->name);
-
-		/* set up the content model */
-		{
-			cong_dtd_for_each_attribute (dtd_element,
-						     attribute_callback_generate_rng_from_dtd,
-						     node_element);
-			
-			if (dtd_element->content) {
-				add_content_subtree_to_rng (node_element,
-							    dtd_element->content);
-			}
-		}
-	}	
+		
+		
+		
+		cong_dtd_for_each_reference_to_element (dtd_element->parent,
+							dtd_element,
+							element_reference_callback_add_comment,
+							node_define);
+		
+		/* Create the <element> tag: */
+		cong_dtd2rng_converter_add_rng_element_inline (converter,
+							       dtd_element,
+							       node_define);
+	}
 }
 
 static void
@@ -435,7 +697,8 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 }
 
 static void
-add_content_subtree_to_rng (CongNodePtr node_parent,
+add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
+			    CongNodePtr node_parent,
 			    xmlElementContentPtr content)
 {
 	CongNodePtr node_occurrence = NULL;
@@ -497,27 +760,23 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		}
 		break;
 	case XML_ELEMENT_CONTENT_ELEMENT:
-		/* Add a <ref name="foobar"> tag: */
 		{
-			CongNodePtr node_ref = xmlNewDocNode(node_occurrence->doc,
-							     xml_ns, 
-							     "ref",
-							     NULL);
-			xmlAddChild (node_occurrence, 
-				     node_ref);
-
-			xmlSetProp (node_ref,
-				    "name",
-				    content->name);
-		}		
+			xmlElementPtr dtd_element = cong_dtd_get_element_for_content (converter->dtd,
+										      content);
+			cong_dtd2rng_converter_add_element_or_ref (converter,
+								   dtd_element,
+								   node_occurrence);
+		}
 		break;
 	case XML_ELEMENT_CONTENT_SEQ:
 		/* Add a <group> tag, and recurse; optimise away the cae where the parent is a <group> tag: */
 		{
 			if (cong_node_is_element (node_occurrence, RELAX_NG_NS_URI, "group")) {
-				add_content_subtree_to_rng (node_occurrence,
+				add_content_subtree_to_rng (converter,
+							    node_occurrence,
 							    content->c1);
-				add_content_subtree_to_rng (node_occurrence,
+				add_content_subtree_to_rng (converter,
+							    node_occurrence,
 							    content->c2);
 			} else {
 				CongNodePtr node_group = xmlNewDocNode(node_occurrence->doc,
@@ -527,9 +786,11 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 				xmlAddChild (node_occurrence, 
 					     node_group);
 				
-				add_content_subtree_to_rng (node_group,
+				add_content_subtree_to_rng (converter,
+							    node_group,
 							    content->c1);
-				add_content_subtree_to_rng (node_group,
+				add_content_subtree_to_rng (converter,
+							    node_group,
 							    content->c2);
 			}
 		}
@@ -544,9 +805,11 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		{
 			if (cong_node_is_element (node_occurrence, RELAX_NG_NS_URI, "choice")) {
 				/* Optimised case: */
-				add_content_subtree_to_rng (node_occurrence,
+				add_content_subtree_to_rng (converter,
+							    node_occurrence,
 							    content->c1);
-				add_content_subtree_to_rng (node_occurrence,
+				add_content_subtree_to_rng (converter,
+							    node_occurrence,
 							    content->c2);
 			} else {
 				/* Non-optimised case: */
@@ -557,9 +820,11 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 				xmlAddChild (node_occurrence, 
 					     node_choice);
 				
-				add_content_subtree_to_rng (node_choice,
+				add_content_subtree_to_rng (converter,
+							    node_choice,
 							    content->c1);
-				add_content_subtree_to_rng (node_choice,
+				add_content_subtree_to_rng (converter,
+							    node_choice,
 							    content->c2);
 			}
 		}

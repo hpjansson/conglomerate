@@ -1,5 +1,9 @@
 2004-02-26  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* plugin-dtd.c
+
+	Big rewrite of DTD->RELAX NG importer: now has a struct to handle options; inlines elements where it can to give a Russian Doll-style schema; adds a <start> element
+
 	* cong-dtd.c, cong-dtd.h
 
 	Added lots of DTD utility functions (finding cross-referencing of elements within DTD content models, guessing likely start elements, etc)
