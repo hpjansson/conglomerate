@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<dispspec>
+	<metadata>
+		<_name>Experimental "readme" format</_name>
+		<_description xml:lang="en">This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</_description>
+	</metadata>
+	<document-models>
+	</document-models>
+	<element-list>
+		<element localName="document" type="structural" color="a0b0c0">
+			<_name>Document</_name>
+		</element>		<!-- Wow - we can have comments in this version of the format -->
+		<!-- Why did introduction have two color values? (second value was c1cdc1) -->
+		<!-- Should all translatable stuff go into po files? -->
+		<!-- What does collapseto mean? -->
+		<element localName="introduction" type = "structural" color = "e0eee0">
+			<_name>Introduction</_name>
+		</element>		<element localName="section" type = "structural" color = "a0b0c0">
+			<_name>Section</_name>
+		</element>		<element localName="section.title" type = "structural">
+			<_name>Title</_name>
+		</element>		<element localName="section.signature" type = "structural">
+			<_name>Signature</_name>
+		</element>		<!-- Here come the spans: -->
+		<element localName="quote" type = "span" color = "8b0000">
+			<_name>Quote</_name>
+		</element>		<element localName="admission" type = "span" color = "b22222">
+			<_name>Admission</_name>
+		</element>		<element localName="excuse" type = "span" color = "b22222">
+			<_name>Excuse</_name>
+		</element>		<element localName="corporate" type = "span" color = "00008b">
+			<_name>Corp jargon</_name>
+		</element>		<element localName="disclaimer" type = "span" color = "698b22">
+			<_name>Disclaimer</_name>
+		</element>		<element localName="emph" type = "span" color = "cd1076">
+			<_name>Emphasis</_name>
+		</element>		<element localName="inspirational" type = "span" color = "08b8b">
+			<_name>Inspirational</_name>
+		</element>		<element localName="optimistic" type = "span" color = "458b74">
+			<_name>Optimistic</_name>
+		</element>		<element localName="p" type = "structural">
+			<_name>Paragraph</_name>
+		</element>
+	</element-list>
+
+</dispspec>

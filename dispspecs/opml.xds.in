@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<dispspec>
+
+	<metadata>
+		<_name>Experimental "opml" format</_name>
+		<_description>Apple OPML dispspec</_description>
+	</metadata>
+	<document-models>
+		<!-- <external-document-model type="dtd" system-id="'insert OPML DTD system id'"/>  -->
+	</document-models>
+	<element-list>
+		<element localName="opml" type="structural" color="a0b0c0">
+			<name xml:lang="C">opml</name>
+		</element>
+		<element localName="head" type="structural" color="a0b0c0">
+			<name xml:lang="C">Head</name>
+			<header-info xpath="normalize-space(child::title)"/>
+		</element>
+		<element localName="title" type="span" color="a0b0c0">
+			<name xml:lang="C">Title</name>
+		</element>
+		<element localName="expansionState" type="span" color="a0b0c0">
+			<name xml:lang="C">Expansion state</name>
+		</element>
+		<element localName="body" type="structural" color="a0b0c0">
+			<name xml:lang="C">Body</name>
+		</element>
+		<element localName="outline" type="structural" color="a0b0c0">
+			<name xml:lang="C">Outline</name>
+			<header-info xpath="@text"/>
+	    	</element>
+
+	</element-list>
+
+</dispspec>

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<dispspec>
+	<metadata>
+		<_name>Experimental "cnxml" format</_name>
+		<_description>Test CNXML ds</_description>
+	</metadata>
+	<document-models>
+		<external-document-model type="dtd" system-id="http://cnx.rice.edu/cnxml/0.5/DTD/cnxml_plain.dtd"/>
+	</document-models>
+	<element-list>
+		<element localName="module" type="structural" color="a0b0c0">
+			<_name>module</_name>
+		</element>
+		<element localName="metadata" type="structural" color="a0b0c0">
+			<_name>metadata</_name>
+		</element>
+		<element localName="content" type="structural" color="a0b0c0">
+			<_name>content</_name>
+		</element>
+		<element localName="section" type="structural" color="a0b0c0">
+			<_name>section</_name>
+		</element>
+		<element localName="equation" type="structural" color="a0b0c0">
+			<_name>equation</_name>
+		</element>
+		<element localName="note" type="structural" color="a0b0c0">
+			<_name>note</_name>
+		</element>
+		<element localName="codeblock" type="structural" color="a0b0c0">
+			<_name>codeblock</_name>
+		</element>
+		<element localName="codeline" type="structural" color="a0b0c0">
+			<_name>codeline</_name>
+		</element>
+		<element localName="rule" type="structural" color="a0b0c0">
+			<_name>rule</_name>
+		</element>
+		<element localName="statement" type="structural" color="a0b0c0">
+			<_name>statement</_name>
+		</element>
+		<element localName="proof" type="structural" color="a0b0c0">
+			<_name>proof</_name>
+		</element>
+		<element localName="para" type="structural" color="a0b0c0">
+			<_name>para</_name>
+		</element>
+		<element localName="list" type="structural" color="a0b0c0">
+			<_name>list</_name>
+		</element>
+		<element localName="item" type="structural" color="a0b0c0">
+			<_name>item</_name>
+		</element>
+		<element localName="emphasis" type="span" color="a0b0c0">
+			<_name>emphasis</_name>
+		</element>
+		<element localName="term" type="span" color="a0b0c0">
+			<_name>term</_name>
+		</element>
+		<element localName="link" type="span" color="a0b0c0">
+			<_name>link</_name>
+		</element>
+		<element localName="cite" type="span" color="a0b0c0">
+			<_name>cite</_name>
+		</element>
+		<element localName="cnxn" type="span" color="a0b0c0">
+			<_name>cnxn</_name>
+		</element>
+	</element-list>
+
+</dispspec>

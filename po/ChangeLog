@@ -1,3 +1,8 @@
+2004-12-29 Michèle Garoche  <michele.garoche@easyconnect.fr>
+ 
+	* POTFILES.in: 
+		Regenerated after *.xds.in addition
+		
 2004-12-28 Michèle Garoche  <michele.garoche@easyconnect.fr>
  
 	* fr.po: Updated French translation.

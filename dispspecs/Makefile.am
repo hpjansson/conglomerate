@@ -3,23 +3,23 @@ NULL =
 
 dispspecdir = $(pkgdatadir)/dispspecs
 dispspec_in_files = \
+	cnxml.xds.in \
 	docbook.xds.in \
 	dispspec.xds.in \
 	forrest-document.xds.in \
 	kernel-traffic-newsletter.xds.in \
+	opml.xds.in \
+	readme.xds.in \
+	relax-ng.xds.in \
+	teixlite.xds.in \
+	website-layout.xds.in \
+	website-webpage.xds.in \
 	xhtml1-strict.xds.in \
+	xsl.xds.in \
 	$(NULL)
 
 dispspec_DATA = \
-	cnxml.xds \
-	opml.xds \
-	readme.xds \
-	relax-ng.xds \
 	release.xds \
-	teixlite.xds \
-	website-layout.xds \
-	website-webpage.xds \
-	xsl.xds \
 	$(dispspec_in_files:.xds.in=.xds)
 
 #INTLTOOL_XML_RULE assumes that the file extension is xml, not xds:

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<dispspec>
+
+	<metadata>
+		<_name>XSL stylesheet</_name>
+		<_description>An XSL stylesheet describes a way of transforming a document of one type into one in another form.   For example, it might describe a way of converting DocBook files into HTML web pages.</_description>
+	</metadata>
+	<document-models/>
+	<element-list nsURI="http://www.w3.org/1999/XSL/Transform">
+		<element localName="stylesheet" type="structural" color="a0b0c0">
+			<_name>Stylesheet</_name>
+		</element>
+
+		<element localName="template" type="plugin" service-id="xsl-template">
+			<_name>Template-matching Rule</_name>
+		</element>
+
+	</element-list>
+
+</dispspec>

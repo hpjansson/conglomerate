@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- Experimental XML-based DispSpec for Norman Walsh's Website customisation of DocBook -->
+<dispspec>
+
+	<metadata>
+		<_name>Website Layout</_name>
+		<_description></_description>
+	</metadata>	
+	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
+	<document-models/>
+	<element-list>			
+		<element localName="layout" type="structural" color="a0b0c0">
+			<_name>Website Layout</_name>
+		</element>		
+		<element localName="config" type="structural" color="a0b0c0">
+			<_name>Configuration Data</_name>
+			<!-- Really need a new element type for this... -->
+		</element>		
+		<element localName="copyright" type="structural" color="a0b0c0">
+			<_name>Copyright</_name>
+		</element>		
+		<element localName="year" type="structural" color="a0b0c0">
+			<_name>Year</_name>
+		</element>		
+		<element localName="holder" type="structural" color="a0b0c0">
+			<_name>Holder</_name>
+		</element>		
+		<element localName="headlink" type="structural" color="a0b0c0">
+			<_name>Header Link</_name>
+		</element>		
+		<element localName="style" type="structural" color="a0b0c0">
+			<_name>Stylesheet</_name>
+		</element>		
+		<element localName="toc" type="structural" color="a0b0c0">
+			<_name>Table of Contents</_name>
+			<header-info xpath="@page"></header-info>
+		</element>		
+		<element localName="tocentry" type="structural" color="a0b0c0">
+			<_name>Content</_name>
+			<header-info xpath="@page"></header-info>
+		</element>		
+		<element localName="notoc" type="structural" color="a0b0c0">
+			<_name>Additional Content</_name>
+			<header-info xpath="@page"></header-info>
+		</element>	
+	</element-list>
+
+</dispspec>

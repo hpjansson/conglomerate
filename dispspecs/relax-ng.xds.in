@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<dispspec>
+	<metadata>
+		<_name>RELAX NG</_name>
+		<_description>RELAX NG is a schema language i.e. a language for describing the structure of an XML document.</_description>
+	</metadata>
+	<serialisation>
+		<format extension="rng"/>
+	</serialisation>
+	<document-models/>
+	<element-list nsURI="http://relaxng.org/ns/structure/1.0">
+		<element localName="grammar" type="structural">
+			<_name>RELAX NG Grammar</_name>
+		</element>
+		<element localName="define" type="structural">
+			<_name>Define</_name>			
+			<header-info xpath="@name"/>
+		</element>
+		<element localName="element" type="structural">
+			<_name>XML Element</_name>			
+			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
+		</element>
+		<element localName="attribute" type="structural">
+			<_name>XML Attribute</_name>			
+			<header-info xpath="concat(&quot;@&quot;, @name)"/>
+		</element>
+		<element localName="zeroOrMore" type="structural">
+			<_name>ZeroOrMore</_name>			
+		</element>
+		<element localName="choice" type="structural">
+			<_name>Choice</_name>			
+		</element>
+		<element localName="text" type="structural">
+			<_name>Text</_name>			
+		</element>
+		<element localName="ref" type="structural">
+			<_name>Reference</_name>			
+			<header-info xpath="@name"/>
+		</element>
+		<element localName="oneOrMore" type="structural">
+			<_name>OneOrMore</_name>			
+		</element>
+		<element localName="group" type="structural">
+			<_name>Group</_name>			
+		</element>
+		<element localName="optional" type="structural">
+			<_name>Optional</_name>			
+		</element>
+		<element localName="value" type="structural">
+			<_name>Value</_name>			
+		</element>
+		<element localName="start" type="structural">
+			<_name>Start</_name>			
+		</element>
+		<element localName="empty" type="structural">
+			<_name>Empty</_name>			
+		</element>
+	</element-list>
+</dispspec>
