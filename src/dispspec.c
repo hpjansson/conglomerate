@@ -78,18 +78,45 @@ CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 	return ds;
 }
 
+static CongDispspec* parse_xmldoc(xmlDocPtr doc);
+
 CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 {
 	CongDispspec* ds;
 
 	xmlDocPtr doc = xmlParseFile(name);
-	xmlDebugDumpDocument(stdout,doc);
 
 	if (NULL==doc) {
 		return NULL;
 	}
 
-	ds = g_new0(CongDispspec,1);
+	ds = parse_xmldoc(doc);
+
+	xmlFreeDoc(doc);
+
+	return ds;	
+}
+
+CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
+{
+	CongDispspec* ds;
+
+	xmlDocPtr doc = xmlParseMemory(buffer, size);
+
+	if (NULL==doc) {
+		return NULL;
+	}
+
+	ds = parse_xmldoc(doc);
+
+	xmlFreeDoc(doc);
+
+	return ds;	
+}
+
+static CongDispspec* parse_xmldoc(xmlDocPtr doc)
+{
+	CongDispspec* ds = g_new0(CongDispspec,1);
 
 	/* Convert the XML into our internal representation: */
 	if (doc->children)
@@ -101,7 +128,7 @@ CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 
 				xmlNodePtr cur;
 				
-				g_message("got dispspec\n");
+				/* g_message("got dispspec\n"); */
 
 				for (cur = xml_dispspec->children; cur; cur=cur->next) {
 				/* Locate the <element-list> tag: */
@@ -109,7 +136,7 @@ CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 						
 
 						xmlNodePtr xml_element;
-						g_message("got element-list\n");
+						/* g_message("got element-list\n"); */
 
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
 							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
@@ -122,8 +149,6 @@ CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 			}
 		}
 	}	
-
-	xmlFreeDoc(doc);
 
 	return ds;	
 }
@@ -690,7 +715,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 {
 	CongDispspecElement* element;
 
-	g_message("got xml element\n");
+	/* g_message("got xml element\n"); */
 
 	element = g_new0(CongDispspecElement,1);
 
