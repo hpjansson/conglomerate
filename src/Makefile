@@ -7,7 +7,7 @@ OBJ = icon_assemble.o icon_connect.o icon_new.o icon_openfile.o icon_submit.o \
       position.o cursor.o select.o popup.o xmledit.o xmlview.o \
       tree.o tchoice.o xmldata.o file.o open.o save.o cong-document.o \
       cong-location.o xmlload.o \
-	cong-error-dialog.o cong-error-file-open.o cong-error-tests.o
+	cong-error-dialog.o cong-error-file-open.o cong-error-file-save.o cong-error-tests.o
 
 LIBS = -lflux-old
 
