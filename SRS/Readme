@@ -1,0 +1,36 @@
+
+>I'm not familiar with the SRS acronym.
+
+No worries Dave, I will make it work. FYI SRS = Software Requirement
+Specification.
+
+A useful doc, the SRS specifies requirements for the software in general
+(usually determined by a customer). SRS assumes you have a SAD (Software
+Architecture Document) and SDD (Software Design Document). Specifications in
+the SRS are normally derived from the SAD and SDD.
+
+A SRS may detail what features and functions will be included in the
+application for this version. This helps in the following ways:
+1. Dev knows how much work has to be done to comply with customer
+requirements for this version.
+2. Dev Managers know how much work is left to do at any stage in the dev.
+3. Test Managers know what features will be included in releases.
+4. Documentation knows what features and functions need to be tested and so
+can prepare relevant procedures in the STP (Software Test Procedure),
+incrementing the document to sync with the new version.
+5. Documentation also knows that it can include these features and functions
+in the User Manuals etc.
+6. In the future, the SRS also enables dev to differential between bugs and
+enhancements. Without the SRS you cannot have any bugs. This is because a
+bug is essentially a feature or function that does not perform according to
+the requirement specification. So if there is no SRS, you will not have
+bugs.
+
+From here you can see that the SRS will build a platform for future dev. It
+will also enable managers to categorize future work into bugs fix, new
+features (must have, nice to have), suggested enhancements.
+
+Later,
+
+Sean
+
