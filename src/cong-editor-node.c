@@ -58,6 +58,9 @@ struct CongEditorNodeDetails
 
 	CongNodePtr node;
 	CongEditorNode *traversal_parent;
+
+	CongEditorChildPolicy *child_policy;
+	CongEditorChildPolicy *parents_child_policy;
 };
 
 static enum CongFlowType
@@ -422,6 +425,40 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 	} else {
 		return NULL;
 	}
+}
+
+CongEditorChildPolicy*
+cong_editor_node_get_child_policy (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	return PRIVATE(editor_node)->child_policy;
+}
+
+void
+cong_editor_node_set_child_policy (CongEditorNode *editor_node,
+				   CongEditorChildPolicy *child_policy)
+{
+	g_return_if_fail (IS_CONG_EDITOR_NODE(editor_node));
+
+	PRIVATE(editor_node)->child_policy = child_policy;
+}
+
+CongEditorChildPolicy*
+cong_editor_node_get_parents_child_policy (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	return PRIVATE(editor_node)->parents_child_policy;
+}
+
+void
+cong_editor_node_set_parents_child_policy (CongEditorNode *editor_node,
+					   CongEditorChildPolicy *child_policy)
+{
+	g_return_if_fail (IS_CONG_EDITOR_NODE(editor_node));
+
+	PRIVATE(editor_node)->parents_child_policy = child_policy;
 }
 
 static enum CongFlowType

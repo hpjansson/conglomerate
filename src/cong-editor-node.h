@@ -153,6 +153,25 @@ cong_editor_node_get_prev (CongEditorNode *editor_node);
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node);
 
+/* Get the child policy; should only be needed by internals of widget implementation: */
+CongEditorChildPolicy*
+cong_editor_node_get_child_policy (CongEditorNode *editor_node);
+
+/* Set the child policy; should only be needed by internals of widget implementation: */
+void
+cong_editor_node_set_child_policy (CongEditorNode *editor_node,
+				   CongEditorChildPolicy *child_policy);
+
+/* Get the parent's child policy; should only be needed by internals of widget implementation: */
+CongEditorChildPolicy*
+cong_editor_node_get_parents_child_policy (CongEditorNode *editor_node);
+
+/* Set the parent's child policy; should only be needed by internals of widget implementation: */
+void
+cong_editor_node_set_parents_child_policy (CongEditorNode *editor_node,
+					   CongEditorChildPolicy *child_policy);
+
+
 G_END_DECLS
 
 #endif

@@ -102,8 +102,10 @@ struct CongEditorWidget3Details
 
 	GHashTable *hash_of_node_to_editor_mapping;
 
+#if 0
 	GHashTable *hash_of_editor_node_to_child_policy;
 	GHashTable *hash_of_editor_node_to_parents_child_policy;
+#endif
 
 	CongEditorArea *root_area;
 	CongEditorAreaFlowHolder *root_flow_holder;
@@ -360,10 +362,12 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 											NULL,
 											value_destroy_func);
 
+#if 0
 	PRIVATE(editor_widget)->hash_of_editor_node_to_child_policy = g_hash_table_new (NULL,
 											NULL);
 	PRIVATE(editor_widget)->hash_of_editor_node_to_parents_child_policy = g_hash_table_new (NULL,
 												NULL);
+#endif
 
 	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
@@ -1440,10 +1444,15 @@ create_areas(CongEditorWidget3 *widget,
 			parents_child_policy = PRIVATE(widget)->root_child_policy;
 		}
 
+		cong_editor_node_set_parents_child_policy (editor_node,
+							   parents_child_policy);
+
+#if 0
 		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
 				     editor_node,
 				     parents_child_policy);
-		
+#endif		
+
 		g_assert(parents_child_policy);
 	}
 
@@ -1451,9 +1460,14 @@ create_areas(CongEditorWidget3 *widget,
 	this_child_policy = cong_editor_child_policy_insert_areas_for_node (parents_child_policy,
 									    editor_node);
 
+	cong_editor_node_set_child_policy (editor_node,
+					   this_child_policy);
+
+#if 0
 	g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
 			     editor_node,
 			     this_child_policy);
+#endif
 
 #else
 	this_area = cong_editor_area_flow_holder_insert_areas_for_node (parent_flow_holder,
@@ -1511,10 +1525,17 @@ destroy_areas(CongEditorWidget3 *widget,
 	cong_editor_child_policy_remove_areas_for_node (parents_child_policy,
 							editor_node);
 
+	cong_editor_node_set_parents_child_policy (editor_node,
+						   NULL);
+	cong_editor_node_set_child_policy (editor_node,
+					   NULL);
+
+#if 0
 	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
 			     editor_node);
 	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
 			     editor_node);
+#endif
 }
 
 #if 1
@@ -1525,8 +1546,12 @@ cong_editor_widget3_get_child_policy_for_editor_node (CongEditorWidget3 *widget,
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
+#if 1
+	return cong_editor_node_get_child_policy (editor_node);						  
+#else
 	return CONG_EDITOR_CHILD_POLICY(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
 							     editor_node));
+#endif
 	
 }
 CongEditorChildPolicy*
@@ -1536,8 +1561,12 @@ cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
+#if 1
+	return cong_editor_node_get_parents_child_policy (editor_node);
+#else
 	return CONG_EDITOR_CHILD_POLICY(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
 							     editor_node));
+#endif
 	
 }
 #else

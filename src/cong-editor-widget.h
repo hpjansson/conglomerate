@@ -68,6 +68,9 @@ typedef struct CongEditorNodeElementClass CongEditorNodeElementClass;
 typedef struct CongEditorLineFragments CongEditorLineFragments;
 typedef struct CongEditorLineFragmentsClass CongEditorLineFragmentsClass;
 
+typedef struct CongEditorChildPolicy CongEditorChildPolicy;
+typedef struct CongEditorChildPolicyClass CongEditorChildPolicyClass;
+
 struct CongEditorWidget3
 {
 	GtkDrawingArea drawing_area;

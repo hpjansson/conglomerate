@@ -1,3 +1,9 @@
+2003-08-09  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-child-policy.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c
+
+	CongEditorNodes now store their child policies and parent child policies, rather than it being stored in hash tables in the CongEditorWidget3
+
 2003-08-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget3.c, plugin-paragraph-area-paragraph.c

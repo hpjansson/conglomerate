@@ -31,8 +31,6 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_CHILD_POLICY_LIFETIMES 0
 
-typedef struct CongEditorChildPolicy CongEditorChildPolicy;
-typedef struct CongEditorChildPolicyClass CongEditorChildPolicyClass;
 typedef struct CongEditorChildPolicyDetails CongEditorChildPolicyDetails;
 
 #define CONG_EDITOR_CHILD_POLICY_TYPE	      (cong_editor_child_policy_get_type ())
