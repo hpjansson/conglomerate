@@ -67,6 +67,24 @@ cong_util_is_docbook (CongDocument *doc)
 	return FALSE;
 }
 
+gboolean 
+cong_util_is_pure_whitespace (const gchar *utf8_text)
+{
+	gunichar ch;
+
+	g_return_val_if_fail(utf8_text, FALSE);
+
+	while ( (ch = g_utf8_get_char(utf8_text)) ) {
+		if (!g_unichar_isspace(ch)) {
+			return FALSE;
+		}
+
+		utf8_text = g_utf8_next_char(utf8_text);
+	}
+	
+	return TRUE;
+}
+
 gchar* 
 cong_util_cleanup_text (const xmlChar *src_text) 
 {
@@ -398,6 +416,7 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 
 	if (xml_dtd) {
 		if (xml_doc->children) {
+			/* FIXME: what if there already is a DTD? */
 			xmlAddPrevSibling((xmlNodePtr)xml_doc->children,
 					  (xmlNodePtr)xml_dtd);
 		} else {

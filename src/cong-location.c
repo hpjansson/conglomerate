@@ -6,6 +6,7 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-error-dialog.h"
+#include "cong-util.h"
 
 gboolean
 cong_location_is_valid(const CongLocation *loc)
@@ -210,8 +211,138 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* in
 	CONG_VALIDATE_UTF8(loc->node->content+loc->byte_offset);
 }
 
+static gboolean
+has_same_namespace (CongNodePtr n1,
+		    CongNodePtr n2)
+{
+	g_return_val_if_fail (n1, FALSE);
+	g_return_val_if_fail (n2, FALSE);
+
+	/* FIXME: */
+	return TRUE;
+}
+
+/*
+  Are both ELEMENT nodes of the same tag type?
+*/
+gboolean
+cong_node_is_same_tag (CongNodePtr n1, 
+		       CongNodePtr n2)
+{
+	g_return_val_if_fail (n1, FALSE);
+	g_return_val_if_fail (n2, FALSE);
+
+	if (CONG_NODE_TYPE_ELEMENT == cong_node_type(n1)) {
+		if (CONG_NODE_TYPE_ELEMENT == cong_node_type(n2)) {
+			if (has_same_namespace(n1,n2)) {
+				if (0==strcmp(n1->name, n2->name)) {
+					return TRUE;
+				}
+			}
+		}
+	}
+
+	return FALSE;
+}
+
+gboolean
+cong_node_is_pure_whitespace_text_node (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+
+	if (CONG_NODE_TYPE_TEXT == cong_node_type(node)) {
+		if (cong_util_is_pure_whitespace (node->content)) {
+			return TRUE;
+		}		
+	}
+
+	return FALSE;
+}
+
+static void
+merge_tags (CongDocument *doc,
+	    CongNodePtr predator,
+	    CongNodePtr victim)
+{
+	CongNodePtr iter, next;
+
+	g_return_if_fail (doc);
+	g_return_if_fail (predator);
+	g_return_if_fail (victim);
+
+	g_message("merging <%s> tags", predator->name);
+
+	cong_document_begin_edit (doc);
+	
+	/* Move all children of victim into predator: */
+	for (iter=victim->children; iter; iter = next) {
+		next = iter->next;
+		
+		cong_document_node_set_parent (doc,
+					       iter,
+					       predator);
+	}
+	
+	/* Merge any text nodes as necessary: */
+	cong_document_merge_adjacent_text_children_of_node (doc, 
+							    predator);
+
+	/* Victim is now empty; remove it and delete it: */
+	cong_document_node_recursive_delete (doc, 
+					     victim);
+
+	cong_document_end_edit (doc);
+}
+
+static void
+handle_tag_merging (CongDocument *doc,
+		    CongNodePtr node)
+{			
+	g_assert (CONG_NODE_TYPE_ELEMENT == cong_node_type(node));
+
+	if (node->next) {
+				
+		/* Handle the case of a single intermediate text node of pure whitespace (added by formatting routine) separating two identical tags: */
+		if (CONG_NODE_TYPE_TEXT == cong_node_type (node->next)) {
+			if (node->next->next) {
+				if (cong_node_is_same_tag (node, 
+							   node->next->next)) {
+					if (cong_node_is_pure_whitespace_text_node (node->next)) {
+						cong_document_begin_edit (doc);
+
+						/* Do the merge: */
+						merge_tags (doc,
+							    node,
+							    node->next->next);
+
+						g_message ("deleting intermediate whitespace");
+
+						/* Delete the intermediate whitespace (NB this pointer should still be valid): */
+						cong_document_node_recursive_delete (doc, 
+										     node->next);
+						
+						cong_document_end_edit (doc);
+					}
+				}				
+			}
+		} else {
+			/* Handle the case of two adjacent, identical tags: */
+			if (cong_node_is_same_tag (node, 
+						   node->next)) {
+				/* Do the merge: */
+				merge_tags (doc,
+					    node,
+					    node->next);
+			}			
+		}
+	}
+
+}
+		     
+
 void
-cong_location_del_next_char(CongDocument *doc, const CongLocation *loc)
+cong_location_del_next_char (CongDocument *doc, 
+			     const CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
 
@@ -242,6 +373,25 @@ cong_location_del_next_char(CongDocument *doc, const CongLocation *loc)
 		cong_document_end_edit (doc);
 
 		xmlFree(new_text);
+	} else {
+		/* 
+		   We're at the end of a text node, trying to delete...
+		*/
+		g_assert (CONG_NODE_TYPE_TEXT==cong_node_type(loc->node));
+		
+		if (loc->node->next) {
+			/* A tag of some kind is about to begin: */
+			/* FIXME: what to do? */
+		} else {
+			/* 
+			   We're at the end of tag, trying to delete...
+			   Interpret this as an attempt to merge the tag containing this text with its next sibling.
+			   See http://bugzilla.gnome.org/show_bug.cgi?id=121970
+			*/
+
+			handle_tag_merging (doc,
+					    loc->node->parent);
+		}
 	}
 }
 

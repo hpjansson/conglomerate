@@ -70,23 +70,6 @@ generate_indentation(const CongSourceCleanupOptions *options, guint indent_level
 
 }
 
-gboolean cong_util_is_pure_whitespace (const gchar *utf8_text)
-{
-	gunichar ch;
-
-	g_return_val_if_fail(utf8_text, FALSE);
-
-	while ( (ch = g_utf8_get_char(utf8_text)) ) {
-		if (!g_unichar_isspace(ch)) {
-			return FALSE;
-		}
-
-		utf8_text = g_utf8_next_char(utf8_text);
-	}
-	
-	return TRUE;
-}
-
 gboolean 
 cong_util_is_recursively_inline (CongDocument *doc,
 				 CongNodePtr node)

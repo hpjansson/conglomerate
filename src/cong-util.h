@@ -32,6 +32,9 @@ G_BEGIN_DECLS
 gboolean 
 cong_util_is_docbook (CongDocument *doc);
 
+gboolean 
+cong_util_is_pure_whitespace (const gchar *utf8_text);
+
 /**
    Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
 */
