@@ -1,5 +1,13 @@
 2004-02-22  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-file-new.c
+
+	Ensured the assistant is fully constructed before it is shown to avoid ugly visual resizing
+
+	* plugin-empty.c
+
+	Updated the boilerplate plugin code
+
 	* cong-edit-preferences.c, plugin-abiword.c, plugin-html.c, plugin-relaxng.c, plugin-tei.c, Makefile.am, cong-app.c, cong-fake-plugin-hooks.h, cong-menus.c, cong-ui-hooks.h
 
 	Added a Preferences dialog, along with stubbed plugins for AbiWord, HTML, RELAX NG and TEI support

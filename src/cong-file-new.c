@@ -468,10 +468,33 @@ void new_document(GtkWindow *parent_window)
 
 	/* FIXME:  what if no document factories found? */
 
-	assistant->druid = GNOME_DRUID(gnome_druid_new_with_window(_("Creating a new file"),
-								   parent_window,
-								   TRUE,
-								   &assistant->window));
+	/* We don't use gnome_druid_new_with_window since this shows the window, and we've got lots of construction work to do before that should happen: */
+	assistant->druid = GNOME_DRUID (gnome_druid_new ());
+	gtk_widget_show (GTK_WIDGET (assistant->druid));
+
+	assistant->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+	gtk_window_set_title (GTK_WINDOW (assistant->window), 
+			      _("Creating a new file"));
+
+	if (parent_window != NULL) {
+		gtk_window_set_transient_for (GTK_WINDOW (assistant->window),
+					      parent_window);
+	}	
+	
+	gtk_container_add (GTK_CONTAINER (assistant->window), 
+			   GTK_WIDGET (assistant->druid));
+	
+	g_signal_connect_object (assistant->druid, "cancel",
+				 G_CALLBACK (gtk_widget_destroy),
+				 assistant->window,
+				 G_CONNECT_SWAPPED);
+	
+	/* When the druid gets destroyed so does the window */
+	g_signal_connect_object (assistant->druid, "destroy",
+				 G_CALLBACK (gtk_widget_destroy),
+				 assistant->window,
+				 G_CONNECT_SWAPPED);
 
 	assistant->first_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_START,
 								   TRUE,
