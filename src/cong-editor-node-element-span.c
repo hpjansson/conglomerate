@@ -145,9 +145,9 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 				
 				if (child_line_fragments) {
 					GList* list_of_areas;
-					list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
-					
 					gboolean is_first = TRUE;
+					
+					list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
 					
 					while (list_of_areas) {
 						

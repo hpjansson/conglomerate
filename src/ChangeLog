@@ -1,4 +1,12 @@
+2004-02-18  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-element-span.c
+
+	Patch by Pav Lucistnik to fix build on gcc-2.95
+
 2004-02-17  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	-- Release of 0.7.12 --
 
 	* cong-editor-node-element-span.c
 
