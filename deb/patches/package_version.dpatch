@@ -16,7 +16,7 @@ FTDP=src/cong-menus.c
 STR="PACKAGE_VERSION"
 
 # modified
-MOD="\"\n${VERSION}\""
+MOD="\"\\\n${VERSION}\""
 
 if [ $# -ne 1 ]; then
     echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
