@@ -2,6 +2,10 @@
 
 	* configure.in
 
+	Post-release version bump to 0.7.13
+
+	* configure.in
+
 	Put version back to 0.7.12 ready for release
 
 2004-02-11  Mitsuru Oka  <oka326@parkcity.ne.jp>
