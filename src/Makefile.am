@@ -73,6 +73,8 @@ conglomerate_SOURCES =      \
   cong-plugin.h             \
   cong-primary-window.h     \
   cong-progress-checklist.h \
+  cong-range.h              \
+  cong-selection.h          \
   cong-text-cache.h         \
   cong-tree-view.h          \
   cong-util.h               \
@@ -149,6 +151,7 @@ conglomerate_SOURCES =      \
   cong-plugin.c             \
   cong-primary-window.c     \
   cong-progress-checklist.c \
+  cong-range.c              \
   cong-section-head-editor.c \
   cong-source-view.c        \
   cong-span-text-editor.c   \
