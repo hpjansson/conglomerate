@@ -1,4 +1,4 @@
-templatedir 	 = $(datadir)/conglomerate/templates
+templatedir 	 = $(pkgdatadir)/templates
 template_DATA 	 = \
 	html.xml \
 	dispspec.xml 

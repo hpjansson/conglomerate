@@ -1,0 +1,7 @@
+2003-10-25 Geert Stappers  <stappers@stappers.nl>
+
+	* ChangeLog
+	Created
+
+	* Makefile.am
+	Use pkgdatadir instead of datadir suffixed by conglomerate.
