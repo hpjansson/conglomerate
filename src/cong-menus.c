@@ -54,6 +54,7 @@
 
 #include "cong-dispspec-registry.h"
 #include <glade/glade.h>
+#include "cong-primary-window.h"
 
 extern char *ilogo_xpm[];
 

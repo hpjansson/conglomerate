@@ -9,6 +9,7 @@
 #include "cong-error-dialog.h"
 #include "cong-plugin.h"
 #include "cong-app.h"
+#include "cong-primary-window.h"
 #include <unistd.h> /* for chdir */
 
 /* Data and callback for handling the forced loading of a file, autogenerating a dispspec: */

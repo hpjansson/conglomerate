@@ -30,6 +30,7 @@
 #include "cong-document.h"
 #include "cong-graph.h"
 #include "cong-dialog.h"
+#include "cong-primary-window.h"
 
 #include "cong-fake-plugin-hooks.h"
 

@@ -29,6 +29,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-dialog.h"
+#include "cong-primary-window.h"
 
 #include <libxml/valid.h>
 

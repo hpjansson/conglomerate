@@ -29,7 +29,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-dialog.h"
-
+#include "cong-primary-window.h"
 #include "cong-fake-plugin-hooks.h"
 
 static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
