@@ -238,5 +238,18 @@ if test x$enable_gconf = xno; then
         echo "*** hacking source code, at least for now."
         echo "*** Also, some prefs may have broken defaults."
 fi
-                                                                                
+
+dnl ==========================================================================
+echo "
+conglomerate-$VERSION:
+ 
+                          prefix: ${prefix}
+            source code location: ${srcdir}
+                        compiler: ${CC}
+ 
+                           GConf: ${enable_gconf}
+                  gtk_doc enable: ${enable_gtk_doc}
+            gtksourveview enable: ${enable_gtksourceview}
+"
+
 dnl -- end of configure.in
