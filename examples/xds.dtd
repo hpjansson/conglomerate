@@ -107,17 +107,17 @@
 
 <!ELEMENT name ( #PCDATA ) >
 <!ATTLIST name 
-   xml:lang  NMTOKEN #REQUIRED
+   xml:lang  CDATA #IMPLIED
 >
 
 <!ELEMENT description ( #PCDATA ) >
 <!ATTLIST description 
-   xml:lang  NMTOKEN #REQUIRED
+   xml:lang  CDATA #IMPLIED
 >
 
 <!ELEMENT short-desc ( #PCDATA ) >
 <!ATTLIST short-desc 
-   xml:lang  NMTOKEN  #REQUIRED
+   xml:lang  CDATA  #IMPLIED
 >
 
 <!ELEMENT property-dialog EMPTY >
