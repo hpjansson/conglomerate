@@ -1,5 +1,5 @@
 # Serbian translation of conglomerate
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003, 2004.
 #
 # This file is distributed under the same license as the conglomerate package.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-18 14:57+0100\n"
-"PO-Revision-Date: 2004-01-18 14:57+0100\n"
+"POT-Creation-Date: 2004-01-23 11:59+0100\n"
+"PO-Revision-Date: 2004-01-23 12:01+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:610 src/cong-primary-window.c:766
-#: src/cong-primary-window.c:768 src/cong-primary-window.c:774
+#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
+#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
 msgid "Conglomerate XML Editor"
 msgstr "Uređivač XML-a Konglomerat"
 
@@ -39,8 +39,8 @@ msgstr "Uvoznik"
 msgid "Options"
 msgstr "Opcije"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:744
-#: src/cong-node-properties-dialog.c:828
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1043
+#: src/cong-node-properties-dialog.c:1127
 msgid "Advanced"
 msgstr "Napredno"
 
@@ -49,7 +49,7 @@ msgid "Basic"
 msgstr "Osnovno"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-file-export.c:307
-#: src/cong-file-new.c:234 src/cong-file-print.c:249 src/cong-menus.c:458
+#: src/cong-file-new.c:290 src/cong-file-print.c:249 src/cong-menus.c:458
 #: src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Opis"
@@ -88,8 +88,8 @@ msgstr "Ime"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3
-#: src/cong-node-properties-dialog.c:790
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1089
 msgid "Properties"
 msgstr "Osobine"
 
@@ -317,6 +317,18 @@ msgstr "Adresa"
 msgid "_Test this Link"
 msgstr "_Isprobajte ovu vezu"
 
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "Parametri stvaranja"
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Dubina"
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:729
+msgid "Document Type"
+msgstr "Tip dokumenta"
+
 #: glade/string_selection_dialog.glade.h:2
 msgid "label"
 msgstr "oznaka"
@@ -492,10 +504,6 @@ msgstr "Primedba „%s“"
 #: src/cong-document.c:726
 msgid "Document"
 msgstr "Dokument"
-
-#: src/cong-document.c:729
-msgid "Document Type"
-msgstr "Tip dokumenta"
 
 #: src/cong-document.c:732
 msgid "Document Fragment"
@@ -1109,21 +1117,21 @@ msgstr "Nijedan od dodataka Konglomerata ne može da učita datoteke tipa „%s�
 msgid "FIXME"
 msgstr "POPRAVI"
 
-#: src/cong-file-new.c:126
+#: src/cong-file-new.c:137
 #, c-format
 msgid "Creating a new file (%s)"
 msgstr "Pravljenje nove datoteke (%s)"
 
-#: src/cong-file-new.c:214
+#: src/cong-file-new.c:270
 msgid "File Type"
 msgstr "Tip datoteke"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:401 src/cong-file-new.c:408 src/cong-file-new.c:433
+#: src/cong-file-new.c:470 src/cong-file-new.c:477 src/cong-file-new.c:502
 msgid "Creating a new file"
 msgstr "Pravljenje nove datoteke"
 
-#: src/cong-file-new.c:409
+#: src/cong-file-new.c:478
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1141,16 +1149,16 @@ msgstr ""
 "Nadamo se da će Konglomerat moći u budućim izdanjima da obrazuje „šablonske "
 "dokumente“ koje ćemo dodati ovom sistemu."
 
-#: src/cong-file-new.c:422
+#: src/cong-file-new.c:491
 msgid "What type of file would you like to create?"
 msgstr "Dokument kojeg tipa želite da napravite?"
 
-#: src/cong-file-new.c:424
+#: src/cong-file-new.c:493
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Istaknite jednu od stavki iz spiska i izaberite „Napred“ da nastavite"
 
-#: src/cong-file-new.c:434
+#: src/cong-file-new.c:503
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1564,12 +1572,44 @@ msgstr "Čisti atributi"
 msgid "Value"
 msgstr "Vrednost"
 
-#: src/cong-node-properties-dialog.c:610
+#: src/cong-node-properties-dialog.c:601
 #, c-format
-msgid "Attributes for <tt>%s</tt> tags"
-msgstr "Atributi za oznake <tt>%s</tt>"
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "Atributi za elemente <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:736 src/cong-node-properties-dialog.c:823
+#: src/cong-node-properties-dialog.c:715
+msgid "Text"
+msgstr "Tekst"
+
+#: src/cong-node-properties-dialog.c:767
+msgid "Choice"
+msgstr "Izbor"
+
+#: src/cong-node-properties-dialog.c:802
+msgid "Optional"
+msgstr "Neobavezno"
+
+#: src/cong-node-properties-dialog.c:818
+msgid "Zero or more"
+msgstr "Nula ili više"
+
+#: src/cong-node-properties-dialog.c:834
+msgid "One or more"
+msgstr "Jedan ili više"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:890
+msgid "Valid Content"
+msgstr "Ispravan sadržaj"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:915
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "Model sadržaja za oznake <tt>%s</tt>"
+
+#: src/cong-node-properties-dialog.c:1035
+#: src/cong-node-properties-dialog.c:1122
 msgid "DTD"
 msgstr "DTD"
 
@@ -1625,57 +1665,57 @@ msgstr "Osobine za <%s>"
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Obezbeđuje prozorče sa osobinama za element <%s>"
 
-#: src/cong-primary-window.c:314 src/cong-primary-window.c:315
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Open document"
 msgstr "Otvori dokument"
 
-#: src/cong-primary-window.c:322 src/cong-primary-window.c:323
+#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
 msgid "New document"
 msgstr "Novi dokument"
 
-#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
+#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
 msgid "Save document"
 msgstr "Sačuvaj dokument"
 
-#: src/cong-primary-window.c:349 src/cong-primary-window.c:350
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
 msgid "Undo"
 msgstr "Opozovi"
 
-#: src/cong-primary-window.c:356 src/cong-primary-window.c:357
+#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
 msgid "Redo"
 msgstr "Ponovi"
 
-#: src/cong-primary-window.c:375 src/cong-primary-window.c:376 src/tree.c:178
+#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Iseci"
 
-#: src/cong-primary-window.c:382 src/cong-primary-window.c:383
+#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
 msgid "Copy"
 msgstr "Umnoži"
 
-#: src/cong-primary-window.c:389 src/cong-primary-window.c:390
+#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Ubaci"
 
-#: src/cong-primary-window.c:521
+#: src/cong-primary-window.c:520
 msgid "Overview"
 msgstr "Kratak pregled"
 
-#: src/cong-primary-window.c:531
+#: src/cong-primary-window.c:530
 msgid "Bookmarks"
 msgstr "Obeleživači"
 
-#: src/cong-primary-window.c:540
+#: src/cong-primary-window.c:539
 msgid "Raw XML"
 msgstr "Čist XML"
 
-#: src/cong-primary-window.c:667 src/cong-primary-window.c:686
+#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Dobrodošli u mnogo zakasneli uređivač Konglomerat."
 
-#: src/cong-primary-window.c:766
+#: src/cong-primary-window.c:770
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (izmenjen) — %s"
@@ -1970,6 +2010,18 @@ msgstr "Pasus"
 msgid "An editor node for visualising a paragraph"
 msgstr "Čvor uređivača za oslikavanje pasusa"
 
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr "Koje vrste želite da napravite slučajan XML dokument?"
+
+#: src/plugin-random.c:603
+msgid "Random Document"
+msgstr "Slučajan dokument"
+
+#: src/plugin-random.c:604
+msgid "Create an XML document containing random content."
+msgstr "Napravite XML dokument koji sa slučajnim sadržajem."
+
 #: src/plugin-save-dispspec.c:131
 msgid "Dump Display Spec"
 msgstr "Ispiši naznake prikaza"
@@ -2034,11 +2086,11 @@ msgstr ""
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr "Unikod znaci 0x%04X-0x%04X"
 
-#: src/plugin-tests.c:331
+#: src/plugin-tests.c:333
 msgid "Unicode Character Reference"
 msgstr "Popis Unikod znakova"
 
-#: src/plugin-tests.c:332
+#: src/plugin-tests.c:334
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
