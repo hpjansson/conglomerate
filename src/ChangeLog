@@ -1,5 +1,9 @@
 2003-12-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-sgml.c
+
+	Warning fixes, and a fix for a stupid parameter mismatch bug that would have caused 100% repeatable crashes if anyone ran this plugin.  Looks like no-one does, I guess...
+
 	* cong-error-dialog.c, cong-modification-set-dtd-ptr.c, global.h, xmledit.c
 
 	Fix more warnings

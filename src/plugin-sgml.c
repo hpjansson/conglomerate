@@ -27,6 +27,7 @@
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
+#include "cong-parser-error.h"
 
 #include "cong-fake-plugin-hooks.h"
 
@@ -87,7 +88,7 @@ void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, con
 	g_message("sgml_importer_action_callback");
 
 	argv[0] = "sgml2xml";
-	argv[1] = uri; /* FIXME: this is GnomeVFS uri path string, not a POSIX path */
+	argv[1] = (gchar*)uri; /* FIXME: this is GnomeVFS uri path string, not a POSIX path */
 	argv[2] = NULL;
 
 
@@ -129,7 +130,7 @@ void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, con
 											       what_failed,
 											       exit_status,
 											       standard_error,
-											       argv);
+											       (const gchar**)argv);
 		g_free(what_failed);
 
 		cong_error_dialog_run(dialog);
@@ -145,9 +146,10 @@ void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, con
 
 	/* Attempt to parse the stdout into an xmlDocPtr: */
 	{
-		GnomeVFSURI *file_uri = gnome_vfs_uri_new(uri);
-		xml_doc = cong_ui_parse_buffer(standard_output, strlen(standard_output), file_uri, toplevel_window);
-		gnome_vfs_uri_unref(file_uri);
+		xml_doc = cong_ui_parse_buffer (standard_output, 
+						strlen(standard_output), 
+						uri, 
+						toplevel_window);
 	}
 
 	g_free(standard_output);
