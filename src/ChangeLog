@@ -1,5 +1,9 @@
 2003-12-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document-traversal.c
+
+	Added signal emissions as traversal nodes are added/removed
+
 	* cong-document.c, cong-document.h
 
 	Added a CongDocumentTraversal to the CongDocument

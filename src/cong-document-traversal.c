@@ -8,6 +8,16 @@
 #include "cong-document-traversal.h"
 #include "cong-traversal-node.h"
 
+enum {
+	TRAVERSAL_NODE_ADDED,
+	TRAVERSAL_NODE_REMOVED,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
+
 #if 1
 typedef struct NodeMapping NodeMapping;
 
@@ -140,6 +150,25 @@ cong_document_traversal_class_init (CongDocumentTraversalClass *klass)
 {
 	G_OBJECT_CLASS (klass)->finalize = finalize;
 	G_OBJECT_CLASS (klass)->dispose = dispose;
+
+	/* Set up signals: */
+	signals[TRAVERSAL_NODE_ADDED] = g_signal_new ("traversal_node_added",
+						      CONG_DOCUMENT_TRAVERSAL_TYPE,
+						      G_SIGNAL_RUN_LAST,
+						      0,
+						      NULL, NULL,
+						      g_cclosure_marshal_VOID__POINTER,
+						      G_TYPE_NONE, 
+						      1, G_TYPE_POINTER);
+	
+	signals[TRAVERSAL_NODE_REMOVED] = g_signal_new ("traversal_node_removed",
+							CONG_DOCUMENT_TRAVERSAL_TYPE,
+							G_SIGNAL_RUN_LAST,
+							0,
+							NULL, NULL,
+							g_cclosure_marshal_VOID__POINTER,
+							G_TYPE_NONE, 
+							1, G_TYPE_POINTER);
 }
 
 static void
@@ -426,8 +455,6 @@ recursive_create_traversal_nodes (CongDocumentTraversal *doc_traversal,
 
 	g_assert(should_have_traversal_node (xml_node));
 
-	/* FIXME: emit signal? */
-
 	/* Add this node: */
 	{
 		traversal_node = cong_traversal_node_new (doc_traversal,
@@ -442,7 +469,14 @@ recursive_create_traversal_nodes (CongDocumentTraversal *doc_traversal,
 
 		/* Our initial reference is now held by the node mapping: */
 		g_object_unref (G_OBJECT(traversal_node));
+
 	}
+
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc_traversal),
+		       signals[TRAVERSAL_NODE_ADDED], 0,
+		       traversal_node);
+
 	
 	/* Recurse: */
 	if (xml_node->type==XML_ENTITY_REF_NODE) {
@@ -503,7 +537,10 @@ recursive_destroy_traversal_nodes (CongDocumentTraversal *doc_traversal,
 		}
 	}
 
-	/* FIXME: emit signal? */
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc_traversal),
+		       signals[TRAVERSAL_NODE_REMOVED], 0,
+		       traversal_node);
 
 	/* Remove this traversal_node: */
 	remove_node_mapping (doc_traversal,
