@@ -1,5 +1,9 @@
 2004-09-23  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* conglomerate.types: 
+
+	Added the various plugin/service GObject types
+
 	* conglomerate-sections.txt: 
 
 	Added titles for various sections
