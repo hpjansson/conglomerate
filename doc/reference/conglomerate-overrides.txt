@@ -47,12 +47,6 @@
 <NAME>CongEditorAreaExpander</NAME>
 </STRUCT>
 <STRUCT>
-<NAME>CongEditorAreaFlowHolderBlocks</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>CongEditorAreaFlowHolderInlines</NAME>
-</STRUCT>
-<STRUCT>
 <NAME>CongEditorAreaFlowHolderSingle</NAME>
 </STRUCT>
 <STRUCT>

@@ -497,66 +497,6 @@ cong_editor_area_expander_new
 cong_editor_area_expander_get_state
 </SECTION>
 
-<SECTION>
-<FILE>cong-editor-area-flow-holder-blocks</FILE>
-<TITLE>CongEditorAreaFlowHolderBlocks</TITLE>
-CongEditorAreaFlowHolderBlocks
-CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS
-CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS_CLASS
-IS_CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS
-cong_editor_area_flow_holder_blocks_get_type
-cong_editor_area_flow_holder_blocks_construct
-cong_editor_area_flow_holder_blocks_new
-cong_editor_area_flow_holder_get_child_flow_holder_for_node
-cong_editor_area_flow_holder_get_previous_child_flow_holder
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-area-flow-holder-inlines</FILE>
-<TITLE>CongEditorAreaFlowHolderInlines</TITLE>
-CongEditorAreaFlowHolderInlines
-CONG_EDITOR_AREA_FLOW_HOLDER_INLINES
-CONG_EDITOR_AREA_FLOW_HOLDER_INLINES_CLASS
-IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES
-cong_editor_area_flow_holder_inlines_get_type
-cong_editor_area_flow_holder_inlines_construct
-cong_editor_area_flow_holder_inlines_new
-cong_editor_area_flow_holder_inlines_get_current_line
-cong_editor_area_flow_holder_inlines_get_line_width
-cong_editor_area_flow_holder_inlines_get_current_indent
-cong_editor_area_flow_holder_inlines_destroy_lines
-cong_editor_area_flow_holder_inlines_insert_line
-cong_editor_area_flow_holder_inlines_reflow_required
-cong_editor_area_flow_holder_inlines_get_first_node
-cong_editor_area_flow_holder_inlines_get_final_node
-cong_editor_area_flow_holder_inlines_contains_editor_node_directly
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-area-flow-holder-single</FILE>
-<TITLE>CongEditorAreaFlowHolderSingle</TITLE>
-CongEditorAreaFlowHolderSingle
-CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE
-CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE_CLASS
-IS_CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE
-cong_editor_area_flow_holder_single_get_type
-cong_editor_area_flow_holder_single_construct
-cong_editor_area_flow_holder_single_new
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-area-flow-holder</FILE>
-<TITLE>CongEditorAreaFlowHolder</TITLE>
-CongEditorAreaFlowHolder
-CONG_EDITOR_AREA_FLOW_HOLDER
-CONG_EDITOR_AREA_FLOW_HOLDER_CLASS
-IS_CONG_EDITOR_AREA_FLOW_HOLDER
-cong_editor_area_flow_holder_get_type
-cong_editor_area_flow_holder_construct
-cong_editor_area_flow_holder_insert_areas_for_node
-cong_editor_area_flow_holder_remove_areas_for_node
-cong_editor_area_flow_holder_manufacture
-</SECTION>
 
 <SECTION>
 <FILE>cong-editor-area-labelled</FILE>
@@ -767,70 +707,12 @@ cong_editor_area_protected_set_parent
 </SECTION>
 
 <SECTION>
-<FILE>cong-editor-child-policy-flow-holder</FILE>
-<TITLE>CongEditorChildPolicyFlowHolder</TITLE>
-CongEditorChildPolicyFlowHolder
-CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER
-CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER_CLASS
-IS_CONG_EDITOR_CHILD_POLICY_FLOW_HOLDER
-cong_editor_child_policy_flow_holder_get_type
-cong_editor_child_policy_flow_holder_construct
-cong_editor_child_policy_flow_holder_new
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-child-policy-inline</FILE>
-<TITLE>CongEditorChildPolicyInline</TITLE>
-CongEditorChildPolicyInline
-CONG_EDITOR_CHILD_POLICY_INLINE
-CONG_EDITOR_CHILD_POLICY_INLINE_CLASS
-IS_CONG_EDITOR_CHILD_POLICY_INLINE
-cong_editor_child_policy_inline_get_type
-cong_editor_child_policy_inline_construct
-cong_editor_child_policy_inline_new
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-child-policy</FILE>
-DEBUG_EDITOR_CHILD_POLICY_LIFETIMES
-<TITLE>CongEditorChildPolicy</TITLE>
-CongEditorChildPolicy
-CONG_EDITOR_CHILD_POLICY
-CONG_EDITOR_CHILD_POLICY_CLASS
-IS_CONG_EDITOR_CHILD_POLICY
-cong_editor_child_policy_get_type
-cong_editor_child_policy_construct
-cong_editor_child_policy_get_node
-cong_editor_child_policy_get_widget
-cong_editor_child_policy_insert_areas_for_node
-cong_editor_child_policy_remove_areas_for_node
-</SECTION>
-
-<SECTION>
-<FILE>cong-editor-line-fragments</FILE>
-DEBUG_EDITOR_LINE_FRAGMENTS_LIFETIMES
-<TITLE>CongEditorLineFragments</TITLE>
-CongEditorLineFragments
-CONG_EDITOR_LINE_FRAGMENTS
-CONG_EDITOR_LINE_FRAGMENTS_CLASS
-IS_CONG_EDITOR_LINE_FRAGMENTS
-cong_editor_line_fragments_get_type
-cong_editor_line_fragments_construct
-cong_editor_line_fragments_new
-cong_editor_line_fragments_get_area_list
-cong_editor_line_fragments_add_area
-</SECTION>
-
-<SECTION>
 <FILE>cong-editor-node-comment</FILE>
 <TITLE>CongEditorNodeComment</TITLE>
 CongEditorNodeComment
 CONG_EDITOR_NODE_COMMENT
 CONG_EDITOR_NODE_COMMENT_CLASS
 IS_CONG_EDITOR_NODE_COMMENT
-cong_editor_node_comment_get_type
-cong_editor_node_comment_construct
-cong_editor_node_comment_new
 </SECTION>
 
 <SECTION>
@@ -840,9 +722,6 @@ CongEditorNodeDocument
 CONG_EDITOR_NODE_DOCUMENT
 CONG_EDITOR_NODE_DOCUMENT_CLASS
 IS_CONG_EDITOR_NODE_DOCUMENT
-cong_editor_node_document_get_type
-cong_editor_node_document_construct
-cong_editor_node_document_new
 </SECTION>
 
 <SECTION>
@@ -852,9 +731,6 @@ CongEditorNodeDtd
 CONG_EDITOR_NODE_DTD
 CONG_EDITOR_NODE_DTD_CLASS
 IS_CONG_EDITOR_NODE_DTD
-cong_editor_node_dtd_get_type
-cong_editor_node_dtd_construct
-cong_editor_node_dtd_new
 </SECTION>
 
 <SECTION>
@@ -864,9 +740,6 @@ CongEditorNodeElementSpan
 CONG_EDITOR_NODE_ELEMENT_SPAN
 CONG_EDITOR_NODE_ELEMENT_SPAN_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_SPAN
-cong_editor_node_element_span_get_type
-cong_editor_node_element_span_construct
-cong_editor_node_element_span_new
 </SECTION>
 
 <SECTION>
@@ -876,9 +749,6 @@ CongEditorNodeElementStructural
 CONG_EDITOR_NODE_ELEMENT_STRUCTURAL
 CONG_EDITOR_NODE_ELEMENT_STRUCTURAL_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_STRUCTURAL
-cong_editor_node_element_structural_get_type
-cong_editor_node_element_structural_construct
-cong_editor_node_element_structural_new
 </SECTION>
 
 <SECTION>
@@ -888,9 +758,6 @@ CongEditorNodeElementUnknown
 CONG_EDITOR_NODE_ELEMENT_UNKNOWN
 CONG_EDITOR_NODE_ELEMENT_UNKNOWN_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_UNKNOWN
-cong_editor_node_element_unknown_get_type
-cong_editor_node_element_unknown_construct
-cong_editor_node_element_unknown_new
 </SECTION>
 
 <SECTION>
@@ -900,9 +767,6 @@ CongEditorNodeElement
 CONG_EDITOR_NODE_ELEMENT
 CONG_EDITOR_NODE_ELEMENT_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT
-cong_editor_node_element_get_type
-cong_editor_node_element_construct
-cong_editor_node_element_get_dispspec_element
 </SECTION>
 
 <SECTION>
@@ -912,9 +776,6 @@ CongEditorNodeEntityDecl
 CONG_EDITOR_NODE_ENTITY_DECL
 CONG_EDITOR_NODE_ENTITY_DECL_CLASS
 IS_CONG_EDITOR_NODE_ENTITY_DECL
-cong_editor_node_entity_decl_get_type
-cong_editor_node_entity_decl_construct
-cong_editor_node_entity_decl_new
 </SECTION>
 
 <SECTION>
@@ -924,9 +785,6 @@ CongEditorNodeEntityRef
 CONG_EDITOR_NODE_ENTITY_REF
 CONG_EDITOR_NODE_ENTITY_REF_CLASS
 IS_CONG_EDITOR_NODE_ENTITY_REF
-cong_editor_node_entity_ref_get_type
-cong_editor_node_entity_ref_construct
-cong_editor_node_entity_ref_new
 </SECTION>
 
 <SECTION>
@@ -936,9 +794,6 @@ CongEditorNodeText
 CONG_EDITOR_NODE_TEXT
 CONG_EDITOR_NODE_TEXT_CLASS
 IS_CONG_EDITOR_NODE_TEXT
-cong_editor_node_text_get_type
-cong_editor_node_text_construct
-cong_editor_node_text_new
 cong_editor_node_text_convert_original_byte_offset_to_stripped
 cong_editor_node_text_calc_up
 cong_editor_node_text_calc_down
@@ -951,9 +806,6 @@ CongEditorNodeUnimplemented
 CONG_EDITOR_NODE_UNIMPLEMENTED
 CONG_EDITOR_NODE_UNIMPLEMENTED_CLASS
 IS_CONG_EDITOR_NODE_UNIMPLEMENTED
-cong_editor_node_unimplemented_get_type
-cong_editor_node_unimplemented_construct
-cong_editor_node_unimplemented_new
 </SECTION>
 
 <SECTION>
@@ -1988,9 +1840,6 @@ CongEditorNodeElementAdmonition
 CONG_EDITOR_NODE_ELEMENT_ADMONITION
 CONG_EDITOR_NODE_ELEMENT_ADMONITION_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_ADMONITION
-cong_editor_node_element_admonition_get_type
-cong_editor_node_element_admonition_construct
-cong_editor_node_element_admonition_new
 </SECTION>
 
 <SECTION>
@@ -2013,9 +1862,6 @@ CongEditorNodeElementListitem
 CONG_EDITOR_NODE_ELEMENT_LISTITEM
 CONG_EDITOR_NODE_ELEMENT_LISTITEM_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_LISTITEM
-cong_editor_node_element_listitem_get_type
-cong_editor_node_element_listitem_construct
-cong_editor_node_element_listitem_new
 cong_editor_node_element_listitem_get_label
 </SECTION>
 
@@ -2038,9 +1884,6 @@ CongEditorNodeElementParagraph
 CONG_EDITOR_NODE_ELEMENT_PARAGRAPH
 CONG_EDITOR_NODE_ELEMENT_PARAGRAPH_CLASS
 IS_CONG_EDITOR_NODE_ELEMENT_PARAGRAPH
-cong_editor_node_element_paragraph_get_type
-cong_editor_node_element_paragraph_construct
-cong_editor_node_element_paragraph_new
 </SECTION>
 
 <SECTION>

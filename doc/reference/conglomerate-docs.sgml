@@ -31,10 +31,6 @@
     <!ENTITY cong-modification-selection-change	SYSTEM "xml/cong-modification-selection-change.xml">
     <!ENTITY cong-modification-set-dtd-ptr	SYSTEM "xml/cong-modification-set-dtd-ptr.xml">
     <!ENTITY cong-editor-widget                           SYSTEM "xml/cong-editor-widget.xml">
-    <!ENTITY cong-editor-line-fragments                           SYSTEM "xml/cong-editor-line-fragments.xml">
-    <!ENTITY cong-editor-child-policy                           SYSTEM "xml/cong-editor-child-policy.xml">
-    <!ENTITY cong-editor-child-policy-flow-holder                           SYSTEM "xml/cong-editor-child-policy-flow-holder.xml">
-    <!ENTITY cong-editor-child-policy-inline                           SYSTEM "xml/cong-editor-child-policy-inline.xml">
     <!ENTITY cong-editor-node                           SYSTEM "xml/cong-editor-node.xml">
     <!ENTITY cong-editor-node-comment                           SYSTEM "xml/cong-editor-node-comment.xml">
     <!ENTITY cong-editor-node-document                           SYSTEM "xml/cong-editor-node-document.xml">
@@ -55,10 +51,6 @@
     <!ENTITY cong-editor-area-entity-decl                           SYSTEM "xml/cong-editor-area-entity-decl.xml">
     <!ENTITY cong-editor-area-entity-ref                           SYSTEM "xml/cong-editor-area-entity-ref.xml">
     <!ENTITY cong-editor-area-expander                           SYSTEM "xml/cong-editor-area-expander.xml">
-    <!ENTITY cong-editor-area-flow-holder-blocks                           SYSTEM "xml/cong-editor-area-flow-holder-blocks.xml">
-    <!ENTITY cong-editor-area-flow-holder-inlines                           SYSTEM "xml/cong-editor-area-flow-holder-inlines.xml">
-    <!ENTITY cong-editor-area-flow-holder-single                           SYSTEM "xml/cong-editor-area-flow-holder-single.xml">
-    <!ENTITY cong-editor-area-flow-holder                           SYSTEM "xml/cong-editor-area-flow-holder.xml">
     <!ENTITY cong-editor-area-labelled                           SYSTEM "xml/cong-editor-area-labelled.xml">
     <!ENTITY cong-editor-area-line                           SYSTEM "xml/cong-editor-area-line.xml">
     <!ENTITY cong-editor-area-pixbuf                           SYSTEM "xml/cong-editor-area-pixbuf.xml">
@@ -124,7 +116,6 @@
     <!ENTITY cong-graph                           SYSTEM "xml/cong-graph.xml">
     <!ENTITY cong-marshal                           SYSTEM "xml/cong-marshal.xml">
     <!ENTITY cong-parser-error                           SYSTEM "xml/cong-parser-error.xml">
-    <!ENTITY fo                           SYSTEM "xml/fo.xml">
     <!ENTITY global                           SYSTEM "xml/global.xml">
     <!ENTITY cong-vfs                           SYSTEM "xml/cong-vfs.xml">
 
@@ -222,14 +213,7 @@ cong_document_end_command (doc, cmd);
     <para> If you want to see the <classname>CongEditorAreas</classname>, then go to <filename>src/cong-editor-area.c</filename> and play around with the #define settings; in particular <constant>DEBUG_RENDER_ALLOCATIONS</constant> can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
     </partintro>
     &cong-editor-widget;
-    &cong-editor-line-fragments;
 
-    <chapter>
-      <title>Child Policies</title>
-      &cong-editor-child-policy;
-      &cong-editor-child-policy-flow-holder;
-      &cong-editor-child-policy-inline;
-    </chapter>
 
     <chapter>
       <title>Editor Nodes</title>
@@ -257,10 +241,6 @@ cong_document_end_command (doc, cmd);
       &cong-editor-area-entity-decl;
       &cong-editor-area-entity-ref;
       &cong-editor-area-expander;
-      &cong-editor-area-flow-holder-blocks;
-      &cong-editor-area-flow-holder-inlines;
-      &cong-editor-area-flow-holder-single;
-      &cong-editor-area-flow-holder;
       &cong-editor-area-labelled;
       &cong-editor-area-line;
       &cong-editor-area-pixbuf;

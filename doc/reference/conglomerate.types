@@ -22,10 +22,6 @@
 #include "cong-editor-area-entity-decl.h"
 #include "cong-editor-area-entity-ref.h"
 #include "cong-editor-area-expander.h"
-#include "cong-editor-area-flow-holder-blocks.h"
-#include "cong-editor-area-flow-holder-inlines.h"
-#include "cong-editor-area-flow-holder-single.h"
-#include "cong-editor-area-flow-holder.h"
 #include "cong-editor-area-labelled.h"
 #include "cong-editor-area-line.h"
 #include "cong-editor-area-pixbuf.h"
@@ -39,10 +35,6 @@
 #include "cong-editor-area-underline.h"
 #include "cong-editor-area-unknown-tag.h"
 #include "cong-editor-area.h"
-#include "cong-editor-child-policy-flow-holder.h"
-#include "cong-editor-child-policy-inline.h"
-#include "cong-editor-child-policy.h"
-#include "cong-editor-line-fragments.h"
 #include "cong-editor-node-comment.h"
 #include "cong-editor-node-document.h"
 #include "cong-editor-node-dtd.h"
@@ -114,10 +106,6 @@ cong_editor_area_container_get_type
 cong_editor_area_entity_decl_get_type
 cong_editor_area_entity_ref_get_type
 cong_editor_area_expander_get_type
-cong_editor_area_flow_holder_blocks_get_type
-cong_editor_area_flow_holder_inlines_get_type
-cong_editor_area_flow_holder_single_get_type
-cong_editor_area_flow_holder_get_type
 cong_editor_area_labelled_get_type
 cong_editor_area_line_get_type
 cong_editor_area_pixbuf_get_type
@@ -131,22 +119,6 @@ cong_editor_area_text_get_type
 cong_editor_area_underline_get_type
 cong_editor_area_unknown_tag_get_type
 cong_editor_area_get_type
-cong_editor_child_policy_flow_holder_get_type
-cong_editor_child_policy_inline_get_type
-cong_editor_child_policy_get_type
-cong_editor_line_fragments_get_type
-cong_editor_node_comment_get_type
-cong_editor_node_document_get_type
-cong_editor_node_dtd_get_type
-cong_editor_node_element_admonition_get_type
-cong_editor_node_element_span_get_type
-cong_editor_node_element_structural_get_type
-cong_editor_node_element_unknown_get_type
-cong_editor_node_element_get_type
-cong_editor_node_entity_decl_get_type
-cong_editor_node_entity_ref_get_type
-cong_editor_node_text_get_type
-cong_editor_node_unimplemented_get_type
 cong_editor_node_get_type
 cong_editor_widget3_get_type
 cong_modification_cursor_change_get_type

@@ -1,3 +1,7 @@
+2004-11-16  Nickolay & Geert
+
+	* bugzilla 158334
+
 2004-10-27  Frederic Brin  <duckx@mezimail.com>
 
 	* Makefile.am
