@@ -1,6 +1,96 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+05-01-03
+
+Conglomerate 0.7.9 - "We Do The Work - You Do The Pleasure" Released
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type. In
+keeping with recent trends in the GNOME project, the codename of this
+release is a quotation from a movie. But can you tell which movie?
+
+There are two features of this release. The first is a big rewrite of
+the clipboard. You can now use the middle-mouse button to paste the
+selection from Conglomerate into other X applications, and vice versa,
+and various other clipboard bugs have been fixed. The other feature is
+that I've gone through Bugzilla fixing as many bugs as possible. Please
+download it and test that no new bugs have been introduced!
+Unfortunately this is still an unstable release; there are still some
+known repeatable crash bugs.
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+
+Enhancements
+      * Support for middle mouse button paste of PRIMARY (me)
+
+      * Update PRIMARY whenever selection changes, fixing bugs #130248
+        and #126039 (me)
+
+      * Rewrite of clipboard and selection code. Selections are now
+        offered and received as both XML and as text, in a sane format,
+        fixing bug #129731 (me)
+
+      * Updated translations - cs (Miloslav Trmac), sr, sr@Latn (Danilo
+        ??egan), pt (Duarte Loreto), es (Francisco Javier F. Serrador)
+
+
+Fixes
+      * Fixed various compilation warnings (me) 
+
+      * Fix for bug #125918 (Elements appearing in incorrect order) (me)
+
+      * Fixed various bugs in the calculation of selection highlighting
+        (including bug #124130); added an early reject to throw away
+        unnecessary updates when dragging out a selection with the mouse
+        (me)
+
+      * Added ordering function for comparing nodes; fixed long-standing
+        bug in CongRange reordering function which was causing glitches
+        in the selection code (me)
+
+      * Fixed bug when moving cursor to next word near end of a node's
+        content which would generate an invalid cursor location
+        off-by-one beyond the valid range (me)
+
+      * Fix for bug #124508 (crash on inserting sibling) (me)
+
+      * Fix for bug #125720 (crash on deleting nothing) (me)
+
+      * Fixed crash when testing text nodes as being irrelevant
+        whitespace in the case where they haven't yet been added to the
+        tree (me)
+
+      * Implemented various missing node types in
+        cong_document_get_node_name, fixing a problem in the test data
+        for bug #120976 (me)
+
+      * Fix for bug #124208 (entity modification is not saved) (me)
+
+      * Fix for bug #129752 (nested entity edit) (me)
+
+      * Fix for bug #129907 (Elements appear in reverse order under
+        certain circumstances) (me)
+
+      * Fix for bug #130227 (Pasting simple text using the middle mouse
+        button often causes assertion failures) (me)
+
+      * Fix for bug #123490 (Carriage return should add a carriage
+        return if whitespace is being preserved) (me)
+
+      * Fix for bug #129776 (missing @PKGDATADIR@ definition) (me and
+        Geert Stappers)
+
+      * Improvements to dispspec debugging (Geert)
+
+      * Fixed intltool problems (me)
+
+
+David Malcolm
+www.conglomerate.org
+
 17-12-03
 
 Conglomerate version 0.7.8 - codenamed "What You See Is Hopefully What
