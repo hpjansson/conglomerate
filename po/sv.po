@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 23:49+0000\n"
-"PO-Revision-Date: 2003-10-24 03:27+0200\n"
+"POT-Creation-Date: 2003-10-28 14:11+0100\n"
+"PO-Revision-Date: 2003-10-28 14:13+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
 #: src/cong-primary-window.c:441 src/cong-primary-window.c:443
@@ -196,23 +196,23 @@ msgid "XML Editor"
 msgstr "XML-redigerare"
 
 #: src/cong-app.c:364
-#, fuzzy
 msgid "Conglomerate could not load any xds files"
-msgstr "Conglomerate kunde inte läsa in några xds-filer från katalogen \"%s\""
+msgstr "Conglomerate kunde inte läsa in några xds-filer"
 
 #: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate kunde inte hitta några beskrivningar av dokumenttyper."
 
 #: src/cong-app.c:368
-#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
 msgstr ""
 "Om du ser detta fel är det sannolikt att du byggt Conglomerate men inte "
-"installerat det. Försök installera det."
+"installerat det. Försök installera det. Om du har ändrat "
+"standardinställningen för displayspecifikationssökvägen bör du "
+"dubbelkontrollera det också."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
@@ -387,9 +387,8 @@ msgid "Size of the expander arrow"
 msgstr "Storlek på utökarpilen"
 
 #: src/cong-editor-widget3.c:867
-#, fuzzy
 msgid "Input Method"
-msgstr "Utskriftsmetod:"
+msgstr "Inmatningsmetod"
 
 #: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
 msgid "Typing"
@@ -2116,6 +2115,9 @@ msgstr "Klistra in efter"
 #: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
+
+#~ msgid "Input Method:"
+#~ msgstr "Inmatningsmetod:"
 
 #~ msgid "Text: \"%s\""
 #~ msgstr "Text: \"%s\""
