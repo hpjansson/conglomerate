@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<dispspec>
+	<metadata>
+		<_name>XHTML 1.0 (strict)</_name>
+		<_description>The strict XML version of HTML </_description>
+	</metadata>
+	<serialisation>
+		<format extension="html"/>
+	</serialisation>
+	<document-models>
+		<external-document-model type="dtd" public-id="-//W3C//DTD XHTML 1.0 Strict//EN" system-id="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
+	</document-models>
+	<element-list>
+	
+		<!-- Skeletal Tags -->
+		<element tag="body" type="structural">
+			<_name>Body</_name>
+		</element>
+		<element tag="head" type="structural">
+			<_name>Head</_name>
+		</element>
+		<element tag="html" type="structural">
+			<_name>HTML Page</_name>
+		</element>
+
+		<!-- Header Tags -->
+		<element tag="base" type="structural">
+			<_name>Base</_name>
+		</element>
+		<element tag="link" type="structural">
+			<_name>Link</_name>
+		</element>
+		<element tag="meta" type="structural">
+			<_name>Metainformation</_name>
+		</element>
+		<element tag="style" type="structural">
+			<_name>Style</_name>
+		</element>
+		<element tag="title" type="structural">
+			<_name>Title</_name>
+		</element>
+
+		<!-- Hyperlinks -->
+		<element tag="a" type="span">
+			<_name>Anchor</_name>
+		</element>
+
+		<!-- Text Markup: Physical-based -->
+		<element tag="b" type="span">
+			<_name>Bold</_name>
+		</element>
+		<element tag="big" type="span">
+			<_name>Big</_name>
+		</element>
+		<element tag="i" type="span">
+			<_name>Italic</_name>
+		</element>
+		<element tag="small" type="span">
+			<_name>Small</_name>
+		</element>
+		<element tag="sub" type="span">
+			<_name>Subscript</_name>
+		</element>
+		<element tag="tt" type="span">
+			<_name>Teletype</_name>
+		</element>
+
+		<!-- Text Markup: Content-based -->
+		<element tag="cite" type="span">
+			<_name>Citation</_name>
+		</element>
+		<element tag="code" type="span">
+			<_name>Code</_name>
+		</element>
+		<element tag="dfn" type="span">
+			<_name>Definition</_name>
+		</element>
+		<element tag="em" type="span">
+			<_name>Emphasis</_name>
+		</element>
+		<element tag="kbd" type="span">
+			<_name>Keyboard</_name>
+		</element>
+		<element tag="samp" type="span">
+			<_name>Sample</_name>
+		</element>
+		<element tag="strong" type="span">
+			<_name>Strong</_name>
+		</element>
+		<element tag="var" type="span">
+			<_name>Variable</_name>
+		</element>
+
+		<!-- Lists -->
+		<element tag="dl" type="structural">
+			<_name>Definition List</_name>
+		</element>
+		<element tag="li" type="plugin" plugin-id="listitem">
+			<_name>List Item</_name>
+		</element>
+		<element tag="ol" type="structural">
+			<_name>List (ordered)</_name>
+		</element>
+		<element tag="ul" type="structural">
+			<_name>List (unordered)</_name>
+		</element>
+
+		<!-- Forms -->
+		<element tag="form" type="structural">
+			<_name>Interactive Form</_name>
+		</element>
+		<element tag="input" type="structural">
+			<_name>Form Control</_name>
+		</element>
+		<element tag="option" type="structural">
+			<_name>Selectable Choice</_name>
+		</element>
+		<element tag="select" type="structural">
+			<_name>Option Selector</_name>
+		</element>
+		<element tag="textarea" type="structural">
+			<_name>Multi-line Text Field</_name>
+		</element>
+
+		<!-- Rules, images and multimedia -->
+		<element tag="img" type="structural">
+			<_name>Image</_name>
+		</element>
+		<element tag="map" type="structural">
+			<_name>Image Map</_name>
+		</element>
+
+		<!-- Tables -->
+		<element tag="caption" type="span">
+			<_name>Caption</_name>
+		</element>
+		<element tag="col" type="span">
+			<_name>Column</_name>
+		</element>
+		<element tag="colgroup" type="structural">
+			<_name>Column Group</_name>
+		</element>
+		<element tag="table" type="structural">
+			<_name>Table</_name>
+		</element>
+		<element tag="tbody" type="structural">
+			<_name>Table Body</_name>
+		</element>
+		<element tag="td" type="span">
+			<_name>Table Cell (data)</_name>
+		</element>
+		<element tag="tfoot" type="structural">
+			<_name>Table Footer</_name>
+		</element>
+		<element tag="th" type="span">
+			<_name>Table Cell (header)</_name>
+		</element>
+		<element tag="thead" type="structural">
+			<_name>Table Header</_name>
+		</element>
+		<element tag="tr" type="structural">
+			<_name>Table Row</_name>
+		</element>
+
+		<!-- Executable Content -->
+		<element tag="object" type="structural">
+			<_name>Object</_name>
+		</element>
+		<element tag="script" type="structural">
+			<_name>Script</_name>
+		</element>
+
+		<!-- Content Presentation and Flow -->
+		<element tag="address" type="span">
+			<_name>Address</_name>
+		</element>
+		<element tag="blockquote" type="structural">
+			<_name>Block Quotation</_name>
+		</element>
+		<element tag="br" type="span">
+			<_name>Forced Line Break</_name>
+		</element>
+		<element tag="div" type="span">
+			<_name>Division</_name>
+		</element>
+		<element tag="h1" type="structural">
+			<_name>Heading (level 1)</_name>
+		</element>
+		<element tag="h2" type="structural">
+			<_name>Heading (level 2)</_name>
+		</element>
+		<element tag="h3" type="structural">
+			<_name>Heading (level 3)</_name>
+		</element>
+		<element tag="h4" type="structural">
+			<_name>Heading (level 4)</_name>
+		</element>
+		<element tag="h5" type="structural">
+			<_name>Heading (level 5)</_name>
+		</element>
+		<element tag="h6" type="structural">
+			<_name>Heading (level 6)</_name>
+		</element>
+		<element tag="hr" type="structural">
+			<_name>Horizontal Rule</_name>
+		</element>
+		<element tag="p" type="structural">
+			<_name>Paragraph</_name>
+		</element>
+
+		<!-- Unclassified tags -->
+
+		<element tag="param" type="span">
+			<_name>Parameter</_name>
+		</element>
+
+		<element tag="button" type="span">
+			<_name>Button</_name>
+		</element>
+		<element tag="dt" type="span">
+			<_name>Definition Term</_name>
+		</element>
+
+		<!-- Ongoing classification -->
+		<element tag="area" type="span">
+			<_name>Area</_name>
+		</element>
+		<element tag="dd" type="span">
+			<_name>Definition</_name>
+		</element>
+		<element tag="fieldset" type="span">
+			<_name>Form Control Group</_name>
+		</element>
+		<element tag="ins" type="span">
+			<_name>Inserted Text</_name>
+		</element>
+		<element tag="span" type="span">
+			<_name>Span</_name>
+		</element>
+		<element tag="label" type="span">
+			<_name>Label</_name>
+		</element>
+		<element tag="acronym" type="span">
+			<_name>Acronym</_name>
+		</element>
+		<element tag="noscript" type="structural">
+			<_name>Alternative Non-Scripted Content</_name>
+		</element>
+		<element tag="sup" type="span">
+			<_name>Superscript</_name>
+		</element>
+		<element tag="optgroup" type="structural">
+			<_name>Option Group</_name>
+		</element>
+		<element tag="pre" type="span">
+			<_name>Preformatted Text</_name>
+		</element>
+		<element tag="bdo" type="span">
+			<_name>Bidirectional Override</_name>
+		</element>
+		<element tag="del" type="span">
+			<_name>Deleted Text</_name>
+		</element>
+		<element tag="q" type="span">
+			<_name>Inline Quotation</_name>
+		</element>
+		<element tag="abbr" type="span">
+			<_name>Abbreviated Form</_name>
+		</element>
+		<element tag="legend" type="span">
+			<_name>Legend</_name>
+		</element>
+	</element-list>
+</dispspec>

@@ -1,0 +1,187 @@
+<!-- Experimental XML-based DispSpec for Kernel Traffic format -->
+<dispspec>
+
+	<metadata>
+		<_name>&quot;Kernel Traffic&quot; Newsletter</_name>
+		<_description>A newletter tracking the technical development of a project within the Free/Open Source Software world</_description>
+	</metadata>
+	<document-models>
+	</document-models>
+	<element-list>
+			
+		<element tag="kc" type="structural" color="a0b0c0">
+			<_name>Kernel Cousin Newsletter</_name>
+			<header-info xpath="concat(normalize-space(child::title/text()), &quot; #&quot;, normalize-space(child::issue/@num))"></header-info>
+		</element>
+
+		<element tag="kcref" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="quote" type="structural" color="a0b0c0"  icon="cong-paragraph"> 
+			<_name>Quotation</_name>
+			<header-info xpath="normalize-space(@who)"></header-info>
+		</element>
+
+		<element tag="section" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Section</_name>
+			<header-info xpath="concat(normalize-space(@title), &quot; (&quot;, normalize-space(@subject), &quot;)&quot;)"></header-info>
+		</element>
+
+		<element tag="stats" type="structural" color="a0b0c0"  icon="cong-metadata"> 
+			<_name>Statistics</_name>
+		</element>
+
+		<element tag="person" type="structural" color="a0b0c0"  icon="cong-author"> 
+			<_name>Person</_name>
+		</element>
+
+		<element tag="vcelement" type="structural" color="a0b0c0"> 
+			<_name>Version Control Activity</_name>
+		</element>
+
+		<element tag="vcstats" type="structural" color="a0b0c0"> 
+			<_name>Version Control Statistics</_name>
+		</element>
+
+		<element tag="vctree" type="structural" color="a0b0c0"> 
+			<_name>Version Control Tree</_name>
+		</element>
+
+		<element tag="intro" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Introduction</_name>
+		</element>
+
+		<element tag="issue" type="structural" color="a0b0c0" icon="cong-metadata"> 
+			<_name>Issue</_name>
+		</element>
+
+		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Author</_name>
+		</element>
+
+		<element tag="translator" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Translator</_name>
+		</element>
+
+		<element tag="editor" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Editor</_name>
+		</element>
+
+		<element tag="correction" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Correction</_name>
+		</element>
+		<element tag="editorialize" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Editorialize</_name>
+		</element>
+
+		<element tag="li" type="structural" color="a0b0c0"  icon="cong-list-item"> 
+			<_name>List Item</_name>
+		</element>
+
+		<element tag="ol" type="structural" color="a0b0c0"  icon="cong-numbered-list"> 
+			<_name>List (ordered)</_name>
+		</element>
+
+		<element tag="p" type="plugin" plugin-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
+			<_name>Paragraph</_name>
+		</element>
+
+		<element tag="pre" type="structural" color="a0b0c0"> 
+		</element>
+
+		<element tag="a" type="span" color="a0b0c0"> 
+			<_name>Hyperlink</_name>
+		</element>
+
+		<element tag="b" type="span" color="a0b0c0"> 
+			<_name>Bold</_name>
+		</element>
+
+		<element tag="blockquote" type="structural" color="a0b0c0"> 
+			<_name>Block Quote</_name>
+		</element>
+
+		<element tag="br" type="structural" color="a0b0c0"> 
+			<_name>Break (manual)</_name>
+		</element>
+
+		<element tag="center" type="structural" color="a0b0c0"> 
+			<_name>Centered</_name>
+		</element>
+
+		<element tag="cite" type="span" color="a0b0c0"> 
+			<_name>Cite</_name>
+		</element>
+
+		<element tag="code" type="structural" color="a0b0c0">
+			<_name>Code</_name>
+		</element>
+
+		<element tag="em" type="span" color="a0b0c0"> 
+			<_name>Emphasis</_name>
+		</element>
+
+		<element tag="font" type="span" color="a0b0c0"> 
+			<_name>Font</_name>
+		</element>
+
+		<element tag="h1" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Heading (level 1)</_name>
+		</element>
+
+		<element tag="h2" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Heading (level 2)</_name>
+		</element>
+
+		<element tag="h3" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Heading (level 3)</_name>
+		</element>
+
+		<element tag="headquote" type="structural" color="a0b0c0"> 
+		</element>
+
+		<element tag="hr" type="structural" color="a0b0c0"> 
+		</element>
+
+		<element tag="i" type="span" color="a0b0c0"> 
+			<_name>Italicised</_name>
+		</element>
+		<element tag="strong" type="span" color="a0b0c0"> 
+			<_name>Strong</_name>
+		</element>
+
+		<element tag="table" type="structural" color="a0b0c0">
+		<!-- FIXME: use table plugin -->
+		</element>
+
+		<element tag="td" type="structural" color="a0b0c0">
+		<!-- FIXME: use table plugin -->
+		</element>
+
+		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
+			<_name>Title</_name>
+		</element>
+
+
+		<element tag="topic" type="structural" color="a0b0c0" icon="cong-subsection"> 
+			<_name>Topic</_name>
+		</element>
+
+		<element tag="tr" type="structural" color="a0b0c0">
+		<!-- FIXME: use table plugin -->
+		</element>
+
+		<element tag="tt" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="u" type="span" color="a0b0c0"> 
+			<_name>Underlined</_name>
+		</element>
+
+		<element tag="ul" type="structural" color="a0b0c0"  icon="cong-bulleted-list"> 
+			<_name>List (unordered)</_name>
+		</element>
+
+	</element-list>
+
+</dispspec>
