@@ -1,6 +1,16 @@
 creating ChangeLog
+2002-08-23 David Malcolm
+
+	* dispspec.c (cong_dispspec_new_from_xml_file)
+
+	Added a way to generate a crude dispspec automatically from an xml file (provided it was loaded with libxml)
+	
 2002-08-22 David Malcolm
 
+	* xmlload.c
+
+	New file; converts from libxml structures to flux TTREEs
+	
 	* dispspec.c
 
 	More robust xds loader (fixes problem with comments)

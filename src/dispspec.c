@@ -48,6 +48,9 @@ cong_dispspec_element_new_from_ttree(TTREE* tt);
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element);
 
+CongDispspecElement*
+cong_dispspec_element_new(const char* tagname, enum CongElementType type);
+
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 {
 	CongDispspec* ds;
@@ -126,6 +129,60 @@ CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 }
 
 
+static void recurse_doc(CongDispspec *ds, xmlNodePtr node);
+ 
+/*
+  A way of automatically generating a dispspec from a loaded xml document.
+
+  Currently it merely creates a structural entry for each unique tag found, with a random colour
+ */
+CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc)
+{
+	CongDispspec* ds;
+	xmlNodePtr node;
+
+	ds = g_new0(CongDispspec,1);
+
+	for (node = doc->children; node; node=node->next) {
+		recurse_doc(ds, node);
+	}
+
+	return ds;	
+}
+
+static void recurse_doc(CongDispspec *ds, xmlNodePtr node)
+{
+	switch (node->type) {
+	case XML_ELEMENT_NODE:
+		{
+			/* Look for this tag: */
+			if (NULL==cong_dispspec_lookup_element(ds, node->name)) {
+
+				/* Tag not found, add it to the dispspec as a strucutral element: */
+				CongDispspecElement* element;
+
+				g_message("Adding <%s> to dispspec\n",node->name);
+
+				element = cong_dispspec_element_new(node->name, CONG_ELEMENT_TYPE_STRUCTURAL);
+				cong_dispspec_add_element(ds, element);
+			}
+			
+			/* Recursively process children */
+			if ((node->children != NULL) && (node->type != XML_ENTITY_REF_NODE)) {
+				xmlNodePtr child = node->children;
+				while (child != NULL) {
+					recurse_doc(ds, child);
+					child = child->next;
+				}
+			}
+		}
+		break;
+		
+	default:
+	};
+}
+
+
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 {
 	g_return_if_fail(ds);
@@ -145,7 +202,7 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 
 void cong_dispspec_delete(CongDispspec *dispspec)
 {
-  g_assert(0);
+	g_assert(0);
 }
 
 TTREE *get_upper_section(TTREE *x)
@@ -703,3 +760,33 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 
 	return element;
 }
+
+CongDispspecElement*
+cong_dispspec_element_new(const char* tagname, enum CongElementType type)
+{
+	CongDispspecElement* element;
+
+	g_return_val_if_fail(tagname,NULL);
+
+	element = g_new0(CongDispspecElement,1);
+
+	element->tagname = g_strdup(tagname);	
+	element->username = g_strdup(tagname);
+	element->type = type;
+
+	/* Extract colour: */
+	{
+		int col = 0x00ffffff;  /* White is default */
+
+		col_to_gcol(&element->col, col);
+
+		/* We don't make any attempt to share GCs between different elements for now */
+		element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+		gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
+		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
+		gdk_gc_set_foreground(element->gc, &element->col);
+	}
+
+	return element;
+}
+
