@@ -32,7 +32,7 @@ data/conglomerate.schemas.in
 HERE
 
 # document types
-find dispspecs -name "*.xds.in" | sort >> ${FPPI}
+find dispspecs -name "*.xds.in" -printf "[type: gettext/xml]%p\n" | sort >> ${FPPI}
 
 # found glade files
 find glade -name "*.glade" | sort >> ${FPPI}

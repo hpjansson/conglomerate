@@ -1,3 +1,9 @@
+2004-08-13 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* mkpotfilesin :
+	
+	Update script to allow translation of xds files
+
 2004-08-13  Geert Stappers <stappers@stappers.nl>
 
 	* mkcvstarball
