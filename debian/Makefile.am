@@ -18,12 +18,15 @@ debian_DISTS = \
 
 # package related files
 pkg_DISTS = \
+    conglomerate.dirs \
     conglomerate.postinst \
     conglomerate.prerm \
+    conglomerate-common.dirs \
+    conglomerate-common.docs \
+    conglomerate-common.menu \
     conglomerate-common.postinst \
     conglomerate-common.prerm \
-    conglomerate-common.menu \
-    conglomerate-common.docs \
+    conglomerate-dbg.dirs \
     conglomerate_icon.xpm \
     $(NULL)
 
