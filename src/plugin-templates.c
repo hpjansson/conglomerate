@@ -63,39 +63,21 @@ void factory_page_creation_callback_templates(CongDocumentFactory *factory, Cong
 {
 }
 
-static gchar** get_template_paths(CongPlugin* plugin)
+static GSList* get_template_paths(CongPlugin* plugin)
 {
-	gchar* template_path;
-	gchar** template_paths;
+	GSList* template_paths;
 	gchar* gconf_key;
 	GConfClient* gconf_client;
 
 	gconf_client = cong_app_get_gconf_client(cong_app_singleton());
-	gconf_key = cong_plugin_get_gconf_key(plugin, "template-path");
+	gconf_key = cong_plugin_get_gconf_key(plugin, "template-paths");
 
-	template_path = gconf_client_get_string(
-		gconf_client,
-		gconf_key, NULL);
+	g_message("key: %s", gconf_key);
 
-	if(template_path==NULL)
-	{
-		template_path = gnome_program_locate_file(
-			cong_app_get_gnome_program(cong_app_singleton()),
-			GNOME_FILE_DOMAIN_APP_DATADIR,
-			"templates",
-			FALSE,
-			NULL);
-
-		gconf_client_set_string(gconf_client,
-			gconf_key,
-			template_path,
-			NULL);
-	}
-
-	template_paths = g_strsplit(template_path, ":", 0);
+	template_paths = gconf_client_get_list(gconf_client,
+		gconf_key, GCONF_VALUE_STRING, NULL);
 
 	g_free(gconf_key);
-	g_free(template_path);
 
 	return template_paths;
 }
@@ -156,29 +138,37 @@ register_template(const gchar *rel_path,
 	return TRUE;
 }
 
-void visit_paths(gchar** paths, GnomeVFSDirectoryVisitFunc visit_path,
+static void visit_paths(GSList* paths, GnomeVFSDirectoryVisitFunc visit_path,
 		void* data)
 {
-	int i;
-	for(i = 0; paths[i]!=NULL; i++)
+	GSList* path;
+	path = paths;
+
+	for(path = paths; path != NULL; path = g_slist_next(path))
 	{
 		GnomeVFSResult vfs_result;
 
-		((CongTemplate*)data)->dir = paths[i];
+		gchar* absolute_path;
+		absolute_path = gnome_vfs_expand_initial_tilde(path->data);
 
-		vfs_result = gnome_vfs_directory_visit(paths[i],
+		g_message("loading templates from %s", absolute_path);
+
+		((CongTemplate*)data)->dir = absolute_path;
+
+		vfs_result = gnome_vfs_directory_visit(absolute_path,
 			GNOME_VFS_FILE_INFO_DEFAULT,
 			GNOME_VFS_DIRECTORY_VISIT_DEFAULT,
 			visit_path,
 			data);
 	}
+
 }
 
 /* would be exposed as "plugin_register"? */
 gboolean plugin_templates_plugin_register(CongPlugin *plugin)
 {
 	int i;
-	gchar** template_paths;
+	GSList* template_paths;
 
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -190,7 +180,7 @@ gboolean plugin_templates_plugin_register(CongPlugin *plugin)
 
 	visit_paths(template_paths, register_template, template);
 
-	g_strfreev(template_paths);
+	g_free(template_paths);
 
 	return TRUE;
 }

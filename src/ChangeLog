@@ -1,3 +1,9 @@
+2003-10-27  Jeff Martin  <jeff@custommonkey.org>
+  
+	* plugin-templates.c
+  
+ 	Change storage of template path the be a list of strings not a colon-separated path. Add expansion of ~ in paths
+	
 2003-10-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-text-cache.c
