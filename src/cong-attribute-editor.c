@@ -24,9 +24,12 @@
 
 #include "global.h"
 #include "cong-attribute-editor.h"
+#include "cong-attribute-editor-cdata.h"
+
+#define PRIVATE(x) ((x)->private)
 
 /*
-   FIXME
+  FIXME
   We need to remove callbacks from document when widgets are deleted!!!
   This probably requires us to have fully-fledged GtkWidget subclasses!
 */
@@ -37,41 +40,12 @@ struct CongAttributeEditorDetails
 	CongDocument *doc;
 	CongNodePtr node;
 	const gchar *attribute_name;
-
-	GtkWidget *hbox;
-	GtkWidget *value;
-	GtkWidget *add_btn;
-	GtkWidget *delete_btn;	
+	xmlAttributePtr attr; /* can be NULL */
 };
-
-
 
 /* Internal function declarations: */
 
 /* CDATA support: */
-static void
-on_set_attribute_cdata (CongDocument *doc, 
-			CongNodePtr node, 
-			const xmlChar *name, 
-			const xmlChar *value, 
-			gpointer user_data);
-static void
-on_remove_attribute_cdata (CongDocument *doc, 
-			   CongNodePtr node, 
-			   const xmlChar *name,
-			   gpointer user_data);
-static void
-on_text_entry_changed_cdata (GtkEditable *editable,
-			     gpointer user_data);
-static void
-on_add_button_cdata (GtkButton *button,
-		     gpointer user_data);
-static void
-on_delete_button_cdata (GtkButton *button,
-			gpointer user_data);
-static void
-refresh_cdata_editor (struct CongAttributeEditorDetails *details);
-
 /* ID support: */
 /* IDREF support: */
 /* IDREFS support: */
@@ -97,6 +71,74 @@ on_enumeration_option_menu_changed (GtkOptionMenu *option_menu,
 /* NOTATION support: */
 
 /* Exported function definitions: */
+GNOME_CLASS_BOILERPLATE(CongAttributeEditor, 
+			cong_attribute_editor,
+			GtkHBox,
+			GTK_TYPE_HBOX);
+
+static void
+cong_attribute_editor_class_init (CongAttributeEditorClass *klass)
+{
+}
+
+static void
+cong_attribute_editor_instance_init (CongAttributeEditor *attribute_editor)
+{
+	attribute_editor->private = g_new0(CongAttributeEditorDetails,1);
+}
+
+CongAttributeEditor*
+cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
+				 CongDocument *doc,
+				 CongNodePtr node,
+				 const gchar *attribute_name,
+				 xmlAttributePtr attr)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	PRIVATE(attribute_editor)->doc = doc;
+	g_object_ref(doc); /*FIXME: need to unref */
+
+	PRIVATE(attribute_editor)->node = node;
+	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
+	PRIVATE(attribute_editor)->attr = attr;
+
+	return CONG_ATTRIBUTE_EDITOR (attribute_editor);
+}
+
+CongDocument*
+cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	return PRIVATE(attribute_editor)->doc; 
+}
+
+CongNodePtr
+cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	return PRIVATE(attribute_editor)->node;
+}
+
+const gchar*
+cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	return PRIVATE(attribute_editor)->attribute_name;
+}
+
+gchar*
+cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	return cong_node_get_attribute (PRIVATE(attribute_editor)->node, 
+					PRIVATE(attribute_editor)->attribute_name);
+}
+
 GtkWidget*
 cong_attribute_editor_new (CongDocument *doc,
 			   CongNodePtr node,
@@ -111,7 +153,8 @@ cong_attribute_editor_new (CongDocument *doc,
 	case XML_ATTRIBUTE_CDATA:
 		return cong_attribute_editor_cdata_new (doc,
 							node,
-							attr->name);
+							attr->name,
+							attr);
 	case XML_ATTRIBUTE_ID:
 		/* FIXME: extend NMTOKEN thing */
 		return gtk_label_new("ID");
@@ -146,8 +189,6 @@ cong_attribute_editor_new (CongDocument *doc,
 			GtkWidget *menu = gtk_menu_new();
 			xmlEnumerationPtr enum_ptr;
 
-			GtkWidget *menu_item = gtk_menu_item_new_with_label(enum_ptr->name);
-			
 			gtk_menu_shell_append (GTK_MENU_SHELL(menu), 
 					       gtk_menu_item_new_with_label(_("(unspecified)")));
 			
@@ -161,7 +202,7 @@ cong_attribute_editor_new (CongDocument *doc,
 				gtk_menu_shell_append(GTK_MENU_SHELL(menu), 
 						      menu_item);
 			}
-			
+
 			gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), 
 						 menu);
 
@@ -189,11 +230,13 @@ cong_attribute_editor_new (CongDocument *doc,
 						G_CALLBACK(on_enumeration_option_menu_changed),
 						NULL);
 
+			gtk_widget_show_all (option_menu);
+			
 			return option_menu;
 		}
 		
 	case XML_ATTRIBUTE_NOTATION:
-		/* FIXME: some kind of list view? */
+		/* FIXME: some kind of text entry? */
 		return gtk_label_new("NOTATION");
 	}
 
@@ -201,74 +244,6 @@ cong_attribute_editor_new (CongDocument *doc,
 
 	g_assert_not_reached();	
 }
-
-GtkWidget*
-cong_attribute_editor_cdata_new (CongDocument *doc,
-				 CongNodePtr node,
-				 const gchar *attribute_name)
-{
-#if 0
-	struct CongAttributeEditorDetails* details;
-
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(attribute_name, NULL);
-
-	details = g_new0(struct CongAttributeEditorDetails,1);
-
-	details->doc = doc;
-	details->node = node;
-	details->attribute_name = attribute_name;
-
-	details->hbox = gtk_hbox_new (FALSE, 6);
-	details->value = gtk_entry_new ();
-	details->add_btn = gtk_button_new_from_stock (GTK_STOCK_ADD);
-	details->delete_btn = gtk_button_new_from_stock (GTK_STOCK_DELETE);
-	
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->value, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->add_btn, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->delete_btn, FALSE, FALSE, 0);
-
-	refresh_cdata_editor (details);
-
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_set_attribute",
-				G_CALLBACK(on_set_attribute_cdata),
-				details);
-	g_signal_connect_after (G_OBJECT(doc),
-				"node_remove_attribute",
-				G_CALLBACK(on_remove_attribute_cdata),
-				details);
-
-	g_signal_connect_after (G_OBJECT(details->value),
-				"changed",
-				G_CALLBACK(on_text_entry_changed_cdata),
-				details);
-	g_signal_connect_after (G_OBJECT(details->add_btn),
-				"clicked",
-				G_CALLBACK(on_add_button_cdata),
-				details);
-	g_signal_connect_after (G_OBJECT(details->delete_btn),
-				"clicked",
-				G_CALLBACK(on_delete_button_cdata),
-				details);
-
-	return details->hbox;
-#else
-	GtkWidget *widget;
-	gchar *msg = g_strdup_printf(_("This will be an editor for CDATA attribute \"%s\""), attribute_name);
-	widget = gtk_label_new(msg);
-
-	g_free(msg);
-
-	return widget;
-#endif
-	
-}
-
-
-
-
 
 GtkWidget*
 create_cdata_editor (GladeXML *xml,
@@ -286,12 +261,15 @@ create_cdata_editor (GladeXML *xml,
 	/* for some reason, the string1 stuff is coming through in func_name on my machine: */
 	custom_widget = cong_attribute_editor_cdata_new (global_glade_doc_ptr, 
 							 global_glade_node_ptr, 
-							 func_name);
+							 func_name,
+							 NULL);
 #else
 	custom_widget = gtk_label_new(g_strdup_printf("custom widget \"%s\" \"%s\" \"%s\" \"%s\" %i %i", func_name, name, string1, string2, int1, int2)); /* for now */
 
 	gtk_widget_show_all(custom_widget);
 #endif
+
+	gtk_widget_show (custom_widget);
 
 	return custom_widget;
 }
@@ -301,96 +279,6 @@ CongNodePtr global_glade_node_ptr = NULL;
 
 
 /* Internal function definitions: */
-/* CDATA support: */
-static void
-on_set_attribute_cdata (CongDocument *doc, 
-			CongNodePtr node, 
-			const xmlChar *name, 
-			const xmlChar *value, 
-			gpointer user_data)
-{
-	refresh_cdata_editor (user_data);
-}
-
-static void
-on_remove_attribute_cdata (CongDocument *doc, 
-			   CongNodePtr node, 
-			   const xmlChar *name,
-			   gpointer user_data)
-{
-	refresh_cdata_editor (user_data);
-}
-
-static void
-on_text_entry_changed_cdata (GtkEditable *editable,
-			     gpointer user_data)
-{
-	struct CongAttributeEditorDetails *details = user_data;
-	
-	cong_document_begin_edit (details->doc);
-	
-	cong_document_node_set_attribute (details->doc, 
-					  details->node, 
-					  details->attribute_name,
-					  gtk_entry_get_text (GTK_ENTRY(details->value)));
-	
-	cong_document_end_edit (details->doc);
-}
-
-static void
-on_add_button_cdata (GtkButton *button,
-		     gpointer user_data)
-{
-	struct CongAttributeEditorDetails *details = user_data;
-	
-	cong_document_begin_edit (details->doc);
-	
-	cong_document_node_set_attribute (details->doc, 
-					  details->node, 
-					  details->attribute_name,
-					  "");
-	
-	cong_document_end_edit (details->doc);
-}
-
-static void
-on_delete_button_cdata (GtkButton *button,
-			gpointer user_data)
-{
-	struct CongAttributeEditorDetails *details = user_data;
-	
-	cong_document_begin_edit (details->doc);
-	
-	cong_document_node_remove_attribute (details->doc, 
-					     details->node, 
-					     details->attribute_name);
-	
-	cong_document_end_edit (details->doc);
-}
-
-
-static void
-refresh_cdata_editor (struct CongAttributeEditorDetails *details)
-{
-	gchar *attr_value = cong_node_get_attribute (details->node, 
-						     details->attribute_name);
-	
-	if (attr_value) {
-		gtk_entry_set_text (GTK_ENTRY (details->value),
-				    attr_value);
-
-		g_free (attr_value);
-
-		gtk_widget_show (details->value);
-		gtk_widget_hide (details->add_btn);
-		gtk_widget_show (details->delete_btn);
-	} else {
-		gtk_widget_hide (details->value);
-		gtk_widget_show (details->add_btn);
-		gtk_widget_hide (details->delete_btn);
-	}
-}
-
 /* ID support: */
 /* IDREF support: */
 /* IDREFS support: */

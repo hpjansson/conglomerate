@@ -1,5 +1,9 @@
 2003-09-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-editor.c, cong-attribute-editor.h, cong-dialog.c, cong-node-properties-dialog.c, tree.c
+
+	Created attribute editor class hierarchy; moved CDATA editing into new file as a subclass; removed some gtk_widget_show_all calls
+
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, Makefile.am
 
 	New files

@@ -30,17 +30,58 @@
 
 G_BEGIN_DECLS
 
+typedef struct CongAttributeEditor CongAttributeEditor;
+typedef struct CongAttributeEditorClass CongAttributeEditorClass;
+typedef struct CongAttributeEditorDetails CongAttributeEditorDetails;
+
+#define CONG_ATTRIBUTE_EDITOR_TYPE	      (cong_attribute_editor_get_type ())
+#define CONG_ATTRIBUTE_EDITOR(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_ATTRIBUTE_EDITOR_TYPE, CongAttributeEditor)
+#define CONG_ATTRIBUTE_EDITOR_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_ATTRIBUTE_EDITOR_TYPE, CongAttributeEditorClass)
+#define IS_CONG_ATTRIBUTE_EDITOR(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_ATTRIBUTE_EDITOR_TYPE)
+
+struct CongAttributeEditor
+{
+	GtkHBox hbox;
+
+	CongAttributeEditorDetails *private;
+};
+
+struct CongAttributeEditorClass
+{
+	GtkHBoxClass klass;
+};
+
+GType
+cong_attribute_editor_get_type (void);
+
+/* it's legitimate for attr to be NULL */
+CongAttributeEditor*
+cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
+				 CongDocument *doc,
+				 CongNodePtr node,
+				 const gchar *attribute_name,
+				 xmlAttributePtr attr);
+
+CongDocument*
+cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor);
+
+CongNodePtr
+cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor);
+
+const gchar*
+cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor);
+
+gchar*
+cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor);
+
+
 /* Generic attribute editing widget factory method: */
 GtkWidget*
 cong_attribute_editor_new (CongDocument *doc,
 			   CongNodePtr node,
 			   xmlAttributePtr attr);
 
-/* Specific attribute editing widget factory methods: */
-GtkWidget*
-cong_attribute_editor_cdata_new (CongDocument *doc,
-				 CongNodePtr node,
-				 const gchar *attribute_name);
+/* Specific attribute editing widget factory methods (to be moved to separate headers): */
 GtkWidget*
 cong_attribute_editor_id_new (CongDocument *doc,
 			      CongNodePtr node,

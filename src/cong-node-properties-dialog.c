@@ -280,9 +280,12 @@ void init_view_modelled_attr(CongAdvancedNodePropertiesView *view,
 									    view->node,
 									    attr);
 
+			gtk_widget_show (attr_editor);
+
 			cong_dialog_category_add_field (modelled_attr->category, 
 							attr->name, 
 							attr_editor);
+
 		}
 	}
 
@@ -531,10 +534,17 @@ void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
 
 		g_signal_connect(G_OBJECT(add_button), "clicked", G_CALLBACK(on_add_attribute), view);
 		g_signal_connect(G_OBJECT(raw_attr->delete_button), "clicked", G_CALLBACK(on_delete_attribute), view);
+
+		gtk_widget_show(raw_attr->delete_button);
+		gtk_widget_show(add_button);
 	}
 
 	gtk_container_add(GTK_CONTAINER(vbox), GTK_WIDGET(raw_attr->tree_view));
 	gtk_container_add(GTK_CONTAINER(vbox), hbox);
+
+	gtk_widget_show(GTK_WIDGET(raw_attr->tree_view));
+	gtk_widget_show(hbox);
+	gtk_widget_show(vbox);
 
 	cong_dialog_category_add_selflabelled_field(raw_attr->category, vbox);
 }
@@ -580,7 +590,7 @@ GtkWidget *cong_node_properties_dialog_advanced_new(CongDocument *doc,
 		
 	widget = cong_dialog_content_get_widget(view->dialog_content);
 
-	gtk_widget_show_all (widget);
+	gtk_widget_show (widget);
 
 	return widget;
 }
@@ -652,12 +662,16 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 		advanced_properties = cong_node_properties_dialog_advanced_new(doc, 
 									       node,
 									       FALSE);
+
 		gtk_box_pack_start(GTK_BOX(vbox), advanced_properties, FALSE, FALSE, 0);
+
+		gtk_widget_show (advanced_properties);
 
 		g_signal_connect_swapped (G_OBJECT (dialog), 
 					  "response", 
 					  G_CALLBACK (gtk_widget_destroy),
 					  GTK_OBJECT (dialog));
+
 
 		return GTK_WIDGET(dialog);
 	}
