@@ -1,8 +1,14 @@
+2004-08-01  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* xmledit.c, popup.c, cong-ui-hooks.h, cong-primary-window.h, cong-primary-window.c, cong-menus.c, cong-document.h: 
+
+	Port of menus from GtkItemFactory to the GtkUIManager/GtkAction API
+
 2004-07-30  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-plugin.c (cong_ui_transform_doc): 
 
-	Convert our list of stylesheet parameters into the form libxslt in expecting.  Not tested yet.
+	Convert our list of stylesheet parameters into the form libxslt is expecting.  Not tested yet.
 
 	* file.c: 
 

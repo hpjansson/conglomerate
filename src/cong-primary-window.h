@@ -27,6 +27,46 @@
 
 G_BEGIN_DECLS
 
+enum CongActionGroup {
+	CONG_ACTION_GROUP_APPLICATION,
+	CONG_ACTION_GROUP_DOCUMENT,
+	CONG_ACTION_GROUP_DOCUMENT_TOOLS,
+	NUM_CONG_ACTION_GROUPS
+};
+
+struct CongPrimaryWindow
+{
+	CongDocument *doc;
+
+	GtkUIManager *ui_manager;
+	GtkActionGroup *action_group[NUM_CONG_ACTION_GROUPS];
+	guint merge_id;
+
+/*  	GtkWidget *w; */
+
+	GtkWidget *cong_editor_widget3;
+	GtkWidget *scroller3;
+
+	GtkWidget *window, *menus;
+	GtkToolbar *toolbar;
+#if 1
+	GtkWidget *app_bar;
+#else
+	GtkWidget *status;
+#endif
+	GtkWidget *auth, *butt_submit, *butt_find;
+	
+#if 0
+	guint status_main_ctx;
+#endif
+
+	GtkAccelGroup *accel;
+
+
+
+};
+
+
 /**
  * cong_primary_window_new:
  * @doc: the document that should be loaded into the new window; if NULL, a document-less
@@ -56,7 +96,18 @@ cong_primary_window_update_title (CongPrimaryWindow *primary_window);
 GtkWindow*
 cong_primary_window_get_toplevel (CongPrimaryWindow *primary_window);
 
+GtkUIManager*
+cong_primary_window_get_ui_manager (CongPrimaryWindow *primary_window);
+
+GtkActionGroup*
+cong_primary_window_get_action_group (CongPrimaryWindow *primary_window,
+				      enum CongActionGroup action_group);
+
 gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window);
+
+void
+cong_menus_setup_document_action_group (CongPrimaryWindow *primary_window);
+
 
 G_END_DECLS
 

@@ -97,14 +97,13 @@ cong_document_copy_selection(CongDocument *doc)
 }
 
 /**
- * cong_document_paste_clipboard_or_selection:
+ * cong_document_paste_clipboard:
  * @doc:
- * @widget:
  *
  * TODO: Write me
  */
 void 
-cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *widget)
+cong_document_paste_clipboard (CongDocument *doc)
 {
 	CongSelection *selection;
 	CongCursor *curs;

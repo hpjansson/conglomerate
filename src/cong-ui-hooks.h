@@ -200,8 +200,19 @@ void menu_callback_debug_dialog(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget);
 
-void cong_menus_create_items(GtkItemFactory *item_factory, 
-			     CongPrimaryWindow *primary_window);
+void
+cong_menus_setup_action_groups (CongPrimaryWindow *primary_window);
+
+guint
+cong_menus_setup_ui_layout (CongPrimaryWindow *primary_window);
+
+#if 0
+guint
+cong_menus_create_items (CongPrimaryWindow *primary_window);
+#endif
+
+void
+cong_menus_refresh_action_groups (CongPrimaryWindow *primary_window);
 
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);

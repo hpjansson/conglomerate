@@ -327,8 +327,7 @@ cong_document_can_print (CongDocument *doc);
 #endif
 
 void 
-cong_document_paste_clipboard_or_selection (CongDocument *doc, 
-					    GtkWidget *widget);
+cong_document_paste_clipboard (CongDocument *doc);
 
 void
 cong_document_paste_source_at (CongDocument *doc, 

@@ -85,34 +85,6 @@
  * 
  */
 
-struct CongPrimaryWindow
-{
-	CongDocument *doc;
-
-/*  	GtkWidget *w; */
-
-	GtkWidget *cong_editor_widget3;
-	GtkWidget *scroller3;
-
-	GtkWidget *window, *menus;
-	GtkToolbar *toolbar;
-#if 1
-	GtkWidget *app_bar;
-#else
-	GtkWidget *status;
-#endif
-	GtkWidget *auth, *butt_submit, *butt_find;
-	
-#if 0
-	guint status_main_ctx;
-#endif
-
-	GtkAccelGroup *accel;
-
-
-
-};
-
 #if 1
 /**
  * cong_gui_get_a_window:
@@ -374,7 +346,7 @@ toolbar_callback_paste(GtkWidget *w, gpointer data)
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	cong_document_paste_clipboard_or_selection(doc, w);
+	cong_document_paste_clipboard (doc);
 
 	return TRUE;
 }
@@ -724,7 +696,6 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 	GdkColor gcol;
 	GtkStyle *style;
 	int i;
-	GtkItemFactory *item_factory = NULL;
 	
 	g_assert (primary_window);
 
@@ -775,9 +746,9 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 	cong_primary_window_toolbar_populate (primary_window);
 	/* title update */
 	cong_primary_window_update_title (primary_window);
+
 	/* update the menus */
-	item_factory = gtk_item_factory_from_widget (primary_window->menus);
-	cong_menus_create_items(item_factory, primary_window);
+	cong_menus_setup_document_action_group (primary_window);
 }
 
 /**
@@ -789,7 +760,6 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 void 
 cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 {
-	GtkItemFactory *item_factory;
 	gchar *title;
 
 	g_assert(primary_window);
@@ -821,17 +791,31 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	/* --- Menus --- */
 
+#if 1
+	primary_window->merge_id = cong_menus_setup_ui_layout (primary_window);
+	primary_window->menus = gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainMenuBar");
+	gnome_app_set_menus(GNOME_APP(primary_window->window), GTK_MENU_BAR(primary_window->menus));
+	gtk_widget_show(primary_window->menus);
+
+	{
+		GtkAccelGroup *accel_group;
+		
+		accel_group = gtk_ui_manager_get_accel_group (primary_window->ui_manager);
+		gtk_window_add_accel_group (GTK_WINDOW (primary_window->window), accel_group);	
+	}
+#else
 	primary_window->accel = gtk_accel_group_new();
 	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", primary_window->accel);
 	gtk_item_factory_set_translate_func(item_factory, (GtkTranslateFunc) gettext, NULL, NULL);
 
-	cong_menus_create_items(item_factory, primary_window);
+	cong_menus_refresh_items(item_factory, primary_window);
 
 	gtk_window_add_accel_group(GTK_WINDOW(primary_window->window), primary_window->accel);
 
 	primary_window->menus = gtk_item_factory_get_widget(item_factory, "<main>");
 	gnome_app_set_menus(GNOME_APP(primary_window->window), GTK_MENU_BAR(primary_window->menus));
 	gtk_widget_show(primary_window->menus);
+#endif
 	
 	/* --- Toolbar --- */
 	primary_window->toolbar = GTK_TOOLBAR(gtk_toolbar_new());
@@ -906,6 +890,9 @@ cong_primary_window_new(CongDocument *doc)
 	
 	primary_window = g_new0(CongPrimaryWindow, 1);
 
+	primary_window->ui_manager = gtk_ui_manager_new ();
+	cong_menus_setup_action_groups (primary_window);
+
 	cong_primary_window_make_gui(primary_window);
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
 
@@ -914,6 +901,7 @@ cong_primary_window_new(CongDocument *doc)
 	gtk_widget_show_all(GTK_WIDGET(primary_window->window));
 
 	cong_app_singleton()->primary_windows = g_list_prepend(cong_app_singleton()->primary_windows, primary_window);
+
 
 	if (doc) {
 		cong_primary_window_add_doc (primary_window, doc);
@@ -1011,4 +999,29 @@ cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window)
 	g_return_val_if_fail(primary_window, NULL);
 
 	return GTK_WINDOW(primary_window->window);
+}
+
+/**
+ * cong_primary_window_get_ui_manager:
+ * @primary_window:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+GtkUIManager*
+cong_primary_window_get_ui_manager (CongPrimaryWindow *primary_window)
+{
+	g_return_val_if_fail (primary_window, NULL);
+
+	return primary_window->ui_manager;
+}
+
+GtkActionGroup*
+cong_primary_window_get_action_group (CongPrimaryWindow *primary_window,
+				      enum CongActionGroup action_group)
+{
+	g_return_val_if_fail (primary_window, NULL);
+	g_return_val_if_fail (action_group<NUM_CONG_ACTION_GROUPS, NULL);
+
+	return primary_window->action_group[action_group];
 }
