@@ -1,6 +1,8 @@
 conglomerate (0.7.4-2) UNRELEASED; urgency=low
 
-  * rules: removed various '#dh_ lines' for readability.
+  * rules:
+   - removed various '#dh_ lines' for readability.
+   - automated the patching of the 'omf.make' file.
 
  -- Geert Stappers <stappers@stappers.nl>  Mon,  6 Oct 2003 13:52:01 +0000
 
