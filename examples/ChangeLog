@@ -1,4 +1,14 @@
 creating ChangeLog
+2003-05-26  David Malcolm
+
+	* docbook.xds
+
+	Added footnote tag
+
+	* error-proposal.xml, test-docbook.xml, test-table.xml
+
+	Fixed most validation problems
+	
 2003-05-15  David Malcolm
 
 	* docbook.xds

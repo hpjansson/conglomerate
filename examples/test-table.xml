@@ -1,1 +1,53 @@
-<document><section>fubar this is a test<table>ooh</table>fubar<embed>fubar</embed></section></document>
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
+<article>
+  <para>This file is a test of table support within <application>Conglomerate</application></para>
+  <table frame="all"><title>Test table</title><titleabbrev>Test</titleabbrev>
+    <tgroup cols="3">
+      <thead>
+	<row>
+	  <entry>Column 0 header</entry>
+	  <entry>Column 1 header</entry>
+	  <entry>Column 2 header</entry>
+	</row>
+      </thead>
+      <tfoot>
+	<row>
+	  <entry>Column 0 footer</entry>
+	  <entry>Column 1 footer</entry>
+	  <entry>Column 2 footer</entry>
+	</row>
+      </tfoot>
+      <tbody>
+	<row>
+	  <entry>Row 0, Col 0</entry>
+	  <entry>Row 0, Col 1</entry>
+	  <entry>Row 0, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 1, Col 0</entry>
+	  <entry>Row 1, Col 1</entry>
+	  <entry>Row 1, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 2, Col 0</entry>
+	  <entry>Row 2, Col 1</entry>
+	  <entry>Row 2, Col 2</entry>
+	</row>
+	  <row>
+	  <entry>Row 3, Col 0</entry>
+	  <entry>Row 3, Col 1</entry>
+	  <entry>Row 3, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 4, Col 0</entry>
+	  <entry>Row 4, Col 1</entry>
+	  <entry>Row 4, Col 2</entry>
+	</row>
+      </tbody>	
+    </tgroup>
+    
+  </table>
+  <para>That was a test table</para>
+</article>

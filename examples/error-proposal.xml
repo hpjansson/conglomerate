@@ -1,413 +1,416 @@
-<book>
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
 <article>
-<artheader>
-<author><firstname>David</firstname><surname>Malcolm</surname></author>
-<title>Proposal for error handling</title>
+  <title>Proposal for error handling</title>
+  <articleinfo>
+    <author><firstname>David</firstname><surname>Malcolm</surname></author>
+  </articleinfo>
+  
+  <para>The three parts of good error reporting (according to a talk by a Sun representative at the 2001 GUADEC, IIRC) are:</para>
+  <orderedlist>
+    <listitem><para>say what hasn't worked</para></listitem>
+    <listitem><para>say why it failed</para></listitem>
+    <listitem><para>make suggestions on how to fix it</para></listitem>
+  </orderedlist>
+  
+  <para>I propose that the HIG should make various recommendations on how the standard menu items for working with documents should deal with errors, and that we provide a lib for making this easy for app developers (with i18n done once for the lib, covering all apps).</para>
+  
+  <sect1><title>Notes</title>
+    <para>The titles I've given aren't user-visible; they are for discussion of the error.  The user-visible title is the "What failed:" string.</para>
+    <para>There are various places where I've avoided jargon e.g. I've spoken about "applications" and "system tasks" rather than programs; I've referred to paths as "locations"; this wording could change, I suspect there is terminology that I'm meant to use</para>
+    <para>I've chosen wording so that if something has failed due to a "permanent" cause, the message says "foo cannot do bar", whereas if the problem is more transient (e.g. is potentially fixable) the message says "foo could not do bar".</para>
+    <para>I've deliberately divided URIs into a path and file componenent; I believe this is more readable for users.</para>
+    <para>Do we want to support a convenience button for accessing files as superuser when certain permission errors occur? (with an authentication dialog?)</para>
+  </sect1>
+  
+  <sect1><title>File->Open</title>
+    <para>Errors that can occur:</para>
+    <sect2><title>Path not found</title>
+      <para>Use this in preference to a mere "file not found".</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot find <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <itemizedlist>
+	      <listitem><para>Check that you spelt the location correctly.  Remember that capitalisation is significant ("MyLocation" is not the same as "MYLOCATION" or "mylocation").</para></listitem>
+	      <listitem><para>Use the GNOME Search Tool to find your file (really?)</para></listitem>
+	    </itemizedlist>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>File not found</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot find <replaceable>filename</replaceable> at <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <orderedlist>
+	      <listitem><para>Check that you spelt the file's name correctly.  Remember that capitalisation is significant ("MyFile" is not the same as "MYFILE" or "myfile").</para></listitem>
+	      <listitem><para>Use the GNOME Search Tool to find your file (really?)</para></listitem>
+	    </orderedlist>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>No read permission (path)</title>
+      <para>Use in preference to "No read permission (file)".</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>You do not have permission to read files from that location.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	   <para>Try getting your system administrator to give you permission.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>No read permission (file)</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>You do not have permission to read that file.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Try getting your system administrator to give you permission.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>Corrupt file</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    The file seems to be corrupt.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Try looking for a backup copy of the file (more description needed... is there a standard we should be pushing for e.g. trailing tildes?)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Convenience button:</term>
+	  <listitem>
+	    <para>Open backup (only sensitive if one exists)</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>Wrong version of file format</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>Various messages are possible, depending on whether the app can recognise the file format...</para>
+	    <para><replaceable>app-name</replaceable> does not understand the file format of <replaceable>filename</replaceable> (jargon?)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Try upgrading to the latest version of <replaceable>app-name</replaceable>, or using a different application to open the file.
+</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>Too early version of file format</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2><title>Too late version of file format</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+  
+  <sect1><title>File->Save</title>
+    <para>Errors that can occur:</para>
+    
+    <sect2><title>Read-only volume</title>
+      <para>Use this in preference to "no permission" for things like CD-ROMS.</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>The location you specified is a read-only device.  (better wording? avoid jargon? may want to split the error into those which are genuinely read-only devices like CD-ROMS, and those which are GnomeVFS methods for which writing isn't yet implemented)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions: </term>
+	  <listitem>
+	    <para>Try saving the file to a different location.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
 
-</artheader>
-
-The three parts of good error reporting (according to a talk by a Sun representative at the 2001 GUADEC, IIRC) are:
-<orderedlist>
-<listitem>say what hasn't worked</listitem>
-<listitem>say why it failed</listitem>
-<listitem>make suggestions on how to fix it</listitem>
-</orderedlist>
-
-I propose that the HIG should make various recommendations on how the standard menu items for working with documents should deal with errors, and that we provide a lib for making this easy for app developers (with i18n done once for the lib, covering all apps).
-
-<sect1><title>Notes</title>
-<para>The titles I've given aren't user-visible; they are for discussion of the error.  The user-visible title is the "What failed:" string.</para>
-<para>There are various places where I've avoided jargon e.g. I've spoken about "applications" and "system tasks" rather than programs; I've referred to paths as "locations"; this wording could change, I suspect there is terminology that I'm meant to use</para>
-<para>I've chosen wording so that if something has failed due to a "permanent" cause, the message says "foo cannot do bar", whereas if the problem is more transient (e.g. is potentially fixable) the message says "foo could not do bar".</para>
-<para>I've deliberately divided URIs into a path and file componenent; I believe this is more readable for users.</para>
-<para>Do we want to support a convenience button for accessing files as superuser when certain permission errors occur? (with an authentication dialog?)</para>
-</sect1>
-
-<sect1><title>File->Open</title>
-Errors that can occur:
-<sect2><title>Path not found</title>
-Use this in preference to a mere "file not found".
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot find <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-(i)Check that you spelt the location correctly.  Remember that capitalisation is significant ("MyLocation" is not the same as "MYLOCATION" or "mylocation").
-(ii) Use the GNOME Search Tool to find your file (really?)
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>File not found</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot find <replaceable>filename</replaceable> at <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-(i)Check that you spelt the file's name correctly.  Remember that capitalisation is significant ("MyFile" is not the same as "MYFILE" or "myfile").
-(ii) Use the GNOME Search Tool to find your file (really?)
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>No read permission (path)</title>
-Use in preference to "No read permission (file)".
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-You do not have permission to read files from that location.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try getting your system administrator to give you permission.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>No read permission (file)</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-You do not have permission to read that file.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try getting your system administrator to give you permission.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>Corrupt file</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-The file seems to be corrupt.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try looking for a backup copy of the file (more description needed... is there a standard we should be pushing for e.g. trailing tildes?)
-</listitem>
-</varlistentry>
-<varlistentry>
-Convenience button:
-<listitem>
-Open backup (only sensitive if one exists)
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>Wrong version of file format</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot read <replaceable>filename</replaceable> from <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-Various messages are possible, depending on whether the app can recognise the file format...
-<replaceable>app-name</replaceable> does not understand the file format of <replaceable>filename</replaceable> (jargon?)
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try upgrading to the latest version of <replaceable>app-name</replaceable>, or using a different application to open the file.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>Too early version of file format</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-<sect2><title>Too late version of file format</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-</sect1>
-
-<sect1><title>File->Save</title>
-Errors that can occur:
-
-<sect2><title>Read-only volume</title>
-Use this in preference to "no permission" for things like CD-ROMS.
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-The location you specified is a read-only device.  (better wording? avoid jargon? may want to split the error into those which are genuinely read-only devices like CD-ROMS, and those which are GnomeVFS methods for which writing isn't yet implemented)
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try saving the file to a different location.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>No write permission (path)</title>
-Use this in preference to "No write permission (file)".
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-You do not have permission to write to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try saving the file to a different location, or getting your system administrator to give you permission.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>No write permission (file)</title>
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-You do not have permission to write to that location.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try saving the file to a different location, or getting your system administrator to give you permission.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>Couldn't open the file (someone else has it open?)</title>
-Use this when the file is held open by another process.
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> could not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-The file may be being accessed by another application or by a system task.
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Wait a few seconds and then try again.  If that fails, try closing other applications using this file, or try saving to another location.
-</listitem>
-</varlistentry>
-<varlistentry>
-Convenience button:
-<listitem>
-Retry
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>Not enough space (permanent)</title>
-Use this when the file is too big to fit on the device, and is indeed larger than the storage capacity of the device e.g. trying to save a 1GB file on a 1.44MB floppy.
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> cannot not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-The file is too big to fit on the device. (jargon?)
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-The size of the file is <replaceable>size</replaceable>, but the device only has a capacity of <replaceable>size</replaceable>.  Try saving the file to a different location.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>Not enough space (fixable)</title>
-Use this when the file is too big to fit on the device, but is not larger than the storage capacity of the device e.g. trying to save a 300KB file on a 1.44MB floppy which only has 100KB of free space.
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> could not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-There isn't enough space on the device. (jargon?)
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-The size of the file is <replaceable>size</replaceable>, but you only have <replaceable>size</replaceable> free on that device.  Try saving the file to a different location, or making more space by moving unwanted files from that device to the trash. (jargon?)
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-<sect2><title>Error writing file</title>
-Use this when a general error occurs when writing the file.  What to do if the file is now likely to be corrupt?
-<variablelist>
-<varlistentry>
-What failed:
-<listitem>
-<replaceable>app-name</replaceable> had problems writing <replaceable>filename</replaceable> to <replaceable>path</replaceable>.
-</listitem>
-</varlistentry>
-<varlistentry>
-Why it failed:
-<listitem>
-writeme
-</listitem>
-</varlistentry>
-<varlistentry>
-Suggestions:
-<listitem>
-Try saving to another location.
-</listitem>
-</varlistentry>
-</variablelist>
-</sect2>
-
-</sect1>
-
-<sect1><title>File->Save As...</title>
-I believe the errors should correspond to those from File->Save
-</sect1>
-
-<sect1><title>File->Save a Copy...</title>
-I believe the errors should correspond to those from File->Save
-</sect1>
-
-<sect1><title>File->Revert</title>
-fubar
-</sect1>
-
-etc
-
+    <sect2><title>No write permission (path)</title>
+      <para>      Use this in preference to "No write permission (file)".</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>You do not have permission to write to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Try saving the file to a different location, or getting your system administrator to give you permission.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+    <sect2><title>No write permission (file)</title>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>You do not have permission to write to that location.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Try saving the file to a different location, or getting your system administrator to give you permission.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+    <sect2><title>Couldn't open the file (someone else has it open?)</title>
+      <para>Use this when the file is held open by another process.</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> could not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	  <para>The file may be being accessed by another application or by a system task.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>Wait a few seconds and then try again.  If that fails, try closing other applications using this file, or try saving to another location.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Convenience button:</term>
+	  <listitem>
+	   <para>Retry</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+    <sect2><title>Not enough space (permanent)</title>
+      <para>Use this when the file is too big to fit on the device, and is indeed larger than the storage capacity of the device e.g. trying to save a 1GB file on a 1.44MB floppy.</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> cannot not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para> The file is too big to fit on the device. (jargon?)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>The size of the file is <replaceable>size</replaceable>, but the device only has a capacity of <replaceable>size</replaceable>.  Try saving the file to a different location.
+</para>	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+    <sect2><title>Not enough space (fixable)</title>
+      <para>Use this when the file is too big to fit on the device, but is not larger than the storage capacity of the device e.g. trying to save a 300KB file on a 1.44MB floppy which only has 100KB of free space.</para>      
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>	  
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> could not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>There isn't enough space on the device. (jargon?)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	    <para>The size of the file is <replaceable>size</replaceable>, but you only have <replaceable>size</replaceable> free on that device.  Try saving the file to a different location, or making more space by moving unwanted files from that device to the trash. (jargon?)</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+    <sect2><title>Error writing file</title>
+      <para>Use this when a general error occurs when writing the file.  What to do if the file is now likely to be corrupt?</para>
+      <variablelist>
+	<varlistentry>
+	  <term>What failed:</term>
+	  <listitem>
+	    <para><replaceable>app-name</replaceable> had problems writing <replaceable>filename</replaceable> to <replaceable>path</replaceable>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Why it failed:</term>
+	  <listitem>
+	    <para>writeme</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Suggestions:</term>
+	  <listitem>
+	      <para>Try saving to another location.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+    
+  </sect1>
+  
+  <sect1><title>File->Save As...</title>
+    <para>I believe the errors should correspond to those from File->Save</para>
+  </sect1>
+  
+  <sect1><title>File->Save a Copy...</title>
+    <para>I believe the errors should correspond to those from File->Save</para>
+  </sect1>
+  
+  <sect1><title>File->Revert</title>
+    <para>fubar</para>
+  </sect1>
+  
 </article>
-</book>
 
 
 

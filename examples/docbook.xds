@@ -148,6 +148,10 @@
 			<name locale="en">Free-floating Heading</name>
 		</element>
 
+		<element tag="footnote" type="structural" color="a0b0c0">
+			<name locale="en">Footnote</name>
+		</element>
+
 		<!-- The various sections -->
 		<element tag="preface" type="structural" color="a0b0c0">
 			<name locale="en">Preface</name>
