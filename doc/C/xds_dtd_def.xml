@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+                      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY % global_entities SYSTEM "global.ent">
+%global_entities;
+]>-->
+<appendix id="xds_dtd_def">
+    <title id="xds_dtd_def.title">Display Specification DTD</title>
+    <para>The Display Specification DTD (<filename>xds.dtd</filename>) specifies the kinds of tags
+        that can be included in your XDS document. In addition, the DTD tells a validating parser
+        which tags are valid, and in what arrangements. A DTD tells both validating and
+        non-validating parsers where text is expected. This lets the parser determine whether the
+        whitespace it sees is significant or ignorable.</para>
+    <para>When creating or editing an XDS, the XML tags used, their attributes and arrangement must
+        conform to <filename>xds.dtd</filename>. If the XDS is invalid,
+        <application>&app;</application> may throw an exception and exit.</para>
+    <sect1 id="xds_anatomy">
+        <title>Anatomy of a Display Specification</title>
+        <para>A display specification is an XML file, it therefore has an XML prolog like such.</para>
+        <para>
+            <programlisting><![CDATA[<?xml version="1.0"?>]]></programlisting>
+        </para>
+        <para>When creating or editing an XDS the Display Specification DTD
+            (<filename>xds.dtd</filename>) should be declared so that your custom XDS may be
+            validated against it. The Document Type Declaration of a display specification always
+            defines the &quot;root&quot; as <sgmltag class="starttag">dispspec</sgmltag>.</para>
+        <para>The Document Type Declaration does not have a PUBLIC Identifier as they are not
+            strictly required for <acronym>XML</acronym> documents. The DTD location is therefore
+            specified using the SYSTEM Identifier as shown in the following example.</para>
+        <para>
+            <programlisting><![CDATA[<!DOCTYPE dispspec SYSTEM "xds.dtd">]]></programlisting>
+        </para>
+        <note>
+            <para>
+                <application>&app;</application> does currently validate XDS files at run-time.</para>
+        </note>
+    </sect1>
+    <sect1 id="display_spec_element_reference">
+        <title id="display_spec_element_reference.title">Element Reference</title>
+        <sect2 id="collapseto">
+            <title id="collapseto.title">collapseto</title>
+            <para>The <sgmltag class="starttag">collapseto</sgmltag> element is currently unsupported.</para>
+            <para>When supported, setting <sgmltag class="starttag">collapseto</sgmltag> causes the
+                element wrapper to become part of the parent node element wrapper. The vertical line
+                of the parent element wrapper is punctuated or outdented at the point where the
+                element with <sgmltag class="starttag">collapseto</sgmltag> set is located.</para>
+            <sect3 id="collapseto_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="collapseto_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>
+                </para>
+            </sect3>
+            <sect3 id="collapseto_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="collapseto_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>.</para>
+            </sect3>
+        </sect2>
+        <sect2 id="description">
+            <title id="description.title">description</title>
+            <para>A paragraph describing the Document Type annoted by the XDS.</para>
+            <sect3 id="description_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            &row_xml_lang_attrib;
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="description_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="metadata.title" linkend="metadata"/>
+                </para>
+            </sect3>
+            <sect3 id="description_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="description_example">
+                <title>Example</title>
+                <para>See <link endterm="metadata.title" linkend="metadata"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="dispspec">
+            <title id="dispspec.title">dispspec</title>
+            <para>This is the root element of the &app; Display Specification Document Type.</para>
+            <sect3 id="dispspec_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="dispspec_parents">
+                <title>Parents</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="dispspec_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="metadata.title" linkend="metadata"/>, <link
+                        endterm="serialisation.title" linkend="serialisation"/>, <link
+                        endterm="document-models.title" linkend="document-models"/>, <link
+                        endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="dispspec_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<dispspec>
+    <metadata>
+        . . .
+    </metadata>
+    <serialisation>
+        . . .
+    </serialisation>
+    <document-models>
+        . . .
+    </document-models>
+    <element-list>
+        . . .
+    </element-list>
+</dispspec>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="document-models">
+            <title id="document-models.title">document-models</title>
+            <para>A wrapper element for <sgmltag class="starttag">external-document-model</sgmltag>.
+                Mutiple <sgmltag class="starttag">external-document-model</sgmltag> elements may be specified.</para>
+            <sect3 id="document-models_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="document-models_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="document-models_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="external-document-model.title" linkend="external-document-model"/>
+                </para>
+            </sect3>
+            <sect3 id="document-models_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    . . .
+    <document-models>
+        <external-document-model type="dtd" public-id="" system-id=""/>
+    </document-models>
+    . . .
+</dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="element">
+            <title id="element.title">element</title>
+            <para>An XML element.</para>
+            <sect3 id="element_attributes">
+                <title>Attributes</title>
+                &tbl_element_attrib;
+            </sect3>
+            <sect3 id="element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link
+                        endterm="key-value-list.title" linkend="key-value-list"/>, <link
+                        endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title"
+                    linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="element-list">
+            <title id="element-list.title">element-list</title>
+            <para>A wrapper element for element types.</para>
+            <sect3 id="element-list_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="element-list_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="element-list_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="element-list_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<dispspec>
+    <element-list> 
+        <element tag="" type="" color="" filename-xpath="" icon="" \
+            ns="" plugin-id="" whitespace="normalize">
+            . . .
+        </element>
+        <plugin-element tag="" color="" filename-xpath="" icon="" \
+            ns="" plugin-id="" whitespace="normalize">
+            . . .
+        </plugin-element>
+        <span-element tag="" color="" filename-xpath="" icon="" \
+            ns="" whitespace="normalize">
+            . . .
+        </span-element>
+        <structural-element tag="" color="" filename-xpath="" icon="" \
+            ns="" whitespace="normalize">
+            . . .
+        </structural-element>
+    </element-list>
+<dispspec>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="external-document-model">
+            <title id="external-document-model.title">external-document-model</title>
+            <para>Specifies the Document Type Definition (DTD) annotated by this Display
+                Specification (XDS).</para>
+            <sect3 id="external-document-model_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>type</entry>
+                                <entry>
+                                    <para>dtd</para>
+                                    <para>relax-ng-schema</para>
+                                    <para>w3c-schema</para>
+                                </entry>
+                                <entry>text</entry>
+                            </row>
+                            <row>
+                                <entry>public-id</entry>
+                                <entry>value</entry>
+                                <entry>The PUBLIC Identifier by which the Documen Type is recognized.</entry>
+                            </row>
+                            <row>
+                                <entry>system-id</entry>
+                                <entry>value</entry>
+                                <entry>The SYSTEM Indentifier by which the Document Type is to be recognized.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="external-document-model_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="document-models.title" linkend="document-models"/>
+                </para>
+            </sect3>
+            <sect3 id="external-document-model_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="external-document-model_example">
+                <title>Example</title>
+                <para>See <link endterm="document-models.title" linkend="document-models"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="format">
+            <title id="format.title">format</title>
+            <para>text</para>
+            <sect3 id="format_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="format_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="serialisation.title" linkend="serialisation"/>
+                </para>
+            </sect3>
+            <sect3 id="format_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="format_example">
+                <title>Example</title>
+                <para>See <link linkend="serialisation" endterm="serialisation.title"/>.</para>
+            </sect3>
+        </sect2>
+        <sect2 id="header-info">
+            <title id="header-info.title">header-info</title>
+            <para>Defines title content for nodes shown in the outline tree view and the element
+                wrappers shown in the page view. Node content is comprised of two parts [element
+                name] : [title] where:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="bold">[name]</emphasis> is derived from <sgmltag class="starttag">name</sgmltag>.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="bold">[title]</emphasis> is derived from either the value of
+                            <sgmltag class="attribute">tag</sgmltag> or the result of <sgmltag class="attribute">xpath</sgmltag>.</para>
+                </listitem>
+            </itemizedlist>
+            <sect3 id="header-info_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>tag</entry>
+                                <entry>An element name from the anotated Document Type.</entry>
+                                <entry>When an element name is provided &app; will search for a
+                                    child node whose name corrsponds to the value of <sgmltag
+                                    class="attribute">tag</sgmltag> and return the value of the next
+                                    child node for [title].</entry>
+                            </row>
+                            <row>
+                                <entry>xpath</entry>
+                                <entry>value</entry>
+                                <entry>An XPath expression that can be used to return a string. The
+                                    resulting string is used for [title].</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="header-info_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>
+                </para>
+            </sect3>
+            <sect3 id="header-info_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="header-info_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>. </para>
+            </sect3>
+        </sect2>
+        <sect2 id="key-value-list">
+            <title id="key-value-list.title">key-value-list</title>
+            <para>text</para>
+            <sect3 id="key-value-list_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="key-value-list_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-list_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="key-value-pair.title" linkend="key-value-pair"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-list_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+</structural-element>
+    . . .
+    <key-value-list>
+       <key-value-pair key="" value=""/>
+    </key-value-list>
+    . . .
+</structural-element>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="key-value-pair">
+            <title id="key-value-pair.title">key-value-pair</title>
+            <para>text</para>
+            <sect3 id="key-value-pair_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="key-value-pair_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="key-value-list.title" linkend="key-value-list"/>
+                </para>
+            </sect3>
+            <sect3 id="key-value-pair_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="key-value-pair_example">
+                <title>Example</title>
+                <para>See <link endterm="key-value-list.title" linkend="key-value-list"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="metadata">
+            <title id="metadata.title">metadata</title>
+            <para>A wrapper for elements that provide data about the Document Type which the XDS annotates.</para>
+            <sect3 id="metadata_attributes">
+                <title>Attributes</title>
+                <para>None Applicable.</para>
+            </sect3>
+            <sect3 id="metadata_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="metadata_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="name.title" linkend="name"/>, <link endterm="description.title" linkend="description"/>
+                </para>
+            </sect3>
+            <sect3 id="metadata_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    <metadata>
+        <name xml:lang=""> . . . </name>
+        <description xml:lang=""> . . . </description>
+    </metadata>
+    . . .
+<dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="name">
+            <title id="name.title">name</title>
+            <para>The displayed name of an object.</para>
+            <sect3 id="name_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            &row_xml_lang_attrib;
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="name_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link
+                        endterm="metadata.title" linkend="metadata"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="name_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="name_example">
+                <title>Example</title>
+                <para>See <link endterm="element.title" linkend="element"/>, <link
+                        endterm="metadata.title" linkend="metadata"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="plugin-element">
+            <title id="plugin-element.title">plugin-element</title>
+            <para>text</para>
+            <sect3 id="plugin-element_attributes">
+                <title>Attributes</title>
+                &tbl_element_attrib;
+            </sect3>
+            <sect3 id="plugin-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="plugin-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link
+                        endterm="key-value-list.title" linkend="key-value-list"/>, <link
+                        endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title"
+                    linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="plugin-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <plugin-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </plugin-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="property-dialog">
+            <title id="property-dialog.title">property-dialog</title>
+            <para>text</para>
+            <sect3 id="property-dialog_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>plugin-id</entry>
+                                <entry>value</entry>
+                                <entry>text</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="property-dialog_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="property-dialog_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="property-dialog_example">
+                <title>Example</title>
+                <para> See <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="serialisation">
+            <title id="serialisation.title">serialisation</title>
+            <para>text</para>
+            <sect3 id="serialisation_attributes">
+                <title>Attributes</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="serialisation_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="dispspec.title" linkend="dispspec"/>
+                </para>
+            </sect3>
+            <sect3 id="serialisation_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="format.title" linkend="format"/>
+                </para>
+            </sect3>
+            <sect3 id="serialisation_example">
+                <title>Example</title>
+                <para>
+                    <programlisting>
+                                <![CDATA[
+<dispspec>
+    . . .
+    <serialisation>
+        <format extension=""/>
+    </serialisation>
+    . . .
+</dispspec>
+]]>
+                            </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="short-desc">
+            <title id="short-desc.title">short-desc</title>
+            <para>A short description of the element specified in <sgmltag class="attribute">tag</sgmltag>.</para>
+            <sect3 id="short-desc_attributes">
+                <title>Attributes</title>
+                <informaltable>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            &row_xml_lang_attrib;
+                        </tbody>
+                    </tgroup>
+                </informaltable>
+            </sect3>
+            <sect3 id="short-desc_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+            <sect3 id="short-desc_children">
+                <title>Children</title>
+                <para>None Applicable</para>
+            </sect3>
+            <sect3 id="short-desc_example">
+                <title>Example</title>
+                <para>See <link endterm="element.title" linkend="element"/>, <link
+                        endterm="plugin-element.title" linkend="plugin-element"/>, <link
+                        endterm="span-element.title" linkend="span-element"/>, <link
+                        endterm="structural-element.title" linkend="structural-element"/>
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="span-element">
+            <title id="span-element.title">span-element</title>
+            <para>text</para>
+            <sect3 id="span-element_attributes">
+                <title>Attributes</title>
+                &tbl_element_attrib;
+            </sect3>
+            <sect3 id="span-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="span-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link
+                        endterm="key-value-list.title" linkend="key-value-list"/>, <link
+                        endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title"
+                    linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="span-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <span-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </span-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+        <sect2 id="structural-element">
+            <title id="structural-element.title">structural-element</title>
+            <para>text</para>
+            <sect3 id="structural-element_attributes">
+                <title>Attributes</title>
+                &tbl_element_attrib;
+            </sect3>
+            <sect3 id="structural-element_parents">
+                <title>Parents</title>
+                <para>
+                    <link endterm="element-list.title" linkend="element-list"/>
+                </para>
+            </sect3>
+            <sect3 id="structural-element_children">
+                <title>Children</title>
+                <para>
+                    <link endterm="header-info.title" linkend="header-info"/>, <link
+                        endterm="key-value-list.title" linkend="key-value-list"/>, <link
+                        endterm="name.title" linkend="name"/>, <link endterm="property-dialog.title"
+                    linkend="property-dialog"/>, <link endterm="short-desc.title" linkend="short-desc"/>
+                </para>
+            </sect3>
+            <sect3 id="structural-element_example">
+                <title>Example</title>
+                <programlisting>
+                        <![CDATA[
+<element-list>
+    <structural-element tag="" type="" color="" filename-xpath="" icon="" \
+        ns="" plugin-id="" whitespace="">
+        <name xml:lang=""> . . . </name>
+        <short-desc xml:lang=""> . . . </short-desc>
+        <property-dialog plugin-id=""/>
+        <header-info tag="" xpath=""/>
+        <key-value-list>
+            . . .
+        </key-value-list>
+    </structural-element>
+    . . .
+</element-list>
+]]>
+                    </programlisting>
+            </sect3>
+        </sect2>
+    </sect1>
+</appendix>
