@@ -931,7 +931,7 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 	CongNodePtr this_node;
 	PangoAttrList* attr_list;
 
-	g_return_if_fail (editor_node_text);
+	g_return_val_if_fail (editor_node_text, NULL);
 
 	this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
 
