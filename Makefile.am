@@ -12,6 +12,7 @@ EXTRA_DIST = BUGS	\
   deb/copyright		\
   deb/rules		\
   deb/watch		\
+  documentation/README        \
   documentation/CodingStyle        \
   documentation/VersionNumbering   \
   documentation/ContribDemo      \

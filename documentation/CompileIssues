@@ -2,14 +2,23 @@
 In this file information on known compile issues
 and possible a workaround for it.
 
-There are two sections, released tarbal compile issues
+There are three sections, common issues, released tarbal compile issues
 and CVS checkout compile issues
 
+
+Common compile issues
+---------------------
+
+A 2.95 version of GCC fails when building the source.
+Use a more recent compiler.
+
 Tarbal compile issues
+---------------------
 
 So far there no reports on released tarballs
 
 CVS Checkout compile issues
+---------------------------
 
 On some system there are problems on generating "./libtool"
 with the original "./autogen.sh". One solution is to run
