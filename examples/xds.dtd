@@ -1,39 +1,40 @@
+<!-- ===================================================================== -->
+<!--
+     Conglomerate Display Specification
+
+     A document type that provides information for Conglomerate on how to 
+     display XML documents of a particular type, together with hints about
+     which DTD might be applicable, filename extensions, etc.
+
+     See http://www.conglomerate.org
+-->
+
 <!--
 @root dispspec
 -->
-<!ELEMENT dispspec ( metadata, serialisation?, document-models, element-list, document-template?, gui? ) >
+<!-- ===================================================================== -->
+<!-- Top-level element                                                     -->
+<!-- ===================================================================== -->
+<!ELEMENT dispspec ( metadata, 
+                     serialisation?,
+                     document-models, 
+                     element-list ) >
 
-<!ELEMENT element ( name?, short-desc?, header-info?, collapseto?, property-dialog? )>
-<!ATTLIST element 
-   color               CDATA                                                             #IMPLIED
-   filename-attribute  NMTOKEN                                                           #IMPLIED
-   icon                CDATA                                                             #IMPLIED
-   tag                 ID                                                                #IMPLIED
-   ns                  NMTOKEN                                                           #IMPLIED
-   type                ( plugin | paragraph | embed-external-file | span | structural )  #REQUIRED
-   plugin-id           NMTOKEN                                                           #IMPLIED 
-   whitespace          (normalize | preserve)                                            "normalize"
->
-
-<!ELEMENT element-list ( element*) >
-
-<!ELEMENT gui EMPTY >
-
-<!ELEMENT header-info EMPTY >
-<!ATTLIST header-info 
-   tag    IDREF  #IMPLIED
-   xpath  CDATA  #IMPLIED
->
-
+<!-- <metadata>:  High-level information about this dispspec -->
 <!ELEMENT metadata ( name, description ) >
 
+<!-- <serialisation>: A list of serialisation formats: -->
 <!ELEMENT serialisation ( format+) >
 
+<!-- <format>: Information about a serialisation format: -->
 <!ELEMENT format EMPTY >
 <!ATTLIST format
    extension  NMTOKEN  #REQUIRED 
 >
 
+<!-- <document-models>:  Information about the DTD/schemas of various kinds 
+     that might relate to this document type: 
+-->
 <!ELEMENT document-models (external-document-model*) >
 <!ELEMENT external-document-model EMPTY >
 <!ATTLIST external-document-model 
@@ -42,12 +43,72 @@
    system-id  CDATA                                     #IMPLIED
 >
 
+<!-- ===================================================================== -->
+<!-- <element-list>: A list of elements of various kinds:                  -->
+<!-- ===================================================================== -->
+<!ELEMENT element-list ( (element|structural-element|span-element|plugin-element)*) >
+
+<!-- ===================================================================== -->
+<!-- The various types of element:                                         -->
+<!-- ===================================================================== -->
+<!-- Content model shared by all element types: -->
+<!ENTITY % element.content "( name?, 
+                              short-desc?, 
+                              header-info?, 
+                              property-dialog?,
+                              key-value-list?) ">
+
+<!-- Attributes shared by all types of element: -->
+<!ENTITY % element.att
+"  
+   ns                  NMTOKEN                                                           #IMPLIED
+   tag                 ID                                                                #IMPLIED
+   icon                CDATA                                                             #IMPLIED
+   whitespace          (normalize | preserve)                                            'normalize'
+
+   color               CDATA                                                             #IMPLIED
+   filename-attribute  NMTOKEN                                                           #IMPLIED
+">
+
+<!-- The element types themselves: -->
+<!-- FIXME:  only <element> is currently supported by the loaders: -->
+<!ELEMENT structural-element %element.content; >
+<!ATTLIST structural-element  
+   %element.att;
+>
+
+<!ELEMENT span-element       %element.content; >
+<!ATTLIST span-element        
+   %element.att;
+>
+
+<!ELEMENT plugin-element     %element.content; >
+<!ATTLIST plugin-element      
+   %element.att;
+   plugin-id           NMTOKEN                                                           #IMPLIED
+>
+
+<!ELEMENT element     %element.content; >
+<!ATTLIST element      
+   %element.att;
+   type                ( plugin | paragraph | embed-external-file | span | structural )  #REQUIRED
+   plugin-id           NMTOKEN                                                           #IMPLIED
+>
+
+<!-- ===================================================================== -->
+<!-- Building-block elements below the main "element" elements:            -->
+<!-- ===================================================================== -->
+
+<!ELEMENT header-info EMPTY >
+<!ATTLIST header-info 
+   tag    IDREF  #IMPLIED
+   xpath  CDATA  #IMPLIED
+>
+
 <!ELEMENT name ( #PCDATA ) >
 <!ATTLIST name 
    locale  ( en )  #IMPLIED 
 >
-
-<!ELEMENT collapseto (#PCDATA)>
 
 <!ELEMENT description ( #PCDATA ) >
 
@@ -61,4 +122,11 @@
    plugin-id  NMTOKEN  #REQUIRED
 >
 
-<!ELEMENT document-template ANY >
+<!ELEMENT key-value-list (key-value-pair)* >
+
+<!ELEMENT key-value-pair EMPTY >
+<!ATTLIST key-value-pair
+   key CDATA #REQUIRED
+   value CDATA #REQUIRED
+>
+

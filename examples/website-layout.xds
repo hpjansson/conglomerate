@@ -19,7 +19,6 @@
 		<element tag="config" type="structural" color="a0b0c0">
 			<name locale="en">Configuration Data</name>
 			<!-- Really need a new element type for this... -->
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="copyright" type="structural" color="a0b0c0">
@@ -58,7 +57,5 @@
 		</element>
 
 	</element-list>
-
-	<gui/>
 
 </dispspec>

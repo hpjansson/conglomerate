@@ -53,12 +53,10 @@
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Title</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="subtitle" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Subtitle</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="authorgroup" type="structural" color="a0b0c0" icon="cong-wrapper">
@@ -166,13 +164,11 @@
 
 		<element tag="question" type="structural" color="a0b0c0" icon="cong-question">
 			<name locale="en">Question</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="answer" type="structural" color="a0b0c0" icon="cong-answer">
 			<name locale="en">Answer</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -380,13 +376,11 @@
 
 		<element tag="listitem" type="plugin" plugin-id="listitem" color="a0b0c0" icon="cong-list-item">
 			<name locale="en">List Item</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="member" type="structural" color="a0b0c0" icon="cong-list-item">
 			<name locale="en">List Member</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -404,22 +398,37 @@
 		<element tag="caution" type="plugin" plugin-id="admonition" color="a0b0c0">
 			<name locale="en">Caution</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<key-value-list>
+				<key-value-pair key="icon" value="cong-caution-48.png" />
+			</key-value-list>
 		</element>
 		<element tag="important" type="plugin" plugin-id="admonition" color="a0b0c0">
 			<name locale="en">Important</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<key-value-list>
+				<key-value-pair key="icon" value="cong-important-48.png" />
+			</key-value-list>
 		</element>
 		<element tag="note" type="plugin" plugin-id="admonition" color="a0b0c0">
 			<name locale="en">Note</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<key-value-list>
+				<key-value-pair key="icon" value="cong-note-48.png" />
+			</key-value-list>
 		</element>
 		<element tag="tip" type="plugin" plugin-id="admonition" color="a0b0c0">
 			<name locale="en">Tip</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<key-value-list>
+				<key-value-pair key="icon" value="cong-tip-48.png" />
+			</key-value-list>
 		</element>
 		<element tag="warning" type="plugin" plugin-id="admonition" color="a0b0c0">
 			<name locale="en">Warning</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
+			<key-value-list>
+				<key-value-pair key="icon" value="cong-warning-48.png" />
+			</key-value-list>
 		</element>
 
 		<!-- Tables -->
@@ -502,7 +511,6 @@
 
 		<element tag="caption" type="structural" color="a0b0c0">
 			<name locale="en">Caption</name>
-			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -704,7 +712,5 @@
 		<!-- etc -->
 
 	</element-list>
-
-	<gui/>
 
 </dispspec>

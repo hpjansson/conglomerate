@@ -12,7 +12,6 @@
 		<element tag="kc" type="structural" color="a0b0c0">
 			<name locale="en">Kernel Cousin Newsletter</name>
 			<header-info xpath="concat(normalize-space(child::title/text()), &quot; #&quot;, normalize-space(child::issue/@num))"></header-info>
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="kcref" type="structural" color="a0b0c0">
@@ -161,7 +160,6 @@
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Title</name>
-			<collapseto></collapseto>
 		</element>
 
 
@@ -185,7 +183,5 @@
 		</element>
 
 	</element-list>
-
-	<gui/>
 
 </dispspec>

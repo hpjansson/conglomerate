@@ -20,11 +20,9 @@
 
 		<element tag="title" type="structural" color="a0b0c0">
 			<name locale="en">Title</name>
-			<collapseto></collapseto>
 		</element>
 		<element tag="subtitle" type="structural" color="a0b0c0">
 			<name locale="en">Subtitle</name>
-			<collapseto></collapseto>
 		</element>
 		<element tag="authorgroup" type="structural" color="a0b0c0">
 			<name locale="en">Authorship Information</name>
@@ -100,11 +98,9 @@
 		</element>
 
 		<element tag="question" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="answer" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="bibliography" type="structural" color="a0b0c0">
@@ -269,11 +265,9 @@
 		</element>
 
 		<element tag="listitem" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="member" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="variablelist" type="structural" color="a0b0c0">
@@ -311,7 +305,6 @@
 		</element>
 
 		<element tag="caption" type="structural" color="a0b0c0">
-			<collapseto></collapseto>
 		</element>
 
 		<element tag="graphic" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
@@ -462,7 +455,5 @@
 		<!-- etc -->
 
 	</element-list>
-
-	<gui/>
 
 </dispspec>

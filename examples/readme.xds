@@ -28,12 +28,10 @@
 
 		<element tag="section.title" type = "structural">
 			<name locale="en">Title</name>
-			<collapseto>section subsection subsubsection</collapseto>
 		</element>
 
 		<element tag="section.signature" type = "structural">
 			<name locale="en">Signature</name>
-			<collapseto>section subsection subsubsection</collapseto>	
 		</element>
 
 		<!-- Here come the spans: -->

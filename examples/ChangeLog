@@ -1,3 +1,9 @@
+2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* docbook.xds, kernel-traffic-newsletter.xds, readme.xds, website-layout.xds, website-webpage.xds, xds.dtd
+
+	Removed all <gui> and <collapseto> tags and removed from DTD; reorganised DTD layout; added key-value pairs to DTD and to DocBook admonition tags
+
 2003-10-25  Boris Goldowsky <bgoldowsky@rcn.com>
 
 	* forrest-document.xds, Makefile.am
