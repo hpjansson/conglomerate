@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 23:49+0000\n"
-"PO-Revision-Date: 2003-10-23 17:05+0200\n"
+"POT-Creation-Date: 2003-10-29 14:16+0100\n"
+"PO-Revision-Date: 2003-10-29 20:30+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -194,23 +194,19 @@ msgid "XML Editor"
 msgstr "Editor XML"
 
 #: src/cong-app.c:364
-#, fuzzy
 msgid "Conglomerate could not load any xds files"
-msgstr "Conglomerate nemohl načíst žádný soubor xds z adresáře \"%s\""
+msgstr "Conglomerate nemohl načíst žádný soubor xds"
 
 #: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 
 #: src/cong-app.c:368
-#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
-msgstr ""
-"Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, "
-"ale nenainstalovali. Zkuste jej nainstalovat."
+msgstr "Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, ale nenainstalovali. Zkuste jej nainstalovat. Pokud jste změnili implicitní nastaven9 specifikací zobrazení, zkontrolujte je prosím také."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
@@ -384,9 +380,8 @@ msgid "Size of the expander arrow"
 msgstr "Velikost šipky rozbalovače"
 
 #: src/cong-editor-widget3.c:867
-#, fuzzy
 msgid "Input Method"
-msgstr "Metoda tisku:"
+msgstr "Vstupní metoda"
 
 #: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
 msgid "Typing"
