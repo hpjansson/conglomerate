@@ -282,7 +282,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 	CongCursor *cursor;
 	CongEditorWidget3 *editor_widget;
 
-	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;
+	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(user_data);
 
 	GtkWindow *parent_window;
 

@@ -1,5 +1,9 @@
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c
+
+	Improved a cast
+	
 	* cong-editor-node-element-structural.c
 
 	Click support
