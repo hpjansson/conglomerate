@@ -40,6 +40,13 @@
 			<_name>Article</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
+		<element tag="articleinfo" type="structural" color="a0b0c0" icon="cong-metadata">
+			<_name>Article Information</_name>
+			<_short-desc>Meta-information for an article</_short-desc>
+			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+
 		<element tag="artheader" type="structural" color="a0b0c0" icon="cong-metadata">
 			<_name>Article Header</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
@@ -59,6 +66,10 @@
 		</element>
 		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Author</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="corpname" type="structural" color="a0b0c0" icon="cong-author"> 
+			<_name>Corporate Name</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="editor" type="structural" color="a0b0c0" icon="cong-editor">
@@ -110,6 +121,14 @@
 		</element>
 		<element tag="holder" type="structural" color="a0b0c0" icon="cong-metadata">
 			<_name>Copyright Holder</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="revhistory" type="structural" color="a0b0c0" icon="cong-metadata">
+			<_name>Revision History</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="revision" type="structural" color="a0b0c0" icon="cong-metadata">
+			<_name>Revision</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="docinfo" type="structural" color="a0b0c0"  icon="cong-metadata">
@@ -239,6 +258,12 @@
 		</element>
 		<element tag="sect5" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Section (level 5)</_name>
+			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+
+		<element tag="section" type="structural" color="a0b0c0" icon="cong-subsection">
+			<_name>Section</_name>
 			<header-info tag="title"></header-info>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
@@ -572,6 +597,10 @@
 			<_name>Application</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
+		<element tag="authorinitials" type="span" color="a0b0c0">
+			<_name>Author Initials</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
  		<element tag="bibliomisc" type="span" color="a0b0c0">
 			<_name>Miscellaneous Bibliographic Information</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
@@ -586,6 +615,10 @@
 		</element>
 		<element tag="edition" type="span" color="a0b0c0">
 			<_name>Edition</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="date" type="span" color="a0b0c0">
+			<_name>Date</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="email" type="span" color="a0b0c0">
@@ -620,6 +653,9 @@
 			<_short-desc>A specific piece of data from a computer system, to be taken literally.</_short-desc>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
+		<element tag="parameter" type="span" color="a0b0c0">
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
 		<element tag="primary" type="span" color="a0b0c0">
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
@@ -627,8 +663,24 @@
 			<_name>Product Name</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
+		<element tag="prompt" type="span" color="a0b0c0">
+			<_name>Prompt</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="quote" type="span" color="a2b0c0">
+			<_name>Quote</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
 		<element tag="replaceable" type="span" color="a0b0c0">
 			<_name>Replaceable Text</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="revnumber" type="span" color="a0b0c0">
+			<_name>Revision</_name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
+		<element tag="revremark" type="span" color="a0b0c0">
+			<_name>Revision Remark</_name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="secondary" type="span" color="a0b0c0">

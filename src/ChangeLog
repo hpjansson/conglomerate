@@ -1,3 +1,9 @@
+2004-01-13  Daniel Larsson <Daniel.Larsson@servicefactory.se>
+
+	* plugin-templates.c
+
+	Free a GSList actual with a g_slist_free()
+
 2004-01-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, cong-command.c, cong-command.h, cong-edit-find-and-replace.c, cong-editor-node.c, cong-editor-node.h, cong-fake-plugin-hooks.h, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-print.c, cong-menus.c, cong-modification.c, cong-node-properties-dialog.c, cong-plugin.c, cong-plugin.h, global.h, popup.c

@@ -1,3 +1,8 @@
+2004-01-13  Daniel Larsson <Daniel.Larsson@servicefactory.se>
+
+	* docbook.xds.in
+	Added a couple of DocBook tags.
+
 2004-01-11  Boris Goldowsky <boris@alum.mit.edu>
 
 	* dispspec-template.xds

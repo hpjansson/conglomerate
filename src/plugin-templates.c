@@ -180,7 +180,7 @@ gboolean plugin_templates_plugin_register(CongPlugin *plugin)
 
 	visit_paths(template_paths, register_template, template);
 
-	g_free(template_paths);
+	g_slist_free(template_paths);
 
 	return TRUE;
 }
