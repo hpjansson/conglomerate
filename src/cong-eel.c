@@ -9,6 +9,8 @@
 
 #include "global.h"
 #include "cong-eel.h"
+#include "cong-ui-hooks.h"
+
 
 void 
 cong_eel_log_ref_count (const gchar *name, 

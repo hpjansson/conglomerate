@@ -32,6 +32,8 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
 
+#include "cong-ui-hooks.h"
+
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
 
@@ -969,6 +971,15 @@ cong_util_make_menu_item (const gchar *label,
 	}
 
 	return GTK_MENU_ITEM(item);
+}
+
+GtkMenuItem* 
+cong_util_make_stock_menu_item (const gchar *stock_id)
+{
+	g_return_val_if_fail (stock_id, NULL);
+
+	return GTK_MENU_ITEM (gtk_image_menu_item_new_from_stock(stock_id,
+								 NULL));
 }
 
 GtkMenuItem* 

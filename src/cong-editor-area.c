@@ -30,6 +30,7 @@
 #include "cong-editor-node.h"
 #include "cong-document.h"
 #include "cong-selection.h"
+#include "cong-ui-hooks.h"
 
 #define PRIVATE(x) ((x)->private)
 

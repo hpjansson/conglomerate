@@ -45,6 +45,8 @@
 #include "cong-command.h"
 #include "cong-traversal-node.h"
 #include "cong-dispspec-element.h"
+#include "cong-ui-hooks.h"
+
 
 #define SHOW_CURSOR_SPEW 0
 #define DEBUG_IM_CONTEXT 1

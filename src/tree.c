@@ -13,23 +13,97 @@
 #include "cong-app.h"
 #include "cong-util.h"
 #include "cong-command.h"
+#include "cong-ui-hooks.h"
 
 /* the popup items have the data "popup_data_item" set on them: */
 
+#if 1
+void 
+tree_new_sibling (CongDocument *doc,
+		  CongDispspecElement *ds_element,
+		  CongNodePtr node)
+{
+	CongNodePtr new_node;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (ds_element);
+	g_return_if_fail (node);
+
+	/* GREP FOR MVC */
+	cong_document_begin_edit(doc);
+
+	{
+		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (ds_element));
+		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
+		g_free (desc);
+
+		/* New element */
+		new_node = cong_node_new_element_from_dispspec (ds_element, 
+								doc);
+		cong_command_add_node_add_after (cmd, 
+						 new_node, 
+						 node);
+
+		/*  add any necessary sub elements it needs */
+		cong_command_add_xml_add_required_children (cmd, 
+							    new_node);
+		
+		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+								      new_node);
+
+		cong_document_end_command (doc, cmd);		
+	}
+
+	cong_document_end_edit(doc);
+	
+}
+
+void
+tree_new_sub_element (CongDocument *doc,
+		      CongDispspecElement *ds_element,
+		      CongNodePtr node)
+{
+	CongNodePtr new_node;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (ds_element);
+	g_return_if_fail (node);
+
+	/* GREP FOR MVC */
+	cong_document_begin_edit(doc);
+
+	{
+		gchar *desc = g_strdup_printf (_("Insert child: %s"), cong_dispspec_element_username (ds_element));
+		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
+		g_free (desc);
+
+		/* New element */
+		new_node = cong_node_new_element_from_dispspec (ds_element, 
+								doc);
+		cong_command_add_node_set_parent (cmd, 
+						  new_node, 
+						  node);
+
+		/*  add any necessary sub elements it needs */
+		cong_command_add_xml_add_required_children (cmd, 
+							    new_node);
+		
+		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+								      new_node);
+
+		cong_document_end_command (doc, cmd);
+	}
+
+	cong_document_end_edit(doc);
+}
+#else
 gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 
 	CongNodePtr new_node;
-#if 1
 	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
 							 "element");
-#else
-	char *label;
-
-	label = g_object_get_data(G_OBJECT(widget),
-				  "label");
-#endif
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
@@ -70,15 +144,8 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 
 	CongNodePtr new_node;
-#if 1
 	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
 							 "element");
-#else
-	char *label;
-
-	label = g_object_get_data(G_OBJECT(widget),
-				  "label");
-#endif
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
@@ -109,7 +176,33 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	return(TRUE);
 }
+#endif
 
+#if 0
+void
+tree_properties (CongDocument *doc,
+		 CongNodePtr node,
+		 GtkWindow *parent_window)
+
+{
+	GtkWidget *properties_dialog;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	properties_dialog = cong_node_properties_dialog_new (doc, 
+							     node, 
+							     parent_window);
+
+#if 1
+	gtk_widget_show (properties_dialog);
+#else
+	/* FIXME:  Make this modeless */
+	gtk_dialog_run(GTK_DIALOG(properties_dialog));
+	gtk_widget_destroy(properties_dialog);
+#endif
+}
+#else
 gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
@@ -134,6 +227,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 
 	return TRUE;
 }
+#endif
 
 
 static gboolean

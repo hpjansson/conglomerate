@@ -289,6 +289,8 @@ GtkMenuItem*
 cong_util_make_menu_item (const gchar *label,
 			  const gchar *tip,
 			  GdkPixbuf *pixbuf);
+GtkMenuItem* 
+cong_util_make_stock_menu_item (const gchar *stock_id);
 
 GtkMenuItem* 
 cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element);

@@ -25,6 +25,8 @@
 #include "global.h"
 #include "cong-editor-area-underline.h"
 #include <libgnome/gnome-macros.h>
+#include "cong-ui-hooks.h"
+
 
 #define PRIVATE(x) ((x)->private)
 

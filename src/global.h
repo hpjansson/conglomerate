@@ -1,4 +1,25 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+/*
+ * global.h
+ *
+ * Copyright (C) 2004 David Malcolm
+ *
+ * Conglomerate is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * Conglomerate is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -117,20 +138,7 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 					   CongNodePtr node, 
 					   GtkWindow *parent_window);
 
-GtkWidget* cong_gui_get_a_window(void);
-
 gint cong_cursor_blink();
-
-void new_document(GtkWindow *parent_window);
-
-gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag);
-gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag);
-gint tree_properties(GtkWidget *widget, CongNodePtr tag);
-gint tree_cut(GtkWidget *widget, CongNodePtr tag);
-gint tree_copy(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
-gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
@@ -140,19 +148,7 @@ GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
 gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
 
-char *tag_new_pick();
-
-void open_document(GtkWindow *parent_window);
-gint save_document(CongDocument *doc, GtkWindow *parent_window);
-gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
-
-char *pick_structural_tag(CongDispspec *ds);
-
-void open_document_do(const gchar *doc_name, GtkWindow *parent_window);
-
 #define UNUSED_VAR(x)
-
-int gui_window_new_document_make();
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 
@@ -173,13 +169,6 @@ void cong_cursor_end(CongCursor *curs, CongDocument *doc);
 const CongLocation*
 cong_cursor_get_location (const CongCursor *cursor);
 
-/* Popup (context) menus for editor view: */
-void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
-void editor_popup_init();
-
-/* Popup (context) menus for tree view and for section headings: */
-GtkWidget* cong_ui_popup_init(CongDocument *doc, CongNodePtr node, GtkWindow *parent_window);
-
 void xv_style_r(GtkWidget *widget, gpointer data);
 
 CongDispspec* 
@@ -192,76 +181,6 @@ GtkWidget* make_uneditable_text(const gchar* text);
 
 gchar*
 get_col_string (const GdkColor* col);
-
-/* Toolbar hooks: */
-gint toolbar_callback_open(GtkWidget *widget, gpointer data);
-gint toolbar_callback_new(GtkWidget *w, gpointer data);
-gint toolbar_callback_save(GtkWidget *w, gpointer data);
-gint toolbar_callback_cut(GtkWidget *w, gpointer data);
-gint toolbar_callback_copy(GtkWidget *w, gpointer data);
-gint toolbar_callback_paste(GtkWidget *w, gpointer data);
-
-/* Menu hooks: */
-void menu_callback_debug_error(gpointer callback_data,
-			       guint callback_action,
-			       GtkWidget *widget);
-void menu_callback_debug_document_types(gpointer callback_data,
-					guint callback_action,
-					GtkWidget *widget);
-void menu_callback_debug_transform_docbook_to_html(gpointer callback_data,
-						   guint callback_action,
-						   GtkWidget *widget);
-void menu_callback_debug_transform_docbook_to_xhtml(gpointer callback_data,
-						    guint callback_action,
-						    GtkWidget *widget);
-void menu_callback_debug_transform_docbook_to_html_help(gpointer callback_data,
-							guint callback_action,
-							GtkWidget *widget);
-void menu_callback_debug_transform_docbook_to_javahelp(gpointer callback_data,
-						       guint callback_action,
-						       GtkWidget *widget);
-void menu_callback_debug_transform_docbook_to_fo(gpointer callback_data,
-						 guint callback_action,
-						 GtkWidget *widget);
-void menu_callback_debug_preview_fo(gpointer callback_data,
-				    guint callback_action,
-				    GtkWidget *widget);
-
-#if PRINT_TESTS
-void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm);
-#endif
-void menu_callback_debug_dtd(gpointer callback_data,
-			    guint callback_action,
-			    GtkWidget *widget);
-
-void menu_callback_debug_dialog(gpointer callback_data,
-				guint callback_action,
-				GtkWidget *widget);
-
-void cong_menus_create_items(GtkItemFactory *item_factory, 
-			     CongPrimaryWindow *primary_window);
-
-/* UI routines for invocation by menus/toolbars: */
-void
-cong_ui_file_import (GtkWindow *toplevel_window);
-
-void
-cong_ui_file_export (CongDocument *doc,
-		     GtkWindow *toplevel_window);
-
-#if ENABLE_PRINTING
-void
-cong_ui_file_print_preview (CongDocument *doc,
-			    GtkWindow *toplevel_window);
-void
-cong_ui_file_print (CongDocument *doc,
-		    GtkWindow *toplevel_window);
-#endif
-
-
-GtkWidget*
-cong_file_properties_dialog_new (CongDocument *doc, 
-				 GtkWindow *parent_window);
 
 /* Extensions to libxml: */
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,

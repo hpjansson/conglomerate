@@ -27,6 +27,7 @@
 #include "cong-tree-view.h"
 #include "cong-document.h"
 #include "cong-selection.h"
+#include "cong-ui-hooks.h"
 
 #define PRIVATE(tree_view) ((tree_view)->private)
 

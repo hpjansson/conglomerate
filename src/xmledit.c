@@ -133,7 +133,7 @@ cong_document_paste_source_at (CongDocument *doc,
 			       const gchar *source_fragment)
 {
 	CongNodePtr new_nodes; 
-	CongNodePtr node_after;
+	CongNodePtr node_after = NULL; /* shut compiler up */
 	CongNodePtr iter, iter_next;
 
 	g_return_if_fail (doc);

@@ -10,6 +10,7 @@
 #include "cong-error-dialog.h"
 
 #include "cong-selection.h"
+#include "cong-ui-hooks.h"
 
 struct CongSelection
 {

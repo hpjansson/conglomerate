@@ -27,6 +27,7 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-font.h"
 #include "cong-eel.h"
+#include "cong-ui-hooks.h"
 
 #define PRIVATE(x) ((x)->private)
 

@@ -12,6 +12,7 @@
 #include "cong-error-dialog.h"
 #include "cong-font.h"
 #include "cong-command.h"
+#include "cong-ui-hooks.h"
 
 void cong_cursor_init(CongCursor *curs, CongDocument *doc)
 {

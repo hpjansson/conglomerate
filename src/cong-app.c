@@ -39,6 +39,8 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 
+#include "cong-ui-hooks.h"
+
 #define TEST_BIG_FONTS 0
 
 #define LOG_SELECTIONS 0

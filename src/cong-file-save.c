@@ -30,6 +30,7 @@
 #include "cong-document.h"
 #include "cong-primary-window.h"
 #include "cong-file-selection.h"
+#include "cong-ui-hooks.h"
 
 gint toolbar_callback_save(GtkWidget *w, gpointer data)
 {

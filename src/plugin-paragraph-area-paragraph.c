@@ -32,6 +32,8 @@
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-bin.h"
 
+#include "cong-ui-hooks.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaParagraphDetails

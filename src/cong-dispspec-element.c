@@ -24,6 +24,7 @@
 #include "cong-dtd.h"
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
+#include "cong-ui-hooks.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))

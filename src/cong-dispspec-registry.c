@@ -212,6 +212,7 @@ enum {
 	COVERAGELISTSTORE_COVERAGE_NUM_FIELDS
 };
 
+#if 0
 static CongDispspec*
 run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
 			      guint count)
@@ -300,6 +301,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
 
 	return NULL; 
 }
+#endif
 
 
 /**
@@ -382,7 +384,9 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	{
 		int i;
 		struct CongDispspecCoverage *coverage_array;
+#if 0
 		CongDispspec *ds;
+#endif
 
 		coverage_array = g_new0 (struct CongDispspecCoverage, cong_dispspec_registry_get_num (registry));
 	       

@@ -38,6 +38,7 @@
 #include "cong-dispspec.h"
 #include "cong-command.h"
 #include "cong-traversal-node.h"
+#include "cong-ui-hooks.h"
 
 enum FragmentState {
 	FRAG_NORMAL,

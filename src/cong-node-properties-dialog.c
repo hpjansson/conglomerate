@@ -1115,15 +1115,15 @@ cong_node_properties_dialog_new (CongDocument *doc,
 
 		vbox = GTK_DIALOG(dialog)->vbox;
 
+		dtd_page = cong_node_properties_dtd_new (doc, 
+							 node,
+							 TRUE);
+
 		advanced_properties = cong_node_properties_dialog_advanced_new (doc, 
 										node,
 										(dtd_page!=NULL));
 			
 		gtk_widget_show (advanced_properties);
-
-		dtd_page = cong_node_properties_dtd_new (doc, 
-							 node,
-							 TRUE);
 
 		if (dtd_page) {
 			GtkWidget *notebook = gtk_notebook_new ();

@@ -39,6 +39,7 @@
 #include "cong-command-history.h"
 #include "cong-selection.h"
 #include "cong-range.h"
+#include "cong-ui-hooks.h"
 
 #if 0
 #include <libgnome/libgnome.h>
