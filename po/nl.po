@@ -9,13 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-11 19:14+0100\n"
+"POT-Creation-Date: 2004-01-13 03:09+0100\n"
 "PO-Revision-Date: 2004-01-11 23:04+0100\n"
 "Last-Translator: Daniel van Eeden <daniel_e@dds.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
 #: src/cong-primary-window.c:599 src/cong-primary-window.c:755
@@ -73,7 +73,7 @@ msgstr "Algemeen"
 
 #: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:249
 msgid "Location"
-msgstr "Plaats"
+msgstr "Lokatie"
 
 #: glade/cong-file-properties.glade.h:9
 msgid "Modified"
@@ -104,7 +104,7 @@ msgstr "Systeem ID"
 #: glade/cong-file-properties.glade.h:14
 #: glade/docbook-ulink-properties.glade.h:5
 msgid "Type"
-msgstr "Soort"
+msgstr "Type"
 
 #: glade/cong-file-properties.glade.h:15
 msgid "Version"
@@ -192,8 +192,8 @@ msgid ""
 "relevancy of the text to different  types of computer system.</small>"
 msgstr ""
 "<small>Waar gaat de tekst over? U kunt deze pagina gebruiken om de "
-"relevantie van deze tekst voor verschillende computer systemen aan te geven.</"
-"small>"
+"relevantie van deze tekst voor verschillende computer systemen aan te geven."
+"</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -205,7 +205,7 @@ msgstr "Herzieningen"
 
 #: glade/docbook-common-properties.glade.h:5
 msgid "Scope"
-msgstr "Gebied"
+msgstr "Bereik"
 
 #: glade/docbook-common-properties.glade.h:6
 msgid ""
@@ -1251,8 +1251,8 @@ msgid ""
 "believes the above information is appropriate.  Click on \"Associate this DTD"
 "\" to specify this information explicitly in the document.</small>"
 msgstr ""
-"<small>Het document geeft geen externe DTD aan, maar Conglomerate denkt dat de "
-"volgende informatie juist is. Klik op \"Deze DTD associëren\" om deze "
+"<small>Het document geeft geen externe DTD aan, maar Conglomerate denkt dat "
+"de volgende informatie juist is. Klik op \"Deze DTD associëren\" om deze "
 "informatie expliciet in het document aan te geven.</small>"
 
 #: src/cong-file-properties.c:194
