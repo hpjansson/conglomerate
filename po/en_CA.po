@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-03 21:15-0400\n"
-"PO-Revision-Date: 2004-08-03 15:29-0400\n"
+"POT-Creation-Date: 2004-08-05 17:13-0400\n"
+"PO-Revision-Date: 2004-08-05 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -1465,12 +1465,12 @@ msgstr "_Help"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1480
-msgid "_New"
-msgstr "_New"
+msgid "_New..."
+msgstr "_New..."
 
 #: src/cong-menus.c:1481
-msgid "_Open"
-msgstr "_Open"
+msgid "_Open..."
+msgstr "_Open..."
 
 #: src/cong-menus.c:1482
 msgid "_Import..."
@@ -1729,7 +1729,7 @@ msgstr "Welcome to the much-delayed Conglomerate editor."
 msgid "%s (modified) - %s"
 msgstr "%s (modified) - %s"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1272
+#: src/cong-util.c:368 src/plugin-docbook.c:1279
 msgid "Printing XSL Formatting Objects"
 msgstr "Printing XSL Formatting Objects"
 
@@ -1812,50 +1812,54 @@ msgstr ""
 "document to lowercase.  Useful when working with legacy SGML documents."
 
 #: src/plugin-docbook.c:220
+msgid "Untitled section"
+msgstr "Untitled section"
+
+#: src/plugin-docbook.c:227
 msgid "Text of the article goes here"
 msgstr "Text of the article goes here"
 
-#: src/plugin-docbook.c:239
+#: src/plugin-docbook.c:246
 msgid "Untitled Article"
 msgstr "Untitled Article"
 
-#: src/plugin-docbook.c:289
+#: src/plugin-docbook.c:296
 msgid "Text of the first chapter goes here"
 msgstr "Text of the first chapter goes here"
 
-#: src/plugin-docbook.c:308
+#: src/plugin-docbook.c:315
 msgid "Untitled Book"
 msgstr "Untitled Book"
 
-#: src/plugin-docbook.c:363
+#: src/plugin-docbook.c:370
 msgid "Untitled Set of Documents"
 msgstr "Untitled Set of Documents"
 
-#: src/plugin-docbook.c:1140
+#: src/plugin-docbook.c:1147
 msgid "Exporting PDF file"
 msgstr "Exporting PDF file"
 
-#: src/plugin-docbook.c:1144 src/plugin-docbook.c:1270
+#: src/plugin-docbook.c:1151 src/plugin-docbook.c:1277
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transforming DocBook into XSL Formatting Objects"
 
-#: src/plugin-docbook.c:1146
+#: src/plugin-docbook.c:1153
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Laying out XSL Formatting Objects as a PDF file"
 
-#: src/plugin-docbook.c:1161 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1168 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Converting XSL Formatting Objects to PDF"
 
-#: src/plugin-docbook.c:1266
+#: src/plugin-docbook.c:1273
 msgid "Printing DocBook file"
 msgstr "Printing DocBook file"
 
-#: src/plugin-docbook.c:1665
+#: src/plugin-docbook.c:1672
 msgid "DocBook Article"
 msgstr "DocBook Article"
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1673
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1863,35 +1867,35 @@ msgstr ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 
-#: src/plugin-docbook.c:1673
+#: src/plugin-docbook.c:1680
 msgid "DocBook Book"
 msgstr "DocBook Book"
 
-#: src/plugin-docbook.c:1674
+#: src/plugin-docbook.c:1681
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Create a book, using the \"DocBook\" format"
 
-#: src/plugin-docbook.c:1681
+#: src/plugin-docbook.c:1688
 msgid "DocBook Set"
 msgstr "DocBook Set"
 
-#: src/plugin-docbook.c:1682
+#: src/plugin-docbook.c:1689
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Create a set of related books, using the \"DocBook\" format"
 
-#: src/plugin-docbook.c:1690
+#: src/plugin-docbook.c:1697
 msgid "Import text as a DocBook article"
 msgstr "Import text as a DocBook article"
 
-#: src/plugin-docbook.c:1691
+#: src/plugin-docbook.c:1698
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Import a plain text file into the \"DocBook\" format, as an article."
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1716
 msgid "Export DocBook as HTML"
 msgstr "Export DocBook as HTML"
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1717
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1899,11 +1903,11 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 
-#: src/plugin-docbook.c:1718
+#: src/plugin-docbook.c:1725
 msgid "Export DocBook as PDF"
 msgstr "Export DocBook as PDF"
 
-#: src/plugin-docbook.c:1719
+#: src/plugin-docbook.c:1726
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1911,11 +1915,11 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 
-#: src/plugin-docbook.c:1727
+#: src/plugin-docbook.c:1734
 msgid "Export DocBook as XSL:FO"
 msgstr "Export DocBook as XSL:FO"
 
-#: src/plugin-docbook.c:1728
+#: src/plugin-docbook.c:1735
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1923,28 +1927,28 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 
-#: src/plugin-docbook.c:1737
+#: src/plugin-docbook.c:1744
 msgid "Print DocBook"
 msgstr "Print DocBook"
 
-#: src/plugin-docbook.c:1746
+#: src/plugin-docbook.c:1753
 msgid "Generic DocBook property dialog"
 msgstr "Generic DocBook property dialog"
 
-#: src/plugin-docbook.c:1747
+#: src/plugin-docbook.c:1754
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Provides a Properties dialog for most DocBook nodes"
 
-#: src/plugin-docbook.c:1765 src/plugin-docbook.c:1768 src/plugin-html.c:137
+#: src/plugin-docbook.c:1772 src/plugin-docbook.c:1775 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Open Link in Browser"
 
-#: src/plugin-docbook.c:1777
+#: src/plugin-docbook.c:1784
 msgid "Promote Section"
 msgstr "Promote Section"
 
-#: src/plugin-docbook.c:1778
+#: src/plugin-docbook.c:1785
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -1952,31 +1956,31 @@ msgstr ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 
-#: src/plugin-docbook.c:1780 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1787 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Promote"
 
-#: src/plugin-docbook.c:1781 src/plugin-docbook.c:1782
+#: src/plugin-docbook.c:1788 src/plugin-docbook.c:1789
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Promote the section to a higher organisational level within the document"
 
-#: src/plugin-docbook.c:1788
+#: src/plugin-docbook.c:1795
 msgid "Demote Section"
 msgstr "Demote Section"
 
-#: src/plugin-docbook.c:1789
+#: src/plugin-docbook.c:1796
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Demotes a DocBook section to a lower organisational level within the document"
 
-#: src/plugin-docbook.c:1791 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1798 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Demote"
 
-#: src/plugin-docbook.c:1792 src/plugin-docbook.c:1793
+#: src/plugin-docbook.c:1799 src/plugin-docbook.c:1800
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Demote the section to a lower organisational level within the document"
 
@@ -2357,142 +2361,3 @@ msgstr "Paste After"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Source View - Conglomerate"
-
-#~ msgid "/File/_New..."
-#~ msgstr "/File/_New..."
-
-#~ msgid "/File/_Open..."
-#~ msgstr "/File/_Open..."
-
-#~ msgid "/File/"
-#~ msgstr "/File/"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/File/Save _As..."
-
-#~ msgid "/File/Print Previe_w..."
-#~ msgstr "/File/Print Previe_w..."
-
-#~ msgid "/File/_Print..."
-#~ msgstr "/File/_Print..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/File/Proper_ties"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Edit/_Undo"
-
-#~ msgid "/Edit/_Redo"
-#~ msgstr "/Edit/_Redo"
-
-#~ msgid "/Edit/"
-#~ msgstr "/Edit/"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Edit/Cu_t"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Edit/_Copy"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Edit/_Paste"
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Edit/Find Ne_xt"
-
-#~ msgid "/Debug"
-#~ msgstr "/Debug"
-
-#~ msgid "/Debug/Begin self-test of error-reporting system..."
-#~ msgstr "/Debug/Begin self-test of error-reporting system..."
-
-#~ msgid "/Debug/Transform DocBook to HTML"
-#~ msgstr "/Debug/Transform DocBook to HTML"
-
-#~ msgid "/Debug/Transform DocBook to XHTML"
-#~ msgstr "/Debug/Transform DocBook to XHTML"
-
-#~ msgid "/Debug/Transform DocBook to HTML Help"
-#~ msgstr "/Debug/Transform DocBook to HTML Help"
-
-#~ msgid "/Debug/Transform DocBook to Java Help"
-#~ msgstr "/Debug/Transform DocBook to Java Help"
-
-#~ msgid "/Debug/Transform DocBook to FO"
-#~ msgstr "/Debug/Transform DocBook to FO"
-
-#~ msgid "/Debug/Preview XSL:FO"
-#~ msgstr "/Debug/Preview XSL:FO"
-
-#~ msgid "/Debug/DTD"
-#~ msgstr "/Debug/DTD"
-
-#~ msgid "/Debug/Dialog"
-#~ msgstr "/Debug/Dialog"
-
-#~ msgid "/Debug/Progress Checklist"
-#~ msgstr "/Debug/Progress Checklist"
-
-#~ msgid "/Debug/Document Message Log"
-#~ msgstr "/Debug/Document Message Log"
-
-#~ msgid "/Debug/Document Signal Log"
-#~ msgstr "/Debug/Document Signal Log"
-
-#~ msgid "/Debug/Information Alert"
-#~ msgstr "/Debug/Information Alert"
-
-#~ msgid "/Debug/Glade Test"
-#~ msgstr "/Debug/Glade Test"
-
-#~ msgid "/Debug/Insert XML Fragment"
-#~ msgstr "/Debug/Insert XML Fragment"
-
-#~ msgid "/Debug/Command Test"
-#~ msgstr "/Debug/Command Test"
-
-#~ msgid "Open document"
-#~ msgstr "Open document"
-
-#~ msgid "New document"
-#~ msgstr "New document"
-
-#~ msgid "Save document"
-#~ msgstr "Save document"
-
-#~ msgid "Could not import the file."
-#~ msgstr "Could not import the file."
-
-#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-#~ msgstr ""
-#~ "None of Conglomerate's plugins know how to load files of type \"%s\""
-
-#~ msgid "FIXME"
-#~ msgstr "FIXME"
-
-#~ msgid ""
-#~ "In a future version of Conglomerate we may have a feature that lets you "
-#~ "attach a document type to a document."
-#~ msgstr ""
-#~ "In a future version of Conglomerate we may have a feature that lets you "
-#~ "attach a document type to a document."
-
-#~ msgid "The document \"%s\" is not valid."
-#~ msgstr "The document \"%s\" is not valid."
-
-#~ msgid "Click on the \"Details\" button for more information."
-#~ msgstr "Click on the \"Details\" button for more information."
-
-#~ msgid ""
-#~ "This is a placeholder page.  Eventually you will be able to edit the "
-#~ "language of the text here.\n"
-#~ "\n"
-#~ "This is listed in Bugzilla as bug #122536"
-#~ msgstr ""
-#~ "This is a placeholder page.  Eventually you will be able to edit the "
-#~ "language of the text here.\n"
-#~ "\n"
-#~ "This is listed in Bugzilla as bug #122536"
-
-#~ msgid "label"
-#~ msgstr "label"

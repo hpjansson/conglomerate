@@ -1,3 +1,7 @@
+2004-08-05  Adam Weinberger  <adamw@gnome.org>
+
+	* en_CA.po: Updated Canadian English translation.
+
 2004-08-05  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* fr.po: French translation of main menu using GtkUIManager/Gtk API
