@@ -8,6 +8,10 @@
 
 2003-10-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c, cursor.c
+
+	Fixed para splitting; now works, and works with undo/redo
+
 	* cong-command.c, cong-command.h, cong-document.c, cong-document.h, cong-editor-node-text.c, cong-editor-widget3.c, cong-location.c, cong-location.h, cong-modification-cursor-change.c, cong-modification-selection-change.c, cong-node-modification-add-after.c, cong-node-modification-add-before.c, cong-node-modification-make-orphan.c, cong-node-modification-remove-attribute.c, cong-node-modification-set-attribute.c, cong-node-modification-set-parent.c, cong-node-modification-set-text.c, cong-range.c, cong-selection.h, cong-util.c, cursor.c, plugin-docbook.c, popup.c, select.c, tree.c, xmldata.c, xmledit.c
 
 	Made old document change private, and recoded the application to make use of new CongCommand API for undo/redo support

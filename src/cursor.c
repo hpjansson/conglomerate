@@ -11,6 +11,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-font.h"
+#include "cong-command.h"
 
 void cong_cursor_init(CongCursor *curs, CongDocument *doc)
 {
@@ -154,7 +155,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 						 t->parent);
 
 		/* Move the second text node and all successive siblings; this should deal with inline tags further in the para: */
-		for (iter = curs->location.node; iter; iter = next) {
+		for (iter = new_cursor_loc.node; iter; iter = next) {
 			next = iter->next;
 			cong_command_add_node_set_parent (cmd, 
 							  iter, 

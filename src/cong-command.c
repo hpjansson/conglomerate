@@ -880,9 +880,9 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 	g_assert (len1>=0);
 	g_assert (len2>=0);
 
-	if (len1>0 && len2>0) {
+	if (len1==0 && len2==0) {
 		d = cong_node_new_text("", doc);
-	} else if (len1>0) {
+	} else if (len1==0) {
 		d = cong_node_new_text("", doc);
 
 		/* Link it in */
@@ -891,7 +891,7 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 						  loc->node);
 		return(d);
 
-	} else if (len2>0) {
+	} else if (len2==0) {
 		d = cong_node_new_text("", doc);
 	} else {
 		xmlChar* new_text = g_strndup(loc->node->content, len1); /* FIXME:  char type conversion? */
