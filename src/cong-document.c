@@ -680,8 +680,7 @@ cong_document_get_node_name (CongDocument *doc,
 		break;
 
 	case CONG_NODE_TYPE_ATTRIBUTE:
-		g_assert_not_reached();
-		return g_strdup_printf("FIXME");
+		return g_strdup_printf ( _("Attribute \"%s\""), node->name);
 
 	case CONG_NODE_TYPE_TEXT:
 		{
@@ -694,8 +693,7 @@ cong_document_get_node_name (CongDocument *doc,
 		}
 
 	case CONG_NODE_TYPE_CDATA_SECTION:
-		g_assert_not_reached();
-		return g_strdup_printf("FIXME");
+		return g_strdup_printf( _("Character Data"));
 
 	case CONG_NODE_TYPE_ENTITY_REF:
 		return g_strdup_printf (_("Reference to Entity \"%s\""), node->name);
@@ -718,25 +716,37 @@ cong_document_get_node_name (CongDocument *doc,
 		return g_strdup_printf (_("Document"));		
 
 	case CONG_NODE_TYPE_DOCUMENT_TYPE:
+		return g_strdup_printf (_("Document Type"));
+
 	case CONG_NODE_TYPE_DOCUMENT_FRAG:
+		return g_strdup_printf (_("Document Fragment"));
+
 	case CONG_NODE_TYPE_NOTATION:
+		return g_strdup_printf (_("Notation"));
+
 	case CONG_NODE_TYPE_HTML_DOCUMENT:
-		g_assert_not_reached();
-		return g_strdup_printf("FIXME");
-		break;
+		return g_strdup_printf (_("HTML Document"));
 
 	case CONG_NODE_TYPE_DTD:
 		return g_strdup_printf (_("Document Type Declaration"));
 
 	case CONG_NODE_TYPE_ELEMENT_DECL:
+		return g_strdup_printf (_("Element Declaration"));
+
 	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+		return g_strdup_printf (_("Attribute Declaration"));
+
 	case CONG_NODE_TYPE_ENTITY_DECL:
+		return g_strdup_printf (_("Entity Declaration"));
+
 	case CONG_NODE_TYPE_NAMESPACE_DECL:
+		return g_strdup_printf (_("Namespace Declaration"));
+
 	case CONG_NODE_TYPE_XINCLUDE_START:
+		return g_strdup_printf (_("XInclude Start"));
+
 	case CONG_NODE_TYPE_XINCLUDE_END:
-		g_assert_not_reached();
-		return g_strdup_printf("FIXME");
-		break;
+		return g_strdup_printf (_("XInclude End"));
 	}
 
 	g_assert_not_reached();
