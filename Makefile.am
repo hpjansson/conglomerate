@@ -1,7 +1,6 @@
 SUBDIRS = src po data
 
 EXTRA_DIST = BUGS	\
-  acconfig.h		\
   intltool-extract.in	\
   intltool-merge.in	\
   intltool-update.in	\

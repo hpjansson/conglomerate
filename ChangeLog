@@ -1,5 +1,9 @@
 2002-11-28  Geert Stappers <Geert.Stappers@xs4all.nl>
 
+	* Makefile.am: Removed acconfig.h from extra_dist
+
+2002-11-28  Geert Stappers <Geert.Stappers@xs4all.nl>
+
 	* Makefile.am: Removed line "ACLOCAL_AMFLAGS = -I m4"
 
 2002-11-27  Dmitry G. Mastrtukov  <dmitry@taurussoft.org>
