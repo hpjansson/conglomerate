@@ -102,66 +102,41 @@ cong_cursor_data_insert (CongCursor *curs,
 int cong_cursor_paragraph_insert(CongCursor *curs)
 {
         CongNodePtr t;
+        CongNodePtr iter, next;
 	CongNodePtr new_element;
-	CongDispspec *ds;
 	CongDispspecElement *para;
 	const gchar *xmlns;
 	const gchar *tagname;
 	CongDocument *doc;
 
-	g_assert(curs!=NULL);
-
-	if (!cong_location_exists(&curs->location)) return(0);
-	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
+	g_return_val_if_fail (curs, FALSE);
+	g_return_val_if_fail (cong_location_exists(&curs->location), FALSE);
+	g_return_val_if_fail (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT, FALSE);
 
 	doc = curs->doc;
-	ds = cong_document_get_dispspec(doc);
 
-#if 0
-	para = cong_dispspec_get_paragraph(ds);
-
-	if (NULL==para) {
-		/* The dispspec does not have a "paragraph" tag */
-		return 0;
-	}
-
-	tagname = cong_dispspec_element_tagname(para);
-#else
-	/* Dodgy hack for now: */
-#if 1
 	xmlns = cong_node_xmlns(curs->location.node->parent);
 	tagname = cong_node_name(curs->location.node->parent);
-#else
-	tagname = "para";
-#endif
-#endif
 
-	/* GREP FOR MVC */
 	cong_document_begin_edit (doc);
 
-#if 1
 	t = cong_location_xml_frag_data_nice_split2(doc, &curs->location);
 	cong_location_set_node_and_byte_offset(&curs->location,t->next,0);
-#else	
-	t = xml_frag_data_nice_split2(curs->t, curs->c);
-	curs->t = t->next;
-	curs->c = 0;
-#endif
 
-	/* New approach, aimed at DocBook support: 
-	   Assume that we've just split up a text node below a <para> node below some parent into two
+	/* Assume that we've just split up a text node below a <para> node below some parent into two
 	   text nodes below that para.
 	   We need to create an new <para> node as a sibling of the other para, and move the second text node
-	   to below it.
+	   and all the rest of the siblings to below it.
 	*/
 	new_element = cong_node_new_element(xmlns, tagname, doc);
 
 	cong_document_node_add_after(doc, new_element, t->parent);
-	cong_document_node_set_parent(doc, curs->location.node, new_element);
 
-	/* FIXME:  
-	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
-	*/
+	/* Move the second text node and all successive siblings; this should deal with inline tags further in the para: */
+	for (iter = curs->location.node; iter; iter = next) {
+		next = iter->next;
+		cong_document_node_set_parent(doc, iter, new_element);
+	}
 
 	cong_document_end_edit (doc);
 
