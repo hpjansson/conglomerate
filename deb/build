@@ -51,15 +51,21 @@ fi
 update()
 # changes in 'debian' should go back into 'deb'
 {
+  echo apply this diff file as
+  echo  patch -p0 < deb.update
   for DF in $( cd debian ; find . -type f | sed -e 's@^\./@@' )
   do
    if [ ! -f deb/$DF ]
    then
-     diff -uN deb/$DF debian/$DF # | \
-     # sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
+     diff -uN debian/$DF deb/$DF | \
+     sed -e 'sG^-\(.*\)G+\1G' -e 'sS^+-- S--- S'
    else
      diff -uN deb/$DF debian/$DF | \
      sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
+   fi
+   if [ ! -s debian/$DF ]
+   then
+     echo empty file debian/$DF
    fi
   done
 }
