@@ -126,6 +126,7 @@ conglomerate_SOURCES =      \
   cong-service-tool.h \
   cong-source-layout.h   \
   cong-spell.h			\
+  cong-stylesheet.h     	\
   cong-text-cache.h         \
   cong-traversal-node.h     \
   cong-tree-view.h          \
@@ -257,6 +258,7 @@ conglomerate_SOURCES =      \
   cong-service-tool.c       \
   cong-source-layout.c	    \
   cong-source-view.c        \
+  cong-stylesheet.c         \
   cong-text-cache.c         \
   cong-traversal-node.c     \
   cong-tree-view.c          \

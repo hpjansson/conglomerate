@@ -1,5 +1,19 @@
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* plugin-docbook.c: added #include of cong-stylesheet.h
+
+	* global.h: moved some content into cong-stylesheet.h
+
+	* cong-plugin.c: moved some content into cong-stylesheet.c
+
+	* cong-util.c: ditto
+
+	* cong-stylesheet.h: new file
+
+	* cong-stylesheet.c: new file
+
+	* Makefile.am: added cong-stylesheet.[ch]
+
 	* cong-dispspec-registry.c: Tidied up debug log code
 
 	* cong-app.c: ditto

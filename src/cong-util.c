@@ -45,9 +45,6 @@
 
 #include "cong-primary-window.h"
 
-#include <libxml/globals.h>
-#include <libxml/catalog.h>
-
 #if ENABLE_PRINTING
 #if 0
 /* FIXME: use xmlroff eventually */
@@ -201,50 +198,6 @@ cong_util_text_header (const xmlChar *text,
 	}
 
 	cong_text_cache_free (text_cache);
-
-	return result;
-}
-
-/**
- * cong_utils_get_norman_walsh_stylesheet_path:
- *
- *  Try to locate Norman Walsh's stylesheets for DocBook using the local catalog to find them.
- *
- * Returns:  a string containing the path (which the caller must delete), or NULL
- */
-gchar*
-cong_utils_get_norman_walsh_stylesheet_path(void)
-{
-       /* This should be changed if another catalog is in use, i guess */
-       xmlChar *resolved_path = NULL;
-
-       resolved_path = xmlCatalogResolveURI ("http://docbook.sourceforge.net/release/xsl/current/");
-
-       g_message ("Norman Walsh XSL path: %s", resolved_path);
-
-       return resolved_path;
-}
-
-/**
- * cong_utils_get_norman_walsh_stylesheet:
- * @stylesheet_relative_path:
- *
- * TODO: Write me
- * Returns:
- */
-gchar*
-cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
-{
-	xmlChar *path;
-	gchar *result;
-
-	g_return_val_if_fail(stylesheet_relative_path, NULL);
-
-	path = cong_utils_get_norman_walsh_stylesheet_path();
-
-	result = g_strdup_printf("%s%s", path, stylesheet_relative_path);
-
-	xmlFree (path);
 
 	return result;
 }
@@ -1810,59 +1763,6 @@ cong_util_bool_to_string (gboolean value)
 	return value?"yes":"no";
 }
 		
-
-CongStylesheetParameter*
-cong_stylesheet_parameter_new (const gchar *name,
-			       const gchar *value)
-{
-	CongStylesheetParameter *param;
-
-	g_return_val_if_fail (name, NULL);
-	g_return_val_if_fail (value, NULL);
-	
-	param = g_new0 (CongStylesheetParameter,1);
-	param->name = g_strdup (name);
-	param->value = g_strdup (value);
-	return param;
-}
-
-void
-cong_stylesheet_parameter_free (CongStylesheetParameter *parameter)
-{
-	g_return_if_fail (parameter);
-	
-	g_free (parameter->name);
-	g_free (parameter->value);
-	g_free (parameter);	
-}
-
-
-void
-cong_stylesheet_parameter_list_free (GList *list_of_parameters)
-{
-	GList *iter;
-
-	for (iter = list_of_parameters; iter; iter=iter->next) {
-		cong_stylesheet_parameter_free ((CongStylesheetParameter*)iter->data);
-	}
-
-	g_list_free (list_of_parameters);
-}
-
-void
-cong_stylesheet_parameter_list_debug (GList *list_of_parameters)
-{
-	GList *iter;
-
-	g_message ("Stylesheet parameters:");
-
-	for (iter = list_of_parameters; iter; iter=iter->next) {
-		CongStylesheetParameter *param = (CongStylesheetParameter*)iter->data;
-
-		g_message ("\"%s\"->\"%s\"", param->name, param->value);
-	}
-
-}
 
 guint 
 cong_str_or_null_hash (gconstpointer key)

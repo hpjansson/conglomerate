@@ -35,6 +35,7 @@
 #include "cong-glade.h"
 #include "cong-dialog.h"
 #include "cong-vfs.h"
+#include "cong-stylesheet.h"
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print-config.h>
