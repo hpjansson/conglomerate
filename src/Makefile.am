@@ -221,6 +221,9 @@ conglomerate_SOURCES =      \
   xmledit.c                 \
   xmlload.c                 \
   xmlview.c                 \
+  plugin-admonition.c       \
+  plugin-admonition-node-element.h \
+  plugin-admonition-node-element.c \
   plugin-cleanup-source.c   \
   plugin-convert-case.c     \
   plugin-docbook.c          \

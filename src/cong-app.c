@@ -384,6 +384,9 @@ static void
 cong_app_private_load_plugins (CongApp *app)
 {
 	/* For the moment, there aren't any actual plugins; instead we fake it. */
+	register_plugin(app,"admonition",
+			plugin_admonition_plugin_register,
+			plugin_admonition_plugin_configure);
 
 	register_plugin(app,"docbook",
 			plugin_docbook_plugin_register,

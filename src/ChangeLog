@@ -1,5 +1,9 @@
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-admonition-node-element.c, plugin-admonition-node-element.h, plugin-admonition.c, Makefile.am, cong-app.c, cong-fake-plugin-hooks.h
+
+	New files: custom handling of DocBook admonition tags
+	
 	* plugin-docbook.c
 
 	Custom property page for DocBook <ulink> tags

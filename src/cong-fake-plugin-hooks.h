@@ -28,6 +28,10 @@
 G_BEGIN_DECLS
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
+/* plugin-admonition.c: */
+gboolean plugin_admonition_plugin_register(CongPlugin *plugin);
+gboolean plugin_admonition_plugin_configure(CongPlugin *plugin);
+
 /* plugin-cleanup-source.c: */
 gboolean plugin_cleanup_source_plugin_register(CongPlugin *plugin);
 gboolean plugin_cleanup_source_plugin_configure(CongPlugin *plugin);
