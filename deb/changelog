@@ -1,4 +1,4 @@
-conglomerate (0.7.6cvs237-5) UNRELEASED; urgency=low
+conglomerate (0.7.6cvs237-6) UNRELEASED; urgency=low
 
   * dpatch compliant
 
@@ -6,12 +6,14 @@ conglomerate (0.7.6cvs237-5) UNRELEASED; urgency=low
   New file. Shows Debian packages version inside the program.
 
   * rules:
-  Upstream has an up-to-date config.guess and config.sub
+  + Upstream has an up-to-date config.guess and config.sub.
+  + Removed 'INSTALL_PROGRAM += -s' with test on DEB_BUILD_OPTIONS,
+  because `dh_strip` takes care of that.
 
-  * NEWS
+  * NEWS:
   In same format as changelog.
 
- -- Geert Stappers <stappers@stappers.nl>  Thu, 20 Nov 2003 09:56:22 +0100
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 24 Nov 2003 21:43:24 +0100
 
 conglomerate (0.7.6-1) unstable; urgency=medium
 
