@@ -726,16 +726,24 @@ recursive_create_areas(CongEditorWidget3 *widget,
 		       CongNodePtr node,
 		       CongEditorArea *parent_area)
 {
+	CongEditorArea *vcomposer;
 	CongNodePtr iter;
 	CongEditorNode *editor_node = cong_editor_widget3_get_editor_node (widget,
 									   node);
 
 	CongEditorArea *this_area = cong_editor_node_generate_area (editor_node);
 
-	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_area),
-					      this_area);
+	if (IS_CONG_EDITOR_AREA_COMPOSER(parent_area)) {
 
-	CongEditorArea *vcomposer;
+		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_area),
+						this_area,
+						FALSE,
+						FALSE,
+						0);
+	} else {
+		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_area),
+						      this_area);
+	}
 
 	if (node->children) {
 		vcomposer = cong_editor_area_composer_new (widget,
