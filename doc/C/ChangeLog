@@ -2,6 +2,10 @@
 
 	* faq.xml
 
+	Updated to refer to service-id rather than plugin-id where appropriate
+
+	* faq.xml
+
 	Added TEI to DTD list; added notes about hooking up plugins in xds files
 
 2004-01-14  Jeff Martin <jeff@custommonkey.org>

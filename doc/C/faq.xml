@@ -151,7 +151,7 @@
 					<para>How do I set up a custom element renderer inside an xds file?</para>
 				</question>
 				<answer>
-					<para>The xds file should use the value &quot;<literal>plugin</literal>&quot; for the element's &quot;<literal>type</literal>&quot; attribute. The element will need to have an additional attribute &quot;<literal>plugin-id</literal>&quot; (I hope to rename this to &quot;<literal>service-id</literal>&quot; before the 0.8.0 release), which should have a value corresponding to the string ID that the service is registered with inside the plugin. </para>
+					<para>The xds file should use the value &quot;<literal>plugin</literal>&quot; for the element's &quot;<literal>type</literal>&quot; attribute. The element will need to have an additional attribute &quot;<literal>service-id</literal>&quot;, which should have a value corresponding to the string ID that the service is registered with inside the plugin. </para>
 					<para>This affects how elements of that type are rendered in the main editor widget. For other purposes (such as XML Source cleanup, handling the Overview sidebar, etc), such elements are, in general, treated like structural elements (as opposed to span ones).</para>
 					<para>Some plugin element types need additional information in the xds file; this is done by having a <sgmltag>key-value-list</sgmltag> element below the <sgmltag>element</sgmltag> element; the <sgmltag>key-value-list</sgmltag> should contain <sgmltag>key-value-pair</sgmltag> elements. Each <sgmltag>key-value-pair</sgmltag> element should contain a &quot;<literal>key</literal>&quot; and &quot;<literal>value</literal>&quot; attribute. See DocBook's <sgmltag>caution</sgmltag> element for an example.</para>
 				</answer>
@@ -161,7 +161,7 @@
 					<para>How do I customise the Property dialog for an element within my DTD?</para>
 				</question>
 				<answer>
-					<para>You can improve support for a DTD by creating a plugin node property dialog. To do this, edit the xds file for the document type, and add a <sgmltag>property-dialog</sgmltag> element inside the main <sgmltag>element</sgmltag>, with a &quot;<literal>plugin-id</literal>&quot; attribute giving the registered ID of the code providing the GtkWidget for elements of that type (again, this will probably become &quot;<literal>service-id</literal>&quot; before the 0.8.0 release).</para>
+					<para>You can improve support for a DTD by creating a plugin node property dialog. To do this, edit the xds file for the document type, and add a <sgmltag>property-dialog</sgmltag> element inside the main <sgmltag>element</sgmltag>, with a &quot;<literal>service-id</literal>&quot; attribute giving the registered ID of the code providing the GtkWidget for elements of that type.</para>
 					<para>FIXME: write information on how to actually create the plugin</para>
 					<para>For example for the DocBook <sgmltag>orderedlist</sgmltag> element; the xds file gives an ID of &quot;<literal>docbook-orderedlist-properties</literal>&quot;. This is hooked up in the source code in <filename>src/plugin-docbook.c</filename> to a routine (the C function &quot;<function>docbook_orderedlist_properties_factory_method</function>&quot;) which loads a GUI from a Glade file, and uses a set of utility functions that bind the widgets in the glade file to attributes of the XML element. For example, the radio buttons are linked to the various valid values of the &quot;<literal>numeration</literal>&quot; attribute.</para>
 				</answer>
