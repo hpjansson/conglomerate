@@ -257,253 +257,6 @@ cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
 }
 
 /**
- * toolbar_callback_undo:
- * @w:
- * @data:
- *
- * TODO: Write me
- * Returns:
- */
-gint 
-toolbar_callback_undo(GtkWidget *w, gpointer data)
-{
-	CongPrimaryWindow *primary_window = data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	cong_document_undo(doc);
-
-	return TRUE;
-}
-
-/**
- * toolbar_callback_redo:
- * @w:
- * @data:
- *
- * TODO: Write me
- * Returns:
- */
-gint 
-toolbar_callback_redo(GtkWidget *w, gpointer data)
-{
-	CongPrimaryWindow *primary_window = data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	cong_document_redo(doc);
-
-	return TRUE;
-}
-
-/**
- * toolbar_callback_cut:
- * @w:
- * @data:
- *
- * TODO: Write me
- * Returns:
- */
-gint 
-toolbar_callback_cut(GtkWidget *w, gpointer data)
-{
-	CongPrimaryWindow *primary_window = data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	cong_document_cut_selection(doc);
-
-	return TRUE;
-}
-
-/**
- * toolbar_callback_copy:
- * @w:
- * @data:
- *
- * TODO: Write me
- * Returns:
- */
-gint 
-toolbar_callback_copy(GtkWidget *w, gpointer data)
-{
-	CongPrimaryWindow *primary_window = data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	cong_document_copy_selection(doc);
-
-	return TRUE;
-}
-
-/**
- * toolbar_callback_paste:
- * @w:
- * @data:
- *
- * TODO: Write me
- * Returns:
- */
-gint 
-toolbar_callback_paste(GtkWidget *w, gpointer data)
-{
-	CongPrimaryWindow *primary_window = data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	cong_document_paste_clipboard (doc);
-
-	return TRUE;
-}
-
-
-static void 
-on_history_changed_undo (CongCommandHistory *history,
-			 gpointer user_data)
-{
-	GtkWidget *undo = GTK_WIDGET (user_data);
-	
-	gtk_widget_set_sensitive (undo,
-				  cong_command_history_can_undo (history));
-}
-
-static void 
-on_history_changed_redo (CongCommandHistory *history,
-			 gpointer user_data)
-{
-	GtkWidget *redo = GTK_WIDGET (user_data);
-	
-	gtk_widget_set_sensitive (redo,
-				  cong_command_history_can_redo (history));	
-}
-
-static void 
-on_selection_changed_copy (CongDocument *document,
-			 gpointer user_data)
-{
-	GtkWidget *copy = GTK_WIDGET (user_data);
-	
-        CongSelection *selection = cong_document_get_selection(document);
-        CongRange *range = cong_selection_get_ordered_range(selection);
-        gtk_widget_set_sensitive (copy,
-                                  cong_range_can_be_copied (range));
-}
-
-static void 
-on_selection_changed_cut (CongDocument *document,
-			 gpointer user_data)
-{
-	GtkWidget *cut = GTK_WIDGET (user_data);
-	
-        CongSelection *selection = cong_document_get_selection(document);
-        CongRange *range = cong_selection_get_ordered_range(selection);
-        gtk_widget_set_sensitive (cut,
-                                  cong_range_can_be_cut (range));
-}
-
-/**
- * cong_primary_window_toolbar_populate:
- * @primary_window:
- *
- * TODO: Write me
- */
-void 
-cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
-{
-	if ( !(primary_window->doc) ) {
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
-				 GTK_STOCK_OPEN,
-				 _("Open document"),
-				 _("Open document"),
-				 GTK_SIGNAL_FUNC(toolbar_callback_open),
-				 primary_window,
-				 -1);
-		
-		gtk_toolbar_insert_stock(primary_window->toolbar,
-				GTK_STOCK_NEW,
-				_("New document"),
-				_("New document"),
-				GTK_SIGNAL_FUNC(toolbar_callback_new),
-				primary_window,
-				-1);
-
-	}
-
-	if (primary_window->doc) {
-		CongDocument *doc = cong_primary_window_get_document (primary_window);
-		CongCommandHistory *history = cong_document_get_command_history (doc);
-		GtkWidget *undo;
-		GtkWidget *redo;
-		GtkWidget *copy;
-		GtkWidget *cut;
-		GtkWidget *paste;
-
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_SAVE,
-					 _("Save document"),
-					 _("Save document"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_save),
-					 primary_window,
-					 -1);
-		gtk_toolbar_append_space(primary_window->toolbar);
-		undo = gtk_toolbar_insert_stock(primary_window->toolbar, 
-						GTK_STOCK_UNDO,
-						_("Undo"),
-						_("Undo"), 
-						GTK_SIGNAL_FUNC(toolbar_callback_undo),
-						primary_window,
-						-1);
-		redo = gtk_toolbar_insert_stock(primary_window->toolbar, 
-						GTK_STOCK_REDO,
-						_("Redo"),
-						_("Redo"), 
-						GTK_SIGNAL_FUNC(toolbar_callback_redo),
-						primary_window,
-						-1);
-		g_signal_connect (G_OBJECT(history),
-				  "changed",
-				  G_CALLBACK(on_history_changed_undo),
-				  undo);
-		g_signal_connect (G_OBJECT(history),
-				  "changed",
-				  G_CALLBACK(on_history_changed_redo),
-				  redo);		
-		gtk_widget_set_sensitive (undo, FALSE);
-		gtk_widget_set_sensitive (redo, FALSE);
-
-		gtk_toolbar_append_space(primary_window->toolbar);
-		cut = gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_CUT,
-					 _("Cut"),
-					 _("Cut"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_cut),
-					 primary_window,
-					 -1);
-		copy = gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_COPY,
-					 _("Copy"),
-					 _("Copy"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_copy),
-					 primary_window,
-					 -1);
-		paste = gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_PASTE,
-					 _("Paste"),
-					 _("Paste"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_paste),
-					 primary_window,
-					 -1);
-		g_signal_connect (G_OBJECT(doc),
-				  "selection_change",
-				  G_CALLBACK(on_selection_changed_copy),
-				  copy);
-		g_signal_connect (G_OBJECT(doc),
-				  "selection_change",
-				  G_CALLBACK(on_selection_changed_cut),
-				  cut);		
-		/* FIXME: What signal to connect paste to in order to update sensitivity? */
-		gtk_widget_set_sensitive (copy, FALSE);
-		gtk_widget_set_sensitive (cut, FALSE);
-		gtk_widget_set_sensitive (paste, cong_document_can_paste(doc));
-	}
-}
-
-/**
  * cong_primary_window_can_close:
  * @primary_window:
  *
@@ -743,7 +496,9 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 	} /* if (doc) */
 	
 	/* toolbar update */
+#if 0
 	cong_primary_window_toolbar_populate (primary_window);
+#endif
 	/* title update */
 	cong_primary_window_update_title (primary_window);
 
@@ -791,7 +546,6 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	/* --- Menus --- */
 
-#if 1
 	primary_window->merge_id = cong_menus_setup_ui_layout (primary_window);
 	primary_window->menus = gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainMenuBar");
 	gnome_app_set_menus(GNOME_APP(primary_window->window), GTK_MENU_BAR(primary_window->menus));
@@ -803,28 +557,11 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		accel_group = gtk_ui_manager_get_accel_group (primary_window->ui_manager);
 		gtk_window_add_accel_group (GTK_WINDOW (primary_window->window), accel_group);	
 	}
-#else
-	primary_window->accel = gtk_accel_group_new();
-	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", primary_window->accel);
-	gtk_item_factory_set_translate_func(item_factory, (GtkTranslateFunc) gettext, NULL, NULL);
-
-	cong_menus_refresh_items(item_factory, primary_window);
-
-	gtk_window_add_accel_group(GTK_WINDOW(primary_window->window), primary_window->accel);
-
-	primary_window->menus = gtk_item_factory_get_widget(item_factory, "<main>");
-	gnome_app_set_menus(GNOME_APP(primary_window->window), GTK_MENU_BAR(primary_window->menus));
-	gtk_widget_show(primary_window->menus);
-#endif
 	
 	/* --- Toolbar --- */
-	primary_window->toolbar = GTK_TOOLBAR(gtk_toolbar_new());
+	primary_window->toolbar = GTK_TOOLBAR (gtk_ui_manager_get_widget (cong_primary_window_get_ui_manager (primary_window), "/MainToolBar"));
 	gnome_app_set_toolbar(GNOME_APP(primary_window->window), primary_window->toolbar);
 	gtk_widget_show(GTK_WIDGET(primary_window->toolbar));
-
-	/* --- Toolbar icons --- */
-
-	cong_primary_window_toolbar_populate(primary_window);
 
 	primary_window->doc = NULL;
 

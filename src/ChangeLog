@@ -1,5 +1,9 @@
 2004-08-01  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-primary-window.c, cong-menus.c: 
+
+	Ported the toolbar to the GtkAction API (a big internal simplification!)
+
 	* xmledit.c, popup.c, cong-ui-hooks.h, cong-primary-window.h, cong-primary-window.c, cong-menus.c, cong-document.h: 
 
 	Port of menus from GtkItemFactory to the GtkUIManager/GtkAction API

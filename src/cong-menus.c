@@ -1639,6 +1639,17 @@ static const gchar *ui_description =
 "      <menuitem action='About'/>"
 "    </menu>"
 "  </menubar>"
+"  <toolbar name='MainToolBar'>"
+"      <toolitem action='New'/>"
+"      <toolitem action='Open'/>"
+"      <separator name='ToolSep1'/>"
+"      <toolitem action='Undo'/>"
+"      <toolitem action='Redo'/>"
+"      <separator name='ToolSep2'/>"
+"      <toolitem action='Cut'/>"
+"      <toolitem action='Copy'/>"
+"      <toolitem action='Paste'/>"
+"  </toolbar>"
 "</ui>";
 
 struct add_tool_callback_data
