@@ -1,5 +1,9 @@
 2004-02-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* dispspec-template.xds
+
+	Removed bogus locale attribute
+
 	* dispspec-template.xds, docbook.xds.in, forrest-document.xds.in, kernel-traffic-newsletter.xds.in, xds.dtd, xhtml1-strict.xds.in, xsl.xds
 
 	Renamed plugin-id attributes to service-id

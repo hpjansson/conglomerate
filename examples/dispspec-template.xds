@@ -2,7 +2,7 @@
 <!DOCTYPE dispspec SYSTEM "/opt/gnome/share/conglomerate/dtd/xds.dtd">
 <dispspec>
   <metadata>
-    <name locale="en">Name of this document type</name>
+    <name>Name of this document type</name>
     <description>Description of this document type</description>
   </metadata>
   <serialisation>
