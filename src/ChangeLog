@@ -1,4 +1,34 @@
 creating ChangeLog
+2002-08-25 David Malcolm
+
+	* cong-error-file-open.c
+
+	User-friendly dialogs for GnomeVFS errors
+
+	* cong-error-tests.c
+
+	Automatic testing of all possible load/save errors.
+
+        * cong-error-file-save.c
+
+	New file: more error handling, based on GnomeVFS
+
+	* dispspec.c
+
+	Added parsing of xds files from memory buffers
+
+	* global.h
+
+	Lots of new declarations
+
+	* main.c
+
+	Test routines now use GnomeVFS to load XML files; app now uses the GnomeApp widget (losing the logo and the auth icons).
+
+	* Makefile
+
+	Added cong-error-file-save.o
+	
 2002-08-23 David Malcolm
 
 	* cong-error-dialog.c cong-error-file-open.c cong-error-tests.c Makefile global.h main.c open.c:
