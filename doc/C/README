@@ -1,6 +1,8 @@
 Some notes:
-( now only one note )
-The file conglomerate-C.omf has a hardcode path
+* The file conglomerate-C.omf has a hardcode path
  grep /usr/local conglomerate-C.omf
      <identifier url="file:/usr/local/share/gnome/help/conglomerate/C/conglomerate.xml"/>
 Probably need a  conglomerate-C.omf.in
+
+* there is conglomerate-C.omf.out generated.
+It is the same a conglomerate-C.omf. I think we don't need the .in file
