@@ -1,3 +1,9 @@
+2003-12-01  Robert Varga
+ 
+	* cong-vfs.c
+
+ 	Fixed loading from GnomeVFS with a relative path
+
 2003-12-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget3.c, cong-node.c, cong-node.h

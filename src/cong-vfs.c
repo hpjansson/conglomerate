@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * cong-util.c
+ * cong-vfs.c
  *
  * Copyright (C) 2003 David Malcolm
  *
@@ -20,7 +20,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
- * Fragments of code based upon libxslt: numbers.c
  */
 
 #include "global.h"
@@ -62,12 +61,13 @@ cong_vfs_new_buffer_from_file (const char* filename,
 	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
 
 	/* it seems that GnomeVFS works with absolute paths, so
-	   if the filename is not absolute, build it */
-	if (!g_path_is_absolute (filename)){
+	   if the filename is not absolute, build it.
+	   GnomeVFS URIs are absolute. */
+	   
+	if (!g_path_is_absolute (filename) && !(g_str_has_prefix (filename, "file:"))) {
+
 		gchar *absolute_path = g_strconcat (g_get_current_dir(), GNOME_VFS_URI_PATH_STR, filename, NULL);
-
-		uri = gnome_vfs_uri_new (absolute_path);
-
+    		uri = gnome_vfs_uri_new (absolute_path);
 		g_free (absolute_path);
 
 	} else {
@@ -167,7 +167,7 @@ cong_vfs_load_xml_from_uri (const gchar *string_uri,
 		CongParserResult parser_result;
 		
 		g_return_val_if_fail(string_uri, NULL);
-
+		
 #error		
 		parser_result.buffer=buffer;
 		parser_result.size=size;
