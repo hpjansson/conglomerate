@@ -52,7 +52,7 @@ for_all (CongEditorArea *editor_area,
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node);
 static void
@@ -190,14 +190,13 @@ for_all (CongEditorArea *editor_area,
 	return NULL;
 }
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node)
 {
 	CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks = CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS(area_flow_holder);
 	CongEditorAreaFlowHolder *child_flow_holder = NULL;
 	CongNodePtr doc_node;
-	CongEditorArea *new_area = NULL;
 
 	enum CongFlowType flow_type;
 
@@ -275,19 +274,10 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	
 	/* Delegate: Add to the child flow-holder: */
 	{
-		new_area = cong_editor_area_flow_holder_insert_areas_for_node (child_flow_holder,
-									       editor_node);
+		return cong_editor_area_flow_holder_insert_areas_for_node (child_flow_holder,
+									   editor_node);
 	}
 	
-	g_assert(new_area);
-
-#if 0
-	g_hash_table_insert (PRIVATE(area_flow_holder_blocks)->hash_of_doc_node_to_area,
-			     doc_node,
-			     new_area);
-#endif
-
-	return new_area;
 }
 
 static void

@@ -28,6 +28,11 @@
 
 #include "cong-editor-area-bin.h"
 
+CongEditorChildPolicy*
+cong_editor_widget_create_child_policy_for_node_with_single_area(CongEditorNode *editor_node,
+								 CongEditorArea *editor_area);
+
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaFlowHolderSingleDetails
@@ -51,7 +56,7 @@ for_all (CongEditorArea *editor_area,
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node);
 static void
@@ -166,7 +171,7 @@ for_all (CongEditorArea *editor_area,
 	return NULL;
 }
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node)
 {
@@ -184,8 +189,9 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 
 	PRIVATE(area_flow_holder_single)->single_editor_node = editor_node;
 	PRIVATE(area_flow_holder_single)->single_editor_area = new_area;
-	
-	return new_area;
+
+	return cong_editor_widget_create_child_policy_for_node_with_single_area(editor_node,
+										new_area);
 }
 
 static void
@@ -203,4 +209,29 @@ remove_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 
 	PRIVATE(area_flow_holder_single)->single_editor_node = NULL;
 	PRIVATE(area_flow_holder_single)->single_editor_area = NULL;
+}
+
+CongEditorChildPolicy*
+cong_editor_widget_create_child_policy_for_node_with_single_area(CongEditorNode *editor_node,
+								 CongEditorArea *editor_area)
+{
+	if (IS_CONG_EDITOR_AREA_CONTAINER(editor_area) ) {
+		CongEditorAreaFlowHolder *flow_holder;
+		enum CongFlowType flow_type = cong_editor_node_get_flow_type (editor_node);
+		
+		flow_holder = cong_editor_area_flow_holder_manufacture (cong_editor_node_get_widget(editor_node),
+									flow_type);
+		
+		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (editor_area),
+						      CONG_EDITOR_AREA(flow_holder));
+		
+		return cong_editor_child_policy_flow_holder_new (editor_node,
+								 flow_holder);
+	} else {
+		return NULL; /* for now */
+#if 0
+		return cong_editor_child_policy_none_new (editor_node);
+#endif
+	}
+	
 }

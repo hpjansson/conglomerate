@@ -81,7 +81,7 @@ cong_editor_area_flow_holder_construct (CongEditorAreaFlowHolder *area_flow_hold
 	return CONG_EDITOR_AREA (area_flow_holder);
 }
 
-CongEditorArea*
+CongEditorChildPolicy*
 cong_editor_area_flow_holder_insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 						    CongEditorNode *editor_node)
 {

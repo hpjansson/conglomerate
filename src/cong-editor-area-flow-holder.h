@@ -27,6 +27,7 @@
 
 #include "cong-editor-area.h"
 #include "cong-editor-node.h"
+#include "cong-editor-child-policy.h"
 
 G_BEGIN_DECLS
 
@@ -50,8 +51,8 @@ struct CongEditorAreaFlowHolderClass
 {
 	CongEditorAreaClass klass;
 
-	CongEditorArea* (*insert_areas_for_node) (CongEditorAreaFlowHolder *area_flow_holder,
-						  CongEditorNode *node);
+	CongEditorChildPolicy* (*insert_areas_for_node) (CongEditorAreaFlowHolder *area_flow_holder,
+							 CongEditorNode *node);
 
 	void (*remove_areas_for_node) (CongEditorAreaFlowHolder *area_flow_holder,
 				       CongEditorNode *node);
@@ -64,7 +65,7 @@ CongEditorArea*
 cong_editor_area_flow_holder_construct (CongEditorAreaFlowHolder *area_flow_holder,
 					CongEditorWidget3 *editor_widget);
 
-CongEditorArea*
+CongEditorChildPolicy*
 cong_editor_area_flow_holder_insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 						    CongEditorNode *node);
 void

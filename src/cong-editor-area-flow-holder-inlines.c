@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-editor-area-flow-holder-inlines.h"
+#include "cong-editor-area-flow-holder-line.h"
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
@@ -33,8 +34,10 @@
 struct CongEditorAreaFlowHolderInlinesDetails
 {
 	CongEditorAreaComposer *outer_compose;
-
+	/* child areas will all be CongEditorAreaFlowHolderLine */
+#if 1
 	GHashTable *hash_of_doc_node_to_area;
+#endif
 };
 
 /* Method implementation prototypes: */
@@ -51,7 +54,7 @@ for_all (CongEditorArea *editor_area,
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node);
 static void
@@ -94,11 +97,12 @@ cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines 
 						editor_widget);
 
 	PRIVATE(area_flow_holder_inlines)->outer_compose = CONG_EDITOR_AREA_COMPOSER( cong_editor_area_composer_new (editor_widget,
-													      GTK_ORIENTATION_HORIZONTAL,
-													      0));
-
+														     GTK_ORIENTATION_VERTICAL,
+														     0));
+#if 1
 	PRIVATE(area_flow_holder_inlines)->hash_of_doc_node_to_area = g_hash_table_new (NULL,
 										NULL); 
+#endif
 
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_flow_holder_inlines),
@@ -174,7 +178,7 @@ for_all (CongEditorArea *editor_area,
 	return NULL;
 }
 
-static CongEditorArea*
+static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node)
 {
@@ -204,7 +208,8 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 							      FALSE,
 							      0);
 
-			return new_area;
+			return cong_editor_widget_create_child_policy_for_node_with_single_area(editor_node,
+												new_area);
 		}
 	}
 
@@ -214,7 +219,9 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 					FALSE,
 					FALSE,
 					0);
-	return new_area;
+
+	return cong_editor_widget_create_child_policy_for_node_with_single_area(editor_node,
+										new_area);
 }
 
 static void
