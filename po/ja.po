@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0.7.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-02-16 01:39+0900\n"
 "Last-Translator: Mitsuru Oka <oka326@parkcity.ne.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -117,50 +117,6 @@ msgstr "XML ヘッダ"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "この DTD を結び付ける(_A)"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "label_dtd_external_id"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "label_dtd_notes"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "label_dtd_system_id"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "label_location"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "label_modified"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "label_name"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "label_typedesc"
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "label_typename"
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "label_xml_encoding"
-
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "label_xml_standalone"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "label_xml_version"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

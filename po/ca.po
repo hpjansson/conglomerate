@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-02-25 15:31+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -116,50 +116,6 @@ msgstr "Capçalera XML"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Associa aquest DTD"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "etiqueta_id_dtd_extern"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "etiqueta_dtd_notes"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "etiqueta_id_dtd_sistema"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "etiqueta_ubicació"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "etiqueta_modificat"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "etiqueta_nom"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "etiqueta_destipus"
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "etiqueta_nomtipus"
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "etiqueta_codificacio_xml"
-
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "etiqueta_xml_independent"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "etiqueta_xml_versio"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

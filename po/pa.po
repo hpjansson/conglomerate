@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-03-16 07:35+0530\n"
 "Last-Translator: Jaswinder Singh Phulewala <jaswinderlinux@netscape.net>\n"
 "Language-Team: Punjabi\n"
@@ -118,50 +118,6 @@ msgstr "XML ਸਿਰਲੇਖ"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "ਇਸ DTD ਨੂੰ ਜੋੜੋ"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "ਲੇਬਲ dtd ਬਾਹਰੀ id"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "ਲੇਬਲ dtd ਸੰਖੇਪ ਟਿੱਪਣੀ"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "ਲੇਬਲ dtd ਸਿਸਟਮ id"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "ਲੇਬਲ ਸਥਿਤੀ"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "ਸੋਧਿਅਾ ਲੇਬਲ"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "ਲੇਬਲ ਨਾਉਂ"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "ਲੇਬਲ typedesc"
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "ਲੇਬਲ ਕਿਸਮ ਨਾਉਂ"
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "ਲੇਬਲ xml ਰੂਪਾਂਤਰਣ"
-
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "ਲੇਬਲ xml ਇੱਕਲਾ"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "ਲੇਬਲ xml ਵਰਜਨ"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

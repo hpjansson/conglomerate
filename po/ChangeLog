@@ -2,6 +2,10 @@
 
 	* Regenerated all po files.
 
+	* all .po files: In ../glade/cong-file-propertities.glade
+	was translation of some strings disabled, those strings removed with
+	 sed -i -e '/^#~ msgid "label_.*/,/^$/d' *.po
+
 2004-05-03  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated.

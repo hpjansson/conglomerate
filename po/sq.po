@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-02-16 18:50+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -116,57 +116,6 @@ msgstr "Header XML"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Shoqëroi këtë DTD"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "label_dtd_external_id"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "label_dtd_notes"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "label_dtd_system_id"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "label_location"
-
-#: glade/cong-file-properties.glade.h:22
-#, fuzzy
-msgid "label_modified"
-msgstr "Ndryshuar"
-
-#: glade/cong-file-properties.glade.h:23
-#, fuzzy
-msgid "label_name"
-msgstr "etiketa"
-
-#: glade/cong-file-properties.glade.h:24
-#, fuzzy
-msgid "label_typedesc"
-msgstr "label_dtd_notes"
-
-#: glade/cong-file-properties.glade.h:25
-#, fuzzy
-msgid "label_typename"
-msgstr "label_dtd_notes"
-
-#: glade/cong-file-properties.glade.h:26
-#, fuzzy
-msgid "label_xml_encoding"
-msgstr "label_location"
-
-#: glade/cong-file-properties.glade.h:27
-#, fuzzy
-msgid "label_xml_standalone"
-msgstr "E vetme"
-
-#: glade/cong-file-properties.glade.h:28
-#, fuzzy
-msgid "label_xml_version"
-msgstr "label_location"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"
@@ -2188,6 +2137,7 @@ msgstr ""
 msgid "Source View - Conglomerate"
 msgstr ""
 
+#, fuzzy
 #~ msgid "Find:"
 #~ msgstr "Gjej:"
 

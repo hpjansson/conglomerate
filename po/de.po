@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0.7.13\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-02-28 22:14+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -116,50 +116,6 @@ msgstr "XML-Kopfzeilen"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "Mit dieser DTD _assoziieren"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "Beschriftung_DTD_extern_Kennung"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "Beschriftung_DTD_Hinweise"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "Beschriftung_DTD_Systemkennung"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "Beschriftung_Speicherort"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "Beschriftung_geändert"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "Beschriftung_Name"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "Beschriftung_Typbeschr"
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "Beschriftung_Typname"
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "Beschriftung_XML_Zeichenkodierung"
-
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "Beschriftung_XML_alleinstehend"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "Bechriftung_XML_Version"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

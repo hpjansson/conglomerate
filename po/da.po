@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2003-08-20 18:47+0200\n"
 "Last-Translator: Michael Rasmussen <mir@miras.org>\n"
 "Language-Team:  <da@li.org>\n"
@@ -119,56 +119,6 @@ msgstr "XML Header"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr ""
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:21
-#, fuzzy
-msgid "label_location"
-msgstr "Sted"
-
-#: glade/cong-file-properties.glade.h:22
-#, fuzzy
-msgid "label_modified"
-msgstr "Ændret"
-
-#: glade/cong-file-properties.glade.h:23
-#, fuzzy
-msgid "label_name"
-msgstr "Ændret"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:26
-#, fuzzy
-msgid "label_xml_encoding"
-msgstr "Standalone"
-
-#: glade/cong-file-properties.glade.h:27
-#, fuzzy
-msgid "label_xml_standalone"
-msgstr "Standalone"
-
-#: glade/cong-file-properties.glade.h:28
-#, fuzzy
-msgid "label_xml_version"
-msgstr "Standalone"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

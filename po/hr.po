@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-03-20 14:42+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -115,55 +115,6 @@ msgstr "XML zaglavlje"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Pridruži ovaj DTD"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:19
-#, fuzzy
-msgid "label_dtd_notes"
-msgstr "oznaka"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "Smještaj"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "Mijenjano"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "oznaka"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:25
-#, fuzzy
-msgid "label_typename"
-msgstr "oznaka"
-
-#: glade/cong-file-properties.glade.h:26
-#, fuzzy
-msgid "label_xml_encoding"
-msgstr "Smještaj"
-
-#: glade/cong-file-properties.glade.h:27
-#, fuzzy
-msgid "label_xml_standalone"
-msgstr "oznaka"
-
-#: glade/cong-file-properties.glade.h:28
-#, fuzzy
-msgid "label_xml_version"
-msgstr "Smještaj"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"
@@ -2304,5 +2255,6 @@ msgstr "Ubaci iza"
 msgid "Source View - Conglomerate"
 msgstr "Pregled kôda — Conglomerate"
 
+#, fuzzy
 #~ msgid "Find:"
 #~ msgstr "Nađi:"

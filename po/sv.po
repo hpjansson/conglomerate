@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-04-12 18:50+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -117,61 +117,6 @@ msgstr "XML-huvud"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Associera denna DTD"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "etikett_dtd_externt_id"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "etikett_dtd_anteckningar"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "etikett_dtd_system-id"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "etikettplats"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "etikett_ändrad"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "etikettnamn"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "etikett_typbeskr"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "etikett_typnamn"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "etikett_xml_kodning"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "etikett_xml_ensam"
-
-# Misstänkt trasigt meddelande.
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "etikett_xml_version"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"
@@ -2327,6 +2272,17 @@ msgstr "Klistra in efter"
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
 
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
+# Misstänkt trasigt meddelande.
 #~ msgid "Find:"
 #~ msgstr "Sök:"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-03-26 17:00+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
@@ -118,50 +118,6 @@ msgstr "XML zaglavlje"
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Nameni ovu DTD"
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr "oznaka_dtd_spoljni_ib"
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr "oznaka_dtd_beleške"
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr "oznaka_dtd_sistemski_ib"
-
-#: glade/cong-file-properties.glade.h:21
-msgid "label_location"
-msgstr "putanja_oznake"
-
-#: glade/cong-file-properties.glade.h:22
-msgid "label_modified"
-msgstr "oznaka_menjana"
-
-#: glade/cong-file-properties.glade.h:23
-msgid "label_name"
-msgstr "ime_oznake"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr "opisvrste_oznake"
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr "imevrste_oznake"
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr "xml_kodiranje_oznake"
-
-#: glade/cong-file-properties.glade.h:27
-msgid "label_xml_standalone"
-msgstr "oznaka_samostalna_xml"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
-msgstr "oznaka_izdanje_xml"
 
 #: glade/cong-find-replace.glade.h:1
 msgid "*"

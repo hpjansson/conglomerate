@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 09:59+0000\n"
+"POT-Creation-Date: 2004-05-16 10:08+0000\n"
 "PO-Revision-Date: 2004-01-31 13:20+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -114,54 +114,6 @@ msgstr "XML-hode"
 
 #: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:18
-msgid "label_dtd_external_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:19
-msgid "label_dtd_notes"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:20
-msgid "label_dtd_system_id"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:21
-#, fuzzy
-msgid "label_location"
-msgstr "Plassering"
-
-#: glade/cong-file-properties.glade.h:22
-#, fuzzy
-msgid "label_modified"
-msgstr "Endret"
-
-#: glade/cong-file-properties.glade.h:23
-#, fuzzy
-msgid "label_name"
-msgstr "etikett"
-
-#: glade/cong-file-properties.glade.h:24
-msgid "label_typedesc"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:25
-msgid "label_typename"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:26
-msgid "label_xml_encoding"
-msgstr ""
-
-#: glade/cong-file-properties.glade.h:27
-#, fuzzy
-msgid "label_xml_standalone"
-msgstr "Frittstående"
-
-#: glade/cong-file-properties.glade.h:28
-msgid "label_xml_version"
 msgstr ""
 
 #: glade/cong-find-replace.glade.h:1
@@ -2182,6 +2134,7 @@ msgstr "Lim inn etter"
 msgid "Source View - Conglomerate"
 msgstr ""
 
+#, fuzzy
 #~ msgid "Find:"
 #~ msgstr "Finn:"
 
