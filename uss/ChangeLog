@@ -1,3 +1,8 @@
+2003-10-26  Geert Stappers <stappers@stappers.nl>
+
+	* ckgtkdocincludes
+	Executable from top source directory
+
 2003-10-25  Geert Stappers <stappers@stappers.nl>
 	
 	* renaming scripts that Robert introduced on october 23th
