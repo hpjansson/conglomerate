@@ -1,3 +1,8 @@
+2003-08-29  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+	Added 'deb/conglomerate.menu'.
+
 2003-08-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in
