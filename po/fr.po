@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-10-24 05:41+0200\n"
-"PO-Revision-Date: 2004-10-24 05:42+0200\n"
+"POT-Creation-Date: 2004-10-27 03:06+0200\n"
+"PO-Revision-Date: 2004-10-27 03:07+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -67,10 +67,9 @@ msgid "Conglomerate Display Specification"
 msgstr "Spécification d'affichage Conglomerate"
 
 #: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
-#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
-#: src/cong-edit-preferences.c:271 src/cong-file-export.c:339
-#: src/cong-file-new.c:363 src/cong-file-print.c:250
-#: src/cong-parser-error.c:320
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:250
+#: src/cong-file-export.c:339 src/cong-file-new.c:363
+#: src/cong-file-print.c:250 src/cong-parser-error.c:320
 msgid "Description"
 msgstr "Description"
 
@@ -111,11 +110,11 @@ msgstr "Liste de types de fichiers pour ce type de document"
 
 #: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:93
 msgid "Metadata"
-msgstr "Métadata"
+msgstr "Métadonnée"
 
 #: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:95
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:338
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
 #: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Nom"
@@ -195,7 +194,7 @@ msgstr "Acronyme"
 
 #: dispspecs/docbook.xds.in.h:12
 msgid "Additional metadata"
-msgstr "Métada supplémentaire"
+msgstr "Métadonnée supplémentaire"
 
 #: dispspecs/docbook.xds.in.h:13 dispspecs/xhtml1-strict.xds.in.h:3
 msgid "Address"
@@ -265,7 +264,7 @@ msgstr "Information sur le livre"
 #: dispspecs/docbook.xds.in.h:29 dispspecs/forrest-document.xds.in.h:6
 #: dispspecs/xhtml1-strict.xds.in.h:14
 msgid "Caption"
-msgstr "Légende"
+msgstr "Titre (tableau)"
 
 #: dispspecs/docbook.xds.in.h:30
 msgid "Caution"
@@ -297,11 +296,11 @@ msgstr "Sortie informatique"
 
 #: dispspecs/docbook.xds.in.h:37
 msgid "Copyright"
-msgstr "Droits d'auteur"
+msgstr "Copyright"
 
 #: dispspecs/docbook.xds.in.h:38
 msgid "Copyright Holder"
-msgstr "Détenteur des droits d'auteur"
+msgstr "Détenteur du copyright"
 
 #: dispspecs/docbook.xds.in.h:39
 msgid "Corporate Name"
@@ -419,19 +418,19 @@ msgstr "Bouton IUG"
 
 #: dispspecs/docbook.xds.in.h:65
 msgid "GUI Label"
-msgstr "Étiquette UIG"
+msgstr "Étiquette IUG"
 
 #: dispspecs/docbook.xds.in.h:66
 msgid "GUI Menu"
-msgstr "Menu UIG"
+msgstr "Menu IUG"
 
 #: dispspecs/docbook.xds.in.h:67
 msgid "GUI Menu Item"
-msgstr "Article de menu UIG"
+msgstr "Article de menu IUG"
 
 #: dispspecs/docbook.xds.in.h:68
 msgid "GUI Submenu"
-msgstr "Sous-menu UIG"
+msgstr "Sous-menu IUG"
 
 #: dispspecs/docbook.xds.in.h:69
 msgid "Glossary"
@@ -524,15 +523,15 @@ msgstr "Choix de menu"
 
 #: dispspecs/docbook.xds.in.h:90
 msgid "Meta-information about a Reference Page"
-msgstr "Méta-information au sujet d'une page de référence"
+msgstr "Métainformation au sujet d'une page de référence"
 
 #: dispspecs/docbook.xds.in.h:91
 msgid "Meta-information for a book"
-msgstr "Méta-information pour un livre"
+msgstr "Métainformation pour un livre"
 
 #: dispspecs/docbook.xds.in.h:92
 msgid "Meta-information for an article"
-msgstr "Méta-information pour un article"
+msgstr "Métainformation pour un article"
 
 #: dispspecs/docbook.xds.in.h:94
 msgid "Miscellaneous Bibliographic Information"
@@ -610,7 +609,7 @@ msgstr "Question-et-Réponse"
 
 #: dispspecs/docbook.xds.in.h:113
 msgid "Question-and-Answer Set"
-msgstr "Jeux de questions et réponses"
+msgstr "Jeu de questions et réponses"
 
 #: dispspecs/docbook.xds.in.h:114
 msgid "Question-and-Answer Subset"
@@ -767,7 +766,7 @@ msgstr "Numéro standard international d'un livre"
 
 #: dispspecs/docbook.xds.in.h:152
 msgid "The International Standard Serial Number of a periodical."
-msgstr "Numéro de série standard international d'un journal"
+msgstr "Numéro de série standard international d'un périodique"
 
 #: dispspecs/docbook.xds.in.h:153
 msgid "The first place where a word or term occurs in a particular context"
@@ -966,11 +965,11 @@ msgstr "Version"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:1
 msgid "\"Kernel Traffic\" Newsletter"
-msgstr "\"Kernel Traffic\" Bulletin d'informations"
+msgstr "Bulletin d'informations \"Kernel Traffic\""
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:2
 msgid ""
-"A newletter tracking the technical development of a project within the Free/"
+"A newsletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
 msgstr ""
 "Un bulletin d'informations traçant le développement technique d'un project "
@@ -1090,7 +1089,7 @@ msgstr "Base"
 
 #: dispspecs/xhtml1-strict.xds.in.h:8
 msgid "Bidirectional Override"
-msgstr "Changment de bidirectionnalité"
+msgstr "Changement de bidirectionnalité"
 
 #: dispspecs/xhtml1-strict.xds.in.h:9
 msgid "Big"
@@ -1126,7 +1125,7 @@ msgstr "Liste de termes"
 
 #: dispspecs/xhtml1-strict.xds.in.h:21
 msgid "Definition Term"
-msgstr "Définition de terme"
+msgstr "Terme"
 
 #: dispspecs/xhtml1-strict.xds.in.h:22
 msgid "Deleted Text"
@@ -1206,7 +1205,7 @@ msgstr "Étiquette"
 
 #: dispspecs/xhtml1-strict.xds.in.h:45
 msgid "Legend"
-msgstr "Légende"
+msgstr "Libellé champ (formulaire)"
 
 #: dispspecs/xhtml1-strict.xds.in.h:50
 msgid "Metainformation"
@@ -2340,8 +2339,8 @@ msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
 msgstr ""
-"Essayez d'enregistrer le fichier à un autre emplacement, ou faites de "
-"l'espace sur le support en mettant à la poubelle certains fichiers."
+"Essayez d'enregistrer le fichier à un autre emplacement, ou faites de la "
+"place sur le support en mettant à la poubelle certains fichiers."
 
 #: src/cong-error-file-save.c:252
 msgid ""
@@ -3198,7 +3197,7 @@ msgstr ""
 
 #: src/plugin-docbook.c:1105
 msgid "Unable to locate the DocBook stylesheets"
-msgstr "Impossible de trouver les feuille de style DocBook"
+msgstr "Impossible de trouver les feuilles de style DocBook"
 
 #: src/plugin-docbook.c:1107
 msgid ""
@@ -3207,8 +3206,8 @@ msgid ""
 "XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
 "information on catalogs)."
 msgstr ""
-"Assurez-vous que les feuilles de styles DocBook de Norman Walsh, disponibles "
-"sur http://docbook.sourceforge.net/projects/xsl/, sont installés sur votre "
+"Assurez-vous que les feuilles de style DocBook de Norman Walsh, disponibles "
+"sur http://docbook.sourceforge.net/projects/xsl/, sont installées sur votre "
 "système et ont été ajoutées au fichier catalogue XML (voir http://www."
 "xmlsoft.org/catalog.html pour de plus amples informations sur les "
 "catalogues);"
@@ -3306,7 +3305,7 @@ msgstr ""
 
 #: src/plugin-docbook.c:1857
 msgid "Export DocBook as XSL:FO"
-msgstr "Export un fichier DocBook sous format XSL:FO"
+msgstr "Exporter un fichier DocBook sous format XSL:FO"
 
 #: src/plugin-docbook.c:1858
 msgid ""
@@ -3738,12 +3737,3 @@ msgstr "Insérer après"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Vue source - Conglomerate"
-
-#~ msgid "Conglomerate cannot export \"%s\""
-#~ msgstr "Conglomerate ne peut exporter \"%s\""
-
-#~ msgid ""
-#~ "None of Conglomerate's plugins know how to export files of this type."
-#~ msgstr ""
-#~ "Aucun plugin de Conglomerate ne sait comment exporter les fichiers de ce "
-#~ "type."
