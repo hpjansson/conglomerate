@@ -3,6 +3,12 @@ creating ChangeLog
 
 	* global.h, xmledit.c
 
+	Minor tidy-ups
+	
+2002-10-10 David Malcolm
+
+	* global.h, xmledit.c
+
 	New stack implementation (see posting to conglomerate-devel for details)
 	
 2002-10-09 David Malcolm

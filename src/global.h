@@ -212,6 +212,17 @@ TTREE *cong_layout_stack_entry_get_ttree_x(CongLayoutStackEntry *entry);
 int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry);
 
 
+/* modes:
+ * 
+ * 0 = calculate height only
+ * 1 = draw and calculate height
+ *
+ */
+enum CongDrawMode
+{
+	CONG_DRAW_MODE_CALCULATE_HEIGHT,
+	CONG_DRAW_MODE_CALCULATE_HEIGHT_AND_DRAW
+};
 
 
 struct CongXMLEditor
@@ -233,7 +244,7 @@ struct CongXMLEditor
 	int already_asked_for_size;
 
 	/* Drawing information (temporary) */
-	int mode;
+	enum CongDrawMode mode;
 
 	TTREE *draw_x;      /* XML node currently at */
 
