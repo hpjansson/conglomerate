@@ -9,8 +9,10 @@
    filename-attribute  NMTOKEN                                                           #IMPLIED
    icon                CDATA                                                             #IMPLIED
    tag                 ID                                                                #IMPLIED
+   ns                  NMTOKEN                                                           #IMPLIED
    type                ( plugin | paragraph | embed-external-file | span | structural )  #REQUIRED
    plugin-id           NMTOKEN                                                           #IMPLIED 
+   whitespace          (normalize | preserve)                                            "normalize"
 >
 
 <!ELEMENT element-list ( element*) >
