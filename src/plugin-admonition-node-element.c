@@ -31,6 +31,7 @@
 #include "cong-enum-mapping.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 
 #include "cong-editor-area-pixbuf.h"
 #include "cong-editor-area-labelled.h"

@@ -29,7 +29,7 @@
 
 #include "cong-editor-area-border.h"
 #include "cong-editor-area-structural-tag.h"
-#include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 
 #define PRIVATE(x) ((x)->private)
 

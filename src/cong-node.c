@@ -26,6 +26,7 @@
 #include "cong-node.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-util.h"
 
 #define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 0

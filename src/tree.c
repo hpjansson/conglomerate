@@ -7,6 +7,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-dialog.h"
 #include "cong-view.h"
 #include "cong-app.h"

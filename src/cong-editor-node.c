@@ -30,6 +30,7 @@
 #include "cong-app.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-editor-node-element-unknown.h"
 #include "cong-editor-node-element-structural.h"
 #include "cong-editor-node-element-span.h"

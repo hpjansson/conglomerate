@@ -28,7 +28,7 @@
 #include "cong-eel.h"
 
 #include "cong-editor-area-span-tag.h"
-#include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-editor-line-fragments.h"
 
 #define PRIVATE(x) ((x)->private)

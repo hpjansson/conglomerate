@@ -39,10 +39,6 @@ enum CongDocumentModelType
 typedef struct CongSerialisationFormat CongSerialisationFormat;
 typedef struct CongExternalDocumentModel CongExternalDocumentModel;
 
-/*******************************
-   cong_dispspec stuff: 
-*******************************/
-
 GdkGC* generate_gc_for_col(const GdkColor *col);
 
 /* Barebones constructor: */
@@ -130,15 +126,6 @@ void cong_dispspec_add_element (CongDispspec* ds,
 
 /* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
-enum CongDispspecGCUsage
-{
-	CONG_DISPSPEC_GC_USAGE_BOLD_LINE,
-	CONG_DISPSPEC_GC_USAGE_DIM_LINE,
-	CONG_DISPSPEC_GC_USAGE_BACKGROUND,
-	CONG_DISPSPEC_GC_USAGE_TEXT,
-
-	CONG_DISPSPEC_GC_USAGE_NUM
-};
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);
 #else
 #if 0
@@ -155,143 +142,6 @@ gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const 
 gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const gchar *name);
 #endif
 
-
-/*******************************
-   cong_dispspec_element stuff: 
-*******************************/
-
-/** 
- * cong_dispspec_element_new:
- * @xmlns: the string prefix of the namespace, or NULL
- * @tagname: the "tag name" for the new element; must be non-NULL
- * @type:
- * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
- * using "header capitalisation"
- *
- * Constructs a new #CongDispspecElement, initialising fields to sane defaults.
- **/
-CongDispspecElement*
-cong_dispspec_element_new (const gchar* xmlns, 
-			   const gchar* tagname, 
-			   enum CongElementType type,
-			   gboolean autogenerate_username);
-
-/* Destruction  */
-void 
-cong_dispspec_element_destroy (CongDispspecElement *element); 
-
-
-/** Get the namespace prefix (if any) */
-const gchar*
-cong_dispspec_element_get_xmlns(CongDispspecElement *element); 
-
-/** Get the tagname in a parser-friendly form */
-const char*
-cong_dispspec_element_tagname(CongDispspecElement *element);
-
-/** Get the name in a user-friendly form */
-const char*
-cong_dispspec_element_username(CongDispspecElement *element);
-
-/** Get a short user-friendly description of the element */
-const gchar*
-cong_dispspec_element_get_description(CongDispspecElement *element);
-
-/**
- *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
- */
-GdkPixbuf*
-cong_dispspec_element_get_icon(CongDispspecElement *element);
-
-/**
- * cong_dispspec_element_get_value_for_key:
- *
- * @key: the key
- * @element:  the dispspec element
- * 
- * Dispspec elements support a list of key/value string pairs; this is intended as a mechanism
- * to allow plugins to have arbitrary data whilst having a DTD for xds files.
- * 
- * Returns:  the value, if found, or NULL if not present.
- */
-const gchar*
-cong_dispspec_element_get_value_for_key (const gchar *key, 
-					 const CongDispspecElement *element);
-
-const char*
-cong_dispspec_element_name_name_get(CongDispspecElement* element);
-
-CongDispspecElement*
-cong_dispspec_element_next(CongDispspecElement* element);
-
-enum CongElementType
-cong_dispspec_element_type(CongDispspecElement *element);
-
-
-/**
- * cong_dispspec_element_get_whitespace:
- * @element:  The element of the display spec
- *
- * Get the #CongWhitespaceHandling behaviour for this element
- * Returns:  
- */
-enum CongWhitespaceHandling
-cong_dispspec_element_get_whitespace (CongDispspecElement *element);
-
-/**
- * cong_dispspec_element_set_whitespace:
- * @element:  The element of the display spec
- * @whitespace: The new value for whitespace handling
- *
- * Set the #CongWhitespaceHandling behaviour for this element
- */
-void
-cong_dispspec_element_set_whitespace (CongDispspecElement *element,
-				      enum CongWhitespaceHandling whitespace);
-
-gboolean
-cong_dispspec_element_collapseto(CongDispspecElement *element);
-
-gboolean
-cong_dispspec_element_is_structural(CongDispspecElement *element);
-
-gboolean
-cong_dispspec_element_is_span(CongDispspecElement *element);
-
-unsigned int
-cong_dispspec_element_color(CongDispspecElement *element);
-
-#if NEW_LOOK
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage);
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage);
-#else
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element);
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element);
-#endif
-
-CongDispspecElementHeaderInfo*
-cong_dispspec_element_header_info(CongDispspecElement *element);
-
-gchar*
-cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x);
-
-gchar*
-cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x);
-
-CongFont*
-cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
-
-const gchar*
-cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element);
-
-const gchar*
-cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element);
 
 /* Serialisation format stuff: */
 const gchar*

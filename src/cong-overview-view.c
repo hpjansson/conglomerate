@@ -26,6 +26,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-tree-view.h"
 
 /* Internal function prototypes: */

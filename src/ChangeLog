@@ -1,5 +1,9 @@
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element.c, cong-dispspec-element.h, Makefile.am, cong-dispspec.c, cong-dispspec.h, cong-document.h, cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c, cong-editor-node-element-span.c, cong-editor-node-element-structural.c, cong-editor-node.c, cong-node-properties-dialog.c, cong-node.c, cong-overview-view.c, global.h, plugin-admonition-node-element.c, popup.c, tree.c, xmldata.c
+
+	Cut relevants parts of cong-dispspec.[hc] into new files cong-dispspec-element[.hc]
+
 	* cong-dispspec.c, cong-dispspec.h, plugin-admonition-node-element.c
 
 	Dispspec elements now support arbitrary key-value pairs; DocBook admonition plugin now uses this to determine icon filenames

@@ -28,6 +28,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-plugin.h"
 #include "cong-app.h"
 #include "cong-eel.h"

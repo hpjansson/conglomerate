@@ -72,6 +72,16 @@ enum CongFontRole
 	CONG_FONT_ROLE_NUM
 };
 
+enum CongDispspecGCUsage
+{
+	CONG_DISPSPEC_GC_USAGE_BOLD_LINE,
+	CONG_DISPSPEC_GC_USAGE_DIM_LINE,
+	CONG_DISPSPEC_GC_USAGE_BACKGROUND,
+	CONG_DISPSPEC_GC_USAGE_TEXT,
+
+	CONG_DISPSPEC_GC_USAGE_NUM
+};
+
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);

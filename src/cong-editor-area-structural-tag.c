@@ -31,7 +31,7 @@
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-spacer.h"
 #include "cong-editor-area-pixbuf.h"
-#include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-util.h"
 
 #define PRIVATE(x) ((x)->private)
