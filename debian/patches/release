@@ -51,7 +51,7 @@ else
   ;;
   *)
    echo \'${1}\' is an unsupported subcommand
-   echo "Supported subcommand are: unpatch & *.*.*-*"
+   echo "Supported subcommands are: unpatch & *.*.*-*"
    echo " Where * are digits for the version"
   ;;
  esac
