@@ -1,5 +1,9 @@
 2003-07-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c
+
+	Fixed a bug: was failing to clean up signals
+
 	* tree.c, xmldata.c
 
 	Found and patched a problem with cong_node_recursive_dup not setting document on new nodes.

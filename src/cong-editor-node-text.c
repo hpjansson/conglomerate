@@ -38,12 +38,20 @@ struct CongEditorNodeTextDetails
 
 	CongEditorAreaText *area_text;
 	
+	gulong handler_id_node_set_text;
+
 #if 0
 	CongEditorAreaComposer *flow_test;
 	PangoLayout *pango_layout;
 	GList *list_of_text_fragments;
 #endif
 };
+
+static void
+finalize (GObject *object);
+
+static void
+dispose (GObject *object);
 
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node);
@@ -68,6 +76,9 @@ cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
+	G_OBJECT_CLASS (klass)->finalize = finalize;
+	G_OBJECT_CLASS (klass)->dispose = dispose;
+
 	node_klass->generate_area = generate_area;
 }
 
@@ -76,6 +87,18 @@ cong_editor_node_text_instance_init (CongEditorNodeText *node_text)
 {
 	node_text->private = g_new0(CongEditorNodeTextDetails,1);
 }
+
+static void
+finalize (GObject *object)
+{
+	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(object);
+
+	g_free (editor_node_text->private);
+	editor_node_text->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
 
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
@@ -86,13 +109,25 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				    editor_widget,
 				    node);
 
-	g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
-				"node_set_text",
-				G_CALLBACK(on_signal_set_text_notify_after),
-				editor_node_text);
+	PRIVATE(editor_node_text)->handler_id_node_set_text = g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
+										      "node_set_text",
+										      G_CALLBACK(on_signal_set_text_notify_after),
+										      editor_node_text);
 
 	return editor_node_text;
 }
+
+static void
+dispose (GObject *object)
+{
+	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(object);
+
+	g_signal_handler_disconnect (G_OBJECT(cong_editor_node_get_document(CONG_EDITOR_NODE(object))),
+				     PRIVATE(editor_node_text)->handler_id_node_set_text);	
+
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+}
+
 
 CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
@@ -139,6 +174,7 @@ generate_area (CongEditorNode *editor_node)
 	PRIVATE(node_text)->area_text = 
 		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
 								  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
+								  NULL, 
 								  stripped_text)
 				       );
 	g_free (stripped_text);
