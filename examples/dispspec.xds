@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <dispspec>
   <metadata>
-    <name>Conglomerate Display Specification</name>
-    <description>Information that tells Conglomerate how to display a particular type of file.</description>
+    <name language="en">Conglomerate Display Specification</name>
+    <description language="en">Information that tells Conglomerate how to display a particular type of file.</description>
   </metadata>
   <serialisation>
     <format extension="xds"/>
@@ -12,50 +12,50 @@
   </document-models>
   <element-list>
     <element tag="collapseto" type="structural">
-      <name>Collapseto</name>
+      <name language="en">Collapseto</name>
     </element>
     <element tag="description" type="structural">
-      <name>Description</name>
-      <short-desc>Short Description of the document type</short-desc>
+      <name language="en">Description</name>
+      <short-desc language="en">Short Description of the document type</short-desc>
     </element>
     <element tag="dispspec" type="structural">
-      <name>Conglomerate Display Specification</name>
+      <name language="en">Conglomerate Display Specification</name>
     </element><element tag="document-models" type="structural">
-      <name>Document Models</name>
+      <name language="en">Document Models</name>
     </element><element tag="external-document-model" type="structural">
-      <name>External Document Model</name>
+      <name language="en">External Document Model</name>
     </element>
     <element tag="element" type="structural">
-      <name>XML Element</name>
+      <name language="en">XML Element</name>
       <header-info xpath="concat(&quot;&lt;&quot;, @tag, &quot;&gt;&quot;)"/>
     </element>
     <element tag="element-list" type="structural">
-      <name>List of XML Elements</name>
+      <name language="en">List of XML Elements</name>
     </element>
     <element tag="format" type="structural">
-      <name>Format</name>
+      <name language="en">Format</name>
       <header-info xpath="concat(&quot;filename extension &quot;, @extension)"/>
     </element>
     <element tag="gui" type="structural">
-      <name>GUI</name>
+      <name language="en">GUI</name>
     </element>
     <element tag="header-info" type="structural">
-      <name>Header Information</name>
+      <name language="en">Header Information</name>
     </element>
     <element tag="metadata" type="structural">
-      <name>Metadata</name>
+      <name language="en">Metadata</name>
     </element>
     <element tag="name" type="structural">
-      <name>Name</name>
-      <short-desc>Name of an XML element</short-desc>
+      <name language="en">Name</name>
+      <short-desc language="en">Name of an XML element</short-desc>
     </element>
     <element tag="serialisation" type="structural">
-      <name>Serialisation Type List</name>
-      <short-desc>List of file types for this type of document</short-desc>
+      <name language="en">Serialisation Type List</name>
+      <short-desc language="en">List of file types for this type of document</short-desc>
     </element>
     <element tag="short-desc" type="structural">
-      <name>Short Description</name>
-      <short-desc>Short Description of an XML element</short-desc>
+      <name language="en">Short Description</name>
+      <short-desc language="en">Short Description of an XML element</short-desc>
     </element>
   </element-list>
 

@@ -1,3 +1,9 @@
+2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cnxml.xds, dispspec.xds, docbook.xds, forrest-document.xds, kernel-traffic-newsletter.xds, readme.xds, relax-ng.xds, website-layout.xds, website-webpage.xds, xhtml1-strict.xds, xsl.xds
+	
+	Added language attribute to metadata name and description tags; converted attribute locale->language elsewhere; added some test translations
+
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* docbook.xds, kernel-traffic-newsletter.xds, readme.xds, website-layout.xds, website-webpage.xds, xds.dtd

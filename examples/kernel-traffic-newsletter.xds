@@ -2,15 +2,15 @@
 <dispspec>
 
 	<metadata>
-		<name>&quot;Kernel Traffic&quot; Newsletter</name>
-		<description>A newletter tracking the technical development of a project within the Free/Open Source Software world</description>
+		<name language="en">&quot;Kernel Traffic&quot; Newsletter</name>
+		<description language="en">A newletter tracking the technical development of a project within the Free/Open Source Software world</description>
 	</metadata>
 	<document-models>
 	</document-models>
 	<element-list>
 			
 		<element tag="kc" type="structural" color="a0b0c0">
-			<name locale="en">Kernel Cousin Newsletter</name>
+			<name language="en">Kernel Cousin Newsletter</name>
 			<header-info xpath="concat(normalize-space(child::title/text()), &quot; #&quot;, normalize-space(child::issue/@num))"></header-info>
 		</element>
 
@@ -18,123 +18,123 @@
 		</element>
 
 		<element tag="quote" type="structural" color="a0b0c0"  icon="cong-paragraph"> 
-			<name locale="en">Quotation</name>
+			<name language="en">Quotation</name>
 			<header-info xpath="normalize-space(@who)"></header-info>
 		</element>
 
 		<element tag="section" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Section</name>
+			<name language="en">Section</name>
 			<header-info xpath="concat(normalize-space(@title), &quot; (&quot;, normalize-space(@subject), &quot;)&quot;)"></header-info>
 		</element>
 
 		<element tag="stats" type="structural" color="a0b0c0"  icon="cong-metadata"> 
-			<name locale="en">Statistics</name>
+			<name language="en">Statistics</name>
 		</element>
 
 		<element tag="person" type="structural" color="a0b0c0"  icon="cong-author"> 
-			<name locale="en">Person</name>
+			<name language="en">Person</name>
 		</element>
 
 		<element tag="vcelement" type="structural" color="a0b0c0"> 
-			<name locale="en">Version Control Activity</name>
+			<name language="en">Version Control Activity</name>
 		</element>
 
 		<element tag="vcstats" type="structural" color="a0b0c0"> 
-			<name locale="en">Version Control Statistics</name>
+			<name language="en">Version Control Statistics</name>
 		</element>
 
 		<element tag="vctree" type="structural" color="a0b0c0"> 
-			<name locale="en">Version Control Tree</name>
+			<name language="en">Version Control Tree</name>
 		</element>
 
 		<element tag="intro" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Introduction</name>
+			<name language="en">Introduction</name>
 		</element>
 
 		<element tag="issue" type="structural" color="a0b0c0" icon="cong-metadata"> 
-			<name locale="en">Issue</name>
+			<name language="en">Issue</name>
 		</element>
 
 		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
-			<name locale="en">Author</name>
+			<name language="en">Author</name>
 		</element>
 
 		<element tag="translator" type="structural" color="a0b0c0" icon="cong-author"> 
-			<name locale="en">Translator</name>
+			<name language="en">Translator</name>
 		</element>
 
 		<element tag="editor" type="structural" color="a0b0c0" icon="cong-author"> 
-			<name locale="en">Editor</name>
+			<name language="en">Editor</name>
 		</element>
 
 		<element tag="correction" type="structural" color="a0b0c0" icon="cong-author"> 
-			<name locale="en">Correction</name>
+			<name language="en">Correction</name>
 		</element>
 		<element tag="editorialize" type="structural" color="a0b0c0" icon="cong-author"> 
-			<name locale="en">Editorialize</name>
+			<name language="en">Editorialize</name>
 		</element>
 
 		<element tag="li" type="structural" color="a0b0c0"  icon="cong-list-item"> 
-			<name locale="en">List Item</name>
+			<name language="en">List Item</name>
 		</element>
 
 		<element tag="ol" type="structural" color="a0b0c0"  icon="cong-numbered-list"> 
-			<name locale="en">List (ordered)</name>
+			<name language="en">List (ordered)</name>
 		</element>
 
 		<element tag="p" type="plugin" plugin-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
-			<name locale="en">Paragraph</name>
+			<name language="en">Paragraph</name>
 		</element>
 
 		<element tag="pre" type="structural" color="a0b0c0"> 
 		</element>
 
 		<element tag="a" type="span" color="a0b0c0"> 
-			<name locale="en">Hyperlink</name>
+			<name language="en">Hyperlink</name>
 		</element>
 
 		<element tag="b" type="span" color="a0b0c0"> 
-			<name locale="en">Bold</name>
+			<name language="en">Bold</name>
 		</element>
 
 		<element tag="blockquote" type="structural" color="a0b0c0"> 
-			<name locale="en">Block Quote</name>
+			<name language="en">Block Quote</name>
 		</element>
 
 		<element tag="br" type="structural" color="a0b0c0"> 
-			<name locale="en">Break (manual)</name>
+			<name language="en">Break (manual)</name>
 		</element>
 
 		<element tag="center" type="structural" color="a0b0c0"> 
-			<name locale="en">Centered</name>
+			<name language="en">Centered</name>
 		</element>
 
 		<element tag="cite" type="span" color="a0b0c0"> 
-			<name locale="en">Cite</name>
+			<name language="en">Cite</name>
 		</element>
 
 		<element tag="code" type="structural" color="a0b0c0">
-			<name locale="en">Code</name>
+			<name language="en">Code</name>
 		</element>
 
 		<element tag="em" type="span" color="a0b0c0"> 
-			<name locale="en">Emphasis</name>
+			<name language="en">Emphasis</name>
 		</element>
 
 		<element tag="font" type="span" color="a0b0c0"> 
-			<name locale="en">Font</name>
+			<name language="en">Font</name>
 		</element>
 
 		<element tag="h1" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Heading (level 1)</name>
+			<name language="en">Heading (level 1)</name>
 		</element>
 
 		<element tag="h2" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Heading (level 2)</name>
+			<name language="en">Heading (level 2)</name>
 		</element>
 
 		<element tag="h3" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Heading (level 3)</name>
+			<name language="en">Heading (level 3)</name>
 		</element>
 
 		<element tag="headquote" type="structural" color="a0b0c0"> 
@@ -144,10 +144,10 @@
 		</element>
 
 		<element tag="i" type="span" color="a0b0c0"> 
-			<name locale="en">Italicised</name>
+			<name language="en">Italicised</name>
 		</element>
 		<element tag="strong" type="span" color="a0b0c0"> 
-			<name locale="en">Strong</name>
+			<name language="en">Strong</name>
 		</element>
 
 		<element tag="table" type="structural" color="a0b0c0">
@@ -159,12 +159,12 @@
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
-			<name locale="en">Title</name>
+			<name language="en">Title</name>
 		</element>
 
 
 		<element tag="topic" type="structural" color="a0b0c0" icon="cong-subsection"> 
-			<name locale="en">Topic</name>
+			<name language="en">Topic</name>
 		</element>
 
 		<element tag="tr" type="structural" color="a0b0c0">
@@ -175,11 +175,11 @@
 		</element>
 
 		<element tag="u" type="span" color="a0b0c0"> 
-			<name locale="en">Underlined</name>
+			<name language="en">Underlined</name>
 		</element>
 
 		<element tag="ul" type="structural" color="a0b0c0"  icon="cong-bulleted-list"> 
-			<name locale="en">List (unordered)</name>
+			<name language="en">List (unordered)</name>
 		</element>
 
 	</element-list>

@@ -2,14 +2,14 @@
 <dispspec>
 
 	<metadata>
-		<name>Experimental "readme" format</name>
-		<description>This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</description>
+		<name language="en">Experimental "readme" format</name>
+		<description language="en">This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</description>
 	</metadata>
 	<document-models>
 	</document-models>
 	<element-list>
 		<element tag="document" type="structural" color="a0b0c0">
-			<name locale="en">Document</name>
+			<name language="en">Document</name>
 		</element>
 
 		<!-- Wow - we can have comments in this version of the format -->
@@ -19,59 +19,59 @@
 		<!-- What does collapseto mean? -->
 
 		<element tag="introduction" type = "structural" color = "e0eee0">
-			<name locale="en">Introduction</name>
+			<name language="en">Introduction</name>
 		</element>
 
 		<element tag="section" type = "structural" color = "a0b0c0">
-			<name locale="en">Section</name>
+			<name language="en">Section</name>
 		</element>
 
 		<element tag="section.title" type = "structural">
-			<name locale="en">Title</name>
+			<name language="en">Title</name>
 		</element>
 
 		<element tag="section.signature" type = "structural">
-			<name locale="en">Signature</name>
+			<name language="en">Signature</name>
 		</element>
 
 		<!-- Here come the spans: -->
 
 		<element tag="quote" type = "span" color = "8b0000">
-			<name locale="en">Quote</name>
+			<name language="en">Quote</name>
 		</element>
 
 		<element tag="admission" type = "span" color = "b22222">
-			<name locale="en">Admission</name>
+			<name language="en">Admission</name>
 		</element>
 
 		<element tag="excuse" type = "span" color = "b22222">
-			<name locale="en">Excuse</name>
+			<name language="en">Excuse</name>
 		</element>
 
 		<element tag="corporate" type = "span" color = "00008b">
-			<name locale="en">Corp jargon</name>
+			<name language="en">Corp jargon</name>
 		</element>
 
 		<element tag="disclaimer" type = "span" color = "698b22">
-			<name locale="en">Disclaimer</name>
+			<name language="en">Disclaimer</name>
 		</element>
 
 		<element tag="emph" type = "span" color = "cd1076">
-			<name locale="en">Emphasis</name>
+			<name language="en">Emphasis</name>
 		</element>
 
 		<element tag="inspirational" type = "span" color = "08b8b">
-			<name locale="en">Inspirational</name>
+			<name language="en">Inspirational</name>
 		</element>
 
 		<element tag="optimistic" type = "span" color = "458b74">
-			<name locale="en">Optimistic</name>
+			<name language="en">Optimistic</name>
 		</element>
 
 		<!-- The paragraph separator: -->
 
 		<element tag="p" type = "paragraph">
-			<name locale="en">Paragraph</name>
+			<name language="en">Paragraph</name>
 		</element>
 		
 

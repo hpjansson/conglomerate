@@ -3,8 +3,8 @@
 <dispspec>
 
 	<metadata>
-		<name>Website Layout</name>
-		<description></description>
+		<name language="en">Website Layout</name>
+		<description language="en"></description>
 	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
@@ -13,46 +13,46 @@
 	<element-list>
 			
 		<element tag="layout" type="structural" color="a0b0c0">
-			<name locale="en">Website Layout</name>
+			<name language="en">Website Layout</name>
 		</element>
 
 		<element tag="config" type="structural" color="a0b0c0">
-			<name locale="en">Configuration Data</name>
+			<name language="en">Configuration Data</name>
 			<!-- Really need a new element type for this... -->
 		</element>
 
 		<element tag="copyright" type="structural" color="a0b0c0">
-			<name locale="en">Copyright</name>
+			<name language="en">Copyright</name>
 		</element>
 
 		<element tag="year" type="structural" color="a0b0c0">
-			<name locale="en">Year</name>
+			<name language="en">Year</name>
 		</element>
 
 		<element tag="holder" type="structural" color="a0b0c0">
-			<name locale="en">Holder</name>
+			<name language="en">Holder</name>
 		</element>
 
 		<element tag="headlink" type="structural" color="a0b0c0">
-			<name locale="en">Header Link</name>
+			<name language="en">Header Link</name>
 		</element>
 
 		<element tag="style" type="structural" color="a0b0c0">
-			<name locale="en">Stylesheet</name>
+			<name language="en">Stylesheet</name>
 		</element>
 
 		<element tag="toc" type="structural" color="a0b0c0">
-			<name locale="en">Table of Contents</name>
+			<name language="en">Table of Contents</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="tocentry" type="structural" color="a0b0c0">
-			<name locale="en">Content</name>
+			<name language="en">Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="notoc" type="structural" color="a0b0c0">
-			<name locale="en">Additional Content</name>
+			<name language="en">Additional Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 

@@ -2,8 +2,8 @@
 <dispspec>
 
 	<metadata>
-		<name>Experimental "cnxml" format</name>
-		<description>Test CNXML ds</description>
+		<name language="en">Experimental "cnxml" format</name>
+		<description language="en">Test CNXML ds</description>
 	</metadata>
 
 	<document-models>
@@ -12,78 +12,78 @@
 
 	<element-list>
 		<element tag="module" type="structural" color="a0b0c0">
-			<name locale="en">module</name>
+			<name language="en">module</name>
 		</element>
 
 		<element tag="metadata" type="structural" color="a0b0c0">
-			<name locale="en">metadata</name>
+			<name language="en">metadata</name>
 		</element>
 		<element tag="content" type="structural" color="a0b0c0">
-			<name locale="en">content</name>
+			<name language="en">content</name>
 		</element>
 
 		<element tag="section" type="structural" color="a0b0c0">
-			<name locale="en">section</name>
+			<name language="en">section</name>
 		</element>
 
 		<element tag="equation" type="structural" color="a0b0c0">
-			<name locale="en">equation</name>
+			<name language="en">equation</name>
 		</element>
 
 		<element tag="note" type="structural" color="a0b0c0">
-			<name locale="en">note</name>
+			<name language="en">note</name>
 		</element>
 
 		<element tag="codeblock" type="structural" color="a0b0c0">
-			<name locale="en">codeblock</name>
+			<name language="en">codeblock</name>
 		</element>
 
 		<element tag="codeline" type="structural" color="a0b0c0">
-			<name locale="en">codeline</name>
+			<name language="en">codeline</name>
 		</element>
 
 		<element tag="rule" type="structural" color="a0b0c0">
-			<name locale="en">rule</name>
+			<name language="en">rule</name>
 		</element>
 
 		<element tag="statement" type="structural" color="a0b0c0">
-			<name locale="en">statement</name>
+			<name language="en">statement</name>
 		</element>
 
 		<element tag="proof" type="structural" color="a0b0c0">
-			<name locale="en">proof</name>
+			<name language="en">proof</name>
 		</element>
 
 		<element tag="para" type="structural" color="a0b0c0">
-			<name locale="en">para</name>
+			<name language="en">para</name>
 		</element>
 
 		<element tag="list" type="structural" color="a0b0c0">
-			<name locale="en">list</name>
+			<name language="en">list</name>
 		</element>
 
 		<element tag="item" type="structural" color="a0b0c0">
-			<name locale="en">item</name>
+			<name language="en">item</name>
 		</element>
 
 		<element tag="emphasis" type="span" color="a0b0c0">
-			<name locale="en">emphasis</name>
+			<name language="en">emphasis</name>
 		</element>
 
 		<element tag="term" type="span" color="a0b0c0">
-			<name locale="en">term</name>
+			<name language="en">term</name>
 		</element>
 
 		<element tag="link" type="span" color="a0b0c0">
-			<name locale="en">link</name>
+			<name language="en">link</name>
 		</element>
 
 		<element tag="cite" type="span" color="a0b0c0">
-			<name locale="en">cite</name>
+			<name language="en">cite</name>
 		</element>
 
 		<element tag="cnxn" type="span" color="a0b0c0">
-			<name locale="en">cnxn</name>
+			<name language="en">cnxn</name>
 		</element>
 	</element-list>
 

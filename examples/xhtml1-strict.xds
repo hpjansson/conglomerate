@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <dispspec>
 	<metadata>
-		<name>XHTML 1.0 (strict)</name>
-		<description>The strict XML version of HTML </description>
+		<name language="en">XHTML 1.0 (strict)</name>
+		<description language="en">The strict XML version of HTML </description>
 	</metadata>
 	<serialisation>
 		<format extension="html"/>
@@ -14,261 +14,261 @@
 	
 		<!-- Skeletal Tags -->
 		<element tag="body" type="structural">
-			<name locale="en">Body</name>
+			<name language="en">Body</name>
 		</element>
 		<element tag="head" type="structural">
-			<name locale="en">Head</name>
+			<name language="en">Head</name>
 		</element>
 		<element tag="html" type="structural">
-			<name locale="en">HTML Page</name>
+			<name language="en">HTML Page</name>
 		</element>
 
 		<!-- Header Tags -->
 		<element tag="base" type="structural">
-			<name locale="en">Base</name>
+			<name language="en">Base</name>
 		</element>
 		<element tag="link" type="structural">
-			<name locale="en">Link</name>
+			<name language="en">Link</name>
 		</element>
 		<element tag="meta" type="structural">
-			<name locale="en">Meta</name>
+			<name language="en">Meta</name>
 		</element>
 		<element tag="style" type="structural">
-			<name locale="en">Style</name>
+			<name language="en">Style</name>
 		</element>
 		<element tag="title" type="structural">
-			<name locale="en">Title</name>
+			<name language="en">Title</name>
 		</element>
 
 		<!-- Hyperlinks -->
 		<element tag="a" type="span">
-			<name locale="en">Anchor</name>
+			<name language="en">Anchor</name>
 		</element>
 
 		<!-- Text Markup: Physical-based -->
 		<element tag="b" type="span">
-			<name locale="en">Bold</name>
+			<name language="en">Bold</name>
 		</element>
 		<element tag="big" type="span">
-			<name locale="en">Big</name>
+			<name language="en">Big</name>
 		</element>
 		<element tag="i" type="span">
-			<name locale="en">Italic</name>
+			<name language="en">Italic</name>
 		</element>
 		<element tag="small" type="span">
-			<name locale="en">Small</name>
+			<name language="en">Small</name>
 		</element>
 		<element tag="sub" type="span">
-			<name locale="en">Subscript</name>
+			<name language="en">Subscript</name>
 		</element>
 		<element tag="tt" type="span">
-			<name locale="en">Teletype</name>
+			<name language="en">Teletype</name>
 		</element>
 
 		<!-- Text Markup: Content-based -->
 		<element tag="cite" type="span">
-			<name locale="en">Citation</name>
+			<name language="en">Citation</name>
 		</element>
 		<element tag="code" type="span">
-			<name locale="en">Code</name>
+			<name language="en">Code</name>
 		</element>
 		<element tag="dfn" type="span">
-			<name locale="en">Definition</name>
+			<name language="en">Definition</name>
 		</element>
 		<element tag="em" type="span">
-			<name locale="en">Emphasis</name>
+			<name language="en">Emphasis</name>
 		</element>
 		<element tag="kbd" type="span">
-			<name locale="en">Keyboard</name>
+			<name language="en">Keyboard</name>
 		</element>
 		<element tag="samp" type="span">
-			<name locale="en">Samp</name>
+			<name language="en">Samp</name>
 		</element>
 		<element tag="strong" type="span">
-			<name locale="en">Strong</name>
+			<name language="en">Strong</name>
 		</element>
 		<element tag="var" type="span">
-			<name locale="en">Var</name>
+			<name language="en">Var</name>
 		</element>
 
 		<!-- Lists -->
 		<element tag="dl" type="structural">
-			<name locale="en">Dl</name>
+			<name language="en">Dl</name>
 		</element>
 		<element tag="li" type="plugin" plugin-id="listitem">
-			<name locale="en">List Item</name>
+			<name language="en">List Item</name>
 		</element>
 		<element tag="ol" type="structural">
-			<name locale="en">List (ordered)</name>
+			<name language="en">List (ordered)</name>
 		</element>
 		<element tag="ul" type="structural">
-			<name locale="en">List (unordered)</name>
+			<name language="en">List (unordered)</name>
 		</element>
 
 		<!-- Forms -->
 		<element tag="form" type="structural">
-			<name locale="en">Form</name>
+			<name language="en">Form</name>
 		</element>
 		<element tag="input" type="structural">
-			<name locale="en">Input</name>
+			<name language="en">Input</name>
 		</element>
 		<element tag="option" type="structural">
-			<name locale="en">Option</name>
+			<name language="en">Option</name>
 		</element>
 		<element tag="select" type="structural">
-			<name locale="en">Select</name>
+			<name language="en">Select</name>
 		</element>
 		<element tag="textarea" type="structural">
-			<name locale="en">Textarea</name>
+			<name language="en">Textarea</name>
 		</element>
 
 		<!-- Rules, images and multimedia -->
 		<element tag="img" type="structural">
-			<name locale="en">Img</name>
+			<name language="en">Img</name>
 		</element>
 		<element tag="map" type="structural">
-			<name locale="en">Map</name>
+			<name language="en">Map</name>
 		</element>
 
 		<!-- Tables -->
 		<element tag="caption" type="span">
-			<name locale="en">Caption</name>
+			<name language="en">Caption</name>
 		</element>
 		<element tag="col" type="span">
-			<name locale="en">Col</name>
+			<name language="en">Col</name>
 		</element>
 		<element tag="colgroup" type="structural">
-			<name locale="en">Colgroup</name>
+			<name language="en">Colgroup</name>
 		</element>
 		<element tag="table" type="structural">
-			<name locale="en">Table</name>
+			<name language="en">Table</name>
 		</element>
 		<element tag="tbody" type="structural">
-			<name locale="en">Tbody</name>
+			<name language="en">Tbody</name>
 		</element>
 		<element tag="td" type="span">
-			<name locale="en">Td</name>
+			<name language="en">Td</name>
 		</element>
 		<element tag="tfoot" type="structural">
-			<name locale="en">Tfoot</name>
+			<name language="en">Tfoot</name>
 		</element>
 		<element tag="th" type="span">
-			<name locale="en">Th</name>
+			<name language="en">Th</name>
 		</element>
 		<element tag="thead" type="structural">
-			<name locale="en">Thead</name>
+			<name language="en">Thead</name>
 		</element>
 
 		<!-- Executable Content -->
 		<element tag="object" type="structural">
-			<name locale="en">Object</name>
+			<name language="en">Object</name>
 		</element>
 		<element tag="script" type="structural">
-			<name locale="en">Script</name>
+			<name language="en">Script</name>
 		</element>
 
 		<!-- Content Presentation and Flow -->
 		<element tag="address" type="span">
-			<name locale="en">Address</name>
+			<name language="en">Address</name>
 		</element>
 		<element tag="blockquote" type="structural">
-			<name locale="en">Blockquote</name>
+			<name language="en">Blockquote</name>
 		</element>
 		<element tag="br" type="span">
-			<name locale="en">Br</name>
+			<name language="en">Br</name>
 		</element>
 		<element tag="div" type="span">
-			<name locale="en">Div</name>
+			<name language="en">Div</name>
 		</element>
 		<element tag="h1" type="structural">
-			<name locale="en">H1</name>
+			<name language="en">H1</name>
 		</element>
 		<element tag="h2" type="structural">
-			<name locale="en">H2</name>
+			<name language="en">H2</name>
 		</element>
 		<element tag="h3" type="structural">
-			<name locale="en">H3</name>
+			<name language="en">H3</name>
 		</element>
 		<element tag="h4" type="structural">
-			<name locale="en">H4</name>
+			<name language="en">H4</name>
 		</element>
 		<element tag="h5" type="structural">
-			<name locale="en">H5</name>
+			<name language="en">H5</name>
 		</element>
 		<element tag="h6" type="structural">
-			<name locale="en">H6</name>
+			<name language="en">H6</name>
 		</element>
 		<element tag="hr" type="structural">
-			<name locale="en">Horizontal Rule</name>
+			<name language="en">Horizontal Rule</name>
 		</element>
 		<element tag="p" type="structural">
-			<name locale="en">Paragraph</name>
+			<name language="en">Paragraph</name>
 		</element>
 
 		<!-- Unclassified tags -->
 
 		<element tag="param" type="span">
-			<name locale="en">Param</name>
+			<name language="en">Param</name>
 		</element>
 
 		<element tag="button" type="span">
-			<name locale="en">Button</name>
+			<name language="en">Button</name>
 		</element>
 		<element tag="dt" type="span">
-			<name locale="en">Dt</name>
+			<name language="en">Dt</name>
 		</element>
 
 		<!-- Ongoing classification -->
 		<element tag="area" type="span">
-			<name locale="en">Area</name>
+			<name language="en">Area</name>
 		</element>
 		<element tag="dd" type="span">
-			<name locale="en">Dd</name>
+			<name language="en">Dd</name>
 		</element>
 		<element tag="fieldset" type="span">
-			<name locale="en">Fieldset</name>
+			<name language="en">Fieldset</name>
 		</element>
 		<element tag="ins" type="span">
-			<name locale="en">Ins</name>
+			<name language="en">Ins</name>
 		</element>
 		<element tag="span" type="span">
-			<name locale="en">Span</name>
+			<name language="en">Span</name>
 		</element>
 		<element tag="label" type="span">
-			<name locale="en">Label</name>
+			<name language="en">Label</name>
 		</element>
 		<element tag="acronym" type="span">
-			<name locale="en">Acronym</name>
+			<name language="en">Acronym</name>
 		</element>
 		<element tag="noscript" type="structural">
-			<name locale="en">Noscript</name>
+			<name language="en">Noscript</name>
 		</element>
 		<element tag="sup" type="span">
-			<name locale="en">Superscript</name>
+			<name language="en">Superscript</name>
 		</element>
 		<element tag="optgroup" type="structural">
-			<name locale="en">Optgroup</name>
+			<name language="en">Optgroup</name>
 		</element>
 		<element tag="pre" type="span">
-			<name locale="en">Preformatted Text</name>
+			<name language="en">Preformatted Text</name>
 		</element>
 		<element tag="bdo" type="span">
-			<name locale="en">Bdo</name>
+			<name language="en">Bdo</name>
 		</element>
 		<element tag="tr" type="structural">
-			<name locale="en">Tr</name>
+			<name language="en">Tr</name>
 		</element>
 		<element tag="del" type="span">
-			<name locale="en">Del</name>
+			<name language="en">Del</name>
 		</element>
 		<element tag="q" type="span">
-			<name locale="en">Q</name>
+			<name language="en">Q</name>
 		</element>
 		<element tag="abbr" type="span">
-			<name locale="en">Abbr</name>
+			<name language="en">Abbr</name>
 		</element>
 		<element tag="legend" type="span">
-			<name locale="en">Legend</name>
+			<name language="en">Legend</name>
 		</element>
 	</element-list>
 </dispspec>
