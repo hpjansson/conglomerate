@@ -63,7 +63,7 @@ int gui_window_new_document_make()
 {
 	GtkWidget *w0, *w1;
 
-  newdoc = gtk_window_new(GTK_WINDOW_DIALOG);
+  newdoc = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(newdoc), 10);
   gtk_widget_set_usize(GTK_WIDGET(newdoc), 240, 120);
   gtk_window_set_title(GTK_WINDOW(newdoc), "Select document class");
