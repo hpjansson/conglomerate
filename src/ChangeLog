@@ -2,6 +2,10 @@
 
 	* cong-dispspec-registry.c
 
+	Applied patch by Boris Goldowsky for bug #121984 (in slightly modified form)
+
+	* cong-dispspec-registry.c
+
 	Fix for bug #121984
 
 	* cong-source-view.c

@@ -200,6 +200,8 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 
 	/* Check for a DTD match: */
 	if (doc->extSubset) {
+
+		/* Check for matching PUBLIC ID: */
 		if (doc->extSubset->ExternalID) {
 			int i;
 
@@ -211,6 +213,30 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 				if (dtd) {
 					if (cong_external_document_model_get_public_id (dtd)) {
 						if (0==strcmp (doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", doc->extSubset->ExternalID);
+							return ds;
+						}
+					}
+				}
+			}
+		}
+
+		/* Check for matching SYSTEM ID: */
+		if (doc->extSubset->SystemID) {
+			const unsigned char *sysID = doc->extSubset->SystemID;
+			int i;
+			
+			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
+				CongDispspec* ds = cong_dispspec_registry_get(registry, i);
+				const CongExternalDocumentModel *model;
+				const char *this_id = NULL;
+				
+				model = cong_dispspec_get_external_document_model(ds, CONG_DOCUMENT_MODE_TYPE_DTD);
+				if (model != NULL) {
+					this_id = cong_external_document_model_get_system_id(model);
+					if (this_id != NULL) {
+						if (!strcmp (sysID, this_id)) {
+							g_message("Found display spec based on matching system ID of DTD\n    %s\n", sysID);
 							return ds;
 						}
 					}
@@ -218,6 +244,7 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 			}
 		}
 	}
+		
 
 	/* Otherwise, check for a matching top-level element:*/
 	/* FIXME: in theory, we could scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from */
