@@ -26,7 +26,9 @@ On some system there are problems on generating "./libtool"
 with the original "./autogen.sh". One solution is to run
 "libtoolize --automake". An other is one to run "autoreconf --install"
 
+When you mis po/Makefile.in.in then run "gettextize -f".
 
 Improvement to this is document is appreciated,
 especially because that the problems don't occure on all systems
 
+Please report the issues that you encounter!
