@@ -1,0 +1,14 @@
+## #tricky #comment
+## #because #.cvsignore #does #not #support #comment
+##
+## #files #generated #by #./autogen.sh
+Makefile
+Makefile.in
+## #files #generated #by #a #build
+dispspec.xds
+docbook.xds
+forrest-document.xds
+kernel-traffic-newsletter.xds
+xhtml1-strict.xds
+## #other #files
+##

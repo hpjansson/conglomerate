@@ -3,11 +3,11 @@
 data/conglomerate.desktop.in
 data/conglomerate.keys.in
 data/conglomerate.schemas.in
-examples/dispspec.xds.in
-examples/docbook.xds.in
-examples/forrest-document.xds.in
-examples/kernel-traffic-newsletter.xds.in
-examples/xhtml1-strict.xds.in
+dispspecs/dispspec.xds.in
+dispspecs/docbook.xds.in
+dispspecs/forrest-document.xds.in
+dispspecs/kernel-traffic-newsletter.xds.in
+dispspecs/xhtml1-strict.xds.in
 glade/cong-file-import.glade
 glade/cong-file-properties.glade
 glade/cong-find-replace.glade

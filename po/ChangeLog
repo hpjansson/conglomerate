@@ -1,3 +1,8 @@
+2004-02-09  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	The xds.in files moved to their own directory.
+
 2004-02-07  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated by Daniel van Eeden.

@@ -1,3 +1,10 @@
+2004-02-09  Geert Stappers <stappers@stappers.nl>
+
+	* all the XDS files are (re)moved.
+
+	* Makefile.am
+	is affected by that move.
+
 2004-02-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* xsl.xds

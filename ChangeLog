@@ -1,3 +1,13 @@
+2004-02-09  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+
+	dispspecs is a new directory
+
+	* configure.in
+
+	generate dispspecs/Makefile
+
 2004-02-08  Geert Stappers <stappers@stappers.nl>
 
 	* NEWS
