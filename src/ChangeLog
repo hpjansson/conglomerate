@@ -1,3 +1,9 @@
+2003-07-15  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-structural-tag.c, cong-editor-area-structural-tag.h
+
+	New files
+
 2003-07-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-unknown-tag.c, cong-editor-area-unknown-tag.h, cong-editor-node-document.c, cong-editor-node-document.h, cong-editor-node-element-span.c, cong-editor-node-element-span.h, cong-editor-node-element-structural.c, cong-editor-node-element-structural.h, cong-editor-node-element-unknown.c, cong-editor-node-element-unknown.h, cong-editor-node-element.c, cong-editor-node-element.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-node-unimplemented.c, cong-editor-node-unimplemented.h
