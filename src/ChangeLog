@@ -1,3 +1,11 @@
+2004-06-04  David Malcolm  <dmalcolm@redhat.com>
+
+	* Makefile.am, cong-fake-plugin-hooks.h, cong-app.c (cong_app_private_load_plugins): 
+	Add CSS/Sewfox plugin
+
+	* plugin-css.c:
+	New file
+
 2004-06-03  David Malcolm  <dmalcolm@redhat.com>
 
 	* xmledit.c (cong_document_view_source): Moved most of the code into new function

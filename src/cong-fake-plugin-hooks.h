@@ -45,6 +45,10 @@ gboolean plugin_cleanup_source_plugin_configure(CongPlugin *plugin);
 gboolean plugin_convert_case_plugin_register(CongPlugin *plugin);
 gboolean plugin_convert_case_plugin_configure(CongPlugin *plugin);
 
+/* plugin-css.c: */
+gboolean plugin_css_plugin_register(CongPlugin *plugin);
+gboolean plugin_css_plugin_configure(CongPlugin *plugin);
+
 /* plugin-docbook.c: */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
 gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);

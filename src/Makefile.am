@@ -297,6 +297,7 @@ conglomerate_SOURCES =      \
   plugin-admonition-node-element.c \
   plugin-cleanup-source.c   \
   plugin-convert-case.c     \
+  plugin-css.c              \
   plugin-docbook.c          \
   plugin-templates.c        \
   plugin-dtd.c              \
@@ -328,6 +329,7 @@ conglomerate_SOURCES =      \
 INCLUDES = $(CONGLOMERATE_CFLAGS) \
 	$(PRINTING_CFLAGS) \
 	$(LIBFO_CFLAGS) \
+	$(SEWFOX_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DPREFIX=\""$(prefix)"\" \
@@ -339,6 +341,7 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(PRINTING_LIBS) \
 	$(LIBFO_LIBS) \
+	$(SEWFOX_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
 	$(NULL)
 

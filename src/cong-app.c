@@ -1119,6 +1119,10 @@ cong_app_private_load_plugins (CongApp *app)
 			plugin_admonition_plugin_register,
 			plugin_admonition_plugin_configure);
 
+	register_plugin(app,"css",
+			plugin_css_plugin_register,
+			plugin_css_plugin_configure);
+
 	register_plugin(app,"docbook",
 			plugin_docbook_plugin_register,
 			plugin_docbook_plugin_configure);
