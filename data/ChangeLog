@@ -1,3 +1,8 @@
+2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am: Fix translation and installation of the GConf
+	schemas
+
 2004-06-14  David Malcolm  <dmalcolm@redhat.com>
 
 	* conglomerate.schemas.in: Changed locale
