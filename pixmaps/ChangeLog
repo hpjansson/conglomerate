@@ -1,3 +1,9 @@
+2003-06-27  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* conglomerate-icon-16.png
+	It now has the (converted) content of ../src/ilogo.c
+	http://bugzilla.gnome.org/show_bug.cgi?id=115930 is updated.
+
 2003-06-26  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am
