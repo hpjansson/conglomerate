@@ -1,6 +1,54 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+07-01-03
+Conglomerate 0.7.10 Released
+============================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced!
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+
+Enhancements
+      * The Home and End keys now take you to the start/end of text
+        within the current structural element; with Ctrl pressed they
+        take you to the start/end of text within the document. Shift can
+        be used to drag out selections as usual. This fixes bug #109698
+        (me)
+
+
+Fixes
+      * Big rewrite of File->Properties dialog - it now uses Glade, it
+        updates in response to changes of DTD, file URL and modification
+        status (bugs #122029, 130728) (me)
+
+      * Overview tree's root element now changes when the file's URL
+        changes (bug #130728) (me)
+
+      * Fix for bug #130724 (crash on loading examples/test-docbook.c)
+        (me)
+
+      * Added a wrapper function to generate generic property dialog
+        descriptions to reduce translator workload (fixes bug #124780)
+        (me)
+
+      * Various documentation and Debian packaging fixes, including bug
+        #123131 (Geert Stappers)
+
+      * Disabled plugin support for Norman Walsh's website format as
+        it's currently too broken to be worth supporting (see Bugzilla
+        #113001 for some of the problems) (me)
+
+--
+David Malcolm
+
 05-01-03
 
 Conglomerate 0.7.9 - "We Do The Work - You Do The Pleasure" Released
