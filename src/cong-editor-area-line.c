@@ -234,11 +234,11 @@ add_child (CongEditorAreaContainer *area_container,
 				  PRIVATE(line)->outer_compose);
 	
 	/* Make the new child expand to fill to the end of the line: */
-	cong_editor_area_composer_pack(CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
-				       child,
-				       TRUE,
-				       TRUE,
-				       0);
+	cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
+					    child,
+					    TRUE,
+					    TRUE,
+					    0);
 
 
 }	

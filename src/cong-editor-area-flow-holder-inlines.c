@@ -195,12 +195,12 @@ cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInline
 											 PRIVATE(area_flow_holder_inlines)->last_width)
 							      );
 
-	cong_editor_area_composer_pack (PRIVATE(area_flow_holder_inlines)->line_composer,
-					CONG_EDITOR_AREA(new_line),
-					FALSE,
-					TRUE,
-					0
-					);
+	cong_editor_area_composer_pack_end (PRIVATE(area_flow_holder_inlines)->line_composer,
+					    CONG_EDITOR_AREA(new_line),
+					    FALSE,
+					    TRUE,
+					    0
+					    );
 
 	PRIVATE(area_flow_holder_inlines)->last_line = new_line;
 

@@ -123,20 +123,20 @@ cong_editor_area_entity_decl_construct (CongEditorAreaEntityDecl *area_entity_de
 									   TRUE);
 	g_free(markup);
 
-	cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_entity_decl)->outer_hcompose),
-					PRIVATE(area_entity_decl)->title_text,
-					FALSE,
-					FALSE,
-					0);
+	cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_entity_decl)->outer_hcompose),
+					    PRIVATE(area_entity_decl)->title_text,
+					    FALSE,
+					    FALSE,
+					    0);
 
 
 	PRIVATE(area_entity_decl)->inner_bin = cong_editor_area_bin_new (editor_widget);
 
-	cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_entity_decl)->outer_hcompose),
-					PRIVATE(area_entity_decl)->inner_bin,
-					TRUE,
-					TRUE,
-					0);
+	cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_entity_decl)->outer_hcompose),
+					    PRIVATE(area_entity_decl)->inner_bin,
+					    TRUE,
+					    TRUE,
+					    0);
 
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_entity_decl),

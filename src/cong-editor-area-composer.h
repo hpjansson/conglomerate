@@ -66,11 +66,17 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 
 /* (Options mostly correspond to those of gtk_box_pack_start; doesn't put extra_padding at end of composer though) */
 void
-cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
-				CongEditorArea *child,
-				gboolean expand,
-				gboolean fill,
-				guint extra_padding);
+cong_editor_area_composer_pack_start (CongEditorAreaComposer *area_composer,
+				      CongEditorArea *child,
+				      gboolean expand,
+				      gboolean fill,
+				      guint extra_padding);
+void
+cong_editor_area_composer_pack_end (CongEditorAreaComposer *area_composer,
+				    CongEditorArea *child,
+				    gboolean expand,
+				    gboolean fill,
+				    guint extra_padding);
 
 void
 cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,

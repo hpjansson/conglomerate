@@ -106,20 +106,20 @@ cong_editor_area_labelled_construct (CongEditorAreaLabelled *area_labelled,
 
 	PRIVATE(area_labelled)->label = label;
 	
-	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_labelled)->outer_hcompose),
-					 CONG_EDITOR_AREA(PRIVATE(area_labelled)->label),
-					 FALSE,
-					 FALSE,
-					 10
-					 );
+	cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_labelled)->outer_hcompose),
+					     CONG_EDITOR_AREA(PRIVATE(area_labelled)->label),
+					     FALSE,
+					     FALSE,
+					     10
+					     );
 	
 	PRIVATE(area_labelled)->inner_area = cong_editor_area_bin_new (editor_widget);
-	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_labelled)->outer_hcompose),
-					 PRIVATE(area_labelled)->inner_area,
-					 TRUE,
-					 TRUE,
-					 0
-					 );		
+	cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_labelled)->outer_hcompose),
+					     PRIVATE(area_labelled)->inner_area,
+					     TRUE,
+					     TRUE,
+					     0
+					     );		
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_labelled),
 								   PRIVATE(area_labelled)->outer_hcompose);

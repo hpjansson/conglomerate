@@ -157,63 +157,63 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 	{
 
 		/* Add a v-spacer: */
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
-						cong_editor_area_spacer_new (editor_widget,
-									     GTK_ORIENTATION_VERTICAL,
-									     V_SPACING),
-						FALSE,
-						FALSE,
-						0);
+		cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
+						    cong_editor_area_spacer_new (editor_widget,
+										 GTK_ORIENTATION_VERTICAL,
+										 V_SPACING),
+						    FALSE,
+						    FALSE,
+						    0);
 		
 		/* Add the h-composer: */
 		PRIVATE(area_structural)->title_hcompose = cong_editor_area_composer_new (editor_widget,
 											      GTK_ORIENTATION_HORIZONTAL,
 											      H_INDENT);
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
-						PRIVATE(area_structural)->title_hcompose,
-						FALSE,
-						FALSE,
-						0);
+		cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
+						    PRIVATE(area_structural)->title_hcompose,
+						    FALSE,
+						    FALSE,
+						    0);
 
 		
 		/* Add a v-spacer: */
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
-						cong_editor_area_spacer_new (editor_widget,
-									     GTK_ORIENTATION_VERTICAL,
-									     V_SPACING),
-						FALSE,
-						FALSE,
-						0);
+		cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_vcompose),
+						    cong_editor_area_spacer_new (editor_widget,
+										 GTK_ORIENTATION_VERTICAL,
+										 V_SPACING),
+						    FALSE,
+						    FALSE,
+						    0);
 		
 		/* Build up the content of the h-composer: */
 		{
 			/* Add a h-spacer: */
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
-							cong_editor_area_spacer_new (editor_widget,
-										     GTK_ORIENTATION_HORIZONTAL,
-										     H_INDENT),
-							FALSE,
-							FALSE,
-							0);
-
+			cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
+							    cong_editor_area_spacer_new (editor_widget,
+											 GTK_ORIENTATION_HORIZONTAL,
+											 H_INDENT),
+							    FALSE,
+							    FALSE,
+							    0);
+			
 			/* Add the expander: */
 			PRIVATE(area_structural)->title_expander = cong_editor_area_expander_new (editor_widget,
 												  TRUE);
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
-							PRIVATE(area_structural)->title_expander,
-							FALSE,
-							FALSE,
-							0);		
+			cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
+							    PRIVATE(area_structural)->title_expander,
+							    FALSE,
+							    FALSE,
+							    0);		
 			
 			/* Add the pixbuf (if any): */
 			if (pixbuf) {
 				PRIVATE(area_structural)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
 													  pixbuf);
-				cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
-								PRIVATE(area_structural)->title_pixbuf,
-								FALSE,
-								FALSE,
-								0);		
+				cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
+								    PRIVATE(area_structural)->title_pixbuf,
+								    FALSE,
+								    FALSE,
+								    0);		
 			}
 			
 			/* Add the title text: */
@@ -223,11 +223,11 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 											  PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_TEXT],
 											  text,
 											  FALSE);
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
-							PRIVATE(area_structural)->title_text,
-							FALSE,
-							FALSE,
-							0);		
+			cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
+							    PRIVATE(area_structural)->title_text,
+							    FALSE,
+							    FALSE,
+							    0);		
 		}
 	}
 

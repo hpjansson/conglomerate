@@ -431,11 +431,11 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 						      FALSE,
 						      0);
 	} else {
-		/* Insert this area after any already present in the parent's insertion area: */
-		cong_editor_area_composer_pack (PRIVATE(area_flow_holder_blocks)->outer_compose,
-						child_area,
-						FALSE,
-						FALSE,
-						0);
+		/* Insert this area before any already present in the parent's insertion area: */
+		cong_editor_area_composer_pack_start (PRIVATE(area_flow_holder_blocks)->outer_compose,
+						      child_area,
+						      FALSE,
+						      FALSE,
+						      0);
 	}
 }

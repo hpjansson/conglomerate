@@ -140,11 +140,44 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 }
 
 void
-cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
-				CongEditorArea *child,
-				gboolean expand,
-				gboolean fill,
-				guint extra_padding)
+cong_editor_area_composer_pack_start (CongEditorAreaComposer *area_composer,
+				      CongEditorArea *child,
+				      gboolean expand,
+				      gboolean fill,
+				      guint extra_padding)
+{
+	CongEditorAreaComposerChildDetails *child_details;
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	g_object_ref (G_OBJECT(child));
+
+	child_details = g_new0(CongEditorAreaComposerChildDetails,1);
+
+	child_details->child = child;
+	child_details->expand = expand;
+	child_details->fill = fill;
+	child_details->extra_padding = extra_padding;
+
+	PRIVATE(area_composer)->list_of_child_details = g_list_prepend (PRIVATE(area_composer)->list_of_child_details, 
+									child_details);
+
+	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
+										 child);
+
+	cong_editor_area_protected_set_parent (child,
+					       CONG_EDITOR_AREA(area_composer));
+
+	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
+}
+
+void
+cong_editor_area_composer_pack_end (CongEditorAreaComposer *area_composer,
+				    CongEditorArea *child,
+				    gboolean expand,
+				    gboolean fill,
+				    guint extra_padding)
 {
 	CongEditorAreaComposerChildDetails *child_details;
 
@@ -489,11 +522,11 @@ add_child ( CongEditorAreaContainer *area_container,
 {
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
 
-	cong_editor_area_composer_pack (area_composer,
-					child,
-					TRUE,
-					TRUE,
-					0);
+	cong_editor_area_composer_pack_end (area_composer,
+					    child,
+					    TRUE,
+					    TRUE,
+					    0);
 	
 }
 
