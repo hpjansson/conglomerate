@@ -67,10 +67,15 @@ cong_selection_get_ordered_end (CongSelection *selection);
 
 void
 cong_selection_set_logical_start (CongSelection *selection,
-				  CongLocation *location);
+				  const CongLocation *location);
 void
 cong_selection_set_logical_end (CongSelection *selection,
-				CongLocation *location);
+				const CongLocation *location);
+
+void
+cong_selection_set_logical_range (CongSelection *selection,
+				  const CongLocation *start_loc,
+				  const CongLocation *end_loc);
 
 gboolean
 cong_selection_is_node (CongSelection *selection,

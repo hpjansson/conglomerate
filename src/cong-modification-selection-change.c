@@ -158,10 +158,9 @@ undo (CongModification *modification)
 
 	cong_document_begin_edit (doc);
 	
-	cong_selection_set_logical_start (selection,
-					  &PRIVATE(modification_selection_change)->old_logical_start);
-	cong_selection_set_logical_end (selection,
-					&PRIVATE(modification_selection_change)->old_logical_end);
+	cong_selection_set_logical_range (selection,
+					  &PRIVATE(modification_selection_change)->old_logical_start,
+					  &PRIVATE(modification_selection_change)->old_logical_end);
 
 	cong_document_private_on_selection_change (doc);
 	
@@ -177,10 +176,9 @@ redo (CongModification *modification)
 
 	cong_document_begin_edit (doc);
 	
-	cong_selection_set_logical_start (selection,
-					  &PRIVATE(modification_selection_change)->new_logical_start);
-	cong_selection_set_logical_end (selection,
-					&PRIVATE(modification_selection_change)->new_logical_end);
+	cong_selection_set_logical_range (selection,
+					  &PRIVATE(modification_selection_change)->new_logical_start,
+					  &PRIVATE(modification_selection_change)->new_logical_end);
 
 	cong_document_private_on_selection_change (doc);
 	

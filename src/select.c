@@ -164,7 +164,7 @@ cong_selection_get_ordered_end (CongSelection *selection)
 
 void
 cong_selection_set_logical_start (CongSelection *selection,
-				  CongLocation *location)
+				  const CongLocation *location)
 {	
 	g_assert(selection!=NULL);
 	g_assert(location!=NULL);
@@ -177,7 +177,7 @@ cong_selection_set_logical_start (CongSelection *selection,
 
 void
 cong_selection_set_logical_end (CongSelection *selection,
-				CongLocation *location)
+				const CongLocation *location)
 {
 	g_assert(selection!=NULL);
 	g_assert(location!=NULL);
@@ -186,6 +186,22 @@ cong_selection_set_logical_end (CongSelection *selection,
 
 	update_ordered_selection (selection);
 }
+
+void
+cong_selection_set_logical_range (CongSelection *selection,
+				  const CongLocation *start_loc,
+				  const CongLocation *end_loc)
+{
+	g_assert (selection!=NULL);
+	g_assert (start_loc!=NULL);
+	g_assert (end_loc!=NULL);
+
+	cong_location_copy (&selection->logical_range.loc0, start_loc);
+	cong_location_copy (&selection->logical_range.loc1, end_loc);
+
+	update_ordered_selection (selection);
+}
+
 
 #if 1
 

@@ -1,5 +1,9 @@
 2003-12-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-modification-selection-change.c, cong-selection.h, select.c
+
+	Attempts to fix bug #130236 (Excessive cong_node_get_ordering assertion failures) by making selection change an atomic range operation
+
 	* cong-editor-widget3.c
 
 	Fix for bug #123490 (Carriage return should add a carriage return if whitespace is being preserved)
