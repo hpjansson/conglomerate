@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-07-03 17:57+0200\n"
+"POT-Creation-Date: 2003-07-03 20:04+0200\n"
 "PO-Revision-Date: 2003-04-29 10:53CET\n"
 "Last-Translator: Quique <quique@sindominio.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -556,11 +556,13 @@ msgstr "Opciones de exportación"
 
 #: src/cong-file-export.c:265 src/cong-file-print.c:233 src/cong-menus.c:289
 #: src/cong-menus.c:293 src/cong-menus.c:509
+#: src/cong-node-properties-dialog.c:529
 msgid "Name"
 msgstr "Nombre"
 
 #: src/cong-file-export.c:266 src/cong-file-new.c:227
 #: src/cong-file-print.c:234 src/cong-menus.c:294 src/cong-menus.c:516
+#: src/cong-parser-error.c:230
 msgid "Description"
 msgstr "Descripción"
 
@@ -713,7 +715,7 @@ msgstr ""
 msgid "The selected menu item has not yet been implemented."
 msgstr "El elemento de menú seleccionado todavía no ha sido implementado."
 
-#: src/cong-menus.c:272
+#: src/cong-menus.c:272 src/cong-node-properties-dialog.c:673
 msgid "Properties"
 msgstr "Propiedades"
 
@@ -721,7 +723,7 @@ msgstr "Propiedades"
 msgid "Type"
 msgstr "Tipo"
 
-#: src/cong-menus.c:290
+#: src/cong-menus.c:290 src/cong-node-properties-dialog.c:250
 msgid "Location"
 msgstr "Ubicación"
 
@@ -774,7 +776,7 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
-#: src/cong-menus.c:345
+#: src/cong-menus.c:345 src/cong-node-properties-dialog.c:630
 msgid "Advanced"
 msgstr ""
 
@@ -1035,6 +1037,47 @@ msgstr "/Ayuda/_Contenido"
 msgid "/Help/_About"
 msgstr "/Ayuda/_Acerca de"
 
+#: src/cong-node-properties-dialog.c:255
+msgid "XPath"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:273
+msgid "Properties from DTD/schema"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:508
+msgid "Raw Attributes"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:541
+msgid "Value"
+msgstr ""
+
+#: src/cong-parser-error.c:154
+#, c-format
+msgid "Parse errors loading %s"
+msgstr ""
+
+#: src/cong-parser-error.c:225
+msgid "Line Number"
+msgstr ""
+
+#: src/cong-parser-error.c:287
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr ""
+
+#: src/cong-parser-error.c:295
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+
+#: src/cong-parser-error.c:296
+msgid "Show Details"
+msgstr ""
+
 #: src/cong-plugin.c:816
 #, fuzzy
 msgid "Conglomerate could not create the file"
@@ -1132,6 +1175,16 @@ msgstr ""
 #: src/main.c:409
 msgid "XML Editor"
 msgstr "Editor XML"
+
+#: src/plugin-convert-case.c:114
+msgid "Export as \"lower case\" XML"
+msgstr ""
+
+#: src/plugin-convert-case.c:115
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
 
 #: src/plugin-docbook.c:198
 msgid "Text of the article goes here"
@@ -1252,6 +1305,27 @@ msgstr ""
 msgid "An element for visualising member of a list"
 msgstr ""
 
+#: src/plugin-sgml.c:33
+#, fuzzy, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "No se ha podido importar el fichero."
+
+#: src/plugin-sgml.c:108
+msgid "Attempting to run the sgml2xml tool"
+msgstr ""
+
+#: src/plugin-sgml.c:162
+msgid "Importing SGML"
+msgstr ""
+
+#: src/plugin-sgml.c:173
+msgid "Import SGML"
+msgstr ""
+
+#: src/plugin-sgml.c:174
+msgid "Import an SGML file, converting to XML."
+msgstr ""
+
 #: src/plugin-tests.c:51
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
@@ -1271,6 +1345,83 @@ msgstr ""
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
+msgstr ""
+
+#: src/plugin-validate.c:91
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr ""
+
+#: src/plugin-validate.c:98
+msgid ""
+"In a future version of Conglomerate we may have a feature that lets you "
+"attach a document type to a document."
+msgstr ""
+
+#: src/plugin-validate.c:118
+#, c-format
+msgid "The document \"%s\" is not valid."
+msgstr ""
+
+#: src/plugin-validate.c:125
+msgid "Click on the \"Details\" button for more information."
+msgstr ""
+
+#: src/plugin-validate.c:126 src/plugin-website.c:471
+msgid "_Details"
+msgstr ""
+
+#: src/plugin-validate.c:140
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr ""
+
+#: src/plugin-validate.c:160
+msgid "Validate Document"
+msgstr ""
+
+#: src/plugin-validate.c:161 src/plugin-validate.c:164
+#: src/plugin-validate.c:165
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+
+#: src/plugin-validate.c:163
+msgid "_Validate Document"
+msgstr ""
+
+#: src/plugin-website.c:456
+msgid "Generating website"
+msgstr ""
+
+#: src/plugin-website.c:463
+msgid "Finished generating website."
+msgstr ""
+
+#: src/plugin-website.c:468
+#, fuzzy
+msgid "Conglomerate did not finish generating the website"
+msgstr "No se ha podido importar el fichero."
+
+#: src/plugin-website.c:469
+msgid "One of the stages reported an error."
+msgstr ""
+
+#: src/plugin-website.c:470
+msgid "Click on the \"Details\" button for more information"
+msgstr ""
+
+#: src/plugin-website.c:488
+msgid "Generate website"
+msgstr ""
+
+#: src/plugin-website.c:489 src/plugin-website.c:492 src/plugin-website.c:493
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr ""
+
+#: src/plugin-website.c:491
+msgid "Generate _Website"
 msgstr ""
 
 #: src/plugin-xsl.c:311
