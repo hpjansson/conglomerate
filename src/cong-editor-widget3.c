@@ -39,6 +39,8 @@
 #include "cong-editor-area-border.h"
 #include "cong-editor-area-composer.h"
 
+#include "cong-selection.h"
+
 #define SHOW_CURSOR_SPEW 0
 
 /* 
@@ -816,17 +818,199 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 #endif
 }
 
-static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data)
+
+/* 
+   Method to calculate where the cursor should go as a result of the key press.
+   Affected by the CTRL key (which means "whole words" rather than "individual characters" for left/right).
+
+   Return value:  TRUE iff the output_loc has been written to with a meaningful location different from the cursor location.
+*/
+static gboolean
+cong_editor_widget3_get_destination_location_for_keypress (CongEditorWidget3 *editor_widget,
+							   guint state,
+							   guint keyval,
+							   CongLocation *output_loc)
 {
-	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongDocument *doc = cong_editor_widget3_get_document(editor_widget);
-	CongCursor *cursor = cong_document_get_cursor(doc);
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongDispspec *dispspec;
+
+	g_return_val_if_fail(IS_CONG_EDITOR_WIDGET3 (editor_widget), FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	doc = cong_editor_widget3_get_document (editor_widget);
+	cursor = cong_document_get_cursor (doc);
+	dispspec = cong_document_get_dispspec (doc);
+
+	switch (keyval) {
+	default: 
+		return FALSE;
+
+#if 0
+	case GDK_Up:
+		return span_text_editor_calc_up(span_text_editor, doc, cursor, output_loc);
+
+	case GDK_Down:
+		return span_text_editor_calc_down(span_text_editor, doc, cursor, output_loc);
+#endif
+	
+	case GDK_Left:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_prev_word(&cursor->location, doc, output_loc);
+		} else {
+			return cong_location_calc_prev_char(&cursor->location, dispspec, output_loc);
+		}
+	
+	case GDK_Right:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_next_word(&cursor->location, doc, output_loc);
+		} else {
+			return cong_location_calc_next_char(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_Home:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_document_start(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_line_start(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_End:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_document_end(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_line_end(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_Page_Up:
+		return cong_location_calc_prev_page(&cursor->location, dispspec, output_loc);
+	case GDK_Page_Down:
+		return cong_location_calc_next_page(&cursor->location, dispspec, output_loc);
+	}
+}
+
+static gboolean 
+key_press_event_handler (GtkWidget *w, 
+			 GdkEventKey *event, 
+			 gpointer user_data)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (w);
+	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
+	CongCursor *cursor = cong_document_get_cursor (doc);
+	CongSelection *selection = cong_document_get_selection  (doc);
 	CongElementEditor *element_editor;
 
 	LOG_GTK_WIDGET_SIGNAL1("key_press_event_handler");
 
 	g_return_val_if_fail(cursor->location.node, FALSE);
 
+	doc = cong_editor_widget3_get_document(editor_widget);
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+	g_assert(selection);
+
+	cong_document_begin_edit (doc);
+
+	switch (event->keyval)
+	{
+	case GDK_Up:
+	case GDK_Down:
+	case GDK_Left:
+	case GDK_Right:
+	case GDK_Home:
+	case GDK_End:
+	case GDK_Page_Up:
+	case GDK_Page_Down:
+		{
+			CongLocation old_location;
+			CongLocation target_location;
+
+			cong_location_copy(&old_location, &cursor->location);
+
+			/* Calculate whereabouts in the document the user wants to go: */
+
+			if (cong_editor_widget3_get_destination_location_for_keypress (editor_widget, 
+										       event->state,
+										       event->keyval,
+										       &target_location)) {
+				/* Are we moving the cursor, or dragging out a selection? */
+
+				/* Move the cursor to the new location: */
+				cong_location_copy(&cursor->location, &target_location);
+
+				cong_document_begin_edit (doc);
+
+				if (event->state & GDK_SHIFT_MASK) {
+					if (NULL==(cong_selection_get_logical_start(selection)->node)) {
+						cong_selection_set_logical_start (selection,
+										  &old_location);
+					}
+
+					/* Then we should also drag out the selection to the new location: */
+					cong_selection_end_from_curs (selection, 
+								      cursor);
+					cong_document_on_selection_change (doc);					
+				} else {
+					/* Then we should clear any selection that exists: */
+					cong_selection_start_from_curs (selection, 
+									cursor);
+					cong_document_on_selection_change (doc);
+				}
+				/* FIXME: should we notify the document? */ 
+
+				cong_document_on_cursor_change (doc);
+
+				cong_document_end_edit (doc);	
+			}
+		}
+		break;
+	
+#if 0
+	case GDK_BackSpace:
+		if (cong_selection_get_start()->node) {
+			cong_document_delete_selection(doc);
+		} else {
+			cong_cursor_del_prev_char(cursor, doc);
+		}
+		break;
+	
+	case GDK_Delete:
+		if (cong_selection_get_start()->node) {
+			cong_document_delete_selection(doc);
+		} else {
+			cong_cursor_del_next_char(cursor, doc);
+		}
+		break;
+#else
+	case GDK_BackSpace:
+		cong_cursor_del_prev_char(cursor, doc);
+		break;
+	
+	case GDK_Delete:
+		cong_cursor_del_next_char(cursor, doc);
+		break;
+#endif
+
+	case GDK_ISO_Enter:
+	case GDK_Return:
+		cong_cursor_paragraph_insert(cursor);
+		break;
+
+	case GDK_Tab:
+		/* Ignore the tab key for now... FIXME: what should we do? */
+		break;
+	
+	default:
+		/* Is the user typing text? */
+		if (event->length && event->string && strlen(event->string)) {
+			cong_cursor_data_insert(cursor, event->string);
+
+			cong_selection_nullify (selection);
+			cong_document_on_selection_change (doc);
+		}
+		break;
+	}
+
+	cong_document_on_cursor_change(doc);	
+
+	cong_document_end_edit (doc);
 
 	return TRUE;
 }

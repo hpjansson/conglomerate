@@ -1,5 +1,9 @@
 2003-08-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c
+
+	Initial implementation of keypress handling for new widget
+
 	* cong-util.c, cong-util.h, plugin-docbook.c
 	
 	Moved Docbook detection from plugin-docbook.c into cong-util.c
