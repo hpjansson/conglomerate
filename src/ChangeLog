@@ -1,5 +1,9 @@
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-gxx.h, cong-dispspec.c
+
+	Port <external-document-model> to gxx
+
 	* cong-dispspec-gxx.h, Makefile.am, cong-dispspec.c, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h
 
 	Ported dispspec serialisation format over to gxx

@@ -860,6 +860,13 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 }
 
 
+static const CongEnumMapping document_model_enum_mapping[] =
+{
+	{"dtd", CONG_DOCUMENT_MODE_TYPE_DTD},
+	{"w3c-xml-schema", CONG_DOCUMENT_MODE_TYPE_W3C_XML_SCHEMA},
+	{"relax-ng-schema", CONG_DOCUMENT_MODE_TYPE_RELAX_NG_SCHEMA},
+};
+
 #include "gxx-object-from-xml-tree.h"
 #include "cong-dispspec-gxx.h"
 
@@ -913,13 +920,6 @@ parse_document_models (CongDispspec *ds,
 
 }
 
-static const CongEnumMapping document_model_enum_mapping[] =
-{
-	{"dtd", CONG_DOCUMENT_MODE_TYPE_DTD},
-	{"w3c-xml-schema", CONG_DOCUMENT_MODE_TYPE_W3C_XML_SCHEMA},
-	{"relax-ng-schema", CONG_DOCUMENT_MODE_TYPE_RELAX_NG_SCHEMA},
-};
-
 
 static void 
 parse_external_document_model (CongDispspec *ds, 
@@ -929,8 +929,6 @@ parse_external_document_model (CongDispspec *ds,
 	gchar *type;
 
 	DS_DEBUG_MSG1("got external-document-model\n");
-
-
 	type = cong_node_get_attribute (node, "type");
 
 	if (type) {
@@ -938,12 +936,17 @@ parse_external_document_model (CongDispspec *ds,
 										  sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
 										  "type",
 										  CONG_DOCUMENT_MODE_TYPE_DTD);
+#if 1
+		ds->document_models[model_type] = gxx_generated_object_from_xml_tree_fn_external_document_model (node);
+#else
+
 		gchar *public_id = cong_node_get_attribute (node, "public-id");
 		gchar *system_id = cong_node_get_attribute (node, "system-id");
 
 		ds->document_models[model_type] = cong_external_document_model_new (model_type,
 										    public_id,
 										    system_id);
+#endif
 		g_free (type);
 
 	} else {
@@ -1082,35 +1085,13 @@ add_xml_for_document_models (xmlDocPtr xml_doc,
 	
 	for (i=0; i<NUM_CONG_DOCUMENT_MODEL_TYPES; i++) {
 		enum CongDocumentModelType model_type = (enum CongDocumentModelType)i;
+
 		const CongExternalDocumentModel* model = cong_dispspec_get_external_document_model (dispspec,
 												    model_type);
 
 		if (model) {
-			CongNodePtr node_document_model;
-		
-			node_document_model = xmlNewDocNode (xml_doc,
-							     NULL,
-							     "external-document-model",
-							     NULL); 
 			xmlAddChild (node_document_models,
-				     node_document_model);
-
-			xmlSetProp (node_document_model,
-				    "type",
-				    cong_enum_mapping_lookup_string (document_model_enum_mapping,
-								     sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
-								     model_type)
-				    );
-			if (model->public_id) {
-				xmlSetProp (node_document_model,
-					    "public-id",
-					    model->public_id);
-			}
-			if (model->system_id) {
-				xmlSetProp (node_document_model,
-					    "system-id",
-					    model->system_id);
-			}
+				     gxx_generated_object_to_xml_tree_fn_external_document_model (model, xml_doc));
 		}		
 	}
 }
