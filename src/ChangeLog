@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-30 David Malcolm
+
+	* xmlload.c
+
+	Removing need for Flux
+	
 2002-10-29 David Malcolm
 
 	* cong-document.c, cong-test-view.c, xmldata.c

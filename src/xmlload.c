@@ -34,8 +34,10 @@
 */
 
 #include <glib.h>
-#include <ttree.h>
 #include <libxml/tree.h>
+
+#if !NEW_XML_IMPLEMENTATION
+#include <ttree.h>
 
 void
 convert_libxml_to_ttree_node_list(TTREE *tt, xmlNodePtr node);
@@ -135,3 +137,4 @@ convert_libxml_to_ttree_doc(xmlDocPtr doc)
 	
 	return node_root;
 }
+#endif /* #if !NEW_XML_IMPLEMENTATION */
