@@ -71,6 +71,22 @@ cong_location_parent(cong_location *loc);
 void
 cong_location_copy(cong_location *dst, const cong_location *src);
 
+/**
+   Struct representing a document, in an effort to decouple the code from TTREE
+ */
+typedef struct _cong_document cong_document;
+
+cong_document*
+cong_document_new_from_ttree(TTREE *tt);
+
+void
+cong_document_delete(cong_document *doc);
+
+TTREE*
+cong_document_get_root(cong_document *doc);
+
+void
+cong_document_save(cong_document *doc, const char* filename);
 
 /* Include these here to help Cygwin a bit */
 
@@ -132,7 +148,11 @@ struct xed
 
 struct xview
 {
+#if 1
+	cong_document *doc;
+#else
   TTREE *x;
+#endif
 	
   GtkWidget *w;
 #if 1
@@ -275,7 +295,11 @@ gint xed_insert_table(GtkWidget *w, struct xed *xed);
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
+#if 1
+struct xview *xmlview_new(cong_document *doc, cong_dispspec *displayspec);
+#else
 struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec);
+#endif
 
 #if 0
 SOCK *server_login();

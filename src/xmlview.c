@@ -694,12 +694,13 @@ GtkWidget *xv_element_new(TTREE *x, cong_dispspec *ds, GtkWidget *root, int coll
 	return(root);
 }
 
-struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
+struct xview *xmlview_new(cong_document *doc, cong_dispspec *displayspec)
 {
 	struct xview *xv;
 	GdkColor gcol;
 	GtkWidget *w; /* , *glaebb_tree; */
 	int i;
+	TTREE *x;
 
 	GtkTreeIter root_iter;
 
@@ -721,7 +722,7 @@ struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
 	memset(xv, 0, sizeof(*xv));
 
 
-	xv->x = x;
+	xv->doc = doc;
 
 	gcol.blue = 0xffff;
 	gcol.green = 0xffff;
@@ -738,7 +739,7 @@ struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
 	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
 	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
 			    TITLE_COLUMN, "Document",
-			    TTREE_COLUMN, x,
+			    TTREE_COLUMN, cong_document_get_root(doc),
 			    -1);
 #else
 	xv->tree = gtk_tree_item_new_with_label("Document");
@@ -754,7 +755,7 @@ struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
 	gtk_widget_show(xv->w);
 #endif
 	
-	x = xml_frag_enter(x->child);  /* Root node specific */
+	x = xml_frag_enter(cong_document_get_root(doc)->child);  /* Root node specific */
 
 	for ( ; x; x = xml_frag_next(x))
 	{
@@ -814,7 +815,14 @@ void xmlview_destroy(int free_xml)
 
  	cong_gui_destroy_tree_store(&the_gui);
 	gtk_widget_destroy(the_globals.xv->w);
+
+#if 1
+	if (free_xml) {
+	  cong_document_delete(the_globals.xv->doc);
+	}
+#else
 	if (free_xml) ttree_branch_remove(the_globals.xv->x);
+#endif
 	
 	free(the_globals.xv);
 	the_globals.xv = 0;

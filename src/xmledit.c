@@ -1626,6 +1626,19 @@ void selection_curs_unset()
 	cong_location_nullify(&the_globals.selection.loc1);
 }
 
+void xed_cutcopy_update(struct curs* curs)
+{
+	if (!curs->xed->x)
+	{
+		cong_document* doc = the_globals.xv->doc;
+		xmlview_destroy(FALSE);
+		the_globals.xv = xmlview_new(doc, the_globals.ds);
+	}
+	else
+	{
+		xed_redraw(curs->xed);
+	}
+}
 
 gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
 {
@@ -1668,17 +1681,8 @@ gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
 	the_globals.clipboard = t;
 
 	selection_curs_unset();
-	
-	if (!curs->xed->x)
-	{
-		t = the_globals.xv->x;
-		xmlview_destroy(FALSE);
-		the_globals.xv = xmlview_new(t, the_globals.ds);
-	}
-	else
-	{
-		xed_redraw(curs->xed);
-	}
+
+	xed_cutcopy_update(curs);
 
 	return(TRUE);
 }
@@ -1739,16 +1743,7 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 	if (t0) ttree_fsave(t0->parent->parent->parent, stdout);
 #endif
 
-	if (!curs->xed->x)
-	{
-		t = the_globals.xv->x;
-		xmlview_destroy(FALSE);
-		the_globals.xv = xmlview_new(t, the_globals.ds);
-	}
-	else
-	{
-		xed_redraw(curs->xed);
-	}
+	xed_cutcopy_update(curs);
 
 	return(TRUE);
 }

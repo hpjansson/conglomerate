@@ -1,6 +1,14 @@
 creating ChangeLog
 2002-08-16  David Malcolm
 
+	* cong-document.c
+
+	New file.
+	
+	* Makefile, global.h, main.c, open.c, save.c, tree.c, xmledit.c
+
+	Updated code to use cong_document struct where appropriate (as opposed to a raw TTREE)
+	
 	* cong-location.c, global.h, popup.c, select.c, xmledit.c, xmlview.c
 
 	Moved struct selection members t0,t1,c0,c1 over to using struct cong_location.

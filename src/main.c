@@ -214,7 +214,7 @@ int test_open_do(const char *doc_name, const char *ds_name)
 #if 0
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), do_ttree_test(xml_in), FALSE, FALSE, 0);
 #else
-	the_globals.xv = xmlview_new(xml_in, the_globals.ds);
+	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in), the_globals.ds);
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 #endif
 

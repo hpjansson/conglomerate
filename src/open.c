@@ -42,7 +42,7 @@ int open_document_do(const char *doc_name, const char *ds_name)
 	the_globals.ds = cong_dispspec_new_from_ttree(ds_temp);
 
 	xml_t_trim(xml_in);
-	the_globals.xv = xmlview_new(xml_in, the_globals.ds);
+	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in), the_globals.ds);
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return (TRUE);
