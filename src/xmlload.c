@@ -36,6 +36,9 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
+#include "global.h" 
+/* purely to get at build settings */
+
 #if !NEW_XML_IMPLEMENTATION
 #include <ttree.h>
 

@@ -3,6 +3,7 @@
 /* #include <sock.h> */
 #include <libgnomevfs/gnome-vfs.h>
 #include <libxml/tree.h>
+#include <gtk/gtk.h>
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
