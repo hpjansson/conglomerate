@@ -1,3 +1,9 @@
+2004-10-27  Frederic Brin  <duckx@mezimail.com>
+
+	* Makefile.am
+	
+	Added Enchant libs to the GTKDOC_LIBS
+	
 2004-10-27  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* conglomerate-sections.txt:
