@@ -4,4 +4,4 @@ _Comment=Edit XML files
 Exec=conglomerate %U
 Terminal=0
 Type=Application
-Categories=Application;Utility;TextEditor;
+Categories=Application;Office;TextEditor;
