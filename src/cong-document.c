@@ -469,7 +469,7 @@ cong_document_get_xml(CongDocument *doc)
 }
 
 /**
- * cong_document_get_root:
+ * cong_document_get_root_element:
  * @doc:
  *
  * Returns: the root element of the document, if any (as opposed to the root node)
