@@ -66,6 +66,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	CongEditorWidgetView *editor_widget_view;
 	CongEditorWidgetDetails* details;
 	CongDocumentEvent event;
+	CongElementEditor *element_editor;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -85,7 +86,11 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
 	event.data.make_orphan.node = node;
 	event.data.make_orphan.former_parent = former_parent;
-	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, former_parent);
+	g_assert(element_editor);
+
+	cong_element_editor_on_document_event(element_editor, &event);
 
 	if (!before_event) {
 		CONG_EDITOR_VIEW_SELF_TEST(details);
@@ -98,6 +103,7 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	CongEditorWidgetView *editor_widget_view;
 	CongEditorWidgetDetails* details;
 	CongDocumentEvent event;
+	CongElementEditor *element_editor;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -114,18 +120,15 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 		CONG_EDITOR_VIEW_SELF_TEST(details);
 	}
 
-	/* Synthesise a "make orphan" event: */
-	event.before_event = before_event;
-	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
-	event.data.make_orphan.node = node;
-	cong_element_editor_on_document_event(details->root_editor, &event);
-
-	/* Send the rest of the event: */
 	event.before_event = before_event;
 	event.type = CONG_DOCUMENT_EVENT_ADD_AFTER;
 	event.data.add_after.node = node;
 	event.data.add_after.older_sibling = older_sibling;
-	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, older_sibling->parent);
+	g_assert(element_editor);
+
+	cong_element_editor_on_document_event(element_editor, &event);
 
 	if (!before_event) {
 		CONG_EDITOR_VIEW_SELF_TEST(details);
@@ -137,6 +140,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	CongEditorWidgetView *editor_widget_view;
 	CongEditorWidgetDetails* details;
 	CongDocumentEvent event;
+	CongElementEditor *element_editor;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -153,18 +157,15 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 		CONG_EDITOR_VIEW_SELF_TEST(details);
 	}
 
-	/* Synthesise a "make orphan" event: */
-	event.before_event = before_event;
-	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
-	event.data.make_orphan.node = node;
-	cong_element_editor_on_document_event(details->root_editor, &event);
-
-	/* Send the rest of the event: */
 	event.before_event = before_event;
 	event.type = CONG_DOCUMENT_EVENT_ADD_BEFORE;
 	event.data.add_before.node = node;
 	event.data.add_before.younger_sibling = younger_sibling;
-	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, younger_sibling->parent);
+	g_assert(element_editor);
+
+	cong_element_editor_on_document_event(element_editor, &event);
 
 	if (!before_event) {
 		CONG_EDITOR_VIEW_SELF_TEST(details);
@@ -176,6 +177,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	CongEditorWidgetView *editor_widget_view;
 	CongEditorWidgetDetails* details;
 	CongDocumentEvent event;
+	CongElementEditor *element_editor;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -192,18 +194,15 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 		CONG_EDITOR_VIEW_SELF_TEST(details);
 	}
 
-	/* Synthesise a "make orphan" event: */
-	event.before_event = before_event;
-	event.type = CONG_DOCUMENT_EVENT_MAKE_ORPHAN;
-	event.data.make_orphan.node = node;
-	cong_element_editor_on_document_event(details->root_editor, &event);
-
-	/* Send the rest of the event: */
 	event.before_event = before_event;
 	event.type = CONG_DOCUMENT_EVENT_SET_PARENT;
 	event.data.set_parent.node = node;
 	event.data.set_parent.adoptive_parent = adoptive_parent;
-	cong_element_editor_on_document_event(details->root_editor, &event);
+
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, adoptive_parent);
+	g_assert(element_editor);
+
+	cong_element_editor_on_document_event(element_editor, &event);
 
 	if (!before_event) {
 		CONG_EDITOR_VIEW_SELF_TEST(details);
@@ -347,6 +346,25 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 	g_message("motion_notify_event_handler");
 
 	cong_element_editor_on_motion_notify(details->root_editor, event);
+
+	return TRUE;
+}
+
+static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data)
+{
+	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
+	CongCursor *cursor = cong_document_get_cursor(doc);
+	CongElementEditor *element_editor;
+
+	g_message("key_press_event_handler");
+
+	/* Get element for cursor location; get it to handle the message: */
+	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget, cursor->location.tt_loc);
+	g_assert(element_editor);
+
+	cong_element_editor_on_key_press(element_editor, event);
 
 	return TRUE;
 }
@@ -497,7 +515,7 @@ void populate_widget(CongEditorWidget *widget)
 		
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{
-			section_head = cong_section_head_editor_new(widget, x);
+			section_head = CONG_SECTION_HEAD_EDITOR(cong_section_head_editor_new(widget, x));
 			details->root_editor = CONG_ELEMENT_EDITOR(section_head);
 		}
 
@@ -560,8 +578,12 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 			   "motion_notify_event",
 			   (GtkSignalFunc) motion_notify_event_handler, 
 			   NULL);
+	gtk_signal_connect_after(GTK_OBJECT(widget), 
+				 "key_press_event",
+				 (GtkSignalFunc) key_press_event_handler, 
+				 NULL);
 
-	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK);
+	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
 
 	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);

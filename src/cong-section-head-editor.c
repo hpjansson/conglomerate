@@ -58,6 +58,7 @@ static void section_head_editor_allocate_child_space(CongElementEditor *element_
 static void section_head_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void section_head_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
 static void section_head_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
+static void section_head_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
 
 static CongElementEditorClass section_head_editor_class =
 {
@@ -69,7 +70,8 @@ static CongElementEditorClass section_head_editor_class =
 	section_head_editor_allocate_child_space,
 	section_head_editor_recursive_render,
 	section_head_on_button_press,
-	section_head_on_motion_notify
+	section_head_on_motion_notify,
+	section_head_on_key_press
 };
 
 static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor)
@@ -619,6 +621,11 @@ static void section_head_on_motion_notify(CongElementEditor *element_editor, Gdk
 			}
 		}
 	}
+}
+
+static void section_head_on_key_press(CongElementEditor *element_editor, GdkEventKey *event)
+{
+	/* FIXME: unimplemented */
 }
 
 #if 0

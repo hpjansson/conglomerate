@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-12-19 David Malcolm
+
+	* cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c, cursor.c, global.h, xmledit.c
+
+	Typing support within CongEditorWidget
+	
 2002-12-12 David Malcolm
 
 	* cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c

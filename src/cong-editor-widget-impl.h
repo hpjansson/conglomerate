@@ -87,11 +87,13 @@ struct CongElementEditorClass
 	void (*recursive_render)(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 	void (*on_button_press)(CongElementEditor *element_editor, GdkEventButton *event);
 	void (*on_motion_notify)(CongElementEditor *element_editor, GdkEventMotion *event);
+	void (*on_key_press)(CongElementEditor *element_editor, GdkEventKey *event);
 };
 
 void cong_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 void cong_element_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
 void cong_element_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
+void cong_element_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
 
 typedef struct CongEditorWidgetDetails CongEditorWidgetDetails;
 typedef struct CongEditorWidgetView CongEditorWidgetView;

@@ -41,6 +41,7 @@ static void dummy_element_editor_allocate_child_space(CongElementEditor *element
 static void dummy_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void dummy_element_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
 static void dummy_element_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
+static void dummy_element_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
 
 static CongElementEditorClass dummy_element_editor_class =
 {
@@ -52,7 +53,8 @@ static CongElementEditorClass dummy_element_editor_class =
 	dummy_element_editor_allocate_child_space,
 	dummy_element_editor_recursive_render,
 	dummy_element_on_button_press,
-	dummy_element_on_motion_notify
+	dummy_element_on_motion_notify,
+	dummy_element_on_key_press
 };
 
 static void dummy_element_editor_on_recursive_delete(CongElementEditor *element_editor)
@@ -154,6 +156,11 @@ static void dummy_element_on_button_press(CongElementEditor *element_editor, Gdk
 static void dummy_element_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
 {
 	/* empty */
+}
+
+static void dummy_element_on_key_press(CongElementEditor *element_editor, GdkEventKey *event)
+{
+	/* FIXME: unimplemented */
 }
 
 /* Public API: */

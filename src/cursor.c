@@ -256,10 +256,11 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 }
 
 
-void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
+void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
+	CongDispspec *dispspec;
 	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
@@ -269,6 +270,8 @@ void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
 	g_assert(curs!=NULL);
 	
 	if (!curs->xed) return;
+
+	dispspec = cong_document_get_dispspec(doc);
 
 	n = curs->location.tt_loc;
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && curs->location.char_loc) { curs->location.char_loc--; return; }
@@ -284,7 +287,7 @@ void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
 			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
 			{
 				if (!strcmp(cong_node_name(n), "table")) break;
-				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -308,7 +311,7 @@ void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
 
 		while (n)
 		{
-			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!cong_node_prev(n)) n = n0 = cong_node_parent(n);
 			else break;
 		}
@@ -322,10 +325,11 @@ void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
 }
 
 
-void cong_cursor_next_char(CongCursor *curs, CongSpanEditor *xed)
+void cong_cursor_next_char(CongCursor *curs, CongDocument *doc)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
+	CongDispspec *dispspec;
 	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
@@ -335,6 +339,8 @@ void cong_cursor_next_char(CongCursor *curs, CongSpanEditor *xed)
 	g_assert(curs!=NULL);
 	
 	if (!curs->xed) return;
+
+	dispspec = cong_document_get_dispspec(doc);
 
 	n = curs->location.tt_loc;
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && cong_location_get_char(&curs->location)!='\0')
@@ -354,7 +360,7 @@ void cong_cursor_next_char(CongCursor *curs, CongSpanEditor *xed)
 			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
 			{				 
 				if (!strcmp(cong_node_name(n), "table")) break;
-				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -378,7 +384,7 @@ void cong_cursor_next_char(CongCursor *curs, CongSpanEditor *xed)
 
 		while (n)
 		{
-			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!cong_node_next(n)) n = n0 = cong_node_parent(n);
 			else break;
 		}
@@ -445,35 +451,25 @@ void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed)
 }
 
 
-void cong_cursor_del_prev_char(CongCursor *curs, CongSpanEditor *xed)
+void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 {
-	CongDocument *doc;
-
 	g_return_if_fail(curs);
-	g_return_if_fail(xed);
+	g_return_if_fail(doc);
 
-	doc = xed->doc;
-
-#if 1
-	if (!cong_location_exists(&curs->location)) return;
-#else
-	if (!curs->t) return;
-#endif
+	if (!cong_location_exists(&curs->location)) {
+		return;
+	}
 	
-	cong_cursor_prev_char(curs,xed);
+ 	cong_cursor_prev_char(curs, doc);
 
 	cong_location_del_next_char(doc, &curs->location);
 }
 
 
-void cong_cursor_del_next_char(CongCursor *curs, CongSpanEditor *xed)
+void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc)
 {
-	CongDocument *doc;
-
 	g_return_if_fail(curs);
-	g_return_if_fail(xed);
-
-	doc = xed->doc;
+	g_return_if_fail(doc);
 
 	if (!cong_location_exists(&curs->location)) return;
 

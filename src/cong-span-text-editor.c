@@ -93,9 +93,11 @@ struct CongSpanTextEditor
 };
 
 static void regenerate_plaintext(CongSpanTextEditor *span_text_editor);
-static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
-static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
-static gboolean get_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset);
+static CongNodePtr get_node_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
+static CongTextSpan *get_text_span_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
+static gboolean get_location_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset, CongLocation *location);
+static gboolean get_stripped_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset);
+static gboolean get_coord_for_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, GdkPoint *window_location);
 
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor);
 static void span_text_editor_on_recursive_self_test(CongElementEditor *element_editor);
@@ -105,6 +107,7 @@ static void span_text_editor_allocate_child_space(CongElementEditor *element_edi
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void span_text_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
 static void span_text_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
+static void span_text_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
 
 static CongElementEditorClass span_text_editor_class =
 {
@@ -116,7 +119,8 @@ static CongElementEditorClass span_text_editor_class =
 	span_text_editor_allocate_child_space,
 	span_text_editor_recursive_render,
 	span_text_editor_on_button_press,
-	span_text_editor_on_motion_notify
+	span_text_editor_on_motion_notify,
+	span_text_editor_on_key_press
 };
 
 CongTextSpan* cong_text_span_new(int original_first_byte_offset,
@@ -375,13 +379,13 @@ static void regenerate_plaintext(CongSpanTextEditor *span_text_editor)
 			       -1);
 }
 
-static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
+static CongNodePtr get_node_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
 {
 	CongTextSpan *text_span;
 
 	g_return_val_if_fail(span_text_editor, NULL);
 
-	text_span = get_text_span_at_byte_offset(span_text_editor, byte_offset);
+	text_span = get_text_span_at_stripped_byte_offset(span_text_editor, byte_offset);
 
 	if (text_span) {
 		return text_span->text_node;
@@ -390,7 +394,7 @@ static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor,
 	}
 }
 
-static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
+static CongTextSpan *get_text_span_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
 {
 	GList *iter;
 
@@ -411,7 +415,25 @@ static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_
 	return NULL;
 }
 
-static gboolean get_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset)
+static gboolean get_location_at_stripped_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset, CongLocation *location)
+{
+	CongTextSpan *text_span;
+
+	g_return_val_if_fail(span_text_editor, FALSE);
+	g_return_val_if_fail(location, FALSE);
+
+	text_span = get_text_span_at_stripped_byte_offset(span_text_editor, byte_offset);
+	
+	if (text_span) {
+		location->tt_loc = text_span->text_node;
+		location->char_loc = text_span->original_first_byte_offset + (byte_offset - text_span->stripped_first_byte_offset);
+	}
+
+	return FALSE;
+	
+}
+
+static gboolean get_stripped_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset)
 {
 	GList *iter;
 
@@ -450,6 +472,8 @@ static gboolean get_byte_offset_at_location(CongSpanTextEditor *span_text_editor
 	return FALSE;
 }
 
+
+/* Event handlers: */
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor)
 {
 	/* FIXME: unimplemented */
@@ -471,10 +495,13 @@ static void span_text_editor_on_recursive_self_test(CongElementEditor *element_e
 static gboolean span_text_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
-	/* FIXME: unimplemented */
 
 	switch (event->type) {
 	default: break;
+	case CONG_DOCUMENT_EVENT_MAKE_ORPHAN:
+	case CONG_DOCUMENT_EVENT_ADD_AFTER:
+	case CONG_DOCUMENT_EVENT_ADD_BEFORE:
+	case CONG_DOCUMENT_EVENT_SET_PARENT:
 	case CONG_DOCUMENT_EVENT_SET_TEXT:
 		/* These messages go direct from the widget to the relevant element editor: */
 		if (!event->before_event) {
@@ -720,8 +747,8 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 		g_assert(cong_node_type(selection->loc0.tt_loc)==CONG_NODE_TYPE_TEXT);
 		g_assert(cong_node_type(selection->loc1.tt_loc)==CONG_NODE_TYPE_TEXT);
 
-		got_selection_start_byte_offset = get_byte_offset_at_location(span_text, &selection->loc0, &selection_start_byte_offset);
-		got_selection_end_byte_offset = get_byte_offset_at_location(span_text, &selection->loc1, &selection_end_byte_offset);
+		got_selection_start_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc0, &selection_start_byte_offset);
+		got_selection_end_byte_offset = get_stripped_byte_offset_at_location(span_text, &selection->loc1, &selection_end_byte_offset);
 
 		if (selection_end_byte_offset<selection_start_byte_offset) {
 			int tmp = selection_end_byte_offset;
@@ -732,7 +759,7 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 
 	if (cong_location_exists(&cursor->location)) {
 		if (cursor->on) {
-			got_cursor_byte_offset = get_byte_offset_at_location(span_text, &cursor->location, &cursor_byte_offset);
+			got_cursor_byte_offset = get_stripped_byte_offset_at_location(span_text, &cursor->location, &cursor_byte_offset);
 		}
 	}
 
@@ -963,7 +990,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 		visit_lines(element_editor, CONG_LINE_VISITOR_HIT_TEST, &hit_test);
 
 		if (hit_test.got_hit) {
-			CongTextSpan *text_span = get_text_span_at_byte_offset(span_text_editor, hit_test.byte_offset);
+			CongTextSpan *text_span = get_text_span_at_stripped_byte_offset(span_text_editor, hit_test.byte_offset);
 
 			if (text_span) {
 				cong_location_set(&cursor->location,
@@ -1014,7 +1041,7 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 	visit_lines(element_editor, CONG_LINE_VISITOR_HIT_TEST, &hit_test);
 
 	if (hit_test.got_hit) {
-		CongTextSpan *text_span = get_text_span_at_byte_offset(span_text_editor, hit_test.byte_offset);
+		CongTextSpan *text_span = get_text_span_at_stripped_byte_offset(span_text_editor, hit_test.byte_offset);
 		
 		if (text_span) {
 			cong_location_set(&cursor->location,
@@ -1027,6 +1054,159 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 			return;
 		}
 	}
+}
+
+static void do_cursor_up(CongSpanTextEditor *span_text_editor, CongDocument *doc, CongCursor *cursor)
+{
+	int byte_offset;
+	GSList *line_iter;
+	PangoLayoutLine *prev_line=NULL;
+
+	g_assert(span_text_editor);
+	g_assert(cursor);
+
+	if (get_stripped_byte_offset_at_location(span_text_editor, &cursor->location, &byte_offset)) {
+		for (line_iter=pango_layout_get_lines(span_text_editor->pango_layout); line_iter; line_iter = line_iter->next) {
+			PangoLayoutLine *line = line_iter->data;
+			g_assert(line);
+			
+			if ( (byte_offset >= line->start_index) && (byte_offset < line->start_index+line->length)) {
+				/* Then the search place is on this line; check to see that we're not on the first line: */
+				if (prev_line) {
+					int x;
+					int index;
+					int trailing;
+					
+					pango_layout_line_index_to_x(line,
+								     byte_offset,
+								     FALSE,
+								     &x);	
+					
+					pango_layout_line_x_to_index(prev_line,
+								     x,
+								     &index,
+								     &trailing);
+
+
+					if (get_location_at_stripped_byte_offset(span_text_editor, index, &cursor->location)) {
+						cong_document_on_cursor_change(doc);
+					}					
+				}
+			}
+			
+			prev_line = line;
+		}
+	}
+}
+
+static void do_cursor_down(CongSpanTextEditor *span_text_editor, CongDocument *doc, CongCursor *cursor)
+{
+	int byte_offset;
+	GSList *line_iter;
+
+	g_assert(span_text_editor);
+	g_assert(cursor);
+
+	if (get_stripped_byte_offset_at_location(span_text_editor, &cursor->location, &byte_offset)) {
+		for (line_iter=pango_layout_get_lines(span_text_editor->pango_layout); line_iter; line_iter = line_iter->next) {
+			PangoLayoutLine *line = line_iter->data;
+			g_assert(line);
+			
+			if ( (byte_offset >= line->start_index) && (byte_offset < line->start_index+line->length)) {
+				/* Then the search place is on this line; check to see that we're not on the last line: */
+				if (line_iter->next) {
+					int x;
+					int index;
+					int trailing;
+					
+					pango_layout_line_index_to_x(line,
+								     byte_offset,
+								     FALSE,
+								     &x);	
+					
+					pango_layout_line_x_to_index((PangoLayoutLine*)line_iter->next->data,
+								     x,
+								     &index,
+								     &trailing);
+
+
+					if (get_location_at_stripped_byte_offset(span_text_editor, index, &cursor->location)) {
+						cong_document_on_cursor_change(doc);
+					}					
+				}
+			}
+		}
+	}
+}
+
+
+static void span_text_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event)
+{
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	CongEditorWidget *editor_widget = element_editor->widget;
+	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
+
+	/* FIXME: unimplemented */
+	g_message("span_text_editor_on_key_press");
+
+#ifndef RELEASE		
+	printf("Keyval: %d, State: %d\n", event->keyval, event->state);
+#endif
+	
+	if (event->state && event->state != 1) {
+		return;
+	}
+
+	doc = cong_editor_widget_get_document(editor_widget);
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+
+	switch (event->keyval)
+	{
+	case GDK_Up:
+		do_cursor_up(span_text_editor, doc, cursor);
+		break;
+	
+	case GDK_Down:
+		do_cursor_down(span_text_editor, doc, cursor);
+		break;
+	
+	case GDK_Left:
+		cong_cursor_prev_char(cursor, doc);
+		cong_document_on_cursor_change(doc);
+		break;
+	
+	case GDK_Right:
+		cong_cursor_next_char(cursor, doc);
+		cong_document_on_cursor_change(doc);
+		break;
+	
+	case GDK_BackSpace:
+		cong_cursor_del_prev_char(cursor, doc);
+		break;
+	
+	case GDK_Delete:
+		cong_cursor_del_next_char(cursor, doc);
+		break;
+	
+	case GDK_ISO_Enter:
+	case GDK_Return:
+		cong_cursor_paragraph_insert(cursor);
+		break;
+	
+	default:
+		if (event->length && event->string && strlen(event->string)) {
+			cong_cursor_data_insert(cursor, event->string);
+		}
+		break;
+	}
+
+	cong_cursor_on(cursor);
+	cong_document_on_cursor_change(doc);	
+
 }
 
 /* Public API: */

@@ -480,7 +480,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 		break;
 	
 	case GDK_Left:
-		cong_cursor_prev_char(cursor, xed);
+		cong_cursor_prev_char(cursor, doc);
 		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
@@ -488,7 +488,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 		break;
 	
 	case GDK_Right:
-		cong_cursor_next_char(cursor, xed);
+		cong_cursor_next_char(cursor, doc);
 		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
@@ -496,7 +496,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 		break;
 	
 	case GDK_BackSpace:
-		cong_cursor_del_prev_char(cursor, xed);
+		cong_cursor_del_prev_char(cursor, doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		xed_redraw(xed);
@@ -504,7 +504,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 		break;
 	
 	case GDK_Delete:
-		cong_cursor_del_next_char(cursor, xed);
+		cong_cursor_del_next_char(cursor, doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		xed_redraw(xed);
