@@ -1,3 +1,9 @@
+2003-07-23  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* ContribDemo
+
+	Fixed typo; from a patch by Varga Robert
+	
 2003-07-07 Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* CodingStyle, CompileIssues, ContribDemo, VersionNumbering,

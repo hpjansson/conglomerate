@@ -46,7 +46,7 @@ $ # make your changes and check it
 
 $ cd ..   # go a level up
 /usr/src
-$ diff -urN -exclude-from=my-work/.diffexclude \
+$ diff -urN --exclude-from=my-work/.diffexclude \
   vanilla my-work > changes
 /usr/src
 $
