@@ -12,6 +12,12 @@
 GtkStyle *style_white;
 
 
+/*
+  We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
+  We store a boolean "expanded" data on the vbox.
+  We store a ptr to the vbox within the title/GtkDrawingArea called "vbox" so it can query this when it draws itself.
+  Probably would be cleaner to have a new widget subclass...
+ */
 
 static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x)
 {
@@ -19,6 +25,9 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	int str_width;
 	TTREE *n0;
 
+	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
+	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
+	
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 300 ? str_width : 300;
 
@@ -34,43 +43,50 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	
 	/* Frame the coloured rectangle */
 
-	gdk_draw_line(w->window, w->style->black_gc, 0, 0, str_width + 3, 0);
-	gdk_draw_line(w->window, w->style->black_gc, 3, w->allocation.height - 1 - 4,
-								str_width + 3, w->allocation.height - 1 - 4);
-	gdk_draw_line(w->window, w->style->black_gc, str_width + 3, 0,
-								str_width + 3, w->allocation.height - 1 - 4);
-	gdk_draw_line(w->window, w->style->black_gc, 0, 0,
-								0, w->allocation.height - 1 - 4);
+	gdk_draw_line(w->window, w->style->black_gc, 
+		      0, 0, 
+		      str_width + 3, 0);
+	gdk_draw_line(w->window, w->style->black_gc, 
+		      expanded?3:0, w->allocation.height - 1 - 4,
+		      str_width + 3, w->allocation.height - 1 - 4);
+	gdk_draw_line(w->window, w->style->black_gc, 
+		      str_width + 3, 0,
+		      str_width + 3, w->allocation.height - 1 - 4);
+	gdk_draw_line(w->window, w->style->black_gc, 
+		      0, 0,
+		      0, w->allocation.height - 1 - 4);
 
 	/* White out at right */
 
-	gdk_draw_rectangle(w->window, w->style->white_gc, 1, str_width + 4, 0,
-										 w->allocation.width - (str_width + 4),
-										 w->allocation.height - 4);
+	gdk_draw_rectangle(w->window, w->style->white_gc, 1, 
+			   str_width + 4, 0,
+			   w->allocation.width - (str_width + 4), w->allocation.height - 4);
 
 	/* White out below */
 
 	gdk_draw_rectangle(w->window, w->style->white_gc, 1,
-										 4, w->allocation.height - 4,
-										 w->allocation.width, w->allocation.height);
+			   expanded?4:0, w->allocation.height - 4,
+			   w->allocation.width, w->allocation.height);
 
 	/* Lines on left */
-	
-	/* Coloured line in the middle */
 
-	gdk_draw_line(w->window, gc, 1, w->allocation.height - 4, 1, w->allocation.height);
-	gdk_draw_line(w->window, gc, 2, w->allocation.height - 4, 2, w->allocation.height);
+	if (expanded) {
 
-	/* Black vertical lines right and left */
+	  /* Coloured line in the middle */
+	  gdk_draw_line(w->window, gc, 1, w->allocation.height - 4, 1, w->allocation.height);
+	  gdk_draw_line(w->window, gc, 2, w->allocation.height - 4, 2, w->allocation.height);
 
-	gdk_draw_line(w->window, w->style->black_gc, 0, w->allocation.height - 4, 0,
-								w->allocation.height);
+	  /* Black vertical lines right and left */
+	  gdk_draw_line(w->window, w->style->black_gc, 
+			0, w->allocation.height - 4, 
+			0, w->allocation.height);
 
-	gdk_draw_line(w->window, w->style->black_gc, 3, w->allocation.height - 4, 3,
-								w->allocation.height);
+	  gdk_draw_line(w->window, w->style->black_gc, 
+			3, w->allocation.height - 4, 
+			3, w->allocation.height);
 
+	}
 	/* Section identifier */
-
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
 									ds_name_get(x));
 
@@ -100,6 +116,53 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	return TRUE;
 }
 
+struct section_fold_cb_data
+{
+  gboolean done_first;
+  gboolean expanded;
+  GtkVBox* vbox;
+};
+
+void xv_section_fold_cb(GtkWidget* widget, gpointer data)
+{
+  struct section_fold_cb_data* cb_data = (struct section_fold_cb_data*)data;
+
+  /* Show/Hide all except for the first child: */
+  if (cb_data->done_first) {
+    if (cb_data->expanded) {
+      gtk_widget_show(widget);
+    } else {
+      gtk_widget_hide(widget);
+    }
+  } else {
+    cb_data->done_first = TRUE;
+  }
+}
+
+static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, GtkVBox *vbox)
+{
+  struct section_fold_cb_data cb_data;
+
+  gpointer expanded = g_object_get_data(G_OBJECT(vbox), "expanded");
+  expanded = GINT_TO_POINTER(!expanded);
+  g_object_set_data(G_OBJECT(vbox), "expanded", expanded);
+
+  /* We will want a redraw of the drawing area, since the appearance of the title bar has changed: */
+  gtk_widget_queue_draw_area(w, 0,0, w->allocation.width, w->allocation.height);
+
+  cb_data.done_first = FALSE;
+  cb_data.vbox = vbox;
+  cb_data.expanded = (expanded!=NULL);
+
+  printf("xv_section_head_button_press\n");
+
+  gtk_container_forall(GTK_CONTAINER(vbox), 
+		       xv_section_fold_cb,
+		       &cb_data);
+
+  return TRUE;
+}
+
 GtkWidget *xv_section_head(TTREE *ds, TTREE *x)
 {
 	UNUSED_VAR(TTREE *n0)
@@ -107,13 +170,20 @@ GtkWidget *xv_section_head(TTREE *ds, TTREE *x)
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	title = gtk_drawing_area_new();
+
+	g_object_set_data(G_OBJECT(vbox), "expanded", GINT_TO_POINTER(1));
+	g_object_set_data(G_OBJECT(title), "vbox", vbox);
+
 	gtk_box_pack_start(GTK_BOX(vbox), title, TRUE, TRUE, 0);
 	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, the_globals.ft_asc + the_globals.ft_desc + 4 /* up and down borders */ + 4 /* space below */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
-										 (GtkSignalFunc) xv_section_head_expose, x);
+			   (GtkSignalFunc) xv_section_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
-										 (GtkSignalFunc) xv_section_head_expose, x);
-  gtk_widget_set_events(title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
+			   (GtkSignalFunc) xv_section_head_expose, x);
+	gtk_signal_connect(GTK_OBJECT(title), "button_press_event",
+			   (GtkSignalFunc) xv_section_head_button_press, vbox);
+
+	gtk_widget_set_events(title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
 
 	gtk_widget_show(title);
 	gtk_widget_show(vbox);
@@ -690,7 +760,19 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 		{
 			/* New element */
 
+#if 1
+			GtkWidget* head = xv_section_head(displayspec, x);
+
+			gtk_box_pack_start(GTK_BOX(xv->w), head, TRUE, TRUE, 0);
+			
+			xv_element_new(x, displayspec, head, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
+
+			w = xv_section_tail(displayspec, x);
+			xv_style_r(w, style_white);
+			gtk_box_pack_start(GTK_BOX(head), w, FALSE, TRUE, 0);
+#else
 			w = xv_section_head(displayspec, x);
+
 			gtk_box_pack_start(GTK_BOX(xv->w), w, TRUE, TRUE, 0);
 			
 #if 1
@@ -702,6 +784,7 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);
 			gtk_box_pack_start(GTK_BOX(xv->w), w, FALSE, TRUE, 0);
+#endif
 		}
 	}
 
