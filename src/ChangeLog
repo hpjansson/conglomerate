@@ -1,5 +1,9 @@
 2003-09-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xmldata.c
+
+	Allow plugin-based tags to appear in the structural popup menus
+	
 	* popup.c
 
 	Make empty submenus insensitive

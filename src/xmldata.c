@@ -675,6 +675,30 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 	}
 }
 
+gboolean
+should_include_element (CongDispspecElement *element,
+			enum CongElementType tag_type )
+{
+	g_return_val_if_fail (element, FALSE);
+
+	switch (tag_type) {
+	default: g_assert_not_reached();
+	case CONG_ELEMENT_TYPE_ALL: 
+		return TRUE;
+			    
+	case CONG_ELEMENT_TYPE_STRUCTURAL: 
+		if (cong_dispspec_element_is_structural(element)) {
+			return TRUE;
+		} else {
+			/* plugins should also be listed (for now) */
+			return cong_dispspec_element_type(element)==CONG_ELEMENT_TYPE_PLUGIN;
+		}
+		
+	case CONG_ELEMENT_TYPE_SPAN: 
+		return cong_dispspec_element_is_span(element);
+	}
+}
+
 /**
  * Find the intersection of a list of valid children
  * and a displayspec, returning a list of the displayspec elements
@@ -686,14 +710,18 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 	gint i;
 
 	for (i = 0; i < elements_length; i++) {
+		g_message ("got element <%s>", elements[i]);
+		
 		/* FIXME:  hack the ns to be NULL for now :-( */
 		element = cong_dispspec_lookup_element(ds, NULL, elements[i]);
-		if ( ( element != NULL ) &&
-		     ( (tag_type == CONG_ELEMENT_TYPE_ALL) ||
-		       ( ( tag_type == CONG_ELEMENT_TYPE_STRUCTURAL ) && (cong_dispspec_element_is_structural(element) )) ||
-		       ( ( tag_type == CONG_ELEMENT_TYPE_SPAN ) && (cong_dispspec_element_is_span(element) ) ) ) ) { 
+		if (element) {
+			if (should_include_element (element,
+						    tag_type )) {				
+				list = g_list_prepend(list, element);
+			}
 
-			list = g_list_prepend(list, element);
+		} else {
+			g_message ("Element not in dispspec <%s>", elements[i]);
 		}
 	}
 
@@ -709,9 +737,8 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementT
 	GList* list = NULL;
 
 	for (element = cong_dispspec_get_first_element(ds); element; element = cong_dispspec_element_next(element)) {
-		if ( (tag_type == CONG_ELEMENT_TYPE_ALL) || 
-		     ( (tag_type == CONG_ELEMENT_TYPE_STRUCTURAL ) && (cong_dispspec_element_is_structural(element)) ) ||
-		     ( (tag_type == CONG_ELEMENT_TYPE_SPAN ) && (cong_dispspec_element_is_span(element)) ) ) {
+		if (should_include_element (element,
+					    tag_type)) {
 			list = g_list_prepend(list, element);
 		}
 	}
