@@ -100,6 +100,11 @@ cong_file_selection_make_xml_filter_list (void)
 	gtk_file_filter_set_name (test_filter, _("XML Files"));
 	gtk_file_filter_add_mime_type (test_filter, "text/xml");
 	gtk_file_filter_add_mime_type (test_filter, "x-directory/normal");
+
+	/* Workarounds for various files that don't appear for me: */
+	gtk_file_filter_add_pattern (test_filter, "*.glade");
+	gtk_file_filter_add_pattern (test_filter, "*.xsl");
+
 	list = g_list_append(list, test_filter);
 
  	return list;	

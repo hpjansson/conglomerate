@@ -1,5 +1,9 @@
 2004-06-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* file.c (cong_file_selection_make_xml_filter_list): 
+
+	Added hacks to ensure that Glade and XSL files appear in file chooser
+
 	* cong-util.c: 
 
 	Added link to bug 145026
