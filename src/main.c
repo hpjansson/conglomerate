@@ -17,6 +17,10 @@
 #include <libgnomevfs/gnome-vfs.h>
 #endif
 
+#if 0
+#include <libxslt/xsltInternals.h>
+#endif
+
 #if 1
 struct cong_gui
 {
@@ -503,6 +507,46 @@ gint test_document_types(GtkWidget *w, gpointer data)
 
 void test_document_types_wrap(GtkWidget *widget, gpointer data) { test_document_types(widget, 0); }
 
+gint test_transform(GtkWidget *w, gpointer data)
+{
+#if 0
+	/* Hackish test of libxslt */
+	xmlDocPtr doc;
+	xsltStylesheetPtr xsl;
+	xmlDocPtr result;
+
+#if 0
+	xmlSubstituteEntitiesDefault(1);
+	xmlLoadExtDtdDefaultValue(1);
+#endif
+	
+	doc = xmlParseFile("../examples/test-docbook.xml");
+	g_assert(doc);
+
+	xsl = xsltParseStylesheetFile("../examples/test-docbook-to-html.xsl");
+	g_assert(xsl);
+
+	result = xsltApplyStylesheet(xsl, doc, NULL);
+	g_assert(result);
+
+	xsltSaveResultToFile(stdout, result, xsl);
+	
+	xsltFreeStylesheet(xsl);
+	xmlFreeDoc(result);
+	xmlFreeDoc(doc);
+
+	/* do we need to clean up the globals? */
+#if 0
+	xmlSubstituteEntitiesDefault(0);
+	xmlLoadExtDtdDefaultValue(0);
+#endif
+
+#endif
+	return TRUE;
+}
+
+void test_transform_wrap(GtkWidget *widget, gpointer data) { test_transform(widget, 0); }
+
 
 static GtkItemFactoryEntry menu_items[] =
 {
@@ -517,7 +561,8 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Tests",                 NULL, NULL, 0, "<Branch>" },
 	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
 	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
-	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL }
+	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
+	{ "/Tests/Transform",       NULL, test_transform_wrap, 0, NULL }
 };
 
 
@@ -537,8 +582,8 @@ void insert_element_init()
 
 
 gint delete_event( GtkWidget *widget,
-									GdkEvent  *event,
-									gpointer   data )
+		   GdkEvent  *event,
+		   gpointer   data )
 {
 #ifndef RELEASE
 	g_print ("delete event occurred\n");
@@ -548,7 +593,7 @@ gint delete_event( GtkWidget *widget,
 
 
 void destroy( GtkWidget *widget,
-						 gpointer   data )
+	      gpointer   data )
 {
 	gtk_main_quit();
 }
@@ -823,7 +868,7 @@ void gui_window_main_make()
 	gtk_widget_show(w2);
 
 #if 1
-        gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER);
+        gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 
 	gui->global_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(gui->global_tree_store)));
 
@@ -851,6 +896,8 @@ void gui_window_main_make()
 	 * cell_renderer to the first column of the model */
 	column = gtk_tree_view_column_new_with_attributes ("Element", renderer,
 							   "text", TREEVIEW_TITLE_COLUMN,
+							   "foreground", TREEVIEW_FOREGROUND_COLOR_COLUMN,
+							   "background", TREEVIEW_BACKGROUND_COLOR_COLUMN,
 							   NULL);
 
 #endif
