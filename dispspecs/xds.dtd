@@ -61,7 +61,7 @@
 <!-- Attributes shared by all types of element: -->
 <!ENTITY % element.att
 "  
-   nsUri               NMTOKEN                                                           #IMPLIED
+   nsURI               CDATA                                                           #IMPLIED
    localName           ID                                                                #REQUIRED
    icon                CDATA                                                             #IMPLIED
    whitespace          (normalize | preserve)                                            'normalize'

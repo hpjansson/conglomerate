@@ -1,6 +1,8 @@
 2004-07-15  Jeff Martin  <jeff@custtommonkey.org>
 
-	* xds.dtd: Added spellcheck attribute
+	* xds.dtd: Added spellcheck attribute, corrected case for nsURI was 
+	incorrectly set to nsUri and changed type to CDATA to allow non
+	alpha numeric characters
 
 2004-07-06  David Malcolm  <david@davemalcolm.demon.co.uk>
 
