@@ -1,4 +1,12 @@
 creating ChangeLog
+2002-11-28 Geert Stappers
+
+	* cong-primary-window.c
+
+	Version back in the about box.
+	Added credits for documenters.
+	Did try to add credits for translators, but failed.
+
 2002-11-28 David Malcolm
 
         * cong-dialog.c, cong-dispspec-registry.c, cong-document.c, cong-dummy-element-editor.c, cong-editor-widget.c, cong-error-dialog.c, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-location.c, cong-plugin.c, cong-primary-window.c, cong-section-head-editor.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, cursor.c, dispspec.c, global.h, main.c, new_doc.c, open.c, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c

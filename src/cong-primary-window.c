@@ -728,13 +728,19 @@ static void menu_callback_about(gpointer callback_data,
 	GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
 	const gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
 
+	const gchar* documenters[] = {"asb?,sb?" \
+			, "Your Name", NULL };
+
+	const gchar* translator_credits[] = {"ru:Dmitry G. Mastrukov" \
+			, "i18n:Your Name", NULL };
+
 	GtkWidget *about = gnome_about_new("Conglomerate",
-					   NULL, /*  VERSION,  */
+					   VERSION,
 					   "(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm",
 					   "Conglomerate will be a user-friendly XML editor for GNOME",
 					   authors,
-					   NULL, /*  const gchar **documenters, */
-					   NULL, /*  const gchar *translator_credits, */
+					   documenters,
+					   translator_credits,
 					   logo_pixbuf);
 	gdk_pixbuf_unref(logo_pixbuf);
 
