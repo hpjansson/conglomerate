@@ -1,3 +1,9 @@
+2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* plugin-docbook.c
+
+	Custom property page for DocBook <ulink> tags
+
 2003-10-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-labelled.c, cong-editor-area-labelled.h, Makefile.am, plugin-lists-area-listitem.c, plugin-lists-area-listitem.h

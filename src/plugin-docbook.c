@@ -1164,6 +1164,65 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongCustomPropertyDialo
 	return glade_xml_get_widget(xml, "common_dialog");
 }
 
+static void
+on_test_link_pressed (GtkButton *button,
+		      gpointer user_data)
+{
+	CongNodePtr node = user_data;
+	gchar *url = cong_node_get_attribute (node, "url");
+
+	if (url) {	
+		/* FIXME: should we have some error handling? */
+		gnome_url_show (url,
+				NULL);
+	}
+
+	g_free (url);
+}
+
+GtkWidget* docbook_ulink_properties_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+	GtkWidget *notebook1;
+
+	g_message("docbook_ulink_properties_factory_method");
+
+	g_return_val_if_fail(custom_property_dialog, NULL);
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "glade/docbook-ulink-properties.glade",
+						    FALSE,
+						    NULL);
+
+	global_glade_doc_ptr = doc;
+	global_glade_node_ptr = node;
+
+	xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	g_signal_connect (G_OBJECT (glade_xml_get_widget(xml, "test_link_button")),
+			  "pressed",
+			  G_CALLBACK (on_test_link_pressed),
+			  node);
+
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+
+	g_free(glade_filename);
+
+	/* Add the advanced properties tab: */
+	notebook1 = glade_xml_get_widget(xml, "notebook1");
+	cong_ui_append_advanced_node_properties_page(GTK_NOTEBOOK(notebook1),
+						     doc, 
+						     node);
+	
+	return glade_xml_get_widget(xml, "common_dialog");
+}
+
 gboolean 
 node_filter_promote (CongNodeTool *node_tool, 
 		     CongDocument *doc, 
@@ -1328,6 +1387,13 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 						    _("Provides a Properties dialog for the <orderedlist> tag"),
 						    "docbook-orderedlist-properties",
 						    docbook_orderedlist_properties_factory_method,
+						    NULL);
+
+	cong_plugin_register_custom_property_dialog(plugin,
+						    _("<ulink> property dialog"), 
+						    _("Provides a Properties dialog for the <ulink> tag"),
+						    "docbook-ulink-properties",
+						    docbook_ulink_properties_factory_method,
 						    NULL);
 
 #if 0
