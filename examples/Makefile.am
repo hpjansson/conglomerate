@@ -38,5 +38,6 @@ dtd_DATA	= xds.dtd
 
 EXTRA_DIST = $(example_DATA)	\
 	$(dispspec_DATA)	\
+	$(dispspec_in_files)	\
 	$(dtd_DATA)
 

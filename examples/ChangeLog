@@ -1,3 +1,9 @@
+2004-01-07  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+
+	Ship the tarball also with the .xds.in files.
+
 2003-12-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* relax-ng.xds
