@@ -837,7 +837,7 @@ gboolean main_load_displayspecs(void)
 		cong_dispspec_registry_dump(the_globals.ds_registry);
 	} else {
 		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not find its registry of document types.",
-							  "You must run the program from the location in which you built it.",
+							  "You must run the program from the \"src\" directory used to build it.",
 							  "This is a known problem and will be fixed.");
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
