@@ -52,6 +52,7 @@ src/main.c
 src/plugin-convert-case.c
 src/plugin-docbook.c
 src/plugin-empty.c
+src/plugin-fo.c
 src/plugin-lists.c
 src/plugin-sgml.c
 src/plugin-tests.c

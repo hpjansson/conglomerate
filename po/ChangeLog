@@ -1,3 +1,11 @@
+2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
+
+       * POTFILES.in:
+       Added the new ../src/plugin-fo.c file.
+
+       * es.po, ru.po:
+       Effected by the various updates.
+
 2003-07-03  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
 	* POTFILES.in: Added all ../src/*.c files.
