@@ -137,10 +137,12 @@ static void on_document_end_edit(CongView *view)
 	CongSourceView *source_view;
 	CongSourceViewDetails *details;
 
-	g_assert(source_view);
+	g_assert(view);
 
 	source_view = CONG_SOURCE_VIEW(view);
-	details = source_view->private;		
+	g_assert(source_view);
+
+	details = source_view->private;
 	
 	if (!details->is_buffer_up_to_date) {
 		/* Then some changes occurred during the nested begin/end edit and we deferred them; regenerate the buffer now: */
