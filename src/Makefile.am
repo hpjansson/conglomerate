@@ -2,6 +2,7 @@ bin_PROGRAMS = conge
 
 conge_SOURCES =             \
   global.h                  \
+  cong-editor-widget-impl.h \
   icon_assemble.c           \
   icon_connect.c            \
   icon_new.c                \
@@ -28,6 +29,9 @@ conge_SOURCES =             \
   cong-dialog.c             \
   cong-dispspec-registry.c  \
   cong-document.c           \
+  cong-dummy-element-editor.c  \
+  cong-editor-widget.c      \
+  cong-element-editor.c     \
   cong-error-dialog.c       \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
@@ -36,6 +40,8 @@ conge_SOURCES =             \
   cong-location.c           \
   cong-plugin.c             \
   cong-primary-window.c     \
+  cong-section-head-editor.c \
+  cong-span-text-editor.c   \
   cong-test-view.c          \
   cong-tree-view.c          \
   fo.h                      \

@@ -1,4 +1,22 @@
 creating ChangeLog
+2002-11-26 David Malcolm
+
+	* Makefile.am
+
+	Added cong-editor-widget-impl.h, cong-dummy-element-editor.c, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c
+
+	* cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c, global.h
+
+	Further improvements to new editor widget
+
+	* cong-font.c, main.c
+
+	More Pango support
+
+	* cong-dummy-element-editor.c
+
+	Initial import
+
 2002-11-25 Dmitry G. Mastrukov
 
 	* main.c, global.h, Makefile.am
