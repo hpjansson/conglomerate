@@ -46,6 +46,7 @@ struct CongFilePropertiesDialogDetails
 
 	gulong sigid_end_edit;
 	gulong sigid_set_dtd;
+	gulong sigid_set_url;
 };
 
 static gboolean
@@ -64,6 +65,11 @@ static void
 on_doc_set_dtd_ptr (CongDocument *doc,
 		    xmlDtdPtr dtd_ptr,
 		    gpointer user_data);
+
+static void
+on_doc_set_url (CongDocument *doc,
+		const gchar *new_url,
+		gpointer user_data);
 
 #include "cong-attribute-editor.h"
 
@@ -103,6 +109,32 @@ cong_util_load_glade_file (const gchar *filename,
 	g_free(glade_filename);
 
 	return xml;
+}
+
+static void
+refresh_filename_and_location (CongFilePropertiesDialogDetails *dialog_details,
+			       CongDocument *doc)
+{
+	/* Filename: */
+	{
+		gchar *filename;
+		filename = cong_document_get_filename (doc);
+		
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_name")), 
+				     filename);
+		g_free (filename);			
+		
+	}
+	
+	/* Location: */
+	{
+		gchar *path;
+		path = cong_document_get_parent_uri (doc);
+		
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_location")), 
+				     path);
+		g_free (path);
+	}
 }
 
 static const gchar*
@@ -244,28 +276,13 @@ cong_file_properties_dialog_new (CongDocument *doc,
 
 	dialog = glade_xml_get_widget(dialog_details->xml, "common_dialog");
 
-	/* Filename: */
-	{
-		gchar *filename;
-		filename = cong_document_get_filename (doc);
-		
-		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_name")), 
-				     filename);
-		g_free (filename);			
-		
-	}
+	/* Filename & Location: */
+	refresh_filename_and_location (dialog_details, doc);
 	
-	/* Location: */
-	{
-		gchar *path;
-		path = cong_document_get_parent_uri (doc);
-		
-		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_location")), 
-				     path);
-		g_free (path);
-	}
-	
-	/* FIXME: wire up a signal to update name and location */
+	dialog_details->sigid_set_url =  g_signal_connect_after (G_OBJECT (doc),
+								 "set_url",
+								 G_CALLBACK (on_doc_set_url),
+								 dialog_details);
 	
 	/* Modified: */
 	{
@@ -335,6 +352,8 @@ on_dialog_destroy (GtkWidget *widget,
 {
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 
+	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
+				     dialog_details->sigid_set_url);
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
 				     dialog_details->sigid_end_edit);
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
@@ -420,4 +439,17 @@ on_doc_set_dtd_ptr (CongDocument *doc,
 
 	refresh_dtd_stuff (dialog_details, 
 			   doc);
+}
+
+static void
+on_doc_set_url (CongDocument *doc,
+		const gchar *new_url,
+		gpointer user_data)
+{
+	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
+	g_assert (IS_CONG_DOCUMENT (doc));
+	g_assert (new_url);
+
+	refresh_filename_and_location (dialog_details,
+				       doc);
 }

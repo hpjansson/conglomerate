@@ -61,6 +61,10 @@ static void
 cong_document_handle_set_dtd_ptr (CongDocument *doc,
 				  xmlDtdPtr dtd_ptr);
 
+static void
+cong_document_handle_set_url (CongDocument *doc,
+			      const gchar *new_url);
+
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
 #define DEBUG_MVC 0
@@ -89,6 +93,7 @@ enum {
 	SELECTION_CHANGE,
 	CURSOR_CHANGE,
 	SET_DTD_PTR,
+	SET_URL,
 
 	LAST_SIGNAL
 };
@@ -156,6 +161,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	klass->selection_change = cong_document_handle_selection_change;
 	klass->cursor_change = cong_document_handle_cursor_change;
 	klass->set_dtd_ptr = cong_document_handle_set_dtd_ptr;
+	klass->set_url = cong_document_handle_set_url;
 
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
@@ -265,6 +271,14 @@ cong_document_class_init (CongDocumentClass *klass)
 					     cong_cclosure_marshal_VOID__CONGNODEPTR,
 					     G_TYPE_NONE, 
 					     1, G_TYPE_POINTER);
+	signals[SET_URL] = g_signal_new ("set_url",
+					 CONG_DOCUMENT_TYPE,
+					 G_SIGNAL_RUN_LAST,
+					 G_STRUCT_OFFSET(CongDocumentClass, set_url),
+					 NULL, NULL,
+					 g_cclosure_marshal_VOID__STRING,
+					 G_TYPE_NONE, 
+					 1, G_TYPE_STRING);
 }
 
 static void
@@ -627,17 +641,12 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 void 
 cong_document_set_url(CongDocument *doc, const gchar *url) 
 {
-	g_return_if_fail(doc);
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (url);
 
-	if (PRIVATE(doc)->url) {
-		g_free(PRIVATE(doc)->url);
-	}
-	PRIVATE(doc)->url = g_strdup(url);
-
-	/* get at primary window; set title */
-	if (PRIVATE(doc)->primary_window) {
-		cong_primary_window_update_title(PRIVATE(doc)->primary_window);
-	}
+	g_signal_emit (G_OBJECT(doc),
+		       signals[SET_URL], 0,
+		       url);
 }
 
 glong
@@ -2038,4 +2047,19 @@ cong_document_handle_set_dtd_ptr (CongDocument *doc,
 	}
 }
 
+static void
+cong_document_handle_set_url (CongDocument *doc,
+			      const gchar *new_url)
+{
+	if (PRIVATE(doc)->url) {
+		g_free(PRIVATE(doc)->url);
+	}
+	PRIVATE(doc)->url = g_strdup(new_url);
+
+	/* FIXME: replace this with signal handler? */
+	/* get at primary window; set title */
+	if (PRIVATE(doc)->primary_window) {
+		cong_primary_window_update_title(PRIVATE(doc)->primary_window);
+	}
+}
 

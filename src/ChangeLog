@@ -1,5 +1,9 @@
 2003-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-file-properties.c
+
+	Added set_url signal to CongDocument; update File->Properties dialog fields when URL changes, partially fixing bug #130728
+	
 	* cong-file-properties.c
 
 	Fixed a memory leak; removed debug logging

@@ -101,6 +101,9 @@ struct CongDocumentClass
 
 	void (*set_dtd_ptr) (CongDocument *doc,
 			     xmlDtdPtr dtd_ptr);
+
+	void (*set_url) (CongDocument *doc,
+			 const gchar *new_url);
 };
 
 GType
