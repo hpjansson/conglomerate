@@ -1,3 +1,15 @@
+2004-10-07  David Malcolm  <dmalcolm@redhat.com>
+
+	* Makefile.am: 
+
+	Remove the fo files; they were a failed experiment; the plan is to
+	eventually replace this	"functionality" with xmlroff
+
+	* fo.h, fo-parser-result.c, fo-print-context.c, fo-rect.c,
+	fo-solver-result.c, fo-tests.c:
+
+	Remove from CVS
+
 2004-10-07  Geert Stappers  <stappers@stappers.nl>
 
 	* Makefile.am:

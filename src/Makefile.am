@@ -3,21 +3,6 @@ NULL =
 
 bin_PROGRAMS = conglomerate
 
-printing_sources_dist = \
-  fo.h                      \
-  fo-parser-result.c        \
-  fo-print-context.c 	    \
-  fo-rect.c                 \
-  fo-solver-result.c        \
-  fo-tests.c                \
-  $(NULL)
-
-if ENABLE_PRINTING
-printing_sources = $(printing_sources_dist)
-else
-printing_sources = 
-endif
-
 ## http://bugzilla.gnome.org/show_bug.cgi?id=137248
 ## integrate marshal.make into this Makefile.am
 ##
@@ -329,8 +314,7 @@ conglomerate_SOURCES =      \
   plugin-validate.c         \
   plugin-website.c          \
   plugin-xsl.c              \
-  main.c		    \
-  $(printing_sources)
+  main.c
 
 INCLUDES = $(BASE_CFLAGS) \
 	$(CONGLOMERATE_CFLAGS) \
@@ -356,7 +340,6 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 
 EXTRA_DIST = Makefile.win \
 	cong.marshal marshal.make \
-	$(printing_sources_dist) \
 	$(NULL)
 
 ## Last Line
