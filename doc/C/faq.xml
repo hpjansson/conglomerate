@@ -8,32 +8,30 @@
 	<title>Conglomerate FAQ</title>
 	<para>This is a list of frequently asked questions for the Conglomerate XML editor.</para>
 	<qandaset>
-		<qandadiv id="gnomefaq">
-			<title>Gnome questions</title>
+		<qandadiv id="generalfaq">
+			<title>General questions</title>
 			<qandaentry>
 				<question>
-					<para>I use the KDE desktop. Do I have to install Gnome instead, to be able to run Conglomerate?</para>
+					<para>Why not just use XXX xml editor?</para>
 				</question>
 				<answer>
-					<para>No. Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
+					<para>Conglomerate is usable for editing all XML documents but it is not always the ideal editor. Conglomerate really comes into its own when dealing with documents which are content based rather than attribute based. Therefore it is much better for editing documents types traditionally handled in word processors rather than configuration files which require a more traditional tree structure. </para>
 				</answer>
 			</qandaentry>
 		</qandadiv>
-		<qandadiv>
+		<qandadiv id="docfaq">
+			<title>Document questions</title>
 			<qandaentry>
 				<question>
-					<para>How do I build Conglomerate from CVS?</para>
+					<para>Can Conglomerate edit an XML document of type XXX?</para>
 				</question>
 				<answer>
-					<para>The latest version of Conglomerate is stored on GNOME's CVS server as module <filename>conglomerate</filename>. Detailed instructions for doing this can be found <ulink url="http://developer.gnome.org/tools/cvs.html">here</ulink>. </para>
-					<para>You'll need Gnome 2.0 installed (or a more recent version) to build on top of. You will also need the <filename>gnome-common</filename>module from GNOME CVS. </para>
-					<para>Bear in mind that you will be playing with the raw code that the developers use, and it might be temporarily broken. Also, there can be a delay of anything up to 24 hours between the time changes happen on the main CVS server and the time they appear on the anonymous CVS server.</para>
-					<para>The CVS tree can be browsed <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;amp;cvsroot=/cvs/gnome&amp;amp;module=default">here</ulink>.</para>
+					<para>Yes, conglomerate will allow you to edit any &quot;well-formed&quot; XML document. Although having a &quot;Display Specification&quot; for the document will make it better. </para>
 				</answer>
 			</qandaentry>
 			<qandaentry>
 				<question>
-					<para>What XML document types does Conglomerate support?</para>
+					<para>What specific XML document types does Conglomerate support?</para>
 				</question>
 				<answer>
 					<para>In theory, Conglomerate can load and save any well-formed XML document, but it is much happier if it can find a Display Specification for the document type. The following document types are currently supported:</para>
@@ -69,6 +67,48 @@
 							<para>Open eBook format</para>
 						</listitem>
 					</itemizedlist>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>Can Conglomerate edit non-XML documents?</para>
+				</question>
+				<answer>
+					<para>Yes and no. You can edit non XML documents but only if the appropriate document plugin is present. The internals of conglomerate are designed to work with XML documents so to allow a non XML document to be handled it requires a plugin to convert the document to XML and back again. </para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>What is a &quot;Display Specification&quot;?</para>
+				</question>
+				<answer>
+					<para>A display specification is an XML document used by Conglomerate to hold information about how Conglomerate should display a document and how elements are to be edited. </para>
+					<para>It is designed to work alongside DTDs or XSchema files to provide information which is more specific to Conglomerate. For example, it can suggest icons that should be used for a particular XML tag. </para>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+		<qandadiv id="gnomefaq">
+			<title>Gnome questions</title>
+			<qandaentry>
+				<question>
+					<para>I use the KDE desktop. Do I have to install Gnome instead, to be able to run Conglomerate?</para>
+				</question>
+				<answer>
+					<para>No. Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+		<qandadiv id="building">
+			<title>Building Conglomerate</title>
+			<qandaentry>
+				<question>
+					<para>How do I build Conglomerate from CVS?</para>
+				</question>
+				<answer>
+					<para>The latest version of Conglomerate is stored on GNOME's CVS server as module <filename>conglomerate</filename>. Detailed instructions for doing this can be found <ulink url="http://developer.gnome.org/tools/cvs.html">here</ulink>. </para>
+					<para>You'll need Gnome 2.0 installed (or a more recent version) to build on top of. You will also need the <filename>gnome-common</filename>module from GNOME CVS. </para>
+					<para>Bear in mind that you will be playing with the raw code that the developers use, and it might be temporarily broken. Also, there can be a delay of anything up to 24 hours between the time changes happen on the main CVS server and the time they appear on the anonymous CVS server.</para>
+					<para>The CVS tree can be browsed <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;amp;cvsroot=/cvs/gnome&amp;amp;module=default">here</ulink>.</para>
 				</answer>
 			</qandaentry>
 		</qandadiv>

@@ -1,3 +1,9 @@
+2003-10-21  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* faq.xml
+
+	New content, based mostly on a patch by Jeff Martin
+
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* faq.xml
