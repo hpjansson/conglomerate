@@ -1,3 +1,23 @@
+2003-09-3  Sean Middleditch <elanthis@awesomeplay.com>
+
+	* configure.in, Makefile.am, News
+
+	 Quick suggestion for keeping the RPM spec up-to-date (it's got
+	the wrong version in 0.7.0) - use the configure script to update it.
+	I.e., make conglomerate.spec to conglomerate.spec.in, set the
+	version as @VERSION@, and add conglomerate.spec to AC_OUTPUT.
+	Then the version is always up-to-date, which is usually all
+	that needs changing in a spec file.  ^,^
+
+	* conglomerate.spec.in
+
+	New file
+
+	* conglomerate.spec
+
+	Removed
+
+
 2003-09-3  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

@@ -131,6 +131,7 @@ BASE_CFLAGS="$BASE_CFLAGS -Wall"
 dnl --- Output ---
 
 AC_OUTPUT(Makefile 
+	  conglomerate.spec
           po/Makefile.in
 	  data/Makefile
 	  doc/Makefile
