@@ -1,1 +1,4 @@
 dch --increment "expecting new upstream version"
+cp debian/changelog debian/changelog.copy
+sed -e '1s/unstable/UNRELEASED/' debian/changelog.copy > debian/changelog
+rm debian/changelog.copy
