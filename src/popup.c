@@ -666,7 +666,7 @@ add_comment_menu_items (GtkMenu *tpopup,
 			item = cong_menu_add_item (tpopup, 
 						   cong_util_make_menu_item (_("Convert to a comment"), 
 									     NULL, /* FIXME */
-									     NULL), /* FIXME: we ought to have a icon for this */
+									     cong_util_load_icon("cong-comment")),
 						   TRUE);
 			cong_menu_item_attach_callback_Document_Node_ParentWindow (item, 
 										   cong_ui_hook_tree_convert_to_comment,
@@ -683,7 +683,7 @@ add_comment_menu_items (GtkMenu *tpopup,
 			item = cong_menu_add_item (tpopup, 
 						   cong_util_make_menu_item (_("Uncomment"), 
 									     _("Convert a comment containing XML source code into the corresponding code"),
-									     NULL), /* FIXME: we ought to have a icon for this */
+									     cong_util_load_icon("cong-uncomment")),
 						   TRUE);
 			cong_menu_item_attach_callback_Document_Node_ParentWindow (item, 
 										   cong_ui_hook_tree_convert_from_comment,

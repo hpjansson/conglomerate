@@ -1,3 +1,15 @@
+2004-07-14  Jeff Martin  <jeff@custommonkey.org>
+
+	* popup.c
+
+	Added icons for comment/uncomment
+
+2004-07-13  Jeff Martin  <jeff@custommonkey.org>
+
+	* tree.c, popup.c
+
+	Added implementation of "Other Elements" menu
+
 2004-07-12  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-editor-area-unknown-tag.c, cong-editor-area-unknown-tag.h, cong-editor-node-element-unknown.c:

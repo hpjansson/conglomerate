@@ -34,6 +34,8 @@ appicons_DATA = \
 	cong-list-item-16.png \
 	cong-definition-list-16.png \
 	cong-code-fragment-16.png \
+	cong-comment-16.png \
+	cong-uncomment-16.png \
 	cong-caution-48.png \
 	cong-important-48.png \
 	cong-note-48.png \

@@ -1,3 +1,9 @@
+2004-07-14  Jeff Martin  <jeff@custommonkey.org>
+
+	* Makefile.am, cong-comment-16.png, cong-uncomment-16.png
+
+	Added icons for comment/uncomment
+
 2003-03-05  Geert Stappers  <stappers@stappers.nl>
 
 	* Makefile.am
