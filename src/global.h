@@ -218,16 +218,6 @@ void menu_callback_debug_dialog(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget);
 
-/* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
-typedef GtkDrawingArea CongEditorWidget2;
-typedef struct CongElementEditor CongElementEditor;
-
-GtkWidget *cong_editor_widget2_new(CongDocument *doc);
-CongDocument *cong_editor_widget2_get_document(CongEditorWidget2 *editor_widget);
-CongDispspec *cong_editor_widget2_get_dispspec(CongEditorWidget2 *editor_widget);
-void cong_editor_widget2_force_layout_update(CongEditorWidget2 *editor_widget);
-#define CONG_EDITOR_WIDGET2(x) ((CongEditorWidget2*)(x))
-
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
 

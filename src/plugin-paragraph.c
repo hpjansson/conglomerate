@@ -27,7 +27,6 @@
 #include "global.h"
 #include "cong-plugin.h"
 
-#include "cong-editor-widget-impl.h"
 #include "cong-eel.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"

@@ -116,13 +116,6 @@ struct CongThumbnailer
 	CongFunctionality functionality; /* base class */
 };
 
-struct CongPluginEditorElement
-{
-	CongFunctionality functionality; /* base class */
-	CongEditorElementFactoryMethod make_element;
-	gpointer user_data;
-};
-
 struct CongPluginEditorNodeFactory
 {
 	CongFunctionality functionality; /* base class */
@@ -462,35 +455,6 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 	return print_method;
 }
 #endif
-
-CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
-							     const gchar *name, 
-							     const gchar *description,
-							     const gchar *id,
-							     CongEditorElementFactoryMethod factory_method,
-							     gpointer user_data)
-{
-	CongPluginEditorElement *editor_element_factory;
-
-	g_return_val_if_fail(plugin, NULL);
-	g_return_val_if_fail(name, NULL);
-	g_return_val_if_fail(description, NULL);
-	g_return_val_if_fail(id, NULL);
-
-        editor_element_factory = g_new0(CongPluginEditorElement,1);
-
-	editor_element_factory->functionality.plugin = plugin;
-	editor_element_factory->functionality.name = g_strdup(name);
-	editor_element_factory->functionality.description = g_strdup(description);
-	editor_element_factory->functionality.functionality_id = g_strdup(id);
-	editor_element_factory->make_element = factory_method;
-	editor_element_factory->user_data = user_data;
-
-	/* Add to plugin's list: */
-	plugin->list_of_editor_element = g_list_append(plugin->list_of_editor_element, editor_element_factory);
-
-	return editor_element_factory;
-}
 
 CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
 								      const gchar *name, 
@@ -1166,57 +1130,6 @@ gboolean cong_ui_load_imported_file_content(const gchar *uri,
 	g_assert(*buffer);
 
 	return TRUE;
-}
-
-CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widget, 
-						  CongNodePtr node, 
-						  CongDispspecElement *element)
-{
-	CongElementEditor *element_editor;
-	gchar *message;
-	const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id(element);
-
-#if 1
-	GList *plugin_iter;
-
-	for (plugin_iter=cong_app_singleton()->plugin_manager->list_of_plugin; plugin_iter; plugin_iter = plugin_iter->next) {
-		GList *editor_element_iter;
-		CongPlugin *plugin = plugin_iter->data;		
-
-		g_assert(plugin);
-
-		for (editor_element_iter=plugin->list_of_editor_element; editor_element_iter; editor_element_iter = editor_element_iter->next) {
-			CongPluginEditorElement *plugin_editor_element = editor_element_iter->data;
-
-			g_assert(plugin_editor_element);
-
-			if (0==strcmp(CONG_FUNCTIONALITY(plugin_editor_element)->functionality_id, plugin_id)) {
-				g_assert(plugin_editor_element->make_element);
-				return plugin_editor_element->make_element(plugin_editor_element, editor_widget, node, plugin_editor_element->user_data);
-			}
-		}
-	}
-
-	/* Handle the "plugin not found" case: */
-	{
-#if 1
-		return cong_section_head_editor_new(editor_widget, node);
-#else
-		message = g_strdup_printf(_("Unrecognised plugin (id=\"%s\")"), cong_dispspec_element_get_editor_plugin_id(element));
-		element_editor = cong_dummy_element_editor_new(editor_widget, node, message);
-
-		g_free(message);
-#endif
-	}
-#else	
-	message = g_strdup_printf("Plugin (id=\"%s\")", cong_dispspec_element_get_plugin_id(element));
-	element_editor = cong_dummy_element_editor_new(editor_widget, node, message);
-
-	g_free(message);
-#endif
-
-	return element_editor;
-
 }
 
 CongEditorNodeElement*

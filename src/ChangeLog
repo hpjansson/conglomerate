@@ -1,3 +1,9 @@
+2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-plugin.c, cong-plugin.h, cong-primary-window.c, global.h, plugin-lists.c, plugin-paragraph.c, plugin-xsl.c, Makefile.am
+
+	Removed references to old editor widget (CongEditorWidget2)
+
 2003-09-21  Geert Stappers <stappers@stappers.nl>
 
 	* cong-file-print.c & cong-file-export.c

@@ -27,7 +27,6 @@
 #include "global.h"
 #include "cong-plugin.h"
 
-#include "cong-editor-widget-impl.h"
 #include "cong-eel.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
@@ -35,6 +34,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#if 0
 typedef struct CongXSLTemplateElementEditor CongXSLTemplateElementEditor;
 struct CongXSLTemplateElementEditor
 {
@@ -303,18 +303,22 @@ static CongElementEditor* manufacture_element(CongPluginEditorElement *plugin_ed
 	return cong_dummy_element_editor_new(editor_widget, node, "This will be the XSL template element");
 #endif
 }
+#endif
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_xsl_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
-	
+
+	/* FIXME: port all of this code over to the CongEditorWidget3 framework: */
+#if 0	
 	cong_plugin_register_editor_element(plugin, 
 					    _("XSL Template Element"), 
 					    _("An element for visualising template rules in an XSL stylesheet"),
 					    "xsl-template",
 					    manufacture_element,
 					    NULL);
+#endif
 
 	return TRUE;
 }

@@ -25,7 +25,6 @@
 #ifndef __CONG_PLUGIN_H__
 #define __CONG_PLUGIN_H__
 
-#include "cong-editor-widget-impl.h"
 #include "cong-editor-widget.h"
 #include "cong-editor-node-element.h"
 
@@ -48,7 +47,6 @@ typedef struct CongExporter CongExporter;
 typedef struct CongPrintMethod CongPrintMethod;
 #endif
 typedef struct CongThumbnailer CongThumbnailer;
-typedef struct CongPluginEditorElement CongPluginEditorElement;
 typedef struct CongPluginEditorNodeFactory CongPluginEditorNodeFactory;
 
 typedef struct CongTool CongTool;
@@ -102,7 +100,6 @@ typedef gboolean (*CongPrintMethodDocumentFilter)(CongPrintMethod *print_method,
 typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
 #endif
 
-typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget2 *editor_widget, CongNodePtr node, gpointer user_data);
 typedef CongEditorNodeElement* (*CongEditorNodeFactoryMethod)(CongPluginEditorNodeFactory *plugin_editor_node_factory, CongEditorWidget3 *editor_widget, CongNodePtr node, CongEditorNode *traversal_parent, gpointer user_data);
 
 /* 
@@ -173,12 +170,6 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 					    CongPrintMethodActionCallback action_callback,
 					    gpointer user_data);
 #endif
-CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
-							     const gchar *name, 
-							     const gchar *description,
-							     const gchar *plugin_id,
-							     CongEditorElementFactoryMethod factory_method,
-							     gpointer user_data);
 CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
 								      const gchar *name, 
 								      const gchar *description,
@@ -336,10 +327,6 @@ void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDrui
 
 /* Method to get toplevel window of the assistant; useful when displaying error dialogs */
 GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant);
-
-CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widget, 
-						  CongNodePtr node, 
-						  CongDispspecElement *element);
 
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,

@@ -63,8 +63,6 @@ conglomerate_SOURCES =      \
   cong-editor-node-entity-ref.h \
   cong-editor-node-text.h        \
   cong-editor-node-unimplemented.h \
-  cong-editor-widget.h	\
-  cong-editor-widget-impl.h \
   cong-editor-widget3-impl.h \
   cong-eel.h                \
   cong-enum-mapping.h       \
@@ -101,7 +99,6 @@ conglomerate_SOURCES =      \
   cong-document.c           \
   cong-dom-view.c           \
   cong-dtd.c                \
-  cong-dummy-element-editor.c  \
   cong-editor-area.c        \
   cong-editor-area-bin.c    \
   cong-editor-area-border.c \
@@ -139,10 +136,8 @@ conglomerate_SOURCES =      \
   cong-editor-node-entity-ref.c \
   cong-editor-node-text.c        \
   cong-editor-node-unimplemented.c \
-  cong-editor-widget.c      \
   cong-editor-widget3.c     \
   cong-eel.c                \
-  cong-element-editor.c     \
   cong-enum-mapping.c       \
   cong-error-dialog.c       \
   cong-error-file-open.c    \
@@ -168,9 +163,7 @@ conglomerate_SOURCES =      \
   cong-primary-window.c     \
   cong-progress-checklist.c \
   cong-range.c              \
-  cong-section-head-editor.c \
   cong-source-view.c        \
-  cong-span-text-editor.c   \
   cong-text-cache.c         \
   cong-tree-view.c          \
   cong-util.c               \
