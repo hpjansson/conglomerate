@@ -125,46 +125,65 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 	{
 
 		/* Add a v-spacer: */
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_vcompose),
-						       cong_editor_area_spacer_new (editor_widget,
-										    GTK_ORIENTATION_VERTICAL,
-										    V_SPACING));
+		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
+						cong_editor_area_spacer_new (editor_widget,
+									     GTK_ORIENTATION_VERTICAL,
+									     V_SPACING),
+						FALSE,
+						FALSE,
+						0);
 		
 		/* Add the h-composer: */
 		PRIVATE(area_structural_tag)->title_hcompose = cong_editor_area_composer_new (editor_widget,
 											      GTK_ORIENTATION_HORIZONTAL,
 											      H_INDENT);
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_vcompose),
-						       PRIVATE(area_structural_tag)->title_hcompose);
+		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
+						PRIVATE(area_structural_tag)->title_hcompose,
+						FALSE,
+						FALSE,
+						0);
+
 		
 		/* Add a v-spacer: */
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_vcompose),
-						       cong_editor_area_spacer_new (editor_widget,
-										    GTK_ORIENTATION_VERTICAL,
-										    V_SPACING));
+		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
+						cong_editor_area_spacer_new (editor_widget,
+									     GTK_ORIENTATION_VERTICAL,
+									     V_SPACING),
+						FALSE,
+						FALSE,
+						0);
 		
 		/* Build up the content of the h-composer: */
 		{
 			/* Add a h-spacer: */
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_hcompose),
-							       cong_editor_area_spacer_new (editor_widget,
-											    GTK_ORIENTATION_HORIZONTAL,
-											    H_INDENT));
+			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
+							cong_editor_area_spacer_new (editor_widget,
+										     GTK_ORIENTATION_HORIZONTAL,
+										     H_INDENT),
+							FALSE,
+							FALSE,
+							0);
 			
 			/* Add the pixbuf (if any): */
 			if (pixbuf) {
 				PRIVATE(area_structural_tag)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
 													  pixbuf);
-				cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_hcompose),
-								       PRIVATE(area_structural_tag)->title_pixbuf);		
+				cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
+								PRIVATE(area_structural_tag)->title_pixbuf,
+								FALSE,
+								FALSE,
+								0);		
 			}
 			
 			/* Add the title text: */
 			PRIVATE(area_structural_tag)->title_text = cong_editor_area_text_new (editor_widget,
 											      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 											      text);
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_structural_tag)->title_hcompose),
-							       PRIVATE(area_structural_tag)->title_text);
+			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
+							PRIVATE(area_structural_tag)->title_text,
+							FALSE,
+							FALSE,
+							0);		
 		}
 	}
 

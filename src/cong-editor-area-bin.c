@@ -111,9 +111,12 @@ static void
 update_requisition (CongEditorArea *area, 
 		    int width_hint)
 {
+	CongEditorAreaBin *bin;
 	const GtkRequisition *child_req;
 
-	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area);
+	g_return_if_fail (IS_CONG_EDITOR_AREA_BIN(area));
+
+	bin = CONG_EDITOR_AREA_BIN(area);	
 
 	if (PRIVATE(bin)->only_child) {
 

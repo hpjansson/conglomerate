@@ -30,9 +30,20 @@
 
 struct CongEditorAreaComposerDetails
 {
-	GList *list_of_children;
+	GList *list_of_child_details;
 	GtkOrientation orientation;
 	guint spacing;
+};
+
+
+typedef struct CongEditorAreaComposerChildDetails CongEditorAreaComposerChildDetails;
+
+struct CongEditorAreaComposerChildDetails
+{
+	CongEditorArea *child;
+	gboolean expand;
+	gboolean fill;
+	guint extra_padding;
 };
 
 /* Method implementation prototypes: */
@@ -108,6 +119,33 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 		 spacing);
 }
 
+void
+cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
+				CongEditorArea *child,
+				gboolean expand,
+				gboolean fill,
+				guint extra_padding)
+{
+	CongEditorAreaComposerChildDetails *child_details;
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	child_details = g_new0(CongEditorAreaComposerChildDetails,1);
+
+	child_details->child = child;
+	child_details->expand = expand;
+	child_details->fill = fill;
+	child_details->extra_padding = extra_padding;
+
+	PRIVATE(area_composer)->list_of_child_details = g_list_append (PRIVATE(area_composer)->list_of_child_details, 
+								       child_details);
+
+	/* FIXME: need to flag things as being invalid etc... */
+
+}
+
+
 /* Method implementation definitions: */
 static void 
 update_requisition (CongEditorArea *area, 
@@ -117,6 +155,7 @@ update_requisition (CongEditorArea *area,
 	GtkRequisition result;
 	GList *iter;
 	int child_count = 0;
+	gint extra_padding = 0;
 
 	g_message ("composer::update_requisition");
 
@@ -124,17 +163,22 @@ update_requisition (CongEditorArea *area,
 	result.height = 0;
 
 	/* Get size requisition for all kids, add in the appropriate axis: */
-	for (iter = PRIVATE(area_composer)->list_of_children; iter; iter=iter->next) {
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+		CongEditorAreaComposerChildDetails *child_details;
 		CongEditorArea *child;
 		const GtkRequisition *child_req;
 
-		child = CONG_EDITOR_AREA(iter->data);
+		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		child = CONG_EDITOR_AREA(child_details->child);
+		g_assert (child);
+
+		extra_padding += child_details->extra_padding;
 
 		cong_editor_area_update_requisition (child, 
 						     width_hint);
 
 		child_req = cong_editor_area_get_requisition (child);
-		g_assert(child_req);
+		g_assert(child_req);		
 
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
 			result.width += child_req->width;
@@ -153,9 +197,9 @@ update_requisition (CongEditorArea *area,
 
 	if (child_count>1) {
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			result.width += PRIVATE(area_composer)->spacing * (child_count-1);
+			result.width += (PRIVATE(area_composer)->spacing * (child_count-1)) + extra_padding;
 		} else {
-			result.height += PRIVATE(area_composer)->spacing * (child_count-1);
+			result.height += (PRIVATE(area_composer)->spacing * (child_count-1)) + extra_padding;
 		}		
 	}
 
@@ -167,36 +211,98 @@ update_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area)
 {
-#if 1
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area);
 	GList *iter;
 	gint x;
 	gint y;
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
+	const GtkRequisition *this_req = cong_editor_area_get_requisition (area);
+	gint total_surplus_space = 0;
+	gint surplus_space_per_expandable_child = 0;
+	guint num_expandable_children = 0;
 
 	x = rect->x;
 	y = rect->y;
 
-	for (iter = PRIVATE(area_composer)->list_of_children; iter; iter=iter->next) {
-		CongEditorArea *child = CONG_EDITOR_AREA(iter->data);
-		const GtkRequisition *child_req = cong_editor_area_get_requisition (child);
+	/* First pass: calculate the num expandable children, the amount of surplus space and hence the amount per expandable child: */
+	{
+		for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+			CongEditorAreaComposerChildDetails *child_details;
+			CongEditorArea *child;
+			
+			child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+			child = CONG_EDITOR_AREA(child_details->child);
+			
+			if (child_details->expand) {
+				num_expandable_children++;
+			}
+		}
+		
+		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
+			total_surplus_space = rect->width - this_req->width;
+		} else {
+			total_surplus_space = rect->height - this_req->height;
+		}
+		
+		if (total_surplus_space<0) {
+			total_surplus_space = 0;
+		}
+		
+		if (num_expandable_children>0) {
+			surplus_space_per_expandable_child = total_surplus_space/num_expandable_children;
+			g_message("surplus space per:%i",surplus_space_per_expandable_child);
+		}
+	}
+
+
+	/* Second pass: allocate all the space: */
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+		CongEditorAreaComposerChildDetails *child_details;
+		CongEditorArea *child;
+		const GtkRequisition *child_req;
+		int child_width;
+		int child_height;
+		int extra_offset;
+
+		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		child = CONG_EDITOR_AREA(child_details->child);
+
+		child_req = cong_editor_area_get_requisition (child);
 		g_assert(child_req);
+
+		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
+			child_width = child_req->width;
+			child_height = rect->height;
+		} else {
+			child_width = rect->width;
+			child_height = child_req->height;
+		}
+		extra_offset = child_details->extra_padding;
+
+		if (child_details->expand) {
+			extra_offset += surplus_space_per_expandable_child;
+
+			if (child_details->fill) {
+				if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
+					child_width += surplus_space_per_expandable_child;
+				} else {
+					child_height += surplus_space_per_expandable_child;
+				}
+			}
+		}
 
 		cong_editor_area_set_allocation (child,
 						 x,
 						 y,
-						 child_req->width,
-						 child_req->height);
-
+						 child_width,
+						 child_height);
+		
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-			x += child_req->width + PRIVATE(area_composer)->spacing;
+			x += child_req->width + PRIVATE(area_composer)->spacing + extra_offset;
 		} else {
-			y += child_req->height + PRIVATE(area_composer)->spacing;
+			y += child_req->height + PRIVATE(area_composer)->spacing + extra_offset;
 		}
 	}
-#else
-	g_message("unimplemented (area_composer->allocate_child_space)");
-#endif
 }
 
 static void 
@@ -207,8 +313,14 @@ for_all (CongEditorArea *editor_area,
 	GList *iter;
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(editor_area);
 
-	for (iter = PRIVATE(area_composer)->list_of_children; iter; iter=iter->next) {
-		(*func)(CONG_EDITOR_AREA(iter->data), user_data);
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+		CongEditorAreaComposerChildDetails *child_details;
+		CongEditorArea *child;
+
+		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		child = CONG_EDITOR_AREA(child_details->child);
+		
+		(*func)(child, user_data);
 	}
 }
 
@@ -219,8 +331,10 @@ add_child ( CongEditorAreaContainer *area_container,
 {
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
 
-	PRIVATE(area_composer)->list_of_children = g_list_append (PRIVATE(area_composer)->list_of_children, 
-								  child);
-
-	/* FIXME: need to flag things as being invalid etc... */
+	cong_editor_area_composer_pack (area_composer,
+					child,
+					TRUE,
+					TRUE,
+					0);
+	
 }

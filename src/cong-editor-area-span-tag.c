@@ -120,8 +120,6 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 
 	PRIVATE(area_span_tag)->ds_element = ds_element;
 
-
-#if 1
 	/* Build it as a vertical composition */
 	PRIVATE(area_span_tag)->span_vcompose = cong_editor_area_composer_new (editor_widget,
 									       GTK_ORIENTATION_VERTICAL,
@@ -151,16 +149,19 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 				
 			/* anon "disappear if not enough space" */
 			anon_disappear = cong_editor_area_bin_new (editor_widget); /* for now */
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_hcompose),
-							       anon_disappear);
-
+			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(anon_hcompose),
+							anon_disappear,
+							FALSE,
+							FALSE,
+							0);
+			
 			{
 
 				CongEditorArea *inner_anon_hcompose = cong_editor_area_composer_new (editor_widget,
 												     GTK_ORIENTATION_HORIZONTAL,
 												     5);
-				cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_disappear),
-								       inner_anon_hcompose);
+				cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(anon_disappear),
+								      inner_anon_hcompose);
 				
 				/* inner anon hcompose */
 				{
@@ -174,9 +175,11 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 					PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
 													cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
 													text);
-					cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(inner_anon_hcompose),
-									       PRIVATE(area_span_tag)->title_text);
-					
+					cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(inner_anon_hcompose),
+									PRIVATE(area_span_tag)->title_text,
+									FALSE,
+									FALSE,
+									0);
 				}
 			}
 			
@@ -187,53 +190,6 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 							       PRIVATE(area_span_tag)->span_line_right);
 		}
 	}
-#else
-	PRIVATE(area_span_tag)->title_vcompose = 
-	/* Build the title bar: */
-	{
-
-		/* Add a v-spacer: */
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->title_vcompose),
-						       cong_editor_area_spacer_new (editor_widget,
-										    GTK_ORIENTATION_VERTICAL,
-										    V_SPACING));
-		
-		/* Add the h-composer: */
-		PRIVATE(area_span_tag)->title_hcompose = 
-		
-		/* Add a v-spacer: */
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->title_vcompose),
-						       cong_editor_area_spacer_new (editor_widget,
-										    GTK_ORIENTATION_VERTICAL,
-										    V_SPACING));
-		
-		/* Build up the content of the h-composer: */
-		{
-			/* Add a h-spacer: */
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->title_hcompose),
-							       cong_editor_area_spacer_new (editor_widget,
-											    GTK_ORIENTATION_HORIZONTAL,
-											    H_INDENT));
-			
-			/* Add the pixbuf (if any): */
-			if (pixbuf) {
-				PRIVATE(area_span_tag)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
-													  pixbuf);
-				cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->title_hcompose),
-								       PRIVATE(area_span_tag)->title_pixbuf);		
-			}
-			
-			/* Add the title text: */
-			PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
-											cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
-											text);
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->title_hcompose),
-							       PRIVATE(area_span_tag)->title_text);
-		}
-	}
-
-	PRIVATE(area_span_tag)->inner_bin = cong_editor_area_bin_new (editor_widget);
-#endif
 
 	return CONG_EDITOR_AREA (area_span_tag);
 }
