@@ -1,3 +1,13 @@
+2003-08-13  Geert Stappers <stappers@stappers.nl>
+
+	* cong-editor-area-flow-holder-blocks.c
+
+	Fixed a C99-ism
+
+	* cong-editor-area-flow-holder-inlines.c
+
+	Fixed a C99-ism
+
 2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-flow-holder-blocks.c

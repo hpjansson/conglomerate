@@ -208,6 +208,7 @@ cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInline
 void
 cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
+	CongDocument *doc ;
 #if 1
 	
 #if DEBUG_LINE_FLOWS
@@ -224,7 +225,7 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
 	  This ought to be easy, efficient, and stop almost all redundant caclulations.
 	 */
 	
-	CongDocument *doc = cong_editor_area_get_document (CONG_EDITOR_AREA (area_flow_holder_inlines));
+	doc = cong_editor_area_get_document (CONG_EDITOR_AREA (area_flow_holder_inlines));
 	g_assert (doc);
 
 	if (cong_document_is_within_edit (doc)) {

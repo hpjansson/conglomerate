@@ -198,6 +198,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks = CONG_EDITOR_AREA_FLOW_HOLDER_BLOCKS(area_flow_holder);
 	CongEditorAreaFlowHolder *child_flow_holder = NULL;
 	CongNodePtr doc_node;
+	CongEditorNode *iter;
 
 	enum CongFlowType flow_type;
 
@@ -224,7 +225,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 					g_message("splitting existing inline");
 
 					/* Remove all following INLINE editor nodes from their inline, building a list.  We will add them back later. */
-					CongEditorNode *iter = editor_node_next;
+					iter = editor_node_next;
 
 					while (iter) {
 						if (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(iter)) {
