@@ -31,12 +31,6 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_NODE_LIFETIMES 0
 
-enum CongFlowType
-{
-	CONG_FLOW_TYPE_BLOCK,
-	CONG_FLOW_TYPE_INLINE
-};
-
 #define CONG_EDITOR_NODE_TYPE	      (cong_editor_node_get_type ())
 #define CONG_EDITOR_NODE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_NODE_TYPE, CongEditorNode)
 #define CONG_EDITOR_NODE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_TYPE, CongEditorNodeClass)
@@ -97,9 +91,6 @@ cong_editor_node_generate_area (CongEditorNode *editor_node);
 
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);
-
-const gchar*
-cong_flow_type_get_debug_string(enum CongFlowType flow_type);
 
 G_END_DECLS
 

@@ -134,17 +134,6 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 						       (editor_node));
 }
 
-const gchar*
-cong_flow_type_get_debug_string(enum CongFlowType flow_type)
-{
-	switch (flow_type) {
-	default: g_assert_not_reached();
-	case CONG_FLOW_TYPE_BLOCK: return "FLOW_TYPE_BLOCK";
-	case CONG_FLOW_TYPE_INLINE: return "FLOW_TYPE_INLINE";
-	}
-}
-
-
 static enum CongFlowType
 get_flow_type(CongEditorNode *editor_node)
 {

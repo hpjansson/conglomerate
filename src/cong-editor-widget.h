@@ -28,6 +28,13 @@
 G_BEGIN_DECLS
 
 /* Third attempt at an editor widget: */
+
+enum CongFlowType
+{
+	CONG_FLOW_TYPE_BLOCK,
+	CONG_FLOW_TYPE_INLINE
+};
+
 #define CONG_EDITOR_WIDGET3_TYPE	 (cong_editor_widget3_get_type ())
 #define CONG_EDITOR_WIDGET3(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3)
 #define CONG_EDITOR_WIDGET3_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3Class)
@@ -81,6 +88,9 @@ CongEditorArea*
 cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 				 gint x,
 				 gint y);
+
+const gchar*
+cong_flow_type_get_debug_string(enum CongFlowType flow_type);
 
 G_END_DECLS
 

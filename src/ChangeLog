@@ -1,5 +1,9 @@
 2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h
+
+	Moved the flow types from the editor-node files into the widget source files
+	
 	* cong-editor-widget3.c
 
 	Use the flow-holder code to create and lay out the children of an XML node
