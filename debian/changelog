@@ -2,6 +2,9 @@ conglomerate (0.7.15-0.4) UNRELEASED; urgency=low
 
   * expecting new upstream version
     - ships with a Linda override file
+  * control:
+    - Removed old library from Build-Depends, Closes: #275004
+    - Build-Depends extended with libenchant-dev for spell checking
   * rules:
     - enable printing at configure time
     - enable spell check "enchant" at configure time
@@ -9,9 +12,6 @@ conglomerate (0.7.15-0.4) UNRELEASED; urgency=low
     - install the ChangeLog from the src directory
     - install the Linda override file
     - clean support for a debug (unstripped) package
-  * control:
-    - Removed old library from Build-Depends, Closes: #275004
-    - Build-Depends extended with libenchant-dev to enable spell checking
 
  -- Geert Stappers <stappers@stappers.nl>  Mon,  1 Nov 2004 12:36:32 +0100
 
