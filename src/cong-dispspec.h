@@ -121,6 +121,14 @@ cong_dispspec_type (CongDispspec *ds,
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds);
 
+void
+cong_dispspec_for_each_element (CongDispspec *ds, 
+				void
+				(*callback) (CongDispspec *ds,
+					     CongDispspecElement *ds_element,
+					     gpointer user_data),
+				gpointer user_data);
+
 /* Manipulating a dispspec: */
 void cong_dispspec_add_element (CongDispspec* ds, 
 				CongDispspecElement* element);

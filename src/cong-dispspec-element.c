@@ -379,14 +379,6 @@ cong_dispspec_element_get_value_for_key (const gchar *key,
 				    key);
 }
 
-CongDispspecElement*
-cong_dispspec_element_next(CongDispspecElement* element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return element->next;
-}
-
 enum CongElementType
 cong_dispspec_element_type(CongDispspecElement *element)
 {

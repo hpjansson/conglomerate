@@ -65,9 +65,7 @@ struct CongDispspec
 	/* The CongDocumentModels: */
 	CongExternalDocumentModel *document_models[NUM_CONG_DOCUMENT_MODEL_TYPES];
 
-	/* Implementation is an "intrusive list" of CongDispspecElement structs */ 
-	CongDispspecElement* first;
-	CongDispspecElement* last;
+	GList *list_of_elements;
 
 	/* We have a search tree, indexed by SearchTreeKeys */
 	GTree *search_tree; 
@@ -380,9 +378,10 @@ xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
 
 		/* The elements: */
 		{
-			CongDispspecElement* element;
+			GList *iter;
+			for (iter = dispspec->list_of_elements; iter; iter=iter->next) {
+				CongDispspecElement *element = (CongDispspecElement *)iter->data;
 			
-			for (element = dispspec->first; element; element = cong_dispspec_element_next (element)) {
 				xmlNodePtr element_as_xml = cong_dispspec_element_to_xml (element,
 											  xml_doc);
 				g_assert (element_as_xml);
@@ -549,8 +548,33 @@ cong_dispspec_get_first_element(CongDispspec *ds)
 {
 	g_return_val_if_fail(ds, NULL);
 
-	return ds->first;
+	if (ds->list_of_elements) {
+		return (CongDispspecElement*)(ds->list_of_elements->data);
+	} else {
+		return NULL;
+	}
 }
+
+void
+cong_dispspec_for_each_element (CongDispspec *ds, 
+				void
+				(*callback) (CongDispspec *ds,
+					     CongDispspecElement *ds_element,
+					     gpointer user_data),
+				gpointer user_data)
+{
+	GList *iter;
+	
+	g_return_if_fail (ds);
+	g_return_if_fail (callback);
+
+	for (iter=ds->list_of_elements; iter; iter=iter->next) {
+		(*callback) (ds,
+			     (CongDispspecElement*)iter->data,
+			     user_data);
+	}
+}
+
 
 /* Manipulating a dispspec: */
 void cong_dispspec_add_element (CongDispspec* ds, 
@@ -561,17 +585,11 @@ void cong_dispspec_add_element (CongDispspec* ds,
 	g_return_if_fail(ds);
 	g_return_if_fail(element);
 
-	g_assert(element->next==NULL);
+
 	g_assert(element->local_name);
 
-	if (ds->first) {
-		g_assert(ds->last);
-		ds->last->next = element;
-	} else {
-		ds->first = element;
-	}
-
-	ds->last = element;
+	ds->list_of_elements = g_list_append (ds->list_of_elements,
+					      element);
 
 	key = g_new0(struct SearchTreeKey, 1);
 	if (element->ns_uri) {
@@ -586,14 +604,14 @@ guint
 cong_dispspec_get_num_elements (CongDispspec *ds)
 {
 	guint count;
-	CongDispspecElement *ds_iter;
+	GList *iter;
 
 	g_return_val_if_fail (ds, 0);
 
 	/* o(n): */
 
 	count = 0;
-	for (ds_iter = ds->first; ds_iter; ds_iter=ds_iter->next) {
+	for (iter = ds->list_of_elements; iter; iter=iter->next) {
 		count++;
 	}
 	return count;	
@@ -604,16 +622,16 @@ cong_dispspec_get_element (CongDispspec *ds,
 			   guint index)
 {
 	guint count;
-	CongDispspecElement *ds_iter;
+	GList *iter;
 
 	g_return_val_if_fail (ds, NULL);
 
 	/* o(n): */
 
 	count = 0;
-	for (ds_iter = ds->first; ds_iter; ds_iter=ds_iter->next) {
+	for (iter = ds->list_of_elements; iter; iter=iter->next) {
 		if (count==index) {
-			return ds_iter;
+			return (CongDispspecElement*)iter->data;
 		}
 
 		count++;

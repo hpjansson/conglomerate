@@ -150,10 +150,27 @@ GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 	return list;
 }
 
+static void
+add_span_callback (CongDispspec *ds,
+		   CongDispspecElement *ds_element,
+		   gpointer user_data)
+{
+	GList **list_ptr = (GList**)user_data;
+
+	g_assert (ds);
+	g_assert (ds_element);
+	g_assert (list_ptr);
+
+	if (cong_dispspec_element_is_span (ds_element)) {
+		/*  prepend node to list */
+		*list_ptr = g_list_prepend (*list_ptr,
+					    ds_element);
+	}
+}
+
 GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node) 
 {
 	GList* list = NULL;
-	CongDispspecElement *ds_element;
 
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(node, NULL);
@@ -167,20 +184,15 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
 	}
 
 	/* FIXME: this adds all span tags; it makes no validity checks */
-
-	for (ds_element = cong_dispspec_get_first_element(ds); ds_element; ds_element = cong_dispspec_element_next(ds_element))
-	{
-		if (cong_dispspec_element_is_span(ds_element)) {
-			/*  prepend node to list */
-			list = g_list_prepend(list, (gpointer *) ds_element);			
-		}
-	}
+	cong_dispspec_for_each_element (ds,
+					add_span_callback,
+					&list);
 
 	return list;
 }
 
 /**
- * xml_add+required_children
+ * xml_add_required_children
  * @doc:
  * @node:
  *
@@ -850,6 +862,27 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 	return list;
 }
 
+struct add_element_data
+{
+	GList *list;
+	enum CongElementType tag_type;
+};
+
+static void
+add_element_cb (CongDispspec *ds,
+		CongDispspecElement *ds_element,
+		gpointer user_data)
+{
+	struct add_element_data *add_element_data = (struct add_element_data*)user_data;
+
+	if (should_include_element (ds_element,
+				    add_element_data->tag_type)) {
+		add_element_data->list = g_list_prepend (add_element_data->list, 
+							 ds_element);
+	}
+}
+		
+
 /**
  * xml_get_elements_from_dispspec
  * @ds:
@@ -860,18 +893,20 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
  * 
  * Returns:
  */
-static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementType tag_type) {
-	CongDispspecElement *element;
-	GList* list = NULL;
+static GList* 
+xml_get_elements_from_dispspec (CongDispspec* ds,
+				enum CongElementType tag_type)
+{
 
-	for (element = cong_dispspec_get_first_element(ds); element; element = cong_dispspec_element_next(element)) {
-		if (should_include_element (element,
-					    tag_type)) {
-			list = g_list_prepend(list, element);
-		}
-	}
+	struct add_element_data add_element_data;
+	add_element_data.list = NULL;
+	add_element_data.tag_type = tag_type;
+
+	cong_dispspec_for_each_element (ds,
+					add_element_cb,
+					&add_element_data);
 	
-	return list;
+	return add_element_data.list;
 }
 
 /* Extensions to libxml: */

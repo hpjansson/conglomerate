@@ -64,8 +64,6 @@ struct CongDispspecElement
 	gchar *property_dialog_service_id;
 
 	GHashTable *key_value_hash;
-
-	struct CongDispspecElement* next;	
 };
 
 G_BEGIN_DECLS
@@ -145,9 +143,6 @@ cong_dispspec_element_get_value_for_key (const gchar *key,
 
 const char*
 cong_dispspec_element_name_name_get(CongDispspecElement* element);
-
-CongDispspecElement*
-cong_dispspec_element_next(CongDispspecElement* element);
 
 enum CongElementType
 cong_dispspec_element_type(CongDispspecElement *element);
