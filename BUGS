@@ -1,0 +1,8 @@
+Known Bugs:
+- Save As does not change the name in the title bar
+- Save As does not remove the (modified) designation behind the title
+- Cut / Copy / Paste does not work with the X Clipboard
+- Cannot type new text into document
+- Cannot add new structural tags
+
+# better ten known bugs, then one unknown

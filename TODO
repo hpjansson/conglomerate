@@ -84,7 +84,7 @@ OTHER JOBS AFTER RELEASE:
 - design icons for dispspec elements?  (we _might_ support this in future)
 - do translations when we have the i18n support,
  both for the program and for the xds files  (Easy)
-- use Conglomerate and see what needs improving, find bugs etc
+- use Conglomerate and see what needs improving, find BUGS etc
 - write some documentation (Medium)
 
 ANYTIME JOBS
@@ -92,13 +92,6 @@ ANYTIME JOBS
 - use the file AUTHORS to generate authors in the About box
 - RH8 says ../libtool ( note the double dots ) and has problems
  check and see if working system say ./libtool
-
-Known Bugs:
-- Save As does not change the name in the title bar
-- Save As does not remove the (modified) designation behind the title
-- Cut / Copy / Paste does not work with the X Clipboard
-- Cannot type new text into document
-- Cannot add new structural tags
 
 Any other ideas?
  tell them to the developers mailinglist
