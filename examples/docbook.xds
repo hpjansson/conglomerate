@@ -196,7 +196,7 @@
 
 		<element tag="refentry" type="structural" color="a0b0c0">
 			<name locale="en">Reference Page</name>
-			<header-info tag="refname"></header-info>
+			<header-info xpath="normalize-space(child::refmeta/refentrytitle)"></header-info>
 		</element>
 
 		<element tag="refmeta" type="structural" color="a0b0c0">

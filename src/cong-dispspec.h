@@ -131,6 +131,9 @@ CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element);
 
 gchar*
+cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x);
+
+gchar*
 cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x);
 
 CongFont*

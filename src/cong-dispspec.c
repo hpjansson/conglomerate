@@ -25,7 +25,8 @@
 
 struct CongDispspecElementHeaderInfo
 {
-	char *tagname;
+	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
+	gchar *tagname; /* if xpath not present, then look for this tag below the main tag (deprecated) */
 };
 
 struct CongDispspecElement
@@ -830,37 +831,79 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
 }
 
 gchar*
+cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
+{
+	xmlXPathContextPtr ctxt;
+	xmlXPathObjectPtr xpath_obj;
+
+	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail(element->header_info, NULL);
+	g_return_val_if_fail(x, NULL);
+
+	/* g_message("cong_dispspec_element_get_title for <%s>", element->tagname); */
+
+	if (element->header_info->xpath) {
+		gchar *result = NULL;
+
+		/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
+
+		ctxt = xmlXPathNewContext(x->doc);
+
+		ctxt->node = x;
+
+		xpath_obj = xmlXPathEval(element->header_info->xpath,
+					 ctxt);
+
+		if (xpath_obj) {
+			result = xmlXPathCastToString(xpath_obj);			
+		} else {
+			result = g_strdup(_("(xpath failed)"));
+		}	
+
+		xmlXPathFreeContext(ctxt);
+		
+		return result;
+	} else if (element->header_info->tagname) {
+		/* Search for a child node matching the tagname: */
+		CongNodePtr i;
+
+		/* g_message("searching for tag <%s>", element->header_info->tagname); */
+		
+		for (i = cong_node_first_child(x); i; i = cong_node_next(i) ) {
+			
+			/* printf("got node named \"%s\"\n", cong_node_name(i)); */			
+			
+			if (0==strcmp(cong_node_name(i), element->header_info->tagname)) {
+				return xml_fetch_clean_data(i);
+			}
+		}
+		
+		/* Not found: */
+		return NULL;
+	} else {
+		return NULL;
+	}
+}
+
+gchar*
 cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x)
 {
 	g_return_val_if_fail(element,NULL);
 	g_return_val_if_fail(x,NULL);
 
-	if (element->header_info && (element->header_info->tagname)) {
-
-		/* Search for a child node matching the tagname: */
-
-		CongNodePtr i;
-
-		/* printf("searching for title for %s\n", cong_node_name(x)); */
-
-		for (i = cong_node_first_child(x); i; i = cong_node_next(i) ) {
-
-			/* printf("got node named \"%s\"\n", cong_node_name(i)); */			
-
-			if (0==strcmp(cong_node_name(i), element->header_info->tagname)) {
-				char *title_text = xml_fetch_clean_data(i);
-
-				char *result = g_strdup_printf("%s : %s", cong_dispspec_element_username(element), title_text);
-				
-				g_free(title_text);
-
-				return result;
-			}
-		}
-
-		/* FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property? */
-		return g_strdup_printf("%s : %s", cong_dispspec_element_username(element), _("<untitled>"));
+	if (element->header_info) {
 		
+		gchar* title = cong_dispspec_element_get_title(element, x);
+
+		if (title) {
+			char *result = g_strdup_printf("%s : %s", cong_dispspec_element_username(element), title);
+			g_free(title);
+
+			return result;
+		} else {
+			/* FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property? */
+			return g_strdup_printf("%s : %s", cong_dispspec_element_username(element), _("<untitled>"));
+		}		
 	} else {
 
 		/* printf("no header info for %s\n", cong_node_name(x)); */
@@ -982,6 +1025,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
   			if (0==strcmp(child->name,"header-info")) {
   				DS_DEBUG_MSG1("got header info\n");
   				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
+				element->header_info->xpath = cong_node_get_attribute(child, "xpath");
 				element->header_info->tagname = cong_node_get_attribute(child, "tag");
   			}
 			

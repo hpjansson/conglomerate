@@ -1,4 +1,14 @@
 creating ChangeLog
+2003-05-15  David Malcolm
+
+	* docbook.xds
+
+	XPath support for refentry titles
+
+	* website-layout.xds
+
+	XPath support for content pages
+	
 2003-05-14  David Malcolm
 
 	* docbook.xds

@@ -43,14 +43,17 @@
 
 		<element tag="toc" type="structural" color="a0b0c0">
 			<name locale="en">Table of Contents</name>
+			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="tocentry" type="structural" color="a0b0c0">
 			<name locale="en">Content</name>
+			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="notoc" type="structural" color="a0b0c0">
 			<name locale="en">Additional Content</name>
+			<header-info xpath="@page"></header-info>
 		</element>
 
 	</element-list>
