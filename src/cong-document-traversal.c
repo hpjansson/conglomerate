@@ -220,6 +220,16 @@ cong_document_traversal_get_document(CongDocumentTraversal *doc_traversal)
 	return PRIVATE(doc_traversal)->doc;
 }
 
+CongTraversalNode*
+cong_document_traversal_get_root_traversal_node (CongDocumentTraversal *doc_traversal)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT_TRAVERSAL(doc_traversal), NULL);
+	
+	return cong_document_traversal_get_traversal_node (doc_traversal,
+							   (xmlNodePtr)cong_document_get_xml (PRIVATE(doc_traversal)->doc),
+							   NULL);
+}
+
 void
 cong_document_traversal_for_each_traversal_node (CongDocumentTraversal *doc_traversal,
 						 CongNodePtr xml_node,
@@ -264,13 +274,49 @@ cong_document_traversal_get_traversal_node (CongDocumentTraversal *doc_traversal
 
 		return CONG_TRAVERSAL_NODE (g_hash_table_lookup (node_mapping->hash_of_traversal_parent_to_traversal_node,
 								 traversal_parent));
-
 	} else {
 		g_message ("Node not found in CongDocumentTraversal");
 		return NULL;
 	}
 }
 
+static void
+foreach_cb_store (gpointer key,
+		  gpointer value,
+		  gpointer user_data)
+{
+	CongTraversalNode **result = (CongTraversalNode**)user_data;
+
+	*result = CONG_TRAVERSAL_NODE (value);
+}
+
+CongTraversalNode*
+cong_document_traversal_get_a_traversal_node (CongDocumentTraversal *doc_traversal,
+					      CongNodePtr xml_node)
+{
+	NodeMapping *node_mapping;
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT_TRAVERSAL(doc_traversal), NULL);
+	g_return_val_if_fail (xml_node, NULL);
+
+	node_mapping = g_hash_table_lookup (PRIVATE(doc_traversal)->hash_of_xml_node_to_node_mapping,
+					    xml_node);
+
+	if (node_mapping) {
+		/* Return any value in table: */
+		CongTraversalNode *result = NULL;
+		g_assert (node_mapping->xml_node == xml_node);
+
+		g_hash_table_foreach (node_mapping->hash_of_traversal_parent_to_traversal_node,
+				      foreach_cb_store,
+				      &result);
+		return result;
+
+	} else {
+		g_message ("Node not found in CongDocumentTraversal");
+		return NULL;
+	}	
+}
 
 /* Internal function definitions: */
 NodeMapping*

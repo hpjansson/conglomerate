@@ -1,3 +1,9 @@
+2003-12-16  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document-traversal.c, cong-document-traversal.h
+
+	Implemented cong_document_traversal_get_root_traversal_node and added cong_document_traversal_get_a_traversal_node
+
 2003-12-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-modification-cursor-change.c, cong-modification-selection-change.c

@@ -96,6 +96,12 @@ cong_document_traversal_get_traversal_node (CongDocumentTraversal *doc_traversal
 					    CongNodePtr xml_node,
 					    CongTraversalNode *traversal_parent);
 
+CongTraversalNode*
+cong_document_traversal_get_a_traversal_node (CongDocumentTraversal *doc_traversal,
+					      CongNodePtr xml_node);
+
+
+
 
 G_END_DECLS
 
