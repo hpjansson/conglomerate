@@ -33,7 +33,7 @@ struct CongNodeModificationMakeOrphanDetails
 {
 	/* Undo info: */
 	CongNodePtr former_parent;
-	CongNodePtr former_older_sibling;
+	CongNodePtr former_younger_sibling;
 };
 
 /* Internal function declarations: */
@@ -83,10 +83,15 @@ cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *no
 	if (node->parent) {
 		PRIVATE(node_modification_make_orphan)->former_parent = node->parent;
 		cong_document_node_ref (doc, PRIVATE(node_modification_make_orphan)->former_parent);		
+	} else {
+		g_assert (node->prev == NULL);
+		g_assert (node->next == NULL);
 	}
 	if (node->next) {
-		PRIVATE(node_modification_make_orphan)->former_older_sibling = node->next;
-		cong_document_node_ref (doc, PRIVATE(node_modification_make_orphan)->former_older_sibling);		
+		g_assert (node->parent != NULL);
+
+		PRIVATE(node_modification_make_orphan)->former_younger_sibling = node->next;
+		cong_document_node_ref (doc, PRIVATE(node_modification_make_orphan)->former_younger_sibling);		
 	}
 
 	return node_modification_make_orphan;
@@ -135,10 +140,10 @@ dispose (GObject *object)
 					  PRIVATE(node_modification_make_orphan)->former_parent);		
 		PRIVATE(node_modification_make_orphan)->former_parent = NULL;
 	}
-	if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
+	if (PRIVATE(node_modification_make_orphan)->former_younger_sibling) {
 		cong_document_node_unref (doc, 
-					  PRIVATE(node_modification_make_orphan)->former_older_sibling);		
-		PRIVATE(node_modification_make_orphan)->former_older_sibling = NULL;
+					  PRIVATE(node_modification_make_orphan)->former_younger_sibling);		
+		PRIVATE(node_modification_make_orphan)->former_younger_sibling = NULL;
 	}
 
 	/* Call the parent method: */		
@@ -152,14 +157,18 @@ undo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->next == NULL);
+	g_assert (node->parent == NULL);
+
 	cong_document_begin_edit (doc);
 
 	if (PRIVATE(node_modification_make_orphan)->former_parent) {
-		if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
-			cong_document_private_node_add_after (doc, 
-							      node, 
-							      PRIVATE(node_modification_make_orphan)->former_older_sibling);
+		if (PRIVATE(node_modification_make_orphan)->former_younger_sibling) {
+			cong_document_private_node_add_before (doc, 
+							       node, 
+							       PRIVATE(node_modification_make_orphan)->former_younger_sibling);
 		} else {
+			/* This will add it as the youngest child; hence we had to store the former younger sibling rather than the former older one: */
 			cong_document_private_node_set_parent (doc, 
 							       node, 
 							       PRIVATE(node_modification_make_orphan)->former_parent);
@@ -170,6 +179,9 @@ undo (CongModification *modification)
 	}
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->next == PRIVATE(node_modification_make_orphan)->former_younger_sibling);
+	g_assert (node->parent == PRIVATE(node_modification_make_orphan)->former_parent);
 }
 
 static void
@@ -179,11 +191,17 @@ redo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->next == PRIVATE(node_modification_make_orphan)->former_younger_sibling);
+	g_assert (node->parent == PRIVATE(node_modification_make_orphan)->former_parent);
+
 	cong_document_begin_edit (doc);
 
 	cong_document_private_node_make_orphan (doc, 
 						node);
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->next == NULL);
+	g_assert (node->parent == NULL);
 }
 

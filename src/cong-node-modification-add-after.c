@@ -97,8 +97,8 @@ cong_node_modification_add_after_construct (CongNodeModificationAddAfter *node_m
 		PRIVATE(node_modification_add_after)->former_parent = node->parent;
 		cong_document_node_ref (doc, PRIVATE(node_modification_add_after)->former_parent);		
 	}
-	if (node->next) {
-		PRIVATE(node_modification_add_after)->former_older_sibling = node->next;
+	if (node->prev) {
+		PRIVATE(node_modification_add_after)->former_older_sibling = node->prev;
 		cong_document_node_ref (doc, PRIVATE(node_modification_add_after)->former_older_sibling);		
 	}
 
@@ -178,6 +178,9 @@ undo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->parent == PRIVATE(node_modification_add_after)->new_parent);
+	g_assert (node->prev == PRIVATE(node_modification_add_after)->new_older_sibling);
+
 	cong_document_begin_edit (doc);
 
 	if (PRIVATE(node_modification_add_after)->former_parent) {
@@ -195,6 +198,9 @@ undo (CongModification *modification)
 							node);
 	}
 
+	g_assert (node->parent == PRIVATE(node_modification_add_after)->former_parent);
+	g_assert (node->prev == PRIVATE(node_modification_add_after)->former_older_sibling);
+
 	cong_document_end_edit (doc);
 }
 
@@ -205,7 +211,8 @@ redo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	g_assert (PRIVATE(node_modification_add_after)->new_parent);
+	g_assert (node->parent == PRIVATE(node_modification_add_after)->former_parent);
+	g_assert (node->prev == PRIVATE(node_modification_add_after)->former_older_sibling);
 	
 	cong_document_begin_edit (doc);
 
@@ -220,5 +227,8 @@ redo (CongModification *modification)
 	}
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->parent == PRIVATE(node_modification_add_after)->new_parent);
+	g_assert (node->prev == PRIVATE(node_modification_add_after)->new_older_sibling);
 }
 

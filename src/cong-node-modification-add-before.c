@@ -178,6 +178,9 @@ undo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->parent == PRIVATE(node_modification_add_before)->new_parent);
+	g_assert (node->next == PRIVATE(node_modification_add_before)->new_younger_sibling);
+
 	cong_document_begin_edit (doc);
 
 	if (PRIVATE(node_modification_add_before)->former_parent) {
@@ -196,6 +199,9 @@ undo (CongModification *modification)
 	}
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->parent == PRIVATE(node_modification_add_before)->former_parent);
+	g_assert (node->next == PRIVATE(node_modification_add_before)->former_younger_sibling);
 }
 
 static void
@@ -205,7 +211,8 @@ redo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	g_assert (PRIVATE(node_modification_add_before)->new_parent);
+	g_assert (node->parent == PRIVATE(node_modification_add_before)->former_parent);
+	g_assert (node->next == PRIVATE(node_modification_add_before)->former_younger_sibling);
 	
 	cong_document_begin_edit (doc);
 
@@ -220,5 +227,8 @@ redo (CongModification *modification)
 	}
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->parent == PRIVATE(node_modification_add_before)->new_parent);
+	g_assert (node->next == PRIVATE(node_modification_add_before)->new_younger_sibling);
 }
 

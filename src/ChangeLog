@@ -1,5 +1,9 @@
 2003-10-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node-modification-add-after.c, cong-node-modification-add-before.c, cong-node-modification-make-orphan.c, cong-node-modification-set-parent.c
+
+	Various fixes in tree modification: fixed a typo in AddBefore, and fixed history of MakeOrphan
+	
 	* cong-command.c
 
 	Added debug code; removed clipboard handling from undo/redo

@@ -91,9 +91,9 @@ cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node
 		PRIVATE(node_modification_set_parent)->former_parent = node->parent;
 		cong_document_node_ref (doc, PRIVATE(node_modification_set_parent)->former_parent);		
 	}
-	if (node->next) {
-		PRIVATE(node_modification_set_parent)->former_older_sibling = node->next;
-		cong_document_node_ref (doc, PRIVATE(node_modification_set_parent)->former_older_sibling);		
+	if (node->prev) {
+		PRIVATE(node_modification_set_parent)->former_older_sibling = node->prev;
+		cong_document_node_ref (doc, PRIVATE(node_modification_set_parent)->former_older_sibling);
 	}
 
 	return node_modification_set_parent;
@@ -155,6 +155,9 @@ undo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->next == NULL);
+	g_assert (node->parent == PRIVATE(node_modification_set_parent)->new_parent);
+
 	cong_document_begin_edit (doc);
 
 	if (PRIVATE(node_modification_set_parent)->former_parent) {
@@ -173,6 +176,9 @@ undo (CongModification *modification)
 	}
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->prev == PRIVATE(node_modification_set_parent)->former_older_sibling);
+	g_assert (node->parent == PRIVATE(node_modification_set_parent)->former_parent);
 }
 
 static void
@@ -182,6 +188,9 @@ redo (CongModification *modification)
 	CongDocument *doc = cong_modification_get_document (modification);
 	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
+	g_assert (node->prev == PRIVATE(node_modification_set_parent)->former_older_sibling);
+	g_assert (node->parent == PRIVATE(node_modification_set_parent)->former_parent);
+
 	cong_document_begin_edit (doc);
 
 	cong_document_private_node_set_parent (doc, 
@@ -189,5 +198,8 @@ redo (CongModification *modification)
 					       PRIVATE(node_modification_set_parent)->new_parent);
 
 	cong_document_end_edit (doc);
+
+	g_assert (node->next == NULL);
+	g_assert (node->parent == PRIVATE(node_modification_set_parent)->new_parent);
 }
 
