@@ -341,6 +341,6 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
 	$(NULL)
 
-EXTRA_DIST = Makefile.win cong.marshal
+EXTRA_DIST = Makefile.win cong.marshal marshal.make
 
 ## Last Line
