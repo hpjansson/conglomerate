@@ -441,15 +441,34 @@ add_tree_layout_for_doc (CongPrimaryWindow *primary_window,
 static void
 refresh_statusbar (CongPrimaryWindow *primary_window)
 {
-	gchar *status_text;
+	gchar *status_text = NULL;
 
 	g_assert (primary_window);
+	
+	/* Set status bar to XPath of selection (if any) */
+	if (primary_window->doc) {
+		CongNodePtr selected_node = cong_document_get_selected_node (primary_window->doc);
 
-	status_text = g_strdup(cong_dispspec_get_name( cong_document_get_default_dispspec(primary_window->doc) ));
+		if (selected_node) {
+			status_text = cong_node_get_path (selected_node);
+		}
+	}
 
-	gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
-				 status_text);
-	g_free(status_text);
+	if (status_text) {
+		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
+					 status_text);
+		g_free(status_text);
+	} else {
+		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
+					 "");
+	}
+}
+
+static void
+end_edit_cb (CongDocument *doc,
+	     CongPrimaryWindow *primary_window)
+{
+	refresh_statusbar (primary_window);
 }
 
 /**
@@ -497,7 +516,12 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 			style->bg[i] = gcol;
 		}
 		
+		/* Set up status bar: */
 		refresh_statusbar (primary_window);
+		g_signal_connect_after (G_OBJECT (doc),
+					"end_edit",
+					G_CALLBACK (end_edit_cb),
+					primary_window);
 
 		cong_document_set_primary_window(doc, primary_window);
 	} /* if (doc) */
