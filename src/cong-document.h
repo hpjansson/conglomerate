@@ -147,6 +147,19 @@ cong_document_get_root(CongDocument *doc);
  * cong_document_get_root_traversal_node:
  * @doc:  The #CongDocument of interest
  *
+ * The #CongDocument maintains #CongDocumentTraversal corresponding to a depth-first traversal of its xml tree,
+ * but with the entity references having only the entity definition as their sole child.
+ *
+ * Returns: the #CongDocumentTraversal owned by the document
+ */
+CongDocumentTraversal*
+cong_document_get_traversal (CongDocument *doc);
+
+
+/**
+ * cong_document_get_root_traversal_node:
+ * @doc:  The #CongDocument of interest
+ *
  * The #CongDocument maintains a tree of #CongTraversalNode objects corresponding to a depth-first traversal of its xml tree,
  * but with the entity references having only the entity definition as their sole child.
  *

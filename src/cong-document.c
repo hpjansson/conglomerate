@@ -427,6 +427,22 @@ cong_document_get_root(CongDocument *doc)
 	return NULL;
 }
 
+CongDocumentTraversal*
+cong_document_get_traversal (CongDocument *doc)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	
+	return PRIVATE(doc)->traversal;
+}
+
+CongTraversalNode*
+cong_document_get_root_traversal_node (CongDocument *doc)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+
+	return cong_document_traversal_get_root_traversal_node (PRIVATE(doc)->traversal);
+}
+
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc)
 {
