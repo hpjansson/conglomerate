@@ -3,6 +3,7 @@
 	* conglomerate.xml
 
 	The FAQ is in this directory, not in ../../documentation.
+	Fixes bugzilla #123131.
 
 	* Makefile.am
 
