@@ -1,5 +1,9 @@
 2004-02-22  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c
+
+	Added a Properties dialog for the first span element (if any) when right-clicking in text areas.
+
 	* cong-file-new.c
 
 	Ensured the assistant is fully constructed before it is shown to avoid ugly visual resizing
