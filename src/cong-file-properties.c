@@ -385,7 +385,8 @@ on_dtd_button_clicked (GtkButton *button,
 			
 		} else {
 			/* Then button is "Add a DTD": */
-			cong_util_run_add_dtd_dialog (doc);
+			cong_util_run_add_dtd_dialog (doc,
+						      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(button))));
 		}
 	}
 }

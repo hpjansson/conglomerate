@@ -143,9 +143,11 @@ static GtkWidget *create_dialog (const gchar *doc_name, GtkWindow* parent, GtkTe
 static void 
 on_add_dtd(gpointer data)
 {
-	CongDocument *doc = CONG_DOCUMENT (data);
+	CongPrimaryWindow *primary_window = (CongPrimaryWindow *)data;
+	CongDocument *doc = cong_primary_window_get_document (primary_window);
 
-	cong_util_run_add_dtd_dialog (doc);
+	cong_util_run_add_dtd_dialog (doc,
+				      cong_primary_window_get_toplevel(primary_window));
 }
 
 static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
@@ -170,7 +172,7 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 								 _("_Cancel"),
 								 TRUE,
 								 on_add_dtd,
-								 doc);
+								 primary_window);
 		
 		g_free(what_failed);
 		g_free(why_failed);

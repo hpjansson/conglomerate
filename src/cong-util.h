@@ -158,7 +158,8 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
  * 
  */
 void
-cong_util_run_add_dtd_dialog (CongDocument *doc);
+cong_util_run_add_dtd_dialog (CongDocument *doc,
+			      GtkWindow *parent_window);
 
 /* Dodgy hack to do lines that blend to white: */
 void 
@@ -352,6 +353,11 @@ cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 void
 cong_util_show_in_window (GtkWidget *content,
 			  const gchar *title);
+
+
+GtkFileFilter*
+cong_util_make_file_filter (const gchar *name,
+			    const gchar* mime_type);
 
 
 G_END_DECLS

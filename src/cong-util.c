@@ -37,6 +37,10 @@
 
 #include "cong-ui-hooks.h"
 
+#include "cong-file-selection.h"
+
+#include "cong-command.h"
+
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
 
@@ -1330,11 +1334,52 @@ cong_util_show_in_window (GtkWidget *content,
 	gtk_widget_show(GTK_WIDGET(window));
 }
 
-void
-cong_util_run_add_dtd_dialog (CongDocument *doc)
+GtkFileFilter*
+cong_util_make_file_filter (const gchar *name,
+			    const gchar* mime_type)
 {
+	GtkFileFilter *filter;
+
+	g_return_val_if_fail (name, NULL);
+	g_return_val_if_fail (mime_type, NULL);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, name);
+	gtk_file_filter_add_mime_type (filter, mime_type);
+
+	return filter;
+}
+
+void
+cong_util_run_add_dtd_dialog (CongDocument *doc,
+			      GtkWindow *parent_window)
+{
+	gchar* dtd_filename;
+	GList *list_of_filters;
+
 	g_return_if_fail (doc);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG (NULL, "Adding a DTD");
+	list_of_filters = g_list_append (NULL, cong_util_make_file_filter (_("DTD files"), 
+									   "text/x-dtd"));
+	
+	dtd_filename = cong_get_file_name (_("Select a DTD"), 
+					   NULL,
+					   parent_window,
+					   CONG_FILE_CHOOSER_ACTION_OPEN,
+					   list_of_filters);
+
+	if (dtd_filename) {
+		CongCommand *cmd = cong_document_begin_command (doc,
+								_("Associate with DTD"),
+								NULL);
+		cong_command_add_set_external_dtd (cmd,
+						   cong_document_get_root(doc)->name,
+						   NULL,
+						   dtd_filename);
+		cong_document_end_command (doc,
+					   cmd);
+		
+		g_free (dtd_filename);
+	}
 }
 

@@ -1,5 +1,9 @@
 2004-06-21  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-file-properties.c, cong-util.c, cong-util.h, plugin-validate.c
+
+	Implemented cong_util_run_add_dtd_dialog, used by File->Properties dialog and the Validation plugin
+
 	* cong-util.c (cong_util_run_add_dtd_dialog): 
 
 	New placeholder function
