@@ -1,3 +1,9 @@
+2003-07-27  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.h, cong-document.c
+
+	Added stats to the document
+
 2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h

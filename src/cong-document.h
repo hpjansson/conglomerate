@@ -163,6 +163,10 @@ cong_document_set_url(CongDocument *doc, const gchar *url);
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
 
+/* Statistics about the document.  These are cached internally */
+guint
+cong_document_get_num_nodes (CongDocument *doc);
+
 /** 
  * Update amortisation
  *
@@ -212,7 +216,7 @@ void cong_document_view_source(CongDocument *doc);
 
 /* Handy ways to traverse the document, with a callback: */
 
-/* Return TRUE to stop the traversal */
+/* Return TRUE to stop the traversal. */
 typedef gboolean (*CongDocumentRecursionCallback)(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level);
 
 /* Return TRUE if the traversal was stopped prematurely */

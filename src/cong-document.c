@@ -92,6 +92,10 @@ struct CongDocumentDetails
 
 	/* Amortisation of updates: */
 	guint edit_depth;
+
+	/* Stats about the document: */
+	gboolean num_nodes_valid;	
+	gboolean num_nodes;
 };
 
 /* Exported function definitions: */
@@ -613,6 +617,31 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 	return current_time.tv_sec - PRIVATE(doc)->time_of_last_save.tv_sec;
 }
 
+static gboolean 
+node_count_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
+{
+	((int*)user_data)++;
+
+	return FALSE;		
+}
+
+
+guint
+cong_document_get_num_nodes (CongDocument *doc)
+{
+	g_return_val_if_fail(doc, 0);
+
+	if (!PRIVATE(doc)->num_nodes_valid) {
+
+		PRIVATE(doc)->num_nodes = 0;
+		cong_document_for_each_node(doc, node_count_callback, &(PRIVATE(doc)->num_nodes));
+		PRIVATE(doc)->num_nodes_valid = TRUE;
+
+	}
+	
+	return PRIVATE(doc)->num_nodes;
+	
+}
 
 /* Public MVC hooks: */
 void cong_document_begin_edit (CongDocument *doc)
@@ -1027,7 +1056,7 @@ cong_document_handle_node_make_orphan(CongDocument *doc, CongNodePtr node)
 #if DEBUG_MVC
 	g_message("cong_document_handle_node_make_orphan");
 #endif
-	
+
 	former_parent = node->parent;
 	
 	if (doc) {
@@ -1045,6 +1074,7 @@ cong_document_handle_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	}
 
 	/* Make the change: */
+	PRIVATE(doc)->num_nodes_valid = FALSE;
 	cong_node_private_make_orphan(node);
 
 	if (doc) {
@@ -1087,6 +1117,7 @@ cong_document_handle_node_add_after(CongDocument *doc, CongNodePtr node, CongNod
 	}
 
 	/* Make the change: */
+	PRIVATE(doc)->num_nodes_valid = FALSE;
 	cong_node_private_add_after(node, older_sibling);
 
 	/* Notify listeners: */
@@ -1122,6 +1153,7 @@ cong_document_handle_node_add_before(CongDocument *doc, CongNodePtr node, CongNo
 	}
 
 	/* Make the change: */
+	PRIVATE(doc)->num_nodes_valid = FALSE;
 	cong_node_private_add_before(node, younger_sibling);
 
 	/* Notify listeners: */
@@ -1160,6 +1192,7 @@ cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNo
 	}
 
 	/* Make the change: */
+	PRIVATE(doc)->num_nodes_valid = FALSE;
 	cong_node_private_set_parent(node, adoptive_parent);
 
 	/* Notify listeners: */
