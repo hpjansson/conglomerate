@@ -579,7 +579,7 @@ is_valid_cursor_node (CongNodePtr node,
 		      gpointer user_data)
 {
 	g_return_val_if_fail (node, FALSE);
-	g_return_val_if_fail (user_data, FALSE); /* user_data is a CongDispspec */
+	g_return_val_if_fail (user_data, FALSE); /* user_data is a CongDocument */
 
 	return cong_node_is_valid_cursor_location (node);
 }
@@ -587,7 +587,7 @@ is_valid_cursor_node (CongNodePtr node,
 /**
  * cong_location_calc_prev_char:
  * @input_loc: the current #CongLocation
- * @dispspec: the #CongDispspec in use
+ * @doc: the #CongDocument containing this #CongLocation
  * @output_loc: the #CongLocation that is computed
  *
  * Calculates a new #CongLocation when the left key is pressed
@@ -596,7 +596,7 @@ is_valid_cursor_node (CongNodePtr node,
  */
 gboolean 
 cong_location_calc_prev_char(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc)
 {
 	CongNodePtr n;
@@ -605,12 +605,12 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 	printf("<- [curs]\n");
 #endif
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 	
 	n = input_loc->node;
-	if (is_valid_cursor_node(input_loc->node, dispspec) && input_loc->byte_offset) { 
+	if (is_valid_cursor_node(input_loc->node, doc) && input_loc->byte_offset) { 
 
 		gchar *this_char;
 		gchar *prev_char;
@@ -631,10 +631,10 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 	}
 	n = cong_node_calc_prev_node_satisfying (n, 
 						 is_valid_cursor_node, 
-						 dispspec);
+						 doc);
 
 	if (n) {
-		g_assert (is_valid_cursor_node (n, dispspec));
+		g_assert (is_valid_cursor_node (n, doc));
 
 		/* FIXME: UTF-8 issues here! */
 		cong_location_set_node_and_byte_offset(output_loc,n, strlen(xml_frag_data_nice(n)));
@@ -647,7 +647,7 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 /**
  * cong_location_calc_next_char:
  * @input_loc: the current #CongLocation
- * @dispspec: the #CongDispspec in use
+ * @doc: the #CongDocument containing this #CongLocation
  * @output_loc: the #CongLocation that is computed
  *
  * Calculates a new #CongLocation when the right key is pressed
@@ -656,7 +656,7 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_next_char(const CongLocation *input_loc,
-				      CongDispspec *dispspec,
+				      CongDocument *doc,
 				      CongLocation *output_loc)
 {
 	CongNodePtr n;
@@ -665,14 +665,14 @@ cong_location_calc_next_char(const CongLocation *input_loc,
 	printf("[curs] ->\n");
 #endif
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 
 	n = input_loc->node;
 
-	if (is_valid_cursor_node (n, dispspec) && cong_location_get_unichar(input_loc)) {
+	if (is_valid_cursor_node (n, doc) && cong_location_get_unichar(input_loc)) {
 		gchar *this_char;
 		gchar *next_char;
 
@@ -694,7 +694,7 @@ cong_location_calc_next_char(const CongLocation *input_loc,
 	 * so we find the next node satisfying is_valid_cursor_node. */ 
 	n = cong_node_calc_next_node_satisfying (n, 
 						 is_valid_cursor_node, 
-						 dispspec);
+						 doc);
 
 	if (n) {
 		/* Found next node, so we return a CongLocation pointing to its first character. */
@@ -847,35 +847,41 @@ get_root_node (CongNodePtr node)
 /**
  * get_enclosing_structural_element:
  * @node:
- * @dispspec:
+ * @doc:
  *
  * TODO: Write me
  * Returns:
  */
 static CongNodePtr
 get_enclosing_structural_element (CongNodePtr node,
-				  const CongDispspec *dispspec)
+				  CongDocument *doc)
 {
 	g_assert (node);
-	g_assert (dispspec);
+	g_assert (doc);
 
 	while (node) {
 		if (cong_node_type (node)==CONG_NODE_TYPE_ELEMENT) {
-			CongDispspecElement* element;
+			CongDispspecElement* ds_element;
 
-			element = cong_dispspec_lookup_node(dispspec, node);
+			ds_element = cong_document_get_dispspec_element_for_node (doc, node);
+
+			if (ds_element) {
 			
-			switch (cong_dispspec_element_type (element)) {
-			default: g_assert_not_reached();
-			case CONG_ELEMENT_TYPE_STRUCTURAL:
-			case CONG_ELEMENT_TYPE_PLUGIN:
+				switch (cong_dispspec_element_type (ds_element)) {
+				default: g_assert_not_reached();
+				case CONG_ELEMENT_TYPE_STRUCTURAL:
+				case CONG_ELEMENT_TYPE_PLUGIN:
+					return node;
+					
+				case CONG_ELEMENT_TYPE_SPAN:
+				case CONG_ELEMENT_TYPE_INSERT:
+				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
+				case CONG_ELEMENT_TYPE_UNKNOWN:
+					break;
+				}
+			} else {
+				/* For the purposes of this function, we treat an unknown element as a structural element: */
 				return node;
-				
-			case CONG_ELEMENT_TYPE_SPAN:
-			case CONG_ELEMENT_TYPE_INSERT:
-			case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
-			case CONG_ELEMENT_TYPE_UNKNOWN:
-				break;
 			}
 		}
 
@@ -889,7 +895,7 @@ get_enclosing_structural_element (CongNodePtr node,
 /**
  * cong_location_calc_document_start:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -897,20 +903,20 @@ get_enclosing_structural_element (CongNodePtr node,
  */
 gboolean 
 cong_location_calc_document_start(const CongLocation *input_loc, 
-				  CongDispspec *dispspec,
+				  CongDocument *doc,
 				  CongLocation *output_loc)
 {
 	CongNodePtr root_node;
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	root_node = get_root_node (input_loc->node);
 	if (root_node) {
 		CongNodePtr node = cong_node_calc_first_node_in_subtree_satisfying (root_node, 
 										    is_valid_cursor_node,
-										    dispspec);
+										    doc);
 		if (node) {
 			cong_location_set_to_start_of_node (output_loc, node);
 			return TRUE;
@@ -923,7 +929,7 @@ cong_location_calc_document_start(const CongLocation *input_loc,
 /**
  * cong_location_calc_line_start:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -931,24 +937,24 @@ cong_location_calc_document_start(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_line_start(const CongLocation *input_loc, 
-			      CongDispspec *dispspec,
+			      CongDocument *doc,
 			      CongLocation *output_loc)
 {
 	CongNodePtr enclosing_structural_element;
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	/* This actually calculates the start of the text within the current structural node, rather than the start of the current line (as it's much easier).
 	   (This was part of bug #109698)
 	*/
 	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
-									 dispspec);
+									 doc);
 	if (enclosing_structural_element) {
 		CongNodePtr node = cong_node_calc_first_node_in_subtree_satisfying (enclosing_structural_element, 
 										    is_valid_cursor_node,
-										    dispspec);
+										    doc);
 		if (node) {
 			cong_location_set_to_start_of_node (output_loc, node);
 			return TRUE;
@@ -961,7 +967,7 @@ cong_location_calc_line_start(const CongLocation *input_loc,
 /**
  * cong_location_calc_document_end:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -969,20 +975,20 @@ cong_location_calc_line_start(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_document_end(const CongLocation *input_loc, 
-				CongDispspec *dispspec,
+				CongDocument *doc,
 				CongLocation *output_loc)
 {
 	CongNodePtr root_node;
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	root_node = get_root_node (input_loc->node);
 	if (root_node) {
 		CongNodePtr node = cong_node_calc_final_node_in_subtree_satisfying (root_node, 									  
 										    is_valid_cursor_node,
-										    dispspec);
+										    doc);
 		if (node) {
 			cong_location_set_to_end_of_node (output_loc, node);
 			return TRUE;
@@ -995,7 +1001,7 @@ cong_location_calc_document_end(const CongLocation *input_loc,
 /**
  * cong_location_calc_line_end:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -1003,24 +1009,24 @@ cong_location_calc_document_end(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_line_end(const CongLocation *input_loc, 
-			    CongDispspec *dispspec,
+			    CongDocument *doc,
 			    CongLocation *output_loc)
 {
 	CongNodePtr enclosing_structural_element;
 
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	/* This actually calculates the end of the text within the current structural node, rather than the start of the current line (as it's much easier).
 	   (This was part of bug #109698)
 	*/
 	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
-									 dispspec);
+									 doc);
 	if (enclosing_structural_element) {
 		CongNodePtr node = cong_node_calc_final_node_in_subtree_satisfying (enclosing_structural_element, 
 										    is_valid_cursor_node,
-										    dispspec);
+										    doc);
 		if (node) {
 			cong_location_set_to_end_of_node (output_loc, node);
 			return TRUE;
@@ -1033,7 +1039,7 @@ cong_location_calc_line_end(const CongLocation *input_loc,
 /**
  * cong_location_calc_prev_page:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -1041,12 +1047,12 @@ cong_location_calc_line_end(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_prev_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc)
 {
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating previous page"));
 
@@ -1056,7 +1062,7 @@ cong_location_calc_prev_page(const CongLocation *input_loc,
 /**
  * cong_location_calc_next_page:
  * @input_loc:
- * @dispspec:
+ * @doc:
  * @output_loc:
  *
  * TODO: Write me
@@ -1064,12 +1070,12 @@ cong_location_calc_prev_page(const CongLocation *input_loc,
  */
 gboolean 
 cong_location_calc_next_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc)
 {
-	g_return_val_if_fail(input_loc, FALSE);
-	g_return_val_if_fail(dispspec, FALSE);
-	g_return_val_if_fail(output_loc, FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating next page"));
 
@@ -1163,7 +1169,7 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 #if 0
 gboolean
 cong_location_calc_prev_text_node (const CongLocation *input_loc, 
-				   CongDispspec *dispspec,
+				   CongDocument *doc,
 				   CongLocation *output_loc)
 {
 #error
@@ -1171,7 +1177,7 @@ cong_location_calc_prev_text_node (const CongLocation *input_loc,
 
 gboolean
 cong_location_calc_next_text_node (const CongLocation *input_loc,
-				   CongDispspec *dispspec,
+				   CongDocument *doc,
 				   CongLocation *output_loc)
 {
 #error

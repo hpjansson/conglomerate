@@ -99,11 +99,11 @@ cong_location_copy(CongLocation *dst, const CongLocation *src);
 
 gboolean
 cong_location_calc_prev_char(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc);
 gboolean
 cong_location_calc_next_char(const CongLocation *input_loc,
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc);
 gboolean
 cong_location_calc_prev_word(const CongLocation *input_loc, 
@@ -115,27 +115,27 @@ cong_location_calc_next_word(const CongLocation *input_loc,
 			     CongLocation *output_loc);
 gboolean
 cong_location_calc_document_start(const CongLocation *input_loc, 
-				  CongDispspec *dispspec,
+				  CongDocument *doc,
 				  CongLocation *output_loc);
 gboolean
 cong_location_calc_line_start(const CongLocation *input_loc, 
-			      CongDispspec *dispspec,
+			      CongDocument *doc,
 			      CongLocation *output_loc);
 gboolean
 cong_location_calc_document_end(const CongLocation *input_loc, 
-				CongDispspec *dispspec,
+				CongDocument *doc,
 				CongLocation *output_loc);
 gboolean
 cong_location_calc_line_end(const CongLocation *input_loc, 
-			    CongDispspec *dispspec,
+			    CongDocument *doc,
 			    CongLocation *output_loc);
 gboolean
 cong_location_calc_prev_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc);
 gboolean
 cong_location_calc_next_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
+			     CongDocument *doc,
 			     CongLocation *output_loc);
 gboolean
 cong_location_calc_word_extent(const CongLocation *input_loc,
@@ -144,11 +144,11 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 			       CongLocation *output_end_of_word);
 gboolean
 cong_location_calc_prev_text_node (const CongLocation *input_loc, 
-				   CongDispspec *dispspec,
+				   CongDocument *doc,
 				   CongLocation *output_loc);
 gboolean
 cong_location_calc_next_text_node (const CongLocation *input_loc,
-				   CongDispspec *dispspec,
+				   CongDocument *doc,
 				   CongLocation *output_loc);
 
 void

@@ -1202,31 +1202,31 @@ cong_editor_widget3_get_destination_location_for_keypress (CongEditorWidget3 *ed
 		if (state & GDK_CONTROL_MASK) {
 			return cong_location_calc_prev_word(&cursor->location, doc, output_loc);
 		} else {
-			return cong_location_calc_prev_char(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_prev_char(&cursor->location, doc, output_loc);
 		}
 	
 	case GDK_Right:
 		if (state & GDK_CONTROL_MASK) {
 			return cong_location_calc_next_word(&cursor->location, doc, output_loc);
 		} else {
-			return cong_location_calc_next_char(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_next_char(&cursor->location, doc, output_loc);
 		}
 	case GDK_Home:
 		if (state & GDK_CONTROL_MASK) {
-			return cong_location_calc_document_start(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_document_start(&cursor->location, doc, output_loc);
 		} else {
-			return cong_location_calc_line_start(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_line_start(&cursor->location, doc, output_loc);
 		}
 	case GDK_End:
 		if (state & GDK_CONTROL_MASK) {
-			return cong_location_calc_document_end(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_document_end(&cursor->location, doc, output_loc);
 		} else {
-			return cong_location_calc_line_end(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_line_end(&cursor->location, doc, output_loc);
 		}
 	case GDK_Page_Up:
-		return cong_location_calc_prev_page(&cursor->location, dispspec, output_loc);
+		return cong_location_calc_prev_page(&cursor->location, doc, output_loc);
 	case GDK_Page_Down:
-		return cong_location_calc_next_page(&cursor->location, dispspec, output_loc);
+		return cong_location_calc_next_page(&cursor->location, doc, output_loc);
 	}
 }
 

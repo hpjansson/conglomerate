@@ -1,5 +1,9 @@
 2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c, cong-location.c, cong-location.h, cursor.c:
+
+	Rewrite of CongLocation methods to work better with the new multiple dispspec model: everything uses a CongDocument rather than a CongDispspec now
+
 	* cong-dispspec.c, cong-dispspec.h: 
 
 	Added support for <typical-prefix> element

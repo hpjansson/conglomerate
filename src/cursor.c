@@ -182,14 +182,14 @@ cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 {
 	CongLocation prev_char;
 
-	g_return_if_fail(curs);
-	g_return_if_fail(doc);
+	g_return_if_fail (curs);
+	g_return_if_fail (doc);
 
 	if (!cong_location_exists(&curs->location)) {
 		return;
 	}
 	
- 	if (cong_location_calc_prev_char(&curs->location, cong_document_get_default_dispspec(doc), &prev_char)) {
+ 	if (cong_location_calc_prev_char(&curs->location, doc, &prev_char)) {
 		cong_location_copy(&curs->location, &prev_char);
 		
 		cong_location_del_next_char(doc, &curs->location);
