@@ -12,6 +12,13 @@
 /* Get rid of all gxx macros: */
 #include "gxx-undefine-shared-macros.h"
 
+#define GXX_STRUCT_BEGIN_ELEMENT(xml_name, type_name, fn_name_frag) \
+type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_node) { \
+  const gchar * const tag_name = xml_name; \
+  type_name *inst; \
+  g_return_val_if_fail (xml_node, NULL); \
+  inst = g_new0 (type_name, 1);
+
 #define GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR(xml_name, type_name, fn_name_frag) \
 type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_node) { \
   const gchar * const tag_name = xml_name; \

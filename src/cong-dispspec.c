@@ -107,11 +107,6 @@ parse_serialisation (CongDispspec *ds,
 		     xmlDocPtr doc, 
 		     xmlNodePtr node);
 
-static CongSerialisationFormat*
-parse_format (CongDispspec *ds, 
-	      xmlDocPtr doc, 
-	      xmlNodePtr node);
-
 static void 
 parse_document_models (CongDispspec *ds, 
 		       xmlDocPtr doc, 
@@ -864,6 +859,13 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 	}
 }
 
+
+#include "gxx-object-from-xml-tree.h"
+#include "cong-dispspec-gxx.h"
+
+#include "gxx-object-to-xml-tree.h"
+#include "cong-dispspec-gxx.h"
+
 static void 
 parse_serialisation (CongDispspec *ds, 
 		     xmlDocPtr doc, 
@@ -887,33 +889,8 @@ parse_serialisation (CongDispspec *ds,
 	index = 0;
 	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
 		if (cong_node_is_tag (xml_element, NULL,"format")) {
-			ds->serialisation_formats[index++] = parse_format (ds, doc, xml_element);
+			ds->serialisation_formats[index++] = gxx_generated_object_from_xml_tree_fn_serialisation_format (xml_element);
 		}
-	}
-}
-
-static CongSerialisationFormat*
-parse_format (CongDispspec *ds, 
-	      xmlDocPtr doc, 
-	      xmlNodePtr node)
-{
-	gchar *extension;
-
-	DS_DEBUG_MSG1("got format\n");
-
-	extension = cong_node_get_attribute (node,
-					     "extension");
-
-	if (extension) {
-		CongSerialisationFormat* result;
-
-		result = cong_serialisation_format_new (extension);
-
-		g_free (extension);
-
-		return result;
-	} else {
-		return NULL;
 	}
 }
 
@@ -1082,21 +1059,8 @@ add_xml_for_serialisation_formats  (xmlDocPtr xml_doc,
 			CongSerialisationFormat *format = dispspec->serialisation_formats[i];
 			g_assert (format);
 
-			node_format = xmlNewDocNode (xml_doc,
-						     NULL,
-						     "format",
-						     NULL);
-
-			xmlAddChild (node_serialisation, 
-				     node_format);
-
-			if (format->extension) {
-				xmlSetProp (node_format,
-					    "extension",
-					    format->extension);
-			}
-
-			
+			xmlAddChild (node_serialisation,
+				     gxx_generated_object_to_xml_tree_fn_serialisation_format (format, xml_doc));
 		}
 	}
 }

@@ -25,6 +25,7 @@ conglomerate_SOURCES =      \
   cong-command-history.h    \
   cong-dialog.h             \
   cong-dispspec.h           \
+  cong-dispspec-gxx.h       \
   cong-dispspec-element.h   \
   cong-dispspec-element-gxx.h \
   cong-dispspec-registry.h  \
