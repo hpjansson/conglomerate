@@ -1,5 +1,9 @@
 2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command-history.c
+
+	Added a changed signal
+	
 	* cong-command.c
 
 	Fixed a warning

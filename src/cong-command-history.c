@@ -33,6 +33,14 @@
 
 #define PRIVATE(x) ((x)->private)
 
+enum {
+	CHANGED,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
 static void
 emit_changed (CongCommandHistory *history);
 
@@ -51,6 +59,14 @@ GNOME_CLASS_BOILERPLATE(CongCommandHistory,
 static void
 cong_command_history_class_init (CongCommandHistoryClass *klass)
 {
+	signals[CHANGED] = g_signal_new ("changed",
+					 CONG_COMMAND_HISTORY_TYPE,
+					 G_SIGNAL_RUN_FIRST,
+					 0,
+					 NULL, NULL,
+					 g_cclosure_marshal_VOID__VOID,
+					 G_TYPE_NONE,
+					 0);
 }
 
 static void
@@ -195,5 +211,6 @@ cong_command_history_get_next_redo_command (CongCommandHistory *command_history)
 static void
 emit_changed (CongCommandHistory *history)
 {
-	/* FIXME: emit signal */
+	g_signal_emit (G_OBJECT(history),
+		       signals[CHANGED], 0);
 }
