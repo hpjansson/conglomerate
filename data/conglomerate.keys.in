@@ -32,3 +32,16 @@ text/x-xds:
 	open=conglomerate %f
 	edit=conglomerate %f
 	view=conglomerate %f
+
+text/x-xsl:
+	description=XSL Stylesheet
+	default_action_type=application
+	default_application_id=conglomerate
+	short_list_application_ids_for_novice_user_level=conglomerate
+	short_list_application_ids_for_intermediate_user_level=conglomerate
+	short_list_application_ids_for_advanced_user_level=conglomerate
+	category=Documents/Extended Markup Language (XML)
+	use_category_default=yes
+	open=conglomerate %f
+	edit=conglomerate %f
+	view=conglomerate %f

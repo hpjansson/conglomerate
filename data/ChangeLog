@@ -1,4 +1,9 @@
-2003-11-23  Robert Varga
+2003-12-05  Robert Varga <frozenfingers@xs4all.nl>
+
+	* conglomerate.keys.in, coglomerate.mime
+	Added text/x-xsl mime type and application binding.
+
+2003-11-23  Robert Varga <frozenfingers@xs4all.nl>
 
 	* conglomerate.keys.in, conglomerate.mime, conglomerate.applications, Makefile.am
 	fix for bug 108400: desktop integration
