@@ -1066,9 +1066,9 @@ dispose (GObject *object)
 		PRIVATE(editor_area)->selection_change_handler_id = 0;		
 	}
 
-	if ( PRIVATE (area)->cursor) {
-		gdk_cursor_unref (PRIVATE (area)->cursor);
-		PRIVATE (area)->cursor = NULL;
+	if ( PRIVATE (editor_area)->cursor) {
+		gdk_cursor_unref (PRIVATE (editor_area)->cursor);
+		PRIVATE (editor_area)->cursor = NULL;
 	}
 
 	/* Call the parent method: */		

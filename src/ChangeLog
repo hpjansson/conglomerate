@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area.c
+
+	Fixed typo
+	
 	* cong-eel-graphic-effects.c
 
 	Fixed header filename
