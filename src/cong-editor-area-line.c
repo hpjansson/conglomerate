@@ -58,6 +58,10 @@ static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
 
+static gboolean 
+set_to_not_expand_cb (CongEditorArea *editor_area, 
+		      gpointer user_data);
+
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaLine, 
 			cong_editor_area_line,
@@ -169,9 +173,9 @@ calc_requisition (CongEditorArea *area,
 	if (GTK_ORIENTATION_HORIZONTAL==orientation) {
 		return PRIVATE(line)->width_limit;
 	} else {
-		return  cong_editor_area_get_requisition (CONG_EDITOR_AREA(PRIVATE(line)->outer_compose),
-							  orientation,
-							  width_hint);
+		return cong_editor_area_get_requisition (CONG_EDITOR_AREA(PRIVATE(line)->outer_compose),
+							 orientation,
+							 width_hint);
 	}
 #else
 	if (PRIVATE(line)->outer_compose) {
@@ -222,10 +226,33 @@ add_child (CongEditorAreaContainer *area_container,
 {
 	CongEditorAreaLine *line = CONG_EDITOR_AREA_LINE(area_container);
 
-	/* Delegate: */
-	cong_editor_area_composer_pack(CONG_EDITOR_AREA_COMPOSER(PRIVATE(line)->outer_compose),
+	/* We delegate to the outer_compose child: */
+
+	/* Ensure all existing children of the line don't expand: */
+	cong_editor_area_for_all (CONG_EDITOR_AREA (PRIVATE(line)->outer_compose), 
+				  set_to_not_expand_cb, 
+				  PRIVATE(line)->outer_compose);
+	
+	/* Make the new child expand to fill to the end of the line: */
+	cong_editor_area_composer_pack(CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
 				       child,
-				       FALSE,
-				       FALSE,
+				       TRUE,
+				       TRUE,
 				       0);
+
+
+}	
+
+static gboolean 
+set_to_not_expand_cb (CongEditorArea *editor_area, 
+		      gpointer user_data)
+{
+
+	cong_editor_area_composer_set_child_packing (CONG_EDITOR_AREA_COMPOSER(user_data),
+						     editor_area,
+						     FALSE,
+						     FALSE,
+						     0);
+
+	return FALSE;
 }

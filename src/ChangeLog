@@ -1,5 +1,9 @@
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-line.c
+
+	Make final subarea of line take remaining horizontal allocation
+
 	* cong-editor-area-composer.c, cong-editor-area-composer.h
 
 	Ability to change child packing after child is added
