@@ -29,10 +29,10 @@
 #include "cong-error-dialog.h"
 #include "cong-progress-checklist.h"
 #include "cong-document.h"
-#include <glade/glade.h>
 #include "cong-app.h"
 #include "cong-util.h"
 #include "cong-fake-plugin-hooks.h"
+#include "cong-attribute-editor.h"
 
 /* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
 static GList*
@@ -1032,83 +1032,6 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 
 }
 #endif /* #if ENABLE_PRINTING */
-
-struct CongAttributeEditorDetails
-{
-	GtkWidget *hbox;
-	GtkWidget *value;
-	GtkWidget *add_btn;
-	GtkWidget *delete_btn;	
-};
-
-
-GtkWidget*
-cong_ui_cdata_editor_new(CongDocument *doc, CongNodePtr node, const gchar* attribute_name);
-
-GtkWidget*
-cong_ui_cdata_editor_new(CongDocument *doc, CongNodePtr node, const gchar* attribute_name)
-{
-#if 0
-	struct CongAttributeEditorDetails* details;
-
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(attribute_name, NULL);
-
-	details = g_new0(struct CongAttributeEditorDetails,1);
-
-	details->hbox = gtk_hbox_new(FALSE, 6);
-	details->value = gtk_label_new(g_strdup_printf("value for %s goes here", attribute_name));
-	details->add = gtk_button_new_from_stock(GTK_STOCK_ADD);
-	details->delete = gtk_button_new_from_stock(GTK_STOCK_DELETE);
-	
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->value, TRUE, TRUE, 0);
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->add_btn, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(details->hbox), details->delete_btn, FALSE, FALSE, 0);
-
-	refresh_cdata_editor(details);
-
-	return details->hbox;
-#else
-	GtkWidget *widget;
-	gchar *msg = g_strdup_printf(_("This will be an editor for attribute \"%s\""), attribute_name);
-	widget = gtk_label_new(msg);
-
-	g_free(msg);
-
-	return widget;
-#endif
-	
-}
-
-
-/* Glade doesn't seem to support user_data unless you override the custom handler.  Hence we use globals for now */
-CongDocument *global_glade_doc_ptr = NULL;
-CongNodePtr global_glade_node_ptr = NULL;
-
-GtkWidget*
-create_cdata_editor(GladeXML *xml,
-		    gchar *func_name,
-		    gchar *name,
-		    gchar *string1,
-		    gchar *string2,
-		    gint int1,
-		    gint int2,
-		    gpointer user_data)
-{
-	GtkWidget *custom_widget;
-
-#if 1
-	/* for some reason, the string1 stuff is coming through in func_name on my machine: */
-	custom_widget = cong_ui_cdata_editor_new(global_glade_doc_ptr, global_glade_node_ptr, func_name);
-#else
-	custom_widget = gtk_label_new(g_strdup_printf("custom widget \"%s\" \"%s\" \"%s\" \"%s\" %i %i", func_name, name, string1, string2, int1, int2)); /* for now */
-
-	gtk_widget_show_all(custom_widget);
-#endif
-
-	return custom_widget;
-}
 
 GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {

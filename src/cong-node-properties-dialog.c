@@ -30,6 +30,8 @@
 #include "cong-dispspec.h"
 #include "cong-plugin.h"
 #include "cong-app.h"
+#include "cong-eel.h"
+#include "cong-attribute-editor.h"
 
 #define CONG_ADVANCED_NODE_PROPERTIES_VIEW(x) ((CongAdvancedNodePropertiesView*)(x))
 typedef struct CongAdvancedNodePropertiesView CongAdvancedNodePropertiesView;
@@ -274,64 +276,13 @@ void init_view_modelled_attr(CongAdvancedNodePropertiesView *view,
 									   _("Properties from DTD/schema"));
 
 		for (attr=xml_element->attributes; attr; attr=attr->nexth) {
-			switch (attr->atype) {
-			default: g_assert_not_reached();
-			case XML_ATTRIBUTE_CDATA:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("CDATA"));
-				break;
-				
-			case XML_ATTRIBUTE_ID:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("ID"));
-				break;
-				
-			case XML_ATTRIBUTE_IDREF:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("IDREF"));
-				break;
-				
-			case XML_ATTRIBUTE_IDREFS:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("IDREFS"));
-				break;
+			GtkWidget *attr_editor = cong_attribute_editor_new (cong_view_get_document(CONG_VIEW(view)), 
+									    view->node,
+									    attr);
 
-			case XML_ATTRIBUTE_ENTITY:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("ENTITY"));
-				break;
-				
-			case XML_ATTRIBUTE_ENTITIES:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("ENTITIES"));
-				break;
-				
-			case XML_ATTRIBUTE_NMTOKEN:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("NMTOKEN"));
-				break;
-				
-			case XML_ATTRIBUTE_NMTOKENS:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("NMTOKENS"));
-				break;
-				
-			case XML_ATTRIBUTE_ENUMERATION:
-				{
-					GtkWidget *option_menu = gtk_option_menu_new();
-					GtkWidget *menu = gtk_menu_new();
-					xmlEnumerationPtr enum_ptr;
-
-					for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
-						gtk_menu_shell_append(GTK_MENU_SHELL(menu), 
-								      gtk_menu_item_new_with_label(enum_ptr->name));
-					}
-
-					gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), 
-								 menu);
-
-					cong_dialog_category_add_field(modelled_attr->category, 
-								       attr->name, 
-								       option_menu);
-				}
-				break;
-
-			case XML_ATTRIBUTE_NOTATION:
-				cong_dialog_category_add_field(modelled_attr->category, attr->name, gtk_label_new("NOTATION"));
-				break;
-			}
+			cong_dialog_category_add_field (modelled_attr->category, 
+							attr->name, 
+							attr_editor);
 		}
 	}
 

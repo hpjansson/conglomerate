@@ -1,5 +1,9 @@
 2003-09-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node-properties-dialog.c, plugin-docbook.c
+
+	Moved the attribute editor widget code to cong-attribute-editor.c
+	
 	* cong-attribute-editor.c, cong-attribute-editor.h, Makefile.am
 
 	New files
