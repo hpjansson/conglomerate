@@ -1,3 +1,9 @@
+2004-07-26  David Malcolm  <dmalcolm@redhat.com>
+
+	* Makefile.am, cong-spell.h, cong-spell.c: 
+
+	Added files to handle spell-checking support
+
 2004-07-23  Jeff Martin  <jeff@custommonkey.org>
 
 	* cong-util.c
