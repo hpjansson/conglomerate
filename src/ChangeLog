@@ -1,5 +1,29 @@
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-element-span.c: Clean-up of code, plus a dummy
+	implementation of needs_area_regeneration
+
+	* cong-editor-line-manager-simple.h: Ensure all LineManager
+	objects know which EditorNode they are owned by; implement a
+	handler for the width changing that lets them ask the child nodes
+	if they want to regenerate their areas, and regenerate as
+	appropriate.  Should make simple word wrapping work properly,
+	fixing bug #143994
+
+	* cong-editor-line-manager-span-wrapper.c: ditto
+
+	* cong-editor-line-manager.c: ditto
+
+	* cong-editor-line-manager.h: ditto
+
+	* cong-editor-node.c: ditto
+
+	* cong-editor-widget3.c: ditto
+
+	* cong-editor-widget.h: ditto
+
+	* cong-editor-node.h: ditto
+
 	* cong-editor-line-manager-simple.c: listen to the width_changed
 	signal on the owning area of the line_manager_simple; call a handler
 	function on the base class line manager when it occurs.

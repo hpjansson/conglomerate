@@ -203,6 +203,9 @@ cong_editor_node_get_prev (CongEditorNode *editor_node);
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node);
 
+CongEditorNode*
+cong_editor_node_get_first_child (CongEditorNode *editor_node);
+
 #if 1
 CongEditorLineManager*
 cong_editor_node_get_line_manager_for_children (CongEditorNode *editor_node);

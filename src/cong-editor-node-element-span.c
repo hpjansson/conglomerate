@@ -42,19 +42,7 @@ struct CongEditorNodeElementSpanDetails
 };
 
 
-#if 1
-static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info);
-#else
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
-
-static CongEditorLineFragments*
-generate_line_areas_recursive (CongEditorNode *editor_node,
-			       gint line_width,
-			       gint initial_indent);
-#endif
+CONG_EDITOR_NODE_DECLARE_HOOKS(cong_editor_node_element_span)
 
 static CongFlowType
 get_flow_type(CongEditorNode *editor_node);
@@ -78,12 +66,7 @@ cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-#if 1
-	node_klass->create_areas = create_areas;
-#else
-	node_klass->generate_block_area = generate_block_area;
-	node_klass->generate_line_areas_recursive = generate_line_areas_recursive;
-#endif
+	CONG_EDITOR_NODE_CONNECT_HOOKS(cong_editor_node_element_span)
 	node_klass->get_flow_type = get_flow_type;
 }
 
@@ -136,10 +119,9 @@ cong_editor_node_element_span_new (CongEditorWidget3* widget,
 				  traversal_node));
 }
 
-#if 1
 static void 
-create_areas (CongEditorNode *editor_node,
-	      const CongAreaCreationInfo *creation_info)
+cong_editor_node_element_span_create_areas (CongEditorNode *editor_node,
+					    const CongAreaCreationInfo *creation_info)
 {
 	CongEditorLineManager *line_manager;
 
@@ -156,7 +138,16 @@ create_areas (CongEditorNode *editor_node,
 							line_manager);
 	g_object_unref (G_OBJECT (line_manager));
 }
-#endif
+
+static gboolean
+cong_editor_node_element_span_needs_area_regeneration (CongEditorNode *editor_node,
+						       const CongAreaCreationGeometry *old_creation_geometry,
+						       const CongAreaCreationGeometry *new_creation_geometry)
+{
+	/* What should this do?  For now: */
+	return TRUE;
+}
+
 
 static CongFlowType
 get_flow_type(CongEditorNode *editor_node)

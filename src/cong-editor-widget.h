@@ -117,6 +117,9 @@ CongEditorNode*
 cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *editor_widget,
 							CongTraversalNode *traversal_node);
 
+CongEditorNode*
+cong_editor_widget_get_root_editor_node (CongEditorWidget3 *editor_widget);
+
 #if 0
 CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,

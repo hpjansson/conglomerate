@@ -87,7 +87,8 @@ CONG_DECLARE_CLASS_END ()
 
 void
 cong_editor_line_manager_construct (CongEditorLineManager *line_manager,
-				    CongEditorWidget3 *widget);
+				    CongEditorWidget3 *widget,
+				    CongEditorNode *editor_node);
 
 CongEditorWidget3*
 cong_editor_line_manager_get_widget (CongEditorLineManager *line_manager);
@@ -140,6 +141,13 @@ cong_editor_line_manager_get_current_indent (CongEditorLineManager *line_manager
 gint
 cong_editor_line_manager_get_current_width_available (CongEditorLineManager *line_manager,
 						      CongEditorLineIter *line_iter);
+
+void
+cong_editor_line_manager_handle_width_change (CongEditorLineManager *line_manager);
+
+CongEditorNode*
+cong_editor_line_manager_get_first_node (CongEditorLineManager *line_manager);
+
 
 G_END_DECLS
 

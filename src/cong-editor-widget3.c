@@ -408,6 +408,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 		/* Set up root line manager: */
 		PRIVATE (editor_widget)->root_line_manager = cong_editor_line_manager_simple_new (editor_widget,
+												  NULL,
 												  CONG_EDITOR_AREA_LINES (PRIVATE(editor_widget)->root_area));
 	}
 
@@ -516,6 +517,16 @@ cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *edito
 	return g_hash_table_lookup (PRIVATE (editor_widget)->hash_of_traversal_node_to_editor_node,
 				    traversal_node);
 }
+
+CongEditorNode*
+cong_editor_widget_get_root_editor_node (CongEditorWidget3 *editor_widget)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget), NULL);
+
+	return cong_editor_widget3_get_editor_node_for_traversal_node (editor_widget,
+								       cong_document_get_root_traversal_node (PRIVATE(editor_widget)->doc));
+}
+
 
 struct for_each_editor_node_struct
 {

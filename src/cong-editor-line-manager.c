@@ -53,8 +53,9 @@ static void log_event (const gchar *msg,
 struct CongEditorLineManagerPrivate
 {
 	CongEditorWidget3* widget;
+	CongEditorNode *editor_node;
 
-	/* Mapping from editor_node to per_node data: */
+	/* Mapping from editor_node children to per_node data: */
 	GHashTable *hash_of_editor_node_to_data;
 };
 
@@ -156,11 +157,14 @@ on_line_regeneration_required (CongEditorNode *editor_node,
 /* Exported function implementations: */
 void
 cong_editor_line_manager_construct (CongEditorLineManager *line_manager,
-				    CongEditorWidget3 *widget)
+				    CongEditorWidget3 *widget,
+				    CongEditorNode *editor_node)
+
 {
 	g_return_if_fail (IS_CONG_EDITOR_LINE_MANAGER (line_manager));
 
 	PRIVATE (line_manager)->widget = widget;
+	PRIVATE (line_manager)->editor_node = editor_node;
 	PRIVATE (line_manager)->hash_of_editor_node_to_data = g_hash_table_new_full (g_direct_hash,
 										     g_direct_equal,
 										     NULL,
@@ -494,6 +498,63 @@ cong_editor_line_manager_get_current_width_available (CongEditorLineManager *lin
 
 	return line_width - current_indent;
 }
+
+void
+cong_editor_line_manager_handle_width_change (CongEditorLineManager *line_manager)
+{
+	CongEditorNode *node;
+	CongEditorLineIter *new_start_iter;
+	CongAreaCreationGeometry *new_start_creation_geometry;
+
+	g_return_if_fail (IS_CONG_EDITOR_LINE_MANAGER (line_manager));
+	
+	g_message ("cong_editor_line_manager_handle_width_change - WRITEME!");
+
+	/* Potentially any/all of the editor nodes might want to regenerate their areas */
+
+	/* We have a start node; use the factory method: */
+	new_start_iter = CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_LINE_MANAGER_CLASS,
+								 line_manager,
+								 make_iter,
+								 (line_manager));
+
+	for (node=cong_editor_line_manager_get_first_node (line_manager); node; node=cong_editor_node_get_next (node)) {
+		PerNodeData *per_node_data = get_data_for_node (line_manager,
+								node);	
+		g_assert (per_node_data);
+
+		new_start_creation_geometry = cong_area_creation_geometry_new (line_manager,
+									       new_start_iter);
+		if (cong_editor_node_needs_area_regeneration (node,
+							      per_node_data->start_creation_geometry,
+							      new_start_creation_geometry)) {
+			/* Do the regeneration: */
+			regenerate_areas_for_node (line_manager,
+						   node,
+						   new_start_iter);
+		}
+
+		/* Iterate onto next node: */
+		new_start_iter = per_node_data->end_line_iter;
+		new_start_creation_geometry = per_node_data->end_creation_geometry;
+		
+		/* FIXME: what about subtrees; should we recurse??? */
+	}
+}
+
+CongEditorNode*
+cong_editor_line_manager_get_first_node (CongEditorLineManager *line_manager)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_LINE_MANAGER (line_manager), NULL);
+
+	if (PRIVATE (line_manager)->editor_node) {
+		return cong_editor_node_get_first_child (PRIVATE (line_manager)->editor_node);
+	} else {
+		/* We're dealing with the root line manager: */
+		return cong_editor_widget_get_root_editor_node (PRIVATE (line_manager)->widget);
+	}
+}
+
 
 /* Internal function implementations: */
 static void

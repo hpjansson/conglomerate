@@ -41,6 +41,7 @@ CONG_DECLARE_CLASS_END ()
 
 CongEditorLineManager*
 cong_editor_line_manager_simple_new (CongEditorWidget3 *widget,
+				     CongEditorNode *editor_node,
 				     CongEditorAreaLines *area_lines);
 
 G_END_DECLS

@@ -133,7 +133,8 @@ cong_editor_line_manager_span_wrapper_construct (CongEditorLineManagerSpanWrappe
 	g_return_val_if_fail (IS_CONG_EDITOR_LINE_ITER (outer_iter), NULL);
 
 	cong_editor_line_manager_construct (CONG_EDITOR_LINE_MANAGER (line_manager),
-					    widget);
+					    widget,
+					    editor_node);
 
 	PRIVATE (line_manager)->editor_node = editor_node;
 	PRIVATE (line_manager)->outer_line_manager = outer_line_manager;

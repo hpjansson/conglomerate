@@ -676,6 +676,23 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 		return NULL;
 	}
 }
+
+CongEditorNode*
+cong_editor_node_get_first_child (CongEditorNode *editor_node)
+{
+
+	CongTraversalNode *traversal_child;
+
+	traversal_child = cong_traversal_node_get_first_child (cong_editor_node_get_traversal_node (editor_node));
+
+	if (traversal_child) {
+		return cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
+									       traversal_child);
+	} else {
+		return NULL;
+	}
+}
+
 #else
 /**
  * cong_editor_node_is_referenced_entity_decl:
@@ -882,6 +899,7 @@ set_up_line_manager (CongEditorNode *editor_node,
 
 	/* Set up line manager: */
 	line_manager = cong_editor_line_manager_simple_new (widget,
+							    editor_node,
 							    CONG_EDITOR_AREA_LINES (area_lines));
 	cong_editor_node_set_line_manager_for_children (editor_node,
 							line_manager);
