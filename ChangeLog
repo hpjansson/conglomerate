@@ -1,3 +1,9 @@
+2003-08-30  Christian Neumair  <chris@gnome-de.org>
+
+	* configure.in
+
+	Added German (de) to ALL_LINGUAS.
+
 2003-08-29  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
