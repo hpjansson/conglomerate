@@ -147,6 +147,9 @@ open_document_do (const gchar* doc_name,
 		ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 								      doc,
 								      filename_extension);
+
+		/* Disable this for now: we'll make it valid to have a NULL dispspec in this case for now: */
+		#if 0
 		if (ds==NULL) {
 			gchar *what_failed;
 
@@ -169,6 +172,7 @@ open_document_do (const gchar* doc_name,
 				return;
 			}
 		}
+		#endif
 
 		gnome_vfs_uri_unref(file_uri);
 
@@ -177,7 +181,6 @@ open_document_do (const gchar* doc_name,
 		}		
 	}
 
-	g_assert(ds);
 	cong_doc = cong_document_new_from_xmldoc(doc, ds, doc_name); /* takes ownership of doc */
 
 	cong_node_self_test_recursive(cong_document_get_root(cong_doc));

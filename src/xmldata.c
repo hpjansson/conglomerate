@@ -817,7 +817,11 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
-		return xml_get_elements_from_dispspec(ds, tag_type);
+		if (ds) {
+			return xml_get_elements_from_dispspec(ds, tag_type);
+		} else {
+			return NULL;
+		}
 	}
 }
 

@@ -687,6 +687,14 @@ add_standard_layout_for_doc (CongPrimaryWindow *primary_window,
 	
 }
 
+static void
+add_tree_layout_for_doc (CongPrimaryWindow *primary_window, 
+			 CongDocument *doc)
+{
+	GtkWidget *widget = cong_dom_view_new(primary_window->doc);
+	gnome_app_set_contents(GNOME_APP(primary_window->window),widget);
+}
+
 /**
  * cong_primary_window_add_doc:
  * @primary_window:
@@ -709,8 +717,13 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
 
-		add_standard_layout_for_doc (primary_window, 
-					     doc);
+		if (cong_document_get_dispspec (doc)) {
+			add_standard_layout_for_doc (primary_window, 
+						     doc);
+		} else {
+			add_tree_layout_for_doc (primary_window,
+						 doc);
+		}
 
 		/* TEMPORARY: Set white background */
 		

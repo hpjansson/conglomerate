@@ -1,5 +1,9 @@
 2004-06-09  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-file-open.c, cong-primary-window.c, xmldata.c: 
+
+	Experiment to use a NULL dispspec for the case where no dispspec if recognised when loading a document, with an alternate tree-based UI.
+
 	* cong-ui-hooks.h, popup.c, tree.c:
 
 	Added a Convert to Comment/Convert from Comment feature to popup menu for a node
