@@ -1,39 +1,76 @@
 <?xml version="1.0"?>
-
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-                      "http://www.docbook.org/xml/4.1.2/docbookx.dtd" []>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.docbook.org/xml/4.1.2/docbookx.dtd">
 
 <?xml-stylesheet type="text/css" href="http://localhost/xml/styles/docbook.css"?>
 
 
 <article>
-    <title>Conglomerate FAQ</title>
-    <para>This is a list of frequently asked questions for the Conglomerate XML editor.</para> 
-
-    <qandaset>
-      <qandadiv id="gnomefaq">
-	<title>Gnome questions</title>
-
-	<qandaentry>
-	  <question>
-	    <para>I use the KDE desktop.  Do I have to install Gnome instead, to be able to run Conglomerate?</para>
-	  </question>
-	  <answer>
-	    <para>No.  Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
-	  </answer>
-	</qandaentry>
-
-	<qandaentry>
-	  <question>
-	    <para>Can I embed KDE applications in Conglomerate?</para>
-	  </question>
-	  <answer>
-	    <para>No, you can only embed Gnome 2 applications.  I.e. if you wish to use an embedded spreadsheet program to edit tables, you have to use gnumeric.  You cannot use KCalc.</para>
-	  </answer>
-	</qandaentry>
-	
-      </qandadiv>
-    </qandaset>
-  
+	<title>Conglomerate FAQ</title>
+	<para>This is a list of frequently asked questions for the Conglomerate XML editor.</para>
+	<qandaset>
+		<qandadiv id="gnomefaq">
+			<title>Gnome questions</title>
+			<qandaentry>
+				<question>
+					<para>I use the KDE desktop. Do I have to install Gnome instead, to be able to run Conglomerate?</para>
+				</question>
+				<answer>
+					<para>No. Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+		<qandadiv>
+			<qandaentry>
+				<question>
+					<para>How do I build Conglomerate from CVS?</para>
+				</question>
+				<answer>
+					<para>The latest version of Conglomerate is stored on GNOME's CVS server as module <filename>conglomerate</filename>. Detailed instructions for doing this can be found <ulink url="http://developer.gnome.org/tools/cvs.html">here</ulink>. </para>
+					<para>You'll need Gnome 2.0 installed (or a more recent version) to build on top of. You will also need the <filename>gnome-common</filename>module from GNOME CVS. </para>
+					<para>Bear in mind that you will be playing with the raw code that the developers use, and it might be temporarily broken. Also, there can be a delay of anything up to 24 hours between the time changes happen on the main CVS server and the time they appear on the anonymous CVS server.</para>
+					<para>The CVS tree can be browsed <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?dir=conglomerate&amp;amp;cvsroot=/cvs/gnome&amp;amp;module=default">here</ulink>.</para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>What XML document types does Conglomerate support?</para>
+				</question>
+				<answer>
+					<para>In theory, Conglomerate can load and save any well-formed XML document, but it is much happier if it can find a Display Specification for the document type. The following document types are currently supported:</para>
+					<itemizedlist>
+						<listitem>
+							<para>DocBook 4.1.2</para>
+						</listitem>
+						<listitem>
+							<para>XHTML (strict)</para>
+						</listitem>
+						<listitem>
+							<para>&quot;Kernel Traffic&quot; newsetter format</para>
+						</listitem>
+					</itemizedlist>
+					<para>The following document types are partially supported:</para>
+					<itemizedlist>
+						<listitem>
+							<para>RELAX NG schema files</para>
+						</listitem>
+						<listitem>
+							<para>XSL-FO files</para>
+						</listitem>
+					</itemizedlist>
+					<para>The following document types are unsupported, though we hope to add support in the future (patches welcome!):</para>
+					<itemizedlist>
+						<listitem>
+							<para>CSS</para>
+						</listitem>
+						<listitem>
+							<para>OpenOffice.org file format</para>
+						</listitem>
+						<listitem>
+							<para>Open eBook format</para>
+						</listitem>
+					</itemizedlist>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+	</qandaset>
 </article>
-
