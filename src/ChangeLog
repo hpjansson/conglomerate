@@ -1,3 +1,17 @@
+2004-03-15  Johannes H?lzl <johannes.hoelzl@gmx.de> ( ChangeLog by GSt)
+
+	* cong.marshal
+
+	New file
+
+	* Makefile.am
+
+	Generate cong-marshal.c & cong-marshal.h from cong.marshal
+
+	* cong-document.c
+
+	Use the generated names
+
 2004-03-08  Geert Stappers <stappers@stappers.nl>
 
 	* cong-file-export.c, cong-file-properties.c

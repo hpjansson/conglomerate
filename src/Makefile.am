@@ -330,6 +330,13 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
 	$(NULL)
 
-EXTRA_DIST = Makefile.win
+EXTRA_DIST = Makefile.win cong.marshal
+
+cong-marshal.h: cong.marshal
+	glib-genmarshal $< --header --prefix=cong_cclosure_marshal > $@
+
+cong-marshal.c: cong.marshal
+	glib-genmarshal $< --body --prefix=cong_cclosure_marshal > $@
+
 
 ## Last Line

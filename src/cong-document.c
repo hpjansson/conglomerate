@@ -188,7 +188,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						  G_SIGNAL_RUN_LAST,
 						  G_STRUCT_OFFSET(CongDocumentClass, node_make_orphan),
 						  NULL, NULL,
-						  cong_cclosure_marshal_VOID__CONGNODEPTR,
+						  cong_cclosure_marshal_VOID__POINTER,
 						  G_TYPE_NONE, 
 						  1, G_TYPE_POINTER);
 	
@@ -197,7 +197,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						G_SIGNAL_RUN_LAST,
 						G_STRUCT_OFFSET(CongDocumentClass, node_add_after),
 						NULL, NULL,
-						cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						cong_cclosure_marshal_VOID__POINTER_POINTER,
 						G_TYPE_NONE, 
 						2, G_TYPE_POINTER, G_TYPE_POINTER);
 	
@@ -206,7 +206,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						 G_SIGNAL_RUN_LAST,
 						 G_STRUCT_OFFSET(CongDocumentClass, node_add_before),
 						 NULL, NULL,
-						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						 cong_cclosure_marshal_VOID__POINTER_POINTER,
 						 G_TYPE_NONE, 
 						 2, G_TYPE_POINTER, G_TYPE_POINTER);
 	
@@ -215,7 +215,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						 G_SIGNAL_RUN_LAST,
 						 G_STRUCT_OFFSET(CongDocumentClass, node_set_parent),
 						 NULL, NULL,
-						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						 cong_cclosure_marshal_VOID__POINTER_POINTER,
 						 G_TYPE_NONE, 
 						 2, G_TYPE_POINTER, G_TYPE_POINTER);
 	
@@ -224,7 +224,7 @@ cong_document_class_init (CongDocumentClass *klass)
 					       G_SIGNAL_RUN_LAST,
 					       G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
 					       NULL, NULL,
-					       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
+					       cong_cclosure_marshal_VOID__POINTER_STRING,
 					       G_TYPE_NONE, 
 					       2, G_TYPE_POINTER, G_TYPE_STRING);
 	
@@ -234,7 +234,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						    G_SIGNAL_RUN_LAST,
 						    G_STRUCT_OFFSET(CongDocumentClass, node_set_attribute),
 						    NULL, NULL,
-						    cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING_STRING,
+						    cong_cclosure_marshal_VOID__POINTER_POINTER_STRING_STRING,
 						    G_TYPE_NONE, 
 						    4, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 
@@ -243,7 +243,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						       G_SIGNAL_RUN_LAST,
 						       G_STRUCT_OFFSET(CongDocumentClass, node_remove_attribute),
 						       NULL, NULL,
-						       cong_cclosure_marshal_VOID__CONGNODEPTR_POINTER_STRING,
+						       cong_cclosure_marshal_VOID__POINTER_POINTER_STRING,
 						       G_TYPE_NONE, 
 						       3, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING);
 
@@ -269,7 +269,7 @@ cong_document_class_init (CongDocumentClass *klass)
 					     G_SIGNAL_RUN_LAST,
 					     G_STRUCT_OFFSET(CongDocumentClass, set_dtd_ptr),
 					     NULL, NULL,
-					     cong_cclosure_marshal_VOID__CONGNODEPTR,
+					     cong_cclosure_marshal_VOID__POINTER,
 					     G_TYPE_NONE, 
 					     1, G_TYPE_POINTER);
 	signals[SET_URL] = g_signal_new ("set_url",
