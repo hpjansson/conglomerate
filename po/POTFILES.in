@@ -25,6 +25,7 @@ src/cong-app.c
 src/cong-attribute-editor-cdata.c
 src/cong-attribute-editor-enumeration.c
 src/cong-attribute-editor-lang.c
+src/cong-attribute-editor-nmtoken.c
 src/cong-attribute-editor.c
 src/cong-attribute-wrapper-check-button.c
 src/cong-attribute-wrapper-radio-button.c

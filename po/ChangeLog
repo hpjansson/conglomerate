@@ -1,3 +1,9 @@
+2004-09-05  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	src/cong-attribute-editor-nmtoken.c was added.
+	Thanks to Marcel Telka.
+
 2004-09-03  Laurent Dhima  <laurenti@alblinux.net>
 
 	* sq.po: Updated Albanian translation.
