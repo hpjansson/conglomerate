@@ -1,5 +1,9 @@
 2003-10-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-labelled.c, cong-editor-area-labelled.h, Makefile.am, plugin-lists-area-listitem.c, plugin-lists-area-listitem.h
+
+	Refactored CongEditorAreaListitem into a new CongEditorAreaLabelled class
+	
 	* plugin-lists-node-element-listitem.c, plugin-lists-node-element-listitem.h
 
 	Fix for bug #122365 (updates for labels in listitem plugin)

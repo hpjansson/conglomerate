@@ -29,54 +29,25 @@
 #include "cong-eel.h"
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
-#include "cong-editor-area-composer.h"
-#include "cong-editor-area-bin.h"
+#include "cong-editor-area-labelled.h"
 
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaListitemDetails
 {
-	CongEditorArea *outer_hcompose;
-	CongEditorAreaText *label;
-	CongEditorArea *inner_area;
+	CongEditorAreaText *area_label;
 };
 
 /* Method implementation prototypes: */
-static gint
-calc_requisition (CongEditorArea *area, 
-		  GtkOrientation orientation,
-		  int width_hint);
-
-static void
-allocate_child_space (CongEditorArea *area);
-
-static CongEditorArea*
-for_all (CongEditorArea *editor_area, 
-	 CongEditorAreaCallbackFunc func, 
-	 gpointer user_data);
-
-static void
-add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
-
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaListitem, 
 			cong_editor_area_listitem,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+			CongEditorAreaLabelled,
+			CONG_EDITOR_AREA_LABELLED_TYPE );
 
 static void
 cong_editor_area_listitem_class_init (CongEditorAreaListitemClass *klass)
 {
-	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
-	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
-
-	area_klass->calc_requisition = calc_requisition;
-	area_klass->allocate_child_space = allocate_child_space;
-	area_klass->for_all = for_all;
-
-	container_klass->add_child = add_child;
-
 }
 
 static void
@@ -92,40 +63,15 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 				     CongEditorWidget3 *editor_widget,
 				     const gchar *label)
 {
-	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_listitem),
-					editor_widget);
-
-	PRIVATE(area_listitem)->outer_hcompose = cong_editor_area_composer_new (editor_widget,
-					       GTK_ORIENTATION_HORIZONTAL,
-					       0);
-
-	PRIVATE(area_listitem)->label = CONG_EDITOR_AREA_TEXT(cong_editor_area_text_new (editor_widget,
-											 cong_app_get_font (cong_app_singleton(),
-													    CONG_FONT_ROLE_TITLE_TEXT), 
-											 NULL,
-											 label,
-											 FALSE));
-	
-	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_listitem)->outer_hcompose),
-					 CONG_EDITOR_AREA(PRIVATE(area_listitem)->label),
-					 FALSE,
-					 FALSE,
-					 10
-					 );
-	
-	PRIVATE(area_listitem)->inner_area = cong_editor_area_bin_new (editor_widget);
-	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_listitem)->outer_hcompose),
-					 PRIVATE(area_listitem)->inner_area,
-					 TRUE,
-					 TRUE,
-					 0
-					 );		
-
-	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_listitem),
-								   PRIVATE(area_listitem)->outer_hcompose);
-
-	cong_editor_area_protected_set_parent (PRIVATE(area_listitem)->outer_hcompose,
-					       CONG_EDITOR_AREA (area_listitem));
+	PRIVATE(area_listitem)->area_label = CONG_EDITOR_AREA_TEXT(cong_editor_area_text_new (editor_widget,
+											      cong_app_get_font (cong_app_singleton(),
+														 CONG_FONT_ROLE_TITLE_TEXT), 
+											      NULL,
+											      label,
+											      FALSE));
+	cong_editor_area_labelled_construct (CONG_EDITOR_AREA_LABELLED(area_listitem),
+					     editor_widget,
+					     CONG_EDITOR_AREA(PRIVATE(area_listitem)->area_label));
 
 	return CONG_EDITOR_AREA (area_listitem);
 }
@@ -152,69 +98,7 @@ cong_editor_area_listitem_set_label (CongEditorAreaListitem *area_listitem,
 	g_return_if_fail (IS_CONG_EDITOR_AREA_LISTITEM (area_listitem));
 	g_return_if_fail (label);
 
-	cong_editor_area_text_set_text (PRIVATE(area_listitem)->label,
+	cong_editor_area_text_set_text (PRIVATE(area_listitem)->area_label,
 					label);
 }
 
-/* Method implementation definitions: */
-static gint
-calc_requisition (CongEditorArea *area, 
-		  GtkOrientation orientation,
-		  int width_hint)
-{
-	CongEditorAreaListitem *listitem = CONG_EDITOR_AREA_LISTITEM(area);
-
-	if (PRIVATE(listitem)->outer_hcompose) {
-
-		return cong_editor_area_get_requisition (PRIVATE(listitem)->outer_hcompose,
-							 orientation,
-							 width_hint);
-	} else {
-		return 0;
-	}
-}
-
-static void
-allocate_child_space (CongEditorArea *area)
-{
-	CongEditorAreaListitem *listitem = CONG_EDITOR_AREA_LISTITEM(area);
-
-	if (PRIVATE(listitem)->outer_hcompose) {
-		const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
-
-		cong_editor_area_set_allocation (PRIVATE(listitem)->outer_hcompose,
-						 rect->x,
-						 rect->y,
-						 rect->width,
-						 rect->height);
-	}
-
-}
-
-static CongEditorArea*
-for_all (CongEditorArea *editor_area, 
-	 CongEditorAreaCallbackFunc func, 
-	 gpointer user_data)
-{
-	CongEditorAreaListitem *listitem = CONG_EDITOR_AREA_LISTITEM(editor_area);
-
-	if (PRIVATE(listitem)->outer_hcompose) {
-		if ((*func)(PRIVATE(listitem)->outer_hcompose, user_data)) {
-			return PRIVATE(listitem)->outer_hcompose;
-		}
-	}
-
-	return NULL;
-}
-
-static void
-add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
-{
-	CongEditorAreaListitem *listitem = CONG_EDITOR_AREA_LISTITEM(area_container);
-
-	g_assert(PRIVATE(listitem)->inner_area);
-
-	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(listitem)->inner_area),
-					       child);
-}

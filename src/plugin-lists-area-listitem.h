@@ -25,7 +25,7 @@
 #ifndef __PLUGIN_LISTS_AREA_LISTITEM_H__
 #define __PLUGIN_LISTS_AREA_LISTITEM_H__
 
-#include "cong-editor-area-bin.h"
+#include "cong-editor-area-labelled.h"
 
 G_BEGIN_DECLS
 
@@ -40,14 +40,14 @@ typedef struct CongEditorAreaListitemDetails CongEditorAreaListitemDetails;
 
 struct CongEditorAreaListitem
 {
-	CongEditorAreaBin bin;
+	CongEditorAreaLabelled labelled;
 
 	CongEditorAreaListitemDetails *private;
 };
 
 struct CongEditorAreaListitemClass
 {
-	CongEditorAreaContainerClass klass;
+	CongEditorAreaLabelledClass klass;
 };
 
 GType
