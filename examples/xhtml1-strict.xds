@@ -276,7 +276,7 @@
 			<head>
 				<title>New Web Page</title>
 			</head>
-			<body>The content of the web page goes here. </body>
+			<body><p>The content of the web page goes here.</p></body>
 		</html>
 	</document-template>
 </dispspec>
