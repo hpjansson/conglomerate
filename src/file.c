@@ -5,11 +5,53 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-file-selection.h"
 
-#if 1
+#if 0
+/* Implementation in terms of new GtkFileChooser interface: */
 gchar *cong_get_file_name(const gchar *title, 
 			  const gchar *filename,
-			  GtkWindow *parent_window)
+			  GtkWindow *parent_window,
+			  CongFileChooserAction action)
+{
+	GtkWidget *dialog;
+	gchar *result = NULL;
+	GtkFileChooserAction gtk_action;
+
+	g_return_val_if_fail (title, NULL);
+	g_return_val_if_fail (parent_window, NULL);
+
+	switch (action) {
+	default: g_assert_not_reached();
+	case GTK_FILE_CHOOSER_ACTION_OPEN:
+		gtk_action = GTK_FILE_CHOOSER_ACTION_OPEN;
+		break;
+	case GTK_FILE_CHOOSER_ACTION_SAVE:
+		gtk_action = GTK_FILE_CHOOSER_ACTION_SAVE;
+		break;		
+	}
+
+	dialog = gtk_file_chooser_dialog_new (title,
+					      parent_window,
+					      gtk_action,
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					      NULL);
+	
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
+		result = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	}
+	
+	gtk_widget_destroy (dialog);
+	
+	return result;
+}
+#else
+/* Implementation in terms of legacy GtkFileSelection interface: */
+gchar *cong_get_file_name(const gchar *title, 
+			  const gchar *filename,
+			  GtkWindow *parent_window,
+			  CongFileChooserAction action)
 {
 	GtkFileSelection *file_selection;
 	gint result_int;
@@ -47,57 +89,5 @@ gchar *cong_get_file_name(const gchar *title,
 	gtk_widget_destroy(GTK_WIDGET(file_selection));
 
 	return result_filename;
-}
-
-#else
-static GtkWidget *filew;
-static const char *file_name_selected;
-
-
-static void destroy( GtkWidget *widget, gpointer   data )
-{
-	gtk_main_quit();
-}
-
-
-static void file_cancel_sel( GtkWidget *w, GtkFileSelection *fs )
-{
-	file_name_selected = 0;
-	gtk_widget_destroy(filew);
-}
-
-static void file_ok_sel( GtkWidget *w, GtkFileSelection *fs )
-{
-	file_name_selected = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
-	if (file_name_selected) file_name_selected = strdup(file_name_selected);
-	gtk_widget_destroy(filew);
-}
-
-
-
-
-const gchar *cong_get_file_name(const gchar *title, 
-				GtkWindow *parent_window)
-{
-	g_return_val_if_fail(title, NULL);
-	g_return_val_if_fail(parent_window, NULL);
-
-	/* Create a new file selection widget */
-	filew = gtk_file_selection_new (title);
-	          
-	gtk_signal_connect (GTK_OBJECT (filew), "destroy", (GtkSignalFunc) destroy, &filew);
-
-	/* Connect the ok_button to file_ok_sel function */
-	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (filew)->ok_button), "clicked", (GtkSignalFunc) file_ok_sel, filew );
-
-	/* Connect the cancel_button to destroy the widget */
-	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION(filew)->cancel_button), "clicked", (GtkSignalFunc) file_cancel_sel, GTK_OBJECT (filew));
-
-	gtk_window_set_transient_for(GTK_WINDOW(filew), parent_window);
-
-	gtk_widget_show(filew);
-
-	gtk_main();
-	return(file_name_selected);
 }
 #endif

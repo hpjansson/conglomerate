@@ -12,6 +12,7 @@
 #include "cong-primary-window.h"
 #include <unistd.h> /* for chdir */
 #include "cong-vfs.h"
+#include "cong-file-selection.h"
 
 /* Data and callback for handling the forced loading of a file, autogenerating a dispspec: */
 struct force_dialog
@@ -167,7 +168,8 @@ void open_document(GtkWindow *parent_window)
 	
 	doc_name = cong_get_file_name(_("Select an XML document"),
 				      NULL,
-				      parent_window);
+				      parent_window,
+				      CONG_FILE_CHOOSER_ACTION_OPEN);
 
 	if (!doc_name) {
 		return;

@@ -34,6 +34,7 @@
 #include "cong-plugin.h"
 #include "cong-eel.h"
 #include "cong-app.h"
+#include "cong-file-selection.h"
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print-job.h>

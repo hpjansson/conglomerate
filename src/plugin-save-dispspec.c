@@ -30,6 +30,7 @@
 #include "cong-dispspec.h"
 #include "cong-app.h"
 #include "cong-primary-window.h"
+#include "cong-file-selection.h"
 
 static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
 {
@@ -71,7 +72,8 @@ static void save_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, 
 
 	new_doc_name = cong_get_file_name("Save Display Specification",
 					  old_doc_name, 
-					  cong_primary_window_get_toplevel (primary_window));
+					  cong_primary_window_get_toplevel (primary_window),
+					  CONG_FILE_CHOOSER_ACTION_SAVE);
 
 	if (!new_doc_name) {
 		g_free (old_doc_name);

@@ -1,3 +1,13 @@
+2003-11-23  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-file-export.c, cong-file-import.c, cong-file-open.c, cong-file-print.c, cong-file-save.c, file.c, global.h, plugin-save-dispspec.c
+
+	New file-selection interface, to begin transition to GtkFileChooser
+	
+	* cong-file-selection.h, Makefile.am
+
+	New file
+
 2003-11-19  Duraid Madina
 
 	* global.h

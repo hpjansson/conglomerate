@@ -29,6 +29,7 @@
 
 #include "cong-document.h"
 #include "cong-primary-window.h"
+#include "cong-file-selection.h"
 
 gint toolbar_callback_save(GtkWidget *w, gpointer data)
 {
@@ -50,7 +51,8 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 	
 	new_doc_name = cong_get_file_name(_("Save XML as..."), 
 					  current_doc_name,
-					  parent_window);
+					  parent_window,
+					  CONG_FILE_CHOOSER_ACTION_SAVE);
 
 	if (current_doc_name) {
 		g_free(current_doc_name);

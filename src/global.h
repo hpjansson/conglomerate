@@ -124,10 +124,6 @@ void open_document(GtkWindow *parent_window);
 gint save_document(CongDocument *doc, GtkWindow *parent_window);
 gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
 
-gchar *cong_get_file_name(const gchar *title, 
-			  const gchar *filename,
-			  GtkWindow *parent_window);
-
 char *pick_structural_tag(CongDispspec *ds);
 
 void open_document_do(const gchar *doc_name, GtkWindow *parent_window);

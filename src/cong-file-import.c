@@ -37,6 +37,7 @@
 #include <glade/glade-xml.h>
 #include "cong-vfs.h"
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include "cong-file-selection.h"
 
 CongImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
@@ -65,7 +66,8 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 	filename = cong_get_file_name(_("Import file..."), 
 				      NULL, 
-				      toplevel_window);
+				      toplevel_window,
+				      CONG_FILE_CHOOSER_ACTION_OPEN);
 
 	if (filename) {
 		char* mime_type = gnome_vfs_get_mime_type (filename);

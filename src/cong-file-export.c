@@ -34,6 +34,7 @@
 #include "cong-plugin.h"
 #include "cong-eel.h"
 #include "cong-app.h"
+#include "cong-file-selection.h"
 
 typedef struct CongExportDialogDetails
 {
@@ -195,7 +196,8 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	
 	new_uri = cong_get_file_name(_("Select file to export to"),
 				     export_uri,
-				     GTK_WINDOW(details->dialog));
+				     GTK_WINDOW(details->dialog),
+				     CONG_FILE_CHOOSER_ACTION_SAVE);
 
 	if (new_uri) {
 		cong_exporter_set_preferred_uri(exporter, new_uri);
