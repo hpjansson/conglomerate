@@ -50,8 +50,6 @@
 #if 0
 /* FIXME: use xmlroff eventually */
 #include <libfo/fo-libfo.h>
-#else
-#include "fo.h"
 #endif
 #endif
 

@@ -1,5 +1,9 @@
 2004-10-07  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-util.c: 
+
+	Remove reference to fo.h
+
 	* Makefile.am: 
 
 	Remove the fo files; they were a failed experiment; the plan is to
