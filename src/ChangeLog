@@ -1,3 +1,7 @@
+2003-05-10 Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* cong-menus.c: tell user many errors to come
+
 2003-05-05  Dmitry G. Mastrukov <dmitry@taurussoft.org>
 
 	* Makefile.am:
@@ -264,7 +268,7 @@ creating ChangeLog
 2002-12-11 Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am: added cong-plugin.h to make it into the dist
-	Discovered that the toplevel `make distcheck` is usefull tool
+	Discovered that the toplevel `make distcheck` is an usefull tool
 
 2002-11-29 Dmitry G. Mastrukov
 

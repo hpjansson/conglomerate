@@ -1195,7 +1195,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 
 #if ENABLE_DEBUG_MENU
 	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
-	{ N_("/Debug/Error"),           NULL, menu_callback_debug_error, 0, NULL },
+	{ N_("/Debug/80 Errorsss"),           NULL, menu_callback_debug_error, 0, NULL },
 	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
 	{ N_("/Debug/Transform DocBook to HTML"),       NULL, menu_callback_debug_transform_docbook_to_html, 0, NULL },
 	{ N_("/Debug/Transform DocBook to XHTML"),       NULL, menu_callback_debug_transform_docbook_to_xhtml, 0, NULL },
@@ -1233,7 +1233,7 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 
 #if ENABLE_DEBUG_MENU
 	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
-	{ N_("/Debug/Error"),           NULL, menu_callback_debug_error, 0, NULL },
+	{ N_("/Debug/80 Errorsss"),           NULL, menu_callback_debug_error, 0, NULL },
 	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
