@@ -3,7 +3,7 @@
 <dispspec>
   <metadata>
     <name>Conglomerate Release Notes</name>
-    <descrption>Conglomerate Release Notes</descrption>
+    <description>Conglomerate Release Notes</description>
   </metadata>
   <element-list>
     <element type="structural" localName="release" whitespace="normalize">
@@ -21,9 +21,11 @@
     </element>
     <element type="structural" localName="translations" whitespace="normalize">
       <name xml:lang="C">Translations</name>
+	<header-info xpath="@status"></header-info>
     </element>
     <element type="structural" localName="translation" whitespace="normalize">
       <name xml:lang="C">Translation</name>
+	<header-info xpath="@lang"></header-info>
     </element>
     <element type="structural" localName="enhancements" whitespace="normalize">
       <name xml:lang="C">Enhancements</name>

@@ -1,3 +1,7 @@
+2004-06-13  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* release.xds: Added <header-info> for <translations> and <translation> elements
+
 2004-06-08  David Malcolm  <dmalcolm@redhat.com>
 
 	* opml.xds: Commented out <external-document-model> element
