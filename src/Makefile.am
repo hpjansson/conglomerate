@@ -39,6 +39,8 @@ conglomerate_SOURCES =      \
   cong-app.h                \
   cong-attribute-editor.h   \
   cong-attribute-editor-cdata.h \
+  cong-attribute-editor-lang.c	\
+  cong-attribute-editor-lang.h	\
   cong-attribute-editor-enumeration.h \
   cong-attribute-wrapper.h   \
   cong-attribute-wrapper-check-button.h \

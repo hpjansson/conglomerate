@@ -1,3 +1,13 @@
+2004-06-17 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-attribute-editor.c
+
+	Added hook for using new attribute editor for languages
+
+	* Makefile.am, cong-attribute-editor-lang.c, cong-attribute-editor-lang.h
+
+	New files
+
 2004-06-16 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
     
 	* xmldata.c, tree.c, cong-command.h: More correctly

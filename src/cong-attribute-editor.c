@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
+#include "cong-attribute-editor-lang.h"
 #include "cong-attribute-editor-enumeration.h"
 #include "cong-attribute-wrapper.h"
 #include "cong-attribute-wrapper-radio-button.h"
@@ -356,6 +357,45 @@ create_cdata_editor (GladeXML *xml,
 #endif
 
 	gtk_widget_show (custom_widget);
+
+	return custom_widget;
+}
+
+/**
+ * create_lang_editor:
+ * @xml:
+ * @func_name:
+ * @name:
+ * @string1:
+ * @string2:
+ * @int1:
+ * @int2:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+GtkWidget*
+create_lang_editor (GladeXML *xml,
+		     gchar *func_name,
+		     gchar *name,
+		     gchar *string1,
+		     gchar *string2,
+		     gint int1,
+		     gint int2,
+		     gpointer user_data)
+{
+	GtkWidget *custom_widget;
+	const char *local_name;
+
+	xmlNs *ns_ptr = cong_node_get_attr_ns(global_glade_node_ptr,
+					      "lang",
+					      &local_name);
+
+	custom_widget = cong_attribute_editor_lang_new (global_glade_doc_ptr, 
+							 global_glade_node_ptr, 
+							 ns_ptr,
+							 NULL);
+	gtk_widget_show_all (custom_widget);
 
 	return custom_widget;
 }

@@ -1,5 +1,10 @@
 2004-06-17 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
+	* docbook-common-properties.glade: Added language editing
+	widget	
+
+2004-06-17 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
 	* string_selection_dialog.glade: Add Cancel button
 	make label not translatable, since it is just a 
 	placeholder.	
