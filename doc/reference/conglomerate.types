@@ -2,6 +2,7 @@
 #include "cong-app.h"
 #include "cong-attribute-editor-cdata.h"
 #include "cong-attribute-editor-enumeration.h"
+#include "cong-attribute-editor-lang.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-wrapper-check-button.h"
 #include "cong-attribute-wrapper-radio-button.h"
@@ -9,20 +10,27 @@
 #include "cong-command-history.h"
 #include "cong-command.h"
 #include "cong-dialog.h"
+#include "cong-dispspec-element-gxx.h"
+#include "cong-dispspec-element.h"
+#include "cong-dispspec-gxx.h"
 #include "cong-dispspec-registry.h"
 #include "cong-dispspec.h"
+#include "cong-document-traversal.h"
 #include "cong-document.h"
 #include "cong-dtd.h"
+#include "cong-edit-find-and-replace.h"
 #include "cong-editor-area-bin.h"
 #include "cong-editor-area-border.h"
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-container.h"
 #include "cong-editor-area-entity-decl.h"
 #include "cong-editor-area-entity-ref.h"
+#include "cong-editor-area-expander.h"
 #include "cong-editor-area-flow-holder-blocks.h"
 #include "cong-editor-area-flow-holder-inlines.h"
 #include "cong-editor-area-flow-holder-single.h"
 #include "cong-editor-area-flow-holder.h"
+#include "cong-editor-area-labelled.h"
 #include "cong-editor-area-line.h"
 #include "cong-editor-area-pixbuf.h"
 #include "cong-editor-area-spacer.h"
@@ -52,11 +60,14 @@
 #include "cong-editor-node-unimplemented.h"
 #include "cong-editor-node.h"
 #include "cong-editor-widget.h"
+#include "cong-eel-graphic-effects.h"
 #include "cong-eel.h"
 #include "cong-enum-mapping.h"
 #include "cong-error-dialog.h"
 #include "cong-fake-plugin-hooks.h"
+#include "cong-file-selection.h"
 #include "cong-font.h"
+#include "cong-glade.h"
 #include "cong-graph.h"
 #include "cong-location.h"
 #include "cong-marshal.h"
@@ -73,18 +84,40 @@
 #include "cong-node-modification-set-text.h"
 #include "cong-node-modification.h"
 #include "cong-node.h"
+#include "cong-object.h"
 #include "cong-overview-view.h"
 #include "cong-parser-error.h"
+#include "cong-plugin-manager.h"
 #include "cong-plugin.h"
 #include "cong-primary-window.h"
 #include "cong-progress-checklist.h"
 #include "cong-range.h"
 #include "cong-selection.h"
+#include "cong-service-doc-tool.h"
+#include "cong-service-document-factory.h"
+#include "cong-service-editor-node-factory.h"
+#include "cong-service-exporter.h"
+#include "cong-service-importer.h"
+#include "cong-service-node-property-dialog.h"
+#include "cong-service-node-tool.h"
+#include "cong-service-print-method.h"
+#include "cong-service-tool.h"
+#include "cong-service.h"
 #include "cong-text-cache.h"
+#include "cong-traversal-node.h"
 #include "cong-tree-view.h"
+#include "cong-ui-hooks.h"
 #include "cong-util.h"
+#include "cong-vfs.h"
 #include "cong-view.h"
+#include "cong-xpath-expression.h"
 #include "fo.h"
+#include "gxx-declare-object-from-xml-tree.h"
+#include "gxx-declare-object-to-xml-tree.h"
+#include "gxx-object-from-xml-tree.h"
+#include "gxx-object-to-xml-tree.h"
+#include "gxx-undefine-shared-macros.h"
+#include "plugin-admonition-node-element.h"
 #include "plugin-lists-area-listitem.h"
 #include "plugin-lists-node-element-listitem.h"
 #include "plugin-paragraph-area-paragraph.h"
@@ -92,12 +125,14 @@
 
 cong_attribute_editor_cdata_get_type
 cong_attribute_editor_enumeration_get_type
+cong_attribute_editor_lang_get_type
 cong_attribute_editor_get_type
 cong_attribute_wrapper_check_button_get_type
 cong_attribute_wrapper_radio_button_get_type
 cong_attribute_wrapper_get_type
 cong_command_history_get_type
 cong_command_get_type
+cong_document_traversal_get_type
 cong_document_get_type
 cong_editor_area_bin_get_type
 cong_editor_area_border_get_type
@@ -105,10 +140,12 @@ cong_editor_area_composer_get_type
 cong_editor_area_container_get_type
 cong_editor_area_entity_decl_get_type
 cong_editor_area_entity_ref_get_type
+cong_editor_area_expander_get_type
 cong_editor_area_flow_holder_blocks_get_type
 cong_editor_area_flow_holder_inlines_get_type
 cong_editor_area_flow_holder_single_get_type
 cong_editor_area_flow_holder_get_type
+cong_editor_area_labelled_get_type
 cong_editor_area_line_get_type
 cong_editor_area_pixbuf_get_type
 cong_editor_area_spacer_get_type
@@ -150,6 +187,10 @@ cong_node_modification_set_attribute_get_type
 cong_node_modification_set_parent_get_type
 cong_node_modification_set_text_get_type
 cong_node_modification_get_type
+extern GType my_class##_get_type \
+cong_traversal_node_get_type
+cong_xpath_expression_get_type
+cong_editor_node_element_admonition_get_type
 cong_editor_area_listitem_get_type
 cong_editor_node_element_listitem_get_type
 cong_editor_area_paragraph_get_type
