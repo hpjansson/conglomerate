@@ -1,3 +1,17 @@
+2004-10-09  Dave Malcolm  <dmalcolm@redhat.com>
+
+	* plugin-cleanup-source.c (Module): 
+	
+	Moved bulk of functionality into new cong-source-file.[ch] files
+	
+	* cong-source-layout.h:
+
+	New file
+
+	* cong-source-layout.c: 
+
+	Ditto
+
 2004-10-09  Mich�le Garoche  <michele.garoche@easyconnect.fr>
 
 	* Makefile.am: 
