@@ -2,6 +2,8 @@
 
 	* conglomerate.spec.in: sync with Dag Wiers
 
+	* autogen.sh: Ready for automake upgrade (#149070)
+
 2004-07-31  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* configure.in: 
