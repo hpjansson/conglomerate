@@ -53,7 +53,7 @@
 
 	(#149305)
 
-	(#149307)
+	Added a title at creation time of a book. (bugzilla.g.o. #149307)
 
 2004-08-08  David Malcolm  <david@davemalcolm.demon.co.uk>
 

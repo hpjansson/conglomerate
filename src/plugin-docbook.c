@@ -292,6 +292,13 @@ make_book(const xmlChar *title)
 	xmlAddChild(chapter_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
+				  "title",
+				  _("Untitled chapter"))
+		    );
+
+	xmlAddChild(chapter_node, 
+		    xmlNewDocNode(xml_doc,
+				  NULL,
 				  "para",
 				  _("Text of the first chapter goes here"))
 		    );
