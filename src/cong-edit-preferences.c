@@ -39,6 +39,10 @@ struct CongPreferencesDialogDetails
 static void 
 populate_dispspec_tree (CongPreferencesDialogDetails *dialog_details);
 
+static void
+on_preferences_dialog_close (GtkButton *button,
+                   CongPreferencesDialogDetails *dialog_details);
+
 static gboolean
 on_preferences_dialog_destroy (GtkWidget *widget,
 			       CongPreferencesDialogDetails *dialog_details);
@@ -54,6 +58,7 @@ void
 cong_ui_hook_edit_preferences (GtkWindow *toplevel_window)
 {
 	GtkDialog *dialog;
+	GtkButton *close;
 	CongPreferencesDialogDetails *dialog_details;
 
 	dialog_details = g_new0 (CongPreferencesDialogDetails, 1);
@@ -63,6 +68,13 @@ cong_ui_hook_edit_preferences (GtkWindow *toplevel_window)
 							 NULL,
 							 NULL);
 	dialog = GTK_DIALOG (glade_xml_get_widget (dialog_details->xml, "preferences_dialog"));
+
+	/* Get the dialog close button and connect to callback */
+	close = GTK_BUTTON (glade_xml_get_widget (dialog_details->xml, "closebutton1"));
+	g_signal_connect (G_OBJECT (close),
+			  "clicked",
+			  G_CALLBACK (on_preferences_dialog_close),
+              dialog_details);
 
 	populate_dispspec_tree (dialog_details);
 
@@ -141,6 +153,19 @@ populate_dispspec_tree (CongPreferencesDialogDetails *dialog_details)
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), 
 				     column);
+}
+
+static void
+on_preferences_dialog_close (GtkButton *button,
+				   CongPreferencesDialogDetails *dialog_details)
+{
+	GtkWidget *dialog;
+
+	g_assert (dialog_details);
+
+	dialog = glade_xml_get_widget (dialog_details->xml, "preferences_dialog");
+	gtk_widget_destroy (dialog);
+	g_free (dialog_details);
 }
 
 static gboolean

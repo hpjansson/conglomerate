@@ -1,3 +1,15 @@
+2004-08-19  Geert Stappers  <stappers@stappers.nl>
+
+	* cong-preferences.glade:
+
+	Added reference to bugzilla 125455.
+
+2004-08-19  Keith Sharp  <kms@passback.co.uk>
+
+	* cong-preferences.glade:
+
+	The OK button should be a CLOSE button.
+
 2004-07-13  Jeff Martin  <jeff@custommonkey.org>
 
 	* glade/custom-element.glade, Makefile.am: 

@@ -1,3 +1,9 @@
+2004-08-19  Keith Sharp  <kms@passback.co.uk>
+
+	* cong-edit-preferences.c:
+
+	Callback / signal handler for CLOSE button. 
+
 2004-08-16  David Malcolm  <dmalcolm@redhat.com>
 
 	* xmledit.c, xmldata.c, cong-node.h, cong-node.c, cong-location.c, cong-editor-widget3.c, cong-editor-node.c, cong-edit-find-and-replace.c, cong-dom-view.c, cong-command.c:
