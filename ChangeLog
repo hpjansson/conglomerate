@@ -1,3 +1,8 @@
+2003-08-19  Geert Stappers <stappers@stappers.nl>
+
+	* configure.in
+	Added 'nl' as translated language.
+
 2003-08-18  Jeff Martin <jeff@custommonkey.org>
 
        * conglomerate.spec
