@@ -293,6 +293,7 @@ conglomerate_SOURCES =      \
   plugin-admonition.c       \
   plugin-admonition-node-element.h \
   plugin-admonition-node-element.c \
+  plugin-arbitrary.c        \
   plugin-cleanup-source.c   \
   plugin-convert-case.c     \
   plugin-css.c              \
