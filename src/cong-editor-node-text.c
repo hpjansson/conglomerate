@@ -485,7 +485,13 @@ cong_selection_get_start_byte_offset (CongSelection *selection,
 				      CongNodePtr node,
 				      gint *output)
 {
-	const CongLocation *start_loc = cong_selection_get_ordered_start (selection);
+	const CongLocation *start_loc;
+
+	g_assert (selection);
+	g_assert (node);
+	g_assert (output);
+
+	start_loc = cong_selection_get_ordered_start (selection);
 
 	if (NULL==start_loc->node) {
 		return FALSE;
@@ -521,7 +527,13 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 				    CongNodePtr node,
 				    gint *output)
 {
-	CongLocation* end_loc = cong_selection_get_ordered_end (selection);
+	const CongLocation *end_loc;
+
+	g_assert (selection);
+	g_assert (node);
+	g_assert (output);
+
+	end_loc = cong_selection_get_ordered_end (selection);
 
 	if (NULL==end_loc->node) {
 		return FALSE;
