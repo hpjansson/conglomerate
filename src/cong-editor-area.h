@@ -146,6 +146,12 @@ gint
 cong_editor_area_get_cached_requisition (CongEditorArea *area,
 					 GtkOrientation orientation);
 
+gint
+cong_editor_area_get_allocation_width (CongEditorArea *area);
+
+gint
+cong_editor_area_get_allocation_height (CongEditorArea *area);
+
 void 
 cong_editor_area_debug_render_area (CongEditorArea *area,
 				    GdkGC *gc);

@@ -517,6 +517,23 @@ cong_editor_area_get_cached_requisition (CongEditorArea *area,
 	return cache->last_calculated_requisition;
 }
 
+gint
+cong_editor_area_get_allocation_width (CongEditorArea *area)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), 0);
+
+	return PRIVATE(area)->window_area.width;
+}
+
+gint
+cong_editor_area_get_allocation_height (CongEditorArea *area)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), 0);
+
+	return PRIVATE(area)->window_area.height;
+}
+
+
 #if 0
 void 
 cong_editor_area_set_requisition (CongEditorArea *area,

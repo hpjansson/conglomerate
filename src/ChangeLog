@@ -1,5 +1,10 @@
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area.h: added functions to get allocated width and
+	height of an area
+
+	* cong-editor-area.c: ditto
+
 	* Makefile.am: Removed tchoice.c
 
 	* tchoice.c: Removed; this is very dead code from years ago!
