@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-eel-graphic-effects.c
+
+	Fixed header filename
+	
 	* cong-editor-area-text-fragment.c, cong-editor-area.c, cong-editor-area.h, cong-editor-widget3.c
 
 	Editor areas now support mouse cursors; text areas use an I-beam

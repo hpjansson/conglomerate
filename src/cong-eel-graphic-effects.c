@@ -26,7 +26,7 @@
    and selection hilighting */
 
 #include <config.h>
-#include "eel-graphic-effects.h"
+#include "cong-eel-graphic-effects.h"
 
 #include <libart_lgpl/art_rect.h>
 #include <libart_lgpl/art_rgb.h>
