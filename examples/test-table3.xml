@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
+<article>
+  <para>This file is for testing table support within <application>Conglomerate</application>.  It is well-formed XML but is invalid DocBook.  It contains various table constructs nested inside each other in inavlid ways, to try to break table support</para>
+
+  <!-- (i) all the table elements at the same level in the hierarchy: -->
+  <table></table>
+  <tgroup></tgroup>
+  <thead></thead>
+  <tfoot></tfoot>
+  <row></row>
+  <entry></entry>
+
+  <!-- (ii) various nestings of table element inside each other -->
+  <tgroup><table></table></tgroup>
+  <thead><tgroup></tgroup></thead>
+  <tfoot><thead></thead></tfoot> 
+  <entry><row></row></entry>
+
+  <!-- (iii) various nestings of table elements inside span tags -->
+  <tgroup><emph><table></table></emph></tgroup>
+  <thead><emph><tgroup></tgroup></emph></thead>
+  <tfoot><emph><thead></thead></emph></tfoot> 
+  <entry><emph><row></row></emph></entry>
+
+  <!-- (iv) Other random invalid stuff: -->
+  <tgroup cols="this is not a number">
+      <thead>
+        <row>
+	  <entry>Column 0 header</entry>
+	  <entry>Column 1 header</entry>
+	  <entry>Column 2 header</entry>
+	</row>
+      </thead>
+      <tfoot>
+	<row>
+	  <entry>Column 0 footer</entry>
+	  <entry>Column 1 footer</entry>
+	  <entry>Column 2 footer</entry>
+	</row>
+      </tfoot>
+      <tbody>
+	<row>
+	  <entry>Row 0, Col 0</entry>
+	  <entry>Row 0, Col 1</entry>
+	  <entry>Row 0, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 1, Col 0</entry>
+	  <entry>Row 1, Col 1</entry>
+	  <entry>Row 1, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 2, Col 0</entry>
+	  <entry>Row 2, Col 1</entry>
+	  <entry>Row 2, Col 2</entry>
+	</row>
+	  <row>
+	  <entry>Row 3, Col 0</entry>
+	  <entry>Row 3, Col 1</entry>
+	  <entry>Row 3, Col 2</entry>
+	</row>
+	<row>
+	  <entry>Row 4, Col 0</entry>
+	  <entry>Row 4, Col 1</entry>
+	  <entry>Row 4, Col 2</entry>
+	</row>
+      </tbody>
+    </tgroup>
+  <para>That was a test table</para>
+</article>

@@ -1,3 +1,9 @@
+2004-03-12  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* test-table3.xml
+
+	New test file, well-formed XML but invalid DocBook, to try to give editing widget code a tough test
+
 2004-02-09  Geert Stappers <stappers@stappers.nl>
 
 	* all the XDS files are (re)moved.
