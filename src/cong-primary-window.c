@@ -80,7 +80,9 @@ struct CongPrimaryWindow
 	CongEditorView *cong_editor_view;
 #endif
 
-	GtkWidget *window, *menus, *toolbar, *status, *tray, *scroller,
+	GtkWidget *window, *menus;
+	GtkToolbar *toolbar;
+	GtkWidget *status, *tray, *scroller,
 		*auth, *butt_submit, *butt_find;
 
 	guint status_main_ctx;
@@ -187,64 +189,76 @@ GtkPixmap* cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, 
 	return GTK_PIXMAP(gtk_pixmap_new(p, mask));
 }
 
-GtkWidget* cong_primary_window_toolbar_create_item(CongPrimaryWindow *primary_window,
-						   GtkToolbar* toolbar,
-						   const char* text, 
-						   const char* tooltip_text, 
-						   const char* tooltip_private_text, 
-						   char** xpm,
-						   gint (*handler)(GtkWidget *w, gpointer data),
-						   gpointer user_data)
+gint toolbar_callback_cut(GtkWidget *w, gpointer data)
 {
-	GtkWidget* widget;
-	GtkWidget* icon;
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	icon = GTK_WIDGET(cong_primary_window_create_pixmap(primary_window, xpm));
+	cong_document_cut_selection(doc);
 
-	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(icon), 1);
+	return TRUE;
+}
 
-	widget = gtk_toolbar_append_item(toolbar, 
-					 text, 
-					 tooltip_text, 
-					 tooltip_private_text, 
-					 icon, 0, 0);
+gint toolbar_callback_copy(GtkWidget *w, gpointer data)
+{
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	gtk_widget_show(icon);
+	cong_document_copy_selection(doc);
 
-/*
-	gtk_widget_set_sensitive(icon, 0);
- */
+	return TRUE;
+}
 
-	gtk_button_set_relief(GTK_BUTTON(widget), GTK_RELIEF_NONE);
+gint toolbar_callback_paste(GtkWidget *w, gpointer data)
+{
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	gtk_signal_connect(GTK_OBJECT(widget), "clicked", GTK_SIGNAL_FUNC(handler), user_data);
+	cong_document_paste_selection(doc, w);
 
-	return widget;
+	return TRUE;
 }
 
 void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 {
-	/* Open */
-	primary_window->butt_find = cong_primary_window_toolbar_create_item(primary_window,
-									    GTK_TOOLBAR(primary_window->toolbar),
-									    _("Open"), 
-									    _("Open document"),
-									    _("Open document"),
-									    icon_openfile, 
-									    toolbar_callback_open,
-									    primary_window);
-	
-	/* Submit */
-	primary_window->butt_submit = cong_primary_window_toolbar_create_item(primary_window,
-									      GTK_TOOLBAR(primary_window->toolbar),
-									      _("Save as..."), 
-									      _("Save document as..."),
-									      _("Save document as..."), 
-									      icon_submit,
-									      toolbar_callback_save_as,
-									      primary_window);
-}
+	gtk_toolbar_insert_stock(primary_window->toolbar, 
+				 GTK_STOCK_OPEN,
+				 _("Open document"),
+				 _("Open document"),
+				 GTK_SIGNAL_FUNC(toolbar_callback_open),
+				 primary_window,
+				 -1);
+	gtk_toolbar_insert_stock(primary_window->toolbar, 
+				 GTK_STOCK_SAVE_AS,
+				 _("Save document as..."),
+				 _("Save document as..."), 
+				 GTK_SIGNAL_FUNC(toolbar_callback_save_as),
+				 primary_window,
+				 -1);
+	gtk_toolbar_append_space(primary_window->toolbar);
+	gtk_toolbar_insert_stock(primary_window->toolbar, 
+				 GTK_STOCK_CUT,
+				 _("Cut"),
+				 _("Cut"), 
+				 GTK_SIGNAL_FUNC(toolbar_callback_cut),
+				 primary_window,
+				 -1);
+	gtk_toolbar_insert_stock(primary_window->toolbar, 
+				 GTK_STOCK_COPY,
+				 _("Copy"),
+				 _("Copy"), 
+				 GTK_SIGNAL_FUNC(toolbar_callback_copy),
+				 primary_window,
+				 -1);
+	gtk_toolbar_insert_stock(primary_window->toolbar, 
+				 GTK_STOCK_PASTE,
+				 _("Paste"),
+				 _("Paste"), 
+				 GTK_SIGNAL_FUNC(toolbar_callback_paste),
+				 primary_window,
+				 -1);
 
+}
 
 gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 {
@@ -373,9 +387,9 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gtk_widget_show(primary_window->menus);
 	
 	/* --- Toolbar --- */
-	primary_window->toolbar = gtk_toolbar_new();
-	gnome_app_set_toolbar(GNOME_APP(primary_window->window), GTK_TOOLBAR(primary_window->toolbar));
-	gtk_widget_show(primary_window->toolbar);
+	primary_window->toolbar = GTK_TOOLBAR(gtk_toolbar_new());
+	gnome_app_set_toolbar(GNOME_APP(primary_window->window), primary_window->toolbar);
+	gtk_widget_show(GTK_WIDGET(primary_window->toolbar));
 
 	/* --- Toolbar icons --- */
 

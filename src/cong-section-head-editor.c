@@ -34,7 +34,6 @@ static void recursively_create_children(CongSectionHeadEditor *section_head);
 #define H_SPACING (4)
 #define H_INDENT (4)
 #define FRAGMENT_WIDTH (45)
-#define TITLE_HEIGHT (20)
 
 struct CongSectionHeadEditor
 {
@@ -48,6 +47,7 @@ struct CongSectionHeadEditor
 
 	GdkRectangle title_bar_window_rect;
 	PangoLayout *title_bar_pango_layout;
+	CongFont *title_font;
 };
 
 static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor);
@@ -78,6 +78,8 @@ static void section_head_editor_on_recursive_delete(CongElementEditor *element_e
 {
 	GList *iter;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
+
+	/* FIXME:  does this leak PangoLayouts? */
 
 	for (iter = section_head->list_of_child; iter; iter=iter->next) {
 		CongElementEditor *child_editor = iter->data;
@@ -356,6 +358,21 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 	return FALSE;
 }
 
+static gint section_head_get_title_bar_height(CongSectionHeadEditor *section_head)
+{
+	gint result;
+	g_return_val_if_fail(section_head, 0);
+
+#if 1
+	pango_layout_get_pixel_size (section_head->title_bar_pango_layout,
+				     NULL,
+				     &result);
+	return result+5;
+#else
+	return cong_font_get_height(section_head->title_font);
+#endif
+}
+
 static void section_head_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
 	CongEditorWidget *editor_widget = element_editor->widget;
@@ -363,9 +380,10 @@ static void section_head_editor_get_size_requisition(CongElementEditor *element_
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	GtkRequisition *requisition = &element_editor->requisition;
 	GList *iter;
+	gint title_bar_height = section_head_get_title_bar_height(section_head);
 
 	requisition->width = 300; /* for now */
-	requisition->height = TITLE_HEIGHT + 1 + V_SPACING;
+	requisition->height = title_bar_height + 1 + V_SPACING;
 
 	if (section_head->expanded) {
 
@@ -392,16 +410,17 @@ static void section_head_editor_allocate_child_space(CongElementEditor *element_
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkRectangle free_rectangle;
+	gint title_bar_height = section_head_get_title_bar_height(section_head);
 
 	section_head->title_bar_window_rect.x = element_editor->window_area.x;
 	section_head->title_bar_window_rect.y = element_editor->window_area.y;
 	section_head->title_bar_window_rect.width = element_editor->window_area.width;
-	section_head->title_bar_window_rect.height = TITLE_HEIGHT;
+	section_head->title_bar_window_rect.height = title_bar_height;
 
 	free_rectangle.x = element_editor->window_area.x+1+H_SPACING;
-	free_rectangle.y = element_editor->window_area.y+TITLE_HEIGHT;
+	free_rectangle.y = element_editor->window_area.y+title_bar_height;
 	free_rectangle.width = element_editor->window_area.width - (1+H_SPACING);
-	free_rectangle.height = element_editor->window_area.height - (TITLE_HEIGHT + 1 + V_SPACING);
+	free_rectangle.height = element_editor->window_area.height - (title_bar_height + 1 + V_SPACING);
 
 	for (iter = section_head->list_of_child; iter; iter=iter->next) {
 		CongElementEditor *child_editor;
@@ -433,6 +452,7 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 	GdkGC *gc;
 	int str_width;
 	gchar *title_text;
+	gint title_bar_height;
 
 	CongDocument *doc;
 	CongDispspec *ds;
@@ -471,6 +491,8 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 	gc = cong_dispspec_element_gc(section_head->element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 	g_assert(gc);
 
+	title_bar_height = section_head_get_title_bar_height(section_head);
+
 	/* Draw the frame rectangle "open" on the right-hand side : */
 	/* Top */
 	gdk_draw_line(window, gc, 
@@ -480,7 +502,7 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 	/* Left */
 	gdk_draw_line(window, gc, 
 		      H_SPACING + window_area->x, 0 + window_area->y,
-		      H_SPACING + window_area->x, (section_head->expanded ? window_area->height-1-V_SPACING : TITLE_HEIGHT-1-V_SPACING) + window_area->y);	
+		      H_SPACING + window_area->x, (section_head->expanded ? window_area->height-1-V_SPACING : title_bar_height-1-V_SPACING) + window_area->y);	
 
 	/* Fill the inside of the rectangle: */
 	gc = cong_dispspec_element_gc(section_head->element, CONG_DISPSPEC_GC_USAGE_BACKGROUND);
@@ -489,12 +511,11 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 	gdk_draw_rectangle(window, gc, 
 			   TRUE, 
 			   1 + H_SPACING + window_area->x, 1 + window_area->y, 
-			   window_area->width - 1 - H_SPACING, TITLE_HEIGHT - 2 - V_SPACING);
+			   window_area->width - 1 - H_SPACING, title_bar_height - 2 - V_SPACING);
 
 	/* Render the text: */
 	title_text = cong_dispspec_element_get_section_header_text(section_head->element, x);
 	gc = cong_dispspec_element_gc(section_head->element, CONG_DISPSPEC_GC_USAGE_TEXT);
-#if 1
 	pango_layout_set_text(section_head->title_bar_pango_layout,
 			      title_text,
 			      -1);
@@ -506,13 +527,6 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 			H_SPACING + H_INDENT + window_area->x, 
 			window_area->y,
 			section_head->title_bar_pango_layout);
-#else
-	gdk_draw_string(window,
-			title_font->gdk_font,
-			gc, 
-			H_SPACING + H_INDENT + window_area->x, 2 + title_font->asc + window_area->y,
-			title_text);
-#endif
 	g_free(title_text);
 
 	/* FIXME:  this will fail to update when the text is edited */
@@ -525,8 +539,8 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 
 		/* Bottom of title bar: */
 		gdk_draw_line(window, gc, 
-			      1 + H_SPACING + window_area->x, TITLE_HEIGHT-1-V_SPACING + window_area->y,
-			      window_area->width + window_area->x, TITLE_HEIGHT-1-V_SPACING + window_area->y);
+			      1 + H_SPACING + window_area->x, title_bar_height-1-V_SPACING + window_area->y,
+			      window_area->width + window_area->x, title_bar_height-1-V_SPACING + window_area->y);
 
 		/* Short horizontal line along very bottom of area: */
 		draw_blended_line(GTK_WIDGET(editor_widget),
@@ -555,8 +569,8 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 
 		/* Bottom of title bar: */
 		gdk_draw_line(window, gc, 
-			      1 + H_SPACING + window_area->x, TITLE_HEIGHT-1-V_SPACING + window_area->y,
-			      window_area->width + window_area->x, TITLE_HEIGHT-1-V_SPACING + window_area->y);
+			      1 + H_SPACING + window_area->x, title_bar_height-1-V_SPACING + window_area->y,
+			      window_area->width + window_area->x, title_bar_height-1-V_SPACING + window_area->y);
 	}
 
 }
@@ -823,11 +837,11 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	section_head->title_bar_pango_layout = pango_layout_new(gdk_pango_context_get());
 	g_assert(section_head->title_bar_pango_layout);
 
-	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
-	g_assert(title_font);
+	section_head->title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
+	g_assert(section_head->title_font);
 
 	pango_layout_set_font_description(section_head->title_bar_pango_layout,
-					  title_font->font_desc);
+					  cong_font_get_pango_description(section_head->title_font));
 
 
 	/* recursive creation? */

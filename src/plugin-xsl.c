@@ -31,6 +31,7 @@
 #include "cong-eel.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-font.h"
 
 typedef struct CongXSLTemplateElementEditor CongXSLTemplateElementEditor;
 struct CongXSLTemplateElementEditor
@@ -253,12 +254,13 @@ static void xsltemplate_element_editor_recursive_render(CongElementEditor *eleme
 		xmlChar* match = xmlGetProp(node,"match");
 
 		if (match) {
-			gdk_draw_string(window,
-					title_font->gdk_font,
-					gc, 
-					left_box_x+(box_width/2), 
-					centre_y,
-					match);
+			cong_font_draw_string_slow(window,
+						   title_font,
+						   gc, 
+						   match,
+						   left_box_x+(box_width/2), 
+						   centre_y,
+						   CONG_FONT_Y_POS_BASELINE);
 		}
 	}
 

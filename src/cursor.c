@@ -10,6 +10,7 @@
 #include "cong-dispspec.h"
 #include "cong-document.h"
 #include "cong-error-dialog.h"
+#include "cong-font.h"
 
 void cong_cursor_on(CongCursor *curs)
 {
@@ -21,8 +22,10 @@ void cong_cursor_on(CongCursor *curs)
 	g_assert(font);
 
 	if (curs->w) {
-		gdk_draw_line(curs->w->window, curs->gc, curs->x - 1 + 1, curs->y - 4,
-			      curs->x - 1 + 1, curs->y + font->asc + font->desc + 4);
+		gdk_draw_line(curs->w->window, 
+			      curs->gc, 
+			      curs->x - 1 + 1, curs->y - 4,
+			      curs->x - 1 + 1, curs->y + cong_font_get_height(font,"Mj") + 4);
 	}
 }
 
@@ -39,7 +42,7 @@ void cong_cursor_off(CongCursor *curs)
 
 	r.x = curs->x - 1 + 1;
 	r.y = curs->y - 4;
-	r.height = font->asc + font->desc + 9;
+	r.height = cong_font_get_height(font,"Mj") + 9;
 	r.width = 1;
 	if (curs->w) gtk_widget_draw(curs->w, &r);
 }

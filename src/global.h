@@ -35,7 +35,6 @@ enum
 };
 
 #define NEW_LOOK 1
-#define USE_PANGO 0
 #define PRINT_TESTS 0
 #define USE_CONG_EDITOR_WIDGET 1
 
@@ -50,247 +49,8 @@ enum
 #define CONG_VALIDATE_UTF8(str) ((void)0)
 #endif
 
-enum CongNodeType
-{
-	CONG_NODE_TYPE_UNKNOWN,
-	CONG_NODE_TYPE_ELEMENT,
-	CONG_NODE_TYPE_TEXT,
-	CONG_NODE_TYPE_COMMENT,
-
-	CONG_NODE_TYPE_NUM
-};
-
-
-enum CongElementType
-{
-	CONG_ELEMENT_TYPE_STRUCTURAL,
-	CONG_ELEMENT_TYPE_SPAN,
-	CONG_ELEMENT_TYPE_INSERT,
-
-	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
-
-	CONG_ELEMENT_TYPE_PARAGRAPH,
-
-	/* Other types?  Table? Plugin widget/Bonobo control? */
-
-	CONG_ELEMENT_TYPE_PLUGIN,
-
-	CONG_ELEMENT_TYPE_UNKNOWN,
-
-	CONG_ELEMENT_TYPE_ALL
-};
-
-typedef struct CongDocument CongDocument;
-typedef struct CongView CongView;
-typedef struct CongViewClass CongViewClass;
-typedef struct CongDispspec CongDispspec;
-typedef struct CongDispspecElement CongDispspecElement;
-typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
-typedef struct CongDispspecRegistry CongDispspecRegistry;
-
-typedef struct CongFont CongFont;
-
-typedef struct CongCursor CongCursor;
-typedef struct CongSelection CongSelection;
-typedef struct CongPrimaryWindow CongPrimaryWindow;
-typedef struct CongTreeView CongTreeView;
-typedef struct CongEditorView CongEditorView;
-typedef struct CongSpanEditor CongSpanEditor; 
-
-typedef xmlNodePtr CongNodePtr;
-typedef xmlChar CongXMLChar;
-
-const char* cong_node_name(CongNodePtr node);
-CongNodePtr cong_node_prev(CongNodePtr node);
-CongNodePtr cong_node_next(CongNodePtr node);
-CongNodePtr cong_node_first_child(CongNodePtr node);
-CongNodePtr cong_node_parent(CongNodePtr node);
-
-enum CongNodeType cong_node_type(CongNodePtr node);
-
-/* Handy debug method for writing log info: */
-const gchar *cong_node_type_description(enum CongNodeType node_type);
-
-/* Methods for accessing attribute values: */
-CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attribute_name);
-/* caller responsible for freeing; will be NULL if not found in node and no default in DTD available */
-
-/* Selftest methods: */
-void cong_node_self_test(CongNodePtr node);
-void cong_node_self_test_recursive(CongNodePtr node);
-
-void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node);
-CongNodePtr cong_node_recursive_dup(CongNodePtr node);
-
-
-#if 1
-#define CONG_NODE_SELF_TEST(node) cong_node_self_test(node)
-#else
-#define CONG_NODE_SELF_TEST(node) ((void)0)
-#endif
-
-int cong_node_get_length(CongNodePtr node); /* get length of content; does not include the zero terminator (to correspond to the TTREE size field) */
-
-/* Construction: */
-CongNodePtr cong_node_new_element(const char *tagname);
-CongNodePtr cong_node_new_text(const char *text);
-CongNodePtr cong_node_new_text_len(const char *text, int len); /* FIXME: what character type ? */
-
-/* Destruction: (the node has to have been unlinked from the tree already): */
-void cong_node_free(CongNodePtr node);
-
-/* 
-   Direct tree manipulation; these functions are "private" and should only be called by the cong_document_ versions below, which send notifications
-   to views of the document.
-   (Eventually we will deprecate those as well and convert to an apporach involving atomic and compound modification objects, which will give us Undo/Redo)
-*/
-void cong_node_private_make_orphan(CongNodePtr node);
-void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling);
-void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling);
-void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
-
-/**
-   Struct representing a location within a document, with both a node ptr and a byte offset into the text.
-   The text is stored as UTF-8, and the offset is a byte offset, not a character offset.
- */
-typedef struct _CongLocation
-{
-	CongNodePtr node;
-	int byte_offset; /* byte offset, not a character offset */
-} CongLocation;
-
-void
-cong_location_nullify(CongLocation *loc);
-
-void
-cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node);
-
-void
-cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int byte_offset);
-
-void
-cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glong char_offset);
-
-gboolean
-cong_location_exists(const CongLocation *loc);
-
-gboolean
-cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
-
-enum CongNodeType
-cong_location_node_type(const CongLocation *loc);
-
-gunichar
-cong_location_get_unichar(const CongLocation *loc);
-
-gchar*
-cong_location_get_utf8_pointer(const CongLocation *loc);
-
-CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc);
-
-/* "insertion" must be a UTF-8 string */
-void
-cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* insertion);
-
-void
-cong_location_del_next_char(CongDocument *doc, const CongLocation *loc);
-
-CongNodePtr
-cong_location_xml_frag_prev(const CongLocation *loc);
-
-CongNodePtr
-cong_location_xml_frag_next(const CongLocation *loc);
-
-CongNodePtr
-cong_location_node(const CongLocation *loc);
-
-CongNodePtr
-cong_location_parent(const CongLocation *loc);
-
-void
-cong_location_copy(CongLocation *dst, const CongLocation *src);
-
-gboolean
-cong_location_calc_prev_char(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_next_char(const CongLocation *input_loc,
-			     CongDispspec *dispspec,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_prev_word(const CongLocation *input_loc, 
-			     CongDocument *doc,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_next_word(const CongLocation *input_loc, 
-			     CongDocument *doc,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_document_start(const CongLocation *input_loc, 
-				  CongDispspec *dispspec,
-				  CongLocation *output_loc);
-gboolean
-cong_location_calc_line_start(const CongLocation *input_loc, 
-			      CongDispspec *dispspec,
-			      CongLocation *output_loc);
-gboolean
-cong_location_calc_document_end(const CongLocation *input_loc, 
-				CongDispspec *dispspec,
-				CongLocation *output_loc);
-gboolean
-cong_location_calc_line_end(const CongLocation *input_loc, 
-			    CongDispspec *dispspec,
-			    CongLocation *output_loc);
-gboolean
-cong_location_calc_prev_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_next_page(const CongLocation *input_loc, 
-			     CongDispspec *dispspec,
-			     CongLocation *output_loc);
-gboolean
-cong_location_calc_word_extent(const CongLocation *input_loc,
-			       CongDocument *doc,
-			       CongLocation *output_start_of_word,
-			       CongLocation *output_end_of_word);
-
-#define CONG_VIEW(x) ((CongView*)(x))
-
-/* 
-   CongView: a base class for views.  They register themselves with their document and get notified when it changes.
-
-   Will eventually be ported to the GObject framework.
-*/
-struct CongView
-{
-	CongViewClass *klass;
-	
-	CongDocument *doc;
-};
-
-struct CongViewClass
-{
-	/* 
-	   Hooks for the various change signals; eventually do this by listening to signals emitted from the document, porting to the standard 
-	   GObject framework.
-
-	   Many of the signals are sent twice; once before the change occurs, and once afterwards.  The boolean "before_change" is TRUE the first 
-	   time and FALSE the second.
-	*/
-	void (*on_document_coarse_update)(CongView *view);
-	void (*on_document_node_make_orphan)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
-	void (*on_document_node_add_after)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
-	void (*on_document_node_add_before)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
-	void (*on_document_node_set_parent)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-	void (*on_document_node_set_text)(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
-	void (*on_selection_change)(CongView *view);
-	void (*on_cursor_change)(CongView *view);
-};
-
+#include "cong-node.h"
+#include "cong-location.h"
 
 GtkWidget*
 cong_span_editor_get_widget(CongSpanEditor *xed);
@@ -476,11 +236,6 @@ struct CongSpanEditor
 #endif
 	int curs_char;      /* Cursor positioned after this char (in node) */
 
-#if USE_PANGO
-	/* Experimental Pango support */
-	PangoLayout *pango_layout;
-#endif
-
 };
 #endif /* #if !USE_CONG_EDITOR_WIDGET */
 
@@ -552,16 +307,6 @@ enum CongFontRole
 	CONG_FONT_ROLE_NUM
 };
 
-struct CongFont
-{
-	PangoFontDescription *font_desc;
-	PangoFont *pango_font;
-	GdkFont *gdk_font;
-	int asc;
-	int desc;
-	
-};
-
 CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
 void cong_primary_window_free(CongPrimaryWindow *primary_window);
 CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window);
@@ -579,12 +324,6 @@ GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 
 GtkWidget *cong_test_view_new(CongDocument *doc);
 GtkWidget *cong_source_view_new(CongDocument *doc);
-
-CongFont*
-cong_font_load(const gchar *font_name);
-
-void
-cong_font_delete(CongFont *font);
 
 #if 1
 GtkWidget* cong_gui_get_a_window(void);
@@ -621,25 +360,8 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
-void cong_document_cut(CongDocument *doc);
-void cong_document_copy(CongDocument *doc);
-void cong_document_paste(CongDocument *doc, GtkWidget *widget);
-void cong_document_view_source(CongDocument *doc);
-
-#if 0
-gint insert_meta_hook(GtkWidget *w, struct CongSpanEditor *xed);
-gint insert_media_hook(GtkWidget *w, struct CongSpanEditor *xed);
-gint select_vector(GtkWidget *w);
-
-gint xed_insert_table(GtkWidget *w, struct CongSpanEditor *xed);
-#endif
-
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
-
-#if 0
-SOCK *server_login();
-#endif
 
 #if !USE_CONG_EDITOR_WIDGET
 struct pos *pos_physical_to_logical(struct CongSpanEditor *xed, int x, int y);
@@ -651,6 +373,8 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
+void cong_selection_delete(CongSelection *selection, CongDocument *doc);
+
 GList *xml_all_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
 gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
@@ -664,11 +388,6 @@ TTREE *get_upper_section(TTREE *x);
 #endif
 
 char *tag_new_pick();
-
-#if 0
-GtkWidget *gui_metachoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
-GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
-#endif
 
 void open_document(GtkWindow *parent_window);
 gint save_document(CongDocument *doc, GtkWindow *parent_window);
@@ -753,6 +472,9 @@ cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* 
 /* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data);
+gint toolbar_callback_cut(GtkWidget *w, gpointer data);
+gint toolbar_callback_copy(GtkWidget *w, gpointer data);
+gint toolbar_callback_paste(GtkWidget *w, gpointer data);
 
 /* Menu hooks: */
 void menu_callback_debug_error(gpointer callback_data,
@@ -864,48 +586,6 @@ extern struct CongGlobals the_globals;
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
-
-typedef struct CongDocumentEvent CongDocumentEvent;
-
-enum CongDocumentEventType
-{
-	CONG_DOCUMENT_EVENT_MAKE_ORPHAN,
-	CONG_DOCUMENT_EVENT_ADD_AFTER,
-	CONG_DOCUMENT_EVENT_ADD_BEFORE,
-	CONG_DOCUMENT_EVENT_SET_PARENT,
-	CONG_DOCUMENT_EVENT_SET_TEXT,
-};
-
-struct CongDocumentEvent
-{
-	gboolean before_event;
-
-	enum CongDocumentEventType type;
-
-	union
-	{
-		struct make_orphan {
-			CongNodePtr node;
-			CongNodePtr former_parent;
-		} make_orphan;
-		struct add_after {
-			CongNodePtr node;
-			CongNodePtr older_sibling;
-		} add_after;
-		struct add_before {
-			CongNodePtr node;
-			CongNodePtr younger_sibling;
-		} add_before;
-		struct set_parent {
-			CongNodePtr node;
-			CongNodePtr adoptive_parent;
-		} set_parent;
-		struct set_text {
-			CongNodePtr node;
-			const xmlChar *new_content;
-		} set_text;
-	} data;
-};
 
 void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node);
 

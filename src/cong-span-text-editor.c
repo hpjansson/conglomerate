@@ -27,6 +27,7 @@
 #include "cong-dispspec.h"
 #include "cong-document.h"
 #include "cong-error-dialog.h"
+#include "cong-font.h"
 
 #if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
@@ -697,20 +698,19 @@ static void render_text_range(CongNodePtr key,
 
 		width = end_x-start_x;
 
-		/* FIXME: replace with a Pango call */
-		text_width = gdk_string_width(span_font->gdk_font, 
-					      span_name);
+		text_width = cong_font_string_width_slow(span_font, 
+							 span_name);
 		if (text_width < width - 6) {
-			int text_y = y + 2 + (span_font->asc + span_font->desc) / 2;
+			int text_y = y + 2 + cong_font_get_height(span_font, span_name) / 2;
 				
 			/* Draw text and lines: */
-			/* FIXME:  replace this with a Pango call */
-			gdk_draw_string(data->drawable, 
-					span_font->gdk_font, 
-					gc, 
-					start_x + 1 + (width - text_width) / 2,
-					text_y, 
-					span_name);
+			cong_font_draw_string_slow(data->drawable, 
+						   span_font, 
+						   gc, 
+						   span_name,
+						   start_x + 1 + (width - text_width) / 2,
+						   y + 2, 
+						   CONG_FONT_Y_POS_MIDDLE);
 			gdk_draw_line(data->drawable, gc, 
 				      start_x, y + 2, 
 				      start_x - 1 + (width - text_width) / 2, y + 2);
@@ -1331,6 +1331,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	doc = cong_editor_widget_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
+	g_assert(selection);
 
 	switch (event->keyval)
 	{
@@ -1371,6 +1372,23 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 		}
 		break;
 	
+#if 0
+	case GDK_BackSpace:
+		if (selection->loc0.node) {
+			cong_document_delete_selection(doc);
+		} else {
+			cong_cursor_del_prev_char(cursor, doc);
+		}
+		break;
+	
+	case GDK_Delete:
+		if (selection->loc0.node) {
+			cong_document_delete_selection(doc);
+		} else {
+			cong_cursor_del_next_char(cursor, doc);
+		}
+		break;
+#else
 	case GDK_BackSpace:
 		cong_cursor_del_prev_char(cursor, doc);
 		break;
@@ -1378,10 +1396,15 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	case GDK_Delete:
 		cong_cursor_del_next_char(cursor, doc);
 		break;
+#endif
 
 	case GDK_ISO_Enter:
 	case GDK_Return:
 		cong_cursor_paragraph_insert(cursor);
+		break;
+
+	case GDK_Tab:
+		/* Ignore the tab key for now... FIXME: what should we do? */
 		break;
 	
 	default:
@@ -1427,14 +1450,14 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 	g_assert(body_font);
 
 	pango_layout_set_font_description(span_text->pango_layout,
-					  body_font->font_desc);
+					  cong_font_get_pango_description(body_font));
 
 	span_font = cong_span_text_editor_get_font(span_text, CONG_FONT_ROLE_SPAN_TAG);
 	g_assert(span_font);
 
-	span_text->tag_height = (span_font->asc + span_font->desc) / 2;
+	span_text->tag_height = cong_font_get_height(span_font, "fubar") / 2;
 	if (span_text->tag_height < 3) span_text->tag_height = 3;
-	span_text->tag_height += (span_font->asc + span_font->desc) / 2;
+	span_text->tag_height += cong_font_get_height(span_font, "fubar") / 2;
 
 	pango_layout_set_justify(span_text->pango_layout,
 				 TRUE);

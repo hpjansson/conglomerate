@@ -7,6 +7,7 @@
 
 #include "global.h"
 #include "cong-document.h"
+#include "cong-error-dialog.h"
 
 void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs)
 {
@@ -369,6 +370,123 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 		/* Return node before p's new position (I think): */
 		return p->prev;
 	}
+}
+
+void cong_selection_delete(CongSelection *selection, CongDocument *doc)
+{
+	/* FIXME: this code is fairly unstable */
+
+	CongLocation loc0, loc1;
+	CongNodePtr n0, n1, n2;
+
+	g_return_if_fail(selection);
+	g_return_if_fail(doc);
+
+	/* Validate selection */
+	g_return_if_fail( cong_location_exists(&selection->loc0) );
+	g_return_if_fail( cong_location_exists(&selection->loc1) );
+	g_return_if_fail( cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1) );
+	/* both must be children of the same parent to maintain proper nesting */
+
+	/* --- Processing for multiple nodes --- */
+
+	if (selection->loc0.node != selection->loc1.node)
+	{
+		CongNodePtr prev_node;
+	
+		/* Selection is valid, now order first/last nodes */
+		
+		for (n0 = selection->loc0.node; n0 && n0 != selection->loc1.node; n0 = n0->next) ;
+		
+		if (!n0)
+		{
+			cong_location_copy(&loc0, &selection->loc1);
+			cong_location_copy(&loc1, &selection->loc0);
+		}
+		else
+		{
+			cong_location_copy(&loc0, &selection->loc0);
+			cong_location_copy(&loc1, &selection->loc1);
+		}
+
+		/* Split, first */
+
+		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		{
+			prev_node = cong_location_xml_frag_data_nice_split2(doc, &loc0);
+			g_assert(prev_node);
+
+			loc0.node = selection->loc0.node = prev_node->next;
+		} else {
+			prev_node = loc0.node;
+		}
+		
+		/* prev_node holds the previous node */
+
+		cong_location_nullify(&selection->loc0);
+		cong_location_nullify(&selection->loc1);
+
+		/* Reparent, first & middle */
+		for (n0 = loc0.node; n0 != loc1.node; n0 = n2) {
+			n2 = n0->next;
+
+			CONG_NODE_SELF_TEST(n0);
+
+			xml_tag_remove(doc, n0);
+		}
+
+		/* Split, last */
+
+		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
+		{
+			loc1.node = cong_location_xml_frag_data_nice_split2(doc, &loc1);
+		}
+
+		/* Delete last */
+		xml_tag_remove(doc, loc1.node);
+	}
+
+	/* --- Processing for single node (loc0.node == loc1.node) --- */
+
+	else
+	{
+		/* Sort out the ordering: */
+		if (selection->loc0.byte_offset < selection->loc1.byte_offset)
+		{
+			cong_location_copy(&loc0,&selection->loc0);
+			cong_location_copy(&loc1,&selection->loc1);
+		}
+		else
+		{
+			cong_location_copy(&loc0,&selection->loc1);
+			cong_location_copy(&loc1,&selection->loc0);
+		}
+
+		cong_location_nullify(&selection->loc0);
+		cong_location_nullify(&selection->loc1);
+
+		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		{
+			if (loc0.byte_offset == loc1.byte_offset) return; /* The end is the beginning is the end */
+			
+			/* Split up textual content of node: */
+#if 1
+			CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Deletion of text within a single node");
+#else
+			/* what should happen to cursor? */
+#endif
+		} else {
+			/* Delete entire node: */
+#if 1
+			CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Deletion of a single non-textual node");
+#else
+			/* what should happen to cursor? */
+			xml_tag_remove(doc, loc0.node);
+#endif
+		}
+	}
+
+
 }
 
 void cong_selection_init(CongSelection *selection)

@@ -8,6 +8,7 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-dialog.h"
+#include "cong-view.h"
 
 void tree_coarse_update_of_view(CongTreeView *cong_tree_view)
 {

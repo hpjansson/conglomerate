@@ -138,24 +138,6 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongSp
 	CongSelection *selection = cong_document_get_selection(xed->doc);
 	CongCursor *curs = cong_document_get_cursor(xed->doc);
 
-#if USE_PANGO
-	pango_layout_set_width(xed->pango_layout, 
-			       widget->allocation.width);
-
-	#if 1
-	{
-		int i;
-		for (i=0; i<pango_layout_get_line_count(xed->pango_layout); i++) {
-
-			PangoLayoutLine* line = pango_layout_get_line(xed->pango_layout,
-								      i);
-
-			printf("Line: %d; start_index: %d length: %d\n", i, line->start_index, line->length);
-
-		}
-	}
-	#endif
-#endif /* #if USE_PANGO */
 	
 #if 0	
 	if (!xed->p)
@@ -903,15 +885,6 @@ CongSpanEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *disp
 	xed->displayspec = displayspec;
 	xed->doc = doc;
 	xed->initial = 1;
-
-#if USE_PANGO
-	xed->pango_layout = pango_layout_new(the_globals.pango_context);
-	{
-		gchar *text = xml_fetch_clean_data(x);
-		pango_layout_set_text(xed->pango_layout, text, -1);
-		g_free(text);
-	}
-#endif /* #if USE_PANGO */
 
 	return(xed);
 }
@@ -2219,7 +2192,7 @@ void xed_cutcopy_update(CongCursor *curs)
 #endif /* #if !USE_CONG_EDITOR_WIDGET */
 }
 
-void cong_document_cut(CongDocument *doc)
+void cong_document_cut_selection(CongDocument *doc)
 {
 	CongNodePtr t;
 #if !USE_CONG_EDITOR_WIDGET
@@ -2272,7 +2245,7 @@ void cong_document_cut(CongDocument *doc)
 	xed_cutcopy_update(curs);
 }
 
-void cong_document_copy(CongDocument *doc)
+void cong_document_copy_selection(CongDocument *doc)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2338,7 +2311,7 @@ void cong_document_copy(CongDocument *doc)
 }
 
 
-void cong_document_paste(CongDocument *doc, GtkWidget *widget)
+void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;

@@ -28,6 +28,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-view.h"
 
 #define DEBUG_TREE_VIEW 0
 

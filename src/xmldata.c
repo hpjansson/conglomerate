@@ -1313,11 +1313,3 @@ xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
 
 	return attr;
 }
-
-gboolean validate_xml(xmlDocPtr doc_ptr)
-{
-	
-}
-
-
-

@@ -7,6 +7,7 @@
 #include <gtk/gtk.h>
 #include "global.h"
 #include "cong-document.h"
+#include "cong-view.h"
 
 #define DEBUG_TEST_VIEW 0
 

@@ -7,6 +7,7 @@
 #include "global.h"
 #include "cong-dispspec.h"
 #include "cong-document.h"
+#include "cong-view.h"
 
 static GtkWidget* add_item_to_popup(GtkMenu *menu, 
 				    const gchar *label,
@@ -186,7 +187,7 @@ static gint editor_popup_callback_cut(GtkWidget *widget, CongDocument *doc)
 {
 	g_assert(doc);
 	
-	cong_document_cut(doc);
+	cong_document_cut_selection(doc);
 	return TRUE;
 }
 
@@ -194,7 +195,7 @@ static gint editor_popup_callback_copy(GtkWidget *widget, CongDocument *doc)
 {
 	g_assert(doc);
 	
-	cong_document_copy(doc);
+	cong_document_copy_selection(doc);
 	return TRUE;
 }
 
@@ -202,7 +203,7 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 {
 	g_assert(doc);
 	
-	cong_document_paste(doc, widget);
+	cong_document_paste_selection(doc, widget);
 	return TRUE;
 }
 

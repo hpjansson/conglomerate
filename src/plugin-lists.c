@@ -31,6 +31,7 @@
 #include "cong-eel.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-font.h"
 
 typedef struct CongListitemElementEditor CongListitemElementEditor;
 struct CongListitemElementEditor
@@ -158,11 +159,14 @@ static void listitem_element_editor_recursive_render(CongElementEditor *element_
 			   window_area->height);
 
 	/* Render the string: */
-	gdk_draw_string(window,
-			title_font->gdk_font,
-			gc, 
-			window_area->x, 2 + title_font->asc + window_area->y,
-			listitem_element->message);
+	cong_font_draw_string_slow(window,
+				   title_font,
+				   gc, 
+				   listitem_element->message,
+				   window_area->x, 
+				   2 + window_area->y,
+				   CONG_FONT_Y_POS_TOP
+				   );
 }
 
 static void listitem_element_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)

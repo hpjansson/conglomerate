@@ -10,6 +10,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-document.h"
 #include "cong-plugin.h"
+#include "cong-font.h"
 
 #if 0
 #include <libgtkhtml/gtkhtml.h>

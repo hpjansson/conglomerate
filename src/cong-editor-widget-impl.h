@@ -29,6 +29,8 @@
 #ifndef __CONG_EDITOR_WIDGET_IMPL_H__
 #define __CONG_EDITOR_WIDGET_IMPL_H__
 
+#include "cong-view.h"
+
 G_BEGIN_DECLS
 
 /* currently implemented as a GtkDrawingArea with user_data "details" pointing to a CongEditorWidgetDetails */

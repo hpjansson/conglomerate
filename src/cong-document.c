@@ -2,6 +2,7 @@
 #include <gtk/gtk.h>
 #include "global.h"
 #include "cong-document.h"
+#include "cong-view.h"
 #include "cong-error-dialog.h"
 
 #define TEST_VIEW 0
@@ -668,4 +669,20 @@ cong_document_get_language_for_node(CongDocument *doc,
 	g_return_val_if_fail(node, NULL);
 
 	return NULL; /* for now */
+}
+
+void cong_document_delete_selection(CongDocument *doc)
+{
+	CongNodePtr t;
+	CongSelection *selection;
+	CongCursor *curs;
+
+	g_return_if_fail(doc);
+
+#if 0
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL,
+				     "Deletion of selection");
+#else
+	cong_selection_delete(cong_document_get_selection(doc), doc);
+#endif
 }

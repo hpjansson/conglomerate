@@ -1,4 +1,14 @@
 creating ChangeLog
+2003-04-16 David Malcolm
+
+	* cong-document.c, cong-document.h, cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-font.c, cong-menus.c, cong-primary-window.c, cong-section-head-editor.c, cong-source-view.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, cursor.c, global.h, main.c, plugin-lists.c, plugin-xsl.c, popup.c, tree.c, xmldata.c, xmledit.c, select.c
+
+	Split global.h up; use stock icons for toolbar; big cleanup of font handling; a disabled attempt to make the delete key work better with selections; various minor cleanups
+	
+	* cong-font.h, cong-location.h, cong-node.h, cong-view.h
+
+	Initial import
+	
 2003-04-15 David Malcolm
 
 	* cong-dispspec-registry.c, cong-document.c, cong-menus.c, cong-editor-widget.c, cong-plugin.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, cursor.c, dispspec.c, open.c, plugin-docbook.c

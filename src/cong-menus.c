@@ -56,6 +56,7 @@
 extern char *ilogo_xpm[];
 
 #define ENABLE_DEBUG_MENU 0
+#define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
 {
@@ -326,21 +327,21 @@ static void menu_callback_cut(gpointer callback_data,
 			      guint callback_action,
 			      GtkWidget *widget)
 {
-	dispatch_document_command(cong_document_cut, callback_data);
+	dispatch_document_command(cong_document_cut_selection, callback_data);
 }
 
 static void menu_callback_copy(gpointer callback_data,
 			       guint callback_action,
 			       GtkWidget *widget)
 {
-	dispatch_document_command(cong_document_copy, callback_data);
+	dispatch_document_command(cong_document_copy_selection, callback_data);
 }
 
 static void menu_callback_paste(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget)
 {
-	dispatch_document_command2(cong_document_paste, callback_data, widget);
+	dispatch_document_command2(cong_document_paste_selection, callback_data, widget);
 }
 
 static void menu_callback_view_source(gpointer callback_data,
@@ -1078,7 +1079,9 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/File/_Save"),           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
 	{ N_("/File/Save _As..."),     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
 	{ N_("/File/Sa_ve a Copy..."), "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/File/_Revert"),         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
+#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/File/_Import..."),           NULL, menu_callback_file_import, 0, "<Item>" },
 	{ N_("/File/_Export..."),           NULL, menu_callback_file_export, 0, "<Item>" },
@@ -1089,13 +1092,16 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 	{ N_("/_Edit"),                 NULL, 0, 0, "<Branch>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Edit/_Undo"),              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
 	{ N_("/Edit/_Redo"),              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
 	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
 	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Edit/_Find..."),         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
 	{ N_("/Edit/Find Ne_xt"),       "<control>G", unimplemented_menu_item, 0, "<Item>" },
 	{ N_("/Edit/Find Pre_vious"),   "<shift><control>G", unimplemented_menu_item, 0, "<Item>" },
@@ -1103,6 +1109,7 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/Edit/View _Source"),     NULL, menu_callback_view_source, 0, NULL },
 
 #if ENABLE_DEBUG_MENU
@@ -1123,7 +1130,9 @@ static GtkItemFactoryEntry menu_items[] =
 #endif
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
+#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };

@@ -112,6 +112,13 @@ PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node);
 
+/* Various UI hooks: */
+void cong_document_cut_selection(CongDocument *doc);
+void cong_document_copy_selection(CongDocument *doc);
+void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget);
+void cong_document_view_source(CongDocument *doc);
+
+
 G_END_DECLS
 
 #endif
