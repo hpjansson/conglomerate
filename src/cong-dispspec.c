@@ -248,7 +248,6 @@ make_model_from_dtd (xmlDtdPtr dtd)
 {
 	g_return_val_if_fail (dtd, NULL);
 
-	G_BREAKPOINT();
 
 	return cong_external_document_model_new (CONG_DOCUMENT_MODE_TYPE_DTD,
 						 dtd->ExternalID,
