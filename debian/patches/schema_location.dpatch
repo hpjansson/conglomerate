@@ -1,0 +1,64 @@
+#!/bin/sh -e
+## debian/patches/schema_location.dpatch by Geert Stappers
+# 
+
+#  All lines beginning with `## DP:' are a description of the patch.
+## DP: workaround for expanding @PKGDATA@
+## DP: see bugzilla #129776 for more information
+
+# File to dpatch
+FTDP=./data/conglomerate.schemas.in
+
+# String to replace, as a regular expression in double quotes
+STR="@datadir@"
+#  that is what upstream provides
+
+# modified version string, this will be the substitute.
+MOD="\/usr\/share"
+# datadir 
+
+
+#-------------------------------------------------------------
+# contact upstream if you need to change below these lines ---
+#-------------------------------------------------------------
+
+if [ $# -lt 1 ]; then
+    echo >&2 "$(basename $0): script expects needs an argument"
+    exit 1
+fi
+
+case "$1" in
+  -patch)
+    if [ $( sed -ne "/${STR}/p" ${FTDP} | wc -l ) -gt 0 ]
+    then
+      sed -e "s/${STR}/${MOD}/" ${FTDP} > ${FTDP}.modified
+      mv ${FTDP}.modified ${FTDP}
+    else
+      echo "$(basename $0): could not find"
+      echo "${STR}"
+      echo "in ${FTDP}, did not patch."
+      exit 1
+    fi
+  ;;
+  -unpatch)
+    if [ $( sed -ne "/${MOD}/p" ${FTDP} | wc -l ) -gt 0 ]
+    then
+      sed -e "s/${MOD}/${STR}/" ${FTDP} > ${FTDP}.modified
+      mv ${FTDP}.modified ${FTDP}
+    else
+      echo "$(basename $0): could not find"
+      echo "${MOD}"
+      echo "in ${FTDP}, did not patch."
+      exit 1
+    fi
+  ;;
+  *)
+    echo >&2 "$(basename $0): script expects -patch|-unpatch as argument"
+    exit 1
+  ;;
+esac
+
+exit 0
+
+# Keep the next line as trailer.
+@DPATCH@

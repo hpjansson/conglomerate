@@ -1,4 +1,8 @@
-# apply these listed patches
+## apply these listed patches
+# for application
+schema_location.dpatch
+# for debian package
 no_scrollkeeper-update.dpatch
 dont_install_generated_gtkdoc.dpatch
+# only cosmetic
 package_version.dpatch

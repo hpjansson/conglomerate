@@ -1,6 +1,6 @@
-conglomerate (0.7.8-2.2) UNRELEASED; urgency=low
+conglomerate (0.7.8-2.3) UNRELEASED; urgency=low
 
-  * keeping it top fit
+  * Keeping it top fit for New upstream release
 
   * Installing gconf schema
    - control: depend on gconf2
@@ -10,7 +10,10 @@ conglomerate (0.7.8-2.2) UNRELEASED; urgency=low
    - conglomerate.postinst: new file
    - conglomerate.prerm: new file
 
- -- Geert Stappers <stappers@stappers.nl>  Sun, 21 Dec 2003 17:59:35 +0100
+  * patches/schema_location.dpatch
+  New file, workaround for bugzilla.gnome.org #129776
+
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 22 Dec 2003 13:34:49 +0000
 
 conglomerate (0.7.8-1) unstable; urgency=low
 
