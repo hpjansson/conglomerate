@@ -888,17 +888,98 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 	return(loc->node);
 }
 
+static gboolean
+merge_text_update_location_callback (CongDocument *doc,
+				     CongLocation *location, 
+				     gpointer user_data)
+{
+	CongNodePtr affected_node = user_data;
+
+	g_assert (affected_node);
+	g_assert (affected_node->prev);
+
+	if (location->node == affected_node->prev) {
+		
+		location->node = affected_node;
+
+		return TRUE;
+
+	} else if (location->node == affected_node) {
+
+		location->byte_offset += strlen(affected_node->prev->content);
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean 
+merge_adjacent_text_callback (CongDocument *doc, 
+			      CongNodePtr node, 
+			      gpointer user_data, 
+			      guint recursion_level)
+{
+	CongCommand *cmd = CONG_COMMAND (user_data);
+
+	/* We have to "look behind" at the previous sibling, since the iteration moes forward: */
+	if (node->prev) {
+		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
+			if (cong_node_type(node->prev)==CONG_NODE_TYPE_TEXT) {
+				/* Merge preceding node's text into this one, then delete it: */
+				gchar *new_text;
+
+				new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
+
+				/* Update cursor and selection if necessary: */
+				cong_command_for_each_location (cmd,
+								merge_text_update_location_callback, 
+								node);
+
+				cong_command_add_node_set_text (cmd, node, new_text);
+				g_free (new_text);
+
+				cong_command_add_node_recursive_delete (cmd, node->prev);
+			}			
+		}
+	}
+
+	/* Keep going: */
+	return FALSE;
+}
+
+
 void
 cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd)
 {
-	g_assert_not_reached();
+	CongDocument *doc;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	doc = cong_command_get_document (cmd);
+
+	cong_document_begin_edit (doc);
+
+	cong_document_for_each_node (doc, merge_adjacent_text_callback, cmd);
+
+	cong_document_end_edit (doc);
 }
 
 void
 cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd, 
 						       CongNodePtr node)
 {
-	g_assert_not_reached();
+	CongDocument *doc;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	doc = cong_command_get_document (cmd);
+
+	cong_document_begin_edit (doc);
+
+	cong_document_for_each_child_of_node (doc, node, merge_adjacent_text_callback, cmd);
+
+	cong_document_end_edit (doc);
 }
 
 gboolean
@@ -1160,4 +1241,33 @@ cong_command_add_node_split3 (CongCommand *cmd,
 	CONG_NODE_SELF_TEST(d2);
 
 	return(d2);
+}
+
+void 
+cong_command_add_remove_tag (CongCommand *cmd,
+			     CongNodePtr node)
+{
+	CongDocument *doc;
+	CongNodePtr iter;
+	CongNodePtr iter_next;
+
+
+	g_return_if_fail (IS_CONG_COMMAND (cmd));
+	g_return_if_fail(node);
+
+	doc = cong_command_get_document (cmd);
+
+	cong_document_begin_edit (doc);
+
+	for (iter = node->children; iter; iter = iter_next) {
+		iter_next = iter->next;
+		
+		cong_command_add_node_add_before (cmd, iter, node);
+	}
+
+	cong_command_add_node_make_orphan (cmd, node);
+
+	cong_command_add_node_recursive_delete (cmd, node);
+
+	cong_document_end_edit (doc);
 }

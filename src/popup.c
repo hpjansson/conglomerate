@@ -269,8 +269,25 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr
 { 
 	CongDocument *doc = (CongDocument*)(g_object_get_data(G_OBJECT(widget), "document"));
 	CongCursor *cursor = cong_document_get_cursor(doc);
+#if SUPPORT_UNDO
+	CongCommand *cmd = cong_command_new (doc, _("Remove Span Tag"));
+	CongNodePtr parent = node_ptr->parent;
 
+	cong_document_begin_edit(doc);
+
+	cong_command_add_remove_tag (cmd,
+				     node_ptr);
+
+	cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+							       parent);
+
+	cong_document_end_edit(doc);
+
+	cong_document_add_command (doc, cmd);
+	g_object_unref (G_OBJECT (cmd));
+#else
 	cong_document_tag_remove(doc, node_ptr);
+#endif
 
 	return TRUE;
 }

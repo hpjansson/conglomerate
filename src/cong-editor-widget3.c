@@ -41,6 +41,7 @@
 
 #include "cong-selection.h"
 #include "cong-editor-node-text.h"
+#include "cong-command.h"
 
 #define SHOW_CURSOR_SPEW 0
 
@@ -1108,6 +1109,46 @@ key_press_event_handler (GtkWidget *w,
 										       &target_location)) {
 				/* Are we moving the cursor, or dragging out a selection? */
 
+#if SUPPORT_UNDO
+				CongCommand *cmd = cong_command_new (doc, _("Cursor Movement"));
+				CongLocation new_selection_start;
+				CongLocation new_selection_end;
+				
+				cong_document_begin_edit (doc);	
+
+				/* Move the cursor to the new location: */
+				cong_command_add_cursor_change (cmd,
+								&target_location);
+
+				cong_location_copy (&new_selection_start, cong_selection_get_logical_start (selection)); 
+				cong_location_copy (&new_selection_end, cong_selection_get_logical_end (selection)); 
+
+				if (event->state & GDK_SHIFT_MASK) {
+					
+					if (NULL==(cong_selection_get_logical_start(selection)->node)) {
+						cong_location_copy (&new_selection_start, &old_location);
+					}
+
+					/* Then we should also drag out the selection to the new location: */
+					cong_location_copy (&new_selection_end, &target_location);
+
+				} else {
+					/* Then we should clear any selection that exists: */
+					cong_location_nullify (&new_selection_start);
+					cong_location_nullify (&new_selection_end);
+				}
+
+				cong_command_add_selection_change (cmd,
+								   &new_selection_start,
+								   &new_selection_end);
+
+				cong_document_add_command (doc,
+							   cmd);
+				
+				g_object_unref (G_OBJECT (cmd));
+				cong_document_end_edit (doc);	
+
+#else
 				/* Move the cursor to the new location: */
 				cong_location_copy(&cursor->location, &target_location);
 
@@ -1130,18 +1171,26 @@ key_press_event_handler (GtkWidget *w,
 					cong_document_on_selection_change (doc);
 				}
 				/* FIXME: should we notify the document? */ 
-
 				cong_document_on_cursor_change (doc);
 
 				cong_document_end_edit (doc);	
+#endif
 			}
 		}
 		break;
 	
-#if 1
 	case GDK_BackSpace:
 		if (cong_selection_get_logical_end(selection)->node) {
+#if SUPPORT_UNDO
+			CongCommand *cmd = cong_command_new (doc, _("Delete Selection"));
+			cong_command_add_delete_selection (cmd);
+			cong_document_add_command (doc,
+						   cmd);
+			
+			g_object_unref (G_OBJECT (cmd));
+#else
 			cong_document_delete_selection(doc);
+#endif
 		} else {
 			cong_cursor_del_prev_char(cursor, doc);
 		}
@@ -1149,20 +1198,20 @@ key_press_event_handler (GtkWidget *w,
 	
 	case GDK_Delete:
 		if (cong_selection_get_logical_end(selection)->node) {
+#if SUPPORT_UNDO
+			CongCommand *cmd = cong_command_new (doc, _("Delete Selection"));
+			cong_command_add_delete_selection (cmd);
+			cong_document_add_command (doc,
+						   cmd);
+			
+			g_object_unref (G_OBJECT (cmd));
+#else
 			cong_document_delete_selection(doc);
+#endif
 		} else {
 			cong_cursor_del_next_char(cursor, doc);
 		}
 		break;
-#else
-	case GDK_BackSpace:
-		cong_cursor_del_prev_char(cursor, doc);
-		break;
-	
-	case GDK_Delete:
-		cong_cursor_del_next_char(cursor, doc);
-		break;
-#endif
 
 	case GDK_ISO_Enter:
 	case GDK_Return:
@@ -1176,6 +1225,20 @@ key_press_event_handler (GtkWidget *w,
 	default:
 		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
+#if SUPPORT_UNDO
+			CongCommand *cmd = cong_command_new (doc, _("Typing"));
+
+                        if (cong_selection_get_logical_end(selection)->node) {
+				cong_command_add_delete_selection (cmd);
+                        }
+			cong_command_add_insert_text_at_cursor (cmd, event->string);
+			cong_command_add_nullify_selection (cmd);
+
+			cong_document_add_command (doc,
+						   cmd);
+			
+			g_object_unref (G_OBJECT (cmd));
+#else
                         if (cong_selection_get_logical_end(selection)->node) {
                                 cong_document_delete_selection(doc);
                         }
@@ -1184,6 +1247,7 @@ key_press_event_handler (GtkWidget *w,
 
 			cong_selection_nullify (selection);
 			cong_document_on_selection_change (doc);
+#endif
 		}
 		break;
 	}

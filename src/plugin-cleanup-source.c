@@ -405,10 +405,8 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 	/* Stage 2:  add back whitespace to indicate the structure of the document: */
 	cong_document_for_each_node (doc, add_indentation_callback, &cleanup_data);
 
-#if 0
 	/* Stage 3: merge adjacent text nodes: */
-#error	cong_document_merge_adjacent_text_nodes(doc);
-#endif
+	cong_command_add_merge_adjacent_text_nodes (cleanup_data.cmd);
 
 	cong_document_add_command (doc,
 				   cleanup_data.cmd);

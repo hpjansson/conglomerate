@@ -1,5 +1,9 @@
 2003-10-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c, cong-editor-widget3.c, plugin-cleanup-source.c, popup.c
+
+	Further undo/redo-ification
+	
 	* popup.c, xmledit.c
 
 	Undo/redo-ification of Span Tag application, and for clipboard operations
