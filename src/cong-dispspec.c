@@ -24,6 +24,7 @@
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
 #include "cong-vfs.h"
+#include "cong-language.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -73,8 +74,8 @@ struct CongDispspec
 	/* We have a search tree, indexed by SearchTreeKeys */
 	GTree *search_tree; 
 
-	gchar *name;
-	gchar *desc;
+	CongPerLanguageData *per_lang_name;
+	CongPerLanguageData *per_lang_desc;
 	gchar *filename_extension;
 	GdkPixbuf *icon;
 
@@ -313,12 +314,19 @@ cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
 
 	ds = cong_dispspec_new();
 
+	ds->per_lang_name = cong_per_language_data_new (g_free);
+	ds->per_lang_desc = cong_per_language_data_new (g_free);
+
 	if (name) {
-		ds->name = g_strdup(name);
+		cong_per_language_set_data_for_lang (ds->per_lang_name,
+						     NULL,
+						     g_strdup (name));
 	}
 
 	if (description) {
-		ds->desc = g_strdup(description);
+		cong_per_language_set_data_for_lang (ds->per_lang_desc,
+						     NULL,
+						     g_strdup (description));
 	}
 
 	ds->document_models[CONG_DOCUMENT_MODE_TYPE_DTD] = make_model_from_dtd (dtd);
@@ -487,36 +495,43 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
  * cong_dispspec_get_name:
  * @ds:
  *
- * TODO: Write me
- * Returns:
+ * Get a human-readable, translated name of the dispspec, in the most appropriate language
+ * Returns: the name
  */
 const gchar*
 cong_dispspec_get_name (const CongDispspec *ds)
 {
-	g_return_val_if_fail(ds,NULL);
+	const gchar *result;
 
-	if (ds->name) {
-		return ds->name;
+	g_return_val_if_fail (ds,NULL);
+
+	result = cong_per_language_get_data (ds->per_lang_name);
+
+	if (result) {
+		return result;
 	} else {
 		return _("unnamed");
 	}
-
 }
 
 /**
  * cong_dispspec_get_description:
  * @ds:
  *
- * TODO: Write me
- * Returns:
+ * Get a human-readable, translated description of the dispspec, in the most appropriate language
+ * Returns: a string description (we may update this to give HTML or similar at some point)
  */
 const gchar*
 cong_dispspec_get_description (const CongDispspec *ds)
 {
-	g_return_val_if_fail(ds,NULL);
+	const gchar *result;
 
-	if (ds->desc) {
-		return ds->desc;
+	g_return_val_if_fail (ds,NULL);
+
+	result = cong_per_language_get_data (ds->per_lang_desc);
+
+	if (result) {
+		return result;
 	} else {
 		return _("No description available.");
 	}
@@ -1205,27 +1220,72 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 }
 
 
+/* Create a generic "per-lang" container of gpointers with a GDestroyFunc, and an iterator so that you can easily write to/from XML functions... first step towards killing GXX as well... */
+#if 0
+/**
+ * cong_node_get_child_for_lang:
+ * @node: the parent node
+ *
+ * Search through the children of the given node, looking for the node with the most appropriate xml:lang 
+ * based upon the language.
+ *
+ * Returns: the most appropriate child node, or NULL if no child of the correct language exists
+ */
+CongNodePtr
+cong_node_get_child_for_lang (CongNodePtr node)
+{
+	CongNodePtr node_iter;
+
+	g_return_val_if_fail (node, NULL);
+
+	for (node_iter = node->children; node_iter; node_iter=node_iter->next) {
+
+		if (cong_node_type (node_iter)==CONG_NODE_ELEMENT) {
+		}
+	}
+	return NULL;
+}
+#endif
+
+static gpointer
+get_content_string_cb (xmlDocPtr xml_doc, CongNodePtr node)
+{
+#if 0
+#error
+	xmlChar* str = xmlNodeListGetString (xml_doc, node, 1);
+	if (str) {
+		return g_strdup (str);
+	} else {
+		return NULL;
+	}
+#else
+	/* FIXME: assumes only a single TEXT child, so will break in the presence of comments etc */
+	if (node->children) {
+		if (cong_node_type (node->children)==CONG_NODE_TYPE_TEXT) {
+			return g_strdup (node->children->content);
+		}
+	}
+	return NULL;
+#endif
+}
+
 static void
 parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 {
-	xmlNodePtr xml_element;
 	DS_DEBUG_MSG1("got metadata\n");
-	
-	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
-		if (0==strcmp(xml_element->name,"name")) {
-			xmlChar* str = xmlNodeListGetString(doc, xml_element->xmlChildrenNode, 1);
-			if (str) {
-				ds->name = g_strdup(str);
-			}
-		}
 
-		if (0==strcmp(xml_element->name,"description")) {
-			xmlChar* str = xmlNodeListGetString(doc, xml_element->xmlChildrenNode, 1);
-			if (str) {
-				ds->desc = g_strdup(str);
-			}
-		}
-	}
+	ds->per_lang_name = cong_per_language_data_new_from_xml (doc,
+								 node,
+								 NULL,
+								 "name",
+								 get_content_string_cb,
+								 g_free);
+	ds->per_lang_desc = cong_per_language_data_new_from_xml (doc,
+								 node,
+								 NULL,
+								 "description",
+								 get_content_string_cb,
+								 g_free);
 }
 
 
@@ -1380,6 +1440,13 @@ cong_external_document_model_get_system_id (const CongExternalDocumentModel* mod
 	return model->system_id;
 }
 
+static CongNodePtr 
+make_string_node_callback (gpointer data)
+{
+	g_assert (0);
+	return NULL;
+}
+
 /* Subroutines for converting a CongDispspec to XML XDS: */
 static void add_xml_for_metadata (xmlDocPtr xml_doc, 
 				  CongNodePtr root, 
@@ -1392,7 +1459,18 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 				 "metadata",
 				 NULL);			
 	xmlAddChild(root, metadata);
-	
+
+	cong_per_language_data_to_xml (dispspec->per_lang_name,
+				       metadata,
+				       NULL,
+				       "name",
+				       make_string_node_callback);
+	cong_per_language_data_to_xml (dispspec->per_lang_desc,
+				       metadata,
+				       NULL,
+				       "description",
+				       make_string_node_callback);
+#if 0
 	if (dispspec->name) {
 		
 		xmlAddChild (metadata, 
@@ -1410,6 +1488,7 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 					       dispspec->desc)
 			     );
 	}
+#endif
 	
 	/* FIXME: we can't yet save the icon name */
 
@@ -1680,7 +1759,9 @@ xml_to_dispspec (CongDispspec *dispspec,
 
 	if (doc)
 	{
-		dispspec->name = g_strdup(doc->URL);
+		/* FIXME: reinstate this code? */
+		/* dispspec->name = g_strdup(doc->URL); */
+
 		handle_elements_from_xml (dispspec, xmlDocGetRootElement (doc));
 		ensure_all_elements_covered(dispspec, xmlDocGetRootElement (doc));
 	}

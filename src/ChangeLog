@@ -1,5 +1,10 @@
 2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c: 
+
+	Reimplemented loading and usage of name/descriptions to use cong-language
+	to (hopefully) improve i18n support.
+
 	* Makefile.am, cong-language.h, cong-language.c: 
 
 	Added new cong-language.[ch] files
