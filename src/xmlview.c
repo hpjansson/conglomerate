@@ -1175,6 +1175,8 @@ struct xview *xmlview_new(CongDocument *doc)
 
 	CongDispspec *displayspec;
 
+	gchar* filename;
+
 	GtkTreeIter root_iter;
 
 	g_message("xmlview_new called\n");
@@ -1212,23 +1214,18 @@ struct xview *xmlview_new(CongDocument *doc)
 
 	for (i = 0; i < 5; i++) style_white->bg[i] = gcol;
 
-#if 1
+	filename = cong_document_get_filename(doc);
+
 	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
 	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
-			    TREEVIEW_TITLE_COLUMN, "Document",
+			    TREEVIEW_TITLE_COLUMN, filename,
 			    TREEVIEW_NODE_COLUMN, cong_document_get_root(doc),
 			    TREEVIEW_DOC_COLUMN, doc,
 			    /* TREEVIEW_COLOR_COLUMN, g_strdup_printf("#305050"), */
 			    -1);
 	/* FIXME: What colour should the Document node be? */
-#else
-	xv->tree = gtk_tree_item_new_with_label("Document");
-	gtk_tree_append(GTK_TREE(tree), xv->tree);
-	gtk_widget_show(xv->tree);
 
-	glaebb_tree = gtk_tree_new();
-	gtk_tree_item_set_subtree(GTK_TREE_ITEM(xv->tree), glaebb_tree);
-#endif
+	g_free(filename);
 
 	xv->w = gtk_vbox_new(FALSE, 0);
 #if 1

@@ -14,11 +14,13 @@ struct _CongDocument
 #endif  /* #if NEW_XML_IMPLEMENTATION */
 
 	CongDispspec *ds;
+
+	gchar *url;
 };
 
 #if NEW_XML_IMPLEMENTATION
 CongDocument*
-cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds)
+cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url)
 {
 	CongDocument *doc;
 
@@ -26,14 +28,15 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds)
 
 	doc = g_new(struct _CongDocument,1);
 
-	doc->xml_doc=xml_doc;
-	doc->ds=ds;
+	doc->xml_doc = xml_doc;
+	doc->ds = ds;
+	doc->url = g_strdup(url);
 
 	return doc;
 }
 #else
 CongDocument*
-cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds)
+cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds, const gchar *url)
 {
 	CongDocument *doc;
 
@@ -41,8 +44,9 @@ cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds)
 
 	doc = g_new(struct _CongDocument,1);
 
-	doc->tt=tt;
-	doc->ds=ds;
+	doc->tt = tt;
+	doc->ds = ds;
+	doc->url = g_strdup(url);
 
 	return doc;
 }
@@ -60,6 +64,10 @@ cong_document_delete(CongDocument *doc)
 
 	ttree_branch_remove(doc->tt);
 #endif  /* #if NEW_XML_IMPLEMENTATION */
+
+	if (doc->url) {
+		g_free(doc->url);
+	}
 	
 	g_free(doc);
 }
@@ -83,6 +91,29 @@ cong_document_get_dispspec(CongDocument *doc)
 	g_return_val_if_fail(doc, NULL);
 
 	return doc->ds;
+}
+
+gchar*
+cong_document_get_filename(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	if (doc->url) {
+		gchar *filename;
+		gchar *path;
+		GnomeVFSURI *uri = gnome_vfs_uri_new(doc->url);
+		
+		cong_error_split_uri(uri, &filename, &path);
+
+		gnome_vfs_uri_unref(uri);
+
+		g_free(path);
+		
+		return filename;
+
+	} else {
+		return g_strdup("(Untitled)");
+	}
 }
 
 void

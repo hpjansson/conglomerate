@@ -83,7 +83,7 @@ GtkWidget* cong_gui_get_root(struct cong_gui* gui)
 
 void cong_gui_destroy_tree_store(struct cong_gui* gui)
 {
-	gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+	gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
  
 #if 0
@@ -387,7 +387,7 @@ int test_open_do(const char *doc_name, const char *ds_name)
 #if 0
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), do_ttree_test(xml_in), FALSE, FALSE, 0);
 #else
-	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds));
+	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in, ds, doc_name));
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 #endif
 

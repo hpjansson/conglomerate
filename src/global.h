@@ -139,10 +139,10 @@ typedef struct _CongDocument CongDocument;
 #if NEW_XML_IMPLEMENTATION
 /* takes ownership of xml_doc */
 CongDocument*
-cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds);
+cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url);
 #else
 CongDocument*
-cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds);
+cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds, const gchar *url);
 #endif
 
 void
@@ -153,6 +153,10 @@ cong_document_get_root(CongDocument *doc);
 
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc);
+
+gchar*
+cong_document_get_filename(CongDocument *doc);
+/* caller is responsible for freeeing */
 
 void
 cong_document_save(CongDocument *doc, const char* filename);

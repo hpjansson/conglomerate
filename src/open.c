@@ -579,9 +579,9 @@ void open_document_do(const gchar* doc_name)
 
 	g_assert(ds);
 #if NEW_XML_IMPLEMENTATION
-	cong_doc = cong_document_new_from_xmldoc(doc, ds); /* takes ownership of doc */
+	cong_doc = cong_document_new_from_xmldoc(doc, ds, doc_name); /* takes ownership of doc */
 #else	
-	cong_doc = cong_document_new_from_ttree(xml_in, ds);
+	cong_doc = cong_document_new_from_ttree(xml_in, ds, doc_name);
 #endif
 
 	g_assert(cong_doc);
