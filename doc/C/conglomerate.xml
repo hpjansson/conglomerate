@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"[
+
+ <!ENTITY app "conglomerate">
+ <!ENTITY title "Conglomerate">
+
+]>
+<article>
+  <title>&title; User Manual</title>
+  <articleinfo>
+    <authorgroup>
+      <author>
+        <firstname>Jeff</firstname>
+        <surname>Martin</surname>
+        <authorblurb>
+          <para>Blah blah blah.  My life story.  Very exciting.</para>
+          <para>Here is my email address: <email>jeff@custommonkey.org</email>; in theory we can support emailing from these tags</para>
+        </authorblurb>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>2003</year>
+      <holder>Jeff Martin</holder>
+    </copyright>
+
+    <graphic fileref="figures/conglomerate_logo.png"/>
+    <abstract>
+      <para>
+&title; is a project to create a complete structured information authoring,
+management, archival, revision control and transformation system. &title;
+uses XML semantics and powerful graphical editing, coupled with a centralised
+storage model and a flexible transformation language to create an environment
+which is easy to use, produces high-quality structured output, and lets the user
+target several output media with a single source document. 
+      </para>      
+    </abstract>
+
+    <legalnotice>
+      <para>
+        This document may be distributed subject to the terms and
+        conditions set forth in the Open Publication License, v1.0 or
+        later (the latest version is presently available at <ulink
+        url=" http://www.opencontent.org/openpub/"
+        type="http">http://www.opencontent.org/openpub/</ulink> )
+      </para>
+    </legalnotice>
+
+  </articleinfo>
+
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+&title; is a project to create a complete structured information authoring,
+management, archival, revision control and transformation system. &title;
+uses XML semantics and powerful graphical editing, coupled with a centralised
+storage model and a flexible transformation language to create an environment
+which is easy to use, produces high-quality structured output, and lets the user
+target several output media with a single source document. 
+    </para>      
+  </sect1>      
+  <sect1 id="getting-started">
+    <title>Getting Started</title>
+    <sect2 id="to-start">
+      <title>To Start &title;</title>
+      <para>You can start <application>&title;</application> in the following ways:</para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>Applications</guimenu> menu</term>
+          <listitem>
+            <para>Choose
+              <menuchoice>
+                <guisubmenu>Accessories</guisubmenu>
+                <guimenuitem>XML Editor</guimenuitem>
+              </menuchoice>. </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Command line</term>
+          <listitem>
+            <para>Type <command>&app;</command>, then press <keycap>Return</keycap>.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="new-document">
+      <title>Creating a new document</title>
+      <para>
+        To create a new document select <guimenuitem>New</guimenuitem> from the
+<guimenu>File</guimenu> menu. This will open the Create a new file wizard.
+      </para>
+      <figure>
+        <title><guimenu>File</guimenu>/<guimenuitem>New</guimenuitem></title>
+        <screenshot>
+          <graphic fileref="figures/new.png"/>
+        </screenshot>
+      </figure>
+      <para>
+        The Create a new file wizard allows the user to select from a number of
+predefined document types.
+      </para>
+      <figure>
+        <title>Create a new file wizard</title>
+        <screenshot>
+          <graphic fileref="figures/new-doc-wizard.png"/>
+        </screenshot>
+      </figure>
+    </sect2>
+    <sect2 id="opening-a-document">
+      <title>Opening a document</title>
+      <para/>
+    </sect2>
+    <sect2 id="saving-a-document">
+      <title>Saving a document</title>
+      <para/>
+    </sect2>
+    <sect2 id="editing">
+      <title>Editing</title>
+      <para/>
+      <sect3 id="adding-elements">
+        <title>Adding Elements</title>
+        <para/>
+      </sect3>
+      <sect3 id="editing-properties">
+        <title>Editing Properties</title>
+        <para/>
+      </sect3>
+      <sect3 id="spans">
+        <title>Spans</title>
+        <para/>
+      </sect3>
+    </sect2>
+    <sect2 id="exporting">
+      <title>Exporting</title>
+      <para/>
+    </sect2>
+  </sect1>
+  <sect1 id="xds">
+    <title>XML Display Definitions</title>
+    <sect2 id="metadata">
+      <title>Metadata</title>
+      <para/>
+    </sect2>
+    <sect2 id="elements">
+      <title>Elements</title>
+      <para/>
+      <sect3 id="structural">
+        <title>Structural</title>
+        <example>
+          <title>Structural Element</title>
+          <programlisting>
+&lt;element tag=&quot;introduction&quot; type=&quot;structural&quot; color=&quot;e0eee0&quot;&gt;
+  &lt;name locale=&quot;en&quot;&gt;Introduction&lt;/name&gt;
+&lt;/element&gt;
+          </programlisting>
+          <screenshot>
+            <graphic fileref="figures/intro.png"/>
+          </screenshot>
+        </example>
+      </sect3>
+      <sect3 id="span-element">
+        <title>Span</title>
+        <example>
+          <title>Span Element</title>
+          <screen>
+&lt;element tag=&quot;quote&quot; type=&quot;span&quot; color=&quot;cd1076&quot;&gt;
+  &lt;name locale=&quot;en&quot;&gt;Quote&lt;/name&gt;
+&lt;/element&gt;
+          </screen>
+          <screenshot>
+            <graphic fileref="figures/quote.png"/>
+          </screenshot>
+        </example>
+      </sect3>
+      <sect3 id="paragraph">
+        <title>Paragraph</title>
+        <example>
+          <title>Paragraph Element</title>
+          <screen>
+&lt;element tag=&quot;p&quot; type=&quot;paragraph&quot;&gt;
+  &lt;name locale=&quot;en&quot;&gt;Paragraph&lt;/name&gt;
+&lt;/element&gt;
+          </screen>
+        </example>
+      </sect3>
+    </sect2>
+  </sect1>
+  <sect1 id="faq">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+      href="../../documentation/faq.xml#xpointer(/article/*)"/>
+  </sect1>
+</article>
