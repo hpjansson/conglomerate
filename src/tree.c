@@ -30,7 +30,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 	CongDispspec *ds;
 
-	CongNodePtr n0, n1, n2;
+	CongNodePtr text_node, new_node;
 	char *s;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
@@ -44,14 +44,21 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-	n0 = cong_node_new_text(" ");
-	cong_document_node_add_after(doc, n0, tag);
+	/* Text node before new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_add_after(doc, text_node, tag);
 
-	n1 = cong_node_new_element(s);
-	cong_document_node_set_parent(doc, n1, tag->parent);
+	/* New element */
+	new_node = cong_node_new_element(s);
+	cong_document_node_add_after(doc, new_node, text_node);
 
-	n2 = cong_node_new_text(" ");
-	cong_document_node_set_parent(doc, n2, n1);
+	/* Text node inside new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_set_parent(doc, text_node, new_node);
+
+	/* Text node after new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_add_after(doc, text_node, new_node);
 
 	tree_coarse_update_of_view(cong_tree_view);
 
@@ -65,8 +72,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 	CongDispspec *ds;
 
-	CongNodePtr n0;
-	CongNodePtr n1;
+	CongNodePtr text_node, new_node;
 	char *s;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
@@ -80,16 +86,21 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-	n0 = cong_node_new_element(s);
-	cong_document_node_set_parent(doc, n0, tag);
+	/* Text node before new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_set_parent(doc, text_node, tag);
 
-	n1 = cong_node_new_text(" ");
-	cong_document_node_set_parent(doc, n1, n0);
+	/* New element */
+	new_node = cong_node_new_element(s);
+	cong_document_node_set_parent(doc, new_node, tag);
 
-	n0 = cong_node_new_text(" ");
-	cong_document_node_set_parent(doc, n0, tag);
+	/* Text node inside new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_set_parent(doc, text_node, new_node);
 
-	tree_coarse_update_of_view(cong_tree_view);
+	/* Text node after new element */
+	text_node = cong_node_new_text(" ");
+	cong_document_node_set_parent(doc, text_node, tag);
 
 	return(TRUE);
 }
