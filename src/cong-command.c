@@ -26,6 +26,7 @@
 #include "cong-command.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
+#include "cong-util.h"
 
 #include "cong-app.h"
 #include "cong-document.h"

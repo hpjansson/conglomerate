@@ -1,5 +1,9 @@
 2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c
+
+	Fixed a warning
+
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-wrapper.c, cong-command.h, cong-document.c, cong-document.h, cong-editor-node-text.c, cong-editor-widget3.c, cong-file-properties.c, cong-location.c, cong-location.h, cong-node-properties-dialog.c, cong-selection.h, cong-source-view.c, cong-util.c, cong-util.h, cong-view.h, cursor.c, global.h, plugin-cleanup-source.c, popup.c, select.c, tree.c, xmldata.c, xmledit.c
 
 	Removed the pre-undo/redo API, and the preprocessor cruft that went with it.
