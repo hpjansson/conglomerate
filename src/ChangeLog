@@ -1,3 +1,13 @@
+2004-10-12  Douglas Burke  <dburke@cfa.harvard.edu>
+
+	* cong_util.c, cong_util.h, popup.c
+
+	Added separators back to the popup menus.
+
+	* cong-menus.c
+
+	Made the name of a separator tag unique.
+ 	
 2004-10-11 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-file-save.c: Ask for replace of existing file.
@@ -33,7 +43,7 @@
 
 	Ditto
 
-2004-10-09  Mich�le Garoche  <michele.garoche@easyconnect.fr>
+2004-10-09  Michï¿½le Garoche  <michele.garoche@easyconnect.fr>
 
 	* Makefile.am: 
  	
@@ -193,7 +203,7 @@
  	Displaying new-line characters in whitespace=preserve areas,
  	is this part of bug#108404. 
 
-2004-08-20  Michèle Garoche  <michele.garoche@easyconnect.fr>
+2004-08-20  MichÃ¨le Garoche  <michele.garoche@easyconnect.fr>
 
 	* cong-menus.c Added patch slighlty modified from Nikolay V. Shmyrev
 	Fixed bug 150149:
@@ -272,7 +282,7 @@
 
 	Added new file: cong-fake-plugin-hooks.c, to contain the part of cong-app.c that was always changing when adding new plugins
 
-2004-08-05  MichÃ¨le Garoche  <michele.garoche@easyconnect.fr>
+2004-08-05  MichÃÂ¨le Garoche  <michele.garoche@easyconnect.fr>
  
  	* cong-menus.c: 
  	
@@ -836,7 +846,7 @@
 
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-document.c, cong-document.h, cong-location.c, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-source-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h
 	
-	Big patch by Johannes Hölzl <johannes.hoelzl@gmx.de> slightly reworked by me that: renames variable to fit naming convention, adds some namespace tests, added cong_util_ns_equality function
+	Big patch by Johannes HÃ¶lzl <johannes.hoelzl@gmx.de> slightly reworked by me that: renames variable to fit naming convention, adds some namespace tests, added cong_util_ns_equality function
 
 2004-03-02  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
@@ -858,7 +868,7 @@
 
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-dispspec-element.c, cong-dispspec.c, cong-document.c, cong-document.h, cong-marshal.c, cong-marshal.h, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-source-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h, plugin-docbook.c, plugin-lists-node-element-listitem.c
 
-	Big patch by Johannes Hölzl <johannes.hoelzl@gmx.de> to add namespace support to attribute editing.
+	Big patch by Johannes HÃ¶lzl <johannes.hoelzl@gmx.de> to add namespace support to attribute editing.
 
 2004-02-26  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 

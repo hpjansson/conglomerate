@@ -277,6 +277,7 @@ cong_menu_add_action (CongPrimaryWindow *primary_window,
 	
 	/* Add to the UI: */
 	/* Apparently the UI path must not have a leading slash; see http://mail.gnome.org/archives/gtk-app-devel-list/2004-July/msg00263.html */
+
 	gtk_ui_manager_add_ui (cong_primary_window_get_ui_manager (primary_window),
 			       gtk_ui_manager_new_merge_id (cong_primary_window_get_ui_manager (primary_window)),
 			       parent_ui_path,
@@ -600,7 +601,8 @@ add_comment_menu_actions (CongDocument *doc,
 	default:
 		/* Convert to comment: */
 		{
-			cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
+			cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
+
 			action = cong_action_new ("ConvertToComment",
 						  _("Convert to a comment"), 
 						  NULL, /* FIXME */
@@ -619,7 +621,8 @@ add_comment_menu_actions (CongDocument *doc,
 	case CONG_NODE_TYPE_COMMENT:
 		/* Convert from comment: */
 		{
-			cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
+			cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
+
 			action = cong_action_new ("ConvertFromComment",
 						  _("Uncomment"), 
 						  _("Convert a comment containing XML source code into the corresponding code"),
@@ -729,7 +732,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 								&callback_data);
 		}
 		
-		cong_util_add_menu_separator(UI_PATH_CONTEXT_MENU);
+		cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
 	}
 
 	
@@ -775,7 +778,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 			      GTK_UI_MANAGER_MENUITEM);
 
 	if (present_span_tags_list != NULL) {
-		cong_util_add_menu_separator(UI_PATH_CONTEXT_MENU);
+		cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
 		
 		span_tag_removal_popup_init (dispspec,
 					     cursor, 
@@ -786,7 +789,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 					     primary_window);
 	}
 	
-	cong_util_add_menu_separator(UI_PATH_CONTEXT_MENU);
+	cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
 
 	if (available_span_tags_desc_list) {
 		GList *iter;
@@ -1032,7 +1035,7 @@ cong_ui_popup_init (CongDocument *doc,
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
 
 #if 0
-		cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
+		cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
 
 		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
 										      cong_action_new_from_stock ("NodeCut",
@@ -1085,7 +1088,7 @@ cong_ui_popup_init (CongDocument *doc,
 										      primary_window);
 	}
 	
-	cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
+	cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
 
 
 	/* The "New Sub-element" submenu: */

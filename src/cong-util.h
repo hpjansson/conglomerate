@@ -232,7 +232,8 @@ cong_util_make_action_for_element_desc (const gchar* action_prefix,
 					CongDocument *doc);
 
 void
-cong_util_add_menu_separator (const gchar *parent_ui_path);
+cong_util_add_menu_separator (CongPrimaryWindow *primary_window,
+			      const gchar *parent_ui_path);
 
 
 char *

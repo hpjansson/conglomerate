@@ -43,6 +43,8 @@
 #include "cong-command.h"
 #include "cong-dispspec-registry.h"
 
+#include "cong-primary-window.h"
+
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
 
@@ -1539,29 +1541,23 @@ cong_util_make_action_for_element_desc (const gchar* action_prefix,
 
 /**
  * cong_util_add_menu_separator:
+ * @primary_window:
  * @parent_ui_path:
  *
- * TODO: Write me
+ * Adds a separator to a menu.
  */
 void
-cong_util_add_menu_separator (const gchar *parent_ui_path)
+cong_util_add_menu_separator (CongPrimaryWindow *primary_window,
+			      const gchar *parent_ui_path)
 {
-#if 1
-	g_message ("writeme! cong_util_add_menu_separator");
-#else
-	GtkWidget *item = gtk_menu_item_new ();
-	GtkWidget *w0 = gtk_hseparator_new ();
-	gtk_container_add (GTK_CONTAINER (item), 
-			   w0);
-	gtk_menu_append (menu, 
-			 item);
-	gtk_widget_set_sensitive (item, 
-				  FALSE);
-	gtk_widget_show (w0);
-	gtk_widget_show (item);
-
-	return item;
-#endif
+	GtkUIManager *ui_manager = cong_primary_window_get_ui_manager (primary_window);
+	gtk_ui_manager_add_ui (ui_manager,
+			       gtk_ui_manager_new_merge_id (ui_manager),
+			       parent_ui_path,
+			       "dummy-name", /* FIXME: what should go here? */
+			       NULL,
+			       GTK_UI_MANAGER_SEPARATOR,
+			       FALSE);
 }
 
 /**
