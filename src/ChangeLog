@@ -1,7 +1,16 @@
-2004-04-26  Geert Stappers <stappers@stappers.nl>
+2004-04-26 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+         
+        * cong-edit-find-and-replace.c: New find and replace implementation
+	mostly taken from gedit/dialogs/gedit-replace-dialog.c
+	
+	* cong-edit-find-and-replace.h: Defined structure to hold current
+	find data.
 
-	* work on bugzilla #108527, part one
-	(You could have now a non building source ( work in progress ))
+	* cong-document.c, cong-document.h: Structure that describe
+	current find data associated with document
+	* cong-selection.h, select.c, xmledig.c: New function
+	cong_selection_get_selected_text now used in xmledit.c
+	and cong-edit-find-and-replace.c
 
 2004-04-17  David Hoover <karma@deadmoose.com>
 

@@ -414,3 +414,39 @@ update_ordered_selection (CongSelection *selection)
 
 	/* probabky should have some caching of the result */
 }
+  
+/**
+ * cong_selection_get_selected_text:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+gchar* 
+cong_selection_get_selected_text (CongDocument *doc)
+{
+   CongSelection *selection;
+   CongCursor *curs;
+
+   g_return_if_fail(doc);
+ 
+   selection = cong_document_get_selection(doc);
+   curs = cong_document_get_cursor(doc);
+	
+   if (!cong_location_exists(&curs->location)) return NULL;
+	
+   if (!(cong_range_exists (cong_selection_get_logical_range (selection)) &&
+	      cong_range_is_valid (cong_selection_get_logical_range (selection)))) { 
+		return NULL;
+   }
+
+   if (cong_range_is_empty (cong_selection_get_logical_range (selection))) {
+      return NULL;
+   }
+
+   if (!cong_range_can_be_copied (cong_selection_get_ordered_range (selection))) {
+      return NULL;
+   }
+
+   return cong_range_generate_source (cong_selection_get_ordered_range (selection));
+}
+

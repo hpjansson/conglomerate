@@ -750,6 +750,19 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
 }
 
 /**
+ * cong_document_get_primary_window:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+CongPrimaryWindow*
+cong_document_get_primary_window(CongDocument *doc)
+{
+	g_return_if_fail(doc);
+	return PRIVATE(doc)->primary_window;
+}
+
+/**
  * cong_document_set_primary_window:
  * @doc:
  * @window:
