@@ -4,5 +4,9 @@ Known Bugs:
 - Cut / Copy / Paste does not work with the X Clipboard
 - Cannot type new text into document
 - Cannot add new structural tags
+- list dialog that opens when selecting "New sibling" from the treeview
+  RMBM is stuck so close together that they are unreadable, and the
+  dialog can't be resized in any way)
+- need better handling of unrecognised tags (those not in the dispspec).  Currently they simply don't appear.   Should they appear as structural elements???
 
-# better ten known bugs, then one unknown
+# better ten known bugs, than one unknown
