@@ -27,7 +27,7 @@ GETTEXT_PACKAGE=AC_PACKAGE_NAME
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
-ALL_LINGUAS="az ca cs da de el es nl pl pt ru sq sr sr@Latn sv"
+ALL_LINGUAS="az ca cs da de el es fr nl pl pt ru sq sr sr@Latn sv"
 
 AM_GLIB_GNU_GETTEXT
 

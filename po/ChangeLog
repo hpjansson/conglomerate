@@ -1,3 +1,9 @@
+2004-01-15  Debian package maintainer <conglomerate@packages.debian.org>
+
+	* fr.po: new file
+	Just the desktop.in strings to fix Debian bug report 227565,
+	filed by Alban Browaeys.
+
 2004-01-13  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated by Kees van den Broek.
