@@ -23,9 +23,6 @@
 <NAME>CongCommand</NAME>
 </STRUCT>
 <STRUCT>
-<NAME>CongDocumentTraversal</NAME>
-</STRUCT>
-<STRUCT>
 <NAME>CongDocument</NAME>
 </STRUCT>
 <STRUCT>
@@ -186,45 +183,6 @@
 </STRUCT>
 <STRUCT>
 <NAME>CongNodeModification</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_plugin_con(CongPlugin *plugin,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_doc_tool_con(CongServiceDocTool *tool,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_document_factory_con(CongServiceDocumentFactory* factory,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_editor_node_factory_con(CongServiceEditorNodeFactory *editor_node_factory,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_exporter_con(CongServiceExporter *exporter,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_importer_con(CongServiceImporter *importer,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_node_property_dialog_con(CongServiceNodePropertyDialog* node_property_dialog,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_node_tool_con(CongServiceNodeTool *tool,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_print_method_con(CongServicePrintMethod *print_method,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_tool_con(CongServiceTool *tool,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>cong_service_con(CongService* service,</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>CongTraversalNode</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>CongXPathExpression</NAME>
 </STRUCT>
 <STRUCT>
 <NAME>CongEditorNodeElementAdmonition</NAME>
