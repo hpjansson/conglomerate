@@ -1,3 +1,23 @@
+2003-07-24  Geert Stappers  <Geert.Stappers@xs4all.nl>
+
+      * POTFILES.in:
+      Added src/cong-editor-area-bin.c, src/cong-editor-area-border.c, 
+      src/cong-editor-area-composer.c, src/cong-editor-area-container.c, 
+      src/cong-editor-area-pixbuf.c, src/cong-editor-area-spacer.c, 
+      src/cong-editor-area-span-tag.c, src/cong-editor-area-structural-tag.c, 
+      src/cong-editor-area-text.c, src/cong-editor-area-underline.c, 
+      src/cong-editor-area-unknown-tag.c, src/cong-editor-area.c, 
+      src/cong-editor-node-document.c, src/cong-editor-node-element-span.c, 
+      src/cong-editor-node-element-structural.c, 
+      src/cong-editor-node-element-unknown.c, src/cong-editor-node-element.c, 
+      src/cong-editor-node-text.c, src/cong-editor-node-unimplemented.c, 
+      src/cong-editor-node.c, src/cong-marshal.c, src/cong-text-cache.c, 
+      src/cong-util.c, src/plugin-lists-area-listitem.c and
+      src/plugin-lists-node-element-listitem.c.
+
+      * conglomerate.pot, es.po, ru.po:
+      Regenerated
+
 2003-07-13  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
       * POTFILES.in:
