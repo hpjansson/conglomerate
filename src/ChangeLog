@@ -1,5 +1,9 @@
 2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget.h
+
+	Re-adding: had forgotten this one was still needed
+
 	* cong-dummy-element-editor.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c, cong-editor-widget.c, cong-editor-widget.h, cong-editor-widget-impl.h
 
 	Removing source files for old widget from CVS (CongEditorWidget2)
