@@ -1,3 +1,8 @@
+2004-08-05  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* fr.po: French translation of main menu using GtkUIManager/Gtk API
+	plus minor changes to accelerators.
+	
 2004-08-04  Francisco Javier F. Serrador  <serrador@cvs.gnome.org>
 
 	* es.po: Updated Spanish translation.

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-04 14:10+0200\n"
-"PO-Revision-Date: 2004-07-31 9:47+0200\n"
+"PO-Revision-Date: 2004-08-04 18:18+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1499,177 +1499,147 @@ msgstr "Conglomerate : un éditeur XML libre et convivial"
 
 #. Menus:
 #: src/cong-menus.c:1471
-#, fuzzy
 msgid "_File"
-msgstr "/_Fichier"
+msgstr "_Fichier"
 
 #: src/cong-menus.c:1472
-#, fuzzy
 msgid "_Edit"
-msgstr "/_Édition"
+msgstr "_Édition"
 
 #: src/cong-menus.c:1476
-#, fuzzy
 msgid "_Help"
-msgstr "/_Aide"
+msgstr "_Aide"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1480
 msgid "_New"
-msgstr ""
+msgstr "_Nouveau"
 
 #: src/cong-menus.c:1481
 msgid "_Open"
-msgstr ""
+msgstr "_Ouvrir"
 
 #: src/cong-menus.c:1482
-#, fuzzy
 msgid "_Import..."
-msgstr "/Fichier/I_mporter..."
+msgstr "I_mporter..."
 
 #: src/cong-menus.c:1483
-#, fuzzy
 msgid "_Close"
-msgstr "/Fichier/_Fermer"
+msgstr "_Fermer"
 
 #: src/cong-menus.c:1484
-#, fuzzy
 msgid "_Quit"
-msgstr "/Fichier/_Quitter"
+msgstr "_Quitter"
 
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1488
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "/Édition/Pré_férences"
+msgstr "Pré_férences"
 
 #. Actions found in Help menu:
 #: src/cong-menus.c:1501
-#, fuzzy
 msgid "_Contents"
-msgstr "/Aide/_Contenu"
+msgstr "_Contenu"
 
 #: src/cong-menus.c:1502
-#, fuzzy
 msgid "_Homepage"
-msgstr "/Aide/Page _web"
+msgstr "Page _web"
 
 #: src/cong-menus.c:1503
-#, fuzzy
 msgid "_About"
-msgstr "/Aide/À _propos"
+msgstr "À _propos"
 
 #: src/cong-menus.c:1509
-#, fuzzy
 msgid "_Tools"
-msgstr "/_Outils"
+msgstr "_Outils"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1513
-#, fuzzy
 msgid "_Save"
-msgstr "/Fichier/_Enregistrer"
+msgstr "_Enregistrer"
 
 #: src/cong-menus.c:1514
-#, fuzzy
 msgid "Save _as..."
-msgstr "Enregistrer XML sous..."
+msgstr "Enre_gistrer sous..."
 
 #: src/cong-menus.c:1515
-#, fuzzy
 msgid "Sa_ve a Copy..."
-msgstr "/Fichier/Enregistrer une _copie..."
+msgstr "Enregistrer une _copie..."
 
 #: src/cong-menus.c:1517
-#, fuzzy
 msgid "Print Previe_w..."
-msgstr "Imprimer l'aperçu"
+msgstr "Imprimer l'_aperçu..."
 
 #: src/cong-menus.c:1518
-#, fuzzy
 msgid "_Print"
-msgstr "Imprimer"
+msgstr "Im_primer"
 
 #: src/cong-menus.c:1521
-#, fuzzy
 msgid "_Revert"
-msgstr "/Fichier/_Revenir à la dernière version enregistrée"
+msgstr "_Revenir à la dernière version enregistrée"
 
 #: src/cong-menus.c:1523
-#, fuzzy
 msgid "_Export..."
-msgstr "/Fichier/E_xporter..."
+msgstr "E_xporter..."
 
 #: src/cong-menus.c:1524
-#, fuzzy
 msgid "Proper_ties"
-msgstr "Propriétés"
+msgstr "Proprié_tés"
 
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1528 src/cong-menus.c:1736
-#, fuzzy
 msgid "_Undo"
-msgstr "Annuler"
+msgstr "_Annuler"
 
 #: src/cong-menus.c:1529 src/cong-menus.c:1746
-#, fuzzy
 msgid "_Redo"
-msgstr "Rétablir"
+msgstr "_Rétablir"
 
 #: src/cong-menus.c:1530
-#, fuzzy
 msgid "Cu_t"
-msgstr "Couper"
+msgstr "Cou_per"
 
 #: src/cong-menus.c:1531
-#, fuzzy
 msgid "_Copy"
-msgstr "Copier"
+msgstr "_Copier"
 
 #: src/cong-menus.c:1532
-#, fuzzy
 msgid "_Paste"
-msgstr "Coller"
+msgstr "Col_ler"
 
 #: src/cong-menus.c:1533
-#, fuzzy
 msgid "_Find..."
-msgstr "/Édition/_Rechercher..."
+msgstr "Rec_hercher..."
 
 #: src/cong-menus.c:1534
-#, fuzzy
 msgid "Find Ne_xt"
-msgstr "Rechercher suivant"
+msgstr "Rechercher le sui_vant"
 
 #: src/cong-menus.c:1535
-#, fuzzy
 msgid "Find Pre_vious"
-msgstr "/Édition/Rechercher le _précédent"
+msgstr "Rechercher le _précé_dent"
 
 #: src/cong-menus.c:1536
-#, fuzzy
 msgid "R_eplace..."
-msgstr "/Édition/R_emplacer..."
+msgstr "R_emplacer..."
 
 #: src/cong-menus.c:1538
-#, fuzzy
 msgid "_Insert..."
-msgstr "/Édition/_Insérer..."
+msgstr "_Insérer..."
 
 #: src/cong-menus.c:1539
-#, fuzzy
 msgid "View _Source"
-msgstr "/Édition/_Voir le source"
+msgstr "_Voir le source"
 
 #: src/cong-menus.c:1732
-#, fuzzy, c-format
+#, c-format
 msgid "_Undo: %s"
-msgstr "Annuler"
+msgstr "_Annuler : %s"
 
 #: src/cong-menus.c:1742
-#, fuzzy, c-format
+#, c-format
 msgid "_Redo: %s"
-msgstr "Rétablir"
+msgstr "_Rétablir : %s"
 
 #: src/cong-node-properties-dialog.c:254
 msgid "XPath"
@@ -1838,9 +1808,8 @@ msgid "XML Files"
 msgstr "Fichiers XML"
 
 #: src/file.c:118
-#, fuzzy
 msgid "All Files"
-msgstr "Fichiers XML"
+msgstr "Tous les fichiers"
 
 #: src/plugin-admonition.c:76
 msgid "Admonition"
@@ -2452,57 +2421,3 @@ msgstr "Insérer après"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Vue source - Conglomerate"
-
-#~ msgid "/File/_New..."
-#~ msgstr "/Fichier/_Nouveau..."
-
-#~ msgid "/File/_Open..."
-#~ msgstr "/Fichier/_Ouvrir..."
-
-#~ msgid "/File/"
-#~ msgstr "/Fichier/"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/Fichier/Enregistrer _sous..."
-
-#~ msgid "/File/Print Previe_w..."
-#~ msgstr "/Fichier/Imprimer l'_aperçu"
-
-#~ msgid "/File/_Print..."
-#~ msgstr "/Fichier/_Imprimer..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/Fichier/Proprié_tés"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Édition/A_nnuler"
-
-#~ msgid "/Edit/_Redo"
-#~ msgstr "/Édition/Ré_tablir"
-
-#~ msgid "/Edit/"
-#~ msgstr "Édition"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Édition/Co_uper"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Édition/_Copier"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Édition/C_oller"
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Édition/Rechercher le _suivant"
-
-#~ msgid "Open document"
-#~ msgstr "Ouvrir un document"
-
-#~ msgid "New document"
-#~ msgstr "Nouveau document"
-
-#~ msgid "Save document"
-#~ msgstr "Enregistrer le document"
-
-#~ msgid "/Debug"
-#~ msgstr "/Débogage"
