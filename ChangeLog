@@ -1,3 +1,9 @@
+2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* README.xml
+
+	New file:  DocBook XML version of the README information, with (I hope) fully up-to-date content
+
 2003-09-22  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am, configure.in

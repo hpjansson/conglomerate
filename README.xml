@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book>
+	<sect1>
+		<title>About Conglomerate</title>
+		<para>This is a work-in-progress version of the Conglomerate editor. It is based on structural document markup with XML. </para>
+	</sect1>
+	<sect1>
+		<title>Compiling</title>
+		<para>Conglomerate uses various GNOME 2 components (though it should run fine under both GNOME and KDE). Hence you'll need a reasonably up-to-date install of GNOME 2 (and the developer packages) to build it.</para>
+		<procedure>
+			<step><command>./configure</command></step>
+			<step><command>make</command></step>
+			<step>
+				<para>Switch to superuser if necessary</para>
+			</step>
+			<step><command>make install</command></step>
+		</procedure>
+		<para>If you're compiling from CVS, you will need the <application>gnome-common</application>module from GNOME CVS installed. Then type</para>
+		<procedure>
+			<step><command>./autogen.sh</command>which generates and runs <command>./configure</command></step>
+			<step><command>make</command></step>
+			<step>
+				<para>Switch to superuser if necessary</para>
+			</step>
+			<step><command>make install</command></step>
+		</procedure>
+		<para>and see what happens. This should produce an executable called <application>conglomerate</application>in the <filename>src</filename>directory. Typing <command>make install</command>installs the program and its data files into a hopefully sensible location. </para>
+		<para>On some systems, example given Red Hat 8, you have to type</para>
+		<procedure>
+			<step><command>libtoolize --automake</command></step>
+			<step><command>./configure</command></step>
+			<step><command>make</command></step>
+		</procedure>
+		<para>see also the file <filename>doc/devel/CompileIssues</filename></para>
+		<sect2>
+			<title>Debian</title>
+			<para>If you want to make a debian package from the tarbal or CVS type</para>
+			<command>deb/build</command>
+			<para>and when you have a deb-src line in <filename>/etc/apt/source</filename>type</para>
+			<command>apt-get source -b conglomerate</command>
+		</sect2>
+		<sect2>
+			<title>Windows</title>
+			<para>The original prototype of Conglomerate built and ran under Windows, probably using Cygwin (<ulink url="http://www.cygnus.com/cygwin/">http://www.cygnus.com/cygwin/</ulink>). The process is basically the same as on Unix. Much has changed within the code since then - please let the development list know if you attempt to build it. There has been a recent attempt to get Conglomerate to build on Win32; see <ulink url="http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html">here</ulink>.</para>
+		</sect2>
+		<sect2>
+			<title>Mac OS X </title>
+			<para>We managed to build one of the Conglomerate 0.5 tarballs on Mac OS X using Fink at GUADEC 4 in Dublin. FIXME: add link to screenshot</para>
+		</sect2>
+	</sect1>
+	<sect1>
+		<title>Running</title>
+		<para>Currently you need to install <application>conglomerate</application>for it to work (so that it can find its data files)</para>
+		<para>Conglomerate needs two files to be able to run and display something. The first is an XML file (if it uses a DTD, this should be locatable as referred from the XML file - there will be no validation done, and DTD-less documents are fine). The second is a &quot;displayspec&quot;, illustrated by <filename>readme.xds</filename>in the <filename>examples</filename>directory. This specifies how the tags are rendered.</para>
+		<para>There are two ways to load a document into Conglomerate. One is by specifying the XML on the commandline, like this:</para>
+		<para><command>conglomerate readme.xml</command></para>
+		<para>The other is by using the GUI open dialogs. The readme example used above is located in the examples directory, from the package root.</para>
+	</sect1>
+	<sect1>
+		<title>Using</title>
+		<para>Try marking some text and right-clicking. The selection field will be inverted for legal tag insertion points, and red wherever insertion is disallowed to promote proper tag nesting.</para>
+		<para>You can also right-click items in the left-hand treeview and see what happens.</para>
+		<para>Many of the menu options are currently unimplemented.</para>
+	</sect1>
+	<sect1>
+		<title>Contact</title>
+		<para>Conglomerate has public mailinglists with web pages as follows:</para>
+		<itemizedlist>
+			<listitem>
+				<formalpara>
+					<title>Announcements</title>
+					<para><ulink url="http://lists.copyleft.no/mailman/listinfo/conglomerate-announce">http://lists.copyleft.no/mailman/listinfo/conglomerate-announce</ulink></para>
+				</formalpara>
+			</listitem>
+			<listitem>
+				<formalpara>
+					<title>User discussion</title>
+					<para><ulink url="http://lists.copyleft.no/mailman/listinfo/conglomerate">http://lists.copyleft.no/mailman/listinfo/conglomerate</ulink></para>
+				</formalpara>
+			</listitem>
+			<listitem>
+				<formalpara>
+					<title>Development</title>
+					<para><ulink url="http://lists.copyleft.no/mailman/listinfo/conglomerate-devel">http://lists.copyleft.no/mailman/listinfo/conglomerate-devel</ulink></para>
+				</formalpara>
+			</listitem>
+		</itemizedlist>
+		<para>The Conglomerate web site is at:</para>
+		<para><ulink url="http://www.conglomerate.org/">http://www.conglomerate.org/</ulink></para>
+		<para>The latest updates are available through anonymous CVS from GNOME's CVS server:</para>
+		<command>cvs -z3 -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome checkout conglomerate</command>
+		<para>CVS is also web-browsable: <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=conglomerate">http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=conglomerate</ulink></para>
+		<para>The code was originally written by Hans Petter Jansson (hpj@styx.net), but please don't send angry mails to him about it. Most coding is currently being done by Dave Malcolm (david@davemalcolm.demon.co.uk), but you should direct questions to the development list (see above) for the moment.</para>
+	</sect1>
+</book>
