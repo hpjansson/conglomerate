@@ -449,6 +449,20 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
 	traversal_node_prev = cong_traversal_node_get_prev (traversal_node);
 
 	if (traversal_node_prev) {
+
+		/* Scan backwards for the case in which the previous node doesn't appear in the widget (fix for bug #129907): */
+		while (!cong_node_should_be_visible_in_editor (cong_traversal_node_get_node (traversal_node_prev))) {
+
+			traversal_node_prev = cong_traversal_node_get_prev (traversal_node_prev);
+			
+			if (traversal_node_prev==NULL) {
+				return NULL;
+			}
+		}
+
+		g_assert (traversal_node_prev);
+		g_assert (cong_node_should_be_visible_in_editor (cong_traversal_node_get_node (traversal_node_prev)));
+
 		return cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
 									       traversal_node_prev);
 	} else {
@@ -468,6 +482,19 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 	traversal_node_next = cong_traversal_node_get_next (traversal_node);
 
 	if (traversal_node_next) {
+		/* Scan forwards for the case in which the next node doesn't appear in the widget (fix for bug #129907): */
+		while (!cong_node_should_be_visible_in_editor (cong_traversal_node_get_node (traversal_node_next))) {
+
+			traversal_node_next = cong_traversal_node_get_prev (traversal_node_next);
+			
+			if (traversal_node_next==NULL) {
+				return NULL;
+			}
+		}
+
+		g_assert (traversal_node_next);
+		g_assert (cong_node_should_be_visible_in_editor (cong_traversal_node_get_node (traversal_node_next)));
+
 		return cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
 									       traversal_node_next);
 	} else {

@@ -390,7 +390,7 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	   So try the previous one... */
 	CongNodePtr doc_node = cong_editor_node_get_node (editor_node);
 	CongEditorArea *child_area;
-	CongNodePtr prev_node;
+	CongEditorNode *prev_editor_node;
 
 #if 1
 	child_area = cong_editor_area_border_new (cong_editor_node_get_widget (editor_node),
@@ -405,19 +405,10 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	child_area = CONG_EDITOR_AREA(child_flow_holder);
 #endif
 
-	prev_node = doc_node->prev;
-
-	if (cong_editor_node_is_referenced_entity_decl (editor_node)) {
-		prev_node = NULL;
-	}
-
-	if (prev_node) {
-		if(cong_editor_area_flow_holder_get_child_flow_holder_for_node(area_flow_holder_blocks, prev_node) == NULL) {
-			prev_node = NULL;
-		}
-	}
-	
-	if (prev_node) {
+	/* Locate the previous node using the CongEditorNode code, which uses CongTraversalNode logic to handle entity references, and can deal with missing nodes due to whitespace removal (fixing bug #129907): */
+	prev_editor_node = cong_editor_node_get_prev (editor_node);
+	if (prev_editor_node) {
+		CongNodePtr prev_node = cong_editor_node_get_node (prev_editor_node);
 		CongEditorAreaFlowHolder* prev_flow_holder = cong_editor_area_flow_holder_get_child_flow_holder_for_node (area_flow_holder_blocks,
 															  prev_node);
 
