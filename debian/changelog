@@ -1,4 +1,10 @@
-conglomerate (0.7.14-2) UNRELEASED; urgency=low
+conglomerate (0.7.14-3.1) UNRELEASED; urgency=low
+
+  * expecting new upstream version
+
+ -- Geert Stappers <stappers@stappers.nl>  Sun,  8 Aug 2004 16:01:14 +0200
+
+conglomerate (0.7.14-2) unstable; urgency=low
 
   * Multiple package, the architecture independent files
     have now their own package: conglomerate-common.
