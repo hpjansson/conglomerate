@@ -1,3 +1,9 @@
+2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c
+
+	Merged some selection notifications
+
 2003-08-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-document.c, cong-document.h, cong-location.c, cong-node.h, global.h, select.c, tree.c, xmldata.c

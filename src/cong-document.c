@@ -1183,6 +1183,8 @@ cong_document_for_each_location (CongDocument *doc,
 				 CongUpdateLocationCallback callback, 
 				 gpointer user_data)
 {
+	gboolean selection_change = FALSE;
+
 	g_return_if_fail (doc);
 	g_return_if_fail (callback);
 
@@ -1195,12 +1197,16 @@ cong_document_for_each_location (CongDocument *doc,
 	if ( callback (doc,
 		       &PRIVATE(doc)->selection.loc0,
 		       user_data)) {
-		cong_document_on_selection_change (doc);
+		selection_change = TRUE;
 	}
-
+	
 	if (callback (doc,
 		      &PRIVATE(doc)->selection.loc1,
 		      user_data)) {
+		selection_change = TRUE;
+	}
+	
+	if (selection_change) {
 		cong_document_on_selection_change (doc);
 	}
 }
