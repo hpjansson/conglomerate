@@ -658,3 +658,13 @@ CongSelection* cong_document_get_selection(CongDocument *doc)
 
 	return &doc->selection;
 }
+
+PangoLanguage*
+cong_document_get_language_for_node(CongDocument *doc, 
+				    CongNodePtr node)
+{
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	return NULL; /* for now */
+}

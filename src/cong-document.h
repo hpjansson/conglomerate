@@ -100,6 +100,15 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view);
 CongCursor* cong_document_get_cursor(CongDocument *doc);
 CongSelection* cong_document_get_selection(CongDocument *doc);
 
+/** 
+    Every node within a document has an implied language, although the logic to determine 
+    this may depend on the dispspec, on attributes of the nodes, and perhaps even on user prefererences (and hence the value may change unexpectedly): 
+
+    FIXME: what are the ownership/ref count semantics of this function?
+*/
+PangoLanguage*
+cong_document_get_language_for_node(CongDocument *doc, 
+				    CongNodePtr node);
 
 G_END_DECLS
 

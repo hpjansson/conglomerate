@@ -28,7 +28,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 
-#if 0
+#if 1
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
 #define CONG_SPAN_TEXT_DEBUG_MSG2(x, a) g_message((x), (a))
 #else
@@ -977,6 +977,49 @@ static void span_text_editor_recursive_render(CongElementEditor *element_editor,
 
 }
 
+static gboolean do_hit_test(CongSpanTextEditor *span_text_editor, int window_x, int window_y, int *stripped_byte_offset)
+{
+	struct CongHitTest hit_test;
+
+	g_return_val_if_fail(span_text_editor, FALSE);
+	g_return_val_if_fail(stripped_byte_offset, FALSE);
+
+	hit_test.window_coord.x = window_x;
+	hit_test.window_coord.y = window_y;
+	hit_test.got_hit = FALSE;
+				
+	visit_lines(CONG_ELEMENT_EDITOR(span_text_editor), CONG_LINE_VISITOR_HIT_TEST, &hit_test);
+
+	if (hit_test.got_hit) {
+		*stripped_byte_offset = hit_test.byte_offset;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+	
+}
+
+static gboolean get_click_location(CongSpanTextEditor *span_text_editor, int window_x, int window_y, CongLocation *result)
+{
+	int stripped_byte_offset;
+
+	g_return_val_if_fail(result, FALSE);
+
+	if (do_hit_test(span_text_editor, window_x, window_y, &stripped_byte_offset)) {
+		CongTextSpan *text_span = get_text_span_at_stripped_byte_offset(span_text_editor, stripped_byte_offset);
+		
+		if (text_span) {
+			cong_location_set_node_and_byte_offset(result,
+							       text_span->text_node,
+							       text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset));
+			return TRUE;
+			
+		}
+	}
+
+	return FALSE;
+}
+
 static void span_text_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)
 {
 	CongDocument *doc;
@@ -994,32 +1037,47 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	selection = cong_document_get_selection(doc);
 	
 	if (event->button == 1) {
-		struct CongHitTest hit_test;
+		switch (event->type) {
+		default: return; /* do nothing */
+		case GDK_2BUTTON_PRESS:
+			/* Handle double-click by locating the word containing the click location, 
+			   making that the selection, with the cursor at the end of it. */
+			{
+				CongLocation click_location;
+				CongLocation start_of_word;
+				CongLocation end_of_word;
 
-		gtk_widget_grab_focus(GTK_WIDGET(editor_widget));
-		gtk_widget_grab_default(GTK_WIDGET(editor_widget));
-
-		hit_test.window_coord.x = event->x;
-		hit_test.window_coord.y = event->y;
-		hit_test.got_hit = FALSE;
-
-		visit_lines(element_editor, CONG_LINE_VISITOR_HIT_TEST, &hit_test);
-
-		if (hit_test.got_hit) {
-			CongTextSpan *text_span = get_text_span_at_stripped_byte_offset(span_text_editor, hit_test.byte_offset);
-
-			if (text_span) {
-				cong_location_set(&cursor->location,
-						  text_span->text_node,
-						  text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
-
-				cong_selection_start_from_curs(selection, cursor);
-				cong_selection_end_from_curs(selection, cursor);
-				cong_document_on_selection_change(doc);
-				cong_document_on_cursor_change(doc);
-
-				return;
+				if (get_click_location(span_text_editor, event->x, event->y, &click_location)) {
+					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
+						
+						cong_location_copy(&selection->loc0, &start_of_word);
+						cong_location_copy(&selection->loc1, &end_of_word);
+						cong_location_copy(&cursor->location, &end_of_word);
+					}						
+				
+					cong_document_on_selection_change(doc);
+					cong_document_on_cursor_change(doc);
+				}
 			}
+			return;
+
+		case GDK_BUTTON_PRESS:
+			/* Handle single-click by moving the cursor and selection to the location of the click: */
+			{
+				gtk_widget_grab_focus(GTK_WIDGET(editor_widget));
+				gtk_widget_grab_default(GTK_WIDGET(editor_widget));
+
+				if (get_click_location(span_text_editor, event->x, event->y, &cursor->location)) {
+					
+					cong_selection_start_from_curs(selection, cursor);
+					cong_selection_end_from_curs(selection, cursor);
+					cong_document_on_selection_change(doc);
+					cong_document_on_cursor_change(doc);
+						
+				}
+			}
+
+			return;
 		}
 	} else if (event->button == 3) {
 
@@ -1060,9 +1118,9 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 		CongTextSpan *text_span = get_text_span_at_stripped_byte_offset(span_text_editor, hit_test.byte_offset);
 		
 		if (text_span) {
-			cong_location_set(&cursor->location,
-					  text_span->text_node,
-					  text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
+			cong_location_set_node_and_byte_offset(&cursor->location,
+							       text_span->text_node,
+							       text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
 			
 			cong_selection_end_from_curs(selection, cursor);
 			cong_document_on_selection_change(doc);
@@ -1199,14 +1257,14 @@ gboolean span_text_editor_get_destination_location_for_keypress(CongSpanTextEdit
 	
 	case GDK_Left:
 		if (state & GDK_CONTROL_MASK) {
-			return cong_location_calc_prev_word(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_prev_word(&cursor->location, doc, output_loc);
 		} else {
 			return cong_location_calc_prev_char(&cursor->location, dispspec, output_loc);
 		}
 	
 	case GDK_Right:
 		if (state & GDK_CONTROL_MASK) {
-			return cong_location_calc_next_word(&cursor->location, dispspec, output_loc);
+			return cong_location_calc_next_word(&cursor->location, doc, output_loc);
 		} else {
 			return cong_location_calc_next_char(&cursor->location, dispspec, output_loc);
 		}
@@ -1223,9 +1281,9 @@ gboolean span_text_editor_get_destination_location_for_keypress(CongSpanTextEdit
 			return cong_location_calc_line_end(&cursor->location, dispspec, output_loc);
 		}
 	case GDK_Page_Up:
-		return cong_location_calc_next_page(&cursor->location, dispspec, output_loc);
-	case GDK_Page_Down:
 		return cong_location_calc_prev_page(&cursor->location, dispspec, output_loc);
+	case GDK_Page_Down:
+		return cong_location_calc_next_page(&cursor->location, dispspec, output_loc);
 	}
 }
 

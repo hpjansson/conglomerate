@@ -4,15 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "cong-document.h"
-
-void cong_location_set(CongLocation *loc, CongNodePtr tt, int offset)
-{
-	g_return_if_fail(loc != NULL);
-	
-	loc->node=tt;
-	loc->byte_offset=offset;
-	
-}
+#include "cong-error-dialog.h"
 
 void
 cong_location_nullify(CongLocation *loc)
@@ -21,6 +13,43 @@ cong_location_nullify(CongLocation *loc)
 	
 	loc->node=NULL;
 }
+
+void
+cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
+{
+	g_return_if_fail(loc != NULL);
+	g_return_if_fail(node != NULL);
+
+	loc->node=node;
+	loc->byte_offset=0;
+}
+
+void 
+cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int offset)
+{
+	g_return_if_fail(loc != NULL);
+	g_return_if_fail(node != NULL);
+	
+	loc->node=node;
+	loc->byte_offset=offset;
+}
+
+void
+cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glong char_offset)
+{
+	gchar *result_pos;
+
+	g_return_if_fail(loc);
+	g_return_if_fail(node);
+
+	result_pos = g_utf8_offset_to_pointer(node->content, char_offset);
+	g_assert(result_pos);
+	
+	loc->node = node;
+	loc->byte_offset = result_pos - (gchar*)node->content;
+}
+
+
 
 
 gboolean cong_location_exists(const CongLocation *loc)
@@ -187,4 +216,425 @@ cong_location_copy(CongLocation *dst, const CongLocation *src)
 	g_return_if_fail(src != NULL);
 	
 	*dst = *src;
+}
+
+gboolean cong_location_calc_prev_char(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	CongNodePtr n;
+	CongNodePtr n0;
+
+#ifndef RELEASE	
+	printf("<- [curs]\n");
+#endif
+
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+	
+	n = input_loc->node;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && input_loc->byte_offset) { 
+
+		gchar *this_char;
+		gchar *prev_char;
+
+		g_assert(input_loc->node);
+		g_assert(input_loc->node->content);
+		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+
+		/* FIXME: Should we be looking at a PangoLogAttrs "is_cursor_position" instead? */
+
+		this_char = input_loc->node->content+input_loc->byte_offset;
+		prev_char = g_utf8_find_prev_char(input_loc->node->content, this_char);
+		g_assert(prev_char);
+
+		cong_location_set_node_and_byte_offset(output_loc,input_loc->node, prev_char - (gchar*)input_loc->node->content);
+
+		return TRUE;
+	}
+
+	do
+	{
+		n0 = n;
+		if (n) n = cong_node_prev(n);
+		
+		for ( ; n; )
+		{
+			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
+			{
+				if (!strcmp(cong_node_name(n), "table")) break;
+				if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n)))
+				{
+					n = n0 = 0;
+					break;
+				}
+				else if (cong_node_first_child(n))
+				{
+#ifndef RELEASE					
+					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
+#endif					
+					n = cong_node_first_child(n);
+					continue;
+				}
+			}
+			
+			n0 = n;
+			n = cong_node_prev(n);
+		}
+
+		if (!n) n = n0;
+		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+
+		while (n)
+		{
+			if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n))) { n = 0; break; }
+			if (!cong_node_prev(n)) n = n0 = cong_node_parent(n);
+			else break;
+		}
+	}
+	while (n);
+
+	if (n) {
+		/* FIXME: UTF-8 issues here! */
+		cong_location_set_node_and_byte_offset(output_loc,n, strlen(xml_frag_data_nice(n)));
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+
+gboolean cong_location_calc_next_char(const CongLocation *input_loc,
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	CongNodePtr n;
+	CongNodePtr n0;
+
+#ifndef RELEASE	
+	printf("[curs] ->\n");
+#endif
+
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+	
+
+	n = input_loc->node;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && cong_location_get_unichar(input_loc))
+	{ 
+		gchar *this_char;
+		gchar *next_char;
+
+		g_assert(input_loc->node);
+		g_assert(input_loc->node->content);
+		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+
+		/* FIXME: Should we be looking at a PangoLogAttrs "is_cursor_position" instead? */
+
+		this_char = input_loc->node->content+input_loc->byte_offset;
+		next_char = g_utf8_find_next_char(this_char, NULL);
+		g_assert(next_char);
+
+		cong_location_set_node_and_byte_offset(output_loc,input_loc->node, next_char - (gchar*)input_loc->node->content);
+
+		return TRUE; 
+	}
+
+	do
+	{
+		n0 = n;
+		if (n) n = cong_node_next(n);
+
+		for ( ; n; )
+		{
+			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
+			{				 
+				if (!strcmp(cong_node_name(n), "table")) break;
+				if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n)))
+				{
+					n = n0 = 0;
+					break;
+				}
+				else if (cong_node_first_child(n))
+				{
+#ifndef RELEASE					
+					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
+#endif
+					n = cong_node_first_child(n);
+					continue;
+				}
+			}
+			
+			n0 = n;
+			n = cong_node_next(n);
+		}
+
+		if (!n) n = n0;
+		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
+
+		while (n)
+		{
+			if (cong_dispspec_element_structural(dispspec, xml_frag_name_nice(n))) { n = 0; break; }
+			if (!cong_node_next(n)) n = n0 = cong_node_parent(n);
+			else break;
+		}
+	}
+	while (n);
+
+	if (n) {
+		cong_location_set_to_start_of_node(output_loc, n);
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+static void make_pango_log_attr_for_node(CongDocument *doc,
+					 CongNodePtr node,
+					 PangoLogAttr **pango_log_attrs,
+					 int *attrs_len)
+{
+	PangoLanguage *language;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(node->content);
+	g_return_if_fail(pango_log_attrs);
+	g_return_if_fail(attrs_len);
+
+	language = cong_document_get_language_for_node(doc, node);
+
+	*attrs_len = g_utf8_strlen(node->content,-1)+1;
+
+	*pango_log_attrs = g_new(PangoLogAttr, (*attrs_len));
+	
+	pango_get_log_attrs(node->content,
+			    strlen(node->content), /* length in bytes */
+			    -1,
+			    language,
+			    *pango_log_attrs,
+			    *attrs_len);
+
+}
+
+gboolean cong_location_calc_prev_word(const CongLocation *input_loc, 
+				      CongDocument *doc,
+				      CongLocation *output_loc)
+{
+	PangoLogAttr *pango_log_attr=NULL;
+	int attrs_len=0;
+
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	make_pango_log_attr_for_node(doc,
+				     input_loc->node,
+				     &pango_log_attr,
+				     &attrs_len);
+
+	if (pango_log_attr) {
+		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+
+		g_assert(attrs_len>0);
+		g_assert(char_index<attrs_len);
+
+		/* Scan backwards to next is_word_start: */
+		while (char_index>0) {
+
+			if (pango_log_attr[--char_index].is_word_start) {
+				cong_location_set_node_and_char_offset(output_loc, input_loc->node, char_index);
+				g_free(pango_log_attr);
+				return TRUE;
+			}
+		}
+
+		cong_location_set_to_start_of_node(output_loc,input_loc->node);
+		g_free(pango_log_attr);
+		return TRUE;
+
+	} else {
+		return FALSE;
+	}
+}
+
+gboolean cong_location_calc_next_word(const CongLocation *input_loc, 
+				      CongDocument *doc,
+				      CongLocation *output_loc)
+{
+	PangoLogAttr *pango_log_attr=NULL;
+	int attrs_len=0;
+
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	make_pango_log_attr_for_node(doc, 
+				     input_loc->node,
+				     &pango_log_attr,
+				     &attrs_len);
+
+	if (pango_log_attr) {
+		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+
+		g_assert(attrs_len>0);
+		g_assert(char_index<attrs_len);
+
+		/* Scan forwards to next is_word_start: */
+		while (char_index<attrs_len) {
+
+			if (pango_log_attr[++char_index].is_word_start) {
+				cong_location_set_node_and_char_offset(output_loc, input_loc->node, char_index);
+				g_free(pango_log_attr);
+				return TRUE;
+			}
+		}
+
+		/* FIXME: is this logic correct??? */
+		cong_location_set_node_and_char_offset(output_loc, input_loc->node, char_index-1);
+		g_free(pango_log_attr);
+		return TRUE;
+
+	} else {
+		return FALSE;
+	}
+}
+
+gboolean cong_location_calc_document_start(const CongLocation *input_loc, 
+					   CongDispspec *dispspec,
+					   CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document start");
+
+	return FALSE;
+}
+gboolean cong_location_calc_line_start(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line start");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_document_end(const CongLocation *input_loc, 
+					 CongDispspec *dispspec,
+					 CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document end");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_line_end(const CongLocation *input_loc, 
+				     CongDispspec *dispspec,
+				     CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line end");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_prev_page(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating previous page");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_next_page(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating next page");
+
+	return FALSE;
+}
+
+gboolean
+cong_location_calc_word_extent(const CongLocation *input_loc, 
+			       CongDocument *doc,
+			       CongLocation *output_start_of_word, 
+			       CongLocation *output_end_of_word)
+{
+	PangoLogAttr *pango_log_attr=NULL;
+	int attrs_len=0;
+
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(output_start_of_word, FALSE);
+	g_return_val_if_fail(output_end_of_word, FALSE);
+
+	make_pango_log_attr_for_node(doc,
+				     input_loc->node,
+				     &pango_log_attr,
+				     &attrs_len);
+
+	if (pango_log_attr) {
+		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+
+		g_assert(attrs_len>0);
+		g_assert(char_index<attrs_len);
+
+		/* Scan backwards to next is_word_start: */
+		{
+			glong start_char_index = char_index;
+			while (start_char_index>0) {
+				
+				if (pango_log_attr[--start_char_index].is_word_start) {
+					break;
+				}
+			}
+			cong_location_set_node_and_char_offset(output_start_of_word, input_loc->node, start_char_index);
+		}
+
+		
+		/* Scan forwards to next is_word_end: */
+		{
+			glong end_char_index = char_index;
+			while (end_char_index<attrs_len) {
+				
+				if (pango_log_attr[++end_char_index].is_word_end) {
+					break;
+				}
+			}
+			cong_location_set_node_and_char_offset(output_end_of_word, input_loc->node, end_char_index);
+		}
+
+		g_free(pango_log_attr);
+		return TRUE;
+
+	} else {
+		return FALSE;
+	}
 }

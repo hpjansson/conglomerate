@@ -157,10 +157,16 @@ typedef struct _CongLocation
 } CongLocation;
 
 void
-cong_location_set(CongLocation *loc, CongNodePtr node, int byte_offset);
+cong_location_nullify(CongLocation *loc);
 
 void
-cong_location_nullify(CongLocation *loc);
+cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node);
+
+void
+cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int byte_offset);
+
+void
+cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glong char_offset);
 
 gboolean
 cong_location_exists(const CongLocation *loc);
@@ -202,6 +208,51 @@ cong_location_parent(const CongLocation *loc);
 void
 cong_location_copy(CongLocation *dst, const CongLocation *src);
 
+gboolean
+cong_location_calc_prev_char(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_next_char(const CongLocation *input_loc,
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_prev_word(const CongLocation *input_loc, 
+			     CongDocument *doc,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_next_word(const CongLocation *input_loc, 
+			     CongDocument *doc,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_document_start(const CongLocation *input_loc, 
+				  CongDispspec *dispspec,
+				  CongLocation *output_loc);
+gboolean
+cong_location_calc_line_start(const CongLocation *input_loc, 
+			      CongDispspec *dispspec,
+			      CongLocation *output_loc);
+gboolean
+cong_location_calc_document_end(const CongLocation *input_loc, 
+				CongDispspec *dispspec,
+				CongLocation *output_loc);
+gboolean
+cong_location_calc_line_end(const CongLocation *input_loc, 
+			    CongDispspec *dispspec,
+			    CongLocation *output_loc);
+gboolean
+cong_location_calc_prev_page(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_next_page(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc);
+gboolean
+cong_location_calc_word_extent(const CongLocation *input_loc,
+			       CongDocument *doc,
+			       CongLocation *output_start_of_word,
+			       CongLocation *output_end_of_word);
 
 #define CONG_VIEW(x) ((CongView*)(x))
 
