@@ -55,7 +55,8 @@ update()
 {
   echo apply this diff file as
   echo  "patch -p0 < deb.update"
-  for DF in $( cd debian ; find . -type f | sed -e 's@^\./@@' )
+  for DF in $( cd debian ; find . -type f \
+  | grep -v "/conglomerate/" | sed -e 's@^\./@@' )
   do
    if [ -f deb/$DF ]
    then

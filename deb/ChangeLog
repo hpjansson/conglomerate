@@ -1,3 +1,8 @@
+2003-10-24  Geert Stappers <stappers@stappers.nl>
+
+	* build:
+	filtering the package direcorty out of the update.
+
 2003-10-17  Geert Stappers <stappers@stappers.nl>
 
 	* changelog up to date for next release
