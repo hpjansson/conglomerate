@@ -40,6 +40,17 @@
 
 #define TEST_BIG_FONTS 0
 
+#define LOG_SELECTIONS 0
+
+#if LOG_SELECTIONS
+#define LOG_SELECTIONS1(x) g_message(x)
+#define LOG_SELECTIONS2(x, a) g_message((x), (a))
+#else
+#define LOG_SELECTIONS1(x) ((void)0)
+#define LOG_SELECTIONS2(x, a) ((void)0)
+#endif
+
+
 #define PRIVATE(x) ((x)->private)
 
 /* Internal data structure declarations: */
@@ -452,13 +463,13 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 					xmlFreeDoc (xml_doc);
 
 					if (source_fragment) {
-						g_message ("Got clipboard data as XML: \"%s\"", source_fragment);
+						LOG_SELECTIONS2 ("Got clipboard data as XML: \"%s\"", source_fragment);
 						return source_fragment;
 					} else {
-						g_message ("Failed to generate source fragment from selected XML");
+						LOG_SELECTIONS1 ("Failed to generate source fragment from selected XML");
 					}
 				} else {
-					g_message ("Parsing of XML from selection failed");
+					LOG_SELECTIONS1 ("Parsing of XML from selection failed");
 				}	
 			}
 		}
@@ -475,7 +486,7 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 				
 				g_free (raw_text);
 
-				g_message ("Got clipboard data as text \"%s\"", escaped_text);
+				LOG_SELECTIONS2 ("Got clipboard data as text \"%s\"", escaped_text);
 				return escaped_text;
 			}			
 		}
@@ -532,7 +543,7 @@ clipboard_get_cb (GtkClipboard *clipboard,
 	switch (info) {
 	default: g_assert_not_reached();
 	case CONG_TARGET_TYPE_TEXT:
-		g_message ("Providing text for selection: \"%s\"", cong_selection->utf8_text);
+		LOG_SELECTIONS2 ("Providing text for selection: \"%s\"", cong_selection->utf8_text);
 		gtk_selection_data_set (selection_data,
 					gdk_atom_intern ("UTF8_STRING", FALSE),
 					8,
@@ -540,7 +551,7 @@ clipboard_get_cb (GtkClipboard *clipboard,
 					strlen (cong_selection->utf8_text));
 		break;
 	case CONG_TARGET_TYPE_XML:
-		g_message ("Providing XML data for selection: \"%s\"", cong_selection->utf8_xml_buffer);
+		LOG_SELECTIONS2 ("Providing XML data for selection: \"%s\"", cong_selection->utf8_xml_buffer);
 		gtk_selection_data_set (selection_data,
 					gdk_atom_intern ("text/xml", FALSE),
 					8,
@@ -694,7 +705,7 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 				     clipboard_clear_cb,
 				     cong_selection);
 
-	g_message("Clipboard set to \"%s\"", xml_fragment);
+	LOG_SELECTIONS2("Clipboard set to \"%s\"", xml_fragment);
 
 	/* emit signals? */
 }

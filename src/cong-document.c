@@ -1293,8 +1293,6 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 
 	fake_document = g_strdup_printf ("<?xml version=\"1.0\"?>\n<placeholder>%s</placeholder>", source_fragment);
 	
-	g_message (fake_document);
-	
 	xml_doc = xmlParseMemory (fake_document, 
 				  strlen(fake_document));
 	
