@@ -1,5 +1,14 @@
 2004-07-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-document.c, cong-document.h, cong-edit-find-and-replace.c, cong-file-open.c, cong-file-properties.c, cong-util.c, plugin-fo.c, plugin-relaxng.c:
+
+	CongDispspecElements now know which CongDispspec they belong to;
+	refactored the code that searches for CongDispspec by DTD;
+	implement CongDocument methods to get CongDispspec for the DTD and
+	for the root element (as well as the default one used for
+	non-namespaced elements); renamed cong_document_get_root to
+	cong_document_get_root_element
+
 	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-document.c, cong-document.h, cong-editor-widget.h, cong-editor-widget3.c, cong-file-properties.c, cong-overview-view.c, cong-primary-window.c, cong-tree-view.c, cong-util.c, cong-view.c, cong-view.h, cursor.c, plugin-save-dispspec.c, popup.c, tree.c, xmldata.c:
 
 	Attempt to handle hybrid documents better: the dispspec for a CongDocument is now just a default, for searching for elements lacking a namespace; search all dispspecs for elements, rather than just the default one. 

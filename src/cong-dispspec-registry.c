@@ -397,53 +397,14 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	g_return_val_if_fail (doc,NULL);
 
 	/* Check for a DTD match: */
-	if (doc->extSubset) {
+	{
+		CongDispspec *ds = cong_dispspec_registry_get_dispspec_for_dtd (registry, 
+										doc);
 
-		/* Check for matching PUBLIC ID: */
-		if (doc->extSubset->ExternalID) {
-			int i;
-
-			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
-				CongDispspec* ds = cong_dispspec_registry_get (registry, i);
-
-				const CongExternalDocumentModel* dtd = cong_dispspec_get_external_document_model (ds, CONG_DOCUMENT_MODE_TYPE_DTD);
-
-				if (dtd) {
-					if (cong_external_document_model_get_public_id (dtd)) {
-						if (0==strcmp (doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
-							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", doc->extSubset->ExternalID);
-							return ds;
-						}
-					}
-				}
-			}
-		}
-
-		/* Check for matching SYSTEM ID: */
-		if (doc->extSubset->SystemID) {
-			const unsigned char *sysID = doc->extSubset->SystemID;
-			int i;
-			
-			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
-				CongDispspec* ds = cong_dispspec_registry_get(registry, i);
-				const CongExternalDocumentModel *model;
-				const char *this_id = NULL;
-				
-				model = cong_dispspec_get_external_document_model(ds, CONG_DOCUMENT_MODE_TYPE_DTD);
-				if (model != NULL) {
-					this_id = cong_external_document_model_get_system_id(model);
-					if (this_id != NULL) {
-						if (!strcmp (sysID, this_id)) {
-							g_message("Found display spec based on matching system ID of DTD\n    %s\n", sysID);
-							return ds;
-						}
-					}
-				}
-			}
+		if (ds) {
+			return ds;
 		}
 	}
-		
-
 
 #if 1
 	/* Scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from: */
@@ -526,6 +487,64 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 
 	return NULL;
 }
+
+CongDispspec*
+cong_dispspec_registry_get_dispspec_for_dtd (CongDispspecRegistry* registry, 
+					     xmlDocPtr xml_doc)
+{
+	g_return_val_if_fail (registry,NULL);
+	g_return_val_if_fail (xml_doc,NULL);
+
+	if (xml_doc->extSubset) {
+
+		/* Check for matching PUBLIC ID: */
+		if (xml_doc->extSubset->ExternalID) {
+			int i;
+
+			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
+				CongDispspec* ds = cong_dispspec_registry_get (registry, i);
+
+				const CongExternalDocumentModel* dtd = cong_dispspec_get_external_document_model (ds, CONG_DOCUMENT_MODE_TYPE_DTD);
+
+				if (dtd) {
+					if (cong_external_document_model_get_public_id (dtd)) {
+						if (0==strcmp (xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID);
+							return ds;
+						}
+					}
+				}
+			}
+		}
+
+		/* Check for matching SYSTEM ID: */
+		if (xml_doc->extSubset->SystemID) {
+			const unsigned char *sysID = xml_doc->extSubset->SystemID;
+			int i;
+			
+			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
+				CongDispspec *ds = cong_dispspec_registry_get (registry, i);
+				const CongExternalDocumentModel *model;
+				const char *this_id = NULL;
+				
+				model = cong_dispspec_get_external_document_model (ds, CONG_DOCUMENT_MODE_TYPE_DTD);
+				if (model != NULL) {
+					this_id = cong_external_document_model_get_system_id (model);
+					if (this_id != NULL) {
+						if (!strcmp (sysID, this_id)) {
+							g_message("Found display spec based on matching system ID of DTD\n    %s\n", sysID);
+							return ds;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* No match found: */
+	return NULL;
+}
+
 
 CongDispspecElement*
 cong_dispspec_registry_get_dispspec_element_for_node (CongDispspecRegistry *registry, 

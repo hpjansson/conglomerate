@@ -34,6 +34,8 @@ struct CongDispspecElementHeaderInfo
 
 struct CongDispspecElement
 {
+	CongDispspec *ds;
+
 	/* URI of namespace, or NULL: */
 	gchar *ns_uri;
 
@@ -289,6 +291,7 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 
 /** 
  * cong_dispspec_element_new:
+ * @ds: the #CongDispspec this will be added to
  * @ns_uri: the URI of the namespace, or NULL
  * @local_name: the local name for the new element; must be non-NULL
  * @type:
@@ -300,7 +303,8 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
  * Returns: a freshly allocated #CongDispspecElement 
  **/
 CongDispspecElement*
-cong_dispspec_element_new (const gchar* ns_uri, 
+cong_dispspec_element_new (CongDispspec *ds,
+			   const gchar* ns_uri, 
 			   const gchar* local_name, 
 			   CongElementType type,
 			   gboolean autogenerate_username)
@@ -313,6 +317,8 @@ cong_dispspec_element_new (const gchar* ns_uri,
 
 	/* Use shared constructor code: */
 	element = gxx_callback_construct_dispspec_element();
+
+	element->ds = ds;
 
 	if (ns_uri) {
 		element->ns_uri = g_strdup(ns_uri);
@@ -396,6 +402,21 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	g_free (element);
 	/* FIXME:  do we need to remove from the list? */
 }
+
+/** 
+ * cong_dispspec_element_get_dispspec:
+ * @element: the element in question
+ * 
+ * Returns: the #CongDispspec containing this element
+ */
+CongDispspec*
+cong_dispspec_element_get_dispspec (CongDispspecElement *element)
+{
+	g_return_val_if_fail (element, NULL);
+
+	return element->ds;
+}
+
 
 /** 
  * cong_dispspec_element_get_ns_uri:
@@ -875,6 +896,7 @@ cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *elemen
 
 /**
  * cong_dispspec_element_from_xml:
+ * @ds: the #CongDispspec this will be added to
  * @xml_element:  the element within the XML document
  *
  * Create an #CongDispspecElement from an xds XML representation
@@ -882,7 +904,8 @@ cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *elemen
  * Returns: a newly-created #CongDispspecElement
  */
 CongDispspecElement*
-cong_dispspec_element_from_xml (xmlNodePtr xml_element)
+cong_dispspec_element_from_xml (CongDispspec *ds,
+				xmlNodePtr xml_element)
 {
 	CongDispspecElement* element;
 
@@ -891,6 +914,8 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 	DS_DEBUG_MSG1("got xml element\n");
 
 	element = gxx_generated_object_from_xml_tree_fn_dispspec_element (xml_element);
+
+	element->ds = ds;
 
 	if (element->type == CONG_ELEMENT_TYPE_PLUGIN) {
 		xmlChar* id = xmlGetProp(xml_element,"service-id");

@@ -49,7 +49,7 @@ is_fo(CongDocument *doc)
 
 	g_return_val_if_fail(doc, FALSE);
 
-	root = cong_document_get_root(doc);
+	root = cong_document_get_root_element (doc);
 
 	if (cong_node_is_element (root, FO_NS_URI, "root")) {
 		return TRUE;

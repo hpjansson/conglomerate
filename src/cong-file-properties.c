@@ -378,7 +378,7 @@ on_dtd_button_clicked (GtkButton *button,
 									_("Associate with DTD"),
 									NULL);
 			cong_command_add_set_external_dtd (cmd,
-							   cong_document_get_root(doc)->name,
+							   cong_document_get_root_element (doc)->name,
 							   cong_external_document_model_get_public_id (model_dtd),
 							   cong_external_document_model_get_system_id (model_dtd));
 			cong_document_end_command (doc,

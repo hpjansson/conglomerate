@@ -704,12 +704,12 @@ find_next (const CongLocation *start_loc,
 		     {
 		         if (data->is_search_backwards)
 				{
-					next_node = cong_node_calc_final_node_in_subtree_satisfying (cong_document_get_root(doc), 
+					next_node = cong_node_calc_final_node_in_subtree_satisfying (cong_document_get_root_element (doc), 
 								 contains_search_string, data);
 		                }								 
 	    		else
 				{
-					next_node = cong_node_calc_first_node_in_subtree_satisfying (cong_document_get_root (doc), 
+					next_node = cong_node_calc_first_node_in_subtree_satisfying (cong_document_get_root_element (doc), 
 								 contains_search_string, data);
 		                }								 
 

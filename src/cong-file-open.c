@@ -185,7 +185,7 @@ open_document_do (const gchar* doc_name,
 
 	cong_doc = cong_document_new_from_xmldoc(doc, ds, doc_name); /* takes ownership of doc */
 
-	cong_node_self_test_recursive(cong_document_get_root(cong_doc));
+	cong_node_self_test_recursive (cong_document_get_root_element (cong_doc));
 
 	g_assert(cong_doc);
 

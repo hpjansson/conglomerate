@@ -52,7 +52,7 @@ doc_filter_is_rng (CongServiceDocTool *doc_tool,
 
 	g_return_val_if_fail(doc, FALSE);
 
-	root = cong_document_get_root(doc);
+	root = cong_document_get_root_element (doc);
 
 	/* FIXME: what are the valid roots of a RELAX NG document? 
 	   We only look at the namespace for the moment.

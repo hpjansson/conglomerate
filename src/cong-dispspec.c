@@ -1062,7 +1062,8 @@ element_callback_generate_dispspec_from_dtd (void *payload, void *ds, xmlChar * 
 	g_assert (dispspec);
 	g_assert (element);
 
-	ds_element = cong_dispspec_element_new (element->prefix,
+	ds_element = cong_dispspec_element_new (dispspec,
+						element->prefix,
 						name,
 						cong_dtd_element_guess_dispspec_type (element),
 						TRUE);
@@ -1096,7 +1097,8 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
 							if(xml_element->type==XML_ELEMENT_NODE)
 							{
-								CongDispspecElement* element = cong_dispspec_element_from_xml (xml_element);
+								CongDispspecElement* element = cong_dispspec_element_from_xml (ds,
+															       xml_element);
 								
 								cong_dispspec_add_element(ds,element);
 							}
@@ -1449,7 +1451,8 @@ promote_element (CongDispspec * dispspec,
 		{
 			if (contains_carriage_return(xmlNodeGetContent (node)))
 			{
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (node->parent),
+				CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+											     cong_node_get_ns_uri (node->parent),
 											     node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
@@ -1462,7 +1465,8 @@ promote_element (CongDispspec * dispspec,
 		{
 			if (contains_text (xmlNodeGetContent (node)))
 			{
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (node->parent),
+				CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+											     cong_node_get_ns_uri (node->parent),
 											     node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
@@ -1490,14 +1494,16 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 				}
 				else if (contains_text (xmlNodeGetContent (cur))) {
 					if (contains_carriage_return(xmlNodeGetContent (cur))) {
-						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
+						CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+													     cong_node_get_ns_uri (cur->parent),
 													     cur->parent->name,
 													     CONG_ELEMENT_TYPE_STRUCTURAL,
 													     TRUE);
 						g_assert (ds_element);
 						cong_dispspec_add_element (dispspec, ds_element);
 					} else {
-						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
+						CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+													     cong_node_get_ns_uri (cur->parent),
 													     cur->parent->name,
 													     CONG_ELEMENT_TYPE_SPAN,
 													     TRUE);
@@ -1505,7 +1511,8 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 						cong_dispspec_add_element (dispspec, ds_element);
 					}
 				} else {
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
+					CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+												     cong_node_get_ns_uri (cur->parent),
 												     cur->parent->name,
 												     CONG_ELEMENT_TYPE_STRUCTURAL,
 												     TRUE);
@@ -1539,7 +1546,8 @@ ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur)
 		element = cong_dispspec_lookup_element (dispspec, cong_node_get_ns_uri (cur), cong_node_get_local_name (cur));
 		if (NULL==element) {
 			/* Then we've found an element that doesn't have any handler in the dispspec; better create a structural tag for it... */
-			CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur),
+			CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+										     cong_node_get_ns_uri (cur),
 										     cong_node_get_local_name (cur),
 										     CONG_ELEMENT_TYPE_STRUCTURAL,
 										     TRUE);
@@ -1578,7 +1586,8 @@ xml_to_dispspec (CongDispspec *dispspec,
 	{
 		xmlNodePtr root_element = xmlDocGetRootElement(doc);
 
-		CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (root_element),
+		CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
+									     cong_node_get_ns_uri (root_element),
 									     root_element->name,
 									     CONG_ELEMENT_TYPE_STRUCTURAL,
 									     TRUE);

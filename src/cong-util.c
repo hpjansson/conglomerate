@@ -1643,7 +1643,7 @@ cong_util_run_add_dtd_dialog (CongDocument *doc,
 								_("Associate with DTD"),
 								NULL);
 		cong_command_add_set_external_dtd (cmd,
-						   cong_document_get_root(doc)->name,
+						   cong_document_get_root_element (doc)->name,
 						   NULL,
 						   dtd_filename);
 		cong_document_end_command (doc,

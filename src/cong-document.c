@@ -472,11 +472,10 @@ cong_document_get_xml(CongDocument *doc)
  * cong_document_get_root:
  * @doc:
  *
- * TODO: Write me
- * Returns:
+ * Returns: the root element of the document, if any (as opposed to the root node)
  */
 CongNodePtr
-cong_document_get_root(CongDocument *doc)
+cong_document_get_root_element(CongDocument *doc)
 {
 	CongNodePtr iter;
 
@@ -527,7 +526,7 @@ cong_document_get_root_traversal_node (CongDocument *doc)
  * cong_document_get_default_dispspec:
  * @doc:
  *
- * TODO: Write me
+ * Get the CongDispspec in use for all non-namespaced elements in this document
  * Returns:
  */
 CongDispspec*
@@ -536,6 +535,45 @@ cong_document_get_default_dispspec(CongDocument *doc)
 	g_return_val_if_fail(doc, NULL);
 
 	return PRIVATE(doc)->default_ds;
+}
+
+/**
+ * cong_document_get_root_dispspec:
+ * @doc:
+ *
+ * Get the CongDispspec corresponding to the root element of the document (if any)
+ * Returns:
+ */
+CongDispspec*
+cong_document_get_root_dispspec(CongDocument *doc)
+{
+	CongNodePtr root_element;
+	g_return_val_if_fail(doc, NULL);
+
+	root_element = cong_document_get_root_element (doc);
+
+	if (root_element) {
+		return cong_document_get_dispspec_for_node (doc, 
+							    root_element);
+	} else {
+		return NULL;
+	}
+}
+
+/**
+ * cong_document_get_dtd_dispspec:
+ * @doc:
+ *
+ * Get the CongDispspec corresponding to the document's DTD (if any)
+ * Returns:
+ */
+CongDispspec*
+cong_document_get_dtd_dispspec(CongDocument *doc)
+{
+	g_return_val_if_fail (doc, NULL);
+
+	return cong_dispspec_registry_get_dispspec_for_dtd (cong_app_get_dispspec_registry (cong_app_singleton ()),
+							    PRIVATE(doc)->xml_doc);
 }
 
 /**
@@ -555,6 +593,31 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 	return cong_dispspec_registry_get_dispspec_element_for_node (cong_app_get_dispspec_registry (cong_app_singleton ()),
 								     PRIVATE(doc)->default_ds,
 								     node);
+}
+
+/**
+ * cong_document_get_dispspec_for_node:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+CongDispspec*
+cong_document_get_dispspec_for_node(CongDocument *doc, CongNodePtr node)
+{
+	CongDispspecElement* ds_element;
+
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	ds_element = cong_document_get_dispspec_element_for_node (doc, node);
+
+	if (ds_element) {
+		return cong_dispspec_element_get_dispspec (ds_element);
+	} else {
+		return NULL;
+	}
 }
 
 /**

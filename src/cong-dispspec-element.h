@@ -45,7 +45,8 @@ typedef enum
 } CongElementType;
 
 CongDispspecElement*
-cong_dispspec_element_new (const gchar* ns_uri, 
+cong_dispspec_element_new (CongDispspec *ds,
+			   const gchar* ns_uri, 
 			   const gchar* local_name,
 			   CongElementType type,
 			   gboolean autogenerate_username);
@@ -54,6 +55,8 @@ cong_dispspec_element_new (const gchar* ns_uri,
 void 
 cong_dispspec_element_destroy (CongDispspecElement *element); 
 
+CongDispspec*
+cong_dispspec_element_get_dispspec (CongDispspecElement *element); 
 
 const gchar*
 cong_dispspec_element_get_ns_uri (CongDispspecElement *element); 
@@ -148,7 +151,8 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 			      xmlDocPtr xml_doc);
 
 CongDispspecElement*
-cong_dispspec_element_from_xml (xmlNodePtr xml_element);
+cong_dispspec_element_from_xml (CongDispspec *ds,
+				xmlNodePtr xml_element);
 
 CongElementDescription*
 cong_dispspec_element_make_element_description (const CongDispspecElement *ds_element);

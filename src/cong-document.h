@@ -131,7 +131,7 @@ xmlDocPtr
 cong_document_get_xml(CongDocument *doc);
 
 CongNodePtr
-cong_document_get_root(CongDocument *doc);
+cong_document_get_root_element(CongDocument *doc);
 
 CongDocumentTraversal*
 cong_document_get_traversal (CongDocument *doc);
@@ -149,8 +149,14 @@ cong_document_get_default_dispspec(CongDocument *doc);
 CongDispspec*
 cong_document_get_root_dispspec(CongDocument *doc);
 
+CongDispspec*
+cong_document_get_dtd_dispspec(CongDocument *doc);
+
 CongDispspecElement*
 cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node);
+
+CongDispspec*
+cong_document_get_dispspec_for_node(CongDocument *doc, CongNodePtr node);
 
 gchar*
 cong_document_get_filename(CongDocument *doc);
