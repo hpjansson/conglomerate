@@ -181,9 +181,27 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 #endif
 
 	new_element = cong_node_new_element_from_dispspec(element, doc);
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf (_("Apply span tag: %s"), 
+						 cong_dispspec_element_username (element));
+		CongCommand *cmd = cong_command_new (doc, desc);
+
+		g_free (desc);
+
+		if (cong_command_can_add_reparent_selection (cmd, new_element)) {
+			cong_command_add_reparent_selection (cmd, new_element);
+		}
+
+		cong_document_add_command (doc, cmd);
+
+		g_object_unref (G_OBJECT (cmd));
+	}
+#else
 	if (!cong_selection_reparent_all(selection, doc, new_element)) {
 		cong_node_free(new_element);
 	}
+#endif
 
 	return(TRUE);
 }

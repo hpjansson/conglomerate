@@ -12,6 +12,7 @@
 #include "cong-selection.h"
 #include "cong-range.h"
 #include "cong-error-dialog.h"
+#include "cong-command.h"
 
 /* --- Cut/copy/paste --- */
 
@@ -64,6 +65,24 @@ void cong_document_cut_selection(CongDocument *doc)
 	cong_document_begin_edit (doc);
 
 	source = cong_range_generate_source (ordered_range);
+
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Cut"));
+
+		cong_command_add_set_clipboard (cmd,
+						source);
+		g_free(source);
+		
+		cong_command_add_delete_range (cmd,
+					       ordered_range);
+		
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));
+	}
+#else
 	cong_app_set_clipboard (cong_app_singleton(),
 				source);
 
@@ -73,6 +92,7 @@ void cong_document_cut_selection(CongDocument *doc)
 				    ordered_range);
 
 	selection_cursor_unset(doc);
+#endif
 
 	cong_document_end_edit (doc);
 }
@@ -101,10 +121,25 @@ void cong_document_copy_selection(CongDocument *doc)
 	/* GREP FOR MVC */
 	cong_document_begin_edit (doc);
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Cut"));
+
+		cong_command_add_set_clipboard (cmd,
+						cong_range_generate_source (cong_selection_get_ordered_range (selection)));
+		/* Does this leak memory? */
+		
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));
+	}
+#else
 	cong_app_set_clipboard (cong_app_singleton(),
 				cong_range_generate_source (cong_selection_get_ordered_range (selection)));
 
 	selection_cursor_unset(doc);
+#endif
 	cong_document_end_edit (doc);
 }
 
@@ -157,6 +192,69 @@ cong_document_paste_source_at (CongDocument *doc,
 
 	/* We will add the children of new_node in place, then delete the placeholder parent, then merge adjacent text nodes if necessary. */
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Paste"));
+
+		/* Calculate insertion point, splitting text nodes if necessary: */
+		if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
+			
+			if (0==insert_loc->byte_offset) {
+				node_after = insert_loc->node;
+			} else if (!cong_location_get_unichar(insert_loc)) {
+				node_after = cong_location_xml_frag_next(insert_loc);
+			} else {
+				/* Split data node */
+				cong_command_add_xml_frag_data_nice_split2 (cmd,
+									    insert_loc);
+				
+				node_after = cong_location_xml_frag_next(insert_loc);
+			}
+		} else {
+			g_assert_not_reached();
+		}
+		
+		if (node_after) {
+			
+			/* Add the new nodes: */
+			for (iter = new_nodes->children; iter; iter = iter_next) {
+				iter_next = iter->next;
+
+				cong_command_add_node_add_before (cmd, 
+								  iter, 
+								  node_after);		
+			}
+			
+			/* Merge adjacent text nodes: */
+			cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+									       node_after->parent);
+		} else {
+			
+			/* Add the new nodes at the end of the parent's list: */
+			for (iter = new_nodes->children; iter; iter = iter_next) {
+				iter_next = iter->next;
+				
+				cong_command_add_node_set_parent (cmd, 
+								  iter, 
+								  insert_loc->node->parent);		
+			}
+			
+			/* Merge adjacent text nodes: */
+			cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+									       insert_loc->node->parent);
+		}
+		
+		/* Delete the placeholder parent: */
+		cong_command_add_node_recursive_delete (cmd, 
+							new_nodes);
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));
+
+		
+	}
+#else
 	/* Calculate insertion point, splitting text nodes if necessary: */
 	if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
 
@@ -204,6 +302,7 @@ cong_document_paste_source_at (CongDocument *doc,
 	cong_document_node_recursive_delete (doc, 
 					     new_nodes);
 		
+#endif
 	
 	cong_document_end_edit (doc);
 
@@ -225,6 +324,34 @@ cong_document_paste_source_under (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Paste Under"));
+
+		/* Add the new nodes: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_command_add_node_set_parent (cmd, 
+							  iter, 
+							  relative_to_node);		
+		}
+		
+		/* Delete the placeholder parent: */
+		cong_command_add_node_recursive_delete (cmd, 
+							new_nodes);
+		
+		/* Merge adjacent text nodes: */
+		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+								       relative_to_node);
+
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));		
+	}
+#else
+
 	/* Add the new nodes: */
 	for (iter = new_nodes->children; iter; iter = iter_next) {
 		iter_next = iter->next;
@@ -241,6 +368,7 @@ cong_document_paste_source_under (CongDocument *doc,
 	/* Merge adjacent text nodes: */
 	cong_document_merge_adjacent_text_children_of_node (doc, 
 							    relative_to_node);
+#endif
 	
 	cong_document_end_edit (doc);
 }
@@ -261,6 +389,32 @@ cong_document_paste_source_before (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Paste Before"));
+
+		/* Add the new nodes: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_command_add_node_add_before (cmd, 
+							  iter, 
+							  relative_to_node);
+		}
+		
+		/* Delete the placeholder parent: */
+		cong_command_add_node_recursive_delete (cmd, 
+							new_nodes);
+		
+		/* Merge adjacent text nodes: */
+		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+								       relative_to_node->parent);
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));		
+	}
+#else
 	/* Add the new nodes: */
 	for (iter = new_nodes->children; iter; iter = iter_next) {
 		iter_next = iter->next;
@@ -277,6 +431,7 @@ cong_document_paste_source_before (CongDocument *doc,
 	/* Merge adjacent text nodes: */
 	cong_document_merge_adjacent_text_children_of_node (doc, 
 							    relative_to_node->parent);
+#endif
 	
 	cong_document_end_edit (doc);
 }
@@ -297,6 +452,36 @@ cong_document_paste_source_after (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd = cong_command_new (doc, _("Paste After"));
+
+
+		/* Add the new nodes: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_command_add_node_add_after (cmd, 
+							 iter, 
+							 relative_to_node);
+			
+			relative_to_node = iter;
+		}
+		
+		/* Delete the placeholder parent: */
+		cong_command_add_node_recursive_delete (cmd, 
+							new_nodes);
+		
+		/* Merge adjacent text nodes: */
+		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+								       relative_to_node->parent);
+
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));
+	}
+#else
 	/* Add the new nodes: */
 	for (iter = new_nodes->children; iter; iter = iter_next) {
 		iter_next = iter->next;
@@ -315,6 +500,7 @@ cong_document_paste_source_after (CongDocument *doc,
 	/* Merge adjacent text nodes: */
 	cong_document_merge_adjacent_text_children_of_node (doc, 
 							    relative_to_node->parent);
+#endif
 	
 	cong_document_end_edit (doc);
 }

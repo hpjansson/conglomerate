@@ -1,5 +1,9 @@
 2003-10-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* popup.c, xmledit.c
+
+	Undo/redo-ification of Span Tag application, and for clipboard operations
+
 	* cong-node-modification-make-orphan.c, cong-node-modification-set-parent.c
 
 	Implemented stubs
