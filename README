@@ -1,44 +1,44 @@
 
-     _________________________________________________________________
+     _________________________________________________________
 
    Table of Contents
 
-        [1]About Conglomerate
-        [2]Compiling
+        About Conglomerate
+        Compiling
 
-              [3]Debian
-              [4]Windows
-              [5]Mac OS X 
+              Debian
+              Windows
+              Mac OS X 
 
-        [6]Running
-        [7]Using
-        [8]Contact
-     _________________________________________________________________
+        Running
+        Using
+        Contact
+     _________________________________________________________
 
    Table of Contents
 
-   [9]About Conglomerate
-   [10]Compiling
+   About Conglomerate
+   Compiling
 
-        [11]Debian
-        [12]Windows
-        [13]Mac OS X 
+        Debian
+        Windows
+        Mac OS X 
 
-   [14]Running
-   [15]Using
-   [16]Contact
+   Running
+   Using
+   Contact
 
 About Conglomerate
 
-   This is a work-in-progress version of the Conglomerate editor. It is
-   based on structural document markup with XML.
+   This is a work-in-progress version of the Conglomerate editor.
+   It is based on structural document markup with XML.
 
 Compiling
 
-   Conglomerate uses various GNOME 2 components (though it should run
-   fine under both GNOME and KDE). Hence you'll need a reasonably
-   up-to-date install of GNOME 2 (and the developer packages) to build
-   it.
+   Conglomerate uses various GNOME 2 components (though it should
+   run fine under both GNOME and KDE). Hence you'll need a
+   reasonably up-to-date install of GNOME 2 (and the developer
+   packages) to build it.
     1.
 ./configure
     2.
@@ -47,8 +47,8 @@ make
     4.
 make install
 
-   If you're compiling from CVS, you will need the gnome-commonmodule
-   from GNOME CVS installed. Then type
+   If you're compiling from CVS, you will need the
+   gnome-commonmodule from GNOME CVS installed. Then type
     1.
 ./autogen.sh
                         which generates and runs
@@ -60,8 +60,9 @@ make
 make install
 
    and see what happens. This should produce an executable called
-   conglomeratein the srcdirectory. Typing make installinstalls the
-   program and its data files into a hopefully sensible location.
+   conglomeratein the srcdirectory. Typing make installinstalls
+   the program and its data files into a hopefully sensible
+   location.
 
    On some systems, example given Red Hat 8, you have to type
     1.
@@ -75,7 +76,8 @@ make
 
 Debian
 
-   If you want to make a debian package from the tarbal or CVS type
+   If you want to make a debian package from the tarbal or CVS
+   type
 
    deb/build
 
@@ -85,106 +87,81 @@ Debian
 
 Windows
 
-   The original prototype of Conglomerate built and ran under Windows,
-   probably using Cygwin ([17]http://www.cygnus.com/cygwin/). The process
-   is basically the same as on Unix. Much has changed within the code
-   since then - please let the development list know if you attempt to
-   build it. There has been a recent attempt to get Conglomerate to build
-   on Win32; see [18]here.
+   The original prototype of Conglomerate built and ran under
+   Windows, probably using Cygwin
+   (http://www.cygnus.com/cygwin/). The process is basically the
+   same as on Unix. Much has changed within the code since then -
+   please let the development list know if you attempt to build
+   it. There has been a recent attempt to get Conglomerate to
+   build on Win32; see here.
 
 Mac OS X
 
-   We managed to build one of the Conglomerate 0.5 tarballs on Mac OS X
-   using Fink at GUADEC 4 in Dublin. FIXME: add link to screenshot
+   We managed to build one of the Conglomerate 0.5 tarballs on
+   Mac OS X using Fink at GUADEC 4 in Dublin. FIXME: add link to
+   screenshot
 
 Running
 
-   Currently you need to install conglomeratefor it to work (so that it
-   can find its data files)
+   Currently you need to install conglomeratefor it to work (so
+   that it can find its data files)
 
-   Conglomerate needs two files to be able to run and display something.
-   The first is an XML file (if it uses a DTD, this should be locatable
-   as referred from the XML file - there will be no validation done, and
-   DTD-less documents are fine). The second is a "displayspec",
-   illustrated by readme.xdsin the examplesdirectory. This specifies how
-   the tags are rendered.
+   Conglomerate needs two files to be able to run and display
+   something. The first is an XML file (if it uses a DTD, this
+   should be locatable as referred from the XML file - there will
+   be no validation done, and DTD-less documents are fine). The
+   second is a "displayspec", illustrated by readme.xdsin the
+   examplesdirectory. This specifies how the tags are rendered.
 
-   There are two ways to load a document into Conglomerate. One is by
-   specifying the XML on the commandline, like this:
+   There are two ways to load a document into Conglomerate. One
+   is by specifying the XML on the commandline, like this:
 
    conglomerate readme.xml
 
-   The other is by using the GUI open dialogs. The readme example used
-   above is located in the examples directory, from the package root.
+   The other is by using the GUI open dialogs. The readme example
+   used above is located in the examples directory, from the
+   package root.
 
 Using
 
-   Try marking some text and right-clicking. The selection field will be
-   inverted for legal tag insertion points, and red wherever insertion is
-   disallowed to promote proper tag nesting.
+   Try marking some text and right-clicking. The selection field
+   will be inverted for legal tag insertion points, and red
+   wherever insertion is disallowed to promote proper tag
+   nesting.
 
-   You can also right-click items in the left-hand treeview and see what
-   happens.
+   You can also right-click items in the left-hand treeview and
+   see what happens.
 
    Many of the menu options are currently unimplemented.
 
 Contact
 
-   Conglomerate has public mailinglists with web pages as follows:
-     * Announcements. [19]http://lists.copyleft.no/mailman/listinfo/congl
-       omerate-announce
+   Conglomerate has public mailinglists with web pages as
+   follows:
+     * Announcements. http://lists.copyleft.no/mailman/listinfo/c
+       onglomerate-announce
      * User
-       discussion. [20]http://lists.copyleft.no/mailman/listinfo/conglome
-       rate
-     * Development. [21]http://lists.copyleft.no/mailman/listinfo/conglom
-       erate-devel
+       discussion. http://lists.copyleft.no/mailman/listinfo/cong
+       lomerate
+     * Development. http://lists.copyleft.no/mailman/listinfo/con
+       glomerate-devel
 
    The Conglomerate web site is at:
 
-   [22]http://www.conglomerate.org/
+   http://www.conglomerate.org/
 
-   The latest updates are available through anonymous CVS from GNOME's
-   CVS server:
+   The latest updates are available through anonymous CVS from
+   GNOME's CVS server:
 
-   cvs -z3 -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome checkout
-   conglomerate
+   cvs -z3 -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome
+   checkout conglomerate
 
    CVS is also web-browsable:
-   [23]http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&dir=congl
-   omerate
+   http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&dir=c
+   onglomerate
 
-   The code was originally written by Hans Petter Jansson (hpj@styx.net),
-   but please don't send angry mails to him about it. Most coding is
-   currently being done by Dave Malcolm (david@davemalcolm.demon.co.uk),
-   but you should direct questions to the development list (see above)
-   for the moment.
-
-References
-
-   Visible links
-   1. file://localhost/usr/src/conglomerate/README.html#id5327853
-   2. file://localhost/usr/src/conglomerate/README.html#id5327914
-   3. file://localhost/usr/src/conglomerate/README.html#id5372595
-   4. file://localhost/usr/src/conglomerate/README.html#id5372628
-   5. file://localhost/usr/src/conglomerate/README.html#id5372662
-   6. file://localhost/usr/src/conglomerate/README.html#id5372678
-   7. file://localhost/usr/src/conglomerate/README.html#id5372349
-   8. file://localhost/usr/src/conglomerate/README.html#id5372375
-   9. file://localhost/usr/src/conglomerate/README.html#id5327853
-  10. file://localhost/usr/src/conglomerate/README.html#id5327914
-  11. file://localhost/usr/src/conglomerate/README.html#id5372595
-  12. file://localhost/usr/src/conglomerate/README.html#id5372628
-  13. file://localhost/usr/src/conglomerate/README.html#id5372662
-  14. file://localhost/usr/src/conglomerate/README.html#id5372678
-  15. file://localhost/usr/src/conglomerate/README.html#id5372349
-  16. file://localhost/usr/src/conglomerate/README.html#id5372375
-  17. http://www.cygnus.com/cygwin/
-  18. http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html
-  19. http://lists.copyleft.no/mailman/listinfo/conglomerate-announce
-  20. http://lists.copyleft.no/mailman/listinfo/conglomerate
-  21. http://lists.copyleft.no/mailman/listinfo/conglomerate-devel
-  22. http://www.conglomerate.org/
-  23. http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&dir=conglomerate
-
-   Hidden links:
-  24. file://localhost/usr/src/conglomerate/README.html#id5327841
+   The code was originally written by Hans Petter Jansson
+   (hpj@styx.net), but please don't send angry mails to him about
+   it. Most coding is currently being done by Dave Malcolm
+   (david@davemalcolm.demon.co.uk), but you should direct
+   questions to the development list (see above) for the moment.
