@@ -251,14 +251,16 @@ CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 	{
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
+		CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
-		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
-		{
-			return(cong_node_prev(x));
-		}
+		if (element) {
+			if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element)) {
+				return(cong_node_prev(x));
+			}
 
-		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
-			return(cong_node_prev(x));
+			if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
+				return(cong_node_prev(x));
+			}
 		}
 	}
 
@@ -285,7 +287,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 
 	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 
-	text = cong_dispspec_get_section_header_text(ds, x);
+	text = cong_dispspec_element_get_section_header_text(element, x);
       	
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 
@@ -345,23 +347,22 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
 		{
-			if (cong_dispspec_element_structural(ds, name))
-			{
-				if (cong_dispspec_element_collapse(ds, name))
-				{
-					cong_tree_view_recursive_populate(doc, x, TRUE, store, &new_tree_iter);
-				}
-				else
-				{
-					/* New structural element */
-					cong_tree_view_recursive_populate(doc, x, FALSE, store, &new_tree_iter);
-				}
-			}
-			else if (cong_dispspec_element_span(ds, name) ||
-				 cong_dispspec_element_insert(ds, name))
-			{
-				/* New editor window */
-				x = tree_editor_elements_skip(x, ds);
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+
+			if (element) {
+				if (cong_dispspec_element_is_structural(element)) {
+					if (cong_dispspec_element_collapseto(element)) {
+						cong_tree_view_recursive_populate(doc, x, TRUE, store, &new_tree_iter);
+					} else	{
+						/* New structural element */
+						cong_tree_view_recursive_populate(doc, x, FALSE, store, &new_tree_iter);
+					}
+				} else if (cong_dispspec_element_is_span(element) ||
+					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element))
+					{
+				                /* New editor window */
+						x = tree_editor_elements_skip(x, ds);
+					}
 			}
 		}
 		else if (node_type == CONG_NODE_TYPE_TEXT)
@@ -415,12 +416,12 @@ void cong_tree_view_populate_tree(CongTreeView *tree_view)
 	for ( ; x; x = cong_node_next(x))
 	{
 		enum CongNodeType type = cong_node_type(x);
-
 		const char *name = xml_frag_name_nice(x);
+		CongDispspecElement* element = cong_dispspec_lookup_element(displayspec, name);
 
 		g_message("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
-		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
+		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element))
 		{
 			/* New element */
 			cong_tree_view_recursive_populate(doc, x, FALSE, tree_view->gtk_tree_store, &root_iter);

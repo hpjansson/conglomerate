@@ -45,9 +45,12 @@ struct CongDispspecElement
 
 struct CongDispspec
 {
-	/* New implementation is an "intrusive list" of CongDispspecElement structs */ 
+	/* Implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
 	CongDispspecElement* last;
+
+	/* We also store a tree of elements, for fast lookup by name: */ 
+	GTree *tree;
 
 	gchar* name;
 	gchar* desc;
@@ -194,6 +197,11 @@ CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 static CongDispspec* parse_xmldoc(xmlDocPtr doc);
 static void parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node);
 
+static gint tree_compare_func(gconstpointer a, gconstpointer b)
+{
+	return strcmp(a,b);
+}
+
 GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
 {
 	char* buffer;
@@ -234,6 +242,7 @@ CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
 static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 {
 	CongDispspec* ds = g_new0(CongDispspec,1);
+	ds->tree = g_tree_new(tree_compare_func);
 
 	/* Convert the XML into our internal representation: */
 	if (doc->children)
@@ -312,6 +321,8 @@ CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc)
 
 	ds = g_new0(CongDispspec,1);
 
+	ds->tree = g_tree_new(tree_compare_func);
+
 	for (node = doc->children; node; node=node->next) {
 		recurse_doc(ds, node);
 	}
@@ -359,6 +370,7 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 	g_return_if_fail(element);
 
 	g_assert(element->next==NULL);
+	g_assert(element->tagname);
 
 	if (ds->first) {
 		g_assert(ds->last);
@@ -368,6 +380,8 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 	}
 
 	ds->last = element;
+
+	g_tree_insert(ds->tree, element->tagname, element);
 }
 
 void cong_dispspec_delete(CongDispspec *dispspec)
@@ -426,7 +440,6 @@ cong_dispspec_get_description(const CongDispspec *ds)
 		return "No description available.";
 	}
 }
-
 
 gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name)
 {
@@ -778,7 +791,7 @@ cong_dispspec_ttree_colour_get(TTREE* tt)
 #endif
 
 /*
-  We now use the CongDispspecElement structs, rather than using TTREE data
+  We now use the GTree search structure for speed
  */
 CongDispspecElement*
 cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
@@ -788,6 +801,11 @@ cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(tagname, NULL);
 
+	g_assert(ds->tree);
+
+#if 1
+	return g_tree_lookup(ds->tree, tagname);
+#else
 	element = ds->first;
 
 	while (element) {
@@ -800,6 +818,7 @@ cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 	}
 
 	return NULL;
+#endif
 }
 
 CongDispspecElement*
@@ -936,15 +955,10 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
 }
 
 gchar*
-cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x)
+cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x)
 {
-	CongDispspecElement *element;
-
-	g_return_val_if_fail(ds,NULL);
+	g_return_val_if_fail(element,NULL);
 	g_return_val_if_fail(x,NULL);
-
-	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
-	g_assert(element);
 
 	if (element->header_info) {
 

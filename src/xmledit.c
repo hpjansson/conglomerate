@@ -1830,8 +1830,9 @@ int xed_xml_content_tag(CongSpanEditor *xed, CongNodePtr x)
 	{
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
+		CongDispspecElement *element = cong_dispspec_lookup_element(xed->displayspec, name);
 
-		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_span(xed->displayspec, name) &&
+		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_span(element) &&
 				g_strcasecmp("table", name))
 		{
 			draw_tag_lev_new = xed_xml_content_tag(xed, x);
@@ -2028,16 +2029,20 @@ int xed_xml_content_draw(CongSpanEditor *xed, enum CongDrawMode mode)
 	{
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
+		CongDispspecElement* element = cong_dispspec_lookup_element(xed->displayspec, name);		
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT && g_strcasecmp("table", name)) {
-			if (cong_dispspec_element_span(xed->displayspec, name) /* ||
-										  cong_dispspec_element_insert(xed->displayspec, name) */ ) {
-				draw_tag_lev_new = xed_xml_content_tag(xed, x);
-				if (draw_tag_lev_new > draw_tag_lev) {
-					draw_tag_lev = draw_tag_lev_new;
+			if (element) {
+				if (cong_dispspec_element_is_span(element) /* ||
+									      cong_dispspec_element_insert(xed->displayspec, name) */ ) {
+					draw_tag_lev_new = xed_xml_content_tag(xed, x);
+					if (draw_tag_lev_new > draw_tag_lev) {
+						draw_tag_lev = draw_tag_lev_new;
+					}
+				} else if (cong_dispspec_element_is_structural(element)) {
+					break;
 				}
 			}
-			else if (cong_dispspec_element_structural(xed->displayspec, name)) break;
 		}
 		else if (node_type == CONG_NODE_TYPE_TEXT)
 		{

@@ -63,7 +63,7 @@ get_col_string(const GdkColor* col)
 }
 
 /* Dodgy blend func: */
-void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
+static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
 {
 	float one_minus = 1.0f - proportion;
 
@@ -182,7 +182,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 			   w->allocation.width - 1 - H_SPACING, w->allocation.height - 2 - V_SPACING);
 
 	/* Render the text: */
-	title_text = cong_dispspec_get_section_header_text(ds,x);
+	title_text = cong_dispspec_element_get_section_header_text(element, x);
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
 	gdk_draw_string(w->window,
 			title_font->gdk_font,
@@ -1088,20 +1088,50 @@ void cong_editor_recursively_populate_ui(CongEditorView *editor_view,
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
 		{
-			if (cong_dispspec_element_structural(ds, name))
-			{
-				if (cong_dispspec_element_collapse(ds, name))
-				{
-					gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
-					/* Recurse here: */
-					cong_editor_recursively_populate_ui(editor_view, x, root, TRUE);
-
-					gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
-				}
-				else
-				{
-					/* New structural element */
+			if (element) {
+				if (cong_dispspec_element_is_structural(element)) {
+					if (cong_dispspec_element_collapseto(element)) {
+						gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
+						
+						/* Recurse here: */
+						cong_editor_recursively_populate_ui(editor_view, x, root, TRUE);
+						
+						gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
+					} else {
+						/* New structural element */
+						CongSectionHead *section_head;
+						GtkWidget *poot;
+						GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
+						gtk_widget_show(hbox);
+						
+						gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
+						gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
+						xv_style_r(hbox, style_white);
+						section_head = cong_section_head_new(doc, x);
+						poot = section_head->vbox;
+						gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
+								
+						/* Recurse here: */
+						cong_editor_recursively_populate_ui(editor_view, x, poot, FALSE);
+								
+						sub = xv_section_tail(ds, x);
+						xv_style_r(sub, style_white);
+						gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
+					}
+				} else if (cong_dispspec_element_is_span(element) ||
+					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
+				        /* New editor window */
+				
+					sub = xv_section_data(x, doc, ds, collapsed);
+					if (sub) {
+						gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);
+						xv_style_r(sub, style_white);
+					}
+				
+					x = xv_editor_elements_skip(x, ds);
+				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
 					CongSectionHead *section_head;
 					GtkWidget *poot;
 					GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
@@ -1110,51 +1140,18 @@ void cong_editor_recursively_populate_ui(CongEditorView *editor_view,
 					gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
 					gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 					xv_style_r(hbox, style_white);
-					section_head = cong_section_head_new(doc, x);
+					section_head = cong_section_head_new(doc,x);
 					poot = section_head->vbox;
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
-
-					/* Recurse here: */
-					cong_editor_recursively_populate_ui(editor_view, x, poot, FALSE);
-
+				        /* xv_style_r(poot, style_white); */
+				
+					sub = xv_section_embedded(doc, x,ds,collapsed);
+					gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
+					
 					sub = xv_section_tail(ds, x);
-					xv_style_r(sub, style_white);
+				        /* xv_style_r(sub, style_white); */
 					gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
 				}
-			}
-			else if (cong_dispspec_element_span(ds, name) ||
-				 cong_dispspec_element_insert(ds, name))
-			{
-				/* New editor window */
-				
-				sub = xv_section_data(x, doc, ds, collapsed);
-				if (sub)
-				{
-					gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);
-					xv_style_r(sub, style_white);
-				}
-				
-				x = xv_editor_elements_skip(x, ds);
-			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
-				CongSectionHead *section_head;
-				GtkWidget *poot;
-				GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
-				gtk_widget_show(hbox);
-
-				gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
-				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
-				xv_style_r(hbox, style_white);
-				section_head = cong_section_head_new(doc,x);
-				poot = section_head->vbox;
-				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
-				/* xv_style_r(poot, style_white); */
-				
-				sub = xv_section_embedded(doc, x,ds,collapsed);
-				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
-					
-				sub = xv_section_tail(ds, x);
-				/* xv_style_r(sub, style_white); */
-				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
 			}
 		}
 		else if (node_type == CONG_NODE_TYPE_TEXT)

@@ -185,12 +185,15 @@ void pos_pl(CongSpanEditor *xed, struct pos *pos)
 	{
 		for (; pos->node; )
 		{
+			const char *frag_name = xml_frag_name_nice(pos->node);
+			CongDispspecElement* element = cong_dispspec_lookup_element(xed->displayspec, frag_name);
+
 			node_prev = pos->node;  /* Backup for later */
 
 			/* XML_TAG_EMPTY isn't supported by my parser */
 #if 0
 			if (xml_frag_type(pos->node) == XML_TAG_EMPTY &&
-					!strcasecmp("p", xml_frag_name_nice(pos->node)))
+					!strcasecmp("p", frag_name))
 			{
 				pos->node = node_prev2;
 				if (xml_frag_type(pos->node) == XML_DATA) 
@@ -202,13 +205,13 @@ void pos_pl(CongSpanEditor *xed, struct pos *pos)
 #endif
 
 			if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT &&
-			    !strcasecmp("table", xml_frag_name_nice(pos->node)))
+			    !strcasecmp("table", frag_name))
 			{
 /*				
 				pos->node = node_prev2;
 
 				if (xml_frag_type(pos->node) == XML_DATA)
-					pos->c = strlen(xml_frag_data_nice(pos->node));
+					pos->c = strlen(frag_data);
 				else pos->c = 0;
 */
 				return;
@@ -218,7 +221,7 @@ void pos_pl(CongSpanEditor *xed, struct pos *pos)
 
 			else if (cong_node_type(pos->node) == CONG_NODE_TYPE_ELEMENT)
 			{
-				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(pos->node)))
+				if (cong_dispspec_element_is_structural(element))
 				{
 					pos->node = node_prev2;
 					if (cong_node_type(pos->node) == CONG_NODE_TYPE_TEXT) {
