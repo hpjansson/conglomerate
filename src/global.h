@@ -634,14 +634,16 @@ void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int 
 #endif
 gint cong_cursor_data_insert(CongCursor *curs, char *s);
 int cong_cursor_paragraph_insert(CongCursor *curs);
-void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc);
-void cong_cursor_next_char(CongCursor *curs, CongDocument *doc);
+gboolean cong_cursor_calc_prev_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
+gboolean cong_cursor_calc_next_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
 #if !USE_CONG_EDITOR_WIDGET
 void cong_cursor_prev_line(CongCursor *curs, CongSpanEditor *xed);
 #endif
 void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed);
 void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc);
+void cong_cursor_home(CongCursor *curs, CongDocument *doc);
+void cong_cursor_end(CongCursor *curs, CongDocument *doc);
 
 void cong_selection_init(CongSelection *selection);
 void cong_selection_import(CongSelection *selection, GtkWidget* widget);

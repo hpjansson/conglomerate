@@ -26,6 +26,7 @@
 #include "cong-editor-widget-impl.h"
 #include "cong-dispspec.h"
 #include "cong-document.h"
+#include "cong-error-dialog.h"
 
 #if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
@@ -435,6 +436,7 @@ static gboolean get_location_at_stripped_byte_offset(CongSpanTextEditor *span_te
 	if (text_span) {
 		location->tt_loc = text_span->text_node;
 		location->char_loc = text_span->original_first_byte_offset + (byte_offset - text_span->stripped_first_byte_offset);
+		return TRUE;
 	}
 
 	return FALSE;
@@ -1070,7 +1072,10 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 	}
 }
 
-static void do_cursor_up(CongSpanTextEditor *span_text_editor, CongDocument *doc, CongCursor *cursor)
+static gboolean span_text_editor_calc_up(CongSpanTextEditor *span_text_editor, 
+					 CongDocument *doc, 
+					 CongCursor *cursor,
+					 CongLocation *output_loc)
 {
 	int byte_offset;
 	GSList *line_iter;
@@ -1102,8 +1107,8 @@ static void do_cursor_up(CongSpanTextEditor *span_text_editor, CongDocument *doc
 								     &trailing);
 
 
-					if (get_location_at_stripped_byte_offset(span_text_editor, index, &cursor->location)) {
-						cong_document_on_cursor_change(doc);
+					if (get_location_at_stripped_byte_offset(span_text_editor, index, output_loc)) {
+						return TRUE;
 					}					
 				}
 			}
@@ -1111,9 +1116,14 @@ static void do_cursor_up(CongSpanTextEditor *span_text_editor, CongDocument *doc
 			prev_line = line;
 		}
 	}
+
+	return FALSE;
 }
 
-static void do_cursor_down(CongSpanTextEditor *span_text_editor, CongDocument *doc, CongCursor *cursor)
+static gboolean span_text_editor_calc_down(CongSpanTextEditor *span_text_editor, 
+					   CongDocument *doc, 
+					   CongCursor *cursor,
+					   CongLocation *output_loc)
 {
 	int byte_offset;
 	GSList *line_iter;
@@ -1144,15 +1154,80 @@ static void do_cursor_down(CongSpanTextEditor *span_text_editor, CongDocument *d
 								     &trailing);
 
 
-					if (get_location_at_stripped_byte_offset(span_text_editor, index, &cursor->location)) {
-						cong_document_on_cursor_change(doc);
+					if (get_location_at_stripped_byte_offset(span_text_editor, index, output_loc)) {
+						return TRUE;
 					}					
 				}
 			}
 		}
 	}
+
+	return FALSE;
 }
 
+/* 
+   Method to calculate where the cursor should go as a result of the key press.
+   Affected by the CTRL key (which means "whole words" rather than "individual characters" for left/right).
+
+   Return value:  TRUE iff the output_loc has been written to with a meaningful location different from the cursor location.
+*/
+gboolean span_text_editor_get_destination_location_for_keypress(CongSpanTextEditor *span_text_editor, 
+								CongDocument *doc, 
+								CongCursor *cursor, 
+								guint state,
+								guint keyval,
+								CongLocation *output_loc)
+{
+	CongDispspec *dispspec;
+
+	g_return_val_if_fail(span_text_editor, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(cursor, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	dispspec = cong_document_get_dispspec(doc);
+
+	switch (keyval) {
+	default: 
+		return FALSE;
+
+	case GDK_Up:
+		return span_text_editor_calc_up(span_text_editor, doc, cursor, output_loc);
+
+	case GDK_Down:
+		return span_text_editor_calc_down(span_text_editor, doc, cursor, output_loc);
+	
+	case GDK_Left:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_prev_word(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_prev_char(&cursor->location, dispspec, output_loc);
+		}
+	
+	case GDK_Right:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_next_word(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_next_char(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_Home:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_document_start(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_line_start(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_End:
+		if (state & GDK_CONTROL_MASK) {
+			return cong_location_calc_document_end(&cursor->location, dispspec, output_loc);
+		} else {
+			return cong_location_calc_line_end(&cursor->location, dispspec, output_loc);
+		}
+	case GDK_Page_Up:
+		return cong_location_calc_next_page(&cursor->location, dispspec, output_loc);
+	case GDK_Page_Down:
+		return cong_location_calc_prev_page(&cursor->location, dispspec, output_loc);
+	}
+}
 
 static void span_text_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event)
 {
@@ -1176,21 +1251,40 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	switch (event->keyval)
 	{
 	case GDK_Up:
-		do_cursor_up(span_text_editor, doc, cursor);
-		break;
-	
 	case GDK_Down:
-		do_cursor_down(span_text_editor, doc, cursor);
-		break;
-	
 	case GDK_Left:
-		cong_cursor_prev_char(cursor, doc);
-		cong_document_on_cursor_change(doc);
-		break;
-	
 	case GDK_Right:
-		cong_cursor_next_char(cursor, doc);
-		cong_document_on_cursor_change(doc);
+	case GDK_Home:
+	case GDK_End:
+	case GDK_Page_Up:
+	case GDK_Page_Down:
+		{
+			CongLocation target_location;
+
+			/* Calculate whereabouts in the document the user wants to go: */
+
+			if (span_text_editor_get_destination_location_for_keypress(span_text_editor, 
+										   doc, 
+										   cursor, 
+										   event->state,
+										   event->keyval,
+										   &target_location)) {
+				/* Are we moving the cursor, or dragging out a selection? */
+
+				/* Move the cursor to the new location: */
+				cong_location_copy(&cursor->location, &target_location);
+
+				if (event->state & GDK_SHIFT_MASK) {
+					/* Then we should also drag out the selection to the new location: */
+					cong_selection_end_from_curs(selection, cursor);
+				} else {
+					/* Then we should clear any selection that exists: */
+					cong_selection_start_from_curs(selection, cursor);
+				}
+
+				cong_document_on_cursor_change(doc);
+			}
+		}
 		break;
 	
 	case GDK_BackSpace:
@@ -1200,13 +1294,14 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	case GDK_Delete:
 		cong_cursor_del_next_char(cursor, doc);
 		break;
-	
+
 	case GDK_ISO_Enter:
 	case GDK_Return:
 		cong_cursor_paragraph_insert(cursor);
 		break;
 	
 	default:
+		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
 			cong_cursor_data_insert(cursor, event->string);
 		}

@@ -9,6 +9,7 @@
 #include <string.h>
 #include "cong-dispspec.h"
 #include "cong-document.h"
+#include "cong-error-dialog.h"
 
 void cong_cursor_on(CongCursor *curs)
 {
@@ -260,28 +261,26 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 }
 
 
-void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc)
+gboolean cong_location_calc_prev_char(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
-	CongDispspec *dispspec;
-	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
 	printf("<- [curs]\n");
 #endif
 
-	g_assert(curs!=NULL);
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
 	
-
-#if !USE_CONG_EDITOR_WIDGET
-	if (!curs->xed) return;
-#endif
-
-	dispspec = cong_document_get_dispspec(doc);
-
-	n = curs->location.tt_loc;
-	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && curs->location.char_loc) { curs->location.char_loc--; return; }
+	n = input_loc->tt_loc;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && input_loc->char_loc) { 
+		cong_location_set(output_loc, input_loc->tt_loc, input_loc->char_loc-1);
+		return TRUE; 
+	}
 
 	do
 	{
@@ -324,37 +323,36 @@ void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc)
 		}
 	}
 	while (n);
-	
-	
+
 	if (n) {
-	  cong_location_set(&curs->location,n, strlen(xml_frag_data_nice(n)));
+		cong_location_set(output_loc,n, strlen(xml_frag_data_nice(n)));
+		return TRUE;
+	} else {
+		return FALSE;
 	}
 }
 
 
-void cong_cursor_next_char(CongCursor *curs, CongDocument *doc)
+gboolean cong_location_calc_next_char(const CongLocation *input_loc,
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
-	CongDispspec *dispspec;
-	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
 	printf("[curs] ->\n");
 #endif
 
-	g_assert(curs!=NULL);
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
 	
-#if !USE_CONG_EDITOR_WIDGET
-	if (!curs->xed) return;
-#endif
 
-	dispspec = cong_document_get_dispspec(doc);
-
-	n = curs->location.tt_loc;
-	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT && cong_location_get_char(&curs->location)!='\0')
+	n = input_loc->tt_loc;
+	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && cong_location_get_char(input_loc)!='\0')
 	{ 
-		curs->location.char_loc++; 
+		cong_location_set(output_loc,input_loc->tt_loc, input_loc->char_loc+1); 
 		return; 
 	}
 
@@ -400,10 +398,111 @@ void cong_cursor_next_char(CongCursor *curs, CongDocument *doc)
 	}
 	while (n);
 
-	if (n)
-	{
-		cong_location_set(&curs->location, n, 0);
+	if (n) {
+		cong_location_set(output_loc, n, 0);
+		return TRUE;
+	} else {
+		return FALSE;
 	}
+}
+
+gboolean cong_location_calc_prev_word(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating previous word");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_next_word(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating next word");
+
+	return FALSE;
+}
+
+gboolean cong_location_calc_document_start(const CongLocation *input_loc, 
+					   CongDispspec *dispspec,
+					   CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document start");
+
+	return FALSE;
+}
+gboolean cong_location_calc_line_start(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line start");
+
+	return FALSE;
+}
+gboolean cong_location_calc_document_end(const CongLocation *input_loc, 
+					 CongDispspec *dispspec,
+					 CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document end");
+
+	return FALSE;
+}
+gboolean cong_location_calc_line_end(const CongLocation *input_loc, 
+				     CongDispspec *dispspec,
+				     CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line end");
+
+	return FALSE;
+}
+gboolean cong_location_calc_prev_page(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating previous page");
+
+	return FALSE;
+}
+gboolean cong_location_calc_next_page(const CongLocation *input_loc, 
+				      CongDispspec *dispspec,
+				      CongLocation *output_loc)
+{
+	g_return_val_if_fail(input_loc, FALSE);
+	g_return_val_if_fail(dispspec, FALSE);
+	g_return_val_if_fail(output_loc, FALSE);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating next page");
+
+	return FALSE;
 }
 
 #if !USE_CONG_EDITOR_WIDGET
@@ -462,6 +561,8 @@ void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed)
 
 void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 {
+	CongLocation prev_char;
+
 	g_return_if_fail(curs);
 	g_return_if_fail(doc);
 
@@ -469,7 +570,8 @@ void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 		return;
 	}
 	
- 	cong_cursor_prev_char(curs, doc);
+ 	cong_location_calc_prev_char(&curs->location, cong_document_get_dispspec(doc), &prev_char);
+	cong_location_copy(&curs->location, &prev_char);
 
 	cong_location_del_next_char(doc, &curs->location);
 }
@@ -484,8 +586,5 @@ void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc)
 
 	cong_location_del_next_char(doc, &curs->location);
 }
-
-
-
 
 
