@@ -37,7 +37,6 @@
 typedef struct CongAdvancedNodePropertiesView CongAdvancedNodePropertiesView;
 
 #define DEBUG_PROPERTIES_VIEW 0
-#define DEBUG_DTD_PROPERTIES_HACK 0
 
 struct RawAttr;
 
@@ -63,11 +62,6 @@ struct XPathView
 	GtkLabel *label;
 };
 
-/* The "modelled attributes" view: */
-struct ModelledAttr
-{
-	CongDialogCategory *category;
-};
 
 /* The "raw xml attributes" view: */
 enum {
@@ -96,7 +90,6 @@ struct CongAdvancedNodePropertiesView
 	CongDialogContent *dialog_content;
 
 	struct XPathView xpath_view;
-	struct ModelledAttr modelled_attr;
 	struct RawAttr raw_attr;
 };
 
@@ -257,40 +250,8 @@ void init_view_xpath_view(CongAdvancedNodePropertiesView *view,
 
 	gtk_widget_show (GTK_WIDGET (xpath_view->label));
 
-	cong_dialog_category_add_field(xpath_view->category, _("XPath"), GTK_WIDGET(xpath_view->label));
+	cong_dialog_category_add_field(xpath_view->category, _("XPath"), GTK_WIDGET(xpath_view->label), FALSE);
 	g_free(xpath);
-}
-
-void init_view_modelled_attr(CongAdvancedNodePropertiesView *view,
-			     struct ModelledAttr *modelled_attr)
-{
-	xmlElementPtr xml_element;
-
-	g_assert(view);
-	g_assert(modelled_attr);
-	g_assert(cong_node_type(view->node)==CONG_NODE_TYPE_ELEMENT);
-
-	xml_element = cong_document_get_dtd_element(cong_view_get_document(CONG_VIEW(view)), 
-						    view->node);
-	if (xml_element) {
-		xmlAttributePtr attr;
-		modelled_attr->category = cong_dialog_content_add_category(view->dialog_content, 
-									   _("Properties from DTD/schema"));
-
-		for (attr=xml_element->attributes; attr; attr=attr->nexth) {
-			GtkWidget *attr_editor = cong_attribute_editor_new (cong_view_get_document(CONG_VIEW(view)), 
-									    view->node,
-									    attr);
-
-			gtk_widget_show (attr_editor);
-
-			cong_dialog_category_add_field (modelled_attr->category, 
-							attr->name, 
-							attr_editor);
-
-		}
-	}
-
 }
 
 static void raw_attr_list_refresh(CongAdvancedNodePropertiesView *view,
@@ -542,18 +503,136 @@ void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
 	}
 
 	gtk_container_add(GTK_CONTAINER(vbox), GTK_WIDGET(raw_attr->tree_view));
-	gtk_container_add(GTK_CONTAINER(vbox), hbox);
+	gtk_box_pack_start (GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
 	gtk_widget_show(GTK_WIDGET(raw_attr->tree_view));
 	gtk_widget_show(hbox);
 	gtk_widget_show(vbox);
 
-	cong_dialog_category_add_selflabelled_field(raw_attr->category, vbox);
+	cong_dialog_category_add_selflabelled_field(raw_attr->category, vbox, TRUE);
 }
 
-GtkWidget *cong_node_properties_dialog_advanced_new(CongDocument *doc, 
-						    CongNodePtr node,
-						    gboolean within_notebook)
+gchar*
+cong_util_get_tag_string_for_node (CongNodePtr node)
+{
+#if 0
+	if (node->xmlns) {
+	} else {
+	}
+#else
+	return g_strdup_printf("<%s>", node->name); /* for now */
+#endif
+}
+
+gchar*
+cong_util_get_tag_string_for_node_escaped (CongNodePtr node)
+{
+	gchar *unescaped = cong_util_get_tag_string_for_node (node);
+	gchar *result = g_markup_escape_text (unescaped,
+					      strlen (unescaped));
+	
+	g_free (unescaped);
+	
+	return result;
+}
+
+GtkWidget*
+cong_node_properties_dtd_new (CongDocument *doc, 
+			      CongNodePtr node,
+			      gboolean within_notebook)
+{	
+	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
+		xmlElementPtr xml_element;
+		
+		xml_element = cong_document_get_dtd_element(doc,
+							    node);
+		if (xml_element) {
+			if (xml_element->attributes!=NULL) {
+				xmlAttributePtr attr;
+				
+				CongDialogContent *dialog_content;
+				CongDialogCategory *category;
+				gchar *category_name;
+				
+				GtkWidget *scrolled_window;
+				GtkWidget *vbox_attributes;
+				GtkSizeGroup *size_group;								
+					
+				dialog_content = cong_dialog_content_new (within_notebook);
+				
+				{
+					gchar *tag_name = cong_util_get_tag_string_for_node_escaped (node);
+					
+					category_name = g_strdup_printf ( _("Attributes for <tt>%s</tt> tags"),
+									  tag_name);
+					g_free (tag_name);
+				}
+
+				category = cong_dialog_content_add_category (dialog_content, 
+									     category_name);
+				g_free (category_name);
+
+
+				scrolled_window = gtk_scrolled_window_new (NULL,
+									   NULL);
+				
+				gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW(scrolled_window),
+								 GTK_POLICY_NEVER,
+								 GTK_POLICY_AUTOMATIC);
+
+				
+				cong_dialog_category_add_selflabelled_field (category, 
+									     scrolled_window,
+									     TRUE);
+
+				vbox_attributes = gtk_vbox_new (FALSE,
+								6);
+				
+				gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(scrolled_window),
+								       vbox_attributes);
+				
+				size_group = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+				
+				for (attr=xml_element->attributes; attr; attr=attr->nexth) {
+					GtkWidget *hbox;
+					GtkWidget *label;
+					GtkWidget *attr_editor = cong_attribute_editor_new (doc,
+											    node,
+											    attr);
+					
+					gtk_widget_show (attr_editor);
+					
+					hbox = gtk_hbox_new(FALSE, 6);
+					label = gtk_label_new(attr->name);
+					gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
+					gtk_size_group_add_widget(size_group, label);
+					gtk_container_add(GTK_CONTAINER(hbox), label);
+					gtk_container_add(GTK_CONTAINER(hbox), attr_editor);
+					gtk_widget_show (label);
+					gtk_widget_show (hbox);
+					gtk_box_pack_start (GTK_BOX(vbox_attributes),
+							    hbox,
+							    FALSE, 
+							    TRUE,
+							    0);
+					
+				}
+				
+				gtk_widget_show (vbox_attributes);
+				gtk_widget_show (scrolled_window);
+				
+				return cong_dialog_content_get_widget(dialog_content);
+			}
+		}
+	}
+
+	return NULL;
+}
+
+GtkWidget*
+cong_node_properties_dialog_advanced_new(CongDocument *doc, 
+					 CongNodePtr node,
+					 gboolean within_notebook)
 {
 	CongAdvancedNodePropertiesView *view;
 	GtkWidget *widget;
@@ -583,10 +662,6 @@ GtkWidget *cong_node_properties_dialog_advanced_new(CongDocument *doc,
 	init_view_xpath_view(view, &view->xpath_view);
 
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-#if DEBUG_DTD_PROPERTIES_HACK
-		init_view_modelled_attr(view, &view->modelled_attr);
-#endif /* #if DEBUG_DTD_PROPERTIES_HACK */
-		
 		init_view_raw_attr(view, &view->raw_attr);
 	}
 		
@@ -601,9 +676,22 @@ void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
 						  CongDocument *doc, 
 						  CongNodePtr node)
 {
+	GtkWidget* dtd_page;
+
 	g_return_if_fail(notebook);
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
+
+	dtd_page = cong_node_properties_dtd_new (doc, 
+						 node,
+						 TRUE);
+
+	if (dtd_page) {
+		gtk_notebook_append_page(notebook,
+					 dtd_page,
+					 gtk_label_new(_("DTD"))
+					 );		
+	}
 
 	gtk_notebook_append_page(notebook,
 				 cong_node_properties_dialog_advanced_new(doc, 
@@ -649,6 +737,8 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 
 	/* Otherwise: */
 	{
+		GtkWidget* dtd_page;
+
 		GtkWidget *dialog, *vbox;
 		GtkWidget *advanced_properties;
 
@@ -661,13 +751,44 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 		gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
 
 		vbox = GTK_DIALOG(dialog)->vbox;
-		advanced_properties = cong_node_properties_dialog_advanced_new(doc, 
-									       node,
-									       FALSE);
 
-		gtk_box_pack_start(GTK_BOX(vbox), advanced_properties, FALSE, FALSE, 0);
-
+		advanced_properties = cong_node_properties_dialog_advanced_new (doc, 
+										node,
+										(dtd_page!=NULL));
+			
 		gtk_widget_show (advanced_properties);
+
+		dtd_page = cong_node_properties_dtd_new (doc, 
+							 node,
+							 TRUE);
+
+		if (dtd_page) {
+			GtkWidget *notebook = gtk_notebook_new ();
+
+			gtk_widget_show (notebook);
+
+			gtk_box_pack_start (GTK_BOX(vbox), 
+					    notebook, 
+					    TRUE, 
+					    TRUE, 
+					    0);
+
+			gtk_notebook_append_page(GTK_NOTEBOOK(notebook),
+						 dtd_page,
+						 gtk_label_new(_("DTD"))
+						 );		
+
+			gtk_notebook_append_page(GTK_NOTEBOOK(notebook),
+						 advanced_properties,
+						 gtk_label_new(_("Advanced"))
+						 );
+		} else {
+			gtk_box_pack_start (GTK_BOX(vbox), 
+					    advanced_properties, 
+					    TRUE, 
+					    TRUE, 
+					    0);
+		}
 
 		g_signal_connect_swapped (G_OBJECT (dialog), 
 					  "response", 

@@ -53,8 +53,8 @@ add_dtd_info (CongDialogCategory *dtd_category,
 	if (NULL==SystemID) {
 		SystemID=_("None");
 	}
-	cong_dialog_category_add_field(dtd_category, _("External ID"), make_uneditable_text(ExternalID));
-	cong_dialog_category_add_field(dtd_category, _("System ID"), make_uneditable_text(SystemID));
+	cong_dialog_category_add_field(dtd_category, _("External ID"), make_uneditable_text(ExternalID), FALSE);
+	cong_dialog_category_add_field(dtd_category, _("System ID"), make_uneditable_text(SystemID), FALSE);
 }
 
 
@@ -99,12 +99,12 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	filename = cong_document_get_filename(doc);
 	path = cong_document_get_parent_uri(doc);
 
-	cong_dialog_category_add_field(general_category, _("Name"), make_uneditable_text(filename));
-	cong_dialog_category_add_field(general_category, _("Location"), make_uneditable_text(path));
-	cong_dialog_category_add_field(general_category, _("Modified"), make_uneditable_text(cong_document_is_modified(doc)?"Yes":"No"));
+	cong_dialog_category_add_field(general_category, _("Name"), make_uneditable_text(filename), FALSE);
+	cong_dialog_category_add_field(general_category, _("Location"), make_uneditable_text(path), FALSE);
+	cong_dialog_category_add_field(general_category, _("Modified"), make_uneditable_text(cong_document_is_modified(doc)?"Yes":"No"), FALSE);
 
-	cong_dialog_category_add_field(doctype_category, _("Name"), make_uneditable_text(cong_dispspec_get_name(ds)));
-	cong_dialog_category_add_field(doctype_category, _("Description"), make_uneditable_text(cong_dispspec_get_description(ds)));
+	cong_dialog_category_add_field(doctype_category, _("Name"), make_uneditable_text(cong_dispspec_get_name(ds)), FALSE);
+	cong_dialog_category_add_field(doctype_category, _("Description"), make_uneditable_text(cong_dispspec_get_description(ds)), FALSE);
 
 	g_free(filename);
 	g_free(path);
@@ -114,16 +114,16 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	header_category = cong_dialog_content_add_category(advanced_content, _("XML Header"));
 	dtd_category = cong_dialog_content_add_category(advanced_content, _("Document Type Declaration"));
 
-	cong_dialog_category_add_field(header_category, _("Version"), make_uneditable_text(xml_doc->version));
+	cong_dialog_category_add_field(header_category, _("Version"), make_uneditable_text(xml_doc->version), FALSE);
 
 	{
 		const gchar *encoding_text = xml_doc->encoding;
 		if (NULL==encoding_text) {
 			encoding_text = _("Unspecified");
 		}
-		cong_dialog_category_add_field(header_category, _("Encoding"), make_uneditable_text(encoding_text));	
+		cong_dialog_category_add_field(header_category, _("Encoding"), make_uneditable_text(encoding_text), FALSE);	
 	}
-	cong_dialog_category_add_field(header_category, _("Standalone"), make_uneditable_text(xml_doc->standalone?"yes":"no"));
+	cong_dialog_category_add_field(header_category, _("Standalone"), make_uneditable_text(xml_doc->standalone?"yes":"no"), FALSE);
 
 	if (xml_doc->extSubset) {
 		GtkWidget *remove_dtd_button = gtk_button_new_with_mnemonic (_("_Remove this DTD"));
@@ -133,7 +133,8 @@ cong_file_properties_dialog_new (CongDocument *doc,
 			      xml_doc->extSubset->SystemID);
 
 		cong_dialog_category_add_selflabelled_field (dtd_category, 
-							     remove_dtd_button);			
+							     remove_dtd_button,
+							     FALSE);			
 		
 		g_signal_connect (G_OBJECT (remove_dtd_button),
 				  "clicked",
@@ -153,14 +154,15 @@ cong_file_properties_dialog_new (CongDocument *doc,
 			gtk_label_set_line_wrap (GTK_LABEL (unspecified_label),
 						 TRUE);
 
-			cong_dialog_category_add_selflabelled_field(dtd_category, unspecified_label);
+			cong_dialog_category_add_selflabelled_field(dtd_category, unspecified_label, FALSE);
 
 			add_dtd_info (dtd_category,
 				      cong_external_document_model_get_public_id (model_dtd),
 				      cong_external_document_model_get_system_id (model_dtd));
 
 			cong_dialog_category_add_selflabelled_field (dtd_category, 
-								     specify_dtd_button);			
+								     specify_dtd_button,
+								     FALSE);			
 
 			g_signal_connect (G_OBJECT (specify_dtd_button),
 					  "clicked",
@@ -168,7 +170,9 @@ cong_file_properties_dialog_new (CongDocument *doc,
 					  doc);
 					  
 		} else {
-			cong_dialog_category_add_selflabelled_field(dtd_category, gtk_label_new(_("No External Subset")));
+			cong_dialog_category_add_selflabelled_field (dtd_category, 
+								     gtk_label_new (_("No External Subset")),
+								     FALSE);
 		}
 	}
 

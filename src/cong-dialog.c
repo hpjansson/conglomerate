@@ -78,8 +78,16 @@ CongDialogCategory *cong_dialog_content_add_category(CongDialogContent *dialog_c
 
 	category->hbox = gtk_hbox_new(FALSE, 0);
 	
-	gtk_container_add(GTK_CONTAINER(category->outer_vbox), category->label);
-	gtk_container_add(GTK_CONTAINER(category->outer_vbox), category->hbox);
+	gtk_box_pack_start (GTK_BOX(category->outer_vbox), 
+			    category->label, 
+			    FALSE, 
+			    TRUE, 
+			    0);
+	gtk_box_pack_start (GTK_BOX(category->outer_vbox), 
+			    category->hbox, 
+			    TRUE, 
+			    TRUE, 
+			    0);
 
 	category->inner_vbox = gtk_vbox_new(FALSE, 6);
 
@@ -99,7 +107,11 @@ CongDialogCategory *cong_dialog_content_add_category(CongDialogContent *dialog_c
 	return category;
 }
 
-void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *title, GtkWidget *widget)
+void 
+cong_dialog_category_add_field (CongDialogCategory *category, 
+				const gchar *title, 
+				GtkWidget *widget,
+				gboolean expand)
 {
 	GtkWidget *hbox;
 	GtkWidget *label;
@@ -116,18 +128,29 @@ void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *t
 	gtk_size_group_add_widget(category->dialog_content->size_group, label);
 	gtk_container_add(GTK_CONTAINER(hbox), label);
 	gtk_container_add(GTK_CONTAINER(hbox), widget);
-	gtk_container_add(GTK_CONTAINER(category->inner_vbox), hbox);
+	gtk_box_pack_start (GTK_BOX(category->inner_vbox), 
+			    hbox,
+			    expand,
+			    TRUE,
+			    0);
 
 	gtk_widget_show (label);
 	gtk_widget_show (hbox);
 }
 
-void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, GtkWidget *widget)
+void 
+cong_dialog_category_add_selflabelled_field (CongDialogCategory *category, 
+					     GtkWidget *widget,
+					     gboolean expand)
 {
 	g_return_if_fail(category);
 	g_return_if_fail(widget);
 
-	gtk_container_add(GTK_CONTAINER(category->inner_vbox), widget);
+	gtk_box_pack_start (GTK_BOX(category->inner_vbox), 
+			    widget,
+			    expand,
+			    TRUE,
+			    0);
 }
 
 static gchar*

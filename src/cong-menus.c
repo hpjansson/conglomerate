@@ -930,29 +930,29 @@ GtkWidget *test_dialog_new(GtkWindow *parent_window)
 	morestuff_category = cong_dialog_content_add_category(advanced_content, "More Stuff");
 	yetmorestuff_category = cong_dialog_content_add_category(advanced_content, "Yet More Stuff");
 
-	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(general_category, "A very long label", gtk_entry_new());
-	cong_dialog_category_add_field(general_category, "Another label", gtk_entry_new());
-	cong_dialog_category_add_selflabelled_field(general_category, gtk_toggle_button_new_with_label("Bar") );
-	cong_dialog_category_add_selflabelled_field(general_category, gtk_check_button_new_with_label("Crikey") );
+	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(general_category, "A very long label", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(general_category, "Another label", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_selflabelled_field(general_category, gtk_toggle_button_new_with_label("Bar"), FALSE);
+	cong_dialog_category_add_selflabelled_field(general_category, gtk_check_button_new_with_label("Crikey"), FALSE);
 
-	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(fubar_category, "Here we go again", gtk_entry_new());
-	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_toggle_button_new_with_label("Bar") );
-	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_check_button_new_with_label("Crikey") );
+	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(fubar_category, "Here we go again", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_toggle_button_new_with_label("Bar"), FALSE);
+	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_check_button_new_with_label("Crikey"), FALSE);
 
-	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_toggle_button_new_with_label("Bar") );
-	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_check_button_new_with_label("Crikey") );
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_toggle_button_new_with_label("Bar"), FALSE);
+	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_check_button_new_with_label("Crikey"), FALSE );
 
-	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_toggle_button_new_with_label("Bar") );
-	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_check_button_new_with_label("Crikey") );
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new(), FALSE);
+	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_toggle_button_new_with_label("Bar"), FALSE);
+	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_check_button_new_with_label("Crikey"), FALSE );
 	
 	gtk_notebook_append_page( GTK_NOTEBOOK(tabs),
 				  cong_dialog_content_get_widget(basic_content),

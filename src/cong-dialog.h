@@ -31,10 +31,17 @@ GtkWidget *cong_dialog_content_get_widget(CongDialogContent *dialog_content);
 CongDialogCategory *cong_dialog_content_add_category(CongDialogContent *dialog_content, const gchar *title);
 
 /* Method to add left-side labelled controls such as text boxes, option menus etc */
-void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *title, GtkWidget *widget);
+void 
+cong_dialog_category_add_field (CongDialogCategory *category, 
+				const gchar *title, 
+				GtkWidget *widget,
+				gboolean expand);
 
 /* Method to add right-side labelled controls usch as check boxes and radio buttons: */
-void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, GtkWidget *widget);
+void 
+cong_dialog_category_add_selflabelled_field (CongDialogCategory *category, 
+					     GtkWidget *widget,
+					     gboolean expand);
 
 /* Function to manufacture the "content area" of a dialog */
 GtkWidget* 

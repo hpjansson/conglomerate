@@ -284,9 +284,9 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 		gtk_box_pack_start(GTK_BOX(hbox), select_filename_button, FALSE, FALSE,0);
 	}
 
-	cong_dialog_category_add_field(general_category, _("Exporter:"), GTK_WIDGET(dialog_details->select_exporter_option_menu));
-	cong_dialog_category_add_field(general_category, "", GTK_WIDGET(dialog_details->description));
-	cong_dialog_category_add_field(general_category, _("File:"), hbox);
+	cong_dialog_category_add_field(general_category, _("Exporter:"), GTK_WIDGET(dialog_details->select_exporter_option_menu), FALSE);
+	cong_dialog_category_add_field(general_category, "", GTK_WIDGET(dialog_details->description), FALSE);
+	cong_dialog_category_add_field(general_category, _("File:"), hbox, TRUE);
 
 	if (dialog_details->got_any_exporters) {
 		monitor_exporter(dialog_details);
