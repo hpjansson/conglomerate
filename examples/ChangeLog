@@ -2,6 +2,7 @@
 
 	* Makefile.am
 	defined NULL, for easier adding new files
+	added test-table3.xml to get it into the tarball
 
 2004-03-12  David Malcolm <david@davemalcolm.demon.co.uk>
 

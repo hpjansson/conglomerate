@@ -9,6 +9,7 @@ example_DATA 	 = \
 	test-docbook.xml \
 	test-entities.xml \
 	test-table.xml \
+	test-table3.xml \
 	$(NULL)
 
 #@INTLTOOL_XML_RULE@
