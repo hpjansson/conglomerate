@@ -5,56 +5,67 @@ If you're going to work on one of these,
 please email conglomerate-devel@lists.copyleft.no
 to avoid duplication of work.
 
-Some of the jobs are quie easy, other are hard,
+Some of the jobs are quite easy, other are hard,
 and other are "blue sky" goals for the future.
 
+I've added some rough estimates of the complexity of each job.
+
 CODING:
-- either port to the current Flux API or remove Flux dependency
-- implement a proper MVC separation, with fine-grained updates
-- get autoheader dependency working,
- then break global.h into separate header files
-- fix the violations of the GNOME coding style guidelines
-- comment the internal interfaces in gtk-doc style
-- adding i18n support
-- port over to SDI-based GUI (for compliance with GNOME HIG)
+- either port to the current Flux API (Easy) or remove Flux dependency (Hard)	
+- implement a proper MVC separation, with fine-grained updates (Hard)
+- get autoheader dependency working, 
+ then break global.h into separate header files  (Easy)
+- fix the violations of the GNOME coding style guidelines (Easy)
+- comment the internal interfaces in gtk-doc style (Easy)
+- adding i18n support (Medium)
+- port over to SDI-based GUI (for compliance with GNOME HIG) (Medium)
 - improving the parser error report dialog
- (add highlighting and single-click selection)
+ (add highlighting and single-click selection)  (Easy)
 - use standardised GNOME app menus, with correct stock icons
- (done using Bonobo so as to get menu merging?)
+ (done using Bonobo so as to get menu merging?) (Easy)
 - make font choices a user prefererence?
- (using GConf and a preferences dialog)
-- add a spellcheck feature
-- add a grammar check feature
+ (using GConf and a preferences dialog)  (Medium)
+- add a spellcheck feature (Hard)
+- add a grammar check feature (Hard)
+  (possibly look at AbiWord bug #3281, and
+   http://www.gnu.org/software/diction/diction.html)
 - add an irritating animated paperclip that says:
  "It looks like you're trying to write a structured document" :-)
 - nicer GUI
  (various ideas have been posted to the list - logical groupings of tags)
 - fix all the FIXMEs in the code
-- get it working with SGML files
+- get it working with SGML files (Medium; possibly requires upstream changes to
+  libxml)
 - get it so it can load the DocBook source code to the OReilly book
  "DocBook - the Definitive Guide"
  (currently fails due to problems with external entities and due to SGML issues)
 - add support for comments within the XML
- (perhaps appearing as mini yellow sticky notes in the view)
+ (perhaps appearing as mini yellow sticky notes in the view) (Medium)
 - ability to edit attributes of tags somehow
- (right-click on the section header?)
-- implement the external-reference component support in a less hackish way
+ (right-click on the section header?) (Medium)
+- implement the external-reference component support in a less hackish way 
+  (Medium)
 - support drag-and-drop from file managers into the external component tags
-- implement inline XML component support
-- implement a table-editing component
+  (Medium)
+- implement inline XML component support (Hard)
+- implement a table-editing component (Hard)
 - make Conglomerate a Bonobo control; get it working in Nautilus, Evolution etc
-- some kind of template support (maybe a Create New File helper/druid)
+  (Medium)
+- some kind of template support (maybe a Create New File helper/druid) (Easy)
 - some kind of transformation view,
  showing results of a transformation of the file into HTML
- or printable form "live" as you edit
+ or printable form "live" as you edit (Hard)
+- perhaps a promote/demote facility for things like sect1 through to sect5 in 
+ DocBook to make it easier to play around with structure?
 
 OTHER:
-- improvements to existing xds files
-- more xds files to cover other DTDs out there
+- improvements to existing xds files (Easy)
+- more xds files to cover other DTDs out there (Easy)
 - design icons for dispspec elements?  (we _might_ support this in future)
 - get the website more up-to-date
 - do translations when we have the i18n support,
- both for the program and for the xds files
+ both for the program and for the xds files  (Easy)
 - use Conglomerate and see what needs improving, find bugs etc
+- write some documentation (Medium)
 
 Any other ideas?
