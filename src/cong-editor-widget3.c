@@ -25,15 +25,6 @@
 #include "global.h"
 #include "cong-editor-widget3-impl.h"
 #include "cong-document.h"
-#include "cong-dispspec.h"
-
-#include "cong-editor-node-element-unknown.h"
-#include "cong-editor-node-element-structural.h"
-#include "cong-editor-node-element-span.h"
-#include "cong-editor-node-text.h"
-#include "cong-editor-node-document.h"
-#include "cong-editor-node-unimplemented.h"
-#include "cong-plugin.h"
 
 #include "cong-app.h"
 #include "cong-eel.h"
@@ -342,7 +333,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 				  G_CALLBACK(on_root_requisition_change),
 				  editor_widget);
 		
-		PRIVATE(editor_widget)->root_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_new(editor_widget));
+		PRIVATE(editor_widget)->root_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_blocks_new(editor_widget));
 
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(PRIVATE(editor_widget)->root_area),
 						      CONG_EDITOR_AREA(PRIVATE(editor_widget)->root_flow_holder));
@@ -997,10 +988,7 @@ static void
 recursive_add_nodes(CongEditorWidget3 *widget,
 		    CongNodePtr node)
 {
-	CongDocument *doc;
 	CongNodePtr iter;
-
-	doc = cong_editor_widget3_get_document(widget);
 
 #if LOG_EDITOR_NODES
 	{
@@ -1016,118 +1004,8 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 
 	/* Add this node: */
 	{
-		enum CongNodeType type = cong_node_type(node);
-		CongEditorNode *editor_node = NULL;
-
-		switch (type) {
-		default: g_assert_not_reached();
-		case CONG_NODE_TYPE_ELEMENT:
-			{
-				CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node (doc, 
-													       node);
-
-				if (ds_element) {
-					switch (cong_dispspec_element_type(ds_element)) {
-					default: g_assert_not_reached();
-					case CONG_ELEMENT_TYPE_STRUCTURAL:
-						editor_node = cong_editor_node_element_structural_new (widget,
-												       node);
-						break;
-
-					case CONG_ELEMENT_TYPE_SPAN:
-						editor_node = cong_editor_node_element_span_new (widget,
-												 node);
-						break;
-
-					case CONG_ELEMENT_TYPE_INSERT:
-					case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
-					case CONG_ELEMENT_TYPE_PARAGRAPH:
-						editor_node = cong_editor_node_element_unknown_new (widget,
-												    node);
-						break;
-
-					case CONG_ELEMENT_TYPE_PLUGIN:
-						{
-							const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id (ds_element);
-							CongPluginEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_singleton()->plugin_manager,
-																		     plugin_id);
-							
-							if (factory) {
-								editor_node = CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
-																	widget, 
-																	node));
-							} else {
-								g_message("plugin not found \"%s\"", plugin_id);
-								editor_node = cong_editor_node_element_unknown_new (widget,
-														    node);
-							}							
-						}
-						break;
-
-					case CONG_ELEMENT_TYPE_UNKNOWN:
-						editor_node = cong_editor_node_element_unknown_new (widget,
-												    node);
-						break;
-					} 
-				} else {
-					editor_node = cong_editor_node_element_unknown_new (widget,
-											    node);
-				}
-			}
-			break;
-
-		case CONG_NODE_TYPE_ATTRIBUTE:
-			{
-				editor_node = cong_editor_node_unimplemented_new (widget, 
-										  node,
-										  cong_node_type_description (type));
-			}
-			break;
-
-		case CONG_NODE_TYPE_TEXT:
-			{
-				editor_node = cong_editor_node_text_new (widget, 
-									 node);
-			}
-			break;
-
-		case CONG_NODE_TYPE_CDATA_SECTION:
-		case CONG_NODE_TYPE_ENTITY_REF:
-		case CONG_NODE_TYPE_ENTITY_NODE:
-		case CONG_NODE_TYPE_PI:
-		case CONG_NODE_TYPE_COMMENT:			
-			{
-				editor_node = cong_editor_node_unimplemented_new (widget, 
-										  node,
-										  cong_node_type_description (type));
-			}
-			break;
-
-		case CONG_NODE_TYPE_DOCUMENT:
-			{
-				editor_node = cong_editor_node_document_new (widget, 
-									     node);
-			}
-			break;
-		case CONG_NODE_TYPE_DOCUMENT_TYPE:
-		case CONG_NODE_TYPE_DOCUMENT_FRAG:
-		case CONG_NODE_TYPE_NOTATION:
-		case CONG_NODE_TYPE_HTML_DOCUMENT:
-		case CONG_NODE_TYPE_DTD:
-		case CONG_NODE_TYPE_ELEMENT_DECL:
-		case CONG_NODE_TYPE_ATRRIBUTE_DECL:
-		case CONG_NODE_TYPE_ENTITY_DECL:
-		case CONG_NODE_TYPE_NAMESPACE_DECL:
-		case CONG_NODE_TYPE_XINCLUDE_START:
-		case CONG_NODE_TYPE_XINCLUDE_END:
-			{
-				editor_node = cong_editor_node_unimplemented_new (widget, 
-										  node,
-										  cong_node_type_description (type));
-			}
-			break;
-		}
-
+		CongEditorNode* editor_node = cong_editor_node_manufacture (widget,
+									    node);
 		g_assert(editor_node);
 
 		g_hash_table_insert (PRIVATE(widget)->hash_of_node_to_editor, 
@@ -1255,7 +1133,8 @@ create_areas(CongEditorWidget3 *widget,
 	if (IS_CONG_EDITOR_AREA_CONTAINER(this_area) ) {
 		CongEditorAreaFlowHolder *flow_holder;
 
-		flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_new (widget));
+		flow_holder = cong_editor_area_flow_holder_manufacture (widget,
+									flow_type);
 
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (this_area),
 						      CONG_EDITOR_AREA(flow_holder));

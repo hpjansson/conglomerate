@@ -27,6 +27,17 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
+#include "cong-app.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
+#include "cong-editor-node-element-unknown.h"
+#include "cong-editor-node-element-structural.h"
+#include "cong-editor-node-element-span.h"
+#include "cong-editor-node-text.h"
+#include "cong-editor-node-document.h"
+#include "cong-editor-node-unimplemented.h"
+#include "cong-plugin.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeDetails
@@ -78,6 +89,120 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->widget = editor_widget;
 	PRIVATE(editor_node)->node = node;
 }
+
+CongEditorNode*
+cong_editor_node_manufacture (CongEditorWidget3* widget,
+			      CongNodePtr node)
+{
+	CongDocument *doc;
+	enum CongNodeType type;
+
+	g_return_val_if_fail (widget, NULL);
+	g_return_val_if_fail (node, NULL);
+
+	doc = cong_editor_widget3_get_document (widget);
+	type = cong_node_type (node);
+
+	switch (type) {
+	default: g_assert_not_reached();
+	case CONG_NODE_TYPE_ELEMENT:
+		{
+			CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node (doc, 
+												       node);
+			
+			if (ds_element) {
+				switch (cong_dispspec_element_type(ds_element)) {
+				default: g_assert_not_reached();
+				case CONG_ELEMENT_TYPE_STRUCTURAL:
+					return  cong_editor_node_element_structural_new (widget,
+											 node);
+					
+				case CONG_ELEMENT_TYPE_SPAN:
+					return  cong_editor_node_element_span_new (widget,
+										   node);
+					
+				case CONG_ELEMENT_TYPE_INSERT:
+				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
+				case CONG_ELEMENT_TYPE_PARAGRAPH:
+					return  cong_editor_node_element_unknown_new (widget,
+										      node);
+					
+				case CONG_ELEMENT_TYPE_PLUGIN:
+					{
+						const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id (ds_element);
+						CongPluginEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_singleton()->plugin_manager,
+																	     plugin_id);
+						
+						if (factory) {
+							return  CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
+															  widget, 
+															  node));
+						} else {
+							g_message("plugin not found \"%s\"", plugin_id);
+							return cong_editor_node_element_unknown_new (widget,
+												     node);
+						}							
+					}
+					
+				case CONG_ELEMENT_TYPE_UNKNOWN:
+					return cong_editor_node_element_unknown_new (widget,
+										     node);
+				} 
+			} else {
+				return cong_editor_node_element_unknown_new (widget,
+									     node);
+			}
+		}
+		
+	case CONG_NODE_TYPE_ATTRIBUTE:
+		{
+			return  cong_editor_node_unimplemented_new (widget, 
+								    node,
+								    cong_node_type_description (type));
+		}
+		
+	case CONG_NODE_TYPE_TEXT:
+		{
+			return cong_editor_node_text_new (widget, 
+							  node);
+		}
+		
+	case CONG_NODE_TYPE_CDATA_SECTION:
+	case CONG_NODE_TYPE_ENTITY_REF:
+	case CONG_NODE_TYPE_ENTITY_NODE:
+	case CONG_NODE_TYPE_PI:
+	case CONG_NODE_TYPE_COMMENT:			
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   node,
+								   cong_node_type_description (type));
+		}
+		
+	case CONG_NODE_TYPE_DOCUMENT:
+		{
+			return cong_editor_node_document_new (widget, 
+							      node);
+		}
+
+	case CONG_NODE_TYPE_DOCUMENT_TYPE:
+	case CONG_NODE_TYPE_DOCUMENT_FRAG:
+	case CONG_NODE_TYPE_NOTATION:
+	case CONG_NODE_TYPE_HTML_DOCUMENT:
+	case CONG_NODE_TYPE_DTD:
+	case CONG_NODE_TYPE_ELEMENT_DECL:
+	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+	case CONG_NODE_TYPE_ENTITY_DECL:
+	case CONG_NODE_TYPE_NAMESPACE_DECL:
+	case CONG_NODE_TYPE_XINCLUDE_START:
+	case CONG_NODE_TYPE_XINCLUDE_END:
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   node,
+								   cong_node_type_description (type));
+		}
+	}
+}
+
 
 
 CongEditorWidget3*
@@ -132,6 +257,40 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 						       editor_node,
 						       get_flow_type, 
 						       (editor_node));
+}
+
+CongEditorNode*
+cong_editor_node_get_prev (CongEditorNode *editor_node)
+{
+	CongNodePtr other_doc_node;
+
+	g_return_val_if_fail (editor_node, NULL);
+
+	other_doc_node = cong_editor_node_get_node(editor_node)->prev;
+
+	if (other_doc_node) {
+		return cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
+							    other_doc_node);
+	} else {
+		return NULL;
+	}
+}
+
+CongEditorNode*
+cong_editor_node_get_next (CongEditorNode *editor_node)
+{
+	CongNodePtr other_doc_node;
+
+	g_return_val_if_fail (editor_node, NULL);
+
+	other_doc_node = cong_editor_node_get_node(editor_node)->next;
+
+	if (other_doc_node) {
+		return cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
+							    other_doc_node);
+	} else {
+		return NULL;
+	}
 }
 
 static enum CongFlowType

@@ -66,6 +66,14 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* widget,
 			    CongNodePtr node);
 
+
+/*
+ * Factory method for creating editor nodes of an appropriate sub-class
+ */
+CongEditorNode*
+cong_editor_node_manufacture (CongEditorWidget3* widget,
+			      CongNodePtr node);
+
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node);
 
@@ -91,6 +99,13 @@ cong_editor_node_generate_area (CongEditorNode *editor_node);
 
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);
+
+/* May not always succeed; if called during the node creation, the relevant editor_node might not have been created yet: */
+CongEditorNode*
+cong_editor_node_get_prev (CongEditorNode *editor_node);
+
+CongEditorNode*
+cong_editor_node_get_next (CongEditorNode *editor_node);
 
 G_END_DECLS
 
