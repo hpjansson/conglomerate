@@ -1,5 +1,9 @@
 2003-09-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c
+
+	Load xmlns for tag if present
+
 	* plugin-dtd.c
 
 	Added some attribute support to DTD->RELAX NG importer

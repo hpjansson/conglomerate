@@ -1202,6 +1202,14 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 
 	element = g_new0(CongDispspecElement,1);
 
+	/* Extract tag namespace: */
+	{
+		xmlChar* xmlns = xmlGetProp(xml_element, "ns");
+		if (xmlns) {
+			element->xmlns = g_strdup(xmlns);
+		}
+	}
+
 	/* Extract tagname: */
 	{
 		xmlChar* tag = xmlGetProp(xml_element, "tag");
