@@ -117,7 +117,7 @@ on_signal_set_parent_notify_after (CongDocument *doc,
 				   gpointer user_data);
 
 
-#define LOG_TRAVERSAL_NODES 1
+#define LOG_TRAVERSAL_NODES 0
 
 #if LOG_TRAVERSAL_NODES
 #define LOG_TRAVERSAL_NODE1(x) g_message(x)

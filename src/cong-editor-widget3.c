@@ -138,7 +138,7 @@ struct CongEditorWidget3Details
 #define DEBUG_EDITOR_WIDGET_VIEW  0
 #define LOG_GTK_WIDGET_SIGNALS    0
 #define LOG_CONG_DOCUMENT_SIGNALS 0
-#define LOG_EDITOR_NODES 1
+#define LOG_EDITOR_NODES 0
 #define LOG_EDITOR_AREAS 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
@@ -1927,12 +1927,13 @@ potentially_add_editor_node (CongEditorWidget3 *editor_widget,
 
 	should_add_node = cong_node_should_be_visible_in_editor (xml_node);
 
+#if 0
 	{
 		gchar *desc = cong_node_debug_description (xml_node);
 		g_message ("Should add node %s? %s", desc, should_add_node ? "TRUE" : "FALSE");
 		g_free (desc);
 	}
-
+#endif
 
 	if (should_add_node) {
 		/* Add this node: */
