@@ -122,6 +122,9 @@ void cong_node_self_test(CongNodePtr node)
 
 	if (node->prev) {
 		g_assert(node->prev->next==node);
+		g_assert(node->prev->parent == node->parent);
+		g_assert(node->parent);
+		g_assert(node->parent->children!=node);
 	} else {
 		if (node->parent) {
 			g_assert(node->parent->children==node);
@@ -130,6 +133,9 @@ void cong_node_self_test(CongNodePtr node)
 
 	if (node->next) {
 		g_assert(node->next->prev==node);
+		g_assert(node->next->parent == node->parent);
+		g_assert(node->parent);
+		g_assert(node->parent->last!=node);
 	} else {
 		if (node->parent) {
 			g_assert(node->parent->last==node);
@@ -156,6 +162,18 @@ void cong_node_self_test(CongNodePtr node)
 			}
 		}
 		g_assert(iter==node);
+	}
+#endif
+}
+
+void cong_node_self_test_recursive(CongNodePtr node)
+{
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr iter;
+	cong_node_self_test(node);
+
+	for (iter=node->children; iter; iter=iter->next) {
+		cong_node_self_test_recursive(iter);
 	}
 #endif
 }
@@ -264,7 +282,6 @@ void cong_node_make_orphan(CongNodePtr node)
 
 	CONG_NODE_SELF_TEST(node);
 
-	/* Store copies for self-text purposes: */
 	former_parent = node->parent;
 	former_prev = node->prev;
 	former_next = node->next;
@@ -287,22 +304,24 @@ void cong_node_make_orphan(CongNodePtr node)
 
 		if (node->prev) {
 			g_assert(node->parent->children != node);
-			g_assert(node->prev->next == node);
-			node->prev->next = node->next;
+			g_assert(former_prev->next == node);
+
+			former_prev->next = former_next;
 			node->prev = NULL;
 		} else {
 			g_assert(node->parent->children == node);
-			node->parent->children = node->next;
+			node->parent->children = former_next;
 		}
 		
 		if (node->next) {
 			g_assert(node->parent->last != node);
-			g_assert(node->next->prev == node);
-			node->next->prev = node->prev;
+			g_assert(former_next->prev == node);
+
+			former_next->prev = former_prev;
 			node->next = NULL;
 		} else {
 			g_assert(node->parent->last == node);
-			node->parent->last = node->prev;
+			node->parent->last = former_prev;
 		}
 
 		node->parent = NULL;
@@ -376,6 +395,11 @@ void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
 
 		CONG_NODE_SELF_TEST(node);
 		CONG_NODE_SELF_TEST(older_sibling);
+		CONG_NODE_SELF_TEST(older_sibling->parent);
+
+		if (node->next) {
+			CONG_NODE_SELF_TEST(node->next);
+		}
 	}
 }
 #endif
@@ -419,6 +443,11 @@ void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 
 		CONG_NODE_SELF_TEST(node);
 		CONG_NODE_SELF_TEST(younger_sibling);
+		CONG_NODE_SELF_TEST(younger_sibling->parent);
+
+		if (node->prev) {
+			CONG_NODE_SELF_TEST(node->prev);
+		}
 	}
 }
 #endif

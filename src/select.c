@@ -167,6 +167,8 @@ CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 	int len1, len2, len3;
 
 	g_return_val_if_fail(cong_node_type(s) == CONG_NODE_TYPE_TEXT, NULL);
+
+	CONG_NODE_SELF_TEST(s);
 	
 	/* Calculate segments */
 	if (cong_node_get_length(s) < c1) c1 = cong_node_get_length(s);
@@ -196,6 +198,12 @@ CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 #endif
 
 	/* Link it in */
+#if NEW_XML_IMPLEMENTATION
+	cong_node_add_after(d1, s);
+	cong_node_add_after(d2, d1);
+	cong_node_add_after(d3, d2);
+	cong_node_make_orphan(s);
+#else
 
 	if (s->prev) s->prev->next = d1;
 	d1->prev = s->prev;
@@ -210,15 +218,13 @@ CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 	d2->parent = s->parent;
 	d3->parent = s->parent;
 
-#if NEW_XML_IMPLEMENTATION
-	if (!d1->prev && d1->parent) d1->parent->children = d1;
-	if (!d1->next && d1->parent) d1->parent->last = d3;
-#else
 	if (!d1->prev && d1->parent) d1->parent->child = d1;
 #endif
 
 	/* Unlink old node */
 	cong_node_free(s);
+
+	CONG_NODE_SELF_TEST(d2);
 
 	return(d2);
 }
@@ -229,6 +235,8 @@ CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
 {
 	CongNodePtr d = NULL;
 	int len1, len2;
+
+	CONG_NODE_SELF_TEST(s);
 
 	/* Calculate segments */
 
@@ -338,6 +346,8 @@ CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
 	d->parent = s->parent;
 #endif
 
+	CONG_NODE_SELF_TEST(s);
+
 	return(s);
 }
 
@@ -361,6 +371,9 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 	g_return_val_if_fail( cong_location_exists(&selection->loc1), NULL );
 	g_return_val_if_fail( cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1), NULL);
 	/* both must be children of the same parent to maintain proper nesting */
+
+
+	CONG_NODE_SELF_TEST(p);
 
 	/* --- Processing for multiple nodes --- */
 

@@ -18,10 +18,7 @@ void tree_coarse_update_of_view()
 
 gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
-	TTREE *n0, *n1, *n2;
+	CongNodePtr n0, n1, n2;
 	char *s;
 
 	CongDocument *doc = the_globals.xv->doc;
@@ -30,6 +27,18 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	s = pick_structural_tag(ds);
 	if (!s) return(TRUE);
 
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	n0 = cong_node_new_text(" ");
+	cong_node_add_after(n0, tag);
+
+	n1 = cong_node_new_element(s);
+	cong_node_set_parent(n1, tag->parent);
+
+	n2 = cong_node_new_text(" ");
+	cong_node_set_parent(n2, n1);
+#else
 	n0 = ttree_node_add(tag->parent, "data", 4);
 	ttree_node_add(n0, " ", 1);
 
@@ -43,9 +52,9 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	n1->next = tag->next;
 	n0->prev = tag;
 	tag->next = n0;
+#endif
 
 	tree_coarse_update_of_view();
-#endif
 
 	return(TRUE);
 }
@@ -53,10 +62,8 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
-	TTREE *n0, *n1;
+	CongNodePtr n0;
+	CongNodePtr n1;
 	char *s;
 
 	CongDocument *doc = the_globals.xv->doc;
@@ -64,7 +71,19 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	s = pick_structural_tag(ds);
 	if (!s) return(TRUE);
-	
+
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	n0 = cong_node_new_element(s);
+	cong_node_set_parent(n0,tag);
+
+	n1 = cong_node_new_text(" ");
+	cong_node_set_parent(n1,n0);
+
+	n0 = cong_node_new_text(" ");
+	cong_node_set_parent(n0,tag);
+#else	
 	n0 = ttree_node_add(tag->child, "tag_span", 8);
 	n1 = ttree_node_add(n0, s, strlen(s));
 	n1 = ttree_node_add(n1, "data", 4);
@@ -72,9 +91,9 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	
 	n0 = ttree_node_add(tag->child, "data", 4);
 	ttree_node_add(n0, " ", 1);
+#endif
 
 	tree_coarse_update_of_view();
-#endif
 
 	return(TRUE);
 }

@@ -60,6 +60,7 @@ const gchar *cong_node_type_description(enum CongNodeType node_type);
 
 
 void cong_node_self_test(CongNodePtr node);
+void cong_node_self_test_recursive(CongNodePtr node);
 
 
 #if 1

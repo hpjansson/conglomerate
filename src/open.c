@@ -262,6 +262,7 @@ void on_parser_error_details(gpointer data)
 	GtkWidget *text_view;
 	GtkTextBuffer *text_buffer;
 	GtkWidget *scrolled_window;
+	GtkWidget *scrolled_window2;
 	GtkListStore *store;
 	GtkWidget *error_list_view;
 	GtkTreeViewColumn *column;
@@ -364,10 +365,16 @@ void on_parser_error_details(gpointer data)
 			   "row-activated",
 			   GTK_SIGNAL_FUNC(on_row_activated),
 			   &report);
-				
+
+	scrolled_window2 = gtk_scrolled_window_new(NULL, NULL);
+		
 	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
-			   error_list_view
-			   );
+			   scrolled_window2);
+	
+			
+	gtk_container_add (GTK_CONTAINER (scrolled_window2),
+			   error_list_view);				
+
 #if 1
 	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
 
@@ -580,6 +587,8 @@ void open_document_do(const gchar* doc_name)
 	g_assert(ds);
 #if NEW_XML_IMPLEMENTATION
 	cong_doc = cong_document_new_from_xmldoc(doc, ds, doc_name); /* takes ownership of doc */
+
+	cong_node_self_test_recursive(cong_document_get_root(cong_doc));
 #else	
 	cong_doc = cong_document_new_from_ttree(xml_in, ds, doc_name);
 #endif
