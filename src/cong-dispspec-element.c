@@ -51,7 +51,6 @@ static const CongEnumMapping type_numeration[] =
 	{"span", CONG_ELEMENT_TYPE_SPAN},
 	{"insert", CONG_ELEMENT_TYPE_INSERT},
 	{"embed-external-file", CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE},
-	{"paragraph", CONG_ELEMENT_TYPE_PARAGRAPH},
 	{"plugin", CONG_ELEMENT_TYPE_PLUGIN},
 	{"all", CONG_ELEMENT_TYPE_ALL}
 };

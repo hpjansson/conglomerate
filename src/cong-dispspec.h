@@ -116,10 +116,6 @@ cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds);
 
-/* Will return NULL if no such tag exists */
-CongDispspecElement*
-cong_dispspec_get_paragraph(CongDispspec *ds);
-
 /* Manipulating a dispspec: */
 void cong_dispspec_add_element (CongDispspec* ds, 
 				CongDispspecElement* element);

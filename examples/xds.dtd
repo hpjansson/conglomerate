@@ -91,7 +91,7 @@
 <!ELEMENT element     %element.content; >
 <!ATTLIST element      
    %element.att;
-   type                ( plugin | paragraph | embed-external-file | span | structural )  #REQUIRED
+   type                ( plugin | embed-external-file | span | structural )              #REQUIRED
    plugin-id           NMTOKEN                                                           #IMPLIED
 >
 

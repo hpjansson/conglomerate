@@ -68,9 +68,7 @@
 			<name language="en">Optimistic</name>
 		</element>
 
-		<!-- The paragraph separator: -->
-
-		<element tag="p" type = "paragraph">
+		<element tag="p" type = "structural">
 			<name language="en">Paragraph</name>
 		</element>
 		

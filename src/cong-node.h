@@ -62,8 +62,6 @@ enum CongElementType
 
 	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
 
-	CONG_ELEMENT_TYPE_PARAGRAPH,
-
 	/* Other types?  Table? Plugin widget/Bonobo control? */
 
 	CONG_ELEMENT_TYPE_PLUGIN,

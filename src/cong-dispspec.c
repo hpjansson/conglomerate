@@ -76,7 +76,6 @@ struct CongDispspec
 	gchar *filename_extension;
 	GdkPixbuf *icon;
 
-	CongDispspecElement *paragraph;
 	xmlNodePtr template;
 };
 
@@ -544,14 +543,6 @@ cong_dispspec_get_first_element(CongDispspec *ds)
 	return ds->first;
 }
 
-CongDispspecElement*
-cong_dispspec_get_paragraph(CongDispspec *ds)
-{
-	g_return_val_if_fail(ds, NULL);
-
-	return ds->paragraph;
-}
-
 /* Manipulating a dispspec: */
 void cong_dispspec_add_element (CongDispspec* ds, 
 				CongDispspecElement* element)
@@ -811,10 +802,6 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 								CongDispspecElement* element = cong_dispspec_element_from_xml (xml_element);
 								
 								cong_dispspec_add_element(ds,element);
-
-								if (cong_dispspec_element_type (element)==CONG_ELEMENT_TYPE_PARAGRAPH){
-									ds->paragraph=element;
-								}
 							}
 						}
 						
@@ -1160,24 +1147,12 @@ promote_element (CongDispspec * dispspec,
 		{
 			if (contains_carriage_return(xmlNodeGetContent (node)))
 			{
-				if (contains_text (xmlNodeGetContent (node)))
-				{
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
-												     node->parent->name,
-												     CONG_ELEMENT_TYPE_PARAGRAPH,
-												     TRUE);
-					g_assert (ds_element);
-					cong_dispspec_add_element (dispspec, ds_element);
-				}
-				else
-				{
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
-												     node->parent->name,
-												     CONG_ELEMENT_TYPE_STRUCTURAL,
-												     TRUE);
-					g_assert (ds_element);
-					cong_dispspec_add_element (dispspec, ds_element);
-				}
+				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+											     node->parent->name,
+											     CONG_ELEMENT_TYPE_STRUCTURAL,
+											     TRUE);
+				g_assert (ds_element);
+				cong_dispspec_add_element (dispspec, ds_element);
 			}
 			break;
 		}
@@ -1187,7 +1162,7 @@ promote_element (CongDispspec * dispspec,
 			{
 				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
 											     node->parent->name,
-											     CONG_ELEMENT_TYPE_PARAGRAPH,
+											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
 				g_assert (ds_element);
 				cong_dispspec_add_element (dispspec, ds_element);
@@ -1215,7 +1190,7 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 					if (contains_carriage_return(xmlNodeGetContent (cur))) {
 						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
 													     cur->parent->name,
-													     CONG_ELEMENT_TYPE_PARAGRAPH,
+													     CONG_ELEMENT_TYPE_STRUCTURAL,
 													     TRUE);
 						g_assert (ds_element);
 						cong_dispspec_add_element (dispspec, ds_element);

@@ -171,7 +171,6 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 					
 				case CONG_ELEMENT_TYPE_INSERT:
 				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
-				case CONG_ELEMENT_TYPE_PARAGRAPH:
 					return  cong_editor_node_element_unknown_new (widget,
 										      node,
 										      traversal_parent);

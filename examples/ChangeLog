@@ -1,5 +1,9 @@
 2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* readme.xds, xds.dtd
+
+	Removed paragraph type
+
 	* xds.dtd
 
 	Allow more than one <name> and <short-desc> below an <element>, locale->language; make it REQUIRED and a NMTOKEN

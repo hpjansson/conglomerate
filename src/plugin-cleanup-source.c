@@ -112,7 +112,6 @@ cong_util_is_recursively_inline (CongDocument *doc,
 						
 					case CONG_ELEMENT_TYPE_INSERT:
 					case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:					
-					case CONG_ELEMENT_TYPE_PARAGRAPH:					
 					case CONG_ELEMENT_TYPE_PLUGIN:
 					case CONG_ELEMENT_TYPE_UNKNOWN:
 						return FALSE;

@@ -94,9 +94,6 @@ node_filter (CongTreeView *cong_tree_view,
 				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
 					return FALSE;
 						
-				case CONG_ELEMENT_TYPE_PARAGRAPH:
-					return FALSE;
-						
 				case CONG_ELEMENT_TYPE_PLUGIN:
 					return FALSE;
 						
