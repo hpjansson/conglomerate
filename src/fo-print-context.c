@@ -13,6 +13,8 @@
 #include "global.h"
 #include "fo.h"
 
+#if PRINT_TESTS
+
 struct FoPrintContext
 {
 	GnomePrintContext *gpc;
@@ -109,3 +111,5 @@ void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y)
 			      x,
 			      y);
 }
+
+#endif /* #if PRINT_TESTS */

@@ -13,9 +13,14 @@
 #include "global.h"
 #include "fo.h"
 
+#if PRINT_TESTS
+
 void fo_solver_area_add_child(FoSolverArea *area, FoSolverArea *child)
 {
+	g_assert(child->parent==NULL);
+
 	area->children = g_list_append(area->children, child);
+	child->parent = area;
 }
 
 void fo_solver_area_render_recursive(FoSolverArea *area, FoPrintContext *fpc)
@@ -28,9 +33,11 @@ void fo_solver_area_render_recursive(FoSolverArea *area, FoPrintContext *fpc)
 	fo_print_context_push_state(fpc);
 
 	/* Render this, if appropriate: */
-	if (FO_SOLVER_AREA_CLASS(FO_OBJECT(area)->klass)->render) {
-		FO_SOLVER_AREA_CLASS(FO_OBJECT(area)->klass)->render(area,
-								     fpc);
+	if (FO_OBJECT(area)->klass) {
+		if (FO_SOLVER_AREA_CLASS(FO_OBJECT(area)->klass)->render) {
+			FO_SOLVER_AREA_CLASS(FO_OBJECT(area)->klass)->render(area,
+									     fpc);
+		}
 	}
 
 	/* Recurse through children: */
@@ -104,7 +111,7 @@ void text_render(FoSolverArea *area,
 
 	FoRect rect;
 
-	fo_rect_set_xywh(&rect, 0,0,200,20);
+	fo_rect_set_xywh(&rect, ((double)rand()*5000.0)/(double)RAND_MAX,((double)rand()*5000.0)/(double)RAND_MAX,200,20);
 	
 	fo_rect_test_render(&rect, fpc, text->text);
 }
@@ -138,12 +145,17 @@ static void add_page(FoSolverResult *solver_result, FoSolverPage *page)
 {
 	solver_result->list_of_solver_page = g_list_append(solver_result->list_of_solver_page, page);
 	solver_result->num_pages++;
+#if 0
 	solver_result->current_page = page;
 	solver_result->insertion_y = 26*30.0;
+#endif
 }
 
-static void pour_single_area(FoSolverResult *solver_result, FoSolverArea *area)
+static void pour_single_area(FoSolverResult *solver_result, FoSolverArea *area, FoSolverArea *insertion_area)
 {
+#if 1
+	fo_solver_area_add_child(insertion_area, area);	
+#else
 	FoRect rect;
 	FoSolverRect *solver_rect;
 
@@ -167,15 +179,37 @@ static void pour_single_area(FoSolverResult *solver_result, FoSolverArea *area)
 	fo_solver_area_add_child(FO_SOLVER_AREA(solver_result->current_page), FO_SOLVER_AREA(solver_rect));
 	fo_solver_area_add_child(FO_SOLVER_AREA(solver_rect), FO_SOLVER_AREA(area));
 	solver_result->insertion_y-=30.0;
+#endif
 }
 
 /* Currently very hackish: */
-static void pour_flow_recursive(FoSolverResult *solver_result, xmlNodePtr node)
+static void pour_flow_recursive(FoSolverResult *solver_result, xmlNodePtr node, FoSolverArea *insertion_area)
 {
 	xmlNodePtr iter;
 
 	/* Handle this node: */
-	if (node->type==XML_TEXT_NODE) {
+	
+	if (0==xmlStrcmp(node->name, "block")) {
+		/* create block area(s) */
+		FoSolverBlockArea *block_area;
+
+		block_area = g_new0(FoSolverBlockArea,1);
+
+		pour_single_area(solver_result, FO_SOLVER_AREA(block_area), insertion_area );
+
+		insertion_area = FO_SOLVER_AREA(block_area);
+
+	} else if (0==xmlStrcmp(node->name, "inline")) {
+		/* create inline area(s) */
+		FoSolverInlineArea *inline_area;
+
+		inline_area = g_new0(FoSolverInlineArea,1);
+
+		pour_single_area(solver_result, FO_SOLVER_AREA(inline_area), insertion_area );
+
+		insertion_area = FO_SOLVER_AREA(inline_area);
+
+	} else if (node->type==XML_TEXT_NODE) {
 
 		/* Split the text into a list of PangoItem:  */
 		{
@@ -258,7 +292,7 @@ static void pour_flow_recursive(FoSolverResult *solver_result, xmlNodePtr node)
 										    &solver_text->logical_rect);
 
 							/* Add an area: */
-							pour_single_area(solver_result, FO_SOLVER_AREA(solver_text) );
+							pour_single_area(solver_result, FO_SOLVER_AREA(solver_text), insertion_area );
 						}
 
 						start_of_line = i+1;
@@ -266,55 +300,21 @@ static void pour_flow_recursive(FoSolverResult *solver_result, xmlNodePtr node)
 				}
 				
 				g_free(attrs);
-
-#if 0
-
-				
-				/* Determine where the linebreak occurs: */
-				pango_glyph_string_x_to_index(glyph_string,
-							      node->content + item->offset,
-							      item->length,
-							      &item->analysis,
-							      5000, /*  int x_pos, */
-							      &index,
-							      &trailing);
-
-				g_message("index=%i, trailing = %i\n", index, trailing);
-				
-				{
-					int i;
-					for (i=0; i<glyph_string->num_glyphs; i++) {
-						
-					}
-				}
-#endif
 			}
 		}
-
-
-#if 0														      
-		/* Add an area: */
-		{
-			FoRect rect;
-
-			fo_rect_set_xywh(&rect, 150.0, solver_result->insertion_y, 200.0, 20.0);
-			fo_solver_area_add_child(FO_SOLVER_AREA(solver_result->current_page), FO_SOLVER_AREA(fo_solver_test_rect_new(&rect, node->content)));
-			solver_result->insertion_y-=30.0;
-		}
-#endif
 
 	}
 
 	/* Recurse through children: */
 	for (iter = node->children; iter; iter = iter->next) {
-		pour_flow_recursive(solver_result, iter);
+		pour_flow_recursive(solver_result, iter, insertion_area);
 	}
 
 }
 
 static void pour_flow(FoSolverResult *solver_result, FoFlow *flow)
 {
-	pour_flow_recursive(solver_result, FO_PARSER_OBJECT(flow)->node);
+	pour_flow_recursive(solver_result, FO_PARSER_OBJECT(flow)->node, FO_SOLVER_AREA(solver_result->list_of_solver_page->data));
 }
 
 void run_solver(FoSolverResult *solver_result, FoParserResult *parser_result)
@@ -450,7 +450,7 @@ void fo_solver_result_render(FoSolverResult *result, FoPrintContext *fpc)
 
 }
 
-
+#endif /* #if PRINT_TESTS */
 
 
 

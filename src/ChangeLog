@@ -1,4 +1,26 @@
 creating ChangeLog
+2002-11-13 David Malcolm
+
+	* fo-parser-result.c, fo-print-context.c, fo-rect.c, fo-solver-result.c, fo-tests.c, fo.h
+
+	Further fo work
+	
+        * cong-primary-window.c, global.h, main.c, xmldata.c
+
+	Added some tests plus a File->Properties implementation 
+
+	* popup.c, tree.c
+
+	Enhancements to the context menu
+	
+	* Makefile.am
+
+	Added cong-dialog.c and the fo files	
+
+	* cong-dialog.c
+
+	Initial import
+	
 2002-11-10 David Malcolm
 
 	* fo.h, fo-parser-result.c, fo-print-context.c, fo-rect.c, fo-solver-result.c, fo-tests.c 

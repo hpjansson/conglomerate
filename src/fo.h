@@ -34,6 +34,8 @@
 #ifndef __FO_H__
 #define __FO_H__
 
+#if PRINT_TESTS
+
 /* Include GnomePrint headers; these will eventually only be required by part of the interface */
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
@@ -84,6 +86,15 @@ typedef struct FoSolverArea FoSolverArea;
 typedef struct FoSolverAreaClass FoSolverAreaClass;
 #define FO_SOLVER_AREA(x) ((FoSolverArea*)(x))
 #define FO_SOLVER_AREA_CLASS(x) ((FoSolverAreaClass*)(x))
+
+typedef struct FoSolverBlockArea FoSolverBlockArea;
+#define FO_SOLVER_BLOCK_AREA(x) ((FoSolverBlockArea*)(x))
+
+typedef struct FoSolverLineArea FoSolverLineArea;
+#define FO_SOLVER_LINE_AREA(x) ((FoSolverLineArea*)(x))
+
+typedef struct FoSolverInlineArea FoSolverInlineArea;
+#define FO_SOLVER_INLINE_AREA(x) ((FoSolverInlineArea*)(x))
 
 typedef struct FoSolverTestRect FoSolverTestRect;
 #define FO_SOLVER_TEST_RECT(x) ((FoSolverTestRect*)(x))
@@ -273,6 +284,18 @@ struct FoSolverArea
 {
 	FoObject base;
 
+	FoParserObject *parser_object; /* can be NULL e.g. for FoLineArea */
+
+	/* Position relative to parent's origin: */
+	FoUnit relative_x;
+	FoUnit relative_y;
+
+	/* Size: */
+	FoUnit width;
+	FoUnit height;
+
+	/* Tree hierarchy: */
+	FoSolverArea *parent;
 	GList *children; /* of type FoSolverArea */	
 };
 
@@ -283,6 +306,21 @@ struct FoSolverAreaClass
 	void (*render)(FoSolverArea *area,
 		       FoPrintContext *fpc);
 		       
+};
+
+struct FoSolverBlockArea
+{
+	FoSolverArea area;
+};
+
+struct FoSolverLineArea
+{
+	FoSolverArea area;
+};
+
+struct FoSolverInlineArea
+{
+	FoSolverArea area;
 };
 
 struct FoSolverTestRect
@@ -302,7 +340,7 @@ struct FoSolverRect
 
 struct FoSolverText
 {
-	FoSolverArea area;
+	FoSolverInlineArea area;
 
 	PangoGlyphString *glyph_string;
 	PangoFont *pango_font;
@@ -316,6 +354,7 @@ struct FoSolverPage
 	FoSolverArea area;
 
 	FoSimplePageMaster *spm;
+
 };
 
 struct FoSolverResult
@@ -331,8 +370,10 @@ struct FoSolverResult
  
 	FoPageSequence *current_ps;
 
+#if 0
 	FoSolverPage *current_page;
 	FoUnit insertion_y;
+#endif
 };
 
 /* FoRect methods: */
@@ -379,5 +420,7 @@ void fo_print_context_pop_state(FoPrintContext *fpc);
 void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y);
 
 G_END_DECLS
+
+#endif /* #if PRINT_TESTS */
 
 #endif

@@ -13,6 +13,8 @@
 #include "global.h"
 #include "fo.h"
 
+#if PRINT_TESTS
+
 /* FoRect methods: */
 void fo_rect_set_xywh(FoRect *rect, FoUnit x, FoUnit y, FoUnit w, FoUnit h)
 {
@@ -38,3 +40,5 @@ void fo_rect_test_render(const FoRect *rect, FoPrintContext *fpc, const gchar *l
 {
 	fo_print_context_test_rect(fpc, rect, label);
 }
+
+#endif /* #if PRINT_TESTS */

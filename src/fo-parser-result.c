@@ -13,6 +13,8 @@
 #include "global.h"
 #include "fo.h"
 
+#if PRINT_TESTS
+
 /* FoParserResult internals: */
 static FoUnit get_distance_property(xmlNodePtr node, const xmlChar *property)
 {
@@ -582,3 +584,5 @@ FoPageSequenceMaster *fo_parser_result_lookup_page_sequence_master(FoParserResul
 
 	return NULL;
 }
+
+#endif /* #if PRINT_TESTS */
