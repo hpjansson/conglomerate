@@ -1,4 +1,4 @@
-conglomerate (0.7.1-0.2) unstable; urgency=low
+conglomerate (0.7.1-1) unstable; urgency=low
 
   * new upstream version
 
@@ -9,30 +9,6 @@ conglomerate (0.7.1-0.2) unstable; urgency=low
   * Debian package into "unstable" (closes: #197049 )
 
  -- Geert Stappers <stappers@stappers.nl>  Wed,  3 Sep 2003 15:46:50 +0200
-
-conglomerate (0.7.1-0.1) unstable; urgency=low
-
-  * new upstream version
-
-  * install file NEWS
-
-  * Debian package into "unstable"
-
- -- Geert Stappers <stappers@stappers.nl>  Wed,  3 Sep 2003 10:56:59 +0000
-
-conglomerate (0.7.0-1) unstable; urgency=low
-
-  * new upstream version
-
-  * Debian package into "unstable"
-
- -- Geert Stappers <stappers@stappers.nl>  Fri, 29 Aug 2003 21:04:53 +0200
-
-conglomerate (0.5.4-0.2) experimental; urgency=low
-
-  * new stuff in CVS
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri, 27 Jun 2003 14:11:56 +0200
 
 conglomerate (0.5.4-1) experimental; urgency=low
 
@@ -84,50 +60,3 @@ conglomerate (0.5.2-1) experimental; urgency=low
   * Initial Experimental Release. 
 
  -- Sven Luther <luther@debian.org>  Wed, 11 Jun 2003 18:35:31 +0200
-
-conglomerate (0.5.2-0.1) unstable; urgency=low
-
-  * new upstream version
-
-  * updated debian/control file
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Thu, 12 Jun 2003 16:16:43 +0200
-
-conglomerate (0.5.0-0.1) unstable; urgency=low
-
-  * http://people.debian.org/~calvin/unofficial/ says
-  """The Debian package version number is parsed from the top entry of
-  debian/changelog, eg. mypackage (1.1-0.1)
-  unstable; urgency=low. The `-0.1' is the debian internal number, and it must
-  be lower than `-1' for unofficial packages.
-  Subsequent releases must have `-0.2', `-0.3', etc. An official package will
-  have `1.1-1'."""
-  It is not in the Debian policy, but it sounds reasonable.
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Wed, 14 May 2003 20:53:19 +0200
-
-conglomerate (0.5.0-4) unstable; urgency=low
-
-  * Tell the user that there about eighty errors to come
-  * reversed not using /home/david/test.xml for the test
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 10 May 2003 13:26:05 +0200
-
-conglomerate (0.5.0-3) unstable; urgency=low
-
-  * not using /home/david/test.xml for the test
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 10 May 2003 08:38:32 +0200
-
-conglomerate (0.5.0-2) unstable; urgency=low
-
-  * debian/rules didn't put files in the package
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri,  9 May 2003 18:09:03 +0200
-
-conglomerate (0.5.0-1) unstable; urgency=low
-
-  * Initial Release.
-
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri,  9 May 2003 14:56:44 +0200
-
