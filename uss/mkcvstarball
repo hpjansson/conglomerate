@@ -15,6 +15,10 @@ then
   # modify them
   ( date -R; echo "This is prelease ${1}"; echo; cat ChangeLog.tm ) > ChangeLog
   sed -e "s/^AC_INIT(\(.*\), \(.*\))/AC_INIT(\1, \2pre${1})/" \
+      -e "/doc\/reference/d" \
+    configure.in.tm > configure.in
+else
+  sed -e "/doc\/reference/d" \
     configure.in.tm > configure.in
 fi
 

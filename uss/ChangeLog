@@ -1,3 +1,9 @@
+2004-05-05  Geert Stappers <stappers@stappers.nl>
+
+	* mkcvstarball
+	Tarballs wouldn't have a doc/reference directory.
+	(bugzilla #131600)
+
 2004-03-06  Geert Stappers <stappers@stappers.nl>
 
 	* mkcvstarball
