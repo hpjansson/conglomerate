@@ -1,0 +1,2015 @@
+# Traducció del mòdul conglomerate per l'equip de Softcatalà
+# Copyright (C) 2003 Free Software Foundation, Inc.
+# This file is distributed under the same license as the conglomerate package.
+# Xavier Conde Rueda <xaviconde@eresmas.com>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-16 14:08+0200\n"
+"PO-Revision-Date: 2003-10-28 15:08+0100\n"
+"Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
+"Language-Team: Catalan <tradgnome@softcatala.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
+#: src/cong-primary-window.c:436 src/cong-primary-window.c:438
+#: src/cong-primary-window.c:670 src/cong-primary-window.c:672
+#: src/cong-primary-window.c:678
+msgid "Conglomerate XML Editor"
+msgstr "Editor XML Conglomerate"
+
+#: data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "Edita fitxers XML"
+
+#: glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "Opcions d'importació de fitxers"
+
+#: glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "Importador"
+
+#: glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "Opcions"
+
+#: glade/docbook-common-properties.glade.h:1
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+"<small>Quin és l'abast del text? Podeu fer servir aquesta pàgina per especificar "
+"la rellevància del text per diferents tipus de sistemes d'ordinador.</small>"
+
+#: glade/docbook-common-properties.glade.h:2
+msgid "Language"
+msgstr "Llenguatge"
+
+#: glade/docbook-common-properties.glade.h:3
+#: glade/docbook-orderedlist-properties.glade.h:9
+#: src/cong-file-properties.c:86 src/cong-node-properties-dialog.c:788
+msgid "Properties"
+msgstr "Propietats"
+
+#: glade/docbook-common-properties.glade.h:4
+msgid "Revisions"
+msgstr "Revisions"
+
+#: glade/docbook-common-properties.glade.h:5
+msgid "Scope"
+msgstr "Abast"
+
+#: glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to edit the "
+"language of the text here.\n"
+"\n"
+"This is listed in Bugzilla as bug #122536"
+msgstr ""
+"Això és una pàgina per posar elements. Més endavant us permetrà editar el "
+"llenguatge del text aquí.\n"
+"\n"
+"Està llistat al Bugzilla com a error nº 122536"
+
+#: glade/docbook-common-properties.glade.h:9
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"Això és una pàgina per posar elements. Més endavant us permetrà manipular informació "
+"sencilla de seguiment de versió de DocBook.\n"
+"\n"
+"Està llistat al Bugzilla com a error nº 122538"
+
+#: glade/docbook-common-properties.glade.h:12
+msgid "_Architecture"
+msgstr "_Arquitectura"
+
+#: glade/docbook-common-properties.glade.h:13
+msgid "_Operating System"
+msgstr "Sistema _operatiu"
+
+#: glade/docbook-common-properties.glade.h:14
+msgid "_User Level"
+msgstr "Nivell d'_usuari"
+
+#: glade/docbook-common-properties.glade.h:15
+msgid "_Vendor"
+msgstr "_Venedor"
+
+#: glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr "Segueix la numeració des de la llista anterior"
+
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
+#: src/cong-error-file-open.c:449
+msgid "Details"
+msgstr "Detalls"
+
+#: glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr "Hereda la numeració de les llistes del voltant"
+
+#: glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr "Minimitza l'espai vertical"
+
+#: glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "Numeració"
+
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Estil"
+
+#: glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: glade/string_selection_dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/string_selection_dialog.glade.h:2
+msgid "label"
+msgstr "etiqueta"
+
+#: glade/string_selection_dialog.glade.h:3
+msgid "string_selection_dialog"
+msgstr "diàleg_selecció_cadena"
+
+#: src/cong-app.c:267
+msgid "XML Editor"
+msgstr "Editor XML"
+
+#: src/cong-app.c:333
+#, c-format
+msgid "Conglomerate could not load any xds files from the directory \"%s\""
+msgstr "Conglomerate no ha pogut carregar cap fitxer xds des del directory \"%s\""
+
+#: src/cong-app.c:335
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "Conglomerate no ha pogut trobar cap descripció de tipus de document."
+
+#: src/cong-app.c:337
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it."
+msgstr ""
+"Si veieu aquest error, vol dir que heu muntat Conglomerate, però no l'heu instal·lat. "
+"Proveu instal·lant-lo."
+
+#: src/cong-attribute-editor-cdata.c:178
+#: src/cong-attribute-editor-enumeration.c:174
+#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:372
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Defineix atribut \"%s\" a \"%s\""
+
+#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:416
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "Afegeix atribut \"%s\""
+
+#: src/cong-attribute-editor-cdata.c:226
+#: src/cong-attribute-editor-enumeration.c:177
+#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:446
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Esborra atribut \"%s\""
+
+#: src/cong-attribute-editor-enumeration.c:89
+msgid "(unspecified)"
+msgstr "(sense especificar)"
+
+#: src/cong-dialog.c:231
+msgid "_Close without Saving"
+msgstr "Tan_ca sense desar"
+
+#: src/cong-dialog.c:246
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Desa els canvis al document \"%s\" abans de tancar?"
+
+#: src/cong-dialog.c:251
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr ""
+"Si tanqueu sense desar, els canvis des de fa %li hores seran descartats."
+
+#: src/cong-dialog.c:253
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr ""
+"Si tanqueu sense desar, els canvis des de fa %li minuts seran descartats."
+
+#: src/cong-dialog.c:255
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+"Si tanqueu sense desar, els canvis del darrer minut seran descartats."
+
+#: src/cong-dialog.c:300
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "Retorna els canvis no desats al document \"%s\"?"
+
+#: src/cong-dialog.c:305
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "Els canvis des de fa %li hores seran descartats."
+
+#: src/cong-dialog.c:307
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "Els canvis des de fa %li minuts seran descartats."
+
+#: src/cong-dialog.c:309
+msgid "Changes from the past minute will be discarded."
+msgstr "Els canvis del darrer minut seran descartats."
+
+#: src/cong-dispspec-registry.c:90
+msgid "Conglomerate could not read its registry of document types."
+msgstr "Conglomerate no pot llegir el seu registre de tipus de document."
+
+#: src/cong-dispspec-registry.c:93
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "Conglomerate ha mirat a tots els fitxers en la ubicació."
+
+#: src/cong-dispspec.c:554
+msgid "unnamed"
+msgstr "sense nom"
+
+#: src/cong-dispspec.c:567
+msgid "No description available."
+msgstr "No hi ha cap descripció disponible."
+
+#: src/cong-dispspec.c:1430
+msgid "(xpath failed)"
+msgstr "(xpath ha fallat)"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec.c:1475
+msgid "<untitled>"
+msgstr "<sense títol>"
+
+#: src/cong-dom-view.c:208
+msgid "UNKNOWN"
+msgstr "DESCONEGUT"
+
+#: src/cong-dom-view.c:237
+#, c-format
+msgid "Text: \"<span foreground=\"%s\">%s</span>\""
+msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
+
+#: src/cong-dom-view.c:254
+#, c-format
+msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+
+#: src/cong-editor-node-text.c:752
+msgid "Select word"
+msgstr "Selecciona paraula"
+
+#: src/cong-editor-node-text.c:777
+msgid "Move cursor"
+msgstr "Mou el cursor"
+
+#: src/cong-editor-node-text.c:829
+msgid "Drag out selection"
+msgstr "Arrosega selecció"
+
+#: src/cong-editor-widget3.c:1113
+msgid "Cursor Movement"
+msgstr "Moviment del cursor"
+
+#: src/cong-editor-widget3.c:1153 src/cong-editor-widget3.c:1166
+msgid "Delete Selection"
+msgstr "Esborra selecció"
+
+#: src/cong-editor-widget3.c:1189
+msgid "Typing"
+msgstr "Escriure"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "Si sou programador, sabeu que el problema es troba al fitxer %s a la línia %i\n"
+
+#: src/cong-error-dialog.c:184
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "Aquesta característica encara no s'ha implementat. Ho sento."
+
+#: src/cong-error-dialog.c:202
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+"Aquesta característica encara no s'ha implementat. Ho sento.\n"
+"\n"
+"Es tracta d'un problema conegut; és l'error número %i del sistema de seguiment d'errors a %s"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:248
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "S'ha informat que s'ha produït un error quan s'estava fent la operació \"%s\""
+
+#: src/cong-error-dialog.c:251
+#, c-format
+msgid ""
+"A GError occurred; the error report was:\n"
+"<i>%s</i>"
+msgstr ""
+"Ha succeït un GError; l'informe de l'error és el següent:\n"
+"<i>%s</i>"
+
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
+msgid "An unexpected error occurred."
+msgstr "Ha succeït un error inesperat."
+
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
+msgid "For more information, click on the \"Details\" button."
+msgstr "Per obtenir més informació, feu clic en el botó \"Detalls\"."
+
+#. Add upper content:
+#: src/cong-error-dialog.c:300
+#, c-format
+msgid ""
+"An error occurred whilst running this system command:\n"
+"\n"
+"<tt>%s</tt>"
+msgstr ""
+"Ha succeït un error mentre s'estava executant l'ordre de sistema:\n"
+"\n"
+"<tt>%s</tt>"
+
+#: src/cong-error-dialog.c:301
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr ""
+"El número d'error indicat era %d. A sota teniu el text de l'error que va ser "
+"escrit per la ordre."
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:54
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "Conglomerate no ha pogut executar l'eina de cerca.\n"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:82
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%s no pot llegir \"%s\" des de %s."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:85
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%s no ha pogut llegir \"%s\" des de %s."
+
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
+msgid "An unexpected internal error occurred."
+msgstr "Ha succeït un error intern inesperat."
+
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+"Proveu-ho de nou. Si falla una altra, envieu un informe d'error a la persona encarregada "
+"d'aquesta aplicació."
+
+#: src/cong-error-file-open.c:234
+msgid "There is no file with that name at that location."
+msgstr "No hi ha cap fitxer amb aquest nom en aquesta ubicació."
+
+#: src/cong-error-file-open.c:235
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Comproveu que heu escrit el nom del fitxer correctament. Recordeu que "
+"les lletres majúscules i minúscules es consideren diferents: \"ElFitxer\" "
+"és diferent d'\"ELFITXER\" o \"elfitxer\".\n"
+"(ii) Proveu d'usar l'eina de cerca per trobar el vostre fitxer."
+
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
+msgid "Search"
+msgstr "Cerca"
+
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
+msgid "The location does not exist."
+msgstr "La ubicació no existeix."
+
+#: src/cong-error-file-open.c:244
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Comproveu que heu escrit el nom de la ubicació correctament. Recordeu que "
+"les lletres majúscules i minúscules es consideren diferents: \"ElDirectori\" "
+"és diferent d'\"ELDIRECTORI\" o \"eldirectori\".\n"
+"(ii) Proveu d'usar l'eina de cerca per trobar el vostre fitxer."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:257
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "La ubicació \"%s\" no permet que es llegeixin fitxers."
+
+#: src/cong-error-file-open.c:261
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+"Intenteu carregar un fitxer des d'una ubicació diferent. Si penseu que "
+"hauria de ser possible llegir el fitxer, poseu-vos en contacte amb l'administrador del vostre sistema."
+
+#: src/cong-error-file-open.c:271
+msgid "There were problems reading the content of the file."
+msgstr "Han hagut problemes en llegir el contingut del fitxer."
+
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr "Proveu de nou. Si falla una altra vegada, poseu-vos en contacte amb l'administrador del vostre sistema."
+
+#: src/cong-error-file-open.c:281
+msgid "The contents of the file seem to be corrupt."
+msgstr "El contingut del fitxer sembla corromput."
+
+#: src/cong-error-file-open.c:282
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+"Proveu de nou. Si falla una altra vegada, busqueu una còpia de seguretat del fitxer."
+
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
+msgid "There were problems reading the contents of the file."
+msgstr "Han hagut problemes en llegir el contingut del fitxer."
+
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
+msgid "The system does not recognise that as a valid location."
+msgstr "El sistema no ho reconeix com a ubicació vàlida."
+
+#: src/cong-error-file-open.c:299
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) Comproveu que heu escrit el nom de la ubicació correctament. Recordeu que "
+"les lletres majúscules i minúscules es consideren diferents: \"Http\" "
+"és diferent d'\"HTTP\" o \"http\".\n"
+"(ii) Proveu d'usar l'eina de cerca per trobar el vostre fitxer."
+
+#: src/cong-error-file-open.c:310
+msgid "You do not have permission to read that file."
+msgstr "No teniu permís per llegir aquest fitxer."
+
+#: src/cong-error-file-open.c:311
+msgid "Try asking your system administrator to give you permission."
+msgstr "Demaneu a l'administrador del vostre sistema que us doni permís."
+
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
+msgid "The system is trying to operate on too many files at once."
+msgstr "El sistema està intentant treballar amb massa fitxers a la vegada."
+
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+"Proveu de nou. Si falla una altra vegada, proveu de tancar aplicacions que no "
+"siguin necessàries, o poseu-vos en contacte amb l'administrador del vostre sistema."
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:336
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\" és un directori, en comptes d'un fitxer."
+
+#: src/cong-error-file-open.c:340
+msgid "Try using the Search Tool to find your file."
+msgstr "Proveu de fer servir l'eina de cerca per trobar el vostre fitxer."
+
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
+msgid "The system ran out of memory."
+msgstr "El sistema ha esgotat tota la memòria."
+
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
+msgid "The server could not be contacted."
+msgstr "No s'ha pogut contactar amb el servidor."
+
+#: src/cong-error-file-open.c:362
+msgid "Try again.  If it fails again, the server may be down."
+msgstr "Proveu de nou. Si falla una altra vegada, potser el servidor està fora de servei."
+
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+"(i) Comproveu que heu escrit la ubicació correctament.\n"
+"(ii) Proveu de nou. Si falla una altra vegada, potser el servidor està fora de servei."
+
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
+msgid "The system could not login to the location."
+msgstr "El sistema no ha pogut entrar a la ubicació."
+
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr "Proveu de nou. Si falla una altra vegada, poseu-vos en contacte amb l'administrador del vostre sistema."
+
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
+msgid "The location was too busy."
+msgstr "La ubicació està massa ocupada."
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "S'ha informat de l'error \"%s\" mentre s'accedia a \"%s\""
+
+#: src/cong-error-file-open.c:439
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr ""
+"El programa ha rebut un error inesperat del sistema de fitxers virtual del GNOME."
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:51
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%s no pot desar \"%s\" a %s."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:54
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%s no ha pogut desar \"%s\" a %s."
+
+#: src/cong-error-file-save.c:101
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) Comproveu que heu escrit el nom de la ubicació correctament. Recordeu que "
+"les lletres majúscules i minúscules es consideren diferents: \"ElDirectori\" "
+"és diferent d'\"ELDIRECTORI\" o \"eldirectori\".\n"
+"(ii) Proveu a desar en una ubicació diferent."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "La ubicació \"%s\" no permet escriure fitxers."
+
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
+msgid "Try saving to a different location."
+msgstr "Proveu a desar en una ubicació diferent."
+
+#: src/cong-error-file-save.c:124
+msgid "There were problems writing the content of the file."
+msgstr "Han hagut problemes en escriure el contingut del fitxer."
+
+#: src/cong-error-file-save.c:125
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr "Proveu de nou. Si falla una altra vegada, proveu a desar en una ubicació diferent."
+
+#: src/cong-error-file-save.c:154
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr ""
+"La mida del fitxer serà de %s, però el dispositiu només té capacitat per a %s."
+
+#. Can't get at the capacity for the device or "volume":
+#: src/cong-error-file-save.c:160
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr "El fitxer és massa gran per desar-lo al dispositiu (la mida serà %s)."
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:168
+msgid "The file is too big to fit on the device."
+msgstr "El fitxer és massa gran per desar-lo en el dispositiu."
+
+#: src/cong-error-file-save.c:177
+msgid "Try saving the file to a different location."
+msgstr "Proveu a desar el fitxer a una ubicació diferent."
+
+#: src/cong-error-file-save.c:198
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+"La mida del fitxer serà %s, però vostè només té %s lliure al dispositiu."
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:204
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+"El fitxer és massa gran per desar-lo a l'espai lliure del dispositiu (la mida serà %s)."
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:212
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "El fitxer és massa gran per desar-lo en l'espai lliure del dispositiu."
+
+#: src/cong-error-file-save.c:221
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+"Proveu a desar el fitxer en una ubicació diferent, o creeu més espai movent "
+"fitxers no desitjats del dispositiu a la paperera."
+
+#: src/cong-error-file-save.c:242
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) Comproveu que heu escrit el nom de la ubicació correctament. Recordeu que "
+"les lletres majúscules i minúscules es consideren diferents: \"Http\" "
+"és diferent d'\"HTTP\" o \"http\".\n"
+"(ii) Proveu a desar en una ubicació diferent."
+
+#: src/cong-error-file-save.c:256
+msgid "You do not have permission to write to that location."
+msgstr "Vosté no té permís per escriure en aquesta ubicació."
+
+#: src/cong-error-file-save.c:257
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr ""
+"Proveu a desar en una ubicació diferent, o demaneu a l'administrador del vostre "
+"sistema que us doni permís."
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:271
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\" és un directori."
+
+#: src/cong-error-file-save.c:275
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr ""
+"Heu de desar en un fitxer dins d'un directori, en comptes d'en el directori."
+
+#: src/cong-error-file-save.c:293
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr "Proveu de nou. Si falla una altra vegada, potser el servidor està fora de "
+"servei; proveu a desar en una altra ubicació."
+
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+"(i) Comproveu que heu escrit el nom de la ubicació correctament.\n"
+"(ii) Proveu de nou. Si falla una altra vegada, potser el servidor està fora de "
+"servei; proveu a desar en una altra ubicació."
+
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
+msgid "Try again. If it fails again, try saving to another location."
+msgstr "Proveu de nou. Si falla una altra vegada, proveu a desar en una altra ubicació."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:336
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr "La ubicació \"%s\" només permet que es llegeixin fitxers, però no que s'escriguin."
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:348
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "El nom \"%s\" és massa llarg per a la ubicació i no ho pot gestionar."
+
+#: src/cong-error-file-save.c:352
+msgid "Try again with a shorter file name."
+msgstr "Proveu de nou amb un nom de fitxer més curt."
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:16
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "S'ha provat el fall de Fitxer->Obre de \"%s\" amb resultat %s"
+
+#: src/cong-error-tests.c:22
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "S'ha provat el fall de Fitxer->Desa de \"%s\" amb resultat %s"
+
+#: src/cong-error-tests.c:28
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "S'ha obtingut el resultat %s en provar el fall genèric \"%s\""
+
+#: src/cong-error-tests.c:31
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr "Conglomerate està simulant el fall d'una operació de fitxer genèrica."
+
+#: src/cong-error-tests.c:34
+msgid "This dialog was generated by the automated testing routine"
+msgstr "Aquest diàleg l'ha generat la rutina de prova automàtica"
+
+#: src/cong-file-export.c:159
+msgid "<small>(No description available)</small>"
+msgstr "<small>(Cap descripció disponible)</small>"
+
+#: src/cong-file-export.c:196
+msgid "Select file to export to"
+msgstr "Selecciona fitxer per exportar a"
+
+#: src/cong-file-export.c:231
+#, c-format
+msgid "Export \"%s\""
+msgstr "Exporta \"%s\""
+
+#: src/cong-file-export.c:236
+msgid "Export"
+msgstr "Exporta"
+
+#: src/cong-file-export.c:252 src/cong-file-print.c:214
+#: src/cong-file-properties.c:97
+msgid "General"
+msgstr "General"
+
+#: src/cong-file-export.c:287
+msgid "Exporter:"
+msgstr "Exportador:"
+
+#: src/cong-file-export.c:289
+msgid "File:"
+msgstr "Fitxer:"
+
+#: src/cong-file-export.c:296
+msgid "Export Options"
+msgstr "Exporta opcions"
+
+#: src/cong-file-export.c:304 src/cong-file-print.c:241
+#: src/cong-file-properties.c:103 src/cong-file-properties.c:107
+#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
+msgid "Name"
+msgstr "Nom"
+
+#: src/cong-file-export.c:305 src/cong-file-new.c:232
+#: src/cong-file-print.c:242 src/cong-file-properties.c:108
+#: src/cong-menus.c:426 src/cong-parser-error.c:269
+msgid "Description"
+msgstr "Descripció"
+
+#: src/cong-file-export.c:377
+#, c-format
+msgid "Conglomerate cannot export \"%s\""
+msgstr "Conglomerate no pot exportar \"%s\""
+
+#: src/cong-file-export.c:380
+msgid "None of Conglomerate's plugins know how to export files of that type."
+msgstr "Cap connector del Conglomerate sap com exportar fitxers d'aquest tipus."
+
+#: src/cong-file-import.c:65
+msgid "Import file..."
+msgstr "Importa fitxer..."
+
+#. FIXME:  eventually provide a convenience dialog to force things
+#: src/cong-file-import.c:98
+msgid "Could not import the file."
+msgstr "No es pot importar el fitxer."
+
+#: src/cong-file-import.c:99
+#, c-format
+msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+msgstr "Cap connector del Conglomerate sap com carregar fitxers de tipus \"%s\""
+
+#: src/cong-file-import.c:100
+msgid "FIXME"
+msgstr "ARREGLEU-ME"
+
+#: src/cong-file-new.c:126
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "S'està creant un nou fitxer (%s)"
+
+#: src/cong-file-new.c:212
+msgid "File Type"
+msgstr "Tipus de fitxer"
+
+#. FIXME:  what if no document factories found?
+#: src/cong-file-new.c:399 src/cong-file-new.c:406 src/cong-file-new.c:431
+msgid "Creating a new file"
+msgstr "S'està creant un nou fitxer"
+
+#: src/cong-file-new.c:407
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"Aquest assistent l'aconsellarà mentres crea un nou fitxer.\n"
+"\n"
+"Hi ha disponibles diferents tipus de fitxer, i Conglomerate serà capaç de proporcionar "
+"alguns dels continguts més generals per vostè.\n"
+"\n"
+"Esperem que en properes versions de Conglomerate pogueu crear \"documents plantilla\" "
+"per afegir a aquest sistema."
+
+#: src/cong-file-new.c:420
+msgid "What type of file would you like to create?"
+msgstr "Quin tipus de fitxer desitgeu crear?"
+
+#: src/cong-file-new.c:422
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+"Marqueu un dels elements de la llista i seleccioneu \"Endavant\" per continuar"
+
+#: src/cong-file-new.c:432
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"El Conglomerate té la informació que necessita per crear el document. Premeu "
+"\"Aplica\" per crear-lo. Haureu de desar el document si desitgeu conservar-lo."
+
+#: src/cong-file-open.c:54
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+"L'estructura interna del document no concorda amb cap dels tipus coneguts pel "
+"Conglomerate."
+
+#: src/cong-file-open.c:55
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+"Podeu obligar Conglomerate a carregar el document fent clic en el botó \"Obliga\" "
+"de sota, però pot ser que els resultats no siguin adecuats."
+
+#: src/cong-file-open.c:56
+msgid "Force"
+msgstr "Obliga"
+
+#: src/cong-file-open.c:168
+msgid "Select an XML document"
+msgstr "Seleccioneu un document XML"
+
+#: src/cong-file-print.c:192
+#, c-format
+msgid "Print \"%s\""
+msgstr "Imprimeix \"%s\""
+
+#: src/cong-file-print.c:198
+msgid "Print"
+msgstr "Imprimeix"
+
+#: src/cong-file-print.c:227
+msgid "Print Method:"
+msgstr "Mètode d'impressió:"
+
+#: src/cong-file-print.c:233
+msgid "Print Options"
+msgstr "Opcions d'impressió"
+
+#: src/cong-file-print.c:311 src/cong-menus.c:716
+msgid "Print Preview"
+msgstr "Previsualitza impressió"
+
+#: src/cong-file-print.c:321
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "Conglomerate no pot imprimir \"%s\""
+
+#: src/cong-file-print.c:324
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr "No hi ha cap connector del Conglomerate que sàpiga com imprimir fitxers "
+"d'aquest tipus."
+
+#: src/cong-file-properties.c:52 src/cong-file-properties.c:55
+msgid "None"
+msgstr "Cap"
+
+#: src/cong-file-properties.c:57
+msgid "External ID"
+msgstr "Identificació externa"
+
+#: src/cong-file-properties.c:58
+msgid "System ID"
+msgstr "Identificació del sistema"
+
+#: src/cong-file-properties.c:98
+msgid "Type"
+msgstr "Tipus"
+
+#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:247
+msgid "Location"
+msgstr "Ubicació"
+
+#: src/cong-file-properties.c:105
+msgid "Modified"
+msgstr "Modificat"
+
+#: src/cong-file-properties.c:115
+msgid "XML Header"
+msgstr "Capçalera XML"
+
+#: src/cong-file-properties.c:116
+msgid "Document Type Declaration"
+msgstr "Declaració de tipus de document"
+
+#: src/cong-file-properties.c:118
+msgid "Version"
+msgstr "Versió"
+
+#: src/cong-file-properties.c:123
+msgid "Unspecified"
+msgstr "Sense especificar"
+
+#: src/cong-file-properties.c:125
+msgid "Encoding"
+msgstr "Codificació"
+
+#: src/cong-file-properties.c:127
+msgid "Standalone"
+msgstr "Independent"
+
+#: src/cong-file-properties.c:130
+msgid "_Remove this DTD"
+msgstr "Esbo_rra aquest DTD"
+
+#: src/cong-file-properties.c:152
+msgid "_Associate this DTD"
+msgstr "_Associa aquest DTD"
+
+#: src/cong-file-properties.c:153
+msgid ""
+"The document does not specify an external DTD, but Conglomerate believes the "
+"following information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr ""
+"El document no especifica un DTD extern, però Conglomerate creu que la següent "
+"informació és apropiada. Feu clic en \"Associa aquest DTD\" per especificar "
+"aquesta informació explícitament en el document."
+
+#: src/cong-file-properties.c:175
+msgid "No External Subset"
+msgstr "Cap subconjut extern"
+
+#: src/cong-file-properties.c:192
+msgid "Basic"
+msgstr "Bàsic"
+
+#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:742
+#: src/cong-node-properties-dialog.c:826
+msgid "Advanced"
+msgstr "Avançat"
+
+#: src/cong-file-properties.c:219
+msgid "Remove DTD"
+msgstr "Esborra DTD"
+
+#: src/cong-file-properties.c:249
+msgid "Associate with DTD"
+msgstr "Associa amb un DTD"
+
+#: src/cong-file-save.c:51
+msgid "Save XML as..."
+msgstr "Desa XML com a..."
+
+#: src/cong-location.c:266 src/cong-location.c:287
+msgid "Merge tags"
+msgstr "Fusiona etiquetes"
+
+#: src/cong-location.c:331
+msgid "Delete character"
+msgstr "Esborra el caràcter"
+
+#: src/cong-location.c:746
+msgid "Calculating document start"
+msgstr "S'està calculant l'inici de document"
+
+#: src/cong-location.c:758
+msgid "Calculating line start"
+msgstr "S'està calculant l'inici de línia"
+
+#: src/cong-location.c:771
+msgid "Calculating document end"
+msgstr "S'està calculant el fi del document"
+
+#: src/cong-location.c:784
+msgid "Calculating line end"
+msgstr "S'està calculant el fi de línia"
+
+#: src/cong-location.c:797
+msgid "Calculating previous page"
+msgstr "S'està calculant l'anterior pàgina"
+
+#: src/cong-location.c:810
+msgid "Calculating next page"
+msgstr "S'està calculant la següent pàgina"
+
+#: src/cong-menus.c:93 src/cong-menus.c:165 src/cong-menus.c:199
+msgid "The selected menu item has not yet been implemented."
+msgstr "L'element de menú seleccionat no està encara implementat."
+
+#: src/cong-menus.c:389
+msgid "Document Types"
+msgstr "Tipus de document"
+
+#: src/cong-menus.c:493
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "Conglomerate no ha pogut obrir el resultat de la transformació"
+
+#: src/cong-menus.c:551 src/cong-plugin.c:1019
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "Hi ha hagut algún problema en llegir el fitxer de full d'estil \"%s\""
+
+#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1022
+#: src/cong-plugin.c:1046
+msgid "Conglomerate could not transform the document"
+msgstr "Conglomerate no ha pogut transformar el document"
+
+#: src/cong-menus.c:575 src/cong-plugin.c:1043
+msgid "There was a problem applying the stylesheet file"
+msgstr "Hi ha hagut algún problema en aplicar el fitxer de full d'estil"
+
+#: src/cong-menus.c:1028
+# ??
+msgid "Test Progress Checklist"
+msgstr "Llista de comprovació del progrès de prova"
+
+#: src/cong-menus.c:1032
+#, c-format
+msgid "This is stage %i"
+msgstr "Aquesta és l'etapa %i"
+
+#: src/cong-menus.c:1077
+msgid "Message Log - Conglomerate"
+msgstr "Registre de missatges - Conglomerate"
+
+#: src/cong-menus.c:1089
+msgid "Signal Log - Conglomerate"
+msgstr "Registre de senyals - Conglomerate"
+
+#: src/cong-menus.c:1187
+msgid "translator_credits"
+msgstr "Xavier Conde Rueda <tradgnome@softcatala.org>"
+
+#: src/cong-menus.c:1191
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2003 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2003 David Malcolm"
+
+#: src/cong-menus.c:1192
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "Conglomerate: un editor XML lliure i d'ús senzill"
+
+#: src/cong-menus.c:1232 src/cong-menus.c:1310
+msgid "/_File"
+msgstr "/_Fitxer"
+
+#: src/cong-menus.c:1233 src/cong-menus.c:1311
+msgid "/File/_New..."
+msgstr "/Fitxer/_Nou..."
+
+#: src/cong-menus.c:1234 src/cong-menus.c:1312
+msgid "/File/_Open..."
+msgstr "/Fitxer/_Obre..."
+
+#: src/cong-menus.c:1235 src/cong-menus.c:1240 src/cong-menus.c:1245
+#: src/cong-menus.c:1248 src/cong-menus.c:1251 src/cong-menus.c:1253
+#: src/cong-menus.c:1313 src/cong-menus.c:1315
+msgid "/File/"
+msgstr "/Fitxer/"
+
+#: src/cong-menus.c:1236
+msgid "/File/_Save"
+msgstr "/Fitxer/De_sa"
+
+#: src/cong-menus.c:1237
+msgid "/File/Save _As..."
+msgstr "/Fitxer/Des_a com a..."
+
+#: src/cong-menus.c:1238
+msgid "/File/Sa_ve a Copy..."
+msgstr "/Fitxer/_Desa una còpia..."
+
+#: src/cong-menus.c:1241
+msgid "/File/Print Previe_w..."
+msgstr "/Fitxer/Pre_visualització de la impressió..."
+
+#: src/cong-menus.c:1242
+msgid "/File/_Print..."
+msgstr "/Fitxer/Im_primeix..."
+
+#: src/cong-menus.c:1246
+msgid "/File/_Revert"
+msgstr "/Fitxer/_Torna a estat original"
+
+#: src/cong-menus.c:1249 src/cong-menus.c:1314
+msgid "/File/_Import..."
+msgstr "/Fitxer/_Importa..."
+
+#: src/cong-menus.c:1250
+msgid "/File/_Export..."
+msgstr "/Fitxer/_Exporta..."
+
+#: src/cong-menus.c:1252
+msgid "/File/Proper_ties"
+msgstr "/Fitxer/Propie_tats"
+
+#: src/cong-menus.c:1254 src/cong-menus.c:1316
+msgid "/File/_Close"
+msgstr "/Fitxer/Tan_ca"
+
+#: src/cong-menus.c:1255 src/cong-menus.c:1317
+msgid "/File/_Quit"
+msgstr "Fitxer/S_urt"
+
+#: src/cong-menus.c:1257
+msgid "/_Edit"
+msgstr "/_Edita/"
+
+#: src/cong-menus.c:1258
+msgid "/Edit/_Undo"
+msgstr "/Edita/Des_fès"
+
+#: src/cong-menus.c:1259
+msgid "/Edit/_Redo"
+msgstr "/Edita/To_rna a fer"
+
+#: src/cong-menus.c:1260 src/cong-menus.c:1264 src/cong-menus.c:1270
+#: src/cong-menus.c:1272
+msgid "/Edit/"
+msgstr "/Edita/"
+
+#: src/cong-menus.c:1261
+msgid "/Edit/Cu_t"
+msgstr "/Edita/Ta_lla"
+
+#: src/cong-menus.c:1262
+msgid "/Edit/_Copy"
+msgstr "/Edita/_Copia"
+
+#: src/cong-menus.c:1263
+msgid "/Edit/_Paste"
+msgstr "/Edita/_Enganxa"
+
+#: src/cong-menus.c:1266
+msgid "/Edit/_Find..."
+msgstr "/Edita/_Troba..."
+
+#: src/cong-menus.c:1267
+msgid "/Edit/Find Ne_xt"
+msgstr "/Edita/Troba el se_güent"
+
+#: src/cong-menus.c:1268
+msgid "/Edit/Find Pre_vious"
+msgstr "/Edita/Tro_ba l'anterior"
+
+#: src/cong-menus.c:1269
+msgid "/Edit/R_eplace..."
+msgstr "/Edita/R_eemplaça..."
+
+#: src/cong-menus.c:1271
+msgid "/Edit/_Insert..."
+msgstr "/Edita/_Insereix..."
+
+#: src/cong-menus.c:1274
+msgid "/Edit/View _Source"
+msgstr "/Edita/Vi_sualitza codi font"
+
+#: src/cong-menus.c:1277 src/cong-menus.c:1320
+msgid "/Debug"
+msgstr "/Depuració"
+
+#: src/cong-menus.c:1278 src/cong-menus.c:1321
+msgid "/Debug/Begin self-test of error-reporting system..."
+msgstr "/Depuració/Comença comprovació automàtica del sistema d'informació d'errors..."
+
+#: src/cong-menus.c:1279 src/cong-menus.c:1322
+msgid "/Debug/Document Types"
+msgstr "/Depuració/Tipus de document"
+
+#: src/cong-menus.c:1280
+msgid "/Debug/Transform DocBook to HTML"
+msgstr "/Depuració/Transforma DocBook a HTML"
+
+#: src/cong-menus.c:1281
+msgid "/Debug/Transform DocBook to XHTML"
+msgstr "/Depuració/Transforma DocBook a XHTML"
+
+#: src/cong-menus.c:1282
+msgid "/Debug/Transform DocBook to HTML Help"
+msgstr "/Depuració/Transforma DocBook a ajut HTML"
+
+#: src/cong-menus.c:1283
+msgid "/Debug/Transform DocBook to Java Help"
+msgstr "/Depuració/Transforma DocBook a ajut del Java"
+
+#: src/cong-menus.c:1284
+msgid "/Debug/Transform DocBook to FO"
+msgstr "/Depuració/Transforma DocBook a FO"
+
+#: src/cong-menus.c:1286
+msgid "/Debug/Preview XSL:FO"
+msgstr "/Depuració/Previsualització XSL:FO"
+
+#: src/cong-menus.c:1288
+msgid "/Debug/DTD"
+msgstr "/Depuració/DTD"
+
+#: src/cong-menus.c:1289 src/cong-menus.c:1323
+msgid "/Debug/Dialog"
+msgstr "/Depuració/Diàleg"
+
+#: src/cong-menus.c:1290 src/cong-menus.c:1324
+msgid "/Debug/Progress Checklist"
+msgstr "/Depuració/Llista de comprovació de progrès"
+
+#: src/cong-menus.c:1291
+msgid "/Debug/Document Message Log"
+msgstr "/Depuració/Registre de missatges del document"
+
+#: src/cong-menus.c:1292
+msgid "/Debug/Document Signal Log"
+msgstr "/Depuració/Registre de senyals del document"
+
+#: src/cong-menus.c:1293 src/cong-menus.c:1325
+msgid "/Debug/Information Alert"
+msgstr "/Depuració/Avís d'informació"
+
+#: src/cong-menus.c:1294 src/cong-menus.c:1326
+msgid "/Debug/Glade Test"
+msgstr "/Depuració/Prova de Glade"
+
+#: src/cong-menus.c:1295
+msgid "/Debug/Insert XML Fragment"
+msgstr "/Depuració/Insereix fragment XML"
+
+#: src/cong-menus.c:1296
+msgid "/Debug/Command Test"
+msgstr "/Depuració/Prova d'ordre"
+
+#: src/cong-menus.c:1299
+msgid "/_Tools"
+msgstr "/_Eines"
+
+#: src/cong-menus.c:1301 src/cong-menus.c:1329
+msgid "/_Help"
+msgstr "/_Ajut"
+
+#: src/cong-menus.c:1302 src/cong-menus.c:1330
+msgid "/Help/_Contents"
+msgstr "/Ajut/_Continguts"
+
+#: src/cong-menus.c:1303 src/cong-menus.c:1331
+msgid "/Help/_About"
+msgstr "/Ajut/Qu_ant a"
+
+#: src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr "XPath"
+
+#: src/cong-node-properties-dialog.c:335
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "Canvia el nom de l'atribut \"%s\" a \"%s\""
+
+#: src/cong-node-properties-dialog.c:486
+msgid "Raw Attributes"
+msgstr "Atributs crus"
+
+#: src/cong-node-properties-dialog.c:519
+msgid "Value"
+msgstr "Valor"
+
+#: src/cong-node-properties-dialog.c:608
+#, c-format
+msgid "Attributes for <tt>%s</tt> tags"
+msgstr "Atributs per a les etiquetes <tt>%s</tt>"
+
+#: src/cong-node-properties-dialog.c:734 src/cong-node-properties-dialog.c:821
+msgid "DTD"
+msgstr "DTD"
+
+#: src/cong-overview-view.c:166
+msgid "Unknown data"
+msgstr "Dades desconegudes"
+
+#: src/cong-parser-error.c:177
+#, c-format
+msgid "Parse errors loading %s"
+msgstr "S'han produït errors analitzant el fitxer %s mentre es carregava"
+
+#: src/cong-parser-error.c:185
+msgid "_Retry"
+msgstr "P_rova de nou"
+
+#: src/cong-parser-error.c:264
+msgid "Line Number"
+msgstr "Número de línia"
+
+#: src/cong-parser-error.c:326
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "%s no pot entendre el format intern del fitxer."
+
+#: src/cong-parser-error.c:334
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+"Conglomerate requereix que els documents estiguin \"ben formats\"; té unes regles "
+"molt més estrictes que la majoria de navegadors web. Tampoc no permet l'ús "
+"d'SGML. Esperem poder arreglar aquests problemes en una propera versió."
+
+#: src/cong-parser-error.c:335
+msgid "Show Details"
+msgstr "Mostra detalls"
+
+#: src/cong-plugin.c:947 src/cong-plugin.c:983
+msgid "Conglomerate could not find display information for the new file"
+msgstr "Conglomerate no ha pogut trobar informació de visualització per al nou fitxer"
+
+#: src/cong-primary-window.c:281 src/cong-primary-window.c:282
+msgid "Open document"
+msgstr "Obre document"
+
+#: src/cong-primary-window.c:295 src/cong-primary-window.c:296
+msgid "Save document as..."
+msgstr "Desa document com a..."
+
+#: src/cong-primary-window.c:303 src/cong-primary-window.c:304
+msgid "Undo"
+msgstr "Desfès"
+
+#: src/cong-primary-window.c:310 src/cong-primary-window.c:311
+msgid "Redo"
+msgstr "Torna a fer"
+
+#: src/cong-primary-window.c:329 src/cong-primary-window.c:330 src/tree.c:175
+#: src/xmledit.c:47
+msgid "Cut"
+msgstr "Talla"
+
+#: src/cong-primary-window.c:336 src/cong-primary-window.c:337
+msgid "Copy"
+msgstr "Copia"
+
+#: src/cong-primary-window.c:343 src/cong-primary-window.c:344
+#: src/xmledit.c:155
+msgid "Paste"
+msgstr "Enganxa"
+
+#: src/cong-primary-window.c:512
+msgid "Overview"
+msgstr "Resum"
+
+#: src/cong-primary-window.c:522
+msgid "Bookmarks"
+msgstr "Adreces d'interès"
+
+#: src/cong-primary-window.c:530
+msgid "Raw XML"
+msgstr "XML cru"
+
+#: src/cong-primary-window.c:588
+# Omiteixo much-delayed
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "Benvingut a l'editor Conglomerate"
+
+#: src/cong-primary-window.c:670
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s (modificat) - %s"
+
+#: src/cong-util.c:243 src/plugin-docbook.c:1006
+msgid "Printing XSL Formatting Objects"
+msgstr "S'estàn escrivint els objectes de formateig XSL"
+
+#: src/cong-util.c:287
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "Això serà finalment el resultat de cong_util_print_xslfo"
+
+#: src/cursor.c:99
+#, c-format
+msgid "Split %s tag"
+msgstr "Divideix l'etiqueta %s"
+
+#: src/plugin-cleanup-source.c:377 src/plugin-cleanup-source.c:411
+msgid "Cleanup XML Source"
+msgstr "Neteja font XML"
+
+#: src/plugin-cleanup-source.c:412 src/plugin-cleanup-source.c:415
+#: src/plugin-cleanup-source.c:416
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr ""
+"Neteja la font XML del document, així serà més fàcil de llegir en un editor de codi."
+
+#: src/plugin-cleanup-source.c:414
+msgid "_Clean the XML Source"
+msgstr "_Neteja la font XML"
+
+#: src/plugin-convert-case.c:118
+msgid "Export as \"lower case\" XML"
+msgstr "Exporta com a fitxer XML en minúscules"
+
+#: src/plugin-convert-case.c:119
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+"Exporta com a fitxer XML, convertint en minúscules totes les etiquetes "
+"i atributs en el document. Útil quan es treballa amb documents SGML."
+
+#: src/plugin-docbook.c:191
+msgid "Text of the article goes here"
+msgstr "El text de l'article va aquí"
+
+#: src/plugin-docbook.c:201
+msgid "Untitled Article"
+msgstr "Article sense títol"
+
+#: src/plugin-docbook.c:244
+msgid "Text of the first chapter goes here"
+msgstr "El text del primer capítol va aquí"
+
+#: src/plugin-docbook.c:254
+msgid "Untitled Book"
+msgstr "Llibre sense nom"
+
+#: src/plugin-docbook.c:293
+msgid "Untitled Set of Documents"
+msgstr "Conjunt de documents sense nom"
+
+#: src/plugin-docbook.c:928
+msgid "Exporting PDF file"
+msgstr "S'està exportant el fitxer PDF"
+
+#: src/plugin-docbook.c:932 src/plugin-docbook.c:1004
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr "S'està transformant DocBook en objectes de formateig XSL"
+
+#: src/plugin-docbook.c:934
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "S'estan disposant els objectes de formateig XSL com a fitxer PDF"
+
+#: src/plugin-docbook.c:947 src/plugin-fo.c:74
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "S'estan convertint objectes de formateig XSL a PDF"
+
+#: src/plugin-docbook.c:1000
+msgid "Printing DocBook file"
+msgstr "S'està imprimint fitxer DocBook"
+
+#: src/plugin-docbook.c:1302
+msgid "DocBook Article"
+msgstr "Article DocBook"
+
+#: src/plugin-docbook.c:1303
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr ""
+"Crea un article, potser per a un lloc web o una revista, fen servir el "
+"format \"DocBook\""
+
+#: src/plugin-docbook.c:1310
+msgid "DocBook Book"
+msgstr "Llibre DocBook"
+
+#: src/plugin-docbook.c:1311
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "Crea un llibre, fent servir el format \"DocBook\""
+
+#: src/plugin-docbook.c:1318
+msgid "DocBook Set"
+msgstr "Conjunt DocBook"
+
+#: src/plugin-docbook.c:1319
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "Crea un conjunt de llibres relacionats, fent servir el format \"DocBook\""
+
+#: src/plugin-docbook.c:1327
+msgid "Import text as a DocBook article"
+msgstr "Importa text com a article DocBook"
+
+#: src/plugin-docbook.c:1328
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr "Importa un fitxer de text sense format a format \"DocBook\", com a article."
+
+#: src/plugin-docbook.c:1345
+msgid "Export DocBook as HTML"
+msgstr "Exporta DocBook a HTML"
+
+#: src/plugin-docbook.c:1346
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr ""
+"Fes servir els fulls d'estil DocBook de Norman Walsh per crear una pàgina web "
+"des d'aquest fitxer DocBook" 
+
+#: src/plugin-docbook.c:1353
+msgid "Export DocBook as PDF"
+msgstr "Exporta DocBook com a PDF"
+
+#: src/plugin-docbook.c:1354
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr ""
+"Fes servir els fulls d'estil DocBook de Norman Walsh per crear un PDF "
+"des d'aquest fitxer DocBook" 
+
+#: src/plugin-docbook.c:1361
+msgid "Export DocBook as XSL:FO"
+msgstr "Exporta DocBook com a XSL:FO"
+
+#: src/plugin-docbook.c:1362
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+"Fes servir els fulls d'estil DocBook de Norman Walsh per crear un fitxer XSL:FO "
+"des d'aquest fitxer DocBook que pugui ser imprès o convertit en PDF més endavant" 
+
+#: src/plugin-docbook.c:1370
+msgid "Print DocBook"
+msgstr "Imprimeix DocBook"
+
+#: src/plugin-docbook.c:1379
+msgid "Generic DocBook property dialog"
+msgstr "Diàleg genèric de propietats DocBook"
+
+#: src/plugin-docbook.c:1380
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr "Proporciona un diàleg de propietats per a la majora de nodes DocBook"
+
+#: src/plugin-docbook.c:1386
+msgid "<orderedlist> property dialog"
+msgstr "Diàleg de propietats d'<orderedlist>"
+
+#: src/plugin-docbook.c:1387
+msgid "Provides a Properties dialog for the <orderedlist> tag"
+msgstr "Proporciona un diàleg de propietats per a l'etiqueta <orderedlist>"
+
+#: src/plugin-docbook.c:1393
+msgid "<ulink> property dialog"
+msgstr "Diàleg de propietats d'<ulink>"
+
+#: src/plugin-docbook.c:1394
+msgid "Provides a Properties dialog for the <ulink> tag"
+msgstr "Proporciona un diàleg de propietats per a l'etiqueta <ulink>"
+
+#: src/plugin-docbook.c:1401
+msgid "Promote Section"
+msgstr "Mou amunt una secció"
+
+#: src/plugin-docbook.c:1402
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr ""
+"Reubica una secció DocBook a una organització de nivell superior dins del document"
+
+#: src/plugin-docbook.c:1404
+msgid "Promote"
+msgstr "Mou amunt"
+
+#: src/plugin-docbook.c:1405 src/plugin-docbook.c:1406
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr ""
+"Reubica la secció a una organització de nivell superior dins del document"
+
+#: src/plugin-docbook.c:1412
+msgid "Demote Section"
+msgstr "Mou abaix una secció"
+
+#: src/plugin-docbook.c:1413
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr ""
+"Reubica una secció DocBook a una organització de nivell inferior dins del document"
+
+#: src/plugin-docbook.c:1415
+msgid "Demote"
+msgstr "Reubica"
+
+#: src/plugin-docbook.c:1416 src/plugin-docbook.c:1417
+msgid "Demote the section to a lower organisational level within the document"
+msgstr "Reubica una secció a una organització de nivell inferior dins del document"
+
+#: src/plugin-dtd.c:81
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "Tipus de document generat automàticament basat en %s"
+
+#: src/plugin-dtd.c:82
+#, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr ""
+"Aquesta especificació de visualització Conglomerate ha estat generat automàticament "
+"a partir de %s"
+
+#: src/plugin-dtd.c:157
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "Converteix un DTD en una especificació de visualització de Conglomerate"
+
+#: src/plugin-dtd.c:158
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "Importa un fitxer DTD per convertir-lo en un fitxer d'especificació de "
+"visualització de Conglomerate."
+
+#: src/plugin-dtd.c:165
+msgid "Convert DTD into a Relax NG schema"
+msgstr "Converteix un DTD en un esquema RELAX NG"
+
+#: src/plugin-dtd.c:166
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "Importa un fitxer DTD per convertir-lo en un esquema RELAX NG."
+
+#: src/plugin-dtd.c:173
+msgid "Convert DTD into W3C XML Schema"
+msgstr "Converteix un DTD en un esquema W3C XML"
+
+#: src/plugin-dtd.c:174
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "Importa un fitxer DTD per convertir-lo en un esquema W3C XML."
+
+#: src/plugin-dtd.c:181
+msgid "Convert DTD into a Schematron file"
+msgstr "Converteix un DTD en un fitxer Schematron"
+
+#: src/plugin-dtd.c:182
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "Importa un fitxer DTD per convertir-lo en un esquema Schematron."
+
+#: src/plugin-dtd.c:189
+msgid "Convert DTD into an Examplotron file"
+msgstr "Converteix un DTD en un fitxer Examplotron"
+
+#: src/plugin-dtd.c:190
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "Importa un fitxer DTD per convertir-lo en un esquema Examplotron."
+
+#: src/plugin-fo.c:101
+msgid "Export XSL-FO as PDF"
+msgstr "Exporta XSL-FO com a PDF"
+
+#: src/plugin-fo.c:102
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "Genera un fitxer PDF des d'informació XSL:FO"
+
+#: src/plugin-fo.c:110
+msgid "Print XSL:FO"
+msgstr "Imprimeix XSL:FO"
+
+#: src/plugin-lists.c:61
+msgid "List Member Element"
+msgstr "Element membre d'una llista"
+
+#: src/plugin-lists.c:62
+msgid "An editor node for visualising a member of a list"
+msgstr "Un node editor per visualitzar un membre d'una llista"
+
+#: src/plugin-paragraph.c:61
+msgid "Paragraph"
+msgstr "Paràgraf"
+
+#: src/plugin-paragraph.c:62
+msgid "An editor node for visualising a paragraph"
+msgstr "Un node editor per visualitzar un paràgraf"
+
+#: src/plugin-save-dispspec.c:129
+msgid "Dump Display Spec"
+msgstr "Transfereix especificació de visualització"
+
+#: src/plugin-save-dispspec.c:130 src/plugin-save-dispspec.c:133
+#: src/plugin-save-dispspec.c:134
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+"Escriu l'especificació de visualització actual en un fitxer d'especificació de "
+"visualització xml. Aquest fitxer pot ser personalitzat per l'usuari del Conglomerate"
+
+#: src/plugin-save-dispspec.c:132
+msgid "_Dump Display Spec"
+msgstr "_Transfereix especificació de visualització"
+
+#: src/plugin-save-dispspec.c:140
+msgid "Edit Display Spec"
+msgstr "Edita especificació de visualització"
+
+#: src/plugin-save-dispspec.c:141 src/plugin-save-dispspec.c:144
+#: src/plugin-save-dispspec.c:145
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "Obre l'especificació de visualització actual com a document conglomerate."
+
+#: src/plugin-save-dispspec.c:143
+msgid "_Edit Display Spec"
+msgstr "_Edita especificació de visualització"
+
+#: src/plugin-sgml.c:35
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "Conglomerate no ha pogut importat el fitxer \"%s\""
+
+#: src/plugin-sgml.c:110
+msgid "Attempting to run the sgml2xml tool"
+msgstr "S'està intentant executar l'eina de transformació de sgml a xml"
+
+#: src/plugin-sgml.c:164
+msgid "Importing SGML"
+msgstr "S'està important SGML"
+
+#: src/plugin-sgml.c:175
+msgid "Import SGML"
+msgstr "Importa SGML"
+
+#: src/plugin-sgml.c:176
+msgid "Import an SGML file, converting to XML."
+msgstr "Importa un fitxer SGML per convertir-lo en XML."
+
+#: src/plugin-tests.c:55
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+"Això és un control de calendari; és un contenidor d'objectes i en el futur "
+"serà reemplaçat per algunes opcions més útils"
+
+#: src/plugin-tests.c:133 src/plugin-tests.c:212
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr "Caràcters Unicode 0x%04X-0x%04X"
+
+#: src/plugin-tests.c:331
+msgid "Unicode Character Reference"
+msgstr "Referència de caràcter Unicode"
+
+#: src/plugin-tests.c:332
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr ""
+"Crea una taula on es llista una part del conjunt de caràcters Unicode com a "
+"article DocBook"
+
+#: src/plugin-validate.c:96
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "No es pot comprovar la validesa del document \"%s\"."
+
+#: src/plugin-validate.c:103
+msgid ""
+"In a future version of Conglomerate we may have a feature that lets you "
+"attach a document type to a document."
+msgstr ""
+"En una propera versió de Conglomerate hi haurà la possibilitat d'adjuntar "
+"un tipus de document a un document."
+
+#: src/plugin-validate.c:123
+#, c-format
+msgid "The document \"%s\" is not valid."
+msgstr "El document \"%s\" no és vàlid."
+
+#: src/plugin-validate.c:130
+msgid "Click on the \"Details\" button for more information."
+msgstr "Per a més informació, feu clic en el botó \"Detalls\"."
+
+#: src/plugin-validate.c:131 src/plugin-website.c:477
+msgid "_Details"
+msgstr "_Detalls"
+
+#: src/plugin-validate.c:145
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr "El document \"%s\" és vàlid."
+
+#: src/plugin-validate.c:165
+msgid "Validate Document"
+msgstr "Valida el document"
+
+#: src/plugin-validate.c:166 src/plugin-validate.c:169
+#: src/plugin-validate.c:170
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+"Comprova que el document és \"vàlid\", és a dir, que compleix un conjunt de "
+"regles donades pel tipus de document o esquema corresponent"
+
+#: src/plugin-validate.c:168
+msgid "_Validate Document"
+msgstr "_Valida document"
+
+#: src/plugin-website.c:462
+msgid "Generating website"
+msgstr "S'està generant el lloc web"
+
+#: src/plugin-website.c:469
+msgid "Finished generating website."
+msgstr "S'ha acabat de generar el lloc web."
+
+#: src/plugin-website.c:474
+msgid "Conglomerate did not finish generating the website"
+msgstr "Conglomerate no ha acabat de generar el lloc web"
+
+#: src/plugin-website.c:475
+msgid "One of the stages reported an error."
+msgstr "Una de les etapes ha notificat un error."
+
+#: src/plugin-website.c:476
+msgid "Click on the \"Details\" button for more information"
+msgstr "Per a més informació, feu clic en el botó \"Detalls\""
+
+#: src/plugin-website.c:494
+msgid "Generate website"
+msgstr "Genera lloc web"
+
+#: src/plugin-website.c:495 src/plugin-website.c:498 src/plugin-website.c:499
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "Genera una col·lecció de pàgines HTML a partir de la descripció XML del lloc web"
+
+#: src/plugin-website.c:497
+msgid "Generate _Website"
+msgstr "Genera lloc _web"
+
+#: src/plugin-xsl.c:316
+msgid "XSL Template Element"
+msgstr "Element de plantilla XSL"
+
+#: src/plugin-xsl.c:317
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "Un element per visualitzar plantilles de regles en un full d'estil XSL"
+
+#: src/popup.c:124
+msgid "(no description available)"
+msgstr "(cap descripció disponible)"
+
+#: src/popup.c:177
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "Apliqueu etiqueta span: %s"
+
+#: src/popup.c:258
+msgid "Remove Span Tag"
+msgstr "Esborra etiqueta span"
+
+#: src/popup.c:357
+msgid "Remove span tag"
+msgstr "Esborra etiqueta span"
+
+#: src/popup.c:917
+msgid "Delete this item"
+msgstr "Esborra aquest element"
+
+#: src/popup.c:927
+msgid "Add text node after"
+msgstr "Afegeix desprès el node de text"
+
+#: src/popup.c:935
+msgid "Add text node before"
+msgstr "Afegeix abans el node de text"
+
+#: src/popup.c:946
+msgid "Set the text"
+msgstr "Posa el text"
+
+#: src/popup.c:977
+msgid "Paste into"
+msgstr "Enganxa en el seu lloc"
+
+#: src/popup.c:985
+msgid "Paste before"
+msgstr "Enganxa abans"
+
+#: src/popup.c:993
+msgid "Paste after"
+msgstr "Enganxa desprès"
+
+#: src/popup.c:1010
+msgid "New sub-element"
+msgstr "Nou subelement"
+
+#: src/popup.c:1035
+msgid "New sibling"
+msgstr "Nou germà"
+
+#: src/tree.c:41
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "Insereix germà: %s"
+
+#: src/tree.c:89
+#, c-format
+msgid "Insert child: %s"
+msgstr "Insereix fill: %s"
+
+#: src/xmldata.c:424
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr ""
+"L'element \"%s\" necessita un fill que sigui vàlid. Esculliu un dels següents "
+"tipus de fills."
+
+#. select a dialog element
+#: src/xmldata.c:428
+msgid "Required Children Choices"
+msgstr "Eleccions de fills necessàries"
+
+#: src/xmledit.c:233
+msgid "Paste Under"
+msgstr "Enganxa a sota"
+
+#: src/xmledit.c:276
+msgid "Paste Before"
+msgstr "Enganxa abans"
+
+#: src/xmledit.c:318
+msgid "Paste After"
+msgstr "Enganxa desprès"
+
+#: src/xmledit.c:357
+msgid "Source View - Conglomerate"
+msgstr "Visualització de codi font - Conglomerate"
