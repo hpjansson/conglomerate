@@ -36,6 +36,8 @@ conglomerate_SOURCES =      \
   cong-editor-area-structural-tag.h \
   cong-editor-area-underline.h \
   cong-editor-area-unknown-tag.h   \
+  cong-editor-child-policy.h \
+  cong-editor-child-policy-flow-holder.h \
   cong-editor-node.h        \
   cong-editor-node-document.h \
   cong-editor-node-element.h \
@@ -88,6 +90,8 @@ conglomerate_SOURCES =      \
   cong-editor-area-structural-tag.c \
   cong-editor-area-underline.c \
   cong-editor-area-unknown-tag.c   \
+  cong-editor-child-policy.c \
+  cong-editor-child-policy-flow-holder.c \
   cong-editor-node.c        \
   cong-editor-node-document.c \
   cong-editor-node-element.c \
