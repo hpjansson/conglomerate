@@ -580,6 +580,365 @@ cong_util_get_tag_string_for_node_escaped (CongNodePtr node)
 	return result;
 }
 
+static void
+make_dtd_attribute_editor (CongDocument *doc, 
+			   CongNodePtr node,
+			   xmlElementPtr xml_element,
+			   CongDialogContent *dialog_content)
+{
+	xmlAttributePtr attr;
+	
+	CongDialogCategory *category;
+	gchar *category_name;
+	
+	GtkWidget *scrolled_window;
+	GtkWidget *vbox_attributes;
+	GtkSizeGroup *size_group;								
+	
+	{
+		gchar *tag_name = cong_util_get_tag_string_for_node_escaped (node);
+		
+		category_name = g_strdup_printf ( _("Attributes for <tt>%s</tt> elements"),
+						  tag_name);
+		g_free (tag_name);
+	}
+	
+	category = cong_dialog_content_add_category (dialog_content, 
+						     category_name);
+	g_free (category_name);
+	
+	
+	scrolled_window = gtk_scrolled_window_new (NULL,
+						   NULL);
+	
+	gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW(scrolled_window),
+					 GTK_POLICY_NEVER,
+					 GTK_POLICY_AUTOMATIC);
+	
+	
+	cong_dialog_category_add_selflabelled_field (category, 
+						     scrolled_window,
+						     TRUE);
+	
+	vbox_attributes = gtk_vbox_new (FALSE,
+					6);
+	
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(scrolled_window),
+					       vbox_attributes);
+	
+	size_group = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	
+	for (attr=xml_element->attributes; attr; attr=attr->nexth) {
+		GtkWidget *hbox;
+		GtkWidget *label;
+		GtkWidget *attr_editor = cong_attribute_editor_new (doc,
+								    node,
+								    attr);
+		
+		gtk_widget_show (attr_editor);
+		
+		hbox = gtk_hbox_new(FALSE, 6);
+		label = gtk_label_new(attr->name);
+		gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
+		gtk_size_group_add_widget(size_group, label);
+		gtk_container_add(GTK_CONTAINER(hbox), label);
+		gtk_container_add(GTK_CONTAINER(hbox), attr_editor);
+		gtk_widget_show (label);
+		gtk_widget_show (hbox);
+		gtk_box_pack_start (GTK_BOX(vbox_attributes),
+				    hbox,
+				    FALSE, 
+				    TRUE,
+				    0);
+		
+	}
+	
+	gtk_widget_show (vbox_attributes);
+	gtk_widget_show (scrolled_window);
+}
+
+enum
+{
+	CONTENT_COLUMN,
+	N_COLUMNS
+};
+
+static void
+set_node_text (GtkTreeStore *store,
+	       GtkTreeIter *iter,
+	       const gchar *text)
+{
+	gtk_tree_store_set (store, 
+			    iter,
+			    CONTENT_COLUMN, text,
+			    -1);
+}
+	  
+static void
+set_node_text_for_element_by_name (GtkTreeStore *store,
+				   GtkTreeIter *iter,
+				   const gchar *name)  /* FIXME: namespace? */
+{
+	gchar *element_name;
+	
+	element_name = g_strdup_printf ("<%s>", name);
+	
+	set_node_text (store,
+		       iter,
+		       element_name);
+
+	g_free (element_name);
+}
+
+static void
+populate_recursive (GtkTreeStore *store,
+		    GtkTreeIter *iter, 
+		    xmlElementContentPtr content);
+
+static void
+add_content_for_type (GtkTreeStore *store,
+		      GtkTreeIter *parent_iter, 
+		      xmlElementContentPtr content)
+{
+	g_assert (content);
+
+	switch (content->type) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_PCDATA:
+		{
+			GtkTreeIter iter_new;
+
+			gtk_tree_store_append (store, &iter_new, parent_iter);
+
+			set_node_text (store,
+				       &iter_new,
+				       _("Text"));
+		}
+		break;
+	case XML_ELEMENT_CONTENT_ELEMENT:
+		{
+			GtkTreeIter iter_new;
+
+			gtk_tree_store_append (store, &iter_new, parent_iter);
+
+			set_node_text_for_element_by_name (store,
+							   &iter_new,
+							   content->name);
+		}
+		break;
+	case XML_ELEMENT_CONTENT_SEQ:
+		/* Do both c1 and c2 in sequence: */
+		populate_recursive (store,
+				    parent_iter,
+				    content->c1);
+		populate_recursive (store,
+				    parent_iter,
+				    content->c2);
+		break;
+	case XML_ELEMENT_CONTENT_OR:
+		{
+			GtkTreeIter iter_wrap;
+
+			/* The naive implementation is to add a choice node, and recurse.
+			   But if we have something like ( tag-a | tag-b | tag-c | ... | tag-z) in the DTD, we get a tree of ( choice tag-a (choice tag-b (choice tag-c ( ... choice tag-y tag-z))))
+			   which creates a grim-looking tree.
+			   
+			   So if we are a CONTENT_ONCE and our parent content is CONTENT_OR, then we can merge into the parent choice; it is associative and hence bracketing should make no difference...
+			*/
+			if (content->ocur==XML_ELEMENT_CONTENT_ONCE) {
+				if (content->parent) {
+					if (content->parent->type==XML_ELEMENT_CONTENT_OR) {
+						/* optimised case */
+						populate_recursive (store,
+								    parent_iter,
+								    content->c1);
+						populate_recursive (store,
+								    parent_iter,
+								    content->c2);						
+						break;
+					}
+				}
+			}
+
+			gtk_tree_store_append (store, &iter_wrap, parent_iter);
+
+			set_node_text (store,
+				       &iter_wrap,
+				       _("Choice"));
+			populate_recursive (store,
+					    &iter_wrap,
+					    content->c1);
+			populate_recursive (store,
+					    &iter_wrap,
+					    content->c2);						
+		}
+		break;
+	}
+}
+
+static void
+populate_recursive (GtkTreeStore *store,
+		    GtkTreeIter *parent_iter, 
+		    xmlElementContentPtr content)
+{
+	g_assert (content);
+
+	switch (content->ocur) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_ONCE:
+		add_content_for_type (store,
+				      parent_iter,
+				      content);
+		break;
+
+	case XML_ELEMENT_CONTENT_OPT:
+		{
+			GtkTreeIter iter_wrap;
+
+			gtk_tree_store_append (store, &iter_wrap, parent_iter);
+
+			set_node_text (store,
+				       &iter_wrap,
+				       _("Optional"));
+			
+			add_content_for_type (store,
+					      &iter_wrap,
+					      content);
+		}
+		break;
+
+	case XML_ELEMENT_CONTENT_MULT:
+		{
+			GtkTreeIter iter_wrap;
+
+			gtk_tree_store_append (store, &iter_wrap, parent_iter);
+
+			set_node_text (store,
+				       &iter_wrap,
+				       _("Zero or more"));
+			
+			add_content_for_type (store,
+					      &iter_wrap,
+					      content);
+		}
+		break;
+
+	case XML_ELEMENT_CONTENT_PLUS:
+		{
+			GtkTreeIter iter_wrap;
+
+			gtk_tree_store_append (store, &iter_wrap, parent_iter);
+
+			set_node_text (store,
+				       &iter_wrap,
+				       _("One or more"));
+			
+			add_content_for_type (store,
+					      &iter_wrap,
+					      content);
+		}
+		break;
+	}
+
+}
+
+
+GtkTreeModel*
+make_tree_model_for_element_model (xmlElementPtr xml_element)
+{  
+	GtkTreeStore *store;
+	GtkTreeIter root_iter;
+
+	g_assert (xml_element);  
+
+	store = gtk_tree_store_new (N_COLUMNS,
+				    G_TYPE_STRING);
+
+	gtk_tree_store_append (store, &root_iter, NULL);  /* Acquire a top-level iterator */
+
+	set_node_text_for_element_by_name (store,
+					   &root_iter,
+					   xml_element->name);  /* FIXME: namespace? */
+
+	if (xml_element->content) {
+		populate_recursive (store, 
+				    &root_iter, 
+				    xml_element->content);
+	}
+
+	return GTK_TREE_MODEL (store);
+}
+
+GtkWidget*
+make_widget_for_element_model (xmlElementPtr xml_element)
+{
+	GtkWidget *tree;
+	GtkTreeModel *tree_model;
+	GtkTreeViewColumn *column;
+	GtkCellRenderer *renderer;
+
+	g_assert (xml_element);
+
+	tree_model = make_tree_model_for_element_model (xml_element);
+	
+	tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (tree_model));
+	g_object_unref (G_OBJECT (tree_model));
+
+	renderer = gtk_cell_renderer_text_new ();
+
+	/* To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun */
+	column = gtk_tree_view_column_new_with_attributes (_("Valid Content"), renderer,
+							   "text", CONTENT_COLUMN,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (tree));
+
+	return tree;
+}
+
+static void
+make_dtd_content_model (CongDocument *doc, 
+			CongNodePtr node,
+			xmlElementPtr xml_element,
+			CongDialogContent *dialog_content)
+{
+	CongDialogCategory *category;
+	gchar *category_name;
+	gchar *tag_name;
+	GtkWidget *scrolled_window;
+	GtkWidget *widget;
+
+	tag_name = cong_util_get_tag_string_for_node_escaped (node);
+
+	/* To translators: "content" is a noun; this is XML jargon */
+	category_name = g_strdup_printf ( _("Content model for <tt>%s</tt> elements"),
+					  tag_name);
+	g_free (tag_name);
+
+	category = cong_dialog_content_add_category (dialog_content, 
+						     category_name);
+	g_free (category_name);
+
+	scrolled_window = gtk_scrolled_window_new (NULL,
+						   NULL);
+	
+	gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW(scrolled_window),
+					 GTK_POLICY_NEVER,
+					 GTK_POLICY_AUTOMATIC);
+	gtk_widget_show (scrolled_window);	
+
+	widget = make_widget_for_element_model (xml_element);
+	gtk_widget_show (widget);
+
+	gtk_container_add (GTK_CONTAINER (scrolled_window),
+			   widget);
+
+	cong_dialog_category_add_selflabelled_field (category,
+						     scrolled_window,
+						     TRUE);
+}
+
 GtkWidget*
 cong_node_properties_dtd_new (CongDocument *doc, 
 			      CongNodePtr node,
@@ -588,85 +947,25 @@ cong_node_properties_dtd_new (CongDocument *doc,
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
 		xmlElementPtr xml_element;
 		
-		xml_element = cong_document_get_dtd_element(doc,
-							    node);
+		xml_element = cong_document_get_dtd_element (doc,
+							     node);
 		if (xml_element) {
+			CongDialogContent *dialog_content;
+			dialog_content = cong_dialog_content_new (within_notebook);
+
 			if (xml_element->attributes!=NULL) {
-				xmlAttributePtr attr;
-				
-				CongDialogContent *dialog_content;
-				CongDialogCategory *category;
-				gchar *category_name;
-				
-				GtkWidget *scrolled_window;
-				GtkWidget *vbox_attributes;
-				GtkSizeGroup *size_group;								
-					
-				dialog_content = cong_dialog_content_new (within_notebook);
-				
-				{
-					gchar *tag_name = cong_util_get_tag_string_for_node_escaped (node);
-					
-					category_name = g_strdup_printf ( _("Attributes for <tt>%s</tt> tags"),
-									  tag_name);
-					g_free (tag_name);
-				}
-
-				category = cong_dialog_content_add_category (dialog_content, 
-									     category_name);
-				g_free (category_name);
-
-
-				scrolled_window = gtk_scrolled_window_new (NULL,
-									   NULL);
-				
-				gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW(scrolled_window),
-								 GTK_POLICY_NEVER,
-								 GTK_POLICY_AUTOMATIC);
-
-				
-				cong_dialog_category_add_selflabelled_field (category, 
-									     scrolled_window,
-									     TRUE);
-
-				vbox_attributes = gtk_vbox_new (FALSE,
-								6);
-				
-				gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(scrolled_window),
-								       vbox_attributes);
-				
-				size_group = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-				
-				for (attr=xml_element->attributes; attr; attr=attr->nexth) {
-					GtkWidget *hbox;
-					GtkWidget *label;
-					GtkWidget *attr_editor = cong_attribute_editor_new (doc,
-											    node,
-											    attr);
-					
-					gtk_widget_show (attr_editor);
-					
-					hbox = gtk_hbox_new(FALSE, 6);
-					label = gtk_label_new(attr->name);
-					gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
-					gtk_size_group_add_widget(size_group, label);
-					gtk_container_add(GTK_CONTAINER(hbox), label);
-					gtk_container_add(GTK_CONTAINER(hbox), attr_editor);
-					gtk_widget_show (label);
-					gtk_widget_show (hbox);
-					gtk_box_pack_start (GTK_BOX(vbox_attributes),
-							    hbox,
-							    FALSE, 
-							    TRUE,
-							    0);
-					
-				}
-				
-				gtk_widget_show (vbox_attributes);
-				gtk_widget_show (scrolled_window);
-				
-				return cong_dialog_content_get_widget(dialog_content);
+				make_dtd_attribute_editor (doc,
+							   node,
+							   xml_element,
+							   dialog_content);				
 			}
+
+			make_dtd_content_model (doc,
+						node,
+						xml_element,
+						dialog_content);
+
+			return cong_dialog_content_get_widget (dialog_content);
 		}
 	}
 

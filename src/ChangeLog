@@ -1,3 +1,9 @@
+2004-01-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-node-properties-dialog.c
+
+	Added a tree-based content model view to the DTD tab
+
 2004-01-19  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* plugin-random.c
