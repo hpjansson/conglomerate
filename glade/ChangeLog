@@ -1,3 +1,17 @@
+2004-09-27  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* docbook-common-properties.glade:
+
+	Changed "OK" to "Close" since dialog is instant-apply
+
+	* docbook-ulink-properties.glade: 
+
+	ditto
+
+	* docbook-orderedlist-properties.glade: 
+
+	ditto
+
 2004-08-19  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-preferences.glade: 
