@@ -874,7 +874,16 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 			}
 
 			/* Render the cursor under the text: */
+			#if 0
+			g_message("rendering cursor");
+			#endif
+						
 			if (got_cursor_byte_offset) {
+				
+				#if 0
+				g_message("got cursor byte offset");
+				#endif
+
 				if (cursor_byte_offset >= line->start_index) {
 					if (cursor_byte_offset < line->start_index+line->length) {
 						int cursor_x;
@@ -885,7 +894,7 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 									     &cursor_x);	
 						cursor_x /= PANGO_SCALE;
 						cursor_x += offset_x;
-						
+
 						/* Render it: */
 						gdk_draw_line(GDK_DRAWABLE(w->window), 
 							      cursor->gc, 
@@ -975,13 +984,10 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	selection = cong_document_get_selection(doc);
 	
 	if (event->button == 1) {
-#if 0
-		cursor->w = widget;
-		gtk_widget_grab_focus(widget);
-		gtk_widget_grab_default(widget);
-#endif
-
 		struct CongHitTest hit_test;
+
+		gtk_widget_grab_focus(GTK_WIDGET(editor_widget));
+		gtk_widget_grab_default(GTK_WIDGET(editor_widget));
 
 		hit_test.window_coord.x = event->x;
 		hit_test.window_coord.y = event->y;

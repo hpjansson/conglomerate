@@ -41,24 +41,29 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 #endif
 
 	new_element = cong_node_new_element(cong_dispspec_element_tagname(element));
-
+#if USE_CONG_EDITOR_WIDGET
+	if (!cong_selection_reparent_all(selection, doc, new_element)) {
+		cong_node_free(new_element);
+	}
+#else
 	g_assert(cursor->xed);
 
 	if (selection->loc0.tt_loc == cursor->xed->x)
 	{
-		r = cong_selection_reparent_all(selection, new_element);
+		r = cong_selection_reparent_all(selection, doc, new_element);
 		if (r) {
 			cursor->xed->x = r;
 		} else {
 			cong_node_free(new_element);
 		}
 	}
-	else if (!cong_selection_reparent_all(selection, new_element)) {
+	else if (!cong_selection_reparent_all(selection, doc, new_element)) {
 		cong_node_free(new_element);
 	}
 
 	xed_redraw(cursor->xed);
 	cursor->xed = NULL;
+#endif
 
 	return(TRUE);
 }
@@ -134,7 +139,9 @@ static void editor_popup_callback_tag_remove_inner(GtkWidget *widget, CongDocume
 	/* GREP FOR MVC */
 
 	if (n0) cong_document_tag_remove(doc, n0);
+#if !USE_CONG_EDITOR_WIDGET
 	if (cursor->xed) xed_redraw(cursor->xed);
+#endif
 }
 
 static void editor_popup_callback_tag_remove_outer(GtkWidget *widget, CongDocument *doc)
@@ -151,7 +158,9 @@ static void editor_popup_callback_tag_remove_outer(GtkWidget *widget, CongDocume
 	/* GREP FOR MVC */
 
 	if (n0) cong_document_tag_remove(doc, n0);
+#if !USE_CONG_EDITOR_WIDGET
 	if (cursor->xed) xed_redraw(cursor->xed);
+#endif
 }
 
 static gint editor_popup_callback_cut(GtkWidget *widget, CongDocument *doc)

@@ -80,9 +80,13 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	cong_selection_init(&doc->selection);
 
 	doc->curs.set = 0;
+#if !USE_CONG_EDITOR_WIDGET
 	doc->curs.xed = 0;
+#endif
 	doc->curs.w = 0;
+#if !USE_CONG_EDITOR_WIDGET
 	doc->selection.xed = 0;
+#endif
 
 #if 1
 	cong_location_nullify(&doc->selection.loc0);
@@ -586,7 +590,7 @@ void cong_document_on_cursor_change(CongDocument *doc)
 	g_return_if_fail(doc);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_text\n");
+	g_message("cong_document_node_on_cursor_change\n");
 	#endif
 
 	/* Notify listeners: */

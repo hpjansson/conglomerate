@@ -13,7 +13,9 @@ void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs)
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
 
+#if !USE_CONG_EDITOR_WIDGET
 	selection->xed = curs->xed;
+#endif
 	selection->x0 = selection->x1 = curs->x;
 	selection->y0 = selection->y1 = curs->y;
 
@@ -33,6 +35,7 @@ void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs)
 }
 
 
+#if !USE_CONG_EDITOR_WIDGET
 void cong_selection_draw(CongSelection *selection, CongCursor *curs)
 {
 	int x0, y0, x1, y1;
@@ -143,6 +146,7 @@ void cong_selection_draw(CongSelection *selection, CongCursor *curs)
 	printf("\n");
 #endif
 }
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 /* Splits a data node in 3 and returns pointer to the middle one */
 CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1)
@@ -234,13 +238,13 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
   The selection is extracted (splitting text nodes at the front and rear if necessary), and then reparented below the second
   node, which is inserted into the position formerly occupied by the selection.
  */
-CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
+CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p)
 {
 	CongLocation loc0, loc1;
 	CongNodePtr n0, n1, n2;
-	CongDocument *doc;
 
 	g_return_val_if_fail(selection,NULL);
+	g_return_val_if_fail(doc,NULL);
 	g_return_val_if_fail(p,NULL);
 
 	/* Validate selection */
@@ -248,9 +252,6 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 	g_return_val_if_fail( cong_location_exists(&selection->loc1), NULL );
 	g_return_val_if_fail( cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1), NULL);
 	/* both must be children of the same parent to maintain proper nesting */
-
-	g_assert(selection->xed);
-	doc = selection->xed->doc;
 
 	CONG_NODE_SELF_TEST(p);
 

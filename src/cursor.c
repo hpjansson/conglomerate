@@ -64,7 +64,7 @@ void print_lines(TTREE *l)
 }
 #endif
 
-
+#if !USE_CONG_EDITOR_WIDGET
 void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int y)
 {
 	struct pos *pos0, *pos1;
@@ -99,7 +99,7 @@ void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int 
 
 	cong_cursor_on(curs);
 }
-
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 void cong_cursor_init(CongCursor *curs, CongDocument *doc)
 {
@@ -139,7 +139,11 @@ gint cong_cursor_blink(gpointer data)
 {
 	CongCursor *curs = data;
 
+	g_message("cong_cursor_blink");
+
+#if !USE_CONG_EDITOR_WIDGET
 	if (!curs->w) return(TRUE);
+#endif
 
 	if (curs->on)
 	{
@@ -165,8 +169,7 @@ gint cong_cursor_data_insert(CongCursor *curs, char *s)
 	g_return_val_if_fail(curs, 0);
 	g_return_val_if_fail(s, 0);
 
-	g_assert(curs->xed);
-	doc = curs->xed->doc;
+	doc = curs->doc;
 
 	len = strlen(s);
 
@@ -198,15 +201,16 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	CongDocument *doc;
 
 	g_assert(curs!=NULL);
-	
+
+#if !USE_CONG_EDITOR_WIDGET	
 	if (!curs->xed) return(0);
+#endif
 
 	if (!cong_location_exists(&curs->location)) return(0);
 	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
 
-	g_assert(curs->xed);
-	ds = curs->xed->displayspec;
-	doc = curs->xed->doc;
+	doc = curs->doc;
+	ds = cong_document_get_dispspec(doc);
 
 #if 0
 	para = cong_dispspec_get_paragraph(ds);
@@ -269,7 +273,10 @@ void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc)
 
 	g_assert(curs!=NULL);
 	
+
+#if !USE_CONG_EDITOR_WIDGET
 	if (!curs->xed) return;
+#endif
 
 	dispspec = cong_document_get_dispspec(doc);
 
@@ -338,7 +345,9 @@ void cong_cursor_next_char(CongCursor *curs, CongDocument *doc)
 
 	g_assert(curs!=NULL);
 	
+#if !USE_CONG_EDITOR_WIDGET
 	if (!curs->xed) return;
+#endif
 
 	dispspec = cong_document_get_dispspec(doc);
 
@@ -397,7 +406,7 @@ void cong_cursor_next_char(CongCursor *curs, CongDocument *doc)
 	}
 }
 
-
+#if !USE_CONG_EDITOR_WIDGET
 void cong_cursor_prev_line(CongCursor *curs, CongSpanEditor *xed)
 {
 	struct pos *pos;
@@ -449,7 +458,7 @@ void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed)
 #endif
 	free(pos);
 }
-
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 {

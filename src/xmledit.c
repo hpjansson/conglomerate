@@ -10,7 +10,7 @@
 #include "cong-dispspec.h"
 
 
-
+#if !USE_CONG_EDITOR_WIDGET
 GtkWidget*
 cong_span_editor_get_widget(CongSpanEditor *xed)
 {
@@ -2176,6 +2176,7 @@ int xed_xml_content_draw(CongSpanEditor *xed, enum CongDrawMode mode)
 	add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
 	return(xed->draw_pos_y);
 }
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 
 /* --- Cut/copy/paste --- */
@@ -2198,6 +2199,7 @@ void selection_cursor_unset(CongDocument *doc)
 
 void xed_cutcopy_update(CongCursor *curs)
 {
+#if !USE_CONG_EDITOR_WIDGET
 	if (!curs->xed->x)
 	{
 #if 1
@@ -2214,13 +2216,15 @@ void xed_cutcopy_update(CongCursor *curs)
 	{
 		xed_redraw(curs->xed);
 	}
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 }
 
 void cong_document_cut(CongDocument *doc)
 {
 	CongNodePtr t;
+#if !USE_CONG_EDITOR_WIDGET
 	int replace_xed = 0;
-
+#endif
 	CongSelection *selection;
 	CongCursor *curs;
 
@@ -2229,8 +2233,10 @@ void cong_document_cut(CongDocument *doc)
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
-
+	if (!curs->w || !cong_location_exists(&curs->location)) return;
+#if !USE_CONG_EDITOR_WIDGET
+	if (!curs->xed) return;
+#endif
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return;
 
@@ -2240,10 +2246,13 @@ void cong_document_cut(CongDocument *doc)
 	
 	t = cong_node_new_element("dummy");
 
+#if !USE_CONG_EDITOR_WIDGET
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
-	
-	cong_selection_reparent_all(selection, t);
+#endif	
 
+	cong_selection_reparent_all(selection, doc, t);
+
+#if !USE_CONG_EDITOR_WIDGET
 	if (t->prev)
 	{
 		if (replace_xed) curs->xed->x = t->prev;
@@ -2252,6 +2261,7 @@ void cong_document_cut(CongDocument *doc)
 	{
 		curs->xed->x = t->next;
 	}
+#endif
 	
 	cong_document_node_make_orphan(doc, t);
 
@@ -2277,8 +2287,10 @@ void cong_document_copy(CongDocument *doc)
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
-
+	if (!curs->w || !cong_location_exists(&curs->location)) return;
+#if !USE_CONG_EDITOR_WIDGET
+	if (!curs->xed) return;
+#endif
 	
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return;
@@ -2293,15 +2305,19 @@ void cong_document_copy(CongDocument *doc)
 
 	t = cong_node_new_element("dummy");
 
+#if !USE_CONG_EDITOR_WIDGET
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
-	cong_selection_reparent_all(selection, t);
+#endif
+	cong_selection_reparent_all(selection, doc, t);
 	the_globals.clipboard = cong_node_recursive_dup(t);
 
 	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
 
+#if !USE_CONG_EDITOR_WIDGET
 	if (replace_xed) {
 		curs->xed->x = t->prev;
 	}
+#endif
 
 	for (t0 = cong_node_first_child(t); t0; t0 = t_next) {
 		t_next = t0->next;
@@ -2319,7 +2335,6 @@ void cong_document_copy(CongDocument *doc)
 
 
 	xed_cutcopy_update(curs);
-
 }
 
 
@@ -2340,9 +2355,11 @@ void cong_document_paste(CongDocument *doc, GtkWidget *widget)
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
 	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return;
-
-	ds = curs->xed->displayspec;
+	if (!curs->w || !cong_location_exists(&curs->location)) return;
+#if !USE_CONG_EDITOR_WIDGET
+	if (!curs->xed) return;
+#endif
+	ds = cong_document_get_dispspec(doc);
 
 	/* GREP FOR MVC */
 
@@ -2397,8 +2414,9 @@ void cong_document_paste(CongDocument *doc, GtkWidget *widget)
 	cong_location_nullify(&selection->loc0);
 	cong_location_nullify(&selection->loc1);
 
+#if !USE_CONG_EDITOR_WIDGET
 	xed_redraw(curs->xed);
-
+#endif
 }
 
 

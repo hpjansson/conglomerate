@@ -33,6 +33,7 @@ enum
 #define NEW_LOOK 1
 #define USE_PANGO 0
 #define PRINT_TESTS 0
+#define USE_CONG_EDITOR_WIDGET 0
 
 #if PRINT_TESTS
 #include <libgnomeprint/gnome-print.h>
@@ -343,6 +344,7 @@ TTREE *cong_layout_stack_entry_get_ttree_x(CongLayoutStackEntry *entry);
 int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry);
 
 
+#if !USE_CONG_EDITOR_WIDGET
 /* modes:
  * 
  * 0 = calculate height only
@@ -409,7 +411,7 @@ struct CongSpanEditor
 #endif
 
 };
-
+#endif /* #if !USE_CONG_EDITOR_WIDGET */
 
 struct pos
 {
@@ -434,7 +436,10 @@ struct pos
 struct CongCursor
 {
 	/* Visual representation */
+#if !USE_CONG_EDITOR_WIDGET
 	CongSpanEditor *xed;
+#endif
+
 	GtkWidget *w;
 	GdkGC *gc;
 	int x, y;
@@ -454,7 +459,9 @@ struct CongCursor
 
 struct CongSelection
 {
+#if !USE_CONG_EDITOR_WIDGET
 	CongSpanEditor *xed;
+#endif
 	GdkGC *gc_0, *gc_1, *gc_2, *gc_3;  /* 0 is brightest, 3 is darkest */
 
 	int x0, y0, x1, y1;
@@ -559,14 +566,16 @@ const char *xml_frag_name_nice(CongNodePtr x);
 SOCK *server_login();
 #endif
 
+#if !USE_CONG_EDITOR_WIDGET
 struct pos *pos_physical_to_logical(struct CongSpanEditor *xed, int x, int y);
 struct pos *pos_logical_to_physical(struct CongSpanEditor *xed, CongNodePtr node, int c);
 struct pos *pos_logical_to_physical_new(struct CongSpanEditor *xed, CongLocation *loc);
+#endif
 
 CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1);
 CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 
-CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p);
+CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
 CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
 CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x);
 char *xml_fetch_clean_data(CongNodePtr x);
@@ -608,12 +617,16 @@ void cong_cursor_init(CongCursor *curs, CongDocument *doc);
 void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
+#if !USE_CONG_EDITOR_WIDGET
 void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int y);
+#endif
 gint cong_cursor_data_insert(CongCursor *curs, char *s);
 int cong_cursor_paragraph_insert(CongCursor *curs);
 void cong_cursor_prev_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_next_char(CongCursor *curs, CongDocument *doc);
+#if !USE_CONG_EDITOR_WIDGET
 void cong_cursor_prev_line(CongCursor *curs, CongSpanEditor *xed);
+#endif
 void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed);
 void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc);

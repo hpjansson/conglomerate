@@ -10,6 +10,7 @@
 #include "global.h"
 #include "cong-dispspec.h"
 
+#if !USE_CONG_EDITOR_WIDGET
 void
 cong_layout_line_free(CongLayoutLine *line)
 {
@@ -166,7 +167,6 @@ void pos_pl_data(CongSpanEditor *xed, struct pos *pos)
 #endif
 	}
 }
-
 
 void pos_pl(CongSpanEditor *xed, struct pos *pos)
 {
@@ -621,3 +621,4 @@ struct pos *pos_logical_to_physical_new(CongSpanEditor *xed, CongLocation *loc)
 {
 	return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
 }
+#endif /* #if !USE_CONG_EDITOR_WIDGET */

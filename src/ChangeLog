@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-01-27 David Malcolm
+
+	*  cong-document.c, cong-primary-window.c, cong-span-text-editor.c, cursor.c, global.h, popup.c, position.c, select.c, xmledit.c, xmlview.c
+
+	Added USE_CONG_EDITOR_WIDGET define
+	
 2002-12-19 David Malcolm
 
 	* cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c, cursor.c, global.h, xmledit.c
