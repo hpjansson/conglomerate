@@ -41,6 +41,12 @@ struct CongEditorNodeElementStructuralDetails
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node);
 
+/* Declarations of the CongEditorArea event handlers: */
+static gboolean
+on_signal_button_press (CongEditorArea *editor_area, 
+			GdkEventButton *event,
+			gpointer user_data);
+
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementStructural, 
 			cong_editor_node_element_structural,
@@ -124,6 +130,11 @@ generate_area (CongEditorNode *editor_node)
 
 	g_free (title_text);
 
+	g_signal_connect (inner_area,
+			  "button_press_event",
+			  G_CALLBACK(on_signal_button_press),
+			  editor_node);
+
 #if 0
 	cong_editor_area_container_add_child (parent_area,
 					      outer_area);
@@ -132,4 +143,50 @@ generate_area (CongEditorNode *editor_node)
 #endif
 
 	return inner_area;
+}
+
+/* Definitions of the CongEditorArea event handlers: */
+static gboolean
+on_signal_button_press (CongEditorArea *editor_area, 
+			GdkEventButton *event,
+			gpointer user_data)
+{
+
+	CongEditorNodeElementStructural *editor_node_structural = CONG_EDITOR_NODE_ELEMENT_STRUCTURAL(user_data);
+
+	CongEditorWidget3* editor_widget;			
+	CongDocument* doc;
+
+	editor_widget = cong_editor_area_get_widget (editor_area);			
+	doc = cong_editor_area_get_document (editor_area);
+
+	/* Which button was pressed? */
+	switch (event->button) {
+	default: return FALSE;
+
+#if 0
+	case 1: /* Normally the left mouse button: */
+		{
+			section_head->expanded = !section_head->expanded;
+			cong_editor_widget2_force_layout_update(editor_widget);
+		}
+		return TRUE;
+#endif
+			
+	case 3: /* Normally the right mouse button: */
+		{
+			GtkWidget* menu;
+
+			menu = cong_ui_popup_init(doc, 
+						  cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_structural)),
+						  GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget))));
+			gtk_menu_popup (GTK_MENU(menu), 
+					NULL, 
+					NULL, 
+					NULL, 
+					NULL, event->button,
+					event->time);		      
+		}
+		return TRUE;
+	}		
 }
