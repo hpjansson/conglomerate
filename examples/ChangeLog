@@ -1,5 +1,9 @@
 2003-09-08  David Malcolm
 
+	* xds.dtd
+
+	Big cleanup; added <document-models> and <external-document-model>
+
 	* validate-all-xds.sh 
 
 	New file: Shell script to validate all xds files against DTD

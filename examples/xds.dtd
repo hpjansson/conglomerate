@@ -1,37 +1,55 @@
-<!ELEMENT collapseto (#PCDATA)>
-
-<!ELEMENT description ( #PCDATA ) >
-
 <!--
 @root dispspec
 -->
-<!ELEMENT dispspec ( metadata, element-list, document-template?, gui? ) >
+<!ELEMENT dispspec ( metadata, document-models, element-list, document-template?, gui? ) >
 
 <!ELEMENT element ( name?, short-desc?, header-info?, collapseto?, property-dialog? )>
-<!ATTLIST element color CDATA #IMPLIED >
-<!ATTLIST element filename-attribute NMTOKEN #IMPLIED >
-<!ATTLIST element icon CDATA #IMPLIED >
-<!ATTLIST element tag ID #IMPLIED >
-<!ATTLIST element type ( plugin | paragraph | embed-external-file | span | structural ) #REQUIRED >
-<!ATTLIST element plugin-id NMTOKEN #IMPLIED >
+<!ATTLIST element 
+   color               CDATA                                                             #IMPLIED
+   filename-attribute  NMTOKEN                                                           #IMPLIED
+   icon                CDATA                                                             #IMPLIED
+   tag                 ID                                                                #IMPLIED
+   type                ( plugin | paragraph | embed-external-file | span | structural )  #REQUIRED
+   plugin-id           NMTOKEN                                                           #IMPLIED 
+>
 
 <!ELEMENT element-list ( element+ ) >
 
 <!ELEMENT gui EMPTY >
 
 <!ELEMENT header-info EMPTY >
-<!ATTLIST header-info tag IDREF  #IMPLIED >
-<!ATTLIST header-info xpath CDATA #IMPLIED >
+<!ATTLIST header-info 
+   tag    IDREF  #IMPLIED
+   xpath  CDATA  #IMPLIED
+>
 
 <!ELEMENT metadata ( name, description ) >
 
-<!ELEMENT name ( #PCDATA ) >
-<!ATTLIST name locale ( en ) #IMPLIED >
+<!ELEMENT document-models (external-document-model*) >
+<!ELEMENT external-document-model EMPTY >
+<!ATTLIST external-document-model 
+   type       (dtd | w3c-xml-schema | relax-ng-schema)  #REQUIRED
+   public-id  CDATA                                     #IMPLIED
+   system-id  CDATA                                     #IMPLIED
+>
 
-<!ELEMENT short-desc ( #PCDATA )* >
-<!ATTLIST short-desc locale NMTOKEN #IMPLIED >
+<!ELEMENT name ( #PCDATA ) >
+<!ATTLIST name 
+   locale  ( en )  #IMPLIED 
+>
+
+<!ELEMENT collapseto (#PCDATA)>
+
+<!ELEMENT description ( #PCDATA ) >
+
+<!ELEMENT short-desc ( #PCDATA ) >
+<!ATTLIST short-desc 
+   locale  NMTOKEN  #IMPLIED 
+>
 
 <!ELEMENT property-dialog EMPTY >
-<!ATTLIST property-dialog plugin-id NMTOKEN #REQUIRED>
+<!ATTLIST property-dialog 
+   plugin-id  NMTOKEN  #REQUIRED
+>
 
 <!ELEMENT document-template ANY >
