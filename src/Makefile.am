@@ -75,7 +75,16 @@ conglomerate_SOURCES =      \
   cong-graph.h              \
   cong-location.h           \
   cong-marshal.h            \
+  cong-modification.h       \
   cong-node.h               \
+  cong-node-modification.h  \
+  cong-node-modification-make-orphan.h  \
+  cong-node-modification-add-after.h  \
+  cong-node-modification-add-before.h  \
+  cong-node-modification-set-parent.h  \
+  cong-node-modification-set-text.h  \
+  cong-node-modification-set-attribute.h  \
+  cong-node-modification-remove-attribute.h  \
   cong-overview-view.h      \
   cong-parser-error.h       \
   cong-plugin.h             \
@@ -161,7 +170,16 @@ conglomerate_SOURCES =      \
   cong-location.c           \
   cong-marshal.c            \
   cong-menus.c              \
+  cong-modification.c       \
   cong-node.c               \
+  cong-node-modification.c  \
+  cong-node-modification-make-orphan.c  \
+  cong-node-modification-add-after.c  \
+  cong-node-modification-add-before.c  \
+  cong-node-modification-set-parent.c  \
+  cong-node-modification-set-text.c  \
+  cong-node-modification-set-attribute.c  \
+  cong-node-modification-remove-attribute.c  \
   cong-node-properties-dialog.c \
   cong-overview-view.c      \
   cong-parser-error.c       \
