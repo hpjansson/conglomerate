@@ -26,14 +26,19 @@ esac
 exit 0
 
 @DPATCH@
---- doc/reference/Makefile.in.tarball	2003-10-08 14:56:58.000000000 +0000
-+++ doc/reference/Makefile.in	2003-10-08 14:58:17.000000000 +0000
-@@ -391,7 +391,7 @@
+--- doc/reference/Makefile.in.tarball	2004-01-07 16:16:39.000000000 +0100
++++ Mdoc/reference/akefile.in	2004-01-08 00:09:15.000000000 +0100
+@@ -259,11 +259,11 @@
  install-data: install-data-am
  
  install-am: all-am
 -	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
-+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am
++	echo " ## no" @$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
  install: install-am
  uninstall-am:
  uninstall: uninstall-am
+-all-am: Makefile all-local
++all-am: Makefile
+ all-redirect: all-am
+ install-strip:
+ 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
