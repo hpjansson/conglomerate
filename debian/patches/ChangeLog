@@ -7,6 +7,9 @@
 	Avoid expanding of the *.*.*-*
 	Typo fix
 
+	* README
+	Tells about the none dpatch scripts
+
 2004-02-09  Geert Stappers <stappers@stappers.nl>
 
 	* release

@@ -26,3 +26,17 @@ or for new files:
     /^EOF/d
 
 Or use the dpatch tools
+
+
+
+Then there are some usefull, none dpatch scripts:
+
+release:
+The actions done when there is tarball release,
+run it as `debian/patches/release 4.3.2-1`.
+
+sync:
+Get the release changes back into upstream version.
+
+next:
+Increment of the Debian changelog with the right string.
