@@ -2,9 +2,6 @@ conglomerate (0.7.8-1) unstable; urgency=low
 
   * New upstream release.
 
-  * control:
-   Added libxml-parser-perl to the build depends.
-
  -- Geert Stappers <stappers@stappers.nl>  Thu, 18 Dec 2003 08:48:00 +0000
 
 conglomerate (0.7.7-1) unstable; urgency=low

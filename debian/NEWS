@@ -1,3 +1,12 @@
+conglomerate (0.7.8-1) unstable; urgency=low
+
+  * intltool, a build depend, will be installed by gnome-common.
+  However Conglomerate needs intltool (>= 0.28) which has the OrigTree.pm.
+  Buildd log shows that they pull in intltool-debian in stead of intltool.
+  So expect there could be needed a 0.7.8-2.
+
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 18 Dec 2003 16:17:23 +0100
+
 conglomerate (0.7.5-1) unstable; urgency=low
 
  * There is gtk-doc, but it will not go into the debian package.
