@@ -1,6 +1,6 @@
 
 uss, UpStream Scripts
-Scripts for upstream.
+Scripts for upstream, will not go into `make dist`-tarballs.
 
 Name convention: all lower case, non hyphe, no underscore.
 
@@ -17,7 +17,8 @@ Generates the README file.
 A `make dist` plus upload to a public place.
 
 * ckgtkdocincludes
-Checks that all the header files have corresponding xi:includes in doc/reference/conglomerate-docs.sgml
+Checks that all the header files have corresponding xi:includes
+in doc/reference/conglomerate-docs.sgml
 
 * mkgtkdoc
 Creates new conglomerate.types, conglomerate-overrides.txt, conglomerate-sections.txt in doc/reference
