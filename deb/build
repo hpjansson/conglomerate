@@ -121,12 +121,7 @@ then
 fi
 
 echo gonna build the package
-if [ ! -f build-stamp ]
-then
-  dpkg-buildpackage -uc -us
-else
-  debian/rules binary
-fi
+debian/rules binary
 
 
 echo one directory level up, are these .deb files:
