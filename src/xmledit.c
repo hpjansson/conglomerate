@@ -277,20 +277,36 @@ cong_document_paste_source_at (CongDocument *doc,
 		g_assert_not_reached();
 	}
 
-	/* Add the new nodes: */
-	for (iter = new_nodes->children; iter; iter = iter_next) {
-		iter_next = iter->next;
+	if (node_after) {
 
-		cong_document_node_add_before(doc, iter, node_after);		
+		/* Add the new nodes: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_document_node_add_before(doc, iter, node_after);		
+		}
+		
+		/* Merge adjacent text nodes: */
+		cong_document_merge_adjacent_text_children_of_node (doc, 
+								    node_after->parent);
+	} else {
+
+		/* Add the new nodes at the end of the parent's list: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_document_node_set_parent(doc, iter, insert_loc->node->parent);		
+		}
+		
+		/* Merge adjacent text nodes: */
+		cong_document_merge_adjacent_text_children_of_node (doc, 
+								    insert_loc->node->parent);
 	}
-	
+
 	/* Delete the placeholder parent: */
 	cong_document_node_recursive_delete (doc, 
 					     new_nodes);
-
-	/* Merge adjacent text nodes: */
-	cong_document_merge_adjacent_text_children_of_node (doc, 
-							    node_after->parent);
+		
 	
 	cong_document_end_edit (doc);
 

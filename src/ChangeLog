@@ -1,3 +1,9 @@
+2003-08-30  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* xmledit.c
+
+	Fix for bug #115993
+	
 2003-08-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-node-text.c
