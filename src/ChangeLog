@@ -1,5 +1,9 @@
 2003-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-app.c
+
+	Provide STRING, TEXT and COMPOUND_TEXT in addition to UTF8_STRING as target atoms for text, finally allows pasting into XEmacs from Conglomerate on my machine
+
 	* cong-app.c, cong-document.c
 
 	Update PRIMARY when selection changes, fixing bug #130248 and #126039

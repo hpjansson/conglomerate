@@ -528,8 +528,14 @@ enum CongTargetTypes {
 
 static const GtkTargetEntry selection_targets[] = 
 {
-	{"UTF8_STRING", 0, CONG_TARGET_TYPE_TEXT},
-	{"text/xml", 0, CONG_TARGET_TYPE_XML},
+	/* Offer various kinds of well-known textual atoms; we use gtk_selection_data_set_text for each of these, which should handle any necessary encoding conversions: */
+	{ "STRING", 0, CONG_TARGET_TYPE_TEXT},
+	{ "TEXT",   0, CONG_TARGET_TYPE_TEXT}, 
+	{ "COMPOUND_TEXT", 0, CONG_TARGET_TYPE_TEXT},
+	{ "UTF8_STRING", 0, CONG_TARGET_TYPE_TEXT},
+
+	/* Offer "text/xml": */
+	{ "text/xml", 0, CONG_TARGET_TYPE_XML}
 };
 
 static void 
@@ -543,15 +549,14 @@ clipboard_get_cb (GtkClipboard *clipboard,
 	switch (info) {
 	default: g_assert_not_reached();
 	case CONG_TARGET_TYPE_TEXT:
-		LOG_SELECTIONS2 ("Providing text for selection: \"%s\"", cong_selection->utf8_text);
-		gtk_selection_data_set (selection_data,
-					gdk_atom_intern ("UTF8_STRING", FALSE),
-					8,
-					cong_selection->utf8_text,
-					strlen (cong_selection->utf8_text));
+		/* We offer various textual atoms, and trust gtk_selection_data_set_text to do any necessary conversions: */
+		LOG_SELECTIONS2 ("Providing one of the text formats for selection: \"%s\"", cong_selection->utf8_text);
+		gtk_selection_data_set_text (selection_data,
+					     cong_selection->utf8_text,
+					     -1);
 		break;
 	case CONG_TARGET_TYPE_XML:
-		LOG_SELECTIONS2 ("Providing XML data for selection: \"%s\"", cong_selection->utf8_xml_buffer);
+		LOG_SELECTIONS2 ("Providing \"text/xml\" for selection: \"%s\"", cong_selection->utf8_xml_buffer);
 		gtk_selection_data_set (selection_data,
 					gdk_atom_intern ("text/xml", FALSE),
 					8,
