@@ -53,6 +53,7 @@ static void remove_template_def(xmlDocPtr template)
 {
 	xmlXPathContextPtr xpathCtx; 
 	xmlXPathObjectPtr xpathObj; 
+	xmlNodePtr def;
 
 	xpathCtx = create_xpath_context(template);
 
@@ -62,7 +63,7 @@ static void remove_template_def(xmlDocPtr template)
 
 	g_assert(xpathObj);
 
-	xmlNodePtr def = xpathObj->nodesetval->nodeTab[0];
+	def = xpathObj->nodesetval->nodeTab[0];
 	xmlReplaceNode(def, def->next);
 
 	xmlXPathFreeObject(xpathObj);
