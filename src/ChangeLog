@@ -1,4 +1,18 @@
 creating ChangeLog
+2003-04-15 David Malcolm
+
+	* cong-dispspec-registry.c, cong-document.c, cong-menus.c, cong-editor-widget.c, cong-plugin.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, cursor.c, dispspec.c, open.c, plugin-docbook.c
+
+	Numerous small cleanups
+
+	* cong-progress-checklist.c, cong-progress-checklist.h
+
+	Initial import
+
+	* Makefile.am
+
+	Added cong-progress-checklist.c
+	
 2003-04-11 David Malcolm
 
 	* cong-document.c, cong-eel.c, cong-eel.h, cong-error-file-save.c, cong-file-export.c, cong-file-import.c, cong-menus.c, cong-plugin.c, cong-plugin.h, file.c, global.h, main.c, open.c, plugin-docbook.c, plugin-tests.c, save.c, xmldata.c

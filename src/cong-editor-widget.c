@@ -37,7 +37,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
-#define DEBUG_EDITOR_WIDGET_VIEW 1
+#define DEBUG_EDITOR_WIDGET_VIEW 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))

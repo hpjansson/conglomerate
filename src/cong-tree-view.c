@@ -29,6 +29,18 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 
+#define DEBUG_TREE_VIEW 0
+
+#if 0
+#define CONG_TREE_VIEW_DEBUG_MSG1(x)       g_message((x))
+#define CONG_TREE_VIEW_DEBUG_MSG2(x, a)    g_message((x), (a))
+#define CONG_TREE_VIEW_DEBUG_MSG2(x, a, b) g_message((x), (a), (b))
+#else
+#define CONG_TREE_VIEW_DEBUG_MSG1(x)       ((void)0)
+#define CONG_TREE_VIEW_DEBUG_MSG2(x, a)    ((void)0)
+#define CONG_TREE_VIEW_DEBUG_MSG3(x, a, b) ((void)0)
+#endif
+
 #define CONG_TREE_VIEW(x) ((CongTreeView*)(x))
 
 struct CongTreeView
@@ -111,8 +123,6 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
-#define DEBUG_TREE_VIEW 1
-
 /* Definitions of the handler functions: */
 static void on_document_coarse_update(CongView *view)
 {
@@ -122,7 +132,7 @@ static void on_document_coarse_update(CongView *view)
 	g_return_if_fail(view);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_coarse_update\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_coarse_update\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -146,7 +156,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_change,
 	g_return_if_fail(node);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_node_make_orphan\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_make_orphan\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -172,7 +182,7 @@ static void on_document_node_add_after(CongView *view, gboolean before_change, C
 	g_return_if_fail(older_sibling);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_node_add_after\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_after\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -213,7 +223,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_change, 
 	g_return_if_fail(younger_sibling);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_node_add_before\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_add_before\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -231,7 +241,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_change, 
 	g_return_if_fail(adoptive_parent);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_node_set_parent\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_parent\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -248,7 +258,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 	g_return_if_fail(new_content);
 
 	#if DEBUG_TREE_VIEW
-	g_message("CongTreeView - on_document_node_set_text\n");
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_node_set_text\n");
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
@@ -361,7 +371,7 @@ void cong_tree_view_recursive_populate(CongDocument *doc,
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
 
-		/* g_message("Examining frag %s\n",name); */
+		/* CONG_TREE_VIEW_DEBUG_MSG1("Examining frag %s\n",name); */
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
 		{
@@ -437,7 +447,7 @@ void cong_tree_view_populate_tree(CongTreeView *tree_view)
 		const char *name = xml_frag_name_nice(x);
 		CongDispspecElement* element = cong_dispspec_lookup_element(displayspec, name);
 
-		g_message("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
+		CONG_TREE_VIEW_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element))
 		{

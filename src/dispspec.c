@@ -69,10 +69,6 @@ struct CongDispspec
 	CongDispspecElement *paragraph;
 };
 
-#if 0
-void cong_dispspec_init(TTREE *ds);
-#endif
-
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
 
 #if SUPPORT_OLD_LOADERS
@@ -265,13 +261,13 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 
 				xmlNodePtr cur;
 				
-				/* DS_DEBUG_MSG1("got dispspec\n"); */
+				DS_DEBUG_MSG1("got dispspec\n");
 
 				for (cur = xml_dispspec->children; cur; cur=cur->next) {
 					if (0==strcmp(cur->name,"element-list")) {
 						
 						xmlNodePtr xml_element;
-						/* DS_DEBUG_MSG1("got element-list\n"); */
+						DS_DEBUG_MSG1("got element-list\n");
 
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
 							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
@@ -998,7 +994,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 {
 	CongDispspecElement* element;
 
-	/* DS_DEBUG_MSG1("got xml element\n"); */
+	DS_DEBUG_MSG1("got xml element\n");
 
 	element = g_new0(CongDispspecElement,1);
 
@@ -1063,7 +1059,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 
   			/* Handle "header-info": */
   			if (0==strcmp(child->name,"header-info")) {
-  				printf("got header info\n");
+  				DS_DEBUG_MSG1("got header info\n");
   				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
   				/* FIXME:  we don't actually extract anything at the moment from the XML; <title> is hardcoded as the header tag */
   			}

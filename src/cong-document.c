@@ -6,6 +6,7 @@
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
+#define DEBUG_MVC 0
 
 typedef void (*CongXMLSelfTestCallback)(xmlNodePtr node, const gchar *error_message);
 
@@ -16,7 +17,7 @@ gboolean cong_xml_selftest_node(xmlNodePtr node, CongXMLSelfTestCallback selftes
 {
 	/* Test this node: */
 	if (node->content) {
-		g_message("testing node content\"%s\"", node->content);
+		/* g_message("testing node content\"%s\"", node->content); */
 		if (!g_utf8_validate(node->content, -1, NULL)) {
 			if (selftest_callback) {
 				(*selftest_callback)(node, "Invalid UTF-8 data");
@@ -361,8 +362,6 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 
 	return current_time.tv_sec - doc->time_of_last_save.tv_sec;
 }
-
-#define DEBUG_MVC 1
 
 void cong_document_coarse_update(CongDocument *doc)
 {

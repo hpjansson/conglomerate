@@ -32,6 +32,7 @@
 #include "cong-error-dialog.h"
 #include "cong-dialog.h"
 #include "cong-plugin.h"
+#include "cong-progress-checklist.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -54,7 +55,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 1
+#define ENABLE_DEBUG_MENU 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
 {
@@ -986,6 +987,54 @@ void menu_callback_debug_dialog(gpointer callback_data,
 	gtk_widget_destroy(dialog);
 }
 
+struct debug_progress_checklist
+{
+	CongProgressChecklistDialog *dialog;
+	CongProgressChecklist *progress_checklist;
+	guint timeout_id;
+};
+
+static gboolean on_timeout(gpointer user_data)
+{
+	struct debug_progress_checklist* debug_data = user_data;
+
+	g_message("on_timeout");
+
+	cong_progress_checklist_complete_stage(debug_data->progress_checklist);
+
+	return TRUE;
+}
+
+
+void menu_callback_debug_progress_checklist(gpointer callback_data,
+					    guint callback_action,
+					    GtkWidget *widget)
+{
+	struct debug_progress_checklist debug_data;
+	CongPrimaryWindow *primary_window = callback_data;
+	int i;
+
+	debug_data.dialog = CONG_PROGRESS_CHECKLIST_DIALOG(cong_progress_checklist_dialog_new("Test Progress Checklist", cong_primary_window_get_toplevel(primary_window)));
+	debug_data.progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(debug_data.dialog);
+	
+	for (i=0;i<10;i++) {
+		gchar *stage_name = g_strdup_printf("This is stage %i", i);
+		cong_progress_checklist_add_stage(debug_data.progress_checklist,
+						  stage_name);
+		g_free(stage_name);
+	}
+	
+	debug_data.timeout_id =gtk_timeout_add(1000,
+					       on_timeout,                                             
+					       &debug_data);
+
+	gtk_dialog_run(GTK_DIALOG(debug_data.dialog));
+
+	gtk_timeout_remove (debug_data.timeout_id);
+	gtk_widget_destroy(GTK_WIDGET(debug_data.dialog));
+	
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1070,6 +1119,7 @@ static GtkItemFactoryEntry menu_items[] =
 #endif /* #if PRINT_TESTS */
 	{ N_("/Debug/DTD"),             NULL, menu_callback_debug_dtd, 0, NULL },
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
+	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 #endif
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },

@@ -39,11 +39,7 @@ struct CongPluginManager
 
 struct CongPlugin
 {
-#if 0
-	gchar *name;
-	gchar *description;
-#endif
-	gchar *id;
+	gchar *plugin_id;
 
 	CongPluginCallbackConfigure configure_callback;
 
@@ -60,7 +56,7 @@ struct CongFunctionality
 	CongPlugin *plugin;
 	gchar *name;
 	gchar *description;
-	gchar *id;
+	gchar *functionality_id;
 };
 
 struct CongDocumentFactory
@@ -103,7 +99,6 @@ struct CongThumbnailer
 struct CongPluginEditorElement
 {
 	CongFunctionality functionality; /* base class */
-	gchar *plugin_id;
 	CongEditorElementFactoryMethod make_element;
 	gpointer user_data;
 };
@@ -133,7 +128,7 @@ CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager,
 
 	plugin = g_new0(CongPlugin,1);
 
-	plugin->id = g_strdup(id);
+	plugin->plugin_id = g_strdup(id);
 	plugin->configure_callback = configure_callback;
 
 	/* Add to list of plugins: */
@@ -212,7 +207,7 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	factory->functionality.plugin = plugin;
 	factory->functionality.name = g_strdup(name);
 	factory->functionality.description = g_strdup(description);
-	factory->functionality.id = g_strdup(id);
+	factory->functionality.functionality_id = g_strdup(id);
 	factory->page_creation_callback = page_creation_callback;
 	factory->action_callback = action_callback;
 	factory->user_data = user_data;
@@ -245,7 +240,7 @@ CongImporter *cong_plugin_register_importer(CongPlugin *plugin,
 	importer->functionality.plugin = plugin;
 	importer->functionality.name = g_strdup(name);
 	importer->functionality.description = g_strdup(description);
-	importer->functionality.id = g_strdup(id);
+	importer->functionality.functionality_id = g_strdup(id);
 	importer->mime_filter = mime_filter;
 	importer->action_callback = action_callback;
 	importer->user_data = user_data;
@@ -278,7 +273,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	exporter->functionality.plugin = plugin;
 	exporter->functionality.name = g_strdup(name);
 	exporter->functionality.description = g_strdup(description);
-	exporter->functionality.id = g_strdup(id);
+	exporter->functionality.functionality_id = g_strdup(id);
 	exporter->fpi_filter = fpi_filter;
 	exporter->action_callback = action_callback;
 	exporter->user_data = user_data;
@@ -308,7 +303,7 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 	editor_element_factory->functionality.plugin = plugin;
 	editor_element_factory->functionality.name = g_strdup(name);
 	editor_element_factory->functionality.description = g_strdup(description);
-	editor_element_factory->functionality.id = g_strdup(id);
+	editor_element_factory->functionality.functionality_id = g_strdup(id);
 	editor_element_factory->make_element = factory_method;
 	editor_element_factory->user_data = user_data;
 
@@ -347,9 +342,9 @@ gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, NULL);
 
-	g_assert(plugin->id);
+	g_assert(plugin->plugin_id);
 
-	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s"), plugin->id);
+	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s"), plugin->plugin_id);
 }
 
 gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
@@ -357,9 +352,9 @@ gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(local_part, NULL);
 
-	g_assert(plugin->id);
+	g_assert(plugin->plugin_id);
 
-	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s/%s"), plugin->id, local_part);
+	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s/%s"), plugin->plugin_id, local_part);
 }
 
 /* Implementation of CongFunctionality: */
@@ -385,11 +380,11 @@ gchar* cong_functionality_get_gconf_namespace(CongFunctionality* functionality)
 	g_return_val_if_fail(functionality, NULL);
 
 	g_assert(functionality->plugin);
-	g_assert(functionality->id);
+	g_assert(functionality->functionality_id);
 
 	plugin_namespace = cong_plugin_get_gconf_namespace(functionality->plugin);
 
-	result = g_strdup_printf("%s/%s", plugin_namespace, functionality->id);
+	result = g_strdup_printf("%s/%s", plugin_namespace, functionality->functionality_id);
 
 	g_free(plugin_namespace);
 
@@ -405,9 +400,9 @@ gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const 
 	g_return_val_if_fail(local_part, NULL);
 
 	g_assert(functionality->plugin);
-	g_assert(functionality->id);
+	g_assert(functionality->functionality_id);
 
-	scoped_local_part =  g_strdup_printf("%s/%s", functionality->id, local_part);
+	scoped_local_part =  g_strdup_printf("%s/%s", functionality->functionality_id, local_part);
 
 	functionality_path = cong_plugin_get_gconf_key(functionality->plugin, scoped_local_part);
 
@@ -763,7 +758,7 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 
 			g_assert(plugin_editor_element);
 
-			if (0==strcmp(plugin_editor_element->plugin_id, plugin_id)) {
+			if (0==strcmp(CONG_FUNCTIONALITY(plugin_editor_element)->functionality_id, plugin_id)) {
 				g_assert(plugin_editor_element->make_element);
 				return plugin_editor_element->make_element(plugin_editor_element, editor_widget, node, plugin_editor_element->user_data);
 			}

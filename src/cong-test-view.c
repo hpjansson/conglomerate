@@ -8,6 +8,8 @@
 #include "global.h"
 #include "cong-document.h"
 
+#define DEBUG_TEST_VIEW 0
+
 enum {
 	TESTVIEW_COLUMN_TEXT,
 	TESTVIEW_COLUMN_NODE,
@@ -172,8 +174,6 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
-
-#define DEBUG_TEST_VIEW 1
 
 /* Definitions of the handler functions: */
 static void on_document_coarse_update(CongView *view)

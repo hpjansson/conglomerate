@@ -140,7 +140,9 @@ gint cong_cursor_blink(gpointer data)
 {
 	CongCursor *curs = data;
 
+#if 0
 	g_message("cong_cursor_blink");
+#endif
 
 #if !USE_CONG_EDITOR_WIDGET
 	if (!curs->w) return(TRUE);

@@ -28,7 +28,7 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 
-#if 0
+#if 1
 #include "cong-progress-checklist.h"
 #endif
 
@@ -437,18 +437,18 @@ void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, co
 
 void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
-	g_message("pdf_exporter_action_callback");
-
-#if 0
+#if 1
 	GtkWidget *progress_checklist_dialog;
 	CongProgressChecklist *progress_checklist;
 	xmlDocPtr fo_doc;
+
+	g_message("pdf_exporter_action_callback");
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
-	progress_checklist_dialog = cong_progress_checklist_dialog_new(toplevel_window);
+	progress_checklist_dialog = cong_progress_checklist_dialog_new("Exporting PDF file", toplevel_window);
 	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
 
 	cong_progress_checklist_add_stage(progress_checklist,
@@ -463,7 +463,7 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 				       toplevel_window);
 
 	if (fo_doc) {
-		cong_progess_checklist_complete_stage(progress_checklist);
+		cong_progress_checklist_complete_stage(progress_checklist);
 
 		CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Converting XSL Formatting Objects to PDF");
 		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
@@ -474,6 +474,8 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 
 	gtk_widget_destroy(progress_checklist_dialog);
 #else
+	g_message("pdf_exporter_action_callback");
+
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Exporting DocBook as PDF");	
 #endif
 }

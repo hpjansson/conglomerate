@@ -37,6 +37,8 @@ typedef struct CongParserResult
 	xmlDocPtr doc;
 #endif
 	GSList *issues; /* list of CongParserIssues */
+
+	GtkWindow *parent_window;
 } CongParserResult;
 
 void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
@@ -215,7 +217,7 @@ void on_parser_error_details(gpointer data)
 	g_free(filename);
 
 	dialog = gtk_dialog_new_with_buttons(title,
-					     NULL, /* FIXME: set up the parent window */
+					     result->parent_window,
 					     0,
 					     GTK_STOCK_OK,
 					     GTK_RESPONSE_OK,
@@ -326,9 +328,8 @@ void on_parser_error_details(gpointer data)
 	
 }
 
-GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error(GtkWindow *parent_window,
-							 const GnomeVFSURI* file_uri, 
+static GtkDialog*
+cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri, 
 							 CongParserResult *parser_result)
 {
 	GtkDialog* dialog = NULL;
@@ -339,7 +340,7 @@ cong_error_dialog_new_file_open_failed_from_parser_error(GtkWindow *parent_windo
 
 	g_assert(parser_result);
 
-	dialog =  cong_error_dialog_new_file_open_failed_with_convenience(parent_window,
+	dialog =  cong_error_dialog_new_file_open_failed_with_convenience(parser_result->parent_window,
 									  file_uri, 
 									  FALSE,
 									  why_failed,
@@ -354,7 +355,7 @@ cong_error_dialog_new_file_open_failed_from_parser_error(GtkWindow *parent_windo
 	return dialog;
 }
 
-xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* file_uri)
+static xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* file_uri, GtkWindow *parent_window)
 {
 #if 1
 	xmlDocPtr ret;
@@ -369,6 +370,7 @@ xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* f
 	parser_result.size=size;
 	parser_result.file_uri=file_uri;
 	parser_result.issues=NULL;
+	parser_result.parent_window=parent_window;
 	
 	ctxt = xmlCreateMemoryParserCtxt(buffer, size);
 	if (ctxt == NULL) return(NULL);
@@ -391,8 +393,7 @@ xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* f
 	if (ctxt->wellFormed) {
 		ret = ctxt->myDoc;
 	} else {
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error(NULL, /* FIXME: need to set up the parent window */
-											     file_uri, 
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error(file_uri,
 											     &parser_result);
 	
 		cong_error_dialog_run(GTK_DIALOG(dialog));
@@ -501,7 +502,7 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 			g_assert(buffer);
 
 			/* Parse the file from the buffer: */
-			doc = parse_buffer(buffer, size, file_uri);
+			doc = parse_buffer(buffer, size, file_uri, parent_window);
 
 			g_free(buffer);
 		}

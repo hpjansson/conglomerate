@@ -29,7 +29,7 @@ visit_func(const gchar *rel_path,
 	struct LoadingDetails* details = (struct LoadingDetails*)data;
 	char* match;
 
-	g_message("visit_func called\n");
+	/* g_message("visit_func called\n"); */
 
 	/* FIXME: Ultimately we should do a MIME-lookup */
 	/* Search for strings that are terminated with ".xds" */

@@ -28,7 +28,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 
-#if 1
+#if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
 #define CONG_SPAN_TEXT_DEBUG_MSG2(x, a) g_message((x), (a))
 #else
