@@ -57,7 +57,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 			    xmlElementContentPtr content);
 
 /* Plugin hooks: */
-gboolean dtd_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
+gboolean dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -69,7 +69,7 @@ gboolean dtd_importer_mime_filter(CongImporter *importer, const gchar *mime_type
 	}
 }
 
-void dtd_to_xds_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void dtd_to_xds_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	xmlDtdPtr dtd;
 
@@ -100,7 +100,7 @@ void dtd_to_xds_importer_action_callback(CongImporter *importer, const gchar *ur
 }
 
 
-void dtd_to_rng_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	xmlDtdPtr dtd;
 
@@ -125,21 +125,21 @@ void dtd_to_rng_importer_action_callback(CongImporter *importer, const gchar *ur
 
 }
 
-void dtd_to_w3c_xml_schema_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void dtd_to_w3c_xml_schema_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_w3c_xml_schema_importer_action_callback");
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as W3C XML Schema");
 }
 
-void dtd_to_schematron_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void dtd_to_schematron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_schematron_importer_action_callback");
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as Schematron Schema");
 }
 
-void dtd_to_examplotron_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void dtd_to_examplotron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_examplotron_importer_action_callback");
 

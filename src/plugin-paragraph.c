@@ -37,7 +37,7 @@
 #include "plugin-paragraph-node-element-paragraph.h"
 
 static CongEditorNodeElement*  
-manufacture_editor_node_paragraph (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
+manufacture_editor_node_paragraph (CongServiceEditorNodeFactory *plugin_editor_node_factory, 
 				   CongEditorWidget3 *editor_widget, 
 				   CongTraversalNode *traversal_node,
 				   gpointer user_data)

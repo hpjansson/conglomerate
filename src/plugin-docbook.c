@@ -56,7 +56,7 @@ struct DocBookCreationInfo
 };
 #endif
 
-void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_page_creation_callback_unified(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 #if 0
 	GnomeDruidPageStandard *which_settings_page;
@@ -194,7 +194,7 @@ xmlDocPtr make_article(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_article(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_action_callback_article(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -247,7 +247,7 @@ xmlDocPtr make_book(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_book(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -286,7 +286,7 @@ xmlDocPtr make_set(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_action_callback_set(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -296,7 +296,7 @@ void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssist
 						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
-gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
+gboolean text_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -775,7 +775,7 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 	cong_document_end_edit (doc);
 }
 
-void text_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -819,7 +819,7 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 	}
 }
 
-gboolean sourcecode_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
+gboolean sourcecode_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -833,7 +833,7 @@ gboolean sourcecode_importer_mime_filter(CongImporter *importer, const gchar *mi
 	}
 }
 
-void sourcecode_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -879,7 +879,7 @@ void sourcecode_importer_action_callback(CongImporter *importer, const gchar *ur
 	}
 }
 
-gboolean docbook_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
+gboolean docbook_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -887,7 +887,7 @@ gboolean docbook_exporter_document_filter(CongExporter *exporter, CongDocument *
 	return cong_util_is_docbook(doc);
 }
 
-void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+void html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 
@@ -908,7 +908,7 @@ void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, co
 	g_free(stylesheet_path);
 }
 
-void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+void pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 #if 1
 	GtkWidget *progress_checklist_dialog;
@@ -959,7 +959,7 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 #endif
 }
 
-void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+void fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 
@@ -982,7 +982,7 @@ void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, cons
 
 #if (ENABLE_PRINTING &&ENABLE_LIBFO)
 gboolean 
-docbook_print_method_document_filter (CongPrintMethod *print_method, 
+docbook_print_method_document_filter (CongServicePrintMethod *print_method, 
 				      CongDocument *doc, 
 				      gpointer user_data)
 {
@@ -993,7 +993,7 @@ docbook_print_method_document_filter (CongPrintMethod *print_method,
 }
 
 void 
-docbook_print_method_action_callback (CongPrintMethod *print_method, 
+docbook_print_method_action_callback (CongServicePrintMethod *print_method, 
 				      CongDocument *doc, 
 				      GnomePrintContext *gpc, 
 				      gpointer user_data, 
@@ -1043,7 +1043,7 @@ docbook_print_method_action_callback (CongPrintMethod *print_method,
 }
 #endif /* #if ENABLE_PRINTING */
 
-GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+GtkWidget* docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1083,7 +1083,7 @@ GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_
 	return glade_xml_get_widget(xml, "common_dialog");
 }
 
-GtkWidget* docbook_orderedlist_properties_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1188,7 +1188,7 @@ on_test_link_pressed (GtkButton *button,
 	g_free (url);
 }
 
-GtkWidget* docbook_ulink_properties_factory_method(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+GtkWidget* docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1232,7 +1232,7 @@ GtkWidget* docbook_ulink_properties_factory_method(CongCustomPropertyDialog *cus
 }
 
 gboolean 
-node_filter_promote (CongNodeTool *node_tool, 
+node_filter_promote (CongServiceNodeTool *node_tool, 
 		     CongDocument *doc, 
 		     CongNodePtr node,
 		     gpointer user_data)
@@ -1255,7 +1255,7 @@ node_filter_promote (CongNodeTool *node_tool,
 }
 
 void
-action_callback_promote (CongNodeTool *tool, 
+action_callback_promote (CongServiceNodeTool *tool, 
 			 CongPrimaryWindow *primary_window, 
 			 CongNodePtr node,
 			 gpointer user_data)
@@ -1266,7 +1266,7 @@ action_callback_promote (CongNodeTool *tool,
 }
 
 gboolean 
-node_filter_demote (CongNodeTool *node_tool, 
+node_filter_demote (CongServiceNodeTool *node_tool, 
 		    CongDocument *doc, 
 		    CongNodePtr node,
 		    gpointer user_data)
@@ -1289,7 +1289,7 @@ node_filter_demote (CongNodeTool *node_tool,
 }
 
 void
-action_callback_demote (CongNodeTool *tool, 
+action_callback_demote (CongServiceNodeTool *tool, 
 			CongPrimaryWindow *primary_window, 
 			CongNodePtr node,
 			gpointer user_data)

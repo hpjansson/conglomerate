@@ -32,7 +32,7 @@
 #include "cong-primary-window.h"
 #include "cong-file-selection.h"
 
-static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
@@ -59,7 +59,7 @@ gchar* change_to_xds(gchar* filename)
 	return result;
 }
 
-static void save_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	gchar *new_doc_name;
 	gchar *old_doc_name;
@@ -91,7 +91,7 @@ static void save_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, 
 
 }
 
-static void edit_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongDocument *doc;
 	xmlDocPtr xml;

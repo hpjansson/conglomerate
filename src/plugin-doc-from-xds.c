@@ -32,7 +32,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-util.h"
 
-void factory_action_callback_doc_from_xds(CongDocumentFactory *factory,
+void factory_action_callback_doc_from_xds(CongServiceDocumentFactory *factory,
 	CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
@@ -71,7 +71,7 @@ void factory_action_callback_doc_from_xds(CongDocumentFactory *factory,
 		cong_new_file_assistant_get_toplevel(assistant));
 }
 
-void factory_page_creation_callback_doc_from_xds(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_page_creation_callback_doc_from_xds(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 }
 

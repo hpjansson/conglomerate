@@ -40,7 +40,7 @@ typedef struct CongTemplate
 	gchar* dir;
 } CongTemplate;
 
-void factory_action_callback_templates(CongDocumentFactory *factory,
+void factory_action_callback_templates(CongServiceDocumentFactory *factory,
 	CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr template;
@@ -59,7 +59,7 @@ void factory_action_callback_templates(CongDocumentFactory *factory,
 		cong_new_file_assistant_get_toplevel(assistant));
 }
 
-void factory_page_creation_callback_templates(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_page_creation_callback_templates(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 }
 

@@ -37,7 +37,7 @@
 #include "plugin-admonition-node-element.h"
 
 static CongEditorNodeElement*  
-manufacture_editor_node_admonition (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
+manufacture_editor_node_admonition (CongServiceEditorNodeFactory *plugin_editor_node_factory, 
 				    CongEditorWidget3 *editor_widget, 
 				    CongTraversalNode *traversal_node,
 				    gpointer user_data)

@@ -49,34 +49,34 @@ struct CongPlugin
 
 	CongPluginCallbackConfigure configure_callback;
 
-	GList *list_of_document_factory; /* ptrs of type CongDocumentFactory */
-	GList *list_of_importer; /* ptrs of type CongImporter */
-	GList *list_of_exporter; /* ptrs of type CongExporter */
+	GList *list_of_document_factory; /* ptrs of type CongServiceDocumentFactory */
+	GList *list_of_importer; /* ptrs of type CongServiceImporter */
+	GList *list_of_exporter; /* ptrs of type CongServiceExporter */
 #if ENABLE_PRINTING
-	GList *list_of_print_method; /* ptrs of type CongPrintMethod */
+	GList *list_of_print_method; /* ptrs of type CongServicePrintMethod */
 #endif
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
-	GList *list_of_editor_node_factory; /* ptrs of type CongPluginEditorNodeFactory */
-	GList *list_of_doc_tool; /* ptrs of type CongDocTool */
-	GList *list_of_node_tool; /* ptrs of type CongNodeTool */
-	GList *list_of_property_dialog; /* ptrs of type CongCustomPropertyDialog */
+	GList *list_of_editor_node_factory; /* ptrs of type CongServiceEditorNodeFactory */
+	GList *list_of_doc_tool; /* ptrs of type CongServiceDocTool */
+	GList *list_of_node_tool; /* ptrs of type CongServiceNodeTool */
+	GList *list_of_property_dialog; /* ptrs of type CongServiceNodePropertyDialog */
 };
 
-struct CongFunctionality
+struct CongService
 {
 	CongPlugin *plugin;
 	gchar *name;
 	gchar *description;
-	gchar *functionality_id;
+	gchar *service_id;
 };
 
-struct CongDocumentFactory
+struct CongServiceDocumentFactory
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 
-	CongDocumentFactoryPageCreationCallback page_creation_callback;
-	CongDocumentFactoryActionCallback action_callback;
+	CongServiceDocumentFactoryPageCreationCallback page_creation_callback;
+	CongServiceDocumentFactoryActionCallback action_callback;
 
 	gchar *icon;
 	GdkPixbuf *icon16;
@@ -84,73 +84,73 @@ struct CongDocumentFactory
 	gpointer user_data;
 };
 
-struct CongImporter
+struct CongServiceImporter
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 
-	CongImporterMimeFilter mime_filter;
-	CongImporterActionCallback action_callback;
+	CongServiceImporterMimeFilter mime_filter;
+	CongServiceImporterActionCallback action_callback;
 	gpointer user_data;
 };
 
-struct CongExporter
+struct CongServiceExporter
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 
-	CongExporterDocumentFilter doc_filter;
-	CongExporterActionCallback action_callback;
+	CongServiceExporterDocumentFilter doc_filter;
+	CongServiceExporterActionCallback action_callback;
 	gpointer user_data;
 };
 
 #if ENABLE_PRINTING
-struct CongPrintMethod
+struct CongServicePrintMethod
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 
-	CongPrintMethodDocumentFilter doc_filter;
-	CongPrintMethodActionCallback action_callback;
+	CongServicePrintMethodDocumentFilter doc_filter;
+	CongServicePrintMethodActionCallback action_callback;
 	gpointer user_data;
 };
 #endif
 
-struct CongThumbnailer
+struct CongServiceThumbnailer
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 };
 
-struct CongPluginEditorNodeFactory
+struct CongServiceEditorNodeFactory
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 	CongEditorNodeFactoryMethod make_node;
 	gpointer user_data;
 };
 
-struct CongTool
+struct CongServiceTool
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 	const gchar *menu_text;
 	const gchar *tooltip_text;
 	const gchar *tooltip_further_text;
 	gpointer user_data;
 };
 
-struct CongDocTool
+struct CongServiceDocTool
 {
-	CongTool tool; /* base class */
-	CongDocToolFilter doc_filter;
-	CongDocToolActionCallback action_callback;
+	CongServiceTool tool; /* base class */
+	CongServiceDocToolFilter doc_filter;
+	CongServiceDocToolActionCallback action_callback;
 };
 
-struct CongNodeTool
+struct CongServiceNodeTool
 {
-	CongTool tool; /* base class */
-	CongNodeToolFilter node_filter;
-	CongNodeToolActionCallback action_callback;
+	CongServiceTool tool; /* base class */
+	CongServiceNodeToolFilter node_filter;
+	CongServiceNodeToolActionCallback action_callback;
 };
 
-struct CongCustomPropertyDialog
+struct CongServiceNodePropertyDialog
 {
-	CongFunctionality functionality; /* base class */
+	CongService service; /* base class */
 	CongCustomPropertyFactoryMethod factory_method;
 	gpointer user_data;
 };
@@ -193,16 +193,16 @@ CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager,
 
 #if 0
 void cong_plugin_unregister_document_factory(CongPlugin *plugin, 
-					     CongDocumentFactory *factory);
+					     CongServiceDocumentFactory *factory);
 
 void cong_plugin_unregister_importer(CongPlugin *plugin, 
-				     CongImporter *importer);
+				     CongServiceImporter *importer);
 
 void cong_plugin_unregister_exporter(CongPlugin *plugin, 
-				     CongExporter *exporter);
+				     CongServiceExporter *exporter);
 #endif
 
-void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -214,7 +214,7 @@ void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_man
 }
 
 
-void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -225,7 +225,7 @@ void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, vo
 	}
 }
 
-void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -238,7 +238,7 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 
 
 #if ENABLE_PRINTING
-void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager, void (*callback)(CongServicePrintMethod *print_method, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -250,7 +250,7 @@ void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager
 }
 #endif
 
-void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongDocTool *tool, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocTool *tool, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -261,7 +261,7 @@ void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, vo
 	}
 }
 
-void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongNodeTool *tool, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceNodeTool *tool, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
@@ -272,7 +272,7 @@ void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, v
 	}
 }
 
-CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_id(CongPluginManager *plugin_manager, const gchar *plugin_id)
+CongServiceNodePropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_id(CongPluginManager *plugin_manager, const gchar *plugin_id)
 {
 	GList *plugin_iter;
 
@@ -283,8 +283,8 @@ CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_i
 		GList *factory_iter;
 
 		for (factory_iter = ((CongPlugin*)plugin_iter->data)->list_of_property_dialog; factory_iter; factory_iter=factory_iter->next) {
-			CongCustomPropertyDialog* factory = factory_iter->data;
-			if (0==strcmp(plugin_id, CONG_FUNCTIONALITY(factory)->functionality_id)) {
+			CongServiceNodePropertyDialog* factory = factory_iter->data;
+			if (0==strcmp(plugin_id, CONG_SERVICE(factory)->service_id)) {
 				return factory;
 			}
 		}
@@ -293,7 +293,7 @@ CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_i
 	return NULL;
 }
 
-CongPluginEditorNodeFactory*
+CongServiceEditorNodeFactory*
 cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_manager,
 						      const gchar *plugin_id)
 {
@@ -306,8 +306,8 @@ cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_
 		GList *factory_iter;
 
 		for (factory_iter = ((CongPlugin*)plugin_iter->data)->list_of_editor_node_factory; factory_iter; factory_iter=factory_iter->next) {
-			CongPluginEditorNodeFactory* factory = factory_iter->data;
-			if (0==strcmp(plugin_id, CONG_FUNCTIONALITY(factory)->functionality_id)) {
+			CongServiceEditorNodeFactory* factory = factory_iter->data;
+			if (0==strcmp(plugin_id, CONG_SERVICE(factory)->service_id)) {
 				return factory;
 			}
 		}
@@ -318,16 +318,16 @@ cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_
 
 
 /* Implementation of CongPlugin: */
-CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
+CongServiceDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
 							   const gchar *name, 
 							   const gchar *description,
 							   const gchar *id,
-							   CongDocumentFactoryPageCreationCallback page_creation_callback,
-							   CongDocumentFactoryActionCallback action_callback,
+							   CongServiceDocumentFactoryPageCreationCallback page_creation_callback,
+							   CongServiceDocumentFactoryActionCallback action_callback,
 							   const gchar *icon,
 							   gpointer user_data)
 {
-	CongDocumentFactory *factory;
+	CongServiceDocumentFactory *factory;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
@@ -337,12 +337,12 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	g_return_val_if_fail(action_callback, NULL);
 	/* icon is allowed to be NULL */
 
-	factory = g_new0(CongDocumentFactory,1);
+	factory = g_new0(CongServiceDocumentFactory,1);
 
-	factory->functionality.plugin = plugin;
-	factory->functionality.name = g_strdup(name);
-	factory->functionality.description = g_strdup(description);
-	factory->functionality.functionality_id = g_strdup(id);
+	factory->service.plugin = plugin;
+	factory->service.name = g_strdup(name);
+	factory->service.description = g_strdup(description);
+	factory->service.service_id = g_strdup(id);
 	factory->page_creation_callback = page_creation_callback;
 	factory->action_callback = action_callback;
 	if (icon) {
@@ -357,15 +357,15 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	return factory;
 }
 
-CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
+CongServiceImporter *cong_plugin_register_importer(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongImporterMimeFilter mime_filter,
-					    CongImporterActionCallback action_callback,
+					    CongServiceImporterMimeFilter mime_filter,
+					    CongServiceImporterActionCallback action_callback,
 					    gpointer user_data)
 {
-	CongImporter *importer;
+	CongServiceImporter *importer;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
@@ -374,12 +374,12 @@ CongImporter *cong_plugin_register_importer(CongPlugin *plugin,
 	g_return_val_if_fail(mime_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
-        importer = g_new0(CongImporter,1);
+        importer = g_new0(CongServiceImporter,1);
 
-	importer->functionality.plugin = plugin;
-	importer->functionality.name = g_strdup(name);
-	importer->functionality.description = g_strdup(description);
-	importer->functionality.functionality_id = g_strdup(id);
+	importer->service.plugin = plugin;
+	importer->service.name = g_strdup(name);
+	importer->service.description = g_strdup(description);
+	importer->service.service_id = g_strdup(id);
 	importer->mime_filter = mime_filter;
 	importer->action_callback = action_callback;
 	importer->user_data = user_data;
@@ -390,15 +390,15 @@ CongImporter *cong_plugin_register_importer(CongPlugin *plugin,
 	return importer;
 }
 
-CongExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
+CongServiceExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongExporterDocumentFilter doc_filter,
-					    CongExporterActionCallback action_callback,
+					    CongServiceExporterDocumentFilter doc_filter,
+					    CongServiceExporterActionCallback action_callback,
 					    gpointer user_data)
 {
-	CongExporter *exporter;
+	CongServiceExporter *exporter;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
@@ -407,12 +407,12 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	g_return_val_if_fail(doc_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
-        exporter = g_new0(CongExporter,1);
+        exporter = g_new0(CongServiceExporter,1);
 
-	exporter->functionality.plugin = plugin;
-	exporter->functionality.name = g_strdup(name);
-	exporter->functionality.description = g_strdup(description);
-	exporter->functionality.functionality_id = g_strdup(id);
+	exporter->service.plugin = plugin;
+	exporter->service.name = g_strdup(name);
+	exporter->service.description = g_strdup(description);
+	exporter->service.service_id = g_strdup(id);
 	exporter->doc_filter = doc_filter;
 	exporter->action_callback = action_callback;
 	exporter->user_data = user_data;
@@ -424,15 +424,15 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 }
 
 #if ENABLE_PRINTING
-CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
+CongServicePrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongPrintMethodDocumentFilter doc_filter,
-					    CongPrintMethodActionCallback action_callback,
+					    CongServicePrintMethodDocumentFilter doc_filter,
+					    CongServicePrintMethodActionCallback action_callback,
 					    gpointer user_data)
 {
-	CongPrintMethod *print_method;
+	CongServicePrintMethod *print_method;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
@@ -441,12 +441,12 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 	g_return_val_if_fail(doc_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
-        print_method = g_new0(CongPrintMethod,1);
+        print_method = g_new0(CongServicePrintMethod,1);
 
-	print_method->functionality.plugin = plugin;
-	print_method->functionality.name = g_strdup(name);
-	print_method->functionality.description = g_strdup(description);
-	print_method->functionality.functionality_id = g_strdup(id);
+	print_method->service.plugin = plugin;
+	print_method->service.name = g_strdup(name);
+	print_method->service.description = g_strdup(description);
+	print_method->service.service_id = g_strdup(id);
 	print_method->doc_filter = doc_filter;
 	print_method->action_callback = action_callback;
 	print_method->user_data = user_data;
@@ -458,14 +458,14 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 }
 #endif
 
-CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
+CongServiceEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
 								      const gchar *name, 
 								      const gchar *description,
 								      const gchar *plugin_id,
 								      CongEditorNodeFactoryMethod factory_method,
 								      gpointer user_data)
 {
-	CongPluginEditorNodeFactory *editor_node_factory;
+	CongServiceEditorNodeFactory *editor_node_factory;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
@@ -473,12 +473,12 @@ CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin
 	g_return_val_if_fail(plugin_id, NULL);
 	g_return_val_if_fail(factory_method, NULL);
 
-        editor_node_factory = g_new0(CongPluginEditorNodeFactory,1);
+        editor_node_factory = g_new0(CongServiceEditorNodeFactory,1);
 
-	editor_node_factory->functionality.plugin = plugin;
-	editor_node_factory->functionality.name = g_strdup(name);
-	editor_node_factory->functionality.description = g_strdup(description);
-	editor_node_factory->functionality.functionality_id = g_strdup(plugin_id);
+	editor_node_factory->service.plugin = plugin;
+	editor_node_factory->service.name = g_strdup(name);
+	editor_node_factory->service.description = g_strdup(description);
+	editor_node_factory->service.service_id = g_strdup(plugin_id);
 	editor_node_factory->make_node = factory_method;
 	editor_node_factory->user_data = user_data;
 
@@ -488,31 +488,31 @@ CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin
 	return editor_node_factory;
 }
 
-CongDocTool*
+CongServiceDocTool*
 cong_plugin_register_doc_tool (CongPlugin *plugin,
 			       const gchar *name, 
 			       const gchar *description,
-			       const gchar *functionality_id,
+			       const gchar *service_id,
 			       const gchar *menu_text,
 			       const gchar *tooltip_text,
 			       const gchar *tooltip_further_text,
-			       CongDocToolFilter doc_filter,
-			       CongDocToolActionCallback action_callback,
+			       CongServiceDocToolFilter doc_filter,
+			       CongServiceDocToolActionCallback action_callback,
 			       gpointer user_data)
 {
-	CongDocTool *tool;
+	CongServiceDocTool *tool;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
-	g_return_val_if_fail(functionality_id, NULL);
+	g_return_val_if_fail(service_id, NULL);
 
-        tool = g_new0(CongDocTool,1);
+        tool = g_new0(CongServiceDocTool,1);
 
-	tool->tool.functionality.plugin = plugin;
-	tool->tool.functionality.name = g_strdup(name);
-	tool->tool.functionality.description = g_strdup(description);
-	tool->tool.functionality.functionality_id = g_strdup(functionality_id);
+	tool->tool.service.plugin = plugin;
+	tool->tool.service.name = g_strdup(name);
+	tool->tool.service.description = g_strdup(description);
+	tool->tool.service.service_id = g_strdup(service_id);
 	tool->tool.menu_text = g_strdup(menu_text);
 	tool->tool.tooltip_text = g_strdup(tooltip_text);
 	tool->tool.tooltip_further_text = g_strdup(tooltip_further_text);
@@ -527,31 +527,31 @@ cong_plugin_register_doc_tool (CongPlugin *plugin,
 
 }
 
-CongNodeTool*
+CongServiceNodeTool*
 cong_plugin_register_node_tool (CongPlugin *plugin,
 				const gchar *name, 
 				const gchar *description,
-				const gchar *functionality_id,
+				const gchar *service_id,
 				const gchar *menu_text,
 				const gchar *tooltip_text,
 				const gchar *tooltip_further_text,
-				CongNodeToolFilter node_filter,
-				CongNodeToolActionCallback action_callback,
+				CongServiceNodeToolFilter node_filter,
+				CongServiceNodeToolActionCallback action_callback,
 				gpointer user_data)
 {
-	CongNodeTool *tool;
+	CongServiceNodeTool *tool;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
-	g_return_val_if_fail(functionality_id, NULL);
+	g_return_val_if_fail(service_id, NULL);
 
-        tool = g_new0(CongNodeTool,1);
+        tool = g_new0(CongServiceNodeTool,1);
 
-	tool->tool.functionality.plugin = plugin;
-	tool->tool.functionality.name = g_strdup(name);
-	tool->tool.functionality.description = g_strdup(description);
-	tool->tool.functionality.functionality_id = g_strdup(functionality_id);
+	tool->tool.service.plugin = plugin;
+	tool->tool.service.name = g_strdup(name);
+	tool->tool.service.description = g_strdup(description);
+	tool->tool.service.service_id = g_strdup(service_id);
 	tool->tool.menu_text = g_strdup(menu_text);
 	tool->tool.tooltip_text = g_strdup(tooltip_text);
 	tool->tool.tooltip_further_text = g_strdup(tooltip_further_text);
@@ -566,27 +566,27 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 
 }
 
-CongCustomPropertyDialog*
+CongServiceNodePropertyDialog*
 cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
 					     const gchar *name, 
 					     const gchar *description,
-					     const gchar *functionality_id,
+					     const gchar *service_id,
 					     CongCustomPropertyFactoryMethod factory_method,
 					     gpointer user_data)
 {
-	CongCustomPropertyDialog *property_dialog;
+	CongServiceNodePropertyDialog *property_dialog;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
-	g_return_val_if_fail(functionality_id, NULL);
+	g_return_val_if_fail(service_id, NULL);
 
-        property_dialog = g_new0(CongCustomPropertyDialog,1);
+        property_dialog = g_new0(CongServiceNodePropertyDialog,1);
 
-	property_dialog->functionality.plugin = plugin;
-	property_dialog->functionality.name = g_strdup(name);
-	property_dialog->functionality.description = g_strdup(description);
-	property_dialog->functionality.functionality_id = g_strdup(functionality_id);
+	property_dialog->service.plugin = plugin;
+	property_dialog->service.name = g_strdup(name);
+	property_dialog->service.description = g_strdup(description);
+	property_dialog->service.service_id = g_strdup(service_id);
 	property_dialog->factory_method = factory_method;
 	property_dialog->user_data = user_data;
 
@@ -597,20 +597,20 @@ cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
 
 }
 
-CongCustomPropertyDialog*
+CongServiceNodePropertyDialog*
 cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 							 const gchar *element_name,
-							 const gchar *functionality_id,
+							 const gchar *service_id,
 							 CongCustomPropertyFactoryMethod factory_method,
 							 gpointer user_data)
 {
-	CongCustomPropertyDialog *property_dialog;
+	CongServiceNodePropertyDialog *property_dialog;
 	gchar *name;
 	gchar *description;	
 
 	g_return_val_if_fail (plugin, NULL);
 	g_return_val_if_fail (element_name, NULL);
-	g_return_val_if_fail (functionality_id, NULL);
+	g_return_val_if_fail (service_id, NULL);
 
 	/* Generate a user-visible name for this plugin property dialog (property dialog for an XML element)*/
 	name = g_strdup_printf (_("<%s> property dialog"), element_name);
@@ -621,7 +621,7 @@ cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 	property_dialog = cong_plugin_register_custom_property_dialog (plugin,
 								       name, 
 								       description,
-								       functionality_id,
+								       service_id,
 								       factory_method,
 								       user_data);
 	g_free (name);
@@ -630,7 +630,7 @@ cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 	return property_dialog;
 }
 
-void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -638,7 +638,7 @@ void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(
 	g_list_foreach(plugin->list_of_document_factory, (GFunc)callback, user_data);
 }
 
-void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -646,7 +646,7 @@ void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImpo
 	g_list_foreach(plugin->list_of_importer, (GFunc)callback, user_data);
 }
 
-void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -655,7 +655,7 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 }
 
 #if ENABLE_PRINTING
-void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongServicePrintMethod *print_method, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -664,7 +664,7 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 }
 #endif
 
-void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongDocTool *doc_tool, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServiceDocTool *doc_tool, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -672,7 +672,7 @@ void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongDocT
 	g_list_foreach(plugin->list_of_doc_tool, (GFunc)callback, user_data);
 }
 
-void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongNodeTool *node_tool, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongServiceNodeTool *node_tool, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
@@ -699,68 +699,68 @@ gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
 	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s/%s"), plugin->plugin_id, local_part);
 }
 
-/* Implementation of CongFunctionality: */
-const gchar* cong_functionality_get_name(CongFunctionality *functionality)
+/* Implementation of CongService: */
+const gchar* cong_service_get_name(CongService *service)
 {
-	g_return_val_if_fail(functionality, NULL);
+	g_return_val_if_fail(service, NULL);
 	
-	return functionality->name;
+	return service->name;
 }
 
-const gchar* cong_functionality_get_description(CongFunctionality *functionality)
+const gchar* cong_service_get_description(CongService *service)
 {
-	g_return_val_if_fail(functionality, NULL);
+	g_return_val_if_fail(service, NULL);
 
-	return functionality->description;
+	return service->description;
 }
 
-gchar* cong_functionality_get_gconf_namespace(CongFunctionality* functionality)
+gchar* cong_service_get_gconf_namespace(CongService* service)
 {
 	gchar *plugin_namespace;
 	gchar *result;
 
-	g_return_val_if_fail(functionality, NULL);
+	g_return_val_if_fail(service, NULL);
 
-	g_assert(functionality->plugin);
-	g_assert(functionality->functionality_id);
+	g_assert(service->plugin);
+	g_assert(service->service_id);
 
-	plugin_namespace = cong_plugin_get_gconf_namespace(functionality->plugin);
+	plugin_namespace = cong_plugin_get_gconf_namespace(service->plugin);
 
-	result = g_strdup_printf("%s/%s", plugin_namespace, functionality->functionality_id);
+	result = g_strdup_printf("%s/%s", plugin_namespace, service->service_id);
 
 	g_free(plugin_namespace);
 
 	return result;
 }
 
-gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const gchar *local_part)
+gchar* cong_service_get_gconf_key(CongService *service, const gchar *local_part)
 {
 	gchar *scoped_local_part;
-	gchar *functionality_path;
+	gchar *service_path;
 
-	g_return_val_if_fail(functionality, NULL);
+	g_return_val_if_fail(service, NULL);
 	g_return_val_if_fail(local_part, NULL);
 
-	g_assert(functionality->plugin);
-	g_assert(functionality->functionality_id);
+	g_assert(service->plugin);
+	g_assert(service->service_id);
 
-	scoped_local_part =  g_strdup_printf("%s/%s", functionality->functionality_id, local_part);
+	scoped_local_part =  g_strdup_printf("%s/%s", service->service_id, local_part);
 
-	functionality_path = cong_plugin_get_gconf_key(functionality->plugin, scoped_local_part);
+	service_path = cong_plugin_get_gconf_key(service->plugin, scoped_local_part);
 
 	g_free(scoped_local_part);
 
-	return functionality_path;
+	return service_path;
 }
 
-/* Implementation of CongDocumentFactory: */
-void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant)
+/* Implementation of CongServiceDocumentFactory: */
+void cong_document_factory_invoke_page_creation_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
 {
 	g_return_if_fail(factory);
 	g_return_if_fail(assistant);
 
 #if 0
-	g_message("page creation for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+	g_message("page creation for document factory \"%s\"", cong_service_get_name(CONG_SERVICE(factory)));
 #endif
 
 	g_assert(factory->page_creation_callback);
@@ -768,13 +768,13 @@ void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *fa
 	factory->page_creation_callback(factory, assistant, factory->user_data);
 }
 
-void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant)
+void cong_document_factory_invoke_action_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
 {
 	g_return_if_fail(factory);
 	g_return_if_fail(assistant);
 
 #if 0
-	g_message("invoking action for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+	g_message("invoking action for document factory \"%s\"", cong_service_get_name(CONG_SERVICE(factory)));
 #endif
 
 	g_assert(factory->action_callback);
@@ -782,7 +782,7 @@ void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, 
 	factory->action_callback(factory, assistant, factory->user_data);
 }
 
-GdkPixbuf *cong_document_factory_get_icon(CongDocumentFactory *factory)
+GdkPixbuf *cong_document_factory_get_icon(CongServiceDocumentFactory *factory)
 {
 	g_return_val_if_fail(factory, NULL);
 
@@ -794,8 +794,8 @@ GdkPixbuf *cong_document_factory_get_icon(CongDocumentFactory *factory)
 	}
 }
 
-/* Implementation of CongImporter: */
-gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type)
+/* Implementation of CongServiceImporter: */
+gboolean cong_importer_supports_mime_type(CongServiceImporter *importer, const gchar *mime_type)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -806,7 +806,7 @@ gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *m
 
 }
 
-void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
+void cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(importer);
 	g_return_if_fail(filename);
@@ -817,8 +817,8 @@ void cong_importer_invoke(CongImporter *importer, const gchar *filename, const g
 	return importer->action_callback(importer, filename, mime_type, importer->user_data, toplevel_window);
 }
 
-/* Implementation of CongExporter: */
-gboolean cong_exporter_supports_document(CongExporter *exporter, CongDocument *doc)
+/* Implementation of CongServiceExporter: */
+gboolean cong_exporter_supports_document(CongServiceExporter *exporter, CongDocument *doc)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -828,7 +828,7 @@ gboolean cong_exporter_supports_document(CongExporter *exporter, CongDocument *d
 	return exporter->doc_filter(exporter, doc, exporter->user_data);
 }
 
-void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
+void cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
@@ -839,14 +839,14 @@ void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar
 	return exporter->action_callback(exporter, doc, uri, exporter->user_data, toplevel_window);
 }
 
-gchar *cong_exporter_get_preferred_uri(CongExporter *exporter)
+gchar *cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
 {
 	gchar *gconf_key;
 	gchar *preferred_uri;
 
 	g_return_val_if_fail(exporter, NULL);
 
-	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
+	gconf_key = cong_service_get_gconf_key(CONG_SERVICE(exporter), "preferred-uri");
 	
 	preferred_uri = gconf_client_get_string( cong_app_get_gconf_client (cong_app_singleton()),
 						 gconf_key,
@@ -857,14 +857,14 @@ gchar *cong_exporter_get_preferred_uri(CongExporter *exporter)
 	return preferred_uri;
 }
 
-void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
+void cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
 {
 	gchar *gconf_key;
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(uri);
 
-	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
+	gconf_key = cong_service_get_gconf_key(CONG_SERVICE(exporter), "preferred-uri");
 
 	gconf_client_set_string( cong_app_get_gconf_client (cong_app_singleton()),
 				 gconf_key,
@@ -875,8 +875,8 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 }
 
 #if ENABLE_PRINTING
-/* Implementation of CongPrintMethod: */
-gboolean cong_print_method_supports_document(CongPrintMethod *print_method, CongDocument *doc)
+/* Implementation of CongServicePrintMethod: */
+gboolean cong_print_method_supports_document(CongServicePrintMethod *print_method, CongDocument *doc)
 {
 	g_return_val_if_fail(print_method, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -886,7 +886,7 @@ gboolean cong_print_method_supports_document(CongPrintMethod *print_method, Cong
 	return print_method->doc_filter(print_method, doc, print_method->user_data);
 }
 
-void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)
+void cong_print_method_invoke(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(print_method);
 	g_return_if_fail(doc);
@@ -899,7 +899,7 @@ void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, 
 #endif
 
 gboolean 
-cong_doc_tool_supports_document (CongDocTool *tool, 
+cong_doc_tool_supports_document (CongServiceDocTool *tool, 
 				 CongDocument *doc)
 {
 	g_return_val_if_fail(tool, FALSE);
@@ -910,7 +910,7 @@ cong_doc_tool_supports_document (CongDocTool *tool,
 }
 
 void 
-cong_doc_tool_invoke (CongDocTool *tool, 
+cong_doc_tool_invoke (CongServiceDocTool *tool, 
 		      CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(tool);
@@ -920,7 +920,7 @@ cong_doc_tool_invoke (CongDocTool *tool,
 }
 
 gboolean 
-cong_node_tool_supports_node (CongNodeTool *tool, 
+cong_node_tool_supports_node (CongServiceNodeTool *tool, 
 			      CongDocument *doc,
 			      CongNodePtr node)
 {
@@ -933,7 +933,7 @@ cong_node_tool_supports_node (CongNodeTool *tool,
 }
 
 void 
-cong_node_tool_invoke (CongNodeTool *tool, 
+cong_node_tool_invoke (CongServiceNodeTool *tool, 
 		       CongPrimaryWindow *primary_window,
 		       CongNodePtr node)
 {
@@ -944,21 +944,21 @@ cong_node_tool_invoke (CongNodeTool *tool,
 	return tool->action_callback(tool, primary_window, node, tool->tool.user_data);
 }
 
-const gchar *cong_tool_get_menu_text(CongTool *tool)
+const gchar *cong_tool_get_menu_text(CongServiceTool *tool)
 {
 	g_return_val_if_fail(tool, NULL);
 
 	return tool->menu_text;
 }
 
-const gchar *cong_tool_get_tip_text(CongTool *tool)
+const gchar *cong_tool_get_tip_text(CongServiceTool *tool)
 {
 	g_return_val_if_fail(tool, NULL);
 
 	return tool->tooltip_text;
 }
 
-const gchar *cong_tool_get_tip_further_text(CongTool *tool)
+const gchar *cong_tool_get_tip_further_text(CongServiceTool *tool)
 {
 	g_return_val_if_fail(tool, NULL);
 
@@ -1166,7 +1166,7 @@ gboolean cong_ui_load_imported_file_content(const gchar *string_uri,
 }
 
 CongEditorNodeElement*
-cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
+cong_plugin_editor_node_factory_invoke (CongServiceEditorNodeFactory *plugin_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 
 					CongTraversalNode *traversal_node)
 {
@@ -1182,7 +1182,7 @@ cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_edit
 						      plugin_editor_node_factory->user_data);
 }
 
-GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,
+GtkWidget *cong_custom_property_dialog_make(CongServiceNodePropertyDialog *custom_property_dialog,
 					    CongDocument *doc,
 					    CongNodePtr node)
 {

@@ -32,7 +32,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
-static gboolean convert_case_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
+static gboolean convert_case_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -59,7 +59,7 @@ static void visit_node(xmlNodePtr node) {
 	}
 }
 
-static void convert_case_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+static void convert_case_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 	xmlDocPtr doc_ptr;

@@ -34,7 +34,7 @@ gboolean plugin_empty_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
-	/* Register your functionality here */
+	/* Register your service here */
 	
 	return TRUE;
 }

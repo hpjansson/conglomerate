@@ -36,7 +36,7 @@
 #include "cong-util.h"
 
 
-static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
@@ -408,7 +408,7 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 				   cleanup_data.cmd);
 }
 
-static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongSourceCleanupOptions options;
 

@@ -1,5 +1,9 @@
 2004-01-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node.c, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-print.c, cong-menus.c, cong-node-properties-dialog.c, cong-plugin.c, cong-plugin.h, plugin-admonition.c, plugin-cleanup-source.c, plugin-convert-case.c, plugin-doc-from-xds.c, plugin-docbook.c, plugin-dtd.c, plugin-empty.c, plugin-fo.c, plugin-lists.c, plugin-paragraph.c, plugin-save-dispspec.c, plugin-sgml.c, plugin-templates.c, plugin-tests.c, plugin-validate.c, plugin-website.c, popup.c
+
+	Big rename of plugin code: functionality is now service
+	
 	* cong-dispspec.c
 
 	Fixed crash when loading file without a dispspec with no extension in its filename

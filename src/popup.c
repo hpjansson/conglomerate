@@ -881,7 +881,7 @@ invoke_node_tool (CongDocument *doc,
 		  GtkWindow *parent_window)
 {
 #if 0
-	cong_node_tool_invoke (CongNodeTool *node_tool, 
+	cong_node_tool_invoke (CongServiceNodeTool *node_tool, 
 			       parent_window,
 			       node);
 #error
@@ -898,7 +898,7 @@ struct add_node_tool_callback_data
 };
 
 static void
-add_node_tool_callback (CongNodeTool *node_tool, 
+add_node_tool_callback (CongServiceNodeTool *node_tool, 
 			gpointer user_data)
 {
 	struct add_node_tool_callback_data *callback_data = user_data;

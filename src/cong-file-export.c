@@ -51,7 +51,7 @@ typedef struct CongExportDialogDetails
 
 } CongExportDialogDetails;
 
-static CongExporter* get_selected_exporter(CongExportDialogDetails *dialog_details)
+static CongServiceExporter* get_selected_exporter(CongExportDialogDetails *dialog_details)
 {
 	GtkMenuItem* selected_menu_item;
 
@@ -61,14 +61,14 @@ static CongExporter* get_selected_exporter(CongExportDialogDetails *dialog_detai
 	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (dialog_details->select_exporter_option_menu);
 			
 	if (selected_menu_item) {
-		return (CongExporter*)g_object_get_data(G_OBJECT(selected_menu_item),
+		return (CongServiceExporter*)g_object_get_data(G_OBJECT(selected_menu_item),
 							"exporter");
 	} else {
 		return NULL;
 	}
 }
 
-static void add_exporter_to_menu(CongExporter *exporter, gpointer user_data)
+static void add_exporter_to_menu(CongServiceExporter *exporter, gpointer user_data)
 {
 	CongExportDialogDetails *dialog_details = (CongExportDialogDetails*)user_data;
 
@@ -76,7 +76,7 @@ static void add_exporter_to_menu(CongExporter *exporter, gpointer user_data)
 
 		GtkWidget *menu = dialog_details->select_exporter_menu;
 
-		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(exporter))));
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_service_get_name(CONG_SERVICE(exporter))));
 
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
 				      GTK_WIDGET(menu_item));
@@ -95,7 +95,7 @@ static void gconf_notify_func(GConfClient *client,
 			      gpointer user_data)
 {
 	CongExportDialogDetails *details = user_data;
-	CongExporter* exporter = get_selected_exporter(details);
+	CongServiceExporter* exporter = get_selected_exporter(details);
 
 	g_message("gconf_notify_function");
 
@@ -110,13 +110,13 @@ static void gconf_notify_func(GConfClient *client,
 
 static void monitor_exporter(CongExportDialogDetails *dialog_details)
 {
-	CongExporter* exporter = get_selected_exporter(dialog_details);
+	CongServiceExporter* exporter = get_selected_exporter(dialog_details);
 	g_assert(dialog_details);
 	g_assert(exporter);
 
 	/* start monitoring GConf for selected plugin */
 	{
-		gchar *exporter_namespace  = cong_functionality_get_gconf_namespace(CONG_FUNCTIONALITY(exporter));
+		gchar *exporter_namespace  = cong_service_get_gconf_namespace(CONG_SERVICE(exporter));
 
 		/* g_message("adding notification for \"%s\"", exporter_namespace); */
 		dialog_details->connection_id = gconf_client_notify_add(cong_app_get_gconf_client (cong_app_singleton()),
@@ -143,13 +143,13 @@ static void monitor_exporter(CongExportDialogDetails *dialog_details)
 
 static void setup_description(CongExportDialogDetails *dialog_details)
 {
-	CongExporter* exporter = get_selected_exporter(dialog_details);
+	CongServiceExporter* exporter = get_selected_exporter(dialog_details);
 	const gchar *desc;
 
 	g_assert(dialog_details);
 	g_assert(exporter);
 
-	desc = cong_functionality_get_description(CONG_FUNCTIONALITY(exporter));
+	desc = cong_service_get_description(CONG_SERVICE(exporter));
 
 	if (desc) {
 		gchar * text = g_strdup_printf("<small>%s</small>", desc);
@@ -185,7 +185,7 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	gchar *export_uri;
 	gchar *new_uri;
 	CongExportDialogDetails *details = user_data;
-	CongExporter* exporter = get_selected_exporter(details);
+	CongServiceExporter* exporter = get_selected_exporter(details);
 	g_assert(exporter);
 
 	/* 
@@ -350,13 +350,13 @@ cong_ui_file_export(CongDocument *doc,
 			
 		case GTK_RESPONSE_OK:
 			{
-				CongExporter* exporter;
+				CongServiceExporter* exporter;
 				
 				/* Which plugin has been selected? */
 				exporter = get_selected_exporter(dialog_details);
 				if (exporter) {
 					gchar *export_uri = cong_exporter_get_preferred_uri(exporter);
-					g_message("Exporter invoked: \"%s\" to \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(exporter)), export_uri);
+					g_message("Exporter invoked: \"%s\" to \"%s\"", cong_service_get_name(CONG_SERVICE(exporter)), export_uri);
 					
 					cong_exporter_invoke(exporter, 
 							     doc, 

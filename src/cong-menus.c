@@ -1377,7 +1377,7 @@ static void on_tool_menu_item_activation(GtkMenuItem *menuitem,
 					 gpointer user_data)
 {
 	CongPrimaryWindow *primary_window = user_data;
-	CongDocTool *tool = g_object_get_data(G_OBJECT(menuitem), "cong-tool");
+	CongServiceDocTool *tool = g_object_get_data(G_OBJECT(menuitem), "cong-tool");
 	
 	g_assert(primary_window);
 	g_assert(tool);
@@ -1385,7 +1385,7 @@ static void on_tool_menu_item_activation(GtkMenuItem *menuitem,
 	cong_doc_tool_invoke(tool, primary_window);
 }
 
-static void add_tool_callback(CongDocTool *tool, gpointer user_data)
+static void add_tool_callback(CongServiceDocTool *tool, gpointer user_data)
 {
 	struct add_tool_callback_data *callback_data = user_data;
 

@@ -39,7 +39,7 @@
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include "cong-file-selection.h"
 
-CongImporter*
+CongServiceImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
 			     const gchar *filename,
 			     const gchar* mime_type,
@@ -51,7 +51,7 @@ struct add_importer_to_list_data
 	GList **list_head;
 };
 
-static void add_importer_to_list(CongImporter *importer, gpointer user_data)
+static void add_importer_to_list(CongServiceImporter *importer, gpointer user_data)
 {
 	struct add_importer_to_list_data *data = user_data;
 	if (cong_importer_supports_mime_type(importer, data->mime_type) ) {
@@ -119,7 +119,7 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 		if (list_of_valid->next) {
 			/* There's more than one valid importer... */
-			CongImporter *importer= cong_file_import_dialog_run (toplevel_window,
+			CongServiceImporter *importer= cong_file_import_dialog_run (toplevel_window,
 									     filename,
 									     mime_type,
 									     list_of_valid);
@@ -131,7 +131,7 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 			}
 			
 		} else {
-			CongImporter *importer = list_of_valid->data;
+			CongServiceImporter *importer = list_of_valid->data;
 			g_assert(importer);
 
 			cong_importer_invoke (importer, 
@@ -147,13 +147,13 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 }
 
-CongImporter*
+CongServiceImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
 			     const gchar *filename,
 			     const gchar* mime_type,
 			     GList *list_of_valid_importers)
 {
-	CongImporter* result = NULL;
+	CongServiceImporter* result = NULL;
 	gchar* glade_filename;
 	GladeXML *xml;
 	GtkOptionMenu *select_importer;
@@ -182,12 +182,12 @@ cong_file_import_dialog_run (GtkWindow *toplevel_window,
 		menu = GTK_MENU (gtk_menu_new ());
 
 		for (iter=list_of_valid_importers; iter; iter=iter->next) {
-			CongImporter *importer = iter->data;
+			CongServiceImporter *importer = iter->data;
 			GtkWidget *menu_item;
 
 			g_assert (importer);
 
-			menu_item = gtk_menu_item_new_with_label (cong_functionality_get_name (CONG_FUNCTIONALITY (importer)));
+			menu_item = gtk_menu_item_new_with_label (cong_service_get_name (CONG_SERVICE (importer)));
 			
 			gtk_widget_show (menu_item);
 

@@ -392,7 +392,7 @@ static void build_node_graph(GenerateWebsiteWorkspace *workspace)
 }
 
 
-static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	const CongXMLChar* dtd_public_id = cong_document_get_dtd_public_identifier(doc);
 	
@@ -419,7 +419,7 @@ static void on_error_details(gpointer data)
 }
 
 
-static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	GenerateWebsiteWorkspace *workspace = g_new0(GenerateWebsiteWorkspace,1);
 	GError *error = NULL;

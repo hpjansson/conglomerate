@@ -73,13 +73,13 @@ static void on_details(gpointer data)
 	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, "Can't supply details about validation failure", 113758);
 }
 
-static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
 }
 
-static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 	xmlDocPtr xml_doc = cong_document_get_xml(doc);

@@ -37,7 +37,7 @@
 #include "plugin-lists-node-element-listitem.h"
 
 static CongEditorNodeElement*  
-manufacture_editor_node_listitem (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
+manufacture_editor_node_listitem (CongServiceEditorNodeFactory *plugin_editor_node_factory, 
 				  CongEditorWidget3 *editor_widget, 
 				  CongTraversalNode *traversal_node,
 				  gpointer user_data)

@@ -54,7 +54,7 @@ static gboolean is_fo(CongDocument *doc)
 }
 
 
-gboolean fo_pdf_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
+gboolean fo_pdf_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -62,7 +62,7 @@ gboolean fo_pdf_exporter_document_filter(CongExporter *exporter, CongDocument *d
 	return is_fo(doc);
 }
 
-void fo_pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+void fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("fo_pdf_exporter_action_callback");
 
@@ -76,7 +76,7 @@ void fo_pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, 
 }
 
 #if (ENABLE_PRINTING && ENABLE_LIBFO)
-gboolean fo_print_method_document_filter(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data)
+gboolean fo_print_method_document_filter(CongServicePrintMethod *print_method, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -84,7 +84,7 @@ gboolean fo_print_method_document_filter(CongPrintMethod *print_method, CongDocu
 	return is_fo(doc);
 }
 
-void fo_print_method_action_callback(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
+void fo_print_method_action_callback(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("fo_print_method_action_callback");
 

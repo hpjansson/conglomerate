@@ -38,7 +38,7 @@ gchar *cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
 	return return_val;
 }
 
-gboolean sgml_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
+gboolean sgml_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -68,7 +68,7 @@ static gboolean on_stderr(GIOChannel *source,
 	return TRUE;
 }
 
-void sgml_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+void sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;

@@ -70,7 +70,7 @@ set_pixbuf (GtkTreeViewColumn *tree_column,
 	    gpointer           user_data)
 {
 	GdkPixbuf *pixbuf = NULL;
-	CongDocumentFactory *factory;
+	CongServiceDocumentFactory *factory;
 	
        	gtk_tree_model_get (model, iter, 
 			    NEWDOCTYPELIST_FACTORY_COLUMN, &factory,
@@ -113,7 +113,7 @@ gboolean last_page_of_factory_next(GnomeDruidPage *druidpage,
 }
 
 GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
-							 CongDocumentFactory *document_factory, 
+							 CongServiceDocumentFactory *document_factory, 
 							 gboolean is_first_of_factory,
 							 gboolean is_last_of_factory)
 {
@@ -124,7 +124,7 @@ GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *a
 	g_return_val_if_fail(document_factory, NULL);
 
 	title = g_strdup_printf(_("Creating a new file (%s)"), 
-				cong_functionality_get_name(CONG_FUNCTIONALITY(document_factory)));
+				cong_service_get_name(CONG_SERVICE(document_factory)));
 
 	page = GNOME_DRUID_PAGE_STANDARD(gnome_druid_page_standard_new_with_vals(title,
 										 assistant->logo,
@@ -168,7 +168,7 @@ GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 	return GTK_WINDOW(assistant->window);
 }
 
-static void add_factory_callback(CongDocumentFactory *factory, gpointer user_data)
+static void add_factory_callback(CongServiceDocumentFactory *factory, gpointer user_data)
 {
 	CongNewFileAssistant *assistant = user_data;
 	
@@ -176,8 +176,8 @@ static void add_factory_callback(CongDocumentFactory *factory, gpointer user_dat
 	gtk_list_store_append (assistant->list_store, &iter);  /* Acquire an iterator */
 			
 	gtk_list_store_set (assistant->list_store, &iter,
-			    NEWDOCTYPELIST_NAME_COLUMN, cong_functionality_get_name(CONG_FUNCTIONALITY(factory)),
-			    NEWDOCTYPELIST_DESCRIPTION_COLUMN, cong_functionality_get_description(CONG_FUNCTIONALITY(factory)),
+			    NEWDOCTYPELIST_NAME_COLUMN, cong_service_get_name(CONG_SERVICE(factory)),
+			    NEWDOCTYPELIST_DESCRIPTION_COLUMN, cong_service_get_description(CONG_SERVICE(factory)),
 			    NEWDOCTYPELIST_FACTORY_COLUMN, factory,
 			    -1);
 
@@ -285,7 +285,7 @@ gboolean second_page_next(GnomeDruidPage *druidpage,
 	if (gtk_tree_selection_get_selected (tree_selection,
                                              &tree_model,
                                              &iter) ) {
-		CongDocumentFactory *factory;		
+		CongServiceDocumentFactory *factory;		
 		GnomeDruidPage *appropriate_third_page;
 
 		gtk_tree_model_get(tree_model,
@@ -304,7 +304,7 @@ gboolean second_page_next(GnomeDruidPage *druidpage,
 			/* what to do in this case? */
 #if DEBUG_FILE_NEW_ASSISTANT
 			g_message("haven't got a third page registered for factory \"%s\"", 
-				  cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+				  cong_service_get_name(CONG_SERVICE(factory)));
 #endif
 			/* go to final page: */
 			assistant->previous_page = druidpage;
@@ -357,7 +357,7 @@ gboolean final_page_finish(GnomeDruidPage *druidpage,
 	if (gtk_tree_selection_get_selected (tree_selection,
                                              &tree_model,
                                              &iter) ) {
-		CongDocumentFactory *factory;		
+		CongServiceDocumentFactory *factory;		
 
 		gtk_tree_model_get(tree_model,
 				   &iter,
@@ -381,7 +381,7 @@ gboolean final_page_finish(GnomeDruidPage *druidpage,
 	return TRUE;
 }
 
-static void add_pages_for_factory_callback(CongDocumentFactory *factory, gpointer user_data)
+static void add_pages_for_factory_callback(CongServiceDocumentFactory *factory, gpointer user_data)
 {
 	CongNewFileAssistant *assistant = user_data;
 

@@ -50,7 +50,7 @@ typedef struct CongPrintDialogDetails
 	GtkWidget *select_print_method_menu;
 } CongPrintDialogDetails;
 
-static CongPrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog_details)
+static CongServicePrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog_details)
 {
 	GtkMenuItem* selected_menu_item;
 
@@ -60,20 +60,20 @@ static CongPrintMethod* get_selected_print_method(CongPrintDialogDetails *dialog
 	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (dialog_details->select_print_method_option_menu);
 			
 	if (selected_menu_item) {
-		return (CongPrintMethod*)g_object_get_data(G_OBJECT(selected_menu_item),
+		return (CongServicePrintMethod*)g_object_get_data(G_OBJECT(selected_menu_item),
 							"print_method");
 	} else {
 		return NULL;
 	}
 }
 
-static void add_print_method_to_menu(CongPrintMethod *print_method, gpointer user_data)
+static void add_print_method_to_menu(CongServicePrintMethod *print_method, gpointer user_data)
 {
 	CongPrintDialogDetails *dialog_details = (CongPrintDialogDetails*)user_data;
 
 	if (cong_print_method_supports_document(print_method, dialog_details->doc)) {
 		GtkWidget *menu = dialog_details->select_print_method_menu;
-		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(print_method))));
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_label( cong_service_get_name(CONG_SERVICE(print_method))));
 
 		gtk_menu_shell_append(GTK_MENU_SHELL(menu),
 				      GTK_WIDGET(menu_item));
@@ -88,14 +88,14 @@ static void add_print_method_to_menu(CongPrintMethod *print_method, gpointer use
 
 static void monitor_print_method(CongPrintDialogDetails *dialog_details)
 {
-	CongPrintMethod* print_method = get_selected_print_method(dialog_details);
+	CongServicePrintMethod* print_method = get_selected_print_method(dialog_details);
 	g_assert(dialog_details);
 	g_assert(print_method);
 
 #if 0
 	/* start monitoring GConf for selected plugin */
 	{
-		gchar *print_method_namespace  = cong_functionality_get_gconf_namespace(CONG_FUNCTIONALITY(print_method));
+		gchar *print_method_namespace  = cong_service_get_gconf_namespace(CONG_SERVICE(print_method));
 
 		/* g_message("adding notification for \"%s\"", print_method_namespace); */
 		dialog_details->connection_id = gconf_client_notify_add(the_globals.gconf_client,
@@ -146,7 +146,7 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	gchar *print_uri;
 	gchar *new_uri;
 	CongPrintDialogDetails *details = user_data;
-	CongPrintMethod* print_method = get_selected_print_method(details);
+	CongServicePrintMethod* print_method = get_selected_print_method(details);
 	g_assert(print_method);
 
 	/* 
@@ -294,7 +294,7 @@ do_ui_file_print(CongDocument *doc,
 			
 		case GTK_RESPONSE_OK:
 			{
-				CongPrintMethod* print_method;
+				CongServicePrintMethod* print_method;
 				
 				/* Which plugin has been selected? */
 				print_method = get_selected_print_method(dialog_details);
@@ -303,7 +303,7 @@ do_ui_file_print(CongDocument *doc,
 					GnomePrintContext *gpc;
 					GtkWidget *preview_widget;
 					
-					g_message("Print_Method invoked: \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(print_method)));
+					g_message("Print_Method invoked: \"%s\"", cong_service_get_name(CONG_SERVICE(print_method)));
 					
 					gpj = gnome_print_job_new (NULL); /* FIXME: provide an option to use a non-default config */
 					gpc = gnome_print_job_get_context (gpj);

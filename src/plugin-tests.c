@@ -3,7 +3,7 @@
 /*
  * plugin-tests.c
  *
- * Plugin for testing functionality of various kinds.  Not really intended for end-users.
+ * Plugin for testing service of various kinds.  Not really intended for end-users.
  *
  * Copyright (C) 2002 David Malcolm
  *
@@ -38,7 +38,7 @@ struct UnicodeCreationInfo
 	int starting_character;
 };
 
-void factory_page_creation_callback_unicode(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_page_creation_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	GnomeDruidPageStandard *page;
 
@@ -306,7 +306,7 @@ xmlDocPtr make_set(const xmlChar *title)
 }
 #endif
 
-void factory_action_callback_unicode(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+void factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 	struct UnicodeCreationInfo uci;
