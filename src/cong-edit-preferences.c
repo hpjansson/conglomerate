@@ -101,7 +101,6 @@ cong_ui_hook_edit_preferences (GtkWindow *toplevel_window)
 enum
 {
 	DOCTYPELIST_NAME_COLUMN,
-	DOCTYPELIST_DESCRIPTION_COLUMN,
 	DOCTYPELIST_N_COLUMNS
 };
 
@@ -117,7 +116,7 @@ populate_dispspec_tree (CongPreferencesDialogDetails *dialog_details)
 
 	tree_view = GTK_TREE_VIEW (glade_xml_get_widget (dialog_details->xml, "treeview_dispspecs"));
 
-	store = gtk_list_store_new (DOCTYPELIST_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
+	store = gtk_list_store_new (DOCTYPELIST_N_COLUMNS, G_TYPE_STRING);
 
 	gtk_tree_view_set_model (tree_view,
 				 GTK_TREE_MODEL (store));
@@ -133,34 +132,31 @@ populate_dispspec_tree (CongPreferencesDialogDetails *dialog_details)
 
 		for (i=0; i<cong_dispspec_registry_get_num (registry); i++) {
 			const CongDispspec* ds = cong_dispspec_registry_get(registry,i);
+
+			gchar *text;
 			
 			GtkTreeIter iter;
 			gtk_list_store_append (store, &iter);  /* Acquire an iterator */
-			
+
+			text = g_strdup_printf ("<big><b>%s</b></big>\n%s", 
+						cong_dispspec_get_name(ds),
+						cong_dispspec_get_description(ds));
 			gtk_list_store_set (store, &iter,
-					    DOCTYPELIST_NAME_COLUMN, cong_dispspec_get_name(ds),
-					    DOCTYPELIST_DESCRIPTION_COLUMN, cong_dispspec_get_description(ds),
+					    DOCTYPELIST_NAME_COLUMN, text,
 					    -1);
+			
+			g_free (text);
 		}
 	}
 
 	renderer = gtk_cell_renderer_text_new ();
 
 	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
-							   "text", DOCTYPELIST_NAME_COLUMN,
+							   "markup", DOCTYPELIST_NAME_COLUMN,
 							   NULL);
-
-	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), 
 				     column);
 
-	column = gtk_tree_view_column_new_with_attributes (_("Description"), renderer,
-							   "text", DOCTYPELIST_DESCRIPTION_COLUMN,
-							   NULL);
-
-	/* Add the column to the view. */
-	gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), 
-				     column);
 }
 
 enum
@@ -236,26 +232,9 @@ populate_plugin_tree (CongPreferencesDialogDetails *dialog_details)
 
 	/* Populate the store based on the plugin manager: */
 	{
-#if 1
 		cong_plugin_manager_for_each_plugin (cong_app_get_plugin_manager (cong_app_singleton ()),
 						     add_plugin,
 						     store);
-#else
-		CongDispspecRegistry *registry = cong_app_get_dispspec_registry (cong_app_singleton ());
-		int i;
-
-		for (i=0; i<cong_dispspec_registry_get_num (registry); i++) {
-			const CongDispspec* ds = cong_dispspec_registry_get(registry,i);
-			
-			GtkTreeIter iter;
-			gtk_list_store_append (store, &iter);  /* Acquire an iterator */
-			
-			gtk_list_store_set (store, &iter,
-					    PLUGINLIST_NAME_COLUMN, cong_dispspec_get_name(ds),
-					    PLUGINLIST_DESCRIPTION_COLUMN, cong_dispspec_get_description(ds),
-					    -1);
-		}
-#endif
 	}
 
 	renderer = gtk_cell_renderer_text_new ();
