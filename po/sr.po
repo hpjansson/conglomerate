@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-16 21:11+0200\n"
-"PO-Revision-Date: 2003-10-16 21:47+0200\n"
+"POT-Creation-Date: 2003-10-22 02:31+0200\n"
+"PO-Revision-Date: 2003-10-22 02:51+0200\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
-#: src/cong-primary-window.c:436 src/cong-primary-window.c:438
-#: src/cong-primary-window.c:670 src/cong-primary-window.c:672
-#: src/cong-primary-window.c:678
+#: src/cong-primary-window.c:441 src/cong-primary-window.c:443
+#: src/cong-primary-window.c:704 src/cong-primary-window.c:706
+#: src/cong-primary-window.c:712
 msgid "Conglomerate XML Editor"
 msgstr "Уређивач XML-а Конгломерат"
 
@@ -158,7 +158,9 @@ msgstr "i, ii, iii, ..."
 msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
-msgstr "<small>Неке примене DocBook-а дозвољавају да се понашање веза прилагоди овим атрибутом „type“. </small>"
+msgstr ""
+"<small>Неке примене DocBook-а дозвољавају да се понашање веза прилагоди овим "
+"атрибутом „type“. </small>"
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
@@ -322,6 +324,43 @@ msgstr "(неуспешан xpath)"
 msgid "<untitled>"
 msgstr "<без наслова>"
 
+#: src/cong-document.c:660
+#, c-format
+msgid "Text \"%s\""
+msgstr "Текст „%s“"
+
+#: src/cong-document.c:670
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "Позив на ентитет „%s“"
+
+#: src/cong-document.c:673
+#, c-format
+msgid "Entity \"%s\""
+msgstr "Ентитет „%s“"
+
+#: src/cong-document.c:676
+msgid "XML Processing Instruction"
+msgstr "XML инструкција обраде"
+
+#: src/cong-document.c:681
+#, c-format
+msgid "Comment \"%s\""
+msgstr "Примедба „%s“"
+
+#: src/cong-document.c:687
+msgid "Document"
+msgstr "Документ"
+
+#: src/cong-document.c:698 src/cong-file-properties.c:116
+msgid "Document Type Declaration"
+msgstr "Декларација типа документа"
+
+#: src/cong-document.c:1398
+#, c-format
+msgid "Select %s"
+msgstr "Изаберите %s"
+
 #: src/cong-dom-view.c:208
 msgid "UNKNOWN"
 msgstr "НЕПОЗНАТО"
@@ -350,15 +389,23 @@ msgstr "Померите курзор"
 msgid "Drag out selection"
 msgstr "Извуци изабрано"
 
-#: src/cong-editor-widget3.c:1113
+#: src/cong-editor-widget3.c:369
+msgid "Expander Size"
+msgstr "Величина разграника"
+
+#: src/cong-editor-widget3.c:370
+msgid "Size of the expander arrow"
+msgstr "Величина стрелице разграника"
+
+#: src/cong-editor-widget3.c:1169
 msgid "Cursor Movement"
 msgstr "Кретање курзора"
 
-#: src/cong-editor-widget3.c:1153 src/cong-editor-widget3.c:1166
+#: src/cong-editor-widget3.c:1209 src/cong-editor-widget3.c:1222
 msgid "Delete Selection"
 msgstr "Обриши изабрано"
 
-#: src/cong-editor-widget3.c:1189
+#: src/cong-editor-widget3.c:1245
 msgid "Typing"
 msgstr "Куцање"
 
@@ -880,21 +927,21 @@ msgstr "Конгломерат не може да извезе „%s“"
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr "Ниједан од додатака Конгломерата не може да извезе датотеке тог типа."
 
-#: src/cong-file-import.c:65
+#: src/cong-file-import.c:66
 msgid "Import file..."
 msgstr "Увези датотеку..."
 
 #. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:98
+#: src/cong-file-import.c:99
 msgid "Could not import the file."
 msgstr "Не могу да увезем датотеку."
 
-#: src/cong-file-import.c:99
+#: src/cong-file-import.c:100
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr "Ниједан од додатака Конгломерата не може да учита датотеке типа „%s“"
 
-#: src/cong-file-import.c:100
+#: src/cong-file-import.c:101
 msgid "FIXME"
 msgstr "ПОПРАВИ"
 
@@ -1028,10 +1075,6 @@ msgstr "Мењано"
 msgid "XML Header"
 msgstr "XML заглавље"
 
-#: src/cong-file-properties.c:116
-msgid "Document Type Declaration"
-msgstr "Декларација типа документа"
-
 #: src/cong-file-properties.c:118
 msgid "Version"
 msgstr "Верзија"
@@ -1091,35 +1134,35 @@ msgstr "Намени ову ДТД"
 msgid "Save XML as..."
 msgstr "Сачувај XML као..."
 
-#: src/cong-location.c:266 src/cong-location.c:287
+#: src/cong-location.c:293 src/cong-location.c:314
 msgid "Merge tags"
 msgstr "Споји ознаке"
 
-#: src/cong-location.c:331
+#: src/cong-location.c:358
 msgid "Delete character"
 msgstr "Обриши знак"
 
-#: src/cong-location.c:746
+#: src/cong-location.c:773
 msgid "Calculating document start"
 msgstr "Срачунава почетак документа"
 
-#: src/cong-location.c:758
+#: src/cong-location.c:785
 msgid "Calculating line start"
 msgstr "Срачунава почетак реда"
 
-#: src/cong-location.c:771
+#: src/cong-location.c:798
 msgid "Calculating document end"
 msgstr "Срачунава крај документа"
 
-#: src/cong-location.c:784
+#: src/cong-location.c:811
 msgid "Calculating line end"
 msgstr "Срачунава крај реда"
 
-#: src/cong-location.c:797
+#: src/cong-location.c:824
 msgid "Calculating previous page"
 msgstr "Срачунава претходну страницу"
 
-#: src/cong-location.c:810
+#: src/cong-location.c:837
 msgid "Calculating next page"
 msgstr "Срачунава наредну страницу"
 
@@ -1455,62 +1498,62 @@ msgstr "Прикажи детаље"
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Конгломерат не може да пронађе податке о приказу за нову датотеку"
 
-#: src/cong-primary-window.c:281 src/cong-primary-window.c:282
+#: src/cong-primary-window.c:286 src/cong-primary-window.c:287
 msgid "Open document"
 msgstr "Отвори документ"
 
-#: src/cong-primary-window.c:295 src/cong-primary-window.c:296
-msgid "Save document as..."
-msgstr "Сачувај документ као..."
+#: src/cong-primary-window.c:300 src/cong-primary-window.c:301
+msgid "Save document"
+msgstr "Сачувај документ"
 
-#: src/cong-primary-window.c:303 src/cong-primary-window.c:304
+#: src/cong-primary-window.c:308 src/cong-primary-window.c:309
 msgid "Undo"
 msgstr "Опозови"
 
-#: src/cong-primary-window.c:310 src/cong-primary-window.c:311
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Redo"
 msgstr "Понови"
 
-#: src/cong-primary-window.c:329 src/cong-primary-window.c:330 src/tree.c:175
+#: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
 #: src/xmledit.c:47
 msgid "Cut"
 msgstr "Исеци"
 
-#: src/cong-primary-window.c:336 src/cong-primary-window.c:337
+#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
 msgid "Copy"
 msgstr "Умножи"
 
-#: src/cong-primary-window.c:343 src/cong-primary-window.c:344
+#: src/cong-primary-window.c:348 src/cong-primary-window.c:349
 #: src/xmledit.c:155
 msgid "Paste"
 msgstr "Убаци"
 
-#: src/cong-primary-window.c:512
+#: src/cong-primary-window.c:517
 msgid "Overview"
 msgstr "Кратак преглед"
 
-#: src/cong-primary-window.c:522
+#: src/cong-primary-window.c:527
 msgid "Bookmarks"
 msgstr "Обележивачи"
 
-#: src/cong-primary-window.c:530
+#: src/cong-primary-window.c:535
 msgid "Raw XML"
 msgstr "Чист XML"
 
-#: src/cong-primary-window.c:588
+#: src/cong-primary-window.c:592 src/cong-primary-window.c:622
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Добродошли у много закаснели уређивач Конгломерат."
 
-#: src/cong-primary-window.c:670
+#: src/cong-primary-window.c:704
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (измењен) — %s"
 
-#: src/cong-util.c:243 src/plugin-docbook.c:1006
+#: src/cong-util.c:273 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Штампање XSL објеката обликовања (FO)"
 
-#: src/cong-util.c:287
+#: src/cong-util.c:317
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ово ће једном постати резултат из cong_util_print_xslfo"
 
@@ -1527,19 +1570,19 @@ msgstr "Упозорење"
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "Чвор уређивача за осликавање савета, упозорења, итд."
 
-#: src/plugin-cleanup-source.c:377 src/plugin-cleanup-source.c:411
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
 msgid "Cleanup XML Source"
 msgstr "Очисти XML кôд"
 
-#: src/plugin-cleanup-source.c:412 src/plugin-cleanup-source.c:415
-#: src/plugin-cleanup-source.c:416
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 msgstr ""
 "Чисти XML кôд документа, тако да га је лако читати у текстуалном уређивачу."
 
-#: src/plugin-cleanup-source.c:414
+#: src/plugin-cleanup-source.c:433
 msgid "_Clean the XML Source"
 msgstr "_Очисти XML кôд"
 
