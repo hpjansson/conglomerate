@@ -234,19 +234,19 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(GTK_WIDGET(details->scrolled_window), 100, 50);
 
         details->text_buffer = gtk_text_buffer_new(NULL);
 	details->text_view = GTK_TEXT_VIEW(gtk_text_view_new_with_buffer(details->text_buffer));
 
 	gtk_text_view_set_editable(details->text_view, FALSE);
+	gtk_text_view_set_cursor_visible(details->text_view, FALSE);
 
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(details->scrolled_window), GTK_WIDGET(details->text_view));
 
+	regenerate_text_buffer(view);
+
 	gtk_widget_show(GTK_WIDGET(details->text_view));
 	gtk_widget_show(GTK_WIDGET(details->scrolled_window));
-
-	regenerate_text_buffer(view);
 
 	return GTK_WIDGET(details->scrolled_window);	
 }

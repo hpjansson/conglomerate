@@ -2444,7 +2444,12 @@ void cong_document_view_source(CongDocument *doc)
 				    icon_pixbuf);
 
 		gdk_pixbuf_unref(icon_pixbuf);
+
 	}
+
+	gtk_window_set_default_size(GTK_WINDOW(window),
+				    500,
+				    400);
 
 	gtk_widget_show(GTK_WIDGET(window));
 
