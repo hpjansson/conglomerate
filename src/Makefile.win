@@ -1,3 +1,6 @@
+# This is a very outdated Makefile,
+# it is shipped in the tarball to show we are willing to help a WIN32 port.
+
 CC = gcc
 
 CFLAGS = -g
