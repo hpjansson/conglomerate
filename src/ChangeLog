@@ -1,3 +1,10 @@
+2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-menus.c: 
+
+	Moved the Homepage action from the context menu (where it had been
+	for testing purposes) back to the Help menu
+
 2004-10-26  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-language.h, cong-language.c, cong-dispspec.c: 
