@@ -1,5 +1,11 @@
 2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am, cong-fake-plugin-hooks.c, cong-fake-plugin-hooks.h,
+	plugin-table.c: 
+
+	Added new plugin, to deal with DocBook tables (eventually).
+	Currently displays the various elements as paragraphs.
+
 	* cong-editor-node-comment.c, cong-editor-node-document.c,
 	cong-editor-node-dtd.c, cong-editor-node-element-structural.c,
 	cong-editor-node-element-unknown.c,

@@ -97,6 +97,10 @@ cong_fake_plugin_hook_register_the_whole_shebang (CongApp *app)
 			 plugin_sgml_plugin_register,
 			 plugin_sgml_plugin_configure);
 
+	register_plugin (app,"table",
+			 plugin_table_plugin_register,
+			 plugin_table_plugin_configure);
+
 	register_plugin (app,"tei",
 			 plugin_tei_plugin_register,
 			 plugin_tei_plugin_configure);

@@ -303,6 +303,7 @@ conglomerate_SOURCES =      \
   plugin-relaxng.c          \
   plugin-save-dispspec.c    \
   plugin-sgml.c             \
+  plugin-table.c            \
   plugin-tests.c            \
   plugin-tei.c              \
   plugin-validate.c         \
