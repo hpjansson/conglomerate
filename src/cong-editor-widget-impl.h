@@ -62,7 +62,11 @@ struct CongElementEditor
 	const CongElementEditorClass *klass;
 
 	CongEditorWidget *widget;
-	CongNodePtr node;
+
+	/* An element editor actually applies to a range of sibling elements; could be a single node: */
+	CongNodePtr first_node;
+	CongNodePtr final_node;
+
 	GdkRectangle window_area; /* allocated area in window space */
 	GtkRequisition requisition;
 };
@@ -105,7 +109,9 @@ struct CongEditorWidgetView
 /* Macro for getting details of a widget; this will eventually be a simple field lookup */
 #define GET_DETAILS(editor_widget) ((CongEditorWidgetDetails*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
 
-CongNodePtr cong_element_editor_get_node(CongElementEditor *element_editor);
+CongNodePtr cong_element_editor_get_first_node(CongElementEditor *element_editor);
+CongNodePtr cong_element_editor_get_final_node(CongElementEditor *element_editor);
+gboolean cong_element_editor_responsible_for_node(CongElementEditor *element_editor, CongNodePtr node);
 void cong_element_editor_recursive_delete(CongElementEditor *element_editor);
 gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
 void cong_element_editor_get_size_requisition(CongElementEditor *element_editor);
@@ -118,7 +124,7 @@ void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 
 
 CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNodePtr node);
-CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodePtr node);
+CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodePtr first_node, CongNodePtr final_node);
 
 
 G_END_DECLS

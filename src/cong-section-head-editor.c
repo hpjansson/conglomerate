@@ -27,6 +27,8 @@
 #include <eel/eel-gdk-extensions.h>
 
 static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node);
+static void create_children_for_range(CongSectionHeadEditor *section_head, CongNodePtr first_node, CongNodePtr final_node, GList *iter_prev);
+static void recursively_create_children(CongSectionHeadEditor *section_head);
 
 #define V_SPACING (4)
 #define H_SPACING (4)
@@ -67,6 +69,31 @@ static void section_head_editor_on_recursive_delete(CongElementEditor *element_e
 	/* FIXME: unimplemented */
 }
 
+static void regenerate_children(CongSectionHeadEditor *section_head)
+{
+	CongEditorWidget *editor_widget = section_head->element_editor.widget;
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	GList *iter;
+
+	/* Delete all child editors: */
+	for (iter = section_head->list_of_child; iter; ) {
+		GList *iter_next = iter->next;
+		CongElementEditor *child_editor = iter->data;
+		g_assert(child_editor);
+
+		cong_element_editor_recursive_delete(child_editor);
+		section_head->list_of_child = g_list_delete_link(section_head->list_of_child, iter);
+
+		iter=iter_next;
+	}
+		
+	/* Regenerate the child editors: */
+	recursively_create_children(section_head);
+
+	cong_editor_widget_force_layout_update(editor_widget);
+}
+
+
 static gboolean section_head_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
 	CongEditorWidget *editor_widget = element_editor->widget;
@@ -76,21 +103,47 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 
 	g_return_val_if_fail(event, FALSE);
 
+#if 1
 	switch (event->type) {
 	default: g_assert_not_reached();
 	case CONG_DOCUMENT_EVENT_MAKE_ORPHAN:
-		
 		/* Search for the node amongst the (direct) children; if found, then delete that child.  Otherwise,
 		   pass the message on to all children? */
 		for (iter = section_head->list_of_child; iter; iter=iter->next) {
 			CongElementEditor *child_editor = iter->data;
 			g_assert(child_editor);
 
-			if (child_editor->node == event->data.make_orphan.node) {
+			if (cong_element_editor_responsible_for_node(child_editor,event->data.make_orphan.node)) {
+#if 1
+				regenerate_children(section_head);
+#else
+				/* Delete this editor, and regenerate editors for any remaining range, if required */
+				CongNodePtr first_node = cong_element_editor_get_first_node(child_editor);
+				CongNodePtr final_node = cong_element_editor_get_final_node(child_editor);
+				GList *iter_prev = iter->prev;
+
+				/* Delete the editor: */
 				cong_element_editor_recursive_delete(child_editor);
 				section_head->list_of_child = g_list_delete_link(section_head->list_of_child, iter);
+				
+				/* Recompute the sibling range, deleting the deleted node: */
+				if (event->data.make_orphan.node==first_node) {
+					first_node = first_node->next;
+				}
+
+				if (event->data.make_orphan.node==final_node) {
+					final_node = final_node->prev;
+				}
+
+				/* Rebuild editors if necessary: */
+				if (first_node!=NULL) {
+					g_assert(final_node!=NULL);
+
+					create_children_for_range(section_head, first_node, final_node, iter_prev);
+				}
 
 				cong_editor_widget_force_layout_update(editor_widget);
+#endif
 
 				return TRUE;
 			} else {
@@ -108,13 +161,8 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 			CongElementEditor *child_editor = iter->data;
 			g_assert(child_editor);
 
-			if (child_editor->node == event->data.add_after.older_sibling) {
-
-				CongEditorWidget *child_editor = create_child(section_head, event->data.add_after.node);
-
-				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter->next, child_editor);
-
-				cong_editor_widget_force_layout_update(editor_widget);
+			if (cong_element_editor_responsible_for_node(child_editor,event->data.add_after.older_sibling)) {
+				regenerate_children(section_head);
 
 				return TRUE;
 			} else {
@@ -132,13 +180,8 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 			CongElementEditor *child_editor = iter->data;
 			g_assert(child_editor);
 
-			if (child_editor->node == event->data.add_before.younger_sibling) {
-
-				CongEditorWidget *child_editor = create_child(section_head, event->data.add_before.node);
-
-				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter, child_editor);
-
-				cong_editor_widget_force_layout_update(editor_widget);
+			if (cong_element_editor_responsible_for_node(child_editor,event->data.add_before.younger_sibling)) {
+				regenerate_children(section_head);
 
 				return TRUE;
 			} else {
@@ -152,13 +195,9 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 		
 	case CONG_DOCUMENT_EVENT_SET_PARENT:
 		/* If this is the parent, add it to the children (at the end); otherwise delegate to children: */
-		if (element_editor->node == event->data.set_parent.adoptive_parent) {
-			CongEditorWidget *child_editor = create_child(section_head, event->data.set_parent.node);
-					
-			section_head->list_of_child = g_list_append(section_head->list_of_child, child_editor);
-			
-			cong_editor_widget_force_layout_update(editor_widget);
-			
+		if (element_editor->first_node == event->data.set_parent.adoptive_parent) {
+			regenerate_children(section_head);
+
 			return TRUE;
 		} else {
 			for (iter = section_head->list_of_child; iter; iter=iter->next) {
@@ -185,6 +224,7 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 
 		break;
 	}
+#endif
 
 	return FALSE;
 }
@@ -286,7 +326,7 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 
 	doc = cong_editor_widget_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
-	x = CONG_ELEMENT_EDITOR(section_head)->node;
+	x = CONG_ELEMENT_EDITOR(section_head)->first_node;
 	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 	g_assert(element);
 
@@ -405,6 +445,7 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 
 }
 
+#if 0
 static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node)
 {
 	CongEditorWidget *editor_widget;
@@ -422,24 +463,145 @@ static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongN
 		
 		if (element) {
 			if (cong_dispspec_element_is_structural(element)) {
-				return cong_section_head_editor_new(editor_widget, child_node);
+				return CONG_EDITOR_WIDGET( cong_section_head_editor_new(editor_widget, child_node) );
 				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
 				
 			} else if (cong_dispspec_element_is_span(element) ||
 				   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
 				
-				return cong_span_text_editor_new(editor_widget, child_node);
+				return CONG_EDITOR_WIDGET( cong_span_text_editor_new(editor_widget, child_node, child_node) );
 				
 			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
 				/* unwritten */
 			}
 		}	
 	} else if (node_type == CONG_NODE_TYPE_TEXT) {
-		return cong_span_text_editor_new(editor_widget, child_node);
+		return CONG_EDITOR_WIDGET( cong_span_text_editor_new(editor_widget, child_node, child_node) );
 	}
 
 	
 	return NULL;
+
+}
+#endif
+
+/* 
+   Given an intitial node that can be used for a span text editor, find a younger sibling
+   that is the final node of a range of siblings suitable for control by a single span text editor.
+ */
+static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongNodePtr final_allowed_node, CongDispspec *ds)
+{
+	g_return_val_if_fail(x, NULL);
+	g_return_val_if_fail(ds, NULL);
+
+	if (x==final_allowed_node) {
+		return x;
+	}
+
+	for (; (x->next!=final_allowed_node) ; x = cong_node_next(x))
+	{
+		enum CongNodeType node_type = cong_node_type(x);
+		const char *name = xml_frag_name_nice(x);
+
+		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
+		{
+			return(cong_node_prev(x));
+		}
+
+		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
+			return(cong_node_prev(x));
+		}
+	}
+
+	g_assert(x);
+
+	return(x);
+}
+
+static void create_children_for_range(CongSectionHeadEditor *section_head, CongNodePtr first_node, CongNodePtr final_node, GList *iter_prev)
+{
+	CongEditorWidget *editor_widget;
+	CongDocument *doc;
+	CongDispspec *ds;
+
+	/* Preconditions: */
+	{
+		g_return_if_fail(section_head);
+		g_return_if_fail(first_node);
+		g_return_if_fail(final_node);
+		
+		g_assert(first_node->parent == final_node->parent);
+	}
+
+	editor_widget = section_head->element_editor.widget;
+	doc = cong_editor_widget_get_document(editor_widget);
+	ds = cong_document_get_dispspec(doc);
+
+	while (1) {
+		enum CongNodeType node_type;
+		const char *name;
+		CongElementEditor *child_editor = NULL;
+		CongNodePtr next_node = first_node;
+
+		g_assert(first_node);
+
+		node_type = cong_node_type(first_node);
+		name = xml_frag_name_nice(first_node);
+
+		if (node_type == CONG_NODE_TYPE_ELEMENT) {
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+			
+			if (element) {
+				if (cong_dispspec_element_is_structural(element)) {
+					child_editor = cong_section_head_editor_new(editor_widget, first_node);
+
+				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
+					
+				} else if (cong_dispspec_element_is_span(element) ||
+					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
+
+					CongNodePtr final_node_of_span = get_final_node_of_span_text(first_node, final_node, ds);
+					
+					child_editor = cong_span_text_editor_new(editor_widget, first_node, final_node_of_span);
+
+					next_node = final_node_of_span->next;
+
+				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
+				/* unwritten */
+				}
+			}	
+		} else if (node_type == CONG_NODE_TYPE_TEXT) {
+			CongNodePtr final_node_of_span = get_final_node_of_span_text(first_node, final_node, ds);
+
+			child_editor = cong_span_text_editor_new(editor_widget, first_node, final_node_of_span);
+
+			next_node = final_node_of_span->next;
+		}
+
+		/* add any child editor that's been created at the correct position: */
+		if (child_editor) {
+			g_assert(next_node);
+
+			if (iter_prev) {
+				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter_prev->next, child_editor);
+
+				iter_prev = iter_prev->next;
+			} else {
+				section_head->list_of_child = g_list_append(section_head->list_of_child, child_editor);
+			}
+		}
+
+		if (first_node==final_node) {
+			return;
+		}
+
+		if (next_node != first_node) {
+			first_node = next_node;		
+		} else {
+			first_node = first_node->next;
+		}
+
+	}
 
 }
 
@@ -457,7 +619,10 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 	doc = cong_editor_widget_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 
-      	this_node = cong_element_editor_get_node( CONG_ELEMENT_EDITOR(section_head) );
+      	this_node = cong_element_editor_get_first_node( CONG_ELEMENT_EDITOR(section_head) );
+#if 1
+	create_children_for_range(section_head, this_node->children, this_node->last, NULL);
+#else
 	for ( child_node = cong_node_first_child(this_node); child_node; child_node = cong_node_next(child_node))
 	{
 		CongElementEditor *child = NULL;
@@ -471,6 +636,7 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 			section_head->list_of_child = g_list_append(section_head->list_of_child, child);
 		}		
 	}
+#endif
 }
 
 /* Public API: */
@@ -479,7 +645,8 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	CongSectionHeadEditor *section_head = g_new0(CongSectionHeadEditor,1);
 	section_head->element_editor.klass = &section_head_editor_class;
 	section_head->element_editor.widget = widget;
-	section_head->element_editor.node = node;
+	section_head->element_editor.first_node = node;
+	section_head->element_editor.final_node = node;
 	section_head->expanded = TRUE;
 
 	/* recursive creation? */

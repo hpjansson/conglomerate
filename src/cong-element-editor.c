@@ -25,11 +25,42 @@
 #include "global.h"
 #include "cong-editor-widget-impl.h"
 
-CongNodePtr cong_element_editor_get_node(CongElementEditor *element_editor)
+CongNodePtr cong_element_editor_get_first_node(CongElementEditor *element_editor)
 {
 	g_return_val_if_fail(element_editor, NULL);
 	
-	return element_editor->node;
+	return element_editor->first_node;
+}
+
+CongNodePtr cong_element_editor_get_final_node(CongElementEditor *element_editor)
+{
+	g_return_val_if_fail(element_editor, NULL);
+	
+	return element_editor->final_node;
+}
+
+gboolean cong_element_editor_responsible_for_node(CongElementEditor *element_editor, CongNodePtr node)
+{
+	/* returns TRUE if the node is within the "sibling range" (as opposed to being a descendant) */
+
+	CongNodePtr iter;
+
+	g_return_val_if_fail(element_editor, FALSE);
+	g_return_val_if_fail(node, FALSE);
+
+	g_assert(element_editor->first_node);
+	g_assert(element_editor->final_node);
+	g_assert(element_editor->first_node->parent == element_editor->final_node->parent);
+
+	for (iter=element_editor->first_node; iter!=element_editor->final_node; iter=iter->next) {
+		g_assert(iter);
+
+		if (iter==node) {
+			return TRUE;
+		}
+	}
+
+	return (iter==element_editor->final_node);
 }
 
 void cong_element_editor_recursive_delete(CongElementEditor *element_editor)

@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-21 David Malcolm
+
+	* cong-editor-widget-impl.h, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c
+
+	CongElementEditors now work on ranges of sibling nodes, rather than individual nodes
+	
 2002-11-20 David Malcolm
 
 	* cong-plugin.c, plugin-docbook.c
