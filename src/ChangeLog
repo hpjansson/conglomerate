@@ -1,3 +1,9 @@
+2003-10-03  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* xmledit.c
+
+	Removed clipboard state from the undo/redo history
+
 2003-10-02  Robert Varga
 
 	* cong-dispspec-registry.c, cong-document.h, cong-dtd.h,

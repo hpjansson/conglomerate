@@ -71,8 +71,8 @@ void cong_document_cut_selection(CongDocument *doc)
 	{
 		CongCommand *cmd = cong_command_new (doc, _("Cut"));
 
-		cong_command_add_set_clipboard (cmd,
-						source);
+		cong_app_set_clipboard (cong_app_singleton(),
+					source);
 		g_free(source);
 		
 		cong_command_add_delete_range (cmd,
@@ -124,16 +124,12 @@ void cong_document_copy_selection(CongDocument *doc)
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_command_new (doc, _("Cut"));
+		gchar *source = cong_range_generate_source (cong_selection_get_ordered_range (selection));
+		
+		cong_app_set_clipboard (cong_app_singleton(),
+					source);
 
-		cong_command_add_set_clipboard (cmd,
-						cong_range_generate_source (cong_selection_get_ordered_range (selection)));
-		/* Does this leak memory? */
-		
-		cong_document_add_command (doc,
-					   cmd);
-		
-		g_object_unref (G_OBJECT (cmd));
+		g_free (source);
 	}
 #else
 	cong_app_set_clipboard (cong_app_singleton(),
