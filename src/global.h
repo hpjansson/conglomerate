@@ -244,11 +244,6 @@ CongDispspec *cong_editor_widget2_get_dispspec(CongEditorWidget2 *editor_widget)
 void cong_editor_widget2_force_layout_update(CongEditorWidget2 *editor_widget);
 #define CONG_EDITOR_WIDGET2(x) ((CongEditorWidget2*)(x))
 
-/* Third attempt at the editor widget: */
-typedef struct CongEditorArea CongEditorArea;
-typedef struct CongEditorNode CongEditorNode;
-
-
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
 

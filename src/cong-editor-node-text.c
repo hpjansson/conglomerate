@@ -31,6 +31,9 @@
 #include "cong-editor-area-text.h"
 #include "cong-text-cache.h"
 #include "cong-document.h"
+#include "cong-editor-line-fragments.h"
+#include "cong-font.h"
+#include "cong-editor-area-text-fragment.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -44,11 +47,8 @@ struct CongEditorNodeTextDetails
 	
 	gulong handler_id_node_set_text;
 
-#if 0
-	CongEditorAreaComposer *flow_test;
 	PangoLayout *pango_layout;
 	GList *list_of_text_fragments;
-#endif
 };
 
 static void
@@ -58,7 +58,12 @@ static void
 dispose (GObject *object);
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node);
+generate_block_area (CongEditorNode *editor_node);
+
+static CongEditorLineFragments*
+generate_line_areas_recursive (CongEditorNode *editor_node,
+			       gint line_width,
+			       gint initial_indent);
 
 static enum CongFlowType
 get_flow_type(CongEditorNode *editor_node);
@@ -95,7 +100,8 @@ cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
 	G_OBJECT_CLASS (klass)->finalize = finalize;
 	G_OBJECT_CLASS (klass)->dispose = dispose;
 
-	node_klass->generate_area = generate_area;
+	node_klass->generate_block_area = generate_block_area;
+	node_klass->generate_line_areas_recursive = generate_line_areas_recursive;
 	node_klass->get_flow_type = get_flow_type;
 }
 
@@ -126,11 +132,24 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				    editor_widget,
 				    node);
 
+	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new (TRUE,
+								     node->content);
+
 	PRIVATE(editor_node_text)->handler_id_node_set_text = g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
 										      "node_set_text",
 										      G_CALLBACK(on_signal_set_text_notify_after),
 										      editor_node_text);
 
+	/* Set up our Pango Layout: */
+	PRIVATE(editor_node_text)->pango_layout = pango_layout_new(gtk_widget_get_pango_context (GTK_WIDGET(editor_widget)));
+
+	pango_layout_set_text (PRIVATE(editor_node_text)->pango_layout,
+			       cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache),
+			       -1);
+
+	pango_layout_set_font_description (PRIVATE(editor_node_text)->pango_layout,
+					   cong_font_get_pango_description(cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT]));
+	
 	return editor_node_text;
 }
 
@@ -161,14 +180,11 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 }
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node)
+generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
 	g_return_val_if_fail (editor_node, NULL);
-
-	PRIVATE(node_text)->text_cache = cong_text_cache_new (TRUE,
-							      cong_editor_node_get_node (editor_node)->content);
 
 #if 0
 	{	
@@ -176,7 +192,6 @@ generate_area (CongEditorNode *editor_node)
 #error
 		/* FIXME: this is really broken WRT lifetimes */
 		PRIVATE(node_text)->flow_test = ;
-		PRIVATE(node_text)->pango_layout = pango_layout_new(gdk_pango_context_get());
 		/* can't get children until we set set width which we can't do until we've got a requisition! */
 		PRIVATE(node_text)->list_of_text_fragments = ;
 
@@ -216,6 +231,79 @@ generate_area (CongEditorNode *editor_node)
 #endif
 }
 
+static CongEditorLineFragments*
+generate_line_areas_recursive (CongEditorNode *editor_node,
+			       gint line_width,
+			       gint initial_indent)
+{
+	CongEditorLineFragments *result;
+	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
+
+#if 0
+	g_message("CongEditorNodeText::generate_line_areas_recursive");
+#endif
+
+	result = cong_editor_line_fragments_new();
+
+#if 1
+	/* Set the "geometry" of the PangoLayout: */
+	pango_layout_set_width (PRIVATE(node_text)->pango_layout,
+				line_width*PANGO_SCALE);
+
+	pango_layout_set_indent (PRIVATE(node_text)->pango_layout,
+				initial_indent*PANGO_SCALE);
+
+	/* Add areas for the PangoLayoutLines: */
+	{
+		GSList* iter;
+
+		/* CAUTION: this is internal data of the PangoLayout */
+		for (iter= pango_layout_get_lines (PRIVATE(node_text)->pango_layout); iter; iter=iter->next) {
+			PangoLayoutLine *line = iter->data;
+			gchar *line_text;
+			PangoRectangle ink_rect;
+			PangoRectangle logical_rect;
+
+			g_assert(line);
+
+			line_text = cong_eel_pango_layout_line_get_text (line);
+
+			pango_layout_line_get_pixel_extents (line,
+							     &ink_rect,
+							     &logical_rect);
+
+			cong_editor_line_fragments_add_area (result,
+							     cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
+												 cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT],
+												 NULL,
+												 line_text,
+												 FALSE,
+												 logical_rect.width,
+												 logical_rect.height)
+							     );
+
+			g_free (line_text);
+
+		}
+	}
+#else
+	{
+		g_message("TEST: generating 1 line");
+
+		cong_editor_line_fragments_add_area (result,
+						     cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
+										cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT],
+										NULL,
+										g_strndup (cong_text_cache_get_text (PRIVATE(node_text)->text_cache),
+											   20),
+										FALSE)
+						     );
+	}
+#endif
+
+	return result;
+}
+
 /* Definitions of the CongDocument event handlers: */
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
@@ -233,9 +321,12 @@ on_signal_set_text_notify_after (CongDocument *doc,
 		cong_text_cache_set_text (PRIVATE(editor_node_text)->text_cache,
 					  cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content);
 
-		g_assert(PRIVATE(editor_node_text)->area_text);
-		cong_editor_area_text_set_text (PRIVATE(editor_node_text)->area_text,
-						cong_text_cache_get_text(PRIVATE(editor_node_text)->text_cache));
+		if (PRIVATE(editor_node_text)->area_text) {
+			cong_editor_area_text_set_text (PRIVATE(editor_node_text)->area_text,
+							cong_text_cache_get_text(PRIVATE(editor_node_text)->text_cache));
+		}
+
+		/* FIXME: also need to generate reflow events for any inline flow_holder gubbins */
 	}
 }
 

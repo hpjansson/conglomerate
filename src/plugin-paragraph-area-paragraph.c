@@ -119,8 +119,8 @@ render_self (CongEditorArea *area,
 	gdk_draw_rectangle (GDK_DRAWABLE(window),
 			    PRIVATE(area_paragraph)->gc,
 			    FALSE,
-			    rect->x,
-			    rect->y,
-			    rect->width-1,
-			    rect->height-1);
+			    rect->x+2,
+			    rect->y+2,
+			    rect->width-3,
+			    rect->height-3);
 }

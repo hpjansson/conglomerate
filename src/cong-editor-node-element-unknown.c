@@ -37,7 +37,7 @@ struct CongEditorNodeElementUnknownDetails
 };
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node);
+generate_block_area (CongEditorNode *editor_node);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementUnknown, 
@@ -50,7 +50,7 @@ cong_editor_node_element_unknown_class_init (CongEditorNodeElementUnknownClass *
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->generate_area = generate_area;
+	node_klass->generate_block_area = generate_block_area;
 }
 
 static void
@@ -87,7 +87,7 @@ cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
 
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node)
+generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorArea *new_area;
 

@@ -31,9 +31,9 @@
 #define PRIVATE(x) ((x)->private)
 
 #define DEBUG_REQUISITIONS 0
-#define DEBUG_ALLOCATIONS 1
+#define DEBUG_ALLOCATIONS 0
 #define DEBUG_RENDER_ALLOCATIONS 0
-#define DEBUG_RENDERING 1
+#define DEBUG_RENDERING 0
 
 enum {
 	BUTTON_PRESS_EVENT,
@@ -197,11 +197,26 @@ cong_editor_area_get_document (CongEditorArea *area)
 }
 
 
-#if 0
-
 gboolean 
-cong_editor_area_is_hidden (CongEditorArea *area);
-#endif
+cong_editor_area_is_hidden (CongEditorArea *area)
+{
+	return PRIVATE(area)->is_hidden;
+}
+
+
+void
+cong_editor_area_show (CongEditorArea *area)
+{
+	PRIVATE(area)->is_hidden = FALSE;
+	/* FIXME: do we need to emit any events? */
+}
+
+void
+cong_editor_area_hide (CongEditorArea *area)
+{
+	PRIVATE(area)->is_hidden = TRUE;
+	/* FIXME: do we need to emit any events? */
+}
 
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area)
@@ -210,6 +225,7 @@ cong_editor_area_get_window_coords (CongEditorArea *area)
 
 	return &PRIVATE(area)->window_area;
 }
+
 
 guint
 cong_editor_area_get_requisition (CongEditorArea *area,
@@ -243,6 +259,25 @@ cong_editor_area_get_requisition (CongEditorArea *area,
 	}
 
 	return cache->last_calculated_requisition;
+}
+
+gint
+cong_editor_area_get_requisition_width (CongEditorArea *area,
+					int width_hint)
+{
+	return cong_editor_area_get_requisition (area,
+						 GTK_ORIENTATION_HORIZONTAL,
+						 width_hint);
+
+}
+
+gint
+cong_editor_area_get_requisition_height (CongEditorArea *area,
+					 int width_hint)
+{
+	return cong_editor_area_get_requisition (area,
+						 GTK_ORIENTATION_VERTICAL,
+						 width_hint);
 }
 
 gint

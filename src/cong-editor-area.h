@@ -31,7 +31,6 @@ G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_AREA_LIFETIMES 0
 
-typedef struct CongEditorAreaClass CongEditorAreaClass;
 typedef struct CongEditorAreaDetails CongEditorAreaDetails;
 
 #define CONG_EDITOR_AREA_TYPE	      (cong_editor_area_get_type ())
@@ -104,6 +103,12 @@ cong_editor_area_get_document (CongEditorArea *area);
 
 gboolean 
 cong_editor_area_is_hidden (CongEditorArea *area);
+
+void
+cong_editor_area_show (CongEditorArea *area);
+
+void
+cong_editor_area_hide (CongEditorArea *area);
 
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area);

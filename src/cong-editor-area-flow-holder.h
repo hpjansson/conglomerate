@@ -31,8 +31,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaFlowHolder CongEditorAreaFlowHolder;
-typedef struct CongEditorAreaFlowHolderClass CongEditorAreaFlowHolderClass;
 typedef struct CongEditorAreaFlowHolderDetails CongEditorAreaFlowHolderDetails;
 
 #define CONG_EDITOR_AREA_FLOW_HOLDER_TYPE	   (cong_editor_area_flow_holder_get_type ())

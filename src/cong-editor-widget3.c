@@ -68,19 +68,8 @@ struct CongEditorWidget3Details
 
 	GHashTable *hash_of_node_to_editor;
 
-#if 1
 	GHashTable *hash_of_editor_node_to_child_policy;
 	GHashTable *hash_of_editor_node_to_parents_child_policy;
-#else
-	/* Record the "primary area" for each editor node: */
-	GHashTable *hash_of_editor_node_to_primary_area;
-
-	/* Record the area each editor node's primary area was inserted into: */
-	GHashTable *hash_of_editor_node_to_parent_flow_holder;
-
-	/* Record the "insetion area" for each editor node: */
-	GHashTable *hash_of_editor_node_to_child_flow_holder;
-#endif
 
 	CongEditorArea *root_area;
 	CongEditorAreaFlowHolder *root_flow_holder;
@@ -91,10 +80,10 @@ struct CongEditorWidget3Details
 
 
 #define DEBUG_EDITOR_WIDGET_VIEW  0
-#define LOG_GTK_WIDGET_SIGNALS    1
+#define LOG_GTK_WIDGET_SIGNALS    0
 #define LOG_CONG_DOCUMENT_SIGNALS 0
 #define LOG_EDITOR_NODES 0
-#define LOG_EDITOR_AREAS 1
+#define LOG_EDITOR_AREAS 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -303,19 +292,10 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 	PRIVATE(editor_widget)->hash_of_node_to_editor = g_hash_table_new (NULL,
 							    NULL);
 
-#if 1
 	PRIVATE(editor_widget)->hash_of_editor_node_to_child_policy = g_hash_table_new (NULL,
 											NULL);
 	PRIVATE(editor_widget)->hash_of_editor_node_to_parents_child_policy = g_hash_table_new (NULL,
 												NULL);
-#else
-	PRIVATE(editor_widget)->hash_of_editor_node_to_primary_area = g_hash_table_new (NULL,
-									 NULL);
-	PRIVATE(editor_widget)->hash_of_editor_node_to_parent_flow_holder = g_hash_table_new (NULL,
-											      NULL);
-	PRIVATE(editor_widget)->hash_of_editor_node_to_child_flow_holder = g_hash_table_new (NULL,
-											     NULL);
-#endif
 
 	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
@@ -1105,15 +1085,8 @@ create_areas(CongEditorWidget3 *widget,
 	     CongNodePtr node)
 {
 	CongEditorNode *editor_node = NULL;
-#if 1
 	CongEditorChildPolicy *parents_child_policy = NULL;
 	CongEditorChildPolicy *this_child_policy = NULL;
-#else
-	CongEditorArea *this_area = NULL;
-	CongEditorAreaFlowHolder* parent_flow_holder = NULL;
-	CongEditorNode *older_sibling_node = NULL;
-	CongEditorArea *older_sibling_primary_area = NULL;
-#endif
 	enum CongFlowType flow_type;
 
 #if LOG_EDITOR_AREAS
@@ -1199,12 +1172,7 @@ destroy_areas(CongEditorWidget3 *widget,
 	      CongNodePtr node)
 {
 	CongEditorNode *editor_node;
-#if 1
 	CongEditorChildPolicy *parents_child_policy = NULL;
-#else
-	CongEditorArea *this_area;
-	CongEditorAreaFlowHolder *parent_flow_holder;
-#endif
 
 #if LOG_EDITOR_AREAS
 	{

@@ -1,5 +1,9 @@
 2003-08-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-inlines.c, cong-editor-area-flow-holder-inlines.h, cong-editor-area-flow-holder-single.c, cong-editor-area-flow-holder.h, cong-editor-area-span-tag.c, cong-editor-area-span-tag.h, cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-area.c, cong-editor-area.h, cong-editor-node-document.c, cong-editor-node-element-span.c, cong-editor-node-element-structural.c, cong-editor-node-element-unknown.c, cong-editor-node-element.h, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, cong-eel.c, cong-eel.h, global.h, plugin-lists-node-element-listitem.c, plugin-paragraph-area-paragraph.c, plugin-paragraph-node-element-paragraph.c
+
+	Big overhaul of relationship between nodes and areas; support for combined inline blocks containing paragraphs of text and span tags etc.
+	
 	* cong-editor-area-composer.c, cong-editor-area-container.c, cong-editor-area-container.h
 
 	Added remove_all_children method to containers.

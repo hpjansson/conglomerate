@@ -44,6 +44,30 @@ typedef struct CongEditorWidget3 CongEditorWidget3;
 typedef struct CongEditorWidget3Class CongEditorWidget3Class;
 typedef struct CongEditorWidget3Details CongEditorWidget3Details;
 
+/* CongEditorArea and some common subclasses: */
+typedef struct CongEditorArea CongEditorArea;
+typedef struct CongEditorAreaClass CongEditorAreaClass;
+
+typedef struct CongEditorAreaFlowHolder CongEditorAreaFlowHolder;
+typedef struct CongEditorAreaFlowHolderClass CongEditorAreaFlowHolderClass;
+
+typedef struct CongEditorAreaFlowHolderInlines CongEditorAreaFlowHolderInlines;
+typedef struct CongEditorAreaFlowHolderInlinesClass CongEditorAreaFlowHolderInlinesClass;
+
+typedef struct CongEditorAreaLine CongEditorAreaLine;
+typedef struct CongEditorAreaLineClass CongEditorAreaLineClass;
+
+/* CongEditorNode and some common subclasses: */
+typedef struct CongEditorNode CongEditorNode;
+typedef struct CongEditorNodeClass CongEditorNodeClass;
+
+typedef struct CongEditorNodeElement CongEditorNodeElement;
+typedef struct CongEditorNodeElementClass CongEditorNodeElementClass;
+
+/* Other related classes: */
+typedef struct CongEditorLineFragments CongEditorLineFragments;
+typedef struct CongEditorLineFragmentsClass CongEditorLineFragmentsClass;
+
 struct CongEditorWidget3
 {
 	GtkDrawingArea drawing_area;

@@ -76,6 +76,10 @@ void
 cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
 				  const gchar *markup);
 
+gint 
+cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text,
+						   GtkOrientation orientation);
+
 G_END_DECLS
 
 #endif

@@ -27,6 +27,7 @@
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-bin.h"
+#include "cong-editor-child-policy-flow-holder.h"
 
 CongEditorChildPolicy*
 cong_editor_widget_create_child_policy_for_node_with_single_area(CongEditorNode *editor_node,
@@ -182,7 +183,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	g_assert(PRIVATE(area_flow_holder_single)->single_editor_area==NULL);
 
 	/* Get the editor node to generate its area: */
-	new_area = cong_editor_node_generate_area (editor_node);
+	new_area = cong_editor_node_generate_block_area (editor_node);
 
 	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_flow_holder_single)->outer_bin),
 					      new_area);

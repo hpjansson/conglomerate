@@ -14,10 +14,12 @@ void
 cong_eel_log_ref_count (const gchar *name, 
 			GObject *obj)
 {
+#if 0
 	g_message("Current ref count of %s = %i (%s)", 
 		  name,
 		  obj->ref_count,
 		  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(obj)));
+#endif
 }
 
 void            
@@ -32,6 +34,15 @@ cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 	rectangle->y = y;
 	rectangle->width = w;
 	rectangle->height = h;
+}
+
+gchar*
+cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line)
+{
+	g_return_val_if_fail (layout_line, NULL);
+
+	return g_strndup (pango_layout_get_text (layout_line->layout) + layout_line->start_index, 
+			  layout_line->length);
 }
 
 /**

@@ -39,7 +39,7 @@ struct CongEditorNodeElementStructuralDetails
 };
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node);
+generate_block_area (CongEditorNode *editor_node);
 
 /* Declarations of the CongEditorArea event handlers: */
 static gboolean
@@ -58,7 +58,7 @@ cong_editor_node_element_structural_class_init (CongEditorNodeElementStructuralC
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->generate_area = generate_area;
+	node_klass->generate_block_area = generate_block_area;
 }
 
 static void
@@ -94,7 +94,7 @@ cong_editor_node_element_structural_new (CongEditorWidget3* widget,
 }
 
 static CongEditorArea*
-generate_area (CongEditorNode *editor_node)
+generate_block_area (CongEditorNode *editor_node)
 {
 #if 0
 	CongEditorArea *outer_area;

@@ -56,7 +56,8 @@ struct CongEditorNodeDetails
 static enum CongFlowType
 get_flow_type(CongEditorNode *editor_node);
 
-CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_area);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_block_area);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_line_areas_recursive);
 
 
 /* Exported function definitions: */
@@ -70,7 +71,10 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 {
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
-					      generate_area);
+					      generate_block_area);
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_editor_node,
+					      generate_line_areas_recursive);
 
 	klass->get_flow_type = get_flow_type;
 }
@@ -238,14 +242,27 @@ cong_editor_node_get_area (CongEditorNode *editor_node)
 #endif
 
 CongEditorArea*
-cong_editor_node_generate_area (CongEditorNode *editor_node)
+cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
 	g_return_if_fail (editor_node);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
-						       generate_area, 
+						       generate_block_area, 
 						       (editor_node));
+}
+
+CongEditorLineFragments*
+cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
+						gint line_width,
+						gint initial_indent)
+{
+	g_return_if_fail (editor_node);
+	
+	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
+						       editor_node,
+						       generate_line_areas_recursive, 
+						       (editor_node, line_width, initial_indent));
 }
 
 enum CongFlowType

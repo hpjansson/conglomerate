@@ -58,13 +58,17 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 				     CongEditorWidget3 *editor_widget,
 				     CongDispspecElement *ds_element,
 				     GdkPixbuf *pixbuf,					   
-				     const gchar *text);
+				     const gchar *text,
+				     gboolean is_at_start,
+				     gboolean is_at_end);
 
 CongEditorArea*
 cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
 			       CongDispspecElement *ds_element,
 			       GdkPixbuf *pixbuf,
-			       const gchar *text);
+			       const gchar *text,
+			       gboolean is_at_start,
+			       gboolean is_at_end);
 
 G_END_DECLS
 

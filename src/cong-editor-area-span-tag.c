@@ -46,15 +46,12 @@ struct CongEditorAreaSpanTagDetails
 {
 	CongDispspecElement *ds_element;
 
-	CongEditorArea *span_vcompose;
-	/****/ CongEditorArea *inner_bin;
-	/****/ /* anon hcompose */
-	/********/ CongEditorArea *span_line_left;
-	/********/ /* anon "disappear if not enough space" */
-	/************/ /* inner anon hcompose */
-	/****************/ CongEditorArea *title_pixbuf;
-	/****************/ CongEditorArea *title_text;
-	/********/ CongEditorArea *span_line_right;
+	CongEditorArea *inner_bin;
+	CongEditorArea *title_pixbuf;
+	CongEditorArea *title_text;
+
+	gboolean is_at_start;
+	gboolean is_at_end;
 };
 
 /* Method implementation prototypes: */
@@ -113,7 +110,9 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 				     CongEditorWidget3 *editor_widget,
 				     CongDispspecElement *ds_element,
 				     GdkPixbuf *pixbuf,
-				     const gchar *text)
+				     const gchar *text,
+				     gboolean is_at_start,
+				     gboolean is_at_end)
 {
 	g_return_val_if_fail (text, NULL);
 
@@ -121,93 +120,47 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 					editor_widget);
 
 	PRIVATE(area_span_tag)->ds_element = ds_element;
+	PRIVATE(area_span_tag)->is_at_start = is_at_start;
+	PRIVATE(area_span_tag)->is_at_end = is_at_end;
 
-	/* Build it as a vertical composition */
-	PRIVATE(area_span_tag)->span_vcompose = cong_editor_area_composer_new (editor_widget,
-									       GTK_ORIENTATION_VERTICAL,
-									       0);
-	
-	{
-		CongEditorArea *anon_hcompose;
+	PRIVATE(area_span_tag)->inner_bin = cong_editor_area_bin_new (editor_widget);
 
-		PRIVATE(area_span_tag)->inner_bin = cong_editor_area_bin_new (editor_widget);
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->span_vcompose),
-						       PRIVATE(area_span_tag)->inner_bin);
+	if (pixbuf) {
+		PRIVATE(area_span_tag)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
+										    pixbuf);
 
-		anon_hcompose = cong_editor_area_composer_new (editor_widget,
-							       GTK_ORIENTATION_HORIZONTAL,
-							       0);
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_span_tag)->span_vcompose),
-						       anon_hcompose);
+		cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_span_tag),
+									   PRIVATE(area_span_tag)->title_pixbuf);
 		
-		{
-			CongEditorArea *anon_disappear;
-			
-			PRIVATE(area_span_tag)->span_line_left = cong_editor_area_underline_new (editor_widget,
-												 CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_START);
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_hcompose),
-							       PRIVATE(area_span_tag)->span_line_left);
-				
-			/* anon "disappear if not enough space" */
-			anon_disappear = cong_editor_area_bin_new (editor_widget); /* for now */
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(anon_hcompose),
-							anon_disappear,
-							FALSE,
-							FALSE,
-							0);
-			
-			{
-
-				CongEditorArea *inner_anon_hcompose = cong_editor_area_composer_new (editor_widget,
-												     GTK_ORIENTATION_HORIZONTAL,
-												     5);
-				cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(anon_disappear),
-								      inner_anon_hcompose);
-				
-				/* inner anon hcompose */
-				{
-					if (pixbuf) {
-						PRIVATE(area_span_tag)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
-														    pixbuf);
-						cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(inner_anon_hcompose),
-										       PRIVATE(area_span_tag)->title_pixbuf);		
-						
-					}
-					PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
-													cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
-													cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-													text,
-													FALSE);
-					cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(inner_anon_hcompose),
-									PRIVATE(area_span_tag)->title_text,
-									FALSE,
-									FALSE,
-									0);
-				}
-			}
-			
-			PRIVATE(area_span_tag)->span_line_right = cong_editor_area_underline_new (editor_widget,
-												  CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_END);
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_hcompose),
-							       PRIVATE(area_span_tag)->span_line_right);
-		}
+		
+		cong_editor_area_protected_set_parent (PRIVATE(area_span_tag)->title_pixbuf,
+						       CONG_EDITOR_AREA (area_span_tag));
 	}
 
-	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_span_tag),
-								   PRIVATE(area_span_tag)->span_vcompose);
+	PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
+									cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
+									cong_dispspec_element_col (ds_element, 
+												   CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+									text,
+									FALSE);
 
-	cong_editor_area_protected_set_parent (PRIVATE(area_span_tag)->span_vcompose,
+	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_span_tag),
+								   PRIVATE(area_span_tag)->title_text);
+
+	cong_editor_area_protected_set_parent (PRIVATE(area_span_tag)->title_text,
 					       CONG_EDITOR_AREA (area_span_tag));
+
 
 	return CONG_EDITOR_AREA (area_span_tag);
 }
 
 CongEditorArea*
 cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
-				     CongDispspecElement *ds_element,
-				     GdkPixbuf *pixbuf,
-				     const gchar *text)
-
+			       CongDispspecElement *ds_element,
+			       GdkPixbuf *pixbuf,
+			       const gchar *text,
+			       gboolean is_at_start,
+			       gboolean is_at_end)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_span_tag_new(%s)", text);
@@ -221,7 +174,9 @@ cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
 		 editor_widget,
 		 ds_element,
 		 pixbuf,
-		 text);
+		 text,
+		 is_at_start,
+		 is_at_end);
 }
 
 /* Method implementation definitions: */
@@ -229,81 +184,61 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect)
 {
-#if 0
-	GdkGC *gc;
 	CongEditorAreaSpanTag *area_span_tag = CONG_EDITOR_AREA_SPAN_TAG(area);
 	CongDispspecElement *ds_element = PRIVATE(area_span_tag)->ds_element;
 	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
 	GdkWindow *window = cong_editor_area_get_gdk_window(area);
-	const GtkRequisition *title_req;
-	gint title_bar_height;
 
-	gboolean expanded = TRUE;
+	GdkGC *gc = cong_dispspec_element_gc(ds_element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 
-	title_req = cong_editor_area_get_requisition (PRIVATE(area_span_tag)->title_vcompose);
-	g_assert(title_req);
+	gint title_text_width_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(area_span_tag)->title_text),
+										       GTK_ORIENTATION_HORIZONTAL);
+	gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(area_span_tag)->title_text),
+											GTK_ORIENTATION_VERTICAL);
+	/* Calculate start/end points on this this line: */
+	gint end_x = rect->x + rect->width;
+	gint line_y = rect->y + rect->height - (title_text_height_req/2);
 
-	title_bar_height = title_req->height;
 
-	gc = cong_dispspec_element_gc (ds_element,
-				       CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
-	g_assert(gc);
+#define UNDERLINE_ASCENT (5)
+	/* was 2 */
 
-	/* Draw the frame rectangle "open" on the right-hand side : */
-	/* Top */
-	gdk_draw_line (window, 
-		       gc, 
-		       rect->x, rect->y, 
-		       rect->x + rect->width, rect->y);
-
-	/* Left */
-	gdk_draw_line (window, 
-		       gc, 
-		       rect->x, rect->y,
-		       rect->x, rect->y + (expanded ? rect->height-1 : title_bar_height));
-
-	/* Fill the inside of the rectangle: */
-	gc = cong_dispspec_element_gc(ds_element, 
-				      CONG_DISPSPEC_GC_USAGE_BACKGROUND);
-	g_assert(gc);
-	
-	gdk_draw_rectangle (window, 
-			    gc, 
-			    TRUE, 
-			    rect->x+1, rect->y+1, 
-			    rect->width - 1, title_bar_height);
-	
-	/* Bottom */  
-	if (1/*section_head->expanded*/) {
-		gc = cong_dispspec_element_gc (ds_element, 
-					       CONG_DISPSPEC_GC_USAGE_DIM_LINE);
-		g_assert(gc);
-
-		/* Bottom of title bar: */
+	if (PRIVATE(area_span_tag)->is_at_start) {
 		gdk_draw_line (window, 
 			       gc, 
-			       rect->x + 1, rect->y + title_bar_height+1,
-			       rect->x + rect->width, rect->y + title_bar_height+1);
-
-		/* Short horizontal line along very bottom of area: */
-		draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
-				   cong_dispspec_element_col (ds_element, 
-							      CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-				   rect->x, rect->y + rect->height-1,
-				   rect->x + 45);
-
-	} else {
-		gc = cong_dispspec_element_gc (ds_element, 
-					       CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
-		g_assert(gc);
-
-		/* Bottom of title bar: */
-		gdk_draw_line (window, 
-			       gc, 
-			       rect->x + 1, rect->y + title_bar_height+1,
-			       rect->x + rect->width, rect->y + title_bar_height+1);
+			       rect->x, line_y - UNDERLINE_ASCENT, 
+			       rect->x, line_y);
 	}
-#endif
+
+	if (PRIVATE(area_span_tag)->is_at_end) {
+		gdk_draw_line (window, 
+			       gc, 
+			       end_x, line_y - UNDERLINE_ASCENT, 
+			       end_x, line_y);
+	}
+
+	/* Draw the main underline: */
+	if (cong_editor_area_is_hidden (PRIVATE(area_span_tag)->title_text)) {
+		/* The text is hidden; draw the entire line in one go: */
+		gdk_draw_line (window, 
+			       gc, 
+			       rect->x, line_y, 
+			       end_x, line_y);
+	} else {
+		const GdkRectangle* text_rect = cong_editor_area_get_window_coords (PRIVATE(area_span_tag)->title_text);
+
+		/* Break line into two parts: */
+		gdk_draw_line (window, 
+			       gc, 
+			       rect->x, line_y, 
+			       text_rect->x, line_y);
+
+		gdk_draw_line (window, 
+			       gc, 
+			       text_rect->x + text_rect->width, line_y, 
+			       end_x, line_y);
+	}
+
 }
 
 static gint
@@ -313,27 +248,63 @@ calc_requisition (CongEditorArea *area,
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(area);
 
-	g_assert (PRIVATE(span_tag)->span_vcompose);
-		 
-	return cong_editor_area_get_requisition (PRIVATE(span_tag)->span_vcompose,
-						 orientation,
-						 width_hint);
+	gint inner_req = cong_editor_area_get_requisition (PRIVATE(span_tag)->inner_bin,
+							   orientation,
+							   width_hint);
+#if 0
+	gint title_pixbuf_req = cong_editor_area_get_requisition (PRIVATE(span_tag)->title_pixbuf,
+								  orientation,
+								  width_hint);
+#endif
+
+	if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+		return inner_req;
+	} else {		
+		gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
+												orientation);
+	
+		return inner_req + title_text_height_req;
+	}
 }
 
 static void
 allocate_child_space (CongEditorArea *area)
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(area);
-
+	
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
+	
+	gint inner_req_height = cong_editor_area_get_requisition (PRIVATE(span_tag)->inner_bin,
+								  GTK_ORIENTATION_VERTICAL,
+								  rect->width);
 
-	g_assert (PRIVATE(span_tag)->span_vcompose);
+	gint title_text_width_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
+										       GTK_ORIENTATION_HORIZONTAL);
+	gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
+											GTK_ORIENTATION_VERTICAL);
 
-	cong_editor_area_set_allocation (PRIVATE(span_tag)->span_vcompose,
+	g_message ("single_line_req = (%i,%i)", 
+		   title_text_width_req,
+		   title_text_height_req);
+	
+	/* Set inner bin to have all the width, plus all the height it wants:*/
+	cong_editor_area_set_allocation (PRIVATE(span_tag)->inner_bin,
 					 rect->x,
 					 rect->y,
 					 rect->width,
-					 rect->height);
+					 inner_req_height);
+
+	/* Set up the title text: */
+	if (title_text_width_req < rect->width) {
+		cong_editor_area_show (PRIVATE(span_tag)->title_text);
+		cong_editor_area_set_allocation (PRIVATE(span_tag)->title_text,
+						 rect->x + (rect->width - title_text_width_req)/2,
+						 rect->y + rect->height - title_text_height_req,
+						 title_text_width_req,
+						 title_text_height_req);
+	} else {
+		cong_editor_area_hide (PRIVATE(span_tag)->title_text);		
+	}
 }
 
 static CongEditorArea*
@@ -343,8 +314,16 @@ for_all (CongEditorArea *editor_area,
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(editor_area);
 
-	if ((*func)(PRIVATE(span_tag)->span_vcompose, user_data)) {
-		return PRIVATE(span_tag)->span_vcompose;
+	if ((*func)(PRIVATE(span_tag)->inner_bin, user_data)) {
+		return PRIVATE(span_tag)->inner_bin;
+	}
+	if (PRIVATE(span_tag)->title_pixbuf) {
+		if ((*func)(PRIVATE(span_tag)->title_pixbuf, user_data)) {
+			return PRIVATE(span_tag)->title_pixbuf;
+		}
+	}
+	if ((*func)(PRIVATE(span_tag)->title_text, user_data)) {
+		return PRIVATE(span_tag)->title_text;
 	}
 
 	return NULL;

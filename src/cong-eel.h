@@ -30,6 +30,9 @@ cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 			      gint                  w,
 			      gint                  h);
 
+gchar*
+cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line);
+
 /* From eel-gdk-extensions.h: */
 gboolean            cong_eel_rectangle_contains             (const GdkRectangle  *rectangle,
 							    int                  x,

@@ -29,8 +29,6 @@
 
 G_BEGIN_DECLS
 
-typedef struct CongEditorAreaFlowHolderInlines CongEditorAreaFlowHolderInlines;
-typedef struct CongEditorAreaFlowHolderInlinesClass CongEditorAreaFlowHolderInlinesClass;
 typedef struct CongEditorAreaFlowHolderInlinesDetails CongEditorAreaFlowHolderInlinesDetails;
 
 #define CONG_EDITOR_AREA_FLOW_HOLDER_INLINES_TYPE	   (cong_editor_area_flow_holder_inlines_get_type ())
@@ -48,6 +46,7 @@ struct CongEditorAreaFlowHolderInlines
 struct CongEditorAreaFlowHolderInlinesClass
 {
 	CongEditorAreaFlowHolderClass klass;
+
 };
 
 GType
@@ -55,10 +54,40 @@ cong_editor_area_flow_holder_inlines_get_type (void);
 
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines,
-					       CongEditorWidget3 *editor_widget);
+						CongEditorWidget3 *editor_widget);
 
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_new (CongEditorWidget3 *editor_widget);
+
+CongEditorAreaLine*
+cong_editor_area_flow_holder_inlines_get_current_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+gint
+cong_editor_area_flow_holder_inlines_get_line_width (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+gint
+cong_editor_area_flow_holder_inlines_get_current_indent (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+void
+cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+CongEditorAreaLine*
+cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+void
+cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+CongEditorNode*
+cong_editor_area_flow_holder_inlines_get_first_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+CongEditorNode*
+cong_editor_area_flow_holder_inlines_get_final_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
+#if 0
+gboolean
+cong_editor_area_flow_holder_inlines_contains_editor_node_directly (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines,
+								    CongEditorNode *editor_node);
+#endif
 
 G_END_DECLS
 

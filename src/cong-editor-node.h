@@ -25,7 +25,7 @@
 #ifndef __CONG_EDITOR_NODE_H__
 #define __CONG_EDITOR_NODE_H__
 
-#include "cong-editor-area.h"
+#include "cong-editor-widget.h"
 
 G_BEGIN_DECLS
 
@@ -36,7 +36,6 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_TYPE, CongEditorNodeClass)
 #define IS_CONG_EDITOR_NODE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_TYPE)
 
-typedef struct CongEditorNodeClass CongEditorNodeClass;
 typedef struct CongEditorNodeDetails CongEditorNodeDetails;
 
 struct CongEditorNode
@@ -53,8 +52,12 @@ struct CongEditorNodeClass
 	/* Methods? */
 
 	/* Simplistic interface for now: */
-	CongEditorArea* (*generate_area) (CongEditorNode *editor_node);
+	CongEditorArea* (*generate_block_area) (CongEditorNode *editor_node);
 
+	CongEditorLineFragments* (*generate_line_areas_recursive) (CongEditorNode *editor_node,
+								   gint line_width,
+								   gint initial_indent);
+	
 	enum CongFlowType (*get_flow_type) (CongEditorNode *editor_node);
 };
 
@@ -95,7 +98,13 @@ cong_editor_node_get_inner_area (CongEditorNode *editor_node);
 #endif
 
 CongEditorArea*
-cong_editor_node_generate_area (CongEditorNode *editor_node);
+cong_editor_node_generate_block_area (CongEditorNode *editor_node);
+
+/* This doesn't actually add the areas anywhere; this has to be done separately (to avoid reparenting issues when the span tags embellish their children's lines: */
+CongEditorLineFragments*
+cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
+						gint line_width,
+						gint initial_indent);
 
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);

@@ -173,6 +173,16 @@ cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_VERTICAL);
 }
 
+gint 
+cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text,
+						   GtkOrientation orientation)
+{
+	/* Bit hackish: use a REALLY BIG width to try to prevent wrapping: */
+	return cong_editor_area_get_requisition (CONG_EDITOR_AREA(area_text),
+						 orientation,
+						 10000);
+}
+
 gboolean
 cong_editor_area_xy_to_index (CongEditorAreaText *area_text,
 			      int x,
@@ -194,7 +204,6 @@ cong_editor_area_xy_to_index (CongEditorAreaText *area_text,
 					 index_,
 					 trailing);
 }
-
 
 /* Method implementation definitions: */
 static void 
