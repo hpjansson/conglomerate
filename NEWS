@@ -1,37 +1,9 @@
 
 NEWS: In this file the announce messages of recent releases.
 
-03-11-04
-Conglomerate 0.7.16 ("Sweet Sixteen") Released
-==============================================
-
-Conglomerate is a free, user-friendly XML editor. It is particularly
-aimed at DocBook, but should be able to handle any XML document type.
-
-This is still an unstable release; there are still some known repeatable
-crash bugs. Please download it and test that no new bugs have been
-introduced!
-
-Conglomerate requires GTK+ version 2.4.0 or later
-
-You can download it from the usual place:
-http://sourceforge.net/project/showfiles.php?group_id=82766
-
-Many thanks to everyone who contributed to this release; my apologies if
-I missed anyone from the credits below.
-
-
-Updated Translations:
-      * French (fr) (Michele Garoche)
-
-Enhancements:
-      * "Widgetplayground" reimplemention of wigdet code (Nickolay V. Shmyrev)
-
-Fixes
-      * Build gtkdoc again after fo code removal (Michele Garoche)
-      * Build gtkdoc when enchant is enabled (Frederic Brin)
-
---David Malcolm
+04-11-04
+Conglomerate 0.7.16 Released
+============================
 
 Conglomerate requires GTK+ version 2.4.0 or later
 
@@ -213,59 +185,3 @@ Fixes
         (Nickolay V. Shmyrev)
 
 --David Malcolm
-
-
-22-06-04
-Conglomerate 0.7.14 Released
-============================
-
-Conglomerate is a free, user-friendly XML editor. It is particularly
-aimed at DocBook, but should be able to handle any XML document type.
-
-This is still an unstable release; there are still some known repeatable
-crash bugs. Please download it and test that no new bugs have been
-introduced! 
-
-Conglomerate now requires GTK+ version 2.4.0 or later
-
-You can download it from the usual place:
-http://sourceforge.net/project/showfiles.php?group_id=82766
-
-Many thanks to everyone who contributed to this release; my apologies if
-I missed anyone from the credits below.
-
-
-Updated Translations: 
-      * Czech (cs) (Miloslav Trmac)
-      * British English (en_GB) (Gareth Owen)
-
-Enhancements
-      * The Tools->Validate feature can now show you the errors when
-        validation fails (Nickolay V. Shmyrev)
-      * You can now select a DTD for documents lacking one, accessible
-        via buttons in the File->Properties dialog and in the
-        Tools->Validate error dialog (Dave Malcolm)
-      * A new option in the File->New assistant for creating empty XML
-        documents of arbitrary type. The assistant has a page which lets
-        you enter the name of the top-level element, and its namespace
-        URI (if any), with a little XML source preview that updates as
-        you type. (Dave Malcolm)
-      * Improvements to the internals of attribute editing, making code
-        cleaner and fixing various crashes (Nickolay V. Shmyrev)
-      * Rewrite of the File->Import UI, making use of GtkFileFilter (see
-        bug # 144713 ). Hopefully the features are now a lot more
-        "discoverable" than before. (Dave Malcolm)
-
-Fixes
-      * Fix layout of alert widget contents. (Nickolay V. Shmyrev)
-      * Added the envar DocBook element ( bug # 144739 ) (Lars Trieloff)
-
-Thanks
-      * Miloslav Trmac
-      * Gareth Owen
-      * Nickolay V. Shmyrev
-      * Dave Malcolm
-      * Lars Trieloff
-
--- 
-David Malcolm
