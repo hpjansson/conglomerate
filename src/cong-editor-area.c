@@ -29,11 +29,19 @@
 
 #define PRIVATE(x) ((x)->private)
 
-#define DEBUG_REQUISITIONS 0
-#define DEBUG_ALLOCATIONS 0
-#define DEBUG_RENDER_ALLOCATIONS 0
+#define DEBUG_REQUISITIONS 1
+#define DEBUG_ALLOCATIONS 1
+#define DEBUG_RENDER_ALLOCATIONS 1
 
 enum {
+#if 0
+	BUTTON_PRESS_EVENT,
+
+	ENTER_NOTIFY_EVENT,
+	LEAVE_NOTIFY_EVENT,
+	MOTION_NOTIFY_EVENT,
+#endif
+
 	FLUSH_REQUISITION_CACHE,
 
 	LAST_SIGNAL
@@ -81,10 +89,46 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 #endif
 
 	/* Set up the various signals: */
+#if 0
+	signals[BUTTON_PRESS_EVENT] = g_signal_new ("button_press_event",
+						    CONG_EDITOR_AREA_TYPE,
+						    G_SIGNAL_RUN_FIRST,
+						    G_STRUCT_OFFSET(CongEditorAreaClass, flush_requisition_cache),
+						    NULL, NULL,
+						    g_cclosure_marshal_BOOLEAN__POINTER,
+						    G_TYPE_BOOLEAN, 
+						    1, G_TYPE_POINTER);
+
+	signals[ENTER_NOTIFY_EVENT] = g_signal_new ("enter_notify_event",
+						     CONG_EDITOR_AREA_TYPE,
+						     G_SIGNAL_RUN_FIRST,
+						     G_STRUCT_OFFSET(CongEditorAreaClass, enter_notify_event),
+						     NULL, NULL,
+						     g_cclosure_marshal_VOID__VOID,
+						     G_TYPE_NONE, 
+						     0);
+	signals[LEAVE_NOTIFY_EVENT] = g_signal_new ("leave_notify_event",
+						     CONG_EDITOR_AREA_TYPE,
+						     G_SIGNAL_RUN_FIRST,
+						     G_STRUCT_OFFSET(CongEditorAreaClass, leave_notify_event),
+						     NULL, NULL,
+						     g_cclosure_marshal_VOID__VOID,
+						     G_TYPE_NONE, 
+						     0);
+	signals[MOTION_NOTIFY_EVENT] = g_signal_new ("motion_notify_event",
+						     CONG_EDITOR_AREA_TYPE,
+						     G_SIGNAL_RUN_FIRST,
+						     G_STRUCT_OFFSET(CongEditorAreaClass, motion_notify_event),
+						     NULL, NULL,
+						     g_cclosure_marshal_VOID__VOID,
+						     G_TYPE_NONE, 
+						     0);
+#endif
+
 	signals[FLUSH_REQUISITION_CACHE] = g_signal_new ("flush_requisition_cache",
 							 CONG_EDITOR_AREA_TYPE,
 							 G_SIGNAL_RUN_FIRST,
-							 G_STRUCT_OFFSET(CongEditorAreaClass, flush_requisition_cache),
+							 0, /* G_STRUCT_OFFSET(CongEditorAreaClass, flush_requisition_cache), */
 							 NULL, NULL,
 							 g_cclosure_marshal_VOID__VOID,
 							 G_TYPE_NONE, 

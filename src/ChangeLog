@@ -1,5 +1,9 @@
 2003-07-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-bin.c, cong-editor-area-composer.c, cong-editor-area-container.c, cong-editor-area-container.h, cong-editor-area.c, cong-editor-widget3.c
+
+	Track tree modifications to the document in the editor widget.
+	
 	* cong-document.c
 
 	Fixed the signal emission flags.

@@ -50,6 +50,9 @@ for_all (CongEditorArea *editor_area,
 static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
+static void
+remove_child (CongEditorAreaContainer *area_container,
+	      CongEditorArea *child);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaBin, 
@@ -68,6 +71,7 @@ cong_editor_area_bin_class_init (CongEditorAreaBinClass *klass)
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+	container_klass->remove_child = remove_child;
 
 }
 
@@ -171,9 +175,30 @@ add_child (CongEditorAreaContainer *area_container,
 	if (PRIVATE(bin)->only_child) {
 		g_error("cong_editor_area_bin::add_child called but already has a child");
 	} else {
+		g_object_ref (G_OBJECT(child));
+
 		PRIVATE(bin)->only_child = child;
 	}
 
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (area_container,
 										 child);
+}
+
+static void
+remove_child (CongEditorAreaContainer *area_container,
+	      CongEditorArea *child)
+{
+	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area_container);
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	if (child==PRIVATE(bin)->only_child) {
+		PRIVATE(bin)->only_child = NULL;
+
+		g_object_unref (G_OBJECT(child));
+	} else {
+		g_error("cong_editor_area_bin::remove_child called but with the wrong child");
+	}
+
+
 }

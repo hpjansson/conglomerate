@@ -43,6 +43,15 @@
 #include "cong-editor-area-bin.h"
 #include "cong-editor-area-unknown-tag.h"
 
+#define SHOW_CURSOR_SPEW 0
+
+gboolean
+cong_editor_widget3_node_should_have_editor_node (CongNodePtr node);
+
+gboolean
+cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
+					      CongNodePtr node);
+
 #define PRIVATE(foo) ((foo)->private)
 
 struct CongEditorWidget3Details
@@ -54,7 +63,16 @@ struct CongEditorWidget3Details
 
 	GHashTable *hash_of_node_to_editor;
 
-	CongEditorArea *test_area;
+	/* Record the "primary area" for each editor node: */
+	GHashTable *hash_of_editor_node_to_primary_area;
+
+	/* Record the area each editor node's primary area was inserted into: */
+	GHashTable *hash_of_editor_node_to_parent_insertion_area;
+
+	/* Record the "insetion area" for each editor node: */
+	GHashTable *hash_of_editor_node_to_child_insertion_area;
+
+	CongEditorArea *root_area;
 
 	GdkGC *test_gc;
 };
@@ -62,7 +80,9 @@ struct CongEditorWidget3Details
 
 #define DEBUG_EDITOR_WIDGET_VIEW  1
 #define LOG_GTK_WIDGET_SIGNALS    0
-#define LOG_CONG_DOCUMENT_SIGNALS 0
+#define LOG_CONG_DOCUMENT_SIGNALS 1
+#define LOG_EDITOR_NODES 1
+#define LOG_EDITOR_AREAS 1
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -90,6 +110,20 @@ struct CongEditorWidget3Details
 #define LOG_CONG_DOCUMENT_SIGNAL1(x) ((void)0)
 #endif
 
+#define LOG_EDITOR_NODES 1
+#if LOG_EDITOR_NODES
+#define LOG_EDITOR_NODE1(x) g_message(x)
+#else
+#define LOG_EDITOR_NODE1(x) ((void)0)
+#endif
+
+#define LOG_EDITOR_AREAS 1
+#if LOG_EDITOR_AREAS
+#define LOG_EDITOR_AREA1(x) g_message(x)
+#else
+#define LOG_EDITOR_AREA1(x) ((void)0)
+#endif
+
 /* Declarations of misc stuff: */
 static void 
 render_area (CongEditorArea *area,
@@ -98,8 +132,10 @@ render_area (CongEditorArea *area,
 static void 
 populate_widget3(CongEditorWidget3 *widget);
 
+#if 0
 static void 
 create_areas(CongEditorWidget3 *widget);
+#endif
 
 static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
@@ -110,10 +146,20 @@ recursive_remove_nodes(CongEditorWidget3 *widget,
 		       CongNodePtr node);
 
 
+#if 1
+static void 
+create_areas(CongEditorWidget3 *widget,
+	     CongNodePtr node);
+static void 
+destroy_areas(CongEditorWidget3 *widget,
+	      CongNodePtr node);
+#else
+
 static void 
 recursive_create_areas(CongEditorWidget3 *widget,
 		       CongNodePtr node,
 		       CongEditorArea *parent_area);
+#endif
 
 /* Declarations of the GtkWidget event handlers: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
@@ -229,6 +275,12 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 
 	details->hash_of_node_to_editor = g_hash_table_new (NULL,
 							    NULL);
+	details->hash_of_editor_node_to_primary_area = g_hash_table_new (NULL,
+									 NULL);
+	details->hash_of_editor_node_to_parent_insertion_area = g_hash_table_new (NULL,
+										  NULL);
+	details->hash_of_editor_node_to_child_insertion_area = g_hash_table_new (NULL,
+										 NULL);
 
 	details->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
@@ -263,77 +315,20 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);
 
-
-#if 1
-	populate_widget3(widget);
-#endif
-
-
-#if 1
-#if 1
-#if 1
-	create_areas(widget);
-#else
+	/* Set up root area: */
 	{
-		int i,j;
-		CongEditorArea *outer_area;
-		CongEditorArea *vcompose_outer;
-
-		details->test_area = cong_editor_area_unknown_tag_new (widget,
-								       "foo");
-
-		vcompose_outer = cong_editor_area_composer_new (widget,
-								GTK_ORIENTATION_VERTICAL,
-								5);
-
-		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(details->test_area),
-						       vcompose_outer);
-
-		for (i=0;i<10;i++) {
-			CongEditorArea *middle_tag = cong_editor_area_unknown_tag_new (widget,
-										      "bar");
-			
-			CongEditorArea *vcompose_inner = cong_editor_area_composer_new (widget,
-											GTK_ORIENTATION_VERTICAL,
-											5);
-
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(vcompose_outer),
-							       middle_tag);
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(middle_tag),
-							       vcompose_inner);
-			
-			for (j=0;j<5;j++) {
-				cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(vcompose_inner),
-								       cong_editor_area_unknown_tag_new (widget,
-													 "fubar")
-								       );
-				
-			}			
-		}
+		details->root_area = cong_editor_area_border_new (widget, 5);
+	
+		g_signal_connect (G_OBJECT(details->root_area),
+				  "flush_requisition_cache",
+				  G_CALLBACK(on_root_requisition_change),
+				  widget);
 	}
-#endif
-#else
+
+	/* Traverse the doc, adding EditorNodes and EditorAreas: */
 	{
-		int i;
-
-		details->test_area = cong_editor_area_composer_new (widget,
-								    GTK_ORIENTATION_VERTICAL,
-								    10);
-
-		for (i=0;i<10;i++) {
-			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(details->test_area),
-							       cong_editor_area_text_new (widget,
-											  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
-											  g_strdup_printf("this is a test string %i",i))
-							       );
-		}
+		populate_widget3(widget);
 	}
-#endif
-#else
-	details->test_area = cong_editor_area_text_new (widget,
-							cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
-							"this is a test");
-#endif
 
 	/* Connect to CongDocument events: */
 	{
@@ -477,7 +472,7 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 			   event->area.height);	
 
 	/* Render the areas: */
-	cong_editor_area_recursive_render (details->test_area,
+	cong_editor_area_recursive_render (details->root_area,
 					   &event->area);
 
 #if 0
@@ -498,17 +493,17 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 	LOG_GTK_WIDGET_SIGNAL3("configure_event_handler; w/h = %i,%i", event->width, event->height);
 
 #if 0
-	if (event->width != cong_editor_area_get_cached_width_hint (details->test_area)) {
+	if (event->width != cong_editor_area_get_cached_width_hint (details->root_area)) {
 		
 	}
 #endif
 
 #if 0
-  	cong_editor_area_update_requisition(details->test_area, event->width);
+  	cong_editor_area_update_requisition(details->root_area, event->width);
 #endif
 
 	/* Pass all of the allocation to root editor; this will recursively allocate space to its children: */
-	cong_editor_area_set_allocation (details->test_area, 
+	cong_editor_area_set_allocation (details->root_area, 
 					 event->x,
 					 event->y,
 					 event->width,
@@ -567,7 +562,7 @@ static void size_request_handler(GtkWidget *widget,
  	g_assert(widget);
  	g_assert(requisition);
 
-	req = cong_editor_area_get_requisition (details->test_area,
+	req = cong_editor_area_get_requisition (details->root_area,
 						widget->allocation.width); 
 
 	/* Only request up to the width you've already been allocated; don't grow in width unless your container gives you more room. */
@@ -604,14 +599,20 @@ static void on_signal_end_edit_notify_before (CongDocument *doc,
 }
 
 static void on_signal_make_orphan_notify_before (CongDocument *doc, 
-					  CongNodePtr node, 
-					  gpointer user_data) 
+						 CongNodePtr node, 
+						 gpointer user_data) 
 { 
 	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_make_orphan_notify_before");
 
-	recursive_remove_nodes(editor_widget, node);
+#if 1
+	if (cong_editor_widget3_node_should_have_editor_node(node)) {
+		recursive_remove_nodes(editor_widget, node);
+	} else {
+		g_assert(!cong_editor_widget3_has_editor_node_for_node(editor_widget, node));
+	}
+#endif
 }
 
 static void on_signal_add_after_notify_before (CongDocument *doc, 
@@ -647,7 +648,11 @@ static void on_signal_set_parent_notify_before (CongDocument *doc,
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_before");
 
-	recursive_remove_nodes(editor_widget, node);
+	if (cong_editor_widget3_node_should_have_editor_node(node)) {
+		recursive_remove_nodes(editor_widget, node);
+	} else {
+		g_assert(!cong_editor_widget3_has_editor_node_for_node(editor_widget, node));
+	}
 }
 
 static void on_signal_set_text_notify_before (CongDocument *doc, 
@@ -702,7 +707,9 @@ static void on_signal_cursor_change_notify_before (CongDocument *doc,
 { 
 	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
 
+#if SHOW_CURSOR_SPEW
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_before");
+#endif
 
 	/* empty so far */
 }
@@ -749,7 +756,9 @@ static void on_signal_add_after_notify_after (CongDocument *doc,
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_after");
 
+#if 1
 	recursive_add_nodes(editor_widget, node);
+#endif
 }
 
 static void on_signal_add_before_notify_after (CongDocument *doc, 
@@ -761,7 +770,9 @@ static void on_signal_add_before_notify_after (CongDocument *doc,
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_after");
 
+#if 1
 	recursive_add_nodes(editor_widget, node);
+#endif
 }
 
 static void on_signal_set_parent_notify_after (CongDocument *doc, 
@@ -773,7 +784,9 @@ static void on_signal_set_parent_notify_after (CongDocument *doc,
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_after");
 
+#if 1
 	recursive_add_nodes(editor_widget, node);
+#endif
 }
 
 static void on_signal_set_text_notify_after (CongDocument *doc, 
@@ -833,7 +846,9 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
 { 
 	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
 
+#if SHOW_CURSOR_SPEW
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_after");
+#endif
 
 	/* empty so far */
 
@@ -867,30 +882,29 @@ populate_widget3(CongEditorWidget3 *widget)
 			     (CongNodePtr)cong_document_get_xml (doc));		
 }
 
-static void 
-create_areas(CongEditorWidget3 *widget)
+gboolean
+cong_editor_widget3_node_should_have_editor_node (CongNodePtr node)
 {
-	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
-	CongEditorWidget3Details *details = GET_DETAILS(editor_widget);
-	CongDocument *doc;
+	g_return_if_fail (node);
 
-	doc = cong_editor_widget3_get_document(widget);
+	/* CongNodePtrs should have CongEditorNodes iff they are part of a tree going up to the document node */
 
-	details->test_area = cong_editor_area_border_new (widget, 5);
-
-	recursive_create_areas (widget,
-				(CongNodePtr)cong_document_get_xml (doc),
-				details->test_area);
-
-	
-	g_signal_connect (G_OBJECT(details->test_area),
-			  "flush_requisition_cache",
-			  G_CALLBACK(on_root_requisition_change),
-			  widget);
+	if (node->parent) {
+		return cong_editor_widget3_node_should_have_editor_node(node->parent);
+	} else {
+		return cong_node_type(node)==CONG_NODE_TYPE_DOCUMENT;
+	}
 }
 
+gboolean
+cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
+					      CongNodePtr node)
+{
+	CongEditorWidget3Details *details = GET_DETAILS(widget);
 
+	return 	g_hash_table_lookup(details->hash_of_node_to_editor,node)!=NULL;
 
+}
 
 static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
@@ -901,6 +915,10 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 	CongNodePtr iter;
 
 	doc = cong_editor_widget3_get_document(widget);
+
+	LOG_EDITOR_NODE1("recursive_add_nodes");
+
+	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 
 	/* Add this node: */
 	{
@@ -998,6 +1016,9 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 		g_hash_table_insert (details->hash_of_node_to_editor, 
 				     node,
 				     editor_node);
+
+		create_areas (widget,
+			      node);
 	}
 	
 	/* Recurse: */
@@ -1007,71 +1028,146 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 	}
 }
 
-
 static void 
-recursive_remove_nodes(CongEditorWidget3 *widget,
-		       CongNodePtr node)
+recursive_remove_nodes (CongEditorWidget3 *widget,
+			CongNodePtr node)
 {
 	CongEditorWidget3Details *details = GET_DETAILS(widget);
 	CongEditorNode *editor_node;
 	CongNodePtr iter;
 
+	LOG_EDITOR_NODE1("recursive_remove_nodes");
+
+	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
+
+	g_assert(g_hash_table_lookup(details->hash_of_node_to_editor,node)!=NULL);
+	
 	/* Recurse: */
 	for (iter = node->children; iter; iter=iter->next) {
 		recursive_remove_nodes (widget, 
 					iter);		
 	}
-
+	
+	destroy_areas (widget,
+		       node);
+	
 	editor_node = g_hash_table_lookup (details->hash_of_node_to_editor,
-					  node);
-
+					   node);
+	
 	/* Remove this editor_node: */
 	g_hash_table_remove (details->hash_of_node_to_editor, 
 			     node);
-
+	
 	/* Unref the editor_node: */
 	g_object_unref (editor_node);
 }
 
 static void 
-recursive_create_areas(CongEditorWidget3 *widget,
-		       CongNodePtr node,
-		       CongEditorArea *parent_area)
+create_areas(CongEditorWidget3 *widget,
+	     CongNodePtr node)
 {
-	CongEditorArea *vcomposer;
-	CongNodePtr iter;
-	CongEditorNode *editor_node = cong_editor_widget3_get_editor_node (widget,
-									   node);
+	CongEditorWidget3Details *details = GET_DETAILS(widget);
+	CongEditorNode *editor_node;
+	CongEditorArea *this_area;
+	CongEditorArea *parent_insertion_area = NULL;
 
-	CongEditorArea *this_area = cong_editor_node_generate_area (editor_node);
+	LOG_EDITOR_AREA1("create_areas");
 
-	if (IS_CONG_EDITOR_AREA_COMPOSER(parent_area)) {
+	editor_node = cong_editor_widget3_get_editor_node (widget,
+							   node);
+	this_area = cong_editor_node_generate_area (editor_node);
 
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_area),
+	g_hash_table_insert (details->hash_of_editor_node_to_primary_area,
+			     editor_node,
+			     this_area);
+
+	if (node->parent) {
+		CongEditorNode *parent_editor_node;
+		
+		parent_editor_node = cong_editor_widget3_get_editor_node (widget,
+									  node->parent);
+		
+		/* What is the parent's child insertion area? */
+		parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
+							     parent_editor_node);
+
+	} else {
+
+		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
+		parent_insertion_area = details->root_area;
+
+	}
+
+	g_hash_table_insert (details->hash_of_editor_node_to_parent_insertion_area,
+			     editor_node,
+			     parent_insertion_area);
+
+	if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
+
+		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
 						this_area,
 						FALSE,
 						FALSE,
 						0);
 	} else {
-		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_area),
+		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
 						      this_area);
 	}
 
 	if (node->children) {
+		CongEditorArea *vcomposer;
+
 		vcomposer = cong_editor_area_composer_new (widget,
 							   GTK_ORIENTATION_VERTICAL,
 							   0);
 
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (this_area),
 						      vcomposer);
-	}
 
-	/* Recurse: */
-	for (iter = node->children; iter; iter=iter->next) {
-		recursive_create_areas (widget,
-					iter,
-					vcomposer);
+		g_hash_table_insert (details->hash_of_editor_node_to_child_insertion_area,
+				     editor_node,
+				     vcomposer);
+	}
+}
+
+static void 
+destroy_areas(CongEditorWidget3 *widget,
+	      CongNodePtr node)
+{
+	CongEditorWidget3Details *details = GET_DETAILS(widget);
+	CongEditorNode *editor_node;
+	CongEditorArea *this_area;
+	CongEditorArea *parent_insertion_area;
+
+	LOG_EDITOR_AREA1("destroy_areas");
+
+	editor_node = cong_editor_widget3_get_editor_node (widget,
+							   node);
+
+	this_area = g_hash_table_lookup (details->hash_of_editor_node_to_primary_area,
+					 editor_node);
+
+	if (node->parent) {
+		parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_parent_insertion_area,
+							     editor_node);
+	} else {
+		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
+		parent_insertion_area = details->root_area;
 	}
 	
+	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (parent_insertion_area),
+						 this_area);
+
+	g_hash_table_remove (details->hash_of_editor_node_to_primary_area,
+			     editor_node);
+	g_hash_table_remove (details->hash_of_editor_node_to_parent_insertion_area,
+			     editor_node);
+	g_hash_table_remove (details->hash_of_editor_node_to_child_insertion_area,
+			     editor_node);
+
+#if 0
+	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (this_area),
+						 vcomposer);
+#endif
 }
 

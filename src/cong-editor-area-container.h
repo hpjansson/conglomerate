@@ -38,6 +38,11 @@ typedef struct CongEditorAreaContainerDetails CongEditorAreaContainerDetails;
 #define CONG_EDITOR_AREA_CONTAINER_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_CONTAINER_TYPE, CongEditorAreaContainerClass)
 #define IS_CONG_EDITOR_AREA_CONTAINER(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_CONTAINER_TYPE)
 
+/**
+ * Containers hold a reference on their children.
+ * 
+ * Areas don't know which their parents are (for now)
+ */
 struct CongEditorAreaContainer
 {
 	CongEditorArea area;
@@ -51,6 +56,9 @@ struct CongEditorAreaContainerClass
 
 	void (*add_child) ( CongEditorAreaContainer *area_container,
 			    CongEditorArea *child);
+
+	void (*remove_child) ( CongEditorAreaContainer *area_container,
+			       CongEditorArea *child);
 
 	void (*for_each) (CongEditorArea *editor_area, 
 			  CongEditorAreaCallbackFunc func, 
@@ -69,6 +77,10 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 void
 cong_editor_area_container_add_child (CongEditorAreaContainer *area_container,
 				      CongEditorArea *child);
+
+void
+cong_editor_area_container_remove_child (CongEditorAreaContainer *area_container,
+					 CongEditorArea *child);
 
 void
 cong_editor_area_container_children_changed (CongEditorAreaContainer *area_container);

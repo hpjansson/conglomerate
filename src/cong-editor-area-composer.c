@@ -63,6 +63,9 @@ for_all (CongEditorArea *editor_area,
 static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
+static void
+remove_child (CongEditorAreaContainer *area_container,
+	      CongEditorArea *child);
 
 
 /* GObject boilerplate stuff: */
@@ -82,6 +85,7 @@ cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+	container_klass->remove_child = remove_child;
 }
 
 static void
@@ -133,6 +137,8 @@ cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
 
 	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
 	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	g_object_ref (G_OBJECT(child));
 
 	child_details = g_new0(CongEditorAreaComposerChildDetails,1);
 
@@ -340,4 +346,35 @@ add_child ( CongEditorAreaContainer *area_container,
 					TRUE,
 					0);
 	
+}
+
+static void
+remove_child ( CongEditorAreaContainer *area_container,
+	       CongEditorArea *child)
+{
+	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
+	GList *iter;
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter=iter->next) {
+		CongEditorAreaComposerChildDetails *iter_child_details;
+		CongEditorArea *iter_child;
+
+		iter_child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		iter_child = CONG_EDITOR_AREA(iter_child_details->child);
+
+		if (child==iter_child) {
+			/* Found it: */
+			PRIVATE(area_composer)->list_of_child_details = g_list_delete_link (PRIVATE(area_composer)->list_of_child_details,
+											    iter);
+			g_object_unref (child);
+
+			return;
+		}
+
+	}
+
+	/* Not found: */
+	g_error ("CongEditorAreaComposer::remove_child called for an area that wawn't a child");
 }

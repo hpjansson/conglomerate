@@ -44,6 +44,7 @@ struct CongEditorAreaContainerDetails
 
 /* Method implementation prototypes: */
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, remove_child);
 
 
 /* Signal handler declarations: */
@@ -68,6 +69,10 @@ cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
 					      add_child);
+
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_editor_area_container,
+					      remove_child);
 
 	/* Set up the various signals: */
 	signals[CHILDREN_CHANGED] = g_signal_new ("children_changed",
@@ -119,10 +124,35 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 }
 
 void
+cong_editor_area_container_remove_child ( CongEditorAreaContainer *area_container,
+					  CongEditorArea *child)
+{
+	g_return_if_fail (area_container);
+	g_return_if_fail (child);
+
+	g_message ("cong_editor_area_container_remove_child(%s,%s)", 
+		   G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area_container)),
+		   G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(child)));
+
+#if 0
+	g_return_if_fail (NULL!= cong_editor_area_get_parent (child));
+#endif
+
+	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CONTAINER_CLASS,
+			      area_container,
+			      remove_child, 
+			      (area_container, child));
+
+	cong_editor_area_container_children_changed ( area_container );
+}
+
+void
 cong_editor_area_container_children_changed ( CongEditorAreaContainer *area_container)
 {
 	g_signal_emit (G_OBJECT(area_container),
 		       signals[CHILDREN_CHANGED], 0);
+
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));
 }
 
 /* Protected:  For implementing subclasses */
