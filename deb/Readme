@@ -37,7 +37,10 @@ Here's what to do to make conge compile:
         ln -s ./libflux.a libflux-old.a
  6. do a CVS checkout, autoconf, configure and build of conge:
         cd ~/src/
+        cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
+	# just hit enter, the anonymouse user has no password
         cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs co conge
+	# now you have an other copy of _this_ file
         cd conge/
         ./autoconf.sh
         ./configure --prefix=/home/myuser/apps --with-flux-prefix=/home/myuser/apps
