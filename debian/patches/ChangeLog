@@ -1,4 +1,10 @@
-2004-02-08  Geert Stappers <stappers@stapers.nl>
+2004-02-09  Geert Stappers <stappers@stappers.nl>
+
+	* release
+	Omnipotent fix, now only remove the last line
+	when it is the empty line after Homepage
+
+2004-02-08  Geert Stappers <stappers@stappers.nl>
 
 	* release
 	-Make debian/rules executable
@@ -11,7 +17,7 @@
 	* Makefile.am
 	The sync script should make it into the tarball
 
-2004-01-19  Geert Stappers <stappers@stapers.nl>
+2004-01-19  Geert Stappers <stappers@stappers.nl>
 
 	* release
 	-Cleaner remove of the debug executeable from debian/rules
