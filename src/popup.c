@@ -10,15 +10,39 @@
 
 static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+#if 1
+	CongNodePtr new_element;
+	CongNodePtr r;
 #else
-	TTREE *dummy, *n, *r;
+	CongNodePtr n;
+	CongNodePtr r;
+#endif
+
+	/* GREP FOR MVC */
+
+	g_return_val_if_fail(element, TRUE);
 
 #ifndef RELEASE
 	printf("Inserting tag (%s).\n", tag->data);
 #endif
-	
+
+#if 1
+	new_element = cong_node_new_element(cong_dispspec_element_tagname(element));
+
+	if (the_globals.selection.loc0.tt_loc == the_globals.curs.xed->x)
+	{
+		r = selection_reparent_all(&the_globals.selection, new_element);
+		if (r) {
+			the_globals.curs.xed->x = r;
+		} else {
+			cong_node_free(new_element);
+		}
+	}
+	else if (!selection_reparent_all(&the_globals.selection, new_element)) {
+		cong_node_free(new_element);
+	}
+
+#else
 	dummy = ttree_node_add(0, "d", 1);
 	n = ttree_node_add(dummy, "tag_span", 8);
 	ttree_node_add(n, cong_dispspec_element_tagname(element), strlen(cong_dispspec_element_tagname(element))+1);
@@ -33,10 +57,10 @@ static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
 		else ttree_branch_remove(n);
 	}
 	else if (!selection_reparent_all(&the_globals.selection, n)) ttree_branch_remove(n);
+#endif
 
 	xed_redraw(the_globals.curs.xed);
 	the_globals.curs.xed = 0;
-#endif
 
 	return(TRUE);
 }

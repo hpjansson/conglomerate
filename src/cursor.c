@@ -173,7 +173,11 @@ gint curs_data_insert(struct curs* curs, char *s)
 int curs_paragraph_insert(struct curs* curs)
 {
         CongNodePtr t;
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr new_element;
+#else
 	CongNodePtr dummy;
+#endif
 	CongDispspec *ds;
 	CongDispspecElement *para;
 	const char *tagname;
@@ -188,6 +192,7 @@ int curs_paragraph_insert(struct curs* curs)
 	g_assert(curs->xed);
 	ds = curs->xed->displayspec;
 
+#if 0
 	para = cong_dispspec_get_paragraph(ds);
 
 	if (NULL==para) {
@@ -196,6 +201,12 @@ int curs_paragraph_insert(struct curs* curs)
 	}
 
 	tagname = cong_dispspec_element_tagname(para);
+#else
+	/* Dodgy hack for now: */
+	tagname = "para";
+#endif
+
+	/* GREP FOR MVC */
 
 #if 1
 	t = cong_location_xml_frag_data_nice_split2(&curs->location);
@@ -206,9 +217,21 @@ int curs_paragraph_insert(struct curs* curs)
 	curs->c = 0;
 #endif
 
-
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0); /* FIXME:  unwritten */
+	/* New approach, aimed at DocBook support: 
+	   Assume that we've just split up a text node below a <para> node below some parent into two
+	   text nodes below that para.
+	   We need to create an new <para> node as a sibling of the other para, and move the second text node
+	   to below it.
+	*/
+	new_element = cong_node_new_element(tagname);
+
+	cong_node_add_after(new_element, curs->location.tt_loc);
+	cong_node_set_parent(t, new_element);
+
+	/* FIXME:  
+	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
+	*/
 #else
 	dummy = ttree_node_add(0, "dummy", 5);
 	

@@ -90,12 +90,9 @@ cong_location_xml_frag_data_nice_split2(CongLocation *loc)
 	g_return_val_if_fail(cong_location_exists(loc), NULL);
 	g_return_val_if_fail( (cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT), NULL);
 	
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return NULL;
-#else
+	/* GREP FOR MVC */
+
 	return xml_frag_data_nice_split2(loc->tt_loc, loc->char_loc);
-#endif
 }
 
 void
@@ -147,7 +144,14 @@ cong_location_del_next_char(CongLocation *loc)
 	/* GREP FOR MVC */
 
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+	/* FIXME: what should we do about "empty" tags?  Better para support instead? */
+	if (cong_location_get_char(loc))
+	{
+		/* FIXME:  audit the char types and ptr arithmetic here: */
+		memmove(xml_frag_data_nice(loc->tt_loc) + loc->char_loc, 
+			xml_frag_data_nice(loc->tt_loc) + loc->char_loc + 1,
+			strlen(xml_frag_data_nice(loc->tt_loc) + loc->char_loc));
+	}
 #else
 
 	if (cong_location_get_char(loc))

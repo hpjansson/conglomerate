@@ -58,6 +58,34 @@ enum CongNodeType cong_node_type(CongNodePtr node);
 /* Handy debug method for writing log info: */
 const gchar *cong_node_type_description(enum CongNodeType node_type);
 
+
+void cong_node_self_test(CongNodePtr node);
+
+
+#if 1
+#define CONG_NODE_SELF_TEST(node) cong_node_self_test(node)
+#else
+#define CONG_NODE_SELF_TEST(node) ((void)0)
+#endif
+
+int cong_node_get_length(CongNodePtr node); /* get length of content; does not include the zero terminator (to correspond to the TTREE size field) */
+
+/* Construction: */
+CongNodePtr cong_node_new_element(const char *tagname);
+CongNodePtr cong_node_new_text(const char *text);
+CongNodePtr cong_node_new_text_len(const char *text, int len); /* FIXME: what character type ? */
+
+/* Destruction: (the node has to have been unlinked from the tree already): */
+void cong_node_free(CongNodePtr node);
+
+/* Tree manipulation: */
+#if NEW_XML_IMPLEMENTATION
+void cong_node_make_orphan(CongNodePtr node);
+void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling);
+void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling);
+void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+#endif
+
 enum CongElementType
 {
 	CONG_ELEMENT_TYPE_STRUCTURAL,
@@ -541,8 +569,8 @@ struct pos *pos_physical_to_logical(struct CongXMLEditor *xed, int x, int y);
 struct pos *pos_logical_to_physical(struct CongXMLEditor *xed, CongNodePtr node, int c);
 struct pos *pos_logical_to_physical_new(struct CongXMLEditor *xed, CongLocation *loc);
 
-TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
-TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
+CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1);
+CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c);
 
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
 CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);

@@ -160,38 +160,28 @@ void selection_draw(struct selection* selection, struct curs* curs)
 #endif
 }
 
-
 /* Splits a data node in 3 and returns pointer to the middle one */
-TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
+CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return NULL;
-#else
-	TTREE *dummy, *d1, *d2, *d3;
-	UNUSED_VAR(TTREE *n0)
-	UNUSED_VAR(TTREE *n1)
+	CongNodePtr d1, d2, d3;
 	int len1, len2, len3;
 
-	if (xml_frag_type(s) != XML_DATA)
-	{
-#ifndef RELEASE
-		printf("--- xml_frag_data_nice_split3() got a non-data node!\n");
-#endif
-		return(s);
-	}
+	g_return_val_if_fail(cong_node_type(s) == CONG_NODE_TYPE_TEXT, NULL);
 	
 	/* Calculate segments */
-	
-	if (s->child->size < c1) c1 = s->child->size;
+	if (cong_node_get_length(s) < c1) c1 = cong_node_get_length(s);
 	if (c1 < c0) c1 = c0;
 	
 	len1 = c0;
 	len2 = c1 - c0;
-	len3 = s->child->size - c1;
+	len3 = cong_node_get_length(s) - c1;
 
 	/* Make split representation */
-	
+#if 1
+	d1 = cong_node_new_text_len(xml_frag_data_nice(s), len1); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
+	d2 = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2);
+	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3);
+#else
 	dummy = ttree_node_add(0, "d", 1);
 
 	d1 = ttree_node_add(dummy, "data", 4);
@@ -203,6 +193,7 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
+#endif
 
 	/* Link it in */
 
@@ -219,151 +210,164 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 	d2->parent = s->parent;
 	d3->parent = s->parent;
 
+#if NEW_XML_IMPLEMENTATION
+	if (!d1->prev && d1->parent) d1->parent->children = d1;
+	if (!d1->next && d1->parent) d1->parent->last = d3;
+#else
 	if (!d1->prev && d1->parent) d1->parent->child = d1;
+#endif
 
 	/* Unlink old node */
-	
-	if (s->child)
-	{
-		if (s->child->data) free(s->child->data);
-		free(s->child);
-	}
-
-	if (s->data) free(s->data);
-	free(s);
+	cong_node_free(s);
 
 	return(d2);
-#endif
 }
 
 
 /* Splits a data node in 2 and returns pointer to first one */
-
-TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
+CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return NULL;
-#else
-	TTREE *dummy, *d;
+	CongNodePtr d = NULL;
 	int len1, len2;
 
 	/* Calculate segments */
 
 	len1 = c;
-	len2 = s->child->size - len1;
+	len2 = cong_node_get_length(s) - len1;
 
-	if (!len1 && !len2)
-	{
-	  dummy = ttree_node_add(0, "d", 1);
-
-	  d = ttree_node_add(dummy, "data", 4);
-	  ttree_node_add(d, 0, 0);
+	if (!len1 && !len2) {
+#if 1
+		d = cong_node_new_text("");
+#else
+		dummy = ttree_node_add(0, "d", 1);
+	  
+		d = ttree_node_add(dummy, "data", 4);
+		ttree_node_add(d, 0, 0);
 		
 		if (d->child->data) free(d->child->data);
 		d->child->size = 0;
 		d->child->data = malloc(1);
 		*(d->child->data) = 0;
 	
-	  dummy->child = 0;
-	  ttree_branch_remove(dummy);
-	}
-	else if (!len1)
-	{
-	  dummy = ttree_node_add(0, "d", 1);
+		dummy->child = 0;
+		ttree_branch_remove(dummy);
+#endif
+	} else if (!len1) {
+#if 1
+		d = cong_node_new_text("");
+#else 
+		dummy = ttree_node_add(0, "d", 1);
 
-	  d = ttree_node_add(dummy, "data", 4);
-	  ttree_node_add(d, 0, 0);
+		d = ttree_node_add(dummy, "data", 4);
+		ttree_node_add(d, 0, 0);
 		
 		if (d->child->data) free(d->child->data);
 		d->child->size = 0;
 		d->child->data = malloc(1);
 		*(d->child->data) = 0;
-	
-	  dummy->child = 0;
-	  ttree_branch_remove(dummy);
+		
+		dummy->child = 0;
+		ttree_branch_remove(dummy);
+#endif
 
 		/* Link it in */
-	
-	  if (s->prev) s->prev->next = d;
-	  d->next = s;
-	  d->prev = s->prev;
-	  s->prev = d;
+#if NEW_XML_IMPLEMENTATION
+		cong_node_add_before(d,s);
+#else
+		if (s->prev) s->prev->next = d;
+		d->next = s;
+		d->prev = s->prev;
+		s->prev = d;
 
-	  d->parent = s->parent;
+		d->parent = s->parent;
+#endif
 		return(d);
-	}
-	else if (!len2)
-	{
-	  dummy = ttree_node_add(0, "d", 1);
+	} else if (!len2) {
+#if 1
+		d = cong_node_new_text("");
+#else
+		dummy = ttree_node_add(0, "d", 1);
 
-	  d = ttree_node_add(dummy, "data", 4);
-	  ttree_node_add(d, 0, 0);
+		d = ttree_node_add(dummy, "data", 4);
+		ttree_node_add(d, 0, 0);
 		
 		if (d->child->data) free(d->child->data);
 		d->child->size = 0;
 		d->child->data = malloc(1);
 		*(d->child->data) = 0;
 	
-	  dummy->child = 0;
-	  ttree_branch_remove(dummy);
-	}
-	else
-	{
-	  /* Make split representation */
+		dummy->child = 0;
+		ttree_branch_remove(dummy);
+#endif
+	} else {
+		/* Make split representation */
+#if 1
+		d = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2); /* FIXME: check char ptr arithmetic; UTF8? */
+#else
+		dummy = ttree_node_add(0, "d", 1);
 
-	  dummy = ttree_node_add(0, "d", 1);
-
-	  d = ttree_node_add(dummy, "data", 4);
-	  ttree_node_add(d, xml_frag_data_nice(s) + len1, len2);
+		d = ttree_node_add(dummy, "data", 4);
+		ttree_node_add(d, xml_frag_data_nice(s) + len1, len2);
 	
-	  dummy->child = 0;
-	  ttree_branch_remove(dummy);
+		dummy->child = 0;
+		ttree_branch_remove(dummy);
+#endif
 
-	  /* Shrink original node */
-	
-	  s->child->data = realloc(s->child->data, len1 + 1);
-	  *(s->child->data + len1) = 0;
-	  s->child->size = len1;
+		/* Shrink original node */
+#if NEW_XML_IMPLEMENTATION
+		s->content = xmlRealloc(s->content, len1+1); /* FIXME: check char ptr arithmetic; UTF8? */
+		*(s->content + len1) = '\0';
+#else
+		s->child->data = realloc(s->child->data, len1 + 1);
+		*(s->child->data + len1) = 0;
+		s->child->size = len1;
+#endif
 	}
+
+	g_assert(d);
 
 	/* Link it in */
-	
+#if NEW_XML_IMPLEMENTATION
+	cong_node_add_after(d, s);
+#else
 	if (s->next) s->next->prev = d;
 	d->prev = s;
 	d->next = s->next;
 	s->next = d;
 
 	d->parent = s->parent;
+#endif
 
 	return(s);
-#endif
 }
 
 
+/*
+  DHM 22/10/2002:  This routine is used when applying a span to a selection.
+  
+  The selection is extracted (splitting text nodes at the front and rear if necessary), and then reparented below the second
+  node, which is inserted into the position formerly occupied by the selection.
+ */
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return NULL;
-#else
 	CongLocation loc0, loc1;
 	CongNodePtr n0, n1, n2;
-	UNUSED_VAR(int len)
-	UNUSED_VAR(char *p_data)
-	CongNodePtr p_node;
 
-	g_assert(selection!=NULL);
+	g_return_val_if_fail(selection,NULL);
+	g_return_val_if_fail(p,NULL);
 
 	/* Validate selection */
-	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
-	      cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1)))
-		return(0);
+	g_return_val_if_fail( cong_location_exists(&selection->loc0), NULL );
+	g_return_val_if_fail( cong_location_exists(&selection->loc1), NULL );
+	g_return_val_if_fail( cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1), NULL);
+	/* both must be children of the same parent to maintain proper nesting */
 
 	/* --- Processing for multiple nodes --- */
 
 	if (selection->loc0.tt_loc != selection->loc1.tt_loc)
 	{
+		CongNodePtr prev_node;
+	
 		/* Selection is valid, now order first/last nodes */
 		
 		for (n0 = selection->loc0.tt_loc; n0 && n0 != selection->loc1.tt_loc; n0 = n0->next) ;
@@ -380,29 +384,59 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		}
 
 		/* Split, first */
-	
-		if (loc0.char_loc && xml_frag_type(loc0.tt_loc) == XML_DATA)
+
+		if (loc0.char_loc && cong_node_type(loc0.tt_loc) == CONG_NODE_TYPE_TEXT)
 		{
-			p_node = cong_location_xml_frag_data_nice_split2(&loc0);
-			loc0.tt_loc = selection->loc0.tt_loc = p_node->next;
+			prev_node = cong_location_xml_frag_data_nice_split2(&loc0);
+			g_assert(prev_node);
+
+			loc0.tt_loc = selection->loc0.tt_loc = prev_node->next;
 		} else {
-			p_node = loc0.tt_loc;
+			prev_node = loc0.tt_loc;
 		}
 		
 		selection->loc0.char_loc = 0;
 
-		if (loc0.tt_loc->prev) loc0.tt_loc->prev->next = p;
-		else if (loc0.tt_loc->parent) loc0.tt_loc->parent->child = p;
+#if NEW_XML_IMPLEMENTATION
+		/* prev_node holds the previous node */
+
+		/* Position p within the tree: */
+		if (prev_node) {
+			cong_node_add_after(p, prev_node);
+			CONG_NODE_SELF_TEST(prev_node);
+		} else {
+			cong_node_set_parent(p, loc0.tt_loc->parent);
+		}
+#else
+		if (loc0.tt_loc->prev) {
+			loc0.tt_loc->prev->next = p;
+		} else if (loc0.tt_loc->parent) {
+			loc0.tt_loc->parent->child = p;
+		}
 
 		p->prev = loc0.tt_loc->prev;
 		p->parent = loc0.tt_loc->parent;
+#endif
 
 		/* Reparent, first & middle */
-
-		for (n0 = loc0.tt_loc, n1 = 0; n0 != loc1.tt_loc; n0 = n2)
-		{
+#if NEW_XML_IMPLEMENTATION
+		for (n0 = loc0.tt_loc; n0 != loc1.tt_loc; n0 = n2) {
 			n2 = n0->next;
-			
+
+			CONG_NODE_SELF_TEST(n0);
+			CONG_NODE_SELF_TEST(p);
+
+			cong_node_set_parent(n0, p);			
+
+			CONG_NODE_SELF_TEST(n0);
+			CONG_NODE_SELF_TEST(p);
+		}
+#else
+		for (n0 = loc0.tt_loc, n1 = NULL; n0 != loc1.tt_loc; n0 = n2)
+		{
+
+			n2 = n0->next;
+
 			n0->parent = p->child;
 			n0->prev = n1;
 			n0->next = 0;
@@ -412,10 +446,11 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 					
 			n1 = n0;
 		}
+#endif
 
 		/* Split, last */
 
-		if (loc1.char_loc && xml_frag_type(loc1.tt_loc) == XML_DATA)
+		if (loc1.char_loc && cong_node_type(loc1.tt_loc) == CONG_NODE_TYPE_TEXT)
 		{
 			loc1.tt_loc = cong_location_xml_frag_data_nice_split2(&loc1);
 			selection->loc1.tt_loc = loc1.tt_loc->next;
@@ -424,7 +459,9 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		selection->loc1.char_loc = 0;
 
 		/* Reparent, last */
-
+#if NEW_XML_IMPLEMENTATION
+		cong_node_set_parent(loc1.tt_loc, p);
+#else
 		loc1.tt_loc->parent = p->child;
 		loc1.tt_loc->prev = n1;
 		n1->next = loc1.tt_loc;
@@ -434,19 +471,22 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		if (!p->child->child) p->child->child = loc1.tt_loc;
 
 #ifndef RELEASE		
-		if (p_node->parent->parent)
+		if (prev_node->parent->parent)
 		{
-			ttree_fsave(p_node->parent->parent, stdout);
+			ttree_fsave(prev_node->parent->parent, stdout);
 		}
 #endif
+
+#endif
 		
-		return(p_node);
+		return(prev_node);
 	}
 
 	/* --- Processing for single node (loc0.tt_loc == loc1.tt_loc) --- */
 
 	else
 	{
+		/* Sort out the ordering: */
 		if (selection->loc0.char_loc < selection->loc1.char_loc)
 		{
 			cong_location_copy(&loc0,&selection->loc0);
@@ -458,7 +498,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 			cong_location_copy(&loc1,&selection->loc0);
 		}
 
-		if (xml_frag_type(loc0.tt_loc) == XML_DATA)
+		if (cong_node_type(loc0.tt_loc) == CONG_NODE_TYPE_TEXT)
 		{
 			if (loc0.char_loc == loc1.char_loc) return(0); /* The end is the beginning is the end */
 			
@@ -470,8 +510,21 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		selection->loc0.char_loc = 0;
 		selection->loc1.char_loc = 0;
 		
-		if (loc0.tt_loc->prev) loc0.tt_loc->prev->next = p;
-		else if (loc0.tt_loc->parent) loc0.tt_loc->parent->child = p;
+#if NEW_XML_IMPLEMENTATION
+		/* Position p where the selection was: */
+		if (loc0.tt_loc->prev) {
+			cong_node_add_after(p, loc0.tt_loc->prev);
+		} else {
+			cong_node_set_parent(p, loc0.tt_loc->parent);
+		}
+		/* Move the selection below p: */
+		cong_node_set_parent(selection->loc0.tt_loc, p);
+#else
+		if (loc0.tt_loc->prev) {
+			loc0.tt_loc->prev->next = p;
+		} else if (loc0.tt_loc->parent) {
+			loc0.tt_loc->parent->child = p;
+		}
 
 		if (loc0.tt_loc->next) loc0.tt_loc->next->prev = p;
 		p->parent = loc0.tt_loc->parent;
@@ -488,10 +541,16 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 			ttree_fsave(loc0.tt_loc->parent->parent->parent, stdout);
 		}
 #endif
-		
-		return(loc0.tt_loc->parent->parent->prev);
-	}
+
 #endif
+
+		/* Return node before p's new position (I think): */
+#if 1
+		return p->prev;
+#else
+		return(loc0.tt_loc->parent->parent->prev);
+#endif
+	}
 }
 
 void selection_init(struct selection* selection)

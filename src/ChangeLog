@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-23 David Malcolm
+
+	* cong-location.c, cursor.c, global.h, popup.c, select.c, xmldata.c
+
+	More porting to libxml2
+	
 2002-10-21 David Malcolm
 
 	* cong-location.c, dispspec.c, global.h, popup.c, xmldata.c
