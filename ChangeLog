@@ -1,3 +1,9 @@
+2004-07-31  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* configure.in: 
+
+	Prettified the ouput of "configure --help"
+
 2004-07-27  Jeff Martin <jeff@custommonkey.org>
 
 	* configure.in:
