@@ -93,7 +93,4 @@ AC_SUBST(CONGLOMERATE_CFLAGS)
 dnl --- Output ---
 
 AC_OUTPUT(Makefile                \
-          src/Makefile            \
-          deb/Makefile            \
-          documentation/Makefile            \
-          examples/Makefile)
+          src/Makefile)
