@@ -1,3 +1,8 @@
+2003-09-26  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am
+	Added the reference directory (from a patch by Varga Robert for bug #122900)
+	
 2003-07-07  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am
