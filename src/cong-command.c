@@ -904,15 +904,260 @@ cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd,
 gboolean
 cong_command_can_add_reparent_selection (CongCommand *cmd)
 {
-	g_assert_not_reached();
+	CongSelection *selection = cong_document_get_selection (cong_command_get_document (cmd));
+	const CongLocation *logical_start = cong_selection_get_logical_start (selection);
+	const CongLocation *logical_end = cong_selection_get_logical_start (selection);
+
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+
+	/* Validate selection */
+	g_return_val_if_fail (cong_location_exists (logical_start), FALSE );
+	g_return_val_if_fail (cong_location_exists (logical_end), FALSE );
+	g_return_val_if_fail (cong_location_parent (logical_start) == cong_location_parent (logical_end), FALSE);
+
 	return TRUE;
 }
 
-void
+CongNodePtr
 cong_command_add_reparent_selection (CongCommand *cmd, 
-				     CongNodePtr node)
+				     CongNodePtr new_parent)
 {
-	g_assert_not_reached();
+	CongDocument *doc;
+	CongSelection *selection;
+	const CongLocation *ordered_start;
+	const CongLocation *ordered_end;
+	CongLocation loc0;
+	CongLocation loc1;
+	CongLocation new_selection_start;
+	CongLocation new_selection_end;
 
-	/* cong_selection_reparent_all(selection, doc, new_element) */
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), NULL);
+	g_return_val_if_fail (new_parent, NULL);
+
+	doc = cong_command_get_document (cmd);
+	selection = cong_document_get_selection (doc);
+
+	ordered_start = cong_selection_get_ordered_start (selection);
+	ordered_end = cong_selection_get_ordered_end (selection);
+
+	/* Validate selection */
+	g_return_val_if_fail (cong_location_exists (ordered_start), NULL );
+	g_return_val_if_fail (cong_location_exists (ordered_end), NULL );
+	g_return_val_if_fail (cong_location_parent (ordered_start) == cong_location_parent(ordered_end), NULL);
+
+	cong_location_copy (&loc0, ordered_start);
+	cong_location_copy (&loc1, ordered_end);
+
+	cong_location_copy (&new_selection_start, ordered_start);
+	cong_location_copy (&new_selection_end, ordered_end);
+
+	CONG_NODE_SELF_TEST(new_parent);
+
+	/* --- Processing for multiple nodes --- */
+	if (loc0.node != loc1.node)
+	{
+		CongNodePtr prev_node;
+		CongNodePtr iter, iter_next;
+
+		cong_document_begin_edit(doc);
+	
+		/* Split, first */
+
+		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		{
+			prev_node = cong_command_add_xml_frag_data_nice_split2(cmd, &loc0);
+			g_assert(prev_node);
+
+			new_selection_start.node = loc0.node = prev_node->next;
+		} else {
+			prev_node = loc0.node;
+		}
+
+		new_selection_start.byte_offset = 0;
+
+		/* prev_node holds the previous node */
+
+		/* Position new_parent within the tree: */
+		if (prev_node) {
+			cong_command_add_node_add_after(cmd, new_parent, prev_node);
+			CONG_NODE_SELF_TEST(prev_node);
+		} else {
+			cong_command_add_node_set_parent(cmd, new_parent, loc0.node->parent);
+		}
+
+		/* Reparent, first & middle */
+		for (iter = loc0.node; iter != loc1.node; iter = iter_next) {
+			iter_next = iter->next;
+
+			CONG_NODE_SELF_TEST(iter);
+			CONG_NODE_SELF_TEST(new_parent);
+
+			cong_command_add_node_set_parent(cmd, iter, new_parent);			
+
+			CONG_NODE_SELF_TEST(iter);
+			CONG_NODE_SELF_TEST(new_parent);
+		}
+
+		/* Split, last */
+
+		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
+		{
+			loc1.node = cong_command_add_xml_frag_data_nice_split2(cmd, &loc1);
+			new_selection_end.node = loc1.node->next;
+		}
+
+		new_selection_end.byte_offset = 0;
+
+		/* Reparent, last */
+		cong_command_add_node_set_parent(cmd, loc1.node, new_parent);
+
+		cong_command_add_selection_change (cmd,
+						   &new_selection_start,
+						   &new_selection_end);
+
+		cong_document_end_edit(doc);
+		
+		return(prev_node);
+	}
+
+	/* --- Processing for single node (loc0.node == loc1.node) --- */
+
+	else
+	{
+		cong_document_begin_edit(doc);
+
+		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		{
+			if (loc0.byte_offset == loc1.byte_offset) {
+				cong_document_end_edit(doc);
+
+				return NULL; /* The end is the beginning is the end */
+			}
+			
+			loc0.node = loc1.node = cong_command_add_node_split3(cmd, loc0.node, loc0.byte_offset, loc1.byte_offset);
+		}
+
+		new_selection_start.byte_offset = 0;
+		new_selection_end.byte_offset = 0;
+		
+		/* Position new_parent where the selection was: */
+		if (loc0.node->prev) {
+			cong_command_add_node_add_after(cmd, new_parent, loc0.node->prev);
+		} else {
+			cong_command_add_node_set_parent(cmd, new_parent, loc0.node->parent);
+		}
+		/* Move the selection below new_parent: */
+		cong_command_add_node_set_parent(cmd, cong_selection_get_ordered_start (selection)->node, new_parent);
+
+		cong_command_add_selection_change (cmd,
+						   &new_selection_start,
+						   &new_selection_end);
+
+		cong_document_end_edit(doc);
+
+		/* Return node before new_parent's new position (I think): */
+		return new_parent->prev;
+	}
+}
+
+struct split3_userdata
+{
+	CongNodePtr node;
+	int c0;
+	int c1;
+
+	CongNodePtr d1;
+	CongNodePtr d2;
+	CongNodePtr d3;
+};
+
+static gboolean
+split3_location_callback (CongDocument *doc,
+			  CongLocation *location, 
+			  gpointer user_data)
+{
+	struct split3_userdata* split3_data = user_data;
+	
+	if (location->node == split3_data->node) {
+		if (location->byte_offset<split3_data->c0) {
+			location->node = split3_data->d1;
+		} else {
+			if (location->byte_offset<split3_data->c1) {
+				location->node = split3_data->d2;
+				location->byte_offset -= split3_data->c0;
+			} else {
+				location->node = split3_data->d3;
+				location->byte_offset -= split3_data->c1;
+			}
+		}
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/* Splits a data node in 3 and returns pointer to the middle one */
+CongNodePtr
+cong_command_add_node_split3 (CongCommand *cmd, 
+			      CongNodePtr node, 
+			      int c0, 
+			      int c1)
+{
+	CongDocument *doc;
+	CongNodePtr d1, d2, d3;
+	int len1, len2, len3;
+
+	g_return_val_if_fail (IS_CONG_COMMAND (cmd), NULL);
+	g_return_val_if_fail (cong_node_type(node) == CONG_NODE_TYPE_TEXT, NULL);
+
+	CONG_NODE_SELF_TEST(node);
+
+	doc = cong_command_get_document (cmd);
+	
+	/* Calculate segments */
+	if (cong_node_get_length(node) < c1) c1 = cong_node_get_length(node);
+	if (c1 < c0) c1 = c0;
+	
+	len1 = c0;
+	len2 = c1 - c0;
+	len3 = cong_node_get_length(node) - c1;
+
+	/* Make split representation */
+	d1 = cong_node_new_text_len(xml_frag_data_nice(node), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
+	d2 = cong_node_new_text_len(xml_frag_data_nice(node) + len1, len2, doc);
+	d3 = cong_node_new_text_len(xml_frag_data_nice(node) + len1 + len2, len3, doc);
+
+	cong_document_begin_edit(doc);
+
+	/* Link it in */
+	cong_command_add_node_add_after(cmd, d1, node);
+	cong_command_add_node_add_after(cmd, d2, d1);
+	cong_command_add_node_add_after(cmd, d3, d2);
+	cong_command_add_node_make_orphan(cmd, node);
+
+	/* Update the cursor and selection as necessary: */
+	{
+		struct split3_userdata user_data;
+		
+		user_data.node = node;
+		user_data.c0 = c0;
+		user_data.c1 = c1;
+		user_data.d1 = d1;
+		user_data.d2 = d2;
+		user_data.d3 = d3;
+		
+		cong_command_for_each_location (cmd, 
+						split3_location_callback,
+						&user_data);
+	}
+
+	/* Unlink old node */
+	cong_command_add_node_recursive_delete (cmd, node);
+
+	cong_document_end_edit(doc);
+
+	CONG_NODE_SELF_TEST(d2);
+
+	return(d2);
 }

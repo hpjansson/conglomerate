@@ -179,9 +179,16 @@ cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd,
 gboolean
 cong_command_can_add_reparent_selection (CongCommand *cmd);
 
-void
+CongNodePtr
 cong_command_add_reparent_selection (CongCommand *cmd, 
 				     CongNodePtr node);
+
+/* Splits a text/comment node in 3 and returns pointer to the middle one */
+CongNodePtr
+cong_command_add_node_split3 (CongCommand *cmd,
+			      CongNodePtr node, 
+			      int c0, 
+			      int c1);
 
 G_END_DECLS
 
