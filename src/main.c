@@ -70,14 +70,14 @@ void cong_gui_destroy_tree_store(struct cong_gui* gui)
 {
   gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
-
+ 
 #if 0
   gtk_widget_destroy(GTK_WIDGET(gui->global_tree_view));
-
+   
   gui->global_tree_view=NULL;
 #endif
 }
-
+ 
 struct cong_globals the_globals;
 struct cong_gui the_gui;
 
@@ -121,6 +121,166 @@ void open_document_wrap(GtkWidget *widget, gpointer data) { open_document(widget
 void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget, 0); }
 
 
+
+void add_node_recursive(TTREE *tt, GtkTreeStore *store, GtkTreeIter *parent_iter)
+{
+  GtkTreeIter child_iter;  /* Child iter  */
+
+  gtk_tree_store_append (store, &child_iter, parent_iter);  /* Acquire a child iterator */
+
+  gtk_tree_store_set (store, &child_iter,
+		      0, tt->data,
+		      -1); 
+  
+  /* Recurse over children: */
+  {
+    TTREE *child_tt = tt->child;
+    while (child_tt != NULL) {
+      add_node_recursive(child_tt, store, &child_iter);
+      child_tt=child_tt->next;
+    }
+  }
+ 
+}
+
+GtkWidget* do_ttree_test(TTREE* tt)
+{
+  GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
+  GtkWidget *tree;
+  GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
+ 
+  add_node_recursive(tt,store,NULL);
+
+  tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+
+  renderer = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes ("Author",
+						     renderer,
+						     "text", 0,
+						     NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+
+  gtk_widget_show(tree);
+
+  return tree;
+}
+
+int test_open_do(const char *doc_name, const char *ds_name)
+{
+	char *p;
+#if 1
+	TTREE *ds_temp, *xml_in;
+	FILE *xml_f;
+
+	ds_temp = ttree_load((char*)ds_name);
+	if (!ds_temp) {
+	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
+	  return(TRUE);  /* Invalid displayspec. */
+	}
+
+	/* Use libxml to load the doc: */
+#if 0
+	{
+	  #if 1
+	  // Use special DocBook loader for DocBook; should handle SGML better...
+	  xmlDocPtr doc = docbParseFile(doc_name,NULL);
+	  #else
+	  xmlDocPtr doc = xmlParseFile(doc_name);
+	  #endif
+	  xmlDebugDumpDocument(stdout,doc);
+	  xml_in = convert_libxml_to_ttree_doc(doc);
+	}
+#else
+	xml_f = fopen(doc_name, "rt");
+	if (!xml_f) {
+	  g_warning("Problem opening doc file \"%s\"\n", doc_name);
+	  return(TRUE);
+	}
+
+	xml_in = xml_f_to_ttree(xml_f, 0);
+	if (!xml_in) {
+	  g_warning("Problem parsing doc file \"%s\"\n", doc_name);
+	  return(TRUE);  /* Invalid XML document. */
+	}
+
+	fclose(xml_f);
+
+	xml_t_trim(xml_in);
+#endif
+
+	the_globals.ds = cong_dispspec_new_from_ttree(ds_temp);
+
+#if 0
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), do_ttree_test(xml_in), FALSE, FALSE, 0);
+#else
+	the_globals.xv = xmlview_new(xml_in, the_globals.ds);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
+#endif
+
+#else
+	TTREE *ds_temp, *xml_in;
+	FILE *xml_f;
+
+	ds_temp = ttree_load(ds_name);
+	if (!ds_temp) {
+	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
+	  return(TRUE);  /* Invalid displayspec. */
+	}
+
+	xml_f = fopen(doc_name, "rt");
+	if (!xml_f) {
+	  g_warning("Problem opening doc file \"%s\"\n", doc_name);
+	  return(TRUE);
+	}
+
+	p = strrchr(doc_name, '/');
+	if (p)
+	{
+		*p = 0;
+		chdir(doc_name);
+	}
+	
+	xml_in = xml_f_to_ttree(xml_f, 0);
+	if (!xml_in) {
+	  g_warning("Problem parsing doc file \"%s\"\n", doc_name);
+	  return(TRUE);  /* Invalid XML document. */
+	}
+
+	fclose(xml_f);
+	
+	the_globals.ds = cong_dispspec_new_from_ttree(ds_temp);
+
+	xml_t_trim(xml_in);
+	the_globals.xv = xmlview_new(xml_in, the_globals.ds);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
+#endif
+
+	return (TRUE);
+}
+
+
+gint test_open(GtkWidget *w, gpointer data)
+{
+#if 1
+	const char *doc_name, *ds_name;
+	
+	doc_name = get_file_name("Select an XML document");
+	if (!doc_name) return(TRUE);
+
+	ds_name = get_file_name("Select a matching displayspec");
+	if (!ds_name) return(TRUE);
+
+	test_open_do(doc_name, ds_name);
+#else
+	test_open_do("../examples/readme.xml", "../examples/readme.ds");
+#endif
+	return(TRUE);
+}
+
+void test_open_wrap(GtkWidget *widget, gpointer data) { test_open(widget, 0); }
+
+
 static GtkItemFactoryEntry menu_items[] =
 {
 	{ "/_Document",             NULL, NULL, 0, "<Branch>" },
@@ -130,7 +290,9 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/_Edit",                 NULL, 0, 0, "<Branch>" },
 	{ "/Edit/Cut",              "<control>X", xed_cut_wrap, 0, 0 },
 	{ "/Edit/Copy",             "<control>C", xed_copy_wrap, 0, 0 },
-	{ "/Edit/Paste",            "<control>V", xed_paste_wrap, 0, 0 }
+	{ "/Edit/Paste",            "<control>V", xed_paste_wrap, 0, 0 },
+	{ "/Tests",                 "NULL", NULL, 0, "<Branch>" },
+	{ "/Tests/Open...",         "NULL", test_open_wrap, 0, NULL }
 };
 
 
@@ -241,7 +403,7 @@ void gui_window_main_make()
 	GtkStyle *style;
 	GtkItemFactory *item_factory;
 	UNUSED_VAR(TTREE *x_in)
-	UNUSED_VAR(*displayspec)
+	UNUSED_VAR(TTREE *displayspec)
 	int i;
 
  	GtkTreeViewColumn *column;
@@ -317,8 +479,8 @@ void gui_window_main_make()
   /* Open file */
 	
 	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-																	 &style->bg[GTK_STATE_NORMAL],
-																	 (gchar **) icon_openfile);
+					 &style->bg[GTK_STATE_NORMAL],
+					 (gchar **) icon_openfile);
 	w3 = gtk_pixmap_new(p, mask);
 	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
 	w2 = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Open", "Open document",
@@ -336,8 +498,8 @@ void gui_window_main_make()
 	/* Submit */
 
 	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-																	 &style->bg[GTK_STATE_NORMAL],
-																	 (gchar **) icon_submit);
+					 &style->bg[GTK_STATE_NORMAL],
+					 (gchar **) icon_submit);
 	w3 = gtk_pixmap_new(p, mask);
 	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
 	gui->butt_submit = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Save", "Save document",
@@ -385,7 +547,6 @@ void gui_window_main_make()
 	gtk_widget_show(w2);
 
 #if 1
-
         gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
 
 	gui->global_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(gui->global_tree_store)));
@@ -421,10 +582,9 @@ void gui_window_main_make()
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (gui->global_tree_view), column);
 
-	/* Wire up the context-menu callback */
-	gtk_signal_connect_object(GTK_OBJECT(gui->global_tree_view), "event",
-				  (GtkSignalFunc) tpopup_show, gui->global_tree_view);
-
+ 	/* Wire up the context-menu callback */
+ 	gtk_signal_connect_object(GTK_OBJECT(gui->global_tree_view), "event",
+ 				  (GtkSignalFunc) tpopup_show, gui->global_tree_view);
 
 	gtk_widget_show(GTK_WIDGET(gui->global_tree_view));
 #else
@@ -509,8 +669,8 @@ void gui_window_main_make()
 	/* --- Indicator: Auth --- */
 
 	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-																	 &style->bg[GTK_STATE_NORMAL],
-																	 (gchar **) auth_off_xpm);
+					 &style->bg[GTK_STATE_NORMAL],
+					 (gchar **) auth_off_xpm);
 	gui->auth = gtk_pixmap_new(p, mask);
 	gtk_box_pack_start(GTK_BOX(gui->tray), gui->auth, FALSE, TRUE, 2);
 	gtk_widget_show(gui->auth);
@@ -530,7 +690,7 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 
 
 int main( int   argc,
-				 char *argv[] )
+	  char *argv[] )
 {
 	gtk_init(&argc, &argv);
 
