@@ -7,6 +7,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-error-dialog.h"
 #include "cong-app.h"
+#include "cong-util.h"
 
 /* FIXME: eventually abstract this into cong-vfs */
 #include <libgnomevfs/gnome-vfs.h>
@@ -182,10 +183,127 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 	return FALSE;
 }
 
+GtkCellRenderer*
+cong_cell_renderer_simple_new (void)
+{
+	GtkCellRenderer* renderer = gtk_cell_renderer_text_new ();
+
+	g_object_set (G_OBJECT (renderer),
+		      "text",
+		      "fubar",
+		      NULL);
+
+	return renderer;
+}
+
+
+struct CongDispspecCoverage
+{
+	CongDispspec *ds;
+	gdouble coverage;
+};
+
+enum {
+	COVERAGELISTSTORE_DS_FIELD,
+	COVERAGELISTSTORE_COVERAGE_FIELD,
+
+	COVERAGELISTSTORE_COVERAGE_NUM_FIELDS
+};
+
+static CongDispspec*
+run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
+			      guint count)
+{
+	GladeXML *xml;
+	GtkTreeView *tree_view;
+	GtkListStore *list_store;
+	int i;
+
+	g_assert (coverage_array);
+
+	xml = cong_util_load_glade_file ("glade/cong-dispspec-selector.glade",
+					 NULL,
+					 NULL,
+					 NULL);
+	tree_view = GTK_TREE_VIEW (glade_xml_get_widget(xml, "treeview1"));
+	list_store = gtk_list_store_new (COVERAGELISTSTORE_COVERAGE_NUM_FIELDS, G_TYPE_POINTER, G_TYPE_DOUBLE);
+
+	gtk_tree_view_set_model (tree_view,
+				 GTK_TREE_MODEL (list_store));
+	g_object_unref (G_OBJECT (list_store));
+
+	/* Populate the list store: */
+	{
+		GtkTreeIter iter;
+
+		for (i=0;i<count;i++) {
+			gtk_list_store_append (list_store, &iter);
+			
+			gtk_list_store_set (list_store, &iter,
+					    COVERAGELISTSTORE_DS_FIELD, coverage_array[i].ds,
+					    COVERAGELISTSTORE_COVERAGE_FIELD, coverage_array[i].coverage,
+					    -1);
+		}
+		
+		/* Add a new document type entry: */
+		gtk_list_store_append (list_store, &iter);
+		
+		gtk_list_store_set (list_store, &iter,
+				    COVERAGELISTSTORE_DS_FIELD, NULL,
+				    -1);
+	}
+
+	/* Create columns & renderers: */
+	{
+		GtkTreeViewColumn *column;
+		GtkCellRenderer *renderer;
+
+		/* File type column: */
+		{
+			column = gtk_tree_view_column_new();
+			gtk_tree_view_column_set_title(column, _("File Type"));
+
+			renderer = cong_cell_renderer_simple_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			
+			gtk_tree_view_append_column (tree_view, column);
+		}
+
+		/* Coverage column: */
+		{
+			column = gtk_tree_view_column_new();
+			gtk_tree_view_column_set_title(column, _("Coverage"));
+
+			renderer = cong_cell_renderer_simple_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			
+			gtk_tree_view_append_column (tree_view, column);
+		}
+		
+		/* Description column: */
+		{
+			column = gtk_tree_view_column_new();
+			gtk_tree_view_column_set_title(column, _("Description"));
+
+			renderer = cong_cell_renderer_simple_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			
+			gtk_tree_view_append_column (tree_view, column);
+		}
+	}
+
+	gtk_dialog_run (GTK_DIALOG (glade_xml_get_widget (xml, "coverage_dialog")));
+
+	g_object_unref (G_OBJECT (xml));
+
+	return NULL; 
+}
+
+
 /**
  * cong_dispspec_registry_get_appropriate_dispspec
  * @registry:
- * @doc:
+ * @xml_doc:
  * @filename_extension:
  * 
  * Routine to figure out an appropriate dispspec for use with this file.
@@ -197,31 +315,33 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
  */
 CongDispspec*
 cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 
-						 xmlDocPtr doc,
+						 xmlDocPtr xml_doc,
 						 const gchar *filename_extension)
 {
+#if 0
 	gchar* toplevel_xmlns;
 	gchar* toplevel_tag;
+#endif
 
-	g_return_val_if_fail(registry,NULL);
-	g_return_val_if_fail(doc,NULL);
+	g_return_val_if_fail (registry,NULL);
+	g_return_val_if_fail (xml_doc,NULL);
 
 	/* Check for a DTD match: */
-	if (doc->extSubset) {
+	if (xml_doc->extSubset) {
 
 		/* Check for matching PUBLIC ID: */
-		if (doc->extSubset->ExternalID) {
+		if (xml_doc->extSubset->ExternalID) {
 			int i;
 
-			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
-				CongDispspec* ds = cong_dispspec_registry_get(registry, i);
+			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
+				CongDispspec* ds = cong_dispspec_registry_get (registry, i);
 
 				const CongExternalDocumentModel* dtd = cong_dispspec_get_external_document_model (ds, CONG_DOCUMENT_MODE_TYPE_DTD);
 
 				if (dtd) {
 					if (cong_external_document_model_get_public_id (dtd)) {
-						if (0==strcmp (doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
-							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", doc->extSubset->ExternalID);
+						if (0==strcmp (xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID);
 							return ds;
 						}
 					}
@@ -230,8 +350,8 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 		}
 
 		/* Check for matching SYSTEM ID: */
-		if (doc->extSubset->SystemID) {
-			const unsigned char *sysID = doc->extSubset->SystemID;
+		if (xml_doc->extSubset->SystemID) {
+			const unsigned char *sysID = xml_doc->extSubset->SystemID;
 			int i;
 			
 			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
@@ -254,9 +374,59 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	}
 		
 
+
+#if 1
+	/* Scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from: */
+	{
+		int i;
+		struct CongDispspecCoverage *coverage_array;
+		CongDispspec *ds;
+
+		coverage_array = g_new0 (struct CongDispspecCoverage, cong_dispspec_registry_get_num (registry));
+	       
+		for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
+			coverage_array[i].ds = cong_dispspec_registry_get (registry, i);
+			coverage_array[i].coverage = cong_dispspec_calculate_coverage (coverage_array[i].ds,
+										       xml_doc);
+			g_message ("coverage of %s = %f", 
+				   cong_dispspec_get_name (coverage_array[i].ds), 
+				   coverage_array[i].coverage);
+		}
+
+
+		/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
+#if 0
+		/* bug #133405 */
+		ds = run_coverage_selector_dialog (coverage_array,
+						   cong_dispspec_registry_get_num (registry));
+		g_free (coverage_array);
+
+		if (ds) {
+			return ds;
+		}
+#else
+		/* For now, just pick the DS with the best coverage: */
+		{
+			gdouble best_coverage = 0.8; /* have a threshold before a dispspec is even considered.  It might be that none are good enough */
+			CongDispspec *best_dispspec = NULL;
+
+			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
+				if (coverage_array[i].coverage>best_coverage) {
+					best_coverage = coverage_array[i].coverage;
+					best_dispspec = coverage_array[i].ds;
+				}
+			}
+
+			g_free (coverage_array);
+
+			return best_dispspec;
+		}
+#endif
+
+	}
+#else
 	/* Otherwise, check for a matching top-level element:*/
-	/* FIXME: in theory, we could scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from */
-	if (get_toplevel_tag(doc, &toplevel_xmlns, &toplevel_tag)) {
+	if (get_toplevel_tag(xml_doc, &toplevel_xmlns, &toplevel_tag)) {
 		int i;
 		
 		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);
@@ -278,9 +448,8 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 		g_free(toplevel_xmlns);
 		g_free(toplevel_tag);
 	}
+#endif
 
-	/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
-	/* bug #133405 */
 
 	return NULL;
 }

@@ -165,6 +165,21 @@ cong_external_document_model_get_system_id (const CongExternalDocumentModel* mod
 xmlNodePtr
 cong_dispspec_get_template(const CongDispspec *ds);
 
+/*
+ * cong_dispspec_calculate_coverage:
+ *
+ * @ds:  The #CongDispspec to use
+ * @xml_doc:  An xml document to be analysed
+ *
+ * Utility function for choosing between different dispspecs to use with a document.
+ *
+ * Returns:  The fraction of the element nodes in the document which are covered by the dispspec (between 0 and 1)
+ *
+ */
+gdouble
+cong_dispspec_calculate_coverage (const CongDispspec *ds,
+				  xmlDocPtr xml_doc);
+
 G_END_DECLS
 
 #endif

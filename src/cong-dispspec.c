@@ -1346,3 +1346,57 @@ cong_dispspec_get_template(const CongDispspec *ds)
 {
 	return  ds->template;
 }
+
+struct CoverageData
+{
+	guint total_elements;
+	guint covered_elements;
+};
+
+static void
+calc_coverage_recursive (const CongDispspec *ds,
+			 CongNodePtr node,
+			 struct CoverageData *coverage_data)
+{
+	CongNodePtr iter;
+
+	g_assert (node);
+
+	if (node->type == XML_ELEMENT_NODE) {
+		coverage_data->total_elements++;
+
+		if (NULL!=cong_dispspec_lookup_node (ds, node)) {
+			coverage_data->covered_elements++;
+		}
+	}
+
+	/* FIXME:  this gives slightly skewed results for entities */
+	for (iter = node->children; iter; iter=iter->next) {
+		calc_coverage_recursive (ds,
+					 iter,
+					 coverage_data);
+	}
+}
+
+gdouble
+cong_dispspec_calculate_coverage (const CongDispspec *ds,
+				  xmlDocPtr xml_doc)
+{
+	struct CoverageData coverage_data;
+
+	g_return_val_if_fail (ds, 0.0);
+	g_return_val_if_fail (xml_doc, 0.0);
+
+	coverage_data.total_elements = 0;
+	coverage_data.covered_elements = 0;
+
+	calc_coverage_recursive (ds,
+				 (CongNodePtr)xml_doc,
+				 &coverage_data);
+
+	if (coverage_data.total_elements>0) {
+		return ((gdouble)coverage_data.covered_elements)/((gdouble)coverage_data.total_elements);
+	} else {
+		return 0.0;
+	}
+}

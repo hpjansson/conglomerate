@@ -1,3 +1,9 @@
+2004-02-05  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-registry.c, cong-dispspec.c, cong-dispspec.h
+
+	When determining which dispspec to use, calculate coverage of the document elements and pick the best (above a certain threshold percentage)
+
 2004-02-04  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-registry.c
