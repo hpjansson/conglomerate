@@ -617,6 +617,10 @@
 			<_name>Edition</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
+		<element type="span" localName="envar" color="a0b0c0">
+			<_name>Environment Variable</_name>
+			<property-dialog service-id="docbook-generic-node-properties" />
+		</element>
 		<element localName="date" type="span" color="a0b0c0">
 			<_name>Date</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>

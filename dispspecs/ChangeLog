@@ -1,3 +1,7 @@
+2004-06-22  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* docbook.xds.in: Added envar, based on bug 144739, thanks to Lars Trieloff
+
 2004-06-13  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* release.xds: Added <header-info> for <translations> and <translation> elements
