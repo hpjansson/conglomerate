@@ -261,6 +261,9 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 	CongDialogCategory *dtd_category;
 	gchar *filename, *path;
 
+       struct _xmlDtd  *extSubset;     /* the document external subset */
+       struct _xmlDtd  *intSubset;     /* the document internal subset */
+
 	g_return_val_if_fail(doc, NULL);
 
 	xml_doc = cong_document_get_xml(doc);
@@ -327,9 +330,6 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 	if (xml_doc->intSubset) {
 	} else {
 	}
-
-	struct _xmlDtd  *extSubset;	/* the document external subset */
-	struct _xmlDtd  *intSubset;	/* the document internal subset */
 
 #if 1
 	notebook = GTK_NOTEBOOK(gtk_notebook_new());

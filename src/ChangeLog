@@ -1,3 +1,10 @@
+2003-06-29 Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* cong-menus.c
+
+	Move declaration of structs to top of function,
+	to make it compile on gcc 2.9x compilers.
+
 2003-06-26 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-registry.c, cong-dispspec.c, cong-dispspec.h, cong-document.c, cong-dom-view.c, cong-editor-widget.c, cong-node.h, cong-section-head-editor.c, cong-tree-view.c, cursor.c, popup.c, tree.c, xmldata.c, xmledit.c
