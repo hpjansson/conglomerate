@@ -1,4 +1,4 @@
-text/xml:
+text/xml
 	default_action_type=application
 	default_application_id=conglomerate
 	short_list_application_ids_for_novice_user_level=conglomerate
@@ -9,7 +9,7 @@ text/xml:
 	edit=conglomerate %f
 	view=conglomerate %f
 
-text/x-dtd:
+text/x-dtd
 	default_action_type=application
 	default_application_id=conglomerate
 	short_list_application_ids_for_novice_user_level=conglomerate
@@ -20,7 +20,7 @@ text/x-dtd:
 	edit=conglomerate %f
 	view=conglomerate %f
 
-text/x-xds:
+text/x-xds
 	description=Conglomerate Display Specification
 	default_action_type=application
 	default_application_id=conglomerate
@@ -33,7 +33,7 @@ text/x-xds:
 	edit=conglomerate %f
 	view=conglomerate %f
 
-text/x-xsl:
+text/x-xsl
 	description=XSL Stylesheet
 	default_action_type=application
 	default_application_id=conglomerate
@@ -45,8 +45,8 @@ text/x-xsl:
 	open=conglomerate %f
 	edit=conglomerate %f
 	view=conglomerate %f
-	
-text/x-rng:
+
+text/x-rng
 	description=RELAX NG XML Document
 	default_action_type=application
 	default_application_id=conglomerate

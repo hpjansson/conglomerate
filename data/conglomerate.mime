@@ -2,5 +2,5 @@ text/x-xds
 	ext: xds
 text/x-xsl
 	ext: xsl
-text/x-nrg
+text/x-rng
 	ext: rng

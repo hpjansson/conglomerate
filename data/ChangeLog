@@ -1,3 +1,19 @@
+2004-11-03  David Malcolm  <dmalcolm@redhat.com>
+
+	* conglomerate.mime:
+
+	Applied patch by Karl Eichwalder <ke@suse.de> to fix misspelling
+	of RELAX NG mimetype.
+	
+	* conglomerate.desktop.in: 
+
+	Applied patch by Karl Eichwalder <ke@suse.de> to add to GNOME category
+
+	* conglomerate.keys.in
+	
+	Applied patch by Karl Eichwalder <ke@suse.de> to remove colons
+	from the mime type headings
+
 2004-10-15  Nickolay V. Shmyrev <nshmyrev.yandex.ru>
 
 	* Makefile.am: Use common rule to translate schemas	

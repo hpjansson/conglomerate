@@ -7,5 +7,5 @@ Exec=conglomerate %U
 Icon=conglomerate-icon-16.png
 Terminal=false
 Type=Application
-Categories=Application;Office;TextEditor;
+Categories=GNOME;Application;Office;TextEditor;
 MimeType=text/xml;text/x-dtd;text/x-xds;
