@@ -39,5 +39,9 @@ Calls the mkgtkdoc*s scripts
 Makes a new po/POTFILES.in, run this script once in a while.
 It will update also the po/ChangeLog and ask for a CVS commit.
 
+* updateconfigsubguess
+Wget config.sub and config.gues from GNU.
+To keep these files up to date.
+
 * wgetspec
 Web get the spec file that Dag Wieers provides.

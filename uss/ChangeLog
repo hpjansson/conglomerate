@@ -1,3 +1,14 @@
+2004-07-02  Geert Stappers <stappers@stappers.nl>
+
+	* updateconfigsubguess
+
+	The files are available again at ftp.gnu.org,
+	enabled the wget.
+
+	* README
+
+	Added entry for updateconfigsubguess
+
 2004-06-30  Geert Stappers <stappers@stappers.nl>
 
 	* wgetspec
