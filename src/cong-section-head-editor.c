@@ -26,8 +26,6 @@
 #include "cong-editor-widget-impl.h"
 #include <eel/eel-gdk-extensions.h>
 
-static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node);
-static void create_children_for_range(CongSectionHeadEditor *section_head, CongNodePtr first_node, CongNodePtr final_node, GList *iter_prev);
 static void recursively_create_children(CongSectionHeadEditor *section_head);
 
 #define V_SPACING (4)
@@ -489,16 +487,12 @@ static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongN
    Given an intitial node that can be used for a span text editor, find a younger sibling
    that is the final node of a range of siblings suitable for control by a single span text editor.
  */
-static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongNodePtr final_allowed_node, CongDispspec *ds)
+static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongDispspec *ds)
 {
 	g_return_val_if_fail(x, NULL);
 	g_return_val_if_fail(ds, NULL);
 
-	if (x==final_allowed_node) {
-		return x;
-	}
-
-	for (; (x->next!=final_allowed_node) ; x = cong_node_next(x))
+	for (; x->next ; x = cong_node_next(x))
 	{
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
@@ -518,92 +512,6 @@ static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongNodePtr final_
 	return(x);
 }
 
-static void create_children_for_range(CongSectionHeadEditor *section_head, CongNodePtr first_node, CongNodePtr final_node, GList *iter_prev)
-{
-	CongEditorWidget *editor_widget;
-	CongDocument *doc;
-	CongDispspec *ds;
-
-	/* Preconditions: */
-	{
-		g_return_if_fail(section_head);
-		g_return_if_fail(first_node);
-		g_return_if_fail(final_node);
-		
-		g_assert(first_node->parent == final_node->parent);
-	}
-
-	editor_widget = section_head->element_editor.widget;
-	doc = cong_editor_widget_get_document(editor_widget);
-	ds = cong_document_get_dispspec(doc);
-
-	while (1) {
-		enum CongNodeType node_type;
-		const char *name;
-		CongElementEditor *child_editor = NULL;
-		CongNodePtr next_node = first_node;
-
-		g_assert(first_node);
-
-		node_type = cong_node_type(first_node);
-		name = xml_frag_name_nice(first_node);
-
-		if (node_type == CONG_NODE_TYPE_ELEMENT) {
-			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
-			
-			if (element) {
-				if (cong_dispspec_element_is_structural(element)) {
-					child_editor = cong_section_head_editor_new(editor_widget, first_node);
-
-				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
-					
-				} else if (cong_dispspec_element_is_span(element) ||
-					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
-
-					CongNodePtr final_node_of_span = get_final_node_of_span_text(first_node, final_node, ds);
-					
-					child_editor = cong_span_text_editor_new(editor_widget, first_node, final_node_of_span);
-
-					next_node = final_node_of_span->next;
-
-				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
-				/* unwritten */
-				}
-			}	
-		} else if (node_type == CONG_NODE_TYPE_TEXT) {
-			CongNodePtr final_node_of_span = get_final_node_of_span_text(first_node, final_node, ds);
-
-			child_editor = cong_span_text_editor_new(editor_widget, first_node, final_node_of_span);
-
-			next_node = final_node_of_span->next;
-		}
-
-		/* add any child editor that's been created at the correct position: */
-		if (child_editor) {
-			g_assert(next_node);
-
-			if (iter_prev) {
-				section_head->list_of_child = g_list_insert_before(section_head->list_of_child, iter_prev->next, child_editor);
-
-				iter_prev = iter_prev->next;
-			} else {
-				section_head->list_of_child = g_list_append(section_head->list_of_child, child_editor);
-			}
-		}
-
-		if (first_node==final_node) {
-			return;
-		}
-
-		if (next_node != first_node) {
-			first_node = next_node;		
-		} else {
-			first_node = first_node->next;
-		}
-
-	}
-
-}
 
 static void recursively_create_children(CongSectionHeadEditor *section_head)
 {
@@ -619,24 +527,63 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 	doc = cong_editor_widget_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 
-      	this_node = cong_element_editor_get_first_node( CONG_ELEMENT_EDITOR(section_head) );
-#if 1
-	create_children_for_range(section_head, this_node->children, this_node->last, NULL);
-#else
-	for ( child_node = cong_node_first_child(this_node); child_node; child_node = cong_node_next(child_node))
-	{
-		CongElementEditor *child = NULL;
-		gboolean collapsed_child = FALSE;
+      	this_node = CONG_ELEMENT_EDITOR(section_head)->first_node->children;
 
-		/* g_message("Examining frag %s\n",name); */
+	while (this_node) {
+		enum CongNodeType node_type;
+		const char *name;
+		CongElementEditor *child_editor = NULL;
+		CongNodePtr next_node = NULL;
 
-		child = create_child(section_head, child_node);
+		g_assert(this_node);
 
-		if (child) {
-			section_head->list_of_child = g_list_append(section_head->list_of_child, child);
-		}		
+		node_type = cong_node_type(this_node);
+		name = xml_frag_name_nice(this_node);
+
+		if (node_type == CONG_NODE_TYPE_ELEMENT) {
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+			
+			if (element) {
+				if (cong_dispspec_element_is_structural(element)) {
+					child_editor = cong_section_head_editor_new(editor_widget, this_node);
+					next_node = this_node->next;
+
+				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
+					
+				} else if (cong_dispspec_element_is_span(element) ||
+					   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
+
+					CongNodePtr final_node_of_span = get_final_node_of_span_text(this_node, ds);
+					
+					child_editor = cong_span_text_editor_new(editor_widget, this_node, final_node_of_span);
+
+					next_node = final_node_of_span->next;
+
+				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
+				/* unwritten */
+				}
+			}	
+		} else if (node_type == CONG_NODE_TYPE_TEXT) {
+			CongNodePtr final_node_of_span = get_final_node_of_span_text(this_node, ds);
+
+			child_editor = cong_span_text_editor_new(editor_widget, this_node, final_node_of_span);
+
+			next_node = final_node_of_span->next;
+		}
+
+		/* add any child editor that's been created at the correct position: */
+		if (child_editor) {
+			section_head->list_of_child = g_list_append(section_head->list_of_child, child_editor);
+		}
+
+		if (next_node) {
+			this_node = next_node;		
+		} else {
+			this_node = this_node->next;
+		}
+
 	}
-#endif
+
 }
 
 /* Public API: */
