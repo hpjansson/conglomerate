@@ -1,4 +1,10 @@
 #!/usr/bin/make -f
+# run this script by invoking
+#
+#  ./marshal.make
+#
+# whenever cong.marshal is changed
+#
 all: cong-marshal.h cong-marshal.c
 
 cong-marshal.h: cong.marshal
