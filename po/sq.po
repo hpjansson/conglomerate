@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-10 03:17+0200\n"
+"POT-Creation-Date: 2004-07-28 03:01+0200\n"
 "PO-Revision-Date: 2004-07-10 11:47+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1500
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1511
 #: src/cong-primary-window.c:799 src/cong-primary-window.c:984
 #: src/cong-primary-window.c:986 src/cong-primary-window.c:992
 msgid "Conglomerate XML Editor"
@@ -60,10 +60,11 @@ msgstr "Importuesi"
 msgid "Options"
 msgstr "Mundësitë"
 
+#. GRUT modified this item
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
 #: src/cong-node-properties-dialog.c:1285
 msgid "Advanced"
-msgstr "Të hollësishme"
+msgstr "Të detajuara"
 
 #: glade/cong-file-properties.glade.h:2
 msgid "Basic"
@@ -76,7 +77,7 @@ msgstr "Bazë"
 msgid "Description"
 msgstr "Përshkrimi"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:934
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
 msgid "Document Type Declaration"
 msgstr "Deklarimi i Llojit të Dokumentit"
 
@@ -140,7 +141,8 @@ msgstr "Header XML"
 msgid "_Associate this DTD"
 msgstr "_Shoqëroi këtë DTD"
 
-#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -188,6 +190,32 @@ msgstr "Preferimet e Conglomerate"
 #: glade/cong-preferences.glade.h:2
 msgid "Document Types"
 msgstr "Lojjet e dokumenteve"
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr ""
+
+#: glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr ""
+
+#: glade/custom-element.glade.h:4
+#, fuzzy
+msgid "Element Type"
+msgstr "Lloji i dokumentit"
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr ""
+
+#: glade/custom-element.glade.h:6
+#, fuzzy
+msgid "Span"
+msgstr "Spanjisht"
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr ""
 
 #: glade/docbook-common-properties.glade.h:1
 msgid ""
@@ -322,7 +350,7 @@ msgstr "Parametrat e krijimit"
 msgid "Depth"
 msgstr "Thellësia"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:922
+#: glade/plugin-random.glade.h:3 src/cong-document.c:984
 msgid "Document Type"
 msgstr "Lloji i dokumentit"
 
@@ -466,9 +494,10 @@ msgstr "Asnjë gjuhë"
 msgid "Set attribute \"%s\" to \"%s\""
 msgstr "Vendos atributin \"%s\" në \"%s\""
 
+#. GRUT modified this item
 #: src/cong-dialog.c:301
 msgid "_Close without Saving"
-msgstr "_Mbylle pa Ruajtur"
+msgstr "_Mbyll pa Ruajtur"
 
 #: src/cong-dialog.c:316
 #, c-format
@@ -480,7 +509,8 @@ msgstr "Ruan ndryshimet tek dokumenti \"%s\" para se t'a mbyllni?"
 msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
-msgstr "Nëse e mbyllni pa ruajtur, ndryshimet nga %li orët e fundit do të humbasin."
+msgstr ""
+"Nëse e mbyllni pa ruajtur, ndryshimet nga %li orët e fundit do të humbasin."
 
 #: src/cong-dialog.c:323
 #, c-format
@@ -492,8 +522,10 @@ msgstr ""
 "humbasin."
 
 #: src/cong-dialog.c:325
-msgid "If you close without saving, changes from the past minute will be discarded."
-msgstr "Nëse e mbyllni pa ruajtur, ndryshimet nga minuta e fundit do të humbasin."
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+"Nëse e mbyllni pa ruajtur, ndryshimet nga minuta e fundit do të humbasin."
 
 #: src/cong-dialog.c:379
 #, c-format
@@ -514,15 +546,16 @@ msgstr "Ndryshimet nga %li minutat e fundit do të humbasin."
 msgid "Changes from the past minute will be discarded."
 msgstr "Ndryshimet nga minuta e fundit do të humbasin."
 
-#: src/cong-dispspec-element.c:728 src/cong-dispspec-element.c:764
+#: src/cong-dispspec-element.c:742 src/cong-dispspec-element.c:778
 #: src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath dështoi)"
 
+#. GRUT modified this item
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:818
+#: src/cong-dispspec-element.c:832
 msgid "<untitled>"
-msgstr "<untitled>"
+msgstr "<pa titull>"
 
 #: src/cong-dispspec-registry.c:108
 msgid "Conglomerate could not read its registry of document types."
@@ -540,88 +573,94 @@ msgstr "Lloji i File"
 msgid "Coverage"
 msgstr ""
 
-#: src/cong-dispspec.c:473
+#: src/cong-dispspec.c:501
 msgid "unnamed"
 msgstr "pa emër"
 
-#: src/cong-dispspec.c:493
+#: src/cong-dispspec.c:521
 msgid "No description available."
 msgstr "Asnjë përshkrim në dispozicion."
 
-#: src/cong-document.c:886
+#. GRUT modified this item
+#: src/cong-document.c:649
+msgid "(Untitled)"
+msgstr "(Pa titull)"
+
+#: src/cong-document.c:948
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Atributi \"%s\""
 
-#: src/cong-document.c:893
+#: src/cong-document.c:955
 #, c-format
 msgid "Text \"%s\""
 msgstr "Teksti \"%s\""
 
-#: src/cong-document.c:899
+#: src/cong-document.c:961
 msgid "Character Data"
 msgstr ""
 
-#: src/cong-document.c:902
+#: src/cong-document.c:964
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr ""
 
-#: src/cong-document.c:905
+#: src/cong-document.c:967
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entiteti \"%s\""
 
-#: src/cong-document.c:908
+#: src/cong-document.c:970
 msgid "XML Processing Instruction"
 msgstr "Instruksioni i proçesimit të XML"
 
-#: src/cong-document.c:913
+#: src/cong-document.c:975
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Komenti \"%s\""
 
-#: src/cong-document.c:919
+#. GRUT modified this item
+#: src/cong-document.c:981
 msgid "Document"
-msgstr "Dokumenti"
+msgstr "Dokument"
 
-#: src/cong-document.c:925
+#: src/cong-document.c:987
 msgid "Document Fragment"
 msgstr "Fragment dokumenti"
 
-#: src/cong-document.c:928
+#: src/cong-document.c:990
 msgid "Notation"
 msgstr "Shënim"
 
-#: src/cong-document.c:931
+#: src/cong-document.c:993
 msgid "HTML Document"
 msgstr "Dokument HTML"
 
-#: src/cong-document.c:937
+#: src/cong-document.c:999
 msgid "Element Declaration"
 msgstr "Deklarimi i elementit"
 
-#: src/cong-document.c:940
+#: src/cong-document.c:1002
 msgid "Attribute Declaration"
 msgstr "Deklarimi i atributit"
 
-#: src/cong-document.c:943
+#: src/cong-document.c:1005
 msgid "Entity Declaration"
 msgstr "Deklarimi i entitetit"
 
-#: src/cong-document.c:946
+#: src/cong-document.c:1008
 msgid "Namespace Declaration"
 msgstr "Deklarimi i emrit të hapësirës"
 
-#: src/cong-document.c:949
+#: src/cong-document.c:1011
 msgid "XInclude Start"
 msgstr "Fillimi i XInclude"
 
-#: src/cong-document.c:952
+#: src/cong-document.c:1014
 msgid "XInclude End"
 msgstr "Fundi i XInclude"
 
-#: src/cong-document.c:2038
+#: src/cong-document.c:2130
 #, c-format
 msgid "Select %s"
 msgstr "Zgjidh %s"
@@ -688,7 +727,8 @@ msgstr "Fshi pjesën e zgjedhur"
 #: src/cong-error-dialog.c:231 src/cong-error-dialog.c:271
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
-msgstr "Nëse jeni ju programuesi, problemi qëndron tek file %s në rreshtin %i\n"
+msgstr ""
+"Nëse jeni ju programuesi, problemi qëndron tek file %s në rreshtin %i\n"
 
 #: src/cong-error-dialog.c:235
 msgid "That feature has not yet been implemented.  Sorry."
@@ -813,7 +853,8 @@ msgid "The contents of the file seem to be corrupt."
 msgstr ""
 
 #: src/cong-error-file-open.c:339
-msgid "Try again.  If it fails again, try looking for a backup copy of the file."
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 
 #: src/cong-error-file-open.c:346 src/cong-error-file-open.c:385
@@ -946,7 +987,8 @@ msgstr ""
 
 #: src/cong-error-file-save.c:164
 #, c-format
-msgid "The size of the file would be %s, but the device only has a capacity of %s."
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
 msgstr ""
 
 #. Can't get at the capacity for the device or "volume":
@@ -966,7 +1008,8 @@ msgstr ""
 
 #: src/cong-error-file-save.c:208
 #, c-format
-msgid "The size of the file would be %s, but you only have %s free on that device."
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
 msgstr ""
 
 #. Can't get at the free space for the device or "volume":
@@ -1122,7 +1165,8 @@ msgstr "Importo file..."
 msgid "Creating a new file (%s)"
 msgstr "Krijimi i një file të ri (%s)"
 
-#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:643
+#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
+#: src/cong-file-new.c:643
 msgid "Creating a new file"
 msgstr "Krijimi i një file të ri"
 
@@ -1142,7 +1186,8 @@ msgid "What type of file would you like to create?"
 msgstr ""
 
 #: src/cong-file-new.c:634
-msgid "Highlight one of the items in the list and select \"Forward\" to continue"
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr ""
 
 #: src/cong-file-new.c:644
@@ -1233,19 +1278,19 @@ msgstr ""
 msgid "_Add a DTD"
 msgstr "Shto një DTD"
 
-#: src/cong-file-properties.c:273 src/cong-file-properties.c:275
+#: src/cong-file-properties.c:275 src/cong-file-properties.c:277
 msgid "Unknown"
 msgstr "Nuk njihet"
 
-#: src/cong-file-properties.c:286
+#: src/cong-file-properties.c:288
 msgid "Unspecified"
 msgstr "E papërcaktuar"
 
-#: src/cong-file-properties.c:361
+#: src/cong-file-properties.c:363
 msgid "Remove DTD"
 msgstr "Fshi DTD"
 
-#: src/cong-file-properties.c:378 src/cong-util.c:1646
+#: src/cong-file-properties.c:380 src/cong-util.c:1643
 msgid "Associate with DTD"
 msgstr "Shoqëroje me DTD"
 
@@ -1261,11 +1306,11 @@ msgstr ""
 msgid "Delete character"
 msgstr "Fshi gërmën"
 
-#: src/cong-location.c:1051
+#: src/cong-location.c:1057
 msgid "Calculating previous page"
 msgstr ""
 
-#: src/cong-location.c:1074
+#: src/cong-location.c:1080
 msgid "Calculating next page"
 msgstr ""
 
@@ -1277,17 +1322,17 @@ msgstr ""
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr ""
 
-#: src/cong-menus.c:567 src/cong-plugin.c:646
+#: src/cong-menus.c:567 src/cong-plugin.c:648
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 
-#: src/cong-menus.c:570 src/cong-menus.c:594 src/cong-plugin.c:649
-#: src/cong-plugin.c:673
+#: src/cong-menus.c:570 src/cong-menus.c:594 src/cong-plugin.c:651
+#: src/cong-plugin.c:679
 msgid "Conglomerate could not transform the document"
 msgstr ""
 
-#: src/cong-menus.c:591 src/cong-plugin.c:670
+#: src/cong-menus.c:591 src/cong-plugin.c:676
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 
@@ -1308,224 +1353,156 @@ msgstr ""
 msgid "Signal Log - Conglomerate"
 msgstr ""
 
-#: src/cong-menus.c:1498
+#: src/cong-menus.c:1509
 msgid "translator_credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
-#: src/cong-menus.c:1502
+#: src/cong-menus.c:1513
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 msgstr ""
 
-#: src/cong-menus.c:1503
+#: src/cong-menus.c:1514
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr ""
 
-#: src/cong-menus.c:1548 src/cong-menus.c:1628
+#: src/cong-menus.c:1559 src/cong-menus.c:1640
 msgid "/_File"
 msgstr "/_File"
 
-#: src/cong-menus.c:1549 src/cong-menus.c:1629
+#: src/cong-menus.c:1560 src/cong-menus.c:1641
 msgid "/File/_New..."
 msgstr "/File/_I ri..."
 
-#: src/cong-menus.c:1550 src/cong-menus.c:1630
+#: src/cong-menus.c:1561 src/cong-menus.c:1642
 msgid "/File/_Open..."
 msgstr "/File/_Hap..."
 
-#: src/cong-menus.c:1551 src/cong-menus.c:1556 src/cong-menus.c:1561
-#: src/cong-menus.c:1564 src/cong-menus.c:1567 src/cong-menus.c:1569
-#: src/cong-menus.c:1631 src/cong-menus.c:1633
+#: src/cong-menus.c:1562 src/cong-menus.c:1567 src/cong-menus.c:1572
+#: src/cong-menus.c:1575 src/cong-menus.c:1578 src/cong-menus.c:1580
+#: src/cong-menus.c:1643 src/cong-menus.c:1645
 msgid "/File/"
 msgstr "/File/"
 
-#: src/cong-menus.c:1552
+#: src/cong-menus.c:1563
 msgid "/File/_Save"
 msgstr "/File/_Ruaj"
 
-#: src/cong-menus.c:1553
+#: src/cong-menus.c:1564
 msgid "/File/Save _As..."
 msgstr "/File/Ruaje _Si..."
 
-#: src/cong-menus.c:1554
+#: src/cong-menus.c:1565
 msgid "/File/Sa_ve a Copy..."
 msgstr "/File/Ru_aj një Kopje..."
 
-#: src/cong-menus.c:1557
+#: src/cong-menus.c:1568
 msgid "/File/Print Previe_w..."
 msgstr ""
 
-#: src/cong-menus.c:1558
+#: src/cong-menus.c:1569
 msgid "/File/_Print..."
 msgstr "/File/_Printo..."
 
-#: src/cong-menus.c:1562
+#: src/cong-menus.c:1573
 msgid "/File/_Revert"
 msgstr ""
 
-#: src/cong-menus.c:1565 src/cong-menus.c:1632
+#: src/cong-menus.c:1576 src/cong-menus.c:1644
 msgid "/File/_Import..."
 msgstr "/File/_Importo..."
 
-#: src/cong-menus.c:1566
+#: src/cong-menus.c:1577
 msgid "/File/_Export..."
 msgstr "/File/_Eksporto..."
 
-#: src/cong-menus.c:1568
+#: src/cong-menus.c:1579
 msgid "/File/Proper_ties"
 msgstr "/File/Pronësi_të"
 
-#: src/cong-menus.c:1570 src/cong-menus.c:1634
+#: src/cong-menus.c:1581 src/cong-menus.c:1646
 msgid "/File/_Close"
 msgstr "/File/_Mbylle"
 
-#: src/cong-menus.c:1571 src/cong-menus.c:1635
+#: src/cong-menus.c:1582 src/cong-menus.c:1647
 msgid "/File/_Quit"
 msgstr "/File/_Dil"
 
-#: src/cong-menus.c:1573 src/cong-menus.c:1637
+#: src/cong-menus.c:1584 src/cong-menus.c:1649
 msgid "/_Edit"
 msgstr "/_Ndrysho"
 
-#: src/cong-menus.c:1574
+#: src/cong-menus.c:1585
 msgid "/Edit/_Undo"
 msgstr "/Ndrysho/_Anullo"
 
-#: src/cong-menus.c:1575
+#: src/cong-menus.c:1586
 msgid "/Edit/_Redo"
 msgstr ""
 
-#: src/cong-menus.c:1576 src/cong-menus.c:1580 src/cong-menus.c:1585
-#: src/cong-menus.c:1588 src/cong-menus.c:1591
+#: src/cong-menus.c:1587 src/cong-menus.c:1591 src/cong-menus.c:1596
+#: src/cong-menus.c:1599 src/cong-menus.c:1602
 msgid "/Edit/"
 msgstr "/Ndrysho/"
 
-#: src/cong-menus.c:1577
+#: src/cong-menus.c:1588
 msgid "/Edit/Cu_t"
 msgstr "/Ndrysho/Pre_je"
 
-#: src/cong-menus.c:1578
+#: src/cong-menus.c:1589
 msgid "/Edit/_Copy"
 msgstr "/Ndrysho/_Kopjo"
 
-#: src/cong-menus.c:1579
+#: src/cong-menus.c:1590
 msgid "/Edit/_Paste"
 msgstr "/Ndrysho/_Ngjite"
 
-#: src/cong-menus.c:1581
+#: src/cong-menus.c:1592
 msgid "/Edit/_Find..."
 msgstr "/Ndrysho/_Gjej..."
 
-#: src/cong-menus.c:1582
+#: src/cong-menus.c:1593
 msgid "/Edit/Find Ne_xt"
 msgstr "/Ndrysho/_Gjej në vazhdim"
 
-#: src/cong-menus.c:1583
+#: src/cong-menus.c:1594
 msgid "/Edit/Find Pre_vious"
 msgstr "/Ndrysho/Gjej pa_raardhësin"
 
-#: src/cong-menus.c:1584
+#: src/cong-menus.c:1595
 msgid "/Edit/R_eplace..."
 msgstr "/Ndrysho/_Zëvendëso"
 
-#: src/cong-menus.c:1587
+#: src/cong-menus.c:1598
 msgid "/Edit/_Insert..."
 msgstr "/Ndrysho/_Shto..."
 
-#: src/cong-menus.c:1590
+#: src/cong-menus.c:1601
 msgid "/Edit/View _Source"
 msgstr "/Ndrysho/Shiko _Burimin"
 
-#: src/cong-menus.c:1592 src/cong-menus.c:1638
+#: src/cong-menus.c:1603 src/cong-menus.c:1650
 msgid "/Edit/Prefere_nces"
 msgstr "/Ndrysho/Preferi_met"
 
-#: src/cong-menus.c:1595
-msgid "/Debug"
-msgstr "/Debug"
-
-#: src/cong-menus.c:1596
-msgid "/Debug/Begin self-test of error-reporting system..."
-msgstr ""
-
-#: src/cong-menus.c:1597
-msgid "/Debug/Transform DocBook to HTML"
-msgstr ""
-
-#: src/cong-menus.c:1598
-msgid "/Debug/Transform DocBook to XHTML"
-msgstr ""
-
-#: src/cong-menus.c:1599
-msgid "/Debug/Transform DocBook to HTML Help"
-msgstr ""
-
-#: src/cong-menus.c:1600
-msgid "/Debug/Transform DocBook to Java Help"
-msgstr ""
-
-#: src/cong-menus.c:1601
-msgid "/Debug/Transform DocBook to FO"
-msgstr ""
-
-#: src/cong-menus.c:1603
-msgid "/Debug/Preview XSL:FO"
-msgstr ""
-
-#: src/cong-menus.c:1605
-msgid "/Debug/DTD"
-msgstr "Debug/DTD"
-
-#: src/cong-menus.c:1606
-msgid "/Debug/Dialog"
-msgstr "/Debug/Dialogu"
-
-#: src/cong-menus.c:1607
-msgid "/Debug/Progress Checklist"
-msgstr ""
-
-#: src/cong-menus.c:1608
-msgid "/Debug/Document Message Log"
-msgstr ""
-
-#: src/cong-menus.c:1609
-msgid "/Debug/Document Signal Log"
-msgstr ""
-
-#: src/cong-menus.c:1610
-msgid "/Debug/Information Alert"
-msgstr ""
-
-#: src/cong-menus.c:1611
-msgid "/Debug/Glade Test"
-msgstr ""
-
-#: src/cong-menus.c:1612
-msgid "/Debug/Insert XML Fragment"
-msgstr ""
-
-#: src/cong-menus.c:1613
-msgid "/Debug/Command Test"
-msgstr ""
-
-#: src/cong-menus.c:1616
+#: src/cong-menus.c:1628
 msgid "/_Tools"
 msgstr "/_Instrumentët"
 
-#: src/cong-menus.c:1618 src/cong-menus.c:1650
+#: src/cong-menus.c:1630 src/cong-menus.c:1662
 msgid "/_Help"
 msgstr "/_Ndihmë"
 
-#: src/cong-menus.c:1619 src/cong-menus.c:1651
+#: src/cong-menus.c:1631 src/cong-menus.c:1663
 msgid "/Help/_Contents"
 msgstr "/Ndihmë/_Përmbajtja"
 
-#: src/cong-menus.c:1620 src/cong-menus.c:1652
+#: src/cong-menus.c:1632 src/cong-menus.c:1664
 msgid "/Help/_Homepage"
 msgstr "/Ndihmë/_Faqja zyrtare"
 
-#: src/cong-menus.c:1621 src/cong-menus.c:1653
+#: src/cong-menus.c:1633 src/cong-menus.c:1665
 msgid "/Help/_About"
 msgstr "/Ndihmë/_Informacione"
 
@@ -1591,7 +1568,7 @@ msgstr ""
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:205
+#: src/cong-overview-view.c:203
 msgid "Unknown data"
 msgstr "E dhënë e panjohur"
 
@@ -1629,13 +1606,13 @@ msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1136
+#: src/cong-plugin.c:1145
 #, c-format
 msgid "<%s> property dialog"
 msgstr ""
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1139
+#: src/cong-plugin.c:1148
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr ""
@@ -1660,7 +1637,7 @@ msgstr "Anullo"
 msgid "Redo"
 msgstr "Përsërite"
 
-#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:219
+#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:306
 #: src/xmledit.c:51
 msgid "Cut"
 msgstr "Preje"
@@ -1695,23 +1672,23 @@ msgstr ""
 msgid "%s (modified) - %s"
 msgstr ""
 
-#: src/cong-util.c:366 src/plugin-docbook.c:1201
+#: src/cong-util.c:367 src/plugin-docbook.c:1238
 msgid "Printing XSL Formatting Objects"
 msgstr ""
 
-#: src/cong-util.c:410
+#: src/cong-util.c:411
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr ""
 
-#: src/cong-util.c:1463
+#: src/cong-util.c:1460
 msgid "(no description available)"
 msgstr "(asnjë përshkrim në dispozicion)"
 
-#: src/cong-util.c:1635
+#: src/cong-util.c:1632
 msgid "DTD files"
 msgstr "Files DTD"
 
-#: src/cong-util.c:1638
+#: src/cong-util.c:1635
 msgid "Select a DTD"
 msgstr "Zgjidh një DTD"
 
@@ -1769,158 +1746,160 @@ msgid ""
 "document to lowercase.  Useful when working with legacy SGML documents."
 msgstr ""
 
-#: src/plugin-docbook.c:208
+#: src/plugin-docbook.c:215
 msgid "Text of the article goes here"
 msgstr ""
 
-#: src/plugin-docbook.c:227
+#: src/plugin-docbook.c:234
 msgid "Untitled Article"
 msgstr "Artikull pa titull"
 
-#: src/plugin-docbook.c:277
+#: src/plugin-docbook.c:284
 msgid "Text of the first chapter goes here"
 msgstr ""
 
-#: src/plugin-docbook.c:296
+#: src/plugin-docbook.c:303
 msgid "Untitled Book"
 msgstr "Libër pa titull"
 
-#: src/plugin-docbook.c:351
+#: src/plugin-docbook.c:358
 msgid "Untitled Set of Documents"
 msgstr ""
 
-#: src/plugin-docbook.c:1085
+#: src/plugin-docbook.c:1115
 msgid "Exporting PDF file"
 msgstr "Eksporto file PDF"
 
-#: src/plugin-docbook.c:1089 src/plugin-docbook.c:1199
+#: src/plugin-docbook.c:1119 src/plugin-docbook.c:1236
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr ""
 
-#: src/plugin-docbook.c:1091
+#: src/plugin-docbook.c:1121
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr ""
 
-#: src/plugin-docbook.c:1104 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1136 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr ""
 
-#: src/plugin-docbook.c:1195
+#: src/plugin-docbook.c:1232
 msgid "Printing DocBook file"
 msgstr "Duke printuar file DocBook"
 
-#: src/plugin-docbook.c:1589
+#: src/plugin-docbook.c:1631
 msgid "DocBook Article"
 msgstr "Artikull DocBook"
 
-#: src/plugin-docbook.c:1590
+#: src/plugin-docbook.c:1632
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 
-#: src/plugin-docbook.c:1597
+#: src/plugin-docbook.c:1639
 msgid "DocBook Book"
 msgstr "Libër DocBook"
 
-#: src/plugin-docbook.c:1598
+#: src/plugin-docbook.c:1640
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Krijo një libër, duke përdorur formatin \"DocBook\""
 
-#: src/plugin-docbook.c:1605
+#: src/plugin-docbook.c:1647
 msgid "DocBook Set"
 msgstr ""
 
-#: src/plugin-docbook.c:1606
+#: src/plugin-docbook.c:1648
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr ""
 
-#: src/plugin-docbook.c:1614
+#: src/plugin-docbook.c:1656
 msgid "Import text as a DocBook article"
 msgstr ""
 
-#: src/plugin-docbook.c:1615
+#: src/plugin-docbook.c:1657
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr ""
 
-#: src/plugin-docbook.c:1632
+#: src/plugin-docbook.c:1674
 msgid "Export DocBook as HTML"
 msgstr ""
 
-#: src/plugin-docbook.c:1633
+#: src/plugin-docbook.c:1675
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr ""
 
-#: src/plugin-docbook.c:1640
+#: src/plugin-docbook.c:1682
 msgid "Export DocBook as PDF"
 msgstr ""
 
-#: src/plugin-docbook.c:1641
+#: src/plugin-docbook.c:1683
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
 
-#: src/plugin-docbook.c:1648
+#: src/plugin-docbook.c:1690
 msgid "Export DocBook as XSL:FO"
 msgstr ""
 
-#: src/plugin-docbook.c:1649
+#: src/plugin-docbook.c:1691
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 msgstr ""
 
-#: src/plugin-docbook.c:1657
+#: src/plugin-docbook.c:1699
 msgid "Print DocBook"
 msgstr ""
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1708
 msgid "Generic DocBook property dialog"
 msgstr ""
 
-#: src/plugin-docbook.c:1667
+#: src/plugin-docbook.c:1709
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr ""
 
-#: src/plugin-docbook.c:1685 src/plugin-docbook.c:1688 src/plugin-html.c:137
+#: src/plugin-docbook.c:1727 src/plugin-docbook.c:1730 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr ""
 
-#: src/plugin-docbook.c:1697
+#: src/plugin-docbook.c:1739
 msgid "Promote Section"
 msgstr ""
 
-#: src/plugin-docbook.c:1698
+#: src/plugin-docbook.c:1740
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr ""
 
-#: src/plugin-docbook.c:1700 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1742 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr ""
 
-#: src/plugin-docbook.c:1701 src/plugin-docbook.c:1702
-msgid "Promote the section to a higher organisational level within the document"
+#: src/plugin-docbook.c:1743 src/plugin-docbook.c:1744
+msgid ""
+"Promote the section to a higher organisational level within the document"
 msgstr ""
 
-#: src/plugin-docbook.c:1708
+#: src/plugin-docbook.c:1750
 msgid "Demote Section"
 msgstr ""
 
-#: src/plugin-docbook.c:1709
-msgid "Demotes a DocBook section to a lower organisational level within the document"
+#: src/plugin-docbook.c:1751
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 
-#: src/plugin-docbook.c:1711 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1753 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr ""
 
-#: src/plugin-docbook.c:1712 src/plugin-docbook.c:1713
+#: src/plugin-docbook.c:1754 src/plugin-docbook.c:1755
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 
@@ -1931,7 +1910,8 @@ msgstr ""
 
 #: src/plugin-dtd.c:94
 #, c-format
-msgid "This Conglomerate display specification was automatically generated from %s"
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 
 #: src/plugin-dtd.c:215
@@ -2102,7 +2082,8 @@ msgid "The document \"%s\" cannot be checked for validity."
 msgstr ""
 
 #: src/plugin-validate.c:170
-msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgid ""
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
 
 #: src/plugin-validate.c:215
@@ -2169,83 +2150,83 @@ msgstr ""
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 
-#: src/popup.c:516
+#: src/popup.c:522
 #, c-format
 msgid "Apply span tag: %s"
 msgstr ""
 
-#: src/popup.c:616
+#: src/popup.c:622
 msgid "Remove Span Tag"
 msgstr ""
 
-#: src/popup.c:661
+#: src/popup.c:667
 msgid "Convert to a comment"
 msgstr ""
 
-#: src/popup.c:678 src/tree.c:421
+#: src/popup.c:684 src/tree.c:508
 msgid "Uncomment"
 msgstr ""
 
-#: src/popup.c:679
-msgid "Convert a comment containing XML source code into the corresponding code"
+#: src/popup.c:685
+msgid ""
+"Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 
-#: src/popup.c:798
+#: src/popup.c:804
 msgid "Remove span tag"
 msgstr ""
 
-#: src/popup.c:1029 src/popup.c:1045
+#: src/popup.c:1032
 msgid "Other XML element..."
 msgstr ""
 
-#. GRUT modified this item
-#: src/popup.c:1265
+#: src/popup.c:1248
 msgid "Delete this item"
 msgstr "Elemino këtë objekt"
 
-#: src/popup.c:1275
+#: src/popup.c:1258
 msgid "Add text node after"
 msgstr ""
 
-#: src/popup.c:1283
+#: src/popup.c:1266
 msgid "Add text node before"
 msgstr ""
 
-#: src/popup.c:1294
+#: src/popup.c:1277
 msgid "Set the text"
 msgstr ""
 
-#: src/popup.c:1330
+#: src/popup.c:1313
 msgid "Paste into"
 msgstr ""
 
-#: src/popup.c:1339
+#: src/popup.c:1322
 msgid "Paste before"
 msgstr ""
 
-#: src/popup.c:1348
+#: src/popup.c:1331
 msgid "Paste after"
 msgstr ""
 
-#: src/popup.c:1367
+#: src/popup.c:1350
 msgid "New sub-element"
 msgstr ""
 
-#: src/popup.c:1381
+#: src/popup.c:1364
 msgid "New sibling"
 msgstr ""
 
-#: src/tree.c:50
+#: src/tree.c:102 src/tree.c:134
 #, c-format
 msgid "Insert sibling: %s"
 msgstr ""
 
-#: src/tree.c:111
+#: src/tree.c:184 src/tree.c:212
 #, c-format
 msgid "Insert child: %s"
 msgstr ""
 
-#: src/tree.c:371
+#: src/tree.c:458
 msgid "Convert to comment"
 msgstr ""
 
@@ -2279,3 +2260,11 @@ msgstr ""
 msgid "Source View - Conglomerate"
 msgstr ""
 
+#~ msgid "/Debug"
+#~ msgstr "/Debug"
+
+#~ msgid "/Debug/DTD"
+#~ msgstr "Debug/DTD"
+
+#~ msgid "/Debug/Dialog"
+#~ msgstr "/Debug/Dialogu"
