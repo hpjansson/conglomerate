@@ -29,7 +29,6 @@
 struct CongDispspecElementHeaderInfo
 {
 	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
-	gchar *tagname; /* if xpath not present, then look for this tag below the main tag (deprecated) */
 };
 
 struct CongDispspecElement
@@ -688,18 +687,12 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
  * TODO: Write me
  * Returns:
  */
-gchar*
+const gchar*
 cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo *header_info)
 {
 	g_return_val_if_fail (header_info, NULL);
 
-	if (header_info->xpath) {
-		return g_strdup (header_info->xpath);
-	} else if (header_info->tagname) {
-		return g_strdup_printf ("normalize-space(child::%s)", header_info->tagname);
-	} else {
-		return NULL;
-	}
+	return header_info->xpath;
 }
 
 /**
@@ -711,16 +704,16 @@ cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeade
  * Returns:
  */
 gchar*
-cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
+cong_dispspec_element_get_title (CongDispspecElement *element, 
+				 CongNodePtr x)
 {
-#if 1
 	xmlXPathContextPtr ctxt;
 	xmlXPathObjectPtr xpath_obj;
-	gchar *xpath_string;
+	const gchar *xpath_string;
 
-	g_return_val_if_fail(element, NULL);
-	g_return_val_if_fail(element->header_info, NULL);
-	g_return_val_if_fail(x, NULL);
+	g_return_val_if_fail (element, NULL);
+	g_return_val_if_fail (element->header_info, NULL);
+	g_return_val_if_fail (x, NULL);
 
 	xpath_string = cong_dispspec_element_header_info_get_xpath_expression (element->header_info);
 
@@ -730,78 +723,24 @@ cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
 		
 		/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
 		
-		ctxt = xmlXPathNewContext(x->doc);
+		ctxt = xmlXPathNewContext (x->doc);
 		
 		ctxt->node = x;
 		
-		xpath_obj = xmlXPathEval(xpath_string,
-					 ctxt);	
+		xpath_obj = xmlXPathEval (xpath_string,
+					  ctxt);	
 		if (xpath_obj) {
-			result = xmlXPathCastToString(xpath_obj);			
+			result = xmlXPathCastToString (xpath_obj);			
 		} else {
-			result = g_strdup(_("(xpath failed)"));
+			result = g_strdup (_("(xpath failed)"));
 		}	
 		
-		g_free (xpath_string);
-		
-		xmlXPathFreeContext(ctxt);
+		xmlXPathFreeContext (ctxt);
 		
 		return result;
 	} else {
 		return NULL;
 	}		
-#else
-	xmlXPathContextPtr ctxt;
-	xmlXPathObjectPtr xpath_obj;
-
-	g_return_val_if_fail(element, NULL);
-	g_return_val_if_fail(element->header_info, NULL);
-	g_return_val_if_fail(x, NULL);
-
-	/* g_message("cong_dispspec_element_get_title for <%s>", element->tagname); */
-
-	if (element->header_info->xpath) {
-		gchar *result = NULL;
-
-		/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
-
-		ctxt = xmlXPathNewContext(x->doc);
-
-		ctxt->node = x;
-
-		xpath_obj = xmlXPathEval(element->header_info->xpath,
-					 ctxt);
-
-		if (xpath_obj) {
-			result = xmlXPathCastToString(xpath_obj);			
-		} else {
-			result = g_strdup(_("(xpath failed)"));
-		}	
-
-		xmlXPathFreeContext(ctxt);
-		
-		return result;
-	} else if (element->header_info->tagname) {
-		/* Search for a child node matching the tagname: */
-		CongNodePtr i;
-
-		/* g_message("searching for tag <%s>", element->header_info->tagname); */
-		
-		for (i = cong_node_first_child(x); i; i = cong_node_next(i) ) {
-			
-			/* printf("got node named \"%s\"\n", cong_node_name(i)); */			
-			
-			if (0==strcmp(cong_node_name(i), element->header_info->tagname)) {
-				return xml_fetch_clean_data(i);
-			}
-		}
-		
-		/* Not found: */
-		return NULL;
-	} else {
-		return NULL;
-	}
-#endif
 }
 
 /**

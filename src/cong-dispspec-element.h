@@ -124,10 +124,7 @@ cong_dispspec_element_col(CongDispspecElement *element);
 CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element);
 
-/*
-  caller must free result
- */
-gchar*
+const gchar*
 cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo* header_info);
 
 gchar*
