@@ -58,11 +58,13 @@ cong_editor_node_element_span_get_type (void);
 CongEditorNodeElementSpan*
 cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_element_span,
 					 CongEditorWidget3* widget,
-					 CongNodePtr node);
+					 CongNodePtr node,
+					 CongEditorNode *traversal_parent);
 
 CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,
-				   CongNodePtr node);
+				   CongNodePtr node,
+				   CongEditorNode *traversal_parent);
 
 G_END_DECLS
 

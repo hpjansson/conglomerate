@@ -37,6 +37,7 @@
 #include "cong-editor-node-document.h"
 #include "cong-editor-node-dtd.h"
 #include "cong-editor-node-entity-decl.h"
+#include "cong-editor-node-entity-ref.h"
 #include "cong-editor-node-text.h"
 #include "cong-editor-node-unimplemented.h"
 #include "cong-plugin.h"
@@ -55,13 +56,8 @@ struct CongEditorNodeDetails
 {
 	CongEditorWidget3 *widget;
 
-	/* An editor node applies to a specific document node; there is a 1-1 mapping: */
 	CongNodePtr node;
-
-#if 0
-	CongEditorArea *primary_area;
-	CongEditorArea *inner_area;
-#endif
+	CongEditorNode *traversal_parent;
 };
 
 static enum CongFlowType
@@ -108,15 +104,18 @@ cong_editor_node_instance_init (CongEditorNode *node)
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* editor_widget,
-			    CongNodePtr node)
+			    CongNodePtr node,
+			    CongEditorNode *traversal_parent)
 {
 	PRIVATE(editor_node)->widget = editor_widget;
 	PRIVATE(editor_node)->node = node;
+	PRIVATE(editor_node)->traversal_parent = traversal_parent;
 }
 
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
-			      CongNodePtr node)
+			      CongNodePtr node,
+			      CongEditorNode *traversal_parent)
 {
 	CongDocument *doc;
 	enum CongNodeType type;
@@ -139,17 +138,20 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 				default: g_assert_not_reached();
 				case CONG_ELEMENT_TYPE_STRUCTURAL:
 					return  cong_editor_node_element_structural_new (widget,
-											 node);
+											 node,
+											 traversal_parent);
 					
 				case CONG_ELEMENT_TYPE_SPAN:
 					return  cong_editor_node_element_span_new (widget,
-										   node);
+										   node,
+										   traversal_parent);
 					
 				case CONG_ELEMENT_TYPE_INSERT:
 				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
 				case CONG_ELEMENT_TYPE_PARAGRAPH:
 					return  cong_editor_node_element_unknown_new (widget,
-										      node);
+										      node,
+										      traversal_parent);
 					
 				case CONG_ELEMENT_TYPE_PLUGIN:
 					{
@@ -160,21 +162,26 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 						if (factory) {
 							return  CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
 															  widget, 
-															  node));
+															  node,
+															  traversal_parent)
+										  );
 						} else {
 							g_message("plugin not found \"%s\"", plugin_id);
 							return cong_editor_node_element_unknown_new (widget,
-												     node);
+												     node,
+												     traversal_parent);
 						}							
 					}
 					
 				case CONG_ELEMENT_TYPE_UNKNOWN:
 					return cong_editor_node_element_unknown_new (widget,
-										     node);
+										     node,
+										     traversal_parent);
 				} 
 			} else {
 				return cong_editor_node_element_unknown_new (widget,
-									     node);
+									     node,
+									     traversal_parent);
 			}
 		}
 		
@@ -182,35 +189,53 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		{
 			return  cong_editor_node_unimplemented_new (widget, 
 								    node,
+								    traversal_parent,
 								    cong_node_type_description (type));
 		}
 		
 	case CONG_NODE_TYPE_TEXT:
 		{
 			return cong_editor_node_text_new (widget, 
-							  node);
+							  node,
+							  traversal_parent);
 		}
 		
 	case CONG_NODE_TYPE_CDATA_SECTION:
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   node,
+								   traversal_parent,
+								   cong_node_type_description (type));
+		}
+
 	case CONG_NODE_TYPE_ENTITY_REF:
+		{
+			return cong_editor_node_entity_ref_new (widget, 
+								node,
+								traversal_parent);
+		}
+
 	case CONG_NODE_TYPE_ENTITY_NODE:
 	case CONG_NODE_TYPE_PI:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
 								   node,
+								   traversal_parent,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_COMMENT:			
 		{
 			return cong_editor_node_comment_new (widget, 
-							     node);
+							     node,
+							     traversal_parent);
 		}
 		
 	case CONG_NODE_TYPE_DOCUMENT:
 		{
 			return cong_editor_node_document_new (widget, 
-							      node);
+							      node,
+							      traversal_parent);
 		}
 
 	case CONG_NODE_TYPE_DOCUMENT_TYPE:
@@ -220,13 +245,15 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		{
 			return cong_editor_node_unimplemented_new (widget, 
 								   node,
+								   traversal_parent,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_DTD:
 		{
 			return cong_editor_node_dtd_new (widget, 
-							 node);
+							 node,
+							 traversal_parent);
 		}
 
 	case CONG_NODE_TYPE_ELEMENT_DECL:
@@ -234,13 +261,15 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		{
 			return cong_editor_node_unimplemented_new (widget, 
 								   node,
+								   traversal_parent,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_ENTITY_DECL:
 		{
 			return cong_editor_node_entity_decl_new (widget, 
-								 node);
+								 node,
+								 traversal_parent);
 		}
 		
 	case CONG_NODE_TYPE_NAMESPACE_DECL:
@@ -249,6 +278,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		{
 			return cong_editor_node_unimplemented_new (widget, 
 								   node,
+								   traversal_parent,
 								   cong_node_type_description (type));
 		}
 	}
@@ -280,13 +310,13 @@ cong_editor_node_get_node (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->node;
 }
 
-#if 0
-CongEditorArea*
-cong_editor_node_get_area (CongEditorNode *editor_node)
+CongEditorNode*
+cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
 {
-#error
+	g_return_val_if_fail (editor_node, NULL);
+
+	return PRIVATE(editor_node)->traversal_parent;	
 }
-#endif
 
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
@@ -332,6 +362,21 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 						       (editor_node));
 }
 
+gboolean
+cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), FALSE);
+
+	if (cong_node_type(cong_editor_node_get_node(editor_node))==CONG_NODE_TYPE_ENTITY_DECL) {
+		if (cong_node_type(cong_editor_node_get_node(cong_editor_node_get_traversal_parent(editor_node)))==CONG_NODE_TYPE_ENTITY_REF) {
+			g_message ("got a referenced entity decl");
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 CongEditorNode*
 cong_editor_node_get_prev (CongEditorNode *editor_node)
 {
@@ -339,11 +384,18 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
 
 	g_return_val_if_fail (editor_node, NULL);
 
+	/* If we're traversing below an entity ref node, visiting an entity decl node, then don't return the siblings (which are all the other entity decls in this document */
+	if (cong_editor_node_is_referenced_entity_decl(editor_node)) {
+		return NULL;
+	}
+
 	other_doc_node = cong_editor_node_get_node(editor_node)->prev;
+
 
 	if (other_doc_node) {
 		return cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
-							    other_doc_node);
+							    other_doc_node,
+							    PRIVATE(editor_node)->traversal_parent);
 	} else {
 		return NULL;
 	}
@@ -356,11 +408,17 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 
 	g_return_val_if_fail (editor_node, NULL);
 
+	/* If we're traversing below an entity ref node, visiting an entity decl node, then don't return the siblings (which are all the other entity decls in this document */
+	if (cong_editor_node_is_referenced_entity_decl(editor_node)) {
+		return NULL;
+	}
+
 	other_doc_node = cong_editor_node_get_node(editor_node)->next;
 
 	if (other_doc_node) {
 		return cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
-							    other_doc_node);
+							    other_doc_node,
+							    PRIVATE(editor_node)->traversal_parent);
 	} else {
 		return NULL;
 	}

@@ -57,12 +57,14 @@ cong_editor_node_element_paragraph_get_type (void);
 
 CongEditorNodeElementParagraph*
 cong_editor_node_element_paragraph_construct (CongEditorNodeElementParagraph *editor_node_element_paragraph,
-					     CongEditorWidget3* widget,
-					     CongNodePtr node);
+					      CongEditorWidget3* widget,
+					      CongNodePtr node,
+					      CongEditorNode *traversal_parent);
 
 CongEditorNode*
 cong_editor_node_element_paragraph_new (CongEditorWidget3* widget,
-				       CongNodePtr node);
+					CongNodePtr node,
+					CongEditorNode *traversal_parent);
 
 G_END_DECLS
 

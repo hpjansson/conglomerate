@@ -80,18 +80,21 @@ cong_editor_node_element_span_instance_init (CongEditorNodeElementSpan *node_ele
 CongEditorNodeElementSpan*
 cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_element_span,
 					 CongEditorWidget3* editor_widget,
-					 CongNodePtr node)
+					 CongNodePtr node,
+					 CongEditorNode *traversal_parent)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_span),
 					    editor_widget,
-					    node);
+					    node,
+					    traversal_parent);
 
 	return editor_node_element_span;
 }
 
 CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,
-				   CongNodePtr node)
+				   CongNodePtr node,
+				   CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_span_new(%s)", node->name);
@@ -100,7 +103,8 @@ cong_editor_node_element_span_new (CongEditorWidget3* widget,
 	return CONG_EDITOR_NODE( cong_editor_node_element_span_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_SPAN_TYPE, NULL),
 				  widget,
-				  node));
+				  node,
+				  traversal_parent));
 }
 
 static CongEditorArea*
@@ -131,7 +135,8 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 		for (iter = cong_editor_node_get_node(editor_node)->children; iter; iter=iter->next) {
 
 			CongEditorNode *editor_node_iter = cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
-												iter);
+												iter,
+												editor_node);
 
 			if (editor_node_iter) {
 				CongEditorLineFragments *child_line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,

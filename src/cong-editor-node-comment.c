@@ -91,11 +91,13 @@ cong_editor_node_comment_instance_init (CongEditorNodeComment *node_comment)
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    CongEditorWidget3* editor_widget,
-				    CongNodePtr node)
+				    CongNodePtr node,
+				    CongEditorNode *traversal_parent)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_comment),
 				    editor_widget,
-				    node);	
+				    node,
+				    traversal_parent);	
 
 	PRIVATE(editor_node_comment)->text_cache = cong_text_cache_new (FALSE, /* Don't strip whitespace */
 									node->content);
@@ -105,14 +107,16 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 
 CongEditorNode*
 cong_editor_node_comment_new (CongEditorWidget3 *widget,
-			       CongNodePtr node)
+			      CongNodePtr node,
+			      CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_comment_new()");
 #endif
 	return CONG_EDITOR_NODE( cong_editor_node_comment_construct (g_object_new (CONG_EDITOR_NODE_COMMENT_TYPE, NULL),
 								     widget,
-								     node)
+								     node,
+								     traversal_parent)
 				 );
 }
 

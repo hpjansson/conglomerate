@@ -1108,7 +1108,8 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widg
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 
-					CongNodePtr node)
+					CongNodePtr node,
+					CongEditorNode *traversal_parent)
 {
 	g_return_val_if_fail(plugin_editor_node_factory, NULL);
 	g_return_val_if_fail(editor_widget, NULL);
@@ -1116,7 +1117,11 @@ cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_edit
 
 	g_assert(plugin_editor_node_factory->make_node);
 
-	return plugin_editor_node_factory->make_node(plugin_editor_node_factory, editor_widget, node, plugin_editor_node_factory->user_data);
+	return plugin_editor_node_factory->make_node (plugin_editor_node_factory, 
+						      editor_widget, 
+						      node, 
+						      traversal_parent,
+						      plugin_editor_node_factory->user_data);
 }
 
 GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,

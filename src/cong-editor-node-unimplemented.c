@@ -64,11 +64,13 @@ CongEditorNodeUnimplemented*
 cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_node_unimplemented,
 					  CongEditorWidget3* editor_widget,
 					  CongNodePtr node,
+					  CongEditorNode *traversal_parent,
 					  const gchar *description)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_unimplemented),
 				    editor_widget,
-				    node);	
+				    node,
+				    traversal_parent);
 
 	PRIVATE(editor_node_unimplemented)->description = g_strdup(description);
 
@@ -78,6 +80,7 @@ cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_no
 CongEditorNode*
 cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 				    CongNodePtr node,
+				    CongEditorNode *traversal_parent,
 				    const gchar *description)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
@@ -86,6 +89,7 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 	return CONG_EDITOR_NODE( cong_editor_node_unimplemented_construct (g_object_new (CONG_EDITOR_NODE_UNIMPLEMENTED_TYPE, NULL),
 									   widget,
 									   node,
+									   traversal_parent,
 									   description)
 				 );
 }

@@ -70,18 +70,21 @@ cong_editor_node_element_structural_instance_init (CongEditorNodeElementStructur
 CongEditorNodeElementStructural*
 cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *editor_node_element_structural,
 					       CongEditorWidget3* editor_widget,
-					       CongNodePtr node)
+					       CongNodePtr node,
+					       CongEditorNode *traversal_parent)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_structural),
 					    editor_widget,
-					    node);
+					    node,
+					    traversal_parent);
 
 	return editor_node_element_structural;
 }
 
 CongEditorNode*
 cong_editor_node_element_structural_new (CongEditorWidget3* widget,
-					 CongNodePtr node)
+					 CongNodePtr node,
+					 CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_structural_new(%s)", node->name);
@@ -90,7 +93,8 @@ cong_editor_node_element_structural_new (CongEditorWidget3* widget,
 	return CONG_EDITOR_NODE( cong_editor_node_element_structural_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_STRUCTURAL_TYPE, NULL),
 				  widget,
-				  node));
+				  node,
+				  traversal_parent));
 }
 
 static CongEditorArea*

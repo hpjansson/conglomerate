@@ -80,7 +80,7 @@ typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, Con
 #endif
 
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget2 *editor_widget, CongNodePtr node, gpointer user_data);
-typedef CongEditorNodeElement* (*CongEditorNodeFactoryMethod)(CongPluginEditorNodeFactory *plugin_editor_node_factory, CongEditorWidget3 *editor_widget, CongNodePtr node, gpointer user_data);
+typedef CongEditorNodeElement* (*CongEditorNodeFactoryMethod)(CongPluginEditorNodeFactory *plugin_editor_node_factory, CongEditorWidget3 *editor_widget, CongNodePtr node, CongEditorNode *traversal_parent, gpointer user_data);
 
 /* 
    CongPluginManager
@@ -274,7 +274,8 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widg
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 
-					CongNodePtr node);
+					CongNodePtr node,
+					CongEditorNode *traversal_parent);
 
 
 GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,

@@ -39,8 +39,6 @@
 
 struct CongEditorNodeTextDetails
 {
-	int dummy;
-
 	CongTextCache* text_cache;
 
 #if 0
@@ -141,13 +139,15 @@ finalize (GObject *object)
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongEditorWidget3* editor_widget,
-				 CongNodePtr node)
+				 CongNodePtr node,
+				 CongEditorNode *traversal_parent)
 {
 	gchar *markup;
 
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_text),
 				    editor_widget,
-				    node);
+				    node,
+				    traversal_parent);
 
 	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new (TRUE,
 								     get_text_cache_input (editor_node_text));
@@ -194,7 +194,8 @@ dispose (GObject *object)
 
 CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
-			   CongNodePtr node)
+			   CongNodePtr node,
+			   CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_text_new(%s)", node->content);
@@ -202,7 +203,8 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 
 	return CONG_EDITOR_NODE( cong_editor_node_text_construct (g_object_new (CONG_EDITOR_NODE_TEXT_TYPE, NULL),
 								  widget,
-								  node)
+								  node,
+								  traversal_parent)
 				 );
 }
 

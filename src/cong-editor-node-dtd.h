@@ -58,11 +58,13 @@ cong_editor_node_dtd_get_type (void);
 CongEditorNodeDtd*
 cong_editor_node_dtd_construct (CongEditorNodeDtd *editor_node_dtd,
 				CongEditorWidget3* widget,
-				CongNodePtr node);
+				CongNodePtr node,
+				CongEditorNode *traversal_parent);
 
 CongEditorNode*
 cong_editor_node_dtd_new (CongEditorWidget3* widget,
-			  CongNodePtr node);
+			  CongNodePtr node,
+			  CongEditorNode *traversal_parent);
 
 G_END_DECLS
 

@@ -101,9 +101,19 @@ cong_editor_widget3_get_dispspec(CongEditorWidget3 *editor_widget);
 void 
 cong_editor_widget3_force_layout_update (CongEditorWidget3 *editor_widget);
 
+typedef void (*CongEditorNodeCallback) (CongEditorWidget3 *widget, 
+					CongEditorNode *editor_node, 
+					gpointer user_data);
+void
+cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *widget,
+					  CongNodePtr xml_node,
+					  CongEditorNodeCallback editor_node_callback,
+					  gpointer user_data);
+
 CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
-				     CongNodePtr node);
+				     CongNodePtr node,
+				     CongEditorNode *traversal_parent);
 
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget);

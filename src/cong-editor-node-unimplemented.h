@@ -59,11 +59,13 @@ CongEditorNodeUnimplemented*
 cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_node_unimplemented,
 					  CongEditorWidget3* widget,
 					  CongNodePtr node,
+					  CongEditorNode *traversal_parent,
 					  const gchar *description);
 
 CongEditorNode*
 cong_editor_node_unimplemented_new (CongEditorWidget3* widget,
 				    CongNodePtr node,
+				    CongEditorNode *traversal_parent,
 				    const gchar *description);
 
 G_END_DECLS

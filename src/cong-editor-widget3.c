@@ -42,7 +42,9 @@
 #define SHOW_CURSOR_SPEW 0
 
 /* 
-   IMPLEMENTATION NOTES
+   The notes below are no longer true; see notes about entities in header file.
+
+   OLD IMPLEMENTATION NOTES
 
    The CongEditorWidget3 maintains a hash table from xml doc nodes to CongEditorNodes.
 
@@ -60,13 +62,45 @@ gboolean
 cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
 					      CongNodePtr node);
 
+typedef struct EditorMapping EditorMapping;
+
+/* A per-xml-node struct that maps from traversal_parent ptrs to editor_nodes: */
+struct EditorMapping
+{
+	CongNodePtr xml_node;
+	GHashTable *hash_of_traversal_parent_to_editor_node;
+};
+
+EditorMapping*
+cong_editor_mapping_new (CongNodePtr xml_node);
+
+void
+cong_editor_mapping_free (EditorMapping* mapping);
+
+void
+cong_editor_mapping_add_editor_node (EditorMapping* mapping,
+				     CongEditorNode *traversal_parent,
+				     CongEditorNode *editor_node);
+void
+cong_editor_mapping_remove_editor_node (EditorMapping* mapping,
+					CongEditorNode *traversal_parent);
+
+static void  
+value_destroy_func (gpointer data)
+{
+	EditorMapping *mapping = (EditorMapping*)data;
+
+	cong_editor_mapping_free (mapping);
+}
+
+
 #define PRIVATE(foo) ((foo)->private)
 
 struct CongEditorWidget3Details
 {
 	CongDocument *doc;
 
-	GHashTable *hash_of_node_to_editor;
+	GHashTable *hash_of_node_to_editor_mapping;
 
 	GHashTable *hash_of_editor_node_to_child_policy;
 	GHashTable *hash_of_editor_node_to_parents_child_policy;
@@ -136,20 +170,52 @@ static void
 populate_widget3(CongEditorWidget3 *widget);
 
 static void 
+recursive_add_all_nodes(CongEditorWidget3 *widget,
+			CongNodePtr node);
+
+static void 
+recursive_remove_all_nodes(CongEditorWidget3 *widget,
+			   CongNodePtr node);
+
+static void 
+add_node_callback (CongEditorWidget3 *widget, 
+		   CongEditorNode *editor_node, 
+		   gpointer user_data);
+
+static void 
+remove_node_callback (CongEditorWidget3 *widget, 
+		      CongEditorNode *editor_node, 
+		      gpointer user_data);
+
+static void
+add_node_mapping (CongEditorWidget3 *widget,
+		  CongNodePtr xml_node,
+		  CongEditorNode *editor_node,
+		  CongEditorNode *traversal_parent);
+
+static void
+remove_node_mapping (CongEditorWidget3 *widget,
+		     CongNodePtr xml_node,
+		     CongEditorNode *editor_node,
+		     CongEditorNode *traversal_parent);
+
+static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
-		    CongNodePtr node);		    
+		    CongNodePtr node,
+		    CongEditorNode *traversal_parent);		    
 
 static void 
 recursive_remove_nodes(CongEditorWidget3 *widget,
-		       CongNodePtr node);
+		       CongNodePtr node,
+		       CongEditorNode *traversal_parent);
 
 
 static void 
 create_areas(CongEditorWidget3 *widget,
-	     CongNodePtr node);
+	     CongEditorNode *editor_node);
 static void 
 destroy_areas(CongEditorWidget3 *widget,
-	      CongNodePtr node);
+	      CongEditorNode *editor_node);
 
 #if 1
 CongEditorChildPolicy*
@@ -289,8 +355,10 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	g_object_ref(G_OBJECT(doc));
 
-	PRIVATE(editor_widget)->hash_of_node_to_editor = g_hash_table_new (NULL,
-							    NULL);
+	PRIVATE(editor_widget)->hash_of_node_to_editor_mapping = g_hash_table_new_full (NULL,
+											NULL,
+											NULL,
+											value_destroy_func);
 
 	PRIVATE(editor_widget)->hash_of_editor_node_to_child_policy = g_hash_table_new (NULL,
 											NULL);
@@ -437,16 +505,136 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 }
 #endif
 
+struct for_each_in_hash_struct
+{
+	CongEditorWidget3 *editor_widget;
+	CongNodePtr xml_node;
+	CongEditorNodeCallback editor_node_callback;
+	gpointer user_data;
+};
+
+static void
+for_each_in_hash_func (gpointer key,
+		       gpointer value,
+		       gpointer user_data)
+{
+	struct for_each_in_hash_struct *tmp_struct = (struct for_each_in_hash_struct*)user_data; 
+
+	g_assert (tmp_struct);
+	g_assert (tmp_struct->editor_widget);
+	g_assert (tmp_struct->xml_node);
+	g_assert (tmp_struct->editor_node_callback);
+
+	tmp_struct->editor_node_callback (tmp_struct->editor_widget,
+					  CONG_EDITOR_NODE(value),
+					  tmp_struct->user_data);
+	
+}
+
+void
+cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *editor_widget,
+					  CongNodePtr xml_node,
+					  CongEditorNodeCallback editor_node_callback,
+					  gpointer user_data)
+{
+	EditorMapping *editor_mapping;
+
+	g_return_if_fail (editor_widget);
+	g_return_if_fail (xml_node);
+	g_return_if_fail (editor_node_callback);
+
+	editor_mapping = g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor_mapping,
+					      xml_node);
+
+	if (editor_mapping) {
+		struct for_each_in_hash_struct tmp_struct; 
+	
+		tmp_struct.editor_widget = editor_widget;
+		tmp_struct.xml_node = xml_node;
+		tmp_struct.editor_node_callback = editor_node_callback;
+		tmp_struct.user_data = user_data;
+
+		g_hash_table_foreach (editor_mapping->hash_of_traversal_parent_to_editor_node,
+				      for_each_in_hash_func,
+				      &tmp_struct);
+				      
+	}
+}
+
 CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
-				     CongNodePtr node)
+				     CongNodePtr xml_node,
+				     CongEditorNode *traversal_parent)
 {
-	g_return_val_if_fail (editor_widget, NULL);
-	g_return_val_if_fail (node, NULL);
+	EditorMapping *editor_mapping;
 
-	return g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor, 
-				    node);
+	g_return_val_if_fail (editor_widget, NULL);
+	g_return_val_if_fail (xml_node, NULL);
+
+	editor_mapping = g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor_mapping,
+					      xml_node);
+
+	if (editor_mapping) {
+		return CONG_EDITOR_NODE(g_hash_table_lookup (editor_mapping->hash_of_traversal_parent_to_editor_node, 
+							     traversal_parent));
+	} else {
+		return NULL;
+	}
 }
+
+EditorMapping*
+cong_editor_mapping_new (CongNodePtr xml_node)
+{
+	EditorMapping *mapping;
+
+	g_assert (xml_node);
+
+	mapping = g_new0(EditorMapping, 1);
+
+	mapping->xml_node = xml_node;
+	mapping->hash_of_traversal_parent_to_editor_node = g_hash_table_new (NULL, 
+									     NULL);	
+
+	return mapping;
+}
+
+void
+cong_editor_mapping_free (EditorMapping* mapping)
+{
+	g_assert(mapping);
+
+	g_hash_table_destroy ( mapping->hash_of_traversal_parent_to_editor_node);
+
+	g_free (mapping);
+}
+
+void
+cong_editor_mapping_add_editor_node (EditorMapping* mapping,
+				     CongEditorNode *traversal_parent,
+				     CongEditorNode *editor_node)
+{
+	g_assert(mapping);
+	g_assert(editor_node);
+	
+	g_assert(mapping->hash_of_traversal_parent_to_editor_node);
+
+	g_hash_table_insert (mapping->hash_of_traversal_parent_to_editor_node,
+			     traversal_parent,
+			     editor_node);
+	
+}
+
+void
+cong_editor_mapping_remove_editor_node (EditorMapping* mapping,
+					CongEditorNode *traversal_parent)
+{
+	g_assert(mapping);
+	g_assert(mapping->hash_of_traversal_parent_to_editor_node);
+
+	g_hash_table_remove (mapping->hash_of_traversal_parent_to_editor_node,
+			     traversal_parent);
+}
+
 
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
@@ -702,7 +890,7 @@ static void on_signal_make_orphan_notify_before (CongDocument *doc,
 
 #if 1
 	if (cong_editor_widget3_node_should_have_editor_node(node)) {
-		recursive_remove_nodes(editor_widget, node);
+		recursive_remove_all_nodes(editor_widget, node);
 	} else {
 		g_assert(!cong_editor_widget3_has_editor_node_for_node(editor_widget, node));
 	}
@@ -743,7 +931,7 @@ static void on_signal_set_parent_notify_before (CongDocument *doc,
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_before");
 
 	if (cong_editor_widget3_node_should_have_editor_node(node)) {
-		recursive_remove_nodes(editor_widget, node);
+		recursive_remove_all_nodes(editor_widget, node);
 	} else {
 		g_assert(!cong_editor_widget3_has_editor_node_for_node(editor_widget, node));
 	}
@@ -851,7 +1039,7 @@ static void on_signal_add_after_notify_after (CongDocument *doc,
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_after");
 
 #if 1
-	recursive_add_nodes(editor_widget, node);
+	recursive_add_all_nodes(editor_widget, node);
 #endif
 }
 
@@ -865,7 +1053,7 @@ static void on_signal_add_before_notify_after (CongDocument *doc,
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_after");
 
 #if 1
-	recursive_add_nodes(editor_widget, node);
+	recursive_add_all_nodes(editor_widget, node);
 #endif
 }
 
@@ -879,7 +1067,7 @@ static void on_signal_set_parent_notify_after (CongDocument *doc,
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_after");
 
 #if 1
-	recursive_add_nodes(editor_widget, node);
+	recursive_add_all_nodes(editor_widget, node);
 #endif
 }
 
@@ -968,8 +1156,8 @@ populate_widget3(CongEditorWidget3 *widget)
 
 	doc = cong_editor_widget3_get_document(widget);
 
-	recursive_add_nodes (widget,
-			     (CongNodePtr)cong_document_get_xml (doc));		
+	recursive_add_all_nodes (widget,
+				 (CongNodePtr)cong_document_get_xml (doc));		
 }
 
 gboolean
@@ -990,15 +1178,137 @@ gboolean
 cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
 					      CongNodePtr node)
 {
-	return 	g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor,node)!=NULL;
+	return 	g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor_mapping,node)!=NULL;
+}
 
+static void 
+recursive_add_all_nodes(CongEditorWidget3 *widget,
+			CongNodePtr node)
+{
+	if (node->parent) {
+		/* Add editor nodes for this node into all of the editor nodes of the parent: */
+		cong_editor_widget3_for_each_editor_node (widget,
+							  node->parent,
+							  add_node_callback,
+							  node);
+	} else {
+		recursive_add_nodes(widget,
+				    node,
+				    NULL);
+	}
+}
+
+static void 
+recursive_remove_all_nodes(CongEditorWidget3 *widget,
+			   CongNodePtr node)
+{
+	if (node->parent) {
+		/* Remove the editor node for this node from all parent editor nodes: */
+		cong_editor_widget3_for_each_editor_node (widget,
+							  node->parent,
+							  remove_node_callback,
+							  node);
+	} else {
+		recursive_remove_nodes (widget,
+					node,
+					NULL);
+	}
+}
+
+static void 
+add_node_callback (CongEditorWidget3 *widget, 
+		   CongEditorNode *editor_node, 
+		   gpointer user_data)
+{
+	recursive_add_nodes(widget,
+			    (CongNodePtr)user_data,
+			    editor_node /* CongEditorNode *traversal_parent*/);
+}
+
+static void 
+remove_node_callback (CongEditorWidget3 *widget, 
+		      CongEditorNode *editor_node, 
+		      gpointer user_data)
+{
+	recursive_remove_nodes(widget,
+			       (CongNodePtr)user_data,
+			       editor_node /* CongEditorNode *traversal_parent*/);
+}
+
+static void
+add_node_mapping (CongEditorWidget3 *widget,
+		  CongNodePtr xml_node,
+		  CongEditorNode *editor_node,
+		  CongEditorNode *traversal_parent)
+{
+	EditorMapping *editor_mapping;
+
+	g_assert (widget);
+	g_assert (xml_node);
+	g_assert (editor_node);
+
+	/* Claim our reference on the editor node: */
+	g_object_ref (G_OBJECT(editor_node));
+
+
+	editor_mapping = g_hash_table_lookup (PRIVATE(widget)->hash_of_node_to_editor_mapping,
+					      xml_node);
+
+	if (NULL==editor_mapping) {
+		editor_mapping = cong_editor_mapping_new (xml_node);
+
+		g_hash_table_insert (PRIVATE(widget)->hash_of_node_to_editor_mapping,
+				     xml_node,
+				     editor_mapping);
+	}
+
+	g_assert (editor_mapping);
+
+	cong_editor_mapping_add_editor_node (editor_mapping,
+					     traversal_parent,
+					     editor_node);
+}
+
+static void
+remove_node_mapping (CongEditorWidget3 *widget,
+		     CongNodePtr xml_node,
+		     CongEditorNode *editor_node,
+		     CongEditorNode *traversal_parent)
+{
+	EditorMapping *editor_mapping;
+
+	g_assert (widget);
+	g_assert (xml_node);
+	g_assert (editor_node);
+
+	editor_mapping = g_hash_table_lookup (PRIVATE(widget)->hash_of_node_to_editor_mapping,
+					      xml_node);
+
+	g_assert(editor_mapping);
+
+	cong_editor_mapping_remove_editor_node (editor_mapping,
+						traversal_parent);
+
+	/* FIXME: is there a cheaper way to do this? */
+	if (0==g_hash_table_size(PRIVATE(widget)->hash_of_node_to_editor_mapping)) {
+		g_hash_table_remove (PRIVATE(widget)->hash_of_node_to_editor_mapping,
+				     xml_node);
+	}
+
+	CONG_EEL_LOG_REF_COUNT("redundant editor node", G_OBJECT(editor_node));
+	
+	/* Release our reference on the editor_node: */
+	g_object_unref (editor_node);
 }
 
 static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
-		    CongNodePtr node)
+		    CongNodePtr node,
+		    CongEditorNode *traversal_parent)
 {
+	CongEditorNode* editor_node;
 	CongNodePtr iter;
+
 
 #if LOG_EDITOR_NODES
 	{
@@ -1014,13 +1324,18 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 
 	/* Add this node: */
 	{
-		CongEditorNode* editor_node = cong_editor_node_manufacture (widget,
-									    node);
+		editor_node = cong_editor_node_manufacture (widget,
+							    node,
+							    traversal_parent);
 		g_assert(editor_node);
 
-		g_hash_table_insert (PRIVATE(widget)->hash_of_node_to_editor, 
-				     node,
-				     editor_node);
+		add_node_mapping (widget,
+				  node,
+				  editor_node,
+				  traversal_parent);
+
+		/* Our initial refernce is now help by the node mapping: */
+		g_object_unref (G_OBJECT(editor_node));
 
 		/* DHM 4th August 2003:
 		   Currently the area packing routines get confused; the areas for an entity ref's content get added below the parent of the entity decl (I think; haven't looked too closely into the details.
@@ -1030,19 +1345,21 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 		   entities (and perhaps trigger updates...).  However it does mean that there can be more than one editor_node per doc_node :-(
 		*/
 		create_areas (widget,
-			      node);
+			      editor_node);
 	}
 	
 	/* Recurse: */
 	for (iter = node->children; iter; iter=iter->next) {
 		recursive_add_nodes (widget, 
-				     iter);		
+				     iter,
+				     editor_node);
 	}
 }
 
 static void 
 recursive_remove_nodes (CongEditorWidget3 *widget,
-			CongNodePtr node)
+			CongNodePtr node,
+			CongEditorNode *traversal_parent)
 {
 	CongEditorNode *editor_node;
 	CongNodePtr iter;
@@ -1059,38 +1376,36 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 
-	g_assert(g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor,node)!=NULL);
-	
+	editor_node = cong_editor_widget3_get_editor_node (widget,
+							   node,
+							   traversal_parent);
+	g_assert(editor_node);
+
 	/* Recurse: */
 	for (iter = node->children; iter; iter=iter->next) {
 		recursive_remove_nodes (widget, 
-					iter);		
+					iter,
+					editor_node);		
 	}
 
 	destroy_areas (widget,
-		       node);
-	
-	editor_node = g_hash_table_lookup (PRIVATE(widget)->hash_of_node_to_editor,
-					   node);
+		       editor_node);
 	
 	/* Remove this editor_node: */
-	g_hash_table_remove (PRIVATE(widget)->hash_of_node_to_editor, 
-			     node);
-
-	CONG_EEL_LOG_REF_COUNT("redundant editor node", G_OBJECT(editor_node));
-	
-	/* Unref the editor_node: */
-	g_object_unref (editor_node);
+	remove_node_mapping (widget,
+			     node,
+			     editor_node,
+			     traversal_parent);
 }
 
 static void 
 create_areas(CongEditorWidget3 *widget,
-	     CongNodePtr node)
+	     CongEditorNode *editor_node)
 {
-	CongEditorNode *editor_node = NULL;
 	CongEditorChildPolicy *parents_child_policy = NULL;
 	CongEditorChildPolicy *this_child_policy = NULL;
 	enum CongFlowType flow_type;
+	CongNodePtr node = cong_editor_node_get_node (editor_node);
 
 #if LOG_EDITOR_AREAS
 	{
@@ -1101,9 +1416,6 @@ create_areas(CongEditorWidget3 *widget,
 		g_free(node_desc);
 	}
 #endif
-
-	editor_node = cong_editor_widget3_get_editor_node (widget,
-							   node);
 
 	flow_type = cong_editor_node_get_flow_type (editor_node);
 
@@ -1116,11 +1428,10 @@ create_areas(CongEditorWidget3 *widget,
 		if (node->parent) {
 			CongEditorNode *parent_editor_node;
 			
-			parent_editor_node = cong_editor_widget3_get_editor_node (widget,
-										  node->parent);
+			parent_editor_node = cong_editor_node_get_traversal_parent (editor_node);
 			
 			parents_child_policy = cong_editor_widget3_get_child_policy_for_editor_node (widget,
-												    parent_editor_node);
+												     parent_editor_node);
 			
 		} else {
 			/* Root of the document; insert below the widget's root_area: */
@@ -1172,10 +1483,10 @@ create_areas(CongEditorWidget3 *widget,
 
 static void 
 destroy_areas(CongEditorWidget3 *widget,
-	      CongNodePtr node)
+	      CongEditorNode *editor_node)
 {
-	CongEditorNode *editor_node;
 	CongEditorChildPolicy *parents_child_policy = NULL;
+	CongNodePtr node = cong_editor_node_get_node (editor_node);
 
 #if LOG_EDITOR_AREAS
 	{
@@ -1187,12 +1498,9 @@ destroy_areas(CongEditorWidget3 *widget,
 	}
 #endif
 
-	editor_node = cong_editor_widget3_get_editor_node (widget,
-							   node);
-
 	if (node->parent) {
 		parents_child_policy = cong_editor_widget3_get_parents_child_policy_for_editor_node (widget,
-												    editor_node);
+												     editor_node);
 	} else {
 		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
 		parents_child_policy = PRIVATE(widget)->root_child_policy;

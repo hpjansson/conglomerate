@@ -213,12 +213,14 @@ static CongEditorNodeElement*
 manufacture_editor_node_listitem (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
 				  CongEditorWidget3 *editor_widget, 
 				  CongNodePtr node, 
+				  CongEditorNode *traversal_parent,
 				  gpointer user_data)
 {
 	g_message("manufacture_editor_node_listitem");
 
 	return CONG_EDITOR_NODE_ELEMENT( cong_editor_node_element_listitem_new (editor_widget,
-										node));
+										node,
+										traversal_parent));
 }
 
  /* would be exposed as "plugin_register"? */

@@ -55,11 +55,13 @@ cong_editor_node_element_instance_init (CongEditorNodeElement *node_element)
 CongEditorNodeElement*
 cong_editor_node_element_construct (CongEditorNodeElement *editor_node_element,
 				    CongEditorWidget3* editor_widget,
-				    CongNodePtr node)
+				    CongNodePtr node,
+				    CongEditorNode *traversal_parent)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_element),
 				    editor_widget,
-				    node);
+				    node,
+				    traversal_parent);
 
 	return editor_node_element;
 }

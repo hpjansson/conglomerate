@@ -38,6 +38,24 @@ G_BEGIN_DECLS
 
 typedef struct CongEditorNodeDetails CongEditorNodeDetails;
 
+
+/**
+ * A CongEditorNode is a per-editor-widget GObject, and represents a node that is visited in a traversal of the xml tree.
+ * Hence there is generally a 1-1 mapping between xml nodes and CongEditorNodes.  When an xmlnode is added or removed from the tree, 
+ * even temporarily, then a corresponding CongEditorNode is added/removed.
+ *
+ * However.  if you have an entity ref, then the nodes below the entity decls get visited multiple times in a traversal,
+ * hence there are multiple CongEditorNodes for such nodes, one for below the entity decl, and one below every entity ref.
+ *
+ * In order to support this every editor node know both which xml node it represents, and which "traversal parent" it has.
+ * So although it is generally the case that the traversal parent is the parent of the xml node, it is NOT always the case.
+ * 
+ * The motivating example is for the immediate children of entity references, for which the parent of the xml node is the
+ * entity declaration, not the entity reference.  In this case, the traversal parent IS the entity reference node.
+ *
+ * The traversal parent is stored as a pointer to the relevant CongEditorNode, rather than a CongNodePtr.
+ *
+ */
 struct CongEditorNode
 {
 	GObject object;
@@ -69,7 +87,8 @@ cong_editor_node_get_type (void);
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* widget,
-			    CongNodePtr node);
+			    CongNodePtr node,
+			    CongEditorNode *traversal_parent);
 
 
 /*
@@ -77,7 +96,8 @@ cong_editor_node_construct (CongEditorNode *editor_node,
  */
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
-			      CongNodePtr node);
+			      CongNodePtr node,
+			      CongEditorNode *traversal_parent);
 
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node);
@@ -87,6 +107,9 @@ cong_editor_node_get_document (CongEditorNode *editor_node);
 
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node);
+
+CongEditorNode*
+cong_editor_node_get_traversal_parent (CongEditorNode *editor_node);
 
 /* 
    Simplistic node->area interface (1-1 for now).
@@ -113,6 +136,15 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node);
 
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);
+
+/**
+ *  Entity decls can be visited in the tree both below the DTD node, and below each entity ref node that references them.
+ *  This function returns TRUE iff the editor_node represents the latter case.
+ *  This is useful e.g. if you want to know the "effective siblings" of the node, which should be the other entity decls in the
+ *  former case, and should be NULL in the latter case.
+ */
+gboolean
+cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node);
 
 /* May not always succeed; if called during the node creation, the relevant editor_node might not have been created yet: */
 CongEditorNode*

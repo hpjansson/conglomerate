@@ -63,24 +63,28 @@ cong_editor_node_document_instance_init (CongEditorNodeDocument *node_document)
 CongEditorNodeDocument*
 cong_editor_node_document_construct (CongEditorNodeDocument *editor_node_document,
 				     CongEditorWidget3* editor_widget,
-				     CongNodePtr node)
+				     CongNodePtr node,
+				     CongEditorNode *traversal_parent)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_document),
 				    editor_widget,
-				    node);	
+				    node,
+				    traversal_parent);	
 	return editor_node_document;
 }
 
 CongEditorNode*
 cong_editor_node_document_new (CongEditorWidget3 *widget,
-			       CongNodePtr node)
+			       CongNodePtr node,
+			       CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_document_new()");
 #endif
 	return CONG_EDITOR_NODE( cong_editor_node_document_construct (g_object_new (CONG_EDITOR_NODE_DOCUMENT_TYPE, NULL),
 								      widget,
-								      node)
+								      node,
+								      traversal_parent)
 				 );
 }
 

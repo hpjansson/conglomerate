@@ -29,6 +29,7 @@
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
+#include "cong-editor-area-border.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -336,16 +337,35 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	/* Given that we've just created a new child flow-holder, we must have a distinct flow-holder for the neighbouring editor-nodes. 
 	   So try the previous one... */
 	CongNodePtr doc_node = cong_editor_node_get_node (editor_node);
+	CongEditorArea *child_area;
+	CongNodePtr prev_node;
 
-	if (doc_node->prev) {
+#if 0
+	child_area = cong_editor_area_border_new (cong_editor_node_get_widget (editor_node),
+						  5);
+
+	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(child_area),
+					      CONG_EDITOR_AREA(child_flow_holder));
+	/* we need to store these child areas for the pack_after below to work: */
+#else
+	child_area = CONG_EDITOR_AREA(child_flow_holder);
+#endif
+
+	prev_node = doc_node->prev;
+
+	if (cong_editor_node_is_referenced_entity_decl (editor_node)) {
+		prev_node = NULL;
+	}
+
+	if (prev_node) {
 		CongEditorAreaFlowHolder* prev_flow_holder = cong_editor_area_flow_holder_get_child_flow_holder_for_node (area_flow_holder_blocks,
-															  doc_node->prev);
+															  prev_node);
 
 		g_assert(prev_flow_holder);
 		g_assert(prev_flow_holder!=child_flow_holder);
 
 		cong_editor_area_composer_pack_after (PRIVATE(area_flow_holder_blocks)->outer_compose,
-						      CONG_EDITOR_AREA(child_flow_holder),
+						      child_area,
 						      CONG_EDITOR_AREA(prev_flow_holder),
 						      FALSE,
 						      FALSE,
@@ -353,7 +373,7 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	} else {
 		/* Insert this area after any already present in the parent's insertion area: */
 		cong_editor_area_composer_pack (PRIVATE(area_flow_holder_blocks)->outer_compose,
-						CONG_EDITOR_AREA(child_flow_holder),
+						child_area,
 						FALSE,
 						FALSE,
 						0);

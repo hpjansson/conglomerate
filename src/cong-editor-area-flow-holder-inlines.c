@@ -31,6 +31,9 @@
 #include "cong-editor-child-policy-inline.h"
 #include "cong-editor-line-fragments.h"
 
+#define DEBUG_LINE_FLOWS 0
+
+
 #define PRIVATE(x) ((x)->private)
 
 /* FIXME: this should probabky be done by interrogating the font, or something like that */

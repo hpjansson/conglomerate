@@ -63,24 +63,28 @@ cong_editor_node_dtd_instance_init (CongEditorNodeDtd *node_dtd)
 CongEditorNodeDtd*
 cong_editor_node_dtd_construct (CongEditorNodeDtd *editor_node_dtd,
 				CongEditorWidget3* editor_widget,
-				CongNodePtr node)
+				CongNodePtr node,
+				CongEditorNode *traversal_parent)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_dtd),
 				    editor_widget,
-				    node);	
+				    node,
+				    traversal_parent);	
 	return editor_node_dtd;
 }
 
 CongEditorNode*
 cong_editor_node_dtd_new (CongEditorWidget3 *widget,
-			  CongNodePtr node)
+			  CongNodePtr node,
+			  CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_dtd_new()");
 #endif
 	return CONG_EDITOR_NODE( cong_editor_node_dtd_construct (g_object_new (CONG_EDITOR_NODE_DTD_TYPE, NULL),
 								 widget,
-								 node)
+								 node,
+								 traversal_parent)
 				 );
 }
 

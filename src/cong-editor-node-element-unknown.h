@@ -58,11 +58,13 @@ cong_editor_node_element_unknown_get_type (void);
 CongEditorNodeElementUnknown*
 cong_editor_node_element_unknown_construct (CongEditorNodeElementUnknown *editor_node_element_unknown,
 					    CongEditorWidget3* widget,
-					    CongNodePtr node);
+					    CongNodePtr node,
+					    CongEditorNode *traversal_parent);
 
 CongEditorNode*
 cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
-				      CongNodePtr node);
+				      CongNodePtr node,
+				      CongEditorNode *traversal_parent);
 
 G_END_DECLS
 

@@ -58,11 +58,13 @@ cong_editor_node_comment_get_type (void);
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    CongEditorWidget3* widget,
-				    CongNodePtr node);
+				    CongNodePtr node,
+				    CongEditorNode *traversal_parent);
 
 CongEditorNode*
 cong_editor_node_comment_new (CongEditorWidget3* widget,
-			      CongNodePtr node);
+			      CongNodePtr node,
+			      CongEditorNode *traversal_parent);
 
 G_END_DECLS
 

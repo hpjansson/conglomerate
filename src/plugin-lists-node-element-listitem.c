@@ -62,19 +62,22 @@ cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *
 
 CongEditorNodeElementListitem*
 cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *editor_node_element_listitem,
-					    CongEditorWidget3* editor_widget,
-					    CongNodePtr node)
+					     CongEditorWidget3* editor_widget,
+					     CongNodePtr node,
+					     CongEditorNode *traversal_parent)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_listitem),
 					    editor_widget,
-					    node);
+					    node,
+					    traversal_parent);
 
 	return editor_node_element_listitem;
 }
 
 CongEditorNode*
 cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
-				      CongNodePtr node)
+				       CongNodePtr node,
+				       CongEditorNode *traversal_parent)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_listitem_new(%s)", node->name);
@@ -83,7 +86,8 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 	return CONG_EDITOR_NODE( cong_editor_node_element_listitem_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE, NULL),
 				  widget,
-				  node));
+				  node,
+				  traversal_parent));
 }
 
 enum CongNumeration {
