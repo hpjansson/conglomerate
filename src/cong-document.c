@@ -549,16 +549,17 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 }
 
 xmlNsPtr
-cong_document_get_nsptr (CongDocument *doc, const gchar *xmlns)
+cong_document_get_xml_ns (CongDocument *doc, 
+			  const gchar* ns_uri)
 {
 	xmlNsPtr ns;
 
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(xmlns, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (ns_uri, NULL);
 
-	ns = xmlSearchNs(PRIVATE(doc)->xml_doc,
-			 (xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
-			 xmlns);
+	ns = xmlSearchNs (PRIVATE(doc)->xml_doc,
+			  (xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
+			  ns_uri);
 
 	return ns;
 }
@@ -681,8 +682,8 @@ cong_document_get_node_name (CongDocument *doc,
 			if (ds_element) {
 				return g_strdup (cong_dispspec_element_username (ds_element));
 			} else {
-				if (cong_node_xmlns(node)) {
-					return g_strdup_printf ("<%s:%s>", cong_node_xmlns(node), node->name);
+				if (cong_node_get_ns_prefix (node)) {
+					return g_strdup_printf ("<%s:%s>", cong_node_get_ns_prefix (node), node->name);
 				} else {
 					return g_strdup_printf ("<%s>", node->name);
 				}
@@ -1314,7 +1315,7 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	}
 
 	g_assert(xml_doc->children);
-	g_assert(cong_node_is_tag (xml_doc->children, NULL, "placeholder"));
+	g_assert(cong_node_is_element (xml_doc->children, NULL, "placeholder"));
 
 	result = cong_node_recursive_dup (xml_doc->children);
 		
@@ -1324,7 +1325,7 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	xmlFreeDoc (xml_doc);
 	g_free (fake_document);
 
-	g_assert(cong_node_is_tag (result, NULL, "placeholder"));
+	g_assert(cong_node_is_element (result, NULL, "placeholder"));
 	
 	return result;
 

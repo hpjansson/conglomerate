@@ -47,7 +47,7 @@ const gchar *xml_frag_data_nice(CongNodePtr x)
 	return(s);
 }
 
-
+#if 0
 const gchar *xml_frag_name_nice(CongNodePtr x)
 {
 	const char *s;
@@ -57,6 +57,7 @@ const gchar *xml_frag_name_nice(CongNodePtr x)
 
 	return(s);
 }
+#endif
 
 
 /* Tested and works */
@@ -121,7 +122,7 @@ GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 	}
 	
 	while( (cong_node_type(node) == CONG_NODE_TYPE_ELEMENT) && 
-	       (cong_dispspec_element_span(ds, cong_node_xmlns(node), cong_node_name(node)) ) ) {
+	       (cong_dispspec_element_span(ds, cong_node_get_ns_uri (node), cong_node_get_local_name(node)) ) ) {
 
 		/* Don't list root element, in case in happens to be a span-type one; this should help prevent its removal (fix for bug #125720): */
 		{
@@ -345,6 +346,7 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
 							   xmlElementContentPtr content, 
 							   xmlNodePtr node) 
 {
+	xmlNsPtr xml_ns;
 	xmlNodePtr new_node;
 	CongDocument *cong_doc;
 
@@ -367,7 +369,11 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
 			
 			/*  create the element and add it */
 			g_print("xml_add_required_content: adding new node %s under node %s\n", content->name, node->name);
-			new_node = cong_node_new_element(content->prefix, content->name, cong_doc);
+			xml_ns = cong_node_get_ns_for_prefix (node, 
+							      content->prefix);
+			new_node = cong_node_new_element (xml_ns, 
+							  content->name, 
+							  cong_doc);
 			cong_command_add_node_set_parent(cmd, new_node, node);
 			
 			/*  recur on the new node to add anything it needs */

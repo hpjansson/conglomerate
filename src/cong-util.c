@@ -523,3 +523,36 @@ cong_util_get_int_from_rgb_hex (const gchar *string)
 	
 	return(col);
 }
+
+gboolean
+cong_util_ns_uri_equality (const gchar* uri0, 
+			   const gchar* uri1)
+{
+	return 0==cong_util_ns_uri_sort_order (uri0, 
+					       uri1);
+
+}
+
+gint
+cong_util_ns_uri_sort_order (const gchar* uri0, 
+			     const gchar* uri1)
+{
+	/* Names are the same; continue searching by namespace; order the NULL namespace before all others: */
+	if (NULL == uri0) {
+		if (NULL == uri1) {
+			return 0;
+		} else {
+			return -1; /* a is less than b */
+		}
+	} else {
+		/* "a" has non-NULL namespace: */
+		if (NULL == uri1) {
+			return 1; /* a is greater than b */
+		} else {
+			/* Both have non-NULL namespaces; order based on them: */
+			/* FIXME: do we need a less strict comparison? */
+			return strcmp(uri0, uri1);
+		}
+	}
+
+}

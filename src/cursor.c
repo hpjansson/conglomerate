@@ -80,8 +80,8 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
         CongNodePtr t;
         CongNodePtr iter, next;
 	CongNodePtr new_element;
-	const gchar *xmlns;
-	const gchar *tagname;
+	xmlNsPtr xml_ns;
+	const gchar *local_name;
 	CongDocument *doc;
 
 	g_return_val_if_fail (curs, FALSE);
@@ -90,13 +90,13 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 
 	doc = curs->doc;
 
-	xmlns = cong_node_xmlns(curs->location.node->parent);
-	tagname = cong_node_name(curs->location.node->parent);
+	xml_ns = cong_node_get_ns (curs->location.node->parent);
+	local_name = cong_node_get_local_name (curs->location.node->parent);
 
 	cong_document_begin_edit (doc);
 
 	{
-		gchar *desc = g_strdup_printf (_("Split %s tag"), tagname);
+		gchar *desc = g_strdup_printf (_("Split <%s> element"), local_name);
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
 		CongLocation new_cursor_loc;
 
@@ -115,7 +115,9 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 		   We need to create an new <para> node as a sibling of the other para, and move the second text node
 		   and all the rest of the siblings to below it.
 		*/
-		new_element = cong_node_new_element(xmlns, tagname, doc);
+		new_element = cong_node_new_element (xml_ns, 
+						     local_name,
+						     doc);
 
 		cong_command_add_node_add_after (cmd, 
 						 new_element, 

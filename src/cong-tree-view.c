@@ -803,31 +803,6 @@ static void on_cursor_change(CongView *view)
 {
 }
 
-#if 0
-CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
-{
-	for ( ; x; x = cong_node_next(x))
-	{
-		enum CongNodeType node_type = cong_node_type(x);
-		const gchar *xmlns = cong_node_xmlns(x);
-		const gchar *name = xml_frag_name_nice(x);
-		CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-		if (element) {
-			if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element)) {
-				return(cong_node_prev(x));
-			}
-
-			if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
-				return(cong_node_prev(x));
-			}
-		}
-	}
-
-	return(x);
-}
-#endif
-
 static void
 set_pixbuf (GtkTreeViewColumn *tree_column,
 	    GtkCellRenderer   *cell,

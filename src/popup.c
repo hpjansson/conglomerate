@@ -612,11 +612,11 @@ static gint my_compare_func(gconstpointer a, gconstpointer b)
 
 	name_a = cong_dispspec_element_username(elem_a);
 	if (NULL==name_a) {
-		name_a = cong_dispspec_element_tagname(elem_a);
+		name_a = cong_dispspec_element_get_local_name (elem_a);
 	}
 	name_b = cong_dispspec_element_username(elem_b);
 	if (NULL==name_b) {
-		name_b = cong_dispspec_element_tagname(elem_b);
+		name_b = cong_dispspec_element_get_local_name (elem_b);
 	}
 
 	g_assert(name_a);

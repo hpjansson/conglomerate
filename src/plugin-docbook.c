@@ -1239,13 +1239,13 @@ node_filter_promote (CongServiceNodeTool *node_tool,
 		     gpointer user_data)
 {
 	if (cong_util_is_docbook(doc)) {
-		if (cong_node_is_tag(node, NULL, "sect2")) {
+		if (cong_node_is_element(node, NULL, "sect2")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect3")) {
+		} else if (cong_node_is_element(node, NULL, "sect3")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect4")) {
+		} else if (cong_node_is_element(node, NULL, "sect4")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect5")) {
+		} else if (cong_node_is_element(node, NULL, "sect5")) {
 			return TRUE;
 		}
 
@@ -1273,13 +1273,13 @@ node_filter_demote (CongServiceNodeTool *node_tool,
 		    gpointer user_data)
 {
 	if (cong_util_is_docbook(doc)) {
-		if (cong_node_is_tag(node, NULL, "sect1")) {
+		if (cong_node_is_element(node, NULL, "sect1")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect2")) {
+		} else if (cong_node_is_element(node, NULL, "sect2")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect3")) {
+		} else if (cong_node_is_element(node, NULL, "sect3")) {
 			return TRUE;
-		} else if (cong_node_is_tag(node, NULL, "sect4")) {
+		} else if (cong_node_is_element(node, NULL, "sect4")) {
 			return TRUE;
 		}
 

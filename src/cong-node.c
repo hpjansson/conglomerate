@@ -42,24 +42,6 @@
 /* Internal function declarations: */
 
 /* Exported function definitions: */
-const gchar* cong_node_name(CongNodePtr node)
-{
-	g_return_val_if_fail(node, NULL);
-
-	return node->name;
-}
-
-const gchar* cong_node_xmlns(CongNodePtr node)
-{
-	g_return_val_if_fail(node, NULL);
-
-	if (node->ns) {
-		return node->ns->prefix;
-	} else {
-		return NULL;
-	}
-}
-
 CongNodePtr cong_node_prev(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
@@ -146,40 +128,48 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 }
 
 gboolean 
-cong_node_is_tag (CongNodePtr node, 
-		  const gchar *xmlns,
-		  const gchar *tagname)
+cong_node_is_element (CongNodePtr node, 
+		      const gchar *ns_uri,
+		      const gchar *local_name)
 {
-	/* FIXME: what about namespaces? */
-
-	g_return_val_if_fail(node, FALSE);
-	g_return_val_if_fail(tagname, FALSE);
+	g_return_val_if_fail (node, FALSE);
+	g_return_val_if_fail (local_name, FALSE);
 
 	if (node->type==XML_ELEMENT_NODE) {
-		const gchar *node_xmlns = cong_node_get_xmlns (node);
+		const gchar *node_ns_uri = cong_node_get_ns_uri (node);
 
-		if (xmlns) {
-			if (node_xmlns) {
-				if (0!=strcmp(xmlns, node_xmlns)) {
-					return FALSE;
-				}
-			} else {
-				return FALSE;
-			}
-		} else {
-			if (node_xmlns) {
-				return FALSE;
-			}
+		if (!cong_util_ns_uri_equality (ns_uri, node_ns_uri)) {
+			return FALSE;
 		}
 		
-		return 0==strcmp(tagname, node->name);
+		return 0==strcmp (local_name, node->name);
 	}
 
 	return FALSE;
 }
 
+xmlNsPtr
+cong_node_get_ns (CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+	
+	return node->ns;
+}
+
 const gchar*
-cong_node_get_xmlns (CongNodePtr node)
+cong_node_get_ns_uri (CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+	
+	if (node->ns) {
+		return node->ns->href;
+	} else {
+		return NULL;
+	}
+}
+
+const gchar*
+cong_node_get_ns_prefix (CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 	
@@ -190,6 +180,41 @@ cong_node_get_xmlns (CongNodePtr node)
 	}
 }
 
+const gchar* 
+cong_node_get_local_name (CongNodePtr node)
+{
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (node->type==XML_ELEMENT_NODE, NULL);
+
+	return node->name;
+}
+
+gchar*
+cong_node_get_qualified_name (CongNodePtr node)
+{
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (node->type==XML_ELEMENT_NODE, NULL);
+
+	if (cong_node_get_ns_prefix (node)) {				
+		return g_strdup_printf ("%s:%s", 
+					cong_node_get_ns_prefix (node), 
+					cong_node_get_local_name (node));
+	} else {
+		return g_strdup (cong_node_get_local_name (node));
+	}	
+}
+
+xmlNsPtr
+cong_node_get_ns_for_prefix (CongNodePtr node, 
+			     const gchar *prefix)
+{
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (prefix, NULL); /* FIXME: really? */
+
+	return xmlSearchNs (node->doc,
+			    node, /* FIXME: is this correct? */
+			    prefix);
+}
 
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node)
@@ -483,54 +508,50 @@ gboolean cong_node_should_recurse(CongNodePtr node)
 }
 
 /* Construction: */
-CongNodePtr cong_node_new_element(const gchar *xmlns, const gchar *tagname, CongDocument *doc)
+CongNodePtr 
+cong_node_new_element (xmlNsPtr xml_ns, 
+		       const gchar *local_name, 
+		       CongDocument *doc)
 {
-	/* xmlns can be NULL */
-	g_return_val_if_fail(tagname, NULL);
-	g_return_val_if_fail(doc, NULL);
-
-	if (xmlns) {
-		return xmlNewDocNode (cong_document_get_xml(doc), 
-				      cong_document_get_nsptr (doc, xmlns), 
-				      tagname, 
-				      NULL); /* FIXME: audit the character types here */
-	} else {
-		return xmlNewDocNode (cong_document_get_xml(doc), 
-				      NULL,
-				      tagname, 
-				      NULL); /* FIXME: audit the character types here */
-	}
-}
-
-CongNodePtr cong_node_new_element_from_dispspec(CongDispspecElement *element, CongDocument *doc)
-{
-	const gchar *xmlns;
-
-	g_return_val_if_fail (element, NULL);
+	/* xml_ns can be NULL */
+	g_return_val_if_fail (local_name, NULL);
 	g_return_val_if_fail (doc, NULL);
 
-	xmlns = cong_dispspec_element_get_xmlns(element);
-
-	if (xmlns) {
-		return xmlNewDocNode (cong_document_get_xml (doc), 
-				      cong_document_get_nsptr (doc, xmlns), 
-				      cong_dispspec_element_tagname(element), 
-				      NULL);
-	} else {
-		return xmlNewDocNode (cong_document_get_xml (doc), 
-				      NULL, 
-				      cong_dispspec_element_tagname(element), 
-				      NULL);
-	}
-
+	return xmlNewDocNode (cong_document_get_xml (doc),
+			      xml_ns,
+			      local_name, 
+			      NULL); /* FIXME: audit the character types here */
 }
 
-CongNodePtr cong_node_new_text(const char *text, CongDocument *doc)
+CongNodePtr
+cong_node_new_element_from_dispspec (CongDispspecElement *element, 
+				     CongDocument *doc)
+{
+	xmlNsPtr xml_ns;
+
+	g_return_val_if_fail (element, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+
+	xml_ns = cong_document_get_xml_ns (doc,
+					   cong_dispspec_element_get_ns_uri (element));
+
+	return xmlNewDocNode (cong_document_get_xml (doc), 
+			      xml_ns,
+			      cong_dispspec_element_get_local_name (element), 
+			      NULL);
+}
+
+CongNodePtr 
+cong_node_new_text (const char *text, 
+		    CongDocument *doc)
 {
 	return cong_node_new_text_len(text, strlen(text),doc);
 }
 
-CongNodePtr cong_node_new_text_len(const char *text, int len, CongDocument *doc)
+CongNodePtr 
+cong_node_new_text_len (const char *text, 
+			int len, 
+			CongDocument *doc)
 {
 	g_return_val_if_fail(text, NULL);
 	g_return_val_if_fail(doc, NULL);
@@ -1076,17 +1097,18 @@ void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
 }
 
 /* Utilities: */
-CongNodePtr cong_node_get_child_by_name (CongNodePtr node, 
-					 const gchar *xmlns, 
-					 const gchar *tagname)
+CongNodePtr 
+cong_node_get_child_by_name (CongNodePtr node, 
+			     const gchar *ns_uri, 
+			     const gchar *local_name)
 {
 	CongNodePtr iter;
 
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(tagname, NULL);
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (local_name, NULL);
 
 	for (iter=node->children; iter; iter=iter->next) {
-		if (cong_node_is_tag (iter, xmlns, tagname)) {
+		if (cong_node_is_element (iter, ns_uri, local_name)) {
 			return iter;
 		}
 	}

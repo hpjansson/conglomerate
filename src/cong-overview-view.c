@@ -239,8 +239,8 @@ node_creation_callback (CongTreeView *cong_tree_view,
 				/* Use red for "tag not found" errors: */ 
 				gchar *text;
 
-				if (cong_node_xmlns(node)) {
-					text= g_strdup_printf("<%s:%s>", cong_node_xmlns(node), node->name);
+				if (cong_node_get_ns_prefix (node)) {
+					text= g_strdup_printf("<%s:%s>", cong_node_get_ns_prefix (node), node->name);
 				} else {
 					text= g_strdup_printf("<%s>", node->name);
 				}

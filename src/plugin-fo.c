@@ -42,9 +42,10 @@ static gboolean is_fo(CongDocument *doc)
 
 	root = cong_document_get_root(doc);
 
-	if (cong_node_xmlns(root)) {
-		if (0==strcmp(cong_node_xmlns(root), "fo")) {
-			if (0==strcmp(cong_node_name(root), "root")) {
+	/* FIXME: do this via URI */
+	if (cong_node_get_ns_prefix (root)) {
+		if (0==strcmp(cong_node_get_ns_prefix (root), "fo")) {
+			if (0==strcmp(cong_node_get_local_name(root), "root")) {
 				return TRUE;
 			}
 		}

@@ -38,8 +38,8 @@
 /* Internal data structure declarations: */
 struct SearchTreeKey
 {
-	gchar* xmlns;
-	gchar* name;
+	gchar* ns_uri;
+	gchar* local_name;
 };
 
 typedef CongSerialisationFormat* CongSerialisationFormatPtr;
@@ -496,21 +496,23 @@ cong_dispspec_get_icon(const CongDispspec *ds)
 
 /* Getting at elements within a dispspec */
 CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
+cong_dispspec_lookup_element (const CongDispspec *ds, 
+			      const gchar* ns_uri, 
+			      const gchar* local_name)
 {
 	/* We use the GTree search structure for speed */
 	CongDispspecElement *element;
 	struct SearchTreeKey key;
 
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(tagname, NULL);
+	g_return_val_if_fail (ds, NULL);
+	g_return_val_if_fail (local_name, NULL);
 
 	g_assert(ds->search_tree);
 
-	key.xmlns = (gchar*)xmlns;
-	key.name = (gchar*)tagname;
+	key.ns_uri = (gchar*)ns_uri;
+	key.local_name = (gchar*)local_name;
 
-	element =  g_tree_lookup(ds->search_tree, &key);
+	element =  g_tree_lookup (ds->search_tree, &key);
 
 	return element;
 }
@@ -521,13 +523,19 @@ cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	return cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
+	return cong_dispspec_lookup_element (ds, 
+					     cong_node_get_ns_uri(node), 
+					     cong_node_get_local_name(node));
 }
 
 enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
+cong_dispspec_type (CongDispspec *ds, 
+		    const gchar* ns_uri, 
+		    const gchar* local_name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, tagname);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, 
+								     ns_uri, 
+								     local_name);
 
 	if (NULL==element) {
 		return CONG_ELEMENT_TYPE_UNKNOWN;
@@ -554,7 +562,7 @@ void cong_dispspec_add_element (CongDispspec* ds,
 	g_return_if_fail(element);
 
 	g_assert(element->next==NULL);
-	g_assert(element->tagname);
+	g_assert(element->local_name);
 
 	if (ds->first) {
 		g_assert(ds->last);
@@ -566,10 +574,10 @@ void cong_dispspec_add_element (CongDispspec* ds,
 	ds->last = element;
 
 	key = g_new0(struct SearchTreeKey, 1);
-	if (element->xmlns) {
-		key->xmlns = g_strdup(element->xmlns);
+	if (element->ns_uri) {
+		key->ns_uri = g_strdup (element->ns_uri);
 	}
-	key->name = element->tagname;
+	key->local_name = element->local_name;
 
 	g_tree_insert(ds->search_tree, key, element);
 }
@@ -652,20 +660,22 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
 }
 #endif
 
-const gchar *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node)
+const gchar*
+cong_dispspec_name_get (CongDispspec *ds, 
+			CongNodePtr node)
 {
 	CongDispspecElement* element;
 
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(cong_node_type(node)==CONG_NODE_TYPE_ELEMENT, NULL);
+	g_return_val_if_fail (ds, NULL);
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT, NULL);
 
-	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
+	element = cong_dispspec_lookup_node (ds, node);
 	if (element) {
 		return cong_dispspec_element_username(element);
 	}
   
-	return(xml_frag_name_nice(node));
+	return cong_node_get_local_name (node);
 }
 
 #if 0
@@ -681,9 +691,12 @@ char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
 #endif
 
 #if 1
-gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, const char *name)
+gboolean 
+cong_dispspec_element_structural (CongDispspec *ds, 
+				  const gchar *ns_uri, 
+				  const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -693,9 +706,12 @@ gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, 
 }
 
 
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, const char *name)
+gboolean 
+cong_dispspec_element_collapse (CongDispspec *ds, 
+				const gchar *ns_uri, 
+				const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -705,9 +721,12 @@ gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, co
 }
 
 
-gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const char *name)
+gboolean
+cong_dispspec_element_span (CongDispspec *ds, 
+			    const gchar *ns_uri, 
+			    const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -717,9 +736,12 @@ gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const 
 }
 
 
-gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const char *name)
+gboolean 
+cong_dispspec_element_insert (CongDispspec *ds, 
+			      const gchar *ns_uri, 
+			      const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, ns_uri, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -740,48 +762,34 @@ static gint key_compare_func (struct SearchTreeKey *a,
 	g_assert(a);
 	g_assert(b);
 
-	g_assert(a->name);
-	g_assert(b->name);
+	g_assert(a->local_name);
+	g_assert(b->local_name);
 
-	/* I believe the search will be faster if we order by name, then namespace: */
-	name_test = strcmp(a->name, b->name);
+	/* I believe the search will be faster if we order by local_name, then namespace: */
+	name_test = strcmp(a->local_name, b->local_name);
 
-	/* Names are different, sort initially on name ordering: */
+	/* Names are different, sort initially on local_name ordering: */
 	if (name_test!=0) {
 		return name_test;
 	}
 
-	/* Names are the same; continue searching by namespace; order the NULL namespace before all others: */
-	if (NULL == a->xmlns) {
-		if (NULL == b->xmlns) {
-			return 0;
-		} else {
-			return -1; /* a is less than b */
-		}
-	} else {
-		/* "a" has non-NULL namespace: */
-		if (NULL == b->xmlns) {
-			return 1; /* a is greater than b */
-		} else {
-			/* Both have non-NULL namespaces; order based on them: */
-			return strcmp(a->xmlns, b->xmlns);
-		}
-	}
+	return cong_util_ns_uri_sort_order (a->ns_uri, 
+					    b->ns_uri);
 }
 
 static void key_destroy_func (struct SearchTreeKey *key)
 {
 	g_assert(key);
 
-	if (key->xmlns) {
-		g_free(key->xmlns);
+	if (key->ns_uri) {
+		g_free (key->ns_uri);
 	}
 
-	g_assert(key->name);
+	g_assert (key->local_name);
 
-	g_free(key->name);
+	g_free (key->local_name);
 
-	g_free(key);
+	g_free (key);
 }
 
 static void value_destroy_func (gpointer data) 
@@ -913,7 +921,7 @@ parse_serialisation (CongDispspec *ds,
 	g_assert (NULL==ds->serialisation_formats);
 	
 	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
-		if (cong_node_is_tag (xml_element, NULL,"format")) {
+		if (cong_node_is_element (xml_element, NULL,"format")) {
 			ds->num_serialisation_formats++;
 		}
 	}
@@ -922,7 +930,7 @@ parse_serialisation (CongDispspec *ds,
 
 	index = 0;
 	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
-		if (cong_node_is_tag (xml_element, NULL,"format")) {
+		if (cong_node_is_element (xml_element, NULL,"format")) {
 			ds->serialisation_formats[index++] = gxx_generated_object_from_xml_tree_fn_serialisation_format (xml_element);
 		}
 	}
@@ -1159,18 +1167,18 @@ promote_element (CongDispspec * dispspec,
 		 xmlNodePtr node)
 {
 
-	if (!strcmp (cong_dispspec_element_tagname (element), xmlDocGetRootElement (node->doc)->name)) {
+	if (!strcmp (cong_dispspec_element_get_local_name (element), xmlDocGetRootElement (node->doc)->name)) {
 		return;
 	}
 
-	switch (cong_dispspec_type (dispspec, cong_node_xmlns(node->parent), node->parent->name))
+	switch (cong_dispspec_type (dispspec, cong_node_get_ns_uri (node->parent), node->parent->name))
 	{
 	default: break;
 		case CONG_ELEMENT_TYPE_SPAN:
 		{
 			if (contains_carriage_return(xmlNodeGetContent (node)))
 			{
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (node->parent),
 											     node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
@@ -1183,7 +1191,7 @@ promote_element (CongDispspec * dispspec,
 		{
 			if (contains_text (xmlNodeGetContent (node)))
 			{
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (node->parent),
 											     node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
@@ -1205,20 +1213,20 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 	if (cur) {
 		if (xmlNodeIsText (cur)) {
 			if (cur->parent->type==XML_ELEMENT_NODE) {
-				element =  cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur->parent), cur->parent->name);
+				element =  cong_dispspec_lookup_element (dispspec, cong_node_get_ns_uri (cur->parent), cur->parent->name);
 				if (element) {
 					promote_element (dispspec, element, cur);
 				}
 				else if (contains_text (xmlNodeGetContent (cur))) {
 					if (contains_carriage_return(xmlNodeGetContent (cur))) {
-						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
 													     cur->parent->name,
 													     CONG_ELEMENT_TYPE_STRUCTURAL,
 													     TRUE);
 						g_assert (ds_element);
 						cong_dispspec_add_element (dispspec, ds_element);
 					} else {
-						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
 													     cur->parent->name,
 													     CONG_ELEMENT_TYPE_SPAN,
 													     TRUE);
@@ -1226,7 +1234,7 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 						cong_dispspec_add_element (dispspec, ds_element);
 					}
 				} else {
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur->parent),
 												     cur->parent->name,
 												     CONG_ELEMENT_TYPE_STRUCTURAL,
 												     TRUE);
@@ -1257,11 +1265,11 @@ ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur)
 	g_assert (cur);
 
 	if (CONG_NODE_TYPE_ELEMENT==cong_node_type(cur)) {
-		element = cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur), cong_node_name(cur));
+		element = cong_dispspec_lookup_element (dispspec, cong_node_get_ns_uri (cur), cong_node_get_local_name (cur));
 		if (NULL==element) {
 			/* Then we've found an element that doesn't have any handler in the dispspec; better create a structural tag for it... */
-			CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur),
-										     cong_node_name(cur),
+			CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (cur),
+										     cong_node_get_local_name (cur),
 										     CONG_ELEMENT_TYPE_STRUCTURAL,
 										     TRUE);
 			g_assert (ds_element);
@@ -1299,7 +1307,7 @@ xml_to_dispspec (CongDispspec *dispspec,
 	{
 		xmlNodePtr root_element = xmlDocGetRootElement(doc);
 
-		CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(root_element),
+		CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_get_ns_uri (root_element),
 									     root_element->name,
 									     CONG_ELEMENT_TYPE_STRUCTURAL,
 									     TRUE);

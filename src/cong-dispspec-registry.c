@@ -162,6 +162,7 @@ cong_dispspec_registry_dump(CongDispspecRegistry* registry)
 	}
 }
 
+#if 0
 static gboolean
 get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 {
@@ -182,6 +183,7 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 
 	return FALSE;
 }
+#endif
 
 GtkCellRenderer*
 cong_cell_renderer_simple_new (void)

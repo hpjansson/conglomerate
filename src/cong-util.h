@@ -195,6 +195,36 @@ cong_util_draw_blended_line (GtkWidget *w,
 unsigned int
 cong_util_get_int_from_rgb_hex (const gchar *string);
 
+/**
+ * cong_util_ns_uri_equality:
+ * 
+ * Compare two namespace URIs, either or both of which can be NULL.
+ *
+ * Currently the comparison is an exact string comparison, which might be too strict,
+ * see p118 of "Effective XML" for a discussion of ambiguities in the spec.
+ *
+ * Returns: TRUE if they are the same URI (or both NULL), FALSE otherwise
+ *
+ */
+gboolean
+cong_util_ns_uri_equality (const gchar* uri0, 
+			   const gchar* uri1);
+
+/**
+ * cong_util_ns_uri_sort_order:
+ * 
+ * Compare two namespace URIs, either or both of which can be NULL.
+ *
+ * Currently the comparison is an exact string comparison, which might be too strict,
+ * see p118 of "Effective XML" for a discussion of ambiguities in the spec.
+ *
+ * Returns: 0 if they are the same URI (or both NULL), otherwise positive or negative to give an ordering
+ *
+ */
+gint
+cong_util_ns_uri_sort_order (const gchar* uri0, 
+			     const gchar* uri1);
+
 G_END_DECLS
 
 #endif

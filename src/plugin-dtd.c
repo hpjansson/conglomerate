@@ -487,7 +487,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 	case XML_ELEMENT_CONTENT_SEQ:
 		/* Add a <group> tag, and recurse; optimise away the cae where the parent is a <group> tag: */
 		{
-			if (cong_node_is_tag (node_occurrence, NULL, "group")) {
+			if (cong_node_is_element (node_occurrence, NULL, "group")) {
 				add_content_subtree_to_rng (node_occurrence,
 							    content->c1);
 				add_content_subtree_to_rng (node_occurrence,
@@ -515,7 +515,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		   So we spot simple <choice> in the tag above, and merge into it if possible; <choice> is associative and hence bracketing should make no difference...
 		 */
 		{
-			if (cong_node_is_tag (node_occurrence, NULL, "choice")) {
+			if (cong_node_is_element (node_occurrence, NULL, "choice")) {
 				/* Optimised case: */
 				add_content_subtree_to_rng (node_occurrence,
 							    content->c1);

@@ -227,31 +227,31 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 
 /* Construction  */
 CongDispspecElement*
-cong_dispspec_element_new (const gchar* xmlns, 
-			   const gchar* tagname, 
+cong_dispspec_element_new (const gchar* ns_uri, 
+			   const gchar* local_name, 
 			   enum CongElementType type,
 			   gboolean autogenerate_username)
 {
 	CongDispspecElement* element;
 
-	g_return_val_if_fail(tagname,NULL);
+	g_return_val_if_fail (local_name, NULL);
 	
-	g_message("cong_dispspec_element_new (\"%s\",\"%s\",)", xmlns, tagname);
+	g_message("cong_dispspec_element_new (\"%s\",\"%s\",)", ns_uri, local_name);
 
 	/* Use shared constructor code: */
 	element = gxx_callback_construct_dispspec_element();
 
-	if (xmlns) {
-		element->xmlns = g_strdup(xmlns);
+	if (ns_uri) {
+		element->ns_uri = g_strdup(ns_uri);
 	}
-	element->tagname = g_strdup(tagname);	
+	element->local_name = g_strdup(local_name);
 
 	if (autogenerate_username) {
 		/* Try to prettify the username if possible; 
 		   FIXME: which language should this go into? */
 		g_hash_table_insert (element->hash_of_language_to_user_name,
 				     "C",
-				     cong_eel_prettify_xml_name_with_header_capitalisation(tagname));
+				     cong_eel_prettify_xml_name_with_header_capitalisation (local_name));
 	} else {
 		/* username remains unset */
 	}
@@ -279,11 +279,11 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	g_return_if_fail (element);
 
 	/* FIXME: could autogenerate this code: */
-	if (element->xmlns) {
-		g_free (element->xmlns);
+	if (element->ns_uri) {
+		g_free (element->ns_uri);
 	}
-	if (element->tagname) {
-		g_free (element->tagname);
+	if (element->local_name) {
+		g_free (element->local_name);
 	}
 	g_hash_table_destroy (element->hash_of_language_to_user_name);
 	g_hash_table_destroy (element->hash_of_language_to_short_desc);
@@ -318,19 +318,19 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 
 
 const gchar*
-cong_dispspec_element_get_xmlns(CongDispspecElement *element)
+cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
 {
-	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail (element, NULL);
 
-	return element->xmlns;
+	return element->ns_uri;
 }
 
 const gchar*
-cong_dispspec_element_tagname(CongDispspecElement* element)
+cong_dispspec_element_get_local_name(CongDispspecElement* element)
 {
-	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail (element, NULL);
 
-	return element->tagname;
+	return element->local_name;
 }
 
 const gchar*
@@ -344,7 +344,7 @@ cong_dispspec_element_username(CongDispspecElement* element)
 	if (result) {
 		return result;
 	} else {
-		return element->tagname;
+		return element->local_name;
 	}
 }
 
@@ -654,7 +654,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 {
 	CongDispspecElement* element;
 
-	g_return_val_if_fail (cong_node_is_tag (xml_element, NULL, "element"), NULL);
+	g_return_val_if_fail (cong_node_is_element (xml_element, NULL, "element"), NULL);
 
 	DS_DEBUG_MSG1("got xml element\n");
 
@@ -694,13 +694,13 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   			}
 
 			/* Handle "key-value-list": */
-			if ( cong_node_is_tag (child, NULL, "key-value-list")) {
+			if ( cong_node_is_element (child, NULL, "key-value-list")) {
 				xmlNodePtr key_value_iter;
 				
   				DS_DEBUG_MSG1("got key-value-list\n");
 				
 				for (key_value_iter = child->children; key_value_iter; key_value_iter=key_value_iter->next) {
-					if (cong_node_is_tag (key_value_iter, NULL, "key-value-pair")) {
+					if (cong_node_is_element (key_value_iter, NULL, "key-value-pair")) {
 						DS_DEBUG_MSG1("got key-value-pair\n");
 						
 						g_hash_table_insert (element->key_value_hash,

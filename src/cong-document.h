@@ -193,8 +193,23 @@ const CongXMLChar*
 cong_document_get_dtd_public_identifier(CongDocument *doc);
 /* NULL if not present */
 
+/**
+ * cong_document_get_xml_ns:
+ * @doc:  The #CongDocument of interest
+ * @ns_uri:  The URI of the namespace
+ *
+ * Locates a namespace by URI within a CongDocument
+ *
+ * Returns: the #xmlNsPtr for the namespace, or NULL if not found
+ */
+xmlNsPtr
+cong_document_get_xml_ns (CongDocument *doc, 
+			  const gchar* ns_uri);
+
+#if 0
 xmlNsPtr
 cong_document_get_nsptr (CongDocument *doc, const gchar* xmlns);
+#endif
 
 void
 cong_document_save(CongDocument *doc, 

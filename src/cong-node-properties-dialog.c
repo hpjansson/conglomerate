@@ -463,6 +463,34 @@ static void on_tree_view_selection_change(GtkTreeSelection *treeselection,
 	
 }
 
+void 
+init_view_namespace (CongAdvancedNodePropertiesView *view)
+{
+	CongDialogCategory *category;
+	GtkWidget *label;
+	const gchar *ns_uri;
+
+	g_assert (view);
+	g_assert (cong_node_type (view->node)==CONG_NODE_TYPE_ELEMENT);
+
+	ns_uri = cong_node_get_ns_uri (view->node);
+
+	if (ns_uri) {
+		label = gtk_label_new (ns_uri);
+	} else {
+		label = gtk_label_new ("None"); /* FIXME: i18n */
+	}
+
+	category = cong_dialog_content_add_category (view->dialog_content, 
+						     _("Namespace"));
+	gtk_widget_show (label);
+	
+	cong_dialog_category_add_selflabelled_field (category, 
+						     label,
+						     TRUE);
+}
+
+
 void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
 			struct RawAttr* raw_attr)
 {
@@ -995,6 +1023,8 @@ cong_node_properties_dialog_advanced_new(CongDocument *doc,
 	init_view_xpath_view(view, &view->xpath_view);
 
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
+		init_view_namespace (view);
+
 		init_view_raw_attr(view, &view->raw_attr);
 	}
 		

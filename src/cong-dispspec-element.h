@@ -34,8 +34,11 @@ struct CongDispspecElementHeaderInfo
 
 struct CongDispspecElement
 {
-	gchar *xmlns;
-	gchar *tagname;
+	/* URI of namespace, or NULL: */
+	gchar *ns_uri;
+
+	/* Local name within namespace (if any); must be non-NULL */
+	gchar *local_name;
 
 	GHashTable *hash_of_language_to_user_name;
 	GHashTable *hash_of_language_to_short_desc;
@@ -69,17 +72,20 @@ G_BEGIN_DECLS
 
 /** 
  * cong_dispspec_element_new:
- * @xmlns: the string prefix of the namespace, or NULL
- * @tagname: the "tag name" for the new element; must be non-NULL
+ * @ns_uri: the URI of the namespace, or NULL
+ * @local_name: the local name for the new element; must be non-NULL
  * @type:
  * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
  * using "header capitalisation"
  *
  * Constructs a new #CongDispspecElement, initialising fields to sane defaults.
+ *
+ * Returns: a freshly allocated #CongDispspecElement 
+ *
  **/
 CongDispspecElement*
-cong_dispspec_element_new (const gchar* xmlns, 
-			   const gchar* tagname, 
+cong_dispspec_element_new (const gchar* ns_uri, 
+			   const gchar* local_name,
 			   enum CongElementType type,
 			   gboolean autogenerate_username);
 
@@ -88,13 +94,25 @@ void
 cong_dispspec_element_destroy (CongDispspecElement *element); 
 
 
-/** Get the namespace prefix (if any) */
+/** 
+ * cong_dispspec_element_get_ns_uri:
+ * @element: the element in question
+ * 
+ * Returns: the namespace URI for this kind of element, or NULL if none
+ *
+ */
 const gchar*
-cong_dispspec_element_get_xmlns(CongDispspecElement *element); 
+cong_dispspec_element_get_ns_uri (CongDispspecElement *element); 
 
-/** Get the tagname in a parser-friendly form */
+/**
+ * cong_dispspec_element_get_local_name:
+ * @element: the element in question
+ * 
+ * Returns: the local name (relative to its namespace, if any) for this kind of element
+ *
+ */
 const char*
-cong_dispspec_element_tagname(CongDispspecElement *element);
+cong_dispspec_element_get_local_name (CongDispspecElement *element);
 
 /** Get the name in a user-friendly form */
 const char*
