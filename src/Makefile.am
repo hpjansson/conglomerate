@@ -44,6 +44,8 @@ conge_SOURCES =             \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
   cong-error-tests.c        \
+  cong-file-export.c        \
+  cong-file-import.c        \
   cong-font.c               \
   cong-location.c           \
   cong-menus.c              \
