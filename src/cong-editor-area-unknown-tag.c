@@ -98,8 +98,13 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_unknown_tag),
 					editor_widget);
 
+#if 0
 	tag_string_begin = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>",colour_string, tagname);
 	tag_string_end = g_strdup_printf("<span foreground=\"%s\">/&lt;%s&gt;</span>",colour_string, tagname);
+#else
+	tag_string_begin = g_strdup_printf("<%s>",tagname);
+	tag_string_end = g_strdup_printf("</%s>",tagname);
+#endif
 
 
 	PRIVATE(area_unknown_tag)->outer_vcompose = cong_editor_area_composer_new (editor_widget,
@@ -144,6 +149,8 @@ cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,
 				  const gchar *tagname)
 
 {
+	g_message("cong_editor_area_unknown_tag_new(%s)", tagname);
+
 	return cong_editor_area_unknown_tag_construct
 		(g_object_new (CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE, NULL),
 		 editor_widget,

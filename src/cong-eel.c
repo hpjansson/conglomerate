@@ -10,6 +10,20 @@
 #include "global.h"
 #include "cong-eel.h"
 
+void            
+cong_eel_rectangle_construct (GdkRectangle  *rectangle,
+			      gint                  x,
+			      gint                  y,
+			      gint                  w,
+			      gint                  h)
+{
+	g_return_if_fail (rectangle);
+	rectangle->x = x;
+	rectangle->y = y;
+	rectangle->width = w;
+	rectangle->height = h;
+}
+
 /**
  * cong_eel_rectangle_contains:
  * @rectangle: Rectangle possibly containing a point.

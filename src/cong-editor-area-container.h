@@ -53,7 +53,7 @@ struct CongEditorAreaContainerClass
 			    CongEditorArea *child);
 
 	void (*for_each) (CongEditorArea *editor_area, 
-			  CongEditorCallbackFunc func, 
+			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
 };
 
@@ -71,7 +71,7 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 /* Iterate over all "non-internal" children: */
 void 
 cong_editor_area_container_for_each (CongEditorArea *editor_area, 
-				     CongEditorCallbackFunc func, 
+				     CongEditorAreaCallbackFunc func, 
 				     gpointer user_data);
 
 G_END_DECLS

@@ -38,6 +38,10 @@ static void
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
+static void 
+update_requisition (CongEditorArea *area, 
+		    int width_hint);
+
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaPixbuf, 
 			cong_editor_area_pixbuf,
@@ -50,6 +54,7 @@ cong_editor_area_pixbuf_class_init (CongEditorAreaPixbufClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
 	area_klass->render_self = render_self;
+	area_klass->update_requisition = update_requisition;
 }
 
 static void
@@ -92,6 +97,31 @@ render_self (CongEditorArea *area,
 {
 	CongEditorAreaPixbuf *area_pixbuf = CONG_EDITOR_AREA_PIXBUF(area);
 	GdkWindow *window = cong_editor_area_get_gdk_window(area);
+	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
 
-	g_message("unimplemented (area_pixbuf->render_self)");
+	gdk_draw_pixbuf (window,
+                         NULL,
+			 PRIVATE(area_pixbuf)->pixbuf,
+			 0,
+			 0,
+			 rect->x,
+			 rect->y,
+			 rect->width,
+			 rect->height,
+			 GDK_RGB_DITHER_NONE,
+			 0,
+			 0);
+}
+
+static void 
+update_requisition (CongEditorArea *area, 
+		    int width_hint)
+{
+	CongEditorAreaPixbuf *area_pixbuf = CONG_EDITOR_AREA_PIXBUF(area);
+
+	g_assert (PRIVATE(area_pixbuf)->pixbuf);
+
+	cong_editor_area_set_requisition (area,
+					  gdk_pixbuf_get_width(PRIVATE(area_pixbuf)->pixbuf),
+					  gdk_pixbuf_get_height(PRIVATE(area_pixbuf)->pixbuf));	
 }

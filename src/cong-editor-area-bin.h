@@ -60,6 +60,9 @@ cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 CongEditorArea*
 cong_editor_area_bin_new (CongEditorWidget3 *editor_widget);
 
+CongEditorArea*
+cong_editor_area_bin_get_child  (CongEditorAreaBin *area_bin);
+
 G_END_DECLS
 
 #endif

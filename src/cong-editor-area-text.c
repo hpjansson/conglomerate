@@ -87,9 +87,10 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 
 	PRIVATE(area_text)->pango_layout = pango_layout_new(gdk_pango_context_get());
 
-	pango_layout_set_text(PRIVATE(area_text)->pango_layout,
-			      text,
-			      -1);
+	pango_layout_set_text (PRIVATE(area_text)->pango_layout,
+			       text,
+			       -1);
+	/* in theory should call pango_layout_set_text instead, though this causes errors with colormaps */
 
 	PRIVATE(area_text)->font = font;
 	g_assert(PRIVATE(area_text)->font);
@@ -106,6 +107,8 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
 			   const gchar *text)
 {
+	g_message("cong_editor_area_text_new(\"%s\")", text);
+
 	return cong_editor_area_text_construct
 		(g_object_new (CONG_EDITOR_AREA_TEXT_TYPE, NULL),
 		 editor_widget,

@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * cong-editor-area-unknown_tag.h
+ * cong-editor-area-unknown-tag.h
  *
  * Copyright (C) 2003 David Malcolm
  *

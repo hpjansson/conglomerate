@@ -34,18 +34,26 @@ struct CongEditorAreaBorderDetails
 };
 
 /* Method implementation prototypes: */
+static void 
+update_requisition (CongEditorArea *area, 
+		    int width_hint);
+
+static void
+allocate_child_space (CongEditorArea *area);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaBorder, 
 			cong_editor_area_border,
-			CongEditorArea,
-			CONG_EDITOR_AREA_TYPE );
+			CongEditorAreaBin,
+			CONG_EDITOR_AREA_BIN_TYPE );
 
 static void
 cong_editor_area_border_class_init (CongEditorAreaBorderClass *klass)
 {
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
+	area_klass->update_requisition = update_requisition;
+	area_klass->allocate_child_space = allocate_child_space;
 }
 
 static void
@@ -72,6 +80,8 @@ CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 			     guint pixels)
 {
+	g_message("cong_editor_area_border_new");
+
 	return cong_editor_area_border_construct
 		(g_object_new (CONG_EDITOR_AREA_BORDER_TYPE, NULL),
 		 editor_widget,
@@ -79,3 +89,51 @@ cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 }
 
 /* Method implementation definitions: */
+static void 
+update_requisition (CongEditorArea *area, 
+		    int width_hint)
+{
+	const GtkRequisition *child_req = NULL;
+
+	CongEditorAreaBorder *border = CONG_EDITOR_AREA_BORDER(area);
+	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area);
+	CongEditorArea *child;
+
+	child = cong_editor_area_bin_get_child(bin);
+
+	if (child) {
+
+		cong_editor_area_update_requisition (child, 
+						     width_hint);
+		
+		child_req = cong_editor_area_get_requisition (child);
+		g_assert(child_req);
+		
+		cong_editor_area_set_requisition (area,
+						  child_req->width + (2 * PRIVATE(border)->pixels),
+						  child_req->height + (2 * PRIVATE(border)->pixels));
+	} else {
+		cong_editor_area_set_requisition (area,
+						  (2 * PRIVATE(border)->pixels),
+						  (2 * PRIVATE(border)->pixels));
+	}
+}
+
+static void
+allocate_child_space (CongEditorArea *area)
+{
+	CongEditorAreaBorder *border = CONG_EDITOR_AREA_BORDER(area);
+	CongEditorArea *child;
+
+	child = cong_editor_area_bin_get_child (CONG_EDITOR_AREA_BIN(area));
+
+	if (child) {
+		const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
+
+		cong_editor_area_set_allocation (child,
+						 rect->x + PRIVATE(border)->pixels,
+						 rect->y + PRIVATE(border)->pixels,
+						 rect->width - (2*PRIVATE(border)->pixels),
+						 rect->height - (2*PRIVATE(border)->pixels));
+	}
+}

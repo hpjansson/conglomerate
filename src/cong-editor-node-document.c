@@ -27,12 +27,18 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
+#include "cong-editor-area-bin.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeDocumentDetails
 {
 	int dummy;
 };
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeDocument, 
@@ -43,6 +49,10 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeDocument,
 static void
 cong_editor_node_document_class_init (CongEditorNodeDocumentClass *klass)
 {
+
+	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
+
+	node_klass->add_area = add_area;
 }
 
 static void
@@ -60,4 +70,33 @@ cong_editor_node_document_construct (CongEditorNodeDocument *editor_node_documen
 				    editor_widget,
 				    node);	
 	return editor_node_document;
+}
+
+CongEditorNode*
+cong_editor_node_document_new (CongEditorWidget3 *widget,
+			       CongNodePtr node)
+{
+	g_message("cong_editor_node_document_new()");
+
+	return CONG_EDITOR_NODE( cong_editor_node_document_construct (g_object_new (CONG_EDITOR_NODE_DOCUMENT_TYPE, NULL),
+								      widget,
+								      node)
+				 );
+}
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area)
+{
+	CongEditorArea *new_area;
+
+	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (parent_area, NULL);
+
+	new_area = cong_editor_area_bin_new (cong_editor_node_get_widget (editor_node));
+
+	cong_editor_area_container_add_child (parent_area,
+					      new_area);
+
+	return new_area;
 }

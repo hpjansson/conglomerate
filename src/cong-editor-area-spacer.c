@@ -81,6 +81,8 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 			     GtkOrientation orientation,
 			     guint spacing)
 {
+	g_message("cong_editor_area_spacer_new");
+
 	return cong_editor_area_spacer_construct
 		(g_object_new (CONG_EDITOR_AREA_SPACER_TYPE, NULL),
 		 editor_widget,

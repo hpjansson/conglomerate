@@ -1,9 +1,9 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * cong-editor-widget-impl.h
+ * cong-editor-widget3-impl.h
  *
- * Copyright (C) 2002 David Malcolm
+ * Copyright (C) 2003 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -29,49 +29,39 @@
 #ifndef __CONG_EDITOR_WIDGET3_IMPL_H__
 #define __CONG_EDITOR_WIDGET3_IMPL_H__
 
+#include <gtk/gtkenums.h>
 #include "cong-view.h"
+#include "cong-editor-area.h"
+#include "cong-editor-node.h"
 
 G_BEGIN_DECLS
 
 /* currently implemented as a GtkDrawingArea with user_data "details" pointing to a CongEditorWidget3Details */
 
 /*
+  Classes: 
+  CongEditorArea:
+  ---------------
+  Represents a visible area of the widget.  Forms a hierarchy, although the implementation is delegated to subclasses.
+  Base class handles hit testing, can do show/hide etc.
+  A parent's rectangular area fully encloses that of all of its children, so we can quickly cull branches of the tree when rendering and doing hit testing.
+
+  CongEditorNode:
+  ---------------
+  Represents a node in the document.  1-1 mapping.  Not directly visible.  Subclasses are responsible for managing a collection of CongEditorAreas.
+  Stores everything relating to the node for this widget.
+  Note that all nodes are represented, including the text nodes, etc etc...
 */
 
+
 #if 0
-struct CongElementEditor
-{
-	const CongElementEditorClass *klass;
+void
+cong_editor_element_generate_areas (CongEditorNode *editor_node,
+				    CongEditorArea *editor_area_parent);
+#endif
 
-	CongEditorWidget3 *widget;
-
-	/* An element editor actually applies to a range of sibling elements; could be a single node: */
-	CongNodePtr first_node;
-	CongNodePtr final_node;
-
-	GdkRectangle window_area; /* allocated area in window space */
-	GtkRequisition requisition;
-};
-
-struct CongElementEditorClass
-{
-	/* Methods? */
-	const gchar *name;
-	void (*on_recursive_delete)(CongElementEditor *element_editor);
-	void (*on_recursive_self_test)(CongElementEditor *element_editor);
-	gboolean (*on_document_event)(CongElementEditor *element_editor, CongDocumentEvent *event);
-	void (*get_size_requisition)(CongElementEditor *element_editor, int width_hint);
-	void (*allocate_child_space)(CongElementEditor *element_editor);
-	void (*recursive_render)(CongElementEditor *element_editor, const GdkRectangle *window_rect);
-	void (*on_button_press)(CongElementEditor *element_editor, GdkEventButton *event);
-	void (*on_motion_notify)(CongElementEditor *element_editor, GdkEventMotion *event);
-	void (*on_key_press)(CongElementEditor *element_editor, GdkEventKey *event);
-};
-
+#if 0
 void cong_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
-void cong_element_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
-void cong_element_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
-void cong_element_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
 #endif
 
 typedef struct CongEditorWidget3Details CongEditorWidget3Details;
@@ -83,11 +73,9 @@ struct CongEditorWidget3Details
 	CongEditorWidget3 *widget;
 	CongEditorWidget3View *view;
 
-#if 0
-	CongElementEditor *root_editor;
+	GHashTable *hash_of_node_to_editor;
 
-	GHashTable *hash_of_node_to_editor; /* holds all nodes which are _directly_ under the control of an editor; descendants aren't stored, but can't be determined. */
-#endif
+	CongEditorArea *test_area;
 };
 
 /* The widget "owns" a CongView, which in turn, holds a ptr back to its widget. */
@@ -101,28 +89,48 @@ struct CongEditorWidget3View
 /* Macro for getting details of a widget; this will eventually be a simple field lookup */
 #define GET_DETAILS(editor_widget) ((CongEditorWidget3Details*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
 
-#if 0
-CongNodePtr cong_element_editor_get_first_node(CongElementEditor *element_editor);
-CongNodePtr cong_element_editor_get_final_node(CongElementEditor *element_editor);
-gboolean cong_element_editor_responsible_for_node(CongElementEditor *element_editor, CongNodePtr node);
-void cong_element_editor_recursive_delete(CongElementEditor *element_editor);
-void cong_element_editor_recursive_self_test(CongElementEditor *element_editor);
-gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
-void cong_element_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint);
-void cong_element_editor_set_allocation(CongElementEditor *element_editor,
-					gint x,
-					gint y,
-					gint width,
-					gint height);
-/* these are in window coords */
-#endif
 
-#if 0
-CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget3 *widget, CongNodePtr node, const gchar* message);
-CongElementEditor *cong_section_head_editor_new(CongEditorWidget3 *widget, CongNodePtr node);
-CongElementEditor *cong_span_text_editor_new(CongEditorWidget3 *widget, CongNodePtr first_node, CongNodePtr final_node);
-#endif
+/* Methods on CongEditorNode: */
+typedef void 
+(*CongEditorAreaCallback) (CongEditorArea *area,
+			   gpointer user_data);
 
+void
+cong_editor_node_for_each_area (CongEditorNode *editor_node,
+				   CongEditorAreaCallback callback,	   
+				   gpointer user_data);
+
+/* Manufacture a debug editor node: */
+CongEditorNode*
+cong_editor_node_dummy_new (CongEditorWidget3 *widget, 
+			       CongNodePtr node, 
+			       const gchar* message);
+
+/* Manufacture an appropriate editor node: */
+CongEditorNode*
+cong_editor_node_new (CongEditorWidget3 *widget, 
+			 CongNodePtr node);
+
+/* Constructors for different types of concrete CongEditorNode subclasses: */
+CongEditorNode*
+cong_editor_node_unknown_tag_new (CongEditorWidget3 *widget, 
+				  CongNodePtr node);
+
+CongEditorNode*
+cong_editor_node_structural_tag_new (CongEditorWidget3 *widget, 
+				     CongNodePtr node);
+
+CongEditorNode*
+cong_editor_node_span_tag_new (CongEditorWidget3 *widget, 
+			       CongNodePtr node);
+
+CongEditorNode*
+cong_editor_node_text_new (CongEditorWidget3 *widget, 
+			   CongNodePtr node);
+
+CongEditorNode*
+cong_editor_node_comment_new (CongEditorWidget3 *widget, 
+			      CongNodePtr node);
 
 G_END_DECLS
 

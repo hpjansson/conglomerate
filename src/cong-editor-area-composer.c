@@ -45,7 +45,7 @@ allocate_child_space (CongEditorArea *area);
 
 static void 
 for_all (CongEditorArea *editor_area, 
-	 CongEditorCallbackFunc func, 
+	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
 
 static void
@@ -99,6 +99,8 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 			       GtkOrientation orientation,
 			       guint spacing)
 {
+	g_message("cong_editor_area_composer_new");
+
 	return cong_editor_area_composer_construct
 		(g_object_new (CONG_EDITOR_AREA_COMPOSER_TYPE, NULL),
 		 editor_widget,
@@ -199,7 +201,7 @@ allocate_child_space (CongEditorArea *area)
 
 static void 
 for_all (CongEditorArea *editor_area, 
-	 CongEditorCallbackFunc func, 
+	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
 {
 	GList *iter;

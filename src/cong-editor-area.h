@@ -37,8 +37,8 @@ typedef struct CongEditorAreaDetails CongEditorAreaDetails;
 #define CONG_EDITOR_AREA_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_TYPE, CongEditorAreaClass)
 #define IS_CONG_EDITOR_AREA(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_TYPE)
 
-typedef void (*CongEditorCallbackFunc) (CongEditorArea *editor_area, 
-					gpointer user_data);
+typedef void (*CongEditorAreaCallbackFunc) (CongEditorArea *editor_area, 
+					    gpointer user_data);
 
 struct CongEditorArea
 {
@@ -60,7 +60,7 @@ struct CongEditorAreaClass
 	void (*allocate_child_space) (CongEditorArea *area);
 
 	void (*for_all) (CongEditorArea *editor_area, 
-			 CongEditorCallbackFunc func, 
+			 CongEditorAreaCallbackFunc func, 
 			 gpointer user_data);
 
 };
@@ -125,7 +125,7 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 /* Iterate over all children of this area, even "internal" ones: */
 void
 cong_editor_area_for_all (CongEditorArea *editor_area, 
-			  CongEditorCallbackFunc func, 
+			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
 
 /* Handy utilities: */

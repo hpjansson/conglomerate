@@ -27,12 +27,19 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
+#include "cong-app.h"
+#include "cong-editor-area-text.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeUnimplementedDetails
 {
 	gchar *description;
 };
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented, 
@@ -43,6 +50,9 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented,
 static void
 cong_editor_node_unimplemented_class_init (CongEditorNodeUnimplementedClass *klass)
 {
+	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
+
+	node_klass->add_area = add_area;
 }
 
 static void
@@ -57,15 +67,11 @@ cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_no
 					  CongNodePtr node,
 					  const gchar *description)
 {
-	g_message("cong_editor_node_unimplemented_construct(%s)", description);
-
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_unimplemented),
 				    editor_widget,
 				    node);	
 
 	PRIVATE(editor_node_unimplemented)->description = g_strdup(description);
-
-	g_message("finished:cong_editor_node_unimplemented_construct(%s)", description);
 
 	return editor_node_unimplemented;
 }
@@ -82,4 +88,24 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 									   node,
 									   description)
 				 );
+}
+
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area)
+{
+	CongEditorNodeUnimplemented *editor_node_unimplemented = CONG_EDITOR_NODE_UNIMPLEMENTED(editor_node);
+	CongEditorArea *new_area;
+
+	g_return_val_if_fail (parent_area, NULL);
+
+	new_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
+					      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT],
+					      PRIVATE(editor_node_unimplemented)->description);
+
+	cong_editor_area_container_add_child (parent_area,
+					      new_area);
+
+	return new_area;
 }

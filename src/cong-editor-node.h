@@ -25,8 +25,9 @@
 #ifndef __CONG_EDITOR_NODE_H__
 #define __CONG_EDITOR_NODE_H__
 
-G_BEGIN_DECLS
+#include "cong-editor-area-container.h"
 
+G_BEGIN_DECLS
 
 #define CONG_EDITOR_NODE_TYPE	      (cong_editor_node_get_type ())
 #define CONG_EDITOR_NODE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_NODE_TYPE, CongEditorNode)
@@ -44,32 +45,41 @@ struct CongEditorNode
 	CongEditorNodeDetails *private;
 };
 
-struct CongElementEditorClass
+struct CongEditorNodeClass
 {
 	GObjectClass klass;
 
 	/* Methods? */
-#if 0
-	void (*on_recursive_delete)(CongElementEditor *element_editor);
-	void (*on_recursive_self_test)(CongElementEditor *element_editor);
-	gboolean (*on_document_event)(CongElementEditor *element_editor, CongDocumentEvent *event);
-	void (*get_size_requisition)(CongElementEditor *element_editor, int width_hint);
-	void (*allocate_child_space)(CongElementEditor *element_editor);
-	void (*recursive_render)(CongElementEditor *element_editor, const GdkRectangle *window_rect);
-	void (*on_button_press)(CongElementEditor *element_editor, GdkEventButton *event);
-	void (*on_motion_notify)(CongElementEditor *element_editor, GdkEventMotion *event);
-	void (*on_key_press)(CongElementEditor *element_editor, GdkEventKey *event);
-#endif
+
+	/* Simplistic interface for now: */
+	CongEditorArea* (*add_area) (CongEditorNode *editor_node,
+				     CongEditorAreaContainer *parent_area);
 };
 
 GType
 cong_editor_node_get_type (void);
 
+CongEditorNode*
+cong_editor_node_construct (CongEditorNode *editor_node,
+			    CongEditorWidget3* widget,
+			    CongNodePtr node);
+
 CongEditorWidget3*
-cong_editor_node_get_widget (CongEditorNode *node);
+cong_editor_node_get_widget (CongEditorNode *editor_node);
+
+CongDocument*
+cong_editor_node_get_document (CongEditorNode *editor_node);
 
 CongNodePtr
-cong_editor_node_get_node (CongEditorNode *node);
+cong_editor_node_get_node (CongEditorNode *editor_node);
+
+/* Simplistic node->area interface (1-1 for now): */
+CongEditorArea*
+cong_editor_node_get_area (CongEditorNode *editor_node);
+
+CongEditorArea*
+cong_editor_node_add_area (CongEditorNode *editor_node,
+			   CongEditorAreaContainer *parent_area);
 
 
 G_END_DECLS

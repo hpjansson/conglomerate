@@ -43,7 +43,7 @@ allocate_child_space (CongEditorArea *area);
 
 static void 
 for_all (CongEditorArea *editor_area, 
-	 CongEditorCallbackFunc func, 
+	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
 
 static void
@@ -81,8 +81,8 @@ CongEditorArea*
 cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 				CongEditorWidget3 *editor_widget)
 {
-	cong_editor_area_construct (CONG_EDITOR_AREA(area_bin),
-				    editor_widget);
+	cong_editor_area_container_construct (CONG_EDITOR_AREA_CONTAINER(area_bin),
+					      editor_widget);
 
 	return CONG_EDITOR_AREA (area_bin);
 }
@@ -90,10 +90,21 @@ cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 CongEditorArea*
 cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
 {
+	g_message("cong_editor_area_bin_new");
+	
 	return cong_editor_area_bin_construct
 		(g_object_new (CONG_EDITOR_AREA_BIN_TYPE, NULL),
 		 editor_widget);
 }
+
+CongEditorArea*
+cong_editor_area_bin_get_child  (CongEditorAreaBin *area_bin)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA_BIN(area_bin), NULL);
+
+	return PRIVATE(area_bin)->only_child;
+}
+
 
 /* Method implementation definitions: */
 static void 
@@ -137,7 +148,7 @@ allocate_child_space (CongEditorArea *area)
 
 static void 
 for_all (CongEditorArea *editor_area, 
-	 CongEditorCallbackFunc func, 
+	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
 {
 	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(editor_area);

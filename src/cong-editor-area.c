@@ -168,7 +168,7 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 	if (gdk_rectangle_intersect((GdkRectangle*)widget_rect,
 				    (GdkRectangle*)cong_editor_area_get_window_coords(area),
 				    &intersected_area)) {
-		
+
 		/* Render self: */
 		CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
 				      area,
@@ -216,6 +216,8 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 {
 	g_return_if_fail (editor_area);
 
+	g_message("cong_editor_area_set_allocation(%i,%i,%i,%i)", x, y, width, height);
+
 	PRIVATE(editor_area)->window_area.x = x;
 	PRIVATE(editor_area)->window_area.y = y;
 	PRIVATE(editor_area)->window_area.width = width;
@@ -230,7 +232,7 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 
 void
 cong_editor_area_for_all (CongEditorArea *editor_area, 
-			  CongEditorCallbackFunc func, 
+			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));

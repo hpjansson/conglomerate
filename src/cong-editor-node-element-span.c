@@ -27,12 +27,19 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
+#include "cong-editor-area-unknown-tag.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeElementSpanDetails
 {
 	int dummy;
 };
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area);
+
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementSpan, 
@@ -43,6 +50,9 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeElementSpan,
 static void
 cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 {
+	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
+
+	node_klass->add_area = add_area;
 }
 
 static void
@@ -67,8 +77,28 @@ CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,
 				   CongNodePtr node)
 {
+	g_message("cong_editor_node_element_span_new(%s)", node->name);
+
 	return CONG_EDITOR_NODE( cong_editor_node_element_span_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_SPAN_TYPE, NULL),
 				  widget,
 				  node));
+}
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area)
+{
+	CongEditorArea *new_area;
+
+	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (parent_area, NULL);
+
+	new_area = cong_editor_area_unknown_tag_new (cong_editor_node_get_widget (editor_node),
+						     cong_editor_node_get_node (editor_node)->name);
+
+	cong_editor_area_container_add_child (parent_area,
+					      new_area);
+
+	return new_area;
 }

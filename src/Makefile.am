@@ -20,7 +20,24 @@ conglomerate_SOURCES =      \
   cong-dispspec-registry.h  \
   cong-document.h           \
   cong-dtd.h                \
-  cong-editor-widget-impl.h \
+  cong-editor-area.h        \
+  cong-editor-area-bin.h    \
+  cong-editor-area-border.h \
+  cong-editor-area-composer.h \
+  cong-editor-area-container.h \
+  cong-editor-area-pixbuf.h \
+  cong-editor-area-spacer.h \
+  cong-editor-area-text.h   \
+  cong-editor-area-structural-tag.h \
+  cong-editor-area-unknown-tag.h   \
+  cong-editor-node.h        \
+  cong-editor-node-document.h \
+  cong-editor-node-element.h \
+  cong-editor-node-element-span.h \
+  cong-editor-node-element-structural.h \
+  cong-editor-node-element-unknown.h \
+  cong-editor-node-text.h        \
+  cong-editor-node-unimplemented.h \
   cong-editor-widget3-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
@@ -46,8 +63,26 @@ conglomerate_SOURCES =      \
   cong-dom-view.c           \
   cong-dtd.c                \
   cong-dummy-element-editor.c  \
+  cong-editor-area.c        \
+  cong-editor-area-bin.c    \
+  cong-editor-area-border.c \
+  cong-editor-area-composer.c \
+  cong-editor-area-container.c \
+  cong-editor-area-pixbuf.c \
+  cong-editor-area-spacer.c \
+  cong-editor-area-text.c   \
+  cong-editor-area-structural-tag.c \
+  cong-editor-area-unknown-tag.c   \
+  cong-editor-node.c        \
+  cong-editor-node-document.c \
+  cong-editor-node-element.c \
+  cong-editor-node-element-span.c \
+  cong-editor-node-element-structural.c \
+  cong-editor-node-element-unknown.c \
+  cong-editor-node-text.c        \
+  cong-editor-node-unimplemented.c \
   cong-editor-widget.c      \
-  cong-editor-widget3.c      \
+  cong-editor-widget3.c     \
   cong-eel.c                \
   cong-element-editor.c     \
   cong-error-dialog.c       \

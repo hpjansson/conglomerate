@@ -27,12 +27,19 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
+#include "cong-app.h"
+#include "cong-editor-area-text.h"
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeTextDetails
 {
 	int dummy;
 };
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeText, 
@@ -43,6 +50,9 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeText,
 static void
 cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
 {
+	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
+
+	node_klass->add_area = add_area;
 }
 
 static void
@@ -61,4 +71,41 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				    node);
 
 	return editor_node_text;
+}
+
+CongEditorNode*
+cong_editor_node_text_new (CongEditorWidget3 *widget,
+			   CongNodePtr node)
+{
+	g_message("cong_editor_node_text_new(%s)", node->content);
+
+	return CONG_EDITOR_NODE( cong_editor_node_text_construct (g_object_new (CONG_EDITOR_NODE_TEXT_TYPE, NULL),
+								  widget,
+								  node)
+				 );
+}
+
+static CongEditorArea*
+add_area (CongEditorNode *editor_node,
+	  CongEditorAreaContainer *parent_area)
+{
+	CongEditorArea *new_area;
+	gchar* stripped_text;
+
+	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (parent_area, NULL);
+
+	/* strip out surplus whitespace; use that for the cong_editor_area_text: */
+	stripped_text = cong_util_strip_whitespace_from_string (cong_editor_node_get_node (editor_node)->content);
+
+	new_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
+					      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+					      stripped_text);
+
+	g_free (stripped_text);
+	
+	cong_editor_area_container_add_child (parent_area,
+					      new_area);
+
+	return new_area;
 }
