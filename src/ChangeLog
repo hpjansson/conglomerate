@@ -1,5 +1,9 @@
 2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-text-cache.c
+
+	Added a debug option
+	
 	* cong-util.c
 
 	Use the default catalog rather than load our own, to avoid path issues

@@ -24,6 +24,9 @@
 
 #include "global.h"
 #include "cong-text-cache.h"
+#include "cong-util.h"
+
+#define DEBUG_TEXT_STRIPPING 0
 
 typedef struct CongTextCacheSpan CongTextCacheSpan;
 
@@ -187,6 +190,18 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 	} else {
 		g_assert(0);
 	}
+
+#if DEBUG_TEXT_STRIPPING
+	{
+		gchar *cleaned_input = cong_util_cleanup_text(input_string);
+		gchar *cleaned_output = cong_util_cleanup_text(text_cache->stripped_string);
+
+		g_message("stripped \"%s\" into \"%s\"", cleaned_input, cleaned_output);
+
+		g_free(cleaned_input);
+		g_free(cleaned_output);
+	}
+#endif
 }
 
 gboolean
