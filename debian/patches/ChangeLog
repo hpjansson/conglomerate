@@ -1,3 +1,7 @@
+2005-03-02 Geert Stappers <stappers@stappers.nl>
+
+	* 4sarge: build instruction for debug package are in debian/rules
+
 2004-08-20 Geert Stappers <stappers@stappers.nl>
 
 	* README.4sarge: new file

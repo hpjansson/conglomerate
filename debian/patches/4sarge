@@ -9,10 +9,6 @@
  sed -e '1s/UNRELEASED/sarge/' \
      -e '3s/expecting //' debian/changelog.orig > debian/changelog
 
- mv debian/rules debian/rules.orig
- sed -e 's/##dh_builddeb -p conglomerate-dbg/dh_builddeb -p conglomerate-dbg/' \
-     debian/rules.orig > debian/rules
- chmod +x debian/rules
 
  sed -ie 's/debian/sarge/' debian/patches/package_version.dpatch
 
