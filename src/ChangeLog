@@ -1,5 +1,9 @@
 2003-10-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c, cong-editor-widget3.c
+
+	Fixes for deletion of selection for new selection semantics
+	
 	* cong-node.c, cong-node.h, cong-range.c, cong-range.h, xmledit.c
 
 	Bulletproofing for clipboard operations

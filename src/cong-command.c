@@ -618,6 +618,22 @@ text_deletion_update_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
+static gboolean
+recursive_node_deletion_update_location_callback (CongDocument *doc,
+						  CongLocation *location, 
+						  gpointer user_data)
+{
+	CongNodePtr node = user_data;
+
+	if ((location->node==node) || cong_node_is_descendant_of (location->node, node)) {
+
+		cong_location_nullify (location);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 void 
 cong_command_add_delete_range (CongCommand *cmd,
 			       CongRange *range)
@@ -719,7 +735,7 @@ cong_command_add_delete_range (CongCommand *cmd,
 			cong_location_copy(&loc1,&range->loc0);
 		}
 
-		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		if (cong_node_supports_byte_offsets (loc0.node))
 		{
 			if (loc0.byte_offset == loc1.byte_offset) {
 				/* The end is the beginning is the end */
@@ -750,13 +766,12 @@ cong_command_add_delete_range (CongCommand *cmd,
 			}
 		} else {
 			/* Delete entire node: */
-#if 1
-			CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Deletion of a single non-textual node");
-#else
-			/* what should happen to cursor? */
-			cong_util_remove_tag (doc, 
-					      loc0.node);
-#endif
+			cong_command_for_each_location (cmd,
+							recursive_node_deletion_update_location_callback,
+							loc0.node);
+
+			cong_command_add_node_recursive_delete (cmd,
+								loc0.node);
 		}
 	}
 

@@ -1259,8 +1259,13 @@ key_press_event_handler (GtkWidget *w,
 									_("Typing"),
 									"cong-typing");
 
+			/* Do we have a selection? */
                         if (cong_selection_get_logical_end(selection)->node) {
-				cong_command_add_delete_selection (cmd);
+
+				/* Either we have an individual selected node, or a range of text.  In the latter case, we should delete it: */
+				if (cong_node_is_valid_cursor_location (cong_selection_get_logical_end(selection)->node)) {
+					cong_command_add_delete_selection (cmd);
+				}
                         }
 			cong_command_add_insert_text_at_cursor (cmd, event->string);
 			cong_command_add_nullify_selection (cmd);
