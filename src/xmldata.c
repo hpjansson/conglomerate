@@ -4,8 +4,8 @@
 #include <gtk/gtk.h>                                                            
 
 #include <stdlib.h>
+#include <string.h>
 
-#include <strtool.h>
 #include "global.h"
 
 char fake_data[] = "";
@@ -284,8 +284,6 @@ void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 		CONG_NODE_SELF_TEST(iter);
 		
 		cong_node_recursive_delete(doc, iter);
-
-		g_assert(iter->parent==NULL);
 
 		iter = next;
 	}
@@ -572,6 +570,16 @@ const char *xml_frag_name_nice(CongNodePtr x)
 
 /* Tested and works */
 
+static char *cat_string(char *head, const char *tail)
+{
+	char *new = g_malloc(strlen(head) + strlen(tail) + 1);
+	strcpy(new, head);
+	strcat(new, tail);
+	g_free(head);
+
+	return(new);
+}
+
 /* Recursively traverses the document from that node concatenating the character data into a string */
 char *xml_fetch_clean_data(CongNodePtr x)
 {
@@ -588,14 +596,14 @@ char *xml_fetch_clean_data(CongNodePtr x)
 	{
 		if (cong_node_type(n0) == CONG_NODE_TYPE_TEXT)
 		{
-			s = strdcat(s, xml_frag_data_nice(n0));
+			s = cat_string(s, xml_frag_data_nice(n0));
 		}
 		else if (cong_node_type(n0) == CONG_NODE_TYPE_ELEMENT)
 		{
 			s_sub = xml_fetch_clean_data(n0);
 			if (s_sub)
 			{
-				s = strdcat(s, s_sub);
+				s = cat_string(s, s_sub);
 				free(s_sub);
 			}
 		}
@@ -710,15 +718,27 @@ CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 /*
   Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
  */
-void xml_tag_remove(CongNodePtr x)
+void xml_tag_remove(CongDocument *doc, CongNodePtr x)
 {
 	CongNodePtr n0;
+	CongNodePtr n0_next;
 
 	g_return_if_fail(x);
 
 	/* GREP FOR MVC */
 
 #if NEW_XML_IMPLEMENTATION
+#if 1
+	for (n0 = x->children; n0; n0 = n0_next) {
+		n0_next = n0->next;
+		
+		cong_document_node_add_after(doc, n0, x);
+	}
+
+	cong_document_node_make_orphan(doc, x);
+
+	cong_node_free(x);
+#else
 	n0 = cong_node_first_child(x);
 
 	if (n0) {
@@ -750,6 +770,7 @@ void xml_tag_remove(CongNodePtr x)
 	x->last = NULL;
 
 	xmlFreeNode(x);
+#endif
 #else
 	n0 = x->child->child;
 	n0->prev = x->prev;

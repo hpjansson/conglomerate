@@ -169,7 +169,6 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_tag_remove(CongView *view, CongNodePtr x);	
 
 #define DEBUG_TEST_VIEW 1
 
@@ -316,24 +315,6 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 		g_free(text);
 	}
 }
-
-static void on_document_node_tag_remove(CongView *view, CongNodePtr node)
-{
-	CongTestView *test_view;
-	GtkTreeIter tree_iter;
-
-	g_return_if_fail(view);
-	g_return_if_fail(node);
-
-	#if DEBUG_TEST_VIEW
-	g_message("CongTestView - on_document_node_tag_remove\n");
-	#endif
-
-	test_view = CONG_TEST_VIEW(view);
-
-	if ( get_iter_for_node(test_view->private, node, &tree_iter) ) {
-	}
-}
 #endif /* #if NEW_XML_IMPLEMENTATION */
 
 GtkWidget *cong_test_view_new(CongDocument *doc)
@@ -359,7 +340,6 @@ GtkWidget *cong_test_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
-	view->view.klass->on_document_node_tag_remove = on_document_node_tag_remove;
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
 #endif

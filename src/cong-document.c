@@ -233,7 +233,8 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 	GList *iter;
 
-	g_return_if_fail(doc);
+	/* This is a special case, in that doc is allowed to be NULL (to handle the clipboard) */
+
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
@@ -243,12 +244,14 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	/* Make the change: */
 	cong_node_make_orphan(node);
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		view->klass->on_document_node_make_orphan(view, node);
+	if (doc) {
+		/* Notify listeners: */
+		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			view->klass->on_document_node_make_orphan(view, node);
+		}
 	}
 }
 
@@ -358,16 +361,7 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 	g_message("cong_document_tag_remove\n");
 	#endif
 
-	/* Make the change: */
-	xml_tag_remove(x);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		view->klass->on_document_node_tag_remove(view, x);
-	}
+	xml_tag_remove(doc, x); /* this is now a compound operation */
 }
 
 void cong_document_register_view(CongDocument *doc, CongView *view)

@@ -1,6 +1,14 @@
 creating ChangeLog
 2002-10-29 David Malcolm
 
+	* cong-document.c, cong-test-view.c, xmldata.c
+
+	MVC cleanups; removing <strtool.h> in favour of GLib
+
+	* global.h, main.c, xmledit.c
+
+	Experimental work with Pango
+
 	* dispspec.c, new_doc.c, xmledit.c
 
 	Removing <strtool.h> in favour of GLib
