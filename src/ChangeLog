@@ -1,3 +1,11 @@
+2004-10-25  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-vfs.c: 
+
+	Applied patch by Jeff Martin that removes the attempt to fixup
+	relative paths, since it appears to no longer be needed and is
+	breaking webdav support.
+
 2004-10-23  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-edit-preferences.c: 
