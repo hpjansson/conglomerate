@@ -1155,17 +1155,12 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	CongEditorWidget *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
-	/* FIXME: unimplemented */
 	g_message("span_text_editor_on_key_press");
 
 #ifndef RELEASE		
 	printf("Keyval: %d, State: %d\n", event->keyval, event->state);
 #endif
 	
-	if (event->state && event->state != 1) {
-		return;
-	}
-
 	doc = cong_editor_widget_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
