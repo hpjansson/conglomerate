@@ -1,10 +1,15 @@
+2003-11-20  Geert Stappers <stappers@stappers.nl>
+
+	* build
+	Ignore debian/files and debian/package.substvars on update.
+
 2003-11-05  Geert Stappers <stappers@stappers.nl>
 
 	* rules:
 	- patch before running ./configure.
 
 	* build:
-	Ignore the patched directory
+	Ignore the patched directory on update.
 
 	* 49_*dpatch:
 	Remove the backslahes that came in from the template.
