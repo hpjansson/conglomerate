@@ -31,6 +31,6 @@ Description: common files for the userfriendly XML editor
 
 Package: conglomerate-dbg
 Architecture: any
-Depends: conglomerate
+Depends: conglomerate-common (>= ${Upstream-Version}), ${shlibs:Depends}
 Description: userfriendly XML editor, with debug symbols
  Unstripped version of the executable
