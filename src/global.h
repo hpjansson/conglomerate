@@ -43,7 +43,7 @@ struct CongCursor
 	/* Visual representation */
 	GdkGC *gc;
 
-	int on;
+	gboolean on;
 
 	/* Conceptual location */
 	CongLocation location;
@@ -81,7 +81,8 @@ GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 /* Various view subclasses: */
 GtkWidget *cong_dom_view_new(CongDocument *doc);
 GtkWidget *cong_source_view_new(CongDocument *doc);
-GtkWidget *cong_debug_log_view_new(CongDocument *doc);
+GtkWidget *cong_debug_message_log_view_new(CongDocument *doc);
+GtkWidget *cong_debug_signal_log_view_new(CongDocument *doc);
 GtkWidget *cong_node_properties_dialog_new(CongDocument *doc, 
 					   CongNodePtr node, 
 					   GtkWindow *parent_window);

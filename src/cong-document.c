@@ -5,11 +5,231 @@
 #include "cong-view.h"
 #include "cong-error-dialog.h"
 #include "cong-dispspec.h"
+#include <libgnome/gnome-macros.h>
+#include "cong-eel.h"
+
+#include "cong-marshal.h"
+
+/* Default signal handlers: */
+static void 
+cong_document_handle_begin_edit(CongDocument *doc);
+
+static void 
+cong_document_handle_end_edit(CongDocument *doc);
+
+static void 
+cong_document_handle_node_make_orphan(CongDocument *doc, CongNodePtr node);
+
+static void
+cong_document_handle_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
+
+static void
+cong_document_handle_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
+
+static void
+cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent);
+
+static void
+cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
+
+static void
+cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value);
+
+static void
+cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
+
+static void
+cong_document_handle_selection_change(CongDocument *doc);
+
+static void
+cong_document_handle_cursor_change(CongDocument *doc);
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
-#define DEBUG_MVC 0
+#define DEBUG_MVC 1
 
+#define PRIVATE(x) ((x)->private)
+
+enum {
+	BEGIN_EDIT,
+	END_EDIT,
+	NODE_MAKE_ORPHAN,
+	NODE_ADD_AFTER,
+	NODE_ADD_BEFORE,
+	NODE_SET_PARENT,
+	NODE_SET_TEXT,
+	NODE_SET_ATTRIBUTE,
+	NODE_REMOVE_ATTRIBUTE,
+	SELECTION_CHANGE,
+	CURSOR_CHANGE,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
+struct CongDocumentDetails
+{
+	xmlDocPtr xml_doc;
+
+	CongDispspec *ds;
+
+	gchar *url;
+
+	GList *views; /* a list of CongView* */
+
+	/* cursor and selections are now properties of the document: */
+	CongCursor curs;
+	CongSelection selection;
+
+	gboolean modified; /* has the document been modified since it was last loaded/saved? */
+	GTimeVal time_of_last_save;
+
+	/* We have an SDI interface, so there should be just one primary window associated with each doc.
+	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
+	*/
+	CongPrimaryWindow *primary_window;
+
+	/* Amortisation of updates: */
+	guint edit_depth;
+};
+
+/* Exported function definitions: */
+GNOME_CLASS_BOILERPLATE(CongDocument, 
+			cong_document,
+			GObject,
+			G_TYPE_OBJECT );
+
+static void
+cong_document_class_init (CongDocumentClass *klass)
+{
+#if 0
+	G_OBJECT_CLASS (klass)->finalize = cong_document_finalize;
+	G_OBJECT_CLASS (klass)->dispose = cong_document_dispose;
+#endif
+
+	/* Set up default handlers: */
+	klass->begin_edit = cong_document_handle_begin_edit;
+	klass->end_edit = cong_document_handle_end_edit;
+	klass->node_make_orphan = cong_document_handle_node_make_orphan;
+	klass->node_add_after = cong_document_handle_node_add_after;
+	klass->node_add_before = cong_document_handle_node_add_before;
+	klass->node_set_parent = cong_document_handle_node_set_parent;
+	klass->node_set_text = cong_document_handle_node_set_text;
+	klass->node_set_attribute = cong_document_handle_node_set_attribute;
+	klass->node_remove_attribute = cong_document_handle_node_remove_attribute;
+	klass->selection_change = cong_document_handle_selection_change;
+	klass->cursor_change = cong_document_handle_cursor_change;
+
+	/* Set up the various signals: */
+	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
+					    CONG_DOCUMENT_TYPE,
+					    G_SIGNAL_RUN_FIRST,
+					    G_STRUCT_OFFSET(CongDocumentClass, begin_edit),
+					    NULL, NULL,
+					    g_cclosure_marshal_VOID__VOID,
+					    G_TYPE_NONE, 
+					    0);
+	
+	signals[END_EDIT] = g_signal_new ("end_edit",
+					  CONG_DOCUMENT_TYPE,
+					  G_SIGNAL_RUN_FIRST,
+					  G_STRUCT_OFFSET(CongDocumentClass, end_edit),
+					  NULL, NULL,
+					  g_cclosure_marshal_VOID__VOID,
+					  G_TYPE_NONE, 
+					  0);
+	
+	signals[NODE_MAKE_ORPHAN] = g_signal_new ("node_make_orphan",
+						  CONG_DOCUMENT_TYPE,
+						  G_SIGNAL_RUN_FIRST,
+						  G_STRUCT_OFFSET(CongDocumentClass, node_make_orphan),
+						  NULL, NULL,
+						  cong_cclosure_marshal_VOID__CONGNODEPTR,
+						  G_TYPE_NONE, 
+						  1, G_TYPE_POINTER);
+	
+	signals[NODE_ADD_AFTER] = g_signal_new ("node_add_after",
+						CONG_DOCUMENT_TYPE,
+						G_SIGNAL_RUN_FIRST,
+						G_STRUCT_OFFSET(CongDocumentClass, node_add_after),
+						NULL, NULL,
+						cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						G_TYPE_NONE, 
+						2, G_TYPE_POINTER, G_TYPE_POINTER);
+	
+	signals[NODE_ADD_BEFORE] = g_signal_new ("node_add_before",
+						 CONG_DOCUMENT_TYPE,
+						 G_SIGNAL_RUN_FIRST,
+						 G_STRUCT_OFFSET(CongDocumentClass, node_add_before),
+						 NULL, NULL,
+						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						 G_TYPE_NONE, 
+						 2, G_TYPE_POINTER, G_TYPE_POINTER);
+	
+	signals[NODE_SET_PARENT] = g_signal_new ("node_set_parent",
+						 CONG_DOCUMENT_TYPE,
+						 G_SIGNAL_RUN_FIRST,
+						 G_STRUCT_OFFSET(CongDocumentClass, node_set_parent),
+						 NULL, NULL,
+						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
+						 G_TYPE_NONE, 
+						 2, G_TYPE_POINTER, G_TYPE_POINTER);
+	
+	signals[NODE_SET_TEXT] = g_signal_new ("node_set_text",
+					       CONG_DOCUMENT_TYPE,
+					       G_SIGNAL_RUN_FIRST,
+					       G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
+					       NULL, NULL,
+					       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
+					       G_TYPE_NONE, 
+					       2, G_TYPE_POINTER, G_TYPE_STRING);
+	
+
+	signals[NODE_SET_ATTRIBUTE] = g_signal_new ("node_set_attribute",
+						    CONG_DOCUMENT_TYPE,
+						    G_SIGNAL_RUN_FIRST,
+						    G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
+						    NULL, NULL,
+						    cong_cclosure_marshal_VOID__CONGNODEPTR_STRING_STRING,
+						    G_TYPE_NONE, 
+						    3, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
+
+	signals[NODE_REMOVE_ATTRIBUTE] = g_signal_new ("node_remove_attribute",
+						       CONG_DOCUMENT_TYPE,
+						       G_SIGNAL_RUN_FIRST,
+						       G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
+						       NULL, NULL,
+						       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
+						       G_TYPE_NONE, 
+						       2, G_TYPE_POINTER, G_TYPE_STRING);
+
+	signals[SELECTION_CHANGE] = g_signal_new ("selection_change",
+						  CONG_DOCUMENT_TYPE,
+						  G_SIGNAL_RUN_FIRST,
+						  G_STRUCT_OFFSET(CongDocumentClass, selection_change),
+						  NULL, NULL,
+						  g_cclosure_marshal_VOID__VOID,
+						  G_TYPE_NONE, 
+						  0);
+
+	signals[CURSOR_CHANGE] = g_signal_new ("cursor_change",
+					       CONG_DOCUMENT_TYPE,
+					       G_SIGNAL_RUN_FIRST,
+					       G_STRUCT_OFFSET(CongDocumentClass, selection_change),
+					       NULL, NULL,
+					       g_cclosure_marshal_VOID__VOID,
+					       G_TYPE_NONE, 
+					       0);
+}
+
+static void
+cong_document_instance_init (CongDocument *doc)
+{
+	doc->private = g_new0(CongDocumentDetails,1);
+}
+
+#if 0
 typedef void (*CongXMLSelfTestCallback)(xmlNodePtr node, const gchar *error_message);
 
 gboolean cong_xml_selftest_node(xmlNodePtr node, CongXMLSelfTestCallback selftest_callback);
@@ -56,54 +276,23 @@ gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selfte
 		}
 	}
 }
-
-
-struct CongDocument
-{
-	int ref_count;
-
-	xmlDocPtr xml_doc;
-
-	CongDispspec *ds;
-
-	gchar *url;
-
-	GList *views; /* a list of CongView* */
-
-	/* cursor and selections are now properties of the document: */
-	CongCursor curs;
-	CongSelection selection;
-
-	gboolean modified; /* has the document been modified since it was last loaded/saved? */
-	GTimeVal time_of_last_save;
-
-	/* We have an SDI interface, so there should be just one primary window associated with each doc.
-	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
-	*/
-	CongPrimaryWindow *primary_window; 
-
-	/* Amortisation of updates: */
-	guint edit_depth;
-};
-
-CongDocument*
-cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url)
-{
-	CongDocument *doc;
-
-	g_return_val_if_fail(xml_doc!=NULL, NULL);
-#if 0
-	g_return_val_if_fail(cong_xml_selftest_doc(xml_doc, NULL), NULL);
 #endif
 
-	doc = g_new0(struct CongDocument,1);
+CongDocument*
+cong_document_construct (CongDocument *doc,
+			 xmlDocPtr xml_doc,
+			 CongDispspec *ds, 
+			 const gchar *url)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (xml_doc, NULL);
+	g_return_val_if_fail (ds, NULL);
 
-	doc->ref_count=1; /* created with an initial ref_count of 1, with all this implies */
-	doc->xml_doc = xml_doc;
-	doc->ds = ds;
-	doc->url = g_strdup(url);
+	PRIVATE(doc)->xml_doc = xml_doc;
+	PRIVATE(doc)->ds = ds;
+	PRIVATE(doc)->url = g_strdup(url);
 
-	g_get_current_time(&doc->time_of_last_save);
+	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
 
 	#if TEST_VIEW
 	{
@@ -135,26 +324,46 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	}
 	#endif
 
-	cong_cursor_init(&doc->curs, doc);
-	cong_selection_init(&doc->selection);
+	cong_cursor_init(&PRIVATE(doc)->curs, doc);
+	cong_selection_init(&PRIVATE(doc)->selection);
 
 #if 0
-	doc->curs.set = 0;
-	doc->curs.w = 0;
+	PRIVATE(doc)->curs.set = 0;
+	PRIVATE(doc)->curs.w = 0;
 #endif
 
-	cong_location_nullify(&doc->selection.loc0);
-	cong_location_nullify(&doc->selection.loc1);
+	cong_location_nullify(&PRIVATE(doc)->selection.loc0);
+	cong_location_nullify(&PRIVATE(doc)->selection.loc1);
 
 	return doc;
 }
 
+
+CongDocument*
+cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
+			       CongDispspec *ds, 
+			       const gchar *url)
+{
+	CongDocument *doc;
+
+	g_return_val_if_fail(xml_doc!=NULL, NULL);
+#if 0
+	g_return_val_if_fail(cong_xml_selftest_doc(xml_doc, NULL), NULL);
+#endif
+
+	return cong_document_construct (g_object_new (CONG_DOCUMENT_TYPE, NULL),
+					xml_doc,
+					ds,
+					url);
+}
+
+#if 0
 void
 cong_document_ref(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
-	doc->ref_count++;
+	PRIVATE(doc)->ref_count++;
 }
 
 
@@ -163,27 +372,28 @@ cong_document_unref(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
-	if ((--doc->ref_count)==0) {
-		g_assert(doc->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */
+	if ((--PRIVATE(doc)->ref_count)==0) {
+		g_assert(PRIVATE(doc)->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */
 
-		cong_cursor_uninit(&doc->curs);
+		cong_cursor_uninit(&PRIVATE(doc)->curs);
 	
-		xmlFreeDoc(doc->xml_doc);
+		xmlFreeDoc(PRIVATE(doc)->xml_doc);
 
-		if (doc->url) {
-			g_free(doc->url);
+		if (PRIVATE(doc)->url) {
+			g_free(PRIVATE(doc)->url);
 		}
 	
 		g_free(doc);
 	}
 }
+#endif
 
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return doc->xml_doc;
+	return PRIVATE(doc)->xml_doc;
 }
 
 CongNodePtr
@@ -191,7 +401,7 @@ cong_document_get_root(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return doc->xml_doc->children;
+	return PRIVATE(doc)->xml_doc->children;
 
 }
 
@@ -200,7 +410,7 @@ cong_document_get_dispspec(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return doc->ds;
+	return PRIVATE(doc)->ds;
 }
 
 CongDispspecElement*
@@ -209,7 +419,7 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	return cong_dispspec_lookup_node(doc->ds, node);
+	return cong_dispspec_lookup_node(PRIVATE(doc)->ds, node);
 }
 
 gchar*
@@ -217,10 +427,10 @@ cong_document_get_filename(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	if (doc->url) {
+	if (PRIVATE(doc)->url) {
 		gchar *filename;
 		gchar *path;
-		GnomeVFSURI *uri = gnome_vfs_uri_new(doc->url);
+		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
 		cong_error_split_uri(uri, &filename, &path);
 
@@ -239,8 +449,8 @@ gchar*
 cong_document_get_full_uri(CongDocument *doc) {
 	g_return_val_if_fail(doc, NULL);
 
-	if (doc->url) {
-		return g_strdup(doc->url);
+	if (PRIVATE(doc)->url) {
+		return g_strdup(PRIVATE(doc)->url);
 	}
 	else {
 		return NULL;
@@ -252,10 +462,10 @@ cong_document_get_parent_uri(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	if (doc->url) {
+	if (PRIVATE(doc)->url) {
 		gchar *filename;
 		gchar *path;
-		GnomeVFSURI *uri = gnome_vfs_uri_new(doc->url);
+		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
 		cong_error_split_uri(uri, &filename, &path);
 
@@ -275,13 +485,13 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	g_assert(doc->xml_doc);
+	g_assert(PRIVATE(doc)->xml_doc);
 
-	if (NULL==doc->xml_doc->extSubset) {
+	if (NULL==PRIVATE(doc)->xml_doc->extSubset) {
 		return NULL;
 	}
 
-	return doc->xml_doc->extSubset->ExternalID;
+	return PRIVATE(doc)->xml_doc->extSubset->ExternalID;
 }
 
 xmlNsPtr
@@ -292,8 +502,8 @@ cong_document_get_nsptr (CongDocument *doc, const gchar *xmlns)
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(xmlns, NULL);
 
-	ns = xmlSearchNs(doc->xml_doc,
-			 (xmlNodePtr)doc->xml_doc, /* FIXME: is this correct? */
+	ns = xmlSearchNs(PRIVATE(doc)->xml_doc,
+			 (xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
 			 xmlns);
 
 	return ns;
@@ -314,7 +524,7 @@ cong_document_save(CongDocument *doc,
 
 	file_uri = gnome_vfs_uri_new(filename);
 	
-	vfs_result = cong_xml_save_to_vfs(doc->xml_doc, 
+	vfs_result = cong_xml_save_to_vfs(PRIVATE(doc)->xml_doc, 
 					  file_uri,	
 					  &file_size);
 
@@ -336,7 +546,7 @@ cong_document_save(CongDocument *doc,
 
 	cong_document_set_modified(doc, FALSE);
 
-	g_get_current_time(&doc->time_of_last_save);
+	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
 
 	gnome_vfs_uri_unref(file_uri);
 }
@@ -346,7 +556,7 @@ cong_document_is_modified(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, FALSE);
 
-	return doc->modified;
+	return PRIVATE(doc)->modified;
 }
 
 void
@@ -354,11 +564,11 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
 {
 	g_return_if_fail(doc);
 
-	doc->modified = modified;
+	PRIVATE(doc)->modified = modified;
 
 	/* get at primary window; set title */
-	if (doc->primary_window) {
-		cong_primary_window_update_title(doc->primary_window);
+	if (PRIVATE(doc)->primary_window) {
+		cong_primary_window_update_title(PRIVATE(doc)->primary_window);
 	}
 }
 
@@ -368,8 +578,8 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 	g_return_if_fail(doc);
 	g_return_if_fail(window);
 
-	g_assert(doc->primary_window==NULL);
-	doc->primary_window = window;
+	g_assert(PRIVATE(doc)->primary_window==NULL);
+	PRIVATE(doc)->primary_window = window;
 }
 
 void 
@@ -377,14 +587,14 @@ cong_document_set_url(CongDocument *doc, const gchar *url)
 {
 	g_return_if_fail(doc);
 
-	if (doc->url) {
-		g_free(doc->url);
+	if (PRIVATE(doc)->url) {
+		g_free(PRIVATE(doc)->url);
 	}
-	doc->url = g_strdup(url);
+	PRIVATE(doc)->url = g_strdup(url);
 
 	/* get at primary window; set title */
-	if (doc->primary_window) {
-		cong_primary_window_update_title(doc->primary_window);
+	if (PRIVATE(doc)->primary_window) {
+		cong_primary_window_update_title(PRIVATE(doc)->primary_window);
 	}
 }
 
@@ -397,26 +607,24 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 
 	g_get_current_time(&current_time);
 
-	return current_time.tv_sec - doc->time_of_last_save.tv_sec;
+	return current_time.tv_sec - PRIVATE(doc)->time_of_last_save.tv_sec;
 }
 
+
+/* Public MVC hooks: */
 void cong_document_begin_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
 
-	doc->edit_depth++;
+	PRIVATE(doc)->edit_depth++;
 
 	/* If we've just started the outermost level of a series of nested edits, then notify all the views: */
-	if (1 == doc->edit_depth) {
-		GList *iter;
-		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-			CongView *view = CONG_VIEW(iter->data);
-			
-			g_assert(view->klass);
-			if (view->klass->on_document_begin_edit) {
-				view->klass->on_document_begin_edit(view);
-			}
-		}
+	if (1 == PRIVATE(doc)->edit_depth) {
+
+		/* Emit signal: */
+		g_signal_emit (G_OBJECT(doc),
+			       signals[BEGIN_EDIT], 0);
+			       
 	}
 }
 
@@ -424,21 +632,16 @@ void cong_document_end_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
 
-	g_assert(doc->edit_depth>0 && "If this assertion fails, then there is a mismatched pair of begin/end edit calls on the document");
+	g_assert(PRIVATE(doc)->edit_depth>0 && "If this assertion fails, then there is a mismatched pair of begin/end edit calls on the document");
 
-	doc->edit_depth--;
+	PRIVATE(doc)->edit_depth--;
 
 	/* If we've just finished the outermost level of a series of nested edits, then notify all the views: */
-	if (0 == doc->edit_depth) {
-		GList *iter;
-		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-			CongView *view = CONG_VIEW(iter->data);
-			
-			g_assert(view->klass);
-			if (view->klass->on_document_begin_edit) {
-				view->klass->on_document_end_edit(view);
-			}
-		}
+	if (0 == PRIVATE(doc)->edit_depth) {
+
+		/* Emit signal: */
+		g_signal_emit (G_OBJECT(doc),
+			       signals[END_EDIT], 0);
 	}
 }
 
@@ -446,92 +649,36 @@ gboolean cong_document_is_within_edit(CongDocument *doc)
 {
 	g_return_val_if_fail (doc, FALSE);
 
-	return (doc->edit_depth>0);
+	return (PRIVATE(doc)->edit_depth>0);
 }
+
 
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
-	GList *iter;
-	CongNodePtr former_parent;
+#if DEBUG_MVC
+	g_message("cong_document_node_make_orphan");
+#endif
 
-	/* This is a special case, in that doc is allowed to be NULL (to handle the clipboard) */
-
-	g_return_if_fail(node);
-
-	#if DEBUG_MVC
-	g_message("cong_document_node_make_orphan\n");
-	#endif
-
-	former_parent = node->parent;
-
-	if (doc) {
-		/* Notify listeners: */
-		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-			CongView *view = CONG_VIEW(iter->data);
-			
-			g_assert(view->klass);
-			if (view->klass->on_document_node_make_orphan) {
-				view->klass->on_document_node_make_orphan(view, TRUE, node, former_parent);
-			}
-		}
-		
-		cong_document_set_modified(doc, TRUE);
-	}
-
-	/* Make the change: */
-	cong_node_private_make_orphan(node);
-
-	if (doc) {
-		/* Notify listeners: */
-		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-			CongView *view = CONG_VIEW(iter->data);
-			
-			g_assert(view->klass);
-			if (view->klass->on_document_node_make_orphan) {
-				view->klass->on_document_node_make_orphan(view, FALSE, node, former_parent);
-			}
-		}
-		
-		cong_document_set_modified(doc, TRUE);
-	}
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_MAKE_ORPHAN], 0,
+		       node);
 }
 
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
 {
-	GList *iter;
-
-	g_assert(doc);
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_add_after\n");
+	g_message("cong_document_node_add_after");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_add_after) {
-			view->klass->on_document_node_add_after(view, TRUE, node, older_sibling);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_add_after(node, older_sibling);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_add_after) {
-			view->klass->on_document_node_add_after(view, FALSE, node, older_sibling);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_ADD_AFTER], 0,
+		       node,
+		       older_sibling);
 }
 
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
@@ -542,33 +689,14 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_add_before\n");
+	g_message("cong_document_node_add_before");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_add_before) {
-			view->klass->on_document_node_add_before(view, TRUE, node, younger_sibling);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_add_before(node, younger_sibling);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_add_before) {
-			view->klass->on_document_node_add_before(view, FALSE, node, younger_sibling);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_ADD_BEFORE], 0,
+		       node,
+		       younger_sibling);
 }
 
 void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
@@ -579,33 +707,14 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 	g_return_if_fail(node);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_parent\n");
+	g_message("cong_document_node_set_parent");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_parent) {
-			view->klass->on_document_node_set_parent(view, TRUE, node, adoptive_parent);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_set_parent(node, adoptive_parent);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_parent) {
-			view->klass->on_document_node_set_parent(view, FALSE, node, adoptive_parent);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_SET_PARENT], 0,
+		       node,
+		       adoptive_parent);
 }
 
 void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
@@ -617,110 +726,50 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	g_return_if_fail(new_content);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_text\n");
+	g_message("cong_document_node_set_text");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_text) {
-			view->klass->on_document_node_set_text(view, TRUE, node, new_content);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_set_text(node, new_content);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_text) {
-			view->klass->on_document_node_set_text(view, FALSE, node, new_content);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_SET_TEXT], 0,
+		       node,
+		       new_content);
 }
 
 void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
 {
-	GList *iter;
-
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 	g_return_if_fail(name);
 	g_return_if_fail(value);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_set_attribute\n");
+	g_message("cong_document_node_set_attribute");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_attribute) {
-			view->klass->on_document_node_set_attribute(view, TRUE, node, name, value);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_set_attribute(node, name, value);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_set_attribute) {
-			view->klass->on_document_node_set_attribute(view, FALSE, node, name, value);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_SET_ATTRIBUTE], 0,
+		       node,
+		       name,
+		       value);
 }
 
 void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
 {
-	GList *iter;
-
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 	g_return_if_fail(name);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_remove_attribute\n");
+	g_message("cong_document_node_remove_attribute");
 	#endif
 
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_remove_attribute) {
-			view->klass->on_document_node_remove_attribute(view, TRUE, node, name);
-		}
-	}
-
-	/* Make the change: */
-	cong_node_private_remove_attribute(node, name);
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_node_remove_attribute) {
-			view->klass->on_document_node_remove_attribute(view, FALSE, node, name);
-		}
-	}
-
-	cong_document_set_modified(doc, TRUE);
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[NODE_REMOVE_ATTRIBUTE], 0,
+		       node,
+		       name);
 }
 
 void cong_document_on_selection_change(CongDocument *doc)
@@ -730,11 +779,15 @@ void cong_document_on_selection_change(CongDocument *doc)
 	g_return_if_fail(doc);
 
 	#if DEBUG_MVC
-	g_message("cong_document_on_selection_change\n");
+	g_message("cong_document_on_selection_change");
 	#endif
 
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[SELECTION_CHANGE], 0);
+
 	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
@@ -751,11 +804,15 @@ void cong_document_on_cursor_change(CongDocument *doc)
 	g_return_if_fail(doc);
 
 	#if DEBUG_MVC
-	g_message("cong_document_node_on_cursor_change\n");
+	g_message("cong_document_node_on_cursor_change");
 	#endif
 
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[CURSOR_CHANGE], 0);
+
 	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
@@ -765,6 +822,10 @@ void cong_document_on_cursor_change(CongDocument *doc)
 	}
 }
 
+/* end of MVC user hooks */
+
+
+
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 {
 	GList *iter;
@@ -773,7 +834,7 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 	g_return_if_fail(x);
 
 	#if DEBUG_MVC
-	g_message("cong_document_tag_remove\n");
+	g_message("cong_document_tag_remove");
 	#endif
 
 	xml_tag_remove(doc, x); /* this is now a compound operation */
@@ -784,8 +845,8 @@ void cong_document_register_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
 
-	doc->views = g_list_prepend(doc->views, view);
-	cong_document_ref(doc);
+	PRIVATE(doc)->views = g_list_prepend(PRIVATE(doc)->views, view);
+	g_object_ref (G_OBJECT(doc));
 }
 
 void cong_document_unregister_view(CongDocument *doc, CongView *view)
@@ -793,8 +854,8 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
 
-	doc->views = g_list_remove(doc->views, view); 
-	cong_document_unref(doc);
+	PRIVATE(doc)->views = g_list_remove(PRIVATE(doc)->views, view); 
+	g_object_unref (G_OBJECT(doc));
 }
 
 
@@ -802,14 +863,14 @@ CongCursor* cong_document_get_cursor(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return &doc->curs;
+	return &PRIVATE(doc)->curs;
 }
 
 CongSelection* cong_document_get_selection(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return &doc->selection;
+	return &PRIVATE(doc)->selection;
 }
 
 PangoLanguage*
@@ -906,3 +967,342 @@ void cong_document_merge_adjacent_text_nodes(CongDocument *doc)
 	cong_document_end_edit (doc);
 
 }
+
+/* Implementation of default signal handlers: */
+static void 
+cong_document_handle_begin_edit(CongDocument *doc)
+{
+	GList *iter;
+
+#if DEBUG_MVC
+	g_message("cong_document_handle_begin_edit");
+#endif
+
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_begin_edit) {
+			view->klass->on_document_begin_edit(view);
+		}
+	}
+
+}
+
+static void 
+cong_document_handle_end_edit(CongDocument *doc)
+{
+	GList *iter;
+
+#if DEBUG_MVC
+	g_message("cong_document_handle_end_edit");
+#endif
+
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_begin_edit) {
+			view->klass->on_document_end_edit(view);
+		}
+	}
+	
+}
+
+static void 
+cong_document_handle_node_make_orphan(CongDocument *doc, CongNodePtr node)
+{
+	GList *iter;
+	CongNodePtr former_parent;
+	
+	/* This is a special case, in that doc is allowed to be NULL (to handle the clipboard) */
+	
+	g_return_if_fail(node);
+	
+#if DEBUG_MVC
+	g_message("cong_document_handle_node_make_orphan");
+#endif
+	
+	former_parent = node->parent;
+	
+	if (doc) {
+		/* Notify listeners: */
+		for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			if (view->klass->on_document_node_make_orphan) {
+				view->klass->on_document_node_make_orphan(view, TRUE, node, former_parent);
+			}
+		}
+		
+		cong_document_set_modified(doc, TRUE);
+	}
+
+	/* Make the change: */
+	cong_node_private_make_orphan(node);
+
+	if (doc) {
+		/* Notify listeners: */
+		for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			if (view->klass->on_document_node_make_orphan) {
+				view->klass->on_document_node_make_orphan(view, FALSE, node, former_parent);
+			}
+		}
+		
+		cong_document_set_modified(doc, TRUE);
+	}
+
+}
+
+static void
+cong_document_handle_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
+{
+	GList *iter;
+
+	g_assert(doc);
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_node_add_after");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_add_after) {
+			view->klass->on_document_node_add_after(view, TRUE, node, older_sibling);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_add_after(node, older_sibling);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_add_after) {
+			view->klass->on_document_node_add_after(view, FALSE, node, older_sibling);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	GList *iter;
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_node_add_before");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_add_before) {
+			view->klass->on_document_node_add_before(view, TRUE, node, younger_sibling);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_add_before(node, younger_sibling);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_add_before) {
+			view->klass->on_document_node_add_before(view, FALSE, node, younger_sibling);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_node_set_parent");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_parent) {
+			view->klass->on_document_node_set_parent(view, TRUE, node, adoptive_parent);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_set_parent(node, adoptive_parent);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_parent) {
+			view->klass->on_document_node_set_parent(view, FALSE, node, adoptive_parent);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_node_set_text");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_text) {
+			view->klass->on_document_node_set_text(view, TRUE, node, new_content);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_set_text(node, new_content);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_text) {
+			view->klass->on_document_node_set_text(view, FALSE, node, new_content);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name, const xmlChar *value)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+	g_return_if_fail(value);
+
+	#if DEBUG_MVC
+	g_message("coeng_document_node_handle_set_attribute");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_attribute) {
+			view->klass->on_document_node_set_attribute(view, TRUE, node, name, value);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_set_attribute(node, name, value);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_set_attribute) {
+			view->klass->on_document_node_set_attribute(view, FALSE, node, name, value);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(name);
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_node_remove_attribute");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_remove_attribute) {
+			view->klass->on_document_node_remove_attribute(view, TRUE, node, name);
+		}
+	}
+
+	/* Make the change: */
+	cong_node_private_remove_attribute(node, name);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_node_remove_attribute) {
+			view->klass->on_document_node_remove_attribute(view, FALSE, node, name);
+		}
+	}
+
+	cong_document_set_modified(doc, TRUE);
+}
+
+static void
+cong_document_handle_selection_change(CongDocument *doc)
+{
+	#if DEBUG_MVC
+	g_message("cong_document_handle_selection_change");
+	#endif
+}
+
+static void
+cong_document_handle_cursor_change(CongDocument *doc)
+{
+	#if DEBUG_MVC
+	g_message("cong_document_handle_change_change");
+	#endif
+}
+
+
+

@@ -3,7 +3,7 @@
 /*
  * cong-document.h
  *
- * Copyright (C) 2002 David Malcolm
+ * Copyright (C) 2003 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -31,16 +31,86 @@ G_BEGIN_DECLS
    CongDocument functions
  */
 
+#define CONG_DOCUMENT_TYPE	   (cong_document_get_type ())
+#define CONG_DOCUMENT(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_DOCUMENT_TYPE, CongDocument)
+#define CONG_DOCUMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_DOCUMENT_TYPE, CongDocumentClass)
+#define IS_CONG_DOCUMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_DOCUMENT_TYPE)
+
+typedef struct CongDocumentClass CongDocumentClass;
+typedef struct CongDocumentDetails CongDocumentDetails;
+
+struct CongDocument
+{
+	GObject object;
+
+	CongDocumentDetails *private;
+};
+
+struct CongDocumentClass
+{
+	GObjectClass klass;
+
+	/* Methods? */
+	void (*begin_edit) (CongDocument *doc);
+
+	void (*end_edit) (CongDocument *doc);
+
+	void (*node_make_orphan) (CongDocument *doc, 
+				  CongNodePtr node);
+
+	void (*node_add_after) (CongDocument *doc, 
+			   CongNodePtr node, 
+			   CongNodePtr older_sibling);
+
+	void (*node_add_before) (CongDocument *doc, 
+			    CongNodePtr node, 
+			    CongNodePtr younger_sibling);
+
+	void (*node_set_parent) (CongDocument *doc, 
+			    CongNodePtr node, 
+			    CongNodePtr adoptive_parent); /* added to end of child list */
+
+	void (*node_set_text) (CongDocument *doc, 
+			  CongNodePtr node, 
+			  const xmlChar *new_content);
+
+	void (*node_set_attribute) (CongDocument *doc, 
+				    CongNodePtr node, 
+				    const xmlChar *name, 
+				    const xmlChar *value);
+
+	void (*node_remove_attribute) (CongDocument *doc, 
+				       CongNodePtr node, 
+				       const xmlChar *name);
+	
+	void (*selection_change) (CongDocument *doc);
+
+	void (*cursor_change) (CongDocument *doc);
+};
+
+GType
+cong_document_get_type (void);
+
+CongDocument*
+cong_document_construct (CongDocument *doc,
+			 xmlDocPtr xml_doc,
+			 CongDispspec *ds, 
+			 const gchar *url);
+
 /* takes ownership of xml_doc; the new CongDocument is created with a reference count of 1; any views constructed of the document will increment its reference count */
 CongDocument*
-cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url);
+cong_document_new_from_xmldoc (xmlDocPtr xml_doc, 
+			       CongDispspec *ds, 
+			       const gchar *url);
 
+#if 0
 /* FIXME: eventually this will be a GObject, and the ref/unref functions will be redundant: */
 void
 cong_document_ref(CongDocument *doc);
 
 void
 cong_document_unref(CongDocument *doc);
+#endif
 
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc);

@@ -1,5 +1,13 @@
 2003-07-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-debug-log-view.c, cong-document.c, cong-document.h, cong-file-open.c, cong-menus.c, cong-plugin.c, cong-primary-window.c, cong-view.h, global.h
+
+	GObject-ification of CongDocument
+	
+	* cong-marshal.c, cong-marshal.h, Makefile.am
+
+	New files: Marshalling functions
+	
 	* cong-editor-widget3.c
 
 	Fixed sizing problem - stopped vcomposers being expandable

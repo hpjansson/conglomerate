@@ -575,7 +575,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	if (doc) {
 		primary_window->doc = doc;
-		cong_document_ref(doc);
+		g_object_ref(G_OBJECT(doc));
 
 		primary_window->cong_overview_view = cong_overview_view_new (doc);
 		primary_window->cong_editor_widget2 = cong_editor_widget2_new(doc);
@@ -608,7 +608,7 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 
 	if (primary_window->doc) {
 		cong_tree_view_free(primary_window->cong_overview_view);
-		cong_document_unref(primary_window->doc);
+		g_object_unref(G_OBJECT(primary_window->doc));
 	} else {
 		g_assert(primary_window->cong_overview_view==NULL);
 	}

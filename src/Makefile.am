@@ -47,6 +47,7 @@ conglomerate_SOURCES =      \
   cong-font.h               \
   cong-graph.h              \
   cong-location.h           \
+  cong-marshal.h            \
   cong-node.h               \
   cong-overview-view.h      \
   cong-parser-error.h       \
@@ -102,6 +103,7 @@ conglomerate_SOURCES =      \
   cong-font.c               \
   cong-graph.c              \
   cong-location.c           \
+  cong-marshal.c            \
   cong-menus.c              \
   cong-node-properties-dialog.c \
   cong-overview-view.c      \

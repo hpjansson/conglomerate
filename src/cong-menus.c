@@ -599,7 +599,7 @@ void open_transformed_window_for_doc(xmlDocPtr doc,
 
 	cong_primary_window_new(cong_doc);
 
-	cong_document_unref(cong_doc);
+	g_object_unref(G_OBJECT(cong_doc));
 }
 
 
@@ -1135,21 +1135,16 @@ void menu_callback_debug_progress_checklist(gpointer callback_data,
 	
 }
 
-void menu_callback_debug_document_message_log(gpointer callback_data,
-					      guint callback_action,
-					      GtkWidget *widget)
+static void make_debug_log_window (CongPrimaryWindow *primary_window,
+				   GtkWidget* log_widget, 
+				   const gchar *window_title)
 {
 	GtkWidget *window;
-	GtkWidget *log_view;
-
-	CongPrimaryWindow *primary_window = callback_data;
-	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
 	window = gnome_app_new(PACKAGE_NAME,
-			       _("Message Log - Conglomerate"));
-	log_view = cong_debug_log_view_new(doc);
+			       window_title);
 
-	gnome_app_set_contents(GNOME_APP(window), log_view);
+	gnome_app_set_contents(GNOME_APP(window), log_widget);
 
 	/* Set up the window nicely: */
 	{	
@@ -1167,6 +1162,31 @@ void menu_callback_debug_document_message_log(gpointer callback_data,
 				    400);
 
 	gtk_widget_show(GTK_WIDGET(window));
+}
+
+
+void menu_callback_debug_document_message_log(gpointer callback_data,
+					      guint callback_action,
+					      GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	make_debug_log_window (primary_window,
+			       cong_debug_message_log_view_new(doc),
+			       _("Message Log - Conglomerate"));
+}
+
+void menu_callback_debug_document_signal_log(gpointer callback_data,
+					      guint callback_action,
+					      GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	make_debug_log_window (primary_window,
+			       cong_debug_signal_log_view_new(doc),
+			       _("Signal Log - Conglomerate"));
 }
 
 void menu_callback_debug_information_alert(gpointer callback_data,
@@ -1321,6 +1341,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 	{ N_("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
+	{ N_("/Debug/Document Signal Log"),           NULL, menu_callback_debug_document_signal_log, 0, NULL },	
 	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
 	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */

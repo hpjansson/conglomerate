@@ -825,7 +825,7 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
 
 	cong_primary_window_new(cong_doc);
-	cong_document_unref(cong_doc);
+	g_object_unref(G_OBJECT(cong_doc));
 }
 
 void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
@@ -855,8 +855,7 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
 
 	cong_primary_window_new(cong_doc);
-
-	cong_document_unref(cong_doc);
+	g_object_unref(G_OBJECT(cong_doc));
 }
 
 xmlDocPtr cong_ui_transform_doc(CongDocument *doc,

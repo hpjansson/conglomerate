@@ -135,13 +135,8 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 
 	g_assert(cong_doc);
 
-#if 1
 	cong_primary_window_new(cong_doc);
-	cong_document_unref(cong_doc);
-#else
-	the_globals.xv = xmlview_new(cong_doc);
-	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
-#endif
+	g_object_unref( G_OBJECT(cong_doc));
 
 }
 

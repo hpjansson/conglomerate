@@ -30,23 +30,22 @@
 /* 
    CongView: a base class for views.  They register themselves with their document and get notified when it changes.
 
-   Will eventually be ported to the GObject framework.  Eventual goal:  we don't have CongView objects; instead, the
-   views are any GObjects e.g. GtkWidgets, they connect to signals on the CongDocument:
+   These are now deprecated; CongDocument objects are now fully-fledged GObjects, and emit signals when things change.
 
-   Signals on a CongDocument will be:
+   Hence you can just subclass a GtkWidget (or whatever), and not have to inherit from any particular Conglomerate class.
+
+   The signals on a CongDocument are:
    "begin_edit"
    "end_edit"
-   "make_orphan"
-   "add_after"
-   "add_before"
-   "set_parent"
-   "set_text"
-   "set_attribute"
-   "remove_attribute"
+   "node_make_orphan"
+   "node_add_after"
+   "node_add_before"
+   "node_set_parent"
+   "node_set_text"
+   "node_set_attribute"
+   "node_remove_attribute"
    "selection_change"
    "cursor_change"
-
-   But they still need to know their document - aha - make it an argument of the callbacks.
 */
 struct CongView
 {
