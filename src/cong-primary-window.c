@@ -35,6 +35,7 @@
 #include "cong-app.h"
 #include "cong-overview-view.h"
 #include "cong-primary-window.h"
+#include "cong-editor-widget.h"
 
 #if 0
 #include <libgnome/libgnome.h>
@@ -43,7 +44,17 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
 
-#define TEST_WIDGET3 0
+#define USE_WIDGET2 1
+#define USE_WIDGET3 0
+
+#define LOG_PRIMARY_WINDOW_CREATION 0
+
+#if LOG_PRIMARY_WINDOW_CREATION
+#define LOG_PRIMARY_WINDOW_CREATION1(msg) g_message(msg)
+#else
+#define LOG_PRIMARY_WINDOW_CREATION1(msg) ((void)0)
+#endif
+
 
 /* Main window layout:
  * 
@@ -80,13 +91,18 @@ struct CongPrimaryWindow
 
 	CongTreeView *cong_overview_view;
 
+#if USE_WIDGET2
 	GtkWidget *cong_editor_widget2;
 	GtkWidget *scroller2;
+#endif
 
-#if TEST_WIDGET3
-	GtkWidget *test_pane;
+#if USE_WIDGET3
 	GtkWidget *cong_editor_widget3;
 	GtkWidget *scroller3;
+#endif
+
+#if (USE_WIDGET2 && USE_WIDGET3)
+	GtkWidget *test_pane;
 #endif
 
 	GtkWidget *window, *menus;
@@ -420,8 +436,10 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	if (primary_window->doc) {
 		g_assert(primary_window->cong_overview_view);
+#if USE_WIDGET2
 		g_assert(primary_window->cong_editor_widget2);
-#if TEST_WIDGET3
+#endif
+#if USE_WIDGET3
 		g_assert(primary_window->cong_editor_widget3);
 #endif
 
@@ -457,38 +475,34 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 #endif
 	
 		/* --- Raw XML view --- */
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
 		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
 					 cong_dom_view_new(primary_window->doc),
 					 gtk_label_new(_("Raw XML"))
 					 );
 
-		
-#if TEST_WIDGET3
+
+#if USE_WIDGET2
+		/* Set up the editor_widget v2: */
 		{
-			primary_window->test_pane = gtk_vpaned_new();
-
-			gtk_paned_add2 (GTK_PANED(w1), 
-					primary_window->test_pane);
-			gtk_widget_show(primary_window->test_pane);
-
 			/* --- Scrolling area for editor widget 2--- */
 			primary_window->scroller2 = gtk_scrolled_window_new(NULL, NULL);
-			gtk_paned_add1 (GTK_PANED(primary_window->test_pane), 
-					primary_window->scroller2);
-			
 			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
 							GTK_POLICY_AUTOMATIC,
 							GTK_POLICY_ALWAYS);
-			
 			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
 							       GTK_WIDGET(primary_window->cong_editor_widget2));
 			gtk_widget_show (primary_window->cong_editor_widget2);
 			gtk_widget_show(primary_window->scroller2);
-			
+		}
+#endif
+
+		
+#if USE_WIDGET3
+		/* Set up the editor_widget v3: */
+		{
 			/* --- Scrolling area for editor widget 3--- */
 			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
-			gtk_paned_add2 (GTK_PANED(primary_window->test_pane),
-					primary_window->scroller3);
 			
 			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
 							GTK_POLICY_AUTOMATIC,
@@ -499,24 +513,38 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 			gtk_widget_show (primary_window->cong_editor_widget3);
 			gtk_widget_show(primary_window->scroller3);
 		}
-#else
+#endif
+
+		/* If using both editor widgets; create a pane and add them: */
+#if (USE_WIDGET2 && USE_WIDGET3)
 		{
-			/* --- Scrolling area for editor widget 2--- */
-			primary_window->scroller2 = gtk_scrolled_window_new(NULL, NULL);
+			primary_window->test_pane = gtk_vpaned_new();
+
+			gtk_paned_add2 (GTK_PANED(w1), 
+					primary_window->test_pane);
+
+			gtk_paned_add1 (GTK_PANED(primary_window->test_pane), 
+					primary_window->scroller2);
+			gtk_paned_add2 (GTK_PANED(primary_window->test_pane),
+					primary_window->scroller3);
+
+			gtk_widget_show(primary_window->test_pane);			
+		}
+#else
+		/* Merely add one of the editor widgets: */
+		{
+			#if USE_WIDGET2
 			gtk_paned_add2 (GTK_PANED(w1), 
 					primary_window->scroller2);
-			
-			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
-							GTK_POLICY_AUTOMATIC,
-							GTK_POLICY_ALWAYS);
-			
-			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
-							       GTK_WIDGET(primary_window->cong_editor_widget2));
-			gtk_widget_show (primary_window->cong_editor_widget2);
-			gtk_widget_show(primary_window->scroller2);
+			#endif
+
+			#if USE_WIDGET3
+			gtk_paned_add2 (GTK_PANED(w1), 
+					primary_window->scroller3);
+			#endif
 		}
 #endif
-		
+
 		/* TEMPORARY: Set white background */
 		
 		gcol.blue = 0xffff;
@@ -577,10 +605,17 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
 
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
 		primary_window->cong_overview_view = cong_overview_view_new (doc);
+
+#if USE_WIDGET2
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v2 widget");
 		primary_window->cong_editor_widget2 = cong_editor_widget2_new(doc);
-#if TEST_WIDGET3
+#endif
+
+#if USE_WIDGET3
 #if 1
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
 		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
 #else
 		primary_window->cong_editor_widget3 = gtk_calendar_new();
@@ -590,6 +625,9 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	cong_primary_window_make_gui(primary_window);
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
+
+
+	LOG_PRIMARY_WINDOW_CREATION1 ("Showing the primary window");
 	gtk_widget_show(GTK_WIDGET(primary_window->window));
 
 	cong_app_singleton()->primary_windows = g_list_prepend(cong_app_singleton()->primary_windows, primary_window);
@@ -597,6 +635,8 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 	if (doc) {
 		cong_document_set_primary_window(doc, primary_window);	
 	}
+
+	LOG_PRIMARY_WINDOW_CREATION1 ("Finished creating primary window");
 
 	return primary_window;
 	
