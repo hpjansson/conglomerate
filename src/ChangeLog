@@ -1,3 +1,10 @@
+2004-10-09  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c: 
+
+	In cong_document_for_each_node_recurse, don't recurse below an ENTITY_REF into the
+	ENTITY_DECL, to avoid reaching the nodes more than once, and to avoid infinite loops.
+
 2004-10-07  David Malcolm  <dmalcolm@redhat.com>
 
 	* plugin-fo.c:

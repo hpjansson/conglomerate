@@ -1862,8 +1862,20 @@ cong_document_for_each_node_recurse (CongDocument *doc,
 	if ((*callback)(doc, node, user_data, recursion_level)) {
 		return TRUE;
 	}
+
 	    
 	/* Recurse over children: */
+	/* Don't visit the children of an ENTITY_REF (i.e. the DECL); it will have been reached elsewhere in the traversal, and if you follow it here, you can get into infinite loops
+	   e.g. the case where 
+	   - ENTITY_DECL A: 
+	         - some content
+	   - ENTITY_DECL B: 
+	         - REF to A
+		    -> DECL A above
+
+	   Following the ref's children whould cause an infinite loop.	   
+	 */
+	if (cong_node_type (node)!=CONG_NODE_TYPE_ENTITY_REF)
 	{
 		CongNodePtr child_iter;
 
