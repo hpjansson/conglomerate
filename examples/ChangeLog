@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-07  David Malcolm
+
+	* test-docbook.xml
+
+	Fixing and adding stuff
+
+	* test-docbook-to-html.xsl
+
+	Initial import
+	
 2002-10-17  David Malcolm
 
 	docbook.xds
