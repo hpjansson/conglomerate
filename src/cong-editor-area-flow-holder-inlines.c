@@ -31,7 +31,7 @@
 #include "cong-editor-child-policy-inline.h"
 #include "cong-editor-line-fragments.h"
 
-#define DEBUG_LINE_FLOWS 1
+#define DEBUG_LINE_FLOWS 0
 
 
 #define PRIVATE(x) ((x)->private)
@@ -279,8 +279,6 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
-	const GtkRequisition *child_req;
-
 	CongEditorAreaFlowHolderInlines *area_flow_holder_inlines = CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area);
 
 #if 1
@@ -477,6 +475,8 @@ on_end_edit (CongDocument *doc,
 	g_assert (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(inlines));
 
 	/* Disconnect from signal: */
+	g_assert(PRIVATE(inlines)->signal_handler_id_pending_reflow != 0);
+
 	g_signal_handler_disconnect (doc,
 				     PRIVATE(inlines)->signal_handler_id_pending_reflow);
 

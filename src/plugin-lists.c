@@ -216,7 +216,9 @@ manufacture_editor_node_listitem (CongPluginEditorNodeFactory *plugin_editor_nod
 				  CongEditorNode *traversal_parent,
 				  gpointer user_data)
 {
+#if 0
 	g_message("manufacture_editor_node_listitem");
+#endif
 
 	return CONG_EDITOR_NODE_ELEMENT( cong_editor_node_element_listitem_new (editor_widget,
 										node,

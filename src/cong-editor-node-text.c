@@ -651,7 +651,7 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 						       &trailing)) {
 		int original_byte_offset;
 
-#if 1
+#if 0
 		g_message("(%i,%i) -> index %i", x,y, index_);
 #endif
 
@@ -690,8 +690,9 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 	GtkWindow *parent_window;
 
-
+#if 0
 	g_message("on_signal_button_press");
+#endif
 
 	editor_widget = cong_editor_node_get_widget (CONG_EDITOR_NODE(editor_node_text));
 	parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget)));

@@ -44,7 +44,9 @@ manufacture_editor_node_paragraph (CongPluginEditorNodeFactory *plugin_editor_no
 				   CongEditorNode *traversal_parent,
 				   gpointer user_data)
 {
+#if 0
 	g_message("manufacture_editor_node_paragraph");
+#endif
 
 	return CONG_EDITOR_NODE_ELEMENT( cong_editor_node_element_paragraph_new (editor_widget,
 										 node,

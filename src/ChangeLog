@@ -1,5 +1,9 @@
 2003-08-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c
+
+	Removed some debug logging
+
 	* cong-document.c, cong-editor-area-flow-holder-inlines.c, cong-editor-widget3.c, plugin-lists.c, plugin-paragraph.c
 
 	Removed some debug logging

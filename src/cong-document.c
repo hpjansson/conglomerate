@@ -1447,13 +1447,16 @@ cong_document_for_each_location (CongDocument *doc,
 	cong_location_copy (&logical_sel_start, cong_selection_get_logical_start (PRIVATE(doc)->selection));
 	cong_location_copy (&logical_sel_end, cong_selection_get_logical_end (PRIVATE(doc)->selection));
 
+#if 0
 	g_message ("test for update of cursor location from (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
+#endif
 
 	if ( callback (doc,
 		       &PRIVATE(doc)->cursor.location,
 		       user_data)) {
+#if 0
 		g_message ("update of cursor location to (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
-
+#endif
 		cong_document_on_cursor_change (doc);
 	}
 

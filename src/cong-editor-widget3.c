@@ -1421,7 +1421,8 @@ on_root_requisition_change (CongEditorArea *child_area,
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data);
 
-	g_message("on_root_requisition_change");
+	LOG_EDITOR_AREA1 ("on_root_requisition_change");
+
 	gtk_widget_queue_resize (GTK_WIDGET(editor_widget));
 }
 
