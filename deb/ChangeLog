@@ -1,7 +1,13 @@
 2003-11-05  Geert Stappers <stappers@stappers.nl>
 
 	* rules:
-	- patch before running configure
+	- patch before running ./configure.
+
+	* build:
+	Ignore the patched directory
+
+	* 49_*dpatch:
+	Remove the backslahes that came in from the template.
 
 2003-11-02  Geert Stappers <stappers@stappers.nl>
 

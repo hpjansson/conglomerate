@@ -2,22 +2,22 @@
 # debian/patches/49_no_scrollkeeper-update.dpatch
 # 
 
-#  All lines beginning with \`## DP:' are a description of the patch.
+#  All lines beginning with `## DP:' are a description of the patch.
 ## DP: avoid `scrollkeeper-update` during "make install"
 
-if [ \$# -ne 1 ]; then
-    echo >&2 "\`basename \$0\`: script expects -patch|-unpatch as argument"
+if [ $# -ne 1 ]; then
+    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
     exit 1
 fi
 
 [ -f debian/patches/00patch-opts ] && . debian/patches/00patch-opts
-patch_opts="\${patch_opts:--f --no-backup-if-mismatch}"
+patch_opts="${patch_opts:--f --no-backup-if-mismatch}"
 
-case "\$1" in
-       -patch) patch \$patch_opts -p0 < \$0;;
-       -unpatch) patch \$patch_opts -p0 -R < \$0;;
+case "$1" in
+       -patch) patch $patch_opts -p0 < $0;;
+       -unpatch) patch $patch_opts -p0 -R < $0;;
         *)
-                echo >&2 "\`basename \$0\`: script expects -patch|-unpatch as argument"
+                echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
                 exit 1;;
 esac
 
