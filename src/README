@@ -14,6 +14,7 @@ GTK/GDK 2.0.5 or later, as well as Flux 0.2.8, available from
 
 ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
 
+(19 augustus 2002: 0.2.8 is still the "current" flux for conge)
 You should configure, make, and install this to your development prefix.  You
 may then need to rename (prefix)/lib/libflux.a to (prefix)/lib/libflux-old.a
 This is a temporary workaround to deal with the fact that libflux has been
