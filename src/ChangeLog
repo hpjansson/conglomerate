@@ -1,5 +1,9 @@
 2003-10-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node.c
+
+	Added assertions to trap missing method handling implementations
+
 	* cong-dispspec-registry.c, cong-document.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-file-open.c, cong-parser-error.c, cong-parser-error.h, cong-plugin.c, cong-plugin.h, cong-vfs.c, cong-vfs.h, plugin-convert-case.c
 
 	Removed lots of GnomeVFS URI objects; replaced with stringified URIs

@@ -66,8 +66,10 @@ struct CongEditorNodeDetails
 static enum CongFlowType
 get_flow_type(CongEditorNode *editor_node);
 
+#if 0
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_block_area);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_line_areas_recursive);
+#endif
 
 
 /* Exported function definitions: */
@@ -79,12 +81,14 @@ GNOME_CLASS_BOILERPLATE(CongEditorNode,
 static void
 cong_editor_node_class_init (CongEditorNodeClass *klass)
 {
+#if 0
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
 					      generate_block_area);
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
 					      generate_line_areas_recursive);
+#endif
 
 	signals[LINE_REGENERATION_REQUIRED] = g_signal_new ("line_regeneration_required",
 							    CONG_EDITOR_NODE_TYPE,
@@ -327,6 +331,8 @@ CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
 	g_return_val_if_fail (editor_node, NULL);
+
+	g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_block_area != NULL);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
@@ -340,6 +346,8 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint initial_indent)
 {
 	g_return_val_if_fail (editor_node, NULL);
+
+	g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive != NULL);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
@@ -359,12 +367,27 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 {
+	enum CongFlowType flow_type;
+		
 	g_return_val_if_fail (editor_node, CONG_FLOW_TYPE_BLOCK);
+
 	
-	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
-						       editor_node,
-						       get_flow_type, 
-						       (editor_node));
+	flow_type = CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
+							    editor_node,
+							    get_flow_type, 
+							    (editor_node));
+
+	switch (flow_type) {
+	default: g_assert_not_reached();
+	case CONG_FLOW_TYPE_BLOCK:
+		g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_block_area != NULL);
+		break;
+	case CONG_FLOW_TYPE_INLINE:
+		g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive != NULL);
+		break;
+	}
+	
+	return flow_type;
 }
 
 gboolean
