@@ -40,14 +40,14 @@ typedef struct CongEditorAreaTextFragmentDetails CongEditorAreaTextFragmentDetai
 
 struct CongEditorAreaTextFragment
 {
-	CongEditorAreaText area_text;
+	CongEditorArea area;
 
 	CongEditorAreaTextFragmentDetails *private;
 };
 
 struct CongEditorAreaTextFragmentClass
 {
-	CongEditorAreaTextClass klass;
+	CongEditorAreaClass klass;
 };
 
 GType
@@ -56,26 +56,24 @@ cong_editor_area_text_fragment_get_type (void);
 CongEditorArea*
 cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_fragment,
 					  CongEditorWidget3 *editor_widget,
-					  CongFont *font,
-					  const GdkColor *fg_col,
-					  const gchar *text,
-					  gboolean use_markup,
-					  gint width,
-					  gint height,
-					  gint text_offset);
+					  PangoLayout *pango_layout,
+					  guint line_index,
+					  int baseline);
 
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
-				    CongFont *font,
-				    const GdkColor *fg_col,
-				    const gchar *text,
-				    gboolean use_markup,
-				    gint width,
-				    gint height,
-				    gint text_offset);
+				    PangoLayout *pango_layout,
+				    guint line_index,
+				    int baseline);
 
-gint
-cong_editor_area_text_fragment_get_text_offset (CongEditorAreaTextFragment *area_text_fragment);
+PangoLayoutLine*
+cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_text_fragment);
+
+gboolean
+cong_editor_area_text_fragment_x_to_index (CongEditorAreaTextFragment *area_text_fragment,
+					   int x,
+					   int *index_,
+					   int *trailing);
 
 G_END_DECLS
 
