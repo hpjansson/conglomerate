@@ -168,6 +168,9 @@ gint curs_data_insert(struct curs* curs, char *s)
 int curs_paragraph_insert(struct curs* curs)
 {
 	TTREE *t, *dummy;
+	CongDispspec *ds;
+	CongDispspecElement *para;
+	const char *tagname;
 
 	g_assert(curs!=NULL);
 	
@@ -181,6 +184,18 @@ int curs_paragraph_insert(struct curs* curs)
 	if (xml_frag_type(curs->t) != XML_DATA) return(0);
 #endif
 
+	g_assert(curs->xed);
+	ds = curs->xed->displayspec;
+
+	para = cong_dispspec_get_paragraph(ds);
+
+	if (NULL==para) {
+		/* The dispspec does not have a "paragraph" tag */
+		return 0;
+	}
+
+	tagname = cong_dispspec_element_tagname(para);
+
 #if 1
 	t = cong_location_xml_frag_data_nice_split2(&curs->location);
 	cong_location_set(&curs->location,t->next,0);
@@ -190,10 +205,13 @@ int curs_paragraph_insert(struct curs* curs)
 	curs->c = 0;
 #endif
 
+
 	dummy = ttree_node_add(0, "dummy", 5);
 	
 	ttree_node_add(dummy, "tag_empty", 9);
-	ttree_node_add(dummy->child, "p", 1);
+	ttree_node_add(dummy->child, tagname, strlen(tagname));
+
+	printf("inserting paragraph using tag <%s>\n",tagname);
 
 	t->next->prev = dummy->child;
 	dummy->child->next = t->next;

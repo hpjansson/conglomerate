@@ -35,6 +35,8 @@ enum CongElementType
 
 	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
 
+	CONG_ELEMENT_TYPE_PARAGRAPH,
+
 	/* Other types?  Table? Plugin widget/Bonobo control? */
 
 	CONG_ELEMENT_TYPE_UNKNOWN
@@ -243,16 +245,20 @@ struct cong_globals
   GdkGC *insert_element_gc;
   int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
 
+#if 0
   TTREE *vect_global;
   TTREE *medias_global;
   TTREE *class_global;
   TTREE *users_global;
   TTREE *user_data;
   struct xed *meta_xed;
+#endif
   TTREE *clipboard;
+#if 0
   TTREE *insert_meta_section_tag;
 
   char *server, *user, *pass;
+#endif
 
 #if 0
   guint status_main_ctx;
@@ -373,6 +379,10 @@ cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname);
 
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds);
+
+/* Will return NULL if no such tag exists */
+CongDispspecElement*
+cong_dispspec_get_paragraph(CongDispspec *ds);
 
 /** Get the tagname in a parser-friendly form */
 const char*

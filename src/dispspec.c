@@ -39,6 +39,8 @@ struct CongDispspec
 
 	gchar* name;
 	gchar* desc;
+
+	CongDispspecElement *paragraph;
 };
 
 void cong_dispspec_init(TTREE *ds);
@@ -147,6 +149,10 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
 							
 							cong_dispspec_add_element(ds,element);
+
+							if (element->type==CONG_ELEMENT_TYPE_PARAGRAPH){
+								ds->paragraph=element;
+							}
 						}
 						
 					} else if (0==strcmp(cur->name,"metadata")) {
@@ -646,7 +652,12 @@ cong_dispspec_ttree_colour_get(TTREE* tt)
 CongDispspecElement*
 cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 {
-	CongDispspecElement* element = ds->first;
+	CongDispspecElement *element;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(tagname, NULL);
+
+	element = ds->first;
 
 	while (element) {
 		g_assert(element->tagname);
@@ -663,7 +674,17 @@ cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds)
 {
+	g_return_val_if_fail(ds, NULL);
+
 	return ds->first;
+}
+
+CongDispspecElement*
+cong_dispspec_get_paragraph(CongDispspec *ds)
+{
+	g_return_val_if_fail(ds, NULL);
+
+	return ds->paragraph;
 }
 
 const char*
@@ -814,6 +835,8 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 				element->type = CONG_ELEMENT_TYPE_INSERT;			
 			} else if (0==strcmp(type,"embed-external-file")) {
 				element->type = CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE;
+			} else if (0==strcmp(type,"paragraph")) {
+				element->type = CONG_ELEMENT_TYPE_PARAGRAPH;
 			}
 		}
 	}

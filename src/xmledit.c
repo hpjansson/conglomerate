@@ -1224,6 +1224,7 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 	UNUSED_VAR(int pushed = 0)
 	int draw_tag_lev_new;
 	int width;
+	CongDispspec *ds = xed->displayspec;
 
 #if 0
 	draw_tag_lev = xed_xml_depth(x) - 1;
@@ -1306,9 +1307,12 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 				continue;
 			}
 		}
-		else if (type == XML_TAG_EMPTY && !strcasecmp("p", name))
+		else if (type == XML_TAG_EMPTY && CONG_ELEMENT_TYPE_PARAGRAPH==cong_dispspec_type(ds, name))
 		{
 			/* Paragraph. Implies linewrap */
+#if 0
+			printf("got paragraph in xed_xml_content_tag, tag=<%s>\n", name);
+#endif
 			
 			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
 			else
@@ -1457,6 +1461,7 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 	UNUSED_VAR(int height = 0)
 	int draw_tag_lev = 0, draw_tag_lev_new;
 	int width;
+	CongDispspec *ds = xed->displayspec;
 
 
 	xed->mode = mode;
@@ -1502,9 +1507,12 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 		{
 			if (xed_xml_content_data_root(xed, x, draw_tag_lev)) draw_tag_lev = 0;
 		}
-		else if (type == XML_TAG_EMPTY && !strcasecmp("p", name))
+		else if (type == XML_TAG_EMPTY && CONG_ELEMENT_TYPE_PARAGRAPH==cong_dispspec_type(ds, name))
 		{
 			/* Linewrap */
+#if 0
+			printf("got paragraph in xed_xml_content_draw, name=<%s>\n",name);
+#endif
 
 			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
 			else
