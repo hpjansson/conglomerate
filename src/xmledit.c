@@ -1,5 +1,3 @@
-#include <strtool.h>
-
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
@@ -7,8 +5,8 @@
 #include <stdlib.h>
 #include <ttree.h>
 #include <xml.h>
+#include <strtool.h>
 #include "global.h"
-
 
 #define ttree_node_add(a, b, c) ttree_node_add(a, (unsigned char *) b, c)
 
@@ -475,7 +473,11 @@ struct xed *xmledit_new(TTREE *x, TTREE *displayspec)
 	gtk_signal_disconnect(GTK_OBJECT(xed->w), sig);
 #endif
 	
+#if 1
+	printf("DHM: removed call to gtk_signal_handlers_destroy here\n");
+#else
 	gtk_signal_handlers_destroy(GTK_OBJECT(xed->w));
+#endif
 	
   gtk_signal_connect (GTK_OBJECT (xed->w), "expose_event",
 											(GtkSignalFunc) expose_event, xed);
