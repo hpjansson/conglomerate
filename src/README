@@ -19,6 +19,12 @@ make
 and see what happens. This should produce an executable called "conge" in
 your current directory.
 
+Compiling on Windows should be equally simple, if you're using Cygwin
+(http://www.cygnus.com/cygwin/):
+
+1) Edit global.h, change #undef WINDOWS_BUILD to #define WINDOWS_BUILD 1
+2) make
+
 
 Running
 -------
@@ -56,5 +62,12 @@ The Conglomerate web site is at:
 
 http://www.conglomerate.org/
 
-The latest updates are available through anonymous CVS to:
+The latest updates are available through anonymous CVS:
 
+cvs -d :pserver:anonymous@cvs.styx.net:/cvs login
+[blank password, just hit enter]
+cvs checkout conglomerate
+
+CVS is also web-browsable:
+
+http://cvs.styx.net/cvsweb.pl/conglomerate/
