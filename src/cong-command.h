@@ -181,11 +181,10 @@ void
 cong_command_add_cursor_change (CongCommand *cmd,
 				const CongLocation *new_location);
 
+/* for now is always the external DTD */
 void 
-cong_command_add_set_external_dtd (CongCommand *cmd,
-				   const gchar* root_element,
-				   const gchar* public_id,
-				   const gchar* system_id);
+cong_command_add_set_dtd_ptr (CongCommand *cmd,
+			      xmlDtdPtr dtd_ptr);
 
 void 
 cong_command_add_set_clipboard (CongCommand *cmd,
@@ -246,6 +245,12 @@ cong_command_add_node_split3 (CongCommand *cmd,
 void
 cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 						      CongNodePtr node);
+
+void
+cong_command_add_set_external_dtd (CongCommand *cmd,
+				   const gchar* root_element,
+				   const gchar* public_id,
+				   const gchar* system_id);
 
 G_END_DECLS
 

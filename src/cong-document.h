@@ -93,10 +93,15 @@ struct CongDocumentClass
 
 	void (*cursor_change) (CongDocument *doc);
 
+#if SUPPORT_UNDO
+	void (*set_dtd_ptr) (CongDocument *doc,
+			     xmlDtdPtr dtd_ptr);
+#else
 	void (*set_external_dtd) (CongDocument *doc,
 				  const gchar* root_element,
 				  const gchar* public_id,
 				  const gchar* system_id);
+#endif
 };
 
 GType
@@ -215,6 +220,20 @@ cong_document_node_unref (CongDocument *doc,
 			  CongNodePtr node);
 
 /**
+ * cong_document_set_with_ref:
+ * @doc:
+ * @node_ptr: A pointer to a #CongNodePtr
+ * @node: a ptr to a node, or NULL
+ * 
+ * Sets @node_ptr to @node, doing any necessary reference count modifications to the old and new value
+ *
+ */
+void
+cong_document_set_with_ref (CongDocument *doc,
+			    CongNodePtr *node_ptr,
+			    CongNodePtr node);
+
+/**
  * cong_document_begin_command:
  * @doc: The #CongDocument upon which the command is to act.
  * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
@@ -269,11 +288,17 @@ void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr nod
 void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
 void cong_document_private_on_selection_change(CongDocument *doc);
 void cong_document_private_on_cursor_change(CongDocument *doc);
+#if SUPPORT_UNDO
+void 
+cong_document_private_set_dtd_ptr (CongDocument *doc,
+				   xmlDtdPtr dtd_ptr);
+#else
 void 
 cong_document_private_set_external_dtd (CongDocument *doc,
 				const xmlChar *root_element,
 				const xmlChar *ExternalID, 
 				const xmlChar *SystemID);
+#endif
 
 /* These functions internally ref and unref the document:, as well as adding the view to the doc's list */
 void cong_document_register_view(CongDocument *doc, CongView *view);

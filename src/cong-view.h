@@ -46,7 +46,7 @@
    "node_remove_attribute"
    "selection_change"
    "cursor_change"
-   "set_external_dtd"
+   "set_dtd_ptr" or "set_external_dtd"
 */
 struct CongView
 {
@@ -79,11 +79,17 @@ struct CongViewClass
 	void (*on_document_node_remove_attribute)(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *name);
 	void (*on_selection_change)(CongView *view);
 	void (*on_cursor_change)(CongView *view);
+#if SUPPORT_UNDO
+	void (*on_document_set_dtd_ptr) (CongView *view, 
+					 gboolean before_change, 
+					 xmlDtdPtr dtd_ptr);
+#else
 	void (*on_document_set_external_dtd) (CongView *view, 
 					      gboolean before_change, 
 					      const gchar* root_element,
 					      const gchar* public_id,
 					      const gchar* system_id);
+#endif
 };
 
 typedef struct CongDocumentEvent CongDocumentEvent;

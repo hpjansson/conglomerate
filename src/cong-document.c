@@ -54,11 +54,17 @@ cong_document_handle_selection_change(CongDocument *doc);
 static void
 cong_document_handle_cursor_change(CongDocument *doc);
 
+#if SUPPORT_UNDO
+static void
+cong_document_handle_set_dtd_ptr (CongDocument *doc,
+				  xmlDtdPtr dtd_ptr);
+#else
 static void
 cong_document_handle_set_external_dtd (CongDocument *doc,
 				       const gchar* root_element,
 				       const gchar* public_id,
 				       const gchar* system_id);
+#endif
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
@@ -78,7 +84,11 @@ enum {
 	NODE_REMOVE_ATTRIBUTE,
 	SELECTION_CHANGE,
 	CURSOR_CHANGE,
+#if SUPPORT_UNDO
+	SET_DTD_PTR,
+#else
 	SET_EXTERNAL_DTD,
+#endif
 
 	LAST_SIGNAL
 };
@@ -142,7 +152,11 @@ cong_document_class_init (CongDocumentClass *klass)
 	klass->node_remove_attribute = cong_document_handle_node_remove_attribute;
 	klass->selection_change = cong_document_handle_selection_change;
 	klass->cursor_change = cong_document_handle_cursor_change;
+#if SUPPORT_UNDO
+	klass->set_dtd_ptr = cong_document_handle_set_dtd_ptr;
+#else
 	klass->set_external_dtd = cong_document_handle_set_external_dtd;
+#endif
 
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
@@ -244,6 +258,16 @@ cong_document_class_init (CongDocumentClass *klass)
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE, 
 					       0);
+#if SUPPORT_UNDO
+	signals[SET_DTD_PTR] = g_signal_new ("set_dtd_ptr",
+					     CONG_DOCUMENT_TYPE,
+					     G_SIGNAL_RUN_LAST,
+					     G_STRUCT_OFFSET(CongDocumentClass, set_dtd_ptr),
+					     NULL, NULL,
+					     cong_cclosure_marshal_VOID__CONGNODEPTR,
+					     G_TYPE_NONE, 
+					     1, G_TYPE_POINTER);
+#else
 	signals[SET_EXTERNAL_DTD] = g_signal_new ("set_external_dtd",
 						  CONG_DOCUMENT_TYPE,
 						  G_SIGNAL_RUN_LAST,
@@ -252,6 +276,7 @@ cong_document_class_init (CongDocumentClass *klass)
 						  cong_cclosure_marshal_VOID__STRING_STRING_STRING,
 						  G_TYPE_NONE, 
 						  3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+#endif
 }
 
 static void
@@ -667,6 +692,28 @@ cong_document_node_unref (CongDocument *doc,
 	/* unwritten */
 }
 
+void
+cong_document_set_with_ref (CongDocument *doc,
+			    CongNodePtr *node_ptr,
+			    CongNodePtr node)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node_ptr);
+	
+	/* re the new value first in case they are equal: */
+	if (node) {
+		cong_document_node_ref (doc,
+					node);
+	}
+
+	if (*node_ptr) {
+		cong_document_node_unref (doc,
+					  *node_ptr);
+	}
+	
+	*node_ptr = node;
+}
+
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
 			     const gchar *description,
@@ -750,7 +797,6 @@ cong_document_end_command (CongDocument *doc,
 
 
 /* Public MVC hooks: */
-#if 1
 void cong_document_begin_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
@@ -977,6 +1023,29 @@ void cong_document_private_on_cursor_change(CongDocument *doc)
 	}
 }
 
+#if SUPPORT_UNDO
+void 
+cong_document_private_set_dtd_ptr (CongDocument *doc,
+				   xmlDtdPtr dtd_ptr)
+{
+	g_return_if_fail(doc);
+
+	g_return_if_fail(doc);
+
+#if 0
+	#if DEBUG_MVC
+	g_message("cong_document_set_dtd_ptr");
+	#endif
+#endif
+
+	g_assert (cong_document_is_within_edit(doc));
+
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[SET_DTD_PTR], 0,
+		       dtd_ptr);
+}
+#else
 void 
 cong_document_set_external_dtd (CongDocument *doc,
 				const xmlChar *root_element,
@@ -1003,7 +1072,6 @@ cong_document_set_external_dtd (CongDocument *doc,
 		       system_id);
 }
 #endif
-
 /* end of MVC user hooks */
 
 
@@ -2158,6 +2226,54 @@ cong_document_handle_cursor_change(CongDocument *doc)
 #endif
 }
 
+
+#if SUPPORT_UNDO
+static void
+cong_document_handle_set_dtd_ptr (CongDocument *doc,
+				  xmlDtdPtr dtd_ptr)
+{
+	GList *iter;
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_set_dtd_ptr");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_set_dtd_ptr) {
+			view->klass->on_document_set_dtd_ptr (view, 
+							      TRUE, 
+							      dtd_ptr);
+		}
+	}
+
+	/* Make the change: */
+	{
+		xmlDocPtr xml_doc = PRIVATE(doc)->xml_doc;
+
+		xml_doc->extSubset = dtd_ptr;
+	}
+
+	/* Document is now modified: */
+	cong_document_set_modified(doc, TRUE);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_set_dtd_ptr) {
+			view->klass->on_document_set_dtd_ptr (view, 
+							      FALSE,
+							      dtd_ptr);
+		}
+	}
+}
+
+#else
 static void
 cong_document_handle_set_external_dtd (CongDocument *doc,
 				       const gchar* root_element,
@@ -2170,9 +2286,6 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 	g_message("cong_document_handle_set_external_dtd");
 	#endif
 
-#if SUPPORT_UNDO
-	g_message ("FIXME: undo/redo not implemented for set_external_dtd");
-#else
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
 		CongView *view = CONG_VIEW(iter->data);
@@ -2244,9 +2357,8 @@ cong_document_handle_set_external_dtd (CongDocument *doc,
 								   system_id);
 		}
 	}
-#endif
 
 }
-
+#endif
 
 

@@ -47,6 +47,7 @@
 #include "cong-node-modification-remove-attribute.h"
 #include "cong-modification-selection-change.h"
 #include "cong-modification-cursor-change.h"
+#include "cong-modification-set-dtd-ptr.h"
 
 /* Headers for the various compound modifications: */
 #include "cong-range.h"
@@ -402,26 +403,18 @@ cong_command_add_cursor_change (CongCommand *cmd,
 }
 
 void 
-cong_command_add_set_external_dtd (CongCommand *cmd,
-				   const gchar* root_element,
-				   const gchar* public_id,
-				   const gchar* system_id)
+cong_command_add_set_dtd_ptr (CongCommand *cmd,
+			      xmlDtdPtr dtd_ptr)
 {
 	CongModification *modification;
 	
 	g_return_if_fail (IS_CONG_COMMAND(cmd));
 
-#if 0
-	modification = cong_node_modification_set_text_new (cong_command_get_document(cmd),
-							    node,
-							    new_content);
+	modification = cong_modification_set_dtd_ptr_new (cong_command_get_document(cmd),
+							  dtd_ptr);
 	cong_command_add_modification (cmd,
 				       modification);
 	g_object_unref (G_OBJECT(modification));
-#endif
-
-	g_assert_not_reached();
-
 }
 
 #if 0
@@ -1354,5 +1347,58 @@ cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 						&new_location);
 
 		cong_document_end_edit (doc);		
+	}
+}
+
+void
+cong_command_add_set_external_dtd (CongCommand *cmd,
+				   const gchar* root_element,
+				   const gchar* public_id,
+				   const gchar* system_id)
+{
+	CongDocument *doc;
+	xmlDocPtr xml_doc;
+
+	g_return_if_fail (IS_CONG_COMMAND (cmd));
+
+	doc = cong_command_get_document (cmd);
+	xml_doc = cong_document_get_xml (doc);
+	
+	/* Remove any existing DTD: */
+	{
+		if (xml_doc->extSubset) {
+			cong_command_add_node_make_orphan (cmd,
+							   (xmlNodePtr)xml_doc->extSubset);
+			
+			cong_command_add_node_recursive_delete (cmd, 
+								(xmlNodePtr)xml_doc->extSubset);
+			
+			cong_command_add_set_dtd_ptr (cmd,
+						      NULL);
+		}
+	}
+	
+	/* Add the new DTD (if any): */
+	if (root_element) {
+		xmlDtdPtr dtd_ptr = cong_util_make_dtd (xml_doc,
+							root_element,
+							public_id, 
+							system_id);
+		
+		if (dtd_ptr) {			
+			if (xml_doc->children) {
+				cong_command_add_node_add_before (cmd,
+								  (xmlNodePtr)dtd_ptr,
+								  (xmlNodePtr)xml_doc->children);
+			} else {
+				cong_command_add_node_set_parent (cmd,
+								  (xmlNodePtr)dtd_ptr,
+								  (xmlNodePtr)xml_doc);
+			}
+			
+			/* Ensure the DTD ptr is still set up within the xml_doc; the tree manipulation seems to make it lose the extSubset pointer: */
+			cong_command_add_set_dtd_ptr (cmd,
+						      dtd_ptr);
+		}
 	}
 }
