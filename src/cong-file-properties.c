@@ -34,10 +34,9 @@
 #include "cong-dispspec.h"
 #include "cong-command.h"
 #include "cong-error-dialog.h"
+#include "cong-util.h"
 
 typedef struct CongFilePropertiesDialogDetails CongFilePropertiesDialogDetails;
-
-#include <glade/glade.h>
 
 struct CongFilePropertiesDialogDetails
 {
@@ -71,45 +70,6 @@ on_doc_set_url (CongDocument *doc,
 		const gchar *new_url,
 		gpointer user_data);
 
-#include "cong-attribute-editor.h"
-
-/*
-  Function to load a Glade interface.
-
-  Converts the filename from a project-relative path to an installed path internally
-  Needs the CongDocument and node (if any) so it can wire up custom widgets.
- */
-GladeXML*
-cong_util_load_glade_file (const gchar *filename,
-			   CongDocument *doc,
-			   CongNodePtr node)
-{
-	gchar* glade_filename;
-	GladeXML *xml;
-		
-	g_return_val_if_fail (filename, NULL);
-	if (doc || node) {
-		g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	}
-
-	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    filename,
-						    FALSE,
-						    NULL);
-	global_glade_doc_ptr = doc;
-	global_glade_node_ptr = node;
-	
-	xml = glade_xml_new(glade_filename, NULL, NULL);
-	glade_xml_signal_autoconnect(xml);
-	
-	global_glade_doc_ptr = NULL;
-	global_glade_node_ptr = NULL;
-	
-	g_free(glade_filename);
-
-	return xml;
-}
 
 static void
 refresh_filename_and_location (CongFilePropertiesDialogDetails *dialog_details,
@@ -271,6 +231,7 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	g_object_ref (G_OBJECT (doc));
 
 	dialog_details->xml = cong_util_load_glade_file ("glade/cong-file-properties.glade",
+							 NULL,
 							 doc,
 							 NULL);		
 

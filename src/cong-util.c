@@ -41,6 +41,43 @@
 #endif
 #endif
 
+#include "cong-attribute-editor.h"
+
+GladeXML*
+cong_util_load_glade_file (const gchar *filename,
+			   const gchar *root,
+			   CongDocument *doc,
+			   CongNodePtr node)
+{
+	gchar* glade_filename;
+	GladeXML *xml;
+		
+	g_return_val_if_fail (filename, NULL);
+	if (doc || node) {
+		g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	}
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    filename,
+						    FALSE,
+						    NULL);
+	global_glade_doc_ptr = doc;
+	global_glade_node_ptr = node;
+	
+	xml = glade_xml_new (glade_filename, 
+			     root, 
+			     NULL);
+	glade_xml_signal_autoconnect(xml);
+	
+	global_glade_doc_ptr = NULL;
+	global_glade_node_ptr = NULL;
+	
+	g_free(glade_filename);
+
+	return xml;
+}
+
 gboolean 
 cong_util_is_docbook (CongDocument *doc) 
 {
@@ -97,6 +134,10 @@ cong_util_cleanup_text (const xmlChar *src_text)
 
 	g_assert(g_utf8_validate(src_text, -1, NULL));
 
+#if 1
+	return g_strescape (src_text, "");
+#else
+
 	buffer = g_malloc((strlen(src_text)*6)+1); /* allow 6 bytes per character, plus a terminating byte; this SHOULD be big enough */
 	dst = buffer;
 
@@ -121,6 +162,7 @@ cong_util_cleanup_text (const xmlChar *src_text)
 	*(dst++) = '\0';
 
 	return buffer;
+#endif
 }
 
 gchar* 

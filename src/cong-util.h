@@ -25,10 +25,34 @@
 #ifndef __CONG_UTIL_H__
 #define __CONG_UTIL_H__
 
+#include <glade/glade.h>
+
 G_BEGIN_DECLS
 
 /* Handy utility functions: */
 
+/**
+ * cong_util_load_glade_file:
+ *
+ * @filename:  Project-relative path of the file, e.g. "glade/my-file.glade"
+ * @root:  The root widget to be created, or NULL for all of them
+ * @doc:  The #CongDocument to be available to custom widgets, or NULL
+ * @node:  The #CongNodePtr to be available to custom widgets, or NULL
+ *
+ * Convenience function for loading interfaces using libglade.
+ *
+ * Converts the filename from a project-relative path to an installed path internally,
+ * and sets up the CongDocument and node pointers (if any) so that custom widgets can
+ * wire themselves up properly.
+ *
+ * Returns: a freshly-loaded #GladeXML interface; client must unref it.
+ *
+ */
+GladeXML*
+cong_util_load_glade_file (const gchar *filename,
+			   const gchar *root,
+			   CongDocument *doc,
+			   CongNodePtr node);
 gboolean 
 cong_util_is_docbook (CongDocument *doc);
 
