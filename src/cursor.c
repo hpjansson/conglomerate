@@ -80,7 +80,6 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
         CongNodePtr t;
         CongNodePtr iter, next;
 	CongNodePtr new_element;
-	CongDispspecElement *para;
 	const gchar *xmlns;
 	const gchar *tagname;
 	CongDocument *doc;

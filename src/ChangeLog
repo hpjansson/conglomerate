@@ -1,3 +1,9 @@
+2003-10-14  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-text.c, cong-file-properties.c, cong-primary-window.c, cursor.c, plugin-cleanup-source.c, popup.c
+
+	Fixed some warnings and removed dead code
+
 2003-10-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-node.c

@@ -33,6 +33,7 @@
 #include "cong-fake-plugin-hooks.h"
 #include "cong-dispspec.h"
 #include "cong-command.h"
+#include "cong-util.h"
 
 
 static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)

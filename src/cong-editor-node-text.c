@@ -36,6 +36,7 @@
 #include "cong-editor-area-text-fragment.h"
 #include "cong-selection.h"
 #include "cong-dispspec.h"
+#include "cong-command.h"
 
 #define PRIVATE(x) ((x)->private)
 

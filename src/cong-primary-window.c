@@ -36,6 +36,7 @@
 #include "cong-overview-view.h"
 #include "cong-primary-window.h"
 #include "cong-editor-widget.h"
+#include "cong-command-history.h"
 
 #if 0
 #include <libgnome/libgnome.h>

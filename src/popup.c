@@ -158,7 +158,6 @@ static GtkWidget *add_menu_separator(GtkMenu *menu)
 static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecElement *element)
 {
 	CongNodePtr new_element;
-	CongNodePtr r;
 
 	CongDocument *doc;
 	CongSelection *selection;
@@ -172,13 +171,6 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 
 	selection = cong_document_get_selection(doc);
 	cursor = cong_document_get_cursor(doc);
-
-	/* GREP FOR MVC */
-
-
-#ifndef RELEASE
-	printf("Inserting tag (%s).\n", tag->data);
-#endif
 
 	new_element = cong_node_new_element_from_dispspec(element, doc);
 	{

@@ -32,6 +32,7 @@
 #include "cong-dialog.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-command.h"
 
 static void
 on_remove_dtd_button_clicked (GtkButton *button,
