@@ -2,6 +2,7 @@
 
 	* NEWS
 	Updated with the announce of 0.7.9.	
+	GConf schema install added.
 
 2004-01-05  David Malcolm <david@davemalcolm.demon.co.uk>
 

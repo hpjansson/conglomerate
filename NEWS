@@ -36,6 +36,7 @@ Enhancements
       * Updated translations - cs (Miloslav Trmac), sr, sr@Latn (Danilo
         ??egan), pt (Duarte Loreto), es (Francisco Javier F. Serrador)
 
+      * Installs GConf schema file (Geert Stappers)
 
 Fixes
       * Fixed various compilation warnings (me) 
