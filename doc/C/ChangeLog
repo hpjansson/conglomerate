@@ -1,5 +1,9 @@
 2004-01-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* conglomerate.xml
+
+	Committed Sean Wheller's new User Manual over the top of Jeff Martin's old one
+
 	* xds_dtd_def.xml
 
 	Oops; missed one
