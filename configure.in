@@ -324,25 +324,25 @@ AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
 dnl --- Output ---
 
-AC_OUTPUT(Makefile 
-	  conglomerate.spec
-          po/Makefile.in
-	  data/conglomerate.keys
-	  data/conglomerate.schemas
-	  data/Makefile
-	  debian/Makefile
-	  debian/patches/Makefile
-	  dispspecs/Makefile
-	  doc/Makefile
-	  doc/devel/Makefile
-	  doc/C/Makefile
-	  doc/reference/Makefile
-	  doc/reference/version.xml
-	  glade/Makefile
-	  pixmaps/Makefile
-	  examples/Makefile 
-	  templates/Makefile 
-          src/Makefile)
+AC_CONFIG_FILES(Makefile 
+	        conglomerate.spec
+                po/Makefile.in
+                data/Makefile
+	        debian/Makefile
+	        debian/patches/Makefile
+	        dispspecs/Makefile
+	        doc/Makefile
+	        doc/devel/Makefile
+	        doc/C/Makefile
+	        doc/reference/Makefile
+	        doc/reference/version.xml
+	        glade/Makefile
+	        pixmaps/Makefile
+	        examples/Makefile 
+	        templates/Makefile 
+                src/Makefile)
+
+AC_OUTPUT
 
 if test x$enable_gconf = xno; then
         echo "*** WARNING WARNING WARNING WARNING WARNING"
