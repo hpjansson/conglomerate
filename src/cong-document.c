@@ -1717,18 +1717,48 @@ cong_document_get_selected_node (CongDocument *doc)
  * Every node within a document has an implied language, although the logic to determine 
  * this may depend on the dispspec, on attributes of the nodes, and perhaps even on user prefererences (and hence the value may change unexpectedly).
  * 
- * FIXME: what are the ownership/ref count semantics of this function?
- * 
- * Returns:
+ * Returns: a #PangoLanguage ptr which will exist for the whole lifetime of the program
  */
 PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node)
 {
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail (doc, NULL);
+	g_return_val_if_fail (node, NULL);
 
-	return NULL; /* for now */
+	/* We special-case DocBook here; perhaps this should involve a plugin mechanism instead?: */
+	if (cong_util_is_docbook (doc)) {
+		/* All DocBook elements have an optional "lang" attribute which appears to be drawn from ISO 639, potentially extended with a country code from ISO 3166 */
+		/* Search in this node and above for such an attribute: */
+		
+		while (node != NULL) {
+			xmlChar *lang = xmlGetProp (node, "lang");
+			if (lang != NULL) {
+				PangoLanguage *result = pango_language_from_string (lang);		
+				xmlFree (lang);
+				
+				return result;
+			}
+			node = node->parent;
+		}
+		
+		return NULL;
+	}
+
+	/* Otherwise, use the standard xml:lang attribute (if any), searching parents up to the root as appropriate: */
+	{
+		xmlChar *xml_lang = xmlNodeGetLang (node);
+
+		if (xml_lang) {
+			PangoLanguage *result = pango_language_from_string (xml_lang);		
+			xmlFree (xml_lang);
+			
+			return result;
+		}
+
+		/* Not found: */
+		return NULL;
+	}
 }
 
 /**

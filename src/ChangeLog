@@ -1,5 +1,9 @@
 2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c (cong_document_get_language_for_node): 
+
+	Implemented this function, with support for the standard xml:lang, and for DocBook's lang attribute
+
 	* cong-editor-widget3.c, cong-location.c, cong-location.h, cursor.c:
 
 	Rewrite of CongLocation methods to work better with the new multiple dispspec model: everything uses a CongDocument rather than a CongDispspec now
