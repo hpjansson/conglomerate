@@ -60,6 +60,8 @@ dispose (GObject *object);
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node);
 
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node);
 
 /* FIXME:  We probably shouldn't have every text node in the doc listening to every text node change... probably should allow for a dispatch mechanism within the widget */
 /* Declarations of the CongDocument event handlers: */
@@ -94,6 +96,7 @@ cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
 	G_OBJECT_CLASS (klass)->dispose = dispose;
 
 	node_klass->generate_area = generate_area;
+	node_klass->get_flow_type = get_flow_type;
 }
 
 static void
@@ -188,7 +191,8 @@ generate_area (CongEditorNode *editor_node)
 		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
 								  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
 								  NULL,
-								  cong_text_cache_get_text (PRIVATE(node_text)->text_cache))
+								  cong_text_cache_get_text (PRIVATE(node_text)->text_cache),
+								  FALSE)
 				       );
 
 	g_signal_connect (PRIVATE(node_text)->area_text,
@@ -404,4 +408,10 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	}
 
 	return FALSE;
+}
+
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node)
+{
+	return CONG_FLOW_TYPE_INLINE;
 }

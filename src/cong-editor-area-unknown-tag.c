@@ -99,7 +99,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_unknown_tag),
 					editor_widget);
 
-#if 0
+#if 1
 	tag_string_begin = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>",colour_string, tagname);
 	tag_string_end = g_strdup_printf("<span foreground=\"%s\">/&lt;%s&gt;</span>",colour_string, tagname);
 #else
@@ -116,7 +116,8 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 					       cong_editor_area_text_new (editor_widget,
 									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 									  NULL,
-									  tag_string_begin)
+									  tag_string_begin,
+									  TRUE)
 					       );
 	
 	PRIVATE(area_unknown_tag)->inner_row = cong_editor_area_composer_new (editor_widget,
@@ -139,7 +140,8 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 					       cong_editor_area_text_new (editor_widget,
 									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 									  NULL,
-									  tag_string_end)
+									  tag_string_end,
+									  TRUE)
 					       );
 
 	g_free (tag_string_begin);

@@ -94,7 +94,6 @@ cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *kl
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
-
 }
 
 static void
@@ -181,7 +180,8 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 			PRIVATE(area_structural_tag)->title_text = cong_editor_area_text_new (editor_widget,
 											      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 											      cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_TEXT),
-											      text);
+											      text,
+											      FALSE);
 			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
 							PRIVATE(area_structural_tag)->title_text,
 							FALSE,

@@ -1,5 +1,9 @@
 2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c, cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-area-unknown-tag.c, cong-editor-node-element-span.c, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.c, cong-editor-node.h, plugin-lists-area-listitem.c
+
+	Added ability for text to contain Pango markup; added an idea of flow type to editor nodes
+	
 	* cong-text-cache.c
 
 	Added a debug option

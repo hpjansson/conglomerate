@@ -42,6 +42,9 @@ struct CongEditorNodeDetails
 #endif
 };
 
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node);
+
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_area);
 
 
@@ -57,6 +60,8 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
 					      generate_area);
+
+	klass->get_flow_type = get_flow_type;
 }
 
 static void
@@ -116,4 +121,32 @@ cong_editor_node_generate_area (CongEditorNode *editor_node)
 						       editor_node,
 						       generate_area, 
 						       (editor_node));
+}
+
+enum CongFlowType
+cong_editor_node_get_flow_type (CongEditorNode *editor_node)
+{
+	g_return_if_fail (editor_node);
+	
+	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
+						       editor_node,
+						       get_flow_type, 
+						       (editor_node));
+}
+
+const gchar*
+cong_flow_type_get_debug_string(enum CongFlowType flow_type)
+{
+	switch (flow_type) {
+	default: g_assert_not_reached();
+	case CONG_FLOW_TYPE_BLOCK: return "FLOW_TYPE_BLOCK";
+	case CONG_FLOW_TYPE_INLINE: return "FLOW_TYPE_INLINE";
+	}
+}
+
+
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node)
+{
+	return CONG_FLOW_TYPE_BLOCK;
 }

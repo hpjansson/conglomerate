@@ -40,6 +40,8 @@ struct CongEditorNodeElementSpanDetails
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node);
 
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementSpan, 
@@ -53,6 +55,7 @@ cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
 	node_klass->generate_area = generate_area;
+	node_klass->get_flow_type = get_flow_type;
 }
 
 static void
@@ -116,4 +119,10 @@ generate_area (CongEditorNode *editor_node)
 	g_free (title_text);
 
 	return area;
+}
+
+static enum CongFlowType
+get_flow_type(CongEditorNode *editor_node)
+{
+	return CONG_FLOW_TYPE_INLINE;
 }

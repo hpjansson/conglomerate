@@ -176,7 +176,8 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 					PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
 													cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
 													cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-													text);
+													text,
+													FALSE);
 					cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(inner_anon_hcompose),
 									PRIVATE(area_span_tag)->title_text,
 									FALSE,

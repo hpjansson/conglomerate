@@ -80,7 +80,8 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 				 CongEditorWidget3 *editor_widget,
 				 CongFont *font,
 				 const GdkColor *fg_col,
-				 const gchar *text)
+				 const gchar *text,
+				 gboolean use_markup)
 {
 	g_return_val_if_fail (text, NULL);
 /* 	g_return_val_if_fail (fg_col, NULL); */
@@ -98,12 +99,17 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 	}
 #endif
 
-	PRIVATE(area_text)->pango_layout = pango_layout_new(gdk_pango_context_get());
+	PRIVATE(area_text)->pango_layout = pango_layout_new(gtk_widget_get_pango_context (GTK_WIDGET(editor_widget)));
 
-	pango_layout_set_text (PRIVATE(area_text)->pango_layout,
-			       text,
-			       -1);
-	/* in theory should call pango_layout_set_markup instead, though this causes errors with colormaps */
+	if (use_markup) {
+		pango_layout_set_markup (PRIVATE(area_text)->pango_layout,
+					 text,
+					 -1);
+	} else {
+		pango_layout_set_text (PRIVATE(area_text)->pango_layout,
+				       text,
+				       -1);
+	}
 
 	PRIVATE(area_text)->font = font;
 	g_assert(PRIVATE(area_text)->font);
@@ -119,7 +125,8 @@ CongEditorArea*
 cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
 			   const GdkColor *fg_col,
-			   const gchar *text)
+			   const gchar *text,
+			   gboolean use_markup)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_text_new(\"%s\")", text);
@@ -130,7 +137,8 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 		 editor_widget,
 		 font,
 		 fg_col,
-		 text);
+		 text,
+		 use_markup);
 }
 
 void
@@ -143,6 +151,21 @@ cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 	pango_layout_set_text (PRIVATE(area_text)->pango_layout,
 			       text,
 			       -1);
+
+	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));
+}
+
+void
+cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
+				  const gchar *markup)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA_TEXT(area_text));
+	g_return_if_fail (markup);
+
+	pango_layout_set_markup (PRIVATE(area_text)->pango_layout,
+				 markup,
+				 -1);
 
 	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));

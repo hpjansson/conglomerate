@@ -102,7 +102,8 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 	PRIVATE(area_listitem)->label = CONG_EDITOR_AREA_TEXT(cong_editor_area_text_new (editor_widget,
 											 cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 											 NULL,
-											 label));
+											 label,
+											 FALSE));
 	
 	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_listitem)->outer_hcompose),
 					 CONG_EDITOR_AREA(PRIVATE(area_listitem)->label),
