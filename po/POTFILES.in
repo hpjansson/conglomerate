@@ -135,6 +135,7 @@ src/cong-service-node-tool.c
 src/cong-service-print-method.c
 src/cong-service-tool.c
 src/cong-service.c
+src/cong-source-layout.c
 src/cong-source-view.c
 src/cong-text-cache.c
 src/cong-traversal-node.c

@@ -1,5 +1,9 @@
 Top line of ChangeLog $Revision$, update below this line.
 
+2004-10-10  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* POTFILES.in: added src/cong-source-layout.c
+
 2004-10-09  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* fr.po: Updated French translation.
