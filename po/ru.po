@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the conglomerate package.
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002-2004.
 # Vitaly Lipatov <lav@altlinux.ru>, 2004.
+# Nickolay V. Shmyrev <nshmyrev@yandex.ru>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-25 08:13+0400\n"
-"PO-Revision-Date: 2004-06-25 08:48+0400\n"
-"Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
+"POT-Creation-Date: 2004-10-16 19:13+0400\n"
+"PO-Revision-Date: 2004-10-16 20:48+0400\n"
+"Last-Translator: Nickolay V. Shmyrev <nshmyrev@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,9 +19,9 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1500
-#: src/cong-primary-window.c:799 src/cong-primary-window.c:984
-#: src/cong-primary-window.c:986 src/cong-primary-window.c:992
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1446
+#: src/cong-primary-window.c:547 src/cong-primary-window.c:732
+#: src/cong-primary-window.c:734 src/cong-primary-window.c:740
 msgid "Conglomerate XML Editor"
 msgstr "Редактор разметки \"Конгломерат\""
 
@@ -35,6 +36,10 @@ msgid ""
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
 msgstr ""
+"Список каталогов в которых Conglomerate ищет спецификации отображения(файлы "
+"с расширением .xds), поясняющие способ отображения документов. Крометого, "
+"поиск происходит в стандартных каталогах, задаваемых при установке. Во "
+"времязагрузки документа ищется подходящая спецификация отображения"
 
 #: data/conglomerate.schemas.in.h:2
 msgid ""
@@ -42,14 +47,1238 @@ msgid ""
 "These documents will be used by the new document assistant as types of "
 "documents which can be created by the user."
 msgstr ""
+"Список каталогов в которых Conglomerate ищет шаблоны документов с "
+"разметкойЭти документы могут использоваться во время создания "
+"пользователемновых типов документов"
 
 #: data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
-msgstr ""
+msgstr "Путь к дополнительным описаниям отбражения документов"
 
 #: data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
+msgstr "Путь к шаблоним"
+
+#: dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr "Свернуть до"
+
+#: dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "Описания отображения документов"
+
+#: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
+#: src/cong-edit-preferences.c:271 src/cong-file-export.c:341
+#: src/cong-file-new.c:363 src/cong-file-print.c:250
+#: src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Описание"
+
+#: dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "Типы документов"
+
+#: dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "Внешняя модель документов"
+
+#: dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "Формат"
+
+#: dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "Интерфейс пользователя"
+
+#: dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "Информация заголовка"
+
+#: dispspecs/dispspec.xds.in.h:9
+msgid ""
+"Information that tells Conglomerate how to display a particular type of file."
+msgstr "Информация с помощью которой отображаются различные типы файлов"
+
+#: dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "Список элементов разметки"
+
+#: dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "Список типов файлов для этого вида документов"
+
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:92
+msgid "Metadata"
+msgstr "Метаданные"
+
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:94
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Имя"
+
+#: dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "Имя элемента разметки"
+
+#: dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "Список типа сериализации"
+
+#: dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "Краткое описание"
+
+#: dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "Краткое описание элемента разметки"
+
+#: dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "Краткое описание типа документа"
+
+#: dispspecs/dispspec.xds.in.h:19
+msgid "XML Element"
+msgstr "Элемент разметки"
+
+#: dispspecs/docbook.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "Ссылка (например, на сайт)"
+
+#: dispspecs/docbook.xds.in.h:2
+msgid ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
 msgstr ""
+"Книга с заголовком и, может быть, некоторым библиографическим "
+"материаломдобавляемым к содержанию"
+
+#: dispspecs/docbook.xds.in.h:3
+msgid "A brief description of the version of a document."
+msgstr "Краткое описание версии документа"
+
+#: dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "Коллекция книг"
+
+#: dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "Структура книги"
+
+#: dispspecs/docbook.xds.in.h:6
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "Специальный кусок данных из компьютерной системы, взятый буквально"
+
+#: dispspecs/docbook.xds.in.h:7
+msgid "A subsection within a section"
+msgstr "Подраздел внутри раздела"
+
+#: dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "Содержание"
+
+#: dispspecs/docbook.xds.in.h:9
+msgid "A top-level section of document"
+msgstr "Раздел документа высокого уровня"
+
+#: dispspecs/docbook.xds.in.h:10 dispspecs/forrest-document.xds.in.h:1
+msgid "Abstract"
+msgstr "Абстракт"
+
+#: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
+#: dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "Акроним"
+
+#: dispspecs/docbook.xds.in.h:12
+msgid "Additional metadata"
+msgstr "Дополнительные метаданные"
+
+#: dispspecs/docbook.xds.in.h:13 dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "Адрес"
+
+#: dispspecs/docbook.xds.in.h:14
+msgid "An email address"
+msgstr "Адрес e-mail"
+
+#: dispspecs/docbook.xds.in.h:15
+msgid "Anchor Point"
+msgstr "Точка выравнивания"
+
+#: dispspecs/docbook.xds.in.h:16
+msgid "Answer"
+msgstr "Ответ"
+
+#: dispspecs/docbook.xds.in.h:17
+msgid "Appendix"
+msgstr "Дополнение"
+
+#: dispspecs/docbook.xds.in.h:18
+msgid "Application"
+msgstr "Приложения"
+
+#: dispspecs/docbook.xds.in.h:19
+msgid "Article"
+msgstr "Статья DocBook"
+
+#: dispspecs/docbook.xds.in.h:20
+msgid "Article Header"
+msgstr "Заголовок статьи"
+
+#: dispspecs/docbook.xds.in.h:21
+msgid "Article Information"
+msgstr "Информация о статье"
+
+#: dispspecs/docbook.xds.in.h:22
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:3
+msgid "Author"
+msgstr "Автор"
+
+#: dispspecs/docbook.xds.in.h:23
+msgid "Author Initials"
+msgstr "Инициалы автора"
+
+#: dispspecs/docbook.xds.in.h:24
+msgid "Authorship Information"
+msgstr "Информация об авторстве"
+
+#: dispspecs/docbook.xds.in.h:25
+msgid "Bibliographic Information"
+msgstr "Библиографическая информация"
+
+#: dispspecs/docbook.xds.in.h:26
+msgid "Bibliography"
+msgstr "Библиография"
+
+#: dispspecs/docbook.xds.in.h:27
+msgid "Book"
+msgstr "Книга"
+
+#: dispspecs/docbook.xds.in.h:28
+msgid "Book Information"
+msgstr "Информация о книге"
+
+#: dispspecs/docbook.xds.in.h:29 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "Область"
+
+#: dispspecs/docbook.xds.in.h:30
+msgid "Caution"
+msgstr "Внимание"
+
+#: dispspecs/docbook.xds.in.h:31
+msgid "Chapter"
+msgstr "Глава"
+
+#: dispspecs/docbook.xds.in.h:32
+msgid "City"
+msgstr "Город"
+
+#: dispspecs/docbook.xds.in.h:33
+msgid "Colophon"
+msgstr "Колофон"
+
+#: dispspecs/docbook.xds.in.h:34
+msgid "Command"
+msgstr "Команда"
+
+#: dispspecs/docbook.xds.in.h:35
+msgid "Command Synopsis"
+msgstr "Описание команды"
+
+#: dispspecs/docbook.xds.in.h:36
+msgid "Copyright"
+msgstr "Авторское право"
+
+#: dispspecs/docbook.xds.in.h:37
+msgid "Copyright Holder"
+msgstr "Владелец авторского права"
+
+#: dispspecs/docbook.xds.in.h:38
+msgid "Corporate Name"
+msgstr "Название корпорации"
+
+#: dispspecs/docbook.xds.in.h:39
+msgid "Cross-reference"
+msgstr "Перекрестная ссылка"
+
+#: dispspecs/docbook.xds.in.h:40
+msgid "Date"
+msgstr "Дата"
+
+#: dispspecs/docbook.xds.in.h:41
+msgid "Date of Publication"
+msgstr "Дата публикации"
+
+#: dispspecs/docbook.xds.in.h:42
+msgid "Defined terms"
+msgstr "Описанные термины"
+
+#: dispspecs/docbook.xds.in.h:43 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "Определение"
+
+#: dispspecs/docbook.xds.in.h:44
+msgid "DocBook"
+msgstr "DocBook"
+
+#: dispspecs/docbook.xds.in.h:45
+msgid ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+msgstr ""
+"DocBook это тип документа, который в широком смысле соответствует понятиюо "
+"\"книге\", он хорошо подходит для написания книг и статейи для печатного и "
+"для сетевого издания"
+
+#: dispspecs/docbook.xds.in.h:46
+msgid "Edition"
+msgstr "Редакция"
+
+#: dispspecs/docbook.xds.in.h:47
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:11
+msgid "Editor"
+msgstr "Редактор"
+
+#: dispspecs/docbook.xds.in.h:48
+msgid "Email Address"
+msgstr "Адрес электронной почты"
+
+#: dispspecs/docbook.xds.in.h:49 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "Курсив"
+
+#: dispspecs/docbook.xds.in.h:50
+msgid "Entry"
+msgstr "Поле ввода"
+
+#: dispspecs/docbook.xds.in.h:51
+msgid "Environment Variable"
+msgstr "Переменная окружения"
+
+#: dispspecs/docbook.xds.in.h:52
+msgid "Example (formal)"
+msgstr "Пример (формальный)"
+
+#: dispspecs/docbook.xds.in.h:53
+msgid "Example (informal)"
+msgstr "Пример (информативный)"
+
+#: dispspecs/docbook.xds.in.h:54 dispspecs/forrest-document.xds.in.h:14
+msgid "Figure"
+msgstr "Рисунок"
+
+#: dispspecs/docbook.xds.in.h:55
+msgid "Figure (informal)"
+msgstr "Рисунок (информативный)"
+
+#: dispspecs/docbook.xds.in.h:56
+msgid "Filename"
+msgstr "Имя файла"
+
+#: dispspecs/docbook.xds.in.h:57
+msgid "First Name"
+msgstr "Имя"
+
+#: dispspecs/docbook.xds.in.h:58
+msgid "First Term"
+msgstr "Термин"
+
+#: dispspecs/docbook.xds.in.h:59
+msgid "Footnote"
+msgstr "Сноска"
+
+#: dispspecs/docbook.xds.in.h:60
+msgid "Free-floating Heading"
+msgstr "Свободно-плавающее заглавие"
+
+#: dispspecs/docbook.xds.in.h:61
+msgid "Function"
+msgstr "Функция"
+
+#: dispspecs/docbook.xds.in.h:62
+msgid "Function Synopsis"
+msgstr "Описание функции"
+
+#: dispspecs/docbook.xds.in.h:63
+msgid "GUI Button"
+msgstr "Кнопка пользовательского интерфейса"
+
+#: dispspecs/docbook.xds.in.h:64
+msgid "GUI Label"
+msgstr "Метка в пользовательском интерфейсе"
+
+#: dispspecs/docbook.xds.in.h:65
+msgid "GUI Menu"
+msgstr "Меню пользователя"
+
+#: dispspecs/docbook.xds.in.h:66
+msgid "GUI Menu Item"
+msgstr "Элемент меню пользователя"
+
+#: dispspecs/docbook.xds.in.h:67
+msgid "GUI Submenu"
+msgstr "Подменю"
+
+#: dispspecs/docbook.xds.in.h:68
+msgid "Glossary"
+msgstr "Словарь"
+
+#: dispspecs/docbook.xds.in.h:69
+msgid "Glossary Entry"
+msgstr "Статья словаря"
+
+#: dispspecs/docbook.xds.in.h:70
+msgid "Graphic"
+msgstr "Графика"
+
+#: dispspecs/docbook.xds.in.h:71
+msgid "ISBN"
+msgstr "ISBN"
+
+#: dispspecs/docbook.xds.in.h:72
+msgid "ISSN"
+msgstr "ISSN"
+
+#: dispspecs/docbook.xds.in.h:73
+msgid "Image Data"
+msgstr "Данные изображения"
+
+#: dispspecs/docbook.xds.in.h:74
+msgid "Image Object"
+msgstr "Объект изображения"
+
+#: dispspecs/docbook.xds.in.h:75
+msgid "Important"
+msgstr "Важно"
+
+#: dispspecs/docbook.xds.in.h:76
+msgid "Index Term"
+msgstr "Определение индекса"
+
+#: dispspecs/docbook.xds.in.h:77 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19
+msgid "Introduction"
+msgstr "Введение"
+
+#: dispspecs/docbook.xds.in.h:78
+msgid "Key Caption"
+msgstr "Ключевое внимание"
+
+#: dispspecs/docbook.xds.in.h:79
+msgid "Legal Notice"
+msgstr "Заметка о правах"
+
+#: dispspecs/docbook.xds.in.h:80
+msgid "List (itemised)"
+msgstr "Список (обычный)"
+
+#: dispspecs/docbook.xds.in.h:81 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "Список пронумерованный"
+
+#: dispspecs/docbook.xds.in.h:82
+msgid "List (simple)"
+msgstr "Список (простой)"
+
+#: dispspecs/docbook.xds.in.h:83
+msgid "List (terms and definitions)"
+msgstr "Список (понятия и определения)"
+
+#: dispspecs/docbook.xds.in.h:84
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "Элемент списка"
+
+#: dispspecs/docbook.xds.in.h:85
+msgid "List Member"
+msgstr "Член списка"
+
+#: dispspecs/docbook.xds.in.h:86
+msgid "Literal"
+msgstr "Литерал"
+
+#: dispspecs/docbook.xds.in.h:87
+msgid "Media Object"
+msgstr "Мультимедийный объект"
+
+#: dispspecs/docbook.xds.in.h:88
+msgid "Menu Choice"
+msgstr "Меню выбора"
+
+#: dispspecs/docbook.xds.in.h:89
+msgid "Meta-information about a Reference Page"
+msgstr "Метаинформация о странице ссылок"
+
+#: dispspecs/docbook.xds.in.h:90
+msgid "Meta-information for a book"
+msgstr "Метаинформация для книги"
+
+#: dispspecs/docbook.xds.in.h:91
+msgid "Meta-information for an article"
+msgstr "Метаинформация о статье"
+
+#: dispspecs/docbook.xds.in.h:93
+msgid "Miscellaneous Bibliographic Information"
+msgstr "Различная библиографическая информация"
+
+#: dispspecs/docbook.xds.in.h:95
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "Имя, назначение и классификация в странице ссылок"
+
+#: dispspecs/docbook.xds.in.h:96
+msgid "Naming"
+msgstr "Именование"
+
+#: dispspecs/docbook.xds.in.h:97 dispspecs/forrest-document.xds.in.h:29
+msgid "Note"
+msgstr "Заметка"
+
+#: dispspecs/docbook.xds.in.h:98 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
+msgid "Paragraph"
+msgstr "Абзац"
+
+#: dispspecs/docbook.xds.in.h:99
+msgid "Paragraph (titled)"
+msgstr "Абзац (озаглавленный)"
+
+#: dispspecs/docbook.xds.in.h:100
+msgid "Part"
+msgstr "Часть"
+
+#: dispspecs/docbook.xds.in.h:101
+msgid "Preface"
+msgstr "Вступление"
+
+#: dispspecs/docbook.xds.in.h:102
+msgid "Printing History"
+msgstr "История публикации"
+
+#: dispspecs/docbook.xds.in.h:103
+msgid "Procedure"
+msgstr "Процедура"
+
+#: dispspecs/docbook.xds.in.h:104
+msgid "Product Name"
+msgstr "Название продукта"
+
+#: dispspecs/docbook.xds.in.h:105
+msgid "Program Listing"
+msgstr "Фрагмент исходного кода"
+
+#: dispspecs/docbook.xds.in.h:106
+msgid "Prompt"
+msgstr "Приглашение"
+
+#: dispspecs/docbook.xds.in.h:107
+msgid "Publisher"
+msgstr "Издатель"
+
+#: dispspecs/docbook.xds.in.h:108
+msgid "Publisher Name"
+msgstr "Название издательства"
+
+#: dispspecs/docbook.xds.in.h:109
+msgid "Purpose"
+msgstr "Цель"
+
+#: dispspecs/docbook.xds.in.h:110
+msgid "Question"
+msgstr "Вопрос"
+
+#: dispspecs/docbook.xds.in.h:111
+msgid "Question-and-Answer"
+msgstr "Вопрос-и-ответ"
+
+#: dispspecs/docbook.xds.in.h:112
+msgid "Question-and-Answer Set"
+msgstr "Набор вопросов и ответов"
+
+#: dispspecs/docbook.xds.in.h:113
+msgid "Question-and-Answer Subset"
+msgstr "Подмножество вопросов и ответов"
+
+#: dispspecs/docbook.xds.in.h:114
+msgid "Quote"
+msgstr "Цитата"
+
+#: dispspecs/docbook.xds.in.h:115
+msgid "Reference"
+msgstr "Ссылка"
+
+#: dispspecs/docbook.xds.in.h:116
+msgid "Reference Page"
+msgstr "Страница ссылка"
+
+#: dispspecs/docbook.xds.in.h:117
+msgid "Release Information"
+msgstr "Информация о распространении"
+
+#: dispspecs/docbook.xds.in.h:118
+msgid "Replaceable Text"
+msgstr "Замещаемый текст"
+
+#: dispspecs/docbook.xds.in.h:119
+msgid "Revision"
+msgstr "Версия"
+
+#: dispspecs/docbook.xds.in.h:120
+msgid "Revision History"
+msgstr "История версий"
+
+#: dispspecs/docbook.xds.in.h:121
+msgid "Revision Remark"
+msgstr "Отметка о версии"
+
+#: dispspecs/docbook.xds.in.h:122
+msgid "SGML Tag"
+msgstr "Тэг SGML"
+
+#: dispspecs/docbook.xds.in.h:123
+msgid "Screen"
+msgstr "Экран"
+
+#: dispspecs/docbook.xds.in.h:124
+msgid "Screenshot"
+msgstr "Снимок икрана"
+
+#: dispspecs/docbook.xds.in.h:125 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:29
+msgid "Section"
+msgstr "Раздел"
+
+#: dispspecs/docbook.xds.in.h:126
+msgid "Section (level 5)"
+msgstr "Подраздел (5-ого уровня)"
+
+#: dispspecs/docbook.xds.in.h:127
+msgid "Set"
+msgstr "Набор"
+
+#: dispspecs/docbook.xds.in.h:128
+msgid "Step"
+msgstr "Шаг"
+
+#: dispspecs/docbook.xds.in.h:129
+msgid "Structure Name"
+msgstr "Название структуры"
+
+#: dispspecs/docbook.xds.in.h:130
+msgid "Subsection"
+msgstr "Подраздел"
+
+#: dispspecs/docbook.xds.in.h:131
+msgid "Subsection (level 3)"
+msgstr "Подраздел (3-его уровня)"
+
+#: dispspecs/docbook.xds.in.h:132
+msgid "Subsection (level 4)"
+msgstr "Подраздел (4-ого уровня)"
+
+#: dispspecs/docbook.xds.in.h:133
+msgid "Substeps"
+msgstr "Подшаг"
+
+#: dispspecs/docbook.xds.in.h:134
+msgid "Subsubsection"
+msgstr "Подраздел"
+
+#: dispspecs/docbook.xds.in.h:135 dispspecs/forrest-document.xds.in.h:37
+msgid "Subtitle"
+msgstr "Субтитры"
+
+#: dispspecs/docbook.xds.in.h:136
+msgid "Surname"
+msgstr "Фамилия"
+
+#: dispspecs/docbook.xds.in.h:137
+msgid "Symbol"
+msgstr "Символ"
+
+#: dispspecs/docbook.xds.in.h:138
+msgid "Synopsis (syntax)"
+msgstr "Рекомендации (синтаксис)"
+
+#: dispspecs/docbook.xds.in.h:139
+msgid "Table (informal)"
+msgstr "Таблица (информационная)"
+
+#: dispspecs/docbook.xds.in.h:140 dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "Тело таблицы"
+
+#: dispspecs/docbook.xds.in.h:141
+msgid "Table Column Specification"
+msgstr "Спецификация колонки таблицы"
+
+#: dispspecs/docbook.xds.in.h:142
+msgid "Table Entry"
+msgstr "Поле таблицы"
+
+#: dispspecs/docbook.xds.in.h:143
+msgid "Table Entry (subtable)"
+msgstr "Поле таблицы (подтаблица)"
+
+#: dispspecs/docbook.xds.in.h:144 dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "Подпись таблицы"
+
+#: dispspecs/docbook.xds.in.h:145
+msgid "Table Group"
+msgstr "Группа таблиц"
+
+#: dispspecs/docbook.xds.in.h:146 dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "Заголовок таблицы"
+
+#: dispspecs/docbook.xds.in.h:147 dispspecs/xhtml1-strict.xds.in.h:73
+msgid "Table Row"
+msgstr "Строка таблицы"
+
+#: dispspecs/docbook.xds.in.h:148
+msgid "Term"
+msgstr "Определение"
+
+#: dispspecs/docbook.xds.in.h:149
+msgid "Text Object"
+msgstr "Текстовый объект"
+
+#: dispspecs/docbook.xds.in.h:150
+msgid "The International Standard Book Number of a document."
+msgstr "Международный стандартный номер книги (ISBN) этого документа"
+
+#: dispspecs/docbook.xds.in.h:151
+msgid "The International Standard Serial Number of a periodical."
+msgstr "Международный стандартный номер серии (ISSN) периодического издания"
+
+#: dispspecs/docbook.xds.in.h:152
+msgid "The first place where a word or term occurs in a particular context"
+msgstr ""
+"Первое место в котором слово или описание встречается в данном конексте"
+
+#: dispspecs/docbook.xds.in.h:153
+msgid "The name of a function, subroutine or procedure"
+msgstr "Имя функции, подпрограммы или процедуры"
+
+#: dispspecs/docbook.xds.in.h:154
+msgid "The printed text on a particular key on a keyboard"
+msgstr "Текст клавиши на клавиатуре"
+
+#: dispspecs/docbook.xds.in.h:155
+msgid "Tip"
+msgstr "Подсказка"
+
+#: dispspecs/docbook.xds.in.h:156 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "Заглавие"
+
+#: dispspecs/docbook.xds.in.h:157
+msgid "Title Citation"
+msgstr "Цитата заглавия"
+
+#: dispspecs/docbook.xds.in.h:158
+msgid "URL Link"
+msgstr "Ссылка"
+
+#: dispspecs/docbook.xds.in.h:159
+msgid "User Input"
+msgstr "Поле ввода пользователя"
+
+#: dispspecs/docbook.xds.in.h:160 dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: dispspecs/docbook.xds.in.h:161
+msgid "Year"
+msgstr "Год"
+
+#: dispspecs/forrest-document.xds.in.h:3 dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "Отступ"
+
+#: dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "Документация проекта Apache версия 1.2"
+
+#: dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "Авторы"
+
+#: dispspecs/forrest-document.xds.in.h:7
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "Код"
+
+#: dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "Понятие"
+
+#: dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "Список определений"
+
+#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:981
+msgid "Document"
+msgstr "Документ"
+
+#: dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "Тело документа"
+
+#: dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "Исправь меня"
+
+#: dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "Нижний колонтитул"
+
+#: dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "Разветвление"
+
+#: dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "Заголовок"
+
+#: dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "Иконка"
+
+#: dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "Изображение"
+
+#: dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "Прыжок"
+
+#: dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "Информация о правах"
+
+#: dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "Разрыв строки"
+
+#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Ссылка"
+
+#: dispspecs/forrest-document.xds.in.h:27
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "Список (неупорядоченный)"
+
+#: dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "Элемент списка"
+
+#: dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "Заметка"
+
+#: dispspecs/forrest-document.xds.in.h:32
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "Личность"
+
+#: dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "Источник"
+
+#: dispspecs/forrest-document.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "Сильная"
+
+#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "Нижний индекс"
+
+#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "Верхний индекс"
+
+#: dispspecs/forrest-document.xds.in.h:39 dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "Таблица"
+
+#: dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "Ячейка таблицы"
+
+#: dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "Ячейка заголовка таблицы"
+
+#: dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "Строка таблицы"
+
+#: dispspecs/forrest-document.xds.in.h:43
+msgid ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://xml."
+"apache.org/forrest ."
+msgstr ""
+"этот тип документов был разработан для создания простой, но достаточномощной "
+"документации к приложениям проекта Apache. Этот типразметки документа "
+"сопровождается Apache XML project. Смотрите http://xml.apache.org/forrest ."
+
+#: dispspecs/forrest-document.xds.in.h:45
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Тип"
+
+#: dispspecs/forrest-document.xds.in.h:46
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "Версия"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "\"Kernel Traffic\" Newsletter"
+msgstr "Новость из \"Переписки Ядра\""
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid ""
+"A newletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+msgstr ""
+"Новостное сопровождение технической разработки проекта со модельюСвободного "
+"программного обеспечения"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "Блоковая цитата"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "Жирный"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "Разрыв (ручной)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "По центру"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "Ссылка"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "Исправление"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "Редактирование"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "Шрифт"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "Заголовок (1-ого уровня)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "Загловок (2-ого уровня)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "Заголовок (3-его уровня)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "Гиперссылка"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "Предмет обсуждения"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "Наклоненный"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "Новость ядра"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "Цитата"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:30
+msgid "Statistics"
+msgstr "Статистика"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "Тема"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:34
+msgid "Translator"
+msgstr ""
+"Дмитрий Мастрюков <dmitry@taurussoft.org>\n"
+"Виталий Липатов <lav@etersoft.ru>"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Underlined"
+msgstr "Подчеркнутый"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Version Control Activity"
+msgstr "Активность контроля версий"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Statistics"
+msgstr "Статистика контроля версий"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Tree"
+msgstr "Дерево управления версиями"
+
+#: dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "Сокращенная форма"
+
+#: dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr "Альтернативные неязыковые данные"
+
+#: dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "Область"
+
+#: dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "Основание"
+
+#: dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr "Двунаправленное переписывание"
+
+#: dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "Большой"
+
+#: dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "Блоковая цитата"
+
+#: dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "Тело"
+
+#: dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "Кнопка"
+
+#: dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "Цитата"
+
+#: dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "Колонка"
+
+#: dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "Группа колонок"
+
+#: dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "Список определений"
+
+#: dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "Понятие определения"
+
+#: dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "Удаленный текст"
+
+#: dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "Разделение"
+
+#: dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "Спровоцированный разрыв линии"
+
+#: dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "Форма"
+
+#: dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "Группа форм"
+
+#: dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "Страница HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "Заголовок"
+
+#: dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "Заголовок (уровень 4)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "Заголовок (уровень 5)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "Заголовок (уровень 6)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "Горизонтальная линия"
+
+#: dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "Изображение"
+
+#: dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "Карта изображения"
+
+#: dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "Встроенная цитирование"
+
+#: dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "Вставленный текст"
+
+#: dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "Интерактивная форма"
+
+#: dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "Наклонный"
+
+#: dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+#: dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "Метка"
+
+#: dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "Описание"
+
+#: dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "Метаинформация"
+
+#: dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "Много строчное текстовое поле"
+
+#: dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "Объект"
+
+#: dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "Группа настроек"
+
+#: dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "Выбор настройки"
+
+#: dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "Параметр"
+
+#: dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "Форматированный текст"
+
+#: dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "Пример"
+
+#: dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "Сценарий"
+
+#: dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "Изменяемый выбор"
+
+#: dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "Маленький"
+
+#: dispspecs/xhtml1-strict.xds.in.h:62 glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Оболочка"
+
+#: dispspecs/xhtml1-strict.xds.in.h:64
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Стиль"
+
+#: dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "Ячейка таблицы (данные)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "Ячейка таблицы (заголовок)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "Телетайп"
+
+#: dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "Строгая версия HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "Переменная"
+
+#: dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (strict)"
 
 #: glade/cong-file-import.glade.h:1
 msgid "File Import Options"
@@ -64,7 +1293,7 @@ msgid "Options"
 msgstr "Параметры"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
-#: src/cong-node-properties-dialog.c:1285
+#: src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
 msgstr "Дополнительные"
 
@@ -72,14 +1301,7 @@ msgstr "Дополнительные"
 msgid "Basic"
 msgstr "Основные"
 
-#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:137 src/cong-file-export.c:303
-#: src/cong-file-new.c:363 src/cong-file-print.c:252
-#: src/cong-parser-error.c:326
-msgid "Description"
-msgstr "Описание"
-
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:930
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
 msgid "Document Type Declaration"
 msgstr "Описание типа документа"
 
@@ -91,8 +1313,8 @@ msgstr "Кодировка"
 msgid "External ID"
 msgstr "Внешний идентификатор"
 
-#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:250
-#: src/cong-file-print.c:219
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:281
+#: src/cong-file-print.c:217
 msgid "General"
 msgstr "Общие"
 
@@ -104,17 +1326,11 @@ msgstr "Местоположение"
 msgid "Modified"
 msgstr "Изменён"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:129
-#: src/cong-file-export.c:302 src/cong-file-print.c:251
-#: src/cong-node-properties-dialog.c:609
-msgid "Name"
-msgstr "Имя"
-
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
-#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1247
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
 msgid "Properties"
 msgstr "Изменить свойства"
 
@@ -126,15 +1342,6 @@ msgstr "Автономный"
 msgid "System ID"
 msgstr "Системный идентификатор"
 
-#: glade/cong-file-properties.glade.h:14
-#: glade/docbook-ulink-properties.glade.h:5
-msgid "Type"
-msgstr "Тип"
-
-#: glade/cong-file-properties.glade.h:15
-msgid "Version"
-msgstr "Версия"
-
 #: glade/cong-file-properties.glade.h:16
 msgid "XML Header"
 msgstr "Заголовок XML"
@@ -143,7 +1350,8 @@ msgstr "Заголовок XML"
 msgid "_Associate this DTD"
 msgstr "_Связать с этим DTD"
 
-#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -156,11 +1364,11 @@ msgid "Match _entire word only"
 msgstr "Совпадает _целое слово"
 
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
-#: src/cong-edit-find-and-replace.c:832 src/cong-edit-find-and-replace.c:846
+#: src/cong-edit-find-and-replace.c:835 src/cong-edit-find-and-replace.c:849
 msgid "Replace"
 msgstr "Заменить"
 
-#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:904
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:907
 msgid "Replace All"
 msgstr "Заменить всё"
 
@@ -170,7 +1378,7 @@ msgstr "З_аменить на:"
 
 #: glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "Искать _предыдущее"
 
 #: glade/cong-find-replace.glade.h:8
 msgid "_Match case"
@@ -192,12 +1400,37 @@ msgstr "Настройки \"Конгломерата\""
 msgid "Document Types"
 msgstr "Типы документов"
 
+#: glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "Расширения"
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "Элемент по умолчанию"
+
+#: glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "Название элемента"
+
+#: glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "Тип элемента"
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "Мне пофиг"
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "Структурный"
+
 #: glade/docbook-common-properties.glade.h:1
-#, fuzzy
 msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
-msgstr "<small> является Текст до  Текст до </small>"
+msgstr ""
+"<small>Вы можете использовать эту закладку чтобы указатьобласть применимости "
+"этого текста к различным типам компьютерных систем</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -209,16 +1442,19 @@ msgstr "Ревизии"
 
 #: glade/docbook-common-properties.glade.h:5
 msgid "Scope"
-msgstr ""
+msgstr "Область видимости"
 
 #: glade/docbook-common-properties.glade.h:6
-#, fuzzy
 msgid ""
 "This is a placeholder page.  Eventually you will be able to use this page to "
 "manipulate DocBook's simple version tracking information.\n"
 "\n"
 "This is listed in Bugzilla as bug #122538"
-msgstr "является до  до  с является дюйм"
+msgstr ""
+"Это тестовая закладка. Скоро с помощью этой закладки вы сможетеУправлять "
+"простейшими версиями документов типа DocBook.\n"
+"\n"
+"Это описано в Багзилле в проблеме #122538"
 
 #: glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -258,9 +1494,8 @@ msgid "I, II, III, ..."
 msgstr "I, II, III, ..."
 
 #: glade/docbook-orderedlist-properties.glade.h:6
-#, fuzzy
 msgid "Inherit numbering from surrounding lists"
-msgstr "Наследовать"
+msgstr "Использовать способ нумерации родительского списка"
 
 #: glade/docbook-orderedlist-properties.glade.h:7
 msgid "Minimise vertical space"
@@ -269,10 +1504,6 @@ msgstr "Уменьшить вертикальный промежуток"
 #: glade/docbook-orderedlist-properties.glade.h:8
 msgid "Numbering"
 msgstr "Нумерация"
-
-#: glade/docbook-orderedlist-properties.glade.h:10
-msgid "Style"
-msgstr "Стиль"
 
 #: glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
@@ -283,15 +1514,12 @@ msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
 #: glade/docbook-ulink-properties.glade.h:1
-#, fuzzy
 msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
-msgstr "<small> до  тип</small>"
-
-#: glade/docbook-ulink-properties.glade.h:2
-msgid "Link"
-msgstr "Ссылка"
+msgstr ""
+"<small>Некоторые приложения позволяют настраивать поведениессылок используя "
+"этот атрибут \"тип\".</small>"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -307,21 +1535,19 @@ msgstr "_Проверить эту ссылку"
 
 #: glade/plugin-arbitrary.glade.h:2
 msgid "Local Name"
-msgstr ""
+msgstr "Локальное название"
 
 #: glade/plugin-arbitrary.glade.h:3
-#, fuzzy
 msgid "Namespace URI"
-msgstr "Имя"
+msgstr "URI пространства имен"
 
 #: glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
 msgstr "Образец"
 
 #: glade/plugin-arbitrary.glade.h:6
-#, fuzzy
 msgid "Top-level Element"
-msgstr "Шаблон"
+msgstr "Элемент верхнего уровня"
 
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
@@ -331,7 +1557,7 @@ msgstr "Параметры создания"
 msgid "Depth"
 msgstr "Глубина"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:918
+#: glade/plugin-random.glade.h:3 src/cong-document.c:984
 msgid "Document Type"
 msgstr "Тип документа"
 
@@ -339,19 +1565,19 @@ msgstr "Тип документа"
 msgid "string_selection_dialog"
 msgstr "string_selection_dialog"
 
-#: src/cong-app.c:974
+#: src/cong-app.c:995
 msgid "XML Editor"
 msgstr "Редактор файлов в формате XML"
 
-#: src/cong-app.c:1103
+#: src/cong-app.c:1131
 msgid "Conglomerate could not load any xds files"
 msgstr "Не удалось загрузить ни один xds-файл"
 
-#: src/cong-app.c:1105
+#: src/cong-app.c:1133
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate не может найти описаний типов документов."
 
-#: src/cong-app.c:1107
+#: src/cong-app.c:1135
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -361,123 +1587,145 @@ msgstr ""
 "установили его. Попробуйте установить его. Если вы изменяли настройки по "
 "умолчанию для показа spec path, пожалуйста также проверьте их."
 
-#: src/cong-attribute-editor-cdata.c:218 src/cong-node-properties-dialog.c:470
+#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
+#: src/cong-node-properties-dialog.c:424
 #, c-format
-msgid "Add attribute \"%s\""
-msgstr "Добавить атрибут \"%s\""
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Установить атрибут \"%s\" в \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244 src/cong-attribute-editor.c:266
-#: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
+#: src/cong-attribute-editor.c:267 src/cong-attribute-editor-cdata.c:244
+#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-wrapper.c:279
+#: src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Удалить атрибути \"%s\""
 
-#: src/cong-attribute-editor-enumeration.c:106
+#: src/cong-attribute-editor-cdata.c:218
+#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-node-properties-dialog.c:470
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "Добавить атрибут \"%s\""
+
+#: src/cong-attribute-editor-enumeration.c:123
 msgid "(unspecified)"
 msgstr "(не указано)"
 
 #: src/cong-attribute-editor-lang.c:48
 msgid "Breton"
-msgstr ""
+msgstr "Бретонский"
 
 #: src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr ""
+msgstr "Каталанский"
 
 #: src/cong-attribute-editor-lang.c:50
 msgid "Czech"
-msgstr ""
+msgstr "Чешский"
 
 #: src/cong-attribute-editor-lang.c:51
 msgid "Danish"
-msgstr ""
+msgstr "Датский"
 
 #: src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr ""
+msgstr "Немецкий (Германия)"
 
 #: src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr ""
+msgstr "Немецкий (Швейцария)"
 
 #: src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
-msgstr ""
+msgstr "Английский (Американский)"
 
 #: src/cong-attribute-editor-lang.c:55
 msgid "English (British)"
-msgstr ""
+msgstr "Английский (Британский)"
 
 #: src/cong-attribute-editor-lang.c:56
 msgid "English (Canadian)"
-msgstr ""
+msgstr "Английский (Канадский)"
 
 #: src/cong-attribute-editor-lang.c:57
 msgid "Esperanto"
-msgstr ""
+msgstr "Эсперанто"
 
 #: src/cong-attribute-editor-lang.c:58
 msgid "Spanish"
-msgstr ""
+msgstr "Испанский"
 
 #: src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr ""
+msgstr "Фароезе"
 
 #: src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr ""
+msgstr "Французский (Франция)"
 
 #: src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr ""
+msgstr "Французкский (Швейцария)"
 
 #: src/cong-attribute-editor-lang.c:62
 msgid "Italian"
-msgstr ""
+msgstr "Итальянский"
 
 #: src/cong-attribute-editor-lang.c:63
 msgid "Dutch"
-msgstr ""
+msgstr "Голландский"
 
 #: src/cong-attribute-editor-lang.c:64
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвежский"
 
 #: src/cong-attribute-editor-lang.c:65
 msgid "Polish"
-msgstr ""
+msgstr "Польский"
 
 #: src/cong-attribute-editor-lang.c:66
 msgid "Portuguese (Portugal)"
-msgstr ""
+msgstr "Португальский (Португалия)"
 
 #: src/cong-attribute-editor-lang.c:67
 msgid "Portuguese (Brazilian)"
-msgstr ""
+msgstr "Португальский (Бразилия)"
 
 #: src/cong-attribute-editor-lang.c:68
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 #: src/cong-attribute-editor-lang.c:69
 msgid "Swedish"
-msgstr ""
+msgstr "Шведский"
 
 #: src/cong-attribute-editor-lang.c:70
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украинский"
 
 #: src/cong-attribute-editor-lang.c:159
-#, fuzzy
 msgid "No Language"
-msgstr "Язык"
+msgstr "Без указания языка"
 
-#: src/cong-attribute-editor.c:263 src/cong-attribute-wrapper.c:248
-#: src/cong-node-properties-dialog.c:424
+# c-format
+#. are there mem leaks here
+#: src/cong-attribute-editor-nmtoken.c:210
 #, c-format
-msgid "Set attribute \"%s\" to \"%s\""
-msgstr "Установить атрибут \"%s\" в \"%s\""
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Невозможно установить атрибут \"%s\" в \"%s\""
+
+#: src/cong-attribute-editor-nmtoken.c:222
+msgid "The attribute value must be an XML name token."
+msgstr "Значение аттрибута должно быть именем XML"
+
+#: src/cong-attribute-editor-nmtoken.c:223
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr ""
+"Имена XML могут содержать только буквы алфавита, цифры и знаки пунктуации "
+"_,-, ., и :. . Они не могут содержать пробелы и другие пробельные символы"
 
 #: src/cong-dialog.c:301
 msgid "_Close without Saving"
@@ -532,13 +1780,20 @@ msgstr "Изменения за последние %li минут будут п�
 msgid "Changes from the past minute will be discarded."
 msgstr "Изменения за последнюю минуту будут потеряны."
 
-#: src/cong-dispspec-element.c:724 src/cong-dispspec-element.c:760
-#: src/cong-xpath-expression.c:247
+#: src/cong-dispspec.c:501
+msgid "unnamed"
+msgstr "Без названия"
+
+#: src/cong-dispspec.c:521
+msgid "No description available."
+msgstr "Описание отсутствует."
+
+#: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(ошибка xpath)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:814
+#: src/cong-dispspec-element.c:771
 msgid "<untitled>"
 msgstr "<без названия>"
 
@@ -558,101 +1813,95 @@ msgstr "Тип файла"
 msgid "Coverage"
 msgstr "Охват"
 
-#: src/cong-dispspec.c:473
-msgid "unnamed"
-msgstr "Без названия"
+#: src/cong-document.c:649
+msgid "(Untitled)"
+msgstr "(Без названия)"
 
-#: src/cong-dispspec.c:493
-msgid "No description available."
-msgstr "Описание отсутствует."
-
-#: src/cong-document.c:882
+#: src/cong-document.c:948
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Атрибут \"%s\""
 
-#: src/cong-document.c:889
+#: src/cong-document.c:955
 #, c-format
 msgid "Text \"%s\""
 msgstr "Текст \"%s\""
 
-#: src/cong-document.c:895
+#: src/cong-document.c:961
 msgid "Character Data"
 msgstr "Данные символов"
 
-#: src/cong-document.c:898
+#: src/cong-document.c:964
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Перекрёстная ссылка на сущность \"%s\""
 
-#: src/cong-document.c:901
+#: src/cong-document.c:967
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Сущность \"%s\""
 
-#: src/cong-document.c:904
+#: src/cong-document.c:970
 msgid "XML Processing Instruction"
 msgstr "Инструкции обработки XML"
 
-#: src/cong-document.c:909
+#: src/cong-document.c:975
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Комментарий \"%s\""
 
-#: src/cong-document.c:915
-msgid "Document"
-msgstr "Документ"
-
-#: src/cong-document.c:921
+#: src/cong-document.c:987
 msgid "Document Fragment"
 msgstr "Фрагмент документа"
 
-#: src/cong-document.c:924
+#: src/cong-document.c:990
 msgid "Notation"
 msgstr "Написание"
 
-#: src/cong-document.c:927
+#: src/cong-document.c:993
 msgid "HTML Document"
 msgstr "Документ HTML"
 
-#: src/cong-document.c:933
+#: src/cong-document.c:999
 msgid "Element Declaration"
 msgstr "Объявление элемента"
 
-#: src/cong-document.c:936
+#: src/cong-document.c:1002
 msgid "Attribute Declaration"
 msgstr "Объявление атрибута"
 
-#: src/cong-document.c:939
+#: src/cong-document.c:1005
 msgid "Entity Declaration"
 msgstr "Объявление сущности"
 
-#: src/cong-document.c:942
+#: src/cong-document.c:1008
 msgid "Namespace Declaration"
 msgstr "Объявление пространства имён"
 
-#: src/cong-document.c:945
-#, fuzzy
+#: src/cong-document.c:1011
 msgid "XInclude Start"
-msgstr "Начало"
+msgstr "Начало включения XInclude"
 
-#: src/cong-document.c:948
-#, fuzzy
+#: src/cong-document.c:1014
 msgid "XInclude End"
-msgstr "Конец"
+msgstr "Конец включения XInclude"
 
-#: src/cong-document.c:1950
-#, fuzzy, c-format
+#: src/cong-document.c:2173
+#, c-format
 msgid "Select %s"
-msgstr "Выбрать с"
+msgstr "Выбрать %s"
 
-#: src/cong-dom-view.c:223
+#: src/cong-dom-view.c:224
 msgid "UNKNOWN"
 msgstr "Неизвестный"
 
-#: src/cong-dom-view.c:250
+#: src/cong-dom-view.c:251
 msgid "Text:"
 msgstr "Текст:"
+
+#: src/cong-dom-view.c:257
+msgid "CDATA:"
+msgstr "CDATA:"
 
 #: src/cong-edit-find-and-replace.c:98
 #, c-format
@@ -663,44 +1912,44 @@ msgstr "Подстрока \"%s\" не найдена."
 msgid "Replace _All"
 msgstr "Заменить вс_е"
 
-#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:757
-#: src/cong-edit-find-and-replace.c:955 src/cong-edit-find-and-replace.c:996
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:760
+#: src/cong-edit-find-and-replace.c:958 src/cong-edit-find-and-replace.c:999
 msgid "Find"
 msgstr "Найти"
 
-#: src/cong-editor-node-text.c:971
+#: src/cong-editor-node-text.c:984
 msgid "Select word"
 msgstr "Выберите слово"
 
-#: src/cong-editor-node-text.c:996
+#: src/cong-editor-node-text.c:1009
 msgid "Move cursor"
 msgstr "Перемещать Курсор"
 
-#: src/cong-editor-node-text.c:1080
+#: src/cong-editor-node-text.c:1095
 msgid "Drag out selection"
 msgstr "Перенесите выделенную область"
 
-#: src/cong-editor-widget3.c:258
+#: src/cong-editor-widget3.c:260
 msgid "Expander Size"
 msgstr "Размер расширителя"
 
-#: src/cong-editor-widget3.c:259
+#: src/cong-editor-widget3.c:261
 msgid "Size of the expander arrow"
 msgstr "Размер стрелки расширителя"
 
-#: src/cong-editor-widget3.c:738
+#: src/cong-editor-widget3.c:745
 msgid "Input Method"
 msgstr "Способ ввода"
 
-#: src/cong-editor-widget3.c:850 src/cong-editor-widget3.c:1381
+#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
 msgid "Typing"
 msgstr "Набор"
 
-#: src/cong-editor-widget3.c:1282
+#: src/cong-editor-widget3.c:1289
 msgid "Cursor Movement"
 msgstr "Движение курсора"
 
-#: src/cong-editor-widget3.c:1322 src/cong-editor-widget3.c:1335
+#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
 msgid "Delete Selection"
 msgstr "Удаление выделения"
 
@@ -728,16 +1977,13 @@ msgstr ""
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-dialog.c:321
-#, fuzzy, c-format
+#, c-format
 msgid "An error was reported whilst attempting the operation \"%s\""
-msgstr "ошибка с"
+msgstr "Во время проведения операции \"%s\" возника ошибка"
 
 #: src/cong-error-dialog.c:325
-#, fuzzy
 msgid "A GError occurred; the error report was:"
-msgstr ""
-"A ошибка\n"
-"<i> с</i>"
+msgstr "Возникла ошибка:"
 
 #: src/cong-error-dialog.c:335 src/cong-error-file-open.c:516
 msgid "An unexpected error occurred."
@@ -748,24 +1994,21 @@ msgid "For more information, click on the \"Details\" button."
 msgstr "Для получения большей информации, нажмите на кнопку \"Подробности\""
 
 #: src/cong-error-dialog.c:386
-#, fuzzy
 msgid "An error occurred whilst running this system command:"
-msgstr ""
-"ошибка команда\n"
-"<tt> с</tt>"
+msgstr "Во время выполнения системной команды возникла ошибка"
 
 #: src/cong-error-dialog.c:389
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The error number reported was %d.  Below is the error text that was output "
 "by the command."
-msgstr "ошибка номер d Под абзацем является ошибка Текст   команда."
+msgstr ""
+"Ошибка номер %d Ниже приведена информация об ошибкикоторую вернула команда."
 
 #. FIXME: ought to set up the parent window properly
 #: src/cong-error-file-open.c:67
-#, fuzzy
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr "Искать"
+msgstr "Ну удалось запустить программу поиска gnome-search-files.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: src/cong-error-file-open.c:103
@@ -796,13 +2039,15 @@ msgid "There is no file with that name at that location."
 msgstr "Нет файла с таким названием в указанном месте."
 
 #: src/cong-error-file-open.c:292
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
 "capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr "с название является является Искать до ."
+msgstr ""
+"(а) Проверьте правильность написания имени файлаПомните, что заглавные буквы "
+"отличаются от строчных\n"
+"(б) Воспользуйтесь программой поиска"
 
 #: src/cong-error-file-open.c:293 src/cong-error-file-open.c:302
 #: src/cong-error-file-open.c:357 src/cong-error-file-open.c:398
@@ -814,26 +2059,29 @@ msgid "The location does not exist."
 msgstr "Расположение не существует."
 
 #: src/cong-error-file-open.c:301
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"MyDirectory\" is not the same as "
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr "расположение является является Искать до ."
+msgstr ""
+"(а) Проверьте, правильно ли вы указали положениеПомните, что строчные буквы "
+"отличаются от заглавных\n"
+"(б) Воспользуйтесь программой поиска"
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-open.c:314
-#, fuzzy, c-format
+#, c-format
 msgid "The location \"%s\" does not support the reading of files."
-msgstr "расположение с."
+msgstr "Невозожно читать файлы с \"%s\""
 
 #: src/cong-error-file-open.c:318
-#, fuzzy
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
-msgstr "расположение до  до  чтение."
+msgstr ""
+"Попробуйте загрузить файл с другого места. Если вы уверенычто имеете права "
+"на чтение для данного файла, спросите администраторасистемы"
 
 #: src/cong-error-file-open.c:328
 msgid "There were problems reading the content of the file."
@@ -862,18 +2110,19 @@ msgid "There were problems reading the contents of the file."
 msgstr "Существует проблема при считывании содержимого файла."
 
 #: src/cong-error-file-open.c:355 src/cong-error-file-save.c:251
-#, fuzzy
 msgid "The system does not recognise that as a valid location."
-msgstr "расположение."
+msgstr "Система не разспознает это как правильное положение"
 
 #: src/cong-error-file-open.c:356
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr "расположение является является HTTP Искать до ."
+msgstr ""
+"(а) Проверьте, правильно ли вы указали положениеПомните, что строчные буквы "
+"отличаются от заглавных\n"
+"(б) Воспользуйтесь программой поиска"
 
 #: src/cong-error-file-open.c:367
 msgid "You do not have permission to read that file."
@@ -904,9 +2153,8 @@ msgid "\"%s\" is a directory, rather than a file."
 msgstr "\"%s\" каталог, а не файл."
 
 #: src/cong-error-file-open.c:397
-#, fuzzy
 msgid "Try using the Search Tool to find your file."
-msgstr "Искать до ."
+msgstr "Попробуйте найти ваш файл с помощью программы пользователя"
 
 #: src/cong-error-file-open.c:409 src/cong-error-file-save.c:293
 msgid "The system ran out of memory."
@@ -924,16 +2172,16 @@ msgstr ""
 "Попробуйте ещё раз.  Если ошибка повториться, возможно сервер выключен."
 
 #: src/cong-error-file-open.c:428 src/cong-error-file-open.c:437
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
-msgstr "расположение."
+msgstr ""
+"(а) Проверьте правильнось написания расположения\n"
+"(б) Попробуйте еще раз. В случае неудачи сервер может не работать."
 
 #: src/cong-error-file-open.c:445 src/cong-error-file-save.c:329
-#, fuzzy
 msgid "The system could not login to the location."
-msgstr "до  расположение."
+msgstr "Невозможно получить доступ к вашему положению"
 
 #: src/cong-error-file-open.c:446 src/cong-error-file-open.c:456
 msgid "Try again. If it fails again, contact your system administrator."
@@ -942,250 +2190,258 @@ msgstr ""
 "администратором."
 
 #: src/cong-error-file-open.c:455 src/cong-error-file-save.c:338
-#, fuzzy
 msgid "The location was too busy."
-msgstr "расположение."
+msgstr "Расположение занято"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-file-open.c:505
-#, fuzzy, c-format
+#, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
-msgstr "ошибка с с"
+msgstr "Ошибка \"%s\" возникла во время доступа к \"%s\""
 
 #: src/cong-error-file-open.c:509
-#, fuzzy
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
-msgstr "ошибка Файл."
+msgstr ""
+"Программа неожиданно получила сообщение об ошибке отвиртуальной файловой "
+"системы"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: src/cong-error-file-save.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot save \"%s\" to %s."
-msgstr "с с до  с."
+msgstr "%s не может сохранить \"%s\" %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-save.c:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s could not save \"%s\" to %s."
-msgstr "с с до  с."
+msgstr "%s не может сохранить \"%s\" в %s."
 
 #: src/cong-error-file-save.c:111
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
 "that capitalisation is significant (\"MyDirectory\" is not the same as "
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
-msgstr "расположение с название является является до  расположение."
+msgstr ""
+"(а) Проверьте правильнось написания расположения. Помните, что строчные "
+"буквы отличаются от заглавных\n"
+"(б) Попробуйте сохранить в другое месть"
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:119 src/cong-error-file-save.c:238
-#, fuzzy, c-format
+#, c-format
 msgid "The location \"%s\" does not support the writing of files."
-msgstr "расположение с."
+msgstr "Положение \"%s\" не поддерживает запись файлов."
 
 #: src/cong-error-file-save.c:123 src/cong-error-file-save.c:242
 #: src/cong-error-file-save.c:350
-#, fuzzy
 msgid "Try saving to a different location."
-msgstr "до  расположение."
+msgstr "Попробуйте записать в другое место"
 
 #: src/cong-error-file-save.c:134
 msgid "There were problems writing the content of the file."
 msgstr "Возникли проблемы при записи содержимого файла."
 
 #: src/cong-error-file-save.c:135
-#, fuzzy
 msgid "Try again.  If it fails again, try saving to a different location."
-msgstr "до  расположение."
+msgstr ""
+"Попробуйте еще раз. В случае неудачи попробуйте записать в другое место"
 
 #: src/cong-error-file-save.c:164
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
-msgstr "с с."
+msgstr "Для записи файла требуется %s, но устройство может вместить только %s."
 
 #. Can't get at the capacity for the device or "volume":
 #: src/cong-error-file-save.c:170
-#, fuzzy, c-format
+#, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
-msgstr "является до  с."
+msgstr "Файл слишком велик, чтобы поместиться на устройстве (размер файла %s)."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:178
-#, fuzzy
 msgid "The file is too big to fit on the device."
-msgstr "является до ."
+msgstr "Файл слишком велик, чтобы поместиться на устройстве"
 
 #: src/cong-error-file-save.c:187
-#, fuzzy
 msgid "Try saving the file to a different location."
-msgstr "до  расположение."
+msgstr "Попробуйте записать файл в другое место."
 
 #: src/cong-error-file-save.c:208
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
-msgstr "с с."
+msgstr "Размер файла %s, но на устройстве только %s свободного места"
 
 #. Can't get at the free space for the device or "volume":
 #: src/cong-error-file-save.c:214
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
-msgstr "является до  дюйм с."
+msgstr ""
+"Файл слишком велик для того, чтобы поместиться на свободном месте (размер "
+"файла %s)."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:222
-#, fuzzy
 msgid "The file is too big to fit in the remaining space on the device."
-msgstr "является до  дюйм."
+msgstr "Файл слишком велик чтобы поместиться на свободном месте."
 
 #: src/cong-error-file-save.c:231
-#, fuzzy
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
-msgstr "до  расположение   до ."
+msgstr ""
+"Попробуйте сохранить файл в другое место, или освободите место на устройстве"
 
 #: src/cong-error-file-save.c:252
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
 "\").\n"
 "(ii) Try saving to a different location."
-msgstr "расположение является является HTTP до  расположение."
+msgstr ""
+"(а) Проверьте правильнось написания расположенияПомните, что строчные буквы "
+"отличаются от заглавных\n"
+"(б) Попробуйте сохранить в другое место"
 
 #: src/cong-error-file-save.c:266
-#, fuzzy
 msgid "You do not have permission to write to that location."
-msgstr "до  запись до  расположение."
+msgstr "У вас нет прав на запись в это место."
 
 #: src/cong-error-file-save.c:267
-#, fuzzy
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
-msgstr "до  расположение до ."
+msgstr ""
+"Попробуйте сохранить в другое месть, или попросите системного администратора "
+"для того, чтобы получить их."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:281
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory."
-msgstr "с является."
+msgstr "\"%s\"является каталогом."
 
 #: src/cong-error-file-save.c:285
-#, fuzzy
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
-msgstr "до  до ."
+msgstr "Вы должны сохранить файл в директорию, а не на саму директорию."
 
 #: src/cong-error-file-save.c:303
-#, fuzzy
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
-msgstr "до  расположение."
+msgstr ""
+"Попробуйте снова. В случае неудачи сервер может быть выключен, попробуйте "
+"сохранить в другое место."
 
 #: src/cong-error-file-save.c:312 src/cong-error-file-save.c:321
-#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to "
 "another location."
-msgstr "расположение до  расположение."
+msgstr ""
+"(а) Попробуйте проверить правильность написания.\n"
+"(б) Попробуйте еще раз, сервер может быть выключен; попробуйтесохранить в "
+"другое место."
 
 #: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
-#, fuzzy
 msgid "Try again. If it fails again, try saving to another location."
-msgstr "до  расположение."
+msgstr "Попробуйте еще раз. В случае неудачи сохраните в другое место."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:346
-#, fuzzy, c-format
+#, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
-msgstr "расположение с до  чтение."
+msgstr "Расположение \"%s\" позволяет только читать, а не записывать."
 
 #. FIXME: need to think more about these messages
 #: src/cong-error-file-save.c:358
-#, fuzzy, c-format
+#, c-format
 msgid "The name \"%s\" is too long for the location to manage."
-msgstr "название с является расположение до ."
+msgstr "Название \"%s\" слишком близко для данного положения."
 
 #: src/cong-error-file-save.c:362
-#, fuzzy
 msgid "Try again with a shorter file name."
-msgstr "название."
+msgstr "Попробуйте еще раз с более коротким именем файла."
 
 #. 5 megabytes, for a test
 #: src/cong-error-tests.c:25
-#, fuzzy, c-format
+#, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
-msgstr "Файл Раскрыть с с"
+msgstr "Тестируется неудача в Файл->Открыть->\"%s\" с результатом %s"
 
 #: src/cong-error-tests.c:31
-#, fuzzy, c-format
+#, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
-msgstr "Файл Сохранить с с"
+msgstr "Тестируется неудача в Файл->Сохранить->\"%s\" с результатом %s"
 
 #: src/cong-error-tests.c:37
-#, fuzzy, c-format
+#, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
-msgstr "с с"
+msgstr "Тестируется неудача в \"%s\" с результатом %s"
 
 #: src/cong-error-tests.c:40
-#, fuzzy
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr "является."
+msgstr "Conglomerate симулирует неудачу в общих операциях с файлами."
 
 #: src/cong-error-tests.c:43
 msgid "This dialog was generated by the automated testing routine"
 msgstr "Этот диалог был сгенерировал автоматической подпрограммой тестирования"
 
-#: src/cong-file-export.c:157
-#, fuzzy
+#: src/cong-file-export.c:153
 msgid "(No description available)"
-msgstr "(описание отсутствует)"
+msgstr "(Описание отсутствует)"
 
-#: src/cong-file-export.c:194
+#: src/cong-file-export.c:212
 msgid "Select file to export to"
 msgstr "Выберите файл для экспорта в"
 
-#: src/cong-file-export.c:229
+#: src/cong-file-export.c:260
 #, c-format
 msgid "Export \"%s\""
 msgstr "Экспортировать \"%s\""
 
-#: src/cong-file-export.c:234
+#: src/cong-file-export.c:265
 msgid "Export"
 msgstr "Экспортировать"
 
-#: src/cong-file-export.c:285
+#: src/cong-file-export.c:317
 msgid "Exporter:"
 msgstr "Дополнение экспорта:"
 
-#: src/cong-file-export.c:287
+#: src/cong-file-export.c:319
 msgid "File:"
 msgstr "Файл:"
 
-#: src/cong-file-export.c:294
+#: src/cong-file-export.c:321
 msgid "Export Options"
 msgstr "Опции экспорта"
 
-#: src/cong-file-export.c:381
+#: src/cong-file-export.c:425
 #, c-format
 msgid "Conglomerate cannot export \"%s\""
 msgstr "Не удалось импортировать \"%s\""
 
-#: src/cong-file-export.c:384
-msgid "None of Conglomerate's plugins know how to export files of that type."
+#: src/cong-file-export.c:429
+msgid "None of Conglomerate's plugins know how to export files of this type."
 msgstr ""
 "Дополнения редактора Conglomerate не могут экспортировать файлы этого типа"
+
+#: src/cong-file-export.c:462
+msgid "No output file specified"
+msgstr "Выходной файл не задан"
+
+#: src/cong-file-export.c:463
+msgid "Please specify a file name."
+msgstr "Пожалуйста задайте имя файла."
 
 #: src/cong-file-import.c:80
 msgid "Import file..."
@@ -1196,7 +2452,8 @@ msgstr "Импортировать файл..."
 msgid "Creating a new file (%s)"
 msgstr "Создание нового файла (%s)"
 
-#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:643
+#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
+#: src/cong-file-new.c:643
 msgid "Creating a new file"
 msgstr "Создание нового файла"
 
@@ -1261,33 +2518,33 @@ msgstr "Принудительно"
 msgid "Select an XML document"
 msgstr "Выберите документ XML"
 
-#: src/cong-file-print.c:197
+#: src/cong-file-print.c:195
 #, c-format
 msgid "Print \"%s\""
 msgstr "Напечатать \"%s\""
 
-#: src/cong-file-print.c:203
+#: src/cong-file-print.c:201
 msgid "Print"
 msgstr "Напечатать"
 
-#: src/cong-file-print.c:235
+#: src/cong-file-print.c:233
 msgid "Print Method:"
 msgstr "Метод печати:"
 
-#: src/cong-file-print.c:243
+#: src/cong-file-print.c:241
 msgid "Print Options"
 msgstr "Параметры печати"
 
-#: src/cong-file-print.c:321 src/cong-menus.c:782
+#: src/cong-file-print.c:336 src/cong-menus.c:729
 msgid "Print Preview"
 msgstr "Образец печати"
 
-#: src/cong-file-print.c:331
+#: src/cong-file-print.c:346
 #, c-format
 msgid "Conglomerate cannot print \"%s\""
 msgstr "Невозможно напечатать \"%s\""
 
-#: src/cong-file-print.c:334
+#: src/cong-file-print.c:349
 msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr "Дополнения редактора Conglomerate не могут печатать файлы этого типа."
 
@@ -1308,107 +2565,129 @@ msgid "_Remove this DTD"
 msgstr "_Удалить этот DTD"
 
 #: src/cong-file-properties.c:190
-#, fuzzy
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
-msgstr "<small> является до  дюйм</small>"
+msgstr ""
+"Документ не задает внешнее определение типа (DTD), но Conglomerate надеется "
+"что приведенная информация верна. Нажмите на \"Ассоциировать с этим DTD\" "
+"длятого, чтобы занести эту информацию в документ."
 
 #: src/cong-file-properties.c:199
-#, fuzzy
 msgid "No External Subset"
-msgstr "Нет Внешний объект"
+msgstr "Отсутствует внешнее определение"
 
 #: src/cong-file-properties.c:201 src/plugin-validate.c:171
 msgid "_Add a DTD"
 msgstr "_Добавить DTD"
 
-#: src/cong-file-properties.c:273 src/cong-file-properties.c:275
-#, fuzzy
+#: src/cong-file-properties.c:275 src/cong-file-properties.c:277
 msgid "Unknown"
-msgstr "Неизвестные данные"
+msgstr "Неизвестно"
 
-#: src/cong-file-properties.c:286
+#: src/cong-file-properties.c:288
 msgid "Unspecified"
 msgstr "Не указано"
 
-#: src/cong-file-properties.c:361
+#: src/cong-file-properties.c:363
 msgid "Remove DTD"
 msgstr "Удалить DTD"
 
-#: src/cong-file-properties.c:378 src/cong-util.c:1439
+#: src/cong-file-properties.c:380 src/cong-util.c:1683
 msgid "Associate with DTD"
 msgstr "Связать с DTD"
 
-#: src/cong-file-save.c:71
+#: src/cong-file-save.c:75
 msgid "Save XML as..."
 msgstr "Сохранить XML как..."
 
-#: src/cong-location.c:393 src/cong-location.c:414
+#: src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Файл \"%s\" доступен только для чтения.\n"
+
+#: src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Файл \"%s\" уже существует.\n"
+
+#: src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "_Заменить"
+
+#: src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Вы хотите заменть его тем файлом, который записываете?"
+
+#: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
 msgstr "Объединять таги"
 
-#: src/cong-location.c:465
+#: src/cong-location.c:468
 msgid "Delete character"
 msgstr "Удалить символ"
 
-#: src/cong-location.c:1089
+#: src/cong-location.c:1060
 msgid "Calculating previous page"
 msgstr "Вычисление предыдущей страницы"
 
-#: src/cong-location.c:1112
+#: src/cong-location.c:1083
 msgid "Calculating next page"
 msgstr "Вычисление следующей страницы"
 
-#: src/cong-menus.c:116 src/cong-menus.c:188 src/cong-menus.c:223
+#: src/cong-menus.c:112 src/cong-menus.c:165 src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
 msgstr "Выбранный пункт меню ещё не работает."
 
-#: src/cong-menus.c:502
-#, fuzzy
+#: src/cong-menus.c:465
 msgid "Conglomerate cannot open the result of the transformation"
-msgstr "open"
+msgstr "Conglomerate не может открыть результат преобразования"
 
-#: src/cong-menus.c:567 src/cong-plugin.c:646
-#, fuzzy, c-format
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:530 src/cong-plugin.c:734
+#, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
-msgstr "с"
+msgstr "Возникла проблема чтения стилевого файла \"%s\""
 
-#: src/cong-menus.c:570 src/cong-menus.c:594 src/cong-plugin.c:649
-#: src/cong-plugin.c:673
+#: src/cong-menus.c:533 src/cong-menus.c:557 src/cong-plugin.c:736
+#: src/cong-plugin.c:799
 msgid "Conglomerate could not transform the document"
 msgstr "Не удаётся преобразовать документ"
 
-#: src/cong-menus.c:591 src/cong-plugin.c:670
+#: src/cong-menus.c:554
 msgid "There was a problem applying the stylesheet file"
 msgstr "Возникли проблемы при применении файла спецификации"
 
-#: src/cong-menus.c:1175
-#, fuzzy
+#: src/cong-menus.c:1115
 msgid "Test Progress Checklist"
-msgstr "Проверка Степень выполнения"
+msgstr "Проверка Индикации Прогресса"
 
-#: src/cong-menus.c:1179
-#, fuzzy, c-format
+#: src/cong-menus.c:1119
+#, c-format
 msgid "This is stage %i"
-msgstr "является"
+msgstr "Это стадия %i"
 
-#: src/cong-menus.c:1232
+#: src/cong-menus.c:1170
 msgid "Message Log - Conglomerate"
 msgstr "Журнал сообщений - Conglomerate"
 
-#: src/cong-menus.c:1253
+#: src/cong-menus.c:1189
 msgid "Signal Log - Conglomerate"
 msgstr "Журнал сигналов"
 
-#: src/cong-menus.c:1498
+#: src/cong-menus.c:1429
 msgid "translator_credits"
 msgstr ""
 "Дмитрий Мастрюков <dmitry@taurussoft.org>\n"
 "Виталий Липатов <lav@etersoft.ru>"
 
-#: src/cong-menus.c:1502
+#: src/cong-menus.c:1448
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1416,221 +2695,167 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 
-#: src/cong-menus.c:1503
+#: src/cong-menus.c:1449
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr ""
 "\"Конгломерат\": свободный, дружественный редактор файлов в формате XML"
 
-#: src/cong-menus.c:1548 src/cong-menus.c:1628
-msgid "/_File"
-msgstr "/_Файл"
+#. Menus:
+#: src/cong-menus.c:1483
+msgid "_File"
+msgstr "_Файл"
 
-#: src/cong-menus.c:1549 src/cong-menus.c:1629
-msgid "/File/_New..."
-msgstr "/Файл/_Создать..."
+#: src/cong-menus.c:1484
+msgid "_Edit"
+msgstr "_Правка"
 
-#: src/cong-menus.c:1550 src/cong-menus.c:1630
-msgid "/File/_Open..."
-msgstr "/Файл/_Открыть..."
+#: src/cong-menus.c:1489
+msgid "_Help"
+msgstr "_Справка"
 
-#: src/cong-menus.c:1551 src/cong-menus.c:1556 src/cong-menus.c:1561
-#: src/cong-menus.c:1564 src/cong-menus.c:1567 src/cong-menus.c:1569
-#: src/cong-menus.c:1631 src/cong-menus.c:1633
-msgid "/File/"
-msgstr "/Файл/"
+#. Sub-menus:
+#: src/cong-menus.c:1492 src/popup.c:1099
+msgid "New sub-element"
+msgstr "Создать подэлемент"
+
+#: src/cong-menus.c:1493 src/popup.c:1113
+msgid "New sibling"
+msgstr "Создать соседний элемент"
+
+#: src/cong-menus.c:1494
+msgid "Remove span tag"
+msgstr "Удалить встроенный тэг"
+
+#. Actions found in File menu:
+#: src/cong-menus.c:1497
+msgid "_New..."
+msgstr "_Создать..."
+
+#: src/cong-menus.c:1498
+msgid "_Open..."
+msgstr "_Открыть..."
+
+#: src/cong-menus.c:1499
+msgid "_Import..."
+msgstr "_Импортировать..."
+
+#: src/cong-menus.c:1500
+msgid "_Close"
+msgstr "_Закрыть"
+
+#: src/cong-menus.c:1501
+msgid "_Quit"
+msgstr "В_ыйти"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1505
+msgid "Prefere_nces"
+msgstr "_Изменить настройки"
+
+#. Actions found in Help menu:
+#: src/cong-menus.c:1518
+msgid "_Contents"
+msgstr "_Содержание"
+
+#: src/cong-menus.c:1519
+msgid "_Homepage"
+msgstr "_Домашняя страница"
+
+#: src/cong-menus.c:1520
+msgid "_About"
+msgstr "_О программе"
+
+#: src/cong-menus.c:1526
+msgid "_Tools"
+msgstr "_Инструменты"
+
+#. Actions found in File menu:
+#: src/cong-menus.c:1530
+msgid "_Save"
+msgstr "Со_хранить"
+
+#: src/cong-menus.c:1531
+msgid "Save _as..."
+msgstr "Сохранить XML как..."
+
+#: src/cong-menus.c:1532
+msgid "Sa_ve a Copy..."
+msgstr "Сохранить копи_ю..."
+
+#: src/cong-menus.c:1534
+msgid "Print Previe_w..."
+msgstr "Образец печати"
+
+#: src/cong-menus.c:1535
+msgid "_Print"
+msgstr "Напечатать"
+
+#: src/cong-menus.c:1538
+msgid "_Revert"
+msgstr "Восста_новить"
+
+#: src/cong-menus.c:1540
+msgid "_Export..."
+msgstr "_Экспортировать..."
+
+#: src/cong-menus.c:1541
+msgid "Proper_ties"
+msgstr "Изменить свойства"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1545 src/cong-menus.c:1768
+msgid "_Undo"
+msgstr "_Откатить"
+
+#: src/cong-menus.c:1546 src/cong-menus.c:1778
+msgid "_Redo"
+msgstr "Во_звратить"
+
+#: src/cong-menus.c:1547
+msgid "Cu_t"
+msgstr "_Вырезать"
+
+#: src/cong-menus.c:1548 src/popup.c:755 src/popup.c:1051
+msgid "_Copy"
+msgstr "_Скопировать"
+
+#: src/cong-menus.c:1549 src/popup.c:769
+msgid "_Paste"
+msgstr "_Вставить"
+
+#: src/cong-menus.c:1550
+msgid "_Find..."
+msgstr "_Найти..."
+
+#: src/cong-menus.c:1551
+msgid "Find Ne_xt"
+msgstr "Найти _следующее"
 
 #: src/cong-menus.c:1552
-msgid "/File/_Save"
-msgstr "/Файл/Со_хранить"
+msgid "Find Pre_vious"
+msgstr "Найти пред_ыдущее"
 
 #: src/cong-menus.c:1553
-msgid "/File/Save _As..."
-msgstr "/Файл/Сохранить _как..."
+msgid "R_eplace..."
+msgstr "_Заменить"
 
-#: src/cong-menus.c:1554
-msgid "/File/Sa_ve a Copy..."
-msgstr "/Файл/Сохранить копи_ю..."
+#: src/cong-menus.c:1555
+msgid "_Insert..."
+msgstr "Вставить _из..."
 
-#: src/cong-menus.c:1557
-msgid "/File/Print Previe_w..."
-msgstr "/Файл/Просмотреть образе_ц печати..."
+#: src/cong-menus.c:1556
+msgid "View _Source"
+msgstr "Просмотреть _исходный текст"
 
-#: src/cong-menus.c:1558
-msgid "/File/_Print..."
-msgstr "/Файл/На_печатать..."
+#: src/cong-menus.c:1764
+#, c-format
+msgid "_Undo: %s"
+msgstr "_Откатить: %s"
 
-#: src/cong-menus.c:1562
-msgid "/File/_Revert"
-msgstr "/Файл/Восста_новить"
-
-#: src/cong-menus.c:1565 src/cong-menus.c:1632
-msgid "/File/_Import..."
-msgstr "/Файл/_Импортировать..."
-
-#: src/cong-menus.c:1566
-msgid "/File/_Export..."
-msgstr "/Файл/_Экспортировать..."
-
-#: src/cong-menus.c:1568
-msgid "/File/Proper_ties"
-msgstr "/Файл/Из_менить свойства"
-
-#: src/cong-menus.c:1570 src/cong-menus.c:1634
-msgid "/File/_Close"
-msgstr "/Файл/_Закрыть"
-
-#: src/cong-menus.c:1571 src/cong-menus.c:1635
-msgid "/File/_Quit"
-msgstr "/Файл/В_ыйти"
-
-#: src/cong-menus.c:1573 src/cong-menus.c:1637
-msgid "/_Edit"
-msgstr "/_Правка"
-
-#: src/cong-menus.c:1574
-msgid "/Edit/_Undo"
-msgstr "/Правка/_Откатить"
-
-#: src/cong-menus.c:1575
-msgid "/Edit/_Redo"
-msgstr "/Правка/Возв_ратить"
-
-#: src/cong-menus.c:1576 src/cong-menus.c:1580 src/cong-menus.c:1585
-#: src/cong-menus.c:1588 src/cong-menus.c:1591
-msgid "/Edit/"
-msgstr "/Правка/"
-
-#: src/cong-menus.c:1577
-msgid "/Edit/Cu_t"
-msgstr "/Правка/_Вырезать"
-
-#: src/cong-menus.c:1578
-msgid "/Edit/_Copy"
-msgstr "/Правка/С_копировать"
-
-#: src/cong-menus.c:1579
-msgid "/Edit/_Paste"
-msgstr "/Правка/Вст_авить"
-
-#: src/cong-menus.c:1581
-msgid "/Edit/_Find..."
-msgstr "/Правка/_Найти..."
-
-#: src/cong-menus.c:1582
-msgid "/Edit/Find Ne_xt"
-msgstr "/Правка/Найти с_ледующее"
-
-#: src/cong-menus.c:1583
-msgid "/Edit/Find Pre_vious"
-msgstr "/Правка/Найти пред_ыдущее"
-
-#: src/cong-menus.c:1584
-msgid "/Edit/R_eplace..."
-msgstr "/Правка/_Заменить"
-
-#: src/cong-menus.c:1587
-msgid "/Edit/_Insert..."
-msgstr "/Правка/Вставить _из..."
-
-#: src/cong-menus.c:1590
-msgid "/Edit/View _Source"
-msgstr "/Правка/Просмотреть _исходный текст"
-
-#: src/cong-menus.c:1592 src/cong-menus.c:1638
-msgid "/Edit/Prefere_nces"
-msgstr "/Правка/_Изменить настройки"
-
-#: src/cong-menus.c:1595
-msgid "/Debug"
-msgstr "/Отладка"
-
-#: src/cong-menus.c:1596
-#, fuzzy
-msgid "/Debug/Begin self-test of error-reporting system..."
-msgstr "Начало ошибка."
-
-#: src/cong-menus.c:1597
-msgid "/Debug/Transform DocBook to HTML"
-msgstr "/Тесты/Преобразовать формат DocBook в формат HTML"
-
-#: src/cong-menus.c:1598
-msgid "/Debug/Transform DocBook to XHTML"
-msgstr "/Тесты/Преобразовать формат DocBook в формат XHTML"
-
-#: src/cong-menus.c:1599
-msgid "/Debug/Transform DocBook to HTML Help"
-msgstr "/Тесты/Преобразовать формат DocBook в формат Справка в формате HTML"
-
-#: src/cong-menus.c:1600
-msgid "/Debug/Transform DocBook to Java Help"
-msgstr "/Тесты/Преобразовать формат DocBook в формат Справка в формате Java"
-
-#: src/cong-menus.c:1601
-msgid "/Debug/Transform DocBook to FO"
-msgstr "/Тесты/Преобразовать формат DocBook в формат FO"
-
-#: src/cong-menus.c:1603
-msgid "/Debug/Preview XSL:FO"
-msgstr "/Тесты/Посмотреть образец XSL:FO"
-
-#: src/cong-menus.c:1605
-msgid "/Debug/DTD"
-msgstr "/Тесты/DTD"
-
-#: src/cong-menus.c:1606
-msgid "/Debug/Dialog"
-msgstr "/Тесты/Диалог"
-
-#: src/cong-menus.c:1607
-#, fuzzy
-msgid "/Debug/Progress Checklist"
-msgstr "Степень выполнения"
-
-#: src/cong-menus.c:1608
-#, fuzzy
-msgid "/Debug/Document Message Log"
-msgstr "Документ Сообщение Журнал"
-
-#: src/cong-menus.c:1609
-#, fuzzy
-msgid "/Debug/Document Signal Log"
-msgstr "/Тесты/Типы документов"
-
-#: src/cong-menus.c:1610
-msgid "/Debug/Information Alert"
-msgstr "/Тесты/Информационное предупреждение"
-
-#: src/cong-menus.c:1611
-msgid "/Debug/Glade Test"
-msgstr "/Тесты/Проверка Glade"
-
-#: src/cong-menus.c:1612
-msgid "/Debug/Insert XML Fragment"
-msgstr "/Тесты/Вставить XML-фрагмент"
-
-#: src/cong-menus.c:1613
-msgid "/Debug/Command Test"
-msgstr "/Тесты/Проверка команд"
-
-#: src/cong-menus.c:1616
-msgid "/_Tools"
-msgstr "/_Инструменты"
-
-#: src/cong-menus.c:1618 src/cong-menus.c:1650
-msgid "/_Help"
-msgstr "/_Справка"
-
-#: src/cong-menus.c:1619 src/cong-menus.c:1651
-msgid "/Help/_Contents"
-msgstr "/Справка/_Содержание"
-
-#: src/cong-menus.c:1620 src/cong-menus.c:1652
-msgid "/Help/_Homepage"
-msgstr "/Справка/_Домашняя страница"
-
-#: src/cong-menus.c:1621 src/cong-menus.c:1653
-msgid "/Help/_About"
-msgstr "/Справка/_О программе"
+#: src/cong-menus.c:1774
+#, c-format
+msgid "_Redo: %s"
+msgstr "Во_звратить: %s"
 
 #: src/cong-node-properties-dialog.c:254
 msgid "XPath"
@@ -1654,9 +2879,9 @@ msgid "Value"
 msgstr "Значение"
 
 #: src/cong-node-properties-dialog.c:713
-#, fuzzy, c-format
+#, c-format
 msgid "Attributes for <tt>%s</tt> elements"
-msgstr "Атрибуты<tt> с</tt>"
+msgstr "Атрибуты для <tt>%s</tt> элементов"
 
 #: src/cong-node-properties-dialog.c:827
 msgid "Text"
@@ -1685,150 +2910,149 @@ msgstr "Проверка корректности документа"
 
 #. To translators: "content" is a noun; this is XML jargon
 #: src/cong-node-properties-dialog.c:1038
-#, fuzzy, c-format
+#, c-format
 msgid "Content model for <tt>%s</tt> elements"
-msgstr "<tt> с</tt>"
+msgstr "Содержимое модели для <tt>%s</tt> элементов"
 
 #: src/cong-node-properties-dialog.c:1185
-#: src/cong-node-properties-dialog.c:1280
+#: src/cong-node-properties-dialog.c:1316
 msgid "DTD"
 msgstr "ДТД (DTD)"
 
-#: src/cong-overview-view.c:205
+#: src/cong-overview-view.c:206
 msgid "Unknown data"
 msgstr "Неизвестные данные"
 
-#: src/cong-parser-error.c:234
+#: src/cong-parser-error.c:228
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Ошибки разбора при загрузке %s"
 
-#: src/cong-parser-error.c:242
+#: src/cong-parser-error.c:236
 msgid "_Retry"
 msgstr "_Повторить"
 
-#: src/cong-parser-error.c:321
+#: src/cong-parser-error.c:315
 msgid "Line Number"
 msgstr "Номер строки"
 
-#: src/cong-parser-error.c:398
-#, fuzzy, c-format
+#: src/cong-parser-error.c:393
+#, c-format
 msgid "%s cannot understand the internal format of the file."
-msgstr "с."
+msgstr "%s не может понять внутренний формат файла."
 
-#: src/cong-parser-error.c:406
-#, fuzzy
+#: src/cong-parser-error.c:401
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
 "We hope to fix these problems in a later release."
-msgstr "до  SGML до  дюйм."
+msgstr ""
+"Сейчас Conglomerate требует, чтобы разметка документов была \"правильными\"; "
+"этогораздо более ограничительные правила, чем в большинстве браузеров. Также "
+"SGML покане поддерживается. Мы надеемся исправить это вскоре."
 
-#: src/cong-parser-error.c:407
+#: src/cong-parser-error.c:402
 msgid "Show Details"
 msgstr "Показать подробности"
 
-#: src/cong-plugin.c:556 src/cong-plugin.c:600
+#: src/cong-plugin.c:557 src/cong-plugin.c:622
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Невозможно найти информацию для отображения нового файла"
 
+#: src/cong-plugin.c:738
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+"Так как Conglomerate не может прочесть стилевой файл, возможно, что ваш "
+"каталог XML файлов не настрен. Зайдите на http://www.xmlsoft.org/catalog."
+"htmlдля получения дополнительной информации."
+
+#: src/cong-plugin.c:769
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "Возникли проблемы при применении стилевого файла \"%s\" к \"%s\""
+
+#: src/cong-plugin.c:786
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"Использовались следующие параметры стилевого файла:\n"
+
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1136
-#, fuzzy, c-format
+#: src/cong-plugin.c:1283
+#, c-format
 msgid "<%s> property dialog"
-msgstr "с"
+msgstr "диалог свойства <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1139
-#, fuzzy, c-format
+#: src/cong-plugin.c:1286
+#, c-format
 msgid "Provides a Properties dialog for the <%s> element"
-msgstr "Свойства с"
+msgstr "Представляет диалог свойств элемента <%s>"
 
-#: src/cong-primary-window.c:439 src/cong-primary-window.c:440
-msgid "Open document"
-msgstr "Открыть документ"
-
-#: src/cong-primary-window.c:447 src/cong-primary-window.c:448
-msgid "New document"
-msgstr "Создать документ"
-
-#: src/cong-primary-window.c:466 src/cong-primary-window.c:467
-msgid "Save document"
-msgstr "Сохранить документ"
-
-#: src/cong-primary-window.c:474 src/cong-primary-window.c:475
-#, fuzzy
-msgid "Undo"
-msgstr "Откатить"
-
-#: src/cong-primary-window.c:481 src/cong-primary-window.c:482
-msgid "Redo"
-msgstr "Возвратить"
-
-#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:202
-#: src/xmledit.c:51
-msgid "Cut"
-msgstr "Вырезать"
-
-#: src/cong-primary-window.c:507 src/cong-primary-window.c:508
-msgid "Copy"
-msgstr "Скопировать"
-
-#: src/cong-primary-window.c:514 src/cong-primary-window.c:515
-#: src/xmledit.c:167
-msgid "Paste"
-msgstr "Вставить"
-
-#: src/cong-primary-window.c:657
+#: src/cong-primary-window.c:374
 msgid "Overview"
 msgstr "Обзор"
 
-#: src/cong-primary-window.c:667
+#: src/cong-primary-window.c:385
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: src/cong-primary-window.c:676
+#: src/cong-primary-window.c:395
 msgid "Raw XML"
 msgstr "Простой XML"
 
-#: src/cong-primary-window.c:856 src/cong-primary-window.c:875
+#: src/cong-primary-window.c:600 src/cong-primary-window.c:619
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Добро пожаловать в долгожданный редактор Conglomerate."
 
-#: src/cong-primary-window.c:984
+#: src/cong-primary-window.c:732
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (изменён) - %s"
 
-#: src/cong-util.c:366 src/plugin-docbook.c:1201
+#: src/cong-source-layout.c:413 src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "Очистить исходный код XML"
+
+#: src/cong-util.c:368 src/plugin-docbook.c:1401
 msgid "Printing XSL Formatting Objects"
 msgstr "Печатаются объекты форматирования XSL"
 
-#: src/cong-util.c:410
+#: src/cong-util.c:412
 msgid "This will eventually be the result from cong_util_print_xslfo"
-msgstr ""
+msgstr "Это скорее всего результат от cong_util_print_xslfo"
 
-#: src/cong-util.c:1263
+#: src/cong-util.c:1484
 msgid "(no description available)"
 msgstr "(описание отсутствует)"
 
-#: src/cong-util.c:1428
+#: src/cong-util.c:1672
 msgid "DTD files"
-msgstr ""
+msgstr "Файлы описания DTD типа документа"
 
-#: src/cong-util.c:1431
-#, fuzzy
+#: src/cong-util.c:1675
 msgid "Select a DTD"
-msgstr "Выбрать с"
+msgstr "Выбрать описание типа документа DTD"
 
 #: src/cursor.c:129
 #, c-format
 msgid "Split <%s> element"
 msgstr "Разделить элемент <%s>"
 
-#: src/file.c:100
+#: src/file.c:106
 msgid "XML Files"
-msgstr ""
+msgstr "Файлы разметки"
+
+#: src/file.c:118
+msgid "All Files"
+msgstr "Все файлы"
 
 #: src/plugin-admonition.c:76
 msgid "Admonition"
@@ -1840,22 +3064,18 @@ msgstr "Узел редактора для отображения подсказ
 
 #: src/plugin-arbitrary.c:168
 msgid "The XML document needs a top-level element."
-msgstr ""
+msgstr "Документу разметки требуется корневой элемент."
 
 #: src/plugin-arbitrary.c:270
 msgid "Empty XML Document"
-msgstr ""
+msgstr "Пустой документ XML"
 
 #: src/plugin-arbitrary.c:271
 msgid "Create an empty XML document of an arbitrary type."
 msgstr "Создать документ формата XML, содержащий случайное содержимое."
 
-#: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:453
-msgid "Cleanup XML Source"
-msgstr "Очистить исходный код XML"
-
-#: src/plugin-cleanup-source.c:454 src/plugin-cleanup-source.c:457
-#: src/plugin-cleanup-source.c:458
+#: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
+#: src/plugin-cleanup-source.c:78
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1863,7 +3083,7 @@ msgstr ""
 "Очистить код XML документа, так что его можно будет легко прочитать в любом "
 "текстовом редакторе."
 
-#: src/plugin-cleanup-source.c:456
+#: src/plugin-cleanup-source.c:76
 msgid "_Clean the XML Source"
 msgstr "_Очистить исходный код XML"
 
@@ -1879,51 +3099,101 @@ msgstr ""
 "Экспортировать как файл XML, преобразуя все таги и атрибуты в документе к "
 "нижнему регистру. Полезно при работе с настоящими SGML документами."
 
-#: src/plugin-docbook.c:208
+#: src/plugin-docbook.c:224
+msgid "Untitled section"
+msgstr "Раздел без названия"
+
+#: src/plugin-docbook.c:231
 msgid "Text of the article goes here"
 msgstr "Текст статьи начинается здесь"
 
-#: src/plugin-docbook.c:227
+#: src/plugin-docbook.c:250
 msgid "Untitled Article"
 msgstr "Статья без названия"
 
-#: src/plugin-docbook.c:277
+#: src/plugin-docbook.c:300
+msgid "Untitled chapter"
+msgstr "Глава без названия"
+
+#: src/plugin-docbook.c:307
 msgid "Text of the first chapter goes here"
 msgstr "Текст первой главы начинается здесь"
 
-#: src/plugin-docbook.c:296
+#: src/plugin-docbook.c:326
 msgid "Untitled Book"
 msgstr "Книга без названия"
 
-#: src/plugin-docbook.c:351
+#: src/plugin-docbook.c:377
+msgid "Untitled book"
+msgstr "Книга без названия"
+
+#: src/plugin-docbook.c:396
 msgid "Untitled Set of Documents"
 msgstr "Набор документов без названия"
 
-#: src/plugin-docbook.c:1085
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: src/plugin-docbook.c:1102
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr ""
+"Conglomerate не может найти стилевой файл, используемы для преобразования "
+"DocBook в %s"
+
+#: src/plugin-docbook.c:1105
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Не удалось найти стилевые файлы DocBook"
+
+#: src/plugin-docbook.c:1107
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr ""
+"Убедитесь что стилевые файлы XSL Norman'а Walsh'а для DocBook, доступные "
+"наhttp://docbook.sourceforge.net/projects/xsl/ установлены и добавлены в ваш "
+"каталогXML (Зайдите на http://www.xmlsoft.org/catalog.html для получения "
+"дополнительной информации о каталоге)."
+
+#: src/plugin-docbook.c:1143
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"%s преобразование закончено.\n"
+"\n"
+"Преобразовано %s в %s за %s"
+
+#: src/plugin-docbook.c:1267
 msgid "Exporting PDF file"
 msgstr "Экспортировать в файл PDF"
 
-#: src/plugin-docbook.c:1089 src/plugin-docbook.c:1199
+#: src/plugin-docbook.c:1271 src/plugin-docbook.c:1399
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Преобразование DocBook в форматированные объекты XSL"
 
-#: src/plugin-docbook.c:1091
+#: src/plugin-docbook.c:1273
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Вывод форматирующих объектов XSL как файл PDF"
 
-#: src/plugin-docbook.c:1104 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1288 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Преобразование форматирующих объектов XSL в PDF"
 
-#: src/plugin-docbook.c:1195
+#: src/plugin-docbook.c:1395
 msgid "Printing DocBook file"
 msgstr "Напечатать файл DocBook"
 
-#: src/plugin-docbook.c:1589
+#: src/plugin-docbook.c:1795
 msgid "DocBook Article"
 msgstr "Статья DocBook"
 
-#: src/plugin-docbook.c:1590
+#: src/plugin-docbook.c:1796
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1931,116 +3201,118 @@ msgstr ""
 "Создать статью, возможно для веб-сайта или журнала, используя формат "
 "\"DocBook\""
 
-#: src/plugin-docbook.c:1597
+#: src/plugin-docbook.c:1803
 msgid "DocBook Book"
 msgstr "Книга в формате DocBook"
 
-#: src/plugin-docbook.c:1598
+#: src/plugin-docbook.c:1804
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Создать книгу, используя формат \"DocBook\""
 
-#: src/plugin-docbook.c:1605
+#: src/plugin-docbook.c:1811
 msgid "DocBook Set"
 msgstr "Набор DocBook"
 
-#: src/plugin-docbook.c:1606
+#: src/plugin-docbook.c:1812
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Создать набор соотносящихся книг, используя формат \"DocBook\""
 
-#: src/plugin-docbook.c:1614
+#: src/plugin-docbook.c:1820
 msgid "Import text as a DocBook article"
 msgstr "Импортировать текст как статью DocBook"
 
-#: src/plugin-docbook.c:1615
+#: src/plugin-docbook.c:1821
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Импортировать простой текстовый файл в формат \"DocBook\", как статью."
 
-#: src/plugin-docbook.c:1632
+#: src/plugin-docbook.c:1839
 msgid "Export DocBook as HTML"
 msgstr "Экспортировать DocBook как HTML"
 
-#: src/plugin-docbook.c:1633
+#: src/plugin-docbook.c:1840
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr ""
+"Использовать стилевой файл Norman Walsh'a для того чтобысоздать web-страницу "
+"из этого документа DocBook"
 
-#: src/plugin-docbook.c:1640
-#, fuzzy
+#: src/plugin-docbook.c:1848
 msgid "Export DocBook as PDF"
-msgstr "Экспортировать"
+msgstr "Экспортировать DocBook как PDF"
 
-#: src/plugin-docbook.c:1641
-#, fuzzy
+#: src/plugin-docbook.c:1849
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
-msgstr "с до "
+msgstr ""
+"Использовать стилевой файл Norman Walsh'a для того чтобысоздать PDF из этого "
+"документа DocBook"
 
-#: src/plugin-docbook.c:1648
+#: src/plugin-docbook.c:1857
 msgid "Export DocBook as XSL:FO"
 msgstr "Экспортировать DocBook как XSL:FO"
 
-#: src/plugin-docbook.c:1649
-#, fuzzy
+#: src/plugin-docbook.c:1858
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
-msgstr "с до  до  дата"
+msgstr ""
+"Использовать стилевые файлы Norman'а Walsh'a для того чтобы создатьфайл XSL:"
+"FO, который может быть распечатан или преобразован в PDF"
 
-#: src/plugin-docbook.c:1657
-#, fuzzy
+#: src/plugin-docbook.c:1867
 msgid "Print DocBook"
-msgstr "Напечатать"
+msgstr "Напечатать DocBook"
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1876
 msgid "Generic DocBook property dialog"
 msgstr "Свойства обычного DocBook"
 
-#: src/plugin-docbook.c:1667
+#: src/plugin-docbook.c:1877
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Предоставляет диалог свойств для большинства узлов DocBook"
 
-#: src/plugin-docbook.c:1685 src/plugin-docbook.c:1688 src/plugin-html.c:137
+#: src/plugin-docbook.c:1895 src/plugin-docbook.c:1898 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
-msgstr ""
+msgstr "Открыть ссылку в браузере"
 
-#: src/plugin-docbook.c:1697
+#: src/plugin-docbook.c:1907
 msgid "Promote Section"
 msgstr "Выдвинуть раздел"
 
-#: src/plugin-docbook.c:1698
+#: src/plugin-docbook.c:1908
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr ""
 "Выдвигает раздел DocBook в более высокий уровень организации в документе."
 
-#: src/plugin-docbook.c:1700 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1910 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Выдвинуть"
 
-#: src/plugin-docbook.c:1701 src/plugin-docbook.c:1702
+#: src/plugin-docbook.c:1911 src/plugin-docbook.c:1912
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Выдвинуть раздел в более высокий уровень организации в документе."
 
-#: src/plugin-docbook.c:1708
+#: src/plugin-docbook.c:1918
 msgid "Demote Section"
 msgstr "Задвинуть раздел"
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1919
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Задвигает раздел DocBook в более низкий уровень организации в документе"
 
-#: src/plugin-docbook.c:1711 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1921 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Задвинуть"
 
-#: src/plugin-docbook.c:1712 src/plugin-docbook.c:1713
+#: src/plugin-docbook.c:1922 src/plugin-docbook.c:1923
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Задвинуть раздел в более низкий уровень организации в документе"
 
@@ -2050,66 +3322,59 @@ msgid "Autogenerated document type based on %s"
 msgstr "Автоматически сформированный тип документа, основанный на %s"
 
 #: src/plugin-dtd.c:94
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
-msgstr "с"
+msgstr ""
+"Эта спецификация отображения для редактора Conglomerate была автоматически "
+"создана из %s"
 
 #: src/plugin-dtd.c:215
-#, fuzzy
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr "Преобразовать Показывать"
+msgstr "Преобразовать DTD в файл спецификации отображения"
 
 #: src/plugin-dtd.c:216
-#, fuzzy
 msgid "Import a DTD file, creating a Conglomerate display specification file."
-msgstr "Импортировать."
-
-#: src/plugin-dtd.c:223
-#, fuzzy
-msgid "Convert DTD into a Relax NG schema"
-msgstr "Преобразовать"
+msgstr ""
+"Импортировать DTD, создав файл спецификации отображения для Conglomerate"
 
 #: src/plugin-dtd.c:224
-#, fuzzy
+msgid "Convert DTD into a Relax NG schema"
+msgstr "Преобразовать DTD в схему Relax NG"
+
+#: src/plugin-dtd.c:225
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
-msgstr "Импортировать."
+msgstr "Импортировать DTD, преобразовав его в схему RELAX NG"
 
-#: src/plugin-dtd.c:231
-#, fuzzy
+#: src/plugin-dtd.c:233
 msgid "Convert DTD into W3C XML Schema"
-msgstr "Преобразовать"
+msgstr "Преобразовать DTD в схему W3C"
 
-#: src/plugin-dtd.c:232
-#, fuzzy
+#: src/plugin-dtd.c:234
 msgid "Import a DTD file, converting it into a W3C XML Schema."
-msgstr "Импортировать."
+msgstr "Импортировать DTD, преобразовав его в схему W3C"
 
-#: src/plugin-dtd.c:239
-#, fuzzy
+#: src/plugin-dtd.c:242
 msgid "Convert DTD into a Schematron file"
-msgstr "Преобразовать"
+msgstr "Преобразовать DTD в файл Schematron"
 
-#: src/plugin-dtd.c:240
-#, fuzzy
+#: src/plugin-dtd.c:243
 msgid "Import a DTD file, converting it into a Schematron Schema."
-msgstr "Импортировать."
+msgstr "Импортировать DTD, преобразовав его в схему Schematron"
 
-#: src/plugin-dtd.c:247
-#, fuzzy
+#: src/plugin-dtd.c:251
 msgid "Convert DTD into an Examplotron file"
-msgstr "Преобразовать"
+msgstr "Преобразовать DTD в файл Examplotron"
 
-#: src/plugin-dtd.c:248
-#, fuzzy
+#: src/plugin-dtd.c:252
 msgid "Import a DTD file, converting it into an Examplotron Schema."
-msgstr "Импортировать."
+msgstr "Импортировать файл DTD, преобразовав его в схему типа Examplotron"
 
-#: src/plugin-fo.c:153
+#: src/plugin-fo.c:152
 msgid "Export XSL-FO as PDF"
 msgstr "Экспортировать XSL-FO в PDF"
 
-#: src/plugin-fo.c:154
+#: src/plugin-fo.c:153
 msgid "Generate a PDF file from the XSL:FO information"
 msgstr "Создать файл PDF из информации XSL:FO"
 
@@ -2119,61 +3384,56 @@ msgstr "Напечатать XSL:FO"
 
 #: src/plugin-lists.c:76
 msgid "List Member Element"
-msgstr ""
+msgstr "Элемент списка"
 
 #: src/plugin-lists.c:77
 msgid "An editor node for visualising a member of a list"
 msgstr "Узел редактора для отображения элементов списка"
 
-#: src/plugin-paragraph.c:67
-msgid "Paragraph"
-msgstr "Абзац"
-
 #: src/plugin-paragraph.c:68
 msgid "An editor node for visualising a paragraph"
 msgstr "Узел редактора для отображения абзаца"
 
-#: src/plugin-random.c:155
+#: src/plugin-random.c:148
 msgid "What kind of random XML document would you like to create?"
 msgstr "Случайный документ XML какого типа вы хотели бы создать?"
 
-#: src/plugin-random.c:682
+#: src/plugin-random.c:685
 msgid "Random Document"
 msgstr "Случайный документ"
 
-#: src/plugin-random.c:683
+#: src/plugin-random.c:686
 msgid "Create an XML document containing random content."
 msgstr "Создать документ XML, содержащий случайное содержимое."
 
 #: src/plugin-relaxng.c:128
 msgid "Compact Syntax View"
-msgstr ""
+msgstr "Компактное отображение синтаксиса"
 
 #: src/plugin-relaxng.c:146 src/plugin-relaxng.c:149
 msgid "View as Compact RELAX NG"
-msgstr ""
+msgstr "Просматривать как Compact RELAX NG"
 
 #: src/plugin-relaxng.c:147
 msgid "Display the compact syntax form of a RELAX NG schema"
-msgstr ""
+msgstr "Отображать компактную форму синтаксиса RELAX NG"
 
 #: src/plugin-save-dispspec.c:149
-#, fuzzy
 msgid "Dump Display Spec"
-msgstr "Показывать"
+msgstr "Вывести спецификации отображения"
 
 #: src/plugin-save-dispspec.c:150 src/plugin-save-dispspec.c:153
 #: src/plugin-save-dispspec.c:154
-#, fuzzy
 msgid ""
 "Writes the current display spec into a display spec xml file. This file can "
 "then be customized by the conglomerate user"
-msgstr "  владелец"
+msgstr ""
+"Записать текущие спецификации отображения в файл разметкиЭтот файл может "
+"быть в будущем отредактирован"
 
 #: src/plugin-save-dispspec.c:152
-#, fuzzy
 msgid "_Dump Display Spec"
-msgstr "Показывать"
+msgstr "_Вывести спецификации отображения"
 
 #: src/plugin-save-dispspec.c:160
 msgid "Edit Display Spec"
@@ -2210,11 +3470,12 @@ msgid "Import an SGML file, converting to XML."
 msgstr "Импортировать файл SGML, преобразуя в XML."
 
 #: src/plugin-tests.c:64
-#, fuzzy
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
 "replaced with some useful options"
-msgstr "является с и"
+msgstr ""
+"Это тестовый элемент управления. В скором времени на этом местепоявятся "
+"полезные настройки"
 
 #: src/plugin-tests.c:142 src/plugin-tests.c:221
 #, c-format
@@ -2222,26 +3483,25 @@ msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr "Символы Юникода 0x%04X-0x%04X"
 
 #: src/plugin-tests.c:359
-#, fuzzy
 msgid "Unicode Character Reference"
-msgstr "Символ Перекрёстная ссылка"
+msgstr "Ссылка на символ Unicode"
 
 #: src/plugin-tests.c:360
-#, fuzzy
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
-msgstr "Создать set"
+msgstr "Создать таблицу содержащую часть символов Unicodeкак статью Docbook"
 
 #: src/plugin-validate.c:163
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" cannot be checked for validity."
-msgstr "с."
+msgstr "Документ \"%s\" не может быть проверен на корректность"
 
 #: src/plugin-validate.c:170
 msgid ""
 "You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
+"Вы можете исправить это, добавив Определение Типа Документа (DTD) к документу"
 
 #: src/plugin-validate.c:215
 #, c-format
@@ -2254,11 +3514,12 @@ msgstr "Проверка корректности документа"
 
 #: src/plugin-validate.c:250 src/plugin-validate.c:253
 #: src/plugin-validate.c:254
-#, fuzzy
 msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
-msgstr "до  является set   тип"
+msgstr ""
+"Проверить, является ли документ \"корректным\", то есть соответствует ли он "
+"набору правил, заданным типом документов или схемой"
 
 #: src/plugin-validate.c:252
 msgid "_Validate Document"
@@ -2302,96 +3563,78 @@ msgid "Generate _Website"
 msgstr "Создать _веб-сайт"
 
 #: src/plugin-xsl.c:324
-#, fuzzy
 msgid "XSL Template Element"
-msgstr "Шаблон"
+msgstr "Шаблон языка разметки"
 
 #: src/plugin-xsl.c:325
-#, fuzzy
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr "дюйм"
+msgstr "Элемент для отображения правил обработки в XSL"
 
-#: src/popup.c:435
-#, fuzzy, c-format
+#: src/popup.c:490
+#, c-format
 msgid "Apply span tag: %s"
-msgstr "Применить с"
+msgstr "Применить встроенный тэг: %s"
 
-#: src/popup.c:534
-#, fuzzy
+#: src/popup.c:561
 msgid "Remove Span Tag"
-msgstr "Удалить"
+msgstr "Удалить вложенный тэг"
 
-#: src/popup.c:579
+#: src/popup.c:607
 msgid "Convert to a comment"
-msgstr ""
+msgstr "Преобразовать к коментарию"
 
-#: src/popup.c:596 src/tree.c:404
+#: src/popup.c:627 src/tree.c:521
 msgid "Uncomment"
-msgstr ""
+msgstr "Раскомментировать"
 
-#: src/popup.c:597
+#: src/popup.c:628
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
+"Преобразовать комментарий, содержащий разметки в соответстующий элемент "
+"разметки"
 
-#: src/popup.c:715
-#, fuzzy
-msgid "Remove span tag"
-msgstr "Удалить"
+#: src/popup.c:708 src/popup.c:1025
+msgid "_Properties"
+msgstr "Изменить _свойства"
 
-#: src/popup.c:1174
-#, fuzzy
-msgid "Delete this item"
-msgstr "Удалить пункт"
+#: src/popup.c:742 src/popup.c:1042
+msgid "_Cut"
+msgstr "_Вырезать"
 
-#: src/popup.c:1184
-#, fuzzy
-msgid "Add text node after"
-msgstr "Добавить Текст"
+#: src/popup.c:968
+msgid "Other XML element..."
+msgstr "Другой элемент разметки"
 
-#: src/popup.c:1192
-#, fuzzy
-msgid "Add text node before"
-msgstr "Добавить Текст"
-
-#: src/popup.c:1203
-#, fuzzy
-msgid "Set the text"
-msgstr "Текст"
-
-#: src/popup.c:1239
+#: src/popup.c:1061
 msgid "Paste into"
 msgstr "Вставить в"
 
-#: src/popup.c:1248
+#: src/popup.c:1071
 msgid "Paste before"
 msgstr "Вставить перед"
 
-#: src/popup.c:1257
+#: src/popup.c:1081
 msgid "Paste after"
 msgstr "Вставить после"
 
-#: src/popup.c:1276
-msgid "New sub-element"
-msgstr "Создать подэлемент"
-
-#: src/popup.c:1292
-msgid "New sibling"
-msgstr "Создать соседний элемент"
-
-#: src/tree.c:43
+#: src/tree.c:104 src/tree.c:136
 #, c-format
 msgid "Insert sibling: %s"
 msgstr "Вставить соседний: %s"
 
-#: src/tree.c:95
+#: src/tree.c:188 src/tree.c:216
 #, c-format
 msgid "Insert child: %s"
 msgstr "Вставить дочерний: %s"
 
-#: src/tree.c:354
+#: src/tree.c:311 src/xmledit.c:51
+msgid "Cut"
+msgstr "Вырезать"
+
+#: src/tree.c:469
 msgid "Convert to comment"
-msgstr ""
+msgstr "Пребразовать в коментарий"
 
 #. create description for dialog
 #: src/xmldata.c:467
@@ -2409,18 +3652,22 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Требуется выбор дочернего узла"
 
-#: src/xmledit.c:253
+#: src/xmledit.c:166
+msgid "Paste"
+msgstr "Вставить"
+
+#: src/xmledit.c:252
 msgid "Paste Under"
 msgstr "Вставить под"
 
-#: src/xmledit.c:304
+#: src/xmledit.c:303
 msgid "Paste Before"
 msgstr "Вставить перед"
 
-#: src/xmledit.c:354
+#: src/xmledit.c:353
 msgid "Paste After"
 msgstr "Вставить после"
 
-#: src/xmledit.c:395
+#: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Просмотр исходного текст - Conglomerate"
