@@ -212,7 +212,7 @@ void popup_build(struct xed *xed)
 	{
 		if (cong_dispspec_element_is_span(n0))
 		{
-			item = gtk_menu_item_new_with_label(cong_dispspec_element_name_name_get(n0));
+			item = gtk_menu_item_new_with_label(cong_dispspec_element_username(n0));
 			gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 			
 			gtk_signal_connect(GTK_OBJECT(item), "activate",

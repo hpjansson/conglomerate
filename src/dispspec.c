@@ -18,24 +18,30 @@
 struct CongDispspecElement
 {
 	char* tagname;
+	char* username;
+
 	enum CongElementType type;
 	gboolean collapseto;
+
+	GdkColor col;
+	GdkGC* gc;
 
 	struct CongDispspecElement* next;	
 };
 
 struct _cong_dispspec
 {
-#if 0
-	/* New implementation will be an "intrusive list" of CongDispspecElement structs */ 
+	/* New implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
-#else
-  int dummy[128];
-  TTREE *tt;
-#endif
+	CongDispspecElement* last;
 };
 
 void cong_dispspec_init(TTREE *ds);
+
+void cong_dispspec_add_element(cong_dispspec* ds, CongDispspecElement* element);
+
+CongDispspecElement*
+cong_dispspec_element_new_from_ttree(TTREE* tt);
 
 cong_dispspec* cong_dispspec_new_from_file(const char *name)
 {
@@ -47,12 +53,38 @@ cong_dispspec* cong_dispspec_new_from_file(const char *name)
 		return NULL;  /* Invalid displayspec. */
 	}
 
-	ds = g_new(cong_dispspec,1);
-	ds->tt = tt;
+	ds = g_new0(cong_dispspec,1);
 
-	cong_dispspec_init(tt);
+	/* Convert the tree into the new representation: */
+	{
+		TTREE* child;
+		for (child = tt->child; child; child=child->next) {
+			CongDispspecElement* element = cong_dispspec_element_new_from_ttree(child);
+
+			cong_dispspec_add_element(ds,element);
+		}
+	}	
+
+	/* FIXME: release the TTREE */
 
 	return ds;
+}
+
+void cong_dispspec_add_element(cong_dispspec* ds, CongDispspecElement* element)
+{
+	g_return_if_fail(ds);
+	g_return_if_fail(element);
+
+	g_assert(element->next==NULL);
+
+	if (ds->first) {
+		g_assert(ds->last);
+		ds->last->next = element;
+	} else {
+		ds->first = element;
+	}
+
+	ds->last = element;
 }
 
 void cong_dispspec_delete(cong_dispspec *dispspec)
@@ -158,21 +190,6 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
 }
 
 
-unsigned int cong_dispspec_colour_get(TTREE *ds, TTREE *x, int odd)
-{
-  TTREE *d;
-
-  d = ttree_node_find1(ds, x->data, x->size, 0);
-  if (d)
-    {
-      if ((d = ttree_node_find1(d, "color", 5, 0)) && d->child)
-	return(get_rgb_hex(d->child->data));
-    }
-  
-  return(0x00ffffff);  /* White is default */
-}
-
-
 char *cong_dispspec_name_get(TTREE *x)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(the_globals.ds, xml_frag_name_nice(x));
@@ -219,6 +236,7 @@ GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog)
 }
 
 
+#if 0
 void cong_dispspec_init(TTREE *ds)
 {
   TTREE *n0, *n1, *n2, *n3;
@@ -274,7 +292,7 @@ void cong_dispspec_init(TTREE *ds)
 	}
     }
 }
-
+#endif
 
 char *section_str = "section";
 
@@ -351,39 +369,13 @@ int strcasestr(char *haystack, char *needle)
 }
 #endif
 
-/*
-  For now we fake things, and pretend a CongDispspecElement* is a TTREE*
- */
-CongDispspecElement*
-cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname)
-{
-	TTREE* n0 = ttree_node_find1(ds->tt, (char*)tagname, strlen(tagname), 0);
-
-	return (CongDispspecElement*)n0;
-}
-
-CongDispspecElement*
-cong_dispspec_get_first_element(cong_dispspec *ds)
-{
-	return (CongDispspecElement*)(ds->tt->child);
-}
-
+/* Routines for working with raw TTREEs, where the supplied ptr is to the root name of the element */
 const char*
-cong_dispspec_element_tagname(CongDispspecElement* element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return ((TTREE*)element)->data;
-}
-
-const char*
-cong_dispspec_element_username(CongDispspecElement* element)
+cong_dispspec_ttree_username(TTREE* tt)
 {
 	TTREE* n1;
 
-	g_return_val_if_fail(element, NULL);
-
-	n1 = ttree_node_find1((TTREE*)element, "name", 4, 0);
+	n1 = ttree_node_find1(tt, "name", 4, 0);
 	if (!n1) return "could not find name";
 	
 	if (!n1->child) return "no name specified";
@@ -392,30 +384,11 @@ cong_dispspec_element_username(CongDispspecElement* element)
 	return n1->data;
 }
 
-const char*
-cong_dispspec_element_name_name_get(CongDispspecElement* element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return cong_dispspec_name_name_get((TTREE*)element);
-}
-
-CongDispspecElement*
-cong_dispspec_element_next(CongDispspecElement* element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return (CongDispspecElement*)(((TTREE*)element)->next);
-}
 
 enum CongElementType
-cong_dispspec_element_type(CongDispspecElement *element)
+cong_dispspec_ttree_type(TTREE* tt)
 {
-	TTREE *n0;
-	
-	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
-
-	n0 = ttree_node_find1((TTREE*)element, "type", 4, 0);
+	TTREE *n0 = ttree_node_find1(tt, "type", 4, 0);
 	if (!n0) {
 		DS_DEBUG_MSG1("\"type\" not found, so type is unknown\n");
 		
@@ -447,14 +420,89 @@ cong_dispspec_element_type(CongDispspecElement *element)
 }
 
 gboolean
-cong_dispspec_element_collapseto(CongDispspecElement *element)
+cong_dispspec_ttree_collapseto(TTREE* tt)
 {
-	TTREE* n0 = ttree_node_find1((TTREE*)element, "collapseto", 10, 0);
+	TTREE* n0 = ttree_node_find1(tt, "collapseto", 10, 0);
 	if (n0) return TRUE;
   
 	return FALSE;
 }
 
+unsigned int 
+cong_dispspec_ttree_colour_get(TTREE* tt)
+{
+	if ((tt = ttree_node_find1(tt, "color", 5, 0)) && tt->child) {
+		return(get_rgb_hex(tt->child->data));
+	}
+
+	return(0x00ffffff);  /* White is default */
+}
+
+/*
+  We now use the CongDispspecElement structs, rather than using TTREE data
+ */
+CongDispspecElement*
+cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname)
+{
+	CongDispspecElement* element = ds->first;
+
+	while (element) {
+		if (0==strcmp(element->tagname,tagname)) {
+			return element;
+		}
+
+		element = element->next;
+	}
+
+	return NULL;
+}
+
+CongDispspecElement*
+cong_dispspec_get_first_element(cong_dispspec *ds)
+{
+	return ds->first;
+}
+
+const char*
+cong_dispspec_element_tagname(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->tagname;
+}
+
+const char*
+cong_dispspec_element_username(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->username;
+}
+
+CongDispspecElement*
+cong_dispspec_element_next(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->next;
+}
+
+enum CongElementType
+cong_dispspec_element_type(CongDispspecElement *element)
+{
+	TTREE *n0;
+	
+	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
+
+	return element->type;
+}
+
+
+gboolean
+cong_dispspec_element_collapseto(CongDispspecElement *element)
+{
+	return element->collapseto;
+}
 
 gboolean
 cong_dispspec_element_is_structural(CongDispspecElement *element)
@@ -487,12 +535,31 @@ cong_dispspec_element_gc(CongDispspecElement *element)
 	
 	g_return_val_if_fail(element, NULL);
 
-	n1 = ttree_node_find1((TTREE*)element, "color", 5, 0);
-	if (!n1) n1 = ttree_node_find1((TTREE*)element, "colour", 6, 0);
-      
-	if (n1 && n1->child && n1->child->child) {
-		return((GdkGC *) *((GdkGC **) n1->child->child->data));
-	}
-
-	return NULL;
+	return element->gc;
 }
+
+CongDispspecElement*
+cong_dispspec_element_new_from_ttree(TTREE* tt)
+{
+	unsigned int col;
+
+	CongDispspecElement* element = g_new0(CongDispspecElement,1);
+
+	element->tagname = g_strdup(tt->data);
+	element->username = g_strdup(cong_dispspec_ttree_username(tt));
+
+	element->type = cong_dispspec_ttree_type(tt);
+	element->collapseto = cong_dispspec_ttree_collapseto(tt);
+
+	col = cong_dispspec_ttree_colour_get(tt);
+	col_to_gcol(&element->col, col);
+
+	/* We don't make any attempt to share GCs between different elements for now */
+	element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+	gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
+	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
+	gdk_gc_set_foreground(element->gc, &element->col);
+
+	return element;
+}
+

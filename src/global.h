@@ -382,6 +382,9 @@ cong_dispspec_element_is_structural(CongDispspecElement *element);
 gboolean
 cong_dispspec_element_is_span(CongDispspecElement *element);
 
+unsigned int
+cong_dispspec_element_color(CongDispspecElement *element);
+
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element);
 
