@@ -1,11 +1,11 @@
 # Translation of conglomerate to Croatian
 # Copyright (C) Croatian team
-# Translators: Automatski Prijevod <>,
+# Translators: Automatski Prijevod <>,Boris Tudan <boris.tudan@ka.htnet.hr>,
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate 0\n"
 "POT-Creation-Date: 2003-11-06 18:06+0100\n"
-"PO-Revision-Date: 2003-11-07 18:38+CET\n"
+"PO-Revision-Date: 2003-11-10 16:48+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
@@ -178,7 +178,7 @@ msgstr ""
 
 #: src/cong-app.c:269
 msgid "XML Editor"
-msgstr ""
+msgstr "XML uređivač"
 
 #: src/cong-app.c:364
 msgid "Conglomerate could not load any xds files"
@@ -436,13 +436,13 @@ msgstr ""
 #: src/cong-error-file-open.c:82
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
-msgstr ""
+msgstr "%s ne mogu čitati \"%s\" iz %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-open.c:85
 #, c-format
 msgid "%s could not read \"%s\" from %s."
-msgstr ""
+msgstr "%s ne mogu čitati \"%s\" iz %s."
 
 #: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
@@ -605,13 +605,13 @@ msgstr ""
 #: src/cong-error-file-save.c:51
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
-msgstr ""
+msgstr "%s ne mogu snimiti \"%s\" u %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-save.c:54
 #, c-format
 msgid "%s could not save \"%s\" to %s."
-msgstr ""
+msgstr "%s ne mogu snimiti \"%s\" u %s."
 
 #: src/cong-error-file-save.c:101
 msgid ""
@@ -1300,7 +1300,7 @@ msgstr "/_Pomoć"
 
 #: src/cong-menus.c:1307 src/cong-menus.c:1335
 msgid "/Help/_Contents"
-msgstr ""
+msgstr "/Pomoć/_Sadržaj"
 
 #: src/cong-menus.c:1308 src/cong-menus.c:1336
 msgid "/Help/_About"
@@ -1352,7 +1352,7 @@ msgstr "Broj retka"
 #: src/cong-parser-error.c:326
 #, c-format
 msgid "%s cannot understand the internal format of the file."
-msgstr ""
+msgstr "%s ne mogu razumjeti unutrašnji format datoteke."
 
 #: src/cong-parser-error.c:334
 msgid ""
@@ -1419,7 +1419,7 @@ msgstr ""
 #: src/cong-primary-window.c:745
 #, c-format
 msgid "%s (modified) - %s"
-msgstr ""
+msgstr "%s (itmjenjeno) - %s"
 
 #: src/cong-util.c:272 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
@@ -1884,7 +1884,6 @@ msgid "Remove span tag"
 msgstr ""
 
 #: src/popup.c:932
-#, fuzzy
 msgid "Delete this item"
 msgstr "Obriši ovu stavku"
 
