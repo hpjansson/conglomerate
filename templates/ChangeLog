@@ -2,6 +2,8 @@
 
 	* dispspec-template.xds: moved from ../dispspecs.
 
+	* Makefile.am: ship with the "new" file.
+
 2004-01-14 Jeff Martin  <jeff@custommonkey.org>
 
 	* dispspec.xml html.xml
