@@ -408,7 +408,6 @@ on_tree_view_selection_changed (GtkTreeSelection *treeselection,
 {
 	CongTreeView *cong_tree_view = CONG_TREE_VIEW (user_data);
 	CongDocument *doc;
-	CongCommand *cmd;
 	CongNodePtr node;
 
 	g_message ("on_tree_view_selection_changed");
@@ -827,7 +826,6 @@ set_pixbuf (GtkTreeViewColumn *tree_column,
 {
 	CongTreeView *cong_tree_view = user_data;	
 	CongNodePtr node = NULL;
-	enum CongNodeType node_type;
 	GdkPixbuf *pixbuf = NULL;
 	
 	g_assert (cong_tree_view);

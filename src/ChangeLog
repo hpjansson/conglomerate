@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-source-view.c, cong-tree-view.c, cong-util.c
+
+	Fixes for warnings
+	
 	* cong-location.c, cong-location.h, cong-node.c, cong-node.h, cong-range.c
 
 	Enhancements of CongLocation and CongRange to match selection semantics change, and to support Edit->Copy of selected node

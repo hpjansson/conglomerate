@@ -90,7 +90,6 @@ gchar*
 cong_util_cleanup_text (const xmlChar *src_text) 
 {
 	gchar *buffer;
-	gchar *src;
 	gchar *dst;
 	gunichar unichar;
 
