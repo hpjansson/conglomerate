@@ -13,5 +13,6 @@
 rm -f conglomerate.spec # we get a new one and don't want a conglomerate.spec.1
 wget -q http://dag.wieers.com/packages/conglomerate/conglomerate.spec
 sed -e '3,9s/Version: .*$/Version: @VERSION@/' \
+    -e '1s/\$/ /g' \
   conglomerate.spec > conglomerate.spec.in
 # last line of this script

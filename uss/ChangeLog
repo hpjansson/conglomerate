@@ -1,3 +1,9 @@
+2004-06-30  Geert Stappers <stappers@stappers.nl>
+
+	* wgetspec
+
+	Keep the version Id from Dag Wieers.
+
 2004-06-21 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cgtkdocincludes
