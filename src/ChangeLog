@@ -2,6 +2,10 @@
 
 	* cong-file-properties.c
 
+	Fixed a memory leak; removed debug logging
+
+	* cong-file-properties.c
+
 	Track the modified state of the document; some improvement to dialog cleanup.
 
 	* cong-file-properties.c

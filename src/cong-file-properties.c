@@ -231,14 +231,12 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 
 	dialog_details = g_new0 (CongFilePropertiesDialogDetails,1);
-	/* FIXME: this will leak */
 
 	xml_doc = cong_document_get_xml(doc);
 	ds = cong_document_get_dispspec(doc);
 
 	dialog_details->doc = doc; 
 	g_object_ref (G_OBJECT (doc));
-	/* FIXME: this leaks the reference to the doc */
 
 	dialog_details->xml = cong_util_load_glade_file ("glade/cong-file-properties.glade",
 							 doc,
@@ -337,14 +335,16 @@ on_dialog_destroy (GtkWidget *widget,
 {
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 
-	g_message ("on_dialog_destroy");
-
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
 				     dialog_details->sigid_end_edit);
 	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
 				     dialog_details->sigid_set_dtd);
 
 	g_object_unref (G_OBJECT (dialog_details->doc));
+
+	g_object_unref (G_OBJECT (dialog_details->xml));
+
+	g_free (dialog_details);
 
 	return FALSE;
 }
@@ -405,8 +405,6 @@ on_doc_end_edit (CongDocument *doc,
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 	g_assert (IS_CONG_DOCUMENT (doc));
 
-	g_message ("on_doc_end_edit");
-
 	refresh_modified (dialog_details, 
 			  doc);
 }
@@ -419,8 +417,6 @@ on_doc_set_dtd_ptr (CongDocument *doc,
 {
 	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 	g_assert (IS_CONG_DOCUMENT (doc));
-
-	g_message ("on_doc_set_dtd_ptr");
 
 	refresh_dtd_stuff (dialog_details, 
 			   doc);
