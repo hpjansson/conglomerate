@@ -691,6 +691,8 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	g_message("cong_document_node_make_orphan");
 #endif
 
+	g_assert (cong_document_is_within_edit(doc));
+
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_MAKE_ORPHAN], 0,
@@ -705,6 +707,8 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 	#if DEBUG_MVC
 	g_message("cong_document_node_add_after");
 	#endif
+
+	g_assert (cong_document_is_within_edit(doc));
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -724,6 +728,8 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 	g_message("cong_document_node_add_before");
 	#endif
 
+	g_assert (cong_document_is_within_edit(doc));
+
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_ADD_BEFORE], 0,
@@ -741,6 +747,8 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 	#if DEBUG_MVC
 	g_message("cong_document_node_set_parent");
 	#endif
+
+	g_assert (cong_document_is_within_edit(doc));
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -761,6 +769,8 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	g_message("cong_document_node_set_text");
 	#endif
 
+	g_assert (cong_document_is_within_edit(doc));
+
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_SET_TEXT], 0,
@@ -778,6 +788,8 @@ void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const
 	#if DEBUG_MVC
 	g_message("cong_document_node_set_attribute");
 	#endif
+
+	g_assert (cong_document_is_within_edit(doc));
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -797,6 +809,8 @@ void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, co
 	g_message("cong_document_node_remove_attribute");
 	#endif
 
+	g_assert (cong_document_is_within_edit(doc));
+
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_REMOVE_ATTRIBUTE], 0,
@@ -813,6 +827,8 @@ void cong_document_on_selection_change(CongDocument *doc)
 	#if DEBUG_MVC
 	g_message("cong_document_on_selection_change");
 	#endif
+
+	g_assert (cong_document_is_within_edit(doc));
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -840,6 +856,8 @@ void cong_document_on_cursor_change(CongDocument *doc)
 	g_message("cong_document_node_on_cursor_change");
 	#endif
 #endif
+
+	g_assert (cong_document_is_within_edit(doc));
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -871,7 +889,11 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 	g_message("cong_document_tag_remove");
 	#endif
 
+	cong_document_begin_edit(doc);
+
 	xml_tag_remove(doc, x); /* this is now a compound operation */
+
+	cong_document_end_edit(doc);
 }
 
 void cong_document_register_view(CongDocument *doc, CongView *view)

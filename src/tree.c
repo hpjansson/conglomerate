@@ -33,6 +33,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	
 	
 	/* GREP FOR MVC */
+	cong_document_begin_edit(doc);
 
 	/* Text node before new element */
 	text_node = cong_node_new_text(" ", doc);
@@ -48,6 +49,9 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_add_after(doc, text_node, new_node);
+
+	cong_document_end_edit(doc);
+
 
 	return(TRUE);
 }
@@ -72,6 +76,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	g_assert(doc);
 
 	/* GREP FOR MVC */
+	cong_document_begin_edit(doc);
 
 	/* Text node before new element */
 	text_node = cong_node_new_text(" ", doc);
@@ -87,6 +92,8 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_set_parent(doc, text_node, tag);
+
+	cong_document_end_edit(doc);
 
 	return(TRUE);
 }
@@ -133,7 +140,9 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
 	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
+	cong_document_begin_edit(doc);
 	cong_node_recursive_delete(doc, tag);
+	cong_document_end_edit(doc);
 
 	return(TRUE);
 }
@@ -173,7 +182,9 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 
 	CONG_NODE_SELF_TEST(new_copy);
 
+	cong_document_begin_edit(doc);
 	cong_document_node_set_parent(doc, new_copy,tag);
+	cong_document_end_edit(doc);
 
 	return(TRUE);
 }
@@ -200,7 +211,9 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 
 	CONG_NODE_SELF_TEST(new_copy);
 
+	cong_document_begin_edit(doc);
 	cong_document_node_add_before(doc, new_copy,tag);
+	cong_document_end_edit(doc);
 	
 	return(TRUE);
 }
@@ -228,7 +241,9 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 
 	CONG_NODE_SELF_TEST(new_copy);
 
+	cong_document_begin_edit(doc);
 	cong_document_node_add_after(doc, new_copy,tag);
+	cong_document_end_edit(doc);
 	
 	return(TRUE);
 }

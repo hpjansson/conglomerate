@@ -195,7 +195,9 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const gchar* in
 	new_content = xmlStrcat(new_content, loc->node->content+loc->byte_offset);
 	CONG_VALIDATE_UTF8(new_content);
 
+	cong_document_begin_edit (doc);
 	cong_document_node_set_text(doc, loc->node, new_content);
+	cong_document_end_edit (doc);
 	
 	xmlFree(new_content);
 
@@ -231,7 +233,9 @@ cong_location_del_next_char(CongDocument *doc, const CongLocation *loc)
 			CONG_VALIDATE_UTF8(new_text);
 		}
 
+		cong_document_begin_edit (doc);
 		cong_document_node_set_text(doc, loc->node, new_text);
+		cong_document_end_edit (doc);
 
 		xmlFree(new_text);
 	}

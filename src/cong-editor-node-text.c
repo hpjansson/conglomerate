@@ -574,8 +574,10 @@ on_signal_button_press (CongEditorArea *editor_area,
 						cong_location_copy(&cursor->location, &end_of_word);
 					}						
 				
+					cong_document_begin_edit(doc);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
+					cong_document_end_edit(doc);
 				}
 			}
 			return TRUE;
@@ -590,9 +592,11 @@ on_signal_button_press (CongEditorArea *editor_area,
 					
 					cong_selection_start_from_curs(selection, cursor);
 					cong_selection_end_from_curs(selection, cursor);
+
+					cong_document_begin_edit(doc);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
-						
+					cong_document_end_edit(doc);						
 				}
 			}
 
@@ -635,8 +639,12 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 				event->y, 
 				&cursor->location)) {
 		cong_selection_end_from_curs(selection, cursor);
+
+		cong_document_begin_edit(doc);
 		cong_document_on_selection_change(doc);
 		cong_document_on_cursor_change(doc);			
+		cong_document_end_edit(doc);
+
 		return TRUE;
 	}
 

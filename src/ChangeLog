@@ -1,4 +1,10 @@
-2003-08-05  David Malcolm <david@davemalcolm.demon.co.uk>
+2003-08-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-editor-node-text.c, cong-location.c, cong-node-properties-dialog.c, cursor.c, select.c, tree.c
+
+	Force all edits to be within a begin/end edit pair
+
+2003-08-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-flow-holder-blocks.c, cong-editor-area-flow-holder-inlines.c, cong-editor-node-comment.c, cong-editor-node-comment.h, cong-editor-node-document.c, cong-editor-node-document.h, cong-editor-node-dtd.c, cong-editor-node-dtd.h, cong-editor-node-element-span.c, cong-editor-node-element-span.h, cong-editor-node-element-structural.c, cong-editor-node-element-structural.h, cong-editor-node-element-unknown.c, cong-editor-node-element-unknown.h, cong-editor-node-element.c, cong-editor-node-element.h, cong-editor-node-entity-decl.c, cong-editor-node-entity-decl.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-node-unimplemented.c, cong-editor-node-unimplemented.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, cong-plugin.c, cong-plugin.h, plugin-lists-node-element-listitem.c, plugin-lists-node-element-listitem.h, plugin-lists.c, plugin-paragraph-node-element-paragraph.c, plugin-paragraph-node-element-paragraph.h, plugin-paragraph.c
 
@@ -7,6 +13,8 @@
 	* cong-editor-area-entity-ref.c, cong-editor-area-entity-ref.h, cong-editor-node-entity-ref.c, cong-editor-node-entity-ref.h, Makefile.am
 
 	New files: Rendering of entity references
+
+2003-08-05  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-text-fragment.c, cong-editor-node.c, cong-editor-widget3.c, cong-eel.c, cong-eel.h, cong-text-cache.c
 

@@ -56,7 +56,10 @@ gint cong_cursor_blink(gpointer data)
 		curs->on = 1;
 	}
 
+
+	cong_document_begin_edit(curs->doc);
 	cong_document_on_cursor_change(curs->doc);
+	cong_document_end_edit(curs->doc);
 	
 	return(TRUE);
 }
@@ -129,6 +132,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 #endif
 
 	/* GREP FOR MVC */
+	cong_document_begin_edit (doc);
 
 #if 1
 	t = cong_location_xml_frag_data_nice_split2(doc, &curs->location);
@@ -153,6 +157,8 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	/* FIXME:  
 	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
 	*/
+
+	cong_document_end_edit (doc);
 
 	return(1);
 }

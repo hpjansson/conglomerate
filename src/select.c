@@ -51,10 +51,12 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3, doc);
 
 	/* Link it in */
+	cong_document_begin_edit(doc);
 	cong_document_node_add_after(doc, d1, s);
 	cong_document_node_add_after(doc, d2, d1);
 	cong_document_node_add_after(doc, d3, d2);
 	cong_document_node_make_orphan(doc, s);
+	cong_document_end_edit(doc);
 
 	/* Unlink old node */
 	cong_node_free(s);
@@ -139,6 +141,8 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 	if (selection->loc0.node != selection->loc1.node)
 	{
 		CongNodePtr prev_node;
+
+		cong_document_begin_edit(doc);
 	
 		/* Selection is valid, now order first/last nodes */
 		
@@ -204,6 +208,8 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 
 		/* Reparent, last */
 		cong_document_node_set_parent(doc, loc1.node, p);
+
+		cong_document_end_edit(doc);
 		
 		return(prev_node);
 	}
@@ -212,6 +218,8 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 
 	else
 	{
+		cong_document_begin_edit(doc);
+
 		/* Sort out the ordering: */
 		if (selection->loc0.byte_offset < selection->loc1.byte_offset)
 		{
@@ -244,6 +252,8 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 		}
 		/* Move the selection below p: */
 		cong_document_node_set_parent(doc, selection->loc0.node, p);
+
+		cong_document_end_edit(doc);
 
 		/* Return node before p's new position (I think): */
 		return p->prev;

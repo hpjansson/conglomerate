@@ -412,11 +412,17 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 
 	/* Ignore if the node already has an attribute of that name: */
 	if (!xmlHasProp(view->node, arg2)) {
+		CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
+
+		cong_document_begin_edit(doc);
+
 		/* Remove old attribute: */
-		cong_document_node_remove_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, attr_name);
+		cong_document_node_remove_attribute(doc, view->node, attr_name);
 	
 		/* Add new attribute: */
-		cong_document_node_set_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, arg2, attr_value);
+		cong_document_node_set_attribute(doc, view->node, arg2, attr_value);
+
+		cong_document_end_edit(doc);
 	}
 	
 	g_free(attr_name);
@@ -432,10 +438,13 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 
 	CongAdvancedNodePropertiesView *view = user_data;
 	gchar* attr_name = get_attr_name_for_tree_path(view, arg1);
+	CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
 	g_message("on_value_edited %s = %s", attr_name, arg2);
 
-	cong_document_node_set_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, attr_name, arg2);
+	cong_document_begin_edit (doc);
+	cong_document_node_set_attribute (doc, view->node, attr_name, arg2);
+	cong_document_end_edit (doc);
 
 	g_free(attr_name);
 }
@@ -447,6 +456,8 @@ static void on_add_attribute(GtkButton *button,
 	gchar *attr_name;
 
 	CongAdvancedNodePropertiesView *view = user_data;
+
+	CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
 	/* Generate a unique name: */
 	while (1) {
@@ -462,7 +473,10 @@ static void on_add_attribute(GtkButton *button,
 
 	g_assert(!xmlHasProp(view->node, attr_name));
 
-	cong_document_node_set_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, attr_name, "");
+	cong_document_begin_edit(doc);
+	cong_document_node_set_attribute(doc, view->node, attr_name, "");
+	cong_document_end_edit(doc);
+
 }
 
 static void on_delete_attribute(GtkButton *button,
@@ -471,13 +485,17 @@ static void on_delete_attribute(GtkButton *button,
 	CongAdvancedNodePropertiesView *view = user_data;
 	GtkTreeSelection* selection = gtk_tree_view_get_selection(view->raw_attr.tree_view);
 	GtkTreeIter iter;
+	CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
 	if (gtk_tree_selection_get_selected (selection,
                                              NULL,
                                              &iter)) {
 		gchar* attr_name = get_attr_name_for_tree_iter(view, &iter);
 
-		cong_document_node_remove_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, attr_name);
+		cong_document_begin_edit(doc);
+		cong_document_node_remove_attribute(doc, view->node, attr_name);
+		cong_document_end_edit(doc);
+
 
 		g_free(attr_name);
 	}
