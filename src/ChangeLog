@@ -1,5 +1,9 @@
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xmldata.c
+
+	Fixed a run-time warning
+	
 	* cong-editor-widget.h
 
 	New file: declaration of new editor widget

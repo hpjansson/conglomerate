@@ -411,13 +411,25 @@ CongNodePtr cong_node_new_element(const gchar *xmlns, const gchar *tagname, Cong
 
 CongNodePtr cong_node_new_element_from_dispspec(CongDispspecElement *element, CongDocument *doc)
 {
+	gchar *xmlns;
+
 	g_return_val_if_fail (element, NULL);
 	g_return_val_if_fail (doc, NULL);
 
-	return xmlNewDocNode (cong_document_get_xml (doc), 
-			      cong_document_get_nsptr (doc, cong_dispspec_element_get_xmlns(element)), 
-			      cong_dispspec_element_tagname(element), 
-			      NULL);
+	xmlns = cong_dispspec_element_get_xmlns(element);
+
+	if (xmlns) {
+		return xmlNewDocNode (cong_document_get_xml (doc), 
+				      cong_document_get_nsptr (doc, xmlns), 
+				      cong_dispspec_element_tagname(element), 
+				      NULL);
+	} else {
+		return xmlNewDocNode (cong_document_get_xml (doc), 
+				      NULL, 
+				      cong_dispspec_element_tagname(element), 
+				      NULL);
+	}
+
 }
 
 CongNodePtr cong_node_new_text(const char *text, CongDocument *doc)
