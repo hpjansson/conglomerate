@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-13 23:10+0200\n"
-"PO-Revision-Date: 2003-10-13 23:13+0200\n"
+"POT-Creation-Date: 2003-10-16 21:11+0200\n"
+"PO-Revision-Date: 2003-10-16 21:47+0200\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
-#: src/cong-primary-window.c:435 src/cong-primary-window.c:437
-#: src/cong-primary-window.c:669 src/cong-primary-window.c:671
-#: src/cong-primary-window.c:677
+#: src/cong-primary-window.c:436 src/cong-primary-window.c:438
+#: src/cong-primary-window.c:670 src/cong-primary-window.c:672
+#: src/cong-primary-window.c:678
 msgid "Conglomerate XML Editor"
 msgstr "Uređivač XML-a Konglomerat"
 
@@ -54,7 +54,8 @@ msgstr "Jezik"
 
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:788
+#: glade/docbook-ulink-properties.glade.h:3 src/cong-file-properties.c:86
+#: src/cong-node-properties-dialog.c:788
 msgid "Properties"
 msgstr "Osobine"
 
@@ -152,6 +153,32 @@ msgstr "a, b, v, ..."
 #: glade/docbook-orderedlist-properties.glade.h:12
 msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
+
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr "<small>Neke primene DocBook-a dozvoljavaju da se ponašanje veza prilagodi ovim atributom „type“. </small>"
+
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Veza"
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "Odredište"
+
+#: glade/docbook-ulink-properties.glade.h:5 src/cong-file-properties.c:98
+msgid "Type"
+msgstr "Tip"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "Adresa"
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr "_Isprobajte ovu vezu"
 
 #: glade/string_selection_dialog.glade.h:1
 msgid "*"
@@ -311,15 +338,15 @@ msgstr "Tekst: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:751
+#: src/cong-editor-node-text.c:752
 msgid "Select word"
 msgstr "Izaberite reč"
 
-#: src/cong-editor-node-text.c:776
+#: src/cong-editor-node-text.c:777
 msgid "Move cursor"
 msgstr "Pomerite kurzor"
 
-#: src/cong-editor-node-text.c:828
+#: src/cong-editor-node-text.c:829
 msgid "Drag out selection"
 msgstr "Izvuci izabrano"
 
@@ -816,7 +843,7 @@ msgid "Export"
 msgstr "Izvezi"
 
 #: src/cong-file-export.c:252 src/cong-file-print.c:214
-#: src/cong-file-properties.c:96
+#: src/cong-file-properties.c:97
 msgid "General"
 msgstr "Opšte"
 
@@ -833,13 +860,13 @@ msgid "Export Options"
 msgstr "Opcije izvoza"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
-#: src/cong-file-properties.c:102 src/cong-file-properties.c:106
+#: src/cong-file-properties.c:103 src/cong-file-properties.c:107
 #: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
 msgid "Name"
 msgstr "Ime"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:232
-#: src/cong-file-print.c:242 src/cong-file-properties.c:107
+#: src/cong-file-print.c:242 src/cong-file-properties.c:108
 #: src/cong-menus.c:426 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Opis"
@@ -977,63 +1004,59 @@ msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
 "Nijedan od Konglomeratovih dodataka ne može da štampa datoteke tog tipa."
 
-#: src/cong-file-properties.c:51 src/cong-file-properties.c:54
+#: src/cong-file-properties.c:52 src/cong-file-properties.c:55
 msgid "None"
 msgstr "Ništa"
 
-#: src/cong-file-properties.c:56
+#: src/cong-file-properties.c:57
 msgid "External ID"
 msgstr "Spoljni ID"
 
-#: src/cong-file-properties.c:57
+#: src/cong-file-properties.c:58
 msgid "System ID"
 msgstr "Sistemski ID"
 
-#: src/cong-file-properties.c:97
-msgid "Type"
-msgstr "Tip"
-
-#: src/cong-file-properties.c:103 src/cong-node-properties-dialog.c:247
+#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:247
 msgid "Location"
 msgstr "Putanja"
 
-#: src/cong-file-properties.c:104
+#: src/cong-file-properties.c:105
 msgid "Modified"
 msgstr "Menjano"
 
-#: src/cong-file-properties.c:114
+#: src/cong-file-properties.c:115
 msgid "XML Header"
 msgstr "XML zaglavlje"
 
-#: src/cong-file-properties.c:115
+#: src/cong-file-properties.c:116
 msgid "Document Type Declaration"
 msgstr "Deklaracija tipa dokumenta"
 
-#: src/cong-file-properties.c:117
+#: src/cong-file-properties.c:118
 msgid "Version"
 msgstr "Verzija"
 
-#: src/cong-file-properties.c:122
+#: src/cong-file-properties.c:123
 msgid "Unspecified"
 msgstr "Nenavedeni"
 
-#: src/cong-file-properties.c:124
+#: src/cong-file-properties.c:125
 msgid "Encoding"
 msgstr "Kodiranje"
 
-#: src/cong-file-properties.c:126
+#: src/cong-file-properties.c:127
 msgid "Standalone"
 msgstr "Samostalan"
 
-#: src/cong-file-properties.c:129
+#: src/cong-file-properties.c:130
 msgid "_Remove this DTD"
 msgstr "U_kloni ovu DTD"
 
-#: src/cong-file-properties.c:151
+#: src/cong-file-properties.c:152
 msgid "_Associate this DTD"
 msgstr "_Nameni ovu DTD"
 
-#: src/cong-file-properties.c:152
+#: src/cong-file-properties.c:153
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "following information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1043,24 +1066,24 @@ msgstr ""
 "podaci odgovarajući. Kliknite na „Nameni ovu DTD“ da izričito navedete ove "
 "podatke u dokumentu."
 
-#: src/cong-file-properties.c:174
+#: src/cong-file-properties.c:175
 msgid "No External Subset"
 msgstr "Bez spoljašnjeg podskupa"
 
-#: src/cong-file-properties.c:191
+#: src/cong-file-properties.c:192
 msgid "Basic"
 msgstr "Osnovno"
 
-#: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:742
+#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:742
 #: src/cong-node-properties-dialog.c:826
 msgid "Advanced"
 msgstr "Napredno"
 
-#: src/cong-file-properties.c:218
+#: src/cong-file-properties.c:219
 msgid "Remove DTD"
 msgstr "Ukloni DTD"
 
-#: src/cong-file-properties.c:248
+#: src/cong-file-properties.c:249
 msgid "Associate with DTD"
 msgstr "Nameni ovu DTD"
 
@@ -1432,53 +1455,53 @@ msgstr "Prikaži detalje"
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Konglomerat ne može da pronađe podatke o prikazu za novu datoteku"
 
-#: src/cong-primary-window.c:280 src/cong-primary-window.c:281
+#: src/cong-primary-window.c:281 src/cong-primary-window.c:282
 msgid "Open document"
 msgstr "Otvori dokument"
 
-#: src/cong-primary-window.c:294 src/cong-primary-window.c:295
+#: src/cong-primary-window.c:295 src/cong-primary-window.c:296
 msgid "Save document as..."
 msgstr "Sačuvaj dokument kao..."
 
-#: src/cong-primary-window.c:302 src/cong-primary-window.c:303
+#: src/cong-primary-window.c:303 src/cong-primary-window.c:304
 msgid "Undo"
 msgstr "Opozovi"
 
-#: src/cong-primary-window.c:309 src/cong-primary-window.c:310
+#: src/cong-primary-window.c:310 src/cong-primary-window.c:311
 msgid "Redo"
 msgstr "Ponovi"
 
-#: src/cong-primary-window.c:328 src/cong-primary-window.c:329 src/tree.c:175
+#: src/cong-primary-window.c:329 src/cong-primary-window.c:330 src/tree.c:175
 #: src/xmledit.c:47
 msgid "Cut"
 msgstr "Iseci"
 
-#: src/cong-primary-window.c:335 src/cong-primary-window.c:336
+#: src/cong-primary-window.c:336 src/cong-primary-window.c:337
 msgid "Copy"
 msgstr "Umnoži"
 
-#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
+#: src/cong-primary-window.c:343 src/cong-primary-window.c:344
 #: src/xmledit.c:155
 msgid "Paste"
 msgstr "Ubaci"
 
-#: src/cong-primary-window.c:511
+#: src/cong-primary-window.c:512
 msgid "Overview"
 msgstr "Kratak pregled"
 
-#: src/cong-primary-window.c:521
+#: src/cong-primary-window.c:522
 msgid "Bookmarks"
 msgstr "Obeleživači"
 
-#: src/cong-primary-window.c:529
+#: src/cong-primary-window.c:530
 msgid "Raw XML"
 msgstr "Čist XML"
 
-#: src/cong-primary-window.c:587
+#: src/cong-primary-window.c:588
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Dobrodošli u mnogo zakasneli uređivač Konglomerat."
 
-#: src/cong-primary-window.c:669
+#: src/cong-primary-window.c:670
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (izmenjen) — %s"
@@ -1491,24 +1514,32 @@ msgstr "Štampanje XSL objekata oblikovanja (FO)"
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ovo će jednom postati rezultat iz cong_util_print_xslfo"
 
-#: src/cursor.c:100
+#: src/cursor.c:99
 #, c-format
 msgid "Split %s tag"
 msgstr "Rastavi oznaku %s"
 
-#: src/plugin-cleanup-source.c:376 src/plugin-cleanup-source.c:410
+#: src/plugin-admonition.c:61
+msgid "Admonition"
+msgstr "Upozorenje"
+
+#: src/plugin-admonition.c:62
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Čvor uređivača za oslikavanje saveta, upozorenja, itd."
+
+#: src/plugin-cleanup-source.c:377 src/plugin-cleanup-source.c:411
 msgid "Cleanup XML Source"
 msgstr "Očisti XML kôd"
 
-#: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:414
-#: src/plugin-cleanup-source.c:415
+#: src/plugin-cleanup-source.c:412 src/plugin-cleanup-source.c:415
+#: src/plugin-cleanup-source.c:416
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 msgstr ""
 "Čisti XML kôd dokumenta, tako da ga je lako čitati u tekstualnom uređivaču."
 
-#: src/plugin-cleanup-source.c:413
+#: src/plugin-cleanup-source.c:414
 msgid "_Clean the XML Source"
 msgstr "_Očisti XML kôd"
 
@@ -1564,46 +1595,46 @@ msgstr "Pretvaranje XSL objekata oblikovanja (FO) u PDF"
 msgid "Printing DocBook file"
 msgstr "Štampanje DocBook datoteke"
 
-#: src/plugin-docbook.c:1243
+#: src/plugin-docbook.c:1302
 msgid "DocBook Article"
 msgstr "DocBook članak"
 
-#: src/plugin-docbook.c:1244
+#: src/plugin-docbook.c:1303
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Sastavi članak, možda za veb stranicu ili časopis, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1251
+#: src/plugin-docbook.c:1310
 msgid "DocBook Book"
 msgstr "DocBook knjiga"
 
-#: src/plugin-docbook.c:1252
+#: src/plugin-docbook.c:1311
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Složi knjigu, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1259
+#: src/plugin-docbook.c:1318
 msgid "DocBook Set"
 msgstr "DocBook skup"
 
-#: src/plugin-docbook.c:1260
+#: src/plugin-docbook.c:1319
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Složi skup srodnih knjiga, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1268
+#: src/plugin-docbook.c:1327
 msgid "Import text as a DocBook article"
 msgstr "Uvezi tekst kao DocBook članak"
 
-#: src/plugin-docbook.c:1269
+#: src/plugin-docbook.c:1328
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Uvezi običan tekst u „DocBook“ oblik, kao jedan članak."
 
-#: src/plugin-docbook.c:1286
+#: src/plugin-docbook.c:1345
 msgid "Export DocBook as HTML"
 msgstr "Izvezi DocBook kao HTML"
 
-#: src/plugin-docbook.c:1287
+#: src/plugin-docbook.c:1346
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1611,11 +1642,11 @@ msgstr ""
 "Koristi opise stila za DocBook od Normana Volša (Norman Walsh) za izradu veb "
 "stranica iz ove DocBook datoteke"
 
-#: src/plugin-docbook.c:1294
+#: src/plugin-docbook.c:1353
 msgid "Export DocBook as PDF"
 msgstr "Izvezi DocBook kao PDF"
 
-#: src/plugin-docbook.c:1295
+#: src/plugin-docbook.c:1354
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1623,11 +1654,11 @@ msgstr ""
 "Koristi opise stila za DocBook od Normana Volša (Norman Walsh) za izradu PDF "
 "datoteke iz ove DocBook datoteke"
 
-#: src/plugin-docbook.c:1302
+#: src/plugin-docbook.c:1361
 msgid "Export DocBook as XSL:FO"
 msgstr "Izvezi DocBook kao XSL:FO"
 
-#: src/plugin-docbook.c:1303
+#: src/plugin-docbook.c:1362
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1636,59 +1667,67 @@ msgstr ""
 "FO datoteke iz ove DocBook datoteke koju je moguće ištampati ili naknadno "
 "pretvoriti u PDF"
 
-#: src/plugin-docbook.c:1311
+#: src/plugin-docbook.c:1370
 msgid "Print DocBook"
 msgstr "Štampaj DocBook"
 
-#: src/plugin-docbook.c:1320
+#: src/plugin-docbook.c:1379
 msgid "Generic DocBook property dialog"
 msgstr "Opšte prozorče za DocBook osobine"
 
-#: src/plugin-docbook.c:1321
+#: src/plugin-docbook.c:1380
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Obezbeđuje prozorče sa osobinama za većinu DocBook čvorova"
 
-#: src/plugin-docbook.c:1327
+#: src/plugin-docbook.c:1386
 msgid "<orderedlist> property dialog"
 msgstr "Osobine za <orderedlist>"
 
-#: src/plugin-docbook.c:1328
+#: src/plugin-docbook.c:1387
 msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr "Obezbeđuje prozorče sa osobinama za oznaku <orderedlist>"
 
-#: src/plugin-docbook.c:1335
+#: src/plugin-docbook.c:1393
+msgid "<ulink> property dialog"
+msgstr "Osobine za <ulink>"
+
+#: src/plugin-docbook.c:1394
+msgid "Provides a Properties dialog for the <ulink> tag"
+msgstr "Obezbeđuje prozorče sa osobinama za oznaku <ulink>"
+
+#: src/plugin-docbook.c:1401
 msgid "Promote Section"
 msgstr "Izdigni odeljak"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1402
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Izdiže DocBook odeljak na viši organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1338
+#: src/plugin-docbook.c:1404
 msgid "Promote"
 msgstr "Izdigni"
 
-#: src/plugin-docbook.c:1339 src/plugin-docbook.c:1340
+#: src/plugin-docbook.c:1405 src/plugin-docbook.c:1406
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Izdigni odeljak na viši organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1346
+#: src/plugin-docbook.c:1412
 msgid "Demote Section"
 msgstr "Spusti odeljak"
 
-#: src/plugin-docbook.c:1347
+#: src/plugin-docbook.c:1413
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Spušta DocBook odeljak na niži organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1349
+#: src/plugin-docbook.c:1415
 msgid "Demote"
 msgstr "Spusti"
 
-#: src/plugin-docbook.c:1350 src/plugin-docbook.c:1351
+#: src/plugin-docbook.c:1416 src/plugin-docbook.c:1417
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Spusti odeljak na niži organizacioni nivo u dokumentu"
 
@@ -1941,54 +1980,54 @@ msgstr "Element za oslikavanje šablonskih pravila u XSL opisu stila"
 msgid "(no description available)"
 msgstr "(nema opisa)"
 
-#: src/popup.c:185
+#: src/popup.c:177
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Primeni obuhvatnu oznaku: %s"
 
 # bug: is "span" keyword
-#: src/popup.c:266
+#: src/popup.c:258
 msgid "Remove Span Tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
 # bug: is "span" keyword
-#: src/popup.c:365
+#: src/popup.c:357
 msgid "Remove span tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
-#: src/popup.c:925
+#: src/popup.c:917
 msgid "Delete this item"
 msgstr "Ukloni ovu stavku"
 
-#: src/popup.c:935
+#: src/popup.c:927
 msgid "Add text node after"
 msgstr "Dodaj tekstualni čvor iza"
 
-#: src/popup.c:943
+#: src/popup.c:935
 msgid "Add text node before"
 msgstr "Dodaj tekstualni čvor ispred"
 
-#: src/popup.c:954
+#: src/popup.c:946
 msgid "Set the text"
 msgstr "Postavi tekst"
 
-#: src/popup.c:985
+#: src/popup.c:977
 msgid "Paste into"
 msgstr "Ubaci u"
 
-#: src/popup.c:993
+#: src/popup.c:985
 msgid "Paste before"
 msgstr "Ubaci ispred"
 
-#: src/popup.c:1001
+#: src/popup.c:993
 msgid "Paste after"
 msgstr "Ubaci iza"
 
-#: src/popup.c:1018
+#: src/popup.c:1010
 msgid "New sub-element"
 msgstr "Novi pod-element"
 
-#: src/popup.c:1043
+#: src/popup.c:1035
 msgid "New sibling"
 msgstr "Novo grananje"
 
