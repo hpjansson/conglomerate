@@ -117,7 +117,7 @@ static GtkWidget *create_dialog (const gchar *doc_name, GtkWindow* parent, GtkTe
   text_view = gtk_text_view_new_with_buffer (buffer);    
 
   title = g_strdup_printf ("Document \"%s\" is not valid", doc_name);
-  alert = cong_alert_content_new (GTK_STOCK_DIALOG_INFO, title, NULL, NULL);
+  alert = cong_alert_content_new (GTK_STOCK_DIALOG_ERROR, title, NULL, NULL);
   g_free (title);
 
   expander = gtk_expander_new_with_mnemonic ("_Details");

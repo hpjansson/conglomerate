@@ -1,4 +1,11 @@
 2004-10-12  Douglas Burke  <dburke@cfa.harvard.edu>
+ 
+	* plugin-validate.c
+ 
+ 	The icon used when there is an error is now different than when
+ 	the document validates.
+ 	
+2004-10-12  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* cong_util.c, cong_util.h, popup.c
 
