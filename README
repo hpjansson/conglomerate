@@ -14,16 +14,28 @@ GTK/GDK 2.0.5 or later, as well as Flux 0.2.8, available from
 
 ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
 
-(19 augustus 2002: 0.2.8 is still the "current" flux for conge)
+(20 september 2002: 0.2.8 is still the "current" flux for conge)
 You should configure, make, and install this to your development prefix.  You
 may then need to rename (prefix)/lib/libflux.a to (prefix)/lib/libflux-old.a
 This is a temporary workaround to deal with the fact that libflux has been
 under heavy development, whereas conge has been left untouched.
 
-There are no autoconf or automake scripts, only a basic makefile. On most
-modern Unices, this means you can type
+Type
 
-make
+  ./autogen.sh --with-flux-prefix=
+
+If Flux is not in your default prefix, you should do
+
+  ./autogen.sh --with-flux-prefix=/opt/flux-old
+
+(Or wherever you installed it to. I installed it to /opt/flux-old to
+keep it separated from the rest of my system). It will still link to
+-lflux-old, so you want to do the rename trick, or change that to -lflux
+in configure.in.
+
+Next type
+
+  make
 
 and see what happens. This should produce an executable called "conge" in
 your current directory.
@@ -35,6 +47,7 @@ Compiling on Windows should be equally simple, if you're using Cygwin
 1) Edit global.h, change #undef WINDOWS_BUILD to #define WINDOWS_BUILD 1
 2) Copy "Makefile.win" to "Makefile".
 3) make
+          ***** Please confirm if it still compiles on Win32 *****
 
 Running
 -------
