@@ -4,6 +4,7 @@
 Makefile
 Makefile.in
 aclocal.m4
+debian
 config.cache
 config.h
 config.h.in

@@ -1,0 +1,52 @@
+
+This directory, deb, is for keeping debian build stuff in upstream source
+without interfering making a  *.diff.gz
+
+ copy this "deb" directory to "debian"
+
+ cd ..
+ cp -a deb debian
+
+ debian/rules
+
+
+
+Build information  18 october 2002
+
+
+Here's what to do to make conge compile:
+ 1. install missing "sarge" packages:
+        apt-get update
+        apt-get install autoconf automake libtool libxml2-dev libgtk2.0-dev
+ 2. change "testing" to "unstable in /etc/apt/sources.list
+ 3. download packages needed from unstable/SID:
+        apt-get update
+        apt-get install libbonoboui2-dev libgnomeui-dev
+ 4. change "unstable" back to "testing" in /etc/apt/sources.list, and do
+    the following command to avoid installing more from unstable/SID:
+        apt-get update
+ 5. download and compile v. 0.2.8 of the flux library:
+        cd ~/src/
+        wget ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
+        tar xzf libflux-0.2.8.tar.gz
+        cd libflux-0.2.8/
+        ./configure --prefix=/home/myuser/apps
+        make
+        make install
+        cd ~/apps/lib/
+        ln -s ./libflux.a libflux-old.a
+ 6. do a CVS checkout, autoconf, configure and build of conge:
+        cd ~/src/
+        cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs co conge
+        cd conge/
+        ./autoconf.sh
+        ./configure --prefix=/home/myuser/apps --with-flux-prefix=/home/myuser/apps
+        make
+
+Note that step 3 caused 15 other packages to be updated to the
+versions in "unstable", 38 new packages to be installed, and another
+26MB being used on my system.
+
+These may not be changes that others wish to inflict on their systems.
+
+# end of Read me
