@@ -139,6 +139,47 @@
 </informalfigure>
 <para>Here is some more text.</para>
 </sect1>
+<sect1><title>Test of whitespace preservation and CDATA sections</title>
+<para>Here is the content of the file <filename>src/main.c</filename> from Conglomerate's <acronym>CVS</acronym> server (copied from <literal>HEAD</literal> on August 16th 2004.</para>
+<programlisting><![CDATA[/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
+#include <gdk/gdk.h>
+#include <gtk/gtk.h>
+
+#include "global.h"
+#include "cong-app.h"
+#include "cong-primary-window.h"
+
+int 
+main( int   argc,
+      char *argv[] )
+{
+	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
+
+	cong_app_construct_singleton (argc, 
+				      argv);
+
+	/* This code requires the app singleton ptr to be set: */
+	cong_primary_window_new(NULL);
+
+	/* Various things require that a primary window exists: */
+	if (cong_app_post_init_hack (cong_app_singleton())) {
+		return 1;
+	}
+
+	/* The main loop: */
+	gtk_main();
+
+	/* Cleanup: */
+	cong_app_destroy_singleton();
+
+	return(0);
+}
+]]>
+</programlisting>
+</sect1>
 
 <!-- etc -->
 

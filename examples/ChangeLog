@@ -1,3 +1,9 @@
+2004-08-16  David Malcolm  <dmalcolm@redhat.com>
+
+	* test-docbook.xml: 
+
+	Added test of <programlisting> and of CDATA sections
+
 2004-08-04  Michèle Garoche <michele.garoche@easyconnect.fr>
  
  	* cnxml.xml
