@@ -379,8 +379,6 @@ cong_document_paste_source_after (CongDocument *doc,
 	cong_document_end_edit (doc);
 }
 
-extern char *ilogo_xpm[];
-
 /**
  * cong_document_view_source:
  * @doc:
@@ -390,32 +388,8 @@ extern char *ilogo_xpm[];
 void 
 cong_document_view_source(CongDocument *doc)
 {
-	GtkWidget *window;
-	GtkWidget *source_view;
-
 	g_return_if_fail(doc);
 
-	window = gnome_app_new(PACKAGE_NAME,
-			       _("Source View - Conglomerate"));
-	source_view = cong_source_view_new(doc);
-
-	gnome_app_set_contents(GNOME_APP(window), source_view);
-
-	/* Set up the window nicely: */
-	{	
-		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
-		
-		gtk_window_set_icon(GTK_WINDOW(window),
-				    icon_pixbuf);
-
-		gdk_pixbuf_unref(icon_pixbuf);
-
-	}
-
-	gtk_window_set_default_size(GTK_WINDOW(window),
-				    500,
-				    400);
-
-	gtk_widget_show(GTK_WIDGET(window));
-
+	cong_util_show_in_window (cong_source_view_new(doc),
+				  _("Source View - Conglomerate"));
 }

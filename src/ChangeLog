@@ -1,5 +1,10 @@
 2004-06-03  David Malcolm  <dmalcolm@redhat.com>
 
+	* xmledit.c (cong_document_view_source): Moved most of the code into new function
+
+	* cong-util.h, cong-util.c (cong_util_show_in_window): New function, refactored from the source_view
+	code
+
 	* cong-primary-window.c (add_standard_layout_for_doc): New function, factoring
 	out the bulk of cong_primary_window_add_doc
 

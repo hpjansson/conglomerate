@@ -340,6 +340,11 @@ char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 				       const xmlChar *local_attribute_name);
 
+void
+cong_util_show_in_window (GtkWidget *content,
+			  const gchar *title);
+
+
 G_END_DECLS
 
 #endif
