@@ -75,6 +75,7 @@ get_current_indent (CongEditorLineManager *line_manager,
 struct CongEditorLineManagerSimplePrivate
 {
 	CongEditorAreaLines *area_lines;
+	gulong handler_id_width_changed;
 };
 
 CONG_DEFINE_CLASS_BEGIN (CongEditorLineManagerSimple, cong_editor_line_manager_simple, CONG_EDITOR_LINE_MANAGER_SIMPLE, CongEditorLineManager, CONG_EDITOR_LINE_MANAGER_TYPE)
@@ -98,32 +99,58 @@ CONG_DEFINE_CLASS_BEGIN (CongEditorLineManagerSimple, cong_editor_line_manager_s
 
 }
 CONG_DEFINE_CLASS_END ()
-CONG_DEFINE_EMPTY_DISPOSE(cong_editor_line_manager_simple)
+
+static void
+on_area_width_changed (CongEditorArea *area,
+		       gpointer data)
+{
+	CongEditorLineManagerSimple *line_manager = CONG_EDITOR_LINE_MANAGER_SIMPLE (data);
+
+	/* g_message ("on_area_width_changed"); */
+
+	cong_editor_line_manager_handle_width_change (CONG_EDITOR_LINE_MANAGER (line_manager));
+}
+
 
 CongEditorLineManager*
 cong_editor_line_manager_simple_construct (CongEditorLineManagerSimple *line_manager,
 					   CongEditorWidget3 *widget,
+					   CongEditorNode *editor_node,
 					   CongEditorAreaLines *area_lines)
 {
 	g_return_val_if_fail (IS_CONG_EDITOR_LINE_MANAGER_SIMPLE (line_manager), NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_AREA_LINES (area_lines), NULL);
 
 	cong_editor_line_manager_construct (CONG_EDITOR_LINE_MANAGER (line_manager),
-					    widget);
+					    widget,
+					    editor_node);
 
 	PRIVATE (line_manager)->area_lines = area_lines;
+
+	
+	PRIVATE (line_manager)->handler_id_width_changed = g_signal_connect (G_OBJECT (area_lines),
+									     "width_changed",
+									     G_CALLBACK (on_area_width_changed),
+									     line_manager);
 
 	return CONG_EDITOR_LINE_MANAGER (line_manager);
 }
 
+CONG_OBJECT_IMPLEMENT_DISPOSE_BEGIN(CongEditorLineManagerSimple, cong_editor_line_manager_simple, CONG_EDITOR_LINE_MANAGER_SIMPLE, simple) 
+     g_signal_handler_disconnect (G_OBJECT(PRIVATE (simple)->area_lines),
+				  PRIVATE(simple)->handler_id_width_changed);
+CONG_OBJECT_IMPLEMENT_DISPOSE_END(cong_editor_line_manager_simple)
+
 CongEditorLineManager*
 cong_editor_line_manager_simple_new (CongEditorWidget3 *widget,
+				     CongEditorNode *editor_node,
 				     CongEditorAreaLines *area_lines)
 {
 	g_return_val_if_fail (IS_CONG_EDITOR_AREA (area_lines), NULL);
 
 	return CONG_EDITOR_LINE_MANAGER (cong_editor_line_manager_simple_construct (g_object_new (CONG_EDITOR_LINE_MANAGER_SIMPLE_TYPE, NULL),
 										    widget,
+										    editor_node,
 										    area_lines));
 }
 

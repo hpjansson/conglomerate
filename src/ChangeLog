@@ -1,5 +1,9 @@
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-line-manager-simple.c: listen to the width_changed
+	signal on the owning area of the line_manager_simple; call a handler
+	function on the base class line manager when it occurs.
+
 	* cong-editor-area.c: Added a width_changed signal, emitted when
 	allocated width changes
 
@@ -34,7 +38,7 @@
 
 	* cong-dispspec-element.h: ditto
 
-	* global.h: ditto, plus removed the unsued isblank macro
+	* global.h: ditto, plus removed the unused isblank macro
 
 2004-11-25  David Malcolm  <david@davemalcolm.demon.co.uk>
 
