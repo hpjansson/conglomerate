@@ -1,3 +1,9 @@
+2004-01-02  Geert Stappers <stappers@stappers.nl>
+
+	* cong-app.c
+	enable GConf search again, we have to fix bug #129776 (missing
+	@PKGDATADIR@) at the right place.
+
 2003-12-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, cong-editor-node-text.c, tree.c, xmledit.c

@@ -326,13 +326,11 @@ cong_app_private_load_displayspecs (CongApp *app,
 	   we need to load in the most-trusted sources first */
 
 	/* Load gconf-specified directories */
-	/* FIXME:  This is temporarily disabled pending a fix to bug #129776 */
-#if 0
+
 	ds_path_list = gconf_client_get_list(PRIVATE(app)->gconf_client,
 					     "/apps/conglomerate/dispspec-paths",
 					     GCONF_VALUE_STRING,
 					     NULL);
-#endif
 	
 	if (ds_path_list == NULL) {
 		/* Fallback in the case where there is nothing in GConf.
@@ -344,6 +342,8 @@ cong_app_private_load_displayspecs (CongApp *app,
 						    FALSE,
 						    NULL);
 		ds_path_list = g_slist_append (ds_path_list, (gpointer)xds_directory);
+		/* Inform user about it. */
+		g_warning ("Using the fallback for GConf place of the dispspec directory");
 	}
 		
 	/* Now run through the path list in order, adding dispspecs to
