@@ -1,3 +1,8 @@
+2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* POTFILES.in: added src/plugin-print-source.c and
+	src/plugin-table.c
+
 2004-11-12  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated by Daniel van Eeden.

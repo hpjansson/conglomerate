@@ -167,10 +167,12 @@ src/plugin-lists-node-element-listitem.c
 src/plugin-paragraph-area-paragraph.c
 src/plugin-paragraph.c
 src/plugin-paragraph-node-element-paragraph.c
+src/plugin-print-source.c
 src/plugin-random.c
 src/plugin-relaxng.c
 src/plugin-save-dispspec.c
 src/plugin-sgml.c
+src/plugin-table.c
 src/plugin-tei.c
 src/plugin-templates.c
 src/plugin-tests.c
