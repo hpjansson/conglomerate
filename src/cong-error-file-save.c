@@ -32,10 +32,10 @@ cong_error_split_uri(const GnomeVFSURI* uri, gchar** filename_alone, gchar** pat
 
 }
 
-GtkWidget*
+GtkDialog*
 cong_error_dialog_new_file_save_failed(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result, const GnomeVFSFileSize* file_size)
 {
-	GtkWidget* dialog = NULL;
+	GtkDialog* dialog = NULL;
 	gchar* app_name;
 	gchar* filename_alone;
 	gchar* path;
@@ -104,7 +104,7 @@ cong_error_dialog_new_file_save_failed(const GnomeVFSURI* file_uri, GnomeVFSResu
 		{
 			/* Since we're saving, this must be "path not found" rather than "file not found": */
 			dialog = cong_error_dialog_new(what_failed_transient,
-						       "The location does not exist",
+						       "The location does not exist.",
 						       "(i) Try checking that you spelt the location's name correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"MYDIRECTORY\" or \"mydirectory\").\n"
 						       "(ii) Try saving to a different location.");
 		}
