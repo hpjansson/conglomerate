@@ -1,5 +1,9 @@
 2003-07-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-lists-area-listitem.c, plugin-lists-area-listitem.h, plugin-lists-node-element-listitem.c, plugin-lists-node-element-listitem.h, Makefile.am
+
+	New files: support for a plugin that renders DocBook <listitem> tags
+
 	* cong-util.c, cong-util.h
 
 	New files, taken from parts of main.c and global.h

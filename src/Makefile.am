@@ -56,6 +56,7 @@ conglomerate_SOURCES =      \
   cong-progress-checklist.h \
   cong-text-cache.h         \
   cong-tree-view.h          \
+  cong-util.h               \
   cong-view.h               \
   fo.h                      \
   cong-app.c                \
@@ -117,6 +118,7 @@ conglomerate_SOURCES =      \
   cong-span-text-editor.c   \
   cong-text-cache.c         \
   cong-tree-view.c          \
+  cong-util.c               \
   cong-view.c               \
   icon_assemble.c           \
   icon_connect.c            \
@@ -144,6 +146,10 @@ conglomerate_SOURCES =      \
   plugin-empty.c            \
   plugin-fo.c               \
   plugin-lists.c            \
+  plugin-lists-area-listitem.h \
+  plugin-lists-area-listitem.c \
+  plugin-lists-node-element-listitem.h \
+  plugin-lists-node-element-listitem.c \
   plugin-sgml.c             \
   plugin-tests.c            \
   plugin-validate.c         \
