@@ -607,44 +607,70 @@ void xed_str_put(CongXMLEditor *xed, char *s)
 }
 
 
-void stack_print(TTREE *t)
+void stack_print(CongLayoutStackEntry *t)
 {
-#ifndef RELEASE		
-	printf("\n");
+	printf("\n STACK:\n");
+
+#if NEW_STACK_IMPLEMENTATION
+	for (; t; t = t->above) {
+		printf("<%s %d>\n", t->text, t->line);
+	}
+#else
 	for (; t; t = t->parent) {
 		printf("<%s %d>\n", t->data,
 		       (int) *(t->child->next->data));
 	}
-	printf("\n\n");
 #endif
+	printf("\n\n");
 }
 
 #define DEBUG_STACK 0
 
 void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev)
 {
-	CongLayoutStackEntry *t;
+	CongLayoutStackEntry *top_entry;
+	CongLayoutStackEntry *new_entry;
 
-	t = cong_layout_stack_top(layout_stack);
+	top_entry = cong_layout_stack_top(layout_stack);
 #if DEBUG_STACK
-	if (t) stack_print(t);
+	if (top_entry) stack_print(top_entry);
 #endif
 
-	t = ttree_node_add(t, s, strlen(s));
-	if (!layout_stack->tags) layout_stack->tags = t;
+#if NEW_STACK_IMPLEMENTATION
+	new_entry = g_new0(CongLayoutStackEntry,1);
+	if (!layout_stack->bottom) layout_stack->bottom = new_entry;
 
-	ttree_node_add(t, &(line), sizeof(int));
-	ttree_node_add(t, &(pos_x), sizeof(int));
-	ttree_node_add(t, &x, sizeof(TTREE *));
-	ttree_node_add(t, &lev, sizeof(int));
+	new_entry->text = g_strdup(s);
+	new_entry->line = line;
+	new_entry->pos_x = pos_x;
+	new_entry->x = x;
+	new_entry->lev = lev;	
+	new_entry->above = NULL;
+	new_entry->below = top_entry;
+
+	if (top_entry) {
+		g_assert(top_entry->above==NULL);
+		top_entry->above = new_entry;
+	}
+	     
+#else
+	new_entry = ttree_node_add(top_entry, s, strlen(s));
+	if (!layout_stack->bottom) layout_stack->bottom = new_entry;
+
+	ttree_node_add(new_entry, &(line), sizeof(int));
+	ttree_node_add(new_entry, &(pos_x), sizeof(int));
+	ttree_node_add(new_entry, &x, sizeof(TTREE *));
+	ttree_node_add(new_entry, &lev, sizeof(int));
+#endif
 
 #if DEBUG_STACK
 	printf("[Tag Push] (%s) line=%d\n", s, line);
 #endif
 
-	t = cong_layout_stack_top(layout_stack);
+	top_entry = cong_layout_stack_top(layout_stack);
+	g_assert(top_entry==new_entry);
 #if DEBUG_STACK
-	if (t) stack_print(t);
+	if (top_entry) stack_print(top_entry);
 #endif
 }
 
@@ -661,41 +687,23 @@ void xed_stack_push(CongXMLEditor *xed, char *s, TTREE *x, int n)
 		pos_x = 0;
 	}
 
-#if 1
 	cong_layout_stack_push(&xed->layout_stack, s, line, pos_x, x, lev);
-#else
-	t = ttree_node_add(t, s, strlen(s));
-	if (!xed->tags) xed->tags = t;
-
-	ttree_node_add(t, &(line), sizeof(int));
-	ttree_node_add(t, &(pos_x), sizeof(int));
-	ttree_node_add(t, &x, sizeof(TTREE *));
-	ttree_node_add(t, &lev, sizeof(int));
-#endif
 
 }
 
-#if 1
 void cong_layout_stack_change_level_of_top_tag(CongLayoutStack *layout_stack, int lev)
 {
 	CongLayoutStackEntry *t;
 
 	t = cong_layout_stack_top(layout_stack);
 
-	memcpy(t->child->next->next->next->data, &lev, sizeof(int));
-}
+#if NEW_STACK_IMPLEMENTATION
+	t->lev=lev;
 #else
-void xed_stack_change_level_of_top_tag(CongXMLEditor *xed, int lev)
-{
-	TTREE *t;
-
-	t = xed_stack_top(xed);
-
 	memcpy(t->child->next->next->next->data, &lev, sizeof(int));
-}
 #endif
+}
 
-#if 1
 void cong_layout_stack_elevate(CongLayoutStack *layout_stack)
 {
 	CongLayoutStackEntry *t;
@@ -703,28 +711,18 @@ void cong_layout_stack_elevate(CongLayoutStack *layout_stack)
 
 	t = cong_layout_stack_top(layout_stack);
 	
-	for (i = 1; t && (int) *((int *) t->child->next->next->next->data) < i;
-	     t = t->parent, i++) {
-		((int) *((int *) t->child->next->next->next->data))++;
+#if NEW_STACK_IMPLEMENTATION
+	for (i = 1; t && t->lev < i; t = t->below, i++) {
+		t->lev++;
 	}
-}
 #else
-void xed_stack_elevate(CongXMLEditor *xed)
-{
-	cong_layout_stack
-	TTREE *t;
-	int i;
-
-	t = xed_stack_top(xed);
-	
 	for (i = 1; t && (int) *((int *) t->child->next->next->next->data) < i;
 	     t = t->parent, i++) {
 		((int) *((int *) t->child->next->next->next->data))++;
 	}
-}
 #endif
+}
 
-#if 1
 void cong_layout_stack_compress(CongLayoutStack *layout_stack)
 {
 	CongLayoutStackEntry *t;
@@ -733,22 +731,13 @@ void cong_layout_stack_compress(CongLayoutStack *layout_stack)
 	t = cong_layout_stack_top(layout_stack);
 
 	for (i = 0; t; t = cong_layout_stack_entry_below(t), i++) {
-		((int) *((int *) t->child->next->next->next->data)) = i;
-	}
-}
+#if NEW_STACK_IMPLEMENTATION
+		t->lev = i;
 #else
-void xed_stack_compress(CongXMLEditor *xed)
-{
-	TTREE *t;
-	int i;
-
-	t = xed_stack_top(xed);
-
-	for (i = 0; t; t = t->parent, i++) {
 		((int) *((int *) t->child->next->next->next->data)) = i;
+#endif
 	}
 }
-#endif
 
 void cong_layout_stack_pop(CongLayoutStack *layout_stack)
 {
@@ -756,17 +745,31 @@ void cong_layout_stack_pop(CongLayoutStack *layout_stack)
 
 	g_return_if_fail(layout_stack);
 
-	t = layout_stack->tags;
+	t = cong_layout_stack_bottom(layout_stack);
 	if (!t) return;
 
 	t = cong_layout_stack_top(layout_stack);
 #if DEBUG_STACK
 	if (t) stack_print(t);
 #endif
-	if (t == layout_stack->tags) {
-		layout_stack->tags = NULL;
+	if (t == layout_stack->bottom) {
+		layout_stack->bottom = NULL;
 	}
+
+#if NEW_STACK_IMPLEMENTATION
+	g_assert(t->above==NULL);
+	if (t->below) {
+		g_assert(t->below->above==t);
+		t->below->above=NULL;
+	}
+
+	g_assert(t->text);
+	g_free(t->text);
+
+	g_free(t);
+#else
 	ttree_branch_remove(t);
+#endif
 
 #if DEBUG_STACK
 	printf("[Tag pop]\n");
@@ -778,13 +781,12 @@ void xed_stack_pop(CongXMLEditor *xed)
 	cong_layout_stack_pop(&xed->layout_stack);
 }
 
-#if 1
 CongLayoutStackEntry*
 cong_layout_stack_top(CongLayoutStack *layout_stack)
 {
 	CongLayoutStackEntry *t;
 
-	t = layout_stack->tags;
+	t = layout_stack->bottom;
 	if (!t) {
 		return NULL;
 	}
@@ -794,26 +796,19 @@ cong_layout_stack_top(CongLayoutStack *layout_stack)
 	}
 	return(t);	
 }
-#else
-TTREE *xed_stack_top(CongXMLEditor *xed)
+
+CongLayoutStackEntry*
+cong_layout_stack_bottom(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
-
-	t = xed->tags;
-	if (!t) return(0);
-
-	for ( ; t->child->next->next->next->next; t = t->child->next->next->next->next) ;
-	return(t);
+	return layout_stack->bottom;
 }
-#endif
 
-#if 1
 int cong_layout_stack_depth(CongLayoutStack *layout_stack)
 {
 	CongLayoutStackEntry *t;
 	int d;
 	
-	t = layout_stack->tags;
+	t = layout_stack->bottom;
 	if (!t) return(0);
 	
 	for (d = 1; cong_layout_stack_entry_next(t); t = cong_layout_stack_entry_next(t)) {
@@ -822,29 +817,17 @@ int cong_layout_stack_depth(CongLayoutStack *layout_stack)
 
 	return(d);
 }
-#else
-int xed_stack_depth(CongXMLEditor *xed)
-{
-	TTREE *t;
-	int d;
-	
-	t = xed->tags;
-	if (!t) return(0);
-	
-	for (d = 1; t->child->next->next->next->next; t = t->child->next->next->next->next) {
-		d++;
-	}
-
-	return(d);
-}
-#endif
 
 CongLayoutStackEntry*
 cong_layout_stack_entry_next(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, NULL);
 
+#if NEW_STACK_IMPLEMENTATION
+	return entry->above;
+#else
 	return entry->child->next->next->next->next;
+#endif
 }
 
 CongLayoutStackEntry*
@@ -852,21 +835,44 @@ cong_layout_stack_entry_below(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, NULL);
 
+#if NEW_STACK_IMPLEMENTATION
+	return entry->below;
+#else
 	return entry->parent;
+#endif
+}
+
+char *cong_layout_stack_entry_get_text(CongLayoutStackEntry *entry) 
+{
+	g_return_val_if_fail(entry, NULL);
+
+#if NEW_STACK_IMPLEMENTATION
+	return entry->text;
+#else
+	return entry->data;
+#endif
 }
 
 int cong_layout_stack_entry_get_line(CongLayoutStackEntry *entry) 
 {
 	g_return_val_if_fail(entry, 0);
 
+#if NEW_STACK_IMPLEMENTATION
+	return entry->line;
+#else
 	return *((int*) entry->child->data);
+#endif
 }
 
 int cong_layout_stack_entry_get_pos_x(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, 0);
 
+#if NEW_STACK_IMPLEMENTATION
+	return entry->pos_x;
+#else
 	return *((int *) entry->child->next->data);
+#endif
 }
 
 #if 0
@@ -881,7 +887,11 @@ int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, 0);
 
+#if NEW_STACK_IMPLEMENTATION
+	return entry->lev;
+#else
 	return *((int *) entry->child->next->next->next->data);
+#endif
 }
 
 
@@ -892,6 +902,29 @@ TTREE *xed_line_last(CongXMLEditor *xed)
 
 
 /* xed->draw_pos_x = last pixel of line */
+
+GdkGC *get_gc_for_stack_entry(CongDispspec *ds, CongLayoutStackEntry *entry, int tog)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_layout_stack_entry_get_text(entry));
+
+	if (element) {
+		return cong_dispspec_element_gc(element);
+	} else {
+		return NULL;
+	}
+}
+
+const char *get_uistring_for_stack_entry(CongDispspec *ds, CongLayoutStackEntry *entry)
+{
+	const char* codename = cong_layout_stack_entry_get_text(entry);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, codename);
+	if (element) {
+		return (char*)cong_dispspec_element_username(element);
+	}
+  
+	return codename;
+}		
+
 
 void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 {
@@ -933,7 +966,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 
 		y = draw_pos_y;
 
-		if (mode == 1 && (gc = cong_dispspec_name_gc_get(xed->displayspec, t, 0)))
+		if (mode == 1 && (gc = get_gc_for_stack_entry(xed->displayspec, t, 0)))
 		{
 			UNUSED_VAR(TTREE *n0)
 			UNUSED_VAR(TTREE *n1)
@@ -941,7 +974,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
+			text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
 			if (text_width < width - 6)
 			{
 				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -950,7 +983,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 				
 				gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
 				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-												text_y, cong_dispspec_name_name_get(ds, t));
+												text_y, get_uistring_for_stack_entry(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 				gdk_draw_line(xed->p, gc, x1, y, x1, y - 2);
@@ -987,7 +1020,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 		draw_pos_y += xed->tag_height;
 #endif
 
-		if (mode == 1 && (gc = cong_dispspec_name_gc_get(xed->displayspec, t, 0)))
+		if (mode == 1 && (gc = get_gc_for_stack_entry(xed->displayspec, t, 0)))
 		{
 			UNUSED_VAR(TTREE *n0)
 			UNUSED_VAR(TTREE *n1)
@@ -995,7 +1028,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 			
 			/* Insert text if it fits */
 
-			text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
+			text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
 			if (text_width < width - 6)
 			{
 				text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -1003,7 +1036,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 				/* Draw text and lines */
 				
 				gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-												text_y, cong_dispspec_name_name_get(ds, t));
+												text_y, get_uistring_for_stack_entry(ds, t));
 				gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 				gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 			}
@@ -1070,14 +1103,14 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, int mode)
 #if 0
 	if (x1 > x0) { x1 -= 4; width -= 4; }
 #endif
-	if (mode == 1 && (gc = cong_dispspec_name_gc_get(ds, t, 0)))
+	if (mode == 1 && (gc = get_gc_for_stack_entry(ds, t, 0)))
 	{
 	  UNUSED_VAR(TTREE *n0)
 	  UNUSED_VAR(TTREE *n1)
 
 		/* Insert text if it fits */
 
-		text_width = gdk_string_width(xed->fm, cong_dispspec_name_name_get(ds, t));
+		text_width = gdk_string_width(xed->fm, get_uistring_for_stack_entry(ds, t));
 		if (text_width < width - 6)
 		{
 			text_y = y + (xed->fm_asc + xed->fm_desc) / 2;
@@ -1086,7 +1119,7 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, int mode)
 			
 			if (line == xed->draw_line) gdk_draw_line(xed->p, gc, x0, y, x0, y - 2);
 			gdk_draw_string(xed->p, xed->fm, gc, x0 + 1 + (width - text_width) / 2,
-											text_y, cong_dispspec_name_name_get(ds, t));
+					text_y, get_uistring_for_stack_entry(ds, t));
 			gdk_draw_line(xed->p, gc, x0, y, x0 - 1 + (width - text_width) / 2, y);
 			gdk_draw_line(xed->p, gc, x1 + 1 - (width - text_width) / 2, y, x1, y);
 			gdk_draw_line(xed->p, gc, x1, y, x1, y - 2);

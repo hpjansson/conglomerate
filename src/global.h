@@ -156,16 +156,41 @@ cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i);
 TTREE*
 cong_layout_cache_get_last_line(CongLayoutCache *layout_cache);
 
+#define NEW_STACK_IMPLEMENTATION 1
+
+#if NEW_STACK_IMPLEMENTATION
+typedef struct CongLayoutStackEntry
+{
+	char *text;
+	int line;
+	int pos_x;
+	TTREE *x;
+	int lev;
+	struct CongLayoutStackEntry *above;
+	struct CongLayoutStackEntry *below;
+
+} CongLayoutStackEntry;
+
 typedef struct CongLayoutStack
 {
-	TTREE *tags;
+	CongLayoutStackEntry *bottom;
 	
 } CongLayoutStack;
-
+#else
 typedef TTREE CongLayoutStackEntry;
+
+typedef struct CongLayoutStack
+{
+	TTREE *bottom;
+	
+} CongLayoutStack;
+#endif
 
 CongLayoutStackEntry*
 cong_layout_stack_top(CongLayoutStack *layout_stack);
+
+CongLayoutStackEntry*
+cong_layout_stack_bottom(CongLayoutStack *layout_stack);
 
 void
 cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev);
