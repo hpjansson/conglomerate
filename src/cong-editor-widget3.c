@@ -692,6 +692,8 @@ void
 cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widget,
 						  CongEditorArea* editor_area)
 {
+	GdkCursor *new_cursor = NULL;
+
 	g_return_if_fail (editor_widget);
 
 #if 0
@@ -712,6 +714,18 @@ cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widg
 			cong_editor_area_set_state (editor_area,
 						    GTK_STATE_PRELIGHT);
 		}
+	}
+
+	if (editor_area) {
+		new_cursor = cong_editor_area_get_cursor (editor_area);		
+	}
+
+	/* I believe that NULL is the default cursor: */
+	gdk_window_set_cursor (GTK_WIDGET(editor_widget)->window,
+			       new_cursor);
+
+	if (new_cursor) {
+		gdk_cursor_unref (new_cursor);
 	}
 }
 

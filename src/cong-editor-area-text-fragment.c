@@ -90,6 +90,8 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 					  guint line_index,
 					  int baseline)
 {
+	GdkCursor *cursor;
+
 	cong_editor_area_construct (CONG_EDITOR_AREA(area_text_fragment),
 				    editor_widget);
 
@@ -97,6 +99,12 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 	PRIVATE(area_text_fragment)->pango_layout = pango_layout;
 	PRIVATE(area_text_fragment)->line_index = line_index;
 	PRIVATE(area_text_fragment)->baseline = baseline;
+
+	cursor = gdk_cursor_new (GDK_XTERM);
+
+	cong_editor_area_set_cursor (CONG_EDITOR_AREA (area_text_fragment),
+				     cursor);
+	gdk_cursor_unref (cursor);
 
 	return CONG_EDITOR_AREA (area_text_fragment);
 }

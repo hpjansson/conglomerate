@@ -79,6 +79,8 @@ struct CongEditorAreaDetails
 	/* If this area is directly associated with an editor_node, this is it: */
 	CongEditorNode *editor_node;
 	guint selection_change_handler_id;
+
+	GdkCursor *cursor;
 };
 /* Declarations of the GObject handlers: */
 static void
@@ -283,6 +285,34 @@ cong_editor_area_set_state (CongEditorArea *area,
 			       signals[STATE_CHANGED], 0);
 
 		cong_editor_area_queue_redraw (area);
+	}
+}
+
+GdkCursor*
+cong_editor_area_get_cursor (CongEditorArea *area)
+{
+	if ( PRIVATE (area)->cursor) {
+		gdk_cursor_ref (PRIVATE (area)->cursor);
+		return PRIVATE (area)->cursor;
+	} else {
+		return NULL;
+	}
+}
+
+void
+cong_editor_area_set_cursor (CongEditorArea *area,
+			     GdkCursor *cursor)
+{
+	if (PRIVATE (area)->cursor != cursor) {
+		if (cursor) {
+			gdk_cursor_ref (cursor);
+		}
+
+		if (PRIVATE (area)->cursor) {
+			gdk_cursor_unref (PRIVATE (area)->cursor);
+		}
+
+		PRIVATE (area)->cursor = cursor;
 	}
 }
 
@@ -1034,6 +1064,11 @@ dispose (GObject *object)
 					     PRIVATE(editor_area)->selection_change_handler_id);
 
 		PRIVATE(editor_area)->selection_change_handler_id = 0;		
+	}
+
+	if ( PRIVATE (area)->cursor) {
+		gdk_cursor_unref (PRIVATE (area)->cursor);
+		PRIVATE (area)->cursor = NULL;
 	}
 
 	/* Call the parent method: */		

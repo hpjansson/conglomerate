@@ -119,6 +119,13 @@ void
 cong_editor_area_set_state (CongEditorArea *editor_area,
 			    GtkStateType state);
 
+GdkCursor*
+cong_editor_area_get_cursor (CongEditorArea *area);
+
+void
+cong_editor_area_set_cursor (CongEditorArea *area,
+			     GdkCursor *cursor);
+
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area);
 
