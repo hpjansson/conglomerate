@@ -71,6 +71,8 @@ query_for_forced_dispspec (gchar *what_failed,
 							_("The internal structure of the document does not match any of the types known to Conglomerate."), 
 							_("You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."),
 							_("Force"),
+							GTK_STOCK_CANCEL,
+							TRUE,
 							force_load,
 							&the_dlg);
 	

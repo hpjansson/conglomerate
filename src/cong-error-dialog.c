@@ -124,15 +124,24 @@ cong_error_dialog_new(GtkWindow *parent_window,
 
 /**
  * cong_error_dialog_new_with_convenience:
- * @parent_window:
- * @what_failed:
- * @why_failed:
- * @suggestions:
- * @convenience_label:
- * @convenience_action:
- * @convenience_data:
  *
- * TODO: Write me
+ * @parent_window: Parent window for dialog.
+ * @what_failed: The description of what failed
+ * @why_failed: The reasons of failture
+ * @suggestions: The suggestions for user.
+ * @cancel_label: Label or gtk stock for cancel button.
+ * @convenience_label: Label or gtk stock for convenience button.
+ * @is_convenience_default: Should the convenience action be the default response.
+ * @convenience_action: Callback to call on convenience response.
+ * @convenience_data: Data to pass to the callback.
+ * 
+ * Description:
+ * Use this function to create a dialog, that will report user about error
+ * and suggest a way, how user can avoid those error. It is more preferable 
+ * to report about errors with this function, rather than with 
+ * cong_error_dialog_new.
+ *
+ * Returns: Dialog widget that should be passed to cong_error_dialog_run.
  */
 GtkDialog* 
 cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
@@ -140,6 +149,8 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 				       const gchar* why_failed, 
 				       const gchar* suggestions,
 				       const gchar* convenience_label,
+				       const gchar* cancel_label,
+				       gboolean is_convenience_default,
 				       void (*convenience_action)(gpointer data),
 				       gpointer convenience_data)
 {
@@ -147,8 +158,6 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 	GtkWidget *dialog_vbox;
 	GtkWidget *dialog_content;
 	GtkWidget *dialog_action_area;
-	GtkWidget *button1;
-	GtkWidget *button2;
 
 	g_return_val_if_fail(what_failed, NULL);
 	g_return_val_if_fail(why_failed, NULL);
@@ -158,15 +167,13 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 
 	dialog = gtk_dialog_new ();
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-/* 	GTK_WINDOW (dialog)->type = GTK_WINDOW_POPUP; */
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), parent_window);
 
 	dialog_vbox = GTK_DIALOG (dialog)->vbox;
-	gtk_widget_show (dialog_vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 2);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 12);
 	
 	dialog_content = cong_alert_content_new(GTK_STOCK_DIALOG_ERROR,
 						what_failed, 
@@ -177,27 +184,29 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 
 
        	dialog_action_area = GTK_DIALOG (dialog)->action_area;
-	gtk_widget_show (dialog_action_area);
-	gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area), 5);
-	gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area), GTK_BUTTONBOX_END);
-	gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area), 10);
-
-	button1 = gtk_button_new_with_mnemonic (convenience_label);
-	gtk_widget_show (button1);
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button1, CONVENIENCE_BUTTON_ID);
-	GTK_WIDGET_SET_FLAGS (button1, GTK_CAN_DEFAULT);
-	
-	button2 = gtk_button_new_from_stock ("gtk-ok");
-	gtk_widget_show (button2);
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button2, GTK_RESPONSE_OK);
-	GTK_WIDGET_SET_FLAGS (button2, GTK_CAN_DEFAULT);
-  
-	gtk_widget_grab_default (button2);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog_action_area), 6);
+	gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog_action_area), 12);
+        
+	if (is_convenience_default)
+	  {
+		gtk_dialog_add_button (GTK_DIALOG (dialog), cancel_label, GTK_RESPONSE_OK);
+		gtk_dialog_add_button (GTK_DIALOG (dialog), convenience_label, CONVENIENCE_BUTTON_ID);
+         	gtk_dialog_set_default_response (GTK_DIALOG(dialog), CONVENIENCE_BUTTON_ID);
+	  }
+	else
+	  {
+		gtk_dialog_add_button (GTK_DIALOG (dialog), convenience_label, CONVENIENCE_BUTTON_ID);
+		gtk_dialog_add_button (GTK_DIALOG (dialog), cancel_label, GTK_RESPONSE_OK);
+         	gtk_dialog_set_default_response (GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+	  }
+	  
+	 
 
 	/* Record the convenience info as user-data for the dialog: */
 	g_object_set_data(G_OBJECT(dialog),"convenience-action",(gpointer)convenience_action);
 	g_object_set_data(G_OBJECT(dialog),"convenience-data",convenience_data);
 
+        gtk_widget_show_all (GTK_WIDGET(dialog));
 	return GTK_DIALOG(dialog);
 }
 
@@ -321,11 +330,11 @@ cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
 
 							what_failed,							
 							_("An unexpected error occurred."),
-							_("For more information, click on the \"Details\" button."),
-							
+							_("For more information, click on the \"Details\" button."),							
 							_("Details"),
-							on_gerror_details,
-							
+							GTK_STOCK_OK,
+							FALSE,
+							on_gerror_details,							
 							details_dialog);
 	/* FIXME: this will leak the details dialog */
 

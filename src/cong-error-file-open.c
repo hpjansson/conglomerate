@@ -188,6 +188,8 @@ cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_
 							why_failed,
 							suggestions,
 							convenience_label,
+							GTK_STOCK_CANCEL,
+							FALSE,
 							convenience_action,
 							convenience_data);
 
@@ -505,11 +507,11 @@ cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 							what_failed,
 							
 							_("An unexpected error occurred."),
-							_("For more information, click on the \"Details\" button."),
-							
+							_("For more information, click on the \"Details\" button."),							
 							_("Details"),
-							on_details,
-							
+							GTK_STOCK_OK,
+							FALSE,
+							on_details,							
 							details_dialog);
 	/* FIXME: this will leak the details dialog */
 

@@ -1,3 +1,13 @@
+2004-06-03 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-error-dialog.h, cong-error-dialog.c: Add new
+ 	parameters to function cong_error_dialog_with_convenience
+ 	that defines the stock for cancel button and
+ 	the default button of dialog.
+ 	
+	* cong-error-file-open.c, cong-file-open.c, plugin-validate.c:
+ 	Updated use of those function, fixing bugzilla #134950
+
 2004-05-22  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-location.c (cong_location_calc_word_extent): 
@@ -10,7 +20,7 @@
          
 2004-04-26 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
          
-        * cong-edit-find-and-replace.c: New find and replace implementation
+	* cong-edit-find-and-replace.c: New find and replace implementation
 	mostly taken from gedit/dialogs/gedit-replace-dialog.c
 	
 	* cong-edit-find-and-replace.h: Defined structure to hold current

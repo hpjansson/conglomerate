@@ -131,6 +131,8 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 									why_failed,
 									_("Click on the \"Details\" button for more information."),
 									_("_Details"),
+									GTK_STOCK_CANCEL,
+									FALSE,
 									on_details,
 									NULL);
 

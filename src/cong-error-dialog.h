@@ -41,6 +41,8 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 				       const gchar* why_failed, 
 				       const gchar* suggestions,
 				       const gchar* convenience_label,
+				       const gchar* cancel_label,
+				       gboolean is_convenience_default,
 				       void (*convenience_action)(gpointer data),
 				       gpointer convenience_data);
 
