@@ -38,6 +38,7 @@ conge_SOURCES =             \
   cong-primary-window.c     \
   cong-test-view.c          \
   cong-tree-view.c          \
+  fo.h                      \
   fo-parser-result.c        \
   fo-print-context.c        \
   fo-rect.c                 \
