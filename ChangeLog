@@ -1,5 +1,12 @@
 2004-06-30  Geert Stappers <stappers@stappers.nl>
 
+	* conglomerate.spec.in: sync with Dag Wiers
+	proper handling of the pixmaps/conglomerate directory
+	include gtk-doc
+	exclude scrollkeeper localstatedir
+
+2004-06-30  Geert Stappers <stappers@stappers.nl>
+
 	* NEWS: updated with the 0.7.13 & 0.7.14 announce
 
 2004-06-23  Geert Stappers <stappers@stappers.nl>
