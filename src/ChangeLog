@@ -1,5 +1,9 @@
 2003-09-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-range.c
+
+	Added a missing header
+
 	* cong-editor-area-line.c
 
 	Fixed a bug in the constructor for the lines in a paragraph of text

@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-range.h"
+#include "cong-eel.h"
 
 void
 cong_range_init (CongRange *range)
