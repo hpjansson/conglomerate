@@ -115,6 +115,8 @@ struct CongEditorWidget3Details
 	CongEditorAreaFlowHolder *root_flow_holder;
 	CongEditorChildPolicy *root_child_policy;
 
+	CongEditorNode *prehighlight_node;
+
 	GdkGC *test_gc;
 };
 
@@ -662,6 +664,41 @@ cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 	}
 }
 
+CongEditorNode*
+cong_editor_widget3_get_prehighlight_editor_node (CongEditorWidget3 *editor_widget)
+{
+	g_return_val_if_fail (editor_widget, NULL);
+	
+	return PRIVATE (editor_widget)->prehighlight_node;
+}
+
+void
+cong_editor_widget3_set_prehighlight_editor_node (CongEditorWidget3 *editor_widget,
+						  CongEditorNode* editor_node)
+{
+	g_return_if_fail (editor_widget);
+
+#if 0
+	g_message ("set_prehighlight_node: %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_node)));
+#endif
+
+	if (PRIVATE (editor_widget)->prehighlight_node) {
+		if (cong_editor_node_get_state (PRIVATE (editor_widget)->prehighlight_node) == CONG_EDITOR_STATE_PREHIGHLIGHT) {
+			cong_editor_node_set_state (PRIVATE (editor_widget)->prehighlight_node,
+						    CONG_EDITOR_STATE_NORMAL);
+		}
+	}
+	
+	PRIVATE (editor_widget)->prehighlight_node = editor_node;
+
+	if (editor_node) {
+		if (cong_editor_node_get_state (editor_node) == CONG_EDITOR_STATE_NORMAL) {
+			cong_editor_node_set_state (editor_node,
+						    CONG_EDITOR_STATE_PREHIGHLIGHT);
+		}
+	}
+}
+
 EditorMapping*
 cong_editor_mapping_new (CongNodePtr xml_node)
 {
@@ -877,7 +914,7 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 
 	while (area) {
 
-#if 0		
+#if 1
 		g_message("Trying button_press on %p %s", 
 			  area,
 			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(G_OBJECT(area))));
@@ -924,7 +961,10 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 		area = cong_editor_area_get_parent (area);
 	}
 
-	/* None of the areas handled the click: */
+	/* None of the areas handled the motion: */
+	cong_editor_widget3_set_prehighlight_editor_node (editor_widget,
+							  NULL);
+
 	return FALSE;
 #else
 	{
@@ -1701,7 +1741,9 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 	}
 #endif
 
+#if 0
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
+#endif
 
 	/* Add this node: */
 	{

@@ -1,3 +1,9 @@
+2003-10-17  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-labelled.c, cong-editor-area-span-tag.c, cong-editor-area-structural.c, cong-editor-area-unknown-tag.c, cong-editor-area.c, cong-editor-area.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, plugin-paragraph-area-paragraph.c
+
+	Support for states for editor nodes and areas; pre-highlighting support.
+
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-registry.c

@@ -40,6 +40,11 @@ enum CongFlowType
 #define CONG_EDITOR_WIDGET3_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3Class)
 #define IS_CONG_EDITOR_WIDGET3(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_WIDGET3_TYPE)
 
+enum CongEditorState {
+	CONG_EDITOR_STATE_NORMAL,
+	CONG_EDITOR_STATE_PREHIGHLIGHT,
+};
+
 typedef struct CongEditorWidget3 CongEditorWidget3;
 typedef struct CongEditorWidget3Class CongEditorWidget3Class;
 typedef struct CongEditorWidget3Details CongEditorWidget3Details;
@@ -121,6 +126,13 @@ cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 CongEditorNode*
 cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 					CongNodePtr node);
+
+CongEditorNode*
+cong_editor_widget3_get_prehighlight_editor_node (CongEditorWidget3 *editor_widget);
+
+void
+cong_editor_widget3_set_prehighlight_editor_node (CongEditorWidget3 *editor_widget,
+						  CongEditorNode* editor_node);
 
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget);

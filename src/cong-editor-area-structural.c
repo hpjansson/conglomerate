@@ -347,6 +347,14 @@ render_self (CongEditorArea *area,
 			       rect->x + 1, rect->y + title_bar_height+1,
 			       rect->x + rect->width, rect->y + title_bar_height+1);
 	}
+
+	switch (cong_editor_area_get_state (area)) {
+	default: break;
+	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
+		cong_editor_area_debug_render_area (area,
+						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
+		break;
+	}
 }
 
 static gint

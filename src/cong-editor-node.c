@@ -46,6 +46,7 @@
 
 enum {
 	LINE_REGENERATION_REQUIRED,
+	STATE_CHANGED,
 
 	LAST_SIGNAL
 };
@@ -61,6 +62,8 @@ struct CongEditorNodeDetails
 
 	CongEditorChildPolicy *child_policy;
 	CongEditorChildPolicy *parents_child_policy;
+
+	enum CongEditorState state;
 };
 
 static enum CongFlowType
@@ -99,6 +102,15 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 							    G_TYPE_NONE, 
 							    0);
 
+	signals[STATE_CHANGED] = g_signal_new ("state_changed",
+					       CONG_EDITOR_NODE_TYPE,
+					       G_SIGNAL_RUN_FIRST,
+					       0,
+					       NULL, NULL,
+					       g_cclosure_marshal_VOID__VOID,
+					       G_TYPE_NONE, 
+					       0);
+
 	klass->get_flow_type = get_flow_type;
 }
 
@@ -117,6 +129,7 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->widget = editor_widget;
 	PRIVATE(editor_node)->node = node;
 	PRIVATE(editor_node)->traversal_parent = traversal_parent;
+	PRIVATE(editor_node)->state = CONG_EDITOR_STATE_NORMAL;
 
 	return editor_node;
 }
@@ -327,6 +340,28 @@ cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->traversal_parent;	
 }
 
+enum CongEditorState
+cong_editor_node_get_state (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (editor_node, CONG_EDITOR_STATE_NORMAL);
+
+	return PRIVATE (editor_node)->state;
+}
+
+void
+cong_editor_node_set_state (CongEditorNode *editor_node,
+			    enum CongEditorState state)
+{
+	g_return_if_fail (editor_node);
+	
+	if (PRIVATE (editor_node)->state != state) {
+		PRIVATE (editor_node)->state = state;
+
+		g_signal_emit (G_OBJECT(editor_node),
+			       signals[STATE_CHANGED], 0);
+	}
+}
+
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
@@ -346,6 +381,11 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint initial_indent)
 {
 	g_return_val_if_fail (editor_node, NULL);
+
+	/* Dubious hack: */
+	if (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive == NULL) {
+		return NULL;
+	}
 
 	g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive != NULL);
 	

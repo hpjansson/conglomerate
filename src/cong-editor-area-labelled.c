@@ -42,6 +42,10 @@ struct CongEditorAreaLabelledDetails
 };
 
 /* Method implementation prototypes: */
+static void 
+render_self (CongEditorArea *area,
+	     const GdkRectangle *widget_rect);
+
 static gint
 calc_requisition (CongEditorArea *area, 
 		  GtkOrientation orientation,
@@ -71,6 +75,7 @@ cong_editor_area_labelled_class_init (CongEditorAreaLabelledClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
+	area_klass->render_self = render_self;
 	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
@@ -147,6 +152,10 @@ cong_editor_area_labelled_set_label (CongEditorAreaLabelled *area_labelled,
 	g_return_if_fail (IS_CONG_EDITOR_AREA_LABELLED (area_labelled));
 	g_return_if_fail (label);
 
+	g_assert_not_reached();
+
+	/* FIXME: this has not been implemented properly; need to remove old label from container, then add new one... */
+
 	PRIVATE(area_labelled)->label = label;
 
 	cong_editor_area_protected_set_parent (PRIVATE(area_labelled)->outer_hcompose,
@@ -156,6 +165,19 @@ cong_editor_area_labelled_set_label (CongEditorAreaLabelled *area_labelled,
 }
 
 /* Method implementation definitions: */
+static void 
+render_self (CongEditorArea *area,
+	     const GdkRectangle *widget_rect)
+{
+	switch (cong_editor_area_get_state (area)) {
+	default: break;
+	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
+		cong_editor_area_debug_render_area (area,
+						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
+		break;
+	}
+}
+
 static gint
 calc_requisition (CongEditorArea *area, 
 		  GtkOrientation orientation,

@@ -47,6 +47,8 @@ enum {
 
 	FLUSH_REQUISITION_CACHE,
 
+	STATE_CHANGED,
+
 	LAST_SIGNAL
 };
 
@@ -66,6 +68,7 @@ struct CongEditorAreaDetails
 	CongEditorArea *parent_area;
 
 	gboolean is_hidden;
+	enum CongEditorState state;
 	GdkRectangle window_area; /* allocated area in window space */
 
 	RequisitionCache requisition_cache[2];
@@ -82,6 +85,15 @@ static gboolean
 on_signal_button_press_for_area_with_node (CongEditorArea *editor_area, 
 					   GdkEventButton *event,
 					   gpointer user_data);
+
+static gboolean
+on_signal_motion_notify_for_area_with_node (CongEditorArea *editor_area, 
+					    GdkEventButton *event,
+					    gpointer user_data);
+
+static void 
+on_signal_state_changed (CongEditorNode *editor_node, 
+			 gpointer user_data);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space);
@@ -159,7 +171,14 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 							 g_cclosure_marshal_VOID__ENUM,
 							 G_TYPE_NONE, 
 							 1, GTK_TYPE_ORIENTATION);
-
+	signals[STATE_CHANGED] = g_signal_new ("state_changed",
+					       CONG_EDITOR_AREA_TYPE,
+					       G_SIGNAL_RUN_FIRST,
+					       0,
+					       NULL, NULL,
+					       g_cclosure_marshal_VOID__VOID,
+					       G_TYPE_NONE,
+					       0);
 }
 
 static void
@@ -175,6 +194,7 @@ cong_editor_area_construct (CongEditorArea *area,
 	PRIVATE(area)->editor_widget = editor_widget;
 
 	PRIVATE(area)->is_hidden = FALSE;
+	PRIVATE(area)->state = CONG_EDITOR_STATE_NORMAL;
 
 	/* FIXME: we forcibly set up the allocation for now: */
 	cong_eel_rectangle_construct( &PRIVATE(area)->window_area,
@@ -228,6 +248,29 @@ cong_editor_area_hide (CongEditorArea *area)
 	PRIVATE(area)->is_hidden = TRUE;
 	/* FIXME: do we need to emit any events? */
 }
+
+enum CongEditorState
+cong_editor_area_get_state (CongEditorArea *area)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), CONG_EDITOR_STATE_NORMAL);
+
+	return PRIVATE(area)->state;
+}
+
+void
+cong_editor_area_set_state (CongEditorArea *area,
+			    enum CongEditorState state)
+{
+	if (PRIVATE(area)->state != state) {
+		PRIVATE(area)->state = state;
+
+		g_signal_emit (G_OBJECT(area),
+			       signals[STATE_CHANGED], 0);
+
+		cong_editor_area_queue_redraw (area);
+	}
+}
+
 
 #if 1
 const GdkRectangle*
@@ -738,6 +781,8 @@ void
 cong_editor_area_connect_node_signals (CongEditorArea *area,
 				       CongEditorNode *editor_node)
 {
+	guint state_change_handler_id;
+
 	g_return_if_fail (IS_CONG_EDITOR_AREA (area));
 	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
 
@@ -745,6 +790,17 @@ cong_editor_area_connect_node_signals (CongEditorArea *area,
 			  "button_press_event",
 			  G_CALLBACK(on_signal_button_press_for_area_with_node),
 			  editor_node);
+
+	g_signal_connect (area,
+			  "motion_notify_event",
+			  G_CALLBACK(on_signal_motion_notify_for_area_with_node),
+			  editor_node);
+
+	/* Connect a state-change handler: */
+	state_change_handler_id = g_signal_connect (editor_node,
+						    "state_changed",
+						    G_CALLBACK(on_signal_state_changed),
+						    area);
 }
 
 /* Protected stuff: */
@@ -829,4 +885,34 @@ on_signal_button_press_for_area_with_node (CongEditorArea *editor_area,
 		}
 		return TRUE;
 	}		
+}
+
+static gboolean
+on_signal_motion_notify_for_area_with_node (CongEditorArea *editor_area, 
+					    GdkEventButton *event,
+					    gpointer user_data)
+{
+
+	CongEditorNode *editor_node = CONG_EDITOR_NODE(user_data);
+
+	CongEditorWidget3* editor_widget;			
+	CongDocument* doc;
+
+	editor_widget = cong_editor_area_get_widget (editor_area);			
+	doc = cong_editor_area_get_document (editor_area);
+
+	cong_editor_widget3_set_prehighlight_editor_node (editor_widget,
+							  editor_node);
+
+	return TRUE;
+}
+
+static void 
+on_signal_state_changed (CongEditorNode *editor_node, 
+			 gpointer user_data)
+{
+	CongEditorArea *area = CONG_EDITOR_AREA (user_data);
+
+	cong_editor_area_set_state (area,
+				    cong_editor_node_get_state (editor_node));
 }
