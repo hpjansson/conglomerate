@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-15 21:45+0000\n"
-"PO-Revision-Date: 2004-01-12 09:41+0100\n"
+"POT-Creation-Date: 2004-01-21 03:12+0100\n"
+"PO-Revision-Date: 2004-01-21 16:58+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:599 src/cong-primary-window.c:755
-#: src/cong-primary-window.c:757 src/cong-primary-window.c:763
+#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
+#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
 msgid "Conglomerate XML Editor"
 msgstr "Editor XML Conglomerate"
 
@@ -38,8 +38,8 @@ msgstr "Importér"
 msgid "Options"
 msgstr "Možnosti"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:744
-#: src/cong-node-properties-dialog.c:828
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1043
+#: src/cong-node-properties-dialog.c:1127
 msgid "Advanced"
 msgstr "Pokročilé"
 
@@ -48,7 +48,7 @@ msgid "Basic"
 msgstr "Základní"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-file-export.c:307
-#: src/cong-file-new.c:234 src/cong-file-print.c:249 src/cong-menus.c:458
+#: src/cong-file-new.c:290 src/cong-file-print.c:249 src/cong-menus.c:458
 #: src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Popis"
@@ -87,8 +87,8 @@ msgstr "Název"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3
-#: src/cong-node-properties-dialog.c:790
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1089
 msgid "Properties"
 msgstr "Vlastnosti"
 
@@ -313,6 +313,18 @@ msgstr "URL"
 msgid "_Test this Link"
 msgstr "O_testovat tento odkaz"
 
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "Parametry vytváření"
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Hloubka"
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:729
+msgid "Document Type"
+msgstr "Typ dokumentu"
+
 #: glade/string_selection_dialog.glade.h:2
 msgid "label"
 msgstr "jmenovka"
@@ -481,10 +493,6 @@ msgstr "Komentář \"%s\""
 msgid "Document"
 msgstr "Dokument"
 
-#: src/cong-document.c:729
-msgid "Document Type"
-msgstr "Typ dokumentu"
-
 #: src/cong-document.c:732
 msgid "Document Fragment"
 msgstr "Fragment dokumentu"
@@ -552,27 +560,27 @@ msgstr "Přesunout kurzor"
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
-#: src/cong-editor-widget3.c:305
+#: src/cong-editor-widget3.c:253
 msgid "Expander Size"
 msgstr "Velikost rozbalovače"
 
-#: src/cong-editor-widget3.c:306
+#: src/cong-editor-widget3.c:254
 msgid "Size of the expander arrow"
 msgstr "Velikost šipky rozbalovače"
 
-#: src/cong-editor-widget3.c:687
+#: src/cong-editor-widget3.c:628
 msgid "Input Method"
 msgstr "Vstupní metoda"
 
-#: src/cong-editor-widget3.c:789 src/cong-editor-widget3.c:1320
+#: src/cong-editor-widget3.c:730 src/cong-editor-widget3.c:1261
 msgid "Typing"
 msgstr "Psaní"
 
-#: src/cong-editor-widget3.c:1221
+#: src/cong-editor-widget3.c:1162
 msgid "Cursor Movement"
 msgstr "Pohyb kurzoru"
 
-#: src/cong-editor-widget3.c:1261 src/cong-editor-widget3.c:1274
+#: src/cong-editor-widget3.c:1202 src/cong-editor-widget3.c:1215
 msgid "Delete Selection"
 msgstr "Odstranit výběr"
 
@@ -1093,21 +1101,21 @@ msgstr "Žádný zásuvný modul Conglomerate neví, jak načíst soubory typu \
 msgid "FIXME"
 msgstr "FIXME"
 
-#: src/cong-file-new.c:126
+#: src/cong-file-new.c:137
 #, c-format
 msgid "Creating a new file (%s)"
 msgstr "Vytvářím nový soubor (%s)"
 
-#: src/cong-file-new.c:214
+#: src/cong-file-new.c:270
 msgid "File Type"
 msgstr "Typ souboru"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:401 src/cong-file-new.c:408 src/cong-file-new.c:433
+#: src/cong-file-new.c:470 src/cong-file-new.c:477 src/cong-file-new.c:502
 msgid "Creating a new file"
 msgstr "Vytvářím nový soubor"
 
-#: src/cong-file-new.c:409
+#: src/cong-file-new.c:478
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1125,16 +1133,16 @@ msgstr ""
 "Doufáme, že v budoucích verzích Conglomerate budete moci vytvářet \"šablony "
 "dokumentů\", a přidat je do tohoto systému."
 
-#: src/cong-file-new.c:422
+#: src/cong-file-new.c:491
 msgid "What type of file would you like to create?"
 msgstr "Jaký typ souboru byste chtěli vytvořit?"
 
-#: src/cong-file-new.c:424
+#: src/cong-file-new.c:493
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Zvýrazněte jednu z položek v seznamu a pokračujte zvolením \"Vpřed\""
 
-#: src/cong-file-new.c:434
+#: src/cong-file-new.c:503
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1543,12 +1551,44 @@ msgstr "Přímo atributy"
 msgid "Value"
 msgstr "Hodnota"
 
-#: src/cong-node-properties-dialog.c:610
+#: src/cong-node-properties-dialog.c:601
 #, c-format
-msgid "Attributes for <tt>%s</tt> tags"
-msgstr "Atributy pro tagy <tt>%s</tt>"
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "Atributy pro elementy <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:736 src/cong-node-properties-dialog.c:823
+#: src/cong-node-properties-dialog.c:715
+msgid "Text"
+msgstr "Text"
+
+#: src/cong-node-properties-dialog.c:767
+msgid "Choice"
+msgstr "Výběr"
+
+#: src/cong-node-properties-dialog.c:802
+msgid "Optional"
+msgstr "Nepovinné"
+
+#: src/cong-node-properties-dialog.c:818
+msgid "Zero or more"
+msgstr "Nula nebo více"
+
+#: src/cong-node-properties-dialog.c:834
+msgid "One or more"
+msgstr "Jeden nebo více"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:890
+msgid "Valid Content"
+msgstr "Platný obsah"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:915
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "Model obsahu pro elementy <tt>%s</tt>"
+
+#: src/cong-node-properties-dialog.c:1035
+#: src/cong-node-properties-dialog.c:1122
 msgid "DTD"
 msgstr "DTD"
 
@@ -1604,53 +1644,57 @@ msgstr "Dialog vlastností <%s>"
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Poskytuje dialog Vlastnosti pro element <%s>"
 
-#: src/cong-primary-window.c:313 src/cong-primary-window.c:314
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Open document"
 msgstr "Otevřít dokument"
 
-#: src/cong-primary-window.c:330 src/cong-primary-window.c:331
+#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
+msgid "New document"
+msgstr "Nový dokument"
+
+#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
 msgid "Save document"
 msgstr "Uložit dokument"
 
-#: src/cong-primary-window.c:338 src/cong-primary-window.c:339
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
 msgid "Undo"
 msgstr "Zpět"
 
-#: src/cong-primary-window.c:345 src/cong-primary-window.c:346
+#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
 msgid "Redo"
 msgstr "Znovu"
 
-#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:178
+#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: src/cong-primary-window.c:371 src/cong-primary-window.c:372
+#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: src/cong-primary-window.c:378 src/cong-primary-window.c:379
+#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Vložit"
 
-#: src/cong-primary-window.c:510
+#: src/cong-primary-window.c:520
 msgid "Overview"
 msgstr "Přehled"
 
-#: src/cong-primary-window.c:520
+#: src/cong-primary-window.c:530
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: src/cong-primary-window.c:529
+#: src/cong-primary-window.c:539
 msgid "Raw XML"
 msgstr "Přímo XML"
 
-#: src/cong-primary-window.c:656 src/cong-primary-window.c:675
+#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 
-#: src/cong-primary-window.c:755
+#: src/cong-primary-window.c:770
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
@@ -1943,6 +1987,18 @@ msgstr "Odstavec"
 msgid "An editor node for visualising a paragraph"
 msgstr "Uzel editoru pro zobrazení odstavce"
 
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr "Jaký typ náhodného dokumentu XML byste chtěli vytvořit?"
+
+#: src/plugin-random.c:602
+msgid "Random Document"
+msgstr "Náhodný dokument"
+
+#: src/plugin-random.c:603
+msgid "Create an XML document containing random content."
+msgstr "Vytvořit dokument XML obsahující náhodný obsah."
+
 #: src/plugin-save-dispspec.c:131
 msgid "Dump Display Spec"
 msgstr "Vypsat specifikaci zobrazování"
@@ -2007,11 +2063,11 @@ msgstr ""
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr "Znaky Unicode 0x%04X-0x%04X"
 
-#: src/plugin-tests.c:331
+#: src/plugin-tests.c:333
 msgid "Unicode Character Reference"
 msgstr "Odkaz na znaky Unicode"
 
-#: src/plugin-tests.c:332
+#: src/plugin-tests.c:334
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
