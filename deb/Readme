@@ -9,7 +9,15 @@ without interfering making a  *.diff.gz
 
  debian/rules
 
-
+#####
+libbonoboui2-0_2.0.3-1_powerpc.deb
+libbonoboui2-common_2.0.3-1_powerpc.deb
+libbonoboui2-dev_2.0.3-1_powerpc.deb
+libgnomeui-0_2.0.5-5_powerpc.deb
+libgnomeui-common_2.0.5-5_all.deb
+libgnomeui-dev_2.0.5-5_powerpc.deb
+libgnomeui-doc_2.0.5-5_all.deb
+# End self build packages for powerpc, because they weren't in the archive ####
 
 Build information  1 may 2003
 
