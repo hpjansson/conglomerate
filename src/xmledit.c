@@ -8,6 +8,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-app.h"
 
 /* --- Cut/copy/paste --- */
 
@@ -46,7 +47,7 @@ void cong_document_cut_selection(CongDocument *doc)
 
 	if (cong_location_equals(&selection->loc0, &selection->loc1)) return;
 	
-	if (the_globals.clipboard) cong_node_recursive_delete(NULL, the_globals.clipboard);
+	if (the_app.clipboard) cong_node_recursive_delete(NULL, the_app.clipboard);
 	
 	t = cong_node_new_element(NULL, "dummy", doc);
 
@@ -54,7 +55,7 @@ void cong_document_cut_selection(CongDocument *doc)
 	
 	cong_document_node_make_orphan(doc, t);
 
-	the_globals.clipboard = t;
+	the_app.clipboard = t;
 
 	selection_cursor_unset(doc);
 }
@@ -83,14 +84,14 @@ void cong_document_copy_selection(CongDocument *doc)
 
 	/* GREP FOR MVC */
 
-	if (the_globals.clipboard) {
-		cong_node_recursive_delete(NULL, the_globals.clipboard);
+	if (the_app.clipboard) {
+		cong_node_recursive_delete(NULL, the_app.clipboard);
 	}
 
 	t = cong_node_new_element(NULL, "dummy", doc);
 
 	cong_selection_reparent_all(selection, doc, t);
-	the_globals.clipboard = cong_node_recursive_dup(t);
+	the_app.clipboard = cong_node_recursive_dup(t);
 
 	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
 
@@ -128,15 +129,15 @@ void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget)
 
 	/* GREP FOR MVC */
 
-	if (!the_globals.clipboard)
+	if (!the_app.clipboard)
 	{
 		cong_selection_import(selection, widget);
 		return;
 	}
 
-	if (!the_globals.clipboard->children) return;
+	if (!the_app.clipboard->children) return;
 	
-	if (cong_dispspec_element_structural(ds, cong_node_xmlns(the_globals.clipboard), xml_frag_name_nice(the_globals.clipboard))) return;
+	if (cong_dispspec_element_structural(ds, cong_node_xmlns(the_app.clipboard), xml_frag_name_nice(the_app.clipboard))) return;
 	
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
 	{
@@ -167,7 +168,7 @@ void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget)
 
 
 	/* FIXME:  does this leak "clip": */
-	clip = cong_node_recursive_dup(the_globals.clipboard);
+	clip = cong_node_recursive_dup(the_app.clipboard);
 
 	t = cong_node_first_child(clip);
 

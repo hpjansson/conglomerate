@@ -6,6 +6,7 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
 #include "cong-error-dialog.h"
+#include "cong-app.h"
 
 struct CongDispspecRegistry
 {
@@ -177,11 +178,12 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
  * If this fails, it asks the user.
  */
 CongDispspec*
-cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
+cong_dispspec_registry_get_appropriate_dispspec(CongDispspecRegistry* registry, xmlDocPtr doc)
 {
 	gchar* toplevel_xmlns;
 	gchar* toplevel_tag;
 
+	g_return_val_if_fail(registry,NULL);
 	g_return_val_if_fail(doc,NULL);
 
 	/* FIXME: check for a DTD */
@@ -195,8 +197,8 @@ cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
 		
 		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);
 
-		for (i=0;i<cong_dispspec_registry_get_num(the_globals.ds_registry);i++) {
-			CongDispspec* ds = cong_dispspec_registry_get(the_globals.ds_registry, i);
+		for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
+			CongDispspec* ds = cong_dispspec_registry_get(registry, i);
 
 			CongDispspecElement* element = cong_dispspec_lookup_element(ds, toplevel_xmlns, toplevel_tag);
 			

@@ -1,3 +1,13 @@
+2003-07-04 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.h
+
+	New file
+
+	* cong-dispspec-registry.[ch], cong-dispspec.c, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-open.c, cong-menus.c, cong-node-properties-dialog.c, cong-plugin.c, cong-primary-window.c, cong-span-text-editor.c, cong-tree-view.c, global.h, main.c, plugin-docbook.c, popup.c, tree.c, xmledit.c
+
+	Converted struct CongGlobals the_globals into struct CongApp the_app and moved into new header file
+
 2003-07-03 Jeff Martin <jeff@custommonkey.org>
 
 	* cong-menus.c

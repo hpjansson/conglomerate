@@ -32,6 +32,7 @@
 #include "cong-error-dialog.h"
 #include "cong-dialog.h"
 #include "cong-plugin.h"
+#include "cong-app.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -95,9 +96,9 @@ GtkWidget* cong_gui_get_a_window(void)
 	CongPrimaryWindow *primary_window;
 
 	/* A window _must_ exist for this to work: */
-	if (the_globals.primary_windows) {
+	if (the_app.primary_windows) {
 
-		primary_window = the_globals.primary_windows->data;
+		primary_window = the_app.primary_windows->data;
 
 		g_assert(primary_window->window);
 
@@ -163,7 +164,7 @@ void cong_gui_destroy_tree_store(struct cong_gui* gui)
 }
 #endif
  
-struct CongGlobals the_globals;
+struct CongApp the_app;
 
 extern char *ilogo_xpm[];
 extern char *auth_off_xpm[];
@@ -326,7 +327,7 @@ void destroy( GtkWidget *widget,
 	      gpointer   data )
 {
 	cong_primary_window_free((CongPrimaryWindow *)data);
-	if (g_list_length(the_globals.primary_windows) == 0) {		
+	if (g_list_length(the_app.primary_windows) == 0) {		
 		gtk_main_quit();
 	}
 }
@@ -530,7 +531,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
 	gtk_widget_show(GTK_WIDGET(primary_window->window));
 
-	the_globals.primary_windows = g_list_prepend(the_globals.primary_windows, primary_window);
+	the_app.primary_windows = g_list_prepend(the_app.primary_windows, primary_window);
 
 	if (doc) {
 		cong_document_set_primary_window(doc, primary_window);	
@@ -551,7 +552,7 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 		g_assert(primary_window->cong_tree_view==NULL);
 	}
 
-	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);	
+	the_app.primary_windows = g_list_remove(the_app.primary_windows, primary_window);	
 
 	g_free(primary_window);
 }

@@ -1,9 +1,9 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * cong-dispspec-registry.h
+ * cong-app.h
  *
- * Copyright (C) 2002 David Malcolm
+ * Copyright (C) 2003 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,33 +22,38 @@
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
  */
 
-#ifndef __CONG_DISPSPEC_REGISTRY_H__
-#define __CONG_DISPSPEC_REGISTRY_H__
+#ifndef __CONG_APP_H__
+#define __CONG_APP_H__
 
 G_BEGIN_DECLS
 
-/* cong-dispspec-registry */
-CongDispspecRegistry*
-cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window);
+struct CongApp
+{
+	GnomeProgram *gnome_program;
 
-void
-cong_dispspec_registry_free(CongDispspecRegistry* registry);
+	CongPluginManager *plugin_manager;
 
-unsigned int
-cong_dispspec_registry_get_num(CongDispspecRegistry* registry);
+	GList *primary_windows;
 
-CongDispspec*
-cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i);
+	CongFont *fonts[CONG_FONT_ROLE_NUM];
 
-void
-cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds);
+	GdkGC *insert_element_gc;
 
-void
-cong_dispspec_registry_dump(CongDispspecRegistry* registry);
+	CongNodePtr clipboard;
 
-CongDispspec*
-cong_dispspec_registry_get_appropriate_dispspec(CongDispspecRegistry* registry, xmlDocPtr doc);
+	CongDispspecRegistry* ds_registry;
+
+	GtkWidget *popup;
+
+	GConfClient* gconf_client;
+
+	GtkTooltips *tooltips;
+};
+
 
 G_END_DECLS
 
 #endif
+
+
+

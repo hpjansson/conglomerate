@@ -28,6 +28,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-font.h"
+#include "cong-app.h"
 
 #if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
@@ -1111,7 +1112,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	} else if (event->button == 3) {
 
 		editor_popup_build(doc, parent_window);
-		editor_popup_show(the_globals.popup, event);
+		editor_popup_show(the_app.popup, event);
 
 	}
 	
@@ -1445,7 +1446,7 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 
 	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(span_text));
 
-	span_text->pango_layout = pango_layout_new(gdk_pango_context_get() /*the_globals.pango_context*/);
+	span_text->pango_layout = pango_layout_new(gdk_pango_context_get() /*the_app.pango_context*/);
 	g_assert(span_text->pango_layout);
 
 	body_font = cong_span_text_editor_get_font(span_text, CONG_FONT_ROLE_BODY_TEXT);
@@ -1482,5 +1483,5 @@ cong_span_text_editor_get_font(CongSpanTextEditor *span_text, enum CongFontRole 
 	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
 
 	/* fonts are currently a property of the app: */
-	return the_globals.fonts[role];
+	return the_app.fonts[role];
 }

@@ -304,31 +304,8 @@ typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, Con
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
 
-/* The globals: */
-struct CongGlobals
-{
-	GnomeProgram *gnome_program;
-
-	CongPluginManager *plugin_manager;
-
-	GList *primary_windows;
-
-	CongFont *fonts[CONG_FONT_ROLE_NUM];
-
-	GdkGC *insert_element_gc;
-
-	CongNodePtr clipboard;
-
-	CongDispspecRegistry* ds_registry;
-
-	GtkWidget *popup;
-
-	GConfClient* gconf_client;
-
-	GtkTooltips *tooltips;
-};
-
-extern struct CongGlobals the_globals;
+/* All the globals go in a CongApp structure: */
+extern struct CongApp the_app;
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);

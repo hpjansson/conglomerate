@@ -173,7 +173,13 @@ static gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, &node, -1);
 					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_DOC_COLUMN, &doc, -1);
 					
-					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), node));
+#if 0
+					{
+						gchar *desc = cong_node_debug_description (node);
+						g_message ("got node \"%s\"\n",desc);
+						g_free (desc);
+					}
+#endif
 					
 					menu = cong_ui_popup_init(doc, 
 								  node, 

@@ -8,6 +8,7 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-plugin.h"
+#include "cong-app.h"
 #include <unistd.h> /* for chdir */
 
 /* Data and callback for handling the forced loading of a file, autogenerating a dispspec: */
@@ -104,7 +105,7 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 			return;
 		}
 
-		ds = cong_dispspec_registry_get_appropriate_dispspec(doc);
+		ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, doc);
 
 		if (ds==NULL) {
 			gchar *what_failed;

@@ -30,6 +30,7 @@
 #include "fo.h"
 #include "cong-progress-checklist.h"
 #include <glade/glade.h>
+#include "cong-app.h"
 
 #if 0
 struct DocBookAuthorInfo
@@ -708,7 +709,7 @@ GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	glade_filename = gnome_program_locate_file(the_globals.gnome_program,
+	glade_filename = gnome_program_locate_file(the_app.gnome_program,
 						   GNOME_FILE_DOMAIN_APP_DATADIR,
 						   "conglomerate/glade/docbook-common-properties.glade",
 						   FALSE,

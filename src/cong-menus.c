@@ -33,6 +33,7 @@
 #include "cong-dialog.h"
 #include "cong-plugin.h"
 #include "cong-progress-checklist.h"
+#include "cong-app.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -395,7 +396,7 @@ static void menu_callback_file_quit(gpointer callback_data,
 	GList *current;
 	gboolean canceled = FALSE;
 
-	current = g_list_first(the_globals.primary_windows);
+	current = g_list_first(the_app.primary_windows);
 
 	while (current) {
 		if (!cong_primary_window_can_close((struct CongPrimaryWindow*)(current->data))) {
@@ -488,7 +489,7 @@ gint debug_document_types(/*GtkWidget *w, gpointer data, */GtkWindow *parent_win
 
 	/* Populate the store based on the ds-registry: */
 	{
-		CongDispspecRegistry* registry = the_globals.ds_registry;
+		CongDispspecRegistry* registry = the_app.ds_registry;
 		int i;
 
 		for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
@@ -575,7 +576,7 @@ void open_transformed_window_for_doc(xmlDocPtr doc,
 
 	g_return_if_fail(doc);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, doc);
 
 	if (ds==NULL) {
 		ds = query_for_forced_dispspec(_("Conglomerate cannot open the result of the transformation"), 
@@ -1184,7 +1185,7 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	gchar* glade_filename = gnome_program_locate_file(the_globals.gnome_program,
+	gchar* glade_filename = gnome_program_locate_file(the_app.gnome_program,
 							  GNOME_FILE_DOMAIN_APP_DATADIR,
 							  "conglomerate/test.glade",
 							  FALSE,
@@ -1431,7 +1432,7 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 			g_assert(callback_data.tools_menu);
 			callback_data.menu_tips = gtk_tooltips_new();
 
-			cong_plugin_manager_for_each_tool(the_globals.plugin_manager, add_tool_callback, &callback_data);
+			cong_plugin_manager_for_each_tool(the_app.plugin_manager, add_tool_callback, &callback_data);
 		}
 
 	} else {

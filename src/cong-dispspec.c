@@ -17,7 +17,7 @@
 #include <glib.h>
 #include <libxml/parser.h>
 #include "cong-node.h"
-
+#include "cong-app.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -511,9 +511,15 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
 
 const gchar *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
+	CongDispspecElement* element;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail(cong_node_type(node)==CONG_NODE_TYPE_ELEMENT, NULL);
+
+	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
 	if (element) {
-		return (char*)cong_dispspec_element_username(element);
+		return cong_dispspec_element_username(element);
 	}
   
 	return(xml_frag_name_nice(node));
@@ -879,7 +885,7 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
 
 	/* fonts are currently a property of the app: */
-	return the_globals.fonts[role];
+	return the_app.fonts[role];
 
 }
 

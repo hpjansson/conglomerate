@@ -28,6 +28,7 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
+#include "cong-app.h"
 
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
@@ -709,7 +710,7 @@ gchar *cong_exporter_get_preferred_uri(CongExporter *exporter)
 
 	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
 	
-	preferred_uri = gconf_client_get_string(the_globals.gconf_client,
+	preferred_uri = gconf_client_get_string(the_app.gconf_client,
 						gconf_key,
 						NULL);
 
@@ -727,7 +728,7 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 
 	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
 
-	gconf_client_set_string(the_globals.gconf_client,
+	gconf_client_set_string(the_app.gconf_client,
 				gconf_key,
 				uri,
 				NULL);
@@ -805,7 +806,7 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	
 	g_return_if_fail(xml_doc);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(xml_doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, xml_doc);
 
 	if (ds == NULL) {
 		GtkDialog* dialog;
@@ -849,7 +850,7 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	
 	g_return_if_fail(xml_doc);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(xml_doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, xml_doc);
 
 	if (ds == NULL) {
 		GtkDialog* dialog;
@@ -1028,7 +1029,7 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 #if 1
 	GList *plugin_iter;
 
-	for (plugin_iter=the_globals.plugin_manager->list_of_plugin; plugin_iter; plugin_iter = plugin_iter->next) {
+	for (plugin_iter=the_app.plugin_manager->list_of_plugin; plugin_iter; plugin_iter = plugin_iter->next) {
 		GList *editor_element_iter;
 		CongPlugin *plugin = plugin_iter->data;		
 
