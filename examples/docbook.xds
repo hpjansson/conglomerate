@@ -10,10 +10,17 @@
 	
 		<element tag="set" type="structural" color="a0b0c0">
 		</element>
+
 		<element tag="book" type="structural" color="a0b0c0">
 		</element>
 		<element tag="bookinfo" type="structural" color="a0b0c0">
 		</element>
+
+		<element tag="article" type="structural" color="a0b0c0">
+		</element>
+		<element tag="artheader" type="structural" color="a0b0c0">
+		</element>
+
 		<element tag="title" type="structural" color="a0b0c0">
 			<collapseto></collapseto>
 		</element>
@@ -86,6 +93,10 @@
 			<collapseto></collapseto>
 		</element>
 
+		<element tag="graphic" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
+			<!-- fileref is assumed for now -->
+		</element>
+
 		<element tag="programlisting" type="structural" color="a0b0c0">
 			<!-- 
 				perhaps this should use a fixed-space font
@@ -115,6 +126,8 @@
 		</element>
 		<element tag="firstterm" type="span" color="a0b0c0">
 		</element>
+		<element tag="firstname" type="span" color="a0b0c0">
+		</element>
 		<element tag="function" type="span" color="a0b0c0">
 		</element>
 		<element tag="literal" type="span" color="a0b0c0">
@@ -122,6 +135,8 @@
 		<element tag="replaceable" type="span" color="a0b0c0">
 		</element>
 		<element tag="structname" type="span" color="a0b0c0">
+		</element>
+		<element tag="surname" type="span" color="a0b0c0">
 		</element>
 		<element tag="symbol" type="span" color="a0b0c0">
 		</element>
