@@ -111,7 +111,7 @@ install-arch: build-arch
 binary-indep: build-indep install-indep
 	dh_testdir -i
 	dh_testroot -i
-	dh_installchangelogs -i ChangeLog
+	dh_installchangelogs -i src/ChangeLog
 	dh_installdocs -i
 	dh_installexamples -i
 	dh_installmenu -i
