@@ -106,11 +106,19 @@ void draw_blended_line(GtkWidget *w,
 
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
-  We store a boolean "expanded" data on the vbox.
-  We also store a "dispspec" ptr to the dispspec on the vbox.
-  We store a ptr to the vbox within the title/GtkDrawingArea called "vbox" so it can query this when it draws itself.
+  We have a CongSectionHead which stores relevant data; the vbox title widgets store pointers to this as userdata.
   Probably would be cleaner to have a new widget subclass...
  */
+typedef struct CongSectionHead CongSectionHead;
+
+struct CongSectionHead
+{
+	CongDocument *doc;
+	CongNodePtr node;
+	gboolean expanded;
+
+	GtkWidget *vbox, *title;
+};
 
 #define V_SPACING (4)
 #define H_SPACING (4)
@@ -123,12 +131,15 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	int str_width;
 	gchar *title_text;
 
-	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
-	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
-	CongDispspec *ds = g_object_get_data(G_OBJECT(vbox), "dispspec");
-
-	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongSectionHead *section_head;
+	CongDispspec *ds;
+	CongDispspecElement *element;
 	CongFont *title_font;
+
+	section_head = g_object_get_data(G_OBJECT(w), "section_head");
+	g_assert(section_head);
+
+	ds = cong_document_get_dispspec(section_head->doc);
 
 	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 	g_assert(element);
@@ -149,10 +160,10 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	/* Left */
 	gdk_draw_line(w->window, gc, 
 		      H_SPACING, 0,
-		      H_SPACING, expanded ? w->allocation.height-1 : w->allocation.height-1-V_SPACING);	
+		      H_SPACING, section_head->expanded ? w->allocation.height-1 : w->allocation.height-1-V_SPACING);	
 
 	/* Bottom */  
-	if (expanded) {
+	if (section_head->expanded) {
 		gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_DIM_LINE);
 		g_assert(gc);
 	}
@@ -222,7 +233,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 		      0, 0, 
 		      str_width + 3, 0);
 	gdk_draw_line(w->window, w->style->black_gc, 
-		      expanded?3:0, w->allocation.height - 1 - 4,
+		      section_head->expanded?3:0, w->allocation.height - 1 - 4,
 		      str_width + 3, w->allocation.height - 1 - 4);
 	gdk_draw_line(w->window, w->style->black_gc, 
 		      str_width + 3, 0,
@@ -240,12 +251,12 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	/* White out below */
 
 	gdk_draw_rectangle(w->window, w->style->white_gc, 1,
-			   expanded?4:0, w->allocation.height - 4,
+			   section_head->expanded?4:0, w->allocation.height - 4,
 			   w->allocation.width, w->allocation.height);
 
 	/* Lines on left */
 
-	if (expanded) {
+	if (section_head->expanded) {
 
 	  /* Coloured line in the middle */
 	  gdk_draw_line(w->window, gc, 1, w->allocation.height - 4, 1, w->allocation.height);
@@ -297,58 +308,69 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 
 struct section_fold_cb_data
 {
-  gboolean done_first;
-  gboolean expanded;
-  GtkVBox* vbox;
+	gboolean done_first;
+	gboolean expanded;
+	GtkVBox* vbox;
 };
 
 void xv_section_fold_cb(GtkWidget* widget, gpointer data)
 {
-  struct section_fold_cb_data* cb_data = (struct section_fold_cb_data*)data;
+	struct section_fold_cb_data* cb_data = (struct section_fold_cb_data*)data;
 
-  /* Show/Hide all except for the first child: */
-  if (cb_data->done_first) {
-    if (cb_data->expanded) {
-      gtk_widget_show(widget);
-    } else {
-      gtk_widget_hide(widget);
-    }
-  } else {
-    cb_data->done_first = TRUE;
-  }
+	/* Show/Hide all except for the first child: */
+	if (cb_data->done_first) {
+		if (cb_data->expanded) {
+			gtk_widget_show(widget);
+		} else {
+			gtk_widget_hide(widget);
+		}
+	} else {
+		cb_data->done_first = TRUE;
+	}
 }
 
 static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, GtkVBox *vbox)
 {
-  struct section_fold_cb_data cb_data;
+	struct section_fold_cb_data cb_data;
 
-  gpointer expanded = g_object_get_data(G_OBJECT(vbox), "expanded");
-  expanded = GINT_TO_POINTER(!expanded);
-  g_object_set_data(G_OBJECT(vbox), "expanded", expanded);
+#if 1
+	CongSectionHead *section_head = g_object_get_data(G_OBJECT(vbox), "section_head");
+	g_assert(section_head);
 
-  /* We will want a redraw of the drawing area, since the appearance of the title bar has changed: */
-  gtk_widget_queue_draw_area(w, 0,0, w->allocation.width, w->allocation.height);
+	section_head->expanded = !section_head->expanded;
+#else
+	gpointer expanded = g_object_get_data(G_OBJECT(vbox), "expanded");
+	expanded = GINT_TO_POINTER(!expanded);
+	g_object_set_data(G_OBJECT(vbox), "expanded", expanded);
+#endif
 
-  cb_data.done_first = FALSE;
-  cb_data.vbox = vbox;
-  cb_data.expanded = (expanded!=NULL);
+	/* We will want a redraw of the drawing area, since the appearance of the title bar has changed: */
+	gtk_widget_queue_draw_area(w, 0,0, w->allocation.width, w->allocation.height);
 
-  printf("xv_section_head_button_press\n");
+	cb_data.done_first = FALSE;
+	cb_data.vbox = vbox;
+	cb_data.expanded = section_head->expanded;
 
-  gtk_container_forall(GTK_CONTAINER(vbox), 
-		       xv_section_fold_cb,
-		       &cb_data);
+	printf("xv_section_head_button_press\n");
 
-  return TRUE;
+	gtk_container_forall(GTK_CONTAINER(vbox), 
+			     xv_section_fold_cb,
+			     &cb_data);
+
+	return TRUE;
 }
 
-GtkWidget *xv_section_head(CongDispspec *ds, CongNodePtr x)
+GtkWidget *xv_section_head(CongDocument *doc, CongNodePtr x)
 {
-	UNUSED_VAR(TTREE *n0)
-	GtkWidget *vbox, *title;
-
-	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	CongDispspec *ds;
+	CongSectionHead *section_head;
+	CongDispspecElement *element;
 	CongFont *title_font;
+
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(x, NULL);
+
+	ds = cong_document_get_dispspec(doc);
 
 	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 	g_assert(element);
@@ -356,27 +378,38 @@ GtkWidget *xv_section_head(CongDispspec *ds, CongNodePtr x)
  	title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
 	g_assert(title_font);
 
-	vbox = gtk_vbox_new(FALSE, 0);
-	title = gtk_drawing_area_new();
+	section_head = g_new0(CongSectionHead,1);
+	section_head->doc = doc;
+	section_head->node = x;
+	section_head->expanded = TRUE;
+	section_head->vbox = gtk_vbox_new(FALSE, 0);
+	section_head->title = gtk_drawing_area_new();
 
-	g_object_set_data(G_OBJECT(vbox), "expanded", GINT_TO_POINTER(1));
-	g_object_set_data(G_OBJECT(vbox), "dispspec", ds);
-	g_object_set_data(G_OBJECT(title), "vbox", vbox);
+	/* FIXME: this will leak */
 
-	gtk_box_pack_start(GTK_BOX(vbox), title, TRUE, TRUE, 0);
-	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, title_font->asc + title_font->desc + 4 /* up and down borders */ + 4 /* space below */);
-	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
+#if 1
+	g_object_set_data(G_OBJECT(section_head->vbox), "section_head", section_head);
+	g_object_set_data(G_OBJECT(section_head->title), "section_head", section_head);
+#else
+	g_object_set_data(G_OBJECT(section_head->vbox), "expanded", GINT_TO_POINTER(1));
+	g_object_set_data(G_OBJECT(section_head->vbox), "dispspec", ds);
+	g_object_set_data(G_OBJECT(section_head->title), "vbox", section_head->vbox);
+#endif
+
+	gtk_box_pack_start(GTK_BOX(section_head->vbox), section_head->title, TRUE, TRUE, 0);
+	gtk_drawing_area_size(GTK_DRAWING_AREA(section_head->title), 300, title_font->asc + title_font->desc + 4 /* up and down borders */ + 4 /* space below */);
+	gtk_signal_connect(GTK_OBJECT(section_head->title), "expose_event",
 			   (GtkSignalFunc) xv_section_head_expose, x);
-	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
+	gtk_signal_connect(GTK_OBJECT(section_head->title), "configure_event",
 			   (GtkSignalFunc) xv_section_head_expose, x);
-	gtk_signal_connect(GTK_OBJECT(title), "button_press_event",
-			   (GtkSignalFunc) xv_section_head_button_press, vbox);
+	gtk_signal_connect(GTK_OBJECT(section_head->title), "button_press_event",
+			   (GtkSignalFunc) xv_section_head_button_press, section_head->vbox);
 
-	gtk_widget_set_events(title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_events(section_head->title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
 
-	gtk_widget_show(title);
-	gtk_widget_show(vbox);
-	return(vbox);
+	gtk_widget_show(section_head->title);
+	gtk_widget_show(section_head->vbox);
+	return(section_head->vbox);
 }
 
 
@@ -1029,7 +1062,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 					gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
 					gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 					xv_style_r(hbox, style_white);
-					poot = xv_section_head(ds, x);
+					poot = xv_section_head(doc, x);
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
 					sub = xv_element_new(doc, x, ds, poot, 0);
 
@@ -1060,7 +1093,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
 				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 				xv_style_r(hbox, style_white);
-				poot = xv_section_head(ds, x);
+				poot = xv_section_head(doc, x);
 				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
 				/* xv_style_r(poot, style_white); */
 				
@@ -1151,7 +1184,7 @@ void cong_editor_populate_ui(CongEditorView *editor_view)
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{
 			/* New element */
-			GtkWidget* head = xv_section_head(displayspec, x);
+			GtkWidget* head = xv_section_head(doc, x);
 
 			gtk_box_pack_start(GTK_BOX(editor_view->inner), head, TRUE, TRUE, 0);
 			
