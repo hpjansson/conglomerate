@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# temporary modified files
+TMPMOD="configure.in ChangeLog"
+
+# preserve
+for TM in ${TMPMOD}
+do
+  cp -p ${TM} ${TM}.tm
+done
+
+if [ "x${1}" != "x" ]
+then
+  # modify them
+  ( date -R; echo "This is prelease ${1}"; echo; cat ChangeLog.tm ) > ChangeLog
+  sed -e "s/^AC_INIT(\(.*\), \(.*\))/AC_INIT(\1, \2pre${1})/" \
+    configure.in.tm > configure.in
+fi
+
+# make the tarball and check it
 ./autogen.sh
 GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes make distcheck
 if [ $? -ne 0 ]
@@ -7,6 +25,12 @@ then
  echo make distcheck failed
  exit 1
 fi
+
+# restore the temporary modified files
+for TM in ${TMPMOD}
+do
+  mv ${TM}.tm ${TM}
+done
 
 TARBALL=$( ls -t *.tar.gz | head -1 )
 echo put here commands for uploading ${TARBALL}

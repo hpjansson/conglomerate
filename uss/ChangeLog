@@ -1,5 +1,11 @@
 2004-02-22 Stappers <stappers@stappers.nl>
 
+	* mkcvstarball
+	Added code for adding a prelease number.
+	(Original functionality not changed)
+
+2004-02-22 Stappers <stappers@stappers.nl>
+
 	* wgetspec
 	New script
 
