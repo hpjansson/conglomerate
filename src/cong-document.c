@@ -14,13 +14,14 @@
 #include "cong-command-history.h"
 #include "cong-marshal.h"
 #include "cong-vfs.h"
+#include "cong-document-traversal.h"
 
+/* Internal functions: */
 static void
 cong_document_finalize (GObject *object);
 
 static void
 cong_document_dispose (GObject *object);
-
 
 /* Default signal handlers: */
 static void 
@@ -63,6 +64,15 @@ cong_document_handle_set_dtd_ptr (CongDocument *doc,
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
 #define DEBUG_MVC 0
+#define LOG_TRAVERSAL_NODES 1
+
+#if LOG_TRAVERSAL_NODES
+#define LOG_TRAVERSAL_NODE1(x) g_message(x)
+#define LOG_TRAVERSAL_NODE2(x, a) g_message((x), (a))
+#else
+#define LOG_TRAVERSAL_NODE1(x) ((void)0)
+#define LOG_TRAVERSAL_NODE2(x, a) ((void)0)
+#endif
 
 #define PRIVATE(x) ((x)->private)
 
@@ -90,6 +100,8 @@ struct CongDocumentDetails
 	xmlDocPtr xml_doc;
 
 	CongDispspec *ds;
+
+	CongDocumentTraversal *traversal;
 
 	gchar *url;
 
@@ -368,6 +380,8 @@ cong_document_construct (CongDocument *doc,
 	}
 
 	PRIVATE(doc)->history = cong_command_history_new();
+
+	PRIVATE(doc)->traversal = cong_document_traversal_new (doc);
 
 	return doc;
 }
@@ -861,7 +875,6 @@ cong_document_end_command (CongDocument *doc,
 	g_object_unref (G_OBJECT (cmd));
 }
 
-
 /* Public MVC hooks: */
 void cong_document_begin_edit (CongDocument *doc)
 {
@@ -912,7 +925,7 @@ void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node)
 
 	g_assert (cong_document_is_within_edit(doc));
 
-	if (node->parent) {		
+	if (node->parent) {
 		/* Emit signal: */
 		g_signal_emit (G_OBJECT(doc),
 			       signals[NODE_MAKE_ORPHAN], 0,
@@ -1519,6 +1532,11 @@ cong_document_dispose (GObject *object)
 	if (PRIVATE(doc)->selection) {
 		cong_selection_free (PRIVATE(doc)->selection);
 		PRIVATE(doc)->selection = NULL;
+	}
+
+	if (PRIVATE(doc)->traversal) {
+		g_object_unref (G_OBJECT (PRIVATE(doc)->traversal));
+		PRIVATE(doc)->traversal = NULL;
 	}
 
 	/* FIXME: the primary_window doesn't hold a ref to the document; should it?  

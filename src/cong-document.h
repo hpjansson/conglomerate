@@ -39,6 +39,12 @@ G_BEGIN_DECLS
 typedef struct CongDocumentClass CongDocumentClass;
 typedef struct CongDocumentDetails CongDocumentDetails;
 
+typedef struct CongDocumentTraversal CongDocumentTraversal;
+typedef struct CongDocumentTraversalClass CongDocumentTraversalClass;
+
+typedef struct CongTraversalNode CongTraversalNode;
+typedef struct CongTraversalNodeClass CongTraversalNodeClass;
+
 typedef struct CongCommand CongCommand;
 typedef struct CongCommandClass CongCommandClass;
 
@@ -136,6 +142,18 @@ cong_document_get_xml(CongDocument *doc);
 
 CongNodePtr
 cong_document_get_root(CongDocument *doc);
+
+/**
+ * cong_document_get_root_traversal_node:
+ * @doc:  The #CongDocument of interest
+ *
+ * The #CongDocument maintains a tree of #CongTraversalNode objects corresponding to a depth-first traversal of its xml tree,
+ * but with the entity references having only the entity definition as their sole child.
+ *
+ * Returns: the #CongTraversalNode corresponding to the root xml node of the document
+ */
+CongTraversalNode*
+cong_document_get_root_traversal_node (CongDocument *doc);
 
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc);

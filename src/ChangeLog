@@ -1,5 +1,9 @@
 2003-12-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h
+
+	Added a CongDocumentTraversal to the CongDocument
+
 	* cong-document-traversal.c, cong-document-traversal.h, cong-traversal-node.c, cong-traversal-node.h, Makefile.am
 
 	New files defining GObject classes that represent traversals of the XML tree
