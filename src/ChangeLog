@@ -1,5 +1,9 @@
 2003-12-19  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node.h, cong-node.c, cong-range.c
+
+	Added ordering function for comparing nodes; fixed long-standing bug in CongRange reordering function which was causing glitches in the selection code
+
 	* cong-location.c
 
 	Fixed bug when moving cursor to next word near end of a node's content which would generate an invalid cursor location off-by-one beyond the valid range

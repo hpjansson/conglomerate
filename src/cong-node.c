@@ -1119,5 +1119,82 @@ cong_node_can_be_copied (CongNodePtr node)
 	return cong_node_can_be_cut(node);
 }
 
+CongNodePtr 
+cong_node_get_deepest_common_parent (CongNodePtr n0, 
+				     CongNodePtr n1)
+{
+	CongNodePtr iter0, iter1;
+
+	g_return_val_if_fail (n0, NULL);
+	g_return_val_if_fail (n1, NULL);
+	g_return_val_if_fail (n0->doc == n1->doc, NULL);
+
+	for (iter0=n0; iter0; iter0=iter0->parent) {
+		for (iter1=n1; iter1; iter1=iter1->parent) {
+			if (iter0==iter1) {
+				return iter0;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+int 
+cong_node_get_ordering (CongNodePtr n0,
+			CongNodePtr n1)
+{
+	CongNodePtr deepest_common_parent;
+
+	g_return_val_if_fail (n0, 0);
+	g_return_val_if_fail (n1, 0);
+	g_return_val_if_fail (n0->doc == n1->doc, 0);
+	g_return_val_if_fail (n0->parent, 0);
+	g_return_val_if_fail (n1->parent, 0);
+
+	deepest_common_parent = cong_node_get_deepest_common_parent (n0, n1);
+
+	while (1) {
+		if (n0==n1) {
+			return 0;
+		}
+
+		/* Easy case: the same parent: */
+		if (n0->parent == n1->parent) {
+			CongNodePtr iter;
+			
+			/* Scan forward from n0 looking for n1: */
+			for (iter = n0; iter && iter != n1; iter = iter->next) ;
+			
+			if (NULL==iter) {
+				/* Didn't find n1?  Must have been earlier */
+				return 1;
+			} else {
+				return -1;
+			}
+		}
+		
+		if (n0->parent == n1) {
+			return -1;
+		}
+		
+		if (n1->parent == n0) {
+			return 1;
+		}
+		
+		/* Different parents, and the nodes are not each other's parents - ordering is determined by both nodes parents provided we don't go to their deepest common parent (or above): */
+		if (n0->parent) {
+			if (n0->parent!=deepest_common_parent) {
+				n0=n0->parent;
+			}
+		}
+		if (n1->parent) {
+			if (n1->parent!=deepest_common_parent) {
+				n1=n1->parent;
+			}
+		}
+	}
+}
+
 /* Internal function definitions: */
 

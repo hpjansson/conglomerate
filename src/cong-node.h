@@ -260,4 +260,19 @@ cong_node_can_be_cut (CongNodePtr node);
 gboolean
 cong_node_can_be_copied (CongNodePtr node);
 
+/**
+ * cong_node_get_ordering:
+ * @n0:  first node to be compared
+ * @n1:  second node to be compared
+ *
+ * This functions compares the location of two nodes in the xml tree and returns a numeric comparsion representing
+ * their locations in a depth-first traversal.
+ *
+ * Returns: negative if n0 is reached before n1, zero if they are the same node, positive if n0 is reached after n1
+ * 
+ */
+int 
+cong_node_get_ordering (CongNodePtr n0,
+			CongNodePtr n1);
+
 #endif

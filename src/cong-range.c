@@ -226,15 +226,23 @@ cong_range_make_ordered (CongRange *range)
 
 	} else {
 		/* Non-equal node ptrs: swap node ptrs if necessary*/
-		CongNodePtr iter;
+		int ordering = cong_node_get_ordering (range->loc0.node, range->loc1.node);
 
-		for (iter = range->loc0.node; iter && iter != range->loc1.node; iter = iter->next) ;
-		
-		if (NULL==iter)
+#if 0
 		{
+			gchar *desc0 = cong_node_debug_description (range->loc0.node);
+			gchar *desc1 = cong_node_debug_description (range->loc1.node);
+			g_message ("comparing %s and %s got %i", desc0, desc1, ordering);
+
+			g_free (desc0);
+			g_free (desc1);
+		}
+#endif
+		
+		if (ordering>0) {
 			/* Swap the node ptrs: */
 			CongLocation tmp;
-
+			
 			cong_location_copy(&tmp, &range->loc0);
 			cong_location_copy(&range->loc0, &range->loc1);
 			cong_location_copy(&range->loc1, &tmp);
