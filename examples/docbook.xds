@@ -125,7 +125,7 @@
 			<short-desc>A sumamry.</short-desc>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
-		<element tag="para" type = "structural" icon="cong-paragraph">
+		<element tag="para" type = "plugin" plugin-id="paragraph" icon="cong-paragraph">
 			<name locale="en">Paragraph</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
@@ -374,7 +374,7 @@
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element tag="listitem" type="structural" color="a0b0c0" icon="cong-list-item">
+		<element tag="listitem" type="plugin" plugin-id="listitem" color="a0b0c0" icon="cong-list-item">
 			<name locale="en">List Item</name>
 			<collapseto></collapseto>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>

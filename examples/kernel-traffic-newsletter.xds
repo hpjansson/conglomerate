@@ -84,7 +84,7 @@
 			<name locale="en">List (ordered)</name>
 		</element>
 
-		<element tag="p" type="structural" color="a0b0c0"  icon="cong-paragraph"> 
+		<element tag="p" type="plugin" plugin-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
 			<name locale="en">Paragraph</name>
 		</element>
 
