@@ -1,0 +1,20 @@
+<!ELEMENT bug ( #PCDATA ) >
+
+<!ELEMENT change ( #PCDATA | bug | person )* >
+
+<!ELEMENT enhancements ( change+ ) >
+
+<!ELEMENT fixes ( change+ ) >
+
+<!ELEMENT para ( #PCDATA | a )* >
+
+<!ELEMENT person ( #PCDATA ) >
+
+<!ELEMENT release ( title, para+, enhancements, fixes ) >
+<!ATTLIST release date CDATA #REQUIRED >
+<!ATTLIST release version CDATA #REQUIRED >
+
+<!ELEMENT title ( #PCDATA ) >
+
+<!ELEMENT a ( #PCDATA ) >
+<!ATTLIST a href CDATA #REQUIRED >

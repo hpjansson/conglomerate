@@ -34,6 +34,9 @@ dtd_DATA = \
 	xds.dtd \
 	$(NULL)
 
+# a strange file in this directory
+dtd_DATA += release.dtd
+
 EXTRA_DIST = \
 	$(dispspec_DATA) \
 	$(dispspec_in_files) \
