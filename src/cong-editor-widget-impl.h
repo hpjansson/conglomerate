@@ -50,10 +50,12 @@ G_BEGIN_DECLS
 */
 typedef struct CongElementEditor CongElementEditor;
 typedef struct CongElementEditorClass CongElementEditorClass;
+typedef struct CongDummyElementEditor CongDummyElementEditor;
 typedef struct CongSectionHeadEditor CongSectionHeadEditor;
 typedef struct CongSpanTextEditor CongSpanTextEditor;
 
 #define CONG_ELEMENT_EDITOR(x) ((CongElementEditor*)(x))
+#define CONG_DUMMY_ELEMENT_EDITOR(x) ((CongDummyElementEditor*)(x))
 #define CONG_SECTION_HEAD_EDITOR(x) ((CongSectionHeadEditor*)(x))
 #define CONG_SPAN_TEXT_EDITOR(x) ((CongSpanTextEditor*)(x))
 
@@ -76,8 +78,9 @@ struct CongElementEditorClass
 	/* Methods? */
 	const gchar *name;
 	void (*on_recursive_delete)(CongElementEditor *element_editor);
+	void (*on_recursive_self_test)(CongElementEditor *element_editor);
 	gboolean (*on_document_event)(CongElementEditor *element_editor, CongDocumentEvent *event);
-	void (*get_size_requisition)(CongElementEditor *element_editor);
+	void (*get_size_requisition)(CongElementEditor *element_editor, int width_hint);
 	void (*allocate_child_space)(CongElementEditor *element_editor);
 	void (*recursive_render)(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 	void (*on_button_press)(CongElementEditor *element_editor, GdkEventButton *event);
@@ -113,8 +116,9 @@ CongNodePtr cong_element_editor_get_first_node(CongElementEditor *element_editor
 CongNodePtr cong_element_editor_get_final_node(CongElementEditor *element_editor);
 gboolean cong_element_editor_responsible_for_node(CongElementEditor *element_editor, CongNodePtr node);
 void cong_element_editor_recursive_delete(CongElementEditor *element_editor);
+void cong_element_editor_recursive_self_test(CongElementEditor *element_editor);
 gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event);
-void cong_element_editor_get_size_requisition(CongElementEditor *element_editor);
+void cong_element_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint);
 void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 					gint x,
 					gint y,
@@ -123,9 +127,12 @@ void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 /* these are in window coords */
 
 
+CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node);
 CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNodePtr node);
 CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodePtr first_node, CongNodePtr final_node);
 
+CongFont*
+cong_span_text_editor_get_font(CongSpanTextEditor *span_text, enum CongFontRole role);
 
 G_END_DECLS
 

@@ -73,6 +73,15 @@ void cong_element_editor_recursive_delete(CongElementEditor *element_editor)
 	return element_editor->klass->on_recursive_delete(element_editor);
 }
 
+void cong_element_editor_recursive_self_test(CongElementEditor *element_editor)
+{
+	g_return_if_fail(element_editor);
+
+	g_assert(element_editor->klass);
+	g_assert(element_editor->klass->on_recursive_self_test);
+
+	return element_editor->klass->on_recursive_self_test(element_editor);
+}
 
 gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
@@ -85,14 +94,14 @@ gboolean cong_element_editor_on_document_event(CongElementEditor *element_editor
 	return element_editor->klass->on_document_event(element_editor, event);	
 }
 
-void cong_element_editor_get_size_requisition(CongElementEditor *element_editor)
+void cong_element_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
 	g_return_if_fail(element_editor);
 
 	g_assert(element_editor->klass);
 	g_assert(element_editor->klass->get_size_requisition);
 
-	element_editor->klass->get_size_requisition(element_editor);	
+	element_editor->klass->get_size_requisition(element_editor, width_hint);	
 }
 
 void cong_element_editor_set_allocation(CongElementEditor *element_editor,

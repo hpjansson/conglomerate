@@ -1151,7 +1151,9 @@ struct CongGlobals
 
 	GtkWidget *popup;
 
+#if 0
 	PangoContext *pango_context;
+#endif
 };
 
 extern struct CongGlobals the_globals;
@@ -1161,6 +1163,7 @@ typedef GtkDrawingArea CongEditorWidget;
 
 GtkWidget *cong_editor_widget_new(CongDocument *doc);
 CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget);
+CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget);
 void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget);
 #define CONG_EDITOR_WIDGET(x) ((CongEditorWidget*)(x))
 
