@@ -4,6 +4,8 @@
 	Just the desktop.in strings to fix Debian bug report 227565,
 	filed by Alban Browaeys.
 
+	* all the .po files: regenerated
+
 2004-01-13  Vincent van Adrighem  <adrighem@gnome.org>
 
 	* nl.po: Translation updated by Kees van den Broek.

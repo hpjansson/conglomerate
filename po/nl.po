@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 03:09+0100\n"
+"POT-Creation-Date: 2004-01-15 21:45+0000\n"
 "PO-Revision-Date: 2004-01-11 23:04+0100\n"
 "Last-Translator: Daniel van Eeden <daniel_e@dds.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -325,19 +325,19 @@ msgstr "label"
 msgid "string_selection_dialog"
 msgstr "string_selection_dialog"
 
-#: src/cong-app.c:797
+#: src/cong-app.c:798
 msgid "XML Editor"
 msgstr "XML-Editor"
 
-#: src/cong-app.c:924
+#: src/cong-app.c:928
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate kan geen xds-bestanden laden"
 
-#: src/cong-app.c:926
+#: src/cong-app.c:930
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate kan geen beschrijvingen van documenttypes vinden."
 
-#: src/cong-app.c:928
+#: src/cong-app.c:932
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-10 03:16+0100\n"
+"POT-Creation-Date: 2004-01-15 21:45+0000\n"
 "PO-Revision-Date: 2004-01-10 03:20+0100\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1220
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
 #: src/cong-primary-window.c:599 src/cong-primary-window.c:755
 #: src/cong-primary-window.c:757 src/cong-primary-window.c:763
 msgid "Conglomerate XML Editor"
@@ -39,8 +39,8 @@ msgstr "Увозник"
 msgid "Options"
 msgstr "Опције"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:743
-#: src/cong-node-properties-dialog.c:827
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:744
+#: src/cong-node-properties-dialog.c:828
 msgid "Advanced"
 msgstr "Напредно"
 
@@ -49,7 +49,7 @@ msgid "Basic"
 msgstr "Основно"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-file-export.c:307
-#: src/cong-file-new.c:232 src/cong-file-print.c:249 src/cong-menus.c:457
+#: src/cong-file-new.c:234 src/cong-file-print.c:249 src/cong-menus.c:458
 #: src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Опис"
@@ -71,7 +71,7 @@ msgstr "Спољни ИД"
 msgid "General"
 msgstr "Опште"
 
-#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:248
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:249
 msgid "Location"
 msgstr "Путања"
 
@@ -80,8 +80,8 @@ msgid "Modified"
 msgstr "Мењано"
 
 #: glade/cong-file-properties.glade.h:10 src/cong-file-export.c:306
-#: src/cong-file-print.c:248 src/cong-menus.c:450
-#: src/cong-node-properties-dialog.c:508
+#: src/cong-file-print.c:248 src/cong-menus.c:451
+#: src/cong-node-properties-dialog.c:509
 msgid "Name"
 msgstr "Име"
 
@@ -89,7 +89,7 @@ msgstr "Име"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3
-#: src/cong-node-properties-dialog.c:789
+#: src/cong-node-properties-dialog.c:790
 msgid "Properties"
 msgstr "Особине"
 
@@ -166,7 +166,7 @@ msgstr "ознака_издање_xml"
 msgid "*"
 msgstr "*"
 
-#: glade/cong-find-replace.glade.h:2 src/cong-edit-find-and-replace.c:210
+#: glade/cong-find-replace.glade.h:2 src/cong-edit-find-and-replace.c:209
 msgid "Find"
 msgstr "Нађи"
 
@@ -190,7 +190,9 @@ msgstr "Замени чиме:"
 msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
-msgstr "<small>Шта обухвата овај текст? Можете користити ову страницу за навођење релевантности текста за разне врсте рачунарских система.</small>"
+msgstr ""
+"<small>Шта обухвата овај текст? Можете користити ову страницу за навођење "
+"релевантности текста за разне врсте рачунарских система.</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -323,19 +325,19 @@ msgstr "ознака"
 msgid "string_selection_dialog"
 msgstr "прозорче_за_избор_ниски"
 
-#: src/cong-app.c:796
+#: src/cong-app.c:798
 msgid "XML Editor"
 msgstr "XML уређивач"
 
-#: src/cong-app.c:923
+#: src/cong-app.c:928
 msgid "Conglomerate could not load any xds files"
 msgstr "Конгломерат не може да учита никакве XDS датотеке"
 
-#: src/cong-app.c:925
+#: src/cong-app.c:930
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Конгломерат не може да пронађе описе типова докумената."
 
-#: src/cong-app.c:927
+#: src/cong-app.c:932
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -347,19 +349,19 @@ msgstr ""
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
-#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:373
+#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:374
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
 msgstr "Постави атрибут „%s“ на „%s“"
 
-#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:417
+#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:418
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Додај атрибут „%s“"
 
 #: src/cong-attribute-editor-cdata.c:226
 #: src/cong-attribute-editor-enumeration.c:177
-#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:447
+#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:448
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Обриши атрибут „%s“"
@@ -1112,16 +1114,16 @@ msgstr "ПОПРАВИ"
 msgid "Creating a new file (%s)"
 msgstr "Прављење нове датотеке (%s)"
 
-#: src/cong-file-new.c:212
+#: src/cong-file-new.c:214
 msgid "File Type"
 msgstr "Тип датотеке"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:399 src/cong-file-new.c:406 src/cong-file-new.c:431
+#: src/cong-file-new.c:401 src/cong-file-new.c:408 src/cong-file-new.c:433
 msgid "Creating a new file"
 msgstr "Прављење нове датотеке"
 
-#: src/cong-file-new.c:407
+#: src/cong-file-new.c:409
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1139,16 +1141,16 @@ msgstr ""
 "Надамо се да ће Конгломерат моћи у будућим издањима да образује „шаблонске "
 "документе“ које ћемо додати овом систему."
 
-#: src/cong-file-new.c:420
+#: src/cong-file-new.c:422
 msgid "What type of file would you like to create?"
 msgstr "Документ којег типа желите да направите?"
 
-#: src/cong-file-new.c:422
+#: src/cong-file-new.c:424
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Истакните једну од ставки из списка и изаберите „Напред“ да наставите"
 
-#: src/cong-file-new.c:432
+#: src/cong-file-new.c:434
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1199,7 +1201,7 @@ msgstr "Начин штампање:"
 msgid "Print Options"
 msgstr "Опције штампе"
 
-#: src/cong-file-print.c:318 src/cong-menus.c:747
+#: src/cong-file-print.c:318 src/cong-menus.c:748
 msgid "Print Preview"
 msgstr "Преглед пре штампу"
 
@@ -1234,7 +1236,10 @@ msgid ""
 "<small>The document does not specify an external DTD, but Conglomerate "
 "believes the above information is appropriate.  Click on \"Associate this DTD"
 "\" to specify this information explicitly in the document.</small>"
-msgstr "<small>Овај документ не наводи спољашњу ДТД, али Конгломерат сматра да су наредни подаци одговарајући. Кликните на „Намени ову ДТД“ да изричито наведете ове податке у документу.</small>"
+msgstr ""
+"<small>Овај документ не наводи спољашњу ДТД, али Конгломерат сматра да су "
+"наредни подаци одговарајући. Кликните на „Намени ову ДТД“ да изричито "
+"наведете ове податке у документу.</small>"
 
 #: src/cong-file-properties.c:194
 msgid "No External Subset"
@@ -1276,58 +1281,58 @@ msgstr "Срачунава претходну страницу"
 msgid "Calculating next page"
 msgstr "Срачунава наредну страницу"
 
-#: src/cong-menus.c:97 src/cong-menus.c:169 src/cong-menus.c:203
+#: src/cong-menus.c:98 src/cong-menus.c:170 src/cong-menus.c:204
 msgid "The selected menu item has not yet been implemented."
 msgstr "Изабрана ставка менија још увек није изведена."
 
-#: src/cong-menus.c:420
+#: src/cong-menus.c:421
 msgid "Document Types"
 msgstr "Типови документа"
 
-#: src/cong-menus.c:524
+#: src/cong-menus.c:525
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Конгломерат не може да отвори резултат преиначења"
 
-#: src/cong-menus.c:582 src/cong-plugin.c:1054
+#: src/cong-menus.c:583 src/cong-plugin.c:303
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Дошло је до неприлика при учитавању датотеке са описом стила „%s“"
 
-#: src/cong-menus.c:585 src/cong-menus.c:609 src/cong-plugin.c:1057
-#: src/cong-plugin.c:1081
+#: src/cong-menus.c:586 src/cong-menus.c:610 src/cong-plugin.c:306
+#: src/cong-plugin.c:330
 msgid "Conglomerate could not transform the document"
 msgstr "Конгломерат не може да преиначи документ"
 
-#: src/cong-menus.c:606 src/cong-plugin.c:1078
+#: src/cong-menus.c:607 src/cong-plugin.c:327
 msgid "There was a problem applying the stylesheet file"
 msgstr "Дошло је до неприлика при примени датотеке са описом стила"
 
 # bug: Checklist of test progress, or (do) test checklisting of progress???
-#: src/cong-menus.c:1059
+#: src/cong-menus.c:1060
 msgid "Test Progress Checklist"
 msgstr "Означавање провере напретка"
 
-#: src/cong-menus.c:1063
+#: src/cong-menus.c:1064
 #, c-format
 msgid "This is stage %i"
 msgstr "Ово је %i. корак"
 
-#: src/cong-menus.c:1108
+#: src/cong-menus.c:1109
 msgid "Message Log - Conglomerate"
 msgstr "Дневник порука — Конгломерат"
 
-#: src/cong-menus.c:1120
+#: src/cong-menus.c:1121
 msgid "Signal Log - Conglomerate"
 msgstr "Дневник сигнала — Конгломерат"
 
-#: src/cong-menus.c:1218
+#: src/cong-menus.c:1219
 msgid "translator_credits"
 msgstr ""
 "Данило Шеган <danilo@prevod.org>\n"
 "\n"
 "Prevod.org — превод на српски језик."
 
-#: src/cong-menus.c:1222
+#: src/cong-menus.c:1223
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1335,236 +1340,236 @@ msgstr ""
 "©1999 Ханс Петер Јансон (Hans Petter Jansson)\n"
 "©2004 Дејвид Малколм (David Malcolm)"
 
-#: src/cong-menus.c:1223
+#: src/cong-menus.c:1224
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Конгломерат: слободан и лак за употребу уређивач XML-а"
 
-#: src/cong-menus.c:1266 src/cong-menus.c:1344
+#: src/cong-menus.c:1267 src/cong-menus.c:1345
 msgid "/_File"
 msgstr "/_Датотека"
 
-#: src/cong-menus.c:1267 src/cong-menus.c:1345
+#: src/cong-menus.c:1268 src/cong-menus.c:1346
 msgid "/File/_New..."
 msgstr "/Датотека/_Нова..."
 
-#: src/cong-menus.c:1268 src/cong-menus.c:1346
+#: src/cong-menus.c:1269 src/cong-menus.c:1347
 msgid "/File/_Open..."
 msgstr "/Датотека/_Отвори..."
 
-#: src/cong-menus.c:1269 src/cong-menus.c:1274 src/cong-menus.c:1279
-#: src/cong-menus.c:1282 src/cong-menus.c:1285 src/cong-menus.c:1287
-#: src/cong-menus.c:1347 src/cong-menus.c:1349
+#: src/cong-menus.c:1270 src/cong-menus.c:1275 src/cong-menus.c:1280
+#: src/cong-menus.c:1283 src/cong-menus.c:1286 src/cong-menus.c:1288
+#: src/cong-menus.c:1348 src/cong-menus.c:1350
 msgid "/File/"
 msgstr "/Датотека/"
 
-#: src/cong-menus.c:1270
+#: src/cong-menus.c:1271
 msgid "/File/_Save"
 msgstr "/Датотека/_Сачувај"
 
-#: src/cong-menus.c:1271
+#: src/cong-menus.c:1272
 msgid "/File/Save _As..."
 msgstr "/Датотека/Сачувај _као..."
 
-#: src/cong-menus.c:1272
+#: src/cong-menus.c:1273
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Датотека/Сачувај ум_ножак..."
 
-#: src/cong-menus.c:1275
+#: src/cong-menus.c:1276
 msgid "/File/Print Previe_w..."
 msgstr "/Датотека/Преглед пр_ед штампу..."
 
-#: src/cong-menus.c:1276
+#: src/cong-menus.c:1277
 msgid "/File/_Print..."
 msgstr "/Датотека/_Штампај..."
 
-#: src/cong-menus.c:1280
+#: src/cong-menus.c:1281
 msgid "/File/_Revert"
 msgstr "/Датотека/_Врати"
 
-#: src/cong-menus.c:1283 src/cong-menus.c:1348
+#: src/cong-menus.c:1284 src/cong-menus.c:1349
 msgid "/File/_Import..."
 msgstr "/Датотека/_Увоз..."
 
-#: src/cong-menus.c:1284
+#: src/cong-menus.c:1285
 msgid "/File/_Export..."
 msgstr "/Датотека/_Извоз..."
 
-#: src/cong-menus.c:1286
+#: src/cong-menus.c:1287
 msgid "/File/Proper_ties"
 msgstr "/Датотека/Осо_бине"
 
-#: src/cong-menus.c:1288 src/cong-menus.c:1350
+#: src/cong-menus.c:1289 src/cong-menus.c:1351
 msgid "/File/_Close"
 msgstr "/Датотека/_Затвори"
 
-#: src/cong-menus.c:1289 src/cong-menus.c:1351
+#: src/cong-menus.c:1290 src/cong-menus.c:1352
 msgid "/File/_Quit"
 msgstr "/Датотека/_Изађи"
 
-#: src/cong-menus.c:1291
+#: src/cong-menus.c:1292
 msgid "/_Edit"
 msgstr "/_Уређивање/"
 
-#: src/cong-menus.c:1292
+#: src/cong-menus.c:1293
 msgid "/Edit/_Undo"
 msgstr "/Уређивање/_Опозови"
 
-#: src/cong-menus.c:1293
+#: src/cong-menus.c:1294
 msgid "/Edit/_Redo"
 msgstr "/Уређивање/_Понови"
 
-#: src/cong-menus.c:1294 src/cong-menus.c:1298 src/cong-menus.c:1304
-#: src/cong-menus.c:1306
+#: src/cong-menus.c:1295 src/cong-menus.c:1299 src/cong-menus.c:1305
+#: src/cong-menus.c:1307
 msgid "/Edit/"
 msgstr "/Уређивање/"
 
-#: src/cong-menus.c:1295
+#: src/cong-menus.c:1296
 msgid "/Edit/Cu_t"
 msgstr "/Уређивање/_Исеци"
 
-#: src/cong-menus.c:1296
+#: src/cong-menus.c:1297
 msgid "/Edit/_Copy"
 msgstr "/Уређивање/_Умножи"
 
-#: src/cong-menus.c:1297
+#: src/cong-menus.c:1298
 msgid "/Edit/_Paste"
 msgstr "/Уређивање/У_баци"
 
-#: src/cong-menus.c:1300
+#: src/cong-menus.c:1301
 msgid "/Edit/_Find..."
 msgstr "/Уређивање/_Нађи..."
 
-#: src/cong-menus.c:1301
+#: src/cong-menus.c:1302
 msgid "/Edit/Find Ne_xt"
 msgstr "/Уређивање/Нађи _следеће"
 
-#: src/cong-menus.c:1302
+#: src/cong-menus.c:1303
 msgid "/Edit/Find Pre_vious"
 msgstr "/Уређивање/Нађи пр_етходно"
 
-#: src/cong-menus.c:1303
+#: src/cong-menus.c:1304
 msgid "/Edit/R_eplace..."
 msgstr "/Уређивање/_Замени..."
 
-#: src/cong-menus.c:1305
+#: src/cong-menus.c:1306
 msgid "/Edit/_Insert..."
 msgstr "/Уређивање/У_метни..."
 
-#: src/cong-menus.c:1308
+#: src/cong-menus.c:1309
 msgid "/Edit/View _Source"
 msgstr "/Уређивање/Погледај _кôд"
 
-#: src/cong-menus.c:1311 src/cong-menus.c:1354
+#: src/cong-menus.c:1312 src/cong-menus.c:1355
 msgid "/Debug"
 msgstr "/Грешке"
 
-#: src/cong-menus.c:1312 src/cong-menus.c:1355
+#: src/cong-menus.c:1313 src/cong-menus.c:1356
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr "/Грешке/Почни самопроверу система за пријаву грешака..."
 
-#: src/cong-menus.c:1313 src/cong-menus.c:1356
+#: src/cong-menus.c:1314 src/cong-menus.c:1357
 msgid "/Debug/Document Types"
 msgstr "/Грешке/Типови докумената"
 
-#: src/cong-menus.c:1314
+#: src/cong-menus.c:1315
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Грешке/Претвори DocBook у HTML"
 
-#: src/cong-menus.c:1315
+#: src/cong-menus.c:1316
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Грешке/Претвори DocBook у XHTML"
 
-#: src/cong-menus.c:1316
+#: src/cong-menus.c:1317
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Грешке/Претвори DocBook у HTML помоћ"
 
-#: src/cong-menus.c:1317
+#: src/cong-menus.c:1318
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Грешке/Претвори DocBook у Јава помоћ"
 
-#: src/cong-menus.c:1318
+#: src/cong-menus.c:1319
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Грешке/Претвори DocBook у FO"
 
-#: src/cong-menus.c:1320
+#: src/cong-menus.c:1321
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Грешке/Преглед XSL:FO-а"
 
-#: src/cong-menus.c:1322
+#: src/cong-menus.c:1323
 msgid "/Debug/DTD"
 msgstr "/Грешке/ДТД"
 
-#: src/cong-menus.c:1323 src/cong-menus.c:1357
+#: src/cong-menus.c:1324 src/cong-menus.c:1358
 msgid "/Debug/Dialog"
 msgstr "/Грешке/Прозорче"
 
-#: src/cong-menus.c:1324 src/cong-menus.c:1358
+#: src/cong-menus.c:1325 src/cong-menus.c:1359
 msgid "/Debug/Progress Checklist"
 msgstr "/Грешке/Означавање напретка"
 
-#: src/cong-menus.c:1325
+#: src/cong-menus.c:1326
 msgid "/Debug/Document Message Log"
 msgstr "/Грешке/Дневник порука документа"
 
-#: src/cong-menus.c:1326
+#: src/cong-menus.c:1327
 msgid "/Debug/Document Signal Log"
 msgstr "/Грешке/Дневник сигнала документа"
 
-#: src/cong-menus.c:1327 src/cong-menus.c:1359
+#: src/cong-menus.c:1328 src/cong-menus.c:1360
 msgid "/Debug/Information Alert"
 msgstr "/Грешке/Упозорење о подацима"
 
-#: src/cong-menus.c:1328 src/cong-menus.c:1360
+#: src/cong-menus.c:1329 src/cong-menus.c:1361
 msgid "/Debug/Glade Test"
 msgstr "/Грешке/Проба Глејда"
 
-#: src/cong-menus.c:1329
+#: src/cong-menus.c:1330
 msgid "/Debug/Insert XML Fragment"
 msgstr "/Грешке/Убаци XML исечак"
 
-#: src/cong-menus.c:1330
+#: src/cong-menus.c:1331
 msgid "/Debug/Command Test"
 msgstr "/Грешке/Проба наредбе"
 
-#: src/cong-menus.c:1333
+#: src/cong-menus.c:1334
 msgid "/_Tools"
 msgstr "/_Алати"
 
-#: src/cong-menus.c:1335 src/cong-menus.c:1363
+#: src/cong-menus.c:1336 src/cong-menus.c:1364
 msgid "/_Help"
 msgstr "/_Помоћ"
 
-#: src/cong-menus.c:1336 src/cong-menus.c:1364
+#: src/cong-menus.c:1337 src/cong-menus.c:1365
 msgid "/Help/_Contents"
 msgstr "/Помоћ/_Садржај"
 
-#: src/cong-menus.c:1337 src/cong-menus.c:1365
+#: src/cong-menus.c:1338 src/cong-menus.c:1366
 msgid "/Help/_About"
 msgstr "/Помоћ/_О програму"
 
-#: src/cong-node-properties-dialog.c:255
+#: src/cong-node-properties-dialog.c:256
 msgid "XPath"
 msgstr "XPath"
 
-#: src/cong-node-properties-dialog.c:336
+#: src/cong-node-properties-dialog.c:337
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
 msgstr "Преименуј атрибут „%s“ на „%s“"
 
-#: src/cong-node-properties-dialog.c:487
+#: src/cong-node-properties-dialog.c:488
 msgid "Raw Attributes"
 msgstr "Чисти атрибути"
 
-#: src/cong-node-properties-dialog.c:520
+#: src/cong-node-properties-dialog.c:521
 msgid "Value"
 msgstr "Вредност"
 
-#: src/cong-node-properties-dialog.c:609
+#: src/cong-node-properties-dialog.c:610
 #, c-format
 msgid "Attributes for <tt>%s</tt> tags"
 msgstr "Атрибути за ознаке <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:735 src/cong-node-properties-dialog.c:822
+#: src/cong-node-properties-dialog.c:736 src/cong-node-properties-dialog.c:823
 msgid "DTD"
 msgstr "ДТД"
 
@@ -1604,21 +1609,21 @@ msgstr ""
 msgid "Show Details"
 msgstr "Прикажи детаље"
 
+#: src/cong-plugin.c:231 src/cong-plugin.c:267
+msgid "Conglomerate could not find display information for the new file"
+msgstr "Конгломерат не може да пронађе податке о приказу за нову датотеку"
+
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:616
+#: src/cong-plugin.c:673
 #, c-format
 msgid "<%s> property dialog"
 msgstr "Особине за <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:619
+#: src/cong-plugin.c:676
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Обезбеђује прозорче са особинама за елемент <%s>"
-
-#: src/cong-plugin.c:982 src/cong-plugin.c:1018
-msgid "Conglomerate could not find display information for the new file"
-msgstr "Конгломерат не може да пронађе податке о приказу за нову датотеку"
 
 #: src/cong-primary-window.c:313 src/cong-primary-window.c:314
 msgid "Open document"
@@ -2125,58 +2130,58 @@ msgstr "Шаблонски XSL елемент"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Елемент за осликавање шаблонских правила у XSL опису стила"
 
-#: src/popup.c:127
+#: src/popup.c:129
 msgid "(no description available)"
 msgstr "(нема описа)"
 
-#: src/popup.c:180
+#: src/popup.c:182
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Примени обухватну ознаку: %s"
 
 # bug: is "span" keyword
-#: src/popup.c:261
+#: src/popup.c:263
 msgid "Remove Span Tag"
 msgstr "Уклони обухватну ознаку"
 
 # bug: is "span" keyword
-#: src/popup.c:370
+#: src/popup.c:372
 msgid "Remove span tag"
 msgstr "Уклони обухватну ознаку"
 
-#: src/popup.c:951
+#: src/popup.c:953
 msgid "Delete this item"
 msgstr "Уклони ову ставку"
 
-#: src/popup.c:961
+#: src/popup.c:963
 msgid "Add text node after"
 msgstr "Додај текстуални чвор иза"
 
-#: src/popup.c:969
+#: src/popup.c:971
 msgid "Add text node before"
 msgstr "Додај текстуални чвор испред"
 
-#: src/popup.c:980
+#: src/popup.c:982
 msgid "Set the text"
 msgstr "Постави текст"
 
-#: src/popup.c:1011
+#: src/popup.c:1013
 msgid "Paste into"
 msgstr "Убаци у"
 
-#: src/popup.c:1019
+#: src/popup.c:1021
 msgid "Paste before"
 msgstr "Убаци испред"
 
-#: src/popup.c:1027
+#: src/popup.c:1029
 msgid "Paste after"
 msgstr "Убаци иза"
 
-#: src/popup.c:1044
+#: src/popup.c:1046
 msgid "New sub-element"
 msgstr "Нови под-елемент"
 
-#: src/popup.c:1069
+#: src/popup.c:1071
 msgid "New sibling"
 msgstr "Ново гранање"
 
