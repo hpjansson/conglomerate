@@ -283,9 +283,11 @@ allocate_child_space (CongEditorArea *area)
 	gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
 											GTK_ORIENTATION_VERTICAL);
 
+#if 0
 	g_message ("single_line_req = (%i,%i)", 
 		   title_text_width_req,
 		   title_text_height_req);
+#endif
 	
 	/* Set inner bin to have all the width, plus all the height it wants:*/
 	cong_editor_area_set_allocation (PRIVATE(span_tag)->inner_bin,

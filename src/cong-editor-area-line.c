@@ -28,6 +28,8 @@
 
 #include "cong-editor-area-composer.h"
 
+#define DEBUG_LINE 0
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaLineDetails
@@ -147,7 +149,9 @@ cong_editor_area_line_get_width_free (CongEditorAreaLine *area_line)
 	width_limit = cong_editor_area_line_get_width_limit (area_line);
 	width_used = cong_editor_area_line_get_width_used (area_line);
 
+#if DEBUG_LINE
 	g_message ("Line has width_limit = %i, of which %i is used", width_limit, width_used);
+#endif
 
 	return width_limit - width_used;
 }
