@@ -32,6 +32,7 @@
 #include "cong-editor-area-spacer.h"
 #include "cong-editor-area-pixbuf.h"
 #include "cong-dispspec.h"
+#include "cong-util.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -310,11 +311,11 @@ render_self (CongEditorArea *area,
 			       rect->x + rect->width, rect->y + title_bar_height+1);
 
 		/* Short horizontal line along very bottom of area: */
-		draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
-				   cong_dispspec_element_col (ds_element, 
-							      CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-				   rect->x, rect->y + rect->height-1,
-				   rect->x + 45);
+		cong_util_draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
+					     cong_dispspec_element_col (ds_element, 
+									CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+					     rect->x, rect->y + rect->height-1,
+					     rect->x + 45);
 
 	} else {
 		gc = cong_dispspec_element_gc (ds_element, 
@@ -365,8 +366,10 @@ allocate_child_space (CongEditorArea *area)
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
 	guint title_req_height;
 
+#if 0
 	PRIVATE(structural_tag)->title_vcompose;
 	PRIVATE(structural_tag)->inner_bin;
+#endif
 
 	title_req_height = cong_editor_area_get_cached_requisition (PRIVATE(structural_tag)->title_vcompose,
 								    GTK_ORIENTATION_VERTICAL);

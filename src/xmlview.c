@@ -66,48 +66,6 @@ get_col_string(const GdkColor* col)
 	return cong_eel_gdk_rgb_to_color_spec(col32);
 }
 
-/* Dodgy blend func: */
-static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
-{
-	float one_minus = 1.0f - proportion;
-
-	dst->red = ((float)src1->red*proportion) + ((float)src0->red*one_minus);
-	dst->green = ((float)src1->green*proportion) + ((float)src0->green*one_minus);
-	dst->blue = ((float)src1->blue*proportion) + ((float)src0->blue*one_minus);
-}
-
-static GdkColor white = {0, 0xffff, 0xffff, 0xffff};
-
-/* Dodgy hack to do lines that blend to white: */
-void draw_blended_line(GtkWidget *w,
-		       const GdkColor *col,
-		       int x0, int y0,
-		       int x1)
-{
-	/* inefficient: claim a gc to do this! (ideally we'd just invoke the hardware... grrr... arrg...) */
-	GdkGC *gc = gdk_gc_new(w->window);
-	int x;
-	float proportion;
-	GdkColor blended_col;
-
-	g_assert(x0!=x1);
-
-	for (x=x0; x<x1; x++) {
-		proportion = (float)(x-x0)/(float)(x1-x0);
-		proportion = (proportion>0.5f)?((proportion-0.5f)*2.0f):0.0f;
-
-		blend_col(&blended_col, col, &white, proportion);
-
-		gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &blended_col, FALSE, TRUE);
-
-		gdk_gc_set_foreground(gc,&blended_col);
-
-		gdk_draw_point(w->window, gc, x, y0);
-	}
-
-	gdk_gc_unref(gc);
-}
-
 #if 0
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
@@ -448,10 +406,10 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 	
 #if NEW_LOOK
 	/* Top: */
-	draw_blended_line(w,
-			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-			  H_SPACING + 1, 0, 
-			  H_SPACING + FRAGMENT_WIDTH);
+	cong_util_draw_blended_line(w,
+				    cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+				    H_SPACING + 1, 0, 
+				    H_SPACING + FRAGMENT_WIDTH);
 
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 	g_assert(gc);
@@ -462,10 +420,10 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 		      H_SPACING, w->allocation.height-1);	
 
 	/* Bottom: */
-	draw_blended_line(w,
-			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_DIM_LINE),
-			  H_SPACING + 1, w->allocation.height-1-V_SPACING,
-			  H_SPACING + FRAGMENT_WIDTH);
+	cong_util_draw_blended_line(w,
+				    cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_DIM_LINE),
+				    H_SPACING + 1, w->allocation.height-1-V_SPACING,
+				    H_SPACING + FRAGMENT_WIDTH);
 
 	/* Fill the inside of the rectangle: */
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND);
@@ -593,10 +551,10 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDis
 	GdkGC *gc;
 
 	/* Short horizontal line: */
-	draw_blended_line(w,
-			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-			  H_SPACING, 0, 
-			  H_SPACING + 45);
+	cong_util_draw_blended_line(w,
+				    cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+				    H_SPACING, 0, 
+				    H_SPACING + 45);
 
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 	g_assert(gc);
@@ -800,10 +758,10 @@ GtkWidget *xv_section_data(CongNodePtr x, CongDocument *doc, CongDispspec *ds, i
 static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
 #if NEW_LOOK
-	draw_blended_line(w,
-			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-			  H_SPACING, 0, 
-			  H_SPACING + 180);
+	cong_util_draw_blended_line(w,
+				    cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+				    H_SPACING, 0, 
+				    H_SPACING + 180);
 #else
   UNUSED_VAR(GdkColor gcol)
 
@@ -877,6 +835,7 @@ CongNodePtr xv_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
 
+#error
 		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
 		{
 			return(cong_node_prev(x));

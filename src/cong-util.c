@@ -488,3 +488,45 @@ cong_util_remove_tag (CongDocument *doc,
 #endif
 }
 
+/* Dodgy blend func: */
+static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
+{
+	float one_minus = 1.0f - proportion;
+
+	dst->red = ((float)src1->red*proportion) + ((float)src0->red*one_minus);
+	dst->green = ((float)src1->green*proportion) + ((float)src0->green*one_minus);
+	dst->blue = ((float)src1->blue*proportion) + ((float)src0->blue*one_minus);
+}
+
+static GdkColor white = {0, 0xffff, 0xffff, 0xffff};
+
+/* Dodgy hack to do lines that blend to white: */
+void 
+cong_util_draw_blended_line (GtkWidget *w,
+			     const GdkColor *col,
+			     int x0, int y0,
+			     int x1)
+{
+	/* inefficient: claim a gc to do this! (ideally we'd just invoke the hardware... grrr... arrg...) */
+	GdkGC *gc = gdk_gc_new(w->window);
+	int x;
+	float proportion;
+	GdkColor blended_col;
+
+	g_assert(x0!=x1);
+
+	for (x=x0; x<x1; x++) {
+		proportion = (float)(x-x0)/(float)(x1-x0);
+		proportion = (proportion>0.5f)?((proportion-0.5f)*2.0f):0.0f;
+
+		blend_col(&blended_col, col, &white, proportion);
+
+		gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &blended_col, FALSE, TRUE);
+
+		gdk_gc_set_foreground(gc,&blended_col);
+
+		gdk_draw_point(w->window, gc, x, y0);
+	}
+
+	gdk_gc_unref(gc);
+}

@@ -141,6 +141,13 @@ void
 cong_util_remove_tag (CongDocument *doc, 
 		      CongNodePtr tag);
 
+
+/* Dodgy hack to do lines that blend to white: */
+void 
+cong_util_draw_blended_line (GtkWidget *w,
+			     const GdkColor *col,
+			     int x0, int y0,
+			     int x1);
 G_END_DECLS
 
 #endif

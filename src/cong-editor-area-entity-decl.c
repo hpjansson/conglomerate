@@ -234,12 +234,12 @@ render_self (CongEditorArea *area,
 			       rect->x + rect->width, rect->y + title_bar_height+1);
 
 		/* Short horizontal line along very bottom of area: */
-		draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
-				   cong_dispspec_element_col (ds_element, 
-							      CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-				   rect->x, rect->y + rect->height-1,
-				   rect->x + 45);
-
+		cong_util_draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
+					     cong_dispspec_element_col (ds_element, 
+									CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+					     rect->x, rect->y + rect->height-1,
+					     rect->x + 45);
+		
 	} else {
 		gc = cong_dispspec_element_gc (ds_element, 
 					       CONG_DISPSPEC_GC_USAGE_BOLD_LINE);

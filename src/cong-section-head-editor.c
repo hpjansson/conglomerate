@@ -29,6 +29,7 @@
 #include "cong-document.h"
 #include "cong-font.h"
 #include "cong-plugin.h"
+#include "cong-util.h"
 
 static void recursively_create_children(CongSectionHeadEditor *section_head);
 
@@ -545,10 +546,10 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 			      window_area->width + window_area->x, title_bar_height-1-V_SPACING + window_area->y);
 
 		/* Short horizontal line along very bottom of area: */
-		draw_blended_line(GTK_WIDGET(editor_widget),
-				  cong_dispspec_element_col(section_head->element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
-				  H_SPACING + window_area->x, window_area->height-1-V_SPACING + window_area->y,
-				  H_SPACING + 45 + window_area->x);
+		cong_util_draw_blended_line(GTK_WIDGET(editor_widget),
+					    cong_dispspec_element_col(section_head->element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+					    H_SPACING + window_area->x, window_area->height-1-V_SPACING + window_area->y,
+					    H_SPACING + 45 + window_area->x);
 
 		/* Render children: */
 		for (iter = section_head->list_of_child; iter; iter=iter->next) {

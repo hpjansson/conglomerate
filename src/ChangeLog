@@ -1,3 +1,9 @@
+2003-09-01  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-entity-decl.c, cong-editor-area-entity-ref.c, cong-editor-area-structural-tag.c, cong-section-head-editor.c, cong-util.c, cong-util.h, xmlview.c
+
+	Added prototype for the draw_blended_line function and moved to cong_util
+
 2003-08-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-plugin.c, cong-plugin.h, plugin-docbook.c
