@@ -1,5 +1,9 @@
 2004-06-09  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-tree-view.c: 
+
+	Added boolean add_to_end to this as well
+
 	* cong-debug-log-view.c, cong-document-traversal.c, cong-document.c, cong-document.h, cong-marshal.c, cong-marshal.h, cong-node-modification-add-after.c, cong-node-modification-add-before.c, cong-node-modification-make-orphan.c, cong-node-modification-set-parent.c, cong-node.c, cong-node.h, cong-view.h, cong.marshal, plugin-docbook.c
 
 	Added a gboolean add_to_end argument to node_set_parent operation to indicate whether the node should be added at the end (TRUE) or beginning (FALSE)

@@ -112,7 +112,7 @@ regenerate_data_for_node (CongTreeView *cong_tree_view,
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
@@ -261,7 +261,10 @@ cong_tree_view_new (CongDocument *doc,
 			  "destroy",
 			  G_CALLBACK (on_widget_destroy_event),
 			  cong_tree_view);
-	
+
+	/* Expand the full tree: */
+	gtk_tree_view_expand_all (details->gtk_tree_view);
+
 	/* Show the tree view: */
 	gtk_widget_show(GTK_WIDGET(details->gtk_tree_view));
 		
@@ -720,7 +723,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_change, 
 	}
 }
 
-static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end)
 {
 	CongTreeView *cong_tree_view;
 	GtkTreeIter tree_iter_parent;
@@ -744,7 +747,12 @@ static void on_document_node_set_parent(CongView *view, gboolean before_change, 
 
 		if ( get_iter_for_node(PRIVATE(cong_tree_view), adoptive_parent, &tree_iter_parent) ) {
 			GtkTreeIter new_tree_iter;
-			gtk_tree_store_append(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+
+			if (add_to_end) {
+				gtk_tree_store_append(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+			} else {
+				gtk_tree_store_prepend(PRIVATE(cong_tree_view)->gtk_tree_store, &new_tree_iter, &tree_iter_parent);
+			}
 			
 			recursive_add_to_tree_store(cong_tree_view, node, &new_tree_iter);
 		}
