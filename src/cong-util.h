@@ -283,6 +283,23 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 					  const gchar *description,
 					  CongDocument *doc,
 					  GList *elements);
+
+/* Simple UI manipulation: */
+GtkMenuItem* 
+cong_util_make_menu_item (const gchar *label,
+			  const gchar *tip,
+			  GdkPixbuf *pixbuf);
+
+GtkMenuItem* 
+cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element);
+
+GtkMenuItem* 
+cong_util_make_menu_item_for_element_desc (const CongElementDescription *element_desc,
+					   CongDocument *doc);
+
+GtkWidget*
+cong_util_add_menu_separator (GtkMenu *menu);
+
 G_END_DECLS
 
 #endif

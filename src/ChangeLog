@@ -1,5 +1,9 @@
 2004-02-11  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-util.c, cong-util.h, popup.c
+
+	Tidy up of the popup menu code
+
 	* cong-node.c, cong-node.h, cong-util.c, cong-util.h, global.h, popup.c, xmldata.c
 
 	Replaced the string_selection_dialog with cong_util_modal_element_selection_dialog and a system for identifying potential elements that can support namespaces

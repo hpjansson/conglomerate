@@ -677,7 +677,6 @@ cong_element_description_list_free (GList *list_of_element_desc)
 	g_list_free (list_of_element_desc);
 }
 
-#if 1
 enum {
 	FIELD_ELEMENT_DESC_PTR,
 	FIELD_DS_PIXBUF,
@@ -943,55 +942,94 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 
 	return result;
 }
-#else
-/**
- * string_selection_dialog
- * @title:
- * @element_description:
- * @elements:
- * 
- * Popup a modal, blocking dialog to obtain
- * the user's choice between a list of char *.
- * Returns a new char * of the element name 
- * selected, which must be freed by caller.
- * 
- * Returns:
- */
-gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *elements) 
+
+
+GtkMenuItem* 
+cong_util_make_menu_item (const gchar *label,
+			  const gchar *tip,
+			  GdkPixbuf *pixbuf)
 {
-	gchar *glade_filename;
-	GladeXML *xml;
-	GtkWidget *dialog, *label, *combo;
-	gchar *text;
+	GtkWidget *item;
 
-	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "glade/string_selection_dialog.glade",
-						    FALSE,
-						    NULL);
+	g_return_val_if_fail(label, NULL);
 
-	xml = glade_xml_new(glade_filename, NULL, NULL);
-	glade_xml_signal_autoconnect(xml);
-	g_free(glade_filename);
+	item = gtk_image_menu_item_new_with_label (label);
 
-	dialog = glade_xml_get_widget(xml, "string_selection_dialog");
-	label = glade_xml_get_widget(xml, "label");
-	combo = glade_xml_get_widget(xml, "combo");
+	if (pixbuf) {
+		GtkWidget *image = gtk_image_new_from_pixbuf(pixbuf);
+		gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), image);
+		gtk_widget_show(image);
+	}
 
-        gtk_window_set_title(GTK_WINDOW(dialog), title);
-	gtk_label_set_text(GTK_LABEL(label), element_description);
-	gtk_combo_set_popdown_strings(GTK_COMBO(combo), elements);
+	if (tip) {
+		gtk_tooltips_set_tip (cong_app_get_tooltips (cong_app_singleton()),
+				      GTK_WIDGET(item),
+				      tip,
+				      tip);
+	}
 
-	gtk_dialog_run(GTK_DIALOG(dialog));
-
-        /* Don't bother catching how they exitted; we need to get a value
-         * from here so we don't crash. */
-
-        text = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(combo)->entry)));
-	
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-        g_object_unref(G_OBJECT(xml));
-
-	return text;
+	return GTK_MENU_ITEM(item);
 }
-#endif
+
+GtkMenuItem* 
+cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element)
+{
+	GtkMenuItem *item;
+	GdkPixbuf *pixbuf;
+	const gchar *tip;
+
+	g_return_val_if_fail (element, NULL);
+
+	pixbuf = cong_dispspec_element_get_icon (element);
+	tip = cong_dispspec_element_get_description (element);
+
+	if (NULL==tip) {
+		tip = _("(no description available)");
+	}
+	
+	item = cong_util_make_menu_item (cong_dispspec_element_username (element),
+					 tip,
+					 pixbuf);
+	if (pixbuf) {
+		g_object_unref (G_OBJECT (pixbuf));
+	}
+
+	return item;
+}
+
+GtkMenuItem* 
+cong_util_make_menu_item_for_element_desc (const CongElementDescription *element_desc,
+					   CongDocument *doc)
+{
+	CongDispspecElement* ds_element;
+
+	g_assert (element_desc);
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+	ds_element = cong_element_description_get_dispspec_element_for_doc (element_desc,
+									    doc);
+	if (ds_element) {
+		return cong_util_make_menu_item_for_dispspec_element (ds_element);
+	} else {
+		return cong_util_make_menu_item (element_desc->local_name,
+						 NULL,
+						 NULL);
+	}
+}
+
+GtkWidget*
+cong_util_add_menu_separator (GtkMenu *menu)
+{
+	GtkWidget *item = gtk_menu_item_new ();
+	GtkWidget *w0 = gtk_hseparator_new ();
+	gtk_container_add (GTK_CONTAINER (item), 
+			   w0);
+	gtk_menu_append (menu, 
+			 item);
+	gtk_widget_set_sensitive (item, 
+				  FALSE);
+	gtk_widget_show (w0);
+	gtk_widget_show (item);
+
+	return item;
+}
