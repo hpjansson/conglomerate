@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-09-28 13:20+0200\n"
-"PO-Revision-Date: 2003-09-28 13:22+0200\n"
+"POT-Creation-Date: 2003-09-28 18:29+0200\n"
+"PO-Revision-Date: 2003-09-28 18:30+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -354,6 +354,10 @@ msgid ""
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
+"(i) Prova att kontrollera att du stavade filnamnet korrekt. Kom ihåg att "
+"stora och små bokstäver gör skillnad (\"MinFil\" är inte samma som \"MINFIL"
+"\" eller \"minfil\").\n"
+"(ii) Prova att använda sökverktyget för att hitta din fil."
 
 #: src/cong-error-file-open.c:229 src/cong-error-file-open.c:238
 #: src/cong-error-file-open.c:293 src/cong-error-file-open.c:334
@@ -371,6 +375,10 @@ msgid ""
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
+"(i) Prova att kontrollera att du stavade platsen korrekt. Kom ihåg att stora "
+"och små bokstäver gör skillnad (\"MinKatalog\" är inte samma som \"MINKATALOG"
+"\" eller \"minkatalog\").\n"
+"(ii) Prova att använda sökverktyget för att hitta din fil."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-open.c:250
@@ -422,6 +430,10 @@ msgid ""
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
 msgstr ""
+"(i) Prova att kontrollera att du stavade platsen korrekt. Kom ihåg att stora "
+"och små bokstäver gör skillnad (\"http\" är inte samma som \"Http\" eller "
+"\"HTTP\").\n"
+"(ii) Prova att använda sökverktyget för att hitta din fil."
 
 #: src/cong-error-file-open.c:303
 msgid "You do not have permission to read that file."
@@ -473,6 +485,8 @@ msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
 msgstr ""
+"(i) Prova att kontrollera att du stavade platsen korrekt.\n"
+"(ii) Försök igen. Om det misslyckas igen kan servern vara nere."
 
 #: src/cong-error-file-open.c:381 src/cong-error-file-save.c:316
 msgid "The system could not login to the location."
@@ -517,6 +531,10 @@ msgid ""
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
+"(i) Prova att kontrollera att du stavade namnet på platsen korrekt. Kom ihåg "
+"att stora och små bokstäver gör skillnad (\"MinKatalog\" är inte samma som "
+"\"MINKATALOG\" eller \"minkatalog\").\n"
+"(ii) Prova att spara på en annan plats."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:106 src/cong-error-file-save.c:225
@@ -598,6 +616,10 @@ msgid ""
 "\").\n"
 "(ii) Try saving to a different location."
 msgstr ""
+"(i) Prova att kontrollera att du stavade platsen korrekt. Kom ihåg att stora "
+"och små bokstäver gör skillnad (\"http\" är inte samma som \"Http\" eller "
+"\"HTTP\").\n"
+"(ii) Prova att spara på en annan plats."
 
 #: src/cong-error-file-save.c:253
 msgid "You do not have permission to write to that location."
@@ -639,6 +661,9 @@ msgid ""
 "(ii) Try again. If it fails again, the server may be down; try saving to "
 "another location."
 msgstr ""
+"(i) Prova att kontrollera att du stavade platsen korrekt.\n"
+"(ii) Försök igen. Om det misslyckas igen kan servern vara nere. Prova att "
+"spara på en annan plats."
 
 #: src/cong-error-file-save.c:317 src/cong-error-file-save.c:326
 msgid "Try again. If it fails again, try saving to another location."
@@ -665,12 +690,12 @@ msgstr "Försök igen med ett kortare filnamn."
 #: src/cong-error-tests.c:17
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
-msgstr ""
+msgstr "Testar Arkiv->Öppna-misslyckande för \"%s\" med resultatet %s"
 
 #: src/cong-error-tests.c:23
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
-msgstr ""
+msgstr "Testar Arkiv->Spara-misslyckande för \"%s\" med resultatet %s"
 
 #: src/cong-error-tests.c:29
 #, c-format
@@ -687,7 +712,7 @@ msgstr "Detta dialogfönster genererades av den automatiserade testrutinen"
 
 #: src/cong-file-export.c:159
 msgid "<small>(No description available)</small>"
-msgstr ""
+msgstr "<small>(Ingen beskrivning tillgänglig)</small>"
 
 #: src/cong-file-export.c:196
 msgid "Select file to export to"
@@ -786,6 +811,13 @@ msgid ""
 "We hope that in future versions of Conglomerate you will be able to create "
 "\"template documents\" to add to this system."
 msgstr ""
+"Denna assistent kommer att guida dig genom skapandet av en ny fil.\n"
+"\n"
+"Diverse filtyper finns tillgängliga, och Conglomerate kan tillhandahålla en "
+"del av \"standardinnehållet\" åt dig.\n"
+"\n"
+"Vi hoppas att Conglomerate i framtida versioner kommer att kunna skapa "
+"\"malldokument\" som kan läggas till i systemet."
 
 #: src/cong-file-new.c:419
 msgid "What type of file would you like to create?"
@@ -794,7 +826,7 @@ msgstr "Vilken typ av fil vill du skapa?"
 #: src/cong-file-new.c:421
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
-msgstr ""
+msgstr "Markera ett av objekten i listan och välj \"Framåt\" för att fortsätta"
 
 #: src/cong-file-new.c:431
 msgid ""
@@ -802,18 +834,25 @@ msgid ""
 "\"Apply\" to create it.  You will need to save the document if you wish to "
 "keep it."
 msgstr ""
+"Conglomerate har nu den information det behöver för att skapa dokumentet. "
+"Tryck på \"Verkställ\" för att skapa det. Du kommer att behöva spara "
+"dokumentet om du vill behålla det."
 
 #: src/cong-file-open.c:53
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
 msgstr ""
+"Den interna strukturen i dokumentet matchar inte något av de typer som är "
+"kända av Conglomerate."
 
 #: src/cong-file-open.c:54
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 msgstr ""
+"Du kan tvinga Conglomerate att läsa in dokumentet genom att klicka på "
+"knappen \"Tvinga\" nedan, men resultatet kan komma lämna övrigt att önska."
 
 #: src/cong-file-open.c:55
 msgid "Force"
@@ -917,6 +956,9 @@ msgid ""
 "following information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
 msgstr ""
+"Dokumentet anger inte en extern DTD, men Conglomerate tror att följande "
+"information är tillämplig. Klicka på \"Associera denna DTD\" för att ange "
+"denna information explicit i dokumentet."
 
 #: src/cong-file-properties.c:174
 msgid "No External Subset"
@@ -1141,7 +1183,7 @@ msgstr "/Felsök"
 
 #: src/cong-menus.c:1255 src/cong-menus.c:1297
 msgid "/Debug/Begin self-test of error-reporting system..."
-msgstr ""
+msgstr "/Felsök/Påbörja självtest av felrapporteringssystem..."
 
 #: src/cong-menus.c:1256 src/cong-menus.c:1298
 msgid "/Debug/Document Types"
@@ -1149,27 +1191,27 @@ msgstr "/Felsök/Dokumenttyper"
 
 #: src/cong-menus.c:1257
 msgid "/Debug/Transform DocBook to HTML"
-msgstr ""
+msgstr "/Felsök/Transformera DocBook till HTML"
 
 #: src/cong-menus.c:1258
 msgid "/Debug/Transform DocBook to XHTML"
-msgstr ""
+msgstr "/Felsök/Transformera DocBook till XHTML"
 
 #: src/cong-menus.c:1259
 msgid "/Debug/Transform DocBook to HTML Help"
-msgstr ""
+msgstr "/Felsök/Transformera DocBook till HTML-hjälp"
 
 #: src/cong-menus.c:1260
 msgid "/Debug/Transform DocBook to Java Help"
-msgstr ""
+msgstr "/Felsök/Transformera DocBook till Java-hjälp"
 
 #: src/cong-menus.c:1261
 msgid "/Debug/Transform DocBook to FO"
-msgstr ""
+msgstr "/Felsök/Transformera DocBook till FO"
 
 #: src/cong-menus.c:1263
 msgid "/Debug/Preview XSL:FO"
-msgstr ""
+msgstr "/Felsök/Förhandsgranska XSL:FO"
 
 #: src/cong-menus.c:1265
 msgid "/Debug/DTD"
@@ -1177,15 +1219,15 @@ msgstr "/Felsök/DTD"
 
 #: src/cong-menus.c:1266 src/cong-menus.c:1299
 msgid "/Debug/Dialog"
-msgstr ""
+msgstr "/Felsök/Dialogfönster"
 
 #: src/cong-menus.c:1267 src/cong-menus.c:1300
 msgid "/Debug/Progress Checklist"
-msgstr ""
+msgstr "/Felsök/Förloppskontrollista"
 
 #: src/cong-menus.c:1268
 msgid "/Debug/Document Message Log"
-msgstr ""
+msgstr "/Felsök/Dokumentmeddelandelogg"
 
 #: src/cong-menus.c:1269
 msgid "/Debug/Document Signal Log"
@@ -1197,7 +1239,7 @@ msgstr ""
 
 #: src/cong-menus.c:1271 src/cong-menus.c:1302
 msgid "/Debug/Glade Test"
-msgstr ""
+msgstr "/Felsök/Glade-test"
 
 #: src/cong-menus.c:1272
 msgid "/Debug/Insert XML Fragment"
@@ -1814,6 +1856,28 @@ msgstr "Nödvändiga barnval"
 #: src/xmledit.c:436
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
+
+#~ msgid ""
+#~ "(i) Try checking that you spelt the location correctly.  Remember that "
+#~ "capitalisation is significant (\"MyDirectory\" is not the same as "
+#~ "\"mydirectory\" or \"MYDIRECTORY\").\n"
+#~ "(ii) Try using the Search Tool to find your directory."
+#~ msgstr ""
+#~ "(i) Prova att kontrollera att du stavade platsen korrekt. Kom ihåg att "
+#~ "stora och små bokstäver gör skillnad (\"MinKatalog\" är inte samma som "
+#~ "\"MINKATALOG\" eller \"minkatalog\").\n"
+#~ "(ii) Prova att använda sökverktyget för att hitta din katalog."
+
+#~ msgid "(No description available)"
+#~ msgstr "(Ingen beskrivning tillgänglig)"
+
+#~ msgid "No description available"
+#~ msgstr "Ingen beskrivning tillgänglig"
+
+#~ msgid ""
+#~ "Highlight one of the items in the list and select \"Forward\" to continue."
+#~ msgstr ""
+#~ "Markera ett av objekten i listan och välj \"Framåt\" för att fortsätta."
 
 #~ msgid ""
 #~ "The program unexpectedly received an error report from the GNOME Virtual "
