@@ -16,6 +16,7 @@ dispspec_DATA 	 = \
 	docbook.xds \
 	kernel-traffic-newsletter.xds \
 	readme.xds \
+	relax-ng.xds \
 	website-layout.xds \
 	website-webpage.xds \
 	xsl.xds
