@@ -1,5 +1,5 @@
 Source: conglomerate
-Section: unknown
+Section: editors
 Priority: optional
 Maintainer: Geert Stappers <Geert.Stappers@xs4all.nl>
 Build-Depends: debhelper (>> 4.0.0)
@@ -7,6 +7,10 @@ Standards-Version: 3.5.8
 
 Package: conglomerate
 Architecture: any
-Depends: ${shlibs:Depends} ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: ${shlibs:Depends}
+Description: a free user-friendly XML editor
+ Conglomerate is a free user-friendly XML editor, for DocBook and
+ other document types.
+ It aims to hide the complexity and jargon of XML behind a friendly GUI.
+ .
+ http://www.conglomerate.org
