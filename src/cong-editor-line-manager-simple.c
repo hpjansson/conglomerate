@@ -230,18 +230,18 @@ undo_change (CongEditorLineManager *line_manager,
 	     CongEditorLineIter *iter_before,
 	     CongEditorLineIter *iter_after)
 {
-	/*CongEditorLineManagerSimple *simple = CONG_EDITOR_LINE_MANAGER_SIMPLE (line_manager); */
+	CongEditorLineManagerSimple *simple = CONG_EDITOR_LINE_MANAGER_SIMPLE (line_manager); 
 	/*CongEditorLineIterSimple *iter_before_simple = CONG_EDITOR_LINE_ITER_SIMPLE (iter_before);*/
 	CongEditorLineIterSimple *iter_after_simple = CONG_EDITOR_LINE_ITER_SIMPLE (iter_after);
 
 	switch (event) {
 	default: g_assert_not_reached ();
 	case CONG_EDITOR_CREATION_EVENT_BEGIN_LINE:
-		g_message ("FIXME: unimplemented CongEditorLineManagerSimple::undo_change (BEGIN_LINE)");
+		cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (PRIVATE (simple)->area_lines),
+							 CONG_EDITOR_AREA (iter_after_simple->current_line));
 		break;
 
 	case CONG_EDITOR_CREATION_EVENT_END_LINE:
-		g_message ("FIXME: unimplemented CongEditorLineManagerSimple::undo_change (END_LINE)");
 		break;
 
 	case CONG_EDITOR_CREATION_EVENT_ADD_AREA:
