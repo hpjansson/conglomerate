@@ -552,6 +552,54 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 	return TRUE;
 }
 
+
+static void
+add_comment_menu_items (GtkMenu *tpopup,
+			CongDocument *doc,
+			CongNodePtr node,
+			GtkWindow *parent_window)
+{
+	GtkMenuItem *item;
+
+	switch (cong_node_type (node)) {
+		/* FIXME: should look through the various node types here; I suspect not all are appropriate */
+	default:
+		/* Convert to comment: */
+		{
+			cong_util_add_menu_separator (tpopup);
+			item = cong_menu_add_item (tpopup, 
+						   cong_util_make_menu_item (_("Convert to a comment"), 
+									     NULL, /* FIXME */
+									     NULL), /* FIXME: we ought to have a icon for this */
+						   TRUE);
+			cong_menu_item_attach_callback_Document_Node_ParentWindow (item, 
+										   cong_ui_hook_tree_convert_to_comment,
+										   doc,
+										   node,
+										   parent_window);
+		}
+		break;
+
+	case CONG_NODE_TYPE_COMMENT:
+		/* Convert from comment: */
+		{
+			cong_util_add_menu_separator (tpopup);
+			item = cong_menu_add_item (tpopup, 
+						   cong_util_make_menu_item (_("Uncomment"), 
+									     _("Convert a comment containing XML source code into the corresponding code"),
+									     NULL), /* FIXME: we ought to have a icon for this */
+						   TRUE);
+			cong_menu_item_attach_callback_Document_Node_ParentWindow (item, 
+										   cong_ui_hook_tree_convert_from_comment,
+										   doc,
+										   node,
+										   parent_window);
+			/* FIXME: set sensitivity */
+		}
+		break;
+	}
+}
+
 /**
  * editor_popup_build:
  * @editor_widget:
@@ -1240,6 +1288,12 @@ cong_ui_popup_init(CongDocument *doc,
 			g_list_free (list_of_dispspec_element);
 		}
 	}
+
+	/* Convert to/from comment: */
+	add_comment_menu_items (tpopup,
+				doc,
+				node,
+				parent_window);
 
 	/* Add any plugin tools for this node: */
 	{

@@ -327,3 +327,109 @@ cong_ui_hook_tree_paste_after (CongDocument *doc,
 						  clipboard_source);
 	}
 }
+
+void
+cong_ui_hook_tree_convert_to_comment (CongDocument *doc,
+				      CongNodePtr node,
+				      GtkWindow *parent_window)
+{
+	gchar *source;
+	CongNodePtr comment_node;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	source = cong_node_generate_source(node);
+	g_message ("source");
+
+	cong_document_begin_edit(doc);
+
+	{
+		CongCommand *cmd = cong_document_begin_command (doc, _("Convert to comment"), NULL);
+
+		/* New element: */
+		comment_node = cong_node_new_comment (source,
+						      doc);
+
+
+		cong_command_add_node_add_after (cmd, 
+						 comment_node, 
+						 node);
+
+		/* Remove old node: */
+		cong_command_for_each_location (cmd, 
+						tree_cut_update_location_callback,
+						node);
+		cong_command_add_node_recursive_delete (cmd,
+							node);
+
+		cong_document_end_command (doc, cmd);		
+	}
+
+	cong_document_end_edit(doc);
+	
+	g_free(source);
+}
+
+void
+cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
+					CongNodePtr comment_node,
+					GtkWindow *parent_window)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (comment_node);
+	g_return_if_fail (CONG_NODE_TYPE_COMMENT == cong_node_type (comment_node));
+	g_return_if_fail (comment_node->content);
+
+	CongNodePtr new_nodes; 
+	CongNodePtr iter, iter_next;
+
+	new_nodes = cong_document_make_nodes_from_source_fragment (doc, 
+								   comment_node->content);
+	if (NULL==new_nodes) {
+		/* Couldn't parse the source */
+		return;
+	}
+
+	cong_document_begin_edit (doc);
+
+	{
+		CongCommand *cmd = cong_document_begin_command (doc, _("Uncomment"), NULL);
+		CongNodePtr relative_to_node = comment_node;
+
+
+		/* Add the new nodes: */
+		for (iter = new_nodes->children; iter; iter = iter_next) {
+			iter_next = iter->next;
+			
+			cong_command_add_node_add_after (cmd, 
+							 iter, 
+							 relative_to_node);
+			
+			relative_to_node = iter;
+		}
+		
+		/* Delete the placeholder parent: */
+		cong_command_add_node_recursive_delete (cmd, 
+							new_nodes);
+
+
+		/* Remove the original comment node: */
+		cong_command_for_each_location (cmd, 
+						tree_cut_update_location_callback,
+						comment_node);
+		cong_command_add_node_recursive_delete (cmd,
+							comment_node);
+		
+		/* Merge adjacent text nodes: */
+		cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+								       relative_to_node->parent);
+
+		cong_document_end_command (doc,
+					   cmd);
+	}
+	
+	cong_document_end_edit (doc);
+
+
+}

@@ -132,6 +132,14 @@ void
 cong_ui_hook_tree_paste_after (CongDocument *doc,
 			       CongNodePtr node,
 			       GtkWindow *parent_window);
+void
+cong_ui_hook_tree_convert_to_comment (CongDocument *doc,
+				      CongNodePtr node,
+				      GtkWindow *parent_window);
+void
+cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
+					CongNodePtr node,
+					GtkWindow *parent_window);
 
 /** Legacy UI Hooks without clean marshalling (to be cleanup up eventually): **/
 
