@@ -991,6 +991,7 @@ cong_plugin_register_editor_node_factory(CongPlugin *plugin,
  * @description:
  * @id:
  * @doc_filter:
+ * @options_widget_callback:
  * @action_callback:
  * @user_data:
  *
@@ -1003,6 +1004,7 @@ cong_plugin_register_exporter (CongPlugin *plugin,
 			       const gchar *description,
 			       const gchar *service_id,
 			       CongServiceExporterDocumentFilter doc_filter,
+			       CongServiceExporterOptionsWidgetCallback options_widget_callback,
 			       CongServiceExporterActionCallback action_callback,
 			       gpointer user_data)
 {
@@ -1020,6 +1022,7 @@ cong_plugin_register_exporter (CongPlugin *plugin,
 						    description,
 						    service_id,
 						    doc_filter,
+						    options_widget_callback,
 						    action_callback,
 						    user_data);
 
@@ -1036,6 +1039,7 @@ cong_plugin_register_exporter (CongPlugin *plugin,
  * @description:
  * @id:
  * @filter_factory_callback:
+ * @options_widget_callback:
  * @action_callback:
  * @user_data:
  *
@@ -1048,6 +1052,7 @@ cong_plugin_register_importer (CongPlugin *plugin,
 			       const gchar *description,
 			       const gchar *service_id,	
 			       CongServiceImporterMakeFilterCallback filter_factory_callback,
+			       CongServiceImporterOptionsWidgetCallback options_widget_callback,
 			       CongServiceImporterActionCallback action_callback,
 			       gpointer user_data)
 {
@@ -1065,6 +1070,7 @@ cong_plugin_register_importer (CongPlugin *plugin,
 						    description,
 						    service_id,
 						    filter_factory_callback,
+						    options_widget_callback,
 						    action_callback,
 						    user_data);
 

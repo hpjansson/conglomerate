@@ -42,19 +42,24 @@ CONG_DECLARE_CLASS_END ()
 /* Function pointers that are registered by plugins: */
 typedef GtkFileFilter*
 (*CongServiceImporterMakeFilterCallback) (CongServiceImporter *importer);
+
+typedef GtkWidget* 
+(*CongServiceImporterOptionsWidgetCallback) (CongServiceImporter *importer, 
+					     gpointer user_data);
+
 typedef void 
 (*CongServiceImporterActionCallback) (CongServiceImporter *importer, 
 				      const gchar *uri, 
 				      const gchar *mime_type, 
 				      gpointer user_data, 
 				      GtkWindow *toplevel_window);
-
 CongServiceImporter*
 cong_service_importer_construct (CongServiceImporter *importer,
 				 const gchar *name, 
 				 const gchar *description,
 				 const gchar *id,
 				 CongServiceImporterMakeFilterCallback filter_factory_callback,
+				 CongServiceImporterOptionsWidgetCallback options_widget_callback,
 				 CongServiceImporterActionCallback action_callback,
 				 gpointer user_data);
 
@@ -64,6 +69,7 @@ cong_plugin_register_importer (CongPlugin *plugin,
 			       const gchar *description,
 			       const gchar *id,
 			       CongServiceImporterMakeFilterCallback filter_factory_callback,
+			       CongServiceImporterOptionsWidgetCallback options_widget_callback,
 			       CongServiceImporterActionCallback action_callback,
 			       gpointer user_data);
 
@@ -75,6 +81,9 @@ cong_importer_invoke (CongServiceImporter *importer,
 		      const gchar *filename, 
 		      const gchar *mime_type, 
 		      GtkWindow *toplevel_window);
+
+GtkWidget* 
+cong_importer_make_options_widget (CongServiceImporter *importer);
 
 void 
 cong_plugin_for_each_importer (CongPlugin *plugin, 

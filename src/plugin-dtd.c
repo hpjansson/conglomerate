@@ -216,6 +216,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Import a DTD file, creating a Conglomerate display specification file."),
 				      "dtd-to-xds-import",
 				      dtd_importer_filter_factory_callback,
+				      NULL,
 				      dtd_to_xds_importer_action_callback,
 				      NULL);
 
@@ -224,6 +225,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Import a DTD file, converting it into a RELAX NG Schema."),
 				      "dtd-to-rng-import",
 				      dtd_importer_filter_factory_callback,
+				      NULL,
 				      dtd_to_rng_importer_action_callback,
 				      NULL);
 
@@ -232,6 +234,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Import a DTD file, converting it into a W3C XML Schema."),
 				      "dtd-to-w3c-xml-schema-import",
 				      dtd_importer_filter_factory_callback,
+				      NULL,
 				      dtd_to_w3c_xml_schema_importer_action_callback,
 				      NULL);
 	
@@ -240,6 +243,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Import a DTD file, converting it into a Schematron Schema."),
 				      "dtd-to-schematron-import",
 				      dtd_importer_filter_factory_callback,
+				      NULL,
 				      dtd_to_schematron_importer_action_callback,
 				      NULL);
 	
@@ -248,6 +252,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
 				      _("Import a DTD file, converting it into an Examplotron Schema."),
 				      "dtd-to-examplotron-import",
 				      dtd_importer_filter_factory_callback,
+				      NULL,
 				      dtd_to_examplotron_importer_action_callback,
 				      NULL);
 	

@@ -47,6 +47,8 @@ typedef struct CongExportDialogDetails
 	GtkOptionMenu *select_exporter_option_menu;
 	GtkLabel *description;
 	guint connection_id;
+	GtkWidget *option_holder;
+	GtkWidget *options;
 
 	gboolean got_any_exporters;
 
@@ -159,6 +161,26 @@ static void setup_description(CongExportDialogDetails *dialog_details)
 	g_free(text);
 }
 
+static void setup_options(CongExportDialogDetails *dialog_details)
+{
+	CongServiceExporter *exporter = get_selected_exporter(dialog_details);
+
+	if (dialog_details->options) {
+		gtk_container_remove (GTK_CONTAINER(dialog_details->option_holder),
+				      dialog_details->options);
+	}
+	
+	dialog_details->options = cong_exporter_make_options_widget (exporter, 
+								     dialog_details->doc);
+	
+	if (dialog_details->options) {
+		gtk_container_add (GTK_CONTAINER(dialog_details->option_holder),
+				   dialog_details->options);
+		gtk_widget_show (dialog_details->options);
+	} else {
+	}
+}
+
 static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 					  gpointer user_data)
 {
@@ -174,6 +196,8 @@ static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 	monitor_exporter(details);
 
 	setup_description(details);
+
+	setup_options(details);
 }
 
 static void on_select_filename_button_clicked(GtkButton *button,
@@ -218,7 +242,6 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	gchar *filename, *title;
 	GtkWidget *hbox, *select_filename_button;
 	CongExportDialogDetails *dialog_details;
-	
 
 	g_return_val_if_fail(doc, NULL);
 
@@ -286,12 +309,18 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	cong_dialog_category_add_field(general_category, "", GTK_WIDGET(dialog_details->description), FALSE);
 	cong_dialog_category_add_field(general_category, _("File:"), hbox, TRUE);
 
+	exporter_category = cong_dialog_content_add_category(content, _("Export Options"));
+
+	dialog_details->option_holder = gtk_vbox_new (TRUE, 0);
+	cong_dialog_category_add_selflabelled_field (exporter_category, 
+						     dialog_details->option_holder,
+						     TRUE);
+
 	if (dialog_details->got_any_exporters) {
 		monitor_exporter(dialog_details);
 		setup_description(dialog_details);
+		setup_options(dialog_details);
 	}
-
-	exporter_category = cong_dialog_content_add_category(content, _("Export Options"));
 
 	g_signal_connect(dialog_details->select_exporter_option_menu,
 			 "changed",

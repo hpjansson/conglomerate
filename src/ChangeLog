@@ -1,3 +1,8 @@
+2004-07-30  David Malcolm  <dmalcolm@redhat.com>
+
+	* plugin-sgml.c, plugin-fo.c, plugin-dtd.c, plugin-docbook.c, plugin-convert-case.c, cong-service-importer.h, cong-service-importer.c, cong-service-exporter.h, cong-service-exporter.c, cong-plugin.c, cong-file-export.c:
+	Added callbacks to create option widgets for exporters and importers; added dummy Paper size options for the PDF and XSL:FO exporters
+
 2004-07-27  Jeff Martin  <jeff@custommonkey.org>
 
 	* cong-spell.c, cong-spell.h, cong-util.h:

@@ -126,6 +126,7 @@ plugin_convert_case_plugin_register(CongPlugin *plugin)
 				      _("Exports as an XML file, converting all the tags and attributes in the document to lowercase.  Useful when working with legacy SGML documents."),
 				      "convert-case-export",
 				      convert_case_exporter_document_filter,
+				      NULL,
 				      convert_case_exporter_action_callback,
 				      NULL);
 	return TRUE;

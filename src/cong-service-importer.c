@@ -28,6 +28,7 @@
 struct CongServiceImporterPrivate
 {
 	CongServiceImporterMakeFilterCallback filter_factory_callback;
+	CongServiceImporterOptionsWidgetCallback options_widget_callback;
 	CongServiceImporterActionCallback action_callback;
 	gpointer user_data;
 };
@@ -41,6 +42,7 @@ CONG_DEFINE_CLASS (CongServiceImporter, cong_service_importer, CONG_SERVICE_IMPO
  * @description:
  * @id:
  * @filter_factory_callback:
+ * @options_widget_callback:
  * @action_callback:
  * @user_data:
  *
@@ -53,6 +55,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 				 const gchar *description,
 				 const gchar *id,
 				 CongServiceImporterMakeFilterCallback filter_factory_callback,
+				 CongServiceImporterOptionsWidgetCallback options_widget_callback,
 				 CongServiceImporterActionCallback action_callback,
 				 gpointer user_data)
 {
@@ -69,6 +72,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
 				id);
 		
 	PRIVATE (importer)->filter_factory_callback = filter_factory_callback;
+	PRIVATE (importer)->options_widget_callback = options_widget_callback;
 	PRIVATE (importer)->action_callback = action_callback;
 	PRIVATE (importer)->user_data = user_data;
 

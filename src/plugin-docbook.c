@@ -34,6 +34,11 @@
 #include "cong-fake-plugin-hooks.h"
 #include "cong-glade.h"
 
+#if ENABLE_PRINTING
+#include <libgnomeprint/gnome-print-config.h>
+#include <libgnomeprintui/gnome-print-paper-selector.h>
+#endif
+
 /* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
 static GList*
 split_utf8_into_unichar_lines (const gchar *utf8_input,
@@ -1081,6 +1086,26 @@ In file:
 	return result;
 }
 
+static GtkWidget*
+make_pagination_options_widget (CongServiceExporter *exporter)
+{
+#if ENABLE_PRINTING
+	/* FIXME: none of this is actually hooked up to anything */
+	GnomePrintConfig *gpc = gnome_print_config_default ();
+	return gnome_paper_selector_new (gpc);
+#else
+	return NULL;
+#endif
+}
+
+static GtkWidget* 
+pdf_exporter_options_callback (CongServiceExporter *exporter, 
+			       CongDocument *doc, 
+			       gpointer user_data)
+{
+	return make_pagination_options_widget (exporter);
+}
+
 /**
  * pdf_exporter_action_callback:
  * @exporter:
@@ -1146,6 +1171,15 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Exporting DocBook as PDF");	
 #endif
+}
+
+
+static GtkWidget* 
+fo_exporter_options_callback (CongServiceExporter *exporter, 
+			      CongDocument *doc, 
+			      gpointer user_data)
+{
+	return make_pagination_options_widget (exporter);
 }
 
 /**
@@ -1657,6 +1691,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 				      _("Import a plain text file into the \"DocBook\" format, as an article."),
 				      "docbook-plaintext-import",
 				      text_importer_filter_factory_callback,
+				      NULL,
 				      text_importer_action_callback,
 				      NULL);
 
@@ -1675,6 +1710,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 				      _("Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook file"),
 				      "docbook-HTML-export",
 				      docbook_exporter_document_filter,
+				      NULL,
 				      html_exporter_action_callback,
 				      NULL);
 
@@ -1683,6 +1719,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 				      _("Use Norman Walsh's DocBook stylesheets to create a PDF file from this DocBook file"),
 				      "docbook-PDF-export",
 				      docbook_exporter_document_filter,
+				      pdf_exporter_options_callback,
 				      pdf_exporter_action_callback,
 				      NULL);
 
@@ -1691,6 +1728,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
 				      _("Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this DocBook file that can be printed or converted to PDF at a later date"),
 				      "docbook-XSLFO-export",
 				      docbook_exporter_document_filter,
+				      fo_exporter_options_callback,
 				      fo_exporter_action_callback,
 				      NULL);
 

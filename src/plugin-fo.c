@@ -154,6 +154,7 @@ plugin_fo_plugin_register(CongPlugin *plugin)
 				      _("Generate a PDF file from the XSL:FO information"),
 				      "fo-pdf-export",
 				      fo_pdf_exporter_document_filter,
+				      NULL,
 				      fo_pdf_exporter_action_callback,
 				      NULL);
 

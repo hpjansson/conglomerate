@@ -40,6 +40,11 @@ typedef gboolean
 				      CongDocument *doc, 
 				      gpointer user_data);
 
+typedef GtkWidget* 
+(*CongServiceExporterOptionsWidgetCallback) (CongServiceExporter *exporter, 
+					     CongDocument *doc, 
+					     gpointer user_data);
+
 typedef void 
 (*CongServiceExporterActionCallback) (CongServiceExporter *exporter, 
 				      CongDocument *doc, 
@@ -53,6 +58,7 @@ cong_service_exporter_construct (CongServiceExporter *exporter,
 				 const gchar *description,
 				 const gchar *service_id,
 				 CongServiceExporterDocumentFilter doc_filter,
+				 CongServiceExporterOptionsWidgetCallback options_widget_callback,
 				 CongServiceExporterActionCallback action_callback,
 				 gpointer user_data);
 
@@ -62,6 +68,7 @@ cong_plugin_register_exporter (CongPlugin *plugin,
 			       const gchar *description,
 			       const gchar *id,
 			       CongServiceExporterDocumentFilter doc_filter,
+			       CongServiceExporterOptionsWidgetCallback options_widget_callback,
 			       CongServiceExporterActionCallback action_callback,
 			       gpointer user_data);
 
@@ -79,6 +86,10 @@ cong_exporter_get_preferred_uri (CongServiceExporter *exporter);
 void
 cong_exporter_set_preferred_uri (CongServiceExporter *exporter, 
 				 const gchar *uri);
+
+GtkWidget* 
+cong_exporter_make_options_widget (CongServiceExporter *exporter, 
+				   CongDocument *doc);
 
 void 
 cong_plugin_for_each_exporter (CongPlugin *plugin, 

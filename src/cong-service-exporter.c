@@ -29,6 +29,7 @@
 struct CongServiceExporterPrivate
 {
 	CongServiceExporterDocumentFilter doc_filter;
+	CongServiceExporterOptionsWidgetCallback options_widget_callback;
 	CongServiceExporterActionCallback action_callback;
 	gpointer user_data;
 };
@@ -42,6 +43,7 @@ CONG_DEFINE_CLASS (CongServiceExporter, cong_service_exporter, CONG_SERVICE_EXPO
  * @description:
  * @service_id:
  * @doc_filter:
+ * @options_widget_callback:
  * @action_callback:
  * @user_data:
  *
@@ -54,6 +56,7 @@ cong_service_exporter_construct (CongServiceExporter *exporter,
 				 const gchar *description,
 				 const gchar *service_id,
 				 CongServiceExporterDocumentFilter doc_filter,
+				 CongServiceExporterOptionsWidgetCallback options_widget_callback,
 				 CongServiceExporterActionCallback action_callback,
 				 gpointer user_data)
 {
@@ -69,6 +72,7 @@ cong_service_exporter_construct (CongServiceExporter *exporter,
 				description,
 				service_id);
 	PRIVATE (exporter)->doc_filter = doc_filter;
+	PRIVATE (exporter)->options_widget_callback = options_widget_callback;
 	PRIVATE (exporter)->action_callback = action_callback;
 	PRIVATE (exporter)->user_data = user_data;
 
@@ -172,5 +176,18 @@ cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
 				 NULL);
 	
 	g_free(gconf_key);
+}
+
+GtkWidget* 
+cong_exporter_make_options_widget (CongServiceExporter *exporter, 
+				   CongDocument *doc)
+{
+	if (PRIVATE (exporter)->options_widget_callback) {
+		return PRIVATE (exporter)->options_widget_callback (exporter, 
+								    doc, 
+								    PRIVATE (exporter)->user_data);	
+	} else {
+		return NULL;
+	}
 }
 

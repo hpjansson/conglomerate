@@ -210,6 +210,7 @@ plugin_sgml_plugin_register(CongPlugin *plugin)
 				      _("Import an SGML file, converting to XML."),
 				      "sgml-import",
 				      sgml_importer_filter_factory_callback,
+				      NULL,
 				      sgml_importer_action_callback,
 				      NULL);
 	return TRUE;
