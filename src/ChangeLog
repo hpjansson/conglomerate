@@ -1,3 +1,11 @@
+2003-07-18  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* cong-editor-area-span-tag.c
+
+	Moved the line
+	g_assert (PRIVATE(span_tag)->span_vcompose);
+	down to avoid a C99 issue
+
 2003-07-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-bin.c, cong-editor-area-composer.c, cong-editor-area-container.c, cong-editor-area-container.h, cong-editor-area.c, cong-editor-widget3.c

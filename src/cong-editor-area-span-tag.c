@@ -325,9 +325,9 @@ allocate_child_space (CongEditorArea *area)
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(area);
 
-	g_assert (PRIVATE(span_tag)->span_vcompose);
-
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
+
+	g_assert (PRIVATE(span_tag)->span_vcompose);
 
 	cong_editor_area_set_allocation (PRIVATE(span_tag)->span_vcompose,
 					 rect->x,
