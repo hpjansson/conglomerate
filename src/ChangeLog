@@ -1,4 +1,27 @@
 creating ChangeLog
+2002-08-16  David Malcolm
+
+	* Makefile
+
+	Added cong-location.o to objects, and libxml-2.0 to packages.
+
+	* cong-location.c
+
+	New file.
+
+	* cursor.c, dispspec.c, global.h, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Moved struct curs members t and c to a new cong_location struct (I aim to do this wherever the code uses a node/offset pair); introduced a cong_dispspec struct to replace explicit usage of TTREE as a precursor to changing the representation of dispspecs; added emacs layout to top of files (copied from Nautilus) 
+
+	* main.c
+
+	Added some test code, and corresponding items to the application's menu bar.
+
+	* open.c
+
+	Tracking changes to dispspec representation
+	
+	
 2002-08-13  David Malcolm
 
 	* xmlview.c
