@@ -1,4 +1,22 @@
 creating ChangeLog
+2002-08-23  David Malcolm
+
+	* error-proposal.xml
+
+	New file: another DocBook test, plus notes on how error handling could work
+
+	* test-table.xml:
+
+	New file: for testing table support (open with readme.xds)
+	
+	* test-docbook.xml:
+
+	New file: for testing DocBook XML support (open with docbook.xds)
+	
+	* docbook.xds:
+
+	Added some new tags, plus a control embedding test
+	
 2002-08-22  David Malcolm
 
 	* docbook.xds:
