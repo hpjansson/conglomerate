@@ -1,5 +1,9 @@
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-registry.c
+
+	Fix for bug #121984
+
 	* cong-source-view.c
 
 	Fixed a stupid bug

@@ -198,12 +198,29 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	g_return_val_if_fail(registry,NULL);
 	g_return_val_if_fail(doc,NULL);
 
-	/* FIXME bug #121984: check for a DTD */
-#if 0
-	if (doc->) {
-	}
-#endif
+	/* Check for a DTD match: */
+	if (doc->extSubset) {
+		if (doc->extSubset->ExternalID) {
+			int i;
 
+			for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
+				CongDispspec* ds = cong_dispspec_registry_get(registry, i);
+
+				const CongExternalDocumentModel* dtd = cong_dispspec_get_external_document_model (ds, CONG_DOCUMENT_MODE_TYPE_DTD);
+
+				if (dtd) {
+					if (cong_external_document_model_get_public_id (dtd)) {
+						if (0==strcmp (doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+							return ds;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* Otherwise, check for a matching top-level element:*/
+	/* FIXME: in theory, we could scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from */
 	if (get_toplevel_tag(doc, &toplevel_xmlns, &toplevel_tag)) {
 		int i;
 		
