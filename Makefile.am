@@ -1,4 +1,4 @@
-SUBDIRS = src po data examples pixmaps glade
+SUBDIRS = src po data doc examples pixmaps glade
 
 EXTRA_DIST = BUGS	\
   .diffexclude		\

@@ -1,3 +1,9 @@
+2003-07-03 Jeff Martin <jeff@custommonkey.org>
+
+	* cong-menus.c
+
+	Enabling the 'help' entry. (bugzilla 108540)
+
 2003-07-02 Wastl <wastl@wastl.net>
 
 	* plugin-website.c

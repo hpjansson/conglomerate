@@ -127,6 +127,8 @@ dnl --- Output ---
 AC_OUTPUT(Makefile 
           po/Makefile.in
 	  data/Makefile
+	  doc/Makefile
+	  doc/C/Makefile
 	  glade/Makefile
 	  pixmaps/Makefile
 	  examples/Makefile 

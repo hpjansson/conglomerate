@@ -1,3 +1,9 @@
+2003-07-03 Jeff Martin <jeff@custommonkey.org>
+
+	* Makefile.am & configure.in
+
+	Including the 'doc' directory. (bugzilla 108540)
+
 2003-06-25  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* documentation/README added

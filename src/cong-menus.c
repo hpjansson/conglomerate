@@ -1237,6 +1237,20 @@ static void menu_callback_about(gpointer callback_data,
 
 }
 
+static void menu_callback_help(gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	GError *error = NULL;
+
+	gnome_help_display("conglomerate.xml", NULL, &error);
+
+	if(error!=NULL)
+	{
+		g_warning(error->message);
+		g_error_free(error);
+	}
+}
 
 /* The menus, for a window that contains a document: */
 #define TOOLS_MENU_ACTION_MARKER (1)
@@ -1312,9 +1326,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
-#if ENABLE_UNIMPLEMENTED_MENUS
-	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
-#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
+	{ N_("/Help/_Contents"), "F1", menu_callback_help, 0, "<StockItem>",GTK_STOCK_HELP },
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
@@ -1342,9 +1354,7 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
-#if ENABLE_UNIMPLEMENTED_MENUS
-	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
-#endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
+	{ N_("/Help/_Contents"), "F1", menu_callback_help, 0, "<StockItem>",GTK_STOCK_HELP },
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
