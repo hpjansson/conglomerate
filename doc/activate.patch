@@ -3,6 +3,10 @@
 
      patch -p0 < doc/activate.patch
 
+  To revert it
+
+     patch -Rp0 < doc/activate.patch
+
   Don't worry about these lines, patch can handle them
 
 Index: Makefile.am
