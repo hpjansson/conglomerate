@@ -1,15 +1,15 @@
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/apps/conglomerate/dispspec-paths</key>
-      <applyto>/apps/conglomerate/dispspec-paths</applyto>
+      <key>/schemas/apps/conglomerate/custom-dispspec-paths</key>
+      <applyto>/apps/conglomerate/custom-dispspec-paths</applyto>
       <owner>conglomerate</owner>
       <type>list</type>
       <list_type>string</list_type>
-      <default>[~/.conglomerate/dispspecs,/bugzilla/129776,/usr/share/@PACKAGE@/dispspecs,/usr/local/share/@PACKAGE@/dispspecs,/opt/share/@PACKAGE@/dispspecs]</default>
+      <default>[~/.conglomerate/dispspecs]</default>
       <locale name="en">
-	<short>Locations for display specification files.</short>
-	<long>A list of directories where Conglomerate should look for the display specification (called dispspec, or .xds) files.  When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used.</long>
+	<short>Custom locations for display specification files.</short>
+	<long>A list of custom directories where Conglomerate should look for the display specification (called dispspec, or .xds) files, in addition to the standard installation path.  When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used.</long>
       </locale>
     </schema>
     <schema>
@@ -18,10 +18,10 @@
       <owner>conglomerate</owner>
       <type>list</type>
       <list_type>string</list_type>
-      <default>[~/.conglomerate/templates,/bugzilla/129776,/usr/share/@PACKAGE@/templates,/usr/local/share/@PACKAGE@/templates,/opt/share/@PACKAGE@/templates]</default>
+      <default>[~/.conglomerate/templates]</default>
       <locale name="en">
 	<short>Locations for template files.</short>
-	<long>A list of directories where Conglomerate should look for template xml files.  These documents will be used by the new document druid as types of documens which can be created by the user.</long>
+	<long>A list of directories where Conglomerate should look for template xml files.  These documents will be used by the new document assistant as types of documents which can be created by the user.</long>
       </locale>
     </schema>
 

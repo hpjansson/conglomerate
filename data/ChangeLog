@@ -1,3 +1,9 @@
+2004-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* conglomerate.schemas.in
+
+	Changed GConf path to be custom-dispspec-paths, and removed all of the installation paths from it, as a fix for bug #129776
+
 2004-01-02  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.schemas.in
