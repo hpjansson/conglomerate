@@ -1,3 +1,9 @@
+2003-12-09  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* relax-ng.xds
+
+	Fixed an over-zealous search-and-replace operation
+
 2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* docbook.xds.in, website-webpage.xds, xds.dtd

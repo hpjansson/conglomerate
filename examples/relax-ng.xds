@@ -2,7 +2,7 @@
 <dispspec>
 	<metadata>
 		<name xml:lang="en">RELAX NG</name>
-		<description xml:lang="en">RELAX NG is a schema xml:lang i.e. a xml:lang for describing the strucutre of an XML document.</description>
+		<description xml:lang="en">RELAX NG is a schema language i.e. a language for describing the structure of an XML document.</description>
 	</metadata>
 	<serialisation>
 		<format extension="rng"/>
