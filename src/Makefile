@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -g `pkg-config --cflags gtk+-2.0`
+CFLAGS = -g `pkg-config --cflags gtk+-2.0` -Wall
 
 OBJ = icon_assemble.o icon_connect.o icon_new.o icon_openfile.o icon_submit.o \
       ilogo.o auth_on.o auth_off.o dispspec.o new_doc.o \
