@@ -47,6 +47,7 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
 
+#define ENABLE_MAIN_WIDGET 1
 #define LOG_PRIMARY_WINDOW_CREATION 0
 
 #if LOG_PRIMARY_WINDOW_CREATION
@@ -492,8 +493,6 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 		gchar *status_text;
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
-		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
 
 		/* --- Main window -> hpane --- */
 		w1 = gtk_hpaned_new();
@@ -541,7 +540,11 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 					 );
 		
 		/* Set up the editor_widget v3: */
+#if ENABLE_MAIN_WIDGET
 		{
+			LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
+			primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
+
 			/* --- Scrolling area for editor widget 3--- */
 			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
 			
@@ -553,10 +556,11 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 							       GTK_WIDGET(primary_window->cong_editor_widget3));
 			gtk_widget_show (primary_window->cong_editor_widget3);
 			gtk_widget_show(primary_window->scroller3);
-		}
 
-		gtk_paned_add2 (GTK_PANED(w1), 
-				primary_window->scroller3);
+			gtk_paned_add2 (GTK_PANED(w1), 
+					primary_window->scroller3);
+		}
+#endif
 
 		/* TEMPORARY: Set white background */
 		

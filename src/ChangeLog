@@ -1,5 +1,9 @@
 2004-01-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-primary-window.c
+
+	Added a way to disable creation of a main editing widget to make it easier to test random document creation (set #define ENABLE_MAIN_WIDGET to 0)
+	
 	* cong-node-properties-dialog.c
 
 	Added a tree-based content model view to the DTD tab
