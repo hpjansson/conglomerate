@@ -1,3 +1,9 @@
+2003-10-23  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-font.c
+
+	Removed last traces of GdkFont
+
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-source-view.c, cong-tree-view.c, cong-util.c
