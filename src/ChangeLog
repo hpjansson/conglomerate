@@ -1,5 +1,9 @@
 2003-07-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-lists-area-listitem.c
+
+	Visual improvements
+	
 	* cong-fake-plugin-hooks.h, main.c
 
 	Added the paragraph plugin; fixed a memory leak in the VFS buffer loader

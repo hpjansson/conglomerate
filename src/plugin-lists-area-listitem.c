@@ -100,16 +100,24 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 					       0);
 
 	PRIVATE(area_listitem)->label = CONG_EDITOR_AREA_TEXT(cong_editor_area_text_new (editor_widget,
-											 cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
+											 cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
 											 NULL,
 											 label));
 	
-	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_listitem)->outer_hcompose),
-					       CONG_EDITOR_AREA(PRIVATE(area_listitem)->label));
+	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_listitem)->outer_hcompose),
+					 CONG_EDITOR_AREA(PRIVATE(area_listitem)->label),
+					 FALSE,
+					 FALSE,
+					 10
+					 );
 	
 	PRIVATE(area_listitem)->inner_area = cong_editor_area_bin_new (editor_widget);
-	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_listitem)->outer_hcompose),
-					       PRIVATE(area_listitem)->inner_area);		
+	cong_editor_area_composer_pack ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_listitem)->outer_hcompose),
+					 PRIVATE(area_listitem)->inner_area,
+					 TRUE,
+					 TRUE,
+					 0
+					 );		
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_listitem),
 								   PRIVATE(area_listitem)->outer_hcompose);
