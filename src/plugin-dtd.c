@@ -33,27 +33,24 @@
 
 #include "cong-util.h"
 
-static xmlDtdPtr load_dtd(const gchar *uri, GtkWindow *toplevel_window)
-{
-	xmlDtdPtr dtd;
-	GnomeVFSURI *vfs_uri;
-	gchar *local_path;
 
-	g_return_val_if_fail(uri, NULL);
+/* Internal function declarations: */
+static xmlDtdPtr 
+load_dtd (const gchar *uri, 
+	  GtkWindow *toplevel_window);
 
-	vfs_uri = gnome_vfs_uri_new(uri);
-	local_path = cong_util_get_local_path_from_uri(vfs_uri);
-	gnome_vfs_uri_unref(vfs_uri);
+static xmlDocPtr
+make_rng_from_dtd (xmlDtdPtr dtd);
 
-	dtd = xmlIOParseDTD(NULL, 
-			    xmlParserInputBufferCreateFilename	(local_path,
-								 XML_CHAR_ENCODING_NONE),
-			    XML_CHAR_ENCODING_NONE);
+static void
+element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
+					gpointer user_data);
 
-	return dtd;
-}
+static void
+add_content_subtree_to_rng (CongNodePtr node_parent,
+			    xmlElementContentPtr content);
 
-
+/* Plugin hooks: */
 gboolean dtd_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
@@ -96,11 +93,30 @@ void dtd_to_xds_importer_action_callback(CongImporter *importer, const gchar *ur
 	}
 }
 
+
 void dtd_to_rng_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
+	xmlDtdPtr dtd;
+
 	g_message("dtd_to_rng_importer_action_callback");
 
+#if 1
+	dtd = load_dtd(uri, toplevel_window);
+
+	if (dtd) {
+		xmlDocPtr xml_doc = make_rng_from_dtd(dtd);
+
+		/* Free up the DTD: */
+		xmlFreeDtd(dtd);
+
+		/* Do appropriate UI stuff: */
+		cong_ui_new_document_from_imported_xml(xml_doc,
+						       toplevel_window);
+	}
+#else
 	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Importing DTD as RELAX NG Schema", 118768);
+#endif
+
 }
 
 void dtd_to_w3c_xml_schema_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
@@ -180,4 +196,223 @@ gboolean plugin_dtd_plugin_configure(CongPlugin *plugin)
 	g_return_val_if_fail(plugin, FALSE);
 
 	return TRUE;
+}
+
+/* Internal function definitions: */
+static xmlDtdPtr 
+load_dtd (const gchar *uri, 
+	  GtkWindow *toplevel_window)
+{
+	xmlDtdPtr dtd;
+	GnomeVFSURI *vfs_uri;
+	gchar *local_path;
+
+	g_return_val_if_fail(uri, NULL);
+
+	vfs_uri = gnome_vfs_uri_new(uri);
+	local_path = cong_util_get_local_path_from_uri(vfs_uri);
+	gnome_vfs_uri_unref(vfs_uri);
+
+	dtd = xmlIOParseDTD(NULL, 
+			    xmlParserInputBufferCreateFilename	(local_path,
+								 XML_CHAR_ENCODING_NONE),
+			    XML_CHAR_ENCODING_NONE);
+
+	return dtd;
+}
+
+static xmlDocPtr
+make_rng_from_dtd (xmlDtdPtr dtd)
+{
+	xmlDocPtr xml_doc;
+	CongNodePtr root_node;
+
+	g_return_val_if_fail (dtd, NULL);
+
+
+	/* Build up the document and its content: */
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "grammar",
+				  NULL);
+	
+	xmlDocSetRootElement(xml_doc,
+			     root_node);
+
+	/* FIXME: The start tag? */
+	
+	/* Add <define> tags for all the elements and attributes: */
+	cong_dtd_for_each_element (dtd,
+				   element_callback_generate_rng_from_dtd,
+				   root_node);
+	return xml_doc;	
+
+}
+
+static void
+element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
+					gpointer user_data)
+{
+	CongNodePtr root_node = (CongNodePtr)user_data;
+	CongNodePtr node_define;
+	
+	node_define = xmlNewDocNode(root_node->doc,
+				    NULL,
+				    "define",
+				    NULL);			
+	xmlAddChild (root_node, 
+		     node_define);
+
+	xmlSetProp (node_define,
+		    "name",
+		    dtd_element->name);
+
+	/* Create the <element> tag: */
+	{
+		CongNodePtr node_element = xmlNewDocNode(root_node->doc,
+							 NULL,
+							 "element",
+							 NULL);
+		xmlAddChild (node_define, 
+			     node_element);
+
+		xmlSetProp (node_element,
+			    "name",
+			    dtd_element->name);
+
+		/* set up the content model */
+		if (dtd_element->content) {
+			add_content_subtree_to_rng (node_element,
+						    dtd_element->content);
+		}
+	}	
+}
+
+static void
+add_content_subtree_to_rng (CongNodePtr node_parent,
+			    xmlElementContentPtr content)
+{
+	CongNodePtr node_occurrence = NULL;
+
+	switch (content->ocur) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_ONCE:
+		/* then we don't need to wrap the content with an occurrence tag: */
+		node_occurrence = node_parent;
+		break;
+
+	case XML_ELEMENT_CONTENT_OPT:
+		node_occurrence = xmlNewDocNode(node_parent->doc,
+						NULL,
+						"optional",
+						NULL);
+		xmlAddChild (node_parent, 
+			     node_occurrence);
+		break;
+
+	case XML_ELEMENT_CONTENT_MULT:
+		node_occurrence = xmlNewDocNode(node_parent->doc,
+						NULL,
+						"zeroOrMore",
+						NULL);
+		xmlAddChild (node_parent, 
+			     node_occurrence);
+		break;
+		
+	case XML_ELEMENT_CONTENT_PLUS:
+		node_occurrence = xmlNewDocNode(node_parent->doc,
+						NULL,
+						"oneOrMore",
+						NULL);
+		xmlAddChild (node_parent, 
+			     node_occurrence);
+		break;
+	}
+		
+	g_assert (node_occurrence);
+
+	switch (content->type) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_PCDATA:
+		/* Add an empty <text> tag: */
+		{
+			CongNodePtr node_text = xmlNewDocNode(node_occurrence->doc,
+							      NULL,
+							      "text",
+							      NULL);
+			xmlAddChild (node_occurrence, 
+				     node_text);
+		}
+		break;
+	case XML_ELEMENT_CONTENT_ELEMENT:
+		/* Add a <ref name="foobar"> tag: */
+		{
+			CongNodePtr node_ref = xmlNewDocNode(node_occurrence->doc,
+							     NULL,
+							     "ref",
+							     NULL);
+			xmlAddChild (node_occurrence, 
+				     node_ref);
+
+			xmlSetProp (node_ref,
+				    "name",
+				    content->name);
+		}		
+		break;
+	case XML_ELEMENT_CONTENT_SEQ:
+		/* Add a <group> tag, and recurse; optimise away the cae where the parent is a <group> tag: */
+		{
+			if (cong_node_is_tag (node_occurrence, NULL, "group")) {
+				add_content_subtree_to_rng (node_occurrence,
+							    content->c1);
+				add_content_subtree_to_rng (node_occurrence,
+							    content->c2);
+			} else {
+				CongNodePtr node_group = xmlNewDocNode(node_occurrence->doc,
+								       NULL,
+								       "group",
+								       NULL);
+				xmlAddChild (node_occurrence, 
+					     node_group);
+				
+				add_content_subtree_to_rng (node_group,
+							    content->c1);
+				add_content_subtree_to_rng (node_group,
+							    content->c2);
+			}
+		}
+		break;
+	case XML_ELEMENT_CONTENT_OR:
+		/* The naive implementation is to add a <choice> tag, and recurse.
+		   But if we have something like ( tag-a | tag-b | tag-c | ... | tag-z) in the DTD, we get a tree of ( choice tag-a (choice tag-b (choice tag-c ( ... choice tag-y tag-z))))
+		   which creates a grim-looking RNG tree.
+
+		   So we spot simple <choice> in the tag above, and merge into it if possible; <choice> is associative and hence bracketing should make difference...
+		 */
+		{
+			if (cong_node_is_tag (node_occurrence, NULL, "choice")) {
+				/* Optimised case: */
+				add_content_subtree_to_rng (node_occurrence,
+							    content->c1);
+				add_content_subtree_to_rng (node_occurrence,
+							    content->c2);
+			} else {
+				/* Non-optimised case: */
+				CongNodePtr node_choice = xmlNewDocNode(node_occurrence->doc,
+									NULL,
+									"choice",
+									NULL);
+				xmlAddChild (node_occurrence, 
+					     node_choice);
+				
+				add_content_subtree_to_rng (node_choice,
+							    content->c1);
+				add_content_subtree_to_rng (node_choice,
+							    content->c2);
+			}
+		}
+		break;
+	}
 }
