@@ -1,3 +1,7 @@
+2004-09-07  Stephane Loeuillet  <bugs@leroutier.net>
+
+	* conglomerate.desktop.in: Updated (bugzilla #151845)
+	
 2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am: Fix translation and installation of the GConf

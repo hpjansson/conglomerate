@@ -1,8 +1,11 @@
 [Desktop Entry]
+Encoding=UTF-8
 _Name=Conglomerate XML Editor
 _Comment=Edit XML files
+TryExec=conglomerate
 Exec=conglomerate %U
 Icon=conglomerate-icon-16.png
-Terminal=0
+Terminal=false
 Type=Application
 Categories=Application;Office;TextEditor;
+MimeType=text/xml;text/x-dtd;text/x-xds;
