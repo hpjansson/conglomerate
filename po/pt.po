@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-02 15:44+0000\n"
-"PO-Revision-Date: 2003-09-23 08:00+0000\n"
+"Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
+"POT-Creation-Date: 2003-11-12 00:55+0000\n"
+"PO-Revision-Date: 2003-11-12 01:00+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Idioma"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 src/cong-file-properties.c:86
-#: src/cong-node-properties-dialog.c:788
+#: src/cong-node-properties-dialog.c:789
 msgid "Properties"
 msgstr "Propriedades"
 
@@ -155,14 +155,16 @@ msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
 msgstr ""
+"<small>Algumas aplicações DocBook permitem que o comportamento do link seja "
+"personalizado utilizando este atributo \"type\". </small>"
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
-msgstr ""
+msgstr "Destino"
 
 #: glade/docbook-ulink-properties.glade.h:5 src/cong-file-properties.c:98
 msgid "Type"
@@ -170,66 +172,66 @@ msgstr "Tipo"
 
 #: glade/docbook-ulink-properties.glade.h:6
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: glade/docbook-ulink-properties.glade.h:7
 msgid "_Test this Link"
-msgstr ""
+msgstr "_Testar este Link"
 
 #: glade/string_selection_dialog.glade.h:1
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: glade/string_selection_dialog.glade.h:2
 msgid "label"
-msgstr ""
+msgstr "etiqueta"
 
 #: glade/string_selection_dialog.glade.h:3
 msgid "string_selection_dialog"
-msgstr ""
+msgstr "diálogo_selecção_expressão"
 
-#: src/cong-app.c:269
+#: src/cong-app.c:280
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: src/cong-app.c:364
-#, fuzzy
+#: src/cong-app.c:386
 msgid "Conglomerate could not load any xds files"
-msgstr "Conglomerate incapaz de ler qualquer ficheiro xds do directório \"%s\""
+msgstr "Conglomerate incapaz de ler quaisquer ficheiros xds"
 
-#: src/cong-app.c:366
+#: src/cong-app.c:388
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr ""
 "Conglomerate incapaz de encontrar quaisquer descrições de tipos de documento."
 
-#: src/cong-app.c:368
-#, fuzzy
+#: src/cong-app.c:390
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
 msgstr ""
 "Caso veja este erro, é provável que tenha compilado o Conglomerate, mas não "
-"o tenha instalado.  Tente instala-lo."
+"o tenha instalado.  Tente instala-lo.  Caso tenha alterado a definição por "
+"omissão para o caminho de especificação de apresentação, confirme também essa "
+"definição."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
-#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:372
+#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:373
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
-msgstr ""
+msgstr "Definir atributo \"%s\" como \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:416
-#, fuzzy, c-format
+#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:417
+#, c-format
 msgid "Add attribute \"%s\""
-msgstr "Atributos em Bruto"
+msgstr "Adicionar atributo \"%s\""
 
 #: src/cong-attribute-editor-cdata.c:226
 #: src/cong-attribute-editor-enumeration.c:177
-#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:446
+#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:447
 #, c-format
 msgid "Delete attribute \"%s\""
-msgstr ""
+msgstr "Remover atributo \"%s\""
 
 #: src/cong-attribute-editor-enumeration.c:89
 msgid "(unspecified)"
@@ -292,60 +294,50 @@ msgstr "Conglomerate incapaz de ler o seu registo de tipos de documento."
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate tentou ver todos os ficheiros na localização."
 
-#: src/cong-dispspec.c:554
+#: src/cong-dispspec.c:408
 msgid "unnamed"
 msgstr "sem nome"
 
-#: src/cong-dispspec.c:567
+#: src/cong-dispspec.c:421
 msgid "No description available."
 msgstr "Nenhuma descrição disponível."
 
-#: src/cong-dispspec.c:1430
-msgid "(xpath failed)"
-msgstr "(falha no xpath)"
-
-#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec.c:1475
-msgid "<untitled>"
-msgstr "<sem título>"
-
-#: src/cong-document.c:660
-#, fuzzy, c-format
+#: src/cong-document.c:661
+#, c-format
 msgid "Text \"%s\""
-msgstr "Exportar \"%s\""
+msgstr "Texto \"%s\""
 
-#: src/cong-document.c:670
+#: src/cong-document.c:671
 #, c-format
 msgid "Reference to Entity \"%s\""
-msgstr ""
+msgstr "Referência à Entidade \"%s\""
 
-#: src/cong-document.c:673
-#, fuzzy, c-format
+#: src/cong-document.c:674
+#, c-format
 msgid "Entity \"%s\""
-msgstr "Imprimir \"%s\""
+msgstr "Entidade \"%s\""
 
-#: src/cong-document.c:676
+#: src/cong-document.c:677
 msgid "XML Processing Instruction"
-msgstr ""
+msgstr "Instrução de Processamento XML"
 
-#: src/cong-document.c:681
-#, fuzzy, c-format
+#: src/cong-document.c:682
+#, c-format
 msgid "Comment \"%s\""
-msgstr "Imprimir \"%s\""
+msgstr "Comentário \"%s\""
 
-#: src/cong-document.c:687
-#, fuzzy
+#: src/cong-document.c:688
 msgid "Document"
-msgstr "Tipos Documento"
+msgstr "Documento"
 
-#: src/cong-document.c:698 src/cong-file-properties.c:116
+#: src/cong-document.c:699 src/cong-file-properties.c:116
 msgid "Document Type Declaration"
 msgstr "Declaração Tipo Documento"
 
-#: src/cong-document.c:1398
+#: src/cong-document.c:1399
 #, c-format
 msgid "Select %s"
-msgstr ""
+msgstr "Selecção %s"
 
 #: src/cong-dom-view.c:208
 msgid "UNKNOWN"
@@ -361,45 +353,41 @@ msgstr "Texto: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:750
+#: src/cong-editor-node-text.c:817
 msgid "Select word"
-msgstr ""
+msgstr "Seleccionar palavra"
 
-#: src/cong-editor-node-text.c:775
+#: src/cong-editor-node-text.c:842
 msgid "Move cursor"
-msgstr ""
+msgstr "Mover cursor"
 
-#: src/cong-editor-node-text.c:833
-#, fuzzy
+#: src/cong-editor-node-text.c:900
 msgid "Drag out selection"
-msgstr "Secção Despromoção"
+msgstr "Arrastar selecção"
 
-#: src/cong-editor-widget3.c:396
+#: src/cong-editor-widget3.c:401
 msgid "Expander Size"
-msgstr ""
+msgstr "Tamanho Expansor"
 
-#: src/cong-editor-widget3.c:397
+#: src/cong-editor-widget3.c:402
 msgid "Size of the expander arrow"
-msgstr ""
+msgstr "Tamanho da seta do expansor"
 
-#: src/cong-editor-widget3.c:867
-#, fuzzy
+#: src/cong-editor-widget3.c:872
 msgid "Input Method"
-msgstr "Método Impressão:"
+msgstr "Método Introdução"
 
-#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
-#, fuzzy
+#: src/cong-editor-widget3.c:982 src/cong-editor-widget3.c:1474
 msgid "Typing"
-msgstr "Tipo"
+msgstr "Escrita"
 
-#: src/cong-editor-widget3.c:1370
+#: src/cong-editor-widget3.c:1397
 msgid "Cursor Movement"
-msgstr ""
+msgstr "Movimento Cursor"
 
-#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
-#, fuzzy
+#: src/cong-editor-widget3.c:1437 src/cong-editor-widget3.c:1450
 msgid "Delete Selection"
-msgstr "Secção Despromoção"
+msgstr "Remover Selecção"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -658,7 +646,6 @@ msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "O erro \"%s\" foi relatado durante o acesso a \"%s\""
 
 #: src/cong-error-file-open.c:439
-#, fuzzy
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
@@ -750,7 +737,7 @@ msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
 msgstr ""
-"O ficheiro +e demasiado grande para caber no espaço disponível do "
+"O ficheiro é demasiado grande para caber no espaço disponível do "
 "dispositivo (tamanho do ficheiro seria de %s)."
 
 #. We don't know the size of the file:
@@ -904,7 +891,7 @@ msgstr "Opções Exportação"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
 #: src/cong-file-properties.c:103 src/cong-file-properties.c:107
-#: src/cong-menus.c:421 src/cong-node-properties-dialog.c:507
+#: src/cong-menus.c:421 src/cong-node-properties-dialog.c:508
 msgid "Name"
 msgstr "Nome"
 
@@ -1062,7 +1049,7 @@ msgstr "ID Externo"
 msgid "System ID"
 msgstr "ID Sistema"
 
-#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:247
+#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:248
 msgid "Location"
 msgstr "Localização"
 
@@ -1116,20 +1103,18 @@ msgstr "Nenhum Subconjunto Externo"
 msgid "Basic"
 msgstr "Básico"
 
-#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:742
-#: src/cong-node-properties-dialog.c:826
+#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:743
+#: src/cong-node-properties-dialog.c:827
 msgid "Advanced"
 msgstr "Avançado"
 
 #: src/cong-file-properties.c:219
-#, fuzzy
 msgid "Remove DTD"
-msgstr "_Remover este DTD"
+msgstr "Remover DTD"
 
 #: src/cong-file-properties.c:249
-#, fuzzy
 msgid "Associate with DTD"
-msgstr "_Associar este DTD"
+msgstr "Associar a DTD"
 
 #: src/cong-file-save.c:51
 msgid "Save XML as..."
@@ -1137,12 +1122,11 @@ msgstr "Gravar XML como..."
 
 #: src/cong-location.c:293 src/cong-location.c:314
 msgid "Merge tags"
-msgstr ""
+msgstr "Juntar etiquetas"
 
 #: src/cong-location.c:358
-#, fuzzy
 msgid "Delete character"
-msgstr "Apagar este item"
+msgstr "Apagar caracter"
 
 #: src/cong-location.c:798
 msgid "Calculating document start"
@@ -1411,9 +1395,8 @@ msgid "/Debug/Insert XML Fragment"
 msgstr "/Depurar/Inserir Fragmento XML"
 
 #: src/cong-menus.c:1301
-#, fuzzy
 msgid "/Debug/Command Test"
-msgstr "/Depurar/Teste Glade"
+msgstr "/Depurar/Teste Comando"
 
 #: src/cong-menus.c:1304
 msgid "/_Tools"
@@ -1431,33 +1414,33 @@ msgstr "/Ajuda/_Conteudo"
 msgid "/Help/_About"
 msgstr "/Ajuda/_Sobre"
 
-#: src/cong-node-properties-dialog.c:254
+#: src/cong-node-properties-dialog.c:255
 msgid "XPath"
 msgstr "XPath"
 
-#: src/cong-node-properties-dialog.c:335
+#: src/cong-node-properties-dialog.c:336
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
-msgstr ""
+msgstr "Renomear atributo \"%s\" como \"%s\""
 
-#: src/cong-node-properties-dialog.c:486
+#: src/cong-node-properties-dialog.c:487
 msgid "Raw Attributes"
 msgstr "Atributos em Bruto"
 
-#: src/cong-node-properties-dialog.c:519
+#: src/cong-node-properties-dialog.c:520
 msgid "Value"
 msgstr "Valor"
 
-#: src/cong-node-properties-dialog.c:608
+#: src/cong-node-properties-dialog.c:609
 #, c-format
 msgid "Attributes for <tt>%s</tt> tags"
 msgstr "Atributos para etiquetas <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:734 src/cong-node-properties-dialog.c:821
+#: src/cong-node-properties-dialog.c:735 src/cong-node-properties-dialog.c:822
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:166
+#: src/cong-overview-view.c:164
 msgid "Unknown data"
 msgstr "Dados desconhecidos"
 
@@ -1468,7 +1451,7 @@ msgstr "Erros de parseamento ao ler %s"
 
 #: src/cong-parser-error.c:185
 msgid "_Retry"
-msgstr ""
+msgstr "Tentar _Novamente"
 
 #: src/cong-parser-error.c:264
 msgid "Line Number"
@@ -1502,20 +1485,19 @@ msgid "Open document"
 msgstr "Abrir documento"
 
 #: src/cong-primary-window.c:330 src/cong-primary-window.c:331
-#, fuzzy
 msgid "Save document"
-msgstr "Gravar documento como..."
+msgstr "Gravar documento"
 
 #: src/cong-primary-window.c:338 src/cong-primary-window.c:339
 msgid "Undo"
-msgstr ""
+msgstr "Desfazer"
 
 #: src/cong-primary-window.c:345 src/cong-primary-window.c:346
 msgid "Redo"
-msgstr ""
+msgstr "Refazer"
 
-#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:175
-#: src/xmledit.c:44
+#: src/cong-primary-window.c:364 src/cong-primary-window.c:365 src/tree.c:176
+#: src/xmledit.c:43
 msgid "Cut"
 msgstr "Cortar"
 
@@ -1524,7 +1506,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 #: src/cong-primary-window.c:378 src/cong-primary-window.c:379
-#: src/xmledit.c:161
+#: src/xmledit.c:159
 msgid "Paste"
 msgstr "Colar"
 
@@ -1549,34 +1531,33 @@ msgstr "Bem vindo ao muito adiado editor Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (alterado) - %s"
 
-#: src/cong-util.c:272 src/plugin-docbook.c:1006
+#: src/cong-util.c:273 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "A Imprimir Objectos de Formatação XSL"
 
-#: src/cong-util.c:316
+#: src/cong-util.c:317
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Este será eventualmente o resultado de cong_util_print_xslfo"
 
 #: src/cursor.c:99
 #, c-format
 msgid "Split %s tag"
-msgstr ""
+msgstr "Separar etiqueta %s"
 
 #: src/plugin-admonition.c:61
 msgid "Admonition"
-msgstr ""
+msgstr "Aviso"
 
 #: src/plugin-admonition.c:62
-#, fuzzy
 msgid "An editor node for visualising tips, warnings, etc"
-msgstr "Um nó de editor para visualizar um parágrafo"
+msgstr "Um nó de editor para visualizar dicas, avisos, etc"
 
-#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
+#: src/plugin-cleanup-source.c:395 src/plugin-cleanup-source.c:429
 msgid "Cleanup XML Source"
 msgstr "Limpar Código XML"
 
-#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
-#: src/plugin-cleanup-source.c:435
+#: src/plugin-cleanup-source.c:430 src/plugin-cleanup-source.c:433
+#: src/plugin-cleanup-source.c:434
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1584,7 +1565,7 @@ msgstr ""
 "Limpa o código XML do documento, para que seja fácil de ler num editor de "
 "código."
 
-#: src/plugin-cleanup-source.c:433
+#: src/plugin-cleanup-source.c:432
 msgid "_Clean the XML Source"
 msgstr "_Limpar Código XML"
 
@@ -1738,14 +1719,12 @@ msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr "Disponibiliza um diálogo de Propriedades para a etiqueta <orderedlist>"
 
 #: src/plugin-docbook.c:1393
-#, fuzzy
 msgid "<ulink> property dialog"
-msgstr "Diálogo de propriedades <orderedlist>"
+msgstr "Diálogo de propriedades <ulink>"
 
 #: src/plugin-docbook.c:1394
-#, fuzzy
 msgid "Provides a Properties dialog for the <ulink> tag"
-msgstr "Disponibiliza um diálogo de Propriedades para a etiqueta <orderedlist>"
+msgstr "Disponibiliza um diálogo de Propriedades para a etiqueta <ulink>"
 
 #: src/plugin-docbook.c:1401
 msgid "Promote Section"
@@ -1884,8 +1863,8 @@ msgid ""
 "then be customized by the conglomerate user"
 msgstr ""
 "Escreve a especificação de apresentação num ficheiro xml de apresentação de "
-"especificação. Este ficheiro pode depois ser costumizado pelo utilizador "
-"Conglomerate"
+"especificação. Este ficheiro pode depois ser personalizado pelo utilizador "
+"conglomerate"
 
 #: src/plugin-save-dispspec.c:132
 msgid "_Dump Display Spec"
@@ -2040,102 +2019,104 @@ msgstr "Elemento Modelo XSL"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Um elemento para visualizar regras de modelo numa folha de estilo XSL"
 
-#: src/popup.c:124
+#: src/popup.c:127
 msgid "(no description available)"
 msgstr "(nenhuma descrição disponível)"
 
-#: src/popup.c:177
+#: src/popup.c:180
 #, c-format
 msgid "Apply span tag: %s"
-msgstr ""
+msgstr "Aplicar etiqueta span: %s"
 
-#: src/popup.c:258
-#, fuzzy
+#: src/popup.c:261
 msgid "Remove Span Tag"
-msgstr "Remover etiqueta span"
+msgstr "Remover Etiqueta Span"
 
-#: src/popup.c:359
+#: src/popup.c:369
 msgid "Remove span tag"
 msgstr "Remover etiqueta span"
 
-#: src/popup.c:924
+#: src/popup.c:950
 msgid "Delete this item"
 msgstr "Apagar este item"
 
-#: src/popup.c:934
+#: src/popup.c:960
 msgid "Add text node after"
 msgstr "Adicionar nó de texto após"
 
-#: src/popup.c:942
+#: src/popup.c:968
 msgid "Add text node before"
 msgstr "Adicionar nó de texto antes"
 
-#: src/popup.c:953
+#: src/popup.c:979
 msgid "Set the text"
 msgstr "Definir o texto"
 
-#: src/popup.c:984
+#: src/popup.c:1010
 msgid "Paste into"
 msgstr "Colar para"
 
-#: src/popup.c:992
+#: src/popup.c:1018
 msgid "Paste before"
 msgstr "Colar antes"
 
-#: src/popup.c:1000
+#: src/popup.c:1026
 msgid "Paste after"
 msgstr "Colar depois"
 
-#: src/popup.c:1017
+#: src/popup.c:1043
 msgid "New sub-element"
 msgstr "Novo sub-elemento"
 
-#: src/popup.c:1042
+#: src/popup.c:1068
 msgid "New sibling"
 msgstr "Novo relativo"
 
-#: src/tree.c:41
-#, fuzzy, c-format
+#: src/tree.c:42
+#, c-format
 msgid "Insert sibling: %s"
-msgstr "Novo relativo"
+msgstr "Inserir relativo: %s"
 
-#: src/tree.c:89
+#: src/tree.c:90
 #, c-format
 msgid "Insert child: %s"
-msgstr ""
+msgstr "Inserir filho: %s"
 
-#: src/xmldata.c:424
-#, fuzzy, c-format
+#: src/xmldata.c:425
+#, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
 msgstr ""
-"O elemento \"%s\" requer um filho para ser válido.  Seleccione um dos "
+"O elemento \"%s\" requer um filho para ser válido. Seleccione um dos "
 "seguintes tipos de filhos."
 
 #. select a dialog element
-#: src/xmldata.c:428
+#: src/xmldata.c:429
 msgid "Required Children Choices"
 msgstr "Possibilidades de Filho Requerido"
 
-#: src/xmledit.c:239
-#, fuzzy
+#: src/xmledit.c:237
 msgid "Paste Under"
-msgstr "Colar depois"
+msgstr "Colar Após"
 
-#: src/xmledit.c:282
-#, fuzzy
+#: src/xmledit.c:280
 msgid "Paste Before"
-msgstr "Colar antes"
+msgstr "Colar Antes"
 
-#: src/xmledit.c:324
-#, fuzzy
+#: src/xmledit.c:322
 msgid "Paste After"
-msgstr "Colar depois"
+msgstr "Colar Depois"
 
-#: src/xmledit.c:363
+#: src/xmledit.c:361
 msgid "Source View - Conglomerate"
 msgstr "Vista Código - Conglomerate"
+
+#~ msgid "(xpath failed)"
+#~ msgstr "(falha no xpath)"
+
+#~ msgid "<untitled>"
+#~ msgstr "<sem título>"
 
 #~ msgid "Unrecognised plugin (id=\"%s\")"
 #~ msgstr "Plugin desconhecido (id=\"%s\")"
