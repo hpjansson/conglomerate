@@ -1,3 +1,9 @@
+2004-07-24  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.1
+
+	Regenerated with manpage.make
+
 2004-07-24  Mich?le Garoche  <michele.garoche@easyconnect.fr>
 
 	* conglomerate-refentry.xml
