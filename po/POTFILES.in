@@ -188,4 +188,3 @@ src/xmldata.c
 src/xmledit.c
 src/xmlload.c
 src/xmlview.c
-# end of file
