@@ -39,6 +39,7 @@ find glade -name "*.glade" | sort >> ${FPPI}
 
 # found C-soure files, this is the reason why this script exists
 find src -name "*.c" | sort >> ${FPPI}
+## that line should changed into something that knows about what needs trans.
 
 # mayby other enumerated files
 

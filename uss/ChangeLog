@@ -16,6 +16,10 @@
 
 	Added entry for updateconfigsubguess
 
+	* mkpotfilesin
+
+	Added a reminder for smarter logic.
+
 2004-06-30  Geert Stappers <stappers@stappers.nl>
 
 	* wgetspec
