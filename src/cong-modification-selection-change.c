@@ -85,6 +85,10 @@ cong_modification_selection_change_construct (CongModificationSelectionChange *m
 {
 	CongSelection *selection = cong_document_get_selection (doc);
 
+	g_assert (cong_location_is_valid (new_logical_start));
+	g_assert (cong_location_is_valid (new_logical_end));
+	/* FIXME: does the old value of the selection have to be valid as well? */
+
 	cong_modification_construct (CONG_MODIFICATION(modification_selection_change),
 				     doc);
 

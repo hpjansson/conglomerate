@@ -82,6 +82,9 @@ cong_modification_cursor_change_construct (CongModificationCursorChange *modific
 {
 	CongCursor *cursor = cong_document_get_cursor (doc);
 
+	g_assert (cong_location_is_valid (new_location));
+	/* FIXME: does the old value of the cursor have to be valid as well? */
+
 	cong_modification_construct (CONG_MODIFICATION(modification_cursor_change),
 				     doc);
 

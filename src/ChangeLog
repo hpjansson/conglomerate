@@ -1,5 +1,9 @@
 2003-12-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-modification-cursor-change.c, cong-modification-selection-change.c
+
+	Added various assertions
+
 	* cong-document-traversal.c
 
 	Added signal emissions as traversal nodes are added/removed
