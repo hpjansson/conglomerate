@@ -1,3 +1,9 @@
+2005-01-25  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	Regenerated, with uss/mkpotfilesin version 1.11
+	this for is bugzilla #165045
+
 2004-12-29 Michèle Garoche  <michele.garoche@easyconnect.fr>
  
 	* POTFILES.in: 

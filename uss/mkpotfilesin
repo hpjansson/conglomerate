@@ -26,7 +26,7 @@ cat << HERE > ${FPPI}
 HERE
 
 # display spec files
-find dispspecs -name "*.xds.in" -printf "[type: gettext/xml]%p\n" | sort >> ${FPPI}
+find dispspecs -name "*.xds.in" -printf "[type: gettext/xml encoding: UTF-8]%p\n" | sort >> ${FPPI}
 
 # core of this script is creating 'po/missing'
 # with an empty po/POTFILES.in
