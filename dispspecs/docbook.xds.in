@@ -369,6 +369,11 @@
 		</element>
 
 
+		<element localName="example" type="structural" color="a0b0c0">
+			<_name>Example (formal)</_name>
+			<property-dialog service-id="docbook-generic-node-properties"/>
+		</element>
+
 		<element localName="informalexample" type="structural" color="a0b0c0">
 			<_name>Example (informal)</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
@@ -559,7 +564,7 @@
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element localName="screen" type="structural" color="a0b0c0">
+		<element localName="screen" whitespace="preserve" type="structural" color="a0b0c0">
 			<_name>Screen</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>

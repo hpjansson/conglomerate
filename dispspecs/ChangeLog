@@ -1,3 +1,10 @@
+2004-10-08  Douglas Burke  <dburke@cfa.harvard.edu>
+
+	* docbook.xds.in: 
+
+	Added an entry for the example tag, since it seemed to be missing.
+	Added whitespace="preserve" to the attribute list of the screen tag.
+
 2004-08-01  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cnxml.xds: 
