@@ -250,6 +250,7 @@ GtkWidget *cong_editor_widget3_new(CongDocument *doc);
 CongDocument *cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget);
 CongDispspec *cong_editor_widget3_get_dispspec(CongEditorWidget3 *editor_widget);
 void cong_editor_widget3_force_layout_update(CongEditorWidget3 *editor_widget);
+GdkGC *cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget);
 #define CONG_EDITOR_WIDGET3(x) ((CongEditorWidget3*)(x))
 
 /* PLUGIN INTERFACE: 

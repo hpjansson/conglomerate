@@ -76,6 +76,8 @@ struct CongEditorWidget3Details
 	GHashTable *hash_of_node_to_editor;
 
 	CongEditorArea *test_area;
+
+	GdkGC *test_gc;
 };
 
 /* The widget "owns" a CongView, which in turn, holds a ptr back to its widget. */

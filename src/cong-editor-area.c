@@ -169,6 +169,15 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 				    (GdkRectangle*)cong_editor_area_get_window_coords(area),
 				    &intersected_area)) {
 
+#if 1
+		/* Render test rectangle to show this area directly: */		
+		{
+			
+			cong_editor_area_debug_render_area (area,
+							    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
+		}
+#endif
+
 		/* Render self: */
 		CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
 				      area,
@@ -177,6 +186,8 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 		
 		/* Recurse over all children (internal and non-internal): */
 		cong_editor_area_for_all (area, do_recursive_render, &intersected_area);
+
+
 	}
 }
 

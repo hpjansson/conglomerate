@@ -1,5 +1,9 @@
 2003-07-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-text.c, cong-editor-area.c, cong-editor-widget3-impl.h, cong-editor-widget3.c, global.h
+
+	Debug rendering of area outlines
+
 	* Makefile.am, cong-editor-area-span-tag.c, cong-editor-area-span-tag.h
 
 	New files; added to build.

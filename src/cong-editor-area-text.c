@@ -128,8 +128,10 @@ render_self (CongEditorArea *area,
 	pango_layout_set_width (PRIVATE(area_text)->pango_layout,
 				rect->width * PANGO_SCALE);
 
+#if 0
 	cong_editor_area_debug_render_area (area,
 					    PRIVATE(area_text)->gc);
+#endif
 
 	gdk_draw_layout (window, 
 			 PRIVATE(area_text)->gc,

@@ -130,6 +130,8 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 
 	details->hash_of_node_to_editor = g_hash_table_new (NULL,
 							    NULL);
+
+	details->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
@@ -311,6 +313,19 @@ cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 	return g_hash_table_lookup (details->hash_of_node_to_editor, 
 				    node);
 }
+
+GdkGC*
+cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
+{
+	CongEditorWidget3Details *details;
+
+	g_return_val_if_fail (editor_widget, NULL);
+
+	details = GET_DETAILS(editor_widget);
+	
+	return details->test_gc;
+}
+
 
 /* Internal function implementations: */
 /* Definitions of misc stuff: */
