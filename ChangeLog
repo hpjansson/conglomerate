@@ -1,3 +1,9 @@
+2004-01-04  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am
+
+	Added intltool voodoo for OrigTree.pm
+
 2004-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in
