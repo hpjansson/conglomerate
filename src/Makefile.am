@@ -111,6 +111,7 @@ conglomerate_SOURCES =      \
   cong-util.h               \
   cong-vfs.h                \
   cong-view.h               \
+  cong-xpath-expression.h   \
   fo.h                      \
   gxx-declare-object-from-xml-tree.h \
   gxx-declare-object-to-xml-tree.h \
@@ -220,6 +221,7 @@ conglomerate_SOURCES =      \
   cong-util.c               \
   cong-vfs.c                \
   cong-view.c               \
+  cong-xpath-expression.c   \
   gxx-impl-object-to-xml-tree.c \
   icon_assemble.c           \
   icon_connect.c            \

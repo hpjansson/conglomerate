@@ -1,3 +1,9 @@
+2003-12-12  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-xpath-expression.h, cong-xpath-expression.c, Makefile.am
+
+	New files
+
 2003-12-11  Pav Lucistnik <pav@FreeBSD.org>
 
 	* cong-primary-window.c
