@@ -1,3 +1,9 @@
+Top line of ChangeLog $Revision$, update below this line.
+
+2004-08-21  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* fr.po: Updated French translation - plugins.
+
 2004-08-20  Miloslav Trmac  <mitr@volny.cz>
 
 	* cs.po: Updated Czech translation.
