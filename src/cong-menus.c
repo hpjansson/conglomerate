@@ -61,10 +61,12 @@
 #include <glade/glade.h>
 #include "cong-primary-window.h"
 
+#include "cong-edit-find-and-replace.h"
+
 extern char *ilogo_xpm[];
 
 #define ENABLE_DEBUG_MENU 0
-#define ENABLE_UNIMPLEMENTED_MENUS 0
+#define ENABLE_UNIMPLEMENTED_MENUS 1
 
 GtkWidget* make_uneditable_text(const gchar* text)
 {
@@ -310,8 +312,6 @@ static void menu_callback_file_quit(gpointer callback_data,
 	}
 }
 
-
-
 /* Callbacks for "Edit" menu: */
 static void menu_callback_undo (gpointer callback_data,
 				guint callback_action,
@@ -346,6 +346,35 @@ static void menu_callback_paste(gpointer callback_data,
 				GtkWidget *widget)
 {
 	dispatch_document_command2(cong_document_paste_clipboard_or_selection, callback_data, widget);
+}
+
+static void 
+menu_callback_find (gpointer callback_data,
+		    guint callback_action,
+		    GtkWidget *widget)
+{
+	dispatch_document_command (cong_document_find, callback_data);
+}
+static void 
+menu_callback_find_next (gpointer callback_data,
+			 guint callback_action,
+			 GtkWidget *widget)
+{
+	dispatch_document_command (cong_document_find_next, callback_data);
+}
+static void 
+menu_callback_find_prev (gpointer callback_data,
+			 guint callback_action,
+			 GtkWidget *widget)
+{
+	dispatch_document_command (cong_document_find_prev, callback_data);
+}
+static void 
+menu_callback_replace (gpointer callback_data,
+		       guint callback_action,
+		       GtkWidget *widget)
+{
+	dispatch_document_command (cong_document_replace, callback_data);
 }
 
 static void menu_callback_view_source(gpointer callback_data,
@@ -1268,10 +1297,10 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, ACTION_MARKER_PASTE, "<StockItem>", GTK_STOCK_PASTE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 #if ENABLE_UNIMPLEMENTED_MENUS
-	{ N_("/Edit/_Find..."),         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
-	{ N_("/Edit/Find Ne_xt"),       "<control>G", unimplemented_menu_item, 0, "<Item>" },
-	{ N_("/Edit/Find Pre_vious"),   "<shift><control>G", unimplemented_menu_item, 0, "<Item>" },
-	{ N_("/Edit/R_eplace..."),      "<control>R", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
+	{ N_("/Edit/_Find..."),         "<control>F", menu_callback_find, 0, "<StockItem>", GTK_STOCK_FIND },
+	{ N_("/Edit/Find Ne_xt"),       "<control>G", menu_callback_find_next, 0, "<Item>" },
+	{ N_("/Edit/Find Pre_vious"),   "<shift><control>G", menu_callback_find_prev, 0, "<Item>" },
+	{ N_("/Edit/R_eplace..."),      "<control>R", menu_callback_replace, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },

@@ -1,5 +1,9 @@
 2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-menus.c
+
+	Hook up find/replace functionality into menus
+
 	* cong-edit-find-and-replace.c, cong-edit-find-and-replace.h, Makefile.am
 
 	New files
