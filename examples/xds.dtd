@@ -1,0 +1,37 @@
+<!ELEMENT collapseto (#PCDATA)>
+
+<!ELEMENT description ( #PCDATA ) >
+
+<!--
+@root dispspec
+-->
+<!ELEMENT dispspec ( metadata, element-list, document-template?, gui? ) >
+
+<!ELEMENT element ( name?, short-desc?, header-info?, collapseto?, property-dialog? )>
+<!ATTLIST element color CDATA #IMPLIED >
+<!ATTLIST element filename-attribute NMTOKEN #IMPLIED >
+<!ATTLIST element icon CDATA #IMPLIED >
+<!ATTLIST element tag ID #IMPLIED >
+<!ATTLIST element type ( plugin | paragraph | embed-external-file | span | structural ) #REQUIRED >
+<!ATTLIST element plugin-id NMTOKEN #IMPLIED >
+
+<!ELEMENT element-list ( element+ ) >
+
+<!ELEMENT gui EMPTY >
+
+<!ELEMENT header-info EMPTY >
+<!ATTLIST header-info tag IDREF  #IMPLIED >
+<!ATTLIST header-info xpath CDATA #IMPLIED >
+
+<!ELEMENT metadata ( name, description ) >
+
+<!ELEMENT name ( #PCDATA ) >
+<!ATTLIST name locale ( en ) #IMPLIED >
+
+<!ELEMENT short-desc ( #PCDATA )* >
+<!ATTLIST short-desc locale NMTOKEN #IMPLIED >
+
+<!ELEMENT property-dialog EMPTY >
+<!ATTLIST property-dialog plugin-id NMTOKEN #REQUIRED>
+
+<!ELEMENT document-template ANY >
