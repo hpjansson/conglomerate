@@ -248,7 +248,7 @@ AC_SUBST(BASE_CFLAGS)
 #  see also
 #  http://bugzilla.gnome.org/show_bug.cgi?id=131600
 ##################################################
-GTK_DOC_CHECK
+##GTK_DOC_CHECK
 
 AC_ARG_WITH(html-dir, [  --with-html-dir=PATH path to installed docs ])
 
