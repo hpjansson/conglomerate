@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-06 11:35-0500\n"
-"PO-Revision-Date: 2004-11-06 15:29-0400\n"
+"POT-Creation-Date: 2004-11-18 17:49-0500\n"
+"PO-Revision-Date: 2004-11-18 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -736,7 +736,7 @@ msgstr "Table Body"
 msgid "Table Column Specification"
 msgstr "Table Column Specification"
 
-#: dispspecs/docbook.xds.in.h:153
+#: dispspecs/docbook.xds.in.h:153 src/plugin-table.c:417
 msgid "Table Entry"
 msgstr "Table Entry"
 
@@ -748,7 +748,7 @@ msgstr "Table Entry (subtable)"
 msgid "Table Footer"
 msgstr "Table Footer"
 
-#: dispspecs/docbook.xds.in.h:156
+#: dispspecs/docbook.xds.in.h:156 src/plugin-table.c:405
 msgid "Table Group"
 msgstr "Table Group"
 
@@ -757,6 +757,7 @@ msgid "Table Header"
 msgstr "Table Header"
 
 #: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
+#: src/plugin-table.c:411
 msgid "Table Row"
 msgstr "Table Row"
 
@@ -3401,6 +3402,15 @@ msgstr "An editor node for visualising a member of a list"
 #: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "An editor node for visualising a paragraph"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Print XML source"
 
 #: src/plugin-random.c:148
 msgid "What kind of random XML document would you like to create?"
