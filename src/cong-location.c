@@ -804,7 +804,7 @@ gboolean cong_location_calc_document_start(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating document start"));
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating document start"), 109698);
 
 	return FALSE;
 }
@@ -816,7 +816,7 @@ gboolean cong_location_calc_line_start(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating line start"));
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating line start"), 109698);
 
 	return FALSE;
 }
@@ -829,7 +829,7 @@ gboolean cong_location_calc_document_end(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating document end"));
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating document end"), 109698);
 
 	return FALSE;
 }
@@ -842,7 +842,7 @@ gboolean cong_location_calc_line_end(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Calculating line end"));
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating line end"), 109698);
 
 	return FALSE;
 }

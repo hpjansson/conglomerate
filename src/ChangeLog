@@ -1,5 +1,9 @@
 2003-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-location.c
+
+	Added references to bug #109698 where appropriate
+	
 	* plugin-website.c
 
 	Disabled this plugin; it's too broken to be worth fixing (see Bugzilla #113001 for some of the problems)
