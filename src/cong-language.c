@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-language.h"
 #include "cong-app.h"
+#include "cong-util.h"
 
 CongPerLanguageData*
 cong_per_language_data_new (GDestroyNotify value_destroy_func)
@@ -33,8 +34,8 @@ cong_per_language_data_new (GDestroyNotify value_destroy_func)
 
 	result = g_new0 (CongPerLanguageData, 1);
 
-	result->hash_table = g_hash_table_new_full (g_str_hash,
-						    g_str_equal,
+	result->hash_table = g_hash_table_new_full (cong_str_or_null_hash,
+						    cong_str_or_null_equal,
 						    g_free,
 						    value_destroy_func);
 	return result;
@@ -70,7 +71,7 @@ cong_per_language_get_data (CongPerLanguageData *per_language)
 	}	
 
 	result = g_hash_table_lookup (per_language->hash_table,
-				      "");
+				      NULL);
 	if (result) {
 		return result;
 	}
@@ -95,7 +96,6 @@ cong_per_language_set_data_for_lang (CongPerLanguageData *per_language,
 				     gpointer data)
 {
 	g_return_if_fail (per_language);
-	g_return_if_fail (language); /* must be non-NULL or the hash table code crashes */
 
 	return g_hash_table_insert (per_language->hash_table,
 				    g_strdup (language),
@@ -146,7 +146,7 @@ cong_per_language_data_new_from_xml (xmlDocPtr xml_doc,
 				xmlFree (lang);
 			} else {
 				cong_per_language_set_data_for_lang (per_lang,
-								     g_strdup (""),
+								     NULL,
 								     data);
 			}
 		}

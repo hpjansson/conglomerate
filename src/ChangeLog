@@ -1,5 +1,10 @@
 2004-10-26  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-language.c: 
+
+	Allow language to be NULL; uses this rather than empty string in
+	case where xml:lang attribute is missing
+
 	* cong-util.h, cong-util.c, cong-dispspec-element.c: 
 
 	Moved hash functions for strings with NULL support to cong-util
