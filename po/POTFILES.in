@@ -1,6 +1,7 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
 data/conglomerate.desktop.in
+data/conglomerate.schemas.in
 glade/cong-file-import.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade

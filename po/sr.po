@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-22 02:31+0200\n"
-"PO-Revision-Date: 2003-10-22 02:51+0200\n"
+"POT-Creation-Date: 2003-10-27 14:31+0100\n"
+"PO-Revision-Date: 2003-10-27 14:32+0100\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -194,27 +194,24 @@ msgstr "ознака"
 msgid "string_selection_dialog"
 msgstr "прозорче_за_избор_ниски"
 
-#: src/cong-app.c:267
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "XML уређивач"
 
-#: src/cong-app.c:333
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
-msgstr ""
-"Конгломерат не може да учита никакве XDS датотеке из директоријума „%s“"
+#: src/cong-app.c:364
+msgid "Conglomerate could not load any xds files"
+msgstr "Конгломерат не може да учита никакве XDS датотеке"
 
-#: src/cong-app.c:335
+#: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Конгломерат не може да пронађе описе типова докумената."
 
-#: src/cong-app.c:337
+#: src/cong-app.c:368
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
-msgstr ""
-"Уколико видите ову грешку, највероватније сте изградили Конгломерат, али га "
-"нисте инсталирали. Покушајте да га инсталирате."
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr "Уколико видите ову грешку, највероватније сте изградили Конгломерат, али га нисте инсталирали. Покушајте да га инсталирате. Уколико сте изменили подразумевано подешавање путање за дефиницију приказа, проверите и то."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
@@ -298,12 +295,12 @@ msgstr "Измене учињене у претходних %li минута ћ�
 msgid "Changes from the past minute will be discarded."
 msgstr "Измене учињене у претходном минуту ће бити занемарене."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr ""
 "Конгломерат не може да учита свој регистар пријављених врсти докумената."
 
-#: src/cong-dispspec-registry.c:93
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Конгломерат је покушао да прегледа све датотеке у путањи."
 
@@ -377,15 +374,15 @@ msgstr "Текст: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:752
+#: src/cong-editor-node-text.c:750
 msgid "Select word"
 msgstr "Изаберите реч"
 
-#: src/cong-editor-node-text.c:777
+#: src/cong-editor-node-text.c:775
 msgid "Move cursor"
 msgstr "Померите курзор"
 
-#: src/cong-editor-node-text.c:829
+#: src/cong-editor-node-text.c:833
 msgid "Drag out selection"
 msgstr "Извуци изабрано"
 
@@ -397,15 +394,15 @@ msgstr "Величина разграника"
 msgid "Size of the expander arrow"
 msgstr "Величина стрелице разграника"
 
-#: src/cong-editor-widget3.c:1169
+#: src/cong-editor-widget3.c:1183
 msgid "Cursor Movement"
 msgstr "Кретање курзора"
 
-#: src/cong-editor-widget3.c:1209 src/cong-editor-widget3.c:1222
+#: src/cong-editor-widget3.c:1223 src/cong-editor-widget3.c:1236
 msgid "Delete Selection"
 msgstr "Обриши изабрано"
 
-#: src/cong-editor-widget3.c:1245
+#: src/cong-editor-widget3.c:1259
 msgid "Typing"
 msgstr "Куцање"
 
@@ -1142,27 +1139,27 @@ msgstr "Споји ознаке"
 msgid "Delete character"
 msgstr "Обриши знак"
 
-#: src/cong-location.c:773
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Срачунава почетак документа"
 
-#: src/cong-location.c:785
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Срачунава почетак реда"
 
-#: src/cong-location.c:798
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Срачунава крај документа"
 
-#: src/cong-location.c:811
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Срачунава крај реда"
 
-#: src/cong-location.c:824
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Срачунава претходну страницу"
 
-#: src/cong-location.c:837
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Срачунава наредну страницу"
 
@@ -1515,7 +1512,7 @@ msgid "Redo"
 msgstr "Понови"
 
 #: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
-#: src/xmledit.c:47
+#: src/xmledit.c:44
 msgid "Cut"
 msgstr "Исеци"
 
@@ -1524,7 +1521,7 @@ msgid "Copy"
 msgstr "Умножи"
 
 #: src/cong-primary-window.c:348 src/cong-primary-window.c:349
-#: src/xmledit.c:155
+#: src/xmledit.c:161
 msgid "Paste"
 msgstr "Убаци"
 
@@ -1549,11 +1546,11 @@ msgstr "Добродошли у много закаснели уређивач �
 msgid "%s (modified) - %s"
 msgstr "%s (измењен) — %s"
 
-#: src/cong-util.c:273 src/plugin-docbook.c:1006
+#: src/cong-util.c:272 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Штампање XSL објеката обликовања (FO)"
 
-#: src/cong-util.c:317
+#: src/cong-util.c:316
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ово ће једном постати резултат из cong_util_print_xslfo"
 
@@ -2098,19 +2095,19 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Обавезни избори за садржане елементе"
 
-#: src/xmledit.c:233
+#: src/xmledit.c:239
 msgid "Paste Under"
 msgstr "Убаци испод"
 
-#: src/xmledit.c:276
+#: src/xmledit.c:282
 msgid "Paste Before"
 msgstr "Убаци испред"
 
-#: src/xmledit.c:318
+#: src/xmledit.c:324
 msgid "Paste After"
 msgstr "Убаци иза"
 
-#: src/xmledit.c:357
+#: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Преглед кôда — Конгломерат"
 

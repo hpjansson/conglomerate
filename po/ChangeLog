@@ -1,3 +1,9 @@
+2003-10-27  Danilo Šegan  <dsegan@gmx.net>
+
+	* sr.po, sr@Latn.po: Updated Serbian translation.
+
+	* POTFILES.in: Added data/conglomerate.schemas.in.
+
 2003-10-25  Metin Amiroff  <metin@karegen.com>
 
 	* az.po: Added Azerbaijani translation.
