@@ -1,3 +1,8 @@
+2003-12-04  Geert Stappers  <stappers@stappers.nl>
+
+	* omf.make
+	- cleanup in the comment lines.
+
 2003-11-25  Geert Stappers  <stappers@stappers.nl>
 
 	* Transition of deb/ into debian/

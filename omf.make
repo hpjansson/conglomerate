@@ -1,5 +1,6 @@
 # 
-# No modifications of this Makefile should be necessary.
+# No modifications of this Makefile should be necessary,
+# and when you do, document it in the ChangeLog file.
 #
 # This file contains the build instructions for installing OMF files.  It is
 # generally called from the makefiles for particular formats of documentation.
@@ -18,12 +19,7 @@
 #       general, there will be other documents install besides XML documents
 #       and the makefiles for these formats should also include this file.
 #
-# About this file:
-#       This file was taken from scrollkeeper_example2, a package illustrating
-#       how to install documentation and OMF files for use with ScrollKeeper
-#       0.3.x and 0.4.x.  For more information, see:
-#	       http://scrollkeeper.sourceforge.net/    
-#       Version: 0.1.2 (last updated: March 20, 2002)
+# For more information, see: http://scrollkeeper.sourceforge.net/    
 #
 
 omf_dest_dir=$(datadir)/omf/@PACKAGE@
@@ -38,6 +34,7 @@ omf_timestamp: $(omffile)
 	touch omf_timestamp
 
 install-data-hook-omf:
+	##-touch tochnog
 	$(mkinstalldirs) $(DESTDIR)$(omf_dest_dir)
 	for file in $(omffile); do \
 		$(INSTALL_DATA) $$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
