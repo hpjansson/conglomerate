@@ -6,6 +6,7 @@ glade_DATA 	 = docbook-common-properties.glade \
                    cong-file-import.glade \
                    cong-file-properties.glade \
                    cong-find-replace.glade \
+                   cong-preferences.glade \
                    plugin-random.glade
 
 EXTRA_DIST = $(glade_DATA)
