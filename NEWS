@@ -1,6 +1,71 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+03-11-04
+Conglomerate 0.7.16 ("Sweet Sixteen") Released
+==============================================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced!
+
+Conglomerate requires GTK+ version 2.4.0 or later
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+Updated Translations:
+      * French (fr) (Michele Garoche)
+
+Enhancements:
+      * "Widgetplayground" reimplemention of wigdet code (Nickolay V. Shmyrev)
+
+Fixes
+      * Build gtkdoc again after fo code removal (Michele Garoche)
+      * Build gtkdoc when enchant is enabled (Frederic Brin)
+
+--David Malcolm
+
+Conglomerate requires GTK+ version 2.4.0 or later
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+Updated Translations: 
+      * Canadian English (en_CA) (Adam Weinberger)
+      * Czech (cs) (Miloslav Trmac)
+      * French (fr) (Michele Garoche)
+
+Fixes
+      * Corrected misspelling. (Michele Garoche)
+      * Removed references to old code from API documentation. (Michèle
+        Garoche)
+      * Fixed build for the case where both Enchant and gtk-doc are
+        enabled. (Frederic Brin)
+      * Fixes for better integration with GNOME's mime-handling system.
+        (Karl Eichwalder)
+
+Thanks
+      * Adam Weinberger
+      * Miloslav Trmac
+      * Michele Garoche
+      * Frederic Brin
+      * Karl Eichwalder
+
+--David Malcolm
+
+
 27-10-04
 Conglomerate 0.7.15 ("Teenage Kicks") Released
 ==============================================
