@@ -686,7 +686,9 @@ void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *fa
 	g_return_if_fail(factory);
 	g_return_if_fail(assistant);
 
+#if 0
 	g_message("page creation for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+#endif
 
 	g_assert(factory->page_creation_callback);
 
@@ -698,7 +700,9 @@ void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, 
 	g_return_if_fail(factory);
 	g_return_if_fail(assistant);
 
+#if 0
 	g_message("invoking action for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+#endif
 
 	g_assert(factory->action_callback);
 
@@ -1081,10 +1085,14 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widg
 
 	/* Handle the "plugin not found" case: */
 	{
+#if 1
+		return cong_section_head_editor_new(editor_widget, node);
+#else
 		message = g_strdup_printf(_("Unrecognised plugin (id=\"%s\")"), cong_dispspec_element_get_editor_plugin_id(element));
 		element_editor = cong_dummy_element_editor_new(editor_widget, node, message);
 
 		g_free(message);
+#endif
 	}
 #else	
 	message = g_strdup_printf("Plugin (id=\"%s\")", cong_dispspec_element_get_plugin_id(element));

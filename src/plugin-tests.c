@@ -42,7 +42,9 @@ void factory_page_creation_callback_unicode(CongDocumentFactory *factory, CongNe
 {
 	GnomeDruidPageStandard *page;
 
+#if 0
 	g_message("factory_page_creation_callback_unicode");
+#endif
 
 	page = cong_new_file_assistant_new_page(assistant, 
 						factory, 

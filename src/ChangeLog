@@ -1,5 +1,9 @@
 2003-08-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-file-new.c, cong-plugin.c, plugin-tests.c
+
+	Disabled lots of stray debug messages
+	
 	* cong-editor-area-text-fragment.c, cong-editor-area-text-fragment.h, cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-node-text.c
 
 	Click and drag support for the new inline blocks

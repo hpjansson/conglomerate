@@ -31,6 +31,9 @@
 #include "cong-plugin.h"
 #include "cong-app.h"
 
+#define DEBUG_FILE_NEW_ASSISTANT 0 
+
+
 enum
 {
 	NEWDOCTYPELIST_NAME_COLUMN,
@@ -250,7 +253,9 @@ void second_page_prepare(GnomeDruidPage *druidpage,
 {
 	CongNewFileAssistant *assistant = user_data;
 
+#if DEBUG_FILE_NEW_ASSISTANT
 	g_message("second_page_prepare");
+#endif
 
 	gnome_druid_set_buttons_sensitive(GNOME_DRUID(assistant->druid),
 					  TRUE, /* gboolean back_sensitive, */
@@ -269,7 +274,9 @@ gboolean second_page_next(GnomeDruidPage *druidpage,
 	GtkTreeModel *tree_model;
 	GtkTreeIter iter;
 
+#if DEBUG_FILE_NEW_ASSISTANT
 	g_message("second_page_next");
+#endif
 
 	/* Get selected factory */
 	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(assistant->list_view));
@@ -294,9 +301,10 @@ gboolean second_page_next(GnomeDruidPage *druidpage,
 			cong_new_file_assistant_set_page(assistant, GNOME_DRUID_PAGE(appropriate_third_page));
 		} else {
 			/* what to do in this case? */
+#if DEBUG_FILE_NEW_ASSISTANT
 			g_message("haven't got a third page registered for factory \"%s\"", 
 				  cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
-
+#endif
 			/* go to final page: */
 			assistant->previous_page = druidpage;
 			gnome_druid_set_page(GNOME_DRUID(assistant->druid), GNOME_DRUID_PAGE(assistant->final_page));
@@ -338,7 +346,9 @@ gboolean final_page_finish(GnomeDruidPage *druidpage,
 	GtkTreeModel *tree_model;
 	GtkTreeIter iter;
 
+#if DEBUG_FILE_NEW_ASSISTANT
 	g_message("final_page_finish");
+#endif
 
 	/* Get selected factory */
 	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(assistant->list_view));
