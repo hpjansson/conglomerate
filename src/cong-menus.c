@@ -1220,7 +1220,12 @@ static void menu_callback_help(gpointer callback_data,
 }
 
 /* The menus, for a window that contains a document: */
-#define TOOLS_MENU_ACTION_MARKER (1)
+enum ActionMarkers {
+	ACTION_MARKER_UNDO = 1,
+	ACTION_MARKER_REDO,
+	ACTION_MARKER_TOOLS_MENU
+};
+
 
 static GtkItemFactoryEntry menu_items_with_doc[] =
 {
@@ -1250,8 +1255,8 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 	{ N_("/_Edit"),                 NULL, 0, 0, "<Branch>" },
-	{ N_("/Edit/_Undo"),              "<control>Z", menu_callback_undo, 0, "<StockItem>", GTK_STOCK_UNDO },
-	{ N_("/Edit/_Redo"),              "<shift><control>Z", menu_callback_redo, 0, "<StockItem>", GTK_STOCK_REDO },
+	{ N_("/Edit/_Undo"),              "<control>Z", menu_callback_undo, ACTION_MARKER_UNDO, "<StockItem>", GTK_STOCK_UNDO },
+	{ N_("/Edit/_Redo"),              "<shift><control>Z", menu_callback_redo, ACTION_MARKER_REDO, "<StockItem>", GTK_STOCK_REDO },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
 	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
@@ -1291,7 +1296,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Command Test"),           NULL, menu_callback_debug_command_test, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
-	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },
+	{ N_("/_Tools"),        NULL, NULL, ACTION_MARKER_TOOLS_MENU, "<Branch>" },
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 	{ N_("/Help/_Contents"), "F1", menu_callback_help, 0, "<StockItem>",GTK_STOCK_HELP },
@@ -1374,6 +1379,28 @@ static void add_tool_callback(CongDocTool *tool, gpointer user_data)
 	}
 }
 
+static void 
+on_history_changed_undo_menu (CongCommandHistory *history,
+			      gpointer user_data)
+{
+	GtkWidget *undo_menu_item = GTK_WIDGET (user_data);
+
+	gtk_widget_set_sensitive (undo_menu_item,
+				  cong_command_history_can_undo (history));
+
+	/* FIXME: is there a way to set the menu item text to reflect the new content? */
+}
+static void 
+on_history_changed_redo_menu (CongCommandHistory *history,
+			      gpointer user_data)
+{
+	GtkWidget *redo_menu_item = GTK_WIDGET (user_data);
+
+	gtk_widget_set_sensitive (redo_menu_item,
+				  cong_command_history_can_redo (history));
+
+	/* FIXME: is there a way to set the menu item text to reflect the new content? */
+}
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window)
@@ -1391,7 +1418,7 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 		{
 			struct add_tool_callback_data callback_data;
 			GtkWidget *tools_menu =  gtk_item_factory_get_widget_by_action(item_factory,
-										       TOOLS_MENU_ACTION_MARKER);
+										       ACTION_MARKER_TOOLS_MENU);
 			g_assert(tools_menu);
 
 			callback_data.primary_window = primary_window;
@@ -1402,6 +1429,29 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 			cong_plugin_manager_for_each_doc_tool(cong_app_singleton()->plugin_manager, add_tool_callback, &callback_data);
 		}
 
+		/* Connect undo/redo sensitivity to the command history: */
+		{
+			CongDocument *doc = cong_primary_window_get_document (primary_window);
+			CongCommandHistory *history = cong_document_get_command_history (doc);
+
+			GtkWidget *undo =  gtk_item_factory_get_widget_by_action(item_factory,
+										 ACTION_MARKER_UNDO);
+			GtkWidget *redo =  gtk_item_factory_get_widget_by_action(item_factory,
+										 ACTION_MARKER_REDO);
+
+			g_signal_connect (G_OBJECT(history),
+					  "changed",
+					  G_CALLBACK(on_history_changed_undo_menu),
+					  undo);
+			g_signal_connect (G_OBJECT(history),
+					  "changed",
+					  G_CALLBACK(on_history_changed_redo_menu),
+					  redo);
+
+			gtk_widget_set_sensitive (undo, FALSE);
+			gtk_widget_set_sensitive (redo, FALSE);
+		}
+
 	} else {
 		gtk_item_factory_create_items(item_factory,
 					      sizeof(menu_items_without_doc) / sizeof(menu_items_without_doc[0]),
@@ -1409,3 +1459,4 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
 	}
 }
+

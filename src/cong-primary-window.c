@@ -253,6 +253,26 @@ gint toolbar_callback_paste(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+
+static void 
+on_history_changed_undo (CongCommandHistory *history,
+			 gpointer user_data)
+{
+	GtkWidget *undo = GTK_WIDGET (user_data);
+	
+	gtk_widget_set_sensitive (undo,
+				  cong_command_history_can_undo (history));
+}
+static void 
+on_history_changed_redo (CongCommandHistory *history,
+			 gpointer user_data)
+{
+	GtkWidget *redo = GTK_WIDGET (user_data);
+	
+	gtk_widget_set_sensitive (redo,
+				  cong_command_history_can_redo (history));	
+}
+
 void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 {
 	gtk_toolbar_insert_stock(primary_window->toolbar, 
@@ -264,6 +284,11 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 				 -1);
 
 	if (primary_window->doc) {
+		CongDocument *doc = cong_primary_window_get_document (primary_window);
+		CongCommandHistory *history = cong_document_get_command_history (doc);
+		GtkWidget *undo;
+		GtkWidget *redo;
+
 		gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_SAVE_AS,
 					 _("Save document as..."),
@@ -272,20 +297,31 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 					 primary_window,
 					 -1);
 		gtk_toolbar_append_space(primary_window->toolbar);
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_UNDO,
-					 _("Undo"),
-					 _("Undo"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_undo),
-					 primary_window,
-					 -1);
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_REDO,
-					 _("Redo"),
-					 _("Redo"), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_redo),
-					 primary_window,
-					 -1);
+		undo = gtk_toolbar_insert_stock(primary_window->toolbar, 
+						GTK_STOCK_UNDO,
+						_("Undo"),
+						_("Undo"), 
+						GTK_SIGNAL_FUNC(toolbar_callback_undo),
+						primary_window,
+						-1);
+		redo = gtk_toolbar_insert_stock(primary_window->toolbar, 
+						GTK_STOCK_REDO,
+						_("Redo"),
+						_("Redo"), 
+						GTK_SIGNAL_FUNC(toolbar_callback_redo),
+						primary_window,
+						-1);
+		g_signal_connect (G_OBJECT(history),
+				  "changed",
+				  G_CALLBACK(on_history_changed_undo),
+				  undo);
+		g_signal_connect (G_OBJECT(history),
+				  "changed",
+				  G_CALLBACK(on_history_changed_redo),
+				  redo);		
+		gtk_widget_set_sensitive (undo, FALSE);
+		gtk_widget_set_sensitive (redo, FALSE);
+
 		gtk_toolbar_append_space(primary_window->toolbar);
 		gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_CUT,

@@ -1,5 +1,9 @@
 2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-menus.c, cong-primary-window.c
+
+	Undo/redo menu items and toolbar buttons now are sensitive/insensitive correctly
+	
 	* cong-command-history.c
 
 	Added a changed signal
