@@ -3,13 +3,13 @@
 <dispspec>
   <metadata>
     <_name>Apache Documentation DTD v1.2</_name>
-    <_description>This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://xml.apache.org/forrest .</_description>
+    <_description>This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://forrest.apache.org .</_description>
   </metadata>
   <document-models>
     <external-document-model
      type="dtd"
      public-id="-//APACHE//DTD Documentation V1.2//EN"
-     system-id="http://apache.org/forrest/dtd/document-v12.dtd"/>
+     system-id="http://forrest.apache.org/dtd/document-v12.dtd"/>
   </document-models>
   <element-list>
     <element localName="abstract" type="structural" icon="cong-summary">

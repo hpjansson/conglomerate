@@ -1,3 +1,13 @@
+2005-04-02  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* teixlite.xds.in: 
+
+	Adding a missing A line 525.
+	
+	* forrest-document.xds.in:
+	
+	Corrected path for web site and dtd.
+
 2004-12-29  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* Makefile.am: 

@@ -522,7 +522,7 @@
 		</element>
 		<element type="structural" localName="sp" whitespace="normalize">
 			<_name>Speech (&lt;sp&gt;)</_name>
-			<_short-desc>n individual speech in a performance text, or a passage presented as such in a prose or verse text</_short-desc>
+			<_short-desc>An individual speech in a performance text, or a passage presented as such in a prose or verse text</_short-desc>
 		</element>
 		<element type="structural" localName="text" whitespace="normalize">
 			<_name>Text</_name>
