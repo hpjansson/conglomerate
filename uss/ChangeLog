@@ -3,6 +3,7 @@
 	* mkcvstarball
 
 	Exclude doc/reference here.
+	(fails currently when automake1.7 is used)
 
 2004-07-02  Geert Stappers <stappers@stappers.nl>
 
