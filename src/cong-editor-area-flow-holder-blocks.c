@@ -210,6 +210,39 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	default: g_assert_not_reached();
 	case CONG_FLOW_TYPE_BLOCK:
 		{
+			CongEditorNode *editor_node_prev, *editor_node_next;
+			GList *list_of_removed_nodes = NULL;
+
+			/* FIXME: what about the case where a new block node is inserted between existing inline nodes; we need to split the existing inline flow into two separate ones... */
+
+			editor_node_prev = cong_editor_node_get_prev (editor_node);
+			editor_node_next = cong_editor_node_get_next (editor_node);
+			
+			if (editor_node_prev && editor_node_next) {
+				if (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(editor_node_prev) && 
+				    CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(editor_node_next)) {
+					g_message("splitting existing inline");
+
+					/* Remove all following INLINE editor nodes from their inline, building a list.  We will add them back later. */
+					CongEditorNode *iter = editor_node_next;
+
+					while (iter) {
+						if (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(iter)) {
+							g_object_ref (G_OBJECT (iter));
+							
+							remove_areas_for_node (area_flow_holder,
+									       iter);
+
+							list_of_removed_nodes = g_list_append (list_of_removed_nodes,
+											       iter);
+							iter = cong_editor_node_get_next (iter);
+						} else {
+							break;
+						}
+					}
+				}	
+			}
+
 			/* Create a "single" flow-holder to hold the areas of the editor_node: */
 			child_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_single_new (cong_editor_node_get_widget (editor_node)));
 
@@ -217,8 +250,28 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 								child_flow_holder, 
 								editor_node);
 
-			/* FIXME: what about the case where a new block node is inserted between existing inline nodes; we need to split the existing inline flow into two separate ones... */
+			/* Add back any inlines you may have removed: */
+			{
+				GList *iter;
+				
+				for (iter = list_of_removed_nodes; iter; iter=iter->next) {
 
+					CongEditorNode *removed_node = CONG_EDITOR_NODE (iter->data);
+					CongEditorChildPolicy* child_policy_for_removed_node;
+					
+					g_assert (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(removed_node));
+
+					child_policy_for_removed_node = insert_areas_for_node (area_flow_holder,
+											       removed_node);
+
+					g_object_unref (G_OBJECT (removed_node));
+
+					cong_editor_node_set_child_policy (removed_node,
+									   child_policy_for_removed_node);					
+				}
+
+				g_list_free (list_of_removed_nodes);
+			}
 		}
 		break;
 

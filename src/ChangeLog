@@ -1,5 +1,9 @@
 2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-blocks.c
+
+	Split existing inline in half when a block node is added inside it.
+
 	* cong-editor-area-flow-holder-inlines.c
 
 	Optimised line regeneration by amortising all ops into one when an end_edit occurs, if a regenreation is requested within a doc edit.
