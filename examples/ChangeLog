@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-08-29  David Malcolm
+
+	* dispspec.xds
+
+	display spec for xds files
+	
 2003-09-02  Jeff Martin
 
 	* xds.dtd

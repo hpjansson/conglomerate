@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!DOCTYPE dispspec SYSTEM "xds.dtd">
+<dispspec>
+  <metadata>
+    <name>Conglomerate Display Specification</name>
+    <description>Information that tells Conglomerate how to display a particular type of file.</description>
+  </metadata>
+  <element-list>
+    <element tag="collapseto" type="structural">
+      <name>Collapseto</name>
+    </element>
+    <element tag="description" type="structural">
+      <name>Description</name>
+      <short-desc>Short Description of the document type</short-desc>
+    </element>
+    <element tag="dispspec" type="structural">
+      <name>Conglomerate Display Specification</name>
+    </element>
+    <element tag="element" type="structural">
+      <name>XML Element</name>
+      <header-info xpath="concat(&quot;&lt;&quot;, @tag, &quot;&gt;&quot;)"></header-info>
+    </element>
+    <element tag="element-list" type="structural">
+      <name>List of XML Elements</name>
+    </element>
+    <element tag="gui" type="structural">
+      <name>GUI</name>
+    </element>
+    <element tag="header-info" type="structural">
+      <name>Header Information</name>
+    </element>
+    <element tag="metadata" type="structural">
+      <name>Metadata</name>
+    </element>
+    <element tag="name" type="structural">
+      <name>Name</name>
+      <short-desc>Name of an XML element</short-desc>
+    </element>
+    <element tag="short-desc" type="structural">
+      <name>Short Description</name>
+      <short-desc>Short Description of an XML element</short-desc>
+    </element>
+  </element-list>
+
+  <document-template>
+    <dispspec>
+      <metadata>
+        <name>New Conglomerate Display Specification</name>
+	<desc></desc>
+      </metadata>
+      <element-list>
+      </element-list>
+    </dispspec>
+  </document-template>
+</dispspec>
