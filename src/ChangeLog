@@ -1,5 +1,9 @@
 2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder.c, cong-editor-area-flow-holder.h, Makefile.am 
+
+	New files: editor areas to handle the layout of the children of an XML node
+	
 	* cong-editor-area-unknown-tag.c
 
 	Fixed a typo
