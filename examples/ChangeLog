@@ -2,6 +2,14 @@
 
 	* Makefile.am
 
+	Added files that previously didn't go into the dist tarball:
+	error-proposal.xml, file-roller.xml, i18n.xml,
+	test-entities.xml and test-table.xml.
+ 
+2003-09-02  Geert Stappers
+
+	* Makefile.am
+
 	Ugly hack to get DTD for xds files into the dist tarball.
 	(dtd's should be installed in some way )
 
