@@ -1,25 +1,27 @@
-#  Id: conglomerate.spec 2423 2004-11-05 11:50:06Z dude  
+#  Id: conglomerate.spec 2975 2005-03-09 05:31:45Z dag  
 # Authority: dag
 # Upstream: Conglomerate Developers <conglomerate-devel$lists,copyleft,no>
 
 Summary: Information authoring, management, and transformation system
 Name: conglomerate
 Version: @VERSION@
-Release: 1
+Release: 1.rf
 License: GPL
 Group: Applications/Text
 URL: http://www.conglomerate.org/
 
+Packager: Dag Wieers <dag@wieers.com>
+Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
+
 Source: http://dl.sf.net/conglomerate/conglomerate-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires: gettext, libxml2-devel >= 2.0, gcc-c++
+BuildRequires: gettext, libxml2-devel >= 2.0, gcc-c++, gtk2-devel >= 2.4
 BuildRequires: libgnomeui-devel >= 2.0, libglade2-devel >= 2.0
 BuildRequires: libgnomeprintui22-devel, gtksourceview-devel, gtk-doc
 BuildRequires: scrollkeeper
 
-Requires(post): scrollkeeper
-Requires(postun): scrollkeeper
+Requires: scrollkeeper
 
 %description
 Conglomerate is a project to create a complete structured information
@@ -74,6 +76,9 @@ scrollkeeper-update -q || :
 %exclude %{_localstatedir}/scrollkeeper/ 
 
 %changelog
+* Sun Mar 20 2005 Dag Wieers <dag@wieers.com> - 0.9.0-1 - 2975+/dag
+- Updated to release 0.9.0.
+
 * Sun Nov 14 2004 Dag Wieers <dag@wieers.com> - 0.7.16-1
 - Updated to release 0.7.16.
 
