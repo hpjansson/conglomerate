@@ -30,6 +30,7 @@
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
 #include "cong-document.h"
+#include "cong-dispspec.h"
 
 #include "cong-editor-area-pixbuf.h"
 #include "cong-editor-area-labelled.h"
@@ -55,7 +56,7 @@ static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
 
 static const gchar*
-get_icon_filename (CongEditorNode *editor_node);
+get_icon_filename (CongEditorNodeElementAdmonition *editor_node_element_admonition);
 
 static GdkPixbuf*
 load_icon (const gchar *icon_filename);
@@ -149,7 +150,7 @@ generate_block_area (CongEditorNode *editor_node)
 	g_return_val_if_fail (editor_node, NULL);
 
 	/* FIXME cache the pixbufs; only load once */
-	pixbuf = load_icon (get_icon_filename (editor_node));
+	pixbuf = load_icon (get_icon_filename (editor_node_element_admonition));
 
 	area_label = cong_editor_area_pixbuf_new (cong_editor_node_get_widget (editor_node),
 						  pixbuf);
@@ -166,24 +167,13 @@ generate_block_area (CongEditorNode *editor_node)
 }
 
 static const gchar*
-get_icon_filename (CongEditorNode *editor_node)
+get_icon_filename (CongEditorNodeElementAdmonition *editor_node_element_admonition)
 {
-	CongNodePtr node = cong_editor_node_get_node (editor_node);
+	CongDispspecElement *element;
 
-	if (cong_node_is_tag (node, NULL, "caution")) {
-		return "cong-caution-48.png";
-	} else if (cong_node_is_tag (node, NULL, "important")) {
-		return "cong-important-48.png";
-	} else if (cong_node_is_tag (node, NULL, "note")) {
-		return "cong-note-48.png";
-	} else if (cong_node_is_tag (node, NULL, "tip")) {
-		return "cong-tip-48.png";
-	} else if (cong_node_is_tag (node, NULL, "warning")) {
-		return "cong-warning-48.png";
-	} else {
-		return NULL;
-	}
+	element = cong_editor_node_element_get_dispspec_element (CONG_EDITOR_NODE_ELEMENT (editor_node_element_admonition));
 
+	return cong_dispspec_element_get_value_for_key ("icon", element);
 }
 
 static GdkPixbuf*
@@ -200,7 +190,7 @@ load_icon (const gchar *icon_filename)
 					       FALSE,
 					       NULL);
 
-	g_message ("Tryting to load \"%s\"", full_path);
+	g_message ("Trying to load \"%s\"", full_path);
 
 	pixbuf = gdk_pixbuf_new_from_file(full_path, NULL);
 	

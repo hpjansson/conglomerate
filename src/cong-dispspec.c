@@ -65,6 +65,8 @@ struct CongDispspecElement
 	gchar *editor_plugin_id;
 	gchar *property_dialog_plugin_id;
 
+	GHashTable *key_value_hash;
+
 	struct CongDispspecElement* next;	
 };
 
@@ -1197,6 +1199,11 @@ cong_dispspec_element_new (const gchar* xmlns,
 		cong_dispspec_element_init_col(element, col);
 	}
 
+	element->key_value_hash = g_hash_table_new_full (g_str_hash,
+							 g_str_equal,
+							 g_free,
+							 g_free);
+
 	return element;
 }
 
@@ -1289,6 +1296,17 @@ cong_dispspec_element_get_icon(CongDispspecElement *element)
 		g_object_ref(G_OBJECT(element->icon16));
 	}
 	return element->icon16;
+}
+
+const gchar*
+cong_dispspec_element_get_value_for_key (const gchar *key, 
+					 const CongDispspecElement *element)
+{
+	g_return_val_if_fail (element, NULL);
+	g_return_val_if_fail (key, NULL);
+
+	return g_hash_table_lookup (element->key_value_hash,
+				    key);
 }
 
 CongDispspecElement*
@@ -1525,6 +1543,11 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 
 	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 
+	element->key_value_hash = g_hash_table_new_full (g_str_hash,
+							 g_str_equal,
+							 g_free,
+							 g_free);
+
 	/* Extract tag namespace: */
 	{
 		xmlChar* xmlns = xmlGetProp(xml_element, "ns");
@@ -1636,12 +1659,29 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 				
 				element->property_dialog_plugin_id = cong_node_get_attribute(child, "plugin-id");
   			}
-			
-		}
 
-		/* Supply defaults where children not found: */
-		if (NULL==element->username) {
-			element->username = g_strdup(element->tagname);
+			/* Handle "key-value-list": */
+			if ( cong_node_is_tag (child, NULL, "key-value-list")) {
+				xmlNodePtr key_value_iter;
+				
+  				DS_DEBUG_MSG1("got key-value-list\n");
+				
+				for (key_value_iter = child->children; key_value_iter; key_value_iter=key_value_iter->next) {
+					if (cong_node_is_tag (key_value_iter, NULL, "key-value-pair")) {
+						DS_DEBUG_MSG1("got key-value-pair\n");
+						
+						g_hash_table_insert (element->key_value_hash,
+								     cong_node_get_attribute (key_value_iter, "key"),
+								     cong_node_get_attribute (key_value_iter, "value"));
+					}
+				}
+		            	
+			}
+			
+			/* Supply defaults where children not found: */
+			if (NULL==element->username) {
+				element->username = g_strdup(element->tagname);
+			}
 		}
 	}
 

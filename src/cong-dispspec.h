@@ -203,6 +203,21 @@ cong_dispspec_element_get_description(CongDispspecElement *element);
 GdkPixbuf*
 cong_dispspec_element_get_icon(CongDispspecElement *element);
 
+/**
+ * cong_dispspec_element_get_value_for_key:
+ *
+ * @key: the key
+ * @element:  the dispspec element
+ * 
+ * Dispspec elements support a list of key/value string pairs; this is intended as a mechanism
+ * to allow plugins to have arbitrary data whilst having a DTD for xds files.
+ * 
+ * Returns:  the value, if found, or NULL if not present.
+ */
+const gchar*
+cong_dispspec_element_get_value_for_key (const gchar *key, 
+					 const CongDispspecElement *element);
+
 const char*
 cong_dispspec_element_name_name_get(CongDispspecElement* element);
 

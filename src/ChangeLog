@@ -1,3 +1,9 @@
+2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c, cong-dispspec.h, plugin-admonition-node-element.c
+
+	Dispspec elements now support arbitrary key-value pairs; DocBook admonition plugin now uses this to determine icon filenames
+
 2003-11-05  Paul Smith  <conglomerate@pcs.uklinux.net>
 
 	* cong-vfs.c
