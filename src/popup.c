@@ -306,7 +306,6 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 	CongDispspec *dispspec;
 	CongDispspecElement *dispspec_element;
 	CongCursor *cursor;
-	GList *span_tags_list;
 	CongDocument *doc;
 	CongSelection *selection;
 	CongRange *range;
@@ -351,71 +350,78 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	span_tags_list = xml_all_present_span_elements(dispspec, cursor->location.node);
-
-	if (span_tags_list != NULL)
 	{
-		item = gtk_menu_item_new();
-		w0 = gtk_hseparator_new();
-		gtk_container_add(GTK_CONTAINER(item), w0);
-		gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
-		gtk_widget_set_sensitive(item, 0);
-		gtk_widget_show(w0);
-		gtk_widget_show(item);
+		GList *span_tags_list;
 		
-		item = add_item_to_popup(GTK_MENU(cong_app_singleton()->popup), 
-					 make_menu_item(_("Remove span tag"), 
-							NULL, /* FIXME: we ought to have a tip for this */
-							NULL), /* FIXME: we ought to have a icon for this */
-					 doc, 
-					 NULL,
-					 NULL,
-					 parent_window);		
-
-		sub_popup = span_tag_removal_popup_init(dispspec, 
-							cursor, 
-							editor_popup_callback_remove_span_tag, 
-							doc, 
-							span_tags_list,
-							parent_window);
-		gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
-
+		span_tags_list = xml_all_present_span_elements(dispspec, cursor->location.node);
+		
+		if (span_tags_list != NULL) {
+			item = gtk_menu_item_new();
+			w0 = gtk_hseparator_new();
+			gtk_container_add(GTK_CONTAINER(item), w0);
+			gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
+			gtk_widget_set_sensitive(item, 0);
+			gtk_widget_show(w0);
+			gtk_widget_show(item);
+			
+			item = add_item_to_popup(GTK_MENU(cong_app_singleton()->popup), 
+						 make_menu_item(_("Remove span tag"), 
+								NULL, /* FIXME: we ought to have a tip for this */
+								NULL), /* FIXME: we ought to have a icon for this */
+						 doc, 
+						 NULL,
+						 NULL,
+						 parent_window);		
+			
+			sub_popup = span_tag_removal_popup_init(dispspec, 
+								cursor, 
+								editor_popup_callback_remove_span_tag, 
+								doc, 
+								span_tags_list,
+								parent_window);
+			gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+			
+		}
+		
+		g_list_free(span_tags_list);
 	}
-	
-	g_list_free(span_tags_list);
 	
 	
 	add_menu_separator(GTK_MENU(cong_app_singleton()->popup));
 
-	/* Build list of dynamic tag insertion tools */
-	/*  build the list of valid inline tags here */
-	span_tags_list = cong_document_get_valid_new_child_elements (doc,
-								     cursor->location.node->parent,
-								     CONG_ELEMENT_TYPE_SPAN);
-	span_tags_list = sort_menu(span_tags_list);
+	if (cursor->location.node) {
+		GList *span_tags_list;
 
-	if (span_tags_list) {
-		GList *iter;
-
-		for (iter=span_tags_list; iter; iter=iter->next) {
-			CongDispspecElement *dispspec_element = (CongDispspecElement *)iter->data;
-
-			item = GTK_WIDGET(make_menu_item_for_dispspec_element(dispspec_element));
-			/* FIXME: perhaps we should composite an "add" icon to the element's icon? */
-
-			gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
-
-			gtk_signal_connect(GTK_OBJECT(item), "activate",
-					   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), dispspec_element);
+		/* Build list of dynamic tag insertion tools */
+		/*  build the list of valid inline tags here */
+		span_tags_list = cong_document_get_valid_new_child_elements (doc,
+									     cursor->location.node->parent,
+									     CONG_ELEMENT_TYPE_SPAN);
+		span_tags_list = sort_menu(span_tags_list);
+		
+		if (span_tags_list) {
+			GList *iter;
 			
-			g_object_set_data(G_OBJECT(item),
-					  "doc",
-					  doc);
-			gtk_widget_show(item);
+			for (iter=span_tags_list; iter; iter=iter->next) {
+				CongDispspecElement *dispspec_element = (CongDispspecElement *)iter->data;
+				
+				item = GTK_WIDGET(make_menu_item_for_dispspec_element(dispspec_element));
+				/* FIXME: perhaps we should composite an "add" icon to the element's icon? */
+				
+				gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
+				
+				gtk_signal_connect(GTK_OBJECT(item), "activate",
+						   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), dispspec_element);
+				
+				g_object_set_data(G_OBJECT(item),
+						  "doc",
+						  doc);
+				gtk_widget_show(item);
+			}
 		}
+		
+		g_list_free(span_tags_list);
 	}
-
-	g_list_free(span_tags_list);
 
 	cong_editor_widget3_add_popup_items (editor_widget,
 					     GTK_MENU(cong_app_singleton()->popup));
@@ -492,6 +498,17 @@ add_stock_item_to_popup (GtkMenu *menu,
 {
 	GtkWidget *item = gtk_image_menu_item_new_from_stock(stock_id,
 							     NULL); 
+
+	if (stock_id == GTK_STOCK_CUT)
+	{
+		gtk_widget_set_sensitive(item, cong_node_can_be_cut(node));
+	}
+
+	if (stock_id == GTK_STOCK_COPY)
+	{
+		gtk_widget_set_sensitive(item, cong_node_can_be_copied(node));
+	}
+
 	gtk_menu_append(menu, item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(func), node);

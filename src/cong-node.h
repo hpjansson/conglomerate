@@ -245,4 +245,7 @@ cong_node_supports_byte_offsets (CongNodePtr node);
 gboolean
 cong_node_can_be_cut (CongNodePtr node);
 
+gboolean
+cong_node_can_be_copied (CongNodePtr node);
+
 #endif

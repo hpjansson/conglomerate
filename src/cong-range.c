@@ -175,32 +175,6 @@ cong_range_is_ordered (CongRange *range)
 }
 
 gboolean
-cong_node_can_be_cut (CongNodePtr node)
-{
-	g_return_val_if_fail (node, FALSE);
-
-	g_assert (node->doc);
-
-#if 0
-	/* Forbid cutting the root element of the document: */
-	if (node->doc->==node) {
-		return FAlSE;
-	}
-#endif
-
-	/* Forbid all but the easy cases for now: we want stability rather than features: */
-	switch (cong_node_type (node)) {
-	default: 
-		return FALSE;
-
-	case CONG_NODE_TYPE_TEXT:
-	case CONG_NODE_TYPE_ELEMENT:
-	case CONG_NODE_TYPE_COMMENT:
-		return TRUE;
-	}
-}
-
-gboolean
 cong_range_can_be_cut (CongRange *range)
 {
 	g_return_val_if_fail (range, FALSE);

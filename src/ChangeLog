@@ -1,5 +1,9 @@
 2003-11-04  Paul Smith  <conglomerate@pcs.uklinux.net>
 
+	* cong-node.c, cong-node.h, cong-range.c, popup.c
+
+	Move cong_node_can_be_cut/copied into correct source file; set up sensitivity of Cut and Copy in context menu when right button is clicked on a structural tag
+
 	* popup.c
  
  	Set Cut and Copy to be insensitive on the RMB context menu when unavailable

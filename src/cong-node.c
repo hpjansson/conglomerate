@@ -1050,4 +1050,38 @@ cong_node_supports_byte_offsets (CongNodePtr node)
 	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
 }
 
+gboolean
+cong_node_can_be_cut (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+
+	g_assert (node->doc);
+
+#if 0
+	/* Forbid cutting the root element of the document: */
+	if (node->doc->==node) {
+		return FAlSE;
+	}
+#endif
+
+	/* Forbid all but the easy cases for now: we want stability rather than features: */
+	switch (cong_node_type (node)) {
+	default: 
+		return FALSE;
+
+	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_ELEMENT:
+	case CONG_NODE_TYPE_COMMENT:
+		return TRUE;
+	}
+}
+
+gboolean
+cong_node_can_be_copied (CongNodePtr node)
+{
+	/* FIXME: should be different conditions (fix after 0.8.0) */
+	return cong_node_can_be_cut(node);
+}
+
 /* Internal function definitions: */
+
