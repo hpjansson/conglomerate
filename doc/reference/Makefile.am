@@ -62,6 +62,8 @@ DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 # Everything below here is generic and you shouldn't need to change it.
 ###########################################################################
 
+#### this where I gonna cut when I back from runners training.
+
 TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
 
 EXTRA_DIST = 				\
