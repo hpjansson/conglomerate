@@ -1239,8 +1239,8 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/_Open..."),      NULL, menu_callback_file_open, 0, "<StockItem>", GTK_STOCK_OPEN },
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/File/_Save"),           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
-	{ N_("/File/Save _As..."),     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
-	{ N_("/File/Sa_ve a Copy..."), "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+	{ N_("/File/Save _As..."),     "<shift><control>S", menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
+	{ N_("/File/Sa_ve a Copy..."), NULL, menu_callback_file_save_copy, 0, "<Item>" },
 #if ENABLE_PRINTING
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/File/Print Previe_w..."),   "<shift><control>P", menu_callback_file_print_preview, 0, "<StockItem>", GTK_STOCK_PRINT_PREVIEW },
