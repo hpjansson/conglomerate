@@ -61,6 +61,7 @@ conge_SOURCES =             \
   fo-tests.c                \
   plugin-docbook.c          \
   plugin-lists.c            \
+  plugin-tests.c            \
   plugin-xsl.c              \
   main.c
 

@@ -1,4 +1,22 @@
 creating ChangeLog
+2003-03-26 David Malcolm
+
+	* Makefile.am
+
+	Added plugin-tests.c
+
+	* plugin-tests.c
+
+	New file
+
+	* cong-plugin.h, main.c
+
+	Added "tests" plugin
+
+	* xmldata.c, global.h
+
+	Added xmlNewProp_NUMBER function
+	
 2003-03-25 David Malcolm
 
 	* Makefile.am
