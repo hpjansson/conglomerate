@@ -1,3 +1,9 @@
+2003-02-19  Geert Stappers  <stappers@stappers.nl>
+
+	* ilogo100.xpm
+
+	New file, with the new logo. It is a blow-up of ../src/ilogo.c
+
 2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am, cong-caution-48.png, cong-important-48.png, cong-note-48.png, cong-tip-48.png, cong-warning-48.png
