@@ -1,3 +1,21 @@
+conglomerate (0.7.4-2) UNRELEASED; urgency=low
+
+  * rules: removed various '#dh_ lines' for readability.
+
+ -- Geert Stappers <stappers@stappers.nl>  Mon,  6 Oct 2003 13:52:01 +0000
+
+conglomerate (0.7.4-1) unstable; urgency=low
+ 
+  * New upstream release.
+
+ -- Geert Stappers <stappers@bahrain>  Wed,  1 Oct 2003 17:37:46 +0200
+
+conglomerate (0.7.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Geert Stappers <stappers@bahrain>  Tue, 23 Sep 2003 09:51:29 +0200
+
 conglomerate (0.7.2-1) unstable; urgency=low
 
   * new upstream version.
