@@ -1034,22 +1034,27 @@ cong_node_should_be_visible_in_editor (CongNodePtr node)
 	g_return_val_if_fail (node, FALSE);
 
 	if (cong_node_type (node) == CONG_NODE_TYPE_TEXT) {
-		xmlElementPtr dtd_entry;
-
-		/* If the DTD doesn't allow #PCDATA in this node and it only
-		   contains whitespace we should ignore it (if it does it
-		   shouldn't validate we should add an error marked element).
-		*/
-		dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
-		if (dtd_entry) {
-			if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
-				return TRUE;
-			} else if (!cong_util_is_pure_whitespace (node->content)) {
-				return TRUE;
+		if (node->parent) {
+			xmlElementPtr dtd_entry;
+			
+			/* If the DTD doesn't allow #PCDATA in this node and it only
+			   contains whitespace we should ignore it (if it does it
+			   shouldn't validate we should add an error marked element).
+			*/
+			dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
+			if (dtd_entry) {
+				if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
+					return TRUE;
+				} else if (!cong_util_is_pure_whitespace (node->content)) {
+					return TRUE;
+				} else {
+					return FALSE;
+				}
 			} else {
-				return FALSE;
+				return TRUE;
 			}
 		} else {
+			/* Node isn't yet part of tree, so we can't tell; assume TRUE to stop cursor tests failing: */
 			return TRUE;
 		}
 	} else {
