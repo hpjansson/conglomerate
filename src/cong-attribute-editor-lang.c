@@ -75,6 +75,8 @@ struct _CongAttributeEditorLangDetails
 	GtkWidget *scrolled_window;
 	GtkWidget *tree_view;
 	GtkTreeModel *model;
+	
+	gulong handler_id_changed;
 };
 
 static void
@@ -172,7 +174,7 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
 	
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(details->tree_view));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
-	g_signal_connect (G_OBJECT(selection), "changed", 
+	details->handler_id_changed = g_signal_connect (G_OBJECT(selection), "changed", 
 		          G_CALLBACK (on_selection_changed), attribute_editor_lang);
 
         renderer = gtk_cell_renderer_text_new ();
@@ -229,64 +231,17 @@ cong_attribute_editor_lang_remove_attribute_handler (CongAttributeEditor *attrib
 static void
 on_selection_changed (GtkTreeSelection *selection, gpointer user_data)
 {
-        CongAttributeEditorLang *attribute_editor = CONG_ATTRIBUTE_EDITOR_LANG (user_data);
-	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor));
-	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor));
-	xmlNs *ns_ptr = cong_attribute_editor_get_ns (CONG_ATTRIBUTE_EDITOR(attribute_editor));
-
 	gchar *value;
-	gchar *desc;
-	gchar *attr_value;
-
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {	
 
 		gtk_tree_model_get (model, &iter, COLUMN_CODE, &value, -1);
-		attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor));
-
-		if (value == NULL || value[0] == 0) {
-			CongCommand *cmd;
-		
-			desc = g_strdup_printf (_("Delete attribute \"%s\""), "lang");
-	
-			cmd = cong_document_begin_command (doc,
-							   desc,
-							   NULL);
-
-			cong_command_add_node_remove_attribute (cmd,
-						node,
-						ns_ptr,
-						"lang");
-						
-			cong_document_end_command (doc,
-						   cmd);
-			g_free (desc);
-		} else {
-			if (attr_value == 0 || strcmp (value, attr_value) != 0) {
-				CongCommand *cmd;
-		
-				desc = g_strdup_printf (  _("Set attribute \"%s\" to \"%s\""), "lang", value);
-	
-		  		cmd = cong_document_begin_command (doc,
-				    			       desc,
-							       NULL);
-    
-				cong_command_add_node_set_attribute (cmd,
-								     node,
-								     ns_ptr,
-								     "lang",
-					    			     value);
-				cong_document_end_command (doc, cmd);
-				g_free (desc);
-			}
-		}
-
+		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(user_data), value);
 		g_free (value);
-    }
+        }
 }
-
 
 
 static void
@@ -320,7 +275,12 @@ cong_attribute_editor_lang_do_refresh (CongAttributeEditorLang *attribute_editor
 		    
 		    if (strcmp (value, attr_value) == 0) 
 		        {
+	  		  g_signal_handler_block ( G_OBJECT(selection),
+					 PRIVATE(attribute_editor_lang)->handler_id_changed);
 			  gtk_tree_selection_select_iter (selection, &iter);
+
+	  		  g_signal_handler_unblock ( G_OBJECT(selection),
+					 PRIVATE(attribute_editor_lang)->handler_id_changed);
 			  g_free(value);
 			  break;
 			}

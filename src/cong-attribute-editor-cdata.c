@@ -23,8 +23,8 @@
  */
 
 #include "global.h"
-#include "cong-attribute-editor-cdata.h"
 #include "cong-command.h"
+#include "cong-attribute-editor-cdata.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -34,6 +34,8 @@ struct CongAttributeEditorCDATADetails
 	GtkEntry *entry;
 	GtkButton *add_btn;
 	GtkButton *delete_btn;	
+	
+	gulong handler_id_changed;
 };
 
 static void
@@ -121,8 +123,8 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 
 	gtk_widget_show (GTK_WIDGET(PRIVATE(attribute_editor_cdata)->hbox));
 
-	g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
-				"changed",
+	PRIVATE(attribute_editor_cdata)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
+    				"changed",
 				G_CALLBACK(on_text_entry_changed),
 				attribute_editor_cdata);
 	g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_cdata)->add_btn),
@@ -195,27 +197,11 @@ static void
 on_text_entry_changed (GtkEditable *editable,
 		       CongAttributeEditorCDATA *attribute_editor_cdata)
 {
-	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
-	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
-	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
-	xmlNs *ns_ptr = cong_attribute_editor_get_ns (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
+	const gchar *value;
 
-	const gchar *value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry));
-	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, value);
+        value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry));
 
-	CongCommand *cmd = cong_document_begin_command (doc,
-							desc,
-							NULL);
-
-	g_free (desc);
-
-	cong_command_add_node_set_attribute (cmd,
-					     node,
-					     ns_ptr,
-					     attribute_name,
-					     value);
-	cong_document_end_command (doc,
-				   cmd);
+        cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata), value);
 }
 
 static void
@@ -276,8 +262,12 @@ do_refresh (CongAttributeEditorCDATA *attribute_editor_cdata)
 	gchar *attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	
 	if (attr_value) {
+		g_signal_handler_block ( G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
+					 PRIVATE(attribute_editor_cdata)->handler_id_changed);
 		gtk_entry_set_text (GTK_ENTRY (PRIVATE(attribute_editor_cdata)->entry),
 				    attr_value);
+		g_signal_handler_unblock ( G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
+					 PRIVATE(attribute_editor_cdata)->handler_id_changed);
 
 		g_free (attr_value);
 

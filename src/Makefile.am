@@ -99,6 +99,8 @@ conglomerate_SOURCES =      \
   cong-fake-plugin-hooks.h  \
   cong-file-selection.h     \
   cong-font.h               \
+  cong-glade.c		    \
+  cong-glade.h		    \
   cong-graph.h              \
   cong-location.h           \
   cong-marshal.h            \

@@ -85,6 +85,8 @@ cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
 gchar*
 cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor);
 
+void
+cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, const gchar *new_attr_value);
 
 /* Generic attribute editing widget factory method: */
 GtkWidget*
@@ -140,40 +142,6 @@ cong_attribute_editor_notation_new (CongDocument *doc,
 				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
 
-/* Glade hooks for various attribute types: */
-GtkWidget*
-create_cdata_editor (GladeXML *xml,
-		     gchar *func_name,
-		     gchar *name,
-		     gchar *string1,
-		     gchar *string2,
-		     gint int1,
-		     gint int2,
-		     gpointer user_data);
-/* FIXME: add the rest of the types */
-
-/* Glade doesn't seem to support user_data unless you override the custom handler.  Hence we use globals for now */
-extern CongDocument *global_glade_doc_ptr;
-extern CongNodePtr global_glade_node_ptr;
-
-/* Hook to bind a radio button to a possible value of an attribute: */
-void
-cong_bind_radio_button (GtkRadioButton *radio_button,
-			CongDocument *doc,
-			CongNodePtr node,
-			xmlNs *ns_ptr,
-			const gchar *attribute_name,
-			const gchar *attribute_value);
-
-/* Hook to bind a checkbox to two possible values of an attribute: */
-void
-cong_bind_check_button (GtkCheckButton *check_button,
-			CongDocument *doc,
-			CongNodePtr node,
-			xmlNs *ns_ptr,
-			const gchar *attribute_name,
-			const gchar *attribute_value_unchecked,
-			const gchar *attribute_value_checked);
 
 G_END_DECLS
 

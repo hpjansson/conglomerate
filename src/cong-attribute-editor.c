@@ -25,13 +25,9 @@
 #include "global.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
-#include "cong-attribute-editor-lang.h"
-#include "cong-attribute-editor-enumeration.h"
-#include "cong-attribute-wrapper.h"
-#include "cong-attribute-wrapper-radio-button.h"
-#include "cong-attribute-wrapper-check-button.h"
 #include "cong-eel.h"
 #include "cong-util.h"
+#include "cong-command.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -68,10 +64,6 @@ on_remove_attribute (CongDocument *doc,
 		     const xmlNs *ns_ptr, 
 		     const xmlChar *name,
 		     CongAttributeEditor *attribute_editor);
-
-static void
-bind_wrapper_to_widget (CongAttributeWrapper* wrapper,
-			GtkWidget *widget);
 
 
 /* Exported function definitions: */
@@ -233,6 +225,68 @@ cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor
 }
 
 /**
+ * cong_attribute_editor_try_set_value:
+ * @attribute_editor: The Attribute Editor that tries to set value
+ * @new_attr_value: value to try.
+ *
+ * If value of attribute is equal to value that attribute editor
+ * is trying to set, the function simply returns. But if those
+ * values differs, the attribute value will be updated. This 
+ * function is proposed to use on updates of UI in various 
+ * implementaion of CongAttributeEditor.
+ */
+
+void
+cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, const gchar *new_attr_value) {
+
+	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor));
+	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor));
+	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor));
+	xmlNs *ns_ptr = cong_attribute_editor_get_ns (CONG_ATTRIBUTE_EDITOR(attribute_editor));
+
+	gchar *old_attr_value;
+	
+	old_attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor));
+
+	if (!cong_util_attribute_value_equality (old_attr_value, new_attr_value))
+	{
+		CongCommand *cmd;
+		gchar *desc;
+
+		if (new_attr_value) {
+    			desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_attr_value);
+			
+		} else {
+			desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
+		}
+
+		cmd = cong_document_begin_command (doc,
+						   desc,
+						   NULL);
+
+		if (new_attr_value) {
+			cong_command_add_node_set_attribute (cmd, 
+							     node, 
+							     ns_ptr,
+							     attribute_name, 
+							     new_attr_value);
+		} else {
+			cong_command_add_node_remove_attribute (cmd, 
+								node, 
+								ns_ptr,
+								attribute_name);
+		}
+
+		cong_document_end_command (doc,
+					   cmd);
+	}
+
+	if (old_attr_value) {
+		g_free (old_attr_value);
+	}
+}
+
+/**
  * cong_attribute_editor_new:
  * @doc:
  * @node:
@@ -310,162 +364,6 @@ cong_attribute_editor_new (CongDocument *doc,
 	g_assert_not_reached();	
 }
 
-/**
- * create_cdata_editor:
- * @xml:
- * @func_name:
- * @name:
- * @string1:
- * @string2:
- * @int1:
- * @int2:
- * @user_data:
- *
- * TODO: Write me
- */
-GtkWidget*
-create_cdata_editor (GladeXML *xml,
-		     gchar *func_name,
-		     gchar *name,
-		     gchar *string1,
-		     gchar *string2,
-		     gint int1,
-		     gint int2,
-		     gpointer user_data)
-{
-	GtkWidget *custom_widget;
-
-#if 1
-	/* for some reason, the string1 stuff is coming through in func_name on my machine: */
-
-	/* FIXME: Should we store the namespace URI somewhere or is the prefix enough. */
-
-	const char *local_name;
-	xmlNs *ns_ptr = cong_node_get_attr_ns(global_glade_node_ptr,
-					      func_name,
-					      &local_name);
-
-	custom_widget = cong_attribute_editor_cdata_new (global_glade_doc_ptr, 
-							 global_glade_node_ptr, 
-							 ns_ptr,
-							 local_name,
-							 NULL);
-#else
-	custom_widget = gtk_label_new(g_strdup_printf("custom widget \"%s\" \"%s\" \"%s\" \"%s\" %i %i", func_name, name, string1, string2, int1, int2)); /* for now */
-
-	gtk_widget_show_all(custom_widget);
-#endif
-
-	gtk_widget_show (custom_widget);
-
-	return custom_widget;
-}
-
-/**
- * create_lang_editor:
- * @xml:
- * @func_name:
- * @name:
- * @string1:
- * @string2:
- * @int1:
- * @int2:
- * @user_data:
- *
- * TODO: Write me
- */
-GtkWidget*
-create_lang_editor (GladeXML *xml,
-		     gchar *func_name,
-		     gchar *name,
-		     gchar *string1,
-		     gchar *string2,
-		     gint int1,
-		     gint int2,
-		     gpointer user_data)
-{
-	GtkWidget *custom_widget;
-	const char *local_name;
-
-	xmlNs *ns_ptr = cong_node_get_attr_ns(global_glade_node_ptr,
-					      "lang",
-					      &local_name);
-
-	custom_widget = cong_attribute_editor_lang_new (global_glade_doc_ptr, 
-							 global_glade_node_ptr, 
-							 ns_ptr,
-							 NULL);
-	gtk_widget_show_all (custom_widget);
-
-	return custom_widget;
-}
-
-CongDocument *global_glade_doc_ptr = NULL;
-CongNodePtr global_glade_node_ptr = NULL;
-
-/**
- * cong_bind_radio_button:
- * @radio_button:
- * @doc:
- * @node:
- * @ns_ptr:
- * @attribute_name:
- * @attribute_value:
- *
- * TODO: Write me
- */
-void
-cong_bind_radio_button (GtkRadioButton *radio_button,
-			CongDocument *doc,
-			CongNodePtr node,
-			xmlNs *ns_ptr,
-			const gchar *attribute_name,
-			const gchar *attribute_value)
-{
-	CongAttributeWrapperRadioButton* wrapper = cong_attribute_wrapper_radio_button_new ( doc,
-											     node,
-											     ns_ptr,
-											     attribute_name,
-											     NULL,
-											     radio_button,
-											     attribute_value);
-	bind_wrapper_to_widget (CONG_ATTRIBUTE_WRAPPER (wrapper),
-				GTK_WIDGET (radio_button));
-}
-
-/**
- * cong_bind_check_button:
- * @check_button:
- * @doc:
- * @node:
- * @ns_ptr:
- * @attribute_name:
- * @attribute_value_unchecked:
- * @attribute_value_checked:
- *
- * TODO: Write me
- */
-void
-cong_bind_check_button (GtkCheckButton *check_button,
-			CongDocument *doc,
-			CongNodePtr node,
-			xmlNs *ns_ptr,
-			const gchar *attribute_name,
-			const gchar *attribute_value_unchecked,
-			const gchar *attribute_value_checked)
-{
-	CongAttributeWrapperCheckButton* wrapper = cong_attribute_wrapper_check_button_new ( doc,
-											     node,
-											     ns_ptr,
-											     attribute_name,
-											     NULL,
-											     check_button,
-											     attribute_value_unchecked,
-											     attribute_value_checked);
-	bind_wrapper_to_widget (CONG_ATTRIBUTE_WRAPPER (wrapper),
-				GTK_WIDGET (check_button));
-}
-
 
 /* Internal function definitions: */
 static void
@@ -541,11 +439,3 @@ on_remove_attribute (CongDocument *doc,
 	}
 }
 
-static void
-bind_wrapper_to_widget (CongAttributeWrapper* wrapper,
-			GtkWidget *widget)
-{
-     g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER (wrapper));
-
-     /* Leak it for now? Or attach as generic data and attach a signal handler to the widget's destroy signal? */
-}

@@ -91,6 +91,9 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 void
 cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper);
 
+void
+cong_attribute_wrapper_bind_to_widget (CongAttributeWrapper* wrapper, GtkWidget *widget);
+
 G_END_DECLS
 
 #endif

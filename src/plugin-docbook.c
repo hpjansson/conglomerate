@@ -32,7 +32,7 @@
 #include "cong-app.h"
 #include "cong-util.h"
 #include "cong-fake-plugin-hooks.h"
-#include "cong-attribute-editor.h"
+#include "cong-glade.h"
 
 /* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
 static GList*

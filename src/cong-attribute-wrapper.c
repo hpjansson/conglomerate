@@ -358,3 +358,20 @@ on_remove_attribute (CongDocument *doc,
 		}
 	}
 }
+
+/**
+ * cong_attribute_wrapper_bind_to_widget:
+ * @attribute_wrapper:
+ * @widget:
+ *
+ * TODO: Write me
+ */
+
+void
+cong_attribute_wrapper_bind_to_widget (CongAttributeWrapper* wrapper,
+			GtkWidget *widget)
+{
+     g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER (wrapper));
+
+     /* Leak it for now? Or attach as generic data and attach a signal handler to the widget's destroy signal? */
+}

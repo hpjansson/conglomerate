@@ -37,6 +37,7 @@
 #include "cong-selection.h"
 #include "cong-primary-window.h"
 #include "cong-command.h"
+#include "cong-glade.h"
 
 #define CONG_RESPONSE_FIND		101
 #define CONG_RESPONSE_REPLACE		102

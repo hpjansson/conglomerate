@@ -27,6 +27,7 @@
 #include "cong-app.h"
 #include "cong-dispspec-registry.h"
 #include "cong-dispspec.h"
+#include "cong-glade.h"
 
 typedef struct CongPreferencesDialogDetails CongPreferencesDialogDetails;
 

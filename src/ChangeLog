@@ -1,3 +1,13 @@
+2004-06-20  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-editor-lang.c, cong-attribute-editor.[ch]:
+ 	Add new function cong_attribute_editor_try_set_value and
+ 	use it in all attribute editors. Add block of signals in
+ 	ui change to make operation safer.
+
+	* Makefile.am, cong-glade.[ch], cong-attribute-editor.[ch], cong-util.[ch] : 
+ 	New file cong-glade that should contain all glade operation in cong.
+ 
 2004-06-20  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-file-import.c, cong-file-selection.h, cong-plugin.c, cong-service-importer.c, cong-service-importer.h, file.c, plugin-docbook.c, plugin-dtd.c, plugin-sgml.c:

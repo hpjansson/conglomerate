@@ -35,6 +35,7 @@
 #include "cong-command.h"
 #include "cong-error-dialog.h"
 #include "cong-util.h"
+#include "cong-glade.h"
 
 typedef struct CongFilePropertiesDialogDetails CongFilePropertiesDialogDetails;
 

@@ -28,6 +28,7 @@
 #include "cong-app.h"
 #include "cong-document.h"
 #include "cong-text-cache.h"
+#include "cong-glade.h"
 
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
@@ -45,52 +46,6 @@
 #include "fo.h"
 #endif
 #endif
-
-#include "cong-attribute-editor.h"
-
-/**
- * cong_util_load_glade_file:
- * @filename:
- * @root:
- * @doc:
- * @node:
- *
- * TODO: Write me
- */
-GladeXML*
-cong_util_load_glade_file (const gchar *filename,
-			   const gchar *root,
-			   CongDocument *doc,
-			   CongNodePtr node)
-{
-	gchar* glade_filename;
-	GladeXML *xml;
-		
-	g_return_val_if_fail (filename, NULL);
-	if (doc || node) {
-		g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	}
-
-	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
-						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    filename,
-						    FALSE,
-						    NULL);
-	global_glade_doc_ptr = doc;
-	global_glade_node_ptr = node;
-	
-	xml = glade_xml_new (glade_filename, 
-			     root, 
-			     NULL);
-	glade_xml_signal_autoconnect(xml);
-	
-	global_glade_doc_ptr = NULL;
-	global_glade_node_ptr = NULL;
-	
-	g_free(glade_filename);
-
-	return xml;
-}
 
 /**
  * cong_util_is_docbook:

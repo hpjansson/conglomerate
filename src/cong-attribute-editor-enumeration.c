@@ -34,6 +34,8 @@ struct CongAttributeEditorENUMERATIONDetails
 {
 	GtkWidget *option_menu;
 	GtkWidget *menu;
+	
+	guint handler_id_changed;
 };
 
 static void
@@ -116,7 +118,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu), 
 				 PRIVATE(attribute_editor_enumeration)->menu);
 	
-	g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->option_menu),
+	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->option_menu),
 				"changed",
 				G_CALLBACK(on_option_menu_changed),
 				attribute_editor_enumeration);
@@ -177,58 +179,12 @@ static void
 on_option_menu_changed (GtkOptionMenu *option_menu,
 			CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 {
-	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-	xmlAttributePtr attr = cong_attribute_editor_get_attribute (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-	xmlNs *ns_ptr = cong_attribute_editor_get_ns (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-
 	GtkMenuItem *selected_menu_item;
 	const gchar *new_attr_value;
-	gchar *old_attr_value;
-
-	g_assert (doc);
-	g_assert (node);
-	g_assert (attr);
 
 	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (option_menu);
 	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
 					    "attr_value");
-	old_attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-
-	if (!cong_util_attribute_value_equality (old_attr_value, new_attr_value))
-	{
-		CongCommand *cmd;
-		gchar *desc;
-
-		if (new_attr_value) {
-			desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attr->name, new_attr_value);
-			
-		} else {
-			desc = g_strdup_printf ( _("Delete attribute \"%s\""), attr->name);
-		}
-
-		cmd = cong_document_begin_command (doc,
-						   desc,
-						   NULL);
-
-		if (new_attr_value) {
-			cong_command_add_node_set_attribute (cmd, 
-							     node, 
-							     ns_ptr,
-							     attr->name, 
-							     new_attr_value);
-		} else {
-			cong_command_add_node_remove_attribute (cmd, 
-								node, 
-								ns_ptr,
-								attr->name);
-		}
-
-		cong_document_end_command (doc,
-					   cmd);
-	}
-
-	if (old_attr_value) {
-		g_free (old_attr_value);
-	}
+	cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration), new_attr_value);
 }
+

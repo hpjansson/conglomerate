@@ -34,6 +34,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-dtd.h"
 #include "cong-eel.h"
+#include "cong-glade.h"
 
 #include "cong-fake-plugin-hooks.h"
 
