@@ -17,7 +17,7 @@ Run autogen.sh with the preferred options of upstream programmers
 Generates the README file.
 
 * mkcvstarball
-A `make dist` plus upload to a public place.
+A `make dist` plus some hacks to have allways a working `make dist`
 
 * ckgtkdocincludes
 Checks that all the header files have corresponding xi:includes
