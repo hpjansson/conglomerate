@@ -22,6 +22,9 @@ schema_DATA = @PACKAGE@.schemas
 stylesheetdir = $(pkgdatadir)/stylesheets
 stylesheet_DATA = selection-to-text.xsl
 
+cssdir = $(pkgdatadir)/css
+css_DATA = docbook.css
+
 install-data-local:
 	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) \
 	$(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
@@ -32,4 +35,5 @@ EXTRA_DIST = $(desktop_in_files)	\
 	$(keys_DATA)			\
 	$(mime_DATA)			\
 	$(app_DATA)                     \
-	$(stylesheet_DATA)
+	$(stylesheet_DATA)		\
+	$(css_DATA)

@@ -1,0 +1,105 @@
+article
+{
+	font-family: verdana;
+	display: block;
+}
+book
+{
+	font-family: verdana;
+	display: block;
+}
+
+title
+{
+	font-size: xx-large;
+	display: block;
+}
+
+para
+{
+	display: block;
+
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+}
+
+emph
+{
+	display: inline;
+
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+}
+chapter
+{
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+}
+sect1
+{
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+}
+sect2
+{
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+}
+
+programlisting
+{
+	background-color: #ffffcc;
+	border:solid;
+	border-color: #009999;
+	border-left: solid #009999 20px;
+	border-right: solid #009999 0px;
+	border-top: solid #009999 0px;
+	border-bottom: solid #009999 0px;
+	
+	padding-left: 15pt;	
+	whitespace: pre;
+}
+
+
+important
+{
+	font-style:italic;
+	border: solid 2px #ff0000;
+	width: 70%;
+	margin-left: 15%;	
+}
