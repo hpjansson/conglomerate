@@ -23,20 +23,27 @@ fi
 
 if [ ! -x ./configure ]
 then
-  echo assuming you did a fresh CVS checkout
-  echo gonna run \`./autogen.sh\` for you
+  echo Assuming you did a fresh CVS checkout,
+  echo gonna run \`./autogen.sh\` for you to create the initial Makefiles.
   ./autogen.sh
 fi
 
-echo coping the deb directory into debian
-cp -a deb debian
-rm -f debian/Readme debian/build # for a cleaner *diff.gz
+DEBIAN_FILES="rules control changelog copyright docs compat
+ conglomerate.menu conglomerate_icon.xpm
+ NEWS watch"
+
+echo coping  deb directory into debian
+mkdir -p debian
+for DF in ${DEBIAN_FILES}
+do
+  cp deb/${DF} debian
+done
 
 # assuming the user has debian development stuff installed
 # ( this is the place where a test on such executables should done )
 
 echo gonna build the package
-dpkg-buildpackage -rfakeroot -us -uc
+debian/rules binary
 
 echo one directory level up, are these .deb files:
 ls -ltr ../*.deb
