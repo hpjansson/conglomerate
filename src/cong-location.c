@@ -512,7 +512,7 @@ gboolean cong_location_calc_document_start(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document start");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating document start");
 
 	return FALSE;
 }
@@ -524,7 +524,7 @@ gboolean cong_location_calc_line_start(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line start");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating line start");
 
 	return FALSE;
 }
@@ -537,7 +537,7 @@ gboolean cong_location_calc_document_end(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating document end");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating document end");
 
 	return FALSE;
 }
@@ -550,7 +550,7 @@ gboolean cong_location_calc_line_end(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating line end");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating line end");
 
 	return FALSE;
 }
@@ -563,7 +563,7 @@ gboolean cong_location_calc_prev_page(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating previous page");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating previous page");
 
 	return FALSE;
 }
@@ -576,7 +576,7 @@ gboolean cong_location_calc_next_page(const CongLocation *input_loc,
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Calculating next page");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Calculating next page");
 
 	return FALSE;
 }

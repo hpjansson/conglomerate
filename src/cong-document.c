@@ -298,7 +298,10 @@ cong_document_save(CongDocument *doc, const char* filename)
 					);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, NULL);
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(NULL, /* FIXME: need to set up parent window correctly */
+									   file_uri, 
+									   vfs_result, 
+									   NULL);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -314,7 +317,10 @@ cong_document_save(CongDocument *doc, const char* filename)
 				     &written_size);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, &file_size);
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(NULL, /* FIXME: need to set up parent window correctly */
+									   file_uri, 
+									   vfs_result, 
+									   &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -331,7 +337,10 @@ cong_document_save(CongDocument *doc, const char* filename)
 	vfs_result = gnome_vfs_close(vfs_handle);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, &file_size);
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(NULL, /* FIXME: need to set up parent window correctly */
+									   file_uri, 
+									   vfs_result, 
+									   &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));

@@ -51,7 +51,8 @@ cong_error_dialog_do(GtkDialog* dialog)
 
 
 GtkDialog* 
-cong_error_dialog_new(const gchar* what_failed, 
+cong_error_dialog_new(GtkWindow *parent_window,
+		      const gchar* what_failed, 
 		      const gchar* why_failed, 
 		      const gchar* suggestions)
 {
@@ -70,6 +71,8 @@ cong_error_dialog_new(const gchar* what_failed,
 	GTK_WINDOW (dialog1)->type = GTK_WINDOW_POPUP;
 	gtk_window_set_resizable (GTK_WINDOW (dialog1), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog1), FALSE);
+
+	gtk_window_set_transient_for(GTK_WINDOW(dialog1), parent_window);
 
 	dialog_vbox1 = GTK_DIALOG (dialog1)->vbox;
 	gtk_widget_show (dialog_vbox1);
@@ -98,7 +101,8 @@ cong_error_dialog_new(const gchar* what_failed,
 }
 
 GtkDialog* 
-cong_error_dialog_new_with_convenience(const gchar* what_failed, 
+cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
+				       const gchar* what_failed, 
 				       const gchar* why_failed, 
 				       const gchar* suggestions,
 				       const gchar* convenience_label,
@@ -162,7 +166,8 @@ cong_error_dialog_new_with_convenience(const gchar* what_failed,
 }
 
 GtkDialog*
-cong_error_dialog_new_unimplemented(const gchar* what_failed, 
+cong_error_dialog_new_unimplemented(GtkWindow *parent_window,
+				    const gchar* what_failed, 
 				    const char* filename, 
 				    int linenum)
 {
@@ -170,7 +175,8 @@ cong_error_dialog_new_unimplemented(const gchar* what_failed,
 	
 	gchar* suggestion =  g_strdup_printf("If you are a programmer, the problem is in file %s at line %i\n", filename, linenum);
 
-	dialog =  cong_error_dialog_new(what_failed,
+	dialog =  cong_error_dialog_new(parent_window,
+					what_failed,
 					"That feature has not yet been implemented.  Sorry.",
 					suggestion);
 
@@ -180,7 +186,8 @@ cong_error_dialog_new_unimplemented(const gchar* what_failed,
 }
 
 GtkDialog*
-cong_error_dialog_new_unimplemented_with_bugzilla_id(const gchar* what_failed, 
+cong_error_dialog_new_unimplemented_with_bugzilla_id(GtkWindow *parent_window,
+						     const gchar* what_failed, 
 						     const char* filename, 
 						     int linenum,
 						     const gchar* bugzilla_url,
@@ -196,7 +203,8 @@ cong_error_dialog_new_unimplemented_with_bugzilla_id(const gchar* what_failed,
 
 	gchar* suggestion =  g_strdup_printf("If you are a programmer, the problem is in file %s at line %i\n", filename, linenum);
 
-	dialog =  cong_error_dialog_new(what_failed,
+	dialog =  cong_error_dialog_new(parent_window,
+					what_failed,
 					why_failed,
 					suggestion);
 

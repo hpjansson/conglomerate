@@ -140,7 +140,8 @@ void factory_action_callback_article(CongDocumentFactory *factory, CongNewFileAs
 
 	xml_doc = make_article("Untitled Article");
 
-	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+	cong_ui_new_document_from_manufactured_xml(xml_doc,
+						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
 
@@ -192,7 +193,8 @@ void factory_action_callback_book(CongDocumentFactory *factory, CongNewFileAssis
 
 	xml_doc = make_book("Untitled Book");
 
-	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+	cong_ui_new_document_from_manufactured_xml(xml_doc,
+						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
 
@@ -230,7 +232,8 @@ void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssist
 
 	xml_doc = make_set("Untitled Set");
 
-	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+	cong_ui_new_document_from_manufactured_xml(xml_doc,
+						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
 gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
@@ -277,7 +280,8 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 		g_free(buffer);
 
 		/* Do appropriate UI stuff: */
-		cong_ui_new_document_from_imported_xml(xml_doc);	
+		cong_ui_new_document_from_imported_xml(xml_doc,
+						       NULL /* FIXME: need a way to set up toplevel window effectively */);
 	}
 }
 
@@ -336,7 +340,8 @@ void sourcecode_importer_action_callback(CongImporter *importer, const gchar *ur
 		g_free(buffer);
 
 		/* Do appropriate UI stuff: */
-		cong_ui_new_document_from_imported_xml(xml_doc);	
+		cong_ui_new_document_from_imported_xml(xml_doc,
+						       NULL /* FIXME: need a way to set up toplevel window effectively */);
 	}
 }
 
@@ -353,7 +358,7 @@ void html_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpo
 	g_return_if_fail(exporter);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Export DocBook to HTML");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to HTML");
 }
 
 void pdf_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpointer user_data)
@@ -361,7 +366,7 @@ void pdf_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpoi
 	g_return_if_fail(exporter);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Export DocBook to PDF");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to PDF");
 }
 
 void fo_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpointer user_data)
@@ -369,7 +374,7 @@ void fo_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpoin
 	g_return_if_fail(exporter);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG("Export DocBook to FO");
+	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to FO");
 }
 
 

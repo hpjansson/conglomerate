@@ -131,6 +131,13 @@ void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDrui
 	
 }
 
+GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
+{
+	g_return_if_fail(assistant);
+
+	return GTK_WINDOW(assistant->window);
+}
+
 static void add_factory_callback(CongDocumentFactory *factory, gpointer user_data)
 {
 	CongNewFileAssistant *assistant = user_data;
@@ -337,9 +344,9 @@ void new_document(GtkWindow *parent_window)
 	/* FIXME:  what if no document factories found? */
 
 	assistant->druid = GNOME_DRUID(gnome_druid_new_with_window("Creating a new file",
-							parent_window,
-							TRUE,
-							&assistant->window));
+								   parent_window,
+								   TRUE,
+								   &assistant->window));
 
 	assistant->first_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_START,
 								   TRUE,

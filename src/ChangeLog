@@ -1,4 +1,18 @@
 creating ChangeLog
+2003-04-04 David Malcolm
+
+	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-document.c, cong-error-dialog.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-location.c, cong-plugin.c, cong-plugin.h, cong-primary-window.c, global.h, main.c, new_doc.c, open.c, plugin-docbook.c, plugin-tests.c, popup.c
+
+	Error dialogs and other transient windows now set up their parent windows more consistently; menu functionality moved from cong-primary-window.c and main.c to new file cong-menus.c
+	
+	* Makefile.am
+
+	Added cong-menus.c
+	
+	* cong-menus.c
+
+	Initial import
+	
 2003-04-03 David Malcolm
 
 	* cong-document.c

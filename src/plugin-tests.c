@@ -314,7 +314,8 @@ void factory_action_callback_unicode(CongDocumentFactory *factory, CongNewFileAs
 
 	xml_doc = make_unicode_tables(&uci);
 
-	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+	cong_ui_new_document_from_manufactured_xml(xml_doc,
+						   cong_new_file_assistant_get_toplevel(assistant));	
 }
 
  /* would be exposed as "plugin_register"? */

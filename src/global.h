@@ -677,7 +677,7 @@ const gchar *cong_get_file_name(const gchar *title,
 
 char *pick_structural_tag(CongDispspec *ds);
 
-void open_document_do(const gchar *doc_name);
+void open_document_do(const gchar *doc_name, GtkWindow *parent_window);
 
 /* DHM: My new stuff goes here for now: */
 #define UNUSED_VAR(x)
@@ -730,10 +730,7 @@ gchar* string_selection_dialog(gchar *title, gchar *element_description, GList *
 
 void xv_style_r(GtkWidget *widget, gpointer data);
 
-const CongDispspec*
-get_appropriate_dispspec(xmlDocPtr doc);
-
-CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc);
+CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWindow* parent_window);
 
 /**
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
@@ -748,42 +745,46 @@ cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileS
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
 
-/* Menu hooks: */
+/* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data);
 
-void test_open_wrap(GtkWidget *widget, gpointer data);
-void test_error_wrap(GtkWidget *widget, gpointer data);
-void test_document_types_wrap(GtkWidget *widget, gpointer data);
-void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
-						  guint callback_action,
-						  GtkWidget *widget);
-void menu_callback_test_transform_docbook_to_xhtml(gpointer callback_data,
-						  guint callback_action,
-						  GtkWidget *widget);
-void menu_callback_test_transform_docbook_to_html_help(gpointer callback_data,
-						  guint callback_action,
-						  GtkWidget *widget);
-void menu_callback_test_transform_docbook_to_javahelp(gpointer callback_data,
-						  guint callback_action,
-						  GtkWidget *widget);
-void menu_callback_test_transform_docbook_to_fo(gpointer callback_data,
-						guint callback_action,
-						GtkWidget *widget);
-void menu_callback_test_preview_fo(gpointer callback_data,
-				   guint callback_action,
-				   GtkWidget *widget);
+/* Menu hooks: */
+void menu_callback_debug_error(gpointer callback_data,
+			       guint callback_action,
+			       GtkWidget *widget);
+void menu_callback_debug_document_types(gpointer callback_data,
+					guint callback_action,
+					GtkWidget *widget);
+void menu_callback_debug_transform_docbook_to_html(gpointer callback_data,
+						   guint callback_action,
+						   GtkWidget *widget);
+void menu_callback_debug_transform_docbook_to_xhtml(gpointer callback_data,
+						    guint callback_action,
+						    GtkWidget *widget);
+void menu_callback_debug_transform_docbook_to_html_help(gpointer callback_data,
+							guint callback_action,
+							GtkWidget *widget);
+void menu_callback_debug_transform_docbook_to_javahelp(gpointer callback_data,
+						       guint callback_action,
+						       GtkWidget *widget);
+void menu_callback_debug_transform_docbook_to_fo(gpointer callback_data,
+						 guint callback_action,
+						 GtkWidget *widget);
+void menu_callback_debug_preview_fo(gpointer callback_data,
+				    guint callback_action,
+				    GtkWidget *widget);
 
 #if PRINT_TESTS
 void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm);
 #endif
-void menu_callback_test_dtd(gpointer callback_data,
+void menu_callback_debug_dtd(gpointer callback_data,
 			    guint callback_action,
 			    GtkWidget *widget);
 
-void menu_callback_test_dialog(gpointer callback_data,
-			       guint callback_action,
-			       GtkWidget *widget);
+void menu_callback_debug_dialog(gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget);
 
 /* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
 typedef GtkDrawingArea CongEditorWidget;
@@ -857,6 +858,9 @@ struct CongGlobals
 };
 
 extern struct CongGlobals the_globals;
+
+void cong_menus_create_items(GtkItemFactory *item_factory, 
+			     CongPrimaryWindow *primary_window);
 
 typedef struct CongDocumentEvent CongDocumentEvent;
 

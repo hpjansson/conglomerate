@@ -82,7 +82,8 @@ cong_dispspec_registry_new(const gchar* xds_directory)
 					       (gpointer)&details);
 
 	if (vfs_result!=GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not read its registry of document types.",
+		GtkDialog* dialog = cong_error_dialog_new(NULL, /* FIXME: need to set up parent window correctly */
+							  "Conglomerate could not read its registry of document types.",
 							  "You must run the program from the location in which you built it.",
 							  "This is a known problem and will be fixed.");
 		cong_error_dialog_run(GTK_DIALOG(dialog));
@@ -114,7 +115,7 @@ cong_dispspec_registry_get_num(CongDispspecRegistry* registry)
 	return registry->num;
 }
 
-const CongDispspec*
+CongDispspec*
 cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i)
 {
 	g_return_val_if_fail(registry,NULL);
@@ -145,4 +146,68 @@ cong_dispspec_registry_dump(CongDispspecRegistry* registry)
 		
 		printf("ds[%i] = \"%s\"\n", i, cong_dispspec_get_name(ds));
 	}
+}
+
+static gchar*
+get_toplevel_tag(xmlDocPtr doc)
+{
+	xmlNodePtr xml_toplevel;
+
+	g_return_val_if_fail(doc,NULL);
+	
+	for (xml_toplevel=doc->children; xml_toplevel; xml_toplevel = xml_toplevel->next) {
+		if (xml_toplevel->type==XML_ELEMENT_NODE) {
+			return g_strdup(xml_toplevel->name);
+		}
+	}
+
+	return NULL;
+}
+
+/**
+ * Routine to figure out an appropriate dispspec for use with this file.
+ * Looks for a DTD; if found, it looks up the DTD in a mapping.
+ * If this fails, it looks at the top-level tag and makes a guess, but asks the user for confirmation.
+ * If this fails, it asks the user.
+ */
+CongDispspec*
+cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
+{
+	gchar* toplevel_tag;
+
+	g_return_val_if_fail(doc,NULL);
+
+	/* FIXME: check for a DTD */
+#if 0
+	if (doc->) {
+	}
+#endif
+
+	toplevel_tag = get_toplevel_tag(doc);
+
+	if (toplevel_tag) {
+		int i;
+		
+		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);
+
+		for (i=0;i<cong_dispspec_registry_get_num(the_globals.ds_registry);i++) {
+			CongDispspec* ds = cong_dispspec_registry_get(the_globals.ds_registry, i);
+
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, toplevel_tag);
+			
+			if (element) {
+				/* FIXME: check for appropriateness */
+				g_free(toplevel_tag);
+				return ds;
+			}
+		}
+		
+		/* No match */
+
+		g_free(toplevel_tag);
+	}
+
+	/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
+
+	return NULL;
 }

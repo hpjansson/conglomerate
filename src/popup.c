@@ -573,7 +573,8 @@ gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *
 	gchar *text;
 
 	/*  create a new dialog */
-	window = gtk_dialog_new_with_buttons(title, NULL, GTK_DIALOG_MODAL,
+	window = gtk_dialog_new_with_buttons(title, NULL, /* FIXME: set up the parent dialog */
+					     GTK_DIALOG_MODAL,
 					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					     GTK_STOCK_OK, GTK_RESPONSE_OK,
 					     NULL);

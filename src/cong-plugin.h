@@ -93,9 +93,11 @@ void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, 
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
 void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type);
 
-/* Helpful functions for implementing plugins: */
-void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc);
-void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc);
+/* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
+void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
+						GtkWindow *parent_window);
+void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
+					    GtkWindow *parent_window);
 
 /* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
    navigation easier */
@@ -104,6 +106,9 @@ GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *a
 							 gboolean is_first_of_factory,
 							 gboolean is_last_of_factory);
 void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage *page);
+
+/* Method to get toplevel window of the assistant; useful when displaying error dialogs */
+GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant);
 
 CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widget, 
 						  CongNodePtr node, 

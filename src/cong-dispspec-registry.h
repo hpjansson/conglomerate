@@ -37,7 +37,7 @@ cong_dispspec_registry_free(CongDispspecRegistry* registry);
 unsigned int
 cong_dispspec_registry_get_num(CongDispspecRegistry* registry);
 
-const CongDispspec*
+CongDispspec*
 cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i);
 
 void
@@ -45,6 +45,9 @@ cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds);
 
 void
 cong_dispspec_registry_dump(CongDispspecRegistry* registry);
+
+CongDispspec*
+cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc);
 
 G_END_DECLS
 

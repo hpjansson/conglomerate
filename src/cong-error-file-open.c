@@ -50,7 +50,8 @@ void on_search(gpointer data)
 	process_id = gnome_execute_async(NULL,1,argv);
 
 	if (-1==process_id) {
-		cong_error_dialog_do( cong_error_dialog_new("Conglomerate could not run the Search Tool.\n",
+		cong_error_dialog_do( cong_error_dialog_new(NULL, /* FIXME: ought to set up the parent window properly */
+							    "Conglomerate could not run the Search Tool.\n",
 							    "FIXME",
 							    "FIXME") );
 	}
@@ -93,7 +94,11 @@ cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, gboolea
 
 
 GtkDialog*
-cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions)
+cong_error_dialog_new_file_open_failed(GtkWindow *parent_window,
+				       const GnomeVFSURI* file_uri, 
+				       gboolean transient, 
+				       const gchar* why_failed, 
+				       const gchar* suggestions)
 {
 	GtkDialog* dialog = NULL;
 
@@ -105,7 +110,8 @@ cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean tra
 
 	what_failed = cong_error_what_failed_on_file_open_failure(file_uri, transient);
 	
-	dialog = cong_error_dialog_new(what_failed,
+	dialog = cong_error_dialog_new(parent_window,
+				       what_failed,
 				       why_failed,
 				       suggestions);
 
@@ -115,7 +121,8 @@ cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean tra
 }
 
 GtkDialog*
-cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_uri, 
+cong_error_dialog_new_file_open_failed_with_convenience(GtkWindow *parent_window,
+							const GnomeVFSURI* file_uri, 
 							gboolean transient, 
 							const gchar* why_failed, 
 							const gchar* suggestions,
@@ -133,7 +140,8 @@ cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_
 
 	what_failed = cong_error_what_failed_on_file_open_failure(file_uri, transient);
 	
-	dialog = cong_error_dialog_new_with_convenience(what_failed,
+	dialog = cong_error_dialog_new_with_convenience(parent_window,
+							what_failed,
 							why_failed,
 							suggestions,
 							convenience_label,
@@ -146,7 +154,9 @@ cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_
 }
 
 GtkDialog*
-cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result)
+cong_error_dialog_new_file_open_failed_from_vfs_result(GtkWindow *parent_window,
+						       const GnomeVFSURI* file_uri, 
+						       GnomeVFSResult vfs_result)
 {
 	GtkDialog* dialog = NULL;
 	gchar* filename_alone;
@@ -190,7 +200,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_PROTOCOL_ERROR: /* FIXME: when does this occur? */
 		{
 			/* Unknown (or inapplicable) error */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"An unexpected internal error occurred.",
 									"Try again.  If it fails again, file a bug report with the maintainer of this application.");
 			/* FIXME: ought to provide a convenience button that launches bug-buddy with lots of details filled in, including info
@@ -216,7 +227,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 				gnome_vfs_directory_close(handle);
 				
 				/* OK; the path exists, but the file doesn't: */
-				dialog = cong_error_dialog_new_file_open_failed_with_convenience(file_uri, TRUE, 
+				dialog = cong_error_dialog_new_file_open_failed_with_convenience(parent_window, 
+												 file_uri, TRUE, 
 												 "There is no file with that name at that location.",
 												 "(i) Try checking that you spelt the file's name correctly.  Remember that capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or \"myfile\").\n"
 												 "(ii) Try using the GNOME Search Tool to find your file.",
@@ -225,7 +237,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 												 NULL);
 			} else {
 				/* The path doesn't exist: */
-				dialog = cong_error_dialog_new_file_open_failed_with_convenience(file_uri, TRUE, 
+				dialog = cong_error_dialog_new_file_open_failed_with_convenience(parent_window, 
+												 file_uri, TRUE, 
 												 "The location does not exist.",
 												 "(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"MyDirectory\" is not the same as \"mydirectory\" or \"MYDIRECTORY\").\n"
 												 "(ii) Try using the GNOME Search Tool to find your file.",
@@ -242,7 +255,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 		{
 			/* FIXME: need some thought about the messages for this */
 			gchar* why_failed = g_strdup_printf("The location \"%s\" does not support the reading of files.",path);
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, FALSE, 
 									why_failed,
 									"Try loading a file from a different location.  If you think that you ought to be able to read this file, contact your system administrator.");
 			g_free(why_failed);
@@ -252,7 +266,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_IO:
 	case GNOME_VFS_ERROR_EOF:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"There were problems reading the content of the file.",
 									"Try again.  If it fails again, contact your system administrator.");
 		}
@@ -261,14 +276,16 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_CORRUPTED_DATA:
 	case GNOME_VFS_ERROR_BAD_FILE:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"The contents of the file seem to be corrupt.",
 									"Try again.  If it fails again, try looking for a backup copy of the file.");
 		}
 		break;
 	case GNOME_VFS_ERROR_WRONG_FORMAT:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"There were problems reading the contents of the file.",
 									"Try again.  If it fails again, contact your system administrator.");
 		}
@@ -276,7 +293,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_INVALID_URI:
 		{
 			/* FIXME: is case significant for VFS method names? */
-			dialog = cong_error_dialog_new_file_open_failed_with_convenience(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed_with_convenience(parent_window, 
+											 file_uri, FALSE, 
 											 "The system does not recognise that as a valid location.",
 											 "(i) Try checking that you spelt the location correctly.  Remember that capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP\").\n"
 											 "(ii) Try using the GNOME Search Tool to find your file.",
@@ -288,14 +306,16 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 		break;
 	case GNOME_VFS_ERROR_ACCESS_DENIED:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, FALSE, 
 									"You do not have permission to read that file.",
 									"Try asking your system administrator to give you permission.");
 		}
 		break;
 	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"The system is trying to operate on too many files at once.",
 									"Try again.  If it fails again, try closing unwanted applications, or contact your system administrator.");
 		}
@@ -304,7 +324,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_INTERRUPTED:
 		{
 			/* FIXME: need a better "why-failed" message */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"There were problems reading the contents of the file.",
 									"Try again.  If it fails again, contact your system administrator.");
 		}
@@ -314,7 +335,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 		{
 			/* FIXME:  capitalisation issues */
 			gchar* why_failed = g_strdup_printf("\"%s\" is a directory, rather than a file.",filename_alone);
-			dialog = cong_error_dialog_new_file_open_failed_with_convenience(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed_with_convenience(parent_window, 
+											 file_uri, FALSE, 
 											 why_failed,
 											 "Try using the GNOME Search Tool to find your file.",
 											 "Search",
@@ -326,7 +348,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 		break;
 	case GNOME_VFS_ERROR_NO_MEMORY:
 		{
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"The system ran out of memory.",
 									"Try again.  If it fails again, try closing unwanted applications, or contact your system administrator.");
 		}
@@ -334,7 +357,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
 		{
 	    /* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, FALSE, 
 									"The server could not be contacted.",
 									"Try again.  If it fails again, the server may be down.");
 		}
@@ -342,7 +366,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
 		{
 			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, FALSE, 
 									"The server could not be contacted.",
 									"(i) Try checking that you spelt the location correctly.\n"
 									"(ii) Try again. If it fails again, the server may be down.");
@@ -351,7 +376,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 		{
 			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, FALSE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, FALSE, 
 									"The server could not be contacted.",
 									"(i) Try checking that you spelt the location correctly.\n"
 									"(ii) Try again. If it fails again, the server may be down.");
@@ -360,7 +386,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_LOGIN_FAILED:
 		{
 			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"The system could not login to the location.",
 									"Try again. If it fails again, contact your system administrator.");
 		}
@@ -369,7 +396,8 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	case GNOME_VFS_ERROR_DIRECTORY_BUSY:
 		{
 			/* FIXME: need to think more about these messages */
-			dialog = cong_error_dialog_new_file_open_failed(file_uri, TRUE, 
+			dialog = cong_error_dialog_new_file_open_failed(parent_window, 
+									file_uri, TRUE, 
 									"The location was too busy.",
 									"Try again. If it fails again, contact your system administrator.");
 		}

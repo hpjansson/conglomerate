@@ -13,70 +13,6 @@
 #include <libxml/tree.h>
 #include <libxml/parserInternals.h>
 
-gchar*
-get_toplevel_tag(xmlDocPtr doc)
-{
-	xmlNodePtr xml_toplevel;
-
-	g_return_val_if_fail(doc,NULL);
-	
-	for (xml_toplevel=doc->children; xml_toplevel; xml_toplevel = xml_toplevel->next) {
-		if (xml_toplevel->type==XML_ELEMENT_NODE) {
-			return g_strdup(xml_toplevel->name);
-		}
-	}
-
-	return NULL;
-}
-
-/**
- * Routine to figure out an appropriate dispspec for use with this file.
- * Looks for a DTD; if found, it looks up the DTD in a mapping.
- * If this fails, it looks at the top-level tag and makes a guess, but asks the user for confirmation.
- * If this fails, it asks the user.
- */
-const CongDispspec*
-get_appropriate_dispspec(xmlDocPtr doc)
-{
-	gchar* toplevel_tag;
-
-	g_return_val_if_fail(doc,NULL);
-
-	/* FIXME: check for a DTD */
-#if 0
-	if (doc->) {
-	}
-#endif
-
-	toplevel_tag = get_toplevel_tag(doc);
-
-	if (toplevel_tag) {
-		int i;
-		
-		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);
-
-		for (i=0;i<cong_dispspec_registry_get_num(the_globals.ds_registry);i++) {
-			const CongDispspec* ds = cong_dispspec_registry_get(the_globals.ds_registry, i);
-
-			CongDispspecElement* element = cong_dispspec_lookup_element(ds, toplevel_tag);
-			
-			if (element) {
-				/* FIXME: check for appropriateness */
-				g_free(toplevel_tag);
-				return ds;
-			}
-		}
-		
-		/* No match */
-
-		g_free(toplevel_tag);
-	}
-
-	/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
-
-	return NULL;
-}
-
 /* Towards improved error handling: */
 enum CongIssueType
 {
@@ -279,7 +215,7 @@ void on_parser_error_details(gpointer data)
 	g_free(filename);
 
 	dialog = gtk_dialog_new_with_buttons(title,
-					     NULL,
+					     NULL, /* FIXME: set up the parent window */
 					     0,
 					     GTK_STOCK_OK,
 					     GTK_RESPONSE_OK,
@@ -391,7 +327,9 @@ void on_parser_error_details(gpointer data)
 }
 
 GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri, CongParserResult *parser_result)
+cong_error_dialog_new_file_open_failed_from_parser_error(GtkWindow *parent_window,
+							 const GnomeVFSURI* file_uri, 
+							 CongParserResult *parser_result)
 {
 	GtkDialog* dialog = NULL;
 
@@ -401,7 +339,9 @@ cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file
 
 	g_assert(parser_result);
 
-	dialog =  cong_error_dialog_new_file_open_failed_with_convenience(file_uri, FALSE,
+	dialog =  cong_error_dialog_new_file_open_failed_with_convenience(parent_window,
+									  file_uri, 
+									  FALSE,
 									  why_failed,
 									  "FIXME",
 									  "Show Details",
@@ -451,7 +391,9 @@ xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* f
 	if (ctxt->wellFormed) {
 		ret = ctxt->myDoc;
 	} else {
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error(file_uri, &parser_result);
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error(NULL, /* FIXME: need to set up the parent window */
+											     file_uri, 
+											     &parser_result);
 	
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -497,7 +439,7 @@ void force_load(gpointer data)
 	g_assert(the_dlg->ds);
 }
 
-CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc)
+CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWindow *parent_window)
 {
 	GtkDialog *dialog;
 	struct force_dialog the_dlg;
@@ -505,7 +447,8 @@ CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc)
 	the_dlg.doc=doc;
 
 
-	dialog = cong_error_dialog_new_with_convenience(what_failed,
+	dialog = cong_error_dialog_new_with_convenience(parent_window,
+							what_failed,
 							"The internal structure of the document does not match any of the types known to Conglomerate.", 
 							"You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal.",
 							"Force",
@@ -524,7 +467,7 @@ CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc)
 	}
 }
 
-void open_document_do(const gchar* doc_name)
+void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 {
 	char *p;
 	FILE *xml_f;
@@ -543,7 +486,9 @@ void open_document_do(const gchar* doc_name)
 			GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file(doc_name, &buffer, &size);
 
 			if (vfs_result!=GNOME_VFS_OK) {
-				GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(file_uri, vfs_result);
+				GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(parent_window,
+													   file_uri, 
+													   vfs_result);
 			
 				cong_error_dialog_run(GTK_DIALOG(dialog));
 				gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -567,14 +512,14 @@ void open_document_do(const gchar* doc_name)
 			return;
 		}
 
-		ds = get_appropriate_dispspec(doc);
+		ds = cong_dispspec_registry_get_appropriate_dispspec(doc);
 
 		if (ds==NULL) {
 			gchar *what_failed;
 
 			what_failed = cong_error_what_failed_on_file_open_failure(file_uri, FALSE);
 
-			ds = query_for_forced_dispspec(what_failed, doc);
+			ds = query_for_forced_dispspec(what_failed, doc, parent_window);
 			
 			g_free(what_failed);
 
@@ -621,7 +566,7 @@ void open_document(GtkWindow *parent_window)
 		return;
 	}
 
-	open_document_do(doc_name);
+	open_document_do(doc_name, parent_window);
 }
 
 gint toolbar_callback_open(GtkWidget *widget, gpointer data)
