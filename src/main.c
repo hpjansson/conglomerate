@@ -779,21 +779,9 @@ void insert_element_init()
 
 void fonts_load()
 {
-#ifdef WINDOWS_BUILD
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");
-	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TAG] = cong_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");
-#else
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");
-	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-*-*");
-#endif
-
-#ifdef WINDOWS_BUILD
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT]->asc -= 2;
-	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT]->asc -= 4;
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG]asc -= 8;
-#endif
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 6");
 }
 
 
@@ -898,7 +886,7 @@ int main( int   argc,
 	the_globals.pango_font_description = pango_font_description_new();
 
 	pango_font_description_set_family(the_globals.pango_font_description,
-					  "helvetica");
+					  "sans");
 	pango_font_description_set_size(the_globals.pango_font_description,
 			       PANGO_SCALE*12);
 

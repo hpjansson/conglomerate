@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-22 Dmitry G. Mastrukov
+
+	* cong-font.c, main.c
+
+	Font patch
+	
 2002-11-21 David Malcolm
 
 	* cong-section-head-editor.c

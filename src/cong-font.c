@@ -33,14 +33,20 @@ CongFont*
 cong_font_load(const gchar *font_name)
 {
 	CongFont *font;
+	PangoFontDescription *font_desc = NULL;
 	g_return_val_if_fail(font_name, NULL);
 
 	font = g_new0(CongFont,1);
 
-	font->gdk_font = gdk_font_load(font_name);
+	font_desc = pango_font_description_from_string (font_name);
+	g_assert (font_desc);
+	
+	font->gdk_font = gdk_font_from_description (font_desc);
 	/* FIXME: add expection handling when font is not on system */
 	g_assert(font->gdk_font);
 
+	pango_font_description_free (font_desc);		
+	
 	gdk_string_extents(font->gdk_font, font_chars, 0, 0, 0, &font->asc, &font->desc);                  
 
 	return font;	
