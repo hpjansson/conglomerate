@@ -565,17 +565,20 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds,
 							CongNodePtr x,
 							GtkWindow *parent_window) 
 {
-	GList *list = xml_get_valid_next_sibling(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+	GList *list;
+	GtkWidget *popup;
+
+	list = xml_get_valid_next_sibling(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
 
 	list = sort_menu(list);
 
-	GtkWidget *popup = structural_tag_popup_init(ds, 
-						     callback, 
-						     cong_tree_view, 
-						     x, 
-						     list,
-						     parent_window);
-
+	popup = structural_tag_popup_init(ds, 
+					  callback, 
+					  cong_tree_view, 
+					  x, 
+					  list,
+					  parent_window);
+	
 	g_list_free(list);
 
 	return popup;
@@ -587,17 +590,20 @@ static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds,
 							    CongNodePtr x,
 							    GtkWindow *parent_window) 
 {
-	GList *list = xml_get_valid_children(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+	GList *list;
+	GtkWidget *popup;
+
+	list = xml_get_valid_children(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
 
 	list = sort_menu(list);
 
-	GtkWidget *popup = structural_tag_popup_init(ds, 
-						     callback, 
-						     cong_tree_view, 
-						     x, 
-						     list,
-						     parent_window);
-
+	popup = structural_tag_popup_init(ds, 
+					  callback, 
+					  cong_tree_view, 
+					  x, 
+					  list,
+					  parent_window);
+	
 	g_list_free(list);
 
 	return popup;

@@ -1,3 +1,7 @@
+2003-06-09 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Applied patch by Chris Wareham <chris.wareham@iosystems.co.uk> to fix build on NetBSD (with minor indentation cleanups)
+	
 2003-06-05 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget.c, cong-menus.c, cong-span-text-editor.c, plugin-docbook.c, 
