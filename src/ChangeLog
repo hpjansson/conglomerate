@@ -1,3 +1,10 @@
+2004-09-30  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c: 
+
+	Fix a crash in cong_document_get_language_for_node when called on
+	a text node inside an entity declaration.
+
 2004-09-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-parser-error.c: 

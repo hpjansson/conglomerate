@@ -1732,12 +1732,15 @@ cong_document_get_language_for_node(CongDocument *doc,
 		/* Search in this node and above for such an attribute: */
 		
 		while (node != NULL) {
-			xmlChar *lang = xmlGetProp (node, "lang");
-			if (lang != NULL) {
-				PangoLanguage *result = pango_language_from_string (lang);		
-				xmlFree (lang);
-				
-				return result;
+			
+			if (cong_node_type (node)==CONG_NODE_TYPE_ELEMENT) {
+				xmlChar *lang = xmlGetProp (node, "lang");
+				if (lang != NULL) {
+					PangoLanguage *result = pango_language_from_string (lang);		
+					xmlFree (lang);
+					
+					return result;
+				}
 			}
 			node = node->parent;
 		}
