@@ -1,13 +1,13 @@
-# Norwegian (bokmål dialect) translation of gnumeric.
+# Norwegian (bokmål dialect) translation of conglomerate.
 # Copyright (C) 1998-2004 Free Software Foundation, Inc.
 # Kjartan Maraas <kmaraas@gnome.org>, 1998-2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnumeric 1.2\n"
+"Project-Id-Version: conglomerate 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-17 20:30+0100\n"
-"PO-Revision-Date: 2004-01-17 21:07+0100\n"
+"POT-Creation-Date: 2004-01-31 13:19+0100\n"
+"PO-Revision-Date: 2004-01-31 13:20+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:610 src/cong-primary-window.c:766
-#: src/cong-primary-window.c:768 src/cong-primary-window.c:774
+#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
+#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-redigering"
 
@@ -36,8 +36,8 @@ msgstr "Import"
 msgid "Options"
 msgstr "Alternativer"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:744
-#: src/cong-node-properties-dialog.c:828
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1043
+#: src/cong-node-properties-dialog.c:1127
 msgid "Advanced"
 msgstr "Avansert"
 
@@ -46,7 +46,7 @@ msgid "Basic"
 msgstr "Grunnleggende"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-file-export.c:307
-#: src/cong-file-new.c:234 src/cong-file-print.c:249 src/cong-menus.c:458
+#: src/cong-file-new.c:290 src/cong-file-print.c:249 src/cong-menus.c:458
 #: src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Beskrivelse"
@@ -85,8 +85,8 @@ msgstr "Navn"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3
-#: src/cong-node-properties-dialog.c:790
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1089
 msgid "Properties"
 msgstr "Egenskaper"
 
@@ -172,9 +172,8 @@ msgid "Find:"
 msgstr "Finn:"
 
 #: glade/cong-find-replace.glade.h:4
-#, fuzzy
 msgid "Match _Case"
-msgstr "Treff"
+msgstr ""
 
 #: glade/cong-find-replace.glade.h:5
 msgid "Replace"
@@ -301,6 +300,18 @@ msgstr "URL"
 msgid "_Test this Link"
 msgstr ""
 
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr ""
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr ""
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:729
+msgid "Document Type"
+msgstr "Dokumenttype"
+
 #: glade/string_selection_dialog.glade.h:2
 msgid "label"
 msgstr "etikett"
@@ -314,9 +325,8 @@ msgid "XML Editor"
 msgstr "XML-redigering"
 
 #: src/cong-app.c:928
-#, fuzzy
 msgid "Conglomerate could not load any xds files"
-msgstr "Kunne ikke laste fil: %s"
+msgstr "Conglomerate kunne ikke laste noen xds-filer"
 
 #: src/cong-app.c:930
 msgid "Conglomerate could not find any descriptions of document types."
@@ -362,24 +372,26 @@ msgid "Save changes to document \"%s\" before closing?"
 msgstr "Lagre endringer i dokument «%s» før programmet lukkes?"
 
 #: src/cong-dialog.c:251
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
-msgstr "Hvis du lukker uten å lagre vil endringene forkastes."
+msgstr ""
+"Hvis du lukker uten å lagre vil endringer fra de siste %li timene gå tapt."
 
 #: src/cong-dialog.c:253
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
-msgstr "Hvis du lukker uten å lagre vil endringene forkastes."
+msgstr ""
+"Hvis du lukker uten å lagre vil endringer fra de siste %li minuttene gå tapt."
 
 #: src/cong-dialog.c:255
-#, fuzzy
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
-msgstr "Hvis du lukker uten å lagre vil endringene forkastes."
+msgstr ""
+"Hvis du lukker uten å lagre vil endringene fra det siste minuttet gå tapt."
 
 #: src/cong-dialog.c:300
 #, c-format
@@ -463,10 +475,6 @@ msgstr "Kommentar «%s»"
 msgid "Document"
 msgstr "Dokument"
 
-#: src/cong-document.c:729
-msgid "Document Type"
-msgstr "Dokumenttype"
-
 #: src/cong-document.c:732
 msgid "Document Fragment"
 msgstr ""
@@ -531,18 +539,16 @@ msgid "Move cursor"
 msgstr ""
 
 #: src/cong-editor-node-text.c:991
-#, fuzzy
 msgid "Drag out selection"
-msgstr "Klipp ut utvalget"
+msgstr ""
 
 #: src/cong-editor-widget3.c:253
-#, fuzzy
 msgid "Expander Size"
-msgstr "Maksimal angrestørrelse"
+msgstr "Størrelse på utvider"
 
 #: src/cong-editor-widget3.c:254
 msgid "Size of the expander arrow"
-msgstr ""
+msgstr "Størrelse på pil for utvider"
 
 #: src/cong-editor-widget3.c:628
 msgid "Input Method"
@@ -554,7 +560,7 @@ msgstr "Skriving"
 
 #: src/cong-editor-widget3.c:1162
 msgid "Cursor Movement"
-msgstr ""
+msgstr "Markørbevegelse"
 
 #: src/cong-editor-widget3.c:1202 src/cong-editor-widget3.c:1215
 msgid "Delete Selection"
@@ -580,9 +586,9 @@ msgstr ""
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-dialog.c:248
-#, fuzzy, c-format
+#, c-format
 msgid "An error was reported whilst attempting the operation \"%s\""
-msgstr "En feil oppstod under lesing av kategorilisten"
+msgstr ""
 
 #: src/cong-error-dialog.c:251
 #, c-format
@@ -592,9 +598,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
-#, fuzzy
 msgid "An unexpected error occurred."
-msgstr "En uventet feil har oppstått: %d."
+msgstr "En uventet feil har oppstått."
 
 #: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
@@ -602,12 +607,12 @@ msgstr ""
 
 #. Add upper content:
 #: src/cong-error-dialog.c:300
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred whilst running this system command:\n"
 "\n"
 "<tt>%s</tt>"
-msgstr "En feil oppstod under lesing av kategorilisten"
+msgstr ""
 
 #: src/cong-error-dialog.c:301
 #, c-format
@@ -634,9 +639,8 @@ msgid "%s could not read \"%s\" from %s."
 msgstr ""
 
 #: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
-#, fuzzy
 msgid "An unexpected internal error occurred."
-msgstr "En uventet feil har oppstått: %d."
+msgstr "En uventet intern feil har oppstått."
 
 #: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
@@ -686,9 +690,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-error-file-open.c:271
-#, fuzzy
 msgid "There were problems reading the content of the file."
-msgstr "Antall filer som vises i «siste filer» i filmenyen."
+msgstr ""
 
 #: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
 #: src/cong-error-file-open.c:329
@@ -705,9 +708,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
-#, fuzzy
 msgid "There were problems reading the contents of the file."
-msgstr "Antall filer som vises i «siste filer» i filmenyen."
+msgstr ""
 
 #: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
 msgid "The system does not recognise that as a valid location."
@@ -722,11 +724,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-error-file-open.c:310
-#, fuzzy
 msgid "You do not have permission to read that file."
-msgstr ""
-"Du har ikke rettigheter til å lagre til\n"
-"%s"
+msgstr "Du har ikke rettigheter til å lese den filen."
 
 #: src/cong-error-file-open.c:311
 msgid "Try asking your system administrator to give you permission."
@@ -745,11 +744,9 @@ msgstr ""
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-open.c:336
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory, rather than a file."
-msgstr ""
-"%s\n"
-"er et katalognavn"
+msgstr "«%s» er en katalog, ikke en fil."
 
 #: src/cong-error-file-open.c:340
 msgid "Try using the Search Tool to find your file."
@@ -763,7 +760,7 @@ msgstr ""
 #: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
 #: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
 msgid "The server could not be contacted."
-msgstr ""
+msgstr "Tjeneren kunne ikke kontaktes."
 
 #: src/cong-error-file-open.c:362
 msgid "Try again.  If it fails again, the server may be down."
@@ -831,9 +828,8 @@ msgid "Try saving to a different location."
 msgstr ""
 
 #: src/cong-error-file-save.c:124
-#, fuzzy
 msgid "There were problems writing the content of the file."
-msgstr "Antall filer som vises i «siste filer» i filmenyen."
+msgstr ""
 
 #: src/cong-error-file-save.c:125
 msgid "Try again.  If it fails again, try saving to a different location."
@@ -853,9 +849,8 @@ msgstr ""
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:168
-#, fuzzy
 msgid "The file is too big to fit on the device."
-msgstr "Denne filen er ikke i gitt koding."
+msgstr ""
 
 #: src/cong-error-file-save.c:177
 msgid "Try saving the file to a different location."
@@ -895,11 +890,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-error-file-save.c:256
-#, fuzzy
 msgid "You do not have permission to write to that location."
-msgstr ""
-"Du har ikke rettigheter til å lagre til\n"
-"%s"
+msgstr "Du har ikke rettigheter til å skrive til den lokasjonen."
 
 #: src/cong-error-file-save.c:257
 msgid ""
@@ -909,11 +901,9 @@ msgstr ""
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:271
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is a directory."
-msgstr ""
-"%s\n"
-"er et katalognavn"
+msgstr "«%s» er en katalog."
 
 #: src/cong-error-file-save.c:275
 msgid ""
@@ -1034,21 +1024,21 @@ msgstr ""
 msgid "FIXME"
 msgstr "FIKSMEG"
 
-#: src/cong-file-new.c:126
-#, fuzzy, c-format
+#: src/cong-file-new.c:137
+#, c-format
 msgid "Creating a new file (%s)"
-msgstr "Kan ikke lese informasjonsfil for tillegg («%s»)."
+msgstr "Oppretter en ny fil (%s)"
 
-#: src/cong-file-new.c:214
+#: src/cong-file-new.c:270
 msgid "File Type"
 msgstr "Filtype"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:401 src/cong-file-new.c:408 src/cong-file-new.c:433
+#: src/cong-file-new.c:470 src/cong-file-new.c:477 src/cong-file-new.c:502
 msgid "Creating a new file"
 msgstr "Oppretter en ny fil"
 
-#: src/cong-file-new.c:409
+#: src/cong-file-new.c:478
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1059,16 +1049,16 @@ msgid ""
 "\"template documents\" to add to this system."
 msgstr ""
 
-#: src/cong-file-new.c:422
+#: src/cong-file-new.c:491
 msgid "What type of file would you like to create?"
 msgstr ""
 
-#: src/cong-file-new.c:424
+#: src/cong-file-new.c:493
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr ""
 
-#: src/cong-file-new.c:434
+#: src/cong-file-new.c:503
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1138,9 +1128,8 @@ msgid "None"
 msgstr "Ingen"
 
 #: src/cong-file-properties.c:163
-#, fuzzy
 msgid "_Remove this DTD"
-msgstr "Fje_rn"
+msgstr "Fje_rn denne DTDen"
 
 #: src/cong-file-properties.c:186
 msgid ""
@@ -1150,9 +1139,8 @@ msgid ""
 msgstr ""
 
 #: src/cong-file-properties.c:194
-#, fuzzy
 msgid "No External Subset"
-msgstr "Hent _eksterne data"
+msgstr ""
 
 #: src/cong-file-properties.c:196
 msgid "_Add a DTD"
@@ -1419,9 +1407,8 @@ msgid "/Debug/Document Signal Log"
 msgstr ""
 
 #: src/cong-menus.c:1328 src/cong-menus.c:1360
-#, fuzzy
 msgid "/Debug/Information Alert"
-msgstr "Informasjon"
+msgstr ""
 
 #: src/cong-menus.c:1329 src/cong-menus.c:1361
 msgid "/Debug/Glade Test"
@@ -1468,12 +1455,44 @@ msgstr ""
 msgid "Value"
 msgstr "Verdi"
 
-#: src/cong-node-properties-dialog.c:610
+#: src/cong-node-properties-dialog.c:601
 #, c-format
-msgid "Attributes for <tt>%s</tt> tags"
+msgid "Attributes for <tt>%s</tt> elements"
 msgstr ""
 
-#: src/cong-node-properties-dialog.c:736 src/cong-node-properties-dialog.c:823
+#: src/cong-node-properties-dialog.c:715
+msgid "Text"
+msgstr "Tekst"
+
+#: src/cong-node-properties-dialog.c:767
+msgid "Choice"
+msgstr "Valg"
+
+#: src/cong-node-properties-dialog.c:802
+msgid "Optional"
+msgstr "Valgfri"
+
+#: src/cong-node-properties-dialog.c:818
+msgid "Zero or more"
+msgstr "Null eller flere"
+
+#: src/cong-node-properties-dialog.c:834
+msgid "One or more"
+msgstr "En eller flere"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:890
+msgid "Valid Content"
+msgstr "Gyldig innhold"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:915
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:1035
+#: src/cong-node-properties-dialog.c:1122
 msgid "DTD"
 msgstr "DTD"
 
@@ -1482,9 +1501,9 @@ msgid "Unknown data"
 msgstr "Ukjente data"
 
 #: src/cong-parser-error.c:177
-#, fuzzy, c-format
+#, c-format
 msgid "Parse errors loading %s"
-msgstr "Feil i tolking under lesing av Applix-fil."
+msgstr "Feil i tolking ved lasting av %s"
 
 #: src/cong-parser-error.c:185
 msgid "_Retry"
@@ -1526,57 +1545,57 @@ msgstr ""
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr ""
 
-#: src/cong-primary-window.c:314 src/cong-primary-window.c:315
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Open document"
 msgstr "Åpne dokument"
 
-#: src/cong-primary-window.c:322 src/cong-primary-window.c:323
+#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
 msgid "New document"
 msgstr "Nytt dokument"
 
-#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
+#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
 msgid "Save document"
 msgstr "Lagre dokument"
 
-#: src/cong-primary-window.c:349 src/cong-primary-window.c:350
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
 msgid "Undo"
 msgstr "Angre"
 
-#: src/cong-primary-window.c:356 src/cong-primary-window.c:357
+#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
 msgid "Redo"
 msgstr "Gjenopprett"
 
-#: src/cong-primary-window.c:375 src/cong-primary-window.c:376 src/tree.c:178
+#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/cong-primary-window.c:382 src/cong-primary-window.c:383
+#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/cong-primary-window.c:389 src/cong-primary-window.c:390
+#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/cong-primary-window.c:521
+#: src/cong-primary-window.c:520
 msgid "Overview"
 msgstr "Oversikt"
 
-#: src/cong-primary-window.c:531
+#: src/cong-primary-window.c:530
 msgid "Bookmarks"
 msgstr "Bokmerker"
 
-#: src/cong-primary-window.c:540
+#: src/cong-primary-window.c:539
 msgid "Raw XML"
 msgstr "Rå XML"
 
-#: src/cong-primary-window.c:667 src/cong-primary-window.c:686
+#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr ""
 
-#: src/cong-primary-window.c:766
+#: src/cong-primary-window.c:770
 #, c-format
 msgid "%s (modified) - %s"
 msgstr ""
@@ -1590,14 +1609,13 @@ msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr ""
 
 #: src/cursor.c:99
-#, c-format, fuzzy
+#, c-format
 msgid "Split %s tag"
-msgstr "Delt sirkel"
+msgstr ""
 
 #: src/plugin-admonition.c:59
-#, fuzzy
 msgid "Admonition"
-msgstr "_Tilstand:"
+msgstr ""
 
 #: src/plugin-admonition.c:60
 msgid "An editor node for visualising tips, warnings, etc"
@@ -1695,9 +1713,8 @@ msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr ""
 
 #: src/plugin-docbook.c:1335
-#, fuzzy
 msgid "Import text as a DocBook article"
-msgstr "Importerer teksten fra en fil"
+msgstr "Importerer tekst som en DocBook-artikkel"
 
 #: src/plugin-docbook.c:1336
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
@@ -1765,9 +1782,8 @@ msgid ""
 msgstr ""
 
 #: src/plugin-docbook.c:1418
-#, fuzzy
 msgid "Demote Section"
-msgstr "Beskyttelse"
+msgstr ""
 
 #: src/plugin-docbook.c:1419
 msgid ""
@@ -1775,9 +1791,8 @@ msgid ""
 msgstr ""
 
 #: src/plugin-docbook.c:1421
-#, fuzzy
 msgid "Demote"
-msgstr "Fjern"
+msgstr ""
 
 #: src/plugin-docbook.c:1422 src/plugin-docbook.c:1423
 msgid "Demote the section to a lower organisational level within the document"
@@ -1862,6 +1877,18 @@ msgstr ""
 msgid "An editor node for visualising a paragraph"
 msgstr ""
 
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr ""
+
+#: src/plugin-random.c:603
+msgid "Random Document"
+msgstr "Tilfeldig dokument"
+
+#: src/plugin-random.c:604
+msgid "Create an XML document containing random content."
+msgstr ""
+
 #: src/plugin-save-dispspec.c:131
 msgid "Dump Display Spec"
 msgstr ""
@@ -1922,11 +1949,11 @@ msgstr ""
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr ""
 
-#: src/plugin-tests.c:331
+#: src/plugin-tests.c:333
 msgid "Unicode Character Reference"
 msgstr ""
 
-#: src/plugin-tests.c:332
+#: src/plugin-tests.c:334
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
@@ -2009,9 +2036,8 @@ msgid "Generate _Website"
 msgstr ""
 
 #: src/plugin-xsl.c:316
-#, fuzzy
 msgid "XSL Template Element"
-msgstr "Detaljer om mal"
+msgstr "XSL-malelement"
 
 #: src/plugin-xsl.c:317
 msgid "An element for visualising template rules in an XSL stylesheet"
@@ -2022,28 +2048,25 @@ msgid "(no description available)"
 msgstr ""
 
 #: src/popup.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "Apply span tag: %s"
-msgstr "Påfør skri_fter"
+msgstr ""
 
 #: src/popup.c:263
-#, fuzzy
 msgid "Remove Span Tag"
-msgstr "Fjern et filter"
+msgstr ""
 
 #: src/popup.c:372
-#, fuzzy
 msgid "Remove span tag"
-msgstr "Fjern et filter"
+msgstr ""
 
 #: src/popup.c:953
 msgid "Delete this item"
 msgstr "Slett denne oppføringen"
 
 #: src/popup.c:963
-#, fuzzy
 msgid "Add text node after"
-msgstr "Legg til eller fjern et filter"
+msgstr "Legg til tekstnode etter"
 
 #: src/popup.c:971
 msgid "Add text node before"
@@ -2074,14 +2097,14 @@ msgid "New sibling"
 msgstr ""
 
 #: src/tree.c:42
-#, fuzzy, c-format
+#, c-format
 msgid "Insert sibling: %s"
-msgstr "Sett inn kolonner"
+msgstr ""
 
 #: src/tree.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Insert child: %s"
-msgstr "Sett inn celler"
+msgstr ""
 
 #: src/xmldata.c:436
 #, c-format
@@ -2096,19 +2119,16 @@ msgid "Required Children Choices"
 msgstr ""
 
 #: src/xmledit.c:244
-#, fuzzy
 msgid "Paste Under"
-msgstr "Siderekkefølge"
+msgstr "Lim inn under"
 
 #: src/xmledit.c:287
-#, fuzzy
 msgid "Paste Before"
-msgstr "Siderekkefølge"
+msgstr "Lim inn før"
 
 #: src/xmledit.c:329
-#, fuzzy
 msgid "Paste After"
-msgstr "Lim inn type"
+msgstr "Lim inn etter"
 
 #: src/xmledit.c:368
 msgid "Source View - Conglomerate"
