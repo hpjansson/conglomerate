@@ -69,31 +69,6 @@ action_marshaller_Document_Node_ParentWindow (GtkAction *action,
 }
 
 static void
-action_marshaller_Document_DispspecElement_Node (GtkAction *action, 
-						 gpointer user_data)
-{
-	CongDocument *doc;
-	CongDispspecElement *ds_element;
-	CongNodePtr node = (CongNodePtr)user_data;
-	CongUICallback_Document_DispspecElement_Node wrapped_callback;
-
-	doc = g_object_get_data (G_OBJECT (action),
-				 "document");
-	g_assert (IS_CONG_DOCUMENT (doc));
-
-	ds_element = g_object_get_data (G_OBJECT (action),
-					"ds_element");
-
-	wrapped_callback = g_object_get_data (G_OBJECT (action),
-					      "wrapped_callback");
-	g_assert (wrapped_callback);
-
-	wrapped_callback (doc, 
-			  ds_element,
-			  node);
-}
-
-static void
 action_marshaller_Document_ElementDescription_SelectedNode (GtkAction *action, 
 							    gpointer user_data)
 {
@@ -185,50 +160,6 @@ cong_action_attach_callback_Document_Node_ParentWindow (GtkAction *action,
 	g_object_set_data (G_OBJECT (action),
 			   "parent_window",
 			   parent_window);
-
-	return action;
-}
-
-/**
- * cong_action_attach_callback_Document_DispspecElement_Node:
- * @action:
- * @callback:
- * @doc:
- * @ds_element:
- * @node:
- *
- * TODO: Write me
- * Returns:
- */
-GtkAction*
-cong_action_attach_callback_Document_DispspecElement_Node (GtkAction *action, 
-							   CongUICallback_Document_DispspecElement_Node callback,
-							   CongDocument *doc,
-							   CongDispspecElement *ds_element,
-							   CongNodePtr node)
-{
-	g_return_val_if_fail (action, NULL);
-	g_return_val_if_fail (callback, NULL);
-	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	g_return_val_if_fail (ds_element, NULL);
-	g_return_val_if_fail (node, NULL);
-
-	g_object_set_data (G_OBJECT (action),
-			   "wrapped_callback",
-			   callback);
-
-	g_signal_connect (G_OBJECT (action), 
-			  "activate",
-			  G_CALLBACK (action_marshaller_Document_DispspecElement_Node), 
-			  node);
-
-	g_object_set_data (G_OBJECT (action),
-			   "document",
-			   doc);
-
-	g_object_set_data (G_OBJECT (action),
-			   "ds_element",
-			   ds_element);
 
 	return action;
 }

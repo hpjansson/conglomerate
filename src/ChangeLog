@@ -1,5 +1,9 @@
 2004-08-13  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c, cong-ui-hooks.h: 
+
+	Removed Document_DispspecElement_Node callbacks
+
 	* cong-dom-view.c, cong-editor-area.c, cong-editor-node-text.c,
 	cong-editor-widget.h, cong-editor-widget3.c, cong-menus.c,
 	cong-overview-view.c, cong-overview-view.h, cong-primary-window.c,

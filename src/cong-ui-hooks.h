@@ -37,11 +37,6 @@ typedef void
 					      GtkWindow *parent_window);
 
 typedef void 
-(*CongUICallback_Document_DispspecElement_Node) (CongDocument *doc,
-						 CongDispspecElement *ds_element,
-						 CongNodePtr node);
-
-typedef void 
 (*CongUICallback_Document_ElementDescription_SelectedNode) (CongDocument *doc,
 							    CongElementDescription *element_desc);
 
@@ -57,13 +52,6 @@ cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
 							   CongDocument *doc,
 							   CongNodePtr node,
 							   GtkWindow *parent_window);
-
-GtkMenuItem* 
-cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item, 
-							      CongUICallback_Document_DispspecElement_Node callback,
-							      CongDocument *doc,
-							      CongDispspecElement *ds_element,
-							      CongNodePtr node);
 
 GtkMenuItem* 
 cong_menu_item_attach_callback_Document_ElementDescription_SelectedNode (GtkMenuItem *item, 
