@@ -1,3 +1,9 @@
+2005-01-02  Michele Garoche  <michele.garoche@easyconnect.fr>
+
+	* cong_element_map_ref.xml
+
+	Added id to second section so that it is displayed in the left panel
+	
 2004-10-15  Hervé Cauwelier <debian@oursours.net>
 
 	* Makefile.am: Added faq.xml to be deleted on uninstall.

@@ -30,8 +30,8 @@
         </table>
         
     </sect1>
-    <sect1>
-        <title>Map to Relax NG</title>
+    <sect1 id="map_to_relaxng">
+        <title id="map_to_relaxng.title">Map to Relax NG</title>
         <para>text</para>
     </sect1>
 </appendix>
