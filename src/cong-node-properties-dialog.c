@@ -1196,12 +1196,36 @@ cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
 
 /**
  * cong_node_properties_dialog_new:
- * @doc:
- * @node:
- * @parent_window:
+ * @doc: The document being displayed.
+ * @node: The node to display.
+ * @parent_window: The parent window of the document.
  *
- * TODO: Write me
- * Returns:
+ * Create a dialog window which displays, and allows the user to edit,
+ * the properties of the supplied node. The format of the dialog
+ * depends on the node type. 
+ *
+ * The main interest will be for nodes of type CONG_NODE_TYPE_ELEMENT.
+ * If there is a plugin registered for this node then the plugin will be
+ * used, otherwise the attributes of the node will be displayed. In the
+ * later case, the attributes will be displayed in a "raw" form (as
+ * a set of name and value pairs) and, if a DTD associated with this file,
+ * using an interface that follows the DTD (e.g. will limit enumerated
+ * values to the allowable choices only).
+ *
+ * For CONG_NODE_TYPE_TEXT nodes the properties of the parent node will
+ * be displayed. This is primarily so that users can access the attributes
+ * of span nodes, but it will work for any text node. Should there be
+ * a way to indicate that this has happened (i.e. some indication
+ * in the dialog that we are actually displaying the parent's
+ * properties)?
+ *
+ * Other node types result in a dialog which only lists the name
+ * and the XPath location of the node.
+ *
+ * At present the returned dialog window should be displayed using
+ * gtk_widget_show() rather than gtk_dialog_run().
+ *
+ * Returns: a #GtkWidget displaying the properties of the node.
  */
 GtkWidget*
 cong_node_properties_dialog_new (CongDocument *doc, 
@@ -1210,6 +1234,18 @@ cong_node_properties_dialog_new (CongDocument *doc,
 {
 	g_return_val_if_fail (doc, NULL);
 	g_return_val_if_fail (node, NULL);
+
+	/*
+	 * If this is a text node then display the properties of its
+	 * parent node instead. I do not think this can recurse "wildly"
+	 * (presumably a text node can not have a text node as its
+	 * parent).
+	 */
+	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
+		return cong_node_properties_dialog_new (doc,
+							cong_node_parent(node),
+							parent_window);
+	}
 
 	/* Should we use a plugin for this node?: */
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {

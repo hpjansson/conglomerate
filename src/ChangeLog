@@ -1,4 +1,13 @@
-2004-08-30  Douflas Burke <dburke@cfa.harvard.edu>
+2004-08-30  Douglas Burke <dburke@cfa.harvard.edu>
+ 
+	* cong-node-properties-dialog.c
+ 
+ 	The node-properties dialog window now displays the properties
+ 	of the parent node if sent a CONG_NODE_TYPE_TEXT node. This is
+ 	to allow editing the attributes of nodes marked as span by the
+ 	display specification for the document type. 
+
+2004-08-30  Douglas Burke <dburke@cfa.harvard.edu>
 
 	* Makefile.am, cong-attribute-editor.c, cong-attribute-editor.h
 
