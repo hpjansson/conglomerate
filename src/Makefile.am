@@ -24,18 +24,24 @@ conge_SOURCES =             \
   file.c                    \
   open.c                    \
   save.c                    \
-  cong-document.c           \
-  cong-location.c           \
   xmlload.c                 \
+  cong-dialog.c             \
+  cong-dispspec-registry.c  \
+  cong-document.c           \
   cong-error-dialog.c       \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
   cong-error-tests.c        \
-  cong-dispspec-registry.c  \
   cong-font.c               \
-  cong-test-view.c          \
+  cong-location.c           \
   cong-primary-window.c     \
+  cong-test-view.c          \
   cong-tree-view.c          \
+  fo-parser-result.c        \
+  fo-print-context.c        \
+  fo-rect.c                 \
+  fo-solver-result.c        \
+  fo-tests.c                \
   main.c
 
 CFLAGS = $(CONGLOMERATE_CFLAGS)
