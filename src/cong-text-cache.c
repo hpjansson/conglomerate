@@ -129,7 +129,7 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 		gchar *dst;
 		int i;
 		gboolean last_char_was_space=FALSE;
-		CongTextCacheSpan *text_span;
+ 		CongTextCacheSpan *text_span;
 		int original_byte_offset_start_of_span = 0;
 		int stripped_byte_offset_start_of_span = 0;
 
@@ -192,7 +192,17 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 		/* Terminate the string: */
 		*dst = '\0';
 	} else {
-		g_assert(0);
+		/* Just generate one big span: */
+ 		CongTextCacheSpan *text_span;
+
+		text_cache->stripped_string = g_strdup (input_string);
+
+		text_span = cong_text_cache_span_new (0,
+						      0,
+						      strlen (input_string));
+		text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
+							  text_span);
+
 	}
 
 #if DEBUG_TEXT_STRIPPING

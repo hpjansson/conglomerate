@@ -124,8 +124,14 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 PangoLayoutLine*
 cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_text_fragment)
 {
-	return pango_layout_get_line (PRIVATE(area_text_fragment)->pango_layout,
-				      PRIVATE(area_text_fragment)->line_index);
+	PangoLayoutLine* line;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA_TEXT_FRAGMENT(area_text_fragment), NULL);
+
+	line = pango_layout_get_line (PRIVATE(area_text_fragment)->pango_layout,
+						       PRIVATE(area_text_fragment)->line_index);
+
+	return line;
 }
 
 gboolean
@@ -223,6 +229,11 @@ calc_requisition (CongEditorArea *area,
 	PangoRectangle logical_rect;
 	
 	line = cong_editor_area_text_get_pango_layout_line (area_text_fragment);
+
+	if (line==NULL) {
+		g_warning("Looked up a non-existant PangoLayoutLine");
+		return 0; /* workaround for now; possible problems with entity refs/entity decls? */
+	}
 
 	pango_layout_line_get_pixel_extents (line,
 					     &ink_rect,

@@ -1022,6 +1022,13 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 				     node,
 				     editor_node);
 
+		/* DHM 4th August 2003:
+		   Currently the area packing routines get confused; the areas for an entity ref's content get added below the parent of the entity decl (I think; haven't looked too closely into the details.
+		   In any case, I need to have a good look at the semantics of entity refs and entity decls in libxml2 before getting this to work...
+
+		   Perhaps the editor_node should store an "effective parent" when it gets created; hence the editor nodes have a kind of resolved entities representation, but we can still get back to the
+		   entities (and perhaps trigger updates...).  However it does mean that there can be more than one editor_node per doc_node :-(
+		*/
 		create_areas (widget,
 			      node);
 	}
@@ -1059,7 +1066,7 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 		recursive_remove_nodes (widget, 
 					iter);		
 	}
-	
+
 	destroy_areas (widget,
 		       node);
 	

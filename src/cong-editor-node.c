@@ -33,8 +33,11 @@
 #include "cong-editor-node-element-unknown.h"
 #include "cong-editor-node-element-structural.h"
 #include "cong-editor-node-element-span.h"
-#include "cong-editor-node-text.h"
+#include "cong-editor-node-comment.h"
 #include "cong-editor-node-document.h"
+#include "cong-editor-node-dtd.h"
+#include "cong-editor-node-entity-decl.h"
+#include "cong-editor-node-text.h"
 #include "cong-editor-node-unimplemented.h"
 #include "cong-plugin.h"
 
@@ -192,11 +195,16 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 	case CONG_NODE_TYPE_ENTITY_REF:
 	case CONG_NODE_TYPE_ENTITY_NODE:
 	case CONG_NODE_TYPE_PI:
-	case CONG_NODE_TYPE_COMMENT:			
 		{
 			return cong_editor_node_unimplemented_new (widget, 
 								   node,
 								   cong_node_type_description (type));
+		}
+
+	case CONG_NODE_TYPE_COMMENT:			
+		{
+			return cong_editor_node_comment_new (widget, 
+							     node);
 		}
 		
 	case CONG_NODE_TYPE_DOCUMENT:
@@ -209,10 +217,32 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 	case CONG_NODE_TYPE_DOCUMENT_FRAG:
 	case CONG_NODE_TYPE_NOTATION:
 	case CONG_NODE_TYPE_HTML_DOCUMENT:
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   node,
+								   cong_node_type_description (type));
+		}
+
 	case CONG_NODE_TYPE_DTD:
+		{
+			return cong_editor_node_dtd_new (widget, 
+							 node);
+		}
+
 	case CONG_NODE_TYPE_ELEMENT_DECL:
 	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   node,
+								   cong_node_type_description (type));
+		}
+
 	case CONG_NODE_TYPE_ENTITY_DECL:
+		{
+			return cong_editor_node_entity_decl_new (widget, 
+								 node);
+		}
+		
 	case CONG_NODE_TYPE_NAMESPACE_DECL:
 	case CONG_NODE_TYPE_XINCLUDE_START:
 	case CONG_NODE_TYPE_XINCLUDE_END:

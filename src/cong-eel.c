@@ -45,6 +45,28 @@ cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line)
 			  layout_line->length);
 }
 
+void
+cong_eel_rgb_to_gdk_color (GdkColor             *color,
+			   guchar               r,
+			   guchar               g,
+			   guchar               b)
+{
+	gboolean result;
+
+	g_return_if_fail (color);
+
+	color->red = (r<<8);
+	color->green = (g<<8);
+	color->blue = (b<<8);
+
+	result = gdk_colormap_alloc_color (cong_gui_get_a_window()->style->colormap, 
+					   color, 
+					   FALSE, 
+					   TRUE);
+	g_assert (result);
+}
+
+
 /**
  * cong_eel_rectangle_contains:
  * @rectangle: Rectangle possibly containing a point.
