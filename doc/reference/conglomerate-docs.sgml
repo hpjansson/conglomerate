@@ -204,14 +204,20 @@ cong_document_end_command (doc, cmd);
 
   <chapter>
     <title>The Editor Widget</title>
+    <sect1><title>The Basics</title>
     <para>For every xml node in the document, there is a <link linkend="CongEditorNode">CongEditorNode</link> for each editor_widget3.  There is a class hierarchy of <classname>CongEditorNode</classname> subclasses, so, for instance, there's a <link linkend="CongEditorNodeElementStructural">CongEditorNodeElementStructural</link> which is used for structural tags, and a <link linkend="CongEditorNodeComment">CongEditorNodeComment</link> for comments.  This way, we only have to figure out what type a node is once, rather than every time we visit it, plus we can store useful state in the <classname>CongEditorNode</classname> objects.  For example, in a <link linkend="CongEditorNodeText">CongEditorNodeText</link>, we store a <classname>PangoLayout</classname>.</para>
     <para>There is also a collection of <link linkend="CongEditorArea">CongEditorArea</link> objects.  These form a hierarchical tree of rectangular areas which divide up the space allocated to the widget.  They know how to draw themselves, can be clicked on, handle size negotiation etc.  They are a little bit like a lightweight version of <classname>GtkWidgets</classname>, although the analogy isn't perfect. </para>
-    <para><classname>CongEditorArea</classname> objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. <link linked="CongEditorAreaComposer">CongEditorAreaComposer</link> which exists purely to manage the sizing of its children).</para>
+    <para><classname>CongEditorArea</classname> objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. <link linkend="CongEditorAreaComposer">CongEditorAreaComposer</link> which exists purely to manage the sizing of its children).</para>
     <para><classname>CongEditorNode</classname> objects work behind the scenes.  They are responsible for creating <classname>CongEditorArea</classname> objects to represent themselves.</para>
     <para>There are a few other classes involved: <link linkend="CongEditorAreaFlowHolder">CongEditorAreaFlowHolder</link>, and <link linkend="CongEditorChildPolicy">CongEditorChildPolicy</link>.  These are responsible for generating paragraph-like areas, which the editor nodes "pour" their <classname>CongEditorAreas</classname> into.  This allows us to get the nice underlines, which is achieved by using a <classname>PangoLayout</classname> for every text node, splitting all the <classname>PangoLayoutLines</classname> into separate <classname>CongEditorArea</classname> objects, and then merging them, together with a few extra <classname>CongEditorAreas</classname>. </para>
     <para> If you want to see the <classname>CongEditorAreas</classname>, then go to <filename>src/cong-editor-area.c</filename> and play around with the #define settings; in particular <constant>DEBUG_RENDER_ALLOCATIONS</constant> can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
+    <!--
+	The followng items do not appear in the "table of contents" for this
+	section, although they are accessible via the "next page" links
+      -->
     &cong-editor-widget;
     &cong-editor-line-fragments;
+    </sect1>
 
     <sect1><title>Child Policies</title>
     &cong-editor-child-policy;
