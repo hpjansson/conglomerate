@@ -1140,13 +1140,16 @@ cong_node_should_be_visible_in_editor (CongNodePtr node)
 
 	if (cong_node_type (node) == CONG_NODE_TYPE_TEXT) {
 		if (node->parent) {
-			xmlElementPtr dtd_entry;
+			xmlElementPtr dtd_entry = NULL;
 			
 			/* If the DTD doesn't allow #PCDATA in this node and it only
 			   contains whitespace we should ignore it (if it does it
 			   shouldn't validate we should add an error marked element).
 			*/
-			dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
+			/* Bulletproof the routine to deal with TEXT nodes immediately below DOCUMENT (which ould have a NULL name) and similar cases: */
+			if (node->parent->name) {
+				dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
+			}
 			if (dtd_entry) {
 				if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
 					return TRUE;

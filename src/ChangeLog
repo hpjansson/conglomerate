@@ -1,5 +1,9 @@
 2004-01-16  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c, cong-node.c:
+
+	Bulletproofing for the Cleanup XML Source tool
+
 	* cong-editor-widget3.c
 
 	Removed dead code

@@ -1410,6 +1410,7 @@ potentially_add_editor_node (CongEditorWidget3 *editor_widget,
 	g_return_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node));
 
 	xml_node = cong_traversal_node_get_node (traversal_node);
+	g_assert (xml_node);
 
 	should_add_node = cong_node_should_be_visible_in_editor (xml_node);
 
