@@ -1,5 +1,5 @@
 desktopdir 	 = $(datadir)/applications
-desktop_in_files = conge.desktop.in
+desktop_in_files = conglomerate.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
