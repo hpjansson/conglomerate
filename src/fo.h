@@ -44,11 +44,61 @@ G_BEGIN_DECLS
 typedef gdouble FoUnit;
 
 typedef struct FoRect FoRect;
+
+typedef struct FoObject FoObject;
+typedef struct FoClass FoClass;
+#define FO_OBJECT(x) ((FoObject*)(x))
+#define FO_CLASS(x) ((FoClass*)(x))
+
+typedef struct FoParserObject FoParserObject;
+typedef struct FoParserClass FoParserClass;
+#define FO_PARSER_OBJECT(x) ((FoParserObject*)(x))
+#define FO_PARSER_CLASS(x) ((FoParserClass*)(x))
+
 typedef struct FoRegion FoRegion;
+
+typedef struct FoPageSequenceGenerator FoPageSequenceGenerator;
+#define FO_PAGE_SEQUENCE_GENERATOR(x) ((FoPageSequenceGenerator*)(x))
+
 typedef struct FoSimplePageMaster FoSimplePageMaster;
+#define FO_SIMPLE_PAGE_MASTER(x) ((FoSimplePageMaster*)(x))
+
+typedef struct FoSubsequenceSpecifier FoSubsequenceSpecifier;
+#define FO_SUBSEQUENCE_SPECIFIER(x) ((FoSubsequenceSpecifier*)(x))
+
+typedef struct FoSS_SinglePageMasterReference FoSS_SinglePageMasterReference;
+typedef struct FoSS_RepeatablePageMasterReference FoSS_RepeatablePageMasterReference;
+typedef struct FoSS_RepeatablePageMasterAlternatives FoSS_RepeatablePageMasterAlternatives;
+typedef struct FoConditionalPageMasterReference FoConditionalPageMasterReference; 
+
+typedef struct FoPageSequenceMaster FoPageSequenceMaster;
+#define FO_PAGE_SEQUENCE_MASTER(x) ((FoPageSequenceMaster*)(x))
+
+typedef struct FoFlow FoFlow;
+
+typedef struct FoPageSequence FoPageSequence;
+
 typedef struct FoParserResult FoParserResult;
+
+typedef struct FoSolverArea FoSolverArea;
+typedef struct FoSolverAreaClass FoSolverAreaClass;
+#define FO_SOLVER_AREA(x) ((FoSolverArea*)(x))
+#define FO_SOLVER_AREA_CLASS(x) ((FoSolverAreaClass*)(x))
+
+typedef struct FoSolverTestRect FoSolverTestRect;
+#define FO_SOLVER_TEST_RECT(x) ((FoSolverTestRect*)(x))
+
+typedef struct FoSolverRect FoSolverRect;
+#define FO_SOLVER_RECT(x) ((FoSolverRect*)(x))
+
+typedef struct FoSolverText FoSolverText;
+#define FO_SOLVER_TEXT(x) ((FoSolverText*)(x))
+
 typedef struct FoSolverPage FoSolverPage;
+#define FO_SOLVER_PAGE(x) ((FoSolverPage*)(x))
+
 typedef struct FoSolverResult FoSolverResult;
+
 typedef struct FoPrintContext FoPrintContext;
 
 enum FoRegionID
@@ -67,8 +117,30 @@ struct FoRect
 	FoUnit w,h;
 };
 
+struct FoObject
+{
+	const FoClass *klass;
+};
+
+struct FoClass
+{
+	const gchar *name;
+};
+
+struct FoParserObject
+{
+	FoObject base;
+	xmlNodePtr node;
+};
+
+struct FoParserClass
+{
+	FoClass base;
+};
+
 struct FoRegion
 {
+	FoParserObject base;
 #if 0
 	border;
 	padding;
@@ -93,11 +165,29 @@ struct FoRegion
 	
 };
 
-struct FoSimplePageMaster
+struct FoPageSequenceGenerator
 {
-	xmlNodePtr node;
+	FoParserObject base;
 
 	gchar *name;
+};
+
+struct FoPageSequenceGeneratorClass
+{
+	FoParserClass base;
+	FoSimplePageMaster *(*get_master_for_next_page)(FoPageSequenceGenerator *psg, 
+							int page_number, 
+							int index_within_page_sequence,
+							gboolean is_first_of_sequence,
+							gboolean is_last_of_sequence,
+							gboolean is_blank);
+
+};
+
+struct FoSimplePageMaster
+{
+	FoPageSequenceGenerator base;
+
 	FoUnit page_height;
 	FoUnit page_width;
 	FoUnit margin_top;
@@ -106,6 +196,63 @@ struct FoSimplePageMaster
 	FoUnit margin_right;	
 
 	FoRegion *regions[NUM_FO_REGIONS];
+};
+
+struct FoSubsequenceSpecifier
+{
+	FoParserObject base;
+};
+
+struct FoSS_SinglePageMasterReference
+{
+	FoSubsequenceSpecifier foss;
+
+	FoSimplePageMaster *spm;
+};
+
+struct FoSS_RepeatablePageMasterReference
+{
+	FoSubsequenceSpecifier foss;
+
+	FoSimplePageMaster *spm;
+};
+
+struct FoSS_RepeatablePageMasterAlternatives
+{
+	FoSubsequenceSpecifier foss;
+
+	GList *list_of_alternatives; /* of type FoConditionalPageMasterReference */
+};
+
+struct FoConditionalPageMasterReference
+{
+	FoParserObject base;
+
+	FoSimplePageMaster *spm;
+};
+
+struct FoPageSequenceMaster
+{
+	FoPageSequenceGenerator base;
+
+	GList *list_of_subsequence_specifier; /* of type FoSubsequenceSpecifier */
+};
+
+struct FoFlow
+{
+	FoParserObject base;
+};
+
+struct FoPageSequence
+{
+	FoParserObject base;
+
+	FoPageSequenceGenerator *psg; /* will be either a FoSimplePageMaster or a FoPageSequenceMaster */
+#if 0
+	FoTitle *title;
+	FoStaticContent *static_content; /* should be a list */
+#endif
+	FoFlow *flow;
 };
 
 struct FoParserResult
@@ -118,16 +265,74 @@ struct FoParserResult
 	xmlNodePtr node_declarations;
 
 	GList *list_of_simple_page_master; /* of type FoSimplePageMaster */
+	GList *list_of_page_sequence_master; /* of type FoPageSequenceMaster */
+	GList *list_of_page_sequence; /* of type FoPageSequence */
+};
+
+struct FoSolverArea
+{
+	FoObject base;
+
+	GList *children; /* of type FoSolverArea */	
+};
+
+struct FoSolverAreaClass
+{
+	FoClass base;
+
+	void (*render)(FoSolverArea *area,
+		       FoPrintContext *fpc);
+		       
+};
+
+struct FoSolverTestRect
+{
+	FoSolverArea area;
+	FoRect rect;
+	gchar *text;
+};
+
+struct FoSolverRect
+{
+	FoSolverArea area;
+	FoRect rect;
+
+	/* offsets its children by its origin */
+};
+
+struct FoSolverText
+{
+	FoSolverArea area;
+
+	PangoGlyphString *glyph_string;
+	PangoFont *pango_font;
+	PangoRectangle ink_rect;
+	PangoRectangle logical_rect;
+	gchar *text;
 };
 
 struct FoSolverPage
 {
-	int dummy;
+	FoSolverArea area;
+
+	FoSimplePageMaster *spm;
 };
 
 struct FoSolverResult
 {
+	FoParserResult *parser_result;
+
 	GList *list_of_solver_page; /* of type FoSolverPage; */
+	int num_pages;
+
+	/* Internal state whilst generating the result: */
+	PangoContext *pango_context;
+	PangoFontMap *pango_font_map;
+ 
+	FoPageSequence *current_ps;
+
+	FoSolverPage *current_page;
+	FoUnit insertion_y;
 };
 
 /* FoRect methods: */
@@ -135,10 +340,28 @@ void fo_rect_set_xywh(FoRect *rect, FoUnit x, FoUnit y, FoUnit w, FoUnit h);
 void fo_rect_set_xyxy(FoRect *rect, FoUnit x0, FoUnit y0, FoUnit x1, FoUnit y1);
 void fo_rect_test_render(const FoRect *rect, FoPrintContext *fpc, const gchar *label);
 
+/**
+   Method to evaluate which SimplePageMaster to use.
+
+   SimplePageMasters return themselves.
+   PageSequenceMasters use their own logic...
+ */
+FoSimplePageMaster *fo_page_sequence_generator_get_master_for_next_page(FoPageSequenceGenerator *psg, 
+									int page_number, 
+									int index_within_page_sequence,
+									gboolean is_first_of_sequence,
+									gboolean is_last_of_sequence,
+									gboolean is_blank);
+
 /* FoParserResult methods: */
 FoParserResult *fo_parser_result_new_from_xmldoc(xmlDocPtr xml_doc);
 void fo_parser_result_delete(FoParserResult *result);
 void fo_parser_result_test_render(FoParserResult *result, FoPrintContext *fpc);
+FoSimplePageMaster *fo_parser_result_lookup_simple_page_master(FoParserResult *result, xmlChar *name);
+FoPageSequenceMaster *fo_parser_result_lookup_page_sequence_master(FoParserResult *result, xmlChar *name);
+
+
+void fo_solver_area_render_recursive(FoSolverArea *area, FoPrintContext *fpc);
 
 /* FoSolverResult methods: */
 FoSolverResult *fo_solver_result_new_from_parser_result(FoParserResult *parser_result);
@@ -151,6 +374,9 @@ void fo_print_context_delete(FoPrintContext *fpc);
 void fo_print_context_beginpage(FoPrintContext *fpc, const gchar* name);
 void fo_print_context_showpage (FoPrintContext *fpc);
 void fo_print_context_test_rect(FoPrintContext *fpc, const FoRect *rect, const gchar *label);
+void fo_print_context_push_state(FoPrintContext *fpc);
+void fo_print_context_pop_state(FoPrintContext *fpc);
+void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y);
 
 G_END_DECLS
 

@@ -81,3 +81,31 @@ void fo_print_context_test_rect(FoPrintContext *fpc, const FoRect *rect, const g
 	gnome_print_rect_stroked(fpc->gpc, rect->x, rect->y, rect->w, rect->h);
 	
 }
+
+void fo_print_context_push_state(FoPrintContext *fpc)
+{
+	g_return_if_fail(fpc);
+
+	g_assert(fpc->gpc);
+
+	gnome_print_gsave(fpc->gpc);
+}
+
+void fo_print_context_pop_state(FoPrintContext *fpc)
+{
+	g_return_if_fail(fpc);
+
+	g_assert(fpc->gpc);
+
+	gnome_print_grestore(fpc->gpc);
+}
+
+void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y)
+{
+	g_return_if_fail(fpc);
+
+	g_assert(fpc->gpc);
+	gnome_print_translate(fpc->gpc,
+			      x,
+			      y);
+}

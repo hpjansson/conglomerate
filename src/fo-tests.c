@@ -33,7 +33,7 @@ void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm)
 
 		if (parser_result) {
 
-#if 0
+#if 1
 			/* View solver result: */
 			solver_result = fo_solver_result_new_from_parser_result(parser_result);
 
