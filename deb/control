@@ -3,7 +3,7 @@ Section: editors
 Priority: optional
 Maintainer: Geert Stappers <stappers@stappers.nl>
 Uploaders: Sven Luther <luther@debian.org>
-Build-Depends: debhelper (>> 4.0.0), libbonobo2-dev, libbonoboui2-dev, libgnome-common, libgnomeui-dev, libgnomeprint-dev, libgnomeprintui-dev
+Build-Depends: debhelper (>> 4.0.0), libbonobo2-dev, libbonoboui2-dev, libgnome2-common, libgnomeui-dev, libgnomeprint-dev, libgnomeprintui2.2-dev
 Standards-Version: 3.6.0
 
 Package: conglomerate
