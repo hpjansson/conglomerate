@@ -29,6 +29,8 @@
 #define DS_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
+/* Internal data structure declarations: */
+
 struct CongDispspecElementHeaderInfo
 {
 	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
@@ -84,83 +86,67 @@ struct CongDispspec
 	CongDispspecElement *paragraph;
 };
 
-void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
+/* Internal function declarations: */
 
-CongDispspecElement*
-cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element);
-
-CongDispspecElement*
-cong_dispspec_element_new(const gchar* xmlns, const gchar* tagname, enum CongElementType type);
-
-
-
-#if 1
+/* Search tree callbacks: */
 static gint key_compare_func (struct SearchTreeKey *a,
 			      struct SearchTreeKey *b,
-			      gpointer user_data)
-{
-	gint name_test;
+			      gpointer user_data);
+static void key_destroy_func (struct SearchTreeKey *key);
+static void value_destroy_func (gpointer data);
 
-	g_assert(a);
-	g_assert(b);
+/* Subroutines for converting XDS XML to a CongDispspec: */
+static CongDispspec* 
+parse_xmldoc (xmlDocPtr doc);
 
-	g_assert(a->name);
-	g_assert(b->name);
+static void 
+parse_metadata (CongDispspec *ds, 
+		xmlDocPtr doc, 
+		xmlNodePtr node);
 
-	/* I believe the search will be faster if we order by name, then namespace: */
-	name_test = strcmp(a->name, b->name);
+static CongDispspecElement*
+cong_dispspec_element_new_from_xml_element (xmlDocPtr doc, 
+					    xmlNodePtr xml_element);
 
-	/* Names are different, sort initially on name ordering: */
-	if (name_test!=0) {
-		return name_test;
-	}
+/* Subroutines for converting a CongDispspec to XDS XML: */
+static void 
+add_xml_for_metadata (xmlDocPtr xml_doc, 
+		      CongNodePtr root, 
+		      CongDispspec *dispspec);
+static void 
+add_xml_for_element (xmlDocPtr xml_doc, 
+		     CongNodePtr element_list, 
+		     CongDispspecElement *element);
 
-	/* Names are the same; continue searching by namespace; order the NULL namespace before all others: */
-	if (NULL == a->xmlns) {
-		if (NULL == b->xmlns) {
-			return 0;
-		} else {
-			return -1; /* a is less than b */
-		}
-	} else {
-		/* "a" has non-NULL namespace: */
-		if (NULL == b->xmlns) {
-			return 1; /* a is greater than b */
-		} else {
-			/* Both have non-NULL namespaces; order based on them: */
-			return strcmp(a->xmlns, b->xmlns);
-		}
-	}
-}
+/* Subroutines for generating a CongDispspec from arbitrtary XML docs: */
+static gboolean
+can_contain_pcdata (xmlElementContentPtr content);
 
-static void key_destroy_func (struct SearchTreeKey *key)
-{
-	g_assert(key);
+static void
+handle_elements_from_dtd (void *payload, void *ds, xmlChar * name);
 
-	if (key->xmlns) {
-		g_free(key->xmlns);
-	}
+static gboolean
+contains_text (const xmlChar* string);
 
-	g_assert(key->name);
+static gboolean
+contains_carriage_return (const xmlChar* string);
 
-	g_free(key->name);
+static void
+promote_element (CongDispspec * dispspec, 
+		 CongDispspecElement * element,
+		 xmlNodePtr node);
 
-	g_free(key);
-}
+static void
+handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur);
 
-static void value_destroy_func (gpointer data) 
-{
-	g_assert(data);
+static void
+ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur);
 
-	/* data is a CongDispspecElement; leave it alone */
-}
-#else
-static gint tree_compare_func(gconstpointer a, gconstpointer b)
-{
-	return strcmp(a,b);
-}
-#endif
+static void
+xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd);
 
+static xmlDtdPtr
+load_dtd (xmlDocPtr doc);
 
 #if NEW_LOOK
 /* Hackish colour calculations in RGB space (ugh!) */
@@ -252,9 +238,23 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 #endif	
 }
 
-static CongDispspec* parse_xmldoc(xmlDocPtr doc);
-static void parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node);
+/* Exported functions: */
 
+/* Barebones constructor, used to implement other ones: */
+CongDispspec* cong_dispspec_new(void)
+{
+	CongDispspec *dispspec;
+	
+	dispspec = g_new0 (CongDispspec, 1);
+	dispspec->search_tree = g_tree_new_full((GCompareDataFunc)key_compare_func,
+						NULL,
+						(GDestroyNotify)key_destroy_func,
+						value_destroy_func);
+
+	return dispspec;
+}
+
+/* Constructors that use the standard format: */
 GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
 {
 	char* buffer;
@@ -292,13 +292,425 @@ CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
 	return ds;	
 }
 
+/* Constructors that try to generate from another format: */
+CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
+						   const gchar *name, 
+						   const gchar *description)
+{
+	CongDispspec *ds;
+
+	g_return_val_if_fail (dtd, NULL);
+
+	ds = cong_dispspec_new();
+
+	if (name) {
+		ds->name = g_strdup(name);
+	}
+
+	if (description) {
+		ds->desc = g_strdup(description);
+	}
+
+
+	/* Traverse the DTD; building stuff */
+	{
+		/* FIXME */
+	}
+
+	return ds;
+}
+
+CongDispspec *
+cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc)
+{
+	CongDispspec *dispspec;
+
+	dispspec = cong_dispspec_new();
+
+	xml_to_dispspec (dispspec, doc, load_dtd (doc));
+
+	return dispspec;
+}
+
+void cong_dispspec_delete (CongDispspec *dispspec)
+{
+	CongDispspecElement* element;
+
+	g_return_if_fail(dispspec);
+
+	/* Destroy elements: */
+	for (element = dispspec->first; element; element=element->next) {
+		/* FIXME:  unimplemented */
+		g_assert(0);
+	}
+
+	/* Destroy search tree: */
+	g_assert(dispspec->search_tree);
+	g_tree_destroy(dispspec->search_tree);
+		
+	if (dispspec->name) {
+		g_free(dispspec->name);
+	}
+	if (dispspec->desc) {
+		g_free(dispspec->desc);
+	}
+	if (dispspec->icon) {
+		g_object_unref(G_OBJECT(dispspec->icon));
+	}
+}
+
+xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
+{
+	xmlDocPtr xml_doc;
+	CongNodePtr root_node;
+
+	g_return_val_if_fail (dispspec, NULL);
+	
+	
+	/* Build up the document and its content: */
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "dispspec",
+				  NULL);
+	
+	xmlDocSetRootElement(xml_doc,
+			     root_node);
+	
+	/* Add the metadata node: */
+	add_xml_for_metadata(xml_doc, root_node, dispspec);
+	
+	/* The <element-list> node: */
+	{
+		CongNodePtr element_list;
+		
+		element_list = xmlNewDocNode(xml_doc,
+					     NULL,
+					     "element-list",
+					     NULL);			
+		xmlAddChild(root_node, element_list);
+
+		/* The elements: */
+		{
+			CongDispspecElement* element;
+			
+			for (element = dispspec->first; element; element=element->next) {
+				add_xml_for_element(xml_doc, element_list, element);
+			}
+		}	
+	}		
+
+	return xml_doc;	
+}
+
+/* Data for the dispspec: */
+const gchar*
+cong_dispspec_get_name (const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds,NULL);
+
+	if (ds->name) {
+		return ds->name;
+	} else {
+		return _("unnamed");
+	}
+
+}
+
+const gchar*
+cong_dispspec_get_description (const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds,NULL);
+
+	if (ds->desc) {
+		return ds->desc;
+	} else {
+		return _("No description available.");
+	}
+}
+
+GdkPixbuf*
+cong_dispspec_get_icon(const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds, NULL);
+
+	if (ds->icon) {
+		g_object_ref(G_OBJECT(ds->icon));
+	}
+	return ds->icon;
+}
+
+/* Getting at elements within a dispspec */
+CongDispspecElement*
+cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
+{
+	/* We use the GTree search structure for speed */
+	CongDispspecElement *element;
+	struct SearchTreeKey key;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(tagname, NULL);
+
+	g_assert(ds->search_tree);
+
+	key.xmlns = (gchar*)xmlns;
+	key.name = (gchar*)tagname;
+
+	element =  g_tree_lookup(ds->search_tree, &key);
+
+	return element;
+}
+
+CongDispspecElement*
+cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
+{
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	return cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
+}
+
+enum CongElementType
+cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, tagname);
+
+	if (NULL==element) {
+		return CONG_ELEMENT_TYPE_UNKNOWN;
+	}
+
+	return cong_dispspec_element_type(element);
+}
+
+CongDispspecElement*
+cong_dispspec_get_first_element(CongDispspec *ds)
+{
+	g_return_val_if_fail(ds, NULL);
+
+	return ds->first;
+}
+
+CongDispspecElement*
+cong_dispspec_get_paragraph(CongDispspec *ds)
+{
+	g_return_val_if_fail(ds, NULL);
+
+	return ds->paragraph;
+}
+
+/* Manipulating a dispspec: */
+void cong_dispspec_add_element (CongDispspec* ds, 
+				CongDispspecElement* element)
+{
+	struct SearchTreeKey *key;
+
+	g_return_if_fail(ds);
+	g_return_if_fail(element);
+
+	g_assert(element->next==NULL);
+	g_assert(element->tagname);
+
+	if (ds->first) {
+		g_assert(ds->last);
+		ds->last->next = element;
+	} else {
+		ds->first = element;
+	}
+
+	ds->last = element;
+
+	key = g_new0(struct SearchTreeKey, 1);
+	if (element->xmlns) {
+		key->xmlns = g_strdup(element->xmlns);
+	}
+	key->name = element->tagname;
+
+	g_tree_insert(ds->search_tree, key, element);
+}
+
+/* Various functions that may get deprecated at some point: */
+#if NEW_LOOK
+#if 0
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, );
+
+	if (element) {
+		return cong_dispspec_element_gc(element, usage);
+	} else {
+		return NULL;
+	}
+}
+#endif
+#else
+GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_name(t));
+
+	if (element) {
+		return cong_dispspec_element_gc(element);
+	} else {
+		return NULL;
+	}
+}
+
+
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
+
+	if (element) {
+		return cong_dispspec_element_gc(element);
+	} else {
+		return NULL;
+	}
+}
+#endif
+
+const gchar *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node)
+{
+	CongDispspecElement* element;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail(cong_node_type(node)==CONG_NODE_TYPE_ELEMENT, NULL);
+
+	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
+	if (element) {
+		return cong_dispspec_element_username(element);
+	}
+  
+	return(xml_frag_name_nice(node));
+}
+
+#if 0
+char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
+	if (element) {
+		return (char*)cong_dispspec_element_username(element);
+	}
+  
+	return(t->data);
+}
+#endif
+
+#if 1
+gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, const char *name)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+
+	return (CONG_ELEMENT_TYPE_STRUCTURAL == cong_dispspec_element_type(element));
+}
+
+
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, const char *name)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+	
+	return cong_dispspec_element_collapseto(element);
+}
+
+
+gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const char *name)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+
+	return (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element));
+}
+
+
+gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const char *name)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+
+	return (CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element));
+}
+#endif
+
+/* ################## Internal function definitions: ################################ */
+/* Search tree callbacks: */
+static gint key_compare_func (struct SearchTreeKey *a,
+			      struct SearchTreeKey *b,
+			      gpointer user_data)
+{
+	gint name_test;
+
+	g_assert(a);
+	g_assert(b);
+
+	g_assert(a->name);
+	g_assert(b->name);
+
+	/* I believe the search will be faster if we order by name, then namespace: */
+	name_test = strcmp(a->name, b->name);
+
+	/* Names are different, sort initially on name ordering: */
+	if (name_test!=0) {
+		return name_test;
+	}
+
+	/* Names are the same; continue searching by namespace; order the NULL namespace before all others: */
+	if (NULL == a->xmlns) {
+		if (NULL == b->xmlns) {
+			return 0;
+		} else {
+			return -1; /* a is less than b */
+		}
+	} else {
+		/* "a" has non-NULL namespace: */
+		if (NULL == b->xmlns) {
+			return 1; /* a is greater than b */
+		} else {
+			/* Both have non-NULL namespaces; order based on them: */
+			return strcmp(a->xmlns, b->xmlns);
+		}
+	}
+}
+
+static void key_destroy_func (struct SearchTreeKey *key)
+{
+	g_assert(key);
+
+	if (key->xmlns) {
+		g_free(key->xmlns);
+	}
+
+	g_assert(key->name);
+
+	g_free(key->name);
+
+	g_free(key);
+}
+
+static void value_destroy_func (gpointer data) 
+{
+	g_assert(data);
+
+	/* data is a CongDispspecElement; leave it alone */
+}
+
+/* Subroutines for converting XDS XML to a CongDispspec: */
 static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 {
-	CongDispspec* ds = g_new0(CongDispspec,1);
-	ds->search_tree = g_tree_new_full((GCompareDataFunc)key_compare_func,
-					  NULL,
-					  (GDestroyNotify)key_destroy_func,
-					  value_destroy_func);
+	CongDispspec* ds = cong_dispspec_new();
 
 	/* Convert the XML into our internal representation: */
 	if (doc->children)
@@ -363,128 +775,6 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 	}
 }
 	
-void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
-{
-	struct SearchTreeKey *key;
-
-	g_return_if_fail(ds);
-	g_return_if_fail(element);
-
-	g_assert(element->next==NULL);
-	g_assert(element->tagname);
-
-	if (ds->first) {
-		g_assert(ds->last);
-		ds->last->next = element;
-	} else {
-		ds->first = element;
-	}
-
-	ds->last = element;
-
-	key = g_new0(struct SearchTreeKey, 1);
-	if (element->xmlns) {
-		key->xmlns = g_strdup(element->xmlns);
-	}
-	key->name = element->tagname;
-
-	g_tree_insert(ds->search_tree, key, element);
-}
-
-void cong_dispspec_delete(CongDispspec *dispspec)
-{
-	/* FIXME:  unimplemented */
-	g_assert(0);
-}
-
-const gchar*
-cong_dispspec_get_name(const CongDispspec *ds)
-{
-	g_return_val_if_fail(ds,NULL);
-
-	if (ds->name) {
-		return ds->name;
-	} else {
-		return _("unnamed");
-	}
-
-}
-
-const gchar*
-cong_dispspec_get_description(const CongDispspec *ds)
-{
-	g_return_val_if_fail(ds,NULL);
-
-	if (ds->desc) {
-		return ds->desc;
-	} else {
-		return _("No description available.");
-	}
-}
-
-/* FIXME: These should be deprecated: */
-#if 1
-gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, const char *name)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-	if (NULL==element) {
-		return FALSE;
-	}
-
-	return (CONG_ELEMENT_TYPE_STRUCTURAL == cong_dispspec_element_type(element));
-}
-
-
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, const char *name)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-	if (NULL==element) {
-		return FALSE;
-	}
-	
-	return cong_dispspec_element_collapseto(element);
-}
-
-
-gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const char *name)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-	if (NULL==element) {
-		return FALSE;
-	}
-
-	return (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element));
-}
-
-
-gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const char *name)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
-
-	if (NULL==element) {
-		return FALSE;
-	}
-
-	return (CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element));
-}
-#endif
-
-enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, tagname);
-
-	if (NULL==element) {
-		return CONG_ELEMENT_TYPE_UNKNOWN;
-	}
-
-	return cong_dispspec_element_type(element);
-}
-
-
 unsigned int get_rgb_hex(unsigned char *s)
 {
   unsigned int col;
@@ -509,159 +799,90 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
   gcol->red = (col >> 8) & 0xff00;
 }
 
-const gchar *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node)
+/*******************************
+   cong_dispspec_element stuff: 
+*******************************/
+
+/* Construction  */
+CongDispspecElement*
+cong_dispspec_element_new (const gchar* xmlns, 
+			   const gchar* tagname, 
+			   enum CongElementType type)
 {
 	CongDispspecElement* element;
 
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail(cong_node_type(node)==CONG_NODE_TYPE_ELEMENT, NULL);
+	g_return_val_if_fail(tagname,NULL);
 
-	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
-	if (element) {
-		return cong_dispspec_element_username(element);
+	element = g_new0(CongDispspecElement,1);
+
+	if (xmlns) {
+		element->xmlns = g_strdup(xmlns);
 	}
-  
-	return(xml_frag_name_nice(node));
-}
+	element->tagname = g_strdup(tagname);	
+	element->username = g_strdup(tagname);
+	element->type = type;
 
-GdkPixbuf*
-cong_dispspec_get_icon(const CongDispspec *ds)
-{
-	g_return_val_if_fail(ds, NULL);
-
-	if (ds->icon) {
-		g_object_ref(G_OBJECT(ds->icon));
-	}
-	return ds->icon;
-}
-
-
-#if 0
-char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
-	if (element) {
-		return (char*)cong_dispspec_element_username(element);
-	}
-  
-	return(t->data);
-}
-#endif
-
+	/* Extract colour: */
+	{
 #if NEW_LOOK
-#if 0
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, );
-
-	if (element) {
-		return cong_dispspec_element_gc(element, usage);
-	} else {
-		return NULL;
-	}
-}
-#endif
+		unsigned int col = 0x00000000;  /* Black is default for the new look */
 #else
-GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_name(t));
-
-	if (element) {
-		return cong_dispspec_element_gc(element);
-	} else {
-		return NULL;
-	}
-}
-
-
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
-
-	if (element) {
-		return cong_dispspec_element_gc(element);
-	} else {
-		return NULL;
-	}
-}
+		unsigned int col = 0x00ffffff;  /* White is default */
 #endif
 
-char *section_str = "section";
-
-
-#ifdef WINDOWS_BUILD
-                                                                                
-int strcasestr(char *haystack, char *needle)                                    
-{
-	  char *r;                                                                        
-	  char *haystack_dup, *needle_dup;                                              
-	                                                                                
-	  haystack_dup = strdup(haystack);                                              
-	  needle_dup = strdup(needle);                                                  
-	                                                                                
-	  strlwr(haystack_dup);                                                         
-	  strlwr(needle_dup);                                                           
-	                                                                                
-	  r = strstr(haystack_dup, needle_dup);                                         
-	                                                                                
-	  free(haystack_dup);                                                           
-	  free(needle_dup);                                                             
-	                                                                                
-	  return(r);                                                                    
-}
-#endif
-
-/*
-  We now use the GTree search structure for speed
- */
-CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
-{
-	CongDispspecElement *element;
-	struct SearchTreeKey key;
-
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(tagname, NULL);
-
-	g_assert(ds->search_tree);
-
-	key.xmlns = (gchar*)xmlns;
-	key.name = (gchar*)tagname;
-
-	element =  g_tree_lookup(ds->search_tree, &key);
+		cong_dispspec_element_init_col(element, col);
+	}
 
 	return element;
 }
 
-CongDispspecElement*
-cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
+/* Destruction  */
+void 
+cong_dispspec_element_destroy (CongDispspecElement *element)
 {
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(node, NULL);
+	g_return_if_fail (element);
 
-	return cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
+	if (element->xmlns) {
+		g_free (element->xmlns);
+	}
+	if (element->tagname) {
+		g_free (element->tagname);
+	}
+	if (element->username) {
+		g_free (element->username);
+	}
+	if (element->short_desc) {
+		g_free (element->short_desc);
+	}
+
+	if (element->icon16) {
+		g_object_unref (G_OBJECT(element->icon16));
+	}
+
+	/* FIXME: need to clean up this stuff: */
+#if 0
+#if NEW_LOOK
+	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
+	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
+#else
+	GdkColor col;
+	GdkGC* gc;
+#endif
+
+	CongDispspecElementHeaderInfo *header_info;
+#endif
+
+	if (element->editor_plugin_id) {
+		g_free (element->editor_plugin_id);
+	}
+	if (element->property_dialog_plugin_id) {
+		g_free (element->property_dialog_plugin_id);
+	}
+
+	/* FIXME:  do we need to remove from the list? */
 }
 
-CongDispspecElement*
-cong_dispspec_get_first_element(CongDispspec *ds)
-{
-	g_return_val_if_fail(ds, NULL);
 
-	return ds->first;
-}
-
-CongDispspecElement*
-cong_dispspec_get_paragraph(CongDispspec *ds)
-{
-	g_return_val_if_fail(ds, NULL);
-
-	return ds->paragraph;
-}
-
-/*******************************
-   cong_dispspec_element stuff: 
-*******************************/
 const gchar*
 cong_dispspec_element_get_xmlns(CongDispspecElement *element)
 {
@@ -1031,39 +1252,97 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 	return element;
 }
 
-CongDispspecElement*
-cong_dispspec_element_new(const gchar* xmlns, const gchar* tagname, enum CongElementType type)
+/* Subroutines for converting a CongDispspec to XML XDS: */
+static void add_xml_for_metadata (xmlDocPtr xml_doc, 
+				  CongNodePtr root, 
+				  CongDispspec *dispspec)
 {
-	CongDispspecElement* element;
-
-	g_return_val_if_fail(tagname,NULL);
-
-	element = g_new0(CongDispspecElement,1);
-
-	if (xmlns) {
-		element->xmlns = g_strdup(xmlns);
+	CongNodePtr metadata;
+	
+	metadata = xmlNewDocNode(xml_doc,
+				 NULL,
+				 "metadata",
+				 NULL);			
+	xmlAddChild(root, metadata);
+	
+	if (dispspec->name) {
+		
+		xmlAddChild(metadata, 
+			    xmlNewDocRawNode(xml_doc,
+					     NULL,
+					     "name",
+					     dispspec->name)
+			    ); 
 	}
-	element->tagname = g_strdup(tagname);	
-	element->username = g_strdup(tagname);
-	element->type = type;
-
-	/* Extract colour: */
-	{
-#if NEW_LOOK
-		unsigned int col = 0x00000000;  /* Black is default for the new look */
-#else
-		unsigned int col = 0x00ffffff;  /* White is default */
-#endif
-
-		cong_dispspec_element_init_col(element, col);
+	if (dispspec->desc) {
+		xmlAddChild(metadata, 
+			    xmlNewDocRawNode(xml_doc,
+					     NULL,
+					     "description",
+					     dispspec->desc)
+			    );
 	}
+	
+	/* FIXME: we can't yet save the icon name */
 
-	return element;
 }
 
-/* ######################### Dispspec from xml ########################### */
+static void add_xml_for_element (xmlDocPtr xml_doc, 
+				 CongNodePtr element_list, 
+				 CongDispspecElement *element)
+{
+	CongNodePtr element_node;
 
+	g_assert(element_list);
+	g_assert(element);
 
+	element_node = xmlNewDocNode(xml_doc,
+				     NULL,
+				     "element",
+				     NULL);			
+	xmlAddChild(element_list, element_node);
+
+#if 0
+	/* FIXME:  Need to store these: */
+#if 0
+	gchar *username;
+	gchar *short_desc;
+	GdkPixbuf *icon16;
+
+	enum CongElementType type;
+	gboolean collapseto;
+
+#if NEW_LOOK
+	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
+	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
+#else
+	GdkColor col;
+	GdkGC* gc;
+#endif
+
+	CongDispspecElementHeaderInfo *header_info;
+
+	gchar *editor_plugin_id;
+	gchar *property_dialog_plugin_id;
+#endif
+
+	if (element->xmlns) {
+		xmlSetProp(element_node, "ns", element->xmls);
+	}
+
+	g_assert (element->tagname);
+	xmlSetProp(element_node, "name", element->tagname);
+
+#else
+	/* Attributes: name, type */
+	xmlAddChild(element_node,
+		    xmlNewDocComment (xml_doc,
+				      "FIXME: need to add node name and type here")
+		    );
+#endif
+}
+
+/* Subroutines for generating a CongDispspec from arbitrary XML docs: */
 static gboolean
 can_contain_pcdata (xmlElementContentPtr content)
 {
@@ -1327,18 +1606,3 @@ load_dtd (xmlDocPtr doc)
 }
 
 
-CongDispspec *
-cong_dispspec_new_from_xml_file (xmlDocPtr doc)
-{
-	CongDispspec *dispspec;
-
-	dispspec = g_new0 (CongDispspec, 1);
-	dispspec->search_tree = g_tree_new_full((GCompareDataFunc)key_compare_func,
-						NULL,
-						(GDestroyNotify)key_destroy_func,
-						value_destroy_func);
-
-	xml_to_dispspec (dispspec, doc, load_dtd (doc));
-
-	return dispspec;
-}

@@ -809,28 +809,14 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, xml_doc);
 
 	if (ds == NULL) {
-		GtkDialog* dialog;
-		gchar *what_failed;
-		gchar *why_failed;
-		gchar *suggestions;
-		
-		what_failed = g_strdup_printf(_("Conglomerate could not create the file"));
-		why_failed = g_strdup_printf(_("Conglomerate could not find display information for the new file"));
-		suggestions = g_strdup_printf(_("There may a problem with your installation, or a bug in the importer"));
-		
-		dialog = cong_error_dialog_new(parent_window,
-					       what_failed,
-					       why_failed,
-					       suggestions);
-		g_free(what_failed);
-		g_free(why_failed);
-		g_free(suggestions);		
-	
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		xmlFreeDoc(xml_doc);
-		return;
+		ds = query_for_forced_dispspec(_("Conglomerate could not find display information for the new file"), 
+					       xml_doc, 
+					       parent_window);
+
+		if (NULL == ds) {
+			xmlFreeDoc(xml_doc);
+			return;
+		}
 	}
 	
 	g_assert(xml_doc);
@@ -853,28 +839,14 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	ds = cong_dispspec_registry_get_appropriate_dispspec(the_app.ds_registry, xml_doc);
 
 	if (ds == NULL) {
-		GtkDialog* dialog;
-		gchar *what_failed;
-		gchar *why_failed;
-		gchar *suggestions;
-		
-		what_failed = g_strdup_printf(_("Conglomerate could not import the file"));
-		why_failed = g_strdup_printf(_("Conglomerate could not find display information for the new file"));
-		suggestions = g_strdup_printf(_("There may a problem with your installation, or a bug in the importer"));
-		
-		dialog = cong_error_dialog_new(parent_window,
-					       what_failed,
-					       why_failed,
-					       suggestions);
-		g_free(what_failed);
-		g_free(why_failed);
-		g_free(suggestions);		
-	
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		xmlFreeDoc(xml_doc);
-		return;
+		ds = query_for_forced_dispspec(_("Conglomerate could not find display information for the new file"), 
+					       xml_doc, 
+					       parent_window);
+
+		if (NULL == ds) {
+			xmlFreeDoc(xml_doc);
+			return;
+		}
 	}
 	
 	g_assert(xml_doc);

@@ -27,7 +27,7 @@ void force_load(gpointer data)
 	g_assert(the_dlg->doc);
 
 	the_dlg->was_forced=TRUE;
-	the_dlg->ds = cong_dispspec_new_from_xml_file(the_dlg->doc);
+	the_dlg->ds = cong_dispspec_new_generate_from_xml_file(the_dlg->doc);
 
 	g_assert(the_dlg->ds);
 }

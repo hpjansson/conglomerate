@@ -1,3 +1,9 @@
+2003-07-06  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c, cong-dispspec.h, cong-file-open.c, cong-plugin.c, plugin-dtd.c
+
+	Big cleanup of the dispspec code
+
 2003-07-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* plugin_fo.c

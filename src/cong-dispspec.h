@@ -27,12 +27,33 @@
 
 G_BEGIN_DECLS
 
+/*******************************
+   cong_dispspec stuff: 
+*******************************/
+
+/* Barebones constructor: */
+CongDispspec* cong_dispspec_new(void);
+
+/* Constructors that use the standard format: */
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
 GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds);
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
-CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc);
+
+/* Constructors that try to generate from another format: */
+CongDispspec* cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc);
+CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
+						   const gchar *name, 
+						   const gchar *description);
+
+/* Destruction: */
 void cong_dispspec_delete(CongDispspec *dispspec);
 
+/**
+ *  Routine to manufacture a XML representation of the dispspec.  Can be saved to disk, used as a CongDocument etc
+ */
+xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec);
+
+/* Data for the dispspec: */
 const gchar*
 cong_dispspec_get_name(const CongDispspec *ds);
 
@@ -45,6 +66,28 @@ cong_dispspec_get_description(const CongDispspec *ds);
 GdkPixbuf*
 cong_dispspec_get_icon(const CongDispspec *ds);
 
+/* Getting at elements within a dispspec */
+CongDispspecElement*
+cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
+
+CongDispspecElement*
+cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node);
+
+enum CongElementType
+cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
+
+CongDispspecElement*
+cong_dispspec_get_first_element(CongDispspec *ds);
+
+/* Will return NULL if no such tag exists */
+CongDispspecElement*
+cong_dispspec_get_paragraph(CongDispspec *ds);
+
+/* Manipulating a dispspec: */
+void cong_dispspec_add_element (CongDispspec* ds, 
+				CongDispspecElement* element);
+
+/* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
 enum CongDispspecGCUsage
 {
@@ -71,27 +114,22 @@ gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const 
 gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const gchar *name);
 #endif
 
-enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
-
-/* New API for getting at elements within a dispspec */
-CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
-
-CongDispspecElement*
-cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node);
-
-CongDispspecElement*
-cong_dispspec_get_first_element(CongDispspec *ds);
-
-/* Will return NULL if no such tag exists */
-CongDispspecElement*
-cong_dispspec_get_paragraph(CongDispspec *ds);
-
 
 /*******************************
    cong_dispspec_element stuff: 
 *******************************/
+
+/* Construction  */
+CongDispspecElement*
+cong_dispspec_element_new (const gchar* xmlns, 
+			   const gchar* tagname, 
+			   enum CongElementType type);
+
+/* Destruction  */
+void 
+cong_dispspec_element_destroy (CongDispspecElement *element); 
+
+
 /** Get the namespace prefix (if any) */
 const gchar*
 cong_dispspec_element_get_xmlns(CongDispspecElement *element); 
