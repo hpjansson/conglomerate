@@ -2,7 +2,15 @@ conglomerate (0.7.14-4.1) UNRELEASED; urgency=low
 
   * expecting new upstream version
 
- -- Geert Stappers <stappers@stappers.nl>  Tue, 17 Aug 2004 18:30:55 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 19 Aug 2004 13:54:28 +0200
+
+conglomerate (0.7.14-4) unstable; urgency=low
+
+  * Upgrade from the archive for 0.7.14-1 should also work
+    - conglomerate-common conflicts with conglomerate << 0.7.14-4,
+      that are all previous versions, this closes: #266746
+
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 19 Aug 2004 12:37:46 +0200
 
 conglomerate (0.7.14-3) unstable; urgency=low
 

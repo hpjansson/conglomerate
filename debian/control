@@ -21,6 +21,7 @@ Description: userfriendly XML editor
 Package: conglomerate-common
 Architecture: all
 Depends: conglomerate, ${misc:Depends}
+Conflicts: conglomerate (<< 0.7.14-4)
 Description: common files for the userfriendly XML editor
  Conglomerate is a free, as in GPL, userfriendly XML-file editor,
  for DocBook and other document types.
