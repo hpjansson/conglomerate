@@ -62,6 +62,7 @@ install: build
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
+	dh_installman doc/C/conglomerate.1
 
 	# using src/Makefile to get files into the package
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
