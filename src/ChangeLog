@@ -1,3 +1,9 @@
+2004-02-17  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-element-span.c
+
+	Added Dialog of Doom for notifying users that they're about to fall foul of bug #124507, in lieu of actually finishing the fix in the WidgetPlayground branch
+
 2004-02-11  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-file-export.c, cong-file-import.c, cong-file-print.c, cong-menus.c, cong-ui-hooks.h, popup.c, tree.c

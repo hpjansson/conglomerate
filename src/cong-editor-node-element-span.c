@@ -31,6 +31,7 @@
 #include "cong-dispspec-element.h"
 #include "cong-editor-line-fragments.h"
 #include "cong-traversal-node.h"
+#include "cong-error-dialog.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -136,33 +137,85 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 														   iter);
 
 			if (editor_node_iter) {
-				CongEditorLineFragments *child_line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
-																line_width,
-																initial_indent);
+				CongEditorLineFragments *child_line_fragments;
 
-				GList* list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
-
-				gboolean is_first = TRUE;
-
-				while (list_of_areas) {
+				child_line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
+												       line_width,
+												       initial_indent);
+				
+				if (child_line_fragments) {
+					GList* list_of_areas;
+					list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
 					
-					CongEditorArea *child_area = CONG_EDITOR_AREA(list_of_areas->data);
-
-					CongEditorArea *enclosing_area = generate_area(editor_node,
-										       is_first,
-										       (NULL==list_of_areas->next));
+					gboolean is_first = TRUE;
 					
-					cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (enclosing_area),
-									      child_area);
+					while (list_of_areas) {
+						
+						CongEditorArea *child_area = CONG_EDITOR_AREA(list_of_areas->data);
+						
+						CongEditorArea *enclosing_area = generate_area(editor_node,
+											       is_first,
+											       (NULL==list_of_areas->next));
+						
+						cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (enclosing_area),
+										      child_area);
+						
+						cong_editor_line_fragments_add_area (result,
+										     enclosing_area);
+						
+						is_first = FALSE;
+						list_of_areas = list_of_areas->next;
+					}
+					
+					g_object_unref (child_line_fragments);
+				} else {
+					/* David Malcolm 2004/02/17:
+					   
+					The big distinction between block and line areas means we have to deal with all four
+					possible nesting combinations as separate cases, and the code can't deal with the case
+					of a structural area nested inside a span/line area (the file "examples/test-nesting.xml" has an example
+					of this.
+					
+					I think this is a design flaw in this version of the code and am working on a redesign, to be found
+					in the WidgetPlayground branch of CVS.
+					
+					*/
+					
+					GtkDialog *dlg;
+					gchar *what_failed;
+					gchar *why_failed;
+					gchar *suggestions;
 
-					cong_editor_line_fragments_add_area (result,
-									     enclosing_area);
+					gchar *inner_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node_iter));
+					gchar *outer_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node));
+					gchar *xpath = cong_node_get_path (cong_editor_node_get_node (editor_node_iter));
 
-					is_first = FALSE;
-					list_of_areas = list_of_areas->next;
+
+					/* I have deliberately not marked these strings for translation as I hope to finish the workaround soon */
+					what_failed = g_strdup_printf ("There are parts of this document that Conglomerate cannot display due to a bug (filed as bug #124507 within the Bug Tracking System at http://bugzilla.gnome.org)");
+					why_failed = g_strdup_printf ("The current version of Conglomerate cannot display \"structural\" elements inside a \"span\" element (due to a design oversight) and is likely to crash after this dialog is dismissed.");
+					suggestions = g_strdup_printf ("The problem element is a structural &lt;%s&gt; nested inside a span &lt;%s&gt;; this has the XPath of \"%s\".  You may be able to fix this by editing the document in another application, hacking Conglomerate's xds files, or waiting for a later release of Conglomerate.", 
+								       inner_node_name, 
+								       outer_node_name, 
+								       xpath);
+
+					g_free (inner_node_name);
+					g_free (outer_node_name);
+					g_free (xpath);
+
+					dlg = cong_error_dialog_new (NULL,
+								     what_failed,
+								     why_failed,
+								     suggestions);
+
+					g_free (suggestions);
+					g_free (why_failed);
+					g_free (what_failed);
+
+					gtk_dialog_run (dlg);
+					gtk_widget_destroy (GTK_WIDGET (dlg));
 				}
 
-				g_object_unref (child_line_fragments);
 			}
 		}
 #else
