@@ -322,7 +322,7 @@ do_ui_file_print(CongDocument *doc,
 		GtkDialog* error_dialog = cong_error_dialog_new(toplevel_window,
 								what_failed, 
 								_("None of Conglomerate's plugins know how to print files of that type."),
-								_(""));
+								"");
 
 		gtk_dialog_run(error_dialog);
 		gtk_widget_destroy(GTK_WIDGET(error_dialog));
