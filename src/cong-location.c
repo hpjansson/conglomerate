@@ -455,6 +455,33 @@ calc_final_node_in_subtree_satisfying (CongDispspec *dispspec,
 }
 
 static CongNodePtr
+calc_first_node_in_subtree_satisfying (CongDispspec *dispspec,
+				       CongNodePtr node,
+				       CongNodePredicate predicate)
+{
+	CongNodePtr iter;
+
+	/* If the current node matches the predicates, return it. */
+	if (predicate (dispspec, node)) {
+		return node;
+	}
+
+	/* Otherwise run through its children, and recursively find the first
+	 * satisfying node. */
+	for (iter = node->children; iter; iter = iter->next) {
+		CongNodePtr first = calc_first_node_in_subtree_satisfying (dispspec, 
+									   iter, 
+									   predicate);
+
+		if (first) {
+			return first;
+		}
+	}
+
+	return NULL;
+}
+
+static CongNodePtr
 calc_prev_node_satisfying (CongDispspec *dispspec,
 			   CongNodePtr node, 
 			   CongNodePredicate predicate)
@@ -487,6 +514,42 @@ calc_prev_node_satisfying (CongDispspec *dispspec,
 							  node->parent, 
 							  predicate);				
 		} 
+	} else {
+		return NULL;
+	}
+}
+
+static CongNodePtr
+calc_next_node_satisfying (CongDispspec *dispspec,
+			   CongNodePtr node,
+			   CongNodePredicate predicate)
+{
+	CongNodePtr iter;
+	
+	g_return_val_if_fail (dispspec, NULL);
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* Search through subtrees of siblings to the right of this node */
+	for (iter = node->next; iter; iter = iter->next) {
+		CongNodePtr first = calc_first_node_in_subtree_satisfying (dispspec, 
+					 				   iter, 
+									   predicate);
+
+		if (first) {
+			return first;
+		}
+	}
+
+	/* If not found, try parent node, and then recurse: */
+	if (node->parent) {
+		if (predicate (dispspec, node->parent)) {
+			return node->parent;
+		} else {
+			return calc_next_node_satisfying (dispspec,
+							  node->parent,
+							  predicate);
+		}
 	} else {
 		return NULL;
 	}
@@ -554,7 +617,6 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 				      CongLocation *output_loc)
 {
 	CongNodePtr n;
-	CongNodePtr n0;
 
 #ifndef RELEASE	
 	printf("[curs] ->\n");
@@ -563,77 +625,40 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
-	
+
 
 	n = input_loc->node;
-	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && cong_location_get_unichar(input_loc))
-	{ 
+
+	if (is_valid_cursor_node (dispspec, n) && cong_location_get_unichar(input_loc)) {
 		gchar *this_char;
 		gchar *next_char;
 
-		g_assert(input_loc->node);
-		g_assert(input_loc->node->content);
-		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+		g_assert (n);
+		g_assert (n->content);
+		g_assert (g_utf8_validate (n->content, -1, NULL));
 
 		/* FIXME: Should we be looking at a PangoLogAttrs "is_cursor_position" instead? */
-
-		this_char = input_loc->node->content+input_loc->byte_offset;
-		next_char = g_utf8_find_next_char(this_char, NULL);
-		g_assert(next_char);
-
-		cong_location_set_node_and_byte_offset(output_loc,input_loc->node, next_char - (gchar*)input_loc->node->content);
-
-		return TRUE; 
+		this_char = n->content + input_loc->byte_offset;
+		next_char = g_utf8_find_next_char (this_char, NULL);
+        
+		/* We still have characters left in this node, so just move the location one character
+		 * further into the current node. */
+		cong_location_set_node_and_byte_offset (output_loc, n, next_char - (gchar*) n->content);
+		return TRUE;
 	}
-
-	do
-	{
-		n0 = n;
-		if (n) n = cong_node_next(n);
-
-		for ( ; n; )
-		{
-			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
-			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
-			{				 
-				if (!strcmp(cong_node_name(n), "table")) break;
-				if (cong_dispspec_element_structural(dispspec, cong_node_get_xmlns(n), xml_frag_name_nice(n)))
-				{
-					n = n0 = 0;
-					break;
-				}
-				else if (cong_node_first_child(n))
-				{
-#ifndef RELEASE					
-					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
-#endif
-					n = cong_node_first_child(n);
-					continue;
-				}
-			}
-			
-			n0 = n;
-			n = cong_node_next(n);
-		}
-
-		if (!n) n = n0;
-		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
-
-		while (n)
-		{
-			if (cong_dispspec_element_structural(dispspec, cong_node_get_xmlns(n), xml_frag_name_nice(n))) { n = 0; break; }
-			if (!cong_node_next(n)) n = n0 = cong_node_parent(n);
-			else break;
-		}
-	}
-	while (n);
+	
+	/* We're either at the end  of the current node, or the current node is not a valid cursor node,
+	 * so we find the next node satisfying is_valid_cursor_node. */ 
+	n = calc_next_node_satisfying (dispspec, n, is_valid_cursor_node);
 
 	if (n) {
-		cong_location_set_to_start_of_node(output_loc, n);
+		/* Found next node, so we return a CongLocation pointing to its first character. */
+		cong_location_set_node_and_byte_offset (output_loc, n, 0);
 		return TRUE;
-	} else {
-		return FALSE;
 	}
+
+	/* No next node found. */
+	return FALSE;
 }
 
 static void make_pango_log_attr_for_node(CongDocument *doc,
