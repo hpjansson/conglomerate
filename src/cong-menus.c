@@ -1500,7 +1500,7 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 
 
 	/* Actions found in Edit menu: */
-	{ "Preferences", NULL, N_("Prefere_nces"), NULL, NULL, G_CALLBACK (action_callback_preferences) },
+	{ "Preferences", GTK_STOCK_PREFERENCES, N_("Pr_eferences"), NULL, NULL, G_CALLBACK (action_callback_preferences) },
 #if ENABLE_DEBUG_MENU
 	/* Actions found in Debug menu: */
 	{ "ErrorReportSelfTest", NULL, "Begin self-test of error-reporting system...", NULL, NULL, G_CALLBACK (action_callback_debug_error) },
@@ -1533,7 +1533,7 @@ static GtkActionEntry primary_window_document_action_entries[] = {
 	{ "Print", GTK_STOCK_PRINT, N_("_Print"), "<control>P", NULL, G_CALLBACK (action_callback_file_print) },
 #endif /* #if ENABLE_PRINTING */
 #if ENABLE_UNIMPLEMENTED_MENUS
-	{ "Revert", GTK_STOCK_REVERT_TO_SAVED, N_("_Revert"), NULL, NULL, G_CALLBACK (action_callback_file_revert) },
+	{ "Revert", GTK_STOCK_REVERT_TO_SAVED, N_("_Revert"), "F12", NULL, G_CALLBACK (action_callback_file_revert) },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ "Export", NULL, N_("_Export..."), NULL, NULL, G_CALLBACK (action_callback_file_export) },
 	{ "Properties", GTK_STOCK_PROPERTIES, N_("Proper_ties"), NULL, NULL, G_CALLBACK (action_callback_file_properties) },
@@ -1546,8 +1546,8 @@ static GtkActionEntry primary_window_document_action_entries[] = {
 	{ "Copy", GTK_STOCK_COPY, N_("_Copy"), "<control>C", NULL, G_CALLBACK (action_callback_copy) },
 	{ "Paste", GTK_STOCK_PASTE, N_("_Paste"), "<control>V", NULL, G_CALLBACK (action_callback_paste) },
 	{ "Find", GTK_STOCK_FIND, N_("_Find..."), "<control>F", NULL, G_CALLBACK (action_callback_find) },
-	{ "FindNext", NULL, N_("Find Ne_xt"), "<control>G", NULL, G_CALLBACK (action_callback_find_next) },
-	{ "FindPrev", NULL, N_("Find Pre_vious"), "<shift><control>G", NULL, G_CALLBACK (action_callback_find_prev) },
+	{ "FindNext", GTK_STOCK_FIND, N_("Find Ne_xt"), "<control>G", NULL, G_CALLBACK (action_callback_find_next) },
+	{ "FindPrev", GTK_STOCK_FIND, N_("Find Pre_vious"), "<shift><control>G", NULL, G_CALLBACK (action_callback_find_prev) },
 	{ "Replace", GTK_STOCK_FIND_AND_REPLACE, N_("R_eplace..."), "<control>R", NULL, G_CALLBACK (action_callback_replace) },
 
 	{ "Insert", NULL, N_("_Insert..."), NULL, NULL, G_CALLBACK (action_callback_unimplemented) },
