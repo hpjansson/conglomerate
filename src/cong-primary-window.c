@@ -32,6 +32,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
 
 /* Main window layout:
@@ -329,6 +330,17 @@ static void dispatch_span_editor_command2(void (*span_editor_command)(CongSpanEd
 	(*span_editor_command)(cursor->xed, widget);	
 }
 
+static GtkWidget* make_uneditable_text(const gchar* text)
+{
+	GtkEntry *entry = GTK_ENTRY(gtk_entry_new());
+
+	gtk_entry_set_text(entry, text);
+	gtk_entry_set_editable(entry, FALSE);
+
+	return GTK_WIDGET(entry);
+}
+
+
 /* Callbacks for "File" menu: */
 static void menu_callback_file_new(gpointer callback_data,
 				   guint callback_action,
@@ -465,6 +477,24 @@ static void menu_callback_file_import(gpointer callback_data,
 
 }
 
+static void add_exporter_to_menu(CongExporter *exporter, gpointer user_data)
+{
+	/* FIXME: should check for an appropriate FPI */
+	GtkWidget *menu = user_data;
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu),
+			      gtk_menu_item_new_with_label( cong_functionality_get_name(CONG_FUNCTIONALITY(exporter))));
+
+}
+
+
+static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
+					  gpointer user_data)
+{
+	GtkWidget* menu = gtk_option_menu_get_menu(optionmenu);
+
+	g_message("on_exporter_selection_changed");
+}
+
 static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 {
 	xmlDocPtr xml_doc;
@@ -474,6 +504,8 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 	CongDialogCategory *general_category;
 	CongDialogCategory *exporter_category;
 	gchar *filename, *title;
+	GtkWidget *select_exporter_option_menu;
+	GtkWidget *select_exporter_menu;
 
 	g_return_val_if_fail(doc, NULL);
 
@@ -498,11 +530,26 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 
 	content = cong_dialog_content_new(FALSE);
 	general_category = cong_dialog_content_add_category(content, "General");
-	exporter_category = cong_dialog_content_add_category(content, "Options");
 
+	select_exporter_option_menu = gtk_option_menu_new();
+	select_exporter_menu = gtk_menu_new();
+	gtk_option_menu_set_menu(GTK_OPTION_MENU(select_exporter_option_menu),
+				 select_exporter_menu);
 
-	cong_dialog_category_add_field(general_category, "Write to _file:", make_uneditable_text("filename"));
-	cong_dialog_category_add_field(general_category, "_Exporter", make_uneditable_text("exporter"));
+	cong_plugin_manager_for_each_exporter(the_globals.plugin_manager, add_exporter_to_menu, select_exporter_menu);
+	gtk_option_menu_set_history(GTK_OPTION_MENU(select_exporter_option_menu),0);
+
+	cong_dialog_category_add_field(general_category, "File:", make_uneditable_text("filename"));
+	cong_dialog_category_add_field(general_category, "Exporter:", select_exporter_option_menu);
+
+	exporter_category = cong_dialog_content_add_category(content, "Export Options");
+
+#if 0
+	g_signal_connect(select_exporter_option_menu,
+			 "changed"
+			 on_exporter_selection_changed,
+			 NULL);
+#endif
 
 #if 0
 	cong_dialog_category_add_field(exporter_category, "Name", make_uneditable_text(cong_dispspec_get_name(ds)));
@@ -541,16 +588,6 @@ static void menu_callback_file_export(gpointer callback_data,
 
 	/* FIXME: memory leaks */
 
-}
-
-static GtkWidget* make_uneditable_text(const gchar* text)
-{
-	GtkEntry *entry = GTK_ENTRY(gtk_entry_new());
-
-	gtk_entry_set_text(entry, text);
-	gtk_entry_set_editable(entry, FALSE);
-
-	return GTK_WIDGET(entry);
 }
 
 static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc)

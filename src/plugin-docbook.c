@@ -26,54 +26,45 @@
 
 #include "global.h"
 
-void factorycallback_unified(CongDocumentFactory *factory, gpointer user_data)
+void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc)
 {
-	g_message("factorycallback_unified <%s>", (char*)user_data);
-}
-
-void factorycallback_article(CongDocumentFactory *factory, gpointer user_data)
-{
-	factorycallback_unified(factory, user_data);
-}
-
-void factorycallback_book(CongDocumentFactory *factory, gpointer user_data)
-{
-	factorycallback_unified(factory, user_data);
-}
-
-void factorycallback_set(CongDocumentFactory *factory, gpointer user_data)
-{
-	factorycallback_unified(factory, user_data);
-}
-
-/* Handy methods for "Import" methods; doing the necessary UI hooks: */
-gboolean cong_ui_load_imported_file_content(const gchar *uri,
-					    char** buffer,
-					    GnomeVFSFileSize* size)
-{
-	GnomeVFSResult vfs_result;
-
-	g_return_val_if_fail(uri, FALSE);
-	g_return_val_if_fail(buffer, FALSE);
-	g_return_val_if_fail(size, FALSE);
-
-	vfs_result = cong_vfs_new_buffer_from_file(uri, buffer, size);
+	CongDocument *cong_doc;
+	CongDispspec *ds;
 	
-	if (vfs_result!=GNOME_VFS_OK) {
-		GnomeVFSURI* file_uri = gnome_vfs_uri_new(uri);
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(file_uri, vfs_result);
+	g_return_if_fail(xml_doc);
+
+	ds = get_appropriate_dispspec(xml_doc);
+
+	if (ds == NULL) {
+		GtkDialog* dialog;
+		gchar *what_failed;
+		gchar *why_failed;
+		gchar *suggestions;
 		
+		what_failed = g_strdup_printf("Conglomerate could not create the file");
+		why_failed = g_strdup_printf("Conglomerate could not find display information for the new file");
+		suggestions = g_strdup_printf("There may a problem with your installation, or a bug in the importer");
+		
+		dialog = cong_error_dialog_new(what_failed,
+					       why_failed,
+					       suggestions);
+		g_free(what_failed);
+		g_free(why_failed);
+		g_free(suggestions);		
+	
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 		
-		gnome_vfs_uri_unref(file_uri);
-		
-		return FALSE;
+		xmlFreeDoc(xml_doc);
+		return;
 	}
 	
-	g_assert(*buffer);
+	g_assert(xml_doc);
+	g_assert(ds);
 
-	return TRUE;
+	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
+
+	cong_primary_window_new(cong_doc);
 }
 
 void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc)
@@ -115,6 +106,197 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc)
 	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
 
 	cong_primary_window_new(cong_doc);
+}
+
+#if 0
+struct DocBookAuthorInfo
+{
+};
+
+struct DocBookCreationInfo
+{
+	const gchar *
+};
+#endif
+
+void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+{
+	GnomeDruidPageStandard *page;
+
+	g_message("factory_page_creation_callback_unified <%s>", (char*)user_data);
+
+	page = cong_new_file_assistant_new_page(assistant, 
+						factory, 
+						TRUE,
+						TRUE);
+
+	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(page),
+					      "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options",
+					      gtk_calendar_new(),
+					      user_data);
+
+#if 0
+	cong_new_file_assistant_set_page(assistant, GNOME_DRUID_PAGE(page));
+#endif
+}
+
+
+xmlDocPtr make_article(const xmlChar *title)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr root_node;
+
+	/* Build up the document and its content: */
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "article",
+				  NULL);
+
+	xmlDocSetRootElement(xml_doc,
+			     root_node);
+
+	xmlAddChild(root_node,
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "title",
+				  title)
+		    );
+
+	xmlAddChild(root_node, 
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "para",
+				  "")
+		    );
+
+	return xml_doc;
+}
+
+void factory_action_callback_article(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+{
+	xmlDocPtr xml_doc;
+
+	xml_doc = make_article("Untitled Article");
+
+	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+}
+
+
+xmlDocPtr make_book(const xmlChar *title)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr root_node;
+	xmlNodePtr chapter_node;
+
+	/* Build up the document and its content: */
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "book",
+				  NULL);
+
+	xmlDocSetRootElement(xml_doc,
+			     root_node);
+
+	xmlAddChild(root_node,
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "title",
+				  title)
+		    );
+
+	chapter_node = xmlNewDocNode(xml_doc,
+				     NULL,
+				     "chapter",
+				     "");
+	xmlAddChild(root_node, chapter_node);
+
+	xmlAddChild(chapter_node, 
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "para",
+				  "")
+		    );
+
+	return xml_doc;
+}
+
+void factory_action_callback_book(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+{
+	xmlDocPtr xml_doc;
+
+	xml_doc = make_book("Untitled Book");
+
+	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+}
+
+
+xmlDocPtr make_set(const xmlChar *title)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr root_node;
+
+	/* Build up the document and its content: */
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "set",
+				  NULL);
+
+	xmlDocSetRootElement(xml_doc,
+			     root_node);
+
+	xmlAddChild(root_node,
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "title",
+				  title)
+		    );
+
+	return xml_doc;
+}
+
+void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+{
+	xmlDocPtr xml_doc;
+
+	xml_doc = make_set("Untitled Set");
+
+	cong_ui_new_document_from_manufactured_xml(xml_doc);	
+}
+
+/* Handy methods for "Import" methods; doing the necessary UI hooks: */
+gboolean cong_ui_load_imported_file_content(const gchar *uri,
+					    char** buffer,
+					    GnomeVFSFileSize* size)
+{
+	GnomeVFSResult vfs_result;
+
+	g_return_val_if_fail(uri, FALSE);
+	g_return_val_if_fail(buffer, FALSE);
+	g_return_val_if_fail(size, FALSE);
+
+	vfs_result = cong_vfs_new_buffer_from_file(uri, buffer, size);
+	
+	if (vfs_result!=GNOME_VFS_OK) {
+		GnomeVFSURI* file_uri = gnome_vfs_uri_new(uri);
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(file_uri, vfs_result);
+		
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		
+		gnome_vfs_uri_unref(file_uri);
+		
+		return FALSE;
+	}
+	
+	g_assert(*buffer);
+
+	return TRUE;
 }
 
 gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_type, gpointer user_data)
@@ -265,17 +447,20 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Article", 
 					      "Create an article, perhaps for a website or a magazine, using the \"DocBook\" format",
-					      factorycallback_article,
+					      factory_page_creation_callback_unified,
+					      factory_action_callback_article,
 					      "article");
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Book", 
 					      "Create a book, using the \"DocBook\" format",
-					      factorycallback_book,
+					      factory_page_creation_callback_unified,
+					      factory_action_callback_book,
 					      "book");
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Set", 
 					      "Create a set of related books, using the \"DocBook\" format",
-					      factorycallback_set,
+					      factory_page_creation_callback_unified,
+					      factory_action_callback_set,
 					      "set");	
 
 	cong_plugin_register_importer(plugin, 

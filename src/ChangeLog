@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-19 David Malcolm
+
+	* cong-plugin.c, cong-primary-window.c, global.h, new_doc.c, plugin-docbook.c
+
+	Plugin enhancements
+
+	* main.c
+
+	Better error message
+	
 2002-11-15 David Malcolm
 
         * Makefile.am, cong-primary-window.c, global.h, main.c, new_doc.c

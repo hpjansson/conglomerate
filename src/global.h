@@ -1022,6 +1022,7 @@ void menu_callback_test_dialog(gpointer callback_data,
 */
 typedef struct CongPlugin CongPlugin;
 typedef struct CongPluginManager CongPluginManager;
+
 typedef struct CongFunctionality CongFunctionality;
 #define CONG_FUNCTIONALITY(x) ((CongFunctionality*)(x))
 
@@ -1032,6 +1033,10 @@ typedef struct CongExporter CongExporter;
 typedef struct CongPrintMethod CongPrintMethod;
 typedef struct CongThumbnailer CongThumbnailer;
 
+/* The File->New GUI: */
+typedef struct CongNewFileAssistant CongNewFileAssistant;
+
+
 /* Function pointers to be exposed by .so/.dll files: */
 typedef gboolean (*CongPluginCallbackInit)(CongPlugin *plugin); /* exposed as "plugin_init"? */
 typedef gboolean (*CongPluginCallbackUninit)(CongPlugin *plugin); /* exposed as "plugin_uninit"? */
@@ -1039,7 +1044,8 @@ typedef gboolean (*CongPluginCallbackRegister)(CongPlugin *plugin); /* exposed a
 typedef gboolean (*CongPluginCallbackConfigure)(CongPlugin *plugin);  /* exposed as "plugin_configure"? legitimate for it not to be present */
 
 /* Function pointers that are registered by plugins: */
-typedef void (*CongDocumentFactoryCallback)(CongDocumentFactory *factory, gpointer user_data);
+typedef void (*CongDocumentFactoryPageCreationCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
+typedef void (*CongDocumentFactoryActionCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
 typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
@@ -1070,7 +1076,8 @@ void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager,
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
 							   const gchar *name, 
 							   const gchar *description,
-							   CongDocumentFactoryCallback callback,
+							   CongDocumentFactoryPageCreationCallback page_creation_callback,
+							   CongDocumentFactoryActionCallback action_callback,
 							   gpointer user_data);
 CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
 					    const gchar *name, 
@@ -1095,8 +1102,24 @@ void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongT
 const gchar* cong_functionality_get_name(CongFunctionality *functionality);
 const gchar* cong_functionality_get_description(CongFunctionality *functionality);
 
+void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
+void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
+
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
 void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type);
+
+/* Helpful functions for implementing plugins: */
+void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc);
+void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc);
+
+/* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
+   navigation easier */
+GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
+							 CongDocumentFactory *document_factory, 
+							 gboolean is_first_of_factory,
+							 gboolean is_last_of_factory);
+void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage *page);
+
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
 /* plugin-docbook.c: */

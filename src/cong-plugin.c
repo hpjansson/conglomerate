@@ -54,7 +54,8 @@ struct CongDocumentFactory
 {
 	CongFunctionality functionality; /* base class */
 
-	CongDocumentFactoryCallback callback;
+	CongDocumentFactoryPageCreationCallback page_creation_callback;
+	CongDocumentFactoryActionCallback action_callback;
 	gpointer user_data;
 };
 
@@ -169,7 +170,8 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
 							   const gchar *name, 
 							   const gchar *description,
-							   CongDocumentFactoryCallback callback,
+							   CongDocumentFactoryPageCreationCallback page_creation_callback,
+							   CongDocumentFactoryActionCallback action_callback,
 							   gpointer user_data)
 {
 	CongDocumentFactory *factory;
@@ -177,13 +179,15 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
-	g_return_val_if_fail(callback, NULL);
+	g_return_val_if_fail(page_creation_callback, NULL);
+	g_return_val_if_fail(action_callback, NULL);
 
 	factory = g_new0(CongDocumentFactory,1);
 
 	factory->functionality.name = g_strdup(name);
 	factory->functionality.description = g_strdup(description);
-	factory->callback = callback;
+	factory->page_creation_callback = page_creation_callback;
+	factory->action_callback = action_callback;
 	factory->user_data = user_data;
 
 	/* Add to plugin's list: */
@@ -289,6 +293,33 @@ const gchar* cong_functionality_get_description(CongFunctionality *functionality
 	return functionality->description;
 }
 
+
+/* Implementation of CongDocumentFactory: */
+void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant)
+{
+	g_return_if_fail(factory);
+	g_return_if_fail(assistant);
+
+	g_message("page creation for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+
+	g_assert(factory->page_creation_callback);
+
+	factory->page_creation_callback(factory, assistant, factory->user_data);
+}
+
+void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant)
+{
+	g_return_if_fail(factory);
+	g_return_if_fail(assistant);
+
+	g_message("invoking action for document factory \"%s\"", cong_functionality_get_name(CONG_FUNCTIONALITY(factory)));
+
+	g_assert(factory->action_callback);
+
+	factory->action_callback(factory, assistant, factory->user_data);
+}
+
+/* Implementation of CongImporter: */
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type)
 {
 	g_return_val_if_fail(importer, FALSE);
