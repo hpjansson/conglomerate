@@ -1,3 +1,9 @@
+2003-12-19  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-location.c
+
+	Fixed bug when moving cursor to next word near end of a node's content which would generate an invalid cursor location off-by-one beyond the valid range
+
 2003-12-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-xpath-expression.c

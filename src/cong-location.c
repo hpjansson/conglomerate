@@ -774,17 +774,18 @@ gboolean cong_location_calc_next_word(const CongLocation *input_loc,
 		g_assert(char_index<attrs_len);
 
 		/* Scan forwards to next is_word_start: */
-		while (char_index<attrs_len) {
+		while ((++char_index)<attrs_len) {
 
-			if (pango_log_attr[++char_index].is_word_start) {
+			if (pango_log_attr[char_index].is_word_start) {
 				cong_location_set_node_and_char_offset(output_loc, input_loc->node, char_index);
 				g_free(pango_log_attr);
 				return TRUE;
 			}
 		}
 
-		/* FIXME: is this logic correct??? */
-		cong_location_set_node_and_char_offset(output_loc, input_loc->node, char_index-1);
+		/* No word starts were found; treat beyond the end of the node's content as the next word: */
+		cong_location_set_to_end_of_node (output_loc, input_loc->node);
+
 		g_free(pango_log_attr);
 		return TRUE;
 
