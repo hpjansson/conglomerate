@@ -26,6 +26,7 @@ function regular_release_changes
  sed -e '/enable-debug/d' \
      -e 's/dh_strip --exclude.*/dh_strip/' \
      -e '/conglomerate-dbg/d' debian/rules.in > debian/rules
+ chmod +x debian/rules
 
  echo Don\'t forgot to update the NEWS file.
 }
