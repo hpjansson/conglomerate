@@ -1,0 +1,7 @@
+#!/bin/bash
+
+make dist
+TARBALL=$( ls -t *.tar.gz | head -1 )
+echo put here commands for uploading ${TARBALL}
+
+# eof

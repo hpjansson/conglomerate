@@ -1,0 +1,19 @@
+
+uss, UpStream Scripts
+Scripts for upstream.
+
+Name convention: all lower case, non hyphe, no underscore.
+
+From toplevel directory you can say: `uss/scriptname`.
+
+
+Available scripts:
+==================
+
+* genreadme
+Generates the README file.
+
+* mkcvstarball
+A `make dist` plus upload to a public place.
+
+

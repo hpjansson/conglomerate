@@ -1,0 +1,7 @@
+#!/bin/bash
+
+xmlto html-nochunk README.xml
+lynx -dump README.html > README
+rm -f README.html
+
+# eof
