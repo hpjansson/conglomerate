@@ -549,6 +549,7 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 							      xml_doc,
 							      NULL);
 
+	#if 0
 	if (ds == NULL) {
 		ds = query_for_forced_dispspec (_("Conglomerate could not find display information for the new file"), 
 						xml_doc, 
@@ -560,9 +561,9 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 			return NULL;
 		}
 	}
+	#endif
 	
 	g_assert(xml_doc);
-	g_assert(ds);
 
 	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
 

@@ -1,5 +1,9 @@
 2004-06-21  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-plugin.c (cong_ui_new_document_from_manufactured_xml): 
+
+	Allow the creation of new documents with no dispspec
+
 	* Makefile.am, cong-app.c, cong-fake-plugin-hooks.h, plugin-arbitrary.c: 
 
 	Added new plugin for creating documents of arbitrary type
