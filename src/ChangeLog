@@ -1,3 +1,9 @@
+2004-06-14  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+ 	
+	* cong-menus.c: Added new menu item Help/Homepage
+ 	that will open www.conglomerate.org in browser.
+ 	See bug #134966 for details.
+ 
 2004-06-14  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-source-view.c: Fixed build problems

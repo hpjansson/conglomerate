@@ -1465,6 +1465,13 @@ menu_callback_debug_command_test (gpointer callback_data,
 #endif /* #if ENABLE_DEBUG_MENU */
 
 /* Callbacks for "Help" menu: */
+static void menu_callback_homepage(gpointer callback_data,
+				   guint callback_action,
+				   GtkWidget *widget)
+{
+   gnome_url_show ("http://www.conglomerate.org", NULL);
+}				   
+
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget)
@@ -1607,6 +1614,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 	{ N_("/Help/_Contents"), "F1", menu_callback_help, 0, "<StockItem>",GTK_STOCK_HELP },
+	{ N_("/Help/_Homepage"), NULL, menu_callback_homepage, 0, "<StockItem>",GTK_STOCK_HOME },
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
@@ -1638,6 +1646,7 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 	{ N_("/Help/_Contents"), "F1", menu_callback_help, 0, "<StockItem>",GTK_STOCK_HELP },
+	{ N_("/Help/_Homepage"), NULL, menu_callback_homepage, 0, "<StockItem>",GTK_STOCK_HOME },
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
