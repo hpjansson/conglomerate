@@ -12,6 +12,15 @@
 
 char fake_data[] = "";
 
+#define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 1
+#if LOG_CONG_NODE_PRIVATE_MODIFICATIONS
+#define LOG_NODE_PRIVATE_MODIFICATION(x) g_message(x)
+#else
+#define LOG_NODE_PRIVATE_MODIFICATION(x) ((void)0)
+#endif
+
+
+
 static gboolean xml_add_required_sub_elements(CongDocument *cong_doc, CongNodePtr node);
 static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node);
@@ -460,9 +469,26 @@ void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 	cong_node_free(node);
 }
 
+static void
+cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)
+{
+	CongNodePtr iter;
+
+	node->doc = xml_doc;
+
+	for (iter = node->children; iter; iter=iter->next) {
+		cong_node_recursive_set_doc(iter, xml_doc);
+	}
+}
+
 CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 {
-	return xmlCopyNode(node, TRUE);
+	CongNodePtr new_node = xmlCopyNode(node, TRUE);
+
+	/* Unfortunately, this doesn't preserve the doc ptrs, so we must reconstruct these: */
+	cong_node_recursive_set_doc(new_node, node->doc);
+
+	/* FIXME: this is an evil hack, and this whole function should be deprecated */
 }
 
 /* Tree manipulation: */
@@ -471,6 +497,8 @@ void cong_node_private_make_orphan(CongNodePtr node)
 	CongNodePtr former_parent;
 	CongNodePtr former_prev;
 	CongNodePtr former_next;
+
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_make_orphan");
 
 	g_return_if_fail(node);
 
@@ -551,6 +579,8 @@ void cong_node_private_make_orphan(CongNodePtr node)
 
 void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_add_after");
+
 	g_return_if_fail(node);
 	g_return_if_fail(older_sibling);
 	g_return_if_fail(older_sibling->parent);
@@ -602,6 +632,8 @@ void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 
 void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_add_before");
+
 	g_return_if_fail(node);
 	g_return_if_fail(younger_sibling);
 	g_return_if_fail(younger_sibling->parent);
@@ -654,6 +686,8 @@ void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 
 void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_parent");
+
 	g_return_if_fail(node);
 	g_return_if_fail(adoptive_parent);
 	g_return_if_fail(node!=adoptive_parent);
@@ -691,6 +725,8 @@ void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_text");
+
 	g_return_if_fail(node);
 	g_return_if_fail(new_content);
 
@@ -699,6 +735,8 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 
 void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_attribute");
+
 	g_return_if_fail(node);
 	g_return_if_fail(name);
 	g_return_if_fail(value);
@@ -708,6 +746,8 @@ void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, cons
 
 void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
 {
+	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_remove_attribute");
+
 	g_return_if_fail(node);
 	g_return_if_fail(name);
 

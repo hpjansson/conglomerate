@@ -1,5 +1,9 @@
 2003-07-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* tree.c, xmldata.c
+
+	Found and patched a problem with cong_node_recursive_dup not setting document on new nodes.
+
 	* cong-editor-area-bin.c, cong-editor-area-composer.c, cong-editor-area-composer.h, cong-editor-area-container.c, cong-editor-area-container.h, cong-editor-widget3.c
 
 	Container areas now have an add_after method
