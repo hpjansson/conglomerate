@@ -57,6 +57,8 @@ CODING:
  or printable form "live" as you edit (Hard)
 - perhaps a promote/demote facility for things like sect1 through to sect5 in 
  DocBook to make it easier to play around with structure?
+- Undo/Redo support (Hard)
+- rewrite xmlview.c/xmledit.c to avoid the GtkDrawingArea mess (Hard)
 
 OTHER:
 - improvements to existing xds files (Easy)

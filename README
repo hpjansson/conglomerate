@@ -99,8 +99,8 @@ The latest updates are available through anonymous CVS:
 
 cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
 [blank password, just hit enter]
-cvs checkout conglomerate
+cvs checkout conge
 
 CVS is also web-browsable:
 
-http://cvs.copyleft.no/cvsweb.pl/conglomerate/
+http://cvs.copyleft.no/cgi/cvsweb.cgi/conge/
