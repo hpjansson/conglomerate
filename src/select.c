@@ -87,7 +87,10 @@ void selection_draw(struct selection* selection, struct curs* curs)
 	}
 
 	/* Find first line */
-
+#if 1
+	l = cong_layout_cache_get_line_by_y_coord(&curs->xed->layout_cache, y0+1);
+	/* FIXME: check the boundary conditions are exactly correct! */
+#else
 	for (l = curs->xed->lines->child; l && l->next; l = l->next)
 	{
 #ifndef RELEASE
@@ -99,6 +102,7 @@ void selection_draw(struct selection* selection, struct curs* curs)
 			break;
 		}
 	}
+#endif
 
 	/* Draw all lines but last */
 

@@ -10,16 +10,54 @@
 #include <strtool.h>
 #include "global.h"
 
+
+GtkWidget*
+cong_xml_editor_get_widget(CongXMLEditor *xed)
+{
+	g_return_val_if_fail(xed, NULL);
+
+	return xed->w;
+}
+
+TTREE *add_line_to_tt(TTREE* parent, TTREE* tt, int i)
+{
+	TTREE *new_line;
+
+	g_return_val_if_fail(parent, NULL);
+
+	new_line = ttree_node_add(parent, "line", 4);  /* Add line */
+	ttree_node_add(new_line, &tt, sizeof(TTREE *));
+	ttree_node_add(new_line, &i, sizeof(int));
+
+	return new_line;
+}
+
+TTREE *cong_layout_cache_add_line(CongLayoutCache *layout_cache, TTREE* tt, int i)
+{
+	g_return_val_if_fail(layout_cache, NULL);
+
+	return add_line_to_tt(layout_cache->lines, tt, i);
+	
+}
+
+TTREE *add_line(CongXMLEditor *xed, TTREE* tt, int i)
+{
+	g_return_val_if_fail(xed, NULL);
+
+	return cong_layout_cache_add_line(&xed->layout_cache, tt, i);
+}
+
+
 #define ttree_node_add(a, b, c) ttree_node_add(a, (unsigned char *) b, c)
 
 
-TTREE *xed_stack_top(struct xed *xed);
-int xed_xml_content_draw(struct xed *xed, unsigned int mode);
+TTREE *xed_stack_top(CongXMLEditor *xed);
+int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode);
 
 
 /* Create a new backing pixmap of the appropriate size, redraw content */
 
-static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct xed *xed)
+static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXMLEditor *xed)
 {
 	struct pos *pos;
 	UNUSED_VAR(GtkRequisition req)
@@ -38,29 +76,29 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 		/* Get backing pixmap */
 
 		xed->p = gdk_pixmap_new(widget->window,
-														widget->allocation.width,
-														height,
-														-1);
+					widget->allocation.width,
+					height,
+					-1);
 
 		/* Make it white */
 
 		gdk_draw_rectangle(xed->p,
-											 widget->style->white_gc,
-											 TRUE,
-											 0, 0,
-											 widget->allocation.width,
-											 widget->allocation.height);
+				   widget->style->white_gc,
+				   TRUE,
+				   0, 0,
+				   widget->allocation.width,
+				   widget->allocation.height);
 	}
 #endif	
 
 	if (xed->p)
 	{
 		gdk_draw_pixmap(widget->window,
-										widget->style->fg_gc[GTK_WIDGET_STATE(widget)],
-										xed->p,
-										0, 0,
-										0, 0,
-										widget->allocation.width, widget->allocation.height);
+				widget->style->fg_gc[GTK_WIDGET_STATE(widget)],
+				xed->p,
+				0, 0,
+				0, 0,
+				widget->allocation.width, widget->allocation.height);
 	}
 
 	if (widget->allocation.width < 200)
@@ -74,12 +112,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 	}
 
 	/* Calculate height */
-
-	if (xed->lines)
-	{
-		ttree_branch_remove(xed->lines);
-		xed->lines = ttree_node_add(0, "lines", 5);
-	}
+	cong_layout_cache_clear(&xed->layout_cache);
 
 	xed->draw_x = 0;  /* FIXME: Out-of-context root node */
 	height = xed_xml_content_draw(xed, 0);  /* Or 0? */
@@ -116,18 +149,18 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 		/* Get backing pixmap */
 
 		xed->p = gdk_pixmap_new(widget->window,
-														widget->allocation.width,
-														height,
-														-1);
+					widget->allocation.width,
+					height,
+					-1);
 
 		/* Make it white */
 
 		gdk_draw_rectangle(xed->p,
-											 widget->style->white_gc,
-											 TRUE,
-											 0, 0,
-											 widget->allocation.width,
-											 widget->allocation.height);
+				   widget->style->white_gc,
+				   TRUE,
+				   0, 0,
+				   widget->allocation.width,
+				   widget->allocation.height);
 
 		if (xed == the_globals.curs.xed && cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1))
 		{
@@ -145,11 +178,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 
 		/* Redraw */
 
-		if (xed->lines)
-		{
-			ttree_branch_remove(xed->lines);
-			xed->lines = ttree_node_add(0, "lines", 5);
-		}
+		cong_layout_cache_clear(&xed->layout_cache);
 
 		xed->draw_x = 0;  /* FIXME: Out-of-context root node */
 		xed_xml_content_draw(xed, 1);
@@ -167,19 +196,14 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 }
 
 
-void xed_redraw(struct xed *xed)
+void xed_redraw(CongXMLEditor *xed)
 {
 	UNUSED_VAR(GtkRequisition req)
 	int height;
 
 
 	/* Calculate height */
-
-	if (xed->lines)
-	{
-		ttree_branch_remove(xed->lines);
-		xed->lines = ttree_node_add(0, "lines", 5);
-	}
+	cong_layout_cache_clear(&xed->layout_cache);
 
 	xed->draw_x = 0;  /* FIXME: Out-of-context root node */
 	height = xed_xml_content_draw(xed, 0);
@@ -200,38 +224,34 @@ void xed_redraw(struct xed *xed)
 		/* Make it white */
 
 		gdk_draw_rectangle(xed->p,
-											 xed->w->style->white_gc,
-											 TRUE,
-											 0, 0,
-											 xed->w->allocation.width,
-											 xed->w->allocation.height);
+				   xed->w->style->white_gc,
+				   TRUE,
+				   0, 0,
+				   xed->w->allocation.width,
+				   xed->w->allocation.height);
 		
 		/* Redraw */
 
 		selection_draw(&the_globals.selection, &the_globals.curs);
 
-		if (xed->lines)
-		{
-			ttree_branch_remove(xed->lines);
-			xed->lines = ttree_node_add(0, "lines", 5);
-		}
+		cong_layout_cache_clear(&xed->layout_cache);
 
 		xed->draw_x = 0;  /* FIXME: Out-of-context root node */
 		xed_xml_content_draw(xed, 1);
 		
 		gdk_draw_pixmap(xed->w->window,
-										xed->w->style->fg_gc[GTK_WIDGET_STATE(xed->w)],
-										xed->p,
-									  0, 0,
-										0, 0,
-										xed->w->allocation.width, xed->w->allocation.height);
+				xed->w->style->fg_gc[GTK_WIDGET_STATE(xed->w)],
+				xed->p,
+				0, 0,
+				0, 0,
+				xed->w->allocation.width, xed->w->allocation.height);
 	}
 }
 
 
 /* Redraw the area from the backing pixmap */
 
-static gint expose_event (GtkWidget *widget, GdkEventExpose *event, struct xed *xed)
+static gint expose_event (GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
 {
 	if (xed->initial)
 	{ xed->initial = 0; gtk_widget_queue_resize(widget); }
@@ -239,11 +259,11 @@ static gint expose_event (GtkWidget *widget, GdkEventExpose *event, struct xed *
 	else if (xed->p)
 	{
 		gdk_draw_pixmap(widget->window,
-										widget->style->fg_gc[GTK_WIDGET_STATE(widget)],
-										xed->p,
-										event->area.x, event->area.y,
-										event->area.x, event->area.y,
-										event->area.width, event->area.height);
+				widget->style->fg_gc[GTK_WIDGET_STATE(widget)],
+				xed->p,
+				event->area.x, event->area.y,
+				event->area.x, event->area.y,
+				event->area.width, event->area.height);
 	}
 
 	return TRUE;
@@ -252,7 +272,7 @@ static gint expose_event (GtkWidget *widget, GdkEventExpose *event, struct xed *
 
 /* Mouse pointer enters */
 
-static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, struct xed *xed)
+static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
 {
 	GdkCursor* cursor;
 
@@ -263,7 +283,7 @@ static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, struct 
 }
 
 
-static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, struct xed *xed)
+static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
 {
   UNUSED_VAR(GdkCursor* cursor)
 	
@@ -272,7 +292,7 @@ static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, struct 
 }
 
 
-static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct xed *xed)
+static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXMLEditor *xed)
 {
 	UNUSED_VAR(TTREE *dummy)
 	UNUSED_VAR(TTREE *n)
@@ -309,7 +329,7 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct 
 }
 
 
-static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *xed)
+static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor *xed)
 {
 	struct pos *pos;
 	UNUSED_VAR(char *s)
@@ -402,7 +422,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *x
 }
 
 
-static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, struct xed *xed)
+static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, CongXMLEditor *xed)
 {
 	if (!(event->state & GDK_BUTTON1_MASK)) return(FALSE);
 	
@@ -431,7 +451,7 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 }
 
 
-static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, struct xed *xed)
+static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
 {
   TTREE *dummy;                                                                 
 	                                                                                
@@ -459,10 +479,10 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, struct x
 }
 
 
-struct xed *xmledit_new(TTREE *x, CongDispspec *displayspec)
+CongXMLEditor *xmledit_new(TTREE *x, CongDispspec *displayspec)
 {
         UNUSED_VAR(GdkCursor* cursor)
-	struct xed *xed;
+	CongXMLEditor *xed;
 	UNUSED_VAR(int sig)
 	
 	xed = malloc(sizeof(*xed));
@@ -557,7 +577,7 @@ struct xed *xmledit_new(TTREE *x, CongDispspec *displayspec)
 }
 
 
-void xed_char_put_at_curs(struct xed *xed, char c)
+void xed_char_put_at_curs(CongXMLEditor *xed, char c)
 {
 	GdkGC *gc;
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
@@ -566,7 +586,7 @@ void xed_char_put_at_curs(struct xed *xed, char c)
 }
 
 
-void xed_str_put(struct xed *xed, char *s)
+void xed_str_put(CongXMLEditor *xed, char *s)
 {
 	GdkGC *gc;
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
@@ -580,21 +600,24 @@ void stack_print(TTREE *t)
 {
 #ifndef RELEASE		
 	printf("\n");
-	for (; t; t = t->parent) printf("<%s %d>\n", t->data,
-																	(int) *(t->child->next->data));
+	for (; t; t = t->parent) {
+		printf("<%s %d>\n", t->data,
+		       (int) *(t->child->next->data));
+	}
 	printf("\n\n");
 #endif
 }
 
+#define DEBUG_STACK 0
 
-void xed_stack_push(struct xed *xed, char *s, TTREE *x, int n)
+void xed_stack_push(CongXMLEditor *xed, char *s, TTREE *x, int n)
 {
 	TTREE *t;
 	int line, pos_x;
 	int lev = 0;
 
 	t = xed_stack_top(xed);
-#if 0	
+#if DEBUG_STACK
 	if (t) stack_print(t);
 #endif
 	t = ttree_node_add(t, s, strlen(s));
@@ -613,18 +636,18 @@ void xed_stack_push(struct xed *xed, char *s, TTREE *x, int n)
 	ttree_node_add(t, &x, sizeof(TTREE *));
 	ttree_node_add(t, &lev, sizeof(int));
 
-#if 0
+#if DEBUG_STACK
 	printf("[Tag Push] (%s) line=%d\n", s, line);
 #endif
 
 	t = xed_stack_top(xed);
-#if 0	
+#if DEBUG_STACK
 	if (t) stack_print(t);
 #endif
 }
 
 
-void xed_stack_change_level_of_top_tag(struct xed *xed, int lev)
+void xed_stack_change_level_of_top_tag(CongXMLEditor *xed, int lev)
 {
 	TTREE *t;
 
@@ -634,7 +657,7 @@ void xed_stack_change_level_of_top_tag(struct xed *xed, int lev)
 }
 
 
-void xed_stack_elevate(struct xed *xed)
+void xed_stack_elevate(CongXMLEditor *xed)
 {
 	TTREE *t;
 	int i;
@@ -642,24 +665,26 @@ void xed_stack_elevate(struct xed *xed)
 	t = xed_stack_top(xed);
 	
 	for (i = 1; t && (int) *((int *) t->child->next->next->next->data) < i;
-			 t = t->parent, i++)
+	     t = t->parent, i++) {
 		((int) *((int *) t->child->next->next->next->data))++;
+	}
 }
 
 
-void xed_stack_compress(struct xed *xed)
+void xed_stack_compress(CongXMLEditor *xed)
 {
 	TTREE *t;
 	int i;
 
 	t = xed_stack_top(xed);
 
-	for (i = 0; t; t = t->parent, i++)
+	for (i = 0; t; t = t->parent, i++) {
 		((int) *((int *) t->child->next->next->next->data)) = i;
+	}
 }
 
 
-void xed_stack_pop(struct xed *xed)
+void xed_stack_pop(CongXMLEditor *xed)
 {
 	TTREE *t;
 
@@ -667,19 +692,19 @@ void xed_stack_pop(struct xed *xed)
 	if (!t) return;
 
 	t = xed_stack_top(xed);
-#if 0	
+#if DEBUG_STACK
 	if (t) stack_print(t);
 #endif
 	if (t == xed->tags) xed->tags = 0;
 	ttree_branch_remove(t);
 
-#if 0	
+#if DEBUG_STACK
 	printf("[Tag pop]\n");
 #endif
 }
 
 
-TTREE *xed_stack_top(struct xed *xed)
+TTREE *xed_stack_top(CongXMLEditor *xed)
 {
 	TTREE *t;
 
@@ -691,7 +716,7 @@ TTREE *xed_stack_top(struct xed *xed)
 }
 
 
-int xed_stack_depth(struct xed *xed)
+int xed_stack_depth(CongXMLEditor *xed)
 {
 	TTREE *t;
 	int d;
@@ -699,27 +724,23 @@ int xed_stack_depth(struct xed *xed)
 	t = xed->tags;
 	if (!t) return(0);
 	
-	for (d = 1; t->child->next->next->next->next; t = t->child->next->next->next->next) d++;
+	for (d = 1; t->child->next->next->next->next; t = t->child->next->next->next->next) {
+		d++;
+	}
+
 	return(d);
 }
 
 
-TTREE *xed_line_last(struct xed *xed)
+TTREE *xed_line_last(CongXMLEditor *xed)
 {
-	TTREE *t;
-
-	t = xed->lines;
-	if (!t || !t->child) return(0);
-	t = t->child;
-
-	for (t = xed->lines; t->next; t = t->next) ;
-	return(t);
+	return cong_layout_cache_get_last_line(&xed->layout_cache);
 }
 
 
 /* xed->draw_pos_x = last pixel of line */
 
-void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
+void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 {
 	TTREE *l, *t;
 	GdkGC *gc;
@@ -733,8 +754,9 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 
 	UNUSED_VAR(int eol = 0)
 
-		
-
+#if 0
+	printf("xed_xml_tags_draw_eol\n");
+#endif
 
 	l = xed_line_last(xed);
 
@@ -843,7 +865,7 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 }
 
 
-void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
+void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, int mode)
 {
 	TTREE *l, *t;
 	GdkGC *gc;
@@ -854,6 +876,10 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 	UNUSED_VAR(unsigned int col)
 
 	CongDispspec *ds = xed->displayspec;
+
+#if 0
+	printf("xed_xml_tags_draw_eot\n");
+#endif
 
 	/* --- Set drawing style --- */
 #if 0
@@ -923,7 +949,7 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 }
 
 
-void xed_str_micro_put(struct xed *xed, char *s)
+void xed_str_micro_put(CongXMLEditor *xed, char *s)
 {
 	GdkGC *gc;
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
@@ -932,7 +958,7 @@ void xed_str_micro_put(struct xed *xed, char *s)
 }
 
 
-char *xed_word(TTREE *x, struct xed *xed, int *spc_before, int *spc_after)
+char *xed_word(TTREE *x, CongXMLEditor *xed, int *spc_before, int *spc_after)
 {
 	UNUSED_VAR(int i)
 	char *p0, *p1;
@@ -968,7 +994,7 @@ char *xed_word(TTREE *x, struct xed *xed, int *spc_before, int *spc_after)
 	for (p1 = p0; *p1 && *p1 != ' ' && *p1 != '\n'; p1++) ;
 
 	if (p0 == p1) return(0);  /* FIXME: Should never happen */
-  xed->draw_char += (p1 - p0);
+	xed->draw_char += (p1 - p0);
 
 	if (*p1) *spc_after = 1;
 	else *spc_after = 0;
@@ -976,7 +1002,7 @@ char *xed_word(TTREE *x, struct xed *xed, int *spc_before, int *spc_after)
 }
 
 
-void xed_word_rewind(struct xed *xed)
+void xed_word_rewind(CongXMLEditor *xed)
 {
 	xed->draw_x = xed->draw_x_prev;
 	xed->draw_char = xed->draw_char_prev;
@@ -986,7 +1012,7 @@ void xed_word_rewind(struct xed *xed)
 /* --- */
 
 
-int xed_word_first_would_wrap(TTREE *x, struct xed *xed)
+int xed_word_first_would_wrap(TTREE *x, CongXMLEditor *xed)
 {
 	char *p0, *p1, *word;
 	int width;
@@ -1033,7 +1059,7 @@ int xed_word_first_would_wrap(TTREE *x, struct xed *xed)
 
 /* --- */
 
-int xed_xml_content_data(struct xed *xed, TTREE *x, int draw_tag_lev)
+int xed_xml_content_data(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1055,7 +1081,7 @@ int xed_xml_content_data(struct xed *xed, TTREE *x, int draw_tag_lev)
 		/* Does it fit? */
 		if (xed->draw_pos_x && xed->draw_pos_x + width > xed->w->allocation.width)
 		{
-#if 0
+#if DEBUG_STACK
 			printf("Wrap at x = %d.\n", xed->draw_pos_x);
 #endif
 			free(word);
@@ -1072,7 +1098,7 @@ int xed_xml_content_data(struct xed *xed, TTREE *x, int draw_tag_lev)
 		xed->draw_pos_x += width;  /* NOTE: Causes tag misalignment? (Nah...) */
 		free(word);
 	}
-#if 0
+#if DEBUG_STACK
 	printf("[Data] draw_pos_x == %d.\n", xed->draw_pos_x);
 #endif
 	if (spc_before) xed->draw_pos_x += gdk_char_width(xed->f, ' ');
@@ -1082,7 +1108,7 @@ int xed_xml_content_data(struct xed *xed, TTREE *x, int draw_tag_lev)
 
 /* --- */
 
-int xed_xml_content_data_root(struct xed *xed, TTREE *x, int draw_tag_lev)
+int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1111,9 +1137,13 @@ int xed_xml_content_data_root(struct xed *xed, TTREE *x, int draw_tag_lev)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1163,7 +1193,7 @@ int xed_xml_depth(TTREE *x)
 
 /* --- */
 
-int xed_xml_depth_after_eol(struct xed *xed, TTREE *x)
+int xed_xml_depth_after_eol(CongXMLEditor *xed, TTREE *x)
 {
 	int d = 0, d_max = 0;
 
@@ -1183,7 +1213,7 @@ int xed_xml_depth_after_eol(struct xed *xed, TTREE *x)
 /* --- */
 
 
-int xed_xml_depth_before_eol(struct xed *xed, TTREE *x, int pos_x, int width, int *eol_p)
+int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width, int *eol_p)
 {
 	int d = 0, d_max = 0;
 	int eol = 0;
@@ -1216,7 +1246,7 @@ int xed_xml_depth_before_eol(struct xed *xed, TTREE *x, int pos_x, int width, in
 /* --- */
 
 
-int xed_xml_content_tag(struct xed *xed, TTREE *x)
+int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 {
 	UNUSED_VAR(int hold = 0)
 	int draw_tag_lev;
@@ -1246,7 +1276,7 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 	}
 #endif
 
-#if 0
+#if DEBUG_STACK
 	printf("> %s (%d)  ", xml_frag_name_nice(x), draw_tag_lev);
 	fflush(stdout);
 #endif
@@ -1280,7 +1310,7 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 		}
 		else if (type == XML_DATA)
 		{
-#if 0
+#if DEBUG_STACK
 			printf("Data node, x = %d.\n", xed->draw_pos_x);
 #endif			
 			if (xed_xml_content_data(xed, x, draw_tag_lev + 1))
@@ -1297,9 +1327,7 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 				xed->draw_pos_x = 1;                       /* Start at left margin */
 				xed->draw_tag_max = 0;
 
-				xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
-				ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
-				ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+				xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 
 				xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 				draw_tag_lev = 0;
@@ -1342,9 +1370,13 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			draw_tag_lev = 0;
@@ -1379,9 +1411,13 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 			
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1412,9 +1448,13 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1428,13 +1468,13 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 		x = xml_frag_next(x);
 	}
 
-#if 0	
+#if DEBUG_STACK
 	printf("[Tag End] %d.\n", xed->draw_pos_x);
 #endif
 	
 	xed_xml_tags_draw_eot(xed, draw_tag_lev, xed->mode);
 	xed_stack_pop(xed);
-#if 0
+#if DEBUG_STACK
 	printf("< (%d)  ", draw_tag_lev);
 	fflush(stdout);
 #endif
@@ -1454,7 +1494,7 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
  *
  */
 
-int xed_xml_content_draw(struct xed *xed, unsigned int mode)
+int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 {
 	TTREE *x;
 	UNUSED_VAR(TTREE *first)
@@ -1463,6 +1503,9 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 	int width;
 	CongDispspec *ds = xed->displayspec;
 
+#if 0
+	printf("xed_xml_content_draw\n");
+#endif
 
 	xed->mode = mode;
 	xed->draw_tag_max = 0;
@@ -1480,13 +1523,16 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 #if 0
 	x = first = xml_frag_enter(x);
 #endif
-	
-	if (xed->lines) ttree_branch_remove(xed->lines);
 
-	xed->lines = ttree_node_add(0, "lines", 5);
+	cong_layout_cache_init(&xed->layout_cache);
+
+#if 1
+	xed->draw_line_t = add_line(xed, xed->x, xed->draw_char);
+#else
 	xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);
 	ttree_node_add(xed->draw_line_t, &xed->x, sizeof(TTREE *));
 	ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 	for (x = xed->x; x; x = xml_frag_next(x))
 	{
@@ -1539,9 +1585,13 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 			
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1577,9 +1627,13 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 			
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1610,9 +1664,13 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 
+#if 1
+			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+#else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+#endif
 
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1655,7 +1713,7 @@ void xed_cutcopy_update(struct curs* curs)
 	}
 }
 
-gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
+gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
 	TTREE *t;
 	int replace_xed = 0;
@@ -1703,7 +1761,7 @@ gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
 }
 
 
-gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
+gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
 	TTREE *t, *t0 = 0;
 	int replace_xed = 0;
@@ -1764,7 +1822,7 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 }
 
 
-gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
+gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
 	TTREE *t, *t0 = 0, *t1 = 0, *clip;
 

@@ -118,7 +118,39 @@ cong_document_save(CongDocument *doc, const char* filename);
 
 /* Include these here to help Cygwin a bit */
 
-struct xed
+
+typedef struct CongXMLEditor CongXMLEditor;
+
+GtkWidget*
+cong_xml_editor_get_widget(CongXMLEditor *xed);
+
+GdkFont*
+cong_xml_editor_get_font(CongXMLEditor *xed);
+
+CongDispspec*
+cong_xml_editor_get_dispspec(CongXMLEditor *xed);
+
+typedef struct CongLayoutCache
+{
+	TTREE *lines;
+} CongLayoutCache;
+
+void
+cong_layout_cache_init(CongLayoutCache *layout_cache);
+
+void
+cong_layout_cache_clear(CongLayoutCache *layout_cache);
+
+TTREE*
+cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y);
+
+TTREE*
+cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i);
+
+TTREE*
+cong_layout_cache_get_last_line(CongLayoutCache *layout_cache);
+
+struct CongXMLEditor
 {
 	/* Display information */
 
@@ -160,11 +192,12 @@ struct xed
 	/* Data content */
 
 	TTREE *x;
-	TTREE *lines;
+
+	struct CongLayoutCache layout_cache;
+
 	TTREE *tags;
 
-  /* Cursor information */
-
+	/* Cursor information */
 	TTREE *curs_x;      /* XML node currently at */
 	int curs_char;      /* Cursor positioned after this char (in node) */
 };
@@ -174,14 +207,14 @@ struct xview
 {
 	CongDocument *doc;
 	
-  GtkWidget *w;
+	GtkWidget *w;
 #if 1
 #if 0
-  GtkTreeView* treeview; /* the tree view */
-  GtkTreeStore* treestore; /* the tree model */
+	GtkTreeView* treeview; /* the tree view */
+	GtkTreeStore* treestore; /* the tree model */
 #endif
 #else
-  GtkWidget *tree;
+	GtkWidget *tree;
 #endif
 };
 
@@ -208,7 +241,7 @@ struct pos
 struct curs
 {
 	/* Visual representation */
-	struct xed *xed;
+	CongXMLEditor *xed;
 	GtkWidget *w;
 	GdkGC *gc;
 	int x, y;
@@ -224,7 +257,7 @@ struct curs
 
 struct selection
 {
-	struct xed *xed;
+	CongXMLEditor *xed;
 	GdkGC *gc_0, *gc_1, *gc_2, *gc_3;  /* 0 is brightest, 3 is darkest */
 
 	int x0, y0, x1, y1;
@@ -236,13 +269,13 @@ struct selection
 
 struct cong_globals
 {
-  struct xview *xv;
-  struct curs curs;
-  struct selection selection;
+	struct xview *xv;
+	struct curs curs;
+	struct selection selection;
 
-  GdkFont *f, *fm, *ft;
-  GdkGC *insert_element_gc;
-  int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
+	GdkFont *f, *fm, *ft;
+	GdkGC *insert_element_gc;
+	int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
 
 #if 0
   TTREE *vect_global;
@@ -250,9 +283,9 @@ struct cong_globals
   TTREE *class_global;
   TTREE *users_global;
   TTREE *user_data;
-  struct xed *meta_xed;
+  CongXMLEditor *meta_xed;
 #endif
-  TTREE *clipboard;
+	TTREE *clipboard;
 #if 0
   TTREE *insert_meta_section_tag;
 
@@ -286,7 +319,7 @@ int find_document();
 int find_documentmetacaps();
 int submit_do();
 int gui_window_login_make(char **user_s, char **pass_s);
-struct xed *xmledit_new();
+CongXMLEditor *xmledit_new();
 
 gint tree_new_sibling(GtkWidget *widget, TTREE *tag);
 gint tree_new_sub_element(GtkWidget *widget, TTREE *tag);
@@ -296,15 +329,15 @@ gint tree_paste_under(GtkWidget *widget, TTREE *tag);
 gint tree_paste_before(GtkWidget *widget, TTREE *tag);
 gint tree_paste_after(GtkWidget *widget, TTREE *tag);
 
-gint xed_cut(GtkWidget *widget, struct xed *xed);
-gint xed_copy(GtkWidget *widget, struct xed *xed);
-gint xed_paste(GtkWidget *widget, struct xed *xed);
+gint xed_cut(GtkWidget *widget, struct CongXMLEditor *xed);
+gint xed_copy(GtkWidget *widget, struct CongXMLEditor *xed);
+gint xed_paste(GtkWidget *widget, struct CongXMLEditor *xed);
 
-gint insert_meta_hook(GtkWidget *w, struct xed *xed);
-gint insert_media_hook(GtkWidget *w, struct xed *xed);
+gint insert_meta_hook(GtkWidget *w, struct CongXMLEditor *xed);
+gint insert_media_hook(GtkWidget *w, struct CongXMLEditor *xed);
 gint select_vector(GtkWidget *w);
 
-gint xed_insert_table(GtkWidget *w, struct xed *xed);
+gint xed_insert_table(GtkWidget *w, struct CongXMLEditor *xed);
 
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
@@ -313,9 +346,9 @@ char *xml_frag_name_nice(TTREE *x);
 SOCK *server_login();
 #endif
 
-struct pos *pos_physical_to_logical(struct xed *xed, int x, int y);
-struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c);
-struct pos *pos_logical_to_physical_new(struct xed *xed, CongLocation *loc);
+struct pos *pos_physical_to_logical(struct CongXMLEditor *xed, int x, int y);
+struct pos *pos_logical_to_physical(struct CongXMLEditor *xed, CongNodePtr node, int c);
+struct pos *pos_logical_to_physical_new(struct CongXMLEditor *xed, CongLocation *loc);
 
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
@@ -417,20 +450,20 @@ GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element);
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
-void xed_redraw(struct xed *xed);
+void cong_xml_editor_redraw(CongXMLEditor *xed);
 
 void curs_init(struct curs* curs);
 void curs_on(struct curs* curs);
 void curs_off(struct curs* curs);
-void curs_place_in_xed(struct curs* curs, struct xed *xed, int x, int y);
+void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y);
 gint curs_data_insert(struct curs* curs, char *s);
 int curs_paragraph_insert(struct curs* curs);
-void curs_prev_char(struct curs* curs, struct xed *xed);
-void curs_next_char(struct curs* curs, struct xed *xed);
-void curs_prev_line(struct curs* curs, struct xed *xed);
-void curs_next_line(struct curs* curs, struct xed *xed);
-void curs_del_prev_char(struct curs* curs, struct xed *xed);
-void curs_del_next_char(struct curs* curs, struct xed *xed);
+void curs_prev_char(struct curs* curs, CongXMLEditor *xed);
+void curs_next_char(struct curs* curs, CongXMLEditor *xed);
+void curs_prev_line(struct curs* curs, CongXMLEditor *xed);
+void curs_next_line(struct curs* curs, CongXMLEditor *xed);
+void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed);
+void curs_del_next_char(struct curs* curs, CongXMLEditor *xed);
 
 void selection_init(struct selection* selection);
 void selection_import(struct selection* selection);
@@ -439,7 +472,7 @@ void selection_start_from_curs(struct selection* selection, struct curs* curs);
 void selection_end_from_curs(struct selection* selection, struct curs* curs);
 
 void popup_show(GtkWidget *widget, GdkEventButton *bevent);
-void popup_build(struct xed *xed);
+void popup_build(CongXMLEditor *xed);
 void popup_init();
 
 #if 1

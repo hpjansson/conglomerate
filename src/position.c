@@ -11,10 +11,96 @@
 #include <xml.h>
 #include "global.h"
 
+void
+cong_layout_cache_init(CongLayoutCache *layout_cache)
+{
+	g_return_if_fail(layout_cache);
+
+	if (layout_cache->lines) {
+		ttree_branch_remove(layout_cache->lines);
+	}
+
+	layout_cache->lines = ttree_node_add(0, "lines", 5);
+}
+
+void
+cong_layout_cache_clear(CongLayoutCache *layout_cache)
+{
+	g_return_if_fail(layout_cache);
+
+	if (layout_cache->lines)
+	{
+#if 0
+		printf("re-adding lines to xed\n");
+#endif
+
+		ttree_branch_remove(layout_cache->lines);
+		layout_cache->lines = ttree_node_add(0, "lines", 5);
+	}
+}
+
+TTREE*
+cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y)
+{
+	TTREE *l;
+
+	/* Find line by y coord */
+	g_return_val_if_fail(layout_cache, NULL);
+
+	g_assert(layout_cache->lines);
+	g_assert(layout_cache->lines->child);
+
+	for (l = layout_cache->lines->child; l->next; l = l->next)
+	{
+		if ((int) *((int *) l->child->next->next->data) >= y)
+		{
+			/* Found the right line */
+			break;
+		}
+	}
+
+	return l;
+}
+
+TTREE*
+cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i)
+{
+	TTREE *l;
+
+	g_return_val_if_fail(layout_cache, NULL);
+	g_return_val_if_fail(i>=0, NULL);
+
+	g_assert(layout_cache->lines);
+	g_assert(layout_cache->lines->child);
+
+	for (l = layout_cache->lines->child; i && l->next; i--) {
+		l = l->next;
+	}
+
+	return l;
+}
+
+TTREE*
+cong_layout_cache_get_last_line(CongLayoutCache *layout_cache)
+{	
+	TTREE *t;
+
+	g_return_val_if_fail(layout_cache, NULL);
+
+	t = layout_cache->lines;
+	if (!t || !t->child) return(0);
+	t = t->child;
+
+	for (t = layout_cache->lines; t->next; t = t->next) {
+		/* empty */
+	}
+
+	return(t);
+}
 
 #define WIDTH_WRAP(disp_w, x, word_w) (((x) + (word_w)) > (disp_w - 1))
 
-void pos_pl_data(struct xed *xed, struct pos *pos)
+void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 {
 	char *data;
 	UNUSED_VAR(int word_x_offset = 0)
@@ -39,7 +125,7 @@ void pos_pl_data(struct xed *xed, struct pos *pos)
 			if (!pos->space)
 			{
 				/* If cumulated word width makes for a wrap, we're done */
-				if (WIDTH_WRAP(xed->w->allocation.width, pos->x, pos->word_width))
+				if (WIDTH_WRAP(cong_xml_editor_get_widget(xed)->allocation.width, pos->x, pos->word_width))
 				{
 #ifndef RELEASE					
 					fputc('\\', stdout);
@@ -82,7 +168,7 @@ void pos_pl_data(struct xed *xed, struct pos *pos)
 }
 
 
-void pos_pl(struct xed *xed, struct pos *pos)
+void pos_pl(CongXMLEditor *xed, struct pos *pos)
 {
 	TTREE *node_prev;
 	TTREE *node_prev2;
@@ -205,11 +291,10 @@ void pos_pl(struct xed *xed, struct pos *pos)
 }
 
 
-struct pos *pos_physical_to_logical(struct xed *xed, int x, int y)
+struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
 {
 	struct pos *pos;
 	TTREE *l;
-	int i;
 
 	/* Basic init */
 
@@ -227,19 +312,7 @@ struct pos *pos_physical_to_logical(struct xed *xed, int x, int y)
 	xed->draw_char = 0;
 	xed->draw_pos_x = 0;
 
-	/* Find line by y coord */
-
-	g_assert(xed->lines);
-	g_assert(xed->lines->child);
-
-	for (i = 0, l = xed->lines->child; l->next; i++, l = l->next)
-	{
-		if ((int) *((int *) l->child->next->next->data) >= y)
-		{
-			/* Found the right line */
-			break;
-		}
-	}
+	l = cong_layout_cache_get_line_by_y_coord(&xed->layout_cache, y);
 
 	pos->node = (TTREE *) *((TTREE **) l->child->data);
 	pos->node_last = (TTREE *) *((TTREE **) l->child->next->next->next->data);
@@ -259,7 +332,7 @@ struct pos *pos_physical_to_logical(struct xed *xed, int x, int y)
 /* -------- */
 
 
-void pos_lp_data(struct xed *xed, struct pos *pos)
+void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 {
 	char *data;
 	int word_x_offset = 0;
@@ -352,7 +425,7 @@ void pos_lp_data(struct xed *xed, struct pos *pos)
 }
 
 
-void pos_lp(struct xed *xed, struct pos *pos)
+void pos_lp(CongXMLEditor *xed, struct pos *pos)
 {
 	TTREE *node_prev;
 	TTREE *node_first;
@@ -459,7 +532,7 @@ void pos_lp(struct xed *xed, struct pos *pos)
 }
 
 
-struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c)
+struct pos *pos_logical_to_physical(CongXMLEditor *xed, CongNodePtr node, int c)
 {
 	struct pos *pos;
 	TTREE *l;
@@ -481,18 +554,22 @@ struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c)
 
 	pos_lp(xed, pos);
 
-	g_assert(xed->lines);
-	g_assert(xed->lines->child);
-
 #ifndef RELEASE
 	printf("\nGot line: %d.\n", pos->line);
 #endif
-	for (i = pos->line, l = xed->lines->child; i && l->next; i--) l = l->next;
+
+	l = cong_layout_cache_get_line_by_index(&xed->layout_cache, pos->line);
 
 	g_assert(l);
 	
-	if (l->prev) pos->y = (int) *((int *) l->prev->child->next->next->data);
-	else pos->y = 0;
+	if (l->prev) {
+		g_assert(l->prev->child);
+		g_assert(l->prev->child->next);
+		g_assert(l->prev->child->next->next);
+		pos->y = (int) *((int *) l->prev->child->next->next->data);
+	} else {
+		pos->y = 0;
+	}
 
 #if 0	
 	for (i = 0, l = xed->lines->child; l->next; i++, l = l->next)
@@ -513,7 +590,7 @@ struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c)
 	return(pos);
 }
 
-struct pos *pos_logical_to_physical_new(struct xed *xed, CongLocation *loc)
+struct pos *pos_logical_to_physical_new(CongXMLEditor *xed, CongLocation *loc)
 {
 	return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
 }

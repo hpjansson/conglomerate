@@ -53,7 +53,7 @@ void print_lines(TTREE *l)
 }
 
 
-void curs_place_in_xed(struct curs* curs, struct xed *xed, int x, int y)
+void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y)
 {
 	struct pos *pos0, *pos1;
 	UNUSED_VAR(TTREE *l);
@@ -224,7 +224,7 @@ int curs_paragraph_insert(struct curs* curs)
 }
 
 
-void curs_prev_char(struct curs* curs, struct xed *xed)
+void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 {
 	TTREE *n, *n0;
 	UNUSED_VAR(int c);
@@ -294,7 +294,7 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 }
 
 
-void curs_next_char(struct curs* curs, struct xed *xed)
+void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 {
 	TTREE *n, *n0;
 	UNUSED_VAR(int c);
@@ -372,10 +372,9 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 }
 
 
-void curs_prev_line(struct curs* curs, struct xed *xed)
+void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
-	int i;
 	TTREE *l;
 	
 	g_assert(curs!=NULL);
@@ -384,7 +383,13 @@ void curs_prev_line(struct curs* curs, struct xed *xed)
 	
 	curs->line--;
 
-	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) ;
+#if 1
+	l = cong_layout_cache_get_line_by_index(&xed->layout_cache, curs->line);
+#else
+	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) {
+		/* empty */
+	}
+#endif
 
 	if (!l) return;
 
@@ -401,15 +406,20 @@ void curs_prev_line(struct curs* curs, struct xed *xed)
 }
 
 
-void curs_next_line(struct curs* curs, struct xed *xed)
+void curs_next_line(struct curs* curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
-	int i;
 	TTREE *l;
 
 	g_assert(curs!=NULL);
 
-	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) ;
+#if 1
+	l = cong_layout_cache_get_line_by_index(&xed->layout_cache, curs->line);
+#else
+	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) {
+		/* empty */
+	}
+#endif
 
 	if (!l) return;
 	l = l->next;
@@ -430,7 +440,7 @@ void curs_next_line(struct curs* curs, struct xed *xed)
 }
 
 
-void curs_del_prev_char(struct curs* curs, struct xed *xed)
+void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 {
 	g_assert(curs!=NULL);
 
@@ -457,7 +467,7 @@ void curs_del_prev_char(struct curs* curs, struct xed *xed)
 }
 
 
-void curs_del_next_char(struct curs* curs, struct xed *xed)
+void curs_del_next_char(struct curs* curs, CongXMLEditor *xed)
 {
 	g_assert(curs!=NULL);
 

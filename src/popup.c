@@ -144,7 +144,7 @@ void popup_tag_remove_outer()
 }
 
 
-void popup_build(struct xed *xed)
+void popup_build(CongXMLEditor *xed)
 {
 	GtkWidget *item, *w0;
 #if 1

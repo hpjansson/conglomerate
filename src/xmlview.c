@@ -483,7 +483,7 @@ GtkWidget *xv_section_vline_and_space(CongDispspec *ds, TTREE *x)
 GtkWidget *xv_section_data(TTREE *x, CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
-	struct xed *xed;
+	CongXMLEditor *xed;
 
 	hbox = gtk_hbox_new(FALSE, 0);
 
@@ -669,7 +669,7 @@ GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidg
 	UNUSED_VAR(TTREE *n1)
 	UNUSED_VAR(GtkWidget *frame)
 	GtkWidget *sub = NULL, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
-	UNUSED_VAR(struct xed *xed)
+	UNUSED_VAR(CongXMLEditor *xed)
 	UNUSED_VAR(unsigned int col)
 	UNUSED_VAR(int i)
 
