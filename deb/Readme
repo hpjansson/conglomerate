@@ -11,19 +11,28 @@ without interfering making a  *.diff.gz
 
 
 
-Build information  6 november 2002
+Build information  1 may 2003
 
 
-Here's what to do to make conge compile:
+Here's what I did to make conge compile:
  1. install missing "sarge" packages:
         apt-get update
         apt-get install autoconf automake libtool libxml2-dev \
 		libgtk2.0-dev libxslt1-dev \
+		libgnomeprintui2.2-dev libgnomeui-dev \
+		libgnomeprint-dev \
 		gnome-common intltool libeel2-dev
  2. change "testing" to "unstable in /etc/apt/sources.list
+
+ ## an other reminder
+ bahrain:/usr/lib/pkgconfig
+ # ln -s libgnomeprintui-2.2.pc libgnomeprintui-2.0.pc
+ bahrain:/usr/lib/pkgconfig
+ #
+
  3. download packages needed from unstable/SID:
         apt-get update
-        apt-get install libbonoboui2-dev libgnomeui-dev
+        apt-get install libbonoboui2-dev
  4. change "unstable" back to "testing" in /etc/apt/sources.list, and do
     the following command to avoid installing more from unstable/SID:
         apt-get update

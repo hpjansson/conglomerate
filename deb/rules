@@ -1,10 +1,13 @@
 #!/usr/bin/make -f
 #
-showthismessage:
+# just show this message
+binary:
 	@echo "  "
 	@echo " this file is a place holder"
 	@echo "  "
 	@echo "  change it to your needs"
+	@echo "  "
+	@echo "  (yes, I should do it myself)"
 	@echo "  "
 
 # end of this dummy file
