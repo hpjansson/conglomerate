@@ -17,6 +17,8 @@ CODING BEFORE RELEASE
 - update AUTHORS
 - update AM_INIT_AUTOMAKE in configure.in
 - add an about dialog box which has a VERSION
+- update README about the congle/conge name
+- update README about running conge
 
 OTHER JOBS BEFORE RELEASE
 - get the website more up-to-date
@@ -87,4 +89,8 @@ OTHER JOBS AFTER RELEASE:
 - use Conglomerate and see what needs improving, find bugs etc
 - write some documentation (Medium)
 
+ANYTIME JOBS
+- remove of Makefile in the directories examples, documentation and deb
+
 Any other ideas?
+ tell them to the developers mailinglist
