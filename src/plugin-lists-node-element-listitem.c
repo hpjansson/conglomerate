@@ -29,6 +29,7 @@
 #include "cong-eel.h"
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
+#include "cong-document.h"
 
 #include "plugin-lists-area-listitem.h"
 
@@ -36,11 +37,41 @@
 
 struct CongEditorNodeElementListitemDetails
 {
-	int dummy;
+	gchar *cached_label;
+
+	gulong handler_id_document_end_edit;
 };
+
+enum {
+	LABEL_CHANGED,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
+
+/* Internal function declarations: */
+static gchar*
+calculate_label (CongEditorNodeElementListitem* listitem);
+
+static void
+finalize (GObject *object);
+
+static void
+dispose (GObject *object);
 
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
+
+static void 
+on_end_edit (CongDocument *doc,
+	     gpointer user_data);
+
+static void 
+on_label_changed (CongEditorNodeElementListitem *listitem,
+		  gpointer user_data);
+
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementListitem, 
@@ -53,7 +84,19 @@ cong_editor_node_element_listitem_class_init (CongEditorNodeElementListitemClass
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
+	G_OBJECT_CLASS (klass)->finalize = finalize;
+	G_OBJECT_CLASS (klass)->dispose = dispose;
+
 	node_klass->generate_block_area = generate_block_area;
+
+	signals[LABEL_CHANGED] = g_signal_new ("label_changed",
+					       CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE,
+					       G_SIGNAL_RUN_FIRST,
+					       0,
+					       NULL, NULL,
+					       g_cclosure_marshal_VOID__VOID,
+					       G_TYPE_NONE, 
+					       0);
 }
 
 static void
@@ -72,6 +115,13 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
 					    editor_widget,
 					    node,
 					    traversal_parent);
+
+	PRIVATE(editor_node_element_listitem)->cached_label = calculate_label (editor_node_element_listitem);
+
+	PRIVATE(editor_node_element_listitem)->handler_id_document_end_edit = g_signal_connect (G_OBJECT(cong_editor_widget3_get_document (editor_widget)),
+												"end_edit",
+												G_CALLBACK(on_end_edit),
+												editor_node_element_listitem);
 
 	return editor_node_element_listitem;
 }
@@ -92,6 +142,14 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 				  traversal_parent));
 }
 
+const gchar*
+cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE_ELEMENT_LISTITEM (listitem), NULL);
+	return PRIVATE(listitem)->cached_label;
+}
+
+/* Private stuff: */
 enum CongNumeration {
 	CONG_NUMERATION_ARABIC,
 	CONG_NUMERATION_LOWER_ALPHA,
@@ -288,8 +346,8 @@ get_child_index(CongEditorNodeElementListitem* listitem)
 }
 
 
-gchar*
-cong_editor_node_element_listitem_calculate_label (CongEditorNodeElementListitem* listitem)
+static gchar*
+calculate_label (CongEditorNodeElementListitem* listitem)
 {
 	CongNodePtr node_listitem;
 	CongNodePtr node_parent;
@@ -322,27 +380,107 @@ cong_editor_node_element_listitem_calculate_label (CongEditorNodeElementListitem
 	return cong_util_string_from_unichar (BULLET_UNICHAR);	
 }
 
+/* Internal function definitions: */
+static void
+finalize (GObject *object)
+{
+	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (object);
+
+	g_free (editor_node_element_listitem->private);
+	editor_node_element_listitem->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+
+}
+
+static void
+dispose (GObject *object)
+{
+	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (object);
+
+	g_assert (editor_node_element_listitem->private);
+	
+	/* Cleanup: */
+
+	if (PRIVATE(editor_node_element_listitem)->cached_label) {
+		g_free (PRIVATE(editor_node_element_listitem)->cached_label);
+		PRIVATE(editor_node_element_listitem)->cached_label = NULL;
+	}
+
+	if (PRIVATE(editor_node_element_listitem)->handler_id_document_end_edit) {
+		g_signal_handler_disconnect (G_OBJECT (cong_editor_node_get_document (CONG_EDITOR_NODE (object))),
+					     PRIVATE(editor_node_element_listitem)->handler_id_document_end_edit);
+		PRIVATE(editor_node_element_listitem)->handler_id_document_end_edit = 0;
+	}
+
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+}
 
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorArea *new_area;
-	gchar* label;
+	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (editor_node);
 
 	g_return_val_if_fail (editor_node, NULL);
 
-	label = cong_editor_node_element_listitem_calculate_label (CONG_EDITOR_NODE_ELEMENT_LISTITEM(editor_node));
-
 	new_area = cong_editor_area_listitem_new (cong_editor_node_get_widget (editor_node),
-						  label);
+						  PRIVATE(editor_node_element_listitem)->cached_label);
 
-	g_free (label);
-
-	/* Connect to various signals: */
-	/* FIXME */
+	/* Connect to signal: */
+	g_signal_connect (G_OBJECT (editor_node),
+			  "label_changed",
+			  G_CALLBACK (on_label_changed),
+			  new_area);
 
 	cong_editor_area_connect_node_signals (new_area,
 					       editor_node);
 
 	return new_area;
 }
+
+static void 
+on_end_edit (CongDocument *doc,
+	     gpointer user_data)
+{
+	CongEditorNodeElementListitem *editor_node_element_listitem;
+	gchar *new_label;
+
+	g_assert (IS_CONG_DOCUMENT (doc));
+	g_assert (IS_CONG_EDITOR_NODE_ELEMENT_LISTITEM (user_data));
+
+	editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (user_data);
+
+	/* Regenerate label: */
+	new_label = calculate_label (editor_node_element_listitem);
+
+	if (0!=strcmp(new_label, PRIVATE(editor_node_element_listitem)->cached_label)) {
+#if 0
+		g_message ("label_changed from \"%s\" to \"%s\"", PRIVATE(editor_node_element_listitem)->cached_label, new_label);
+#endif
+
+		/* Label has changed: */
+		g_free (PRIVATE(editor_node_element_listitem)->cached_label);
+
+		PRIVATE(editor_node_element_listitem)->cached_label = new_label;
+
+		/* Emit label_changed signal: */
+		g_signal_emit (G_OBJECT(editor_node_element_listitem),
+			       signals[LABEL_CHANGED], 0);
+	} else {
+		/* No change: */
+		g_free (new_label);
+	}
+}
+
+static void 
+on_label_changed (CongEditorNodeElementListitem *listitem,
+		  gpointer user_data)
+{
+	CongEditorAreaListitem *area_listitem = CONG_EDITOR_AREA_LISTITEM (user_data);
+
+	cong_editor_area_listitem_set_label (area_listitem,
+					     cong_editor_node_element_listitem_get_label (listitem));
+}
+

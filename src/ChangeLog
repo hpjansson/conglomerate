@@ -1,5 +1,9 @@
 2003-10-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-lists-node-element-listitem.c, plugin-lists-node-element-listitem.h
+
+	Fix for bug #122365 (updates for labels in listitem plugin)
+	
 	* cong-parser-error.c, cong-parser-error.h
 
 	Support for parsing from a libxml2 URI

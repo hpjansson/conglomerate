@@ -66,8 +66,8 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 				       CongNodePtr node,
 				       CongEditorNode *traversal_parent);
 
-gchar*
-cong_editor_node_element_listitem_calculate_label (CongEditorNodeElementListitem* listitem);
+const gchar*
+cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem);
 
 
 G_END_DECLS
