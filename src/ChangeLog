@@ -1,3 +1,9 @@
+2003-10-01  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-modification-cursor-change.c, cong-modification-cursor-change.h, cong-modification-selection-change.c, cong-modification-selection-change.h, Makefile.am
+
+	New files:  new atomic modification subclasses
+
 2003-09-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-radio-button.c

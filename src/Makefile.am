@@ -76,6 +76,8 @@ conglomerate_SOURCES =      \
   cong-location.h           \
   cong-marshal.h            \
   cong-modification.h       \
+  cong-modification-cursor-change.h \
+  cong-modification-selection-change.h \
   cong-node.h               \
   cong-node-modification.h  \
   cong-node-modification-make-orphan.h  \
@@ -171,6 +173,8 @@ conglomerate_SOURCES =      \
   cong-marshal.c            \
   cong-menus.c              \
   cong-modification.c       \
+  cong-modification-cursor-change.c \
+  cong-modification-selection-change.c \
   cong-node.c               \
   cong-node-modification.c  \
   cong-node-modification-make-orphan.c  \
