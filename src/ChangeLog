@@ -1,3 +1,7 @@
+2004-11-25  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-debug-log-view.c: Removed dead code (#145096)
+
 2004-11-22  David Malcolm  <dmalcolm@redhat.com>
 
 	* plugin-random.c: 

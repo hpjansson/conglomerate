@@ -65,29 +65,6 @@ static void debug_log_view_details_add_message (CongDebugLogViewDetails *details
 			    -1);
 }
 
-#if 0
-static void debug_log_view_add_message (CongDebugLogView *debug_log_view,
-					const gchar *description, 
-					gboolean before_event,
-					const gchar *node_id, 
-					const gchar *extra_info)
-{
-	CongDebugLogViewDetails* details;
-
-	g_return_if_fail(debug_log_view);
-	g_return_if_fail(description);
-
-	details = debug_log_view->private;
-	g_assert(details);
-
-	debug_log_view_details_add_message(details,
-					   description, 
-					   before_event,
-					   node_id, 
-					   extra_info);
-}
-#endif
-
 /**
  * log_begin_edit:
  * @details:
