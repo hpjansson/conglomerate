@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -6,6 +8,13 @@
 #include <comm.h>
 #include <xml.h>
 #include "global.h"
+
+#include <libxml/tree.h>
+
+#if 1
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
+#endif
 
 #if 1
 struct cong_gui
@@ -22,13 +31,14 @@ struct cong_gui
   GtkTreeView *global_tree_view;
   GtkTreeStore *global_tree_store;
 
+	GnomeProgram *gnome_program;
 };
 
 GtkWidget* cong_gui_get_window(struct cong_gui* gui)
 {
   g_assert(gui!=NULL);
 
-  return gui->window;
+  return GTK_WIDGET(gui->window);
 }
 
 GtkWidget* cong_gui_get_popup(struct cong_gui* gui)
@@ -149,6 +159,8 @@ GtkWidget* do_ttree_test(TTREE* tt)
   GtkWidget *tree;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
+
+  g_return_val_if_fail(tt, NULL);
  
   add_node_recursive(tt,store,NULL);
 
@@ -166,28 +178,40 @@ GtkWidget* do_ttree_test(TTREE* tt)
   return tree;
 }
 
+/* 
+#define AUTOGENERATE_DS
+*/
+
 int test_open_do(const char *doc_name, const char *ds_name)
 {
 	char *p;
 	TTREE *xml_in;
 	FILE *xml_f;
 
+#ifndef AUTOGENERATE_DS
 	the_globals.ds = cong_dispspec_new_from_xds_file(ds_name);
 	if (!the_globals.ds) {
 	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
 	  return(TRUE);  /* Invalid displayspec. */
 	}
+#endif
 
-#if 0
+#if 1
 	/* Use libxml to load the doc: */
 	{
-	  #if 1
+	  #if 0
 	  // Use special DocBook loader for DocBook; should handle SGML better...
 	  xmlDocPtr doc = docbParseFile(doc_name,NULL);
 	  #else
 	  xmlDocPtr doc = xmlParseFile(doc_name);
 	  #endif
 	  xmlDebugDumpDocument(stdout,doc);
+
+#ifdef AUTOGENERATE_DS
+	  /* Autogenerate the ds: */
+	  the_globals.ds = cong_dispspec_new_from_xml_file(doc);
+#endif
+
 	  xml_in = convert_libxml_to_ttree_doc(doc);
 	}
 #else
@@ -234,7 +258,12 @@ gint test_open(GtkWidget *w, gpointer data)
 
 	test_open_do(doc_name, ds_name);
 #else
-	test_open_do("../examples/readme.xml", "../examples/readme.xds");
+	#if 0
+	test_open_do("../examples/hacked_gconf.sgml", "../examples/docbook.xds");
+	#else
+	/* test_open_do("../examples/readme.xml", "../examples/readme.xds"); */
+	test_open_do("../examples/test-docbook.xml", "../examples/docbook.xds");
+	#endif
 #endif
 	return(TRUE);
 }
@@ -375,11 +404,14 @@ void gui_window_main_make()
 	gdk_rgb_init();
 
 	/* --- Main window --- */
-
+#if 0
+	gui->window = gnome_app_new("Conglomerate","Conglomerate Editor");
+#else
 	gui->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_usize(GTK_WIDGET(gui->window), 360, 240);
 	gtk_window_set_default_size(GTK_WINDOW(gui->window), 480, 480);
 	gtk_window_set_title(GTK_WINDOW(gui->window), "Conglomerate Editor 0.1.0");
+#endif
 
 	gtk_signal_connect(GTK_OBJECT(gui->window), "delete_event",
 										 GTK_SIGNAL_FUNC(delete_event), NULL);
@@ -389,7 +421,7 @@ void gui_window_main_make()
 
 	gtk_container_set_border_width(GTK_CONTAINER(gui->window), 0);
 
-	gtk_widget_realize(gui->window);
+	gtk_widget_realize(GTK_WIDGET(gui->window));
 
 	/* --- Main window -> vbox --- */
 
@@ -434,10 +466,10 @@ void gui_window_main_make()
 
 	/* --- Toolbar icons --- */
 
-	gtk_widget_realize(gui->window);
-	style = gtk_widget_get_style(gui->window);
+	gtk_widget_realize(GTK_WIDGET(gui->window));
+	style = gtk_widget_get_style(GTK_WIDGET(gui->window));
 
-  /* Open file */
+	/* Open file */
 	
 	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
 					 &style->bg[GTK_STATE_NORMAL],
@@ -588,7 +620,7 @@ void gui_window_main_make()
 	
 	/* TEMPORARY: Set white background */
 	
-  gcol.blue = 0xffff;
+	gcol.blue = 0xffff;
 	gcol.green = 0xffff;
 	gcol.red = 0xffff;
 	
@@ -653,7 +685,15 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 int main( int   argc,
 	  char *argv[] )
 {
+#if 1
+	the_gui.gnome_program = gnome_program_init("Conglomerate",
+						   "0.1.0",
+						   LIBGNOMEUI_MODULE,
+						   argc,argv,
+						   GNOME_PARAM_NONE);
+#else
 	gtk_init(&argc, &argv);
+#endif
 
 	fonts_load();
 	popup_init();

@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-08-23 David Malcolm
 
+	* Makefile, dispspec.c, global.h, main.c, xmlview.c
+
+	Added Bonobo control embedding test
+
 	* dispspec.c (cong_dispspec_new_from_xml_file)
 
 	Added a way to generate a crude dispspec automatically from an xml file (provided it was loaded with libxml)

@@ -277,6 +277,18 @@ gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name)
 	return (CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element));
 }
 
+enum CongElementType
+cong_dispspec_type(CongDispspec *ds, const char* tagname)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, tagname);
+
+	if (NULL==element) {
+		return CONG_ELEMENT_TYPE_UNKNOWN;
+	}
+
+	return cong_dispspec_element_type(element);
+}
+
 
 unsigned int get_rgb_hex(unsigned char *s)
 {
@@ -723,6 +735,8 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 				element->type = CONG_ELEMENT_TYPE_SPAN;			
 			} else if (0==strcmp(type,"insert")) {
 				element->type = CONG_ELEMENT_TYPE_INSERT;			
+			} else if (0==strcmp(type,"embed-external-file")) {
+				element->type = CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE;
 			}
 		}
 	}

@@ -13,6 +13,7 @@
 
 GtkStyle *style_white;
 
+#include <bonobo/bonobo-widget.h>
 
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
@@ -521,11 +522,15 @@ TTREE *xv_editor_elements_skip(TTREE *x, CongDispspec *ds)
 
 	for ( ; x; x = xml_frag_next(x))
 	{
-    int type = xml_frag_type(x);
+		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
 
 		if (type == XML_TAG_SPAN && cong_dispspec_element_structural(ds, name))
 		{
+			return(xml_frag_prev(x));
+		}
+
+		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
 			return(xml_frag_prev(x));
 		}
 	}
@@ -547,6 +552,101 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
+GtkWidget* embedded_new(TTREE * x,CongDispspec *ds)
+{
+	GtkWidget *embedded;
+
+#if 1
+#if 0
+	/* char* moniker = "file:/home/david/cdrom/readme.txt"; */
+	/* char* moniker = "file:/home/david/Downloads/Backgrounds/artist.955353495.jpg"; */
+	/* char* moniker = "file:/home/david/coding/conge-cvs-dhm/conge/src/icon_openfile.c"; */
+
+	char* moniker = "file:./icon_openfile.c";
+	/* 
+	   This works, but we'll probably have to give some thought to search paths...
+	   Should be relative to the document rather than to the PWD.
+	 */
+
+	/* char* moniker = "fubar"; */
+	/* Test for broken moniker */
+	
+	/*   char* moniker = "file:/home/david/Downloads/Backgrounds/artist.956323194.jpg"; */
+#endif
+
+	GtkVBox *vbox;
+	GtkHBox *hbox;
+	GtkEntry* entry;
+	GtkButton* browse;
+
+	char* file_ref = "../src/ilogo.c"; /* FIXME: extract from file */
+	char* moniker = g_strdup_printf("file:%s",file_ref);
+
+	g_message("embedded_new\n");
+
+
+	vbox = GTK_VBOX(gtk_vbox_new(FALSE,0));
+	hbox = GTK_HBOX(gtk_hbox_new(FALSE,0));
+
+	gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(hbox), FALSE, TRUE, 0);
+
+	entry = GTK_ENTRY(gtk_entry_new());
+	gtk_entry_set_text(entry, file_ref);
+	browse = GTK_BUTTON(gtk_button_new_with_label("Browse"));
+
+	gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(entry), FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(browse), FALSE, TRUE, 0);
+
+	
+		
+	embedded = bonobo_widget_new_control(moniker,NULL);
+
+	g_free(moniker);
+		
+	/* error handling ? */
+	if (NULL==embedded) {
+		embedded = gtk_label_new("Conglomerate could not create a control for viewing this file's content.");
+	}
+
+	gtk_box_pack_start(GTK_BOX(vbox), embedded, FALSE, TRUE, 0);
+
+	return GTK_WIDGET(vbox);
+#else
+	/* Create a simple test widget: */
+	embedded = gtk_calendar_new();
+	return embedded;
+#endif
+}
+
+GtkWidget *xv_section_embedded(TTREE * x,CongDispspec *ds, int collapsed)
+{
+	GtkWidget *hbox, *line;
+	GtkWidget *embedded;
+
+	hbox = gtk_hbox_new(FALSE, 0);
+
+	line = xv_section_vline_and_space(ds, collapsed ? xml_frag_exit(xml_frag_exit(x)) :
+					  xml_frag_exit(x));
+
+	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
+
+	embedded = embedded_new(x, ds);
+#if 0
+	gtk_box_pack_start(GTK_BOX(hbox), embedded, FALSE, TRUE, 0);
+#else
+	gtk_box_pack_start(GTK_BOX(hbox), embedded, TRUE, TRUE, 0);
+#endif
+
+#if 1
+	gtk_widget_show(line);
+	gtk_widget_show(hbox);
+	gtk_widget_show(embedded);
+	gtk_widget_queue_resize(embedded);
+#endif
+	return(hbox);
+
+}
+
 GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
@@ -556,7 +656,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 	UNUSED_VAR(TTREE *n0)
 	UNUSED_VAR(TTREE *n1)
 	UNUSED_VAR(GtkWidget *frame)
-	GtkWidget *sub, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
+	GtkWidget *sub = NULL, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
 	UNUSED_VAR(struct xed *xed)
 	UNUSED_VAR(unsigned int col)
 	UNUSED_VAR(int i)
@@ -599,8 +699,10 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 
 	for ( ; x; x = xml_frag_next(x))
 	{
-    int type = xml_frag_type(x);
+		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
+
+		g_message("Examining frag %s\n",name);
 
 		if (type == XML_TAG_SPAN)
 		{
@@ -668,6 +770,34 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 				}
 				
 				x = xv_editor_elements_skip(x, ds);
+			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
+#if 1
+				hbox = gtk_hbox_new(FALSE, 0);
+				gtk_widget_show(hbox);
+
+				gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
+				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, xml_frag_exit(x)), FALSE, TRUE, 0);
+				xv_style_r(hbox, style_white);
+				poot = xv_section_head(ds, x);
+				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
+				/* xv_style_r(poot, style_white); */
+				
+				sub = xv_section_embedded(x,ds,collapsed);
+				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
+					
+				sub = xv_section_tail(ds, x);
+				/* xv_style_r(sub, style_white); */
+				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
+
+#else
+				sub = xv_section_embedded(x,ds,collapsed);
+				if (sub)
+				{
+
+					gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);
+					xv_style_r(sub, style_white);
+				}
+#endif
 			}
 		}
 		else if (type == XML_DATA)
@@ -705,6 +835,9 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 	GtkTreeIter root_iter;
 
 	g_message("xmlview_new called\n");
+
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(displayspec, NULL);
 	
 	the_globals.curs.set = 0;
 	the_globals.curs.xed = 0;
@@ -755,7 +888,12 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 	gtk_widget_show(xv->w);
 #endif
 	
+
+#if 0
+	x = xml_frag_enter(cong_document_get_root(doc));  /* Don't ignore root element */
+#else
 	x = xml_frag_enter(cong_document_get_root(doc)->child);  /* Root node specific */
+#endif
 
 	for ( ; x; x = xml_frag_next(x))
 	{

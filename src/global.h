@@ -32,6 +32,8 @@ enum CongElementType
 	CONG_ELEMENT_TYPE_SPAN,
 	CONG_ELEMENT_TYPE_INSERT,
 
+	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
+
 	/* Other types?  Table? Plugin widget/Bonobo control? */
 
 	CONG_ELEMENT_TYPE_UNKNOWN
@@ -113,14 +115,14 @@ cong_document_save(cong_document *doc, const char* filename);
 
 struct xed
 {
-  /* Display information */
+	/* Display information */
 
 	GtkWidget *e;  /* Eventbox */
-  GtkWidget *w;  /* Drawing area */
-  GdkPixmap *p;  /* Backing pixmap */
+	GtkWidget *w;  /* Drawing area */
+	GdkPixmap *p;  /* Backing pixmap */
 	GdkFont *f, *fm;
 
-  CongDispspec *displayspec;
+	CongDispspec *displayspec;
 	
 	int f_asc, f_desc;
 	int fm_asc, fm_desc;
@@ -349,6 +351,9 @@ gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
 gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name);
 gboolean cong_dispspec_element_span(CongDispspec *ds, char *name);
 gboolean cong_dispspec_element_insert(CongDispspec *ds, char *name);
+
+enum CongElementType
+cong_dispspec_type(CongDispspec *ds, const char* tagname);
 
 /* New API for getting at elements within a dispspec */
 CongDispspecElement*
