@@ -1,5 +1,9 @@
 2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-util.c, plugin-doc-from-xds.c
+
+	Document templates now associate themselves with the DTD, if available; DTD now always appears at top of document
+
 	* cong-dispspec.c
 
 	Implemented access to System ID and Public ID for document models

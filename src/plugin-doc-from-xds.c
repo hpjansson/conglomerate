@@ -30,6 +30,7 @@
 #include "cong-fake-plugin-hooks.h"
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
+#include "cong-util.h"
 
 void factory_action_callback_doc_from_xds(CongDocumentFactory *factory,
 	CongNewFileAssistant *assistant, gpointer user_data)
@@ -45,10 +46,23 @@ void factory_action_callback_doc_from_xds(CongDocumentFactory *factory,
 	template = cong_dispspec_get_template(dispspec);
 	if(template)
 	{
-		xmlNodePtr clone = xmlCopyNode(template, TRUE);
+		xmlNodePtr clone;
+		const CongExternalDocumentModel* model_dtd;
+
+		clone = xmlCopyNode(template, TRUE);
 
 		cong_node_recursive_set_doc (clone, 
 					     xml_doc);
+
+		model_dtd = cong_dispspec_get_external_document_model (dispspec,
+								       CONG_DOCUMENT_MODE_TYPE_DTD);
+
+		if (model_dtd) {
+			cong_util_add_external_dtd (xml_doc, 
+						    clone->name,
+						    cong_external_document_model_get_public_id (model_dtd),
+						    cong_external_document_model_get_system_id (model_dtd));
+		}
 
 		xmlDocSetRootElement(xml_doc, clone);
 	}

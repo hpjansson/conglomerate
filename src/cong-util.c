@@ -82,7 +82,7 @@ cong_util_cleanup_text (const xmlChar *src_text)
 	buffer = g_malloc((strlen(src_text)*6)+1); /* allow 6 bytes per character, plus a terminating byte; this SHOULD be big enough */
 	dst = buffer;
 
-	while (	unichar = g_utf8_get_char(src_text) ) {
+	while (	(unichar = g_utf8_get_char(src_text)) ) {
 		switch (unichar) {
 		default:
 			dst += g_unichar_to_utf8(unichar,dst);
@@ -336,11 +336,16 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 		    const xmlChar *SystemID)
 {
 #if 1
+	xmlDtdPtr  dtd_ptr;
 
-	xmlDtdPtr dtd_ptr = xmlParseDTD (ExternalID, 
-					 SystemID);
+	g_message ("Trying to load DTD with PUBLIC \"%s\" SYSTEM \"%s\"", ExternalID, SystemID);
 
+	dtd_ptr = xmlParseDTD (ExternalID, 
+			       SystemID);
+	
 	if (dtd_ptr) {
+		g_message ("Succeeded");
+
 		/* Then set the document and the root_element: */
 		cong_node_recursive_set_doc ((CongNodePtr)dtd_ptr, 
 					     xml_doc);
@@ -359,6 +364,8 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 
 		return dtd_ptr;
 	} else {
+		g_message ("Failed");
+
 		return NULL;
 	}
 #else
@@ -389,8 +396,18 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 				      ExternalID, 
 				      SystemID);
 
-	xmlAddChild((xmlNodePtr)xml_doc,
-		    (xmlNodePtr)xml_dtd);
+	if (xml_dtd) {
+		if (xml_doc->children) {
+			xmlAddPrevSibling((xmlNodePtr)xml_doc->children,
+					  (xmlNodePtr)xml_dtd);
+		} else {
+			xmlAddChild((xmlNodePtr)xml_doc,
+				    (xmlNodePtr)xml_dtd);
+		}
+
+		/* Ensure the DTD ptr is still set up within the xml_doc; the tree manipulation seems to make it lose the extSubset pointer: */
+		xml_doc->extSubset = xml_dtd;
+	}
 
 	return xml_dtd;
 }
