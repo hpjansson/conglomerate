@@ -1,3 +1,9 @@
+2003-11-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, Makefile.am, cong-dispspec-element-gxx.h, cong-dispspec-element.c, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h, gxx-undefine-shared-macros.h
+
+	New files for generating declarations of gxx functions; reimplemented <header-info> load/save using gxx
+
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h

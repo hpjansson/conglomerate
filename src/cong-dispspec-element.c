@@ -34,12 +34,59 @@
 #define DS_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
+
 /* Internal data structure declarations: */
 
 /* Internal function prototypes: */
 static const gchar* 
 element_type_to_string (enum CongElementType type);
 
+/* Use gxx to generate XML load/save routines: */
+static const CongEnumMapping type_numeration[] =
+{
+	{"structural", CONG_ELEMENT_TYPE_STRUCTURAL},
+	{"span", CONG_ELEMENT_TYPE_SPAN},
+	{"insert", CONG_ELEMENT_TYPE_INSERT},
+	{"embed-external-file", CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE},
+	{"paragraph", CONG_ELEMENT_TYPE_PARAGRAPH},
+	{"plugin", CONG_ELEMENT_TYPE_PLUGIN},
+	{"all", CONG_ELEMENT_TYPE_ALL}
+};
+
+static const CongEnumMapping whitespace_numeration[] =
+{
+	{"preserve", CONG_WHITESPACE_PRESERVE},
+	{"normalize", CONG_WHITESPACE_NORMALIZE}
+};
+
+CongDispspecElement*
+gxx_callback_construct_dispspec_element(void)
+{
+	CongDispspecElement *element = g_new0(CongDispspecElement,1);
+
+	element->whitespace = CONG_WHITESPACE_NORMALIZE;
+
+	element->key_value_hash = g_hash_table_new_full (g_str_hash,
+							 g_str_equal,
+							 g_free,
+							 g_free);
+
+	return element;
+}
+
+#include "gxx-declare-object-from-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+
+#include "gxx-object-from-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+
+#include "gxx-declare-object-to-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+
+#include "gxx-object-to-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+
+/* Random other stuff: */
 #if NEW_LOOK
 /* Hackish colour calculations in RGB space (ugh!) */
 static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
@@ -513,48 +560,6 @@ cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element
 	return element->property_dialog_plugin_id;
 }
 
-static const CongEnumMapping type_numeration[] =
-{
-	{"structural", CONG_ELEMENT_TYPE_STRUCTURAL},
-	{"span", CONG_ELEMENT_TYPE_SPAN},
-	{"insert", CONG_ELEMENT_TYPE_INSERT},
-	{"embed-external-file", CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE},
-	{"paragraph", CONG_ELEMENT_TYPE_PARAGRAPH},
-	{"plugin", CONG_ELEMENT_TYPE_PLUGIN},
-	{"all", CONG_ELEMENT_TYPE_ALL}
-};
-
-static const CongEnumMapping whitespace_numeration[] =
-{
-	{"preserve", CONG_WHITESPACE_PRESERVE},
-	{"normalize", CONG_WHITESPACE_NORMALIZE}
-};
-
-CongDispspecElement*
-gxx_callback_construct_dispspec_element(void)
-{
-	CongDispspecElement *element = g_new0(CongDispspecElement,1);
-
-	element->whitespace = CONG_WHITESPACE_NORMALIZE;
-
-	element->key_value_hash = g_hash_table_new_full (g_str_hash,
-							 g_str_equal,
-							 g_free,
-							 g_free);
-
-	return element;
-}
-
-#if 1
-#include "gxx-object-from-xml-tree.h"
-#include "cong-dispspec-element-gxx.h"
-#endif
-
-#if 1
-#include "gxx-object-to-xml-tree.h"
-#include "cong-dispspec-element-gxx.h"
-#endif
-
 CongDispspecElement*
 cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 {
@@ -586,6 +591,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   		xmlNodePtr child;
 
   		for (child = xml_element->children; child; child=child->next) {
+
   			/* Extract names: */
   			if (0==strcmp(child->name,"name")) {
   				xmlChar* str = xmlNodeListGetString(xml_element->doc, child->xmlChildrenNode, 1);
@@ -605,12 +611,6 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   			/* Handle "collapseto": */
   			if (0==strcmp(child->name,"collapseto")) {
   				element->collapseto = TRUE;
-  			}
-
-  			/* Handle "header-info": */
-  			if (0==strcmp(child->name,"header-info")) {				
-  				DS_DEBUG_MSG1("got header info\n");
-				element->header_info = gxx_generated_object_from_xml_tree_fn_header_info (child);
   			}
 
 			/* Handle "property-dialog": */
@@ -697,12 +697,6 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 		xmlAddChild (xml_node, desc_node);		
 	}
 
-	if (element->header_info) {
-		xmlAddChild (xml_node, 
-			     gxx_generated_object_to_xml_tree_fn_header_info (element->header_info, xml_doc));
-	}
-
-
 	/* FIXME:  Need to store these: */
 #if 0
 	gboolean collapseto;
@@ -722,29 +716,3 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	return xml_node;
 }
 
-#if 0
-static const gchar* 
-element_type_to_string (enum CongElementType type) 
-{
-        switch(type) {
-	default:
-		g_assert_not_reached();
-	case CONG_ELEMENT_TYPE_STRUCTURAL:
-		return "structural";
-	case CONG_ELEMENT_TYPE_SPAN:
-		return "span";
-	case CONG_ELEMENT_TYPE_INSERT:
-		return "insert";
-	case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
-		return "embed-external-file";
-	case CONG_ELEMENT_TYPE_PARAGRAPH:
-		return "paragraph";
-	case CONG_ELEMENT_TYPE_PLUGIN:
-		return "plugin";
-	case CONG_ELEMENT_TYPE_UNKNOWN:
-		return "unknown";
-	case CONG_ELEMENT_TYPE_ALL:
-		return "all";
-        }
-}
-#endif

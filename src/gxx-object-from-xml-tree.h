@@ -62,3 +62,18 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
       } \
     } \
   }
+
+#define GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT(child_name, member_name, fn_name_frag, is_required) \
+  { \
+    xmlNodePtr child; \
+    for (child = xml_node->children; child; child=child->next) { \
+      if (0==strcmp(child->name,child_name)) { \
+	inst->member_name = gxx_generated_object_from_xml_tree_fn_##fn_name_frag (child); \
+      } \
+    } \
+    if (is_required) { \
+     if (NULL==inst->member_name) { \
+       g_warning("Missing child <%s> within <%s>", child_name, tag_name); \
+     } \
+    } \
+  }
