@@ -17,12 +17,11 @@ mime_DATA = conglomerate.mime
 ## bugzilla 122011 for catalog & catalog.xml
 
 
-
 schemadir        = $(sysconfdir)/gconf/schemas/
 schema_in_files  = conglomerate.schemas.in
 schema_DATA      = $(schema_in_files:.schemas.in=.schemas)
-%.schemas:       %.schemas.in       $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -x -u -c $(top_builddir)/po/.intltool-merge-cache
 
+@INTLTOOL_SCHEMAS_RULE@
 
 stylesheetdir = $(pkgdatadir)/stylesheets
 stylesheet_DATA = selection-to-text.xsl
