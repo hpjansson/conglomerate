@@ -241,15 +241,20 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
 	
 	if (text_span) {
 		g_assert (stripped_byte_offset >= text_span->stripped_first_byte_offset);
+		g_assert (stripped_byte_offset <= (text_span->stripped_first_byte_offset + text_span->stripped_byte_count));
 		*original_byte_offset = text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset);
 
 		g_assert (*original_byte_offset>=0);
 		g_assert (*original_byte_offset<=strlen(text_cache->unstripped_string));
 
-#if 0
+#if DEBUG_TEXT_STRIPPING
 		g_message("stripped byte offset %i -> original offset %i", stripped_byte_offset, *original_byte_offset);
 #endif
 		return TRUE;
+	} else {
+#if DEBUG_TEXT_STRIPPING
+		g_message("stripped byte offset %i could not be converted", stripped_byte_offset);
+#endif
 	}
 
 	return FALSE;
@@ -277,10 +282,14 @@ cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_ca
 		g_assert (*stripped_byte_offset>=0);
 		g_assert (*stripped_byte_offset<=strlen(text_cache->stripped_string));
 
-#if 0
+#if DEBUG_TEXT_STRIPPING
 		g_message("original byte offset %i -> stripped offset %i", original_byte_offset, *stripped_byte_offset);
 #endif
 		return TRUE;
+	} else {
+#if DEBUG_TEXT_STRIPPING
+		g_message("original byte offset %i could not be converted", original_byte_offset);
+#endif
 	}
 
 	return FALSE;
@@ -316,7 +325,7 @@ get_text_span_at_stripped_byte_offset (CongTextCache *text_cache,
 		
 		g_assert(byte_offset >= text_span->stripped_first_byte_offset);
 
-		if (byte_offset < (text_span->stripped_first_byte_offset + text_span->stripped_byte_count) ) {
+		if (byte_offset <= (text_span->stripped_first_byte_offset + text_span->stripped_byte_count) ) {
 			return text_span;
 		}
 	}
@@ -344,7 +353,7 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 			return 	(CongTextCacheSpan *)iter->prev->data;
 		}
 
-		if (byte_offset < (text_span->original_first_byte_offset + text_span->stripped_byte_count) ) {
+		if (byte_offset <= (text_span->original_first_byte_offset + text_span->stripped_byte_count) ) {
 			return text_span;
 		}
 	}
