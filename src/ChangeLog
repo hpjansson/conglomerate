@@ -1,3 +1,10 @@
+2004-07-16  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec.c, cong-dispspec.h:
+	Namespace URI is now a per-CongDispspec property, rather than
+	per-CongDispspecElement; it is an attribute of the <element-list>
+	element, rather than the <element> element.
+
 2004-07-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-document.c, cong-document.h, cong-edit-find-and-replace.c, cong-file-open.c, cong-file-properties.c, cong-util.c, plugin-fo.c, plugin-relaxng.c:

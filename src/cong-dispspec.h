@@ -77,6 +77,9 @@ cong_dispspec_get_name(const CongDispspec *ds);
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
+const gchar*
+cong_dispspec_get_ns_uri (CongDispspec *ds);
+
 guint
 cong_dispspec_get_num_serialisation_formats (const CongDispspec *ds);
 

@@ -46,7 +46,6 @@ typedef enum
 
 CongDispspecElement*
 cong_dispspec_element_new (CongDispspec *ds,
-			   const gchar* ns_uri, 
 			   const gchar* local_name,
 			   CongElementType type,
 			   gboolean autogenerate_username);
@@ -56,13 +55,13 @@ void
 cong_dispspec_element_destroy (CongDispspecElement *element); 
 
 CongDispspec*
-cong_dispspec_element_get_dispspec (CongDispspecElement *element); 
+cong_dispspec_element_get_dispspec (const CongDispspecElement *element); 
 
 const gchar*
-cong_dispspec_element_get_ns_uri (CongDispspecElement *element); 
+cong_dispspec_element_get_ns_uri (const CongDispspecElement *element); 
 
 const char*
-cong_dispspec_element_get_local_name (CongDispspecElement *element);
+cong_dispspec_element_get_local_name (const CongDispspecElement *element);
 
 /** Get the name in a user-friendly form */
 const char*

@@ -36,9 +36,6 @@ struct CongDispspecElement
 {
 	CongDispspec *ds;
 
-	/* URI of namespace, or NULL: */
-	gchar *ns_uri;
-
 	/* Local name within namespace (if any); must be non-NULL */
 	gchar *local_name;
 
@@ -292,7 +289,6 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 /** 
  * cong_dispspec_element_new:
  * @ds: the #CongDispspec this will be added to
- * @ns_uri: the URI of the namespace, or NULL
  * @local_name: the local name for the new element; must be non-NULL
  * @type:
  * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
@@ -304,7 +300,6 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
  **/
 CongDispspecElement*
 cong_dispspec_element_new (CongDispspec *ds,
-			   const gchar* ns_uri, 
 			   const gchar* local_name, 
 			   CongElementType type,
 			   gboolean autogenerate_username)
@@ -313,16 +308,13 @@ cong_dispspec_element_new (CongDispspec *ds,
 
 	g_return_val_if_fail (local_name, NULL);
 	
-	g_message("cong_dispspec_element_new (\"%s\",\"%s\",)", ns_uri, local_name);
+	g_message("cong_dispspec_element_new (\"%s\",)", local_name);
 
 	/* Use shared constructor code: */
 	element = gxx_callback_construct_dispspec_element();
 
 	element->ds = ds;
 
-	if (ns_uri) {
-		element->ns_uri = g_strdup(ns_uri);
-	}
 	element->local_name = g_strdup(local_name);
 
 	if (autogenerate_username) {
@@ -366,9 +358,6 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	g_return_if_fail (element);
 
 	/* FIXME: could autogenerate this code: */
-	if (element->ns_uri) {
-		g_free (element->ns_uri);
-	}
 	if (element->local_name) {
 		g_free (element->local_name);
 	}
@@ -410,7 +399,7 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
  * Returns: the #CongDispspec containing this element
  */
 CongDispspec*
-cong_dispspec_element_get_dispspec (CongDispspecElement *element)
+cong_dispspec_element_get_dispspec (const CongDispspecElement *element)
 {
 	g_return_val_if_fail (element, NULL);
 
@@ -425,11 +414,15 @@ cong_dispspec_element_get_dispspec (CongDispspecElement *element)
  * Returns: the namespace URI for this kind of element, or NULL if none
  */
 const gchar*
-cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
+cong_dispspec_element_get_ns_uri (const CongDispspecElement *element)
 {
 	g_return_val_if_fail (element, NULL);
 
-	return element->ns_uri;
+	if (element->ds) {
+		return cong_dispspec_get_ns_uri (element->ds);
+	} else {
+		return NULL;
+	}
 }
 
 /**
@@ -439,7 +432,7 @@ cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
  * Returns: the local name (relative to its namespace, if any) for this kind of element
  */
 const gchar*
-cong_dispspec_element_get_local_name(CongDispspecElement* element)
+cong_dispspec_element_get_local_name(const CongDispspecElement* element)
 {
 	g_return_val_if_fail (element, NULL);
 
@@ -1064,7 +1057,7 @@ cong_dispspec_element_make_element_description (const CongDispspecElement *ds_el
 {
 	g_return_val_if_fail (ds_element, NULL);
 
-	return cong_element_description_new (ds_element->ns_uri,
+	return cong_element_description_new (cong_dispspec_element_get_ns_uri (ds_element),
 					     ds_element->local_name);
 }
 
