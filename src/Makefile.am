@@ -83,8 +83,10 @@ conglomerate_SOURCES =      \
   xmledit.c                 \
   xmlload.c                 \
   xmlview.c                 \
+  plugin-cleanup-source.c   \
   plugin-convert-case.c     \
   plugin-docbook.c          \
+  plugin-dtd.c              \
   plugin-empty.c            \
   plugin-fo.c               \
   plugin-lists.c            \

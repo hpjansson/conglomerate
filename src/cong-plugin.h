@@ -209,49 +209,6 @@ GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_pro
 					    CongDocument *doc,
 					    CongNodePtr node);
 
-/* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
-/* plugin-convert-case.c: */
-gboolean plugin_convert_case_plugin_register(CongPlugin *plugin);
-gboolean plugin_convert_case_plugin_configure(CongPlugin *plugin);
-
-/* plugin-docbook.c: */
-gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
-gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
-
-/* plugin-empty.c: */
-gboolean plugin_empty_plugin_register(CongPlugin *plugin);
-gboolean plugin_empty_plugin_configure(CongPlugin *plugin);
-
-/* plugin-fo.c: */
-gboolean plugin_fo_plugin_register(CongPlugin *plugin);
-gboolean plugin_fo_plugin_configure(CongPlugin *plugin);
-
-/* plugin-lists.c: */
-gboolean plugin_lists_plugin_register(CongPlugin *plugin);
-gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
-
-/* plugin-sgml.c: */
-gboolean plugin_sgml_plugin_register(CongPlugin *plugin);
-gboolean plugin_sgml_plugin_configure(CongPlugin *plugin);
-
-/* plugin-tests.c: */
-gboolean plugin_tests_plugin_register(CongPlugin *plugin);
-gboolean plugin_tests_plugin_configure(CongPlugin *plugin);
-
-/* plugin-validate.c: */
-gboolean plugin_validate_plugin_register(CongPlugin *plugin);
-gboolean plugin_validate_plugin_configure(CongPlugin *plugin);
-
-/* plugin-website.c: */
-gboolean plugin_website_plugin_register(CongPlugin *plugin);
-gboolean plugin_website_plugin_configure(CongPlugin *plugin);
-
-/* plugin-xsl.c: */
-gboolean plugin_xsl_plugin_register(CongPlugin *plugin);
-gboolean plugin_xsl_plugin_configure(CongPlugin *plugin);
-
-/* more plugins please! */
-
 
 G_END_DECLS
 

@@ -12,12 +12,15 @@
 #include "cong-plugin.h"
 #include "cong-font.h"
 #include "cong-app.h"
+#include "cong-fake-plugin-hooks.h"
 
+#if ENABLE_PRINTING
 #if 0
 /* FIXME: use xmlroff eventually */
-#include <xmlroff/result-to-fo.h>
+#include <libfo/fo-libfo.h>
 #else
 #include "fo.h"
+#endif
 #endif
 
 gchar* cong_util_cleanup_text(const xmlChar *src_text) {
@@ -492,6 +495,14 @@ void main_load_plugins(void)
 	register_plugin("convert-case",
 			plugin_convert_case_plugin_register,
 			plugin_convert_case_plugin_configure);
+
+	register_plugin("cleanup-source",
+			plugin_cleanup_source_plugin_register,
+			plugin_cleanup_source_plugin_configure);
+
+	register_plugin("dtd",
+			plugin_dtd_plugin_register,
+			plugin_dtd_plugin_configure);
 }
 
 int main( int   argc,

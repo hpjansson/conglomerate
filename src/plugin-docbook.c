@@ -32,6 +32,8 @@
 #include <glade/glade.h>
 #include "cong-app.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 #if 0
 struct DocBookAuthorInfo
 {

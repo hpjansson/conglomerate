@@ -20,6 +20,8 @@ typedef struct CongSourceView
 
 typedef struct CongSourceViewDetails
 {
+	gboolean format;
+
 	GtkScrolledWindow *scrolled_window;
 	
 	GtkTextBuffer *text_buffer;
@@ -59,7 +61,7 @@ void regenerate_text_buffer(CongSourceView *source_view)
 					  &doc_txt_ptr,
 					  &doc_txt_len, 
 					  "UTF-8",
-					  1 /*  int format */);
+					  (details->format ? 1 : 0));
 
 		gtk_text_buffer_set_text(details->text_buffer,
 					 doc_txt_ptr,
@@ -257,6 +259,8 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	view->view.klass->on_cursor_change = on_cursor_change;
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
+
+	details->format = FALSE;
 	
 	details->scrolled_window = GTK_SCROLLED_WINDOW( gtk_scrolled_window_new(NULL, NULL) );
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 

@@ -32,6 +32,8 @@
 
 #include <libxml/valid.h>
 
+#include "cong-fake-plugin-hooks.h"
+
 struct validation_attempt
 {
 };

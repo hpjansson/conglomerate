@@ -28,6 +28,8 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 struct UnicodeCreationInfo
 {
 	int num_tables;

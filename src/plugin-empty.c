@@ -27,6 +27,7 @@
 #include "global.h"
 #include "cong-plugin.h"
 
+#include "cong-fake-plugin-hooks.h"
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_empty_plugin_register(CongPlugin *plugin)

@@ -31,6 +31,8 @@
 #include "cong-graph.h"
 #include "cong-dialog.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 gboolean cong_transform_easy(const gchar *filename_src_xml, 
 			     const gchar *filename_dst_xml, 
 			     const gchar *filename_stylesheet,

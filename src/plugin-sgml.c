@@ -28,6 +28,8 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 gchar *cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
 {
 	gchar *return_val = g_strdup_printf(_("Conglomerate could not import the file \"%s\""), uri_string);

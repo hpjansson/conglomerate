@@ -33,6 +33,8 @@
 #include "cong-dispspec.h"
 #include "cong-font.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 typedef struct CongListitemElementEditor CongListitemElementEditor;
 struct CongListitemElementEditor
 {

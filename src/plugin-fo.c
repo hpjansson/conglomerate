@@ -32,6 +32,8 @@
 #include "cong-document.h"
 #include <glade/glade.h>
 
+#include "cong-fake-plugin-hooks.h"
+
 static gboolean is_fo(CongDocument *doc) 
 {
 	CongNodePtr root;

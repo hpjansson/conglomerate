@@ -29,6 +29,8 @@
 #include "cong-error-dialog.h"
 #include "cong-document.h"
 
+#include "cong-fake-plugin-hooks.h"
+
 static gboolean convert_case_exporter_document_filter(CongExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
