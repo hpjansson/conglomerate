@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# script to support the sarge release
+#
+# debian/patches/4sarge
+#
+
+ mv debian/changelog debian/changelog.orig
+ sed -e '1s/UNRELEASED/sarge/' \
+     -e '3s/expecting //' debian/changelog.orig > debian/changelog
+
+ mv debian/rules debian/rules.orig
+ sed -e 's/##dh_builddeb -p conglomerate-dbg/dh_builddeb -p conglomerate-dbg/' \
+     debian/rules.orig > debian/rules
+ chmod +x debian/rules
+
+ sed -ie 's/debian/sarge/' debian/patches/package_version.dpatch
+
+   # set version and current date
+   VERSION="$( grep ^AC_INIT configure.in | sed -e 's/.*, \(.*\))/\1/')-1"
+   RFC2822DATE=$(date -R)
+   mv debian/changelog debian/changelog.orig
+   sed -e "1s/\(.*\) (\(.*\)) \(.*\)/\1 ($VERSION) \3/" \
+       -e "1,/ -- /s/>  .*/>  $RFC2822DATE/" \
+       debian/changelog.orig > debian/changelog
+   # plus a clean up
+   rm debian/changelog.orig
+   rm debian/rules.orig
+
+# end of script ( happy hacking/testing the package )

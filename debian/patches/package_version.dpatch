@@ -1,13 +1,13 @@
 #!/bin/sh -e
-## debian/patches/package_version.dpatch by Geert Stappers
+## sarge/patches/package_version.dpatch by Geert Stappers
 # 
 
 #  All lines beginning with `## DP:' are a description of the patch.
 ## DP: Show inside the program which Debian package version it is.
-## DP: For 4.3.2-1 it does `sed -e 's/4.3.2/4.3.2debian1/'`.
+## DP: For 4.3.2-1 it does `sed -e 's/4.3.2/4.3.2sarge1/'`.
 
 VERSION=$( dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
-VERSION=$( echo $VERSION | sed -e 's/-/debian/')
+VERSION=$( echo $VERSION | sed -e 's/-/sarge/')
 
 # File to dpatch
 FTDP=./src/cong-menus.c
@@ -22,7 +22,7 @@ MOD="\"\\\n${VERSION}\""
 #  it is the version prefixed with an new line and surrounded by double quoutes
 
 # to recover
-RCVR="\"\\\n.*debian.*\""
+RCVR="\"\\\n.*sarge.*\""
 
 #-------------------------------------------------------------
 # contact upstream if you need to change below these lines ---

@@ -1,0 +1,30 @@
+The script 4sarge is to help debian sarge users
+when there is a new conglomerate release.
+
+The idea is that sarge users do
+
+  download the conglomerate tarball
+
+  unzip it
+
+  untar it
+
+  change directory into it
+
+  run `debian/patches/4sarge`
+
+  run `fakeroot dpkg-buildpackage -uc -us`
+
+  switch to super user  ( `su` )
+
+  run `debi ../conglomerate_$VERSION-1_$ARCH.changes`
+
+
+We will see how it will work out. (feedback welcome)
+
+
+Probably is this whole idea, a silly idea.
+Sarge user should add a "deb-src" line in /etc/apt/sources.list
+and use "apt-get source conglomerate" plus `debian/rules binary`
+then install it.
+

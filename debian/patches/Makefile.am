@@ -12,7 +12,9 @@ patch_DISTS = \
 # other files that travell with the package
 EXTRA_DIST = 00list 00patch-opts \
 	$(patch_DISTS) \
+	README.4sarge \
 	README.release \
+	4sarge \
 	next \
 	release \
 	sync \
