@@ -360,7 +360,7 @@ static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, Gt
 	return TRUE;
 }
 
-GtkWidget *xv_section_head(CongDocument *doc, CongNodePtr x)
+CongSectionHead *cong_section_head_new(CongDocument *doc, CongNodePtr x)
 {
 	CongDispspec *ds;
 	CongSectionHead *section_head;
@@ -409,7 +409,7 @@ GtkWidget *xv_section_head(CongDocument *doc, CongNodePtr x)
 
 	gtk_widget_show(section_head->title);
 	gtk_widget_show(section_head->vbox);
-	return(section_head->vbox);
+	return section_head;
 }
 
 
@@ -1017,23 +1017,67 @@ GtkWidget *xv_section_embedded(CongDocument *doc, CongNodePtr x,CongDispspec *ds
 
 }
 
-GtkWidget *xv_element_new(CongDocument *doc, 
-			  CongNodePtr x, 
-			  CongDispspec *ds, 
-			  GtkWidget *root, 
-			  int collapsed)
+
+#if 0
+typedef struct CongStructuralElement CongStructuralElement;
+
+struct CongStructuralElement
+{
+	GtkWidget *hbox;
+	CongSectionHead *section_head;
+};
+
+CongStructuralElement* cong_structural_element_new(CongDocument *doc, 
+						   CongNodePtr x, 
+						   GtkWidget *root,
+						   GtkWidget **sub)
+{
+	CongDispspec *ds = cong_document_get_dispspec(doc);
+	CongStructuralElement *structural_element = g_new0(CongStructuralElement,1);
+	CongSectionHead *section_head;
+	GtkWidget *poot;
+					
+	structural_element->hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(structural_element->hbox);
+
+	gtk_box_pack_start(GTK_BOX(root), structural_element->hbox, FALSE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(structural_element->hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
+	xv_style_r(structural_element->hbox, style_white);
+	section_head = cong_section_head_new(doc, x);
+
+	poot = section_head->vbox;
+	gtk_box_pack_start(GTK_BOX(structural_element->hbox), poot, TRUE, TRUE, 0);
+	*sub = xv_element_new(doc, x, ds, poot, 0);
+
+	*sub = xv_section_tail(ds, x);
+	xv_style_r(*sub, style_white);
+	gtk_box_pack_start(GTK_BOX(poot), *sub, FALSE, TRUE, 0);
+
+	return structural_element;
+}
+#endif
+
+void cong_editor_recursively_populate_ui(CongEditorView *editor_view,
+					 CongNodePtr x, 
+					 GtkWidget *root, 
+					 int collapsed)
 {
 	CongNodePtr x_orig;
-	GtkWidget *sub = NULL, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
+	GtkWidget *sub = NULL;
+	CongDocument *doc;
+	CongDispspec *ds;
 
-	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_return_if_fail(editor_view);
+	
+	doc = editor_view->view.doc;
+	ds = cong_document_get_dispspec(doc);
       	
 	x_orig = x;
 	
 	xv_style_r(root, style_white);
 
 	x = cong_node_first_child(x);
-	if (!x) return(0);
+	if (!x) return;
 
 	for ( ; x; )
 	{
@@ -1049,23 +1093,29 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				if (cong_dispspec_element_collapse(ds, name))
 				{
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
-					sub = xv_element_new(doc, x, ds, root, 1);
+
+					/* Recurse here: */
+					cong_editor_recursively_populate_ui(editor_view, x, root, TRUE);
+
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
 				}
 				else
 				{
 					/* New structural element */
-					
-					hbox = gtk_hbox_new(FALSE, 0);
+					CongSectionHead *section_head;
+					GtkWidget *poot;
+					GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
 					gtk_widget_show(hbox);
 
 					gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
 					gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 					xv_style_r(hbox, style_white);
-					poot = xv_section_head(doc, x);
+					section_head = cong_section_head_new(doc, x);
+					poot = section_head->vbox;
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
-					sub = xv_element_new(doc, x, ds, poot, 0);
 
+					/* Recurse here: */
+					cong_editor_recursively_populate_ui(editor_view, x, poot, FALSE);
 
 					sub = xv_section_tail(ds, x);
 					xv_style_r(sub, style_white);
@@ -1086,14 +1136,16 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				
 				x = xv_editor_elements_skip(x, ds);
 			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
-#if 1
-				hbox = gtk_hbox_new(FALSE, 0);
+				CongSectionHead *section_head;
+				GtkWidget *poot;
+				GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
 				gtk_widget_show(hbox);
 
 				gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
 				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 				xv_style_r(hbox, style_white);
-				poot = xv_section_head(doc, x);
+				section_head = cong_section_head_new(doc,x);
+				poot = section_head->vbox;
 				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
 				/* xv_style_r(poot, style_white); */
 				
@@ -1103,16 +1155,6 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				sub = xv_section_tail(ds, x);
 				/* xv_style_r(sub, style_white); */
 				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
-
-#else
-				sub = xv_section_embedded(x,ds,collapsed);
-				if (sub)
-				{
-
-					gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);
-					xv_style_r(sub, style_white);
-				}
-#endif
 			}
 		}
 		else if (node_type == CONG_NODE_TYPE_TEXT)
@@ -1135,8 +1177,6 @@ GtkWidget *xv_element_new(CongDocument *doc,
 	}
 
 	xv_style_r(sub, style_white);
-	return(root);
-
 }
 
 void cong_editor_populate_ui(CongEditorView *editor_view)
@@ -1184,11 +1224,14 @@ void cong_editor_populate_ui(CongEditorView *editor_view)
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{
 			/* New element */
-			GtkWidget* head = xv_section_head(doc, x);
+			CongSectionHead *section_head;
+			GtkWidget* head;
+			section_head = cong_section_head_new(doc, x);
+			head = section_head->vbox;
 
 			gtk_box_pack_start(GTK_BOX(editor_view->inner), head, TRUE, TRUE, 0);
 			
-			xv_element_new(doc, x, displayspec, head, 0);
+			cong_editor_recursively_populate_ui(editor_view, x, head, FALSE);
 
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);
@@ -1360,9 +1403,14 @@ CongEditorView *cong_editor_view_new(CongDocument *doc)
 
 void cong_editor_view_free(CongEditorView *editor_view)
 {
+	g_return_if_fail(editor_view);
+	
+	/* FIXME: should we delete the widgetry here as well? */
+
 	cong_document_unregister_view( editor_view->view.doc, CONG_VIEW(editor_view) );
 
-	g_assert(0); /* unwritten */
+	g_free(editor_view->view.klass);
+	g_free(editor_view);
 }
 
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view)
