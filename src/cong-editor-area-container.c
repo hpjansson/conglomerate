@@ -46,6 +46,7 @@ struct CongEditorAreaContainerDetails
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child_after);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, remove_child);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, remove_all_children);
 
 
 /* Signal handler declarations: */
@@ -79,6 +80,10 @@ cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
 					      remove_child);
+
+	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
+					      cong_editor_area_container,
+					      remove_all_children);
 
 	/* Set up the various signals: */
 	signals[CHILDREN_CHANGED] = g_signal_new ("children_changed",
@@ -157,9 +162,11 @@ cong_editor_area_container_remove_child ( CongEditorAreaContainer *area_containe
 	g_return_if_fail (area_container);
 	g_return_if_fail (child);
 
+#if 0
 	g_message ("cong_editor_area_container_remove_child(%s,%s)", 
 		   G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area_container)),
 		   G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(child)));
+#endif
 
 #if 0
 	g_return_if_fail (NULL!= cong_editor_area_get_parent (child));
@@ -169,6 +176,19 @@ cong_editor_area_container_remove_child ( CongEditorAreaContainer *area_containe
 			      area_container,
 			      remove_child, 
 			      (area_container, child));
+
+	cong_editor_area_container_children_changed ( area_container );
+}
+
+void 
+cong_editor_area_remove_all_children ( CongEditorAreaContainer *area_container)
+{
+	g_return_if_fail (area_container);
+
+	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CONTAINER_CLASS,
+			      area_container,
+			      remove_all_children, 
+			      (area_container));
 
 	cong_editor_area_container_children_changed ( area_container );
 }

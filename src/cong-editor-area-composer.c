@@ -26,6 +26,8 @@
 #include "cong-editor-area-composer.h"
 #include <libgnome/gnome-macros.h>
 
+#define DEBUG_CHILD_ALLOCATIONS 0
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaComposerDetails
@@ -70,7 +72,8 @@ add_child_after (CongEditorAreaContainer *area_container,
 static void
 remove_child (CongEditorAreaContainer *area_container,
 	      CongEditorArea *child);
-
+static void
+remove_all_children (CongEditorAreaContainer *area_container);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaComposer, 
@@ -91,6 +94,7 @@ cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
 	container_klass->add_child = add_child;
 	container_klass->add_child_after = add_child_after;
 	container_klass->remove_child = remove_child;
+	container_klass->remove_all_children = remove_all_children;
 }
 
 static void
@@ -355,7 +359,7 @@ allocate_child_space (CongEditorArea *area)
 		}
 	}
 
-#if 1
+#if DEBUG_CHILD_ALLOCATIONS
 	g_message("-->%ccomposer giving children an alloc of (%i,%i); surplus space=%i (%i per expandable child)",
 		  ((PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL)?'h':'v'),
 		  this_width,
@@ -400,8 +404,8 @@ allocate_child_space (CongEditorArea *area)
 				}
 			}
 		}
-
-#if 1
+ 
+#if DEBUG_CHILD_ALLOCATIONS
 		g_message("-->%ccomposer giving %s child with cached req (%i,%i) an alloc of (%i,%i)",
 			  ((PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL)?'h':'v'),
 			  (child_details->expand?"expandable":"non-expandable"),
@@ -508,4 +512,25 @@ remove_child ( CongEditorAreaContainer *area_container,
 
 	/* Not found: */
 	g_error ("CongEditorAreaComposer::remove_child called for an area that wawn't a child");
+}
+
+static void
+remove_all_children (CongEditorAreaContainer *area_container)
+{
+	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
+	GList *iter;
+	GList *next;
+
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter = next) {
+		CongEditorAreaComposerChildDetails *iter_child_details;
+		CongEditorArea *iter_child;
+		next = iter->next;
+
+		iter_child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		iter_child = CONG_EDITOR_AREA(iter_child_details->child);
+
+		PRIVATE(area_composer)->list_of_child_details = g_list_delete_link (PRIVATE(area_composer)->list_of_child_details,
+										    iter);
+		g_object_unref (iter_child);
+	}
 }

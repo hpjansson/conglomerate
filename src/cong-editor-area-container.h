@@ -64,6 +64,8 @@ struct CongEditorAreaContainerClass
 	void (*remove_child) ( CongEditorAreaContainer *area_container,
 			       CongEditorArea *child);
 
+	void (*remove_all_children) ( CongEditorAreaContainer *area_container);
+
 	void (*for_each) (CongEditorArea *editor_area, 
 			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
@@ -90,6 +92,9 @@ cong_editor_area_container_add_child_after (CongEditorAreaContainer *area_contai
 void
 cong_editor_area_container_remove_child (CongEditorAreaContainer *area_container,
 					 CongEditorArea *child);
+
+void 
+cong_editor_area_remove_all_children ( CongEditorAreaContainer *area_container);
 
 void
 cong_editor_area_container_children_changed (CongEditorAreaContainer *area_container);
