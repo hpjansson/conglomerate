@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-29 19:17+0200\n"
-"PO-Revision-Date: 2004-06-29 21:38+0100\n"
+"POT-Creation-Date: 2004-07-20 19:41+0100\n"
+"PO-Revision-Date: 2004-07-20 19:41+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Basic"
 msgid "Description"
 msgstr "Description"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:934
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
 msgid "Document Type Declaration"
 msgstr "Document Type Declaration"
 
@@ -149,7 +149,8 @@ msgstr "XML Header"
 msgid "_Associate this DTD"
 msgstr "_Associate this DTD"
 
-#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -197,6 +198,30 @@ msgstr "Conglomerate Preferences"
 #: glade/cong-preferences.glade.h:2
 msgid "Document Types"
 msgstr "Document Types"
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "Adhoc Element"
+
+#: glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "Element Name"
+
+#: glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "Element Type"
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "I Don't Care"
+
+#: glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Span"
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "Structural"
 
 #: glade/docbook-common-properties.glade.h:1
 msgid ""
@@ -339,7 +364,7 @@ msgstr "Creation Parameters"
 msgid "Depth"
 msgstr "Depth"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:922
+#: glade/plugin-random.glade.h:3 src/cong-document.c:984
 msgid "Document Type"
 msgstr "Document Type"
 
@@ -347,19 +372,19 @@ msgstr "Document Type"
 msgid "string_selection_dialog"
 msgstr "string_selection_dialogue"
 
-#: src/cong-app.c:974
+#: src/cong-app.c:1001
 msgid "XML Editor"
 msgstr "XML Editor"
 
-#: src/cong-app.c:1103
+#: src/cong-app.c:1137
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate could not load any xds files"
 
-#: src/cong-app.c:1105
+#: src/cong-app.c:1139
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate could not find any descriptions of document types."
 
-#: src/cong-app.c:1107
+#: src/cong-app.c:1141
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -538,13 +563,13 @@ msgstr "Changes from the past %li minutes will be discarded."
 msgid "Changes from the past minute will be discarded."
 msgstr "Changes from the past minute will be discarded."
 
-#: src/cong-dispspec-element.c:724 src/cong-dispspec-element.c:760
+#: src/cong-dispspec-element.c:742 src/cong-dispspec-element.c:778
 #: src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath failed)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:814
+#: src/cong-dispspec-element.c:832
 msgid "<untitled>"
 msgstr "<untitled>"
 
@@ -564,88 +589,88 @@ msgstr "File Type"
 msgid "Coverage"
 msgstr "Coverage"
 
-#: src/cong-dispspec.c:473
+#: src/cong-dispspec.c:501
 msgid "unnamed"
 msgstr "unnamed"
 
-#: src/cong-dispspec.c:493
+#: src/cong-dispspec.c:521
 msgid "No description available."
 msgstr "No description available."
 
-#: src/cong-document.c:886
+#: src/cong-document.c:948
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Attribute \"%s\""
 
-#: src/cong-document.c:893
+#: src/cong-document.c:955
 #, c-format
 msgid "Text \"%s\""
 msgstr "Text \"%s\""
 
-#: src/cong-document.c:899
+#: src/cong-document.c:961
 msgid "Character Data"
 msgstr "Character Data"
 
-#: src/cong-document.c:902
+#: src/cong-document.c:964
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Reference to Entity \"%s\""
 
-#: src/cong-document.c:905
+#: src/cong-document.c:967
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entity \"%s\""
 
-#: src/cong-document.c:908
+#: src/cong-document.c:970
 msgid "XML Processing Instruction"
 msgstr "XML Processing Instruction"
 
-#: src/cong-document.c:913
+#: src/cong-document.c:975
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Comment \"%s\""
 
-#: src/cong-document.c:919
+#: src/cong-document.c:981
 msgid "Document"
 msgstr "Document"
 
-#: src/cong-document.c:925
+#: src/cong-document.c:987
 msgid "Document Fragment"
 msgstr "Document Fragment"
 
-#: src/cong-document.c:928
+#: src/cong-document.c:990
 msgid "Notation"
 msgstr "Notation"
 
-#: src/cong-document.c:931
+#: src/cong-document.c:993
 msgid "HTML Document"
 msgstr "HTML Document"
 
-#: src/cong-document.c:937
+#: src/cong-document.c:999
 msgid "Element Declaration"
 msgstr "Element Declaration"
 
-#: src/cong-document.c:940
+#: src/cong-document.c:1002
 msgid "Attribute Declaration"
 msgstr "Attribute Declaration"
 
-#: src/cong-document.c:943
+#: src/cong-document.c:1005
 msgid "Entity Declaration"
 msgstr "Entity Declaration"
 
-#: src/cong-document.c:946
+#: src/cong-document.c:1008
 msgid "Namespace Declaration"
 msgstr "Namespace Declaration"
 
-#: src/cong-document.c:949
+#: src/cong-document.c:1011
 msgid "XInclude Start"
 msgstr "XInclude Start"
 
-#: src/cong-document.c:952
+#: src/cong-document.c:1014
 msgid "XInclude End"
 msgstr "XInclude End"
 
-#: src/cong-document.c:1954
+#: src/cong-document.c:2130
 #, c-format
 msgid "Select %s"
 msgstr "Select %s"
@@ -672,15 +697,15 @@ msgstr "Replace _All"
 msgid "Find"
 msgstr "Find"
 
-#: src/cong-editor-node-text.c:971
+#: src/cong-editor-node-text.c:975
 msgid "Select word"
 msgstr "Select word"
 
-#: src/cong-editor-node-text.c:996
+#: src/cong-editor-node-text.c:1000
 msgid "Move cursor"
 msgstr "Move cursor"
 
-#: src/cong-editor-node-text.c:1080
+#: src/cong-editor-node-text.c:1084
 msgid "Drag out selection"
 msgstr "Drag out selection"
 
@@ -1330,19 +1355,19 @@ msgstr "No External Subset"
 msgid "_Add a DTD"
 msgstr "_Add a DTD"
 
-#: src/cong-file-properties.c:273 src/cong-file-properties.c:275
+#: src/cong-file-properties.c:275 src/cong-file-properties.c:277
 msgid "Unknown"
 msgstr "Unknown"
 
-#: src/cong-file-properties.c:286
+#: src/cong-file-properties.c:288
 msgid "Unspecified"
 msgstr "Unspecified"
 
-#: src/cong-file-properties.c:361
+#: src/cong-file-properties.c:363
 msgid "Remove DTD"
 msgstr "Remove DTD"
 
-#: src/cong-file-properties.c:378 src/cong-util.c:1643
+#: src/cong-file-properties.c:380 src/cong-util.c:1643
 msgid "Associate with DTD"
 msgstr "Associate with DTD"
 
@@ -1358,11 +1383,11 @@ msgstr "Merge tags"
 msgid "Delete character"
 msgstr "Delete character"
 
-#: src/cong-location.c:1089
+#: src/cong-location.c:1057
 msgid "Calculating previous page"
 msgstr "Calculating previous page"
 
-#: src/cong-location.c:1112
+#: src/cong-location.c:1080
 msgid "Calculating next page"
 msgstr "Calculating next page"
 
@@ -1693,7 +1718,7 @@ msgstr "Content model for <tt>%s</tt> elements"
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:205
+#: src/cong-overview-view.c:203
 msgid "Unknown data"
 msgstr "Unknown data"
 
@@ -1765,7 +1790,7 @@ msgstr "Undo"
 msgid "Redo"
 msgstr "Redo"
 
-#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:219
+#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:306
 #: src/xmledit.c:51
 msgid "Cut"
 msgstr "Cut"
@@ -1800,11 +1825,11 @@ msgstr "Welcome to the much-delayed Conglomerate editor."
 msgid "%s (modified) - %s"
 msgstr "%s (modified) - %s"
 
-#: src/cong-util.c:366 src/plugin-docbook.c:1201
+#: src/cong-util.c:367 src/plugin-docbook.c:1201
 msgid "Printing XSL Formatting Objects"
 msgstr "Printing XSL Formatting Objects"
 
-#: src/cong-util.c:410
+#: src/cong-util.c:411
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "This will eventually be the result from cong_util_print_xslfo"
 
@@ -1825,7 +1850,7 @@ msgstr "Select a DTD"
 msgid "Split <%s> element"
 msgstr "Split <%s> element"
 
-#: src/file.c:100
+#: src/file.c:104
 msgid "XML Files"
 msgstr "XML Files"
 
@@ -2304,84 +2329,84 @@ msgstr "XSL Template Element"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "An element for visualising template rules in an XSL stylesheet"
 
-#: src/popup.c:516
+#: src/popup.c:522
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Apply span tag: %s"
 
-#: src/popup.c:616
+#: src/popup.c:622
 msgid "Remove Span Tag"
 msgstr "Remove Span Tag"
 
-#: src/popup.c:661
+#: src/popup.c:667
 msgid "Convert to a comment"
 msgstr "Convert to a comment"
 
-#: src/popup.c:678 src/tree.c:421
+#: src/popup.c:684 src/tree.c:508
 msgid "Uncomment"
 msgstr "Uncomment"
 
-#: src/popup.c:679
+#: src/popup.c:685
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 "Convert a comment containing XML source code into the corresponding code"
 
-#: src/popup.c:798
+#: src/popup.c:804
 msgid "Remove span tag"
 msgstr "Remove span tag"
 
-#: src/popup.c:1029 src/popup.c:1045
+#: src/popup.c:1032
 msgid "Other XML element..."
 msgstr "Other XML element..."
 
-#: src/popup.c:1265
+#: src/popup.c:1248
 msgid "Delete this item"
 msgstr "Delete this item"
 
-#: src/popup.c:1275
+#: src/popup.c:1258
 msgid "Add text node after"
 msgstr "Add text node after"
 
-#: src/popup.c:1283
+#: src/popup.c:1266
 msgid "Add text node before"
 msgstr "Add text node before"
 
-#: src/popup.c:1294
+#: src/popup.c:1277
 msgid "Set the text"
 msgstr "Set the text"
 
-#: src/popup.c:1330
+#: src/popup.c:1313
 msgid "Paste into"
 msgstr "Paste into"
 
-#: src/popup.c:1339
+#: src/popup.c:1322
 msgid "Paste before"
 msgstr "Paste before"
 
-#: src/popup.c:1348
+#: src/popup.c:1331
 msgid "Paste after"
 msgstr "Paste after"
 
-#: src/popup.c:1367
+#: src/popup.c:1350
 msgid "New sub-element"
 msgstr "New sub-element"
 
-#: src/popup.c:1381
+#: src/popup.c:1364
 msgid "New sibling"
 msgstr "New sibling"
 
-#: src/tree.c:50
+#: src/tree.c:102 src/tree.c:134
 #, c-format
 msgid "Insert sibling: %s"
 msgstr "Insert sibling: %s"
 
-#: src/tree.c:111
+#: src/tree.c:184 src/tree.c:212
 #, c-format
 msgid "Insert child: %s"
 msgstr "Insert child: %s"
 
-#: src/tree.c:371
+#: src/tree.c:458
 msgid "Convert to comment"
 msgstr "Convert to comment"
 
