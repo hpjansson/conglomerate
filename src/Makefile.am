@@ -18,6 +18,7 @@ conglomerate_SOURCES =      \
   cong-dispspec.h           \
   cong-dispspec-registry.h  \
   cong-document.h           \
+  cong-dtd.h                \
   cong-editor-widget-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
@@ -36,6 +37,7 @@ conglomerate_SOURCES =      \
   cong-dispspec-registry.c  \
   cong-document.c           \
   cong-dom-view.c           \
+  cong-dtd.c                \
   cong-dummy-element-editor.c  \
   cong-editor-widget.c      \
   cong-eel.c                \

@@ -70,8 +70,6 @@ void dtd_to_xds_importer_action_callback(CongImporter *importer, const gchar *ur
 
 	g_message("dtd_to_xds_importer_action_callback");
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as XDS");
-
 	dtd = load_dtd(uri, toplevel_window);
 
 	if (dtd) {

@@ -123,7 +123,8 @@ gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, cons
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* xmlns, 
 			   const gchar* tagname, 
-			   enum CongElementType type);
+			   enum CongElementType type,
+			   gboolean autogenerate_username);
 
 /* Destruction  */
 void 

@@ -19,6 +19,7 @@
 #include "cong-node.h"
 #include "cong-app.h"
 #include "cong-eel.h"
+#include "cong-dtd.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -98,7 +99,7 @@ static void value_destroy_func (gpointer data);
 
 /* Subroutines for generating a CongDispspec from a DTD: */
 static void
-generate_elements_from_dtd (void *payload, void *ds, xmlChar * name);
+element_callback_generate_dispspec_from_dtd (void *payload, void *ds, xmlChar * name);
 
 /* Subroutines for converting XDS XML to a CongDispspec: */
 static CongDispspec* 
@@ -126,12 +127,6 @@ add_xml_for_element (xmlDocPtr xml_doc,
 		     CongDispspecElement *element);
 
 /* Subroutines for generating a CongDispspec from arbitrtary XML docs: */
-static gboolean
-can_contain_pcdata (xmlElementContentPtr content);
-
-static void
-handle_elements_from_dtd (void *payload, void *ds, xmlChar * name);
-
 static gboolean
 contains_text (const xmlChar* string);
 
@@ -321,7 +316,7 @@ CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
 	}
 
 	/* Traverse the DTD; building stuff */
-	xmlHashScan (dtd->elements, generate_elements_from_dtd, ds);
+	xmlHashScan (dtd->elements, element_callback_generate_dispspec_from_dtd, ds);
 
 	return ds;
 }
@@ -719,7 +714,7 @@ static void value_destroy_func (gpointer data)
 
 /* Subroutines for generating a CongDispspec from a DTD: */
 static void
-generate_elements_from_dtd (void *payload, void *ds, xmlChar * name)
+element_callback_generate_dispspec_from_dtd (void *payload, void *ds, xmlChar * name)
 {
 	xmlElementPtr element;
 	CongDispspec *dispspec;
@@ -733,34 +728,10 @@ generate_elements_from_dtd (void *payload, void *ds, xmlChar * name)
 
 	ds_element = cong_dispspec_element_new (element->prefix,
 						name,
-						CONG_ELEMENT_TYPE_STRUCTURAL);
-
-	/* Try to prettify the username if possible: */
-	ds_element->username = cong_eel_prettify_xml_name_with_header_capitalisation(name);
+						cong_dtd_element_guess_dispspec_type (element),
+						TRUE);
 
 	cong_dispspec_add_element (dispspec, ds_element);
-
-
-#if 0
-#error
-
-	if (!element->content || can_contain_pcdata (element->content))
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_SPAN);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-	else
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_STRUCTURAL);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-#endif
 }
 
 /* Subroutines for converting XDS XML to a CongDispspec: */
@@ -863,7 +834,8 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* xmlns, 
 			   const gchar* tagname, 
-			   enum CongElementType type)
+			   enum CongElementType type,
+			   gboolean autogenerate_username)
 {
 	CongDispspecElement* element;
 
@@ -875,7 +847,16 @@ cong_dispspec_element_new (const gchar* xmlns,
 		element->xmlns = g_strdup(xmlns);
 	}
 	element->tagname = g_strdup(tagname);	
-	element->username = g_strdup(tagname);
+
+	if (autogenerate_username) {
+
+		/* Try to prettify the username if possible: */
+		element->username = cong_eel_prettify_xml_name_with_header_capitalisation(tagname);
+
+	} else {
+		/* username remains NULL */
+	}
+
 	element->type = type;
 
 	/* Extract colour: */
@@ -1437,52 +1418,6 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 }
 
 /* Subroutines for generating a CongDispspec from arbitrary XML docs: */
-static gboolean
-can_contain_pcdata (xmlElementContentPtr content)
-{
-	if (content) {
-		switch (content->type) {
-		case XML_ELEMENT_CONTENT_PCDATA:
-			return TRUE;
-		}
-		
-		return can_contain_pcdata (content->c1)
-			|| can_contain_pcdata (content->c2);
-	} else {
-		return FALSE;
-	}
-}
-
-static void
-handle_elements_from_dtd (void *payload, void *ds, xmlChar * name)
-{
-	xmlElementPtr element;
-	CongDispspec *dispspec;
-
-	dispspec = (CongDispspec *) ds;
-	element = (xmlElementPtr) payload;
-
-	g_assert (element);
-
-	if (!element->content || can_contain_pcdata (element->content))
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_SPAN);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-	else
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_STRUCTURAL);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-
-}
-
 /** 
     Does the string contain any non-whitespace characters? 
 */
@@ -1549,7 +1484,8 @@ promote_element (CongDispspec * dispspec,
 				{
 					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
 												     node->parent->name,
-												     CONG_ELEMENT_TYPE_PARAGRAPH);
+												     CONG_ELEMENT_TYPE_PARAGRAPH,
+												     TRUE);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
@@ -1557,7 +1493,8 @@ promote_element (CongDispspec * dispspec,
 				{
 					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
 												     node->parent->name,
-												     CONG_ELEMENT_TYPE_STRUCTURAL);
+												     CONG_ELEMENT_TYPE_STRUCTURAL,
+												     TRUE);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
@@ -1570,7 +1507,8 @@ promote_element (CongDispspec * dispspec,
 			{
 				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
 											     node->parent->name,
-											     CONG_ELEMENT_TYPE_PARAGRAPH);
+											     CONG_ELEMENT_TYPE_PARAGRAPH,
+											     TRUE);
 				g_assert (ds_element);
 				cong_dispspec_add_element (dispspec, ds_element);
 			}
@@ -1596,20 +1534,23 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 				if (contains_carriage_return(xmlNodeGetContent (cur))) {
 					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
 												     cur->parent->name,
-												     CONG_ELEMENT_TYPE_PARAGRAPH);
+												     CONG_ELEMENT_TYPE_PARAGRAPH,
+												     TRUE);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				} else {
 					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
 												     cur->parent->name,
-												     CONG_ELEMENT_TYPE_SPAN);
+												     CONG_ELEMENT_TYPE_SPAN,
+												     TRUE);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
 			} else {
 				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
 											     cur->parent->name,
-											     CONG_ELEMENT_TYPE_STRUCTURAL);
+											     CONG_ELEMENT_TYPE_STRUCTURAL,
+											     TRUE);
 				g_assert (ds_element);
 				cong_dispspec_add_element (dispspec, ds_element);
 			}
@@ -1639,7 +1580,8 @@ ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur)
 			/* Then we've found an element that doesn't have any handler in the dispspec; better create a structural tag for it... */
 			CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur),
 										     cong_node_name(cur),
-										     CONG_ELEMENT_TYPE_STRUCTURAL);
+										     CONG_ELEMENT_TYPE_STRUCTURAL,
+										     TRUE);
 			g_assert (ds_element);
 			cong_dispspec_add_element (dispspec, ds_element);
 		}
@@ -1663,14 +1605,15 @@ xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
 
 		CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(root_element),
 									     root_element->name,
-									     CONG_ELEMENT_TYPE_STRUCTURAL);
+									     CONG_ELEMENT_TYPE_STRUCTURAL,
+									     TRUE);
 		g_assert (ds_element);
 		cong_dispspec_add_element (dispspec, ds_element);
 	}
 
 	if (dtd)
 	{
-		xmlHashScan (dtd->elements, handle_elements_from_dtd, dispspec);
+		xmlHashScan (dtd->elements, element_callback_generate_dispspec_from_dtd, dispspec);
 	}
 
 	if (doc)

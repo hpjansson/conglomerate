@@ -116,6 +116,13 @@ static gchar* cong_eel_utf8_capitalise(const gchar *str)
 	return result;
 }
 
+/**
+ * Splits things like "this-is-a-tag" into its individual words.
+ * Can handle hyphenated words.
+ * FIXME:  Add support for splitting caps-seperated things like "ThisIsATag"
+ * FIXME:  Probably should convert everything to lower case as well on output
+ * FIXME:  To be really smart, we could try to spot acronyms and fully capitalise them...  would require a dictionary though.
+ */
 static gchar** split_xmlname(const gchar *xml_name)
 {
 	/* FIXME: is this really UTF-8 safe? */

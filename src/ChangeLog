@@ -1,5 +1,13 @@
 2003-07-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am, cong-dtd.c, cong-dtd.h, cong-dispspec.c, cong-dispspec.h, cong-eel.c
+
+	New files; refactoring of the dispspec generation code.
+
+	* plugin-dtd.c
+
+	Removed extraneous error dialog.
+	
 	* cong-dispspec.c, cong-eel.c, cong-eel.h
 
 	Improvements to DTD->Dispspec conversion
