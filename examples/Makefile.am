@@ -14,6 +14,7 @@ dispspec_DATA 	 = \
 	cnxml.xds \
 	dispspec.xds \
 	docbook.xds \
+	forrest-document.xds \
 	kernel-traffic-newsletter.xds \
 	readme.xds \
 	relax-ng.xds \

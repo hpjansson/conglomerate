@@ -1,3 +1,9 @@
+2003-10-25  Boris Goldowsky <bgoldowsky@rcn.com>
+
+	* forrest-document.xds, Makefile.am
+
+	Added dispspec for Apache Forrest documents
+
 2003-10-24  Jeff Martin <jeff@custommonkey.org>
 
 	* dispspec.xds xhtml1-strict.xds
