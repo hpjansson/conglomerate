@@ -1,8 +1,26 @@
-conglomerate (0.7.1-3) unstable; urgency=low
+conglomerate (0.7.2-1) unstable; urgency=low
 
-  * Trimmed debian/changelog further. 
+  * new upstream version.
 
- -- Geert Stappers <stappers@stappers.nl>  Fri, 12 Sep 2003 17:14:03 +0000
+  * control
+   - recommending xml-core.
+   - avoiding "short desc. in long desc." warning from Linda.
+
+  * compat, new file, now we are debhelper V4. That had these effects:
+   - The control file has added ${misc:Depends} to ${shlib:Depends}.
+   - Building is done in debian/conglomerate instead of debian/tmp.
+
+  * rules
+   - does call dh_scrollkeeper.
+   - installs "conglomerate_icon.xpm".
+
+  * Trimmed changelog further.
+
+  * watch file: Get upstream tarball from Ireland.
+
+  * first release with a debian NEWS file.
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri, 19 Sep 2003 16:20:37 +0000
 
 conglomerate (0.7.1-2) unstable; urgency=medium
 

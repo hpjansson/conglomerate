@@ -71,7 +71,9 @@ install: build
 	dh_installdirs
 
 	# using src/Makefile to get files into the package
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
+	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
+	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 
 
 # Build architecture-independent files here.
@@ -96,6 +98,7 @@ binary-arch: build install
 #	dh_installcron
 #	dh_installinfo
 	dh_installman doc/C/conglomerate.1
+	dh_scrollkeeper
 	dh_link
 	dh_strip
 	dh_compress

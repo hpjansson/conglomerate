@@ -1,10 +1,80 @@
 
 NEWS: In this file the announce messages of recent releases.
 
-Version 0.7.1++  ( whatever)
+Version 0.7.2 announced september 18th 2003
+
+Enhancements
+Beginnings of RELAX NG support
+      * An importer that reads DTD files and generate RELAX NG schema.
+        (me)
+      * A Conglomerate display specification for editing RELAX NG schema
+        files. (me)
+ 
+Beginnings of XHTML support:
+      * A Conglomerate display specification for editing XHTML (strict)
+        web pages. (me)
+      * A simple template for creating new web pages. (me)
+ 
+Attribute editing:
+      * The Property dialog now has a tab page listing any attributes
+        found in the DTD for the selected node (me)
+      * Utility functions to make it easy to create attribute editors by
+        binding GTK and Glade widgets to XML attributes (me)
+      * A custom property dialog for DocBook <orderedlist> tags as an
+        example of the above. (me)
+ 
+Improvements to document type infrastructure:
+      * Support for template files that can be used in the File->New
+        assistant (Jeff Martin)
+      * A template for creating new Conglomerate display specification
+        files (Jeff Martin)
+      * XML doc types can specify a file extension. For example, RELAX
+        NG schema files have a ".rng" extension, and HTML files have
+        ".html" extension. (me)
+      * The display spec file can specify a formal Public ID for the
+        DTD, and the code will try to use this, even if the XML file
+        doesn't explicitly specify the DTD. (me)
+      * The File->Properties dialog allows you to remove DTD
+        associations, and can guess at a DTD if one is not present. It
+        has a button to add the association to the document header. (me)
+      * The display specification file format now supports XML
+        namespaces (me)
+ 
+Improvements to the "Cleanup the XML Source" tool
+      * The tool now understands the difference between structural and
+        span tags and doesn't force line breaks for span tags. (me)
+      * Fixed some bugs and improved look of the resulting source, IMHO.
+        (me)
+ 
+Other Enhancements
+      * Stability enhancements (me)
+      * Improvements to the DTD for our display specification files (me,
+        Jeff Martin)
+      * Various test files should now be in the examples subdirectory of
+        the tarball (Geert Stappers)
+      * You can now merge adjacent paragraphs (as requested by Linux
+        Weekly News) - move the cursor to the end of a <para> tag and
+        press Delete, or to the start of a tag and press Backspace. (me)
+      * Probably some other things I missed :-)
+ 
+Fixes
+      * Fixed lots of cleanup bugs when documents were closed; this
+        makes the app much more stable. (me)
+      * Fix for bux #118769 - a new dialog to select importers if more
+        than one is applicable (me)
+      * Empty context submenus are now insensitive (me)
+      * Removed an unnecessary dependency on GDK 2.2 which broke the
+        build on Red Hat 8
+ 
+Thanks to
+      * Jeff Martin
+      * Geert Stappers
+..and anyone else I missed (sorry!)
+ 
+Dave Malcolm
 
 Thanks to 
-Sean Middleditch for suggestion the generate conglomerate.spec 
+Sean Middleditch for suggestion to generate conglomerate.spec 
 
 
 -----------------------------------------
