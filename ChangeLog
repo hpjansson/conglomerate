@@ -1,3 +1,10 @@
+	--- 0.9.0 ---
+
+2005-02-13  David Malcolm  <dmalcolm@redhat.com>
+	
+	* NEWS: Updated to reflect 0.9.0 release
+	* configure.in: Changed version to 0.9.0
+
 2005-02-13  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.spec.in: sync with Dag Wiers

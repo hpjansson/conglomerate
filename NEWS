@@ -1,6 +1,68 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+13-02-05
+Conglomerate 0.9.0 Released - Widget Rewrite #4 - Now with Interestingly Different Bugs!
+========================================================================================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly aimed at DocBook, but should be able to handle any XML document type.
+
+This is the first 0.9 release - the main editing widget has been rewritten since the last release (0.7.16). Please download it and try to break things (and fix them - patches gratefully acepted!).
+
+The new code fixes a long-standing problem where Conglomerate would crash when loading certain documents. This has now been fixed (we believe), so that Conglomerate should now be able to load and display any well-formed XML document. The design is simpler and should enable us to implement more sophisticated effects in the future (e.g. table editing).
+
+Unfortunately, whilst it's better than it was at loading files, it's now less stable when it comes to editing them. There are quite a few bugs still present in the new implementation - for example, "span tags" are invisible if present in a document loaded off disk (freshly created span tags appear as expected). This and other bugs can be seen below a tracker bug ( bug # 143769 ); please file bugs with editing and attach them to this tracker bug.
+
+Conglomerate requires GTK+ version 2.4.0 or later
+
+You can download it from the usual place: http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if I missed anyone from the credits below.
+
+
+New Translations: 
+      * Simplified Chinese (zh_CN) (Funda Wang)
+
+Updated Translations: 
+      * Czech (cs) (Miloslav Trmac)
+      * German (de) (Frank Arnold)
+      * Greek (el) (Kostas Papadimas)
+      * Canadian English (en_CA) (Adam Weinberger)
+      * British English (en_GB) (David Lodge)
+      * Spanish (es) (Francisco Javier F. Serrador)
+      * French (fr) (Michèle Garoche)
+      * Dutch (nl) (Daniel van Eeden)
+
+Enhancements
+      * Major rewrite of the main editing widget (David Malcolm) (Nickolay V. Shmyrev)
+      * Improvements to menu icons and keyboard shortcuts (Alan Horkan)
+      * Beginnings of work on a table-editing plugin for DocBook (David Malcolm)
+
+Fixes
+      * Fixes to i18n framework (Michèle Garoche) (Geert Stappers) (Marcel Telka)
+        Fixes to improve stability of basic editing (Nickolay V. Shmyrev)
+      * Fixed the random document generator to use the correct text "Lorem ipsum" text from Cicero's "de Finibus Bonorum et Malorum", based on http://lipsum.com/ (David Malcolm)
+      * Cleaned up to fix bug # 145096 (David Malcolm)
+      * Fixed simple word-wrapping in new editor widget (I hope) bug # 143994 (David Malcolm)
+
+Thanks
+      * Funda Wang
+      * Miloslav Trmac
+      * Frank Arnold
+      * Kostas Papadimas
+      * Adam Weinberger
+      * David Lodge
+      * Francisco Javier F. Serrador
+      * Michèle Garoche
+      * Daniel van Eeden
+      * David Malcolm
+      * Nickolay V. Shmyrev
+      * Alan Horkan
+      * Geert Stappers
+      * Marcel Telka
+
+David Malcolm
+
 04-11-04
 Conglomerate 0.7.16 Released
 ============================
