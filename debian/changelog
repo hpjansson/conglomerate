@@ -1,9 +1,9 @@
-conglomerate (0.7.6cvs237-8) UNRELEASED; urgency=low
+conglomerate (0.7.7-1) unstable; urgency=low
 
-  * Ready for New upstream release.
+  * New upstream release.
    - included FAQ in the gnome help file. (closes: #218589)
 
-  * dpatch compliant
+  * dpatch compliant.
 
   * patches/package_version.dpatch:
   New file. Shows Debian packages version inside the program.
@@ -21,7 +21,7 @@ conglomerate (0.7.6cvs237-8) UNRELEASED; urgency=low
    Suggested by Martin Michlmayr, thanks.
    - Clearified the gtk-doc issue.
 
- -- Geert Stappers <stappers@stappers.nl>  Thu,  4 Dec 2003 19:55:27 +0100
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 11 Dec 2003 14:29:17 +0100
 
 conglomerate (0.7.6-1) unstable; urgency=medium
 
