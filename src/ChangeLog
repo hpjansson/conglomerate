@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-09-20 David Malcolm
+
+	* cong-dispspec-registry.c
+
+	Bullet-proofing for the loader
+
+	* cursor.c, dispspec.c, global.h, xmledit.c
+
+	Generalised the support for paragraph tags.
+	
 2002-09-18 David Malcolm
 
 	* cong-document.c, cursor.c, dispspec.c, global.h, main.c, open.c, popup.c, position.c, tree.c, xmldata.c, xmledit.c, xmlview.c
