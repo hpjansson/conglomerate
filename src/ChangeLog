@@ -1,3 +1,9 @@
+2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-modification-set-dtd-ptr.c, cong-modification-set-dtd-ptr.h, Makefile.am
+
+	New files:  a new modification subclass for handling DTD changes within undo/redo system.
+
 2003-10-06  Robert Varga
 
 	* cong-util.c, cong-util.h and main.c

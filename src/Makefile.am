@@ -78,6 +78,7 @@ conglomerate_SOURCES =      \
   cong-modification.h       \
   cong-modification-cursor-change.h \
   cong-modification-selection-change.h \
+  cong-modification-set-dtd-ptr.h \
   cong-node.h               \
   cong-node-modification.h  \
   cong-node-modification-make-orphan.h  \
@@ -175,6 +176,7 @@ conglomerate_SOURCES =      \
   cong-modification.c       \
   cong-modification-cursor-change.c \
   cong-modification-selection-change.c \
+  cong-modification-set-dtd-ptr.c \
   cong-node.c               \
   cong-node-modification.c  \
   cong-node-modification-make-orphan.c  \
