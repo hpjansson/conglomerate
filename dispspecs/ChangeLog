@@ -1,3 +1,10 @@
+2004-06-08  David Malcolm  <dmalcolm@redhat.com>
+
+	* opml.xds: Commented out <external-document-model> element
+
+	* Makefile.am (%.xds): Applied fix for bug 143937 by 
+	nshmyrev@yandex.ru (Nickolay V. Shmyrev)
+	
 2004-06-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* release.dtd: Added <translations> and <translation> elements
