@@ -1,5 +1,9 @@
 2003-09-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-structural-tag.c, cong-editor-area-structural-tag.h
+
+	CongEditorAreaStructuralTag is now a subclass of the new CongEditorAreaStructural, rather than CongEditorAreaBin
+	
 	* cong-dispspec.c
 
 	Moved hackish GdkGC allocation into a separate routine

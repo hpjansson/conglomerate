@@ -25,7 +25,7 @@
 #ifndef __CONG_EDITOR_AREA_STRUCTURAL_TAG_H__
 #define __CONG_EDITOR_AREA_STRUCTURAL_TAG_H__
 
-#include "cong-editor-area-bin.h"
+#include "cong-editor-area-structural.h"
 
 G_BEGIN_DECLS
 
@@ -40,14 +40,14 @@ typedef struct CongEditorAreaStructuralTagDetails CongEditorAreaStructuralTagDet
 
 struct CongEditorAreaStructuralTag
 {
-	CongEditorAreaBin bin;
+	CongEditorAreaStructural structural;
 
 	CongEditorAreaStructuralTagDetails *private;
 };
 
 struct CongEditorAreaStructuralTagClass
 {
-	CongEditorAreaContainerClass klass;
+	CongEditorAreaStructuralClass klass;
 };
 
 GType

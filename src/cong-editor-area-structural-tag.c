@@ -45,6 +45,7 @@ struct CongEditorAreaStructuralTagDetails
 {
 	CongDispspecElement *ds_element;
 
+#if 0
 	gboolean expanded;
 
 	CongEditorArea *title_vcompose;
@@ -55,9 +56,11 @@ struct CongEditorAreaStructuralTagDetails
 	/********/ CongEditorArea *title_text;
 	/****/ /* anon v-spacer */
 	CongEditorArea *inner_bin;
+#endif
 };
 
 /* Method implementation prototypes: */
+#if 0
 static void 
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
@@ -83,26 +86,29 @@ static gboolean
 on_button_press (CongEditorArea *editor_area, 
 		 GdkEventButton *event,
 		 gpointer user_data);
+#endif
 
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaStructuralTag, 
 			cong_editor_area_structural_tag,
-			CongEditorAreaBin,
-			CONG_EDITOR_AREA_BIN_TYPE );
+			CongEditorAreaStructural,
+			CONG_EDITOR_AREA_STRUCTURAL_TYPE );
 
 static void
 cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *klass)
 {
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
-	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
+	CongEditorAreaStructuralClass *container_klass = CONG_EDITOR_AREA_STRUCTURAL_CLASS(klass);
 
+#if 0
 	area_klass->render_self = render_self;
 	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+#endif
 }
 
 static void
@@ -120,103 +126,19 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 					   GdkPixbuf *pixbuf,
 					   const gchar *text)
 {
+	g_return_val_if_fail (ds_element, NULL);
 	g_return_val_if_fail (text, NULL);
 
-	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_structural_tag),
-					editor_widget);
+	cong_editor_area_structural_construct (CONG_EDITOR_AREA_STRUCTURAL(area_structural_tag),
+					       editor_widget,
+					       pixbuf,
+					       text,
+					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_DIM_LINE),
+					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_BACKGROUND),
+					       cong_dispspec_element_col (ds_element,  CONG_DISPSPEC_GC_USAGE_TEXT));
 
 	PRIVATE(area_structural_tag)->ds_element = ds_element;
-	PRIVATE(area_structural_tag)->expanded = TRUE;
-
-	PRIVATE(area_structural_tag)->title_vcompose = cong_editor_area_composer_new (editor_widget,
-										      GTK_ORIENTATION_VERTICAL,
-										      0);
-
-	/* Build the title bar: */
-	{
-
-		/* Add a v-spacer: */
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
-						cong_editor_area_spacer_new (editor_widget,
-									     GTK_ORIENTATION_VERTICAL,
-									     V_SPACING),
-						FALSE,
-						FALSE,
-						0);
-		
-		/* Add the h-composer: */
-		PRIVATE(area_structural_tag)->title_hcompose = cong_editor_area_composer_new (editor_widget,
-											      GTK_ORIENTATION_HORIZONTAL,
-											      H_INDENT);
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
-						PRIVATE(area_structural_tag)->title_hcompose,
-						FALSE,
-						FALSE,
-						0);
-
-		
-		/* Add a v-spacer: */
-		cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_vcompose),
-						cong_editor_area_spacer_new (editor_widget,
-									     GTK_ORIENTATION_VERTICAL,
-									     V_SPACING),
-						FALSE,
-						FALSE,
-						0);
-		
-		/* Build up the content of the h-composer: */
-		{
-			/* Add a h-spacer: */
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
-							cong_editor_area_spacer_new (editor_widget,
-										     GTK_ORIENTATION_HORIZONTAL,
-										     H_INDENT),
-							FALSE,
-							FALSE,
-							0);
-			
-			/* Add the pixbuf (if any): */
-			if (pixbuf) {
-				PRIVATE(area_structural_tag)->title_pixbuf = cong_editor_area_pixbuf_new (editor_widget,
-													  pixbuf);
-				cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
-								PRIVATE(area_structural_tag)->title_pixbuf,
-								FALSE,
-								FALSE,
-								0);		
-			}
-			
-			/* Add the title text: */
-			PRIVATE(area_structural_tag)->title_text = cong_editor_area_text_new (editor_widget,
-											      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
-											      cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_TEXT),
-											      text,
-											      FALSE);
-			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
-							PRIVATE(area_structural_tag)->title_text,
-							FALSE,
-							FALSE,
-							0);		
-		}
-	}
-
-	PRIVATE(area_structural_tag)->inner_bin = cong_editor_area_bin_new (editor_widget);
-
-	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_structural_tag),
-								   PRIVATE(area_structural_tag)->title_vcompose);
-	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_structural_tag),
-								   PRIVATE(area_structural_tag)->inner_bin);
-
-	cong_editor_area_protected_set_parent (PRIVATE(area_structural_tag)->title_vcompose,
-					       CONG_EDITOR_AREA (area_structural_tag));
-	cong_editor_area_protected_set_parent (PRIVATE(area_structural_tag)->inner_bin,
-					       CONG_EDITOR_AREA (area_structural_tag));
-
-	/* Click handling for title bar: */
-	g_signal_connect (G_OBJECT(PRIVATE(area_structural_tag)->title_hcompose),
-			  "button_press_event",
-			  G_CALLBACK(on_button_press),
-			  area_structural_tag);
 
 	return CONG_EDITOR_AREA (area_structural_tag);
 }
@@ -244,6 +166,7 @@ cong_editor_area_structural_tag_new (CongEditorWidget3 *editor_widget,
 }
 
 /* Method implementation definitions: */
+#if 0
 static void 
 render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect)
@@ -447,3 +370,4 @@ on_button_press (CongEditorArea *editor_area,
 		return FALSE;
 	}
 }
+#endif
