@@ -1,3 +1,7 @@
+2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* conglomerate-docs.sgml: word-wrapped the document
+
 2004-11-16  Nickolay & Geert
 
 	* bugzilla 158334
