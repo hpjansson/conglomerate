@@ -31,6 +31,7 @@
 #include "cong-dialog.h"
 #include "cong-primary-window.h"
 #include "cong-fake-plugin-hooks.h"
+#include "cong-dispspec.h"
 
 static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
 {
@@ -57,6 +58,10 @@ generate_indentation(const CongSourceCleanupOptions *options, guint indent_level
 {
 	g_return_val_if_fail(options, NULL);
 
+	if (indent_level>0) {
+		indent_level--;
+	}
+
 	if (options->use_tabs) {
 		return g_strnfill(indent_level, '\t');
 	} else {
@@ -71,13 +76,87 @@ gboolean cong_util_is_pure_whitespace (const gchar *utf8_text)
 
 	g_return_val_if_fail(utf8_text, FALSE);
 
-	while (ch = g_utf8_get_char(utf8_text)) {
+	while ( (ch = g_utf8_get_char(utf8_text)) ) {
 		if (!g_unichar_isspace(ch)) {
 			return FALSE;
 		}
 
 		utf8_text = g_utf8_next_char(utf8_text);
 	}
+	
+	return TRUE;
+}
+
+gboolean 
+cong_util_is_recursively_inline (CongDocument *doc,
+				 CongNodePtr node)
+{
+	CongNodePtr iter;
+
+	g_return_val_if_fail (doc, FALSE);
+	g_return_val_if_fail (node, FALSE);
+
+	for (iter=node->children; iter; iter=iter->next) {
+		switch (cong_node_type (iter)) {
+		default: g_assert_not_reached();
+		case CONG_NODE_TYPE_UNKNOWN:
+			break;
+			
+		case CONG_NODE_TYPE_ELEMENT:
+			{
+				CongDispspecElement* ds_element = cong_document_get_dispspec_element_for_node(doc, 
+													      iter);
+				
+				if (ds_element) {
+					switch (cong_dispspec_element_type(ds_element)) {
+					default: g_assert_not_reached();
+					case CONG_ELEMENT_TYPE_STRUCTURAL:
+						return FALSE;
+						/* Insert indentation here: */
+						
+					case CONG_ELEMENT_TYPE_SPAN:
+						break;
+						
+					case CONG_ELEMENT_TYPE_INSERT:
+					case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:					
+					case CONG_ELEMENT_TYPE_PARAGRAPH:					
+					case CONG_ELEMENT_TYPE_PLUGIN:
+					case CONG_ELEMENT_TYPE_UNKNOWN:
+						return FALSE;
+					}
+				} else {
+					return FALSE;
+				}
+			}
+			break;
+			
+		case CONG_NODE_TYPE_ATTRIBUTE:
+			break;
+			
+		case CONG_NODE_TYPE_TEXT:
+			break;
+			
+		case CONG_NODE_TYPE_CDATA_SECTION:
+		case CONG_NODE_TYPE_ENTITY_REF:
+		case CONG_NODE_TYPE_ENTITY_NODE:
+		case CONG_NODE_TYPE_PI:
+		case CONG_NODE_TYPE_COMMENT:
+		case CONG_NODE_TYPE_DOCUMENT:
+		case CONG_NODE_TYPE_DOCUMENT_TYPE:
+		case CONG_NODE_TYPE_DOCUMENT_FRAG:
+		case CONG_NODE_TYPE_NOTATION:
+		case CONG_NODE_TYPE_HTML_DOCUMENT:
+		case CONG_NODE_TYPE_DTD:
+		case CONG_NODE_TYPE_ELEMENT_DECL:
+		case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+		case CONG_NODE_TYPE_ENTITY_DECL:
+		case CONG_NODE_TYPE_NAMESPACE_DECL:
+		case CONG_NODE_TYPE_XINCLUDE_START:
+		case CONG_NODE_TYPE_XINCLUDE_END:
+			return FALSE;
+		}
+	}
+	
 	
 	return TRUE;
 }
@@ -142,6 +221,28 @@ static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, g
 	return FALSE;
 }
 
+static void 
+add_indentation_and_cr_nodes (CongDocument *doc, 
+			      CongNodePtr node,
+			      const CongSourceCleanupOptions *options,
+			      guint recursion_level)
+{
+	/* Add indentation before this element: */
+	{
+		gchar *indentation_text = generate_indentation (options, recursion_level);
+		CongNodePtr indentation_node = cong_node_new_text (indentation_text, doc);
+		g_free (indentation_text);
+		
+		cong_document_node_add_before (doc, indentation_node, node);
+	}
+#if 1
+	/* Add a carriage return after this element: */
+	{
+		CongNodePtr cr_node = cong_node_new_text ("\n", doc);
+		cong_document_node_add_after (doc, cr_node, node);
+	}
+#endif
+}
 
 static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
@@ -153,6 +254,14 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 
 /* 	g_message("cleanup_source_callback(%s)", cong_node_debug_description(node)); */
 
+	if (node->parent) {
+		if (cong_util_is_recursively_inline (doc, node)) {
+			if (cong_util_is_recursively_inline (doc, node->parent)) {
+				return FALSE;
+			}
+		}
+	}						
+
 	switch (cong_node_type(node)) {
 	default: g_assert_not_reached();
 	case CONG_NODE_TYPE_UNKNOWN:
@@ -160,71 +269,41 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 
 	case CONG_NODE_TYPE_ELEMENT:
 		{
-#if 0
-			CongDispspecElement* ds_element = cong_document_get_dispspec_element_for_node(doc, node);
-
-			if (ds_element) {
-				switch (cong_dispspec_element_type(ds_element)) {
-				default: g_assert_not_reached();
-				case CONG_ELEMENT_TYPE_STRUCTURAL:
-					/* Insert indentation here: */
-					
-					#error
-				case CONG_ELEMENT_TYPE_SPAN:
-				case CONG_ELEMENT_TYPE_INSERT:					
-				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:					
-				case CONG_ELEMENT_TYPE_PARAGRAPH:					
-				case CONG_ELEMENT_TYPE_PLUGIN:					
-				case CONG_ELEMENT_TYPE_UNKNOWN:
-					break;
-				}
-			} else {
-				#error
-			}
-#else
 			g_assert(node->parent);
 			
 			{
 				enum CongNodeType parent_type = cong_node_type (node->parent);
 				if (parent_type!=CONG_NODE_TYPE_DOCUMENT) {
-
-					/* Add indentation before this element: */
-					{
-						gchar *indentation_text = generate_indentation (options, recursion_level);
-						CongNodePtr indentation_node = cong_node_new_text (indentation_text, doc);
-						g_free (indentation_text);
-						
-						cong_document_node_add_before (doc, indentation_node, node);
-					}
-#if 1
-					/* Add a carriage return after this element: */
-					{
-						CongNodePtr cr_node = cong_node_new_text ("\n", doc);
-						cong_document_node_add_after (doc, cr_node, node);
-					}
-#endif
-
+					add_indentation_and_cr_nodes (doc, 
+								      node,
+								      options,
+								      recursion_level);
 				}
 				
-				/* If this node has children; add a carriage returns as the new first child, and a CR+indent as the new last child: */
 				if (node->children) {
-					CongNodePtr new_first_child = cong_node_new_text ("\n", doc);
-					gchar *indentation_text = generate_indentation (options, recursion_level);
+					
+					if (cong_util_is_recursively_inline (doc, node)) {
+						/* 
+						   Do nothing
+						*/						
+					} else {
+						/* Add a carriage returns as the new first child, and a CR+indent as the new last child: */
+						CongNodePtr new_first_child = cong_node_new_text ("\n", doc);
+						gchar *indentation_text = generate_indentation (options, recursion_level);
 #if 1
-					CongNodePtr new_last_child = cong_node_new_text (indentation_text, doc);
+						CongNodePtr new_last_child = cong_node_new_text (indentation_text, doc);
 #else
-					gchar *new_last_child_text = g_strdup_printf ("\n%s", indentation_text);
-					CongNodePtr new_last_child = cong_node_new_text (new_last_child_text, doc);
-					g_free (new_last_child_text);
+						gchar *new_last_child_text = g_strdup_printf ("\n%s", indentation_text);
+						CongNodePtr new_last_child = cong_node_new_text (new_last_child_text, doc);
+						g_free (new_last_child_text);
 #endif
-					g_free (indentation_text);
+						g_free (indentation_text);
 						
-					cong_document_node_add_before (doc, new_first_child, node->children);
-					cong_document_node_add_after (doc, new_last_child, node->last);
+						cong_document_node_add_before (doc, new_first_child, node->children);
+						cong_document_node_add_after (doc, new_last_child, node->last);
+					}
 				}
 			}
-
-#endif
 		}
 		break;
 
@@ -235,21 +314,33 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 		/* Clean up a text node, provided it's not one of the whitespace ones we've added ourselves: */
 		if (!cong_util_is_pure_whitespace (node->content))
 		{
-			gchar *indentation = generate_indentation (options, recursion_level);
-			gchar *new_content = g_strdup_printf ("%s%s\n", indentation, node->content);
-
-			cong_document_node_set_text (doc, node, new_content);
-
-			g_free (indentation);
-			g_free (new_content);
+			if (cong_util_is_recursively_inline (doc, node->parent)) {
+				/* Do nothing: */
+			} else {
+				gchar *indentation = generate_indentation (options, recursion_level);
+				gchar *new_content = g_strdup_printf ("%s%s\n", indentation, node->content);
+				
+				cong_document_node_set_text (doc, node, new_content);
+				
+				g_free (indentation);
+				g_free (new_content);
+			}
 		}
 		break;
 
 	case CONG_NODE_TYPE_CDATA_SECTION:
 	case CONG_NODE_TYPE_ENTITY_REF:
 	case CONG_NODE_TYPE_ENTITY_NODE:
+		break;
+
 	case CONG_NODE_TYPE_PI:
 	case CONG_NODE_TYPE_COMMENT:
+		add_indentation_and_cr_nodes (doc, 
+					      node,
+					      options,
+					      recursion_level);
+		break;
+		
 	case CONG_NODE_TYPE_DOCUMENT:
 	case CONG_NODE_TYPE_DOCUMENT_TYPE:
 	case CONG_NODE_TYPE_DOCUMENT_FRAG:
