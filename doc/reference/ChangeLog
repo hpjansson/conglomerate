@@ -1,3 +1,10 @@
+2004-09-07 Douglas Burke <dburke@cfa.harvard.edu>
+
+	* conglomerate-docs.sgml
+
+	Converted to match GTK+ docs (use of part rather than chapter
+	to provide document structure). Added an index.
+	
 2004-09-02 Douglas Burke <dburke@cfa.harvard.edu>
 
 	* conglomerate-docs.sgml

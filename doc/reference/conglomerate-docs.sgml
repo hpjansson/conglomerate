@@ -87,6 +87,9 @@
     <!ENTITY cong-attribute-editor-cdata                           SYSTEM "xml/cong-attribute-editor-cdata.xml">
     <!ENTITY cong-attribute-editor-enumeration                           SYSTEM "xml/cong-attribute-editor-enumeration.xml">
     <!ENTITY cong-attribute-editor-lang                           SYSTEM "xml/cong-attribute-editor-lang.xml">
+<!--
+    <!ENTITY cong-attribute-editor-nmtoken                           SYSTEM "xml/cong-attribute-editor-nmtoken.xml">
+-->
     <!ENTITY cong-attribute-wrapper                           SYSTEM "xml/cong-attribute-wrapper.xml">
     <!ENTITY cong-attribute-wrapper-check-button                           SYSTEM "xml/cong-attribute-wrapper-check-button.xml">
     <!ENTITY cong-attribute-wrapper-radio-button                           SYSTEM "xml/cong-attribute-wrapper-radio-button.xml">
@@ -139,8 +142,9 @@
     <title>Conglomerate Programmer's Reference Manual</title>
   </bookinfo>
 
-  <chapter>
+  <part id="class-overview">
     <title>High-level Classes</title>
+    <partintro>
     <para>There is a single <link linkend="conglomerate-cong-app">CongApp</link> object representing the entire application; this owns a collection of <link linkend="conglomerate-cong-primary-window">CongPrimaryWindow</link> objects, each represents one of the application's primary windows.  A primary window corresponds to a particular <link linkend="CongDocument">CongDocument</link>.</para>
     <para>In addition, the <classname>CongApp</classname> owns certain global resources, including the <link linkend="conglomerate-cong-dispspec-registry">CongDispspecRegistry</link>.</para>
     <para>A <classname>CongDocument</classname> is a wrapper around the libxml2 document tree, together with a cursor location, and a selection range.  It references a <link linkend="conglomerate-cong-dispspec">CongDispspec</link>.  It is a <classname>GObject</classname>, and it emits signals when things change.  </para>
@@ -150,6 +154,7 @@
     </warning>
     <para>A dispspec is a "display specification"; it is a way of looking up tags in the xml document and deciding if they are "structural" and hence should appear as big blocks in the view, or "spans", in which case they can merely be rendered as an underline.  It also supports looking up icons to use, and, in theory, localisation of the tag names.</para>
     <para>The display specifications are generally loaded from ".xds" files, but can also be created at run-time. </para>
+    </partintro>
     &cong-app;
     &cong-document;
     &cong-document-traversal;
@@ -159,20 +164,23 @@
     &cong-dispspec-registry;
     &cong-dtd;
     &cong-primary-window;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="xml">
     <title>XML Handling</title>
+    <partintro>
     <para>A <link linkend="CongNodePtr">CongNodePtr</link> is a libxml2 xmlNodePtr; originally it was something else, though.  It's a node in the DOM tree of the document.  Everything is stored in UTF-8 internally.  There are some CongNode operations, and these are generally convenience wrappers around libxml2.</para>
     <para>A <link linkend="conglomerate-cong-location">CongLocation</link> is a small struct which identifies a "location" in the document (e.g. for storing the cursor location).  It's got a pointer to a node in the document tree, together with an offset into the content of the node, which is only relevant for TEXT and COMMENT nodes.  It's the number of bytes, rather than the number of characters.</para>
+    </partintro>
     &cong-node;
     &cong-location;
     &cong-range;
     &cong-selection;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="state">
     <title>Undo/Redo System</title>
+    <partintro>
     <para>All changes to a <link linkend="CongDocument">CongDocument</link> should be done using <link linkend="CongCommand">CongCommand</link> objects.  Each <classname>CongDocument</classname> has a <link linkend="CongCommandHistory">CongCommandHistory</link> which stores all of the commands that have been applied to that command which can be undone, and all that can be redone.</para>
     <para>In order to modify the document, you should do something like this:
 <programlisting>
@@ -186,6 +194,7 @@ cong_document_end_command (doc, cmd);
     </para>
     <para>All commands are built up of modifications, all of which break down into a small number of atomic modifications.  Each type of modification corresponds to a subclass of <link linkend="CongModification">CongModification</link>, and contains enough information to be able to redo and undo the command</para>
     <para>As the atomic modifications are done/undone, they call the appropriate <classname>CongDocument</classname> methods which have the word "private" in their names e.g. <function>cong_document_private_node_add_after</function>.  These emit signals which are listened to by the various views, widgets etc.  The CongDocument also handles the signal by calling a correspong cong_node_private function e.g. <function>cong_node_private_add_after</function>, which actual makes the change to the libxml2 representation of the document.</para>
+    </partintro>
     &cong-command;
     &cong-command-history;
     &cong-modification;
@@ -200,82 +209,81 @@ cong_document_end_command (doc, cmd);
     &cong-modification-cursor-change;
     &cong-modification-selection-change;
     &cong-modification-set-dtd-ptr;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="editor">
     <title>The Editor Widget</title>
-    <sect1><title>The Basics</title>
+    <partintro>
     <para>For every xml node in the document, there is a <link linkend="CongEditorNode">CongEditorNode</link> for each editor_widget3.  There is a class hierarchy of <classname>CongEditorNode</classname> subclasses, so, for instance, there's a <link linkend="CongEditorNodeElementStructural">CongEditorNodeElementStructural</link> which is used for structural tags, and a <link linkend="CongEditorNodeComment">CongEditorNodeComment</link> for comments.  This way, we only have to figure out what type a node is once, rather than every time we visit it, plus we can store useful state in the <classname>CongEditorNode</classname> objects.  For example, in a <link linkend="CongEditorNodeText">CongEditorNodeText</link>, we store a <classname>PangoLayout</classname>.</para>
     <para>There is also a collection of <link linkend="CongEditorArea">CongEditorArea</link> objects.  These form a hierarchical tree of rectangular areas which divide up the space allocated to the widget.  They know how to draw themselves, can be clicked on, handle size negotiation etc.  They are a little bit like a lightweight version of <classname>GtkWidgets</classname>, although the analogy isn't perfect. </para>
     <para><classname>CongEditorArea</classname> objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. <link linkend="CongEditorAreaComposer">CongEditorAreaComposer</link> which exists purely to manage the sizing of its children).</para>
     <para><classname>CongEditorNode</classname> objects work behind the scenes.  They are responsible for creating <classname>CongEditorArea</classname> objects to represent themselves.</para>
     <para>There are a few other classes involved: <link linkend="CongEditorAreaFlowHolder">CongEditorAreaFlowHolder</link>, and <link linkend="CongEditorChildPolicy">CongEditorChildPolicy</link>.  These are responsible for generating paragraph-like areas, which the editor nodes "pour" their <classname>CongEditorAreas</classname> into.  This allows us to get the nice underlines, which is achieved by using a <classname>PangoLayout</classname> for every text node, splitting all the <classname>PangoLayoutLines</classname> into separate <classname>CongEditorArea</classname> objects, and then merging them, together with a few extra <classname>CongEditorAreas</classname>. </para>
     <para> If you want to see the <classname>CongEditorAreas</classname>, then go to <filename>src/cong-editor-area.c</filename> and play around with the #define settings; in particular <constant>DEBUG_RENDER_ALLOCATIONS</constant> can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
-    <!--
-	The followng items do not appear in the "table of contents" for this
-	section, although they are accessible via the "next page" links
-      -->
+    </partintro>
     &cong-editor-widget;
     &cong-editor-line-fragments;
-    </sect1>
 
-    <sect1><title>Child Policies</title>
-    &cong-editor-child-policy;
-    &cong-editor-child-policy-flow-holder;
-    &cong-editor-child-policy-inline;
-    </sect1>
+    <chapter>
+      <title>Child Policies</title>
+      &cong-editor-child-policy;
+      &cong-editor-child-policy-flow-holder;
+      &cong-editor-child-policy-inline;
+    </chapter>
 
-    <sect1><title>Editor Nodes</title>
-    &cong-editor-node;
-    &cong-editor-node-comment;
-    &cong-editor-node-document;
-    &cong-editor-node-dtd;
-    &cong-editor-node-element-span;
-    &cong-editor-node-element-structural;
-    &cong-editor-node-element-unknown;
-    &cong-editor-node-element;
-    &cong-editor-node-entity-decl;
-    &cong-editor-node-entity-ref;
-    &cong-editor-node-text;
-    &cong-editor-node-unimplemented;
-    </sect1>
+    <chapter>
+      <title>Editor Nodes</title>
+      &cong-editor-node;
+      &cong-editor-node-comment;
+      &cong-editor-node-document;
+      &cong-editor-node-dtd;
+      &cong-editor-node-element-span;
+      &cong-editor-node-element-structural;
+      &cong-editor-node-element-unknown;
+      &cong-editor-node-element;
+      &cong-editor-node-entity-decl;
+      &cong-editor-node-entity-ref;
+      &cong-editor-node-text;
+      &cong-editor-node-unimplemented;
+    </chapter>
 
-    <sect1><title>Editor Areas</title>
-    &cong-editor-area;
-    &cong-editor-area-bin;
-    &cong-editor-area-border;
-    &cong-editor-area-composer;
-    &cong-editor-area-container;
-    &cong-editor-area-entity-decl;
-    &cong-editor-area-entity-ref;
-    &cong-editor-area-expander;
-    &cong-editor-area-flow-holder-blocks;
-    &cong-editor-area-flow-holder-inlines;
-    &cong-editor-area-flow-holder-single;
-    &cong-editor-area-flow-holder;
-    &cong-editor-area-labelled;
-    &cong-editor-area-line;
-    &cong-editor-area-pixbuf;
-    &cong-editor-area-spacer;
-    &cong-editor-area-span-tag;
-    &cong-editor-area-structural-tag;
-    &cong-editor-area-structural;
-    &cong-editor-area-text-comment;
-    &cong-editor-area-text-fragment;
-    &cong-editor-area-text;
-    &cong-editor-area-underline;
-    &cong-editor-area-unknown-tag;
-    </sect1>
-  </chapter>
+    <chapter>
+      <title>Editor Areas</title>
+      &cong-editor-area;
+      &cong-editor-area-bin;
+      &cong-editor-area-border;
+      &cong-editor-area-composer;
+      &cong-editor-area-container;
+      &cong-editor-area-entity-decl;
+      &cong-editor-area-entity-ref;
+      &cong-editor-area-expander;
+      &cong-editor-area-flow-holder-blocks;
+      &cong-editor-area-flow-holder-inlines;
+      &cong-editor-area-flow-holder-single;
+      &cong-editor-area-flow-holder;
+      &cong-editor-area-labelled;
+      &cong-editor-area-line;
+      &cong-editor-area-pixbuf;
+      &cong-editor-area-spacer;
+      &cong-editor-area-span-tag;
+      &cong-editor-area-structural-tag;
+      &cong-editor-area-structural;
+      &cong-editor-area-text-comment;
+      &cong-editor-area-text-fragment;
+      &cong-editor-area-text;
+      &cong-editor-area-underline;
+      &cong-editor-area-unknown-tag;
+    </chapter>
+  </part>
 
-  <chapter>
+  <part id="views">
     <title>Other Views of the Document</title>
     &cong-view;
     &cong-tree-view;
     &cong-overview-view;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="plugins">
     <title>Plugins</title>
     &cong-plugin;
     &cong-plugin-manager;
@@ -285,13 +293,14 @@ cong_document_end_command (doc, cmd);
     &plugin-lists-node-element-listitem;
     &plugin-paragraph-area-paragraph;
     &plugin-paragraph-node-element-paragraph;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="helper">
     <title>Helper Routines and Widgets</title>
     &cong-attribute-editor;
     &cong-attribute-editor-cdata;
     &cong-attribute-editor-enumeration;
+<!--    &cong-attribute-editor-nmtoken; -->
     &cong-attribute-editor-lang;
     &cong-attribute-wrapper;
     &cong-attribute-wrapper-check-button;
@@ -310,9 +319,9 @@ cong_document_end_command (doc, cmd);
     &cong-edit-find-and-replace;
     &cong-ui-hooks;
     &cong-xpath-expression;
-  </chapter>
+  </part>
 
-  <chapter>
+  <part id="misc">
     <title>Miscellaneous</title>
     &cong-service;
     &cong-service-tool;
@@ -337,10 +346,13 @@ cong_document_end_command (doc, cmd);
     &gxx-object-from-xml-tree;
     &gxx-object-to-xml-tree;
 -->
-  </chapter>
-  
-  <chapter>
+  </part>
+
+  <part id="object-tree">
     <title>Object Tree</title>
     &tree_index;
-  </chapter>
+  </part>
+
+  <index/>
+
 </book>
