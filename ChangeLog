@@ -1,3 +1,9 @@
+2004-02-24  Geert Stappers <stappers@stappers.nl>
+
+	* NEWS
+	
+	Removed old news.
+
 2004-02-22  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.spec.in
