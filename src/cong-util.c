@@ -132,9 +132,10 @@ cong_util_text_header (const xmlChar *text,
 	gchar *result;
 
 	text_cache = cong_text_cache_new (TRUE,
-					  text);
+					  text,
+					  NULL);
 
-	stripped_text = cong_text_cache_get_text (text_cache);
+	stripped_text = cong_text_cache_get_output_text (text_cache);
 
 	if (g_utf8_strlen (stripped_text, -1)>truncation_length) {
 		gchar *truncated = g_strndup (stripped_text, truncation_length);

@@ -38,6 +38,29 @@
 #include "cong-dispspec.h"
 #include "cong-command.h"
 
+enum FragmentState {
+	FRAG_NORMAL,
+	FRAG_VALID_SELECTION,
+	FRAG_INVALID_SELECTION,
+
+	NUM_FRAG_STATES
+};
+
+static PangoAttribute* 
+make_pango_attr_foreground (guint start_index,
+			    guint end_index,
+			    enum FragmentState state);
+static PangoAttribute* 
+make_pango_attr_background (guint start_index,
+			    guint end_index,
+			    enum FragmentState state);
+static void
+add_attrs_for_state (PangoAttrList *attr_list,
+		     guint start_index,
+		     guint end_index,
+		     enum FragmentState state);
+
+
 #define PRIVATE(x) ((x)->private)
 
 typedef struct CongEditorNodeTextSelectionState CongEditorNodeTextSelectionState;
@@ -49,14 +72,16 @@ struct CongEditorNodeTextSelectionState
 	gboolean got_selection_end;
 	gint selection_start_original;
 	gint selection_end_original;
+#if 0
 	gint selection_start_stripped;
 	gint selection_end_stripped;
+#endif
 };
 
 struct CongEditorNodeTextDetails
 {
 	CongTextCache* text_cache;
-	
+
 	gboolean selection_state_valid;
 	CongEditorNodeTextSelectionState cached_selection_state;
 	
@@ -108,15 +133,33 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 
 /* Internal utilities: */
 static const gchar*
-get_text_cache_input (CongEditorNodeText *editor_node_text);
+get_text_cache_input_text (CongEditorNodeText *editor_node_text);
 
+static PangoAttrList*
+get_text_cache_input_attributes (CongEditorNodeText *editor_node_text);
+
+#if 1
 /* Returns TRUE if anything has changed */
 static gboolean
 regenerate_selection_state (CongEditorNodeText *editor_node_text);
+#endif
 
+#if 1
+/* Generate effective data; this will be affected by the preedit state of the GTK Input Module if the cursor is in this node: */
+#if 0
+static void
+generate_pango_data (CongEditorNodeText *editor_node_text,
+		     gchar **output_effective_string,
+		     PangoAttrList **output_effective_pango_attr_list,
+		     gint *output_effective_cursor_pos);
+#endif
+#else
 static gchar*
 generate_markup (CongEditorNodeText *editor_node_text);
+#endif
 
+static void
+refresh_pango_layout (CongEditorNodeText *editor_node_text);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeText, 
@@ -160,7 +203,9 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongNodePtr node,
 				 CongEditorNode *traversal_parent)
 {
+#if 0
 	gchar *markup;	
+#endif
 	enum CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_widget3_get_document (editor_widget),
 										    node);
 
@@ -171,7 +216,8 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 
 
 	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new ((whitespace==CONG_WHITESPACE_NORMALIZE),
-								     get_text_cache_input (editor_node_text));
+								     get_text_cache_input_text (editor_node_text),
+								     get_text_cache_input_attributes (editor_node_text));
 
 	PRIVATE(editor_node_text)->handler_id_node_set_text = g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
 										      "node_set_text",
@@ -186,7 +232,12 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 	/* Set up our Pango Layout: */
 	PRIVATE(editor_node_text)->pango_layout = pango_layout_new(gtk_widget_get_pango_context (GTK_WIDGET(editor_widget)));
 	
+
 	regenerate_selection_state (editor_node_text);
+
+#if 1
+	refresh_pango_layout (editor_node_text);
+#else
 
 	markup = generate_markup (editor_node_text);
 
@@ -194,6 +245,7 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 markup,
 				 -1);
 	g_free (markup);
+#endif
 
 	pango_layout_set_font_description (PRIVATE(editor_node_text)->pango_layout,
 					   cong_font_get_pango_description( cong_app_get_font (cong_app_singleton(),
@@ -585,16 +637,23 @@ on_signal_set_text_notify_after (CongDocument *doc,
 
 	/* FIXME: need smarter dispatch mechanism: */
 	if (node == cong_editor_node_get_node( CONG_EDITOR_NODE(editor_node_text))) {
-
+#if 0
 		gchar *markup;
+#endif
 	
-		cong_text_cache_set_text (PRIVATE(editor_node_text)->text_cache,
-					  get_text_cache_input (editor_node_text));
+		cong_text_cache_set_input_text (PRIVATE(editor_node_text)->text_cache,
+						get_text_cache_input_text (editor_node_text));
 
-		
 		PRIVATE(editor_node_text)->selection_state_valid = FALSE;
 		regenerate_selection_state (editor_node_text);
 
+		cong_text_cache_set_input_attributes (PRIVATE(editor_node_text)->text_cache,
+						      get_text_cache_input_attributes (editor_node_text));	
+
+
+#if 1
+		refresh_pango_layout (editor_node_text);
+#else
 		markup = generate_markup (editor_node_text);
 
 		pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
@@ -602,6 +661,7 @@ on_signal_set_text_notify_after (CongDocument *doc,
 					 -1);
 
 		g_free (markup);
+#endif
 
 		cong_editor_node_line_regeneration_required (CONG_EDITOR_NODE(editor_node_text));
 
@@ -624,6 +684,12 @@ on_signal_selection_change_notify_after (CongDocument *doc,
 
 	/* Optimise regeneration of markup so it only happens in the cases where the "local selection" has changed: */
 	if (regenerate_selection_state (editor_node_text)) {
+#if 1
+		cong_text_cache_set_input_attributes (PRIVATE(editor_node_text)->text_cache,
+						      get_text_cache_input_attributes (editor_node_text));	
+
+		refresh_pango_layout (editor_node_text);
+#else
 		gchar *markup = generate_markup (editor_node_text);
 	
 		pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
@@ -631,6 +697,7 @@ on_signal_selection_change_notify_after (CongDocument *doc,
 					 -1);
 		
 		g_free (markup);
+#endif
 
 		/* The change to the markup should only affect the colours of the text hence we don't need to regenerate the lines; we only need to
 		   ensure all the fragments get redrawn. 
@@ -853,9 +920,85 @@ get_flow_type(CongEditorNode *editor_node)
 
 /* Internal utilities: */
 static const gchar*
-get_text_cache_input (CongEditorNodeText *editor_node_text)
+get_text_cache_input_text (CongEditorNodeText *editor_node_text)
 {
 	return cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
+}
+
+static PangoAttrList*
+get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
+{
+	CongNodePtr this_node;
+	PangoAttrList* attr_list;
+
+	g_return_if_fail (editor_node_text);
+
+	this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
+
+#if 0
+	cursor = cong_document_get_cursor (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
+#endif
+
+	attr_list = pango_attr_list_new ();
+
+#if 1
+	{
+		CongNodePtr this_node;
+		CongSelection *selection;
+		gboolean got_selection_start;
+		gboolean got_selection_end;
+		gint selection_start;
+		gint selection_end;
+		enum FragmentState select_state;
+		const gchar* text = get_text_cache_input_text (editor_node_text);
+		
+		this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
+		selection = cong_document_get_selection (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
+		select_state = cong_selection_is_valid (selection) ? FRAG_VALID_SELECTION : FRAG_INVALID_SELECTION;
+
+		/* See if we have any selections starting or ending in this node: */
+		got_selection_start = cong_selection_get_start_byte_offset (selection,
+									    this_node, 
+									    &selection_start);
+		got_selection_end = cong_selection_get_end_byte_offset (selection, 
+									this_node, 
+									&selection_end);
+		if (got_selection_start) {
+
+			add_attrs_for_state (attr_list, 0, selection_start, FRAG_NORMAL);
+
+			if (got_selection_end) {				
+				/* we've got a self-contained selection within this node, or one that entirely encloses it: */
+				add_attrs_for_state (attr_list, selection_start, selection_end, select_state);
+				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
+			} else {
+				/* we've got a selection that starts in this node but carries on past the end: */
+				add_attrs_for_state (attr_list, selection_start, strlen(text), select_state);
+			}
+		} else {
+
+			if (got_selection_end) {
+				/* we've got a selection that starts before this node and carries on past the end: */
+				add_attrs_for_state (attr_list, 0, selection_end, select_state);
+				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
+			} else {
+				/* no selections present: */
+				add_attrs_for_state (attr_list, 0, strlen(text), FRAG_NORMAL);
+			}
+		}
+
+		
+	}
+#else
+	/* Big hack: */
+	{
+		add_attrs_for_state (attr_list, 0, 1, FRAG_NORMAL);
+		add_attrs_for_state (attr_list, 1, 2, FRAG_VALID_SELECTION);
+		add_attrs_for_state (attr_list, 2, 3, FRAG_INVALID_SELECTION);
+	}
+#endif
+
+	return attr_list;
 }
 
 #if 0
@@ -874,6 +1017,7 @@ cong_selection_is_valid (CongSelection *selection)
 }
 #endif
 
+#if 1
 static void
 cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state,
 			       CongSelection *selection,
@@ -910,6 +1054,7 @@ cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state
 										 this_node, 
 										 &selection_state->selection_end_original);
 
+#if 0
 	if (selection_state->got_selection_start) {
 		selection_state->got_selection_start = cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
 														 selection_state->selection_start_original,
@@ -920,12 +1065,42 @@ cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state
 													       selection_state->selection_end_original,
 													       &selection_state->selection_end_stripped);
 	}
+#endif
 }
 
 static gboolean
 cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range_a,
 				   const CongEditorNodeTextSelectionState *range_b)
 {
+#if 1
+	if (range_a->got_selection_end) {
+		if (range_b->got_selection_end) {
+			if (range_a->selection_end_original!=range_b->selection_end_original) {
+				return FALSE;
+			}
+		} else {
+			return FALSE;
+		}
+	} else {
+		if (range_b->got_selection_end) {
+			return FALSE;
+		}
+	}
+
+	if (range_a->got_selection_start) {
+		if (range_b->got_selection_start) {
+			if (range_a->selection_start_original!=range_b->selection_start_original) {
+				return FALSE;
+			}
+		} else {
+			return FALSE;
+		}
+	} else {
+		if (range_b->got_selection_start) {
+			return FALSE;
+		}
+	}
+#else
 	if (range_a->got_selection_end) {
 		if (range_b->got_selection_end) {
 			if (range_a->selection_end_original!=range_b->selection_end_original) {
@@ -959,6 +1134,7 @@ cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range
 			return FALSE;
 		}
 	}
+#endif
 
 	if (range_a->is_selection_valid!=range_b->is_selection_valid) {
 		return FALSE;
@@ -967,6 +1143,7 @@ cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range
 	return TRUE;
 }
 
+#if 0
 static gchar*
 cong_text_selection_state_generate_markup (CongEditorNodeTextSelectionState *selection_state,
 					   CongSelection *selection,
@@ -1063,6 +1240,7 @@ cong_text_selection_state_generate_markup (CongEditorNodeTextSelectionState *sel
 	return result_markup;
 	
 }
+#endif
 
 /* Returns TRUE if anything has changed */
 static gboolean
@@ -1106,7 +1284,61 @@ regenerate_selection_state (CongEditorNodeText *editor_node_text)
 	}
 	
 }
+#endif
 
+#if 1
+#if 0
+static void
+generate_pango_data (CongEditorNodeText *editor_node_text,
+		     gchar **output_effective_string,
+		     PangoAttrList **output_effective_pango_attr_list,
+		     gint *output_effective_cursor_pos)
+{
+	CongNodePtr this_node;
+	CongCursor *cursor;
+	PangoAttrList* attr_list;
+
+	g_return_if_fail (editor_node_text);
+
+	this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
+
+	cursor = cong_document_get_cursor (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
+
+	attr_list = pango_attr_list_new ();
+
+	/* Big hack: */
+	{
+		attr_list = pango_attr_list_new ();
+		add_attrs_for_state (attr_list, 0, 1, FRAG_NORMAL);
+		add_attrs_for_state (attr_list, 1, 2, FRAG_VALID_SELECTION);
+		add_attrs_for_state (attr_list, 2, 3, FRAG_INVALID_SELECTION);
+	}
+
+	*output_effective_string = ;
+	*output_effective_pango_attr_list = attr_list;
+
+
+
+
+#if 0
+	*output_effective_string 
+#error
+	pango_attr_list_splice (PangoAttrList *list,
+				PangoAttrList *other,
+				gint pos,
+				gint len);
+
+	if (cursor->location.node==this_node) {
+		/* FIXME: */
+		/* then we need to add the preedit string with appropriate Pango attributes; should we add it to the text cache???... */
+	}
+#endif
+
+
+}
+#endif
+
+#else
 static gchar*
 generate_markup (CongEditorNodeText *editor_node_text)
 {
@@ -1116,7 +1348,8 @@ generate_markup (CongEditorNodeText *editor_node_text)
 	g_return_val_if_fail (editor_node_text, NULL);
 
 	selection = cong_document_get_selection (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
-	stripped_text = cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache);
+	stripped_text = cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache,
+						  NULL);
 	
 	g_assert (PRIVATE(editor_node_text)->selection_state_valid);
 
@@ -1124,3 +1357,95 @@ generate_markup (CongEditorNodeText *editor_node_text)
 							  selection,
 							  stripped_text);
 }
+#endif
+
+
+/* FIXME:  get these from the theme: */
+static const guint16 fg_col[NUM_FRAG_STATES][3] = {
+	/* FRAG_NORMAL, */
+	{0x0000, 0x0000, 0x0000},
+
+	/* FRAG_VALID_SELECTION, */
+	{0xffff, 0xffff, 0xffff},
+
+	/* FRAG_INVALID_SELECTION, */
+	{0x0000, 0x0000, 0x0000}	
+};
+
+static const guint16 bg_col[NUM_FRAG_STATES][3] = {
+	/* FRAG_NORMAL, */
+	{0xffff, 0xffff, 0xffff},
+
+	/* FRAG_VALID_SELECTION, */
+	{0x0000, 0x0000, 0x0000},
+
+	/* FRAG_INVALID_SELECTION, */
+	{0xffff, 0x0000, 0x0000}	
+};
+
+static PangoAttribute* 
+make_pango_attr_foreground (guint start_index,
+			    guint end_index,
+			    enum FragmentState state)
+{
+	PangoAttribute *attr;
+
+	attr = pango_attr_foreground_new (fg_col [state][0],
+					  fg_col [state][1],
+					  fg_col [state][2]);
+	attr->start_index = start_index;
+	attr->end_index = end_index;
+	
+	return attr;
+}
+
+static PangoAttribute* 
+make_pango_attr_background (guint start_index,
+			    guint end_index,
+			    enum FragmentState state)
+{
+	PangoAttribute *attr;
+
+	attr = pango_attr_background_new (bg_col [state][0],
+					  bg_col [state][1],
+					  bg_col [state][2]);
+	attr->start_index = start_index;
+	attr->end_index = end_index;
+	
+	return attr;
+}
+
+static void
+add_attrs_for_state (PangoAttrList *attr_list,
+		     guint start_index,
+		     guint end_index,
+		     enum FragmentState state)
+{
+	pango_attr_list_insert (attr_list,
+				make_pango_attr_foreground (start_index, end_index, state));
+	pango_attr_list_insert (attr_list,
+				make_pango_attr_background (start_index, end_index, state));
+}
+
+static void
+refresh_pango_layout (CongEditorNodeText *editor_node_text)
+{
+	const gchar *stripped_text;
+	PangoAttrList *attr_list;
+
+	stripped_text = cong_text_cache_get_output_text (PRIVATE(editor_node_text)->text_cache);
+	attr_list = cong_text_cache_get_output_attributes (PRIVATE(editor_node_text)->text_cache);
+	g_assert (attr_list);
+	
+	pango_layout_set_text (PRIVATE(editor_node_text)->pango_layout,
+			       stripped_text,
+			       -1);
+
+	pango_layout_set_attributes (PRIVATE(editor_node_text)->pango_layout,
+				     attr_list);
+
+#if 0
+	pango_attr_list_unref (attr_list);
+#endif
+}
+

@@ -100,7 +100,8 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    traversal_parent);	
 
 	PRIVATE(editor_node_comment)->text_cache = cong_text_cache_new (FALSE, /* Don't strip whitespace */
-									node->content);
+									node->content,
+									NULL);
 
 	return editor_node_comment;
 }
@@ -124,6 +125,8 @@ static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorNodeComment *node_comment = CONG_EDITOR_NODE_COMMENT(editor_node);
+	gchar *text;
+
 
 	g_return_val_if_fail (editor_node, NULL);
 
@@ -132,7 +135,7 @@ generate_block_area (CongEditorNode *editor_node)
 										  cong_app_get_font (cong_app_singleton(),
 												     CONG_FONT_ROLE_BODY_TEXT), 
 										  NULL,
-										  cong_text_cache_get_text (PRIVATE(node_comment)->text_cache),
+										  cong_text_cache_get_output_text (PRIVATE(node_comment)->text_cache),
 										  FALSE)
 					       );
 

@@ -152,6 +152,12 @@ void
 cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
 				     GtkMenu *menu);
 
+void
+cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
+				      gchar **output_string, 
+				      PangoAttrList **output_pango_attr_list,
+				      gint *output_cursor_pos);
+
 G_END_DECLS
 
 #endif

@@ -1,3 +1,9 @@
+2003-11-05  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-comment.c, cong-editor-node-text.c, cong-editor-widget.h, cong-editor-widget3.c, cong-text-cache.c, cong-text-cache.h, cong-util.c
+
+	Text normalisation now supports Pango attributes; rewrite of the usage of PangoLayout handling in the editor widget to use this (in preparation for proper support of preedit states for GTK Input Modules)
+
 2003-11-04  Paul Smith  <conglomerate@pcs.uklinux.net>
 
 	* cong-node.c, cong-node.h, cong-range.c, popup.c

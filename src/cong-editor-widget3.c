@@ -44,7 +44,7 @@
 #include "cong-command.h"
 
 #define SHOW_CURSOR_SPEW 0
-#define DEBUG_IM_CONTEXT 0
+#define DEBUG_IM_CONTEXT 1
 
 /* 
    The notes below are no longer true; see notes about entities in header file.
@@ -883,6 +883,24 @@ cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
 	gtk_widget_show (submenu_menu);
 }
 
+void
+cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
+				      gchar **output_string, 
+				      PangoAttrList **output_pango_attr_list,
+				      gint *output_cursor_pos)
+{
+	g_return_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget));
+	g_return_if_fail (output_string);
+	g_return_if_fail (output_pango_attr_list);
+	g_return_if_fail (output_cursor_pos);
+
+	gtk_im_context_get_preedit_string (PRIVATE(editor_widget)->im_context,
+					   output_string,
+					   output_pango_attr_list,
+					   output_cursor_pos);
+}
+
+
 /* Internal function implementations: */
 /* Definitions of misc stuff: */
 static void 
@@ -981,10 +999,21 @@ commit_cb (GtkIMContext *context,
 
 }
 
+static void
+editor_node_preedit_changed_cb (CongEditorWidget3 *widget, 
+				CongEditorNode *editor_node, 
+				gpointer user_data)
+{
+	cong_editor_node_line_regeneration_required (editor_node);
+}
+
 static void     
 preedit_changed_cb (GtkIMContext *context,
 		    CongEditorWidget3     *editor_widget)
 {
+	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
+	CongCursor *cursor = cong_document_get_cursor (doc);
+
 	gchar *preedit_string;
 	PangoAttrList *preedit_pango_attr_list;
 	gint preedit_cursor_pos;
@@ -995,8 +1024,15 @@ preedit_changed_cb (GtkIMContext *context,
 					   &preedit_cursor_pos);
 
 #if DEBUG_IM_CONTEXT
-	g_message ("preedit_changed_cb: preedit string is: \"%s\"", preedit_string);
+	g_message ("preedit_changed_cb: preedit string is: \"%s\",cursor pos=%i", preedit_string, preedit_cursor_pos);
 #endif
+
+	/* Need to regenerate the Pango data for old and new text/comment nodes; what happens when we switch between nodes?  etc...: */
+	g_assert (cursor->location.node);
+	cong_editor_widget3_for_each_editor_node (editor_widget,
+						  cursor->location.node,
+						  editor_node_preedit_changed_cb,
+						  NULL);
 
 	g_free (preedit_string);
 	pango_attr_list_unref (preedit_pango_attr_list);

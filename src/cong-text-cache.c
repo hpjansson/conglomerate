@@ -39,17 +39,34 @@ struct CongTextCacheSpan
 
 struct CongTextCache
 {
+	/* Behaviour: */
 	gboolean strip_whitespace;
-	gchar *unstripped_string; /* only useful for debugging at the moment */
-	gchar *stripped_string;
-	GList *list_of_span;
+
+	/*  Inputs: */
+	gchar *input_string;
+	PangoAttrList *input_attr_list; /* can be NULL if client code isn't interested in attributes */
+
+	/* Outputs: */
+	gchar *output_string; /* NULL if it needs regenerating */
+	PangoAttrList *output_attr_list; /* NULL if it needs regenerating */
+	GList *list_of_span; /* NULL if it needs regenerating */
 };
 
 /* Internal function declarations: */
+static void
+regenerate_output_text (CongTextCache *text_cache);
+
+static void
+regenerate_output_attr_list (CongTextCache *text_cache);
+
+static void
+clear_cache (CongTextCache *text_cache);
+
 static CongTextCacheSpan* 
 cong_text_cache_span_new(int original_first_byte_offset,
 			 int stripped_first_byte_offset,
 			 int stripped_byte_count);
+
 
 static CongTextCacheSpan *
 get_text_span_at_stripped_byte_offset (CongTextCache *text_cache, 
@@ -62,15 +79,21 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 /* Exported function definitions: */
 CongTextCache*
 cong_text_cache_new (gboolean strip_whitespace,
-		     const gchar *string)
+		     const gchar *string,
+		     PangoAttrList *attr_list)
 {
-	CongTextCache* cache = g_new0(CongTextCache,1);
+	CongTextCache* cache;
+
+	g_return_val_if_fail (string, NULL);
+
+	cache = g_new0(CongTextCache,1);
 
 	cache->strip_whitespace = strip_whitespace;
 
-	cong_text_cache_set_text (cache,
-				  string);
-
+	cong_text_cache_set_input_text (cache,
+					string);
+	cong_text_cache_set_input_attributes (cache,
+					      attr_list);
 	return cache;
 }
 
@@ -92,56 +115,172 @@ cong_text_cache_free (CongTextCache* text_cache)
 }
 
 const gchar*
-cong_text_cache_get_text (CongTextCache* text_cache)
+cong_text_cache_get_output_text (CongTextCache* text_cache)
 {
 	g_return_val_if_fail (text_cache, NULL);
 
-	return text_cache->stripped_string;
+	if (NULL==text_cache->output_string) {
+		regenerate_output_text (text_cache);
+	}
+
+	g_assert (text_cache->output_string);
+	return text_cache->output_string;
 }
 
+PangoAttrList*
+cong_text_cache_get_output_attributes (CongTextCache* text_cache)
+{
+	g_return_val_if_fail (text_cache, NULL);
+
+	if (NULL==text_cache->input_attr_list) {
+		return NULL;
+	}
+
+	if (NULL==text_cache->output_attr_list) {
+		regenerate_output_attr_list (text_cache);
+	}
+
+	g_assert (text_cache->output_attr_list);
+	return text_cache->output_attr_list;
+}
+
+
 void
-cong_text_cache_set_text (CongTextCache* text_cache,
-			  const gchar* input_string)
+cong_text_cache_set_input_text (CongTextCache* text_cache,
+				const gchar* input_string)
 {
 	g_return_if_fail (text_cache);
 	g_return_if_fail (input_string);
 
-	if (text_cache->unstripped_string) {
-		g_free (text_cache->unstripped_string);
+	if (text_cache->input_string) {
+		g_free (text_cache->input_string);
+	}
+	text_cache->input_string = g_strdup (input_string);
+
+	clear_cache (text_cache);
+}
+
+void
+cong_text_cache_set_input_attributes (CongTextCache* text_cache,
+				      PangoAttrList *attr_list)
+{
+	g_return_if_fail (text_cache);
+	g_return_if_fail (attr_list);
+
+	pango_attr_list_ref (attr_list);
+	if (text_cache->input_attr_list) {
+		pango_attr_list_unref (text_cache->input_attr_list);
 	}
 
-	text_cache->unstripped_string = g_strdup (input_string);
+	text_cache->input_attr_list = attr_list;
 
-	if (text_cache->stripped_string) {
-		g_free (text_cache->stripped_string);
-		text_cache->stripped_string = NULL;
+	if (text_cache->output_attr_list) {
+		pango_attr_list_unref (text_cache->output_attr_list);
+		text_cache->output_attr_list = NULL;
+	}
+}
+
+
+gboolean
+cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_cache,
+							  int stripped_byte_offset,
+							  int *original_byte_offset)
+{
+	CongTextCacheSpan *text_span;
+
+	g_return_val_if_fail(text_cache, FALSE);
+	g_return_val_if_fail(original_byte_offset, FALSE);
+	g_return_val_if_fail(stripped_byte_offset>=0, FALSE);
+	g_return_val_if_fail(stripped_byte_offset<=strlen(text_cache->input_string), FALSE);
+
+	text_span = get_text_span_at_stripped_byte_offset(text_cache, stripped_byte_offset);
+	
+	if (text_span) {
+		g_assert (stripped_byte_offset >= text_span->stripped_first_byte_offset);
+		g_assert (stripped_byte_offset <= (text_span->stripped_first_byte_offset + text_span->stripped_byte_count));
+		*original_byte_offset = text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset);
+
+		g_assert (*original_byte_offset>=0);
+		g_assert (*original_byte_offset<=strlen(text_cache->input_string));
+
+#if DEBUG_TEXT_STRIPPING
+		g_message("stripped byte offset %i -> original offset %i", stripped_byte_offset, *original_byte_offset);
+#endif
+		return TRUE;
+	} else {
+#if DEBUG_TEXT_STRIPPING
+		g_message("stripped byte offset %i could not be converted", stripped_byte_offset);
+#endif
 	}
 
-	if (text_cache->list_of_span) {
-		GList *iter;
+	return FALSE;
+}
 
-		for (iter=text_cache->list_of_span; iter; iter=iter->next) {
-			g_assert(iter->data);
-			g_free (iter->data);
+gboolean
+cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,
+							  int original_byte_offset,
+							  int *stripped_byte_offset)
+{
+	CongTextCacheSpan *text_span;
+
+	g_return_val_if_fail(text_cache, FALSE);
+	g_return_val_if_fail(stripped_byte_offset, FALSE);
+	g_return_val_if_fail(original_byte_offset>=0, FALSE);
+	g_return_val_if_fail(original_byte_offset<=strlen(text_cache->input_string), FALSE);
+
+	text_span = get_text_span_at_original_byte_offset(text_cache, original_byte_offset);
+	
+	if (text_span) {
+		int byte_count_into_span;
+
+		g_assert (original_byte_offset >= text_span->original_first_byte_offset);
+
+		byte_count_into_span = original_byte_offset - text_span->original_first_byte_offset;
+		if (byte_count_into_span <= text_span->stripped_byte_count) {
+			*stripped_byte_offset = text_span->stripped_first_byte_offset + byte_count_into_span;
+		} else {
+			*stripped_byte_offset = text_span->stripped_first_byte_offset + text_span->stripped_byte_count;
 		}
 
-		g_list_free(text_cache->list_of_span);
+		g_assert (*stripped_byte_offset>=0);
+		g_assert (*stripped_byte_offset<=strlen(text_cache->output_string));
 
-		text_cache->list_of_span = NULL;
+#if DEBUG_TEXT_STRIPPING
+		g_message("original byte offset %i -> stripped offset %i", original_byte_offset, *stripped_byte_offset);
+#endif
+		return TRUE;
+	} else {
+#if DEBUG_TEXT_STRIPPING
+		g_message("original byte offset %i could not be converted", original_byte_offset);
+#endif
 	}
+
+	return FALSE;
+}
+
+
+/* Internal function definitions: */
+static void
+regenerate_output_text (CongTextCache *text_cache)
+{
+	g_assert (text_cache);
+
+	g_assert (text_cache->input_string);
+
+	clear_cache (text_cache);
 
 	if (text_cache->strip_whitespace) {
 		gchar *dst;
-		const gchar *src = input_string;
+		const gchar *src = text_cache->input_string;
 		gboolean last_char_was_space=FALSE;
  		CongTextCacheSpan *text_span;
 		int original_byte_offset_start_of_span = 0;
 		int stripped_byte_offset_start_of_span = 0;
 		
-		g_assert (NULL==text_cache->stripped_string);
-		text_cache->stripped_string = g_malloc((strlen(input_string)*8)+1);
+		g_assert (NULL==text_cache->output_string);
+		text_cache->output_string = g_malloc((strlen(text_cache->input_string)*8)+1);
 		
-		dst = text_cache->stripped_string;
+		dst = text_cache->output_string;
 		
 		while (*src) {			
 			gunichar c = g_utf8_get_char (src);
@@ -157,7 +296,7 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 					/* Add stuff to the list of spans */
 					text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 									      stripped_byte_offset_start_of_span,
-									      (dst-text_cache->stripped_string) - stripped_byte_offset_start_of_span);
+									      (dst-text_cache->output_string) - stripped_byte_offset_start_of_span);
 					text_cache->list_of_span = g_list_append(text_cache->list_of_span, 
 										 text_span);
 
@@ -167,8 +306,8 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 				
 				if (last_char_was_space) {
 					/* We're starting what will be a new span; record where we've got to: */
-					original_byte_offset_start_of_span = (src-input_string); 
-					stripped_byte_offset_start_of_span = (dst-text_cache->stripped_string);
+					original_byte_offset_start_of_span = (src-text_cache->input_string); 
+					stripped_byte_offset_start_of_span = (dst-text_cache->output_string);
 				}
 				
 				/* Write character as utf-8 into buffer: */
@@ -184,7 +323,7 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 			/* Add stuff to the list of spans */
 			text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 							      stripped_byte_offset_start_of_span,
-							      (dst-text_cache->stripped_string) - stripped_byte_offset_start_of_span);
+							      (dst-text_cache->output_string) - stripped_byte_offset_start_of_span);
 			text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
 								  text_span);
 		}
@@ -195,11 +334,11 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 		/* Just generate one big span: */
  		CongTextCacheSpan *text_span;
 
-		text_cache->stripped_string = g_strdup (input_string);
+		text_cache->output_string = g_strdup (text_cache->input_string);
 
 		text_span = cong_text_cache_span_new (0,
 						      0,
-						      strlen (input_string));
+						      strlen (text_cache->input_string));
 		text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
 							  text_span);
 
@@ -231,85 +370,94 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 #endif
 }
 
-gboolean
-cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_cache,
-							  int stripped_byte_offset,
-							  int *original_byte_offset)
+static void
+regenerate_output_attr_list (CongTextCache *text_cache)
 {
-	CongTextCacheSpan *text_span;
+	PangoAttrIterator* iter;
 
-	g_return_val_if_fail(text_cache, FALSE);
-	g_return_val_if_fail(original_byte_offset, FALSE);
-	g_return_val_if_fail(stripped_byte_offset>=0, FALSE);
-	g_return_val_if_fail(stripped_byte_offset<=strlen(text_cache->unstripped_string), FALSE);
+	g_assert (text_cache);
+	g_assert (NULL==text_cache->output_attr_list);
+	g_assert (text_cache->input_attr_list);
 
-	text_span = get_text_span_at_stripped_byte_offset(text_cache, stripped_byte_offset);
+
+
+#if 1
+	text_cache->output_attr_list = pango_attr_list_new ();
+
+	iter = pango_attr_list_get_iterator (text_cache->input_attr_list);
+
+	do {
+		GSList *first_attr;
+		GSList *inner_iter;
+
+		first_attr = pango_attr_iterator_get_attrs (iter);
+
+		for (inner_iter = first_attr; inner_iter; inner_iter=inner_iter->next) {
+
+			/* Clone, with modified range: */
+			PangoAttribute *cloned_attr = pango_attribute_copy (inner_iter->data);
+			
+			if (!cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
+										       cloned_attr->start_index,
+										       &cloned_attr->start_index)){
+				g_warning ("unable to convert attribute start index %i", cloned_attr->start_index);
+			}
+			if (!cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
+										       cloned_attr->end_index,
+										       &cloned_attr->end_index)){
+				g_warning ("unable to convert attribute end index %i", cloned_attr->end_index);
+			}
+			
+			pango_attr_list_insert (text_cache->output_attr_list,
+						cloned_attr);
+			
+			pango_attribute_destroy (inner_iter->data);
+		}
+		
+		g_slist_free (first_attr);
+
+	} while (pango_attr_iterator_next (iter));
 	
-	if (text_span) {
-		g_assert (stripped_byte_offset >= text_span->stripped_first_byte_offset);
-		g_assert (stripped_byte_offset <= (text_span->stripped_first_byte_offset + text_span->stripped_byte_count));
-		*original_byte_offset = text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset);
-
-		g_assert (*original_byte_offset>=0);
-		g_assert (*original_byte_offset<=strlen(text_cache->unstripped_string));
-
-#if DEBUG_TEXT_STRIPPING
-		g_message("stripped byte offset %i -> original offset %i", stripped_byte_offset, *original_byte_offset);
+	pango_attr_iterator_destroy (iter);
+#else
+	/* For now: */
+	text_cache->output_attr_list = pango_attr_list_copy (text_cache->input_attr_list);
 #endif
-		return TRUE;
-	} else {
-#if DEBUG_TEXT_STRIPPING
-		g_message("stripped byte offset %i could not be converted", stripped_byte_offset);
-#endif
-	}
 
-	return FALSE;
 }
 
-gboolean
-cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,
-							  int original_byte_offset,
-							  int *stripped_byte_offset)
+static void
+clear_cache (CongTextCache *text_cache)
 {
-	CongTextCacheSpan *text_span;
+	g_assert (text_cache);
 
-	g_return_val_if_fail(text_cache, FALSE);
-	g_return_val_if_fail(stripped_byte_offset, FALSE);
-	g_return_val_if_fail(original_byte_offset>=0, FALSE);
-	g_return_val_if_fail(original_byte_offset<=strlen(text_cache->unstripped_string), FALSE);
+	/* Clear any results; they will need recalculating: */
 
-	text_span = get_text_span_at_original_byte_offset(text_cache, original_byte_offset);
-	
-	if (text_span) {
-		int byte_count_into_span;
+	if (text_cache->output_string) {
+		g_free (text_cache->output_string);
+		text_cache->output_string = NULL;
+	}
 
-		g_assert (original_byte_offset >= text_span->original_first_byte_offset);
+	if (text_cache->output_attr_list) {
+		pango_attr_list_unref (text_cache->output_attr_list);
+		text_cache->output_attr_list = NULL;
+	}
 
-		byte_count_into_span = original_byte_offset - text_span->original_first_byte_offset;
-		if (byte_count_into_span <= text_span->stripped_byte_count) {
-			*stripped_byte_offset = text_span->stripped_first_byte_offset + byte_count_into_span;
-		} else {
-			*stripped_byte_offset = text_span->stripped_first_byte_offset + text_span->stripped_byte_count;
+	if (text_cache->list_of_span) {
+		GList *iter;
+
+		for (iter=text_cache->list_of_span; iter; iter=iter->next) {
+			g_assert(iter->data);
+			g_free (iter->data);
 		}
 
-		g_assert (*stripped_byte_offset>=0);
-		g_assert (*stripped_byte_offset<=strlen(text_cache->stripped_string));
+		g_list_free(text_cache->list_of_span);
 
-#if DEBUG_TEXT_STRIPPING
-		g_message("original byte offset %i -> stripped offset %i", original_byte_offset, *stripped_byte_offset);
-#endif
-		return TRUE;
-	} else {
-#if DEBUG_TEXT_STRIPPING
-		g_message("original byte offset %i could not be converted", original_byte_offset);
-#endif
+		text_cache->list_of_span = NULL;
 	}
-
-	return FALSE;
 }
 
 
-/* Internal function definitions: */
 static CongTextCacheSpan* 
 cong_text_cache_span_new(int original_first_byte_offset,
 			 int stripped_first_byte_offset,			 
