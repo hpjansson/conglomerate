@@ -122,6 +122,8 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 
 /**
    Make DTD declaration, assigns it to the given document, and add it to the tree.
+
+   Call cong_document_set_external_dtd instead if you want notifications to work.
 */
 xmlDtdPtr 
 cong_util_add_external_dtd (xmlDocPtr xml_doc, 

@@ -30,6 +30,30 @@
 #include "cong-plugin.h"
 #include "cong-app.h"
 #include "cong-dialog.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
+
+static void
+on_specify_dtd_button_clicked (GtkButton *button,
+			       CongDocument *doc);
+
+static void
+add_dtd_info (CongDialogCategory *dtd_category,
+	      const gchar *ExternalID,
+	      const gchar *SystemID)
+{
+	g_assert (dtd_category);
+
+	if (NULL==ExternalID) {
+		ExternalID=_("None");
+	}
+	if (NULL==SystemID) {
+		SystemID=_("None");
+	}
+	cong_dialog_category_add_field(dtd_category, _("External ID"), make_uneditable_text(ExternalID));
+	cong_dialog_category_add_field(dtd_category, _("System ID"), make_uneditable_text(SystemID));
+}
+
 
 GtkWidget*
 cong_file_properties_dialog_new (CongDocument *doc, 
@@ -99,18 +123,39 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	cong_dialog_category_add_field(header_category, _("Standalone"), make_uneditable_text(xml_doc->standalone?"yes":"no"));
 
 	if (xml_doc->extSubset) {
-		const gchar *ExternalID = xml_doc->extSubset->ExternalID;
-		const gchar *SystemID = xml_doc->extSubset->SystemID;
-		if (NULL==ExternalID) {
-			ExternalID=_("None");
-		}
-		if (NULL==SystemID) {
-			SystemID=_("None");
-		}
-		cong_dialog_category_add_field(dtd_category, _("External ID"), make_uneditable_text(ExternalID));
-		cong_dialog_category_add_field(dtd_category, _("System ID"), make_uneditable_text(SystemID));
+		add_dtd_info (dtd_category,
+			      xml_doc->extSubset->ExternalID,
+			      xml_doc->extSubset->SystemID);
 	} else {
-		cong_dialog_category_add_selflabelled_field(dtd_category, gtk_label_new(_("No External Subset")));
+		const CongExternalDocumentModel* model_dtd;
+
+		model_dtd = cong_dispspec_get_external_document_model (ds,
+								       CONG_DOCUMENT_MODE_TYPE_DTD);
+		
+ 		if (model_dtd) {
+			GtkWidget *specify_dtd_button = gtk_button_new_with_mnemonic (_("_Associate this DTD"));
+			GtkWidget *unspecified_label = gtk_label_new (_("The document does not specify an external DTD, but Conglomerate believes the following information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document."));
+
+			gtk_label_set_line_wrap (GTK_LABEL (unspecified_label),
+						 TRUE);
+
+			cong_dialog_category_add_selflabelled_field(dtd_category, unspecified_label);
+
+			add_dtd_info (dtd_category,
+				      cong_external_document_model_get_public_id (model_dtd),
+				      cong_external_document_model_get_system_id (model_dtd));
+
+			cong_dialog_category_add_selflabelled_field (dtd_category, 
+								     specify_dtd_button);			
+
+			g_signal_connect (G_OBJECT (specify_dtd_button),
+					  "clicked",
+					  G_CALLBACK (on_specify_dtd_button_clicked),
+					  doc);
+					  
+		} else {
+			cong_dialog_category_add_selflabelled_field(dtd_category, gtk_label_new(_("No External Subset")));
+		}
 	}
 
 	if (xml_doc->intSubset) {
@@ -142,4 +187,27 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	gtk_widget_show_all(dialog);
 
 	return dialog;
+}
+
+static void
+on_specify_dtd_button_clicked (GtkButton *button,
+			       CongDocument *doc)
+{
+	const CongExternalDocumentModel* model_dtd;
+	CongDispspec* ds;
+
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+
+	ds = cong_document_get_dispspec(doc);
+
+	model_dtd = cong_dispspec_get_external_document_model (ds,
+							       CONG_DOCUMENT_MODE_TYPE_DTD);
+	
+	g_assert (model_dtd);
+
+	cong_document_set_external_dtd (doc,
+					cong_document_get_root(doc)->name,
+					cong_external_document_model_get_public_id (model_dtd),
+					cong_external_document_model_get_system_id (model_dtd));
 }

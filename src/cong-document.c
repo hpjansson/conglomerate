@@ -12,6 +12,13 @@
 
 #include "cong-marshal.h"
 
+static void
+cong_document_finalize (GObject *object);
+
+static void
+cong_document_dispose (GObject *object);
+
+
 /* Default signal handlers: */
 static void 
 cong_document_handle_begin_edit(CongDocument *doc);
@@ -109,10 +116,8 @@ GNOME_CLASS_BOILERPLATE(CongDocument,
 static void
 cong_document_class_init (CongDocumentClass *klass)
 {
-#if 0
 	G_OBJECT_CLASS (klass)->finalize = cong_document_finalize;
 	G_OBJECT_CLASS (klass)->dispose = cong_document_dispose;
-#endif
 
 	/* Set up default handlers: */
 	klass->begin_edit = cong_document_handle_begin_edit;
@@ -360,37 +365,6 @@ cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 					ds,
 					url);
 }
-
-#if 0
-void
-cong_document_ref(CongDocument *doc)
-{
-	g_return_if_fail(doc);
-
-	PRIVATE(doc)->ref_count++;
-}
-
-
-void
-cong_document_unref(CongDocument *doc)
-{
-	g_return_if_fail(doc);
-
-	if ((--PRIVATE(doc)->ref_count)==0) {
-		g_assert(PRIVATE(doc)->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */
-
-		cong_cursor_uninit(&PRIVATE(doc)->curs);
-	
-		xmlFreeDoc(PRIVATE(doc)->xml_doc);
-
-		if (PRIVATE(doc)->url) {
-			g_free(PRIVATE(doc)->url);
-		}
-	
-		g_free(doc);
-	}
-}
-#endif
 
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc)
@@ -875,6 +849,21 @@ void cong_document_on_cursor_change(CongDocument *doc)
 			view->klass->on_cursor_change(view);
 		}
 	}
+}
+
+void 
+cong_document_set_external_dtd (CongDocument *doc,
+				const xmlChar *root_element,
+				const xmlChar *ExternalID, 
+				const xmlChar *SystemID)
+{
+	g_return_if_fail(doc);
+
+	/* For now, just do it, without worrying about signals: */
+	cong_util_add_external_dtd (PRIVATE(doc)->xml_doc, 
+				    root_element,
+				    ExternalID, 
+				    SystemID);
 }
 
 /* end of MVC user hooks */
@@ -1484,6 +1473,66 @@ cong_document_for_each_location (CongDocument *doc,
 		
 		cong_document_on_selection_change (doc);
 	}
+}
+
+static void
+cong_document_finalize (GObject *object)
+{
+	CongDocument *doc = CONG_DOCUMENT (object);
+
+	g_message ("cong_document_finalize");
+	
+	g_free (doc->private);
+	doc->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+cong_document_dispose (GObject *object)
+{
+	CongDocument *doc = CONG_DOCUMENT (object);
+
+	g_message ("cong_document_dispose");
+
+	g_assert (doc->private);
+	g_assert (PRIVATE(doc)->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */
+	g_assert (0==PRIVATE(doc)->edit_depth); /* We musn't be in the middle of an edit, or things will go badly wrong */
+
+	if (PRIVATE(doc)->xml_doc) {
+		xmlFreeDoc(PRIVATE(doc)->xml_doc);
+		PRIVATE(doc)->xml_doc = NULL;
+	}
+
+#if 1
+	if (PRIVATE(doc)->ds) {
+		/* FIXME: need to make CongDispsec into a GObject */
+#if 0
+		g_object_unref (G_OBJECT (doc->ds));
+#endif
+		PRIVATE(doc)->ds = NULL;
+	}
+#endif
+	
+	if (PRIVATE(doc)->url) {
+		g_free (PRIVATE(doc)->url);
+		PRIVATE(doc)->url = NULL;
+	}
+	
+	cong_cursor_uninit(&PRIVATE(doc)->cursor);
+
+	if (PRIVATE(doc)->selection) {
+		cong_selection_free (PRIVATE(doc)->selection);
+		PRIVATE(doc)->selection = NULL;
+	}
+
+	/* FIXME: the primary_window doesn't hold a ref to the document; should it?  
+	   Should we hold a ref to the primary_window? 
+	   Should the primary_window be a GObject subclass
+	*/
+	
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
 /* Implementation of default signal handlers: */

@@ -35,7 +35,15 @@ void cong_cursor_uninit(CongCursor *curs)
 {
 	g_assert(curs);
 
-	gtk_timeout_remove(curs->timeout_id);
+	curs->doc = NULL;
+	cong_location_nullify(&curs->location);
+
+	if (curs->timeout_id) {
+		gtk_timeout_remove (curs->timeout_id);
+		curs->timeout_id = 0;
+	}
+
+	/* FIXME: anything else needed? */
 }
 
 

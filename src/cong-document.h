@@ -189,6 +189,11 @@ void cong_document_node_set_attribute(CongDocument *doc, CongNodePtr node, const
 void cong_document_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
 void cong_document_on_selection_change(CongDocument *doc);
 void cong_document_on_cursor_change(CongDocument *doc);
+void 
+cong_document_set_external_dtd (CongDocument *doc,
+				const xmlChar *root_element,
+				const xmlChar *ExternalID, 
+				const xmlChar *SystemID);
 
 /* These functions internally ref and unref the document:, as well as adding the view to the doc's list */
 void cong_document_register_view(CongDocument *doc, CongView *view);

@@ -1,5 +1,9 @@
 2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-file-properties.c, cong-util.h, cursor.c
+
+	Document cleanup fixes; beginnings of CongDocument support for attaching a DTD to a document
+
 	* cong-dispspec.c
 
 	Dispspec creation now stores DTD information for (i) DTD import and for (ii) dispspec autogeneration from XML if a DTD is present
