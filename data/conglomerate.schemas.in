@@ -6,7 +6,7 @@
       <owner>conglomerate</owner>
       <type>list</type>
       <list_type>string</list_type>
-      <default>[~/.conglomerate/dispspecs,/opt/gnome/share/conglomerate/dispspecs]</default>
+      <default>[~/.conglomerate/dispspecs,@pkgdatadir@/dispspecs]</default>
       <locale name="en">
 	<short>Locations for display specification files.</short>
 	<long>A list of directories where Conglomerate should look for the display specification (called dispspec, or .xds) files.  When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used.</long>
