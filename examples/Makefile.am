@@ -19,7 +19,7 @@ dispspec_DATA 	 = \
 	relax-ng.xds \
 	website-layout.xds \
 	website-webpage.xds \
-	xhtml1-strict.xds
+	xhtml1-strict.xds \
 	xsl.xds
 
 # bugzilla #122011
