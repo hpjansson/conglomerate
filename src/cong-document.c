@@ -18,10 +18,11 @@
 #include "cong-document-traversal.h"
 #include "cong-edit-find-and-replace.h"
 #include "cong-dispspec-registry.h"
+#include "cong-service-exporter.h"
+#include "cong-plugin-manager.h"
 
 #if ENABLE_PRINTING
 #include "cong-service-print-method.h"
-#include "cong-plugin-manager.h"
 #endif 
 
 /* Internal functions: */
@@ -374,6 +375,7 @@ cong_document_construct (CongDocument *doc,
 	PRIVATE(doc)->url = g_strdup(url);
 
 	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
+	PRIVATE(doc)->modified = FALSE;
 
 	#if TEST_VIEW
 	{
@@ -825,18 +827,23 @@ cong_document_is_modified(CongDocument *doc)
  *
  * TODO: Write me
  */
+
 void
 cong_document_set_modified(CongDocument *doc, gboolean modified)
 {
 	g_return_if_fail(doc);
 
 	if (PRIVATE(doc)->modified != modified) {
+		CongPrimaryWindow *primary_window = PRIVATE(doc)->primary_window;
 
 		PRIVATE(doc)->modified = modified;
 
-		/* get at primary window; set title */
-		if (PRIVATE(doc)->primary_window) {
-			cong_primary_window_update_title(PRIVATE(doc)->primary_window);
+		if (primary_window) {
+			/* set title */
+			cong_primary_window_update_title (primary_window);
+
+			/* change the menu/toolbar Save action */
+			cong_primary_window_action_set_sensitive (primary_window, "Save", modified);
 		}
 	}
 }
@@ -2265,6 +2272,50 @@ cong_document_can_paste(CongDocument *doc)
 {
 	return TRUE;
 	/* FIXMEPCS: conditions? */
+}
+
+/*
+ * NOTE: can probably abstract this routine a bit since we probably want to
+ * do similar things for other properties/plugins. This is especially true since
+ * this is just a copy of the code used for calculating whether you can print
+ * a document! Then again it's pretty simple as is, so maybe we don't need it
+ */
+struct can_export_data
+{
+	CongDocument *doc;
+	gint num_export_methods;
+};
+
+static void
+callback_can_export (CongServiceExporter *exporter, 
+		     gpointer user_data)
+{
+	struct can_export_data *export_data = (struct can_export_data*)user_data;
+
+	if (cong_exporter_supports_document (exporter, export_data->doc)) {
+		export_data->num_export_methods++;
+	}
+}
+
+/**
+ * cong_document_can_export:
+ * @doc:
+ *
+ * Returns: TRUE if there are any exporters registered for the document.
+ */
+gboolean
+cong_document_can_export (CongDocument *doc)
+{
+	struct can_export_data export_data;
+	g_assert (doc);
+
+	export_data.doc = doc;
+	export_data.num_export_methods = 0;
+	cong_plugin_manager_for_each_exporter (cong_app_get_plugin_manager (cong_app_singleton()),
+					       callback_can_export,
+					       &export_data);
+
+	return export_data.num_export_methods>0;
 }
 
 #if ENABLE_PRINTING

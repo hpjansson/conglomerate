@@ -290,7 +290,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 						       dialog_details);
 
 		gtk_combo_box_set_active (GTK_COMBO_BOX(dialog_details->combo_box), 0);
-
+		g_assert (dialog_details->got_any_exporters);
 	}
 
 	dialog_details->description = GTK_LABEL(gtk_label_new(NULL));
@@ -325,11 +325,9 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 						     dialog_details->option_holder,
 						     TRUE);
 
-	if (dialog_details->got_any_exporters) {
-		monitor_exporter(dialog_details);
-		setup_description(dialog_details);
-		setup_options(dialog_details);
-	}
+	monitor_exporter(dialog_details);
+	setup_description(dialog_details);
+	setup_options(dialog_details);
 
 	g_signal_connect(dialog_details->combo_box,
 			 "changed",
@@ -386,12 +384,6 @@ cong_document_export_dialog_delete (GtkWidget *dialog)
  * how to inform the user of what is going on, and
  * whether we allow the user to stop an exporter whilst it is
  * processing.
- *
- * At the moment the "Export" menu item can be called when there are
- * no exporters registered for the document. We really should make the
- * menu item insensitive in this situation to avoid this situation.
- * (this is already pointed out in action_callback_file_export in
- *  cong-menus.c)
  */
 void
 cong_ui_hook_file_export (CongDocument *doc,
@@ -411,29 +403,6 @@ cong_ui_hook_file_export (CongDocument *doc,
 	dialog_details = g_object_get_data( G_OBJECT(dialog),
 					    "dialog_details");
 	g_assert(dialog_details);
-
-	/*
-	 * Temporary until we disable the Export menu item for
-	 * documents with no registered exporterd
-	 */
-	if (dialog_details->got_any_exporters==FALSE) {
-		GtkDialog* error_dialog;
-		gchar *what_failed;
-
-		cong_document_export_dialog_delete (dialog);
-
-		what_failed = g_strdup_printf (_("Conglomerate cannot export \"%s\""),
-					       cong_document_get_filename(doc));
-		error_dialog = cong_error_dialog_new (toplevel_window,
-						      what_failed, 
-						      _("None of Conglomerate's plugins know how to export files of this type."),
-						      "");
-
-		gtk_dialog_run (error_dialog);
-		gtk_widget_destroy (GTK_WIDGET(error_dialog));
-		g_free (what_failed);
-		return;
-	}
 
 	gtk_widget_show_all (dialog);
 

@@ -324,6 +324,9 @@ cong_document_copy_selection (CongDocument *doc);
 gboolean
 cong_document_can_paste (CongDocument *doc);
 
+gboolean
+cong_document_can_export (CongDocument *doc);
+
 #if ENABLE_PRINTING
 gboolean
 cong_document_can_print (CongDocument *doc);

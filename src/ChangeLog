@@ -1,3 +1,30 @@
+2004-10-20  Douglas Burke  <dburke@cfa.harvard.edu>
+ 
+	* cong-primary-window.c, cong-primary-window.h:
+ 
+ 	Added cong_primary_window_action_set_sensitive(), and
+ 	cong_primary_window_action_set_label().
+ 
+	* cong-menus.c:
+ 
+ 	Updated to use cong_primary_window_action_set_sensitive() and
+ 	cong_primary_window_action_set_label() functions rather than the
+ 	SET_ACTION_LABEL and SET_ACTION_SENSITIVE macros. The Export
+ 	action is now insensitive if there are no exporters registered for
+ 	the document.
+ 	
+	* cong-document.c, cong-document.h, cong-file-open.c:
+ 
+ 	The "Save" menu and toolbar items are now inactive when the file
+ 	has not changed. It's not 100% foolproof (add a space and then delete
+ 	it and it still thinks the file has changed).
+ 	Added cong_document_can_export() function.
+ 	
+	* cong-file-export.c:
+ 
+ 	Removed the dialog indicating that no exporters are available since
+ 	this condition can no longer be met.	
+
 2004-10-17  Douglas Burke  <dburke@cfa.harvard.edu>
  
 	* cong-attribute-editor.c, cong-attribute-editor-cdata.c, cong-attribute-editor-lang.c, cong-attribute-editor-nmtoken.c, cong-attribute-wrapper.c, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-radio-button.c:

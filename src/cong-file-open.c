@@ -190,6 +190,14 @@ open_document_do (const gchar* doc_name,
 	g_assert(cong_doc);
 
 	cong_primary_window_new(cong_doc);
+
+	/* now we have a primary window we can set the "Save" menu item */
+	{
+		CongPrimaryWindow *primary_window = cong_document_get_primary_window(cong_doc);
+		g_assert (primary_window);
+		cong_primary_window_action_set_sensitive (primary_window, "Save", FALSE);
+	}
+
 	g_object_unref( G_OBJECT(cong_doc));
 
 }

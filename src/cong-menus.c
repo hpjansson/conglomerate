@@ -206,7 +206,11 @@ static void
 action_callback_file_import (GtkAction *action,
 			     CongPrimaryWindow *primary_window)
 {
-	/* FIXME: this option should be disabled if there are no importers installed */
+	/*
+	 * FIXME: this option should be disabled if there are no importers installed
+	 *  - or we could assume that there is always going to be an importer, since
+	 *    some already come with Conglomerate.
+	 */
 
 	cong_ui_hook_file_import (cong_primary_window_get_toplevel (primary_window));
 }
@@ -216,8 +220,6 @@ action_callback_file_export (GtkAction *action,
 			     CongPrimaryWindow *primary_window)
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	/* FIXME: this option should be disabled if there are no exporters installed that are appropriate for this FPI */
 
 	cong_ui_hook_file_export (doc,
 				  cong_primary_window_get_toplevel (primary_window));
@@ -230,8 +232,6 @@ action_callback_file_print_preview (GtkAction *action,
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
-
 	cong_ui_hook_file_print_preview (doc,
 					 cong_primary_window_get_toplevel (primary_window));
 }
@@ -241,8 +241,6 @@ action_callback_file_print (GtkAction *action,
 			    CongPrimaryWindow *primary_window)
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
-
-	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
 
 	cong_ui_hook_file_print (doc,
 				 cong_primary_window_get_toplevel (primary_window));
@@ -1745,10 +1743,13 @@ static void add_tool_callback(CongServiceDocTool *tool, gpointer user_data)
 	}
 }
 
-#define SET_ACTION_SENSITIVE(action_name, sens) \
-			g_object_set (G_OBJECT (gtk_action_group_get_action (cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT), action_name)), "sensitive", sens, NULL)
+#if OLD_SKOOL
 #define SET_ACTION_LABEL(action_name, label) \
 			g_object_set (G_OBJECT (gtk_action_group_get_action (cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT), action_name)), "label", label, NULL)
+#define SET_ACTION_SENSITIVE(action_name, sens) \
+			g_object_set (G_OBJECT (gtk_action_group_get_action (cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT), action_name)), "sensitive", sens, NULL)
+
+#endif
 
 static void 
 on_history_changed (CongCommandHistory *history,
@@ -1758,24 +1759,24 @@ on_history_changed (CongCommandHistory *history,
 	gboolean can_undo = cong_command_history_can_undo (history);
 	gboolean can_redo = cong_command_history_can_redo (history);
 
-	SET_ACTION_SENSITIVE("Undo", can_undo);
+	cong_primary_window_action_set_sensitive (primary_window, "Undo", can_undo);
 	if (can_undo) {
 		CongCommand *command = cong_command_history_get_next_undo_command (history);
 		gchar *label = g_strdup_printf (_("_Undo: %s"), cong_command_get_description (command));
-		SET_ACTION_LABEL("Undo", label);
+		cong_primary_window_action_set_label (primary_window, "Undo", label);
 		g_free (label);
 	} else {
-		SET_ACTION_LABEL("Undo", _("_Undo"));
+		cong_primary_window_action_set_label (primary_window, "Undo", _("_Undo"));
 	}
 
-	SET_ACTION_SENSITIVE("Redo", cong_command_history_can_redo (history));
+	cong_primary_window_action_set_sensitive (primary_window, "Redo", cong_command_history_can_redo (history));
 	if (can_redo) {
 		CongCommand *command = cong_command_history_get_next_redo_command (history);
 		gchar *label = g_strdup_printf (_("_Redo: %s"), cong_command_get_description (command));
-		SET_ACTION_LABEL("Redo", label);
+		cong_primary_window_action_set_label (primary_window, "Redo", label);
 		g_free (label);
 	} else {
-		SET_ACTION_LABEL("Redo", _("_Redo"));
+		cong_primary_window_action_set_label (primary_window, "Redo", _("_Redo"));
 	}
 }
 
@@ -1786,8 +1787,8 @@ on_selection_changed (CongDocument *document,
 	/* Update sensitivity of cut and copy actions: */
 	CongSelection *selection = cong_document_get_selection(document);
 	CongRange *range = cong_selection_get_ordered_range(selection);
-	SET_ACTION_SENSITIVE("Cut", cong_range_can_be_cut (range));
-	SET_ACTION_SENSITIVE("Copy", cong_range_can_be_copied (range));
+	cong_primary_window_action_set_sensitive (primary_window, "Cut", cong_range_can_be_cut (range));
+	cong_primary_window_action_set_sensitive (primary_window, "Copy", cong_range_can_be_copied (range));
 }
 
 void
@@ -1814,6 +1815,10 @@ cong_menus_setup_action_groups (CongPrimaryWindow *primary_window)
 				      primary_window_application_action_entries, 
 				      G_N_ELEMENTS (primary_window_application_action_entries), 
 				      primary_window);
+	/*
+	 * FIXME: make the Import menu item insensitive if there are no importers
+	 *  (or do we assume there is always an importer available?)
+	 */
 	gtk_action_group_add_actions (cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT), 
 				      primary_window_document_action_entries, 
 				      G_N_ELEMENTS (primary_window_document_action_entries), 
@@ -1851,15 +1856,32 @@ cong_menus_setup_document_action_group (CongPrimaryWindow *primary_window)
 			  G_CALLBACK(on_selection_changed),
 			  primary_window);
 	
-	SET_ACTION_SENSITIVE("Undo", FALSE);
-	SET_ACTION_SENSITIVE("Redo", FALSE);
-	SET_ACTION_SENSITIVE("Cut", FALSE);
-	SET_ACTION_SENSITIVE("Copy", FALSE);
-	SET_ACTION_SENSITIVE("Paste", cong_document_can_paste(doc));
-	
+	cong_primary_window_action_set_sensitive (primary_window, "Undo", FALSE);
+	cong_primary_window_action_set_sensitive (primary_window, "Redo", FALSE);
+	cong_primary_window_action_set_sensitive (primary_window, "Cut", FALSE);
+	cong_primary_window_action_set_sensitive (primary_window, "Copy", FALSE);
+
+	/*
+	 * set sensitivity for those menu items that depend on the
+	 * document or plugins
+	 */
+	cong_primary_window_action_set_sensitive (primary_window,
+						  "Paste",
+						  cong_document_can_paste(doc));
+	cong_primary_window_action_set_sensitive (primary_window,
+						  "Export",
+						  cong_document_can_export(doc));
+
 #if ENABLE_PRINTING
-	SET_ACTION_SENSITIVE("PrintPreview", cong_document_can_print(doc));
-	SET_ACTION_SENSITIVE("Print", cong_document_can_print(doc));
+	{
+		gboolean can_print = cong_document_can_print(doc);
+		cong_primary_window_action_set_sensitive (primary_window,
+							  "PrintPreview",
+							  can_print);
+		cong_primary_window_action_set_sensitive (primary_window,
+							  "Print",
+							  can_print);
+	}
 #endif
 	
 	/* Now add any plugin tools below the "Tools" menu: */

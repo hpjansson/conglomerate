@@ -96,6 +96,17 @@ void
 cong_menus_setup_document_action_group (CongPrimaryWindow *primary_window);
 
 
+/* deal with action items */
+void
+cong_primary_window_action_set_sensitive (CongPrimaryWindow *primary_window,
+					  gchar *action_name,
+					  gboolean state);
+
+void
+cong_primary_window_action_set_label (CongPrimaryWindow *primary_window,
+				      gchar *action_name,
+				      gchar *label);
+
 G_END_DECLS
 
 #endif

@@ -785,3 +785,57 @@ cong_primary_window_get_action_group (CongPrimaryWindow *primary_window,
 
 	return primary_window->action_group[action_group];
 }
+
+/**
+ * cong_primary_window_action_set_sensitive:
+ * @action_name: name of Action item
+ * @state: TRUE for sensitive, FALSE for insensitive
+ * @primary_window: the primary window containing the action
+ *
+ * Makes the given Action (@action_name) sensitive (@state=TRUE)
+ * or insensitive (@state=FALSE) for the primary window
+ * @primary_window.
+ */
+void
+cong_primary_window_action_set_sensitive (CongPrimaryWindow *primary_window,
+					  gchar *action_name,
+					  gboolean state) {
+	GtkActionGroup *action_group;
+	GtkAction *action;
+
+	action_group = cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT);
+	g_assert (action_group);
+
+	action = gtk_action_group_get_action (action_group, action_name);
+	g_assert (action);
+
+	g_object_set (G_OBJECT (action), "sensitive", state, NULL);
+}
+
+/**
+ * cong_primary_window_action_set_label:
+ * @action_name: name of Action item
+ * @label: label for the Action
+ * @primary_window: the primary window containing the action
+ *
+ * Sets the label for the Action (@action_name) whose
+ * primary window is @primary_window.
+ *
+ * NOTE: should we make a copy of label?
+ */
+void
+cong_primary_window_action_set_label (CongPrimaryWindow *primary_window,
+				      gchar *action_name,
+				      gchar *label) {
+	GtkActionGroup *action_group;
+	GtkAction *action;
+
+	action_group = cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_DOCUMENT);
+	g_assert (action_group);
+
+	action = gtk_action_group_get_action (action_group, action_name);
+	g_assert (action);
+
+	g_object_set (G_OBJECT (action), "label", (gpointer)label, NULL);
+}
+
