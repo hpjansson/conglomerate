@@ -270,6 +270,15 @@ gint test_open(GtkWidget *w, gpointer data)
 
 void test_open_wrap(GtkWidget *widget, gpointer data) { test_open(widget, 0); }
 
+gint test_error(GtkWidget *w, gpointer data)
+{
+	cong_error_tests();
+
+	return TRUE;
+}
+
+void test_error_wrap(GtkWidget *widget, gpointer data) { test_error(widget, 0); }
+
 
 static GtkItemFactoryEntry menu_items[] =
 {
@@ -281,8 +290,9 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Edit/Cut",              "<control>X", xed_cut_wrap, 0, 0 },
 	{ "/Edit/Copy",             "<control>C", xed_copy_wrap, 0, 0 },
 	{ "/Edit/Paste",            "<control>V", xed_paste_wrap, 0, 0 },
-	{ "/Tests",                 "NULL", NULL, 0, "<Branch>" },
-	{ "/Tests/Open...",         "NULL", test_open_wrap, 0, NULL }
+	{ "/Tests",                 NULL, NULL, 0, "<Branch>" },
+	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
+	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL }
 };
 
 
@@ -383,6 +393,76 @@ extern char *icon_assemble[];
 extern char *icon_openfile[];
 extern char *icon_submit[];
 
+GtkPixmap* gui_create_pixmap(struct cong_gui* gui, char** xpm)
+{
+	GdkPixmap *p;
+	GdkBitmap *mask;
+	GtkStyle *style;
+
+	gtk_widget_realize(GTK_WIDGET(gui->window));
+
+	style = gtk_widget_get_style(GTK_WIDGET(gui->window));
+
+	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
+					 &style->bg[GTK_STATE_NORMAL],
+					 (gchar **) xpm);
+	return GTK_PIXMAP(gtk_pixmap_new(p, mask));
+}
+
+GtkWidget* gui_toolbar_create_item(struct cong_gui* gui,
+				   GtkToolbar* toolbar,
+				   const char* text, 
+				   const char* tooltip_text, 
+				   const char* tooltip_private_text, 
+				   char** xpm,
+				   gint (*handler)(GtkWidget *w, gpointer data))
+{
+	GtkWidget* widget;
+	GtkWidget* icon;
+
+	icon = GTK_WIDGET(gui_create_pixmap(gui, xpm));
+
+	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(icon), 1);
+
+	widget = gtk_toolbar_append_item(toolbar, 
+					 text, 
+					 tooltip_text, 
+					 tooltip_private_text, 
+					 icon, 0, 0);
+
+	gtk_widget_show(icon);
+
+/*
+	gtk_widget_set_sensitive(icon, 0);
+ */
+
+	gtk_button_set_relief(GTK_BUTTON(widget), GTK_RELIEF_NONE);
+
+	gtk_signal_connect(GTK_OBJECT(widget), "clicked", GTK_SIGNAL_FUNC(handler), 0);
+
+	return widget;
+}
+
+void gui_toolbar_populate(struct cong_gui* gui)
+{
+	/* Open */
+	gui->butt_find = gui_toolbar_create_item(gui,
+						 GTK_TOOLBAR(gui->toolbar),
+						 "Open", 
+						 "Open document",
+						 "Open document",
+						 icon_openfile, 
+						 open_document);
+	
+	/* Submit */
+	gui->butt_submit = gui_toolbar_create_item(gui,
+						   GTK_TOOLBAR(gui->toolbar),
+						   "Save", 
+						   "Save document",
+						   "Save document", 
+						   icon_submit,
+						   save_document);
+}
 
 void gui_window_main_make()
 {
@@ -466,45 +546,7 @@ void gui_window_main_make()
 
 	/* --- Toolbar icons --- */
 
-	gtk_widget_realize(GTK_WIDGET(gui->window));
-	style = gtk_widget_get_style(GTK_WIDGET(gui->window));
-
-	/* Open file */
-	
-	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-					 &style->bg[GTK_STATE_NORMAL],
-					 (gchar **) icon_openfile);
-	w3 = gtk_pixmap_new(p, mask);
-	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
-	w2 = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Open", "Open document",
-															 "Open document", w3, 0, 0);
-	gtk_widget_show(w3);
-/*
-	gtk_widget_set_sensitive(w2, 0);
- */
-	gtk_button_set_relief(GTK_BUTTON(w2), GTK_RELIEF_NONE);
-
-	gtk_signal_connect(GTK_OBJECT(w2), "clicked", GTK_SIGNAL_FUNC(open_document), 0);
-
-	gui->butt_find = w2;
-	
-	/* Submit */
-
-	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-					 &style->bg[GTK_STATE_NORMAL],
-					 (gchar **) icon_submit);
-	w3 = gtk_pixmap_new(p, mask);
-	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
-	gui->butt_submit = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Save", "Save document",
-															 "Save document", w3, 0, 0);
-	gtk_widget_show(w3);
-/*
-	gtk_widget_set_sensitive(gui->butt_submit, 0);
- */
-	gtk_button_set_relief(GTK_BUTTON(gui->butt_submit), GTK_RELIEF_NONE);
-
-	gtk_signal_connect(GTK_OBJECT(gui->butt_submit), "clicked", GTK_SIGNAL_FUNC(save_document), 0);
-
+	gui_toolbar_populate(gui);
 
 	/* --- Logo --- */
 
@@ -517,10 +559,7 @@ void gui_window_main_make()
 	gtk_container_add(GTK_CONTAINER(w2), w1);
 	gtk_widget_show(w1);
 
-	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
-					 &style->bg[GTK_STATE_NORMAL],
-					 (gchar **) ilogo_xpm);
-	logo = gtk_pixmap_new(p, mask);
+	logo = GTK_WIDGET(gui_create_pixmap(gui, ilogo_xpm));
 	gtk_box_pack_start(GTK_BOX(w1), logo, FALSE, TRUE, 0);
 	gtk_widget_show(logo);
 

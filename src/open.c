@@ -19,7 +19,14 @@ int open_document_do(const char *doc_name, const char *ds_name)
 
 	xml_f = fopen(doc_name, "rt");
 	if (!xml_f) {
+	  GtkWidget* dialog;
+
 	  g_warning("Problem opening doc file \"%s\"\n", doc_name);
+
+	  dialog = cong_error_dialog_new_file_open_failed(doc_name);
+	  gtk_dialog_run(GTK_DIALOG(dialog));
+	  gtk_widget_destroy(dialog);
+
 	  return(TRUE);
 	}
 

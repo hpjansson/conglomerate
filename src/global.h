@@ -428,3 +428,17 @@ void tpopup_init(GtkWidget *treeitem, TTREE *x);
 gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
+
+/* Error handling facilities: */
+GtkWidget* 
+cong_error_dialog_new(const gchar* what_failed, 
+		      const gchar* why_failed, 
+		      const gchar* suggestions);
+
+GtkWidget*
+cong_error_dialog_new_file_open_failed(const gchar* filename);
+/* should this be a URI? */
+
+void
+cong_error_tests(void);
+

@@ -1,6 +1,14 @@
 creating ChangeLog
 2002-08-23 David Malcolm
 
+	* cong-error-dialog.c cong-error-file-open.c cong-error-tests.c Makefile global.h main.c open.c:
+
+	Error handling and toolbar cleanup
+
+	* cong-error-dialog.c cong-error-file-open.c cong-error-tests.c:
+
+	New files: error handling
+
 	* Makefile, dispspec.c, global.h, main.c, xmlview.c
 
 	Added Bonobo control embedding test
