@@ -2,7 +2,7 @@
 
 	* plugin-random.c: 
 
-	Correct "lore ipsum" to "Lore ipsum..." etc; getting hopefully the
+	Correct "lore ipsum" to "Lorem ipsum..." etc; getting hopefully the
 	standard fragment of latin text for doing dummy text; copied from
 	http://lipsum.com/
 
