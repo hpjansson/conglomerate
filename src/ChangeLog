@@ -1,5 +1,9 @@
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-tree-view.c
+
+	Optimised creation by only creating the GtkTreeView after the store is populated
+
 	* cong-primary-window.c
 
 	More debugging options, including ability to select either/both/no editor widget
