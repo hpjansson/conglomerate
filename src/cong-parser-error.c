@@ -148,37 +148,31 @@ typedef struct CongErrorReport
 	GtkWidget *text_view;
 } CongErrorReport;
 
-/* The "row-activated" signal */
-/**
- * on_row_activated:
- * @treeview:
- * @arg1:
- * @arg2:
- * @user_data:
- *
- * TODO: Write me
- */
-void  
-on_row_activated(GtkTreeView *treeview,
-                 GtkTreePath *arg1,
-                 GtkTreeViewColumn *arg2,
-                 gpointer user_data)
+static void        
+on_selection_changed (GtkTreeSelection *treeselection,
+		      CongErrorReport *report)
 {
-	CongErrorReport *report = (CongErrorReport*)user_data;
 	GtkTreeIter tree_iter;
 	GtkTextIter text_iter;
+	GtkTextIter text_iter_next_line;
 
-	g_message("on_row_activated\n");
+	g_message("on_selection_changed");
 
-	if ( gtk_tree_model_get_iter(GTK_TREE_MODEL(report->store), &tree_iter, arg1) ) {
+	if ( gtk_tree_selection_get_selected (treeselection, NULL, &tree_iter) ) {
 
 		gint line_number;
 
 		gtk_tree_model_get(GTK_TREE_MODEL(report->store), &tree_iter, PARSER_ERROR_LINENUM_NUMERIC_COLUMN, &line_number, -1);
+
+		/* Error reporting from libxml2 has line numbers starting at 1; gtk_text_buffer lines start at 0 */
+		g_assert (line_number>=1);
 		
-		gtk_text_buffer_get_iter_at_line(GTK_TEXT_BUFFER (report->text_buffer),
-						 &text_iter,
-						 line_number);
+		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (report->text_buffer),
+						  &text_iter,
+						  line_number-1);
+		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (report->text_buffer),
+						  &text_iter_next_line,
+						  line_number);
 
 		gtk_text_view_scroll_to_iter(GTK_TEXT_VIEW(report->text_view),
                                              &text_iter,
@@ -186,9 +180,9 @@ on_row_activated(GtkTreeView *treeview,
                                              FALSE, /* gboolean use_align, */
                                              0.5, /* gdouble xalign, */
                                              0.5 /* gdouble yalign */);
-
-		/* FIXME:  better to highlight the line; how do we do this? */
-		/* FIXME: would this better to do on single-click, rather than double-click? */
+		gtk_text_buffer_select_range (GTK_TEXT_BUFFER (report->text_buffer),
+					      &text_iter,
+					      &text_iter_next_line);
 	}
 }
 
@@ -334,10 +328,11 @@ cong_parser_result_dialog_new(CongParserResult *parser_result)
 	report->store = store;
 	report->text_buffer = text_buffer;
 	report->text_view = text_view;
-	gtk_signal_connect(GTK_OBJECT(error_list_view),
-			   "row-activated",
-			   GTK_SIGNAL_FUNC(on_row_activated),
-			   report);
+
+	g_signal_connect (G_OBJECT(gtk_tree_view_get_selection (GTK_TREE_VIEW (error_list_view))),
+			  "changed",
+			  G_CALLBACK (on_selection_changed),
+			  report);
 
 	scrolled_window2 = gtk_scrolled_window_new(NULL, NULL);
 		

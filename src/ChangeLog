@@ -1,3 +1,11 @@
+2004-09-28  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-parser-error.c: 
+
+	Use selection/single-click rather than double-click for moving
+	between the parser errors; highlight the line containing the error
+	when an error is selected.
+
 2004-09-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-node-properties-dialog.c: 
