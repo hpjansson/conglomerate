@@ -20,7 +20,7 @@ stamp-h.in
 ##new-tarballs_and_their_create_directory
 conglomerate-?.?.*
 ## #other #files
-debian
+#debian
 build-stamp
 patch-stamp
 ##
