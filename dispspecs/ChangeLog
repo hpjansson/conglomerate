@@ -1,3 +1,9 @@
+2004-02-18  Geert Stappers <stappers@stappers.nl>
+
+	* dispspec-template.xds
+
+	Change the the absolute file path in a URL.
+
 2004-02-09  Geert Stappers <stappers@stappers.nl>
 
 	* New directory

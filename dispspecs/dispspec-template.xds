@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE dispspec SYSTEM "/opt/gnome/share/conglomerate/dtd/xds.dtd">
+<!DOCTYPE dispspec SYSTEM "http://www.conglomerate.org/dtd/xds.dtd">
 <dispspec>
   <metadata>
     <name>Name of this document type</name>
