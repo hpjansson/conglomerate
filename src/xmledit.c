@@ -486,7 +486,7 @@ struct xed *xmledit_new(TTREE *x, CongDispspec *displayspec)
 #endif
 	
 #if 1
-	printf("DHM: removed call to gtk_signal_handlers_destroy here\n");
+	/* FIXME: g_message("DHM: removed call to gtk_signal_handlers_destroy here\n"); */
 #else
 	gtk_signal_handlers_destroy(GTK_OBJECT(xed->w));
 #endif
@@ -550,7 +550,7 @@ struct xed *xmledit_new(TTREE *x, CongDispspec *displayspec)
 	if (xed->tag_height < 3) xed->tag_height = 3;
 	xed->tag_height += (xed->fm_asc + xed->fm_desc) / 2;
 
-	printf("xed used to clone the TTREE for the displayspec; it now shares it\n");
+	/* g_message("xed used to clone the TTREE for the displayspec; it now shares it\n"); */
 	xed->displayspec = displayspec;
 	xed->initial = 1;
 	return(xed);

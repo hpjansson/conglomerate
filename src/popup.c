@@ -271,7 +271,7 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
  		      TTREE* tt;
  		      GtkWidget* menu;
  
- 		      gtk_tree_model_get(tree_model, &iter, TTREE_COLUMN, &tt, -1);
+ 		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_TTREE_COLUMN, &tt, -1);
  
  		      printf("got node \"%s\"\n",cong_dispspec_name_get(tt));
  

@@ -666,8 +666,8 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 #if 1
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 	gtk_tree_store_set (store, &new_tree_iter,
-			    TITLE_COLUMN, cong_dispspec_name_get(x),
-			    TTREE_COLUMN, x,
+			    TREEVIEW_TITLE_COLUMN, cong_dispspec_name_get(x),
+			    TREEVIEW_TTREE_COLUMN, x,
 			    -1);
 #else
 	glaebb_tree = 0;
@@ -702,7 +702,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
 
-		g_message("Examining frag %s\n",name);
+		/* g_message("Examining frag %s\n",name); */
 
 		if (type == XML_TAG_SPAN)
 		{
@@ -817,7 +817,7 @@ GtkWidget *xv_element_new(TTREE *x, CongDispspec *ds, GtkWidget *root, int colla
 
 	xv_style_r(sub, style_white);
 #if 1
-	printf("removed call to gtk_tree_item_expand\n");
+	/* g_message("removed call to gtk_tree_item_expand\n"); */
 #else
 	gtk_tree_item_expand(GTK_TREE_ITEM(glaebb_item));
 #endif
@@ -871,8 +871,8 @@ struct xview *xmlview_new(cong_document *doc, CongDispspec *displayspec)
 #if 1
 	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
 	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
-			    TITLE_COLUMN, "Document",
-			    TTREE_COLUMN, cong_document_get_root(doc),
+			    TREEVIEW_TITLE_COLUMN, "Document",
+			    TREEVIEW_TTREE_COLUMN, cong_document_get_root(doc),
 			    -1);
 #else
 	xv->tree = gtk_tree_item_new_with_label("Document");
