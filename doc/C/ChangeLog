@@ -1,3 +1,9 @@
+2004-01-08  Sean Wheller <sean@enbaya.co.za>
+
+	* faq.xml
+
+	root and DTD name now are matching.
+
 2003-12-04  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.xml
