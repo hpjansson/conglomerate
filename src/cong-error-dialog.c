@@ -162,7 +162,9 @@ cong_error_dialog_new_with_convenience(const gchar* what_failed,
 }
 
 GtkDialog*
-cong_error_dialog_new_unimplemented(const gchar* what_failed, const char* filename, int linenum)
+cong_error_dialog_new_unimplemented(const gchar* what_failed, 
+				    const char* filename, 
+				    int linenum)
 {
 	GtkDialog* dialog;
 	
@@ -173,6 +175,33 @@ cong_error_dialog_new_unimplemented(const gchar* what_failed, const char* filena
 					suggestion);
 
 	g_free(suggestion);
+
+	return dialog;
+}
+
+GtkDialog*
+cong_error_dialog_new_unimplemented_with_bugzilla_id(const gchar* what_failed, 
+						     const char* filename, 
+						     int linenum,
+						     const gchar* bugzilla_url,
+						     int bugzilla_id)
+{
+	GtkDialog* dialog;
+	
+	gchar* why_failed = g_strdup_printf("That feature has not yet been implemented.  Sorry.\n\nThis is a known problem; it is bug #%i within the Bug Tracking System at %s",
+					    bugzilla_id,
+					    bugzilla_url); 
+
+	/* FIXME: would be nice to have convenience buttons/hyperlinks for the bug */
+
+	gchar* suggestion =  g_strdup_printf("If you are a programmer, the problem is in file %s at line %i\n", filename, linenum);
+
+	dialog =  cong_error_dialog_new(what_failed,
+					why_failed,
+					suggestion);
+
+	g_free(suggestion);
+	g_free(why_failed);
 
 	return dialog;
 }

@@ -66,7 +66,20 @@ cong_error_dialog_new_unimplemented(const gchar* what_failed,
 				    const char* filename, 
 				    int linenum);
 
-#define CONG_DO_UNIMPLEMENTED_DIALOG(what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented(what_failed, __FILE__, __LINE__)))
+/**
+ * Routine to manufacture an error dialog for unimplemented functionality for when you have a Bugzilla bug ID
+ */
+GtkDialog*
+cong_error_dialog_new_unimplemented_with_bugzilla_id(const gchar* what_failed, 
+						     const char* filename, 
+						     int linenum,
+						     const gchar* bugzilla_url,
+						     int bugzilla_id);
+
+#define CONG_BUGZILLA_URL ("http://bugzilla.gnome.org")
+
+#define CONG_DO_UNIMPLEMENTED_DIALOG(what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented((what_failed), __FILE__, __LINE__)))
+#define CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(what_failed, bugzilla_id) (cong_error_dialog_do(cong_error_dialog_new_unimplemented_with_bugzilla_id((what_failed), __FILE__, __LINE__, CONG_BUGZILLA_URL, (bugzilla_id))))
 
 /**
  * Routine to manufacture a "what failed" string for when File->Open fails.
