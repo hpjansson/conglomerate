@@ -1,6 +1,12 @@
 creating ChangeLog
 2002-10-15 David Malcolm
 
+	cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, popup.c, position.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Converting TTREE* to CongNodePtr where appropriate.
+	
+2002-10-15 David Malcolm
+
 	* cursor.c, global.h, position.c, select.c, xmledit.c
 
 	New line layout implementation

@@ -233,9 +233,9 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 
 void pos_pl(CongXMLEditor *xed, struct pos *pos)
 {
-	TTREE *node_prev;
-	TTREE *node_prev2;
-	TTREE *node_first;
+	CongNodePtr node_prev;
+	CongNodePtr node_prev2;
+	CongNodePtr node_first;
 
 	g_assert(pos->node);
 	
@@ -286,7 +286,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 					else pos->c = 0;
 					return;
 				}
-				else if (xml_frag_enter(pos->node))
+				else if (cong_node_first_child(pos->node))
 				{
 					if (pos->node != node_first)
 					{
@@ -300,7 +300,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 #ifndef RELEASE					
 					fputc('>', stdout);
 #endif					
-					pos->node = xml_frag_enter(pos->node);
+					pos->node = cong_node_first_child(pos->node);
 					continue;
 				}
 			}
@@ -319,7 +319,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 			/* Go forward */
 
 			node_prev2 = pos->node;
-			pos->node = xml_frag_next(pos->node);
+			pos->node = cong_node_next(pos->node);
 #ifndef RELEASE
 			fputc('.', stdout);
 #endif			
@@ -342,11 +342,11 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 				
 			node_prev = pos->node;
 			if (pos->node == pos->node_last) return;
-			else if (!xml_frag_next(pos->node)) pos->node = xml_frag_exit(pos->node);
+			else if (!cong_node_next(pos->node)) pos->node = cong_node_parent(pos->node);
 			else break;
 		}
 		
-		if (pos->node) pos->node = xml_frag_next(pos->node);
+		if (pos->node) pos->node = cong_node_next(pos->node);
 	}
 	while (pos->node);
 
@@ -496,8 +496,8 @@ void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 
 void pos_lp(CongXMLEditor *xed, struct pos *pos)
 {
-	TTREE *node_prev;
-	TTREE *node_first;
+	CongNodePtr node_prev;
+	CongNodePtr node_first;
 
 	g_assert(pos->node);
 	
@@ -532,13 +532,13 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 			/* If spanning tag... */
 
 			else if (xml_frag_type(pos->node) == XML_TAG_SPAN &&
-					     xml_frag_enter(pos->node))
+					     cong_node_first_child(pos->node))
 			{
 				/* Go down */
 #ifndef RELEASE
 				fputc('>', stdout);
 #endif				
-				pos->node = xml_frag_enter(pos->node);
+				pos->node = cong_node_first_child(pos->node);
 				continue;
 			}
 
@@ -560,7 +560,7 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 
 			/* Go forward */
 			
-			pos->node = xml_frag_next(pos->node);
+			pos->node = cong_node_next(pos->node);
 		}
 
 		if (!pos->node) pos->node = node_prev;
@@ -573,7 +573,7 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 		fputc('.', stdout);
 #endif		
 
-		while (pos->node && !xml_frag_next(pos->node))
+		while (pos->node && !cong_node_next(pos->node))
 		{
 			if (pos->node == pos->node_find)
 			{
@@ -585,10 +585,10 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 			}
 
 			node_prev = pos->node;
-			pos->node = xml_frag_exit(pos->node);
+			pos->node = cong_node_parent(pos->node);
 		}
 		
-		if (pos->node) pos->node = xml_frag_next(pos->node);
+		if (pos->node) pos->node = cong_node_next(pos->node);
 	}
 	while (pos->node);
 

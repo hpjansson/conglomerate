@@ -331,13 +331,13 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 }
 
 
-TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
+CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 {
 	CongLocation loc0, loc1;
-	TTREE *n0, *n1, *n2;
+	CongNodePtr n0, n1, n2;
 	UNUSED_VAR(int len)
 	UNUSED_VAR(char *p_data)
-	TTREE *p_node;
+	CongNodePtr p_node;
 
 	g_assert(selection!=NULL);
 

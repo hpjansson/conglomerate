@@ -15,15 +15,29 @@
 enum
 {
 	TREEVIEW_TITLE_COLUMN,
-	TREEVIEW_TTREE_COLUMN,
+	TREEVIEW_NODE_COLUMN,
 	TREEVIEW_DOC_COLUMN,
 	TREEVIEW_N_COLUMNS
 };
 
-#if 0
+#define NEW_XML_IMPLEMENTATION 0
+
+#if NEW_XML_IMPLEMENTATION
 typedef xmlNodePtr CongNodePtr;
+
+const char* cong_node_name(CongNodePtr node);
+CongNodePtr cong_node_prev(CongNodePtr node);
+CongNodePtr cong_node_next(CongNodePtr node);
+CongNodePtr cong_node_first_child(CongNodePtr node);
+CongNodePtr cong_node_parent(CongNodePtr node);
 #else
 typedef TTREE* CongNodePtr;
+
+#define cong_node_name(t) xml_frag_name(t)
+#define cong_node_prev(t) xml_frag_prev(t)
+#define cong_node_next(t) xml_frag_next(t)
+#define cong_node_first_child(t) xml_frag_enter(t)
+#define cong_node_parent(t) xml_frag_exit(t)
 #endif
 
 enum CongElementType
@@ -156,13 +170,13 @@ typedef struct CongLayoutLine
 	struct CongLayoutLine *prev;
 
 	/* Data set by add_line: */
-	TTREE *tt;
+	CongNodePtr tt;
 	int i;  /* c_given */
 	
 	/* Data set by add stuff: */
 	gboolean got_rest_of_data;
 	int pos_y;
-	TTREE *x;
+	CongNodePtr x;
 	int draw_char;  /* Seems to be unused */
 
 } CongLayoutLine;
@@ -194,10 +208,10 @@ cong_layout_line_get_prev(CongLayoutLine *line);
 int
 cong_layout_line_get_second_y(CongLayoutLine *line);
 
-TTREE*
+CongNodePtr
 cong_layout_line_get_node(CongLayoutLine *line);
 
-TTREE*
+CongNodePtr
 cong_layout_line_get_node_last(CongLayoutLine *line);
 
 int
@@ -215,7 +229,7 @@ typedef struct CongLayoutStackEntry
 	char *text;
 	int line;
 	int pos_x;
-	TTREE *x;
+	CongNodePtr x;
 	int lev;
 	struct CongLayoutStackEntry *above;
 	struct CongLayoutStackEntry *below;
@@ -244,7 +258,7 @@ CongLayoutStackEntry*
 cong_layout_stack_bottom(CongLayoutStack *layout_stack);
 
 void
-cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev);
+cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, CongNodePtr x, int lev);
 
 
 
@@ -297,9 +311,9 @@ struct CongXMLEditor
 	/* Drawing information (temporary) */
 	enum CongDrawMode mode;
 
-	TTREE *draw_x;      /* XML node currently at */
+	CongNodePtr draw_x;      /* XML node currently at */
 
-	TTREE *draw_x_prev;
+	CongNodePtr draw_x_prev;
 	int draw_char_prev;
 
 	int draw_line;      /* Line to draw at (in display) */
@@ -311,7 +325,7 @@ struct CongXMLEditor
 
 	/* Data content */
 
-	TTREE *x;
+	CongNodePtr x;
 
 	CongLayoutCache layout_cache;
 	CongLayoutStack layout_stack;
@@ -344,9 +358,10 @@ struct pos
 	int x_find;
 
 	int line;
-	TTREE *node;
-	TTREE *node_last;
-	TTREE *node_find;
+	CongNodePtr node;
+	CongNodePtr node_last;
+	CongNodePtr node_find;
+
 	int c, c_given;
 	int space;  /* 0 = have no space, 1 = have space */
 
@@ -404,7 +419,7 @@ struct cong_globals
   TTREE *user_data;
   CongXMLEditor *meta_xed;
 #endif
-	TTREE *clipboard;
+	CongNodePtr clipboard;
 #if 0
   TTREE *insert_meta_section_tag;
 
@@ -444,9 +459,9 @@ gint tree_new_sibling(GtkWidget *widget, TTREE *tag);
 gint tree_new_sub_element(GtkWidget *widget, TTREE *tag);
 gint tree_cut(GtkWidget *widget, TTREE *tag);
 gint tree_copy(GtkWidget *widget, TTREE *tag);
-gint tree_paste_under(GtkWidget *widget, TTREE *tag);
-gint tree_paste_before(GtkWidget *widget, TTREE *tag);
-gint tree_paste_after(GtkWidget *widget, TTREE *tag);
+gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
+gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
+gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
 gint xed_cut(GtkWidget *widget, struct CongXMLEditor *xed);
 gint xed_copy(GtkWidget *widget, struct CongXMLEditor *xed);
@@ -458,8 +473,8 @@ gint select_vector(GtkWidget *w);
 
 gint xed_insert_table(GtkWidget *w, struct CongXMLEditor *xed);
 
-char *xml_frag_data_nice(TTREE *x);
-char *xml_frag_name_nice(TTREE *x);
+char *xml_frag_data_nice(CongNodePtr x);
+char *xml_frag_name_nice(CongNodePtr x);
 
 #if 0
 SOCK *server_login();
@@ -472,7 +487,7 @@ struct pos *pos_logical_to_physical_new(struct CongXMLEditor *xed, CongLocation 
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
 
-TTREE *selection_reparent_all(struct selection* selection, TTREE *p);
+CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
 TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x);
 TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x);
 char *xml_fetch_clean_data(TTREE *x);
@@ -514,8 +529,8 @@ cong_dispspec_get_description(const CongDispspec *ds);
 
 char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, TTREE *x, int tog);
-char *cong_dispspec_name_get(CongDispspec *ds, TTREE *x);
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
+char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
 
 gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
 gboolean cong_dispspec_element_collapse(CongDispspec *ds, char *name);

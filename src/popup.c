@@ -274,11 +274,11 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 #endif
 		    
  		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
- 		      TTREE* tt;
+ 		      CongNodePtr tt;
  		      GtkWidget* menu;
 		      CongDocument* doc;
  
- 		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_TTREE_COLUMN, &tt, -1);
+ 		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_NODE_COLUMN, &tt, -1);
  		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_DOC_COLUMN, &doc, -1);
  
  		      printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), tt));

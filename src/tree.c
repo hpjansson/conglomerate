@@ -93,7 +93,7 @@ gint tree_copy(GtkWidget *widget, TTREE *tag)
 }
 
 
-gint tree_paste_under(GtkWidget *widget, TTREE *tag)
+gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
@@ -119,7 +119,7 @@ gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 }
 
 
-gint tree_paste_before(GtkWidget *widget, TTREE *tag)
+gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
@@ -151,7 +151,7 @@ gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 }
 
 
-gint tree_paste_after(GtkWidget *widget, TTREE *tag)
+gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);

@@ -266,6 +266,7 @@ void cong_dispspec_delete(CongDispspec *dispspec)
 	g_assert(0);
 }
 
+#if 0
 TTREE *get_upper_section(TTREE *x)
 {
   TTREE *t, *r = 0;
@@ -281,6 +282,7 @@ TTREE *get_upper_section(TTREE *x)
   
   return(x);
 }
+#endif
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -400,7 +402,7 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
   gcol->red = (col >> 8) & 0xff00;
 }
 
-char *cong_dispspec_name_get(CongDispspec *ds, TTREE *x)
+char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
 	if (element) {
@@ -432,7 +434,7 @@ GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog)
 }
 
 
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, TTREE *x, int tog)
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
 

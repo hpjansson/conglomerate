@@ -23,7 +23,7 @@ GtkStyle *style_white;
   Probably would be cleaner to have a new widget subclass...
  */
 
-static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x)
+static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNodePtr x)
 {
 	GdkGC *gc;
 	int str_width;
@@ -168,7 +168,7 @@ static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, Gt
   return TRUE;
 }
 
-GtkWidget *xv_section_head(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_section_head(CongDispspec *ds, CongNodePtr x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *vbox, *title;
@@ -202,7 +202,7 @@ GtkWidget *xv_section_head(CongDispspec *ds, TTREE *x)
 
    Currently just a GtkDrawingArea widget, with a "dispspec" field of data.  Probably should be a subclass.   
 */
-static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x)
+static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNodePtr x)
 {
 	GdkGC *gc;
 	int str_width;
@@ -213,7 +213,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
-	gc = cong_dispspec_gc_get(ds, xml_frag_exit(x), 0);
+	gc = cong_dispspec_gc_get(ds, cong_node_parent(x), 0);
 	if (!gc) gc = w->style->black_gc;
 
 	/* Fill the header box */
@@ -282,7 +282,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 }
 
 
-GtkWidget *xv_fragment_head(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_fragment_head(CongDispspec *ds, CongNodePtr x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *title;
@@ -334,7 +334,7 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *
 }
 
 
-GtkWidget *xv_fragment_tail(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_fragment_tail(CongDispspec *ds, CongNodePtr x)
 {
         UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -344,10 +344,10 @@ GtkWidget *xv_fragment_tail(CongDispspec *ds, TTREE *x)
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 5);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, xml_frag_exit(x), 0));
+			   (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, cong_node_parent(x), 0));
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, xml_frag_exit(x), 0));
-  gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+			   (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, cong_node_parent(x), 0));
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 	xv_style_r(line, style_white);
 	gtk_widget_show(line);
@@ -444,7 +444,7 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *g
 }
 
 
-GtkWidget *xv_section_vline(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_section_vline(CongDispspec *ds, CongNodePtr x)
 {
 	GtkWidget *line;
 
@@ -462,7 +462,7 @@ GtkWidget *xv_section_vline(CongDispspec *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_vline_and_space(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_section_vline_and_space(CongDispspec *ds, CongNodePtr x)
 {
 	GtkWidget *line;
 
@@ -480,15 +480,15 @@ GtkWidget *xv_section_vline_and_space(CongDispspec *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_data(TTREE *x, CongDispspec *ds, int collapsed)
+GtkWidget *xv_section_data(CongNodePtr x, CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	CongXMLEditor *xed;
 
 	hbox = gtk_hbox_new(FALSE, 0);
 
-	line = xv_section_vline_and_space(ds, collapsed ? xml_frag_exit(xml_frag_exit(x)) :
-													xml_frag_exit(x));
+	line = xv_section_vline_and_space(ds, collapsed ? cong_node_parent(cong_node_parent(x)) :
+													cong_node_parent(x));
 
 	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
 
@@ -509,7 +509,7 @@ GtkWidget *xv_section_data(TTREE *x, CongDispspec *ds, int collapsed)
 }
 
 
-GtkWidget *xv_section_tail(CongDispspec *ds, TTREE *x)
+GtkWidget *xv_section_tail(CongDispspec *ds, CongNodePtr x)
 {
 	UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -564,7 +564,7 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
-GtkWidget* embedded_new(TTREE * x,CongDispspec *ds)
+GtkWidget* embedded_new(CongNodePtr x,CongDispspec *ds)
 {
 	GtkWidget *embedded;
 
@@ -630,15 +630,15 @@ GtkWidget* embedded_new(TTREE * x,CongDispspec *ds)
 #endif
 }
 
-GtkWidget *xv_section_embedded(TTREE * x,CongDispspec *ds, int collapsed)
+GtkWidget *xv_section_embedded(CongNodePtr x,CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	GtkWidget *embedded;
 
 	hbox = gtk_hbox_new(FALSE, 0);
 
-	line = xv_section_vline_and_space(ds, collapsed ? xml_frag_exit(xml_frag_exit(x)) :
-					  xml_frag_exit(x));
+	line = xv_section_vline_and_space(ds, collapsed ? cong_node_parent(cong_node_parent(x)) :
+					  cong_node_parent(x));
 
 	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
 
@@ -659,12 +659,18 @@ GtkWidget *xv_section_embedded(TTREE * x,CongDispspec *ds, int collapsed)
 
 }
 
-GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
+GtkWidget *xv_element_new(CongDocument *doc, 
+			  CongNodePtr x, 
+			  CongDispspec *ds, 
+			  GtkWidget *root, 
+			  int collapsed, 
+			  GtkTreeStore* store, 
+			  GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
 	UNUSED_VAR(GdkGCValues     gc_values)
 
-	TTREE *x_orig;
+	CongNodePtr x_orig;
 	UNUSED_VAR(TTREE *n0)
 	UNUSED_VAR(TTREE *n1)
 	UNUSED_VAR(GtkWidget *frame)
@@ -679,7 +685,7 @@ GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidg
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 	gtk_tree_store_set (store, &new_tree_iter,
 			    TREEVIEW_TITLE_COLUMN, cong_dispspec_name_get(ds, x),
-			    TREEVIEW_TTREE_COLUMN, x,
+			    TREEVIEW_NODE_COLUMN, x,
 			    TREEVIEW_DOC_COLUMN, doc,
 			    -1);
 #else
@@ -707,10 +713,10 @@ GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidg
 	xv_style_r(root, style_white);
 
 
-	x = xml_frag_enter(x);
+	x = cong_node_first_child(x);
 	if (!x) return(0);
 
-	for ( ; x; x = xml_frag_next(x))
+	for ( ; x; x = cong_node_next(x))
 	{
 		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
@@ -750,7 +756,7 @@ GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidg
 					gtk_widget_show(hbox);
 
 					gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
-					gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, xml_frag_exit(x)), FALSE, TRUE, 0);
+					gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 					xv_style_r(hbox, style_white);
 					poot = xv_section_head(ds, x);
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
@@ -781,7 +787,7 @@ GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidg
 				gtk_widget_show(hbox);
 
 				gtk_box_pack_start(GTK_BOX(root), hbox, FALSE, TRUE, 0);
-				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, xml_frag_exit(x)), FALSE, TRUE, 0);
+				gtk_box_pack_start(GTK_BOX(hbox), xv_section_vline_and_space(ds, cong_node_parent(x)), FALSE, TRUE, 0);
 				xv_style_r(hbox, style_white);
 				poot = xv_section_head(ds, x);
 				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
@@ -835,7 +841,7 @@ struct xview *xmlview_new(CongDocument *doc)
 	GdkColor gcol;
 	GtkWidget *w; /* , *glaebb_tree; */
 	int i;
-	TTREE *x;
+	CongNodePtr x;
 
 	CongDispspec *displayspec;
 
@@ -880,7 +886,7 @@ struct xview *xmlview_new(CongDocument *doc)
 	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
 	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
 			    TREEVIEW_TITLE_COLUMN, "Document",
-			    TREEVIEW_TTREE_COLUMN, cong_document_get_root(doc),
+			    TREEVIEW_NODE_COLUMN, cong_document_get_root(doc),
 			    TREEVIEW_DOC_COLUMN, doc,
 			    -1);
 #else
@@ -899,12 +905,12 @@ struct xview *xmlview_new(CongDocument *doc)
 	
 
 #if 0
-	x = xml_frag_enter(cong_document_get_root(doc));  /* Don't ignore root element */
+	x = cong_node_first_child(cong_document_get_root(doc));  /* Don't ignore root element */
 #else
-	x = xml_frag_enter(cong_document_get_root(doc)->child);  /* Root node specific */
+	x = cong_node_first_child(cong_document_get_root(doc)->child);  /* Root node specific */
 #endif
 
-	for ( ; x; x = xml_frag_next(x))
+	for ( ; x; x = cong_node_next(x))
 	{
 	  int type = xml_frag_type(x);
 	  char *name = xml_frag_name_nice(x);

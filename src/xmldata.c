@@ -12,23 +12,68 @@
 
 char fake_data[] = "";
 
-char *xml_frag_data_nice(TTREE *x)
+#if NEW_XML_IMPLEMENTATION
+const char* cong_node_name(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return node->name;
+}
+
+CongNodePtr cong_node_prev(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return node->prev;	
+}
+
+CongNodePtr cong_node_next(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return node->next;
+}
+
+CongNodePtr cong_node_first_child(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return node->children;
+}
+
+CongNodePtr cong_node_parent(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	return node->parent;
+}
+#endif
+
+char *xml_frag_data_nice(CongNodePtr x)
 {
 	char *s;
 	
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	s = xml_frag_data(x);
 	if (!s) s = fake_data;
+#endif
 	
 	return(s);
 }
 
 
-char *xml_frag_name_nice(TTREE *x)
+char *xml_frag_name_nice(CongNodePtr x)
 {
 	char *s;
 	
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	s = xml_frag_name(x);
 	if (!s) s = fake_data;
+#endif
 
 	return(s);
 }

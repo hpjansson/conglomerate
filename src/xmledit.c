@@ -21,14 +21,14 @@ cong_xml_editor_get_widget(CongXMLEditor *xed)
 	return xed->w;
 }
 
-void add_stuff_to_tt(TTREE* tt, int pos_y, TTREE* x, int draw_char)
+void add_stuff_to_tt(TTREE* tt, int pos_y, CongNodePtr x, int draw_char)
 {
 	ttree_node_add(tt, (unsigned char*)&pos_y, sizeof(int));
-	ttree_node_add(tt, (unsigned char*)&x, sizeof(TTREE *));
+	ttree_node_add(tt, (unsigned char*)&x, sizeof(CongNodePtr));
 	ttree_node_add(tt, (unsigned char*)&draw_char, sizeof(int));
 }
 
-void add_stuff(CongXMLEditor *xed, int pos_y, TTREE* x, int draw_char)
+void add_stuff(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char)
 {
 #if NEW_LAYOUT_IMPLEMENTATION
 	g_assert(xed->layout_cache.last_line);
@@ -43,20 +43,20 @@ void add_stuff(CongXMLEditor *xed, int pos_y, TTREE* x, int draw_char)
 #endif
 }
 
-TTREE *add_line_to_tt(TTREE* parent, TTREE* tt, int i)
+TTREE *add_line_to_tt(TTREE* parent, CongNodePtr tt, int i)
 {
 	TTREE *new_line;
 
 	g_return_val_if_fail(parent, NULL);
 
 	new_line = ttree_node_add(parent, "line", 4);  /* Add line */
-	ttree_node_add(new_line, (unsigned char*)&tt, sizeof(TTREE *));
+	ttree_node_add(new_line, (unsigned char*)&tt, sizeof(CongNodePtr));
 	ttree_node_add(new_line, (unsigned char*)&i, sizeof(int));
 
 	return new_line;
 }
 
-CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, TTREE* tt, int i)
+CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, CongNodePtr tt, int i)
 {
 	CongLayoutLine *line;
 	g_return_val_if_fail(layout_cache, NULL);
@@ -86,7 +86,7 @@ CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, TTREE*
 	
 }
 
-void add_line(CongXMLEditor *xed, TTREE* tt, int i)
+void add_line(CongXMLEditor *xed, CongNodePtr tt, int i)
 {
 	g_return_if_fail(xed);
 
@@ -97,7 +97,7 @@ void add_line(CongXMLEditor *xed, TTREE* tt, int i)
 #endif
 }
 
-void add_stuff_then_add_line(CongXMLEditor *xed, int pos_y, TTREE *x, int draw_char, TTREE *tt, int i)
+void add_stuff_then_add_line(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char, CongNodePtr tt, int i)
 {
 	add_stuff(xed,pos_y, x, draw_char);
 	add_line(xed, tt, i);
@@ -137,7 +137,7 @@ cong_layout_line_get_second_y(CongLayoutLine *line)
 #endif
 }
 
-TTREE*
+CongNodePtr
 cong_layout_line_get_node(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,NULL);
@@ -152,7 +152,7 @@ cong_layout_line_get_node(CongLayoutLine *line)
 #endif
 }
 
-TTREE*
+CongNodePtr
 cong_layout_line_get_node_last(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,NULL);
@@ -618,7 +618,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 }
 
 
-CongXMLEditor *xmledit_new(TTREE *x, CongDispspec *displayspec)
+CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
 {
         UNUSED_VAR(GdkCursor* cursor)
 	CongXMLEditor *xed;
@@ -756,7 +756,7 @@ void stack_print(CongLayoutStackEntry *t)
 
 #define DEBUG_STACK 0
 
-void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev)
+void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, CongNodePtr x, int lev)
 {
 	CongLayoutStackEntry *top_entry;
 	CongLayoutStackEntry *new_entry;
@@ -804,7 +804,7 @@ void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, in
 #endif
 }
 
-void xed_stack_push(CongXMLEditor *xed, char *s, TTREE *x, gboolean new_line)
+void xed_stack_push(CongXMLEditor *xed, char *s, CongNodePtr x, gboolean new_line)
 {
 	int line, pos_x;
 	int lev = 0;
@@ -1278,7 +1278,7 @@ void xed_str_micro_put(CongXMLEditor *xed, char *s)
 }
 
 
-char *xed_word(TTREE *x, CongXMLEditor *xed, gboolean *spc_before, gboolean *spc_after)
+char *xed_word(CongNodePtr x, CongXMLEditor *xed, gboolean *spc_before, gboolean *spc_after)
 {
 	UNUSED_VAR(int i)
 	char *p0, *p1;
@@ -1339,14 +1339,14 @@ void xed_word_rewind(CongXMLEditor *xed)
 /* --- */
 
 
-int xed_word_first_would_wrap(TTREE *x, CongXMLEditor *xed)
+int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 {
 	char *p0, *p1, *word;
 	int width;
 
-	x = xml_frag_enter(x);
+	x = cong_node_first_child(x);
 
-	for ( ; x; x = xml_frag_next(x))
+	for ( ; x; x = cong_node_next(x))
 	{
 		if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
@@ -1393,7 +1393,7 @@ int xed_word_first_would_wrap(TTREE *x, CongXMLEditor *xed)
 
 /* --- */
 
-int xed_xml_content_data(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
+int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1449,7 +1449,7 @@ int xed_xml_content_data(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 
 /* --- */
 
-int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
+int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1512,13 +1512,13 @@ int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 /* --- */
 
 
-int xed_xml_depth(TTREE *x)
+int xed_xml_depth(CongNodePtr x)
 {
 	int d = 0, d_max = 0;
 
-	x = xml_frag_enter(x);
+	x = cong_node_first_child(x);
 
-	for (d = d_max = 0; x; x = xml_frag_next(x))
+	for (d = d_max = 0; x; x = cong_node_next(x))
 	{
 		if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
@@ -1535,15 +1535,15 @@ int xed_xml_depth(TTREE *x)
 
 /* --- */
 
-int xed_xml_depth_after_eol(CongXMLEditor *xed, TTREE *x)
+int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 {
 	int d = 0, d_max = 0;
 
-	for (d = d_max = 0; x; x = xml_frag_next(x))
+	for (d = d_max = 0; x; x = cong_node_next(x))
 	{
 		if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
-			d = xed_xml_depth_after_eol(xed, xml_frag_enter(x));
+			d = xed_xml_depth_after_eol(xed, cong_node_first_child(x));
 			if (d > d_max) {
 				d_max = d;
 			}
@@ -1556,15 +1556,16 @@ int xed_xml_depth_after_eol(CongXMLEditor *xed, TTREE *x)
 
 /* --- */
 
-
+/* Not sure this actually gets called... */
+#if 0
 int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width, int *eol_p)
 {
 	int d = 0, d_max = 0;
 	int eol = 0;
 
-	x = xml_frag_enter(x);
+	x = cong_node_first_child(x);
 
-	for (d = d_max = 0; x; x = xml_frag_next(x))
+	for (d = d_max = 0; x; x = cong_node_next(x))
 	{
 		if (xml_frag_type(x) == XML_DATA)
 		{
@@ -1590,12 +1591,12 @@ int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width,
 
 	return(d_max + 1);
 }
-
+#endif
 
 /* --- */
 
 
-int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
+int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 {
 	UNUSED_VAR(int hold = 0)
 	int draw_tag_lev;
@@ -1632,7 +1633,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 	/* Goto first child fragment */
 
-	x = xml_frag_enter(x);
+	x = cong_node_first_child(x);
 	if (!x)
 	{
 		xed_stack_pop(xed);
@@ -1687,15 +1688,15 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 			printf("got paragraph in xed_xml_content_tag, tag=<%s>\n", name);
 #endif
 			
-			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
+			if (cong_node_next(x)) xed->draw_x_prev = cong_node_next(x);
 			else
 			{
 			  for (xed->draw_x_prev = x; ; )
 			  {
-				  xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-				  if (xml_frag_next(xed->draw_x_prev))
+				  xed->draw_x_prev = cong_node_parent(xed->draw_x_prev);
+				  if (cong_node_next(xed->draw_x_prev))
 				  {
-					  xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+					  xed->draw_x_prev = cong_node_next(xed->draw_x_prev);
 					  break;
 				  }
 			  }
@@ -1721,13 +1722,13 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 		{
 			/* TABLE. Identifier on separate line */
 
-			if (xml_frag_next(x)) {
-				xed->draw_x_prev = xml_frag_next(x);
+			if (cong_node_next(x)) {
+				xed->draw_x_prev = cong_node_next(x);
 			} else 	{
 				for (xed->draw_x_prev = x; ; ) {
-					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-					if (xml_frag_next(xed->draw_x_prev)) {
-						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+					xed->draw_x_prev = cong_node_parent(xed->draw_x_prev);
+					if (cong_node_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = cong_node_next(xed->draw_x_prev);
 						break;
 					}
 				}
@@ -1778,7 +1779,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 		
 		xed->draw_char = 0;  /* Beginning of next data node */
 		
-		x = xml_frag_next(x);
+		x = cong_node_next(x);
 	}
 
 #if DEBUG_STACK
@@ -1802,7 +1803,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 {
-	TTREE *x;
+	CongNodePtr x;
 	UNUSED_VAR(TTREE *first)
 	UNUSED_VAR(int height = 0)
 	int draw_tag_lev = 0, draw_tag_lev_new;
@@ -1827,7 +1828,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	/* We start inside a parent element, which hopefully is structural. */
 	
 #if 0
-	x = first = xml_frag_enter(x);
+	x = first = cong_node_first_child(x);
 #endif
 
 	cong_layout_cache_init(&xed->layout_cache);
@@ -1840,7 +1841,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
 #endif
 
-	for (x = xed->x; x; x = xml_frag_next(x))
+	for (x = xed->x; x; x = cong_node_next(x))
 	{
 		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
@@ -1868,15 +1869,15 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			printf("got paragraph in xed_xml_content_draw, name=<%s>\n",name);
 #endif
 
-			if (xml_frag_next(x)) {
-				xed->draw_x_prev = xml_frag_next(x);
+			if (cong_node_next(x)) {
+				xed->draw_x_prev = cong_node_next(x);
 			}
 			else
 			{
 				for (xed->draw_x_prev = x; ; ) {
-					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-					if (xml_frag_next(xed->draw_x_prev)) {
-						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+					xed->draw_x_prev = cong_node_parent(xed->draw_x_prev);
+					if (cong_node_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = cong_node_next(xed->draw_x_prev);
 						break;
 					}
 				}
@@ -1901,15 +1902,15 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 		{
 			/* TABLE. Identifier on separate line */
 
-			if (xml_frag_next(x)) {
-				xed->draw_x_prev = xml_frag_next(x);
+			if (cong_node_next(x)) {
+				xed->draw_x_prev = cong_node_next(x);
 			}
 			else
 			{
 				for (xed->draw_x_prev = x; ; ) {
-					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-					if (xml_frag_next(xed->draw_x_prev)) {
-						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+					xed->draw_x_prev = cong_node_parent(xed->draw_x_prev);
+					if (cong_node_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = cong_node_next(xed->draw_x_prev);
 						break;
 					}
 				}
@@ -1997,7 +1998,7 @@ void xed_cutcopy_update(struct curs* curs)
 
 gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-	TTREE *t;
+	CongNodePtr t;
 	int replace_xed = 0;
 
 	struct selection* selection = &the_globals.selection;
@@ -2045,7 +2046,8 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-	TTREE *t, *t0 = 0;
+	CongNodePtr t;
+	CongNodePtr t0 = NULL;
 	int replace_xed = 0;
 
 	struct selection* selection = &the_globals.selection;
@@ -2106,7 +2108,10 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-	TTREE *t, *t0 = 0, *t1 = 0, *clip;
+	CongNodePtr t;
+	CongNodePtr t0 = NULL;
+	CongNodePtr t1 = NULL;
+	CongNodePtr clip;
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;

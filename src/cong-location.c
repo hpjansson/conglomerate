@@ -111,25 +111,25 @@ cong_location_del_next_char(CongLocation *loc)
 	}
 }
 
-TTREE*
+CongNodePtr
 cong_location_xml_frag_prev(CongLocation *loc)
 {
-	return xml_frag_prev(loc->tt_loc);
+	return cong_node_prev(loc->tt_loc);
 }
 
-TTREE*
+CongNodePtr
 cong_location_xml_frag_next(CongLocation *loc)
 {
-	return xml_frag_next(loc->tt_loc);
+	return cong_node_next(loc->tt_loc);
 }
 
-TTREE*
+CongNodePtr
 cong_location_node(CongLocation *loc)
 {
 	return loc->tt_loc;
 }
 
-TTREE*
+CongNodePtr
 cong_location_parent(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);

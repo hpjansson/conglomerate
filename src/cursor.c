@@ -167,7 +167,8 @@ gint curs_data_insert(struct curs* curs, char *s)
 
 int curs_paragraph_insert(struct curs* curs)
 {
-	TTREE *t, *dummy;
+        CongNodePtr t;
+	CongNodePtr dummy;
 	CongDispspec *ds;
 	CongDispspecElement *para;
 	const char *tagname;
@@ -206,6 +207,9 @@ int curs_paragraph_insert(struct curs* curs)
 #endif
 
 
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0); /* FIXME:  unwritten */
+#else
 	dummy = ttree_node_add(0, "dummy", 5);
 	
 	ttree_node_add(dummy, "tag_empty", 9);
@@ -220,13 +224,15 @@ int curs_paragraph_insert(struct curs* curs)
 	dummy->child->parent = t->parent;
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
+#endif
 	return(1);
 }
 
 
 void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 {
-	TTREE *n, *n0;
+	CongNodePtr n;
+	CongNodePtr n0;
 	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
@@ -248,31 +254,31 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 	do
 	{
 		n0 = n;
-		if (n) n = xml_frag_prev(n);
+		if (n) n = cong_node_prev(n);
 		
 		for ( ; n; )
 		{
 			if (xml_frag_type(n) == XML_DATA) break;
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{
-				if (!strcmp(xml_frag_name(n), "table")) break;
+				if (!strcmp(cong_node_name(n), "table")) break;
 				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
 				}
-				else if (xml_frag_enter(n))
+				else if (cong_node_first_child(n))
 				{
 #ifndef RELEASE					
 					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
 #endif					
-					n = xml_frag_enter(n);
+					n = cong_node_first_child(n);
 					continue;
 				}
 			}
 			
 			n0 = n;
-			n = xml_frag_prev(n);
+			n = cong_node_prev(n);
 		}
 
 		if (!n) n = n0;
@@ -281,7 +287,7 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 		while (n)
 		{
 			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
-			if (!xml_frag_prev(n)) n = n0 = xml_frag_exit(n);
+			if (!cong_node_prev(n)) n = n0 = cong_node_parent(n);
 			else break;
 		}
 	}
@@ -296,7 +302,8 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 
 void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 {
-	TTREE *n, *n0;
+	CongNodePtr n;
+	CongNodePtr n0;
 	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
@@ -326,31 +333,31 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 	do
 	{
 		n0 = n;
-		if (n) n = xml_frag_next(n);
+		if (n) n = cong_node_next(n);
 
 		for ( ; n; )
 		{
 			if (xml_frag_type(n) == XML_DATA) break;
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{				 
-				if (!strcmp(xml_frag_name(n), "table")) break;
+				if (!strcmp(cong_node_name(n), "table")) break;
 				if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
 				}
-				else if (xml_frag_enter(n))
+				else if (cong_node_first_child(n))
 				{
 #ifndef RELEASE					
 					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
 #endif
-					n = xml_frag_enter(n);
+					n = cong_node_first_child(n);
 					continue;
 				}
 			}
 			
 			n0 = n;
-			n = xml_frag_next(n);
+			n = cong_node_next(n);
 		}
 
 		if (!n) n = n0;
@@ -359,7 +366,7 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 		while (n)
 		{
 			if (cong_dispspec_element_structural(xed->displayspec, xml_frag_name_nice(n))) { n = 0; break; }
-			if (!xml_frag_next(n)) n = n0 = xml_frag_exit(n);
+			if (!cong_node_next(n)) n = n0 = cong_node_parent(n);
 			else break;
 		}
 	}

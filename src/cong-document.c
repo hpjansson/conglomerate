@@ -37,7 +37,7 @@ cong_document_delete(CongDocument *doc)
 	g_free(doc);
 }
 
-TTREE*
+CongNodePtr
 cong_document_get_root(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
