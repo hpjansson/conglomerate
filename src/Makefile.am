@@ -77,6 +77,7 @@ conglomerate_SOURCES =      \
   cong-enum-mapping.h       \
   cong-error-dialog.h       \
   cong-fake-plugin-hooks.h  \
+  cong-file-selection.h     \
   cong-font.h               \
   cong-graph.h              \
   cong-location.h           \
