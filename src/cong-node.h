@@ -242,4 +242,7 @@ cong_node_is_valid_cursor_location (CongNodePtr node);
 gboolean
 cong_node_supports_byte_offsets (CongNodePtr node);
 
+gboolean
+cong_node_can_be_cut (CongNodePtr node);
+
 #endif

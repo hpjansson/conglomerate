@@ -558,11 +558,18 @@ cong_node_generate_source (CongNodePtr node)
 
 	xml_buffer = xmlBufferCreate();
 
-	xmlNodeDump (xml_buffer,
-		     node->doc,
-		     node,
-		     0,
-		     FALSE);
+	switch (cong_node_type (node)) {
+	case CONG_NODE_TYPE_DOCUMENT:
+		g_assert_not_reached();
+		break;
+	default:
+		xmlNodeDump (xml_buffer,
+			     node->doc,
+			     node,
+			     0,
+			     FALSE);
+		break;
+	}
 
 	result = g_strdup (xmlBufferContent (xml_buffer));
 

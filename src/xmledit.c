@@ -30,12 +30,9 @@ void cong_document_cut_selection(CongDocument *doc)
 	
 	if (!cong_location_exists(&curs->location)) return;
 
-	if (!(cong_range_exists (ordered_range) &&
-	      cong_range_is_valid (ordered_range))) { 
-		return;
-	}
-
-	if (cong_range_is_empty (ordered_range)) {
+	if (!cong_range_can_be_cut (ordered_range)) {
+		/* FIXME: Make UI insensitive to block this */
+		g_message ("Selection cannot be cut");
 		return;
 	}
 
@@ -81,6 +78,12 @@ void cong_document_copy_selection(CongDocument *doc)
 		return;
 	}
 
+	if (!cong_range_can_be_cut (cong_selection_get_ordered_range (selection))) {
+		/* FIXME: Make UI insensitive to block this */
+		g_message ("Selection cannot be copied");
+		return;
+	}
+
 	/* GREP FOR MVC */
 	cong_document_begin_edit (doc);
 
@@ -102,6 +105,7 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 	CongDispspec *ds;
 	CongSelection *selection;
 	CongCursor *curs;
+	gchar *source_fragment;
 
 	g_return_if_fail(doc);
 
@@ -118,11 +122,13 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 		return;
 	}
 #endif
+	source_fragment = cong_app_get_clipboard (cong_app_singleton ());
 
-	/* GREP FOR MVC */
-	cong_document_paste_source_at (doc, 
-				       &curs->location, 
-				       cong_app_get_clipboard(cong_app_singleton()));
+	if (source_fragment) {
+		cong_document_paste_source_at (doc, 
+					       &curs->location, 
+					       source_fragment);
+	}
 }
 
 void 

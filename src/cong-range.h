@@ -56,6 +56,9 @@ cong_range_init (CongRange *range);
 void
 cong_range_nullify (CongRange *range);
 
+gboolean
+cong_range_is_valid (CongRange *range);
+
 gchar*
 cong_range_generate_source (CongRange *range);
 
@@ -67,6 +70,12 @@ cong_range_is_empty (CongRange *range);
 
 gboolean
 cong_range_is_ordered (CongRange *range);
+
+gboolean
+cong_range_can_be_cut (CongRange *range);
+
+gboolean
+cong_range_can_be_copied (CongRange *range);
 
 void
 cong_range_make_ordered (CongRange *range);

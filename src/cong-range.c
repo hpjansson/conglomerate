@@ -174,6 +174,60 @@ cong_range_is_ordered (CongRange *range)
 
 }
 
+gboolean
+cong_node_can_be_cut (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+
+	g_assert (node->doc);
+
+#if 0
+	/* Forbid cutting the root element of the document: */
+	if (node->doc->==node) {
+		return FAlSE;
+	}
+#endif
+
+	/* Forbid all but the easy cases for now: we want stability rather than features: */
+	switch (cong_node_type (node)) {
+	default: 
+		return FALSE;
+
+	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_ELEMENT:
+	case CONG_NODE_TYPE_COMMENT:
+		return TRUE;
+	}
+}
+
+gboolean
+cong_range_can_be_cut (CongRange *range)
+{
+	g_return_val_if_fail (range, FALSE);
+
+	if (!(cong_range_exists (range) &&
+	      cong_range_is_valid (range))) { 
+		return FALSE;
+	}
+
+	if (cong_range_is_empty (range)) {
+		return FALSE;
+	}
+
+
+	if (!cong_range_is_ordered (range)) {
+		return FALSE;
+	}
+
+
+	/* If we have a single node: */
+	if (range->loc0.node==range->loc1.node) {
+		return cong_node_can_be_cut (range->loc0.node);
+	} else {
+		return TRUE;
+	}
+}
+
 void
 cong_range_make_ordered (CongRange *range)
 {
