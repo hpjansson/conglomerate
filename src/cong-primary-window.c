@@ -320,6 +320,14 @@ static void menu_callback_file_properties(gpointer callback_data,
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
 }
 
+static void menu_callback_file_close(gpointer data, guint
+				     callback_action, GtkWidget
+				     *widget) {
+	/* Need to prompt to save any unsaved data in the current
+	   document */
+	gtk_widget_destroy(((struct CongPrimaryWindow*)data)->window);
+}
+
 /* Callbacks for "Edit" menu: */
 static void menu_callback_cut(gpointer callback_data,
 			      guint callback_action,
@@ -364,6 +372,7 @@ static void menu_callback_about(gpointer callback_data,
 
 }
 
+
 /* The menus: */
 static GtkItemFactoryEntry menu_items[] =
 {
@@ -378,7 +387,7 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
 	{ "/File/Proper_ties",     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/_Close",         "<control>W", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_CLOSE },
+	{ "/File/_Close",         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
 	{ "/File/_Quit",         "<control>Q", gtk_main_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 	{ "/_Edit",                 NULL, 0, 0, "<Branch>" },
@@ -412,9 +421,10 @@ gint delete_event( GtkWidget *widget,
 		   GdkEvent  *event,
 		   gpointer   data )
 {
-#ifndef RELEASE
+	/* This path to window deletion is accessed by a window
+	   manager delete_event. This is where we should prompt the user to save
+	   any unsaved information in the document */
 	g_print ("delete event occurred\n");
-#endif	
 	return(FALSE);
 }
 
@@ -422,7 +432,11 @@ gint delete_event( GtkWidget *widget,
 void destroy( GtkWidget *widget,
 	      gpointer   data )
 {
-	gtk_main_quit();
+	g_print("destroy event occurred\n");
+	cong_primary_window_free((CongPrimaryWindow *)data);
+	if (g_list_length(the_globals.primary_windows) == 0) {		
+		gtk_main_quit();
+	}
 }
 
 void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
@@ -460,10 +474,10 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	}
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",
-			   GTK_SIGNAL_FUNC(delete_event), NULL);
+			   GTK_SIGNAL_FUNC(delete_event), primary_window);
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "destroy",
-			   GTK_SIGNAL_FUNC(destroy), NULL);
+			   GTK_SIGNAL_FUNC(destroy), primary_window);
 
 	gtk_container_set_border_width(GTK_CONTAINER(primary_window->window), 0);
 
@@ -599,7 +613,7 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
-	g_assert(0); /* FIXME: unwritten */
+	/*g_assert(0);  FIXME: unwritten */
 
 	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);
 }
