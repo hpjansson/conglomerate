@@ -1,19 +1,18 @@
-# translation of conglomerate to Albanian
+# Përkthimi i mesazheve të conglomerate në shqip
 # This file is distributed under the same license as the conglomerate package.
 # Laurent Dhima <laurenti@alblinux.net>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: conglomerate.HEAD\n"
+"Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-19 11:03+0200\n"
-"PO-Revision-Date: 2004-07-10 11:47+0200\n"
+"POT-Creation-Date: 2004-09-02 11:04+0200\n"
+"PO-Revision-Date: 2004-09-03 17:29+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1434
 #: src/cong-primary-window.c:528 src/cong-primary-window.c:713
@@ -26,27 +25,29 @@ msgid "Edit XML files"
 msgstr "Ndrysho XML files"
 
 #: data/conglomerate.schemas.in.h:1
+#, fuzzy
 msgid ""
 "A list of custom directories where Conglomerate should look for the display "
 "specification (called dispspec, or .xds) files, in addition to the standard "
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
-msgstr ""
+msgstr "A lista nga e personalizuar për në shtegu Kur a është për në dhe i pari është."
 
 #: data/conglomerate.schemas.in.h:2
+#, fuzzy
 msgid ""
 "A list of directories where Conglomerate should look for template xml files. "
 "These documents will be used by the new document assistant as types of "
 "documents which can be created by the user."
-msgstr ""
+msgstr "A lista nga për nga i ri nga nga përdorues."
 
 #: data/conglomerate.schemas.in.h:3
 msgid "Custom locations for display specification files."
-msgstr ""
+msgstr "Pozicione të personalizuar për shfaqjen e files specifikues."
 
 #: data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
-msgstr ""
+msgstr "Pozicionet për files shabllonë."
 
 #: glade/cong-file-import.glade.h:1
 msgid "File Import Options"
@@ -61,7 +62,7 @@ msgid "Options"
 msgstr "Mundësitë"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
-#: src/cong-node-properties-dialog.c:1285
+#: src/cong-node-properties-dialog.c:1321
 msgid "Advanced"
 msgstr "Të detajuara"
 
@@ -70,9 +71,9 @@ msgid "Basic"
 msgstr "Bazë"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:137 src/cong-file-export.c:332
-#: src/cong-file-new.c:363 src/cong-file-print.c:252
-#: src/cong-parser-error.c:326
+#: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
+#: src/cong-file-export.c:332 src/cong-file-new.c:363
+#: src/cong-file-print.c:252 src/cong-parser-error.c:326
 msgid "Description"
 msgstr "Përshkrimi"
 
@@ -101,9 +102,9 @@ msgstr "Vendodhja"
 msgid "Modified"
 msgstr "Ndryshuar"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:129
-#: src/cong-file-export.c:331 src/cong-file-print.c:251
-#: src/cong-node-properties-dialog.c:609
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:331
+#: src/cong-file-print.c:251 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Emri"
 
@@ -111,7 +112,7 @@ msgstr "Emri"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
-#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1247
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
 msgid "Properties"
 msgstr "Pronësitë"
 
@@ -145,7 +146,6 @@ msgstr "_Shoqëroi këtë DTD"
 msgid "*"
 msgstr "*"
 
-#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:2
 msgid "Find Next"
 msgstr "Gjej në vazhdim"
@@ -191,22 +191,25 @@ msgstr "Preferimet e Conglomerate"
 msgid "Document Types"
 msgstr "Lojjet e dokumenteve"
 
+#: glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "Plugins"
+
 #: glade/custom-element.glade.h:2
 msgid "Adhoc Element"
-msgstr ""
+msgstr "Element i krijuar Adhoc"
 
 #: glade/custom-element.glade.h:3
 msgid "Element Name"
-msgstr ""
+msgstr "Emri i elementit"
 
 #: glade/custom-element.glade.h:4
-#, fuzzy
 msgid "Element Type"
-msgstr "Lloji i dokumentit"
+msgstr "Lloji i elementit"
 
 #: glade/custom-element.glade.h:5
 msgid "I Don't Care"
-msgstr ""
+msgstr "Nuk më intereson"
 
 #: glade/custom-element.glade.h:6
 #, fuzzy
@@ -218,10 +221,11 @@ msgid "Structural"
 msgstr ""
 
 #: glade/docbook-common-properties.glade.h:1
+#, fuzzy
 msgid ""
 "<small>What is the scope of the text? You can use this page to specify the "
 "relevancy of the text to different  types of computer system.</small>"
-msgstr ""
+msgstr "<small> Çfarë është nga tekst Ti faqe nga tekst nga sistemi</small>"
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
@@ -236,12 +240,13 @@ msgid "Scope"
 msgstr "Qëllimi"
 
 #: glade/docbook-common-properties.glade.h:6
+#, fuzzy
 msgid ""
 "This is a placeholder page.  Eventually you will be able to use this page to "
 "manipulate DocBook's simple version tracking information.\n"
 "\n"
 "This is listed in Bugzilla as bug #122538"
-msgstr ""
+msgstr "është a faqe faqe thjeshtë versioni j është në difekt"
 
 #: glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -305,10 +310,11 @@ msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
 #: glade/docbook-ulink-properties.glade.h:1
+#, fuzzy
 msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
-msgstr ""
+msgstr "<small> nga lidhje lloji</small>"
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
@@ -339,8 +345,9 @@ msgid "Preview"
 msgstr "Shikoje"
 
 #: glade/plugin-arbitrary.glade.h:6
+#, fuzzy
 msgid "Top-level Element"
-msgstr ""
+msgstr "Sipër niveli Elementi"
 
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
@@ -371,24 +378,25 @@ msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nuk gjeti asnjë përshkrim mbi llojet e dokumentit."
 
 #: src/cong-app.c:1135
+#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
-msgstr ""
+msgstr "gabim është nuk instalo prezgjedhur për shtegu."
 
 #: src/cong-attribute-editor-cdata.c:218 src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Shto atributin \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244 src/cong-attribute-editor.c:266
+#: src/cong-attribute-editor-cdata.c:244 src/cong-attribute-editor.c:267
 #: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Hiq atributin \"%s\""
 
-#: src/cong-attribute-editor-enumeration.c:106
+#: src/cong-attribute-editor-enumeration.c:121
 msgid "(unspecified)"
 msgstr "(jo e specifikuar)"
 
@@ -488,7 +496,7 @@ msgstr "Ukrahinase"
 msgid "No Language"
 msgstr "Asnjë gjuhë"
 
-#: src/cong-attribute-editor.c:263 src/cong-attribute-wrapper.c:248
+#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
 #: src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
@@ -508,8 +516,7 @@ msgstr "Ruan ndryshimet tek dokumenti \"%s\" para se t'a mbyllni?"
 msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
-msgstr ""
-"Nëse e mbyllni pa ruajtur, ndryshimet nga %li orët e fundit do të humbasin."
+msgstr "Nëse e mbyllni pa ruajtur, ndryshimet nga %li orët e fundit do të humbasin."
 
 #: src/cong-dialog.c:323
 #, c-format
@@ -521,10 +528,8 @@ msgstr ""
 "humbasin."
 
 #: src/cong-dialog.c:325
-msgid ""
-"If you close without saving, changes from the past minute will be discarded."
-msgstr ""
-"Nëse e mbyllni pa ruajtur, ndryshimet nga minuta e fundit do të humbasin."
+msgid "If you close without saving, changes from the past minute will be discarded."
+msgstr "Nëse e mbyllni pa ruajtur, ndryshimet nga minuta e fundit do të humbasin."
 
 #: src/cong-dialog.c:379
 #, c-format
@@ -556,12 +561,14 @@ msgid "<untitled>"
 msgstr "<pa titull>"
 
 #: src/cong-dispspec-registry.c:108
+#, fuzzy
 msgid "Conglomerate could not read its registry of document types."
-msgstr ""
+msgstr "nuk nga."
 
 #: src/cong-dispspec-registry.c:111
+#, fuzzy
 msgid "Conglomerate attempted to look at all the files in the location."
-msgstr ""
+msgstr "në pozicioni."
 
 #: src/cong-dispspec-registry.c:333 src/cong-file-new.c:343
 msgid "File Type"
@@ -594,13 +601,15 @@ msgid "Text \"%s\""
 msgstr "Teksti \"%s\""
 
 #: src/cong-document.c:961
+#, fuzzy
 msgid "Character Data"
-msgstr ""
+msgstr "Simboli Të dhëna"
 
 #: src/cong-document.c:964
 #, c-format
+#, fuzzy
 msgid "Reference to Entity \"%s\""
-msgstr ""
+msgstr "Referime Entitet"
 
 #: src/cong-document.c:967
 #, c-format
@@ -687,15 +696,15 @@ msgstr "Zëvendëso _Gjithçka"
 msgid "Find"
 msgstr "Gjej"
 
-#: src/cong-editor-node-text.c:975
+#: src/cong-editor-node-text.c:984
 msgid "Select word"
 msgstr "Zgjidh fjalën"
 
-#: src/cong-editor-node-text.c:1000
+#: src/cong-editor-node-text.c:1009
 msgid "Move cursor"
 msgstr "Lëviz kursorin"
 
-#: src/cong-editor-node-text.c:1086
+#: src/cong-editor-node-text.c:1095
 msgid "Drag out selection"
 msgstr ""
 
@@ -727,54 +736,62 @@ msgstr "Fshi pjesën e zgjedhur"
 #: src/cong-error-dialog.c:231 src/cong-error-dialog.c:271
 #, c-format
 msgid "If you are a programmer, the problem is in file %s at line %i\n"
-msgstr ""
-"Nëse jeni ju programuesi, problemi qëndron tek file %s në rreshtin %i\n"
+msgstr "Nëse jeni ju programuesi, problemi qëndron tek file %s në rreshtin %i\n"
 
 #: src/cong-error-dialog.c:235
+#, fuzzy
 msgid "That feature has not yet been implemented.  Sorry."
-msgstr ""
+msgstr "karakteristika nuk Më vjen keq."
 
 #: src/cong-error-dialog.c:265
 #, c-format
+#, fuzzy
 msgid ""
 "That feature has not yet been implemented.  Sorry.\n"
 "\n"
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
-msgstr ""
+msgstr "karakteristika nuk Më vjen keq j është a është difekt Sistemi"
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-dialog.c:321
 #, c-format
+#, fuzzy
 msgid "An error was reported whilst attempting the operation \"%s\""
-msgstr ""
+msgstr "gabim"
 
 #: src/cong-error-dialog.c:325
+#, fuzzy
 msgid "A GError occurred; the error report was:"
-msgstr ""
+msgstr "A gabim:"
 
 #: src/cong-error-dialog.c:335 src/cong-error-file-open.c:516
+#, fuzzy
 msgid "An unexpected error occurred."
-msgstr ""
+msgstr "gabim."
 
 #: src/cong-error-dialog.c:336 src/cong-error-file-open.c:517
+#, fuzzy
 msgid "For more information, click on the \"Details\" button."
-msgstr ""
+msgstr "tjetër në Hollësi."
 
 #: src/cong-error-dialog.c:386
+#, fuzzy
 msgid "An error occurred whilst running this system command:"
-msgstr ""
+msgstr "gabim në punim e sipër sistemi:"
 
 #: src/cong-error-dialog.c:389
 #, c-format
+#, fuzzy
 msgid ""
 "The error number reported was %d.  Below is the error text that was output "
 "by the command."
-msgstr ""
+msgstr "gabim është gabim tekst nga."
 
 #. FIXME: ought to set up the parent window properly
 #: src/cong-error-file-open.c:67
+#, fuzzy
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr ""
+msgstr "nuk Kërko j"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: src/cong-error-file-open.c:103
@@ -785,30 +802,35 @@ msgstr "%s nuk arrin të lexojë \"%s\" nga %s."
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-open.c:106
 #, c-format
+#, fuzzy
 msgid "%s could not read \"%s\" from %s."
-msgstr ""
+msgstr "nuk."
 
 #: src/cong-error-file-open.c:264 src/cong-error-file-save.c:92
+#, fuzzy
 msgid "An unexpected internal error occurred."
-msgstr ""
+msgstr "i brendshëm gabim."
 
 #: src/cong-error-file-open.c:265 src/cong-error-file-save.c:93
+#, fuzzy
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
-msgstr ""
+msgstr "a difekt me nga programi."
 
 #: src/cong-error-file-open.c:291
+#, fuzzy
 msgid "There is no file with that name at that location."
-msgstr ""
+msgstr "është jo me emri pozicioni."
 
 #: src/cong-error-file-open.c:292
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
 "capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
 "\"myfile\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr ""
+msgstr "emri Kujto është është nuk j Kërko gjej."
 
 #: src/cong-error-file-open.c:293 src/cong-error-file-open.c:302
 #: src/cong-error-file-open.c:357 src/cong-error-file-open.c:398
@@ -816,238 +838,279 @@ msgid "Search"
 msgstr "Kërko"
 
 #: src/cong-error-file-open.c:300 src/cong-error-file-save.c:110
+#, fuzzy
 msgid "The location does not exist."
-msgstr ""
+msgstr "pozicioni nuk."
 
 #: src/cong-error-file-open.c:301
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"MyDirectory\" is not the same as "
 "\"mydirectory\" or \"MYDIRECTORY\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr ""
+msgstr "pozicioni Kujto është është nuk j Kërko gjej."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-open.c:314
 #, c-format
+#, fuzzy
 msgid "The location \"%s\" does not support the reading of files."
-msgstr ""
+msgstr "pozicioni nuk nga."
 
 #: src/cong-error-file-open.c:318
+#, fuzzy
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
-msgstr ""
+msgstr "a a pozicioni kontakti sistemi."
 
 #: src/cong-error-file-open.c:328
+#, fuzzy
 msgid "There were problems reading the content of the file."
-msgstr ""
+msgstr "përmbajtja nga."
 
 #: src/cong-error-file-open.c:329 src/cong-error-file-open.c:347
 #: src/cong-error-file-open.c:386
+#, fuzzy
 msgid "Try again.  If it fails again, contact your system administrator."
-msgstr ""
+msgstr "kontakti sistemi."
 
 #: src/cong-error-file-open.c:338
+#, fuzzy
 msgid "The contents of the file seem to be corrupt."
-msgstr ""
+msgstr "nga."
 
 #: src/cong-error-file-open.c:339
-msgid ""
-"Try again.  If it fails again, try looking for a backup copy of the file."
-msgstr ""
+#, fuzzy
+msgid "Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr "për a kopjo nga."
 
 #: src/cong-error-file-open.c:346 src/cong-error-file-open.c:385
+#, fuzzy
 msgid "There were problems reading the contents of the file."
-msgstr ""
+msgstr "nga."
 
 #: src/cong-error-file-open.c:355 src/cong-error-file-save.c:251
+#, fuzzy
 msgid "The system does not recognise that as a valid location."
-msgstr ""
+msgstr "sistemi nuk a pozicioni."
 
 #: src/cong-error-file-open.c:356
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
 "\").\n"
 "(ii) Try using the Search Tool to find your file."
-msgstr ""
+msgstr "pozicioni Kujto është http është nuk HTTP j Kërko gjej."
 
 #: src/cong-error-file-open.c:367
+#, fuzzy
 msgid "You do not have permission to read that file."
-msgstr ""
+msgstr "Ti nuk."
 
 #: src/cong-error-file-open.c:368
+#, fuzzy
 msgid "Try asking your system administrator to give you permission."
-msgstr ""
+msgstr "sistemi."
 
 #: src/cong-error-file-open.c:375 src/cong-error-file-save.c:274
+#, fuzzy
 msgid "The system is trying to operate on too many files at once."
-msgstr ""
+msgstr "sistemi është në."
 
 #: src/cong-error-file-open.c:376 src/cong-error-file-open.c:410
 #: src/cong-error-file-save.c:275 src/cong-error-file-save.c:294
+#, fuzzy
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
-msgstr ""
+msgstr "kontakti sistemi."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-open.c:393
 #, c-format
+#, fuzzy
 msgid "\"%s\" is a directory, rather than a file."
-msgstr ""
+msgstr "është a a."
 
 #: src/cong-error-file-open.c:397
+#, fuzzy
 msgid "Try using the Search Tool to find your file."
-msgstr ""
+msgstr "Kërko gjej."
 
 #: src/cong-error-file-open.c:409 src/cong-error-file-save.c:293
+#, fuzzy
 msgid "The system ran out of memory."
-msgstr ""
+msgstr "sistemi nga."
 
 #: src/cong-error-file-open.c:418 src/cong-error-file-open.c:427
 #: src/cong-error-file-open.c:436 src/cong-error-file-save.c:302
 #: src/cong-error-file-save.c:311 src/cong-error-file-save.c:320
+#, fuzzy
 msgid "The server could not be contacted."
-msgstr ""
+msgstr "server nuk."
 
 #: src/cong-error-file-open.c:419
+#, fuzzy
 msgid "Try again.  If it fails again, the server may be down."
-msgstr ""
+msgstr "server poshtë."
 
 #: src/cong-error-file-open.c:428 src/cong-error-file-open.c:437
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
-msgstr ""
+msgstr "pozicioni j server poshtë."
 
 #: src/cong-error-file-open.c:445 src/cong-error-file-save.c:329
+#, fuzzy
 msgid "The system could not login to the location."
-msgstr ""
+msgstr "sistemi nuk pozicioni."
 
 #: src/cong-error-file-open.c:446 src/cong-error-file-open.c:456
+#, fuzzy
 msgid "Try again. If it fails again, contact your system administrator."
-msgstr ""
+msgstr "kontakti sistemi."
 
 #: src/cong-error-file-open.c:455 src/cong-error-file-save.c:338
+#, fuzzy
 msgid "The location was too busy."
-msgstr ""
+msgstr "pozicioni."
 
 #. Manufacture a dialog that is displayed if the user requests further details:
 #: src/cong-error-file-open.c:505
 #, c-format
+#, fuzzy
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
-msgstr ""
+msgstr "gabim"
 
 #: src/cong-error-file-open.c:509
+#, fuzzy
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
-msgstr ""
+msgstr "programi gabim GNOME Virtual File Sistemi."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: src/cong-error-file-save.c:61
 #, c-format
+#, fuzzy
 msgid "%s cannot save \"%s\" to %s."
-msgstr ""
+msgstr "ruaj."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
 #: src/cong-error-file-save.c:64
 #, c-format
+#, fuzzy
 msgid "%s could not save \"%s\" to %s."
-msgstr ""
+msgstr "nuk ruaj."
 
 #: src/cong-error-file-save.c:111
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
 "that capitalisation is significant (\"MyDirectory\" is not the same as "
 "\"MYDIRECTORY\" or \"mydirectory\").\n"
 "(ii) Try saving to a different location."
-msgstr ""
+msgstr "pozicioni emri Kujto është është nuk j a pozicioni."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:119 src/cong-error-file-save.c:238
 #, c-format
+#, fuzzy
 msgid "The location \"%s\" does not support the writing of files."
-msgstr ""
+msgstr "pozicioni nuk nga."
 
 #: src/cong-error-file-save.c:123 src/cong-error-file-save.c:242
 #: src/cong-error-file-save.c:350
+#, fuzzy
 msgid "Try saving to a different location."
-msgstr ""
+msgstr "a pozicioni."
 
 #: src/cong-error-file-save.c:134
+#, fuzzy
 msgid "There were problems writing the content of the file."
-msgstr ""
+msgstr "përmbajtja nga."
 
 #: src/cong-error-file-save.c:135
+#, fuzzy
 msgid "Try again.  If it fails again, try saving to a different location."
-msgstr ""
+msgstr "a pozicioni."
 
 #: src/cong-error-file-save.c:164
 #, c-format
-msgid ""
-"The size of the file would be %s, but the device only has a capacity of %s."
-msgstr ""
+#, fuzzy
+msgid "The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "madhësia nga periferik a nga."
 
 #. Can't get at the capacity for the device or "volume":
 #: src/cong-error-file-save.c:170
 #, c-format
+#, fuzzy
 msgid "The file is too big to fit on the device (file size would be %s)."
-msgstr ""
+msgstr "është në periferik madhësia."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:178
+#, fuzzy
 msgid "The file is too big to fit on the device."
-msgstr ""
+msgstr "është në periferik."
 
 #: src/cong-error-file-save.c:187
+#, fuzzy
 msgid "Try saving the file to a different location."
-msgstr ""
+msgstr "a pozicioni."
 
 #: src/cong-error-file-save.c:208
 #, c-format
-msgid ""
-"The size of the file would be %s, but you only have %s free on that device."
-msgstr ""
+#, fuzzy
+msgid "The size of the file would be %s, but you only have %s free on that device."
+msgstr "madhësia nga në periferik."
 
 #. Can't get at the free space for the device or "volume":
 #: src/cong-error-file-save.c:214
 #, c-format
+#, fuzzy
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
-msgstr ""
+msgstr "është në hapësirë në periferik madhësia."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:222
+#, fuzzy
 msgid "The file is too big to fit in the remaining space on the device."
-msgstr ""
+msgstr "është në hapësirë në periferik."
 
 #: src/cong-error-file-save.c:231
+#, fuzzy
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
-msgstr ""
+msgstr "a pozicioni tjetër hapësirë nga periferik koshi."
 
 #: src/cong-error-file-save.c:252
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
 "\").\n"
 "(ii) Try saving to a different location."
-msgstr ""
+msgstr "pozicioni Kujto është http është nuk HTTP j a pozicioni."
 
 #: src/cong-error-file-save.c:266
+#, fuzzy
 msgid "You do not have permission to write to that location."
-msgstr ""
+msgstr "Ti nuk pozicioni."
 
 #: src/cong-error-file-save.c:267
+#, fuzzy
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
-msgstr ""
+msgstr "a pozicioni sistemi."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:281
@@ -1056,75 +1119,88 @@ msgid "\"%s\" is a directory."
 msgstr "\"%s\" është një directory."
 
 #: src/cong-error-file-save.c:285
+#, fuzzy
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
-msgstr ""
+msgstr "Ti ruaj a a letra vetë."
 
 #: src/cong-error-file-save.c:303
+#, fuzzy
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
-msgstr ""
+msgstr "server poshtë pozicioni."
 
 #: src/cong-error-file-save.c:312 src/cong-error-file-save.c:321
+#, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to "
 "another location."
-msgstr ""
+msgstr "pozicioni j server poshtë pozicioni."
 
 #: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
+#, fuzzy
 msgid "Try again. If it fails again, try saving to another location."
-msgstr ""
+msgstr "pozicioni."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:346
 #, c-format
+#, fuzzy
 msgid "The location \"%s\" only allows files to be read, not written."
-msgstr ""
+msgstr "pozicioni nuk."
 
 #. FIXME: need to think more about these messages
 #: src/cong-error-file-save.c:358
 #, c-format
+#, fuzzy
 msgid "The name \"%s\" is too long for the location to manage."
-msgstr ""
+msgstr "emri është për pozicioni."
 
 #: src/cong-error-file-save.c:362
+#, fuzzy
 msgid "Try again with a shorter file name."
-msgstr ""
+msgstr "me a emri."
 
 #. 5 megabytes, for a test
 #: src/cong-error-tests.c:25
 #, c-format
+#, fuzzy
 msgid "Testing File->Open failure of \"%s\" with result %s"
-msgstr ""
+msgstr "File Hap nga me"
 
 #: src/cong-error-tests.c:31
 #, c-format
+#, fuzzy
 msgid "Testing File->Save failure of \"%s\" with result %s"
-msgstr ""
+msgstr "File Ruaj nga me"
 
 #: src/cong-error-tests.c:37
 #, c-format
+#, fuzzy
 msgid "Testing generic failure of \"%s\" with result %s"
-msgstr ""
+msgstr "nga me"
 
 #: src/cong-error-tests.c:40
+#, fuzzy
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr ""
+msgstr "është nga a."
 
 #: src/cong-error-tests.c:43
+#, fuzzy
 msgid "This dialog was generated by the automated testing routine"
-msgstr ""
+msgstr "dialog nga"
 
 #: src/cong-file-export.c:159
 msgid "(No description available)"
 msgstr "(Asnjë përshkrim në dispozicion)"
 
 #: src/cong-file-export.c:218
+#, fuzzy
 msgid "Select file to export to"
-msgstr ""
+msgstr "Zgjidh eksporto"
 
 #: src/cong-file-export.c:252
 #, c-format
@@ -1153,8 +1229,9 @@ msgid "Conglomerate cannot export \"%s\""
 msgstr "Conglomerate nuk mund të eksportojë \"%s\""
 
 #: src/cong-file-export.c:413
+#, fuzzy
 msgid "None of Conglomerate's plugins know how to export files of that type."
-msgstr ""
+msgstr "Asnjë nga eksporto nga lloji."
 
 #: src/cong-file-import.c:80
 msgid "Import file..."
@@ -1171,6 +1248,7 @@ msgid "Creating a new file"
 msgstr "Krijimi i një file të ri"
 
 #: src/cong-file-new.c:619
+#, fuzzy
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1179,35 +1257,39 @@ msgid ""
 "\n"
 "We hope that in future versions of Conglomerate you will be able to create "
 "\"template documents\" to add to this system."
-msgstr ""
+msgstr "a i ri j nga dhe nga përmbajtja për j në nga shto sistemi."
 
 #: src/cong-file-new.c:632
+#, fuzzy
 msgid "What type of file would you like to create?"
-msgstr ""
+msgstr "Çfarë lloji nga?"
 
 #: src/cong-file-new.c:634
-msgid ""
-"Highlight one of the items in the list and select \"Forward\" to continue"
-msgstr ""
+#, fuzzy
+msgid "Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr "Vër në dukje nga elementët në lista dhe zgjidh Vazhdo"
 
 #: src/cong-file-new.c:644
+#, fuzzy
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
 "keep it."
-msgstr ""
+msgstr "Shtypi Apliko Ti ruaj."
 
 #: src/cong-file-open.c:72
+#, fuzzy
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
-msgstr ""
+msgstr "i brendshëm nga nuk çdo nga."
 
 #: src/cong-file-open.c:73
+#, fuzzy
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
-msgstr ""
+msgstr "Ti detyroje ngarkoje nga në Detyro rezultatet nuk."
 
 #: src/cong-file-open.c:74
 msgid "Force"
@@ -1244,8 +1326,9 @@ msgid "Conglomerate cannot print \"%s\""
 msgstr "Conglomerate nuk mund të printojë \"%s\""
 
 #: src/cong-file-print.c:334
+#, fuzzy
 msgid "None of Conglomerate's plugins know how to print files of that type."
-msgstr ""
+msgstr "Asnjë nga printo nga lloji."
 
 #: src/cong-file-properties.c:105
 msgid "Yes"
@@ -1264,15 +1347,17 @@ msgid "_Remove this DTD"
 msgstr "Fshi këtë DTD"
 
 #: src/cong-file-properties.c:190
+#, fuzzy
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
-msgstr ""
+msgstr "nuk i jashtëm DTD është në DTD në."
 
 #: src/cong-file-properties.c:199
+#, fuzzy
 msgid "No External Subset"
-msgstr ""
+msgstr "Jo"
 
 #: src/cong-file-properties.c:201 src/plugin-validate.c:171
 msgid "_Add a DTD"
@@ -1307,65 +1392,78 @@ msgid "Delete character"
 msgstr "Fshi gërmën"
 
 #: src/cong-location.c:1060
+#, fuzzy
 msgid "Calculating previous page"
-msgstr ""
+msgstr "paraardhësja faqe"
 
 #: src/cong-location.c:1083
+#, fuzzy
 msgid "Calculating next page"
-msgstr ""
+msgstr "në vazhdim faqe"
 
 #: src/cong-menus.c:114 src/cong-menus.c:167 src/cong-menus.c:201
+#, fuzzy
 msgid "The selected menu item has not yet been implemented."
-msgstr ""
+msgstr "menuja element nuk."
 
 #: src/cong-menus.c:467
+#, fuzzy
 msgid "Conglomerate cannot open the result of the transformation"
-msgstr ""
+msgstr "hap nga"
 
 #: src/cong-menus.c:532 src/cong-plugin.c:677
 #, c-format
+#, fuzzy
 msgid "There was a problem reading the stylesheet file \"%s\""
-msgstr ""
+msgstr "a"
 
 #: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:680
 #: src/cong-plugin.c:710
+#, fuzzy
 msgid "Conglomerate could not transform the document"
-msgstr ""
+msgstr "nuk"
 
 #: src/cong-menus.c:556 src/cong-plugin.c:707
+#, fuzzy
 msgid "There was a problem applying the stylesheet file"
-msgstr ""
+msgstr "a"
 
 #: src/cong-menus.c:1117
+#, fuzzy
 msgid "Test Progress Checklist"
-msgstr ""
+msgstr "Prova Progresi Lista zgjedhjes"
 
 #: src/cong-menus.c:1121
 #, c-format
+#, fuzzy
 msgid "This is stage %i"
-msgstr ""
+msgstr "është"
 
 #: src/cong-menus.c:1172
+#, fuzzy
 msgid "Message Log - Conglomerate"
-msgstr ""
+msgstr "Mesazh Log"
 
 #: src/cong-menus.c:1191
+#, fuzzy
 msgid "Signal Log - Conglomerate"
-msgstr ""
+msgstr "Sinjali Log"
 
 #: src/cong-menus.c:1432
 msgid "translator_credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
 #: src/cong-menus.c:1436
+#, fuzzy
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
-msgstr ""
+msgstr "C j C David"
 
 #: src/cong-menus.c:1437
+#, fuzzy
 msgid "Conglomerate: a free, user-friendly XML editor"
-msgstr ""
+msgstr "a përdorues XML"
 
 #. Menus:
 #: src/cong-menus.c:1471
@@ -1382,16 +1480,19 @@ msgstr "_Ndihmë"
 
 #. Sub-menus:
 #: src/cong-menus.c:1480 src/popup.c:1096
+#, fuzzy
 msgid "New sub-element"
-msgstr ""
+msgstr "E re"
 
 #: src/cong-menus.c:1481 src/popup.c:1110
+#, fuzzy
 msgid "New sibling"
-msgstr ""
+msgstr "E re"
 
 #: src/cong-menus.c:1482
+#, fuzzy
 msgid "Remove span tag"
-msgstr ""
+msgstr "Hiq"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1485
@@ -1472,11 +1573,11 @@ msgid "Proper_ties"
 msgstr "Pronësi_të"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1533 src/cong-menus.c:1755
+#: src/cong-menus.c:1533 src/cong-menus.c:1756
 msgid "_Undo"
 msgstr "_Anullo"
 
-#: src/cong-menus.c:1534 src/cong-menus.c:1765
+#: src/cong-menus.c:1534 src/cong-menus.c:1766
 msgid "_Redo"
 msgstr "_Përsërit"
 
@@ -1508,7 +1609,6 @@ msgstr "Gjej para_ardhësen"
 msgid "R_eplace..."
 msgstr "Z_ëvendëso..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1543
 msgid "_Insert..."
 msgstr "_Ndërfut..."
@@ -1518,14 +1618,12 @@ msgstr "_Ndërfut..."
 msgid "View _Source"
 msgstr "/Ndrysho/Shiko _Burimin"
 
-#. GRUT modified this item
-#: src/cong-menus.c:1751
+#: src/cong-menus.c:1752
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Anullo: %s"
 
-#. GRUT modified this item
-#: src/cong-menus.c:1761
+#: src/cong-menus.c:1762
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Përsërit: %s"
@@ -1536,16 +1634,18 @@ msgstr "XPath"
 
 #: src/cong-node-properties-dialog.c:379
 #, c-format
+#, fuzzy
 msgid "Rename attribute \"%s\" as \"%s\""
-msgstr ""
+msgstr "Riemërto"
 
 #: src/cong-node-properties-dialog.c:560
 msgid "Namespace"
 msgstr "Emri hapësirës"
 
 #: src/cong-node-properties-dialog.c:588
+#, fuzzy
 msgid "Raw Attributes"
-msgstr ""
+msgstr "Veçoritë"
 
 #: src/cong-node-properties-dialog.c:621
 msgid "Value"
@@ -1553,8 +1653,9 @@ msgstr "Vlera"
 
 #: src/cong-node-properties-dialog.c:713
 #, c-format
+#, fuzzy
 msgid "Attributes for <tt>%s</tt> elements"
-msgstr ""
+msgstr "Veçoritë për<tt></tt>"
 
 #: src/cong-node-properties-dialog.c:827
 msgid "Text"
@@ -1578,17 +1679,19 @@ msgstr "Një ose më shumë"
 
 #. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
 #: src/cong-node-properties-dialog.c:1013
+#, fuzzy
 msgid "Valid Content"
-msgstr ""
+msgstr "I vlefshëm Përmbajtja"
 
 #. To translators: "content" is a noun; this is XML jargon
 #: src/cong-node-properties-dialog.c:1038
 #, c-format
+#, fuzzy
 msgid "Content model for <tt>%s</tt> elements"
-msgstr ""
+msgstr "Përmbajtja për<tt></tt>"
 
 #: src/cong-node-properties-dialog.c:1185
-#: src/cong-node-properties-dialog.c:1280
+#: src/cong-node-properties-dialog.c:1316
 msgid "DTD"
 msgstr "DTD"
 
@@ -1611,35 +1714,40 @@ msgstr "Numri rreshtit"
 
 #: src/cong-parser-error.c:398
 #, c-format
+#, fuzzy
 msgid "%s cannot understand the internal format of the file."
-msgstr ""
+msgstr "i brendshëm nga."
 
 #: src/cong-parser-error.c:406
+#, fuzzy
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
 "We hope to fix these problems in a later release."
-msgstr ""
+msgstr "nuk SGML Më në a."
 
 #: src/cong-parser-error.c:407
 msgid "Show Details"
 msgstr "Shfaq hollësitë"
 
 #: src/cong-plugin.c:556 src/cong-plugin.c:600
+#, fuzzy
 msgid "Conglomerate could not find display information for the new file"
-msgstr ""
+msgstr "nuk gjej për i ri"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
 #: src/cong-plugin.c:1182
 #, c-format
+#, fuzzy
 msgid "<%s> property dialog"
-msgstr ""
+msgstr "dialog"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
 #: src/cong-plugin.c:1185
 #, c-format
+#, fuzzy
 msgid "Provides a Properties dialog for the <%s> element"
-msgstr ""
+msgstr "Afron a Pronësitë dialog për"
 
 #: src/cong-primary-window.c:382
 msgid "Overview"
@@ -1650,25 +1758,29 @@ msgid "Bookmarks"
 msgstr "Libërshënues"
 
 #: src/cong-primary-window.c:403
+#, fuzzy
 msgid "Raw XML"
-msgstr ""
+msgstr "XML"
 
 #: src/cong-primary-window.c:581 src/cong-primary-window.c:600
+#, fuzzy
 msgid "Welcome to the much-delayed Conglomerate editor."
-msgstr ""
+msgstr "Mirësevini."
 
 #: src/cong-primary-window.c:713
 #, c-format
 msgid "%s (modified) - %s"
 msgstr ""
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1279
+#: src/cong-util.c:368 src/plugin-docbook.c:1301
+#, fuzzy
 msgid "Printing XSL Formatting Objects"
-msgstr ""
+msgstr "Duke printuar Duke formatuar Objekte"
 
 #: src/cong-util.c:412
+#, fuzzy
 msgid "This will eventually be the result from cong_util_print_xslfo"
-msgstr ""
+msgstr "printo"
 
 #: src/cong-util.c:1484
 msgid "(no description available)"
@@ -1684,8 +1796,9 @@ msgstr "Zgjidh një DTD"
 
 #: src/cursor.c:129
 #, c-format
+#, fuzzy
 msgid "Split <%s> element"
-msgstr ""
+msgstr "Shkëpute"
 
 #: src/file.c:106
 msgid "XML Files"
@@ -1700,20 +1813,23 @@ msgid "Admonition"
 msgstr ""
 
 #: src/plugin-admonition.c:77
+#, fuzzy
 msgid "An editor node for visualising tips, warnings, etc"
-msgstr ""
+msgstr "nyje për"
 
 #: src/plugin-arbitrary.c:168
+#, fuzzy
 msgid "The XML document needs a top-level element."
-msgstr ""
+msgstr "XML a sipër niveli."
 
 #: src/plugin-arbitrary.c:270
 msgid "Empty XML Document"
 msgstr "Dokument XML bosh"
 
 #: src/plugin-arbitrary.c:271
+#, fuzzy
 msgid "Create an empty XML document of an arbitrary type."
-msgstr ""
+msgstr "Krijo XML nga lloji."
 
 #: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:453
 msgid "Cleanup XML Source"
@@ -1721,24 +1837,27 @@ msgstr "Pastro burimin XML"
 
 #: src/plugin-cleanup-source.c:454 src/plugin-cleanup-source.c:457
 #: src/plugin-cleanup-source.c:458
+#, fuzzy
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
-msgstr ""
+msgstr "sipër XML nga është në a kodi."
 
 #: src/plugin-cleanup-source.c:456
 msgid "_Clean the XML Source"
 msgstr "_Pastro burimin XML"
 
 #: src/plugin-convert-case.c:125
+#, fuzzy
 msgid "Export as \"lower case\" XML"
-msgstr ""
+msgstr "Eksporto XML"
 
 #: src/plugin-convert-case.c:126
+#, fuzzy
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
-msgstr ""
+msgstr "XML dhe në me SGML."
 
 #: src/plugin-docbook.c:220
 #, fuzzy
@@ -1746,384 +1865,462 @@ msgid "Untitled section"
 msgstr "Libër pa titull"
 
 #: src/plugin-docbook.c:227
+#, fuzzy
 msgid "Text of the article goes here"
-msgstr ""
+msgstr "Teksti nga"
 
 #: src/plugin-docbook.c:246
 msgid "Untitled Article"
 msgstr "Artikull pa titull"
 
 #: src/plugin-docbook.c:296
-msgid "Text of the first chapter goes here"
-msgstr ""
+#, fuzzy
+msgid "Untitled chapter"
+msgstr "Libër pa titull"
 
-#: src/plugin-docbook.c:315
+#: src/plugin-docbook.c:303
+#, fuzzy
+msgid "Text of the first chapter goes here"
+msgstr "Teksti nga i pari"
+
+#: src/plugin-docbook.c:322
 msgid "Untitled Book"
 msgstr "Libër pa titull"
 
-#: src/plugin-docbook.c:370
-msgid "Untitled Set of Documents"
-msgstr ""
+#: src/plugin-docbook.c:373
+#, fuzzy
+msgid "Untitled book"
+msgstr "Libër pa titull"
 
-#: src/plugin-docbook.c:1147
+#: src/plugin-docbook.c:392
+#, fuzzy
+msgid "Untitled Set of Documents"
+msgstr "Pa titull nga Dokumente"
+
+#: src/plugin-docbook.c:1169
 msgid "Exporting PDF file"
 msgstr "Eksporto file PDF"
 
-#: src/plugin-docbook.c:1151 src/plugin-docbook.c:1277
+#: src/plugin-docbook.c:1173 src/plugin-docbook.c:1299
+#, fuzzy
 msgid "Transforming DocBook into XSL Formatting Objects"
-msgstr ""
+msgstr "Duke formatuar Objekte"
 
-#: src/plugin-docbook.c:1153
+#: src/plugin-docbook.c:1175
+#, fuzzy
 msgid "Laying out XSL Formatting Objects as a PDF file"
-msgstr ""
+msgstr "Duke formatuar Objekte a"
 
-#: src/plugin-docbook.c:1168 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1190 src/plugin-fo.c:98
+#, fuzzy
 msgid "Converting XSL Formatting Objects to PDF"
-msgstr ""
+msgstr "Duke formatuar Objekte"
 
-#: src/plugin-docbook.c:1273
+#: src/plugin-docbook.c:1295
 msgid "Printing DocBook file"
 msgstr "Duke printuar file DocBook"
 
-#: src/plugin-docbook.c:1672
+#: src/plugin-docbook.c:1694
 msgid "DocBook Article"
 msgstr "Artikull DocBook"
 
-#: src/plugin-docbook.c:1673
+#: src/plugin-docbook.c:1695
+#, fuzzy
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
-msgstr ""
+msgstr "Krijo për a a"
 
-#: src/plugin-docbook.c:1680
+#: src/plugin-docbook.c:1702
 msgid "DocBook Book"
 msgstr "Libër DocBook"
 
-#: src/plugin-docbook.c:1681
+#: src/plugin-docbook.c:1703
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Krijo një libër, duke përdorur formatin \"DocBook\""
 
-#: src/plugin-docbook.c:1688
+#: src/plugin-docbook.c:1710
 msgid "DocBook Set"
 msgstr ""
 
-#: src/plugin-docbook.c:1689
+#: src/plugin-docbook.c:1711
+#, fuzzy
 msgid "Create a set of related books, using the \"DocBook\" format"
-msgstr ""
+msgstr "Krijo a nga librat"
 
-#: src/plugin-docbook.c:1697
+#: src/plugin-docbook.c:1719
+#, fuzzy
 msgid "Import text as a DocBook article"
-msgstr ""
+msgstr "Importo tekst a"
 
-#: src/plugin-docbook.c:1698
+#: src/plugin-docbook.c:1720
+#, fuzzy
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
-msgstr ""
+msgstr "Importo a tekst."
 
-#: src/plugin-docbook.c:1716
+#: src/plugin-docbook.c:1738
+#, fuzzy
 msgid "Export DocBook as HTML"
-msgstr ""
+msgstr "Eksporto HTML"
 
-#: src/plugin-docbook.c:1717
+#: src/plugin-docbook.c:1739
+#, fuzzy
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
-msgstr ""
+msgstr "a"
 
-#: src/plugin-docbook.c:1725
+#: src/plugin-docbook.c:1747
+#, fuzzy
 msgid "Export DocBook as PDF"
-msgstr ""
+msgstr "Eksporto"
 
-#: src/plugin-docbook.c:1726
+#: src/plugin-docbook.c:1748
+#, fuzzy
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
-msgstr ""
+msgstr "a"
 
-#: src/plugin-docbook.c:1734
+#: src/plugin-docbook.c:1756
+#, fuzzy
 msgid "Export DocBook as XSL:FO"
-msgstr ""
+msgstr "Eksporto"
 
-#: src/plugin-docbook.c:1735
+#: src/plugin-docbook.c:1757
+#, fuzzy
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
-msgstr ""
+msgstr "a data"
 
-#: src/plugin-docbook.c:1744
+#: src/plugin-docbook.c:1766
+#, fuzzy
 msgid "Print DocBook"
-msgstr ""
+msgstr "Printo"
 
-#: src/plugin-docbook.c:1753
+#: src/plugin-docbook.c:1775
+#, fuzzy
 msgid "Generic DocBook property dialog"
-msgstr ""
+msgstr "I përgjithshëm dialog"
 
-#: src/plugin-docbook.c:1754
+#: src/plugin-docbook.c:1776
+#, fuzzy
 msgid "Provides a Properties dialog for most DocBook nodes"
-msgstr ""
+msgstr "Afron a Pronësitë dialog për"
 
-#: src/plugin-docbook.c:1772 src/plugin-docbook.c:1775 src/plugin-html.c:137
+#: src/plugin-docbook.c:1794 src/plugin-docbook.c:1797 src/plugin-html.c:137
 #: src/plugin-html.c:140
+#, fuzzy
 msgid "Open Link in Browser"
-msgstr ""
+msgstr "Hap Lidhje në Shfletuesi"
 
-#: src/plugin-docbook.c:1784
+#: src/plugin-docbook.c:1806
+#, fuzzy
 msgid "Promote Section"
-msgstr ""
+msgstr "Seksioni"
 
-#: src/plugin-docbook.c:1785
+#: src/plugin-docbook.c:1807
+#, fuzzy
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
-msgstr ""
+msgstr "a a niveli"
 
-#: src/plugin-docbook.c:1787 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1809 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr ""
 
-#: src/plugin-docbook.c:1788 src/plugin-docbook.c:1789
-msgid ""
-"Promote the section to a higher organisational level within the document"
-msgstr ""
+#: src/plugin-docbook.c:1810 src/plugin-docbook.c:1811
+#, fuzzy
+msgid "Promote the section to a higher organisational level within the document"
+msgstr "a niveli"
 
-#: src/plugin-docbook.c:1795
+#: src/plugin-docbook.c:1817
+#, fuzzy
 msgid "Demote Section"
-msgstr ""
+msgstr "Seksioni"
 
-#: src/plugin-docbook.c:1796
-msgid ""
-"Demotes a DocBook section to a lower organisational level within the document"
-msgstr ""
+#: src/plugin-docbook.c:1818
+#, fuzzy
+msgid "Demotes a DocBook section to a lower organisational level within the document"
+msgstr "a a niveli"
 
-#: src/plugin-docbook.c:1798 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1820 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr ""
 
-#: src/plugin-docbook.c:1799 src/plugin-docbook.c:1800
+#: src/plugin-docbook.c:1821 src/plugin-docbook.c:1822
+#, fuzzy
 msgid "Demote the section to a lower organisational level within the document"
-msgstr ""
+msgstr "a niveli"
 
 #: src/plugin-dtd.c:93
 #, c-format
+#, fuzzy
 msgid "Autogenerated document type based on %s"
-msgstr ""
+msgstr "I auto krijuar lloji në"
 
 #: src/plugin-dtd.c:94
 #, c-format
-msgid ""
-"This Conglomerate display specification was automatically generated from %s"
+msgid "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 
 #: src/plugin-dtd.c:215
+#, fuzzy
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr ""
+msgstr "DTD a Shfaq"
 
 #: src/plugin-dtd.c:216
+#, fuzzy
 msgid "Import a DTD file, creating a Conglomerate display specification file."
-msgstr ""
+msgstr "Importo a DTD a."
 
 #: src/plugin-dtd.c:224
+#, fuzzy
 msgid "Convert DTD into a Relax NG schema"
-msgstr ""
+msgstr "DTD a"
 
 #: src/plugin-dtd.c:225
+#, fuzzy
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
-msgstr ""
+msgstr "Importo a DTD a."
 
 #: src/plugin-dtd.c:233
+#, fuzzy
 msgid "Convert DTD into W3C XML Schema"
-msgstr ""
+msgstr "DTD XML"
 
 #: src/plugin-dtd.c:234
+#, fuzzy
 msgid "Import a DTD file, converting it into a W3C XML Schema."
-msgstr ""
+msgstr "Importo a DTD a XML."
 
 #: src/plugin-dtd.c:242
+#, fuzzy
 msgid "Convert DTD into a Schematron file"
-msgstr ""
+msgstr "DTD a"
 
 #: src/plugin-dtd.c:243
+#, fuzzy
 msgid "Import a DTD file, converting it into a Schematron Schema."
-msgstr ""
+msgstr "Importo a DTD a."
 
 #: src/plugin-dtd.c:251
+#, fuzzy
 msgid "Convert DTD into an Examplotron file"
-msgstr ""
+msgstr "DTD"
 
 #: src/plugin-dtd.c:252
+#, fuzzy
 msgid "Import a DTD file, converting it into an Examplotron Schema."
-msgstr ""
+msgstr "Importo a DTD."
 
 #: src/plugin-fo.c:153
+#, fuzzy
 msgid "Export XSL-FO as PDF"
-msgstr ""
+msgstr "Eksporto"
 
 #: src/plugin-fo.c:154
+#, fuzzy
 msgid "Generate a PDF file from the XSL:FO information"
-msgstr ""
+msgstr "a"
 
 #: src/plugin-fo.c:163
+#, fuzzy
 msgid "Print XSL:FO"
-msgstr ""
+msgstr "Printo"
 
 #: src/plugin-lists.c:76
+#, fuzzy
 msgid "List Member Element"
-msgstr ""
+msgstr "Lista Anëtar Elementi"
 
 #: src/plugin-lists.c:77
+#, fuzzy
 msgid "An editor node for visualising a member of a list"
-msgstr ""
+msgstr "nyje për a nga a lista"
 
 #: src/plugin-paragraph.c:67
+#, fuzzy
 msgid "Paragraph"
-msgstr ""
+msgstr "Paragrafi"
 
 #: src/plugin-paragraph.c:68
+#, fuzzy
 msgid "An editor node for visualising a paragraph"
-msgstr ""
+msgstr "nyje për a paragraf"
 
 #: src/plugin-random.c:155
+#, fuzzy
 msgid "What kind of random XML document would you like to create?"
-msgstr ""
+msgstr "Çfarë nga XML?"
 
 #: src/plugin-random.c:682
 msgid "Random Document"
 msgstr "Dokument i rastit"
 
 #: src/plugin-random.c:683
+#, fuzzy
 msgid "Create an XML document containing random content."
-msgstr ""
+msgstr "Krijo XML përmbajtja."
 
 #: src/plugin-relaxng.c:128
+#, fuzzy
 msgid "Compact Syntax View"
-msgstr ""
+msgstr "Paraqitja"
 
 #: src/plugin-relaxng.c:146 src/plugin-relaxng.c:149
+#, fuzzy
 msgid "View as Compact RELAX NG"
-msgstr ""
+msgstr "Paraqitja"
 
 #: src/plugin-relaxng.c:147
+#, fuzzy
 msgid "Display the compact syntax form of a RELAX NG schema"
-msgstr ""
+msgstr "Shfaq nga a"
 
 #: src/plugin-save-dispspec.c:149
+#, fuzzy
 msgid "Dump Display Spec"
-msgstr ""
+msgstr "Shfaq"
 
 #: src/plugin-save-dispspec.c:150 src/plugin-save-dispspec.c:153
 #: src/plugin-save-dispspec.c:154
+#, fuzzy
 msgid ""
 "Writes the current display spec into a display spec xml file. This file can "
 "then be customized by the conglomerate user"
-msgstr ""
+msgstr "a nga përdorues"
 
 #: src/plugin-save-dispspec.c:152
+#, fuzzy
 msgid "_Dump Display Spec"
-msgstr ""
+msgstr "Shfaq"
 
 #: src/plugin-save-dispspec.c:160
+#, fuzzy
 msgid "Edit Display Spec"
-msgstr ""
+msgstr "Ndrysho Shfaq"
 
 #: src/plugin-save-dispspec.c:161 src/plugin-save-dispspec.c:164
 #: src/plugin-save-dispspec.c:165
+#, fuzzy
 msgid "Opens the current display spec as a conglomerate document."
-msgstr ""
+msgstr "a."
 
 #: src/plugin-save-dispspec.c:163
+#, fuzzy
 msgid "_Edit Display Spec"
-msgstr ""
+msgstr "Ndrysho Shfaq"
 
 #: src/plugin-sgml.c:43
 #, c-format
+#, fuzzy
 msgid "Conglomerate could not import the file \"%s\""
-msgstr ""
+msgstr "nuk importo"
 
 #: src/plugin-sgml.c:135
 msgid "Attempting to run the sgml2xml tool"
 msgstr ""
 
 #: src/plugin-sgml.c:190
+#, fuzzy
 msgid "Importing SGML"
-msgstr ""
+msgstr "SGML"
 
 #: src/plugin-sgml.c:209
+#, fuzzy
 msgid "Import SGML"
-msgstr ""
+msgstr "Importo SGML"
 
 #: src/plugin-sgml.c:210
+#, fuzzy
 msgid "Import an SGML file, converting to XML."
-msgstr ""
+msgstr "Importo SGML XML."
 
 #: src/plugin-tests.c:64
+#, fuzzy
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
 "replaced with some useful options"
-msgstr ""
+msgstr "është a kalendari kontrolli a dhe me"
 
 #: src/plugin-tests.c:142 src/plugin-tests.c:221
 #, c-format
+#, fuzzy
 msgid "Unicode Characters 0x%04X-0x%04X"
-msgstr ""
+msgstr "Unicode Simbolet"
 
 #: src/plugin-tests.c:359
 msgid "Unicode Character Reference"
 msgstr "Riferimenti i simbolit Unicode"
 
 #: src/plugin-tests.c:360
+#, fuzzy
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
-msgstr ""
+msgstr "Krijo a tabelë a nga Unicode a"
 
 #: src/plugin-validate.c:163
 #, c-format
+#, fuzzy
 msgid "The document \"%s\" cannot be checked for validity."
-msgstr ""
+msgstr "për."
 
 #: src/plugin-validate.c:170
-msgid ""
-"You can fix this by adding a Document Type Declaration (DTD) to the document"
-msgstr ""
+#, fuzzy
+msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr "Ti nga a Dokument Lloji DTD"
 
 #: src/plugin-validate.c:215
 #, c-format
+#, fuzzy
 msgid "The document \"%s\" is valid."
-msgstr ""
+msgstr "është."
 
 #: src/plugin-validate.c:249
+#, fuzzy
 msgid "Validate Document"
-msgstr ""
+msgstr "Dokument"
 
 #: src/plugin-validate.c:250 src/plugin-validate.c:253
 #: src/plugin-validate.c:254
+#, fuzzy
 msgid ""
 "Checks to see if the document is \"valid\" i.e. that it matches a set of "
 "rules given by the corresponding document type or schema"
-msgstr ""
+msgstr "është e a nga nga lloji"
 
 #: src/plugin-validate.c:252
+#, fuzzy
 msgid "_Validate Document"
-msgstr ""
+msgstr "Dokument"
 
 #: src/plugin-website.c:465
 msgid "Generating website"
 msgstr ""
 
 #: src/plugin-website.c:472
+#, fuzzy
 msgid "Finished generating website."
-msgstr ""
+msgstr "Përfundoi."
 
 #: src/plugin-website.c:477
+#, fuzzy
 msgid "Conglomerate did not finish generating the website"
-msgstr ""
+msgstr "nuk"
 
 #: src/plugin-website.c:478
+#, fuzzy
 msgid "One of the stages reported an error."
-msgstr ""
+msgstr "Një nga gabim."
 
 #: src/plugin-website.c:479
+#, fuzzy
 msgid "Click on the \"Details\" button for more information"
-msgstr ""
+msgstr "në Hollësi për tjetër"
 
 #: src/plugin-website.c:480
 msgid "_Details"
@@ -2134,42 +2331,48 @@ msgid "Generate website"
 msgstr ""
 
 #: src/plugin-website.c:509 src/plugin-website.c:512 src/plugin-website.c:513
+#, fuzzy
 msgid "Generates a collection of HTML pages from the website XML description"
-msgstr ""
+msgstr "a nga HTML faqe XML përshkrimi"
 
 #: src/plugin-website.c:511
 msgid "Generate _Website"
 msgstr ""
 
 #: src/plugin-xsl.c:324
+#, fuzzy
 msgid "XSL Template Element"
-msgstr ""
+msgstr "Shabllon Elementi"
 
 #: src/plugin-xsl.c:325
+#, fuzzy
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr ""
+msgstr "për në"
 
 #: src/popup.c:489
 #, c-format
+#, fuzzy
 msgid "Apply span tag: %s"
-msgstr ""
+msgstr "Apliko"
 
 #: src/popup.c:560
+#, fuzzy
 msgid "Remove Span Tag"
-msgstr ""
+msgstr "Hiq Tag"
 
 #: src/popup.c:605
+#, fuzzy
 msgid "Convert to a comment"
-msgstr ""
+msgstr "a komenti"
 
 #: src/popup.c:624 src/tree.c:521
 msgid "Uncomment"
 msgstr ""
 
 #: src/popup.c:625
-msgid ""
-"Convert a comment containing XML source code into the corresponding code"
-msgstr ""
+#, fuzzy
+msgid "Convert a comment containing XML source code into the corresponding code"
+msgstr "a komenti XML kodi kodi"
 
 #: src/popup.c:705 src/popup.c:1022
 msgid "_Properties"
@@ -2180,120 +2383,83 @@ msgid "_Cut"
 msgstr "_Preje"
 
 #: src/popup.c:965
+#, fuzzy
 msgid "Other XML element..."
-msgstr ""
+msgstr "Tjetër XML."
 
 #: src/popup.c:1058
+#, fuzzy
 msgid "Paste into"
-msgstr ""
+msgstr "Ngjite"
 
 #: src/popup.c:1068
+#, fuzzy
 msgid "Paste before"
-msgstr ""
+msgstr "Ngjite përpara"
 
 #: src/popup.c:1078
+#, fuzzy
 msgid "Paste after"
-msgstr ""
+msgstr "Ngjite mbas"
 
 #: src/tree.c:104 src/tree.c:136
 #, c-format
+#, fuzzy
 msgid "Insert sibling: %s"
-msgstr ""
+msgstr "Fut"
 
 #: src/tree.c:188 src/tree.c:216
 #, c-format
+#, fuzzy
 msgid "Insert child: %s"
-msgstr ""
+msgstr "Fut fëmi (sekondar, i dytë)"
 
 #: src/tree.c:311 src/xmledit.c:51
 msgid "Cut"
 msgstr "Preje"
 
 #: src/tree.c:469
+#, fuzzy
 msgid "Convert to comment"
-msgstr ""
+msgstr "komenti"
 
 #. create description for dialog
 #: src/xmldata.c:467
 #, c-format
+#, fuzzy
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
-msgstr ""
+msgstr "a fëmi (sekondar, i dytë) nga fëmi (sekondar, i dytë)."
 
 #. FIXME: put in a better description for the name
 #. select a dialog element
 #: src/xmldata.c:472
+#, fuzzy
 msgid "Required Children Choices"
-msgstr ""
+msgstr "Kërkohet"
 
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Ngjite"
 
 #: src/xmledit.c:252
+#, fuzzy
 msgid "Paste Under"
-msgstr ""
+msgstr "Ngjite"
 
 #: src/xmledit.c:303
+#, fuzzy
 msgid "Paste Before"
-msgstr ""
+msgstr "Ngjite"
 
 #: src/xmledit.c:353
+#, fuzzy
 msgid "Paste After"
-msgstr ""
+msgstr "Ngjite"
 
 #: src/xmledit.c:394
+#, fuzzy
 msgid "Source View - Conglomerate"
-msgstr ""
+msgstr "Burimi Paraqitja"
 
-#~ msgid "/File/"
-#~ msgstr "/File/"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/File/Ruaje _Si..."
-
-#~ msgid "/File/_Print..."
-#~ msgstr "/File/_Printo..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/File/Pronësi_të"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Ndrysho/_Anullo"
-
-#~ msgid "/Edit/"
-#~ msgstr "/Ndrysho/"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Ndrysho/Pre_je"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Ndrysho/_Kopjo"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Ndrysho/_Ngjite"
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Ndrysho/_Gjej në vazhdim"
-
-#~ msgid "Open document"
-#~ msgstr "Hap dikumentin"
-
-#~ msgid "New document"
-#~ msgstr "Dokument i ri"
-
-#~ msgid "Save document"
-#~ msgstr "Ruaj dokumentin"
-
-#~ msgid "Delete this item"
-#~ msgstr "Elemino këtë objekt"
-
-#~ msgid "/Debug"
-#~ msgstr "/Debug"
-
-#~ msgid "/Debug/DTD"
-#~ msgstr "Debug/DTD"
-
-#~ msgid "/Debug/Dialog"
-#~ msgstr "/Debug/Dialogu"
