@@ -47,6 +47,8 @@ update_gtkdoc_changelog(){
 }
 
 ######################################
+echo script currently disabled
+exit 1
 
 uss/mkgtkdoctypes $SOURCE_DIR $DEST_DIR/$CONGLOMERATE_TYPES 
 

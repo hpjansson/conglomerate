@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo script currently disabled
+exit 1
+
 # source dir = path to the header files
 # SOURCE_DIR=../src
 SOURCE_DIR=$1

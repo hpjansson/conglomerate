@@ -1,3 +1,9 @@
+2004-10-27 Geert Stappers  <stappers@stappers.nl>
+
+	* mkgtkdoc*
+
+	The various mkgtkdoc scripts disabled.
+
 2004-08-13 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* mkpotfilesin :
