@@ -292,6 +292,48 @@ CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
 	return ds;	
 }
 
+
+
+static void
+generate_elements_from_dtd (void *payload, void *ds, xmlChar * name)
+{
+	xmlElementPtr element;
+	CongDispspec *dispspec;
+	CongDispspecElement *ds_element;
+
+	dispspec = (CongDispspec *) ds;
+	element = (xmlElementPtr) payload;
+
+	g_assert (dispspec);
+	g_assert (element);
+
+	ds_element = cong_dispspec_element_new (element->prefix,
+						name,
+						CONG_ELEMENT_TYPE_STRUCTURAL);
+	cong_dispspec_add_element (dispspec, ds_element);
+
+#if 0
+#error
+
+	if (!element->content || can_contain_pcdata (element->content))
+	{
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
+									     CONG_ELEMENT_TYPE_SPAN);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+	else
+	{
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
+									     CONG_ELEMENT_TYPE_STRUCTURAL);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+#endif
+}
+
 /* Constructors that try to generate from another format: */
 CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
 						   const gchar *name, 
@@ -311,11 +353,8 @@ CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
 		ds->desc = g_strdup(description);
 	}
 
-
 	/* Traverse the DTD; building stuff */
-	{
-		/* FIXME */
-	}
+	xmlHashScan (dtd->elements, generate_elements_from_dtd, ds);
 
 	return ds;
 }
@@ -334,29 +373,33 @@ cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc)
 
 void cong_dispspec_delete (CongDispspec *dispspec)
 {
-	CongDispspecElement* element;
+	CongDispspecElement *element;
+	CongDispspecElement *next;
 
 	g_return_if_fail(dispspec);
 
+	/* FIXME: is this causing heap corruption? */
+#if 0
 	/* Destroy elements: */
-	for (element = dispspec->first; element; element=element->next) {
-		/* FIXME:  unimplemented */
-		g_assert(0);
+	for (element = dispspec->first; element; element=next) {
+		next = element->next;
+		cong_dispspec_element_destroy (element);
 	}
 
 	/* Destroy search tree: */
-	g_assert(dispspec->search_tree);
-	g_tree_destroy(dispspec->search_tree);
+	g_assert (dispspec->search_tree);
+	g_tree_destroy (dispspec->search_tree);
 		
 	if (dispspec->name) {
-		g_free(dispspec->name);
+		g_free (dispspec->name);
 	}
 	if (dispspec->desc) {
-		g_free(dispspec->desc);
-	}
+		g_free (dispspec->desc);
+	} 
 	if (dispspec->icon) {
-		g_object_unref(G_OBJECT(dispspec->icon));
+		g_object_unref (G_OBJECT(dispspec->icon));
 	}
+#endif
 }
 
 xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
@@ -879,6 +922,7 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 		g_free (element->property_dialog_plugin_id);
 	}
 
+	g_free (element);
 	/* FIXME:  do we need to remove from the list? */
 }
 
@@ -1267,20 +1311,20 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 	
 	if (dispspec->name) {
 		
-		xmlAddChild(metadata, 
-			    xmlNewDocRawNode(xml_doc,
-					     NULL,
-					     "name",
-					     dispspec->name)
-			    ); 
+		xmlAddChild (metadata, 
+			     xmlNewDocRawNode (xml_doc,
+					       NULL,
+					       "name",
+					       dispspec->name)
+			     ); 
 	}
 	if (dispspec->desc) {
-		xmlAddChild(metadata, 
-			    xmlNewDocRawNode(xml_doc,
-					     NULL,
-					     "description",
-					     dispspec->desc)
-			    );
+		xmlAddChild (metadata, 
+			     xmlNewDocRawNode (xml_doc,
+					       NULL,
+					       "description",
+					       dispspec->desc)
+			     );
 	}
 	
 	/* FIXME: we can't yet save the icon name */
@@ -1296,17 +1340,45 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 	g_assert(element_list);
 	g_assert(element);
 
-	element_node = xmlNewDocNode(xml_doc,
-				     NULL,
-				     "element",
-				     NULL);			
-	xmlAddChild(element_list, element_node);
+	element_node = xmlNewDocNode (xml_doc,
+				      NULL,
+				      "element",
+				      NULL);			
+	xmlAddChild (element_list, element_node);
 
-#if 0
+	if (element->xmlns) {
+		xmlSetProp (element_node, "ns", element->xmlns);
+	}
+
+	g_assert (element->tagname);
+	xmlSetProp (element_node, "name", element->tagname);
+
+	/* Handle name: */
+	if (element->username)
+	{
+		CongNodePtr name_node = xmlNewDocNode (xml_doc,
+						       NULL,
+						       "name",
+						       element->username
+						       );
+		xmlSetProp (element_node, "locale", "en");
+
+		xmlAddChild (element_node, name_node);		
+	}
+	
+	/* Handle short-desc: */
+	if (element->short_desc)
+	{
+		CongNodePtr desc_node = xmlNewDocNode (xml_doc,
+						       NULL,
+						       "short-desc",
+						       element->short_desc
+						       );
+		xmlAddChild (element_node, desc_node);		
+	}
+
 	/* FIXME:  Need to store these: */
 #if 0
-	gchar *username;
-	gchar *short_desc;
 	GdkPixbuf *icon16;
 
 	enum CongElementType type;
@@ -1324,21 +1396,6 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 
 	gchar *editor_plugin_id;
 	gchar *property_dialog_plugin_id;
-#endif
-
-	if (element->xmlns) {
-		xmlSetProp(element_node, "ns", element->xmls);
-	}
-
-	g_assert (element->tagname);
-	xmlSetProp(element_node, "name", element->tagname);
-
-#else
-	/* Attributes: name, type */
-	xmlAddChild(element_node,
-		    xmlNewDocComment (xml_doc,
-				      "FIXME: need to add node name and type here")
-		    );
 #endif
 }
 
