@@ -1,0 +1,35 @@
+What is to do at a release:
+===========================
+
+summary:
+--------
+
+debian/patches/release 4.3.2-1
+
+vi NEWS
+
+dpkg-buildpackages -uc -us
+check and double check
+debrsign 
+upload
+
+background information:
+-----------------------
+
+The tarball is shipped with the debian directory,
+so we have also the script debian/patches/release,
+which does:
+
+* modify debian/changelog
+ - update debian version
+ - change UNRELEASED in unstable
+ - setting time stamp
+
+* modify debian/control
+ - removes the debug package
+
+* modify debian/rules
+ - removal the debug package support
+ - enable stripping
+
+
