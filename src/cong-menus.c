@@ -1476,6 +1476,9 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 	{ "ContextMenu", NULL, ("Context Menu") },
 	{ "HelpMenu", NULL, N_("_Help") },
 
+	/* Sub-menus: */
+	{ "NewSubelement", NULL, N_("New sub-element") },
+	{ "NewSibling", NULL, N_("New sibling") },
 
 	/* Actions found in File menu: */
 	{ "New", GTK_STOCK_NEW, N_("_New..."), "<control>N", NULL, G_CALLBACK (action_callback_file_new) },
@@ -1557,6 +1560,8 @@ static GtkActionEntry primary_window_document_action_entries[] = {
 	{ "DebugCommandTest", NULL, "Command Test", NULL, NULL, G_CALLBACK (action_callback_debug_command_test) },
 	{ "DebugSpell", NULL, "Spell", NULL, NULL, G_CALLBACK (action_callback_debug_gnome_spell) },
 #endif
+
+
 };
 
 /* we name the separators as a workaround for a bug in GTK 2.4.0; see http://mail.gnome.org/archives/gtk-app-devel-list/2004-June/msg00271.html */
@@ -1608,6 +1613,8 @@ static const gchar *ui_description =
 "      <menuitem action='ViewSource'/>"
 "      <separator name='EditSep11'/>"
 "      <menuitem action='Preferences'/>"
+"      <menu action='NewSubelement'/>"
+"      <menu action='NewSibling'/>"
 "    </menu>"
 #if ENABLE_DEBUG_MENU
 "    <menu action='DebugMenu'>"
@@ -1645,6 +1652,8 @@ static const gchar *ui_description =
 "      <menuitem action='Cut'/>"
 "      <menuitem action='Copy'/>"
 "      <separator name='ContextSep1'/>"
+"      <menu action='NewSubelement'/>"
+"      <menu action='NewSibling'/>"
 "  </popup>"
 "  <toolbar name='MainToolBar'>"
 "      <toolitem action='New'/>"

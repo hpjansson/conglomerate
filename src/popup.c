@@ -948,8 +948,6 @@ structural_tag_popup_init (const gchar *label,
 			   GList *list_of_element_desc,
 			   CongPrimaryWindow *primary_window)
 {
-	GtkAction *popup;
-	GList *current;
 	gchar *submenu_ui_path;
 
 	g_return_if_fail (callback);
@@ -957,18 +955,9 @@ structural_tag_popup_init (const gchar *label,
 
 	/* use the action_prefix to name the submenu: */
 	submenu_ui_path = make_submenu_ui_path (action_prefix);
-	popup = cong_action_new (action_prefix,
-				 label,
-				 NULL, /* FIXME:  ought to have a tooltip */
-				 NULL); /* FIXME:  ought to have an icon */
-	
-	cong_menu_add_action (primary_window,
-			      UI_PATH_CONTEXT_MENU,
-			      popup,
-			      GTK_UI_MANAGER_MENU);
-
 
 	if (list_of_element_desc) {
+		GList *current;
 		CongDispspec *ds;
 
 		ds = cong_document_get_default_dispspec (doc);
@@ -1012,9 +1001,6 @@ structural_tag_popup_init (const gchar *label,
 					      GTK_UI_MANAGER_MENUITEM);
 		
 		}
-	} else {
-		cong_action_set_sensitive (popup,
-					   FALSE);
 	}
 
 	g_free (submenu_ui_path);
