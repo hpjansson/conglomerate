@@ -36,6 +36,10 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#define LOG_RANDOM1(x)       (g_message ((x)))
+#define LOG_RANDOM2(x, a)    (g_message ((x), (a)))
+#define LOG_RANDOM3(x, a, b) (g_message ((x), (a), (b)))
+
 struct RandomCreationInfo
 {
 	CongDispspec *dispspec;
@@ -180,6 +184,30 @@ generate_count_for_ocur (struct RandomCreationInfo *rci,
 	
 }
 
+#if 0
+gchar*
+cong_dtd_generate_source_for_content (xmlElementContentPtr content)
+{
+	g_return_val_if_fail (content, NULL);
+
+	switch (ocur) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_ONCE:
+		return 1;
+
+	case XML_ELEMENT_CONTENT_OPT:
+		return generate_bool_for_opt (rci)?1:0;
+
+	case XML_ELEMENT_CONTENT_MULT:
+		return generate_count_for_mult (rci);
+
+	case XML_ELEMENT_CONTENT_PLUS:
+		return generate_count_for_plus (rci);
+	}
+	
+}
+#endif
+
 static void
 populate_element_from_content (struct RandomCreationInfo *rci,
 			       xmlDocPtr xml_doc,
@@ -189,59 +217,73 @@ populate_element_from_content (struct RandomCreationInfo *rci,
 {
 	g_assert (content);
 
-	switch (content->type) {
-	default: g_assert_not_reached ();
-	case XML_ELEMENT_CONTENT_PCDATA:
-		{
-			xmlNodePtr child_node = xmlNewDocText (xml_doc,
-							       "the quick brown fox jumps over the lazy dog");
-			xmlAddChild (xml_node, 
-				     child_node);
-		}
-		break;
-	case XML_ELEMENT_CONTENT_ELEMENT:
-		{
-			xmlNodePtr child_node = xmlNewDocNode (xml_doc,
-							       NULL,
-							       content->name,
-							       ""); /* FIXME: namespace? */
-			xmlAddChild (xml_node, 
-				     child_node);
-			populate_element (rci,
-					  xml_doc,
-					  child_node,
-					  depth+1);
-		}
-		break;
-	case XML_ELEMENT_CONTENT_SEQ:
-		/* Do both c1 and c2 in sequence: */
-		populate_element_from_content (rci,
-					       xml_doc,
-					       xml_node,
-					       depth,
-					       content->c1);
-		populate_element_from_content (rci,
-					       xml_doc,
-					       xml_node,
-					       depth,
-					       content->c2);
-		break;
-	case XML_ELEMENT_CONTENT_OR:
-		/* Do one of c1 or c2: */
-		if (generate_bool_for_opt (rci)) {
+	guint count = generate_count_for_ocur (rci,
+					       content->ocur);
+	gint i;
+	
+#if 0
+	{
+		gchar *frag = cong_dtd_generate_source_for_content (content);
+		g_message ("got count of %i for %s", count, frag);
+		g_free (frag);
+	}
+#endif
+
+	for (i=0;i<count;i++) {	
+		switch (content->type) {
+		default: g_assert_not_reached ();
+		case XML_ELEMENT_CONTENT_PCDATA:
+			{
+				xmlNodePtr child_node = xmlNewDocText (xml_doc,
+								       "the quick brown fox jumps over the lazy dog");
+				xmlAddChild (xml_node, 
+					     child_node);
+			}
+			break;
+		case XML_ELEMENT_CONTENT_ELEMENT:
+			{
+				xmlNodePtr child_node = xmlNewDocNode (xml_doc,
+								       NULL,
+								       content->name,
+								       ""); /* FIXME: namespace? */
+				xmlAddChild (xml_node, 
+					     child_node);
+				populate_element (rci,
+						  xml_doc,
+						  child_node,
+						  depth+1);
+			}
+			break;
+		case XML_ELEMENT_CONTENT_SEQ:
+			/* Do both c1 and c2 in sequence: */
 			populate_element_from_content (rci,
 						       xml_doc,
 						       xml_node,
 						       depth,
 						       content->c1);
-		} else {
 			populate_element_from_content (rci,
 						       xml_doc,
 						       xml_node,
 						       depth,
 						       content->c2);
+			break;
+		case XML_ELEMENT_CONTENT_OR:
+			/* Do one of c1 or c2: */
+			if (generate_bool_for_opt (rci)) {
+				populate_element_from_content (rci,
+							       xml_doc,
+							       xml_node,
+							       depth,
+							       content->c1);
+			} else {
+				populate_element_from_content (rci,
+							       xml_doc,
+							       xml_node,
+							       depth,
+							       content->c2);
+			}
+			break;
 		}
-		break;
 	}
 }
 
@@ -275,18 +317,13 @@ populate_element_from_dtd (struct RandomCreationInfo *rci,
 	}
 
 	if (element->content) {
-		guint count = generate_count_for_ocur (rci,
-						       element->content->ocur);
-		gint i;
-		
-		for (i=0;i<count;i++) {
-			populate_element_from_content (rci,
-						       xml_doc,
-						       xml_node,
-						       depth+1,
-						       element->content);
-		}				
+		populate_element_from_content (rci,
+					       xml_doc,
+					       xml_node,
+					       depth+1,
+					       element->content);
 	}
+
 
 
 	/* FIXME: set up attributes! */
@@ -303,6 +340,8 @@ populate_element (struct RandomCreationInfo *rci,
 	g_assert (rci);
 	g_assert (xml_doc);
 	g_assert (xml_node);
+
+	LOG_RANDOM3 ("populate_element (below <%s>, %i)", xml_node->name, depth);
 
 	/* Safety cutoffs */
 	{ 
@@ -391,7 +430,7 @@ void factory_action_callback_random(CongServiceDocumentFactory *factory, CongNew
 	xmlDocPtr xml_doc;
 
 	rci.dispspec = cong_dispspec_registry_get (cong_app_get_dispspec_registry (cong_app_singleton ()), 1); /* FIXME */
-	rci.depth = 4; /* FIXME */
+	rci.depth = 10; /* FIXME */
 	rci.random = g_rand_new ();
 
 	xml_doc = make_random_doc (&rci);
