@@ -1,5 +1,10 @@
 Top line of ChangeLog $Revision$, update below this line.
 
+2004-10-09  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* fr.po: Updated French translation.
+	* POTFILES.in: removed reference to fo.h
+
 2004-09-30  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* fr.po: Updated French translation.

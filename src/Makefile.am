@@ -133,7 +133,6 @@ conglomerate_SOURCES =      \
   cong-vfs.h                \
   cong-view.h               \
   cong-xpath-expression.h   \
-  fo.h                      \
   gxx-declare-object-from-xml-tree.h \
   gxx-declare-object-to-xml-tree.h \
   gxx-object-from-xml-tree.h \

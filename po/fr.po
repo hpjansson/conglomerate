@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-09-30 18:16+0200\n"
+"POT-Creation-Date: 2004-10-09 00:33+0200\n"
 "PO-Revision-Date: 2004-09-30 18:28+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
@@ -716,7 +716,7 @@ msgstr "Début d'XInclude"
 msgid "XInclude End"
 msgstr "Fin d'XInclude"
 
-#: src/cong-document.c:2130
+#: src/cong-document.c:2133
 #, c-format
 msgid "Select %s"
 msgstr "Sélectionner %s"
@@ -1445,7 +1445,7 @@ msgstr "Non spécifié"
 msgid "Remove DTD"
 msgstr "Supprimer la DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1680
+#: src/cong-file-properties.c:380 src/cong-util.c:1678
 msgid "Associate with DTD"
 msgstr "Associer à la DTD"
 
@@ -1822,23 +1822,23 @@ msgstr "Bienvenue dans l'éditeur Conglomerate tant attendu."
 msgid "%s (modified) - %s"
 msgstr "%s (modifié) - %s"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1301
+#: src/cong-util.c:366 src/plugin-docbook.c:1301
 msgid "Printing XSL Formatting Objects"
 msgstr "Impression d'objets de formatage XSL"
 
-#: src/cong-util.c:412
+#: src/cong-util.c:410
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ce sera éventuellement le résult de cong_util_print_xslfo"
 
-#: src/cong-util.c:1484
+#: src/cong-util.c:1482
 msgid "(no description available)"
 msgstr "(aucune description n'est disponible)"
 
-#: src/cong-util.c:1669
+#: src/cong-util.c:1667
 msgid "DTD files"
 msgstr "Fichiers DTD"
 
-#: src/cong-util.c:1672
+#: src/cong-util.c:1670
 msgid "Select a DTD"
 msgstr "Choisir une DTD"
 
@@ -1951,7 +1951,7 @@ msgstr "Transformation de DocBook en objets de formatage XSL"
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Mise en page des objets de formatage XSL sous format PDF"
 
-#: src/plugin-docbook.c:1190 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1190 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Conversion d'objets de formatage XSL en PDF"
 
@@ -2146,15 +2146,15 @@ msgstr "Convertir une DTD en fichier Examplotron"
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "Importer un fichier DTD en le convertissant en schéma Examplotron."
 
-#: src/plugin-fo.c:153
+#: src/plugin-fo.c:152
 msgid "Export XSL-FO as PDF"
 msgstr "Exporter un fichier XSL-FO sous format PDF"
 
-#: src/plugin-fo.c:154
+#: src/plugin-fo.c:153
 msgid "Generate a PDF file from the XSL:FO information"
 msgstr "Générer un fichier PDF à partir des données XSL:FO"
 
-#: src/plugin-fo.c:163
+#: src/plugin-fo.c:162
 msgid "Print XSL:FO"
 msgstr "Imprimer le fichier XSL:FO"
 

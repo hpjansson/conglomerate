@@ -90,7 +90,6 @@
 #include "cong-util.h"
 #include "cong-view.h"
 #include "cong-xpath-expression.h"
-#include "fo.h"
 #include "plugin-lists-area-listitem.h"
 #include "plugin-lists-node-element-listitem.h"
 #include "plugin-paragraph-area-paragraph.h"

@@ -1,3 +1,9 @@
+2004-10-09  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* conglomerate.types:
+	
+	Removed reference to fo.h
+
 2004-09-23  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* conglomerate.types: 
