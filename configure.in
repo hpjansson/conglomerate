@@ -95,8 +95,8 @@ dnl --- Set compiler flags ---
 
 BASE_CFLAGS="$BASE_CFLAGS -Wall"
 
-CONGLOMERATE_LIBS="$BASE_LIBS `pkg-config --libs gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0`"
-CONGLOMERATE_CFLAGS="$BASE_CFLAGS `pkg-config --cflags gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0`"
+CONGLOMERATE_LIBS="$BASE_LIBS `pkg-config --libs gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0 eel-2.0`"
+CONGLOMERATE_CFLAGS="$BASE_CFLAGS `pkg-config --cflags gtk+-2.0 gdk-2.0 libxml-2.0 libxslt libbonoboui-2.0 libgnomeui-2.0 eel-2.0`"
 
 dnl --- Output ---
 
