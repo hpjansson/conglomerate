@@ -1,3 +1,8 @@
+2004-01-13  Geert Stappers <stappers@stappers.nl>
+
+	* release
+	Script to help doing a release.
+
 2004-01-11  Geert Stappers <stappers@stappers.nl>
 
 	* dont_install_generated_gtkdoc.dpatch

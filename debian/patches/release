@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# script to help doing a release
+#
+# debian/patches/release
+#   should be harmless
+#
+# debian/patches/release unpatch
+#   reverts the "release" changes
+#
+# debian/patches/release 4.3.2-1
+#   does the things to be done on a release
+#
+
+function regular_release_changes
+{
+ echo Doing the release changes...
+ mv debian/rules debian/rules.in
+ sed -e '/enable-debug/d' debian/rules.in > debian/rules
+ echo Don\'t forgot to update the NEWS file.
+}
+
+if [ "x" == "x${1}" ]
+then
+ regular_release_changes
+else
+ case "${1}" in
+  unpatch)
+   test -f debian/rules.in && mv debian/rules.in debian/rules
+  ;;
+  *\.*\.*-*)
+   regular_release_changes
+   # plus a clean up
+   rm debian/rules.in
+  ;;
+  *)
+   echo \'${1}\' is not supported
+  ;;
+ esac
+fi
+
+# end of script ( happy hacking/testing the package )
