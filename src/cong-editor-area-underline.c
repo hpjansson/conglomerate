@@ -157,7 +157,9 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
+#if 0
 	CongEditorAreaUnderline *area_underline = CONG_EDITOR_AREA_UNDERLINE(area);
+#endif
 
 	if (orientation==GTK_ORIENTATION_HORIZONTAL) {
 		return 0;

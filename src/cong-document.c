@@ -14,6 +14,7 @@
 #include "cong-command-history.h"
 #include "cong-marshal.h"
 #include "cong-vfs.h"
+#include "cong-app.h"
 #include "cong-document-traversal.h"
 
 /* Internal functions: */
@@ -1491,8 +1492,8 @@ cong_document_node_can_be_deleted (CongDocument *doc,
 	CongCursor* cursor;
 	CongSelection* selection;
 
-	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (node);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (node, FALSE);
 
 	cursor = cong_document_get_cursor (doc);
 	selection = cong_document_get_selection (doc);

@@ -34,15 +34,10 @@ struct CongFont
 	PangoLayout *pango_layout;
 };
 
-const char font_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                          "abcdefghijklmnopqrstuvwxyz"
-                          "0123456789!@\"'/()[]{}*&#~";
-
 CongFont*
 cong_font_load(const gchar *font_name)
 {
 	CongFont *font;
-	PangoFontMetrics *font_metrics;
 	g_return_val_if_fail(font_name, NULL);
 
 	font = g_new0(CongFont,1);

@@ -15,6 +15,8 @@
 #include "cong-range.h"
 #include "cong-editor-widget.h"
 #include "cong-service-tool.h"
+#include "cong-command.h"
+#include "cong-plugin-manager.h"
 
 #define ENABLE_RAW_TREE_MANIPULATION 0
 
@@ -202,7 +204,7 @@ void popup_item_handlers_destroy(GtkWidget *widget, gpointer data)
 
 }
 
-
+#if 0
 static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 {
 	UNUSED_VAR(int sig);
@@ -231,6 +233,7 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 	
 	return(FALSE);
 }
+#endif
 
 
 
@@ -259,7 +262,6 @@ void editor_popup_init(CongDocument *doc)
 static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr node_ptr)
 { 
 	CongDocument *doc = (CongDocument*)(g_object_get_data(G_OBJECT(widget), "document"));
-	CongCursor *cursor = cong_document_get_cursor(doc);
 	CongCommand *cmd = cong_document_begin_command (doc, _("Remove Span Tag"), NULL);
 	CongNodePtr parent = node_ptr->parent;
 
@@ -307,7 +309,6 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 {
 	GtkWidget *item, *w0, *sub_popup;
 	CongDispspec *dispspec;
-	CongDispspecElement *dispspec_element;
 	CongCursor *cursor;
 	CongDocument *doc;
 	CongSelection *selection;

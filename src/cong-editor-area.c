@@ -110,7 +110,9 @@ on_signal_is_selected_changed_for_area_with_node (CongEditorNode *editor_node,
 						 gpointer user_data);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
+#if 0
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space);
+#endif
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorArea, 
@@ -983,8 +985,9 @@ on_signal_motion_notify_for_area_with_node (CongEditorArea *editor_area,
 					    GdkEventButton *event,
 					    gpointer user_data)
 {
-
+#if 0
 	CongEditorNode *editor_node = CONG_EDITOR_NODE(user_data);
+#endif
 
 	CongEditorWidget3* editor_widget;			
 	CongDocument* doc;

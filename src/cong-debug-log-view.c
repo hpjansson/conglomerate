@@ -65,6 +65,7 @@ static void debug_log_view_details_add_message (CongDebugLogViewDetails *details
 			    -1);
 }
 
+#if 0
 static void debug_log_view_add_message (CongDebugLogView *debug_log_view,
 					const gchar *description, 
 					gboolean before_event,
@@ -85,6 +86,7 @@ static void debug_log_view_add_message (CongDebugLogView *debug_log_view,
 					   node_id, 
 					   extra_info);
 }
+#endif
 
 void log_begin_edit (CongDebugLogViewDetails *details,
 		     gboolean before_event)

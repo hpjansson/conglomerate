@@ -83,8 +83,10 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 	xmlDocPtr xml_doc = cong_document_get_xml(doc);
+#if 0
 	GtkWidget *window;
 	GtkWidget *log_view;
+#endif
 
 	int result;
 

@@ -95,8 +95,10 @@ static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 {
 	CongDocument *doc;
 	xmlDocPtr xml;
+#if 0
 	CongDispspec *dispspec;
 	gchar *filename;
+#endif
 
 	doc = cong_primary_window_get_document(primary_window);
 

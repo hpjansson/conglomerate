@@ -32,6 +32,7 @@
 #include "cong-util.h"
 #include "cong-vfs.h"
 #include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
 
 const gchar NAMESPACE[] = "http://www.conglomerate.org/";
 
@@ -222,7 +223,6 @@ static void visit_paths(GSList* paths, GnomeVFSDirectoryVisitFunc visit_path,
 /* would be exposed as "plugin_register"? */
 gboolean plugin_templates_plugin_register(CongPlugin *plugin)
 {
-	int i;
 	GSList* template_paths;
 	CongTemplate* template;
 

@@ -518,9 +518,10 @@ cong_ucs4_concat (gunichar *ucs4_input_1,
 GList*
 merge_lines (GList *list)
 {
+#if 0	
 	GList *iter;
 	GList *next;
-#if 0	
+
 	for (iter=list;iter;iter=next) {
 		gunichar *string = iter->data;
 

@@ -36,6 +36,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#if 0
 gboolean cong_transform_easy(const gchar *filename_src_xml, 
 			     const gchar *filename_dst_xml, 
 			     const gchar *filename_stylesheet,
@@ -305,7 +306,9 @@ static GnomeVFSURI *content_make_src_uri(WebsiteContent *content, GenerateWebsit
 static gboolean generate_html(CongDependencyNode *node, GError **error)
 {
 	CongDependencyNodeTransformWebsiteContent *node_from_content = (CongDependencyNodeTransformWebsiteContent*)(node);
+#if 0
 	WebsiteContent *content;
+#endif
 	gchar *output_filename;
 	gchar *input_filename;
 	gchar *standard_error;
@@ -484,6 +487,7 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 	/* FIXME: memory leaks here! */
 	g_free(workspace);
 }
+#endif
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_website_plugin_register(CongPlugin *plugin)

@@ -235,7 +235,8 @@ cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd,
 						       CongNodePtr node);
 
 gboolean
-cong_command_can_add_reparent_selection (CongCommand *cmd);
+cong_command_can_add_reparent_selection (CongCommand *cmd,
+					 CongNodePtr new_parent);
 
 CongNodePtr
 cong_command_add_reparent_selection (CongCommand *cmd, 
@@ -247,6 +248,11 @@ cong_command_add_node_split3 (CongCommand *cmd,
 			      CongNodePtr node, 
 			      int c0, 
 			      int c1);
+
+void 
+cong_command_add_remove_tag (CongCommand *cmd,
+			     CongNodePtr node);
+
 void
 cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 						      CongNodePtr node);
@@ -256,6 +262,10 @@ cong_command_add_set_external_dtd (CongCommand *cmd,
 				   const gchar* root_element,
 				   const gchar* public_id,
 				   const gchar* system_id);
+
+gboolean 
+cong_command_add_xml_add_required_children (CongCommand *cmd, 
+					    CongNodePtr node);
 
 G_END_DECLS
 

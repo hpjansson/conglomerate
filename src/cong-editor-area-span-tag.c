@@ -192,8 +192,10 @@ render_self (CongEditorArea *area,
 
 	GdkGC *gc = cong_dispspec_element_gc(ds_element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
 
+#if 0
 	gint title_text_width_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(area_span_tag)->title_text),
 										       GTK_ORIENTATION_HORIZONTAL);
+#endif
 	gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(area_span_tag)->title_text),
 											GTK_ORIENTATION_VERTICAL);
 	/* Calculate start/end points on this this line: */

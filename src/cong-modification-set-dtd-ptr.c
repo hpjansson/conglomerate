@@ -79,8 +79,6 @@ cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification
 					 CongDocument *doc,
 					 xmlDtdPtr dtd_ptr)
 {
-	CongCursor *cursor = cong_document_get_cursor (doc);
-
 	cong_modification_construct (CONG_MODIFICATION(modification_set_dtd_ptr),
 				     doc);
 
@@ -148,7 +146,6 @@ undo (CongModification *modification)
 {
 	CongModificationSetDtdPtr *modification_set_dtd_ptr = CONG_MODIFICATION_SET_DTD_PTR (modification);
 	CongDocument *doc = cong_modification_get_document (modification);
-	CongCursor *cursor = cong_document_get_cursor (doc);
 
 	cong_document_begin_edit (doc);
 	
@@ -163,7 +160,6 @@ redo (CongModification *modification)
 {
 	CongModificationSetDtdPtr *modification_set_dtd_ptr = CONG_MODIFICATION_SET_DTD_PTR (modification);
 	CongDocument *doc = cong_modification_get_document (modification);
-	CongCursor *cursor = cong_document_get_cursor (doc);
 
 	cong_document_begin_edit (doc);
 	

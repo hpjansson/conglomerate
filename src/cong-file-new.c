@@ -32,6 +32,7 @@
 #include "cong-app.h"
 
 #include "cong-primary-window.h"
+#include "cong-plugin-manager.h"
 
 #define DEBUG_FILE_NEW_ASSISTANT 1
 

@@ -296,6 +296,8 @@ static void menu_callback_file_quit(gpointer callback_data,
 	GList *current;
 	gboolean canceled = FALSE;
 
+	(void)primary_window; /* suppress warnings */
+
 	current = g_list_first(cong_app_singleton()->primary_windows);
 
 	while (current) {
@@ -644,8 +646,8 @@ void menu_callback_debug_transform_docbook_to_html(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	debug_transform(callback_data,
-		       DOCBOOK_TO_HTML_STYLESHEET_FILE);
+	debug_transform (primary_window,
+			 DOCBOOK_TO_HTML_STYLESHEET_FILE);
 }
 void menu_callback_debug_transform_docbook_to_xhtml(gpointer callback_data,
 						  guint callback_action,
@@ -653,8 +655,8 @@ void menu_callback_debug_transform_docbook_to_xhtml(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	debug_transform(callback_data,
-		       DOCBOOK_TO_XHTML_STYLESHEET_FILE);
+	debug_transform (primary_window,
+			 DOCBOOK_TO_XHTML_STYLESHEET_FILE);
 }
 void menu_callback_debug_transform_docbook_to_html_help(gpointer callback_data,
 						  guint callback_action,
@@ -662,8 +664,8 @@ void menu_callback_debug_transform_docbook_to_html_help(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	debug_transform(callback_data,
-		       DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE);
+	debug_transform (primary_window,
+			 DOCBOOK_TO_HTML_HELP_STYLESHEET_FILE);
 }
 void menu_callback_debug_transform_docbook_to_javahelp(gpointer callback_data,
 						  guint callback_action,
@@ -671,8 +673,8 @@ void menu_callback_debug_transform_docbook_to_javahelp(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	debug_transform(callback_data,
-		       DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE);
+	debug_transform (primary_window,
+			 DOCBOOK_TO_JAVAHELP_STYLESHEET_FILE);
 }
 void menu_callback_debug_transform_docbook_to_fo(gpointer callback_data,
 				  guint callback_action,
@@ -680,8 +682,8 @@ void menu_callback_debug_transform_docbook_to_fo(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	debug_transform(callback_data,
-		       DOCBOOK_TO_FO_STYLESHEET_FILE);
+	debug_transform (primary_window,
+			 DOCBOOK_TO_FO_STYLESHEET_FILE);
 }
 
 #if PRINT_TESTS
@@ -1148,6 +1150,8 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 	glade_xml_signal_autoconnect(xml);
 
 	g_free(glade_filename);
+
+	(void)primary_window; /* suppress warnings */
 }
 
 

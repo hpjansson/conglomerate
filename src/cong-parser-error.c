@@ -16,6 +16,8 @@
 #include "cong-util.h"
 #include "cong-vfs.h"
 
+#include <libxml/catalog.h>
+
 void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
 {
 	CongParserIssue *issue;

@@ -280,8 +280,6 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 			/* If we haven't found an existing neighbouring inline flow to join; create a new one: */
 			if (NULL==child_flow_holder)
 			{
-				CongNodePtr doc_node_iter;
-
 				child_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_inlines_new (cong_editor_node_get_widget (editor_node)));
 
 				insert_child_flow_holder_into_composer (area_flow_holder_blocks,
@@ -388,7 +386,9 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 {
 	/* Given that we've just created a new child flow-holder, we must have a distinct flow-holder for the neighbouring editor-nodes. 
 	   So try the previous one... */
+#if 0
 	CongNodePtr doc_node = cong_editor_node_get_node (editor_node);
+#endif
 	CongEditorArea *child_area;
 	CongEditorNode *prev_editor_node;
 

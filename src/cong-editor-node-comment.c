@@ -48,6 +48,7 @@ static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
 
 /* Declarations of the CongDocument event handlers: */
+#if 0
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
 				 CongNodePtr node, 
@@ -67,6 +68,7 @@ static gboolean
 on_signal_motion_notify (CongEditorArea *editor_area, 
 			 GdkEventMotion *event,
 			 gpointer user_data);
+#endif
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeComment, 
@@ -122,8 +124,9 @@ static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorNodeComment *node_comment = CONG_EDITOR_NODE_COMMENT(editor_node);
+#if 0
 	gchar *text;
-
+#endif
 
 	g_return_val_if_fail (editor_node, NULL);
 

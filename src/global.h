@@ -246,11 +246,21 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 
 /* UI routines for invocation by menus/toolbars: */
 void
-cong_ui_file_import(GtkWindow *toplevel_window);
+cong_ui_file_import (GtkWindow *toplevel_window);
 
 void
-cong_ui_file_export(CongDocument *doc,
+cong_ui_file_export (CongDocument *doc,
+		     GtkWindow *toplevel_window);
+
+#if ENABLE_PRINTING
+void
+cong_ui_file_print_preview (CongDocument *doc,
+			    GtkWindow *toplevel_window);
+void
+cong_ui_file_print (CongDocument *doc,
 		    GtkWindow *toplevel_window);
+#endif
+
 
 GtkWidget*
 cong_file_properties_dialog_new (CongDocument *doc, 

@@ -28,6 +28,7 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
 #include "cong-util.h"
+#include "cong-dtd.h"
 
 #define LOG_CONG_NODE_PRIVATE_MODIFICATIONS 0
 #if LOG_CONG_NODE_PRIVATE_MODIFICATIONS
@@ -778,6 +779,7 @@ update_entities (CongNodePtr node)
 			g_free (child_source);
 			break;
 
+		case XML_INTERNAL_PREDEFINED_ENTITY:
 		case XML_EXTERNAL_GENERAL_PARSED_ENTITY:
 		case XML_EXTERNAL_GENERAL_UNPARSED_ENTITY:
 		case XML_EXTERNAL_PARAMETER_ENTITY:

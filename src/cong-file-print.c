@@ -35,6 +35,7 @@
 #include "cong-app.h"
 #include "cong-file-selection.h"
 #include "cong-service-print-method.h"
+#include "cong-plugin-manager.h"
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print-job.h>
@@ -86,6 +87,7 @@ static void add_print_method_to_menu(CongServicePrintMethod *print_method, gpoin
 	}
 }
 
+#if 0
 static void monitor_print_method(CongPrintDialogDetails *dialog_details)
 {
 	CongServicePrintMethod* print_method = get_selected_print_method(dialog_details);
@@ -120,12 +122,15 @@ static void monitor_print_method(CongPrintDialogDetails *dialog_details)
 	}
 #endif
 }
+#endif
 
 static void on_print_method_selection_changed(GtkOptionMenu *optionmenu,
 					  gpointer user_data)
 {
+#if 0
 	GtkWidget* menu = gtk_option_menu_get_menu(optionmenu);
 	CongPrintDialogDetails *details = user_data;
+#endif
 
 	g_message("on_print_method_selection_changed");
 

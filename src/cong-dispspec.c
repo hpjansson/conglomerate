@@ -23,6 +23,7 @@
 #include "cong-dtd.h"
 #include "cong-util.h"
 #include "cong-enum-mapping.h"
+#include "cong-vfs.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -311,13 +312,13 @@ cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc,
 
 void cong_dispspec_delete (CongDispspec *dispspec)
 {
+	/* FIXME: is this causing heap corruption? */
+#if 0
 	CongDispspecElement *element;
 	CongDispspecElement *next;
 
 	g_return_if_fail(dispspec);
 
-	/* FIXME: is this causing heap corruption? */
-#if 0
 	/* Destroy elements: */
 	for (element = dispspec->first; element; element=next) {
 		next = element->next;
@@ -992,23 +993,6 @@ parse_template(CongDispspec *ds, xmlNodePtr node)
 	}
 }
 	
-unsigned int get_rgb_hex(unsigned char *s)
-{
-  unsigned int col;
-
-  col = 0;
-  while (*s)
-    {
-      col <<= 4;
-      if (isalpha(*s)) col |= tolower(*s) - 'a' + 10;
-      else if (isdigit(*s)) col |= *s - '0';
-      s++;
-    }
-  
-  return(col);
-}
-
-
 void col_to_gcol(GdkColor *gcol, unsigned int col)
 {
   gcol->blue = (col << 8) & 0xff00;
@@ -1084,7 +1068,6 @@ add_xml_for_serialisation_formats  (xmlDocPtr xml_doc,
 			     node_serialisation);
 
 		for (i=0;i<dispspec->num_serialisation_formats; i++) {
-			CongNodePtr node_format;
 			CongSerialisationFormat *format = dispspec->serialisation_formats[i];
 			g_assert (format);
 
@@ -1182,6 +1165,7 @@ promote_element (CongDispspec * dispspec,
 
 	switch (cong_dispspec_type (dispspec, cong_node_xmlns(node->parent), node->parent->name))
 	{
+	default: break;
 		case CONG_ELEMENT_TYPE_SPAN:
 		{
 			if (contains_carriage_return(xmlNodeGetContent (node)))

@@ -45,6 +45,18 @@ typedef void
 				     gpointer user_data);
 
 CongServiceDocTool*
+cong_plugin_register_doc_tool (CongPlugin *plugin,
+			       const gchar *name, 
+			       const gchar *description,
+			       const gchar *service_id,
+			       const gchar *menu_text,
+			       const gchar *tooltip_text,
+			       const gchar *tooltip_further_text,
+			       CongServiceDocToolFilter doc_filter,
+			       CongServiceDocToolActionCallback action_callback,
+			       gpointer user_data);
+
+CongServiceDocTool*
 cong_service_doc_tool_construct (CongServiceDocTool *tool,
 				 const gchar *name, 
 				 const gchar *description,

@@ -17,10 +17,12 @@ void status_update()
 }
 
 
+#if 0
 static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 {
 	return(TRUE);
 }
+#endif
 
 int main( int   argc,
 	  char *argv[] )

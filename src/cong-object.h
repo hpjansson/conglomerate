@@ -31,6 +31,7 @@ G_BEGIN_DECLS
 #define PRIVATE(x) ((x)->priv)
 
 #define CONG_DECLARE_CLASS_BEGIN(MyClass, my_class, BaseClass) \
+extern GType my_class##_get_type (void); \
 typedef struct MyClass##Class MyClass##Class; \
 typedef struct MyClass##Private MyClass##Private; \
 struct MyClass \

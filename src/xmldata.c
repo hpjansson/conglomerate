@@ -24,7 +24,9 @@ static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, x
 static gboolean cong_command_add_xml_add_required_content(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
 
+#if 0
 static void xml_get_or_content_list(xmlElementContentPtr content, GList* list);
+#endif
 static gint xml_valid_get_potential_element_children(xmlElementContent *ctree, const xmlChar **list, int *len, int max);
 static gint wrap_xml_valid_get_valid_elements(CongDocument *doc, xmlNode *parent, xmlNode *next_sibling, const xmlChar ** elements, gint max);
 static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, 
@@ -199,7 +201,10 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
  * node passed is now valid under a DTD.  If no DTD exists,
  * this will return FALSE.
  */
-gboolean cong_command_add_xml_add_required_children(CongCommand *cmd, CongNodePtr node) {
+gboolean 
+cong_command_add_xml_add_required_children (CongCommand *cmd, 
+					    CongNodePtr node)
+{
 	gboolean success;
 	xmlNodePtr new_node;
 	CongDocument *doc;
@@ -241,7 +246,6 @@ static gboolean cong_command_add_xml_add_required_sub_elements(CongCommand *cmd,
 	xmlDocPtr doc;
 	xmlElementPtr elemDecl = NULL;
 	xmlElementContentPtr content;
-	const xmlChar *name;
 	const xmlChar *prefix = NULL;
 	gboolean extsubset = FALSE;
 
@@ -409,7 +413,7 @@ static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cm
 	CongNodePtr new_node;
 	const xmlChar *names[256];
 	gchar *element_name;
-	gint i, response, size, length;
+	gint i, size, length;
 	CongDocument *cong_doc;
 
 	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
@@ -570,7 +574,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
 				   gint max)
 {
 	xmlElement *element_desc;
-	gint nb_elements, i;
+	gint nb_elements;
 	
 	if (parent == NULL) {
 		/*  nothing to work with */

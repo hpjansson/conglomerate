@@ -61,7 +61,6 @@ static void visit_node(xmlNodePtr node) {
 
 static void convert_case_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
-	gchar *stylesheet_path;
 	xmlDocPtr doc_ptr;
 
 	g_return_if_fail(exporter);

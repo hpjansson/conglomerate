@@ -7,6 +7,7 @@
 #include "cong-primary-window.h"
 #include "cong-edit-find-and-replace.h"
 #include "cong-util.h"
+#include "cong-command.h"
 #include <glade/glade.h>
 
 typedef struct CongFindDialogDetails CongFindDialogDetails;
@@ -37,7 +38,6 @@ on_find_dialog_destroy (GtkWidget *widget,
 void
 cong_document_find (CongDocument *doc)
 {
-	GladeXML *xml;
 	GtkDialog *dialog;
 	CongFindDialogDetails *dialog_details;
 

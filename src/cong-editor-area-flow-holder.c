@@ -54,8 +54,9 @@ CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_flow_holder, remove_ar
 static void
 cong_editor_area_flow_holder_class_init (CongEditorAreaFlowHolderClass *klass)
 {
+#if 0
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
-
+#endif
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_flow_holder,
 					      insert_areas_for_node);

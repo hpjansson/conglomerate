@@ -1,3 +1,9 @@
+2004-02-04  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-dispspec-element.c, cong-dispspec.c, cong-document-traversal.c, cong-document.c, cong-dtd.c, cong-edit-find-and-replace.c, cong-editor-area-composer.c, cong-editor-area-container.c, cong-editor-area-expander.c, cong-editor-area-flow-holder-blocks.c, cong-editor-area-flow-holder-single.c, cong-editor-area-flow-holder.c, cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c, cong-editor-area-text-comment.c, cong-editor-area-underline.c, cong-editor-area.c, cong-editor-node-comment.c, cong-editor-node-text.c, cong-editor-widget3.c, cong-file-export.c, cong-file-import.c, cong-file-new.c, cong-file-print.c, cong-font.c, cong-location.c, cong-menus.c, cong-modification-set-dtd-ptr.c, cong-node-properties-dialog.c, cong-node.c, cong-object.h, cong-overview-view.c, cong-parser-error.c, cong-plugin-manager.h, cong-primary-window.c, cong-service-doc-tool.h, cong-util.c, cong-util.h, cong-xpath-expression.c, fo-parser-result.c, fo-solver-result.c, fo-tests.c, global.h, main.c, plugin-cleanup-source.c, plugin-convert-case.c, plugin-docbook.c, plugin-paragraph-area-paragraph.c, plugin-save-dispspec.c, plugin-sgml.c, plugin-templates.c, plugin-validate.c, plugin-website.c, popup.c, xmldata.c
+
+	Big warning fix; should now compile cleanly on -Wall
+
 2004-02-03  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element.c, cong-dispspec-element.h, cong-editor-node.c, cong-node-properties-dialog.c

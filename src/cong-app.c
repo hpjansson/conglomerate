@@ -176,7 +176,7 @@ typedef gchar*
 (CongSelectionDataToXMLSourceConversionFn) (guchar *data, 
 					    gint length);
 
-
+#if 0
 static void
 debug_selection_data (GtkSelectionData *selection_data, 
 		      const gchar *type,
@@ -270,6 +270,7 @@ debug_target_list (GtkClipboard *clipboard,
 		g_free (atom_name);
 	}
 }
+#endif
 
 gchar*
 convert_ucs2_to_utf8 (guchar *data,
@@ -344,6 +345,7 @@ convert_application_rtf (guchar *data,
 	return NULL;
 }
 
+#if 0
 static void
 debug_well_known_targets (GtkClipboard *clipboard)
 {
@@ -376,6 +378,7 @@ debug_well_known_targets (GtkClipboard *clipboard)
 	  So how do we distinguish between UTF-8 and UCS-2???
 	 */
 }
+#endif
 
 /* This is a simple copy-and-paste of gtk_clipboard_wait_for_targets, which was added to GTK in version 2.4: */
 gboolean
@@ -436,8 +439,6 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 				   CongDocument *target_doc)
 {
 	GtkClipboard* clipboard;
-	GdkAtom *targets;
-	gint n_targets;
 
 	g_return_val_if_fail (app, NULL);
 	g_return_val_if_fail ((selection == GDK_SELECTION_CLIPBOARD)||(selection == GDK_SELECTION_PRIMARY), NULL);
@@ -497,6 +498,8 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 	return NULL;
 
 #if 0
+	GdkAtom *targets;
+	gint n_targets;
 	if (cong_eel_gtk_clipboard_wait_for_targets (clipboard,
 						     &targets,
 						     &n_targets)) {

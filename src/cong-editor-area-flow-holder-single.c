@@ -200,7 +200,6 @@ remove_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node)
 {
 	CongEditorAreaFlowHolderSingle *area_flow_holder_single = CONG_EDITOR_AREA_FLOW_HOLDER_SINGLE(area_flow_holder);
-	CongEditorArea *area;
 
 	g_assert(PRIVATE(area_flow_holder_single)->single_editor_node==editor_node);
 	g_assert(PRIVATE(area_flow_holder_single)->single_editor_area);

@@ -203,7 +203,6 @@ node_creation_callback (CongTreeView *cong_tree_view,
 	case CONG_NODE_TYPE_ELEMENT:
 		{
 			CongDispspecElement *element;
-			GdkPixbuf *pixbuf;
 			gchar *text;
 
 			element = cong_dispspec_lookup_node(ds, node);

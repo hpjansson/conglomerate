@@ -1126,10 +1126,12 @@ static gboolean
 cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range_a,
 				   const CongEditorNodeTextSelectionState *range_b);
 
+#if 0
 static gchar*
 cong_text_selection_state_generate_markup (CongEditorNodeTextSelectionState *selection_state,
 					   CongSelection *selection,
 					   const gchar *stripped_text);
+#endif
 
 static void
 cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state,

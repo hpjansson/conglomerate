@@ -189,12 +189,11 @@ dispose (GObject *object)
 static gchar*
 evaluate_expression (CongXPathExpression *xpath_expression)
 {
-	gchar *xpath_string;
 	xmlXPathObjectPtr xpath_obj;
 
 	gchar *result = NULL;
 
-	g_return_val_if_fail(xpath_expression, NULL);
+	g_return_val_if_fail (IS_CONG_XPATH_EXPRESSION (xpath_expression), NULL);
 	
 	/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
 

@@ -181,6 +181,20 @@ cong_util_draw_blended_line (GtkWidget *w,
 			     const GdkColor *col,
 			     int x0, int y0,
 			     int x1);
+
+/**
+ * cong_util_get_int_from_rgb_hex:
+ * 
+ * Parse a string containing an HTML-style hexadecimal representation of an RGB triplet
+ * into a 32 bit RGB triplet.
+ *
+ * FIXME: it's fundamentally broken to be using ints for this; should use a struct
+ *
+ * Returns: RGB triplet packed into a 32-bit value
+ */
+unsigned int
+cong_util_get_int_from_rgb_hex (const gchar *string);
+
 G_END_DECLS
 
 #endif

@@ -186,8 +186,9 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
+#if 0
 	CongEditorAreaExpander *area_expander = CONG_EDITOR_AREA_EXPANDER(area);
-
+#endif
 	gint expander_size;
 	
 	gtk_widget_style_get (GTK_WIDGET (cong_editor_area_get_widget (area)),

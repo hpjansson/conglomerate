@@ -50,6 +50,7 @@ gboolean sgml_importer_mime_filter(CongServiceImporter *importer, const gchar *m
 	}
 }
 
+#if 0
 static gboolean on_stdout(GIOChannel *source,
 			  GIOCondition condition,
 			  gpointer data)
@@ -67,11 +68,14 @@ static gboolean on_stderr(GIOChannel *source,
 
 	return TRUE;
 }
+#endif
 
 void sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
+#if 0
 	char* buffer;
 	GnomeVFSFileSize size;
+#endif
 	xmlDocPtr xml_doc;
 
 #if 1

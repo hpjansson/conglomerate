@@ -50,8 +50,10 @@ CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, remove_all_
 
 
 /* Signal handler declarations: */
+#if 0
 static void 
 handle_children_changed (CongEditorAreaContainer* area_container);
+#endif
 
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
@@ -67,7 +69,9 @@ GNOME_CLASS_BOILERPLATE(CongEditorAreaContainer,
 static void
 cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 {
+#if 0
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
+#endif
 
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
@@ -221,12 +225,14 @@ cong_editor_area_container_protected_postprocess_add_non_internal_child (CongEdi
 /* Method implementation definitions: */
 
 /* Signal handler definitions: */
+#if 0
 static void 
 handle_children_changed (CongEditorAreaContainer* area_container)
 {
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_HORIZONTAL);
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container), GTK_ORIENTATION_VERTICAL);
 }
+#endif
 
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,

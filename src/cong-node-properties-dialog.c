@@ -100,7 +100,6 @@ struct CongAdvancedNodePropertiesView
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -117,8 +116,6 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter_sibling;
-	GtkTreeIter tree_iter_parent;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -136,8 +133,6 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter_sibling;
-	GtkTreeIter tree_iter_parent;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -155,8 +150,6 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter_node;
-	GtkTreeIter tree_iter_parent;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -174,7 +167,6 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -192,7 +184,6 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
@@ -212,7 +203,6 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
 {
 	CongAdvancedNodePropertiesView *properties_view;
-	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "cong-document.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-error-dialog.h"
 #include "cong-util.h"
 #include "cong-command.h"
@@ -960,8 +961,6 @@ void
 cong_location_nullify_with_ref (CongDocument *doc, 
 				CongLocation *loc)
 {
-	CongNodePtr old_node;
-
 	if (loc->node) {
 		cong_document_node_unref (doc, loc->node);
 	}

@@ -181,8 +181,6 @@ CongDocumentTraversal*
 cong_document_traversal_construct (CongDocumentTraversal *doc_traversal,
 				   CongDocument *doc)
 {
-	CongNodePtr initial_cursor_node;
-
 	g_return_val_if_fail (IS_CONG_DOCUMENT_TRAVERSAL (doc_traversal), NULL);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 
@@ -541,6 +539,8 @@ recursive_create_traversal_nodes (CongDocumentTraversal *doc_traversal,
 							  traversal_node);
 		}
 	}
+
+	return traversal_node;
 }
 
 static void 

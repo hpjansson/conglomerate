@@ -98,8 +98,10 @@ GNOME_CLASS_BOILERPLATE(CongEditorAreaStructuralTag,
 static void
 cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *klass)
 {
+#if 0
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	CongEditorAreaStructuralClass *container_klass = CONG_EDITOR_AREA_STRUCTURAL_CLASS(klass);
+#endif
 
 #if 0
 	area_klass->render_self = render_self;

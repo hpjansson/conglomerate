@@ -56,7 +56,11 @@ void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_man
 void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data);
 #if ENABLE_PRINTING
-void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongServicePrintMethod *print_method, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_print_method (CongPluginManager *plugin_manager, 
+						void 
+						(*callback) (CongServicePrintMethod *print_method, 
+							     gpointer user_data), 
+						gpointer user_data);
 #endif
 /*void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongServiceThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);*/
 void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocTool *doc_tool, gpointer user_data), gpointer user_data);

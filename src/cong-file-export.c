@@ -35,6 +35,7 @@
 #include "cong-app.h"
 #include "cong-file-selection.h"
 #include "cong-service-exporter.h"
+#include "cong-plugin-manager.h"
 
 typedef struct CongExportDialogDetails
 {
@@ -164,7 +165,6 @@ static void setup_description(CongExportDialogDetails *dialog_details)
 static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 					  gpointer user_data)
 {
-	GtkWidget* menu = gtk_option_menu_get_menu(optionmenu);
 	CongExportDialogDetails *details = user_data;
 
 	g_message("on_exporter_selection_changed");

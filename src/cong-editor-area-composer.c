@@ -205,6 +205,7 @@ cong_editor_area_composer_pack_end (CongEditorAreaComposer *area_composer,
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
+#if 0
 static gint 
 find_area (gconstpointer *a,
 	   gconstpointer *b)
@@ -222,6 +223,7 @@ find_area (gconstpointer *a,
 
 	return (a_details->child) - (b_details->child);
 }
+#endif
 
 void
 cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,

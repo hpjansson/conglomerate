@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-dtd.h"
+#include <libxml/hash.h>
 
 /* Internal types: */
 struct dtd_callback_marshall
@@ -97,6 +98,7 @@ cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 	g_return_val_if_fail (content, FALSE);
   
 	switch (content->type) {
+	default: break;
 	case XML_ELEMENT_CONTENT_PCDATA:
 		return TRUE;
 	}

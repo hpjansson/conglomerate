@@ -121,6 +121,7 @@ gxx_callback_construct_dispspec_element(void)
 
 /* Random other stuff: */
 #if NEW_LOOK
+#if 0
 /* Hackish colour calculations in RGB space (ugh!) */
 static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
 {
@@ -128,6 +129,7 @@ static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
 	dst->green = src->green / bodge_factor;
 	dst->blue = src->blue / bodge_factor;
 }
+#endif
 
 
 unsigned int hacked_cols[3][CONG_DISPSPEC_GC_USAGE_NUM] =
@@ -724,7 +726,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 		unsigned int col;
 
 		if (col_text) {
-			col = get_rgb_hex(col_text);
+			col = cong_util_get_int_from_rgb_hex (col_text);
 		} else {
 			col = 0x00ffffff;  /* White is default */
 		}

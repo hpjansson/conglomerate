@@ -126,9 +126,11 @@ cong_util_is_pure_whitespace (const gchar *utf8_text)
 gchar* 
 cong_util_cleanup_text (const xmlChar *src_text) 
 {
+#if 0
 	gchar *buffer;
 	gchar *dst;
 	gunichar unichar;
+#endif
 
 	g_return_val_if_fail(src_text, NULL);
 
@@ -499,4 +501,25 @@ cong_util_draw_blended_line (GtkWidget *w,
 	}
 
 	gdk_gc_unref(gc);
+}
+
+unsigned int
+cong_util_get_int_from_rgb_hex (const gchar *string)
+{
+	unsigned int col;
+	
+	col = 0;
+	while (*string) {
+		gchar ch = *(string++);
+
+		col <<= 4;
+
+		if (g_ascii_isalpha (ch)) {
+			col |= (g_ascii_tolower (ch) - 'a' + 10);
+		} else if (g_ascii_isdigit (ch)) {
+			col |= (ch - '0');
+		}
+	}
+	
+	return(col);
 }

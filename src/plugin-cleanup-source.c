@@ -32,6 +32,7 @@
 #include "cong-primary-window.h"
 #include "cong-fake-plugin-hooks.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-command.h"
 #include "cong-util.h"
 

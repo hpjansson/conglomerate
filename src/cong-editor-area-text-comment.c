@@ -54,8 +54,10 @@ calc_requisition (CongEditorArea *area,
 		  int width_hint);
 #endif
 
+#if 0
 static void
 allocate_child_space (CongEditorArea *area);
+#endif
 
 
 /* GObject boilerplate stuff: */
