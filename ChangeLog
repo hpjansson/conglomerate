@@ -1,3 +1,7 @@
+2003-09-26  Varga Robert <frozenfingers@home.ro>
+
+	* configure.in: Added gtkdoc support
+
 2003-09-25  Miloslav Trmac  <mitr@volny.cz>
 
 	* configure.in: Added Czech (cs) to ALL_LINGUAS.
