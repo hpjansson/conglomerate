@@ -1,5 +1,9 @@
 2003-10-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-vfs.c, cong-vfs.h, Makefile.am
+
+	New files:  Handling of URIs moved into a single place
+
 	* cong-command.c
 
 	Restore unmodified status of doc when user undoes enough commands

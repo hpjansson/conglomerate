@@ -98,6 +98,7 @@ conglomerate_SOURCES =      \
   cong-text-cache.h         \
   cong-tree-view.h          \
   cong-util.h               \
+  cong-vfs.h                \
   cong-view.h               \
   fo.h                      \
   cong-app.c                \
@@ -197,6 +198,7 @@ conglomerate_SOURCES =      \
   cong-text-cache.c         \
   cong-tree-view.c          \
   cong-util.c               \
+  cong-vfs.c                \
   cong-view.c               \
   icon_assemble.c           \
   icon_connect.c            \
