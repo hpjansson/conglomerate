@@ -29,6 +29,7 @@ src/cong-dialog.c
 src/cong-dispspec-element.c
 src/cong-dispspec-registry.c
 src/cong-dispspec.c
+src/cong-document-traversal.c
 src/cong-document.c
 src/cong-dom-view.c
 src/cong-dtd.c
@@ -114,10 +115,12 @@ src/cong-progress-checklist.c
 src/cong-range.c
 src/cong-source-view.c
 src/cong-text-cache.c
+src/cong-traversal-node.c
 src/cong-tree-view.c
 src/cong-util.c
 src/cong-vfs.c
 src/cong-view.c
+src/cong-xpath-expression.c
 src/cursor.c
 src/file.c
 src/fo-parser-result.c
