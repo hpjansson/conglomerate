@@ -37,6 +37,7 @@ cong_font_load(const gchar *font_name)
 	font = g_new0(CongFont,1);
 
 	font->gdk_font = gdk_font_load(font_name);
+	/* FIXME: add expection handling when font is not on system */
 	g_assert(font->gdk_font);
 
 	gdk_string_extents(font->gdk_font, font_chars, 0, 0, 0, &font->asc, &font->desc);                  
