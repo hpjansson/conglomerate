@@ -1,6 +1,223 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+22-06-04
+Conglomerate 0.7.14 Released
+============================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced! 
+
+Conglomerate now requires GTK+ version 2.4.0 or later
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+Updated Translations: 
+      * Czech (cs) (Miloslav Trmac)
+      * British English (en_GB) (Gareth Owen)
+
+Enhancements
+      * The Tools->Validate feature can now show you the errors when
+        validation fails (Nickolay V. Shmyrev)
+      * You can now select a DTD for documents lacking one, accessible
+        via buttons in the File->Properties dialog and in the
+        Tools->Validate error dialog (Dave Malcolm)
+      * A new option in the File->New assistant for creating empty XML
+        documents of arbitrary type. The assistant has a page which lets
+        you enter the name of the top-level element, and its namespace
+        URI (if any), with a little XML source preview that updates as
+        you type. (Dave Malcolm)
+      * Improvements to the internals of attribute editing, making code
+        cleaner and fixing various crashes (Nickolay V. Shmyrev)
+      * Rewrite of the File->Import UI, making use of GtkFileFilter (see
+        bug # 144713 ). Hopefully the features are now a lot more
+        "discoverable" than before. (Dave Malcolm)
+
+Fixes
+      * Fix layout of alert widget contents. (Nickolay V. Shmyrev)
+      * Added the envar DocBook element ( bug # 144739 ) (Lars Trieloff)
+
+Thanks
+      * Miloslav Trmac
+      * Gareth Owen
+      * Nickolay V. Shmyrev
+      * Dave Malcolm
+      * Lars Trieloff
+
+-- 
+David Malcolm
+
+20-06-04
+Conglomerate 0.7.13 Released
+============================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced! 
+
+Conglomerate now requires GTK+ version 2.4.0 or later. We use the new
+file chooser dialog by default, and hope to make use of the other good
+stuff as we work towards the 0.8 release.
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+New Translations: 
+      * Punjabi (pa) (Jaswinder Singh Phulewala)
+      * British English (en_GB) (Gareth Owen)
+      * Canadian English (en_CA) (Adam Weinberger)
+
+Updated Translations: 
+      * Czech (cs) (Miloslav Trmac)
+      * Russian (ru) (Dmitry G. Mastrukov)
+      * Dutch (nl) (Daniel van Eeden)
+        (Kees van den Broek)
+      * Swedish (sv) (Christian Rose)
+      * Spanish (es) (Francisco Javier F. Serrador)
+      * Croatian (hr) (Robert Sedak)
+      * German (de) (Christian Neumair)
+      * Catalan (ca) (Jordi Mallach)
+      * Serbian (sr) (Danilo Šegan)
+      * Serbian (sr@Latn) (Danilo Šegan)
+
+Enhancements
+      * Conglomerate no longer requires a display specification for an
+        XML file. If the document type isn't recognised when loading a
+        document, it switches to an alternate tree-based UI. (Dave
+        Malcolm)
+      * Implementation of Find and Replace, adapted from GEdit (Nickolay
+        V. Shmyrev)
+      * Added a Convert to Comment/Convert from Comment feature to the
+        popup context menu (Dave Malcolm)
+      * Added the beginnings of a plugin to view the document with a CSS
+        stylesheet, using Dodji Seketeli's Sewfox library (Dave Malcolm)
+      * Use GtkFileChooser rather than GtkFileSelector; we now require
+        GTK 2.4 in configure.in (Dave Malcolm)
+      * Big improvements to namespace handling code, including adding
+        namespace support to attribute editing (Johannes Hölzl)
+      * Properties dialog for DocBook elements now has a language
+        selection widget (Nickolay V. Shmyrev)
+      * Added the beginnings of a preferences dialog (Dave Malcolm)
+      * Added a display specification for the OPML outliner format
+        (Daniel Larsson)
+      * Added support for a "Release Notes" document type, which I used
+        to create these release notes (Jeff Martin)
+      * Changes to LOTS of files, adding gtk-doc style comments to most
+        functions. ( bug # 123318 ) Lots are currently placeholder
+        comments, and will be filled in later. (David Hoover)
+      * Added stubbed plugins for AbiWord, HTML and TEI support. Began
+        work on a "View RELAX NG in compact form" plugin. (Dave Malcolm)
+      * Finished implementating the "node tools" category of plugin;
+        they now appear in the context menus and work; some simple
+        examples implemented. (Dave Malcolm)
+      * Added item to debug menu to dump plugin information into an XML
+        file (Dave Malcolm)
+      * Various packaging improvements (Geert Stappers)
+      * Big rewrite of DTD->RELAX NG importer: now has a struct to
+        handle options; inlines elements where it can to give a Russian
+        Doll-style schema; adds a <start> element (Dave Malcolm)
+      * Added a Properties dialog for the first span element (if any)
+        when right-clicking in text areas. (Dave Malcolm)
+      * Improvements to internal API support for DTDs, with new utility
+        functions (finding cross-referencing of elements within DTD
+        content models, guessing likely start elements, etc) (Dave
+        Malcolm)
+      * Building from CVS now requires the use of the flags: -Wall
+        -Werror; various warnings fixed as a result of this (Dave
+        Malcolm)
+      * Cancelling the addition of required children elements now works
+        properly, with enhancements to the internal API for modifying
+        the document. See bug # 135865 for details. (Nickolay V.
+        Shmyrev)
+      * Added new menu item Help/Homepage that will open
+        www.conglomerate.org in browser. (see bug # 134966 ). (Nickolay
+        V. Shmyrev)
+
+Fixes
+      * Fixed a long-standing problem with the internal API
+        (node_set_parent operation now has an explicit argument to
+        indicate whether the node should be added at the end or
+        beginning, fixing at least one subtle pointer manipulation bug
+        (Dave Malcolm)
+      * Big overhaul of path handling within the code (Toshio Kuratomi)
+        and (Geert Stappers)
+        , fixing bug # 135345 , bug # 121676
+      * More cleanups of the internals of the popup menu code (Dave
+        Malcolm)
+      * Fix for bug # 143937 (Nickolay V. Shmyrev)
+      * Various build fixes for GCC-2.95 (Pav Lucistnik)
+        (Geert Stappers)
+      * Updated with the new logo, fixing bug # 134749 . (Geert
+        Stappers)
+      * Warning fixes (Danilo Segan)
+      * Autogenerate the marshalling code (Johannes Hölzl)
+      * Removed unnecessary translation markings from debug menu strings
+        (Dave Malcolm)
+      * Updated the boilerplate example plugin code (Dave Malcolm)
+      * Fixes for bug # 122813 ; eliminate markup inside translated
+        strings (David Hoover)
+      * Cleanup of internals of dispspec handling (Dave Malcolm)
+      * Removed unnecessary test that stopped detecting nested
+        cross-references to elements in a DTD, fixing bug # 136209 part
+        (i) (Dave Malcolm)
+      * Fix for bug # 135867 (crash when selecting Edit Display Spec)
+        (Dave Malcolm)
+      * Added tests to determine if we have a way of printing a
+        document; set up the sensitivity of printing menu options
+        appropriately (Dave Malcolm)
+      * Add new parameters to function
+        cong_error_dialog_with_convenience, fixing bug # 134950
+        (Nickolay V. Shmyrev)
+      * Applied patch by (hondaguru AT earthlink.net)
+        for bug # 132884
+      * Ensured the File->New assistant is fully constructed before it
+        is shown to avoid ugly visual resizing (Dave Malcolm)
+
+Thanks
+      * Jaswinder Singh Phulewala
+      * Gareth Owen
+      * Adam Weinberger
+      * Miloslav Trmac
+      * Dmitry G. Mastrukov
+      * Daniel van Eeden
+      * Kees van den Broek
+      * Christian Rose
+      * Francisco Javier F. Serrador
+      * Robert Sedak
+      * Christian Neumair
+      * Jordi Mallach
+      * Danilo Šegan
+      * Dave Malcolm
+      * Nickolay V. Shmyrev
+      * Johannes Hölzl
+      * Daniel Larsson
+      * Jeff Martin
+      * David Hoover
+      * Geert Stappers
+      * Toshio Kuratomi
+      * Pav Lucistnik
+      * Danilo Segan
+      * hondaguru AT earthlink.net
+
+-- 
+David Malcolm
+
 17-02-04
 Conglomerate 0.7.12 Released
 ============================
@@ -66,94 +283,3 @@ Fixes
 
 -- 
 David Malcolm
-
-30-01-04
-Conglomerate 0.7.11 Released
-============================
-
-Conglomerate is a free, user-friendly XML editor. It is particularly
-aimed at DocBook, but should be able to handle any XML document type.
-
-This is still an unstable release; there are still some known repeatable
-crash bugs. Please download it and test that no new bugs have been
-introduced! 
-
-You can download it from the usual place:
-http://sourceforge.net/project/showfiles.php?group_id=82766
-
-Many thanks to everyone who contributed to this release; my apologies if
-I missed anyone from the credits below.
-
-
-Enhancements
-      * New translations: no (Kjaartan Marass), fr (Alban Browaeys), sq
-        (Laurent Dhima)
-        
-      * Updated translations: cs (Miloslav Trmac), es (Francisco Javier
-        F. Serrador), nl (Daniel van Eeden), no (Kjartan Maraas), pt
-        (Duarte Loreto), sr/sr@Latn (Danilo Å egan), 
-        
-      * The File->New assistant now has a "Random Document" plugin,
-        which is both great fun, and good for testing. If you select
-        this, you reach a page where you can select a document type from
-        those available (based on the dispspec files loaded). You can
-        also specify a "depth" which is used to give an idea of how deep
-        the document's tree should be. If a DTD is available,
-        Conglomerate will try to ensure that the document is valid
-        against that DTD. It also generates random text, to really push
-        the unicode support (it generates random strings using most of
-        the full range of Unicode). (me) 
-        
-      * If a DTD if found, the DTD tab of the Properties dialog for a
-        node now has a "content model" view, showing the valid child
-        elements that are allowed by the DTD in a tree form. (me)
-        
-      * First attempt at a "Find" dialog; improving this and the
-        "Replace" dialog would make great jobs for programmers wanting
-        to get involved. (me)
-        
-      * Big rewrite of the plugin code with the aim of eventually moving
-        over to libgnomeoffice's framework. Plugins contain services of
-        various kinds; everything is now a GObject subclass. (me)
-        
-      * The "--enable-printing" configuration option no longer requires
-        libfo; this is now enabled separately with a new
-        "--enable-libfo" option (me)
-        
-      * Change template code to use a <cong:template> element (Jeff
-        Martin)
-        
-      * Toolbar now has a "New Document" button (Daniel van Eeden)
-        
-      * Internal improvements to GUI button sensitivity logic (Paul
-        Smith)
-
-      * User manual extended (Sean Wheller)
-
-      * Extended User manual source files into tarball (Jeff Martin)
-        
-
-Fixes
-      * Fix bug #130820 (me)
-        
-      * Fixed crash when loading file without a dispspec with no
-        extension in its filename (me)
-        
-      * Fixed a bug in the template code (Daniel Larson)
-        
-      * Fixes for C99ism build problems on gcc-2.95.4 (Geert Stappers)
-        
-      * Fixed whitespace issues in the README files (David Hoover)
-        
-      * Various build fixes, including disabling gtk-doc for now (Geert)
-        
-      * Added a couple of DocBook tags to the display specification
-        (Daniel Larsson)
-        
-      * Added a template file for display specifications to the examples
-        subfolder (Boris Goldowsky)
-        
--- 
-David Malcolm
-www.conglomerate.org
-
