@@ -1,3 +1,9 @@
+2003-10-31  Pav Lucistnik <pav@oook.cz>
+
+	* plugin-templates.c
+
+	Fixed C99-ism
+
 2003-10-27  Jeff Martin  <jeff@custommonkey.org>
   
 	* plugin-templates.c

@@ -169,12 +169,12 @@ gboolean plugin_templates_plugin_register(CongPlugin *plugin)
 {
 	int i;
 	GSList* template_paths;
+	CongTemplate* template;
 
 	g_return_val_if_fail(plugin, FALSE);
 
 	template_paths = get_template_paths(plugin);
 
-	CongTemplate* template;
 	template = g_new0(CongTemplate, sizeof(template));
 	template->plugin = plugin;
 
