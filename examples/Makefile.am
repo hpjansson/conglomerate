@@ -9,7 +9,7 @@ example_DATA 	 = \
 	test-entities.xml \
 	test-table.xml
 
-dispspecdir 	 = $(pkgdatadir)/conglomerate/dispspecs
+dispspecdir 	 = $(pkgdatadir)/dispspecs
 dispspec_DATA 	 = \
 	cnxml.xds \
 	dispspec.xds \
