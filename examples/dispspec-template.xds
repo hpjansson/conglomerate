@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE dispspec SYSTEM "/opt/gnome/share/conglomerate/dtd/xds.dtd">
+<dispspec>
+  <metadata>
+    <name locale="en">Name of this document type</name>
+    <description>Description of this document type</description>
+  </metadata>
+  <serialisation>
+    <!-- put the normal filename extension for this document type here: -->
+    <format extension="ext"/>
+  </serialisation>
+  <document-models>
+   <!-- Document models can be of type dtd, w3c-xml-schema, or relax-ng-schema.
+        Besides type, attributes are public-id and system-id -->
+    <external-document-model type="dtd" public-id="--/PUBID" system-id="URL or filename"/>
+  </document-models>
+  <element-list>
+    <!-- elements can have the following attributes:
+
+   Required attribute:
+
+     tag (ID #IMPLIED) which tag (element name) is being defined here
+
+     type, can be
+       structural  : render element as a box with title bar
+       span        : render as a bracket under the text
+       embed-external-file : display another file for this element
+       plugin      : special case requiring own program to support display
+       paragraph   : deprecated
+
+   Optional attributes for all elements:
+
+     color (CDATA #IMPLIED) color of structural elt header or span bracket
+
+     whitespace (normalize or preserve, default normalize)
+
+   Only if type is embed-external-file:
+
+     filename-attribute (NMTOKEN #IMPLIED) : name of the file to embed
+
+   Structural elements only:
+
+     icon (CDATA #IMPLIED) icon for structural header
+
+   Plugin elements only:
+
+     plugin-id (NMTOKEN #IMPLIED)
+-->
+
+<!-- sub-elements of element element (all optional):
+   name : what name to use in gui for this element
+   short-desc (locale=en) : description, used where???
+   header-info [for structural] empty element with attributes:
+      tag ???
+      xpath, expression which is used to construct the title information
+   collapseto [for structural] ???
+   property-dialog : points to external plugin
+-->
+
+  </element-list>
+
+  <!-- document template can be here, but should be deprecated -->
+
+  <!-- gui goes here, but currently unused (?) -->
+
+</dispspec>
