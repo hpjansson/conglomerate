@@ -1,5 +1,9 @@
 2003-08-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-plugin.c, cong-plugin.h, plugin-docbook.c
+
+	Improvements to text->DocBook importer
+
 	* cong-document.c, cong-editor-area-flow-holder-blocks.c, cong-editor-area-flow-holder-inlines.c, cong-editor-area-line.c, cong-error-file-open.c, cong-error-file-save.c, cong-plugin.c, cong-plugin.h, cong-primary-window.h, cong-util.c, cong-util.h, plugin-docbook.c, tree.c, xmldata.c, xmledit.c
 
 	Fixed various warnings and prototype problems

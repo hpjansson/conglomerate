@@ -864,13 +864,14 @@ const gchar *cong_tool_get_tip_further_text(CongTool *tool)
 	return tool->tooltip_further_text;
 }
 
-void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
-						GtkWindow *parent_window)
+CongDocument*
+cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
+					   GtkWindow *parent_window)
 {
 	CongDocument *cong_doc;
 	CongDispspec *ds;
 	
-	g_return_if_fail(xml_doc);
+	g_return_val_if_fail (xml_doc, NULL);
 
 	ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, xml_doc);
 
@@ -881,7 +882,7 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 
 		if (NULL == ds) {
 			xmlFreeDoc(xml_doc);
-			return;
+			return NULL;
 		}
 	}
 	
@@ -892,15 +893,18 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 
 	cong_primary_window_new(cong_doc);
 	g_object_unref(G_OBJECT(cong_doc));
+
+	return cong_doc;
 }
 
-void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
-					    GtkWindow *parent_window)
+CongDocument*
+cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
+				       GtkWindow *parent_window)
 {
 	CongDocument *cong_doc;
 	CongDispspec *ds;
 	
-	g_return_if_fail(xml_doc);
+	g_return_val_if_fail (xml_doc, NULL);
 
 	ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, xml_doc);
 
@@ -911,7 +915,7 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 
 		if (NULL == ds) {
 			xmlFreeDoc(xml_doc);
-			return;
+			return NULL;
 		}
 	}
 	
@@ -922,6 +926,8 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 
 	cong_primary_window_new(cong_doc);
 	g_object_unref(G_OBJECT(cong_doc));
+
+	return cong_doc;
 }
 
 xmlDocPtr cong_ui_transform_doc(CongDocument *doc,

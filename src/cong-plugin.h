@@ -238,10 +238,12 @@ const gchar *cong_tool_get_tip_text(CongTool *tool);
 const gchar *cong_tool_get_tip_further_text(CongTool *tool);
 
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
-void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
-						GtkWindow *parent_window);
-void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
-					    GtkWindow *parent_window);
+CongDocument* 
+cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
+					   GtkWindow *parent_window);
+CongDocument*
+cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
+				       GtkWindow *parent_window);
 
 xmlDocPtr cong_ui_parse_buffer(const char* buffer, 
 			       GnomeVFSFileSize size, 

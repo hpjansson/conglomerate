@@ -34,6 +34,15 @@
 #include "cong-util.h"
 #include "cong-fake-plugin-hooks.h"
 
+/* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
+static GList*
+split_utf8_into_unichar_lines (const gchar *utf8_input);
+
+static void
+parse_text_buffer_into_docbook (CongDocument *doc,
+				CongNodePtr root_node, 
+				const char* buffer);
+
 #if 0
 struct DocBookAuthorInfo
 {
@@ -294,11 +303,469 @@ gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_typ
 		return TRUE;
 	} else if (0==strcmp(mime_type,"text/x-readme")) {
 		return TRUE;
+	} else if (0==strcmp(mime_type,"text/x-install")) {
+		return TRUE;
+	} else if (0==strcmp(mime_type,"text/x-copying")) {
+		return TRUE;
 	} else if (0==strcmp(mime_type,"application/octet-stream")) {
 		return TRUE;
 	} else {
 		return FALSE;
 	}
+}
+
+/* Internal stuff for the text importer: */
+gboolean
+cong_unichar_is_line_break(gunichar c)
+{
+	switch (g_unichar_break_type (c)) {
+	default: return FALSE;
+
+	case G_UNICODE_BREAK_CARRIAGE_RETURN:
+	case G_UNICODE_BREAK_LINE_FEED:
+		return TRUE;
+	}
+}
+
+static gunichar*
+make_unichar_line (gunichar *start, 
+		   gunichar *beyond_end)
+{
+	gunichar *duplicate;
+
+	g_return_val_if_fail (start, NULL);
+	g_return_val_if_fail (beyond_end, NULL);
+	g_return_val_if_fail (beyond_end>=start, NULL);
+
+	duplicate = g_memdup (start, ((beyond_end-start)+1)*sizeof(gunichar));
+
+	duplicate[(beyond_end-start)] = 0;
+
+	return duplicate;
+}
+
+static void
+append_line (GList **result,
+	     gunichar *start, 
+	     gunichar *beyond_end)
+{
+	gunichar* line = make_unichar_line (start, 
+					    beyond_end);
+	
+	if (line) {
+		*result = g_list_append (*result, line);
+	}	
+}
+
+static GList*
+split_utf8_into_unichar_lines (const gchar *utf8_input)
+{
+	GList *result = NULL;
+	gunichar* ucs4_full_string;
+	gunichar* line_start;
+	gunichar* iter;
+
+	g_return_val_if_fail (utf8_input, NULL);
+
+	ucs4_full_string = g_utf8_to_ucs4_fast (utf8_input,
+						-1,
+						NULL);
+	
+	line_start = ucs4_full_string;
+
+	for (iter=ucs4_full_string; *iter; iter++) {
+		if (cong_unichar_is_line_break(*iter)) {
+			append_line (&result, line_start, iter);
+			line_start = iter+1;
+		}
+	}
+
+	append_line (&result, line_start, iter-1);
+	
+	g_free (ucs4_full_string);
+
+	return result;
+}
+
+static gboolean
+cong_ucs4_is_bold_caps (gunichar *ucs4_input)
+{
+	g_return_val_if_fail (ucs4_input, FALSE);
+
+	if (0 == *ucs4_input) {
+		return FALSE;
+	}
+
+	while (*ucs4_input) {
+		if (g_unichar_islower (*ucs4_input)) {
+			return FALSE;
+		}
+
+		ucs4_input++;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+cong_unichar_is_underline (gunichar c)
+{
+	switch (c) {
+	default: return FALSE;
+	case '-': return TRUE;
+	case '=': return TRUE;
+	case '_': return TRUE;
+	}
+}
+
+static gboolean
+cong_ucs4_is_underline (gunichar *ucs4_input)
+{
+	g_return_val_if_fail (ucs4_input, FALSE);
+
+	if (0 == *ucs4_input) {
+		return FALSE;
+	}
+
+	while (*ucs4_input) {
+		if (!cong_unichar_is_underline (*ucs4_input)) {
+			return FALSE;
+		}
+
+		ucs4_input++;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+cong_ucs4_is_list_item (gunichar *ucs4_input, 
+			gunichar **output_text)
+{
+	/* For now, detect "- ": */
+	if ('-'==ucs4_input[0]) {
+		if (' '==ucs4_input[1]) {
+			gunichar *iter = &ucs4_input[2];
+			while (0!=*iter) {
+				iter++;				
+			}
+
+			if (output_text) {
+				*output_text = g_memdup (&ucs4_input[2], sizeof(gunichar)*(1+(iter-&ucs4_input[2])));
+			}
+			
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+gboolean
+should_merge (gunichar *ucs4_input_1,
+	      gunichar *ucs4_input_2)
+{
+	if (0==ucs4_input_2[0]) {
+		return FALSE;
+	}
+
+	if (cong_ucs4_is_bold_caps (ucs4_input_1)) {
+		return cong_ucs4_is_bold_caps (ucs4_input_2);
+	} else {
+		if (cong_ucs4_is_bold_caps (ucs4_input_2)) {
+			return FALSE;
+		}
+	}
+
+	if (cong_ucs4_is_list_item (ucs4_input_2, NULL)) {
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+gunichar*
+cong_ucs4_concat (gunichar *ucs4_input_1,
+		  gunichar *ucs4_input_2)
+{
+	gchar *utf8_input_1 = g_ucs4_to_utf8 (ucs4_input_1,
+					      -1,
+					      NULL,
+					      NULL,
+					      NULL);
+	gchar *utf8_input_2 = g_ucs4_to_utf8 (ucs4_input_2,
+					      -1,
+					      NULL,
+					      NULL,
+					      NULL);
+	gchar *utf8_result = g_strdup_printf("%s %s", utf8_input_1, utf8_input_2);
+
+	gunichar *ucs4_result = g_utf8_to_ucs4_fast (utf8_result,
+						     -1,
+						     NULL);
+	g_assert (ucs4_result);
+	
+	g_free (utf8_input_1);
+	g_free (utf8_input_2);
+	g_free (utf8_result);
+
+	return ucs4_result;
+}
+
+
+GList*
+merge_lines (GList *list)
+{
+	GList *iter;
+	GList *next;
+#if 0	
+	for (iter=list;iter;iter=next) {
+		gunichar *string = iter->data;
+
+		g_assert (string);
+
+		next = iter->next;
+
+		if (0==string[0]) {
+			/* Delete empty lines: */
+			g_free (iter->data);
+			list = g_list_delete_link (list,
+						   iter->next);
+
+			
+		} else {
+			/* Merge with next line, if both are non-empty: */
+			if (next) {
+				g_assert (next->data);
+				if (should_merge(iter->data, next->data)) {
+					
+					gunichar *new_string = cong_ucs4_concat (iter->data, next->data);
+					g_free (iter->data);
+					iter->data = new_string;
+
+					g_assert (next==iter->next);
+					next = next->next;
+
+					g_free (iter->next->data);
+					list = g_list_delete_link (list,
+								   iter->next);
+				}
+			}
+		}
+	}	
+#endif
+	return list;
+}
+
+#if 0
+/**
+   Traverse document, looking for <para> tags containing empty text.
+
+   Go back and merge the 
+ */
+void
+cong_util_merge_paras (CongDocument *doc)
+{
+	cong_document_begin_edit (doc);
+	cong_document_end_edit (doc);
+}
+#endif
+
+static void
+parse_text_buffer_into_docbook (CongDocument *doc,
+				CongNodePtr root_node, 
+				const char* buffer)
+{
+	g_return_if_fail (doc);
+	g_return_if_fail (root_node);
+	g_return_if_fail (buffer);
+
+	cong_document_begin_edit (doc);
+
+	#if 1
+	/* Split buffer into lines; add lines individually as paras, with some heuristics: */
+	{
+		GList* list = split_utf8_into_unichar_lines (buffer);
+		GList *iter;
+		CongNodePtr current_sect = NULL;
+		CongNodePtr current_list = NULL;
+
+		list = merge_lines (list);
+		
+		for (iter=list;iter;iter=iter->next) {
+			gboolean is_heading = FALSE;
+			gunichar *ucs4_listitem_text = NULL;
+
+			g_assert (iter->data);
+			
+			/* Individual fully bold lines are probably headings: */
+			if (cong_ucs4_is_bold_caps (iter->data) ) {
+				if (iter->next) {
+					if (!cong_ucs4_is_bold_caps (iter->next->data) ) {
+						is_heading = TRUE;
+					}					
+				}
+			} 
+
+			/* Detect if the next line is merely an underline of some kind: */
+			if (iter->next) {
+				
+				g_assert (iter->next->data);
+				if (cong_ucs4_is_underline (iter->next->data)) {
+					is_heading = TRUE;
+					
+					list = g_list_delete_link (list,
+								   iter->next);
+				}
+			}
+
+			/* Reject blanks lines here: */
+			if (0==((gunichar*)iter->data)[0]) {
+				continue;
+			}
+			
+			/* Attempt to merge with the next line: */
+			while (iter->next) {
+				if (should_merge (iter->data, iter->next->data)) {
+					gunichar *new_string = cong_ucs4_concat (iter->data, iter->next->data);
+					g_free (iter->data);
+					iter->data = new_string;
+					
+					g_free (iter->next->data);
+					list = g_list_delete_link (list,
+								   iter->next);
+				} else {
+					break;
+				}
+			}
+
+				
+
+			if (cong_ucs4_is_list_item (iter->data,
+						    &ucs4_listitem_text) ) {
+				CongNodePtr listitem;
+				CongNodePtr para;
+				CongNodePtr text_node;
+
+
+				gchar *utf8_listitem_text = g_ucs4_to_utf8 (ucs4_listitem_text,
+									    -1,
+									    NULL,
+									    NULL,
+									    NULL);
+				
+				text_node = cong_node_new_text (utf8_listitem_text, 
+								doc);
+				
+				g_free (utf8_listitem_text);
+				g_free (ucs4_listitem_text);
+
+
+				if (NULL==current_list) {
+					/* Create a <itemizedlist> below the root/currect sect: */
+					current_list = cong_node_new_element(NULL, "itemizedlist", doc);
+					
+					
+					if (current_sect) {
+						cong_document_node_set_parent (doc, 
+									       current_list,
+									       current_sect);
+					} else {
+						cong_document_node_set_parent (doc, 
+									       current_list, 
+									       root_node);
+					}
+				}
+
+				listitem = cong_node_new_element(NULL, "listitem", doc);
+
+				para = cong_node_new_element(NULL, "para", doc);
+					
+				cong_document_node_set_parent (doc, 
+							       listitem,
+							       current_list);
+
+				cong_document_node_set_parent (doc, 							       
+							       para,
+							       listitem);
+
+				cong_document_node_set_parent (doc,
+							       text_node,
+ 							       para);
+			} else {
+				CongNodePtr text_node;
+
+				gchar *utf8_line;
+
+				utf8_line = g_ucs4_to_utf8 (iter->data,
+							    -1,
+							    NULL,
+							    NULL,
+							    NULL);
+				
+				text_node = cong_node_new_text (utf8_line, 
+								doc);
+				
+				g_free (utf8_line);
+
+				current_list = NULL;
+
+				if (is_heading) {
+					CongNodePtr title;
+					
+					/* Create a <sect1> below the root and add as a title */
+					current_sect = cong_node_new_element(NULL, "sect1", doc);
+					
+					title = cong_node_new_element(NULL, "title", doc);
+					
+					cong_document_node_set_parent (doc, 
+								       current_sect, 
+								       root_node);
+					
+					cong_document_node_set_parent (doc, 
+								       title,
+								       current_sect);
+					
+					cong_document_node_set_parent (doc, 							       
+								       text_node,
+								       title);
+				} else {
+					/* FIXME: spot text of the form: "fubar: more text"; turn it into a <formalpara> tag instead */
+					CongNodePtr para_node;
+					
+					/* Create a <para>; either below the currect <sect1> or below the root */
+					para_node = cong_node_new_element(NULL, "para", doc);				
+					
+					if (current_sect) {
+						cong_document_node_set_parent (doc, 
+									       para_node, 
+									       current_sect);
+					} else {
+						cong_document_node_set_parent (doc, 
+									       para_node, 
+									       root_node);
+					}
+					cong_document_node_set_parent (doc, 
+								       text_node, 
+								       para_node);
+				}
+			}
+		}
+
+		/* FIXME: this leaks the lines */
+	}
+	#else
+	/* Add raw to doc: */
+	{
+		CongNodePtr text_node = cong_node_new_text (buffer, 
+							    doc);
+		
+		cong_document_node_set_parent (doc, 
+					       text_node, 
+					       root_node);
+	}
+	#endif
+
+	cong_document_end_edit (doc);
 }
 
 void text_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
@@ -310,27 +777,37 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 	g_message("text_importer_action_callback");
 
 	if (cong_ui_load_imported_file_content(uri, &buffer, &size, toplevel_window)) {
+		CongDocument *doc;
 		xmlNodePtr root_node;
 
 		g_assert(buffer);
 
 		/* Build up the document and its content: */
 		xml_doc = xmlNewDoc("1.0");
+
+		add_docbook_declaration(xml_doc, "article");
 			
 		root_node = xmlNewDocNode(xml_doc,
 					  NULL, /* xmlNsPtr ns, */
 					  "article",
-					  buffer);
+					  NULL);
 
 		xmlDocSetRootElement(xml_doc,
 				     root_node);
 
+		/* Do appropriate UI stuff: */
+		doc = cong_ui_new_document_from_imported_xml(xml_doc,
+							     toplevel_window);
+
+		if (doc) {
+			parse_text_buffer_into_docbook (doc,
+							root_node, 
+							buffer);
+		}
+
 		/* Finished building content: */
 		g_free(buffer);
 
-		/* Do appropriate UI stuff: */
-		cong_ui_new_document_from_imported_xml(xml_doc,
-						       toplevel_window);
 	}
 }
 
