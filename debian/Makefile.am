@@ -19,10 +19,12 @@ debian_DISTS = \
 # package related files
 pkg_DISTS = \
     conglomerate.dirs \
+    conglomerate.lintian-override \
     conglomerate.postinst \
     conglomerate.prerm \
     conglomerate-common.dirs \
     conglomerate-common.docs \
+    conglomerate-common.lintian-override \
     conglomerate-common.menu \
     conglomerate-dbg.dirs \
     conglomerate_icon.xpm \
