@@ -1,8 +1,19 @@
-conglomerate (0.7.11-2.1) unstable; urgency=low
+conglomerate (0.7.11-2.2) UNRELEASED; urgency=medium
 
   * expecting new upstream version
+   - This one will pull in a new scrollkeeper package,
+   which pulls in new DocBook XML package.
+   That will be docbook-xml => 4.2-8, which registers DTDs,
+   it affects bugreports 226011, 212408 & 223470 positively.
+   - Registering DTDs in xmlcatalog is the reason for the medium urgency.
 
- -- Geert Stappers <stappers@stappers.nl>  Wed, 11 Feb 2004 12:36:56 +0100
+  * README
+  Told more about the docbook-xml dependency,
+  allows it to closes: #212408, #223470.
+  But it was the DTD registration to close those bugs
+  for the point of view of the user, slash bugreporter.
+
+ -- Geert Stappers <stappers@stappers.nl>  Sat Feb 14 15:24:24 UTC 2004
 
 conglomerate (0.7.11-1) unstable; urgency=low
 
