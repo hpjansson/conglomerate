@@ -38,6 +38,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 					   "popup_data_item");
 	g_assert(cong_tree_view);				
+
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	
 	
@@ -112,6 +113,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	CongDialogCategory *category_dtdschema;
 	CongDialogCategory *category_custom;
 	xmlElementPtr xml_element;
+	GtkWindow *parent_window;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 					   "popup_data_item");
@@ -119,9 +121,12 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
 
+	parent_window = g_object_get_data(G_OBJECT(widget),
+					  "parent_window");
+
 	/* FIXME: Test implementation: */
 	dialog = gtk_dialog_new_with_buttons("Placeholder Properties Dialog",
-					     NULL,
+					     parent_window,
 					     GTK_DIALOG_MODAL,
 					     GTK_STOCK_OK, GTK_RESPONSE_OK,
 					     NULL);

@@ -718,11 +718,11 @@ void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs);
 
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
-void editor_popup_build(CongDocument *doc);
+void editor_popup_build(CongDocument *doc, GtkWindow *parent_window);
 void editor_popup_init();
 
 /* Popup (context) menus for tree view: */
-GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x);
+GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x, GtkWindow *parent_window);
 gint tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
 /* dialog to select from a list of string */

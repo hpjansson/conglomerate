@@ -1029,6 +1029,8 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	CongEditorWidget *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
+	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget)));
+
 	/* FIXME: unimplemented */
 	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_button_press");
 
@@ -1039,6 +1041,30 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	if (event->button == 1) {
 		switch (event->type) {
 		default: return; /* do nothing */
+#if 0
+		case GDK_3BUTTON_PRESS:
+			/* Handle triple-click by locating the tag containing the click location, 
+			   making that the selection, with the cursor at the end of it? */
+			{
+				CongLocation click_location;
+				CongLocation start_of_tag;
+				CongLocation end_of_tag;
+
+				if (get_click_location(span_text_editor, event->x, event->y, &click_location)) {
+					cong_location_calc_tag_start(&click_location, &tag_start);
+					cong_location_calc_tag_end(&click_location, &tag_end);
+						
+					cong_location_copy(&selection->loc0, &start_of_tag);
+					cong_location_copy(&selection->loc1, &end_of_tag);
+					cong_location_copy(&cursor->location, &end_of_tag);
+				
+					cong_document_on_selection_change(doc);
+					cong_document_on_cursor_change(doc);
+				}
+			}
+			return;
+#endif
+
 		case GDK_2BUTTON_PRESS:
 			/* Handle double-click by locating the word containing the click location, 
 			   making that the selection, with the cursor at the end of it. */
@@ -1081,7 +1107,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 		}
 	} else if (event->button == 3) {
 
-		editor_popup_build(doc);
+		editor_popup_build(doc, parent_window);
 		editor_popup_show(the_globals.popup, event);
 
 	}

@@ -64,7 +64,9 @@ cong_document_get_parent_uri(CongDocument *doc);
 /* caller is responsible for freeeing */
 
 void
-cong_document_save(CongDocument *doc, const char* filename);
+cong_document_save(CongDocument *doc, 
+		   const char* filename,
+		   GtkWindow *parent_window);
 
 gboolean
 cong_document_is_modified(CongDocument *doc);

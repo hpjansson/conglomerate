@@ -1,4 +1,18 @@
 creating ChangeLog
+2003-04-08 David Malcolm
+
+	* cong-document.c, cong-document.h, cong-span-text-editor.c, global.h, popup.c, save.c, tree.c
+
+	More transient window fixes
+
+	* cong-menus.c
+
+	Fixed typo in comment
+
+	* cong-plugin.c, new_doc.c
+
+	Fixed warnings
+	
 2003-04-04 David Malcolm
 
 	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-document.c, cong-error-dialog.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-location.c, cong-plugin.c, cong-plugin.h, cong-primary-window.c, global.h, main.c, new_doc.c, open.c, plugin-docbook.c, plugin-tests.c, popup.c

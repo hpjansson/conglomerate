@@ -27,6 +27,8 @@
 
 #include "global.h"
 
+#include "cong-document.h"
+
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
@@ -47,7 +49,7 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 		return TRUE;
 	}
 	
-	cong_document_save(doc, doc_name);
+	cong_document_save(doc, doc_name, parent_window);
 	
 	return TRUE;
 }
@@ -64,7 +66,7 @@ gint save_document(CongDocument *doc, GtkWindow *parent_window)
 		return save_document_as(doc, parent_window);
 	}
 
-	cong_document_save(doc, doc_name);
+	cong_document_save(doc, doc_name, parent_window);
 	
 	g_free(doc_name);
 
