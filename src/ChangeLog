@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.h, cong-command.c, cong-command-history.h, cong-command-history.c
+
+	New files: beginnings of undo/redo framework
+
 	* plugin-lists-area-listitem.c, plugin-lists-area-listitem.h
 
 	Added set_label method
