@@ -754,7 +754,7 @@ GtkWidget *xv_section_vline_and_space(CongDispspec *ds, CongNodePtr x)
 }
 
 
-GtkWidget *xv_section_data(CongNodePtr x, CongDispspec *ds, int collapsed)
+GtkWidget *xv_section_data(CongNodePtr x, CongDocument *doc, CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	CongXMLEditor *xed;
@@ -766,7 +766,7 @@ GtkWidget *xv_section_data(CongNodePtr x, CongDispspec *ds, int collapsed)
 
 	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
 
-	xed = xmledit_new(x, ds);
+	xed = xmledit_new(x, doc, ds);
 #if 0
 	gtk_box_pack_start(GTK_BOX(hbox), xed->w, FALSE, TRUE, 0);
 #else
@@ -1085,7 +1085,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 			{
 				/* New editor window */
 				
-				sub = xv_section_data(x, ds, collapsed);
+				sub = xv_section_data(x, doc, ds, collapsed);
 				if (sub)
 				{
 					gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);
@@ -1127,7 +1127,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 		{
 			/* New editor window */
 
-			sub = xv_section_data(x, ds, collapsed);
+			sub = xv_section_data(x, doc, ds, collapsed);
 			if (sub)
 			{
 				gtk_box_pack_start(GTK_BOX(root), sub, FALSE, TRUE, 0);

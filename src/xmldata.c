@@ -269,7 +269,7 @@ void cong_node_free(CongNodePtr node)
 }
 
 
-void cong_node_recursive_delete(CongNodePtr node)
+void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 {
 #if NEW_XML_IMPLEMENTATION
 	CongNodePtr iter, next;
@@ -283,7 +283,7 @@ void cong_node_recursive_delete(CongNodePtr node)
 
 		CONG_NODE_SELF_TEST(iter);
 		
-		cong_node_recursive_delete(iter);
+		cong_node_recursive_delete(doc, iter);
 
 		g_assert(iter->parent==NULL);
 
@@ -293,7 +293,7 @@ void cong_node_recursive_delete(CongNodePtr node)
 	g_assert(node->children==NULL);
 	g_assert(node->last==NULL);
 
-	cong_node_make_orphan(node);
+	cong_document_node_make_orphan(doc, node);
 
 	cong_node_free(node);
 #else
@@ -522,6 +522,16 @@ void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 		CONG_NODE_SELF_TEST(node);
 		CONG_NODE_SELF_TEST(adoptive_parent);
 	}
+}
+#endif
+
+#if NEW_XML_IMPLEMENTATION
+void cong_node_set_text(CongNodePtr node, const xmlChar *new_content)
+{
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	xmlNodeSetContent(node, new_content);
 }
 #endif
 

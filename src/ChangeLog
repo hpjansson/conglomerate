@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-28 David Malcolm
+
+	* cong-document.c, cong-location.c, cong-test-view.c, cursor.c, global.h, popup.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Beginnings of MVC separation
+	
 2002-10-27 David Malcolm
 
 	* cong-dispspec-registry.c, cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, main.c, open.c, popup.c, position.c, save.c, select.c, tchoice.c, tree.c, xmldata.c, xmledit.c, xmlview.c

@@ -34,6 +34,32 @@ enum CongNodeType
 	CONG_NODE_TYPE_NUM
 };
 
+
+enum CongElementType
+{
+	CONG_ELEMENT_TYPE_STRUCTURAL,
+	CONG_ELEMENT_TYPE_SPAN,
+	CONG_ELEMENT_TYPE_INSERT,
+
+	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
+
+	CONG_ELEMENT_TYPE_PARAGRAPH,
+
+	/* Other types?  Table? Plugin widget/Bonobo control? */
+
+	CONG_ELEMENT_TYPE_UNKNOWN
+};
+
+typedef struct CongDocument CongDocument;
+typedef struct CongView CongView;
+typedef struct CongViewClass CongViewClass;
+typedef struct CongDispspec CongDispspec;
+typedef struct CongDispspecElement CongDispspecElement;
+typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
+typedef struct CongDispspecRegistry CongDispspecRegistry;
+
+typedef struct CongFont CongFont;
+
 #if NEW_XML_IMPLEMENTATION
 typedef xmlNodePtr CongNodePtr;
 
@@ -63,7 +89,7 @@ const gchar *cong_node_type_description(enum CongNodeType node_type);
 void cong_node_self_test(CongNodePtr node);
 void cong_node_self_test_recursive(CongNodePtr node);
 
-void cong_node_recursive_delete(CongNodePtr node);
+void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node);
 CongNodePtr cong_node_recursive_dup(CongNodePtr node);
 
 
@@ -83,35 +109,17 @@ CongNodePtr cong_node_new_text_len(const char *text, int len); /* FIXME: what ch
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void cong_node_free(CongNodePtr node);
 
-/* Tree manipulation: */
+/* 
+   Direct tree manipulation; these functions are deprecated in favour of the cong_document_ versions below, which, in turn,
+   will get converted to an apporach involving atomic and compound modification objects, which will give us Undo/Redo
+*/
 #if NEW_XML_IMPLEMENTATION
 void cong_node_make_orphan(CongNodePtr node);
 void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling);
 void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling);
 void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_node_set_text(CongNodePtr node, const xmlChar *new_content);
 #endif
-
-enum CongElementType
-{
-	CONG_ELEMENT_TYPE_STRUCTURAL,
-	CONG_ELEMENT_TYPE_SPAN,
-	CONG_ELEMENT_TYPE_INSERT,
-
-	CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE,
-
-	CONG_ELEMENT_TYPE_PARAGRAPH,
-
-	/* Other types?  Table? Plugin widget/Bonobo control? */
-
-	CONG_ELEMENT_TYPE_UNKNOWN
-};
-
-typedef struct CongDispspec CongDispspec;
-typedef struct CongDispspecElement CongDispspecElement;
-typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
-typedef struct CongDispspecRegistry CongDispspecRegistry;
-
-typedef struct CongFont CongFont;
 
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
@@ -141,13 +149,13 @@ char
 cong_location_get_char(CongLocation *loc);
 
 CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongLocation *loc);
+cong_location_xml_frag_data_nice_split2(CongDocument *doc, CongLocation *loc);
 
 void
-cong_location_insert_chars(CongLocation *loc, const char* s);
+cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s);
 
 void
-cong_location_del_next_char(CongLocation *loc);
+cong_location_del_next_char(CongDocument *doc, CongLocation *loc);
 
 CongNodePtr
 cong_location_xml_frag_prev(CongLocation *loc);
@@ -165,9 +173,8 @@ void
 cong_location_copy(CongLocation *dst, const CongLocation *src);
 
 /**
-   Struct representing a document, in an effort to decouple the code from TTREE
+   CongDocument functions
  */
-typedef struct _CongDocument CongDocument;
 
 #if NEW_XML_IMPLEMENTATION
 /* takes ownership of xml_doc */
@@ -194,8 +201,18 @@ cong_document_get_filename(CongDocument *doc);
 void
 cong_document_save(CongDocument *doc, const char* filename);
 
-/* Include these here to help Cygwin a bit */
+/* MVC-related methods on the document: */
+#if NEW_XML_IMPLEMENTATION
+void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
+void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
+void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
+void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
+#endif
+void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
 
+void cong_document_register_view(CongDocument *doc, CongView *view);
+void cong_document_unregister_view(CongDocument *doc, CongView *view);
 
 typedef struct CongXMLEditor CongXMLEditor;
 
@@ -367,6 +384,7 @@ struct CongXMLEditor
 	GdkPixmap *p;  /* Backing pixmap */
 
 	CongDispspec *displayspec;
+	CongDocument *doc;
 	
 	int tag_height;
 	
@@ -544,7 +562,8 @@ int find_document();
 int find_documentmetacaps();
 int submit_do();
 int gui_window_login_make(char **user_s, char **pass_s);
-CongXMLEditor *xmledit_new();
+
+CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec);
 
 CongFont*
 cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role);
@@ -578,8 +597,8 @@ struct pos *pos_physical_to_logical(struct CongXMLEditor *xed, int x, int y);
 struct pos *pos_logical_to_physical(struct CongXMLEditor *xed, CongNodePtr node, int c);
 struct pos *pos_logical_to_physical_new(struct CongXMLEditor *xed, CongLocation *loc);
 
-CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1);
-CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c);
+CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1);
+CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
 CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
@@ -752,6 +771,34 @@ GtkWidget* tpopup_init(CongNodePtr x);
 gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
+
+#define CONG_VIEW(x) ((CongView*)(x))
+
+/* 
+   CongView: a base class for views.  They register themselves with their document and get notified when it changes.
+
+   Will eventually be ported to the GObject framework.
+*/
+struct CongView
+{
+	CongViewClass *klass;
+	
+	CongDocument *doc;
+};
+
+struct CongViewClass
+{
+	/* 
+	   Hooks for the various change signals; eventually do this by listening to signals emitted from the document, porting to the standard 
+	   GObject framework
+	*/
+	void (*on_document_node_make_orphan)(CongView *view, CongNodePtr node);
+	void (*on_document_node_add_after)(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
+	void (*on_document_node_add_before)(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
+	void (*on_document_node_set_parent)(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+	void (*on_document_node_set_text)(CongView *view, CongNodePtr node, const xmlChar *new_content);
+	void (*on_document_node_tag_remove)(CongView *view, CongNodePtr node);	
+};
 
 /* 
    Error handling facilities: 

@@ -132,7 +132,7 @@ void popup_tag_remove_inner()
 
 	/* GREP FOR MVC */
 
-	if (n0) xml_tag_remove(n0);
+	if (n0) cong_document_tag_remove(doc, n0);
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
 }
 
@@ -149,7 +149,7 @@ void popup_tag_remove_outer()
 
 	/* GREP FOR MVC */
 
-	if (n0) xml_tag_remove(n0);
+	if (n0) cong_document_tag_remove(doc, n0);
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
 }
 

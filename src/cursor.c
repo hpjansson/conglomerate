@@ -145,9 +145,14 @@ gint curs_blink(gpointer data)
 
 gint curs_data_insert(struct curs* curs, char *s)
 {
+	CongDocument *doc;
 	int len;
 
-	g_assert(curs!=NULL);
+	g_return_val_if_fail(curs, 0);
+	g_return_val_if_fail(s, 0);
+
+	g_assert(curs->xed);
+	doc = curs->xed->doc;
 
 	len = strlen(s);
 
@@ -155,7 +160,7 @@ gint curs_data_insert(struct curs* curs, char *s)
 	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return(0);
 
 #if 1
-	cong_location_insert_chars(&curs->location, s);
+	cong_location_insert_chars(doc, &curs->location, s);
 #else
 	n = curs->t->child;
 	n->data = realloc(n->data, (n->size + 1) + len);
@@ -180,6 +185,7 @@ int curs_paragraph_insert(struct curs* curs)
 	CongDispspec *ds;
 	CongDispspecElement *para;
 	const char *tagname;
+	CongDocument *doc;
 
 	g_assert(curs!=NULL);
 	
@@ -190,6 +196,7 @@ int curs_paragraph_insert(struct curs* curs)
 
 	g_assert(curs->xed);
 	ds = curs->xed->displayspec;
+	doc = curs->xed->doc;
 
 #if 0
 	para = cong_dispspec_get_paragraph(ds);
@@ -208,7 +215,7 @@ int curs_paragraph_insert(struct curs* curs)
 	/* GREP FOR MVC */
 
 #if 1
-	t = cong_location_xml_frag_data_nice_split2(&curs->location);
+	t = cong_location_xml_frag_data_nice_split2(doc, &curs->location);
 	cong_location_set(&curs->location,t->next,0);
 #else	
 	t = xml_frag_data_nice_split2(curs->t, curs->c);
@@ -225,8 +232,8 @@ int curs_paragraph_insert(struct curs* curs)
 	*/
 	new_element = cong_node_new_element(tagname);
 
-	cong_node_add_after(new_element, curs->location.tt_loc);
-	cong_node_set_parent(t, new_element);
+	cong_document_node_add_after(doc, new_element, curs->location.tt_loc);
+	cong_document_node_set_parent(doc, t, new_element);
 
 	/* FIXME:  
 	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
@@ -469,7 +476,12 @@ void curs_next_line(struct curs* curs, CongXMLEditor *xed)
 
 void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 {
-	g_assert(curs!=NULL);
+	CongDocument *doc;
+
+	g_return_if_fail(curs);
+	g_return_if_fail(xed);
+
+	doc = xed->doc;
 
 #if 1
 	if (!cong_location_exists(&curs->location)) return;
@@ -480,7 +492,7 @@ void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 	curs_prev_char(curs,xed);
 
 #if 1
-	cong_location_del_next_char(&curs->location);
+	cong_location_del_next_char(doc, &curs->location);
 #else	
 	if (*(xml_frag_data_nice(curs->t) + curs->c))
 	{
@@ -496,12 +508,17 @@ void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 
 void curs_del_next_char(struct curs* curs, CongXMLEditor *xed)
 {
-	g_assert(curs!=NULL);
+	CongDocument *doc;
+
+	g_return_if_fail(curs);
+	g_return_if_fail(xed);
+
+	doc = xed->doc;
 
 #if 1
 	if (!cong_location_exists(&curs->location)) return;
 
-	cong_location_del_next_char(&curs->location);
+	cong_location_del_next_char(doc, &curs->location);
 #else
 	if (!curs->t) return;
 	

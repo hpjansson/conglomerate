@@ -83,7 +83,7 @@ char cong_location_get_char(CongLocation *loc)
 }
 
 CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongLocation *loc)
+cong_location_xml_frag_data_nice_split2(CongDocument *doc, CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(cong_location_exists(loc), NULL);
@@ -91,11 +91,11 @@ cong_location_xml_frag_data_nice_split2(CongLocation *loc)
 	
 	/* GREP FOR MVC */
 
-	return xml_frag_data_nice_split2(loc->tt_loc, loc->char_loc);
+	return xml_frag_data_nice_split2(doc, loc->tt_loc, loc->char_loc);
 }
 
 void
-cong_location_insert_chars(CongLocation *loc, const char* s)
+cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s)
 {
 #if NEW_XML_IMPLEMENTATION
 	xmlChar *new_content;
@@ -118,8 +118,13 @@ cong_location_insert_chars(CongLocation *loc, const char* s)
 	new_content = xmlStrcat(new_content, s); /* FIXME: xmlChar versus char */
 	new_content = xmlStrcat(new_content, loc->tt_loc->content+loc->char_loc); /* FIXME: pointer arithmetic will fail with UTF8 etc */
 
+	#if 1
+	cong_document_node_set_text(doc, loc->tt_loc, new_content);
+	#else
 	xmlNodeSetContent(loc->tt_loc, new_content);
+	#endif
 
+	
 	xmlFree(new_content);
 
 	loc->char_loc += len;		
@@ -136,7 +141,7 @@ cong_location_insert_chars(CongLocation *loc, const char* s)
 }
 
 void
-cong_location_del_next_char(CongLocation *loc)
+cong_location_del_next_char(CongDocument *doc, CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
 
@@ -147,9 +152,20 @@ cong_location_del_next_char(CongLocation *loc)
 	if (cong_location_get_char(loc))
 	{
 		/* FIXME:  audit the char types and ptr arithmetic here: */
+#if 1
+		char *new_text;
+
+		new_text = xmlStrndup(xml_frag_data_nice(loc->tt_loc), loc->char_loc);
+		new_text = xmlStrcat(new_text, xml_frag_data_nice(loc->tt_loc) + loc->char_loc + 1); 
+
+		cong_document_node_set_text(doc, loc->tt_loc, new_text);
+
+		xmlFree(new_text);
+#else
 		memmove(xml_frag_data_nice(loc->tt_loc) + loc->char_loc, 
 			xml_frag_data_nice(loc->tt_loc) + loc->char_loc + 1,
 			strlen(xml_frag_data_nice(loc->tt_loc) + loc->char_loc));
+#endif
 	}
 #else
 

@@ -597,12 +597,16 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
 {
 	CongNodePtr dummy;                                                                 
+	CongDocument *doc;
 	                                                                                
 #ifndef RELEASE                                                                 
 	printf("In selection_received_event().\n");                                   
 #endif                                                                          
 
 	if (!d->data || d->length < 1) return(TRUE);
+
+	doc = xed->doc;
+	g_assert(doc);
 	
 	fwrite(d->data, d->length, 1, stdout);                                        
 	fputs("\n", stdout);
@@ -610,7 +614,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 	/* GREP FOR MVC */
 #if NEW_XML_IMPLEMENTATION	                                                                                
 	dummy = cong_node_new_element("dummy");
-	cong_node_set_parent( cong_node_new_text_len(d->data, d->length), dummy );
+	cong_document_node_set_parent( doc, cong_node_new_text_len(d->data, d->length), dummy );
 #else
 	  dummy = ttree_node_add(0, "tag_span", 8);                                     
 	  ttree_node_add(dummy, "dummy", 5);                                            
@@ -633,7 +637,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 }
 
 
-CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
+CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec)
 {
         UNUSED_VAR(GdkCursor* cursor)
 	CongXMLEditor *xed;
@@ -733,6 +737,7 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDispspec *displayspec)
 
 	/* g_message("xed used to clone the TTREE for the displayspec; it now shares it\n"); */
 	xed->displayspec = displayspec;
+	xed->doc = doc;
 	xed->initial = 1;
 	return(xed);
 }
@@ -2103,15 +2108,20 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
+	CongDocument *doc;
 
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+
+	g_assert(xed_disabled);
+	doc = xed_disabled->doc;
+	g_assert(doc);
 	
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
 
 	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
 	
-	if (the_globals.clipboard) cong_node_recursive_delete(the_globals.clipboard);
+	if (the_globals.clipboard) cong_node_recursive_delete(NULL, the_globals.clipboard);
 	
 	t = cong_node_new_element("dummy");
 
@@ -2129,7 +2139,7 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 		curs->xed->x = t->next;
 	}
 	
-	cong_node_make_orphan(t);
+	cong_document_node_make_orphan(doc, t);
 #else
 	if (t->prev)
 	{
@@ -2165,9 +2175,14 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
+	CongDocument *doc;
 
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
 
+	g_assert(xed_disabled);
+	doc = xed_disabled->doc;
+	g_assert(doc);
+	
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
 
@@ -2176,7 +2191,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	/* GREP FOR MVC */
 
 	if (the_globals.clipboard) {
-		cong_node_recursive_delete(the_globals.clipboard);
+		cong_node_recursive_delete(NULL, the_globals.clipboard);
 	}
 
 	t = cong_node_new_element("dummy");
@@ -2194,10 +2209,10 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	for (t0 = cong_node_first_child(t); t0; t0 = t_next) {
 		t_next = t0->next;
-		cong_node_add_before(t0, t);
+		cong_document_node_add_before(doc, t0, t);
 	}
 
-	cong_node_make_orphan(t);
+	cong_document_node_make_orphan(doc,t);
 	cong_node_free(t);
 #else
 	if (t->child->child)
@@ -2251,10 +2266,15 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
 	CongDispspec *ds;
+	CongDocument *doc;
 	
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
 
 	ds = curs->xed->displayspec;
+
+	g_assert(xed_disabled);
+	doc = xed_disabled->doc;
+	g_assert(doc);
 
 	/* GREP FOR MVC */
 
@@ -2287,7 +2307,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 		else
 		{
 			/* Split data node */
-			cong_location_xml_frag_data_nice_split2(&curs->location);
+			cong_location_xml_frag_data_nice_split2(doc, &curs->location);
 
 			curs->location.char_loc = 0;
 			t0 = cong_location_node(&curs->location);
@@ -2308,7 +2328,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 #if NEW_XML_IMPLEMENTATION
 	for (; t; t = t_next) {
 		t_next = t->next;
-		cong_node_add_before(t,t1);
+		cong_document_node_add_before(doc, t, t1);
 	}
 #else
 	t->prev = t0;

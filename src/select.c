@@ -159,7 +159,7 @@ void selection_draw(struct selection* selection, struct curs* curs)
 }
 
 /* Splits a data node in 3 and returns pointer to the middle one */
-CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
+CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1)
 {
 	CongNodePtr d1, d2, d3;
 	int len1, len2, len3;
@@ -197,10 +197,10 @@ CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 
 	/* Link it in */
 #if NEW_XML_IMPLEMENTATION
-	cong_node_add_after(d1, s);
-	cong_node_add_after(d2, d1);
-	cong_node_add_after(d3, d2);
-	cong_node_make_orphan(s);
+	cong_document_node_add_after(doc, d1, s);
+	cong_document_node_add_after(doc, d2, d1);
+	cong_document_node_add_after(doc, d3, d2);
+	cong_document_node_make_orphan(doc, s);
 #else
 
 	if (s->prev) s->prev->next = d1;
@@ -229,7 +229,7 @@ CongNodePtr xml_frag_data_nice_split3(CongNodePtr s, int c0, int c1)
 
 
 /* Splits a data node in 2 and returns pointer to first one */
-CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
+CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
 {
 	CongNodePtr d = NULL;
 	int len1, len2;
@@ -278,7 +278,7 @@ CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
 
 		/* Link it in */
 #if NEW_XML_IMPLEMENTATION
-		cong_node_add_before(d,s);
+		cong_document_node_add_before(doc, d,s);
 #else
 		if (s->prev) s->prev->next = d;
 		d->next = s;
@@ -334,7 +334,7 @@ CongNodePtr xml_frag_data_nice_split2(CongNodePtr s, int c)
 
 	/* Link it in */
 #if NEW_XML_IMPLEMENTATION
-	cong_node_add_after(d, s);
+	cong_document_node_add_after(doc, d, s);
 #else
 	if (s->next) s->next->prev = d;
 	d->prev = s;
@@ -360,6 +360,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 {
 	CongLocation loc0, loc1;
 	CongNodePtr n0, n1, n2;
+	CongDocument *doc;
 
 	g_return_val_if_fail(selection,NULL);
 	g_return_val_if_fail(p,NULL);
@@ -370,6 +371,8 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 	g_return_val_if_fail( cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1), NULL);
 	/* both must be children of the same parent to maintain proper nesting */
 
+	g_assert(selection->xed);
+	doc = selection->xed->doc;
 
 	CONG_NODE_SELF_TEST(p);
 
@@ -398,7 +401,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 
 		if (loc0.char_loc && cong_node_type(loc0.tt_loc) == CONG_NODE_TYPE_TEXT)
 		{
-			prev_node = cong_location_xml_frag_data_nice_split2(&loc0);
+			prev_node = cong_location_xml_frag_data_nice_split2(doc, &loc0);
 			g_assert(prev_node);
 
 			loc0.tt_loc = selection->loc0.tt_loc = prev_node->next;
@@ -413,10 +416,10 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 
 		/* Position p within the tree: */
 		if (prev_node) {
-			cong_node_add_after(p, prev_node);
+			cong_document_node_add_after(doc, p, prev_node);
 			CONG_NODE_SELF_TEST(prev_node);
 		} else {
-			cong_node_set_parent(p, loc0.tt_loc->parent);
+			cong_document_node_set_parent(doc, p, loc0.tt_loc->parent);
 		}
 #else
 		if (loc0.tt_loc->prev) {
@@ -437,7 +440,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 			CONG_NODE_SELF_TEST(n0);
 			CONG_NODE_SELF_TEST(p);
 
-			cong_node_set_parent(n0, p);			
+			cong_document_node_set_parent(doc, n0, p);			
 
 			CONG_NODE_SELF_TEST(n0);
 			CONG_NODE_SELF_TEST(p);
@@ -463,7 +466,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 
 		if (loc1.char_loc && cong_node_type(loc1.tt_loc) == CONG_NODE_TYPE_TEXT)
 		{
-			loc1.tt_loc = cong_location_xml_frag_data_nice_split2(&loc1);
+			loc1.tt_loc = cong_location_xml_frag_data_nice_split2(doc, &loc1);
 			selection->loc1.tt_loc = loc1.tt_loc->next;
 		}
 
@@ -471,7 +474,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 
 		/* Reparent, last */
 #if NEW_XML_IMPLEMENTATION
-		cong_node_set_parent(loc1.tt_loc, p);
+		cong_document_node_set_parent(doc, loc1.tt_loc, p);
 #else
 		loc1.tt_loc->parent = p->child;
 		loc1.tt_loc->prev = n1;
@@ -513,7 +516,7 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 		{
 			if (loc0.char_loc == loc1.char_loc) return(0); /* The end is the beginning is the end */
 			
-			loc0.tt_loc = loc1.tt_loc = xml_frag_data_nice_split3(loc0.tt_loc, loc0.char_loc, loc1.char_loc);
+			loc0.tt_loc = loc1.tt_loc = xml_frag_data_nice_split3(doc, loc0.tt_loc, loc0.char_loc, loc1.char_loc);
 			selection->loc0.tt_loc = loc0.tt_loc;
 			selection->loc1.tt_loc = loc0.tt_loc->next;
 		}
@@ -524,12 +527,12 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 #if NEW_XML_IMPLEMENTATION
 		/* Position p where the selection was: */
 		if (loc0.tt_loc->prev) {
-			cong_node_add_after(p, loc0.tt_loc->prev);
+			cong_document_node_add_after(doc, p, loc0.tt_loc->prev);
 		} else {
-			cong_node_set_parent(p, loc0.tt_loc->parent);
+			cong_document_node_set_parent(doc, p, loc0.tt_loc->parent);
 		}
 		/* Move the selection below p: */
-		cong_node_set_parent(selection->loc0.tt_loc, p);
+		cong_document_node_set_parent(doc, selection->loc0.tt_loc, p);
 #else
 		if (loc0.tt_loc->prev) {
 			loc0.tt_loc->prev->next = p;

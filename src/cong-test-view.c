@@ -13,6 +13,15 @@ enum {
 	TESTVIEW_NUM_COLUMNS
 };
 
+#define CONG_TEST_VIEW(x) ((CongTestView*)(x))
+
+typedef struct CongTestView
+{
+	CongView view;
+
+	struct CongTestViewDetails *private;
+} CongTestView;
+
 typedef struct CongTestViewDetails
 {
 
@@ -22,9 +31,63 @@ typedef struct CongTestViewDetails
 
 } CongTestViewDetails;
 
+struct search_struct
+{
+	CongNodePtr node;
+
+	gboolean found_it;	
+	
+	GtkTreeIter *tree_iter;
+};
+
+static gboolean search_for_node(GtkTreeModel *model,
+				GtkTreePath *path,
+				GtkTreeIter *iter,
+				gpointer data)
+{
+	struct search_struct* search = (struct search_struct*)data;
+	CongNodePtr this_node;
+	
+	g_assert(model);
+	g_assert(path);
+	g_assert(iter);
+	g_assert(search);
+
+	gtk_tree_model_get(model,
+			   iter,
+			   TESTVIEW_COLUMN_NODE,
+			   &this_node,
+			   -1);
+
+	if (this_node==search->node) {
+		search->found_it = TRUE;
+		*search->tree_iter = *iter;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+
+}
+
+static gboolean get_iter_for_node(CongTestViewDetails *details, CongNodePtr node, GtkTreeIter* tree_iter)
+{
+	/* FIXME: this is O(n), it ought to be O(1), by adding some kind of search structure */
+	struct search_struct search;
+	
+	search.node = node;
+	search.found_it = FALSE;
+	search.tree_iter = tree_iter;
+
+	gtk_tree_model_foreach(GTK_TREE_MODEL(details->tree_store),
+			       search_for_node,
+			       &search);
+
+	return search.found_it;
+}
+
 #if NEW_XML_IMPLEMENTATION
 gchar* cleanup_text(xmlChar *text) {
-	gchar *buffer = g_malloc(strlen(text)*3); /* for safety's sake */
+	gchar *buffer = g_malloc((strlen(text)*3)+1); /* for safety's sake */
 	gchar *dst = buffer;
 
 	/* FIXME: audit for character set issues */
@@ -99,19 +162,208 @@ void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr nod
 		populate_tree_store_recursive(details, node_iter, &child_tree_iter);
 	}	
 }
-#endif
+
+/* Prototypes of the handler functions: */
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_tag_remove(CongView *view, CongNodePtr x);	
+
+#define DEBUG_TEST_VIEW 1
+
+/* Definitions of the handler functions: */
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_make_orphan\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, node, &tree_iter) ) {
+
+		/* Remove this branch of the tree: */
+		gtk_tree_store_remove(test_view->private->tree_store, &tree_iter);
+
+	}
+}
+
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter_sibling;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(older_sibling);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_add_after\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, older_sibling, &tree_iter_sibling) ) {
+
+		if ( get_iter_for_node(test_view->private, older_sibling->parent, &tree_iter_parent) ) {
+
+			GtkTreeIter new_tree_iter;
+			gtk_tree_store_insert_after(test_view->private->tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
+
+			populate_tree_store_recursive(test_view->private, node, &new_tree_iter);
+		}
+	}
+}
+
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter_sibling;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(younger_sibling);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_add_before\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, younger_sibling, &tree_iter_sibling) ) {
+
+		if ( get_iter_for_node(test_view->private, younger_sibling->parent, &tree_iter_parent) ) {
+		
+			GtkTreeIter new_tree_iter;
+			gtk_tree_store_insert_before(test_view->private->tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
+
+			populate_tree_store_recursive(test_view->private, node, &new_tree_iter);
+		}
+	}
+}
+
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter_node;
+	GtkTreeIter tree_iter_parent;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(adoptive_parent);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_set_parent\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, node, &tree_iter_node) ) {
+		/* Remove this branch of the tree: */
+		gtk_tree_store_remove(test_view->private->tree_store, &tree_iter_node);
+	}
+
+	if ( get_iter_for_node(test_view->private, adoptive_parent, &tree_iter_parent) ) {
+		GtkTreeIter new_tree_iter;
+		gtk_tree_store_append(test_view->private->tree_store, &new_tree_iter, &tree_iter_parent);
+
+		populate_tree_store_recursive(test_view->private, node, &new_tree_iter);
+	}
+}
+
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_set_text\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, node, &tree_iter) ) {
+		gchar *text = NULL;
+		gchar *cleaned_text = NULL;
+
+		g_assert(cong_node_type(node) == CONG_NODE_TYPE_TEXT);
+
+		cleaned_text = cleanup_text(node->content);
+		text = g_strdup_printf("Text: \"%s\"", cleaned_text);
+		g_free(cleaned_text);
+		
+		g_assert(text);
+
+		gtk_tree_store_set(test_view->private->tree_store, 
+				   &tree_iter,
+				   TESTVIEW_COLUMN_TEXT, text,
+				   -1);
+
+		g_free(text);
+	}
+}
+
+static void on_document_node_tag_remove(CongView *view, CongNodePtr node)
+{
+	CongTestView *test_view;
+	GtkTreeIter tree_iter;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_node_tag_remove\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	if ( get_iter_for_node(test_view->private, node, &tree_iter) ) {
+	}
+}
+#endif /* #if NEW_XML_IMPLEMENTATION */
 
 GtkWidget *cong_test_view_new(CongDocument *doc)
 {
 	CongTestViewDetails *details;
+	CongTestView *view;
 	GtkCellRenderer *renderer;
  	GtkTreeViewColumn *column;
 	GtkTreeIter root_iter;
 
 	g_return_val_if_fail(doc, NULL);
 
+	view = g_new0(CongTestView,1);
 	details = g_new0(CongTestViewDetails,1);
+	
+	view->private = details;
+	
+	view->view.doc = doc;
+	view->view.klass = g_new0(CongViewClass,1);
+#if NEW_XML_IMPLEMENTATION
+	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
+	view->view.klass->on_document_node_add_after = on_document_node_add_after;
+	view->view.klass->on_document_node_add_before = on_document_node_add_before;
+	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
+	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_document_node_tag_remove = on_document_node_tag_remove;
 
+	cong_document_register_view( doc, CONG_VIEW(view) );
+#endif
+	
 	details->scrolled_window = GTK_SCROLLED_WINDOW( gtk_scrolled_window_new(NULL, NULL) );
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 
 				       GTK_POLICY_AUTOMATIC,

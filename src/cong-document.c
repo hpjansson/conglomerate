@@ -6,7 +6,7 @@
 
 GtkWidget *cong_test_view_new(CongDocument *doc);
 
-struct _CongDocument
+struct CongDocument
 {
 	char dummy[128];
 
@@ -19,6 +19,8 @@ struct _CongDocument
 	CongDispspec *ds;
 
 	gchar *url;
+
+	GList *views; /* a list of CongView* */
 };
 
 #if NEW_XML_IMPLEMENTATION
@@ -29,7 +31,7 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 
 	g_return_val_if_fail(xml_doc!=NULL, NULL);
 
-	doc = g_new(struct _CongDocument,1);
+	doc = g_new0(struct CongDocument,1);
 
 	doc->xml_doc = xml_doc;
 	doc->ds = ds;
@@ -54,7 +56,7 @@ cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds, const gchar *url)
 
 	g_return_val_if_fail(tt!=NULL, NULL);
 
-	doc = g_new(struct _CongDocument,1);
+	doc = g_new(struct CongDocument,1);
 
 	doc->tt = tt;
 	doc->ds = ds;
@@ -224,3 +226,164 @@ cong_document_save(CongDocument *doc, const char* filename)
 	fclose(xml_f);
 #endif  /* #if NEW_XML_IMPLEMENTATION */
 }
+
+#if NEW_XML_IMPLEMENTATION
+#define DEBUG_MVC 1
+void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_make_orphan\n");
+	#endif
+
+	/* Make the change: */
+	cong_node_make_orphan(node);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_make_orphan(view, node);
+	}
+}
+
+void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
+{
+	GList *iter;
+
+	g_assert(doc);
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_add_after\n");
+	#endif
+
+	/* Make the change: */
+	cong_node_add_after(node, older_sibling);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_add_after(view, node, older_sibling);
+	}
+}
+
+void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_add_before\n");
+	#endif
+
+	/* Make the change: */
+	cong_node_add_before(node, younger_sibling);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_add_before(view, node, younger_sibling);
+	}
+}
+
+void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_set_parent\n");
+	#endif
+
+	/* Make the change: */
+	cong_node_set_parent(node, adoptive_parent);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_set_parent(view, node, adoptive_parent);
+	}
+}
+
+void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_set_text\n");
+	#endif
+
+	/* Make the change: */
+	cong_node_set_text(node, new_content);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_set_text(view, node, new_content);
+	}
+}
+#endif
+
+void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(x);
+
+	#if DEBUG_MVC
+	g_message("cong_document_tag_remove\n");
+	#endif
+
+	/* Make the change: */
+	xml_tag_remove(x);
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_node_tag_remove(view, x);
+	}
+}
+
+void cong_document_register_view(CongDocument *doc, CongView *view)
+{
+	g_return_if_fail(doc);
+	g_return_if_fail(view);
+
+	doc->views = g_list_prepend(doc->views,view);
+}
+
+void cong_document_unregister_view(CongDocument *doc, CongView *view)
+{
+	g_return_if_fail(doc);
+	g_return_if_fail(view);
+
+	g_assert(0); /* FIXME:  unwritten */
+}
+
+
