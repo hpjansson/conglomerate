@@ -203,6 +203,26 @@ GtkPixmap* cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, 
 	return GTK_PIXMAP(gtk_pixmap_new(p, mask));
 }
 
+gint toolbar_callback_undo(GtkWidget *w, gpointer data)
+{
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	cong_document_undo(doc);
+
+	return TRUE;
+}
+
+gint toolbar_callback_redo(GtkWidget *w, gpointer data)
+{
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	cong_document_redo(doc);
+
+	return TRUE;
+}
+
 gint toolbar_callback_cut(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
@@ -249,6 +269,21 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 					 _("Save document as..."),
 					 _("Save document as..."), 
 					 GTK_SIGNAL_FUNC(toolbar_callback_save_as),
+					 primary_window,
+					 -1);
+		gtk_toolbar_append_space(primary_window->toolbar);
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_UNDO,
+					 _("Undo"),
+					 _("Undo"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_undo),
+					 primary_window,
+					 -1);
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
+					 GTK_STOCK_REDO,
+					 _("Redo"),
+					 _("Redo"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_redo),
 					 primary_window,
 					 -1);
 		gtk_toolbar_append_space(primary_window->toolbar);

@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-primary-window.c
+
+	Added Undo/Redo to toolbar
+
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-wrapper.c, cong-command-history.c, cong-command.c, cong-command.h, cong-document.c, cong-document.h, global.h
 
 	More work on undo/redo
