@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
+#include "cong-attribute-editor-enumeration.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -54,20 +55,6 @@ struct CongAttributeEditorDetails
 /* NMTOKEN support: */
 /* NMTOKENS support: */
 /* ENUMERATION support: */
-static void
-on_set_attribute_enumeration (CongDocument *doc, 
-			      CongNodePtr node, 
-			      const xmlChar *name, 
-			      const xmlChar *value, 
-			      gpointer user_data);
-static void
-on_remove_attribute_enumeration (CongDocument *doc, 
-				 CongNodePtr node, 
-				 const xmlChar *name,
-				 gpointer user_data);
-static void
-on_enumeration_option_menu_changed (GtkOptionMenu *option_menu,
-				    gpointer user_data);
 /* NOTATION support: */
 
 /* Exported function definitions: */
@@ -120,6 +107,14 @@ cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
 
 	return PRIVATE(attribute_editor)->node;
+}
+
+xmlAttributePtr
+cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
+{
+	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
+
+	return PRIVATE(attribute_editor)->attr;
 }
 
 const gchar*
@@ -184,57 +179,10 @@ cong_attribute_editor_new (CongDocument *doc,
 		return gtk_label_new("NMTOKENS");
 		
 	case XML_ATTRIBUTE_ENUMERATION:
-		{
-			GtkWidget *option_menu = gtk_option_menu_new();
-			GtkWidget *menu = gtk_menu_new();
-			xmlEnumerationPtr enum_ptr;
-
-			gtk_menu_shell_append (GTK_MENU_SHELL(menu), 
-					       gtk_menu_item_new_with_label(_("(unspecified)")));
-			
-			for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
-				GtkWidget *menu_item = gtk_menu_item_new_with_label(enum_ptr->name);
-
-				g_object_set_data (G_OBJECT(menu_item),
-						   "attr_value",
-						   enum_ptr->name);
-
-				gtk_menu_shell_append(GTK_MENU_SHELL(menu), 
-						      menu_item);
-			}
-
-			gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), 
-						 menu);
-
-			g_object_set_data (G_OBJECT(option_menu),
-					   "doc",
-					   doc);
-			g_object_set_data (G_OBJECT(option_menu),
-					   "node",
-					   node);
-			g_object_set_data (G_OBJECT(option_menu),
-					   "attr",
-					   attr);
-
-			g_signal_connect_after (G_OBJECT(doc),
-						"node_set_attribute",
-						G_CALLBACK(on_set_attribute_enumeration),
-						option_menu);
-			g_signal_connect_after (G_OBJECT(doc),
-						"node_remove_attribute",
-						G_CALLBACK(on_remove_attribute_enumeration),
-						option_menu);
-
-			g_signal_connect_after (G_OBJECT(option_menu),
-						"changed",
-						G_CALLBACK(on_enumeration_option_menu_changed),
-						NULL);
-
-			gtk_widget_show_all (option_menu);
-			
-			return option_menu;
-		}
-		
+		return cong_attribute_editor_enumeration_new (doc,
+							      node,
+							      attr->name,
+							      attr);
 	case XML_ATTRIBUTE_NOTATION:
 		/* FIXME: some kind of text entry? */
 		return gtk_label_new("NOTATION");
@@ -288,71 +236,5 @@ CongNodePtr global_glade_node_ptr = NULL;
 /* NMTOKENS support: */
 
 /* ENUMERATION support: */
-static void
-on_set_attribute_enumeration (CongDocument *doc, 
-			      CongNodePtr node, 
-			      const xmlChar *name, 
-			      const xmlChar *value, 
-			      gpointer user_data)
-{
-	/* FIXME */
-}
-
-static void
-on_remove_attribute_enumeration (CongDocument *doc, 
-				 CongNodePtr node, 
-				 const xmlChar *name,
-				 gpointer user_data)
-		     
-{
-	GtkOptionMenu *option_menu = GTK_OPTION_MENU(user_data);
-
-	if (doc == g_object_get_data (G_OBJECT(option_menu), "doc")) {
-		if (node == g_object_get_data (G_OBJECT(option_menu), "node")) {
-			xmlAttributePtr attr = g_object_get_data (G_OBJECT(option_menu), "attr");
-			g_assert (attr);
-
-			if (0 == strcmp(name, attr->name)) {
-				/* The initial item is the "unspecified" one: */
-				gtk_option_menu_set_history (option_menu,
-							     0);
-			}
-		}
-	}
-}
-
-static void
-on_enumeration_option_menu_changed (GtkOptionMenu *option_menu,
-				    gpointer user_data)
-{
-	CongDocument *doc = g_object_get_data (G_OBJECT(option_menu), "doc");
-	CongNodePtr node = g_object_get_data (G_OBJECT(option_menu), "node");
-	xmlAttributePtr attr = g_object_get_data (G_OBJECT(option_menu), "attr");
-	GtkMenuItem *selected_menu_item;
-	const gchar *new_attr_value;
-
-	g_assert (doc);
-	g_assert (node);
-	g_assert (attr);
-
-	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (option_menu);
-	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
-					    "attr_value");
-
-	cong_document_begin_edit (doc);
-
-	if (new_attr_value) {
-		cong_document_node_set_attribute (doc, 
-						  node, 
-						  attr->name, 
-						  new_attr_value);
-	} else {
-		cong_document_node_remove_attribute (doc, 
-						     node, 
-						     attr->name);
-	}
-
-	cong_document_end_edit (doc);
-}
 
 /* NOTATION support: */

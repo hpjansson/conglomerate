@@ -68,6 +68,10 @@ cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor);
 CongNodePtr
 cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor);
 
+/* Result can be NULL */
+xmlAttributePtr
+cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor);
+
 const gchar*
 cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor);
 
@@ -113,7 +117,8 @@ cong_attribute_editor_nmtokens_new (CongDocument *doc,
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,
-				       const gchar *attribute_name);
+				       const gchar *attribute_name,
+				       xmlAttributePtr attr);
 GtkWidget*
 cong_attribute_editor_notation_new (CongDocument *doc,
 				    CongNodePtr node,
