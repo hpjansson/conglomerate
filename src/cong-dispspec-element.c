@@ -485,8 +485,61 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
 }
 
 gchar*
+cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo *header_info)
+{
+	g_return_val_if_fail (header_info, NULL);
+
+	if (header_info->xpath) {
+		return g_strdup (header_info->xpath);
+	} else if (header_info->tagname) {
+		return g_strdup_printf ("normalize-space(child::%s)", header_info->tagname);
+	} else {
+		return NULL;
+	}
+}
+
+
+gchar*
 cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
 {
+#if 1
+	xmlXPathContextPtr ctxt;
+	xmlXPathObjectPtr xpath_obj;
+	gchar *xpath_string;
+
+	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail(element->header_info, NULL);
+	g_return_val_if_fail(x, NULL);
+
+	xpath_string = cong_dispspec_element_header_info_get_xpath_expression (element->header_info);
+
+	if (xpath_string) {
+
+		gchar *result = NULL;
+		
+		/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
+		
+		ctxt = xmlXPathNewContext(x->doc);
+		
+		ctxt->node = x;
+		
+		xpath_obj = xmlXPathEval(xpath_string,
+					 ctxt);	
+		if (xpath_obj) {
+			result = xmlXPathCastToString(xpath_obj);			
+		} else {
+			result = g_strdup(_("(xpath failed)"));
+		}	
+		
+		g_free (xpath_string);
+		
+		xmlXPathFreeContext(ctxt);
+		
+		return result;
+	} else {
+		return NULL;
+	}		
+#else
 	xmlXPathContextPtr ctxt;
 	xmlXPathObjectPtr xpath_obj;
 
@@ -537,6 +590,7 @@ cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
 	} else {
 		return NULL;
 	}
+#endif
 }
 
 gchar*

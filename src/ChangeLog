@@ -1,5 +1,9 @@
 2003-12-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element.c, cong-dispspec-element.h
+
+	More use of XPaths to get at titles for elements; working towards a fix for bug #123012
+
 	* cong-xpath-expression.h, cong-xpath-expression.c, Makefile.am
 
 	New files

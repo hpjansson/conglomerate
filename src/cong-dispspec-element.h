@@ -185,6 +185,12 @@ cong_dispspec_element_col(CongDispspecElement *element);
 CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element);
 
+/*
+  caller must free result
+ */
+gchar*
+cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo* header_info);
+
 gchar*
 cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x);
 
