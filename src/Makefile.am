@@ -9,6 +9,7 @@ conge_SOURCES =             \
   cong-editor-widget-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
+  cong-plugin.h             \
   icon_assemble.c           \
   icon_connect.c            \
   icon_new.c                \

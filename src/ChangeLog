@@ -1,4 +1,8 @@
-creating ChangeLog
+2002-12-11 Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am: added cong-plugin.h to make it into the dist
+	Discovered that the toplevel `make distcheck` is usefull tool
+
 2002-11-29 Dmitry G. Mastrukov
 
 	* cong-primary-window.c, global.h, main.c
@@ -8,7 +12,6 @@ creating ChangeLog
 2002-11-28 Geert Stappers
 
 	* cong-primary-window.c
-
 	Version back in the about box.
 	Added credits for documenters.
 	Did try to add credits for translators, but failed.
