@@ -1,5 +1,10 @@
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area.c: Added a width_changed signal, emitted when
+	allocated width changes
+
+	* cong-editor-area.h: ditto
+
 	* cong-traversal-node.c: Removed some debug spewage
 
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>

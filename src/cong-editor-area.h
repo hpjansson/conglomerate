@@ -88,6 +88,8 @@ struct CongEditorAreaClass
 					 GtkOrientation orientation);
 
 	void (*state_changed) (CongEditorArea *area);
+
+	void (*width_changed) (CongEditorArea *area);
 };
 
 GType

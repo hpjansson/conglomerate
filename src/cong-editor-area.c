@@ -53,6 +53,8 @@ enum {
 
 	STATE_CHANGED,
 
+	WIDTH_CHANGED,
+
 	LAST_SIGNAL
 };
 
@@ -196,6 +198,14 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 					       CONG_EDITOR_AREA_TYPE,
 					       G_SIGNAL_RUN_LAST,
 					       G_STRUCT_OFFSET(CongEditorAreaClass, state_changed),
+					       NULL, NULL,
+					       g_cclosure_marshal_VOID__VOID,
+					       G_TYPE_NONE,
+					       0);
+	signals[WIDTH_CHANGED] = g_signal_new ("width_changed",
+					       CONG_EDITOR_AREA_TYPE,
+					       G_SIGNAL_RUN_LAST,
+					       G_STRUCT_OFFSET(CongEditorAreaClass, width_changed),
 					       NULL, NULL,
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE,
@@ -806,8 +816,11 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 				 gint height)
 {
 	gboolean has_changed = TRUE;
+	gint old_width;
 
-	g_return_if_fail (editor_area);
+	g_return_if_fail (IS_CONG_EDITOR_AREA (editor_area));
+
+	old_width = PRIVATE(editor_area)->window_area.width;
 
 	if (PRIVATE(editor_area)->window_area.x == x) {
 		if (PRIVATE(editor_area)->window_area.y == y) {
@@ -833,6 +846,11 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 		PRIVATE(editor_area)->window_area.y = y;
 		PRIVATE(editor_area)->window_area.width = width;
 		PRIVATE(editor_area)->window_area.height = height;
+	}
+
+	if (old_width!=width) {
+		g_signal_emit (G_OBJECT(editor_area),
+			       signals[WIDTH_CHANGED], 0);
 	}
 
 	if (has_changed || PRIVATE(editor_area)->needs_recursive_allocation) {
