@@ -27,7 +27,6 @@
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
-#include "fo.h"
 #include "cong-progress-checklist.h"
 #include "cong-document.h"
 #include <glade/glade.h>

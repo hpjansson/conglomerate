@@ -1,5 +1,9 @@
 2004-10-07  David Malcolm  <dmalcolm@redhat.com>
 
+	* plugin-fo.c:
+
+	Remove reference to fo.h
+
 	* cong-util.c: 
 
 	Remove reference to fo.h
