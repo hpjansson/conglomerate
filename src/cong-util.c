@@ -945,7 +945,7 @@ cong_element_description_make_user_name (const CongElementDescription *element_d
 	}
 	
 	if (element_desc->ns_uri) {
-		return g_strdup_printf("<%s xmls=\"%s\"/>", element_desc->local_name, element_desc->ns_uri);
+		return g_strdup_printf("<%s xmlns=\"%s\"/>", element_desc->local_name, element_desc->ns_uri);
 	} else {
 		return g_strdup_printf("<%s />", element_desc->local_name);
 	}

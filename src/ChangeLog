@@ -1,3 +1,9 @@
+2004-07-23  Jeff Martin  <jeff@custommonkey.org>
+
+	* cong-util.c
+
+	Fixed typo, xmls changed to xmlns in cong_element_description_make_user_name
+
 2004-07-22  Geert Stappers  <stappers@stappers.nl>
 
 	* plugin-docbook.c:
