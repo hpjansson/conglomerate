@@ -4,20 +4,40 @@
 
 #include "global.h"
 
+void cong_error_test_file_ops(const gchar* filename, GnomeVFSResult vfs_result)
+{
+	GtkWidget* dialog;
+
+	GnomeVFSURI* vfs_uri = gnome_vfs_uri_new(filename);
+	GnomeVFSFileSize file_size = 5*1024*1024; /* 5 megabytes, for a test */
+
+	g_message("Testing File->Open failure of \"%s\" with result %s\n", filename, gnome_vfs_result_to_string(vfs_result));
+
+	dialog = cong_error_dialog_new_file_open_failed2(vfs_uri, vfs_result);
+	gtk_dialog_run(GTK_DIALOG(dialog));		
+	gtk_widget_destroy(dialog);    
+
+	g_message("Testing File->Save failure of \"%s\" with result %s\n", filename, gnome_vfs_result_to_string(vfs_result));
+
+	dialog = cong_error_dialog_new_file_save_failed(vfs_uri, vfs_result, &file_size);
+	gtk_dialog_run(GTK_DIALOG(dialog));		
+	gtk_widget_destroy(dialog);    
+
+	gnome_vfs_uri_unref(vfs_uri);
+}
+
 void cong_error_tests(void)
 {
-	GtkWidget* dialog = cong_error_dialog_new(
-#if 1
-						  "app-name could not write \"filename\" to path",
-#else
-						  "<replaceable>app-name</replaceable> could not write <replaceable>filename</replaceable> to <replaceable>path</replaceable>",
-#endif
-						  "The file may be being accessed by another application or by a system task.",
-						  "Wait a few seconds and then try again.  If that fails, try closing other applications using this file, or try saving to another location.");
-	/* It doesn't work if we have unrecognised tags in the Pango markup */
+	int i;
+	for (i=(int)GNOME_VFS_ERROR_NOT_FOUND;i<(int)GNOME_VFS_NUM_ERRORS;i++) {
 
-	gtk_dialog_run(GTK_DIALOG(dialog));
+		#define TEST_URI ("file:///home/david/test.xml")
+		// #define TEST_URI ("file:///home/david/fubar.xml")
+		// #define TEST_URI ("file:///home/david/faq.html")
+		// #define TEST_URI ("http://www.fubar.com/fubar.xml")
+		// #define TEST_URI ("ftp://www.fubar.com/fubar.xml")
 
-	gtk_widget_destroy(dialog);
 
+		cong_error_test_file_ops(TEST_URI, (GnomeVFSResult)i);
+	}
 }
