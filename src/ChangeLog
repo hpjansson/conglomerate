@@ -1,3 +1,9 @@
+2003-07-18  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* cong-editor-node-text.c
+	Removed NULL paramater when calling function `cong_editor_area_text_new'
+	in function `generate_area'.
+	
 2003-07-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-eel.c, cong-eel.h

@@ -174,7 +174,6 @@ generate_area (CongEditorNode *editor_node)
 	PRIVATE(node_text)->area_text = 
 		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
 								  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
-								  NULL, 
 								  stripped_text)
 				       );
 	g_free (stripped_text);
