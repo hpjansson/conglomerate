@@ -332,7 +332,6 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 	if (!xmlHasProp(view->node, arg2)) {
 		CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
-#if SUPPORT_UNDO
 		gchar *desc = g_strdup_printf(_("Rename attribute \"%s\" as \"%s\""),
 					      attr_name,
 					      arg2);
@@ -350,17 +349,6 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 						     attr_value);
 		cong_document_end_command (doc,
 					   cmd);
-#else
-		cong_document_begin_edit(doc);
-
-		/* Remove old attribute: */
-		cong_document_node_remove_attribute(doc, view->node, attr_name);
-	
-		/* Add new attribute: */
-		cong_document_node_set_attribute(doc, view->node, arg2, attr_value);
-
-		cong_document_end_edit(doc);
-#endif
 	}
 	
 	g_free(attr_name);
@@ -380,7 +368,6 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 
 	g_message("on_value_edited %s = %s", attr_name, arg2);
 
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf(_("Set attribute \"%s\" to \"%s\""),
 					      attr_name,
@@ -397,11 +384,6 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	cong_document_begin_edit (doc);
-	cong_document_node_set_attribute (doc, view->node, attr_name, arg2);
-	cong_document_end_edit (doc);
-#endif
 
 	g_free(attr_name);
 }
@@ -430,7 +412,6 @@ static void on_add_attribute(GtkButton *button,
 
 	g_assert(!xmlHasProp(view->node, attr_name));
 
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf(_("Add attribute \"%s\""),
 					      attr_name);
@@ -446,11 +427,6 @@ static void on_add_attribute(GtkButton *button,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	cong_document_begin_edit(doc);
-	cong_document_node_set_attribute(doc, view->node, attr_name, "");
-	cong_document_end_edit(doc);
-#endif
 
 }
 
@@ -467,7 +443,6 @@ static void on_delete_attribute(GtkButton *button,
                                              &iter)) {
 		gchar* attr_name = get_attr_name_for_tree_iter(view, &iter);
 
-#if SUPPORT_UNDO
 		gchar *desc = g_strdup_printf(_("Delete attribute \"%s\""),
 					      attr_name);
 
@@ -480,12 +455,6 @@ static void on_delete_attribute(GtkButton *button,
 							attr_name);
 		cong_document_end_command (doc,
 					   cmd);
-#else
-		cong_document_begin_edit(doc);
-		cong_document_node_remove_attribute(doc, view->node, attr_name);
-		cong_document_end_edit(doc);
-#endif
-
 
 		g_free(attr_name);
 	}

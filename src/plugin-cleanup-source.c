@@ -209,13 +209,9 @@ static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, g
 		if (cong_node_get_whitespace_handling (doc, node)==CONG_WHITESPACE_NORMALIZE) {
 			gchar *new_content = cong_util_strip_whitespace_from_string(node->content);
 
-#if SUPPORT_UNDO
 			cong_command_add_node_set_text (cleanup_data->cmd,
 							node,
 							new_content);
-#else
-			cong_document_node_set_text (doc, node, new_content);
-#endif
 			g_free(new_content);
 		}
 	}
@@ -235,26 +231,18 @@ add_indentation_and_cr_nodes (CongDocument *doc,
 		CongNodePtr indentation_node = cong_node_new_text (indentation_text, doc);
 		g_free (indentation_text);
 
-#if SUPPORT_UNDO
 		cong_command_add_node_add_before (cleanup_data->cmd,
 						  indentation_node,
 						  node);
-#else		
-		cong_document_node_add_before (doc, indentation_node, node);
-#endif
 	}
 
 	/* Add a carriage return after this element: */
 	{
 		CongNodePtr cr_node = cong_node_new_text ("\n", doc);
 
-#if SUPPORT_UNDO
 		cong_command_add_node_add_after (cleanup_data->cmd,
 						 cr_node,
 						 node);
-#else		
-		cong_document_node_add_after (doc, cr_node, node);
-#endif
 	}
 }
 
@@ -308,13 +296,8 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 						CongNodePtr new_last_child = cong_node_new_text (indentation_text, doc);
 						g_free (indentation_text);
 
-#if SUPPORT_UNDO
 						cong_command_add_node_add_before (cleanup_data->cmd, new_first_child, node->children);
 						cong_command_add_node_add_after (cleanup_data->cmd, new_last_child, node->last);
-#else						
-						cong_document_node_add_before (doc, new_first_child, node->children);
-						cong_document_node_add_after (doc, new_last_child, node->last);
-#endif
 					}
 				}
 			}
@@ -334,11 +317,7 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 				gchar *indentation = generate_indentation (options, recursion_level);
 				gchar *new_content = g_strdup_printf ("%s%s\n", indentation, node->content);
 				
-#if SUPPORT_UNDO
 				cong_command_add_node_set_text (cleanup_data->cmd, node, new_content);
-#else
-				cong_document_node_set_text (doc, node, new_content);
-#endif
 				
 				g_free (indentation);
 				g_free (new_content);
@@ -393,7 +372,6 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 
 	cleanup_data.options = options;
 
-#if SUPPORT_UNDO
 	cleanup_data.cmd = cong_document_begin_command (doc,
 							_("Cleanup XML Source"),
 							NULL);
@@ -409,22 +387,6 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 
 	cong_document_end_command (doc,
 				   cleanup_data.cmd);
-#else
-	/* Allow views to amortise updates: */
-	cong_document_begin_edit (doc);
-
-	/* Stage 1:  strip out all non-significant whitespace: */
-	cong_document_for_each_node (doc, strip_whitespace_callback, &cleanup_data);
-
-	/* Stage 2:  add back whitespace to indicate the structure of the document: */
-	cong_document_for_each_node (doc, add_indentation_callback, &cleanup_data);
-
-	/* Stage 3: merge adjacent text nodes: */
-	cong_document_merge_adjacent_text_nodes(doc);
-
-	/* Allow views to amortise updates: */
-	cong_document_end_edit (doc);
-#endif
 }
 
 static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)

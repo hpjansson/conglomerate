@@ -70,9 +70,6 @@ cong_location_get_unichar(const CongLocation *loc);
 gchar*
 cong_location_get_utf8_pointer(const CongLocation *loc);
 
-CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc);
-
 void
 cong_location_del_next_char(CongDocument *doc, const CongLocation *loc);
 

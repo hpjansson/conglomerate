@@ -37,7 +37,6 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (element));
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
@@ -56,17 +55,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 		cong_document_end_command (doc, cmd);		
 	}
-#else	
-	/* New element */
-	new_node = cong_node_new_element_from_dispspec(element, doc);
-	cong_document_node_add_after(doc, new_node, tag);
 
-	/*  add any necessary sub elements it needs */
-	xml_add_required_children(doc, new_node);
-
-	cong_util_set_cursor_to_first_text_descendant (doc, 
-						       new_node);
-#endif
 	cong_document_end_edit(doc);
 
 
@@ -96,7 +85,6 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Insert child: %s"), cong_dispspec_element_username (element));
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
@@ -115,17 +103,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 		cong_document_end_command (doc, cmd);
 	}
-#else	
-	/* New element */
-	new_node = cong_node_new_element_from_dispspec(element, doc);
-	cong_document_node_set_parent(doc, new_node, tag);
 
-	/*  add any necessary sub elements it needs */
-	xml_add_required_children(doc, new_node);
-
-	cong_util_set_cursor_to_first_text_descendant (doc, 
-						       new_node);
-#endif
 	cong_document_end_edit(doc);
 
 	return(TRUE);
@@ -193,7 +171,6 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 	cong_document_begin_edit(doc);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"), NULL);
 
@@ -205,13 +182,6 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 		cong_document_end_command (doc, cmd);
 	}
-#else	
-	cong_document_for_each_location (doc, 
-					 tree_cut_update_location_callback,
-					 tag);
-
-	cong_document_node_recursive_delete(doc, tag);
-#endif
 
 	cong_document_end_edit(doc);
 

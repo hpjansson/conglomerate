@@ -195,6 +195,11 @@ void
 cong_command_add_node_recursive_delete (CongCommand *cmd,
 					CongNodePtr node);
 
+/* Return true if you modify the location */
+typedef gboolean
+(*CongUpdateLocationCallback) (CongDocument *doc,
+			       CongLocation *location, 
+			       gpointer user_data);
 
 /* Invoke the callback for the cursor and selection locations; allowing you to do something sane with them when manipulating the tree */
 void

@@ -15,30 +15,6 @@
 #include "cong-command.h"
 
 /* --- Cut/copy/paste --- */
-#if !SUPPORT_UNDO
-void selection_cursor_unset(CongDocument *doc)
-{
-	CongCursor *cursor;
-	CongSelection *selection;
-
-	g_return_if_fail(doc);
-
-	cursor = cong_document_get_cursor(doc);
-	selection = cong_document_get_selection(doc);
-
-	cong_document_begin_edit (doc);
-
-	cong_location_nullify (&cursor->location);
-	cong_selection_nullify (selection);
-
-	cong_document_on_cursor_change(doc);
-	cong_document_on_selection_change(doc);
-
-	cong_document_end_edit (doc);
-
-}
-#endif /* #if !SUPPORT_UNDO */
-
 void cong_document_cut_selection(CongDocument *doc)
 {
 	CongSelection *selection;
@@ -67,7 +43,6 @@ void cong_document_cut_selection(CongDocument *doc)
 
 	source = cong_range_generate_source (ordered_range);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"), NULL);
 
@@ -81,17 +56,6 @@ void cong_document_cut_selection(CongDocument *doc)
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	cong_app_set_clipboard (cong_app_singleton(),
-				source);
-
-	g_free(source);
-
-	cong_document_delete_range (doc, 
-				    ordered_range);
-
-	selection_cursor_unset(doc);
-#endif
 
 	cong_document_end_edit (doc);
 }
@@ -120,7 +84,6 @@ void cong_document_copy_selection(CongDocument *doc)
 	/* GREP FOR MVC */
 	cong_document_begin_edit (doc);
 
-#if SUPPORT_UNDO
 	{
 		gchar *source = cong_range_generate_source (cong_selection_get_ordered_range (selection));
 		
@@ -129,12 +92,7 @@ void cong_document_copy_selection(CongDocument *doc)
 
 		g_free (source);
 	}
-#else
-	cong_app_set_clipboard (cong_app_singleton(),
-				cong_range_generate_source (cong_selection_get_ordered_range (selection)));
 
-	selection_cursor_unset(doc);
-#endif
 	cong_document_end_edit (doc);
 }
 
@@ -187,7 +145,6 @@ cong_document_paste_source_at (CongDocument *doc,
 
 	/* We will add the children of new_node in place, then delete the placeholder parent, then merge adjacent text nodes if necessary. */
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Paste"), NULL);
 
@@ -245,55 +202,6 @@ cong_document_paste_source_at (CongDocument *doc,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	/* Calculate insertion point, splitting text nodes if necessary: */
-	if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
-
-		if (0==insert_loc->byte_offset) {
-			node_after = insert_loc->node;
-		} else if (!cong_location_get_unichar(insert_loc)) {
-		        node_after = cong_location_xml_frag_next(insert_loc);
-		} else {
-			/* Split data node */
-			cong_location_xml_frag_data_nice_split2(doc, insert_loc);
-			
-			node_after = cong_location_xml_frag_next(insert_loc);
-		}
-	} else {
-		g_assert_not_reached();
-	}
-
-	if (node_after) {
-
-		/* Add the new nodes: */
-		for (iter = new_nodes->children; iter; iter = iter_next) {
-			iter_next = iter->next;
-			
-			cong_document_node_add_before(doc, iter, node_after);		
-		}
-		
-		/* Merge adjacent text nodes: */
-		cong_document_merge_adjacent_text_children_of_node (doc, 
-								    node_after->parent);
-	} else {
-
-		/* Add the new nodes at the end of the parent's list: */
-		for (iter = new_nodes->children; iter; iter = iter_next) {
-			iter_next = iter->next;
-			
-			cong_document_node_set_parent(doc, iter, insert_loc->node->parent);		
-		}
-		
-		/* Merge adjacent text nodes: */
-		cong_document_merge_adjacent_text_children_of_node (doc, 
-								    insert_loc->node->parent);
-	}
-
-	/* Delete the placeholder parent: */
-	cong_document_node_recursive_delete (doc, 
-					     new_nodes);
-		
-#endif
 	
 	cong_document_end_edit (doc);
 
@@ -315,7 +223,6 @@ cong_document_paste_source_under (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Paste Under"), NULL);
 
@@ -339,25 +246,6 @@ cong_document_paste_source_under (CongDocument *doc,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-
-	/* Add the new nodes: */
-	for (iter = new_nodes->children; iter; iter = iter_next) {
-		iter_next = iter->next;
-
-		cong_document_node_set_parent (doc, 
-					       iter, 
-					       relative_to_node);		
-	}
-	
-	/* Delete the placeholder parent: */
-	cong_document_node_recursive_delete (doc, 
-					     new_nodes);
-
-	/* Merge adjacent text nodes: */
-	cong_document_merge_adjacent_text_children_of_node (doc, 
-							    relative_to_node);
-#endif
 	
 	cong_document_end_edit (doc);
 }
@@ -378,7 +266,6 @@ cong_document_paste_source_before (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Paste Before"), NULL);
 
@@ -401,24 +288,6 @@ cong_document_paste_source_before (CongDocument *doc,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	/* Add the new nodes: */
-	for (iter = new_nodes->children; iter; iter = iter_next) {
-		iter_next = iter->next;
-
-		cong_document_node_add_before (doc, 
-					       iter, 
-					       relative_to_node);
-	}
-	
-	/* Delete the placeholder parent: */
-	cong_document_node_recursive_delete (doc, 
-					     new_nodes);
-
-	/* Merge adjacent text nodes: */
-	cong_document_merge_adjacent_text_children_of_node (doc, 
-							    relative_to_node->parent);
-#endif
 	
 	cong_document_end_edit (doc);
 }
@@ -439,7 +308,6 @@ cong_document_paste_source_after (CongDocument *doc,
 								   source_fragment);
 	cong_document_begin_edit (doc);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Paste After"), NULL);
 
@@ -466,26 +334,6 @@ cong_document_paste_source_after (CongDocument *doc,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	/* Add the new nodes: */
-	for (iter = new_nodes->children; iter; iter = iter_next) {
-		iter_next = iter->next;
-
-		cong_document_node_add_after (doc, 
-					      iter, 
-					      relative_to_node);
-
-		relative_to_node = iter;
-	}
-	
-	/* Delete the placeholder parent: */
-	cong_document_node_recursive_delete (doc, 
-					     new_nodes);
-
-	/* Merge adjacent text nodes: */
-	cong_document_merge_adjacent_text_children_of_node (doc, 
-							    relative_to_node->parent);
-#endif
 	
 	cong_document_end_edit (doc);
 }

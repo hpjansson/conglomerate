@@ -24,8 +24,6 @@ G_BEGIN_DECLS
 
 #define NEW_LOOK 1
 
-#define SUPPORT_UNDO 1
-
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
@@ -106,9 +104,6 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
 
-CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
-void cong_selection_delete(CongSelection *selection, CongDocument *doc);
-
 GList *xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node);
 GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
@@ -139,8 +134,6 @@ void cong_cursor_init(CongCursor *curs, CongDocument *doc);
 void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
-void cong_cursor_data_insert (CongCursor *curs, 
-			      const gchar *s);
 int cong_cursor_paragraph_insert(CongCursor *curs);
 gboolean cong_cursor_calc_prev_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);
 gboolean cong_cursor_calc_next_char(CongCursor *curs, CongDocument *doc, CongLocation *output_loc);

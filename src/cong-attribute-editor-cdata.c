@@ -174,7 +174,6 @@ on_text_entry_changed (GtkEditable *editable,
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
-#if SUPPORT_UNDO
 	const gchar *value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry));
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, value);
 
@@ -190,16 +189,6 @@ on_text_entry_changed (GtkEditable *editable,
 					     value);
 	cong_document_end_command (doc,
 				   cmd);
-#else
-	cong_document_begin_edit (doc);
-	
-	cong_document_node_set_attribute (doc, 
-					  node, 
-					  attribute_name,
-					  gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_cdata)->entry)));
-	
-	cong_document_end_edit (doc);
-#endif
 }
 
 static void
@@ -210,7 +199,6 @@ on_add_button (GtkButton *button,
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
-#if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Add attribute \"%s\""), attribute_name);
 
 	CongCommand *cmd = cong_document_begin_command (doc,
@@ -225,16 +213,6 @@ on_add_button (GtkButton *button,
 					     "");
 	cong_document_end_command (doc,
 				    cmd);
-#else
-	cong_document_begin_edit (cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata)));
-	
-	cong_document_node_set_attribute (doc, 
-					  node, 
-					  attribute_name,
-					  "");
-	
-	cong_document_end_edit (cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata)));
-#endif
 }
 
 static void
@@ -245,7 +223,6 @@ on_delete_button (GtkButton *button,
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	const gchar *attribute_name = cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 
-#if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
 	CongCommand *cmd = cong_document_begin_command (doc,
@@ -259,15 +236,6 @@ on_delete_button (GtkButton *button,
 						attribute_name);
 	cong_document_end_command (doc,
 				   cmd);
-#else
-	cong_document_begin_edit (doc);
-	
-	cong_document_node_remove_attribute (doc,
-					     node, 
-					     attribute_name);
-	
-	cong_document_end_edit (doc);
-#endif
 }
 
 

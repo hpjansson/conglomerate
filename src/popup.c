@@ -181,7 +181,6 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 #endif
 
 	new_element = cong_node_new_element_from_dispspec(element, doc);
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Apply span tag: %s"), 
 						 cong_dispspec_element_username (element));
@@ -195,11 +194,6 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 
 		cong_document_end_command (doc, cmd);
 	}
-#else
-	if (!cong_selection_reparent_all(selection, doc, new_element)) {
-		cong_node_free(new_element);
-	}
-#endif
 
 	return(TRUE);
 }
@@ -267,7 +261,6 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr
 { 
 	CongDocument *doc = (CongDocument*)(g_object_get_data(G_OBJECT(widget), "document"));
 	CongCursor *cursor = cong_document_get_cursor(doc);
-#if SUPPORT_UNDO
 	CongCommand *cmd = cong_document_begin_command (doc, _("Remove Span Tag"), NULL);
 	CongNodePtr parent = node_ptr->parent;
 
@@ -282,9 +275,6 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr
 	cong_document_end_edit(doc);
 
 	cong_document_end_command (doc, cmd);
-#else
-	cong_document_tag_remove(doc, node_ptr);
-#endif
 
 	return TRUE;
 }

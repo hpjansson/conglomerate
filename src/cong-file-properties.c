@@ -213,7 +213,6 @@ on_remove_dtd_button_clicked (GtkButton *button,
 {
 	g_assert (IS_CONG_DOCUMENT (doc));
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc,
 								_("Remove DTD"),
@@ -225,16 +224,6 @@ on_remove_dtd_button_clicked (GtkButton *button,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	cong_document_begin_edit (doc);
-
-	cong_document_set_external_dtd (doc,
-					NULL,
-					NULL,
-					NULL);
-
-	cong_document_end_edit (doc);
-#endif
 }
 
 static void
@@ -254,7 +243,6 @@ on_specify_dtd_button_clicked (GtkButton *button,
 	
 	g_assert (model_dtd);
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd = cong_document_begin_command (doc,
 								_("Associate with DTD"),
@@ -266,14 +254,4 @@ on_specify_dtd_button_clicked (GtkButton *button,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-	cong_document_begin_edit (doc);
-
-	cong_document_set_external_dtd (doc,
-					cong_document_get_root(doc)->name,
-					cong_external_document_model_get_public_id (model_dtd),
-					cong_external_document_model_get_system_id (model_dtd));
-
-	cong_document_end_edit (doc);
-#endif
 }

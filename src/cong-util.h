@@ -123,10 +123,6 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
     }								\
 }
 
-void
-cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
-					       CongNodePtr node);
-
 /**
  * cong_util_make_dtd:
  *
@@ -158,16 +154,6 @@ void
 cong_util_split_uri (const GnomeVFSURI* uri, 
 		     gchar** filename_alone, 
 		     gchar** path);
-
-/**
- * cong_util_remove_tag:
- *
- * Function to remove a node "tag" from the tree; all its children become children of tag's parents in the natural place in the tree.
- */
-void 
-cong_util_remove_tag (CongDocument *doc, 
-		      CongNodePtr tag);
-
 
 /* Dodgy hack to do lines that blend to white: */
 void 

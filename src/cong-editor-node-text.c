@@ -743,7 +743,6 @@ on_signal_button_press (CongEditorArea *editor_area,
 				CongLocation click_location;
 				CongLocation start_of_word;
 				CongLocation end_of_word;
-#if SUPPORT_UNDO
 
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
@@ -760,20 +759,6 @@ on_signal_button_press (CongEditorArea *editor_area,
 						cong_document_end_command (doc,
 									   cmd);
 					}			       
-#else
-
-				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
-					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
-						cong_selection_set_logical_start(selection, &start_of_word);
-						cong_selection_set_logical_end(selection, &end_of_word);
-						cong_location_copy(&cursor->location, &end_of_word);
-					}						
-				
-					cong_document_begin_edit(doc);
-					cong_document_on_selection_change(doc);
-					cong_document_on_cursor_change(doc);
-					cong_document_end_edit(doc);
-#endif
 				}
 			}
 			return TRUE;
@@ -786,7 +771,6 @@ on_signal_button_press (CongEditorArea *editor_area,
 				gtk_widget_grab_focus(GTK_WIDGET(editor_widget));
 				gtk_widget_grab_default(GTK_WIDGET(editor_widget));
 
-#if SUPPORT_UNDO
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {
 					CongCommand *cmd = cong_document_begin_command (doc, _("Move cursor"), NULL);
 
@@ -798,17 +782,6 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 					cong_document_end_command (doc, cmd);
 				}
-#else					
-				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &cursor->location)) {
-					cong_selection_start_from_curs(selection, cursor);
-					cong_selection_end_from_curs(selection, cursor);
-
-					cong_document_begin_edit(doc);
-					cong_document_on_selection_change(doc);
-					cong_document_on_cursor_change(doc);
-					cong_document_end_edit(doc);						
-				}
-#endif
 			}
 
 			return TRUE;
@@ -850,7 +823,6 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 				event->x, 
 				event->y, 
 				&new_location)) {
-#if SUPPORT_UNDO
 		CongCommand *cmd = cong_document_begin_command (doc, 
 								_("Drag out selection"), 
 								"cong-drag-selection");		
@@ -860,16 +832,6 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 						   cong_selection_get_logical_start (selection),
 						   &new_location);		
 		cong_document_end_command (doc, cmd);
-#else
-		cong_location_copy (&cursor->location, new_location);
-
-		cong_selection_end_from_curs(selection, cursor);
-
-		cong_document_begin_edit(doc);
-		cong_document_on_selection_change(doc);
-		cong_document_on_cursor_change(doc);			
-		cong_document_end_edit(doc);
-#endif
 
 		return TRUE;
 	}

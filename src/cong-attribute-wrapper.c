@@ -167,7 +167,6 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 
-#if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_value);
 
 	CongCommand *cmd = cong_document_begin_command (doc,
@@ -182,16 +181,6 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 					     new_value);
 	cong_document_end_command (doc,
 				   cmd);
-#else
-	cong_document_begin_edit (doc);
-	
-	cong_document_node_set_attribute (doc,
-					  node,
-					  attribute_name,
-					  new_value);
-	
-	cong_document_end_edit (doc);
-#endif
 }
 
 void
@@ -201,7 +190,6 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	
-#if SUPPORT_UNDO
 	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
 
 	CongCommand *cmd = cong_document_begin_command (doc,
@@ -215,15 +203,6 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 						attribute_name);
 	cong_document_end_command (doc,
 				   cmd);
-#else
-	cong_document_begin_edit (doc);
-	
-	cong_document_node_remove_attribute (doc,
-					     node,
-					     attribute_name);
-	
-	cong_document_end_edit (doc);
-#endif
 }
 
 /* Internal function definitions: */

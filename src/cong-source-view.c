@@ -63,18 +63,9 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
-#if SUPPORT_UNDO
 static void on_document_set_dtd_ptr (CongView *view, 
 				     gboolean before_change, 
 				     xmlDtdPtr dtd_ptr);
-#else
-static void on_document_set_external_dtd (CongView *view, 
-					  gboolean before_change, 
-					  const gchar* root_element,
-					  const gchar* public_id,
-					  const gchar* system_id);
-#endif
-
 
 #define DEBUG_SOURCE_VIEW 0
 
@@ -308,7 +299,6 @@ static void on_cursor_change(CongView *view)
 {
 }
 
-#if SUPPORT_UNDO
 static void on_document_set_dtd_ptr (CongView *view, 
 				     gboolean before_event, 
 				     xmlDtdPtr dtd_ptr)
@@ -327,28 +317,6 @@ static void on_document_set_dtd_ptr (CongView *view,
 		on_document_change(source_view);
 	}
 }
-#else
-static void on_document_set_external_dtd (CongView *view, 
-					  gboolean before_event, 
-					  const gchar* root_element,
-					  const gchar* public_id,
-					  const gchar* system_id)
-{
-	CongSourceView *source_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_SOURCE_VIEW
-	g_message("CongSourceView - on_document_set_external_dtd");
-	#endif
-
-	source_view = CONG_SOURCE_VIEW(view);
-
-	if (!before_event) {
-		on_document_change(source_view);
-	}
-}
-#endif
 
 GtkWidget *cong_source_view_new(CongDocument *doc)
 {
@@ -382,11 +350,7 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
-#if SUPPORT_UNDO
 	view->view.klass->on_document_set_dtd_ptr = on_document_set_dtd_ptr;
-#else
-	view->view.klass->on_document_set_external_dtd = on_document_set_external_dtd;
-#endif
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
 

@@ -1109,7 +1109,6 @@ key_press_event_handler (GtkWidget *w,
 										       &target_location)) {
 				/* Are we moving the cursor, or dragging out a selection? */
 
-#if SUPPORT_UNDO
 				CongCommand *cmd = cong_document_begin_command (doc, 
 										_("Cursor Movement"),
 										"cong-cursor-movement");
@@ -1144,49 +1143,18 @@ key_press_event_handler (GtkWidget *w,
 
 				cong_document_end_command (doc,
 							   cmd);
-#else
-				/* Move the cursor to the new location: */
-				cong_location_copy(&cursor->location, &target_location);
-
-				cong_document_begin_edit (doc);
-
-				if (event->state & GDK_SHIFT_MASK) {
-					if (NULL==(cong_selection_get_logical_start(selection)->node)) {
-						cong_selection_set_logical_start (selection,
-										  &old_location);
-					}
-
-					/* Then we should also drag out the selection to the new location: */
-					cong_selection_end_from_curs (selection, 
-								      cursor);
-					cong_document_on_selection_change (doc);					
-				} else {
-					/* Then we should clear any selection that exists: */
-					cong_selection_start_from_curs (selection, 
-									cursor);
-					cong_document_on_selection_change (doc);
-				}
-				/* FIXME: should we notify the document? */ 
-				cong_document_on_cursor_change (doc);
-
-				cong_document_end_edit (doc);	
-#endif
 			}
 		}
 		break;
 	
 	case GDK_BackSpace:
 		if (cong_selection_get_logical_end(selection)->node) {
-#if SUPPORT_UNDO
 			CongCommand *cmd = cong_document_begin_command (doc, 
 									_("Delete Selection"), 
 									"cong-delete");
 			cong_command_add_delete_selection (cmd);
 			cong_document_end_command (doc,
 						   cmd);
-#else
-			cong_document_delete_selection(doc);
-#endif
 		} else {
 			cong_cursor_del_prev_char(cursor, doc);
 		}
@@ -1194,16 +1162,12 @@ key_press_event_handler (GtkWidget *w,
 	
 	case GDK_Delete:
 		if (cong_selection_get_logical_end(selection)->node) {
-#if SUPPORT_UNDO
 			CongCommand *cmd = cong_document_begin_command (doc, 
 									_("Delete Selection"),
 									"cong-delete");
 			cong_command_add_delete_selection (cmd);
 			cong_document_end_command (doc,
 						   cmd);			
-#else
-			cong_document_delete_selection(doc);
-#endif
 		} else {
 			cong_cursor_del_next_char(cursor, doc);
 		}
@@ -1221,7 +1185,6 @@ key_press_event_handler (GtkWidget *w,
 	default:
 		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
-#if SUPPORT_UNDO
 			CongCommand *cmd = cong_document_begin_command (doc, 
 									_("Typing"),
 									"cong-typing");
@@ -1234,23 +1197,9 @@ key_press_event_handler (GtkWidget *w,
 
 			cong_document_end_command (doc,
 						   cmd);
-#else
-                        if (cong_selection_get_logical_end(selection)->node) {
-                                cong_document_delete_selection(doc);
-                        }
-
-			cong_cursor_data_insert(cursor, event->string);
-
-			cong_selection_nullify (selection);
-			cong_document_on_selection_change (doc);
-#endif
 		}
 		break;
 	}
-
-#if !SUPPORT_UNDO
-	cong_document_on_cursor_change(doc);	
-#endif
 
 	cong_document_end_edit (doc);
 

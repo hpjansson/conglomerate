@@ -54,17 +54,9 @@ cong_document_handle_selection_change(CongDocument *doc);
 static void
 cong_document_handle_cursor_change(CongDocument *doc);
 
-#if SUPPORT_UNDO
 static void
 cong_document_handle_set_dtd_ptr (CongDocument *doc,
 				  xmlDtdPtr dtd_ptr);
-#else
-static void
-cong_document_handle_set_external_dtd (CongDocument *doc,
-				       const gchar* root_element,
-				       const gchar* public_id,
-				       const gchar* system_id);
-#endif
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
@@ -84,11 +76,7 @@ enum {
 	NODE_REMOVE_ATTRIBUTE,
 	SELECTION_CHANGE,
 	CURSOR_CHANGE,
-#if SUPPORT_UNDO
 	SET_DTD_PTR,
-#else
-	SET_EXTERNAL_DTD,
-#endif
 
 	LAST_SIGNAL
 };
@@ -152,11 +140,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	klass->node_remove_attribute = cong_document_handle_node_remove_attribute;
 	klass->selection_change = cong_document_handle_selection_change;
 	klass->cursor_change = cong_document_handle_cursor_change;
-#if SUPPORT_UNDO
 	klass->set_dtd_ptr = cong_document_handle_set_dtd_ptr;
-#else
-	klass->set_external_dtd = cong_document_handle_set_external_dtd;
-#endif
 
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
@@ -258,7 +242,6 @@ cong_document_class_init (CongDocumentClass *klass)
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE, 
 					       0);
-#if SUPPORT_UNDO
 	signals[SET_DTD_PTR] = g_signal_new ("set_dtd_ptr",
 					     CONG_DOCUMENT_TYPE,
 					     G_SIGNAL_RUN_LAST,
@@ -267,16 +250,6 @@ cong_document_class_init (CongDocumentClass *klass)
 					     cong_cclosure_marshal_VOID__CONGNODEPTR,
 					     G_TYPE_NONE, 
 					     1, G_TYPE_POINTER);
-#else
-	signals[SET_EXTERNAL_DTD] = g_signal_new ("set_external_dtd",
-						  CONG_DOCUMENT_TYPE,
-						  G_SIGNAL_RUN_LAST,
-						  G_STRUCT_OFFSET(CongDocumentClass, set_external_dtd),
-						  NULL, NULL,
-						  cong_cclosure_marshal_VOID__STRING_STRING_STRING,
-						  G_TYPE_NONE, 
-						  3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
-#endif
 }
 
 static void
@@ -1023,7 +996,6 @@ void cong_document_private_on_cursor_change(CongDocument *doc)
 	}
 }
 
-#if SUPPORT_UNDO
 void 
 cong_document_private_set_dtd_ptr (CongDocument *doc,
 				   xmlDtdPtr dtd_ptr)
@@ -1045,61 +1017,8 @@ cong_document_private_set_dtd_ptr (CongDocument *doc,
 		       signals[SET_DTD_PTR], 0,
 		       dtd_ptr);
 }
-#else
-void 
-cong_document_set_external_dtd (CongDocument *doc,
-				const xmlChar *root_element,
-				const xmlChar *public_id, 
-				const xmlChar *system_id)
-{
-	g_return_if_fail(doc);
-
-	g_return_if_fail(doc);
-
-#if 0
-	#if DEBUG_MVC
-	g_message("cong_document_set_external_dtd");
-	#endif
-#endif
-
-	g_assert (cong_document_is_within_edit(doc));
-
-	/* Emit signal: */
-	g_signal_emit (G_OBJECT(doc),
-		       signals[SET_EXTERNAL_DTD], 0,
-		       root_element,
-		       public_id, 
-		       system_id);
-}
-#endif
 /* end of MVC user hooks */
 
-
-#if !SUPPORT_UNDO
-void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
-{
-	CongNodePtr parent;
-
-	g_return_if_fail(doc);
-	g_return_if_fail(x);
-
-	#if DEBUG_MVC
-	g_message("cong_document_tag_remove");
-	#endif
-
-	parent = x->parent;
-
-	cong_document_begin_edit(doc);
-
-	cong_util_remove_tag (doc, 
-			      x); /* this is now a compound operation */
-
-	cong_document_merge_adjacent_text_children_of_node (doc, 
-							    parent);
-
-	cong_document_end_edit(doc);
-}
-#endif /* #if !SUPPORT_UNDO */
 
 void cong_document_register_view(CongDocument *doc, CongView *view)
 {
@@ -1143,31 +1062,6 @@ cong_document_get_language_for_node(CongDocument *doc,
 
 	return NULL; /* for now */
 }
-
-#if !SUPPORT_UNDO
-void
-cong_document_delete_selection (CongDocument *doc)
-{
-	CongSelection *selection;
-	CongRange *range;
-
-	g_return_if_fail(doc);
-
-	selection = cong_document_get_selection(doc);
-	range = cong_selection_get_ordered_range (selection);
-
-	cong_document_begin_edit (doc);
-
-	cong_document_delete_range (doc, 
-				    cong_selection_get_ordered_range (selection));
-
-	cong_selection_nullify (selection);
-
-	cong_document_on_selection_change (doc);
-
-	cong_document_end_edit (doc);
-}
-#endif /* #if !SUPPORT_UNDO */
 
 static gboolean 
 cong_document_for_each_node_recurse (CongDocument *doc, 
@@ -1234,375 +1128,6 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 	return FALSE;
 }
 
-#if !SUPPORT_UNDO
-static gboolean
-merge_text_update_location_callback (CongDocument *doc,
-				     CongLocation *location, 
-				     gpointer user_data)
-{
-	CongNodePtr affected_node = user_data;
-
-	g_assert (affected_node);
-	g_assert (affected_node->prev);
-
-	if (location->node == affected_node->prev) {
-		
-		location->node = affected_node;
-
-		return TRUE;
-
-	} else if (location->node == affected_node) {
-
-		location->byte_offset += strlen(affected_node->prev->content);
-
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-static gboolean merge_adjacent_text_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
-{
-	/* We have to "look behind" at the previous sibling, since the iteration moes forward: */
-	if (node->prev) {
-		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
-			if (cong_node_type(node->prev)==CONG_NODE_TYPE_TEXT) {
-				/* Merge preceding node's text into this one, then delete it: */
-				gchar *new_text;
-
-				new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
-
-				/* Update cursor and selection if necessary: */
-				cong_document_for_each_location (doc,
-								 merge_text_update_location_callback, 
-								 node);
-
-				cong_document_node_set_text (doc, node, new_text);
-				g_free (new_text);
-
-				cong_document_node_recursive_delete (doc, node->prev);
-			}			
-		}
-	}
-
-	/* Keep going: */
-	return FALSE;
-}
-
-void 
-cong_document_merge_adjacent_text_nodes (CongDocument *doc)
-{
-	g_return_if_fail (doc);
-
-	cong_document_begin_edit (doc);
-
-	cong_document_for_each_node (doc, merge_adjacent_text_callback, NULL);
-
-	cong_document_end_edit (doc);
-
-}
-
-void 
-cong_document_merge_adjacent_text_children_of_node (CongDocument *doc, 
-						    CongNodePtr parent)
-{
-	g_return_if_fail (doc);
-	g_return_if_fail (parent);
-
-	cong_document_begin_edit (doc);
-
-	cong_document_for_each_child_of_node (doc, parent, merge_adjacent_text_callback, NULL);
-
-	cong_document_end_edit (doc);
-}
-#endif /* #if !SUPPORT_UNDO */
-
-#if !SUPPORT_UNDO
-void 
-cong_document_node_recursive_delete (CongDocument *doc, 
-				     CongNodePtr node)
-{
-	CongNodePtr iter, next;
-
-	CONG_NODE_SELF_TEST(node);
-
-	/* You must ensure the cursor and/or selection locations don't retain a pointer to this node: */
-	if (doc) {
-		g_assert (PRIVATE(doc)->cursor.location.node!=node);
-		g_assert (cong_selection_get_logical_start (PRIVATE(doc)->selection)->node!=node);
-		g_assert (cong_selection_get_logical_end (PRIVATE(doc)->selection)->node!=node);
-	}
-
-	iter = node->children; 
-
-	while (iter) {
-		next = iter->next;
-
-		CONG_NODE_SELF_TEST(iter);
-		
-		cong_document_node_recursive_delete(doc, iter);
-
-		iter = next;
-	}
-
-	g_assert(node->children==NULL);
-	g_assert(node->last==NULL);
-
-	if (node->parent) {
-		cong_document_node_make_orphan(doc, node);
-	}
-
-	cong_node_free(node);
-}
-
-static gboolean
-pre_node_deletion_update_location_callback (CongDocument *doc,
-					   CongLocation *location, 
-					   gpointer user_data)
-{
-	CongNodePtr node = user_data;
-	if (location->node == node) {
-
-#if 1
-		/* FIXME: do this for now: */
-		cong_location_nullify (location);
-		return TRUE;
-#else
-		if (node->prev) {
-			/* Find text node: */
-#error
-			return TRUE;
-
-		} else {
-			if (node->next) {
-				/* Find text node: */
-#error
-
-				return TRUE;
-
-			} else {
-				cong_location_nullify (location);
-				return TRUE;
-			}
-		}
-#endif
-	}
-
-	return FALSE;
-}
-
-struct text_deletion_userdata
-{
-	CongNodePtr node;
-	int start_byte_offset;
-	int end_byte_offset;
-};
-
-static gboolean
-text_deletion_update_location_callback (CongDocument *doc,
-					CongLocation *location, 
-					gpointer user_data)
-{
-	struct text_deletion_userdata *text_deletion_userdata = user_data;
-
-	if (location->node == text_deletion_userdata->node) {
-		if (location->byte_offset <= text_deletion_userdata->start_byte_offset) {
-			return FALSE;
-		} else {
-			if (location->byte_offset < text_deletion_userdata->end_byte_offset) {
-				cong_location_nullify (location);
-				return TRUE;
-			} else {
-				location->byte_offset -= (text_deletion_userdata->end_byte_offset - text_deletion_userdata->start_byte_offset);
-				
-				return TRUE;				
-			}
-		}
-	} 
-
-	return FALSE;
-}
-
-void cong_document_delete_range (CongDocument *doc, 
-				 CongRange *range)
-{
-	CongLocation loc0, loc1;
-	CongNodePtr n0, n1, n2;
-	
-	g_return_if_fail(doc);
-	g_return_if_fail(range);
-
-	/* Validate range */
-	g_return_if_fail( cong_location_exists(&range->loc0) );
-	g_return_if_fail( cong_location_exists(&range->loc1) );
-	g_return_if_fail( cong_location_parent(&range->loc0) == cong_location_parent(&range->loc1) );
-	/* both must be children of the same parent to maintain proper nesting */
-
-	cong_document_begin_edit (doc);
-
-	/* --- Processing for multiple nodes --- */
-	if (range->loc0.node != range->loc1.node)
-	{
-		CongNodePtr prev_node;
-	
-		/* Range is valid, now order first/last nodes */
-		
-		for (n0 = range->loc0.node; n0 && n0 != range->loc1.node; n0 = n0->next) ;
-		
-		if (!n0)
-		{
-			cong_location_copy(&loc0, &range->loc1);
-			cong_location_copy(&loc1, &range->loc0);
-		}
-		else
-		{
-			cong_location_copy(&loc0, &range->loc0);
-			cong_location_copy(&loc1, &range->loc1);
-		}
-
-		/* Split, first */
-
-		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
-		{
-			prev_node = cong_location_xml_frag_data_nice_split2(doc, &loc0);
-			g_assert(prev_node);
-
-			loc0.node = range->loc0.node = prev_node->next;
-		} else {
-			prev_node = loc0.node;
-		}
-		
-		/* prev_node holds the previous node */
-
-		/* Reparent, first & middle */
-		for (n0 = loc0.node; n0 != loc1.node; n0 = n2) {
-			n2 = n0->next;
-
-			CONG_NODE_SELF_TEST(n0);
-
-			cong_document_for_each_location (doc, 
-							 pre_node_deletion_update_location_callback, 
-							 n0);
-
-			cong_document_node_recursive_delete (doc,
-							     n0);
-		}
-
-		/* Split, last */
-
-		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
-		{
-			loc1.node = cong_location_xml_frag_data_nice_split2(doc, &loc1);
-		}
-
-		/* Delete last */
-		cong_document_for_each_location (doc, 
-						 pre_node_deletion_update_location_callback, 
-						 loc1.node);
-
-		/* FIXME: should this be a cong_document_node_recursive_delete instead? */
-		cong_util_remove_tag (doc, 
-				      loc1.node);
-	}
-
-	/* --- Processing for single node (loc0.node == loc1.node) --- */
-
-	else
-	{
-		/* Sort out the ordering: */
-		if (range->loc0.byte_offset < range->loc1.byte_offset)
-		{
-			cong_location_copy(&loc0,&range->loc0);
-			cong_location_copy(&loc1,&range->loc1);
-		}
-		else
-		{
-			cong_location_copy(&loc0,&range->loc1);
-			cong_location_copy(&loc1,&range->loc0);
-		}
-
-		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
-		{
-			if (loc0.byte_offset == loc1.byte_offset) {
-				/* The end is the beginning is the end */
-			} else {
-			
-				/* Split up textual content of node: */
-				gchar *text_before = g_strndup (loc0.node->content, loc0.byte_offset);
-
-				gchar *new_text = g_strdup_printf("%s%s",text_before, loc1.node->content + loc1.byte_offset);
-
-				struct text_deletion_userdata text_deletion_userdata;				
-				text_deletion_userdata.node = loc0.node;
-				text_deletion_userdata.start_byte_offset = loc0.byte_offset;
-				text_deletion_userdata.end_byte_offset = loc1.byte_offset;
-
-				cong_document_for_each_location (doc, 
-								 text_deletion_update_location_callback, 
-								 &text_deletion_userdata);
-
-				cong_document_node_set_text (doc,
-							     loc0.node,
-							     new_text);
-
-				g_free (text_before);
-				g_free (new_text);
-
-				/* what should happen to cursor? */
-			}
-		} else {
-			/* Delete entire node: */
-#if 1
-			CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Deletion of a single non-textual node");
-#else
-			/* what should happen to cursor? */
-			cong_util_remove_tag (doc, 
-					      loc0.node);
-#endif
-		}
-	}
-
-	cong_document_end_edit (doc);
-}
-#endif /* #if !SUPPORT_UNDO */
-
-#if !SUPPORT_UNDO
-void
-cong_document_insert_text (CongDocument *doc, 
-			   CongLocation *loc, 
-			   const gchar* insertion)
-{
-	xmlChar *new_content;
-
-	int byte_length;
-
-	g_return_if_fail(cong_location_exists(loc));
-	g_return_if_fail (cong_node_is_valid_cursor_location(loc->node));
-	g_return_if_fail(insertion!=NULL);
-	g_return_if_fail(g_utf8_validate(insertion, -1, NULL));
-
-	byte_length = strlen(insertion);
-
-	new_content = xmlStrndup(loc->node->content, loc->byte_offset);
-	CONG_VALIDATE_UTF8(new_content);
-
-	new_content = xmlStrcat(new_content, insertion);
-	CONG_VALIDATE_UTF8(new_content);
-
-	CONG_VALIDATE_UTF8(loc->node->content+loc->byte_offset);
-	new_content = xmlStrcat(new_content, loc->node->content+loc->byte_offset);
-	CONG_VALIDATE_UTF8(new_content);
-
-	cong_document_node_set_text(doc, loc->node, new_content);
-	
-	xmlFree(new_content);
-
-	/* GREP FOR MVC: the location is updated here */
-	loc->byte_offset += byte_length;		
-	CONG_VALIDATE_UTF8(loc->node->content+loc->byte_offset);
-}
-#endif /* #if !SUPPORT_UNDO */
-
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment)
@@ -1638,59 +1163,6 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	return result;
 
 }
-
-#if !SUPPORT_UNDO
-void
-cong_document_for_each_location (CongDocument *doc, 
-				 CongUpdateLocationCallback callback, 
-				 gpointer user_data)
-{
-	gboolean selection_change = FALSE;
-	CongLocation logical_sel_start;
-	CongLocation logical_sel_end;
-
-	g_return_if_fail (doc);
-	g_return_if_fail (callback);
-
-	cong_location_copy (&logical_sel_start, cong_selection_get_logical_start (PRIVATE(doc)->selection));
-	cong_location_copy (&logical_sel_end, cong_selection_get_logical_end (PRIVATE(doc)->selection));
-
-#if 0
-	g_message ("test for update of cursor location from (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
-#endif
-
-	if ( callback (doc,
-		       &PRIVATE(doc)->cursor.location,
-		       user_data)) {
-#if 0
-		g_message ("update of cursor location to (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
-#endif
-		cong_document_on_cursor_change (doc);
-	}
-
-	if ( callback (doc,
-		       &logical_sel_start,
-		       user_data)) {
-		selection_change = TRUE;
-	}
-	
-	if (callback (doc,
-		      &logical_sel_end,
-		      user_data)) {
-		selection_change = TRUE;
-	}
-	
-	if (selection_change) {
-		cong_selection_set_logical_start (PRIVATE(doc)->selection,
-						  &logical_sel_start);
-		
-		cong_selection_set_logical_end (PRIVATE(doc)->selection,
-						&logical_sel_end);
-		
-		cong_document_on_selection_change (doc);
-	}
-}
-#endif /* #if !SUPPORT_UNDO */
 
 xmlElementPtr 
 cong_document_get_dtd_element (CongDocument *cong_doc, 
@@ -2227,7 +1699,6 @@ cong_document_handle_cursor_change(CongDocument *doc)
 }
 
 
-#if SUPPORT_UNDO
 static void
 cong_document_handle_set_dtd_ptr (CongDocument *doc,
 				  xmlDtdPtr dtd_ptr)
@@ -2272,93 +1743,5 @@ cong_document_handle_set_dtd_ptr (CongDocument *doc,
 		}
 	}
 }
-
-#else
-static void
-cong_document_handle_set_external_dtd (CongDocument *doc,
-				       const gchar* root_element,
-				       const gchar* public_id,
-				       const gchar* system_id)
-{
-	GList *iter;
-
-	#if DEBUG_MVC
-	g_message("cong_document_handle_set_external_dtd");
-	#endif
-
-	/* Notify listeners: */
-	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_set_external_dtd) {
-			view->klass->on_document_set_external_dtd (view, 
-								   TRUE, 
-								   root_element,
-								   public_id,
-								   system_id);
-		}
-	}
-
-	/* Make the change: */
-	{
-		xmlDocPtr xml_doc = PRIVATE(doc)->xml_doc;
-
-		/* Remove any existing DTD: */
-		{
-			if (xml_doc->extSubset) {
-				cong_document_private_node_make_orphan (doc,
-									(xmlNodePtr)xml_doc->extSubset);
-
-				cong_document_node_recursive_delete (doc, 
-								     (xmlNodePtr)xml_doc->extSubset);
-
-				xml_doc->extSubset = NULL;
-			}
-		}
-
-		/* Add the new DTD (if any): */
-		if (root_element) {
-			xmlDtdPtr dtd_ptr = cong_util_make_dtd (xml_doc,
-								root_element,
-								public_id, 
-								system_id);
-			
-			if (dtd_ptr) {			
-				if (xml_doc->children) {
-					cong_document_private_node_add_before (doc,
-									       (xmlNodePtr)dtd_ptr,
-									       (xmlNodePtr)xml_doc->children);
-				} else {
-					cong_document_private_node_set_parent (doc,
-									       (xmlNodePtr)dtd_ptr,
-									       (xmlNodePtr)xml_doc);
-				}
-				
-				/* Ensure the DTD ptr is still set up within the xml_doc; the tree manipulation seems to make it lose the extSubset pointer: */
-				xml_doc->extSubset = dtd_ptr;
-			}
-		}
-	}
-
-	/* Document is now modified: */
-	cong_document_set_modified(doc, TRUE);
-
-	/* Notify listeners: */
-	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		if (view->klass->on_document_set_external_dtd) {
-			view->klass->on_document_set_external_dtd (view, 
-								   FALSE,
-								   root_element,
-								   public_id,
-								   system_id);
-		}
-	}
-
-}
-#endif
 
 

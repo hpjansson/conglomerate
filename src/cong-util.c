@@ -436,32 +436,6 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
 }
 #endif
 
-#if !SUPPORT_UNDO
-void
-cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
-					       CongNodePtr node)
-{
-	CongNodePtr cursor_node;
-
-	g_return_if_fail (doc);
-	g_return_if_fail (node);
-
-	cursor_node = cong_node_get_first_text_node_descendant (node);
-	
-	if (cursor_node) {
-		CongCursor *cursor = cong_document_get_cursor (doc);
-		cong_document_begin_edit (doc);
-
-		cong_location_set_to_start_of_node (&cursor->location,
-						    cursor_node);
-
-		cong_document_on_cursor_change (doc);
-
-		cong_document_end_edit (doc);		
-	}
-}
-#endif /* #if !SUPPORT_UNDO */
-
 /**
    Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
  */
@@ -582,67 +556,6 @@ cong_util_split_uri (const GnomeVFSURI* uri,
 	gnome_vfs_uri_unref(parent_uri);
 
 }
-
-/*
-  Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
- */
-#if !SUPPORT_UNDO
-void 
-cong_util_remove_tag (CongDocument *doc, 
-		      CongNodePtr x)
-{
-	CongNodePtr n0;
-	CongNodePtr n0_next;
-
-	g_return_if_fail(x);
-
-	/* GREP FOR MVC */
-
-#if 1
-	for (n0 = x->children; n0; n0 = n0_next) {
-		n0_next = n0->next;
-		
-		cong_document_node_add_before(doc, n0, x);
-	}
-
-	cong_document_node_make_orphan(doc, x);
-
-	cong_document_node_recursive_delete (doc, x);
-#else
-	n0 = cong_node_first_child(x);
-
-	if (n0) {
-		n0->prev = x->prev;
-	}
-
-	if (NULL==x->prev) {
-		x->parent->children = n0;
-	} else {
-		x->prev->next = n0;
-	}
-
-	for (; n0->next; n0 = n0->next) {
-		n0->parent = x->parent;
-	}
-	n0->parent = x->parent;
-
-	n0->next = x->next;
-	if (x->next) {
-		x->next->prev = n0;
-	} else {
-		x->parent->last = n0;
-	}
-	
-	x->next = NULL;
-	x->prev = NULL;
-	x->parent = NULL;
-	x->children = NULL;
-	x->last = NULL;
-
-	xmlFreeNode(x);
-#endif
-}
-#endif /* #if !SUPPORT_UNDO */
 
 /* Dodgy blend func: */
 static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)

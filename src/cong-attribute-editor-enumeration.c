@@ -166,7 +166,6 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
 					    "attr_value");
 
-#if SUPPORT_UNDO
 	{
 		CongCommand *cmd;
 		gchar *desc;
@@ -196,21 +195,4 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-
-	cong_document_begin_edit (doc);
-
-	if (new_attr_value) {
-		cong_document_node_set_attribute (doc, 
-						  node, 
-						  attr->name, 
-						  new_attr_value);
-	} else {
-		cong_document_node_remove_attribute (doc, 
-						     node, 
-						     attr->name);
-	}
-
-	cong_document_end_edit (doc);
-#endif
 }

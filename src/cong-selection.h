@@ -65,17 +65,6 @@ cong_selection_get_ordered_start (CongSelection *selection);
 CongLocation*
 cong_selection_get_ordered_end (CongSelection *selection);
 
-#if !SUPPORT_UNDO
-void
-cong_selection_set_logical_start (CongSelection *selection,
-				CongLocation *location);
-
-void
-cong_selection_set_logical_end (CongSelection *selection,
-				CongLocation *location);
-
-#endif /* #if !SUPPORT_UNDO */
-
 void
 cong_selection_nullify (CongSelection *selection);
 

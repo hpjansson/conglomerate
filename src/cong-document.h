@@ -93,15 +93,8 @@ struct CongDocumentClass
 
 	void (*cursor_change) (CongDocument *doc);
 
-#if SUPPORT_UNDO
 	void (*set_dtd_ptr) (CongDocument *doc,
 			     xmlDtdPtr dtd_ptr);
-#else
-	void (*set_external_dtd) (CongDocument *doc,
-				  const gchar* root_element,
-				  const gchar* public_id,
-				  const gchar* system_id);
-#endif
 };
 
 GType
@@ -288,17 +281,9 @@ void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr nod
 void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, const xmlChar *name);
 void cong_document_private_on_selection_change(CongDocument *doc);
 void cong_document_private_on_cursor_change(CongDocument *doc);
-#if SUPPORT_UNDO
 void 
 cong_document_private_set_dtd_ptr (CongDocument *doc,
 				   xmlDtdPtr dtd_ptr);
-#else
-void 
-cong_document_private_set_external_dtd (CongDocument *doc,
-				const xmlChar *root_element,
-				const xmlChar *ExternalID, 
-				const xmlChar *SystemID);
-#endif
 
 /* These functions internally ref and unref the document:, as well as adding the view to the doc's list */
 void cong_document_register_view(CongDocument *doc, CongView *view);
@@ -340,9 +325,6 @@ cong_document_cut_selection (CongDocument *doc);
 
 void
 cong_document_copy_selection (CongDocument *doc);
-
-void
-cong_document_delete_selection (CongDocument *doc);
 
 void 
 cong_document_paste_clipboard_or_selection (CongDocument *doc, 
@@ -389,56 +371,11 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 				      CongDocumentRecursionCallback callback, 
 				      gpointer callback_data);
 
-/* Handy utilities for manipulating the document: */
-void
-cong_document_merge_adjacent_text_nodes (CongDocument *doc);
-
-void
-cong_document_merge_adjacent_text_children_of_node (CongDocument *doc, 
-						    CongNodePtr parent);
-
-void cong_document_node_recursive_delete (CongDocument *doc, 
-					  CongNodePtr node);
-
-void cong_document_delete_range (CongDocument *doc, 
-				 CongRange *range);
-
-/* "insertion" must be a UTF-8 string; the location must be within a text or comment node */
-void
-cong_document_insert_text (CongDocument *doc, 
-			   CongLocation *loc, 
-			   const gchar* insertion);
-
 /* Tries to parse the source fragment, places the result under a <placeholder> tag, which is returned */
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment);
 
-/* Return true if you modify the location */
-typedef gboolean
-(*CongUpdateLocationCallback) (CongDocument *doc,
-			       CongLocation *location, 
-			       gpointer user_data);
-
-/* Invoke the callback for the cursor and selection locations; allowing you to do something sane with them when manipulating the tree */
-void
-cong_document_for_each_location (CongDocument *doc, 
-				 CongUpdateLocationCallback callback, 
-				 gpointer user_data);
-
-/**
- * Splits a data node in 3 and returns pointer to the middle one 
- */
-CongNodePtr
-cong_document_node_split3 (CongDocument *doc, 
-			   CongNodePtr s, 
-			   int c0, 
-			   int c1);
-
-CongNodePtr 
-cong_document_node_split2 (CongDocument *doc, 
-			   CongNodePtr s, 
-			   int c);
 
 /**
  * cong_document_get_dtd_element

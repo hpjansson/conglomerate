@@ -75,37 +75,6 @@ gint cong_cursor_blink(gpointer data)
 	return(TRUE);
 }
 
-#if !SUPPORT_UNDO
-void 
-cong_cursor_data_insert (CongCursor *curs, 
-			 const gchar *text)
-{
-	CongDocument *doc;
-#if 0cursor
-	int len;
-#endif
-
- 	g_return_if_fail(curs);
-	g_return_if_fail(text);
-
-	doc = curs->doc;
-
-#if 0
-	len = strlen(text);
-#endif
-
-	if (!cong_location_exists(&curs->location)) return;
-
-	if (!cong_node_is_valid_cursor_location (curs->location.node)) {
-		return;
-	}
-
-	cong_document_insert_text (doc, 
-				   &curs->location, 
-				   text);
-}
-#endif /* #if !SUPPORT_UNDO */
-
 int cong_cursor_paragraph_insert(CongCursor *curs)
 {
         CongNodePtr t;
@@ -127,7 +96,6 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 
 	cong_document_begin_edit (doc);
 
-#if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Split %s tag"), tagname);
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
@@ -165,28 +133,6 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 		cong_document_end_command (doc,
 					   cmd);
 	}
-#else
-
-
-	t = cong_location_xml_frag_data_nice_split2(doc, &curs->location);
-	cong_location_set_node_and_byte_offset(&curs->location,t->next,0);
-
-	/* Assume that we've just split up a text node below a <para> node below some parent into two
-	   text nodes below that para.
-	   We need to create an new <para> node as a sibling of the other para, and move the second text node
-	   and all the rest of the siblings to below it.
-	*/
-	new_element = cong_node_new_element(xmlns, tagname, doc);
-
-	cong_document_node_add_after(doc, new_element, t->parent);
-
-	/* Move the second text node and all successive siblings; this should deal with inline tags further in the para: */
-	for (iter = curs->location.node; iter; iter = next) {
-		next = iter->next;
-		cong_document_node_set_parent(doc, iter, new_element);
-	}
-
-#endif
 
 	cong_document_end_edit (doc);
 
