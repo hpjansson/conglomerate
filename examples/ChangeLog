@@ -1,5 +1,9 @@
 2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xds.dtd
+
+	Allow more than one <name> and <short-desc> below an <element>, locale->language; make it REQUIRED and a NMTOKEN
+	
 	* cnxml.xds, dispspec.xds, docbook.xds, forrest-document.xds, kernel-traffic-newsletter.xds, readme.xds, relax-ng.xds, website-layout.xds, website-webpage.xds, xhtml1-strict.xds, xsl.xds
 	
 	Added language attribute to metadata name and description tags; converted attribute locale->language elsewhere; added some test translations

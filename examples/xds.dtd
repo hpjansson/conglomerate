@@ -52,8 +52,8 @@
 <!-- The various types of element:                                         -->
 <!-- ===================================================================== -->
 <!-- Content model shared by all element types: -->
-<!ENTITY % element.content "( name?, 
-                              short-desc?, 
+<!ENTITY % element.content "( name*, 
+                              short-desc*,
                               header-info?, 
                               property-dialog?,
                               key-value-list?) ">
@@ -107,14 +107,17 @@
 
 <!ELEMENT name ( #PCDATA ) >
 <!ATTLIST name 
-   locale  ( en )  #IMPLIED 
+   language  NMTOKEN #REQUIRED
 >
 
 <!ELEMENT description ( #PCDATA ) >
+<!ATTLIST description 
+   language  NMTOKEN #REQUIRED
+>
 
 <!ELEMENT short-desc ( #PCDATA ) >
 <!ATTLIST short-desc 
-   locale  NMTOKEN  #IMPLIED 
+   language  NMTOKEN  #REQUIRED
 >
 
 <!ELEMENT property-dialog EMPTY >
