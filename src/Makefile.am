@@ -60,6 +60,8 @@ conge_SOURCES =             \
   fo-solver-result.c        \
   fo-tests.c                \
   plugin-docbook.c          \
+  plugin-lists.c            \
+  plugin-xsl.c              \
   main.c
 
 INCLUDES = $(CONGLOMERATE_CFLAGS) \

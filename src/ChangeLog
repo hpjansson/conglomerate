@@ -1,4 +1,28 @@
 creating ChangeLog
+2003-03-25 David Malcolm
+
+	* Makefile.am
+
+	Added plugin-lists.c and plugin-xsl.c
+
+	* plugin-lists.c, plugin-xsl.c
+
+	New files
+
+	* cong-dispspec.h, cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-plugin.c, cong-plugin.h, cong-section-head-editor.c, dispspec.c, global.h, main.c
+
+	Plugin system now supports pluggable editor elements
+
+	* cong-primary-window.c
+
+	Sidebar is now tabbed, with a "Raw XML" tab to complement the "Overview" tab
+	
+2003-03-24 David Malcolm
+
+	* cong-section-head-editor.c, global.h, popup.c, xmlview.c
+
+	Cleanups for editor context menu	
+	
 2003-03-14 David Malcolm
 	
 	* Makefile.am, cong-document.c, cong-document.h, cong-plugin.c, cong-primary-window.c, cong-test-view.c, global.h, main.c, open.c, xmldata.c, xmledit.c, cong-source-view.c
