@@ -243,6 +243,16 @@ render_self (CongEditorArea *area,
 	cong_editor_area_debug_render_state (area);
 }
 
+/**
+ * calc_requisition
+ * @area: the CongEditorArea being queried.
+ * @orientation: which dimension?  GTK_ORIENTATION_HORIZONTAL or GTK_ORIENTATION_VERTICAL.
+ * @width_hint:
+ *
+ * Calculate the height or width required by the span tag given by the area argument.
+ *
+ * Returns: the required dimension, as a gint.
+ */
 static gint
 calc_requisition (CongEditorArea *area, 
 		  GtkOrientation orientation,
@@ -260,7 +270,10 @@ calc_requisition (CongEditorArea *area,
 #endif
 
 	if (orientation == GTK_ORIENTATION_HORIZONTAL) {
-		return inner_req;
+		/* Make sure there is enough space for title and for text */
+		gint title_text_width_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
+											       orientation);
+		return (MAX(inner_req, title_text_width_req));
 	} else {		
 		gint title_text_height_req = cong_editor_area_text_get_single_line_requisition (CONG_EDITOR_AREA_TEXT(PRIVATE(span_tag)->title_text),
 												orientation);
@@ -269,6 +282,14 @@ calc_requisition (CongEditorArea *area,
 	}
 }
 
+/**
+ * allocate_child_space
+ * @area CongEditorArea for parent span element
+ *
+ * Given area allocated for span element, allocate two subareas (its inner_bin and its title).
+ * 
+ * Returns: void
+ */
 static void
 allocate_child_space (CongEditorArea *area)
 {
@@ -276,6 +297,10 @@ allocate_child_space (CongEditorArea *area)
 	
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
 	
+	gint inner_req_width =  cong_editor_area_get_requisition (PRIVATE(span_tag)->inner_bin,
+								  GTK_ORIENTATION_HORIZONTAL,
+								  rect->width);
+
 	gint inner_req_height = cong_editor_area_get_requisition (PRIVATE(span_tag)->inner_bin,
 								  GTK_ORIENTATION_VERTICAL,
 								  rect->width);
@@ -293,22 +318,17 @@ allocate_child_space (CongEditorArea *area)
 	
 	/* Set inner bin to have all the width, plus all the height it wants:*/
 	cong_editor_area_set_allocation (PRIVATE(span_tag)->inner_bin,
-					 rect->x,
+					 rect->x + (rect->width - inner_req_width)/2,
 					 rect->y,
-					 rect->width,
+					 inner_req_width,
 					 inner_req_height);
 
-	/* Set up the title text: */
-	if (title_text_width_req < rect->width) {
-		cong_editor_area_show (PRIVATE(span_tag)->title_text);
-		cong_editor_area_set_allocation (PRIVATE(span_tag)->title_text,
-						 rect->x + (rect->width - title_text_width_req)/2,
-						 rect->y + rect->height - title_text_height_req,
-						 title_text_width_req,
-						 title_text_height_req);
-	} else {
-		cong_editor_area_hide (PRIVATE(span_tag)->title_text);		
-	}
+	cong_editor_area_show (PRIVATE(span_tag)->title_text);
+	cong_editor_area_set_allocation (PRIVATE(span_tag)->title_text,
+					 rect->x + (rect->width - title_text_width_req)/2,
+					 rect->y + rect->height - title_text_height_req,
+					 title_text_width_req,
+					 title_text_height_req);
 }
 
 static CongEditorArea*
