@@ -101,13 +101,25 @@ conglomerate_SOURCES =      \
   cong-node-modification-set-text.h  \
   cong-node-modification-set-attribute.h  \
   cong-node-modification-remove-attribute.h  \
+  cong-object.h      \
   cong-overview-view.h      \
   cong-parser-error.h       \
   cong-plugin.h             \
+  cong-plugin-manager.h     \
   cong-primary-window.h     \
   cong-progress-checklist.h \
   cong-range.h              \
   cong-selection.h          \
+  cong-service.h            \
+  cong-service-doc-tool.h   \
+  cong-service-document-factory.h \
+  cong-service-editor-node-factory.h \
+  cong-service-exporter.h   \
+  cong-service-importer.h   \
+  cong-service-node-property-dialog.h \
+  cong-service-node-tool.h  \
+  cong-service-print-method.h \
+  cong-service-tool.h \
   cong-text-cache.h         \
   cong-traversal-node.h     \
   cong-tree-view.h          \
@@ -217,9 +229,20 @@ conglomerate_SOURCES =      \
   cong-overview-view.c      \
   cong-parser-error.c       \
   cong-plugin.c             \
+  cong-plugin-manager.c     \
   cong-primary-window.c     \
   cong-progress-checklist.c \
   cong-range.c              \
+  cong-service.c            \
+  cong-service-doc-tool.c   \
+  cong-service-document-factory.c \
+  cong-service-editor-node-factory.c \
+  cong-service-exporter.c   \
+  cong-service-importer.c   \
+  cong-service-node-property-dialog.c \
+  cong-service-node-tool.c  \
+  cong-service-print-method.c \
+  cong-service-tool.c       \
   cong-source-view.c        \
   cong-text-cache.c         \
   cong-traversal-node.c     \
