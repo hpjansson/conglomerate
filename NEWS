@@ -1,7 +1,109 @@
 
-bugzilla 123131 fixed
-
 NEWS: In this file the announce messages of recent releases.
+
+30-10-03
+Conglomerate 0.7.6 - "It Looks Like You're Writing A <letter>"
+Released
+ 
+   Conglomerate  is  a  free,  user-friendly  XML  editor.  It is
+   particularly  aimed  at  DocBook, but should be able to handle
+   any XML document type.
+ 
+   Conglomerate   is  still  UNSTABLE,  and  not  yet  ready  for
+   heavy-duty production use. Having said that I used it to write
+   these  release  notes  in  DocBook without having to resort to
+   Emacs,  and  it's  less painful than it was. Has crashed twice
+   (so  far).  Notable  remaining  problems  are  lack  of speed,
+   inability  to  deal  with  external entities, and crashes when
+   nesting certain elements inside certain other elements.
+ 
+   A  fair  amount  has changed since the last release: there are
+   plenty  of  new  features  which  need testing. In particular,
+   support for non-Roman scripts should be substantially better -
+   we now support GTK Input Methods, and I believe I've fixed the
+   last remaining multibyte character bug. Testers welcome!
+ 
+Enhancements
+ 
+     * Structural   headers   now  have  an  animated  disclosure
+       triangle for folding the content (me)
+     * Extension  of  selection  so  that  entire  nodes  can  be
+       selected  as  well  as  ranges  of  text - try clicking on
+       things! (me)
+     * Bulletproofing various clipboard operations (me)
+     * Editor  areas  now  support pre-lighting when the mouse is
+       over  them;  there are various placeholder effects for now
+       (me)
+     * Editor  areas now support mouse cursors; text areas use an
+       I-beam (me)
+     * Support  for  template  documents which will appear in the
+       Create New File assistant. (Jeff Martin)
+     * Support for GTK Input Methods (me)
+     * Now  uses  the  X CLIPBOARD for clipboard handling, rather
+       than an internal buffer (me)
+     * Span tags are now filtered using DTD if available (me)
+     * If  there  is a gconf key specifying dispspec directories,
+       load  them  from  there  instead  of  using  application's
+       default directory. (Boris Goldowsky)
+     * Enhancements  to  gtk-doc  documentation  coverage (Robert
+       Varga)
+     * Made moving the cursor to the right move through tags just
+       like cursor movement to the left (bug #125341). (Geert-Jan
+       Van den Bogaerde)
+     * Removed last traces of GdkFont (me)
+     * Change  the toolbar to give 'save' as an option instead of
+       'save as' (David Hoover)
+     * Fixes to help 64-bit architectures (me, Andreas Schwab)
+     * Custom  display  of  DocBook  admonition  tags  <warning>,
+       <caution> etc (code by me, artwork by Jakub Steiner)
+     * Custom proprty dialog for DocBook <ulink> tags (me)
+     * Simplified  usage  of  GnomeVFS; made it easy to switch to
+       pure usage of libxml2's loaders (me)
+     * Improvements to display specification for xds files (Boris
+       Goldowsky)
+     * Support for Apache Forrest documents (Boris Goldowsky)
+     * New  translations:  az  (Metin  Amiroff), ca (Xavier Conde
+       Rueda), el (Kostas Papadimas)
+     * Updated  translations:  cs (Miloslav Trmac), de (Christian
+       Neumair), sr, sr@Latn (Danilo Segan), sv (Christian Rose),
+ 
+Fixes
+ 
+     * Fixed  a  long-standing  byte  versus  char bug that broke
+       cursor positioning in non-Roman scripts (me)
+     * Self-test  now  handles  children  of  an entity reference
+       correctly (me)
+     * Fix for bug #125119 (me)
+     * Fix  for  bug  #124011  -  now  handles  entity  reference
+       children correctly within editor widget (me)
+     * Fix  for  bug  #122365  -  List  item labels now update as
+       appropriate (me)
+     * Fix for bug #121984 (Boris Goldowsky)
+     * Fixed various warnings; removed dead code (me)
+     * Packaging fixes (Geert Stappers, Robert Varga)
+ 
+Thanks to
+ 
+     * Jeff Martin
+     * Boris Goldowsky
+     * Robert Varga
+     * Geert-Jan Van den Bogaerde
+     * David Hoover
+     * Andreas Schwab
+     * Jakub Steiner
+     * Metin Amiroff
+     * Miloslav Trmac
+     * Geert Stappers
+     * Xavier Conde Rueda
+     * Kostas Papadimas
+     * Christian Neumair
+     * Danilo Segan
+     * Christian Rose
+ 
+   ...and anyone else I missed (sorry!)
+ 
+   David Malcolm
+
 
 Conglomerate 0.7.5 - "Now You See It, Now You Don't" Released
 
