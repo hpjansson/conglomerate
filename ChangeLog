@@ -1,3 +1,10 @@
+2004-02-22  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.spec.in
+	
+	Replaced by the version of Dag Wieers.
+	Yes, the FOSDEM visit was a joy.
+
 2004-02-20  Geert Stappers <stappers@stappers.nl>
 
 	* configure.in
