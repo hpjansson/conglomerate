@@ -1,4 +1,25 @@
 creating ChangeLog
+2002-10-24 David Malcolm
+
+	* Makefile.am, cong-test-view.c
+
+	Added cong-test-view.c
+
+	* cong-document.c
+
+	Ported cong_document_save to libxml2
+
+	* xmldata.c
+
+	Ported xml_outer_span_element to libxml2
+
+	
+2002-10-24 David Malcolm
+
+	* global.h, open.c, select.c, tree.c, xmldata.c
+
+	More porting to libxml2; bug fixes of port.
+	
 2002-10-23 David Malcolm
 
 	* cong-location.c, cursor.c, global.h, popup.c, select.c, xmldata.c
