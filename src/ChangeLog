@@ -1,5 +1,9 @@
 2004-06-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-tree-view.c:
+
+	Removed debug spewage
+
 	* cong-document.c (cong_document_get_dispspec_element_for_node): 
 
 	Proper handling of case where doucument has no dispspec

@@ -480,8 +480,9 @@ on_tree_view_selection_changed (GtkTreeSelection *treeselection,
 	CongDocument *doc;
 	CongNodePtr node;
 
+	#if DEBUG_TREE_VIEW
 	g_message ("on_tree_view_selection_changed");
-
+	#endif
 
 	doc = cong_view_get_document (CONG_VIEW (cong_tree_view));
 
