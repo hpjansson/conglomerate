@@ -68,7 +68,7 @@ get_element_name(CongDocument* doc)
 /**
  * cong_ui_hook_tree_new_sibling:
  * @doc:
- * @ds_element:
+ * @element_desc:
  *
  * TODO: Write me
  */
@@ -151,7 +151,7 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 /**
  * cong_ui_hook_tree_new_sub_element:
  * @doc:
- * @ds_element:
+ * @element_desc:
  *
  * TODO: Write me
  */

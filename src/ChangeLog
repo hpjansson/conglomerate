@@ -1,3 +1,10 @@
+2004-11-05 Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* tree.c: 
+
+	Corrected description for doc in two places 
+	(element_desc vs ds_element)
+
 2004-10-28 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* lots of files: Merged WidgetPlayground branch.
