@@ -430,7 +430,7 @@ GtkWidget *cong_debug_message_log_view_new(CongDocument *doc)
 
 /* Signal handling callbacks: */
 /* Callbacks attached before the default handler: */
-void on_signal_begin_edit_notify_before (CongDocument *doc,
+static void on_signal_begin_edit_notify_before (CongDocument *doc,
 					 gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -438,7 +438,7 @@ void on_signal_begin_edit_notify_before (CongDocument *doc,
 	log_begin_edit (details, TRUE);
 }
 
-void on_signal_end_edit_notify_before (CongDocument *doc,
+static void on_signal_end_edit_notify_before (CongDocument *doc,
 				       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -446,7 +446,7 @@ void on_signal_end_edit_notify_before (CongDocument *doc,
 	log_end_edit (details, TRUE);
 }
 
-void on_signal_make_orphan_notify_before (CongDocument *doc, 
+static void on_signal_make_orphan_notify_before (CongDocument *doc, 
 					  CongNodePtr node, 
 					  gpointer user_data) 
 { 
@@ -455,7 +455,7 @@ void on_signal_make_orphan_notify_before (CongDocument *doc,
 	log_make_orphan (details, TRUE, node);
 }
 
-void on_signal_add_after_notify_before (CongDocument *doc, 
+static void on_signal_add_after_notify_before (CongDocument *doc, 
 					CongNodePtr node, 
 					CongNodePtr older_sibling, 
 					gpointer user_data) 
@@ -465,7 +465,7 @@ void on_signal_add_after_notify_before (CongDocument *doc,
 	log_add_after (details, TRUE, node, older_sibling);
 }
 
-void on_signal_add_before_notify_before (CongDocument *doc, 
+static void on_signal_add_before_notify_before (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr younger_sibling, 
 					 gpointer user_data) 
@@ -475,7 +475,7 @@ void on_signal_add_before_notify_before (CongDocument *doc,
 	log_add_before (details, TRUE, node, younger_sibling);
 }
 
-void on_signal_set_parent_notify_before (CongDocument *doc, 
+static void on_signal_set_parent_notify_before (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr adoptive_parent, 
 					 gpointer user_data) 
@@ -485,7 +485,7 @@ void on_signal_set_parent_notify_before (CongDocument *doc,
 	log_set_parent (details, TRUE, node, adoptive_parent);
 }
 
-void on_signal_set_text_notify_before (CongDocument *doc, 
+static void on_signal_set_text_notify_before (CongDocument *doc, 
 				       CongNodePtr node, 
 				       const xmlChar *new_content, 
 				       gpointer user_data) 
@@ -495,7 +495,7 @@ void on_signal_set_text_notify_before (CongDocument *doc,
 	log_set_text (details, TRUE, node, new_content);
 }
 
-void on_signal_set_attribute_notify_before (CongDocument *doc, 
+static void on_signal_set_attribute_notify_before (CongDocument *doc, 
 					    CongNodePtr node, 
 					    const xmlChar *name, 
 					    const xmlChar *value, 
@@ -506,7 +506,7 @@ void on_signal_set_attribute_notify_before (CongDocument *doc,
 	log_set_attribute (details, TRUE, node, name, value);
 }
 
-void on_signal_remove_attribute_notify_before (CongDocument *doc, 
+static void on_signal_remove_attribute_notify_before (CongDocument *doc, 
 					       CongNodePtr node, 
 					       const xmlChar *name, 
 					       gpointer user_data) 
@@ -516,7 +516,7 @@ void on_signal_remove_attribute_notify_before (CongDocument *doc,
 	log_remove_attribute (details, TRUE, node, name);
 }
 
-void on_signal_selection_change_notify_before (CongDocument *doc, 
+static void on_signal_selection_change_notify_before (CongDocument *doc, 
 					       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -524,7 +524,7 @@ void on_signal_selection_change_notify_before (CongDocument *doc,
 	log_selection_change (details, TRUE);
 }
 
-void on_signal_cursor_change_notify_before (CongDocument *doc, 
+static void on_signal_cursor_change_notify_before (CongDocument *doc, 
 					    gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -534,7 +534,7 @@ void on_signal_cursor_change_notify_before (CongDocument *doc,
 
 
 /* Callbacks attached after the default handler: */
-void on_signal_begin_edit_notify_after (CongDocument *doc,
+static void on_signal_begin_edit_notify_after (CongDocument *doc,
 					 gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -542,7 +542,7 @@ void on_signal_begin_edit_notify_after (CongDocument *doc,
 	log_begin_edit (details, FALSE);
 }
 
-void on_signal_end_edit_notify_after (CongDocument *doc,
+static void on_signal_end_edit_notify_after (CongDocument *doc,
 				       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -550,7 +550,7 @@ void on_signal_end_edit_notify_after (CongDocument *doc,
 	log_end_edit (details, FALSE);
 }
 
-void on_signal_make_orphan_notify_after (CongDocument *doc, 
+static void on_signal_make_orphan_notify_after (CongDocument *doc, 
 					 CongNodePtr node, 
 					 gpointer user_data) 
 { 
@@ -559,7 +559,7 @@ void on_signal_make_orphan_notify_after (CongDocument *doc,
 	log_make_orphan (details, FALSE, node);
 }
 
-void on_signal_add_after_notify_after (CongDocument *doc, 
+static void on_signal_add_after_notify_after (CongDocument *doc, 
 					CongNodePtr node, 
 					CongNodePtr older_sibling, 
 					gpointer user_data) 
@@ -569,7 +569,7 @@ void on_signal_add_after_notify_after (CongDocument *doc,
 	log_add_after (details, FALSE, node, older_sibling);
 }
 
-void on_signal_add_before_notify_after (CongDocument *doc, 
+static void on_signal_add_before_notify_after (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr younger_sibling, 
 					 gpointer user_data) 
@@ -579,7 +579,7 @@ void on_signal_add_before_notify_after (CongDocument *doc,
 	log_add_before (details, FALSE, node, younger_sibling);
 }
 
-void on_signal_set_parent_notify_after (CongDocument *doc, 
+static void on_signal_set_parent_notify_after (CongDocument *doc, 
 					 CongNodePtr node, 
 					 CongNodePtr adoptive_parent, 
 					 gpointer user_data) 
@@ -589,7 +589,7 @@ void on_signal_set_parent_notify_after (CongDocument *doc,
 	log_set_parent (details, FALSE, node, adoptive_parent);
 }
 
-void on_signal_set_text_notify_after (CongDocument *doc, 
+static void on_signal_set_text_notify_after (CongDocument *doc, 
 				       CongNodePtr node, 
 				       const xmlChar *new_content, 
 				       gpointer user_data) 
@@ -599,7 +599,7 @@ void on_signal_set_text_notify_after (CongDocument *doc,
 	log_set_text (details, FALSE, node, new_content);
 }
 
-void on_signal_set_attribute_notify_after (CongDocument *doc, 
+static void on_signal_set_attribute_notify_after (CongDocument *doc, 
 					   CongNodePtr node, 
 					   const xmlChar *name, 
 					   const xmlChar *value, 
@@ -610,7 +610,7 @@ void on_signal_set_attribute_notify_after (CongDocument *doc,
 	log_set_attribute (details, FALSE, node, name, value);
 }
 
-void on_signal_remove_attribute_notify_after (CongDocument *doc, 
+static void on_signal_remove_attribute_notify_after (CongDocument *doc, 
 					       CongNodePtr node, 
 					       const xmlChar *name, 
 					       gpointer user_data) 
@@ -620,7 +620,7 @@ void on_signal_remove_attribute_notify_after (CongDocument *doc,
 	log_remove_attribute (details, FALSE, node, name);
 }
 
-void on_signal_selection_change_notify_after (CongDocument *doc, 
+static void on_signal_selection_change_notify_after (CongDocument *doc, 
 					       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -628,7 +628,7 @@ void on_signal_selection_change_notify_after (CongDocument *doc,
 	log_selection_change (details, FALSE);
 }
 
-void on_signal_cursor_change_notify_after (CongDocument *doc, 
+static void on_signal_cursor_change_notify_after (CongDocument *doc, 
 					    gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
