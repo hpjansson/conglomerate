@@ -1,5 +1,9 @@
 2003-09-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-location.c
+
+	Rewrite of 3-year old cursor->left logic (based on work by Amaury Jacquot)
+	
 	* cong-node.c
 
 	Rewrite of overzealous g_assert that was stopping entities working (cf bug #122967 and about 10 dups)

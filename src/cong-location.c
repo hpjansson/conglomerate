@@ -8,6 +8,7 @@
 #include "cong-error-dialog.h"
 #include "cong-util.h"
 
+ 
 gboolean
 cong_location_is_valid(const CongLocation *loc)
 {
@@ -432,12 +433,95 @@ cong_location_copy(CongLocation *dst, const CongLocation *src)
 	*dst = *src;
 }
 
+typedef gboolean (*CongNodePredicate) (CongDispspec *dispspec,
+				       CongNodePtr node);
+
+/* Search for prev node, assuming a depth-first traversal: */
+static CongNodePtr
+calc_final_node_in_subtree_satisfying (CongDispspec *dispspec,
+				       CongNodePtr node, 
+				       CongNodePredicate predicate)
+{
+	CongNodePtr iter;
+
+	/* "node" is treated as being in its own subtree */
+
+	for (iter = node->last; iter; iter=iter->prev) {
+		CongNodePtr final = calc_final_node_in_subtree_satisfying (dispspec,
+									   iter,
+									   predicate);
+		
+		if (final) {
+			return final;
+		}		
+	}
+
+	/* Not found in any children of this node, try this node: */
+	if (predicate (dispspec, node)) {
+		return node;
+	} else {
+		return NULL;
+	}
+}
+
+static CongNodePtr
+calc_prev_node_satisfying (CongDispspec *dispspec,
+			   CongNodePtr node, 
+			   CongNodePredicate predicate)
+{
+	g_return_val_if_fail (dispspec, NULL);
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* Search through subtrees of siblings to the left of this node: */
+	{
+		CongNodePtr iter;
+
+		for (iter = node->prev; iter; iter = iter->prev) {
+			CongNodePtr final = calc_final_node_in_subtree_satisfying (dispspec,
+										   iter, 
+										   predicate);
+			
+			if (final) {
+				return final;
+			}
+		}
+	}
+
+	/* If not found, try parent node, and then recurse: */
+	if (node->parent) {
+		if (predicate(dispspec, node->parent)) {
+			return node->parent;
+		} else {
+			return calc_prev_node_satisfying (dispspec,
+							  node->parent, 
+							  predicate);				
+		} 
+	} else {
+		return NULL;
+	}
+}
+
+static gboolean
+is_valid_cursor_node (CongDispspec *dispspec,
+		      CongNodePtr node) 
+{
+	g_return_val_if_fail (node, FALSE);
+
+#if 1
+	/* For now: */
+	return (node->type == XML_TEXT_NODE);
+#else
+	/* Eventually allow comment editing: */
+	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
+#endif
+}
+
 gboolean cong_location_calc_prev_char(const CongLocation *input_loc, 
 				      CongDispspec *dispspec,
 				      CongLocation *output_loc)
 {
 	CongNodePtr n;
-	CongNodePtr n0;
 
 #ifndef RELEASE	
 	printf("<- [curs]\n");
@@ -448,7 +532,7 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 	g_return_val_if_fail(output_loc, FALSE);
 	
 	n = input_loc->node;
-	if (cong_location_node_type(input_loc) == CONG_NODE_TYPE_TEXT && input_loc->byte_offset) { 
+	if (is_valid_cursor_node(dispspec, input_loc->node) && input_loc->byte_offset) { 
 
 		gchar *this_char;
 		gchar *prev_char;
@@ -467,50 +551,11 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 
 		return TRUE;
 	}
-
-	do
-	{
-		n0 = n;
-		if (n) n = cong_node_prev(n);
-		
-		for ( ; n; )
-		{
-			if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
-			else if (cong_node_type(n) == CONG_NODE_TYPE_ELEMENT)
-			{
-				if (!strcmp(cong_node_name(n), "table")) break;
-				if (cong_dispspec_element_structural(dispspec, cong_node_get_xmlns(n), xml_frag_name_nice(n)))
-				{
-					n = n0 = 0;
-					break;
-				}
-				else if (cong_node_first_child(n))
-				{
-#ifndef RELEASE					
-					printf("Entering tag: %s.\n", xml_frag_name_nice(n));
-#endif					
-					n = cong_node_first_child(n);
-					continue;
-				}
-			}
-			
-			n0 = n;
-			n = cong_node_prev(n);
-		}
-
-		if (!n) n = n0;
-		else if (cong_node_type(n) == CONG_NODE_TYPE_TEXT) break;
-
-		while (n)
-		{
-			if (cong_dispspec_element_structural(dispspec, cong_node_get_xmlns(n), xml_frag_name_nice(n))) { n = 0; break; }
-			if (!cong_node_prev(n)) n = n0 = cong_node_parent(n);
-			else break;
-		}
-	}
-	while (n);
+	n = calc_prev_node_satisfying (dispspec, n, is_valid_cursor_node);
 
 	if (n) {
+		g_assert (is_valid_cursor_node (dispspec, n));
+
 		/* FIXME: UTF-8 issues here! */
 		cong_location_set_node_and_byte_offset(output_loc,n, strlen(xml_frag_data_nice(n)));
 		return TRUE;
