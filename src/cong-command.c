@@ -65,6 +65,8 @@ struct CongCommandDetails
 	gchar *consolidation_id;
 	gboolean has_ever_been_undone;
 	GList *list_of_modification;
+
+	gboolean doc_modified_before;
 };
 
 /* Exported function definitions: */
@@ -96,6 +98,7 @@ cong_command_construct (CongCommand *command,
 		PRIVATE(command)->consolidation_id = g_strdup (consolidation_id);
 	}
 	PRIVATE(command)->has_ever_been_undone = FALSE;
+	PRIVATE(command)->doc_modified_before = cong_document_is_modified (doc);
 
 	return command;
 }
@@ -164,6 +167,9 @@ cong_command_undo (CongCommand *command)
 				      undo, 
 				      (modification));
 	}
+
+	cong_document_set_modified (doc,
+				    PRIVATE(command)->doc_modified_before);
 
 	cong_document_end_edit (doc);
 }
