@@ -17,8 +17,19 @@
 		</element>
 
 		<element tag="book" type="structural" color="a0b0c0">
+
+			<!-- 
+				A way to get better section header information.
+				Perhaps we should have a list of elements; each provides a path into the children for looking for header information?
+				(If found, then the content of that tag goes into the header)
+
+				At the moment, only a single tag is supported (i.e. no lists).
+			-->
+			<header-info tag="title"></header-info>
+
 		</element>
 		<element tag="bookinfo" type="structural" color="a0b0c0">
+			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="article" type="structural" color="a0b0c0">
@@ -40,7 +51,7 @@
 		</element>
 		<element tag="abstract" type="structural" color="a0b0c0">
 		</element>
-		<element tag="para" type = "paragraph">
+		<element tag="para" type = "structural">
 			<name locale="en">Paragraph</name>
 		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0">
@@ -49,18 +60,27 @@
 		<!-- The various sections -->
 
 		<element tag="chapter" type="structural" color="a0b0c0">
+			<name locale="en">Chapter</name>
+			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect1" type="structural" color="a0b0c0">
+		<element tag="sect1" type="structural" color="a1b0c0">
+			<name locale="en">Section (level 1)</name>
 			<short-desc>A top-level section of document</short-desc>
+			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect2" type="structural" color="a0b0c0">
+			<name locale="en">Section (level 2)</name>
 			<short-desc>A subsection within an <element>sect1</element></short-desc>
+			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect3" type="structural" color="a0b0c0">
+			<name locale="en">Section (level 3)</name>
 		</element>
 		<element tag="sect4" type="structural" color="a0b0c0">
+			<name locale="en">Section (level 4)</name>
 		</element>
 		<element tag="sect5" type="structural" color="a0b0c0">
+			<name locale="en">Section (level 5)</name>
 		</element>
 
 		<!-- List support -->
@@ -69,6 +89,7 @@
 		<element tag="orderedlist" type="structural" color="a0b0c0">
 		</element>
 		<element tag="listitem" type="structural" color="a0b0c0">
+			<collapseto></collapseto>
 		</element>
 
 		<element tag="variablelist" type="structural" color="a0b0c0">
@@ -126,7 +147,7 @@
 		</element>
 		<element tag="email" type="span" color="a0b0c0">
 		</element>
-		<element tag="emphasis" type="span" color="a0b0c0">
+		<element tag="emphasis" type="span" color="a2b0c0">
 		</element>
 		<element tag="filename" type="span" color="a0b0c0">
 		</element>

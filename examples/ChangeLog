@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-17  David Malcolm
+
+	docbook.xds
+
+	Removed paragraph tags for now, added header info and some localised names.
+	
 2002-09-20  David Malcolm
 
 	* docbook.xds, readme.xds
