@@ -1,10 +1,10 @@
-conglomerate-dbg (0.7.14-3.2) UNRELEASED; urgency=low
+conglomerate-dbg (0.7.16-1) unstable; urgency=low
 
-  * The upstream tarball ships a debian directory that
+  * Doing `apt-get source conglomerate` and `debian/rules conglomerate-dbg`
   can easy produce an executable that is not stripped.
   You can use the conglomerate-dbg package for creating usefull stacktraces.
 
- -- Geert Stappers <stappers@stappers.nl>  Thu, 12 Aug 2004 13:44:41 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Sat, 30 Oct 2004 14:27:55 +0200
 
 conglomerate (0.7.8-1) unstable; urgency=low
 

@@ -18,16 +18,6 @@ function regular_release_changes
  sed -e '1s/UNRELEASED/unstable/' \
      -e '3s/expecting //' debian/changelog.orig > debian/changelog
 
- mv debian/control debian/control.orig
- sed -e '/Package: conglomerate-dbg/,$d' debian/control.orig | \
- sed -e '/architecture independent/,$ { /^$/d }' > debian/control
-
- mv debian/rules debian/rules.orig
- sed -e '/enable-debug/d' \
-     -e 's/dh_strip -a --exclude.*/dh_strip -a/' \
-     -e '/conglomerate-dbg/d' debian/rules.orig > debian/rules
- chmod +x debian/rules
-
  echo Don\'t forgot to update the NEWS file.
 }
 
@@ -38,8 +28,6 @@ else
  case "${1}" in
   unpatch)
    test -f debian/changelog.orig && mv debian/changelog.orig debian/changelog
-   test -f debian/control.orig && mv debian/control.orig debian/control
-   test -f debian/rules.orig && mv debian/rules.orig debian/rules
   ;;
   *\.*\.*-*)
    regular_release_changes
@@ -52,8 +40,6 @@ else
        debian/changelog.orig > debian/changelog
    # plus a clean up
    rm debian/changelog.orig
-   rm debian/control.orig
-   rm debian/rules.orig
   ;;
   *)
    echo \'${1}\' is an unsupported subcommand

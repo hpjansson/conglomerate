@@ -129,18 +129,34 @@ binary-indep: build-indep install-indep
 	dh_builddeb -i
 
 # Build architecture-dependent files here.
-binary-arch: build-arch install-arch
-	dh_testdir -a
-	dh_testroot -a
-	dh_strip -a --exclude=conglomerate-dbg
-	dh_compress -a
-	dh_fixperms -a
-	dh_installdeb -a
-	dh_shlibdeps -a
-	dh_gencontrol -a -v -- -VUpstream-Version=$(upstreamversion)
-	dh_md5sums -a
-	dh_builddeb -p conglomerate
-	##dh_builddeb -p conglomerate-dbg
+# The regular binary
+conglomerate: build-arch install-arch
+	dh_testdir -p $@
+	dh_testroot -p $@
+	dh_strip -p $@
+	dh_compress -p $@
+	dh_fixperms -p $@
+	dh_installdeb -p $@
+	dh_shlibdeps -p $@
+	dh_gencontrol -p $@ -v -- -VUpstream-Version=$(upstreamversion)
+	dh_md5sums -p $@
+	dh_builddeb -p $@
+
+# The debug version, same as the regular, but no stripping
+# users can do `fakeroot debian/rules conglomerate-dbg` to get it build
+conglomerate-dbg: build-arch install-arch
+	dh_testdir -p $@
+	dh_testroot -p $@
+	#dh_strip -p $@
+	dh_compress -p $@
+	dh_fixperms -p $@
+	dh_installdeb -p $@
+	dh_shlibdeps -p $@
+	dh_gencontrol -p $@ -v -- -VUpstream-Version=$(upstreamversion)
+	dh_md5sums -p $@
+	dh_builddeb -p $@
+
+binary-arch: conglomerate
 
 binary: binary-arch binary-indep
-.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch patch
+.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch patch conglomerate-dbg
