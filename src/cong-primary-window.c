@@ -37,6 +37,8 @@
 #include "cong-primary-window.h"
 #include "cong-editor-widget.h"
 #include "cong-command-history.h"
+#include "cong-selection.h"
+#include "cong-range.h"
 
 #if 0
 #include <libgnome/libgnome.h>
@@ -269,6 +271,7 @@ on_history_changed_undo (CongCommandHistory *history,
 	gtk_widget_set_sensitive (undo,
 				  cong_command_history_can_undo (history));
 }
+
 static void 
 on_history_changed_redo (CongCommandHistory *history,
 			 gpointer user_data)
@@ -277,6 +280,30 @@ on_history_changed_redo (CongCommandHistory *history,
 	
 	gtk_widget_set_sensitive (redo,
 				  cong_command_history_can_redo (history));	
+}
+
+static void 
+on_selection_changed_copy (CongDocument *document,
+			 gpointer user_data)
+{
+	GtkWidget *copy = GTK_WIDGET (user_data);
+	
+        CongSelection *selection = cong_document_get_selection(document);
+        CongRange *range = cong_selection_get_ordered_range(selection);
+        gtk_widget_set_sensitive (copy,
+                                  cong_range_can_be_cut (range));
+}
+
+static void 
+on_selection_changed_cut (CongDocument *document,
+			 gpointer user_data)
+{
+	GtkWidget *cut = GTK_WIDGET (user_data);
+	
+        CongSelection *selection = cong_document_get_selection(document);
+        CongRange *range = cong_selection_get_ordered_range(selection);
+        gtk_widget_set_sensitive (cut,
+                                  cong_range_can_be_cut (range));
 }
 
 void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
@@ -294,6 +321,9 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 		CongCommandHistory *history = cong_document_get_command_history (doc);
 		GtkWidget *undo;
 		GtkWidget *redo;
+		GtkWidget *copy;
+		GtkWidget *cut;
+		GtkWidget *paste;
 
 		gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_SAVE,
@@ -329,27 +359,38 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 		gtk_widget_set_sensitive (redo, FALSE);
 
 		gtk_toolbar_append_space(primary_window->toolbar);
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
+		cut = gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_CUT,
 					 _("Cut"),
 					 _("Cut"), 
 					 GTK_SIGNAL_FUNC(toolbar_callback_cut),
 					 primary_window,
 					 -1);
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
+		copy = gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_COPY,
 					 _("Copy"),
 					 _("Copy"), 
 					 GTK_SIGNAL_FUNC(toolbar_callback_copy),
 					 primary_window,
 					 -1);
-		gtk_toolbar_insert_stock(primary_window->toolbar, 
+		paste = gtk_toolbar_insert_stock(primary_window->toolbar, 
 					 GTK_STOCK_PASTE,
 					 _("Paste"),
 					 _("Paste"), 
 					 GTK_SIGNAL_FUNC(toolbar_callback_paste),
 					 primary_window,
 					 -1);
+		g_signal_connect (G_OBJECT(doc),
+				  "selection_change",
+				  G_CALLBACK(on_selection_changed_copy),
+				  copy);
+		g_signal_connect (G_OBJECT(doc),
+				  "selection_change",
+				  G_CALLBACK(on_selection_changed_cut),
+				  cut);		
+		/* FIXME: What signal to connect paste to? */
+		gtk_widget_set_sensitive (copy, FALSE);
+		gtk_widget_set_sensitive (cut, FALSE);
 	}
 }
 

@@ -1409,27 +1409,25 @@ on_history_changed_redo_menu (CongCommandHistory *history,
 }
 
 static void 
-on_selection_changed_copy (CongDocument *document,
+on_selection_changed_copy_menu (CongDocument *document,
 			      gpointer user_data)
 {
 	GtkWidget *copy = GTK_WIDGET (user_data);
 
 	CongSelection *selection = cong_document_get_selection(document);
-	/* FIXME: logical or ordered range? */
-	CongRange *range = cong_selection_get_logical_range(selection);
+	CongRange *range = cong_selection_get_ordered_range(selection);
 	gtk_widget_set_sensitive (copy,
 				  cong_range_can_be_cut (range));
 }
 
 static void 
-on_selection_changed_cut (CongDocument *document,
+on_selection_changed_cut_menu (CongDocument *document,
 			      gpointer user_data)
 {
 	GtkWidget *cut = GTK_WIDGET (user_data);
 
 	CongSelection *selection = cong_document_get_selection(document);
-	/* FIXME: logical or ordered range? */
-	CongRange *range = cong_selection_get_logical_range(selection);
+	CongRange *range = cong_selection_get_ordered_range(selection);
 	gtk_widget_set_sensitive (cut,
 				  cong_range_can_be_cut (range));
 }
@@ -1489,11 +1487,11 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 					  redo);
 			g_signal_connect (G_OBJECT(doc),
 					  "selection_change",
-					  G_CALLBACK(on_selection_changed_copy),
+					  G_CALLBACK(on_selection_changed_copy_menu),
 					  copy);
 			g_signal_connect (G_OBJECT(doc),
 					  "selection_change",
-					  G_CALLBACK(on_selection_changed_cut),
+					  G_CALLBACK(on_selection_changed_cut_menu),
 					  cut);
 
 			gtk_widget_set_sensitive (undo, FALSE);

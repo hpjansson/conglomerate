@@ -1,9 +1,15 @@
+2003-11-01  Paul Smith  <conglomerate@pcs.uklinux.net>
+
+	* cong-primary-window.c, cong-menus.c
+
+	Set Cut and Copy toolbars to be unsensitive when current selection cannot be cut. (Bug 125342)
+
 2003-10-31  Paul Smith  <conglomerate@pcs.uklinux.net>
- 
+
 	* cong-menus.c
- 
- 	Set Cut and Copy menu items to be unsensitive when current selection can't be cut (Bug 125342).  Still to do toolbar items and Paste item.
- 
+
+	Set Cut and Copy menu items to be unsensitive when current selection can't be cut (Bug 125342).  Still to do toolbar items and Paste item.
+
 2003-10-31  Pav Lucistnik <pav@oook.cz>
 
 	* plugin-templates.c
