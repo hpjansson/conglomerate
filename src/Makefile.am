@@ -32,6 +32,7 @@ conge_SOURCES =             \
   cong-error-file-save.c    \
   cong-error-tests.c        \
   cong-dispspec-registry.c  \
+  cong-test-view.c          \
   main.c
 
 CFLAGS = $(CONGLOMERATE_CFLAGS)
