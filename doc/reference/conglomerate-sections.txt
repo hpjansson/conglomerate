@@ -1,6 +1,7 @@
 
 <SECTION>
 <FILE>cong-app</FILE>
+<TITLE>CongApp</TITLE>
 cong_app_singleton
 cong_app_construct_singleton
 cong_app_destroy_singleton
@@ -195,6 +196,7 @@ cong_dialog_information_alert_new
 
 <SECTION>
 <FILE>cong-dispspec-element</FILE>
+<TITLE>CongDispspecElement</TITLE>
 cong_dispspec_element_new
 cong_dispspec_element_destroy
 cong_dispspec_element_get_ns_uri
@@ -223,6 +225,7 @@ cong_dispspec_element_from_xml
 
 <SECTION>
 <FILE>cong-dispspec-registry</FILE>
+<TITLE>CongDispspecRegistry</TITLE>
 cong_dispspec_registry_new
 cong_dispspec_registry_add_dir
 cong_dispspec_registry_free
@@ -234,6 +237,7 @@ cong_dispspec_registry_get_appropriate_dispspec
 
 <SECTION>
 <FILE>cong-dispspec</FILE>
+<TITLE>CongDispspec</TITLE>
 generate_gc_for_col
 cong_dispspec_new
 cong_dispspec_new_from_ds_file
@@ -375,6 +379,7 @@ cong_document_node_can_be_deleted
 
 <SECTION>
 <FILE>cong-dtd</FILE>
+<TITLE>DTD Handling</TITLE>
 CongDtdElementCallback
 cong_dtd_for_each_element
 CongDtdAttributeCallback
@@ -1164,6 +1169,7 @@ cong_dependency_node_from_file_is_up_to_date
 
 <SECTION>
 <FILE>cong-location</FILE>
+<TITLE>CongLocation</TITLE>
 CONG_LOCATION_BYTE_OFFSET_NULL_NODE
 CONG_LOCATION_BYTE_OFFSET_MEANINGLESS
 cong_location_is_valid
@@ -1360,6 +1366,7 @@ cong_node_modification_get_node
 
 <SECTION>
 <FILE>cong-node</FILE>
+<TITLE>XML Nodes</TITLE>
 CongNodePtr
 CongXMLChar
 cong_node_prev
@@ -1423,6 +1430,7 @@ cong_node_calc_next_node_satisfying
 
 <SECTION>
 <FILE>cong-object</FILE>
+<TITLE>CongObject</TITLE>
 PRIVATE
 CONG_DECLARE_CLASS_BEGIN
 CONG_DECLARE_CLASS
@@ -1448,6 +1456,7 @@ cong_parse_from_memory
 
 <SECTION>
 <FILE>cong-plugin-manager</FILE>
+<TITLE>CongPluginManager</TITLE>
 cong_plugin_manager_new
 cong_plugin_manager_register
 cong_plugin_manager_unregister
@@ -1468,8 +1477,7 @@ cong_plugin_manager_locate_editor_node_factory_by_id
 
 <SECTION>
 <FILE>cong-plugin</FILE>
-<TITLE></TITLE>
-
+<TITLE>CongPlugin</TITLE>
 CONG_PLUGIN
 CONG_PLUGIN_CLASS
 IS_CONG_PLUGIN
@@ -1518,6 +1526,7 @@ cong_progress_checklist_dialog_set_progress_bar
 
 <SECTION>
 <FILE>cong-range</FILE>
+<TITLE>CongRange</TITLE>
 cong_range_init
 cong_range_nullify
 cong_range_is_valid
@@ -1534,6 +1543,7 @@ cong_range_copy
 
 <SECTION>
 <FILE>cong-selection</FILE>
+<TITLE>CongSelection</TITLE>
 cong_selection_new
 cong_selection_free
 cong_selection_import
@@ -1558,7 +1568,7 @@ cong_selection_legacy_get_gc_invalid
 
 <SECTION>
 <FILE>cong-service-doc-tool</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceDocTool</TITLE>
 
 CONG_SERVICE_DOC_TOOL
 CONG_SERVICE_DOC_TOOL_CLASS
@@ -1572,7 +1582,7 @@ cong_plugin_for_each_doc_tool
 
 <SECTION>
 <FILE>cong-service-document-factory</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceDocumentFactory</TITLE>
 
 CONG_SERVICE_DOCUMENT_FACTORY
 CONG_SERVICE_DOCUMENT_FACTORY_CLASS
@@ -1592,7 +1602,7 @@ cong_new_file_assistant_get_data_for_factory
 
 <SECTION>
 <FILE>cong-service-editor-node-factory</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceEditorNodeFactory</TITLE>
 
 CONG_SERVICE_EDITOR_NODE_FACTORY
 CONG_SERVICE_EDITOR_NODE_FACTORY_CLASS
@@ -1604,7 +1614,7 @@ cong_plugin_editor_node_factory_invoke
 
 <SECTION>
 <FILE>cong-service-exporter</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceExporter</TITLE>
 
 CONG_SERVICE_EXPORTER
 CONG_SERVICE_EXPORTER_CLASS
@@ -1620,7 +1630,7 @@ cong_plugin_for_each_exporter
 
 <SECTION>
 <FILE>cong-service-importer</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceImporter</TITLE>
 
 CONG_SERVICE_IMPORTER
 CONG_SERVICE_IMPORTER_CLASS
@@ -1635,7 +1645,7 @@ cong_service_importer_make_basic_filter
 
 <SECTION>
 <FILE>cong-service-node-property-dialog</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceNodePropertyDialog</TITLE>
 
 CONG_SERVICE_NODE_PROPERTY_DIALOG
 CONG_SERVICE_NODE_PROPERTY_DIALOG_CLASS
@@ -1649,7 +1659,7 @@ cong_custom_property_dialog_make
 
 <SECTION>
 <FILE>cong-service-node-tool</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceNodeTool</TITLE>
 
 CONG_SERVICE_NODE_TOOL
 CONG_SERVICE_NODE_TOOL_CLASS
@@ -1658,7 +1668,7 @@ IS_CONG_SERVICE_NODE_TOOL
 
 <SECTION>
 <FILE>cong-service-print-method</FILE>
-<TITLE></TITLE>
+<TITLE>CongServicePrintMethod</TITLE>
 
 CONG_SERVICE_PRINT_METHOD
 CONG_SERVICE_PRINT_METHOD_CLASS
@@ -1672,7 +1682,7 @@ cong_plugin_for_each_print_method
 
 <SECTION>
 <FILE>cong-service-tool</FILE>
-<TITLE></TITLE>
+<TITLE>CongServiceTool</TITLE>
 
 CONG_SERVICE_TOOL
 CONG_SERVICE_TOOL_CLASS
@@ -1686,7 +1696,7 @@ cong_service_tool_get_user_data
 
 <SECTION>
 <FILE>cong-service</FILE>
-<TITLE></TITLE>
+<TITLE>CongService</TITLE>
 
 CONG_SERVICE
 CONG_SERVICE_CLASS
@@ -1806,6 +1816,7 @@ cong_file_properties_dialog_new
 
 <SECTION>
 <FILE>cong-util</FILE>
+<TITLE>Utility functions</TITLE>
 cong_util_is_docbook
 cong_util_is_pure_whitespace
 cong_util_cleanup_text
