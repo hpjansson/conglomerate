@@ -1,3 +1,9 @@
+2004-06-18  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* xmldata.c (cong_command_add_required_sub_elements): 
+
+	Fix for bug #144575 (entering new elements in documents lacking a DTD)
+
 2004-06-17  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am: 

@@ -242,6 +242,7 @@ cong_command_add_required_sub_elements (CongCommand *cmd,
 	xmlElementContentPtr content;
 	const xmlChar *prefix = NULL;
 	gboolean extsubset = FALSE;
+	CongDocument *cong_doc;
 
 	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
 	g_return_val_if_fail (node, FALSE);
@@ -252,14 +253,21 @@ cong_command_add_required_sub_elements (CongCommand *cmd,
 	/*  set document */
 	doc = node->doc;
 	
-	/*  check that document has DTD */
-	g_return_val_if_fail(doc->intSubset || doc->extSubset, FALSE);
-
 	/*  if this is not an element node, it has no children */
 	if (node->type != XML_ELEMENT_NODE) { return TRUE; }
 
 	/*  ensure element has a name */
 	g_return_val_if_fail(node->name, FALSE);
+
+	cong_doc = cong_command_get_document (cmd);
+
+	/*  For documents with no DTD, allow arbitrary elements to be entered; we add a text node under them: */
+	if (!doc->intSubset && !doc->extSubset) { 
+		
+		CongNodePtr text_node = cong_node_new_text ("", cong_doc);
+		cong_command_add_node_set_parent(cmd, text_node, node);
+		return TRUE; 
+	}
 
 	/*
 	 * Fetch the declaration for the qualified name.
