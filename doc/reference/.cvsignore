@@ -1,5 +1,4 @@
 Makefile Makefile.in
 version.xml
-conglomerate*
 *.stamp
 html tmpl xml
