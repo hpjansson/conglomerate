@@ -55,6 +55,8 @@ struct CongEditorAreaContainerClass
 	void (*for_each) (CongEditorArea *editor_area, 
 			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
+
+	void (*children_changed) (CongEditorAreaContainer* area_container);
 };
 
 GType
@@ -65,14 +67,23 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 				      CongEditorWidget3 *editor_widget);
 
 void
-cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
-				       CongEditorArea *child);
+cong_editor_area_container_add_child (CongEditorAreaContainer *area_container,
+				      CongEditorArea *child);
+
+void
+cong_editor_area_container_children_changed (CongEditorAreaContainer *area_container);
+
 
 /* Iterate over all "non-internal" children: */
 void 
 cong_editor_area_container_for_each (CongEditorArea *editor_area, 
 				     CongEditorAreaCallbackFunc func, 
 				     gpointer user_data);
+
+/* Protected:  For implementing subclasses */
+void
+cong_editor_area_container_protected_postprocess_add_non_internal_child (CongEditorAreaContainer *area_container,
+									 CongEditorArea *child);
 
 G_END_DECLS
 

@@ -29,15 +29,36 @@
 
 #define PRIVATE(x) ((x)->private)
 
+#define DEBUG_REQUISITIONS 0
+#define DEBUG_ALLOCATIONS 0
+#define DEBUG_RENDER_ALLOCATIONS 0
+
+enum {
+	FLUSH_REQUISITION_CACHE,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
 struct CongEditorAreaDetails
 {
 	CongEditorWidget3 *editor_widget;
 	gboolean is_hidden;
 	GdkRectangle window_area; /* allocated area in window space */
-	GtkRequisition requisition;
+
+	gboolean requisition_cache_valid;
+
+	GtkRequisition last_calculated_requisition;
+	int cached_width_hint;
 };
 
-CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, update_requisition);
+/* Signal handler declarations: */
+static void
+on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  gpointer user_data);
+
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space);
 
 /* Exported function definitions: */
@@ -51,11 +72,24 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 {
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area,
-					      update_requisition);
+					      calc_requisition);
 
+#if 0
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area,
 					      allocate_child_space);
+#endif
+
+	/* Set up the various signals: */
+	signals[FLUSH_REQUISITION_CACHE] = g_signal_new ("flush_requisition_cache",
+							 CONG_EDITOR_AREA_TYPE,
+							 G_SIGNAL_RUN_FIRST,
+							 G_STRUCT_OFFSET(CongEditorAreaClass, flush_requisition_cache),
+							 NULL, NULL,
+							 g_cclosure_marshal_VOID__VOID,
+							 G_TYPE_NONE, 
+							 0);
+
 }
 
 static void
@@ -106,15 +140,43 @@ cong_editor_area_get_window_coords (CongEditorArea *area)
 }
 
 const GtkRequisition*
-cong_editor_area_get_requisition (CongEditorArea *area)
+cong_editor_area_get_requisition (CongEditorArea *area,
+				  int width_hint)
 {
 	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
 
-	/* FIXME: if not uptodate, call fn? */
+	/* If not up-to-date, call fn to regenerate cache: */
+	if ( (width_hint!=PRIVATE(area)->cached_width_hint) 
+	     || (!PRIVATE(area)->requisition_cache_valid) ) {
+		
+#if DEBUG_REQUISITIONS
+		g_message("cong_editor_area_get_requisition:  recalcing cache on %s with width_hint %i", 
+			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area)), 
+			  width_hint);
+#endif
 
-	return &PRIVATE(area)->requisition;
+		cong_editor_area_calc_requisition (area, 
+						   width_hint,
+						   &PRIVATE(area)->last_calculated_requisition);
+
+		PRIVATE(area)->cached_width_hint = width_hint;
+
+		PRIVATE(area)->requisition_cache_valid = TRUE;
+	}
+
+	return &PRIVATE(area)->last_calculated_requisition;
 }
 
+const GtkRequisition*
+cong_editor_area_get_cached_requisition (CongEditorArea *area)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
+
+	return &PRIVATE(area)->last_calculated_requisition;
+}
+
+
+#if 0
 void 
 cong_editor_area_set_requisition (CongEditorArea *area,
 				  gint width,
@@ -125,6 +187,7 @@ cong_editor_area_set_requisition (CongEditorArea *area,
 	PRIVATE(area)->requisition.width = width;
 	PRIVATE(area)->requisition.height = height;
 }
+#endif
 
 void 
 cong_editor_area_debug_render_area (CongEditorArea *area,
@@ -169,7 +232,7 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 				    (GdkRectangle*)cong_editor_area_get_window_coords(area),
 				    &intersected_area)) {
 
-#if 1
+#if DEBUG_RENDER_ALLOCATIONS
 		/* Render test rectangle to show this area directly: */		
 		{
 			
@@ -207,15 +270,16 @@ cong_editor_area_on_key_press (CongEditorArea *editor_area,
 #endif
 
 void 
-cong_editor_area_update_requisition (CongEditorArea *editor_area, 
-				     int width_hint)
+cong_editor_area_calc_requisition (CongEditorArea *editor_area, 
+				   int width_hint,
+				   GtkRequisition *output)
 {
 	g_return_if_fail (editor_area);
 
 	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
 			      editor_area,
-			      update_requisition, 
-			      (editor_area, width_hint));
+			      calc_requisition, 
+			      (editor_area, width_hint, output));
 }
 
 void 
@@ -227,8 +291,8 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 {
 	g_return_if_fail (editor_area);
 
-#if 0
-	g_message("cong_editor_area_set_allocation(%i,%i,%i,%i)", x, y, width, height);
+#if DEBUG_ALLOCATIONS
+	g_message("cong_editor_area_set_allocation(%i,%i,%i,%i) on %s", x, y, width, height, G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)));
 #endif
 
 	cong_editor_area_queue_redraw (editor_area);
@@ -245,6 +309,41 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 			      (editor_area));
 
 	cong_editor_area_queue_redraw (editor_area);
+}
+
+
+void
+cong_editor_area_queue_redraw (CongEditorArea *editor_area)
+{
+	const GdkRectangle *rect;
+	
+	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
+	
+	rect = &PRIVATE(editor_area)->window_area;
+	
+	gtk_widget_queue_draw_area (GTK_WIDGET(cong_editor_area_get_widget (editor_area)),
+				    rect->x,
+				    rect->y,
+				    rect->width,
+				    rect->height);
+}
+
+void
+cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
+	
+	if (PRIVATE(editor_area)->requisition_cache_valid) {
+
+#if DEBUG_REQUISITIONS
+		g_message("flush_requisition_cache called on a valid cache (%s)", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)));
+#endif
+
+		PRIVATE(editor_area)->requisition_cache_valid = FALSE;
+		
+		g_signal_emit (G_OBJECT(editor_area),
+			       signals[FLUSH_REQUISITION_CACHE], 0);
+	}
 }
 
 void
@@ -271,18 +370,34 @@ cong_editor_area_get_gdk_window(CongEditorArea *editor_area)
 	return GTK_WIDGET(cong_editor_area_get_widget (editor_area))->window;
 }
 
+/* Protected stuff: */
 void
-cong_editor_area_queue_redraw (CongEditorArea *editor_area)
+cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
+							   CongEditorArea *internal_child)
 {
-	const GdkRectangle *rect;
+	g_return_if_fail ( IS_CONG_EDITOR_AREA(area));
+	g_return_if_fail ( IS_CONG_EDITOR_AREA(internal_child));
+
+	g_signal_connect (G_OBJECT(internal_child),
+			  "flush_requisition_cache",
+			  G_CALLBACK(on_child_flush_requisition_cache),
+			  area);	
+
+}
+
+/* Signal handler definitions: */
+static void
+on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  gpointer user_data)
+{
+	CongEditorArea *fake_parent_area = CONG_EDITOR_AREA(user_data);
+
+#if DEBUG_REQUISITIONS
+	g_message("on_child_flush_requisition_cache");
+#endif
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child_area) );
 	
-	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
-	
-	rect = &PRIVATE(editor_area)->window_area;
-	
-	gtk_widget_queue_draw_area (GTK_WIDGET(cong_editor_area_get_widget (editor_area)),
-				    rect->x,
-				    rect->y,
-				    rect->width,
-				    rect->height);
+	/* One of children has changed its requisition; so must we: */
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area));
 }

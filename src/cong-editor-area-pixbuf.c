@@ -39,8 +39,9 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaPixbuf, 
@@ -54,7 +55,7 @@ cong_editor_area_pixbuf_class_init (CongEditorAreaPixbufClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
 	area_klass->render_self = render_self;
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 }
 
 static void
@@ -115,15 +116,15 @@ render_self (CongEditorArea *area,
 }
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	CongEditorAreaPixbuf *area_pixbuf = CONG_EDITOR_AREA_PIXBUF(area);
 	GdkPixbuf *pixbuf = PRIVATE(area_pixbuf)->pixbuf;
 
 	g_assert (pixbuf);
 
-	cong_editor_area_set_requisition (area,
-					  gdk_pixbuf_get_width(pixbuf),
-					  gdk_pixbuf_get_height(pixbuf));
+	output->width = gdk_pixbuf_get_width(pixbuf);
+	output->height = gdk_pixbuf_get_height(pixbuf);
 }

@@ -1,5 +1,9 @@
 2003-07-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-bin.c, cong-editor-area-border.c, cong-editor-area-composer.c, cong-editor-area-container.c, cong-editor-area-container.h, cong-editor-area-pixbuf.c, cong-editor-area-spacer.c, cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c, cong-editor-area-text.c, cong-editor-area-underline.c, cong-editor-area-unknown-tag.c, cong-editor-area.c, cong-editor-area.h, cong-editor-widget3.c
+
+	Allow areas to change their requisition
+
 	* cong-document.c
 
 	Fixed mismatched signal class struct offsets	

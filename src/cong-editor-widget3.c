@@ -60,7 +60,7 @@ struct CongEditorWidget3Details
 };
 
 
-#define DEBUG_EDITOR_WIDGET_VIEW 0
+#define DEBUG_EDITOR_WIDGET_VIEW 1
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -128,6 +128,11 @@ on_signal_remove_attribute_notify_after (CongDocument *doc,
 					 CongNodePtr node, 
 					 const xmlChar *name, 
 					 gpointer user_data); 
+
+/* Declarations of CongEditorArea event handlers: */
+static void
+on_root_requisition_change (CongEditorArea *child_area,
+			    gpointer user_data);
 
 #if 0
 /* Declarations of the MVC handler functions: */
@@ -300,6 +305,7 @@ CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
 	return cong_document_get_dispspec(details->doc);
 }
 
+#if 0
 void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 {
 	CongEditorWidget3Details *details;
@@ -323,6 +329,7 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));
 #endif
 }
+#endif
 
 CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
@@ -406,14 +413,22 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 
 	CONG_EDITOR_WIDGET3_DEBUG_MSG3("configure_event_handler; w/h = %i,%i", event->width, event->height);
 
+#if 0
+	if (event->width != cong_editor_area_get_cached_width_hint (details->test_area)) {
+		
+	}
+#endif
+
+#if 0
   	cong_editor_area_update_requisition(details->test_area, event->width);
+#endif
 
 	/* Pass all of the allocation to root editor; this will recursively allocate space to its children: */
-	cong_editor_area_set_allocation(details->test_area, 
-					event->x,
-					event->y,
-					event->width,
-					event->height);
+	cong_editor_area_set_allocation (details->test_area, 
+					 event->x,
+					 event->y,
+					 event->width,
+					 event->height);
 	return TRUE;
 }
 
@@ -469,10 +484,15 @@ static void size_request_handler(GtkWidget *widget,
  	g_assert(widget);
  	g_assert(requisition);
 
-  	cong_editor_area_update_requisition(details->test_area, widget->allocation.width);
-	req = cong_editor_area_get_requisition (details->test_area); 
+	req = cong_editor_area_get_requisition (details->test_area,
+						widget->allocation.width); 
 
- 	requisition->width = req->width;
+	/* Only request up to the width you've already been allocated; don't grow in width unless your container gives you more room. */
+	if (req->width > widget->allocation.width) {
+		requisition->width = widget->allocation.width;
+	} else {
+		requisition->width = req->width;
+	}
  	requisition->height = req->height;
 }
 
@@ -506,6 +526,17 @@ on_signal_remove_attribute_notify_after (CongDocument *doc,
 	g_assert_not_reached();
 }
 #endif
+
+/* Definitions of CongEditorArea event handlers: */
+static void
+on_root_requisition_change (CongEditorArea *child_area,
+			    gpointer user_data)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data);
+
+	g_message("on_root_requisition_change");
+	gtk_widget_queue_resize (GTK_WIDGET(editor_widget));
+}
 
 
 /* Definitions of the MVC handler functions: */
@@ -634,6 +665,12 @@ create_areas(CongEditorWidget3 *widget)
 	recursive_create_areas (widget,
 				(CongNodePtr)cong_document_get_xml (doc),
 				details->test_area);
+
+	
+	g_signal_connect (G_OBJECT(details->test_area),
+			  "flush_requisition_cache",
+			  G_CALLBACK(on_root_requisition_change),
+			  widget);
 }
 
 
@@ -821,3 +858,4 @@ recursive_create_areas(CongEditorWidget3 *widget,
 	}
 	
 }
+

@@ -44,8 +44,12 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
+
+static void
+allocate_child_space (CongEditorArea *area);
 
 
 /* GObject boilerplate stuff: */
@@ -60,7 +64,8 @@ cong_editor_area_text_class_init (CongEditorAreaTextClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
 	area_klass->render_self = render_self;
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
+	area_klass->allocate_child_space = allocate_child_space;
 }
 
 static void
@@ -107,7 +112,9 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
 			   const gchar *text)
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_text_new(\"%s\")", text);
+#endif
 
 	return cong_editor_area_text_construct
 		(g_object_new (CONG_EDITOR_AREA_TEXT_TYPE, NULL),
@@ -127,9 +134,8 @@ cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 			       text,
 			       -1);
 
-	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text) );
-
-	/* FIXME: will eventually need to signal a requisition change */
+	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));
 }
 
 
@@ -158,29 +164,33 @@ render_self (CongEditorArea *area,
 }
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
-#if 1
-	int width, height;
-
 	CongEditorAreaText *area_text = CONG_EDITOR_AREA_TEXT(area);
 
+	/* Try the suggested width; calculate how high that makes you want to be: */
 	pango_layout_set_width (PRIVATE(area_text)->pango_layout,
 				width_hint*PANGO_SCALE);
-	
-	pango_layout_get_pixel_size (PRIVATE(area_text)->pango_layout,
-				     &width,
-				     &height);
 
-	cong_editor_area_set_requisition (area,
-					  width,
-					  height);
-#else
-	/* For now: */
-	cong_editor_area_set_requisition (area,
-					  100,
-					  50);
-#endif
-	
+	pango_layout_get_pixel_size (PRIVATE(area_text)->pango_layout,
+				     &output->width,
+				     &output->height);	
+
+	/* Shrink to size of width hint if above it: */
+	if (output->width>width_hint) {
+		output->width = width_hint;
+	}
+}
+
+static void
+allocate_child_space (CongEditorArea *area)
+{
+	CongEditorAreaText *area_text = CONG_EDITOR_AREA_TEXT(area);	
+	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
+
+	/* and update our own space: */
+	pango_layout_set_width (PRIVATE(area_text)->pango_layout,
+				rect->width*PANGO_SCALE);
 }

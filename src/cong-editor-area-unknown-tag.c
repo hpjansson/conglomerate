@@ -42,8 +42,9 @@ struct CongEditorAreaUnknownTagDetails
 
 /* Method implementation prototypes: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -69,7 +70,7 @@ cong_editor_area_unknown_tag_class_init (CongEditorAreaUnknownTagClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
@@ -141,6 +142,10 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 
 	g_free (tag_string_begin);
 	g_free (tag_string_end);
+
+	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_unknown_tag),
+								   PRIVATE(area_unknown_tag)->outer_vcompose);
+
 	return CONG_EDITOR_AREA (area_unknown_tag);
 }
 
@@ -149,7 +154,9 @@ cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,
 				  const gchar *tagname)
 
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_unknown_tag_new(%s)", tagname);
+#endif
 
 	return cong_editor_area_unknown_tag_construct
 		(g_object_new (CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE, NULL),
@@ -159,8 +166,9 @@ cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,
 
 /* Method implementation definitions: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	const GtkRequisition *child_req;
 
@@ -168,15 +176,12 @@ update_requisition (CongEditorArea *area,
 
 	if (PRIVATE(unknown_tag)->outer_vcompose) {
 
-		cong_editor_area_update_requisition (PRIVATE(unknown_tag)->outer_vcompose, 
-						     width_hint);
-		
-		child_req = cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose);
+		child_req = cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose,
+							      width_hint);
 		g_assert(child_req);
 		
-		cong_editor_area_set_requisition (area,
-						  child_req->width,
-						  child_req->height);
+		output->width = child_req->width;
+		output->height = child_req->height;
 	}
 }
 

@@ -35,8 +35,9 @@ struct CongEditorAreaBorderDetails
 
 /* Method implementation prototypes: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -52,7 +53,7 @@ cong_editor_area_border_class_init (CongEditorAreaBorderClass *klass)
 {
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 }
 
@@ -80,8 +81,9 @@ CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 			     guint pixels)
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_border_new");
-
+#endif
 	return cong_editor_area_border_construct
 		(g_object_new (CONG_EDITOR_AREA_BORDER_TYPE, NULL),
 		 editor_widget,
@@ -90,8 +92,9 @@ cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 
 /* Method implementation definitions: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	const GtkRequisition *child_req = NULL;
 
@@ -103,19 +106,15 @@ update_requisition (CongEditorArea *area,
 
 	if (child) {
 
-		cong_editor_area_update_requisition (child, 
-						     width_hint);
-		
-		child_req = cong_editor_area_get_requisition (child);
+		child_req = cong_editor_area_get_requisition (child,
+							      width_hint);
 		g_assert(child_req);
 		
-		cong_editor_area_set_requisition (area,
-						  child_req->width + (2 * PRIVATE(border)->pixels),
-						  child_req->height + (2 * PRIVATE(border)->pixels));
+		output->width = child_req->width + (2 * PRIVATE(border)->pixels);
+		output->height = child_req->height + (2 * PRIVATE(border)->pixels);
 	} else {
-		cong_editor_area_set_requisition (area,
-						  (2 * PRIVATE(border)->pixels),
-						  (2 * PRIVATE(border)->pixels));
+		output->width = (2 * PRIVATE(border)->pixels);
+		output->height = (2 * PRIVATE(border)->pixels);
 	}
 }
 

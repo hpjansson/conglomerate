@@ -27,6 +27,7 @@
 
 G_BEGIN_DECLS
 
+#define DEBUG_EDITOR_AREA_LIFETIMES 0
 
 typedef struct CongEditorArea CongEditorArea;
 typedef struct CongEditorAreaClass CongEditorAreaClass;
@@ -54,8 +55,9 @@ struct CongEditorAreaClass
 	void (*render_self) (CongEditorArea *area,
 			     const GdkRectangle *widget_rect);
 
-	void (*update_requisition) (CongEditorArea *area, 
-				    int width_hint);
+	void (*calc_requisition) (CongEditorArea *area, 
+				  int width_hint,
+				  GtkRequisition *output);
 
 	void (*allocate_child_space) (CongEditorArea *area);
 
@@ -63,6 +65,8 @@ struct CongEditorAreaClass
 			 CongEditorAreaCallbackFunc func, 
 			 gpointer user_data);
 
+	/* Signal emission hooks: */
+	void (*flush_requisition_cache) (CongEditorArea *area);
 };
 
 GType
@@ -82,12 +86,18 @@ const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area);
 
 const GtkRequisition*
-cong_editor_area_get_requisition (CongEditorArea *area);
+cong_editor_area_get_requisition (CongEditorArea *area,
+				  int width_hint);
 
+const GtkRequisition*
+cong_editor_area_get_cached_requisition (CongEditorArea *area);
+
+#if 0
 void 
 cong_editor_area_set_requisition (CongEditorArea *area,
 				  gint width,
 				  gint height);
+#endif
 
 void 
 cong_editor_area_debug_render_area (CongEditorArea *area,
@@ -111,8 +121,9 @@ cong_editor_area_on_key_press (CongEditorArea *editor_area,
 			       GdkEventKey *event);
 
 void 
-cong_editor_area_update_requisition (CongEditorArea *editor_area, 
-				     int width_hint);
+cong_editor_area_calc_requisition (CongEditorArea *editor_area, 
+				   int width_hint,
+				   GtkRequisition *output);
 
 void 
 cong_editor_area_set_allocation (CongEditorArea *editor_area,
@@ -124,15 +135,24 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 void
 cong_editor_area_queue_redraw (CongEditorArea *editor_area);
 
+void
+cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area);
+
 /* Iterate over all children of this area, even "internal" ones: */
 void
 cong_editor_area_for_all (CongEditorArea *editor_area, 
 			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
 
+
 /* Handy utilities: */
 GdkWindow*
 cong_editor_area_get_gdk_window(CongEditorArea *editor_area);
+
+/* Protected stuff: */
+void
+cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
+							   CongEditorArea *internal_child);
 
 G_END_DECLS
 

@@ -48,8 +48,9 @@ struct CongEditorAreaComposerChildDetails
 
 /* Method implementation prototypes: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -76,7 +77,7 @@ cong_editor_area_composer_class_init (CongEditorAreaComposerClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
@@ -110,7 +111,9 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 			       GtkOrientation orientation,
 			       guint spacing)
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_composer_new");
+#endif
 
 	return cong_editor_area_composer_construct
 		(g_object_new (CONG_EDITOR_AREA_COMPOSER_TYPE, NULL),
@@ -141,23 +144,24 @@ cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
 	PRIVATE(area_composer)->list_of_child_details = g_list_append (PRIVATE(area_composer)->list_of_child_details, 
 								       child_details);
 
-	/* FIXME: need to flag things as being invalid etc... */
+	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
+										 child);
 
+	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
 
 /* Method implementation definitions: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area);
 	GtkRequisition result;
 	GList *iter;
 	int child_count = 0;
 	gint extra_padding = 0;
-
-	g_message ("composer::update_requisition");
 
 	result.width = 0;
 	result.height = 0;
@@ -174,10 +178,8 @@ update_requisition (CongEditorArea *area,
 
 		extra_padding += child_details->extra_padding;
 
-		cong_editor_area_update_requisition (child, 
-						     width_hint);
-
-		child_req = cong_editor_area_get_requisition (child);
+		child_req = cong_editor_area_get_requisition (child,
+							      width_hint);
 		g_assert(child_req);		
 
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
@@ -203,9 +205,8 @@ update_requisition (CongEditorArea *area,
 		}		
 	}
 
-	cong_editor_area_set_requisition (area,
-					  result.width,
-					  result.height);
+	output->width = result.width;
+	output->height = result.height;
 }
 
 static void
@@ -216,7 +217,7 @@ allocate_child_space (CongEditorArea *area)
 	gint x;
 	gint y;
 	const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
-	const GtkRequisition *this_req = cong_editor_area_get_requisition (area);
+	const GtkRequisition *this_req = cong_editor_area_get_cached_requisition (area);
 	gint total_surplus_space = 0;
 	gint surplus_space_per_expandable_child = 0;
 	guint num_expandable_children = 0;
@@ -250,7 +251,9 @@ allocate_child_space (CongEditorArea *area)
 		
 		if (num_expandable_children>0) {
 			surplus_space_per_expandable_child = total_surplus_space/num_expandable_children;
+#if 0
 			g_message("surplus space per:%i",surplus_space_per_expandable_child);
+#endif
 		}
 	}
 
@@ -267,7 +270,7 @@ allocate_child_space (CongEditorArea *area)
 		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
 		child = CONG_EDITOR_AREA(child_details->child);
 
-		child_req = cong_editor_area_get_requisition (child);
+		child_req = cong_editor_area_get_cached_requisition (child);
 		g_assert(child_req);
 
 		if (PRIVATE(area_composer)->orientation == GTK_ORIENTATION_HORIZONTAL) {

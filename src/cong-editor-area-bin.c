@@ -35,8 +35,9 @@ struct CongEditorAreaBinDetails
 
 /* Method implementation prototypes: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -62,7 +63,7 @@ cong_editor_area_bin_class_init (CongEditorAreaBinClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
@@ -90,7 +91,9 @@ cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 CongEditorArea*
 cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_bin_new");
+#endif
 	
 	return cong_editor_area_bin_construct
 		(g_object_new (CONG_EDITOR_AREA_BIN_TYPE, NULL),
@@ -108,8 +111,9 @@ cong_editor_area_bin_get_child  (CongEditorAreaBin *area_bin)
 
 /* Method implementation definitions: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	CongEditorAreaBin *bin;
 	const GtkRequisition *child_req;
@@ -120,15 +124,12 @@ update_requisition (CongEditorArea *area,
 
 	if (PRIVATE(bin)->only_child) {
 
-		cong_editor_area_update_requisition (PRIVATE(bin)->only_child, 
-						     width_hint);
-		
-		child_req = cong_editor_area_get_requisition (PRIVATE(bin)->only_child);
+		child_req = cong_editor_area_get_requisition (PRIVATE(bin)->only_child,
+							      width_hint);
 		g_assert(child_req);
 		
-		cong_editor_area_set_requisition (area,
-						  child_req->width,
-						  child_req->height);
+		output->width = child_req->width;
+		output->height = child_req->height;
 	}
 }
 
@@ -172,4 +173,7 @@ add_child (CongEditorAreaContainer *area_container,
 	} else {
 		PRIVATE(bin)->only_child = child;
 	}
+
+	cong_editor_area_container_protected_postprocess_add_non_internal_child (area_container,
+										 child);
 }

@@ -37,8 +37,9 @@ struct CongEditorAreaSpacerDetails
 
 /* Method implementation prototypes: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaSpacer, 
@@ -51,7 +52,7 @@ cong_editor_area_spacer_class_init (CongEditorAreaSpacerClass *klass)
 {
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 	
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 }
 
 static void
@@ -81,7 +82,9 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 			     GtkOrientation orientation,
 			     guint spacing)
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_spacer_new");
+#endif
 
 	return cong_editor_area_spacer_construct
 		(g_object_new (CONG_EDITOR_AREA_SPACER_TYPE, NULL),
@@ -92,18 +95,17 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 
 /* Method implementation definitions: */
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	CongEditorAreaSpacer *area_spacer = CONG_EDITOR_AREA_SPACER(area);
 	
 	if (PRIVATE(area_spacer)->orientation == GTK_ORIENTATION_HORIZONTAL) {
-		cong_editor_area_set_requisition (area,
-						  PRIVATE(area_spacer)->spacing,
-						  0);;
+		output->width = PRIVATE(area_spacer)->spacing;
+		output->height = 0;
 	} else {
-		cong_editor_area_set_requisition (area,
-						  0,
-						  PRIVATE(area_spacer)->spacing);
+		output->width = 0;
+		output->height = PRIVATE(area_spacer)->spacing;
 	}
 }

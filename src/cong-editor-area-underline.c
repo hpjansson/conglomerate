@@ -41,8 +41,9 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaUnderline, 
@@ -56,7 +57,7 @@ cong_editor_area_underline_class_init (CongEditorAreaUnderlineClass *klass)
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
 	area_klass->render_self = render_self;
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 }
 
 static void
@@ -152,12 +153,12 @@ render_self (CongEditorArea *area,
 }
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	CongEditorAreaUnderline *area_underline = CONG_EDITOR_AREA_UNDERLINE(area);
 
-	cong_editor_area_set_requisition (area,
-					  0,
-					  5);
+	output->width = 0;
+	output->height = 5;
 }

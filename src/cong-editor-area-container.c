@@ -29,6 +29,14 @@
 
 #define PRIVATE(x) ((x)->private)
 
+enum {
+	CHILDREN_CHANGED,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
 struct CongEditorAreaContainerDetails
 {
 	int dummy;
@@ -36,6 +44,15 @@ struct CongEditorAreaContainerDetails
 
 /* Method implementation prototypes: */
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area_container, add_child);
+
+
+/* Signal handler declarations: */
+static void 
+handle_children_changed (CongEditorAreaContainer* area_container);
+
+static void
+on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  gpointer user_data);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaContainer, 
@@ -51,6 +68,18 @@ cong_editor_area_container_class_init (CongEditorAreaContainerClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area_container,
 					      add_child);
+
+	/* Set up the various signals: */
+	signals[CHILDREN_CHANGED] = g_signal_new ("children_changed",
+						  CONG_EDITOR_AREA_TYPE,
+						  G_SIGNAL_RUN_FIRST,
+						  G_STRUCT_OFFSET(CongEditorAreaContainerClass, children_changed),
+						  NULL, NULL,
+						  g_cclosure_marshal_VOID__VOID,
+						  G_TYPE_NONE, 
+						  0);
+
+
 }
 
 static void
@@ -85,6 +114,53 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 			      area_container,
 			      add_child, 
 			      (area_container, child));
+
+	cong_editor_area_container_children_changed ( area_container);
 }
 
+void
+cong_editor_area_container_children_changed ( CongEditorAreaContainer *area_container)
+{
+	g_signal_emit (G_OBJECT(area_container),
+		       signals[CHILDREN_CHANGED], 0);
+}
+
+/* Protected:  For implementing subclasses */
+void
+cong_editor_area_container_protected_postprocess_add_non_internal_child (CongEditorAreaContainer *area_container,
+									 CongEditorArea *child)
+{
+	g_return_if_fail ( IS_CONG_EDITOR_AREA_CONTAINER(area_container));
+	g_return_if_fail ( IS_CONG_EDITOR_AREA(child));
+
+	g_signal_connect (G_OBJECT(child),
+			  "flush_requisition_cache",
+			  G_CALLBACK(on_child_flush_requisition_cache),
+			  area_container);	
+}
+
+
 /* Method implementation definitions: */
+
+/* Signal handler definitions: */
+static void 
+handle_children_changed (CongEditorAreaContainer* area_container)
+{
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));	
+}
+
+static void
+on_child_flush_requisition_cache (CongEditorArea *child_area,
+				  gpointer user_data)
+{
+	CongEditorAreaContainer *area_container = CONG_EDITOR_AREA_CONTAINER(user_data);
+
+#if 0
+	g_message("on_child_flush_requisition_cache");
+#endif
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child_area) );
+	
+	/* One of children has changed its requisition; so must we: */
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_container));
+}

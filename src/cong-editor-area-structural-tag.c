@@ -60,8 +60,9 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -88,7 +89,7 @@ cong_editor_area_structural_tag_class_init (CongEditorAreaStructuralTagClass *kl
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
 	area_klass->render_self = render_self;
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
@@ -121,6 +122,7 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 	PRIVATE(area_structural_tag)->title_vcompose = cong_editor_area_composer_new (editor_widget,
 										      GTK_ORIENTATION_VERTICAL,
 										      0);
+
 	/* Build the title bar: */
 	{
 
@@ -189,6 +191,11 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 
 	PRIVATE(area_structural_tag)->inner_bin = cong_editor_area_bin_new (editor_widget);
 
+	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_structural_tag),
+								   PRIVATE(area_structural_tag)->title_vcompose);
+	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_structural_tag),
+								   PRIVATE(area_structural_tag)->inner_bin);
+
 	return CONG_EDITOR_AREA (area_structural_tag);
 }
 
@@ -199,7 +206,9 @@ cong_editor_area_structural_tag_new (CongEditorWidget3 *editor_widget,
 				     const gchar *text)
 
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_structural_tag_new(%s)", text);
+#endif
 
 	g_return_val_if_fail (editor_widget, NULL);
 	g_return_val_if_fail (text, NULL);
@@ -227,7 +236,7 @@ render_self (CongEditorArea *area,
 
 	gboolean expanded = TRUE;
 
-	title_req = cong_editor_area_get_requisition (PRIVATE(area_structural_tag)->title_vcompose);
+	title_req = cong_editor_area_get_cached_requisition (PRIVATE(area_structural_tag)->title_vcompose);
 	g_assert(title_req);
 
 	title_bar_height = title_req->height;
@@ -293,8 +302,9 @@ render_self (CongEditorArea *area,
 }
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 #if 0
 	gint width;
@@ -304,16 +314,12 @@ update_requisition (CongEditorArea *area,
 
 	CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
 
-	cong_editor_area_update_requisition (PRIVATE(structural_tag)->title_vcompose, 
-					     width_hint-1);
-
-	cong_editor_area_update_requisition (PRIVATE(structural_tag)->inner_bin, 
-					     width_hint-1);
-		
-	title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose);
+	title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose,
+						      width_hint-1);
 	g_assert(title_req);
-
-	inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin);
+	
+	inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
+						      width_hint-1);
 	g_assert(inner_req);
 
 #if 0
@@ -327,9 +333,8 @@ update_requisition (CongEditorArea *area,
 	}
 #endif
 
-	cong_editor_area_set_requisition (area,
-					  width_hint,
-					  title_req->height + inner_req->height+3);
+	output->width = width_hint;
+	output->height = title_req->height + inner_req->height+3;
 }
 
 static void
@@ -342,7 +347,7 @@ allocate_child_space (CongEditorArea *area)
 	PRIVATE(structural_tag)->title_vcompose;
 	PRIVATE(structural_tag)->inner_bin;
 
-	title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose);
+	title_req = cong_editor_area_get_cached_requisition (PRIVATE(structural_tag)->title_vcompose);
 	g_assert(title_req);
 
 	cong_editor_area_set_allocation (PRIVATE(structural_tag)->title_vcompose,

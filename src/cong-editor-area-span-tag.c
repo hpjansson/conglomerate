@@ -63,8 +63,9 @@ render_self (CongEditorArea *area,
 	     const GdkRectangle *widget_rect);
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint);
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output);
 
 static void
 allocate_child_space (CongEditorArea *area);
@@ -91,7 +92,7 @@ cong_editor_area_span_tag_class_init (CongEditorAreaSpanTagClass *klass)
 	CongEditorAreaContainerClass *container_klass = CONG_EDITOR_AREA_CONTAINER_CLASS(klass);
 
 	area_klass->render_self = render_self;
-	area_klass->update_requisition = update_requisition;
+	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
 
@@ -190,6 +191,9 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 		}
 	}
 
+	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_span_tag),
+								   PRIVATE(area_span_tag)->span_vcompose);
+
 	return CONG_EDITOR_AREA (area_span_tag);
 }
 
@@ -200,7 +204,9 @@ cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
 				     const gchar *text)
 
 {
+#if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_span_tag_new(%s)", text);
+#endif
 
 	g_return_val_if_fail (editor_widget, NULL);
 	g_return_val_if_fail (text, NULL);
@@ -296,8 +302,9 @@ render_self (CongEditorArea *area,
 }
 
 static void 
-update_requisition (CongEditorArea *area, 
-		    int width_hint)
+calc_requisition (CongEditorArea *area, 
+		  int width_hint,
+		  GtkRequisition *output)
 {
 	const GtkRequisition *child_req;
 	
@@ -305,15 +312,12 @@ update_requisition (CongEditorArea *area,
 
 	g_assert (PRIVATE(span_tag)->span_vcompose);
 		 
-	cong_editor_area_update_requisition (PRIVATE(span_tag)->span_vcompose, 
-					     width_hint);
-	
-	child_req = cong_editor_area_get_requisition (PRIVATE(span_tag)->span_vcompose);
+	child_req = cong_editor_area_get_requisition (PRIVATE(span_tag)->span_vcompose,
+						      width_hint);
 	g_assert(child_req);
 		
-	cong_editor_area_set_requisition (area,
-					  child_req->width,
-					  child_req->height);
+	output->width = child_req->width;
+	output->height = child_req->height;
 }
 
 static void
