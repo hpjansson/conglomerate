@@ -1,3 +1,7 @@
+2004-07-02  Geert Stappers <stappers@stappers.nl>
+
+	* config.guess & config.sub: updated
+
 2004-06-30  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.spec.in: sync with Dag Wiers
