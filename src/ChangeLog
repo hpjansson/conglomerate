@@ -1,5 +1,9 @@
 2003-07-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c
+
+	Listen to document signals
+	
 	* cong-editor-node-document.c, cong-editor-node-element-span.c, cong-editor-node-element-structural.c, cong-editor-node-element-unknown.c, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.h
 
 	Suppress some of the debug spew

@@ -60,7 +60,9 @@ struct CongEditorWidget3Details
 };
 
 
-#define DEBUG_EDITOR_WIDGET_VIEW 1
+#define DEBUG_EDITOR_WIDGET_VIEW  1
+#define LOG_GTK_WIDGET_SIGNALS    0
+#define LOG_CONG_DOCUMENT_SIGNALS 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -72,6 +74,20 @@ struct CongEditorWidget3Details
 #define CONG_EDITOR_WIDGET3_DEBUG_MSG1(x)    ((void)0)
 #define CONG_EDITOR_WIDGET3_DEBUG_MSG2(x, a) ((void)0)
 #define CONG_EDITOR_WIDGET3_DEBUG_MSG3(x, a, b) ((void)0)
+#endif
+
+#if LOG_GTK_WIDGET_SIGNALS
+#define LOG_GTK_WIDGET_SIGNAL1(x) g_message(x)
+#define LOG_GTK_WIDGET_SIGNAL3(x, a, b) g_message((x), (a), (b))
+#else
+#define LOG_GTK_WIDGET_SIGNAL1(x) ((void)0)
+#define LOG_GTK_WIDGET_SIGNAL3(x, a, b) ((void)0)
+#endif
+
+#if LOG_CONG_DOCUMENT_SIGNALS
+#define LOG_CONG_DOCUMENT_SIGNAL1(x) g_message(x)
+#else
+#define LOG_CONG_DOCUMENT_SIGNAL1(x) ((void)0)
 #endif
 
 /* Declarations of misc stuff: */
@@ -110,44 +126,87 @@ static void size_request_handler(GtkWidget *widget,
  				 gpointer user_data);
 
 /* Declarations of the CongDocument event handlers: */
-static void 
-on_signal_set_text_notify_after (CongDocument *doc, 
-				 CongNodePtr node, 
-				 const xmlChar *new_content, 
-				 gpointer user_data);
-
-static void 
-on_signal_set_attribute_notify_after (CongDocument *doc, 
-				      CongNodePtr node, 
-				      const xmlChar *name, 
-				      const xmlChar *value, 
-				      gpointer user_data); 
-
-static void 
-on_signal_remove_attribute_notify_after (CongDocument *doc, 
+/* Signal handling callbacks: */
+/* Callbacks attached before the default handler: */
+static void on_signal_begin_edit_notify_before (CongDocument *doc,
+					 gpointer user_data);
+static void on_signal_end_edit_notify_before (CongDocument *doc,
+				       gpointer user_data);
+static void on_signal_make_orphan_notify_before (CongDocument *doc, 
+					  CongNodePtr node, 
+					  gpointer user_data);
+static void on_signal_add_after_notify_before (CongDocument *doc, 
+					CongNodePtr node, 
+					CongNodePtr older_sibling, 
+					gpointer user_data);
+static void on_signal_add_before_notify_before (CongDocument *doc, 
 					 CongNodePtr node, 
-					 const xmlChar *name, 
-					 gpointer user_data); 
+					 CongNodePtr younger_sibling, 
+					 gpointer user_data);
+static void on_signal_set_parent_notify_before (CongDocument *doc, 
+					 CongNodePtr node, 
+					 CongNodePtr adoptive_parent, 
+					 gpointer user_data);
+static void on_signal_set_text_notify_before (CongDocument *doc, 
+				       CongNodePtr node, 
+				       const xmlChar *new_content, 
+				       gpointer user_data);
+static void on_signal_set_attribute_notify_before (CongDocument *doc, 
+					    CongNodePtr node, 
+					    const xmlChar *name, 
+					    const xmlChar *value, 
+					    gpointer user_data);
+static void on_signal_remove_attribute_notify_before (CongDocument *doc, 
+					       CongNodePtr node, 
+					       const xmlChar *name, 
+					       gpointer user_data);
+static void on_signal_selection_change_notify_before (CongDocument *doc, 
+					       gpointer user_data);
+static void on_signal_cursor_change_notify_before (CongDocument *doc, 
+					    gpointer user_data);
+
+/* Callbacks attached after the default handler: */
+static void on_signal_begin_edit_notify_after (CongDocument *doc,
+					gpointer user_data);
+static void on_signal_end_edit_notify_after (CongDocument *doc,
+				      gpointer user_data);
+static void on_signal_make_orphan_notify_after (CongDocument *doc, 
+					 CongNodePtr node, 
+					 gpointer user_data);
+static void on_signal_add_after_notify_after (CongDocument *doc, 
+				       CongNodePtr node, 
+				       CongNodePtr older_sibling, 
+				       gpointer user_data);
+static void on_signal_add_before_notify_after (CongDocument *doc, 
+					CongNodePtr node, 
+					CongNodePtr younger_sibling, 
+					gpointer user_data);
+static void on_signal_set_parent_notify_after (CongDocument *doc, 
+					CongNodePtr node, 
+					CongNodePtr adoptive_parent, 
+					gpointer user_data);
+static void on_signal_set_text_notify_after (CongDocument *doc, 
+				      CongNodePtr node, 
+				      const xmlChar *new_content, 
+				      gpointer user_data);
+static void on_signal_set_attribute_notify_after (CongDocument *doc, 
+					   CongNodePtr node, 
+					   const xmlChar *name, 
+					   const xmlChar *value, 
+					   gpointer user_data);
+static void on_signal_remove_attribute_notify_after (CongDocument *doc, 
+					      CongNodePtr node, 
+					      const xmlChar *name, 
+					      gpointer user_data);
+static void on_signal_selection_change_notify_after (CongDocument *doc, 
+					      gpointer user_data);
+static void on_signal_cursor_change_notify_after (CongDocument *doc, 
+					   gpointer user_data);
 
 /* Declarations of CongEditorArea event handlers: */
 static void
 on_root_requisition_change (CongEditorArea *child_area,
 			    gpointer user_data);
-
-#if 0
-/* Declarations of the MVC handler functions: */
-static void on_document_begin_edit(CongView *view);
-static void on_document_end_edit(CongView *view);
-static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
-static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
-static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent);
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
-static void on_selection_change(CongView *view);
-static void on_cursor_change(CongView *view);
-#endif
 
 /* Implementations of public functions: */
 GtkWidget* cong_editor_widget3_new(CongDocument *doc)
@@ -278,6 +337,31 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 
 	/* Connect to CongDocument events: */
 	{
+		/* attach signal handlers to document for notification before change happens: */
+		g_signal_connect (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_before), widget);
+		g_signal_connect (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_before), widget);
+		
+		/* attach signal handlers to document for notification after change happens: */
+		g_signal_connect_after (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_after), widget);
+		g_signal_connect_after (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_after), widget);
 	}
 
 	return GTK_WIDGET(widget);
@@ -379,7 +463,7 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("expose_event_handler");
+	LOG_GTK_WIDGET_SIGNAL1("expose_event_handler");
 
 	doc = cong_editor_widget3_get_document(editor_widget);
 
@@ -411,7 +495,7 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET3_DEBUG_MSG3("configure_event_handler; w/h = %i,%i", event->width, event->height);
+	LOG_GTK_WIDGET_SIGNAL3("configure_event_handler; w/h = %i,%i", event->width, event->height);
 
 #if 0
 	if (event->width != cong_editor_area_get_cached_width_hint (details->test_area)) {
@@ -437,7 +521,7 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("button_press_event_handler");
+	LOG_GTK_WIDGET_SIGNAL1("button_press_event_handler");
 
 
 	return TRUE;
@@ -448,8 +532,7 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("motion_notify_event_handler");
-
+	LOG_GTK_WIDGET_SIGNAL1("motion_notify_event_handler");
 
 	return TRUE;
 }
@@ -462,7 +545,7 @@ static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpoint
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	CongElementEditor *element_editor;
 
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("key_press_event_handler");
+	LOG_GTK_WIDGET_SIGNAL1("key_press_event_handler");
 
 	g_return_val_if_fail(cursor->location.node, FALSE);
 
@@ -479,7 +562,7 @@ static void size_request_handler(GtkWidget *widget,
  	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 	const GtkRequisition* req;
  
- 	CONG_EDITOR_WIDGET3_DEBUG_MSG1("size_request_handler");
+ 	LOG_GTK_WIDGET_SIGNAL1("size_request_handler");
 
  	g_assert(widget);
  	g_assert(requisition);
@@ -497,35 +580,268 @@ static void size_request_handler(GtkWidget *widget,
 }
 
 /* Definitions of the CongDocument event handlers: */
-#if 0
-static void 
-on_signal_set_text_notify_after (CongDocument *doc, 
-				  CongNodePtr node, 
-				  const xmlChar *new_content, 
-				  gpointer user_data)
-{
-	g_assert_not_reached();
+/* Signal handling callbacks: */
+/* Callbacks attached before the default handler: */
+
+static void on_signal_begin_edit_notify_before (CongDocument *doc,
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_begin_edit_notify_before");
+
+	/* empty so far */
 }
 
-static void 
-on_signal_set_attribute_notify_after (CongDocument *doc, 
-				       CongNodePtr node, 
-				       const xmlChar *name, 
-				       const xmlChar *value, 
-				       gpointer user_data)
-{
-	g_assert_not_reached();
+static void on_signal_end_edit_notify_before (CongDocument *doc,
+				       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_end_edit_notify_before");
+
+	/* empty so far */
 }
 
-static void 
-on_signal_remove_attribute_notify_after (CongDocument *doc, 
+static void on_signal_make_orphan_notify_before (CongDocument *doc, 
 					  CongNodePtr node, 
-					  const xmlChar *name, 
-					  gpointer user_data)
-{
-	g_assert_not_reached();
+					  gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_make_orphan_notify_before");
+
+	recursive_remove_nodes(editor_widget, node);
 }
+
+static void on_signal_add_after_notify_before (CongDocument *doc, 
+					CongNodePtr node, 
+					CongNodePtr older_sibling, 
+					gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_add_before_notify_before (CongDocument *doc, 
+					 CongNodePtr node, 
+					 CongNodePtr younger_sibling, 
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_set_parent_notify_before (CongDocument *doc, 
+					 CongNodePtr node, 
+					 CongNodePtr adoptive_parent, 
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_before");
+
+	recursive_remove_nodes(editor_widget, node);
+}
+
+static void on_signal_set_text_notify_before (CongDocument *doc, 
+				       CongNodePtr node, 
+				       const xmlChar *new_content, 
+				       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_text_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_set_attribute_notify_before (CongDocument *doc, 
+					    CongNodePtr node, 
+					    const xmlChar *name, 
+					    const xmlChar *value, 
+					    gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_attribute_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_remove_attribute_notify_before (CongDocument *doc, 
+					       CongNodePtr node, 
+					       const xmlChar *name, 
+					       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_remove_attribute_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_selection_change_notify_before (CongDocument *doc, 
+					       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_selection_change_notify_before");
+
+	/* empty so far */
+}
+
+static void on_signal_cursor_change_notify_before (CongDocument *doc, 
+					    gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_before");
+
+	/* empty so far */
+}
+
+
+/* Callbacks attached after the default handler: */
+static void on_signal_begin_edit_notify_after (CongDocument *doc,
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_begin_edit_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_end_edit_notify_after (CongDocument *doc,
+				       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_end_edit_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_make_orphan_notify_after (CongDocument *doc, 
+					 CongNodePtr node, 
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_make_orphan_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_add_after_notify_after (CongDocument *doc, 
+					CongNodePtr node, 
+					CongNodePtr older_sibling, 
+					gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_after");
+
+	recursive_add_nodes(editor_widget, node);
+}
+
+static void on_signal_add_before_notify_after (CongDocument *doc, 
+					 CongNodePtr node, 
+					 CongNodePtr younger_sibling, 
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_after");
+
+	recursive_add_nodes(editor_widget, node);
+}
+
+static void on_signal_set_parent_notify_after (CongDocument *doc, 
+					 CongNodePtr node, 
+					 CongNodePtr adoptive_parent, 
+					 gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_after");
+
+	recursive_add_nodes(editor_widget, node);
+}
+
+static void on_signal_set_text_notify_after (CongDocument *doc, 
+				       CongNodePtr node, 
+				       const xmlChar *new_content, 
+				       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_text_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_set_attribute_notify_after (CongDocument *doc, 
+					   CongNodePtr node, 
+					   const xmlChar *name, 
+					   const xmlChar *value, 
+					   gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_attribute_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_remove_attribute_notify_after (CongDocument *doc, 
+					       CongNodePtr node, 
+					       const xmlChar *name, 
+					       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_remove_attribute_notify_after");
+
+	/* empty so far */
+}
+
+static void on_signal_selection_change_notify_after (CongDocument *doc, 
+					       gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_selection_change_notify_after");
+
+	/* empty so far */
+
+#if 0
+	/* Force a redraw: */
+	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));	
 #endif
+}
+
+static void on_signal_cursor_change_notify_after (CongDocument *doc, 
+					    gpointer user_data) 
+{ 
+	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+
+	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_after");
+
+	/* empty so far */
+
+#if 0
+	/* Force a redraw: */
+	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));	
+#endif
+}
 
 /* Definitions of CongEditorArea event handlers: */
 static void
@@ -537,106 +853,6 @@ on_root_requisition_change (CongEditorArea *child_area,
 	g_message("on_root_requisition_change");
 	gtk_widget_queue_resize (GTK_WIDGET(editor_widget));
 }
-
-
-/* Definitions of the MVC handler functions: */
-#if 0
-static void on_document_begin_edit(CongView *view)
-{
-	/* UNWRITTEN */
-}
-
-static void on_document_end_edit(CongView *view)
-{
-	/* UNWRITTEN */
-}
-
-static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
-{
-	if (before_event) {
-		recursive_remove_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
-	}
-
-}
-
-static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling)
-{
-	if (before_event) {
-		return;
-	}
-
-	recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
-}
-
-static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling)
-{
-	if (before_event) {
-		return;
-	}
-
-	recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
-}
-
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
-{
-	if (before_event) {
-		recursive_remove_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
-	} else {
-		recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
-	}
-}
-
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
-{
-	/* UNWRITTEN */
-}
-
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
-{
-	/* UNWRITTEN */
-}
-
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
-{
-	/* UNWRITTEN */
-}
-
-static void on_selection_change(CongView *view)
-{
-	CongEditorWidget3View *editor_widget_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("CongEditorWidget3View - on_selection_change\n");
-	#endif
-
-	editor_widget_view = CONG_EDITOR_WIDGET3_VIEW(view);
-
-#if 0
-	/* Force a redraw: */
-	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));	
-#endif
-}
-
-static void on_cursor_change(CongView *view)
-{
-	CongEditorWidget3View *editor_widget_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET3_DEBUG_MSG1("CongEditorWidget3View - on_cursor_change\n");
-	#endif
-
-	editor_widget_view = CONG_EDITOR_WIDGET3_VIEW(view);
-
-#if 0
-	/* Force a redraw: */
-	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));
-#endif
-}
-#endif
 
 static void 
 populate_widget3(CongEditorWidget3 *widget)
