@@ -1,5 +1,9 @@
 2003-10-20  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-expander.c, cong-editor-area-expander.h, Makefile.am
+
+	New files: CongEditorAreaExpander subclass
+
 	* cong-editor-child-policy.c
 
 	Remove spurious return from cong_editor_child_policy_remove_areas_for_node

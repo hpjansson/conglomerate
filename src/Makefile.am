@@ -35,6 +35,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-container.h \
   cong-editor-area-entity-decl.h \
   cong-editor-area-entity-ref.h \
+  cong-editor-area-expander.h \
   cong-editor-area-flow-holder.h \
   cong-editor-area-flow-holder-blocks.h \
   cong-editor-area-flow-holder-inlines.h \
@@ -125,6 +126,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-container.c \
   cong-editor-area-entity-decl.c \
   cong-editor-area-entity-ref.c \
+  cong-editor-area-expander.c \
   cong-editor-area-flow-holder.c \
   cong-editor-area-flow-holder-blocks.c \
   cong-editor-area-flow-holder-inlines.c \
