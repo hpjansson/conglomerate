@@ -327,4 +327,6 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
 	$(NULL)
 
-## reminder: include Makefile.win into the dist.tar.gz
+EXTRA_DIST = Makefile.win
+
+## Last Line

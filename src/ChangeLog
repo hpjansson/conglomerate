@@ -5,6 +5,10 @@
 	Added the first two comment lines, hoping it does block anything,
 	otherwise we will make a README_Makefile.win
 
+	* Makefile.am
+
+	Ship tarball with Makefile.win.
+
 2004-02-23  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-node.c, cong-node.h, cong-service-node-tool.c, cong-service-node-tool.h, plugin-docbook.c, plugin-html.c, popup.c
