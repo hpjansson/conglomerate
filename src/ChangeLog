@@ -1,4 +1,27 @@
 creating ChangeLog
+2003-04-03 David Malcolm
+
+	* cong-document.c
+
+	Ensure that all content is valid UTF-8 when the cong_document is constructed from the xml_doc
+
+	* cong-error-dialog.c, cong-error-dialog.h
+
+	Added optional bugzilla ID to the Unimplemented dialog
+
+	* cong-primary-window.c, file.c, global.h, main.c, open.c, save.c
+
+	Tell the window manager which window the fileselector dialogs have been spawned from
+
+	* cong-source-view.c, xmledit.c
+
+	Fix the sizing of the source view
+
+	* plugin-docbook.c
+
+	Set up the doctype declaration for created DocBook files
+	
+	
 2003-04-02 David Malcolm
 
 	* cong-document.c, cong-document.h, cong-location.c, global.h, cong-span-text-editor.c, cursor.c

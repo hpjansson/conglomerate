@@ -7,6 +7,54 @@
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
 
+typedef void (*CongXMLSelfTestCallback)(xmlNodePtr node, const gchar *error_message);
+
+gboolean cong_xml_selftest_node(xmlNodePtr node, CongXMLSelfTestCallback selftest_callback);
+gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selftest_callback);
+
+gboolean cong_xml_selftest_node(xmlNodePtr node, CongXMLSelfTestCallback selftest_callback)
+{
+	/* Test this node: */
+	if (node->content) {
+		g_message("testing node content\"%s\"", node->content);
+		if (!g_utf8_validate(node->content, -1, NULL)) {
+			if (selftest_callback) {
+				(*selftest_callback)(node, "Invalid UTF-8 data");
+			}
+			return FALSE;
+		}
+	}
+
+	/* Recurse through children: */
+	{
+		xmlNodePtr iter;
+		
+		for (iter = node->children; iter; iter=iter->next) {
+			if (!cong_xml_selftest_node(iter, selftest_callback)) {
+				return FALSE;
+			}
+		}
+	}
+
+	/* All tests passed: */
+	return TRUE;
+}
+
+gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selftest_callback)
+{
+	xmlNodePtr iter;
+
+	g_return_val_if_fail(xml_doc, FALSE);
+
+	/* Traverse the document: */
+	for (iter = xml_doc->children; iter; iter=iter->next) {
+		if (!cong_xml_selftest_node(iter, selftest_callback)) {
+			return FALSE;
+		}
+	}
+}
+
+
 struct CongDocument
 {
 	int ref_count;
@@ -38,6 +86,7 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	CongDocument *doc;
 
 	g_return_val_if_fail(xml_doc!=NULL, NULL);
+	g_return_val_if_fail(cong_xml_selftest_doc(xml_doc, NULL), NULL);
 
 	doc = g_new0(struct CongDocument,1);
 
