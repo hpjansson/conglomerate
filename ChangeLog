@@ -1,3 +1,7 @@
+2004-02-11  Mitsuru Oka  <oka326@parkcity.ne.jp>
+
+	* configure.in: Added "ja" to ALL_LINGUAS.
+
 2004-02-09  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

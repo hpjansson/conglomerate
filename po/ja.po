@@ -1,0 +1,2152 @@
+# Japanese translation of conglomerate.
+# Copyright (C) 2004 THE conglomerate'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the conglomerate package.
+# Mitsuru Oka <oka326@parkcity.ne.jp>, 2004.
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate 0.7.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-10 17:49+0900\n"
+"PO-Revision-Date: 2004-02-11 09:17+0900\n"
+"Last-Translator: Mitsuru Oka <oka326@parkcity.ne.jp>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1225
+#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
+#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
+msgid "Conglomerate XML Editor"
+msgstr "Conglomerate·XML エディタ "
+
+#: data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "XML ファイルを編集"
+
+#: glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "ファイル読み込みオプション"
+
+#: glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "インポーター"
+
+#: glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "オプション"
+
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1063
+#: src/cong-node-properties-dialog.c:1147
+msgid "Advanced"
+msgstr "詳細"
+
+#: glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "基本"
+
+#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:288
+#: src/cong-file-export.c:307 src/cong-file-new.c:291
+#: src/cong-file-print.c:254 src/cong-menus.c:460 src/cong-parser-error.c:271
+msgid "Description"
+msgstr "説明"
+
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:743
+msgid "Document Type Declaration"
+msgstr "文書型宣言"
+
+#: glade/cong-file-properties.glade.h:5
+msgid "Encoding"
+msgstr "エンコーディング"
+
+#: glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr "外部 ID"
+
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:254
+#: src/cong-file-print.c:221
+msgid "General"
+msgstr "一般"
+
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:239
+msgid "Location"
+msgstr "位置"
+
+#: glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:10 src/cong-file-export.c:306
+#: src/cong-file-print.c:253 src/cong-menus.c:453
+#: src/cong-node-properties-dialog.c:527
+msgid "Name"
+msgstr "名前"
+
+#: glade/cong-file-properties.glade.h:11
+#: glade/docbook-common-properties.glade.h:3
+#: glade/docbook-orderedlist-properties.glade.h:9
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1109
+msgid "Properties"
+msgstr "プロパティ"
+
+#: glade/cong-file-properties.glade.h:12
+msgid "Standalone"
+msgstr "スタンドアロン"
+
+#: glade/cong-file-properties.glade.h:13
+msgid "System ID"
+msgstr "システム ID"
+
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "型"
+
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "バージョン"
+
+#: glade/cong-file-properties.glade.h:16
+msgid "XML Header"
+msgstr "XML ヘッダ"
+
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:180
+msgid "_Associate this DTD"
+msgstr "この DTD を結び付ける(_A)"
+
+#: glade/cong-file-properties.glade.h:18
+msgid "label_dtd_external_id"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:19
+msgid "label_dtd_notes"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:20
+msgid "label_dtd_system_id"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:21
+msgid "label_location"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:22
+msgid "label_modified"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:23
+msgid "label_name"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:24
+msgid "label_typedesc"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:25
+msgid "label_typename"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:26
+msgid "label_xml_encoding"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:27
+msgid "label_xml_standalone"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:28
+msgid "label_xml_version"
+msgstr ""
+
+#: glade/cong-find-replace.glade.h:1 glade/string_selection_dialog.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/cong-find-replace.glade.h:2 src/cong-edit-find-and-replace.c:209
+msgid "Find"
+msgstr "検索"
+
+#: glade/cong-find-replace.glade.h:3
+msgid "Find:"
+msgstr "検索:"
+
+#: glade/cong-find-replace.glade.h:4
+msgid "Match _Case"
+msgstr "大文字小文字を区別しない(_C)"
+
+#: glade/cong-find-replace.glade.h:5
+msgid "Replace"
+msgstr "置換"
+
+#: glade/cong-find-replace.glade.h:6
+msgid "Replace with:"
+msgstr "置換:"
+
+#: glade/docbook-common-properties.glade.h:1
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:2
+msgid "Language"
+msgstr "言語"
+
+#: glade/docbook-common-properties.glade.h:4
+msgid "Revisions"
+msgstr "リビジョン"
+
+#: glade/docbook-common-properties.glade.h:5
+msgid "Scope"
+msgstr "スコープ"
+
+#: glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to edit the "
+"language of the text here.\n"
+"\n"
+"This is listed in Bugzilla as bug #122536"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:9
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:12
+msgid "_Architecture"
+msgstr "アーキテクチャ(_A)"
+
+#: glade/docbook-common-properties.glade.h:13
+msgid "_Operating System"
+msgstr "オペレーティングシステム(_O)"
+
+#: glade/docbook-common-properties.glade.h:14
+msgid "_User Level"
+msgstr "ユーザーレベル(_U)"
+
+#: glade/docbook-common-properties.glade.h:15
+msgid "_Vendor"
+msgstr "ベンダ(V)"
+
+#: glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
+#: src/cong-error-file-open.c:449
+msgid "Details"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr ""
+
+#: glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr ""
+
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr ""
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr ""
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:731
+msgid "Document Type"
+msgstr "文書型"
+
+#: glade/string_selection_dialog.glade.h:2
+msgid "label"
+msgstr ""
+
+#: glade/string_selection_dialog.glade.h:3
+msgid "string_selection_dialog"
+msgstr ""
+
+#: src/cong-app.c:801
+msgid "XML Editor"
+msgstr "XML エディタ"
+
+#: src/cong-app.c:931
+msgid "Conglomerate could not load any xds files"
+msgstr ""
+
+#: src/cong-app.c:933
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr ""
+
+#: src/cong-app.c:935
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+
+#: src/cong-attribute-editor-cdata.c:178
+#: src/cong-attribute-editor-enumeration.c:174
+#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:364
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr ""
+
+#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:408
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr ""
+
+#: src/cong-attribute-editor-cdata.c:226
+#: src/cong-attribute-editor-enumeration.c:177
+#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:438
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr ""
+
+#: src/cong-attribute-editor-enumeration.c:89
+msgid "(unspecified)"
+msgstr ""
+
+#: src/cong-dialog.c:231
+msgid "_Close without Saving"
+msgstr ""
+
+#: src/cong-dialog.c:246
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr ""
+
+#: src/cong-dialog.c:251
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr ""
+
+#: src/cong-dialog.c:253
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr ""
+
+#: src/cong-dialog.c:255
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:300
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr ""
+
+#: src/cong-dialog.c:305
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:307
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:309
+msgid "Changes from the past minute will be discarded."
+msgstr ""
+
+#: src/cong-dispspec-element.c:534 src/cong-dispspec-element.c:570
+#: src/cong-xpath-expression.c:207
+msgid "(xpath failed)"
+msgstr ""
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec-element.c:616
+msgid "<untitled>"
+msgstr ""
+
+#: src/cong-dispspec-registry.c:89
+msgid "Conglomerate could not read its registry of document types."
+msgstr ""
+
+#: src/cong-dispspec-registry.c:92
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr ""
+
+#: src/cong-dispspec-registry.c:266 src/cong-file-new.c:271
+msgid "File Type"
+msgstr "ファイルの型"
+
+#: src/cong-dispspec-registry.c:277
+msgid "Coverage"
+msgstr ""
+
+#: src/cong-dispspec.c:409
+msgid "unnamed"
+msgstr ""
+
+#: src/cong-dispspec.c:422
+msgid "No description available."
+msgstr ""
+
+#: src/cong-document.c:695
+#, c-format
+msgid "Attribute \"%s\""
+msgstr ""
+
+#: src/cong-document.c:702
+#, c-format
+msgid "Text \"%s\""
+msgstr ""
+
+#: src/cong-document.c:708
+msgid "Character Data"
+msgstr ""
+
+#: src/cong-document.c:711
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:714
+#, c-format
+msgid "Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:717
+msgid "XML Processing Instruction"
+msgstr ""
+
+#: src/cong-document.c:722
+#, c-format
+msgid "Comment \"%s\""
+msgstr ""
+
+#: src/cong-document.c:728
+msgid "Document"
+msgstr "文書"
+
+#: src/cong-document.c:734
+msgid "Document Fragment"
+msgstr ""
+
+#: src/cong-document.c:737
+msgid "Notation"
+msgstr "記法"
+
+#: src/cong-document.c:740
+msgid "HTML Document"
+msgstr "HTML 文書"
+
+#: src/cong-document.c:746
+msgid "Element Declaration"
+msgstr "要素宣言"
+
+#: src/cong-document.c:749
+msgid "Attribute Declaration"
+msgstr ""
+
+#: src/cong-document.c:752
+msgid "Entity Declaration"
+msgstr "実体宣言"
+
+#: src/cong-document.c:755
+msgid "Namespace Declaration"
+msgstr "名前空間宣言"
+
+#: src/cong-document.c:758
+msgid "XInclude Start"
+msgstr ""
+
+#: src/cong-document.c:761
+msgid "XInclude End"
+msgstr ""
+
+#: src/cong-document.c:1448
+#, c-format
+msgid "Select %s"
+msgstr ""
+
+#: src/cong-dom-view.c:208
+msgid "UNKNOWN"
+msgstr ""
+
+#: src/cong-dom-view.c:234
+#, c-format
+msgid "Text: \"<span foreground=\"%s\">%s</span>\""
+msgstr ""
+
+#: src/cong-dom-view.c:251
+#, c-format
+msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+msgstr ""
+
+#: src/cong-editor-node-text.c:882
+msgid "Select word"
+msgstr "単語を選択"
+
+#: src/cong-editor-node-text.c:907
+msgid "Move cursor"
+msgstr ""
+
+#: src/cong-editor-node-text.c:991
+msgid "Drag out selection"
+msgstr ""
+
+#: src/cong-editor-widget3.c:256
+msgid "Expander Size"
+msgstr ""
+
+#: src/cong-editor-widget3.c:257
+msgid "Size of the expander arrow"
+msgstr ""
+
+#: src/cong-editor-widget3.c:631
+msgid "Input Method"
+msgstr ""
+
+#: src/cong-editor-widget3.c:734 src/cong-editor-widget3.c:1265
+msgid "Typing"
+msgstr ""
+
+#: src/cong-editor-widget3.c:1166
+msgid "Cursor Movement"
+msgstr ""
+
+#: src/cong-editor-widget3.c:1206 src/cong-editor-widget3.c:1219
+msgid "Delete Selection"
+msgstr "選択を削除"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr ""
+
+#: src/cong-error-dialog.c:184
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr ""
+
+#: src/cong-error-dialog.c:202
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:248
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr ""
+
+#: src/cong-error-dialog.c:251
+#, c-format
+msgid ""
+"A GError occurred; the error report was:\n"
+"<i>%s</i>"
+msgstr ""
+
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
+msgid "An unexpected error occurred."
+msgstr ""
+
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
+msgid "For more information, click on the \"Details\" button."
+msgstr ""
+
+#. Add upper content:
+#: src/cong-error-dialog.c:300
+#, c-format
+msgid ""
+"An error occurred whilst running this system command:\n"
+"\n"
+"<tt>%s</tt>"
+msgstr ""
+
+#: src/cong-error-dialog.c:301
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr ""
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:54
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:82
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:85
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr ""
+
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
+msgid "An unexpected internal error occurred."
+msgstr ""
+
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+
+#: src/cong-error-file-open.c:234
+msgid "There is no file with that name at that location."
+msgstr ""
+
+#: src/cong-error-file-open.c:235
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
+msgid "Search"
+msgstr ""
+
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
+msgid "The location does not exist."
+msgstr ""
+
+#: src/cong-error-file-open.c:244
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:257
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr ""
+
+#: src/cong-error-file-open.c:261
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:271
+msgid "There were problems reading the content of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:281
+msgid "The contents of the file seem to be corrupt."
+msgstr ""
+
+#: src/cong-error-file-open.c:282
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
+msgid "There were problems reading the contents of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
+msgid "The system does not recognise that as a valid location."
+msgstr ""
+
+#: src/cong-error-file-open.c:299
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:310
+msgid "You do not have permission to read that file."
+msgstr ""
+
+#: src/cong-error-file-open.c:311
+msgid "Try asking your system administrator to give you permission."
+msgstr ""
+
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
+msgid "The system is trying to operate on too many files at once."
+msgstr ""
+
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:336
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr ""
+
+#: src/cong-error-file-open.c:340
+msgid "Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
+msgid "The system ran out of memory."
+msgstr ""
+
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
+msgid "The server could not be contacted."
+msgstr ""
+
+#: src/cong-error-file-open.c:362
+msgid "Try again.  If it fails again, the server may be down."
+msgstr ""
+
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
+msgid "The system could not login to the location."
+msgstr ""
+
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
+msgid "The location was too busy."
+msgstr ""
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr ""
+
+#: src/cong-error-file-open.c:439
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:51
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:54
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr ""
+
+#: src/cong-error-file-save.c:101
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr ""
+
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
+msgid "Try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:124
+msgid "There were problems writing the content of the file."
+msgstr ""
+
+#: src/cong-error-file-save.c:125
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:154
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr ""
+
+#. Can't get at the capacity for the device or "volume":
+#: src/cong-error-file-save.c:160
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:168
+msgid "The file is too big to fit on the device."
+msgstr ""
+
+#: src/cong-error-file-save.c:177
+msgid "Try saving the file to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:198
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:204
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:212
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr ""
+
+#: src/cong-error-file-save.c:221
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+
+#: src/cong-error-file-save.c:242
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:256
+msgid "You do not have permission to write to that location."
+msgstr ""
+
+#: src/cong-error-file-save.c:257
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:271
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr ""
+
+#: src/cong-error-file-save.c:275
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr ""
+
+#: src/cong-error-file-save.c:293
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr ""
+
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
+msgid "Try again. If it fails again, try saving to another location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:336
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr ""
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:348
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr ""
+
+#: src/cong-error-file-save.c:352
+msgid "Try again with a shorter file name."
+msgstr ""
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:16
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:22
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:28
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:31
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr ""
+
+#: src/cong-error-tests.c:34
+msgid "This dialog was generated by the automated testing routine"
+msgstr ""
+
+#: src/cong-file-export.c:161
+msgid "<small>(No description available)</small>"
+msgstr ""
+
+#: src/cong-file-export.c:197
+msgid "Select file to export to"
+msgstr "書き出すファイルを選択"
+
+#: src/cong-file-export.c:233
+#, c-format
+msgid "Export \"%s\""
+msgstr ""
+
+#: src/cong-file-export.c:238
+msgid "Export"
+msgstr "書き出し"
+
+#: src/cong-file-export.c:289
+msgid "Exporter:"
+msgstr ""
+
+#: src/cong-file-export.c:291
+msgid "File:"
+msgstr "ファイル:"
+
+#: src/cong-file-export.c:298
+msgid "Export Options"
+msgstr "書き出しオプション"
+
+#: src/cong-file-export.c:379
+#, c-format
+msgid "Conglomerate cannot export \"%s\""
+msgstr ""
+
+#: src/cong-file-export.c:382
+msgid "None of Conglomerate's plugins know how to export files of that type."
+msgstr ""
+
+#: src/cong-file-import.c:68
+msgid "Import file..."
+msgstr "ファイルの読み込み..."
+
+#. FIXME:  eventually provide a convenience dialog to force things
+#: src/cong-file-import.c:102
+msgid "Could not import the file."
+msgstr ""
+
+#: src/cong-file-import.c:103
+#, c-format
+msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+msgstr ""
+
+#: src/cong-file-import.c:104
+msgid "FIXME"
+msgstr ""
+
+#: src/cong-file-new.c:138
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "新規ファイル作成 (%s)"
+
+#. FIXME:  what if no document factories found?
+#: src/cong-file-new.c:471 src/cong-file-new.c:478 src/cong-file-new.c:503
+msgid "Creating a new file"
+msgstr "新規ファイルの作成"
+
+#: src/cong-file-new.c:479
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"本アシスタントが新規ファイル作成のお手伝いをいたします。\n"
+"\n"
+"様々なファイルの種類が用意されていますので、Conglomerate は \"ボイラーテンプレート\" コンテンツをいくつかご提供できるでしょう。\n"
+"\n"
+"Conglomerate の将来のバージョンでは、\"テンプレートドキュメント\" を作成し、本システムに追加することができるようになると期待しています。"
+
+#: src/cong-file-new.c:492
+msgid "What type of file would you like to create?"
+msgstr "どの種類のファイルを新規作成しますか?"
+
+#: src/cong-file-new.c:494
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+"リスト中のアイテムを一つ選択し、 \"進む\" で次に進みます"
+
+#: src/cong-file-new.c:504
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"Conglomerate は文書新規作成に必要な情報が整いました。\"適用\" ボタンを押して文書を作成します。文書を取っておきたい場合は保存する必要があります。"
+
+#: src/cong-file-open.c:55
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+
+#: src/cong-file-open.c:56
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+
+#: src/cong-file-open.c:57
+msgid "Force"
+msgstr ""
+
+#: src/cong-file-open.c:169
+msgid "Select an XML document"
+msgstr "XML 文書を選択"
+
+#: src/cong-file-print.c:199
+#, c-format
+msgid "Print \"%s\""
+msgstr ""
+
+#: src/cong-file-print.c:205
+msgid "Print"
+msgstr "印刷"
+
+#: src/cong-file-print.c:237
+msgid "Print Method:"
+msgstr ""
+
+#: src/cong-file-print.c:245
+msgid "Print Options"
+msgstr "印刷オプション"
+
+#: src/cong-file-print.c:323 src/cong-menus.c:750
+msgid "Print Preview"
+msgstr "印刷プレビュー"
+
+#: src/cong-file-print.c:333
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr ""
+
+#: src/cong-file-print.c:336
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr ""
+
+#: src/cong-file-properties.c:105
+msgid "Yes"
+msgstr ""
+
+#: src/cong-file-properties.c:105
+msgid "No"
+msgstr ""
+
+#: src/cong-file-properties.c:124 src/cong-file-properties.c:127
+msgid "None"
+msgstr ""
+
+#: src/cong-file-properties.c:163
+msgid "_Remove this DTD"
+msgstr "この DTD を削除(_R)"
+
+#: src/cong-file-properties.c:186
+msgid ""
+"<small>The document does not specify an external DTD, but Conglomerate "
+"believes the above information is appropriate.  Click on \"Associate this DTD"
+"\" to specify this information explicitly in the document.</small>"
+msgstr ""
+
+#: src/cong-file-properties.c:194
+msgid "No External Subset"
+msgstr ""
+
+#: src/cong-file-properties.c:196
+msgid "_Add a DTD"
+msgstr "DTD を追加(_A)"
+
+#: src/cong-file-properties.c:273
+msgid "Unspecified"
+msgstr ""
+
+#: src/cong-file-properties.c:348
+msgid "Remove DTD"
+msgstr "DTD を削除"
+
+#: src/cong-file-properties.c:365
+msgid "Associate with DTD"
+msgstr "DTD と結び付ける"
+
+#: src/cong-file-save.c:52
+msgid "Save XML as..."
+msgstr "名前をつけて保存..."
+
+#: src/cong-location.c:300 src/cong-location.c:321
+msgid "Merge tags"
+msgstr "タグを合併"
+
+#: src/cong-location.c:365
+msgid "Delete character"
+msgstr "文字を削除"
+
+#: src/cong-location.c:830
+msgid "Calculating previous page"
+msgstr ""
+
+#: src/cong-location.c:843
+msgid "Calculating next page"
+msgstr ""
+
+#: src/cong-menus.c:98 src/cong-menus.c:170 src/cong-menus.c:204
+msgid "The selected menu item has not yet been implemented."
+msgstr ""
+
+#: src/cong-menus.c:423
+msgid "Document Types"
+msgstr "文書型"
+
+#: src/cong-menus.c:527
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr ""
+
+#: src/cong-menus.c:585 src/cong-plugin.c:469
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr ""
+
+#: src/cong-menus.c:588 src/cong-menus.c:612 src/cong-plugin.c:472
+#: src/cong-plugin.c:496
+msgid "Conglomerate could not transform the document"
+msgstr ""
+
+#: src/cong-menus.c:609 src/cong-plugin.c:493
+msgid "There was a problem applying the stylesheet file"
+msgstr ""
+
+#: src/cong-menus.c:1062
+msgid "Test Progress Checklist"
+msgstr ""
+
+#: src/cong-menus.c:1066
+#, c-format
+msgid "This is stage %i"
+msgstr ""
+
+#: src/cong-menus.c:1111
+msgid "Message Log - Conglomerate"
+msgstr ""
+
+#: src/cong-menus.c:1123
+msgid "Signal Log - Conglomerate"
+msgstr ""
+
+#: src/cong-menus.c:1223
+msgid "translator_credits"
+msgstr ""
+
+#: src/cong-menus.c:1227
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+
+#: src/cong-menus.c:1228
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr ""
+
+#: src/cong-menus.c:1271 src/cong-menus.c:1349
+msgid "/_File"
+msgstr "/ファイル(_F)"
+
+#: src/cong-menus.c:1272 src/cong-menus.c:1350
+msgid "/File/_New..."
+msgstr "/ファイル/新規作成(_N)..."
+
+#: src/cong-menus.c:1273 src/cong-menus.c:1351
+msgid "/File/_Open..."
+msgstr "/ファイル/開く(_O)..."
+
+#: src/cong-menus.c:1274 src/cong-menus.c:1279 src/cong-menus.c:1284
+#: src/cong-menus.c:1287 src/cong-menus.c:1290 src/cong-menus.c:1292
+#: src/cong-menus.c:1352 src/cong-menus.c:1354
+msgid "/File/"
+msgstr "/ファイル/"
+
+#: src/cong-menus.c:1275
+msgid "/File/_Save"
+msgstr "/ファイル/保存(S)"
+
+#: src/cong-menus.c:1276
+msgid "/File/Save _As..."
+msgstr "/ファイル/名前をつけて保存(_A)..."
+
+#: src/cong-menus.c:1277
+msgid "/File/Sa_ve a Copy..."
+msgstr "/ファイル/別名で保存(_V)..."
+
+#: src/cong-menus.c:1280
+msgid "/File/Print Previe_w..."
+msgstr "/ファイル/印刷プレビュ(_W)..."
+
+#: src/cong-menus.c:1281
+msgid "/File/_Print..."
+msgstr "/ファイル/印刷(_P)..."
+
+#: src/cong-menus.c:1285
+msgid "/File/_Revert"
+msgstr "/ファイル/回復(_R)"
+
+#: src/cong-menus.c:1288 src/cong-menus.c:1353
+msgid "/File/_Import..."
+msgstr "/ファイル/読み込み(_I)..."
+
+#: src/cong-menus.c:1289
+msgid "/File/_Export..."
+msgstr "/ファイル/書き出し(_E)..."
+
+#: src/cong-menus.c:1291
+msgid "/File/Proper_ties"
+msgstr "/ファイル/プロパティ(_T)"
+
+#: src/cong-menus.c:1293 src/cong-menus.c:1355
+msgid "/File/_Close"
+msgstr "/ファイル/閉じる(_C)"
+
+#: src/cong-menus.c:1294 src/cong-menus.c:1356
+msgid "/File/_Quit"
+msgstr "/ファイル/終了(_Q)"
+
+#: src/cong-menus.c:1296
+msgid "/_Edit"
+msgstr "/編集(_E)"
+
+#: src/cong-menus.c:1297
+msgid "/Edit/_Undo"
+msgstr "/ファイル/元に戻す(_U)"
+
+#: src/cong-menus.c:1298
+msgid "/Edit/_Redo"
+msgstr "/ファイル/やり直し(_R)"
+
+#: src/cong-menus.c:1299 src/cong-menus.c:1303 src/cong-menus.c:1309
+#: src/cong-menus.c:1311
+msgid "/Edit/"
+msgstr "/編集/"
+
+#: src/cong-menus.c:1300
+msgid "/Edit/Cu_t"
+msgstr "/編集/切り取り(_T)"
+
+#: src/cong-menus.c:1301
+msgid "/Edit/_Copy"
+msgstr "/編集/コピー(_C)"
+
+#: src/cong-menus.c:1302
+msgid "/Edit/_Paste"
+msgstr "/編集/貼り付け(_P)"
+
+#: src/cong-menus.c:1305
+msgid "/Edit/_Find..."
+msgstr "/編集/検索(_F)..."
+
+#: src/cong-menus.c:1306
+msgid "/Edit/Find Ne_xt"
+msgstr "/編集/次を検索(_X)"
+
+#: src/cong-menus.c:1307
+msgid "/Edit/Find Pre_vious"
+msgstr "/編集/前を検索(_V)"
+
+#: src/cong-menus.c:1308
+msgid "/Edit/R_eplace..."
+msgstr "/編集/置換(_E)..."
+
+#: src/cong-menus.c:1310
+msgid "/Edit/_Insert..."
+msgstr "/編集/挿入(_I)..."
+
+#: src/cong-menus.c:1313
+msgid "/Edit/View _Source"
+msgstr "/編集/ソースを閲覧(_S)"
+
+#: src/cong-menus.c:1316 src/cong-menus.c:1359
+msgid "/Debug"
+msgstr "/デバッグ"
+
+#: src/cong-menus.c:1317 src/cong-menus.c:1360
+msgid "/Debug/Begin self-test of error-reporting system..."
+msgstr "/デバッグ/エラーレポートシステムの自己診断を開始..."
+
+#: src/cong-menus.c:1318 src/cong-menus.c:1361
+msgid "/Debug/Document Types"
+msgstr "/デバッグ/文書型"
+
+#: src/cong-menus.c:1319
+msgid "/Debug/Transform DocBook to HTML"
+msgstr "/デバッグ/DocBook を HTML に変換"
+
+#: src/cong-menus.c:1320
+msgid "/Debug/Transform DocBook to XHTML"
+msgstr "/デバッグ/DocBook を XHTMLに変換"
+
+#: src/cong-menus.c:1321
+msgid "/Debug/Transform DocBook to HTML Help"
+msgstr "/デバッグ/DocBook を HTML ヘルプに変換"
+
+#: src/cong-menus.c:1322
+msgid "/Debug/Transform DocBook to Java Help"
+msgstr "/デバッグ/DocBook を Java ヘルプに変換"
+
+#: src/cong-menus.c:1323
+msgid "/Debug/Transform DocBook to FO"
+msgstr "/デバッグ/DocBook を FO に変換"
+
+#: src/cong-menus.c:1325
+msgid "/Debug/Preview XSL:FO"
+msgstr "/デバッグ/XSL FO を閲覧"
+
+#: src/cong-menus.c:1327
+msgid "/Debug/DTD"
+msgstr "/デバッグ/DTD"
+
+#: src/cong-menus.c:1328 src/cong-menus.c:1362
+msgid "/Debug/Dialog"
+msgstr "/デバッグ/ダイアログ"
+
+#: src/cong-menus.c:1329 src/cong-menus.c:1363
+msgid "/Debug/Progress Checklist"
+msgstr "/デバッグ/チェックリストの進捗"
+
+#: src/cong-menus.c:1330
+msgid "/Debug/Document Message Log"
+msgstr "/デバッグ/文書メッセージログ"
+
+#: src/cong-menus.c:1331
+msgid "/Debug/Document Signal Log"
+msgstr "/デバッグ/文書シグナルログ"
+
+#: src/cong-menus.c:1332 src/cong-menus.c:1364
+msgid "/Debug/Information Alert"
+msgstr "/デバッグ/情報アラート"
+
+#: src/cong-menus.c:1333 src/cong-menus.c:1365
+msgid "/Debug/Glade Test"
+msgstr "/デバッグ/Glade テスト"
+
+#: src/cong-menus.c:1334
+msgid "/Debug/Insert XML Fragment"
+msgstr "/デバッグ/XML の一部を挿入"
+
+#: src/cong-menus.c:1335
+msgid "/Debug/Command Test"
+msgstr "/デバッグ/コマンドテスト"
+
+#: src/cong-menus.c:1338
+msgid "/_Tools"
+msgstr "/ツール(_T)"
+
+#: src/cong-menus.c:1340 src/cong-menus.c:1368
+msgid "/_Help"
+msgstr "/ヘルプ(_H)"
+
+#: src/cong-menus.c:1341 src/cong-menus.c:1369
+msgid "/Help/_Contents"
+msgstr "/ヘルプ/目次(_C)"
+
+#: src/cong-menus.c:1342 src/cong-menus.c:1370
+msgid "/Help/_About"
+msgstr "/ヘルプ/情報"
+
+#: src/cong-node-properties-dialog.c:246
+msgid "XPath"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:327
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:485
+msgid "Namespace"
+msgstr "名前空間"
+
+#: src/cong-node-properties-dialog.c:506
+msgid "Raw Attributes"
+msgstr "属性の直接編集"
+
+#: src/cong-node-properties-dialog.c:539
+msgid "Value"
+msgstr "値"
+
+#: src/cong-node-properties-dialog.c:619
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> 要素の属性"
+
+#: src/cong-node-properties-dialog.c:733
+msgid "Text"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:785
+msgid "Choice"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:820
+msgid "Optional"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:836
+msgid "Zero or more"
+msgstr "0 個以上"
+
+#: src/cong-node-properties-dialog.c:852
+msgid "One or more"
+msgstr "1 個以上"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:908
+msgid "Valid Content"
+msgstr "妥当な内容"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:933
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> 要素の内容モデル"
+
+#: src/cong-node-properties-dialog.c:1055
+#: src/cong-node-properties-dialog.c:1142
+msgid "DTD"
+msgstr "DTD"
+
+#: src/cong-overview-view.c:198
+msgid "Unknown data"
+msgstr ""
+
+#: src/cong-parser-error.c:179
+#, c-format
+msgid "Parse errors loading %s"
+msgstr ""
+
+#: src/cong-parser-error.c:187
+msgid "_Retry"
+msgstr ""
+
+#: src/cong-parser-error.c:266
+msgid "Line Number"
+msgstr ""
+
+#: src/cong-parser-error.c:328
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr ""
+
+#: src/cong-parser-error.c:336
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+
+#: src/cong-parser-error.c:337
+msgid "Show Details"
+msgstr ""
+
+#: src/cong-plugin.c:397 src/cong-plugin.c:433
+msgid "Conglomerate could not find display information for the new file"
+msgstr ""
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: src/cong-plugin.c:832
+#, c-format
+msgid "<%s> property dialog"
+msgstr ""
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: src/cong-plugin.c:835
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr ""
+
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
+msgid "Open document"
+msgstr "文書を開く"
+
+#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
+msgid "New document"
+msgstr "文書を新規作成"
+
+#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
+msgid "Save document"
+msgstr "文書を保存"
+
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
+msgid "Undo"
+msgstr "元に戻す"
+
+#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
+msgid "Redo"
+msgstr "やり直し"
+
+#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
+#: src/xmledit.c:43
+msgid "Cut"
+msgstr "切り取り"
+
+#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
+msgid "Copy"
+msgstr "コピー"
+
+#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
+#: src/xmledit.c:166
+msgid "Paste"
+msgstr "貼り付け"
+
+#: src/cong-primary-window.c:520
+msgid "Overview"
+msgstr "概要"
+
+#: src/cong-primary-window.c:530
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: src/cong-primary-window.c:539
+msgid "Raw XML"
+msgstr ""
+
+#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr ""
+
+#: src/cong-primary-window.c:770
+#, c-format
+msgid "%s (modified) - %s"
+msgstr ""
+
+#: src/cong-util.c:317 src/plugin-docbook.c:1015
+msgid "Printing XSL Formatting Objects"
+msgstr ""
+
+#: src/cong-util.c:361
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr ""
+
+#: src/cursor.c:99
+#, c-format
+msgid "Split <%s> element"
+msgstr ""
+
+#: src/plugin-admonition.c:59
+msgid "Admonition"
+msgstr ""
+
+#: src/plugin-admonition.c:60
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr ""
+
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
+msgid "Cleanup XML Source"
+msgstr "XML ソースを整理する"
+
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr "文書の XML ソースを整理し、コードエディタで読みやすくする"
+
+#: src/plugin-cleanup-source.c:433
+msgid "_Clean the XML Source"
+msgstr "XML ソースを整理(_C)"
+
+#: src/plugin-convert-case.c:117
+msgid "Export as \"lower case\" XML"
+msgstr "\"小文字\" の XML として書き出し"
+
+#: src/plugin-convert-case.c:118
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+
+#: src/plugin-docbook.c:191
+msgid "Text of the article goes here"
+msgstr ""
+
+#: src/plugin-docbook.c:201
+msgid "Untitled Article"
+msgstr ""
+
+#: src/plugin-docbook.c:244
+msgid "Text of the first chapter goes here"
+msgstr ""
+
+#: src/plugin-docbook.c:254
+msgid "Untitled Book"
+msgstr ""
+
+#: src/plugin-docbook.c:293
+msgid "Untitled Set of Documents"
+msgstr ""
+
+#: src/plugin-docbook.c:929
+msgid "Exporting PDF file"
+msgstr "PDF ファイルの書き出し"
+
+#: src/plugin-docbook.c:933 src/plugin-docbook.c:1013
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr ""
+
+#: src/plugin-docbook.c:935
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr ""
+
+#: src/plugin-docbook.c:948 src/plugin-fo.c:72
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr ""
+
+#: src/plugin-docbook.c:1009
+msgid "Printing DocBook file"
+msgstr "DocBook ファイルを印刷中"
+
+#: src/plugin-docbook.c:1311
+msgid "DocBook Article"
+msgstr "DocBook Article"
+
+#: src/plugin-docbook.c:1312
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:1319
+msgid "DocBook Book"
+msgstr ""
+
+#: src/plugin-docbook.c:1320
+msgid "Create a book, using the \"DocBook\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:1327
+msgid "DocBook Set"
+msgstr ""
+
+#: src/plugin-docbook.c:1328
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:1336
+msgid "Import text as a DocBook article"
+msgstr "テキストを DocBook article として読み込み"
+
+#: src/plugin-docbook.c:1337
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr ""
+
+#: src/plugin-docbook.c:1354
+msgid "Export DocBook as HTML"
+msgstr "DocBook を HTML として書き出し"
+
+#: src/plugin-docbook.c:1355
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr ""
+
+#: src/plugin-docbook.c:1362
+msgid "Export DocBook as PDF"
+msgstr "DocBook を PDF として書き出し"
+
+#: src/plugin-docbook.c:1363
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr ""
+
+#: src/plugin-docbook.c:1370
+msgid "Export DocBook as XSL:FO"
+msgstr "DocBook を XSL FO として書き出し"
+
+#: src/plugin-docbook.c:1371
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+
+#: src/plugin-docbook.c:1379
+msgid "Print DocBook"
+msgstr "DocBook を印刷"
+
+#: src/plugin-docbook.c:1388
+msgid "Generic DocBook property dialog"
+msgstr ""
+
+#: src/plugin-docbook.c:1389
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr ""
+
+#: src/plugin-docbook.c:1408
+msgid "Promote Section"
+msgstr ""
+
+#: src/plugin-docbook.c:1409
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr ""
+
+#: src/plugin-docbook.c:1411
+msgid "Promote"
+msgstr ""
+
+#: src/plugin-docbook.c:1412 src/plugin-docbook.c:1413
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr ""
+
+#: src/plugin-docbook.c:1419
+msgid "Demote Section"
+msgstr ""
+
+#: src/plugin-docbook.c:1420
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr ""
+
+#: src/plugin-docbook.c:1422
+msgid "Demote"
+msgstr ""
+
+#: src/plugin-docbook.c:1423 src/plugin-docbook.c:1424
+msgid "Demote the section to a lower organisational level within the document"
+msgstr ""
+
+#: src/plugin-dtd.c:83
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr ""
+
+#: src/plugin-dtd.c:84
+#, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr ""
+
+#: src/plugin-dtd.c:159
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr ""
+
+#: src/plugin-dtd.c:160
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr ""
+
+#: src/plugin-dtd.c:167
+msgid "Convert DTD into a Relax NG schema"
+msgstr ""
+
+#: src/plugin-dtd.c:168
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr ""
+
+#: src/plugin-dtd.c:175
+msgid "Convert DTD into W3C XML Schema"
+msgstr ""
+
+#: src/plugin-dtd.c:176
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr ""
+
+#: src/plugin-dtd.c:183
+msgid "Convert DTD into a Schematron file"
+msgstr ""
+
+#: src/plugin-dtd.c:184
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr ""
+
+#: src/plugin-dtd.c:191
+msgid "Convert DTD into an Examplotron file"
+msgstr ""
+
+#: src/plugin-dtd.c:192
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr ""
+
+#: src/plugin-fo.c:99
+msgid "Export XSL-FO as PDF"
+msgstr "XSL-FO を PDF として書き出し"
+
+#: src/plugin-fo.c:100
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr ""
+
+#: src/plugin-fo.c:108
+msgid "Print XSL:FO"
+msgstr "XSL FO の印刷"
+
+#: src/plugin-lists.c:59
+msgid "List Member Element"
+msgstr ""
+
+#: src/plugin-lists.c:60
+msgid "An editor node for visualising a member of a list"
+msgstr ""
+
+#: src/plugin-paragraph.c:59
+msgid "Paragraph"
+msgstr ""
+
+#: src/plugin-paragraph.c:60
+msgid "An editor node for visualising a paragraph"
+msgstr ""
+
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr ""
+
+#: src/plugin-random.c:607
+msgid "Random Document"
+msgstr ""
+
+#: src/plugin-random.c:608
+msgid "Create an XML document containing random content."
+msgstr ""
+
+#: src/plugin-save-dispspec.c:133
+msgid "Dump Display Spec"
+msgstr "表示スペックをダンプ"
+
+#: src/plugin-save-dispspec.c:134 src/plugin-save-dispspec.c:137
+#: src/plugin-save-dispspec.c:138
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:136
+msgid "_Dump Display Spec"
+msgstr "表示スペックをダンプ(_D)"
+
+#: src/plugin-save-dispspec.c:144
+msgid "Edit Display Spec"
+msgstr "表示スペックを編集"
+
+#: src/plugin-save-dispspec.c:145 src/plugin-save-dispspec.c:148
+#: src/plugin-save-dispspec.c:149
+msgid "Opens the current display spec as a conglomerate document."
+msgstr ""
+
+#: src/plugin-save-dispspec.c:147
+msgid "_Edit Display Spec"
+msgstr "表示スペックを編集(_E)"
+
+#: src/plugin-sgml.c:36
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr ""
+
+#: src/plugin-sgml.c:115
+msgid "Attempting to run the sgml2xml tool"
+msgstr ""
+
+#: src/plugin-sgml.c:170
+msgid "Importing SGML"
+msgstr "SGML の読み込み中"
+
+#: src/plugin-sgml.c:181
+msgid "Import SGML"
+msgstr "SGML を読み込み"
+
+#: src/plugin-sgml.c:182
+msgid "Import an SGML file, converting to XML."
+msgstr "SGML ファイルを読み込み、XML へ変換"
+
+#: src/plugin-tests.c:55
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+
+#: src/plugin-tests.c:133 src/plugin-tests.c:212
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr ""
+
+#: src/plugin-tests.c:333
+msgid "Unicode Character Reference"
+msgstr ""
+
+#: src/plugin-tests.c:334
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr ""
+
+#: src/plugin-validate.c:98
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr ""
+
+#: src/plugin-validate.c:105
+msgid ""
+"In a future version of Conglomerate we may have a feature that lets you "
+"attach a document type to a document."
+msgstr ""
+
+#: src/plugin-validate.c:125
+#, c-format
+msgid "The document \"%s\" is not valid."
+msgstr ""
+
+#: src/plugin-validate.c:132
+msgid "Click on the \"Details\" button for more information."
+msgstr ""
+
+#: src/plugin-validate.c:133 src/plugin-website.c:480
+msgid "_Details"
+msgstr ""
+
+#: src/plugin-validate.c:147
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr ""
+
+#: src/plugin-validate.c:167
+msgid "Validate Document"
+msgstr "文書を検証"
+
+#: src/plugin-validate.c:168 src/plugin-validate.c:171
+#: src/plugin-validate.c:172
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+
+#: src/plugin-validate.c:170
+msgid "_Validate Document"
+msgstr "文書を検証(_V)"
+
+#: src/plugin-website.c:465
+msgid "Generating website"
+msgstr ""
+
+#: src/plugin-website.c:472
+msgid "Finished generating website."
+msgstr ""
+
+#: src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr ""
+
+#: src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr ""
+
+#: src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr ""
+
+#: src/plugin-website.c:500
+msgid "Generate website"
+msgstr ""
+
+#: src/plugin-website.c:501 src/plugin-website.c:504 src/plugin-website.c:505
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr ""
+
+#: src/plugin-website.c:503
+msgid "Generate _Website"
+msgstr ""
+
+#: src/plugin-xsl.c:316
+msgid "XSL Template Element"
+msgstr ""
+
+#: src/plugin-xsl.c:317
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr ""
+
+#: src/popup.c:131
+msgid "(no description available)"
+msgstr ""
+
+#: src/popup.c:184
+#, c-format
+msgid "Apply span tag: %s"
+msgstr ""
+
+#: src/popup.c:265
+msgid "Remove Span Tag"
+msgstr ""
+
+#: src/popup.c:373
+msgid "Remove span tag"
+msgstr ""
+
+#: src/popup.c:954
+msgid "Delete this item"
+msgstr "このアイテムを削除"
+
+#: src/popup.c:964
+msgid "Add text node after"
+msgstr "直後にテキストノードを追加"
+
+#: src/popup.c:972
+msgid "Add text node before"
+msgstr "直前にテキストノードを追加"
+
+#: src/popup.c:983
+msgid "Set the text"
+msgstr "テキストを設定"
+
+#: src/popup.c:1014
+msgid "Paste into"
+msgstr "ここに貼り付け"
+
+#: src/popup.c:1022
+msgid "Paste before"
+msgstr "直前に貼り付け"
+
+#: src/popup.c:1030
+msgid "Paste after"
+msgstr "直後に貼り付け"
+
+#: src/popup.c:1047
+msgid "New sub-element"
+msgstr ""
+
+#: src/popup.c:1072
+msgid "New sibling"
+msgstr ""
+
+#: src/tree.c:42
+#, c-format
+msgid "Insert sibling: %s"
+msgstr ""
+
+#: src/tree.c:90
+#, c-format
+msgid "Insert child: %s"
+msgstr ""
+
+#: src/xmldata.c:446
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr ""
+
+#. select a dialog element
+#: src/xmldata.c:450
+msgid "Required Children Choices"
+msgstr ""
+
+#: src/xmledit.c:244
+msgid "Paste Under"
+msgstr "直下に貼り付け"
+
+#: src/xmledit.c:287
+msgid "Paste Before"
+msgstr "直前に貼り付け"
+
+#: src/xmledit.c:329
+msgid "Paste After"
+msgstr "直後に貼り付け"
+
+#: src/xmledit.c:368
+msgid "Source View - Conglomerate"
+msgstr ""
+
