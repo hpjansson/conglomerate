@@ -1,5 +1,9 @@
 2003-12-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-xpath-expression.c
+
+	Fixed a missing prototype
+
 	* cong-editor-node-element-span.c
 
 	Fixed warnings

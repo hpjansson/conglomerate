@@ -57,6 +57,10 @@ finalize (GObject *object);
 static void
 dispose (GObject *object);
 
+/* Implementation details: */
+static gchar*
+evaluate_expression (CongXPathExpression *xpath_expression);
+
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongXPathExpression, 
 			cong_xpath_expression,
@@ -180,6 +184,7 @@ dispose (GObject *object)
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
+/* Implementation details: */
 static gchar*
 evaluate_expression (CongXPathExpression *xpath_expression)
 {
