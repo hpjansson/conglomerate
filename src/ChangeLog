@@ -1,5 +1,9 @@
 2004-02-11  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c
+
+	More tidying up
+
 	* cong-util.c, cong-util.h, popup.c
 
 	Tidy up of the popup menu code

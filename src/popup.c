@@ -67,22 +67,10 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget,
 static GtkWidget *structural_tag_popup_init(CongDocument *doc,
 					    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
 					    CongNodePtr x, 
-					    GList *list,
+					    GList *list_of_dispspec_element,
 					    GtkWindow *parent_window);
 
 static GList *sort_menu(GList *list_of_dispspec_element);
-
-
-static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc,
-							gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							CongNodePtr x,
-							GtkWindow *parent_window);
-
-static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
-							    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							    CongNodePtr x,
-							    GtkWindow *parent_window);
-
 
 
 /*
@@ -563,76 +551,13 @@ static GList *sort_menu(GList *list_of_dispspec_element)
 	/* Sort the list into alphabetical order or user-visible names: */
 	return g_list_sort(list_of_dispspec_element, my_compare_func);
 }
-					 
-static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc, 
-							gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							CongNodePtr node,
-							GtkWindow *parent_window) 
-{
-	GList *list;
-
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
-
-	list = cong_document_get_valid_new_next_sibling_elements (doc, 
-								  node, 
-								  CONG_ELEMENT_TYPE_STRUCTURAL);
-
-	if (list) {
-		GtkWidget *popup;
-
-		popup = structural_tag_popup_init(doc, 
-						  callback, 
-						  node, 
-						  list,
-						  parent_window);
 		
-		g_list_free(list);
-		
-		return popup;
-	} else {
-		return NULL;
-	}
-}
-					 
-static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
-							    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							    CongNodePtr node,
-							    GtkWindow *parent_window) 
-{
-	GList *list;
-
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
-
-	list = cong_document_get_valid_new_child_elements (doc,
-							   node, 
-							   CONG_ELEMENT_TYPE_STRUCTURAL);
-
-	if (list) {
-		GtkWidget *popup;
-
-		popup = structural_tag_popup_init(doc, 
-						  callback, 
-						  node, 
-						  list,
-						  parent_window);
-		
-		g_list_free(list);
-
-		return popup;
-	} else {
-		return NULL;
-	}
-}
-
-
-
-static GtkWidget *structural_tag_popup_init(CongDocument *doc,
-					    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-					    CongNodePtr node, 
-					    GList *list,
-					    GtkWindow *parent_window)
+static GtkWidget*
+structural_tag_popup_init (CongDocument *doc,
+			   gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+			   CongNodePtr node, 
+			   GList *list_of_dispspec_element,
+			   GtkWindow *parent_window)
 {
 	CongDispspec *ds;
 	GtkWidget *popup, *item;
@@ -646,22 +571,21 @@ static GtkWidget *structural_tag_popup_init(CongDocument *doc,
 	popup = gtk_menu_new();
 	gtk_menu_set_title(GTK_MENU(popup), "Sub menu");
 
-	list = sort_menu(list);
+	list_of_dispspec_element = sort_menu (list_of_dispspec_element);
 	
-	for (current = g_list_first(list); current; current = g_list_next(current)) {
+	for (current = g_list_first(list_of_dispspec_element); current; current = g_list_next(current)) {
 
-		CongDispspecElement *element = (CongDispspecElement *)(current->data);
+		CongDispspecElement *ds_element = (CongDispspecElement *)(current->data);
 		
 		item = add_item_to_popup(GTK_MENU(popup),
-					 cong_util_make_menu_item_for_dispspec_element(element),
+					 cong_util_make_menu_item_for_dispspec_element(ds_element),
 					 doc,
 					 callback,
 					 node,
 					 parent_window);
 		g_object_set_data(G_OBJECT(item),
 				  "element",
-				  (gpointer)element);
-
+				  (gpointer)ds_element);
 	}
 
 	gtk_widget_show(popup);
@@ -844,6 +768,56 @@ add_node_tool_callback (CongServiceNodeTool *node_tool,
 	}
 }
 
+static void
+make_element_submenu (GtkMenu *tpopup,
+		      const gchar *label,
+		      CongDocument *doc,
+		      CongNodePtr node,
+		      GtkWindow *parent_window,
+		      gint (*callback) (GtkWidget *widget, CongNodePtr tag),
+		      GList *list_of_dispspec_element);
+
+static void
+make_element_submenu (GtkMenu *tpopup,
+		      const gchar *label,
+		      CongDocument *doc,
+		      CongNodePtr node,
+		      GtkWindow *parent_window,
+		      gint (*callback) (GtkWidget *widget, CongNodePtr tag),
+		      GList *list_of_dispspec_element)
+{
+	GtkWidget *item;
+	
+	item = add_item_to_popup(tpopup,
+				 cong_util_make_menu_item (label,
+							   NULL, /* FIXME:  ought to have a tooltip */
+							   NULL), /* FIXME:  ought to have an icon */
+				 doc,
+				 NULL,
+				 node,
+				 parent_window);
+
+	if (list_of_dispspec_element) {
+		GtkWidget *sub_popup = structural_tag_popup_init (doc, 
+								  callback, 
+								  node, 
+								  list_of_dispspec_element,
+								  parent_window);
+		gtk_menu_item_set_submenu (GTK_MENU_ITEM(item), 
+					   sub_popup);
+	} else {
+		gtk_widget_set_sensitive (item, FALSE);
+	}	
+}
+
+
+		      
+		      
+		      
+
+
+
+
 
 GtkWidget* cong_ui_popup_init(CongDocument *doc, 
 			      CongNodePtr node,
@@ -961,53 +935,38 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 
 	cong_util_add_menu_separator(GTK_MENU(tpopup));
 
+
 	/* The "New Sub-element" submenu: */
 	{
-		GtkWidget *item;
-		GtkWidget *sub_popup;
-
-		item = add_item_to_popup(tpopup,
-					 cong_util_make_menu_item (_("New sub-element"),
-								   NULL, /* FIXME:  ought to have a tooltip */
-								   NULL), /* FIXME:  ought to have an icon */
-					 doc,
-					 NULL,
-					 node,
-					 parent_window);
-		
-		sub_popup = new_sub_element_structural_tag_popup_init(doc, 
-								      tree_new_sub_element, 
-								      node, 
-								      parent_window);
-		if (sub_popup) {
-			gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
-		} else {
-			gtk_widget_set_sensitive (item, FALSE);
+		GList *list_of_dispspec_element = cong_document_get_valid_new_child_elements (doc,
+											      node, 
+											      CONG_ELEMENT_TYPE_STRUCTURAL);
+		make_element_submenu (tpopup,
+				      _("New sub-element"),
+				      doc,
+				      node,
+				      parent_window,
+				      tree_new_sub_element,
+				      list_of_dispspec_element);
+		if (list_of_dispspec_element) {
+			g_list_free (list_of_dispspec_element);
 		}
 	}
 		
 	/* The "New sibling" submenu: */
 	{
-		GtkWidget *item;
-		GtkWidget *sub_popup;
-
-		item = add_item_to_popup(tpopup,
-					 cong_util_make_menu_item (_("New sibling"),
-								   NULL, /* FIXME:  ought to have a tooltip */
-								   NULL), /* FIXME:  ought to have an icon */
-					 doc,
-					 NULL,
-					 node,
-					 parent_window);
-		
-		sub_popup = new_sibling_structural_tag_popup_init(doc, 
-								  tree_new_sibling, 
-								  node, 
-								  parent_window);
-		if (sub_popup) {
-			gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
-		} else {
-			gtk_widget_set_sensitive (item, FALSE);
+		GList *list_of_dispspec_element = cong_document_get_valid_new_next_sibling_elements (doc, 
+												     node, 
+												     CONG_ELEMENT_TYPE_STRUCTURAL);
+		make_element_submenu (tpopup,
+				      _("New sibling"),
+				      doc,
+				      node,
+				      parent_window,
+				      tree_new_sibling,
+				      list_of_dispspec_element);
+		if (list_of_dispspec_element) {
+			g_list_free (list_of_dispspec_element);
 		}
 	}
 
