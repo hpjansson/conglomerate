@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-03 02:40+0100\n"
-"PO-Revision-Date: 2004-11-03 13:19+0100\n"
+"POT-Creation-Date: 2004-11-09 10:39+0100\n"
+"PO-Revision-Date: 2004-11-09 14:23+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -549,7 +549,7 @@ msgstr "Poznámka"
 
 #: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
-#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:68
 msgid "Paragraph"
 msgstr "Odstavec"
 
@@ -975,7 +975,8 @@ msgstr "Novinky &quot;Kernel Traffic&quot;"
 msgid ""
 "A newsletter tracking the technical development of a project within the Free/"
 "Open Source Software world"
-msgstr "Novinky sledující technický vývoj projektu ve světě Free/Open Source Software"
+msgstr ""
+"Novinky sledující technický vývoj projektu ve světě Free/Open Source Software"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:4
 msgid "Block Quote"
@@ -1933,39 +1934,39 @@ msgstr "Nahradit _vše"
 msgid "Find"
 msgstr "Hledat"
 
-#: src/cong-editor-node-text.c:984
+#: src/cong-editor-node-text.c:898
 msgid "Select word"
 msgstr "Vybrat slovo"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:923
 msgid "Move cursor"
 msgstr "Přesunout kurzor"
 
-#: src/cong-editor-node-text.c:1095
+#: src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
-#: src/cong-editor-widget3.c:260
+#: src/cong-editor-widget3.c:268
 msgid "Expander Size"
 msgstr "Velikost rozbalovače"
 
-#: src/cong-editor-widget3.c:261
+#: src/cong-editor-widget3.c:269
 msgid "Size of the expander arrow"
 msgstr "Velikost šipky rozbalovače"
 
-#: src/cong-editor-widget3.c:745
+#: src/cong-editor-widget3.c:735
 msgid "Input Method"
 msgstr "Vstupní metoda"
 
-#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
+#: src/cong-editor-widget3.c:865 src/cong-editor-widget3.c:1396
 msgid "Typing"
 msgstr "Psaní"
 
-#: src/cong-editor-widget3.c:1289
+#: src/cong-editor-widget3.c:1297
 msgid "Cursor Movement"
 msgstr "Pohyb kurzoru"
 
-#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
+#: src/cong-editor-widget3.c:1337 src/cong-editor-widget3.c:1350
 msgid "Delete Selection"
 msgstr "Odstranit výběr"
 
@@ -2756,7 +2757,7 @@ msgstr "U_končit"
 
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1503
-msgid "Prefere_nces"
+msgid "Pr_eferences"
 msgstr "Nas_tavení"
 
 #. Actions found in Help menu:
@@ -3061,11 +3062,11 @@ msgstr "Soubory XML"
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: src/plugin-admonition.c:76
+#: src/plugin-admonition.c:77
 msgid "Admonition"
 msgstr "Upozornění"
 
-#: src/plugin-admonition.c:77
+#: src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "Uzel editoru pro zobrazení tipů, varování atd"
 
@@ -3382,15 +3383,15 @@ msgstr "Vygenerovat soubor PDF z informací XSL:FO"
 msgid "Print XSL:FO"
 msgstr "Vytisknout XSL:FO"
 
-#: src/plugin-lists.c:76
+#: src/plugin-lists.c:77
 msgid "List Member Element"
 msgstr "Element položky seznamu"
 
-#: src/plugin-lists.c:77
+#: src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
 msgstr "Uzel editoru pro zobrazení položky seznamu"
 
-#: src/plugin-paragraph.c:68
+#: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "Uzel editoru pro zobrazení odstavce"
 
