@@ -629,7 +629,12 @@ on_signal_selection_change_notify_after (CongDocument *doc,
 		
 		g_free (markup);
 
-		cong_editor_node_line_regeneration_required (CONG_EDITOR_NODE(editor_node_text));
+		/* The change to the markup should only affect the colours of the text hence we don't need to regenerate the lines; we only need to
+		   ensure all the fragments get redrawn. 
+
+		   We don't have any way of getting at the specific areas, so redraw the entire widget for now:
+		*/		
+		gtk_widget_queue_draw (GTK_WIDGET(cong_editor_node_get_widget (CONG_EDITOR_NODE (editor_node_text))));
 	}
 }
 

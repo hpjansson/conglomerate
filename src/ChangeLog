@@ -1,5 +1,13 @@
+2003-09-21  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-text.c
+
+	Optimisation of handling for selection changes
+
 2003-09-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	--- Version 0.7.2 ---
+	
 	* cong-dialog.c, cong-dialog.h, cong-file-export.c, cong-file-properties.c, cong-menus.c, cong-node-properties-dialog.c
 
 	Packing fixes for CongDialog; a new tab in node properties dialog listing DTD attributes.
