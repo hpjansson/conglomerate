@@ -14,6 +14,9 @@ CODING BEFORE RELEASE
 - sort out font crash
 - improve the configuration tests
 - remove the preprocessor cruft (the old unused versions of code)
+- update AUTHORS
+- update AM_INIT_AUTOMAKE in configure.in
+- add an about dialog box which has a VERSION
 
 OTHER JOBS BEFORE RELEASE
 - get the website more up-to-date
