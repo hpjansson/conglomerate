@@ -1,5 +1,9 @@
 2003-08-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c
+
+	Big optimisation: only regenerate markup (and the subsequent activity) for selection changes that are significant to the result
+
 	* cong-editor-area-text-fragment.c
 
 	Cursor is now visible when in right-most position within a run of text

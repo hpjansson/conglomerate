@@ -38,13 +38,25 @@
 
 #define PRIVATE(x) ((x)->private)
 
+typedef struct CongEditorNodeTextSelectionState CongEditorNodeTextSelectionState;
+
+struct CongEditorNodeTextSelectionState
+{
+	gboolean is_selection_valid; /* is the nesting correct? */
+	gboolean got_selection_start;
+	gboolean got_selection_end;
+	gint selection_start_original;
+	gint selection_end_original;
+	gint selection_start_stripped;
+	gint selection_end_stripped;
+};
+
 struct CongEditorNodeTextDetails
 {
 	CongTextCache* text_cache;
-
-#if 0
-	CongEditorAreaText *area_text;
-#endif
+	
+	gboolean selection_state_valid;
+	CongEditorNodeTextSelectionState cached_selection_state;
 	
 	gulong handler_id_node_set_text;
 	gulong handler_id_selection_change;
@@ -93,10 +105,14 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 			 gpointer user_data);
 
 /* Internal utilities: */
-const gchar*
+static const gchar*
 get_text_cache_input (CongEditorNodeText *editor_node_text);
 
-gchar*
+/* Returns TRUE if anything has changed */
+static gboolean
+regenerate_selection_state (CongEditorNodeText *editor_node_text);
+
+static gchar*
 generate_markup (CongEditorNodeText *editor_node_text);
 
 
@@ -166,6 +182,8 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 	/* Set up our Pango Layout: */
 	PRIVATE(editor_node_text)->pango_layout = pango_layout_new(gtk_widget_get_pango_context (GTK_WIDGET(editor_widget)));
 	
+	regenerate_selection_state (editor_node_text);
+
 	markup = generate_markup (editor_node_text);
 
 	pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
@@ -238,7 +256,6 @@ cong_eel_pango_layout_calc_up (PangoLayout *layout,
 			/* Then the search place is on this line; check to see that we're not on the first line: */
 			if (prev_line) {
 				int x;
-				int index;
 				int trailing;
 				
 				pango_layout_line_index_to_x(line,
@@ -257,6 +274,8 @@ cong_eel_pango_layout_calc_up (PangoLayout *layout,
 		
 		prev_line = line;
 	}
+
+	return FALSE;
 }
 
 gboolean
@@ -277,7 +296,6 @@ cong_eel_pango_layout_calc_down (PangoLayout *layout,
 			/* Then the search place is on this line; check to see that we're not on the last line: */
 			if (line_iter->next) {
 				int x;
-				int index;
 				int trailing;
 				
 				pango_layout_line_index_to_x(line,
@@ -294,6 +312,8 @@ cong_eel_pango_layout_calc_down (PangoLayout *layout,
 			}
 		}
 	}
+
+	return FALSE;
 }
 
 gboolean
@@ -568,6 +588,10 @@ on_signal_set_text_notify_after (CongDocument *doc,
 		cong_text_cache_set_text (PRIVATE(editor_node_text)->text_cache,
 					  get_text_cache_input (editor_node_text));
 
+		
+		PRIVATE(editor_node_text)->selection_state_valid = FALSE;
+		regenerate_selection_state (editor_node_text);
+
 		markup = generate_markup (editor_node_text);
 
 		pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
@@ -592,19 +616,21 @@ on_signal_selection_change_notify_after (CongDocument *doc,
 					 gpointer user_data)
 {
 	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;
-	gchar *markup;
 	
 	g_return_if_fail (IS_CONG_EDITOR_NODE_TEXT(editor_node_text));
 
-	markup = generate_markup (editor_node_text);
+	/* Optimise regeneration of markup so it only happens in the cases where the "local selection" has changed: */
+	if (regenerate_selection_state (editor_node_text)) {
+		gchar *markup = generate_markup (editor_node_text);
 	
-	pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
-				 markup,
-				 -1);
-	
-	g_free (markup);
+		pango_layout_set_markup (PRIVATE(editor_node_text)->pango_layout,
+					 markup,
+					 -1);
+		
+		g_free (markup);
 
-	cong_editor_node_line_regeneration_required (CONG_EDITOR_NODE(editor_node_text));
+		cong_editor_node_line_regeneration_required (CONG_EDITOR_NODE(editor_node_text));
+	}
 }
 
 static gboolean 
@@ -801,7 +827,7 @@ get_flow_type(CongEditorNode *editor_node)
 }
 
 /* Internal utilities: */
-const gchar*
+static const gchar*
 get_text_cache_input (CongEditorNodeText *editor_node_text)
 {
 	return cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
@@ -823,45 +849,108 @@ cong_selection_is_valid (CongSelection *selection)
 }
 #endif
 
-gchar*
-generate_markup (CongEditorNodeText *editor_node_text)
-{
-	gchar *result_markup;
-	CongNodePtr this_node;
-	const gchar *stripped_text;
-	CongSelection *selection;
-	gint selection_start_original;
-	gint selection_end_original;
-	gint selection_start_stripped;
-	gint selection_end_stripped;
-	gboolean got_selection_start;
-	gboolean got_selection_end;
-	
-	g_return_val_if_fail (editor_node_text, NULL);
+static void
+cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state,
+			       CongSelection *selection,
+			       CongNodePtr this_node,
+			       CongTextCache *text_cache);
 
-	this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
-	selection = cong_document_get_selection (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
-	stripped_text = cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache),
+static gboolean
+cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range_a,
+				   const CongEditorNodeTextSelectionState *range_b);
+
+static gchar*
+cong_text_selection_state_generate_markup (CongEditorNodeTextSelectionState *selection_state,
+					   CongSelection *selection,
+					   const gchar *stripped_text);
+
+static void
+cong_text_selection_state_get (CongEditorNodeTextSelectionState *selection_state,
+			       CongSelection *selection,
+			       CongNodePtr this_node,
+			       CongTextCache *text_cache)
+{
+	g_return_if_fail (selection_state);
+	g_return_if_fail (selection);
+	g_return_if_fail (this_node);
+	g_return_if_fail (text_cache);
+
+	selection_state->is_selection_valid = cong_selection_is_valid (selection);
 
 	/* See if we have any selections starting or ending in this node: */
-	got_selection_start = cong_selection_get_start_byte_offset (selection, 
-								    this_node, 
-								    &selection_start_original);
-	got_selection_end = cong_selection_get_end_byte_offset (selection, 
-								this_node, 
-								&selection_end_original);
+	selection_state->got_selection_start = cong_selection_get_start_byte_offset (selection, 
+										     this_node, 
+										     &selection_state->selection_start_original);
+	selection_state->got_selection_end = cong_selection_get_end_byte_offset (selection, 
+										 this_node, 
+										 &selection_state->selection_end_original);
 
-	if (got_selection_start) {
-		got_selection_start = cong_text_cache_convert_original_byte_offset_to_stripped (PRIVATE(editor_node_text)->text_cache,
-												selection_start_original,
-												&selection_start_stripped);
+	if (selection_state->got_selection_start) {
+		selection_state->got_selection_start = cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
+														 selection_state->selection_start_original,
+														 &selection_state->selection_start_stripped);		
+	}
+	if (selection_state->got_selection_end) {
+		selection_state->got_selection_end = cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
+													       selection_state->selection_end_original,
+													       &selection_state->selection_end_stripped);
+	}
+}
 
+static gboolean
+cong_text_selection_state_equals  (const CongEditorNodeTextSelectionState *range_a,
+				   const CongEditorNodeTextSelectionState *range_b)
+{
+	if (range_a->got_selection_end) {
+		if (range_b->got_selection_end) {
+			if (range_a->selection_end_original!=range_b->selection_end_original) {
+				return FALSE;
+			}
+			if (range_a->selection_end_stripped!=range_b->selection_end_stripped) {
+				return FALSE;
+			}
+		} else {
+			return FALSE;
+		}
+	} else {
+		if (range_b->got_selection_end) {
+			return FALSE;
+		}
 	}
-	if (got_selection_end) {
-		got_selection_end = cong_text_cache_convert_original_byte_offset_to_stripped (PRIVATE(editor_node_text)->text_cache,
-											      selection_end_original,
-											      &selection_end_stripped);
+
+	if (range_a->got_selection_start) {
+		if (range_b->got_selection_start) {
+			if (range_a->selection_start_original!=range_b->selection_start_original) {
+				return FALSE;
+			}
+			if (range_a->selection_start_stripped!=range_b->selection_start_stripped) {
+				return FALSE;
+			}
+		} else {
+			return FALSE;
+		}
+	} else {
+		if (range_b->got_selection_start) {
+			return FALSE;
+		}
 	}
+
+	if (range_a->is_selection_valid!=range_b->is_selection_valid) {
+		return FALSE;
+	}
+	
+	return TRUE;
+}
+
+static gchar*
+cong_text_selection_state_generate_markup (CongEditorNodeTextSelectionState *selection_state,
+					   CongSelection *selection,
+					   const gchar *stripped_text)
+{
+	gchar *result_markup;
+
+	g_return_val_if_fail (selection_state, NULL);
+	g_return_val_if_fail (stripped_text, NULL);
 
 	{
 		/* FIXME: get these from theme! */
@@ -875,7 +964,7 @@ generate_markup (CongEditorNodeText *editor_node_text)
 		gchar *within_selection = NULL;
 		gchar *after_selection = NULL;
 
-		if (cong_selection_is_valid (selection)) {
+		if (selection_state->is_selection_valid) {
 			fg_col_selection = "white";
 			bg_col_selection = "black";
 		} else {
@@ -883,30 +972,32 @@ generate_markup (CongEditorNodeText *editor_node_text)
 			bg_col_selection = "red";
 		}
 		
-		if (got_selection_start) {
+		if (selection_state->got_selection_start) {
 
-			before_selection = g_strndup (stripped_text, selection_start_stripped);
+			before_selection = g_strndup (stripped_text, selection_state->selection_start_stripped);
 
-			if (got_selection_end) {
+			if (selection_state->got_selection_end) {
 				
-				g_assert (selection_start_stripped<=selection_end_stripped);
+				g_assert (selection_state->selection_start_stripped<=selection_state->selection_end_stripped);
 
 				/* we've got a self-contained selection within this node, or one that entirely encloses it: */
-				within_selection = g_strndup (stripped_text + selection_start_stripped, selection_end_stripped - selection_start_stripped);
-				after_selection =  g_strdup (stripped_text + selection_end_stripped);
+				within_selection = g_strndup (stripped_text + selection_state->selection_start_stripped, selection_state->selection_end_stripped - selection_state->selection_start_stripped);
+				after_selection =  g_strdup (stripped_text + selection_state->selection_end_stripped);
 			} else {
 				/* we've got a selection that starts in this node but carries on past the end: */
-				within_selection = g_strdup (stripped_text + selection_start_stripped);
+				g_assert (selection_state->selection_start_stripped<=strlen(stripped_text));
+
+				within_selection = g_strdup (stripped_text + selection_state->selection_start_stripped);
 				after_selection =  g_strdup ("");
 				
 			}
 		} else {
 			before_selection = g_strdup ("");
 
-			if (got_selection_end) {
+			if (selection_state->got_selection_end) {
 				/* we've got a selection that starts before this node and carries on past the end: */
-				within_selection = g_strndup (stripped_text,  selection_end_stripped);
-				after_selection = g_strdup (stripped_text + selection_end_stripped);
+				within_selection = g_strndup (stripped_text,  selection_state->selection_end_stripped);
+				after_selection = g_strdup (stripped_text + selection_state->selection_end_stripped);
 			} else {
 				/* no selections present: */
 				within_selection =  g_strdup ("");
@@ -945,4 +1036,67 @@ generate_markup (CongEditorNodeText *editor_node_text)
 	}
 
 	return result_markup;
+	
+}
+
+/* Returns TRUE if anything has changed */
+static gboolean
+regenerate_selection_state (CongEditorNodeText *editor_node_text)
+{
+	CongNodePtr this_node;
+	CongSelection *selection;
+
+	g_return_val_if_fail (editor_node_text, FALSE);
+
+	this_node = cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text));
+	selection = cong_document_get_selection (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
+
+	if (PRIVATE(editor_node_text)->selection_state_valid) {
+		CongEditorNodeTextSelectionState tmp_selection_state;
+
+		cong_text_selection_state_get (&tmp_selection_state,
+					       selection,
+					       this_node,
+					       PRIVATE(editor_node_text)->text_cache);
+
+		if (cong_text_selection_state_equals (&tmp_selection_state,
+						      &PRIVATE(editor_node_text)->cached_selection_state)) {
+			/* Nothing has changed. */
+			return FALSE;
+
+		} else {
+			PRIVATE(editor_node_text)->cached_selection_state = tmp_selection_state;
+			return TRUE;
+		}
+
+	} else {
+		cong_text_selection_state_get (&PRIVATE(editor_node_text)->cached_selection_state,
+					       selection,
+					       this_node,
+					       PRIVATE(editor_node_text)->text_cache);
+
+		PRIVATE(editor_node_text)->selection_state_valid = TRUE;
+
+		return TRUE;
+	}
+	
+}
+
+static gchar*
+generate_markup (CongEditorNodeText *editor_node_text)
+{
+	CongNodePtr this_node;
+	const gchar *stripped_text;
+	CongSelection *selection;
+
+	g_return_val_if_fail (editor_node_text, NULL);
+
+	selection = cong_document_get_selection (cong_editor_node_get_document (CONG_EDITOR_NODE(editor_node_text)));
+	stripped_text = cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache);
+	
+	g_assert (PRIVATE(editor_node_text)->selection_state_valid);
+
+	return cong_text_selection_state_generate_markup (&PRIVATE(editor_node_text)->cached_selection_state,
+							  selection,
+							  stripped_text);
 }
