@@ -648,6 +648,10 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 	gint result;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
+	if (node->parent==NULL) {
+		return NULL;
+	}
+
 	switch (cong_node_type(node)) {
 	default: return NULL;
 	case CONG_NODE_TYPE_ELEMENT:
@@ -686,6 +690,10 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
 	CongDispspec *ds = cong_document_get_dispspec(doc); 
+
+	if (node->parent==NULL) {
+		return NULL;
+	}
 	
 	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node, elements, MAX_ELEMENTS);
 	if (result != -1) {
@@ -720,6 +728,10 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
 	CongDispspec *ds = cong_document_get_dispspec(doc); 
+
+	if (node->parent==NULL) {
+		return NULL;
+	}
 		
 	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node->next, elements, MAX_ELEMENTS);
 	if (result != -1) {
