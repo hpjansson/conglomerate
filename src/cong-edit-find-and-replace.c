@@ -641,6 +641,9 @@ find_next (const CongLocation *start_loc,
 	g_return_val_if_fail (start_loc, FALSE);
 	g_return_val_if_fail (output, FALSE);
 
+	g_return_val_if_fail (start_loc->node, FALSE);
+	g_return_val_if_fail (start_loc->node->content, FALSE);
+
 	/* Search in current node: */
 	if (data->is_search_backwards)
 	{

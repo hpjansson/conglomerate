@@ -1,3 +1,10 @@
+2004-09-09  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-edit-find-and-replace.c: 
+
+	Added some bulletproofing to the "find previous" routine, for the case
+	where the cursor no longer exists
+
 2004-08-31  Douglas Burke <dburke@cfa.harvard.edu>
  
 	* cong-attribute-editor-enumeration.c
