@@ -148,6 +148,43 @@ cong_node_is_element (CongNodePtr node,
 	return FALSE;
 }
 
+gboolean 
+cong_node_is_element_from_set (CongNodePtr node, 
+			       const gchar *ns_uri,
+			       const gchar **local_name_array,
+			       guint num_local_names,
+			       guint *output_index)
+{
+	g_return_val_if_fail (node, FALSE);
+	g_return_val_if_fail (local_name_array, FALSE);
+
+	if (node->type==XML_ELEMENT_NODE) {
+		const gchar *node_ns_uri = cong_node_get_ns_uri (node);
+		guint i;
+
+		if (!cong_util_ns_uri_equality (ns_uri, node_ns_uri)) {
+			return FALSE;
+		}
+
+		for (i=0;i<num_local_names;i++) {
+			g_assert (local_name_array[i]);
+
+			if (0==strcmp (local_name_array[i], node->name)) {
+
+				if (output_index) {
+					*output_index = i;					
+				}
+
+				return TRUE;
+			}
+		}
+	}
+
+	return FALSE;
+	
+}
+
+
 xmlNsPtr
 cong_node_get_ns (CongNodePtr node)
 {

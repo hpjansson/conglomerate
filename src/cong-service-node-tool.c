@@ -64,10 +64,10 @@ cong_service_node_tool_construct (CongServiceNodeTool *tool,
 	return tool;
 }
 
-gboolean 
-cong_node_tool_supports_node (CongServiceNodeTool *tool, 
-			      CongDocument *doc,
-			      CongNodePtr node)
+enum NodeToolFilterResult
+cong_service_node_tool_filter_node (CongServiceNodeTool *tool, 
+				    CongDocument *doc,
+				    CongNodePtr node)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_NODE_TOOL (tool), FALSE);
 	g_return_val_if_fail (doc, FALSE);
@@ -81,17 +81,19 @@ cong_node_tool_supports_node (CongServiceNodeTool *tool,
 }
 
 void 
-cong_node_tool_invoke (CongServiceNodeTool *tool, 
-		       CongPrimaryWindow *primary_window,
-		       CongNodePtr node)
+cong_service_node_tool_invoke (CongServiceNodeTool *tool,
+			       CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_NODE_TOOL (tool));
 	g_return_if_fail (node);
 
 	g_assert (PRIVATE (tool)->action_callback);
 	return PRIVATE (tool)->action_callback (tool, 
-						primary_window, 
+						doc,
 						node, 
+						parent_window,
 						cong_service_tool_get_user_data (CONG_SERVICE_TOOL (tool)));
 }
 

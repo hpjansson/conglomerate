@@ -1,5 +1,9 @@
 2004-02-23  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-node.c, cong-node.h, cong-service-node-tool.c, cong-service-node-tool.h, plugin-docbook.c, plugin-html.c, popup.c
+
+	Finished the implementation of node tools; they now appear in the context menus and work; some simple examples implemented.
+
 	* popup.c
 
 	More cleanups of the popup marshalling code

@@ -35,17 +35,25 @@ G_BEGIN_DECLS
 #define IS_CONG_SERVICE_NODE_TOOL(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_SERVICE_NODE_TOOL_TYPE)
 CONG_DECLARE_CLASS (CongServiceNodeTool, cong_service_node_tool, CongServiceTool)
 
+enum NodeToolFilterResult
+{
+	NODE_TOOL_HIDDEN = 3,
+	NODE_TOOL_INSENSITIVE = 4,
+	NODE_TOOL_AVAILABLE = 5
+};
 
-typedef gboolean 
+typedef enum NodeToolFilterResult
 (*CongServiceNodeToolFilter) (CongServiceNodeTool *node_tool, 
 			      CongDocument *doc, 
 			      CongNodePtr node,
 			      gpointer user_data);
 typedef void 
 (*CongServiceNodeToolActionCallback) (CongServiceNodeTool *tool, 
-				      CongPrimaryWindow *primary_window, 
+				      CongDocument *doc, 
 				      CongNodePtr node,
+				      GtkWindow *parent_window,
 				      gpointer user_data);
+
 CongServiceNodeTool*
 cong_service_node_tool_construct (CongServiceNodeTool *tool,
 				  const gchar *name, 
@@ -70,14 +78,15 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 				CongServiceNodeToolActionCallback action_callback,
 				gpointer user_data);
 
-gboolean 
-cong_node_tool_supports_node (CongServiceNodeTool *node_tool, 
-			      CongDocument *doc,
-			      CongNodePtr node);
-void 
-cong_node_tool_invoke (CongServiceNodeTool *node_tool, 
-		       CongPrimaryWindow *primary_window,
-		       CongNodePtr node);
+enum NodeToolFilterResult
+cong_service_node_tool_filter_node (CongServiceNodeTool *node_tool, 
+				    CongDocument *doc,
+				    CongNodePtr node);
+void
+cong_service_node_tool_invoke (CongServiceNodeTool *node_tool, 
+			       CongDocument *doc,
+			       CongNodePtr node,
+			       GtkWindow *parent_window);
 
 void
 cong_plugin_for_each_node_tool (CongPlugin *plugin, 

@@ -104,14 +104,31 @@ enum CongNodeType cong_node_type(CongNodePtr node);
  *
  * Handy method for deciding if you've found a element with the given name, as opposed to text nodes, comments, elements with other names etc.
  *
- * Misnamed; it should be called cong_node_is_element
- *
  * Returns: TRUE if the node is an element with the correct name, FALSE otherwise
  */
 gboolean 
 cong_node_is_element (CongNodePtr node, 
 		      const gchar *ns_uri, 
 		      const gchar *local_name);
+
+/** 
+ * cong_node_is_element_from_set:
+ *
+ * @ns_uri: URI of the namespace shared by all the element in the search set
+ * @local_name_array: array of element local names within the namespace
+ * @num_local_names: size of search array
+ * @output_index: pointer to write index of result to, or NULL if you don't care
+ *
+ * Handy method for deciding if you've found a element with one of the given names in the set, as opposed to text nodes, comments, elements with other names etc.
+ *
+ * Returns: TRUE if the node is an element with the correct name, FALSE otherwise
+ */
+gboolean 
+cong_node_is_element_from_set (CongNodePtr node, 
+			       const gchar *ns_uri,
+			       const gchar **local_name_array,
+			       guint num_local_names,
+			       guint *output_index);
 
 xmlNsPtr
 cong_node_get_ns (CongNodePtr node);
