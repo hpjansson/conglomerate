@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-08-16  David Malcolm
 
+	* cong-location.c, global.h, popup.c, select.c, xmledit.c, xmlview.c
+
+	Moved struct selection members t0,t1,c0,c1 over to using struct cong_location.
+
 	* Makefile
 
 	Added cong-location.o to objects, and libxml-2.0 to packages.
