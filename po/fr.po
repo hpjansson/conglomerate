@@ -2,14 +2,14 @@
 # Copyright (C) 2004 Conglomerate developers
 # This file is distributed under the GPL license.
 # Alban Browaeys <albanbrowaeys@oreka.com>
-# Michèle Garoche <michele.garoche@easyconnect.fr>
+# Michèle Garoche <michele.garoche@easyconnect.fr>, 2004
 # next translator
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-08-15 19:52+0200\n"
-"PO-Revision-Date: 2004-08-13 18:41+0200\n"
+"POT-Creation-Date: 2004-08-18 02:28+0200\n"
+"PO-Revision-Date: 2004-08-18 02:36+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -694,13 +694,17 @@ msgstr "Fin d'XInclude"
 msgid "Select %s"
 msgstr "Sélectionner %s"
 
-#: src/cong-dom-view.c:225
+#: src/cong-dom-view.c:224
 msgid "UNKNOWN"
 msgstr "INCONNU"
 
-#: src/cong-dom-view.c:252
+#: src/cong-dom-view.c:251
 msgid "Text:"
 msgstr "Texte :"
+
+#: src/cong-dom-view.c:257
+msgid "CDATA:"
+msgstr "Données textuelles"
 
 #: src/cong-edit-find-and-replace.c:98
 #, c-format
@@ -1422,19 +1426,19 @@ msgstr "Associer à la DTD"
 msgid "Save XML as..."
 msgstr "Enregistrer XML sous..."
 
-#: src/cong-location.c:393 src/cong-location.c:414
+#: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
 msgstr "Fusionner les balises"
 
-#: src/cong-location.c:465
+#: src/cong-location.c:468
 msgid "Delete character"
 msgstr "Supprimer le caractère"
 
-#: src/cong-location.c:1057
+#: src/cong-location.c:1060
 msgid "Calculating previous page"
 msgstr "Construction de la page précédente"
 
-#: src/cong-location.c:1080
+#: src/cong-location.c:1083
 msgid "Calculating next page"
 msgstr "Construction de la page suivante"
 
