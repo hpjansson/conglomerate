@@ -67,6 +67,7 @@ conglomerate_SOURCES =      \
   cong-editor-widget-impl.h \
   cong-editor-widget3-impl.h \
   cong-eel.h                \
+  cong-enum-mapping.h       \
   cong-error-dialog.h       \
   cong-fake-plugin-hooks.h  \
   cong-font.h               \
@@ -142,6 +143,7 @@ conglomerate_SOURCES =      \
   cong-editor-widget3.c     \
   cong-eel.c                \
   cong-element-editor.c     \
+  cong-enum-mapping.c       \
   cong-error-dialog.c       \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
@@ -152,6 +154,7 @@ conglomerate_SOURCES =      \
   cong-file-export.c        \
   cong-file-import.c        \
   cong-file-print.c         \
+  cong-file-properties.c    \
   cong-font.c               \
   cong-graph.c              \
   cong-location.c           \

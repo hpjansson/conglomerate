@@ -1,3 +1,9 @@
+2003-09-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-enum-mapping.c, cong-enum-mapping.h, cong-file-properties.c, cong-menus.c, Makefile.am
+
+	New files: Mapping between strings and enum values; File->Properties dialog split from cong-menus.c
+
 2003-09-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c
