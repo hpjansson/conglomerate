@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-14 14:13+0200\n"
-"PO-Revision-Date: 2004-08-04 18:18+0200\n"
+"PO-Revision-Date: 2004-08-13 18:41+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1512,14 +1512,12 @@ msgstr "_Aide"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1480
-#, fuzzy
 msgid "_New..."
-msgstr "_Nouveau"
+msgstr "_Nouveau..."
 
 #: src/cong-menus.c:1481
-#, fuzzy
 msgid "_Open..."
-msgstr "_Ouvrir"
+msgstr "_Ouvrir..."
 
 #: src/cong-menus.c:1482
 msgid "_Import..."
@@ -1866,9 +1864,8 @@ msgstr ""
 "anciens."
 
 #: src/plugin-docbook.c:220
-#, fuzzy
 msgid "Untitled section"
-msgstr "Livre sans titre"
+msgstr "Section sans titre"
 
 #: src/plugin-docbook.c:227
 msgid "Text of the article goes here"
