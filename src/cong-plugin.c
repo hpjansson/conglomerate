@@ -1059,17 +1059,17 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 
 void cong_ui_transform_doc_to_uri(CongDocument *doc,
 				  const gchar *stylesheet_filename,
-				  const gchar *uri,
+				  const gchar *string_uri,
 				  GtkWindow *toplevel_window)
 {
 	xmlDocPtr doc_ptr;
-	GnomeVFSURI *file_uri;
+	GnomeVFSURI *vfs_uri;
 	GnomeVFSResult vfs_result;
 	GnomeVFSFileSize file_size;
 
 	g_return_if_fail(doc);
 	g_return_if_fail(stylesheet_filename);
-	g_return_if_fail(uri);
+	g_return_if_fail(string_uri);
 
 	/* FIXME:  need some kind of feedback e.g. a busy cursor */
 
@@ -1078,15 +1078,15 @@ void cong_ui_transform_doc_to_uri(CongDocument *doc,
 					toplevel_window);
 
 	if (doc_ptr) {
-		file_uri = gnome_vfs_uri_new(uri);
+		vfs_uri = gnome_vfs_uri_new(string_uri);
 	
 		vfs_result = cong_vfs_save_xml_to_uri (doc_ptr, 
-						       file_uri,	
+						       vfs_uri,	
 						       &file_size);
 		
 		if (vfs_result != GNOME_VFS_OK) {
 			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
-											 file_uri, 
+											 string_uri, 
 											 vfs_result, 
 											 &file_size);
 			
@@ -1094,36 +1094,33 @@ void cong_ui_transform_doc_to_uri(CongDocument *doc,
 			gtk_widget_destroy(GTK_WIDGET(dialog));
 		}
 		
-		gnome_vfs_uri_unref(file_uri);
+		gnome_vfs_uri_unref(vfs_uri);
 
 		xmlFreeDoc(doc_ptr);
 	}
 }
 
 /* Handy methods for "Import" methods; doing the necessary UI hooks: */
-gboolean cong_ui_load_imported_file_content(const gchar *uri,
+gboolean cong_ui_load_imported_file_content(const gchar *string_uri,
 					    char** buffer,
 					    GnomeVFSFileSize* size,
 					    GtkWindow *parent_window)
 {
 	GnomeVFSResult vfs_result;
 
-	g_return_val_if_fail(uri, FALSE);
+	g_return_val_if_fail(string_uri, FALSE);
 	g_return_val_if_fail(buffer, FALSE);
 	g_return_val_if_fail(size, FALSE);
 
-	vfs_result = cong_vfs_new_buffer_from_file(uri, buffer, size);
+	vfs_result = cong_vfs_new_buffer_from_file(string_uri, buffer, size);
 	
 	if (vfs_result!=GNOME_VFS_OK) {
-		GnomeVFSURI* file_uri = gnome_vfs_uri_new(uri);
-		GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result(parent_window,
-												 file_uri, 
-												 vfs_result);
+		GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result (parent_window,
+												  string_uri, 
+												  vfs_result);
 		
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
-		
-		gnome_vfs_uri_unref(file_uri);
 		
 		return FALSE;
 	}

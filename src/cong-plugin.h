@@ -306,11 +306,6 @@ CongDocument*
 cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 				       GtkWindow *parent_window);
 
-xmlDocPtr cong_ui_parse_buffer(const char* buffer, 
-			       GnomeVFSFileSize size, 
-			       GnomeVFSURI *file_uri, 
-			       GtkWindow *parent_window);
-
 xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 				const gchar *stylesheet_filename,
 				GtkWindow *toplevel_window);

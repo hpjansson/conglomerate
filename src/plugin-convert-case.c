@@ -95,7 +95,7 @@ static void convert_case_exporter_action_callback(CongExporter *exporter, CongDo
 		
 		if (vfs_result != GNOME_VFS_OK) {
 			GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
-											 file_uri, 
+											 uri, 
 											 vfs_result, 
 											 &file_size);
 			

@@ -439,7 +439,7 @@ cong_document_get_filename(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_vfs_split_uri (uri, &filename, &path);
+		cong_vfs_split_vfs_uri (uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -474,7 +474,7 @@ cong_document_get_parent_uri(CongDocument *doc)
 		gchar *path;
 		GnomeVFSURI *uri = gnome_vfs_uri_new(PRIVATE(doc)->url);
 		
-		cong_vfs_split_uri (uri, &filename, &path);
+		cong_vfs_split_vfs_uri (uri, &filename, &path);
 
 		gnome_vfs_uri_unref(uri);
 
@@ -536,10 +536,10 @@ cong_document_save(CongDocument *doc,
 					       &file_size);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure(toplevel_window,
-										 file_uri, 
-										 vfs_result, 
-										 &file_size);
+		GtkDialog* dialog = cong_error_dialog_new_from_file_save_failure (toplevel_window,
+										  filename, 
+										  vfs_result, 
+										  &file_size);
 			
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));

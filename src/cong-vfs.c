@@ -26,6 +26,10 @@
 #include "global.h"
 #include "cong-vfs.h"
 
+#include "cong-error-dialog.h"
+#include "cong-plugin.h"
+#include "cong-parser-error.h"
+
 /*
   A routine that tries to load all the bytes requested from the handle into the buffer and bails out on any failure
  */
@@ -148,6 +152,105 @@ cong_vfs_new_buffer_from_uri (GnomeVFSURI* uri,
 	}
 }
 
+xmlDocPtr
+cong_vfs_load_xml_from_uri (const gchar *string_uri,
+			    GtkWindow *parent_window)
+{
+	xmlDocPtr xml_doc = NULL;
+
+#if 0
+	/* Load using libxml directly: */
+	{
+		xmlDocPtr ret;
+		xmlParserCtxtPtr ctxt;
+		
+		CongParserResult parser_result;
+		
+		g_return_val_if_fail(string_uri, NULL);
+
+#error		
+		parser_result.buffer=buffer;
+		parser_result.size=size;
+		parser_result.issues=NULL;
+		parser_result.parent_window=parent_window;
+		
+		parser_result.string_uri = g_strdup (string_uri);
+		
+		ctxt = xmlCreateFileParserCtxt	(string_uri);
+		if (ctxt == NULL) return(NULL);
+		
+		g_assert(ctxt->sax);
+		ctxt->sax->error=on_sax_error;
+		ctxt->sax->warning=on_sax_warning;
+		ctxt->loadsubset = TRUE; /* try to get DTDs to be loaded */
+		
+		xmlCatalogSetDebug(TRUE);
+		
+		g_assert(global_parser_result==NULL);
+		
+		global_parser_result = &parser_result;
+		
+		xmlParseDocument(ctxt);
+		
+		global_parser_result = NULL;
+		
+		if (ctxt->wellFormed) {
+			ret = ctxt->myDoc;
+		} else {
+			GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error (string_uri,
+												      &parser_result);
+			
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+			
+			/* FIXME: It will often be possible to continue; we should give the user the option of carrying on with what we've got */
+			
+			ret = NULL;
+			xmlFreeDoc(ctxt->myDoc);
+			ctxt->myDoc = NULL;
+			
+		}
+		xmlFreeParserCtxt(ctxt);
+		
+		return(ret);
+	}
+#else
+	/* Load using GnomeVFS: */
+	{
+		GnomeVFSURI* vfs_uri = gnome_vfs_uri_new (string_uri);
+		char* buffer;
+		GnomeVFSFileSize size;
+		GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file (string_uri, 
+									   &buffer, 
+									   &size);		
+		if (vfs_result!=GNOME_VFS_OK) {
+			GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result (parent_window,
+													  string_uri,
+													  vfs_result);
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+
+			gnome_vfs_uri_unref (vfs_uri);
+			
+			return NULL;
+		}
+		
+		g_assert(buffer);
+		
+		/* Parse the file from the buffer: */
+		xml_doc = cong_ui_parse_buffer (buffer, 
+						size, 
+						string_uri, 
+						parent_window);
+		g_free(buffer);
+
+		gnome_vfs_uri_unref (vfs_uri);
+
+		return xml_doc;
+	}
+#endif
+}
+
 GnomeVFSResult
 cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr, 
 			  GnomeVFSURI *file_uri,	
@@ -223,19 +326,19 @@ cong_vfs_get_local_path_from_uri (GnomeVFSURI *uri)
 }
 
 void
-cong_vfs_split_uri (const GnomeVFSURI* uri, 
-		    gchar** filename_alone, 
-		    gchar** path)
+cong_vfs_split_vfs_uri (const GnomeVFSURI* vfs_uri, 
+			gchar** filename_alone, 
+			gchar** path)
 {
 	GnomeVFSURI* parent_uri;
 
-	g_return_if_fail(uri);
+	g_return_if_fail(vfs_uri);
 	g_return_if_fail(filename_alone);
 	g_return_if_fail(path);
 
-	parent_uri = gnome_vfs_uri_get_parent(uri);
+	parent_uri = gnome_vfs_uri_get_parent(vfs_uri);
 
-	*filename_alone=gnome_vfs_uri_extract_short_name(uri);
+	*filename_alone=gnome_vfs_uri_extract_short_name(vfs_uri);
 
 #if 1
 	/* This version seems better when dealing with e.g. http and ftp methods etc: */
@@ -248,9 +351,44 @@ cong_vfs_split_uri (const GnomeVFSURI* uri,
 	}
 #else
 	/* This version seems better when dealing with the "file" method; perhaps we should have a conditional here? */ 
-	*path=gnome_vfs_uri_extract_dirname(uri);
+	*path=gnome_vfs_uri_extract_dirname(vfs_uri);
 #endif
 
 	gnome_vfs_uri_unref(parent_uri);
 
+}
+
+void
+cong_vfs_split_string_uri (const gchar* string_uri,
+			   gchar** filename_alone, 
+			   gchar** path)
+{
+	GnomeVFSURI* vfs_uri;
+
+	g_return_if_fail(string_uri);
+
+	vfs_uri = gnome_vfs_uri_new (string_uri);
+
+	cong_vfs_split_vfs_uri (vfs_uri, 
+				filename_alone, 
+				path);
+	
+	gnome_vfs_uri_unref (vfs_uri);
+}
+
+gchar*
+cong_vfs_extract_short_name (const gchar *string_uri)
+{
+	GnomeVFSURI* vfs_uri;
+	gchar *result;
+
+	g_return_val_if_fail(string_uri, NULL);
+
+	vfs_uri = gnome_vfs_uri_new (string_uri);
+
+	result = gnome_vfs_uri_extract_short_name(vfs_uri);
+	
+	gnome_vfs_uri_unref (vfs_uri);
+
+	return result;
 }

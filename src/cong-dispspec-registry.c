@@ -88,7 +88,7 @@ cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_windo
 	if (vfs_result!=GNOME_VFS_OK) {
 		GtkDialog* dialog = cong_error_dialog_new_from_file_operation_failure(toplevel_window,
 										      _("Conglomerate could not read its registry of document types."),
-										      details.path_uri, 
+										      xds_directory,
 										      vfs_result, 
 										      _("Conglomerate attempted to look at all the files in the location."));
 		cong_error_dialog_run(GTK_DIALOG(dialog));

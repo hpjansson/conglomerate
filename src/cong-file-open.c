@@ -99,43 +99,16 @@ open_document_do (const gchar* doc_name,
 	CongDocument *cong_doc;
 	xmlDocPtr doc = NULL;
 
+	doc = cong_vfs_load_xml_from_uri (doc_name, parent_window);
+
+	if (NULL==doc) {
+		return;
+	}
+
 	/* Use libxml to load the doc: */
 	{
 		GnomeVFSURI* file_uri = gnome_vfs_uri_new(doc_name);
 		gchar *filename_extension;
-
-		/* Load using GnomeVFS: */
-		{
-			char* buffer;
-			GnomeVFSFileSize size;
-			GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file(doc_name, &buffer, &size);
-
-			if (vfs_result!=GNOME_VFS_OK) {
-				GtkDialog* dialog = cong_error_dialog_new_from_file_open_failure_with_vfs_result(parent_window,
-														 file_uri, 
-														 vfs_result);
-			
-				cong_error_dialog_run(GTK_DIALOG(dialog));
-				gtk_widget_destroy(GTK_WIDGET(dialog));
-
-				gnome_vfs_uri_unref(file_uri);
-
-				return;
-			}
-
-			g_assert(buffer);
-
-			/* Parse the file from the buffer: */
-			doc = cong_ui_parse_buffer(buffer, size, file_uri, parent_window);
-
-			g_free(buffer);
-		}
-
-
-		if (NULL==doc) {
-			gnome_vfs_uri_unref(file_uri);
-			return;
-		}
 
 		filename_extension = get_filename_extension (file_uri);
 
@@ -145,7 +118,7 @@ open_document_do (const gchar* doc_name,
 		if (ds==NULL) {
 			gchar *what_failed;
 
-			what_failed = cong_error_what_failed_on_file_open_failure(file_uri, FALSE);
+			what_failed = cong_error_what_failed_on_file_open_failure(doc_name, FALSE);
 
 			ds = query_for_forced_dispspec (what_failed, 
 							doc, 

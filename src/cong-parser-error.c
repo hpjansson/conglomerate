@@ -14,6 +14,7 @@
 #include "cong-error-dialog.h"
 #include "cong-parser-error.h"
 #include "cong-util.h"
+#include "cong-vfs.h"
 
 void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
 {
@@ -142,6 +143,10 @@ void  on_row_activated(GtkTreeView *treeview,
 	}
 }
 
+enum {
+	CONG_PARSER_ERROR_RESPONSE_RETRY = 1
+};
+
 GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 {
 	GtkWidget *dialog;
@@ -165,9 +170,10 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	g_return_val_if_fail(parser_result, NULL);
 
 	g_assert(parser_result);
-	g_assert(parser_result->file_uri);
+	g_assert(parser_result->string_uri);
 
-	filename = gnome_vfs_uri_extract_short_name(parser_result->file_uri);
+	filename = cong_vfs_extract_short_name (parser_result->string_uri);
+
 	title = g_strdup_printf(_("Parse errors loading %s"), filename);
 
 	g_free(filename);
@@ -175,8 +181,12 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	dialog = gtk_dialog_new_with_buttons(title,
 					     parser_result->parent_window,
 					     0,
-					     GTK_STOCK_OK,
-					     GTK_RESPONSE_OK,
+#if 0
+					     _("_Retry"),
+					     CONG_PARSER_ERROR_RESPONSE_RETRY,
+#endif
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
 					     NULL);
 
 	g_free(title);
@@ -306,8 +316,8 @@ void on_parser_error_details(gpointer data)
 }
 
 static GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri, 
-							 CongParserResult *parser_result)
+cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
+							  CongParserResult *parser_result)
 {
 	GtkDialog* dialog = NULL;
 
@@ -317,22 +327,26 @@ cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file
 
 	g_assert(parser_result);
 
-	dialog =  cong_error_dialog_new_from_file_open_failure_with_convenience(parser_result->parent_window,
-										file_uri, 
+	dialog = cong_error_dialog_new_from_file_open_failure_with_convenience (parser_result->parent_window,
+										string_uri, 
 										FALSE,
 										why_failed,
 										_("Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."),
 										_("Show Details"),
 										on_parser_error_details,
 										parser_result);
-
+	
 	g_free(why_failed);
 	g_free(app_name);
 
 	return dialog;
 }
 
-xmlDocPtr cong_ui_parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* file_uri, GtkWindow *parent_window)
+xmlDocPtr 
+cong_ui_parse_buffer (const char* buffer,
+		      GnomeVFSFileSize size, 
+		      const gchar *string_uri,
+		      GtkWindow *parent_window)
 {
 #if 1
 	xmlDocPtr ret;
@@ -341,37 +355,24 @@ xmlDocPtr cong_ui_parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeV
 	CongParserResult parser_result;
 
 	g_return_val_if_fail(buffer, NULL);
-	g_return_val_if_fail(file_uri, NULL);
+	g_return_val_if_fail(string_uri, NULL);
 
 	parser_result.buffer=buffer;
 	parser_result.size=size;
-	parser_result.file_uri=file_uri;
 	parser_result.issues=NULL;
 	parser_result.parent_window=parent_window;
+
+	parser_result.string_uri = g_strdup (string_uri);
 	
-	ctxt = xmlCreateMemoryParserCtxt(buffer, size);
-	if (ctxt == NULL) return(NULL);
-	
-	g_assert(ctxt->sax);
-	ctxt->sax->error=on_sax_error;
-	ctxt->sax->warning=on_sax_warning;
-	ctxt->loadsubset = TRUE; /* try to get DTDs to be loaded */
-
-	xmlCatalogSetDebug(TRUE);
-
-	g_assert(global_parser_result==NULL);
-
-	global_parser_result = &parser_result;
-
-	xmlParseDocument(ctxt);
-
-	global_parser_result = NULL;
+	ctxt = cong_parse_from_memory (buffer, 
+				       size,
+				       &parser_result);
 
 	if (ctxt->wellFormed) {
 		ret = ctxt->myDoc;
 	} else {
-		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error(file_uri,
-											     &parser_result);
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_parser_error (string_uri,
+											      &parser_result);
 	
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
@@ -394,4 +395,35 @@ xmlDocPtr cong_ui_parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeV
 #endif
 
 	
+}
+
+xmlParserCtxtPtr
+cong_parse_from_memory (const char* buffer, 
+			GnomeVFSFileSize size,
+			CongParserResult *parser_result)
+{
+	xmlParserCtxtPtr ctxt;
+
+	g_return_val_if_fail (buffer, NULL);
+	g_return_val_if_fail (parser_result, NULL);
+
+	ctxt = xmlCreateMemoryParserCtxt(buffer, size);
+	if (ctxt == NULL) return(NULL);
+	
+	g_assert(ctxt->sax);
+	ctxt->sax->error=on_sax_error;
+	ctxt->sax->warning=on_sax_warning;
+	ctxt->loadsubset = TRUE; /* try to get DTDs to be loaded */
+
+	xmlCatalogSetDebug(TRUE);
+
+	g_assert(global_parser_result==NULL);
+
+	global_parser_result = parser_result;
+
+	xmlParseDocument(ctxt);
+
+	global_parser_result = NULL;
+
+	return ctxt;
 }

@@ -58,25 +58,40 @@ cong_vfs_new_buffer_from_file (const char* filename,
  * Returns:
 */
 GnomeVFSResult
-cong_vfs_new_buffer_from_uri (GnomeVFSURI* uri, 
+cong_vfs_new_buffer_from_uri (GnomeVFSURI *vfs_uri, 
 			      char** buffer, 
 			      GnomeVFSFileSize* size);
 
+xmlDocPtr
+cong_vfs_load_xml_from_uri (const gchar *string_uri,
+			    GtkWindow *parent_window);
+
 GnomeVFSResult
 cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr, 
-			  GnomeVFSURI *file_uri,
+			  GnomeVFSURI *vfs_uri,
 			  GnomeVFSFileSize *output_file_size);
 
 /**
    Convert a URI into a POSIX, path, assuming that this is valid: 
 */
 gchar*
-cong_vfs_get_local_path_from_uri (GnomeVFSURI *uri);
+cong_vfs_get_local_path_from_uri (GnomeVFSURI *vfs_uri);
 
 void
-cong_vfs_split_uri (const GnomeVFSURI* uri, 
-		    gchar** filename_alone, 
-		    gchar** path);
+cong_vfs_split_vfs_uri (const GnomeVFSURI* vfs_uri, 
+			gchar** filename_alone, 
+			gchar** path);
+
+void
+cong_vfs_split_string_uri (const gchar* string_uri,
+			   gchar** filename_alone, 
+			   gchar** path);
+
+/**
+ * Extract a short name from a stringified URI; typically the filename itself, without any path etc
+ */
+gchar*
+cong_vfs_extract_short_name (const gchar *string_uri);
 
 G_END_DECLS
 

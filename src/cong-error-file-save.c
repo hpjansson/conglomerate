@@ -20,7 +20,7 @@
 /* FIXME: i18n! */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 
-					     const GnomeVFSURI* file_uri, 
+					     const gchar* string_uri, 
 					     GnomeVFSResult vfs_result, 
 					     const GnomeVFSFileSize* file_size)
 {
@@ -30,20 +30,22 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	gchar* path;
 	gchar* what_failed_permanent;
 	gchar* what_failed_transient;
+	GnomeVFSURI* vfs_uri;
 	GnomeVFSURI* parent_uri;
 
-	g_return_val_if_fail(file_uri, NULL);
+	g_return_val_if_fail(string_uri, NULL);
 	g_return_val_if_fail(GNOME_VFS_OK!=vfs_result, NULL);
 
 	app_name = cong_error_get_appname();
 
-	cong_vfs_split_uri (file_uri, &filename_alone, &path);
+	cong_vfs_split_string_uri (string_uri, &filename_alone, &path);
 
 	g_assert(filename_alone);
 	g_assert(path);
 
 	/* Get at the parent URI in case it's needed: */
-	parent_uri = gnome_vfs_uri_get_parent(file_uri);
+	vfs_uri = gnome_vfs_uri_new (string_uri);
+	parent_uri = gnome_vfs_uri_get_parent(vfs_uri);
 
 	/* A "what failed" message when the failure is likely to be permanent; this URI won't be saveable */
 	what_failed_permanent = g_strdup_printf(_("%s cannot save \"%s\" to %s."),app_name, filename_alone, path);
@@ -359,7 +361,8 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	g_free(filename_alone);
 	g_free(path);
 
-	gnome_vfs_uri_unref(parent_uri);
+	gnome_vfs_uri_unref (parent_uri);
+	gnome_vfs_uri_unref (vfs_uri);
 
 	g_free(app_name);
 

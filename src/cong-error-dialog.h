@@ -128,58 +128,58 @@ cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_win
 
 /**
  * Routine to manufacture a "what failed" string for when File->Open fails.
- * @vfs_uri:  the URI from which you tried to open the file.
+ * @string_uri:  the stringified URI from which you tried to open the file.
  */
 gchar*
-cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, 
-					    gboolean transient);
+cong_error_what_failed_on_file_open_failure (const gchar *string_uri, 
+					     gboolean transient);
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI from which you tried to open the file.
+ * @string_uri:  the stringified URI from which you tried to open the file.
  */
 GtkDialog*
-cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
-					     const GnomeVFSURI* file_uri, 
-					     gboolean transient, 
-					     const gchar* why_failed, 
-					     const gchar* suggestions);
+cong_error_dialog_new_from_file_open_failure (GtkWindow *parent_window,
+					      const gchar* string_uri, 
+					      gboolean transient, 
+					      const gchar* why_failed, 
+					      const gchar* suggestions);
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI to which you tried to save the file.
+ * @string_uri:  the stringified URI from which you tried to open the file.
  */
 GtkDialog*
-cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_window,
-							      const GnomeVFSURI* file_uri, 
-							      gboolean transient, 
-							      const gchar* why_failed, 
-							      const gchar* suggestions,
-							      const gchar* convenience_label,
-							      void (*convenience_action)(gpointer data),
-							      gpointer convenience_data);
+cong_error_dialog_new_from_file_open_failure_with_convenience (GtkWindow *parent_window,
+							       const gchar* string_uri, 
+							       gboolean transient, 
+							       const gchar* why_failed, 
+							       const gchar* suggestions,
+							       const gchar* convenience_label,
+							       void (*convenience_action)(gpointer data),
+							       gpointer convenience_data);
 
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI to which you tried to save the file.
+ * @string_uri:  the URI from which you tried to open the file.
  * @vfs_result: the error code that occurred.
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
-							     const GnomeVFSURI* file_uri, 
+							     const gchar *string_uri,
 							     GnomeVFSResult vfs_result);
 
 
 /**
  * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.
- * @vfs_uri:  the URI to which you tried to save the file.
+ * @string_uri:  the URI to which you tried to save the file.
  * @vfs_result: the error code that occurred.
  * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
  */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
-					     const GnomeVFSURI* file_uri, 
+					     const gchar *string_uri, 
 					     GnomeVFSResult vfs_result, 
 					     const GnomeVFSFileSize* file_size);
 
@@ -187,7 +187,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
  * cong_error_dialog_new_from_file_operation_failure
  * @parent_window:
  * @what_failed:
- * @file_uri: the URI from which you tried to access file.
+ * @string_uri: the URI from which you tried to access file.
  * @vfs_result:
  * @technical_details:
  * 
@@ -199,7 +199,7 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 						  const gchar *what_failed,
-						  const GnomeVFSURI *file_uri, 
+						  const gchar *string_uri, 
 						  GnomeVFSResult vfs_result, 
 						  const gchar *technical_details);
 /** 
