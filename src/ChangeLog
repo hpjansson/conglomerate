@@ -1,3 +1,9 @@
+2004-10-13  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c: 
+
+	Fixed a stupid bug in cong_document_can_print that made it always return FALSE
+
 2004-10-13  Douglas Burke  <dburke@cfa.harvard.edu>
  
 	* cong-file-export.c, cong-file-print.c, plugin-random.c

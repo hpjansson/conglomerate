@@ -2280,8 +2280,8 @@ callback_can_print (CongServicePrintMethod *print_method,
 {
 	struct can_print_data *print_data = (struct can_print_data*)user_data;
 
-	if (cong_print_method_supports_document(print_method, print_data->doc)) {
-		print_data->doc++;
+	if (cong_print_method_supports_document (print_method, print_data->doc)) {
+		print_data->num_print_methods++;
 	}
 }
 
