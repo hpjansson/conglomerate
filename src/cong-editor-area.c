@@ -759,11 +759,15 @@ cong_editor_area_calc_requisition (CongEditorArea *editor_area,
 				   int width_hint)
 {
 	g_return_val_if_fail (editor_area, 0);
-
-	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
+	
+	if (PRIVATE(editor_area)->is_hidden) {
+	        return 0;
+        } else {
+		return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
 						       editor_area,
 						       calc_requisition, 
 						       (editor_area, orientation, width_hint));
+        }						       
 }
 
 /**

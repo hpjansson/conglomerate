@@ -1,3 +1,9 @@
+2004-08-23  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-editor-area.c: 
+
+	Hidden areas have zero size
+
 2004-08-23  Doug Burke  <dburke@cfa.harvard.edu>
 
 	* cong-editor-area-flow-holder-inlines.c, cong-editor-line-fragments.c, cong-editor-line-fragments.h, cong-editor-node-element-span.c, cong-editor-node-text.c:
