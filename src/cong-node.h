@@ -93,7 +93,8 @@ typedef struct CongSpanEditor CongSpanEditor;
 typedef xmlNodePtr CongNodePtr;
 typedef xmlChar CongXMLChar;
 
-const char* cong_node_name(CongNodePtr node);
+const gchar* cong_node_name(CongNodePtr node);
+const gchar* cong_node_xmlns(CongNodePtr node);
 CongNodePtr cong_node_prev(CongNodePtr node);
 CongNodePtr cong_node_next(CongNodePtr node);
 CongNodePtr cong_node_first_child(CongNodePtr node);
@@ -140,9 +141,10 @@ gboolean cong_node_should_recurse(CongNodePtr node);
 int cong_node_get_length(CongNodePtr node); /* get length of content; does not include the zero terminator (to correspond to the TTREE size field) */
 
 /* Construction: */
-CongNodePtr cong_node_new_element(const char *tagname, CongDocument *doc);
-CongNodePtr cong_node_new_text(const char *text, CongDocument *doc);
-CongNodePtr cong_node_new_text_len(const char *text, int len, CongDocument *doc); /* FIXME: what character type ? */
+CongNodePtr cong_node_new_element(const gchar* xmlns, const gchar *tagname, CongDocument *doc);
+CongNodePtr cong_node_new_element_from_dispspec(CongDispspecElement *element, CongDocument *doc);
+CongNodePtr cong_node_new_text(const gchar *text, CongDocument *doc);
+CongNodePtr cong_node_new_text_len(const gchar *text, int len, CongDocument *doc); /* FIXME: what character type ? */
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void cong_node_free(CongNodePtr node);

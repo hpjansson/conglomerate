@@ -151,7 +151,7 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 	printf("Inserting tag (%s).\n", tag->data);
 #endif
 
-	new_element = cong_node_new_element(cong_dispspec_element_tagname(element), doc);
+	new_element = cong_node_new_element_from_dispspec(element, doc);
 	if (!cong_selection_reparent_all(selection, doc, new_element)) {
 		cong_node_free(new_element);
 	}
@@ -583,8 +583,8 @@ static GtkWidget *structural_tag_popup_init(CongDocument *doc,
 					 node,
 					 parent_window);
 		g_object_set_data(G_OBJECT(item),
-				  "label",
-				  (gpointer)(cong_dispspec_element_tagname(element)));
+				  "element",
+				  (gpointer)element);
 
 	}
 

@@ -717,18 +717,19 @@ static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongDispspec *ds)
 	for (; x->next ; x = cong_node_next(x))
 	{
 		enum CongNodeType node_type = cong_node_type(x);
+		const char *xmlns = cong_node_xmlns(x);
 		const char *name = xml_frag_name_nice(x);
 
-		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
+		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, xmlns, name))
 		{
 			return(cong_node_prev(x));
 		}
 
-		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
+		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, xmlns, name)) {
 			return(cong_node_prev(x));
 		}
 
-		if (CONG_ELEMENT_TYPE_PLUGIN==cong_dispspec_type(ds, name)) {
+		if (CONG_ELEMENT_TYPE_PLUGIN==cong_dispspec_type(ds, xmlns, name)) {
 			return(cong_node_prev(x));
 		}
 	}
@@ -757,17 +758,19 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 
 	while (this_node) {
 		enum CongNodeType node_type;
-		const char *name;
+		const gchar *xmlns;
+		const gchar *name;
 		CongElementEditor *child_editor = NULL;
 		CongNodePtr next_node = this_node->next;
 
 		g_assert(this_node);
 
 		node_type = cong_node_type(this_node);
+		xmlns = cong_node_xmlns(this_node);
 		name = xml_frag_name_nice(this_node);
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT) {
-			CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 			
 			if (element) {
 				if (cong_dispspec_element_is_structural(element)) {
@@ -791,7 +794,7 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 					child_editor = cong_plugin_element_editor_new(editor_widget, this_node, element);
 					next_node = this_node->next;					
 				}
-			}	
+			}
 		} else if (node_type == CONG_NODE_TYPE_TEXT) {
 			CongNodePtr final_node_of_span = get_final_node_of_span_text(this_node, ds);
 
@@ -802,7 +805,13 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 
 		/* If no child editor has been created, create a dummy one: */
 		if (child_editor==NULL) {
-			gchar *message = g_strdup_printf(_("Dummy element for tag <%s>"), this_node->name);
+			gchar *message;
+
+			if (cong_node_xmlns(this_node)) {
+				message = g_strdup_printf(_("Dummy element for tag <%s:%s>"), cong_node_xmlns(this_node), this_node->name);
+			} else {
+				message = g_strdup_printf(_("Dummy element for tag <%s>"), this_node->name);
+			}
 
 			child_editor = cong_dummy_element_editor_new(editor_widget, this_node, message);
 
@@ -830,7 +839,7 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 
 	doc = cong_editor_widget_get_document(widget);
 	ds = cong_document_get_dispspec(doc);
-	element = cong_dispspec_lookup_element(ds, cong_node_name(node));
+	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
 	g_assert(element);
 
 	section_head = g_new0(CongSectionHeadEditor,1);

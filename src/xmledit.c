@@ -48,7 +48,7 @@ void cong_document_cut_selection(CongDocument *doc)
 	
 	if (the_globals.clipboard) cong_node_recursive_delete(NULL, the_globals.clipboard);
 	
-	t = cong_node_new_element("dummy", doc);
+	t = cong_node_new_element(NULL, "dummy", doc);
 
 	cong_selection_reparent_all(selection, doc, t);
 	
@@ -87,7 +87,7 @@ void cong_document_copy_selection(CongDocument *doc)
 		cong_node_recursive_delete(NULL, the_globals.clipboard);
 	}
 
-	t = cong_node_new_element("dummy", doc);
+	t = cong_node_new_element(NULL, "dummy", doc);
 
 	cong_selection_reparent_all(selection, doc, t);
 	the_globals.clipboard = cong_node_recursive_dup(t);
@@ -136,7 +136,7 @@ void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget)
 
 	if (!the_globals.clipboard->children) return;
 	
-	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return;
+	if (cong_dispspec_element_structural(ds, cong_node_xmlns(the_globals.clipboard), xml_frag_name_nice(the_globals.clipboard))) return;
 	
 	if (cong_location_node_type(&curs->location) == CONG_NODE_TYPE_TEXT)
 	{

@@ -64,17 +64,19 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
 #endif
 const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
 
-gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name);
+#if 1
+gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, const gchar *name);
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, const gchar *name);
+gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const gchar *name);
+gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const gchar *name);
+#endif
 
 enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const char* tagname);
+cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
 
 /* New API for getting at elements within a dispspec */
 CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname);
+cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname);
 
 CongDispspecElement*
 cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node);
@@ -90,18 +92,21 @@ cong_dispspec_get_paragraph(CongDispspec *ds);
 /*******************************
    cong_dispspec_element stuff: 
 *******************************/
+/** Get the namespace prefix (if any) */
+const gchar*
+cong_dispspec_element_get_xmlns(CongDispspecElement *element); 
 
 /** Get the tagname in a parser-friendly form */
 const char*
-cong_dispspec_element_tagname(CongDispspecElement* element);
+cong_dispspec_element_tagname(CongDispspecElement *element);
 
 /** Get the name in a user-friendly form */
 const char*
-cong_dispspec_element_username(CongDispspecElement* element);
+cong_dispspec_element_username(CongDispspecElement *element);
 
 /** Get a short user-friendly description of the element */
 const gchar*
-cong_dispspec_element_get_description(CongDispspecElement* element);
+cong_dispspec_element_get_description(CongDispspecElement *element);
 
 /**
  *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf

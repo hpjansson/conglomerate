@@ -281,6 +281,21 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 	return doc->xml_doc->extSubset->ExternalID;
 }
 
+xmlNsPtr
+cong_document_get_nsptr (CongDocument *doc, const gchar *xmlns)
+{
+	xmlNsPtr ns;
+
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(xmlns, NULL);
+
+	ns = xmlSearchNs(doc->xml_doc,
+			 (xmlNodePtr)doc->xml_doc, /* FIXME: is this correct? */
+			 xmlns);
+
+	return ns;
+}
+
 void
 cong_document_save(CongDocument *doc, 
 		   const char* filename, 

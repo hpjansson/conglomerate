@@ -70,6 +70,9 @@ const CongXMLChar*
 cong_document_get_dtd_public_identifier(CongDocument *doc);
 /* NULL if not present */
 
+xmlNsPtr
+cong_document_get_nsptr (CongDocument *doc, const gchar* xmlns);
+
 void
 cong_document_save(CongDocument *doc, 
 		   const char* filename,

@@ -413,8 +413,9 @@ CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 	for ( ; x; x = cong_node_next(x))
 	{
 		enum CongNodeType node_type = cong_node_type(x);
-		const char *name = xml_frag_name_nice(x);
-		CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+		const gchar *xmlns = cong_node_xmlns(x);
+		const gchar *name = xml_frag_name_nice(x);
+		CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 
 		if (element) {
 			if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_is_structural(element)) {
@@ -504,7 +505,7 @@ static gboolean should_appear_in_overview(CongTreeView *cong_tree_view,
 
 	case CONG_NODE_TYPE_ELEMENT:
 		{
-			CongDispspecElement* element = cong_dispspec_lookup_element(cong_view_get_dispspec(CONG_VIEW(cong_tree_view)), node->name);
+			CongDispspecElement* element = cong_dispspec_lookup_node(cong_view_get_dispspec(CONG_VIEW(cong_tree_view)), node);
 			
 			if (element) {
 				switch (cong_dispspec_element_type(element)) {
@@ -602,7 +603,7 @@ static void populate_tree_store_recursive(CongTreeView *cong_tree_view,
 			GdkPixbuf *pixbuf;
 			gchar *text;
 
-			element = cong_dispspec_lookup_element(ds, cong_node_name(node));
+			element = cong_dispspec_lookup_node(ds, node);
 
 			if (element) {
 				const GdkColor *col;
@@ -634,7 +635,13 @@ static void populate_tree_store_recursive(CongTreeView *cong_tree_view,
 				
 			} else {
 				/* Use red for "tag not found" errors: */ 
-				gchar *text = g_strdup_printf("<%s>", node->name);
+				gchar *text;
+
+				if (cong_node_xmlns(node)) {
+					text= g_strdup_printf("<%s:%s>", cong_node_xmlns(node), node->name);
+				} else {
+					text= g_strdup_printf("<%s>", node->name);
+				}
 
 				gtk_tree_store_set (cong_tree_view->private->gtk_tree_store, 
 						    tree_iter,

@@ -178,12 +178,16 @@ static gchar *get_text_for_node(CongNodePtr node)
 		break;
 	case CONG_NODE_TYPE_ELEMENT: 
 		{
-#if 1
 			xmlAttrPtr attr_iter;
 			const gchar* attname_col = cong_ui_get_colour_string(CONG_NODE_TYPE_ATTRIBUTE);
 			const gchar* attval_col = string_colour_string;
 
-			text = g_strdup_printf("<span foreground=\"%s\">&lt;%s", colour_string, cong_node_name(node));
+			if (cong_node_xmlns(node)) {				
+				text = g_strdup_printf("<span foreground=\"%s\">&lt;%s:%s", colour_string, cong_node_xmlns(node), cong_node_name(node));
+			} else {
+				text = g_strdup_printf("<span foreground=\"%s\">&lt;%s", colour_string, cong_node_name(node));
+			}
+
 			
 			/* Add attributes (if any): */
 			for (attr_iter = node->properties; attr_iter; attr_iter=attr_iter->next) {
@@ -192,10 +196,6 @@ static gchar *get_text_for_node(CongNodePtr node)
 				g_free(attribute);
 			}
 			cong_util_append(&text, "&gt;</span>");
-#else
-			text = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>", colour_string, cong_node_name(node));
-#endif
-
 		}
 		break;
 	case CONG_NODE_TYPE_ATTRIBUTE:

@@ -97,7 +97,8 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	CongNodePtr new_element;
 	CongDispspec *ds;
 	CongDispspecElement *para;
-	const char *tagname;
+	const gchar *xmlns;
+	const gchar *tagname;
 	CongDocument *doc;
 
 	g_assert(curs!=NULL);
@@ -120,6 +121,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 #else
 	/* Dodgy hack for now: */
 #if 1
+	xmlns = cong_node_xmlns(curs->location.node->parent);
 	tagname = cong_node_name(curs->location.node->parent);
 #else
 	tagname = "para";
@@ -143,7 +145,7 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	   We need to create an new <para> node as a sibling of the other para, and move the second text node
 	   to below it.
 	*/
-	new_element = cong_node_new_element(tagname, doc);
+	new_element = cong_node_new_element(xmlns, tagname, doc);
 
 	cong_document_node_add_after(doc, new_element, t->parent);
 	cong_document_node_set_parent(doc, curs->location.node, new_element);

@@ -19,8 +19,6 @@
 #include "cong-node.h"
 
 
-#define SUPPORT_OLD_LOADERS 0
-
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
 #define DS_DEBUG_MSG2(x, a) g_message((x), (a))
@@ -39,6 +37,7 @@ struct CongDispspecElementHeaderInfo
 
 struct CongDispspecElement
 {
+	gchar *xmlns;
 	gchar *tagname;
 	gchar *username;
 	gchar *short_desc;
@@ -63,14 +62,20 @@ struct CongDispspecElement
 	struct CongDispspecElement* next;	
 };
 
+struct SearchTreeKey
+{
+	gchar* xmlns;
+	gchar* name;
+};
+
 struct CongDispspec
 {
 	/* Implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
 	CongDispspecElement* last;
 
-	/* We also store a tree of elements, for fast lookup by name: */ 
-	GTree *tree;
+	/* We have a search tree, indexed by SearchTreeKeys */
+	GTree *search_tree; 
 
 	gchar *name;
 	gchar *desc;
@@ -81,16 +86,81 @@ struct CongDispspec
 
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
 
-#if SUPPORT_OLD_LOADERS
-CongDispspecElement*
-cong_dispspec_element_new_from_ttree(TTREE* tt);
-#endif
-
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element);
 
 CongDispspecElement*
-cong_dispspec_element_new(const char* tagname, enum CongElementType type);
+cong_dispspec_element_new(const gchar* xmlns, const gchar* tagname, enum CongElementType type);
+
+
+
+#if 1
+static gint key_compare_func (struct SearchTreeKey *a,
+			      struct SearchTreeKey *b,
+			      gpointer user_data)
+{
+	gint name_test;
+
+	g_assert(a);
+	g_assert(b);
+
+	g_assert(a->name);
+	g_assert(b->name);
+
+	/* I believe the search will be faster if we order by name, then namespace: */
+	name_test = strcmp(a->name, b->name);
+
+	/* Names are different, sort initially on name ordering: */
+	if (name_test!=0) {
+		return name_test;
+	}
+
+	/* Names are the same; continue searching by namespace; order the NULL namespace before all others: */
+	if (NULL == a->xmlns) {
+		if (NULL == b->xmlns) {
+			return 0;
+		} else {
+			return -1; /* a is less than b */
+		}
+	} else {
+		/* "a" has non-NULL namespace: */
+		if (NULL == b->xmlns) {
+			return 1; /* a is greater than b */
+		} else {
+			/* Both have non-NULL namespaces; order based on them: */
+			return strcmp(a->xmlns, b->xmlns);
+		}
+	}
+}
+
+static void key_destroy_func (struct SearchTreeKey *key)
+{
+	g_assert(key);
+
+	if (key->xmlns) {
+		g_free(key->xmlns);
+	}
+
+	g_assert(key->name);
+
+	g_free(key->name);
+
+	g_free(key);
+}
+
+static void value_destroy_func (gpointer data) 
+{
+	g_assert(data);
+
+	/* data is a CongDispspecElement; leave it alone */
+}
+#else
+static gint tree_compare_func(gconstpointer a, gconstpointer b)
+{
+	return strcmp(a,b);
+}
+#endif
+
 
 #if NEW_LOOK
 /* Hackish colour calculations in RGB space (ugh!) */
@@ -182,42 +252,8 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 #endif	
 }
 
-#if SUPPORT_OLD_LOADERS
-CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
-{
-	CongDispspec* ds;
-
-	TTREE* tt = ttree_load((char*)name);
-	if (!tt) {
-		g_warning("Problem loading dispspec file \"%s\"\n", name);
-		return NULL;  /* Invalid displayspec. */
-	}
-
-	ds = g_new0(CongDispspec,1);
-
-	/* Convert the tree into the new representation: */
-	{
-		TTREE* child;
-		for (child = tt->child; child; child=child->next) {
-			CongDispspecElement* element = cong_dispspec_element_new_from_ttree(child);
-
-			cong_dispspec_add_element(ds,element);
-		}
-	}	
-
-	/* FIXME: release the TTREE */
-
-	return ds;
-}
-#endif /* #if SUPPORT_OLD_LOADERS */
-
 static CongDispspec* parse_xmldoc(xmlDocPtr doc);
 static void parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node);
-
-static gint tree_compare_func(gconstpointer a, gconstpointer b)
-{
-	return strcmp(a,b);
-}
 
 GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
 {
@@ -259,7 +295,10 @@ CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
 static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 {
 	CongDispspec* ds = g_new0(CongDispspec,1);
-	ds->tree = g_tree_new(tree_compare_func);
+	ds->search_tree = g_tree_new_full((GCompareDataFunc)key_compare_func,
+					  NULL,
+					  (GDestroyNotify)key_destroy_func,
+					  value_destroy_func);
 
 	/* Convert the XML into our internal representation: */
 	if (doc->children)
@@ -326,6 +365,8 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 	
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 {
+	struct SearchTreeKey *key;
+
 	g_return_if_fail(ds);
 	g_return_if_fail(element);
 
@@ -341,7 +382,13 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 
 	ds->last = element;
 
-	g_tree_insert(ds->tree, element->tagname, element);
+	key = g_new0(struct SearchTreeKey, 1);
+	if (element->xmlns) {
+		key->xmlns = g_strdup(element->xmlns);
+	}
+	key->name = element->tagname;
+
+	g_tree_insert(ds->search_tree, key, element);
 }
 
 void cong_dispspec_delete(CongDispspec *dispspec)
@@ -377,9 +424,9 @@ cong_dispspec_get_description(const CongDispspec *ds)
 
 /* FIXME: These should be deprecated: */
 #if 1
-gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name)
+gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *xmlns, const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -389,9 +436,9 @@ gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name)
 }
 
 
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name)
+gboolean cong_dispspec_element_collapse(CongDispspec *ds, const gchar *xmlns, const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -401,9 +448,9 @@ gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name)
 }
 
 
-gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name)
+gboolean cong_dispspec_element_span(CongDispspec *ds, const gchar *xmlns, const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -413,9 +460,9 @@ gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name)
 }
 
 
-gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name)
+gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, const char *name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -426,9 +473,9 @@ gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name)
 #endif
 
 enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const char* tagname)
+cong_dispspec_type(CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, tagname);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xmlns, tagname);
 
 	if (NULL==element) {
 		return CONG_ELEMENT_TYPE_UNKNOWN;
@@ -462,14 +509,14 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
   gcol->red = (col >> 8) & 0xff00;
 }
 
-const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
+const gchar *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), xml_frag_name_nice(node));
 	if (element) {
 		return (char*)cong_dispspec_element_username(element);
 	}
   
-	return(xml_frag_name_nice(x));
+	return(xml_frag_name_nice(node));
 }
 
 GdkPixbuf*
@@ -563,31 +610,22 @@ int strcasestr(char *haystack, char *needle)
   We now use the GTree search structure for speed
  */
 CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
+cong_dispspec_lookup_element(const CongDispspec *ds, const gchar* xmlns, const gchar* tagname)
 {
 	CongDispspecElement *element;
+	struct SearchTreeKey key;
 
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(tagname, NULL);
 
-	g_assert(ds->tree);
+	g_assert(ds->search_tree);
 
-#if 1
-	return g_tree_lookup(ds->tree, tagname);
-#else
-	element = ds->first;
+	key.xmlns = (gchar*)xmlns;
+	key.name = (gchar*)tagname;
 
-	while (element) {
-		g_assert(element->tagname);
-		if (0==strcmp(element->tagname,tagname)) {
-			return element;
-		}
+	element =  g_tree_lookup(ds->search_tree, &key);
 
-		element = element->next;
-	}
-
-	return NULL;
-#endif
+	return element;
 }
 
 CongDispspecElement*
@@ -596,7 +634,7 @@ cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	return cong_dispspec_lookup_element(ds, cong_node_name(node));
+	return cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
 }
 
 CongDispspecElement*
@@ -618,6 +656,13 @@ cong_dispspec_get_paragraph(CongDispspec *ds)
 /*******************************
    cong_dispspec_element stuff: 
 *******************************/
+const gchar*
+cong_dispspec_element_get_xmlns(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->xmlns;
+}
 
 const gchar*
 cong_dispspec_element_tagname(CongDispspecElement* element)
@@ -854,29 +899,6 @@ cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element
 	return element->property_dialog_plugin_id;
 }
 
-
-#if SUPPORT_OLD_LOADERS
-CongDispspecElement*
-cong_dispspec_element_new_from_ttree(TTREE* tt)
-{
-	unsigned int col;
-
-	CongDispspecElement* element = g_new0(CongDispspecElement,1);
-
-	element->tagname = g_strdup(tt->data);
-	element->username = g_strdup(cong_dispspec_ttree_username(tt));
-
-	element->type = cong_dispspec_ttree_type(tt);
-	element->collapseto = cong_dispspec_ttree_collapseto(tt);
-
-	col = cong_dispspec_ttree_colour_get(tt);
-
-	cong_dispspec_element_init_col(element, col);
-
-	return element;
-}
-#endif /* #if SUPPORT_OLD_LOADERS */
-
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element)
 {
@@ -1004,7 +1026,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 }
 
 CongDispspecElement*
-cong_dispspec_element_new(const char* tagname, enum CongElementType type)
+cong_dispspec_element_new(const gchar* xmlns, const gchar* tagname, enum CongElementType type)
 {
 	CongDispspecElement* element;
 
@@ -1012,6 +1034,9 @@ cong_dispspec_element_new(const char* tagname, enum CongElementType type)
 
 	element = g_new0(CongDispspecElement,1);
 
+	if (xmlns) {
+		element->xmlns = g_strdup(xmlns);
+	}
 	element->tagname = g_strdup(tagname);	
 	element->username = g_strdup(tagname);
 	element->type = type;
@@ -1062,13 +1087,17 @@ handle_elements_from_dtd (void *payload, void *ds, xmlChar * name)
 
 	if (!element->content || can_contain_pcdata (element->content))
 	{
-		CongDispspecElement *ds_element = cong_dispspec_element_new (name,
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
 									     CONG_ELEMENT_TYPE_SPAN);
 		cong_dispspec_add_element (dispspec, ds_element);
 	}
 	else
 	{
-		CongDispspecElement *ds_element = cong_dispspec_element_new (name,
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
 									     CONG_ELEMENT_TYPE_STRUCTURAL);
 		cong_dispspec_add_element (dispspec, ds_element);
 	}
@@ -1131,7 +1160,7 @@ promote_element (CongDispspec * dispspec,
 		return;
 	}
 
-	switch (cong_dispspec_type (dispspec, node->parent->name))
+	switch (cong_dispspec_type (dispspec, cong_node_xmlns(node->parent), node->parent->name))
 	{
 		case CONG_ELEMENT_TYPE_SPAN:
 		{
@@ -1139,14 +1168,16 @@ promote_element (CongDispspec * dispspec,
 			{
 				if (contains_text (xmlNodeGetContent (node)))
 				{
-					CongDispspecElement *ds_element = cong_dispspec_element_new (node->parent->name,
+					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+												     node->parent->name,
 												     CONG_ELEMENT_TYPE_PARAGRAPH);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
 				else
 				{
-					CongDispspecElement *ds_element = cong_dispspec_element_new (node->parent->name,
+					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+												     node->parent->name,
 												     CONG_ELEMENT_TYPE_STRUCTURAL);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
@@ -1158,7 +1189,8 @@ promote_element (CongDispspec * dispspec,
 		{
 			if (contains_text (xmlNodeGetContent (node)))
 			{
-				CongDispspecElement *ds_element = cong_dispspec_element_new (node->parent->name,
+				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(node->parent),
+											     node->parent->name,
 											     CONG_ELEMENT_TYPE_PARAGRAPH);
 				g_assert (ds_element);
 				cong_dispspec_add_element (dispspec, ds_element);
@@ -1173,28 +1205,31 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 {
 	CongDispspecElement *element;
 	g_assert (dispspec);
-	g_assert (dispspec->tree);
+	g_assert (dispspec->search_tree);
 
 	if (cur) {
 		if (xmlNodeIsText (cur)) {
-			element =  cong_dispspec_lookup_element (dispspec, cur->parent->name);
+			element =  cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur->parent), cur->parent->name);
 			if (element) {
 				promote_element (dispspec, element, cur);
 			}
 			else if (contains_text (xmlNodeGetContent (cur))) {
 				if (contains_carriage_return(xmlNodeGetContent (cur))) {
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cur->parent->name,
+					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+												     cur->parent->name,
 												     CONG_ELEMENT_TYPE_PARAGRAPH);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				} else {
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cur->parent->name,
+					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+												     cur->parent->name,
 												     CONG_ELEMENT_TYPE_SPAN);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
 			} else {
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cur->parent->name,
+				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+											     cur->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL);
 				g_assert (ds_element);
 				cong_dispspec_add_element (dispspec, ds_element);
@@ -1212,11 +1247,43 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 }
 
 static void
+ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur)
+{
+	CongDispspecElement *element;
+
+	g_assert (dispspec);
+	g_assert (cur);
+
+	if (CONG_NODE_TYPE_ELEMENT==cong_node_type(cur)) {
+		element = cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur), cong_node_name(cur));
+		if (NULL==element) {
+			/* Then we've found an element that doesn't have any handler in the dispspec; better create a structural tag for it... */
+			CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur),
+										     cong_node_name(cur),
+										     CONG_ELEMENT_TYPE_STRUCTURAL);
+			g_assert (ds_element);
+			cong_dispspec_add_element (dispspec, ds_element);
+		}
+	}
+
+	/* traverse children: */
+	cur = cur->xmlChildrenNode;
+	
+	while (cur != NULL) {
+		ensure_all_elements_covered (dispspec, cur);
+		cur = cur->next;
+	}
+}
+
+static void
 xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
 {
 	if (doc)
 	{
-		CongDispspecElement *ds_element = cong_dispspec_element_new (xmlDocGetRootElement(doc)->name,
+		xmlNodePtr root_element = xmlDocGetRootElement(doc);
+
+		CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(root_element),
+									     root_element->name,
 									     CONG_ELEMENT_TYPE_STRUCTURAL);
 		g_assert (ds_element);
 		cong_dispspec_add_element (dispspec, ds_element);
@@ -1231,6 +1298,7 @@ xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
 	{
 		dispspec->name = g_strdup(doc->URL);
 		handle_elements_from_xml (dispspec, xmlDocGetRootElement (doc));
+		ensure_all_elements_covered(dispspec, xmlDocGetRootElement (doc));
 	}
 }
 
@@ -1259,7 +1327,10 @@ cong_dispspec_new_from_xml_file (xmlDocPtr doc)
 	CongDispspec *dispspec;
 
 	dispspec = g_new0 (CongDispspec, 1);
-	dispspec->tree = g_tree_new (tree_compare_func);
+	dispspec->search_tree = g_tree_new_full((GCompareDataFunc)key_compare_func,
+						NULL,
+						(GDestroyNotify)key_destroy_func,
+						value_destroy_func);
 
 	xml_to_dispspec (dispspec, doc, load_dtd (doc));
 

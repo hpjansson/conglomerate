@@ -23,11 +23,22 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 						      gint elements_length, enum CongElementType tag_type);
 static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementType tag_type);
 
-const char* cong_node_name(CongNodePtr node)
+const gchar* cong_node_name(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
 	return node->name;
+}
+
+const gchar* cong_node_xmlns(CongNodePtr node)
+{
+	g_return_val_if_fail(node, NULL);
+
+	if (node->ns) {
+		return node->ns->prefix;
+	} else {
+		return NULL;
+	}
 }
 
 CongNodePtr cong_node_prev(CongNodePtr node)
@@ -370,12 +381,34 @@ gboolean cong_node_should_recurse(CongNodePtr node)
 }
 
 /* Construction: */
-CongNodePtr cong_node_new_element(const char *tagname, CongDocument *doc)
+CongNodePtr cong_node_new_element(const gchar *xmlns, const gchar *tagname, CongDocument *doc)
 {
+	/* xmlns can be NULL */
 	g_return_val_if_fail(tagname, NULL);
 	g_return_val_if_fail(doc, NULL);
 
-	return xmlNewDocNode(cong_document_get_xml(doc), NULL, tagname, NULL); /* FIXME: audit the character types here */
+	if (xmlns) {
+		return xmlNewDocNode (cong_document_get_xml(doc), 
+				      cong_document_get_nsptr (doc, xmlns), 
+				      tagname, 
+				      NULL); /* FIXME: audit the character types here */
+	} else {
+		return xmlNewDocNode (cong_document_get_xml(doc), 
+				      NULL,
+				      tagname, 
+				      NULL); /* FIXME: audit the character types here */
+	}
+}
+
+CongNodePtr cong_node_new_element_from_dispspec(CongDispspecElement *element, CongDocument *doc)
+{
+	g_return_val_if_fail (element, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	return xmlNewDocNode (cong_document_get_xml (doc), 
+			      cong_document_get_nsptr (doc, cong_dispspec_element_get_xmlns(element)), 
+			      cong_dispspec_element_tagname(element), 
+			      NULL);
 }
 
 CongNodePtr cong_node_new_text(const char *text, CongDocument *doc)
@@ -767,7 +800,7 @@ GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 	}
 	
 	while( (cong_node_type(node) == CONG_NODE_TYPE_ELEMENT) && 
-	       (cong_dispspec_element_span(ds, cong_node_name(node)) ) ) {
+	       (cong_dispspec_element_span(ds, cong_node_xmlns(node), cong_node_name(node)) ) ) {
 
 		/*  prepend node to list */
 		list = g_list_prepend(list, (gpointer *) node);
@@ -1058,7 +1091,7 @@ static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementConte
 			
 			/*  create the element and add it */
 			g_print("xml_add_required_content: adding new node %s under node %s\n", content->name, node->name);
-			new_node = cong_node_new_element(content->name, cong_doc);
+			new_node = cong_node_new_element(content->prefix, content->name, cong_doc);
 			cong_document_node_set_parent(cong_doc, new_node, node);
 			
 			/*  recur on the new node to add anything it needs */
@@ -1137,7 +1170,8 @@ static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlEleme
 	g_return_val_if_fail(element_name, FALSE);
 
 	/*  add the element */
-	new_node = cong_node_new_element(element_name, cong_doc);
+	/* FIXME:  we need to supply the correct namespace; need to provide ds element rather than a mere string... Hack to NULL ns for now :-( */
+	new_node = cong_node_new_element(NULL, element_name, cong_doc);
 	cong_document_node_set_parent(cong_doc, new_node, node);
 	
 	/*  free the returned string */
@@ -1372,7 +1406,8 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 	gint i;
 
 	for (i = 0; i < elements_length; i++) {
-		element = cong_dispspec_lookup_element(ds, elements[i]);
+		/* FIXME:  hack the ns to be NULL for now :-( */
+		element = cong_dispspec_lookup_element(ds, NULL, elements[i]);
 		if ( ( element != NULL ) &&
 		     ( (tag_type == CONG_ELEMENT_TYPE_ALL) ||
 		       ( ( tag_type == CONG_ELEMENT_TYPE_STRUCTURAL ) && (cong_dispspec_element_is_structural(element) )) ||

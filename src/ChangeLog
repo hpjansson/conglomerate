@@ -1,5 +1,13 @@
 2003-06-26 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-registry.c, cong-dispspec.c, cong-dispspec.h, cong-document.c, cong-dom-view.c, cong-editor-widget.c, cong-node.h, cong-section-head-editor.c, cong-tree-view.c, cursor.c, popup.c, tree.c, xmldata.c, xmledit.c
+
+	Added namespace support
+
+	* cong-file-open.c
+
+	Fixed a warning
+	
 	* cong-parser-error.c
 
 	Fixed bug #115225.

@@ -535,11 +535,12 @@ void populate_widget(CongEditorWidget *widget)
 	{
 		enum CongNodeType type = cong_node_type(x);
 
+		const char *xmlns = cong_node_xmlns(x);
 		const char *name = xml_frag_name_nice(x);
 
 		CONG_EDITOR_WIDGET_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
-		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_type(displayspec, name)==CONG_ELEMENT_TYPE_STRUCTURAL)
+		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_type(displayspec, xmlns, name)==CONG_ELEMENT_TYPE_STRUCTURAL)
 		{
 			section_head = CONG_SECTION_HEAD_EDITOR(cong_section_head_editor_new(widget, x));
 			details->root_editor = CONG_ELEMENT_EDITOR(section_head);

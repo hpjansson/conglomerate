@@ -17,10 +17,15 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 
 	CongNodePtr text_node, new_node;
+#if 1
+	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
+							 "element");
+#else
 	char *label;
 
 	label = g_object_get_data(G_OBJECT(widget),
 				  "label");
+#endif
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
@@ -33,7 +38,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	cong_document_node_add_after(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(label, doc);
+	new_node = cong_node_new_element_from_dispspec(element, doc);
 	cong_document_node_add_after(doc, new_node, text_node);
 
 	/*  add any necessary sub elements it needs */
@@ -52,10 +57,15 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 
 	CongNodePtr text_node, new_node;
+#if 1
+	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
+							 "element");
+#else
 	char *label;
 
 	label = g_object_get_data(G_OBJECT(widget),
 				  "label");
+#endif
 
 	doc = g_object_get_data(G_OBJECT(widget),"document");
 	g_assert(doc);
@@ -67,7 +77,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	cong_document_node_set_parent(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(label, doc);
+	new_node = cong_node_new_element_from_dispspec(element, doc);
 	cong_document_node_set_parent(doc, new_node, tag);
 
 	/*  add any necessary sub elements it needs */
@@ -149,8 +159,8 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 	ds = cong_document_get_dispspec(doc);
 
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_globals.clipboard), xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 
 	/* GREP FOR MVC */
 
@@ -173,10 +183,9 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	g_assert(doc);
 
 	ds = cong_document_get_dispspec(doc);
-
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_globals.clipboard), xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 
 	/* GREP FOR MVC */
 
@@ -201,8 +210,8 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 	ds = cong_document_get_dispspec(doc);
 
 	if (!the_globals.clipboard) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
-	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(tag), xml_frag_name_nice(tag))) return(TRUE);
+	if (!cong_dispspec_element_structural(ds, cong_node_xmlns(the_globals.clipboard), xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 
 	/* GREP FOR MVC */
 

@@ -149,20 +149,25 @@ cong_dispspec_registry_dump(CongDispspecRegistry* registry)
 	}
 }
 
-static gchar*
-get_toplevel_tag(xmlDocPtr doc)
+static gboolean
+get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 {
 	xmlNodePtr xml_toplevel;
 
-	g_return_val_if_fail(doc,NULL);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(xmlns, FALSE);
+	g_return_val_if_fail(tagname, FALSE);
+
 	
 	for (xml_toplevel=doc->children; xml_toplevel; xml_toplevel = xml_toplevel->next) {
 		if (xml_toplevel->type==XML_ELEMENT_NODE) {
-			return g_strdup(xml_toplevel->name);
+			*xmlns = g_strdup(cong_node_xmlns(xml_toplevel));
+			*tagname = g_strdup(xml_toplevel->name);
+			return TRUE;
 		}
 	}
 
-	return NULL;
+	return FALSE;
 }
 
 /**
@@ -174,6 +179,7 @@ get_toplevel_tag(xmlDocPtr doc)
 CongDispspec*
 cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
 {
+	gchar* toplevel_xmlns;
 	gchar* toplevel_tag;
 
 	g_return_val_if_fail(doc,NULL);
@@ -184,9 +190,7 @@ cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
 	}
 #endif
 
-	toplevel_tag = get_toplevel_tag(doc);
-
-	if (toplevel_tag) {
+	if (get_toplevel_tag(doc, &toplevel_xmlns, &toplevel_tag)) {
 		int i;
 		
 		g_message("Searching for a match against top-level tag <%s>\n", toplevel_tag);
@@ -194,17 +198,18 @@ cong_dispspec_registry_get_appropriate_dispspec(xmlDocPtr doc)
 		for (i=0;i<cong_dispspec_registry_get_num(the_globals.ds_registry);i++) {
 			CongDispspec* ds = cong_dispspec_registry_get(the_globals.ds_registry, i);
 
-			CongDispspecElement* element = cong_dispspec_lookup_element(ds, toplevel_tag);
+			CongDispspecElement* element = cong_dispspec_lookup_element(ds, toplevel_xmlns, toplevel_tag);
 			
 			if (element) {
 				/* FIXME: check for appropriateness */
+				g_free(toplevel_xmlns);
 				g_free(toplevel_tag);
 				return ds;
 			}
 		}
 		
 		/* No match */
-
+		g_free(toplevel_xmlns);
 		g_free(toplevel_tag);
 	}
 
