@@ -2,6 +2,10 @@
 
 	* xds.dtd
 
+	<element-list> can now contain zero or more <element> tags, rather than one or more
+
+	* xds.dtd
+
 	Big cleanup; added <document-models> and <external-document-model>
 
 	* validate-all-xds.sh 

@@ -13,7 +13,7 @@
    plugin-id           NMTOKEN                                                           #IMPLIED 
 >
 
-<!ELEMENT element-list ( element+ ) >
+<!ELEMENT element-list ( element*) >
 
 <!ELEMENT gui EMPTY >
 
