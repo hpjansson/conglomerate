@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 /** 
  *  cong-eel.c
  *
@@ -95,3 +97,93 @@ cong_eel_option_menu_get_selected_menu_item(GtkOptionMenu *option_menu)
 
 }
 
+static gchar* cong_eel_utf8_capitalise(const gchar *str)
+{
+	gchar *result;
+	gunichar*   unichar;
+
+	g_return_val_if_fail (str, NULL);
+
+	unichar = g_utf8_to_ucs4_fast (str, -1, NULL);
+
+	/* FIXME: is this correct? */
+	unichar[0] = g_unichar_toupper(unichar[0]);
+
+	result = g_ucs4_to_utf8(unichar, -1, NULL, NULL, NULL);
+
+	g_free(unichar);
+
+	return result;
+}
+
+static gchar** split_xmlname(const gchar *xml_name)
+{
+	/* FIXME: is this really UTF-8 safe? */
+	return g_strsplit (xml_name,
+			   "-",
+			   0);
+}
+
+gchar *cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name)
+{
+	gchar *result = NULL;
+	gchar** string_array;
+	gchar** iter;
+
+	g_return_val_if_fail(xml_name, NULL);
+
+	string_array = split_xmlname(xml_name);
+
+	for (iter = string_array; *iter; iter++) {
+		cong_eel_set_string (iter, cong_eel_utf8_capitalise(*iter));
+	}
+
+	result = g_strjoinv (" ",
+			     string_array);
+
+	g_strfreev(string_array);
+
+	return result;
+}
+
+gchar *cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_name)
+{
+	gchar *result = NULL;
+	gchar** string_array;
+	gchar** iter;
+
+	g_return_val_if_fail(xml_name, NULL);
+
+	string_array = split_xmlname(xml_name);
+
+	/* Capitalise first word, if there is one: */
+	if (*string_array) {
+		cong_eel_set_string (&string_array[0], cong_eel_utf8_capitalise(string_array[0]));
+	}
+	for (iter = string_array; *iter; iter++) {
+		/* FIXME: unwritten */
+	}
+
+	result = g_strjoinv (" ",
+			     string_array);
+
+	g_strfreev(string_array);
+
+	return result;
+}
+
+/* Routine that sets a string ptr to point to a new value, and frees the old value (if any) */
+void cong_eel_set_string(gchar **string, gchar *value)
+{
+	gchar *old_value;
+
+	g_return_if_fail (string);
+
+	old_value = *string;
+
+	*string = value;
+
+	if (old_value) {
+		g_free (old_value);
+	}
+}

@@ -18,6 +18,7 @@
 #include <libxml/parser.h>
 #include "cong-node.h"
 #include "cong-app.h"
+#include "cong-eel.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -95,6 +96,10 @@ static gint key_compare_func (struct SearchTreeKey *a,
 static void key_destroy_func (struct SearchTreeKey *key);
 static void value_destroy_func (gpointer data);
 
+/* Subroutines for generating a CongDispspec from a DTD: */
+static void
+generate_elements_from_dtd (void *payload, void *ds, xmlChar * name);
+
 /* Subroutines for converting XDS XML to a CongDispspec: */
 static CongDispspec* 
 parse_xmldoc (xmlDocPtr doc);
@@ -109,6 +114,8 @@ cong_dispspec_element_new_from_xml_element (xmlDocPtr doc,
 					    xmlNodePtr xml_element);
 
 /* Subroutines for converting a CongDispspec to XDS XML: */
+static const gchar* element_type_to_string(enum CongElementType type);
+
 static void 
 add_xml_for_metadata (xmlDocPtr xml_doc, 
 		      CongNodePtr root, 
@@ -293,46 +300,6 @@ CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
 }
 
 
-
-static void
-generate_elements_from_dtd (void *payload, void *ds, xmlChar * name)
-{
-	xmlElementPtr element;
-	CongDispspec *dispspec;
-	CongDispspecElement *ds_element;
-
-	dispspec = (CongDispspec *) ds;
-	element = (xmlElementPtr) payload;
-
-	g_assert (dispspec);
-	g_assert (element);
-
-	ds_element = cong_dispspec_element_new (element->prefix,
-						name,
-						CONG_ELEMENT_TYPE_STRUCTURAL);
-	cong_dispspec_add_element (dispspec, ds_element);
-
-#if 0
-#error
-
-	if (!element->content || can_contain_pcdata (element->content))
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_SPAN);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-	else
-	{
-		/* FIXME: set up ns properly */
-		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
-									     name,
-									     CONG_ELEMENT_TYPE_STRUCTURAL);
-		cong_dispspec_add_element (dispspec, ds_element);
-	}
-#endif
-}
 
 /* Constructors that try to generate from another format: */
 CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
@@ -748,6 +715,52 @@ static void value_destroy_func (gpointer data)
 	g_assert(data);
 
 	/* data is a CongDispspecElement; leave it alone */
+}
+
+/* Subroutines for generating a CongDispspec from a DTD: */
+static void
+generate_elements_from_dtd (void *payload, void *ds, xmlChar * name)
+{
+	xmlElementPtr element;
+	CongDispspec *dispspec;
+	CongDispspecElement *ds_element;
+
+	dispspec = (CongDispspec *) ds;
+	element = (xmlElementPtr) payload;
+
+	g_assert (dispspec);
+	g_assert (element);
+
+	ds_element = cong_dispspec_element_new (element->prefix,
+						name,
+						CONG_ELEMENT_TYPE_STRUCTURAL);
+
+	/* Try to prettify the username if possible: */
+	ds_element->username = cong_eel_prettify_xml_name_with_header_capitalisation(name);
+
+	cong_dispspec_add_element (dispspec, ds_element);
+
+
+#if 0
+#error
+
+	if (!element->content || can_contain_pcdata (element->content))
+	{
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
+									     CONG_ELEMENT_TYPE_SPAN);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+	else
+	{
+		/* FIXME: set up ns properly */
+		CongDispspecElement *ds_element = cong_dispspec_element_new (NULL,
+									     name,
+									     CONG_ELEMENT_TYPE_STRUCTURAL);
+		cong_dispspec_add_element (dispspec, ds_element);
+	}
+#endif
 }
 
 /* Subroutines for converting XDS XML to a CongDispspec: */
@@ -1297,6 +1310,30 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 }
 
 /* Subroutines for converting a CongDispspec to XML XDS: */
+static const gchar* element_type_to_string(enum CongElementType type) 
+{
+        switch(type) {
+	default:
+		g_assert_not_reached();
+	case CONG_ELEMENT_TYPE_STRUCTURAL:
+		return "structural";
+	case CONG_ELEMENT_TYPE_SPAN:
+		return "span";
+	case CONG_ELEMENT_TYPE_INSERT:
+		return "insert";
+	case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
+		return "embed-external-file";
+	case CONG_ELEMENT_TYPE_PARAGRAPH:
+		return "paragraph";
+	case CONG_ELEMENT_TYPE_PLUGIN:
+		return "plugin";
+	case CONG_ELEMENT_TYPE_UNKNOWN:
+		return "unknown";
+	case CONG_ELEMENT_TYPE_ALL:
+		return "all";
+        }
+}
+
 static void add_xml_for_metadata (xmlDocPtr xml_doc, 
 				  CongNodePtr root, 
 				  CongDispspec *dispspec)
@@ -1352,6 +1389,7 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 
 	g_assert (element->tagname);
 	xmlSetProp (element_node, "name", element->tagname);
+	xmlSetProp (element_node, "type", element_type_to_string(element->type));
 
 	/* Handle name: */
 	if (element->username)
@@ -1361,7 +1399,7 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 						       "name",
 						       element->username
 						       );
-		xmlSetProp (element_node, "locale", "en");
+		xmlSetProp (name_node, "locale", "en");
 
 		xmlAddChild (element_node, name_node);		
 	}
@@ -1381,7 +1419,6 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 #if 0
 	GdkPixbuf *icon16;
 
-	enum CongElementType type;
 	gboolean collapseto;
 
 #if NEW_LOOK

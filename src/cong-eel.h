@@ -26,6 +26,15 @@ char *              cong_eel_gdk_rgb_to_color_spec          (guint32            
 /* This isn't from eel, but perhaps should be: */
 GtkMenuItem*        cong_eel_option_menu_get_selected_menu_item (GtkOptionMenu *option_menu);
 
+/* This isn't from eel, but perhaps should be: */
+/* 
+   Routines that take an xml tag or attribute name e.g. <conditional-page-master-reference>, split it into words, and apply the given capitalisation (see the GNOME HIG for descriptions of capitalisation) 
+*/
+gchar *cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name);
+gchar *cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_name);
+
+/* Routine that sets a string ptr to point to a new value, and frees the old value (if any) */
+void cong_eel_set_string(gchar **string, gchar *value);
 
 G_END_DECLS
 
