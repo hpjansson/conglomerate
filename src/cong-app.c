@@ -141,23 +141,306 @@ cong_app_post_init_hack (CongApp *app)
 	return 0;
 }
 
+typedef gchar*
+(CongSelectionDataToXMLSourceConversionFn) (guchar *data, 
+					    gint length);
+
+
+static void
+debug_selection_data (GtkSelectionData *selection_data, 
+		      const gchar *type,
+		      CongSelectionDataToXMLSourceConversionFn conversion_fn)
+{
+	if (selection_data) {
+		gchar *selection_name = gdk_atom_name (selection_data->selection);
+		gchar *target_name = gdk_atom_name (selection_data->target);
+		gchar *type_name = gdk_atom_name (selection_data->type);
+		gchar *source_string;
+
+		if (conversion_fn) {
+			source_string = conversion_fn (selection_data->data, selection_data->length);
+		} else {
+			source_string = g_strdup ("conversion_fn unavailable");
+		}
+
+		g_message ("Available: selection:\"%s\" target:\"%s\" type:\"%s\" format: %i, length: %i, source_string:\"%s\":", 
+			   selection_name,
+			   target_name,
+			   type_name,
+			   selection_data->format,
+			   selection_data->length,
+			   source_string);
+
+		g_free (selection_name);
+		g_free (target_name);
+		g_free (type_name);
+		g_free (source_string);
+
+#if 0
+		if (0!=strcmp(type, "UTF8_STRING")) {
+			G_BREAKPOINT();
+		}
+		g_message (gtk_selection_data_get_text (selection_data));
+		g_message (selection_data->data);
+#endif
+	} else {
+		g_message ("Unavailable: type \"%s\"", type);
+	}
+}
+
+static void
+debug_try_selection_type (GtkClipboard* clipboard,
+			  const gchar *type,
+			  CongSelectionDataToXMLSourceConversionFn conversion_fn)
+{
+	GtkSelectionData* selection_data;
+
+	g_return_if_fail (clipboard);
+	g_return_if_fail (type);
+
+	selection_data = gtk_clipboard_wait_for_contents (clipboard,
+							  gdk_atom_intern (type,
+									   TRUE));
+	debug_selection_data (selection_data, 
+			      type, 
+			      conversion_fn);
+
+	if (selection_data) {
+		gtk_selection_data_free (selection_data);
+	}
+}
+
+static void
+debug_target_list (GtkClipboard *clipboard,
+		   GdkAtom *targets,
+		   gint n_targets)
+{
+	gint i;
+	
+	for (i=0;i<n_targets;i++) {
+		GtkSelectionData *selection_data;
+		gchar *atom_name = gdk_atom_name (targets[i]);
+
+		g_message ("target [%i]: \"%s\"", i, atom_name);
+
+#if 0
+		/* It's dying inside here with a bad atom error: */
+		selection_data = gtk_clipboard_wait_for_contents (clipboard,
+								  targets[i]);
+		debug_selection_data (selection_data, 
+				      atom_name, 
+				      NULL);
+
+		if (selection_data) {
+			gtk_selection_data_free (selection_data);
+		}
+#endif
+
+		g_free (atom_name);
+	}
+}
+
+gchar*
+convert_ucs2_to_utf8 (guchar *data,
+		      gint length)
+{
+	return g_utf16_to_utf8 ((const gunichar2 *)data,
+				(glong)length,
+				NULL,
+				NULL,
+				NULL);
+}
+
+gchar*
+convert_utf8_string (guchar *data, 
+		     gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+	/* It should be a valid UTF-8 string; escape as necessary: */
+	return g_markup_escape_text ((const gchar *)data,
+				     (gssize)length);
+}
+
+gchar*
+convert_text_xml (guchar *data, 
+		  gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+	return NULL;
+}
+
+gchar*
+convert_text_html (guchar *data, 
+		   gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+#if 0
+	/* Assume that it's UCS-2 HTML: */
+	return convert_ucs2_to_utf8 (data, length);
+#else
+	/* Assume that it's valid UTF-8 HTML: */
+	return g_strndup (data, length);
+#endif
+}
+
+gchar*
+convert_text_plain (guchar *data, 
+		    gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+	return NULL;
+}
+
+gchar*
+convert_application_xhtml_plus_xml (guchar *data, 
+				    gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+	return NULL;
+}
+
+gchar*
+convert_application_rtf (guchar *data, 
+			 gint length)
+{
+	g_return_val_if_fail (data, NULL);
+
+	return NULL;
+}
+
+static void
+debug_well_known_targets (GtkClipboard *clipboard)
+{
+	debug_try_selection_type (clipboard, "UTF8_STRING", convert_utf8_string);
+	debug_try_selection_type (clipboard, "text/xml", convert_text_xml);
+	debug_try_selection_type (clipboard, "text/html", convert_text_html);
+	debug_try_selection_type (clipboard, "text/plain", convert_text_plain);
+	debug_try_selection_type (clipboard, "application/xhtml+xml", convert_application_xhtml_plus_xml);
+	debug_try_selection_type (clipboard, "application/rtf", convert_application_rtf);
+
+	/*
+	  Of the above
+	  Evolution offers 9 atoms in TARGETS; of the above:
+	  - "UTF8_STRING" as UTF-8, format 8
+	  - "text/html", appears to be UCS-2, format 16, though I got some trailing junk characters.  Also appears to have capitalised the element names.
+
+	  Emacs doesn't offer any (20 TARGETS reported, though)
+
+	  Mozilla offers 107 atoms in TARGETS; of the above:
+	  - "UTF8_STRING" as UTF-8, format 8
+	  - "text/html", appears to be UCS-2, but format=8, and be a genuine fragment of the document source.
+
+	  OpenOffice.org Writer offers 10 atoms in TARGETS, of the above:
+	  - "UTF8_STRING" as UTF-8, format=8
+	  - "text/html" as a UTF-8 document, format=8 consisting of a <!DOCTYPE declaration> with <HTML> element, <HEAD>, and a <BODY> containing the highlighted text!
+	  - "text/plain"; probably as UCS-2, though format=8
+	  
+	  AbiWord offers 6 atoms in TARGETS, though none of the above
+
+	  So how do we distinguish between UTF-8 and UCS-2???
+	 */
+}
+
+/* This is a simple copy-and-paste of gtk_clipboard_wait_for_targets, which was added to GTK in version 2.4: */
+gboolean
+cong_eel_gtk_clipboard_wait_for_targets (GtkClipboard  *clipboard, 
+					 GdkAtom      **targets,
+					 gint          *n_targets)
+{
+  GtkSelectionData *data;
+  gboolean result = FALSE;
+  
+  g_return_val_if_fail (clipboard != NULL, FALSE);
+
+  /* TODO: see http://bugzilla.gnome.org/show_bug.cgi?id=101774 with regard to XFIXES */
+
+  if (n_targets)
+    *n_targets = 0;
+      
+  targets = NULL;      
+
+  data = gtk_clipboard_wait_for_contents (clipboard, gdk_atom_intern ("TARGETS", FALSE));
+
+  if (data)
+    {
+      result = gtk_selection_data_get_targets (data, targets, n_targets);
+      gtk_selection_data_free (data);
+    }
+
+  return result;
+}
+
 gchar*
 cong_app_get_clipboard_xml_source (CongApp *app,
 				   GdkAtom selection,
 				   CongDocument *target_doc)
 {
 	GtkClipboard* clipboard;
+	GdkAtom *targets;
+	gint n_targets;
 
 	g_return_val_if_fail (app, NULL);
 	g_return_val_if_fail ((selection == GDK_SELECTION_CLIPBOARD)||(selection == GDK_SELECTION_PRIMARY), NULL);
-	g_return_val_if_fail (target_doc, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (target_doc), NULL);
 
 	clipboard = gtk_clipboard_get (selection);
 
+#if 0
+	if (cong_eel_gtk_clipboard_wait_for_targets (clipboard,
+						     &targets,
+						     &n_targets)) {
+		#if 0
+		debug_target_list (clipboard,
+				   targets,
+				   n_targets);
+		g_free (targets);
+		#endif
+
+		debug_well_known_targets (clipboard);
+
+		return gtk_clipboard_wait_for_text (clipboard);
+	} else {
+		return NULL;
+	}
+#else
+
 	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
 	return gtk_clipboard_wait_for_text (clipboard);
+#endif
 }
 
+#if 1
+void
+cong_app_set_clipboard_from_xml_fragment (CongApp *app,
+					  GdkAtom selection,
+					  const gchar* xml_fragment,
+					  CongDocument *source_doc)
+{
+	GtkClipboard* clipboard;
+
+	g_return_if_fail (app);
+	g_return_if_fail ((selection == GDK_SELECTION_CLIPBOARD)||(selection == GDK_SELECTION_PRIMARY));
+	g_return_if_fail (IS_CONG_DOCUMENT (source_doc));
+
+	clipboard = gtk_clipboard_get (selection);
+	
+	if (xml_fragment) {
+		/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
+		gtk_clipboard_set_text (clipboard, xml_fragment, -1);
+	} else {
+		/* FIXME: should this happen? */
+	}
+
+	g_message("Clipboard set to \"%s\"", xml_fragment);
+
+	/* emit signals? */
+}
+#else
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text)
@@ -180,6 +463,7 @@ cong_app_set_clipboard (CongApp *app,
 
 	/* emit signals? */
 }
+#endif
 
 GnomeProgram*
 cong_app_get_gnome_program (CongApp *app)
@@ -323,29 +607,16 @@ cong_app_private_load_displayspecs (CongApp *app,
 	}
 	
 	/* Dispspec search goes from the start of the list to the end, so
-	   we need to load in the most-trusted sources first */
+	   we need to load in the most-trusted sources first.
 
-	/* Load gconf-specified directories */
+	   Then load from the standard installation path.
+	*/
 
+	/* Load gconf-specified custom directories */
 	ds_path_list = gconf_client_get_list(PRIVATE(app)->gconf_client,
-					     "/apps/conglomerate/dispspec-paths",
+					     "/apps/conglomerate/custom-dispspec-paths",
 					     GCONF_VALUE_STRING,
 					     NULL);
-	
-	if (ds_path_list == NULL) {
-		/* Fallback in the case where there is nothing in GConf.
-		   Look in application default directory for dispspecs. */
-		gchar* xds_directory
-			= gnome_program_locate_file(PRIVATE(app)->gnome_program,
-						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "dispspecs",
-						    FALSE,
-						    NULL);
-		ds_path_list = g_slist_append (ds_path_list, (gpointer)xds_directory);
-		/* Inform user about it. */
-		g_warning ("Using the fallback for GConf place of the dispspec directory");
-	}
-		
 	/* Now run through the path list in order, adding dispspecs to
 	   the registry from each dir. */
 	path = ds_path_list;
@@ -360,6 +631,21 @@ cong_app_private_load_displayspecs (CongApp *app,
 		path = g_slist_next(path);
 	}
 	g_slist_free (ds_path_list);
+
+	/* Finally, try the standard installation path.  This used to be listed in the GConf path, see Bugzilla #129776 */
+	{
+		gchar* xds_directory = gnome_program_locate_file (PRIVATE(app)->gnome_program,
+								  GNOME_FILE_DOMAIN_APP_DATADIR,
+								  "dispspecs",
+								  FALSE,
+								  NULL);
+
+		
+		cong_dispspec_registry_add_dir (PRIVATE(app)->ds_registry, xds_directory, toplevel_window, 0);
+		
+		g_free (xds_directory);
+	}
+		
 	
 	/* If no xds files were found anywhere, perhaps the program
 	   hasn't been installed yet (merely built): */

@@ -166,8 +166,10 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	source = cong_node_generate_source(tag);
 
 	/* FIXME: set clipboard state within command? */
-	cong_app_set_clipboard (cong_app_singleton(),
-				source);
+	cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+						  GDK_SELECTION_CLIPBOARD,
+						  source,
+						  doc);
 	g_free(source);
 
 	cong_document_begin_edit(doc);
@@ -194,17 +196,18 @@ gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
 	/* GREP FOR MVC */
 
-#if 1
+	CongDocument *doc;
 	gchar *source;
 
+	doc = g_object_get_data(G_OBJECT(widget),"document");
+	g_assert(doc);
+
 	source = cong_node_generate_source(tag);
-	cong_app_set_clipboard (cong_app_singleton(),
-				cong_node_generate_source(tag));	
+	cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+						  GDK_SELECTION_CLIPBOARD,
+						  source,
+						  doc);	
 	g_free(source);
-#else
-	if (cong_app_singleton()->clipboard) cong_document_node_recursive_delete(NULL, cong_app_singleton()->clipboard);
-	cong_app_singleton()->clipboard = cong_node_recursive_dup(tag);
-#endif
 
 	return(TRUE);
 }

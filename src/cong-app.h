@@ -73,9 +73,28 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 				   GdkAtom selection,
 				   CongDocument *target_doc);
 
+
+/**
+ * cong_app_set_clipboard_from_xml_fragment:
+ * @app: the #CongApp
+ * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
+ * @xml_fragment: a fragment of XML source, or NULL if there's no content
+ * @source_doc: the #CongDocument from which the source has been cut
+ * 
+ * This function takes the XML source and attempts to place it into the appropriate clipboard.  It will attempt to make it 
+ * available in a number of formats, and in the best possible way for each format.  It may attempt to do conversions when it does 
+ * this, e.g. generating pretty versions of bulleted lists for text, or converting to an HTML representation
+ * where appropriate.
+ *
+ * The XML form of the source is not converted, but is wrapped in an <xml-fragment> top-level element and given a DOCTYPE declaration if available in the source document.
+ * So it should be well-formed, but not valid.
+ * Haven't yet specified what happens to entities.
+ */
 void
-cong_app_set_clipboard (CongApp *app, 
-			const gchar* text);
+cong_app_set_clipboard_from_xml_fragment (CongApp *app,
+					  GdkAtom selection,
+					  const gchar* xml_fragment,
+					  CongDocument *source_doc);
 
 GnomeProgram*
 cong_app_get_gnome_program (CongApp *app);

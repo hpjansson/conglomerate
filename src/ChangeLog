@@ -1,3 +1,9 @@
+2003-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c, cong-app.h, tree.c, xmledit.c
+
+	Changed GConf path to be custom-dispspec-paths, and removed all of the installation paths from it, instead generating it at run-time as a fix for bug #129776; change to the clipboard setting API and lots of debug clipboard code as work towards fixing bug #129731
+
 2004-01-02  Geert Stappers <stappers@stappers.nl>
 
 	* cong-app.c

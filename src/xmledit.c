@@ -42,8 +42,10 @@ void cong_document_cut_selection(CongDocument *doc)
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"), NULL);
 
-		cong_app_set_clipboard (cong_app_singleton(),
-					source);
+		cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+							  GDK_SELECTION_CLIPBOARD,
+							  source,
+							  doc);
 		g_free(source);
 		
 		cong_command_add_delete_range (cmd,
@@ -88,8 +90,10 @@ void cong_document_copy_selection(CongDocument *doc)
 	{
 		gchar *source = cong_range_generate_source (cong_selection_get_ordered_range (selection));
 		
-		cong_app_set_clipboard (cong_app_singleton(),
-					source);
+		cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+							  GDK_SELECTION_CLIPBOARD,
+							  source,
+							  doc);
 
 		g_free (source);
 	}
