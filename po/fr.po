@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-09-08 01:54+0200\n"
-"PO-Revision-Date: 2004-09-08 01:55+0200\n"
+"POT-Creation-Date: 2004-09-30 18:16+0200\n"
+"PO-Revision-Date: 2004-09-30 18:28+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1434
-#: src/cong-primary-window.c:528 src/cong-primary-window.c:713
-#: src/cong-primary-window.c:715 src/cong-primary-window.c:721
+#: src/cong-primary-window.c:555 src/cong-primary-window.c:740
+#: src/cong-primary-window.c:742 src/cong-primary-window.c:748
 msgid "Conglomerate XML Editor"
 msgstr "Éditeur XML Conglomerate"
 
@@ -82,7 +82,7 @@ msgstr "Débutant"
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
 #: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
 #: src/cong-file-export.c:332 src/cong-file-new.c:363
-#: src/cong-file-print.c:252 src/cong-parser-error.c:326
+#: src/cong-file-print.c:252 src/cong-parser-error.c:320
 msgid "Description"
 msgstr "Description"
 
@@ -164,11 +164,11 @@ msgid "Match _entire word only"
 msgstr "_Mot entier seulement"
 
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
-#: src/cong-edit-find-and-replace.c:832 src/cong-edit-find-and-replace.c:846
+#: src/cong-edit-find-and-replace.c:835 src/cong-edit-find-and-replace.c:849
 msgid "Replace"
 msgstr "Remplacer"
 
-#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:904
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:907
 msgid "Replace All"
 msgstr "Tout remplacer"
 
@@ -529,9 +529,10 @@ msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
-msgstr "Les symboles de nom XML ne peuvent contenir que des caractères "
-"alphanumériques et/ou des idéogrammes, ainsi les symboles _, -, . et :. Ils ne "
-"doivent contenir aucun espace."
+msgstr ""
+"Les symboles de nom XML ne peuvent contenir que des caractères "
+"alphanumériques et/ou des idéogrammes, ainsi les symboles _, -, . et :. Ils "
+"ne doivent contenir aucun espace."
 
 #: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
 #: src/cong-node-properties-dialog.c:424
@@ -741,8 +742,8 @@ msgstr "Aucune chaîne \"%s\" trouvée."
 msgid "Replace _All"
 msgstr "_Tout Remplacer"
 
-#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:757
-#: src/cong-edit-find-and-replace.c:955 src/cong-edit-find-and-replace.c:996
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:760
+#: src/cong-edit-find-and-replace.c:958 src/cong-edit-find-and-replace.c:999
 msgid "Find"
 msgstr "Rechercher"
 
@@ -1750,25 +1751,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Données inconnues"
 
-#: src/cong-parser-error.c:234
+#: src/cong-parser-error.c:228
 #, c-format
 msgid "Parse errors loading %s"
-msgstr "Error d'analyses syntaxique lors du chargement de %s"
+msgstr "Erreurs d'analyse syntaxique lors du chargement de %s"
 
-#: src/cong-parser-error.c:242
+#: src/cong-parser-error.c:236
 msgid "_Retry"
 msgstr "_Réessayer"
 
-#: src/cong-parser-error.c:321
+#: src/cong-parser-error.c:315
 msgid "Line Number"
 msgstr "Numéro de ligne"
 
-#: src/cong-parser-error.c:398
+#: src/cong-parser-error.c:393
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s n'est pas capable d'interpréter le format interne de ce fichier."
 
-#: src/cong-parser-error.c:406
+#: src/cong-parser-error.c:401
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1779,7 +1780,7 @@ msgstr ""
 "web. Il ne gère pas non plus, à l'heure actuelle SGML. Nous espérons "
 "résoudre ces problèmes dans les versions futures."
 
-#: src/cong-parser-error.c:407
+#: src/cong-parser-error.c:402
 msgid "Show Details"
 msgstr "Afficher les détails"
 
@@ -1812,11 +1813,11 @@ msgstr "Signets"
 msgid "Raw XML"
 msgstr "Format XML"
 
-#: src/cong-primary-window.c:581 src/cong-primary-window.c:600
+#: src/cong-primary-window.c:608 src/cong-primary-window.c:627
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Bienvenue dans l'éditeur Conglomerate tant attendu."
 
-#: src/cong-primary-window.c:713
+#: src/cong-primary-window.c:740
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (modifié) - %s"
