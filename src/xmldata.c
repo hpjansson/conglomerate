@@ -11,6 +11,8 @@
 #include "cong-dispspec.h"
 #include "cong-util.h"
 
+#define DEBUG_VALID_INSERTIONS 0
+
 char fake_data[] = "";
 
 static gboolean xml_add_required_sub_elements(CongDocument *cong_doc, CongNodePtr node);
@@ -710,7 +712,9 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 	gint i;
 
 	for (i = 0; i < elements_length; i++) {
+#if DEBUG_VALID_INSERTIONS
 		g_message ("got element <%s>", elements[i]);
+#endif
 		
 		/* FIXME:  hack the ns to be NULL for now :-( */
 		element = cong_dispspec_lookup_element(ds, NULL, elements[i]);
@@ -721,7 +725,9 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 			}
 
 		} else {
+#if DEBUG_VALID_INSERTIONS
 			g_message ("Element not in dispspec <%s>", elements[i]);
+#endif
 		}
 	}
 

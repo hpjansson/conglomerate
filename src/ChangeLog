@@ -1,5 +1,9 @@
 2003-09-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* xmldata.c
+
+	Suppressed some debug info
+
 	* cong-editor-area.c, cong-editor-area.h, cong-editor-node-element-structural.c, cong-editor-node-element-unknown.c, plugin-lists-node-element-listitem.c, plugin-paragraph-node-element-paragraph.c
 
 	Generalised the popup dialog to support the unknown, paragraph and list item plugins
