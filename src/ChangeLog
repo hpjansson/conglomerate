@@ -1,5 +1,9 @@
 2003-08-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-location.c
+
+	Added some bulletproofing to the get next/prev word routines for when the cursor is at the very end of a TEXT node
+	
 	* xmledit.c
 
 	Fix for bug #115993

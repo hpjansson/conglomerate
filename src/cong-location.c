@@ -504,6 +504,16 @@ gboolean cong_location_calc_prev_word(const CongLocation *input_loc,
 		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
 
 		g_assert(attrs_len>0);
+		
+		if (char_index==attrs_len) {
+			if (attrs_len>0) {
+				char_index=attrs_len-1;
+			} else {
+				g_free(pango_log_attr);
+				return FALSE;	
+			}
+		}
+
 		g_assert(char_index<attrs_len);
 
 		/* Scan backwards to next is_word_start: */
@@ -545,6 +555,11 @@ gboolean cong_location_calc_next_word(const CongLocation *input_loc,
 		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
 
 		g_assert(attrs_len>0);
+
+		if (char_index==attrs_len) {
+			return FALSE;
+		}
+
 		g_assert(char_index<attrs_len);
 
 		/* Scan forwards to next is_word_start: */
@@ -658,6 +673,12 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 	g_return_val_if_fail(output_start_of_word, FALSE);
 	g_return_val_if_fail(output_end_of_word, FALSE);
 
+#if 0
+	g_message ("cong_location_calc_word_extent at offset %i for content \"%s\"",
+		   input_loc->byte_offset,
+		   input_loc->node->content);
+#endif
+
 	make_pango_log_attr_for_node(doc,
 				     input_loc->node,
 				     &pango_log_attr,
@@ -695,9 +716,19 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 		}
 
 		g_free(pango_log_attr);
+
+#if 0
+		g_message ("succeeeded with offsets (%i->%i)",
+			   output_start_of_word->byte_offset,
+			   output_end_of_word->byte_offset);
+#endif
+
 		return TRUE;
 
 	} else {
+#if 0
+		g_message ("failed");
+#endif
 		return FALSE;
 	}
 }
