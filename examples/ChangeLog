@@ -1,4 +1,7 @@
-2004-08-04  Michele Garoche  <michele.garoche@easyconnect.fr>
+2004-08-04  Michèle Garoche <michele.garoche@easyconnect.fr>
+ 
+ 	* cnxml.xml
+	Put the file in conformance with its DTD.
 
 	* test-entities.xml:
 	Doctype in conformity with contents (article).
