@@ -21,6 +21,8 @@ STR="PACKAGE_VERSION"
 MOD="\"\\\n${VERSION}\""
 #  it is the version prefixed with an new line and surrounded by double quoutes
 
+# to recover
+RCVR="\"\\\n.*debian.*\""
 
 #-------------------------------------------------------------
 # contact upstream if you need to change below these lines ---
@@ -52,12 +54,24 @@ case "$1" in
     else
       echo "$(basename $0): could not find"
       echo "${MOD}"
-      echo "in ${FTDP}, did not patch."
+      echo "in ${FTDP}, did not unpatch."
+      exit 1
+    fi
+  ;;
+  -recover)
+    if [ $( sed -ne "/${RCVR}/p" ${FTDP} | wc -l ) -gt 0 ]
+    then
+      sed -e "s/${RCVR}/${STR}/" ${FTDP} > ${FTDP}.modified
+      mv ${FTDP}.modified ${FTDP}
+    else
+      echo "$(basename $0): could not find"
+      echo "${RCVR}"
+      echo "in ${FTDP}, did not recover."
       exit 1
     fi
   ;;
   *)
-    echo >&2 "$(basename $0): script expects -patch|-unpatch as argument"
+    echo >&2 "$(basename $0): script expects -patch|-unpatch|-recover as argument"
     exit 1
   ;;
 esac
