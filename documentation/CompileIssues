@@ -1,0 +1,21 @@
+
+In this file information on known compile issues
+and possible a workaround for it.
+
+There are two sections, released tarbal compile issues
+and CVS checkout compile issues
+
+Tarbal compile issues
+
+So far there no reports on released tarballs
+
+CVS Checkout compile issues
+
+On some system there are problems on generating "./libtool"
+with the original "./autogen.sh". One solution is to run
+"libtoolize --automake". An other is one to run "autoreconf --install"
+
+
+Improvement to this is document is appreciated,
+especially because that the problems don't occure on all systems
+

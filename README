@@ -36,6 +36,7 @@ On some systems, example given Red Hat 8, you have to type
    ./configure
    make
 
+   see also the file documentation/CompileIssues
 
 
 In theory, compiling on Windows should be equally simple, if you're using Cygwin
