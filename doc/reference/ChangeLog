@@ -1,5 +1,8 @@
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* conglomerate-docs.sgml: added another tip for debugging the
+	layout code
+	
 	* conglomerate-docs.sgml: word-wrapped the document
 
 2004-11-16  Nickolay & Geert

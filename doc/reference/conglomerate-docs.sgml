@@ -318,6 +318,7 @@ cong_document_end_command (doc, cmd);
     them, together with a few extra
     <classname>CongEditorAreas</classname>. </para>
 
+    <tip>
     <para> If you want to see the
     <classname>CongEditorAreas</classname>, then go to
     <filename>src/cong-editor-area.c</filename> and play around with
@@ -325,6 +326,15 @@ cong_document_end_command (doc, cmd);
     <constant>DEBUG_RENDER_ALLOCATIONS</constant> can be used to
     render rectangles to indicate all of the bounding boxes of the
     CongEditorAreas.</para>
+    </tip>
+
+    <tip>
+    <para>When working on layout code, it may help to turn up the font
+    sizes so that everything is much larger on your screen.  You can
+    do this by editing <filename>src/cong-app.c</filename> and
+    defining <literal>TEST_BIG_FONTS</literal> to be <literal>1</literal>.
+    </para>
+    </tip>
 
     </partintro>
     &cong-editor-widget;
