@@ -66,6 +66,9 @@
 						<listitem>
 							<para>Open eBook format</para>
 						</listitem>
+						<listitem>
+							<para>TEI format</para>
+						</listitem>
 					</itemizedlist>
 				</answer>
 			</qandaentry>
@@ -113,7 +116,54 @@
 							<para>Use plugins to better represent an element. For example, there are already plugins aimed at rendering paragraphs, and items within lists. You can even create custom property dialogs for an element type, those this requires writing some code.</para>
 						</listitem>
 					</itemizedlist>
-					<para>The best thing to do is to look through the examples/docbook.xds file, which has examples of how to do these things, and to ask on the conglomerate-devel mailing list.</para>
+					<para>The best thing to do is to look through the <filename>examples/docbook.xds</filename> file, which has examples of how to do these things, and to ask on the conglomerate-devel mailing list.</para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>What custom element renderers already exist?</para>
+				</question>
+				<answer>
+					<itemizedlist>
+						<listitem>
+							<formalpara>
+								<title><literal>paragraph</literal></title>
+								<para>This is used by the DocBook <sgmltag>para</sgmltag> element and should be used by any other document type to represent a typical paragraph-level element. Currently it renders itself as a dashed rectangle surrounding the element's content. We might add a &quot;pilcrow&quot; symbol (a little q) as an extra refinement at some point.</para>
+							</formalpara>
+						</listitem>
+						<listitem>
+							<formalpara>
+								<title><literal>admonition</literal></title>
+								<para>This is used by DocBook's admonition elements: <sgmltag>note</sgmltag>, <sgmltag>tip</sgmltag>, <sgmltag>caution</sgmltag> etc. It renders itself as an icon on the left, with the element's content presented in an indented form to the right. It could be used by any other element that would be well-presented as a icon labelling the content. The key-value pair &quot;icon&quot; should be used to specify which icon to use for each particular element.</para>
+							</formalpara>
+						</listitem>
+						<listitem>
+							<formalpara>
+								<title><literal>listitem</literal></title>
+								<para>This is used by DocBook's <sgmltag>listitem</sgmltag> element. It renders itself as a textual label, with the content indented on the right-hand side. Currently the code has hardcoded logic that generates the label according to DocBook's semantics; it looks to see if its inside an <sgmltag>orderedlist</sgmltag> or an <sgmltag>itemizedlist</sgmltag>, and what position it occupies in that list etc to generate either a bullet or a numbering. This could be generalised if people want to reuse the code for other DTDs.</para>
+							</formalpara>
+						</listitem>
+					</itemizedlist>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>How do I set up a custom element renderer inside an xds file?</para>
+				</question>
+				<answer>
+					<para>The xds file should use the value &quot;<literal>plugin</literal>&quot; for the element's &quot;<literal>type</literal>&quot; attribute. The element will need to have an additional attribute &quot;<literal>plugin-id</literal>&quot; (I hope to rename this to &quot;<literal>service-id</literal>&quot; before the 0.8.0 release), which should have a value corresponding to the string ID that the service is registered with inside the plugin. </para>
+					<para>This affects how elements of that type are rendered in the main editor widget. For other purposes (such as XML Source cleanup, handling the Overview sidebar, etc), such elements are, in general, treated like structural elements (as opposed to span ones).</para>
+					<para>Some plugin element types need additional information in the xds file; this is done by having a <sgmltag>key-value-list</sgmltag> element below the <sgmltag>element</sgmltag> element; the <sgmltag>key-value-list</sgmltag> should contain <sgmltag>key-value-pair</sgmltag> elements. Each <sgmltag>key-value-pair</sgmltag> element should contain a &quot;<literal>key</literal>&quot; and &quot;<literal>value</literal>&quot; attribute. See DocBook's <sgmltag>caution</sgmltag> element for an example.</para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>How do I customise the Property dialog for an element within my DTD?</para>
+				</question>
+				<answer>
+					<para>You can improve support for a DTD by creating a plugin node property dialog. To do this, edit the xds file for the document type, and add a <sgmltag>property-dialog</sgmltag> element inside the main <sgmltag>element</sgmltag>, with a &quot;<literal>plugin-id</literal>&quot; attribute giving the registered ID of the code providing the GtkWidget for elements of that type (again, this will probably become &quot;<literal>service-id</literal>&quot; before the 0.8.0 release).</para>
+					<para>FIXME: write information on how to actually create the plugin</para>
+					<para>For example for the DocBook <sgmltag>orderedlist</sgmltag> element; the xds file gives an ID of &quot;<literal>docbook-orderedlist-properties</literal>&quot;. This is hooked up in the source code in <filename>src/plugin-docbook.c</filename> to a routine (the C function &quot;<function>docbook_orderedlist_properties_factory_method</function>&quot;) which loads a GUI from a Glade file, and uses a set of utility functions that bind the widgets in the glade file to attributes of the XML element. For example, the radio buttons are linked to the various valid values of the &quot;<literal>numeration</literal>&quot; attribute.</para>
 				</answer>
 			</qandaentry>
 		</qandadiv>
