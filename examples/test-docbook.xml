@@ -62,12 +62,31 @@
 <para>Inconceivable!</para>
 </sect1>
 
+<sect1><title>Tests of various kinds of list</title>
+<sect2><title>Test of &lt;itemizedlist&gt;</title>
+<itemizedlist>
+<listitem><para>Some text</para></listitem>
+<listitem><para>Some more text</para></listitem>
+<listitem><para>Yet more text</para></listitem>
+</itemizedlist>
+</sect2>
+
+<sect2><title>Test of &lt;orderedlist&gt;</title>
+<orderedlist>
+<listitem><para>The first item</para></listitem>
+<listitem><para>The second item</para></listitem>
+<listitem><para>The third item</para></listitem>
+</orderedlist>
+</sect2>
+</sect1>
+
 <sect1><title>Test of &lt;formalpara&gt;</title>
 <formalpara><title>Activity</title><para>Jumped over the lazy dog.</para></formalpara>
 <formalpara><title>Speed</title><para>Quick</para></formalpara>
 <formalpara><title>Colour</title><para>Brown</para></formalpara>
 <formalpara><title>Was it a fox?</title><para>Now that you mention it...</para></formalpara> 
 </sect1>
+
 
 <!-- Here is another test comment -->
 
