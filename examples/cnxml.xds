@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<dispspec>
+
+	<metadata>
+		<name>Experimental "cnxml" format</name>
+		<description>Test CNXML ds</description>
+	</metadata>
+
+	<element-list>
+		<element tag="module" type="structural" color="a0b0c0">
+			<name locale="en">module</name>
+		</element>
+
+		<element tag="metadata" type="structural" color="a0b0c0">
+			<name locale="en">metadata</name>
+		</element>
+		<element tag="content" type="structural" color="a0b0c0">
+			<name locale="en">content</name>
+		</element>
+
+		<element tag="section" type="structural" color="a0b0c0">
+			<name locale="en">section</name>
+		</element>
+
+		<element tag="equation" type="structural" color="a0b0c0">
+			<name locale="en">equation</name>
+		</element>
+
+		<element tag="note" type="structural" color="a0b0c0">
+			<name locale="en">note</name>
+		</element>
+
+		<element tag="codeblock" type="structural" color="a0b0c0">
+			<name locale="en">codeblock</name>
+		</element>
+
+		<element tag="codeline" type="structural" color="a0b0c0">
+			<name locale="en">codeline</name>
+		</element>
+
+		<element tag="rule" type="structural" color="a0b0c0">
+			<name locale="en">rule</name>
+		</element>
+
+		<element tag="statement" type="structural" color="a0b0c0">
+			<name locale="en">statement</name>
+		</element>
+
+		<element tag="proof" type="structural" color="a0b0c0">
+			<name locale="en">proof</name>
+		</element>
+
+		<element tag="para" type="structural" color="a0b0c0">
+			<name locale="en">para</name>
+		</element>
+
+		<element tag="list" type="structural" color="a0b0c0">
+			<name locale="en">list</name>
+		</element>
+
+		<element tag="item" type="structural" color="a0b0c0">
+			<name locale="en">item</name>
+		</element>
+
+		<element tag="emphasis" type="span" color="a0b0c0">
+			<name locale="en">emphasis</name>
+		</element>
+
+		<element tag="term" type="span" color="a0b0c0">
+			<name locale="en">term</name>
+		</element>
+
+		<element tag="link" type="span" color="a0b0c0">
+			<name locale="en">link</name>
+		</element>
+
+		<element tag="cite" type="span" color="a0b0c0">
+			<name locale="en">cite</name>
+		</element>
+
+		<element tag="cnxn" type="span" color="a0b0c0">
+			<name locale="en">cnxn</name>
+		</element>
+
+		<element tag="cite" type="span" color="a0b0c0">
+			<name locale="en">cite</name>
+		</element>
+
+		<element tag="codeline" type="span" color="a0b0c0">
+			<name locale="en">codeline</name>
+		</element>
+
+	</element-list>
+
+</dispspec>
