@@ -75,7 +75,7 @@ void fo_pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, 
 	/* FIXME: ultimately we probably want to use xmlroff to do this stage */
 }
 
-#if ENABLE_PRINTING
+#if (ENABLE_PRINTING && ENABLE_LIBFO)
 gboolean fo_print_method_document_filter(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
@@ -105,7 +105,7 @@ gboolean plugin_fo_plugin_register(CongPlugin *plugin)
 				      fo_pdf_exporter_action_callback,
 				      NULL);
 
-#if ENABLE_PRINTING
+#if (ENABLE_PRINTING && ENABLE_LIBFO)
 	cong_plugin_register_print_method(plugin, 
 					  _("Print XSL:FO"),
 					  "",

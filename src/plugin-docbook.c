@@ -980,8 +980,11 @@ void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, cons
 	g_free(stylesheet_path);
 }
 
-#if ENABLE_PRINTING
-gboolean docbook_print_method_document_filter(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data)
+#if (ENABLE_PRINTING &&ENABLE_LIBFO)
+gboolean 
+docbook_print_method_document_filter (CongPrintMethod *print_method, 
+				      CongDocument *doc, 
+				      gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -989,7 +992,12 @@ gboolean docbook_print_method_document_filter(CongPrintMethod *print_method, Con
 	return cong_util_is_docbook(doc);
 }
 
-void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
+void 
+docbook_print_method_action_callback (CongPrintMethod *print_method, 
+				      CongDocument *doc, 
+				      GnomePrintContext *gpc, 
+				      gpointer user_data, 
+				      GtkWindow *toplevel_window)
 {
 	GtkWidget *progress_checklist_dialog;
 	CongProgressChecklist *progress_checklist;
@@ -1365,7 +1373,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 				      fo_exporter_action_callback,
 				      NULL);
 
-#if ENABLE_PRINTING
+#if (ENABLE_PRINTING && ENABLE_LIBFO)
 	cong_plugin_register_print_method(plugin, 
 					  _("Print DocBook"),
 					  "",

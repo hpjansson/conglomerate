@@ -112,7 +112,7 @@ void
 cong_util_prepend (gchar **string, 
 		   const gchar *to_add);
 
-#if ENABLE_PRINTING
+#if (ENABLE_PRINTING && ENABLE_LIBFO)
 void 
 cong_util_print_xslfo (GtkWindow *toplevel_window, 
 		       GnomePrintContext *gpc, 

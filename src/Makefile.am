@@ -279,6 +279,7 @@ conglomerate_SOURCES =      \
 
 INCLUDES = $(CONGLOMERATE_CFLAGS) \
 	$(PRINTING_CFLAGS) \
+	$(LIBFO_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DPKGDATADIR=\""$(pkgdatadir)"\" \
@@ -286,6 +287,7 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(PRINTING_LIBS) \
+	$(LIBFO_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
 	$(NULL)
 
