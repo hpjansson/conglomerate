@@ -35,6 +35,7 @@ config.status: configure
 	--sysconfdir=/etc \
 	--enable-debug \
 	--enable-enchant=yes \
+	--enable-gtksourceview=yes \
 	--enable-printing=yes \
 	--infodir=\$${prefix}/share/info \
 	--enable-gtk-doc=no \

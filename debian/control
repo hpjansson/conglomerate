@@ -3,7 +3,7 @@ Section: editors
 Priority: optional
 Maintainer: Geert Stappers <stappers@stappers.nl>
 Uploaders: Sven Luther <luther@debian.org>
-Build-Depends: debhelper (>> 4.1.51), dpatch, gnome-common, libbonobo2-dev, libbonoboui2-dev, libenchant-dev, libgnomeui-dev (>= 2.6.1.1-4), libgnomeprintui2.2-dev, libxslt1-dev, scrollkeeper
+Build-Depends: debhelper (>> 4.1.51), dpatch, gnome-common, libbonobo2-dev, libbonoboui2-dev, libenchant-dev, libgnomeui-dev (>= 2.6.1.1-4), libgnomeprintui2.2-dev, libgtksourceview-dev, libxslt1-dev, scrollkeeper
 Standards-Version: 3.6.1
 
 Package: conglomerate
