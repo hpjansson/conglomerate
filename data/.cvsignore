@@ -1,3 +1,4 @@
 Makefile
 Makefile.in
 conglomerate.desktop
+conglomerate.schema
