@@ -31,6 +31,11 @@
 
 struct CongNodeModificationSetTextDetails
 {
+	/* Undo info: */
+	gchar *old_content;
+
+	/* Redo info: */
+	gchar *new_content;
 };
 
 /* Internal function declarations: */
@@ -78,6 +83,9 @@ cong_node_modification_set_text_construct (CongNodeModificationSetText *node_mod
 					  doc,
 					  node);
 
+	PRIVATE (node_modification_set_text)->old_content = g_strdup (node->content);
+	PRIVATE (node_modification_set_text)->new_content = g_strdup (new_content);
+
 	return node_modification_set_text;
 }
 
@@ -120,8 +128,14 @@ dispose (GObject *object)
 	g_assert (node_modification_set_text->private);
 	
 	/* Cleanup: */
-
-	/* FIXME: write! */
+	if (PRIVATE (node_modification_set_text)->old_content) {
+		g_free (PRIVATE (node_modification_set_text)->old_content);
+		PRIVATE (node_modification_set_text)->old_content = NULL;
+	}
+	if (PRIVATE (node_modification_set_text)->new_content) {
+		g_free (PRIVATE (node_modification_set_text)->new_content);
+		PRIVATE (node_modification_set_text)->new_content = NULL;
+	}
 
 	/* Call the parent method: */		
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
@@ -131,15 +145,29 @@ static void
 undo (CongModification *modification)
 {
 	CongNodeModificationSetText *node_modification_set_text = CONG_NODE_MODIFICATION_SET_TEXT (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
+	CongDocument *doc = cong_modification_get_document (modification);
 
-	/* FIXME: handle undo */
+	cong_document_begin_edit (doc);
+
+	cong_document_node_set_text (doc,
+				     node,
+				     PRIVATE (node_modification_set_text)->old_content);
+	cong_document_end_edit (doc);
 }
 
 static void
 redo (CongModification *modification)
 {
 	CongNodeModificationSetText *node_modification_set_text = CONG_NODE_MODIFICATION_SET_TEXT (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
+	CongDocument *doc = cong_modification_get_document (modification);
 
-	/* FIXME: handle redo */
+	cong_document_begin_edit (doc);
+
+	cong_document_node_set_text (doc,
+				     node,
+				     PRIVATE (node_modification_set_text)->new_content);
+	cong_document_end_edit (doc);
 }
 
