@@ -1,6 +1,5 @@
-conglomerate (0.5.1-0.1) unstable; urgency=low
+conglomerate (0.5.0-0.1) unstable; urgency=low
 
-  * David did a big CVS update, that is why we have a new upstream_version
   * http://people.debian.org/~calvin/unofficial/ says
   """The Debian package version number is parsed from the top entry of
   debian/changelog, eg. mypackage (1.1-0.1)
@@ -10,7 +9,7 @@ conglomerate (0.5.1-0.1) unstable; urgency=low
   have `1.1-1'."""
   It is not in the Debian policy, but it sounds reasonable.
 
- -- Geert Stappers <Geert.Stappers@xs4all.nl>  Wed, 14 May 2003 17:24:40 +0200
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Wed, 14 May 2003 20:53:19 +0200
 
 conglomerate (0.5.0-4) unstable; urgency=low
 
