@@ -63,7 +63,9 @@ enum CongElementType
 
 	/* Other types?  Table? Plugin widget/Bonobo control? */
 
-	CONG_ELEMENT_TYPE_UNKNOWN
+	CONG_ELEMENT_TYPE_UNKNOWN,
+
+	CONG_ELEMENT_TYPE_ALL
 };
 
 typedef struct CongDocument CongDocument;
@@ -578,6 +580,10 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
 GList *xml_all_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
+gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
+GList* xml_get_valid_children(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
+GList* xml_get_valid_previous_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
+GList* xml_get_valid_next_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
 
 #if 0
 TTREE *get_upper_section(TTREE *x);
@@ -645,6 +651,8 @@ void editor_popup_init();
 GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x);
 gint tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
+/* dialog to select from a list of string */
+gchar* string_selection_dialog(gchar *title, gchar *element_description, GList *elements);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
 

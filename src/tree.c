@@ -50,9 +50,8 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	new_node = cong_node_new_element(label);
 	cong_document_node_add_after(doc, new_node, text_node);
 
-	/* Text node inside new element */
-	text_node = cong_node_new_text(" ");
-	cong_document_node_set_parent(doc, text_node, new_node);
+	/*  add any necessary sub elements it needs */
+	xml_add_required_children(doc, new_node);
 
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ");
@@ -89,9 +88,8 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	new_node = cong_node_new_element(label);
 	cong_document_node_set_parent(doc, new_node, tag);
 
-	/* Text node inside new element */
-	text_node = cong_node_new_text(" ");
-	cong_document_node_set_parent(doc, text_node, new_node);
+	/*  add any necessary sub elements it needs */
+	xml_add_required_children(doc, new_node);
 
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ");

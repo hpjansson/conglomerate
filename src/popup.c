@@ -19,6 +19,17 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds, CongCursor *curs
 
 static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr node_ptr);
 
+static GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+					    CongTreeView *cong_tree_view,
+					    CongNodePtr x, GList *list);
+
+static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+							CongTreeView *cong_tree_view, CongNodePtr x);
+
+static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+							    CongTreeView *cong_tree_view, CongNodePtr x);
+
+
 /*
   EDITOR POPUP CODE:
  */
@@ -216,7 +227,6 @@ void editor_popup_build(CongDocument *doc)
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	// build list of available span tags at current location
 	span_tags_list = xml_all_span_elements(dispspec, cursor->location.tt_loc);
 
 	if (span_tags_list != NULL)
@@ -231,9 +241,8 @@ void editor_popup_build(CongDocument *doc)
 		
 		item = add_item_to_popup(GTK_MENU(the_globals.popup), "Remove span tag", NULL, NULL, NULL);		
 
-		// XXX fix me insert callback function to perform action
 		sub_popup = span_tag_removal_popup_init(dispspec, cursor, 
-							  editor_popup_callback_remove_span_tag, doc, span_tags_list);
+							editor_popup_callback_remove_span_tag, doc, span_tags_list);
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
 
 	}
@@ -250,6 +259,8 @@ void editor_popup_build(CongDocument *doc)
 	gtk_widget_show(item);
 
 	/* Build list of dynamic tag insertion tools */
+	/*  build the list of valid inline tags here */
+	
 	for (n0 = cong_dispspec_get_first_element(dispspec); n0; n0 = cong_dispspec_element_next(n0))
 	{
 		if (cong_dispspec_element_is_span(n0))
@@ -400,32 +411,55 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds, CongCursor *curs
 	return popup;
 }
 					 
+static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+						 CongTreeView *cong_tree_view, CongNodePtr x) 
+{
+	GList *list = xml_get_valid_next_sibling(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+	GtkWidget *popup = structural_tag_popup_init(ds, callback, cong_tree_view, x, list);
+
+	g_list_free(list);
+
+	return popup;
+}
+					 
+static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+						     CongTreeView *cong_tree_view, CongNodePtr x) 
+{
+	GList *list = xml_get_valid_children(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
+	GtkWidget *popup = structural_tag_popup_init(ds, callback, cong_tree_view, x, list);
+
+	g_list_free(list);
+
+	return popup;
+}
 
 
-GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+
+static GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
 				     CongTreeView *cong_tree_view,
-				     CongNodePtr x)
+				     CongNodePtr x, GList *list)
 {
 	GtkWidget *popup, *item;
 	CongDispspecElement *n0;
-  
-	popup = gtk_menu_new();
-	gtk_menu_set_title(GTK_MENU(popup), "Sub-element menu");
-	
-	/* Window -> vbox -> buttons */
-	for (n0 = cong_dispspec_get_first_element(ds); n0; n0 = cong_dispspec_element_next(n0)) {
-		if (cong_dispspec_element_is_structural(n0)) {
-			item = add_item_to_popup(GTK_MENU(popup),
-						 cong_dispspec_element_username(n0),
-						 callback,
-						 (gpointer)cong_tree_view,
-						 x);
-			g_object_set_data(G_OBJECT(item),
-					  "label",
-					  (gpointer)(cong_dispspec_element_tagname(n0)));
+	GList *current;
+	int i;
 
-		}
+	popup = gtk_menu_new();
+	gtk_menu_set_title(GTK_MENU(popup), "Sub menu");
+	
+	for (current = g_list_first(list); current; current = g_list_next(current)) {
+		
+		item = add_item_to_popup(GTK_MENU(popup),
+					 cong_dispspec_element_username((CongDispspecElement *)(current->data)),
+					 callback,
+					 (gpointer)cong_tree_view,
+					 x);
+		g_object_set_data(G_OBJECT(item),
+				  "label",
+				  (gpointer)(cong_dispspec_element_tagname((CongDispspecElement *)(current->data))));
+
 	}
+
 	gtk_widget_show(popup);
 	return popup;
 }
@@ -500,7 +534,7 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 				 cong_tree_view,
 				 x);
 	
-	sub_popup = structural_tag_popup_init(ds, tree_new_sub_element, cong_tree_view, x);
+	sub_popup = new_sub_element_structural_tag_popup_init(ds, tree_new_sub_element, cong_tree_view, x);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
 
 	
@@ -510,8 +544,60 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 				 cong_tree_view,
 				 x);
 
-	sub_popup = structural_tag_popup_init(ds, tree_new_sibling, cong_tree_view, x);
+	sub_popup = new_sibling_structural_tag_popup_init(ds, tree_new_sibling, cong_tree_view, x);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
 
 	return GTK_WIDGET(tpopup);
+}
+
+
+/**
+ * Popup a modal, blocking dialog to obtain
+ * the user's choice between a list of char *.
+ * Returns a new char * of the element name 
+ * selected, which must be freed by caller.
+ */
+gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *elements) 
+{
+	GtkWidget *window, *vbox, *label, *button, *action_area, *combo;
+	GList *current;
+	gint length, response;
+	gchar *text;
+
+	/*  create a new dialog */
+	window = gtk_dialog_new_with_buttons(title, NULL, GTK_DIALOG_MODAL,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK, GTK_RESPONSE_OK,
+					     NULL);
+
+	/*  get internal vbox  */
+	vbox = GTK_DIALOG(window)->vbox;
+	action_area = GTK_DIALOG(window)->action_area;
+       
+	/*  Create dialog contents */
+	label = gtk_label_new(element_description);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	
+	combo = gtk_combo_new ();
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo), elements);
+	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), FALSE);
+	
+
+	gtk_box_pack_start(GTK_BOX(vbox), combo, FALSE, FALSE, 0);	
+
+	/*  run the dialog */
+	gtk_widget_show_all(GTK_WIDGET(window));
+	response = gtk_dialog_run(GTK_DIALOG(window));
+
+	if (response == GTK_RESPONSE_OK) {
+		/* get combo value, and strdup since string will be destroyed with combo widget */
+		text = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(combo)->entry)));
+	}
+	else {
+		text = NULL;
+	}
+	
+	gtk_widget_destroy(GTK_WIDGET(window));
+
+	return text;
 }
