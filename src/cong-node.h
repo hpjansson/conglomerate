@@ -176,7 +176,7 @@ cong_node_is_descendant_of (CongNodePtr node,
 */
 gboolean cong_node_should_recurse(CongNodePtr node);
 
-#if 1
+#if 0
 #define CONG_NODE_SELF_TEST(node) cong_node_self_test(node)
 #else
 #define CONG_NODE_SELF_TEST(node) ((void)0)

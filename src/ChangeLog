@@ -1,5 +1,9 @@
 2004-10-22  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-node.h: 
+
+	Disable CONG_NODE_SELF_TEST for now, to get an instant big speedup.
+
 	* cong-editor-node-element-span.c, cong-document.h: 
 
 	Make the warn about bug 124507 Dialog of Doom only appear once per
