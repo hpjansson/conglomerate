@@ -159,6 +159,7 @@ conglomerate_SOURCES =      \
   cong-dom-view.c           \
   cong-dtd.c                \
   cong-edit-find-and-replace.c \
+  cong-edit-preferences.c   \
   cong-editor-area.c        \
   cong-editor-area-bin.c    \
   cong-editor-area-border.c \
@@ -278,6 +279,7 @@ conglomerate_SOURCES =      \
   xmledit.c                 \
   xmlload.c                 \
   xmlview.c                 \
+  plugin-abiword.c          \
   plugin-admonition.c       \
   plugin-admonition-node-element.h \
   plugin-admonition-node-element.c \
@@ -288,6 +290,7 @@ conglomerate_SOURCES =      \
   plugin-dtd.c              \
   plugin-empty.c            \
   plugin-fo.c               \
+  plugin-html.c             \
   plugin-lists.c            \
   plugin-lists-area-listitem.h \
   plugin-lists-area-listitem.c \
@@ -299,9 +302,11 @@ conglomerate_SOURCES =      \
   plugin-paragraph-node-element-paragraph.h \
   plugin-paragraph-node-element-paragraph.c \
   plugin-random.c    \
+  plugin-relaxng.c          \
   plugin-save-dispspec.c    \
   plugin-sgml.c             \
   plugin-tests.c            \
+  plugin-tei.c              \
   plugin-validate.c         \
   plugin-website.c          \
   plugin-xsl.c              \

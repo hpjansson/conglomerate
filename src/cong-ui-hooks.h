@@ -94,6 +94,11 @@ cong_ui_hook_file_print (CongDocument *doc,
 			 GtkWindow *toplevel_window);
 #endif
 
+/* Edit menu hooks: */
+void
+cong_ui_hook_edit_preferences (GtkWindow *toplevel_window);
+
+
 /* Tree editing hooks: */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,

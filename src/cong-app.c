@@ -969,6 +969,10 @@ static void
 cong_app_private_load_plugins (CongApp *app)
 {
 	/* For the moment, there aren't any actual plugins; instead we fake it. */
+	register_plugin(app,"abiword",
+			plugin_abiword_plugin_register,
+			plugin_abiword_plugin_configure);
+
 	register_plugin(app,"admonition",
 			plugin_admonition_plugin_register,
 			plugin_admonition_plugin_configure);
@@ -985,6 +989,10 @@ cong_app_private_load_plugins (CongApp *app)
 			plugin_fo_plugin_register,
 			plugin_fo_plugin_configure);
 
+	register_plugin(app,"html",
+			plugin_html_plugin_register,
+			plugin_html_plugin_configure);
+
 	register_plugin(app,"lists",
 			plugin_lists_plugin_register,
 			plugin_lists_plugin_configure);
@@ -993,9 +1001,17 @@ cong_app_private_load_plugins (CongApp *app)
 			plugin_random_plugin_register,
 			plugin_random_plugin_configure);
 
+	register_plugin(app,"relaxng",
+			plugin_relaxng_plugin_register,
+			plugin_relaxng_plugin_configure);
+
 	register_plugin(app,"sgml",
 			plugin_sgml_plugin_register,
 			plugin_sgml_plugin_configure);
+
+	register_plugin(app,"tei",
+			plugin_tei_plugin_register,
+			plugin_tei_plugin_configure);
 
 	register_plugin(app,"tests",
 			plugin_tests_plugin_register,

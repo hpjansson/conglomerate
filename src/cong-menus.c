@@ -388,6 +388,17 @@ static void menu_callback_view_source(gpointer callback_data,
 	dispatch_document_command(cong_document_view_source, callback_data);
 }
 
+static void
+menu_callback_preferences (gpointer callback_data,
+			   guint callback_action,
+			   GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	g_assert(primary_window);
+
+	cong_ui_hook_edit_preferences (cong_primary_window_get_toplevel (primary_window));
+}
+
 /* Callbacks for "Debug" menu: */
 #if ENABLE_DEBUG_MENU
 void debug_error(CongPrimaryWindow *primary_window)
@@ -402,94 +413,6 @@ void menu_callback_debug_error(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 
 	debug_error(primary_window); 
-}
-
-enum
-{
-	DOCTYPELIST_NAME_COLUMN,
-	DOCTYPELIST_DESCRIPTION_COLUMN,
-	DOCTYPELIST_N_COLUMNS
-};
-
-gint debug_document_types(/*GtkWidget *w, gpointer data, */GtkWindow *parent_window)
-{
-	GtkWidget* dialog;
-	GtkWidget* list_view;
-
-	GtkListStore *store;
-	GtkTreeViewColumn *column;
-	GtkCellRenderer *renderer;
-
-	dialog = gtk_dialog_new();
-
-	gtk_window_set_title(GTK_WINDOW(dialog), _("Document Types"));
-
-	store = gtk_list_store_new (DOCTYPELIST_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
-
-	list_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
-
-	/* The view now holds a reference.  We can get rid of our own
-	 * reference */
-	g_object_unref (G_OBJECT (store));
-
-	/* Populate the store based on the ds-registry: */
-	{
-		CongDispspecRegistry* registry = cong_app_get_dispspec_registry (cong_app_singleton());
-		int i;
-
-		for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
-			const CongDispspec* ds = cong_dispspec_registry_get(registry,i);
-			
-			GtkTreeIter iter;
-			gtk_list_store_append (store, &iter);  /* Acquire an iterator */
-			
-			gtk_list_store_set (store, &iter,
-					    DOCTYPELIST_NAME_COLUMN, cong_dispspec_get_name(ds),
-					    DOCTYPELIST_DESCRIPTION_COLUMN, cong_dispspec_get_description(ds),
-					    -1);
-		}
-	}
-
-	renderer = gtk_cell_renderer_text_new ();
-
-	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
-							   "text", DOCTYPELIST_NAME_COLUMN,
-							   NULL);
-
-	/* Add the column to the view. */
-	gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
-
-	column = gtk_tree_view_column_new_with_attributes (_("Description"), renderer,
-							   "text", DOCTYPELIST_DESCRIPTION_COLUMN,
-							   NULL);
-
-	/* Add the column to the view. */
-	gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
-
-	gtk_widget_show (GTK_WIDGET(list_view));
-
-	gtk_container_add (GTK_CONTAINER( GTK_DIALOG (dialog)->vbox ),
-			   list_view);
-
-	gtk_dialog_add_button(GTK_DIALOG(dialog),
-			      "gtk-ok",
-			      GTK_RESPONSE_OK);
-
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), 
-				     parent_window);
-	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(GTK_WIDGET(dialog));
-
-	return TRUE;
-}
-
-void menu_callback_debug_document_types(gpointer callback_data,
-					guint callback_action,
-					GtkWidget *widget)
-{
-	CongPrimaryWindow *primary_window = callback_data;
-
-	debug_document_types(cong_primary_window_get_toplevel(primary_window)); 
 }
 
 void open_preview_window_for_doc(xmlDocPtr doc)
@@ -1415,11 +1338,12 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/Edit/View _Source"),     "<control>U", menu_callback_view_source, 0, NULL },
+	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/Edit/Prefere_nces"),     NULL, menu_callback_preferences, 0, NULL },
 
 #if ENABLE_DEBUG_MENU
 	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
 	{ N_("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
-	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
 	{ N_("/Debug/Transform DocBook to HTML"),       NULL, menu_callback_debug_transform_docbook_to_html, 0, NULL },
 	{ N_("/Debug/Transform DocBook to XHTML"),       NULL, menu_callback_debug_transform_docbook_to_xhtml, 0, NULL },
 	{ N_("/Debug/Transform DocBook to HTML Help"),       NULL, menu_callback_debug_transform_docbook_to_html_help, 0, NULL },
@@ -1459,10 +1383,12 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 	{ N_("/File/_Close"),         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
 	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
+	{ N_("/_Edit"),                 NULL, 0, 0, "<Branch>" },
+	{ N_("/Edit/Prefere_nces"),     NULL, menu_callback_preferences, 0, NULL },
+
 #if ENABLE_DEBUG_MENU
 	{ ("/Debug"),                 NULL, NULL, 0, "<Branch>" },
 	{ ("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
-	{ ("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
 	{ ("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ ("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 	{ ("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	

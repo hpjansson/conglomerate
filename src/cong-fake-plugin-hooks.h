@@ -29,6 +29,10 @@ G_BEGIN_DECLS
 
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
+/* plugin-abiword.c: */
+gboolean plugin_abiword_plugin_register(CongPlugin *plugin);
+gboolean plugin_abiword_plugin_configure(CongPlugin *plugin);
+
 /* plugin-admonition.c: */
 gboolean plugin_admonition_plugin_register(CongPlugin *plugin);
 gboolean plugin_admonition_plugin_configure(CongPlugin *plugin);
@@ -57,6 +61,10 @@ gboolean plugin_empty_plugin_configure(CongPlugin *plugin);
 gboolean plugin_fo_plugin_register(CongPlugin *plugin);
 gboolean plugin_fo_plugin_configure(CongPlugin *plugin);
 
+/* plugin-html.c: */
+gboolean plugin_html_plugin_register(CongPlugin *plugin);
+gboolean plugin_html_plugin_configure(CongPlugin *plugin);
+
 /* plugin-lists.c: */
 gboolean plugin_lists_plugin_register(CongPlugin *plugin);
 gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
@@ -69,9 +77,17 @@ gboolean plugin_paragraph_plugin_configure(CongPlugin *plugin);
 gboolean plugin_random_plugin_register(CongPlugin *plugin);
 gboolean plugin_random_plugin_configure(CongPlugin *plugin);
 
+/* plugin-relaxng.c: */
+gboolean plugin_relaxng_plugin_register(CongPlugin *plugin);
+gboolean plugin_relaxng_plugin_configure(CongPlugin *plugin);
+
 /* plugin-sgml.c: */
 gboolean plugin_sgml_plugin_register(CongPlugin *plugin);
 gboolean plugin_sgml_plugin_configure(CongPlugin *plugin);
+
+/* plugin-tei.c: */
+gboolean plugin_tei_plugin_register(CongPlugin *plugin);
+gboolean plugin_tei_plugin_configure(CongPlugin *plugin);
 
 /* plugin-tests.c: */
 gboolean plugin_tests_plugin_register(CongPlugin *plugin);
