@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <!DOCTYPE dispspec SYSTEM "xds.dtd">
 <dispspec>
   <metadata>
@@ -15,10 +15,14 @@
     </element>
     <element tag="dispspec" type="structural">
       <name>Conglomerate Display Specification</name>
+    </element><element tag="document-models" type="structural">
+      <name>Document Models</name>
+    </element><element tag="external-document-model" type="structural">
+      <name>External Document Model</name>
     </element>
     <element tag="element" type="structural">
       <name>XML Element</name>
-      <header-info xpath="concat(&quot;&lt;&quot;, @tag, &quot;&gt;&quot;)"></header-info>
+      <header-info xpath="concat(&quot;&lt;&quot;, @tag, &quot;&gt;&quot;)"/>
     </element>
     <element tag="element-list" type="structural">
       <name>List of XML Elements</name>
@@ -46,7 +50,7 @@
     <dispspec>
       <metadata>
         <name>New Conglomerate Display Specification</name>
-	<desc></desc>
+	<desc/>
       </metadata>
       <element-list>
       </element-list>
