@@ -889,10 +889,13 @@ int main( int   argc,
 	fonts_load();
 	popup_init(NULL); /* FIXME */
 
+#if 0
 	the_globals.pango_context = pango_context_new();
 
-	pango_context_set_font_map( the_globals.pango_context,
+	pango_context_set_font_map( gdk_pango_context_get(), /*  the_globals.pango_context, */
 				    pango_ft2_font_map_for_display() );
+#endif
+
 
 #if 0
 	the_globals.pango_font_description = pango_font_description_new();

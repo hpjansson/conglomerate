@@ -39,6 +39,9 @@ cong_font_load(const gchar *font_name)
 
 	font->font_desc = pango_font_description_from_string (font_name);
 	g_assert (font->font_desc);
+
+	font->pango_font = pango_context_load_font(gdk_pango_context_get(),
+						   font->desc);
 	
 	font->gdk_font = gdk_font_from_description (font->font_desc);
 	/* FIXME: add expection handling when font is not on system */
