@@ -133,6 +133,211 @@ cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
 				     xml_node->name);
 }
 
+gboolean
+cong_dtd_content_model_node_is_element (xmlElementContentPtr content,
+					xmlElementPtr dtd_element)
+{
+	g_return_val_if_fail (content, FALSE);
+	g_return_val_if_fail (dtd_element, FALSE);
+
+	if (content->type==XML_ELEMENT_CONTENT_ELEMENT) {
+		if (0==strcmp (content->name, dtd_element->name)) {
+			if (content->prefix) {
+				if (dtd_element->prefix) {
+					if (0==strcmp (content->prefix, dtd_element->prefix)) {
+						return TRUE;
+					}
+				}
+			} else {
+				if (NULL==dtd_element->prefix) {
+					return TRUE;
+				}
+			}
+		}
+	}
+
+	return FALSE;
+}
+
+struct find_content_data
+{
+	xmlElementContentPtr content;
+	xmlElementPtr result;
+	
+};
+
+static void 
+find_content_callback (xmlElementPtr dtd_element,
+		       gpointer user_data)
+{
+	struct find_content_data *cb_data = (struct find_content_data *)user_data;
+
+	if (cong_dtd_content_model_node_is_element (cb_data->content,
+						    dtd_element)) {
+		cb_data->result = dtd_element;
+		/* FIXME: ought to terminate search here! */
+	}
+}
+
+
+xmlElementPtr 
+cong_dtd_get_element_for_content (xmlDtdPtr dtd,
+				  xmlElementContentPtr content)
+{
+	g_return_val_if_fail (dtd, NULL);
+	g_return_val_if_fail (content, NULL);
+
+	if (content->type==XML_ELEMENT_CONTENT_ELEMENT) {
+		struct find_content_data cb_data;
+		cb_data.content = content;
+		cb_data.result = NULL;
+		cong_dtd_for_each_element (dtd,
+					   find_content_callback,
+					   &cb_data);
+		return cb_data.result;
+	}
+
+	return NULL;
+}
+
+
+struct cross_reference_data
+{
+	xmlDtdPtr dtd;
+	xmlElementPtr dtd_element;
+	CongDtdElementReferenceCallback callback;
+	gpointer user_data;
+};
+
+static void
+visit_element_references_for_content_subtree (xmlElementContentPtr content,
+					      struct cross_reference_data *cb_data)
+{
+	g_assert (content);
+	g_assert (cb_data);
+
+	/* content->ocur is irrelvant */
+	switch (content->type) {
+	default: g_assert_not_reached ();
+	case XML_ELEMENT_CONTENT_PCDATA:
+		break;
+	case XML_ELEMENT_CONTENT_ELEMENT:
+		if (cong_dtd_content_model_node_is_element (content, cb_data->dtd_element)) {
+			/* We've found a reference to the search element: */
+			cb_data->callback (cb_data->dtd,
+					   cb_data->dtd_element,
+					   content,
+					   cb_data->user_data);
+		}
+		break;
+	case XML_ELEMENT_CONTENT_SEQ:
+	case XML_ELEMENT_CONTENT_OR:
+		/* recurse down subtrees: */
+		visit_element_references_for_content_subtree (content->c1,
+							      cb_data);
+		visit_element_references_for_content_subtree (content->c2,
+							      cb_data);
+		break;
+	}
+}
+
+
+
+static void 
+element_callback_visit_cross_references (xmlElementPtr dtd_element,
+					 gpointer user_data)
+{
+	struct cross_reference_data *cb_data = (struct cross_reference_data *)user_data;
+
+	g_assert (dtd_element);
+	g_assert (user_data);
+
+	g_assert (cb_data->dtd_element);
+
+	/* Don't count the element itself */
+	if (cb_data->dtd_element!=dtd_element) {
+		if (dtd_element->content) {
+			visit_element_references_for_content_subtree (dtd_element->content,
+								      cb_data);
+		}
+	}
+}
+
+void
+cong_dtd_for_each_reference_to_element (xmlDtdPtr dtd,
+					xmlElementPtr dtd_element,
+					CongDtdElementReferenceCallback callback,
+					gpointer user_data)
+{
+	struct cross_reference_data cb_data;
+
+	g_return_if_fail (dtd);
+	g_return_if_fail (dtd_element);
+	g_return_if_fail (callback);
+
+	cb_data.dtd = dtd;
+	cb_data.dtd_element = dtd_element;
+	cb_data.callback = callback;
+	cb_data.user_data = user_data;
+
+	cong_dtd_for_each_element (dtd,
+				   element_callback_visit_cross_references,
+				   &cb_data);
+}
+
+
+static void
+element_reference_callback_count (xmlDtdPtr dtd,
+				  xmlElementPtr dtd_element,
+				  xmlElementContentPtr content,
+				  gpointer user_data)
+{
+	guint *count = (guint *)user_data;
+
+	(*count)++;
+}
+
+guint
+cong_dtd_count_references_to_element (xmlDtdPtr dtd,
+				      xmlElementPtr dtd_element)
+{
+	guint result = 0;
+
+	cong_dtd_for_each_reference_to_element (dtd_element->parent,
+						dtd_element,
+						element_reference_callback_count,
+						&result);
+
+	return result;
+}			  
+
+static void 
+element_callback_add_candidates (xmlElementPtr dtd_element,
+				 gpointer user_data)
+{
+	if (0==cong_dtd_count_references_to_element (dtd_element->parent,
+						     dtd_element)) {
+		/* If no references, then perhaps this is the element: */
+		GList** list_ptr = (GList**)user_data;
+
+		*list_ptr = g_list_append (*list_ptr, dtd_element);
+	}
+}
+
+GList*
+cong_dtd_guess_start_elements (xmlDtdPtr dtd)
+{
+	GList *list = NULL;
+
+	g_return_val_if_fail (dtd, NULL);
+
+	cong_dtd_for_each_element (dtd,
+				   element_callback_add_candidates,
+				   &list);
+	return list;
+}
+
+
 /* Internal function definitions: */
 static void
 element_callback_marshall (void *payload, 

@@ -78,6 +78,68 @@ xmlElementPtr
 cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
 				       xmlNodePtr xml_node);
 
+/**
+ * cong_dtd_content_model_node_is_element:
+ *
+ * @content: a node in the content model tree for one of the elements in a DTD
+ * @dtd_element: one of the elements in a DTD (usually a different one)
+ *
+ * Determine if this node in the content model is a direct cross-reference
+ * to the given element.  Useful for determining recursion, nesting of elements, etc
+ * 
+ * Returns: TRUE if it is the element, FALSE if it's another element, PCDATA, etc
+ *
+ */
+gboolean
+cong_dtd_content_model_node_is_element (xmlElementContentPtr content,
+					xmlElementPtr dtd_element);
+
+/**
+ * cong_dtd_get_element_for_content:
+ *
+ * Get the element in the DTD corresponding to a node in the content model (if any)
+ *
+ */
+xmlElementPtr 
+cong_dtd_get_element_for_content (xmlDtdPtr dtd,
+				  xmlElementContentPtr content);
+
+typedef void
+(*CongDtdElementReferenceCallback) (xmlDtdPtr dtd,
+				    xmlElementPtr dtd_element,
+				    xmlElementContentPtr content,
+				    gpointer user_data);
+
+/**
+ * cong_dtd_for_each_reference_to_element:
+ *
+ * Function to search through the content models in the DTD, calling the callback for any reference to the given element.
+ *
+ * Handles the case where the element is part of a recursive content model (which would allow arbitrary
+ * numbers of that element to be added) by treating each as a single cross-reference.
+ *
+ */
+void
+cong_dtd_for_each_reference_to_element (xmlDtdPtr dtd,
+					xmlElementPtr dtd_element,
+					CongDtdElementReferenceCallback callback,
+					gpointer user_data);
+
+guint
+cong_dtd_count_references_to_element (xmlDtdPtr dtd,
+				      xmlElementPtr dtd_element);
+
+/*
+ * cong_dtd_guess_start_elements:
+ *
+ * Try to guess the most likely root elements of the DTD.
+ * Currently implemented by finding those that aren't cross-referenced elsewhere in the DTD.
+ *
+ * Returns: a freshly allocated GList of xmlElementPtr
+ */
+GList*
+cong_dtd_guess_start_elements (xmlDtdPtr dtd);
+
 G_END_DECLS
 
 #endif

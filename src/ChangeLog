@@ -1,3 +1,9 @@
+2004-02-26  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dtd.c, cong-dtd.h
+
+	Added lots of DTD utility functions (finding cross-referencing of elements within DTD content models, guessing likely start elements, etc)
+
 2004-02-24  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.win
