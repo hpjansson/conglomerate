@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-22 09:27-0400\n"
+"POT-Creation-Date: 2004-06-23 14:06+0200\n"
 "PO-Revision-Date: 2004-02-16 18:50+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -56,9 +56,10 @@ msgstr "Opcionet e importimit të file"
 msgid "Importer"
 msgstr "Importuesi"
 
+#. GRUT modified this item
 #: glade/cong-file-import.glade.h:3
 msgid "Options"
-msgstr "Opcionet"
+msgstr "Mundësitë"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
 #: src/cong-node-properties-dialog.c:1284
@@ -93,9 +94,10 @@ msgstr "ID e jashtme"
 msgid "General"
 msgstr "Të përgjithshme"
 
+#. GRUT modified this item
 #: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:247
 msgid "Location"
-msgstr "Pozicioni"
+msgstr "Vendodhja"
 
 #: glade/cong-file-properties.glade.h:9
 msgid "Modified"
@@ -144,47 +146,51 @@ msgstr "_Shoqëroi këtë DTD"
 msgid "*"
 msgstr "*"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:2
-#, fuzzy
 msgid "Find Next"
-msgstr "/Ndrysho/_Gjej në vazhdim"
+msgstr "Gjej pasardhësin"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
-msgstr ""
+msgstr "V_etëm fjalën e plotë"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
 #: src/cong-edit-find-and-replace.c:832 src/cong-edit-find-and-replace.c:846
 msgid "Replace"
-msgstr "Zevëndëso"
+msgstr "Zëvendëso"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:904
-#, fuzzy
 msgid "Replace All"
-msgstr "Zevëndëso"
+msgstr "Zëvendëso gjithçka"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:6
-#, fuzzy
 msgid "Replace _with: "
-msgstr "Zëvendëso me:"
+msgstr "Zëvendëso _me:"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "Kërko m_brapsht"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:8
-#, fuzzy
 msgid "_Match case"
-msgstr "Rispekto _Gërma të mëdha/vogla"
+msgstr "Respekto _Gërma të mëdha/vogla"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:9
-#, fuzzy
 msgid "_Search for: "
-msgstr "Kërko"
+msgstr "_Kërko për: "
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
-msgstr ""
+msgstr "_Rifillo nga fillimi"
 
 #: glade/cong-preferences.glade.h:1
 msgid "Conglomerate Preferences"
@@ -312,10 +318,10 @@ msgstr ""
 msgid "Namespace URI"
 msgstr "Emri hapësirës"
 
+#. GRUT modified this item
 #: glade/plugin-arbitrary.glade.h:4
-#, fuzzy
 msgid "Preview"
-msgstr "Pamja e parë e printimit"
+msgstr "Shikoje"
 
 #: glade/plugin-arbitrary.glade.h:6
 msgid "Top-level Element"
@@ -371,99 +377,120 @@ msgstr "Hiq atributin \"%s\""
 msgid "(unspecified)"
 msgstr "(jo e specifikuar)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:48
 msgid "Breton"
-msgstr ""
+msgstr "Bretone"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr ""
+msgstr "Katalane"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:50
 msgid "Czech"
-msgstr ""
+msgstr "Çekisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:51
-#, fuzzy
 msgid "Danish"
-msgstr "Hollësi"
+msgstr "Danisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr ""
+msgstr "Gjermanisht (Gjermani)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr ""
+msgstr "Gjermanisht (Zvicër)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
-msgstr ""
+msgstr "Anglisht (Amerikë)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:55
 msgid "English (British)"
-msgstr ""
+msgstr "Anglisht (Britani)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:56
 msgid "English (Canadian)"
-msgstr ""
+msgstr "Anglisht (Kanada)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:57
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:58
 msgid "Spanish"
-msgstr ""
+msgstr "Spanjisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr ""
+msgstr "Faroese"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr ""
+msgstr "Frengjisht (Francë)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr ""
+msgstr "Frengjisht (Zvicër)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:62
 msgid "Italian"
-msgstr ""
+msgstr "Italisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:63
-#, fuzzy
 msgid "Dutch"
-msgstr "Thellësia"
+msgstr "Hollandeze"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:64
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvegjeze"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:65
 msgid "Polish"
-msgstr ""
+msgstr "Polonisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:66
 msgid "Portuguese (Portugal)"
-msgstr ""
+msgstr "Portugeze (Portugali)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:67
 msgid "Portuguese (Brazilian)"
-msgstr ""
+msgstr "Portugeze (Brazil)"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:68
 msgid "Russian"
-msgstr ""
+msgstr "Rusisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:69
 msgid "Swedish"
-msgstr ""
+msgstr "Suedisht"
 
+#. GRUT modified this item
 #: src/cong-attribute-editor-lang.c:70
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrahinase"
 
 #: src/cong-attribute-editor-lang.c:159
 #, fuzzy
@@ -594,9 +621,10 @@ msgstr ""
 msgid "Comment \"%s\""
 msgstr "Komenti \"%s\""
 
+#. GRUT modified this item
 #: src/cong-document.c:890
 msgid "Document"
-msgstr "Dokumenti"
+msgstr "Dokument"
 
 #: src/cong-document.c:896
 msgid "Document Fragment"
@@ -643,20 +671,21 @@ msgstr "Zgjidh %s"
 msgid "UNKNOWN"
 msgstr "PANJOHUR"
 
+#. GRUT modified this item
 #: src/cong-dom-view.c:248
-#, fuzzy
 msgid "Text:"
-msgstr "Teksti"
+msgstr "Teksti:"
 
+#. GRUT modified this item
 #: src/cong-edit-find-and-replace.c:98
 #, c-format
 msgid "The text \"%s\" was not found."
-msgstr ""
+msgstr "Teksti \"%s\" nuk u gjet."
 
+#. GRUT modified this item
 #: src/cong-edit-find-and-replace.c:200
-#, fuzzy
 msgid "Replace _All"
-msgstr "Zevëndëso"
+msgstr "Zëvendëso _Gjithçka"
 
 #: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:757
 #: src/cong-edit-find-and-replace.c:955 src/cong-edit-find-and-replace.c:996
@@ -675,13 +704,15 @@ msgstr "Lëviz kursorin"
 msgid "Drag out selection"
 msgstr ""
 
+#. GRUT modified this item
 #: src/cong-editor-widget3.c:258
 msgid "Expander Size"
-msgstr "Madhësia e zgjeruesit"
+msgstr "Madhësia e shpalosësit"
 
+#. GRUT modified this item
 #: src/cong-editor-widget3.c:259
 msgid "Size of the expander arrow"
-msgstr "Madhësia e shigjetës së zgjeruesit"
+msgstr "Madhësia e shigjetës së shpalosësit"
 
 #: src/cong-editor-widget3.c:728
 msgid "Input Method"
@@ -1108,9 +1139,10 @@ msgstr ""
 msgid "Export \"%s\""
 msgstr ""
 
+#. GRUT modified this item
 #: src/cong-file-export.c:234
 msgid "Export"
-msgstr "Eksportim"
+msgstr "Eksporto"
 
 #: src/cong-file-export.c:285
 msgid "Exporter:"
@@ -1254,13 +1286,15 @@ msgstr ""
 msgid "_Add a DTD"
 msgstr ""
 
+#. GRUT modified this item
 #: src/cong-file-properties.c:272 src/cong-file-properties.c:274
 msgid "Unknown"
-msgstr ""
+msgstr "Nuk njihet"
 
+#. GRUT modified this item
 #: src/cong-file-properties.c:285
 msgid "Unspecified"
-msgstr ""
+msgstr "E papërcaktuar"
 
 #: src/cong-file-properties.c:360
 msgid "Remove DTD"
@@ -1682,10 +1716,11 @@ msgstr "Anullo"
 msgid "Redo"
 msgstr "Përsërite"
 
+#. GRUT modified this item
 #: src/cong-primary-window.c:488 src/cong-primary-window.c:489 src/tree.c:202
 #: src/xmledit.c:51
 msgid "Cut"
-msgstr "Prije"
+msgstr "Preje"
 
 #: src/cong-primary-window.c:495 src/cong-primary-window.c:496
 msgid "Copy"
@@ -2134,9 +2169,10 @@ msgid ""
 "You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr ""
 
+#. GRUT modified this item
 #: src/plugin-validate.c:172
 msgid "_Cancel"
-msgstr ""
+msgstr "_Anullo"
 
 #: src/plugin-validate.c:215
 #, c-format
