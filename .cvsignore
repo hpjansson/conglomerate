@@ -4,7 +4,6 @@
 Makefile
 Makefile.in
 aclocal.m4
-debian
 config.cache
 config.h
 config.h.in
@@ -15,4 +14,5 @@ libtool
 stamp-h
 stamp-h.in
 ## #other #files
+debian
 ##
