@@ -346,16 +346,17 @@ cong_vfs_split_vfs_uri (const GnomeVFSURI* vfs_uri,
 
 		*path=gnome_vfs_uri_to_string(parent_uri,
 					      GNOME_VFS_URI_HIDE_USER_NAME|GNOME_VFS_URI_HIDE_PASSWORD);
+		gnome_vfs_uri_unref(parent_uri);
 	} else {
 		*path=g_strdup("");
 	}
 #else
 	/* This version seems better when dealing with the "file" method; perhaps we should have a conditional here? */ 
 	*path=gnome_vfs_uri_extract_dirname(vfs_uri);
-#endif
 
 	gnome_vfs_uri_unref(parent_uri);
 
+#endif
 }
 
 void

@@ -1,5 +1,9 @@
 2003-11-05  Paul Smith  <conglomerate@pcs.uklinux.net>
 
+	* cong-vfs.c
+
+	Fixed unref of NULL uri (bug #126231)
+
 	* xmledit.c
 
 	Improvements to cut/copy insensitivity warning
