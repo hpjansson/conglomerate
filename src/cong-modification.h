@@ -105,7 +105,6 @@ CongModification*
 cong_modification_node_remove_attribute_new (CongDocument *doc, 
 					     CongNodePtr node, 
 					     const xmlChar *name);
-#endif
 
 CongModification* 
 cong_modification_selection_change_new (CongDocument *doc);
@@ -118,8 +117,7 @@ cong_modification_set_external_dtd_new (CongDocument *doc,
 					const gchar* root_element,
 					const gchar* public_id,
 					const gchar* system_id);
-
-
+#endif
 
 G_END_DECLS
 

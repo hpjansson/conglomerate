@@ -1,5 +1,9 @@
 2003-10-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-modification.h
+
+	Diabled bad declarations
+
 	* cong-command.h, cong-command.c
 
 	Added split3 modification
