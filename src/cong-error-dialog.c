@@ -23,7 +23,9 @@ cong_error_dialog_run(GtkDialog* dialog)
 	gint result = gtk_dialog_run(dialog);
 	
 	switch (result) {
-	default: g_assert(0);
+	default: g_assert_not_reached();
+	case GTK_RESPONSE_DELETE_EVENT:
+		/* (the dialog was deleted, probably by the user clicking on a window manager button) */	
 	case GTK_RESPONSE_OK:
 		/* Do nothing */
 		break;
@@ -68,7 +70,7 @@ cong_error_dialog_new(GtkWindow *parent_window,
 
 	dialog1 = gtk_dialog_new ();
 	gtk_container_set_border_width (GTK_CONTAINER (dialog1), 6);
-	GTK_WINDOW (dialog1)->type = GTK_WINDOW_POPUP;
+/* 	GTK_WINDOW (dialog1)->type = GTK_WINDOW_POPUP; */
 	gtk_window_set_resizable (GTK_WINDOW (dialog1), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog1), FALSE);
 
@@ -124,9 +126,11 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 
 	dialog = gtk_dialog_new ();
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-	GTK_WINDOW (dialog)->type = GTK_WINDOW_POPUP;
+/* 	GTK_WINDOW (dialog)->type = GTK_WINDOW_POPUP; */
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), parent_window);
 
 	dialog_vbox = GTK_DIALOG (dialog)->vbox;
 	gtk_widget_show (dialog_vbox);
