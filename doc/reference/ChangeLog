@@ -2,6 +2,10 @@
 
 	* Makefile.am
 
+	Make object paths in GTKDOC_LIBS relative to current build location in another attempt to try to get make distcheck to work
+
+	* Makefile.am
+
 	Explicitly list all object files in GTKDOC_LIBS (was failing a make distcheck)
 
 2003-10-07  David Malcolm <david@davemalcolm.demon.co.uk>
