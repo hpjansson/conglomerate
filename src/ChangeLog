@@ -1,3 +1,9 @@
+2004-03-17  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+
+	Enabled useless, but harmless lines on cong-marshal.[ch] generation.
+
 2004-03-15  Geert Stappers <stappers@stappers.nl>
 
 	* marshal.make
