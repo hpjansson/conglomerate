@@ -9,6 +9,8 @@ config.cache
 config.h
 config.h.in
 config.log
+config.sub
+config.guess
 config.status
 configure
 conglomerate.spec
