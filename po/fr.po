@@ -3,6 +3,7 @@
 # This file is distributed under the GPL license.
 # Alban Browaeys <albanbrowaeys@oreka.com>
 # Michèle Garoche <michele.garoche@easyconnect.fr>
+# next translator
 #
 
 msgid ""
