@@ -194,7 +194,7 @@ static GdkPixbuf*
 load_icon (const gchar *icon_filename)
 {
 	gchar *full_path;
-	gchar *modified_icon_filename; /* FIXME bugzilla 136287 */
+	gchar *modified_icon_filename;
 	GdkPixbuf *pixbuf;
 
 	g_return_val_if_fail(icon_filename, NULL);
