@@ -2,6 +2,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
+#include <glade/glade-xml.h>
 
 #include <stdlib.h>
 #include "global.h"
@@ -1058,46 +1059,38 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
  */
 gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *elements) 
 {
-	GtkWidget *window, *vbox, *label, *button, *action_area, *combo;
-	GList *current;
-	gint length, response;
+	gchar *glade_filename;
+	GladeXML *xml;
+	GtkWidget *dialog, *label, *combo;
 	gchar *text;
 
-	/*  create a new dialog */
-	window = gtk_dialog_new_with_buttons(title, NULL, /* FIXME: set up the parent dialog */
-					     GTK_DIALOG_MODAL,
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					     GTK_STOCK_OK, GTK_RESPONSE_OK,
-					     NULL);
+	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
+						   GNOME_FILE_DOMAIN_APP_DATADIR,
+						   "conglomerate/glade/string_selection_dialog.glade",
+						   FALSE,
+						   NULL);
 
-	/*  get internal vbox  */
-	vbox = GTK_DIALOG(window)->vbox;
-	action_area = GTK_DIALOG(window)->action_area;
-       
-	/*  Create dialog contents */
-	label = gtk_label_new(element_description);
-	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-	
-	combo = gtk_combo_new ();
+	xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+	g_free(glade_filename);
+
+	dialog = glade_xml_get_widget(xml, "string_selection_dialog");
+	label = glade_xml_get_widget(xml, "label");
+	combo = glade_xml_get_widget(xml, "combo");
+
+        gtk_window_set_title(GTK_WINDOW(dialog), title);
+	gtk_label_set_text(GTK_LABEL(label), element_description);
 	gtk_combo_set_popdown_strings(GTK_COMBO(combo), elements);
-	gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(combo)->entry), FALSE);
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+
+        /* Don't bother catching how they exitted; we need to get a value
+         * from here so we don't crash. */
+
+        text = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(combo)->entry)));
 	
-
-	gtk_box_pack_start(GTK_BOX(vbox), combo, FALSE, FALSE, 0);	
-
-	/*  run the dialog */
-	gtk_widget_show_all(GTK_WIDGET(window));
-	response = gtk_dialog_run(GTK_DIALOG(window));
-
-	if (response == GTK_RESPONSE_OK) {
-		/* get combo value, and strdup since string will be destroyed with combo widget */
-		text = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(combo)->entry)));
-	}
-	else {
-		text = NULL;
-	}
-	
-	gtk_widget_destroy(GTK_WIDGET(window));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+        g_object_unref(G_OBJECT(xml));
 
 	return text;
 }

@@ -397,7 +397,7 @@ static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlEleme
 
 	/*  create description for dialog */
 	description = g_string_new("");
-	g_string_printf(description, _("The element \"%s\" requires a child to be valid.  Please choose one of the following child types."),
+	g_string_printf(description, _("The element \"%s\" requires a child to be valid.\n\nPlease choose one of the following child types."),
 			node->name);
 	
 	/*  select a dialog element */

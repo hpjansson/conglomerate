@@ -29,12 +29,24 @@
 	* tree.c
 
 	Removed redundant whitespace nodes that were added when adding new structural elements
-	
+
 2003-09-27  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
  
         * cong-parser-error.c
  
 	Added syntax highlighting to the parser error dialog.
+
+2003-09-27  David Hoover <karma@deadmoose.com>
+        
+        * popup.c
+
+        Use glade-xml, and use a glade-based dialog for string_selection_dialog.
+        Also, force us to always grab a value from it so we don't crash if 
+        closed w/o pressing OK.
+
+        * xmldata.c
+
+        Change 'Required Child' dialog string to be more HIG compliant.
 
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
