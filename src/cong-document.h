@@ -182,6 +182,19 @@ cong_document_set_url(CongDocument *doc, const gchar *url);
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
 
+/**
+ * cong_document_get_node_name
+ * @doc: 
+ * @node:
+ * 
+ * Generate a user-visible, translated string that is a name for this node.
+ * 
+ * Returns:  the node name, which must be deleted by the caller.
+ */
+gchar*
+cong_document_get_node_name (CongDocument *doc, 
+			     CongNodePtr node);
+
 /* Statistics about the document.  These are cached internally */
 guint
 cong_document_get_num_nodes (CongDocument *doc);
@@ -292,6 +305,20 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view);
 /* cursor and selections are now properties of the document: */
 CongCursor* cong_document_get_cursor(CongDocument *doc);
 CongSelection* cong_document_get_selection(CongDocument *doc);
+
+
+/** 
+ * cong_document_get_selected_node
+ * @doc: the document
+ * 
+ * Convenience wrapper around CongSelection for dealing with selection of specific nodes (as opposed to text ranges).
+ * 
+ * Returns: If a specific node is selected, returns that node.  If a text range is selected instead, or there is no selection, NULL is returned.
+ * 
+ */
+CongNodePtr
+cong_document_get_selected_node (CongDocument *doc);
+
 
 /** 
  * cong_document_get_language_for_node

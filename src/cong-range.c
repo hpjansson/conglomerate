@@ -195,6 +195,21 @@ cong_range_make_ordered (CongRange *range)
 	
 }
 
+gboolean
+cong_range_is_node (CongRange *range,
+		    CongNodePtr node)
+{
+	g_return_val_if_fail (range, FALSE);
+
+	if (range->loc0.node==node && range->loc0.byte_offset==0) {
+		if (range->loc1.node==node && range->loc1.byte_offset==0) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
 void
 cong_range_copy(CongRange *dst, const CongRange *src)
 {

@@ -71,6 +71,10 @@ cong_range_is_ordered (CongRange *range);
 void
 cong_range_make_ordered (CongRange *range);
 
+gboolean
+cong_range_is_node (CongRange *range,
+		    CongNodePtr node);
+
 void
 cong_range_copy(CongRange *dst, const CongRange *src);
 

@@ -26,6 +26,7 @@
 #include "global.h"
 #include "cong-tree-view.h"
 #include "cong-document.h"
+#include "cong-selection.h"
 
 #define PRIVATE(tree_view) ((tree_view)->private)
 
@@ -673,8 +674,41 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 	}
 }
 
+
 static void on_selection_change(CongView *view)
 {
+	CongTreeView *cong_tree_view;
+	CongDocument *doc;
+	CongSelection *selection;
+	CongNodePtr node;
+	GtkTreeSelection *tree_selection;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_TREE_VIEW
+	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_selection_change\n");
+	#endif
+
+	cong_tree_view = CONG_TREE_VIEW(view);
+
+	tree_selection = gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view);
+	g_assert (tree_selection);
+
+	doc = cong_view_get_document (view);
+	selection = cong_document_get_selection (doc);
+
+	node = cong_location_node (cong_selection_get_logical_start (selection));
+	
+	if (node) {
+		GtkTreeIter tree_iter;
+
+		if (get_iter_for_node(PRIVATE(cong_tree_view), node, &tree_iter)) {
+			gtk_tree_selection_select_iter  (tree_selection,
+							 &tree_iter);
+		}
+	} else {
+		gtk_tree_selection_unselect_all (tree_selection);
+	}
 }
 
 static void on_cursor_change(CongView *view)

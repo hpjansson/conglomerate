@@ -620,6 +620,59 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 	return current_time.tv_sec - PRIVATE(doc)->time_of_last_save.tv_sec;
 }
 
+
+gchar*
+cong_document_get_node_name (CongDocument *doc, 
+			     CongNodePtr node)
+{
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (node, NULL);
+
+	switch (cong_node_type (node)) {
+	default: g_assert_not_reached();
+	case CONG_NODE_TYPE_ELEMENT:
+		{
+			CongDispspecElement *ds_element = cong_dispspec_lookup_node (cong_document_get_dispspec (doc),
+										     node);
+			
+			if (ds_element) {
+				return g_strdup (cong_dispspec_element_username (ds_element));
+			} else {
+				if (cong_node_xmlns(node)) {
+					return g_strdup_printf ("<%s:%s>", cong_node_xmlns(node), node->name);
+				} else {
+					return g_strdup_printf ("<%s>", node->name);
+				}
+			}
+		}
+		break;
+
+	case CONG_NODE_TYPE_ATTRIBUTE:
+	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_CDATA_SECTION:
+	case CONG_NODE_TYPE_ENTITY_REF:
+	case CONG_NODE_TYPE_ENTITY_NODE:
+	case CONG_NODE_TYPE_PI:
+	case CONG_NODE_TYPE_COMMENT:
+	case CONG_NODE_TYPE_DOCUMENT:
+	case CONG_NODE_TYPE_DOCUMENT_TYPE:
+	case CONG_NODE_TYPE_DOCUMENT_FRAG:
+	case CONG_NODE_TYPE_NOTATION:
+	case CONG_NODE_TYPE_HTML_DOCUMENT:
+	case CONG_NODE_TYPE_DTD:
+	case CONG_NODE_TYPE_ELEMENT_DECL:
+	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+	case CONG_NODE_TYPE_ENTITY_DECL:
+	case CONG_NODE_TYPE_NAMESPACE_DECL:
+	case CONG_NODE_TYPE_XINCLUDE_START:
+	case CONG_NODE_TYPE_XINCLUDE_END:
+		g_assert_not_reached();
+		return g_strdup_printf("FIXME");
+		break;
+	}
+}
+
 static gboolean 
 node_count_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
@@ -1053,6 +1106,26 @@ CongSelection* cong_document_get_selection(CongDocument *doc)
 
 	return PRIVATE(doc)->selection;
 }
+
+CongNodePtr
+cong_document_get_selected_node (CongDocument *doc)
+{
+	CongLocation *start, *end;
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+
+	start = cong_selection_get_logical_start (PRIVATE(doc)->selection);
+	end = cong_selection_get_logical_start (PRIVATE(doc)->selection);
+	g_assert (start);
+	g_assert (end);
+
+	if (start->node == end->node) {
+		return start->node;
+	}
+
+	return NULL;
+}
+
 
 PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 

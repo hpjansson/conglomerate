@@ -93,6 +93,34 @@ cong_editor_area_expander_instance_init (CongEditorAreaExpander *area_expander)
 	area_expander->private = g_new0(CongEditorAreaExpanderDetails,1);
 }
 
+
+static gboolean
+on_signal_motion_notify_for_area (CongEditorArea *editor_area, 
+				  GdkEventButton *event,
+				  gpointer user_data)
+{
+
+	CongEditorWidget3* editor_widget;
+
+	editor_widget = cong_editor_area_get_widget (editor_area);			
+
+	cong_editor_widget3_set_prehighlight_editor_area (editor_widget,
+							  editor_area);
+
+	return TRUE;
+}
+
+
+void
+cong_editor_area_connect_motion_notify_prelight (CongEditorArea *area)
+{
+	g_signal_connect (G_OBJECT(area),
+			  "motion_notify_event",
+			  G_CALLBACK(on_signal_motion_notify_for_area),
+			  NULL);
+}
+
+
 /* Exported function definitions: */
 CongEditorArea*
 cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
@@ -110,6 +138,8 @@ cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
 			  "button_press_event",
 			  G_CALLBACK(on_button_press),
 			  NULL);
+
+	cong_editor_area_connect_motion_notify_prelight (CONG_EDITOR_AREA(area_expander));
 
 	return CONG_EDITOR_AREA (area_expander);
 }

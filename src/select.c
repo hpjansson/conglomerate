@@ -216,6 +216,16 @@ void cong_selection_claim(CongSelection *selection)
 
 #endif
 
+gboolean
+cong_selection_is_node (CongSelection *selection,
+			CongNodePtr node)
+{
+	g_return_val_if_fail (selection, FALSE);
+
+	return cong_range_is_node (&selection->logical_range,
+				   node);
+}
+
 void
 cong_selection_nullify (CongSelection *selection)
 {

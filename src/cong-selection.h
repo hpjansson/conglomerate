@@ -65,6 +65,10 @@ cong_selection_get_ordered_start (CongSelection *selection);
 CongLocation*
 cong_selection_get_ordered_end (CongSelection *selection);
 
+gboolean
+cong_selection_is_node (CongSelection *selection,
+			CongNodePtr node);
+
 void
 cong_selection_nullify (CongSelection *selection);
 

@@ -115,7 +115,9 @@ struct CongEditorWidget3Details
 	CongEditorAreaFlowHolder *root_flow_holder;
 	CongEditorChildPolicy *root_child_policy;
 
-	CongEditorNode *prehighlight_node;
+	CongEditorArea *prehighlight_area;
+
+	CongNodePtr selected_xml_node;
 
 	GdkGC *test_gc;
 };
@@ -678,37 +680,37 @@ cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 	}
 }
 
-CongEditorNode*
-cong_editor_widget3_get_prehighlight_editor_node (CongEditorWidget3 *editor_widget)
+CongEditorArea*
+cong_editor_widget3_get_prehighlight_editor_area (CongEditorWidget3 *editor_widget)
 {
 	g_return_val_if_fail (editor_widget, NULL);
 	
-	return PRIVATE (editor_widget)->prehighlight_node;
+	return PRIVATE (editor_widget)->prehighlight_area;
 }
 
 void
-cong_editor_widget3_set_prehighlight_editor_node (CongEditorWidget3 *editor_widget,
-						  CongEditorNode* editor_node)
+cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widget,
+						  CongEditorArea* editor_area)
 {
 	g_return_if_fail (editor_widget);
 
 #if 0
-	g_message ("set_prehighlight_node: %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_node)));
+	g_message ("set_prehighlight_area: %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)));
 #endif
 
-	if (PRIVATE (editor_widget)->prehighlight_node) {
-		if (cong_editor_node_get_state (PRIVATE (editor_widget)->prehighlight_node) == CONG_EDITOR_STATE_PREHIGHLIGHT) {
-			cong_editor_node_set_state (PRIVATE (editor_widget)->prehighlight_node,
-						    CONG_EDITOR_STATE_NORMAL);
+	if (PRIVATE (editor_widget)->prehighlight_area) {
+		if (cong_editor_area_get_state (PRIVATE (editor_widget)->prehighlight_area) == GTK_STATE_PRELIGHT) {
+			cong_editor_area_set_state (PRIVATE (editor_widget)->prehighlight_area,
+						    GTK_STATE_NORMAL);
 		}
 	}
 	
-	PRIVATE (editor_widget)->prehighlight_node = editor_node;
+	PRIVATE (editor_widget)->prehighlight_area = editor_area;
 
-	if (editor_node) {
-		if (cong_editor_node_get_state (editor_node) == CONG_EDITOR_STATE_NORMAL) {
-			cong_editor_node_set_state (editor_node,
-						    CONG_EDITOR_STATE_PREHIGHLIGHT);
+	if (editor_area) {
+		if (cong_editor_area_get_state (editor_area) == GTK_STATE_NORMAL) {
+			cong_editor_area_set_state (editor_area,
+						    GTK_STATE_PRELIGHT);
 		}
 	}
 }
@@ -928,7 +930,7 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 
 	while (area) {
 
-#if 1
+#if 0
 		g_message("Trying button_press on %p %s", 
 			  area,
 			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(G_OBJECT(area))));
@@ -976,7 +978,7 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 	}
 
 	/* None of the areas handled the motion: */
-	cong_editor_widget3_set_prehighlight_editor_node (editor_widget,
+	cong_editor_widget3_set_prehighlight_editor_area (editor_widget,
 							  NULL);
 
 	return FALSE;
@@ -1542,19 +1544,42 @@ static void on_signal_remove_attribute_notify_after (CongDocument *doc,
 	/* empty so far */
 }
 
+static void 
+set_editor_node_selection (CongEditorWidget3 *widget, 
+			   CongEditorNode *editor_node, 
+			   gpointer user_data)
+{
+	cong_editor_node_private_set_selected (editor_node,
+					       (gboolean)user_data);
+}
+
 static void on_signal_selection_change_notify_after (CongDocument *doc, 
 					       gpointer user_data) 
 { 
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
+	CongNodePtr selected_node;
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_selection_change_notify_after");
 
-	/* empty so far */
+	selected_node = cong_document_get_selected_node (doc);
 
-#if 0
-	/* Force a redraw: */
-	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));	
-#endif
+	if (selected_node != PRIVATE(editor_widget)->selected_xml_node) {
+		if (PRIVATE(editor_widget)->selected_xml_node) {
+			cong_editor_widget3_for_each_editor_node (editor_widget,
+								  PRIVATE(editor_widget)->selected_xml_node,
+								  set_editor_node_selection,
+								  GUINT_TO_POINTER(PRIVATE(editor_widget)->selected_xml_node == selected_node));
+		}
+		
+		PRIVATE(editor_widget)->selected_xml_node = selected_node;
+		
+		if (PRIVATE(editor_widget)->selected_xml_node) {
+			cong_editor_widget3_for_each_editor_node (editor_widget,
+								  PRIVATE(editor_widget)->selected_xml_node,
+								  set_editor_node_selection,
+								  GUINT_TO_POINTER(TRUE));
+		}
+	}
 }
 
 static void on_signal_cursor_change_notify_after (CongDocument *doc, 
@@ -1824,6 +1849,10 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 							   node,
 							   traversal_parent);
 	g_assert(editor_node);
+
+	if (node == PRIVATE (widget)->selected_xml_node) {
+		PRIVATE (widget)->selected_xml_node = NULL;
+	}
 
 	/* Recurse: */
 	if (node->type==XML_ENTITY_REF_NODE) {

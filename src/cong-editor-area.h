@@ -110,12 +110,12 @@ cong_editor_area_show (CongEditorArea *area);
 void
 cong_editor_area_hide (CongEditorArea *area);
 
-enum CongEditorState
+GtkStateType
 cong_editor_area_get_state (CongEditorArea *editor_area);
 
 void
 cong_editor_area_set_state (CongEditorArea *editor_area,
-			    enum CongEditorState state);
+			    GtkStateType state);
 
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area);

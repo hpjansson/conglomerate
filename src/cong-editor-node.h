@@ -112,12 +112,15 @@ cong_editor_node_get_node (CongEditorNode *editor_node);
 CongEditorNode*
 cong_editor_node_get_traversal_parent (CongEditorNode *editor_node);
 
-enum CongEditorState
-cong_editor_node_get_state (CongEditorNode *editor_node);
+gboolean
+cong_editor_node_is_selected (CongEditorNode *editor_node);
 
+/*
+  This function should only be called by the editor widget internals:
+ */
 void
-cong_editor_node_set_state (CongEditorNode *editor_node,
-			    enum CongEditorState state);
+cong_editor_node_private_set_selected (CongEditorNode *editor_node,
+				       gboolean is_selected);
 
 /* 
    Simplistic node->area interface (1-1 for now).

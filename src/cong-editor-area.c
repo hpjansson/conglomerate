@@ -28,6 +28,8 @@
 #include "cong-eel.h"
 #include "cong-marshal.h"
 #include "cong-editor-node.h"
+#include "cong-document.h"
+#include "cong-selection.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -68,12 +70,22 @@ struct CongEditorAreaDetails
 	CongEditorArea *parent_area;
 
 	gboolean is_hidden;
-	enum CongEditorState state;
+	GtkStateType state;
 	GdkRectangle window_area; /* allocated area in window space */
 
 	RequisitionCache requisition_cache[2];
 	gboolean needs_recursive_allocation;
+
+	/* If this area is directly associated with an editor_node, this is it: */
+	CongEditorNode *editor_node;
+	guint selection_change_handler_id;
 };
+/* Declarations of the GObject handlers: */
+static void
+finalize (GObject *object);
+
+static void
+dispose (GObject *object);
 
 /* Signal handler declarations: */
 static void
@@ -91,9 +103,9 @@ on_signal_motion_notify_for_area_with_node (CongEditorArea *editor_area,
 					    GdkEventButton *event,
 					    gpointer user_data);
 
-static void 
-on_signal_state_changed (CongEditorNode *editor_node, 
-			 gpointer user_data);
+static void
+on_signal_is_selected_changed_for_area_with_node (CongEditorNode *editor_node,
+						 gpointer user_data);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space);
@@ -107,6 +119,9 @@ GNOME_CLASS_BOILERPLATE(CongEditorArea,
 static void
 cong_editor_area_class_init (CongEditorAreaClass *klass)
 {
+	G_OBJECT_CLASS (klass)->finalize = finalize;
+	G_OBJECT_CLASS (klass)->dispose = dispose;
+
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_area,
 					      calc_requisition);
@@ -194,7 +209,7 @@ cong_editor_area_construct (CongEditorArea *area,
 	PRIVATE(area)->editor_widget = editor_widget;
 
 	PRIVATE(area)->is_hidden = FALSE;
-	PRIVATE(area)->state = CONG_EDITOR_STATE_NORMAL;
+	PRIVATE(area)->state = GTK_STATE_NORMAL;
 
 	/* FIXME: we forcibly set up the allocation for now: */
 	cong_eel_rectangle_construct( &PRIVATE(area)->window_area,
@@ -249,17 +264,17 @@ cong_editor_area_hide (CongEditorArea *area)
 	/* FIXME: do we need to emit any events? */
 }
 
-enum CongEditorState
+GtkStateType
 cong_editor_area_get_state (CongEditorArea *area)
 {
-	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), CONG_EDITOR_STATE_NORMAL);
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), GTK_STATE_NORMAL);
 
 	return PRIVATE(area)->state;
 }
 
 void
 cong_editor_area_set_state (CongEditorArea *area,
-			    enum CongEditorState state)
+			    GtkStateType state)
 {
 	if (PRIVATE(area)->state != state) {
 		PRIVATE(area)->state = state;
@@ -395,10 +410,29 @@ cong_editor_area_debug_render_state (CongEditorArea *area)
 {
 	switch (cong_editor_area_get_state (area)) {
 	default: break;
-	case CONG_EDITOR_STATE_PREHIGHLIGHT: 
+	case GTK_STATE_PRELIGHT: 
 		cong_editor_area_debug_render_area (area,
 						    cong_editor_widget3_get_test_gc (cong_editor_area_get_widget (area)));
 		break;
+	case GTK_STATE_SELECTED:
+		/* Render solid blue outline for now: */
+		{
+			GdkGC *gc = gdk_gc_new (GDK_DRAWABLE(cong_editor_area_get_gdk_window(area)));
+			GdkColor col;
+
+			col_to_gcol (&col, 0x0000ff);
+			gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &col, FALSE, TRUE);
+
+			gdk_gc_set_foreground (gc, &col);
+			gdk_draw_rectangle (GDK_DRAWABLE(cong_editor_area_get_gdk_window(area)),
+					    gc,
+					    FALSE,
+					    PRIVATE(area)->window_area.x,
+					    PRIVATE(area)->window_area.y,
+					    PRIVATE(area)->window_area.width-1,
+					    PRIVATE(area)->window_area.height-1);
+		}
+		break;		
 	}
 
 }
@@ -795,10 +829,15 @@ void
 cong_editor_area_connect_node_signals (CongEditorArea *area,
 				       CongEditorNode *editor_node)
 {
-	guint state_change_handler_id;
+	CongDocument *doc;
 
 	g_return_if_fail (IS_CONG_EDITOR_AREA (area));
 	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
+	g_return_if_fail (PRIVATE(area)->editor_node==NULL);
+
+	doc = cong_editor_node_get_document (editor_node);
+
+	PRIVATE(area)->editor_node = editor_node;
 
 	g_signal_connect (area,
 			  "button_press_event",
@@ -810,11 +849,11 @@ cong_editor_area_connect_node_signals (CongEditorArea *area,
 			  G_CALLBACK(on_signal_motion_notify_for_area_with_node),
 			  editor_node);
 
-	/* Connect a state-change handler: */
-	state_change_handler_id = g_signal_connect (editor_node,
-						    "state_changed",
-						    G_CALLBACK(on_signal_state_changed),
-						    area);
+	/* FIXME: need to disconnect these signals eventually: */
+	PRIVATE(area)->selection_change_handler_id = g_signal_connect (editor_node,
+								       "is_selected_changed",
+								       G_CALLBACK(on_signal_is_selected_changed_for_area_with_node),
+								       area);
 }
 
 /* Protected stuff: */
@@ -883,6 +922,31 @@ on_signal_button_press_for_area_with_node (CongEditorArea *editor_area,
 	/* Which button was pressed? */
 	switch (event->button) {
 	default: return FALSE;
+	case 1: /* Normally the left mouse button: */
+		{
+			CongNodePtr node = cong_editor_node_get_node (editor_node);
+			
+			if (!cong_selection_is_node (cong_document_get_selection (doc),node)) {
+				gchar *node_name = cong_document_get_node_name (doc, node);
+				gchar *cmd_name = g_strdup_printf (_("Select %s"), node_name);
+				CongCommand *cmd = cong_document_begin_command (doc, cmd_name, NULL);
+				CongLocation new_selection;
+
+				new_selection.node = node;
+				new_selection.byte_offset = 0;
+
+				cong_command_add_selection_change (cmd,
+								   &new_selection,
+								   &new_selection);
+
+				cong_document_end_command (doc, cmd);
+
+				g_free (node_name);
+				g_free (cmd_name);
+			}
+		}
+		return TRUE;
+
 	case 3: /* Normally the right mouse button: */
 		{
 			GtkWidget* menu;
@@ -915,18 +979,80 @@ on_signal_motion_notify_for_area_with_node (CongEditorArea *editor_area,
 	editor_widget = cong_editor_area_get_widget (editor_area);			
 	doc = cong_editor_area_get_document (editor_area);
 
-	cong_editor_widget3_set_prehighlight_editor_node (editor_widget,
-							  editor_node);
+	cong_editor_widget3_set_prehighlight_editor_area (editor_widget,
+							  editor_area);
 
 	return TRUE;
 }
 
-static void 
-on_signal_state_changed (CongEditorNode *editor_node, 
-			 gpointer user_data)
+static GtkStateType
+calc_state (CongEditorArea *area)
 {
-	CongEditorArea *area = CONG_EDITOR_AREA (user_data);
+	CongEditorWidget3 *editor_widget;
+	CongDocument* doc;
 
-	cong_editor_area_set_state (area,
-				    cong_editor_node_get_state (editor_node));
+
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA (area), GTK_STATE_NORMAL);
+	
+	editor_widget = cong_editor_area_get_widget (area);
+	doc = cong_editor_area_get_document (area);
+
+	if (PRIVATE(area)->editor_node) {
+		if (cong_editor_node_is_selected (PRIVATE(area)->editor_node)) {
+			return GTK_STATE_SELECTED;
+		}
+	}
+
+	if (cong_editor_widget3_get_prehighlight_editor_area (editor_widget) == area) {
+		return GTK_STATE_PRELIGHT;
+	}
+
+	return GTK_STATE_NORMAL;
+}
+
+static void
+on_signal_is_selected_changed_for_area_with_node (CongEditorNode *editor_node,
+						  gpointer user_data)
+{
+	CongEditorArea *editor_area = CONG_EDITOR_AREA (user_data);
+
+	g_assert (PRIVATE(editor_area)->editor_node);
+
+	cong_editor_area_set_state (editor_area,
+				    calc_state (editor_area));	
+}
+
+static void
+finalize (GObject *object)
+{
+	CongEditorArea *editor_area = CONG_EDITOR_AREA (object);
+
+	g_message ("cong_editor_area::finalize");
+	
+	g_free (editor_area->private);
+	editor_area->private = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+dispose (GObject *object)
+{
+	CongEditorArea *editor_area = CONG_EDITOR_AREA (object);
+
+	g_message ("cong_editor_area::dispose");
+
+	g_assert (editor_area->private);
+
+	if (PRIVATE (editor_area)->selection_change_handler_id) {
+		CongDocument *doc = cong_editor_area_get_document (editor_area);
+
+		g_signal_handler_disconnect (doc,
+					     PRIVATE(editor_area)->selection_change_handler_id);
+
+		PRIVATE(editor_area)->selection_change_handler_id = 0;		
+	}
+
+	/* Call the parent method: */		
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
