@@ -209,8 +209,6 @@ void
 cong_command_merge (CongCommand *dst,
 		    CongCommand *src)
 {
-	GList *iter;
-
 	g_return_if_fail (IS_CONG_COMMAND(dst));
 	g_return_if_fail (IS_CONG_COMMAND(src));
 
@@ -626,7 +624,7 @@ cong_command_add_delete_range (CongCommand *cmd,
 {
 	CongDocument *doc;
 	CongLocation loc0, loc1;
-	CongNodePtr n0, n1, n2;
+	CongNodePtr n0, n2;
 	
 	g_return_if_fail (IS_CONG_COMMAND (cmd));
 	g_return_if_fail(range);

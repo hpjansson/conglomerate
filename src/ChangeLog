@@ -1,5 +1,9 @@
 2003-10-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c, cong-editor-node-text.c, cong-selection.h
+
+	Fixed warnings
+	
 	* cong-font.c
 
 	Removed last traces of GdkFont

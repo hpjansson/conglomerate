@@ -498,7 +498,6 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 
 	/* Add areas for the PangoLayoutLines: */
 	{
-		GSList* iter;
 		int index;
 		PangoLayoutIter* layout_iter = pango_layout_get_iter (PRIVATE(node_text)->pango_layout);
 
@@ -506,7 +505,6 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 		/* CAUTION: this is internal data of the PangoLayout */
 		for (index=0; index<pango_layout_get_line_count(PRIVATE(node_text)->pango_layout); index++, pango_layout_iter_next_line(layout_iter)) {
 			PangoLayoutLine *line = pango_layout_iter_get_line (layout_iter);
-			gchar *line_text;
 			CongEditorArea *text_fragment;
 			PangoRectangle ink_rect;
 			PangoRectangle logical_rect;
@@ -1112,7 +1110,6 @@ regenerate_selection_state (CongEditorNodeText *editor_node_text)
 static gchar*
 generate_markup (CongEditorNodeText *editor_node_text)
 {
-	CongNodePtr this_node;
 	const gchar *stripped_text;
 	CongSelection *selection;
 
