@@ -2,7 +2,8 @@
 
 	* marshal.make
 
-	New file
+	New file, but it is just a workaround.
+	(see http://bugzilla.gnome.org/show_bug.cgi?id=137248 for details)
 
 2004-03-15  Johannes H?lzl <johannes.hoelzl@gmx.de> (ChangeLog by GSt)
 

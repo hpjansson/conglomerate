@@ -22,6 +22,17 @@ else
 printing_sources = 
 endif
 
+## http://bugzilla.gnome.org/show_bug.cgi?id=137248
+## integrate marshal.make into this Makefile.am
+##
+##cong-marshal.h: cong.marshal
+##	glib-genmarshal $< --header --prefix=cong_cclosure_marshal > $@
+##
+##cong-marshal.c: cong.marshal
+##	glib-genmarshal $< --body --prefix=cong_cclosure_marshal > $@
+##
+## http://bugzilla.gnome.org/show_bug.cgi?id=137248
+
 conglomerate_SOURCES =      \
   global.h                  \
   cong-app.h                \
@@ -331,12 +342,5 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(NULL)
 
 EXTRA_DIST = Makefile.win cong.marshal
-
-cong-marshal.h: cong.marshal
-	glib-genmarshal $< --header --prefix=cong_cclosure_marshal > $@
-
-cong-marshal.c: cong.marshal
-	glib-genmarshal $< --body --prefix=cong_cclosure_marshal > $@
-
 
 ## Last Line
