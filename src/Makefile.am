@@ -3,8 +3,7 @@ NULL =
 
 bin_PROGRAMS = conglomerate
 
-if ENABLE_PRINTING
-printing_sources = \
+printing_sources_dist = \
   fo.h                      \
   fo-parser-result.c        \
   fo-print-context.c 	    \
@@ -12,6 +11,9 @@ printing_sources = \
   fo-solver-result.c        \
   fo-tests.c                \
   $(NULL)
+
+if ENABLE_PRINTING
+printing_sources = $(printing_sources_dist)
 else
 printing_sources = 
 endif
@@ -352,6 +354,9 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(ENCHANT_LIBS) \
 	$(NULL)
 
-EXTRA_DIST = Makefile.win cong.marshal marshal.make
+EXTRA_DIST = Makefile.win \
+	cong.marshal marshal.make \
+	$(printing_sources_dist) \
+	$(NULL)
 
 ## Last Line
