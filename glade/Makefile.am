@@ -1,6 +1,7 @@
 gladedir 	 = $(pkgdatadir)/glade
 glade_DATA 	 = docbook-common-properties.glade \
                    docbook-orderedlist-properties.glade \
+                   docbook-ulink-properties.glade \
 		   string_selection_dialog.glade \
                    cong-file-import.glade
 
