@@ -26,6 +26,7 @@
 #include "cong-attribute-editor-enumeration.h"
 #include "cong-eel.h"
 #include "cong-command.h"
+#include "cong-util.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -162,6 +163,7 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 
 	GtkMenuItem *selected_menu_item;
 	const gchar *new_attr_value;
+	gchar *old_attr_value;
 
 	g_assert (doc);
 	g_assert (node);
@@ -170,7 +172,9 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (option_menu);
 	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
 					    "attr_value");
+	old_attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 
+	if (!cong_util_attribute_value_equality (old_attr_value, new_attr_value))
 	{
 		CongCommand *cmd;
 		gchar *desc;
@@ -201,5 +205,9 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 
 		cong_document_end_command (doc,
 					   cmd);
+	}
+
+	if (old_attr_value) {
+		g_free (old_attr_value);
 	}
 }

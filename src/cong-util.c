@@ -562,6 +562,26 @@ cong_util_ns_uri_sort_order (const gchar* uri0,
 
 }
 
+gboolean
+cong_util_attribute_value_equality (const gchar *value0,
+				    const gchar *value1)
+{
+	if (value0) {
+		if (value1) {
+			return 0==strcmp (value0,value1);
+		} else {
+			return FALSE;
+		}
+	} else {
+		if (value1) {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+}
+
+
 CongElementDescription*
 cong_element_description_new (const gchar *ns_uri,
 			      const gchar *local_name)

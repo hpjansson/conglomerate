@@ -225,6 +225,17 @@ gint
 cong_util_ns_uri_sort_order (const gchar* uri0, 
 			     const gchar* uri1);
 
+/**
+ * cong_util_attribute_value_equality:
+ *
+ * Compare two attribute value strings for equality; either or both might be NULL
+ *
+ * Returns TRUE if they are equal (i.e. the same string, or both are NULL)
+ *
+ */
+gboolean
+cong_util_attribute_value_equality (const gchar *value0,
+				    const gchar *value1);
 
 typedef struct CongElementDescription CongElementDescription;
 
@@ -313,8 +324,6 @@ cong_util_add_menu_separator (GtkMenu *menu);
 char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 				       const xmlChar *local_attribute_name);
-
-
 
 G_END_DECLS
 
