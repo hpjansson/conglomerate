@@ -33,7 +33,13 @@ appicons_DATA = \
 	cong-numbered-list-16.png \
 	cong-list-item-16.png \
 	cong-definition-list-16.png \
-	cong-code-fragment-16.png
+	cong-code-fragment-16.png \
+	cong-caution-48.png \
+	cong-important-48.png \
+	cong-note-48.png \
+	cong-tip-48.png \
+	cong-warning-48.png
+
 
 EXTRA_DIST = $(dti_DATA) $(appicons_DATA)
 ## End of Makefile.am
