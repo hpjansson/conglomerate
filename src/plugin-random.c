@@ -336,11 +336,12 @@ populate_element_from_content (RandomCreationInfo *rci,
 			       int depth,
 			       xmlElementContentPtr content)
 {
+	gint i;
+	guint count;
+
 	g_assert (content);
 
-	guint count = generate_count_for_ocur (rci,
-					       content->ocur);
-	gint i;
+	count = generate_count_for_ocur (rci, content->ocur);
 	
 #if 0
 	{

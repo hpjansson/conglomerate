@@ -1,3 +1,9 @@
+2004-01-22  Geert Stappers <stappers@stappers.nl>
+
+	* plugin-random.c
+
+	Fixed C99ism build problem on gcc-2.95.4
+
 2004-01-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c, cong-dispspec.h, plugin-random.c
