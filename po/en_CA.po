@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-02 15:25-0500\n"
-"PO-Revision-Date: 2004-11-02 15:29-0400\n"
+"POT-Creation-Date: 2004-11-06 11:35-0500\n"
+"PO-Revision-Date: 2004-11-06 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -551,7 +551,7 @@ msgstr "Note"
 
 #: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
-#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:68
 msgid "Paragraph"
 msgstr "Paragraph"
 
@@ -1937,39 +1937,39 @@ msgstr "Replace _All"
 msgid "Find"
 msgstr "Find"
 
-#: src/cong-editor-node-text.c:984
+#: src/cong-editor-node-text.c:898
 msgid "Select word"
 msgstr "Select word"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:923
 msgid "Move cursor"
 msgstr "Move cursor"
 
-#: src/cong-editor-node-text.c:1095
+#: src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
 msgstr "Drag out selection"
 
-#: src/cong-editor-widget3.c:260
+#: src/cong-editor-widget3.c:268
 msgid "Expander Size"
 msgstr "Expander Size"
 
-#: src/cong-editor-widget3.c:261
+#: src/cong-editor-widget3.c:269
 msgid "Size of the expander arrow"
 msgstr "Size of the expander arrow"
 
-#: src/cong-editor-widget3.c:745
+#: src/cong-editor-widget3.c:735
 msgid "Input Method"
 msgstr "Input Method"
 
-#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
+#: src/cong-editor-widget3.c:865 src/cong-editor-widget3.c:1396
 msgid "Typing"
 msgstr "Typing"
 
-#: src/cong-editor-widget3.c:1289
+#: src/cong-editor-widget3.c:1297
 msgid "Cursor Movement"
 msgstr "Cursor Movement"
 
-#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
+#: src/cong-editor-widget3.c:1337 src/cong-editor-widget3.c:1350
 msgid "Delete Selection"
 msgstr "Delete Selection"
 
@@ -2759,8 +2759,8 @@ msgstr "_Quit"
 
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1503
-msgid "Prefere_nces"
-msgstr "Prefere_nces"
+msgid "Pr_eferences"
+msgstr "Pr_eferences"
 
 #. Actions found in Help menu:
 #: src/cong-menus.c:1516
@@ -3064,11 +3064,11 @@ msgstr "XML Files"
 msgid "All Files"
 msgstr "All Files"
 
-#: src/plugin-admonition.c:76
+#: src/plugin-admonition.c:77
 msgid "Admonition"
 msgstr "Admonition"
 
-#: src/plugin-admonition.c:77
+#: src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "An editor node for visualising tips, warnings, etc"
 
@@ -3390,15 +3390,15 @@ msgstr "Generate a PDF file from the XSL:FO information"
 msgid "Print XSL:FO"
 msgstr "Print XSL:FO"
 
-#: src/plugin-lists.c:76
+#: src/plugin-lists.c:77
 msgid "List Member Element"
 msgstr "List Member Element"
 
-#: src/plugin-lists.c:77
+#: src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
 msgstr "An editor node for visualising a member of a list"
 
-#: src/plugin-paragraph.c:68
+#: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "An editor node for visualising a paragraph"
 
