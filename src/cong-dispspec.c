@@ -910,53 +910,6 @@ cong_dispspec_get_element (CongDispspec *ds,
 }
 
 /* Various functions that may get deprecated at some point: */
-#if NEW_LOOK
-#if 0
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, CongDispspecGCUsage usage)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, );
-
-	if (element) {
-		return cong_dispspec_element_gc(element, usage);
-	} else {
-		return NULL;
-	}
-}
-#endif
-#else
-/**
- * cong_dispspec_name_gc_get:
- * @ds:
- * @t:
- * @tog:
- *
- * TODO: Write me
- * Returns:
- */
-GdkGC *
-cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_name(t));
-
-	if (element) {
-		return cong_dispspec_element_gc(element);
-	} else {
-		return NULL;
-	}
-}
-
-GdkGC *
-cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
-{
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
-
-	if (element) {
-		return cong_dispspec_element_gc(element);
-	} else {
-		return NULL;
-	}
-}
-#endif
 
 /**
  * cong_dispspec_name_get:

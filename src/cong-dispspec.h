@@ -156,14 +156,7 @@ cong_dispspec_get_element (CongDispspec *ds,
 			   guint index);
 
 /* Various functions that may get deprecated at some point: */
-#if NEW_LOOK
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, CongDispspecGCUsage usage);
-#else
-#if 0
-GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
-#endif
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
-#endif
 const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node);
 
 #if 1

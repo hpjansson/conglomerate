@@ -107,19 +107,11 @@ cong_dispspec_element_is_span(CongDispspecElement *element);
 unsigned int
 cong_dispspec_element_color(CongDispspecElement *element);
 
-#if NEW_LOOK
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element, CongDispspecGCUsage usage);
 
 const GdkColor*
 cong_dispspec_element_col(CongDispspecElement *element, CongDispspecGCUsage usage);
-#else
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element);
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element);
-#endif
 
 CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element);

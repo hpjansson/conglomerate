@@ -41,12 +41,6 @@ G_BEGIN_DECLS
 #define RELEASE 1
 #undef WINDOWS_BUILD
 
-#ifdef WINDOWS_BUILD
-# define isblank(c) ((c) == ' ' || (c) == '\n' || (c) == '\r' || (c) == '\t')
-#endif
-
-#define NEW_LOOK 1
-
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>

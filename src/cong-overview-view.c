@@ -227,12 +227,8 @@ node_creation_callback (CongTreeView *cong_tree_view,
 						    -1);
 				g_free(text);
 				/* FIXME:  this will fail to update when the text is edited */
-#if NEW_LOOK
 				col = cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_TEXT);
 				/* We hope this will contrast well against white */
-#else
-				col = cong_dispspec_element_col(element);
-#endif
 
 				col_string = get_col_string(col);
 				

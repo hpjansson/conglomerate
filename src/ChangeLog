@@ -1,3 +1,19 @@
+2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-element.c: Removed NEW_LOOK macro and the unused
+	old look code since it doesn't compile and I don't plan to revive
+	it.
+
+	* cong-overview-view.c: ditto
+
+	* cong-dispspec.h: ditto
+
+	* cong-dispspec.c: ditto
+
+	* cong-dispspec-element.h: ditto
+
+	* global.h: ditto, plus removed the unsued isblank macro
+
 2004-11-25  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-debug-log-view.c: Removed dead code (#145096)

@@ -48,13 +48,8 @@ struct CongDispspecElement
 	CongElementType type;
 	gboolean collapseto;
 
-#if NEW_LOOK
 	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
 	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
-#else
-	GdkColor col;
-	GdkGC* gc;
-#endif
 
 	CongDispspecElementHeaderInfo *header_info;
 
@@ -143,7 +138,6 @@ gxx_callback_construct_dispspec_element(void)
 #include "cong-dispspec-element-gxx.h"
 
 /* Random other stuff: */
-#if NEW_LOOK
 #if 0
 /* Hackish colour calculations in RGB space (ugh!) */
 static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
@@ -172,7 +166,6 @@ static void get_col(GdkColor *dst, const GdkColor *src, CongDispspecGCUsage usag
 	/* pick one of the test colour tables based on a dodgy hashing of the source colour: */
 	col_to_gcol(dst, hacked_cols[(src->red>>8)%2][usage]);
 }
-#endif /* #if NEW_LOOK */
 
 /**
  * generate_gc_for_col:
@@ -200,7 +193,6 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 {
 	g_assert(element);
 
-#if NEW_LOOK
 	{
 		GdkColor gdk_col;
 		int i;
@@ -242,15 +234,6 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 			element->gc_array[i] = generate_gc_for_col (&this_col);
 		}
 	}
-#else
-	col_to_gcol(&element->col, col);
-
-	/* We don't make any attempt to share GCs between different elements for now */
-	element->gc = gdk_gc_new(cong_gui_get_a_window()->window);
-	gdk_gc_copy(element->gc, cong_gui_get_a_window()->style->white_gc);
-	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &element->col, FALSE, TRUE);
-	gdk_gc_set_foreground(element->gc, &element->col);
-#endif	
 }
 
 /* Exported functions: */
@@ -302,11 +285,7 @@ cong_dispspec_element_new (CongDispspec *ds,
 
 	/* Extract colour: */
 	{
-#if NEW_LOOK
 		unsigned int col = 0x00000000;  /* Black is default for the new look */
-#else
-		unsigned int col = 0x00ffffff;  /* White is default */
-#endif
 
 		cong_dispspec_element_init_col(element, col);
 	}
@@ -339,13 +318,8 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 
 	/* FIXME: need to clean up this stuff: */
 #if 0
-#if NEW_LOOK
 	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
 	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
-#else
-	GdkColor col;
-	GdkGC* gc;
-#endif
 
 	CongDispspecElementHeaderInfo *header_info;
 #endif
@@ -581,7 +555,6 @@ cong_dispspec_element_is_span(CongDispspecElement *element)
 	}
 }
 
-#if NEW_LOOK
 /**
  * cong_dispspec_element_gc:
  * @element:
@@ -615,25 +588,6 @@ cong_dispspec_element_col(CongDispspecElement *element, CongDispspecGCUsage usag
 
 	return &element->col_array[usage];
 }
-
-#else
-
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return element->gc;
-}
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element)
-{
-	g_return_val_if_fail(element, NULL);
-
-	return &element->col;
-}
-#endif
 
 /**
  * cong_dispspec_element_header_info:
@@ -920,13 +874,8 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 #if 0
 	gboolean collapseto;
 
-#if NEW_LOOK
 	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
 	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
-#else
-	GdkColor col;
-	GdkGC* gc;
-#endif
 
 	gchar *editor_service_id;
 	gchar *property_dialog_service_id;
