@@ -1,8 +1,8 @@
-conglomerate (0.7.11-2) unstable; urgency=low
+conglomerate (0.7.11-2.1) unstable; urgency=low
 
   * expecting new upstream version
 
- -- Geert Stappers <stappers@stappers.nl>  Tue, 10 Feb 2004 09:26:22 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Wed, 11 Feb 2004 12:36:56 +0100
 
 conglomerate (0.7.11-1) unstable; urgency=low
 
