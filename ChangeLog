@@ -1,3 +1,9 @@
+2003-10-16  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* README.xml, README
+
+	Expanded the Win32 link text to contain the link.
+
 2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in

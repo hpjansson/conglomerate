@@ -45,7 +45,7 @@
 		</sect2>
 		<sect2>
 			<title>Windows</title>
-			<para>The original prototype of Conglomerate built and ran under Windows, probably using Cygwin (<ulink url="http://www.cygnus.com/cygwin/">http://www.cygnus.com/cygwin/</ulink>). The process is basically the same as on Unix. Much has changed within the code since then - please let the development list know if you attempt to build it. There has been a recent attempt to get Conglomerate to build on Win32; see <ulink url="http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html">here</ulink>.</para>
+			<para>The original prototype of Conglomerate built and ran under Windows, probably using Cygwin (<ulink url="http://www.cygnus.com/cygwin/">http://www.cygnus.com/cygwin/</ulink>). The process is basically the same as on Unix. Much has changed within the code since then - please let the development list know if you attempt to build it. There has been a recent attempt to get Conglomerate to build on Win32; see <ulink url="http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html">http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html</ulink>.</para>
 		</sect2>
 		<sect2>
 			<title>Mac OS X </title>
