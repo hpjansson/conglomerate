@@ -1,0 +1,45 @@
+#!/bin/sh
+# debian/patches/package_version.dpatch
+# 
+
+#  All lines beginning with `## DP:' are a description of the patch.
+## DP: Show inside program which Debian version it is.
+
+VERSION=$( dpkg-parsechangelog | awk '/^Version:/ { print $2 }')
+VERSION=$( echo $VERSION | sed -e 's/-/debian/')
+
+# File to dpatch:
+FTDP=src/cong-menus.c
+# modifing config.h could effect other files, at least for make.
+
+# String to replace
+STR="PACKAGE_VERSION"
+
+# modified
+MOD="\"\n${VERSION}\""
+
+if [ $# -ne 1 ]; then
+    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+    exit 1
+fi
+
+case "$1" in
+  -patch)
+    sed -e "s/${STR}/${MOD}/" ${FTDP} > ${FTDP}.modified
+    mv ${FTDP}.modified ${FTDP}
+  ;;
+  -unpatch)
+    # test if $MOD is in $FTDP    FIXME
+    sed -e "s/${MOD}/${STR}/" ${FTDP} > ${FTDP}.modified
+    mv ${FTDP}.modified ${FTDP}
+  ;;
+  *)
+    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+    exit 1
+  ;;
+esac
+
+exit 0
+
+# Keep the next line as trailer.
+@DPATCH@
