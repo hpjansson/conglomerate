@@ -52,6 +52,7 @@
 #endif
 
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 /* Internal data structure declarations: */

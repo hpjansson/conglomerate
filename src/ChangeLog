@@ -1,3 +1,9 @@
+2004-01-15  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c
+
+	Suppress a warning due to clashing PRIVATE macros
+	
 2004-01-14  Jeff Martin <jeff@custommonkey.org>
 
 	* plugin-templates.c
