@@ -1430,6 +1430,22 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 	return element;
 }
 
+const gchar*
+cong_external_document_model_get_public_id (const CongExternalDocumentModel* model)
+{
+	g_return_val_if_fail (model, NULL);
+
+	return model->public_id;
+}
+
+const gchar*
+cong_external_document_model_get_system_id (const CongExternalDocumentModel* model)
+{
+	g_return_val_if_fail (model, NULL);
+
+	return model->system_id;
+}
+
 /* Subroutines for converting a CongDispspec to XML XDS: */
 static const gchar* element_type_to_string(enum CongElementType type) 
 {

@@ -1,4 +1,11 @@
+2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c
+
+	Implemented access to System ID and Public ID for document models
+
 2003-09-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
 	* plugin-cleanup-source.c
 
 	Now handles span vs structural tags in indentation; fix indentation for comments (bug #116823)
