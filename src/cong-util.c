@@ -1738,7 +1738,15 @@ cong_util_spellcheck_word (PangoLanguage *language,
 	g_return_val_if_fail (string, FALSE);
 	g_return_val_if_fail (word, FALSE);
 
+#if 0
+	g_message ("Spellchecking: language=\"%s\" string=\"%s\" offset:%i ,length:%i", pango_language_to_string(language), string, word->start_byte_offset, word->length_in_bytes);
+#endif
+
+#if 0
 	return TRUE; /* for now */
+#else
+	return FALSE; /* for now */
+#endif
 }
 
 gboolean
