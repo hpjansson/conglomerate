@@ -22,7 +22,7 @@
 <article id="index" lang="ru">
 <!-- please do not change the id; for translations, change lang to -->
 <!-- appropriate code -->
-<artheader>
+<articleinfo>
     <title>пСЙНБНДЯРБН ОНКЭГНБЮРЕКЪ File Roller, БЕПЯХЪ  &manrevision;</title>       
 
     <copyright> 
@@ -67,7 +67,7 @@
 
     <releaseinfo> б ДЮММНЛ ПСЙНБНДБЕ НОХЯШБЮЕРЯЪ БЕПЯХЪ &appversion; ОПНЦПЮЛЛШ File Roller.
     </releaseinfo> 
-  </artheader> 
+  </articleinfo> 
 
 
 <!-- ============= Document Body ============================= -->

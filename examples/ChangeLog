@@ -3,6 +3,9 @@
 	* test-entities.xml:
 	Doctype in conformity with contents (article).
 
+	* file-roller.xml:
+	Artheader replaced by ArticleInfo in DocBook 4.
+
 2004-03-13  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
