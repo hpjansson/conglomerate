@@ -8,7 +8,8 @@ glade_DATA 	 = docbook-common-properties.glade \
                    cong-find-replace.glade \
                    cong-preferences.glade \
                    plugin-arbitrary.glade \
-                   plugin-random.glade
+                   plugin-random.glade \
+                   custom-element.glade
 
 EXTRA_DIST = $(glade_DATA)
 

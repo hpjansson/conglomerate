@@ -1,3 +1,9 @@
+2004-07-13  Jeff Martin  <jeff@custommonkey.org>
+
+	* glade/custom-element.glade, Makefile.am: 
+
+	Added arbitrary element creation page document popup menu
+
 2004-06-21  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* plugin-arbitrary.c, Makefile.am: 
