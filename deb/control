@@ -1,7 +1,7 @@
 Source: conglomerate
 Section: editors
 Priority: optional
-Maintainer: Geert Stappers <Geert.Stappers@xs4all.nl>
+Maintainer: Geert Stappers <Stappers@Stappers.nl>
 Build-Depends: debhelper (>> 4.0.0)
 Standards-Version: 3.6.0
 
