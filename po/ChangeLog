@@ -1,3 +1,18 @@
+2003-08-08  Geert Stappers  <stappers@stappers.nl>
+
+      * POTFILES.in:
+      Added src/cong-editor-area-entity-decl.c,
+      src/cong-editor-area-entity-ref.c, src/cong-editor-area-line.c,
+      src/cong-editor-area-text-comment.c,
+      src/cong-editor-area-text-fragment.c,
+      src/cong-editor-child-policy-inline.c,
+      src/cong-editor-line-fragments.c, src/cong-editor-node-comment.c,
+      src/cong-editor-node-dtd.c, src/cong-editor-node-entity-decl.c,
+      src/cong-editor-node-entity-ref.c.
+
+      * conglomerate.pot, es.po, ru.po:
+      Regenerated
+
 2003-07-31  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
       * POTFILES.in:

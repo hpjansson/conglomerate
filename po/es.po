@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-07-31 15:50+0000\n"
+"POT-Creation-Date: 2003-08-08 06:19+0000\n"
 "PO-Revision-Date: 2003-04-29 10:53CET\n"
 "Last-Translator: Quique <quique@sindominio.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -555,11 +555,11 @@ msgstr "Opciones de exportación"
 
 #: src/cong-file-export.c:305 src/cong-file-print.c:241 src/cong-menus.c:294
 #: src/cong-menus.c:298 src/cong-menus.c:514
-#: src/cong-node-properties-dialog.c:530
+#: src/cong-node-properties-dialog.c:548
 msgid "Name"
 msgstr "Nombre"
 
-#: src/cong-file-export.c:306 src/cong-file-new.c:228
+#: src/cong-file-export.c:306 src/cong-file-new.c:231
 #: src/cong-file-print.c:242 src/cong-menus.c:299 src/cong-menus.c:521
 #: src/cong-parser-error.c:231
 msgid "Description"
@@ -607,22 +607,22 @@ msgstr ""
 "selección todavía está por implementar. Tendrá que usar el primero que "
 "encuentre el gestor de módulos."
 
-#: src/cong-file-new.c:123
+#: src/cong-file-new.c:126
 #, c-format
 msgid "Creating a new file (%s)"
 msgstr ""
 
-#: src/cong-file-new.c:208
+#: src/cong-file-new.c:211
 #, fuzzy
 msgid "File Type"
 msgstr "Tipo"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:388 src/cong-file-new.c:395 src/cong-file-new.c:420
+#: src/cong-file-new.c:398 src/cong-file-new.c:405 src/cong-file-new.c:430
 msgid "Creating a new file"
 msgstr ""
 
-#: src/cong-file-new.c:396
+#: src/cong-file-new.c:406
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -633,16 +633,16 @@ msgid ""
 "\"template documents\" to add to this system."
 msgstr ""
 
-#: src/cong-file-new.c:409
+#: src/cong-file-new.c:419
 msgid "What type of file would you like to create?"
 msgstr ""
 
-#: src/cong-file-new.c:411
+#: src/cong-file-new.c:421
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr ""
 
-#: src/cong-file-new.c:421
+#: src/cong-file-new.c:431
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -709,27 +709,27 @@ msgstr ""
 msgid "Save XML as..."
 msgstr "Guardar como..."
 
-#: src/cong-location.c:571
+#: src/cong-location.c:575
 msgid "Calculating document start"
 msgstr ""
 
-#: src/cong-location.c:583
+#: src/cong-location.c:587
 msgid "Calculating line start"
 msgstr ""
 
-#: src/cong-location.c:596
+#: src/cong-location.c:600
 msgid "Calculating document end"
 msgstr ""
 
-#: src/cong-location.c:609
+#: src/cong-location.c:613
 msgid "Calculating line end"
 msgstr ""
 
-#: src/cong-location.c:622
+#: src/cong-location.c:626
 msgid "Calculating previous page"
 msgstr ""
 
-#: src/cong-location.c:635
+#: src/cong-location.c:639
 msgid "Calculating next page"
 msgstr ""
 
@@ -737,7 +737,7 @@ msgstr ""
 msgid "The selected menu item has not yet been implemented."
 msgstr "El elemento de menú seleccionado todavía no ha sido implementado."
 
-#: src/cong-menus.c:277 src/cong-node-properties-dialog.c:674
+#: src/cong-menus.c:277 src/cong-node-properties-dialog.c:692
 msgid "Properties"
 msgstr "Propiedades"
 
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
-#: src/cong-menus.c:350 src/cong-node-properties-dialog.c:631
+#: src/cong-menus.c:350 src/cong-node-properties-dialog.c:649
 msgid "Advanced"
 msgstr ""
 
@@ -811,17 +811,17 @@ msgstr "/Pruebas/Tipos de documento"
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr ""
 
-#: src/cong-menus.c:643 src/cong-plugin.c:936
+#: src/cong-menus.c:643 src/cong-plugin.c:940
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 
-#: src/cong-menus.c:646 src/cong-menus.c:670 src/cong-plugin.c:939
-#: src/cong-plugin.c:963
+#: src/cong-menus.c:646 src/cong-menus.c:670 src/cong-plugin.c:943
+#: src/cong-plugin.c:967
 msgid "Conglomerate could not transform the document"
 msgstr ""
 
-#: src/cong-menus.c:667 src/cong-plugin.c:960
+#: src/cong-menus.c:667 src/cong-plugin.c:964
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 
@@ -1076,11 +1076,11 @@ msgstr ""
 msgid "Properties from DTD/schema"
 msgstr ""
 
-#: src/cong-node-properties-dialog.c:509
+#: src/cong-node-properties-dialog.c:527
 msgid "Raw Attributes"
 msgstr ""
 
-#: src/cong-node-properties-dialog.c:542
+#: src/cong-node-properties-dialog.c:560
 msgid "Value"
 msgstr ""
 
@@ -1113,11 +1113,11 @@ msgstr ""
 msgid "Show Details"
 msgstr ""
 
-#: src/cong-plugin.c:873 src/cong-plugin.c:903
+#: src/cong-plugin.c:877 src/cong-plugin.c:907
 msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 
-#: src/cong-plugin.c:1084
+#: src/cong-plugin.c:1091
 #, c-format
 msgid "Unrecognised plugin (id=\"%s\")"
 msgstr ""
@@ -1412,23 +1412,23 @@ msgstr ""
 msgid "Print XSL:FO"
 msgstr "/Pruebas/Previsualizar XSL:FO"
 
-#: src/plugin-lists.c:230 src/plugin-lists.c:236
+#: src/plugin-lists.c:232 src/plugin-lists.c:238
 msgid "List Member Element"
 msgstr ""
 
-#: src/plugin-lists.c:231
+#: src/plugin-lists.c:233
 msgid "An element for visualising member of a list"
 msgstr ""
 
-#: src/plugin-lists.c:237
+#: src/plugin-lists.c:239
 msgid "An editor node for visualising a member of a list"
 msgstr ""
 
-#: src/plugin-paragraph.c:58
+#: src/plugin-paragraph.c:60
 msgid "Paragraph"
 msgstr ""
 
-#: src/plugin-paragraph.c:59
+#: src/plugin-paragraph.c:61
 msgid "An editor node for visualising a paragraph"
 msgstr ""
 
@@ -1481,22 +1481,22 @@ msgstr ""
 msgid "Import an SGML file, converting to XML."
 msgstr ""
 
-#: src/plugin-tests.c:53
+#: src/plugin-tests.c:55
 msgid ""
 "This is a dummy calendar control; it's a placeholder and will eventually be "
 "replaced with some useful options"
 msgstr ""
 
-#: src/plugin-tests.c:131 src/plugin-tests.c:210
+#: src/plugin-tests.c:133 src/plugin-tests.c:212
 #, c-format
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr ""
 
-#: src/plugin-tests.c:329
+#: src/plugin-tests.c:331
 msgid "Unicode Character Reference"
 msgstr ""
 
-#: src/plugin-tests.c:330
+#: src/plugin-tests.c:332
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
