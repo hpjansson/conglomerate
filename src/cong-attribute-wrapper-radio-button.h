@@ -60,7 +60,6 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,
 					       const gchar *attribute_name,
-					       xmlAttributePtr attr,
 					       GtkRadioButton *radio_button,
 					       const gchar *attribute_value);
 
@@ -69,7 +68,6 @@ cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
 					  const gchar *attribute_name,
-					  xmlAttributePtr attr,
 					  GtkRadioButton *radio_button,
 					  const gchar *attribute_value);
 

@@ -39,7 +39,6 @@ struct CongAttributeEditorDetails
 	CongNodePtr node;
 	xmlNs *ns_ptr;
 	gchar *attribute_name;
-	xmlAttributePtr attr; /* can be NULL */
 
 	gulong handler_id_node_set_attribute;
 	gulong handler_id_node_remove_attribute;
@@ -103,7 +102,6 @@ cong_attribute_editor_instance_init (CongAttributeEditor *attribute_editor)
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * TODO: Write me
  * Returns:
@@ -113,17 +111,15 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 				 CongDocument *doc,
 				 CongNodePtr node,
 				 xmlNs *ns_ptr,
-				 const gchar *attribute_name,
-				 xmlAttributePtr attr)
+				 const gchar *attribute_name)
 {
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
 
 	PRIVATE(attribute_editor)->doc = doc;
-	g_object_ref(doc); /*FIXME: need to unref */
+	g_object_ref(doc);
 
 	PRIVATE(attribute_editor)->node = node;
-	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
-	PRIVATE(attribute_editor)->attr = attr;
+	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name);
 
 	PRIVATE(attribute_editor)->ns_ptr = ns_ptr;
 
@@ -171,21 +167,6 @@ cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
 }
 
 /**
- * cong_attribute_editor_get_attribute:
- * @attribute_editor:
- *
- * TODO: Write me
- * Returns:
- */
-xmlAttributePtr
-cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
-{
-	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
-
-	return PRIVATE(attribute_editor)->attr;
-}
-
-/**
  * cong_attribute_editor_get_ns:
  * @attribute_editor:
  *
@@ -204,7 +185,8 @@ cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
  * cong_attribute_editor_get_attribute_name:
  * @attribute_editor:
  *
- * TODO: Write me
+ * Returns the name of the attribute. This string should not be freed.
+ *
  * Returns:
  */
 const gchar*
@@ -326,8 +308,7 @@ cong_attribute_editor_new (CongDocument *doc,
 		return cong_attribute_editor_cdata_new (doc,
 							node,
 						        ns_ptr,
-							attr->name,
-							attr);
+							attr->name);
 
 	case XML_ATTRIBUTE_ID:
 		/* FIXME: extend NMTOKEN thing */
@@ -354,8 +335,7 @@ cong_attribute_editor_new (CongDocument *doc,
 		return cong_attribute_editor_nmtoken_new (doc,
 							  node,
 							  ns_ptr,
-							  attr->name,
-							  attr);
+							  attr->name);
 		
 	case XML_ATTRIBUTE_NMTOKENS:
 		/* FIXME: use a list view, with buttons to add and delete? */
@@ -367,6 +347,7 @@ cong_attribute_editor_new (CongDocument *doc,
 							      ns_ptr,
 							      attr->name,
 							      attr);
+
 	case XML_ATTRIBUTE_NOTATION:
 		/* FIXME: some kind of text entry? */
 		return gtk_label_new("NOTATION");

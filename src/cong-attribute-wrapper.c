@@ -37,7 +37,6 @@ struct CongAttributeWrapperDetails
 	CongNodePtr node;
 	gchar *attribute_name;
 	xmlNs *ns_ptr;
-	xmlAttributePtr attr; /* can be NULL */
 
 	gulong handler_id_node_set_attribute;
 	gulong handler_id_node_remove_attribute;
@@ -100,7 +99,6 @@ cong_attribute_wrapper_instance_init (CongAttributeWrapper *attribute_wrapper)
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * TODO: Write me
  * Returns:
@@ -110,17 +108,15 @@ cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
 				  CongDocument *doc,
 				  CongNodePtr node,
 				  xmlNs *ns_ptr,
-				  const gchar *attribute_name,
-				  xmlAttributePtr attr)
+				  const gchar *attribute_name)
 {
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper), NULL);
 
 	PRIVATE(attribute_wrapper)->doc = doc;
-	g_object_ref(doc); /*FIXME: need to unref */
+	g_object_ref(doc);
 
 	PRIVATE(attribute_wrapper)->node = node;
-	PRIVATE(attribute_wrapper)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
-	PRIVATE(attribute_wrapper)->attr = attr;
+	PRIVATE(attribute_wrapper)->attribute_name = g_strdup(attribute_name);
 
 	PRIVATE(attribute_wrapper)->ns_ptr = ns_ptr;
 
@@ -165,21 +161,6 @@ cong_attribute_wrapper_get_node (CongAttributeWrapper *attribute_wrapper)
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper), NULL);
 
 	return PRIVATE(attribute_wrapper)->node;
-}
-
-/**
- * cong_attribute_wrapper_get_attribute:
- * @attribute_wrapper:
- *
- * TODO: Write me
- * Returns:
- */
-xmlAttributePtr
-cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper)
-{
-	g_return_val_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper), NULL);
-
-	return PRIVATE(attribute_wrapper)->attr;
 }
 
 /**

@@ -55,15 +55,13 @@ cong_attribute_editor_lang_get_type (void);
 
 CongAttributeEditor*
 cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_lang,
-				       CongDocument *doc,
-				       CongNodePtr node,
-				       xmlNs *ns_ptr,
-				       xmlAttributePtr attr);
+				      CongDocument *doc,
+				      CongNodePtr node,
+				      xmlNs *ns_ptr);
 GtkWidget*
 cong_attribute_editor_lang_new (CongDocument *doc,
 			        CongNodePtr node,
-			        xmlNs *ns_ptr,
-				xmlAttributePtr attr);
+			        xmlNs *ns_ptr);
 G_END_DECLS
 
 #endif

@@ -83,7 +83,6 @@ cong_attribute_editor_cdata_instance_init (CongAttributeEditorCDATA *area)
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * TODO: Write me
  * Returns:
@@ -93,18 +92,15 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 				       CongDocument *doc,
 				       CongNodePtr node,
 				       xmlNs *ns_ptr,
-				       const gchar *attribute_name,
-				       xmlAttributePtr attr)
+				       const gchar *attribute_name)
 {
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_CDATA(attribute_editor_cdata), NULL);
 
-#if 1
 	cong_attribute_editor_construct (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata),
 					 doc,
 					 node,
 					 ns_ptr,
-					 attribute_name,
-					 attr);
+					 attribute_name);
 
 	/* Build widgetry: */
 	PRIVATE(attribute_editor_cdata)->hbox = GTK_BOX(gtk_hbox_new (FALSE, 6));
@@ -112,11 +108,21 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 	PRIVATE(attribute_editor_cdata)->add_btn = GTK_BUTTON(gtk_button_new_from_stock (GTK_STOCK_ADD));
 	PRIVATE(attribute_editor_cdata)->delete_btn = GTK_BUTTON(gtk_button_new_from_stock (GTK_STOCK_DELETE));
 
-	gtk_box_pack_end(PRIVATE(attribute_editor_cdata)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_cdata)->delete_btn), FALSE, FALSE, 0);
-	gtk_box_pack_end(PRIVATE(attribute_editor_cdata)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_cdata)->entry), TRUE, TRUE, 0);
-
-	gtk_box_pack_end(PRIVATE(attribute_editor_cdata)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_cdata)->add_btn), FALSE, FALSE, 0);
-
+	gtk_box_pack_end (PRIVATE(attribute_editor_cdata)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_cdata)->delete_btn),
+			  FALSE,
+			  FALSE,
+			  0);
+	gtk_box_pack_end (PRIVATE(attribute_editor_cdata)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_cdata)->entry),
+			  TRUE,
+			  TRUE,
+			  0);
+	gtk_box_pack_end (PRIVATE(attribute_editor_cdata)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_cdata)->add_btn),
+			  FALSE,
+			  FALSE,
+			  0);
 	gtk_container_add (GTK_CONTAINER(attribute_editor_cdata),
 			   GTK_WIDGET(PRIVATE(attribute_editor_cdata)->hbox));
 
@@ -136,21 +142,6 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 				"clicked",
 				G_CALLBACK(on_delete_button),
 				attribute_editor_cdata);
-#else
-	{
-		GtkWidget *label = gtk_label_new("fubar");
-
-		g_assert (GTK_IS_HBOX (attribute_editor_cdata));
-		
-		gtk_box_pack_start (GTK_BOX(attribute_editor_cdata),
-				    label,
-				    FALSE,
-				    FALSE,
-				    0);
-
-		gtk_widget_show (label);
-	}
-#endif
 
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_cdata);
 }
@@ -161,7 +152,6 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * TODO: Write me
  * Returns:
@@ -170,16 +160,14 @@ GtkWidget*
 cong_attribute_editor_cdata_new (CongDocument *doc,
 				 CongNodePtr node,
 				 xmlNs *ns_ptr,
-				 const gchar *attribute_name,
-				 xmlAttributePtr attr)
+				 const gchar *attribute_name)
 {
 	return GTK_WIDGET( cong_attribute_editor_cdata_construct
 			   (g_object_new (CONG_ATTRIBUTE_EDITOR_CDATA_TYPE, NULL),
 			    doc,
 			    node,
 			    ns_ptr,
-			    attribute_name,
-			    attr));			   
+			    attribute_name));			   
 }
 
 /* Internal function definitions: */

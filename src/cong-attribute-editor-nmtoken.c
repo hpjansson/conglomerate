@@ -86,7 +86,6 @@ cong_attribute_editor_nmtoken_instance_init (CongAttributeEditorNMTOKEN *area)
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * Constructror called by #cong_attribute_editor_nmtoken_new()
  *
@@ -97,8 +96,7 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
 					 CongDocument *doc,
 					 CongNodePtr node,
 					 xmlNs *ns_ptr,
-					 const gchar *attribute_name,
-					 xmlAttributePtr attr)
+					 const gchar *attribute_name)
 {
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_NMTOKEN(attribute_editor_nmtoken), NULL);
 
@@ -106,8 +104,7 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
 					 doc,
 					 node,
 					 ns_ptr,
-					 attribute_name,
-					 attr);
+					 attribute_name);
 
 	/* Build widgetry: */
 	PRIVATE(attribute_editor_nmtoken)->hbox = GTK_BOX(gtk_hbox_new (FALSE, 6));
@@ -149,7 +146,6 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  *
  * Creates a #GtkWidget that is used to display/edit the
  * supplied attribute (with name given by the attribute_name
@@ -168,16 +164,14 @@ GtkWidget*
 cong_attribute_editor_nmtoken_new (CongDocument *doc,
 				   CongNodePtr node,
 				   xmlNs *ns_ptr,
-				   const gchar *attribute_name,
-				   xmlAttributePtr attr)
+				   const gchar *attribute_name)
 {
 	return GTK_WIDGET( cong_attribute_editor_nmtoken_construct
 			   (g_object_new (CONG_ATTRIBUTE_EDITOR_NMTOKEN_TYPE, NULL),
 			    doc,
 			    node,
 			    ns_ptr,
-			    attribute_name,
-			    attr));			   
+			    attribute_name));			   
 }
 
 /* Internal function definitions: */

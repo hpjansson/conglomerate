@@ -108,8 +108,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 					 doc,
 					 node,
 					 ns_ptr,
-					 attribute_name,
-					 attr);
+					 attribute_name);
 
 	/* Build widgetry: */
 	PRIVATE(attribute_editor_enumeration)->combo_box = gtk_combo_box_new_text ();
@@ -160,7 +159,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
  * @attr: Pointer to the attribute.
  *
  * Creates a widget that allows a user to create, edit, and delete
- * the value of an attribute (@attr and @attribute) of type
+ * the value of an attribute (@attr) of type
  * XML_ATTRIBUTE_ENUMERATION.
  *
  * Returns: 

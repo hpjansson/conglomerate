@@ -90,7 +90,6 @@ cong_attribute_wrapper_radio_button_instance_init (CongAttributeWrapperRadioButt
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  * @radio_button:
  * @attribute_value:
  *
@@ -103,7 +102,6 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,
 					       const gchar *attribute_name,
-					       xmlAttributePtr attr,
 					       GtkRadioButton *radio_button,
 					       const gchar *attribute_value)
 {
@@ -113,8 +111,7 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 					  doc,
 					  node,
 					  ns_ptr,
-					  attribute_name,
-					  attr);
+					  attribute_name);
 
 
 	PRIVATE(attribute_wrapper)->radio_button = radio_button;
@@ -135,7 +132,6 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  * @radio_button:
  * @attribute_value:
  *
@@ -147,7 +143,6 @@ cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
 					  const gchar *attribute_name,
-					  xmlAttributePtr attr,
 					  GtkRadioButton *radio_button,
 					  const gchar *attribute_value)
 {
@@ -156,7 +151,6 @@ cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 							      node,
 							      ns_ptr,
 							      attribute_name,
-							      attr,
 							      radio_button,
 							      attribute_value);
 
@@ -178,37 +172,25 @@ remove_attribute_handler (CongAttributeWrapper *attribute_wrapper)
 static void
 finalize (GObject *object)
 {
-#if 0
 	CongAttributeWrapperRadioButton *attribute_wrapper_radio_button = CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON(object);
 	
-	g_free (attribute_wrapper->private);
-	attribute_wrapper->private = NULL;
+	g_free (attribute_wrapper_radio_button->private);
+	attribute_wrapper_radio_button->private = NULL;
 	
 	G_OBJECT_CLASS (parent_class)->finalize (object);
-#endif
 }
 
 static void
 dispose (GObject *object)
 {
-#if 0
-	CongAttributeWrapperRadioButton *attribute_wrapper = CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON(object);
+	CongAttributeWrapperRadioButton *attribute_wrapper_radio_button = CONG_ATTRIBUTE_WRAPPER_RADIO_BUTTON(object);
 
-	if (PRIVATE(attribute_wrapper)->doc) {
-	
-		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_wrapper)->doc),
-					     PRIVATE(attribute_wrapper)->handler_id_node_set_attribute);
-		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_wrapper)->doc),
-					     PRIVATE(attribute_wrapper)->handler_id_node_remove_attribute);
-		
-		g_object_unref (G_OBJECT (PRIVATE(attribute_wrapper)->doc));
-		PRIVATE(attribute_wrapper)->doc = NULL;
-		
-		g_free (PRIVATE(attribute_wrapper)->attribute_name);
+	if (PRIVATE(attribute_wrapper_radio_button)->attribute_value) {
+		g_free (PRIVATE(attribute_wrapper_radio_button)->attribute_value);
+		PRIVATE(attribute_wrapper_radio_button)->attribute_value = NULL;
 	}
-		
+	
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
-#endif
 }
 
 static void

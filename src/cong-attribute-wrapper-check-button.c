@@ -91,7 +91,6 @@ cong_attribute_wrapper_check_button_instance_init (CongAttributeWrapperCheckButt
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  * @check_button:
  * @attribute_value_unchecked:
  * @attribute_value_checked:
@@ -105,7 +104,6 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,
 					       const gchar *attribute_name,
-					       xmlAttributePtr attr,
 					       GtkCheckButton *check_button,
 					       const gchar *attribute_value_unchecked,
 					       const gchar *attribute_value_checked)
@@ -116,8 +114,7 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
 					  doc,
 					  node,
 					  ns_ptr,
-					  attribute_name,
-					  attr);
+					  attribute_name);
 
 
 	PRIVATE(attribute_wrapper)->check_button = check_button;
@@ -140,7 +137,6 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
  * @node:
  * @ns_ptr:
  * @attribute_name:
- * @attr:
  * @check_button:
  * @attribute_value_unchecked:
  * @attribute_value_checked:
@@ -153,7 +149,6 @@ cong_attribute_wrapper_check_button_new ( CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
 					  const gchar *attribute_name,
-					  xmlAttributePtr attr,
 					  GtkCheckButton *check_button,
 					  const gchar *attribute_value_unchecked,
 					  const gchar *attribute_value_checked)
@@ -163,7 +158,6 @@ cong_attribute_wrapper_check_button_new ( CongDocument *doc,
 							      node,
 							      ns_ptr,
 							      attribute_name,
-							      attr,
 							      check_button,
 							      attribute_value_unchecked,
 							      attribute_value_checked);
@@ -186,37 +180,29 @@ remove_attribute_handler (CongAttributeWrapper *attribute_wrapper)
 static void
 finalize (GObject *object)
 {
-#if 0
 	CongAttributeWrapperCheckButton *attribute_wrapper_check_button = CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON(object);
 	
-	g_free (attribute_wrapper->private);
-	attribute_wrapper->private = NULL;
+	g_free (attribute_wrapper_check_button->private);
+	attribute_wrapper_check_button->private = NULL;
 	
 	G_OBJECT_CLASS (parent_class)->finalize (object);
-#endif
 }
 
 static void
 dispose (GObject *object)
 {
-#if 0
 	CongAttributeWrapperCheckButton *attribute_wrapper = CONG_ATTRIBUTE_WRAPPER_CHECK_BUTTON(object);
 
-	if (PRIVATE(attribute_wrapper)->doc) {
-	
-		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_wrapper)->doc),
-					     PRIVATE(attribute_wrapper)->handler_id_node_set_attribute);
-		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_wrapper)->doc),
-					     PRIVATE(attribute_wrapper)->handler_id_node_remove_attribute);
-		
-		g_object_unref (G_OBJECT (PRIVATE(attribute_wrapper)->doc));
-		PRIVATE(attribute_wrapper)->doc = NULL;
-		
-		g_free (PRIVATE(attribute_wrapper)->attribute_name);
+	if (PRIVATE(attribute_wrapper)->attribute_value_unchecked) {
+		g_free (PRIVATE(attribute_wrapper)->attribute_value_unchecked);
+		PRIVATE(attribute_wrapper)->attribute_value_unchecked = NULL;
 	}
-		
+	if (PRIVATE(attribute_wrapper)->attribute_value_checked) {
+		g_free (PRIVATE(attribute_wrapper)->attribute_value_checked);
+		PRIVATE(attribute_wrapper)->attribute_value_checked = NULL;
+	}
+	
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
-#endif
 }
 
 static void

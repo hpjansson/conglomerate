@@ -116,17 +116,15 @@ cong_attribute_editor_lang_instance_init (CongAttributeEditorLang *attribute_edi
  * @doc:
  * @node:
  * @ns_ptr:
- * @attr:
  *
  * TODO: Write me
  * Returns:
  */
 CongAttributeEditor*
 cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_lang,
-				       CongDocument *doc,
-				       CongNodePtr node,
-				       xmlNs *ns_ptr,
-				       xmlAttributePtr attr)
+				      CongDocument *doc,
+				      CongNodePtr node,
+				      xmlNs *ns_ptr)
 {
 	CongAttributeEditorLangDetails *details;
 
@@ -136,7 +134,6 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 	GtkTreeSelection *selection;
-
 	
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_LANG(attribute_editor_lang), NULL);
 
@@ -146,8 +143,7 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
 					 doc,
 					 node,
 					 ns_ptr,
-					 "lang",
-					 attr);
+					 "lang");
 	
 	details->model = GTK_TREE_MODEL(gtk_list_store_new (NUM_COLUMNS,
 							    G_TYPE_STRING,
@@ -155,12 +151,15 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
     	
 
         gtk_list_store_append (GTK_LIST_STORE(details->model), &iter);
-        gtk_list_store_set (GTK_LIST_STORE(details->model), &iter,
-   		            COLUMN_NAME, _("No Language"), 
+        gtk_list_store_set (GTK_LIST_STORE(details->model),
+			    &iter,
+   		            COLUMN_NAME,
+			    _("No Language"), 
 			    -1);
 	for (i = 0; i < KNOWN_LANGUAGES; i++) {
 	   gtk_list_store_append (GTK_LIST_STORE(details->model), &iter);
-	   gtk_list_store_set (GTK_LIST_STORE(details->model), &iter,
+	   gtk_list_store_set (GTK_LIST_STORE(details->model),
+			       &iter,
 			       COLUMN_NAME, known_languages[i].name, 
 			       COLUMN_CODE, known_languages[i].code,
 			       -1);
@@ -197,7 +196,6 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
  * @doc: Valid document
  * @node: Cong Node of attribute
  * @ns_ptr: Pointer to xml namespace
- * @attr: Pointer to attribute
  *
  * TODO: Creates editor of language-based attribute
  * Returns:
@@ -205,15 +203,13 @@ cong_attribute_editor_lang_construct (CongAttributeEditorLang *attribute_editor_
 GtkWidget*
 cong_attribute_editor_lang_new (CongDocument *doc,
 				 CongNodePtr node,
-				 xmlNs *ns_ptr,
-				 xmlAttributePtr attr)
+				 xmlNs *ns_ptr)
 {
 	return GTK_WIDGET( cong_attribute_editor_lang_construct
 			   (g_object_new (CONG_ATTRIBUTE_EDITOR_LANG_TYPE, NULL),
 			    doc,
 			    node,
-			    ns_ptr,
-			    attr));			   
+			    ns_ptr));			   
 }
 
 /* Internal function definitions: */

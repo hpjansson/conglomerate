@@ -58,14 +58,12 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
 					 CongDocument *doc,
 					 CongNodePtr node,
 					 xmlNs *ns_ptr,
-					 const gchar *attribute_name,
-					 xmlAttributePtr attr);
+					 const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_nmtoken_new (CongDocument *doc,
 				   CongNodePtr node,
 				   xmlNs *ns_ptr,
-				   const gchar *attribute_name,
-				   xmlAttributePtr attr);
+				   const gchar *attribute_name);
 
 
 G_END_DECLS

@@ -57,14 +57,13 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 				       CongDocument *doc,
 				       CongNodePtr node,
 				       xmlNs *ns_ptr,
-				       const gchar *attribute_name,
-				       xmlAttributePtr attr);
+				       const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_cdata_new (CongDocument *doc,
 				 CongNodePtr node,
 				 xmlNs *ns_ptr,
-				 const gchar *attribute_name,
-				 xmlAttributePtr attr);
+				 const gchar *attribute_name);
+
 G_END_DECLS
 
 #endif

@@ -113,7 +113,6 @@ cong_bind_radio_button (GtkRadioButton *radio_button,
 											     node,
 											     ns_ptr,
 											     attribute_name,
-											     NULL,
 											     radio_button,
 											     attribute_value);
 	cong_attribute_wrapper_bind_to_widget (CONG_ATTRIBUTE_WRAPPER (wrapper),
@@ -145,7 +144,6 @@ cong_bind_check_button (GtkCheckButton *check_button,
 											     node,
 											     ns_ptr,
 											     attribute_name,
-											     NULL,
 											     check_button,
 											     attribute_value_unchecked,
 											     attribute_value_checked);
@@ -180,9 +178,7 @@ create_cdata_editor (GladeXML *xml,
 {
 	GtkWidget *custom_widget;
 
-#if 1
 	/* for some reason, the string1 stuff is coming through in func_name on my machine: */
-
 	/* FIXME: Should we store the namespace URI somewhere or is the prefix enough. */
 
 	const char *local_name;
@@ -193,14 +189,7 @@ create_cdata_editor (GladeXML *xml,
 	custom_widget = cong_attribute_editor_cdata_new (global_glade_doc_ptr, 
 							 global_glade_node_ptr, 
 							 ns_ptr,
-							 local_name,
-							 NULL);
-#else
-	custom_widget = gtk_label_new(g_strdup_printf("custom widget \"%s\" \"%s\" \"%s\" \"%s\" %i %i", func_name, name, string1, string2, int1, int2)); /* for now */
-
-	gtk_widget_show_all(custom_widget);
-#endif
-
+							 local_name);
 	gtk_widget_show (custom_widget);
 
 	return custom_widget;
@@ -233,14 +222,13 @@ create_lang_editor (GladeXML *xml,
 	GtkWidget *custom_widget;
 	const char *local_name;
 
-	xmlNs *ns_ptr = cong_node_get_attr_ns(global_glade_node_ptr,
-					      "lang",
-					      &local_name);
+	xmlNs *ns_ptr = cong_node_get_attr_ns (global_glade_node_ptr,
+					       "lang",
+					       &local_name);
 
 	custom_widget = cong_attribute_editor_lang_new (global_glade_doc_ptr, 
-							 global_glade_node_ptr, 
-							 ns_ptr,
-							 NULL);
+							global_glade_node_ptr, 
+							ns_ptr);
 	gtk_widget_show_all (custom_widget);
 
 	return custom_widget;

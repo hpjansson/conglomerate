@@ -57,24 +57,18 @@ struct CongAttributeEditorClass
 GType
 cong_attribute_editor_get_type (void);
 
-/* it's legitimate for attr to be NULL */
 CongAttributeEditor*
 cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 				 CongDocument *doc,
 				 CongNodePtr node,
 				 xmlNs *ns_ptr,
-				 const gchar *attribute_name,
-				 xmlAttributePtr attr);
+				 const gchar *attribute_name);
 
 CongDocument*
 cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor);
 
 CongNodePtr
 cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor);
-
-/* Result can be NULL */
-xmlAttributePtr
-cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor);
 
 xmlNs *
 cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor);

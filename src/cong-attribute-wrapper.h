@@ -56,24 +56,18 @@ struct CongAttributeWrapperClass
 GType
 cong_attribute_wrapper_get_type (void);
 
-/* it's legitimate for attr to be NULL */
 CongAttributeWrapper*
 cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
 				  CongDocument *doc,
 				  CongNodePtr node,
 				  xmlNs *ns_ptr,
-				  const gchar *attribute_name,
-				  xmlAttributePtr attr);
+				  const gchar *attribute_name);
 
 CongDocument*
 cong_attribute_wrapper_get_document (CongAttributeWrapper *attribute_wrapper);
 
 CongNodePtr
 cong_attribute_wrapper_get_node (CongAttributeWrapper *attribute_wrapper);
-
-/* Result can be NULL */
-xmlAttributePtr
-cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper);
 
 xmlNs *
 cong_attribute_wrapper_get_ns (CongAttributeWrapper *attribute_wrapper);

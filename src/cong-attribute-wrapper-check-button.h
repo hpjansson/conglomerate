@@ -60,7 +60,6 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
 					       CongNodePtr node,
 					       xmlNs *ns_ptr,
 					       const gchar *attribute_name,
-					       xmlAttributePtr attr,
 					       GtkCheckButton *check_button,
 					       const gchar *attribute_value_unchecked,
 					       const gchar *attribute_value_checked);
@@ -70,7 +69,6 @@ cong_attribute_wrapper_check_button_new ( CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
 					  const gchar *attribute_name,
-					  xmlAttributePtr attr,
 					  GtkCheckButton *check_button,
 					  const gchar *attribute_value_unchecked,
 					  const gchar *attribute_value_checked);
