@@ -1,3 +1,9 @@
+2003-09-24  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
+
+	* configure.in
+ 
+        Added PKG_CHECK for GtkSourceView 
+
 2003-09-23  Geert Stappers <stappers@stappers.nl>
 
 	* README.xml

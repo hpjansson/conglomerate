@@ -42,6 +42,7 @@ LIBGNOMEPRINT_REQUIRED=1.116.0
 LIBGNOMEPRINTUI_REQUIRED=1.116.0
 LIBGLADE2_REQUIRED=2.0.0
 LIBFO_REQUIRED=0.2.3
+GTKSOURCEVIEW_REQUIRED=0.6
 
 PKG_CHECK_MODULES(CONGLOMERATE,		\
   libxml-2.0 >= $LIBXML_REQUIRED	\
@@ -82,6 +83,32 @@ AM_CONDITIONAL(ENABLE_PRINTING, test x$enable_printing = xyes)
 AC_SUBST(PRINTING_CFLAGS)
 AC_SUBST(PRINTING_LIBS)
 AC_MSG_RESULT($enable_printing)
+
+AC_MSG_CHECKING([whether to build with GtkSourceView support])
+AC_ARG_ENABLE(gtksourceview, [  --enable-gtksourceview      build with GtkSourceView support [default=yes]], enable_gtksourceview="$enableval", enable_gtksourceview=yes)
+
+if test x$enable_gtksourceview = xauto || test x$enable_gtksourceview = xyes ; then
+        PKG_CHECK_MODULES(GTKSOURCEVIEW, \
+                          gtksourceview-1.0 >= $GTKSOURCEVIEW_REQUIRED, \
+                          have_gtksourceview=yes, have_gtksourceview=no)
+        if test x"$have_gtksourceview" = "xyes"; then
+                enable_gtksourceview=yes
+                GTKSOURCEVIEW_CFLAGS="$GTKSOURCEVIEW_CFLAGS -DENABLE_GTKSOURCEVIEW"
+        else
+                enable_gtksourceview=no
+                GTKSOURCEVIEW_CFLAGS=
+                GTKSOURCEVIEW_LIBS=
+        fi
+else
+        enable_gtksourceview=no
+        GTKSOURCEVIEW_CFLAGS=
+        GTKSOURCEVIEW_LIBS=
+fi
+
+AM_CONDITIONAL(ENABLE_GTKSOURCEVIEW, test x$enable_gtksourceview = xyes)
+AC_SUBST(GTKSOURCEVIEW_CFLAGS)
+AC_SUBST(GTKSOURCEVIEW_LIBS)
+AC_MSG_RESULT($enable_gtksourceview)
 
 dnl --- General compilation options ---
 
