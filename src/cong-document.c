@@ -1,9 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <gtk/gtk.h>
 #include "global.h"
-#if !NEW_XML_IMPLEMENTATION
-#include "xml.h"
-#endif
 
 #define TEST_VIEW 1
 

@@ -7,8 +7,6 @@
 
 #include <ctype.h>
 
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 #if NEW_LAYOUT_IMPLEMENTATION

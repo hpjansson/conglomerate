@@ -8,12 +8,11 @@
 
 #include <ctype.h>
 
-#include <ttree.h>
-#include <xml.h>
-
 #include <libxml/tree.h>
 #include <libxml/debugXML.h>
 #include "global.h"
+
+#define SUPPORT_OLD_LOADERS 0
 
 struct CongDispspecElementHeaderInfo
 {
@@ -56,12 +55,16 @@ struct CongDispspec
 	CongDispspecElement *paragraph;
 };
 
+#if 0
 void cong_dispspec_init(TTREE *ds);
+#endif
 
 void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element);
 
+#if SUPPORT_OLD_LOADERS
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt);
+#endif
 
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element);
@@ -159,6 +162,7 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 #endif	
 }
 
+#if SUPPORT_OLD_LOADERS
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 {
 	CongDispspec* ds;
@@ -185,6 +189,7 @@ CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 
 	return ds;
 }
+#endif /* #if SUPPORT_OLD_LOADERS */
 
 static CongDispspec* parse_xmldoc(xmlDocPtr doc);
 static void parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node);
@@ -516,6 +521,7 @@ const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x)
 	return(xml_frag_name_nice(x));
 }
 
+#if 0
 char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
@@ -525,6 +531,8 @@ char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
   
 	return(t->data);
 }
+#endif
+
 #if NEW_LOOK
 #if 0
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage)
@@ -539,9 +547,9 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGC
 }
 #endif
 #else
-GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog)
+GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_node_name(t));
 
 	if (element) {
 		return cong_dispspec_element_gc(element);
@@ -698,6 +706,7 @@ int strcasestr(char *haystack, char *needle)
 #endif
 
 /* Routines for working with raw TTREEs, where the supplied ptr is to the root name of the element */
+#if 0
 const char*
 cong_dispspec_ttree_username(TTREE* tt)
 {
@@ -765,6 +774,7 @@ cong_dispspec_ttree_colour_get(TTREE* tt)
 
 	return(0x00ffffff);  /* White is default */
 }
+#endif
 
 /*
   We now use the CongDispspecElement structs, rather than using TTREE data
@@ -979,6 +989,7 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 
 }
 
+#if SUPPORT_OLD_LOADERS
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt)
 {
@@ -998,6 +1009,7 @@ cong_dispspec_element_new_from_ttree(TTREE* tt)
 
 	return element;
 }
+#endif /* #if SUPPORT_OLD_LOADERS */
 
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element)

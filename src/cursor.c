@@ -5,8 +5,6 @@
 
 #include <stdlib.h>
 
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 #include <string.h>
 
@@ -44,6 +42,7 @@ void curs_off(struct curs* curs)
 }
 
 
+#if 0
 void print_lines(TTREE *l)
 {
 	int i = 0;
@@ -61,6 +60,7 @@ void print_lines(TTREE *l)
 #endif		
 	}
 }
+#endif
 
 
 void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y)
@@ -145,7 +145,6 @@ gint curs_blink(gpointer data)
 
 gint curs_data_insert(struct curs* curs, char *s)
 {
-	TTREE *n;
 	int len;
 
 	g_assert(curs!=NULL);

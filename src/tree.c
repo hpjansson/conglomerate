@@ -4,8 +4,6 @@
 #include <gtk/gtk.h>
 
 #include <stdlib.h>
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 void tree_coarse_update_of_view()

@@ -5,8 +5,6 @@
 #include <gtk/gtk.h>
 
 #include <stdlib.h>
-#include <ttree.h>
-#include <xml.h>
 #include <strtool.h>
 #include "global.h"
 
@@ -21,12 +19,14 @@ cong_xml_editor_get_widget(CongXMLEditor *xed)
 	return xed->w;
 }
 
+#if !NEW_LAYOUT_IMPLEMENTATION
 void add_stuff_to_tt(TTREE* tt, int pos_y, CongNodePtr x, int draw_char)
 {
 	ttree_node_add(tt, (unsigned char*)&pos_y, sizeof(int));
 	ttree_node_add(tt, (unsigned char*)&x, sizeof(CongNodePtr));
 	ttree_node_add(tt, (unsigned char*)&draw_char, sizeof(int));
 }
+#endif
 
 void add_stuff(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char)
 {
@@ -43,6 +43,7 @@ void add_stuff(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char)
 #endif
 }
 
+#if !NEW_LAYOUT_IMPLEMENTATION
 TTREE *add_line_to_tt(TTREE* parent, CongNodePtr tt, int i)
 {
 	TTREE *new_line;
@@ -55,6 +56,7 @@ TTREE *add_line_to_tt(TTREE* parent, CongNodePtr tt, int i)
 
 	return new_line;
 }
+#endif
 
 CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, CongNodePtr tt, int i)
 {
@@ -191,7 +193,9 @@ cong_layout_line_get_c_given(CongLayoutLine *line)
 #define ttree_node_add(a, b, c) ttree_node_add(a, (unsigned char *) b, c)
 
 
+#if 0
 TTREE *xed_stack_top(CongXMLEditor *xed);
+#endif
 int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode);
 
 
@@ -592,36 +596,39 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 
 static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
-
-  TTREE *dummy;                                                                 
+	CongNodePtr dummy;                                                                 
 	                                                                                
-	#ifndef RELEASE                                                                 
-	  printf("In selection_received_event().\n");                                   
-	#endif                                                                          
+#ifndef RELEASE                                                                 
+	printf("In selection_received_event().\n");                                   
+#endif                                                                          
 
 	if (!d->data || d->length < 1) return(TRUE);
 	
-	  fwrite(d->data, d->length, 1, stdout);                                        
-	  fputs("\n", stdout);                                                          
-	                                                                                
+	fwrite(d->data, d->length, 1, stdout);                                        
+	fputs("\n", stdout);
+
+	/* GREP FOR MVC */
+#if NEW_XML_IMPLEMENTATION	                                                                                
+	dummy = cong_node_new_element("dummy");
+	cong_node_set_parent( cong_node_new_text_len(d->data, d->length), dummy );
+#else
 	  dummy = ttree_node_add(0, "tag_span", 8);                                     
 	  ttree_node_add(dummy, "dummy", 5);                                            
 	  ttree_node_add(dummy->child, "data", 4);                                      
 	  ttree_node_add(dummy->child->child, d->data, d->length);                      
-	  the_globals.clipboard = dummy;                                                            
+#endif
+
+	the_globals.clipboard = dummy;                                                            
+
+	/* FIXME: is there a memory leak here? Do we leak the old clipboard content?  */
 	/*                                                                              
 	 *   dummy->child->parent = 0;                                                     
 	 *   dummy->child = 0;                                                             
 	 *   ttree_branch_remove(dummy);                                                   
 	 * */                                                                              
-	  xed_paste(the_globals.curs.w, the_globals.curs.xed);                                                  
+	xed_paste(the_globals.curs.w, the_globals.curs.xed);                                                  
 
-#endif /* #if NEW_XML_IMPLEMENTATION */
-
-	  return(TRUE);  
+	return(TRUE);  
 
 }
 
@@ -1589,17 +1596,13 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 
 int xed_xml_depth(CongNodePtr x)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return 0;
-#else
 	int d = 0, d_max = 0;
 
 	x = cong_node_first_child(x);
 
 	for (d = d_max = 0; x; x = cong_node_next(x))
 	{
-		if (xml_frag_type(x) == XML_TAG_SPAN)
+		if (cong_node_type(x) == CONG_NODE_TYPE_ELEMENT)
 		{
 			d = xed_xml_depth(x);
 			if (d > d_max) {
@@ -1609,7 +1612,6 @@ int xed_xml_depth(CongNodePtr x)
 	}
 
 	return(d_max + 1);
-#endif  /* #if NEW_XML_IMPLEMENTATION */
 
 }
 
@@ -1618,15 +1620,11 @@ int xed_xml_depth(CongNodePtr x)
 
 int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return 0;
-#else
 	int d = 0, d_max = 0;
 
 	for (d = d_max = 0; x; x = cong_node_next(x))
 	{
-		if (xml_frag_type(x) == XML_TAG_SPAN)
+		if (cong_node_type(x) == CONG_NODE_TYPE_ELEMENT)
 		{
 			d = xed_xml_depth_after_eol(xed, cong_node_first_child(x));
 			if (d > d_max) {
@@ -1636,7 +1634,6 @@ int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 	}
 	
 	return(d_max + 1);
-#endif
 }
 
 

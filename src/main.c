@@ -3,10 +3,10 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
-#include <ttree.h>
+#if 0
 #include <sock.h>
 #include <comm.h>
-#include <xml.h>
+#endif
 #include "global.h"
 
 #include <libxml/tree.h>
@@ -136,7 +136,7 @@ void open_document_wrap(GtkWidget *widget, gpointer data) { open_document(widget
 void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget, 0); }
 
 
-
+#if !NEW_XML_IMPLEMENTATION
 void add_node_recursive(TTREE *tt, GtkTreeStore *store, GtkTreeIter *parent_iter)
 {
 	GtkTreeIter child_iter;  /* Child iter  */
@@ -182,6 +182,7 @@ GtkWidget* do_ttree_test(TTREE* tt)
 	
 	return tree;
 }
+#endif /* #if !NEW_XML_IMPLEMENTATION */
 
 /* 
 #define AUTOGENERATE_DS

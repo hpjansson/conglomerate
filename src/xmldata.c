@@ -5,8 +5,6 @@
 
 #include <stdlib.h>
 
-#include <ttree.h>
-#include <xml.h>
 #include <strtool.h>
 #include "global.h"
 

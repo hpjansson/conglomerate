@@ -1,7 +1,6 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-#include <ttree.h>
-#include <sock.h>
+/* #include <sock.h> */
 #include <libgnomevfs/gnome-vfs.h>
 #include <libxml/tree.h>
 
@@ -44,6 +43,8 @@ CongNodePtr cong_node_next(CongNodePtr node);
 CongNodePtr cong_node_first_child(CongNodePtr node);
 CongNodePtr cong_node_parent(CongNodePtr node);
 #else
+#include <ttree.h>
+#include <xml.h>
 typedef TTREE* CongNodePtr;
 
 #define cong_node_name(t) xml_frag_name(t)
@@ -338,7 +339,9 @@ cong_layout_stack_entry_below(CongLayoutStackEntry *entry);
 /* Various access methods: */
 int cong_layout_stack_entry_get_line(CongLayoutStackEntry *entry);
 int cong_layout_stack_entry_get_pos_x(CongLayoutStackEntry *entry);
+#if 0
 TTREE *cong_layout_stack_entry_get_ttree_x(CongLayoutStackEntry *entry);
+#endif
 int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry);
 
 
@@ -393,7 +396,9 @@ struct CongXMLEditor
 	CongLayoutStack layout_stack;
 
 	/* Cursor information */
+#if 0
 	TTREE *curs_x;      /* XML node currently at */
+#endif
 	int curs_char;      /* Cursor positioned after this char (in node) */
 };
 
@@ -581,12 +586,16 @@ CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
 CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x);
 char *xml_fetch_clean_data(CongNodePtr x);
 
+#if 0
 TTREE *get_upper_section(TTREE *x);
+#endif
 
 char *tag_new_pick();
 
+#if 0
 GtkWidget *gui_metachoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
 GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
+#endif
 
 gint open_document(GtkWidget *w, gpointer data);
 gint save_document(GtkWidget *w, gpointer data);
@@ -616,7 +625,10 @@ cong_dispspec_get_name(const CongDispspec *ds);
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
+#if 0
 char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
+#endif
+
 #if NEW_LOOK
 enum CongDispspecGCUsage
 {
@@ -629,7 +641,9 @@ enum CongDispspecGCUsage
 };
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);
 #else
+#if 0
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
+#endif
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
 #endif
 const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);

@@ -2,8 +2,6 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 struct CongDispspecRegistry

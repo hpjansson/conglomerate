@@ -3,7 +3,6 @@
 #include "global.h"
 #include <string.h>
 #include <stdlib.h>
-#include "xml.h"
 
 void cong_location_set(CongLocation *loc, CongNodePtr tt, int offset)
 {

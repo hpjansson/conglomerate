@@ -4,8 +4,6 @@
 #include <gtk/gtk.h>
 
 #include <stdlib.h>
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)

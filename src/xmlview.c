@@ -7,8 +7,6 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 GtkStyle *style_white;
@@ -117,7 +115,9 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 {
 	GdkGC *gc;
 	int str_width;
+#if !NEW_XML_IMPLEMENTATION
 	TTREE *n0;
+#endif
 	gchar *title_text;
 
 	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
@@ -242,6 +242,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 4, 2 + title_font->asc,
 									cong_dispspec_name_get(ds, x));
 
+#if !NEW_XML_IMPLEMENTATION
 	/* Metadata indicator */
 	
 	n0 = x->child;
@@ -264,6 +265,8 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 				10 - gdk_string_width(title_font->gdk_font, "fuentes"),
 				2 + title_font->asc, "fuentes");
 	}
+#endif /* #if !NEW_XML_IMPLEMENTATION */
+
 #endif
 
 	return TRUE;
@@ -804,11 +807,7 @@ CongNodePtr xv_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
 {
 	for ( ; x; x = cong_node_next(x))
 	{
-#if 1
 		enum CongNodeType node_type = cong_node_type(x);
-#else
-		int type = xml_frag_type(x);
-#endif
 		const char *name = xml_frag_name_nice(x);
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(ds, name))
@@ -1031,20 +1030,12 @@ GtkWidget *xv_element_new(CongDocument *doc,
 
 	for ( ; x; )
 	{
-#if 1
 		enum CongNodeType node_type = cong_node_type(x);
-#else
-		int type = xml_frag_type(x);
-#endif
 		const char *name = xml_frag_name_nice(x);
 
 		/* g_message("Examining frag %s\n",name); */
 
-#if 1
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
-#else
-		if (type == XML_TAG_SPAN)
-#endif
 		{
 			if (cong_dispspec_element_structural(ds, name))
 			{
@@ -1132,11 +1123,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 #endif
 			}
 		}
-#if 1
 		else if (node_type == CONG_NODE_TYPE_TEXT)
-#else
-		else if (type == XML_DATA)
-#endif
 		{
 			/* New editor window */
 
@@ -1284,7 +1271,7 @@ void xmlview_destroy(int free_xml)
 
 #if 1
 	if (free_xml) {
-	  cong_document_delete(the_globals.xv->doc);
+		cong_document_delete(the_globals.xv->doc);
 	}
 #else
 	if (free_xml) ttree_branch_remove(the_globals.xv->x);

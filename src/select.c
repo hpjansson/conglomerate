@@ -5,8 +5,6 @@
 
 #include <stdlib.h>
 
-#include <ttree.h>
-#include <xml.h>
 #include "global.h"
 
 void selection_start_from_curs(struct selection* selection, struct curs* curs)

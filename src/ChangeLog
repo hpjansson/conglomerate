@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-27 David Malcolm
+
+	* cong-dispspec-registry.c, cong-document.c, cong-location.c, cursor.c, dispspec.c, global.h, main.c, open.c, popup.c, position.c, save.c, select.c, tchoice.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Removal of all #includes of Flux code except for where needed; last of porting to libxml2.
+	
 2002-10-26 David Malcolm
 
 	* xmledit.c
