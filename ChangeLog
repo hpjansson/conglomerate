@@ -1,3 +1,9 @@
+2003-09-01  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in, conglomerate.spec
+
+	Increased version number to 0.7.1
+
 2003-08-30  Christian Neumair  <chris@gnome-de.org>
 
 	* configure.in
