@@ -3,7 +3,7 @@
 /*
  * cong-dispspec-element.h
  *
- * Copyright (C) 2003 David Malcolm
+ * Copyright (C) 2004 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -24,47 +24,6 @@
 
 #ifndef __CONG_DISPSPEC_ELEMENT_H__
 #define __CONG_DISPSPEC_ELEMENT_H__
-
-/* FIXME: make these private eventually */
-struct CongDispspecElementHeaderInfo
-{
-	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
-	gchar *tagname; /* if xpath not present, then look for this tag below the main tag (deprecated) */
-};
-
-struct CongDispspecElement
-{
-	/* URI of namespace, or NULL: */
-	gchar *ns_uri;
-
-	/* Local name within namespace (if any); must be non-NULL */
-	gchar *local_name;
-
-	GHashTable *hash_of_language_to_user_name;
-	GHashTable *hash_of_language_to_short_desc;
-
-	gchar *icon_name;
-	GdkPixbuf *icon16;
-	enum CongWhitespaceHandling whitespace;
-
-	enum CongElementType type;
-	gboolean collapseto;
-
-#if NEW_LOOK
-	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
-	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
-#else
-	GdkColor col;
-	GdkGC* gc;
-#endif
-
-	CongDispspecElementHeaderInfo *header_info;
-
-	gchar *editor_service_id;
-	gchar *property_dialog_service_id;
-
-	GHashTable *key_value_hash;
-};
 
 G_BEGIN_DECLS
 

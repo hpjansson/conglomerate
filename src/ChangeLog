@@ -1,5 +1,9 @@
 2004-03-05  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec.c
+
+	Made definition of CongDispspecElement private
+
 	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec.c, cong-dispspec.h, xmldata.c
 
 	Use a GList for the list of elements inside a dispspec, rather than the legacy in-place list handling code

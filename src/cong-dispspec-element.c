@@ -26,6 +26,46 @@
 #include "cong-enum-mapping.h"
 #include "cong-ui-hooks.h"
 
+struct CongDispspecElementHeaderInfo
+{
+	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
+	gchar *tagname; /* if xpath not present, then look for this tag below the main tag (deprecated) */
+};
+
+struct CongDispspecElement
+{
+	/* URI of namespace, or NULL: */
+	gchar *ns_uri;
+
+	/* Local name within namespace (if any); must be non-NULL */
+	gchar *local_name;
+
+	GHashTable *hash_of_language_to_user_name;
+	GHashTable *hash_of_language_to_short_desc;
+
+	gchar *icon_name;
+	GdkPixbuf *icon16;
+	enum CongWhitespaceHandling whitespace;
+
+	enum CongElementType type;
+	gboolean collapseto;
+
+#if NEW_LOOK
+	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
+	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
+#else
+	GdkColor col;
+	GdkGC* gc;
+#endif
+
+	CongDispspecElementHeaderInfo *header_info;
+
+	gchar *editor_service_id;
+	gchar *property_dialog_service_id;
+
+	GHashTable *key_value_hash;
+};
+
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
 #define DS_DEBUG_MSG2(x, a) g_message((x), (a))

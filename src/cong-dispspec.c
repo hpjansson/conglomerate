@@ -585,17 +585,16 @@ void cong_dispspec_add_element (CongDispspec* ds,
 	g_return_if_fail(ds);
 	g_return_if_fail(element);
 
-
-	g_assert(element->local_name);
-
 	ds->list_of_elements = g_list_append (ds->list_of_elements,
 					      element);
 
 	key = g_new0(struct SearchTreeKey, 1);
-	if (element->ns_uri) {
-		key->ns_uri = g_strdup (element->ns_uri);
+	if (cong_dispspec_element_get_ns_uri (element)) {
+		key->ns_uri = g_strdup (cong_dispspec_element_get_ns_uri (element));
 	}
-	key->local_name = element->local_name;
+	g_assert (cong_dispspec_element_get_local_name (element));
+	key->local_name = g_strdup (cong_dispspec_element_get_local_name (element));
+	/* FIXME: does this leak? */
 
 	g_tree_insert(ds->search_tree, key, element);
 }
