@@ -1,5 +1,9 @@
 2003-09-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-editor.c, cong-attribute-editor.h
+
+	Added ability to bind GtkWidgets to XML attributes
+
 	* cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, Makefile.am
 
 	New files

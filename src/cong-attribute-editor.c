@@ -26,15 +26,12 @@
 #include "cong-attribute-editor.h"
 #include "cong-attribute-editor-cdata.h"
 #include "cong-attribute-editor-enumeration.h"
+#include "cong-attribute-wrapper.h"
+#include "cong-attribute-wrapper-radio-button.h"
+#include "cong-attribute-wrapper-check-button.h"
 #include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
-
-/*
-  FIXME
-  We need to remove callbacks from document when widgets are deleted!!!
-  This probably requires us to have fully-fledged GtkWidget subclasses!
-*/
 
 /* Internal types: */
 struct CongAttributeEditorDetails
@@ -66,6 +63,11 @@ on_remove_attribute (CongDocument *doc,
 		     CongNodePtr node, 
 		     const xmlChar *name,
 		     CongAttributeEditor *attribute_editor);
+
+static void
+bind_wrapper_to_widget (CongAttributeWrapper* wrapper,
+			GtkWidget *widget);
+
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongAttributeEditor, 
@@ -257,6 +259,43 @@ create_cdata_editor (GladeXML *xml,
 CongDocument *global_glade_doc_ptr = NULL;
 CongNodePtr global_glade_node_ptr = NULL;
 
+void
+cong_bind_radio_button (GtkRadioButton *radio_button,
+			CongDocument *doc,
+			CongNodePtr node,
+			const gchar *attribute_name,
+			const gchar *attribute_value)
+{
+	CongAttributeWrapperRadioButton* wrapper = cong_attribute_wrapper_radio_button_new ( doc,
+											     node,
+											     attribute_name,
+											     NULL,
+											     radio_button,
+											     attribute_value);
+	bind_wrapper_to_widget (CONG_ATTRIBUTE_WRAPPER (wrapper),
+				GTK_WIDGET (radio_button));
+}
+
+
+void
+cong_bind_check_button (GtkCheckButton *check_button,
+			CongDocument *doc,
+			CongNodePtr node,
+			const gchar *attribute_name,
+			const gchar *attribute_value_unchecked,
+			const gchar *attribute_value_checked)
+{
+	CongAttributeWrapperRadioButton* wrapper = cong_attribute_wrapper_check_button_new ( doc,
+											     node,
+											     attribute_name,
+											     NULL,
+											     check_button,
+											     attribute_value_unchecked,
+											     attribute_value_checked);
+	bind_wrapper_to_widget (CONG_ATTRIBUTE_WRAPPER (wrapper),
+				GTK_WIDGET (check_button));
+}
+
 
 /* Internal function definitions: */
 static void
@@ -326,4 +365,13 @@ on_remove_attribute (CongDocument *doc,
 					      (attribute_editor));
 		}
 	}
+}
+
+static void
+bind_wrapper_to_widget (CongAttributeWrapper* wrapper,
+			GtkWidget *widget)
+{
+     g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER (wrapper));
+
+     /* Leak it for now? Or attach as generic data and attach a signal handler to the widget's destroy signal? */
 }
