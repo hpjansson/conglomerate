@@ -33,6 +33,14 @@
 #include "cong-dialog.h"
 #include "cong-plugin.h"
 #include "cong-app.h"
+#include "cong-eel.h"
+#include <glade/glade-xml.h>
+
+CongImporter*
+cong_file_import_dialog_run (GtkWindow *toplevel_window,
+			     const gchar *filename,
+			     const gchar* mime_type,
+			     GList *list_of_valid_importers);
 
 struct add_importer_to_list_data
 {
@@ -61,7 +69,6 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
 		GList *list_of_valid = NULL; 
 		struct add_importer_to_list_data data;
-		CongImporter *importer = NULL;
 
 		g_message("Got mimetype: \"%s\"",mime_type);
 
@@ -105,23 +112,115 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 		if (list_of_valid->next) {
 			/* There's more than one valid importer... */
-			CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, 
-								      _("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found."), 
-								      118769);
-
-			importer = list_of_valid->data;
+			CongImporter *importer= cong_file_import_dialog_run (toplevel_window,
+									     filename,
+									     mime_type,
+									     list_of_valid);
+			if (importer) {
+				cong_importer_invoke (importer, 
+						      filename, 
+						      mime_type, 
+						      toplevel_window);
+			}
+			
 		} else {
-			importer = list_of_valid->data;
+			CongImporter *importer = list_of_valid->data;
+			g_assert(importer);
+
+			cong_importer_invoke (importer, 
+					      filename, 
+					      mime_type, 
+					      toplevel_window);
 		}
 
 		g_list_free(list_of_valid);
-
-		g_assert(importer);
-		
-		cong_importer_invoke(importer, filename, mime_type, toplevel_window);
-
 		g_free(filename);
 	}
 
 }
 
+CongImporter*
+cong_file_import_dialog_run (GtkWindow *toplevel_window,
+			     const gchar *filename,
+			     const gchar* mime_type,
+			     GList *list_of_valid_importers)
+{
+	CongImporter* result = NULL;
+	gchar* glade_filename;
+	GladeXML *xml;
+	GtkOptionMenu *select_importer;
+	GtkDialog *dialog;
+
+	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
+						   GNOME_FILE_DOMAIN_APP_DATADIR,
+						   "conglomerate/glade/cong-file-import.glade",
+						   FALSE,
+						   NULL);
+	
+	xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	g_free(glade_filename);
+
+	select_importer = GTK_OPTION_MENU(glade_xml_get_widget(xml, "optionmenu_select_importer"));
+
+	g_object_ref (select_importer);
+
+	/* Populate the option menu: */
+	{
+		GList *iter;
+		GtkMenu *menu;
+
+		menu = GTK_MENU (gtk_menu_new ());
+
+		for (iter=list_of_valid_importers; iter; iter=iter->next) {
+			CongImporter *importer = iter->data;
+			GtkWidget *menu_item;
+
+			g_assert (importer);
+
+			menu_item = gtk_menu_item_new_with_label (cong_functionality_get_name (CONG_FUNCTIONALITY (importer)));
+			
+			gtk_widget_show (menu_item);
+
+			g_object_set_data (G_OBJECT(menu_item),
+					   "importer",
+					   importer);
+			
+			gtk_menu_shell_append(GTK_MENU_SHELL(menu), 
+					      menu_item);
+		}
+
+		gtk_option_menu_set_menu (select_importer,
+					  GTK_WIDGET (menu));
+
+		gtk_widget_show (GTK_WIDGET(menu));
+	}	
+
+	dialog = GTK_DIALOG(glade_xml_get_widget(xml, "file_import_dialog"));
+
+	switch (gtk_dialog_run (dialog)) {
+	default: /* do nothing - closed by window manager? */
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CANCEL: 
+		/* do nothing */
+		g_message("import cancelled");
+		break;
+		
+	case GTK_RESPONSE_OK:
+		{
+			GtkMenuItem* menu_item = cong_eel_option_menu_get_selected_menu_item (select_importer);
+
+			g_assert (menu_item);
+
+			result = g_object_get_data (G_OBJECT (menu_item),
+						    "importer");
+		}
+		break;
+	}
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+	g_object_unref (G_OBJECT (xml));
+
+	return result;
+}
