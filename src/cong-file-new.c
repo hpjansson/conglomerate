@@ -623,7 +623,7 @@ new_document(GtkWindow *parent_window)
 	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->first_page));
 	gtk_widget_show(GTK_WIDGET(assistant->first_page));
 
-	assistant->second_page = gnome_druid_page_standard_new_with_vals("Creating a new file",
+	assistant->second_page = gnome_druid_page_standard_new_with_vals(_("Creating a new file"),
 							      assistant->logo,
 							      assistant->top_watermark);
 

@@ -1,3 +1,9 @@
+2004-07-27  Michele Garoche <michele.garoche@easyconnect.fr>
+
+	* cong-document.c, cong-file-new.c:
+
+	More strings to be translated.
+
 2004-07-27  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-plugin.c, cong-plugin.h, cong-util.c, global.h, plugin-docbook.c: 

@@ -646,7 +646,7 @@ cong_document_get_filename(CongDocument *doc)
 		return filename;
 
 	} else {
-		return g_strdup("(Untitled)");
+		return g_strdup(_("(Untitled)"));
 	}
 }
 
