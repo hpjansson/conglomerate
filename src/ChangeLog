@@ -1,5 +1,9 @@
 2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element-gxx.h, gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, gxx-impl-object-to-xml-tree.c, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h
+
+	Use xml:lang instead of language attribute; started adding namespace support to gxx
+
 	* cong-dispspec-element.c, cong-dispspec.c, cong-dispspec.h, cong-editor-node.c, cong-node.h, cong-overview-view.c, plugin-cleanup-source.c
 
 	Removed paragraph type

@@ -20,6 +20,7 @@ gxx_hash_table_of_children_with_pcdata_to_xml_tree (gpointer key,
 {
 	GXXCallbackData_HashTableOfChildrenWithPCDATA *cb_data = (GXXCallbackData_HashTableOfChildrenWithPCDATA *)user_data;
 	xmlNodePtr child_node;
+	xmlNsPtr ns;
 
 	g_assert (key);
 	g_assert (g_utf8_validate (key, -1, NULL));
@@ -35,10 +36,17 @@ gxx_hash_table_of_children_with_pcdata_to_xml_tree (gpointer key,
 				    NULL,
 				    cb_data->str_child_name,
 				    value);
-	xmlSetProp (child_node, 
-		    cb_data->str_hashing_attribute_name, 
-		    key);
-
 	xmlAddChild (cb_data->xml_node, 
-		     child_node);
+		     child_node);    
+
+	ns = xmlSearchNsByHref (cb_data->xml_node->doc, 
+				child_node, 
+				cb_data->str_hashing_attribute_ns_uri);
+	if (ns == NULL) {
+		g_warning ("FIXME couldn't find namespace %s ", cb_data->str_hashing_attribute_ns_uri);
+	}
+	xmlSetNsProp (child_node,
+		      ns,
+		      cb_data->str_hashing_attribute_name, 
+		      key);
 }

@@ -79,12 +79,12 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
     } \
   }
 
-#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hash_table_member_name) \
+#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hashing_attribute_ns_uri, hash_table_member_name) \
   { \
     xmlNodePtr child; \
     for (child = xml_node->children; child; child=child->next) { \
       if (0==strcmp(child->name,child_name)) { \
-        gchar *hash_attr = xmlGetProp (child, hashing_attribute_name); \
+        gchar *hash_attr = xmlGetNsProp (child, hashing_attribute_name, hashing_attribute_ns_uri); \
         if (hash_attr) { \
           gchar *pcdata = xmlNodeListGetString(xml_node->doc, child->xmlChildrenNode, 1); \
 	  if (pcdata) { \

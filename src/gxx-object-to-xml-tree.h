@@ -28,6 +28,7 @@ struct GXXCallbackData_HashTableOfChildrenWithPCDATA
 	xmlNodePtr xml_node;
 	const gchar *str_child_name;
 	const gchar *str_hashing_attribute_name;
+	const gchar *str_hashing_attribute_ns_uri;
 };
 
 /* Macro definitions: */
@@ -87,12 +88,13 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
     } \
   }
 
-#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hash_table_member_name) \
+#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hashing_attribute_ns_uri, hash_table_member_name) \
   { \
     GXXCallbackData_HashTableOfChildrenWithPCDATA cb_data; \
     cb_data.xml_node = xml_node; \
     cb_data.str_child_name = child_name; \
     cb_data.str_hashing_attribute_name = hashing_attribute_name; \
+    cb_data.str_hashing_attribute_ns_uri = hashing_attribute_ns_uri; \
     g_hash_table_foreach (inst->hash_table_member_name, \
 			  gxx_hash_table_of_children_with_pcdata_to_xml_tree, \
 			  &cb_data); \
