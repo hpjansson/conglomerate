@@ -1,17 +1,19 @@
-AC_INIT(configure.in)
-
 dnl ---------------------------------------------
 dnl Automake/autoconf input file for Conglomerate
 dnl ---------------------------------------------
 
-LIBXML_REQUIRED=2.0.0
-GNOMEUI_REQUIRED=2.0.0
-BONOBOUI_REQUIRED=1.0.0
+AC_PREREQ(2.52)
 
-dnl --- Package configuration ---
+AC_INIT(conglomerate, 0.3.110)
+AC_CONFIG_SRCDIR(src/main.c)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-AM_INIT_AUTOMAKE(conglomerate, 0.3.110)
 AM_CONFIG_HEADER(config.h)
+
+AM_SANITY_CHECK
+AM_MAINTAINER_MODE
+AC_CANONICAL_HOST
+
 dnl AM_ACLOCAL_INCLUDE(macros)
 
 AC_SUBST(VERSION)
@@ -20,17 +22,28 @@ AC_SUBST(PACKAGE)
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 
-AM_SANITY_CHECK
-AM_MAINTAINER_MODE
-AC_CANONICAL_HOST
-
 AC_C_CONST
 AC_ISC_POSIX
 AC_PROG_CC
 AC_PROG_CPP
 AC_PROG_INSTALL
 AM_DISABLE_STATIC
-AC_PROG_LIBTOOL
+AM_PROG_LIBTOOL
+
+GETTEXT_PACKAGE=conge
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+
+ALL_LINGUAS="ru"
+
+AM_GLIB_GNU_GETTEXT
+AC_PROG_INTLTOOL
+
+dnl --- Package configuration ---
+
+LIBXML_REQUIRED=2.0.0
+GNOMEUI_REQUIRED=2.0.0
+BONOBOUI_REQUIRED=1.0.0
 
 PKG_CHECK_MODULES(ALL,                     \
   libxml-2.0 >= $LIBXML_REQUIRED           \
@@ -92,5 +105,7 @@ AC_SUBST(CONGLOMERATE_CFLAGS)
 
 dnl --- Output ---
 
-AC_OUTPUT(Makefile                \
+AC_OUTPUT(Makefile 
+          po/Makefile.in
+	  data/Makefile 
           src/Makefile)

@@ -5,6 +5,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <config.h>
 
 G_BEGIN_DECLS
 

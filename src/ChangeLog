@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-25 Dmitry G. Mastrukov
+
+	* main.c, global.h, Makefile.am
+
+	Internationalization patch
+	
 2002-11-23 David Malcolm
 
 	* cong-editor-widget.c, cong-font.c, cong-span-text-editor.c, global.h, main.c

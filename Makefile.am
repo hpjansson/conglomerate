@@ -1,8 +1,12 @@
-SUBDIRS = src
+SUBDIRS = src po data
 
-EXTRA_DIST = acconfig.h            \
-  deb/Readme                       \
-  deb/rules                        \
+EXTRA_DIST = BUGS	\
+  acconfig.h		\
+  intltool-extract.in	\
+  intltool-merge.in	\
+  intltool-update.in	\
+  deb/Readme		\
+  deb/rules		\
   documentation/CodingStyle        \
   documentation/VersionNumbering   \
   documentation/CompileIssues      \
@@ -15,5 +19,6 @@ EXTRA_DIST = acconfig.h            \
   examples/readme.xml                \
   examples/test-docbook.xml          \
   examples/test-table.xml            \
-  examples/test-docbook-to-html.xsl  \
-  BUGS
+  examples/test-docbook-to-html.xsl
+
+ACLOCAL_AMFLAGS = -I m4

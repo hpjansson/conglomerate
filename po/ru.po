@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2002-11-25 07:46+0300\n"
+"POT-Creation-Date: 2002-11-26 07:13+0000\n"
 "PO-Revision-Date: 2002-11-25 07:32+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"

@@ -4,6 +4,7 @@
 
 #undef PACKAGE
 #undef VERSION
+#undef GETTEXT_PACKAGE
 
 @BOTTOM@
 

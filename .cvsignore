@@ -3,6 +3,7 @@
 ## #files #generated #by #./autogen.sh
 Makefile
 Makefile.in
+autom4te.cache
 aclocal.m4
 config.cache
 config.h
@@ -10,7 +11,9 @@ config.h.in
 config.log
 config.status
 configure
+intltool-*
 libtool
+ltmain.sh
 stamp-h
 stamp-h.in
 ## #other #files

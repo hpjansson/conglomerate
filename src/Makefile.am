@@ -47,5 +47,8 @@ conge_SOURCES =             \
   plugin-docbook.c          \
   main.c
 
-CFLAGS = $(CONGLOMERATE_CFLAGS)
-LDADD  = $(CONGLOMERATE_LIBS)
+INCLUDES = $(CONGLOMERATE_CFLAGS) \
+	-DLOCALEDIR=\""$(datadir)/locale"\" \
+	-DDATADIR=\""$(datadir)"\"
+conge_LDADD  = $(CONGLOMERATE_LIBS)
+

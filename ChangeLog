@@ -1,1 +1,11 @@
+2002-11-25  Dmitry G. Mastrtukov  <dmitry@taurussoft.org>
+
+	* data/conge.desktop.in: Created.
+	* configure.in, Makefile.in, autogen.sh: Internationalization patch
+
+2002-11-24  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* (ACLOCAL_AMFLAGS): New variable.
+	* configure.in (AC_OUTPUT): Add po/Makefile.in.
+
 creating ChangeLog
