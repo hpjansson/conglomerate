@@ -6,6 +6,7 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 
+G_BEGIN_DECLS
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
@@ -27,6 +28,12 @@ enum
 
 #define NEW_LOOK 1
 #define USE_PANGO 0
+#define PRINT_TESTS 0
+
+#if PRINT_TESTS
+#include <libgnomeprint/gnome-print.h>
+#include <libgnomeprint/gnome-print-master.h>
+#endif
 
 enum CongNodeType
 {
@@ -594,6 +601,7 @@ cong_span_editor_get_font(CongSpanEditor *xed, enum CongFontRole role);
 
 gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag);
 gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag);
+gint tree_properties(GtkWidget *widget, CongNodePtr tag);
 gint tree_cut(GtkWidget *widget, CongNodePtr tag);
 gint tree_copy(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
@@ -924,6 +932,27 @@ cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileS
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
 
+/*
+  Dialog-handling functions.
+
+  Handy functions for building HIG-compliant property dialogs etc.
+*/
+typedef struct CongDialogContent CongDialogContent;
+typedef struct CongDialogCategory CongDialogCategory;
+
+/* An object suitable for use either as the innards of a dialog, or for a page in a property dialog */
+CongDialogContent *cong_dialog_content_new(gboolean within_notebook);
+GtkWidget *cong_dialog_content_get_widget(CongDialogContent *dialog_content);
+
+/* Category headings within a CongDialogContent */
+CongDialogCategory *cong_dialog_content_add_category(CongDialogContent *dialog_content, const gchar *title);
+
+/* Method to add left-side labelled controls such as text boxes, option menus etc */
+void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *title, GtkWidget *widget);
+
+/* Method to add right-side labelled controls usch as check boxes and radio buttons: */
+void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, GtkWidget *widget);
+
 /* cong-dispspec-registry */
 CongDispspecRegistry*
 cong_dispspec_registry_new(const gchar* xds_directory);
@@ -954,6 +983,24 @@ void xed_paste_wrap(GtkWidget *widget, gpointer data);
 void test_open_wrap(GtkWidget *widget, gpointer data);
 void test_error_wrap(GtkWidget *widget, gpointer data);
 void test_document_types_wrap(GtkWidget *widget, gpointer data);
-void menu_callback_test_transform(gpointer callback_data,
+void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
+						  guint callback_action,
+						  GtkWidget *widget);
+void menu_callback_test_transform_docbook_to_fo(gpointer callback_data,
+						guint callback_action,
+						GtkWidget *widget);
+#if PRINT_TESTS
+void menu_callback_test_preview_fo(gpointer callback_data,
 				  guint callback_action,
 				  GtkWidget *widget);
+
+void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm);
+#endif
+void menu_callback_test_dtd(gpointer callback_data,
+			    guint callback_action,
+			    GtkWidget *widget);
+
+void menu_callback_test_dialog(gpointer callback_data,
+			       guint callback_action,
+			       GtkWidget *widget);
+G_END_DECLS

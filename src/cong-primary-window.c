@@ -330,11 +330,83 @@ static void menu_callback_file_revert(gpointer callback_data,
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
 }
 
+static GtkWidget* make_uneditable_text(const gchar* text)
+{
+	GtkEntry *entry = GTK_ENTRY(gtk_entry_new());
+
+	gtk_entry_set_text(entry, text);
+	gtk_entry_set_editable(entry, FALSE);
+
+	return GTK_WIDGET(entry);
+}
+
+static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc)
+{
+	xmlDocPtr xml_doc;
+	CongDispspec* ds;
+	GtkWidget *dialog;
+	CongDialogContent *content;
+	CongDialogCategory *general_category;
+	CongDialogCategory *doctype_category;
+	gchar *filename, *path;
+
+	g_return_val_if_fail(doc, NULL);
+
+	xml_doc = cong_document_get_xml(doc);
+	ds = cong_document_get_dispspec(doc);
+
+	dialog = gtk_dialog_new_with_buttons("Properties",
+					     NULL,
+					     0,
+					     GTK_STOCK_OK,
+					     GTK_RESPONSE_ACCEPT,
+					     NULL);
+
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
+
+	content = cong_dialog_content_new(FALSE);
+	general_category = cong_dialog_content_add_category(content, "General");
+	doctype_category = cong_dialog_content_add_category(content, "Type");
+
+	filename = cong_document_get_filename(doc);
+	path = cong_document_get_parent_uri(doc);
+
+	cong_dialog_category_add_field(general_category, "Name", make_uneditable_text(filename));
+	cong_dialog_category_add_field(general_category, "Location", make_uneditable_text(path));
+	cong_dialog_category_add_field(general_category, "Modified", make_uneditable_text(cong_document_is_modified(doc)?"Yes":"No"));
+
+	cong_dialog_category_add_field(doctype_category, "Name", make_uneditable_text(cong_dispspec_get_name(ds)));
+	cong_dialog_category_add_field(doctype_category, "Description", make_uneditable_text(cong_dispspec_get_description(ds)));
+
+	g_free(filename);
+	g_free(path);
+
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+			   cong_dialog_content_get_widget(content));
+
+	gtk_widget_show_all(dialog);
+
+	return dialog;
+}
+
 static void menu_callback_file_properties(gpointer callback_data,
 					  guint callback_action,
 					  GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	GtkWidget *dialog;
+
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = primary_window->doc;
+
+	g_return_if_fail(doc);
+
+	dialog = cong_document_properties_dialog_new(doc);
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+
+	gtk_widget_destroy(dialog);
+
+	/* FIXME: memory leaks */
 }
 
 static void menu_callback_file_close(gpointer data, guint
@@ -426,8 +498,13 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
 	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
 	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
-	{ "/Tests/Transform DocBook to HTML",       NULL, menu_callback_test_transform, 0, NULL },
-
+	{ "/Tests/Transform DocBook to HTML",       NULL, menu_callback_test_transform_docbook_to_html, 0, NULL },
+#if PRINT_TESTS
+	{ "/Tests/Transform DocBook to FO",       NULL, menu_callback_test_transform_docbook_to_fo, 0, NULL },
+	{ "/Tests/Preview XSL:FO",       NULL, menu_callback_test_preview_fo, 0, NULL },
+#endif /* #if PRINT_TESTS */
+	{ "/Tests/DTD",             NULL, menu_callback_test_dtd, 0, NULL },
+	{ "/Tests/Dialog",             NULL, menu_callback_test_dialog, 0, NULL },
 	{ "/_Help",        NULL, NULL, 0, "<Branch>" },
 	{ "/Help/_Contents", "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
 	{ "/Help/_About",    NULL, menu_callback_about, 0, "<Item>" }
@@ -595,9 +672,27 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	primary_window->status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(primary_window->status), 
 								       "Main");
-	gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
-			   primary_window->status_main_ctx,
-			   "Welcome to the much-too-early Conglomerate editor.");
+
+	{
+		gchar *status_text;
+
+		if (primary_window->doc) {
+			status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
+
+			
+
+		} else {
+
+			status_text = g_strdup("Welcome to the much-too-early Conglomerate editor.");	
+
+		}
+
+		gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
+				   primary_window->status_main_ctx,
+				   status_text);
+
+		g_free(status_text);
+	}
 
 }
 

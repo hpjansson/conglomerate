@@ -14,7 +14,10 @@
 #include <libgtkhtml/gtkhtml.h>
 #endif
 
-
+#if PRINT_TESTS
+#include <libgnomeprintui/gnome-print-dialog.h>
+#include <libgnomeprintui/gnome-print-master-preview.h>
+#endif
 
 void get_example(GtkWidget *w, gpointer data);
 gint set_vectors(GtkWidget *w, gpointer data);
@@ -292,11 +295,9 @@ void open_transformed_window_for_doc(xmlDocPtr doc)
 }
 
 
-void menu_callback_test_transform(gpointer callback_data,
-				  guint callback_action,
-				  GtkWidget *widget)
+void test_transform(CongPrimaryWindow *primary_window,
+		    const gchar *stylesheet_filename)
 {
-	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc;
 
 	/* Hackish test of libxslt */
@@ -312,12 +313,10 @@ void menu_callback_test_transform(gpointer callback_data,
 
 	g_return_if_fail(doc);
 
-	#define STYLESHEET_FILE ("../examples/test-docbook-to-html.xsl")
-
-	xsl = xsltParseStylesheetFile(STYLESHEET_FILE);
+	xsl = xsltParseStylesheetFile(stylesheet_filename);
 
 	if (NULL==xsl) {
-		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",STYLESHEET_FILE);
+		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",stylesheet_filename);
 
 		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not transform the document",
 							  why_failed,
@@ -330,6 +329,18 @@ void menu_callback_test_transform(gpointer callback_data,
 
 	result = xsltApplyStylesheet(xsl, cong_document_get_xml(doc), NULL);
 	g_assert(result);
+
+	if (result->children==NULL) {
+		gchar *why_failed = g_strdup_printf("There was a problem applying the stylesheet file");
+
+		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not transform the document",
+							  why_failed,
+							  "FIXME");
+	
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		return;
+	}
 
 #if 0
 	open_preview_window_for_doc(result); /* takes ownership of the result */
@@ -347,6 +358,359 @@ void menu_callback_test_transform(gpointer callback_data,
 #endif
 }
 
+#define STYLESHEET_PATH "/home/david/Extraction/docbook-xsl-1.57.0/"
+
+#if 0
+#define DOCBOOK_TO_HTML_STYLESHEET_FILE (STYLESHEET_PATH "html/chunk.xsl")
+#else
+#define DOCBOOK_TO_HTML_STYLESHEET_FILE ("../examples/test-docbook-to-html.xsl")
+#endif
+#define DOCBOOK_TO_FO_STYLESHEET_FILE (STYLESHEET_PATH "fo/docbook.xsl")
+
+void menu_callback_test_transform_docbook_to_html(gpointer callback_data,
+				  guint callback_action,
+				  GtkWidget *widget)
+{
+	test_transform(callback_data,
+		       DOCBOOK_TO_HTML_STYLESHEET_FILE);
+}
+
+void menu_callback_test_transform_docbook_to_fo(gpointer callback_data,
+				  guint callback_action,
+				  GtkWidget *widget)
+{
+	test_transform(callback_data,
+		       DOCBOOK_TO_FO_STYLESHEET_FILE);
+}
+
+#if PRINT_TESTS
+static void
+my_draw (GnomePrintContext *gpc)
+{
+	GnomeFont *font;
+
+	font = gnome_font_find_closest ("Helvetica", 12);
+
+	gnome_print_beginpage (gpc, "1");
+
+	gnome_print_setfont (gpc, font);
+	gnome_print_moveto (gpc, 100, 400);
+	gnome_print_show (gpc, "Hello world\nThis is a test");
+
+	gnome_print_moveto (gpc, 100, 200);
+	gnome_print_lineto (gpc, 200, 200);
+	gnome_print_stroke (gpc);
+
+	gnome_print_showpage (gpc);
+}
+
+void menu_callback_test_preview_fo(gpointer callback_data,
+				  guint callback_action,
+				  GtkWidget *widget)
+{
+	/* Open a GnomePrint preview */
+	xmlDocPtr xml_doc;
+	GnomePrintMaster *gpm;
+	GnomePrintContext *gpc;
+	GtkWidget *preview_widget;
+
+	gpm = gnome_print_master_new ();
+	gpc = gnome_print_master_get_context (gpm);
+#if 1
+	xml_doc = xmlParseFile("/home/david/coding/conge-cvs-dhm3/conge/examples/test-fo.xml");
+	g_assert(xml_doc);
+	
+	cong_gnome_print_render_xslfo(xml_doc, gpm);
+	
+	xmlFreeDoc(xml_doc);
+#else
+	my_draw (gpc);
+#endif
+
+	gnome_print_master_close (gpm);
+
+	preview_widget = gnome_print_master_preview_new (gpm, "Print Preview");
+	gtk_widget_show(preview_widget);
+}
+#endif /* #if PRINT_TESTS */
+
+void my_hash_scanner(void *payload, void *data, xmlChar *name)
+{
+	g_message("got name \"%s\"", name);
+}
+
+#if 0
+gchar *get_element_content_string(xmlElementContentPtr content)
+{
+	g_return_val_if_fail(content, NULL);
+
+	switch (content->type) {
+	default: g_assert(0);
+	case XML_ELEMENT_CONTENT_PCDATA:
+	case XML_ELEMENT_CONTENT_ELEMENT:
+	case XML_ELEMENT_CONTENT_SEQ:
+	case XML_ELEMENT_CONTENT_OR:
+		{
+			gchar *lhs = c1->name;
+		}
+
+
+	}
+}
+#endif
+
+gchar *get_enumeration_details(xmlEnumerationPtr enum_ptr)
+{
+	gchar *temp, *temp2;
+	temp = g_strdup("(");
+
+	while (enum_ptr) {
+		temp2 = g_strdup_printf("%s %s%s", temp, enum_ptr->name, (enum_ptr->next!=NULL)?",":"");
+		g_free(temp);
+		temp = temp2;
+
+		enum_ptr=enum_ptr->next;
+	}
+
+	temp2 = g_strdup_printf("%s )", temp);
+	g_free(temp);
+	return temp2;
+}
+
+gchar *get_attribute_debug_details(xmlAttributePtr attr)
+{
+	gchar *type_str = NULL;
+	g_assert(attr);
+
+	switch (attr->atype) {
+	default: g_assert(0);
+	case XML_ATTRIBUTE_CDATA:
+		type_str = g_strdup("CDATA");
+		break;
+
+	case XML_ATTRIBUTE_ID:
+		type_str = g_strdup("ID");
+		break;
+
+	case XML_ATTRIBUTE_IDREF:
+		type_str = g_strdup("IDREF");
+		break;
+
+	case XML_ATTRIBUTE_IDREFS:
+		type_str = g_strdup("IDREFS");
+		break;
+
+	case XML_ATTRIBUTE_ENTITY:
+		type_str = g_strdup("ENTITY");
+		break;
+
+	case XML_ATTRIBUTE_ENTITIES:
+		type_str = g_strdup("ENTITIES");
+		break;
+
+	case XML_ATTRIBUTE_NMTOKEN:
+		type_str = g_strdup("NMTOKEN");
+		break;
+
+	case XML_ATTRIBUTE_NMTOKENS:
+		type_str = g_strdup("NMTOKENS");
+		break;
+
+	case XML_ATTRIBUTE_ENUMERATION:
+		type_str = get_enumeration_details(attr->tree);
+		break;
+
+	case XML_ATTRIBUTE_NOTATION:
+		type_str = g_strdup("NOTATION");
+		break;
+	}
+
+#if 0
+	switch (attr->def) {
+	}
+#endif
+
+	return type_str;
+
+#if 0
+    xmlAttributeType       atype;	/* The attribute type */
+    xmlAttributeDefault      def;	/* the default */
+    const xmlChar  *defaultValue;	/* or the default value */
+    xmlEnumerationPtr       tree;       /* or the enumeration tree if any */
+#endif
+
+}
+
+void element_hash_scanner(void *payload, void *data, xmlChar *name)
+{
+	xmlElementPtr element = payload;
+	xmlAttributePtr attr;
+
+	g_message("got element <%s>", name);
+/*  	g_message("content = "); */
+
+	/* List the attributes that apply to this element: */
+	for (attr=element->attributes; attr; attr=attr->nexth) {
+		gchar *details = get_attribute_debug_details(attr);
+		g_message("attribute \"%s\": %s",attr->name, details);
+		g_free(details);
+	}
+}
+
+void entity_hash_scanner(void *payload, void *data, xmlChar *name)
+{
+	g_message("got entity \"%s\"", name);
+}
+
+void test_log_dtd(xmlDtdPtr dtd)
+{
+	g_message("Name \"%s\"\n", dtd->name);
+	g_message("ExternalID:\"%s\"\n", dtd->ExternalID);
+	g_message("SystemID:\"%s\"\n", dtd->SystemID);
+
+#if 0
+	g_message("notations\n");
+	xmlHashScan(dtd->notations,
+		    my_hash_scanner,
+		    NULL);
+#endif
+
+	g_message("\nelements\n");
+	xmlHashScan(dtd->elements,
+		    element_hash_scanner,
+		    NULL);
+
+#if 0
+	g_message("\nattributes\n");
+	xmlHashScan(dtd->attributes,
+		    my_hash_scanner,
+		    NULL);
+#endif
+
+#if 0
+	g_message("\nentities\n");
+	xmlHashScan(dtd->entities,
+		    entity_hash_scanner,
+		    NULL);
+#endif
+
+#if 0
+	g_message("\npentities\n");
+	xmlHashScan(dtd->pentities,
+		    my_hash_scanner,
+		    NULL);
+#endif
+}
+
+void menu_callback_test_dtd(gpointer callback_data,
+			    guint callback_action,
+			    GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc;
+	xmlDocPtr xml_doc;
+
+
+	doc = cong_primary_window_get_document(primary_window);
+	g_return_if_fail(doc);
+
+	xml_doc = cong_document_get_xml(doc);
+	g_assert(xml_doc);
+ 
+	if (xml_doc->intSubset) {
+		g_message("Interior subset:\n");
+		test_log_dtd(xml_doc->intSubset);
+	} else {
+		g_message("No interior subset\n");
+	}
+	
+	if (xml_doc->extSubset) {
+		g_message("Exterior subset:\n");
+		test_log_dtd(xml_doc->extSubset);
+	} else {
+		g_message("No exterior subset\n");
+	}
+}
+
+GtkWidget *test_dialog_new(void)
+{
+	GtkWidget *dialog;
+	GtkWidget *tabs;
+	CongDialogContent *basic_content;
+	CongDialogCategory *general_category;
+	CongDialogCategory *fubar_category;
+	CongDialogContent *advanced_content;
+	CongDialogCategory *morestuff_category;
+	CongDialogCategory *yetmorestuff_category;
+
+	dialog = gtk_dialog_new_with_buttons("Test Dialog",
+					     NULL,
+					     0,
+					     GTK_STOCK_OK,
+					     GTK_RESPONSE_ACCEPT,
+					     NULL);
+
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
+
+	tabs = gtk_notebook_new();
+
+	basic_content = cong_dialog_content_new(TRUE);
+	general_category = cong_dialog_content_add_category(basic_content, "General");
+	fubar_category = cong_dialog_content_add_category(basic_content, "Fubar");
+
+	advanced_content = cong_dialog_content_new(TRUE);
+	morestuff_category = cong_dialog_content_add_category(advanced_content, "More Stuff");
+	yetmorestuff_category = cong_dialog_content_add_category(advanced_content, "Yet More Stuff");
+
+	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_selflabelled_field(general_category, gtk_toggle_button_new_with_label("Bar") );
+	cong_dialog_category_add_selflabelled_field(general_category, gtk_check_button_new_with_label("Crikey") );
+
+	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_toggle_button_new_with_label("Bar") );
+	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_check_button_new_with_label("Crikey") );
+
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(morestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_toggle_button_new_with_label("Bar") );
+	cong_dialog_category_add_selflabelled_field(morestuff_category, gtk_check_button_new_with_label("Crikey") );
+
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(yetmorestuff_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_toggle_button_new_with_label("Bar") );
+	cong_dialog_category_add_selflabelled_field(yetmorestuff_category, gtk_check_button_new_with_label("Crikey") );
+	
+	gtk_notebook_append_page( GTK_NOTEBOOK(tabs),
+				  cong_dialog_content_get_widget(basic_content),
+				  gtk_label_new("Basic"));
+
+	gtk_notebook_append_page( GTK_NOTEBOOK(tabs),
+				  cong_dialog_content_get_widget(advanced_content),
+				  gtk_label_new("Advanced"));
+
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+			   tabs);
+
+	gtk_widget_show_all(dialog);
+
+	return dialog;
+}
+
+void menu_callback_test_dialog(gpointer callback_data,
+					guint callback_action,
+					GtkWidget *widget)
+{
+	GtkWidget *dialog = test_dialog_new();
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(dialog);
+}
 
 
 void insert_element_init()
@@ -403,6 +767,13 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 int main( int   argc,
 	  char *argv[] )
 {
+#if 0
+	/* THIS SHOULD NEVER BE ENABLED IN CVS: */
+
+	setenv("XML_CATALOG_FILES", "file:///home/david/garnome/etc/xml/catalog", TRUE);
+#endif
+
+
 #if 1
 	the_globals.gnome_program = gnome_program_init("Conglomerate",
 						       "0.1.0",

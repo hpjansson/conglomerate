@@ -169,6 +169,9 @@ void cong_node_self_test(CongNodePtr node)
 void cong_node_self_test_recursive(CongNodePtr node)
 {
 	CongNodePtr iter;
+
+	g_return_if_fail(node);
+
 	cong_node_self_test(node);
 
 	for (iter=node->children; iter; iter=iter->next) {
