@@ -1,0 +1,19 @@
+Source: conglomerate
+Section: editors
+Priority: optional
+Maintainer: Geert Stappers <stappers@stappers.nl>
+Uploaders: Sven Luther <luther@debian.org>
+Build-Depends: debhelper (>> 4.1.51), dpatch, gnome-common, libbonobo2-dev, libbonoboui2-dev, libgnomeui-dev, libgnomeprint-dev, libgnomeprintui2.2-dev, libxslt1-dev, scrollkeeper
+Standards-Version: 3.6.1
+
+Package: conglomerate
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: xml-core
+Suggests: docbook-xml, docbook-xsl
+Description: userfriendly XML editor
+ Conglomerate is a free, as in GPL, userfriendly XML-file editor,
+ for DocBook and other document types.
+ It aims to hide the complexity and jargon of XML behind a friendly GUI.
+ .
+ Homepage: http://www.conglomerate.org

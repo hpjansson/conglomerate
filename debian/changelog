@@ -1,0 +1,148 @@
+conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
+
+  * dpatch compliant
+
+  * patches/package_version.dpatch:
+  New file. Shows Debian packages version inside the program.
+
+  * rules:
+   - Upstream has an up-to-date config.guess and config.sub.
+   - Removed 'INSTALL_PROGRAM += -s' with test on DEB_BUILD_OPTIONS,
+   because `dh_strip` takes care of that.
+
+  * NEWS:
+  In same format as changelog.
+
+ -- Geert Stappers <stappers@stappers.nl>  Tue, 25 Nov 2003 13:36:10 +0000
+
+conglomerate (0.7.6-1) unstable; urgency=medium
+
+  * New upstream release.
+   - application icons placed in /usr/share/conglomerate/pixmaps (closes: #208984)
+   - improved font loading (closes: #217321)
+   - cleaner support for 64-bit systems (closes: #216461)
+
+  * README
+   new file, mostly created to get help on #217443
+
+  * rules:
+   - noted that patches can be done by `dbs` or `dpatch`
+
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 30 Oct 2003 14:14:41 +0000
+
+conglomerate (0.7.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+  * control:
+  Build depends on gnome-common for gettext (closes: #214569),
+  libgnome2-common gets in by libbonoboui2-dev.
+
+  * rules:
+   - removed various '#dh_ lines' for readability.
+   - automated the patching of the 'omf.make' file.
+   - disable gtk-doc stuff at configure,
+   but actual disabled in a patched doc/reference/Makefile.in
+
+ -- Geert Stappers <stappers@stappers.nl>  Wed,  8 Oct 2003 13:48:26 +0000
+
+conglomerate (0.7.4-1) unstable; urgency=low
+ 
+  * New upstream release.
+
+ -- Geert Stappers <stappers@bahrain>  Wed,  1 Oct 2003 17:37:46 +0200
+
+conglomerate (0.7.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Geert Stappers <stappers@bahrain>  Tue, 23 Sep 2003 09:51:29 +0200
+
+conglomerate (0.7.2-1) unstable; urgency=low
+
+  * new upstream version.
+
+  * control
+   - recommending xml-core.
+   - avoiding "short desc. in long desc." warning from Linda.
+
+  * compat, new file, now we are debhelper V4. That had these effects:
+   - The control file has added ${misc:Depends} to ${shlib:Depends}.
+   - Building is done in debian/conglomerate instead of debian/tmp.
+
+  * rules
+   - does call dh_scrollkeeper.
+   - installs "conglomerate_icon.xpm".
+
+  * Trimmed changelog further.
+
+  * watch file: Get upstream tarball from Ireland.
+
+  * first release with a debian NEWS file.
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri, 19 Sep 2003 16:20:37 +0000
+
+conglomerate (0.7.1-2) unstable; urgency=medium
+
+  * Right sequence for setup on gconf (closes: #208794)
+
+  * debian/rules tuned.
+   - remove generated files that survive a 'make distclean'
+   - call install manpage only once
+
+  * debian/control:
+   - a debhelper version that will install debian NEWS fille.
+   - Standard version 3.6.1 ( instead of 3.6.1.0 )
+
+  * Trimmed debian/changelog file.
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri,  5 Sep 2003 23:33:37 +0000
+
+conglomerate (0.7.1-1) unstable; urgency=low
+
+  * new upstream version
+
+  * install toplevel file NEWS
+
+  * Mentioning the Exprimental uploads in this changelog file
+
+  * Debian package into "unstable" (closes: #197049 )
+
+ -- Geert Stappers <stappers@stappers.nl>  Wed,  3 Sep 2003 15:46:50 +0200
+
+conglomerate (0.5.4-1) experimental; urgency=low
+
+  * New upstream release :
+    - The executable is now named "conglomerate", rather than "conge"
+    - Major rewrite of the node "Properties" dialog. It's now modeless,
+      a lot tidier, and supports the renaming of attributes.
+    - The display spec can now specify that Conglomerate should override
+      the standard node property dialog for a tag, and use one from a plugin
+      instead. I've begun the implementation of one of these plugins: a dialog
+      that handles the standard attributes that are present on nearly every
+      DocBook tag.
+    - We no longer depend on eel or libbonoboui, which should make it easier
+      to build
+    - We now depend on libglade, which should make it much easier to support
+      things like accessibility.
+    - Numerous minor fixes
+
+ -- Sven Luther <luther@debian.org>  Wed, 25 Jun 2003 16:55:10 +0200
+
+conglomerate (0.5.3-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Sven Luther <luther@debian.org>  Fri, 13 Jun 2003 21:09:25 +0200
+
+conglomerate (0.5.2-1) experimental; urgency=low
+
+  * Initial Experimental Release. 
+
+ -- Sven Luther <luther@debian.org>  Wed, 11 Jun 2003 18:35:31 +0200
+
+conglomerate (0.5.0-1) unstable; urgency=low
+
+  * never release into offical debian archives.
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri,  9 May 2003 14:56:44 +0200

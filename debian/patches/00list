@@ -1,0 +1,4 @@
+# apply these listed patches
+no_scrollkeeper-update.dpatch
+dont_install_generated_gtkdoc.dpatch
+package_version.dpatch
