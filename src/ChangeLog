@@ -51,7 +51,7 @@
 
 	*  plugin-docbook.c
 
-	(#149305)
+	Added a first book at creation time of a book set. (bug.g.o. #149305)
 
 	Added a title at creation time of a book. (bugzilla.g.o. #149307)
 

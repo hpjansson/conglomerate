@@ -337,6 +337,7 @@ make_set(const xmlChar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
+	xmlNodePtr book_node;
 
 	/* Build up the document and its content: */
 	xml_doc = xmlNewDoc("1.0");
@@ -356,6 +357,20 @@ make_set(const xmlChar *title)
 				  NULL,
 				  "title",
 				  title)
+		    );
+
+	book_node = xmlNewDocNode(xml_doc,
+				     NULL,
+				     "book",
+				     "");
+
+	xmlAddChild(root_node, book_node);
+
+	xmlAddChild(book_node, 
+		    xmlNewDocNode(xml_doc,
+				  NULL,
+				  "title",
+				  _("Untitled book"))
 		    );
 
 	return xml_doc;
