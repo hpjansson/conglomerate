@@ -1,0 +1,66 @@
+
+NEWS: In this file the announce messages of recent releases.
+
+-----------------------------------------
+Version 0.7.1 announce september 2nd 2003
+Enhancements
+============
+(i) German Translation (Christian Neumair)
+(ii) Completely rewritten Text->DocBook importer; it now attempts to:
+- spot lines that have been wrapped manually in the source document,
+  and merges them back into lines.
+- figure out where the actual paragraphs are and
+  put them in para tags accordingly
+- spot headings (either due to block capitals, or underlining),
+  and create sect1 and title tags
+- spot bullet points, and creates itemizedlist and listitem tags
+  (very primitive at the moment).
+                                                                                
+It works quite well for our TODO document,
+and most other documents I've been playing with.
+
+Fixes
+=====
+- Fixed bug #115993 (Copy/Paste Not working at end of line) (me)
+- Added some bulletproofing to the get next/prev word routines (me)
+- Fixed various warnings and prototype problems (Pav Lucistnik, me)
+
+Dave Malcolm
+
+-----------------------------------
+0.7.0, announce on 29 augustus 2003
+
+WHAT'S NEW IN 0.7.0?
+- Danish translations (Michael Rasmussen)
+- Dutch translation (Mark Van den Borre)
+- Improvements to core architecture (me)
+        - Most important structs are now GObjects
+        - MVC framework now uses GObjects signals
+        - MVC framework allows updates to be amortized, allowed a big optimisation of the "View Source" feature.
+- Complete rewrite of the main editor control: (me)
+        - Fixes numerous bugs
+        - In theory, now supports all possible XML
+        - Should be more maintainable than old implementation
+        - Support for plugin rendering of tags; initial support for various types of list tag and for paragraphs.
+        - Various usability fixes; typing now works a lot more like a regular word-processor.
+- Better support for namespaces (me)
+- Complete rewrite of clipboard, fixing various bugs (me)
+- Online help, integrated with Scrollkeeper/Yelp (Jeff Martin)
+- Reimplementation of tree views, with big optimisations to the change-notification handling. (me)
+- Adjacent text nodes get merged where necessary. (me)
+- Stylesheets are now located using the XML catalog (Varga Robert)
+- Improvements to automatic generation of display specs (Jeff Martin)
+- Support for the Kernel Cousin newsletter format (me)
+- Various bug-fixes (me)
+- Anything else I've forgotten.
+ 
+THANKS TO:
+- Jeff Martin
+- Geert Stappers
+- Michael Rasmussen
+- Mark Van den Borre
+- Varga Robert
+plus anyone else I've missed!
+ 
+Dave Malcolm
+
