@@ -1,3 +1,9 @@
+2003-12-22  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am:
+	- Added --main-sgml-file to gtkdoc-mkdb (as found in upstream example)
+	- Minor cosmetic changes
+
 2003-11-04  Boris Goldowsky  <boris@alum.mit.edu>
 
 	* Makefile.am: don't die if index.sgml is missing.

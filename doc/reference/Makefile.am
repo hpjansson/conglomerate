@@ -7,7 +7,7 @@
 DOC_MODULE=conglomerate
 
 # The top-level SGML file.
-DOC_MAIN_SGML_FILE=conglomerate-docs.sgml
+DOC_MAIN_SGML_FILE=$(DOC_MODULE)-docs.sgml
 
 # The directory containing the source code. Relative to $(srcdir).
 # gtk-doc will search all .c & .h files beneath here for inline comments
@@ -60,8 +60,6 @@ DOC_OVERRIDES = $(DOC_MODULE)-overrides.txt
 ###########################################################################
 # Everything below here is generic and you shouldn't need to change it.
 ###########################################################################
-
-#### this where I gonna cut when I back from runners training.
 
 TARGET_DIR=$(HTML_DIR)/$(DOC_MODULE)
 
@@ -121,7 +119,7 @@ tmpl.stamp: tmpl-build.stamp
 sgml-build.stamp: tmpl.stamp $(CFILE_GLOB) $(srcdir)/tmpl/*.sgml
 	@echo '*** Building SGML ***'
 	cd $(srcdir) && \
-	gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) $(MKDB_OPTIONS)
+	gtkdoc-mkdb --module=$(DOC_MODULE) --source-dir=$(DOC_SOURCE_DIR) --main-sgml-file=$(DOC_MAIN_SGML_FILE) $(MKDB_OPTIONS)
 	touch sgml-build.stamp
 
 sgml.stamp: sgml-build.stamp
@@ -163,6 +161,10 @@ install-data-local:
 	  else echo '-- No index.sgml to install'; \
 	  fi; \
 	fi)
+##	  original upstream	##
+##	  echo '-- Installing $(srcdir)/html/index.sgml' ; \
+##	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR); \
+##	fi)
 
 #
 # Require gtk-doc when making dist
