@@ -69,6 +69,7 @@ struct CongEditorAreaDetails
 	GdkRectangle window_area; /* allocated area in window space */
 
 	RequisitionCache requisition_cache[2];
+	gboolean needs_recursive_allocation;
 };
 
 /* Signal handler declarations: */
@@ -184,6 +185,8 @@ cong_editor_area_construct (CongEditorArea *area,
 	PRIVATE(area)->requisition;
 #endif
 
+	PRIVATE(area)->needs_recursive_allocation = TRUE;
+
 	return area;
 }
 
@@ -226,6 +229,7 @@ cong_editor_area_hide (CongEditorArea *area)
 	/* FIXME: do we need to emit any events? */
 }
 
+#if 1
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area)
 {
@@ -233,6 +237,7 @@ cong_editor_area_get_window_coords (CongEditorArea *area)
 
 	return &PRIVATE(area)->window_area;
 }
+#endif
 
 
 guint
@@ -249,21 +254,32 @@ cong_editor_area_get_requisition (CongEditorArea *area,
 	/* If not up-to-date, call fn to regenerate cache: */
 	if ( (width_hint!=cache->cached_width_hint) 
 	     || (!cache->requisition_cache_valid) ) {
+		guint calculated_requisition;
 		
 #if DEBUG_REQUISITIONS
-		g_message("cong_editor_area_get_requisition:  recalcing cache on %s with width_hint %i", 
+		g_message("cong_editor_area_get_requisition:  recalcing %s cache on %s with width_hint %i", 
+			  ((orientation == GTK_ORIENTATION_HORIZONTAL)?"h":"v"),
 			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area)), 
 			  width_hint);
 #endif
 
-		cache->last_calculated_requisition = cong_editor_area_calc_requisition (area, 
-											orientation,
-											width_hint
-											);
+		calculated_requisition = cong_editor_area_calc_requisition (area, 
+									    orientation,
+									    width_hint);
+
+		cache->last_calculated_requisition = calculated_requisition;
 
 		cache->cached_width_hint = width_hint;
 
 		cache->requisition_cache_valid = TRUE;
+
+#if DEBUG_REQUISITIONS
+		g_message("cong_editor_area_get_requisition:  recalced  %s cache on %s with width_hint %i as %i", 
+			  ((orientation == GTK_ORIENTATION_HORIZONTAL)?"h":"v"),
+			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area)), 
+			  width_hint,
+			  cache->last_calculated_requisition);
+#endif
 	}
 
 	return cache->last_calculated_requisition;
@@ -470,26 +486,48 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 				 gint width,
 				 gint height)
 {
+	gboolean has_changed = TRUE;
+
 	g_return_if_fail (editor_area);
 
+	if (PRIVATE(editor_area)->window_area.x == x) {
+		if (PRIVATE(editor_area)->window_area.y == y) {
+			if (PRIVATE(editor_area)->window_area.width == width) {
+				if (PRIVATE(editor_area)->window_area.height == height) {
+					has_changed = FALSE;
+				}
+			}
+		}
+	}
+
 #if DEBUG_ALLOCATIONS
-	g_message("cong_editor_area_set_allocation(%i,%i,%i,%i) on %s", x, y, width, height, G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)));
+	g_message ("cong_editor_area_set_allocation(%i,%i,%i,%i) on %s: changed: %s needs_recursive: %s", 
+		   x, y, width, height, 
+		   G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_area)),
+		   (has_changed?"YES":"NO "),
+		   (PRIVATE(editor_area)->needs_recursive_allocation?"YES":"NO "));
 #endif
 
-	cong_editor_area_queue_redraw (editor_area);
 
-	PRIVATE(editor_area)->window_area.x = x;
-	PRIVATE(editor_area)->window_area.y = y;
-	PRIVATE(editor_area)->window_area.width = width;
-	PRIVATE(editor_area)->window_area.height = height;
+	if (has_changed) {
+		PRIVATE(editor_area)->window_area.x = x;
+		PRIVATE(editor_area)->window_area.y = y;
+		PRIVATE(editor_area)->window_area.width = width;
+		PRIVATE(editor_area)->window_area.height = height;
+	}
 
-	/* Call hook to recursively allocate space to children: */
-	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
-			      editor_area,
-			      allocate_child_space, 
-			      (editor_area));
+	if (has_changed || PRIVATE(editor_area)->needs_recursive_allocation) {
 
-	cong_editor_area_queue_redraw (editor_area);
+		PRIVATE(editor_area)->needs_recursive_allocation = FALSE;
+		
+		/* Call hook to recursively allocate space to children: */
+		CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CLASS,
+				      editor_area,
+				      allocate_child_space, 
+				      (editor_area));
+		
+		cong_editor_area_queue_redraw (editor_area);
+	}
 }
 
 
@@ -526,7 +564,10 @@ cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area,
 #endif
 
 		cache->requisition_cache_valid = FALSE;
-		
+
+		/* Ensure that allocation messages don't get optimised away: */
+		PRIVATE(editor_area)->needs_recursive_allocation = TRUE;
+
 		g_signal_emit (G_OBJECT(editor_area),
 			       signals[FLUSH_REQUISITION_CACHE], 0,
 			       orientation);
@@ -717,8 +758,7 @@ cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
 	g_signal_connect (G_OBJECT(internal_child),
 			  "flush_requisition_cache",
 			  G_CALLBACK(on_child_flush_requisition_cache),
-			  area);	
-
+			  area);
 }
 
 void
