@@ -251,3 +251,48 @@ void cong_eel_set_string(gchar **string, gchar *value)
 		g_free (old_value);
 	}
 }
+
+void 
+cong_eel_draw_pixbuf (GdkDrawable *drawable,
+		      GdkGC *gc,
+		      GdkPixbuf *pixbuf,
+		      gint src_x,
+		      gint src_y,
+		      gint dest_x,
+		      gint dest_y,
+		      gint width,
+		      gint height,
+		      GdkRgbDither dither,
+		      gint x_dither,
+		      gint y_dither)
+{
+#if 0
+	/* Code for Gdk-2.2 and later: */
+	gdk_draw_pixbuf (drawable,
+			 gc,
+			 pixbuf,
+			 src_x,
+			 src_y,
+			 dest_x,
+			 dest_y,
+			 -1,
+			 -1,
+			 dither,
+			 x_dither,
+			 y_dither);
+#else
+	/* Code for pre Gdk-2.2: */
+	gdk_pixbuf_render_to_drawable (pixbuf,
+				       drawable,
+				       gc,
+				       src_x,
+				       src_y,
+				       dest_x,
+				       dest_y,
+				       -1,
+				       -1,
+				       dither,
+				       x_dither,
+				       y_dither);
+#endif
+}

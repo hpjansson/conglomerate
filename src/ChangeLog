@@ -1,5 +1,9 @@
 2003-09-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-pixbuf.c, cong-eel.c, cong-eel.h
+
+	Removed gdk_draw_pixbuf (it required GDK 2.2, which isn't yet widespread)
+		
 	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-dispspec.h, cong-file-open.c, cong-menus.c, cong-plugin.c, global.h, main.c, plugin-dtd.c
 
 	Support for fileformat extension hints in dispspecs; warning fixes

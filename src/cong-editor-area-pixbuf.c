@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-editor-area-pixbuf.h"
 #include <libgnome/gnome-macros.h>
+#include "cong-eel.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -101,18 +102,18 @@ render_self (CongEditorArea *area,
 	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
 	GdkPixbuf *pixbuf = PRIVATE(area_pixbuf)->pixbuf;
 
-	gdk_draw_pixbuf (window,
-                         NULL,
-			 pixbuf,
-			 0,
-			 0,
-			 rect->x,
-			 rect->y,
-			 gdk_pixbuf_get_width(pixbuf),
-			 gdk_pixbuf_get_height(pixbuf),
-			 GDK_RGB_DITHER_NONE,
-			 0,
-			 0);
+	cong_eel_draw_pixbuf (window,
+			      NULL,
+			      pixbuf,
+			      0,
+			      0,
+			      rect->x,
+			      rect->y,
+			      gdk_pixbuf_get_width(pixbuf),
+			      gdk_pixbuf_get_height(pixbuf),
+			      GDK_RGB_DITHER_NONE,
+			      0,
+			      0);
 }
 
 static gint

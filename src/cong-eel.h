@@ -164,6 +164,20 @@ gchar *cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_
 /* Routine that sets a string ptr to point to a new value, and frees the old value (if any) */
 void cong_eel_set_string(gchar **string, gchar *value);
 
+void 
+cong_eel_draw_pixbuf (GdkDrawable *drawable,
+		      GdkGC *gc,
+		      GdkPixbuf *pixbuf,
+		      gint src_x,
+		      gint src_y,
+		      gint dest_x,
+		      gint dest_y,
+		      gint width,
+		      gint height,
+		      GdkRgbDither dither,
+		      gint x_dither,
+		      gint y_dither);
+
 G_END_DECLS
 
 #endif
