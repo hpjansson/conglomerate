@@ -280,6 +280,7 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 	}
 
 	/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
+	/* bug #133405 */
 
 	return NULL;
 }
