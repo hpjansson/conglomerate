@@ -28,6 +28,7 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-util.h"
+#include "cong-enum-mapping.h"
 
 #include "plugin-lists-area-listitem.h"
 
@@ -220,40 +221,7 @@ cong_util_numeration (enum CongNumeration numeration,
 	}
 }
 
-typedef struct CongEnumMapping CongEnumMapping;
-
-struct CongEnumMapping
-{
-	const gchar *text_value;
-	guint numeric_value;
-};
-
-
-guint
-cong_enum_mapping_lookup (CongEnumMapping *enum_mapping,
-			  guint num_values,
-			  const gchar *text_value,
-			  guint default_value)
-{
-	guint i;
-
-	g_return_val_if_fail (enum_mapping, default_value);
-
-	if (NULL==text_value) {
-		return default_value;
-	}
-
-	for (i=0;i<num_values;i++) {
-		if (0==strcmp(enum_mapping[i].text_value, text_value)) {
-			return enum_mapping[i].numeric_value;
-		}
-	}
-
-	/* Unrecognised value: */
-	return default_value;	
-}
-
-static CongEnumMapping docbook_orderedlist_numeration[] =
+static const CongEnumMapping docbook_orderedlist_numeration[] =
 {
 	{"arabic", CONG_NUMERATION_ARABIC},
 	{"loweralpha", CONG_NUMERATION_LOWER_ALPHA},

@@ -27,6 +27,17 @@
 
 G_BEGIN_DECLS
 
+enum CongDocumentModelType
+{
+	CONG_DOCUMENT_MODE_TYPE_DTD,
+	CONG_DOCUMENT_MODE_TYPE_W3C_XML_SCHEMA,
+	CONG_DOCUMENT_MODE_TYPE_RELAX_NG_SCHEMA,
+
+	NUM_CONG_DOCUMENT_MODEL_TYPES
+};
+
+typedef struct CongExternalDocumentModel CongExternalDocumentModel;
+
 /*******************************
    cong_dispspec stuff: 
 *******************************/
@@ -59,6 +70,10 @@ cong_dispspec_get_name(const CongDispspec *ds);
 
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
+
+const CongExternalDocumentModel*
+cong_dispspec_get_external_document_model (const CongDispspec *ds,
+					   enum CongDocumentModelType model_type);
 
 xmlNodePtr
 cong_dispspec_get_template(const CongDispspec *ds);
@@ -208,6 +223,16 @@ cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element);
 
 const gchar*
 cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element);
+
+
+/* Document model stuff: */
+/* e.g. for DocBook 4.1.2: "-//OASIS//DTD DocBook XML V4.1.2//EN" */
+const gchar*
+cong_external_document_model_get_public_id (const CongExternalDocumentModel* model);
+
+/* e.g. for DocBook 4.1.2: "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" */
+const gchar*
+cong_external_document_model_get_system_id (const CongExternalDocumentModel* model);
 
 G_END_DECLS
 

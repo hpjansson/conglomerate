@@ -21,6 +21,7 @@
 #include "cong-eel.h"
 #include "cong-dtd.h"
 #include "cong-util.h"
+#include "cong-enum-mapping.h"
 
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
@@ -73,8 +74,18 @@ struct SearchTreeKey
 	gchar* name;
 };
 
+struct CongExternalDocumentModel
+{
+	enum CongDocumentModelType model_type;
+	gchar *public_id;
+	gchar *system_id;
+};
+
 struct CongDispspec
 {
+	/* The CongDocumentModels: */
+	CongExternalDocumentModel *document_models[NUM_CONG_DOCUMENT_MODEL_TYPES];
+
 	/* Implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
 	CongDispspecElement* last;
@@ -111,6 +122,16 @@ static void
 parse_metadata (CongDispspec *ds, 
 		xmlDocPtr doc, 
 		xmlNodePtr node);
+
+static void 
+parse_document_models (CongDispspec *ds, 
+		       xmlDocPtr doc, 
+		       xmlNodePtr node);
+
+static void 
+parse_external_document_model (CongDispspec *ds, 
+			       xmlDocPtr doc, 
+			       xmlNodePtr node);
 
 static void 
 parse_template (CongDispspec *ds, 
@@ -441,6 +462,16 @@ cong_dispspec_get_description (const CongDispspec *ds)
 	} else {
 		return _("No description available.");
 	}
+}
+
+const CongExternalDocumentModel*
+cong_dispspec_get_external_document_model (const CongDispspec *ds,
+					   enum CongDocumentModelType model_type)
+{
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(model_type<NUM_CONG_DOCUMENT_MODEL_TYPES, NULL);
+	
+	return ds->document_models[model_type];
 }
 
 GdkPixbuf*
@@ -783,6 +814,10 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 					{
 						parse_metadata(ds, doc, cur);
 					}
+					else if (0==strcmp(cur->name,"document-models"))
+					{
+						parse_document_models(ds, doc, cur);
+					}
 					else if (0==strcmp(cur->name, "document-template"))
 					{
 						parse_template(ds, cur);
@@ -816,6 +851,66 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 				ds->desc = g_strdup(str);
 			}
 		}
+	}
+}
+
+static void 
+parse_document_models (CongDispspec *ds, 
+		       xmlDocPtr doc, 
+		       xmlNodePtr node)
+{
+	xmlNodePtr xml_element;
+
+	DS_DEBUG_MSG1("got document-models\n");
+
+	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
+		if (0==strcmp(xml_element->name,"external-document-model")) {
+			parse_external_document_model (ds, 
+						       doc, 
+						       xml_element);
+		}
+	}
+
+}
+
+static const CongEnumMapping document_model_enum_mapping[] =
+{
+	{"dtd", CONG_DOCUMENT_MODE_TYPE_DTD},
+	{"w3c-xml-schema", CONG_DOCUMENT_MODE_TYPE_W3C_XML_SCHEMA},
+	{"relax-ng-schema", CONG_DOCUMENT_MODE_TYPE_RELAX_NG_SCHEMA},
+};
+
+
+static void 
+parse_external_document_model (CongDispspec *ds, 
+			       xmlDocPtr doc, 
+			       xmlNodePtr node)
+{
+	gchar *type;
+
+	DS_DEBUG_MSG1("got external-document-model\n");
+
+
+	type = cong_node_get_attribute (node, "type");
+
+	if (type) {
+		CongExternalDocumentModel *model;
+
+		model = g_new0 (CongExternalDocumentModel, 1);
+
+		model->model_type = cong_enum_mapping_lookup (document_model_enum_mapping,
+							      sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
+							      "type",
+							      CONG_DOCUMENT_MODE_TYPE_DTD);
+
+		model->public_id = cong_node_get_attribute (node, "public-id");
+		model->system_id = cong_node_get_attribute (node, "system-id");
+
+		ds->document_models[model->model_type] = model;
+
+		g_free (type);
+	} else {
+		g_message ("Missing document-model type");
 	}
 }
 

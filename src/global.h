@@ -239,6 +239,10 @@ void
 cong_ui_file_export(CongDocument *doc,
 		    GtkWindow *toplevel_window);
 
+GtkWidget*
+cong_file_properties_dialog_new (CongDocument *doc, 
+				 GtkWindow *parent_window);
+
 GnomeVFSResult
 cong_xml_save_to_vfs(xmlDocPtr doc_ptr, 
 		     GnomeVFSURI *file_uri,	
