@@ -1,5 +1,9 @@
 2004-06-11  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-plugin.c: 
+
+	Suppressed debug spewage
+
 	* cong-node-properties-dialog.c: 
 
 	Fixed warning

@@ -208,7 +208,7 @@ cong_plugin_locate_service_by_id (CongPlugin *plugin,
 		CongService *service = CONG_SERVICE (iter->data);
 
 		if (g_type_check_instance_is_a ((GTypeInstance*)service, type)) {
-			g_message ("searching for \"%s\" found \"%s\"", service_id, cong_service_get_id (service));
+			/* g_message ("searching for \"%s\" found \"%s\"", service_id, cong_service_get_id (service)); */
 			if (0==strcmp(service_id, cong_service_get_id (service))) {
 				return service;
 			}
