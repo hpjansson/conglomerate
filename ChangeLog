@@ -1,3 +1,8 @@
+2003-05-09  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am: using the complete example directory,
+	instead of single files
+
 2003-05-05  Dmitry G. Mastrukov <dmitry@taurussoft.org>
 
 	* configure.in: Added --enable-printing option.
