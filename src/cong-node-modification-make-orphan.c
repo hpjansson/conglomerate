@@ -31,6 +31,9 @@
 
 struct CongNodeModificationMakeOrphanDetails
 {
+	/* Undo info: */
+	CongNodePtr former_parent;
+	CongNodePtr former_older_sibling;
 };
 
 /* Internal function declarations: */
@@ -77,6 +80,15 @@ cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *no
 					  doc,
 					  node);
 
+	if (node->parent) {
+		PRIVATE(node_modification_make_orphan)->former_parent = node->parent;
+		cong_document_node_ref (doc, PRIVATE(node_modification_make_orphan)->former_parent);		
+	}
+	if (node->next) {
+		PRIVATE(node_modification_make_orphan)->former_older_sibling = node->next;
+		cong_document_node_ref (doc, PRIVATE(node_modification_make_orphan)->former_older_sibling);		
+	}
+
 	return node_modification_make_orphan;
 }
 
@@ -109,6 +121,7 @@ static void
 dispose (GObject *object)
 {
 	CongNodeModificationMakeOrphan *node_modification_make_orphan = CONG_NODE_MODIFICATION_MAKE_ORPHAN (object);
+	CongDocument *doc = cong_modification_get_document(CONG_MODIFICATION(node_modification_make_orphan));
 
 #if DEBUG_MODIFICATION_LIFETIMES
 	g_message ("CongNodeModificationMakeOrphan::dispose");
@@ -117,9 +130,16 @@ dispose (GObject *object)
 	g_assert (node_modification_make_orphan->private);
 	
 	/* Cleanup: */
-
-	/* FIXME: write! */
-	g_assert_not_reached();
+	if (PRIVATE(node_modification_make_orphan)->former_parent) {
+		cong_document_node_unref (doc, 
+					  PRIVATE(node_modification_make_orphan)->former_parent);		
+		PRIVATE(node_modification_make_orphan)->former_parent = NULL;
+	}
+	if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
+		cong_document_node_unref (doc, 
+					PRIVATE(node_modification_make_orphan)->former_older_sibling);		
+		PRIVATE(node_modification_make_orphan)->former_older_sibling = NULL;
+	}
 
 	/* Call the parent method: */		
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
@@ -129,17 +149,41 @@ static void
 undo (CongModification *modification)
 {
 	CongNodeModificationMakeOrphan *node_modification_make_orphan = CONG_NODE_MODIFICATION_MAKE_ORPHAN (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle undo */
-	g_assert_not_reached();
+	cong_document_begin_edit (doc);
+
+	if (PRIVATE(node_modification_make_orphan)->former_parent) {
+		if (PRIVATE(node_modification_make_orphan)->former_older_sibling) {
+			cong_document_node_add_after (doc, 
+						       node, 
+						       PRIVATE(node_modification_make_orphan)->former_older_sibling);
+		} else {
+			cong_document_node_set_parent (doc, 
+						       node, 
+						       PRIVATE(node_modification_make_orphan)->former_parent);
+		}
+	} else {
+		cong_document_node_make_orphan (doc, 
+						node);
+	}
+
+	cong_document_end_edit (doc);
 }
 
 static void
 redo (CongModification *modification)
 {
 	CongNodeModificationMakeOrphan *node_modification_make_orphan = CONG_NODE_MODIFICATION_MAKE_ORPHAN (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle redo */
-	g_assert_not_reached();
+	cong_document_begin_edit (doc);
+
+	cong_document_node_make_orphan (doc, 
+					node);
+
+	cong_document_end_edit (doc);
 }
 

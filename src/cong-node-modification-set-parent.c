@@ -31,7 +31,12 @@
 
 struct CongNodeModificationSetParentDetails
 {
-	CongNodePtr adoptive_parent;
+	/* Undo info: */
+	CongNodePtr former_parent;
+	CongNodePtr former_older_sibling;
+
+	/* Undo info: */
+	CongNodePtr new_parent;
 };
 
 /* Internal function declarations: */
@@ -73,14 +78,23 @@ CongNodeModificationSetParent*
 cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node_modification_set_parent,
 					     CongDocument *doc,
 					     CongNodePtr node,
-					     CongNodePtr adoptive_parent)
+					     CongNodePtr new_parent)
 {
 	cong_node_modification_construct (CONG_NODE_MODIFICATION(node_modification_set_parent),
 					  doc,
 					  node);
 
-	PRIVATE(node_modification_set_parent)->adoptive_parent = adoptive_parent;
-	cong_document_node_ref (doc, adoptive_parent);
+	PRIVATE(node_modification_set_parent)->new_parent = new_parent;
+	cong_document_node_ref (doc, new_parent);
+
+	if (node->parent) {
+		PRIVATE(node_modification_set_parent)->former_parent = node->parent;
+		cong_document_node_ref (doc, PRIVATE(node_modification_set_parent)->former_parent);		
+	}
+	if (node->next) {
+		PRIVATE(node_modification_set_parent)->former_older_sibling = node->next;
+		cong_document_node_ref (doc, PRIVATE(node_modification_set_parent)->former_older_sibling);		
+	}
 
 	return node_modification_set_parent;
 }
@@ -88,12 +102,12 @@ cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node
 CongModification*
 cong_node_modification_set_parent_new (CongDocument *doc,
 				       CongNodePtr node,
-				       CongNodePtr adoptive_parent)
+				       CongNodePtr new_parent)
 {
 	return CONG_MODIFICATION(cong_node_modification_set_parent_construct (CONG_NODE_MODIFICATION_SET_PARENT(g_object_new (CONG_NODE_MODIFICATION_SET_PARENT_TYPE, NULL)),
 									      doc,
 									      node,
-									      adoptive_parent));
+									      new_parent));
 }
 
 static void
@@ -124,10 +138,10 @@ dispose (GObject *object)
 	g_assert (node_modification_set_parent->private);
 	
 	/* Cleanup: */
-	if (PRIVATE(node_modification_set_parent)->adoptive_parent) {
+	if (PRIVATE(node_modification_set_parent)->new_parent) {
 		cong_document_node_unref (cong_modification_get_document(CONG_MODIFICATION(node_modification_set_parent)),
-					  PRIVATE(node_modification_set_parent)->adoptive_parent);
-		PRIVATE(node_modification_set_parent)->adoptive_parent = NULL;
+					  PRIVATE(node_modification_set_parent)->new_parent);
+		PRIVATE(node_modification_set_parent)->new_parent = NULL;
 	}
 
 	/* Call the parent method: */		
@@ -138,15 +152,42 @@ static void
 undo (CongModification *modification)
 {
 	CongNodeModificationSetParent *node_modification_set_parent = CONG_NODE_MODIFICATION_SET_PARENT (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle undo */
+	cong_document_begin_edit (doc);
+
+	if (PRIVATE(node_modification_set_parent)->former_parent) {
+		if (PRIVATE(node_modification_set_parent)->former_older_sibling) {
+			cong_document_node_add_after (doc, 
+						       node, 
+						       PRIVATE(node_modification_set_parent)->former_older_sibling);
+		} else {
+			cong_document_node_set_parent (doc, 
+						       node, 
+						       PRIVATE(node_modification_set_parent)->former_parent);
+		}
+	} else {
+		cong_document_node_make_orphan (doc, 
+						node);
+	}
+
+	cong_document_end_edit (doc);
 }
 
 static void
 redo (CongModification *modification)
 {
 	CongNodeModificationSetParent *node_modification_set_parent = CONG_NODE_MODIFICATION_SET_PARENT (modification);
+	CongDocument *doc = cong_modification_get_document (modification);
+	CongNodePtr node = cong_node_modification_get_node (CONG_NODE_MODIFICATION(modification));
 
-	/* FIXME: handle redo */
+	cong_document_begin_edit (doc);
+
+	cong_document_node_set_parent (doc, 
+				       node,
+				       PRIVATE(node_modification_set_parent)->new_parent);
+
+	cong_document_end_edit (doc);
 }
 
