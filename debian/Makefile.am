@@ -12,16 +12,14 @@ debian_DISTS = \
     compat \
     control \
     copyright \
-    docs \
     rules \
     watch \
     $(NULL)
 
 # package related files
 pkg_DISTS = \
-    conglomerate.menu \
-    conglomerate.postinst \
-    conglomerate.prerm \
+    conglomerate-common.menu \
+    conglomerate-common.docs \
     conglomerate_icon.xpm \
     $(NULL)
 

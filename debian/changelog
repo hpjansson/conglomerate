@@ -6,7 +6,7 @@ conglomerate (0.7.14-2) UNRELEASED; urgency=low
   * The new compile will pull in gcrypt11 and gnutls11,
     this closes: #263701
 
- -- Geert Stappers <stappers@stappers.nl>  Sun,  8 Aug 2004 00:34:27 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Sun,  8 Aug 2004 11:07:42 +0200
 
 conglomerate (0.7.14-1) unstable; urgency=low
 
