@@ -52,12 +52,12 @@ typedef struct CongTreeViewDetails
 	GtkTreeView *gtk_tree_view;
 	GtkTreeStore *gtk_tree_store;
 	
-	/* need some kind of search structure - mapping from nodes to GtkTreeIter; the GtkTreeStore class guarantees persisntant validity of a GtkTreeIter provided the node remains valid */
+	/* need some kind of search structure - mapping from nodes to GtkTreeIter; the GtkTreeStore class guarantees persistant validity of a GtkTreeIter provided the node remains valid */
 	GTree *search_structure;
 
 } CongTreeViewDetails;
 
-#if 1
+#if 0
 struct search_struct
 {
 	CongNodePtr node;
@@ -72,11 +72,18 @@ struct search_struct
 static gint 
 tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
+#if 0
 static gboolean 
 node_search_callback(GtkTreeModel *model,
 		     GtkTreePath *path,
 		     GtkTreeIter *iter,
 		     gpointer data);
+#endif
+
+gint key_compare_func (gconstpointer a, 
+		       gconstpointer b, 
+		       gpointer user_data);
+void value_destroy_func (gpointer data);
 
 static gboolean 
 get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter);
@@ -137,6 +144,10 @@ cong_tree_view_new (CongDocument *doc,
 	details->pixbuf_callback = pixbuf_callback;
 	details->user_data = user_data;
 
+	details->search_structure = g_tree_new_full (key_compare_func,
+						     NULL,
+						     NULL,
+						     value_destroy_func);
 	cong_tree_view->view.doc = doc;
 	cong_tree_view->view.klass = g_new0(CongViewClass,1);
 	cong_tree_view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
@@ -326,6 +337,7 @@ tree_popup_show(GtkWidget *widget, GdkEvent *event)
 	return(FALSE);
 }
 
+#if 0
 static gboolean 
 node_search_callback (GtkTreeModel *model,
 		      GtkTreePath *path,
@@ -355,10 +367,35 @@ node_search_callback (GtkTreeModel *model,
 	}
 
 }
+#endif
+
+
+gint key_compare_func (gconstpointer a, 
+		       gconstpointer b, 
+		       gpointer user_data)
+{
+	return (gint)(a-b);
+}
+
+void value_destroy_func (gpointer data)
+{
+	g_free(data);
+}
 
 static gboolean 
 get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter)
 {
+#if 1
+	GtkTreeIter *found_iter = g_tree_lookup (tree_view_details->search_structure,
+						 node);
+
+	if (found_iter) {
+		*tree_iter = *found_iter;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+#else
 	/* FIXME: this is O(n), it ought to be O(1), by adding some kind of search structure */
 	struct search_struct search;
 	
@@ -371,6 +408,7 @@ get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkT
 			       &search);
 
 	return search.found_it;
+#endif
 }
 
 /* Definitions of the handler functions: */
@@ -695,6 +733,17 @@ static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
 							 node,
 							 PRIVATE(cong_tree_view)->user_data);
 
+	/* Add to search structure: */
+	{
+		GtkTreeIter *copied_tree_iter = g_new(GtkTreeIter, 1);
+		*copied_tree_iter = *tree_iter;
+
+		g_tree_insert (PRIVATE(cong_tree_view)->search_structure,
+			       node,
+			       copied_tree_iter);
+	}
+		      
+
 	/* Recurse through the children: */
 	for (child_node=node->children; child_node; child_node=child_node->next) {
 		if (cong_tree_view_should_show_node(cong_tree_view,
@@ -709,6 +758,19 @@ static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
 	}
 }
 
+static void recursive_remove_from_search_structure(CongTreeView *cong_tree_view,
+						   CongNodePtr node)
+{
+	CongNodePtr child_node;
+	
+	g_tree_remove(PRIVATE(cong_tree_view)->search_structure, node);	
+	
+	for (child_node=node->children; child_node; child_node=child_node->next) {
+		recursive_remove_from_search_structure (cong_tree_view,
+							child_node);
+	}
+}
+
 static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
 					     CongNodePtr node)
 {
@@ -716,10 +778,12 @@ static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
 
 	g_return_if_fail(cong_tree_view);
 	g_return_if_fail(node);
-
-	/* FIXME: write this! */
+	
 	if ( get_iter_for_node(PRIVATE(cong_tree_view), node, &tree_iter_node) ) {
 		/* Remove this branch of the tree: */
 		gtk_tree_store_remove(PRIVATE(cong_tree_view)->gtk_tree_store, &tree_iter_node);
 	}		
+	
+	recursive_remove_from_search_structure (cong_tree_view,
+						node);
 }

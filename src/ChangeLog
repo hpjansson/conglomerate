@@ -2,6 +2,10 @@
 
 	* cong-tree-view.c
 
+	Added a search structure to speed up the tree view updates
+
+	* cong-tree-view.c
+
 	Tidy up and bug fixes for shared tree view code
 
 2003-07-07  David Malcolm <david@davemalcolm.demon.co.uk>
