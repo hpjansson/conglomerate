@@ -984,6 +984,10 @@ cong_app_private_load_plugins (CongApp *app)
 			plugin_lists_plugin_register,
 			plugin_lists_plugin_configure);
 
+	register_plugin(app,"random",
+			plugin_random_plugin_register,
+			plugin_random_plugin_configure);
+
 	register_plugin(app,"sgml",
 			plugin_sgml_plugin_register,
 			plugin_sgml_plugin_configure);

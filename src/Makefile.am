@@ -291,6 +291,7 @@ conglomerate_SOURCES =      \
   plugin-paragraph-area-paragraph.c \
   plugin-paragraph-node-element-paragraph.h \
   plugin-paragraph-node-element-paragraph.c \
+  plugin-random.c    \
   plugin-save-dispspec.c    \
   plugin-sgml.c             \
   plugin-tests.c            \

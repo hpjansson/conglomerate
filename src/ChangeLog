@@ -1,3 +1,9 @@
+2004-01-19  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* plugin-random.c, Makefile.am, cong-app.c, cong-fake-plugin-hooks.h
+
+	New plugin for generating random documents
+
 2004-01-16  Daniel van Eeden  <daniel_e@dds.nl>
 
 	* cong-file-new.c, cong-primary-window.c & global.h
