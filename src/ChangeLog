@@ -1,3 +1,9 @@
+2004-07-07  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* main.c, cong-app.c : Use popt context to parse command
+	line options and open them all in conglomerate, converting
+	them to uri.
+
 2004-07-06  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h, cong-document.c, cong-util.c, cong-util.h, gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h, gxx-undefine-shared-macros.h

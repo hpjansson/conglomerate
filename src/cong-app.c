@@ -955,12 +955,39 @@ cong_app_get_language_list (CongApp *app)
 	return PRIVATE(app)->language_list;
 }
 
+static gboolean
+handle_cmdline_args (gpointer data)
+{
+	poptContext ctx;
+	const gchar **startup_files;
+	gchar *uri;
+	int i;
+
+	ctx = data;
+	startup_files = poptGetArgs (ctx);
+
+	if (startup_files) {
+		for (i = 0; startup_files [i]; ++i) {
+		       uri = gnome_vfs_make_uri_from_shell_arg (startup_files[i]);
+		       open_document_do (uri, NULL);
+		       g_free(uri);
+		   }
+	}
+	
+	poptFreeContext (ctx);
+
+	return FALSE;
+}
+
+
 /* Internal function definitions: */
 static CongApp*
 cong_app_new (int   argc,
 	      char *argv[])
 {
 	CongApp *app;
+	GValue value = { 0 };
+	poptContext ctx;
 
 	app = g_new0(CongApp,1);
 	app->private = g_new0(CongAppPrivate,1);
@@ -974,6 +1001,13 @@ cong_app_new (int   argc,
 							  _("XML Editor"),
 							  GNOME_PROGRAM_STANDARD_PROPERTIES,
 							  NULL);
+
+	g_value_init (&value, G_TYPE_POINTER);
+	g_object_get_property (G_OBJECT (PRIVATE (app)->gnome_program), GNOME_PARAM_POPT_CONTEXT,
+			       &value);
+	ctx = g_value_get_pointer (&value);
+	g_value_unset (&value);
+	g_idle_add (handle_cmdline_args, ctx);
 
 	/* Set up usage of GConf: */
 	PRIVATE(app)->gconf_client = gconf_client_get_default();
