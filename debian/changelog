@@ -1,8 +1,8 @@
-conglomerate (0.7.12-2.1) UNRELEASED; urgency=low
+conglomerate (0.7.11-2.2) UNRELEASED; urgency=low
 
   * expecting new upstream version
    - It has a new logo, that affects conglomeate_icons.xpm.
-   (not yet checked if it lintian and/or linda clean)
+     (lintian says it has to much colors)
 
  -- Geert Stappers <stappers@stappers.nl>  Thu, 19 Feb 2004 15:00:15 +0100
 
