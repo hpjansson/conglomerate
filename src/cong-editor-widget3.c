@@ -400,7 +400,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	/* Set up root area: */
 	{
-		PRIVATE(editor_widget)->root_area = cong_editor_area_border_new (editor_widget, 5);
+		PRIVATE(editor_widget)->root_area = cong_editor_area_bin_new (editor_widget);
 	
 		g_signal_connect (G_OBJECT(PRIVATE(editor_widget)->root_area),
 				  "flush_requisition_cache",

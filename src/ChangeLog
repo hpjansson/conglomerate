@@ -1,5 +1,9 @@
 2003-08-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c, plugin-paragraph-area-paragraph.c
+
+	Fixed some build breakage
+	
 	* cong-editor-area-border.c, cong-editor-area-border.h, cong-editor-area-flow-holder-blocks.c
 
 	Spacing improvements in new widget

@@ -89,6 +89,9 @@ cong_editor_area_paragraph_construct (CongEditorAreaParagraph *area_paragraph,
 {
 	cong_editor_area_border_construct (CONG_EDITOR_AREA_BORDER(area_paragraph),
 					   editor_widget,
+					   5,
+					   5,
+					   5,
 					   5);
 
 	return CONG_EDITOR_AREA (area_paragraph);
