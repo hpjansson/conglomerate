@@ -57,6 +57,7 @@ typedef GdkPixbuf* (*CongTreeViewPixbufCallback) (CongTreeView *cong_tree_view,
 
 CongTreeView *
 cong_tree_view_new (CongDocument *doc,
+		    gboolean use_markup,
 		    CongTreeViewNodeFilter node_filter,
 		    CongTreeViewNodeCreationCallback node_creation_callback,
 		    CongTreeViewPixbufCallback pixbuf_callback, /* can be NULL */

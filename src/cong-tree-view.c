@@ -384,6 +384,14 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 	cong_tree_view = CONG_TREE_VIEW(view);
 
 	/* FIXME: Potentially we need to regenerate all text in the tree, due to XPath concerns... */
+
+	/* For now, just regenerate the text for this node: */
+	if ( get_iter_for_node(cong_tree_view->private, node, &tree_iter) ) {
+		PRIVATE(cong_tree_view)->node_creation_callback (cong_tree_view,
+								 &tree_iter,
+								 node,
+								 PRIVATE(cong_tree_view)->user_data);
+	}
 }
 
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
@@ -509,6 +517,7 @@ static void populate_tree_store_recursive(CongTreeView *cong_tree_view,
 
 CongTreeView *
 cong_tree_view_new (CongDocument *doc,
+		    gboolean use_markup,
 		    CongTreeViewNodeFilter node_filter,
 		    CongTreeViewNodeCreationCallback node_creation_callback,
 		    CongTreeViewPixbufCallback pixbuf_callback, /* can be NULL */
@@ -583,7 +592,7 @@ cong_tree_view_new (CongDocument *doc,
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_set_attributes(column,
 					    renderer,
-					    "text", CONG_TREE_VIEW_TREE_MODEL_TITLE_COLUMN,
+					    (use_markup ? "markup" : "text"), CONG_TREE_VIEW_TREE_MODEL_TITLE_COLUMN,
 					    "foreground", CONG_TREE_VIEW_TREE_MODEL_FOREGROUND_COLOR_COLUMN,
 					    "background", CONG_TREE_VIEW_TREE_MODEL_BACKGROUND_COLOR_COLUMN,
 					    NULL);

@@ -51,6 +51,7 @@ cong_overview_view_new (CongDocument *doc)
 	g_return_val_if_fail (doc, NULL);
 	
 	return cong_tree_view_new (doc,
+				   FALSE,
 				   node_filter,
 				   node_creation_callback,
 				   pixbuf_callback,
