@@ -42,9 +42,11 @@ LIBGNOMEPRINT_REQUIRED=1.116.0
 LIBGNOMEPRINTUI_REQUIRED=1.116.0
 LIBGLADE2_REQUIRED=2.0.0
 LIBFO_REQUIRED=0.2.3
+GCONF2_REQUIRED=1.2.0
 GTKSOURCEVIEW_REQUIRED=0.6
 
 PKG_CHECK_MODULES(CONGLOMERATE,		\
+  gconf-2.0 >= $GCONF2_REQUIRED		\
   libxml-2.0 >= $LIBXML_REQUIRED	\
   libxslt >= $LIBXSLT_REQUIRED		\
   libbonobo-2.0 >= $LIBBONOBO_REQUIRED	\
@@ -109,6 +111,20 @@ AM_CONDITIONAL(ENABLE_GTKSOURCEVIEW, test x$enable_gtksourceview = xyes)
 AC_SUBST(GTKSOURCEVIEW_CFLAGS)
 AC_SUBST(GTKSOURCEVIEW_LIBS)
 AC_MSG_RESULT($enable_gtksourceview)
+
+ 
+dnl -- gconf, kudos to metacity
+ 
+AC_ARG_ENABLE(gconf,              [  --disable-gconf             disable gconf usage, effects unknown leave it enabled],,enable_gconf=yes)
+
+if test x$enable_gconf = xyes; then
+  AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+  if test x"$GCONFTOOL" = xno; then
+    AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
+  fi
+  AM_GCONF_SOURCE_2
+fi
+
 
 dnl --- General compilation options ---
 
@@ -215,3 +231,13 @@ AC_OUTPUT(Makefile
 	  examples/Makefile 
 	  templates/Makefile 
           src/Makefile)
+
+if test x$enable_gconf = xno; then
+        echo "*** WARNING WARNING WARNING WARNING WARNING"
+        echo "*** Building without GConf"
+        echo "*** This means there's no way to change prefs except"
+        echo "*** hacking source code, at least for now."
+        echo "*** Also, some prefs may have broken defaults."
+fi
+                                                                                
+dnl -- end of configure.in

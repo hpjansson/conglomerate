@@ -30,6 +30,7 @@ config.status: configure
 	./configure --host=$(DEB_HOST_GNU_TYPE) \
 	--build=$(DEB_BUILD_GNU_TYPE) \
 	--prefix=/usr --mandir=\$${prefix}/share/man \
+	--sysconfdir=/etc \
 	--infodir=\$${prefix}/share/info \
 	--enable-gtk-doc=no \
 	--datadir=\$${prefix}/share || cat config.log
@@ -68,7 +69,8 @@ install: build
 	dh_installdirs
 
 	# using src/Makefile to get files into the package
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes \
+ 	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
 	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 
