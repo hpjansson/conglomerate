@@ -24,6 +24,16 @@ struct LoadingDetails
 	GnomeVFSURI* path_uri;
 };
 
+/**
+ * visit_func:
+ * @rel_path:
+ * @info:
+ * @recursing_will_loop:
+ * @data:
+ * @recurse:
+ *
+ * TODO: Write me
+ */
 gboolean
 visit_func(const gchar *rel_path,
 	   GnomeVFSFileInfo *info,
@@ -68,6 +78,15 @@ visit_func(const gchar *rel_path,
 }
 
 /* Add all disspecs found in directory to an existing DispspecRegistry */
+/**
+ * cong_dispspec_registry_add_dir:
+ * @registry:
+ * @xds_directory:
+ * @toplevel_window:
+ * @raise_errors:
+ *
+ * TODO: Write me
+ */
 void
 cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_directory, GtkWindow *toplevel_window, gboolean raise_errors)
 {
@@ -101,6 +120,13 @@ cong_dispspec_registry_add_dir(CongDispspecRegistry *registry, const gchar *xds_
 
 /* Create a new DispspecRegistry.
    If a directory is specified, read disppsec files from it and insert them into registry.  If not, returned registry is empty. */
+/**
+ * cong_dispspec_registry_new:
+ * @xds_directory:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 CongDispspecRegistry*
 cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window)
 {
@@ -115,12 +141,24 @@ cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_windo
 	return registry;
 }
 
+/**
+ * cong_dispspec_registry_free:
+ * @registry:
+ *
+ * This function is currently just a false assertion
+ */
 void
 cong_dispspec_registry_free(CongDispspecRegistry* registry)
 {
 	g_assert(0); /* for now */
 }
 
+/**
+ * cong_dispspec_registry_get_num:
+ * @registry:
+ *
+ * TODO: Write me
+ */
 unsigned int
 cong_dispspec_registry_get_num(CongDispspecRegistry* registry)
 {
@@ -129,6 +167,13 @@ cong_dispspec_registry_get_num(CongDispspecRegistry* registry)
 	return registry->num;
 }
 
+/**
+ * cong_dispspec_registry_get:
+ * @registry:
+ * @i:
+ *
+ * TODO: Write me
+ */
 CongDispspec*
 cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i)
 {
@@ -138,6 +183,13 @@ cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i)
 	return registry->array[i];
 }
 
+/**
+ * cong_dispspec_registry_add:
+ * @registry:
+ * @ds:
+ *
+ * TODO: Write me
+ */
 void
 cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds)
 {
@@ -148,6 +200,12 @@ cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds)
 	registry->array[registry->num-1]=ds;
 }
 
+/**
+ * cong_dispspec_registry_dump:
+ * @registry:
+ *
+ * TODO: Write me
+ */
 void
 cong_dispspec_registry_dump(CongDispspecRegistry* registry)
 {
@@ -185,6 +243,11 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 }
 #endif
 
+/**
+ * cong_cell_renderer_simple_new:
+ *
+ * TODO: Write me
+ */
 GtkCellRenderer*
 cong_cell_renderer_simple_new (void)
 {
@@ -305,7 +368,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
 
 
 /**
- * cong_dispspec_registry_get_appropriate_dispspec
+ * cong_dispspec_registry_get_appropriate_dispspec:
  * @registry:
  * @xml_doc:
  * @filename_extension:
@@ -315,7 +378,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
  * If this fails, it looks at the top-level tag and makes a guess, but asks the user for confirmation.
  * If this fails, it asks the user.
  * 
- * Returns:
+ * Returns: The appropriate dispspec for use with the file.
  */
 CongDispspec*
 cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 

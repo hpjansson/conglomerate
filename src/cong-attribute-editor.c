@@ -102,6 +102,17 @@ cong_attribute_editor_instance_init (CongAttributeEditor *attribute_editor)
 	attribute_editor->private = g_new0(CongAttributeEditorDetails,1);
 }
 
+/**
+ * cong_attribute_editor_construct:
+ * @attribute_editor:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 CongAttributeEditor*
 cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 				 CongDocument *doc,
@@ -134,6 +145,12 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor);
 }
 
+/**
+ * cong_attribute_editor_get_document:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor)
 {
@@ -142,6 +159,12 @@ cong_attribute_editor_get_document (CongAttributeEditor *attribute_editor)
 	return PRIVATE(attribute_editor)->doc; 
 }
 
+/**
+ * cong_attribute_editor_get_node:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
 {
@@ -150,6 +173,12 @@ cong_attribute_editor_get_node (CongAttributeEditor *attribute_editor)
 	return PRIVATE(attribute_editor)->node;
 }
 
+/**
+ * cong_attribute_editor_get_attribute:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 xmlAttributePtr
 cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
 {
@@ -158,6 +187,12 @@ cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
 	return PRIVATE(attribute_editor)->attr;
 }
 
+/**
+ * cong_attribute_editor_get_ns:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 xmlNs *
 cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
 {
@@ -166,6 +201,12 @@ cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
 	return PRIVATE(attribute_editor)->ns_ptr;	
 }
 
+/**
+ * cong_attribute_editor_get_attribute_name:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
 {
@@ -174,6 +215,12 @@ cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
 	return PRIVATE(attribute_editor)->attribute_name;
 }
 
+/**
+ * cong_attribute_editor_get_attribute_value:
+ * @attribute_editor:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor)
 {
@@ -184,6 +231,14 @@ cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor
 					PRIVATE(attribute_editor)->attribute_name);
 }
 
+/**
+ * cong_attribute_editor_new:
+ * @doc:
+ * @node:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_attribute_editor_new (CongDocument *doc,
 			   CongNodePtr node,
@@ -254,6 +309,19 @@ cong_attribute_editor_new (CongDocument *doc,
 	g_assert_not_reached();	
 }
 
+/**
+ * create_cdata_editor:
+ * @xml:
+ * @func_name:
+ * @name:
+ * @string1:
+ * @string2:
+ * @int1:
+ * @int2:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 create_cdata_editor (GladeXML *xml,
 		     gchar *func_name,
@@ -295,6 +363,17 @@ create_cdata_editor (GladeXML *xml,
 CongDocument *global_glade_doc_ptr = NULL;
 CongNodePtr global_glade_node_ptr = NULL;
 
+/**
+ * cong_bind_radio_button:
+ * @radio_button:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attribute_value:
+ *
+ * TODO: Write me
+ */
 void
 cong_bind_radio_button (GtkRadioButton *radio_button,
 			CongDocument *doc,
@@ -314,7 +393,18 @@ cong_bind_radio_button (GtkRadioButton *radio_button,
 				GTK_WIDGET (radio_button));
 }
 
-
+/**
+ * cong_bind_check_button:
+ * @check_button:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attribute_value_unchecked:
+ * @attribute_value_checked:
+ *
+ * TODO: Write me
+ */
 void
 cong_bind_check_button (GtkCheckButton *check_button,
 			CongDocument *doc,

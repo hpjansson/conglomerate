@@ -75,6 +75,15 @@ cong_node_modification_add_before_instance_init (CongNodeModificationAddBefore *
 	node->private = g_new0(CongNodeModificationAddBeforeDetails,1);
 }
 
+/**
+ * cong_node_modification_add_before_construct:
+ * @node_modification_add_before:
+ * @doc:
+ * @node:
+ * @younger_sibling:
+ *
+ * TODO: Write me
+ */
 CongNodeModificationAddBefore*
 cong_node_modification_add_before_construct (CongNodeModificationAddBefore *node_modification_add_before,
 					     CongDocument *doc,
@@ -105,6 +114,14 @@ cong_node_modification_add_before_construct (CongNodeModificationAddBefore *node
 	return node_modification_add_before;
 }
 
+/**
+ * cong_node_modification_add_before_new:
+ * @doc:
+ * @node:
+ * @younger_sibling:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_node_modification_add_before_new (CongDocument *doc,
 				      CongNodePtr node,

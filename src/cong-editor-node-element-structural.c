@@ -63,6 +63,14 @@ cong_editor_node_element_structural_instance_init (CongEditorNodeElementStructur
 	node_element_structural->private = g_new0(CongEditorNodeElementStructuralDetails,1);
 }
 
+/**
+ * cong_editor_node_element_structural_construct:
+ * @editor_node_element_structural:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeElementStructural*
 cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *editor_node_element_structural,
 					       CongEditorWidget3* editor_widget,
@@ -75,6 +83,13 @@ cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *
 	return editor_node_element_structural;
 }
 
+/**
+ * cong_editor_node_element_structural_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_element_structural_new (CongEditorWidget3* widget,
 					 CongTraversalNode *traversal_node)

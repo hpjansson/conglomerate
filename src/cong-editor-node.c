@@ -122,6 +122,14 @@ cong_editor_node_instance_init (CongEditorNode *node)
 	node->priv = g_new0(CongEditorNodeDetails,1);
 }
 
+/**
+ * cong_editor_node_construct:
+ * @editor_node:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* editor_widget,
@@ -133,6 +141,13 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 	return editor_node;
 }
 
+/**
+ * cong_editor_node_manufacture:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
 			      CongTraversalNode *traversal_node)
@@ -286,8 +301,12 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 	}
 }
 
-
-
+/**
+ * cong_editor_node_get_widget:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node)
 {
@@ -296,6 +315,12 @@ cong_editor_node_get_widget (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->widget;
 }
 
+/**
+ * cong_editor_node_get_document:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_editor_node_get_document (CongEditorNode *editor_node)
 {
@@ -304,6 +329,12 @@ cong_editor_node_get_document (CongEditorNode *editor_node)
 	return cong_editor_widget3_get_document( cong_editor_node_get_widget(editor_node));
 }
 
+/**
+ * cong_editor_node_get_node:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node)
 {
@@ -312,6 +343,12 @@ cong_editor_node_get_node (CongEditorNode *editor_node)
 	return cong_traversal_node_get_node (PRIVATE(editor_node)->traversal_node);
 }
 
+/**
+ * cong_editor_node_get_traversal_node:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongTraversalNode*
 cong_editor_node_get_traversal_node (CongEditorNode *editor_node)
 {
@@ -320,6 +357,12 @@ cong_editor_node_get_traversal_node (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->traversal_node;	
 }
 
+/**
+ * cong_editor_node_get_traversal_parent:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
 {
@@ -333,6 +376,12 @@ cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
 								       traversal_node_parent);
 }
 
+/**
+ * cong_editor_node_is_selected:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_node_is_selected (CongEditorNode *editor_node)
 {
@@ -341,6 +390,13 @@ cong_editor_node_is_selected (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->is_selected;	
 }
 
+/**
+ * cong_editor_node_private_set_selected:
+ * @editor_node:
+ * @is_selected:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_node_private_set_selected (CongEditorNode *editor_node,
 				       gboolean is_selected)
@@ -355,7 +411,12 @@ cong_editor_node_private_set_selected (CongEditorNode *editor_node,
 	}	
 }
 
-
+/**
+ * cong_editor_node_generate_block_area:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
@@ -369,6 +430,14 @@ cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 						       (editor_node));
 }
 
+/**
+ * cong_editor_node_generate_line_areas_recursive:
+ * @editor_node:
+ * @line_width:
+ * @initial_indent:
+ *
+ * TODO: Write me
+ */
 CongEditorLineFragments*
 cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint line_width,
@@ -389,6 +458,12 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						       (editor_node, line_width, initial_indent));
 }
 
+/**
+ * cong_editor_node_line_regeneration_required:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
 {
@@ -398,6 +473,12 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
 		       signals[LINE_REGENERATION_REQUIRED], 0);
 }
 
+/**
+ * cong_editor_node_get_flow_type:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 {
@@ -425,6 +506,12 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 }
 
 #if 1
+/**
+ * cong_editor_node_is_referenced_entity_decl:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
 {
@@ -437,6 +524,12 @@ cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
 	return cong_traversal_node_is_referenced_entity_decl (traversal_node);
 }
 
+/**
+ * cong_editor_node_get_prev:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_get_prev (CongEditorNode *editor_node)
 {
@@ -470,6 +563,12 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
 	}
 }
 
+/**
+ * cong_editor_node_get_next:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node)
 {
@@ -502,6 +601,12 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 	}
 }
 #else
+/**
+ * cong_editor_node_is_referenced_entity_decl:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
 {
@@ -517,6 +622,12 @@ cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
 	return FALSE;
 }
 
+/**
+ * cong_editor_node_get_prev:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_get_prev (CongEditorNode *editor_node)
 {
@@ -541,6 +652,12 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
 	}
 }
 
+/**
+ * cong_editor_node_get_next:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node)
 {
@@ -565,6 +682,12 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 }
 #endif
 
+/**
+ * cong_editor_node_get_child_policy:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_node_get_child_policy (CongEditorNode *editor_node)
 {
@@ -573,6 +696,13 @@ cong_editor_node_get_child_policy (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->child_policy;
 }
 
+/**
+ * cong_editor_node_set_child_policy:
+ * @editor_node:
+ * @child_policy:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_node_set_child_policy (CongEditorNode *editor_node,
 				   CongEditorChildPolicy *child_policy)
@@ -582,6 +712,12 @@ cong_editor_node_set_child_policy (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->child_policy = child_policy;
 }
 
+/**
+ * cong_editor_node_get_parents_child_policy:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_node_get_parents_child_policy (CongEditorNode *editor_node)
 {
@@ -590,6 +726,13 @@ cong_editor_node_get_parents_child_policy (CongEditorNode *editor_node)
 	return PRIVATE(editor_node)->parents_child_policy;
 }
 
+/**
+ * cong_editor_node_set_parents_child_policy:
+ * @editor_node:
+ * @child_policy:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_node_set_parents_child_policy (CongEditorNode *editor_node,
 					   CongEditorChildPolicy *child_policy)

@@ -21,7 +21,14 @@ struct FoPrintContext
 /* FoPrintContext internals: */
 
 /* FoPrintContext methods: */
-FoPrintContext *fo_print_context_new_from_gnome_print(GnomePrintContext *gpc)
+/**
+ * fo_print_context_new_from_gnome_print:
+ * @gpc:
+ *
+ * TODO: Write me
+ */
+FoPrintContext *
+fo_print_context_new_from_gnome_print(GnomePrintContext *gpc)
 {
 	FoPrintContext *fpc;
 	
@@ -34,7 +41,14 @@ FoPrintContext *fo_print_context_new_from_gnome_print(GnomePrintContext *gpc)
 	return fpc;  
 }
 
-void fo_print_context_delete(FoPrintContext *fpc)
+/**
+ * fo_print_context_delete:
+ * @fpc:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_delete(FoPrintContext *fpc)
 {
 	g_return_if_fail(fpc);
 
@@ -43,7 +57,15 @@ void fo_print_context_delete(FoPrintContext *fpc)
 	/* (No other cleanup required) */
 }
 
-void fo_print_context_beginpage(FoPrintContext *fpc, const gchar* name)
+/**
+ * fo_print_context_beginpage:
+ * @fpc:
+ * @name:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_beginpage(FoPrintContext *fpc, const gchar* name)
 {
 	g_return_if_fail(fpc);
 	g_return_if_fail(name);
@@ -53,7 +75,14 @@ void fo_print_context_beginpage(FoPrintContext *fpc, const gchar* name)
 	gnome_print_beginpage (fpc->gpc, name);
 }
 
-void fo_print_context_showpage (FoPrintContext *fpc)
+/**
+ * fo_print_context_showpage:
+ * @fpc:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_showpage (FoPrintContext *fpc)
 {
 	g_return_if_fail(fpc);
 
@@ -62,7 +91,16 @@ void fo_print_context_showpage (FoPrintContext *fpc)
 	gnome_print_showpage (fpc->gpc);
 }
 
-void fo_print_context_test_rect(FoPrintContext *fpc, const FoRect *rect, const gchar *label)
+/**
+ * fo_print_context_test_rect:
+ * @fpc:
+ * @rect:
+ * @label:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_test_rect(FoPrintContext *fpc, const FoRect *rect, const gchar *label)
 {
 	GnomeFont *font;
 
@@ -82,7 +120,14 @@ void fo_print_context_test_rect(FoPrintContext *fpc, const FoRect *rect, const g
 	
 }
 
-void fo_print_context_push_state(FoPrintContext *fpc)
+/**
+ * fo_print_context_push_state:
+ * @fpc:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_push_state(FoPrintContext *fpc)
 {
 	g_return_if_fail(fpc);
 
@@ -91,7 +136,14 @@ void fo_print_context_push_state(FoPrintContext *fpc)
 	gnome_print_gsave(fpc->gpc);
 }
 
-void fo_print_context_pop_state(FoPrintContext *fpc)
+/**
+ * fo_print_context_pop_state:
+ * @fpc:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_pop_state(FoPrintContext *fpc)
 {
 	g_return_if_fail(fpc);
 
@@ -100,7 +152,16 @@ void fo_print_context_pop_state(FoPrintContext *fpc)
 	gnome_print_grestore(fpc->gpc);
 }
 
-void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y)
+/**
+ * fo_print_context_translate:
+ * @fpc:
+ * @x:
+ * @y:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y)
 {
 	g_return_if_fail(fpc);
 

@@ -71,6 +71,12 @@ cong_editor_child_policy_construct (CongEditorChildPolicy *child_policy,
 }
 
 
+/**
+ * cong_editor_child_policy_get_node:
+ * @child_policy:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_child_policy_get_node (CongEditorChildPolicy *child_policy)
 {
@@ -89,6 +95,13 @@ cong_editor_child_policy_get_widget (CongEditorChildPolicy *child_policy)
 }
 #endif
 
+/**
+ * cong_editor_child_policy_insert_areas_for_node:
+ * @child_policy:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy* 
 cong_editor_child_policy_insert_areas_for_node (CongEditorChildPolicy *child_policy,
 						CongEditorNode *node)
@@ -102,6 +115,13 @@ cong_editor_child_policy_insert_areas_for_node (CongEditorChildPolicy *child_pol
 						       (child_policy, node));
 }
 
+/**
+ * cong_editor_child_policy_remove_areas_for_node:
+ * @child_policy:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void 
 cong_editor_child_policy_remove_areas_for_node (CongEditorChildPolicy *child_policy,
 						CongEditorNode *node)

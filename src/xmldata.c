@@ -35,7 +35,14 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementT
 
 
 /* Other stuff: */
-const gchar *xml_frag_data_nice(CongNodePtr x)
+/**
+ * xml_frag_data_nice:
+ * @x:
+ *
+ * TODO: Write me
+ */
+const gchar *
+xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;
 	
@@ -73,7 +80,8 @@ static char *cat_string(char *head, const char *tail)
 }
 
 /* Recursively traverses the document from that node concatenating the character data into a string */
-char *xml_fetch_clean_data(CongNodePtr x)
+char *
+xml_fetch_clean_data(CongNodePtr x)
 {
 	CongNodePtr n0;
 	char *s = 0, *s_sub;
@@ -104,8 +112,15 @@ char *xml_fetch_clean_data(CongNodePtr x)
 	return(s);
 }
 
-
-GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node) 
+/**
+ * xml_all_present_span_elements:
+ * @ds:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GList* 
+xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node) 
 {
 	GList* list = NULL;
 
@@ -168,7 +183,15 @@ add_span_callback (CongDispspec *ds,
 	}
 }
 
-GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node) 
+/**
+ * xml_all_valid_span_elements:
+ * @ds:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GList*
+xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node) 
 {
 	GList* list = NULL;
 
@@ -192,7 +215,7 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
 }
 
 /**
- * xml_add_required_children
+ * xml_add_required_children:
  * @doc:
  * @node:
  *
@@ -210,9 +233,8 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
  * If no DTD is present, this function will default to
  * simply adding a text node under the node as well.
  *
- * Returns: a boolean telling whether the structure of the
- * node passed is now valid under a DTD.  If no DTD exists,
- * this will return FALSE.
+ * Returns: %TRUE if the structure of @node is valid under
+ * a DTD, %FALSE otherwise.
  */
 gboolean 
 cong_command_add_xml_add_required_children (CongCommand *cmd, 
@@ -255,7 +277,9 @@ cong_command_add_xml_add_required_children (CongCommand *cmd,
  *
  * Returns whether the node is now valid
  */
-static gboolean cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node) {
+static gboolean 
+cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node) 
+{
 	xmlDocPtr doc;
 	xmlElementPtr elemDecl = NULL;
 	xmlElementContentPtr content;
@@ -540,7 +564,7 @@ static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, x
 /**** end of the add_required stuff ****/
 
 /**
- * xml_valid_get_potential_element_children
+ * xml_valid_get_potential_element_children:
  * @ctree:
  * @list:
  * @len:
@@ -589,7 +613,7 @@ xml_valid_get_potential_element_children(xmlElementContent *ctree,
 }
 
 /**
- * wrap_xml_valid_get_valid_elements
+ * wrap_xml_valid_get_valid_elements:
  * @doc:
  * @parent:
  * @next_sibling:
@@ -679,7 +703,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
 #define MAX_ELEMENTS 256
 
 /**
- * cong_document_get_valid_new_child_elements
+ * cong_document_get_valid_new_child_elements:
  * @doc:
  * @node: node for which to get valid children
  * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
@@ -691,7 +715,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: GList of CongDispspecElement
+ * Returns: #GList of #CongDispspecElement
  */
 GList*
 cong_document_get_valid_new_child_elements (CongDocument *doc,
@@ -722,9 +746,9 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 
 
 /**
- * cong_document_get_valid_new_previous_sibling_elements
+ * cong_document_get_valid_new_previous_sibling_elements:
  * @doc:
- * @node: CongNodePtr node for which to get valid previous siblings
+ * @node: #CongNodePtr node for which to get valid previous siblings
  * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
  * 
  * Get the set of valid previous siblings for a node.  If the document
@@ -734,7 +758,7 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: GList of CongDispspecElement
+ * Returns: #GList of #CongDispspecElement
  */
 GList* 
 cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
@@ -760,7 +784,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 }
 
 /**
- * cong_document_get_valid_new_next_sibling_elements
+ * cong_document_get_valid_new_next_sibling_elements:
  * @doc:
  * @node: node for which to get valid next siblings
  * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
@@ -772,7 +796,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: GList of CongDispspecElement
+ * Returns: #GList of #CongDispspecElement
  */
 GList* 
 cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
@@ -797,6 +821,13 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 	}
 }
 
+/**
+ * should_include_element:
+ * @element:
+ * @tag_type:
+ *
+ * TODO: Write me
+ */
 gboolean
 should_include_element (CongDispspecElement *element,
 			enum CongElementType tag_type )
@@ -822,7 +853,7 @@ should_include_element (CongDispspecElement *element,
 }
 
 /**
- * xml_filter_valid_children_with_dispspec
+ * xml_filter_valid_children_with_dispspec:
  * @ds:
  * @elements:
  * @elements_length:
@@ -884,7 +915,7 @@ add_element_cb (CongDispspec *ds,
 		
 
 /**
- * xml_get_elements_from_dispspec
+ * xml_get_elements_from_dispspec:
  * @ds:
  * @tag_type:
  * 
@@ -910,9 +941,18 @@ xml_get_elements_from_dispspec (CongDispspec* ds,
 }
 
 /* Extensions to libxml: */
-xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
-					 const xmlChar *name,
-					 int value)
+/**
+ * xmlNewProp_NUMBER:
+ * @node:
+ * @name:
+ * @value:
+ *
+ * TODO: Write me
+ */
+xmlAttrPtr
+xmlNewProp_NUMBER (xmlNodePtr node,
+		   const xmlChar *name,
+		   int value)
 {
 	gchar *textual_value = g_strdup_printf("%i", value);
 	xmlAttrPtr attr = xmlNewProp(node, name, textual_value);

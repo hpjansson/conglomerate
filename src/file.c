@@ -70,7 +70,17 @@ cong_get_file_name (const gchar *title,
 	return result;
 }
 #else
+
 /* Implementation in terms of gtk_file_selection: */
+/**
+ * cong_get_file_name:
+ * @title:
+ * @filename:
+ * @parent_window:
+ * @cong_action:
+ * 
+ * TODO: Write me
+ */
 gchar*
 cong_get_file_name (const gchar *title, 
 		    const gchar *filename,

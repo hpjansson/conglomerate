@@ -38,7 +38,14 @@ static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer
 	return TRUE;
 }
 
-gchar* change_to_xds(gchar* filename)
+/**
+ * change_to_xds:
+ * @filename:
+ *
+ * TODO: Write me
+ */
+gchar* 
+change_to_xds(gchar* filename)
 {
 	gchar **split_strings;
 	gchar *old_doc_name;
@@ -124,8 +131,15 @@ static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 
 
 
- /* would be exposed as "plugin_register"? */
-gboolean plugin_save_dispspec_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_save_dispspec_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_save_dispspec_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -156,7 +170,14 @@ gboolean plugin_save_dispspec_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_save_dispspec_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_save_dispspec_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_save_dispspec_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

@@ -66,6 +66,17 @@ cong_attribute_editor_enumeration_instance_init (CongAttributeEditorENUMERATION 
 	area->private = g_new0(CongAttributeEditorENUMERATIONDetails,1);
 }
 
+/**
+ * cong_attribute_editor_enumeration_construct:
+ * @attribute_editor_enumeration:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 CongAttributeEditor*
 cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
 					     CongDocument *doc,
@@ -119,6 +130,16 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_enumeration);
 }
 
+/**
+ * cong_attribute_editor_enumeration_new:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,

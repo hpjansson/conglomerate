@@ -87,6 +87,15 @@ void cong_plugin_unregister_exporter(CongPlugin *plugin,
 
 
 /* Implementation of CongPlugin: */
+/**
+ * cong_plugin_construct:
+ * @plugin:
+ * @plugin_id:
+ * @register_callback:
+ * @configure_callback:
+ *
+ * TODO: Write me
+ */
 CongPlugin*
 cong_plugin_construct (CongPlugin *plugin,
 		       const gchar *plugin_id,
@@ -106,6 +115,13 @@ cong_plugin_construct (CongPlugin *plugin,
 	return plugin;
 }
 
+/**
+ * cong_plugin_add_service:
+ * @plugin:
+ * @service:
+ *
+ * TODO: Write me
+ */
 void
 cong_plugin_add_service (CongPlugin *plugin,
 			 CongService *service)
@@ -118,7 +134,14 @@ cong_plugin_add_service (CongPlugin *plugin,
 							   service);
 }
 
-
+/**
+ * cong_plugin_for_each_service:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_plugin_for_each_service (CongPlugin *plugin, 
 			      void 
@@ -132,6 +155,15 @@ cong_plugin_for_each_service (CongPlugin *plugin,
 	g_list_foreach(PRIVATE(plugin)->list_of_service, (GFunc)callback, user_data);	
 }
 
+/**
+ * cong_plugin_for_each_service_of_type:
+ * @plugin:
+ * @type:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_plugin_for_each_service_of_type (CongPlugin *plugin, 
 				      GType type,
@@ -154,6 +186,14 @@ cong_plugin_for_each_service_of_type (CongPlugin *plugin,
 	}
 }
 
+/**
+ * cong_plugin_locate_service_by_id:
+ * @plugin:
+ * @type:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongService*
 cong_plugin_locate_service_by_id (CongPlugin *plugin, 
 				  GType type,
@@ -183,7 +223,16 @@ typedef void
 (CongServiceCallback) (CongService *service,
 		       gpointer user_data);
 
-void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_document_factory:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -198,7 +247,16 @@ void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(
 #endif
 }
 
-void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_importer:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -213,7 +271,16 @@ void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServ
 #endif
 }
 
-void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_exporter:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -229,7 +296,16 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServ
 }
 
 #if ENABLE_PRINTING
-void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongServicePrintMethod *print_method, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_print_method:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongServicePrintMethod *print_method, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -245,7 +321,16 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 }
 #endif
 
-void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServiceDocTool *doc_tool, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_doc_tool:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServiceDocTool *doc_tool, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -260,7 +345,16 @@ void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServ
 #endif
 }
 
-void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongServiceNodeTool *node_tool, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_for_each_node_tool:
+ * @plugin:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongServiceNodeTool *node_tool, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
@@ -277,6 +371,13 @@ void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongSer
 
 
 #if 1
+/**
+ * cong_plugin_locate_custom_property_dialog_by_id:
+ * @plugin:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin, 
 						 const gchar *service_id)
@@ -297,6 +398,13 @@ cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin,
 	}
 }
 
+/**
+ * cong_plugin_locate_editor_node_factory_by_id:
+ * @plugin:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceEditorNodeFactory*
 cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 					      const gchar *service_id)
@@ -318,6 +426,13 @@ cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 
 }
 #else
+/**
+ * cong_plugin_locate_custom_property_dialog_by_id:
+ * @plugin:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin, 
 						 const gchar *service_id)
@@ -338,6 +453,13 @@ cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin,
 	return NULL;
 }
 
+/**
+ * cong_plugin_locate_editor_node_factory_by_id:
+ * @plugin:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceEditorNodeFactory*
 cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 					      const gchar *service_id)
@@ -359,6 +481,12 @@ cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 }
 #endif
 
+/**
+ * cong_plugin_get_id:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
 const gchar* 
 cong_plugin_get_id (CongPlugin *plugin)
 {
@@ -367,7 +495,14 @@ cong_plugin_get_id (CongPlugin *plugin)
 	return PRIVATE (plugin)->plugin_id;
 }
 
-gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
+/**
+ * cong_plugin_get_gconf_namespace:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gchar* 
+cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
 	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
 
@@ -376,7 +511,15 @@ gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s"), PRIVATE (plugin)->plugin_id);
 }
 
-gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
+/**
+ * cong_plugin_get_gconf_key:
+ * @plugin:
+ * @local_part:
+ *
+ * TODO: Write me
+ */
+gchar* 
+cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
 {
 	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
 	g_return_val_if_fail (local_part, NULL);
@@ -386,8 +529,13 @@ gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
 	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s/%s"), PRIVATE (plugin)->plugin_id, local_part);
 }
 
-
-
+/**
+ * cong_ui_new_document_from_manufactured_xml:
+ * @xml_doc:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 					   GtkWindow *parent_window)
@@ -424,6 +572,13 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	return cong_doc;
 }
 
+/**
+ * cong_ui_new_document_from_imported_xml:
+ * @xml_doc:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 				       GtkWindow *parent_window)
@@ -460,9 +615,18 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	return cong_doc;
 }
 
-xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
-				const gchar *stylesheet_filename,
-				GtkWindow *toplevel_window)
+/**
+ * cong_ui_transform_doc:
+ * @doc:
+ * @stylesheet_filename:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+xmlDocPtr 
+cong_ui_transform_doc(CongDocument *doc,
+		      const gchar *stylesheet_filename,
+		      GtkWindow *toplevel_window)
 {
 	xsltStylesheetPtr xsl;
 	xmlDocPtr input_clone;
@@ -515,10 +679,20 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 	return result;
 }
 
-void cong_ui_transform_doc_to_uri(CongDocument *doc,
-				  const gchar *stylesheet_filename,
-				  const gchar *string_uri,
-				  GtkWindow *toplevel_window)
+/**
+ * cong_ui_transform_doc_to_uri:
+ * @doc:
+ * @stylesheet_filename:
+ * @string_uri:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_ui_transform_doc_to_uri(CongDocument *doc,
+			     const gchar *stylesheet_filename,
+			     const gchar *string_uri,
+			     GtkWindow *toplevel_window)
 {
 	xmlDocPtr doc_ptr;
 	GnomeVFSURI *vfs_uri;
@@ -559,10 +733,20 @@ void cong_ui_transform_doc_to_uri(CongDocument *doc,
 }
 
 /* Handy methods for "Import" methods; doing the necessary UI hooks: */
-gboolean cong_ui_load_imported_file_content(const gchar *string_uri,
-					    char** buffer,
-					    GnomeVFSFileSize* size,
-					    GtkWindow *parent_window)
+/**
+ * cong_ui_load_imported_file_content:
+ * @string_uri:
+ * @buffer:
+ * @size:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_ui_load_imported_file_content(const gchar *string_uri,
+				   char** buffer,
+				   GnomeVFSFileSize* size,
+				   GtkWindow *parent_window)
 {
 	GnomeVFSResult vfs_result;
 
@@ -588,8 +772,20 @@ gboolean cong_ui_load_imported_file_content(const gchar *string_uri,
 	return TRUE;
 }
 
-
 /* Registration methods for various services: */
+/**
+ * cong_plugin_register_document_factory:
+ * @plugin:
+ * @name:
+ * @description:
+ * @id:
+ * @page_creation_callback:
+ * @action_callback:
+ * @icon:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceDocumentFactory*
 cong_plugin_register_document_factory (CongPlugin *plugin, 
 				       const gchar *name, 
@@ -625,6 +821,21 @@ cong_plugin_register_document_factory (CongPlugin *plugin,
 	return factory;
 }
 
+/**
+ * cong_plugin_register_doc_tool:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @menu_text:
+ * @tooltip_text:
+ * @tooltip_further_text:
+ * @doc_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceDocTool*
 cong_plugin_register_doc_tool (CongPlugin *plugin,
 			       const gchar *name, 
@@ -662,6 +873,21 @@ cong_plugin_register_doc_tool (CongPlugin *plugin,
 
 }
 
+/**
+ * cong_plugin_register_node_tool:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @menu_text:
+ * @tooltip_text:
+ * @tooltip_further_text:
+ * @node_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceNodeTool*
 cong_plugin_register_node_tool (CongPlugin *plugin,
 				const gchar *name, 
@@ -699,12 +925,24 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 
 }
 
-CongServiceEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
-								      const gchar *name, 
-								      const gchar *description,
-								      const gchar *service_id,
-								      CongEditorNodeFactoryMethod factory_method,
-								      gpointer user_data)
+/**
+ * cong_plugin_register_editor_node_factory:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+CongServiceEditorNodeFactory *
+cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
+					 const gchar *name, 
+					 const gchar *description,
+					 const gchar *service_id,
+					 CongEditorNodeFactoryMethod factory_method,
+					 gpointer user_data)
 {
 	CongServiceEditorNodeFactory *editor_node_factory;
 
@@ -727,7 +965,18 @@ CongServiceEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugi
 	return editor_node_factory;
 }
 
-
+/**
+ * cong_plugin_register_exporter:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @doc_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceExporter*
 cong_plugin_register_exporter (CongPlugin *plugin, 
 			       const gchar *name, 
@@ -760,6 +1009,18 @@ cong_plugin_register_exporter (CongPlugin *plugin,
 	return exporter;
 }
 
+/**
+ * cong_plugin_register_importer:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @mime_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceImporter*
 cong_plugin_register_importer (CongPlugin *plugin, 
 			       const gchar *name, 
@@ -792,6 +1053,17 @@ cong_plugin_register_importer (CongPlugin *plugin,
 	return importer;
 }
 
+/**
+ * cong_plugin_register_custom_property_dialog:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
 					     const gchar *name, 
@@ -821,6 +1093,16 @@ cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
 
 }
 
+/**
+ * cong_plugin_register_custom_property_dialog_for_element:
+ * @plugin:
+ * @element_name:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 							 const gchar *element_name,
@@ -855,6 +1137,18 @@ cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
 }
 
 #if ENABLE_PRINTING
+/**
+ * cong_plugin_register_print_method:
+ * @plugin:
+ * @name:
+ * @description:
+ * @service_id:
+ * @doc_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServicePrintMethod*
 cong_plugin_register_print_method (CongPlugin *plugin, 
 				   const gchar *name, 

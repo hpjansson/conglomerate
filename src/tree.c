@@ -17,6 +17,14 @@
 
 /* the popup items have the data "popup_data_item" set on them: */
 
+/**
+ * cong_ui_hook_tree_new_sibling:
+ * @doc:
+ * @ds_element:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,
 			       CongDispspecElement *ds_element,
@@ -57,6 +65,14 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 	
 }
 
+/**
+ * cong_ui_hook_tree_new_sub_element:
+ * @doc:
+ * @ds_element:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 				   CongDispspecElement *ds_element,
@@ -96,6 +112,14 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 	cong_document_end_edit(doc);
 }
 
+/**
+ * cong_ui_hook_tree_properties:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_tree_properties (CongDocument *doc,
 			      CongNodePtr node,
@@ -138,6 +162,14 @@ tree_cut_update_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
+/**
+ * cong_ui_hook_tree_cut:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void 
 cong_ui_hook_tree_cut (CongDocument *doc,
 		       CongNodePtr node,
@@ -175,7 +207,14 @@ cong_ui_hook_tree_cut (CongDocument *doc,
 	cong_document_end_edit(doc);
 }
 
-
+/**
+ * cong_ui_hook_tree_copy:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void 
 cong_ui_hook_tree_copy (CongDocument *doc,
 			CongNodePtr node,
@@ -196,6 +235,14 @@ cong_ui_hook_tree_copy (CongDocument *doc,
 	g_free(source);
 }
 
+/**
+ * cong_ui_hook_tree_paste_under:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void 
 cong_ui_hook_tree_paste_under (CongDocument *doc,
 			       CongNodePtr node,
@@ -219,7 +266,14 @@ cong_ui_hook_tree_paste_under (CongDocument *doc,
 	}
 }
 
-
+/**
+ * cong_ui_hook_tree_paste_before:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_tree_paste_before (CongDocument *doc,
 				CongNodePtr node,
@@ -243,7 +297,14 @@ cong_ui_hook_tree_paste_before (CongDocument *doc,
 	}
 }
 
-
+/**
+ * cong_ui_hook_tree_paste_after:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_tree_paste_after (CongDocument *doc,
 			       CongNodePtr node,

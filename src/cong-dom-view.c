@@ -50,7 +50,14 @@ static gchar*
 get_text_for_node(CongNodePtr node);
 
 /* Exported function implementations: */
-GtkWidget *cong_dom_view_new (CongDocument *doc)
+/**
+ * cong_dom_view_new:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+GtkWidget *
+cong_dom_view_new (CongDocument *doc)
 {
 	CongTreeView *cong_tree_view;
 	GtkScrolledWindow *scrolled_window;
@@ -135,6 +142,12 @@ clean_text(const gchar* txt)
 	return result;
 }
 
+/**
+ * cong_ui_get_colour_string:
+ * @type:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_ui_get_colour_string(enum CongNodeType type)
 {
@@ -316,4 +329,3 @@ get_text_for_node(CongNodePtr node)
 	return (text);
 	
 }
-

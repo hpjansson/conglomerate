@@ -343,6 +343,13 @@ do_ui_file_print(CongDocument *doc,
 }
 
 
+/**
+ * cong_ui_hook_file_print_preview:
+ * @doc:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_file_print_preview (CongDocument *doc,
 				 GtkWindow *toplevel_window)
@@ -352,6 +359,13 @@ cong_ui_hook_file_print_preview (CongDocument *doc,
 			 TRUE);
 }
 
+/**
+ * cong_ui_hook_file_print:
+ * @doc:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_file_print (CongDocument *doc,
 			 GtkWindow *toplevel_window)

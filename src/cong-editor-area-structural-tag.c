@@ -121,6 +121,16 @@ cong_editor_area_structural_tag_instance_init (CongEditorAreaStructuralTag *area
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_structural_tag_construct:
+ * @area_structural_tag:
+ * @editor_widget:
+ * @ds_element:
+ * @pixbuf:
+ * @text:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_structural_tag,
 					   CongEditorWidget3 *editor_widget,
@@ -145,12 +155,20 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 	return CONG_EDITOR_AREA (area_structural_tag);
 }
 
+/**
+ * cong_editor_area_structural_tag_new:
+ * @editor_widget:
+ * @ds_element:
+ * @pixbuf:
+ * @text:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_structural_tag_new (CongEditorWidget3 *editor_widget,
 				     CongDispspecElement *ds_element,
 				     GdkPixbuf *pixbuf,
 				     const gchar *text)
-
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_structural_tag_new(%s)", text);

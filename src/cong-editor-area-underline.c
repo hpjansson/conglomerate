@@ -69,6 +69,14 @@ cong_editor_area_underline_instance_init (CongEditorAreaUnderline *area_underlin
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_underline_construct:
+ * @area_underline:
+ * @editor_widget:
+ * @style:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_underline_construct (CongEditorAreaUnderline *area_underline,
 				      CongEditorWidget3 *editor_widget,
@@ -85,6 +93,13 @@ cong_editor_area_underline_construct (CongEditorAreaUnderline *area_underline,
 	return CONG_EDITOR_AREA (area_underline);
 }
 
+/**
+ * cong_editor_area_underline_new:
+ * @editor_widget:
+ * @style:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_underline_new (CongEditorWidget3 *editor_widget,
 				enum CongEditorAreaUnderlineStyle style)

@@ -114,7 +114,13 @@ struct CongPrimaryWindow
 };
 
 #if 1
-GtkWidget* cong_gui_get_a_window(void)
+/**
+ * cong_gui_get_a_window:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_gui_get_a_window(void)
 {
 	CongPrimaryWindow *primary_window;
 
@@ -132,49 +138,99 @@ GtkWidget* cong_gui_get_a_window(void)
 	}
 }
 #else
-GtkWidget* cong_gui_get_window(struct cong_gui* gui)
+/**
+ * cong_gui_get_window:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_gui_get_window(struct cong_gui* gui)
 {
 	g_assert(gui!=NULL);
 
 	return GTK_WIDGET(gui->window);
 }
 
-GtkWidget* cong_gui_get_popup(struct cong_gui* gui)
+/**
+ * cong_gui_get_popup:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_gui_get_popup(struct cong_gui* gui)
 {
 	g_assert(gui!=NULL);
 
 	return gui->popup;
 }
 
-void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup)
+/**
+ * cong_gui_set_popup:
+ * @gui:
+ * @popup:
+ *
+ * TODO: Write me
+ */
+void 
+cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup)
 {
 	g_assert(gui!=NULL);
 
 	gui->popup=popup;
 }
 
-GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui)
+/**
+ * cong_gui_get_button_submit:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_gui_get_button_submit(struct cong_gui* gui)
 {
 	g_assert(gui!=NULL);
 
 	return gui->butt_submit;
 }
 
-GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui)
+/**
+ * cong_gui_get_tree_store:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+GtkTreeStore* 
+cong_gui_get_tree_store(struct cong_gui* gui)
 {
 	g_assert(gui!=NULL);
 
 	return gui->global_tree_store;
 }
 
-GtkWidget* cong_gui_get_root(struct cong_gui* gui)
+/**
+ * cong_gui_get_root:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_gui_get_root(struct cong_gui* gui)
 {
 	g_assert(gui!=NULL);
 
 	return gui->root;
 }
 
-void cong_gui_destroy_tree_store(struct cong_gui* gui)
+/**
+ * cong_gui_destroy_tree_store:
+ * @gui:
+ *
+ * TODO: Write me
+ */
+void 
+cong_gui_destroy_tree_store(struct cong_gui* gui)
 {
 	gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_STRING, G_TYPE_STRING);
 	gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
@@ -197,7 +253,15 @@ extern char *icon_assemble[];
 extern char *icon_openfile[];
 extern char *icon_submit[];
 
-GtkPixmap* cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
+/**
+ * cong_primary_window_create_pixmap:
+ * @primary_window:
+ * @xpm:
+ *
+ * TODO: Write me
+ */
+GtkPixmap* 
+cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
 {
 	GdkPixmap *p;
 	GdkBitmap *mask;
@@ -213,7 +277,15 @@ GtkPixmap* cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, 
 	return GTK_PIXMAP(gtk_pixmap_new(p, mask));
 }
 
-gint toolbar_callback_undo(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_undo:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_undo(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -223,7 +295,15 @@ gint toolbar_callback_undo(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
-gint toolbar_callback_redo(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_redo:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_redo(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -233,7 +313,15 @@ gint toolbar_callback_redo(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
-gint toolbar_callback_cut(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_cut:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_cut(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -243,7 +331,15 @@ gint toolbar_callback_cut(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
-gint toolbar_callback_copy(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_copy:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_copy(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -253,7 +349,15 @@ gint toolbar_callback_copy(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
-gint toolbar_callback_paste(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_paste:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_paste(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -308,7 +412,14 @@ on_selection_changed_cut (CongDocument *document,
                                   cong_range_can_be_cut (range));
 }
 
-void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_toolbar_populate:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 {
 	if ( !(primary_window->doc) ) {
 		gtk_toolbar_insert_stock(primary_window->toolbar, 
@@ -408,7 +519,14 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 	}
 }
 
-gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_can_close:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 {
 	g_assert(primary_window);
 
@@ -457,19 +575,34 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 	return TRUE;
 }
 
-
-gint delete_event( GtkWidget *widget,
-		   GdkEvent  *event,
-		   gpointer   data )
+/**
+ * delete_event:
+ * @widget:
+ * @event:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+delete_event( GtkWidget *widget,
+	      GdkEvent  *event,
+	      gpointer   data )
 {
 	/* If the window can't close, return TRUE so the callback chain
 	   ends here */
 	return ! cong_primary_window_can_close((CongPrimaryWindow *)data);
 }
 
-
-void destroy( GtkWidget *widget,
-	      gpointer   data )
+/**
+ * destroy:
+ * @widget:
+ * @data:
+ *
+ * TODO: Write me
+ */
+void 
+destroy( GtkWidget *widget,
+	 gpointer   data )
 {
 	cong_primary_window_free((CongPrimaryWindow *)data);
 	if (g_list_length(cong_app_singleton()->primary_windows) == 0) {		
@@ -477,6 +610,13 @@ void destroy( GtkWidget *widget,
 	}
 }
 
+/**
+ * cong_primary_window_add_doc:
+ * @primary_window:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc)
 {
@@ -602,8 +742,14 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 	cong_menus_create_items(item_factory, primary_window);
 }
 
-
-void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_make_gui:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 {
 	GtkItemFactory *item_factory;
 	gchar *title;
@@ -699,8 +845,14 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 #endif
 }
 
-
-CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
+/**
+ * cong_primary_window_new:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+CongPrimaryWindow *
+cong_primary_window_new(CongDocument *doc)
 {
 
 	CongPrimaryWindow *prwin = (CongPrimaryWindow *)g_list_nth_data(cong_app_singleton()->primary_windows, 0);
@@ -734,7 +886,14 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 	
 }
 
-void cong_primary_window_free(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_free:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
@@ -749,14 +908,28 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 	g_free(primary_window);
 }
 
-CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_get_document:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+CongDocument *
+cong_primary_window_get_document(CongPrimaryWindow *primary_window)
 {
 	g_return_val_if_fail(primary_window, NULL);
 
 	return primary_window->doc;
 }
 
-void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_update_title:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_primary_window_update_title(CongPrimaryWindow *primary_window)
 {
 	gchar *title;
 	gchar *filename;
@@ -785,7 +958,14 @@ void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
 	g_free(title);
 }
 
-GtkWindow *cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window)
+/**
+ * cong_primary_window_get_toplevel:
+ * @primary_window:
+ *
+ * TODO: Write me
+ */
+GtkWindow *
+cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window)
 {
 	g_return_val_if_fail(primary_window, NULL);
 

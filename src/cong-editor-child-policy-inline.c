@@ -65,6 +65,14 @@ cong_editor_child_policy_inline_instance_init (CongEditorChildPolicyInline *chil
 	child_policy_inline->private = g_new0(CongEditorChildPolicyInlineDetails,1);
 }
 
+/**
+ * cong_editor_child_policy_inline_construct:
+ * @child_policy_inline:
+ * @editor_node:
+ * @inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_child_policy_inline_construct (CongEditorChildPolicyInline *child_policy_inline,
 					   CongEditorNode *editor_node,
@@ -78,6 +86,13 @@ cong_editor_child_policy_inline_construct (CongEditorChildPolicyInline *child_po
 	return CONG_EDITOR_CHILD_POLICY(child_policy_inline);
 }
 
+/**
+ * cong_editor_child_policy_inline_new:
+ * @editor_node:
+ * @inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_child_policy_inline_new (CongEditorNode *editor_node,
 				     CongEditorAreaFlowHolderInlines *inlines)
@@ -99,6 +114,13 @@ cong_editor_child_policy_inline_new (CongEditorNode *editor_node,
 
 
 /* Whenever children are added or removed, we need to regenerate the lines of the flow_holder_inline */
+/**
+ * insert_areas_for_node:
+ * @child_policy:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 static CongEditorChildPolicy* 
 insert_areas_for_node (CongEditorChildPolicy *child_policy,
 		       CongEditorNode *editor_node)
@@ -112,6 +134,13 @@ insert_areas_for_node (CongEditorChildPolicy *child_policy,
 						     PRIVATE(child_policy_inline)->area_inlines);
 }
 
+/**
+ * remove_areas_for_node:
+ * @child_policy:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 static void 
 remove_areas_for_node (CongEditorChildPolicy *child_policy,
 		       CongEditorNode *editor_node)

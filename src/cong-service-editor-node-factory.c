@@ -34,6 +34,17 @@ struct CongServiceEditorNodeFactoryPrivate
 
 CONG_DEFINE_CLASS (CongServiceEditorNodeFactory, cong_service_editor_node_factory, CONG_SERVICE_EDITOR_NODE_FACTORY, CongService, CONG_SERVICE_TYPE)
 
+/**
+ * cong_service_editor_node_factory_construct:
+ * @editor_node_factory:
+ * @name: 
+ * @description:
+ * @plugin_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceEditorNodeFactory*
 cong_service_editor_node_factory_construct (CongServiceEditorNodeFactory *editor_node_factory,
 					    const gchar *name, 
@@ -58,6 +69,14 @@ cong_service_editor_node_factory_construct (CongServiceEditorNodeFactory *editor
 	return editor_node_factory;
 }
 
+/**
+ * cong_plugin_editor_node_factory_invoke:
+ * @service_editor_node_factory:
+ * @editor_widget: 
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongServiceEditorNodeFactory *service_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 

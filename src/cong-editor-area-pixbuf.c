@@ -76,6 +76,14 @@ cong_editor_area_pixbuf_instance_init (CongEditorAreaPixbuf *area_pixbuf)
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_pixbuf_construct:
+ * @area_pixbuf:
+ * @editor_widget:
+ * @pixbuf:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_pixbuf_construct (CongEditorAreaPixbuf *area_pixbuf,
 				   CongEditorWidget3 *editor_widget,
@@ -95,6 +103,13 @@ cong_editor_area_pixbuf_construct (CongEditorAreaPixbuf *area_pixbuf,
 	return CONG_EDITOR_AREA (area_pixbuf);
 }
 
+/**
+ * cong_editor_area_pixbuf_new:
+ * @editor_widget:
+ * @pixbuf:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_pixbuf_new (CongEditorWidget3 *editor_widget,
 			     GdkPixbuf *pixbuf)
@@ -140,6 +155,12 @@ calc_requisition (CongEditorArea *area,
 	return PRIVATE(area_pixbuf)->pixbuf_size[orientation];
 }
 
+/**
+ * get_pixbuf:
+ * @area_pixbuf:
+ *
+ * TODO: Write me
+ */
 GdkPixbuf*
 get_pixbuf (CongEditorAreaPixbuf *area_pixbuf)
 {
@@ -154,6 +175,13 @@ get_pixbuf (CongEditorAreaPixbuf *area_pixbuf)
 	return PRIVATE(area_pixbuf)->pixbuf_states[state];
 }
 
+/**
+ * generate_pixbuf_for_state:
+ * @normal_pixbuf:
+ * @state:
+ *
+ * TODO: Write me
+ */
 GdkPixbuf*
 generate_pixbuf_for_state (GdkPixbuf *normal_pixbuf,
 			   GtkStateType state)

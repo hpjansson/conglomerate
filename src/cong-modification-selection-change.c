@@ -77,6 +77,15 @@ cong_modification_selection_change_instance_init (CongModificationSelectionChang
 	node->private = g_new0(CongModificationSelectionChangeDetails,1);
 }
 
+/**
+ * cong_modification_selection_change_construct:
+ * @modification_selection_change:
+ * @doc:
+ * @new_logical_start:
+ * @new_logical_end:
+ *
+ * TODO: Write me
+ */
 CongModificationSelectionChange*
 cong_modification_selection_change_construct (CongModificationSelectionChange *modification_selection_change,
 					      CongDocument *doc,
@@ -100,6 +109,14 @@ cong_modification_selection_change_construct (CongModificationSelectionChange *m
 	return modification_selection_change;
 }
 
+/**
+ * cong_modification_selection_change_new:
+ * @doc:
+ * @new_logical_start:
+ * @new_logical_end:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_modification_selection_change_new (CongDocument *doc,
 					const CongLocation *new_logical_start,
@@ -111,6 +128,12 @@ cong_modification_selection_change_new (CongDocument *doc,
 									       new_logical_end));
 }
 
+/**
+ * finalize:
+ * @object:
+ *
+ * TODO: Write me
+ */
 void
 finalize (GObject *object)
 {

@@ -19,6 +19,14 @@
 
 #include "cong-vfs.h"
 
+/**
+ * cong_error_split_filename:
+ * @filename:
+ * @filename_alone:
+ * @path:
+ *
+ * TODO: Write me
+ */
 void
 cong_error_split_filename(const gchar* filename, gchar** filename_alone, gchar** path)
 {
@@ -32,6 +40,11 @@ cong_error_split_filename(const gchar* filename, gchar** filename_alone, gchar**
 	*path=g_strdup("/some_location/some_subdir");
 }
 
+/**
+ * cong_error_get_appname:
+ *
+ * Returns: a string containing "Conglomerate"
+ */
 gchar* 
 cong_error_get_appname(void)
 {
@@ -57,6 +70,13 @@ static void on_search(gpointer data)
 	}
 }
 
+/**
+ * cong_error_what_failed_on_file_open_failure:
+ * @string_uri:
+ * @transient:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_error_what_failed_on_file_open_failure (const gchar *string_uri, 
 					     gboolean transient)
@@ -92,6 +112,16 @@ cong_error_what_failed_on_file_open_failure (const gchar *string_uri,
 	return what_failed;
 }
 
+/**
+ * cong_error_dialog_new_from_file_open_failure:
+ * @parent_window:
+ * @string_uri:
+ * @transient:
+ * @why_failed:
+ * @suggestions:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
 					     const gchar* string_uri, 
@@ -120,6 +150,19 @@ cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
 	return dialog;
 }
 
+/**
+ * cong_error_dialog_new_from_file_open_failure_with_convenience:
+ * @parent_window:
+ * @string_uri:
+ * @transient:
+ * @why_failed:
+ * @suggestions:
+ * @convenience_label:
+ * @convenience_action:
+ * @convenience_data:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_window,
 							      const gchar *string_uri, 
@@ -153,6 +196,14 @@ cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_
 	return dialog;
 }
 
+/**
+ * cong_error_dialog_new_from_file_open_failure_with_vfs_result:
+ * @parent_window:
+ * @string_uri:
+ * @vfs_result:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
 							     const gchar *string_uri, 
@@ -417,6 +468,16 @@ static void on_details(gpointer data)
 	gtk_widget_destroy(details_dialog);
 }
 
+/**
+ * cong_error_dialog_new_from_file_operation_failure:
+ * @parent_window:
+ * @what_failed:
+ * @string_uri:
+ * @vfs_result:
+ * @technical_details:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 						  const gchar *what_failed,

@@ -11,6 +11,12 @@
 #include "cong-command.h"
 
  
+/**
+ * cong_location_is_valid:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_location_is_valid(const CongLocation *loc)
 {
@@ -49,6 +55,12 @@ cong_location_is_valid(const CongLocation *loc)
 	}
 }
 
+/**
+ * cong_location_nullify:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_nullify(CongLocation *loc)
 {
@@ -58,6 +70,13 @@ cong_location_nullify(CongLocation *loc)
 	loc->byte_offset=CONG_LOCATION_BYTE_OFFSET_NULL_NODE; /* for good measure */
 }
 
+/**
+ * cong_location_set_to_start_of_node:
+ * @loc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
 {
@@ -78,6 +97,13 @@ cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
 	}
 }
 
+/**
+ * cong_location_set_to_end_of_node:
+ * @loc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
 {
@@ -98,6 +124,14 @@ cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
 	}
 }
 
+/**
+ * cong_location_set_node_and_byte_offset:
+ * @loc:
+ * @node:
+ * @offset:
+ *
+ * TODO: Write me
+ */
 void 
 cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int offset)
 {
@@ -117,6 +151,14 @@ cong_location_set_node_and_byte_offset(CongLocation *loc, CongNodePtr node, int 
 	g_assert(cong_location_is_valid(loc));
 }
 
+/**
+ * cong_location_set_node_and_char_offset:
+ * @loc:
+ * @node:
+ * @char_offset:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glong char_offset)
 {
@@ -140,16 +182,27 @@ cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glon
 	g_assert(cong_location_is_valid(loc));
 }
 
-
-
-
-gboolean cong_location_exists(const CongLocation *loc)
+/**
+ * cong_location_exists:
+ * @loc:
+ * 
+ * TODO: Write me
+ */
+gboolean 
+cong_location_exists(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, FALSE);
 	
 	return (loc->node!=NULL);
 }
 
+/**
+ * cong_location_equals:
+ * @loc0:
+ * @loc1:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 {
@@ -168,7 +221,12 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 	return FALSE;	
 }
 
-
+/**
+ * cong_location_node_type:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 enum CongNodeType
 cong_location_node_type(const CongLocation *loc)
 {
@@ -178,7 +236,14 @@ cong_location_node_type(const CongLocation *loc)
 	return cong_node_type(loc->node);
 }
 
-gunichar cong_location_get_unichar(const CongLocation *loc)
+/**
+ * cong_location_get_unichar:
+ * @loc:
+ *
+ * TODO: Write me
+ */
+gunichar 
+cong_location_get_unichar(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, '\0');
 	g_return_val_if_fail(loc->node != NULL, '\0');
@@ -187,6 +252,12 @@ gunichar cong_location_get_unichar(const CongLocation *loc)
 	return g_utf8_get_char(xml_frag_data_nice(loc->node) + loc->byte_offset);
 }
 
+/**
+ * cong_location_get_utf7_pointer:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_location_get_utf8_pointer(const CongLocation *loc)
 {
@@ -197,9 +268,14 @@ cong_location_get_utf8_pointer(const CongLocation *loc)
 	return NULL;
 }
 
-/*
-  Are both ELEMENT nodes of the same tag type?
-*/
+/**
+ * cong_node_is_same_tag:
+ * @n1: a #CongNodePtr
+ * @n2: a #CongNodePtr
+ *
+ * Returns: %TRUE if both element nodes are of the same tag type,
+ * %FALSE otherwise.
+ */
 gboolean
 cong_node_is_same_tag (CongNodePtr n1, 
 		       CongNodePtr n2)
@@ -220,6 +296,13 @@ cong_node_is_same_tag (CongNodePtr n1,
 	return FALSE;
 }
 
+/**
+ * cong_node_is_pure_whitespace_text_node:
+ * @node: a #CongNodePtr
+ *
+ * Returns: %TRUE if @node is a text node and is entirely whitespace,
+ * returns %FALSE otherwise.
+ */
 gboolean
 cong_node_is_pure_whitespace_text_node (CongNodePtr node)
 {
@@ -234,6 +317,14 @@ cong_node_is_pure_whitespace_text_node (CongNodePtr node)
 	return FALSE;
 }
 
+/**
+ * merge_tags:
+ * @cmd:
+ * @predator:
+ * @victim:
+ *
+ * TODO: Write me
+ */
 static void
 merge_tags (CongCommand *cmd,
 	    CongNodePtr predator,
@@ -272,6 +363,13 @@ merge_tags (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * handle_tag_merging:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 static void
 handle_tag_merging (CongDocument *doc,
 		    CongNodePtr node)
@@ -321,6 +419,13 @@ handle_tag_merging (CongDocument *doc,
 
 }
 
+/**
+ * cong_location_del_next_char:
+ * @doc:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_del_next_char (CongDocument *doc, 
 			     const CongLocation *loc)
@@ -384,24 +489,48 @@ cong_location_del_next_char (CongDocument *doc,
 	}
 }
 
+/**
+ * cong_location_xml_frag_prev:
+ * @loc: a #CongLocation
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_location_xml_frag_prev(const CongLocation *loc)
 {
 	return cong_node_prev(loc->node);
 }
 
+/**
+ * cong_location_xml_frag_next:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_location_xml_frag_next(const CongLocation *loc)
 {
 	return cong_node_next(loc->node);
 }
 
+/**
+ * cong_location_node:
+ * @loc:
+ * 
+ * TODO: Write me
+ */
 CongNodePtr
 cong_location_node(const CongLocation *loc)
 {
 	return loc->node;
 }
 
+/**
+ * cong_location_parent:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_location_parent(const CongLocation *loc)
 {
@@ -411,7 +540,13 @@ cong_location_parent(const CongLocation *loc)
 	return loc->node->parent;
 }
 
-
+/**
+ * cong_location_copy:
+ * @dst:
+ * @src:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_copy(CongLocation *dst, const CongLocation *src)
 {
@@ -421,6 +556,13 @@ cong_location_copy(CongLocation *dst, const CongLocation *src)
 	*dst = *src;
 }
 
+/**
+ * is_valid_cusor_node:
+ * @node:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 static gboolean
 is_valid_cursor_node (CongNodePtr node,
 		      gpointer user_data)
@@ -431,9 +573,18 @@ is_valid_cursor_node (CongNodePtr node,
 	return cong_node_is_valid_cursor_location (node);
 }
 
-gboolean cong_location_calc_prev_char(const CongLocation *input_loc, 
-				      CongDispspec *dispspec,
-				      CongLocation *output_loc)
+/**
+ * cong_location_calc_prev_char:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_prev_char(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc)
 {
 	CongNodePtr n;
 
@@ -480,8 +631,16 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 	}
 }
 
-
-gboolean cong_location_calc_next_char(const CongLocation *input_loc,
+/**
+ * cong_location_calc_next_char:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_next_char(const CongLocation *input_loc,
 				      CongDispspec *dispspec,
 				      CongLocation *output_loc)
 {
@@ -532,10 +691,20 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 	return FALSE;
 }
 
-static void make_pango_log_attr_for_node(CongDocument *doc,
-					 CongNodePtr node,
-					 PangoLogAttr **pango_log_attrs,
-					 int *attrs_len)
+/**
+ * make_pango_log_attr_for_node:
+ * @doc:
+ * @node:
+ * @pango_log_attrs:
+ * @attrs_len:
+ *
+ * TODO: Write me
+ */
+static void 
+make_pango_log_attr_for_node(CongDocument *doc,
+			     CongNodePtr node,
+			     PangoLogAttr **pango_log_attrs,
+			     int *attrs_len)
 {
 	PangoLanguage *language;
 
@@ -560,9 +729,18 @@ static void make_pango_log_attr_for_node(CongDocument *doc,
 
 }
 
-gboolean cong_location_calc_prev_word(const CongLocation *input_loc, 
-				      CongDocument *doc,
-				      CongLocation *output_loc)
+/**
+ * cong_location_calc_prev_word:
+ * @input_loc:
+ * @doc:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_prev_word(const CongLocation *input_loc, 
+			     CongDocument *doc,
+			     CongLocation *output_loc)
 {
 	PangoLogAttr *pango_log_attr=NULL;
 	int attrs_len=0;
@@ -611,9 +789,18 @@ gboolean cong_location_calc_prev_word(const CongLocation *input_loc,
 	}
 }
 
-gboolean cong_location_calc_next_word(const CongLocation *input_loc, 
-				      CongDocument *doc,
-				      CongLocation *output_loc)
+/**
+ * cong_location_calc_next_word:
+ * @input_loc:
+ * @doc:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_next_word(const CongLocation *input_loc, 
+			     CongDocument *doc,
+			     CongLocation *output_loc)
 {
 	PangoLogAttr *pango_log_attr=NULL;
 	int attrs_len=0;
@@ -659,6 +846,12 @@ gboolean cong_location_calc_next_word(const CongLocation *input_loc,
 	}
 }
 
+/**
+ * get_root_node:
+ * @node:
+ *
+ * TODO: Write me
+ */
 static CongNodePtr
 get_root_node (CongNodePtr node)
 {
@@ -671,6 +864,13 @@ get_root_node (CongNodePtr node)
 	return node;
 }
 
+/**
+ * get_enclosing_structural_element:
+ * @node:
+ * @dispspec:
+ *
+ * TODO: Write me
+ */
 static CongNodePtr
 get_enclosing_structural_element (CongNodePtr node,
 				  const CongDispspec *dispspec)
@@ -705,9 +905,18 @@ get_enclosing_structural_element (CongNodePtr node,
 	return NULL;
 }
 
-gboolean cong_location_calc_document_start(const CongLocation *input_loc, 
-					   CongDispspec *dispspec,
-					   CongLocation *output_loc)
+/**
+ * cong_location_calc_document_start:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_document_start(const CongLocation *input_loc, 
+				  CongDispspec *dispspec,
+				  CongLocation *output_loc)
 {
 	CongNodePtr root_node;
 
@@ -728,9 +937,19 @@ gboolean cong_location_calc_document_start(const CongLocation *input_loc,
 
 	return FALSE;
 }
-gboolean cong_location_calc_line_start(const CongLocation *input_loc, 
-				      CongDispspec *dispspec,
-				      CongLocation *output_loc)
+
+/**
+ * cong_location_calc_line_start:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_line_start(const CongLocation *input_loc, 
+			      CongDispspec *dispspec,
+			      CongLocation *output_loc)
 {
 	CongNodePtr enclosing_structural_element;
 
@@ -756,9 +975,18 @@ gboolean cong_location_calc_line_start(const CongLocation *input_loc,
 	return FALSE;
 }
 
-gboolean cong_location_calc_document_end(const CongLocation *input_loc, 
-					 CongDispspec *dispspec,
-					 CongLocation *output_loc)
+/**
+ * cong_location_calc_document_end:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_document_end(const CongLocation *input_loc, 
+				CongDispspec *dispspec,
+				CongLocation *output_loc)
 {
 	CongNodePtr root_node;
 
@@ -780,9 +1008,18 @@ gboolean cong_location_calc_document_end(const CongLocation *input_loc,
 	return FALSE;
 }
 
-gboolean cong_location_calc_line_end(const CongLocation *input_loc, 
-				     CongDispspec *dispspec,
-				     CongLocation *output_loc)
+/**
+ * cong_location_calc_line_end:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_line_end(const CongLocation *input_loc, 
+			    CongDispspec *dispspec,
+			    CongLocation *output_loc)
 {
 	CongNodePtr enclosing_structural_element;
 
@@ -808,9 +1045,18 @@ gboolean cong_location_calc_line_end(const CongLocation *input_loc,
 	return FALSE;
 }
 
-gboolean cong_location_calc_prev_page(const CongLocation *input_loc, 
-				      CongDispspec *dispspec,
-				      CongLocation *output_loc)
+/**
+ * cong_location_calc_prev_page:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_prev_page(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc)
 {
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
@@ -821,9 +1067,18 @@ gboolean cong_location_calc_prev_page(const CongLocation *input_loc,
 	return FALSE;
 }
 
-gboolean cong_location_calc_next_page(const CongLocation *input_loc, 
-				      CongDispspec *dispspec,
-				      CongLocation *output_loc)
+/**
+ * cong_location_calc_next_page:
+ * @input_loc:
+ * @dispspec:
+ * @output_loc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_location_calc_next_page(const CongLocation *input_loc, 
+			     CongDispspec *dispspec,
+			     CongLocation *output_loc)
 {
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
@@ -834,6 +1089,15 @@ gboolean cong_location_calc_next_page(const CongLocation *input_loc,
 	return FALSE;
 }
 
+/**
+ * cong_location_calc_word_extent:
+ * @input_loc:
+ * @doc:
+ * @output_start_of_word:
+ * @output_end_of_word:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_location_calc_word_extent(const CongLocation *input_loc, 
 			       CongDocument *doc,
@@ -926,6 +1190,14 @@ cong_location_calc_next_text_node (const CongLocation *input_loc,
 }
 #endif
 
+/**
+ * cong_location_copy_with_ref:
+ * @doc:
+ * @dst:
+ * @src:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_copy_with_ref (CongDocument *doc, 
 			     CongLocation *dst,
@@ -946,6 +1218,13 @@ cong_location_copy_with_ref (CongDocument *doc,
 	}
 }
 
+/**
+ * cong_location_nullify_with_ref:
+ * @doc:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 void
 cong_location_nullify_with_ref (CongDocument *doc, 
 				CongLocation *loc)

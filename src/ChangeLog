@@ -1,3 +1,9 @@
+2004-04-17  David Hoover <karma@deadmoose.com>
+
+	Changes to LOTS of files, adding gtk-doc style comments to most
+        functions. (Bug 123318) Lots are currently placeholder comments,
+        and will be filled in later.
+
 2004-03-17  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

@@ -84,6 +84,20 @@ cong_attribute_wrapper_check_button_instance_init (CongAttributeWrapperCheckButt
 	attribute_wrapper->private = g_new0(CongAttributeWrapperCheckButtonDetails,1);
 }
 
+/**
+ * cong_attribute_wrapper_check_button_construct:
+ * @attribute_wrapper:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ * @check_button:
+ * @attribute_value_unchecked:
+ * @attribute_value_checked:
+ *
+ * TODO: Write me
+ */
 CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *attribute_wrapper,
 					       CongDocument *doc,
@@ -119,6 +133,19 @@ cong_attribute_wrapper_check_button_construct (CongAttributeWrapperCheckButton *
 	return attribute_wrapper;
 }
 
+/**
+ * cong_attribute_wrapper_check_button_new:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ * @check_button:
+ * @attribute_value_unchecked:
+ * @attribute_value_checked:
+ *
+ * TODO: Write me
+ */
 CongAttributeWrapperCheckButton*
 cong_attribute_wrapper_check_button_new ( CongDocument *doc,
 					  CongNodePtr node,

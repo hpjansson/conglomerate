@@ -76,6 +76,17 @@ cong_editor_area_text_instance_init (CongEditorAreaText *area_text)
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_text_construct:
+ * @area_text:
+ * @editor_widget:
+ * @font:
+ * @fg_col:
+ * @text:
+ * @use_markup:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_construct (CongEditorAreaText *area_text,
 				 CongEditorWidget3 *editor_widget,
@@ -121,7 +132,16 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 
 	return CONG_EDITOR_AREA (area_text);
 }
-
+/**
+ * cong_editor_area_text_new:
+ * @editor_widget:
+ * @font:
+ * @fg_col:
+ * @text:
+ * @use_markup:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
@@ -142,6 +162,13 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 		 use_markup);
 }
 
+/**
+ * cong_editor_area_text_set_text:
+ * @area_text:
+ * @text:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 				const gchar *text)
@@ -158,6 +185,13 @@ cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_VERTICAL);
 }
 
+/**
+ * cong_editor_area_text_set_markup:
+ * @area_text:
+ * @markup:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
 				  const gchar *markup)
@@ -174,6 +208,13 @@ cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text), GTK_ORIENTATION_VERTICAL);
 }
 
+/**
+ * cong_editor_area_text_get_single_line_requisition:
+ * @area_text:
+ * @orientation:
+ *
+ * TODO: Write me
+ */
 gint 
 cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text,
 						   GtkOrientation orientation)
@@ -184,6 +225,16 @@ cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text
 						 10000);
 }
 
+/**
+ * cong_editor_area_text_xy_to_index:
+ * @area_text:
+ * @x:
+ * @y:
+ * @index_:
+ * @trailing:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_area_text_xy_to_index (CongEditorAreaText *area_text,
 				   int x,

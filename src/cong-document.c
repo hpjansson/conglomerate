@@ -337,6 +337,15 @@ gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selfte
 }
 #endif
 
+/**
+ * cong_document_construct:
+ * @doc:
+ * @xml_doc:
+ * @ds:
+ * @url:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_document_construct (CongDocument *doc,
 			 xmlDocPtr xml_doc,
@@ -402,7 +411,14 @@ cong_document_construct (CongDocument *doc,
 	return doc;
 }
 
-
+/**
+ * cong_document_new_from_xmldoc:
+ * @xml_doc:
+ * @ds:
+ * @url:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 			       CongDispspec *ds, 
@@ -419,6 +435,12 @@ cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 					url);
 }
 
+/**
+ * cong_document_get_xml:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc)
 {
@@ -427,6 +449,12 @@ cong_document_get_xml(CongDocument *doc)
 	return PRIVATE(doc)->xml_doc;
 }
 
+/**
+ * cong_document_get_root:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_document_get_root(CongDocument *doc)
 {
@@ -443,6 +471,12 @@ cong_document_get_root(CongDocument *doc)
 	return NULL;
 }
 
+/**
+ * cong_document_get_traversal:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongDocumentTraversal*
 cong_document_get_traversal (CongDocument *doc)
 {
@@ -451,6 +485,12 @@ cong_document_get_traversal (CongDocument *doc)
 	return PRIVATE(doc)->traversal;
 }
 
+/**
+ * cong_document_get_root_traversal_node:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongTraversalNode*
 cong_document_get_root_traversal_node (CongDocument *doc)
 {
@@ -459,6 +499,12 @@ cong_document_get_root_traversal_node (CongDocument *doc)
 	return cong_document_traversal_get_root_traversal_node (PRIVATE(doc)->traversal);
 }
 
+/**
+ * cong_document_get_dispspec:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc)
 {
@@ -467,6 +513,13 @@ cong_document_get_dispspec(CongDocument *doc)
 	return PRIVATE(doc)->ds;
 }
 
+/**
+ * cong_document_get_dispspec_element_for_node:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 {
@@ -476,6 +529,12 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 	return cong_dispspec_lookup_node(PRIVATE(doc)->ds, node);
 }
 
+/**
+ * cong_document_get_filename:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_document_get_filename(CongDocument *doc)
 {
@@ -499,8 +558,15 @@ cong_document_get_filename(CongDocument *doc)
 	}
 }
 
+/**
+ * cong_document_get_full_uri:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 gchar*
-cong_document_get_full_uri(CongDocument *doc) {
+cong_document_get_full_uri(CongDocument *doc) 
+{
 	g_return_val_if_fail(doc, NULL);
 
 	if (PRIVATE(doc)->url) {
@@ -511,6 +577,12 @@ cong_document_get_full_uri(CongDocument *doc) {
 	}		    
 }
 
+/**
+ * cong_document_get_parent_uri:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_document_get_parent_uri(CongDocument *doc)
 {
@@ -534,6 +606,12 @@ cong_document_get_parent_uri(CongDocument *doc)
 	}
 }
 
+/**
+ * cong_document_get_dtd_public_identifier:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 const CongXMLChar*
 cong_document_get_dtd_public_identifier(CongDocument *doc)
 {
@@ -548,6 +626,13 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 	return PRIVATE(doc)->xml_doc->extSubset->ExternalID;
 }
 
+/**
+ * cong_document_get_xml_ns:
+ * @doc:
+ * @ns_uri:
+ *
+ * TODO: Write me
+ */
 xmlNsPtr
 cong_document_get_xml_ns (CongDocument *doc, 
 			  const gchar* ns_uri)
@@ -564,6 +649,14 @@ cong_document_get_xml_ns (CongDocument *doc,
 	return ns;
 }
 
+/**
+ * cong_document_save:
+ * @doc:
+ * @filename:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_save(CongDocument *doc, 
 		   const char* filename, 
@@ -606,6 +699,12 @@ cong_document_save(CongDocument *doc,
 	gnome_vfs_uri_unref(file_uri);
 }
 
+/**
+ * cong_document_is_modified:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_document_is_modified(CongDocument *doc)
 {
@@ -614,6 +713,13 @@ cong_document_is_modified(CongDocument *doc)
 	return PRIVATE(doc)->modified;
 }
 
+/**
+ * cong_document_set_modified:
+ * @doc:
+ * @modified:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_set_modified(CongDocument *doc, gboolean modified)
 {
@@ -630,6 +736,13 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
 	}
 }
 
+/**
+ * cong_document_set_primary_window:
+ * @doc:
+ * @window:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 {
@@ -640,6 +753,13 @@ cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
 	PRIVATE(doc)->primary_window = window;
 }
 
+/**
+ * cong_document_set_url:
+ * @doc:
+ * @url:
+ *
+ * TODO: Write me
+ */
 void 
 cong_document_set_url(CongDocument *doc, const gchar *url) 
 {
@@ -651,6 +771,12 @@ cong_document_set_url(CongDocument *doc, const gchar *url)
 		       url);
 }
 
+/**
+ * cong_document_get_seconds_since_last_save_or_load:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 {
@@ -663,7 +789,13 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 	return current_time.tv_sec - PRIVATE(doc)->time_of_last_save.tv_sec;
 }
 
-
+/**
+ * cong_document_get_node_name:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_document_get_node_name (CongDocument *doc, 
 			     CongNodePtr node)
@@ -771,7 +903,12 @@ node_count_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, gu
 	return FALSE;		
 }
 
-
+/**
+ * cong_document_get_num_nodes:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 guint
 cong_document_get_num_nodes (CongDocument *doc)
 {
@@ -789,6 +926,13 @@ cong_document_get_num_nodes (CongDocument *doc)
 	
 }
 
+/**
+ * cong_document_node_ref:
+ * @doc:
+ * @node:
+ *
+ * This function is not currently implemented
+ */
 void 
 cong_document_node_ref (CongDocument *doc,
 			CongNodePtr node)
@@ -799,6 +943,13 @@ cong_document_node_ref (CongDocument *doc,
 	/* unwritten */
 }
 
+/**
+ * cong_document_node_unref:
+ * @doc:
+ * @node:
+ *
+ * This function is not currently implemented
+ */
 void 
 cong_document_node_unref (CongDocument *doc,
 			  CongNodePtr node)
@@ -809,6 +960,14 @@ cong_document_node_unref (CongDocument *doc,
 	/* unwritten */
 }
 
+/**
+ * cong_document_set_with_ref:
+ * @doc:
+ * @node_ptr:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_set_with_ref (CongDocument *doc,
 			    CongNodePtr *node_ptr,
@@ -831,6 +990,14 @@ cong_document_set_with_ref (CongDocument *doc,
 	*node_ptr = node;
 }
 
+/**
+ * cong_document_begin_command:
+ * @doc:
+ * @description:
+ * @consolidation_id:
+ *
+ * TODO: Write me
+ */
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
 			     const gchar *description,
@@ -880,6 +1047,13 @@ should_merge_commands (CongDocument *doc,
 	return NULL;
 }
 
+/**
+ * cong_document_end_command:
+ * @doc:
+ * @cmd:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_end_command (CongDocument *doc,
 			   CongCommand *cmd)
@@ -913,7 +1087,14 @@ cong_document_end_command (CongDocument *doc,
 }
 
 /* Public MVC hooks: */
-void cong_document_begin_edit (CongDocument *doc)
+/**
+ * cong_document_begin_edit:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_begin_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
 
@@ -929,7 +1110,14 @@ void cong_document_begin_edit (CongDocument *doc)
 	}
 }
 
-void cong_document_end_edit (CongDocument *doc)
+/**
+ * cong_document_end_edit:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_end_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
 
@@ -946,15 +1134,29 @@ void cong_document_end_edit (CongDocument *doc)
 	}
 }
 
-gboolean cong_document_is_within_edit(CongDocument *doc)
+/**
+ * cong_document_is_within_edit:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_document_is_within_edit(CongDocument *doc)
 {
 	g_return_val_if_fail (doc, FALSE);
 
 	return (PRIVATE(doc)->edit_depth>0);
 }
 
-
-void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node)
+/**
+ * cong_document_private_node_make_orphan:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 #if DEBUG_MVC
 	g_message("cong_document_private_node_make_orphan");
@@ -970,7 +1172,16 @@ void cong_document_private_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	}
 }
 
-void cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
+/**
+ * cong_document_private_node_add_after:
+ * @doc:
+ * @node:
+ * @older_sibling:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -988,7 +1199,16 @@ void cong_document_private_node_add_after(CongDocument *doc, CongNodePtr node, C
 		       older_sibling);
 }
 
-void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
+/**
+ * cong_document_private_node_add_before:
+ * @doc:
+ * @node:
+ * @younger_sibling:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1006,7 +1226,16 @@ void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, 
 		       younger_sibling);
 }
 
-void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
+/**
+ * cong_document_private_node_set_parent:
+ * @doc:
+ * @node:
+ * @adoptive_parent:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1024,7 +1253,16 @@ void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, 
 		       adoptive_parent);
 }
 
-void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+/**
+ * cong_document_private_node_set_text:
+ * @doc:
+ * @node:
+ * @new_content:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1043,11 +1281,22 @@ void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, co
 		       new_content);
 }
 
-void cong_document_private_node_set_attribute(CongDocument *doc, 
-					      CongNodePtr node, 
-					      xmlNs *ns_ptr,
-					      const xmlChar *name, 
-					      const xmlChar *value)
+/**
+ * cong_document_private_node_set_attribute:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @name:
+ * @value:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_set_attribute(CongDocument *doc, 
+					 CongNodePtr node, 
+					 xmlNs *ns_ptr,
+					 const xmlChar *name, 
+					 const xmlChar *value)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1069,10 +1318,20 @@ void cong_document_private_node_set_attribute(CongDocument *doc,
 		       value);
 }
 
-void cong_document_private_node_remove_attribute(CongDocument *doc, 
-						 CongNodePtr node, 
-						 xmlNs *ns_ptr,
-						 const xmlChar *name)
+/**
+ * cong_document_private_node_remove_attribute:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @name:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_node_remove_attribute(CongDocument *doc, 
+					    CongNodePtr node, 
+					    xmlNs *ns_ptr,
+					    const xmlChar *name)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1092,7 +1351,14 @@ void cong_document_private_node_remove_attribute(CongDocument *doc,
 		       name);
 }
 
-void cong_document_private_on_selection_change(CongDocument *doc)
+/**
+ * cong_document_private_on_selection_change:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_on_selection_change(CongDocument *doc)
 {
 	GList *iter;
 
@@ -1119,7 +1385,14 @@ void cong_document_private_on_selection_change(CongDocument *doc)
 	}
 }
 
-void cong_document_private_on_cursor_change(CongDocument *doc)
+/**
+ * cong_document_private_on_cursor_change:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_private_on_cursor_change(CongDocument *doc)
 {
 	GList *iter;
 
@@ -1148,6 +1421,13 @@ void cong_document_private_on_cursor_change(CongDocument *doc)
 	}
 }
 
+/**
+ * cong_document_private_set_dtd_ptr:
+ * @doc:
+ * @dtd_ptr:
+ *
+ * TODO: Write me
+ */
 void 
 cong_document_private_set_dtd_ptr (CongDocument *doc,
 				   xmlDtdPtr dtd_ptr)
@@ -1171,8 +1451,15 @@ cong_document_private_set_dtd_ptr (CongDocument *doc,
 }
 /* end of MVC user hooks */
 
-
-void cong_document_register_view(CongDocument *doc, CongView *view)
+/**
+ * cong_document_register_view:
+ * @doc:
+ * @view:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_register_view(CongDocument *doc, CongView *view)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
@@ -1181,7 +1468,15 @@ void cong_document_register_view(CongDocument *doc, CongView *view)
 	g_object_ref (G_OBJECT(doc));
 }
 
-void cong_document_unregister_view(CongDocument *doc, CongView *view)
+/**
+ * cong_document_unregister_view:
+ * @doc:
+ * @view:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_unregister_view(CongDocument *doc, CongView *view)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
@@ -1190,21 +1485,40 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view)
 	g_object_unref (G_OBJECT(doc));
 }
 
-
-CongCursor* cong_document_get_cursor(CongDocument *doc)
+/**
+ * cong_document_get_cursor:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+CongCursor* 
+cong_document_get_cursor(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
 	return &PRIVATE(doc)->cursor;
 }
 
-CongSelection* cong_document_get_selection(CongDocument *doc)
+/**
+ * cong_document_get_selection:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+CongSelection* 
+cong_document_get_selection(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
 	return PRIVATE(doc)->selection;
 }
 
+/**
+ * cong_document_get_selected_node:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_document_get_selected_node (CongDocument *doc)
 {
@@ -1225,6 +1539,13 @@ cong_document_get_selected_node (CongDocument *doc)
 }
 
 
+/**
+ * cong_document_get_language_for_node:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node)
@@ -1264,6 +1585,14 @@ cong_document_for_each_node_recurse (CongDocument *doc,
 	return FALSE;
 }
 
+/**
+ * cong_document_for_each_node:
+ * @doc:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_document_for_each_node (CongDocument *doc, 
 			     CongDocumentRecursionCallback callback, 
@@ -1279,6 +1608,15 @@ cong_document_for_each_node (CongDocument *doc,
 						    0);
 }
 
+/**
+ * cong_document_for_each_child_of_node:
+ * @doc:
+ * @parent:
+ * @callback:
+ * @callback_data:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_document_for_each_child_of_node (CongDocument *doc, 
 				      CongNodePtr parent, 
@@ -1300,6 +1638,13 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 	return FALSE;
 }
 
+/**
+ * cong_document_make_nodes_from_source_fragment:
+ * @doc:
+ * @source_fragment:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment)
@@ -1339,6 +1684,13 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 
 }
 
+/**
+ * cong_document_get_dtd_element:
+ * @cong_doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 xmlElementPtr 
 cong_document_get_dtd_element (CongDocument *cong_doc, 
 			       CongNodePtr node)
@@ -1411,6 +1763,12 @@ cong_document_get_dtd_element (CongDocument *cong_doc,
 	return elemDecl;
 }
 
+/**
+ * cong_document_get_command_history:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongCommandHistory*
 cong_document_get_command_history (CongDocument *doc)
 {
@@ -1419,7 +1777,12 @@ cong_document_get_command_history (CongDocument *doc)
 	return PRIVATE(doc)->history;
 }
 
-
+/**
+ * cong_document_undo:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_undo (CongDocument *doc)
 {
@@ -1432,6 +1795,12 @@ cong_document_undo (CongDocument *doc)
 	cong_command_history_undo (PRIVATE(doc)->history);
 }
 
+/**
+ * cong_document_redo:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_redo (CongDocument *doc)
 {
@@ -1444,6 +1813,13 @@ cong_document_redo (CongDocument *doc)
 	cong_command_history_redo (PRIVATE(doc)->history);
 }
 
+/**
+ * cong_document_select_node:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_select_node (CongDocument *doc,
 			   CongNodePtr node)
@@ -1494,6 +1870,13 @@ is_location_in_node_subtree (const CongLocation *loc,
 	return FALSE;
 }
 
+/**
+ * cong_document_node_can_be_deleted:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_document_node_can_be_deleted (CongDocument *doc,
 				   CongNodePtr node)
@@ -1525,6 +1908,12 @@ cong_document_node_can_be_deleted (CongDocument *doc,
 	return TRUE; 
 }
 
+/**
+ * cong_document_can_paste:
+ * @doc:
+ *
+ * Returns: %TRUE
+ */
 gboolean
 cong_document_can_paste(CongDocument *doc)
 {

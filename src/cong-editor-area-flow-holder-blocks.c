@@ -93,6 +93,13 @@ cong_editor_area_flow_holder_blocks_instance_init (CongEditorAreaFlowHolderBlock
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_flow_holder_blocks_construct:
+ * @area_flow_holder_blocks:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_blocks_construct (CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks,
 					CongEditorWidget3 *editor_widget)
@@ -115,6 +122,12 @@ cong_editor_area_flow_holder_blocks_construct (CongEditorAreaFlowHolderBlocks *a
 	return CONG_EDITOR_AREA (area_flow_holder_blocks);
 }
 
+/**
+ * cong_editor_area_flow_holder_blocks_new:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_blocks_new (CongEditorWidget3 *editor_widget)
 {
@@ -127,6 +140,13 @@ cong_editor_area_flow_holder_blocks_new (CongEditorWidget3 *editor_widget)
 		 editor_widget);
 }
 
+/**
+ * cong_editor_area_flow_holder_get_child_flow_holder_for_node:
+ * @area_flow_holder_blocks:
+ * @doc_node:
+ *
+ * TODO: Write me
+ */
 CongEditorAreaFlowHolder*
 cong_editor_area_flow_holder_get_child_flow_holder_for_node (CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks,
 							     CongNodePtr doc_node)

@@ -119,6 +119,11 @@ static void
 cong_app_private_insert_element_init (CongApp *app);
 
 /* Exported function definitions: */
+/**
+ * cong_app_singleton:
+ *
+ * TODO: Write me
+ */
 CongApp*
 cong_app_singleton (void)
 {
@@ -127,6 +132,13 @@ cong_app_singleton (void)
 	return the_singleton_app;
 }
 
+/**
+ * cong_app_construct_singleton:
+ * @argc:
+ * @argv:
+ *
+ * TODO: Write me
+ */
 void
 cong_app_construct_singleton (int   argc,
 			      char *argv[])
@@ -137,6 +149,11 @@ cong_app_construct_singleton (int   argc,
 					 argv);
 }
 
+/**
+ * cong_app_destroy_singleton:
+ *
+ * TODO: Write me
+ */
 void
 cong_app_destroy_singleton(void)
 {
@@ -147,6 +164,12 @@ cong_app_destroy_singleton(void)
 	the_singleton_app = NULL;
 }
 
+/**
+ * cong_app_post_init_hack:
+ * @app:
+ *
+ * TODO: Write me
+ */
 int
 cong_app_post_init_hack (CongApp *app)
 {
@@ -274,6 +297,13 @@ debug_target_list (GtkClipboard *clipboard,
 }
 #endif
 
+/**
+ * convert_ucs2_to_utf8:
+ * @data:
+ * @length:
+ *
+ * TODO: Write me
+ */
 gchar*
 convert_ucs2_to_utf8 (guchar *data,
 		      gint length)
@@ -285,6 +315,13 @@ convert_ucs2_to_utf8 (guchar *data,
 				NULL);
 }
 
+/**
+ * convert_utf8_string:
+ * @data:
+ * @length:
+ *
+ * TODO: Write me
+ */
 gchar*
 convert_utf8_string (guchar *data, 
 		     gint length)
@@ -296,6 +333,15 @@ convert_utf8_string (guchar *data,
 				     (gssize)length);
 }
 
+/**
+ * convert_text_xml:
+ * @data:
+ * @length:
+ *
+ * This function is not currently implemented
+ *
+ * Returns: %NULL
+ */
 gchar*
 convert_text_xml (guchar *data, 
 		  gint length)
@@ -305,6 +351,13 @@ convert_text_xml (guchar *data,
 	return NULL;
 }
 
+/**
+ * convert_text_html:
+ * @data:
+ * @length:
+ *
+ * TODO: Write me
+ */
 gchar*
 convert_text_html (guchar *data, 
 		   gint length)
@@ -320,6 +373,15 @@ convert_text_html (guchar *data,
 #endif
 }
 
+/**
+ * convert_text_plain:
+ * @data:
+ * @length:
+ *
+ * This function is not currently implemented
+ *
+ * Returns: %NULL
+ */
 gchar*
 convert_text_plain (guchar *data, 
 		    gint length)
@@ -329,6 +391,15 @@ convert_text_plain (guchar *data,
 	return NULL;
 }
 
+/**
+ * convert_application_xhtml_plus_xml:
+ * @data:
+ * @length:
+ *
+ * This function is not currently implemented
+ *
+ * Returns: %NULL
+ */
 gchar*
 convert_application_xhtml_plus_xml (guchar *data, 
 				    gint length)
@@ -338,6 +409,15 @@ convert_application_xhtml_plus_xml (guchar *data,
 	return NULL;
 }
 
+/**
+ * convert_application_rtf:
+ * @data:
+ * @length:
+ *
+ * This function is not currently implemented
+ *
+ * Returns: %NULL
+ */
 gchar*
 convert_application_rtf (guchar *data, 
 			 gint length)
@@ -383,6 +463,14 @@ debug_well_known_targets (GtkClipboard *clipboard)
 #endif
 
 /* This is a simple copy-and-paste of gtk_clipboard_wait_for_targets, which was added to GTK in version 2.4: */
+/**
+ * cong_eel_gtk_clipboard_wait_for_targets:
+ * @clipboard:
+ * @targets:
+ * @n_targets:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_eel_gtk_clipboard_wait_for_targets (GtkClipboard  *clipboard, 
 					 GdkAtom      **targets,
@@ -435,6 +523,14 @@ generate_source_fragment_from_selection_doc (xmlDocPtr xml_doc,
 	return NULL;
 }
 
+/**
+ * cong_app_get_clipboard_xml_source:
+ * @app:
+ * @selection:
+ * @target_doc:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_app_get_clipboard_xml_source (CongApp *app,
 				   GdkAtom selection,
@@ -683,8 +779,15 @@ regenerate_selection (CongApp *app,
 	}
 }
 
-
-
+/**
+ * cong_app_set_clipboard_from_xml_fragment:
+ * @app:
+ * @selection:
+ * @xml_fragment:
+ * @source_doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 					  GdkAtom selection,
@@ -725,6 +828,12 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 	/* emit signals? */
 }
 
+/**
+ * cong_app_get_gnome_program:
+ * @app:
+ *
+ * TODO: Write me
+ */
 GnomeProgram*
 cong_app_get_gnome_program (CongApp *app)
 {
@@ -733,6 +842,12 @@ cong_app_get_gnome_program (CongApp *app)
 	return PRIVATE(app)->gnome_program;
 }
 
+/**
+ * cong_app_get_tooltips:
+ * @app:
+ *
+ * TODO: Write me
+ */
 GtkTooltips*
 cong_app_get_tooltips (CongApp *app)
 {
@@ -741,6 +856,13 @@ cong_app_get_tooltips (CongApp *app)
 	return PRIVATE(app)->tooltips;
 }
 
+/**
+ * cong_app_get_font:
+ * @app:
+ * @role:
+ *
+ * TODO: Write me
+ */
 CongFont*
 cong_app_get_font (CongApp *app,
 		   enum CongFontRole role)
@@ -751,6 +873,12 @@ cong_app_get_font (CongApp *app,
 	return PRIVATE(app)->fonts[role];
 }
 
+/**
+ * cong_app_get_plugin_manager:
+ * @app:
+ *
+ * TODO: Write me
+ */
 CongPluginManager*
 cong_app_get_plugin_manager (CongApp *app)
 {
@@ -759,6 +887,12 @@ cong_app_get_plugin_manager (CongApp *app)
 	return PRIVATE(app)->plugin_manager;
 }
 
+/**
+ * cong_app_get_dispspec_registry:
+ * @app:
+ *
+ * TODO: Write me
+ */
 CongDispspecRegistry*
 cong_app_get_dispspec_registry (CongApp *app)
 {
@@ -767,6 +901,12 @@ cong_app_get_dispspec_registry (CongApp *app)
 	return PRIVATE(app)->ds_registry;
 }
 
+/**
+ * cong_app_get_gconf_client:
+ * @app:
+ *
+ * TODO: Write me
+ */
 GConfClient*
 cong_app_get_gconf_client (CongApp *app)
 {
@@ -775,6 +915,12 @@ cong_app_get_gconf_client (CongApp *app)
 	return PRIVATE(app)->gconf_client;
 }
 
+/**
+ * cong_app_get_language_list:
+ * @app:
+ *
+ * TODO: Write me
+ */
 const GList*
 cong_app_get_language_list (CongApp *app)
 {
@@ -782,8 +928,6 @@ cong_app_get_language_list (CongApp *app)
 
 	return PRIVATE(app)->language_list;
 }
-
-
 
 /* Internal function definitions: */
 static CongApp*
@@ -963,8 +1107,6 @@ register_plugin (CongApp *app,
 				     configure_callback);
 }
 
-
-
 static void 
 cong_app_private_load_plugins (CongApp *app)
 {
@@ -1067,11 +1209,3 @@ cong_app_private_insert_element_init (CongApp *app)
 	gdk_gc_set_foreground(app->insert_element_gc, &gcol);
 #endif
 }
-
-
-
-
-
-
-
-

@@ -57,6 +57,11 @@ cong_editor_line_fragments_construct (CongEditorLineFragments *line_fragments)
 	return line_fragments;
 }
 
+/**
+ * cong_editor_line_fragments_new:
+ *
+ * Returns: a new #CongEditorLineFragments
+ */
 CongEditorLineFragments*
 cong_editor_line_fragments_new (void)
 {
@@ -64,12 +69,25 @@ cong_editor_line_fragments_new (void)
 		(g_object_new (CONG_EDITOR_LINE_FRAGMENTS_TYPE, NULL));
 }
 
+/**
+ * cong_editor_line_fragments_get_area_list:
+ * @line_fragments:
+ *
+ * TODO: Write me
+ */
 GList*
 cong_editor_line_fragments_get_area_list (CongEditorLineFragments *line_fragments)
 {
 	return PRIVATE(line_fragments)->list_of_areas;
 }
 
+/**
+ * cong_editor_line_fragments_add_area:
+ * @line_fragments:
+ * @area:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_line_fragments_add_area (CongEditorLineFragments *line_fragments,
 				     CongEditorArea *area)

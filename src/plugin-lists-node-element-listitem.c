@@ -105,6 +105,14 @@ cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *
 	node_element_listitem->private = g_new0(CongEditorNodeElementListitemDetails,1);
 }
 
+/**
+ * cong_editor_node_element_listitem_construct:
+ * @editor_node_element_listitem:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeElementListitem*
 cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *editor_node_element_listitem,
 					     CongEditorWidget3* editor_widget,
@@ -124,6 +132,13 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
 	return editor_node_element_listitem;
 }
 
+/**
+ * cong_editor_node_element_listitem_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 				       CongTraversalNode *traversal_node)
@@ -138,6 +153,12 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 				  traversal_node));
 }
 
+/**
+ * cong_editor_node_element_listitem_get_label:
+ * @listitem:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem)
 {
@@ -165,6 +186,13 @@ static const gchar alpha_lower_list[] = "abcdefghijklmnopqrstuvwxyz";
  * 1..26 should return "a".."z"
  * 27..52 should return "aa".."az"
  */
+/**
+ * cong_util_format_number_alpha:
+ * @number:
+ * @is_upper:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_format_number_alpha (guint number,
 			       gboolean is_upper)
@@ -187,6 +215,13 @@ cong_util_format_number_alpha (guint number,
 	return result;
 }
 
+/**
+ * cong_util_format_number_roman:
+ * @number:
+ * @is_upper:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_format_number_roman (guint number,
 			       gboolean is_upper)
@@ -252,6 +287,13 @@ cong_util_format_number_roman (guint number,
     return result;
 }
 
+/**
+ * cong_util_numeration:
+ * @numeration:
+ * @number:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_numeration (enum CongNumeration numeration, 
 		      guint number)
@@ -294,6 +336,12 @@ cong_util_get_numeration_from_docbook_orderedlist_attr (const gchar *numeration_
 					 CONG_NUMERATION_ARABIC);
 }
 
+/**
+ * cong_util_string_from_unichar:
+ * @ch:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_string_from_unichar (gunichar ch) 
 {
@@ -311,6 +359,12 @@ cong_util_string_from_unichar (gunichar ch)
 
 #define BULLET_UNICHAR (0x2022)
 
+/**
+ * get_child_index:
+ * @listitem:
+ *
+ * TODO: Write me
+ */
 guint
 get_child_index(CongEditorNodeElementListitem* listitem)
 {
@@ -340,7 +394,6 @@ get_child_index(CongEditorNodeElementListitem* listitem)
 
 	return item_count+1;
 }
-
 
 static gchar*
 calculate_label (CongEditorNodeElementListitem* listitem)
@@ -479,4 +532,3 @@ on_label_changed (CongEditorNodeElementListitem *listitem,
 	cong_editor_area_listitem_set_label (area_listitem,
 					     cong_editor_node_element_listitem_get_label (listitem));
 }
-

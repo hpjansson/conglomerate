@@ -74,6 +74,17 @@ cong_attribute_editor_cdata_instance_init (CongAttributeEditorCDATA *area)
 	area->private = g_new0(CongAttributeEditorCDATADetails,1);
 }
 
+/**
+ * cong_attribute_editor_cdata_construct:
+ * @attribute_editor_cdata:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 CongAttributeEditor*
 cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_editor_cdata,
 				       CongDocument *doc,
@@ -141,6 +152,16 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_cdata);
 }
 
+/**
+ * cong_attribute_editor_cdata_new:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_attribute_editor_cdata_new (CongDocument *doc,
 				 CongNodePtr node,

@@ -39,6 +39,15 @@ CONG_DEFINE_EMPTY_DISPOSE(cong_service)
 
 
 /* Implementation of CongService: */
+/**
+ * cong_service_construct:
+ * @service:
+ * @name:
+ * @description:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongService*
 cong_service_construct (CongService* service,
 			const gchar *name, 
@@ -57,6 +66,12 @@ cong_service_construct (CongService* service,
 	return service;
 }
 
+/**
+ * cong_service_get_name:
+ * @service:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_service_get_name (CongService *service)
 {
@@ -65,6 +80,12 @@ cong_service_get_name (CongService *service)
 	return PRIVATE (service)->name;
 }
 
+/**
+ * cong_service_get_description:
+ * @service:
+ *
+ * TODO: Write me
+ */
 const gchar* 
 cong_service_get_description (CongService *service)
 {
@@ -73,6 +94,12 @@ cong_service_get_description (CongService *service)
 	return PRIVATE (service)->description;
 }
 
+/**
+ * cong_service_get_id:
+ * @service:
+ *
+ * TODO: Write me
+ */
 const gchar* 
 cong_service_get_id (CongService *service)
 {
@@ -81,6 +108,12 @@ cong_service_get_id (CongService *service)
 	return PRIVATE (service)->service_id;
 }
 
+/**
+ * cong_service_get_gconf_namespace:
+ * @service:
+ *
+ * TODO: Write me
+ */
 gchar* 
 cong_service_get_gconf_namespace (CongService* service)
 {
@@ -91,6 +124,13 @@ cong_service_get_gconf_namespace (CongService* service)
 	return g_strdup_printf (CONG_GCONF_PATH "services/%s", PRIVATE (service)->service_id);
 }
 
+/**
+ * cong_service_get_gconf_key:
+ * @service:
+ * @local_part:
+ *
+ * TODO: Write me
+ */
 gchar* 
 cong_service_get_gconf_key (CongService *service, 
 			    const gchar *local_part)

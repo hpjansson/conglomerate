@@ -15,7 +15,16 @@ const CongDependencyNodeClass klass_pure_dependency = {
 	NULL
 };
 
-CongDependencyNode *cong_dependency_node_new_from_file(GnomeVFSURI *uri)
+/**
+ * cong_dependency_node_new_from_file:
+ * @uri:
+ *
+ * TODO: Write me
+ *
+ * Returns: the new #CongDependencyNode
+ */
+CongDependencyNode *
+cong_dependency_node_new_from_file(GnomeVFSURI *uri)
 {
 	CongDependencyNodeFromFile *node;
 
@@ -26,7 +35,16 @@ CongDependencyNode *cong_dependency_node_new_from_file(GnomeVFSURI *uri)
 	return CONG_DEPENDENCY_NODE(node);
 }
 
-void construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GnomeVFSURI *uri)
+/**
+ * construct_dependency_node_from_file:
+ * @node:
+ * @klass
+ * @uri:
+ * 
+ * TODO: Write me
+ */
+void 
+construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const CongDependencyNodeClass *klass, GnomeVFSURI *uri)
 {
 	node->base.klass = klass;
 	node->base.debug_name = gnome_vfs_uri_to_string(uri, GNOME_VFS_URI_HIDE_PASSWORD);	
@@ -35,7 +53,15 @@ void construct_dependency_node_from_file(CongDependencyNodeFromFile *node, const
 	gnome_vfs_uri_ref(uri);
 }
 
-void cong_dependency_node_add_dependency(CongDependencyNode *downstream, CongDependencyNode *upstream)
+/**
+ * cong_dependency_node_add_dependency:
+ * @downstream:
+ * @upstream:
+
+ * TODO: Write me
+ */
+void 
+cong_dependency_node_add_dependency(CongDependencyNode *downstream, CongDependencyNode *upstream)
 {
 	g_return_if_fail(downstream);
 	g_return_if_fail(upstream);
@@ -44,12 +70,26 @@ void cong_dependency_node_add_dependency(CongDependencyNode *downstream, CongDep
 	upstream->list_of_downstream = g_list_append(upstream->list_of_downstream, downstream);
 }
 
-CongDependencyGraph *cong_dependency_graph_new(void)
+/**
+ * cong_dependency_graph_new:
+ *
+ * Returns: a new #CongDependencyGraph
+ */
+CongDependencyGraph *
+cong_dependency_graph_new(void)
 {
 	return g_new0(CongDependencyGraph,1);
 }
 
-void cong_dependency_graph_add_ultimate_node(CongDependencyGraph *graph, CongDependencyNode *node)
+/**
+ * cong_dependency_graph_add_ultimate_node:
+ * @graph:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_dependency_graph_add_ultimate_node(CongDependencyGraph *graph, CongDependencyNode *node)
 {
 	g_return_if_fail(graph);
 	g_return_if_fail(node);
@@ -57,8 +97,15 @@ void cong_dependency_graph_add_ultimate_node(CongDependencyGraph *graph, CongDep
 	graph->list_of_ultimate_targets = g_list_append(graph->list_of_ultimate_targets, node);
 }
 
-
-static gboolean brute_force_build(CongDependencyNode* node, GError **error)
+/**
+ * brute_force_build:
+ * @node:
+ * @error:
+ *
+ * TODO: Write me
+ */
+static gboolean 
+brute_force_build(CongDependencyNode* node, GError **error)
 {
 	GList *iter;
 
@@ -89,7 +136,17 @@ static gboolean brute_force_build(CongDependencyNode* node, GError **error)
 	return TRUE;	
 }
 
-gboolean cong_dependency_graph_process(CongDependencyGraph *graph, GError **error)
+/**
+ * cong_dependency_graph_process:
+ * @graph:
+ * @error:
+ *
+ * TODO: Write me
+ *
+ * Returns:
+ */
+gboolean 
+cong_dependency_graph_process(CongDependencyGraph *graph, GError **error)
 {
 	GList *iter;
 
@@ -107,7 +164,16 @@ gboolean cong_dependency_graph_process(CongDependencyGraph *graph, GError **erro
 	return TRUE;
 }
 
-gboolean cong_dependency_node_from_file_is_up_to_date(CongDependencyNode *target)
+/**
+ * cong_dependency_node_from_file_is_up_to_date:
+ * @target: a #CongDependencyNode
+ *
+ * This function is not currently implemented.
+ *
+ * Returns: FALSE
+ */
+gboolean
+cong_dependency_node_from_file_is_up_to_date(CongDependencyNode *target)
 {
 	return FALSE; /* for now */
 }

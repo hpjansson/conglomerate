@@ -79,6 +79,14 @@ cong_editor_node_element_span_instance_init (CongEditorNodeElementSpan *node_ele
 	node_element_span->private = g_new0(CongEditorNodeElementSpanDetails,1);
 }
 
+/**
+ * cong_editor_node_element_span_construct:
+ * @editor_node_element_span:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeElementSpan*
 cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_element_span,
 					 CongEditorWidget3* editor_widget,
@@ -91,6 +99,13 @@ cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_
 	return editor_node_element_span;
 }
 
+/**
+ * cong_editor_node_element_span_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,
 				   CongTraversalNode *traversal_node)

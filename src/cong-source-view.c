@@ -69,7 +69,14 @@ static void on_document_set_dtd_ptr (CongView *view,
 
 #define DEBUG_SOURCE_VIEW 0
 
-void regenerate_text_buffer(CongSourceView *source_view)
+/**
+ * regenerate_text_buffer:
+ * @source_view:
+ *
+ * TODO: Write me
+ */
+void 
+regenerate_text_buffer(CongSourceView *source_view)
 {
 	CongSourceViewDetails *details;
 
@@ -103,7 +110,6 @@ void regenerate_text_buffer(CongSourceView *source_view)
 				 "fubar",
 				 -1);
 #endif
-
 
 }
 
@@ -310,7 +316,14 @@ static void on_document_set_dtd_ptr (CongView *view,
 	}
 }
 
-GtkWidget *cong_source_view_new(CongDocument *doc)
+/**
+ * cong_source_view_new:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+GtkWidget *
+cong_source_view_new(CongDocument *doc)
 {
 	CongSourceViewDetails *details;
 	CongSourceView *view;

@@ -88,6 +88,13 @@ g_str_or_null_hash (gconstpointer key)
 	}
 }
 
+/**
+ * g_str_or_null_equal:
+ * @a:
+ * @b:
+ *
+ * TODO: Write me
+ */
 gboolean
 g_str_or_null_equal (gconstpointer a,
 		     gconstpointer b)
@@ -125,6 +132,11 @@ static const CongEnumMapping whitespace_numeration[] =
 	{"normalize", CONG_WHITESPACE_NORMALIZE}
 };
 
+/**
+ * gxx_callback_construct_dispspec_element:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 gxx_callback_construct_dispspec_element(void)
 {
@@ -192,6 +204,12 @@ static void get_col(GdkColor *dst, const GdkColor *src, enum CongDispspecGCUsage
 }
 #endif /* #if NEW_LOOK */
 
+/**
+ * generate_gc_for_col:
+ * @col:
+ *
+ * TODO: Write me
+ */
 GdkGC*
 generate_gc_for_col (const GdkColor *col)
 {
@@ -267,6 +285,15 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 /* Exported functions: */
 
 /* Construction  */
+/**
+ * cong_dispspec_element_new:
+ * @ns_uri:
+ * @local_name:
+ * @type:
+ * @autogenerate_username:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* ns_uri, 
 			   const gchar* local_name, 
@@ -314,6 +341,12 @@ cong_dispspec_element_new (const gchar* ns_uri,
 }
 
 /* Destruction  */
+/**
+ * cong_dispspec_element_destroy:
+ * @element:
+ *
+ * TODO: Write me
+ */
 void 
 cong_dispspec_element_destroy (CongDispspecElement *element)
 {
@@ -357,7 +390,12 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	/* FIXME:  do we need to remove from the list? */
 }
 
-
+/**
+ * cong_dispspec_element_get_ns_uri:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
 {
@@ -366,6 +404,12 @@ cong_dispspec_element_get_ns_uri (CongDispspecElement *element)
 	return element->ns_uri;
 }
 
+/**
+ * cong_dispspec_element_get_local_name:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_local_name(CongDispspecElement* element)
 {
@@ -374,6 +418,12 @@ cong_dispspec_element_get_local_name(CongDispspecElement* element)
 	return element->local_name;
 }
 
+/**
+ * cong_dispspec_element_username:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_username(CongDispspecElement* element)
 {
@@ -389,6 +439,12 @@ cong_dispspec_element_username(CongDispspecElement* element)
 	}
 }
 
+/**
+ * cong_dispspec_element_get_description:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_description(CongDispspecElement *element)
 {
@@ -397,6 +453,12 @@ cong_dispspec_element_get_description(CongDispspecElement *element)
 	return find_best_string_for_language (element->hash_of_language_to_short_desc);
 }
 
+/**
+ * cong_dispspec_element_get_icon:
+ * @element:
+ *
+ * TODO: Write me
+ */
 GdkPixbuf*
 cong_dispspec_element_get_icon(CongDispspecElement *element)
 {
@@ -408,6 +470,13 @@ cong_dispspec_element_get_icon(CongDispspecElement *element)
 	return element->icon16;
 }
 
+/**
+ * cong_dispspec_element_get_value_for_key:
+ * @key:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_value_for_key (const gchar *key, 
 					 const CongDispspecElement *element)
@@ -419,6 +488,12 @@ cong_dispspec_element_get_value_for_key (const gchar *key,
 				    key);
 }
 
+/**
+ * cong_dispspec_element_type:
+ * @element:
+ *
+ * TODO: Write me
+ */
 enum CongElementType
 cong_dispspec_element_type(CongDispspecElement *element)
 {
@@ -427,6 +502,12 @@ cong_dispspec_element_type(CongDispspecElement *element)
 	return element->type;
 }
 
+/**
+ * cong_dispspec_element_get_whitespace:
+ * @element:
+ *
+ * TODO: Write me
+ */
 enum CongWhitespaceHandling
 cong_dispspec_element_get_whitespace (CongDispspecElement *element)
 {
@@ -435,6 +516,13 @@ cong_dispspec_element_get_whitespace (CongDispspecElement *element)
 	return element->whitespace;
 }
 
+/**
+ * cong_dispspec_element_set_whitespace:
+ * @element:
+ * @whitespace:
+ *
+ * TODO: Write me
+ */
 void
 cong_dispspec_element_set_whitespace (CongDispspecElement *element,
 				      enum CongWhitespaceHandling whitespace)
@@ -444,13 +532,24 @@ cong_dispspec_element_set_whitespace (CongDispspecElement *element,
 	element->whitespace = whitespace;
 }
 
-
+/**
+ * cong_dispspec_element_collapseto:
+ * @element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dispspec_element_collapseto(CongDispspecElement *element)
 {
 	return element->collapseto;
 }
 
+/**
+ * cong_dispspec_element_is_structural:
+ * @element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dispspec_element_is_structural(CongDispspecElement *element)
 {
@@ -463,6 +562,12 @@ cong_dispspec_element_is_structural(CongDispspecElement *element)
 	}
 }
 
+/**
+ * cong_dispspec_element_is_span:
+ * @element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dispspec_element_is_span(CongDispspecElement *element)
 {
@@ -476,6 +581,13 @@ cong_dispspec_element_is_span(CongDispspecElement *element)
 }
 
 #if NEW_LOOK
+/**
+ * cong_dispspec_element_gc:
+ * @element:
+ * @usage:
+ *
+ * TODO: Write me
+ */
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage)
 {
@@ -485,6 +597,13 @@ cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage 
 	return element->gc_array[usage];
 }
 
+/**
+ * cong_dispspec_element_col:
+ * @element:
+ * @usage:
+ *
+ * TODO: Write me
+ */
 const GdkColor*
 cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage)
 {
@@ -495,6 +614,12 @@ cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage
 }
 
 #else
+/**
+ * cong_dispspec_element_gc:
+ * @element:
+ *
+ * TODO: Write me
+ */
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element)
 {
@@ -503,6 +628,12 @@ cong_dispspec_element_gc(CongDispspecElement *element)
 	return element->gc;
 }
 
+/**
+ * cong_dispspec_element_col:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const GdkColor*
 cong_dispspec_element_col(CongDispspecElement *element)
 {
@@ -512,6 +643,12 @@ cong_dispspec_element_col(CongDispspecElement *element)
 }
 #endif
 
+/**
+ * cong_dispspec_element_header_info:
+ * @element:
+ *
+ * TODO: Write me
+ */
 CongDispspecElementHeaderInfo*
 cong_dispspec_element_header_info(CongDispspecElement *element)
 {
@@ -520,6 +657,12 @@ cong_dispspec_element_header_info(CongDispspecElement *element)
 	return element->header_info;
 }
 
+/**
+ * cong_dispspec_element_header_info_get_xpath_expression:
+ * @header_info:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeaderInfo *header_info)
 {
@@ -534,7 +677,13 @@ cong_dispspec_element_header_info_get_xpath_expression (CongDispspecElementHeade
 	}
 }
 
-
+/**
+ * cong_dispspec_element_get_title:
+ * @element:
+ * @x:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
 {
@@ -629,6 +778,13 @@ cong_dispspec_element_get_title(CongDispspecElement *element, CongNodePtr x)
 #endif
 }
 
+/**
+ * cong_dispspec_element_get_section_header_text:
+ * @element:
+ * @x:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x)
 {
@@ -655,6 +811,13 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
 	}
 }
 
+/**
+ * cong_dispspec_element_get_font:
+ * @element:
+ * @role:
+ *
+ * TODO: Write me
+ */
 CongFont*
 cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role)
 {
@@ -666,6 +829,12 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 				  role);
 }
 
+/**
+ * cong_dispspec_element_get_editor_service_id:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_editor_service_id(CongDispspecElement *element)
 {
@@ -674,6 +843,12 @@ cong_dispspec_element_get_editor_service_id(CongDispspecElement *element)
 	return element->editor_service_id;
 }
 
+/**
+ * cong_dispspec_element_get_property_dialog_service_id:
+ * @element:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *element)
 {
@@ -682,6 +857,12 @@ cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *elemen
 	return element->property_dialog_service_id;
 }
 
+/**
+ * cong_dispspec_element_from_xml:
+ * @xml_element:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 {
@@ -770,6 +951,13 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 	return element;
 }
 
+/**
+ * cong_dispspec_element_to_xml:
+ * @element:
+ * @xml_doc:
+ *
+ * TODO: Write me
+ */
 xmlNodePtr
 cong_dispspec_element_to_xml (const CongDispspecElement *element,
 			      xmlDocPtr xml_doc)

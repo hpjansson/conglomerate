@@ -73,6 +73,15 @@ cong_node_modification_set_text_instance_init (CongNodeModificationSetText *node
 	node->private = g_new0(CongNodeModificationSetTextDetails,1);
 }
 
+/**
+ * cong_node_modification_set_text_construct:
+ * @node_modification_set_text:
+ * @doc:
+ * @node:
+ * @new_content:
+ *
+ * TODO: Write me
+ */
 CongNodeModificationSetText*
 cong_node_modification_set_text_construct (CongNodeModificationSetText *node_modification_set_text,
 					   CongDocument *doc,
@@ -89,6 +98,14 @@ cong_node_modification_set_text_construct (CongNodeModificationSetText *node_mod
 	return node_modification_set_text;
 }
 
+/**
+ * cong_node_modification_set_text_new:
+ * @doc:
+ * @node:
+ * @new_content:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_node_modification_set_text_new (CongDocument *doc,
 				     CongNodePtr node,
@@ -170,4 +187,3 @@ redo (CongModification *modification)
 					     PRIVATE (node_modification_set_text)->new_content);
 	cong_document_end_edit (doc);
 }
-

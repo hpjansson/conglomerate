@@ -56,7 +56,16 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 					  gpointer user_data);
 
 /* Plugin hooks: */
-gboolean dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+/**
+ * dtd_importer_mime_filter:
+ * @importer:
+ * @mime_type:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -68,7 +77,18 @@ gboolean dtd_importer_mime_filter(CongServiceImporter *importer, const gchar *mi
 	}
 }
 
-void dtd_to_xds_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * dtd_to_xds_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+dtd_to_xds_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	xmlDtdPtr dtd;
 
@@ -98,8 +118,18 @@ void dtd_to_xds_importer_action_callback(CongServiceImporter *importer, const gc
 	}
 }
 
-
-void dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * dtd_to_rng_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	xmlDtdPtr dtd;
 
@@ -121,31 +151,69 @@ void dtd_to_rng_importer_action_callback(CongServiceImporter *importer, const gc
 	}
 }
 
-void dtd_to_w3c_xml_schema_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * dtd_to_w3c_xml_schema_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+dtd_to_w3c_xml_schema_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_w3c_xml_schema_importer_action_callback");
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as W3C XML Schema");
 }
 
-void dtd_to_schematron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * dtd_to_schematron_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+dtd_to_schematron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_schematron_importer_action_callback");
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as Schematron Schema");
 }
 
-void dtd_to_examplotron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * dtd_to_examplotron_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+dtd_to_examplotron_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("dtd_to_examplotron_importer_action_callback");
 
 	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as Examplotron Schema");
 }
 
-
-
- /* would be exposed as "plugin_register"? */
-gboolean plugin_dtd_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_dtd_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_dtd_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -193,7 +261,14 @@ gboolean plugin_dtd_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_dtd_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_dtd_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_dtd_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -300,6 +375,13 @@ make_rng_from_dtd (xmlDtdPtr dtd,
 
 /* Implementation of CongDTD2RNGConverter: */
 
+/**
+ * cong_dtd2rng_converter_new:
+ * @dtd:
+ * @list_of_start_elements:
+ *
+ * TODO: Write me
+ */
 CongDTD2RNGConverter*
 cong_dtd2rng_converter_new (xmlDtdPtr dtd,
 			    GList *list_of_start_elements)
@@ -317,12 +399,25 @@ cong_dtd2rng_converter_new (xmlDtdPtr dtd,
 	return converter;
 }
 
+/**
+ * cong_dtd2rng_converter_free:
+ * @converter: a #CongDTD2RNGConverter
+ *
+ * Calls g_free on @converter
+ */
 void
 cong_dtd2rng_converter_free (CongDTD2RNGConverter *converter)
 {
 	g_free (converter);
 }
 
+/**
+ * cong_dtd2rng_converter_is_start_element:
+ * @converter:
+ * @dtd_element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dtd2rng_converter_is_start_element (CongDTD2RNGConverter *converter,
 					 xmlElementPtr dtd_element)
@@ -344,6 +439,13 @@ cong_dtd2rng_converter_is_start_element (CongDTD2RNGConverter *converter,
 /*
   Count references; they can happen in the main DTD, or in the <start> element (if any):
 */
+/**
+ * cong_dtd2rng_converter_get_element_ref_count:
+ * @converter:
+ * @dtd_element:
+ *
+ * TODO: Write me
+ */
 guint
 cong_dtd2rng_converter_get_element_ref_count (CongDTD2RNGConverter *converter,
 					      xmlElementPtr dtd_element)
@@ -371,6 +473,13 @@ cong_dtd2rng_converter_get_element_ref_count (CongDTD2RNGConverter *converter,
    Elements need to be wrapped with a define if they are referenced more than once (or if the
    user has requested a flat schema?)
 */
+/**
+ * cong_dtd2rng_converter_should_element_have_define:
+ * @converter:
+ * @dtd_element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dtd2rng_converter_should_element_have_define (CongDTD2RNGConverter *converter,
 						   xmlElementPtr dtd_element)
@@ -390,6 +499,12 @@ cong_dtd2rng_converter_should_element_have_define (CongDTD2RNGConverter *convert
 	}
 }
 
+/**
+ * cong_dtd2rng_converter_make_schema:
+ * @converter:
+ *
+ * TODO: Write me
+ */
 xmlDocPtr
 cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 {
@@ -461,7 +576,6 @@ cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 
 }
 
-
 static void
 element_reference_callback_add_comment (xmlDtdPtr dtd,
 					xmlElementPtr dtd_element,
@@ -476,6 +590,14 @@ element_reference_callback_add_comment (xmlDtdPtr dtd,
 }
 
 /* Adds the element either via a ref, or directly inline, depending on whether its referenced elsewhere or not: */
+/**
+ * cong_dtd2rng_converter_add_element_or_ref:
+ * @converter:
+ * @dtd_element:
+ * @parent_node:
+ *
+ * TODO: Write me
+ */
 void
 cong_dtd2rng_converter_add_element_or_ref (CongDTD2RNGConverter *converter,
 					   xmlElementPtr dtd_element,
@@ -496,6 +618,14 @@ cong_dtd2rng_converter_add_element_or_ref (CongDTD2RNGConverter *converter,
 
 
 /* Add a <ref name="foobar"> tag: */
+/**
+ * cong_dtd2rng_converter_add_rng_element_ref:
+ * @converter:
+ * @dtd_element:
+ * @parent_node:
+ *
+ * TODO: Write me
+ */
 void
 cong_dtd2rng_converter_add_rng_element_ref (CongDTD2RNGConverter *converter,
 					    xmlElementPtr dtd_element,
@@ -514,6 +644,14 @@ cong_dtd2rng_converter_add_rng_element_ref (CongDTD2RNGConverter *converter,
 }
 
 /* Create a RELAX NG <element>, either somewhere inside a content model, or inside a <define> element */
+/**
+ * cong_dtd2rng_converter_add_rng_element_inline:
+ * @converter:
+ * @dtd_element:
+ * @parent_node:
+ *
+ * TODO: Write me
+ */
 void
 cong_dtd2rng_converter_add_rng_element_inline (CongDTD2RNGConverter *converter,
 					       xmlElementPtr dtd_element,
@@ -832,4 +970,3 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 		break;
 	}
 }
-

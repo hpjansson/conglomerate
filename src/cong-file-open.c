@@ -23,7 +23,14 @@ struct force_dialog
 	const gchar *filename_extension;
 };
 
-void force_load(gpointer data)
+/**
+ * force_load:
+ * @data:
+ *
+ * TODO: Write me
+ */
+void 
+force_load(gpointer data)
 {
 	struct force_dialog *the_dlg = (struct force_dialog*)data;
 
@@ -37,6 +44,15 @@ void force_load(gpointer data)
 	g_assert(the_dlg->ds);
 }
 
+/**
+ * query_for_forced_dispspec:
+ * @what_failed:
+ * @doc:
+ * @parent_window:
+ * @filename_extension:
+ *
+ * TODO: Write me
+ */
 CongDispspec* 
 query_for_forced_dispspec (gchar *what_failed, 
 			   xmlDocPtr doc, 
@@ -70,6 +86,12 @@ query_for_forced_dispspec (gchar *what_failed,
 	}
 }
 
+/**
+ * get_filename_extension:
+ * @uri:
+ *
+ * TODO: Write me
+ */
 gchar*
 get_filename_extension (const GnomeVFSURI *uri)
 {
@@ -92,6 +114,13 @@ get_filename_extension (const GnomeVFSURI *uri)
 	return result;
 }
 
+/**
+ * open_document_do:
+ * @doc_name:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void 
 open_document_do (const gchar* doc_name, 
 		  GtkWindow *parent_window)
@@ -158,9 +187,14 @@ open_document_do (const gchar* doc_name,
 
 }
 
-
-
-void open_document(GtkWindow *parent_window)
+/**
+ * open_document:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+void 
+open_document(GtkWindow *parent_window)
 {
 	char *doc_name;
 
@@ -180,7 +214,15 @@ void open_document(GtkWindow *parent_window)
 	g_free(doc_name);
 }
 
-gint toolbar_callback_open(GtkWidget *widget, gpointer data)
+/**
+ * toolbar_callback_open:
+ * @widget:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_open(GtkWidget *widget, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 

@@ -67,6 +67,17 @@ cong_editor_area_border_instance_init (CongEditorAreaBorder *area_border)
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_border_construct:
+ * @area_border:
+ * @editor_widget:
+ * @left_pixels:
+ * @right_pixels:
+ * @top_pixels:
+ * @bottom_pixels:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
 				   CongEditorWidget3 *editor_widget,
@@ -86,6 +97,16 @@ cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
 	return CONG_EDITOR_AREA (area_border);
 }
 
+/**
+ * cong_editor_area_border_new:
+ * @editor_widget:
+ * @left_pixels:
+ * @right_pixels:
+ * @top_pixels:
+ * @bottom_pixels:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 			     guint left_pixels,

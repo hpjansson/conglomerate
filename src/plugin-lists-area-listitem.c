@@ -58,6 +58,14 @@ cong_editor_area_listitem_instance_init (CongEditorAreaListitem *area_listitem)
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_listitem_construct:
+ * @area_listitem:
+ * @editor_widget:
+ * @label:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 				     CongEditorWidget3 *editor_widget,
@@ -76,6 +84,13 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 	return CONG_EDITOR_AREA (area_listitem);
 }
 
+/**
+ * cong_editor_area_listitem_new:
+ * @editor_widget:
+ * @label:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_listitem_new (CongEditorWidget3 *editor_widget,
 			       const gchar *label)
@@ -91,6 +106,13 @@ cong_editor_area_listitem_new (CongEditorWidget3 *editor_widget,
 		 label);
 }
 
+/**
+ * cong_editor_area_listitem_set_label:
+ * @area_listitem:
+ * @label:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_listitem_set_label (CongEditorAreaListitem *area_listitem,
 				     const gchar *label)

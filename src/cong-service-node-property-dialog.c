@@ -33,6 +33,17 @@ struct CongServiceNodePropertyDialogPrivate
 
 CONG_DEFINE_CLASS (CongServiceNodePropertyDialog, cong_service_node_property_dialog, CONG_SERVICE_NODE_PROPERTY_DIALOG, CongService, CONG_SERVICE_TYPE)
 
+/**
+ * cong_service_node_property_dialog_construct:
+ * @node_property_dialog:
+ * @name:
+ * @description:
+ * @service_id:
+ * @factory_method:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_service_node_property_dialog_construct (CongServiceNodePropertyDialog* node_property_dialog,
 					     const gchar *name, 
@@ -56,9 +67,18 @@ cong_service_node_property_dialog_construct (CongServiceNodePropertyDialog* node
 	return node_property_dialog;
 }
 
-GtkWidget *cong_custom_property_dialog_make(CongServiceNodePropertyDialog *node_property_dialog,
-					    CongDocument *doc,
-					    CongNodePtr node)
+/**
+ * cong_custom_property_dialog_make:
+ * @node_property_dialog:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GtkWidget *
+cong_custom_property_dialog_make(CongServiceNodePropertyDialog *node_property_dialog,
+				 CongDocument *doc,
+				 CongNodePtr node)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_NODE_PROPERTY_DIALOG (node_property_dialog), NULL);
 	g_return_val_if_fail (doc, NULL);

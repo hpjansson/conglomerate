@@ -315,7 +315,13 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 	return dialog;
 }
 
-
+/**
+ * cong_ui_hook_file_export:
+ * @doc:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_file_export (CongDocument *doc,
 			  GtkWindow *toplevel_window)

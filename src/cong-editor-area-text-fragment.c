@@ -82,6 +82,17 @@ cong_editor_area_text_fragment_instance_init (CongEditorAreaTextFragment *area_t
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_text_fragment_construct:
+ * @area_text_fragment:
+ * @editor_widget:
+ * @editor_node_text:
+ * @pango_layout:
+ * @line_index:
+ * @baseline:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_fragment,
 					  CongEditorWidget3 *editor_widget,
@@ -109,6 +120,16 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 	return CONG_EDITOR_AREA (area_text_fragment);
 }
 
+/**
+ * cong_editor_area_text_fragment_new:
+ * @editor_widget:
+ * @editor_node_text:
+ * @pango_layout:
+ * @line_index:
+ * @baseline:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 				    CongEditorNodeText *editor_node_text,
@@ -129,6 +150,12 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 		 baseline);
 }
 
+/**
+ * cong_editor_area_text_get_pango_layout_line:
+ * @area_text_fragment:
+ *
+ * TODO: Write me
+ */
 PangoLayoutLine*
 cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_text_fragment)
 {
@@ -142,7 +169,12 @@ cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_te
 	return line;
 }
 
-
+/**
+ * cong_editor_area_text_fragment_is_final_line:
+ * @area_text_fragment:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_area_text_fragment_is_final_line (CongEditorAreaTextFragment *area_text_fragment)
 {
@@ -151,6 +183,15 @@ cong_editor_area_text_fragment_is_final_line (CongEditorAreaTextFragment *area_t
 	return ((PRIVATE(area_text_fragment)->line_index+1) == pango_layout_get_line_count (PRIVATE(area_text_fragment)->pango_layout));
 }
 
+/**
+ * cong_editor_area_text_fragment_x_to_index:
+ * @area_text_fragment:
+ * @x:
+ * @index_:
+ * @trailing:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_area_text_fragment_x_to_index (CongEditorAreaTextFragment *area_text_fragment,
 					   int x,

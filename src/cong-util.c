@@ -48,6 +48,15 @@
 
 #include "cong-attribute-editor.h"
 
+/**
+ * cong_util_load_glade_file:
+ * @filename:
+ * @root:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 GladeXML*
 cong_util_load_glade_file (const gchar *filename,
 			   const gchar *root,
@@ -83,6 +92,12 @@ cong_util_load_glade_file (const gchar *filename,
 	return xml;
 }
 
+/**
+ * cong_util_is_docbook:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 gboolean 
 cong_util_is_docbook (CongDocument *doc) 
 {
@@ -110,6 +125,12 @@ cong_util_is_docbook (CongDocument *doc)
 	return FALSE;
 }
 
+/**
+ * cong_util_is_pure_whitespace:
+ * @utf8_text:
+ *
+ * TODO: Write me
+ */
 gboolean 
 cong_util_is_pure_whitespace (const gchar *utf8_text)
 {
@@ -128,6 +149,12 @@ cong_util_is_pure_whitespace (const gchar *utf8_text)
 	return TRUE;
 }
 
+/**
+ * cong_util_cleanup_text:
+ * @src_text:
+ *
+ * TODO: Write me
+ */
 gchar* 
 cong_util_cleanup_text (const xmlChar *src_text) 
 {
@@ -172,6 +199,13 @@ cong_util_cleanup_text (const xmlChar *src_text)
 #endif
 }
 
+/**
+ * cong_util_text_header:
+ * @text:
+ * @truncation_length:
+ *
+ * TODO: Write me
+ */
 gchar* 
 cong_util_text_header (const xmlChar *text,
 		       guint truncation_length)
@@ -201,7 +235,11 @@ cong_util_text_header (const xmlChar *text,
 	return result;
 }
 
-
+/**
+ * cong_utils_get_norman_walsh_stylesheet_path:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void)
 {
@@ -215,6 +253,12 @@ cong_utils_get_norman_walsh_stylesheet_path(void)
        return resolved_path;
 }
 
+/**
+ * cong_utils_get_norman_walsh_stylesheet:
+ * @stylesheet_relative_path:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 {
@@ -232,6 +276,12 @@ cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 	return result;
 }
 
+/**
+ * cong_util_load_icon:
+ * @icon_basename:
+ *
+ * TODO: Write me
+ */
 GdkPixbuf*
 cong_util_load_icon (const gchar *icon_basename)
 {
@@ -255,6 +305,13 @@ cong_util_load_icon (const gchar *icon_basename)
 	return pixbuf;
 }
 
+/**
+ * cong_util_append:
+ * @string:
+ * @to_add:
+ *
+ * TODO: Write me
+ */
 void 
 cong_util_append (gchar **string, 
 		  const gchar *to_add)
@@ -271,6 +328,13 @@ cong_util_append (gchar **string,
 	*string = new_string;
 }
 
+/**
+ * cong_util_prepend:
+ * @string:
+ * @to_add:
+ *
+ * TODO: Write me
+ */
 void 
 cong_util_prepend (gchar **string, 
 		  const gchar *to_add)
@@ -288,6 +352,14 @@ cong_util_prepend (gchar **string,
 }
 
 #if (ENABLE_PRINTING && ENABLED_LIBFO)
+/**
+ * cong_util_print_xslfo:
+ * @toplevel_window:
+ * @gpc:
+ * @xml_doc:
+ *
+ * TODO: Write me
+ */
 void 
 cong_util_print_xslfo (GtkWindow *toplevel_window, 
 		       GnomePrintContext *gpc,
@@ -381,6 +453,15 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
 /**
    Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
  */
+/**
+ * cong_util_make_dtd:
+ * @xml_doc:
+ * @root_element:
+ * @ExternalID:
+ * @SystemID:
+ *
+ * TODO: Write me
+ */
 xmlDtdPtr
 cong_util_make_dtd (xmlDocPtr xml_doc,
 		    const xmlChar *root_element,
@@ -432,6 +513,15 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 /**
    Make DTD declaration, assigns it to the given document, and add it to the tree.
 */
+/**
+ * cong_util_add_external_dtd:
+ * @xml_doc:
+ * @root_element:
+ * @ExternalID:
+ * @SystemID:
+ *
+ * TODO: Write me
+ */
 xmlDtdPtr 
 cong_util_add_external_dtd (xmlDocPtr xml_doc, 
 			    const xmlChar *root_element,
@@ -478,6 +568,16 @@ static void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1,
 static GdkColor white = {0, 0xffff, 0xffff, 0xffff};
 
 /* Dodgy hack to do lines that blend to white: */
+/**
+ * cong_util_draw_blended_line:
+ * @w:
+ * @col:
+ * @x0:
+ * @y0:
+ * @x1:
+ *
+ * TODO: Write me
+ */
 void 
 cong_util_draw_blended_line (GtkWidget *w,
 			     const GdkColor *col,
@@ -508,6 +608,12 @@ cong_util_draw_blended_line (GtkWidget *w,
 	gdk_gc_unref(gc);
 }
 
+/**
+ * cong_util_get_int_from_rgb_hex:
+ * @string:
+ *
+ * TODO: Write me
+ */
 unsigned int
 cong_util_get_int_from_rgb_hex (const gchar *string)
 {
@@ -529,7 +635,13 @@ cong_util_get_int_from_rgb_hex (const gchar *string)
 	return(col);
 }
 
-
+/**
+ * cong_util_ns_equality:
+ * @xml_ns1:
+ * @xml_ns2:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_util_ns_equality (const xmlNs *xml_ns1,
 		       const xmlNs *xml_ns2)
@@ -544,6 +656,13 @@ cong_util_ns_equality (const xmlNs *xml_ns1,
 					  xml_ns2->href);
 }
 
+/**
+ * cong_util_ns_uri_equality:
+ * @uri0:
+ * @uri1:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_util_ns_uri_equality (const gchar* uri0, 
 			   const gchar* uri1)
@@ -553,6 +672,13 @@ cong_util_ns_uri_equality (const gchar* uri0,
 
 }
 
+/**
+ * cong_util_ns_uri_sort_order:
+ * @uri0:
+ * @uri1:
+ *
+ * TODO: Write me
+ */
 gint
 cong_util_ns_uri_sort_order (const gchar* uri0, 
 			     const gchar* uri1)
@@ -577,6 +703,13 @@ cong_util_ns_uri_sort_order (const gchar* uri0,
 
 }
 
+/**
+ * cong_util_attribute_value_equality:
+ * @value0:
+ * @value1:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_util_attribute_value_equality (const gchar *value0,
 				    const gchar *value1)
@@ -596,7 +729,13 @@ cong_util_attribute_value_equality (const gchar *value0,
 	}
 }
 
-
+/**
+ * cong_element_description_new:
+ * @ns_uri:
+ * @local_name:
+ *
+ * TODO: Write me
+ */
 CongElementDescription*
 cong_element_description_new (const gchar *ns_uri,
 			      const gchar *local_name)
@@ -615,6 +754,12 @@ cong_element_description_new (const gchar *ns_uri,
 	return element_desc;
 }
 
+/**
+ * cong_element_description_clone:
+ * @element_desc:
+ *
+ * TODO: Write me
+ */
 CongElementDescription*
 cong_element_description_clone (const CongElementDescription *element_desc)
 {
@@ -632,6 +777,12 @@ cong_element_description_clone (const CongElementDescription *element_desc)
 	return new_element_desc;
 }
 
+/**
+ * cong_element_description_free:
+ * @element_desc:
+ *
+ * TODO: Write me
+ */
 void
 cong_element_description_free (CongElementDescription *element_desc)
 {
@@ -643,6 +794,14 @@ cong_element_description_free (CongElementDescription *element_desc)
 	g_free (element_desc->local_name);
 }
 
+/**
+ * cong_element_description_make_node:
+ * @element_desc:
+ * @doc:
+ * @ns_search_node:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_element_description_make_node (const CongElementDescription *element_desc,
 				    CongDocument *doc,
@@ -664,6 +823,13 @@ cong_element_description_make_node (const CongElementDescription *element_desc,
 	return new_node;	
 }
 
+/**
+ * cong_element_description_get_dispspec_element_for_doc:
+ * @element_desc:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 cong_element_description_get_dispspec_element_for_doc (const CongElementDescription *element_desc,
 						       CongDocument *doc)
@@ -680,6 +846,13 @@ cong_element_description_get_dispspec_element_for_doc (const CongElementDescript
 									   ds);
 }
 
+/**
+ * cong_element_description_get_dispspec_element_for_dispspec:
+ * @element_desc:
+ * @ds:
+ *
+ * TODO: Write me
+ */
 CongDispspecElement*
 cong_element_description_get_dispspec_element_for_dispspec (const CongElementDescription *element_desc,
 							    CongDispspec *ds)
@@ -702,7 +875,12 @@ cong_element_description_get_qualified_name (const CongElementDescription *eleme
 }
 #endif
 
-
+/**
+ * cong_element_description_list_free:
+ * @list_of_element_desc:
+ *
+ * TODO: Write me
+ */
 void
 cong_element_description_list_free (GList *list_of_element_desc)
 {
@@ -723,6 +901,15 @@ enum {
 	NUM_FIELDS
 };
 
+/**
+ * sort_func_ds_user_visible_name:
+ * @model:
+ * @a:
+ * @b:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 gint
 sort_func_ds_user_visible_name (GtkTreeModel *model,
 				GtkTreeIter *a,
@@ -764,6 +951,15 @@ sort_func_ds_user_visible_name (GtkTreeModel *model,
 	return result;
 }
 
+/**
+ * sort_func_element_local_name:
+ * @model:
+ * @a:
+ * @b:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 gint
 sort_func_element_local_name (GtkTreeModel *model,
 			      GtkTreeIter *a,
@@ -802,7 +998,15 @@ selection_changed_cb (GtkTreeSelection *selection,
 				  gtk_tree_selection_get_selected (selection, NULL, NULL));
 }
 
-
+/**
+ * cong_util_modal_element_selection_dialog:
+ * @title:
+ * @description:
+ * @doc:
+ * @elements:
+ *
+ * TODO: Write me
+ */
 CongElementDescription*
 cong_util_modal_element_selection_dialog (const gchar *title, 
 					  const gchar *description,
@@ -980,7 +1184,14 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 	return result;
 }
 
-
+/**
+ * cong_util_make_menu_item:
+ * @label:
+ * @tip:
+ * @pixbuf:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_util_make_menu_item (const gchar *label,
 			  const gchar *tip,
@@ -1008,6 +1219,12 @@ cong_util_make_menu_item (const gchar *label,
 	return GTK_MENU_ITEM(item);
 }
 
+/**
+ * cong_util_make_stock_menu_item:
+ * @stock_id:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_util_make_stock_menu_item (const gchar *stock_id)
 {
@@ -1017,6 +1234,12 @@ cong_util_make_stock_menu_item (const gchar *stock_id)
 								 NULL));
 }
 
+/**
+ * cong_util_make_menu_item_for_dispspec_element:
+ * @element:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element)
 {
@@ -1043,6 +1266,13 @@ cong_util_make_menu_item_for_dispspec_element (CongDispspecElement *element)
 	return item;
 }
 
+/**
+ * cong_util_make_menu_item_for_element_desc:
+ * @element_desc:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_util_make_menu_item_for_element_desc (const CongElementDescription *element_desc,
 					   CongDocument *doc)
@@ -1063,6 +1293,12 @@ cong_util_make_menu_item_for_element_desc (const CongElementDescription *element
 	}
 }
 
+/**
+ * cong_util_add_menu_separator:
+ * @menu:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_util_add_menu_separator (GtkMenu *menu)
 {
@@ -1080,6 +1316,13 @@ cong_util_add_menu_separator (GtkMenu *menu)
 	return item;
 }
 
+/**
+ * cong_util_get_qualified_attribute_name:
+ * @namespace:
+ * @local_attribute_name:
+ *
+ * TODO: Write me
+ */
 char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 				       const xmlChar *local_attribute_name)

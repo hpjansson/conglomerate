@@ -40,6 +40,14 @@ element_callback_marshall (void *payload,
 			   xmlChar * name);
 
 /* Exported function definitions: */
+/**
+ * cong_dtd_for_each_element:
+ * @dtd:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_dtd_for_each_element (xmlDtdPtr dtd,
 			   CongDtdElementCallback callback,
@@ -56,9 +64,16 @@ cong_dtd_for_each_element (xmlDtdPtr dtd,
 	xmlHashScan (dtd->elements, 
 		     element_callback_marshall, 
 		     &marshall);
-
 }
 
+/**
+ * cong_dtd_for_each_attribute:
+ * @dtd_element:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void 
 cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
 			     CongDtdAttributeCallback callback,
@@ -76,7 +91,12 @@ cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
 	}
 }
 
-
+/**
+ * cong_dtd_element_guess_dispspec_type:
+ * @element:
+ *
+ * TODO: Write me
+ */
 enum CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
 {
@@ -92,6 +112,12 @@ cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
 	}
 }
 
+/**
+ * cong_dtd_element_content_can_contain_pcdata:
+ * @content:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 {
@@ -119,6 +145,13 @@ cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 	return FALSE;
 }
 
+/**
+ * cong_dtd_element_get_element_for_node:
+ * @dtd:
+ * @xml_node:
+ *
+ * TODO: Write me
+ */
 xmlElementPtr
 cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
 				       xmlNodePtr xml_node)
@@ -133,6 +166,13 @@ cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
 				     xml_node->name);
 }
 
+/**
+ * cong_dtd_content_model_node_is_element:
+ * @content:
+ * @dtd_element:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_dtd_content_model_node_is_element (xmlElementContentPtr content,
 					xmlElementPtr dtd_element)
@@ -180,6 +220,13 @@ find_content_callback (xmlElementPtr dtd_element,
 }
 
 
+/**
+ * cong_dtd_get_element_for_content:
+ * @dtd:
+ * @content:
+ *
+ * TODO: Write me
+ */
 xmlElementPtr 
 cong_dtd_get_element_for_content (xmlDtdPtr dtd,
 				  xmlElementContentPtr content)
@@ -260,6 +307,15 @@ element_callback_visit_cross_references (xmlElementPtr dtd_element,
 	}
 }
 
+/**
+ * cong_dtd_for_each_reference_to_element:
+ * @dtd:
+ * @dtd_element:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_dtd_for_each_reference_to_element (xmlDtdPtr dtd,
 					xmlElementPtr dtd_element,
@@ -282,7 +338,6 @@ cong_dtd_for_each_reference_to_element (xmlDtdPtr dtd,
 				   &cb_data);
 }
 
-
 static void
 element_reference_callback_count (xmlDtdPtr dtd,
 				  xmlElementPtr dtd_element,
@@ -294,6 +349,13 @@ element_reference_callback_count (xmlDtdPtr dtd,
 	(*count)++;
 }
 
+/**
+ * cong_dtd_count_references_to_element:
+ * @dtd:
+ * @dtd_element:
+ *
+ * TODO: Write me
+ */
 guint
 cong_dtd_count_references_to_element (xmlDtdPtr dtd,
 				      xmlElementPtr dtd_element)
@@ -321,6 +383,12 @@ element_callback_add_candidates (xmlElementPtr dtd_element,
 	}
 }
 
+/**
+ * cong_dtd_guess_start_elements:
+ * @dtd:
+ *
+ * TODO: Write me
+ */
 GList*
 cong_dtd_guess_start_elements (xmlDtdPtr dtd)
 {

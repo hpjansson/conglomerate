@@ -13,6 +13,14 @@
 #include <libxml/tree.h>
 #include "gxx-object-to-xml-tree.h"
 
+/**
+ * gxx_hash_table_of_children_with_pcdata_to_xml_tree:
+ * @key:
+ * @value:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 gxx_hash_table_of_children_with_pcdata_to_xml_tree (gpointer key,
 						    gpointer value,

@@ -74,6 +74,14 @@ cong_modification_set_dtd_ptr_instance_init (CongModificationSetDtdPtr *node)
 	node->private = g_new0(CongModificationSetDtdPtrDetails,1);
 }
 
+/**
+ * cong_modification_set_dtd_ptr_construct:
+ * @modification_set_dtd_ptr:
+ * @doc:
+ * @dtd_ptr:
+ *
+ * TODO: Write me
+ */
 CongModificationSetDtdPtr*
 cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification_set_dtd_ptr,
 					 CongDocument *doc,
@@ -92,6 +100,13 @@ cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification
 	return modification_set_dtd_ptr;
 }
 
+/**
+ * cong_modification_set_dtd_ptr_new:
+ * @doc:
+ * @dtd_ptr:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_modification_set_dtd_ptr_new (CongDocument *doc,
 					 xmlDtdPtr dtd_ptr)
@@ -101,6 +116,12 @@ cong_modification_set_dtd_ptr_new (CongDocument *doc,
 									  dtd_ptr));
 }
 
+/**
+ * finalize:
+ * @object:
+ *
+ * TODO: Write me
+ */
 void
 finalize (GObject *object)
 {

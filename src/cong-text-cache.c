@@ -77,6 +77,14 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 				       int byte_offset);
 
 /* Exported function definitions: */
+/**
+ * cong_text_cache_new:
+ * @strip_whitespace:
+ * @string:
+ * @attr_list:
+ *
+ * TODO: Write me
+ */
 CongTextCache*
 cong_text_cache_new (gboolean strip_whitespace,
 		     const gchar *string,
@@ -97,6 +105,12 @@ cong_text_cache_new (gboolean strip_whitespace,
 	return cache;
 }
 
+/**
+ * cong_text_cache_free:
+ * @text_cache:
+ *
+ * TODO: Write me
+ */
 void
 cong_text_cache_free (CongTextCache* text_cache)
 {
@@ -114,6 +128,12 @@ cong_text_cache_free (CongTextCache* text_cache)
 	g_free (text_cache);
 }
 
+/**
+ * cong_text_cache_get_output_text:
+ * @text_cache:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_text_cache_get_output_text (CongTextCache* text_cache)
 {
@@ -127,6 +147,12 @@ cong_text_cache_get_output_text (CongTextCache* text_cache)
 	return text_cache->output_string;
 }
 
+/**
+ * cong_text_cache_get_output_attributes:
+ * @text_cache:
+ *
+ * TODO: Write me
+ */
 PangoAttrList*
 cong_text_cache_get_output_attributes (CongTextCache* text_cache)
 {
@@ -144,7 +170,13 @@ cong_text_cache_get_output_attributes (CongTextCache* text_cache)
 	return text_cache->output_attr_list;
 }
 
-
+/**
+ * cong_text_cache_set_input_text:
+ * @text_cache:
+ * @input_string:
+ *
+ * TODO: Write me
+ */
 void
 cong_text_cache_set_input_text (CongTextCache* text_cache,
 				const gchar* input_string)
@@ -160,6 +192,13 @@ cong_text_cache_set_input_text (CongTextCache* text_cache,
 	clear_cache (text_cache);
 }
 
+/**
+ * cong_text_cache_set_input_attributes:
+ * @text_cache:
+ * @attr_list:
+ *
+ * TODO: Write me
+ */
 void
 cong_text_cache_set_input_attributes (CongTextCache* text_cache,
 				      PangoAttrList *attr_list)
@@ -180,7 +219,14 @@ cong_text_cache_set_input_attributes (CongTextCache* text_cache,
 	}
 }
 
-
+/**
+ * cong_text_cache_convert_stripped_byte_offset_to_original:
+ * @text_cache:
+ * @stripped_byte_offset:
+ * @original_byte_offset:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_cache,
 							  int stripped_byte_offset,
@@ -216,6 +262,14 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
 	return FALSE;
 }
 
+/**
+ * cong_text_cache_convert_original_byte_offset_to_stripped:
+ * @text_cache:
+ * @original_byte_offset:
+ * @stripped_byte_offset:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,
 							  int original_byte_offset,
@@ -523,5 +577,3 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 
 	return NULL;
 }
-
-

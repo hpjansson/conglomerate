@@ -43,12 +43,11 @@ on_preferences_dialog_destroy (GtkWidget *widget,
 			       CongPreferencesDialogDetails *dialog_details);
 
 
-
 /**
  * cong_ui_hook_edit_preferences:
+ * @toplevel_window:
  *
  * Opens the Preferences dialog for Conglomerate
- *
  */
 void
 cong_ui_hook_edit_preferences (GtkWindow *toplevel_window)

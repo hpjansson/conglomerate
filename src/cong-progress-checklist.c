@@ -118,7 +118,13 @@ static void refresh_stages(CongProgressChecklistDetails *progress_checklist_deta
 	}
 }
 
-GtkWidget *cong_progress_checklist_new(void)
+/**
+ * cong_progress_checklist_new:
+ *
+ * TODO: Write me
+ */
+GtkWidget *
+cong_progress_checklist_new(void)
 {
 	GtkTable *widget = GTK_TABLE(gtk_table_new(0,2,FALSE));
 	CongProgressChecklistDetails *details = g_new0(CongProgressChecklistDetails, 1);
@@ -134,8 +140,16 @@ GtkWidget *cong_progress_checklist_new(void)
 	return GTK_WIDGET(widget);
 }
 
-void cong_progress_checklist_add_stage(CongProgressChecklist *progress_checklist,
-				       const gchar *stage_name)
+/**
+ * cong_progress_checklist_add_stage:
+ * @progress_checklist:
+ * @stage_name:
+ *
+ * TODO: Write me
+ */
+void 
+cong_progress_checklist_add_stage(CongProgressChecklist *progress_checklist,
+				  const gchar *stage_name)
 {
 	CongProgressChecklistDetails *details;
 	CongProgressChecklistStage *new_stage;
@@ -179,7 +193,14 @@ void cong_progress_checklist_add_stage(CongProgressChecklist *progress_checklist
 
 }
 
-void cong_progress_checklist_complete_stage(CongProgressChecklist *progress_checklist)
+/**
+ * cong_progress_checklist_complete_stage:
+ * @progress_checklist:
+ *
+ * TODO: Write me
+ */
+void 
+cong_progress_checklist_complete_stage(CongProgressChecklist *progress_checklist)
 {
 	CongProgressChecklistDetails *details;
 
@@ -193,8 +214,16 @@ void cong_progress_checklist_complete_stage(CongProgressChecklist *progress_chec
 	refresh_stages(details);
 }
 
-GtkWidget *cong_progress_checklist_dialog_new(const gchar *title,
-					      GtkWindow *parent_window)
+/**
+ * cong_progress_checklist_dialog_new:
+ * @title:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+GtkWidget *
+cong_progress_checklist_dialog_new(const gchar *title,
+				   GtkWindow *parent_window)
 {
 	GtkWidget *dialog;
 	CongProgressChecklistDialogDetails *details = g_new0(CongProgressChecklistDialogDetails, 1);
@@ -218,7 +247,14 @@ GtkWidget *cong_progress_checklist_dialog_new(const gchar *title,
 	return GTK_WIDGET(dialog);
 }
 
-CongProgressChecklist *cong_progress_checklist_dialog_get_progress_checklist(CongProgressChecklistDialog *progress_checklist_dialog)
+/**
+ * cong_progress_checklist_dialog_get_progress_checklist:
+ * @progress_checklist_dialog:
+ *
+ * TODO: Write me
+ */
+CongProgressChecklist *
+cong_progress_checklist_dialog_get_progress_checklist(CongProgressChecklistDialog *progress_checklist_dialog)
 {
 	CongProgressChecklistDialogDetails *details;
 
@@ -231,8 +267,16 @@ CongProgressChecklist *cong_progress_checklist_dialog_get_progress_checklist(Con
 	return details->progress_checklist;
 }
 
-void cong_progress_checklist_dialog_set_progress_bar(CongProgressChecklist *progress_checklist, 
-						    GtkWidget *progress_bar)
+/**
+ * cong_progress_checklist_dialog_set_progress_bar:
+ * @progress_checklist:
+ * @progress_bar:
+ *
+ * This function is not currently implemented
+ */
+void 
+cong_progress_checklist_dialog_set_progress_bar(CongProgressChecklist *progress_checklist, 
+						GtkWidget *progress_bar)
 {
 	/* FIXME: unwritten */
 }

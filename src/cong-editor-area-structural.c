@@ -118,6 +118,19 @@ cong_editor_area_structural_instance_init (CongEditorAreaStructural *area_struct
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_structural_construct:
+ * @area_structural:
+ * @editor_widget:
+ * @pixbuf:
+ * @text:
+ * @col_bold:
+ * @col_dim:
+ * @col_background:
+ * @col_text:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural,
 				       CongEditorWidget3 *editor_widget,
@@ -253,6 +266,18 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 	return CONG_EDITOR_AREA (area_structural);
 }
 
+/**
+ * cong_editor_area_structural_new:
+ * @editor_widget:
+ * @pixbuf:
+ * @text:
+ * @col_bold:
+ * @col_dim:
+ * @col_background:
+ * @col_text:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_structural_new (CongEditorWidget3 *editor_widget,
 				 GdkPixbuf *pixbuf,

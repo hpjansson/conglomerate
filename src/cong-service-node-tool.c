@@ -33,6 +33,21 @@ struct CongServiceNodeToolPrivate
 
 CONG_DEFINE_CLASS (CongServiceNodeTool, cong_service_node_tool, CONG_SERVICE_NODE_TOOL, CongServiceTool, CONG_SERVICE_TOOL_TYPE)
 
+/**
+ * cong_service_node_tool_construct:
+ * @tool:
+ * @name: 
+ * @description:
+ * @service_id:
+ * @menu_text:
+ * @tooltip_text:
+ * @tooltip_further_text:
+ * @node_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceNodeTool*
 cong_service_node_tool_construct (CongServiceNodeTool *tool,
 				  const gchar *name, 
@@ -64,6 +79,14 @@ cong_service_node_tool_construct (CongServiceNodeTool *tool,
 	return tool;
 }
 
+/**
+ * cong_service_node_tool_filter_node:
+ * @tool:
+ * @doc: 
+ * @node:
+ *
+ * TODO: Write me
+ */
 enum NodeToolFilterResult
 cong_service_node_tool_filter_node (CongServiceNodeTool *tool, 
 				    CongDocument *doc,
@@ -80,6 +103,15 @@ cong_service_node_tool_filter_node (CongServiceNodeTool *tool,
 					    cong_service_tool_get_user_data (CONG_SERVICE_TOOL (tool)));
 }
 
+/**
+ * cong_service_node_tool_invoke:
+ * @tool:
+ * @doc: 
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 void 
 cong_service_node_tool_invoke (CongServiceNodeTool *tool,
 			       CongDocument *doc,

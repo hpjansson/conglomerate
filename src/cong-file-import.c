@@ -61,6 +61,12 @@ static void add_importer_to_list(CongServiceImporter *importer, gpointer user_da
 	}
 }
 
+/**
+ * cong_ui_hook_file_import:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void
 cong_ui_hook_file_import (GtkWindow *toplevel_window)
 {
@@ -149,6 +155,15 @@ cong_ui_hook_file_import (GtkWindow *toplevel_window)
 
 }
 
+/**
+ * cong_file_import_dialog_run:
+ * @toplevel_window:
+ * @filename:
+ * @mime_type:
+ * @list_of_valid_importers:
+ *
+ * TODO: Write me
+ */
 CongServiceImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
 			     const gchar *filename,

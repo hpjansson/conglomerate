@@ -86,6 +86,17 @@ cong_editor_area_text_comment_instance_init (CongEditorAreaTextComment *area_tex
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_text_comment_construct:
+ * @area_text_comment:
+ * @editor_widget:
+ * @font:
+ * @fg_col:
+ * @text_comment:
+ * @use_markup:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_comment_construct (CongEditorAreaTextComment *area_text_comment,
 					 CongEditorWidget3 *editor_widget,
@@ -120,6 +131,16 @@ cong_editor_area_text_comment_construct (CongEditorAreaTextComment *area_text_co
 	return CONG_EDITOR_AREA (area_text_comment);
 }
 
+/**
+ * cong_editor_area_text_comment_new:
+ * @editor_widget:
+ * @font:
+ * @fg_col:
+ * @text_comment:
+ * @use_markup:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_text_comment_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,

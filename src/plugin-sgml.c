@@ -31,14 +31,30 @@
 
 #include "cong-fake-plugin-hooks.h"
 
-gchar *cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
+/**
+ * cong_ui_make_what_failed_string_for_import:
+ * @uri_string:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_ui_make_what_failed_string_for_import(const gchar *uri_string)
 {
 	gchar *return_val = g_strdup_printf(_("Conglomerate could not import the file \"%s\""), uri_string);
 
 	return return_val;
 }
 
-gboolean sgml_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+/**
+ * sgml_importer_mime_filter:
+ * @importer:
+ * @mime_type:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+sgml_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -70,7 +86,18 @@ static gboolean on_stderr(GIOChannel *source,
 }
 #endif
 
-void sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * sgml_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 #if 0
 	char* buffer;
@@ -172,8 +199,15 @@ void sgml_importer_action_callback(CongServiceImporter *importer, const gchar *u
 }
 
 
- /* would be exposed as "plugin_register"? */
-gboolean plugin_sgml_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_sgml_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_sgml_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 	
@@ -188,7 +222,14 @@ gboolean plugin_sgml_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_sgml_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_sgml_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_sgml_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

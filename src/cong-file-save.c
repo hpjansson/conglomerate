@@ -32,7 +32,15 @@
 #include "cong-file-selection.h"
 #include "cong-ui-hooks.h"
 
-gint toolbar_callback_save(GtkWidget *w, gpointer data)
+/**
+ * toolbar_callback_save:
+ * @w:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+toolbar_callback_save(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
@@ -40,7 +48,15 @@ gint toolbar_callback_save(GtkWidget *w, gpointer data)
 	return save_document(doc, cong_primary_window_get_toplevel(primary_window));
 }
 
-gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
+/**
+ * save_document_as:
+ * @doc:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+gint 
+save_document_as(CongDocument *doc, GtkWindow *parent_window)
 {
 	char *current_doc_name;
 	char *new_doc_name;
@@ -70,7 +86,15 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 	return TRUE;
 }
 
-gint save_document(CongDocument *doc, GtkWindow *parent_window) 
+/**
+ * save_document:
+ * @doc:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+gint 
+save_document(CongDocument *doc, GtkWindow *parent_window) 
 {
 	gchar *doc_name;
 

@@ -105,6 +105,18 @@ cong_editor_area_span_tag_instance_init (CongEditorAreaSpanTag *area_span_tag)
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_span_tag_construct:
+ * @area_span_tag:
+ * @editor_widget:
+ * @ds_element:
+ * @pixbuf:
+ * @text:
+ * @is_at_start:
+ * @is_at_end:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 				     CongEditorWidget3 *editor_widget,
@@ -155,6 +167,17 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 	return CONG_EDITOR_AREA (area_span_tag);
 }
 
+/**
+ * cong_editor_area_span_tag_new:
+ * @editor_widget:
+ * @ds_element:
+ * @pixbuf:
+ * @text:
+ * @is_at_start:
+ * @is_at_end:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
 			       CongDispspecElement *ds_element,

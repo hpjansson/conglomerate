@@ -34,6 +34,18 @@ struct CongServiceImporterPrivate
 
 CONG_DEFINE_CLASS (CongServiceImporter, cong_service_importer, CONG_SERVICE_IMPORTER, CongService, CONG_SERVICE_TYPE)
 
+/**
+ * cong_service_importer_construct:
+ * @importer:
+ * @name:
+ * @description:
+ * @id:
+ * @mime_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceImporter*
 cong_service_importer_construct (CongServiceImporter *importer,
 				 const gchar *name, 
@@ -63,7 +75,15 @@ cong_service_importer_construct (CongServiceImporter *importer,
 }
 
 /* Implementation of CongServiceImporter: */
-gboolean cong_importer_supports_mime_type(CongServiceImporter *importer, const gchar *mime_type)
+/**
+ * cong_importer_supports_mime_type:
+ * @importer:
+ * @mime_type:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_importer_supports_mime_type(CongServiceImporter *importer, const gchar *mime_type)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_IMPORTER (importer), FALSE);
 	g_return_val_if_fail (mime_type, FALSE);
@@ -76,7 +96,17 @@ gboolean cong_importer_supports_mime_type(CongServiceImporter *importer, const g
 
 }
 
-void cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
+/**
+ * cong_importer_invoke:
+ * @importer:
+ * @filename:
+ * @mime_type:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_IMPORTER (importer));
 	g_return_if_fail (filename);
@@ -89,4 +119,3 @@ void cong_importer_invoke(CongServiceImporter *importer, const gchar *filename, 
 						    mime_type, 
 						    PRIVATE (importer)->user_data, toplevel_window);
 }
-

@@ -51,6 +51,14 @@ cong_node_modification_instance_init (CongNodeModification *node)
 	node->private = g_new0(CongNodeModificationDetails,1);
 }
 
+/**
+ * cong_node_modification_construct:
+ * @node_modification:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongNodeModification*
 cong_node_modification_construct (CongNodeModification *node_modification,
 				  CongDocument *doc,
@@ -67,6 +75,12 @@ cong_node_modification_construct (CongNodeModification *node_modification,
 	return node_modification;
 }
 
+/**
+ * cong_node_modification_get_node:
+ * @node_modification:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_modification_get_node (CongNodeModification *node_modification)
 {

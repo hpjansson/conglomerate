@@ -75,18 +75,36 @@ cong_command_history_instance_init (CongCommandHistory *history)
 	history->private = g_new0(CongCommandHistoryDetails,1);
 }
 
+/**
+ * cong_command_history_construct:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 CongCommandHistory*
 cong_command_history_construct (CongCommandHistory *command_history)
 {
 	return command_history;
 }
 
+/**
+ * cong_command_history_new:
+ *
+ * TODO: Write me
+ */
 CongCommandHistory*
 cong_command_history_new (void)
 {
 	return cong_command_history_construct (CONG_COMMAND_HISTORY(g_object_new (CONG_COMMAND_HISTORY_TYPE, NULL)));
 }
 
+/**
+ * cong_command_history_add_command:
+ * @command_history:
+ * @command:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_history_add_command (CongCommandHistory *command_history,
 				  CongCommand *command)
@@ -114,6 +132,12 @@ cong_command_history_add_command (CongCommandHistory *command_history,
 	emit_changed (command_history);
 }
 
+/**
+ * cong_command_history_can_undo:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_command_history_can_undo (CongCommandHistory *command_history)
 {
@@ -122,6 +146,12 @@ cong_command_history_can_undo (CongCommandHistory *command_history)
 	return PRIVATE(command_history)->list_of_commands_to_undo!=NULL;
 }
 
+/**
+ * cong_command_history_can_redo:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_command_history_can_redo (CongCommandHistory *command_history)
 {
@@ -130,6 +160,12 @@ cong_command_history_can_redo (CongCommandHistory *command_history)
 	return PRIVATE(command_history)->list_of_commands_to_redo!=NULL;
 }
 
+/**
+ * cong_command_history_undo:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_history_undo (CongCommandHistory *command_history)
 {
@@ -157,6 +193,12 @@ cong_command_history_undo (CongCommandHistory *command_history)
 
 }
 
+/**
+ * cong_command_history_redo:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_history_redo (CongCommandHistory *command_history)
 {
@@ -183,6 +225,12 @@ cong_command_history_redo (CongCommandHistory *command_history)
 	}
 }
 
+/**
+ * cong_command_history_get_next_undo_command:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 CongCommand*
 cong_command_history_get_next_undo_command (CongCommandHistory *command_history)
 {
@@ -195,6 +243,12 @@ cong_command_history_get_next_undo_command (CongCommandHistory *command_history)
 	} 
 }
 
+/**
+ * cong_command_history_get_next_redo_command:
+ * @command_history:
+ *
+ * TODO: Write me
+ */
 CongCommand*
 cong_command_history_get_next_redo_command (CongCommandHistory *command_history)
 {

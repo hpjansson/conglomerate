@@ -71,6 +71,14 @@ cong_node_modification_make_orphan_instance_init (CongNodeModificationMakeOrphan
 	node->private = g_new0(CongNodeModificationMakeOrphanDetails,1);
 }
 
+/**
+ * cong_node_modification_make_orphan_construct:
+ * @node_modification_make_orphan:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongNodeModificationMakeOrphan*
 cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *node_modification_make_orphan,
 					      CongDocument *doc,
@@ -97,6 +105,13 @@ cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *no
 	return node_modification_make_orphan;
 }
 
+/**
+ * cong_node_modification_make_orphan_new:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_node_modification_make_orphan_new (CongDocument *doc,
 					CongNodePtr node)
@@ -204,4 +219,3 @@ redo (CongModification *modification)
 	g_assert (node->next == NULL);
 	g_assert (node->parent == NULL);
 }
-

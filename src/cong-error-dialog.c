@@ -17,6 +17,12 @@
 
 #define CONVENIENCE_BUTTON_ID (0)
 
+/**
+ * cong_error_dialog_run:
+ * @dialog:
+ *
+ * TODO: Write me
+ */
 void
 cong_error_dialog_run(GtkDialog* dialog)
 {
@@ -44,6 +50,12 @@ cong_error_dialog_run(GtkDialog* dialog)
 	}
 }
 
+/**
+ * cong_error_dialog_do:
+ * @dialog:
+ *
+ * TODO: Write me
+ */
 void
 cong_error_dialog_do(GtkDialog* dialog)
 {
@@ -51,7 +63,15 @@ cong_error_dialog_do(GtkDialog* dialog)
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-
+/**
+ * cong_error_dialog_new:
+ * @parent_window:
+ * @what_failed:
+ * @why_failed:
+ * @suggestions:
+ *
+ * TODO: Write me
+ */
 GtkDialog* 
 cong_error_dialog_new(GtkWindow *parent_window,
 		      const gchar* what_failed, 
@@ -102,6 +122,18 @@ cong_error_dialog_new(GtkWindow *parent_window,
 
 }
 
+/**
+ * cong_error_dialog_new_with_convenience:
+ * @parent_window:
+ * @what_failed:
+ * @why_failed:
+ * @suggestions:
+ * @convenience_label:
+ * @convenience_action:
+ * @convenience_data:
+ *
+ * TODO: Write me
+ */
 GtkDialog* 
 cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 				       const gchar* what_failed, 
@@ -169,6 +201,15 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
 	return GTK_DIALOG(dialog);
 }
 
+/**
+ * cong_error_dialog_new_from_unimplemented_feature:
+ * @parent_window:
+ * @what_failed:
+ * @filename:
+ * @linenum:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_unimplemented_feature(GtkWindow *parent_window,
 						 const gchar* what_failed, 
@@ -189,6 +230,17 @@ cong_error_dialog_new_from_unimplemented_feature(GtkWindow *parent_window,
 	return dialog;
 }
 
+/**
+ * cong_error_dialog_new_from_unimplemented_feature_with_bugzilla_id:
+ * @parent_window:
+ * @what_failed:
+ * @filename:
+ * @linenum:
+ * @bugzilla_url:
+ * @bugzilla_id:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_unimplemented_feature_with_bugzilla_id(GtkWindow *parent_window,
 								  const gchar* what_failed, 
@@ -228,6 +280,15 @@ static void on_gerror_details(gpointer data)
 
 /**
  * Routine to manufacture an error dialog for when some arbitrary operation fails but you have a GError available to you
+ */
+/**
+ * cong_error_dialog_new_from_gerror:
+ * @toplevel_window:
+ * @what_failed:
+ * @details:
+ * @error:
+ *
+ * TODO: Write me
  */
 GtkDialog*
 cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
@@ -271,6 +332,16 @@ cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
 	return dialog;
 }
 
+/**
+ * cong_error_dialog_new_from_shell_command_failure_with_command_line:
+ * @parent_window:
+ * @what_failed:
+ * @exit_status:
+ * @standard_error:
+ * @command_line:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *parent_window,
 								   const gchar *what_failed,
@@ -337,6 +408,16 @@ cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *pa
 	return dialog;
 }
 
+/**
+ * cong_error_dialog_new_from_shell_command_failure_with_argv:
+ * @parent_window:
+ * @what_failed:
+ * @exit_status:
+ * @standard_error:
+ * @argv:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_window,
 							   const gchar *what_failed,
@@ -361,6 +442,4 @@ cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_win
 	g_free(command_line);
 
 	return dialog;
-		
-	
 }

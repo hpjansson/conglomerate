@@ -35,6 +35,18 @@ struct CongServiceExporterPrivate
 
 CONG_DEFINE_CLASS (CongServiceExporter, cong_service_exporter, CONG_SERVICE_EXPORTER, CongService, CONG_SERVICE_TYPE)
 
+/**
+ * cong_service_exporter_construct:
+ * @exporter:
+ * @name:
+ * @description:
+ * @service_id:
+ * @doc_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceExporter*
 cong_service_exporter_construct (CongServiceExporter *exporter,
 				 const gchar *name, 
@@ -63,7 +75,15 @@ cong_service_exporter_construct (CongServiceExporter *exporter,
 }
 
 /* Implementation of CongServiceExporter: */
-gboolean cong_exporter_supports_document(CongServiceExporter *exporter, CongDocument *doc)
+/**
+ * cong_exporter_supports_document:
+ * @exporter:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_exporter_supports_document(CongServiceExporter *exporter, CongDocument *doc)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_EXPORTER (exporter), FALSE);
 	g_return_val_if_fail (doc, FALSE);
@@ -75,7 +95,17 @@ gboolean cong_exporter_supports_document(CongServiceExporter *exporter, CongDocu
 					       PRIVATE (exporter)->user_data);
 }
 
-void cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
+/**
+ * cong_exporter_invoke:
+ * @exporter:
+ * @doc:
+ * @uri:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_EXPORTER (exporter));
 	g_return_if_fail (doc);
@@ -90,7 +120,14 @@ void cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, cons
 						    toplevel_window);
 }
 
-gchar *cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
+/**
+ * cong_exporter_get_preferred_uri:
+ * @exporter:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
 {
 	gchar *gconf_key;
 	gchar *preferred_uri;
@@ -109,7 +146,15 @@ gchar *cong_exporter_get_preferred_uri(CongServiceExporter *exporter)
 	return preferred_uri;
 }
 
-void cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
+/**
+ * cong_exporter_set_preferred_uri:
+ * @exporter:
+ * @uri:
+ *
+ * TODO: Write me
+ */
+void 
+cong_exporter_set_preferred_uri(CongServiceExporter *exporter, const gchar *uri)
 {
 	gchar *gconf_key;
 

@@ -34,7 +34,18 @@ struct CongServicePrintMethodPrivate
 };
 CONG_DEFINE_CLASS (CongServicePrintMethod, cong_service_print_method, CONG_SERVICE_PRINT_METHOD, CongService, CONG_SERVICE_TYPE)
 
-
+/**
+ * cong_service_print_method_construct:
+ * @print_method:
+ * @name:
+ * @description:
+ * @service_id:
+ * @doc_filter:
+ * @action_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServicePrintMethod *
 cong_service_print_method_construct (CongServicePrintMethod *print_method,
 				     const gchar *name, 
@@ -63,7 +74,15 @@ cong_service_print_method_construct (CongServicePrintMethod *print_method,
 }
 
 /* Implementation of CongServicePrintMethod: */
-gboolean cong_print_method_supports_document(CongServicePrintMethod *print_method, CongDocument *doc)
+/**
+ * cong_print_method_supports_document:
+ * @print_method:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_print_method_supports_document(CongServicePrintMethod *print_method, CongDocument *doc)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_PRINT_METHOD (print_method), FALSE);
 	g_return_val_if_fail (doc, FALSE);
@@ -75,7 +94,17 @@ gboolean cong_print_method_supports_document(CongServicePrintMethod *print_metho
 						   PRIVATE (print_method)->user_data);
 }
 
-void cong_print_method_invoke(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)
+/**
+ * cong_print_method_invoke:
+ * @print_method:
+ * @doc:
+ * @gpc:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_print_method_invoke(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)
 {
 	g_return_if_fail (IS_CONG_SERVICE_PRINT_METHOD (print_method));
 	g_return_if_fail (doc);

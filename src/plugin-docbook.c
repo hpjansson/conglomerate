@@ -56,7 +56,16 @@ struct DocBookCreationInfo
 };
 #endif
 
-void factory_page_creation_callback_unified(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_page_creation_callback_unified:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_page_creation_callback_unified(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 #if 0
 	GnomeDruidPageStandard *which_settings_page;
@@ -159,7 +168,14 @@ static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_
 	return xml_dtd;
 }
 
-xmlDocPtr make_article(const xmlChar *title)
+/**
+ * make_article:
+ * @title:
+ *
+ * TODO: Write me
+ */
+xmlDocPtr 
+make_article(const xmlChar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -194,7 +210,16 @@ xmlDocPtr make_article(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_article(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_action_callback_article:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_action_callback_article(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -204,8 +229,14 @@ void factory_action_callback_article(CongServiceDocumentFactory *factory, CongNe
 						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
-
-xmlDocPtr make_book(const xmlChar *title)
+/**
+ * make_book:
+ * @title:
+ *
+ * TODO: Write me
+ */
+xmlDocPtr 
+make_book(const xmlChar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -247,7 +278,16 @@ xmlDocPtr make_book(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_action_callback_book:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -257,8 +297,14 @@ void factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFi
 						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
-
-xmlDocPtr make_set(const xmlChar *title)
+/**
+ * make_set:
+ * @title:
+ *
+ * TODO: Write me
+ */
+xmlDocPtr 
+make_set(const xmlChar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
@@ -286,7 +332,16 @@ xmlDocPtr make_set(const xmlChar *title)
 	return xml_doc;
 }
 
-void factory_action_callback_set(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_action_callback_set:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_action_callback_set(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 
@@ -296,7 +351,16 @@ void factory_action_callback_set(CongServiceDocumentFactory *factory, CongNewFil
 						   cong_new_file_assistant_get_toplevel(assistant));
 }
 
-gboolean text_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+/**
+ * text_importer_mime_filter:
+ * @importer:
+ * @mime_type:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+text_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -317,6 +381,12 @@ gboolean text_importer_mime_filter(CongServiceImporter *importer, const gchar *m
 }
 
 /* Internal stuff for the text importer: */
+/**
+ * cong_unichar_is_line_break:
+ * @c:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_unichar_is_line_break(gunichar c)
 {
@@ -463,6 +533,13 @@ cong_ucs4_is_list_item (gunichar *ucs4_input,
 	return FALSE;
 }
 
+/**
+ * should_merge:
+ * @ucs4_input_1:
+ * @ucs4_input_2:
+ *
+ * TODO: Write me
+ */
 gboolean
 should_merge (gunichar *ucs4_input_1,
 	      gunichar *ucs4_input_2)
@@ -486,6 +563,13 @@ should_merge (gunichar *ucs4_input_1,
 	return TRUE;
 }
 
+/**
+ * cong_ucs4_concat:
+ * @ucs4_input_1:
+ * @ucs4_input_2:
+ *
+ * TODO: Write me
+ */
 gunichar*
 cong_ucs4_concat (gunichar *ucs4_input_1,
 		  gunichar *ucs4_input_2)
@@ -514,7 +598,12 @@ cong_ucs4_concat (gunichar *ucs4_input_1,
 	return ucs4_result;
 }
 
-
+/**
+ * merge_lines:
+ * @list:
+ *
+ * TODO: Write me
+ */
 GList*
 merge_lines (GList *list)
 {
@@ -776,7 +865,18 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 	cong_document_end_edit (doc);
 }
 
-void text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * text_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -820,7 +920,16 @@ void text_importer_action_callback(CongServiceImporter *importer, const gchar *u
 	}
 }
 
-gboolean sourcecode_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
+/**
+ * sourcecode_importer_mime_filter:
+ * @importer:
+ * @mime_type:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+sourcecode_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
 {
 	g_return_val_if_fail(importer, FALSE);
 	g_return_val_if_fail(mime_type, FALSE);
@@ -834,7 +943,18 @@ gboolean sourcecode_importer_mime_filter(CongServiceImporter *importer, const gc
 	}
 }
 
-void sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * sourcecode_importer_action_callback:
+ * @importer:
+ * @uri:
+ * @mime_type:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -880,7 +1000,16 @@ void sourcecode_importer_action_callback(CongServiceImporter *importer, const gc
 	}
 }
 
-gboolean docbook_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
+/**
+ * docbook_exporter_document_filter:
+ * @exporter:
+ * @doc:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+docbook_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -888,7 +1017,18 @@ gboolean docbook_exporter_document_filter(CongServiceExporter *exporter, CongDoc
 	return cong_util_is_docbook(doc);
 }
 
-void html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * html_exporter_action_callback:
+ * @exporter:
+ * @doc:
+ * @uri:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 
@@ -909,7 +1049,18 @@ void html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *
 	g_free(stylesheet_path);
 }
 
-void pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * pdf_exporter_action_callback:
+ * @exporter:
+ * @doc:
+ * @uri:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 #if 1
 	GtkWidget *progress_checklist_dialog;
@@ -960,7 +1111,18 @@ void pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *d
 #endif
 }
 
-void fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * fo_exporter_action_callback:
+ * @exporter:
+ * @doc:
+ * @uri:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
 
@@ -981,7 +1143,15 @@ void fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *do
 	g_free(stylesheet_path);
 }
 
-#if (ENABLE_PRINTING &&ENABLE_LIBFO)
+#if (ENABLE_PRINTING && ENABLE_LIBFO)
+/**
+ * docbook_print_method_document_filter:
+ * @print_method:
+ * @doc:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 gboolean 
 docbook_print_method_document_filter (CongServicePrintMethod *print_method, 
 				      CongDocument *doc, 
@@ -993,6 +1163,16 @@ docbook_print_method_document_filter (CongServicePrintMethod *print_method,
 	return cong_util_is_docbook(doc);
 }
 
+/**
+ * docbook_print_method_action_callback:
+ * @print_method:
+ * @doc:
+ * @gpc:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
 void 
 docbook_print_method_action_callback (CongServicePrintMethod *print_method, 
 				      CongDocument *doc, 
@@ -1044,7 +1224,16 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
 }
 #endif /* #if ENABLE_PRINTING */
 
-GtkWidget* docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+/**
+ * docbook_generic_node_factory_method:
+ * @custom_property_dialog:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1084,7 +1273,16 @@ GtkWidget* docbook_generic_node_factory_method(CongServiceNodePropertyDialog *cu
 	return glade_xml_get_widget(xml, "common_dialog");
 }
 
-GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+/**
+ * docbook_orderedlist_properties_factory_method:
+ * @custom_property_dialog:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1204,7 +1402,16 @@ on_test_link_pressed (GtkButton *button,
 	open_ulink_in_browser (node);
 }
 
-GtkWidget* docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+/**
+ * docbook_ulink_properties_factory_method:
+ * @custom_property_dialog:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1356,8 +1563,15 @@ action_callback_demote (CongServiceNodeTool *tool,
 
 
 
- /* would be exposed as "plugin_register"? */
-gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_docbook_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_docbook_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 	
@@ -1496,7 +1710,14 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_docbook_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_docbook_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_docbook_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

@@ -77,6 +77,14 @@ cong_editor_area_spacer_construct (CongEditorAreaSpacer *area_spacer,
 	return CONG_EDITOR_AREA (area_spacer);
 }
 
+/**
+ * cong_editor_area_spacer_new:
+ * @editor_widget:
+ * @orientation:
+ * @spacing:
+ *
+ * Returns: the new #CongEditorArea
+ */
 CongEditorArea*
 cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 			     GtkOrientation orientation,
@@ -94,6 +102,14 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
 }
 
 /* Method implementation definitions: */
+/**
+ * calc_requisition:
+ * @area:
+ * @orientation:
+ * @width_hint:
+ *
+ * TODO: Write me
+ */
 static gint
 calc_requisition (CongEditorArea *area, 
 		  GtkOrientation orientation,

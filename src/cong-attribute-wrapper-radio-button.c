@@ -83,6 +83,19 @@ cong_attribute_wrapper_radio_button_instance_init (CongAttributeWrapperRadioButt
 	attribute_wrapper->private = g_new0(CongAttributeWrapperRadioButtonDetails,1);
 }
 
+/**
+ * cong_attribute_wrapper_radio_button_construct:
+ * @attribute_wrapper:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ * @radio_button:
+ * @attribute_value:
+ *
+ * TODO: Write me
+ */
 CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *attribute_wrapper,
 					       CongDocument *doc,
@@ -115,6 +128,18 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 	return attribute_wrapper;
 }
 
+/**
+ * cong_attribute_wrapper_radio_button_new:
+ * @doc:
+ * @node:
+ * @ns_ptr:
+ * @attribute_name:
+ * @attr:
+ * @radio_button:
+ * @attribute_value:
+ *
+ * TODO: Write me
+ */
 CongAttributeWrapperRadioButton*
 cong_attribute_wrapper_radio_button_new ( CongDocument *doc,
 					  CongNodePtr node,

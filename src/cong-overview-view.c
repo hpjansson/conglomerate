@@ -65,6 +65,12 @@ struct CongOverviewDetails
 };
 
 /* Exported function implementations: */
+/**
+ * cong_overview_view_new:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongTreeView*
 cong_overview_view_new (CongDocument *doc)
 {
@@ -271,6 +277,14 @@ node_creation_callback (CongTreeView *cong_tree_view,
 	}
 }
 
+/**
+ * pixbuf_callback:
+ * @cong_tree_view:
+ * @node:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 			    CongNodePtr node,
 			    gpointer user_data)

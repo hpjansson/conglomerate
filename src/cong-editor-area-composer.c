@@ -108,6 +108,15 @@ cong_editor_area_composer_instance_init (CongEditorAreaComposer *area_composer)
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_composer_construct:
+ * @area_composer:
+ * @editor_widget:
+ * @orientation:
+ * @spacing:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_composer_construct (CongEditorAreaComposer *area_composer,
 				     CongEditorWidget3 *editor_widget,
@@ -123,6 +132,14 @@ cong_editor_area_composer_construct (CongEditorAreaComposer *area_composer,
 	return CONG_EDITOR_AREA (area_composer);
 }
 
+/**
+ * cong_editor_area_composer_new:
+ * @editor_widget:
+ * @orientation:
+ * @spacing:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 			       GtkOrientation orientation,
@@ -139,6 +156,16 @@ cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
 		 spacing);
 }
 
+/**
+ * cong_editor_area_composer_pack_start:
+ * @area_composer:
+ * @child:
+ * @expand:
+ * @fill:
+ * @extra_padding:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_composer_pack_start (CongEditorAreaComposer *area_composer,
 				      CongEditorArea *child,
@@ -172,6 +199,16 @@ cong_editor_area_composer_pack_start (CongEditorAreaComposer *area_composer,
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
+/**
+ * cong_editor_area_composer_pack_end:
+ * @area_composer:
+ * @child:
+ * @expand:
+ * @fill:
+ * @extra_padding:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_composer_pack_end (CongEditorAreaComposer *area_composer,
 				    CongEditorArea *child,
@@ -225,6 +262,17 @@ find_area (gconstpointer *a,
 }
 #endif
 
+/**
+ * cong_editor_area_composer_pack_after:
+ * @area_composer:
+ * @new_child:
+ * @ooh_relative_to:
+ * @expand:
+ * @fill:
+ * @extra_padding:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 				      CongEditorArea *new_child,
@@ -274,6 +322,16 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
+/**
+ * cong_editor_area_composer_set_child_packing:
+ * @area_composer:
+ * @child:
+ * @expand:
+ * @fill:
+ * @extra_padding:
+ *
+ * TODO: Write me
+ */
 void 
 cong_editor_area_composer_set_child_packing (CongEditorAreaComposer *area_composer,
 					     CongEditorArea *child,

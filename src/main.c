@@ -13,7 +13,13 @@
 #define AUTOGENERATE_DS
 */
 
-void status_update()
+/**
+ * status_update:
+ *
+ * TODO: Write me
+ */
+void 
+status_update()
 {
   while (g_main_iteration(FALSE));
 }
@@ -26,8 +32,9 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 }
 #endif
 
-int main( int   argc,
-	  char *argv[] )
+int 
+main( int   argc,
+      char *argv[] )
 {
 	bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");

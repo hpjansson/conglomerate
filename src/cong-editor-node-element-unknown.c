@@ -59,6 +59,14 @@ cong_editor_node_element_unknown_instance_init (CongEditorNodeElementUnknown *no
 	node_element_unknown->private = g_new0(CongEditorNodeElementUnknownDetails,1);
 }
 
+/**
+ * cong_editor_node_element_unknown_construct:
+ * @editor_node_element_unknown:
+ * @editor_widget:
+ * @traversal_node:
+ * 
+ * TODO: Write me
+ */
 CongEditorNodeElementUnknown*
 cong_editor_node_element_unknown_construct (CongEditorNodeElementUnknown *editor_node_element_unknown,
 					    CongEditorWidget3* editor_widget,
@@ -71,6 +79,13 @@ cong_editor_node_element_unknown_construct (CongEditorNodeElementUnknown *editor
 	return editor_node_element_unknown;
 }
 
+/**
+ * cong_editor_node_element_unknown_new:
+ * @widget:
+ * @traversal_node:
+ * 
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
 				      CongTraversalNode *traversal_node)
@@ -85,7 +100,12 @@ cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
 				  traversal_node));
 }
 
-
+/**
+ * generate_block_area:
+ * @editor_node:
+ * 
+ * TODO: Write me
+ */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {

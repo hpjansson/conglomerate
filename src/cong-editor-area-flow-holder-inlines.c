@@ -117,6 +117,13 @@ cong_editor_area_flow_holder_inlines_instance_init (CongEditorAreaFlowHolderInli
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_flow_holder_inlines_construct:
+ * @area_flow_holder_inlines:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines,
 					CongEditorWidget3 *editor_widget)
@@ -142,6 +149,12 @@ cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines 
 	return CONG_EDITOR_AREA (area_flow_holder_inlines);
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_new:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_new (CongEditorWidget3 *editor_widget)
 {
@@ -154,18 +167,36 @@ cong_editor_area_flow_holder_inlines_new (CongEditorWidget3 *editor_widget)
 		 editor_widget);
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_get_current_line:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorAreaLine*
 cong_editor_area_flow_holder_inlines_get_current_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
 	return PRIVATE(area_flow_holder_inlines)->last_line;
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_get_line_width:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 gint
 cong_editor_area_flow_holder_inlines_get_line_width (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
 	return PRIVATE(area_flow_holder_inlines)->last_width;
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_get_current_indent:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 gint
 cong_editor_area_flow_holder_inlines_get_current_indent (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
@@ -178,6 +209,12 @@ cong_editor_area_flow_holder_inlines_get_current_indent (CongEditorAreaFlowHolde
 	}
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_destroy_lines:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
@@ -188,6 +225,12 @@ cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInli
 }
 
 
+/**
+ * cong_editor_area_flow_holder_inlines_insert_line:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorAreaLine*
 cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
@@ -207,6 +250,12 @@ cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInline
 	return new_line;
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_reflow_required:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
@@ -251,6 +300,12 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
 #endif
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_get_first_node:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_area_flow_holder_inlines_get_first_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
@@ -263,6 +318,12 @@ cong_editor_area_flow_holder_inlines_get_first_node (CongEditorAreaFlowHolderInl
 	}
 }
 
+/**
+ * cong_editor_area_flow_holder_inlines_get_final_node:
+ * @area_flow_holder_inlines:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_area_flow_holder_inlines_get_final_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {

@@ -14,7 +14,15 @@
 #include "cong-command.h"
 #include "cong-ui-hooks.h"
 
-void cong_cursor_init(CongCursor *curs, CongDocument *doc)
+/**
+ * cong_cursor_init:
+ * @curs:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_cursor_init(CongCursor *curs, CongDocument *doc)
 {
 	GdkColor gcol;
 
@@ -35,7 +43,14 @@ void cong_cursor_init(CongCursor *curs, CongDocument *doc)
 	gdk_gc_set_foreground(curs->gc, &gcol);
 }
 
-void cong_cursor_uninit(CongCursor *curs)
+/**
+ * cong_cursor_uninit:
+ * @curs:
+ *
+ * TODO: Write me
+ */
+void 
+cong_cursor_uninit(CongCursor *curs)
 {
 	g_assert(curs);
 
@@ -50,8 +65,14 @@ void cong_cursor_uninit(CongCursor *curs)
 	/* FIXME: anything else needed? */
 }
 
-
-gint cong_cursor_blink(gpointer data)
+/**
+ * cong_cursor_blink:
+ * @data:
+ *
+ * TODO: Write me
+ */
+gint 
+cong_cursor_blink(gpointer data)
 {
 	CongCursor *curs = data;
 
@@ -76,7 +97,14 @@ gint cong_cursor_blink(gpointer data)
 	return(TRUE);
 }
 
-int cong_cursor_paragraph_insert(CongCursor *curs)
+/**
+ * cong_cursor_paragraph_insert:
+ * @curs:
+ *
+ * TODO: Write me
+ */
+int 
+cong_cursor_paragraph_insert(CongCursor *curs)
 {
         CongNodePtr t;
         CongNodePtr iter, next;
@@ -141,7 +169,15 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	return(1);
 }
 
-void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
+/**
+ * cong_cursor_del_prev_char:
+ * @curs:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 {
 	CongLocation prev_char;
 
@@ -159,8 +195,15 @@ void cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 	}
 }
 
-
-void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc)
+/**
+ * cong_cursor_del_next_char:
+ * @curs:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc)
 {
 	g_return_if_fail(curs);
 	g_return_if_fail(doc);
@@ -169,5 +212,3 @@ void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc)
 
 	cong_location_del_next_char(doc, &curs->location);
 }
-
-

@@ -14,7 +14,18 @@
 #include "fo.h"
 
 /* FoRect methods: */
-void fo_rect_set_xywh(FoRect *rect, FoUnit x, FoUnit y, FoUnit w, FoUnit h)
+/**
+ * fo_rect_set_xywh:
+ * @rect:
+ * @x:
+ * @y:
+ * @w:
+ * @h:
+ *
+ * TODO: Write me
+ */
+void 
+fo_rect_set_xywh(FoRect *rect, FoUnit x, FoUnit y, FoUnit w, FoUnit h)
 {
 	g_return_if_fail(rect);
 
@@ -24,7 +35,18 @@ void fo_rect_set_xywh(FoRect *rect, FoUnit x, FoUnit y, FoUnit w, FoUnit h)
 	rect->h=h;
 }
 
-void fo_rect_set_xyxy(FoRect *rect, FoUnit x0, FoUnit y0, FoUnit x1, FoUnit y1)
+/**
+ * fo_rect_set_xyxy:
+ * @rect:
+ * @x0:
+ * @y0:
+ * @x1:
+ * @y1:
+ *
+ * TODO: Write me
+ */
+void 
+fo_rect_set_xyxy(FoRect *rect, FoUnit x0, FoUnit y0, FoUnit x1, FoUnit y1)
 {
 	g_return_if_fail(rect);
 
@@ -34,7 +56,16 @@ void fo_rect_set_xyxy(FoRect *rect, FoUnit x0, FoUnit y0, FoUnit x1, FoUnit y1)
 	rect->h=y1-y0;
 }
 
-void fo_rect_test_render(const FoRect *rect, FoPrintContext *fpc, const gchar *label)
+/**
+ * fo_rect_test_render:
+ * @rect:
+ * @fpc:
+ * @label:
+ *
+ * TODO: Write me
+ */
+void 
+fo_rect_test_render(const FoRect *rect, FoPrintContext *fpc, const gchar *label)
 {
 	fo_print_context_test_rect(fpc, rect, label);
 }

@@ -134,14 +134,24 @@ static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
 					     CongNodePtr node);
 
 /* Exported function implementations: */
+/**
+ * cong_tree_view_new:
+ * @doc:
+ * @use_markup:
+ * @node_filter:
+ * @node_creation_callback:
+ * @pixbuf_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongTreeView *
 cong_tree_view_new (CongDocument *doc,
 		    gboolean use_markup,
 		    CongTreeViewNodeFilter node_filter,
 		    CongTreeViewNodeCreationCallback node_creation_callback,
 		    CongTreeViewPixbufCallback pixbuf_callback, /* can be NULL */
-		    gpointer user_data
-		    )
+		    gpointer user_data)
 {
 	CongTreeView *cong_tree_view;
 	CongTreeViewDetails *details;
@@ -258,7 +268,14 @@ cong_tree_view_new (CongDocument *doc,
 	return cong_tree_view;
 }
 
-void cong_tree_view_free(CongTreeView *tree_view)
+/**
+ * cong_tree_view_free:
+ * @tree_view:
+ *
+ * TODO: Write me
+ */
+void 
+cong_tree_view_free(CongTreeView *tree_view)
 {
 	g_return_if_fail(tree_view);
 
@@ -276,13 +293,27 @@ void cong_tree_view_free(CongTreeView *tree_view)
 	g_free(tree_view);
 }
 
-GtkWidget* cong_tree_view_get_widget(CongTreeView *tree_view)
+/**
+ * cong_tree_view_get_widget:
+ * @tree_view:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_tree_view_get_widget(CongTreeView *tree_view)
 {
 	g_return_val_if_fail(tree_view, NULL);
 
 	return GTK_WIDGET(tree_view->private->gtk_tree_view);
 }
 
+/**
+ * cong_tree_view_should_show_node:
+ * @cong_tree_view:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
 				 CongNodePtr node)
@@ -297,6 +328,12 @@ cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
 						     PRIVATE(cong_tree_view)->user_data);
 }
 
+/**
+ * cong_tree_view_get_selected_node:
+ * @cong_tree_view:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_tree_view_get_selected_node (CongTreeView *cong_tree_view)
 {
@@ -311,6 +348,12 @@ cong_tree_view_get_selected_node (CongTreeView *cong_tree_view)
 	}
 }
 
+/**
+ * cong_tree_view_protected_get_tree_store:
+ * @tree_view:
+ *
+ * TODO: Write me
+ */
 GtkTreeStore* 
 cong_tree_view_protected_get_tree_store (CongTreeView *tree_view)
 {
@@ -319,6 +362,13 @@ cong_tree_view_protected_get_tree_store (CongTreeView *tree_view)
 	return tree_view->private->gtk_tree_store;
 }
 
+/**
+ * cong_tree_view_protected_force_node_update:
+ * @tree_view:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_tree_view_protected_force_node_update (CongTreeView *tree_view,
 					    CongNodePtr node)
@@ -475,15 +525,30 @@ node_search_callback (GtkTreeModel *model,
 }
 #endif
 
-
-gint key_compare_func (gconstpointer a, 
-		       gconstpointer b, 
-		       gpointer user_data)
+/**
+ * key_compare_func:
+ * @a:
+ * @b:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gint 
+key_compare_func (gconstpointer a, 
+		  gconstpointer b, 
+		  gpointer user_data)
 {
 	return (gint)(a-b);
 }
 
-void value_destroy_func (gpointer data)
+/**
+ * value_destroy_func:
+ * @data:
+ *
+ * TODO: Write me
+ */
+void 
+value_destroy_func (gpointer data)
 {
 	g_free(data);
 }

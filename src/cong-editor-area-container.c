@@ -109,6 +109,13 @@ cong_editor_area_container_instance_init (CongEditorAreaContainer *area_containe
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_container_construct:
+ * @area_container:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 				      CongEditorWidget3 *editor_widget)
@@ -119,6 +126,13 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 	return CONG_EDITOR_AREA (area_container);
 }
 
+/**
+ * cong_editor_area_container_add_child:
+ * @area_container:
+ * @child:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 				       CongEditorArea *child)
@@ -138,6 +152,14 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 	cong_editor_area_container_children_changed ( area_container);
 }
 
+/**
+ * cong_editor_area_container_add_child_after:
+ * @area_container:
+ * @new_child:
+ * @relative_to:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_container_add_child_after ( CongEditorAreaContainer *area_container,
 					     CongEditorArea *new_child,
@@ -159,6 +181,13 @@ cong_editor_area_container_add_child_after ( CongEditorAreaContainer *area_conta
 	cong_editor_area_container_children_changed ( area_container);
 }
 
+/**
+ * cong_editor_area_container_remove_child:
+ * @area_container:
+ * @child:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_container_remove_child ( CongEditorAreaContainer *area_container,
 					  CongEditorArea *child)
@@ -184,6 +213,12 @@ cong_editor_area_container_remove_child ( CongEditorAreaContainer *area_containe
 	cong_editor_area_container_children_changed ( area_container );
 }
 
+/**
+ * cong_editor_area_remove_all_children:
+ * @area_container:
+ *
+ * TODO: Write me
+ */
 void 
 cong_editor_area_remove_all_children ( CongEditorAreaContainer *area_container)
 {
@@ -197,6 +232,12 @@ cong_editor_area_remove_all_children ( CongEditorAreaContainer *area_container)
 	cong_editor_area_container_children_changed ( area_container );
 }
 
+/**
+ * cong_editor_area_container_children_changed:
+ * @area_container:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_container_children_changed ( CongEditorAreaContainer *area_container)
 {
@@ -208,6 +249,13 @@ cong_editor_area_container_children_changed ( CongEditorAreaContainer *area_cont
 }
 
 /* Protected:  For implementing subclasses */
+/**
+ * cong_editor_area_container_protected_postprocess_add_non_internal_child:
+ * @area_container:
+ * @child:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_container_protected_postprocess_add_non_internal_child (CongEditorAreaContainer *area_container,
 									 CongEditorArea *child)

@@ -110,7 +110,12 @@ on_signal_motion_notify_for_area (CongEditorArea *editor_area,
 	return TRUE;
 }
 
-
+/**
+ * cong_editor_area_connect_motion_notify_prelight:
+ * @area:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_area_connect_motion_notify_prelight (CongEditorArea *area)
 {
@@ -122,6 +127,14 @@ cong_editor_area_connect_motion_notify_prelight (CongEditorArea *area)
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_expander_construct:
+ * @area_expander:
+ * @editor_widget:
+ * @expanded:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
 				     CongEditorWidget3 *editor_widget,
@@ -144,6 +157,13 @@ cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
 	return CONG_EDITOR_AREA (area_expander);
 }
 
+/**
+ * cong_editor_area_expander_new:
+ * @editor_widget:
+ * @expanded:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_expander_new (CongEditorWidget3 *editor_widget,
 			       gboolean expanded)
@@ -154,6 +174,12 @@ cong_editor_area_expander_new (CongEditorWidget3 *editor_widget,
 		 expanded);
 }
 
+/**
+ * cong_editor_area_expander_get_state:
+ * @area_expander:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_area_expander_get_state (CongEditorAreaExpander *area_expander)
 {
@@ -234,6 +260,12 @@ on_button_press (CongEditorArea *editor_area,
 	}
 }
 
+/**
+ * on_timeout:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 gint
 on_timeout (gpointer user_data)
 {

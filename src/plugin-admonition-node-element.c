@@ -85,6 +85,14 @@ cong_editor_node_element_admonition_instance_init (CongEditorNodeElementAdmoniti
 	node_element_admonition->private = g_new0(CongEditorNodeElementAdmonitionDetails,1);
 }
 
+/**
+ * cong_editor_node_element_admonition_construct:
+ * @editor_node_element_admonition:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeElementAdmonition*
 cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *editor_node_element_admonition,
 					       CongEditorWidget3* editor_widget,
@@ -97,6 +105,13 @@ cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *
 	return editor_node_element_admonition;
 }
 
+/**
+ * cong_editor_node_element_admonition_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_element_admonition_new (CongEditorWidget3* widget,
 					 CongTraversalNode *traversal_node)

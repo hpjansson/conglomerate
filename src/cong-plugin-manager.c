@@ -32,7 +32,13 @@ struct CongPluginManager
 };
 
 /* Implementation of CongPluginManager: */
-CongPluginManager *cong_plugin_manager_new(void)
+/**
+ * cong_plugin_manager_new:
+ *
+ * Returns: a new #CongPluginManager
+ */
+CongPluginManager *
+cong_plugin_manager_new(void)
 {
 	CongPluginManager *manager;
 
@@ -41,6 +47,15 @@ CongPluginManager *cong_plugin_manager_new(void)
 	return manager;
 }
 
+/**
+ * cong_plugin_manager_register:
+ * @plugin_manager:
+ * @plugin_id:
+ * @register_callback:
+ * @configure_callback:
+ *
+ * TODO: Write me
+ */
 CongPlugin*
 cong_plugin_manager_register (CongPluginManager *plugin_manager,
 			      const gchar *plugin_id,
@@ -66,6 +81,14 @@ cong_plugin_manager_register (CongPluginManager *plugin_manager,
 	return plugin;
 }
 
+/**
+ * cong_plugin_manager_for_each_plugin:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_plugin_manager_for_each_plugin (CongPluginManager *plugin_manager, 
 				     void 
@@ -84,6 +107,14 @@ cong_plugin_manager_for_each_plugin (CongPluginManager *plugin_manager,
 	}
 }
 
+/**
+ * cong_plugin_manager_for_each_document_factory:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void 
 cong_plugin_manager_for_each_document_factory (CongPluginManager *plugin_manager, 
 					       void 
@@ -100,6 +131,14 @@ cong_plugin_manager_for_each_document_factory (CongPluginManager *plugin_manager
 	}
 }
 
+/**
+ * cong_plugin_manager_for_each_importer:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void 
 cong_plugin_manager_for_each_importer (CongPluginManager *plugin_manager, 
 				       void 
@@ -116,6 +155,14 @@ cong_plugin_manager_for_each_importer (CongPluginManager *plugin_manager,
 	}
 }
 
+/**
+ * cong_plugin_manager_for_each_exporter:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void 
 cong_plugin_manager_for_each_exporter (CongPluginManager *plugin_manager, 
 				       void 
@@ -134,7 +181,16 @@ cong_plugin_manager_for_each_exporter (CongPluginManager *plugin_manager,
 
 
 #if ENABLE_PRINTING
-void cong_plugin_manager_for_each_print_method (CongPluginManager *plugin_manager, 
+/**
+ * cong_plugin_manager_for_each_print_method:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_manager_for_each_print_method (CongPluginManager *plugin_manager, 
 						void 
 						(*callback) (CongServicePrintMethod *print_method, 
 							     gpointer user_data), 
@@ -150,7 +206,16 @@ void cong_plugin_manager_for_each_print_method (CongPluginManager *plugin_manage
 }
 #endif
 
-void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocTool *tool, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_manager_for_each_doc_tool:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocTool *tool, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail (plugin_manager);
@@ -161,7 +226,16 @@ void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, vo
 	}
 }
 
-void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceNodeTool *tool, gpointer user_data), gpointer user_data)
+/**
+ * cong_plugin_manager_for_each_node_tool:
+ * @plugin_manager:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongServiceNodeTool *tool, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail (plugin_manager);
@@ -172,6 +246,13 @@ void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, v
 	}
 }
 
+/**
+ * cong_plugin_manager_locate_custom_property_dialog_by_id:
+ * @plugin_manager:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceNodePropertyDialog*
 cong_plugin_manager_locate_custom_property_dialog_by_id (CongPluginManager *plugin_manager, 
 							 const gchar *service_id)
@@ -192,6 +273,13 @@ cong_plugin_manager_locate_custom_property_dialog_by_id (CongPluginManager *plug
 	return NULL;
 }
 
+/**
+ * cong_plugin_manager_locate_editor_node_factory_by_id:
+ * @plugin_manager:
+ * @service_id:
+ *
+ * TODO: Write me
+ */
 CongServiceEditorNodeFactory*
 cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_manager,
 						      const gchar *service_id)
@@ -211,4 +299,3 @@ cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_
 	
 	return NULL;
 }
-

@@ -86,6 +86,13 @@ cong_editor_area_bin_instance_init (CongEditorAreaBin *area_bin)
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_bin_construct:
+ * @area_bin:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 				CongEditorWidget3 *editor_widget)
@@ -96,6 +103,12 @@ cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
 	return CONG_EDITOR_AREA (area_bin);
 }
 
+/**
+ * cong_editor_area_bin_new:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
 {
@@ -108,6 +121,12 @@ cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
 		 editor_widget);
 }
 
+/**
+ * cong_editor_area_bin_get_child:
+ * @area_bin:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_bin_get_child  (CongEditorAreaBin *area_bin)
 {

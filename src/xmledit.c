@@ -15,7 +15,14 @@
 #include "cong-command.h"
 
 /* --- Cut/copy/paste --- */
-void cong_document_cut_selection(CongDocument *doc)
+/**
+ * cong_document_cut_selection:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_cut_selection(CongDocument *doc)
 {
 	CongSelection *selection;
 	CongCursor *curs;
@@ -58,7 +65,14 @@ void cong_document_cut_selection(CongDocument *doc)
 	cong_document_end_edit (doc);
 }
 
-void cong_document_copy_selection(CongDocument *doc)
+/**
+ * cong_document_copy_selection:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_copy_selection(CongDocument *doc)
 {
 	CongSelection *selection;
 	CongCursor *curs;
@@ -101,8 +115,15 @@ void cong_document_copy_selection(CongDocument *doc)
 	cong_document_end_edit (doc);
 }
 
-
-void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *widget)
+/**
+ * cong_document_paste_clipboard_or_selection:
+ * @doc:
+ * @widget:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *widget)
 {
 	CongSelection *selection;
 	CongCursor *curs;
@@ -127,6 +148,14 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 	}
 }
 
+/**
+ * cong_document_paste_source_at:
+ * @doc:
+ * @insert_loc:
+ * @source_fragment:
+ *
+ * TODO: Write me
+ */
 void 
 cong_document_paste_source_at (CongDocument *doc, 
 			       CongLocation *insert_loc, 
@@ -215,6 +244,14 @@ cong_document_paste_source_at (CongDocument *doc,
 
 }
 
+/**
+ * cong_document_paste_source_under:
+ * @doc:
+ * @relative_to_node:
+ * @source_fragment:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_paste_source_under (CongDocument *doc, 
 				  CongNodePtr relative_to_node,
@@ -258,6 +295,14 @@ cong_document_paste_source_under (CongDocument *doc,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_document_paste_source_before:
+ * @doc:
+ * @relative_to_node:
+ * @source_fragment:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_paste_source_before (CongDocument *doc, 
 				   CongNodePtr relative_to_node,
@@ -300,6 +345,14 @@ cong_document_paste_source_before (CongDocument *doc,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_document_paste_source_after:
+ * @doc:
+ * @relative_to_node:
+ * @source_fragment:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_paste_source_after (CongDocument *doc, 
 				  CongNodePtr relative_to_node,
@@ -348,7 +401,14 @@ cong_document_paste_source_after (CongDocument *doc,
 
 extern char *ilogo_xpm[];
 
-void cong_document_view_source(CongDocument *doc)
+/**
+ * cong_document_view_source:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_view_source(CongDocument *doc)
 {
 	GtkWidget *window;
 	GtkWidget *source_view;
@@ -379,13 +439,3 @@ void cong_document_view_source(CongDocument *doc)
 	gtk_widget_show(GTK_WIDGET(window));
 
 }
-
-
-
-
-
-
-
-
-
-

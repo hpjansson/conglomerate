@@ -34,6 +34,14 @@ struct CongFont
 	PangoLayout *pango_layout;
 };
 
+/**
+ * cong_font_load:
+ * @font_name: The name of the font to load
+ *
+ * Loads a font named @font_name
+ *
+ * Returns: The #CongFont
+ */
 CongFont*
 cong_font_load(const gchar *font_name)
 {
@@ -60,12 +68,27 @@ cong_font_load(const gchar *font_name)
 	return font;	
 }
 
+/**
+ * cong_font_delete:
+ * @font: a #CongFont
+ *
+ * Unimplemented
+ */
 void
 cong_font_delete(CongFont *font)
 {
 	g_assert(0); /* unimplemented */
 }
 
+/**
+ * cong_font_get_height:
+ * @font: a #CongFont
+ * @text: a string to render
+ *
+ * Computes the height, in pixels, of @text rendered in @font.
+ * 
+ * Returns: height, in pixels, of @text rendered in @font
+ */
 gint
 cong_font_get_height(CongFont *font,
 		     const gchar *text) 
@@ -87,6 +110,12 @@ cong_font_get_height(CongFont *font,
 	return result;
 }
 
+/**
+ * cong_font_get_pango_description:
+ * @font: a #CongFont
+ *
+ * Returns: the #PangoFontDescription for @font
+ */
 PangoFontDescription*
 cong_font_get_pango_description(CongFont *font)
 {
@@ -95,6 +124,17 @@ cong_font_get_pango_description(CongFont *font)
 	return font->font_desc;	
 }
 
+/**
+ * cong_font_draw_string_slow:
+ * @drawable: a #GdkDrawable
+ * @font: a #CongFont
+ * @gc: a #GdkGC
+ * @text: a string
+ * @x: a #gint
+ * @y: a #gint
+ *
+ * TODO: Write me
+ */
 void
 cong_font_draw_string_slow(GdkDrawable *drawable,
 			   CongFont *font, 
@@ -148,6 +188,13 @@ cong_font_draw_string_slow(GdkDrawable *drawable,
 			font->pango_layout);
 }
 
+/**
+ * cong_font_string_width_slow:
+ * @font: a #CongFont
+ * @text: the string to be rendered
+ *
+ * Returns: The width, in pixels, of @text rendered in @font
+ */
 gint
 cong_font_string_width_slow(CongFont *font, 
 			    const gchar *text)

@@ -269,7 +269,13 @@ cong_editor_widget3_instance_init (CongEditorWidget3 *widget)
 	widget->private = g_new0(CongEditorWidget3Details,1);
 }
 
-/* Disconnects all signals from instance that have the supplied user_data as the closure data; returns the number disconnected: */
+/**
+ * cong_eel_disconnect_all_with_data:
+ * @instance: The instance owning the signal handler to be found
+ * @user_data: The closure data of the handler's closure
+ *
+ * Returns: The number of signals disconnected
+ */
 guint
 cong_eel_disconnect_all_with_data (gpointer instance,
 				   gpointer user_data)
@@ -297,6 +303,13 @@ cong_eel_disconnect_all_with_data (gpointer instance,
 	}
 }
 
+/**
+ * cong_editor_widget3_construct:
+ * @editor_widget:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongEditorWidget3*
 cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 			       CongDocument *doc)
@@ -414,7 +427,14 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 	return editor_widget;
 }
 
-GtkWidget* cong_editor_widget3_new(CongDocument *doc)
+/**
+ * cong_editor_widget3_new:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_editor_widget3_new(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
@@ -423,14 +443,28 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 			   );
 }
 
-CongDocument *cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
+/**
+ * cong_editor_widget3_get_document:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
+CongDocument *
+cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
 {
 	g_return_val_if_fail(editor_widget, NULL);
 
 	return PRIVATE(editor_widget)->doc;
 }
 
-CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
+/**
+ * cong_editor_widget_get_dispspec:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
+CongDispspec *
+cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
 {
 	g_return_val_if_fail(editor_widget, NULL);
 
@@ -463,6 +497,13 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 }
 #endif
 
+/**
+ * cong_editor_widget3_get_editor_node_for_traversal_node:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *editor_widget,
 							CongTraversalNode *traversal_node)
@@ -502,6 +543,15 @@ for_each_editor_node_cb (CongDocumentTraversal *doc_traversal,
 	
 }
 
+/**
+ * cong_editor_widget3_for_each_editor_node:
+ * @editor_widget:
+ * @xml_node:
+ * @editor_node_callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *editor_widget,
 					  CongNodePtr xml_node,
@@ -524,6 +574,13 @@ cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *editor_widget,
 							 &tmp_struct);
 }
 
+/**
+ * cong_editor_widget3_get_an_editor_node:
+ * @editor_widget:
+ * @xml_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 					CongNodePtr xml_node)
@@ -544,6 +601,12 @@ cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 	}
 }
 
+/**
+ * cong_editor_widget3_get_prehighlight_editor_area:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_widget3_get_prehighlight_editor_area (CongEditorWidget3 *editor_widget)
 {
@@ -552,6 +615,13 @@ cong_editor_widget3_get_prehighlight_editor_area (CongEditorWidget3 *editor_widg
 	return PRIVATE (editor_widget)->prehighlight_area;
 }
 
+/**
+ * cong_editor_widget3_set_prehighlight_editor_area:
+ * @editor_widget:
+ * @editor_area:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widget,
 						  CongEditorArea* editor_area)
@@ -593,7 +663,12 @@ cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widg
 	}
 }
 
-
+/**
+ * cong_editor_widget3_get_test_gc:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
 {
@@ -602,7 +677,14 @@ cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
 	return PRIVATE(editor_widget)->test_gc;
 }
 
-
+/**
+ * cong_editor_widget3_get_area_at:
+ * @editor_widget:
+ * @x:
+ * @y:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 				 gint x,
@@ -613,6 +695,12 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 						      y);
 }
 
+/**
+ * cong_flow_type_get_debug_string:
+ * @flow_type:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_flow_type_get_debug_string(enum CongFlowType flow_type)
 {
@@ -623,6 +711,13 @@ cong_flow_type_get_debug_string(enum CongFlowType flow_type)
 	}
 }
 
+/**
+ * cong_editor_widget3_add_popup_items:
+ * @editor_widget:
+ * @menu:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
 				     GtkMenu *menu)
@@ -644,6 +739,15 @@ cong_editor_widget3_add_popup_items (CongEditorWidget3 *editor_widget,
 	gtk_widget_show (submenu_menu);
 }
 
+/**
+ * cong_editor_widget3_get_preedit_data:
+ * @editor_widget:
+ * @output_string:
+ * @output_pango_attr_list:
+ * @output_cursor_pos:
+ *
+ * TODO: Write me
+ */
 void
 cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
 				      gchar **output_string, 
@@ -1540,6 +1644,12 @@ populate_widget3(CongEditorWidget3 *widget)
        	/* FIXME: Also need to do the opposite when widget is destroyed */
 }
 
+/**
+ * cong_editor_widget3_node_should_have_editor_node:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_editor_widget3_node_should_have_editor_node (CongNodePtr node)
 {
@@ -1694,6 +1804,14 @@ cong_editor_widget3_get_child_policy_for_editor_node (CongEditorWidget3 *widget,
 #endif
 	
 }
+
+/**
+ * cong_editor_widget3_get_parents_child_policy_for_editor_node:
+ * @widget:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 *widget,
 							      CongEditorNode *editor_node)
@@ -1710,6 +1828,14 @@ cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 
 	
 }
 #else
+
+/**
+ * cong_editor_widget3_get_primary_area_for_editor_node:
+ * @widget:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
 						      CongEditorNode *editor_node)
@@ -1721,6 +1847,13 @@ cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
 						     editor_node));
 }
 
+/**
+ * cong_editor_widget3_get_parent_flow_holder_for_editor_node:
+ * @widget:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorAreaFlowHolder*
 cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *widget,
 							    CongEditorNode *editor_node)
@@ -1732,6 +1865,13 @@ cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *w
 								 editor_node));
 }
 
+/**
+ * cong_editor_widget3_get_child_flow_holder_for_editor_node:
+ * @widget:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 CongEditorAreaFlowHolder*
 cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *widget,
 							   CongEditorNode *editor_node)

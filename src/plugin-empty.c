@@ -29,7 +29,13 @@
 
 #include "cong-fake-plugin-hooks.h"
 
- /* would be exposed as "plugin_register"? */
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_empty_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
 gboolean 
 plugin_empty_plugin_register (CongPlugin *plugin)
 {
@@ -41,6 +47,12 @@ plugin_empty_plugin_register (CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
+/**
+ * plugin_empty_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
 gboolean 
 plugin_empty_plugin_configure (CongPlugin *plugin)
 {

@@ -38,7 +38,16 @@ struct UnicodeCreationInfo
 	int starting_character;
 };
 
-void factory_page_creation_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_page_creation_callback_unicode:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_page_creation_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	GnomeDruidPageStandard *page;
 
@@ -306,7 +315,16 @@ xmlDocPtr make_set(const xmlChar *title)
 }
 #endif
 
-void factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_action_callback_unicode:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
 	struct UnicodeCreationInfo uci;
@@ -322,8 +340,15 @@ void factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNe
 						   cong_new_file_assistant_get_toplevel(assistant));	
 }
 
- /* would be exposed as "plugin_register"? */
-gboolean plugin_tests_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_tests_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_tests_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -343,7 +368,14 @@ gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_tests_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_tests_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_tests_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

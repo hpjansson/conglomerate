@@ -11,7 +11,13 @@
 #include "cong-eel.h"
 #include "cong-ui-hooks.h"
 
-
+/**
+ * cong_eel_log_ref_count:
+ * @name:
+ * @obj:
+ *
+ * TODO: Write me
+ */
 void 
 cong_eel_log_ref_count (const gchar *name, 
 			GObject *obj)
@@ -24,6 +30,16 @@ cong_eel_log_ref_count (const gchar *name,
 #endif
 }
 
+/**
+ * cong_eel_rectangle_construct:
+ * @rectangle:
+ * @x:
+ * @y:
+ * @w:
+ * @h:
+ *
+ * TODO: Write me
+ */
 void            
 cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 			      gint                  x,
@@ -38,6 +54,12 @@ cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 	rectangle->height = h;
 }
 
+/**
+ * cong_eel_pango_layout_line_get_text:
+ * @layout_line:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line)
 {
@@ -47,6 +69,15 @@ cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line)
 			  layout_line->length);
 }
 
+/**
+ * cong_eel_rgb_to_gdk_color:
+ * @color:
+ * @r:
+ * @g:
+ * @b:
+ *
+ * TODO: Write me
+ */
 void
 cong_eel_rgb_to_gdk_color (GdkColor             *color,
 			   guchar               r,
@@ -75,7 +106,7 @@ cong_eel_rgb_to_gdk_color (GdkColor             *color,
  * @x: X coordinate of a point.
  * @y: Y coordinate of a point.
  *
- * Retun TRUE if point is contained inside a rectangle
+ * Returns: %TRUE if point is contained inside a rectangle, %FALSE otherwise
  */
 gboolean
 cong_eel_rectangle_contains (const GdkRectangle *rectangle, 
@@ -87,7 +118,14 @@ cong_eel_rectangle_contains (const GdkRectangle *rectangle,
 		&& rectangle->y <= y && rectangle->y + rectangle->height >= y;
 }
 
-
+/**
+ * cong_eel_rgb16_to_rgb:
+ * @r:
+ * @g:
+ * @b:
+ *
+ * TODO: Write me
+ */
 guint32
 cong_eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
 {
@@ -122,7 +160,7 @@ cong_eel_gdk_color_to_rgb (const GdkColor *color)
  * Converts from a gdk_rgb value style to a string color spec.
  * The gdk_rgb color alpha channel is ignored.
  * 
- * Return value: a newly allocated color spec.
+ * Returns: a newly allocated color spec.
  */
 char *
 cong_eel_gdk_rgb_to_color_spec (const guint32 color)
@@ -130,6 +168,12 @@ cong_eel_gdk_rgb_to_color_spec (const guint32 color)
 	return g_strdup_printf ("#%06X", (guint) (color & 0xFFFFFF));
 }
 
+/**
+ * cong_eel_option_menu_get_selected_menu_item:
+ * @option_menu:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_eel_option_menu_get_selected_menu_item(GtkOptionMenu *option_menu)
 {
@@ -157,7 +201,8 @@ cong_eel_option_menu_get_selected_menu_item(GtkOptionMenu *option_menu)
 
 }
 
-static gchar* cong_eel_utf8_capitalise(const gchar *str)
+static gchar* 
+cong_eel_utf8_capitalise(const gchar *str)
 {
 	gchar *result;
 	gunichar*   unichar;
@@ -188,7 +233,8 @@ static gchar* cong_eel_utf8_capitalise(const gchar *str)
  * 
  * Returns:
  */
-static gchar** split_xmlname(const gchar *xml_name)
+static gchar** 
+split_xmlname(const gchar *xml_name)
 {
 	/* FIXME: is this really UTF-8 safe? */
 	return g_strsplit (xml_name,
@@ -196,7 +242,14 @@ static gchar** split_xmlname(const gchar *xml_name)
 			   0);
 }
 
-gchar *cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name)
+/**
+ * cong_eel_prettify_xml_name_with_header_capitalisation:
+ * @xml_name:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name)
 {
 	gchar *result = NULL;
 	gchar** string_array;
@@ -218,7 +271,14 @@ gchar *cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_na
 	return result;
 }
 
-gchar *cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_name)
+/**
+ * cong_eel_prettify_xml_name_with_sentence_capitalisation:
+ * @xml_name:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_name)
 {
 	gchar *result = NULL;
 	gchar** string_array;
@@ -244,8 +304,15 @@ gchar *cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_
 	return result;
 }
 
-/* Routine that sets a string ptr to point to a new value, and frees the old value (if any) */
-void cong_eel_set_string(gchar **string, gchar *value)
+/**
+ * cong_eel_set_string:
+ * @string: a string
+ * @value: a new value for the string
+ *
+ * Sets a @string to @value, freeing the old value (if any)
+ */
+void 
+cong_eel_set_string(gchar **string, gchar *value)
 {
 	gchar *old_value;
 
@@ -260,6 +327,23 @@ void cong_eel_set_string(gchar **string, gchar *value)
 	}
 }
 
+/**
+ * cong_eel_draw_pixbuf:
+ * @drawable:
+ * @gc:
+ * @pixbuf:
+ * @src_x:
+ * @src_y:
+ * @dest_x:
+ * @dest_y:
+ * @width:
+ * @height:
+ * @dither:
+ * @x_dither:
+ * @y_dither:
+ *
+ * TODO: Write me
+ */
 void 
 cong_eel_draw_pixbuf (GdkDrawable *drawable,
 		      GdkGC *gc,

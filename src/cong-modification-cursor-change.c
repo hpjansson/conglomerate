@@ -75,6 +75,14 @@ cong_modification_cursor_change_instance_init (CongModificationCursorChange *nod
 	node->private = g_new0(CongModificationCursorChangeDetails,1);
 }
 
+/**
+ * cong_modification_cursor_change_construct:
+ * @modification_cursor_change:
+ * @doc:
+ * @new_location:
+ *
+ * TODO: Write me
+ */
 CongModificationCursorChange*
 cong_modification_cursor_change_construct (CongModificationCursorChange *modification_cursor_change,
 					      CongDocument *doc,
@@ -94,6 +102,13 @@ cong_modification_cursor_change_construct (CongModificationCursorChange *modific
 	return modification_cursor_change;
 }
 
+/**
+ * cong_modification_cursor_change_new:
+ * @doc:
+ * @new_location:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_modification_cursor_change_new (CongDocument *doc,
 				     const CongLocation *new_location)
@@ -103,6 +118,12 @@ cong_modification_cursor_change_new (CongDocument *doc,
 									    new_location));
 }
 
+/**
+ * finalize:
+ * @object:
+ *
+ * TODO: Write me
+ */
 void
 finalize (GObject *object)
 {

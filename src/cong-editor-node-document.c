@@ -60,6 +60,14 @@ cong_editor_node_document_instance_init (CongEditorNodeDocument *node_document)
 	node_document->private = g_new0(CongEditorNodeDocumentDetails,1);
 }
 
+/**
+ * cong_editor_node_document_construct:
+ * @editor_node_document:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeDocument*
 cong_editor_node_document_construct (CongEditorNodeDocument *editor_node_document,
 				     CongEditorWidget3* editor_widget,
@@ -71,6 +79,13 @@ cong_editor_node_document_construct (CongEditorNodeDocument *editor_node_documen
 	return editor_node_document;
 }
 
+/**
+ * cong_editor_node_document_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_document_new (CongEditorWidget3 *widget,
 			       CongTraversalNode *traversal_node)
@@ -84,6 +99,12 @@ cong_editor_node_document_new (CongEditorWidget3 *widget,
 				 );
 }
 
+/**
+ * generate_block_area:
+ * @editor_node:
+ *
+ * TODO: Write me
+ */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {

@@ -74,6 +74,15 @@ cong_node_modification_set_parent_instance_init (CongNodeModificationSetParent *
 	node->private = g_new0(CongNodeModificationSetParentDetails,1);
 }
 
+/**
+ * cong_node_modification_set_parent_construct:
+ * @node_modification_set_parent:
+ * @doc:
+ * @node:
+ * @new_parent:
+ *
+ * TODO: Write me
+ */
 CongNodeModificationSetParent*
 cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node_modification_set_parent,
 					     CongDocument *doc,
@@ -99,6 +108,14 @@ cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node
 	return node_modification_set_parent;
 }
 
+/**
+ * cong_node_modification_set_parent_new:
+ * @doc:
+ * @node:
+ * @new_parent:
+ *
+ * TODO: Write me
+ */
 CongModification*
 cong_node_modification_set_parent_new (CongDocument *doc,
 				       CongNodePtr node,
@@ -202,4 +219,3 @@ redo (CongModification *modification)
 	g_assert (node->next == NULL);
 	g_assert (node->parent == PRIVATE(node_modification_set_parent)->new_parent);
 }
-

@@ -32,7 +32,16 @@
 #include "cong-dispspec-registry.h"
 #include "cong-util.h"
 
-void factory_action_callback_doc_from_xds(CongServiceDocumentFactory *factory,
+/**
+ * factory_action_callback_doc_from_xds:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_action_callback_doc_from_xds(CongServiceDocumentFactory *factory,
 	CongNewFileAssistant *assistant, gpointer user_data)
 {
 	xmlDocPtr xml_doc;
@@ -71,14 +80,30 @@ void factory_action_callback_doc_from_xds(CongServiceDocumentFactory *factory,
 		cong_new_file_assistant_get_toplevel(assistant));
 }
 
-void factory_page_creation_callback_doc_from_xds(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+/**
+ * factory_page_creation_callback_doc_from_xds:
+ * @factory:
+ * @assistant:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void 
+factory_page_creation_callback_doc_from_xds(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
 }
 
 
 
 /* would be exposed as "plugin_register"? */
-gboolean plugin_doc_from_xds_plugin_register(CongPlugin *plugin)
+/**
+ * plugin_doc_from_xds_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_doc_from_xds_plugin_register(CongPlugin *plugin)
 {
 	int i;
 	CongDispspecRegistry* registry;
@@ -108,15 +133,19 @@ gboolean plugin_doc_from_xds_plugin_register(CongPlugin *plugin)
 		}
 
 	}
-	                                                                                
-
-
 
 	return TRUE;
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_doc_from_xds_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_doc_from_xds_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_doc_from_xds_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

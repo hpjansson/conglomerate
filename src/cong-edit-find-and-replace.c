@@ -29,7 +29,6 @@ on_find_dialog_destroy (GtkWidget *widget,
 
 /**
  * cong_document_find:
- *
  * @doc: the #CongDocument for which the find dialog is to be run
  *
  * Opens the Find dialog for this #CongDocument
@@ -68,6 +67,12 @@ cong_document_find (CongDocument *doc)
 			  dialog_details);
 }
 
+/**
+ * cong_document_find_next:
+ * @doc:
+ *
+ * This function is not currently implemented
+ */
 void
 cong_document_find_next (CongDocument *doc)
 {
@@ -76,6 +81,12 @@ cong_document_find_next (CongDocument *doc)
 	CONG_DO_UNIMPLEMENTED_DIALOG (NULL, "Find Next");
 }
 
+/**
+ * cong_document_find_prev:
+ * @doc:
+ *
+ * This function is not currently implemented
+ */
 void
 cong_document_find_prev (CongDocument *doc)
 {
@@ -84,6 +95,12 @@ cong_document_find_prev (CongDocument *doc)
 	CONG_DO_UNIMPLEMENTED_DIALOG (NULL, "Find Previous");
 }
 
+/**
+ * cong_document_replace:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_document_replace (CongDocument *doc)
 {
@@ -111,6 +128,14 @@ struct CongFindParameters
 	/* might add a filter like Only Text Nodes vs Only Comments vs Both */
 };
 
+/**
+ * cong_util_strstr_with_case:
+ * @haystack:
+ * @needle:
+ * @match_case:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_util_strstr_with_case (const gchar *haystack,
 			    const gchar *needle,

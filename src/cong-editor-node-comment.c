@@ -91,6 +91,14 @@ cong_editor_node_comment_instance_init (CongEditorNodeComment *node_comment)
 	node_comment->private = g_new0(CongEditorNodeCommentDetails,1);
 }
 
+/**
+ * cong_editor_node_comment_construct:
+ * @editor_node_comment:
+ * @editor_widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    CongEditorWidget3* editor_widget,
@@ -107,6 +115,13 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 	return editor_node_comment;
 }
 
+/**
+ * cong_editor_node_comment_new:
+ * @widget:
+ * @traversal_node:
+ *
+ * TODO: Write me
+ */
 CongEditorNode*
 cong_editor_node_comment_new (CongEditorWidget3 *widget,
 			      CongTraversalNode *traversal_node)

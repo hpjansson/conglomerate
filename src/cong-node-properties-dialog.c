@@ -227,9 +227,16 @@ static void on_cursor_change(CongView *view)
 {
 }
 
-
-void init_view_xpath_view(CongAdvancedNodePropertiesView *view,
-			  struct XPathView* xpath_view)
+/**
+ * init_view_xpath_view:
+ * @view:
+ * @xpath_view:
+ *
+ * TODO: Write me
+ */
+void 
+init_view_xpath_view(CongAdvancedNodePropertiesView *view,
+		     struct XPathView* xpath_view)
 {
 	gchar *xpath;
 
@@ -525,6 +532,12 @@ static void on_tree_view_selection_change(GtkTreeSelection *treeselection,
 	
 }
 
+/**
+ * init_view_namespace:
+ * @view:
+ *
+ * TODO: Write me
+ */
 void 
 init_view_namespace (CongAdvancedNodePropertiesView *view)
 {
@@ -552,9 +565,16 @@ init_view_namespace (CongAdvancedNodePropertiesView *view)
 						     TRUE);
 }
 
-
-void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
-			struct RawAttr* raw_attr)
+/**
+ * init_view_raw_attr:
+ * @view:
+ * @raw_attr:
+ *
+ * TODO: Write me
+ */
+void 
+init_view_raw_attr(CongAdvancedNodePropertiesView *view,
+		   struct RawAttr* raw_attr)
 {
 	/* FIXME: use libglade for this... */
 	GtkWidget *vbox = gtk_vbox_new(FALSE, 6);
@@ -636,6 +656,12 @@ void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
 	cong_dialog_category_add_selflabelled_field(raw_attr->category, vbox, TRUE);
 }
 
+/**
+ * cong_util_get_tag_string_for_node:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_get_tag_string_for_node (CongNodePtr node)
 {
@@ -648,6 +674,12 @@ cong_util_get_tag_string_for_node (CongNodePtr node)
 #endif
 }
 
+/**
+ * cong_util_get_tag_string_for_node_escaped:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_util_get_tag_string_for_node_escaped (CongNodePtr node)
 {
@@ -922,7 +954,12 @@ populate_recursive (GtkTreeStore *store,
 
 }
 
-
+/**
+ * make_tree_model_for_element_model:
+ * @xml_element:
+ *
+ * TODO: Write me
+ */
 GtkTreeModel*
 make_tree_model_for_element_model (xmlElementPtr xml_element)
 {  
@@ -949,6 +986,12 @@ make_tree_model_for_element_model (xmlElementPtr xml_element)
 	return GTK_TREE_MODEL (store);
 }
 
+/**
+ * make_widget_for_element_model:
+ * @xml_element:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 make_widget_for_element_model (xmlElementPtr xml_element)
 {
@@ -1019,6 +1062,14 @@ make_dtd_content_model (CongDocument *doc,
 						     TRUE);
 }
 
+/**
+ * cong_node_properties_dtd_new:
+ * @doc:
+ * @node:
+ * @within_notebook:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_node_properties_dtd_new (CongDocument *doc, 
 			      CongNodePtr node,
@@ -1052,6 +1103,14 @@ cong_node_properties_dtd_new (CongDocument *doc,
 	return NULL;
 }
 
+/**
+ * cong_node_properties_dialog_advanced_new:
+ * @doc:
+ * @node:
+ * @within_notebook:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_node_properties_dialog_advanced_new(CongDocument *doc, 
 					 CongNodePtr node,
@@ -1097,9 +1156,18 @@ cong_node_properties_dialog_advanced_new(CongDocument *doc,
 	return widget;
 }
 
-void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
-						  CongDocument *doc, 
-						  CongNodePtr node)
+/**
+ * cong_ui_append_advanced_node_properties_page:
+ * @notebook:
+ * @doc:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
+					     CongDocument *doc, 
+					     CongNodePtr node)
 {
 	GtkWidget* dtd_page;
 
@@ -1126,6 +1194,14 @@ void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
 				 );
 }
 
+/**
+ * cong_node_properties_dialog_new:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 GtkWidget*
 cong_node_properties_dialog_new (CongDocument *doc, 
 				 CongNodePtr node, 
@@ -1216,12 +1292,10 @@ cong_node_properties_dialog_new (CongDocument *doc,
 		}
 
 		g_signal_connect_swapped (G_OBJECT (dialog), 
-					  "response", 
-					  G_CALLBACK (gtk_widget_destroy),
+					  "response", G_CALLBACK (gtk_widget_destroy),
 					  GTK_OBJECT (dialog));
 
 
 		return GTK_WIDGET(dialog);
 	}
 }
-

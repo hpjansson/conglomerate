@@ -18,6 +18,15 @@
 #include "cong-vfs.h"
 
 /* FIXME: i18n! */
+/**
+ * cong_error_dialog_new_from_file_save_failure:
+ * @parent_window:
+ * @string_uri:
+ * @vfs_result:
+ * @file_size:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 
 					     const gchar* string_uri, 
@@ -369,5 +378,4 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 	g_assert(dialog);
 
 	return dialog;
-
 }

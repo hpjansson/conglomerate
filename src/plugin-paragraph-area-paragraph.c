@@ -84,6 +84,13 @@ cong_editor_area_paragraph_instance_init (CongEditorAreaParagraph *area_paragrap
 
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_paragraph_construct:
+ * @area_paragraph:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_paragraph_construct (CongEditorAreaParagraph *area_paragraph,
 				      CongEditorWidget3 *editor_widget)
@@ -98,9 +105,14 @@ cong_editor_area_paragraph_construct (CongEditorAreaParagraph *area_paragraph,
 	return CONG_EDITOR_AREA (area_paragraph);
 }
 
+/**
+ * cong_editor_area_paragraph_new:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_paragraph_new (CongEditorWidget3 *editor_widget)
-
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_paragraph_new");

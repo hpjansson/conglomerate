@@ -36,7 +36,14 @@
 
 #define FO_NS_URI ("http://www.w3.org/1999/XSL/Format")
 
-static gboolean is_fo(CongDocument *doc) 
+/**
+ * is_fo:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+static gboolean 
+is_fo(CongDocument *doc) 
 {
 	CongNodePtr root;
 
@@ -51,8 +58,16 @@ static gboolean is_fo(CongDocument *doc)
 	return FALSE;
 }
 
-
-gboolean fo_pdf_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
+/**
+ * fo_pdf_exporter_document_filter:
+ * @exporter:
+ * @doc:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+fo_pdf_exporter_document_filter(CongServiceExporter *exporter, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -60,7 +75,18 @@ gboolean fo_pdf_exporter_document_filter(CongServiceExporter *exporter, CongDocu
 	return is_fo(doc);
 }
 
-void fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * fo_pdf_export_action_callback:
+ * @exporter:
+ * @doc:
+ * @uri:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("fo_pdf_exporter_action_callback");
 
@@ -74,7 +100,16 @@ void fo_pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument
 }
 
 #if (ENABLE_PRINTING && ENABLE_LIBFO)
-gboolean fo_print_method_document_filter(CongServicePrintMethod *print_method, CongDocument *doc, gpointer user_data)
+/**
+ * fo_print_method_document_filter:
+ * @print_method:
+ * @doc:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+gboolean 
+fo_print_method_document_filter(CongServicePrintMethod *print_method, CongDocument *doc, gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
 	g_return_val_if_fail(doc, FALSE);
@@ -82,7 +117,18 @@ gboolean fo_print_method_document_filter(CongServicePrintMethod *print_method, C
 	return is_fo(doc);
 }
 
-void fo_print_method_action_callback(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
+/**
+ * fo_print_method_action_callback:
+ * @print_method:
+ * @doc:
+ * @gpc:
+ * @user_data:
+ * @toplevel_window:
+ *
+ * TODO: Write me
+ */
+void 
+fo_print_method_action_callback(CongServicePrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_message("fo_print_method_action_callback");
 
@@ -90,8 +136,15 @@ void fo_print_method_action_callback(CongServicePrintMethod *print_method, CongD
 }
 #endif /* #if ENABLE_PRINTING */
 
- /* would be exposed as "plugin_register"? */
-gboolean plugin_fo_plugin_register(CongPlugin *plugin)
+/* would be exposed as "plugin_register"? */
+/**
+ * plugin_fo_plugin_register:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_fo_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
@@ -116,7 +169,14 @@ gboolean plugin_fo_plugin_register(CongPlugin *plugin)
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_fo_plugin_configure(CongPlugin *plugin)
+/**
+ * plugin_fo_plugin_configure:
+ * @plugin:
+ *
+ * TODO: Write me
+ */
+gboolean 
+plugin_fo_plugin_configure(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 

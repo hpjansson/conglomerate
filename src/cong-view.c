@@ -26,6 +26,12 @@
 #include "cong-view.h"
 #include "cong-document.h"
 
+/**
+ * cong_view_get_document:
+ * @view:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_view_get_document(CongView *view)
 {
@@ -34,6 +40,12 @@ cong_view_get_document(CongView *view)
 	return view->doc;
 }
 
+/**
+ * cong_view_get_dispspec
+ * @view:
+ *
+ * TODO: Write me
+ */
 CongDispspec*
 cong_view_get_dispspec(CongView *view)
 {

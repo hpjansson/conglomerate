@@ -98,6 +98,14 @@ callback_marshaller_Document_DispspecElement_Node (GtkWidget *widget,
 }
 
 /* Implementations: */
+/**
+ * cong_menu_item_attach_callback_Document:
+ * @item:
+ * @callback:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_menu_item_attach_callback_Document (GtkMenuItem *item,
 					 CongUICallback_Document callback,
@@ -118,7 +126,16 @@ cong_menu_item_attach_callback_Document (GtkMenuItem *item,
 	return item;
 }
 
-
+/**
+ * cong_menu_item_attach_callback_Document_Node_ParentWindow:
+ * @item:
+ * @callback:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem*
 cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
 							   CongUICallback_Document_Node_ParentWindow callback,
@@ -151,6 +168,16 @@ cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
 	return item;
 }
 
+/**
+ * cong_menu_item_attach_callback_Document_DispspecElement_Node:
+ * @item:
+ * @callback:
+ * @doc:
+ * @ds_element:
+ * @node:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem*
 cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item, 
 							      CongUICallback_Document_DispspecElement_Node callback,
@@ -192,6 +219,16 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
   
    The CongNodePtr is passed to the callback function
 */
+/**
+ * cong_menu_item_attach_callback_legacy:
+ * @item:
+ * @callback:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem*
 cong_menu_item_attach_callback_legacy (GtkMenuItem *item,
 				       gint (*callback)(GtkWidget *widget, CongNodePtr node),
@@ -220,6 +257,14 @@ cong_menu_item_attach_callback_legacy (GtkMenuItem *item,
 	return item;
 }
 
+/**
+ * cong_menu_add_item:
+ * @menu:
+ * @item:
+ * @is_sensitive:
+ *
+ * TODO: Write me
+ */
 GtkMenuItem* 
 cong_menu_add_item (GtkMenu *menu,
 		    GtkMenuItem *item,
@@ -398,11 +443,16 @@ static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecE
 	return(TRUE);
 }
 
-
+/**
+ * popup_item_handlers_destroy:
+ * @widget:
+ * @data:
+ *
+ * TODO: Write me
+ */
 void popup_item_handlers_destroy(GtkWidget *widget, gpointer data)
 {
 	UNUSED_VAR(int sig);
-
 }
 
 #if 0
@@ -436,9 +486,15 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 }
 #endif
 
-
-
-void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
+/**
+ * editor_popup_show:
+ * @widget:
+ * @bevent:
+ *
+ * TODO: Write me
+ */
+void 
+editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 {
 	gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL, bevent->button,
 								 bevent->time);
@@ -446,7 +502,14 @@ void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 	return;
 }
 
-void editor_popup_init(CongDocument *doc)
+/**
+ * editor_popup_init:
+ * @doc:
+ *
+ * TODO: Write me
+ */
+void 
+editor_popup_init(CongDocument *doc)
 {
 	g_return_if_fail (cong_app_singleton());
 
@@ -489,8 +552,15 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 	return TRUE;
 }
 
-
-void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_window)
+/**
+ * editor_popup_build:
+ * @editor_widget:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+void 
+editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_window)
 {
 	GtkMenuItem *item;
 	GtkWidget *sub_popup;
@@ -1007,18 +1077,18 @@ make_element_submenu (GtkMenu *tpopup,
 	}	
 }
 
-
-		      
-		      
-		      
-
-
-
-
-
-GtkWidget* cong_ui_popup_init(CongDocument *doc, 
-			      CongNodePtr node,
-			      GtkWindow *parent_window)
+/**
+ * cong_ui_popup_init:
+ * @doc:
+ * @node:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+GtkWidget* 
+cong_ui_popup_init(CongDocument *doc, 
+		   CongNodePtr node,
+		   GtkWindow *parent_window)
 {
 	GtkMenu *tpopup;
 /* 	GtkWidget *w0; */
@@ -1187,5 +1257,3 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 
 	return GTK_WIDGET(tpopup);
 }
-
-

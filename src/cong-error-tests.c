@@ -5,9 +5,18 @@
 #include "global.h"
 #include "cong-error-dialog.h"
 
-void cong_error_test_file_ops(GtkWindow *parent_window, 
-			      const gchar* filename,
-			      GnomeVFSResult vfs_result)
+/**
+ * cong_error_test_file_ops:
+ * @parent_window:
+ * @filename:
+ * @vfs_result:
+ *
+ * TODO: Write me
+ */
+void 
+cong_error_test_file_ops(GtkWindow *parent_window, 
+			 const gchar* filename,
+			 GnomeVFSResult vfs_result)
 {
 	GtkDialog* dialog;
 
@@ -36,7 +45,14 @@ void cong_error_test_file_ops(GtkWindow *parent_window,
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-void cong_error_tests(GtkWindow *parent_window)
+/**
+ * cong_error_tests:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
+void 
+cong_error_tests(GtkWindow *parent_window)
 {
 	int i;
 	for (i=(int)GNOME_VFS_ERROR_NOT_FOUND;i<(int)GNOME_VFS_NUM_ERRORS;i++) {

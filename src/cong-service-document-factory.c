@@ -39,7 +39,19 @@ struct CongServiceDocumentFactoryPrivate
 
 CONG_DEFINE_CLASS (CongServiceDocumentFactory, cong_service_document_factory, CONG_SERVICE_DOCUMENT_FACTORY, CongService, CONG_SERVICE_TYPE)
 
-
+/**
+ * cong_service_document_factory_construct:
+ * @factory:
+ * @name: 
+ * @description:
+ * @id:
+ * @page_creation_callback:
+ * @action_callback:
+ * @icon:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongServiceDocumentFactory*
 cong_service_document_factory_construct (CongServiceDocumentFactory* factory,
 					 const gchar *name, 
@@ -76,7 +88,15 @@ cong_service_document_factory_construct (CongServiceDocumentFactory* factory,
 }
 
 /* Implementation of CongServiceDocumentFactory: */
-void cong_document_factory_invoke_page_creation_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
+/**
+ * cong_document_factory_invoke_page_creation_callback:
+ * @factory:
+ * @assistant:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_factory_invoke_page_creation_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
 {
 	g_return_if_fail (IS_CONG_SERVICE_DOCUMENT_FACTORY (factory));
 	g_return_if_fail (assistant);
@@ -90,7 +110,15 @@ void cong_document_factory_invoke_page_creation_callback(CongServiceDocumentFact
 	PRIVATE (factory)->page_creation_callback(factory, assistant, PRIVATE (factory)->user_data);
 }
 
-void cong_document_factory_invoke_action_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
+/**
+ * cong_document_factory_invoke_action_callback:
+ * @factory:
+ * @assistant:
+ *
+ * TODO: Write me
+ */
+void 
+cong_document_factory_invoke_action_callback(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant)
 {
 	g_return_if_fail (IS_CONG_SERVICE_DOCUMENT_FACTORY (factory));
 	g_return_if_fail (assistant);
@@ -104,7 +132,14 @@ void cong_document_factory_invoke_action_callback(CongServiceDocumentFactory *fa
 	PRIVATE (factory)->action_callback(factory, assistant, PRIVATE (factory)->user_data);
 }
 
-GdkPixbuf *cong_document_factory_get_icon(CongServiceDocumentFactory *factory)
+/**
+ * cong_document_factory_get_icon:
+ * @factory:
+ *
+ * TODO: Write me
+ */
+GdkPixbuf *
+cong_document_factory_get_icon(CongServiceDocumentFactory *factory)
 {
 	g_return_val_if_fail (IS_CONG_SERVICE_DOCUMENT_FACTORY (factory), NULL);
 

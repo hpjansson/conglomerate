@@ -84,6 +84,15 @@ cong_command_instance_init (CongCommand *node)
 	node->priv = g_new0(CongCommandDetails,1);
 }
 
+/**
+ * cong_command_construct:
+ * @command:
+ * @doc:
+ * @description:
+ * @consolidation_id:
+ *
+ * TODO: Write me
+ */
 CongCommand*
 cong_command_construct (CongCommand *command,
 			CongDocument *doc,
@@ -101,6 +110,14 @@ cong_command_construct (CongCommand *command,
 	return command;
 }
 
+/**
+ * cong_command_private_new:
+ * @doc:
+ * @description:
+ * @consolidation_id:
+ *
+ * TODO: Write me
+ */
 CongCommand*
 cong_command_private_new (CongDocument *doc,
 			  const gchar *description,
@@ -112,6 +129,12 @@ cong_command_private_new (CongDocument *doc,
 				       consolidation_id);
 }
 
+/**
+ * cong_command_get_document:
+ * @command:
+ *
+ * TODO: Write me
+ */
 CongDocument*
 cong_command_get_document (CongCommand *command)
 {
@@ -120,6 +143,12 @@ cong_command_get_document (CongCommand *command)
 	return PRIVATE(command)->doc;
 }
 
+/**
+ * cong_command_get_description:
+ * @command:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_command_get_description (CongCommand *command)
 {
@@ -128,6 +157,12 @@ cong_command_get_description (CongCommand *command)
 	return PRIVATE(command)->description;
 }
 
+/**
+ * cong_command_get_consolidation_id:
+ * @command:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_command_get_consolidation_id (CongCommand *command)
 {
@@ -136,6 +171,12 @@ cong_command_get_consolidation_id (CongCommand *command)
 	return PRIVATE(command)->consolidation_id;
 }
 
+/**
+ * cong_command_undo:
+ * @command:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_undo (CongCommand *command)
 {
@@ -172,6 +213,12 @@ cong_command_undo (CongCommand *command)
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_redo:
+ * @command:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_redo (CongCommand *command)
 {
@@ -203,6 +250,13 @@ cong_command_redo (CongCommand *command)
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_merge:
+ * @dst:
+ * @src:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_merge (CongCommand *dst,
 		    CongCommand *src)
@@ -227,6 +281,13 @@ cong_command_has_ever_been_undone (CongCommand *cmd)
 
 
 /* Adding Atomic modifications: */
+/**
+ * cong_command_add_modification:
+ * @cmd:
+ * @modification:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_modification (CongCommand *cmd,
 			       CongModification *modification)
@@ -246,7 +307,13 @@ cong_command_add_modification (CongCommand *cmd,
 			      (modification));
 }
 
-
+/**
+ * cong_command_add_node_make_orphan:
+ * @cmd:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_node_make_orphan (CongCommand *cmd,
 				   CongNodePtr node)
@@ -264,6 +331,14 @@ cong_command_add_node_make_orphan (CongCommand *cmd,
 
 }
 
+/**
+ * cong_command_add_node_add_after:
+ * @cmd:
+ * @node:
+ * @older_sibling:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_node_add_after (CongCommand *cmd, 
 				 CongNodePtr node, 
@@ -281,7 +356,14 @@ cong_command_add_node_add_after (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
-
+/**
+ * cong_command_add_node_add_before:
+ * @cmd:
+ * @node:
+ * @younger_sibling:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_node_add_before (CongCommand *cmd, 
 				  CongNodePtr node, 
@@ -299,6 +381,14 @@ cong_command_add_node_add_before (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_node_set_parent:
+ * @cmd:
+ * @node:
+ * @adoptive_parent:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_node_set_parent (CongCommand *cmd, 
 				  CongNodePtr node,
@@ -316,6 +406,14 @@ cong_command_add_node_set_parent (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_node_set_text:
+ * @cmd:
+ * @node:
+ * @new_content:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_node_set_text (CongCommand *cmd, 
 				CongNodePtr node, 
@@ -333,6 +431,16 @@ cong_command_add_node_set_text (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_node_set_attribute:
+ * @cmd:
+ * @node:
+ * @ns_ptr:
+ * @name:
+ * @value:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
@@ -354,6 +462,15 @@ cong_command_add_node_set_attribute (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_node_remove_attribute:
+ * @cmd:
+ * @node:
+ * @ns_ptr:
+ * @name:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
@@ -374,6 +491,14 @@ cong_command_add_node_remove_attribute (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 	
+/**
+ * cong_command_add_selection_change:
+ * @cmd:
+ * @new_logical_start:
+ * @new_logical_end:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_selection_change (CongCommand *cmd,
 				   const CongLocation *new_logical_start,
@@ -393,6 +518,13 @@ cong_command_add_selection_change (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_cursor_change:
+ * @cmd:
+ * @new_location:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_cursor_change (CongCommand *cmd,
 				const CongLocation *new_location)
@@ -409,6 +541,13 @@ cong_command_add_cursor_change (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 }
 
+/**
+ * cong_command_add_set_dtd_ptr:
+ * @cmd:
+ * @dtd_ptr:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_set_dtd_ptr (CongCommand *cmd,
 			      xmlDtdPtr dtd_ptr)
@@ -447,6 +586,13 @@ cong_command_add_set_clipboard (CongCommand *cmd,
 }
 #endif
 
+/**
+ * cong_command_add_node_free:
+ * @cmd:
+ * @node:
+ *
+ * This function is not currently implemented
+ */
 void
 cong_command_add_node_free (CongCommand *cmd,
 			    CongNodePtr node)
@@ -455,6 +601,13 @@ cong_command_add_node_free (CongCommand *cmd,
 }
 
 /* Adding Compound modifications: */
+/**
+ * cong_command_add_node_recursive_delete:
+ * @cmd:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_node_recursive_delete (CongCommand *cmd,
 					CongNodePtr node)
@@ -503,6 +656,12 @@ cong_command_add_node_recursive_delete (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_cursor_get_location:
+ * @cursor:
+ *
+ * TODO: Write me
+ */
 const CongLocation*
 cong_cursor_get_location (const CongCursor *cursor)
 {
@@ -511,6 +670,14 @@ cong_cursor_get_location (const CongCursor *cursor)
 	return &cursor->location;
 }
 
+/**
+ * cong_command_for_each_location:
+ * @cmd:
+ * @callback:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_for_each_location (CongCommand *cmd, 
 				CongUpdateLocationCallback callback, 
@@ -636,6 +803,13 @@ recursive_node_deletion_update_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
+/**
+ * cong_command_add_delete_range:
+ * @cmd:
+ * @range:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_delete_range (CongCommand *cmd,
 			       CongRange *range)
@@ -780,6 +954,12 @@ cong_command_add_delete_range (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_add_delete_selection:
+ * @cmd:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_delete_selection (CongCommand *cmd)
 {
@@ -805,6 +985,13 @@ cong_command_add_delete_selection (CongCommand *cmd)
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_add_insert_text_at_cursor:
+ * @cmd:
+ * @string:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_insert_text_at_cursor (CongCommand *cmd, 
 					const gchar *string)
@@ -860,6 +1047,12 @@ cong_command_add_insert_text_at_cursor (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_add_nullify_cursor:
+ * @cmd:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_nullify_cursor (CongCommand *cmd)
 {
@@ -876,6 +1069,12 @@ cong_command_add_nullify_cursor (CongCommand *cmd)
 					&new_logical_loc);
 }
 
+/**
+ * cong_command_add_nullify_selection:
+ * @cmd:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_nullify_selection (CongCommand *cmd)
 {
@@ -895,6 +1094,13 @@ cong_command_add_nullify_selection (CongCommand *cmd)
 					   &new_logical_loc);	
 }
 
+/**
+ * cong_command_add_xml_frag_data_nice_split2:
+ * @cmd:
+ * @loc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd, 
 					     const CongLocation *loc)
@@ -1021,7 +1227,12 @@ merge_adjacent_text_callback (CongDocument *doc,
 	return FALSE;
 }
 
-
+/**
+ * cong_command_add_merge_adjacent_text_nodes:
+ * @cmd:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd)
 {
@@ -1038,6 +1249,13 @@ cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd)
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_add_merge_adjacent_text_children_of_node:
+ * @cmd:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd, 
 						       CongNodePtr node)
@@ -1055,6 +1273,13 @@ cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_can_add_reparent_selection:
+ * @cmd:
+ * @new_parent:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_command_can_add_reparent_selection (CongCommand *cmd,
 					 CongNodePtr new_parent)
@@ -1075,6 +1300,13 @@ cong_command_can_add_reparent_selection (CongCommand *cmd,
 	return TRUE;
 }
 
+/**
+ * cong_command_add_reparent_selection:
+ * @cmd:
+ * @new_parent:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_command_add_reparent_selection (CongCommand *cmd, 
 				     CongNodePtr new_parent)
@@ -1255,6 +1487,15 @@ split3_location_callback (CongDocument *doc,
 }
 
 /* Splits a data node in 3 and returns pointer to the middle one */
+/**
+ * cong_command_add_node_split3:
+ * @cmd:
+ * @node:
+ * @c0:
+ * @c1:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_command_add_node_split3 (CongCommand *cmd, 
 			      CongNodePtr node, 
@@ -1319,6 +1560,13 @@ cong_command_add_node_split3 (CongCommand *cmd,
 	return(d2);
 }
 
+/**
+ * cong_command_add_remove_tag:
+ * @cmd:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void 
 cong_command_add_remove_tag (CongCommand *cmd,
 			     CongNodePtr node)
@@ -1348,6 +1596,13 @@ cong_command_add_remove_tag (CongCommand *cmd,
 	cong_document_end_edit (doc);
 }
 
+/**
+ * cong_command_add_set_cursor_to_first_text_descendant:
+ * @cmd:
+ * @node:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 						      CongNodePtr node)
@@ -1377,6 +1632,15 @@ cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 	}
 }
 
+/**
+ * cong_command_add_set_external_dtd:
+ * @cmd:
+ * @root_element:
+ * @public_id:
+ * @system_id:
+ *
+ * TODO: Write me
+ */
 void
 cong_command_add_set_external_dtd (CongCommand *cmd,
 				   const gchar* root_element,

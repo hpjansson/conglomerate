@@ -44,14 +44,28 @@
 /* Internal function declarations: */
 
 /* Exported function definitions: */
-CongNodePtr cong_node_prev(CongNodePtr node)
+/**
+ * cong_node_prev:
+ * @node:
+ *
+ * TODO: Write me
+ */
+CongNodePtr 
+cong_node_prev(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
 	return node->prev;	
 }
 
-CongNodePtr cong_node_next(CongNodePtr node)
+/**
+ * cong_node_next:
+ * @node:
+ *
+ * TODO: Write me
+ */
+CongNodePtr 
+cong_node_next(CongNodePtr node)
 {
 	g_assert(node);
 	g_return_val_if_fail(node, NULL);
@@ -59,21 +73,42 @@ CongNodePtr cong_node_next(CongNodePtr node)
 	return node->next;
 }
 
-CongNodePtr cong_node_first_child(CongNodePtr node)
+/**
+ * cong_node_first_child:
+ * @node:
+ *
+ * TODO: Write me
+ */
+CongNodePtr 
+cong_node_first_child(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
 	return node->children;
 }
 
-CongNodePtr cong_node_parent(CongNodePtr node)
+/**
+ * cong_node_parent:
+ * @node:
+ *
+ * TODO: Write me
+ */
+CongNodePtr 
+cong_node_parent(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
 	return node->parent;
 }
 
-enum CongNodeType cong_node_type(CongNodePtr node)
+/**
+ * cong_node_type:
+ * @node:
+ *
+ * TODO: Write me
+ */
+enum CongNodeType 
+cong_node_type(CongNodePtr node)
 {
 	g_return_val_if_fail(node, CONG_NODE_TYPE_UNKNOWN);
 
@@ -129,6 +164,14 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 
 }
 
+/**
+ * cong_node_is_element:
+ * @node:
+ * @ns_uri:
+ * @local_name:
+ *
+ * TODO: Write me
+ */
 gboolean 
 cong_node_is_element (CongNodePtr node, 
 		      const gchar *ns_uri,
@@ -150,6 +193,16 @@ cong_node_is_element (CongNodePtr node,
 	return FALSE;
 }
 
+/**
+ * cong_node_is_element_from_set:
+ * @node:
+ * @ns_uri:
+ * @local_name_array:
+ * @num_local_names:
+ * @output_index:
+ *
+ * TODO: Write me
+ */
 gboolean 
 cong_node_is_element_from_set (CongNodePtr node, 
 			       const gchar *ns_uri,
@@ -186,7 +239,12 @@ cong_node_is_element_from_set (CongNodePtr node,
 	
 }
 
-
+/**
+ * cong_node_get_ns:
+ * @node:
+ *
+ * TODO: Write me
+ */
 xmlNsPtr
 cong_node_get_ns (CongNodePtr node)
 {
@@ -195,6 +253,12 @@ cong_node_get_ns (CongNodePtr node)
 	return node->ns;
 }
 
+/**
+ * cong_node_get_ns_uri:
+ * @node:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_node_get_ns_uri (CongNodePtr node)
 {
@@ -207,6 +271,12 @@ cong_node_get_ns_uri (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_get_ns_prefix:
+ * @node:
+ *
+ * TODO: Write me
+ */
 const gchar*
 cong_node_get_ns_prefix (CongNodePtr node)
 {
@@ -219,6 +289,12 @@ cong_node_get_ns_prefix (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_get_local_name:
+ * @node:
+ *
+ * TODO: Write me
+ */
 const gchar* 
 cong_node_get_local_name (CongNodePtr node)
 {
@@ -228,6 +304,12 @@ cong_node_get_local_name (CongNodePtr node)
 	return node->name;
 }
 
+/**
+ * cong_node_get_qualified_name:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_node_get_qualified_name (CongNodePtr node)
 {
@@ -243,6 +325,13 @@ cong_node_get_qualified_name (CongNodePtr node)
 	}	
 }
 
+/**
+ * cong_node_get_ns_for_uri:
+ * @node:
+ * @ns_uri:
+ *
+ * TODO: Write me
+ */
 xmlNsPtr
 cong_node_get_ns_for_uri (CongNodePtr node, 
 			  const gchar *ns_uri)
@@ -252,6 +341,13 @@ cong_node_get_ns_for_uri (CongNodePtr node,
 				  ns_uri);
 }
 
+/**
+ * cong_node_get_ns_for_prefix:
+ * @node:
+ * @prefix:
+ *
+ * TODO: Write me
+ */
 xmlNsPtr
 cong_node_get_ns_for_prefix (CongNodePtr node, 
 			     const gchar *prefix)
@@ -264,9 +360,18 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
 			    prefix);
 }
 
-xmlNsPtr cong_node_get_attr_ns(CongNodePtr node, 
-			       const char *qualified_name, 
-			       const char **output_name)
+/**
+ * cong_node_get_attr_ns:
+ * @node:
+ * @qualified_name:
+ * @output_name:
+ *
+ * TODO: Write me
+ */
+xmlNsPtr 
+cong_node_get_attr_ns(CongNodePtr node, 
+		      const char *qualified_name, 
+		      const char **output_name)
 {
 	g_return_val_if_fail(node != NULL, NULL);
 	g_return_val_if_fail(qualified_name != NULL, NULL);
@@ -299,14 +404,28 @@ xmlNsPtr cong_node_get_attr_ns(CongNodePtr node,
 }
 
 /* Method for getting an XPath to the node: */
-gchar *cong_node_get_path(CongNodePtr node)
+/**
+ * cong_node_get_path:
+ * @node:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_node_get_path(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
 	return xmlGetNodePath(node);
 }
 
-gchar *cong_node_debug_description(CongNodePtr node)
+/**
+ * cong_node_debug_description:
+ * @node:
+ *
+ * TODO: Write me
+ */
+gchar *
+cong_node_debug_description(CongNodePtr node)
 {
 	gchar *result = NULL; 
 	gchar *xpath;
@@ -408,9 +527,14 @@ static const gchar* node_type_names[CONG_NODE_TYPE_NUM]=
 	"CONG_NODE_TYPE_XINCLUDE_END"
 };
 	
-
-
-const gchar *cong_node_type_description(enum CongNodeType node_type)
+/**
+ * cong_node_type_description:
+ * @node_type:
+ *
+ * TODO: Write me
+ */
+const gchar *
+cong_node_type_description(enum CongNodeType node_type)
 {
 	g_return_val_if_fail(node_type<CONG_NODE_TYPE_NUM,"(invalid type)");
 
@@ -419,9 +543,18 @@ const gchar *cong_node_type_description(enum CongNodeType node_type)
 }
 
 /* Methods for accessing attribute values: */
-CongXMLChar* cong_node_get_attribute(CongNodePtr node,
-				     xmlNs* ns_ptr, 
-				     const CongXMLChar* local_attribute_name)
+/**
+ * cong_node_get_attribute:
+ * @node:
+ * @ns_ptr:
+ * @local_attribute_name:
+ *
+ * TODO: Write me
+ */
+CongXMLChar* 
+cong_node_get_attribute(CongNodePtr node,
+			xmlNs* ns_ptr, 
+			const CongXMLChar* local_attribute_name)
 {
 	g_return_val_if_fail(node, NULL);
 	g_return_val_if_fail(local_attribute_name, NULL);
@@ -433,9 +566,18 @@ CongXMLChar* cong_node_get_attribute(CongNodePtr node,
 	}
 }
 
-gboolean cong_node_has_attribute(CongNodePtr node,
-				 xmlNs* ns_ptr, 
-				 const CongXMLChar* local_attribute_name)
+/**
+ * cong_node_has_attribute:
+ * @node:
+ * @ns_ptr:
+ * @local_attribute_name:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_node_has_attribute(CongNodePtr node,
+			xmlNs* ns_ptr, 
+			const CongXMLChar* local_attribute_name)
 {
 	g_return_val_if_fail(node, FALSE);
 	g_return_val_if_fail(local_attribute_name, FALSE);
@@ -462,7 +604,14 @@ gboolean cong_node_has_attribute(CongNodePtr node,
 	}
 }
 
-void cong_node_self_test(CongNodePtr node)
+/**
+ * cong_node_self_test:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_self_test(CongNodePtr node)
 {
 	CongNodePtr iter;
 
@@ -560,7 +709,14 @@ void cong_node_self_test(CongNodePtr node)
 	}
 }
 
-void cong_node_self_test_recursive(CongNodePtr node)
+/**
+ * cong_node_self_test_recursive:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_self_test_recursive(CongNodePtr node)
 {
 
 	g_return_if_fail(node);
@@ -578,7 +734,14 @@ void cong_node_self_test_recursive(CongNodePtr node)
 	}
 }
 
-int cong_node_get_length(CongNodePtr node)
+/**
+ * cong_node_get_length:
+ * @node:
+ *
+ * TODO: Write me
+ */
+int 
+cong_node_get_length(CongNodePtr node)
 {
 	/* get length of content; does not include the zero terminator */
 	g_return_val_if_fail( (cong_node_type(node) == CONG_NODE_TYPE_TEXT) || (cong_node_type(node) == CONG_NODE_TYPE_COMMENT), 0);
@@ -587,7 +750,14 @@ int cong_node_get_length(CongNodePtr node)
 	
 }
 
-gboolean cong_node_should_recurse(CongNodePtr node)
+/**
+ * cong_node_should_recurse:
+ * @node:
+ *
+ * TODO: Write me
+ */
+gboolean 
+cong_node_should_recurse(CongNodePtr node)
 {
 	g_return_val_if_fail(node, FALSE);
 
@@ -625,6 +795,14 @@ gboolean cong_node_should_recurse(CongNodePtr node)
 }
 
 /* Construction: */
+/**
+ * cong_node_new_element:
+ * @xml_ns:
+ * @local_name:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_new_element (xmlNsPtr xml_ns, 
 		       const gchar *local_name, 
@@ -640,6 +818,13 @@ cong_node_new_element (xmlNsPtr xml_ns,
 			      NULL); /* FIXME: audit the character types here */
 }
 
+/**
+ * cong_node_new_element_from_dispspec:
+ * @element:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_node_new_element_from_dispspec (CongDispspecElement *element, 
 				     CongDocument *doc)
@@ -658,6 +843,13 @@ cong_node_new_element_from_dispspec (CongDispspecElement *element,
 			      NULL);
 }
 
+/**
+ * cong_node_new_text:
+ * @text:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_new_text (const char *text, 
 		    CongDocument *doc)
@@ -665,6 +857,14 @@ cong_node_new_text (const char *text,
 	return cong_node_new_text_len(text, strlen(text),doc);
 }
 
+/**
+ * cong_node_new_text_len:
+ * @text:
+ * @len:
+ * @doc:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_new_text_len (const char *text, 
 			int len, 
@@ -678,13 +878,26 @@ cong_node_new_text_len (const char *text,
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 
-void cong_node_free(CongNodePtr node)
+/**
+ * cong_node_free:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_free(CongNodePtr node)
 {
 	g_return_if_fail(node);
 
 	xmlFreeNode(node);
 }
 
+/**
+ * cong_node_generate_source:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_node_generate_source (CongNodePtr node)
 {
@@ -718,6 +931,12 @@ cong_node_generate_source (CongNodePtr node)
 	return result;
 }
 
+/**
+ * cong_node_generate_child_source:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_node_generate_child_source (CongNodePtr node)
 {
@@ -764,7 +983,13 @@ cong_node_generate_child_source (CongNodePtr node)
 	return result;	
 }
 
-
+/**
+ * cong_node_generate_source_from_byte_offset:
+ * @node:
+ * @start_byte_offset:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_node_generate_source_from_byte_offset (CongNodePtr node,
 					    int start_byte_offset)
@@ -784,6 +1009,13 @@ cong_node_generate_source_from_byte_offset (CongNodePtr node,
 /* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, up to the byte offset into the UTF-8: 
    FIXME: specify the end-point more precisely
  */
+/**
+ * cong_node_generate_source_up_to_byte_offset:
+ * @node:
+ * @end_byte_offset:
+ *
+ * TODO: Write me
+ */
 gchar*
 cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
 					     int end_byte_offset)
@@ -802,6 +1034,14 @@ cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
 
 /* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, between the given byte offset into the UTF-8: 
    FIXME: specify the end-point more precisely
+ */
+/**
+ * cong_node_generate_source_between_byte_offsets:
+ * @node:
+ * @start_byte_offset:
+ * @end_byte_offset:
+ *
+ * TODO: Write me
  */
 gchar*
 cong_node_generate_source_between_byte_offsets (CongNodePtr node,
@@ -847,6 +1087,13 @@ cong_node_generate_source_between_byte_offsets (CongNodePtr node,
 	return result;
 }
 
+/**
+ * cong_node_recursive_set_doc:
+ * @node:
+ * @xml_doc:
+ *
+ * TODO: Write me
+ */
 void
 cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)
 {
@@ -859,7 +1106,14 @@ cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)
 	}
 }
 
-CongNodePtr cong_node_recursive_dup(CongNodePtr node)
+/**
+ * cong_node_recursive_dup:
+ * @node:
+ *
+ * TODO: Write me
+ */
+CongNodePtr 
+cong_node_recursive_dup(CongNodePtr node)
 {
 	CongNodePtr new_node = xmlCopyNode(node, TRUE);
 
@@ -871,6 +1125,13 @@ CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 	return new_node;
 }
 
+/**
+ * cong_node_is_descendant_of:
+ * @node:
+ * @potential_ancestor:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_is_descendant_of (CongNodePtr node,
 			    CongNodePtr potential_ancestor)
@@ -935,7 +1196,14 @@ update_entities (CongNodePtr node)
 }
 
 /* Tree manipulation: */
-void cong_node_private_make_orphan(CongNodePtr node)
+/**
+ * cong_node_private_make_orphan:
+ * @node:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_make_orphan(CongNodePtr node)
 {
 	CongNodePtr former_parent;
 	CongNodePtr former_prev;
@@ -1024,7 +1292,15 @@ void cong_node_private_make_orphan(CongNodePtr node)
 	}
 }
 
-void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
+/**
+ * cong_node_private_add_after:
+ * @node:
+ * @older_sibling:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_add_after");
 
@@ -1079,7 +1355,15 @@ void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 
 }
 
-void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
+/**
+ * cong_node_private_add_before:
+ * @node:
+ * @younger_sibling:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_add_before");
 
@@ -1135,7 +1419,15 @@ void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 
 }
 
-void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
+/**
+ * cong_node_private_set_parent:
+ * @node:
+ * @adoptive_parent:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_parent");
 
@@ -1176,7 +1468,15 @@ void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 
 }
 
-void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
+/**
+ * cong_node_private_set_text:
+ * @node:
+ * @new_content:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_text");
 
@@ -1188,10 +1488,20 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 	update_entities (node);
 }
 
-void cong_node_private_set_attribute(CongNodePtr node,
-				     xmlNs *ns_ptr, 
-				     const xmlChar *local_attribute_name,
-				     const xmlChar *value)
+/**
+ * cong_node_private_set_attribute:
+ * @node:
+ * @ns_ptr:
+ * @local_attribute_name:
+ * @value:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_set_attribute(CongNodePtr node,
+				xmlNs *ns_ptr, 
+				const xmlChar *local_attribute_name,
+				const xmlChar *value)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_attribute");
 
@@ -1207,9 +1517,18 @@ void cong_node_private_set_attribute(CongNodePtr node,
 	update_entities (node);
 }
 
-void cong_node_private_remove_attribute(CongNodePtr node, 
-					xmlNs *ns_ptr,
-					const xmlChar *local_attribute_name)
+/**
+ * cong_node_private_remove_attribute:
+ * @node:
+ * @ns_ptr:
+ * @local_attribute_name:
+ *
+ * TODO: Write me
+ */
+void 
+cong_node_private_remove_attribute(CongNodePtr node, 
+				   xmlNs *ns_ptr,
+				   const xmlChar *local_attribute_name)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_remove_attribute");
 
@@ -1225,6 +1544,14 @@ void cong_node_private_remove_attribute(CongNodePtr node,
 }
 
 /* Utilities: */
+/**
+ * cong_node_get_child_by_name:
+ * @node:
+ * @ns_uri:
+ * @local_name:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_get_child_by_name (CongNodePtr node, 
 			     const gchar *ns_uri, 
@@ -1244,6 +1571,12 @@ cong_node_get_child_by_name (CongNodePtr node,
 	return NULL;
 }
 
+/**
+ * cong_node_get_first_text_node_descendant:
+ * @node:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_get_first_text_node_descendant (CongNodePtr node)
 {
@@ -1266,6 +1599,13 @@ cong_node_get_first_text_node_descendant (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_get_whitespace_handling:
+ * @doc:
+ * @text_node:
+ *
+ * TODO: Write me
+ */
 enum CongWhitespaceHandling
 cong_node_get_whitespace_handling (CongDocument *doc,
 				   CongNodePtr text_node)
@@ -1285,6 +1625,12 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 	return CONG_WHITESPACE_NORMALIZE;
 }
 
+/**
+ * cong_node_should_be_visible_in_editor:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_should_be_visible_in_editor (CongNodePtr node)
 {
@@ -1322,6 +1668,12 @@ cong_node_should_be_visible_in_editor (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_is_valid_cursor_location:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_is_valid_cursor_location (CongNodePtr node)
 {
@@ -1338,6 +1690,12 @@ cong_node_is_valid_cursor_location (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_supports_byte_offsets:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_supports_byte_offsets (CongNodePtr node)
 {
@@ -1346,6 +1704,12 @@ cong_node_supports_byte_offsets (CongNodePtr node)
 	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
 }
 
+/**
+ * cong_node_can_be_cut:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_can_be_cut (CongNodePtr node)
 {
@@ -1372,6 +1736,12 @@ cong_node_can_be_cut (CongNodePtr node)
 	}
 }
 
+/**
+ * cong_node_can_be_copied:
+ * @node:
+ *
+ * TODO: Write me
+ */
 gboolean
 cong_node_can_be_copied (CongNodePtr node)
 {
@@ -1379,6 +1749,13 @@ cong_node_can_be_copied (CongNodePtr node)
 	return cong_node_can_be_cut(node);
 }
 
+/**
+ * cong_node_get_deepest_common_parent:
+ * @n0:
+ * @n1:
+ *
+ * TODO: Write me
+ */
 CongNodePtr 
 cong_node_get_deepest_common_parent (CongNodePtr n0, 
 				     CongNodePtr n1)
@@ -1400,6 +1777,13 @@ cong_node_get_deepest_common_parent (CongNodePtr n0,
 	return NULL;
 }
 
+/**
+ * cong_node_get_ordering:
+ * @n0:
+ * @n1:
+ *
+ * TODO: Write me
+ */
 int 
 cong_node_get_ordering (CongNodePtr n0,
 			CongNodePtr n1)
@@ -1463,6 +1847,14 @@ cong_node_get_ordering (CongNodePtr n0,
 	}
 }
 
+/**
+ * cong_node_calc_first_node_in_subtree_satisfying:
+ * @node:
+ * @predicate:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
 						 CongNodePredicate predicate,
@@ -1493,6 +1885,14 @@ cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
 	return NULL;
 }
 
+/**
+ * cong_node_calc_final_node_in_subtree_satisfying:
+ * @node:
+ * @predicate:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node, 
 						 CongNodePredicate predicate,
@@ -1523,6 +1923,14 @@ cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node,
 	}
 }
 
+/**
+ * cong_node_calc_prev_node_satisfying:
+ * @node:
+ * @predicate:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_node_calc_prev_node_satisfying (CongNodePtr node, 
 				     CongNodePredicate predicate,
@@ -1560,6 +1968,14 @@ cong_node_calc_prev_node_satisfying (CongNodePtr node,
 	}
 }
 
+/**
+ * cong_node_calc_next_node_satisfying:
+ * @node:
+ * @predicate:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
 CongNodePtr
 cong_node_calc_next_node_satisfying (CongNodePtr node,
 				     CongNodePredicate predicate,
@@ -1594,7 +2010,3 @@ cong_node_calc_next_node_satisfying (CongNodePtr node,
 		return NULL;
 	}
 }
-
-
-/* Internal function definitions: */
-

@@ -92,6 +92,13 @@ cong_editor_area_flow_holder_single_instance_init (CongEditorAreaFlowHolderSingl
 }
 
 /* Exported function definitions: */
+/**
+ * cong_editor_area_flow_holder_single_construct:
+ * @area_flow_holder_single:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_single_construct (CongEditorAreaFlowHolderSingle *area_flow_holder_single,
 					CongEditorWidget3 *editor_widget)
@@ -110,6 +117,12 @@ cong_editor_area_flow_holder_single_construct (CongEditorAreaFlowHolderSingle *a
 	return CONG_EDITOR_AREA (area_flow_holder_single);
 }
 
+/**
+ * cong_editor_area_flow_holder_single_new:
+ * @editor_widget:
+ *
+ * TODO: Write me
+ */
 CongEditorArea*
 cong_editor_area_flow_holder_single_new (CongEditorWidget3 *editor_widget)
 {
@@ -211,6 +224,13 @@ remove_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	PRIVATE(area_flow_holder_single)->single_editor_area = NULL;
 }
 
+/**
+ * cong_editor_widget_create_child_policy_for_node_with_single_area:
+ * @editor_node:
+ * @editor_area:
+ *
+ * TODO: Write me
+ */
 CongEditorChildPolicy*
 cong_editor_widget_create_child_policy_for_node_with_single_area(CongEditorNode *editor_node,
 								 CongEditorArea *editor_area)

@@ -18,7 +18,17 @@
 
 #include <libxml/catalog.h>
 
-void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
+/**
+ * cong_parser_result_add_issue:
+ * @result:
+ * @type:
+ * @linenum:
+ * @description:
+ *
+ * TODO: Write me
+ */
+void 
+cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType type, int linenum, gchar *description)
 {
 	CongParserIssue *issue;
 
@@ -41,7 +51,17 @@ void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType t
 
 CongParserResult *global_parser_result=NULL;
 
-void on_issue(CongParserResult *result, enum CongIssueType type, xmlParserCtxtPtr ctxt, gchar* description)
+/**
+ * on_issue:
+ * @result:
+ * @type:
+ * @ctxt:
+ * @description:
+ *
+ * TODO: Write me
+ */
+void 
+on_issue(CongParserResult *result, enum CongIssueType type, xmlParserCtxtPtr ctxt, gchar* description)
 {
 	g_return_if_fail(description);
 
@@ -60,7 +80,16 @@ void on_issue(CongParserResult *result, enum CongIssueType type, xmlParserCtxtPt
 	}
 }
 
-void on_sax_error(void *ctx, const char *msg, ...)
+/**
+ * on_sax_error:
+ * @ctx:
+ * @msg:
+ * @...: FIXME: Check how gtk-doc wants to handle var-args
+ *
+ * TODO: Write me
+ */
+void 
+on_sax_error(void *ctx, const char *msg, ...)
 {
 	gchar *str;
 	printf("on_sax_error\n");
@@ -74,7 +103,16 @@ void on_sax_error(void *ctx, const char *msg, ...)
 	g_free(str);
 }
 
-void on_sax_warning(void *ctx, const char *msg, ...)
+/**
+ * on_sax_warning:
+ * @ctx:
+ * @msg:
+ * @...: FIXME: Check how gtk-doc wants to handle var args
+ *
+ * TODO: Write me
+ */
+void 
+on_sax_warning(void *ctx, const char *msg, ...)
 {
 	gchar *str;
 	printf("on_sax_warning\n");
@@ -111,11 +149,20 @@ typedef struct CongErrorReport
 } CongErrorReport;
 
 /* The "row-activated" signal */
-
-void  on_row_activated(GtkTreeView *treeview,
-		       GtkTreePath *arg1,
-		       GtkTreeViewColumn *arg2,
-		       gpointer user_data)
+/**
+ * on_row_activated:
+ * @treeview:
+ * @arg1:
+ * @arg2:
+ * @user_data:
+ *
+ * TODO: Write me
+ */
+void  
+on_row_activated(GtkTreeView *treeview,
+                 GtkTreePath *arg1,
+                 GtkTreeViewColumn *arg2,
+                 gpointer user_data)
 {
 	CongErrorReport *report = (CongErrorReport*)user_data;
 	GtkTreeIter tree_iter;
@@ -149,7 +196,14 @@ enum {
 	CONG_PARSER_ERROR_RESPONSE_RETRY = 1
 };
 
-GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
+/**
+ * cong_parser_result_dialog_new:
+ * @parser_result:
+ *
+ * TODO: Write me
+ */
+GtkDialog *
+cong_parser_result_dialog_new(CongParserResult *parser_result)
 {
 	GtkWidget *dialog;
 	gchar *title, *filename;
@@ -306,7 +360,14 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	return GTK_DIALOG(dialog);
 }
 
-void on_parser_error_details(gpointer data)
+/**
+ * on_parser_error_details:
+ * @data:
+ *
+ * TODO: Write me
+ */
+void 
+on_parser_error_details(gpointer data)
 {
 	GtkDialog * dialog;
 
@@ -317,6 +378,13 @@ void on_parser_error_details(gpointer data)
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
+/**
+ * cong_error_dialog_new_file_open_failed_from_parser_error:
+ * @string_uri:
+ * @parser_result:
+ *
+ * TODO: Write me
+ */
 GtkDialog*
 cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
 							  CongParserResult *parser_result)
@@ -344,6 +412,15 @@ cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_ur
 	return dialog;
 }
 
+/**
+ * cong_ui_parse_buffer:
+ * @buffer:
+ * @size:
+ * @string_uri:
+ * @parent_window:
+ *
+ * TODO: Write me
+ */
 xmlDocPtr 
 cong_ui_parse_buffer (const char* buffer,
 		      GnomeVFSFileSize size, 
@@ -399,6 +476,13 @@ cong_ui_parse_buffer (const char* buffer,
 	
 }
 
+/**
+ * cong_parse_from_filename:
+ * @string_uri:
+ * @parser_result:
+ *
+ * TODO: Write me
+ */
 xmlParserCtxtPtr
 cong_parse_from_filename (const gchar* string_uri,
 			  CongParserResult *parser_result)
@@ -429,6 +513,14 @@ cong_parse_from_filename (const gchar* string_uri,
 	return ctxt;
 }
 
+/**
+ * cong_parse_from_memory:
+ * @buffer:
+ * @size:
+ * @parser_result:
+ *
+ * TODO: Write me
+ */
 xmlParserCtxtPtr
 cong_parse_from_memory (const char* buffer, 
 			GnomeVFSFileSize size,
