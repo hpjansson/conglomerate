@@ -208,7 +208,7 @@ void curs_prev_char(struct xed *xed)
 		}
 
 		if (!n) n = n0;
-		if (xml_frag_type(n) == XML_DATA) break;
+		else if (xml_frag_type(n) == XML_DATA) break;
 
 		while (n)
 		{
@@ -277,7 +277,7 @@ void curs_next_char(struct xed *xed)
 		}
 
 		if (!n) n = n0;
-		if (xml_frag_type(n) == XML_DATA) break;
+		else if (xml_frag_type(n) == XML_DATA) break;
 
 		while (n)
 		{

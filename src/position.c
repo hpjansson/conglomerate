@@ -8,7 +8,7 @@
 #include "global.h"
 
 
-#define WIDTH_WRAP(disp_w, x, word_w) (((x) + (word_w)) > (disp_w))
+#define WIDTH_WRAP(disp_w, x, word_w) (((x) + (word_w)) > (disp_w - 1))
 
 
 void assert(void *a)
