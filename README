@@ -24,7 +24,7 @@ build it.
 
 If you're compiling from CVS, type
 
-  ./autogen.sh   		# generate and run ./configure
+  ./autogen.sh   	# which does generate and run ./configure
   make
 
 and see what happens. This should produce an executable called "conge" in
