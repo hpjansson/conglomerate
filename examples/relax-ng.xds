@@ -1,59 +1,59 @@
 <?xml version="1.0"?>
 <dispspec>
 	<metadata>
-		<name xml:lang="en">RELAX NG</name>
-		<description xml:lang="en">RELAX NG is a schema language i.e. a language for describing the structure of an XML document.</description>
+		<name>RELAX NG</name>
+		<description>RELAX NG is a schema language i.e. a language for describing the structure of an XML document.</description>
 	</metadata>
 	<serialisation>
 		<format extension="rng"/>
 	</serialisation>
 	<document-models/>
 	<element-list>
-		<element localName="grammar" type="structural">
-			<name xml:lang="en">Grammar</name>
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="grammar" type="structural">
+			<name>Grammar</name>
 		</element>
-		<element localName="define" type="structural">
-			<name xml:lang="en">Define</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="define" type="structural">
+			<name>Define</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element localName="element" type="structural">
-			<name xml:lang="en">XML Element</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="element" type="structural">
+			<name>XML Element</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
-		<element localName="attribute" type="structural">
-			<name xml:lang="en">XML Attribute</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="attribute" type="structural">
+			<name>XML Attribute</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
-		<element localName="zeroOrMore" type="structural">
-			<name xml:lang="en">ZeroOrMore</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="zeroOrMore" type="structural">
+			<name>ZeroOrMore</name>			
 		</element>
-		<element localName="choice" type="structural">
-			<name xml:lang="en">Choice</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="choice" type="structural">
+			<name>Choice</name>			
 		</element>
-		<element localName="text" type="structural">
-			<name xml:lang="en">Text</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="text" type="structural">
+			<name>Text</name>			
 		</element>
-		<element localName="ref" type="structural">
-			<name xml:lang="en">Reference</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="ref" type="structural">
+			<name>Reference</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element localName="oneOrMore" type="structural">
-			<name xml:lang="en">OneOrMore</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="oneOrMore" type="structural">
+			<name>OneOrMore</name>			
 		</element>
-		<element localName="group" type="structural">
-			<name xml:lang="en">Group</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="group" type="structural">
+			<name>Group</name>			
 		</element>
-		<element localName="optional" type="structural">
-			<name xml:lang="en">Optional</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="optional" type="structural">
+			<name>Optional</name>			
 		</element>
-		<element localName="value" type="structural">
-			<name xml:lang="en">Value</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="value" type="structural">
+			<name>Value</name>			
 		</element>
-		<element localName="start" type="structural">
-			<name xml:lang="en">Start</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="start" type="structural">
+			<name>Start</name>			
 		</element>
-		<element localName="empty" type="structural">
-			<name xml:lang="en">Empty</name>			
+		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="empty" type="structural">
+			<name>Empty</name>			
 		</element>
 	</element-list>
 </dispspec>

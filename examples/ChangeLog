@@ -1,5 +1,9 @@
 2004-02-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* relax-ng.xds
+
+	Fixed the nsURI attribute
+	
 	* Makefile.am
 
 	Added teixlite.xds
