@@ -1,23 +1,22 @@
 # English (British) translation.
-# Copyright (C) 2004 THE conglomerate'S COPYRIGHT HOLDER
+# Copyright (C) 2004 The GNOME Foundation
 # This file is distributed under the same license as the conglomerate package.
-# Gareth Owen <gowen72@yahoo.com>, 2004.
-# 
+# Gareth Owen <gowen72@yahoo.com>, David Lodge <dave@cirt.net>, 2004.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-20 19:41+0100\n"
-"PO-Revision-Date: 2004-07-20 19:41+0100\n"
+"POT-Creation-Date: 2004-07-28 23:14+0100\n"
+"PO-Revision-Date: 2004-07-28 23:15+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: English/GB <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1500
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1511
 #: src/cong-primary-window.c:799 src/cong-primary-window.c:984
 #: src/cong-primary-window.c:986 src/cong-primary-window.c:992
 msgid "Conglomerate XML Editor"
@@ -596,6 +595,10 @@ msgstr "unnamed"
 #: src/cong-dispspec.c:521
 msgid "No description available."
 msgstr "No description available."
+
+#: src/cong-document.c:649
+msgid "(Untitled)"
+msgstr "(Untitled)"
 
 #: src/cong-document.c:948
 #, c-format
@@ -1225,7 +1228,8 @@ msgstr "Import file..."
 msgid "Creating a new file (%s)"
 msgstr "Creating a new file (%s)"
 
-#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:643
+#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
+#: src/cong-file-new.c:643
 msgid "Creating a new file"
 msgstr "Creating a new file"
 
@@ -1367,7 +1371,7 @@ msgstr "Unspecified"
 msgid "Remove DTD"
 msgstr "Remove DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1643
+#: src/cong-file-properties.c:380 src/cong-util.c:1644
 msgid "Associate with DTD"
 msgstr "Associate with DTD"
 
@@ -1399,17 +1403,17 @@ msgstr "The selected menu item has not yet been implemented."
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate cannot open the result of the transformation"
 
-#: src/cong-menus.c:567 src/cong-plugin.c:646
+#: src/cong-menus.c:567 src/cong-plugin.c:648
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "There was a problem reading the stylesheet file \"%s\""
 
-#: src/cong-menus.c:570 src/cong-menus.c:594 src/cong-plugin.c:649
-#: src/cong-plugin.c:673
+#: src/cong-menus.c:570 src/cong-menus.c:594 src/cong-plugin.c:651
+#: src/cong-plugin.c:679
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate could not transform the document"
 
-#: src/cong-menus.c:591 src/cong-plugin.c:670
+#: src/cong-menus.c:591 src/cong-plugin.c:676
 msgid "There was a problem applying the stylesheet file"
 msgstr "There was a problem applying the stylesheet file"
 
@@ -1430,14 +1434,14 @@ msgstr "Message Log - Conglomerate"
 msgid "Signal Log - Conglomerate"
 msgstr "Signal Log - Conglomerate"
 
-#: src/cong-menus.c:1498
+#: src/cong-menus.c:1509
 msgid "translator_credits"
 msgstr ""
 "Abigail Brady <morwen@evilmagi_c.org>\n"
 "Bastien Nocera <hadess@hadess.net>\n"
 "Gareth Owen <gowen72@yahoo.com>"
 
-#: src/cong-menus.c:1502
+#: src/cong-menus.c:1513
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1445,214 +1449,146 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 
-#: src/cong-menus.c:1503
+#: src/cong-menus.c:1514
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: a free, user-friendly XML editor"
 
-#: src/cong-menus.c:1548 src/cong-menus.c:1628
+#: src/cong-menus.c:1559 src/cong-menus.c:1640
 msgid "/_File"
 msgstr "/_File"
 
-#: src/cong-menus.c:1549 src/cong-menus.c:1629
+#: src/cong-menus.c:1560 src/cong-menus.c:1641
 msgid "/File/_New..."
 msgstr "/File/_New..."
 
-#: src/cong-menus.c:1550 src/cong-menus.c:1630
+#: src/cong-menus.c:1561 src/cong-menus.c:1642
 msgid "/File/_Open..."
 msgstr "/File/_Open..."
 
-#: src/cong-menus.c:1551 src/cong-menus.c:1556 src/cong-menus.c:1561
-#: src/cong-menus.c:1564 src/cong-menus.c:1567 src/cong-menus.c:1569
-#: src/cong-menus.c:1631 src/cong-menus.c:1633
+#: src/cong-menus.c:1562 src/cong-menus.c:1567 src/cong-menus.c:1572
+#: src/cong-menus.c:1575 src/cong-menus.c:1578 src/cong-menus.c:1580
+#: src/cong-menus.c:1643 src/cong-menus.c:1645
 msgid "/File/"
 msgstr "/File/"
 
-#: src/cong-menus.c:1552
+#: src/cong-menus.c:1563
 msgid "/File/_Save"
 msgstr "/File/_Save"
 
-#: src/cong-menus.c:1553
+#: src/cong-menus.c:1564
 msgid "/File/Save _As..."
 msgstr "/File/Save _As..."
 
-#: src/cong-menus.c:1554
+#: src/cong-menus.c:1565
 msgid "/File/Sa_ve a Copy..."
 msgstr "/File/Sa_ve a Copy..."
 
-#: src/cong-menus.c:1557
+#: src/cong-menus.c:1568
 msgid "/File/Print Previe_w..."
 msgstr "/File/Print Previe_w..."
 
-#: src/cong-menus.c:1558
+#: src/cong-menus.c:1569
 msgid "/File/_Print..."
 msgstr "/File/_Print..."
 
-#: src/cong-menus.c:1562
+#: src/cong-menus.c:1573
 msgid "/File/_Revert"
 msgstr "/File/_Revert"
 
-#: src/cong-menus.c:1565 src/cong-menus.c:1632
+#: src/cong-menus.c:1576 src/cong-menus.c:1644
 msgid "/File/_Import..."
 msgstr "/File/_Import..."
 
-#: src/cong-menus.c:1566
+#: src/cong-menus.c:1577
 msgid "/File/_Export..."
 msgstr "/File/_Export..."
 
-#: src/cong-menus.c:1568
+#: src/cong-menus.c:1579
 msgid "/File/Proper_ties"
 msgstr "/File/Proper_ties"
 
-#: src/cong-menus.c:1570 src/cong-menus.c:1634
+#: src/cong-menus.c:1581 src/cong-menus.c:1646
 msgid "/File/_Close"
 msgstr "/File/_Close"
 
-#: src/cong-menus.c:1571 src/cong-menus.c:1635
+#: src/cong-menus.c:1582 src/cong-menus.c:1647
 msgid "/File/_Quit"
 msgstr "/File/_Quit"
 
-#: src/cong-menus.c:1573 src/cong-menus.c:1637
+#: src/cong-menus.c:1584 src/cong-menus.c:1649
 msgid "/_Edit"
 msgstr "/_Edit"
 
-#: src/cong-menus.c:1574
+#: src/cong-menus.c:1585
 msgid "/Edit/_Undo"
 msgstr "/Edit/_Undo"
 
-#: src/cong-menus.c:1575
+#: src/cong-menus.c:1586
 msgid "/Edit/_Redo"
 msgstr "/Edit/_Redo"
 
-#: src/cong-menus.c:1576 src/cong-menus.c:1580 src/cong-menus.c:1585
-#: src/cong-menus.c:1588 src/cong-menus.c:1591
+#: src/cong-menus.c:1587 src/cong-menus.c:1591 src/cong-menus.c:1596
+#: src/cong-menus.c:1599 src/cong-menus.c:1602
 msgid "/Edit/"
 msgstr "/Edit/"
 
-#: src/cong-menus.c:1577
+#: src/cong-menus.c:1588
 msgid "/Edit/Cu_t"
 msgstr "/Edit/Cu_t"
 
-#: src/cong-menus.c:1578
+#: src/cong-menus.c:1589
 msgid "/Edit/_Copy"
 msgstr "/Edit/_Copy"
 
-#: src/cong-menus.c:1579
+#: src/cong-menus.c:1590
 msgid "/Edit/_Paste"
 msgstr "/Edit/_Paste"
 
-#: src/cong-menus.c:1581
+#: src/cong-menus.c:1592
 msgid "/Edit/_Find..."
 msgstr "/Edit/_Find..."
 
-#: src/cong-menus.c:1582
+#: src/cong-menus.c:1593
 msgid "/Edit/Find Ne_xt"
 msgstr "/Edit/Find Ne_xt"
 
-#: src/cong-menus.c:1583
+#: src/cong-menus.c:1594
 msgid "/Edit/Find Pre_vious"
 msgstr "/Edit/Find Pre_vious"
 
-#: src/cong-menus.c:1584
+#: src/cong-menus.c:1595
 msgid "/Edit/R_eplace..."
 msgstr "/Edit/R_eplace..."
 
-#: src/cong-menus.c:1587
+#: src/cong-menus.c:1598
 msgid "/Edit/_Insert..."
 msgstr "/Edit/_Insert..."
 
-#: src/cong-menus.c:1590
+#: src/cong-menus.c:1601
 msgid "/Edit/View _Source"
 msgstr "/Edit/View _Source"
 
-#: src/cong-menus.c:1592 src/cong-menus.c:1638
+#: src/cong-menus.c:1603 src/cong-menus.c:1650
 msgid "/Edit/Prefere_nces"
 msgstr "/Edit/Prefere_nces"
 
-#: src/cong-menus.c:1595
-msgid "/Debug"
-msgstr "/Debug"
-
-#: src/cong-menus.c:1596
-msgid "/Debug/Begin self-test of error-reporting system..."
-msgstr "/Debug/Begin self-test of error-reporting system..."
-
-#: src/cong-menus.c:1597
-msgid "/Debug/Transform DocBook to HTML"
-msgstr "/Debug/Transform DocBook to HTML"
-
-#: src/cong-menus.c:1598
-msgid "/Debug/Transform DocBook to XHTML"
-msgstr "/Debug/Transform DocBook to XHTML"
-
-#: src/cong-menus.c:1599
-msgid "/Debug/Transform DocBook to HTML Help"
-msgstr "/Debug/Transform DocBook to HTML Help"
-
-#: src/cong-menus.c:1600
-msgid "/Debug/Transform DocBook to Java Help"
-msgstr "/Debug/Transform DocBook to Java Help"
-
-#: src/cong-menus.c:1601
-msgid "/Debug/Transform DocBook to FO"
-msgstr "/Debug/Transform DocBook to FO"
-
-#: src/cong-menus.c:1603
-msgid "/Debug/Preview XSL:FO"
-msgstr "/Debug/Preview XSL:FO"
-
-#: src/cong-menus.c:1605
-msgid "/Debug/DTD"
-msgstr "/Debug/DTD"
-
-#: src/cong-menus.c:1606
-msgid "/Debug/Dialog"
-msgstr "/Debug/Dialogue"
-
-#: src/cong-menus.c:1607
-msgid "/Debug/Progress Checklist"
-msgstr "/Debug/Progress Checklist"
-
-#: src/cong-menus.c:1608
-msgid "/Debug/Document Message Log"
-msgstr "/Debug/Document Message Log"
-
-#: src/cong-menus.c:1609
-msgid "/Debug/Document Signal Log"
-msgstr "/Debug/Document Signal Log"
-
-#: src/cong-menus.c:1610
-msgid "/Debug/Information Alert"
-msgstr "/Debug/Information Alert"
-
-#: src/cong-menus.c:1611
-msgid "/Debug/Glade Test"
-msgstr "/Debug/Glade Test"
-
-#: src/cong-menus.c:1612
-msgid "/Debug/Insert XML Fragment"
-msgstr "/Debug/Insert XML Fragment"
-
-#: src/cong-menus.c:1613
-msgid "/Debug/Command Test"
-msgstr "/Debug/Command Test"
-
-#: src/cong-menus.c:1616
+#: src/cong-menus.c:1628
 msgid "/_Tools"
 msgstr "/_Tools"
 
-#: src/cong-menus.c:1618 src/cong-menus.c:1650
+#: src/cong-menus.c:1630 src/cong-menus.c:1662
 msgid "/_Help"
 msgstr "/_Help"
 
-#: src/cong-menus.c:1619 src/cong-menus.c:1651
+#: src/cong-menus.c:1631 src/cong-menus.c:1663
 msgid "/Help/_Contents"
 msgstr "/Help/_Contents"
 
-#: src/cong-menus.c:1620 src/cong-menus.c:1652
+#: src/cong-menus.c:1632 src/cong-menus.c:1664
 msgid "/Help/_Homepage"
 msgstr "/Help/_Homepage"
 
-#: src/cong-menus.c:1621 src/cong-menus.c:1653
+#: src/cong-menus.c:1633 src/cong-menus.c:1665
 msgid "/Help/_About"
 msgstr "/Help/_About"
 
@@ -1759,13 +1695,13 @@ msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate could not find display information for the new file"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1136
+#: src/cong-plugin.c:1145
 #, c-format
 msgid "<%s> property dialog"
 msgstr "<%s> property dialogue"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1139
+#: src/cong-plugin.c:1148
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Provides a Properties dialogue for the <%s> element"
@@ -1825,23 +1761,23 @@ msgstr "Welcome to the much-delayed Conglomerate editor."
 msgid "%s (modified) - %s"
 msgstr "%s (modified) - %s"
 
-#: src/cong-util.c:367 src/plugin-docbook.c:1201
+#: src/cong-util.c:368 src/plugin-docbook.c:1238
 msgid "Printing XSL Formatting Objects"
 msgstr "Printing XSL Formatting Objects"
 
-#: src/cong-util.c:411
+#: src/cong-util.c:412
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "This will eventually be the result from cong_util_print_xslfo"
 
-#: src/cong-util.c:1460
+#: src/cong-util.c:1461
 msgid "(no description available)"
 msgstr "(no description available)"
 
-#: src/cong-util.c:1632
+#: src/cong-util.c:1633
 msgid "DTD files"
 msgstr "DTD files"
 
-#: src/cong-util.c:1635
+#: src/cong-util.c:1636
 msgid "Select a DTD"
 msgstr "Select a DTD"
 
@@ -1903,51 +1839,51 @@ msgstr ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
 
-#: src/plugin-docbook.c:208
+#: src/plugin-docbook.c:215
 msgid "Text of the article goes here"
 msgstr "Text of the article goes here"
 
-#: src/plugin-docbook.c:227
+#: src/plugin-docbook.c:234
 msgid "Untitled Article"
 msgstr "Untitled Article"
 
-#: src/plugin-docbook.c:277
+#: src/plugin-docbook.c:284
 msgid "Text of the first chapter goes here"
 msgstr "Text of the first chapter goes here"
 
-#: src/plugin-docbook.c:296
+#: src/plugin-docbook.c:303
 msgid "Untitled Book"
 msgstr "Untitled Book"
 
-#: src/plugin-docbook.c:351
+#: src/plugin-docbook.c:358
 msgid "Untitled Set of Documents"
 msgstr "Untitled Set of Documents"
 
-#: src/plugin-docbook.c:1085
+#: src/plugin-docbook.c:1115
 msgid "Exporting PDF file"
 msgstr "Exporting PDF file"
 
-#: src/plugin-docbook.c:1089 src/plugin-docbook.c:1199
+#: src/plugin-docbook.c:1119 src/plugin-docbook.c:1236
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transforming DocBook into XSL Formatting Objects"
 
-#: src/plugin-docbook.c:1091
+#: src/plugin-docbook.c:1121
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Laying out XSL Formatting Objects as a PDF file"
 
-#: src/plugin-docbook.c:1104 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1136 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Converting XSL Formatting Objects to PDF"
 
-#: src/plugin-docbook.c:1195
+#: src/plugin-docbook.c:1232
 msgid "Printing DocBook file"
 msgstr "Printing DocBook file"
 
-#: src/plugin-docbook.c:1589
+#: src/plugin-docbook.c:1631
 msgid "DocBook Article"
 msgstr "DocBook Article"
 
-#: src/plugin-docbook.c:1590
+#: src/plugin-docbook.c:1632
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1955,35 +1891,35 @@ msgstr ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 
-#: src/plugin-docbook.c:1597
+#: src/plugin-docbook.c:1639
 msgid "DocBook Book"
 msgstr "DocBook Book"
 
-#: src/plugin-docbook.c:1598
+#: src/plugin-docbook.c:1640
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Create a book, using the \"DocBook\" format"
 
-#: src/plugin-docbook.c:1605
+#: src/plugin-docbook.c:1647
 msgid "DocBook Set"
 msgstr "DocBook Set"
 
-#: src/plugin-docbook.c:1606
+#: src/plugin-docbook.c:1648
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Create a set of related books, using the \"DocBook\" format"
 
-#: src/plugin-docbook.c:1614
+#: src/plugin-docbook.c:1656
 msgid "Import text as a DocBook article"
 msgstr "Import text as a DocBook article"
 
-#: src/plugin-docbook.c:1615
+#: src/plugin-docbook.c:1657
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Import a plain text file into the \"DocBook\" format, as an article."
 
-#: src/plugin-docbook.c:1632
+#: src/plugin-docbook.c:1674
 msgid "Export DocBook as HTML"
 msgstr "Export DocBook as HTML"
 
-#: src/plugin-docbook.c:1633
+#: src/plugin-docbook.c:1675
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1991,11 +1927,11 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 
-#: src/plugin-docbook.c:1640
+#: src/plugin-docbook.c:1682
 msgid "Export DocBook as PDF"
 msgstr "Export DocBook as PDF"
 
-#: src/plugin-docbook.c:1641
+#: src/plugin-docbook.c:1683
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -2003,11 +1939,11 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 
-#: src/plugin-docbook.c:1648
+#: src/plugin-docbook.c:1690
 msgid "Export DocBook as XSL:FO"
 msgstr "Export DocBook as XSL:FO"
 
-#: src/plugin-docbook.c:1649
+#: src/plugin-docbook.c:1691
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -2015,28 +1951,28 @@ msgstr ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 
-#: src/plugin-docbook.c:1657
+#: src/plugin-docbook.c:1699
 msgid "Print DocBook"
 msgstr "Print DocBook"
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1708
 msgid "Generic DocBook property dialog"
 msgstr "Generic DocBook property dialogue"
 
-#: src/plugin-docbook.c:1667
+#: src/plugin-docbook.c:1709
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Provides a Properties dialogue for most DocBook nodes"
 
-#: src/plugin-docbook.c:1685 src/plugin-docbook.c:1688 src/plugin-html.c:137
+#: src/plugin-docbook.c:1727 src/plugin-docbook.c:1730 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Open Link in Browser"
 
-#: src/plugin-docbook.c:1697
+#: src/plugin-docbook.c:1739
 msgid "Promote Section"
 msgstr "Promote Section"
 
-#: src/plugin-docbook.c:1698
+#: src/plugin-docbook.c:1740
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -2044,31 +1980,31 @@ msgstr ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 
-#: src/plugin-docbook.c:1700 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1742 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Promote"
 
-#: src/plugin-docbook.c:1701 src/plugin-docbook.c:1702
+#: src/plugin-docbook.c:1743 src/plugin-docbook.c:1744
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Promote the section to a higher organisational level within the document"
 
-#: src/plugin-docbook.c:1708
+#: src/plugin-docbook.c:1750
 msgid "Demote Section"
 msgstr "Demote Section"
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1751
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Demotes a DocBook section to a lower organisational level within the document"
 
-#: src/plugin-docbook.c:1711 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1753 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Demote"
 
-#: src/plugin-docbook.c:1712 src/plugin-docbook.c:1713
+#: src/plugin-docbook.c:1754 src/plugin-docbook.c:1755
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Demote the section to a lower organisational level within the document"
 
@@ -2441,6 +2377,57 @@ msgstr "Paste After"
 #: src/xmledit.c:395
 msgid "Source View - Conglomerate"
 msgstr "Source View - Conglomerate"
+
+#~ msgid "/Debug"
+#~ msgstr "/Debug"
+
+#~ msgid "/Debug/Begin self-test of error-reporting system..."
+#~ msgstr "/Debug/Begin self-test of error-reporting system..."
+
+#~ msgid "/Debug/Transform DocBook to HTML"
+#~ msgstr "/Debug/Transform DocBook to HTML"
+
+#~ msgid "/Debug/Transform DocBook to XHTML"
+#~ msgstr "/Debug/Transform DocBook to XHTML"
+
+#~ msgid "/Debug/Transform DocBook to HTML Help"
+#~ msgstr "/Debug/Transform DocBook to HTML Help"
+
+#~ msgid "/Debug/Transform DocBook to Java Help"
+#~ msgstr "/Debug/Transform DocBook to Java Help"
+
+#~ msgid "/Debug/Transform DocBook to FO"
+#~ msgstr "/Debug/Transform DocBook to FO"
+
+#~ msgid "/Debug/Preview XSL:FO"
+#~ msgstr "/Debug/Preview XSL:FO"
+
+#~ msgid "/Debug/DTD"
+#~ msgstr "/Debug/DTD"
+
+#~ msgid "/Debug/Dialog"
+#~ msgstr "/Debug/Dialogue"
+
+#~ msgid "/Debug/Progress Checklist"
+#~ msgstr "/Debug/Progress Checklist"
+
+#~ msgid "/Debug/Document Message Log"
+#~ msgstr "/Debug/Document Message Log"
+
+#~ msgid "/Debug/Document Signal Log"
+#~ msgstr "/Debug/Document Signal Log"
+
+#~ msgid "/Debug/Information Alert"
+#~ msgstr "/Debug/Information Alert"
+
+#~ msgid "/Debug/Glade Test"
+#~ msgstr "/Debug/Glade Test"
+
+#~ msgid "/Debug/Insert XML Fragment"
+#~ msgstr "/Debug/Insert XML Fragment"
+
+#~ msgid "/Debug/Command Test"
+#~ msgstr "/Debug/Command Test"
 
 #~ msgid "Could not import the file."
 #~ msgstr "Could not import the file."
