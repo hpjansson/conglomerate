@@ -1,0 +1,38 @@
+#!/bin/bash
+# $Id$
+# po strings update
+#
+# makes po/POTFILES.in
+#
+
+# possible effected files
+PPI=po/POTFILES.in
+PCL=po/ChangeLog
+
+# fresh files
+FPPI=${PPI}.fresh
+FPCL=${PCL}.fresh
+# 
+
+# header
+
+# several enumerated files
+
+# found C-soure files, this is the reason why this script exists
+
+# mayby other enumerated files
+
+# tailer
+
+
+# Okay, we have the fresh file, but do we need to do more
+if [ true ] then
+	# use the fresh POTFILES.in
+	# update ChangeLog
+	# warn user
+fi
+
+# cleanup
+rm -f ${FPPI} ${FPCL}
+
+# end of script
