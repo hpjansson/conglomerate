@@ -323,6 +323,23 @@ void add_item_to_popup(GtkMenu *menu,
 	gtk_widget_show(item);
 }
 
+void add_stock_item_to_popup(GtkMenu *menu,
+			     const gchar *stock_id,
+			     gint (*func)(GtkWidget *widget, CongNodePtr tag),
+			     CongTreeView *cong_tree_view,
+			     CongNodePtr x)
+{
+	GtkWidget *item = gtk_image_menu_item_new_from_stock(stock_id,
+							     NULL); 
+	gtk_menu_append(menu, item);
+	gtk_signal_connect(GTK_OBJECT(item), "activate",
+			   GTK_SIGNAL_FUNC(func), x);
+	g_object_set_data(G_OBJECT(item),
+			  "cong_tree_view",
+			  cong_tree_view);
+	gtk_widget_show(item);
+}
+
 GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 {
 	GtkMenu *tpopup;
@@ -330,18 +347,34 @@ GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 
 	tpopup = GTK_MENU(gtk_menu_new());
 	gtk_menu_set_title(GTK_MENU(tpopup), "Structure menu");
+
+#if 1
+	add_stock_item_to_popup(tpopup,
+				GTK_STOCK_PROPERTIES,
+				tree_properties,
+				cong_tree_view,
+				x);
+
+	item = gtk_menu_item_new();
+	w0 = gtk_hseparator_new();
+	gtk_container_add(GTK_CONTAINER(item), w0);
+	gtk_menu_append(GTK_MENU(tpopup), item);
+	gtk_widget_set_sensitive(item, 0);
+	gtk_widget_show(w0);
+	gtk_widget_show(item);
+#endif
 	
 #if 1
-	add_item_to_popup(tpopup,
-			  "Cut",
-			  tree_cut,
-			  cong_tree_view,
-			  x);
-	add_item_to_popup(tpopup,
-			  "Copy",
-			  tree_copy,
-			  cong_tree_view,
-			  x);
+	add_stock_item_to_popup(tpopup,
+				GTK_STOCK_CUT,
+				tree_cut,
+				cong_tree_view,
+				x);
+	add_stock_item_to_popup(tpopup,
+				GTK_STOCK_COPY,
+				tree_copy,
+				cong_tree_view,
+				x);
 	add_item_to_popup(tpopup,
 			  "Paste into",
 			  tree_paste_under,

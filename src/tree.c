@@ -92,6 +92,22 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	return(TRUE);
 }
 
+gint tree_properties(GtkWidget *widget, CongNodePtr tag)
+{
+	CongTreeView *cong_tree_view;
+	CongDocument *doc;
+	CongDispspec *ds;
+
+	cong_tree_view = g_object_get_data(G_OBJECT(widget),
+					   "cong_tree_view");
+	g_assert(cong_tree_view);				
+	doc = CONG_VIEW(cong_tree_view)->doc;
+	ds = cong_document_get_dispspec(doc);
+
+	/* FIXME: unwriten */
+
+	return TRUE;
+}
 
 gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
