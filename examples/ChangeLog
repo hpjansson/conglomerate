@@ -1,5 +1,9 @@
 2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* dispspec.xds, docbook.xds, forrest-document.xds, kernel-traffic-newsletter.xds, xhtml1-strict.xds
+
+	Removed files; they should now be generated from the xds.in files by intltool
+
 	* Makefile.am
 
 	Added a custom rule (due to non-standard xds extension) that uses intltool to generate xds files from xds.in files
