@@ -1,5 +1,9 @@
 2003-08-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-structural-tag.c
+
+	Support for folding structural elements in new widget
+
 	* cong-document.c, cong-editor-node-text.c, cong-location.c, cong-node-properties-dialog.c, cursor.c, select.c, tree.c
 
 	Force all edits to be within a begin/end edit pair

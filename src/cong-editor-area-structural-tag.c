@@ -44,6 +44,8 @@ struct CongEditorAreaStructuralTagDetails
 {
 	CongDispspecElement *ds_element;
 
+	gboolean expanded;
+
 	CongEditorArea *title_vcompose;
 	/****/ /* anon v-spacer */
 	/****/ CongEditorArea *title_hcompose;
@@ -75,6 +77,12 @@ for_all (CongEditorArea *editor_area,
 static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
+
+static gboolean
+on_button_press (CongEditorArea *editor_area, 
+		 GdkEventButton *event,
+		 gpointer user_data);
+
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaStructuralTag, 
@@ -117,6 +125,7 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 					editor_widget);
 
 	PRIVATE(area_structural_tag)->ds_element = ds_element;
+	PRIVATE(area_structural_tag)->expanded = TRUE;
 
 	PRIVATE(area_structural_tag)->title_vcompose = cong_editor_area_composer_new (editor_widget,
 										      GTK_ORIENTATION_VERTICAL,
@@ -202,6 +211,12 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 	cong_editor_area_protected_set_parent (PRIVATE(area_structural_tag)->inner_bin,
 					       CONG_EDITOR_AREA (area_structural_tag));
 
+	/* Click handling for title bar: */
+	g_signal_connect (G_OBJECT(PRIVATE(area_structural_tag)->title_hcompose),
+			  "button_press_event",
+			  G_CALLBACK(on_button_press),
+			  area_structural_tag);
+
 	return CONG_EDITOR_AREA (area_structural_tag);
 }
 
@@ -283,7 +298,7 @@ render_self (CongEditorArea *area,
 			    rect->width - 1, title_bar_height);
 	
 	/* Bottom */  
-	if (1/*section_head->expanded*/) {
+	if (PRIVATE(area_structural_tag)->expanded) {
 		gc = cong_dispspec_element_gc (ds_element, 
 					       CONG_DISPSPEC_GC_USAGE_DIM_LINE);
 		g_assert(gc);
@@ -323,17 +338,23 @@ calc_requisition (CongEditorArea *area,
 		return width_hint;
 	} else {
 		gint title_req;
-		gint inner_req;
 		
 		CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
-		
+
 		title_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->title_vcompose,
 							      orientation,
 							      width_hint-1);
-		inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
-							      orientation,
-							      width_hint-1);
-		return title_req + inner_req+3;	
+
+		if (PRIVATE(structural_tag)->expanded) {
+			gint inner_req;
+		
+			inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
+								      orientation,
+								      width_hint-1);
+			return title_req + inner_req+3;	
+		} else {
+			return title_req + 2;	
+		}
 	}
 }
 
@@ -391,4 +412,35 @@ add_child (CongEditorAreaContainer *area_container,
 
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(structural_tag)->inner_bin),
 					       child);
+}
+
+static gboolean
+on_button_press (CongEditorArea *editor_area, 
+		 GdkEventButton *event,
+		 gpointer user_data)
+{
+	CongEditorAreaStructuralTag *area_structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG (user_data);
+
+	if (1==event->button) {
+		/* Normally the left mouse button: */
+
+#if 0
+		g_message ("folding toggle");
+#endif
+
+		PRIVATE(area_structural_tag)->expanded = !PRIVATE(area_structural_tag)->expanded;
+
+		if (PRIVATE(area_structural_tag)->expanded) {
+			cong_editor_area_show (PRIVATE(area_structural_tag)->inner_bin);
+		} else {
+			cong_editor_area_hide (PRIVATE(area_structural_tag)->inner_bin);
+		}
+
+		cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_structural_tag),
+							  GTK_ORIENTATION_VERTICAL );
+
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }
