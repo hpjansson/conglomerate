@@ -1,3 +1,9 @@
+2003-10-20  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-child-policy.c
+
+	Remove spurious return from cong_editor_child_policy_remove_areas_for_node
+
 2003-10-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-labelled.c, cong-editor-area-span-tag.c, cong-editor-area-structural.c, cong-editor-area-unknown-tag.c, cong-editor-area.c, cong-editor-area.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, plugin-paragraph-area-paragraph.c

@@ -109,8 +109,8 @@ cong_editor_child_policy_remove_areas_for_node (CongEditorChildPolicy *child_pol
 	g_return_if_fail (child_policy);
 	g_return_if_fail (node);
 
-	return CONG_EEL_CALL_METHOD (CONG_EDITOR_CHILD_POLICY_CLASS,
-				     child_policy,
-				     remove_areas_for_node, 
-				     (child_policy, node));
+	CONG_EEL_CALL_METHOD (CONG_EDITOR_CHILD_POLICY_CLASS,
+			      child_policy,
+			      remove_areas_for_node, 
+			      (child_policy, node));
 }
