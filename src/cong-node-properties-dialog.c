@@ -32,6 +32,7 @@
 #include "cong-app.h"
 #include "cong-eel.h"
 #include "cong-attribute-editor.h"
+#include "cong-command.h"
 
 #define CONG_ADVANCED_NODE_PROPERTIES_VIEW(x) ((CongAdvancedNodePropertiesView*)(x))
 typedef struct CongAdvancedNodePropertiesView CongAdvancedNodePropertiesView;
@@ -331,6 +332,27 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 	if (!xmlHasProp(view->node, arg2)) {
 		CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
+#if SUPPORT_UNDO
+		gchar *desc = g_strdup_printf(_("Rename attribute \"%s\" as \"%s\""),
+					      attr_name,
+					      arg2);
+
+		CongCommand *cmd = cong_command_new (doc,
+						     desc);
+
+		cong_command_add_node_remove_attribute (cmd,
+							view->node,
+							attr_name);
+		cong_command_add_node_set_attribute (cmd,
+						     view->node,
+						     arg2,
+						     attr_value);
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));				       
+
+#else
 		cong_document_begin_edit(doc);
 
 		/* Remove old attribute: */
@@ -340,6 +362,7 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 		cong_document_node_set_attribute(doc, view->node, arg2, attr_value);
 
 		cong_document_end_edit(doc);
+#endif
 	}
 	
 	g_free(attr_name);
@@ -359,9 +382,29 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 
 	g_message("on_value_edited %s = %s", attr_name, arg2);
 
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf(_("Set attribute \"%s\" to \"%s\""),
+					      attr_name,
+					      arg2);
+
+		CongCommand *cmd = cong_command_new (doc,
+						     desc);
+
+		cong_command_add_node_set_attribute (cmd,
+						     view->node,
+						     attr_name,
+						     arg2);
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));				       
+	}
+#else
 	cong_document_begin_edit (doc);
 	cong_document_node_set_attribute (doc, view->node, attr_name, arg2);
 	cong_document_end_edit (doc);
+#endif
 
 	g_free(attr_name);
 }
@@ -390,9 +433,28 @@ static void on_add_attribute(GtkButton *button,
 
 	g_assert(!xmlHasProp(view->node, attr_name));
 
+#if SUPPORT_UNDO
+	{
+		gchar *desc = g_strdup_printf(_("Add attribute \"%s\""),
+					      attr_name);
+
+		CongCommand *cmd = cong_command_new (doc,
+						     desc);
+
+		cong_command_add_node_set_attribute (cmd,
+						     view->node,
+						     attr_name,
+						     "");
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));				       
+	}
+#else
 	cong_document_begin_edit(doc);
 	cong_document_node_set_attribute(doc, view->node, attr_name, "");
 	cong_document_end_edit(doc);
+#endif
 
 }
 
@@ -409,9 +471,25 @@ static void on_delete_attribute(GtkButton *button,
                                              &iter)) {
 		gchar* attr_name = get_attr_name_for_tree_iter(view, &iter);
 
+#if SUPPORT_UNDO
+		gchar *desc = g_strdup_printf(_("Delete attribute \"%s\""),
+					      attr_name);
+
+		CongCommand *cmd = cong_command_new (doc,
+						     desc);
+
+		cong_command_add_node_remove_attribute (cmd,
+							view->node,
+							attr_name);
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));				       
+#else
 		cong_document_begin_edit(doc);
 		cong_document_node_remove_attribute(doc, view->node, attr_name);
 		cong_document_end_edit(doc);
+#endif
 
 
 		g_free(attr_name);

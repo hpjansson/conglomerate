@@ -175,9 +175,10 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 
 	g_free (desc);
 
-	cong_command_add_node_remove_attribute (cmd,
-						node,
-						attribute_name);
+	cong_command_add_node_set_attribute (cmd,
+					     node,
+					     attribute_name,
+					     new_value);
 	cong_document_add_command (doc,
 				   cmd);
 
