@@ -1,5 +1,9 @@
 2004-01-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c, cong-dispspec.h, plugin-random.c
+
+	Added slow access but convenient access method to elements of a CongDispspec; Improvements to random doc generation in absence of a DTD
+
 	* plugin-dtd.c, plugin-tests.c
 
 	Fixed typo; disabled broken plugin

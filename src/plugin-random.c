@@ -459,8 +459,6 @@ populate_element (RandomCreationInfo *rci,
 		  xmlNodePtr xml_node,
 		  int depth)
 {
-	int i=0;
-
 	g_assert (rci);
 	g_assert (xml_doc);
 	g_assert (xml_node);
@@ -489,18 +487,39 @@ populate_element (RandomCreationInfo *rci,
 	} 
 
 	/* No DTD information was available for this node; randomly add content: */
-	for (i=0;i<(rci->depth-depth);i++) {
-		xmlNodePtr child_node = xmlNewDocNode (xml_doc,
-						       NULL,
-						       "chapter",
-						       "");
-		xmlAddChild (xml_node, 
-			     child_node);
+	{
+		gint child_count;
+		gint i;
 		
-		populate_element (rci,
-				  xml_doc,
-				  child_node,
-				  depth+1);
+		/* Slow algorithm */
+		guint num_elements = cong_dispspec_get_num_elements (rci->dispspec);
+
+		child_count = g_rand_int_range (rci->random, 
+						0,
+						(rci->depth-depth));
+
+		for (i=0;i<child_count;i++) {
+			CongDispspecElement* ds_element;
+			xmlNodePtr child_node;
+
+			ds_element = cong_dispspec_get_element (rci->dispspec,
+								g_rand_int_range (rci->random, 
+										  0,
+										  num_elements));
+			g_assert (ds_element);
+
+			child_node = xmlNewDocNode (xml_doc,
+						    NULL, /* fixme: namespaces! */
+						    cong_dispspec_element_tagname (ds_element),
+						    "");
+			xmlAddChild (xml_node,
+				     child_node);
+			
+			populate_element (rci,
+					  xml_doc,
+					  child_node,
+					  depth+1);
+		}
 	}
 }
 

@@ -120,6 +120,15 @@ cong_dispspec_get_first_element(CongDispspec *ds);
 void cong_dispspec_add_element (CongDispspec* ds, 
 				CongDispspecElement* element);
 
+/* Caution: this is o(n) */
+guint
+cong_dispspec_get_num_elements (CongDispspec *ds);
+
+/* Caution: this is o(n) */
+CongDispspecElement*
+cong_dispspec_get_element (CongDispspec *ds,
+			   guint index);
+
 /* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);

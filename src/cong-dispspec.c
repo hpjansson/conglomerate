@@ -573,6 +573,45 @@ void cong_dispspec_add_element (CongDispspec* ds,
 	g_tree_insert(ds->search_tree, key, element);
 }
 
+guint
+cong_dispspec_get_num_elements (CongDispspec *ds)
+{
+	guint count;
+	CongDispspecElement *ds_iter;
+
+	g_return_val_if_fail (ds, 0);
+
+	/* o(n): */
+
+	count = 0;
+	for (ds_iter = ds->first; ds_iter; ds_iter=ds_iter->next) {
+		count++;
+	}
+	return count;	
+}
+
+CongDispspecElement*
+cong_dispspec_get_element (CongDispspec *ds,
+			   guint index)
+{
+	guint count;
+	CongDispspecElement *ds_iter;
+
+	g_return_val_if_fail (ds, NULL);
+
+	/* o(n): */
+
+	count = 0;
+	for (ds_iter = ds->first; ds_iter; ds_iter=ds_iter->next) {
+		if (count==index) {
+			return ds_iter;
+		}
+
+		count++;
+	}
+	return NULL;	
+}
+
 /* Various functions that may get deprecated at some point: */
 #if NEW_LOOK
 #if 0
