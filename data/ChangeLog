@@ -1,3 +1,10 @@
+2003-12-21  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.schemas.in
+
+	Some kind of package data directory expansion,
+	see bugzilla #129776 for details.
+
 2003-12-11  Robert Varga <frozenfingers@xs4all.nl>
 
 	* conglomerate.keys.in, conglomerate.mime
