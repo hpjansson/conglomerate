@@ -341,7 +341,6 @@ cong_document_end_command (doc, cmd);
     &cong-graph;
     &cong-marshal;
     &cong-parser-error;
-    &fo;
     &global;
     &cong-vfs;
 <!-- these create warning messages about multiple "IDs" for constraint linkend

@@ -1,3 +1,14 @@
+2004-10-27  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* conglomerate-sections.txt:
+	
+	Removed section fo
+	
+	* conglomerate-docs.sgml:
+	
+	Removed &fo entity
+
+
 2004-10-09  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* conglomerate.types:
