@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-02 11:04+0200\n"
-"PO-Revision-Date: 2004-08-02 18:55+0200\n"
+"POT-Creation-Date: 2004-08-05 19:04+0200\n"
+"PO-Revision-Date: 2004-08-06 00:42+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1467,12 +1467,12 @@ msgstr "Nápo_věda"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1480
-msgid "_New"
-msgstr "_Nový"
+msgid "_New..."
+msgstr "_Nový..."
 
 #: src/cong-menus.c:1481
-msgid "_Open"
-msgstr "_Otevřít"
+msgid "_Open..."
+msgstr "_Otevřít..."
 
 #: src/cong-menus.c:1482
 msgid "_Import..."
@@ -1731,7 +1731,7 @@ msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1272
+#: src/cong-util.c:368 src/plugin-docbook.c:1279
 msgid "Printing XSL Formatting Objects"
 msgstr "Tisk formátovacích objektů XSL"
 
@@ -1812,85 +1812,89 @@ msgstr ""
 "malá písmena. Užitečné při práci se zděděnými dokumenty SGML."
 
 #: src/plugin-docbook.c:220
+msgid "Untitled section"
+msgstr "Nepojmenovaný oddíl"
+
+#: src/plugin-docbook.c:227
 msgid "Text of the article goes here"
 msgstr "Sem přijde text článku"
 
-#: src/plugin-docbook.c:239
+#: src/plugin-docbook.c:246
 msgid "Untitled Article"
 msgstr "Nepojmenovaný článek"
 
-#: src/plugin-docbook.c:289
+#: src/plugin-docbook.c:296
 msgid "Text of the first chapter goes here"
 msgstr "Sem přijde text první kapitoly"
 
-#: src/plugin-docbook.c:308
+#: src/plugin-docbook.c:315
 msgid "Untitled Book"
 msgstr "Nepojmenovaná kniha"
 
-#: src/plugin-docbook.c:363
+#: src/plugin-docbook.c:370
 msgid "Untitled Set of Documents"
 msgstr "Nepojmenovaná sada dokumentů"
 
-#: src/plugin-docbook.c:1140
+#: src/plugin-docbook.c:1147
 msgid "Exporting PDF file"
 msgstr "Exportuji soubor PDF"
 
-#: src/plugin-docbook.c:1144 src/plugin-docbook.c:1270
+#: src/plugin-docbook.c:1151 src/plugin-docbook.c:1277
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transformuji DocBook do formátovacích objektů XSL"
 
-#: src/plugin-docbook.c:1146
+#: src/plugin-docbook.c:1153
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Kreslím formátovací objekty XSL jako soubor PDF"
 
-#: src/plugin-docbook.c:1161 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1168 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Převádím formátovací objekty XSL do PDF"
 
-#: src/plugin-docbook.c:1266
+#: src/plugin-docbook.c:1273
 msgid "Printing DocBook file"
 msgstr "Tisknu soubor DocBook"
 
-#: src/plugin-docbook.c:1665
+#: src/plugin-docbook.c:1672
 msgid "DocBook Article"
 msgstr "Článek DocBook"
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1673
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1673
+#: src/plugin-docbook.c:1680
 msgid "DocBook Book"
 msgstr "Kniha DocBook"
 
-#: src/plugin-docbook.c:1674
+#: src/plugin-docbook.c:1681
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Vytvořit knihu pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1681
+#: src/plugin-docbook.c:1688
 msgid "DocBook Set"
 msgstr "Sada DocBook"
 
-#: src/plugin-docbook.c:1682
+#: src/plugin-docbook.c:1689
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Vytvořit sadu souvisejících knih pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1690
+#: src/plugin-docbook.c:1697
 msgid "Import text as a DocBook article"
 msgstr "Importovat text jako článek DocBook"
 
-#: src/plugin-docbook.c:1691
+#: src/plugin-docbook.c:1698
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Importovat čistý textový soubor do formátu \"DocBook\" jako článek"
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1716
 msgid "Export DocBook as HTML"
 msgstr "Exportovat DocBook jako HTML"
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1717
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1898,11 +1902,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto "
 "souboru DocBook"
 
-#: src/plugin-docbook.c:1718
+#: src/plugin-docbook.c:1725
 msgid "Export DocBook as PDF"
 msgstr "Exportovat DocBook jako PDF"
 
-#: src/plugin-docbook.c:1719
+#: src/plugin-docbook.c:1726
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1910,11 +1914,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto "
 "souboru DocBook"
 
-#: src/plugin-docbook.c:1727
+#: src/plugin-docbook.c:1734
 msgid "Export DocBook as XSL:FO"
 msgstr "Exportovat DocBook jako XSL:FO"
 
-#: src/plugin-docbook.c:1728
+#: src/plugin-docbook.c:1735
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1922,56 +1926,56 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z "
 "tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
 
-#: src/plugin-docbook.c:1737
+#: src/plugin-docbook.c:1744
 msgid "Print DocBook"
 msgstr "Vytisknout DocBook"
 
-#: src/plugin-docbook.c:1746
+#: src/plugin-docbook.c:1753
 msgid "Generic DocBook property dialog"
 msgstr "Obecný dialog vlastností DocBook"
 
-#: src/plugin-docbook.c:1747
+#: src/plugin-docbook.c:1754
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Poskytuje dialog Vlastnosti pro většinu uzlů DocBook"
 
-#: src/plugin-docbook.c:1765 src/plugin-docbook.c:1768 src/plugin-html.c:137
+#: src/plugin-docbook.c:1772 src/plugin-docbook.c:1775 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Otevřít odkaz v prohlížeči"
 
-#: src/plugin-docbook.c:1777
+#: src/plugin-docbook.c:1784
 msgid "Promote Section"
 msgstr "Povýšit oddíl"
 
-#: src/plugin-docbook.c:1778
+#: src/plugin-docbook.c:1785
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Povýší oddíl DocBook na vyšší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1780 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1787 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Povýšit"
 
-#: src/plugin-docbook.c:1781 src/plugin-docbook.c:1782
+#: src/plugin-docbook.c:1788 src/plugin-docbook.c:1789
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Povýšit oddíl na vyšší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1788
+#: src/plugin-docbook.c:1795
 msgid "Demote Section"
 msgstr "Ponížit oddíl"
 
-#: src/plugin-docbook.c:1789
+#: src/plugin-docbook.c:1796
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Poníží oddíl DocBook na nižší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1791 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1798 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Ponížit"
 
-#: src/plugin-docbook.c:1792 src/plugin-docbook.c:1793
+#: src/plugin-docbook.c:1799 src/plugin-docbook.c:1800
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Ponížit oddíl DocBook na nižší úroveň organizace v dokumentu"
 
