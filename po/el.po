@@ -10,17 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 20:22+0200\n"
-"PO-Revision-Date: 2004-07-09 14:05+0200\n"
-"Last-Translator: Nikos Charonitakis  <charosn@her.forthnet.gr>\n"
+"POT-Creation-Date: 2005-02-10 14:54+0200\n"
+"PO-Revision-Date: 2005-02-10 12:52+0200\n"
+"Last-Translator: Kostas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1434
-#: src/cong-primary-window.c:555 src/cong-primary-window.c:740
-#: src/cong-primary-window.c:742 src/cong-primary-window.c:748
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
+#: src/cong-primary-window.c:547 src/cong-primary-window.c:732
+#: src/cong-primary-window.c:734 src/cong-primary-window.c:740
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate Επεξεργαστής XML"
 
@@ -44,11 +44,8 @@ msgid ""
 msgstr ""
 
 #: data/conglomerate.schemas.in.h:3
-#, fuzzy
 msgid "Custom locations for display specification files."
-msgstr ""
-"Εισαγωγή ενός αρχείου DTD , δημιουργώντας ένα αρχείου καθορισμού εμφάνισης "
-"του Conglomerate. "
+msgstr "Προσαρμοσμένες τοποθεσίςς για την εμφάνιση αρχείων καθορισμού."
 
 #: data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
@@ -76,13 +73,13 @@ msgid "Basic"
 msgstr "Βασικό"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
-#: src/cong-file-export.c:341 src/cong-file-new.c:363
-#: src/cong-file-print.c:250 src/cong-parser-error.c:320
+#: src/cong-edit-preferences.c:250 src/cong-file-export.c:339
+#: src/cong-file-new.c:363 src/cong-file-print.c:250
+#: src/cong-parser-error.c:320
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
 msgid "Document Type Declaration"
 msgstr "Δήλωση Τύπου Αρχείου"
 
@@ -107,8 +104,8 @@ msgstr "Τοποθεσία"
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
 #: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Όνομα"
@@ -157,7 +154,7 @@ msgstr "Εύρεση Επόμενου"
 
 #: glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
-msgstr ""
+msgstr "Ταίριασμα μόνο όλο_κληρης λέξης"
 
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
 #: src/cong-edit-find-and-replace.c:835 src/cong-edit-find-and-replace.c:849
@@ -174,20 +171,19 @@ msgstr "Αντικατάσταση _με:"
 
 #: glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "Αναζήτηση πρός τα _πίσω"
 
 #: glade/cong-find-replace.glade.h:8
 msgid "_Match case"
 msgstr "_Ταίριασμα πεζών/κεφαλαίων"
 
 #: glade/cong-find-replace.glade.h:9
-#, fuzzy
 msgid "_Search for: "
-msgstr "Αναζήτηση για: "
+msgstr "Ανα_ζήτηση για: "
 
 #: glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
-msgstr ""
+msgstr "Α_ναδίπλωση γύρω"
 
 #: glade/cong-preferences.glade.h:1
 msgid "Conglomerate Preferences"
@@ -199,24 +195,23 @@ msgstr "Τύποι Εγγράφου"
 
 #: glade/cong-preferences.glade.h:3
 msgid "Plugins"
-msgstr ""
+msgstr "Πρόσθετες λειτουργίες"
 
 #: glade/custom-element.glade.h:2
 msgid "Adhoc Element"
-msgstr ""
+msgstr "Adhoc Element"
 
 #: glade/custom-element.glade.h:3
 msgid "Element Name"
-msgstr ""
+msgstr "Όνομα στοιχείου"
 
 #: glade/custom-element.glade.h:4
-#, fuzzy
 msgid "Element Type"
-msgstr "Τύπος Εγγράφου"
+msgstr "Τύπος στοιχείου"
 
 #: glade/custom-element.glade.h:5
 msgid "I Don't Care"
-msgstr ""
+msgstr "Δεν με νοιάζει"
 
 #: glade/custom-element.glade.h:6
 msgid "Span"
@@ -348,18 +343,16 @@ msgid "Local Name"
 msgstr "Τοπικό Όνομα"
 
 #: glade/plugin-arbitrary.glade.h:3
-#, fuzzy
 msgid "Namespace URI"
-msgstr "Αντικατάσταση"
+msgstr "Namespace URI"
 
 #: glade/plugin-arbitrary.glade.h:4
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
 #: glade/plugin-arbitrary.glade.h:6
-#, fuzzy
 msgid "Top-level Element"
-msgstr "Στοιχείο προτύπου XSL"
+msgstr "Στοιχείο Top-level"
 
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
@@ -369,7 +362,7 @@ msgstr "Παράμετροι δημιουργίας"
 msgid "Depth"
 msgstr "Βάθος"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:984
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
 msgid "Document Type"
 msgstr "Τύπος Εγγράφου"
 
@@ -400,141 +393,148 @@ msgstr ""
 "προεπιλεγμένη ρύθμιση για την display spec path, παρακαλώ ελέγξτε το και "
 "αυτό."
 
-#: src/cong-attribute-editor-cdata.c:218
-#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
 #: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Προσθήκη γνωρίσματος \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244
-#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-editor.c:267
-#: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
+#: src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-editor.c:253
+#: src/cong-attribute-wrapper.c:263 src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Διαγραφή γνωρίσματος \"%s\""
 
-#: src/cong-attribute-editor-enumeration.c:121
+#: src/cong-attribute-editor-enumeration.c:122
 msgid "(unspecified)"
 msgstr "(ακαθόριστο)"
 
 #: src/cong-attribute-editor-lang.c:48
 msgid "Breton"
-msgstr ""
+msgstr "Breton"
 
 #: src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr ""
+msgstr "Catalan"
 
 #: src/cong-attribute-editor-lang.c:50
 msgid "Czech"
-msgstr ""
+msgstr "Czech"
 
 #: src/cong-attribute-editor-lang.c:51
-#, fuzzy
 msgid "Danish"
-msgstr "Λεπτομέρειες"
+msgstr "Danish"
 
 #: src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr ""
+msgstr "German (Germany)"
 
 #: src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr ""
+msgstr "German (Swiss)"
 
 #: src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
-msgstr ""
+msgstr "English (American)"
 
 #: src/cong-attribute-editor-lang.c:55
 msgid "English (British)"
-msgstr ""
+msgstr "English (British)"
 
 #: src/cong-attribute-editor-lang.c:56
 msgid "English (Canadian)"
-msgstr ""
+msgstr "English (Canadian)"
 
 #: src/cong-attribute-editor-lang.c:57
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #: src/cong-attribute-editor-lang.c:58
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
 #: src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr ""
+msgstr "Faroese"
 
 #: src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr ""
+msgstr "French (France)"
 
 #: src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr ""
+msgstr "French (Swiss)"
 
 #: src/cong-attribute-editor-lang.c:62
 msgid "Italian"
-msgstr ""
+msgstr "Italian"
 
 #: src/cong-attribute-editor-lang.c:63
-#, fuzzy
 msgid "Dutch"
-msgstr "Βάθος"
+msgstr "Dutch"
 
 #: src/cong-attribute-editor-lang.c:64
 msgid "Norwegian"
-msgstr ""
+msgstr "Norwegian"
 
 #: src/cong-attribute-editor-lang.c:65
 msgid "Polish"
-msgstr ""
+msgstr "Polish"
 
 #: src/cong-attribute-editor-lang.c:66
 msgid "Portuguese (Portugal)"
-msgstr ""
+msgstr "Portuguese (Portugal)"
 
 #: src/cong-attribute-editor-lang.c:67
 msgid "Portuguese (Brazilian)"
-msgstr ""
+msgstr "Portuguese (Brazilian)"
 
 #: src/cong-attribute-editor-lang.c:68
 msgid "Russian"
-msgstr ""
+msgstr "Russian"
 
 #: src/cong-attribute-editor-lang.c:69
 msgid "Swedish"
-msgstr ""
+msgstr "Swedish"
 
 #: src/cong-attribute-editor-lang.c:70
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrainian"
 
-#: src/cong-attribute-editor-lang.c:159
-#, fuzzy
+#: src/cong-attribute-editor-lang.c:157
 msgid "No Language"
-msgstr "Γλώσσα"
+msgstr "Χωρόις γλώσσα"
 
-#. are there mem leaks here
-#: src/cong-attribute-editor-nmtoken.c:210
-#, fuzzy, c-format
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
+#, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
-msgstr "Ορισμός γνωρίσματος \"%s\" to \"%s\""
+msgstr "Αδυναμία ορισμού γνωρίσματος \"%s\" σε \"%s\""
 
-#: src/cong-attribute-editor-nmtoken.c:222
+#: src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
 msgstr ""
 
-#: src/cong-attribute-editor-nmtoken.c:223
+#: src/cong-attribute-editor-nmtoken.c:237
 msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
 msgstr ""
 
-#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
 #: src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
@@ -593,12 +593,12 @@ msgstr "Οι αλλαγές από τα προηγούμενα %li λεπτά θ
 msgid "Changes from the past minute will be discarded."
 msgstr "Οι αλλαγές από το προηγούμενο λεπτό θα χαθούν."
 
-#: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
+#: src/cong-dispspec-element.c:659 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath απέτυχε)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:771
+#: src/cong-dispspec-element.c:695
 msgid "<untitled>"
 msgstr "<untitled>"
 
@@ -621,108 +621,107 @@ msgstr "Τύπος αρχείου"
 msgid "Coverage"
 msgstr "Κάλυψη"
 
-#: src/cong-dispspec.c:501
+#: src/cong-dispspec.c:513
 msgid "unnamed"
 msgstr "ανώνυμο"
 
-#: src/cong-dispspec.c:521
+#: src/cong-dispspec.c:536
 msgid "No description available."
 msgstr "Δεν υπάρχει διαθέσιμη περιγραφή."
 
-#: src/cong-document.c:649
-#, fuzzy
+#: src/cong-document.c:651
 msgid "(Untitled)"
 msgstr "<untitled>"
 
-#: src/cong-document.c:948
+#: src/cong-document.c:955
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Γνώρισμα \"%s\""
 
-#: src/cong-document.c:955
+#: src/cong-document.c:962
 #, c-format
 msgid "Text \"%s\""
 msgstr "Κείμενο \"%s\""
 
-#: src/cong-document.c:961
+#: src/cong-document.c:968
 msgid "Character Data"
 msgstr "Δεδομένα Χαρακτήρα"
 
-#: src/cong-document.c:964
+#: src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Αναφορά στην Οντότητα \"%s\""
 
-#: src/cong-document.c:967
+#: src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Οντότητα \"%s\""
 
-#: src/cong-document.c:970
+#: src/cong-document.c:977
 msgid "XML Processing Instruction"
 msgstr "Εντολή XML Processing"
 
-#: src/cong-document.c:975
+#: src/cong-document.c:982
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Σχόλιο \"%s\""
 
-#: src/cong-document.c:981
+#: src/cong-document.c:988
 msgid "Document"
 msgstr "Έγγραφο"
 
-#: src/cong-document.c:987
+#: src/cong-document.c:994
 msgid "Document Fragment"
 msgstr "Κομμάτι Εγγράφου"
 
-#: src/cong-document.c:990
+#: src/cong-document.c:997
 msgid "Notation"
 msgstr "Σημείωση"
 
-#: src/cong-document.c:993
+#: src/cong-document.c:1000
 msgid "HTML Document"
 msgstr "Έγγραφο HTML"
 
-#: src/cong-document.c:999
+#: src/cong-document.c:1006
 msgid "Element Declaration"
 msgstr "Δήλωση Στοιχείου"
 
-#: src/cong-document.c:1002
+#: src/cong-document.c:1009
 msgid "Attribute Declaration"
 msgstr "Δήλωση Γνωρίσματος"
 
-#: src/cong-document.c:1005
+#: src/cong-document.c:1012
 msgid "Entity Declaration"
 msgstr "Δήλωση Οντότητας"
 
-#: src/cong-document.c:1008
+#: src/cong-document.c:1015
 msgid "Namespace Declaration"
 msgstr "Δήλωση Namespace"
 
-#: src/cong-document.c:1011
+#: src/cong-document.c:1018
 msgid "XInclude Start"
 msgstr "Έναρξη XInclude"
 
-#: src/cong-document.c:1014
+#: src/cong-document.c:1021
 msgid "XInclude End"
 msgstr "Τέλος XInclude"
 
-#: src/cong-document.c:2173
+#: src/cong-document.c:2180
 #, c-format
 msgid "Select %s"
 msgstr "Επιλογή %s"
 
-#: src/cong-dom-view.c:224
+#: src/cong-dom-view.c:225
 msgid "UNKNOWN"
 msgstr "ΑΓΝΩΣΤΟ"
 
-#: src/cong-dom-view.c:251
+#: src/cong-dom-view.c:252
 msgid "Text:"
 msgstr "Κείμενο:"
 
-#: src/cong-dom-view.c:257
+#: src/cong-dom-view.c:258
 msgid "CDATA:"
-msgstr ""
+msgstr "CDATA:"
 
 #: src/cong-edit-find-and-replace.c:98
 #, c-format
@@ -738,39 +737,39 @@ msgstr "Αντικατάσταση _Όλων"
 msgid "Find"
 msgstr "Εύρεση"
 
-#: src/cong-editor-node-text.c:984
+#: src/cong-editor-node-text.c:898
 msgid "Select word"
 msgstr "Επιλογή λέξης"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:923
 msgid "Move cursor"
 msgstr "Μετακίνηση δρομέα"
 
-#: src/cong-editor-node-text.c:1095
+#: src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
 msgstr "Σύρσιμο επιλογής"
 
-#: src/cong-editor-widget3.c:260
+#: src/cong-editor-widget3.c:268
 msgid "Expander Size"
 msgstr "Μέγεθος Expander"
 
-#: src/cong-editor-widget3.c:261
+#: src/cong-editor-widget3.c:269
 msgid "Size of the expander arrow"
 msgstr "Μέγεθος του βέλους Expander"
 
-#: src/cong-editor-widget3.c:745
+#: src/cong-editor-widget3.c:747
 msgid "Input Method"
 msgstr "Μέθοδος Εισαγωγής"
 
-#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
+#: src/cong-editor-widget3.c:877 src/cong-editor-widget3.c:1408
 msgid "Typing"
 msgstr "Πληκτρολόγηση"
 
-#: src/cong-editor-widget3.c:1289
+#: src/cong-editor-widget3.c:1309
 msgid "Cursor Movement"
 msgstr "Κίνηση Δρομέα"
 
-#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
+#: src/cong-editor-widget3.c:1349 src/cong-editor-widget3.c:1362
 msgid "Delete Selection"
 msgstr "Διαγραφή Επιλογής"
 
@@ -804,11 +803,8 @@ msgid "An error was reported whilst attempting the operation \"%s\""
 msgstr "Σφάλμα κατά την προσπάθεια της λειτουργίας \"%s\""
 
 #: src/cong-error-dialog.c:325
-#, fuzzy
 msgid "A GError occurred; the error report was:"
-msgstr ""
-"Σφάλμα GError, η αναφορά σφάλματος ήταν:\n"
-"<i>%s</i>"
+msgstr "Σφάλμα GError, η αναφορά σφάλματος ήταν:"
 
 #: src/cong-error-dialog.c:335 src/cong-error-file-open.c:516
 msgid "An unexpected error occurred."
@@ -819,12 +815,8 @@ msgid "For more information, click on the \"Details\" button."
 msgstr "Για περισσότερες πληροφορίες κάντε κλικ στο κουμπί \"Λεπτομέρειες\"."
 
 #: src/cong-error-dialog.c:386
-#, fuzzy
 msgid "An error occurred whilst running this system command:"
-msgstr ""
-"Συνέβηκε ένα σφάλμα κατά την εκτέλεση αυτής της εντολής συστήματος:\n"
-"\n"
-"<tt>%s</tt>"
+msgstr "Συνέβηκε ένα σφάλμα κατά την εκτέλεση αυτής της εντολής συστήματος:"
 
 #: src/cong-error-dialog.c:389
 #, c-format
@@ -1251,7 +1243,6 @@ msgstr ""
 "Αυτός ο διάλογος δημιουργήθηκε από την αυτοματοποιημένη ρουτίνα δοκιμής."
 
 #: src/cong-file-export.c:153
-#, fuzzy
 msgid "(No description available)"
 msgstr "(Δεν υπάρχει διαθέσιμη περιγραφή)"
 
@@ -1280,16 +1271,13 @@ msgstr "Αρχείο:"
 msgid "Export Options"
 msgstr "Επιλογές Εξαγωγής"
 
-#: src/cong-file-export.c:436
-#, c-format
-msgid "Conglomerate cannot export \"%s\""
-msgstr "Το Conglomerate δεν μπορεί να εξάγει το \"%s\""
+#: src/cong-file-export.c:431
+msgid "No output file specified"
+msgstr "Δεν καθορίσθηκε αρχείο αποτελέσματος"
 
-#: src/cong-file-export.c:439
-msgid "None of Conglomerate's plugins know how to export files of that type."
-msgstr ""
-"Καμμία από τις πρόσθετες λειτουργίες του Conglomerate δεν γνωρίζει τον τρόπο "
-"εξαγωγής αρχείων αυτού του είδους."
+#: src/cong-file-export.c:432
+msgid "Please specify a file name."
+msgstr "Παρακαλώ καθορίστε ένα όνομα αρχείου"
 
 #: src/cong-file-import.c:80
 msgid "Import file..."
@@ -1365,7 +1353,7 @@ msgstr ""
 msgid "Force"
 msgstr "Εξαναγκασμός"
 
-#: src/cong-file-open.c:210
+#: src/cong-file-open.c:218
 msgid "Select an XML document"
 msgstr "Επιλογή ενός αρχείου XML"
 
@@ -1386,7 +1374,7 @@ msgstr "Μέθοδος Εκτύπωσης:"
 msgid "Print Options"
 msgstr "Επιλογές Εκτύπωσης"
 
-#: src/cong-file-print.c:336 src/cong-menus.c:731
+#: src/cong-file-print.c:336 src/cong-menus.c:727
 msgid "Print Preview"
 msgstr "Προεπισκόπηση Εκτύπωσης"
 
@@ -1418,15 +1406,14 @@ msgid "_Remove this DTD"
 msgstr "Α_φαίρεση αυτού του DTD"
 
 #: src/cong-file-properties.c:190
-#, fuzzy
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
 "specify this information explicitly in the document."
 msgstr ""
-"<small>Το έγγραφο δεν καθορίζει ένα εξωτερικό DTD, αλλά το Conglomerate "
-"πιστεύει ότι οι ακόλουθες πληροφορίες είναι κατάλληλες. Πατήστε \"Συσχέτιση "
-"του DTD\" για να καθορίσετε αυτή την πληροφορία στο έγγραφο.</small>"
+"Το έγγραφο δεν καθορίζει ένα εξωτερικό DTD, αλλά το Conglomerate πιστεύει "
+"ότι οι ακόλουθες πληροφορίες είναι κατάλληλες. Πατήστε \"Συσχέτιση του DTD\" "
+"για να καθορίσετε αυτή την πληροφορία στο έγγραφο."
 
 #: src/cong-file-properties.c:199
 msgid "No External Subset"
@@ -1448,7 +1435,7 @@ msgstr "Ακαθόριστο"
 msgid "Remove DTD"
 msgstr "Αφαίρεση DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1674
+#: src/cong-file-properties.c:380 src/cong-util.c:1636
 msgid "Associate with DTD"
 msgstr "Συσχέτιση με DTD"
 
@@ -1457,23 +1444,22 @@ msgid "Save XML as..."
 msgstr "Αποθήκευση XML ως..."
 
 #: src/cong-file-save.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "Το έγγραφο \"%s\" είναι έγκυρο."
+msgstr "Το έγγραφο \"%s\" είναι μόνο για ανάγνωση.\n"
 
 #: src/cong-file-save.c:113
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr ""
+msgstr "Ένα αρχείο  με το όνομα  \"%s\" υπάρχει ήδη.\n"
 
 #: src/cong-file-save.c:121
-#, fuzzy
 msgid "_Replace"
-msgstr "Αντικατάσταση"
+msgstr "Αντικατά_σταση"
 
 #: src/cong-file-save.c:131
 msgid "Do you want to replace it with the one you are saving?"
-msgstr ""
+msgstr "Θέλετε να το αντιακαστήσετε με αυτό που αποθηκεύετε;"
 
 #: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
@@ -1491,50 +1477,56 @@ msgstr "Υπολογισμός προηγούμενης σελίδας"
 msgid "Calculating next page"
 msgstr "Υπολογισμός επόμενης σελίδας"
 
-#: src/cong-menus.c:114 src/cong-menus.c:167 src/cong-menus.c:201
+#: src/cong-menus.c:112 src/cong-menus.c:165 src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
 msgstr "Το επιλεγμένο αντικείμενο μενού δεν έχει ακόμα εφαρμοστεί."
 
-#: src/cong-menus.c:467
+#: src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Το Conglomerate δεν μπορεί να ανοίξει το αποτέλεσμα της μετατροπής"
 
-#: src/cong-menus.c:532 src/cong-plugin.c:699
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:528 src/cong-stylesheet.c:225
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Υπήρξε πρόβλημα ανάγνωσης του αρχείου stylesheet \"%s\""
 
-#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:702
-#: src/cong-plugin.c:732
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-stylesheet.c:227
+#: src/cong-stylesheet.c:290
 msgid "Conglomerate could not transform the document"
 msgstr "Το Conglomerate δεν μπορεί να μετατρέψει το έγγραφο"
 
-#: src/cong-menus.c:556 src/cong-plugin.c:729
+#: src/cong-menus.c:552
 msgid "There was a problem applying the stylesheet file"
 msgstr "Υπήρξε πρόβλημα εφαρμογής του αρχείου stylesheet"
 
-#: src/cong-menus.c:1117
+#: src/cong-menus.c:1113
 msgid "Test Progress Checklist"
 msgstr "Λίστα ελέγχου προόδου δοκιμής"
 
-#: src/cong-menus.c:1121
+#: src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
 msgstr "Αυτό είναι το βήμα %i"
 
-#: src/cong-menus.c:1172
+#: src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
 msgstr "Μήνυμα Καταγραφής - Conglomerate"
 
-#: src/cong-menus.c:1191
+#: src/cong-menus.c:1187
 msgid "Signal Log - Conglomerate"
 msgstr "Σήμα Καταγραφής - Conglomerate"
 
-#: src/cong-menus.c:1432
+#: src/cong-menus.c:1427
 msgid "translator_credits"
 msgstr "Κώστας Παπαδήμας <pkst@gnome.org> , 2003"
 
-#: src/cong-menus.c:1436
+#: src/cong-menus.c:1446
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1542,198 +1534,166 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 
-#: src/cong-menus.c:1437
+#: src/cong-menus.c:1447
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: ένας ελεύθερος, φιλικός στον χρήστη επεξεργαστής XML"
 
 #. Menus:
-#: src/cong-menus.c:1471
-#, fuzzy
+#: src/cong-menus.c:1481
 msgid "_File"
-msgstr "/_Αρχείο"
+msgstr "_Αρχείο"
 
-#: src/cong-menus.c:1472
-#, fuzzy
+#: src/cong-menus.c:1482
 msgid "_Edit"
-msgstr "/_Επεξεργασία"
+msgstr "_Επεξεργασία"
 
-#: src/cong-menus.c:1477
-#, fuzzy
+#: src/cong-menus.c:1487
 msgid "_Help"
-msgstr "/_Βοήθεια"
+msgstr "_Βοήθεια"
 
 #. Sub-menus:
-#: src/cong-menus.c:1480 src/popup.c:1099
+#: src/cong-menus.c:1490 src/popup.c:1100
 msgid "New sub-element"
 msgstr "Νέο υποστοιχείο"
 
-#: src/cong-menus.c:1481 src/popup.c:1113
+#: src/cong-menus.c:1491 src/popup.c:1114
 msgid "New sibling"
 msgstr "Νέο  sibling"
 
-#: src/cong-menus.c:1482
+#: src/cong-menus.c:1492
 msgid "Remove span tag"
 msgstr "Αφαίρεση span tag"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1485
-#, fuzzy
+#: src/cong-menus.c:1495
 msgid "_New..."
-msgstr "/Αρχείο/_Νέο..."
+msgstr "_Νέο..."
 
-#: src/cong-menus.c:1486
-#, fuzzy
+#: src/cong-menus.c:1496
 msgid "_Open..."
-msgstr "/Αρχείο/_Άνοιγμα..."
+msgstr "Ά_νοιγμα..."
 
-#: src/cong-menus.c:1487
-#, fuzzy
+#: src/cong-menus.c:1497
 msgid "_Import..."
-msgstr "/Αρχείο/Ε_ισαγωγή..."
+msgstr "Ε_ισαγωγή..."
 
-#: src/cong-menus.c:1488
-#, fuzzy
+#: src/cong-menus.c:1498
 msgid "_Close"
-msgstr "/Αρχείο/_Κλείσιμο"
+msgstr "_Κλείσιμο"
 
-#: src/cong-menus.c:1489
-#, fuzzy
+#: src/cong-menus.c:1499
 msgid "_Quit"
-msgstr "/Αρχείο/Έ_ξοδος"
+msgstr "Έ_ξοδος"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1493
-#, fuzzy
-msgid "Prefere_nces"
-msgstr "/Επεξεργασία/_Προτιμήσεις"
+#: src/cong-menus.c:1503
+msgid "Pr_eferences"
+msgstr "Προ_τιμήσεις"
 
 #. Actions found in Help menu:
-#: src/cong-menus.c:1506
-#, fuzzy
+#: src/cong-menus.c:1516
 msgid "_Contents"
-msgstr "/Βοήθεια/_Περιεχόμενα"
+msgstr "_Περιεχόμενα"
 
-#: src/cong-menus.c:1507
-#, fuzzy
+#: src/cong-menus.c:1517
 msgid "_Homepage"
-msgstr "/Βοήθεια/_Αρχική Σελίδα"
+msgstr "_Αρχική Σελίδα"
 
-#: src/cong-menus.c:1508
-#, fuzzy
+#: src/cong-menus.c:1518
 msgid "_About"
-msgstr "/Βοήθεια/Πε_ρί"
+msgstr "Πε_ρί"
 
-#: src/cong-menus.c:1514
-#, fuzzy
+#: src/cong-menus.c:1524
 msgid "_Tools"
-msgstr "/Ε_ργαλεία"
+msgstr "Εργαλ_εία"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1518
-#, fuzzy
-msgid "_Save"
-msgstr "/Αρχείο/Αποθήκευ_ση"
-
-#: src/cong-menus.c:1519
-#, fuzzy
-msgid "Save _as..."
-msgstr "Αποθήκευση XML ως..."
-
-#: src/cong-menus.c:1520
-#, fuzzy
-msgid "Sa_ve a Copy..."
-msgstr "/Αρχείο/Απο_θήκευση αντιγράφου..."
-
-#: src/cong-menus.c:1522
-#, fuzzy
-msgid "Print Previe_w..."
-msgstr "Προεπισκόπηση Εκτύπωσης"
-
-#: src/cong-menus.c:1523
-#, fuzzy
-msgid "_Print"
-msgstr "Εκτύπωση"
-
-#: src/cong-menus.c:1526
-#, fuzzy
-msgid "_Revert"
-msgstr "/Αρχείο/Επαναφο_ρά"
-
 #: src/cong-menus.c:1528
-#, fuzzy
-msgid "_Export..."
-msgstr "/Αρχείο/_Εξαγωγή..."
+msgid "_Save"
+msgstr "Αποθήκευ_ση"
 
 #: src/cong-menus.c:1529
-#, fuzzy
-msgid "Proper_ties"
-msgstr "Ιδιότητες"
+msgid "Save _as..."
+msgstr "Αποθήκευση _ως..."
 
-#. Actions found in Edit menu:
-#: src/cong-menus.c:1533 src/cong-menus.c:1756
-#, fuzzy
-msgid "_Undo"
-msgstr "Αναίρεση"
+#: src/cong-menus.c:1530
+msgid "Sa_ve a Copy..."
+msgstr "Απο_θήκευση αντιγράφου..."
 
-#: src/cong-menus.c:1534 src/cong-menus.c:1766
-#, fuzzy
-msgid "_Redo"
-msgstr "Ακύρωση αναίρεσης"
+#: src/cong-menus.c:1532
+msgid "Print Previe_w..."
+msgstr "Προεπισκόπηση ε_κτύπωσης..."
 
-#: src/cong-menus.c:1535
-#, fuzzy
-msgid "Cu_t"
-msgstr "Αποκοπή"
+#: src/cong-menus.c:1533
+msgid "_Print"
+msgstr "Εκτύ_πωση"
 
-#: src/cong-menus.c:1536 src/popup.c:755 src/popup.c:1051
-#, fuzzy
-msgid "_Copy"
-msgstr "Αντιγραφή"
-
-#: src/cong-menus.c:1537 src/popup.c:769
-#, fuzzy
-msgid "_Paste"
-msgstr "Επικόλληση"
+#: src/cong-menus.c:1536
+msgid "_Revert"
+msgstr "Επαναφο_ρά"
 
 #: src/cong-menus.c:1538
-#, fuzzy
-msgid "_Find..."
-msgstr "/Επεξεργασία/Εύ_ρεση..."
+msgid "_Export..."
+msgstr "Ε_ξαγωγή..."
 
 #: src/cong-menus.c:1539
-#, fuzzy
+msgid "Proper_ties"
+msgstr "Ιδιό_τητες"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1543 src/cong-menus.c:1768
+msgid "_Undo"
+msgstr "Α_ναίρεση"
+
+#: src/cong-menus.c:1544 src/cong-menus.c:1778
+msgid "_Redo"
+msgstr "Α_κύρωση αναίρεσης"
+
+#: src/cong-menus.c:1545
+msgid "Cu_t"
+msgstr "Απο_κοπή"
+
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1052
+msgid "_Copy"
+msgstr "Αντι_γραφή"
+
+#: src/cong-menus.c:1547 src/popup.c:769
+msgid "_Paste"
+msgstr "Επικόλ_ληση"
+
+#: src/cong-menus.c:1548
+msgid "_Find..."
+msgstr "Εύ_ρεση..."
+
+#: src/cong-menus.c:1549
 msgid "Find Ne_xt"
-msgstr "Εύρεση Επόμενου"
+msgstr "Εύρεση επό_μενου"
 
-#: src/cong-menus.c:1540
-#, fuzzy
+#: src/cong-menus.c:1550
 msgid "Find Pre_vious"
-msgstr "/Επεξεργασία/Εύρεση _προηγουμένου"
+msgstr "Εύρεση _προηγουμένου"
 
-#: src/cong-menus.c:1541
-#, fuzzy
+#: src/cong-menus.c:1551
 msgid "R_eplace..."
-msgstr "/Επεξεργασία/Αν_τικατάσταση..."
+msgstr "Αν_τικατάσταση..."
 
-#: src/cong-menus.c:1543
-#, fuzzy
+#: src/cong-menus.c:1553
 msgid "_Insert..."
-msgstr "/Επεξεργασία/Ε_ισαγωγή..."
+msgstr "Ε_ισαγωγή..."
 
-#: src/cong-menus.c:1544
-#, fuzzy
+#: src/cong-menus.c:1554
 msgid "View _Source"
-msgstr "/Επεξεργασία/Προβολή πη_γής"
+msgstr "Προβολή πη_γαίου κώδικα"
 
-#: src/cong-menus.c:1752
-#, fuzzy, c-format
+#: src/cong-menus.c:1764
+#, c-format
 msgid "_Undo: %s"
-msgstr "Αναίρεση"
+msgstr "Α_ναίρεση: %s"
 
-#: src/cong-menus.c:1762
-#, fuzzy, c-format
+#: src/cong-menus.c:1774
+#, c-format
 msgid "_Redo: %s"
-msgstr "Ακύρωση αναίρεσης"
+msgstr "Α_κύρωση αναίρεσης: %s"
 
 #: src/cong-node-properties-dialog.c:254
 msgid "XPath"
@@ -1745,9 +1705,8 @@ msgid "Rename attribute \"%s\" as \"%s\""
 msgstr "Μετονομασία γνωρίσματος \"%s\" ως \"%s\""
 
 #: src/cong-node-properties-dialog.c:560
-#, fuzzy
 msgid "Namespace"
-msgstr "Αντικατάσταση"
+msgstr "Namespace"
 
 #: src/cong-node-properties-dialog.c:588
 msgid "Raw Attributes"
@@ -1798,7 +1757,7 @@ msgstr "Μοντέλο περιεχομένου για <tt>%s</tt> στοιχε�
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:206
+#: src/cong-overview-view.c:207
 msgid "Unknown data"
 msgstr "Άγνωστα δεδομένα"
 
@@ -1835,40 +1794,40 @@ msgstr ""
 msgid "Show Details"
 msgstr "Εμφάνιση Λεπτομερειών"
 
-#: src/cong-plugin.c:557 src/cong-plugin.c:622
+#: src/cong-plugin.c:554 src/cong-plugin.c:619
 msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 "Το Conglomerate δεν μπορεί να βρεί πληροφορίες εμφάνισης για το νέο αρχείο"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1204
+#: src/cong-plugin.c:1043
 #, c-format
 msgid "<%s> property dialog"
 msgstr "<%s> διάλογος ιδιότητας"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1207
+#: src/cong-plugin.c:1046
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Παρέχει ένα διάλογο ιδιοτήτων για το στοιχείο <%s>"
 
-#: src/cong-primary-window.c:382
+#: src/cong-primary-window.c:374
 msgid "Overview"
 msgstr "Επισκόπηση"
 
-#: src/cong-primary-window.c:393
+#: src/cong-primary-window.c:385
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: src/cong-primary-window.c:403
+#: src/cong-primary-window.c:395
 msgid "Raw XML"
 msgstr "Raw XML"
 
-#: src/cong-primary-window.c:608 src/cong-primary-window.c:627
+#: src/cong-primary-window.c:600 src/cong-primary-window.c:619
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Καλώς ήλθατε στον επεξεργαστή Conglomerate."
 
-#: src/cong-primary-window.c:740
+#: src/cong-primary-window.c:732
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (τροποποιήθηκε) - %s"
@@ -1877,45 +1836,63 @@ msgstr "%s (τροποποιήθηκε) - %s"
 msgid "Cleanup XML Source"
 msgstr "Εκκαθάριση πηγαίου κώδικα XML"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1301
+#: src/cong-stylesheet.c:229
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+
+#: src/cong-stylesheet.c:260
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "Υπήρξε πρόβλημα εφαρμογής του αρχείου stylesheet  \"%s\" σε \"%s\""
+
+#: src/cong-stylesheet.c:277
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+
+#: src/cong-util.c:321 src/plugin-docbook.c:1402
 msgid "Printing XSL Formatting Objects"
 msgstr "Εκτύπωση XSL Formatting Objects"
 
-#: src/cong-util.c:412
+#: src/cong-util.c:365
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Αυτό θα είναι το αποτέλεσμα από το cong_util_print_xslfo"
 
-#: src/cong-util.c:1484
+#: src/cong-util.c:1437
 msgid "(no description available)"
 msgstr "(δεν υπάρχει διαθέσιμη περιγραφή)"
 
-#: src/cong-util.c:1663
+#: src/cong-util.c:1625
 msgid "DTD files"
 msgstr "Αρχεία DTD"
 
-#: src/cong-util.c:1666
+#: src/cong-util.c:1628
 msgid "Select a DTD"
 msgstr "Επιλογή DTD"
 
 #: src/cursor.c:129
-#, fuzzy, c-format
+#, c-format
 msgid "Split <%s> element"
-msgstr "Χωρισμός  %s tag"
+msgstr "Χωρισμός <%s> element"
 
 #: src/file.c:106
 msgid "XML Files"
 msgstr "Αρχεία XML"
 
 #: src/file.c:118
-#, fuzzy
 msgid "All Files"
-msgstr "Αρχεία XML"
+msgstr "Όλα τα αρχεία"
 
-#: src/plugin-admonition.c:76
+#: src/plugin-admonition.c:77
 msgid "Admonition"
 msgstr "Προειδοποίηση"
 
-#: src/plugin-admonition.c:77
+#: src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr ""
 "Μια node επεξεργαστή για την οπτικοποίηση συμβουλών, προειδοποιήσεων κτλ,"
@@ -1925,14 +1902,12 @@ msgid "The XML document needs a top-level element."
 msgstr ""
 
 #: src/plugin-arbitrary.c:270
-#, fuzzy
 msgid "Empty XML Document"
-msgstr "Έγγραφο HTML"
+msgstr "Κενό έγγραφο HTML"
 
 #: src/plugin-arbitrary.c:271
-#, fuzzy
 msgid "Create an empty XML document of an arbitrary type."
-msgstr "Δημιουργία ενός εγράφου XML που περιέχει τυχαίο κείμενο."
+msgstr "Δημιουργία ενός κενού εγράφου XML που περιέχει τυχαίο κείμενο."
 
 #: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
 #: src/plugin-cleanup-source.c:78
@@ -1959,66 +1934,95 @@ msgstr ""
 "Εξάγει ένα αρχείο XML , μετατρέποντας όλα τα tags και γνωρίσματα στο έγγραφο "
 "σε lowercase.  Χρήσιμο όταν δουλεύετε με έγγραφα legacy SGML."
 
-#: src/plugin-docbook.c:220
-#, fuzzy
+#: src/plugin-docbook.c:225
 msgid "Untitled section"
-msgstr "Ανώνυμο Βιβλίο"
+msgstr "Ανώνυμο ενότητα"
 
-#: src/plugin-docbook.c:227
+#: src/plugin-docbook.c:232
 msgid "Text of the article goes here"
 msgstr "Το κείμενο του άρθρου πάει εδώ"
 
-#: src/plugin-docbook.c:246
+#: src/plugin-docbook.c:251
 msgid "Untitled Article"
 msgstr "Ανώνυμο Άρθρο"
 
-#: src/plugin-docbook.c:296
-#, fuzzy
+#: src/plugin-docbook.c:301
 msgid "Untitled chapter"
-msgstr "Ανώνυμο Άρθρο"
+msgstr "Ανώνυμο κεφάλαιο"
 
-#: src/plugin-docbook.c:303
+#: src/plugin-docbook.c:308
 msgid "Text of the first chapter goes here"
 msgstr "Το κείμενο του πρώτου κεφαλαίου πάει εδώ"
 
-#: src/plugin-docbook.c:322
+#: src/plugin-docbook.c:327
 msgid "Untitled Book"
 msgstr "Ανώνυμο Βιβλίο"
 
-#: src/plugin-docbook.c:373
-#, fuzzy
+#: src/plugin-docbook.c:378
 msgid "Untitled book"
-msgstr "Ανώνυμο Βιβλίο"
+msgstr "Ανώνυμο βιβλίο"
 
-#: src/plugin-docbook.c:392
+#: src/plugin-docbook.c:397
 msgid "Untitled Set of Documents"
 msgstr "Untitled Set of Documents"
 
-#: src/plugin-docbook.c:1169
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: src/plugin-docbook.c:1103
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr ""
+
+#: src/plugin-docbook.c:1106
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Αδυναμία εντοπισμού των DocBook stylesheets"
+
+#: src/plugin-docbook.c:1108
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr ""
+
+#: src/plugin-docbook.c:1144
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"%s μετατροπή ολοκληρώθηκε.\n"
+"\n"
+"Μετατράπηκε %s σε %s στο %s"
+
+#: src/plugin-docbook.c:1268
 msgid "Exporting PDF file"
 msgstr "Εξαγωγή αρχείου PDF"
 
-#: src/plugin-docbook.c:1173 src/plugin-docbook.c:1299
+#: src/plugin-docbook.c:1272 src/plugin-docbook.c:1400
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Μετατροπή DocBook σε XSL Formatting Objects"
 
-#: src/plugin-docbook.c:1175
+#: src/plugin-docbook.c:1274
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Διατάσσει XSL Formatting Objects ως αρχεία PDF"
 
-#: src/plugin-docbook.c:1190 src/plugin-fo.c:97
+#: src/plugin-docbook.c:1289 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Μετατρέπει XSL Formatting Objects σε PDF"
 
-#: src/plugin-docbook.c:1295
+#: src/plugin-docbook.c:1396
 msgid "Printing DocBook file"
 msgstr "Εκτύπωση αρχείου DocBook"
 
-#: src/plugin-docbook.c:1694
+#: src/plugin-docbook.c:1796
 msgid "DocBook Article"
 msgstr "Άρθρο DocBook"
 
-#: src/plugin-docbook.c:1695
+#: src/plugin-docbook.c:1797
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -2026,36 +2030,36 @@ msgstr ""
 "Δημιουργία ενός άρθρου, πιθανώς για ιστοσελίδα ή για περιοδικό με την χρήση "
 "του  \"DocBook\" format"
 
-#: src/plugin-docbook.c:1702
+#: src/plugin-docbook.c:1804
 msgid "DocBook Book"
 msgstr "Βιβλίο DocBook"
 
-#: src/plugin-docbook.c:1703
+#: src/plugin-docbook.c:1805
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Δημιουργεί ένα βιβλίο, με την χρήση του \"DocBook\" format"
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1812
 msgid "DocBook Set"
 msgstr "DocBook Set"
 
-#: src/plugin-docbook.c:1711
+#: src/plugin-docbook.c:1813
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr ""
 "Δημιουργία μιας ομάδας σχετικών βιβλίων, με την χρήση του  \"DocBook\" format"
 
-#: src/plugin-docbook.c:1719
+#: src/plugin-docbook.c:1821
 msgid "Import text as a DocBook article"
 msgstr "Εισαγωγή κείμενου ως άρθρο DocBook"
 
-#: src/plugin-docbook.c:1720
+#: src/plugin-docbook.c:1822
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Εισαγωγή ενός αρχείου απλού κειμένου σε μορφή \"DocBook\", ως άρθρο."
 
-#: src/plugin-docbook.c:1738
+#: src/plugin-docbook.c:1840
 msgid "Export DocBook as HTML"
 msgstr "Εξαγωγή DocBook ως HTML"
 
-#: src/plugin-docbook.c:1739
+#: src/plugin-docbook.c:1841
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -2063,11 +2067,11 @@ msgstr ""
 "Χρήση των Walsh's DocBook stylesheets για την δημιουργία μιας ιστοσελίδας "
 "από αυτό το αρχείο DocBook"
 
-#: src/plugin-docbook.c:1747
+#: src/plugin-docbook.c:1849
 msgid "Export DocBook as PDF"
 msgstr "Εξαγωγή DocBook ως PDF"
 
-#: src/plugin-docbook.c:1748
+#: src/plugin-docbook.c:1850
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -2075,11 +2079,11 @@ msgstr ""
 "Χρήση των Walsh's DocBook stylesheets για την δημιουργία ενός αρχείου PDF "
 "από αυτό το αρχείο DocBook"
 
-#: src/plugin-docbook.c:1756
+#: src/plugin-docbook.c:1858
 msgid "Export DocBook as XSL:FO"
 msgstr "Εξαγωγή  DocBook ως XSL:FO"
 
-#: src/plugin-docbook.c:1757
+#: src/plugin-docbook.c:1859
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -2088,28 +2092,28 @@ msgstr ""
 "από αυτό το αρχείο DocBook έτσι ώστε να εκτυπωθεί ή να μετατραπεί σε PDF "
 "αργότερα"
 
-#: src/plugin-docbook.c:1766
+#: src/plugin-docbook.c:1868
 msgid "Print DocBook"
 msgstr "Εκτύπωση DocBook"
 
-#: src/plugin-docbook.c:1775
+#: src/plugin-docbook.c:1877
 msgid "Generic DocBook property dialog"
 msgstr "Γενικός διάλογος ιδιότητας DocBook"
 
-#: src/plugin-docbook.c:1776
+#: src/plugin-docbook.c:1878
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Παρέχει ένα διάλογο ιδιοτήτων για τα περισσότερα nodes"
 
-#: src/plugin-docbook.c:1794 src/plugin-docbook.c:1797 src/plugin-html.c:137
+#: src/plugin-docbook.c:1896 src/plugin-docbook.c:1899 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Άνοιγμα Δεσμού στον Περιηγητή Ιστοσελίδων"
 
-#: src/plugin-docbook.c:1806
+#: src/plugin-docbook.c:1908
 msgid "Promote Section"
 msgstr "Ενότητα προαγωγής"
 
-#: src/plugin-docbook.c:1807
+#: src/plugin-docbook.c:1909
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -2117,32 +2121,32 @@ msgstr ""
 "Προάγει μια ενότητα DocBook σε ένα υψηλότερο οργανωτικό επίπεδο μέσα στο "
 "έγγραφο"
 
-#: src/plugin-docbook.c:1809 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1911 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Προαγωγή"
 
-#: src/plugin-docbook.c:1810 src/plugin-docbook.c:1811
+#: src/plugin-docbook.c:1912 src/plugin-docbook.c:1913
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Προαγωγή της ενότητας σε ένα υψηλότερο οργανωτικό επίπεδο μέσα στο έγγραφο"
 
-#: src/plugin-docbook.c:1817
+#: src/plugin-docbook.c:1919
 msgid "Demote Section"
 msgstr "Υποβιβασμός Ενότητας"
 
-#: src/plugin-docbook.c:1818
+#: src/plugin-docbook.c:1920
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Υποβιβάζει μια ενότητα DocBook σε ένα χαμηλότερο οργανωτικό επίπεδο μέσα στο "
 "έγγραφο"
 
-#: src/plugin-docbook.c:1820 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1922 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Υποβιβασμός"
 
-#: src/plugin-docbook.c:1821 src/plugin-docbook.c:1822
+#: src/plugin-docbook.c:1923 src/plugin-docbook.c:1924
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 "Υποβιβάζει μια ενότητα σε ένα χαμηλότερο οργανωτικό επίπεδο μέσα στο έγγραφο"
@@ -2213,21 +2217,30 @@ msgstr "Δημιουργία ενός αρχείου PDF από τις πληρ�
 msgid "Print XSL:FO"
 msgstr "Εκτύπωση XSL:FO"
 
-#: src/plugin-lists.c:76
+#: src/plugin-lists.c:77
 msgid "List Member Element"
 msgstr "Λίστα στοιχείου μέλους"
 
-#: src/plugin-lists.c:77
+#: src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
 msgstr "Μια node επεξεργαστή για την οπτικοποίηση ενός μέλους λίστας"
 
-#: src/plugin-paragraph.c:67
+#: src/plugin-paragraph.c:68
 msgid "Paragraph"
 msgstr "Παράγραφος"
 
-#: src/plugin-paragraph.c:68
+#: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "Μια node επεξεργαστή για την οπτικοποίηση μιας παραγράφου"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Εκτύπωση πηγαίου κώδικα XML"
 
 #: src/plugin-random.c:148
 msgid "What kind of random XML document would you like to create?"
@@ -2303,6 +2316,18 @@ msgstr "Εισαγωγή SGML"
 #: src/plugin-sgml.c:210
 msgid "Import an SGML file, converting to XML."
 msgstr "Εισαγωγή ενός αρχείου SGML, μετατρέποντας το σε XML."
+
+#: src/plugin-table.c:405
+msgid "Table Group"
+msgstr ""
+
+#: src/plugin-table.c:411
+msgid "Table Row"
+msgstr ""
+
+#: src/plugin-table.c:417
+msgid "Table Entry"
+msgstr ""
 
 #: src/plugin-tests.c:64
 msgid ""
@@ -2418,40 +2443,38 @@ msgstr "Αφαίρεση Span Tag"
 
 #: src/popup.c:607
 msgid "Convert to a comment"
-msgstr ""
+msgstr "Μετατροπή σε σχόλιο"
 
 #: src/popup.c:627 src/tree.c:521
 msgid "Uncomment"
-msgstr ""
+msgstr "Άρση σχολίου"
 
 #: src/popup.c:628
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 
-#: src/popup.c:708 src/popup.c:1025
-#, fuzzy
+#: src/popup.c:708 src/popup.c:1026
 msgid "_Properties"
-msgstr "Ιδιότητες"
+msgstr "Ι_διότητες"
 
-#: src/popup.c:742 src/popup.c:1042
-#, fuzzy
+#: src/popup.c:742 src/popup.c:1043
 msgid "_Cut"
-msgstr "Αποκοπή"
+msgstr "Απο_κοπή"
 
 #: src/popup.c:968
 msgid "Other XML element..."
-msgstr ""
+msgstr "Άλλο στοιχείο  XML.."
 
-#: src/popup.c:1061
+#: src/popup.c:1062
 msgid "Paste into"
 msgstr "Επικόλληση σε"
 
-#: src/popup.c:1071
+#: src/popup.c:1072
 msgid "Paste before"
 msgstr "Επικόλληση πριν"
 
-#: src/popup.c:1081
+#: src/popup.c:1082
 msgid "Paste after"
 msgstr "Επικόλληση μετά"
 
@@ -2471,7 +2494,7 @@ msgstr "Αποκοπή"
 
 #: src/tree.c:469
 msgid "Convert to comment"
-msgstr ""
+msgstr "Μετατροπή σε σχόλιο"
 
 #. create description for dialog
 #: src/xmldata.c:467
@@ -2508,183 +2531,3 @@ msgstr "Επικόλληση Μετά"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Προβολή πηγαίου κώδικα - Conglomerate"
-
-#~ msgid "/File/"
-#~ msgstr "/Αρχείο/"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/Αρχείο/Αποθήκευση _ως..."
-
-#~ msgid "/File/Print Previe_w..."
-#~ msgstr "/Αρχείο/Προε_πισκόπηση εκτύπωσης..."
-
-#~ msgid "/File/_Print..."
-#~ msgstr "/Αρχείο/Ε_κτύπωση..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/Αρχείο/Ιδιότ_ητες"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Επεξεργασία/Α_ναίρεση"
-
-#~ msgid "/Edit/_Redo"
-#~ msgstr "/Επεξεργασία/Ακύ_ρωση αναίρεσης"
-
-#~ msgid "/Edit/"
-#~ msgstr "/Επεξεργασία/"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Επεξεργασία/Απο_κοπή"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Επεξεργασία/Αντι_γραφή"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Επεξεργασία/Επικό_λληση"
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Επεξεργασία/Εύρεση επομέ_νου"
-
-#~ msgid "/Debug"
-#~ msgstr "/Εκσφαλμάτωση"
-
-#~ msgid "/Debug/Begin self-test of error-reporting system..."
-#~ msgstr ""
-#~ "/Εκσφαλμάτωση/Εκκίνηση αυτοδιάγνωσης του συστήματος αναφοράς σφάλματος..."
-
-#~ msgid "/Debug/Transform DocBook to HTML"
-#~ msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε HTML"
-
-#~ msgid "/Debug/Transform DocBook to XHTML"
-#~ msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε XHTML"
-
-#~ msgid "/Debug/Transform DocBook to HTML Help"
-#~ msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε Βοήθεια HTML"
-
-#~ msgid "/Debug/Transform DocBook to Java Help"
-#~ msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε Βοήθεια Java"
-
-#~ msgid "/Debug/Transform DocBook to FO"
-#~ msgstr "/Εκσφαλμάτωση/Μετατροπή DocBook σε FO"
-
-#~ msgid "/Debug/Preview XSL:FO"
-#~ msgstr "/Εκσφαλμάτωση/Προεπισκόπηση XSL:FO"
-
-#~ msgid "/Debug/DTD"
-#~ msgstr "/Εκσφαλμάτωση/DTD"
-
-#~ msgid "/Debug/Dialog"
-#~ msgstr "/Εκσφαλμάτωση/Διάλογος"
-
-#~ msgid "/Debug/Progress Checklist"
-#~ msgstr "/Εκσφαλμάτωση/Λίστα ελέγχου προόδου"
-
-#~ msgid "/Debug/Document Message Log"
-#~ msgstr "/Εκσφαλμάτωση/Καταγραφή μηνύματος εγγράφου"
-
-#~ msgid "/Debug/Document Signal Log"
-#~ msgstr "/Εκσφαλμάτωση/Καταγραφή σήματος εγγράφου"
-
-#~ msgid "/Debug/Information Alert"
-#~ msgstr "/Εκσφαλμάτωση/Ειδοποίηση πληροφορίας"
-
-#~ msgid "/Debug/Glade Test"
-#~ msgstr "/Εκσφαλμάτωση/Δοκιμή Glade"
-
-#~ msgid "/Debug/Insert XML Fragment"
-#~ msgstr "/Εκσφαλμάτωση/Εισαγωγή κομματιού XML"
-
-#~ msgid "/Debug/Command Test"
-#~ msgstr "/Εκσφαλμάτωση/Δοκιμή εντολής"
-
-#~ msgid "Open document"
-#~ msgstr "Άνοιγμα εγγράφου"
-
-#~ msgid "New document"
-#~ msgstr "Νέο έγγραφο"
-
-#~ msgid "Save document"
-#~ msgstr "Αποθήκευση εγγράφου"
-
-#~ msgid "Delete this item"
-#~ msgstr "Διαγραφή αυτού του στοιχείου"
-
-#~ msgid "Add text node after"
-#~ msgstr "Προσθήκη node κειμένου μετά"
-
-#~ msgid "Add text node before"
-#~ msgstr "Προσθήκη node κειμένου πριν"
-
-#~ msgid "Set the text"
-#~ msgstr "Ορισμού του κειμένου"
-
-#~ msgid "Could not import the file."
-#~ msgstr "Αδυναμία εισαγωγής αρχείου."
-
-#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-#~ msgstr ""
-#~ "Καμμία από τις πρόσθετες λειτουργίες του Conglomerate δεν γνωρίζει τον "
-#~ "τρόπο ανοίγματος αρχείων του είδους\"%s\""
-
-#~ msgid "FIXME"
-#~ msgstr "FIXME"
-
-#~ msgid ""
-#~ "In a future version of Conglomerate we may have a feature that lets you "
-#~ "attach a document type to a document."
-#~ msgstr ""
-#~ "Σε μια μελλοντική έκδοση του Conglomerate μπορεί να έχουμε μια λειτουργία "
-#~ "που σας επιτρέπει να επισυνάψετε ένα τύπο εγγράφου στο έγγραφο."
-
-#~ msgid "The document \"%s\" is not valid."
-#~ msgstr "Το έγγραφο \"%s\" δεν είναι έγκυρο."
-
-#~ msgid "Click on the \"Details\" button for more information."
-#~ msgstr "Πατήστε στο κουμπί \"Λεπτομέρειες\" για περισσότερες πληροφορίες."
-
-#~ msgid ""
-#~ "This is a placeholder page.  Eventually you will be able to edit the "
-#~ "language of the text here.\n"
-#~ "\n"
-#~ "This is listed in Bugzilla as bug #122536"
-#~ msgstr ""
-#~ "This is a placeholder page.  Eventually you will be able to edit the "
-#~ "language of the text here.\n"
-#~ "\n"
-#~ "This is listed in Bugzilla as bug #122536"
-
-#~ msgid "label"
-#~ msgstr "ετικέτα"
-
-#~ msgid "Find:"
-#~ msgstr "Εύρεση:"
-
-#~ msgid "Text: \"<span foreground=\"%s\">%s</span>\""
-#~ msgstr "Κείμενο: \"<span foreground=\"%s\">%s</span>\""
-
-#~ msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-#~ msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-
-#~ msgid "<small>(No description available)</small>"
-#~ msgstr "<small>(Δεν υπάρχει διαθέσιμη περιγραφή)</small>"
-
-#~ msgid "/Debug/Document Types"
-#~ msgstr "/Εκσφαλμάτωση/Τύποι εγγράφου"
-
-#~ msgid "Calculating document start"
-#~ msgstr "Υπολογισμός έναρξης εγγράφου"
-
-#~ msgid "Calculating line start"
-#~ msgstr "Υπολογισμός έναρξης γραμμής"
-
-#~ msgid "Calculating document end"
-#~ msgstr "Υπολογισμός τέλους εγγράφου"
-
-#~ msgid "Calculating line end"
-#~ msgstr "Υπολογισμός τέλους γραμμής"
-
-#~ msgid "<orderedlist> property dialog"
-#~ msgstr "<orderedlist> διάλογος ιδιότητας"
-
-#~ msgid "Provides a Properties dialog for the <orderedlist> tag"
-#~ msgstr "Παρέχει ένα διάλογο ιδιοτήτων για την <orderedlist> tag"
