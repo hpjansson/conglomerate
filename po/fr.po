@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-04 14:10+0200\n"
+"POT-Creation-Date: 2004-08-14 14:13+0200\n"
 "PO-Revision-Date: 2004-08-04 18:18+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
@@ -374,19 +374,19 @@ msgstr "Type de document"
 msgid "string_selection_dialog"
 msgstr "dialogue-de-sélection-de-chaîne"
 
-#: src/cong-app.c:1001
+#: src/cong-app.c:995
 msgid "XML Editor"
 msgstr "Éditeur XML"
 
-#: src/cong-app.c:1137
+#: src/cong-app.c:1131
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate ne peut charger aucun fichier xds"
 
-#: src/cong-app.c:1139
+#: src/cong-app.c:1133
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate ne peut trouver aucune description de types de document."
 
-#: src/cong-app.c:1141
+#: src/cong-app.c:1135
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -1512,11 +1512,13 @@ msgstr "_Aide"
 
 #. Actions found in File menu:
 #: src/cong-menus.c:1480
-msgid "_New"
+#, fuzzy
+msgid "_New..."
 msgstr "_Nouveau"
 
 #: src/cong-menus.c:1481
-msgid "_Open"
+#, fuzzy
+msgid "_Open..."
 msgstr "_Ouvrir"
 
 #: src/cong-menus.c:1482
@@ -1778,7 +1780,7 @@ msgstr "Bienvenue dans l'éditeur Conglomerate tant attendu."
 msgid "%s (modified) - %s"
 msgstr "%s (modifié) - %s"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1272
+#: src/cong-util.c:368 src/plugin-docbook.c:1279
 msgid "Printing XSL Formatting Objects"
 msgstr "Impression d'objets de formatage XSL"
 
@@ -1864,50 +1866,55 @@ msgstr ""
 "anciens."
 
 #: src/plugin-docbook.c:220
+#, fuzzy
+msgid "Untitled section"
+msgstr "Livre sans titre"
+
+#: src/plugin-docbook.c:227
 msgid "Text of the article goes here"
 msgstr "Placez ici le texte de l'article"
 
-#: src/plugin-docbook.c:239
+#: src/plugin-docbook.c:246
 msgid "Untitled Article"
 msgstr "Article sans titre"
 
-#: src/plugin-docbook.c:289
+#: src/plugin-docbook.c:296
 msgid "Text of the first chapter goes here"
 msgstr "Placez ici le texte du premier chapitre"
 
-#: src/plugin-docbook.c:308
+#: src/plugin-docbook.c:315
 msgid "Untitled Book"
 msgstr "Livre sans titre"
 
-#: src/plugin-docbook.c:363
+#: src/plugin-docbook.c:370
 msgid "Untitled Set of Documents"
 msgstr "Collection de documents sans titres"
 
-#: src/plugin-docbook.c:1140
+#: src/plugin-docbook.c:1147
 msgid "Exporting PDF file"
 msgstr "Exportation sous format PDF"
 
-#: src/plugin-docbook.c:1144 src/plugin-docbook.c:1270
+#: src/plugin-docbook.c:1151 src/plugin-docbook.c:1277
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transformation de DocBook en objets de formatage XSL"
 
-#: src/plugin-docbook.c:1146
+#: src/plugin-docbook.c:1153
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Mise en page des objets de formatage XSL sous format PDF"
 
-#: src/plugin-docbook.c:1161 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1168 src/plugin-fo.c:98
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Conversion d'objets de formatage XSL en PDF"
 
-#: src/plugin-docbook.c:1266
+#: src/plugin-docbook.c:1273
 msgid "Printing DocBook file"
 msgstr "Impression d'un fichier DocBook"
 
-#: src/plugin-docbook.c:1665
+#: src/plugin-docbook.c:1672
 msgid "DocBook Article"
 msgstr "Article DocBook"
 
-#: src/plugin-docbook.c:1666
+#: src/plugin-docbook.c:1673
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1915,35 +1922,35 @@ msgstr ""
 "Créer un article, pour un site web ou un magazine par exemple, en utilisant "
 "le format \"DocBook\""
 
-#: src/plugin-docbook.c:1673
+#: src/plugin-docbook.c:1680
 msgid "DocBook Book"
 msgstr "Livre DocBook"
 
-#: src/plugin-docbook.c:1674
+#: src/plugin-docbook.c:1681
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Créer un livre, en utilisant le format \"DocBook\""
 
-#: src/plugin-docbook.c:1681
+#: src/plugin-docbook.c:1688
 msgid "DocBook Set"
 msgstr "Collection DocBook"
 
-#: src/plugin-docbook.c:1682
+#: src/plugin-docbook.c:1689
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Créer une collection de livres, en utilisant le format \"DocBook\""
 
-#: src/plugin-docbook.c:1690
+#: src/plugin-docbook.c:1697
 msgid "Import text as a DocBook article"
 msgstr "Importer du texte sous forme d'article DocBook"
 
-#: src/plugin-docbook.c:1691
+#: src/plugin-docbook.c:1698
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Importer un fichier texte standard sous forme d'article  \"DocBook\""
 
-#: src/plugin-docbook.c:1709
+#: src/plugin-docbook.c:1716
 msgid "Export DocBook as HTML"
 msgstr "Exporter un fichier DocBook sous format HTML"
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1717
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1951,11 +1958,11 @@ msgstr ""
 "Utiliser les feuilles de style DocBook de Norman Walsh pour créer une page "
 "web à partir du fichier DocBook"
 
-#: src/plugin-docbook.c:1718
+#: src/plugin-docbook.c:1725
 msgid "Export DocBook as PDF"
 msgstr "Exporter un fichier DocBook sous format PDF"
 
-#: src/plugin-docbook.c:1719
+#: src/plugin-docbook.c:1726
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1963,11 +1970,11 @@ msgstr ""
 "Utiliser les feuilles de style DocBook de Norman Walsh pour créer un fichier "
 "PDF à partir du fichier DocBook"
 
-#: src/plugin-docbook.c:1727
+#: src/plugin-docbook.c:1734
 msgid "Export DocBook as XSL:FO"
 msgstr "Export un fichier DocBook sous format XSL:FO"
 
-#: src/plugin-docbook.c:1728
+#: src/plugin-docbook.c:1735
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1976,28 +1983,28 @@ msgstr ""
 "de ce fichier DocBook un fichier XSL:FO qui puisse être imprimé ou converti "
 "ultérieurement sous format PDF"
 
-#: src/plugin-docbook.c:1737
+#: src/plugin-docbook.c:1744
 msgid "Print DocBook"
 msgstr "Imprimer un fichier DocBook"
 
-#: src/plugin-docbook.c:1746
+#: src/plugin-docbook.c:1753
 msgid "Generic DocBook property dialog"
 msgstr "Dialogue de propriété générique DocBook"
 
-#: src/plugin-docbook.c:1747
+#: src/plugin-docbook.c:1754
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Fournit un dialogue de propriétés pour la plupart des noeuds DocBook"
 
-#: src/plugin-docbook.c:1765 src/plugin-docbook.c:1768 src/plugin-html.c:137
+#: src/plugin-docbook.c:1772 src/plugin-docbook.c:1775 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Ouvrir le lien dans le navigateur"
 
-#: src/plugin-docbook.c:1777
+#: src/plugin-docbook.c:1784
 msgid "Promote Section"
 msgstr "Placer la section à un niveau supérieur"
 
-#: src/plugin-docbook.c:1778
+#: src/plugin-docbook.c:1785
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -2005,32 +2012,32 @@ msgstr ""
 "Place une section DocBook à un niveau d'organisation supérieur dans le "
 "document"
 
-#: src/plugin-docbook.c:1780 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1787 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Placer à un niveau supérieur"
 
-#: src/plugin-docbook.c:1781 src/plugin-docbook.c:1782
+#: src/plugin-docbook.c:1788 src/plugin-docbook.c:1789
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Placer la section à un niveau d'organisation supérieur dans le document"
 
-#: src/plugin-docbook.c:1788
+#: src/plugin-docbook.c:1795
 msgid "Demote Section"
 msgstr "Placer la section à un niveau inférieur"
 
-#: src/plugin-docbook.c:1789
+#: src/plugin-docbook.c:1796
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Place une section DocBook à un niveau d'organisation inférieur dans le "
 "document"
 
-#: src/plugin-docbook.c:1791 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1798 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Placer à un niveau inférieur"
 
-#: src/plugin-docbook.c:1792 src/plugin-docbook.c:1793
+#: src/plugin-docbook.c:1799 src/plugin-docbook.c:1800
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 "Placer la section à un niveau d'organisation inférieur dans le document"
@@ -2300,71 +2307,55 @@ msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 "Élément pour visualiser les règles du modèles dans une feuille de style XSL"
 
-#: src/popup.c:522
+#: src/popup.c:520
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Appliquer la balise span : %s"
 
-#: src/popup.c:622
+#: src/popup.c:589
 msgid "Remove Span Tag"
 msgstr "Supprimer la balise span"
 
-#: src/popup.c:667
+#: src/popup.c:634
 msgid "Convert to a comment"
 msgstr "Convertir en commentaire"
 
-#: src/popup.c:684 src/tree.c:508
+#: src/popup.c:651 src/tree.c:508
 msgid "Uncomment"
 msgstr "Supprimer les balises de commentaire"
 
-#: src/popup.c:685
+#: src/popup.c:652
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 "Convertir un commentaire contenant du code source XML dans le code "
 "correspondant"
 
-#: src/popup.c:804
+#: src/popup.c:771
 msgid "Remove span tag"
 msgstr "Supprimer la balise span"
 
-#: src/popup.c:1032
+#: src/popup.c:932
 msgid "Other XML element..."
 msgstr "Autre élément XML..."
 
-#: src/popup.c:1248
-msgid "Delete this item"
-msgstr "Supprimer cet élément"
-
-#: src/popup.c:1258
-msgid "Add text node after"
-msgstr "Ajouter un noeud de texte après"
-
-#: src/popup.c:1266
-msgid "Add text node before"
-msgstr "Ajouter un noeud de texte avant"
-
-#: src/popup.c:1277
-msgid "Set the text"
-msgstr "Définir le texte"
-
-#: src/popup.c:1313
+#: src/popup.c:1032
 msgid "Paste into"
 msgstr "Insérer dans"
 
-#: src/popup.c:1322
+#: src/popup.c:1041
 msgid "Paste before"
 msgstr "Insérer avant"
 
-#: src/popup.c:1331
+#: src/popup.c:1050
 msgid "Paste after"
 msgstr "Insérer après"
 
-#: src/popup.c:1350
+#: src/popup.c:1069
 msgid "New sub-element"
 msgstr "Nouveau sous-élément"
 
-#: src/popup.c:1364
+#: src/popup.c:1083
 msgid "New sibling"
 msgstr "Nouvel enfant"
 
@@ -2421,3 +2412,15 @@ msgstr "Insérer après"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Vue source - Conglomerate"
+
+#~ msgid "Delete this item"
+#~ msgstr "Supprimer cet élément"
+
+#~ msgid "Add text node after"
+#~ msgstr "Ajouter un noeud de texte après"
+
+#~ msgid "Add text node before"
+#~ msgstr "Ajouter un noeud de texte avant"
+
+#~ msgid "Set the text"
+#~ msgstr "Définir le texte"
