@@ -72,6 +72,19 @@ cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeTe
 								int *stripped_byte_offset);
 
 
+/* Utility for handling cursor movement: */
+gboolean
+cong_editor_node_text_calc_up (CongEditorNodeText *editor_node_text,
+			       int input_byte_offset,
+			       int* output_byte_offset);
+
+/* Utility for handling cursor movement: */
+gboolean
+cong_editor_node_text_calc_down (CongEditorNodeText *editor_node_text,
+				 int input_byte_offset,
+				 int* output_byte_offset);
+
+
 G_END_DECLS
 
 #endif

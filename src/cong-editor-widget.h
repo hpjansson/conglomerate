@@ -118,6 +118,10 @@ cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 				     CongNodePtr node,
 				     CongEditorNode *traversal_parent);
 
+CongEditorNode*
+cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
+					CongNodePtr node);
+
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget);
 

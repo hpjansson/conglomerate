@@ -219,6 +219,142 @@ cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeTe
 									 stripped_byte_offset);
 }
 
+gboolean
+cong_eel_pango_layout_calc_up (PangoLayout *layout,
+			       int input_index,
+			       int *output_index)
+{
+	GSList *line_iter;
+	PangoLayoutLine *prev_line=NULL;
+
+	g_return_val_if_fail (layout, FALSE);
+	g_return_val_if_fail (output_index, FALSE);
+
+	for (line_iter=pango_layout_get_lines(layout); line_iter; line_iter = line_iter->next) {
+		PangoLayoutLine *line = line_iter->data;
+		g_assert(line);
+		
+		if ( (input_index >= line->start_index) && (input_index < line->start_index+line->length)) {
+			/* Then the search place is on this line; check to see that we're not on the first line: */
+			if (prev_line) {
+				int x;
+				int index;
+				int trailing;
+				
+				pango_layout_line_index_to_x(line,
+							     input_index,
+							     FALSE,
+							     &x);	
+				
+				pango_layout_line_x_to_index(prev_line,
+							     x,
+							     output_index,
+							     &trailing);
+				
+				return TRUE;
+			}
+		}
+		
+		prev_line = line;
+	}
+}
+
+gboolean
+cong_eel_pango_layout_calc_down (PangoLayout *layout,
+				 int input_index,
+				 int *output_index)
+{
+	GSList *line_iter;
+
+	g_return_val_if_fail (layout, FALSE);
+	g_return_val_if_fail (output_index, FALSE);
+
+	for (line_iter=pango_layout_get_lines(layout); line_iter; line_iter = line_iter->next) {
+		PangoLayoutLine *line = line_iter->data;
+		g_assert(line);
+		
+		if ( (input_index >= line->start_index) && (input_index < line->start_index+line->length)) {
+			/* Then the search place is on this line; check to see that we're not on the last line: */
+			if (line_iter->next) {
+				int x;
+				int index;
+				int trailing;
+				
+				pango_layout_line_index_to_x(line,
+							     input_index,
+							     FALSE,
+							     &x);	
+				
+				pango_layout_line_x_to_index((PangoLayoutLine*)line_iter->next->data,
+							     x,
+							     output_index,
+							     &trailing);
+				
+				return TRUE;
+			}
+		}
+	}
+}
+
+gboolean
+cong_editor_node_text_calc_up (CongEditorNodeText *editor_node_text,
+			       int input_byte_offset,
+			       int* output_byte_offset)
+{
+
+	int input_stripped_byte_offset;
+	int result_stripped_byte_offset;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE_TEXT (editor_node_text), FALSE);
+	g_return_val_if_fail (output_byte_offset, FALSE);
+
+	if (!cong_text_cache_convert_original_byte_offset_to_stripped (PRIVATE(editor_node_text)->text_cache,
+								      input_byte_offset,
+								      &input_stripped_byte_offset)) {
+		return FALSE;		
+	}
+	       
+	if (!cong_eel_pango_layout_calc_up (PRIVATE(editor_node_text)->pango_layout,
+					    input_stripped_byte_offset,
+					    &result_stripped_byte_offset)) {
+		return FALSE;		
+	}
+
+	return cong_text_cache_convert_stripped_byte_offset_to_original (PRIVATE(editor_node_text)->text_cache,
+									 result_stripped_byte_offset,
+									 output_byte_offset);
+
+}
+
+gboolean
+cong_editor_node_text_calc_down (CongEditorNodeText *editor_node_text,
+				 int input_byte_offset,
+				 int* output_byte_offset)
+{
+	int input_stripped_byte_offset;
+	int result_stripped_byte_offset;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE_TEXT (editor_node_text), FALSE);
+	g_return_val_if_fail (output_byte_offset, FALSE);
+
+	if (!cong_text_cache_convert_original_byte_offset_to_stripped (PRIVATE(editor_node_text)->text_cache,
+								      input_byte_offset,
+								      &input_stripped_byte_offset)) {
+		return FALSE;		
+	}
+
+	if (!cong_eel_pango_layout_calc_down (PRIVATE(editor_node_text)->pango_layout,
+					      input_stripped_byte_offset,
+					      &result_stripped_byte_offset)) {
+		return FALSE;		
+	}
+
+	return cong_text_cache_convert_stripped_byte_offset_to_original (PRIVATE(editor_node_text)->text_cache,
+									 result_stripped_byte_offset,
+									 output_byte_offset);
+}
+
+
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {

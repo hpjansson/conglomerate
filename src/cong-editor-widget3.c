@@ -23,7 +23,6 @@
  */
 
 #include "global.h"
-#include "cong-editor-widget3-impl.h"
 #include "cong-document.h"
 
 #include "cong-app.h"
@@ -40,6 +39,7 @@
 #include "cong-editor-area-composer.h"
 
 #include "cong-selection.h"
+#include "cong-editor-node-text.h"
 
 #define SHOW_CURSOR_SPEW 0
 
@@ -588,6 +588,42 @@ cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 	}
 }
 
+static void
+copy_to_result_hash_func (gpointer key,
+			  gpointer value,
+			  gpointer user_data)
+{
+	CongEditorNode **result = user_data;
+	g_assert (result);
+
+	*result = CONG_EDITOR_NODE (value);
+}
+
+CongEditorNode*
+cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
+					CongNodePtr xml_node)
+{
+	EditorMapping *editor_mapping;
+
+	g_return_val_if_fail (editor_widget, NULL);
+	g_return_val_if_fail (xml_node, NULL);
+
+	editor_mapping = g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor_mapping,
+					      xml_node);
+
+	if (editor_mapping) {
+		CongEditorNode *result = NULL;
+
+		g_hash_table_foreach (editor_mapping->hash_of_traversal_parent_to_editor_node,
+				      copy_to_result_hash_func,
+				      &result);
+
+		return result;
+	} else {
+		return NULL;
+	}
+}
+
 EditorMapping*
 cong_editor_mapping_new (CongNodePtr xml_node)
 {
@@ -818,6 +854,61 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 #endif
 }
 
+static gboolean
+cong_editor_widget3_calc_up (CongEditorWidget3 *editor_widget,
+			     CongLocation *input_loc,
+			     CongLocation *output_loc)
+{
+	CongEditorNodeText *editor_node_text;
+	int output_byte_offset;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget), FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
+
+	editor_node_text = CONG_EDITOR_NODE_TEXT ( cong_editor_widget3_get_an_editor_node (editor_widget,
+											   input_loc->node));
+	g_assert (editor_node_text);
+
+	if (cong_editor_node_text_calc_up (editor_node_text,
+					   input_loc->byte_offset,
+					   &output_byte_offset)) {
+		cong_location_set_node_and_byte_offset (output_loc,
+							input_loc->node,
+							output_byte_offset);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+cong_editor_widget3_calc_down (CongEditorWidget3 *editor_widget,
+			       CongLocation *input_loc,
+			       CongLocation *output_loc)
+{
+	CongEditorNodeText *editor_node_text;
+	int output_byte_offset;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget), FALSE);
+	g_return_val_if_fail (input_loc, FALSE);
+	g_return_val_if_fail (output_loc, FALSE);
+
+	editor_node_text = CONG_EDITOR_NODE_TEXT ( cong_editor_widget3_get_an_editor_node (editor_widget,
+											   input_loc->node));
+	g_assert (editor_node_text);
+
+	if (cong_editor_node_text_calc_down (editor_node_text,
+					     input_loc->byte_offset,
+					     &output_byte_offset)) {
+		cong_location_set_node_and_byte_offset (output_loc,
+							input_loc->node,
+							output_byte_offset);
+		return TRUE;
+	}
+
+	return FALSE;
+}
 
 /* 
    Method to calculate where the cursor should go as a result of the key press.
@@ -846,13 +937,15 @@ cong_editor_widget3_get_destination_location_for_keypress (CongEditorWidget3 *ed
 	default: 
 		return FALSE;
 
-#if 0
 	case GDK_Up:
-		return span_text_editor_calc_up(span_text_editor, doc, cursor, output_loc);
+		return cong_editor_widget3_calc_up (editor_widget, 
+						    &cursor->location,
+						    output_loc);
 
 	case GDK_Down:
-		return span_text_editor_calc_down(span_text_editor, doc, cursor, output_loc);
-#endif
+		return cong_editor_widget3_calc_down (editor_widget, 
+						      &cursor->location,
+						      output_loc);
 	
 	case GDK_Left:
 		if (state & GDK_CONTROL_MASK) {
