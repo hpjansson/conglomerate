@@ -52,6 +52,8 @@
 #include "cong-range.h"
 #include "cong-selection.h"
 
+#define DEBUG_MODIFICATIONS 0
+
 #define PRIVATE(x) ((x)->private)
 
 struct CongCommandDetails
@@ -164,6 +166,10 @@ cong_command_undo (CongCommand *command)
 	for (iter = g_list_last(PRIVATE(command)->list_of_modification); iter; iter=iter->prev) {
 		CongModification *modification = CONG_MODIFICATION (iter->data);
 
+#if DEBUG_MODIFICATIONS
+		g_message ("undoing modification %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(modification)));
+#endif
+
 		CONG_EEL_CALL_METHOD (CONG_MODIFICATION_CLASS, 
 				      modification, 
 				      undo, 
@@ -190,6 +196,10 @@ cong_command_redo (CongCommand *command)
 	/* Start at front of modification list: */
 	for (iter = PRIVATE(command)->list_of_modification; iter; iter=iter->next) {
 		CongModification *modification = CONG_MODIFICATION (iter->data);
+
+#if DEBUG_MODIFICATIONS
+		g_message ("redoing modification %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(modification)));
+#endif
 
 		CONG_EEL_CALL_METHOD (CONG_MODIFICATION_CLASS, 
 				      modification,
@@ -402,6 +412,7 @@ cong_command_add_set_external_dtd (CongCommand *cmd,
 
 }
 
+#if 0
 void 
 cong_command_add_set_clipboard (CongCommand *cmd,
 				const gchar* clipboard_source)
@@ -419,8 +430,10 @@ cong_command_add_set_clipboard (CongCommand *cmd,
 	g_object_unref (G_OBJECT(modification));
 #endif
 
+#error
 	g_assert_not_reached();
 }
+#endif
 
 void
 cong_command_add_node_free (CongCommand *cmd,

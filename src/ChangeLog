@@ -1,5 +1,9 @@
 2003-10-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c
+
+	Added debug code; removed clipboard handling from undo/redo
+	
 	* cong-editor-widget3.c
 
 	Disabled overzealous assertion
