@@ -1,5 +1,9 @@
 2003-07-17  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c
+
+	Fixed the signal emission flags.
+
 	* cong-editor-widget3.c
 
 	Listen to document signals

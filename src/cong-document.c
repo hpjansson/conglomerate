@@ -46,7 +46,7 @@ cong_document_handle_cursor_change(CongDocument *doc);
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
-#define DEBUG_MVC 0
+#define DEBUG_MVC 1
 
 #define PRIVATE(x) ((x)->private)
 
@@ -124,7 +124,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
 					    CONG_DOCUMENT_TYPE,
-					    G_SIGNAL_RUN_FIRST,
+					    G_SIGNAL_RUN_LAST,
 					    G_STRUCT_OFFSET(CongDocumentClass, begin_edit),
 					    NULL, NULL,
 					    g_cclosure_marshal_VOID__VOID,
@@ -133,7 +133,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[END_EDIT] = g_signal_new ("end_edit",
 					  CONG_DOCUMENT_TYPE,
-					  G_SIGNAL_RUN_FIRST,
+					  G_SIGNAL_RUN_LAST,
 					  G_STRUCT_OFFSET(CongDocumentClass, end_edit),
 					  NULL, NULL,
 					  g_cclosure_marshal_VOID__VOID,
@@ -142,7 +142,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[NODE_MAKE_ORPHAN] = g_signal_new ("node_make_orphan",
 						  CONG_DOCUMENT_TYPE,
-						  G_SIGNAL_RUN_FIRST,
+						  G_SIGNAL_RUN_LAST,
 						  G_STRUCT_OFFSET(CongDocumentClass, node_make_orphan),
 						  NULL, NULL,
 						  cong_cclosure_marshal_VOID__CONGNODEPTR,
@@ -151,7 +151,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[NODE_ADD_AFTER] = g_signal_new ("node_add_after",
 						CONG_DOCUMENT_TYPE,
-						G_SIGNAL_RUN_FIRST,
+						G_SIGNAL_RUN_LAST,
 						G_STRUCT_OFFSET(CongDocumentClass, node_add_after),
 						NULL, NULL,
 						cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
@@ -160,7 +160,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[NODE_ADD_BEFORE] = g_signal_new ("node_add_before",
 						 CONG_DOCUMENT_TYPE,
-						 G_SIGNAL_RUN_FIRST,
+						 G_SIGNAL_RUN_LAST,
 						 G_STRUCT_OFFSET(CongDocumentClass, node_add_before),
 						 NULL, NULL,
 						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
@@ -169,7 +169,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[NODE_SET_PARENT] = g_signal_new ("node_set_parent",
 						 CONG_DOCUMENT_TYPE,
-						 G_SIGNAL_RUN_FIRST,
+						 G_SIGNAL_RUN_LAST,
 						 G_STRUCT_OFFSET(CongDocumentClass, node_set_parent),
 						 NULL, NULL,
 						 cong_cclosure_marshal_VOID__CONGNODEPTR_CONGNODEPTR,
@@ -178,7 +178,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	
 	signals[NODE_SET_TEXT] = g_signal_new ("node_set_text",
 					       CONG_DOCUMENT_TYPE,
-					       G_SIGNAL_RUN_FIRST,
+					       G_SIGNAL_RUN_LAST,
 					       G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
 					       NULL, NULL,
 					       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
@@ -188,7 +188,7 @@ cong_document_class_init (CongDocumentClass *klass)
 
 	signals[NODE_SET_ATTRIBUTE] = g_signal_new ("node_set_attribute",
 						    CONG_DOCUMENT_TYPE,
-						    G_SIGNAL_RUN_FIRST,
+						    G_SIGNAL_RUN_LAST,
 						    G_STRUCT_OFFSET(CongDocumentClass, node_set_attribute),
 						    NULL, NULL,
 						    cong_cclosure_marshal_VOID__CONGNODEPTR_STRING_STRING,
@@ -197,7 +197,7 @@ cong_document_class_init (CongDocumentClass *klass)
 
 	signals[NODE_REMOVE_ATTRIBUTE] = g_signal_new ("node_remove_attribute",
 						       CONG_DOCUMENT_TYPE,
-						       G_SIGNAL_RUN_FIRST,
+						       G_SIGNAL_RUN_LAST,
 						       G_STRUCT_OFFSET(CongDocumentClass, node_remove_attribute),
 						       NULL, NULL,
 						       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
@@ -206,7 +206,7 @@ cong_document_class_init (CongDocumentClass *klass)
 
 	signals[SELECTION_CHANGE] = g_signal_new ("selection_change",
 						  CONG_DOCUMENT_TYPE,
-						  G_SIGNAL_RUN_FIRST,
+						  G_SIGNAL_RUN_LAST,
 						  G_STRUCT_OFFSET(CongDocumentClass, selection_change),
 						  NULL, NULL,
 						  g_cclosure_marshal_VOID__VOID,
@@ -215,8 +215,8 @@ cong_document_class_init (CongDocumentClass *klass)
 
 	signals[CURSOR_CHANGE] = g_signal_new ("cursor_change",
 					       CONG_DOCUMENT_TYPE,
-					       G_SIGNAL_RUN_FIRST,
-					       G_STRUCT_OFFSET(CongDocumentClass, selection_change),
+					       G_SIGNAL_RUN_LAST,
+					       G_STRUCT_OFFSET(CongDocumentClass, cursor_change),
 					       NULL, NULL,
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE, 
@@ -803,9 +803,11 @@ void cong_document_on_cursor_change(CongDocument *doc)
 
 	g_return_if_fail(doc);
 
+#if 0
 	#if DEBUG_MVC
 	g_message("cong_document_node_on_cursor_change");
 	#endif
+#endif
 
 	/* Emit signal: */
 	g_signal_emit (G_OBJECT(doc),
@@ -1299,9 +1301,11 @@ cong_document_handle_selection_change(CongDocument *doc)
 static void
 cong_document_handle_cursor_change(CongDocument *doc)
 {
+#if 0
 	#if DEBUG_MVC
-	g_message("cong_document_handle_change_change");
+	g_message("cong_document_handle_cursor_change");
 	#endif
+#endif
 }
 
 
