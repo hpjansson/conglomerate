@@ -4,6 +4,11 @@
 # it assumes that you are in the tarball directory
 # and the same directory level is the CVS module conglomerate directory
 #
+
 cp -p debian/changelog ../conglomerate/debian
 cp -p NEWS ../conglomerate
+
+
+# do not include the next script here
+
 # end of this simple script

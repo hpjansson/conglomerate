@@ -9,5 +9,5 @@ patch_DISTS = \
 	package_version.dpatch \
 	$(NULL)
 
-EXTRA_DIST = 00list 00patch-opts $(patch_DISTS) release sync
+EXTRA_DIST = 00list 00patch-opts $(patch_DISTS) next release sync
 ## eof
