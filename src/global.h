@@ -835,4 +835,9 @@ struct CongDocumentEvent
 
 void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node);
 
+/* Extensions to libxml: */
+xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
+					 const xmlChar *name,
+					 int value);
+
 G_END_DECLS

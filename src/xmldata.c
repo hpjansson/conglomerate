@@ -1244,6 +1244,18 @@ void xml_tag_remove(CongDocument *doc, CongNodePtr x)
 #endif
 }
 
+/* Extensions to libxml: */
+xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,
+					 const xmlChar *name,
+					 int value)
+{
+	gchar *textual_value = g_strdup_printf("%i", value);
+	xmlAttrPtr attr = xmlNewProp(node, name, textual_value);
+
+	g_free(textual_value);
+
+	return attr;
+}
 
 
 
