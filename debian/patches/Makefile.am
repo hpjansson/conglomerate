@@ -9,5 +9,11 @@ patch_DISTS = \
 	package_version.dpatch \
 	$(NULL)
 
-EXTRA_DIST = 00list 00patch-opts $(patch_DISTS) next release sync
+# other files that travell with the package
+EXTRA_DIST = 00list 00patch-opts \
+	$(patch_DISTS) \
+	next \
+	release \
+	sync \
+	$(NULL)
 ## eof
