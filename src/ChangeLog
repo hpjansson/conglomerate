@@ -1,3 +1,9 @@
+2004-03-15  Geert Stappers <stappers@stappers.nl>
+
+	* marshal.make
+
+	New file
+
 2004-03-15  Johannes H?lzl <johannes.hoelzl@gmx.de> (ChangeLog by GSt)
 
 	* cong.marshal
