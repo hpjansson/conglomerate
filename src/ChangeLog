@@ -2,6 +2,10 @@
 
 	* cong-file-properties.c
 
+	Removed dead code; added debug code to track down the reopened bug #122029 (obscure bug when undoing DTD changes)
+
+	* cong-file-properties.c
+
 	Big rewrite to use Glade; fix for bug #122029 (respond to DTD notifications)
 
 	* cong-editor-node-text.c
