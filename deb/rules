@@ -23,7 +23,7 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 
-config.status: configure
+config.status: configure patch-stamp
 	dh_testdir
 	# Commands to configure the package.
 	./configure --host=$(DEB_HOST_GNU_TYPE) \
@@ -46,18 +46,10 @@ build-stamp:  config.status
 	touch build-stamp
 
 
-# apply patches
-patch-stamp: debian/patches/P00000patch-stamp
-	pfs=`ls debian/patches/P*` ; \
-	for pf in $$pfs ; do \
-	  patch --forward --silent < $$pf ; \
-	done
-
-clean:
+clean: patch-stamp
 	dh_testdir
 	dh_testroot
-	#rm -f build-stamp patch-stamp
-	rm -f build-stamp # run 'patch-stamp' only once
+	rm -f build-stamp
 
 	# Add here commands to clean up after the build process.
 	-$(MAKE) distclean
@@ -73,6 +65,13 @@ ifneq "$(wildcard /usr/share/misc/config.guess)" ""
 endif
 
 	dh_clean
+
+# apply patches only once and surely at a `make clean`
+patch-stamp: debian/patches/P00000patch-stamp
+	pfs=`ls debian/patches/P*` ; \
+	for pf in $$pfs ; do \
+	  patch --forward --silent < $$pf ; \
+	done
 
 install: build
 	dh_testdir
