@@ -10,17 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-17 03:18+0100\n"
-"PO-Revision-Date: 2004-01-17 13:45+0100\n"
+"POT-Creation-Date: 2004-01-24 19:28+0100\n"
+"PO-Revision-Date: 2004-01-25 02:09+0100\n"
 "Last-Translator: Daniel van Eeden <daniel_e@dds.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1221
-#: src/cong-primary-window.c:610 src/cong-primary-window.c:766
-#: src/cong-primary-window.c:768 src/cong-primary-window.c:774
+#: src/cong-primary-window.c:614 src/cong-primary-window.c:770
+#: src/cong-primary-window.c:772 src/cong-primary-window.c:778
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-Editor"
 
@@ -40,8 +40,8 @@ msgstr "Importeur"
 msgid "Options"
 msgstr "Opties"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:744
-#: src/cong-node-properties-dialog.c:828
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1043
+#: src/cong-node-properties-dialog.c:1127
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -50,7 +50,7 @@ msgid "Basic"
 msgstr "Basis"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-file-export.c:307
-#: src/cong-file-new.c:234 src/cong-file-print.c:249 src/cong-menus.c:458
+#: src/cong-file-new.c:290 src/cong-file-print.c:249 src/cong-menus.c:458
 #: src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Beschrijving"
@@ -89,8 +89,8 @@ msgstr "Naam"
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: glade/docbook-ulink-properties.glade.h:3
-#: src/cong-node-properties-dialog.c:790
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1089
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -318,6 +318,18 @@ msgstr "URL"
 msgid "_Test this Link"
 msgstr "_Test deze koppeling"
 
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "Aanmak parameters"
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Diepte"
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:729
+msgid "Document Type"
+msgstr "Documentsoort"
+
 #: glade/string_selection_dialog.glade.h:2
 msgid "label"
 msgstr "label"
@@ -486,10 +498,6 @@ msgstr "Commentaar \"%s\""
 #: src/cong-document.c:726
 msgid "Document"
 msgstr "Document"
-
-#: src/cong-document.c:729
-msgid "Document Type"
-msgstr "Documentsoort"
 
 #: src/cong-document.c:732
 msgid "Document Fragment"
@@ -1123,21 +1131,21 @@ msgstr "Geen enkele Conglomerate plugin kan bestanden van soort \"%s\" laden"
 msgid "FIXME"
 msgstr "FIXME"
 
-#: src/cong-file-new.c:126
+#: src/cong-file-new.c:137
 #, c-format
 msgid "Creating a new file (%s)"
 msgstr "Bezig met maken nieuw bestand (%s)"
 
-#: src/cong-file-new.c:214
+#: src/cong-file-new.c:270
 msgid "File Type"
 msgstr "Bestandssoort"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:401 src/cong-file-new.c:408 src/cong-file-new.c:433
+#: src/cong-file-new.c:470 src/cong-file-new.c:477 src/cong-file-new.c:502
 msgid "Creating a new file"
 msgstr "Bezig met maken nieuw bestand"
 
-#: src/cong-file-new.c:409
+#: src/cong-file-new.c:478
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -1155,17 +1163,17 @@ msgstr ""
 " In toekomstige versies zal u hopelijk zelf \"sjabloondocumenten\" kunnen "
 "toevoegen aan dit systeem."
 
-#: src/cong-file-new.c:422
+#: src/cong-file-new.c:491
 msgid "What type of file would you like to create?"
 msgstr "Welk soort bestand wilt u aanmaken?"
 
-#: src/cong-file-new.c:424
+#: src/cong-file-new.c:493
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr ""
 "Selecteer een van de punten in de lijst en kies 'Vooruit' om door te gaan."
 
-#: src/cong-file-new.c:434
+#: src/cong-file-new.c:503
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -1579,12 +1587,44 @@ msgstr "Ruwe kenmerken"
 msgid "Value"
 msgstr "Waarde"
 
-#: src/cong-node-properties-dialog.c:610
+#: src/cong-node-properties-dialog.c:601
 #, c-format
-msgid "Attributes for <tt>%s</tt> tags"
-msgstr "Kenmerken voor <tt>%s</tt> secties"
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "Kenmerken voor <tt>%s</tt> elementen"
 
-#: src/cong-node-properties-dialog.c:736 src/cong-node-properties-dialog.c:823
+#: src/cong-node-properties-dialog.c:715
+msgid "Text"
+msgstr "Tekst"
+
+#: src/cong-node-properties-dialog.c:767
+msgid "Choice"
+msgstr "Keuze"
+
+#: src/cong-node-properties-dialog.c:802
+msgid "Optional"
+msgstr "Optioneel"
+
+#: src/cong-node-properties-dialog.c:818
+msgid "Zero or more"
+msgstr "Nul of meer"
+
+#: src/cong-node-properties-dialog.c:834
+msgid "One or more"
+msgstr "Een of meer"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:890
+msgid "Valid Content"
+msgstr "Gevalideerde inhoud"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:915
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "Inhoud model voor <tt>%s</tt> elementen"
+
+#: src/cong-node-properties-dialog.c:1035
+#: src/cong-node-properties-dialog.c:1122
 msgid "DTD"
 msgstr "DTD"
 
@@ -1640,57 +1680,57 @@ msgstr "<%s> Eigenschappen-dialoogvenster"
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Voorziet een Eigenschappen-dialoogvenster voor het <%s> item"
 
-#: src/cong-primary-window.c:314 src/cong-primary-window.c:315
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Open document"
 msgstr "Document openen"
 
-#: src/cong-primary-window.c:322 src/cong-primary-window.c:323
+#: src/cong-primary-window.c:323 src/cong-primary-window.c:324
 msgid "New document"
 msgstr "Nieuw document"
 
-#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
+#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
 msgid "Save document"
 msgstr "Document opslaan"
 
-#: src/cong-primary-window.c:349 src/cong-primary-window.c:350
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:351
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/cong-primary-window.c:356 src/cong-primary-window.c:357
+#: src/cong-primary-window.c:357 src/cong-primary-window.c:358
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: src/cong-primary-window.c:375 src/cong-primary-window.c:376 src/tree.c:178
+#: src/cong-primary-window.c:376 src/cong-primary-window.c:377 src/tree.c:178
 #: src/xmledit.c:43
 msgid "Cut"
 msgstr "Knippen"
 
-#: src/cong-primary-window.c:382 src/cong-primary-window.c:383
+#: src/cong-primary-window.c:383 src/cong-primary-window.c:384
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/cong-primary-window.c:389 src/cong-primary-window.c:390
+#: src/cong-primary-window.c:390 src/cong-primary-window.c:391
 #: src/xmledit.c:166
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/cong-primary-window.c:521
+#: src/cong-primary-window.c:520
 msgid "Overview"
 msgstr "Overzicht"
 
-#: src/cong-primary-window.c:531
+#: src/cong-primary-window.c:530
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: src/cong-primary-window.c:540
+#: src/cong-primary-window.c:539
 msgid "Raw XML"
 msgstr "Pure XML"
 
-#: src/cong-primary-window.c:667 src/cong-primary-window.c:686
+#: src/cong-primary-window.c:671 src/cong-primary-window.c:690
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welkom bij de Conglomerate editor"
 
-#: src/cong-primary-window.c:766
+#: src/cong-primary-window.c:770
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (bijgewerkt) - %s"
@@ -1993,6 +2033,18 @@ msgstr "Paragraaf"
 msgid "An editor node for visualising a paragraph"
 msgstr "Een editor item om alinea's weer te geven"
 
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr "Welk willekeurig soort XML document wilt u aanmaken?"
+
+#: src/plugin-random.c:603
+msgid "Random Document"
+msgstr "Willekeurig document"
+
+#: src/plugin-random.c:604
+msgid "Create an XML document containing random content."
+msgstr "Maak een XML document aan met willekeurige inhoud."
+
 #: src/plugin-save-dispspec.c:131
 msgid "Dump Display Spec"
 msgstr "Weergave specificaties dumpen"
@@ -2057,11 +2109,11 @@ msgstr ""
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr "Unicode-karakters 0x%04X-0x%04X"
 
-#: src/plugin-tests.c:331
+#: src/plugin-tests.c:333
 msgid "Unicode Character Reference"
 msgstr "Unicode Character Reference"
 
-#: src/plugin-tests.c:332
+#: src/plugin-tests.c:334
 msgid ""
 "Create a table listing a part of the Unicode character set as a DocBook "
 "article"
