@@ -3,7 +3,8 @@ glade_DATA 	 = docbook-common-properties.glade \
                    docbook-orderedlist-properties.glade \
                    docbook-ulink-properties.glade \
 		   string_selection_dialog.glade \
-                   cong-file-import.glade
+                   cong-file-import.glade \
+                   cong-file-properties.glade
 
 EXTRA_DIST = $(glade_DATA)
 
