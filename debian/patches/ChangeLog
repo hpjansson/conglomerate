@@ -3,6 +3,7 @@
 	* release
 	-Make debian/rules executable
 	-Proper name for the original files
+	-Better Usage
 
 2004-01-19  Geert Stappers <stappers@stapers.nl>
 

@@ -50,7 +50,9 @@ else
    rm debian/rules.orig
   ;;
   *)
-   echo \'${1}\' is not supported
+   echo \'${1}\' is an unsupported subcommand
+   echo Supported subcommand are: unpatch \& *.*.*-*
+   echo " Where * are digits for the version"
   ;;
  esac
 fi
