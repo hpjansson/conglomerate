@@ -120,7 +120,10 @@ void cong_document_paste_clipboard_or_selection(CongDocument *doc, GtkWidget *wi
 		return;
 	}
 #endif
-	source_fragment = cong_app_get_clipboard (cong_app_singleton ());
+	source_fragment = cong_app_get_clipboard_xml_source (cong_app_singleton (),
+							     GDK_SELECTION_CLIPBOARD,
+							     doc);
+
 
 	if (source_fragment) {
 		cong_document_paste_source_at (doc, 

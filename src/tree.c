@@ -220,8 +220,9 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 
 	ds = cong_document_get_dispspec(doc);
 
-	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
-						   
+	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
+							      GDK_SELECTION_CLIPBOARD,
+							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_under (doc,
 						  tag,
@@ -243,8 +244,9 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 
 	ds = cong_document_get_dispspec(doc);
 
-	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
-						   
+	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
+							      GDK_SELECTION_CLIPBOARD,
+							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_before (doc,
 						   tag,
@@ -266,8 +268,9 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 
 	ds = cong_document_get_dispspec(doc);
 
-	clipboard_source = cong_app_get_clipboard (cong_app_singleton());
-						   
+	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
+							      GDK_SELECTION_CLIPBOARD,
+							      doc);
 	if (clipboard_source) {
 		cong_document_paste_source_after (doc,
 						  tag,

@@ -908,21 +908,17 @@ on_signal_button_press (CongEditorArea *editor_area,
 		{
 			CongLocation new_location;
 			
-			if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {
-				GtkClipboard* clipboard;
-				gchar *selected_text;
+			if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {				
 
-				clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
-					
-				/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
-				selected_text = gtk_clipboard_wait_for_text (clipboard);
-
-				if (selected_text) {
+				gchar *selected_xml_source = cong_app_get_clipboard_xml_source (cong_app_singleton (),
+												GDK_SELECTION_PRIMARY,
+												doc);
+				if (selected_xml_source) {
 					cong_document_paste_source_at (doc, 
 								       &new_location, 
-								       selected_text);
+								       selected_xml_source);
 					
-					g_free (selected_text);
+					g_free (selected_xml_source);
 				}
 			}
 		}

@@ -1,5 +1,9 @@
 2003-12-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-app.c, cong-app.h, cong-editor-node-text.c, tree.c, xmledit.c
+
+	Reorganisation of clipboard code in preparation for a fix to bug #129731 (Clipboard interaction gets text but assumes it is XML source) ; disabled GConf search for dispspec paths until we have a fix for bug #129776 (missing @PKGDATADIR@ definition)
+
 	* cong-modification-selection-change.c, cong-selection.h, select.c
 
 	Attempts to fix bug #130236 (Excessive cong_node_get_ordering assertion failures) by making selection change an atomic range operation

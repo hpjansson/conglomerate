@@ -54,8 +54,24 @@ cong_app_destroy_singleton(void);
 int
 cong_app_post_init_hack (CongApp *app);
 
-const gchar*
-cong_app_get_clipboard (CongApp *app);
+
+/**
+ * cong_app_get_clipboard_xml_source:
+ * @app: the #CongApp
+ * @selection: should be either GDK_SELECTION_CLIPBOARD or GDK_SELECTION_PRIMARY
+ * @target_doc: the #CongDocument into which the source is to be pasted
+ * 
+ * This function interrogates the appropriate clipboard and attempts to get the content
+ * in the best possible format for the target document.  It may attempt to do conversions,
+ * for example, converting <li> elements into <listitem> when pasting HTML into a DocBook document.
+ *
+ * Returns: a newly-allocated UTF-8 fragment of XML source, wrapped in a <placeholder> element,
+ * suitable for parsing and adding to the document (which must then be freed using g_free) or NULL
+ */
+gchar*
+cong_app_get_clipboard_xml_source (CongApp *app,
+				   GdkAtom selection,
+				   CongDocument *target_doc);
 
 void
 cong_app_set_clipboard (CongApp *app, 

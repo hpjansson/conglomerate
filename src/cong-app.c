@@ -35,7 +35,6 @@
 
 #include "cong-fake-plugin-hooks.h"
 
-#define CORRECT_CLIPBOARD 1
 #define TEST_BIG_FONTS 0
 
 #define PRIVATE(x) ((x)->private)
@@ -52,10 +51,6 @@ struct CongAppPrivate
 	GConfClient* gconf_client;
 	GtkTooltips *tooltips;
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
-
-#if !CORRECT_CLIPBOARD
-	gchar *clipboard; /* can be NULL to signify nothing in clipboard*/
-#endif
 
 	const GList *language_list;
 };
@@ -146,37 +141,32 @@ cong_app_post_init_hack (CongApp *app)
 	return 0;
 }
 
-const gchar*
-cong_app_get_clipboard (CongApp *app)
+gchar*
+cong_app_get_clipboard_xml_source (CongApp *app,
+				   GdkAtom selection,
+				   CongDocument *target_doc)
 {
-#if CORRECT_CLIPBOARD
 	GtkClipboard* clipboard;
-#endif
 
 	g_return_val_if_fail (app, NULL);
+	g_return_val_if_fail ((selection == GDK_SELECTION_CLIPBOARD)||(selection == GDK_SELECTION_PRIMARY), NULL);
+	g_return_val_if_fail (target_doc, NULL);
 
-#if CORRECT_CLIPBOARD
-	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+	clipboard = gtk_clipboard_get (selection);
 
 	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
 	return gtk_clipboard_wait_for_text (clipboard);
-
-#else
-	return PRIVATE(app)->clipboard;
-#endif
 }
 
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text)
 {
-#if CORRECT_CLIPBOARD
 	GtkClipboard* clipboard;
-#endif
+
 	g_return_if_fail (app);
 	/* text is allowed to be NULL */
 
-#if CORRECT_CLIPBOARD
 	clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 	
 	if (text) {
@@ -185,17 +175,6 @@ cong_app_set_clipboard (CongApp *app,
 	} else {
 		/* FIXME: should this happen? */
 	}
-#else
-	if (PRIVATE(app)->clipboard) {
-		g_free(PRIVATE(app)->clipboard);
-	}
-
-	if (text) {
-		PRIVATE(app)->clipboard = g_strdup(text);
-	} else {
-		PRIVATE(app)->clipboard = NULL;
-	}
-#endif
 
 	g_message("Clipboard set to \"%s\"", text);
 
@@ -334,7 +313,7 @@ static gboolean
 cong_app_private_load_displayspecs (CongApp *app,
 				    GtkWindow *toplevel_window)
 {
-	GSList *ds_path_list;
+	GSList *ds_path_list = NULL;
 	GSList *path;
 
 	/* Create new empty registry */
@@ -347,11 +326,13 @@ cong_app_private_load_displayspecs (CongApp *app,
 	   we need to load in the most-trusted sources first */
 
 	/* Load gconf-specified directories */
-
+	/* FIXME:  This is temporarily disabled pending a fix to bug #129776 */
+#if 0
 	ds_path_list = gconf_client_get_list(PRIVATE(app)->gconf_client,
 					     "/apps/conglomerate/dispspec-paths",
 					     GCONF_VALUE_STRING,
 					     NULL);
+#endif
 	
 	if (ds_path_list == NULL) {
 		/* Fallback in the case where there is nothing in GConf.
