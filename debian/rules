@@ -96,7 +96,7 @@ binary-arch: build install
 	dh_installman doc/C/conglomerate.1
 	dh_scrollkeeper
 	dh_link
-	dh_strip --dbg-package=conglomerate
+	dh_strip --exclude=conglomerate-dbg
 	dh_compress
 	dh_fixperms
 	dh_installdeb
