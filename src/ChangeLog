@@ -1,5 +1,9 @@
 2003-07-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-unknown-tag.c, cong-editor-area-unknown-tag.h, cong-editor-node-document.c, cong-editor-node-document.h, cong-editor-node-element-span.c, cong-editor-node-element-span.h, cong-editor-node-element-structural.c, cong-editor-node-element-structural.h, cong-editor-node-element-unknown.c, cong-editor-node-element-unknown.h, cong-editor-node-element.c, cong-editor-node-element.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-node-unimplemented.c, cong-editor-node-unimplemented.h
+
+	Even more new files
+	
 	* cong-editor-area-bin.c, cong-editor-area-bin.h, cong-editor-area-border.c, cong-editor-area-border.h, cong-editor-area-composer.c, cong-editor-area-composer.h, cong-editor-area-container.c, cong-editor-area-container.h, cong-editor-area-pixbuf.c, cong-editor-area-pixbuf.h, cong-editor-area-spacer.c, cong-editor-area-spacer.h, cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-area.c, cong-editor-area.h, cong-editor-node.c, cong-editor-node.h
 
 	New files
