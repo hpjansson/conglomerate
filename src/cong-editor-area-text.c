@@ -184,11 +184,11 @@ cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text
 }
 
 gboolean
-cong_editor_area_xy_to_index (CongEditorAreaText *area_text,
-			      int x,
-			      int y,
-			      int *index_,
-			      int *trailing)
+cong_editor_area_text_xy_to_index (CongEditorAreaText *area_text,
+				   int x,
+				   int y,
+				   int *index_,
+				   int *trailing)
 {
 	const GdkRectangle *rect;
 

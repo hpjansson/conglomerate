@@ -61,7 +61,8 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 					  const gchar *text,
 					  gboolean use_markup,
 					  gint width,
-					  gint height);
+					  gint height,
+					  gint text_offset);
 
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
@@ -70,7 +71,11 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 				    const gchar *text,
 				    gboolean use_markup,
 				    gint width,
-				    gint height);
+				    gint height,
+				    gint text_offset);
+
+gint
+cong_editor_area_text_fragment_get_text_offset (CongEditorAreaTextFragment *area_text_fragment);
 
 G_END_DECLS
 

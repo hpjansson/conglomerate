@@ -43,7 +43,9 @@ struct CongEditorNodeTextDetails
 
 	CongTextCache* text_cache;
 
+#if 0
 	CongEditorAreaText *area_text;
+#endif
 	
 	gulong handler_id_node_set_text;
 
@@ -76,7 +78,7 @@ on_signal_set_text_notify_after (CongDocument *doc,
 				 const xmlChar *new_content, 
 				 gpointer user_data);
 
-/* Declarations of the CongEditorArea event handlers: */
+/* Declarations of the CongEditorArea event handlers for the block area: */
 static gboolean
 on_signal_button_press (CongEditorArea *editor_area, 
 			GdkEventButton *event,
@@ -182,25 +184,14 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
+
+#if 1
+	g_assert_not_reached();
+	return NULL;
+#else
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
 	g_return_val_if_fail (editor_node, NULL);
-
-#if 0
-	{	
-
-#error
-		/* FIXME: this is really broken WRT lifetimes */
-		PRIVATE(node_text)->flow_test = ;
-		/* can't get children until we set set width which we can't do until we've got a requisition! */
-		PRIVATE(node_text)->list_of_text_fragments = ;
-
-		cong_editor_area_container_add_child (parent_area,
-						      CONG_EDITOR_AREA( PRIVATE(node_text)->flow_test ));
-
-		return PRIVATE(node_text)->flow_test;
-	}
-#else
 
 	PRIVATE(node_text)->area_text = 
 		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
@@ -212,23 +203,24 @@ generate_block_area (CongEditorNode *editor_node)
 
 	g_signal_connect (PRIVATE(node_text)->area_text,
 			  "button_press_event",
-			  G_CALLBACK(on_signal_button_press),
+			  G_CALLBACK(on_signal_block_button_press),
 			  editor_node);
 
 	g_signal_connect (PRIVATE(node_text)->area_text,
 			  "motion_notify_event",
-			  G_CALLBACK(on_signal_motion_notify),
+			  G_CALLBACK(on_signal_block_motion_notify),
 			  editor_node);
 
 #if 0
 	g_signal_connect (PRIVATE(node_text)->area_text,
 			  "key_press_event",
-			  G_CALLBACK(on_signal_key_press),
+			  G_CALLBACK(on_signal_block_key_press),
 			  editor_node);
 #endif
-	
+
 	return CONG_EDITOR_AREA(PRIVATE(node_text)->area_text);
 #endif
+	
 }
 
 static CongEditorLineFragments*
@@ -263,6 +255,7 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 			gchar *line_text;
 			PangoRectangle ink_rect;
 			PangoRectangle logical_rect;
+			CongEditorArea *text_fragment;
 
 			g_assert(line);
 
@@ -272,17 +265,36 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 							     &ink_rect,
 							     &logical_rect);
 
-			cong_editor_line_fragments_add_area (result,
-							     cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
-												 cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT],
-												 NULL,
-												 line_text,
-												 FALSE,
-												 logical_rect.width,
-												 logical_rect.height)
-							     );
-
+			text_fragment = cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
+									    cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT],
+									    NULL,
+									    line_text,
+									    FALSE,
+									    logical_rect.width,
+									    logical_rect.height,
+									    line->start_index);
 			g_free (line_text);
+
+			g_signal_connect (text_fragment,
+					  "button_press_event",
+					  G_CALLBACK(on_signal_button_press),
+					  editor_node);
+			
+			g_signal_connect (text_fragment,
+					  "motion_notify_event",
+					  G_CALLBACK(on_signal_motion_notify),
+					  editor_node);
+			
+#if 0
+			g_signal_connect (text_fragment,
+					  "key_press_event",
+					  G_CALLBACK(on_signal_key_press),
+					  editor_node);
+#endif
+
+			cong_editor_line_fragments_add_area (result,
+							     text_fragment);
+
 
 		}
 	}
@@ -321,18 +333,20 @@ on_signal_set_text_notify_after (CongDocument *doc,
 		cong_text_cache_set_text (PRIVATE(editor_node_text)->text_cache,
 					  cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content);
 
+#if 0
 		if (PRIVATE(editor_node_text)->area_text) {
 			cong_editor_area_text_set_text (PRIVATE(editor_node_text)->area_text,
 							cong_text_cache_get_text(PRIVATE(editor_node_text)->text_cache));
 		}
+#endif
 
 		/* FIXME: also need to generate reflow events for any inline flow_holder gubbins */
 	}
 }
 
-
 static gboolean 
 get_location_at_xy(CongEditorNodeText *editor_node_text, 
+		   CongEditorAreaTextFragment *editor_area_text_fragment,
 		   int x, 
 		   int y, 
 		   CongLocation *result)
@@ -340,16 +354,19 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 	int index_, trailing;
 
 	g_return_val_if_fail(result, FALSE);
+	g_return_val_if_fail(editor_area_text_fragment, FALSE);
 
 
-	if (cong_editor_area_xy_to_index (PRIVATE(editor_node_text)->area_text,
-					  x,
-					  y,
-					  &index_,
-					  &trailing)) {
+	if (cong_editor_area_text_xy_to_index (CONG_EDITOR_AREA_TEXT(editor_area_text_fragment),
+					       x,
+					       y,
+					       &index_,
+					       &trailing)) {
 		int original_byte_offset;
 
 		g_message("(%i,%i) -> index %i", x,y, index_);
+
+		index_ += cong_editor_area_text_fragment_get_text_offset (editor_area_text_fragment);
 
 		if ( cong_text_cache_convert_stripped_byte_offset_to_original (PRIVATE(editor_node_text)->text_cache,
 									       index_,
@@ -366,11 +383,11 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 	return FALSE;
 }
 
-/* Definitions of the CongEditorArea event handlers: */
+/* Declarations of the CongEditorArea event handlers for the block areas: */
 static gboolean
 on_signal_button_press (CongEditorArea *editor_area, 
-			GdkEventButton *event,
-			gpointer user_data)
+			      GdkEventButton *event,
+			      gpointer user_data)
 {
 	CongDocument *doc;
 	CongSelection *selection;
@@ -378,6 +395,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 	CongEditorWidget3 *editor_widget;
 
 	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(user_data);
+	CongEditorAreaTextFragment *editor_area_text_fragment = CONG_EDITOR_AREA_TEXT_FRAGMENT(editor_area);
 
 	GtkWindow *parent_window;
 
@@ -403,7 +421,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 				CongLocation start_of_tag;
 				CongLocation end_of_tag;
 
-				if (get_location_at_xy(editor_node_text, event->x, event->y, &click_location)) {
+				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					cong_location_calc_tag_start(&click_location, &tag_start);
 					cong_location_calc_tag_end(&click_location, &tag_end);
 						
@@ -426,7 +444,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 				CongLocation start_of_word;
 				CongLocation end_of_word;
 
-				if (get_location_at_xy(editor_node_text, event->x, event->y, &click_location)) {
+				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
 						
 						cong_location_copy(&selection->loc0, &start_of_word);
@@ -446,7 +464,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 				gtk_widget_grab_focus(GTK_WIDGET(editor_widget));
 				gtk_widget_grab_default(GTK_WIDGET(editor_widget));
 
-				if (get_location_at_xy(editor_node_text, event->x, event->y, &cursor->location)) {
+				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &cursor->location)) {
 					
 					cong_selection_start_from_curs(selection, cursor);
 					cong_selection_end_from_curs(selection, cursor);
@@ -479,6 +497,7 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	CongSelection *selection;
 
 	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;
+	CongEditorAreaTextFragment *editor_area_text_fragment = CONG_EDITOR_AREA_TEXT_FRAGMENT(editor_area);
 
 	if (!(event->state & GDK_BUTTON1_MASK)) {
 		return FALSE;
@@ -489,6 +508,7 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	selection = cong_document_get_selection(doc);
 	
 	if (get_location_at_xy (editor_node_text, 
+				editor_area_text_fragment,
 				event->x, 
 				event->y, 
 				&cursor->location)) {

@@ -33,6 +33,7 @@ struct CongEditorAreaTextFragmentDetails
 {
 	gint width;
 	gint height;
+	gint text_offset;
 };
 
 /* Method implementation prototypes: */
@@ -41,6 +42,13 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint);
 
+#if 0
+static gboolean 
+get_location_at_xy (CongEditorArea *editor_area, 
+		    gint x,
+		    gint y,
+		    CongLocation *output);
+#endif
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaTextFragment, 
@@ -54,6 +62,9 @@ cong_editor_area_text_fragment_class_init (CongEditorAreaTextFragmentClass *klas
 	CongEditorAreaClass *area_klass = CONG_EDITOR_AREA_CLASS(klass);
 
 	area_klass->calc_requisition = calc_requisition;
+#if 0
+	area_klass->get_location_at_xy = get_location_at_xy;
+#endif
 }
 
 static void
@@ -71,7 +82,8 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 					  const gchar *text,
 					  gboolean use_markup,
 					  gint width,
-					  gint height)
+					  gint height,
+					  gint text_offset)
 {
 	cong_editor_area_text_construct (CONG_EDITOR_AREA_TEXT(area_text_fragment),
 					 editor_widget,
@@ -82,6 +94,7 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 
 	PRIVATE(area_text_fragment)->width = width;
 	PRIVATE(area_text_fragment)->height = height;
+	PRIVATE(area_text_fragment)->text_offset = text_offset;
 
 	return CONG_EDITOR_AREA (area_text_fragment);
 }
@@ -93,7 +106,8 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 				    const gchar *text,
 				    gboolean use_markup,
 				    gint width,
-				    gint height)
+				    gint height,
+				    gint text_offset)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_text_fragment_new(%s)", text);
@@ -107,9 +121,15 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 		 text,
 		 use_markup,
 		 width,
-		 height);
+		 height,
+		 text_offset);
 }
 
+gint
+cong_editor_area_text_fragment_get_text_offset (CongEditorAreaTextFragment *area_text_fragment)
+{
+	return PRIVATE(area_text_fragment)->text_offset;
+}
 
 /* Method implementation definitions: */
 static gint
@@ -125,3 +145,14 @@ calc_requisition (CongEditorArea *area,
 		return PRIVATE(area_text_fragment)->height;
 	}
 }
+
+#if 0
+static gboolean 
+get_location_at_xy (CongEditorArea *editor_area, 
+		    gint x,
+		    gint y,
+		    CongLocation *output)
+{
+	g_assert_not_reached();
+}
+#endif
