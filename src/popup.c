@@ -262,7 +262,7 @@ cong_menu_item_attach_callback_Document_ElementDescription_Node (GtkMenuItem *it
 	g_return_val_if_fail (item, NULL);
 	g_return_val_if_fail (callback, NULL);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	g_return_val_if_fail (element_desc, NULL);
+	/* element_desc can be NULL, meaning ask the user for a desc */
 	g_return_val_if_fail (node, NULL);
 
 	g_object_set_data (G_OBJECT(item),
@@ -279,9 +279,15 @@ cong_menu_item_attach_callback_Document_ElementDescription_Node (GtkMenuItem *it
 			   doc);
 
 	/* FIXME: do we need to clone this? Plus we're leaking memory... */
-	g_object_set_data (G_OBJECT(item),
-			   "element_desc",
-			   cong_element_description_clone (element_desc));
+	if (element_desc) {
+		g_object_set_data (G_OBJECT(item),
+				   "element_desc",
+				   cong_element_description_clone (element_desc));
+	} else {
+		g_object_set_data (G_OBJECT(item),
+				   "element_desc",
+				   NULL);
+	}
 
 	return item;
 }
@@ -1020,44 +1026,21 @@ structural_tag_popup_init (CongUICallback_Document_ElementDescription_Node callb
 				    TRUE);
 	}
 
-#if 1
-	/* If no DTD/dispspec, add a list of all elements in the doc: */
-	{
-		/* FIXME: unwritten */
-#if 0
-		GtkMenuItem *item;
-		item = GTK_MENU_ITEM (gtk_image_menu_item_new_with_label (_("Other XML element...")));
-
-		cong_menu_item_attach_callback_Document_ElementDescription_Node (item,
-										 element_desc_callback,
-										 doc,
-										 ds_element,
-										 node);
-		cong_menu_add_item (GTK_MENU (popup),
-				    item,
-				    TRUE);
-#endif
-	}
-
 	/* Finally, add a way to add arbitary XML elements: */
 	{
 		GtkMenuItem *item;
 		item = GTK_MENU_ITEM (gtk_image_menu_item_new_with_label (_("Other XML element...")));
 
-#if 0
 		cong_menu_item_attach_callback_Document_ElementDescription_Node (item,
 										 callback,
 										 doc,
-										 ds_element,
+										 NULL,
 										 node);
-#endif
 		cong_menu_add_item (GTK_MENU (popup),
 				    item,
 				    TRUE);
 		
 	}
-#endif
-
 
 	gtk_widget_show(popup);
 	return popup;

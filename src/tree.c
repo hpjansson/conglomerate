@@ -14,6 +14,54 @@
 #include "cong-util.h"
 #include "cong-command.h"
 #include "cong-ui-hooks.h"
+#include "cong-glade.h"
+
+static CongNodePtr
+get_element_name(CongDocument* doc)
+{
+	GladeXML* xml;
+	GtkWidget* dialog;
+	CongNodePtr new_node;
+
+	xml = cong_util_load_glade_file (
+		"conglomerate/glade/custom-element.glade",
+		NULL,
+		doc,
+		NULL);
+
+	dialog = glade_xml_get_widget (xml,
+			"custom-element-dialog");
+
+	if(gtk_dialog_run (GTK_DIALOG (dialog))==GTK_RESPONSE_OK) 
+	{
+		GtkWidget* element_name;
+		GtkWidget* element_type_span;
+		GtkWidget* element_type_structural;
+
+		element_name = glade_xml_get_widget(xml, "element-name");
+		element_type_span = glade_xml_get_widget(xml,
+				"element-type-span");
+		element_type_structural = glade_xml_get_widget(xml,
+				"element-type-structural");
+
+		g_assert(element_name);
+		g_assert(element_type_structural);
+		g_assert(element_type_span);
+
+		new_node = cong_node_new_element(NULL,
+			gtk_entry_get_text(GTK_ENTRY(element_name)), doc);
+	}
+	else
+	{
+		new_node = NULL;
+	}
+
+	gtk_widget_destroy (dialog);
+
+	g_object_unref (G_OBJECT (xml));
+
+	return new_node;
+}
 
 /* the popup items have the data "popup_data_item" set on them: */
 
@@ -32,50 +80,69 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 {
 	CongNodePtr new_node;
 	CongDispspec *ds;
-	gchar *username;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (element_desc);
 	g_return_if_fail (node);
 
 	ds = cong_document_get_dispspec(doc);
-
-	username = cong_element_description_make_user_name (element_desc,
-							    ds);
 
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
 	{
-		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), username);
-		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
-		g_free (desc);
+		if(element_desc)
+		{
+			gchar *username;
+			gchar *desc;
+			CongCommand *cmd;
 
-		/* New element */
-		new_node = cong_element_description_make_node (element_desc, 
-							       doc,
-							       node->parent);
-		cong_command_add_node_add_after (cmd, 
-						 new_node, 
-						 node);
+			username = cong_element_description_make_user_name (element_desc,
+									    ds);
 
-		/*  add any necessary sub elements it needs */
-	        if (cong_command_add_required_sub_elements (cmd,new_node)) {
-		
-			cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-									      new_node);
+			desc = g_strdup_printf (_("Insert sibling: %s"), username);
+			cmd = cong_document_begin_command (doc, desc, NULL);
+			g_free (desc);
 
-		        cong_document_end_command (doc, cmd);		
-		} else {
+			/* New element */
+			new_node = cong_element_description_make_node (element_desc, 
+								       doc,
+								       node->parent);
+			cong_command_add_node_add_after (cmd, 
+							 new_node, 
+							 node);
 
-			cong_document_abort_command (doc, cmd);
+			/*  add any necessary sub elements it needs */
+			if (cong_command_add_required_sub_elements (cmd,new_node)) {
+			
+				cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+										      new_node);
 
+				cong_document_end_command (doc, cmd);		
+			} else {
+
+				cong_document_abort_command (doc, cmd);
+
+			}
+
+			g_free (username);
+		}
+		else
+		{
+			new_node = get_element_name(doc);
+			if(new_node!=NULL)
+			{
+				gchar *desc = g_strdup_printf (_("Insert sibling: %s"), new_node->name);
+				CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
+				g_free (desc);
+
+				cong_command_add_node_add_after(cmd, new_node, node);
+				cong_document_end_command (doc, cmd);
+			}
 		}
 	}
 
 	cong_document_end_edit(doc);
 
-	g_free (username);
 	
 }
 
@@ -94,41 +161,61 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 {
 	CongNodePtr new_node;
 	CongDispspec *ds;
-	gchar *username;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (element_desc);
 	g_return_if_fail (node);
 
 	ds = cong_document_get_dispspec(doc);
 
-	username = cong_element_description_make_user_name (element_desc,
-							    ds);
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
 	{
-		gchar *desc = g_strdup_printf (_("Insert child: %s"), username);
-		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
-		g_free (desc);
 
 		/* New element */
-		new_node = cong_element_description_make_node (element_desc, 
-							       doc,
-							       node);
-		cong_command_add_node_set_parent (cmd, 
-						  new_node, 
-						  node);
+		if(element_desc)
+		{
+			gchar *username;
+			gchar *desc;
+			CongCommand *cmd;
 
-		/*  add any necessary sub elements it needs */
-	        if (cong_command_add_required_sub_elements (cmd,new_node)) {
-		
-			cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-									      new_node);
-		        cong_document_end_command (doc, cmd);		
+			username = cong_element_description_make_user_name (element_desc,
+									    ds);
+			desc = g_strdup_printf (_("Insert child: %s"), username);
+			cmd = cong_document_begin_command (doc, desc, NULL);
+			g_free (desc);
+			new_node = cong_element_description_make_node (
+				element_desc, 
+				doc,
+				node);
+			cong_command_add_node_set_parent (cmd, 
+							  new_node, 
+							  node);
+			/*  add any necessary sub elements it needs */
+			if (cong_command_add_required_sub_elements (cmd,new_node)) {
+			
+				cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+										      new_node);
+				cong_document_end_command (doc, cmd);		
 
-		} else {
-			cong_document_abort_command (doc, cmd);
+			} else {
+				cong_document_abort_command (doc, cmd);
+			}
+			
+			g_free (username);
+		}
+		else
+		{
+			new_node = get_element_name(doc);
+			if(new_node!=NULL)
+			{
+				gchar *desc = g_strdup_printf (_("Insert child: %s"), new_node->name);
+				CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
+				g_free (desc);
+
+				cong_command_add_node_set_parent (cmd, new_node, node);
+				cong_document_end_command (doc, cmd);
+			}
 		}
 	}
 
