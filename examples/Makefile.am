@@ -1,3 +1,4 @@
+NULL =
 exampledir 	 = $(datadir)/conglomerate/examples
 example_DATA 	 = \
 	cnxml.xml \
