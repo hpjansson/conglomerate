@@ -36,4 +36,4 @@ appicons_DATA = \
 	cong-definition-list-16.png \
 	cong-code-fragment-16.png
 
-EXTRA_DIST = $(dti_DATA appicons_DATA)
+EXTRA_DIST = $(dti_DATA) $(appicons_DATA)
