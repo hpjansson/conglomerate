@@ -60,7 +60,8 @@ CongApp*
 cong_app_singleton(void);
 
 void
-cong_app_construct_singleton(void);
+cong_app_construct_singleton(int   argc,
+			     char *argv[]);
 
 void
 cong_app_destroy_singleton(void);

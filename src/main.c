@@ -317,16 +317,8 @@ int main( int   argc,
 	g_log_set_always_fatal (G_LOG_LEVEL_CRITICAL);
 #endif
 
-	cong_app_construct_singleton();
-
-	/* Set up the GnomeProgram: */
-	cong_app_singleton()->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
-								  LIBGNOMEUI_MODULE,
-								  argc,argv,
-								  GNOME_PARAM_HUMAN_READABLE_NAME,
-								  _("XML Editor"),
-								  GNOME_PARAM_APP_DATADIR, DATADIR,
-								  NULL);
+	cong_app_construct_singleton (argc, 
+				      argv);
 
 	fonts_load();
 	editor_popup_init(NULL); /* FIXME */

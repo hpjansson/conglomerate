@@ -38,14 +38,15 @@ CongApp *the_singleton_app = NULL;
 
 /* Internal function declarations: */
 static CongApp*
-cong_app_new(void);
+cong_app_new(int   argc,
+	     char *argv[]);
 
 static void
 cong_app_free(CongApp *app);
 
 /* Exported function definitions: */
 CongApp*
-cong_app_singleton(void)
+cong_app_singleton (void)
 {
 	g_assert(the_singleton_app);
 
@@ -53,11 +54,13 @@ cong_app_singleton(void)
 }
 
 void
-cong_app_construct_singleton(void)
+cong_app_construct_singleton (int   argc,
+			      char *argv[])
 {
 	g_assert(NULL == the_singleton_app);
 
-	the_singleton_app = cong_app_new();
+	the_singleton_app = cong_app_new(argc,
+					 argv);
 }
 
 void
@@ -103,16 +106,24 @@ cong_app_set_clipboard (CongApp *app,
 
 /* Internal function definitions: */
 static CongApp*
-cong_app_new(void)
+cong_app_new (int   argc,
+	      char *argv[])
 {
 	CongApp *app;
 
 	app = g_new0(CongApp,1);
 	app->private = g_new0(CongAppPrivate,1);
 
+	/* Set up the GnomeProgram: */
+	app->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
+						 LIBGNOMEUI_MODULE,
+						 argc,argv,
+						 GNOME_PARAM_HUMAN_READABLE_NAME,
+						 _("XML Editor"),
+						 GNOME_PARAM_APP_DATADIR, DATADIR,
+						 NULL);
 
 	/* Set up usage of GConf: */
-	g_type_init(); /* GSt: fix attempt on 119755 */
 	app->gconf_client = gconf_client_get_default();
 	gconf_client_add_dir (app->gconf_client,
 			      "/apps/conglomerate",
@@ -123,7 +134,7 @@ cong_app_new(void)
 }
 
 static void
-cong_app_free(CongApp *app)
+cong_app_free (CongApp *app)
 {
 	g_return_if_fail (app);
 
