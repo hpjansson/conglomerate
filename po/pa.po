@@ -1,0 +1,2247 @@
+# KBST Punjab translation of punlinux.
+# Copyright (C) 2004 THE CONGLOMERATE_HEAD'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the CONGLOMERATE_HEAD package.
+# jaswinder singh <jaswindersinghra@yahoo.com>, 2004.
+# jaswinder singh <jaswindersinghra@yahoo.com>, 2004.
+# 
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate.HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-20 17:06+0530\n"
+"PO-Revision-Date: 2004-03-16 07:35+0530\n"
+"Last-Translator: Jaswinder Singh Phulewala <jaswinderlinux@netscape.net>\n"
+"Language-Team: Punjabi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1252
+#: src/cong-primary-window.c:615 src/cong-primary-window.c:771
+#: src/cong-primary-window.c:773 src/cong-primary-window.c:779
+msgid "Conglomerate XML Editor"
+msgstr "ਇਕਤ੍ਰਤਾ XML ਸੋਧਕ"
+
+#: data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "XML ਫਾਈਲ ਸੋਧੋ"
+
+#: glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "ਫਾਈਲ ਭੇਜਣ ਲਈ ਚੋਣ"
+
+#: glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "ਲਿਅਾੳੁਣ ਵਾਲਾ"
+
+#: glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "ਚੋਣ"
+
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1125
+#: src/cong-node-properties-dialog.c:1208
+msgid "Advanced"
+msgstr "ਤਕਨੀਕੀ"
+
+#: glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "ਮੂਲ"
+
+#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:289
+#: src/cong-edit-preferences.c:137 src/cong-file-export.c:302
+#: src/cong-file-new.c:291 src/cong-file-print.c:252
+#: src/cong-parser-error.c:271
+msgid "Description"
+msgstr "ਵਰਨਣ"
+
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:742
+msgid "Document Type Declaration"
+msgstr "ਦਸਤਾਵੇਜ਼ ਕਿਸਮ ਐਲਾਨ"
+
+#: glade/cong-file-properties.glade.h:5
+msgid "Encoding"
+msgstr "ੲਿੰਕੋਡਿੰਗ"
+
+#: glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr "ਬਾਹਰੀ  ID"
+
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:249
+#: src/cong-file-print.c:219
+msgid "General"
+msgstr "ਸਧਾਰਣ"
+
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:240
+msgid "Location"
+msgstr "ਸਥਿਤੀ"
+
+#: glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr "ਸੋਧਿਅਾ"
+
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:129
+#: src/cong-file-export.c:301 src/cong-file-print.c:251
+#: src/cong-node-properties-dialog.c:589
+msgid "Name"
+msgstr "ਨਾਉਂ"
+
+#: glade/cong-file-properties.glade.h:11
+#: glade/docbook-common-properties.glade.h:3
+#: glade/docbook-orderedlist-properties.glade.h:9
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
+#: src/cong-node-properties-dialog.c:1170
+msgid "Properties"
+msgstr "ਵਿਸ਼ੋਸ਼ਤਾਵਾਂ"
+
+#: glade/cong-file-properties.glade.h:12
+msgid "Standalone"
+msgstr "ਇੱਕਲਾ"
+
+#: glade/cong-file-properties.glade.h:13
+msgid "System ID"
+msgstr "ਸਿਸਟਮ  ID"
+
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "ਕਿਸਮ"
+
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "ਵਰਜਨ"
+
+#: glade/cong-file-properties.glade.h:16
+msgid "XML Header"
+msgstr "XML ਸਿਰਲੇਖ"
+
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
+msgid "_Associate this DTD"
+msgstr "ਇਸ DTD ਨੂੰ ਜੋੜੋ"
+
+#: glade/cong-file-properties.glade.h:18
+msgid "label_dtd_external_id"
+msgstr "ਲੇਬਲ dtd ਬਾਹਰੀ id"
+
+#: glade/cong-file-properties.glade.h:19
+msgid "label_dtd_notes"
+msgstr "ਲੇਬਲ dtd ਸੰਖੇਪ ਟਿੱਪਣੀ"
+
+#: glade/cong-file-properties.glade.h:20
+msgid "label_dtd_system_id"
+msgstr "ਲੇਬਲ dtd ਸਿਸਟਮ id"
+
+#: glade/cong-file-properties.glade.h:21
+msgid "label_location"
+msgstr "ਲੇਬਲ ਸਥਿਤੀ"
+
+#: glade/cong-file-properties.glade.h:22
+msgid "label_modified"
+msgstr "ਸੋਧਿਅਾ ਲੇਬਲ"
+
+#: glade/cong-file-properties.glade.h:23
+msgid "label_name"
+msgstr "ਲੇਬਲ ਨਾਉਂ"
+
+#: glade/cong-file-properties.glade.h:24
+msgid "label_typedesc"
+msgstr "ਲੇਬਲ typedesc"
+
+#: glade/cong-file-properties.glade.h:25
+msgid "label_typename"
+msgstr "ਲੇਬਲ ਕਿਸਮ ਨਾਉਂ"
+
+#: glade/cong-file-properties.glade.h:26
+msgid "label_xml_encoding"
+msgstr "ਲੇਬਲ xml ਰੂਪਾਂਤਰਣ"
+
+#: glade/cong-file-properties.glade.h:27
+msgid "label_xml_standalone"
+msgstr "ਲੇਬਲ xml ਇੱਕਲਾ"
+
+#: glade/cong-file-properties.glade.h:28
+msgid "label_xml_version"
+msgstr "ਲੇਬਲ xml ਵਰਜਨ"
+
+#: glade/cong-find-replace.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/cong-find-replace.glade.h:2 src/cong-edit-find-and-replace.c:209
+msgid "Find"
+msgstr "ਲੱਭੋ"
+
+#: glade/cong-find-replace.glade.h:3
+msgid "Find:"
+msgstr "ਲੱਭੋ:"
+
+#: glade/cong-find-replace.glade.h:4
+msgid "Match _Case"
+msgstr "ਅੱਖਰ ਮਿਲਾਉਣਾ"
+
+#: glade/cong-find-replace.glade.h:5
+msgid "Replace"
+msgstr "ਹਟਾੳੁ"
+
+#: glade/cong-find-replace.glade.h:6
+msgid "Replace with:"
+msgstr "ਨਾਲ ਤਬਦੀਲ ਕਰੋ:"
+
+#: glade/cong-preferences.glade.h:1
+#, fuzzy
+msgid "Conglomerate Preferences"
+msgstr "ਯੂਨੀਕੋਡ ਅੱਖਰ ਸੰਕੇਤ"
+
+#: glade/cong-preferences.glade.h:2
+msgid "Document Types"
+msgstr "ਦਸਤਾਵੇਜ਼  ਕਿਸਮਾਂ"
+
+#: glade/docbook-common-properties.glade.h:1
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+"<small>ਪਾਠ ਦਾ ਕਾਰਜ ਖੇਤਰ ਕੀ ਹੈ?ਤੁਸੀਂ ਇਸ ਸਫ਼ੇ ਨੂੰ ਪਾਠ ਦੀ ਕੰਪਿਊਟਰ ਦੀਆਂ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਨਾਲ "
+"ਸੰਬੰਧਤਾ ਬਿਆਨ ਕਰਨ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ।</small>"
+
+#: glade/docbook-common-properties.glade.h:2
+msgid "Language"
+msgstr "ਭਾਸ਼ਾ"
+
+#: glade/docbook-common-properties.glade.h:4
+msgid "Revisions"
+msgstr "ਦੁਹਰਾਈਆਂ"
+
+#: glade/docbook-common-properties.glade.h:5
+msgid "Scope"
+msgstr "ਕਾਰਜ ਖੋਤਰ"
+
+#: glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to edit the "
+"language of the text here.\n"
+"\n"
+"This is listed in Bugzilla as bug #122536"
+msgstr ""
+"ਇਹ ਜਗਾ ਮਾਲਕ ਸਫ਼ਾ ਹੈ।ਸੰਭਾਵਿਤ ਹੀ ਤੁਸੀਂ ਇਥੇ ਪਾਠ ਦੀ ਭਾਸ਼ਾ ਸੋਧਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ।\n"
+"\n"
+"ਇਹ ਬੱਗਜ਼ੀਲਾ ਵਿਚ ਬੱਗ  #122536 ਦੇ ਰੂਪ ਵਿਚ ਦਿਖਾਇਆ ਹੈ"
+
+#: glade/docbook-common-properties.glade.h:9
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"ਇਹ ਜਗਾ ਮਾਲਕ ਸਫ਼ਾ ਹੈ।ਸੰਭਾਵਿਤ ਹੀ ਤੁਸੀਂ DocBook ਦੀ ਸਧਾਰਣ ਵਰਜਨ ਖੋਜ ਸੂਚਨਾ ਨੂੰ ਕੰਮ ਵਿਚ ਲਿਆਉਣ "
+"ਦੇ ਯੋਗ ਹੋਵੋਗੇ।\n"
+"\n"
+"ਇਹ ਬੱਗਜ਼ੀਲਾ ਵਿਚ ਬਗ #122538 ਦੇ ਰੂਪ ਵਿਚ ਦਿਖਾਇਆ ਹੈ"
+
+#: glade/docbook-common-properties.glade.h:12
+msgid "_Architecture"
+msgstr "ਢ੾ਚਾ"
+
+#: glade/docbook-common-properties.glade.h:13
+msgid "_Operating System"
+msgstr "ਓਪਰੇਟੀੲਿੰਗ ਸਿਸਟਮ"
+
+#: glade/docbook-common-properties.glade.h:14
+msgid "_User Level"
+msgstr "ਉਪਭੋਗੀ ਦਰਜਾ"
+
+#: glade/docbook-common-properties.glade.h:15
+msgid "_Vendor"
+msgstr "ਵੇਚਣ ਵਾਲਾ"
+
+#: glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr "ਪਿਛਲੀ ਲੜੀ ਤੋਂ ਅੰਕਿਤ ਕਰਨਾ ਜਾਰੀ ਕਰੋ"
+
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:265
+#: src/cong-error-file-open.c:449
+msgid "Details"
+msgstr "ਵਿਸਥਾਰ"
+
+#: glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr "ਗੁਅਾਢੀ ਲੜੀਆਂ ਤੋਂ ਅੰਕਾਂ ਨੂੰ ਲਵੋ"
+
+#: glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr "ਖੜਵੀਂ ਜਗਾ ਘਟਾਓ"
+
+#: glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "ਅੰਕਿਤ ਕਰਨਾ"
+
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "ਸ਼ੈਲੀ"
+
+#: glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+"<small> ਕੁਝ DocBook ਕਾਰਜ, ਸੰਬੰਧ ਦੇ ਵਰਤਾਓ ਨੂੰ ਇਹ \"ਕਿਸਮ\" ਵਿਸ਼ੇਸ਼ਤਾ ਵਰਤ ਕੇ ਨਿਯੁਕਤ ਕਰਨ ਦੀ "
+"ਇਜ਼ਾਜਤ ਦਿੰਦੇ ਹਨ।</small>"
+
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "ਸੰਬੰਧ"
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "ਨਿਸ਼ਾਨਾ"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "URL"
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr "ਇਸ ਸੰਬੰਧ ਦੀ ਜਾਂਚ ਕਰੋ"
+
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "ਪੈਦਾ ਕਰਨ ਵਾਲੇ ਪੈਰਾਮੀਟਰ"
+
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "ਡੂੰਘਾਈ"
+
+#: glade/plugin-random.glade.h:3 src/cong-document.c:730
+msgid "Document Type"
+msgstr "ਦਸਤਾਵੇਜ਼  ਕਿਸਮ"
+
+#: glade/string_selection_dialog.glade.h:1
+msgid "label"
+msgstr "ਲੇਬਲ"
+
+#: glade/string_selection_dialog.glade.h:2
+msgid "string_selection_dialog"
+msgstr "ਸਤਰ ਚੋਣ ਤੱਖਤੀ"
+
+#: src/cong-app.c:804
+msgid "XML Editor"
+msgstr "XML ਸੋਧਕ"
+
+#: src/cong-app.c:933
+msgid "Conglomerate could not load any xds files"
+msgstr "ਇਕਤ੍ਰਤਾ ਕੋਈ xds ਫਾਈਲ ਸਥਾਪਿਤ ਨਹੀਂ ਕਰ ਸਕਿਆ"
+
+#: src/cong-app.c:935
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "ਇਕਤ੍ਰਤਾ, ਦਸਤਾਵੇਜ਼  ਕਿਸਮ ਦਾ ਕੋਈ ਵੀ ਵਰਨਣ ਨਹੀਂ ਲੱਭ ਸਕਿਆ।"
+
+#: src/cong-app.c:937
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+"ਜੇ ਤੁਸੀਂ ਇਹ ਗਲਤੀ ਦੇਖਦੇ ਹੋ, ਇਸ ਦਾ ਮਤਲਬ ਹੈ ਕਿ ਤੁਸੀਂ ਇਕਤ੍ਰਤਾ ਕੀਤੀ ਪਰ ਇਸ ਨੂੰ ਸਥਾਪਿਤ ਨਹੀਂ "
+"ਕੀਤਾ।ਇਸ ਨੂੰ ਸਥਾਪਿਤ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਤੁਸੀਂ ਅੰਦਾਜਨ ਰਸਤਾ ਦਿਖਾਉਣ ਲਈ ਆਪਣੇ-ਆਪ ਨਿਯੁਕਤੀਆਂ "
+"ਤਬਦੀਲ ਕਰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਉਹਨਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।"
+
+#: src/cong-attribute-editor-cdata.c:183
+#: src/cong-attribute-editor-enumeration.c:183
+#: src/cong-attribute-wrapper.c:187 src/cong-node-properties-dialog.c:417
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ \"%s\" ਨਿਯੁਕਤ ਕਰੋ"
+
+#: src/cong-attribute-editor-cdata.c:209 src/cong-node-properties-dialog.c:463
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਜੋੜੋ"
+
+#: src/cong-attribute-editor-cdata.c:235
+#: src/cong-attribute-editor-enumeration.c:186
+#: src/cong-attribute-wrapper.c:212 src/cong-node-properties-dialog.c:499
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "\"%s\" ਵਿਸ਼ੇਸ਼ਤਾ ਮਿਟਾਓ"
+
+#: src/cong-attribute-editor-enumeration.c:92
+msgid "(unspecified)"
+msgstr "(ਬਿਨਾ ਨਿਰਧਾਰਤ ਕੀਤੇ)"
+
+#: src/cong-dialog.c:231
+msgid "_Close without Saving"
+msgstr " ਬਿਨਾਂ ਸੰਭਾਲੇ ਬੰਦ ਕਰੋ"
+
+#: src/cong-dialog.c:246
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "ਬੰਦ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਦਸਤਾਵੇਜ਼  \"%s\" ਦੀ ਤਬਦੀਲੀ ਸੰਭਾਲੀੲੇ ?"
+
+#: src/cong-dialog.c:251
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr "ਜੇ ਤੁਸੀਂ ਬਿਨਾਂ ਸੰਭਾਲੇ ਬੰਦ ਕਰਦੇ ਹੋ ਤਾਂ ਪਿਛਲੇ %li ਘੰਟਿਆਂ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ ਜਾਏਗੀ।"
+
+#: src/cong-dialog.c:253
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr "ਜੇ ਤੁਸੀਂ ਬਿਨਾਂ ਸੰਭਾਲੇ ਬੰਦ ਕਰਦੇ ਹੋ ਤਾਂ ਪਿਛਲੇ %li ਮਿੰਟਾਂ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ ਜਾਏਗੀ।"
+
+#: src/cong-dialog.c:255
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr "ਜੇ ਤੁਸੀਂ ਬਿਨਾਂ ਸੰਭਾਲੇ ਬੰਦ ਕਰਦੇ ਹੋ ਤਾਂ ਪਿਛਲੇ ਮਿੰਟ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ ਜਾਏਗੀ।"
+
+#: src/cong-dialog.c:300
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "ਦਸਤਾਵੇਜ਼  \"%s\" ਵਿਚ ਤਬਦੀਲੀ ਜੋ ਸੰਭਾਲੀ ਨਹੀਂ ਮੁੜ ਲਿਆਓ?"
+
+#: src/cong-dialog.c:305
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "ਪਿਛਲੇ %li ਘੰਟਿਆਂ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ  ਜਾਏਗੀ।"
+
+#: src/cong-dialog.c:307
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "ਪਿਛਲੇ %li ਮਿੰਟਾਂ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ ਜਾਏਗੀ।"
+
+#: src/cong-dialog.c:309
+msgid "Changes from the past minute will be discarded."
+msgstr "ਪਿਛਲੇ ਮਿੰਟ ਦੀ ਤਬਦੀਲੀ ਰੱਦ ਕੀਤੀ ਜਾਏਗੀ।"
+
+#: src/cong-dispspec-element.c:567 src/cong-dispspec-element.c:603
+#: src/cong-xpath-expression.c:207
+msgid "(xpath failed)"
+msgstr "(x ਰਸਤਾ ਅਸਫਲ)"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec-element.c:649
+msgid "<untitled>"
+msgstr "<ਸਿਰਲੇਖ ਬਿਨਾ>"
+
+#: src/cong-dispspec-registry.c:89
+msgid "Conglomerate could not read its registry of document types."
+msgstr "ਇਕਤ੍ਰਤਾ ਇਸ ਦੀ ਦਸਤਾਵੇਜ਼  ਦੀ ਕਿਸਮ ਦਾ ਆਲੇਖ ਨੰੂ ਪੜ ਨਹੀਂ ਸਕਿਆ।"
+
+#: src/cong-dispspec-registry.c:92
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "ਇਕਤ੍ਰਤਾ ਨੇ ਸਥਿਤੀ ਵਿਚ ਸਾਰੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਦੇਖਣ ਦਾ ਯਤਨ ਕੀਤਾ। "
+
+#: src/cong-dispspec-registry.c:267 src/cong-file-new.c:271
+msgid "File Type"
+msgstr "ਫਾਈਲ ਕਿਸਮ"
+
+#: src/cong-dispspec-registry.c:278
+msgid "Coverage"
+msgstr ""
+
+#: src/cong-dispspec.c:408
+msgid "unnamed"
+msgstr "ਨਾੳੁ ਬਿਨਾ"
+
+#: src/cong-dispspec.c:421
+msgid "No description available."
+msgstr "ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ।"
+
+#: src/cong-document.c:694
+#, c-format
+msgid "Attribute \"%s\""
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ \"%s\""
+
+#: src/cong-document.c:701
+#, c-format
+msgid "Text \"%s\""
+msgstr "ਪਾਠ \"%s\""
+
+#: src/cong-document.c:707
+msgid "Character Data"
+msgstr "ਕਰੈਕਟਰ ਡੈਟਾ"
+
+#: src/cong-document.c:710
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "ਅੰਸ਼ \"%s\" ਨੂੰ ਹਵਾਲਾ"
+
+#: src/cong-document.c:713
+#, c-format
+msgid "Entity \"%s\""
+msgstr "ਅੰਸ਼  \"%s\""
+
+#: src/cong-document.c:716
+msgid "XML Processing Instruction"
+msgstr "XML ਕ੍ਰਿਆਤਮਕ ਹਦਾਇਤਾਂ"
+
+#: src/cong-document.c:721
+#, c-format
+msgid "Comment \"%s\""
+msgstr "ਟਿੱਪਣੀ \"%s\""
+
+#: src/cong-document.c:727
+msgid "Document"
+msgstr "ਦਸਤਾਵੇਜ਼"
+
+#: src/cong-document.c:733
+msgid "Document Fragment"
+msgstr "ਦਸਤਾਵੇਜ਼  ਹਿੱਸਾ"
+
+#: src/cong-document.c:736
+msgid "Notation"
+msgstr "ਸੰਕੇਤ-ਚਿੰਨ"
+
+#: src/cong-document.c:739
+msgid "HTML Document"
+msgstr "HTML ਦਸਤਾਵੇਜ਼ "
+
+#: src/cong-document.c:745
+msgid "Element Declaration"
+msgstr "ਭਾਗ ਐਲਾਨ"
+
+#: src/cong-document.c:748
+msgid "Attribute Declaration"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ ਦਾ ਐਲਾਨ"
+
+#: src/cong-document.c:751
+msgid "Entity Declaration"
+msgstr "ਭਾਗ ਦਾ ਐਲਾਨ"
+
+#: src/cong-document.c:754
+msgid "Namespace Declaration"
+msgstr "ਨਾਉਂ-ਜਗਾ ਦਾ ਐਲਾਨ"
+
+#: src/cong-document.c:757
+msgid "XInclude Start"
+msgstr "X ਆਰੰਭ ਸ਼ਾਮਿਲ ਕਰਦੀ ਹੈ"
+
+#: src/cong-document.c:760
+msgid "XInclude End"
+msgstr "X ਅੰਤ ਸ਼ਾਮਿਲ ਕਰਦੀ ਹੈ"
+
+#: src/cong-document.c:1456
+#, c-format
+msgid "Select %s"
+msgstr "%s ਚੁਣੋ"
+
+#: src/cong-dom-view.c:208
+msgid "UNKNOWN"
+msgstr "ਅਣਜਾਣਾ"
+
+#: src/cong-dom-view.c:235
+#, fuzzy
+msgid "Text:"
+msgstr "ਪਾਠ"
+
+#: src/cong-editor-node-text.c:883
+msgid "Select word"
+msgstr "ਸ਼ਬਦ ਚੁਣੋ"
+
+#: src/cong-editor-node-text.c:908
+msgid "Move cursor"
+msgstr "ਕਰਸਰ ਹਿਲਾਓ"
+
+#: src/cong-editor-node-text.c:992
+msgid "Drag out selection"
+msgstr "ਚੋਣ ਖਿਚ ਕੇ ਬਾਹਰ ਕਰੋ"
+
+#: src/cong-editor-widget3.c:258
+msgid "Expander Size"
+msgstr "ਵਿਸਥਾਰ ਕਰਨ ਵਾਲੇ ਦਾ ਅਕਾਰ"
+
+#: src/cong-editor-widget3.c:259
+msgid "Size of the expander arrow"
+msgstr "ਵਿਸਥਾਰ ਕਰਨ ਵਾਲੇ ਤੀਰ ਦਾ ਅਕਾਰ"
+
+#: src/cong-editor-widget3.c:633
+msgid "Input Method"
+msgstr "ੲਿੰਪੁੱਟ ਦਾ ਢੰਗ"
+
+#: src/cong-editor-widget3.c:736 src/cong-editor-widget3.c:1267
+msgid "Typing"
+msgstr "ਟਾਈਪ"
+
+#: src/cong-editor-widget3.c:1168
+msgid "Cursor Movement"
+msgstr "ਕਰਸਰ ਹਿਲਜੁਲ"
+
+#: src/cong-editor-widget3.c:1208 src/cong-editor-widget3.c:1221
+msgid "Delete Selection"
+msgstr "ਚੋਣ ਮਿਟਾਓ"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "ਜੇ ਤੁਸੀਂ ਕਾਰਜਕਾਰੀ ਹੋ,%s ਫਾਈਲ ਵਿਚ %i ਸਤਰ ਵਿਚ ਸਮੱਸਿਆ ਹੈ \n"
+
+#: src/cong-error-dialog.c:184
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "ਮੁਆਫ ਕਰਨਾ, ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਅਜੇ ਲਾਗੂ ਨਹੀਂ ਕੀਤੀ।"
+
+#: src/cong-error-dialog.c:202
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+"ਮੁਆਫ ਕਰਨਾ, ਇਹ ਵਿਸ਼ੇਸ਼ਤਾ ਅਜੇ ਲਾਗੂ ਨਹੀਂ ਕੀਤੀ।\n"
+"\n"
+"ਇਹ ਜਾਣੀ-ਪਛਾਣੀ ਸਮਸਿਆ ਹੈ; ਬੱਗ ਖੋਜ ਸਿਸਟਮ ਵਿਚ  #%i ਬੱਗ ਹੈ%s ਉਪਰ "
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:248
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "ਜਦ \"%s\" ਕਿਰਿਆ ਕਰਨ ਦਾ ਯਤਨ ਕੀਤਾ ਤਾਂ ਇਕ ਗਲਤੀ ਪੇਸ਼ ਹੋਈ ਸੀ"
+
+#: src/cong-error-dialog.c:252
+#, fuzzy
+msgid "A GError occurred; the error report was:"
+msgstr ""
+"ਇਕ G ਗਲਤੀ ਵਾਪਰੀ; ਪੇਸ਼ ਕੀਤੀ ਗਲਤੀ ਸੀ:\n"
+"<i>%s</i>"
+
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:446
+msgid "An unexpected error occurred."
+msgstr "ਅਚਾਨਕ ਇਕ ਗਲਤੀ ਵਾਪਰੀ।"
+
+#: src/cong-error-dialog.c:263 src/cong-error-file-open.c:447
+msgid "For more information, click on the \"Details\" button."
+msgstr "ਵਧੋਰੋ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
+
+#: src/cong-error-dialog.c:302
+#, fuzzy
+msgid "An error occurred whilst running this system command:"
+msgstr ""
+"ਜਦ ਇਹ ਸਿਸਟਮ ਕਮਾਂਡ ਚਲੀ ਤਾਂ ਇਕ ਗਲਤੀ ਹੋਈ:\n"
+"\n"
+"<tt>%s</tt>"
+
+#: src/cong-error-dialog.c:305
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr "ਪੇਸ਼ ਕੀਤਾ ਗਲਤੀ ਅੰਕ %d ਸੀ। ਹੇਠਾਂ ਗਲਤ ਪਾਠ ਹੈ ਜੋ ਕਮਾਂਡ ਦਾ ਨਤੀਜਾ ਹੈ।"
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:54
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "ਇਕਤ੍ਰਤਾ ਖੋਜ ਸੰਦ ਨੂੰ ਚਾਲੂ ਨਹੀਂ ਕਰ ਸਕਦਾ ਸੀ।\n"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:82
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%s,%s ਵਿਚੋਂ \"%s\" ਪੜ ਨਹੀਂ ਸਕੀ।"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:85
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%s,%s ਵਿਚੋਂ \"%s\" ਪੜ ਨਹੀਂ ਸਕਦੀ ਸੀ।"
+
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
+msgid "An unexpected internal error occurred."
+msgstr "ਅਚਾਨਕ ਇਕ ਅੰਦਰੂਨੀ ਗਲਤੀ ਵਾਪਰੀ।"
+
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+"ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ ਇਸ ਕਾਰਜ ਨੂੰ ਜਾਰੀ ਰਖਣ ਵਾਲੇ ਸਮੇਤ ਬੱਗ ਰਿਪੋਰਟ ਨੂੰ ਫਾਈਲ "
+"ਵਿਚ ਰਖੋ।"
+
+#: src/cong-error-file-open.c:234
+msgid "There is no file with that name at that location."
+msgstr "ਉਥੇ ਇਸ ਸਥਿਤੀ ਉਪਰ ਇਸ ਨਾਉਂ ਵਾਲੀ ਕੋਈ ਫਾਈਲ ਨਹੀਂ ਹੈ।"
+
+#: src/cong-error-file-open.c:235
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਫਾਈਲ ਦਾ ਨਾਉਂ ਠੀਕ ਲਿਖਿਆ ਹੈ। ਯਾਦ ਰਖੋ ਕਿ ਵੱਡੇ ਅੱਖਰਾਂ "
+"ਵਿਚ ਲਿਖਣਾ ਮਹੱਤਵਪੂਰਣ ਹੈ (\"MyFile\",\"MYFILE\" ਜਾਂ \"myfile\" ਸਮਾਨਾਰਥਪ ਨਹੀਂ ਹਨ)।\n"
+"(ii) ਆਪਣੀ ਫਾਈਲ ਖੋਜਣ ਲਈ ਖੋਜ ਸੰਦ ਵਰਤਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
+msgid "Search"
+msgstr "ਖੋਜ"
+
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
+msgid "The location does not exist."
+msgstr "ਸਥਿਤੀ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
+
+#: src/cong-error-file-open.c:244
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਸਥਿਤੀ ਦਾ ਨਾਉਂ ਠੀਕ ਲਿਖਿਆ ਹੈ। ਯਾਦ ਰਖੋ ਕਿ ਵੱਡੇ ਅੱਖਰਾਂ "
+"ਵਿਚ ਲਿਖਣਾ ਮਹੱਤਵਪੂਰਣ ਹੈ (\"MyDirectory\",\"mydirectory\" ਜਾਂ \"MYDIRECTORY\" "
+"ਸਮਾਨਾਰਥਪ ਨਹੀਂ ਹਨ)।\n"
+"(ii) ਆਪਣੀ ਫਾਈਲ ਖੋਜਣ ਲਈ ਖੋਜ ਸੰਦ ਵਰਤਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:257
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "\"%s\" ਸਥਿਤੀ ਫਾਈਲਾਂ ਪੜਨ ਲਈ ਸਹਾਰਾ ਨਹੀਂ ਦਿੰਦੀ।"
+
+#: src/cong-error-file-open.c:261
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+"ਅਲਗ ਸਥਿਤੀ ਤੋਂ ਫਾਈਲ ਪੜਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਤੁਸੀਂ ਫਾਈਲ ਪੜਨ ਦੇ ਯੋਗ ਹੋਣਾ ਜਰੂਰੀ ਸਮਝਦੇ ਹੋ ਤਾਂ ਆਪਣੇ "
+"ਸਿਸਟਮ ਪ੍ਰਬੰਧਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:271
+msgid "There were problems reading the content of the file."
+msgstr "ਉਥੇ ਫਾਈਲ ਦੇ ਭਾਗ ਪੜਨ ਲਈ ਸਮਸਿਆਵਾਂ ਸਨ।"
+
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮੱਰਥ ਹੈ ਤਾਂ ਆਪਣੇ ਸਿਸਟਮ ਪ੍ਰਬੰਧਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:281
+msgid "The contents of the file seem to be corrupt."
+msgstr "ਫਾਈਲ ਦੇ ਅੰਸ਼ ਨਸ਼ਟ ਹੋਏ ਜਾਪਦੇ ਹਨ।"
+
+#: src/cong-error-file-open.c:282
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ ਫਾਈਲ ਦਾ ਪਿਛਲਾ ਉਤਾਰਾ ਵੇਖਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
+msgid "There were problems reading the contents of the file."
+msgstr "ਉਥੇ ਫਾਈਲ ਦੇ ਭਾਗ ਪੜਨ ਲਈ ਸੱਮਸਿਆਵਾਂ ਸਨ।"
+
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
+msgid "The system does not recognise that as a valid location."
+msgstr "ਸਿਸਟਮ ਉਸ ਨੂੰ ਯੋਗ ਸਥਿਤੀ ਸਵੀਕਾਰ ਨਹੀਂ ਕਰਦਾ।"
+
+#: src/cong-error-file-open.c:299
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i)ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਠੀਕ ਸਥਿਤੀ ਲਿਖੀ ਹੈ। ਯਾਦ ਰਖੋ ਕਿ ਵੱਡੇ ਅੱਖਰਾਂ ਵਿਚ "
+"ਲਿਖਣਾ ਮਹਤਵਪੂਰਣ ਹੈ (\"http\", \"Http\" ਜਾਂ \"HTTP\" ਸਮਾਨਾਰਥਕ ਨਹੀਂ ਹਨ)। \n"
+"(ii) ਆਪਣੀ ਫਾਈਲ ਖੋਜਣ ਲਈ ਖੋਜ ਸੰਦ ਵਰਤਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:310
+msgid "You do not have permission to read that file."
+msgstr "ਤੁਹਾਨੂੰ ਇਸ ਫਾਈਲ ਵਿਚ ਲਿਖਣ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀਂ ਹੈ।"
+
+#: src/cong-error-file-open.c:311
+msgid "Try asking your system administrator to give you permission."
+msgstr "ਆਪਣੇ ਪ੍ਰਬੰਧਕ ਤੋਂ ਤੁਹਾਨੂੰ ਇਜ਼ਾਜਤ ਦੇਣ ਬਾਰੇ ਪੁਛਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
+msgid "The system is trying to operate on too many files at once."
+msgstr "ਸਿਸਟਮ ਇਕੋ ਸਮੇਂ ਜਿਆਦਾ ਫਾਈਲਾਂ ਉਪਰ ਕੰਮ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ।"
+
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+"ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸੱਮਰਥ ਹੈ ਤਾਂ ਫਾਲਤੂ ਕਾਰਜਾਂ ਨੂੰ ਬੰਦ ਕਰਨ ਜਾਂ ਆਪਣੇ ਸਿਸਟਮ ਪ੍ਰਬੰਧਕ "
+"ਨਾਲ ਸੰਪਰਕ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:336
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\" ਇਕ ਡਾਈਰੈਕਟਰੀ ਹੈ ਨਾ ਕਿ ਫਾਈਲ।"
+
+#: src/cong-error-file-open.c:340
+msgid "Try using the Search Tool to find your file."
+msgstr "ਆਪਣੀ ਫਾਈਲ ਖੋਜਣ ਲਈ ਖੋਜ ਸੰਦ ਵਰਤਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
+msgid "The system ran out of memory."
+msgstr "ਸਿਸਟਮ ਸਮਰਣ-ਸ਼ਕਤੀ ਤੋਂ ਉਪਰ ਚਲਦਾ ਸੀ।"
+
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
+msgid "The server could not be contacted."
+msgstr "ਸਰਵਰ ਨਾਲ ਸੰਪਰਕ ਨਹੀਂ ਹੋ ਸਕਿਆ।"
+
+#: src/cong-error-file-open.c:362
+msgid "Try again.  If it fails again, the server may be down."
+msgstr "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮੱਰਥ ਹੈ ਤਾਂ ਸਰਵਰ ਦੀ ਹਾਲਤ ਮਾੜੀ ਹੈ।"
+
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਠੀਕ ਸਥਿਤੀ ਲਿਖੀ ਹੈ।\n"
+"(ii) ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮੱਰਥ ਹੈ ਤਾਂ ਸਰਵਰ ਦੀ ਹਾਲਤ ਮਾੜੀ ਹੈ।"
+
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
+msgid "The system could not login to the location."
+msgstr "ਸਿਸਟਮ ਸਥਿਤੀ ਵਿਚ ਪ੍ਰਵੇਸ਼ ਨਹੀਂ ਹੋ ਸਕਦਾ ਸੀ।"
+
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮੱਰਥ ਹੈ ਤਾਂ ਆਪਣੇ ਸਿਸਟਮ ਪ੍ਰਬੰਧਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।"
+
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
+msgid "The location was too busy."
+msgstr "ਸਥਿਤੀ ਜਿਆਦਾ ਰੁੱਝੀ ਸੀ।"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "ਗਲਤੀ  \"%s\" ਅਾੲੀ ਹੈ ਜਦ  \"%s\" ਖੋਲਣ ਦੀ ਕੋਸ਼ਿਸ ਕੀਤੀ ਹੈ"
+
+#: src/cong-error-file-open.c:439
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr "ਪ੍ਰੋਗਰਾਮ ਨੇ ਅਚਾਨਕ ਹੀ ਅਸਲੀ ਗਨੋਮ ਫਾਈਲ ਸਿਸਟਮ ਦੁਆਰਾ ਪੋਸ਼ ਕੀਤੀ ਇਕ ਗਲਤੀ ਪ੍ਾਪਤ ਕੀਤੀ।"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:51
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%s,\"%s\" ਨੂੰ %s ਵਿੱਚ ਸੰਭਾਲ ਨਹੀਂ ਸਕਦਾ।"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:54
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%s,\"%s\" ਨੂੰ %s ਵਿੱਚ ਸੰਭਾਲ ਨਹੀਂ ਸਕਿਆ।"
+
+#: src/cong-error-file-save.c:101
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਸਥਿਤੀ ਦਾ ਨਾਉਂ ਠੀਕ ਲਿਖਿਆ ਹੈ। ਯਾਦ ਰਖੋ ਕਿ ਵੱਡੇ ਅੱਖਰਾਂ "
+"ਵਿਚ ਲਿਖਣਾ ਮਹੱਤਵਪੂਰਣ ਹੈ (\"MyDirectory\",\"MYDIRECTORY\" ਜਾਂ \"mydirectory\" "
+"ਸਮਾਨਾਰਥਪ ਨਹੀਂ ਹਨ)।\n"
+"(ii) ਅਲਗ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "\"%s\" ਸਥਿਤੀ ਫਾਈਲਾਂ ਲਿਖਣ ਲਈ ਸਹਾਰਾ ਨਹੀਂ ਦਿੰਦੀ।"
+
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
+msgid "Try saving to a different location."
+msgstr "ਅਲਗ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-save.c:124
+msgid "There were problems writing the content of the file."
+msgstr "ਉਥੇ ਫਾਈਲ ਦੇ ਭਾਗ ਲਿਖਣ ਲਈ ਸਮਸਿਆਵਾਂ ਸਨ।"
+
+#: src/cong-error-file-save.c:125
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr "ਮੋੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ,ਅਲਗ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-save.c:154
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "ਫਾਈਲ ਦਾ ਆਕਾਰ %s ਹੋਵੇਗਾ,ਪ੍ਰੰਤੂ ਯੰਤਰ  ਕੋਲ ਸਿਰਫ %s ਸਥਿਤੀ ਹੈ।"
+
+#. Can't get at the capacity for the device or "volume":
+#: src/cong-error-file-save.c:160
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr "ਫਾਈਲ ਇੰਨੀ ਵੱਡੀ ਹੈ ਕਿ ਯੰਤਰ ਉਪੱਰ ਰੱਖੀ ਨਹੀਂ ਜਾ ਸਕਦੀ (ਫਾਈਲ ਆਕਾਰ %s ਹੋਵੇਗਾ)।"
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:168
+msgid "The file is too big to fit on the device."
+msgstr "ਫਾਈਲ ਇੰਨੀ ਵੱਡੀ ਹੈ ਕਿ ਯੰਤਰ ਉਪਰ ਰੱਖੀ ਨਹੀਂ ਜਾ ਸਕਦੀ।"
+
+#: src/cong-error-file-save.c:177
+msgid "Try saving the file to a different location."
+msgstr "ਅਲੱਗ ਥਾਂ ਤੇ ਫਾਈਲ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-save.c:198
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr "ਫਾਈਲ ਦਾ ਆਕਾਰ %s ਹੋਵੇਗਾ,ਪ੍ਰੰਤੂ ਇਸ ਯੰਤਰ ਤੇ ਤੁਹਾਡੇ ਕੋਲ ਸਿਰਫ %s ਫਾਲਤੂ ਹੈ।"
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:204
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+"ਫਾਈਲ ਇੰਨੀ ਵੱਡੀ ਹੈ ਕਿ ਯੰਤਰ ਉਪਰ ਬਾਕੀ ਜਗਾ ਵਿਚ ਰੱਖੀ ਨਹੀਂ ਜਾ ਸਕਦੀ(ਫਾਈਲ ਆਕਾਰ %s ਹੋਵੇਗਾ)।"
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:212
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "ਫਾਈਲ ਇੰਨੀ ਵੱਡੀ ਹੈ ਕਿ ਯੰਤਰ ਉਪਰ ਬਾਕੀ ਜਗਾ ਵਿਚ ਰੱਖੀ ਨਹੀਂ ਜਾ ਸਕਦੀ।"
+
+#: src/cong-error-file-save.c:221
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+"ਅਲਗ ਥਾਂ ਤੇ ਫਾਈਲ ਸੰਭਾਲਣ  ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ,ਜਾਂ ਉਸ ਯੰਤਰ ਵਿਚੋਂ ਫਾਲਤੂ ਫਾਈਲਾਂ ਰੱਦੀ ਵਿਚ ਭੇਜ ਕੇ, ਜਗਾ "
+"ਵਧਾ ਕੇ।"
+
+#: src/cong-error-file-save.c:242
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਠੀਕ ਸਥਿਤੀ ਲਿਖੀ ਹੈ। ਯਾਦ ਰਖੋ ਕਿ ਵੱਡੇ ਅੱਖਰਾਂ ਵਿਚ "
+"ਲਿਖਣਾ ਮਹੱਤਵਪੂਰਣ ਹੈ (\"http\", \"Http\" ਜਾਂ \"HTTP\" ਸਮਾਨਾਰਥਕ ਨਹੀਂ ਹਨ)। \n"
+"(ii) ਹੋਰ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-save.c:256
+msgid "You do not have permission to write to that location."
+msgstr "ਤੁਹਾਨੂੰ ਇਸ ਥਾਂ ਤੇ ਲਿਖਣ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀਂ ਹੈ।"
+
+#: src/cong-error-file-save.c:257
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr "ਅਲੱਗ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ,ਜਾਂ ਆਪਣੇ ਪ੍ਰਬੰਧਕ ਤੋਂ ਇਜ਼ਾਜਤ ਦੇਣ ਬਾਰੇ ਪੁਛੋ।"
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:271
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\" ਡਾਇਰੈਕਟਰੀ ਹੈ।"
+
+#: src/cong-error-file-save.c:275
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr "ਤੁਹਾਨੂੰ ਡਾਇਰੈਕਟਰੀ ਅੰਦਰ ਇਕ ਫਾਈਲ ਵਿਚ ਸੰਭਾਲਣਾ ਚਾਹੀਦਾ ਨਾ ਕਿ ਇੱਕਲੀ ਡਾਇਰੈਕਟਰੀ ਵਿੱਚ।"
+
+#: src/cong-error-file-save.c:293
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr ""
+"ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ ਸਰਵਰ ਦੀ ਹਾਲਤ ਮਾੜੀ ਹੈ;ਹੋਰ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ਼ "
+"ਕਰੋ।"
+
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+"(i) ਜਾਂਚ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਠੀਕ ਸਥਿਤੀ ਲਿਖੀ ਹੈ।\n"
+"(ii) ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ ਸਰਵਰ ਦੀ ਹਾਲਤ ਮਾੜੀ ਹੈ;ਹੋਰ ਥਾਂ ਤੇ ਸੰਭਾਲਣ ਦੀ "
+"ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
+msgid "Try again. If it fails again, try saving to another location."
+msgstr "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ ਕਰੋ। ਜੇ ਇਹ ਫਿਰ ਅਸਮਰਥ ਹੈ ਤਾਂ ਹੋਰ ਥਾਂ ਤੇ ਸੰਭਾਲੋ।"
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:336
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr "\"%s\" ਸਥਿਤੀ ਸਿਰਫ ਫਾਈਲਾਂ ਪੜਨ ਦੀ ਇਜ਼ਾਜਤ ਦਿੰਦੀ ਹੈ, ਲਿਖਣ ਦੀ ਨਹੀਂ।"
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:348
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "ਸਥਿਤੀ ਦਾ ਪ੍ਰਬੰਧ ਕਰਨ ਲਈ  \"%s\" ਨਾਉਂ ਜਿਆਦਾ ਲੰਬਾ ਹੈ।"
+
+#: src/cong-error-file-save.c:352
+msgid "Try again with a shorter file name."
+msgstr "ਛੋਟੇ ਫਾਈਲ ਨਾਉਂ ਨਾਲ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:16
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "%s ਨਤੀਜੇ ਨਾਲ \"%s\" ਦੀ ਫਾਈਲ->ਖੋਲੋ ਅਸਫ਼ਲਤਾ ਦੀ ਜਾਂਚ"
+
+#: src/cong-error-tests.c:22
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "%s ਨਤੀਜੇ ਨਾਲ \"%s\" ਦੀ ਫਾਈਲ->ਸੰਭਾਲਪ ਅਸਫ਼ਲਤਾ ਦੀ ਜਾਂਚ"
+
+#: src/cong-error-tests.c:28
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "%s ਨਤੀਜੇ ਨਾਲ \"%s\" ਦੀ ਸਾਧਾਰਣ ਅਸਫ਼ਲਤਾ ਦੀ ਜਾਂਚ"
+
+#: src/cong-error-tests.c:31
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr "ਇਕਤ੍ਰਤਾ, ਸਾਧਾਰਣ ਫਾਈਲ ਕਿਰਿਆ ਦੇ ਅਸਫ਼ਲ ਹੋਣ ਦਾ ਬਹਾਨਾ ਕਰ ਰਹੀ ਹੈ।"
+
+#: src/cong-error-tests.c:34
+msgid "This dialog was generated by the automated testing routine"
+msgstr "ਇਹ ਡਾਇਲਾਗ,ਸ੍ਵੈ ਜਾਂਚ ਕਾਰਜਕ੍ਰਮ ਦੁਆਰਾ ਪੈਦਾ ਕੀਤਾ ਸੀ"
+
+#: src/cong-file-export.c:157
+#, fuzzy
+msgid "(No description available)"
+msgstr "(ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ)"
+
+#: src/cong-file-export.c:194
+msgid "Select file to export to"
+msgstr "ਭੇਜਣ ਲਈ ਫਾਈਲ ਚੁਣੋ"
+
+#: src/cong-file-export.c:228
+#, c-format
+msgid "Export \"%s\""
+msgstr "\"%s\" ਭੇਜੋ"
+
+#: src/cong-file-export.c:233
+msgid "Export"
+msgstr "ਭੇਜਣਾ"
+
+#: src/cong-file-export.c:284
+msgid "Exporter:"
+msgstr "ਭੇਜਣ ਵਾਲਾ:"
+
+#: src/cong-file-export.c:286
+msgid "File:"
+msgstr "ਫਾਈਲ:"
+
+#: src/cong-file-export.c:293
+msgid "Export Options"
+msgstr "ਭੇਜਣ ਲੲੀ ਚੋਣ"
+
+#: src/cong-file-export.c:374
+#, c-format
+msgid "Conglomerate cannot export \"%s\""
+msgstr "ਇਕਤ੍ਰਤਾ \"%s\" ਭੇਜ ਨਹੀਂ ਸਕਿਆ"
+
+#: src/cong-file-export.c:377
+msgid "None of Conglomerate's plugins know how to export files of that type."
+msgstr "ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਉਸ ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਭੇਜਣਾ ਹੈ।"
+
+#: src/cong-file-import.c:69
+msgid "Import file..."
+msgstr "ਫਾਈਲ ਲਿਅਾੳੁ"
+
+#. FIXME:  eventually provide a convenience dialog to force things
+#: src/cong-file-import.c:103
+msgid "Could not import the file."
+msgstr " ਫਾਈਲ ਨੂੰ ਲਿਅਾ ਨਹੀ ਸਕਿਅਾ।"
+
+#: src/cong-file-import.c:104
+#, c-format
+msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+msgstr ""
+"ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ \"%s\" ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਸਥਾਪਿਤ ਕਰਨਾ ਹੈ।"
+
+#: src/cong-file-import.c:105
+msgid "FIXME"
+msgstr "ਮੈਨੂੰ ਠੀਕ ਕਰੋ"
+
+#: src/cong-file-new.c:138
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "ਨਵੀਂ ਫਾਈਲ (%s) ਬਣਾਉਣਾ"
+
+#: src/cong-file-new.c:478 src/cong-file-new.c:501 src/cong-file-new.c:526
+msgid "Creating a new file"
+msgstr "ਨਵੀਂ ਫਾਈਲ ਬਣਾਉਣਾ"
+
+#: src/cong-file-new.c:502
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"ਇਹ ਸਹਾਇਕ ਨਵੀਂ ਫਾਈਲ ਬਣਾਉਣ ਵਿਚ ਤੁਹਾਨੂੰ ਸੇਧ ਦੇਵੇਗਾ।\n"
+"\n"
+"ਫਾਈਲ ਦੀਆਂ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਉਪਲੱਬਧ ਹਨ,ਅਤੇ ਇਕਤ੍ਰਤਾ ਤੁਹਾਡੇ ਵਾਸਤੇ ਕੁਝ \"ਬਾਇਲਰਪਲੇਟ\" ਅੰਸ਼ ਪੇਸ਼ ਕਰਨ "
+"ਦੇ ਯੋਗ ਹੋਵੇਗਾ।\n"
+"\n"
+"ਸਾਨੂੰ ਉਮੀਦ ਹੈ ਕਿ ਇਕਤ੍ਰਤਾ ਦੇ ਆਉਣ ਵਾਲੇ ਵਰਜਨ ਵਿਚ ਤੁਸੀਂ ਇਸ ਸਿਸਟਮ ਵਿਚ ਜੋੜਨ ਲਈ \"ਦਸਤਾਵੇਜ਼  "
+"ਨਮੂਨਾ\" ਬਣਾਉਣ ਦੇ ਯੋਗ ਹੋਵੋਗੇ।"
+
+#: src/cong-file-new.c:515
+msgid "What type of file would you like to create?"
+msgstr "ਤੁਸੀਂ ਕਿਹੜੀ ਕਿਸਮ ਦੀ ਫਾਈਲ ਬਣਾਉਣਾ ਪਸੰਦ ਕਰਦੇ ਹੋ?"
+
+#: src/cong-file-new.c:517
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr "ਸੂਚੀ ਵਿਚ ਅੰਗ ਚੁਣੋ ਅਤੇ ਜਾਰੀ ਰਹਿਣ ਲਈ \"ਅੱਗੇ \" ਚੁਣੋ"
+
+#: src/cong-file-new.c:527
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"ਹੁਣ ਇਕਤ੍ਰਤਾ ਕੋਲ ਦਸਤਾਵੇਜ਼  ਬਣਾਉਣ ਲਈ ਲੋੜੀਦੀ ਸੂਚਨਾ ਹੈ। ਇਸ ਨੂੰ ਬਣਾਉਣ ਲਈ \"ਲਾਗੂ ਕਰੋ \" ਦਬਾਓ।ਜੇ "
+"ਤੁਸੀਂ ਇਸ ਨੂੰ ਰਖਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਤੁਹਾਨੂੰ ਦਸਤਾਵੇਜ਼  ਸੰਭਾਲਣ ਦੀ ਲੋੜ ਪਵੇਗੀ।"
+
+#: src/cong-file-open.c:55
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr "ਇਕਤ੍ਰਤਾ ਅਨੁਸਾਰ ਕਿਸਮਾਂ ਵਿਚੋਂ ਕਿਸੇ ਨਾਲ ਵੀ ਦਸਤਾਵੇਜ਼  ਦੀ ਬਣਤਰ ਮੇਲ ਨਹੀਂ ਕਰਦੀ।"
+
+#: src/cong-file-open.c:56
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+"ਤੁਸੀਂ ਇਕਤ੍ਰਤਾ ਨੂੰ \"ਮਜ਼ਬੂਰ\"ਬਟਨ\" ਨੰੂ ਦਬਾਕੇ ਦਸਤਾਵੇਜ਼  ਸਥਾਪਿਤ ਕਰਨ ਲਈ ਮਜ਼ਬੂਰ ਕਰ ਸਕਦੇ ਹੋ, ਪ੍ਰੰਤੂ "
+"ਨਤੀਜਾ ਸਪਸ਼ਟ ਨਹੀਂ ਹੋਵੇਗਾ।"
+
+#: src/cong-file-open.c:57
+msgid "Force"
+msgstr "ਬਲ"
+
+#: src/cong-file-open.c:169
+msgid "Select an XML document"
+msgstr "ਇਕ XML ਦਸਤਾਵੇਜ਼  ਚੁਣੋ"
+
+#: src/cong-file-print.c:197
+#, c-format
+msgid "Print \"%s\""
+msgstr "\"%s\" ਛਾਪੋ"
+
+#: src/cong-file-print.c:203
+msgid "Print"
+msgstr "ਛਾਪੋ"
+
+#: src/cong-file-print.c:235
+msgid "Print Method:"
+msgstr "ਛਾਪਣ ਦੇ ਢੰਗ"
+
+#: src/cong-file-print.c:243
+msgid "Print Options"
+msgstr "ਛਾਪਣ ਦੀ ਚੋਣ"
+
+#: src/cong-file-print.c:321 src/cong-menus.c:675
+msgid "Print Preview"
+msgstr "ਛਾਪੇ ਦੀ ਅਸਲ ਦਿਖ"
+
+#: src/cong-file-print.c:331
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "ਇਕਤ੍ਰਤਾ \"%s\" ਨੂੰ ਛਾਪ ਨਹੀਂ ਸਕਦੀ"
+
+#: src/cong-file-print.c:334
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr "ਕੋਈ ਵੀ ਇਕਤ੍ਰਤਾ ਦਾ ਸਿਰਾ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਉਸ ਕਿਸਮ ਦੀਆਂ ਫਾਈਲਾਂ ਨੂੰ ਕਿਵੇਂ ਛਾਪਣਾ ਹੈ।"
+
+#: src/cong-file-properties.c:105
+msgid "Yes"
+msgstr "ਹਾਂ"
+
+#: src/cong-file-properties.c:105
+msgid "No"
+msgstr "ਨਹੀਂ"
+
+#: src/cong-file-properties.c:124 src/cong-file-properties.c:127
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: src/cong-file-properties.c:165
+msgid "_Remove this DTD"
+msgstr "ਇਹ DTD ਹਟਾਓ"
+
+#: src/cong-file-properties.c:188
+#, fuzzy
+msgid ""
+"The document does not specify an external DTD, but Conglomerate believes the "
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr ""
+"<small>ਦਸਤਾਵੇਜ਼  ਬਾਹਰੀ DTD ਨੂੰ  ਬਿਆਨ ਨਹੀੰ ਕਰਦਾ ਪ੍ਰੰਤੂ ਇਕਤ੍ਰਤਾ ਵਿਸ਼ਵਾਸ ਦਿਵਾਉਂਦੀ ਹੈ ਕਿ "
+"ਉਪਰਲੀ ਸੂਚਨਾ ਉਚਿਤ ਹੈ। ਦਸਤਾਵੇਜ਼  ਵਿੱਚ ਇਸ ਸੂਚਨਾ ਨੂੰ ਨਿਸਚਿਤ ਰੂਪ ਵਿਚ ਬਿਆਨ ਕਰਨ ਵਾਸਤੇ \"ਇਸ "
+"DTD ਨੂੰ ਜੋੜੋ\" ਨੰੂ ਦਬਾੳੁ।</small>"
+
+#: src/cong-file-properties.c:197
+msgid "No External Subset"
+msgstr "ਕੋਈ ਬਾਹਰੀ ਉਪ ਸਮੂਹ ਨਹੀਂ"
+
+#: src/cong-file-properties.c:199
+msgid "_Add a DTD"
+msgstr "ਇਕ DTD ਜੋੜੋ"
+
+#: src/cong-file-properties.c:276
+msgid "Unspecified"
+msgstr "ਬਿਨਾਂ ਬਿਆਨ ਕੀਤੇ"
+
+#: src/cong-file-properties.c:351
+msgid "Remove DTD"
+msgstr "DTD ਹਟਾਓ"
+
+#: src/cong-file-properties.c:368
+msgid "Associate with DTD"
+msgstr "DTD ਨਾਲ ਮਿਲਾਓ"
+
+#: src/cong-file-save.c:53
+msgid "Save XML as..."
+msgstr "...ਦੀ ਤਰਾਂ XML ਸੰਭਾਲੋ"
+
+#: src/cong-location.c:289 src/cong-location.c:310
+msgid "Merge tags"
+msgstr "ਟੈਬ ਮਿਲਾਓ"
+
+#: src/cong-location.c:354
+msgid "Delete character"
+msgstr "ਅੱਖਰ ਮਿਟਾਓ"
+
+#: src/cong-location.c:819
+msgid "Calculating previous page"
+msgstr "ਪਹਿਲੇ ਸਫ਼ਾ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
+
+#: src/cong-location.c:832
+msgid "Calculating next page"
+msgstr "ਅਗਲੇ ਸਫ਼ਾ ਦਾ ਹਿਸਾਬ ਲਗਾਓ"
+
+#: src/cong-menus.c:99 src/cong-menus.c:171 src/cong-menus.c:205
+msgid "The selected menu item has not yet been implemented."
+msgstr "ਚੁਣੇ ਹੋਏ ਸੂਚੀ ਅੰਗ ਹੁਣ ਤਕ ਲਾਗੂ ਨਹੀਂ ਕੀਤੇ।"
+
+#: src/cong-menus.c:452
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "ਇਕਤ੍ਰਤਾ ਬਦਲਾਓ ਦਾ ਨਤੀਜਾ ਨਹੀ ਖੋਲ ਸਕੀ"
+
+#: src/cong-menus.c:510 src/cong-plugin.c:477
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "ਉਥੇ stylesheet ਫਾਈਲ \"%s\" ਪੜਨ ਵਿਚ ਗਲਤੀ ਸੀ"
+
+#: src/cong-menus.c:513 src/cong-menus.c:537 src/cong-plugin.c:480
+#: src/cong-plugin.c:504
+msgid "Conglomerate could not transform the document"
+msgstr "ਇਕਤ੍ਰਤਾ ਦਸਤਾਵੇਜ਼  ਨੂੰ ਬਦਲ ਨਹੀ ਸਕੀ"
+
+#: src/cong-menus.c:534 src/cong-plugin.c:501
+msgid "There was a problem applying the stylesheet file"
+msgstr "ਉਥੇ stylesheet ਫਾਈਲ ਲਾਗੂ ਕਰਨ ਦੀ ਗਲਤੀ ਸੀ"
+
+#: src/cong-menus.c:987
+msgid "Test Progress Checklist"
+msgstr "ਤਰਕੀ ਜਾਂਚ ਲੜੀ ਦਾ ਪਰੀਖਣ ਕਰੋ"
+
+#: src/cong-menus.c:991
+#, c-format
+msgid "This is stage %i"
+msgstr "ਇਹ ਸਥਿਤੀ  %i ਹੈ"
+
+#: src/cong-menus.c:1036
+msgid "Message Log - Conglomerate"
+msgstr "ਸੰਦੇਸ਼ ਰੋਜਨਾਮਚਾ - ਇਕਤ੍ਰਤਾ"
+
+#: src/cong-menus.c:1048
+msgid "Signal Log - Conglomerate"
+msgstr "ਸੰਕੇਤ ਰੋਜਨਾਮਚਾ - ਇਕਤ੍ਰਤਾ"
+
+#: src/cong-menus.c:1250
+msgid "translator_credits"
+msgstr "ਜਸਵਿੰਦਰ ਸਿੰਘ ਫੂਲੇਵਾਲਾ (jaswinderlinux@netscape.net)"
+
+#: src/cong-menus.c:1254
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+"ਹੱਕ ਰਾਖਵੇ ਹਨ (C) ੧੯੯੯ ਹੰਸ ਪੀਟਰ ਜਾਨਸਨ\n"
+"ਹੱਕ ਰਾਖਵੇ ਹਨ (C) ੨੦੦੪ ਡੇਵਿਡ ਮਲਕਾਮ"
+
+#: src/cong-menus.c:1255
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "ਇਕਤ੍ਰਤਾ: ਇਕ ਮੁਫਤ,ਉਪਯੋਗੀ ਸਮਰਥਕ XML ਸੋਧਕ"
+
+#: src/cong-menus.c:1298 src/cong-menus.c:1377
+msgid "/_File"
+msgstr "/ਫਾਈਲ"
+
+#: src/cong-menus.c:1299 src/cong-menus.c:1378
+msgid "/File/_New..."
+msgstr "/ਫਾਈਲ/ ਨਵੀਂ ਼਼"
+
+#: src/cong-menus.c:1300 src/cong-menus.c:1379
+msgid "/File/_Open..."
+msgstr "/ਫਾਈਲ/ ਖੋਲੋ੏ ਼਼"
+
+#: src/cong-menus.c:1301 src/cong-menus.c:1306 src/cong-menus.c:1311
+#: src/cong-menus.c:1314 src/cong-menus.c:1317 src/cong-menus.c:1319
+#: src/cong-menus.c:1380 src/cong-menus.c:1382
+msgid "/File/"
+msgstr "/ਫਾਈਲ/"
+
+#: src/cong-menus.c:1302
+msgid "/File/_Save"
+msgstr "/ਫਾਈਲ/ ਸੰਭਾਲੋ"
+
+#: src/cong-menus.c:1303
+msgid "/File/Save _As..."
+msgstr "/ਫਾਈਲ/ ਇਸ ਤਰਾਂ ਸੰਭਾਲੋ"
+
+#: src/cong-menus.c:1304
+msgid "/File/Sa_ve a Copy..."
+msgstr "/ਫਾਈਲ/ ਨਕਲ ਸੰਭਾਲੋ"
+
+#: src/cong-menus.c:1307
+msgid "/File/Print Previe_w..."
+msgstr "/ਫਾਈਲ/ ਛਾਪੇ ਦੀ ਅਸਲੀ ਦਿਖ"
+
+#: src/cong-menus.c:1308
+msgid "/File/_Print..."
+msgstr "/ਫਾਈਲ/ ਛਾਪਾ"
+
+#: src/cong-menus.c:1312
+msgid "/File/_Revert"
+msgstr "/ਫਾਈਲ/ ਮੁੜ"
+
+#: src/cong-menus.c:1315 src/cong-menus.c:1381
+msgid "/File/_Import..."
+msgstr "/ਫਾਈਲ/ ਲਿਅਾੳੁ ਼਼"
+
+#: src/cong-menus.c:1316
+msgid "/File/_Export..."
+msgstr "/ਫਾਈਲ/ ਭੇਜੋ ਼਼਼"
+
+#: src/cong-menus.c:1318
+msgid "/File/Proper_ties"
+msgstr "/ਫਾਈਲ/ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ"
+
+#: src/cong-menus.c:1320 src/cong-menus.c:1383
+msgid "/File/_Close"
+msgstr "/ਫਾਈਲ/ ਬੰਦ ਕਰੋ"
+
+#: src/cong-menus.c:1321 src/cong-menus.c:1384
+msgid "/File/_Quit"
+msgstr "/ਫਾਈਲ/ ਬਾਹਰ"
+
+#: src/cong-menus.c:1323 src/cong-menus.c:1386
+msgid "/_Edit"
+msgstr "/ਸੋਧ/"
+
+#: src/cong-menus.c:1324
+msgid "/Edit/_Undo"
+msgstr "/ਸੋਧ/ ਰੱਦ ਕਰਨਾ"
+
+#: src/cong-menus.c:1325
+msgid "/Edit/_Redo"
+msgstr "/ਸੋਧ/ ਦੁਹਰਾਈ"
+
+#: src/cong-menus.c:1326 src/cong-menus.c:1330 src/cong-menus.c:1336
+#: src/cong-menus.c:1338 src/cong-menus.c:1341
+msgid "/Edit/"
+msgstr "/ਸੋਧ/"
+
+#: src/cong-menus.c:1327
+msgid "/Edit/Cu_t"
+msgstr "/ਸੋਧ/ ਕੱਟਣਾ"
+
+#: src/cong-menus.c:1328
+msgid "/Edit/_Copy"
+msgstr "/ਸੋਧ/ ਨਕਲ"
+
+#: src/cong-menus.c:1329
+msgid "/Edit/_Paste"
+msgstr "/ਸੋਧ/ ਚਿਪਕਾਓ"
+
+#: src/cong-menus.c:1332
+msgid "/Edit/_Find..."
+msgstr "/ਸੋਧ/ ਲੱਭੋ"
+
+#: src/cong-menus.c:1333
+msgid "/Edit/Find Ne_xt"
+msgstr "/ਸੋਧ/ ਅੱਗੇ ਲੱਭੋ"
+
+#: src/cong-menus.c:1334
+msgid "/Edit/Find Pre_vious"
+msgstr "/ਸੋਧ/ ਪਿੱਛੇ ਲੱਭੋ"
+
+#: src/cong-menus.c:1335
+msgid "/Edit/R_eplace..."
+msgstr "/ਸੋਧ/ ਤਬਦੀਲ ਼਼"
+
+#: src/cong-menus.c:1337
+msgid "/Edit/_Insert..."
+msgstr "/ਸੋਧ/ ਵਿਚਕਾਰ ਼਼"
+
+#: src/cong-menus.c:1340
+msgid "/Edit/View _Source"
+msgstr "/ਸੋਧ/ ਸਰੋਤ ਵੇਖੋ"
+
+#: src/cong-menus.c:1342 src/cong-menus.c:1387
+msgid "/Edit/Prefere_nces"
+msgstr ""
+
+#: src/cong-menus.c:1345
+msgid "/Debug"
+msgstr "/ਡੀਬੱਗ"
+
+#: src/cong-menus.c:1346
+msgid "/Debug/Begin self-test of error-reporting system..."
+msgstr "/ਡੀਬੱਗ/ ਗਲਤੀ ਸੰਪਾਦਕ ਸਿਸਟਮ ਦੀ ਸ੍ਵੈ ਜਾਂਚ ਸ਼ੁਰੂ ਕਰੋ"
+
+#: src/cong-menus.c:1347
+msgid "/Debug/Transform DocBook to HTML"
+msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ HTML ਵਿੱਚ ਬਦਲੋ"
+
+#: src/cong-menus.c:1348
+msgid "/Debug/Transform DocBook to XHTML"
+msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ XHTML ਵਿੱਚ ਬਦਲੋ"
+
+#: src/cong-menus.c:1349
+msgid "/Debug/Transform DocBook to HTML Help"
+msgstr "/ਡੀਬੱਗ/  DocBook ਤੋਂ HTML ਸਹਾੲਿਤਾ ਵਿੱਚ ਬਦਲੋ"
+
+#: src/cong-menus.c:1350
+msgid "/Debug/Transform DocBook to Java Help"
+msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ Java ਸਹਾੲਿਤਾ ਵਿੱਚ ਬਦਲੋ"
+
+#: src/cong-menus.c:1351
+msgid "/Debug/Transform DocBook to FO"
+msgstr "/ਡੀਬੱਗ/ DocBook ਤੋਂ FO ਬਦਲੋ"
+
+#: src/cong-menus.c:1353
+msgid "/Debug/Preview XSL:FO"
+msgstr "/ਡੀਬੱਗ/ ਅਸਲੀ ਦਿਖ XSL:FO"
+
+#: src/cong-menus.c:1355
+msgid "/Debug/DTD"
+msgstr "/ਡੀਬੱਗ/ DTD"
+
+#: src/cong-menus.c:1356
+msgid "/Debug/Dialog"
+msgstr "/ਡੀਬੱਗ/ ਤਖਤੀ"
+
+#: src/cong-menus.c:1357
+msgid "/Debug/Progress Checklist"
+msgstr "/ਡੀਬੱਗ/ ਉਨੱਤੀ ਜਾਂਚ ਲੜੀ"
+
+#: src/cong-menus.c:1358
+msgid "/Debug/Document Message Log"
+msgstr "/ਡੀਬੱਗ/ ਦਸਤਾਵੇਜ਼  ਸੰਦੇਸ਼ ਰੋਜ਼ਨਾਮਚਾ"
+
+#: src/cong-menus.c:1359
+msgid "/Debug/Document Signal Log"
+msgstr "/ਡੀਬੱਗ/ ਦਸਤਾਵੇਜ਼  ਸੰਕੇਤ ਰੋਜ਼ਨਾਮਚਾ"
+
+#: src/cong-menus.c:1360
+msgid "/Debug/Information Alert"
+msgstr "/ਡੀਬੱਗ/ ਸੂਚਨਾ ਚੇਤਾਵਨੀ"
+
+#: src/cong-menus.c:1361
+msgid "/Debug/Glade Test"
+msgstr "/ਡੀਬੱਗ/ ਰਸਤਾ ਜਾਂਚ"
+
+#: src/cong-menus.c:1362
+msgid "/Debug/Insert XML Fragment"
+msgstr "/ਡੀਬੱਗ/ XML ਹਿਸਾ ਦਿੳੁ"
+
+#: src/cong-menus.c:1363
+msgid "/Debug/Command Test"
+msgstr "/ਡੀਬੱਗ/ ਕਮਾਂਡ ਜਾਂਚ"
+
+#: src/cong-menus.c:1366
+msgid "/_Tools"
+msgstr "/ਸੰਦ"
+
+#: src/cong-menus.c:1368 src/cong-menus.c:1399
+msgid "/_Help"
+msgstr "/ਸਹਾੲਿਤਾ"
+
+#: src/cong-menus.c:1369 src/cong-menus.c:1400
+msgid "/Help/_Contents"
+msgstr "/ਸਹਾੲਿਤਾ/ ਭਾਗ"
+
+#: src/cong-menus.c:1370 src/cong-menus.c:1401
+msgid "/Help/_About"
+msgstr "/ਸਹਾੲਿਤਾ/ ੲਿਸ ਬਾਰੇ "
+
+#: src/cong-node-properties-dialog.c:247
+msgid "XPath"
+msgstr "X ਰਸਤਾ"
+
+#: src/cong-node-properties-dialog.c:372
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ \"%s\" ਨੂੰ  \"%s\" ਨਾਉਂ ਨਾਲ ਬਦਲੋ"
+
+#: src/cong-node-properties-dialog.c:547
+#, fuzzy
+msgid "Namespace"
+msgstr "ਹਟਾੳੁ"
+
+#: src/cong-node-properties-dialog.c:568
+msgid "Raw Attributes"
+msgstr "ਫਾਲਤੂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ"
+
+#: src/cong-node-properties-dialog.c:601
+msgid "Value"
+msgstr "ਮੁੱਲ"
+
+#: src/cong-node-properties-dialog.c:681
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> ਭਾਗਾਂ ਲਈ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ"
+
+#: src/cong-node-properties-dialog.c:795
+msgid "Text"
+msgstr "ਪਾਠ"
+
+#: src/cong-node-properties-dialog.c:847
+msgid "Choice"
+msgstr "ਪਸੰਦ"
+
+#: src/cong-node-properties-dialog.c:882
+msgid "Optional"
+msgstr "ਚੋਣ"
+
+#: src/cong-node-properties-dialog.c:898
+msgid "Zero or more"
+msgstr "ਸਿਫਰ ਜਾਂ ਜਿਆਦਾ"
+
+#: src/cong-node-properties-dialog.c:914
+msgid "One or more"
+msgstr "ਇਕ ਜਾਂ ਜਿਆਦਾ"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:970
+msgid "Valid Content"
+msgstr "ਯੋਗ ਭਾਗ"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:995
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "<tt>%s</tt> ਭਾਗਾਂ ਲਈ ਸੰਖੇਪ ਨਮੂਨਾ"
+
+#: src/cong-node-properties-dialog.c:1117
+#: src/cong-node-properties-dialog.c:1203
+msgid "DTD"
+msgstr "DTD"
+
+#: src/cong-overview-view.c:198
+msgid "Unknown data"
+msgstr "ਅਣਜਾਣਾ ਡੈਟਾ"
+
+#: src/cong-parser-error.c:179
+#, c-format
+msgid "Parse errors loading %s"
+msgstr "%s ਦੀ ਸਥਾਪਿਤੀ ਵਿਚ ਪਾਰਸ ਗਲਤੀਆਂ"
+
+#: src/cong-parser-error.c:187
+msgid "_Retry"
+msgstr "ਮੁੜ ਕੋਸ਼ਿਸ"
+
+#: src/cong-parser-error.c:266
+msgid "Line Number"
+msgstr "ਸਤਰ ਨੰ"
+
+#: src/cong-parser-error.c:328
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "ਫਾਈਲ ਦੀ ਅੰਦਰੂਨੀ ਬਣਤਰ ਨੂੰ %s ਸਮਝ ਨਹੀਂ ਸਕਿਆ।"
+
+#: src/cong-parser-error.c:336
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+"ਹੁਣ ਲੋੜੀਦੇ \"ਵਧੀਆ ਬਣੇ\" ਦਸਤਾਵੇਜ਼  ਇਕਤ੍ਰ ਕਰੋ; ਇਸ ਵਿਚ ਜਿਆਦਾਤਰ ਵੈਬ ਝਲਕਾਂ ਨਾਲੋਂ ਵਧੇਰੇ ਸਖਤ ਕਾਨੂੰਨ "
+"ਹਨ। ਇਹ ਫਿਰ ਵੀ SGML ਲਈ ਸਹਾਇਕ ਹੁੰਦਾ ਹੈ। ਅਸੀਂ ਇਹਨਾਂ ਮੁਸ਼ਕਿਲਾਂ ਨੂੰ ਬਾਅਦ ਵਾਲੇ ਪ੍ਰਕਾਸ਼ਨ ਵਿਚ "
+"ਨਿਰਧਾਰਨ ਕਰਨ ਦੀ ਉਮੀਦ ਕਰਦੇ ਹਾਂ।"
+
+#: src/cong-parser-error.c:337
+msgid "Show Details"
+msgstr "ਵਿਸਥਾਰ ਦਿਖਾਓ"
+
+#: src/cong-plugin.c:405 src/cong-plugin.c:441
+msgid "Conglomerate could not find display information for the new file"
+msgstr "ਇਕਤ੍ਰਤਾ ਨਵੀਂ ਫਾਈਲ ਵਾਸਤੇ ਦਿਖਾਉਣ ਵਾਲੀ ਜਾਣਕਾਰੀ ਨਹੀਂ ਲੱਭ ਸਕਿਆ"
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: src/cong-plugin.c:840
+#, c-format
+msgid "<%s> property dialog"
+msgstr "<%s> ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: src/cong-plugin.c:843
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr "<%s>ਅੰਸ਼ ਵਾਸਤੇ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ ਦਿਓ"
+
+#: src/cong-primary-window.c:316 src/cong-primary-window.c:317
+msgid "Open document"
+msgstr "ਦਸਤਾਵੇਜ਼ ਖੋਲੋ"
+
+#: src/cong-primary-window.c:324 src/cong-primary-window.c:325
+msgid "New document"
+msgstr "ਨਵਾਂ ਦਸਤਾਵੇਜ਼"
+
+#: src/cong-primary-window.c:343 src/cong-primary-window.c:344
+msgid "Save document"
+msgstr "ਦਸਤਾਵੇਜ਼ ਸੰਭਾਲੋ"
+
+#: src/cong-primary-window.c:351 src/cong-primary-window.c:352
+msgid "Undo"
+msgstr "ਰੱਦ ਕਰੋ"
+
+#: src/cong-primary-window.c:358 src/cong-primary-window.c:359
+msgid "Redo"
+msgstr "ਦੁਬਾਰਾ ਕਰੋ"
+
+#: src/cong-primary-window.c:377 src/cong-primary-window.c:378 src/tree.c:164
+#: src/xmledit.c:43
+msgid "Cut"
+msgstr "ਕੱਟੋ"
+
+#: src/cong-primary-window.c:384 src/cong-primary-window.c:385
+msgid "Copy"
+msgstr "ਨਕਲ"
+
+#: src/cong-primary-window.c:391 src/cong-primary-window.c:392
+#: src/xmledit.c:157
+msgid "Paste"
+msgstr "ਚਿਪਕਾਉ"
+
+#: src/cong-primary-window.c:521
+msgid "Overview"
+msgstr "ਝਾਕੀ"
+
+#: src/cong-primary-window.c:531
+msgid "Bookmarks"
+msgstr "ਬੁੱਕਮਾਰਕ"
+
+#: src/cong-primary-window.c:540
+msgid "Raw XML"
+msgstr "ਫਾਲਤੂ XML"
+
+#: src/cong-primary-window.c:672 src/cong-primary-window.c:691
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "ਜਿਆਦਾ ਵਕਫੇ ਵਾਲੇ, ਇਕਤ੍ਰ ਕਰਨ ਵਾਲੇ ਸੋਧਕ ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
+
+#: src/cong-primary-window.c:771
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s(ਤਬਦੀਲ ਹੋਈ) - %s"
+
+#: src/cong-util.c:322 src/plugin-docbook.c:1015
+msgid "Printing XSL Formatting Objects"
+msgstr "ਮਿਟਾਉਣ ਵਾਲੇ XSL ਪਦਾਰਥ ਛਾਪੋ    "
+
+#: src/cong-util.c:366
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "ਇਹ ਸੰਭਾਵੀ ਹੀ cong_util_print_xslfo ਦਾ ਨਤੀਜਾ ਹੋਵੇਗਾ"
+
+#: src/cong-util.c:1033
+msgid "(no description available)"
+msgstr "(ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ)"
+
+#: src/cursor.c:100
+#, fuzzy, c-format
+msgid "Split <%s> element"
+msgstr "ਹਿੱਸਾ %s ਬਟਨ "
+
+#: src/plugin-admonition.c:59
+msgid "Admonition"
+msgstr "ਚੇਤਾਵਨੀ"
+
+#: src/plugin-admonition.c:60
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "ਸੰਕੇਤ, ਸੂਚਨਾਵਾਂ ਆਦਿ ਦੇਖਣ ਲਈ ਸੋਧਕ ਮੂਲ"
+
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
+msgid "Cleanup XML Source"
+msgstr "XML ਸ੍ਰੋਤ ਸਾਫ ਕਰੋ"
+
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr "ਦਸਤਾਵੇਜ਼  ਦਾ XML ਸ੍ਰੋਤ ਸਾਫ ਕਰੋ ਤਾਂ ਕਿ ਕੋਡ ਸੋਧਕ ਵਿੱਚ ਪੜਨਾ ਆਸਾਨ ਹੋਵੇ।"
+
+#: src/plugin-cleanup-source.c:433
+msgid "_Clean the XML Source"
+msgstr "XML ਸ੍ਰੋਤ ਸਾਫ ਕਰੋ"
+
+#: src/plugin-convert-case.c:117
+msgid "Export as \"lower case\" XML"
+msgstr "\"ਛੋਟੇ ਅੱਖਰ\" XML ਵਾਂਗ ਭੇਜੋ"
+
+#: src/plugin-convert-case.c:118
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+"ਦਸਤਾਵੇਜ਼  ਵਿਚ ਸਾਰੇ ਬਟਨਾਂ ਅਤੇ ਗੁਣਾਂ ਨੂੰ ਛੋਟੇ ਅੱਖਰਾਂ ਵਿਚ ਬਦਲ ਕੇ XML ਫਾਈਲ ਵਾਂਗ ਭੇਜੋ। ਵਰਤਣ ਯੋਗ ਹੈ "
+"ਜਦੋਂ ਜਦੀ SGML ਦਸਤਾਵੇਜਾਂ ਨਾਲ ਕੰਮ ਕਰਦੇ ਹਾਂ।"
+
+#: src/plugin-docbook.c:191
+msgid "Text of the article goes here"
+msgstr "ਅੰਸ਼ ਦਾ ਪਾਠ ਇਥੋਂ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ"
+
+#: src/plugin-docbook.c:201
+msgid "Untitled Article"
+msgstr "ਬਿਨਾ ਨਾਉਂ ਤੋਂ ਲੇਖ"
+
+#: src/plugin-docbook.c:244
+msgid "Text of the first chapter goes here"
+msgstr "ਪਹਿਲੇ ਸਬਕ ਦਾ ਪਾਠ ਇਥੋਂ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ"
+
+#: src/plugin-docbook.c:254
+msgid "Untitled Book"
+msgstr "ਬਿਨਾ ਨਾਉਂ ਤੋਂ ਕਿਤਾਬ"
+
+#: src/plugin-docbook.c:293
+msgid "Untitled Set of Documents"
+msgstr "ਬਿਨਾ ਨਾਉਂ ਤੋਂ ਦਸਤਾਵੇਜ਼ਾ ਦਾ ਸਮੂਹ"
+
+#: src/plugin-docbook.c:929
+msgid "Exporting PDF file"
+msgstr "PDF ਫਾਈਲ ਭੇਜਣਾ"
+
+#: src/plugin-docbook.c:933 src/plugin-docbook.c:1013
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr "DocBook ਨੂੰ ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਵਿਚ ਬਦਲਣਾ"
+
+#: src/plugin-docbook.c:935
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਨੂੰ PDF ਫਾਈਲ ਵਾਂਗ ਤਰਤੀਬ ਦਿਓ"
+
+#: src/plugin-docbook.c:948 src/plugin-fo.c:72
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "ਮਿਟਾਉਣ ਵਾਲੇ ਪਦਾਰਥ XSL ਨੂੰ  PDF ਵਿਚ ਬਦਲਣਾ"
+
+#: src/plugin-docbook.c:1009
+msgid "Printing DocBook file"
+msgstr "DocBook ਫਾਈਲ ਛਾਪੋ"
+
+#: src/plugin-docbook.c:1365
+msgid "DocBook Article"
+msgstr "DocBook  ਲੇਖ"
+
+#: src/plugin-docbook.c:1366
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ, ਸ਼ਾਇਦ ਵੈਬਸਾਈਟ ਜਾਂ ਰਸਾਲੇ ਵਾਸਤੇ ਅੰਸ਼ ਬਣਾਓ"
+
+#: src/plugin-docbook.c:1373
+msgid "DocBook Book"
+msgstr "DocBook ਕਿਤਾਬ"
+
+#: src/plugin-docbook.c:1374
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ ਇਕ ਕਿਤਾਬ ਬਣਾਓ"
+
+#: src/plugin-docbook.c:1381
+msgid "DocBook Set"
+msgstr "DocBook ਸਮੂਹ"
+
+#: src/plugin-docbook.c:1382
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "\"DocBook\" ਬਣਤਰ ਵਰਤ ਕੇ ਸੰਬੰਧਿਤ ਕਿਤਾਬਾਂ ਦੇ ਸਮੂਹ ਬਣਾਓ"
+
+#: src/plugin-docbook.c:1390
+msgid "Import text as a DocBook article"
+msgstr "DocBook ਭਾਗ ਵਾਂਗ ਪਾਠ ਲਿਅਾੳੁ"
+
+#: src/plugin-docbook.c:1391
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr "ਇਕ ਹਿਸੇ ਵਾਂਗ ਸਮਤਲ ਪਾਠ ਨੂੰ \"DocBook\" ਬਣਤਰ ਵਿਚ ਲਿਅਾੳੁ"
+
+#: src/plugin-docbook.c:1408
+msgid "Export DocBook as HTML"
+msgstr "HTML ਵਾਂਗ DocBook ਭੇਜੋ"
+
+#: src/plugin-docbook.c:1409
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr "DocBook ਫਾਈਲ ਤੋਂ ਵੈਬ ਸਫ਼ਾ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ"
+
+#: src/plugin-docbook.c:1416
+msgid "Export DocBook as PDF"
+msgstr "PDF ਵਾਂਗ DocBook ਭੇਜੋ"
+
+#: src/plugin-docbook.c:1417
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr ""
+"DocBook ਫਾਈਲ ਤੋਂ PDF ਫਾਈਲ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ"
+
+#: src/plugin-docbook.c:1424
+msgid "Export DocBook as XSL:FO"
+msgstr "XSL:FO ਵਾਂਗ DocBook ਭੇਜੋ"
+
+#: src/plugin-docbook.c:1425
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+"DocBook ਫਾਈਲ ਤੋਂ XSL:FO ਫਾਈਲ ਬਣਾਉਣ ਲਈ Norman Walsh's DocBook stylesheets ਵਰਤੋ,"
+"ਜਿਹਡ਼ੀ ਬਾਅਦ ਵਿੱਚ PDF ਵਿਚ ਛਾਪੀ ਜਾਂ ਬਦਲੀ ਜਾ ਸਕਦੀ ਹੈ"
+
+#: src/plugin-docbook.c:1433
+msgid "Print DocBook"
+msgstr "DocBook ਛਾਪੋ"
+
+#: src/plugin-docbook.c:1442
+msgid "Generic DocBook property dialog"
+msgstr "ਆਮ DocBook ਵਿਸ਼ੇਸ਼ਤਾ ਤਖਤੀ"
+
+#: src/plugin-docbook.c:1443
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr "ਜਿਆਦਾਤਰ DocBook ਮੂਲਾਂ ਵਾਸਤੇ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਤਖਤੀ ਵਖਾੳੁ"
+
+#: src/plugin-docbook.c:1461 src/plugin-docbook.c:1464 src/plugin-html.c:130
+#: src/plugin-html.c:133
+msgid "Open Link in Browser"
+msgstr ""
+
+#: src/plugin-docbook.c:1473
+msgid "Promote Section"
+msgstr "ਭਾਗ ਦਾ ਦਰਜਾ ਵਧਾਉ"
+
+#: src/plugin-docbook.c:1474
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ DocBook ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਉਚੇ ਦਰਜੇ ਤਕ ਵਧਾਓ"
+
+#: src/plugin-docbook.c:1476 src/plugin-html.c:141 src/plugin-html.c:144
+msgid "Promote"
+msgstr "ਦਰਜਾ ਵਧਾਉ"
+
+#: src/plugin-docbook.c:1477 src/plugin-docbook.c:1478
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਉਚੇ ਦਰਜੇ ਤਕ ਵਧਾਓ"
+
+#: src/plugin-docbook.c:1484
+msgid "Demote Section"
+msgstr "ਭਾਗ ਦਾ ਦਰਜਾ ਘਟਾਓ"
+
+#: src/plugin-docbook.c:1485
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ DocBook ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਛੋਟੇ ਦਰਜੇ ਤਕ ਘਟਾਓ"
+
+#: src/plugin-docbook.c:1487 src/plugin-html.c:152 src/plugin-html.c:155
+msgid "Demote"
+msgstr "ਦਰਜਾ ਘਟਾਓ"
+
+#: src/plugin-docbook.c:1488 src/plugin-docbook.c:1489
+msgid "Demote the section to a lower organisational level within the document"
+msgstr "ਦਸਤਾਵੇਜ਼  ਵਿਚ ਭਾਗ ਨੂੰ ਸਮੂਹ ਦੇ ਛੋਟੇ ਦਰਜੇ ਤਕ ਘਟਾਓ"
+
+#: src/plugin-dtd.c:80
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "%s ਤੇ ਆਧਾਰਿਤ ਸ੍ਵੈ ਪੈਦਾਇਸ਼ੀ ਦਸਤਾਵੇਜ਼  ਕਿਸਮ"
+
+#: src/plugin-dtd.c:81
+#, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr "ਇਹ ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਨਿਰਧਾਰਣ ਆਪਣੇ ਆਪ  %s ਤੋਂ ਪੈਦਾ ਹੋਇਆ ਸੀ"
+
+#: src/plugin-dtd.c:153
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "DTD ਨੂੰ ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਨਿਰਧਾਰਣ ਵਿਚ ਬਦਲੋ"
+
+#: src/plugin-dtd.c:154
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "ਇਕਤ੍ਰਤਾ ਪੇਸ਼ਗੀ ਬਿਆਨ ਕਰਨ ਵਾਲੀ ਫਾਈਲ ਬਣਾ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
+
+#: src/plugin-dtd.c:161
+msgid "Convert DTD into a Relax NG schema"
+msgstr "DTD ਨੂੰ Relax NG ਬਣਤਰ ਵਿਚ ਬਦਲੋ"
+
+#: src/plugin-dtd.c:162
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "RELAX NG ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ  ਦਿੳੁ"
+
+#: src/plugin-dtd.c:169
+msgid "Convert DTD into W3C XML Schema"
+msgstr "DTD ਨੂੰ W3C XML ਬਣਤਰ ਵਿਚ ਬਦਲੋ"
+
+#: src/plugin-dtd.c:170
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "W3C XML ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
+
+#: src/plugin-dtd.c:177
+msgid "Convert DTD into a Schematron file"
+msgstr "DTD ਨੂੰ Schematron ਫਾਈਲ ਵਿਚ ਬਦਲੋ"
+
+#: src/plugin-dtd.c:178
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "Schematron ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
+
+#: src/plugin-dtd.c:185
+msgid "Convert DTD into an Examplotron file"
+msgstr "DTD ਨੂੰ Examplotron ਫਾਈਲ ਵਿਚ ਬਦਲੋ"
+
+#: src/plugin-dtd.c:186
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "Examplotron ਬਣਤਰ ਵਿਚ ਬਦਲ ਕੇ DTD ਫਾਈਲ ਦਿੳੁ"
+
+#: src/plugin-fo.c:99
+msgid "Export XSL-FO as PDF"
+msgstr "XSL-FO ਨੂੰ PDF ਵਾਂਗ ਭੇਜੋ"
+
+#: src/plugin-fo.c:100
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "XSL:FO ਸੂਚਨਾ ਤੋਂ PDF ਫਾਈਲ ਪੈਦਾ ਕਰੋ"
+
+#: src/plugin-fo.c:108
+msgid "Print XSL:FO"
+msgstr "XSL:FO ਛਾਪੋ"
+
+#: src/plugin-lists.c:59
+msgid "List Member Element"
+msgstr "ਲੜੀ ਮੈਂਬਰ ਦਾ ਅੰਗ "
+
+#: src/plugin-lists.c:60
+msgid "An editor node for visualising a member of a list"
+msgstr "ਲੜੀ ਦਾ ਮੈਂਬਰ ਦੇਖਣ ਲਈ ਮੂਲ ਸੰਪਾਦਕ"
+
+#: src/plugin-paragraph.c:59
+msgid "Paragraph"
+msgstr "ਪੈਰਾ"
+
+#: src/plugin-paragraph.c:60
+msgid "An editor node for visualising a paragraph"
+msgstr "ਪੈਰੇ ਨੂੰ ਦੇਖਣ ਲਈ ਮੂਲ ਸੰਪਾਦਕ"
+
+#: src/plugin-random.c:145
+msgid "What kind of random XML document would you like to create?"
+msgstr "ਤੁਸੀਂ ਕਿਹੜੀ ਕਿਸਮ ਦਾ ਬੇਤਰਤੀਬ XML ਦਸਤਾਵੇਜ਼  ਬਣਾਉਣਾ ਪਸੰਦ ਕਰਦੇ ਹੋ"
+
+#: src/plugin-random.c:607
+msgid "Random Document"
+msgstr "ਬੇਤਰਤੀਬ ਦਸਤਾਵੇਜ਼ "
+
+#: src/plugin-random.c:608
+msgid "Create an XML document containing random content."
+msgstr "XML ਦਸਤਾਵੇਜ਼  ਬਣਾਉ ਜਿਸ ਵਿਚ ਬੇਤਰਤੀਬ ਸੰਖੇਪ ਹੋਣ।"
+
+#: src/plugin-save-dispspec.c:133
+msgid "Dump Display Spec"
+msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਇਕਤ੍ਰ ਕਰੋ"
+
+#: src/plugin-save-dispspec.c:134 src/plugin-save-dispspec.c:137
+#: src/plugin-save-dispspec.c:138
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+"ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ xml ਫਾਈਲ ਵਿਚ ਮੌਜੂਦ ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਲਿਖੋ। ਤਦ ਇਹ ਫਾਈਲ ਇਕਤ੍ਰਤਾ ਉਪਯੋਗੀ ਦੁਆਰਾ "
+"ਬਦਲੀ ਜਾ ਸਕਦੀ ਹੈ"
+
+#: src/plugin-save-dispspec.c:136
+msgid "_Dump Display Spec"
+msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਇਕਤ੍ਰ ਕਰੋ"
+
+#: src/plugin-save-dispspec.c:144
+msgid "Edit Display Spec"
+msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਸੋਧੋ"
+
+#: src/plugin-save-dispspec.c:145 src/plugin-save-dispspec.c:148
+#: src/plugin-save-dispspec.c:149
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "ਇਕਤ੍ਰ ਦਸਤਾਵੇਜ਼  ਵਾਂਗ ਮੌਜੂਦ ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਖੋਲਦਾ ਹੈ।"
+
+#: src/plugin-save-dispspec.c:147
+msgid "_Edit Display Spec"
+msgstr "ਅੰਦਾਜ਼ਾ ਪੇਸ਼ਗੀ ਸੋਧੋ"
+
+#: src/plugin-sgml.c:36
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "ਇਕਤ੍ਰਤਾ,ਫਾਈਲ \"%s\" ਨਹੀਂ ਭੇਜ ਸਕੀ"
+
+#: src/plugin-sgml.c:115
+msgid "Attempting to run the sgml2xml tool"
+msgstr "sgml2xml ਸੰਦ ਚਲਾਉਣ ਲਈ ਯਤਨ"
+
+#: src/plugin-sgml.c:170
+msgid "Importing SGML"
+msgstr "SGML ਭੇਜਣਾ"
+
+#: src/plugin-sgml.c:181
+msgid "Import SGML"
+msgstr "SGML ਭੇਜੋ"
+
+#: src/plugin-sgml.c:182
+msgid "Import an SGML file, converting to XML."
+msgstr "XML ਵਿਚ ਬਦਲਣ ਵਾਸਤੇ SGML ਫਾਈਲ ਭੇਜੋ।"
+
+#: src/plugin-tests.c:55
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+"ਇਹ dummy ਕੈਲੰਡਰ ਕੰਟਰੋਲ ਹੈ, ਇਹ ਸਥਾਨਕ ਹੈ ਅਤੇ ਸੰਭਾਵਿਤ ਹੀ ਕੁਝ ਵਰਤਣ ਯੋਗ ਚੋਣ ਨਾਲ ਬਦਲਿਆ ਜਾ "
+"ਸਕਦਾ ਹੈ।"
+
+#: src/plugin-tests.c:133 src/plugin-tests.c:212
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr "ਯੂਨੀਕੋਡ ਅੱਖਰ  0x%04X-0x%04X"
+
+#: src/plugin-tests.c:333
+msgid "Unicode Character Reference"
+msgstr "ਯੂਨੀਕੋਡ ਅੱਖਰ ਸੰਕੇਤ"
+
+#: src/plugin-tests.c:334
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr "ਇਕ ਸਾਰਣੀ ਬਣਾਓ ਜਿਹੜੀ DocBook ਲੇਖ ਵਾਗੂੰ ਯੂਨੀਕੋਡ ਅੱਖਰ ਸਮੂਹ ਦੇ ਭਾਗ ਨੂੰ ਦਿਖਾਵੇ"
+
+#: src/plugin-validate.c:98
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "ਯੋਗਤਾ ਵਾਸਤੇ ਦਸਤਾਵੇਜ਼  \"%s\" ਦੀ ਜਾਂਚ ਨਹੀਂ ਹੋ ਸਕੀ।"
+
+#: src/plugin-validate.c:105
+msgid ""
+"In a future version of Conglomerate we may have a feature that lets you "
+"attach a document type to a document."
+msgstr ""
+"ਇਕਤ੍ਰ ਕਰਨ ਦੇ ਆਉਣ ਵਾਲੇ ਵਰਜਨ ਵਿਚ ਸਾਡੇ ਕੋਲ ਇਕ ਵਿਸ਼ੇਸ਼ਤਾ ਹੋਵੇਗੀ ਜੋ ਤੁਹਾਨੂੰ ਦਸਤਾਵੇਜ਼ ਕਿਸਮ ਨੂੰ "
+"ਦਸਤਾਵੇਜ਼ ਨਾਲ ਜੋੜਨ ਦੇਵੇਗੀ।"
+
+#: src/plugin-validate.c:125
+#, c-format
+msgid "The document \"%s\" is not valid."
+msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਨਹੀਂ ਹੈ।"
+
+#: src/plugin-validate.c:132
+msgid "Click on the \"Details\" button for more information."
+msgstr "ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
+
+#: src/plugin-validate.c:133 src/plugin-website.c:480
+msgid "_Details"
+msgstr "ਵਿਸਥਾਰ"
+
+#: src/plugin-validate.c:147
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr "ਦਸਤਾਵੇਜ਼ \"%s\" ਯੋਗ ਹੈ।"
+
+#: src/plugin-validate.c:167
+msgid "Validate Document"
+msgstr "ਯੋਗ ਠਹਿਰਾਇਆ ਦਸਤਾਵੇਜ਼"
+
+#: src/plugin-validate.c:168 src/plugin-validate.c:171
+#: src/plugin-validate.c:172
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+"ਜਾਂਚ ਕਰੋ ਕਿ ਕੀ ਇਹ ਦਸਤਾਵੇਜ਼  \"ਯੋਗ\" ਹੈ,ਕੀ ਇਹ ਅਨੁਕੂਲ ਦਸਤਾਵੇਜ਼  ਕਿਸਮ ਜਾਂ ਬਣਤਰ ਦੁਆਰਾ ਦਿਤੇ "
+"ਕਾਨੂੰਨਾਂ ਦੇ ਸਮੂਹਾਂ ਦੀ ਤੁਲਣਾ ਕਰਦਾ ਹੈ।"
+
+#: src/plugin-validate.c:170
+msgid "_Validate Document"
+msgstr "ਯੋਗ ਠਹਿਰਾਇਆ ਦਸਤਾਵੇਜ਼"
+
+#: src/plugin-website.c:465
+msgid "Generating website"
+msgstr "ਵੈਬਸਾਈਟ ਬਣਾਉਣਾ"
+
+#: src/plugin-website.c:472
+msgid "Finished generating website."
+msgstr "ਵੈਬਸਾਈਟ ਬਣਾਉਣਾ ਖਤਮ ਹੋਇਆ"
+
+#: src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr "ਇਕਤ੍ਰਤਾ,ਵੈਬਸਾਈਟ ਬਣਾਉਣਾ ਖਤਮ ਨਹੀਂ ਕਰਦੀ ਸੀ"
+
+#: src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr "ਕੋਈ ਇਕ ਸਥਿਤੀ ਗਲਤੀ ਦਰਸਾਉਂਦੀ ਹੈ"
+
+#: src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr "ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ \"ਵਿਸਥਾਰ \" ਬਟਨ ਨੰੂ ਦਬਾੳੁ"
+
+#: src/plugin-website.c:500
+msgid "Generate website"
+msgstr "ਵੈਬਸਾਈਟ ਬਣਾਓ"
+
+#: src/plugin-website.c:501 src/plugin-website.c:504 src/plugin-website.c:505
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "ਵੈਬਸਾਈਟ XML ਵਰਨਣ ਵਿਚੋਂ HTML ਸਫ਼ਾਾਂ ਦੇ ਸਮੂਹ ਪੈਦਾ ਕਰੋ"
+
+#: src/plugin-website.c:503
+msgid "Generate _Website"
+msgstr "ਵੈਬਸਾਈਟ ਬਣਾਓ"
+
+#: src/plugin-xsl.c:316
+msgid "XSL Template Element"
+msgstr "XSL ਨਮੂਨਾ ਅੰਸ਼"
+
+#: src/plugin-xsl.c:317
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "XSL stylesheet ਦੇ ਮੁੱਖ ਕਾਨੂੰਨਾਂ ਨੂੰ ਦੇਖਣ ਵਾਲਾ ਨਮੂਨਾ"
+
+#: src/popup.c:385
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "ਘੁੰਮਾਓ ਬਟਨ %s ਲਾਗੂ ਕਰੋ"
+
+#: src/popup.c:466
+msgid "Remove Span Tag"
+msgstr "ਘੁੰਮਾਓ ਬਟਨ ਹਟਾਓ"
+
+#: src/popup.c:589
+msgid "Remove span tag"
+msgstr "ਘੁੰਮਾਓ ਬਟਨ ਹਟਾਓ"
+
+#: src/popup.c:1049
+msgid "Delete this item"
+msgstr "ਇਸ ਇਕਾਈ ਨੂੰ ਮਿਟਾਓ"
+
+#: src/popup.c:1059
+msgid "Add text node after"
+msgstr "ਪਿਛੋਂ ਪਾਠ ਮੂਲ ਜੋੜੋ"
+
+#: src/popup.c:1067
+msgid "Add text node before"
+msgstr "ਪਹਿਲਾਂ ਪਾਠ ਮੂਲ ਜੋੜੋ"
+
+#: src/popup.c:1078
+msgid "Set the text"
+msgstr "ਪਾਠ ਨੂੰ ਠੀਕ ਕਰੋ"
+
+#: src/popup.c:1111
+msgid "Paste into"
+msgstr "ਵਿੱਚ ਚਿਪਕਾਓ"
+
+#: src/popup.c:1120
+msgid "Paste before"
+msgstr "ਪਹਿਲਾਂ ਚਿਪਕਾਓ"
+
+#: src/popup.c:1129
+msgid "Paste after"
+msgstr "ਪਿਛੋਂ ਚਿਪਕਾਓ"
+
+#: src/popup.c:1148
+msgid "New sub-element"
+msgstr "ਨਵਾਂ ਉਪ ਭਾਗ"
+
+#: src/popup.c:1164
+msgid "New sibling"
+msgstr "ਨਵੀਂ sibling"
+
+#: src/tree.c:35
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "sibling ਪ੍ਰਵੇਸ਼ ਕਰੋ: %s"
+
+#: src/tree.c:75
+#, c-format
+msgid "Insert child: %s"
+msgstr "ਚਾੲਿਲਡ ਪ੍ਰਵੇਸ਼ ਕਰੋ: %s"
+
+#. create description for dialog
+#: src/xmldata.c:473
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr "ਭਾਗ \"%s\" ਯੋਗ ਚਾੲਿਲਡ ਲੋੜਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਲੀਆਂ ਚਾੲਿਲਡ ਕਿਸਮਾਂ ਵਿਚੋਂ ਇਕ ਚੁਣੋ।"
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: src/xmldata.c:478
+msgid "Required Children Choices"
+msgstr "ਲੋੜੀਦੀਆਂ ਚਾੲਿਲਡ ਚੋਣ"
+
+#: src/xmledit.c:235
+msgid "Paste Under"
+msgstr "ਹੇਠਾਂ ਚਿਪਕਾਓ"
+
+#: src/xmledit.c:278
+msgid "Paste Before"
+msgstr "ਪਹਿਲਾਂ ਚਿਪਕਾਓ"
+
+#: src/xmledit.c:320
+msgid "Paste After"
+msgstr "ਪਿਛੋਂ ਚਿਪਕਾਓ"
+
+#: src/xmledit.c:359
+msgid "Source View - Conglomerate"
+msgstr "ਸ੍ਰੋਤ ਦ੍ਰਿਸ਼ ਇਕਤ੍ਰ ਕਰਨਾ"
+
+#~ msgid "Text: \"<span foreground=\"%s\">%s</span>\""
+#~ msgstr "ਪਾਠ: \"<span foreground=\"%s\">%s</span>\""
+
+#~ msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+#~ msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+
+#~ msgid "<small>(No description available)</small>"
+#~ msgstr "<small>(ਕੋਈ ਵਰਨਣ ਮੌਜੂਦ ਨਹੀਂ)</small>"
+
+#~ msgid "/Debug/Document Types"
+#~ msgstr "/ਡੀਬੱਗ/ ਦਸਤਾਵੇਜ਼  ਕਿਸਮ"
