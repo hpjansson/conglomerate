@@ -1,3 +1,10 @@
+2004-10-14  Douglas Burke  <dburke@cfa.harvard.edu>
+
+	* cong-attribute-editor-enumeration.c:
+
+	Changed to use a GPtrArray to store the enumerated values rather than
+	directly use the xmlAttributePtr supplied to the constructor.
+ 
 2004-10-13  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec-element-gxx.h: 

@@ -33,12 +33,17 @@
 struct CongAttributeEditorENUMERATIONDetails
 {
 	GtkWidget *combo_box;
-	xmlAttributePtr attr_ptr;
-
+	GPtrArray *combo_array;
 	guint handler_id_changed;
 };
 
 /* Internal function declarations: */
+static void
+finalize (GObject *object);
+
+static void
+dispose (GObject *object);
+
 static void
 set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
@@ -63,6 +68,9 @@ cong_attribute_editor_enumeration_class_init (CongAttributeEditorENUMERATIONClas
 
 	editor_klass->set_attribute_handler = set_attribute_handler;
 	editor_klass->remove_attribute_handler = remove_attribute_handler;
+
+	G_OBJECT_CLASS (klass)->finalize = finalize;
+	G_OBJECT_CLASS (klass)->dispose = dispose;
 }
 
 static void
@@ -103,25 +111,29 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 					 attribute_name,
 					 attr);
 
-	/*
-	 * We store the xmlAttributePtr in the object so that we can access the values
-	 * from the on_selection_changed handler. An alternative implementation would
-	 * be to create a list of the enumerated values and store that in the object,
-	 * but that involves more work for a small speed gain
-	 *
-	 * Is accessing the xmlAttributePtr in the handler going to cause problems
-	 * e.g. if the DTD changes, as discussed in bug # 122028 ?
-	 */
-	PRIVATE(attribute_editor_enumeration)->attr_ptr = attr;
-
 	/* Build widgetry: */
-	PRIVATE(attribute_editor_enumeration)->combo_box = gtk_combo_box_new_text();
+	PRIVATE(attribute_editor_enumeration)->combo_box = gtk_combo_box_new_text ();
+	PRIVATE(attribute_editor_enumeration)->combo_array = g_ptr_array_new ();
 	
+	/*
+	 * We have one more element in the combo box than we do in the "combo array"
+	 * since the first item indicates that the attribute is not set.
+	 */
 	gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
 				   _("(unspecified)"));
 	for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
+		/*
+		 * We do a deep copy of the items in the attr list. This is because
+		 * I have seen bug # 122028, which is about storing xmlAttributePtr when
+		 * the DTD may change. For this case I think it is probably over-kill,
+		 * in that the widget would need to be torn down and re-built if the
+		 * DTD were to change, but I have left it in just in case.
+		 */
+		gchar *text = g_strdup (enum_ptr->name);
 		gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
-					   enum_ptr->name);
+					   text);
+		g_ptr_array_add (PRIVATE(attribute_editor_enumeration)->combo_array,
+				 (gpointer)text );
 	}
 	
 	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->combo_box),
@@ -171,6 +183,31 @@ cong_attribute_editor_enumeration_new (CongDocument *doc,
 
 /* Internal function definitions: */
 static void
+finalize (GObject *object)
+{
+	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
+
+	g_free (PRIVATE(attribute_editor_enumeration));
+	PRIVATE(attribute_editor_enumeration) = NULL;
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
+dispose (GObject *object)
+{
+	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION(object);
+
+	if (PRIVATE(attribute_editor_enumeration)->combo_array) {
+		/* free the array of enumerated values and the values themselves */
+		g_ptr_array_free (PRIVATE(attribute_editor_enumeration)->combo_array, 1);
+		PRIVATE(attribute_editor_enumeration)->combo_array = NULL;
+	}
+
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
+}
+
+static void
 set_attribute_handler (CongAttributeEditor *attribute_editor)
 {
 	do_refresh (CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor));
@@ -193,17 +230,18 @@ do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 
 	/* only loop if the attribute is defined */
 	if (NULL!=attr_value) {
-		xmlEnumerationPtr enum_ptr;
-		guint enum_ctr;
-		
-		for (enum_ptr=PRIVATE(attribute_editor_enumeration)->attr_ptr->tree, enum_ctr=1;
-		     enum_ptr;
-		     enum_ptr=enum_ptr->next, enum_ctr++) {
-			/* is this the value of the current attribute? */
-			if (cong_util_attribute_value_equality (attr_value,enum_ptr->name))
-				enum_pos = enum_ctr;
+		GPtrArray *gparray = PRIVATE(attribute_editor_enumeration)->combo_array;
+		guint ctr;
+		for (ctr=0; ctr<gparray->len && enum_pos==0; ctr++) {
+			/*
+			 * Is this the value of the current attribute?
+			 * If so we need to add on one to account for the first
+			 * element of the combo array not being a member of the combo_array
+			 */
+			if (cong_util_attribute_value_equality (attr_value,
+								(gchar*)g_ptr_array_index (gparray,ctr)))
+				enum_pos = ctr + 1;
 		}
-
 		g_free (attr_value);
 	}
 
@@ -222,18 +260,15 @@ static void
 on_selection_changed (GtkComboBox *combo_box,
 		      CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 {
-	xmlEnumerationPtr enum_ptr;
-	gint selected, ctr;
+	gint selected;
 
 	selected = gtk_combo_box_get_active (combo_box);
 	if (selected) {
-		enum_ptr = PRIVATE(attribute_editor_enumeration)->attr_ptr->tree;
-		for (ctr=1; ctr<selected; ctr++) {
-			enum_ptr = enum_ptr->next;
-		}
-		g_assert (enum_ptr!=NULL); /* this should not be possible, but just in case */
+		/* note the -1 offset between the combo box and combo array indexes */
+		gchar *newval = (gchar *)g_ptr_array_index (PRIVATE(attribute_editor_enumeration)->combo_array,
+							    selected-1);
 		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
-						     enum_ptr->name);
+						     newval);
 	} else {
 		/* this deletes the attribute */
 		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
