@@ -143,8 +143,7 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	GtkWidget *error_list_view;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *text_renderer;
-	CongErrorReport report;
-
+	CongErrorReport *report;
 
 	g_return_val_if_fail(parser_result, NULL);
 
@@ -233,15 +232,16 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (error_list_view), column);
 
-
-	report.parser_result = parser_result;
-	report.store = store;
-	report.text_buffer = text_buffer;
-	report.text_view = text_view;
+	/* FIXME: this will leak memory */
+	report = g_new0(CongErrorReport,1);
+	report->parser_result = parser_result;
+	report->store = store;
+	report->text_buffer = text_buffer;
+	report->text_view = text_view;
 	gtk_signal_connect(GTK_OBJECT(error_list_view),
 			   "row-activated",
 			   GTK_SIGNAL_FUNC(on_row_activated),
-			   &report);
+			   report);
 
 	scrolled_window2 = gtk_scrolled_window_new(NULL, NULL);
 		
