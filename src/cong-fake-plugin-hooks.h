@@ -25,8 +25,12 @@
 #ifndef __CONG_FAKE_PLUGIN_HOOKS_H__
 #define __CONG_FAKE_PLUGIN_HOOKS_H__
 
+#include "cong-app.h"
+
 G_BEGIN_DECLS
 
+void
+cong_fake_plugin_hook_register_the_whole_shebang (CongApp *app);
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
 /* plugin-abiword.c: */

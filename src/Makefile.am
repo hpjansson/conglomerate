@@ -219,6 +219,7 @@ conglomerate_SOURCES =      \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
   cong-error-tests.c        \
+  cong-fake-plugin-hooks.c  \
   cong-file-new.c           \
   cong-file-open.c          \
   cong-file-save.c          \

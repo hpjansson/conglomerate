@@ -1,3 +1,9 @@
+2004-08-08  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-fake-plugin-hooks.h, cong-fake-plugin-hooks.c, cong-app.c, Makefile.am:
+
+	Added new file: cong-fake-plugin-hooks.c, to contain the part of cong-app.c that was always changing when adding new plugins
+
 2004-08-05  Michèle Garoche  <michele.garoche@easyconnect.fr>
  
  	* cong-menus.c: 
