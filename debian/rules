@@ -135,7 +135,8 @@ binary-arch: build-arch install-arch
 	dh_shlibdeps -a
 	dh_gencontrol -a -v -- -VUpstream-Version=$(upstreamversion)
 	dh_md5sums -a
-	dh_builddeb -a
+	dh_builddeb -p conglomerate
+	##dh_builddeb -p conglomerate-dbg
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install install-indep install-arch patch
