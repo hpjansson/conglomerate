@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-27 David Malcolm
+
+	* cong-span-text-editor.c
+
+	Layout fixes
+	
 2002-11-26 David Malcolm
 
 	* Makefile.am

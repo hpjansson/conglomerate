@@ -25,9 +25,13 @@
 #include "global.h"
 #include "cong-editor-widget-impl.h"
 
+#define H_SPACING (4)
+
+static int visit_lines(CongElementEditor *element_editor, gboolean render);
+
 typedef struct CongTextSpan CongTextSpan;
 
-/* Struct representing a run of characters within the plaintext cache from a specific text node: */
+/* Struct representing a run of characters within the plaintext cache from a specific text node; not sure if this ever get used: */
 struct CongTextSpan
 {
 	int first_byte_offset;
@@ -62,23 +66,6 @@ struct CongSpanTextEditor
 	PangoLayout *pango_layout;
 };
 
-#if 0
-typedef struct CongSpanStack CongSpanStack;
-typedef struct CongSpanStackEntry CongSpanStackEntry;
-
-struct CongSpanStack
-{
-	GList *bottom_of_stack;
-	GList *top_of_stack;
-};
-
-struct CongSpanStackEntry
-{
-	CongNodePtr 
-};
-#endif
-
-
 static void regenerate_plaintext(CongSpanTextEditor *span_text_editor);
 
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor);
@@ -101,10 +88,60 @@ static CongElementEditorClass span_text_editor_class =
 	span_text_editor_on_button_press
 };
 
-static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node)
+/* Strips repeated whitespace from strings; converts all into spaces: */
+gchar* strip_whitespace_from_string(const gchar* input_string)
+{
+	gunichar *unichar_string;
+	glong num_chars;
+	gchar *result_string;
+	gchar *dst;
+	int i;
+	gboolean last_char_was_space=FALSE;
+
+	g_return_val_if_fail(input_string, NULL);
+
+	unichar_string = g_utf8_to_ucs4_fast(input_string,
+                                             -1,
+                                             &num_chars);
+
+	result_string = g_malloc((num_chars*8)+1);
+
+	dst = result_string;
+
+	for (i=0;i<num_chars;i++) {
+		gunichar c = unichar_string[i];
+		gboolean this_char_is_space = g_unichar_isspace(c);
+
+		if (this_char_is_space) {
+
+			if (!last_char_was_space) {
+				
+				/* Write a space into the buffer: */
+				*(dst++) = ' ';
+			}
+
+		} else {
+
+			/* Write character as utf-8 into buffer: */
+			dst += g_unichar_to_utf8(c, dst);
+		}
+		
+		last_char_was_space = this_char_is_space;
+	}
+
+	g_free(unichar_string);
+
+	/* Terminate the string: */
+	*dst = '\0';
+
+	return result_string;	
+}
+
+static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node, gboolean strip_whitespace)
 {
 	gchar *new_value;
 	CongTextSpan *text_span;
+	gchar *string_to_append;
 
 	g_return_if_fail(span_text_editor);
 	g_return_if_fail(node);
@@ -114,14 +151,23 @@ static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node)
 	/* Add stuff to the list of spans */
 	text_span = g_new0(CongTextSpan,1);
 	text_span->first_byte_offset = strlen(span_text_editor->plain_text);
-	text_span->byte_count = strlen(node->content);
+
+	if (strip_whitespace) {
+		string_to_append = strip_whitespace_from_string(node->content);
+	} else {
+		string_to_append = g_strdup(node->content);
+	}
+
+	text_span->byte_count = strlen(string_to_append);
 	text_span->text_node = node;
 	g_list_append(span_text_editor->list_of_cong_text_span, text_span);
-
-	/* Add to the big plaintext string: */
-	new_value = g_strdup_printf("%s%s", span_text_editor->plain_text, node->content);
-	g_free(span_text_editor->plain_text);
 	
+	/* Add to the big plaintext string: */
+	new_value = g_strdup_printf("%s%s", span_text_editor->plain_text, string_to_append);
+
+	g_free(string_to_append);	
+	g_free(span_text_editor->plain_text);	
+
 	span_text_editor->plain_text = new_value;
 
 }
@@ -129,12 +175,14 @@ static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node)
 /**
  * Recursively traverse the node tree, calling add_text on text nodes and registering CongTextRanges for the spans
  */
-static void regenerate_plaintext_recursive(CongSpanTextEditor *span_text_editor, CongNodePtr node, int depth)
+static void regenerate_plaintext_recursive(CongSpanTextEditor *span_text_editor, CongNodePtr node, int depth, gboolean strip_whitespace)
 {
 	g_return_if_fail(span_text_editor);
 
 	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
-		add_text(span_text_editor,node);
+		add_text(span_text_editor,
+			 node,
+			 strip_whitespace);
 	} else {
 		CongNodePtr child;
 
@@ -158,7 +206,7 @@ static void regenerate_plaintext_recursive(CongSpanTextEditor *span_text_editor,
 
 		/* Recurse: */
 		for (child=node->children; child; child = child->next) {
-			regenerate_plaintext_recursive(span_text_editor, child, (text_range!=NULL)?depth+1:depth);
+			regenerate_plaintext_recursive(span_text_editor, child, (text_range!=NULL)?depth+1:depth, strip_whitespace);
 		}
 
 		if (text_range) {
@@ -186,7 +234,10 @@ static void regenerate_plaintext(CongSpanTextEditor *span_text_editor)
 {
 	CongNodePtr iter;
 	GList *list_iter;
+	gboolean strip_whitespace = TRUE; /* for now */
+
 	g_return_if_fail(span_text_editor);
+
 
 	/* Clean up any existing representation: */
 	if (span_text_editor->plain_text) {
@@ -213,12 +264,12 @@ static void regenerate_plaintext(CongSpanTextEditor *span_text_editor)
 	iter = span_text_editor->element_editor.first_node; 
 
 	while (1) {
-		gchar *cleaned_text;
-		gchar *new_value;
-
 		g_assert(iter);
 
-		regenerate_plaintext_recursive(span_text_editor, iter, 0);
+		regenerate_plaintext_recursive(span_text_editor, 
+					       iter, 
+					       0, 
+					       strip_whitespace);
 
 		if (iter == span_text_editor->element_editor.final_node) {
 			break;
@@ -283,11 +334,16 @@ static void span_text_editor_get_size_requisition(CongElementEditor *element_edi
 	CongNodePtr node = element_editor->first_node;
 
 	pango_layout_set_width(span_text->pango_layout,
-			       width_hint*PANGO_SCALE);
+			       (width_hint-H_SPACING)*PANGO_SCALE);
 
+#if 1
+	element_editor->requisition.width = width_hint;
+	element_editor->requisition.height = visit_lines(element_editor, FALSE);
+#else
 	pango_layout_get_pixel_size(span_text->pango_layout,
 				    &element_editor->requisition.width,
 				    &element_editor->requisition.height);
+#endif
 }
 
 static void span_text_editor_allocate_child_space(CongElementEditor *element_editor)
@@ -295,17 +351,48 @@ static void span_text_editor_allocate_child_space(CongElementEditor *element_edi
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	pango_layout_set_width(span_text->pango_layout,
-			       element_editor->window_area.width*PANGO_SCALE);
+			       (element_editor->window_area.width-H_SPACING)*PANGO_SCALE);
+}
+
+struct CalculateSpanHeightData
+{
+	CongSpanTextEditor *span_text;
+	PangoLayoutLine *line;
+
+	int max_depth;
+};
+
+static void calculate_span_height(CongNodePtr key, 
+				  CongTextRange *text_range,
+				  struct CalculateSpanHeightData *data)
+{
+	/* is this span present on the given line? */
+	if (text_range->final_byte_offset < data->line->start_index) {
+		/* Reject; the range ends before this line */
+		return;
+	}
+	
+	if (text_range->first_byte_offset > data->line->start_index+data->line->length) {
+		/* Reject; the range starts after this line */
+		return;
+	}
+
+	/* OK; at least part of this range is present on this line: */
+	if (data->max_depth<text_range->depth) {
+		data->max_depth = text_range->depth;
+	}
 }
 
 struct RenderTextRangeData
 {
 	CongSpanTextEditor *span_text;
 	PangoLayoutLine *line;
+
 	int offset_x;
 	int offset_y;
 	int max_x;
 	GdkDrawable *drawable;
+	int deepest_depth_for_line;
 };
 
 static void render_text_range(CongNodePtr key, 
@@ -346,7 +433,7 @@ static void render_text_range(CongNodePtr key,
 
 			gdk_draw_line(data->drawable, gc, 
 				      start_x, y, 
-				      start_x, y - 2);
+				      start_x, y + 2);
 		} else {
 			/* range started somewhere before this line: */
 			start_x = data->offset_x;
@@ -363,39 +450,126 @@ static void render_text_range(CongNodePtr key,
 
 			gdk_draw_line(data->drawable, gc, 
 				      end_x, y, 
-				      end_x, y - 2);
+				      end_x, y + 2);
 		} else {
 			/* range finishes somewhere after this line: */
 			end_x = data->max_x;
 		}
-			
+
 		width = end_x-start_x;
 
+		/* FIXME: replace with a Pango call */
 		text_width = gdk_string_width(span_font->gdk_font, 
 					      span_name);
-		if (text_width < width - 6)
-		{
-			int text_y = y + (span_font->asc + span_font->desc) / 2;
-			
+		if (text_width < width - 6) {
+			int text_y = y + 2 + (span_font->asc + span_font->desc) / 2;
+				
 			/* Draw text and lines: */
-			gdk_draw_string(data->drawable, span_font->gdk_font, gc, start_x + 1 + (width - text_width) / 2,
-					text_y, span_name);
+			/* FIXME:  replace this with a Pango call */
+			gdk_draw_string(data->drawable, 
+					span_font->gdk_font, 
+					gc, 
+					start_x + 1 + (width - text_width) / 2,
+					text_y, 
+					span_name);
 			gdk_draw_line(data->drawable, gc, 
-				      start_x, y, 
-				      start_x - 1 + (width - text_width) / 2, y);
+				      start_x, y + 2, 
+				      start_x - 1 + (width - text_width) / 2, y + 2);
 			gdk_draw_line(data->drawable, gc, 
-				      end_x + 1 - (width - text_width) / 2, y, 
-				      end_x, y);
-		}
-		else
-		{
-			/* Draw line: */			
+				      end_x + 1 - (width - text_width) / 2, y + 2, 
+				      end_x, y + 2);
+		} else {
+				/* Draw line: */			
 			gdk_draw_line(data->drawable, gc, 
-				      start_x, y, 
-				      end_x, y);		
+				      start_x, y + 2, 
+				      end_x, y + 2);		
+		}			
+	}
+}
+
+/**
+ * Return value: total height used
+ */
+static int visit_lines(CongElementEditor *element_editor, gboolean render)
+{
+	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
+	GtkWidget *w = GTK_WIDGET(editor_widget);
+
+	GSList *line_iter;
+	GList *text_span_iter = span_text->list_of_cong_text_span;	
+
+	int y = element_editor->window_area.y;
+
+	for (line_iter=pango_layout_get_lines(span_text->pango_layout); line_iter; line_iter = line_iter->next) {
+		struct CalculateSpanHeightData calculate_span_height_data;				
+
+		PangoRectangle logical_rect;
+		
+		PangoLayoutLine *line = line_iter->data;
+		g_assert(line);
+
+		pango_layout_line_get_pixel_extents(line,
+						    NULL,
+						    &logical_rect);
+		
+#if 0
+		g_message("ink_rect: (%i,%i,%i,%i), logical_rect:(%i,%i,%i,%i)",
+			  ink_rect.x,
+			  ink_rect.y,
+			  ink_rect.width,
+			  ink_rect.height,
+			  logical_rect.x,
+			  logical_rect.y,
+			  logical_rect.width,
+			  logical_rect.height);
+#endif
+			
+
+		if (render) {
+			/* Render the PangoLayoutLine: */
+			gdk_draw_layout_line(GDK_DRAWABLE(w->window),
+					     w->style->black_gc,
+					     element_editor->window_area.x + H_SPACING,
+					     (y - logical_rect.y),
+					     line);
 		}
 
+		/* Calculate height of all spans applying to this line: */
+		{
+			calculate_span_height_data.span_text = span_text;
+			calculate_span_height_data.max_depth = 0;
+			calculate_span_height_data.line = line;
+			
+			g_assert(span_text->hash_of_node_to_text_range);
+			g_hash_table_foreach(span_text->hash_of_node_to_text_range,
+					     calculate_span_height,
+					     &calculate_span_height_data);
+		}
+		
+		/* Render spans: */
+		if (render) {
+			struct RenderTextRangeData render_text_range_data;
+			render_text_range_data.span_text = span_text;
+			render_text_range_data.line = line;
+			render_text_range_data.offset_x = element_editor->window_area.x + H_SPACING;
+			render_text_range_data.offset_y = y + logical_rect.height + (calculate_span_height_data.max_depth * span_text->tag_height);
+			render_text_range_data.max_x = element_editor->window_area.x + element_editor->window_area.width;
+			render_text_range_data.drawable = GDK_DRAWABLE(w->window);				
+			
+			g_assert(span_text->hash_of_node_to_text_range);
+			g_hash_table_foreach(span_text->hash_of_node_to_text_range,
+					     render_text_range,
+					     &render_text_range_data);
+		}
+		
+#define INTER_LINE_SPACING (8)
+
+		y += logical_rect.height + INTER_LINE_SPACING + (calculate_span_height_data.max_depth * span_text->tag_height);
 	}
+
+	return y - element_editor->window_area.y;
 }
 
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
@@ -414,42 +588,9 @@ static void span_text_editor_recursive_render(CongElementEditor *element_editor,
 	if (gdk_rectangle_intersect((GdkRectangle*)window_rect,
 				     &element_editor->window_area,
 				     &intersected_area)) {
-
+		
 #if 1
-		GSList *line_iter;
-		GList *text_span_iter = span_text->list_of_cong_text_span;	
-
-		int y = element_editor->window_area.y;
-
-		for (line_iter=pango_layout_get_lines(span_text->pango_layout); line_iter; line_iter = line_iter->next) {
-			PangoLayoutLine *line = line_iter->data;
-			g_assert(line);
-
-			gdk_draw_layout_line(GDK_DRAWABLE(w->window),
-					     w->style->black_gc,
-					     element_editor->window_area.x,
-					     y,
-					     line);
-
-			/* Render spans: */
-			{
-				struct RenderTextRangeData render_text_range_data;
-
-				render_text_range_data.span_text = span_text;
-				render_text_range_data.line = line;
-				render_text_range_data.offset_x = element_editor->window_area.x;
-				render_text_range_data.offset_y = y+5;
-				render_text_range_data.max_x = element_editor->window_area.x + element_editor->window_area.width;
-				render_text_range_data.drawable = GDK_DRAWABLE(w->window);				
-
-				g_assert(span_text->hash_of_node_to_text_range);
-				g_hash_table_foreach(span_text->hash_of_node_to_text_range,
-						     render_text_range,
-						     &render_text_range_data);
-			}
-
-			y+=25; /* for now; will want to have the line cache as before */
-		}
+		visit_lines(element_editor, TRUE);
 #else
 		gdk_draw_layout(GDK_DRAWABLE(w->window),
 				w->style->black_gc,
@@ -458,8 +599,7 @@ static void span_text_editor_recursive_render(CongElementEditor *element_editor,
 				span_text->pango_layout);
 
 		/*  printf("plaintext:\"%s\"\n", span_text->plain_text); */
-#endif
-		
+#endif		
 	}
 
 }
