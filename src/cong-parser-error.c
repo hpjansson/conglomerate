@@ -315,7 +315,7 @@ void on_parser_error_details(gpointer data)
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
-static GtkDialog*
+GtkDialog*
 cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
 							  CongParserResult *parser_result)
 {
@@ -395,6 +395,36 @@ cong_ui_parse_buffer (const char* buffer,
 #endif
 
 	
+}
+
+xmlParserCtxtPtr
+cong_parse_from_filename (const gchar* string_uri,
+			  CongParserResult *parser_result)
+{
+	xmlParserCtxtPtr ctxt;
+
+	g_return_val_if_fail (string_uri, NULL);
+	g_return_val_if_fail (parser_result, NULL);
+
+	ctxt = xmlCreateFileParserCtxt	(string_uri);
+	if (ctxt == NULL) return(NULL);
+	
+	g_assert(ctxt->sax);
+	ctxt->sax->error=on_sax_error;
+	ctxt->sax->warning=on_sax_warning;
+	ctxt->loadsubset = TRUE; /* try to get DTDs to be loaded */
+	
+	xmlCatalogSetDebug(TRUE);
+	
+	g_assert(global_parser_result==NULL);
+	
+	global_parser_result = parser_result;
+	
+	xmlParseDocument(ctxt);
+	
+	global_parser_result = NULL;		
+
+	return ctxt;
 }
 
 xmlParserCtxtPtr

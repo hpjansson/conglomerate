@@ -1,5 +1,9 @@
 2003-10-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-parser-error.c, cong-parser-error.h
+
+	Support for parsing from a libxml2 URI
+
 	* cong-editor-node-text.c, cong-file-properties.c, cong-primary-window.c, cursor.c, plugin-cleanup-source.c, popup.c
 
 	Fixed some warnings and removed dead code

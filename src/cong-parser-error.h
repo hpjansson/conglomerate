@@ -40,6 +40,14 @@ void cong_parser_result_add_issue(CongParserResult *result, enum CongIssueType t
 
 GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result);
 
+GtkDialog*
+cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
+							  CongParserResult *parser_result);
+
+xmlParserCtxtPtr
+cong_parse_from_filename (const gchar* string_uri,
+			  CongParserResult *parser_result);
+
 xmlParserCtxtPtr
 cong_parse_from_memory (const char* buffer, 
 			GnomeVFSFileSize size,
