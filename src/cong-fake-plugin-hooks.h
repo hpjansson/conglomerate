@@ -56,6 +56,10 @@ gboolean plugin_fo_plugin_configure(CongPlugin *plugin);
 gboolean plugin_lists_plugin_register(CongPlugin *plugin);
 gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
 
+/* plugin-paragraph.c: */
+gboolean plugin_paragraph_plugin_register(CongPlugin *plugin);
+gboolean plugin_paragraph_plugin_configure(CongPlugin *plugin);
+
 /* plugin-sgml.c: */
 gboolean plugin_sgml_plugin_register(CongPlugin *plugin);
 gboolean plugin_sgml_plugin_configure(CongPlugin *plugin);

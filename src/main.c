@@ -73,36 +73,41 @@ cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* 
 	if (GNOME_VFS_OK!=vfs_result) {
 		return vfs_result;
 	} else {
-		GnomeVFSFileInfo info;
+		GnomeVFSFileInfo *info;
 		*buffer=NULL;
 		
+		info = gnome_vfs_file_info_new ();
+
 		/* Get the size of the file: */
 		vfs_result = gnome_vfs_get_file_info_from_handle(vfs_handle,
-								 &info,
+								 info,
 								 GNOME_VFS_FILE_INFO_DEFAULT);
 		if (GNOME_VFS_OK!=vfs_result) {
 			gnome_vfs_close(vfs_handle);
+			gnome_vfs_file_info_unref (info);
 			
 			return vfs_result;
 		}
 
-		if (!(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)) {
+		if (!(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)) {
 			gnome_vfs_close(vfs_handle);
+			gnome_vfs_file_info_unref (info);
 			
 			return GNOME_VFS_ERROR_IO; /* FIXME: is this appropriate? */
 		}
 
 		
 		/* Allocate the buffer: */
-		*buffer = g_malloc(info.size);
+		*buffer = g_malloc(info->size);
 		
 		/* Read the file into the buffer: */
-		vfs_result = cong_vfs_read_bytes(vfs_handle, *buffer, info.size);
+		vfs_result = cong_vfs_read_bytes(vfs_handle, *buffer, info->size);
 		
 		if (GNOME_VFS_OK!=vfs_result) {
 			
 			g_free(*buffer);
 			gnome_vfs_close(vfs_handle);
+			gnome_vfs_file_info_unref (info);
 
 			*buffer=NULL;
 			
@@ -110,7 +115,10 @@ cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* 
 		}
 		
 		gnome_vfs_close(vfs_handle);
-		*size = info.size;
+		
+		*size = info->size;
+		
+		gnome_vfs_file_info_unref (info);
 
 		return GNOME_VFS_OK;
 	}
@@ -284,6 +292,10 @@ void main_load_plugins(void)
 	register_plugin("dtd",
 			plugin_dtd_plugin_register,
 			plugin_dtd_plugin_configure);
+
+	register_plugin("paragraph",
+			plugin_paragraph_plugin_register,
+			plugin_paragraph_plugin_configure);
 }
 
 int main( int   argc,
