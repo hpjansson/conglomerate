@@ -1,5 +1,9 @@
 2004-10-26  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-node.c, cong-node.h: 
+
+	Added some news ways to create nodes
+
 	* cong-language.c: 
 
 	Allow language to be NULL; uses this rather than empty string in

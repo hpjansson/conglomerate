@@ -926,6 +926,46 @@ cong_node_new_element_from_dispspec (CongDispspecElement *element,
 			      NULL);
 }
 
+CongNodePtr 
+cong_node_new_element_full (xmlDocPtr xml_doc, 
+			    const gchar *ns_uri,
+			    const gchar *local_name)
+{
+	xmlNsPtr xml_ns;
+
+	g_return_val_if_fail (xml_doc, NULL);
+	g_return_val_if_fail (local_name, NULL);
+
+	xml_ns = xmlSearchNsByHref (xml_doc,
+				    (xmlNodePtr)xml_doc, /* FIXME: is this correct? */
+				    ns_uri);
+	return xmlNewDocNode (xml_doc,
+			      xml_ns,
+			      local_name, 
+			      NULL);
+}
+
+CongNodePtr 
+cong_node_new_element_full_with_content (xmlDocPtr xml_doc, 
+					 const gchar *ns_uri,
+					 const gchar *local_name,
+					 const gchar *content)
+{
+	xmlNsPtr xml_ns;
+
+	g_return_val_if_fail (xml_doc, NULL);
+	g_return_val_if_fail (local_name, NULL);
+	g_return_val_if_fail (content, NULL);
+
+	xml_ns = xmlSearchNsByHref (xml_doc,
+				    (xmlNodePtr)xml_doc, /* FIXME: is this correct? */
+				    ns_uri);
+	return xmlNewDocNode (xml_doc,
+			      xml_ns,
+			      local_name, 
+			      content);
+}
+
 /**
  * cong_node_new_text:
  * @text:

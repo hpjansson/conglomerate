@@ -192,7 +192,15 @@ cong_node_new_element (xmlNsPtr ns,
 CongNodePtr 
 cong_node_new_element_from_dispspec (CongDispspecElement *element,
 				     CongDocument *doc);
-
+CongNodePtr 
+cong_node_new_element_full (xmlDocPtr xml_doc, 
+			    const gchar *ns_uri,
+			    const gchar *local_name);
+CongNodePtr 
+cong_node_new_element_full_with_content (xmlDocPtr xml_doc, 
+					 const gchar *ns_uri,
+					 const gchar *local_name,
+					 const gchar *content);
 CongNodePtr
 cong_node_new_text (const gchar *text, 
 		    CongDocument *doc);
