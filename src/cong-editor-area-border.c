@@ -30,7 +30,10 @@
 
 struct CongEditorAreaBorderDetails
 {
-	guint pixels;
+	guint left_pixels;
+	guint right_pixels;
+	guint top_pixels;
+	guint bottom_pixels;
 };
 
 /* Method implementation prototypes: */
@@ -67,19 +70,28 @@ cong_editor_area_border_instance_init (CongEditorAreaBorder *area_border)
 CongEditorArea*
 cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
 				   CongEditorWidget3 *editor_widget,
-				   guint pixels)     
+				   guint left_pixels,
+				   guint right_pixels,
+				   guint top_pixels,
+				   guint bottom_pixels)
 {
 	cong_editor_area_bin_construct (CONG_EDITOR_AREA_BIN(area_border),
 					editor_widget);
 	
-	PRIVATE(area_border)->pixels = pixels;
+	PRIVATE(area_border)->left_pixels = left_pixels;
+	PRIVATE(area_border)->right_pixels = right_pixels;
+	PRIVATE(area_border)->top_pixels = top_pixels;
+	PRIVATE(area_border)->bottom_pixels = bottom_pixels;
 	
 	return CONG_EDITOR_AREA (area_border);
 }
 
 CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
-			     guint pixels)
+			     guint left_pixels,
+			     guint right_pixels,
+			     guint top_pixels,
+			     guint bottom_pixels)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
 	g_message("cong_editor_area_border_new");
@@ -87,7 +99,10 @@ cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
 	return cong_editor_area_border_construct
 		(g_object_new (CONG_EDITOR_AREA_BORDER_TYPE, NULL),
 		 editor_widget,
-		 pixels);
+		 left_pixels,
+		 right_pixels,
+		 top_pixels,
+		 bottom_pixels);
 }
 
 /* Method implementation definitions: */
@@ -99,7 +114,7 @@ calc_requisition (CongEditorArea *area,
 	CongEditorAreaBorder *border = CONG_EDITOR_AREA_BORDER(area);
 	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area);
 	CongEditorArea *child;
-	gint border_pixels = (2 * PRIVATE(border)->pixels);
+	gint border_pixels;
 	gint child_req;
 
 	child = cong_editor_area_bin_get_child(bin);
@@ -110,6 +125,12 @@ calc_requisition (CongEditorArea *area,
 							      width_hint);
 	} else {
 		child_req = 0;
+	}
+
+	if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+		border_pixels = PRIVATE(border)->left_pixels + PRIVATE(border)->right_pixels;
+	} else {
+		border_pixels = PRIVATE(border)->top_pixels + PRIVATE(border)->bottom_pixels;
 	}
 
 	return child_req + border_pixels;
@@ -127,9 +148,9 @@ allocate_child_space (CongEditorArea *area)
 		const GdkRectangle *rect = cong_editor_area_get_window_coords(area);
 
 		cong_editor_area_set_allocation (child,
-						 rect->x + PRIVATE(border)->pixels,
-						 rect->y + PRIVATE(border)->pixels,
-						 rect->width - (2*PRIVATE(border)->pixels),
-						 rect->height - (2*PRIVATE(border)->pixels));
+						 rect->x + PRIVATE(border)->left_pixels,
+						 rect->y + PRIVATE(border)->top_pixels,
+						 rect->width - (PRIVATE(border)->left_pixels + PRIVATE(border)->right_pixels),
+						 rect->height - (PRIVATE(border)->top_pixels + PRIVATE(border)->bottom_pixels));
 	}
 }

@@ -340,13 +340,15 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	CongEditorArea *child_area;
 	CongNodePtr prev_node;
 
-#if 0
+#if 1
 	child_area = cong_editor_area_border_new (cong_editor_node_get_widget (editor_node),
+						  5,
+						  0,
+						  5,
 						  5);
 
 	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(child_area),
 					      CONG_EDITOR_AREA(child_flow_holder));
-	/* we need to store these child areas for the pack_after below to work: */
 #else
 	child_area = CONG_EDITOR_AREA(child_flow_holder);
 #endif
@@ -366,7 +368,7 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 
 		cong_editor_area_composer_pack_after (PRIVATE(area_flow_holder_blocks)->outer_compose,
 						      child_area,
-						      CONG_EDITOR_AREA(prev_flow_holder),
+						      cong_editor_area_get_parent(CONG_EDITOR_AREA(prev_flow_holder)),
 						      FALSE,
 						      FALSE,
 						      0);

@@ -56,11 +56,17 @@ cong_editor_area_border_get_type (void);
 CongEditorArea*
 cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
 				   CongEditorWidget3 *editor_widget,
-				   guint pixels);
+				   guint left_pixels,
+				   guint right_pixels,
+				   guint top_pixels,
+				   guint bottom_pixels);
 
 CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,
-			     guint pixels);
+			     guint left_pixels,
+			     guint right_pixels,
+			     guint top_pixels,
+			     guint bottom_pixels);
 
 G_END_DECLS
 
