@@ -49,58 +49,11 @@
 #define DEBUG_IM_CONTEXT 1
 
 /* 
-   The notes below are no longer true; see notes about entities in header file.
+   The CongEditorWidget3 maintains a hash table from CongTraversalNodes to CongEditorNodes.
 
-   OLD IMPLEMENTATION NOTES
-
-   The CongEditorWidget3 maintains a hash table from xml doc nodes to CongEditorNodes.
-
-   A CongEditorNode exists for an xml node iff the xml node exists within the tree i.e. you can currently
-   trace a path back from the node up to root of the xml tree,
-
-   The widget holds references to the CongEditorNodes it is storing in its hash table; these should (I think) be the only references
+   The widget holds references to the CongEditorNodes it is storing in this hash table; these should (I think) be the only references
    on the EditorNodes.
 */
-
-#if 0
-gboolean
-cong_editor_widget3_node_should_have_editor_node (CongNodePtr node);
-
-gboolean
-cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
-					      CongNodePtr node);
-
-typedef struct EditorMapping EditorMapping;
-
-/* A per-xml-node struct that maps from traversal_parent ptrs to editor_nodes: */
-struct EditorMapping
-{
-	CongNodePtr xml_node;
-	GHashTable *hash_of_traversal_parent_to_editor_node;
-};
-
-EditorMapping*
-cong_editor_mapping_new (CongNodePtr xml_node);
-
-void
-cong_editor_mapping_free (EditorMapping* mapping);
-
-void
-cong_editor_mapping_add_editor_node (EditorMapping* mapping,
-				     CongEditorNode *traversal_parent,
-				     CongEditorNode *editor_node);
-void
-cong_editor_mapping_remove_editor_node (EditorMapping* mapping,
-					CongEditorNode *traversal_parent);
-
-static void  
-value_destroy_func (gpointer data)
-{
-	EditorMapping *mapping = (EditorMapping*)data;
-
-	cong_editor_mapping_free (mapping);
-}
-#endif
 
 
 #define PRIVATE(foo) ((foo)->private)
@@ -110,11 +63,6 @@ struct CongEditorWidget3Details
 	CongDocument *doc;
 
 	GHashTable *hash_of_traversal_node_to_editor_node;
-
-#if 1
-	GHashTable *hash_of_editor_node_to_child_policy;
-	GHashTable *hash_of_editor_node_to_parents_child_policy;
-#endif
 
 	CongEditorArea *root_area;
 	CongEditorAreaFlowHolder *root_flow_holder;
@@ -363,13 +311,6 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 											NULL,
 											NULL,
 											value_destroy_func);
-#endif
-
-#if 1
-	PRIVATE(editor_widget)->hash_of_editor_node_to_child_policy = g_hash_table_new (NULL,
-											NULL);
-	PRIVATE(editor_widget)->hash_of_editor_node_to_parents_child_policy = g_hash_table_new (NULL,
-												NULL);
 #endif
 
 	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
@@ -1654,12 +1595,6 @@ create_areas(CongEditorWidget3 *widget,
 		cong_editor_node_set_parents_child_policy (editor_node,
 							   parents_child_policy);
 
-#if 0
-		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
-				     editor_node,
-				     parents_child_policy);
-#endif		
-
 		g_assert(parents_child_policy);
 	}
 
@@ -1669,12 +1604,6 @@ create_areas(CongEditorWidget3 *widget,
 
 	cong_editor_node_set_child_policy (editor_node,
 					   this_child_policy);
-
-#if 0
-	g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
-			     editor_node,
-			     this_child_policy);
-#endif
 
 #else
 	this_area = cong_editor_area_flow_holder_insert_areas_for_node (parent_flow_holder,
