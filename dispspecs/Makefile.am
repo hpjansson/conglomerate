@@ -15,6 +15,7 @@ dispspec_DATA = \
 	dispspec-template.xds \
 	readme.xds \
 	relax-ng.xds \
+	release.xds \
 	teixlite.xds \
 	website-layout.xds \
 	website-webpage.xds \

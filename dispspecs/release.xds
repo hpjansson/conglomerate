@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE dispspec SYSTEM "dispspec.dtd">
+<dispspec>
+  <metadata>
+    <name>Conglomerate Release Notes</name>
+    <descrption>Conglomerate Release Notes</descrption>
+  </metadata>
+  <element-list>
+    <element type="structural" localName="release" whitespace="normalize">
+      <name xml:lang="C">Release</name>
+      <header-info childElement="title"/>
+    </element>
+    <element type="structural" localName="title" whitespace="normalize">
+      <name xml:lang="C">Title</name>
+    </element>
+    <element type="structural" localName="para" whitespace="normalize">
+      <name xml:lang="C">Para</name>
+    </element>
+    <element type="span" localName="a" whitespace="normalize">
+      <name xml:lang="C">A</name>
+    </element>
+    <element type="structural" localName="enhancements" whitespace="normalize">
+      <name xml:lang="C">Enhancements</name>
+    </element>
+    <element type="structural" localName="change" whitespace="normalize">
+      <name xml:lang="C">Change</name>
+    </element>
+    <element type="span" localName="person" whitespace="normalize">
+      <name xml:lang="C">Person</name>
+    </element>
+    <element type="span" localName="bug" whitespace="normalize">
+      <name xml:lang="C">Bug</name>
+    </element>
+    <element type="structural" localName="fixes" whitespace="normalize">
+      <name xml:lang="C">Fixes</name>
+    </element>
+  </element-list>
+</dispspec>
