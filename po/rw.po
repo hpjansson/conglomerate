@@ -1,0 +1,2867 @@
+# translation of conglomerate to Kinyarwanda.
+# Copyright (C) 2005 Free Software Foundation, Inc.
+# This file is distributed under the same license as the conglomerate package.
+# Steve Murphy <murf@e-tools.com>, 2005
+# Steve performed initial rough translation from compendium built from translations provided by the following translators:
+# Philibert Ndandali  <ndandali@yahoo.fr>, 2005.
+# Viateur MUGENZI <muvia1@yahoo.fr>, 2005.
+# Noëlla Mupole <s24211045@tuks.co.za>, 2005.
+# Carole Karema <karemacarole@hotmail.com>, 2005.
+# JEAN BAPTISTE NGENDAHAYO <ngenda_denis@yahoo.co.uk>, 2005.
+# Augustin KIBERWA  <akiberwa@yahoo.co.uk>, 2005.
+# Donatien NSENGIYUMVA <ndonatienuk@yahoo.co.uk>, 2005..
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-04-01 10:24-0700\n"
+"PO-Revision-Date: 2005-03-31 20:55-0700\n"
+"Last-Translator: Steve Murphy <murf@e-tools.com>\n"
+"Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"ULL NAME <EMAIL@ADDRESS>\n"
+
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
+#: src/cong-primary-window.c:547 src/cong-primary-window.c:733
+#: src/cong-primary-window.c:735 src/cong-primary-window.c:741
+msgid "Conglomerate XML Editor"
+msgstr ""
+
+#: data/conglomerate.desktop.in.h:2
+#, fuzzy
+msgid "Edit XML files"
+msgstr "Idosiye"
+
+#: data/conglomerate.schemas.in.h:1
+#, fuzzy
+msgid ""
+"A list of custom directories where Conglomerate should look for the display "
+"specification (called dispspec, or .xds) files, in addition to the standard "
+"installation path. When documents are loaded a matching dispspec is searched "
+"for in these directories, and the first matching dispspec file is used."
+msgstr ""
+"A Urutonde Bya Kunoza ububiko bw'amaderese kugirango i Kugaragaza Cyangwa "
+"Idosiye in Guteranya+ Kuri i Bisanzwe iyinjizaporogaramu Inzira Inyandiko a "
+"ni kugirango in ububiko bw'amaderese Na i Itangira IDOSIYE ni"
+
+#: data/conglomerate.schemas.in.h:2
+#, fuzzy
+msgid ""
+"A list of directories where Conglomerate should look for template xml files. "
+"These documents will be used by the new document assistant as types of "
+"documents which can be created by the user."
+msgstr ""
+"A Urutonde Bya ububiko bw'amaderese kugirango Inyandikorugero xml Idosiye "
+"Inyandiko ku i Gishya Inyandiko Nka Bya Inyandiko Byaremwe ku i Ukoresha:"
+
+#: data/conglomerate.schemas.in.h:3
+#, fuzzy
+msgid "Custom locations for display specification files."
+msgstr "Kugena kugirango Kugaragaza Idosiye"
+
+#: data/conglomerate.schemas.in.h:4
+#, fuzzy
+msgid "Locations for template files."
+msgstr "kugirango Inyandikorugero Idosiye"
+
+#: glade/cong-file-import.glade.h:1
+#, fuzzy
+msgid "File Import Options"
+msgstr "Idosiye"
+
+#: glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr ""
+
+# basctl/source\basicide\moduldlg.src:RID_DLG_LIBS.RID_FL_OPTIONS.text
+#: glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "Amahitamo"
+
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
+#: src/cong-node-properties-dialog.c:1321
+msgid "Advanced"
+msgstr "Urwego rwo hejuru"
+
+#: glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "By'ibanze"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moptions.src:RID_MACROOPTIONS.RID_FT_DESCR.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moptions.src:RID_MACROOPTIONS.text
+#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
+#: src/cong-edit-preferences.c:250 src/cong-file-export.c:339
+#: src/cong-file-new.c:363 src/cong-file-print.c:250
+#: src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Isobanuramiterere"
+
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
+msgid "Document Type Declaration"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:5
+#, fuzzy
+msgid "Encoding"
+msgstr "Imisobekere:"
+
+#: glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr ""
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:281
+#: src/cong-file-print.c:217
+msgid "General"
+msgstr "Rusange"
+
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Agenda.Elements.Location.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Fax.Save.AutoPath.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Memo.Save.AutoDocName.text
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:247
+msgid "Location"
+msgstr "Ahantu"
+
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_DOC_MODIFIED.text
+#: glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr "Byahinduwe"
+
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Izina"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_POPUP_BRKPROPS.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\tbxctl.src:RID_TOOLBOX.SID_SHOW_PROPERTYBROWSER.text
+#: glade/cong-file-properties.glade.h:11
+#: glade/docbook-common-properties.glade.h:3
+#: glade/docbook-orderedlist-properties.glade.h:9
+#: glade/docbook-ulink-properties.glade.h:3 glade/plugin-arbitrary.glade.h:5
+#: glade/plugin-random.glade.h:4 src/cong-node-properties-dialog.c:1283
+msgid "Properties"
+msgstr "indangakintu"
+
+#: glade/cong-file-properties.glade.h:12
+msgid "Standalone"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:13
+msgid "System ID"
+msgstr ""
+
+# filter/source\xsltdialog\xmlfilterdialogstrings.src:STR_COLUMN_HEADER_TYPE.text
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Ubwoko"
+
+# goodies/source\filter.vcl\eps\dlgeps.src:DLG_EXPORT_EPS.GRP_VERSION.text
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "Verisiyo"
+
+#: glade/cong-file-properties.glade.h:16
+msgid "XML Header"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:184
+#, fuzzy
+msgid "_Associate this DTD"
+msgstr "iyi"
+
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: glade/cong-find-replace.glade.h:2
+#, fuzzy
+msgid "Find Next"
+msgstr "Shaka ibikurikira"
+
+#: glade/cong-find-replace.glade.h:3
+#, fuzzy
+msgid "Match _entire word only"
+msgstr "ijambo"
+
+# offmgr/source\offapp\dialog\autocdlg.src:RID_OFA_AUTOCORR_DLG.1.RID_OFAPAGE_AUTOCORR_REPLACE.text
+#: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
+#: src/cong-edit-find-and-replace.c:836 src/cong-edit-find-and-replace.c:850
+msgid "Replace"
+msgstr "Gusimbura"
+
+# setup2/source\ui\dialog\dialog.src:RESID_DLG_OVERWRITE.12.text
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:908
+msgid "Replace All"
+msgstr "Hindura byose"
+
+# svx/source\dialog\bmpmask.src:RID_SVXDLG_BMPMASK.FT_3.text
+#: glade/cong-find-replace.glade.h:6
+#, fuzzy
+msgid "Replace _with: "
+msgstr "Gusimbuza na..."
+
+# svx/source\form\fmsearch.src:RID_SVXDLG_SEARCHFORM.CB_BACKWARD.text
+#: glade/cong-find-replace.glade.h:7
+#, fuzzy
+msgid "Search _backwards"
+msgstr "Gushakisha inyuma"
+
+# svx/source\dialog\srchdlg.src:RID_SVXDLG_SEARCH.CB_MATCH_CASE.text
+#: glade/cong-find-replace.glade.h:8
+#, fuzzy
+msgid "_Match case"
+msgstr "Guhuza inyandiko"
+
+#: glade/cong-find-replace.glade.h:9
+#, fuzzy
+msgid "_Search for: "
+msgstr "Gushakisha:"
+
+#: glade/cong-find-replace.glade.h:10
+#, fuzzy
+msgid "_Wrap around"
+msgstr "Gufunika kumpande"
+
+#: glade/cong-preferences.glade.h:1
+msgid "Conglomerate Preferences"
+msgstr ""
+
+#: glade/cong-preferences.glade.h:2
+msgid "Document Types"
+msgstr ""
+
+#: glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr ""
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr ""
+
+#: glade/custom-element.glade.h:3
+#, fuzzy
+msgid "Element Name"
+msgstr "Izina ry'ikigize"
+
+#: glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr ""
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr ""
+
+#: glade/custom-element.glade.h:6
+msgid "Span"
+msgstr ""
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:1
+#, fuzzy
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+"<Gitoya ni i Ingano: Bya i Umwandiko Gukoresha iyi Ipaji Kuri i Bya i "
+"Umwandiko Kuri Bya Sisitemu Gitoya"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANGUAGE.text
+#: glade/docbook-common-properties.glade.h:2
+msgid "Language"
+msgstr "Ururimi"
+
+#: glade/docbook-common-properties.glade.h:4
+msgid "Revisions"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:5
+#, fuzzy
+msgid "Scope"
+msgstr "Ingano:"
+
+#: glade/docbook-common-properties.glade.h:6
+#, fuzzy
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"ni a Akarindamwanya Ipaji Kuri Gukoresha iyi Ipaji Kuri Byoroheje Verisiyo "
+"Ibisobanuro ni in Nka"
+
+#: glade/docbook-common-properties.glade.h:9
+msgid "_Architecture"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:10
+msgid "_Operating System"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:11
+msgid "_User Level"
+msgstr ""
+
+#: glade/docbook-common-properties.glade.h:12
+#, fuzzy
+msgid "_Vendor"
+msgstr "Umucuruzi"
+
+# svx/source\dialog\page.src:RID_SVXPAGE_PAGE.LB_NUMBER_FORMAT.5.text
+#: glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+# svx/source\dialog\page.src:RID_SVXPAGE_PAGE.LB_NUMBER_FORMAT.1.text
+#: glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:3
+#, fuzzy
+msgid "Continue numbering from previous list"
+msgstr "Dukomeza Itanganomero Bivuye Ibanjirije Urutonde"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:337
+#: src/cong-error-file-open.c:518
+msgid "Details"
+msgstr "Birambuye"
+
+# svx/source\dialog\page.src:RID_SVXPAGE_PAGE.LB_NUMBER_FORMAT.3.text
+#: glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: glade/docbook-orderedlist-properties.glade.h:6
+#, fuzzy
+msgid "Inherit numbering from surrounding lists"
+msgstr "Itanganomero Bivuye Intonde"
+
+#: glade/docbook-orderedlist-properties.glade.h:7
+#, fuzzy
+msgid "Minimise vertical space"
+msgstr "Bihagaritse Umwanya"
+
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.WriterObject.Table.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.WriterObject.Frame.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.WriterObject.Graphic.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Calc.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Draw.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Chart.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Image.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Formula.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.Impress.Settings.Numbering.text
+# #-#-#-#-#  officecfg.pot (PACKAGE VERSION)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Insert.Caption.OfficeObject.OLEMisc.Settings.Numbering.text
+#: glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "Itanganomero"
+
+# sc/source\ui\src\scfuncs.src:RID_SC_FUNCTION_DESCRIPTIONS2.SC_OPCODE_STYLE.2.text
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Umususire"
+
+# #-#-#-#-#  svx.pot (PACKAGE VERSION)  #-#-#-#-#
+# svx/source\dialog\numpages.src:RID_SVXPAGE_NUM_OPTIONS.LB_FMT.3.text
+# #-#-#-#-#  svx.pot (PACKAGE VERSION)  #-#-#-#-#
+# svx/source\dialog\page.src:RID_SVXPAGE_PAGE.LB_NUMBER_FORMAT.2.text
+#: glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+# svx/source\dialog\page.src:RID_SVXPAGE_PAGE.LB_NUMBER_FORMAT.4.text
+#: glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: glade/docbook-ulink-properties.glade.h:1
+#, fuzzy
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+"<Gitoya Porogaramu Kwemerera i Bya i Ihuza Kuri ikoresha iyi Ubwoko Ikiranga "
+"Gitoya"
+
+# offmgr/source\offapp\dialog\hyprlink.src:RID_SVXDLG_HYPERLINK.BTN_INSERT_BOOKMARK.text
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Ihuza"
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "Intego"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "URL"
+
+#: glade/docbook-ulink-properties.glade.h:7
+#, fuzzy
+msgid "_Test this Link"
+msgstr "iyi"
+
+#: glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr ""
+
+#: glade/plugin-arbitrary.glade.h:3
+msgid "Namespace URI"
+msgstr ""
+
+#: glade/plugin-arbitrary.glade.h:4
+msgid "Preview"
+msgstr "Igaragazambere"
+
+#: glade/plugin-arbitrary.glade.h:6
+#, fuzzy
+msgid "Top-level Element"
+msgstr "urwego"
+
+#: glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr ""
+
+# 1617
+#: glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Ubujyakuzimu"
+
+# svx/source\options\optsave.src:RID_SFXPAGE_SAVE.FT_APP.text
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
+#, fuzzy
+msgid "Document Type"
+msgstr "Ubwoko bw'inyandiko"
+
+#: glade/string_selection_dialog.glade.h:1
+msgid "string_selection_dialog"
+msgstr ""
+
+#: src/cong-app.c:995
+msgid "XML Editor"
+msgstr ""
+
+#: src/cong-app.c:1131
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
+msgstr "OYA Ibirimo Idosiye"
+
+#: src/cong-app.c:1133
+#, fuzzy
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "OYA Gushaka Bya Inyandiko"
+
+#: src/cong-app.c:1135
+#, fuzzy
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+"iyi Ikosa ni OYA Kwinjiza porogaramu gukora iyinjizaporogaramu:%s Byahinduwe "
+"i Mburabuzi Igenamiterere kugirango i Kugaragaza Inzira MAHARAKUBIRI "
+"Kugenzura... Nka"
+
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
+#: src/cong-node-properties-dialog.c:470
+#, fuzzy, c-format
+msgid "Add attribute \"%s\""
+msgstr "Kongeraho Ikiranga"
+
+#: src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-editor.c:253
+#: src/cong-attribute-wrapper.c:263 src/cong-node-properties-dialog.c:506
+#, fuzzy, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Gusiba Ikiranga"
+
+#: src/cong-attribute-editor-enumeration.c:122
+msgid "(unspecified)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr "Ikinyabureto"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.31.text
+#: src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr "Nyakatara"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.39.text
+#: src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr "Ceke"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_DANISH.text
+#: src/cong-attribute-editor-lang.c:51
+msgid "Danish"
+msgstr "Ikidanwa"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.66.text
+#: src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr "Ikidage (Ubudage)"
+
+#: src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr ""
+
+#: src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr ""
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.159.text
+#: src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr "Icyesiperanto"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_SPANISH.text
+#: src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr "Icyesipanyoro"
+
+#: src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr "Igifarowe"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.60.text
+#: src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr "Igifaransa (Ubufaransa)"
+
+#: src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr ""
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_ITALIEN.text
+#: src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr "Igitariyani"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_DUTCH.text
+#: src/cong-attribute-editor-lang.c:63
+msgid "Dutch"
+msgstr "Igihorandi"
+
+#: src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr "Ikinyanoruveji"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_POLEN.text
+#: src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr "Igiporonye"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.102.text
+#: src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr "Igiporitigari (Poritigari)"
+
+#: src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_RUSSIAN.text
+#: src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr "Ikirusi"
+
+# setup2/source\ui\pages\plang.src:RESID_PAGE_PAGELANGUAGE.STR_LANG_SWEDISH.text
+#: src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr "Igisuwedi"
+
+# svx/source\dialog\langtab.src:RID_SVXSTR_LANGUAGE_TABLE.145.text
+#: src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr "Nyaukerene"
+
+#: src/cong-attribute-editor-lang.c:157
+msgid "No Language"
+msgstr ""
+
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
+#, fuzzy, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Kuri Gushyiraho Ikiranga Kuri"
+
+#: src/cong-attribute-editor-nmtoken.c:236
+#, fuzzy
+msgid "The attribute value must be an XML name token."
+msgstr "Ikiranga Agaciro Izina:"
+
+#: src/cong-attribute-editor-nmtoken.c:237
+#, fuzzy
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr "Na."
+
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
+#: src/cong-node-properties-dialog.c:424
+#, fuzzy, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Ikiranga Kuri"
+
+#: src/cong-dialog.c:301
+#, fuzzy
+msgid "_Close without Saving"
+msgstr "Funga"
+
+#: src/cong-dialog.c:316
+#, fuzzy, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Kubika Amahinduka Kuri Inyandiko Mbere"
+
+#: src/cong-dialog.c:321
+#, fuzzy, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr "Gufunga Mu kubika Amahinduka Bivuye i amasaha"
+
+#: src/cong-dialog.c:323
+#, fuzzy, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr "Gufunga Mu kubika Amahinduka Bivuye i Iminota"
+
+#: src/cong-dialog.c:325
+#, fuzzy
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr "Gufunga Mu kubika Amahinduka Bivuye i UMUNOTA"
+
+#: src/cong-dialog.c:379
+#, fuzzy, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "Amahinduka Kuri Inyandiko"
+
+#: src/cong-dialog.c:384
+#, fuzzy, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "Bivuye i amasaha"
+
+#: src/cong-dialog.c:386
+#, fuzzy, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "Bivuye i Iminota"
+
+#: src/cong-dialog.c:388
+#, fuzzy
+msgid "Changes from the past minute will be discarded."
+msgstr "Bivuye i UMUNOTA"
+
+#: src/cong-dispspec-element.c:661 src/cong-xpath-expression.c:248
+#, fuzzy
+msgid "(xpath failed)"
+msgstr "(Byanze"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec-element.c:697
+#, fuzzy
+msgid "<untitled>"
+msgstr "<Nta mutwe)"
+
+#: src/cong-dispspec-registry.c:108
+#, fuzzy
+msgid "Conglomerate could not read its registry of document types."
+msgstr "OYA Gusoma Bya Inyandiko"
+
+#: src/cong-dispspec-registry.c:111
+#, fuzzy
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "Kuri ku Byose i Idosiye in i Ahantu"
+
+# 2262
+#: src/cong-dispspec-registry.c:333 src/cong-file-new.c:343
+msgid "File Type"
+msgstr "ubwoko bwa dosiye"
+
+#: src/cong-dispspec-registry.c:344
+msgid "Coverage"
+msgstr ""
+
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_DB_NONAME.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\scstring.src:SCSTR_NONAME.text
+#: src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "Kitiswe"
+
+#: src/cong-dispspec.c:536
+#, fuzzy
+msgid "No description available."
+msgstr "Isobanuramiterere Bihari"
+
+#: src/cong-document.c:651
+msgid "(Untitled)"
+msgstr "(Nta mutwe)"
+
+#: src/cong-document.c:955
+#, fuzzy, c-format
+msgid "Attribute \"%s\""
+msgstr "Ikiranga"
+
+# sfx2/source\explorer\explorer.src:STR_SFX_SWRITER_DOC.text
+#: src/cong-document.c:962
+#, fuzzy, c-format
+msgid "Text \"%s\""
+msgstr "Umwandiko()"
+
+#: src/cong-document.c:968
+msgid "Character Data"
+msgstr ""
+
+#: src/cong-document.c:971
+#, fuzzy, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "Kuri"
+
+#: src/cong-document.c:974
+#, c-format
+msgid "Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:977
+msgid "XML Processing Instruction"
+msgstr ""
+
+# padmin/source\padialog.src:RID_PADIALOG.RID_PA_TXT_COMMENT.text
+#: src/cong-document.c:982
+#, fuzzy, c-format
+msgid "Comment \"%s\""
+msgstr "Icyo wongeraho"
+
+# basctl/source\basicide\basidesh.src:RID_STR_DOC.text
+#: src/cong-document.c:988
+msgid "Document"
+msgstr "Inyandiko"
+
+#: src/cong-document.c:994
+msgid "Document Fragment"
+msgstr ""
+
+#: src/cong-document.c:997
+msgid "Notation"
+msgstr ""
+
+# officecfg/registry\data\org\openoffice\Office\TypeDetection.xcu:..TypeDetection.Filters.HTML.UIName.text
+#: src/cong-document.c:1000
+msgid "HTML Document"
+msgstr "Inyandiko HTML"
+
+#: src/cong-document.c:1006
+msgid "Element Declaration"
+msgstr ""
+
+#: src/cong-document.c:1009
+msgid "Attribute Declaration"
+msgstr ""
+
+#: src/cong-document.c:1012
+msgid "Entity Declaration"
+msgstr ""
+
+#: src/cong-document.c:1015
+msgid "Namespace Declaration"
+msgstr ""
+
+#: src/cong-document.c:1018
+#, fuzzy
+msgid "XInclude Start"
+msgstr "Gutangira"
+
+#: src/cong-document.c:1021
+#, fuzzy
+msgid "XInclude End"
+msgstr "Impera"
+
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\menue.src:SCCFG_PLUGINMENU.SUBMENU_EDIT.SUBMENU_EDIT_TABLE.SID_SELECT_TABLES.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\menue.src:SCCFG_MENUBAR.SUBMENU_EDIT.SUBMENU_EDIT_TABLE.SID_SELECT_TABLES.text
+#: src/cong-document.c:2180
+#, fuzzy, c-format
+msgid "Select %s"
+msgstr "Guhitamo..."
+
+# filter/source\xsltdialog\xmlfilterdialogstrings.src:STR_UNKNOWN_APPLICATION.text
+#: src/cong-dom-view.c:225
+#, fuzzy
+msgid "UNKNOWN"
+msgstr "Kitazwi"
+
+# svx/source\dialog\imapdlg.src:RID_SVXDLG_IMAP.FT_TEXT.text
+#: src/cong-dom-view.c:252
+msgid "Text:"
+msgstr "Umwandiko:"
+
+#: src/cong-dom-view.c:258
+msgid "CDATA:"
+msgstr ""
+
+#: src/cong-edit-find-and-replace.c:98
+#, fuzzy, c-format
+msgid "The text \"%s\" was not found."
+msgstr "Umwandiko OYA Byabonetse"
+
+# setup2/source\ui\dialog\dialog.src:RESID_DLG_OVERWRITE.12.text
+#: src/cong-edit-find-and-replace.c:200
+#, fuzzy
+msgid "Replace _All"
+msgstr "Hindura byose"
+
+# offmgr/source\offapp\dialog\hyprlink.src:RID_SVXDLG_HYPERLINK.BTN_INET_SEARCH.text
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:761
+#: src/cong-edit-find-and-replace.c:959 src/cong-edit-find-and-replace.c:1000
+msgid "Find"
+msgstr "Gushaka"
+
+# sw/sdi\swslots.src:FN_SELECT_WORD.text
+#: src/cong-editor-node-text.c:898
+#, fuzzy
+msgid "Select word"
+msgstr "Gutoranya ijambo"
+
+#: src/cong-editor-node-text.c:923
+#, fuzzy
+msgid "Move cursor"
+msgstr "indanga"
+
+#: src/cong-editor-node-text.c:1009
+#, fuzzy
+msgid "Drag out selection"
+msgstr "Inyuma Ihitamo"
+
+#: src/cong-editor-widget3.c:268
+msgid "Expander Size"
+msgstr ""
+
+#: src/cong-editor-widget3.c:269
+#, fuzzy
+msgid "Size of the expander arrow"
+msgstr "Bya i Akambi"
+
+#: src/cong-editor-widget3.c:747
+msgid "Input Method"
+msgstr ""
+
+#: src/cong-editor-widget3.c:877 src/cong-editor-widget3.c:1408
+#, fuzzy
+msgid "Typing"
+msgstr "Kwandika:"
+
+#: src/cong-editor-widget3.c:1309
+msgid "Cursor Movement"
+msgstr ""
+
+#: src/cong-editor-widget3.c:1349 src/cong-editor-widget3.c:1362
+msgid "Delete Selection"
+msgstr ""
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:231 src/cong-error-dialog.c:271
+#, fuzzy, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "a i ni in IDOSIYE ku Umurongo"
+
+#: src/cong-error-dialog.c:235
+#, fuzzy
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "OYA"
+
+#: src/cong-error-dialog.c:265
+#, fuzzy, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr "OYA ni a ni muri i ku"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:321
+#, fuzzy, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "Ikosa i"
+
+#: src/cong-error-dialog.c:325
+#, fuzzy
+msgid "A GError occurred; the error report was:"
+msgstr "A i Ikosa Icyegeranyo"
+
+# desktop/source\app\desktop.src:STR_BOOTSTRAP_ERR_INTERNAL.text
+#: src/cong-error-dialog.c:335 src/cong-error-file-open.c:516
+msgid "An unexpected error occurred."
+msgstr "Ikosa rititeguwe ryagaragaye."
+
+#: src/cong-error-dialog.c:336 src/cong-error-file-open.c:517
+#, fuzzy
+msgid "For more information, click on the \"Details\" button."
+msgstr "Birenzeho Ibisobanuro Kanda ku i Akabuto"
+
+#: src/cong-error-dialog.c:386
+#, fuzzy
+msgid "An error occurred whilst running this system command:"
+msgstr "Ikosa iyi Sisitemu Komandi:"
+
+#: src/cong-error-dialog.c:389
+#, fuzzy, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr "Ikosa Umubare ni i Ikosa Umwandiko Ibisohoka ku i Komandi:"
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:67
+#, fuzzy
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "OYA Gukoresha i"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:103
+#, fuzzy, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%sGusoma Bivuye"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:106
+#, fuzzy, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%sOYA Gusoma Bivuye"
+
+#: src/cong-error-file-open.c:264 src/cong-error-file-save.c:92
+#, fuzzy
+msgid "An unexpected internal error occurred."
+msgstr "By'imbere Ikosa"
+
+#: src/cong-error-file-open.c:265 src/cong-error-file-save.c:93
+#, fuzzy
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-open.c:291
+#, fuzzy
+msgid "There is no file with that name at that location."
+msgstr "ni Oya IDOSIYE Na: Izina: ku Ahantu"
+
+#: src/cong-error-file-open.c:292
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr "(i i Izina: ni ni OYA i Nka Cyangwa ikoresha i Kuri Gushaka IDOSIYE"
+
+# #-#-#-#-#  offmgr.pot (PACKAGE VERSION)  #-#-#-#-#
+# offmgr/source\offapp\dialog\inetdlg.src:RID_OFADLG_INTERNET.1.RID_SVXPAGE_INET_SEARCH.text
+# #-#-#-#-#  offmgr.pot (PACKAGE VERSION)  #-#-#-#-#
+# offmgr/source\offapp\dialog\treeopt.src:RID_OFADLG_OPTIONS_TREE_PAGES.SID_INET_DLG.3.text
+#: src/cong-error-file-open.c:293 src/cong-error-file-open.c:302
+#: src/cong-error-file-open.c:357 src/cong-error-file-open.c:398
+msgid "Search"
+msgstr "Gushaka"
+
+#: src/cong-error-file-open.c:300 src/cong-error-file-save.c:110
+#, fuzzy
+msgid "The location does not exist."
+msgstr "Ahantu OYA"
+
+#: src/cong-error-file-open.c:301
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr "(i i Ahantu ni ni OYA i Nka Cyangwa ikoresha i Kuri Gushaka IDOSIYE"
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:314
+#, fuzzy, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "Ahantu OYA Gushigikira i Bya Idosiye"
+
+#: src/cong-error-file-open.c:318
+#, fuzzy
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+"Itangira... a IDOSIYE Bivuye a Ahantu Kuri Kuri Gusoma iyi IDOSIYE Umuntu "
+"Sisitemu umuyobozi/ uyobora"
+
+#: src/cong-error-file-open.c:328
+#, fuzzy
+msgid "There were problems reading the content of the file."
+msgstr "i Ibikubiyemo Bya i IDOSIYE"
+
+#: src/cong-error-file-open.c:329 src/cong-error-file-open.c:347
+#: src/cong-error-file-open.c:386
+#, fuzzy
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-open.c:338
+#, fuzzy
+msgid "The contents of the file seem to be corrupt."
+msgstr "Ibigize Bya i IDOSIYE Kuri"
+
+#: src/cong-error-file-open.c:339
+#, fuzzy
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-open.c:346 src/cong-error-file-open.c:385
+#, fuzzy
+msgid "There were problems reading the contents of the file."
+msgstr "i Ibigize Bya i IDOSIYE"
+
+#: src/cong-error-file-open.c:355 src/cong-error-file-save.c:251
+#, fuzzy
+msgid "The system does not recognise that as a valid location."
+msgstr "Sisitemu OYA Nka a Byemewe Ahantu"
+
+#: src/cong-error-file-open.c:356
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(i i Ahantu ni HTTP ni OYA i Nka Cyangwa ikoresha i Kuri Gushaka IDOSIYE"
+
+#: src/cong-error-file-open.c:367
+#, fuzzy
+msgid "You do not have permission to read that file."
+msgstr "OYA Kuri Gusoma IDOSIYE"
+
+#: src/cong-error-file-open.c:368
+#, fuzzy
+msgid "Try asking your system administrator to give you permission."
+msgstr "Sisitemu umuyobozi/ uyobora Kuri"
+
+#: src/cong-error-file-open.c:375 src/cong-error-file-save.c:274
+#, fuzzy
+msgid "The system is trying to operate on too many files at once."
+msgstr "Sisitemu ni Kuri ku Idosiye ku Rimwe"
+
+#: src/cong-error-file-open.c:376 src/cong-error-file-open.c:410
+#: src/cong-error-file-save.c:275 src/cong-error-file-save.c:294
+#, fuzzy
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr "Ongeraugerageze."
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:393
+#, fuzzy, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\"ni a bushyinguro a IDOSIYE"
+
+#: src/cong-error-file-open.c:397
+#, fuzzy
+msgid "Try using the Search Tool to find your file."
+msgstr "ikoresha i Kuri Gushaka IDOSIYE"
+
+#: src/cong-error-file-open.c:409 src/cong-error-file-save.c:293
+#, fuzzy
+msgid "The system ran out of memory."
+msgstr "Sisitemu Inyuma Bya Ububiko"
+
+#: src/cong-error-file-open.c:418 src/cong-error-file-open.c:427
+#: src/cong-error-file-open.c:436 src/cong-error-file-save.c:302
+#: src/cong-error-file-save.c:311 src/cong-error-file-save.c:320
+#, fuzzy
+msgid "The server could not be contacted."
+msgstr "Seriveri OYA"
+
+#: src/cong-error-file-open.c:419
+#, fuzzy
+msgid "Try again.  If it fails again, the server may be down."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-open.c:428 src/cong-error-file-open.c:437
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr "(i i Ahantu i Seriveri Gicurasi Hasi"
+
+#: src/cong-error-file-open.c:445 src/cong-error-file-save.c:329
+#, fuzzy
+msgid "The system could not login to the location."
+msgstr "Sisitemu OYA Ifashayinjira Kuri i Ahantu"
+
+#: src/cong-error-file-open.c:446 src/cong-error-file-open.c:456
+#, fuzzy
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-open.c:455 src/cong-error-file-save.c:338
+#, fuzzy
+msgid "The location was too busy."
+msgstr "Ahantu Irahuze"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:505
+#, fuzzy, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "Ikosa"
+
+#: src/cong-error-file-open.c:509
+#, fuzzy
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr "Porogaramu BYAKIRIWE Ikosa Icyegeranyo Bivuye i Idosiye"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:61
+#, fuzzy, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%sKubika Kuri"
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:64
+#, fuzzy, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%sOYA Kubika Kuri"
+
+#: src/cong-error-file-save.c:111
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr "(i i Izina: ni ni OYA i Nka Cyangwa Mu kubika Kuri a Ahantu"
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:119 src/cong-error-file-save.c:238
+#, fuzzy, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "Ahantu OYA Gushigikira i Bya Idosiye"
+
+#: src/cong-error-file-save.c:123 src/cong-error-file-save.c:242
+#: src/cong-error-file-save.c:350
+#, fuzzy
+msgid "Try saving to a different location."
+msgstr "Mu kubika Kuri a Ahantu"
+
+#: src/cong-error-file-save.c:134
+#, fuzzy
+msgid "There were problems writing the content of the file."
+msgstr "i Ibikubiyemo Bya i IDOSIYE"
+
+#: src/cong-error-file-save.c:135
+#, fuzzy
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-save.c:159
+#, fuzzy, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "Ingano Bya i IDOSIYE i APAREYE a Bya"
+
+#. Can't get at the capacity for the device or "volume":
+#. FIXME: This is the workaround:
+#: src/cong-error-file-save.c:165 src/cong-error-file-save.c:169
+#, fuzzy, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr "IDOSIYE ni Kuri ku i APAREYE IDOSIYE Ingano"
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:178
+#, fuzzy
+msgid "The file is too big to fit on the device."
+msgstr "IDOSIYE ni Kuri ku i APAREYE"
+
+#: src/cong-error-file-save.c:187
+#, fuzzy
+msgid "Try saving the file to a different location."
+msgstr "Mu kubika i IDOSIYE Kuri a Ahantu"
+
+#: src/cong-error-file-save.c:208
+#, fuzzy, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr "Ingano Bya i IDOSIYE Kigenga ku APAREYE"
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:214
+#, fuzzy, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr "IDOSIYE ni Kuri in i Umwanya ku i APAREYE IDOSIYE Ingano"
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:222
+#, fuzzy
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "IDOSIYE ni Kuri in i Umwanya ku i APAREYE"
+
+#: src/cong-error-file-save.c:231
+#, fuzzy
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+"Mu kubika i IDOSIYE Kuri a Ahantu Cyangwa Birenzeho Umwanya ku Idosiye "
+"Bivuye APAREYE Kuri i"
+
+#: src/cong-error-file-save.c:252
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr "(i i Ahantu ni HTTP ni OYA i Nka Cyangwa Mu kubika Kuri a Ahantu"
+
+#: src/cong-error-file-save.c:266
+#, fuzzy
+msgid "You do not have permission to write to that location."
+msgstr "OYA Kuri Kwandika Kuri Ahantu"
+
+#: src/cong-error-file-save.c:267
+#, fuzzy
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr "Mu kubika Kuri a Ahantu Cyangwa Sisitemu umuyobozi/ uyobora Kuri"
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:281
+#, fuzzy, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\"ni a bushyinguro"
+
+#: src/cong-error-file-save.c:285
+#, fuzzy
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr "Kubika Kuri a IDOSIYE muri a bushyinguro Kuri i bushyinguro"
+
+#: src/cong-error-file-save.c:303
+#, fuzzy
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr "Ongeraugerageze."
+
+#: src/cong-error-file-save.c:312 src/cong-error-file-save.c:321
+#, fuzzy
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr "(i i Ahantu i Seriveri Gicurasi Hasi Mu kubika Kuri Ahantu"
+
+#: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
+#, fuzzy
+msgid "Try again. If it fails again, try saving to another location."
+msgstr "Ongeraugerageze."
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:346
+#, fuzzy, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr "Ahantu Idosiye Kuri Gusoma OYA"
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:358
+#, fuzzy, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "Izina: ni kugirango i Ahantu Kuri kuyobora"
+
+#: src/cong-error-file-save.c:362
+#, fuzzy
+msgid "Try again with a shorter file name."
+msgstr "Na: a IDOSIYE Izina:"
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:25
+#, fuzzy, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "Idosiye Bya Na: Igisubizo"
+
+#: src/cong-error-tests.c:31
+#, fuzzy, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "Idosiye Kubika Bya Na: Igisubizo"
+
+#: src/cong-error-tests.c:37
+#, fuzzy, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "Gifitanye isano Bya Na: Igisubizo"
+
+#: src/cong-error-tests.c:40
+#, fuzzy
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr "ni i Bya a Gifitanye isano IDOSIYE"
+
+#: src/cong-error-tests.c:43
+#, fuzzy
+msgid "This dialog was generated by the automated testing routine"
+msgstr "Ikiganiro ku i"
+
+#: src/cong-file-export.c:153
+#, fuzzy
+msgid "(No description available)"
+msgstr "(Isobanuramiterere Bihari"
+
+#: src/cong-file-export.c:212
+#, fuzzy
+msgid "Select file to export to"
+msgstr "IDOSIYE Kuri Kohereza Kuri"
+
+# filter/source\pdf\impdialog.src:RID_PDF_EXPORT_DLG.BT_OK.text
+# filter/source\xsltdialog\xmlfiltertestdialog.src:DLG_XML_FILTER_TEST_DIALOG.FL_EXPORT.text
+#: src/cong-file-export.c:260
+#, fuzzy, c-format
+msgid "Export \"%s\""
+msgstr "Kohereza"
+
+# filter/source\pdf\impdialog.src:RID_PDF_EXPORT_DLG.BT_OK.text
+# filter/source\xsltdialog\xmlfiltertestdialog.src:DLG_XML_FILTER_TEST_DIALOG.FL_EXPORT.text
+#: src/cong-file-export.c:265
+msgid "Export"
+msgstr "Kohereza"
+
+#: src/cong-file-export.c:317
+msgid "Exporter:"
+msgstr ""
+
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_LINKERRORFILE.text
+#: src/cong-file-export.c:319
+msgid "File:"
+msgstr "Idosiye:"
+
+#: src/cong-file-export.c:321
+msgid "Export Options"
+msgstr ""
+
+#: src/cong-file-export.c:431
+#, fuzzy
+msgid "No output file specified"
+msgstr "Ibisohoka IDOSIYE"
+
+#: src/cong-file-export.c:432
+#, fuzzy
+msgid "Please specify a file name."
+msgstr "a IDOSIYE Izina:"
+
+# sc/source\ui\dbgui\imoptdlg.src:RID_SCDLG_IMPORTOPT.text
+#: src/cong-file-import.c:80
+#, fuzzy
+msgid "Import file..."
+msgstr "Kuzana Idosiye"
+
+#: src/cong-file-new.c:169
+#, fuzzy, c-format
+msgid "Creating a new file (%s)"
+msgstr "a Gishya IDOSIYE"
+
+#: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
+#: src/cong-file-new.c:643
+#, fuzzy
+msgid "Creating a new file"
+msgstr "a Gishya IDOSIYE"
+
+#: src/cong-file-new.c:619
+#, fuzzy
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"Gihinguranya a Gishya IDOSIYE Bya IDOSIYE Bihari Na Gicurasi Kuri Bya i "
+"Ibikubiyemo kugirango in Uburyo Bya Kuri Kurema Inyandikorugero Inyandiko "
+"Kuri Kongeramo Kuri iyi Sisitemu"
+
+#: src/cong-file-new.c:632
+#, fuzzy
+msgid "What type of file would you like to create?"
+msgstr "Ubwoko Bya IDOSIYE nka Kuri Kurema"
+
+#: src/cong-file-new.c:634
+#, fuzzy
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr "Bya i in i Urutonde Na Guhitamo Kuri urifuzagukomeza"
+
+#: src/cong-file-new.c:644
+#, fuzzy
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"NONEAHA i Ibisobanuro Kuri Kurema i Inyandiko Kuri Kurema Kuri Kubika i "
+"Inyandiko NIBA Kuri Gumana:"
+
+#: src/cong-file-open.c:72
+#, fuzzy
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr "By'imbere Imiterere Bya i Inyandiko OYA BIHUYE Bya i Kuri"
+
+#: src/cong-file-open.c:73
+#, fuzzy
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+"Kuri Ibirimo i Inyandiko ku ku i Akabuto munsi Ibisubizo ku Gicurasi OYA"
+
+#: src/cong-file-open.c:74
+msgid "Force"
+msgstr ""
+
+#: src/cong-file-open.c:218
+#, fuzzy
+msgid "Select an XML document"
+msgstr "Inyandiko"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: src/cong-file-print.c:195
+#, fuzzy, c-format
+msgid "Print \"%s\""
+msgstr "Gucapa"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: src/cong-file-print.c:201
+msgid "Print"
+msgstr "Gucapa"
+
+#: src/cong-file-print.c:233
+msgid "Print Method:"
+msgstr ""
+
+# sc/source\ui\src\scstring.src:SCSTR_CFG_PRINT.text
+#: src/cong-file-print.c:241
+msgid "Print Options"
+msgstr "Amahitamo yo gucapa"
+
+# sc/source\ui\src\scstring.src:SCSTR_PREVIEWSHELL.text
+#: src/cong-file-print.c:336 src/cong-menus.c:727
+msgid "Print Preview"
+msgstr "Igaragazambere ryo Gucapa"
+
+#: src/cong-file-print.c:346
+#, fuzzy, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "Gucapa"
+
+#: src/cong-file-print.c:349
+#, fuzzy
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr "Bya Kuri Gucapa Idosiye Bya Ubwoko"
+
+#: src/cong-file-properties.c:105
+msgid "Yes"
+msgstr "Yego"
+
+#: src/cong-file-properties.c:105
+msgid "No"
+msgstr "Oya"
+
+# goodies/source\filter.vcl\eps\dlgeps.src:DLG_EXPORT_EPS.RB_COMPRESSION_NONE.text
+#: src/cong-file-properties.c:124 src/cong-file-properties.c:127
+msgid "None"
+msgstr "Nta na kimwe"
+
+#: src/cong-file-properties.c:165
+#, fuzzy
+msgid "_Remove this DTD"
+msgstr "iyi"
+
+#: src/cong-file-properties.c:190
+#, fuzzy
+msgid ""
+"The document does not specify an external DTD, but Conglomerate believes the "
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr ""
+"Inyandiko OYA external i hejuru Ibisobanuro ni ku iyi Kuri iyi Ibisobanuro "
+"in i Inyandiko"
+
+#: src/cong-file-properties.c:199
+msgid "No External Subset"
+msgstr ""
+
+#: src/cong-file-properties.c:201 src/plugin-validate.c:171
+#, fuzzy
+msgid "_Add a DTD"
+msgstr "a"
+
+# filter/source\xsltdialog\xmlfilterdialogstrings.src:STR_UNKNOWN_APPLICATION.text
+#: src/cong-file-properties.c:275 src/cong-file-properties.c:277
+msgid "Unknown"
+msgstr "Kitazwi"
+
+#: src/cong-file-properties.c:288
+msgid "Unspecified"
+msgstr ""
+
+#: src/cong-file-properties.c:363
+msgid "Remove DTD"
+msgstr ""
+
+#: src/cong-file-properties.c:380 src/cong-util.c:1636
+#, fuzzy
+msgid "Associate with DTD"
+msgstr "Na:"
+
+#: src/cong-file-save.c:75
+#, fuzzy
+msgid "Save XML as..."
+msgstr "Kubika Nka"
+
+#: src/cong-file-save.c:110
+#, fuzzy, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "IDOSIYE ni Gusoma"
+
+#: src/cong-file-save.c:113
+#, fuzzy, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "A IDOSIYE"
+
+# offmgr/source\offapp\dialog\autocdlg.src:RID_OFA_AUTOCORR_DLG.1.RID_OFAPAGE_AUTOCORR_REPLACE.text
+#: src/cong-file-save.c:121
+#, fuzzy
+msgid "_Replace"
+msgstr "Gusimbura"
+
+#: src/cong-file-save.c:131
+#, fuzzy
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Kuri Gusimbura Na: i Mu kubika"
+
+#: src/cong-location.c:395 src/cong-location.c:416
+msgid "Merge tags"
+msgstr ""
+
+#: src/cong-location.c:467
+#, fuzzy
+msgid "Delete character"
+msgstr "Inyuguti"
+
+#: src/cong-location.c:1061
+#, fuzzy
+msgid "Calculating previous page"
+msgstr "Ibanjirije Ipaji"
+
+#: src/cong-location.c:1084
+#, fuzzy
+msgid "Calculating next page"
+msgstr "Komeza>> Ipaji"
+
+#: src/cong-menus.c:112 src/cong-menus.c:165 src/cong-menus.c:199
+#, fuzzy
+msgid "The selected menu item has not yet been implemented."
+msgstr "Byahiswemo Ibikubiyemo Ikintu OYA"
+
+#: src/cong-menus.c:463
+#, fuzzy
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "Gufungura i Igisubizo Bya i Ihindurwa"
+
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:528 src/cong-stylesheet.c:226
+#, fuzzy, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "a i Ipaji y'imisusire IDOSIYE"
+
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-stylesheet.c:228
+#: src/cong-stylesheet.c:291
+#, fuzzy
+msgid "Conglomerate could not transform the document"
+msgstr "OYA Guhinduramo i Inyandiko"
+
+#: src/cong-menus.c:552
+#, fuzzy
+msgid "There was a problem applying the stylesheet file"
+msgstr "a i Ipaji y'imisusire IDOSIYE"
+
+#: src/cong-menus.c:1113
+msgid "Test Progress Checklist"
+msgstr ""
+
+#: src/cong-menus.c:1117
+#, fuzzy, c-format
+msgid "This is stage %i"
+msgstr "ni"
+
+#: src/cong-menus.c:1168
+msgid "Message Log - Conglomerate"
+msgstr ""
+
+#: src/cong-menus.c:1187
+msgid "Signal Log - Conglomerate"
+msgstr ""
+
+#: src/cong-menus.c:1427
+msgid "translator_credits"
+msgstr ""
+
+#: src/cong-menus.c:1446
+#, fuzzy
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr "(C C"
+
+#: src/cong-menus.c:1447
+#, fuzzy
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "a Kigenga Ukoresha: Muhinduzi"
+
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_HFCMD_FILE.text
+#. Menus:
+#: src/cong-menus.c:1481
+#, fuzzy
+msgid "_File"
+msgstr "IDOSIYE"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICMENU.MN_EDIT.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICPLUGINMENU.MN_PLEDIT.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_MACROCHOOSER.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_EDIT.text
+#: src/cong-menus.c:1482
+#, fuzzy
+msgid "_Edit"
+msgstr "Guhindura"
+
+#: src/cong-menus.c:1487
+#, fuzzy
+msgid "_Help"
+msgstr "Ifashayobora"
+
+#. Sub-menus:
+#: src/cong-menus.c:1490 src/popup.c:1100
+#, fuzzy
+msgid "New sub-element"
+msgstr "Ikigize:"
+
+#: src/cong-menus.c:1491 src/popup.c:1114
+msgid "New sibling"
+msgstr ""
+
+#: src/cong-menus.c:1492
+#, fuzzy
+msgid "Remove span tag"
+msgstr "Itagi:"
+
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_NEWLIB.text
+#. Actions found in File menu:
+#: src/cong-menus.c:1495
+#, fuzzy
+msgid "_New..."
+msgstr "Gishya..."
+
+# sfx2/source\appl\minbox.src:RID_MAIL_INBOX.BTN_MAILINBOX_OPEN.text
+#: src/cong-menus.c:1496
+#, fuzzy
+msgid "_Open..."
+msgstr "Gufungura..."
+
+# padmin/source\padialog.src:RID_ADDP_PAGE_CHOOSEDRIVER.RID_ADDP_CHDRV_BTN_ADD.text
+#: src/cong-menus.c:1497
+#, fuzzy
+msgid "_Import..."
+msgstr "Kuzana"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_MACROCHOOSER.RID_PB_CLOSE.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_STR_CLOSE.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_CLOSE.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_CLOSE.text
+#: src/cong-menus.c:1498
+#, fuzzy
+msgid "_Close"
+msgstr "Gufunga"
+
+#: src/cong-menus.c:1499
+#, fuzzy
+msgid "_Quit"
+msgstr "Kuvamo"
+
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1503
+#, fuzzy
+msgid "Pr_eferences"
+msgstr "Ibyahiswemo"
+
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\dbgui\validate.src:TP_VALIDATION_INPUTHELP.FL_CONTENT.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\dbgui\validate.src:TP_VALIDATION_ERROR.FL_CONTENT.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\navipi\navipi.src:RID_SCDLG_NAVIGATOR.TBX_CMD.IID_ZOOMOUT.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\navipi\navipi.src:SCSTR_CONTENT_ROOT.text
+#. Actions found in Help menu:
+#: src/cong-menus.c:1516
+#, fuzzy
+msgid "_Contents"
+msgstr "Ibigize"
+
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....BusinessCard.PrivateAddress.WebAddress.text
+#: src/cong-menus.c:1517
+#, fuzzy
+msgid "_Homepage"
+msgstr "Ipajikwinjira"
+
+#: src/cong-menus.c:1518
+#, fuzzy
+msgid "_About"
+msgstr "Bigyanye"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICMENU.MN_EXTRA.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICPLUGINMENU.MN_PLEXTRA.text
+#: src/cong-menus.c:1524
+#, fuzzy
+msgid "_Tools"
+msgstr "Ibikoresho"
+
+# basctl/source\basicide\basidesh.src:RID_STR_SAVE.text
+#. Actions found in File menu:
+#: src/cong-menus.c:1528
+#, fuzzy
+msgid "_Save"
+msgstr "Kubika"
+
+# sfx2/source\doc\doc.src:STR_SAVEASDOC.text
+#: src/cong-menus.c:1529
+#, fuzzy
+msgid "Save _as..."
+msgstr "Gushyingura muri..."
+
+#: src/cong-menus.c:1530
+#, fuzzy
+msgid "Sa_ve a Copy..."
+msgstr "Kubika a"
+
+#: src/cong-menus.c:1532
+#, fuzzy
+msgid "Print Previe_w..."
+msgstr "Imigaragarire y'Urupapuro mbere y'Ishyirwa- Rupapuro"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: src/cong-menus.c:1533
+#, fuzzy
+msgid "_Print"
+msgstr "Gucapa"
+
+#: src/cong-menus.c:1536
+#, fuzzy
+msgid "_Revert"
+msgstr "Kugaruza"
+
+#: src/cong-menus.c:1538
+#, fuzzy
+msgid "_Export..."
+msgstr "Kohereza..."
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_POPUP_BRKPROPS.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\tbxctl.src:RID_TOOLBOX.SID_SHOW_PROPERTYBROWSER.text
+#: src/cong-menus.c:1539
+#, fuzzy
+msgid "Proper_ties"
+msgstr "indangakintu"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# dbaccess/source/ui/inc/toolbox.hrc:MID_UNDO.text
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Actions found in Edit menu:
+#: src/cong-menus.c:1543 src/cong-menus.c:1768
+#, fuzzy
+msgid "_Undo"
+msgstr "Isubiranyuma"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# dbaccess/source/ui/inc/toolbox.hrc:MID_REDO.text
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: src/cong-menus.c:1544 src/cong-menus.c:1778
+#, fuzzy
+msgid "_Redo"
+msgstr "Isubiramo"
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_CUT.text
+#: src/cong-menus.c:1545
+#, fuzzy
+msgid "Cu_t"
+msgstr "Gukata"
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_COPY.text
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1052
+#, fuzzy
+msgid "_Copy"
+msgstr "Gukoporora"
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_PASTE.text
+#: src/cong-menus.c:1547 src/popup.c:769
+#, fuzzy
+msgid "_Paste"
+msgstr "Komeka"
+
+# sfx2/source\appl\newhelp.src:STR_HELP_BUTTON_SEARCHDIALOG.text
+#: src/cong-menus.c:1548
+#, fuzzy
+msgid "_Find..."
+msgstr "Gushaka..."
+
+#: src/cong-menus.c:1549
+#, fuzzy
+msgid "Find Ne_xt"
+msgstr "Shaka ibikurikira"
+
+#: src/cong-menus.c:1550
+#, fuzzy
+msgid "Find Pre_vious"
+msgstr "Shaka ibibanjirije"
+
+#: src/cong-menus.c:1551
+#, fuzzy
+msgid "R_eplace..."
+msgstr "Gusimbura:"
+
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\menue.src:SCCFG_PLUGINMENU.SUBMENU_INSERT.SUBMENU_NAME.FID_INSERT_NAME.text
+# #-#-#-#-#  sc.pot (PACKAGE VERSION)  #-#-#-#-#
+# sc/source\ui\src\menue.src:SCCFG_MENUBAR.SUBMENU_INSERT.SUBMENU_NAME.FID_INSERT_NAME.text
+#: src/cong-menus.c:1553
+#, fuzzy
+msgid "_Insert..."
+msgstr "Kongeramo..."
+
+#: src/cong-menus.c:1554
+msgid "View _Source"
+msgstr ""
+
+#: src/cong-menus.c:1764
+#, fuzzy, c-format
+msgid "_Undo: %s"
+msgstr "Isubiranyuma:"
+
+#: src/cong-menus.c:1774
+#, fuzzy, c-format
+msgid "_Redo: %s"
+msgstr "Isubiramo:"
+
+#: src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:379
+#, fuzzy, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "Ikiranga Nka"
+
+#: src/cong-node-properties-dialog.c:560
+msgid "Namespace"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:588
+msgid "Raw Attributes"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:621
+msgid "Value"
+msgstr "Agaciro"
+
+#: src/cong-node-properties-dialog.c:713
+#, fuzzy, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "kugirango Ibintu"
+
+#: src/cong-node-properties-dialog.c:827
+msgid "Text"
+msgstr "Umwandiko"
+
+#: src/cong-node-properties-dialog.c:879
+msgid "Choice"
+msgstr ""
+
+#: src/cong-node-properties-dialog.c:914
+msgid "Optional"
+msgstr "Bitari ngombwa"
+
+#: src/cong-node-properties-dialog.c:930
+#, fuzzy
+msgid "Zero or more"
+msgstr "Cyangwa Birenzeho"
+
+#: src/cong-node-properties-dialog.c:946
+#, fuzzy
+msgid "One or more"
+msgstr "Cyangwa Birenzeho"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: src/cong-node-properties-dialog.c:1013
+msgid "Valid Content"
+msgstr ""
+
+#. To translators: "content" is a noun; this is XML jargon
+#: src/cong-node-properties-dialog.c:1038
+#, fuzzy, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "Urugero kugirango Ibintu"
+
+# filter/source\xsltdialog\xmlfiltertabpagexslt.src:RID_XML_FILTER_TABPAGE_XSLT.FT_XML_DTD_SCHEMA.text
+#: src/cong-node-properties-dialog.c:1185
+#: src/cong-node-properties-dialog.c:1316
+msgid "DTD"
+msgstr "DTD"
+
+#: src/cong-overview-view.c:207
+#, fuzzy
+msgid "Unknown data"
+msgstr "Ibyatanzwe"
+
+#: src/cong-parser-error.c:228
+#, fuzzy, c-format
+msgid "Parse errors loading %s"
+msgstr "Amakosa Itangira..."
+
+# setup2/source\ui\dialog\querydlg.src:RID_EXECERROR_DLG.BTN_QUERY_RETRY.text
+#: src/cong-parser-error.c:236
+#, fuzzy
+msgid "_Retry"
+msgstr "Ongera ugerageze"
+
+#: src/cong-parser-error.c:315
+msgid "Line Number"
+msgstr ""
+
+#: src/cong-parser-error.c:393
+#, fuzzy, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "%si By'imbere Imiterere Bya i IDOSIYE"
+
+#: src/cong-parser-error.c:401
+#, fuzzy
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr "Inyandiko Kuri Urubuga OYA Gushigikira Kuri in a"
+
+# svx/sdi\svxslots.src:SID_OUTLINE_SHOW.text
+#: src/cong-parser-error.c:402
+msgid "Show Details"
+msgstr "Kwerekana Amasesengurabyose"
+
+#: src/cong-plugin.c:554 src/cong-plugin.c:619
+#, fuzzy
+msgid "Conglomerate could not find display information for the new file"
+msgstr "OYA Gushaka Kugaragaza Ibisobanuro kugirango i Gishya IDOSIYE"
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: src/cong-plugin.c:1043
+#, fuzzy, c-format
+msgid "<%s> property dialog"
+msgstr "<%s>indangakintu Ikiganiro"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: src/cong-plugin.c:1046
+#, fuzzy, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr "a Ikiganiro kugirango i Ikigize:"
+
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_OVERVIEW.text
+#: src/cong-primary-window.c:374
+msgid "Overview"
+msgstr "Incamake"
+
+# sfx2/source\appl\newhelp.src:WIN_HELP_INDEX.TC_INDEX.HELP_INDEX_PAGE_BOOKMARKS.text
+#: src/cong-primary-window.c:385
+msgid "Bookmarks"
+msgstr "Ibirango"
+
+#: src/cong-primary-window.c:395
+msgid "Raw XML"
+msgstr ""
+
+#: src/cong-primary-window.c:600 src/cong-primary-window.c:619
+#, fuzzy
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "Kuri i Muhinduzi"
+
+#: src/cong-primary-window.c:733
+#, fuzzy, c-format
+msgid "%s (modified) - %s"
+msgstr "%s(Byahinduwe"
+
+#: src/cong-source-layout.c:513 src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr ""
+
+#: src/cong-stylesheet.c:230
+#, fuzzy
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+"OYA Gusoma i Ipaji y'imisusire ni Agatabo IDOSIYE ni Gushyiraho Hejuru HTTP "
+"www org Agatabo HTML kugirango Birenzeho Ibisobanuro ku"
+
+#: src/cong-stylesheet.c:261
+#, fuzzy, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "a i Ipaji y'imisusire IDOSIYE Kuri"
+
+#: src/cong-stylesheet.c:278
+#, fuzzy
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr "Ipaji y'imisusire Ibigenga"
+
+#: src/cong-util.c:321 src/plugin-docbook.c:1402
+msgid "Printing XSL Formatting Objects"
+msgstr ""
+
+#: src/cong-util.c:365
+#, fuzzy
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "i Igisubizo Bivuye"
+
+#: src/cong-util.c:1437
+#, fuzzy
+msgid "(no description available)"
+msgstr "(Oya Isobanuramiterere Bihari"
+
+#: src/cong-util.c:1625
+#, fuzzy
+msgid "DTD files"
+msgstr "Idosiye"
+
+#: src/cong-util.c:1628
+#, fuzzy
+msgid "Select a DTD"
+msgstr "a"
+
+#: src/cursor.c:129
+#, fuzzy, c-format
+msgid "Split <%s> element"
+msgstr "Ikigize:"
+
+#: src/file.c:106
+msgid "XML Files"
+msgstr "Amadosiye ya XML"
+
+#: src/file.c:118
+msgid "All Files"
+msgstr "Amadosiye yose"
+
+#: src/plugin-admonition.c:77
+msgid "Admonition"
+msgstr ""
+
+#: src/plugin-admonition.c:78
+#, fuzzy
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Muhinduzi kugirango Inyobora Iburira"
+
+#: src/plugin-arbitrary.c:168
+#, fuzzy
+msgid "The XML document needs a top-level element."
+msgstr "Inyandiko a Hejuru: urwego Ikigize:"
+
+#: src/plugin-arbitrary.c:270
+msgid "Empty XML Document"
+msgstr ""
+
+#: src/plugin-arbitrary.c:271
+#, fuzzy
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "ubusa Inyandiko Bya Ubwoko"
+
+#: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
+#: src/plugin-cleanup-source.c:78
+#, fuzzy
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr ""
+"Hejuru i Inkomoko Bya i Inyandiko ni Kuri Gusoma in a ITEGEKONGENGA Muhinduzi"
+
+#: src/plugin-cleanup-source.c:76
+#, fuzzy
+msgid "_Clean the XML Source"
+msgstr "i"
+
+#: src/plugin-convert-case.c:125
+#, fuzzy
+msgid "Export as \"lower case\" XML"
+msgstr "Nka Ntoya"
+
+#: src/plugin-convert-case.c:126
+#, fuzzy
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+"Nka IDOSIYE Guhindura.... Byose i Na Ibiranga in i Inyandiko Kuri Inyuguti "
+"nto Ryari: Na: Inyandiko"
+
+#: src/plugin-docbook.c:225
+#, fuzzy
+msgid "Untitled section"
+msgstr "Icyiciro"
+
+#: src/plugin-docbook.c:232
+#, fuzzy
+msgid "Text of the article goes here"
+msgstr "Bya i Ingingo"
+
+#: src/plugin-docbook.c:251
+msgid "Untitled Article"
+msgstr ""
+
+#: src/plugin-docbook.c:301
+#, fuzzy
+msgid "Untitled chapter"
+msgstr "Umutwe"
+
+#: src/plugin-docbook.c:308
+#, fuzzy
+msgid "Text of the first chapter goes here"
+msgstr "Bya i Itangira Umutwe"
+
+#: src/plugin-docbook.c:327
+msgid "Untitled Book"
+msgstr ""
+
+#: src/plugin-docbook.c:378
+#, fuzzy
+msgid "Untitled book"
+msgstr "Igitabo"
+
+#: src/plugin-docbook.c:397
+#, fuzzy
+msgid "Untitled Set of Documents"
+msgstr "Bya"
+
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: src/plugin-docbook.c:1103
+#, fuzzy, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr "OYA Gushaka i Ipaji y'imisusire Kuri GUHINDURA Kuri"
+
+#: src/plugin-docbook.c:1106
+#, fuzzy
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Kuri i"
+
+#: src/plugin-docbook.c:1108
+#, fuzzy
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr ""
+"Bihari ku HTTP InyandikoGitabo Cyuzuye Na Kyongewe Kuri Agatabo IDOSIYE HTTP "
+"www org Agatabo HTML kugirango Birenzeho Ibisobanuro ku"
+
+#: src/plugin-docbook.c:1144
+#, fuzzy, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr "%sIhindurangero Byuzuye Kuri in"
+
+#: src/plugin-docbook.c:1268
+#, fuzzy
+msgid "Exporting PDF file"
+msgstr "IDOSIYE"
+
+#: src/plugin-docbook.c:1272 src/plugin-docbook.c:1400
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr ""
+
+#: src/plugin-docbook.c:1274
+#, fuzzy
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "Inyuma Nka a IDOSIYE"
+
+#: src/plugin-docbook.c:1289 src/plugin-fo.c:97
+#, fuzzy
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "Kuri"
+
+#: src/plugin-docbook.c:1396
+#, fuzzy
+msgid "Printing DocBook file"
+msgstr "IDOSIYE"
+
+#: src/plugin-docbook.c:1796
+msgid "DocBook Article"
+msgstr ""
+
+#: src/plugin-docbook.c:1797
+#, fuzzy
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr "Ingingo kugirango a Webu Cyangwa a ikinyamakuru ikoresha i Imiterere"
+
+#: src/plugin-docbook.c:1804
+msgid "DocBook Book"
+msgstr ""
+
+#: src/plugin-docbook.c:1805
+#, fuzzy
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "a Igitabo ikoresha i Imiterere"
+
+#: src/plugin-docbook.c:1812
+msgid "DocBook Set"
+msgstr ""
+
+#: src/plugin-docbook.c:1813
+#, fuzzy
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "a Gushyiraho Bya ikoresha i Imiterere"
+
+#: src/plugin-docbook.c:1821
+#, fuzzy
+msgid "Import text as a DocBook article"
+msgstr "Umwandiko Nka a Ingingo"
+
+#: src/plugin-docbook.c:1822
+#, fuzzy
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr "a Byuzuye Umwandiko IDOSIYE i Imiterere Nka Ingingo"
+
+#: src/plugin-docbook.c:1840
+#, fuzzy
+msgid "Export DocBook as HTML"
+msgstr "Nka"
+
+#: src/plugin-docbook.c:1841
+#, fuzzy
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr "Kuri Kurema a Bivuye iyi IDOSIYE"
+
+#: src/plugin-docbook.c:1849
+#, fuzzy
+msgid "Export DocBook as PDF"
+msgstr "Nka"
+
+#: src/plugin-docbook.c:1850
+#, fuzzy
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr "Kuri Kurema a IDOSIYE Bivuye iyi IDOSIYE"
+
+#: src/plugin-docbook.c:1858
+#, fuzzy
+msgid "Export DocBook as XSL:FO"
+msgstr "Nka"
+
+#: src/plugin-docbook.c:1859
+#, fuzzy
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+"Kuri Kurema IDOSIYE Bivuye iyi IDOSIYE Byacapwe Cyangwa Kuri ku a Itariki"
+
+#: src/plugin-docbook.c:1868
+msgid "Print DocBook"
+msgstr ""
+
+#: src/plugin-docbook.c:1877
+#, fuzzy
+msgid "Generic DocBook property dialog"
+msgstr "indangakintu Ikiganiro"
+
+#: src/plugin-docbook.c:1878
+#, fuzzy
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr "a Ikiganiro kugirango"
+
+#: src/plugin-docbook.c:1896 src/plugin-docbook.c:1899 src/plugin-html.c:137
+#: src/plugin-html.c:140
+#, fuzzy
+msgid "Open Link in Browser"
+msgstr "in"
+
+#: src/plugin-docbook.c:1908
+msgid "Promote Section"
+msgstr ""
+
+#: src/plugin-docbook.c:1909
+#, fuzzy
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr "a Icyiciro Kuri a urwego muri i Inyandiko"
+
+# svx/sdi\svxslots.src:SID_OUTLINE_LEFT.text
+#: src/plugin-docbook.c:1911 src/plugin-html.c:148 src/plugin-html.c:151
+msgid "Promote"
+msgstr "Guteza imbere"
+
+#: src/plugin-docbook.c:1912 src/plugin-docbook.c:1913
+#, fuzzy
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr "i Icyiciro Kuri a urwego muri i Inyandiko"
+
+#: src/plugin-docbook.c:1919
+msgid "Demote Section"
+msgstr ""
+
+#: src/plugin-docbook.c:1920
+#, fuzzy
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr "a Icyiciro Kuri a Ntoya urwego muri i Inyandiko"
+
+# svx/sdi\svxslots.src:SID_OUTLINE_RIGHT.text
+#: src/plugin-docbook.c:1922 src/plugin-html.c:159 src/plugin-html.c:162
+msgid "Demote"
+msgstr "Gusubiza Inyuma"
+
+#: src/plugin-docbook.c:1923 src/plugin-docbook.c:1924
+#, fuzzy
+msgid "Demote the section to a lower organisational level within the document"
+msgstr "i Icyiciro Kuri a Ntoya urwego muri i Inyandiko"
+
+#: src/plugin-dtd.c:93
+#, fuzzy, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "Inyandiko Ubwoko ku"
+
+#: src/plugin-dtd.c:94
+#, fuzzy, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr "Kugaragaza ku buryo bwikora Bivuye"
+
+#: src/plugin-dtd.c:215
+#, fuzzy
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "a"
+
+#: src/plugin-dtd.c:216
+#, fuzzy
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "a IDOSIYE a Kugaragaza IDOSIYE"
+
+#: src/plugin-dtd.c:224
+#, fuzzy
+msgid "Convert DTD into a Relax NG schema"
+msgstr "a Igishushanyo"
+
+#: src/plugin-dtd.c:225
+#, fuzzy
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "a IDOSIYE Guhindura.... a"
+
+#: src/plugin-dtd.c:233
+msgid "Convert DTD into W3C XML Schema"
+msgstr ""
+
+#: src/plugin-dtd.c:234
+#, fuzzy
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "a IDOSIYE Guhindura.... a"
+
+#: src/plugin-dtd.c:242
+#, fuzzy
+msgid "Convert DTD into a Schematron file"
+msgstr "a IDOSIYE"
+
+#: src/plugin-dtd.c:243
+#, fuzzy
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "a IDOSIYE Guhindura.... a"
+
+#: src/plugin-dtd.c:251
+#, fuzzy
+msgid "Convert DTD into an Examplotron file"
+msgstr "IDOSIYE"
+
+#: src/plugin-dtd.c:252
+#, fuzzy
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "a IDOSIYE Guhindura...."
+
+#: src/plugin-fo.c:152
+#, fuzzy
+msgid "Export XSL-FO as PDF"
+msgstr "Nka"
+
+#: src/plugin-fo.c:153
+#, fuzzy
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "a IDOSIYE Bivuye i Ibisobanuro"
+
+#: src/plugin-fo.c:162
+msgid "Print XSL:FO"
+msgstr ""
+
+#: src/plugin-lists.c:77
+msgid "List Member Element"
+msgstr ""
+
+#: src/plugin-lists.c:78
+#, fuzzy
+msgid "An editor node for visualising a member of a list"
+msgstr "Muhinduzi kugirango a Bya a Urutonde"
+
+# sc/source\ui\src\textdlgs.src:RID_SCDLG_PARAGRAPH.text
+#: src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "Igika"
+
+#: src/plugin-paragraph.c:69
+#, fuzzy
+msgid "An editor node for visualising a paragraph"
+msgstr "Muhinduzi kugirango a Igika"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+#, fuzzy
+msgid "Print XML source"
+msgstr "Inkomoko"
+
+#: src/plugin-random.c:148
+#, fuzzy
+msgid "What kind of random XML document would you like to create?"
+msgstr "Bya Inyandiko nka Kuri Kurema"
+
+#: src/plugin-random.c:685
+msgid "Random Document"
+msgstr ""
+
+#: src/plugin-random.c:686
+#, fuzzy
+msgid "Create an XML document containing random content."
+msgstr "Inyandiko Ibikubiyemo"
+
+#: src/plugin-relaxng.c:128
+msgid "Compact Syntax View"
+msgstr ""
+
+#: src/plugin-relaxng.c:146 src/plugin-relaxng.c:149
+#, fuzzy
+msgid "View as Compact RELAX NG"
+msgstr "Nka"
+
+#: src/plugin-relaxng.c:147
+#, fuzzy
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr "i Ifishi Bya a Igishushanyo"
+
+#: src/plugin-save-dispspec.c:155
+msgid "Dump Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:156 src/plugin-save-dispspec.c:159
+#: src/plugin-save-dispspec.c:160
+#, fuzzy
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+"i KIGEZWEHO Kugaragaza a Kugaragaza xml IDOSIYE IDOSIYE Hanyuma ku i "
+"Ukoresha:"
+
+#: src/plugin-save-dispspec.c:158
+msgid "_Dump Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:166
+msgid "Edit Display Spec"
+msgstr ""
+
+#: src/plugin-save-dispspec.c:167 src/plugin-save-dispspec.c:170
+#: src/plugin-save-dispspec.c:171
+#, fuzzy
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "i KIGEZWEHO Kugaragaza Nka a Inyandiko"
+
+#: src/plugin-save-dispspec.c:169
+msgid "_Edit Display Spec"
+msgstr ""
+
+#: src/plugin-sgml.c:43
+#, fuzzy, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "OYA Kuzana i IDOSIYE"
+
+#: src/plugin-sgml.c:135
+#, fuzzy
+msgid "Attempting to run the sgml2xml tool"
+msgstr "Kuri Gukoresha i"
+
+#: src/plugin-sgml.c:190
+msgid "Importing SGML"
+msgstr ""
+
+#: src/plugin-sgml.c:209
+msgid "Import SGML"
+msgstr ""
+
+#: src/plugin-sgml.c:210
+#, fuzzy
+msgid "Import an SGML file, converting to XML."
+msgstr "IDOSIYE Guhindura.... Kuri"
+
+#: src/plugin-table.c:405
+msgid "Table Group"
+msgstr ""
+
+# sw/source\ui\shells\shells.src:STR_SWBG_TABLE_ROW.text
+#: src/plugin-table.c:411
+#, fuzzy
+msgid "Table Row"
+msgstr "Urubariro rw'imbonerahamwe"
+
+#: src/plugin-table.c:417
+msgid "Table Entry"
+msgstr ""
+
+#: src/plugin-tests.c:64
+#, fuzzy
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr "ni a Ishusho Kalindari Igenzura a Akarindamwanya Na Na: Amahitamo"
+
+#: src/plugin-tests.c:142 src/plugin-tests.c:221
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr ""
+
+#: src/plugin-tests.c:359
+msgid "Unicode Character Reference"
+msgstr ""
+
+#: src/plugin-tests.c:360
+#, fuzzy
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr "a imbonerahamwe# a Bya i Inyuguti Gushyiraho Nka a Ingingo"
+
+#: src/plugin-validate.c:163
+#, fuzzy, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "Inyandiko Ivivuwe kugirango Ukugira agaciro"
+
+#: src/plugin-validate.c:170
+#, fuzzy
+msgid ""
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr "iyi ku Wongera a Kuri i Inyandiko"
+
+#: src/plugin-validate.c:215
+#, fuzzy, c-format
+msgid "The document \"%s\" is valid."
+msgstr "Inyandiko ni Byemewe"
+
+#: src/plugin-validate.c:249
+msgid "Validate Document"
+msgstr ""
+
+#: src/plugin-validate.c:250 src/plugin-validate.c:253
+#: src/plugin-validate.c:254
+#, fuzzy
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr "E."
+
+#: src/plugin-validate.c:252
+msgid "_Validate Document"
+msgstr ""
+
+#: src/plugin-website.c:465
+#, fuzzy
+msgid "Generating website"
+msgstr "Webu"
+
+#: src/plugin-website.c:472
+#, fuzzy
+msgid "Finished generating website."
+msgstr "Webu"
+
+#: src/plugin-website.c:477
+#, fuzzy
+msgid "Conglomerate did not finish generating the website"
+msgstr "OYA Kurangiza i Webu"
+
+#: src/plugin-website.c:478
+#, fuzzy
+msgid "One of the stages reported an error."
+msgstr "Bya i Ikosa"
+
+#: src/plugin-website.c:479
+#, fuzzy
+msgid "Click on the \"Details\" button for more information"
+msgstr "ku i Akabuto kugirango Birenzeho Ibisobanuro"
+
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (PACKAGE VERSION)  #-#-#-#-#
+#: src/plugin-website.c:480
+#, fuzzy
+msgid "_Details"
+msgstr "Birambuye"
+
+#: src/plugin-website.c:508
+#, fuzzy
+msgid "Generate website"
+msgstr "Webu"
+
+#: src/plugin-website.c:509 src/plugin-website.c:512 src/plugin-website.c:513
+#, fuzzy
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "a Bya Amapaji Bivuye i Webu Isobanuramiterere"
+
+#: src/plugin-website.c:511
+msgid "Generate _Website"
+msgstr ""
+
+#: src/plugin-xsl.c:324
+msgid "XSL Template Element"
+msgstr ""
+
+#: src/plugin-xsl.c:325
+#, fuzzy
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "Ikigize: kugirango Inyandikorugero in Ipaji y'imisusire"
+
+#: src/popup.c:490
+#, fuzzy, c-format
+msgid "Apply span tag: %s"
+msgstr "Itagi:"
+
+#: src/popup.c:561
+msgid "Remove Span Tag"
+msgstr ""
+
+#: src/popup.c:607
+#, fuzzy
+msgid "Convert to a comment"
+msgstr "Kuri a Icyo wongeraho"
+
+#: src/popup.c:627 src/tree.c:521
+msgid "Uncomment"
+msgstr ""
+
+#: src/popup.c:628
+#, fuzzy
+msgid ""
+"Convert a comment containing XML source code into the corresponding code"
+msgstr "a Icyo wongeraho Inkomoko ITEGEKONGENGA i ITEGEKONGENGA"
+
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_POPUP_BRKPROPS.text
+# #-#-#-#-#  basctl.pot (PACKAGE VERSION)  #-#-#-#-#
+# basctl/source\basicide\tbxctl.src:RID_TOOLBOX.SID_SHOW_PROPERTYBROWSER.text
+#: src/popup.c:708 src/popup.c:1026
+#, fuzzy
+msgid "_Properties"
+msgstr "indangakintu"
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_CUT.text
+#: src/popup.c:742 src/popup.c:1043
+#, fuzzy
+msgid "_Cut"
+msgstr "Gukata"
+
+#: src/popup.c:968
+#, fuzzy
+msgid "Other XML element..."
+msgstr "Ikigize:"
+
+#: src/popup.c:1062
+msgid "Paste into"
+msgstr ""
+
+#: src/popup.c:1072
+#, fuzzy
+msgid "Paste before"
+msgstr "Mbere"
+
+#: src/popup.c:1082
+#, fuzzy
+msgid "Paste after"
+msgstr "Nyuma"
+
+#: src/tree.c:104 src/tree.c:136
+#, c-format
+msgid "Insert sibling: %s"
+msgstr ""
+
+#: src/tree.c:188 src/tree.c:216
+#, c-format
+msgid "Insert child: %s"
+msgstr ""
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_CUT.text
+#: src/tree.c:311 src/xmledit.c:51
+msgid "Cut"
+msgstr "Gukata"
+
+#: src/tree.c:469
+#, fuzzy
+msgid "Convert to comment"
+msgstr "Kuri Icyo wongeraho"
+
+#. create description for dialog
+#: src/xmldata.c:452
+#, fuzzy, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr "Ikigize: a Kuri Byemewe Guhitamo Bya i"
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: src/xmldata.c:457
+msgid "Required Children Choices"
+msgstr ""
+
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_PASTE.text
+#: src/xmledit.c:166
+msgid "Paste"
+msgstr "Komeka"
+
+#: src/xmledit.c:252
+msgid "Paste Under"
+msgstr ""
+
+#: src/xmledit.c:303
+msgid "Paste Before"
+msgstr ""
+
+#: src/xmledit.c:353
+msgid "Paste After"
+msgstr ""
+
+#: src/xmledit.c:394
+msgid "Source View - Conglomerate"
+msgstr ""
