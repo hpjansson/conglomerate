@@ -63,7 +63,7 @@ conglomerate_SOURCES =      \
   cong-editor-node-entity-ref.h \
   cong-editor-node-text.h        \
   cong-editor-node-unimplemented.h \
-  cong-editor-widget3.h     \
+  cong-editor-widget.h      \
   cong-eel.h                \
   cong-enum-mapping.h       \
   cong-error-dialog.h       \
