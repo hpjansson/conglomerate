@@ -13,6 +13,7 @@ config.log
 config.status
 config.sub
 configure
+conglomerate.spec
 intltool-*
 libtool
 ltmain.sh
