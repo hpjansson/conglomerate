@@ -1,5 +1,9 @@
 2003-07-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-inlines.c
+
+	Removed spurious include
+
 	* cong-editor-area-flow-holder-blocks.c, cong-editor-area-flow-holder-inlines.c, cong-editor-area-flow-holder-single.c, cong-editor-area-flow-holder.c, cong-editor-area-flow-holder.h, cong-editor-widget3.c
 
 	Use child_policy objects; editor widget no longer needs (or has) a 1-1 mapping between nodes and areas

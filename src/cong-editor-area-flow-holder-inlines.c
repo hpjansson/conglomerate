@@ -24,7 +24,6 @@
 
 #include "global.h"
 #include "cong-editor-area-flow-holder-inlines.h"
-#include "cong-editor-area-flow-holder-line.h"
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
