@@ -51,8 +51,20 @@ fi
 update()
 # changes in 'debian' should go back into 'deb'
 {
-  echo Take manually care of \"^Only in\"
-  diff -r debian deb | grep "^Only in de"
+  NEWFILES=""
+  set +x
+  for DF in $( cd debian ; find . -type f | sed -e 's@^\./@@' )
+  do
+    echo $DF
+    if [ ! -f deb/$DF ]
+    then
+     # a new file in the debian directory
+     diff -uN /dev/null debian/$DF | sed -e 'sS^\+\+\+ debian/S+++ deb/S'
+    else
+     diff -u deb/$DF debian/$DF | \
+     sed -e 'sG^--- deb/G--- debian/G' -e 'sS^\+\+\+ debian/S+++ deb/S'
+    fi
+  done
 }
 
 diffgz()
