@@ -1,3 +1,8 @@
+2003-10-27  Geert Stappers  <stappers@stappers.nl>
+
+	* configure.in
+	version 0.7.5cvs237 for tarball releases
+
 2003-10-25  Metin Amiroff  <metin@karegen.com>
 
 	* configure.in: Added az to ALL_LINGUAS.
