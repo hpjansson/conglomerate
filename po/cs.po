@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-22 09:27-0400\n"
-"PO-Revision-Date: 2004-06-21 17:25+0200\n"
+"POT-Creation-Date: 2004-06-23 03:06+0200\n"
+"PO-Revision-Date: 2004-06-23 10:46+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -316,22 +316,19 @@ msgstr "O_testovat tento odkaz"
 
 #: glade/plugin-arbitrary.glade.h:2
 msgid "Local Name"
-msgstr ""
+msgstr "Místní název"
 
 #: glade/plugin-arbitrary.glade.h:3
-#, fuzzy
 msgid "Namespace URI"
-msgstr "Prostor jmen"
+msgstr "URI prostoru jmen"
 
 #: glade/plugin-arbitrary.glade.h:4
-#, fuzzy
 msgid "Preview"
-msgstr "Náhled před tiskem"
+msgstr "Náhled"
 
 #: glade/plugin-arbitrary.glade.h:6
-#, fuzzy
 msgid "Top-level Element"
-msgstr "Element šablony XSL"
+msgstr "Element nejvyšší úrovně"
 
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
@@ -388,102 +385,99 @@ msgstr "(neurčeno)"
 
 #: src/cong-attribute-editor-lang.c:48
 msgid "Breton"
-msgstr ""
+msgstr "Bretonština"
 
 #: src/cong-attribute-editor-lang.c:49
 msgid "Catalan"
-msgstr ""
+msgstr "Katalánština"
 
 #: src/cong-attribute-editor-lang.c:50
 msgid "Czech"
-msgstr ""
+msgstr "Čeština"
 
 #: src/cong-attribute-editor-lang.c:51
-#, fuzzy
 msgid "Danish"
-msgstr "Detaily"
+msgstr "Dánština"
 
 #: src/cong-attribute-editor-lang.c:52
 msgid "German (Germany)"
-msgstr ""
+msgstr "Němčina (německá)"
 
 #: src/cong-attribute-editor-lang.c:53
 msgid "German (Swiss)"
-msgstr ""
+msgstr "Němčina (švýcarská)"
 
 #: src/cong-attribute-editor-lang.c:54
 msgid "English (American)"
-msgstr ""
+msgstr "Angličtina (americká)"
 
 #: src/cong-attribute-editor-lang.c:55
 msgid "English (British)"
-msgstr ""
+msgstr "Angličtina (britská)"
 
 #: src/cong-attribute-editor-lang.c:56
 msgid "English (Canadian)"
-msgstr ""
+msgstr "Angličtina (kanadská)"
 
 #: src/cong-attribute-editor-lang.c:57
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #: src/cong-attribute-editor-lang.c:58
 msgid "Spanish"
-msgstr ""
+msgstr "Španělština"
 
 #: src/cong-attribute-editor-lang.c:59
 msgid "Faroese"
-msgstr ""
+msgstr "Faroese"
 
 #: src/cong-attribute-editor-lang.c:60
 msgid "French (France)"
-msgstr ""
+msgstr "Francouzština (francouzská)"
 
 #: src/cong-attribute-editor-lang.c:61
 msgid "French (Swiss)"
-msgstr ""
+msgstr "Francouzština (švýcarská)"
 
 #: src/cong-attribute-editor-lang.c:62
 msgid "Italian"
-msgstr ""
+msgstr "Italština"
 
 #: src/cong-attribute-editor-lang.c:63
-#, fuzzy
 msgid "Dutch"
-msgstr "Hloubka"
+msgstr "Holandština"
 
 #: src/cong-attribute-editor-lang.c:64
 msgid "Norwegian"
-msgstr ""
+msgstr "Norština"
 
 #: src/cong-attribute-editor-lang.c:65
 msgid "Polish"
-msgstr ""
+msgstr "Polština"
 
 #: src/cong-attribute-editor-lang.c:66
 msgid "Portuguese (Portugal)"
-msgstr ""
+msgstr "Portugalština (portugalská)"
 
 #: src/cong-attribute-editor-lang.c:67
 msgid "Portuguese (Brazilian)"
-msgstr ""
+msgstr "Portugalština (brazilská)"
 
 #: src/cong-attribute-editor-lang.c:68
 msgid "Russian"
-msgstr ""
+msgstr "Ruština"
 
 #: src/cong-attribute-editor-lang.c:69
 msgid "Swedish"
-msgstr ""
+msgstr "Švédština"
 
 #: src/cong-attribute-editor-lang.c:70
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukrajinština"
 
 #: src/cong-attribute-editor-lang.c:159
-#, fuzzy
 msgid "No Language"
-msgstr "Jazyk"
+msgstr "Žádný jazyk"
 
 #: src/cong-attribute-editor.c:257 src/cong-attribute-wrapper.c:241
 #: src/cong-node-properties-dialog.c:424
@@ -1818,12 +1812,11 @@ msgstr "(popis není k dispozici)"
 
 #: src/cong-util.c:1362
 msgid "DTD files"
-msgstr ""
+msgstr "Soubory DTD"
 
 #: src/cong-util.c:1365
-#, fuzzy
 msgid "Select a DTD"
-msgstr "Vybrat %s"
+msgstr "Zvolte DTD"
 
 #: src/cursor.c:128
 #, c-format
@@ -1844,17 +1837,15 @@ msgstr "Uzel editoru pro zobrazení tipů, varování atd"
 
 #: src/plugin-arbitrary.c:168
 msgid "The XML document needs a top-level element."
-msgstr ""
+msgstr "Dokument XML potřebuje element nejvyšší úrovně."
 
 #: src/plugin-arbitrary.c:269
-#, fuzzy
 msgid "Empty XML Document"
-msgstr "Dokument HTML"
+msgstr "Prázdný dokument XML"
 
 #: src/plugin-arbitrary.c:270
-#, fuzzy
 msgid "Create an empty XML document of an arbitrary type."
-msgstr "Vytvořit dokument XML obsahující náhodný obsah."
+msgstr "Vytvořit prázdný dokument XML libovolného typu."
 
 #: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:452
 msgid "Cleanup XML Source"
@@ -2235,11 +2226,11 @@ msgstr "Nemůže být zkontrolována platnost dokumentu \"%s\"."
 #: src/plugin-validate.c:170
 msgid ""
 "You can fix this by adding a Document Type Declaration (DTD) to the document"
-msgstr ""
+msgstr "Můžete to opravit přidáním deklarace typu dokumentu (DTD) do dokumentu"
 
 #: src/plugin-validate.c:172
 msgid "_Cancel"
-msgstr ""
+msgstr "_Zrušit"
 
 #: src/plugin-validate.c:215
 #, c-format
@@ -2414,13 +2405,6 @@ msgstr "Vložit za"
 #: src/xmledit.c:395
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
-
-#~ msgid ""
-#~ "In a future version of Conglomerate we may have a feature that lets you "
-#~ "attach a document type to a document."
-#~ msgstr ""
-#~ "V budoucí verzi Conglomerate možná budeme mít funkci, která vás nechá "
-#~ "přiřadit k dokumentu jeho typ."
 
 #~ msgid "The document \"%s\" is not valid."
 #~ msgstr "Dokument \"%s\" není platný."
