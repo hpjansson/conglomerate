@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-23 14:13+0200\n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-23 17:05+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -189,23 +189,25 @@ msgstr "jmenovka"
 msgid "string_selection_dialog"
 msgstr "dialog_výběru_řetězce"
 
-#: src/cong-app.c:267
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: src/cong-app.c:333
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
+#: src/cong-app.c:364
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate nemohl načíst žádný soubor xds z adresáře \"%s\""
 
-#: src/cong-app.c:335
+#: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 
-#: src/cong-app.c:337
+#: src/cong-app.c:368
+#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
 msgstr ""
 "Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, "
 "ale nenainstalovali. Zkuste jej nainstalovat."
@@ -285,11 +287,11 @@ msgstr "Změny za posledních %li minut budou zahozeny."
 msgid "Changes from the past minute will be discarded."
 msgstr "Změny za poslední minutu budou zahozeny."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr "Conglomerate nemohl číst svůj registr typů dokumentů."
 
-#: src/cong-dispspec-registry.c:93
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate se pokusil podívat na všechny soubory v daném umístění."
 
@@ -361,37 +363,42 @@ msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:752
+#: src/cong-editor-node-text.c:750
 msgid "Select word"
 msgstr "Vybrat slovo"
 
-#: src/cong-editor-node-text.c:777
+#: src/cong-editor-node-text.c:775
 msgid "Move cursor"
 msgstr "Přesunout kurzor"
 
-#: src/cong-editor-node-text.c:835
+#: src/cong-editor-node-text.c:833
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
-#: src/cong-editor-widget3.c:369
+#: src/cong-editor-widget3.c:396
 msgid "Expander Size"
 msgstr "Velikost rozbalovače"
 
-#: src/cong-editor-widget3.c:370
+#: src/cong-editor-widget3.c:397
 msgid "Size of the expander arrow"
 msgstr "Velikost šipky rozbalovače"
 
-#: src/cong-editor-widget3.c:1183
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Metoda tisku:"
+
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr "Psaní"
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Pohyb kurzoru"
 
-#: src/cong-editor-widget3.c:1223 src/cong-editor-widget3.c:1236
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Odstranit výběr"
-
-#: src/cong-editor-widget3.c:1259
-msgid "Typing"
-msgstr "Psaní"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -1123,27 +1130,27 @@ msgstr "Sloučit tagy"
 msgid "Delete character"
 msgstr "Odstranit znak"
 
-#: src/cong-location.c:773
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Počítám začátek dokumentu"
 
-#: src/cong-location.c:785
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Počítám začátek řádku"
 
-#: src/cong-location.c:798
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Počítám konec dokumentu"
 
-#: src/cong-location.c:811
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Počítám konec řádku"
 
-#: src/cong-location.c:824
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Počítám předchozí stránku"
 
-#: src/cong-location.c:837
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Počítám následující stránku"
 
@@ -1492,7 +1499,7 @@ msgid "Redo"
 msgstr "Znovu"
 
 #: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
-#: src/xmledit.c:47
+#: src/xmledit.c:44
 msgid "Cut"
 msgstr "Vyjmout"
 
@@ -1501,7 +1508,7 @@ msgid "Copy"
 msgstr "Kopírovat"
 
 #: src/cong-primary-window.c:348 src/cong-primary-window.c:349
-#: src/xmledit.c:155
+#: src/xmledit.c:161
 msgid "Paste"
 msgstr "Vložit"
 
@@ -2006,43 +2013,43 @@ msgstr "Použít tag span: %s"
 msgid "Remove Span Tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:357
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:917
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:927
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:935
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:946
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:977
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:985
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:993
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:1010
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1035
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
@@ -2070,18 +2077,18 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Vyžadované volby potomků"
 
-#: src/xmledit.c:233
+#: src/xmledit.c:239
 msgid "Paste Under"
 msgstr "Vložit pod"
 
-#: src/xmledit.c:276
+#: src/xmledit.c:282
 msgid "Paste Before"
 msgstr "Vložit před"
 
-#: src/xmledit.c:318
+#: src/xmledit.c:324
 msgid "Paste After"
 msgstr "Vložit za"
 
-#: src/xmledit.c:357
+#: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"

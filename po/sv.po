@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-10-24 03:27+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-24 03:27+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -190,23 +191,25 @@ msgstr "etikett"
 msgid "string_selection_dialog"
 msgstr "strängvalsdialog"
 
-#: src/cong-app.c:267
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "XML-redigerare"
 
-#: src/cong-app.c:333
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
+#: src/cong-app.c:364
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate kunde inte läsa in några xds-filer från katalogen \"%s\""
 
-#: src/cong-app.c:335
+#: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate kunde inte hitta några beskrivningar av dokumenttyper."
 
-#: src/cong-app.c:337
+#: src/cong-app.c:368
+#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
 msgstr ""
 "Om du ser detta fel är det sannolikt att du byggt Conglomerate men inte "
 "installerat det. Försök installera det."
@@ -287,11 +290,11 @@ msgstr "Ändringar från de senaste %li minuterna kommer att kastas."
 msgid "Changes from the past minute will be discarded."
 msgstr "Ändringar från den senaste minuten kommer att kastas."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr "Conglomerate kunde inte läsa sitt register med dokumenttyper."
 
-#: src/cong-dispspec-registry.c:93
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate försökte att titta på alla filer på platsen."
 
@@ -375,25 +378,30 @@ msgstr "Flytta markör"
 msgid "Drag out selection"
 msgstr "Dra ut markering"
 
-#: src/cong-editor-widget3.c:369
+#: src/cong-editor-widget3.c:396
 msgid "Expander Size"
 msgstr "Utökarstorlek"
 
-#: src/cong-editor-widget3.c:370
+#: src/cong-editor-widget3.c:397
 msgid "Size of the expander arrow"
 msgstr "Storlek på utökarpilen"
 
-#: src/cong-editor-widget3.c:1183
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Utskriftsmetod:"
+
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr "Inmatning"
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Markörflytt"
 
-#: src/cong-editor-widget3.c:1223 src/cong-editor-widget3.c:1236
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Ta bort markerin"
-
-#: src/cong-editor-widget3.c:1259
-msgid "Typing"
-msgstr "Inmatning"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -1132,27 +1140,27 @@ msgstr "Slå samman taggar"
 msgid "Delete character"
 msgstr "Ta bort tecken"
 
-#: src/cong-location.c:773
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Beräknar dokumentbörjan"
 
-#: src/cong-location.c:785
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Beräknar radbörjan"
 
-#: src/cong-location.c:798
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Beräknar dokumentslut"
 
-#: src/cong-location.c:811
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Berknar radslut"
 
-#: src/cong-location.c:824
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Beräknar föregående sida"
 
-#: src/cong-location.c:837
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Beräknar nästa sida"
 
@@ -2029,43 +2037,43 @@ msgstr "Tillämpa spanntagg: %s"
 msgid "Remove Span Tag"
 msgstr "Ta bort spanntagg"
 
-#: src/popup.c:357
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "Ta bort spanntagg"
 
-#: src/popup.c:917
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Ta bort detta objekt"
 
-#: src/popup.c:927
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr "Lägg till textnod efter"
 
-#: src/popup.c:935
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr "Lägg till textnod före"
 
-#: src/popup.c:946
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "Ställ in texten"
 
-#: src/popup.c:977
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Klistra in i"
 
-#: src/popup.c:985
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Klistra in före"
 
-#: src/popup.c:993
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Klistra in efter"
 
-#: src/popup.c:1010
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Nytt underelement"
 
-#: src/popup.c:1035
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr "Nytt syskon"
 

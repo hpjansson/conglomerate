@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 14:31+0100\n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-27 14:32+0100\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -211,7 +211,10 @@ msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
-msgstr "Уколико видите ову грешку, највероватније сте изградили Конгломерат, али га нисте инсталирали. Покушајте да га инсталирате. Уколико сте изменили подразумевано подешавање путање за дефиницију приказа, проверите и то."
+msgstr ""
+"Уколико видите ову грешку, највероватније сте изградили Конгломерат, али га "
+"нисте инсталирали. Покушајте да га инсталирате. Уколико сте изменили "
+"подразумевано подешавање путање за дефиницију приказа, проверите и то."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
@@ -386,25 +389,30 @@ msgstr "Померите курзор"
 msgid "Drag out selection"
 msgstr "Извуци изабрано"
 
-#: src/cong-editor-widget3.c:369
+#: src/cong-editor-widget3.c:396
 msgid "Expander Size"
 msgstr "Величина разграника"
 
-#: src/cong-editor-widget3.c:370
+#: src/cong-editor-widget3.c:397
 msgid "Size of the expander arrow"
 msgstr "Величина стрелице разграника"
 
-#: src/cong-editor-widget3.c:1183
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Начин штампање:"
+
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr "Куцање"
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Кретање курзора"
 
-#: src/cong-editor-widget3.c:1223 src/cong-editor-widget3.c:1236
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Обриши изабрано"
-
-#: src/cong-editor-widget3.c:1259
-msgid "Typing"
-msgstr "Куцање"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -2031,43 +2039,43 @@ msgid "Remove Span Tag"
 msgstr "Уклони обухватну ознаку"
 
 # bug: is "span" keyword
-#: src/popup.c:357
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "Уклони обухватну ознаку"
 
-#: src/popup.c:917
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Уклони ову ставку"
 
-#: src/popup.c:927
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr "Додај текстуални чвор иза"
 
-#: src/popup.c:935
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr "Додај текстуални чвор испред"
 
-#: src/popup.c:946
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "Постави текст"
 
-#: src/popup.c:977
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Убаци у"
 
-#: src/popup.c:985
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Убаци испред"
 
-#: src/popup.c:993
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Убаци иза"
 
-#: src/popup.c:1010
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Нови под-елемент"
 
-#: src/popup.c:1035
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr "Ново гранање"
 

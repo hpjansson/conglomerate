@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-12 20:12+0300\n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-12 20:08+0300\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "X-Generator: KBabel 1.0\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
-#: src/cong-primary-window.c:435 src/cong-primary-window.c:437
-#: src/cong-primary-window.c:669 src/cong-primary-window.c:671
-#: src/cong-primary-window.c:677
+#: src/cong-primary-window.c:441 src/cong-primary-window.c:443
+#: src/cong-primary-window.c:704 src/cong-primary-window.c:706
+#: src/cong-primary-window.c:712
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate Επεξεργαστής XML"
 
@@ -53,7 +53,8 @@ msgstr "Γλώσσα"
 
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:788
+#: glade/docbook-ulink-properties.glade.h:3 src/cong-file-properties.c:86
+#: src/cong-node-properties-dialog.c:788
 msgid "Properties"
 msgstr "Ιδιότητες"
 
@@ -118,7 +119,7 @@ msgid "Continue numbering from previous list"
 msgstr "Συνέχιση αρίθμησης από τη προηγούμενη λίστα"
 
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
-#: src/cong-error-file-open.c:448
+#: src/cong-error-file-open.c:449
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
@@ -150,6 +151,32 @@ msgstr "a, b, c, ..."
 msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:5 src/cong-file-properties.c:98
+msgid "Type"
+msgstr "Τύπος"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr ""
+
 #: glade/string_selection_dialog.glade.h:1
 msgid "*"
 msgstr "*"
@@ -162,24 +189,26 @@ msgstr "ετικέτα"
 msgid "string_selection_dialog"
 msgstr "string_selection_dialog"
 
-#: src/cong-app.c:267
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "Επεξεργαστής XML"
 
-#: src/cong-app.c:333
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
+#: src/cong-app.c:364
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
 msgstr ""
 "Το Conglomerate δεν μπορεί να φορτώσει αρχεία xds από τον κατάλογο \"%s\""
 
-#: src/cong-app.c:335
+#: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Το Conglomerate  δεν μπορεί να βρεί περιγραφές για τύπους εγγράφων."
 
-#: src/cong-app.c:337
+#: src/cong-app.c:368
+#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
 msgstr ""
 "Αν βλέπετε αυτό το σφάλμα μάλλον κάνατε built το Conglomerate, αλλά δεν το "
 "εγκαταστήσατε. Προσπαθήστε να το εγκαταστήσετε."
@@ -260,12 +289,12 @@ msgstr "Οι αλλαγές από τα προηγούμενα %li λεπτά θ
 msgid "Changes from the past minute will be discarded."
 msgstr "Οι αλλαγές από το προηγούμενο λεπτό θα χαθούν."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr ""
 "Το Conglomerate δεν μπορεί να διαβάσει το μητρώο με τους τύπους εγγράφου."
 
-#: src/cong-dispspec-registry.c:93
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr ""
 "Το Conglomerate προσπάθησε να κοιτάξει σε όλα τα αρχεία σε αυτή την "
@@ -288,6 +317,44 @@ msgstr "(xpath απέτυχε)"
 msgid "<untitled>"
 msgstr "<untitled>"
 
+#: src/cong-document.c:660
+#, fuzzy, c-format
+msgid "Text \"%s\""
+msgstr "Εξαγωγή \"%s\""
+
+#: src/cong-document.c:670
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:673
+#, fuzzy, c-format
+msgid "Entity \"%s\""
+msgstr "Εκτύπωση \"%s\""
+
+#: src/cong-document.c:676
+msgid "XML Processing Instruction"
+msgstr ""
+
+#: src/cong-document.c:681
+#, fuzzy, c-format
+msgid "Comment \"%s\""
+msgstr "Εκτύπωση \"%s\""
+
+#: src/cong-document.c:687
+#, fuzzy
+msgid "Document"
+msgstr "Τύποι εγγράφου"
+
+#: src/cong-document.c:698 src/cong-file-properties.c:116
+msgid "Document Type Declaration"
+msgstr "Δήλωση τύπου αρχείου"
+
+#: src/cong-document.c:1398
+#, fuzzy, c-format
+msgid "Select %s"
+msgstr "Επιλογή λέξης"
+
 #: src/cong-dom-view.c:208
 msgid "UNKNOWN"
 msgstr "ΑΓΝΩΣΤΟ"
@@ -302,29 +369,42 @@ msgstr "Κείμενο: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:751
+#: src/cong-editor-node-text.c:750
 msgid "Select word"
 msgstr "Επιλογή λέξης"
 
-#: src/cong-editor-node-text.c:776
+#: src/cong-editor-node-text.c:775
 msgid "Move cursor"
 msgstr "Μετακίνηση δρομέα"
 
-#: src/cong-editor-node-text.c:828
+#: src/cong-editor-node-text.c:833
 msgid "Drag out selection"
 msgstr "Σύρσιμο επιλογής"
 
-#: src/cong-editor-widget3.c:1113
+#: src/cong-editor-widget3.c:396
+msgid "Expander Size"
+msgstr ""
+
+#: src/cong-editor-widget3.c:397
+msgid "Size of the expander arrow"
+msgstr ""
+
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Μέθοδος εκτύπωσης:"
+
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr "Πληκτρολόγηση"
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Κίνηση δρομέα"
 
-#: src/cong-editor-widget3.c:1153 src/cong-editor-widget3.c:1166
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Διαγραφή επιλογής"
-
-#: src/cong-editor-widget3.c:1189
-msgid "Typing"
-msgstr "Πληκτρολόγηση"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -364,11 +444,11 @@ msgstr ""
 "Σφάλμα GError, η αναφορά σφάλματος ήταν:\n"
 "<i>%s</i>"
 
-#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:445
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
 msgstr "Συνέβηκε ένα απροσδόκητο σφάλμα."
 
-#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:446
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
 msgstr "Για περισσότερες πληροφορίες κάντε κλικ στο κουμπί \"Λεπτομέρειες\"."
 
@@ -399,22 +479,22 @@ msgid "Conglomerate could not run the Search Tool.\n"
 msgstr "Το Conglomerate δεν μπορεί να εκτελέσει το εργαλείο αναζήτησης.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
-#: src/cong-error-file-open.c:79
+#: src/cong-error-file-open.c:82
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
 msgstr "%s δεν μπορεί να διαβάσει \"%s\" από %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-open.c:82
+#: src/cong-error-file-open.c:85
 #, c-format
 msgid "%s could not read \"%s\" from %s."
 msgstr "%s δεν μπόρεσε να να διαβάσει \"%s\" από %s."
 
-#: src/cong-error-file-open.c:202 src/cong-error-file-save.c:80
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
 msgstr "Συνέβηκε ένα απρόσμενο σφάλμα."
 
-#: src/cong-error-file-open.c:203 src/cong-error-file-save.c:81
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
@@ -422,11 +502,11 @@ msgstr ""
 "Προσπαθήστε ξανά.  Αν αυτό αποτύχει πάλι, συμπληρώστε μια αναφορά σφάλματος "
 "για αυτή την εφαρμογή."
 
-#: src/cong-error-file-open.c:229
+#: src/cong-error-file-open.c:234
 msgid "There is no file with that name at that location."
 msgstr "Δεν υπάρχει αρχείο με αυτό το όνομα σε αυτή την τοποθεσία."
 
-#: src/cong-error-file-open.c:230
+#: src/cong-error-file-open.c:235
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
 "capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
@@ -438,16 +518,16 @@ msgstr ""
 "\" ή το \"myfile\").\n"
 "(ii) Χρησιμοποιήστε το εργαλείο αναζήτησης για να βρείτε το αρχείο."
 
-#: src/cong-error-file-open.c:231 src/cong-error-file-open.c:240
-#: src/cong-error-file-open.c:295 src/cong-error-file-open.c:336
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: src/cong-error-file-open.c:238 src/cong-error-file-save.c:98
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
 msgid "The location does not exist."
 msgstr "Η τοποθεσία δεν υπάρχει."
 
-#: src/cong-error-file-open.c:239
+#: src/cong-error-file-open.c:244
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -460,12 +540,12 @@ msgstr ""
 "(ii) Χρησιμοποιήστε το εργαλείο αναζήτησης για να βρείτε το αρχείο."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-open.c:252
+#: src/cong-error-file-open.c:257
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
 msgstr "Η τοποθεσία \"%s\" δεν υποστηρίζει την ανάγνωση αρχείων."
 
-#: src/cong-error-file-open.c:256
+#: src/cong-error-file-open.c:261
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
@@ -474,37 +554,37 @@ msgstr ""
 "ότι θα πρέπει να μπορείτε να διαβάσετε αυτό το αρχείο, επικοινωνήστε με τον "
 "διαχειριστή του συστήματος σας."
 
-#: src/cong-error-file-open.c:266
+#: src/cong-error-file-open.c:271
 msgid "There were problems reading the content of the file."
 msgstr "Υπήρξαν προβλήματα στην ανάγνωση των περιεχομένων του αρχείου."
 
-#: src/cong-error-file-open.c:267 src/cong-error-file-open.c:285
-#: src/cong-error-file-open.c:324
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, επικοινωνήστε με τον διαχειριστή "
 "του συστήματος σας."
 
-#: src/cong-error-file-open.c:276
+#: src/cong-error-file-open.c:281
 msgid "The contents of the file seem to be corrupt."
 msgstr "Τα περιεχόμενα του αρχείου φαίνεται να είναι κατεστραμμένα."
 
-#: src/cong-error-file-open.c:277
+#: src/cong-error-file-open.c:282
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, ψάξτε για ένα αντίγραφο ασφαλείας "
 "αυτού του αρχείου."
 
-#: src/cong-error-file-open.c:284 src/cong-error-file-open.c:323
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
 msgid "There were problems reading the contents of the file."
 msgstr "Υπήρξαν προβλήματα στην ανάγνωση των περιεχομένων του αρχείου."
 
-#: src/cong-error-file-open.c:293 src/cong-error-file-save.c:239
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
 msgid "The system does not recognise that as a valid location."
 msgstr "Το σύστημα δεν αναγνωρίζει αυτή ως έγκυρη τοποθεσία."
 
-#: src/cong-error-file-open.c:294
+#: src/cong-error-file-open.c:299
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -516,20 +596,20 @@ msgstr ""
 "το \"HTTP\").\n"
 "(ii) Χρησιμοποιήστε το εργαλείο αναζήτησης για να βρείτε το αρχείο."
 
-#: src/cong-error-file-open.c:305
+#: src/cong-error-file-open.c:310
 msgid "You do not have permission to read that file."
 msgstr "δεν έχετε δικαιώματα ανάγνωσης για αυτό το αρχείο."
 
-#: src/cong-error-file-open.c:306
+#: src/cong-error-file-open.c:311
 msgid "Try asking your system administrator to give you permission."
 msgstr "Ζητήστε από τον διαχειριστή του συτήματος σας να σας δώσει δικαιώματα."
 
-#: src/cong-error-file-open.c:313 src/cong-error-file-save.c:262
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
 msgid "The system is trying to operate on too many files at once."
 msgstr "Το σύστημα προσπαθεί να λειτουργήσει σε πάρα πολλά αρχεία συγχρόνως."
 
-#: src/cong-error-file-open.c:314 src/cong-error-file-open.c:348
-#: src/cong-error-file-save.c:263 src/cong-error-file-save.c:282
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
@@ -538,32 +618,32 @@ msgstr ""
 "χρειάζεστε, ή επικοινωνήστε με τον διαχειριστή του συστήματος σας."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-open.c:331
+#: src/cong-error-file-open.c:336
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
 msgstr "\"%s\"είναι ένας κατάλογος και όχι αρχείο."
 
-#: src/cong-error-file-open.c:335
+#: src/cong-error-file-open.c:340
 msgid "Try using the Search Tool to find your file."
 msgstr "Χρησιμοποιήστε το εργαλείο αναζήτησης για να βρείτε το αρχείο."
 
-#: src/cong-error-file-open.c:347 src/cong-error-file-save.c:281
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
 msgid "The system ran out of memory."
 msgstr "Ανεπάρκεια μνήμης του συστήματος."
 
-#: src/cong-error-file-open.c:356 src/cong-error-file-open.c:365
-#: src/cong-error-file-open.c:374 src/cong-error-file-save.c:290
-#: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
 msgid "The server could not be contacted."
 msgstr "Δεν είναι δυνατή η επικοινωνία με τον εξυπηρετητή."
 
-#: src/cong-error-file-open.c:357
+#: src/cong-error-file-open.c:362
 msgid "Try again.  If it fails again, the server may be down."
 msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, ο εξυπηρετητής μπορεί να μην είναι "
 "σε λειτουργία."
 
-#: src/cong-error-file-open.c:366 src/cong-error-file-open.c:375
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
@@ -572,26 +652,27 @@ msgstr ""
 "(ii) Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, ο εξυπηρετητής μπορεί να μην "
 "είναι σε λειτουργία."
 
-#: src/cong-error-file-open.c:383 src/cong-error-file-save.c:317
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
 msgid "The system could not login to the location."
 msgstr "Το σύστημα δεν μπορεί να συνδθεί με την τοποθεσία."
 
-#: src/cong-error-file-open.c:384 src/cong-error-file-open.c:394
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, επικοινωνήστε με τον διαχειριστή "
 "του συστήματος σας."
 
-#: src/cong-error-file-open.c:393 src/cong-error-file-save.c:326
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
 msgid "The location was too busy."
 msgstr "Η τοποθεσία ήταν απασχολημένη."
 
-#: src/cong-error-file-open.c:432
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "Το σφάλμα \"%s\" αναφέρθηκε κατα την πρόσβαση στο \"%s\""
 
-#: src/cong-error-file-open.c:438
+#: src/cong-error-file-open.c:439
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
@@ -600,18 +681,18 @@ msgstr ""
 "System."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
-#: src/cong-error-file-save.c:49
+#: src/cong-error-file-save.c:51
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
 msgstr "%s αδυναμία αποθήκευσης \"%s\" στο %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-save.c:52
+#: src/cong-error-file-save.c:54
 #, c-format
 msgid "%s could not save \"%s\" to %s."
 msgstr "%s δεν ήταν δυνατή η αποθήκευση \"%s\" στο %s."
 
-#: src/cong-error-file-save.c:99
+#: src/cong-error-file-save.c:101
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
 "that capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -624,27 +705,27 @@ msgstr ""
 "(ii) Προσπαθείστε να αποθηκεύσετε σε μια διαφορετική τοποθεσία."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:107 src/cong-error-file-save.c:226
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
 msgstr "Η τοποθεσία \"%s\" δεν υποστηρίζει την εγγραφή αρχείων."
 
-#: src/cong-error-file-save.c:111 src/cong-error-file-save.c:230
-#: src/cong-error-file-save.c:338
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
 msgid "Try saving to a different location."
 msgstr "Προσπαθείστε να αποθηκεύσετε σε διαφορετική τοποθεσία."
 
-#: src/cong-error-file-save.c:122
+#: src/cong-error-file-save.c:124
 msgid "There were problems writing the content of the file."
 msgstr "Υπήρξαν προβλήματα κατά την εγγραφή του περιεχομένου του αρχείου."
 
-#: src/cong-error-file-save.c:123
+#: src/cong-error-file-save.c:125
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr ""
 "Προσπαθήστε ξανά.  Αν αυτό αποτύχει, προσπαθήστε να αποθηκεύσετε σε "
 "διαφορετική τοποθεσία."
 
-#: src/cong-error-file-save.c:152
+#: src/cong-error-file-save.c:154
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
@@ -653,7 +734,7 @@ msgstr ""
 "s."
 
 #. Can't get at the capacity for the device or "volume":
-#: src/cong-error-file-save.c:158
+#: src/cong-error-file-save.c:160
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
@@ -661,15 +742,15 @@ msgstr ""
 "θα είναι %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:166
+#: src/cong-error-file-save.c:168
 msgid "The file is too big to fit on the device."
 msgstr "Το αρχείο είναι πολύ μεγάλο για χωρέσει στην συσκευή."
 
-#: src/cong-error-file-save.c:175
+#: src/cong-error-file-save.c:177
 msgid "Try saving the file to a different location."
 msgstr "Προσπαθείστε να αποθηκεύσετε το αρχείο σε διαφορετική τοποθεσία."
 
-#: src/cong-error-file-save.c:196
+#: src/cong-error-file-save.c:198
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
@@ -678,7 +759,7 @@ msgstr ""
 "συσκευή."
 
 #. Can't get at the free space for the device or "volume":
-#: src/cong-error-file-save.c:202
+#: src/cong-error-file-save.c:204
 #, c-format
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
@@ -688,12 +769,12 @@ msgstr ""
 "(το μέγεθος του αρχείου θα είναι %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:210
+#: src/cong-error-file-save.c:212
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
 "Το αρχείο είναι πολύ μεγάλο για χωρέσει στον εναπομείναντα χώρο της συσκευής."
 
-#: src/cong-error-file-save.c:219
+#: src/cong-error-file-save.c:221
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
@@ -702,7 +783,7 @@ msgstr ""
 "ελευθερώστε χώρο στην συσκευή μετακινώντας αρχεία που δεν χρειάζεστε από "
 "αυτή την συσκευή."
 
-#: src/cong-error-file-save.c:240
+#: src/cong-error-file-save.c:242
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -714,11 +795,11 @@ msgstr ""
 "\" ή το \"HTTP\").\n"
 "(ii) Προσπαθείστε να αποθηκεύσετε σε μια διαφορετική τοποθεσία."
 
-#: src/cong-error-file-save.c:254
+#: src/cong-error-file-save.c:256
 msgid "You do not have permission to write to that location."
 msgstr "Δεν έχετε δικαιώματα εγγραφής σε αυτήν την τοποθεσία."
 
-#: src/cong-error-file-save.c:255
+#: src/cong-error-file-save.c:257
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
@@ -727,12 +808,12 @@ msgstr ""
 "διαχειριστή του συστήματος να σας δώσει δικαιώματα."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-save.c:269
+#: src/cong-error-file-save.c:271
 #, c-format
 msgid "\"%s\" is a directory."
 msgstr "\"%s\" είναι ένας κατάλογος."
 
-#: src/cong-error-file-save.c:273
+#: src/cong-error-file-save.c:275
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
@@ -740,7 +821,7 @@ msgstr ""
 "Θα πρέπει να αποθηκεύσετε το αρχείο μέσα σε ένα κατάλογο, αντί για τον "
 "κατάλογο τον ίδιο."
 
-#: src/cong-error-file-save.c:291
+#: src/cong-error-file-save.c:293
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
@@ -748,7 +829,7 @@ msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, ο εξυπηρετητής μπορεί να μην είναι "
 "σε λειτουργία, προσπαθείστε να το αποθηκεύσετε σε διαφορετική τοποθεσία."
 
-#: src/cong-error-file-save.c:300 src/cong-error-file-save.c:309
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to "
@@ -759,51 +840,51 @@ msgstr ""
 "είναι σε λειτουργία, προσπαθείστε να το αποθηκεύσετε σε διαφορετική "
 "τοποθεσία."
 
-#: src/cong-error-file-save.c:318 src/cong-error-file-save.c:327
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
 msgid "Try again. If it fails again, try saving to another location."
 msgstr ""
 "Προσπαθείστε ξανά. Αν αυτό αποτύχει πάλι, προσπαθείστε να το αποθηκεύσετε σε "
 "διαφορετική τοποθεσία."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:334
+#: src/cong-error-file-save.c:336
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
 msgstr ""
 "Η τοποθεσία  \"%s\" επιτρέπει μόνο αρχεία για ανάγνωση, όχι για εγγραφή."
 
 #. FIXME: need to think more about these messages
-#: src/cong-error-file-save.c:346
+#: src/cong-error-file-save.c:348
 #, c-format
 msgid "The name \"%s\" is too long for the location to manage."
 msgstr "Το όνομα \"%s\" είναι πολύ μακρύ για να το χειριστεί η τοποθεσία."
 
-#: src/cong-error-file-save.c:350
+#: src/cong-error-file-save.c:352
 msgid "Try again with a shorter file name."
 msgstr "Προσπαθείσυε ξανά με ένα συντομότερο όνομα αρχείου."
 
 #. 5 megabytes, for a test
-#: src/cong-error-tests.c:17
+#: src/cong-error-tests.c:16
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
 msgstr "Δοκική αρχείου->Αποτυχία ανοίγματος \"%s\" με αποτέλεσμα %s"
 
-#: src/cong-error-tests.c:23
+#: src/cong-error-tests.c:22
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
 msgstr "Δοκική αρχείου->Αποτυχία αποθήκευσης \"%s\" με αποτέλεσμα %s"
 
-#: src/cong-error-tests.c:29
+#: src/cong-error-tests.c:28
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
 msgstr "Δοκιμή γενική αποτυχία του \"%s\"  με αποτέλεσμα %s"
 
-#: src/cong-error-tests.c:32
+#: src/cong-error-tests.c:31
 msgid "Conglomerate is simulating the failure of a generic file operation."
 msgstr ""
 "Το Conglomerate εξομοιώνει την αποτυχία μιας γενικής λειτουργίας αρχείου."
 
-#: src/cong-error-tests.c:35
+#: src/cong-error-tests.c:34
 msgid "This dialog was generated by the automated testing routine"
 msgstr ""
 "Αυτός ο διάλογος δημιουργήθηκε από την αυτοματοποιημένη ρουτίνα δοκιμής."
@@ -826,7 +907,7 @@ msgid "Export"
 msgstr "Εξαγωγή "
 
 #: src/cong-file-export.c:252 src/cong-file-print.c:214
-#: src/cong-file-properties.c:96
+#: src/cong-file-properties.c:97
 msgid "General"
 msgstr "Γενικά"
 
@@ -843,14 +924,14 @@ msgid "Export Options"
 msgstr "Επιλογές εξαγωγής"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
-#: src/cong-file-properties.c:102 src/cong-file-properties.c:106
+#: src/cong-file-properties.c:103 src/cong-file-properties.c:107
 #: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
 msgid "Name"
 msgstr "Όνομα"
 
 #: src/cong-file-export.c:305 src/cong-file-new.c:232
-#: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:426 src/cong-parser-error.c:259
+#: src/cong-file-print.c:242 src/cong-file-properties.c:108
+#: src/cong-menus.c:426 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Περιγραφή"
 
@@ -865,23 +946,23 @@ msgstr ""
 "Καμμία από τις πρόσθετες λειτουργίες του Conglomerate δεν γνωρίζει τον τρόπο "
 "εξαγωγής αρχείων αυτού του είδους."
 
-#: src/cong-file-import.c:65
+#: src/cong-file-import.c:66
 msgid "Import file..."
 msgstr "Εισαγωγή αρχείου..."
 
 #. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:98
+#: src/cong-file-import.c:99
 msgid "Could not import the file."
 msgstr "Αδυναμία εισαγωγής αρχείου."
 
-#: src/cong-file-import.c:99
+#: src/cong-file-import.c:100
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr ""
 "Καμμία από τις πρόσθετες λειτουργίες του Conglomerate δεν γνωρίζει τον τρόπο "
 "ανοίγματος αρχείων του είδους\"%s\""
 
-#: src/cong-file-import.c:100
+#: src/cong-file-import.c:101
 msgid "FIXME"
 msgstr "FIXME"
 
@@ -959,7 +1040,7 @@ msgstr ""
 msgid "Force"
 msgstr "Εξαναγκασμός"
 
-#: src/cong-file-open.c:195
+#: src/cong-file-open.c:168
 msgid "Select an XML document"
 msgstr "Επιλογή ενός αρχείου XML"
 
@@ -995,63 +1076,55 @@ msgstr ""
 "Καμμία από τις πρόσθετες λειτουργίες του Conglomerate δεν γνωρίζει τον τρόπο "
 "εκτύπωσης αρχείων αυτού του είδους."
 
-#: src/cong-file-properties.c:51 src/cong-file-properties.c:54
+#: src/cong-file-properties.c:52 src/cong-file-properties.c:55
 msgid "None"
 msgstr "Κανένα"
 
-#: src/cong-file-properties.c:56
+#: src/cong-file-properties.c:57
 msgid "External ID"
 msgstr "Εξωτερική  ID"
 
-#: src/cong-file-properties.c:57
+#: src/cong-file-properties.c:58
 msgid "System ID"
 msgstr "ID συστήματος"
 
-#: src/cong-file-properties.c:97
-msgid "Type"
-msgstr "Τύπος"
-
-#: src/cong-file-properties.c:103 src/cong-node-properties-dialog.c:247
+#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:247
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: src/cong-file-properties.c:104
+#: src/cong-file-properties.c:105
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
-#: src/cong-file-properties.c:114
+#: src/cong-file-properties.c:115
 msgid "XML Header"
 msgstr "Κεφαλίδα XML"
 
-#: src/cong-file-properties.c:115
-msgid "Document Type Declaration"
-msgstr "Δήλωση τύπου αρχείου"
-
-#: src/cong-file-properties.c:117
+#: src/cong-file-properties.c:118
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/cong-file-properties.c:122
+#: src/cong-file-properties.c:123
 msgid "Unspecified"
 msgstr "Ακαθόριστο"
 
-#: src/cong-file-properties.c:124
+#: src/cong-file-properties.c:125
 msgid "Encoding"
 msgstr "Κωδικοποίηση"
 
-#: src/cong-file-properties.c:126
+#: src/cong-file-properties.c:127
 msgid "Standalone"
 msgstr "Standalone"
 
-#: src/cong-file-properties.c:129
+#: src/cong-file-properties.c:130
 msgid "_Remove this DTD"
 msgstr "Α_φαίρεση αυτού του  DTD"
 
-#: src/cong-file-properties.c:151
+#: src/cong-file-properties.c:152
 msgid "_Associate this DTD"
 msgstr "Σ_υσχετισμός αυτού του DTD"
 
-#: src/cong-file-properties.c:152
+#: src/cong-file-properties.c:153
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "following information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1061,24 +1134,24 @@ msgstr ""
 "ότι οι ακόλουθες πληροφορίες είναι κατάλληλες. Πατήστε \"Συσχέτιση του DTD\" "
 "για να καθορίσετε αυτή την πληροφορία στο έγγραφο."
 
-#: src/cong-file-properties.c:174
+#: src/cong-file-properties.c:175
 msgid "No External Subset"
 msgstr "Όχι εξωτερικό υποσύνολο"
 
-#: src/cong-file-properties.c:191
+#: src/cong-file-properties.c:192
 msgid "Basic"
 msgstr "Βασικό"
 
-#: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:742
+#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:742
 #: src/cong-node-properties-dialog.c:826
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: src/cong-file-properties.c:218
+#: src/cong-file-properties.c:219
 msgid "Remove DTD"
 msgstr "Αφαίρεση  DTD"
 
-#: src/cong-file-properties.c:248
+#: src/cong-file-properties.c:249
 msgid "Associate with DTD"
 msgstr "Συσχέτιση με DTD"
 
@@ -1086,35 +1159,35 @@ msgstr "Συσχέτιση με DTD"
 msgid "Save XML as..."
 msgstr "Αποθήκευση XML ως..."
 
-#: src/cong-location.c:266 src/cong-location.c:287
+#: src/cong-location.c:293 src/cong-location.c:314
 msgid "Merge tags"
 msgstr "Συγχωνεύση tags"
 
-#: src/cong-location.c:331
+#: src/cong-location.c:358
 msgid "Delete character"
 msgstr "Διαγραφή χαρακτήρα"
 
-#: src/cong-location.c:746
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Υπολογισμός έναρξης εγγράφου"
 
-#: src/cong-location.c:758
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Υπολογισμός έναρξης γραμμής"
 
-#: src/cong-location.c:771
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Υπολογισμός τέλους εγγράφου"
 
-#: src/cong-location.c:784
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Υπολογισμός τέλους γραμμής"
 
-#: src/cong-location.c:797
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Υπολογισμός προηγούμενης σελίδας"
 
-#: src/cong-location.c:810
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Υπολογισμός επόμενης σελίδας"
 
@@ -1411,21 +1484,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Άγνωστα δεδομένα"
 
-#: src/cong-parser-error.c:171
+#: src/cong-parser-error.c:177
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Ανάλυση σφαλμάτων φόρτωσης %s"
 
-#: src/cong-parser-error.c:254
+#: src/cong-parser-error.c:185
+msgid "_Retry"
+msgstr ""
+
+#: src/cong-parser-error.c:264
 msgid "Line Number"
 msgstr "Αριθμός γραμμής"
 
-#: src/cong-parser-error.c:316
+#: src/cong-parser-error.c:326
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "Το %s αδυνατεί να κατανοήσει την εσωτερική μορφή του αρχείου."
 
-#: src/cong-parser-error.c:324
+#: src/cong-parser-error.c:334
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1436,7 +1513,7 @@ msgstr ""
 "δεν υποστηρίζει  SGML. Ελπίζουμε ότι θα διορθώσουμε αυτά τα προβλήματα σε "
 "μια επόμενη έκδοση."
 
-#: src/cong-parser-error.c:325
+#: src/cong-parser-error.c:335
 msgid "Show Details"
 msgstr "Εμφάνιση Λεπτομερειών"
 
@@ -1445,76 +1522,86 @@ msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 "Το Conglomerate δεν μπορεί να βρεί πληροφορίες εμφάνισης για το νέο αρχείο"
 
-#: src/cong-primary-window.c:280 src/cong-primary-window.c:281
+#: src/cong-primary-window.c:286 src/cong-primary-window.c:287
 msgid "Open document"
 msgstr "Άνοιγμα εγγράφου"
 
-#: src/cong-primary-window.c:294 src/cong-primary-window.c:295
-msgid "Save document as..."
+#: src/cong-primary-window.c:300 src/cong-primary-window.c:301
+#, fuzzy
+msgid "Save document"
 msgstr "Αποθήκευση εγγράφου ως..."
 
-#: src/cong-primary-window.c:302 src/cong-primary-window.c:303
+#: src/cong-primary-window.c:308 src/cong-primary-window.c:309
 msgid "Undo"
 msgstr "Αναίρεση"
 
-#: src/cong-primary-window.c:309 src/cong-primary-window.c:310
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Redo"
 msgstr "Ακύρωση αναίρεσης"
 
-#: src/cong-primary-window.c:328 src/cong-primary-window.c:329 src/tree.c:175
-#: src/xmledit.c:47
+#: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
+#: src/xmledit.c:44
 msgid "Cut"
 msgstr "Αποκοπή"
 
-#: src/cong-primary-window.c:335 src/cong-primary-window.c:336
+#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: src/cong-primary-window.c:342 src/cong-primary-window.c:343
-#: src/xmledit.c:155
+#: src/cong-primary-window.c:348 src/cong-primary-window.c:349
+#: src/xmledit.c:161
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: src/cong-primary-window.c:511
+#: src/cong-primary-window.c:517
 msgid "Overview"
 msgstr "Επισκόπηση"
 
-#: src/cong-primary-window.c:521
+#: src/cong-primary-window.c:527
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: src/cong-primary-window.c:529
+#: src/cong-primary-window.c:535
 msgid "Raw XML"
 msgstr "Raw XML"
 
-#: src/cong-primary-window.c:587
+#: src/cong-primary-window.c:592 src/cong-primary-window.c:622
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Καλώς ήλθατε στον επεξεργαστή Conglomerate."
 
-#: src/cong-primary-window.c:669
+#: src/cong-primary-window.c:704
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (τροποποιήθηκε) - %s"
 
-#: src/cong-util.c:243 src/plugin-docbook.c:1006
+#: src/cong-util.c:272 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Εκτύπωση XSL Formatting Objects"
 
-#: src/cong-util.c:287
+#: src/cong-util.c:316
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Αυτό θα είναι το αποτέλεσμα από το cong_util_print_xslfo"
 
-#: src/cursor.c:100
+#: src/cursor.c:99
 #, c-format
 msgid "Split %s tag"
 msgstr "Χωρισμός  %s tag"
 
-#: src/plugin-cleanup-source.c:376 src/plugin-cleanup-source.c:410
+#: src/plugin-admonition.c:61
+msgid "Admonition"
+msgstr ""
+
+#: src/plugin-admonition.c:62
+#, fuzzy
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Μια node επεξεργαστή για την οπτικοποίηση μιας παραγράφου"
+
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
 msgid "Cleanup XML Source"
 msgstr "Εκκαθάριση πηγαίου κώδικα XML"
 
-#: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:414
-#: src/plugin-cleanup-source.c:415
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1522,7 +1609,7 @@ msgstr ""
 "Καθαρίζει τον κώδικα XML του εγγράφου, ώστε να είναι εύκολο να αναγνωστεί σε "
 "ένα επεξεργαστή κώδικα."
 
-#: src/plugin-cleanup-source.c:413
+#: src/plugin-cleanup-source.c:433
 msgid "_Clean the XML Source"
 msgstr "Εκκα_θάριση πηγαίου κώδικα XML"
 
@@ -1578,11 +1665,11 @@ msgstr "Μετατρέπει XSL Formatting Objects σε PDF"
 msgid "Printing DocBook file"
 msgstr "Εκτύπωση αρχείου DocBook"
 
-#: src/plugin-docbook.c:1243
+#: src/plugin-docbook.c:1302
 msgid "DocBook Article"
 msgstr "Άρθρο DocBook"
 
-#: src/plugin-docbook.c:1244
+#: src/plugin-docbook.c:1303
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1590,36 +1677,36 @@ msgstr ""
 "Δημιουργία ενός άρθρου, πιθανώς για ιστοσελίδα ή για περιοδικό με την χρήση "
 "του  \"DocBook\" format"
 
-#: src/plugin-docbook.c:1251
+#: src/plugin-docbook.c:1310
 msgid "DocBook Book"
 msgstr "Βιβλίο DocBook"
 
-#: src/plugin-docbook.c:1252
+#: src/plugin-docbook.c:1311
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Δημιουργεί ένα βιβλίο, με την χρήση του \"DocBook\" format"
 
-#: src/plugin-docbook.c:1259
+#: src/plugin-docbook.c:1318
 msgid "DocBook Set"
 msgstr "DocBook Set"
 
-#: src/plugin-docbook.c:1260
+#: src/plugin-docbook.c:1319
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr ""
 "Δημιουργία μιας ομάδας σχετικών βιβλίων, με την χρήση του  \"DocBook\" format"
 
-#: src/plugin-docbook.c:1268
+#: src/plugin-docbook.c:1327
 msgid "Import text as a DocBook article"
 msgstr "Εισαγωγή κείμενου ως άρθρο DocBook"
 
-#: src/plugin-docbook.c:1269
+#: src/plugin-docbook.c:1328
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Εισαγωγή ενός αρχείου απλού κειμένου σε μορφή \"DocBook\", ως άρθρο."
 
-#: src/plugin-docbook.c:1286
+#: src/plugin-docbook.c:1345
 msgid "Export DocBook as HTML"
 msgstr "Εξαγωγή DocBook ως HTML"
 
-#: src/plugin-docbook.c:1287
+#: src/plugin-docbook.c:1346
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1627,11 +1714,11 @@ msgstr ""
 "Χρήση των Walsh's DocBook stylesheets για την δημιουργία μιας ιστοσελίδας "
 "από αυτό το αρχείο DocBook"
 
-#: src/plugin-docbook.c:1294
+#: src/plugin-docbook.c:1353
 msgid "Export DocBook as PDF"
 msgstr "Εξαγωγή DocBook ως PDF"
 
-#: src/plugin-docbook.c:1295
+#: src/plugin-docbook.c:1354
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1639,11 +1726,11 @@ msgstr ""
 "Χρήση των Walsh's DocBook stylesheets για την δημιουργία ενός αρχείου PDF "
 "από αυτό το αρχείο DocBook"
 
-#: src/plugin-docbook.c:1302
+#: src/plugin-docbook.c:1361
 msgid "Export DocBook as XSL:FO"
 msgstr "Εξαγωγή  DocBook ως XSL:FO"
 
-#: src/plugin-docbook.c:1303
+#: src/plugin-docbook.c:1362
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1652,31 +1739,41 @@ msgstr ""
 "από αυτό το αρχείο DocBook έτσι ώστε να εκτυπωθεί ή να μετατραπεί σε PDF "
 "αργότερα"
 
-#: src/plugin-docbook.c:1311
+#: src/plugin-docbook.c:1370
 msgid "Print DocBook"
 msgstr "Εκτύπωση DocBook"
 
-#: src/plugin-docbook.c:1320
+#: src/plugin-docbook.c:1379
 msgid "Generic DocBook property dialog"
 msgstr "Γενικός διάλογοσ ιδιότητας DocBook"
 
-#: src/plugin-docbook.c:1321
+#: src/plugin-docbook.c:1380
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Παρέχει ένα διάλογο ιδιοτήτων για τα περισσότερα nodes"
 
-#: src/plugin-docbook.c:1327
+#: src/plugin-docbook.c:1386
 msgid "<orderedlist> property dialog"
 msgstr "<orderedlist> διάλογος ιδιότητας"
 
-#: src/plugin-docbook.c:1328
+#: src/plugin-docbook.c:1387
 msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr "Παρέχει ένα διάλογο ιδιοτήτων για την <orderedlist> tag"
 
-#: src/plugin-docbook.c:1335
+#: src/plugin-docbook.c:1393
+#, fuzzy
+msgid "<ulink> property dialog"
+msgstr "<orderedlist> διάλογος ιδιότητας"
+
+#: src/plugin-docbook.c:1394
+#, fuzzy
+msgid "Provides a Properties dialog for the <ulink> tag"
+msgstr "Παρέχει ένα διάλογο ιδιοτήτων για την <orderedlist> tag"
+
+#: src/plugin-docbook.c:1401
 msgid "Promote Section"
 msgstr "Ενότητα προαγωγής"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1402
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -1684,32 +1781,32 @@ msgstr ""
 "Προάγει μια ενότητα DocBook σε ένα υψηλότερο οργανωτικό επίπεδο μέσα στο "
 "έγγραφο"
 
-#: src/plugin-docbook.c:1338
+#: src/plugin-docbook.c:1404
 msgid "Promote"
 msgstr "Προαγωγή"
 
-#: src/plugin-docbook.c:1339 src/plugin-docbook.c:1340
+#: src/plugin-docbook.c:1405 src/plugin-docbook.c:1406
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Προαγωγή της ενότητας σε ένα υψηλότερο οργανωτικό επίπεδο μέσα στο έγγραφο"
 
-#: src/plugin-docbook.c:1346
+#: src/plugin-docbook.c:1412
 msgid "Demote Section"
 msgstr "Υποβιβασμός ενότητας"
 
-#: src/plugin-docbook.c:1347
+#: src/plugin-docbook.c:1413
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Υποβιβάζει μια ενότητα DocBook σε ένα χαμηλότερο οργανωτικό επίπεδο μέσα στο "
 "έγγραφο"
 
-#: src/plugin-docbook.c:1349
+#: src/plugin-docbook.c:1415
 msgid "Demote"
 msgstr "Υποβιβασμός"
 
-#: src/plugin-docbook.c:1350 src/plugin-docbook.c:1351
+#: src/plugin-docbook.c:1416 src/plugin-docbook.c:1417
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 "Υποβιβάζει μια ενότητα σε ένα χαμηλότερο οργανωτικό επίπεδο μέσα στο έγγραφο"
@@ -1966,52 +2063,52 @@ msgstr ""
 msgid "(no description available)"
 msgstr "(δεν υπάρχει διαθέσιμη περιγραφή)"
 
-#: src/popup.c:185
+#: src/popup.c:177
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Εφαρμογή span tag: %s"
 
-#: src/popup.c:266
+#: src/popup.c:258
 msgid "Remove Span Tag"
 msgstr "Αφαίρεση Span Tag"
 
-#: src/popup.c:365
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "Αφαίρεση span tag"
 
-#: src/popup.c:925
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Διαγραφή αυτού του στοιχείου"
 
-#: src/popup.c:935
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr "Προσθήκη node κειμένου μετά"
 
-#: src/popup.c:943
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr "Προσθήκη node κειμένου πριν"
 
-#: src/popup.c:954
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "Ορισμού του κειμένου"
 
-#: src/popup.c:985
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Επικόλληση σε"
 
-#: src/popup.c:993
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Επικόλληση πριν"
 
-#: src/popup.c:1001
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Επικόλληση μετά"
 
-#: src/popup.c:1018
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Νέο υποστοιχείο"
 
-#: src/popup.c:1043
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr "Νέο  sibling"
 
@@ -2039,18 +2136,18 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Απαιτούμενες επιλογές θυγατρικού"
 
-#: src/xmledit.c:233
+#: src/xmledit.c:239
 msgid "Paste Under"
 msgstr "Επικόλληση κάτω"
 
-#: src/xmledit.c:276
+#: src/xmledit.c:282
 msgid "Paste Before"
 msgstr "Επικόλληση πριν"
 
-#: src/xmledit.c:318
+#: src/xmledit.c:324
 msgid "Paste After"
 msgstr "Επικόλληση μετά"
 
-#: src/xmledit.c:357
+#: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Προβολή πηγαίου κώδικα - Conglomerate"

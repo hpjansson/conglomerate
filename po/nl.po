@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2003-10-02 11:22+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-02 21:30+0100\n"
 "Last-Translator: Elros Cyriatan <cyriatan@fastmail.fm>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -15,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1190
-#: src/cong-primary-window.c:399 src/cong-primary-window.c:401
-#: src/cong-primary-window.c:633 src/cong-primary-window.c:635
-#: src/cong-primary-window.c:641
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1189
+#: src/cong-primary-window.c:441 src/cong-primary-window.c:443
+#: src/cong-primary-window.c:704 src/cong-primary-window.c:706
+#: src/cong-primary-window.c:712
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML-Editor"
 
@@ -50,7 +51,8 @@ msgstr "Taal"
 
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:823
+#: glade/docbook-ulink-properties.glade.h:3 src/cong-file-properties.c:86
+#: src/cong-node-properties-dialog.c:788
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -116,7 +118,7 @@ msgid "Continue numbering from previous list"
 msgstr "Nummering voortzetten uit vorige lijst"
 
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
-#: src/cong-error-file-open.c:446
+#: src/cong-error-file-open.c:449
 msgid "Details"
 msgstr "Details"
 
@@ -148,6 +150,32 @@ msgstr "a, b, c, ..."
 msgid "i, ii, iii, ..."
 msgstr "i, ii, iii, ..."
 
+#: glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:5 src/cong-file-properties.c:98
+msgid "Type"
+msgstr "Soort"
+
+#: glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr ""
+
+#: glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr ""
+
 #: glade/string_selection_dialog.glade.h:1
 msgid "*"
 msgstr "*"
@@ -160,25 +188,44 @@ msgstr "label"
 msgid "string_selection_dialog"
 msgstr ""
 
-#: src/cong-app.c:122
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "XML-Editor"
 
-#: src/cong-attribute-editor-cdata.c:179
-#: src/cong-attribute-editor-enumeration.c:175
-#: src/cong-attribute-wrapper.c:171 src/cong-node-properties-dialog.c:387
+#: src/cong-app.c:364
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
+msgstr "Conglomerate kan geen xds-bestanden laden uit de map \"%s\""
+
+#: src/cong-app.c:366
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "Conglomerate kan geen beschrijvingen van documenttypes vinden."
+
+#: src/cong-app.c:368
+#, fuzzy
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+"U heeft waarschijnlijk Conglomerate gebouwd, maar niet geïnstalleerd. "
+"Installeren kan helpen."
+
+#: src/cong-attribute-editor-cdata.c:178
+#: src/cong-attribute-editor-enumeration.c:174
+#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:372
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
 msgstr "Kenmerk \"%s\" instellen op \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:215 src/cong-node-properties-dialog.c:438
+#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:416
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Kenmerk \"%s\" toevoegen"
 
-#: src/cong-attribute-editor-cdata.c:251
-#: src/cong-attribute-editor-enumeration.c:178
-#: src/cong-attribute-wrapper.c:206 src/cong-node-properties-dialog.c:475
+#: src/cong-attribute-editor-cdata.c:226
+#: src/cong-attribute-editor-enumeration.c:177
+#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:446
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Kenmerk \"%s\" verwijderen"
@@ -240,11 +287,11 @@ msgstr "Wijzigingen van de laatste %li minuten zullen verloren gaan."
 msgid "Changes from the past minute will be discarded."
 msgstr "Wijzigingen van de laatste minuut zullen verloren gaan."
 
-#: src/cong-dispspec-registry.c:87
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr "Register van document-types lezen mislukt."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate heeft gepoogd alle bestanden op de lokatie te bekijken."
 
@@ -265,6 +312,44 @@ msgstr "(xpath mislukt)"
 msgid "<untitled>"
 msgstr "<naamloos>"
 
+#: src/cong-document.c:660
+#, fuzzy, c-format
+msgid "Text \"%s\""
+msgstr "\"%s\" exporteren"
+
+#: src/cong-document.c:670
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:673
+#, fuzzy, c-format
+msgid "Entity \"%s\""
+msgstr "\"%s\" afdrukken"
+
+#: src/cong-document.c:676
+msgid "XML Processing Instruction"
+msgstr ""
+
+#: src/cong-document.c:681
+#, fuzzy, c-format
+msgid "Comment \"%s\""
+msgstr "\"%s\" afdrukken"
+
+#: src/cong-document.c:687
+#, fuzzy
+msgid "Document"
+msgstr "Documentsoorten"
+
+#: src/cong-document.c:698 src/cong-file-properties.c:116
+msgid "Document Type Declaration"
+msgstr "Documentsoort declaratie"
+
+#: src/cong-document.c:1398
+#, fuzzy, c-format
+msgid "Select %s"
+msgstr "Woord selecteren"
+
 #: src/cong-dom-view.c:208
 msgid "UNKNOWN"
 msgstr "ONBEKEND"
@@ -279,29 +364,42 @@ msgstr "Tekst: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:751
+#: src/cong-editor-node-text.c:750
 msgid "Select word"
 msgstr "Woord selecteren"
 
-#: src/cong-editor-node-text.c:792
+#: src/cong-editor-node-text.c:775
 msgid "Move cursor"
 msgstr "Aanwijzer verplaatsen"
 
-#: src/cong-editor-node-text.c:855
+#: src/cong-editor-node-text.c:833
 msgid "Drag out selection"
 msgstr "Selectie eruit slepen"
 
-#: src/cong-editor-widget3.c:1113
+#: src/cong-editor-widget3.c:396
+msgid "Expander Size"
+msgstr ""
+
+#: src/cong-editor-widget3.c:397
+msgid "Size of the expander arrow"
+msgstr ""
+
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Afdrukmethode:"
+
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr ""
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Beweging van aanwijzer"
 
-#: src/cong-editor-widget3.c:1185 src/cong-editor-widget3.c:1202
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Selectie verwijderen"
-
-#: src/cong-editor-widget3.c:1229
-msgid "Typing"
-msgstr ""
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -340,11 +438,11 @@ msgstr ""
 "Er heeft zich een GError voorgedaan; de foutmelding was:\n"
 "<i>%s</i>"
 
-#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:443
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
 msgstr "Er heeft zich een onverwachte fout voorgedaan."
 
-#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:444
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
 msgstr "Voor meer informatie kan u op \"Details\" klikken."
 
@@ -371,27 +469,27 @@ msgstr ""
 "commando teruggaf."
 
 #. FIXME: ought to set up the parent window properly
-#: src/cong-error-file-open.c:52
+#: src/cong-error-file-open.c:54
 msgid "Conglomerate could not run the Search Tool.\n"
 msgstr "Conglomerate kan het Zoek-Gereedschap niet gebruiken.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
-#: src/cong-error-file-open.c:77
+#: src/cong-error-file-open.c:82
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
 msgstr "%s kan \"%s\" niet lezen uit %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-open.c:80
+#: src/cong-error-file-open.c:85
 #, c-format
 msgid "%s could not read \"%s\" from %s."
 msgstr "%s kon \"%s\" niet lezen vanaf %s."
 
-#: src/cong-error-file-open.c:200 src/cong-error-file-save.c:79
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
 msgstr "Er heeft zich een onverwachte interne fout voorgedaan."
 
-#: src/cong-error-file-open.c:201 src/cong-error-file-save.c:80
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
@@ -399,11 +497,11 @@ msgstr ""
 "Opnieuw proberen kan helpen. gaat het weer fout, dan kan u een fout "
 "rapporteren aan de maker van deze toepassing."
 
-#: src/cong-error-file-open.c:227
+#: src/cong-error-file-open.c:234
 msgid "There is no file with that name at that location."
 msgstr "Er is geen bestand met die naam op die plaats."
 
-#: src/cong-error-file-open.c:228
+#: src/cong-error-file-open.c:235
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
@@ -416,16 +514,16 @@ msgstr ""
 "\"mijnbestand\" of \"mijnbestand\").\n"
 "(ii) het zoek-gereedschap kan u helpen uw bestand te vinden."
 
-#: src/cong-error-file-open.c:229 src/cong-error-file-open.c:238
-#: src/cong-error-file-open.c:293 src/cong-error-file-open.c:334
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/cong-error-file-open.c:236 src/cong-error-file-save.c:97
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
 msgid "The location does not exist."
 msgstr "De plaats bestaat niet."
 
-#: src/cong-error-file-open.c:237
+#: src/cong-error-file-open.c:244
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
@@ -439,12 +537,12 @@ msgstr ""
 "(ii) het zoek-gereedschap kan u helpen uw map te vinden."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-open.c:250
+#: src/cong-error-file-open.c:257
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
 msgstr "De plaats \"%s\" ondersteunt het lezen van bestanden niet."
 
-#: src/cong-error-file-open.c:254
+#: src/cong-error-file-open.c:261
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
@@ -454,22 +552,22 @@ msgstr ""
 "systeembeheerder."
 
 # todo: same as src/config-error-file-open.c:320
-#: src/cong-error-file-open.c:264
+#: src/cong-error-file-open.c:271
 msgid "There were problems reading the content of the file."
 msgstr "Er is iets fout gegaan bij het lezen van de inhoud van het bestand."
 
-#: src/cong-error-file-open.c:265 src/cong-error-file-open.c:283
-#: src/cong-error-file-open.c:322
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
 "Probeer het opnieuw. Als het opnieuw mislukt, kunt u contact opnemen met uw "
 "systeembeheerder."
 
-#: src/cong-error-file-open.c:274
+#: src/cong-error-file-open.c:281
 msgid "The contents of the file seem to be corrupt."
 msgstr "De inhoud van het bestand lijkt beschadigd."
 
-#: src/cong-error-file-open.c:275
+#: src/cong-error-file-open.c:282
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
@@ -477,15 +575,15 @@ msgstr ""
 "het bestand allicht soelaas brengen."
 
 # todo: same as src/config-error-file-open.c:263
-#: src/cong-error-file-open.c:282 src/cong-error-file-open.c:321
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
 msgid "There were problems reading the contents of the file."
 msgstr "Er is iets foutgegaan bij het lezen van de inhoud van het bestand."
 
-#: src/cong-error-file-open.c:291 src/cong-error-file-save.c:238
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
 msgid "The system does not recognise that as a valid location."
 msgstr "Het systeem herkent dat niet als een geldige plaats."
 
-#: src/cong-error-file-open.c:292
+#: src/cong-error-file-open.c:299
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
@@ -497,21 +595,21 @@ msgstr ""
 "hoofdletter-gevoelig (\"http\" is niet gelijk aan \"http\" of \"http\")\n"
 "(ii) "
 
-#: src/cong-error-file-open.c:303
+#: src/cong-error-file-open.c:310
 msgid "You do not have permission to read that file."
 msgstr "U heeft geen toegangsrechten om dat bestand te lezen."
 
-#: src/cong-error-file-open.c:304
+#: src/cong-error-file-open.c:311
 #, fuzzy
 msgid "Try asking your system administrator to give you permission."
 msgstr "uw systeembeheerder kan u allicht toelating geven."
 
-#: src/cong-error-file-open.c:311 src/cong-error-file-save.c:261
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
 msgid "The system is trying to operate on too many files at once."
 msgstr "Het systeem probeert teveel bestanden tegelijk te verwerken."
 
-#: src/cong-error-file-open.c:312 src/cong-error-file-open.c:346
-#: src/cong-error-file-save.c:262 src/cong-error-file-save.c:281
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
@@ -520,32 +618,32 @@ msgstr ""
 "toepassingen te sluiten, of contact opnemen met uw systeembeheerder."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-open.c:329
+#: src/cong-error-file-open.c:336
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
 msgstr "\"%s\" is een map, geen bestand."
 
-#: src/cong-error-file-open.c:333
+#: src/cong-error-file-open.c:340
 #, fuzzy
 msgid "Try using the Search Tool to find your file."
 msgstr "het zoek-gereedschap kan u uw bestand helpen vinden."
 
-#: src/cong-error-file-open.c:345 src/cong-error-file-save.c:280
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
 msgid "The system ran out of memory."
 msgstr "Het systeem heeft een geheugentekort."
 
-#: src/cong-error-file-open.c:354 src/cong-error-file-open.c:363
-#: src/cong-error-file-open.c:372 src/cong-error-file-save.c:289
-#: src/cong-error-file-save.c:298 src/cong-error-file-save.c:307
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
 msgid "The server could not be contacted."
 msgstr "De server is onbereikbaar."
 
-#: src/cong-error-file-open.c:355
+#: src/cong-error-file-open.c:362
 msgid "Try again.  If it fails again, the server may be down."
 msgstr ""
 "Probeer het opnieuw. Als het opnieuw mislukt, is de server misschien down."
 
-#: src/cong-error-file-open.c:364 src/cong-error-file-open.c:373
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
@@ -555,26 +653,27 @@ msgstr ""
 "(ii) opnieuw proberen kan helpen. gaat het weer fout, dan is het misschien "
 "de server die plat ligt."
 
-#: src/cong-error-file-open.c:381 src/cong-error-file-save.c:316
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
 msgid "The system could not login to the location."
 msgstr "Het systeem kon niet op de plaats inloggen."
 
-#: src/cong-error-file-open.c:382 src/cong-error-file-open.c:392
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
 "Probeer het opnieuw. Als het opnieuw mislukt, kunt u contact opnemen met uw "
 "systeembeheerder."
 
-#: src/cong-error-file-open.c:391 src/cong-error-file-save.c:325
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
 msgid "The location was too busy."
 msgstr "De plaats was overbezet."
 
-#: src/cong-error-file-open.c:430
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
 #, fuzzy, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "het aanspreken van \"%s\" gaf volgende foutmelding: \"%s\""
 
-#: src/cong-error-file-open.c:436
+#: src/cong-error-file-open.c:439
 #, fuzzy
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
@@ -584,18 +683,18 @@ msgstr ""
 "virtueel bestandssysteem."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
-#: src/cong-error-file-save.c:48
+#: src/cong-error-file-save.c:51
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
 msgstr "%s kan \"%s\" niet opslaan in %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-save.c:51
+#: src/cong-error-file-save.c:54
 #, c-format
 msgid "%s could not save \"%s\" to %s."
 msgstr "%s kon \"%s\" niet opslaan in %s."
 
-#: src/cong-error-file-save.c:98
+#: src/cong-error-file-save.c:101
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
@@ -608,29 +707,29 @@ msgstr ""
 "(ii) Opslaan op een andere plaats kan helpen."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:106 src/cong-error-file-save.c:225
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
 msgstr "De plaats \"%s\" ondersteunt het schrijven van bestanden niet."
 
-#: src/cong-error-file-save.c:110 src/cong-error-file-save.c:229
-#: src/cong-error-file-save.c:337
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
 msgid "Try saving to a different location."
 msgstr "Probeer op te slaan op een andere plaats."
 
-#: src/cong-error-file-save.c:121
+#: src/cong-error-file-save.c:124
 msgid "There were problems writing the content of the file."
 msgstr ""
 "Er heeft zich een probleem voorgedaan bij het schrijven van de inhoud van "
 "het bestand."
 
-#: src/cong-error-file-save.c:122
+#: src/cong-error-file-save.c:125
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr ""
 "Probeer het opnieuw. Als het opnieuw mislukt, kunt u proberen op te slaan op "
 "een andere plaats."
 
-#: src/cong-error-file-save.c:151
+#: src/cong-error-file-save.c:154
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
@@ -639,7 +738,7 @@ msgstr ""
 "capaciteit voor %s."
 
 #. Can't get at the capacity for the device or "volume":
-#: src/cong-error-file-save.c:157
+#: src/cong-error-file-save.c:160
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
@@ -647,15 +746,15 @@ msgstr ""
 "zijn)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:165
+#: src/cong-error-file-save.c:168
 msgid "The file is too big to fit on the device."
 msgstr "Het bestand is te groot om op het apparaat te passen."
 
-#: src/cong-error-file-save.c:174
+#: src/cong-error-file-save.c:177
 msgid "Try saving the file to a different location."
 msgstr "Probeer het bestand op te slaan op een andere plaats."
 
-#: src/cong-error-file-save.c:195
+#: src/cong-error-file-save.c:198
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
@@ -664,7 +763,7 @@ msgstr ""
 "op dat apparaat."
 
 #. Can't get at the free space for the device or "volume":
-#: src/cong-error-file-save.c:201
+#: src/cong-error-file-save.c:204
 #, c-format
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
@@ -674,13 +773,13 @@ msgstr ""
 "passen (bestandsgrootte zou %s zijn)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:209
+#: src/cong-error-file-save.c:212
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr ""
 "Het bestand is te groot om op de overgebleven plaats op het apparaat te "
 "passen."
 
-#: src/cong-error-file-save.c:218
+#: src/cong-error-file-save.c:221
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
@@ -689,7 +788,7 @@ msgstr ""
 "vrij door ongewenste bestand van dat apparaat te verplaatsen naar de "
 "prullenbak."
 
-#: src/cong-error-file-save.c:239
+#: src/cong-error-file-save.c:242
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
@@ -701,11 +800,11 @@ msgstr ""
 "gelijk aan \"Http\" of \"HTTP\").\n"
 "(ii) Misschien helpt opslaan op een andere plaats?"
 
-#: src/cong-error-file-save.c:253
+#: src/cong-error-file-save.c:256
 msgid "You do not have permission to write to that location."
 msgstr "U heeft geen toegangsrechten om op die plaats te schrijven."
 
-#: src/cong-error-file-save.c:254
+#: src/cong-error-file-save.c:257
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
@@ -714,12 +813,12 @@ msgstr ""
 "toegangsrechten te geven."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-save.c:268
+#: src/cong-error-file-save.c:271
 #, c-format
 msgid "\"%s\" is a directory."
 msgstr "\"%s\" is een map."
 
-#: src/cong-error-file-save.c:272
+#: src/cong-error-file-save.c:275
 #, fuzzy
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
@@ -727,7 +826,7 @@ msgid ""
 msgstr ""
 "u kan het document enkel opslaan als een bestand in een map, en niet als map."
 
-#: src/cong-error-file-save.c:290
+#: src/cong-error-file-save.c:293
 #, fuzzy
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
@@ -736,7 +835,7 @@ msgstr ""
 "nogmaals proberen kan helpen. mislukt het opnieuw? op een andere plaats "
 "opslaan lost allicht uw probleem op."
 
-#: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
 #, fuzzy
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
@@ -747,13 +846,13 @@ msgstr ""
 "(ii) opnieuw proberen kan helpen. Lukt het nog steeds niet? Misschien ligt "
 "de server plat. Lukt opslaan op een andere plaats wel?"
 
-#: src/cong-error-file-save.c:317 src/cong-error-file-save.c:326
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
 #, fuzzy
 msgid "Try again. If it fails again, try saving to another location."
 msgstr "opnieuw proberen kan helpen. "
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:333
+#: src/cong-error-file-save.c:336
 #, fuzzy, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
 msgstr ""
@@ -761,38 +860,38 @@ msgstr ""
 "schrijven."
 
 #. FIXME: need to think more about these messages
-#: src/cong-error-file-save.c:345
+#: src/cong-error-file-save.c:348
 #, fuzzy, c-format
 msgid "The name \"%s\" is too long for the location to manage."
 msgstr "deze plaats kan niet overweg met een lange naam als \"%s\"."
 
-#: src/cong-error-file-save.c:349
+#: src/cong-error-file-save.c:352
 #, fuzzy
 msgid "Try again with a shorter file name."
 msgstr "Opnieuw proberen met een kortere bestandsnaam kan helpen."
 
 #. 5 megabytes, for a test
-#: src/cong-error-tests.c:17
+#: src/cong-error-tests.c:16
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
 msgstr ""
 
-#: src/cong-error-tests.c:23
+#: src/cong-error-tests.c:22
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
 msgstr ""
 
-#: src/cong-error-tests.c:29
+#: src/cong-error-tests.c:28
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
 msgstr "Testen algemeen falen van \"%s\" met resultaat %s"
 
-#: src/cong-error-tests.c:32
+#: src/cong-error-tests.c:31
 #, fuzzy
 msgid "Conglomerate is simulating the failure of a generic file operation."
 msgstr "conglomerate simuleert een mislukkende generieke bestands-bewerking"
 
-#: src/cong-error-tests.c:35
+#: src/cong-error-tests.c:34
 #, fuzzy
 msgid "This dialog was generated by the automated testing routine"
 msgstr "dit dialoogvenster werd gegenereerd door de automatische testroutine"
@@ -816,7 +915,7 @@ msgid "Export"
 msgstr "Exporteren"
 
 #: src/cong-file-export.c:252 src/cong-file-print.c:214
-#: src/cong-file-properties.c:96
+#: src/cong-file-properties.c:97
 msgid "General"
 msgstr "Algemeen"
 
@@ -833,14 +932,14 @@ msgid "Export Options"
 msgstr "Exporteer opties"
 
 #: src/cong-file-export.c:304 src/cong-file-print.c:241
-#: src/cong-file-properties.c:102 src/cong-file-properties.c:106
-#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:543
+#: src/cong-file-properties.c:103 src/cong-file-properties.c:107
+#: src/cong-menus.c:419 src/cong-node-properties-dialog.c:507
 msgid "Name"
 msgstr "Naam"
 
-#: src/cong-file-export.c:305 src/cong-file-new.c:231
-#: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:426 src/cong-parser-error.c:259
+#: src/cong-file-export.c:305 src/cong-file-new.c:232
+#: src/cong-file-print.c:242 src/cong-file-properties.c:108
+#: src/cong-menus.c:426 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Beschrijving"
 
@@ -855,21 +954,21 @@ msgstr ""
 "Geen enkele Conglomerate plugin weet hoe bestanden van die soort te "
 "exporteren."
 
-#: src/cong-file-import.c:64
+#: src/cong-file-import.c:66
 msgid "Import file..."
 msgstr "Bestand importeren..."
 
 #. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:95
+#: src/cong-file-import.c:99
 msgid "Could not import the file."
 msgstr "Kon het bestand niet importeren."
 
-#: src/cong-file-import.c:96
+#: src/cong-file-import.c:100
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr "Geen enkele Conglomerate plugin kan bestanden van soort \"%s\" laden"
 
-#: src/cong-file-import.c:97
+#: src/cong-file-import.c:101
 msgid "FIXME"
 msgstr ""
 
@@ -878,16 +977,16 @@ msgstr ""
 msgid "Creating a new file (%s)"
 msgstr "Bezig met maken nieuw bestand (%s)"
 
-#: src/cong-file-new.c:211
+#: src/cong-file-new.c:212
 msgid "File Type"
 msgstr "Bestandssoort"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:398 src/cong-file-new.c:405 src/cong-file-new.c:430
+#: src/cong-file-new.c:399 src/cong-file-new.c:406 src/cong-file-new.c:431
 msgid "Creating a new file"
 msgstr "Bezig met maken nieuw bestand"
 
-#: src/cong-file-new.c:406
+#: src/cong-file-new.c:407
 #, fuzzy
 msgid ""
 "This assistant will guide you through creating a new file.\n"
@@ -906,18 +1005,18 @@ msgstr ""
 "In toekomstige versies zal u hopelijk zelf \"sjabloondocumenten\" kunnen "
 "toevoegen aan dit systeem."
 
-#: src/cong-file-new.c:419
+#: src/cong-file-new.c:420
 #, fuzzy
 msgid "What type of file would you like to create?"
 msgstr "welk soort bestand wilt u aanmaken?"
 
-#: src/cong-file-new.c:421
+#: src/cong-file-new.c:422
 #, fuzzy
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "U dient een van de punten in de lijst te selecteren om verder te gaan"
 
-#: src/cong-file-new.c:431
+#: src/cong-file-new.c:432
 #, fuzzy
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
@@ -928,7 +1027,7 @@ msgstr ""
 "klik \"toepassen\" om het aan te maken. u zal het document moeten opslaan "
 "als u het wil behouden."
 
-#: src/cong-file-open.c:53
+#: src/cong-file-open.c:54
 #, fuzzy
 msgid ""
 "The internal structure of the document does not match any of the types known "
@@ -937,7 +1036,7 @@ msgstr ""
 "de interne structuur van het document komt met geen enkel type dat "
 "conglomerate kent overeen."
 
-#: src/cong-file-open.c:54
+#: src/cong-file-open.c:55
 #, fuzzy
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
@@ -946,11 +1045,11 @@ msgstr ""
 "U kan conglomerate dwingen het document te laden door op \"force\" te "
 "klikken, maar verwacht niet te veel van het resultaat."
 
-#: src/cong-file-open.c:55
+#: src/cong-file-open.c:56
 msgid "Force"
 msgstr "Dwingen"
 
-#: src/cong-file-open.c:194
+#: src/cong-file-open.c:168
 msgid "Select an XML document"
 msgstr "Een XML-document selecteren"
 
@@ -985,63 +1084,55 @@ msgid "None of Conglomerate's plugins know how to print files of that type."
 msgstr ""
 "Geen enkele Conglomerate plugin weet hoe dergelijke bestanden af te drukken."
 
-#: src/cong-file-properties.c:51 src/cong-file-properties.c:54
+#: src/cong-file-properties.c:52 src/cong-file-properties.c:55
 msgid "None"
 msgstr "Geen"
 
-#: src/cong-file-properties.c:56
+#: src/cong-file-properties.c:57
 msgid "External ID"
 msgstr "Externe ID"
 
-#: src/cong-file-properties.c:57
+#: src/cong-file-properties.c:58
 msgid "System ID"
 msgstr "Systeem ID"
 
-#: src/cong-file-properties.c:97
-msgid "Type"
-msgstr "Soort"
-
-#: src/cong-file-properties.c:103 src/cong-node-properties-dialog.c:247
+#: src/cong-file-properties.c:104 src/cong-node-properties-dialog.c:247
 msgid "Location"
 msgstr "Plaats"
 
-#: src/cong-file-properties.c:104
+#: src/cong-file-properties.c:105
 msgid "Modified"
 msgstr "Gewijzigd"
 
-#: src/cong-file-properties.c:114
+#: src/cong-file-properties.c:115
 msgid "XML Header"
 msgstr "XML kop"
 
-#: src/cong-file-properties.c:115
-msgid "Document Type Declaration"
-msgstr "Documentsoort declaratie"
-
-#: src/cong-file-properties.c:117
+#: src/cong-file-properties.c:118
 msgid "Version"
 msgstr "Versie"
 
-#: src/cong-file-properties.c:122
+#: src/cong-file-properties.c:123
 msgid "Unspecified"
 msgstr "Niet aangegeven"
 
-#: src/cong-file-properties.c:124
+#: src/cong-file-properties.c:125
 msgid "Encoding"
 msgstr "Codering"
 
-#: src/cong-file-properties.c:126
+#: src/cong-file-properties.c:127
 msgid "Standalone"
 msgstr "Alleenstaand"
 
-#: src/cong-file-properties.c:129
+#: src/cong-file-properties.c:130
 msgid "_Remove this DTD"
 msgstr "Deze DTD _verwijderen"
 
-#: src/cong-file-properties.c:151
+#: src/cong-file-properties.c:152
 msgid "_Associate this DTD"
 msgstr "Deze DTD _associëren"
 
-#: src/cong-file-properties.c:152
+#: src/cong-file-properties.c:153
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "following information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1051,52 +1142,62 @@ msgstr ""
 "volgende informatie juist is. Klik op \"Deze DTD associëren\" om deze "
 "informatie expliciet in het document aan te geven."
 
-#: src/cong-file-properties.c:174
+#: src/cong-file-properties.c:175
 msgid "No External Subset"
 msgstr "Geen externe deelverzameling"
 
-#: src/cong-file-properties.c:191
+#: src/cong-file-properties.c:192
 msgid "Basic"
 msgstr "Basis"
 
-#: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:778
-#: src/cong-node-properties-dialog.c:861
+#: src/cong-file-properties.c:195 src/cong-node-properties-dialog.c:742
+#: src/cong-node-properties-dialog.c:826
 msgid "Advanced"
 msgstr "Geavanceerd"
+
+#: src/cong-file-properties.c:219
+#, fuzzy
+msgid "Remove DTD"
+msgstr "Deze DTD _verwijderen"
+
+#: src/cong-file-properties.c:249
+#, fuzzy
+msgid "Associate with DTD"
+msgstr "Deze DTD _associëren"
 
 #: src/cong-file-save.c:51
 msgid "Save XML as..."
 msgstr "XML opslaan als..."
 
-#: src/cong-location.c:358 src/cong-location.c:404
+#: src/cong-location.c:293 src/cong-location.c:314
 msgid "Merge tags"
 msgstr ""
 
-#: src/cong-location.c:455
+#: src/cong-location.c:358
 msgid "Delete character"
 msgstr "Teken verwijderen"
 
-#: src/cong-location.c:875
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Bezig met berekenen begin document"
 
-#: src/cong-location.c:887
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Bezig met berekenen begin regel"
 
-#: src/cong-location.c:900
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Bezig met berekenen document-einde"
 
-#: src/cong-location.c:913
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Bezig met berekenen regel-einde"
 
-#: src/cong-location.c:926
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Bezig met berekenen vorige pagina"
 
-#: src/cong-location.c:939
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Bezig met berekenen volgende pagina"
 
@@ -1112,17 +1213,17 @@ msgstr "Documentsoorten"
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate kan het resultaat van de transformatie niet openen"
 
-#: src/cong-menus.c:551 src/cong-plugin.c:1018
+#: src/cong-menus.c:551 src/cong-plugin.c:1019
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Er was een probleem bij het lezen van het stijlblad-bestand \"%s\""
 
-#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1021
-#: src/cong-plugin.c:1045
+#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1022
+#: src/cong-plugin.c:1046
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate kon het document niet transformeren"
 
-#: src/cong-menus.c:575 src/cong-plugin.c:1042
+#: src/cong-menus.c:575 src/cong-plugin.c:1043
 msgid "There was a problem applying the stylesheet file"
 msgstr "Er was een probleem bij het toepassen van het stijlblad"
 
@@ -1145,13 +1246,13 @@ msgstr "berichtenarchief - conglomerate"
 msgid "Signal Log - Conglomerate"
 msgstr "berichtenarchief - conglomerate"
 
-#: src/cong-menus.c:1188
+#: src/cong-menus.c:1187
 msgid "translator_credits"
 msgstr ""
 "Mark van den Borre \n"
 "Elros Cyriatan"
 
-#: src/cong-menus.c:1192
+#: src/cong-menus.c:1191
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
@@ -1159,241 +1260,241 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2003 David Malcolm"
 
-#: src/cong-menus.c:1193
+#: src/cong-menus.c:1192
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: een vrije, gebruiksvriendelijke XML bewerker"
 
-#: src/cong-menus.c:1228 src/cong-menus.c:1306
+#: src/cong-menus.c:1232 src/cong-menus.c:1310
 #, fuzzy
 msgid "/_File"
 msgstr "_bestand"
 
-#: src/cong-menus.c:1229 src/cong-menus.c:1307
+#: src/cong-menus.c:1233 src/cong-menus.c:1311
 #, fuzzy
 msgid "/File/_New..."
 msgstr "/bestand/_nieuw"
 
-#: src/cong-menus.c:1230 src/cong-menus.c:1308
+#: src/cong-menus.c:1234 src/cong-menus.c:1312
 #, fuzzy
 msgid "/File/_Open..."
 msgstr "/bestand/_open..."
 
-#: src/cong-menus.c:1231 src/cong-menus.c:1236 src/cong-menus.c:1241
-#: src/cong-menus.c:1244 src/cong-menus.c:1247 src/cong-menus.c:1249
-#: src/cong-menus.c:1309 src/cong-menus.c:1311
+#: src/cong-menus.c:1235 src/cong-menus.c:1240 src/cong-menus.c:1245
+#: src/cong-menus.c:1248 src/cong-menus.c:1251 src/cong-menus.c:1253
+#: src/cong-menus.c:1313 src/cong-menus.c:1315
 #, fuzzy
 msgid "/File/"
 msgstr "/bestand/"
 
-#: src/cong-menus.c:1232
+#: src/cong-menus.c:1236
 #, fuzzy
 msgid "/File/_Save"
 msgstr "/bestand/op_slaan"
 
-#: src/cong-menus.c:1233
+#: src/cong-menus.c:1237
 #, fuzzy
 msgid "/File/Save _As..."
 msgstr "/bestand/opslaan_als..."
 
-#: src/cong-menus.c:1234
+#: src/cong-menus.c:1238
 #, fuzzy
 msgid "/File/Sa_ve a Copy..."
 msgstr "/bestand/e_xemplaar opslaan..."
 
-#: src/cong-menus.c:1237
+#: src/cong-menus.c:1241
 #, fuzzy
 msgid "/File/Print Previe_w..."
 msgstr "/bestand/afdruk_voorbeeld..."
 
-#: src/cong-menus.c:1238
+#: src/cong-menus.c:1242
 #, fuzzy
 msgid "/File/_Print..."
 msgstr "/bestand/af_drukken..."
 
-#: src/cong-menus.c:1242
+#: src/cong-menus.c:1246
 #, fuzzy
 msgid "/File/_Revert"
 msgstr "/bestand/he_rstellen"
 
-#: src/cong-menus.c:1245 src/cong-menus.c:1310
+#: src/cong-menus.c:1249 src/cong-menus.c:1314
 #, fuzzy
 msgid "/File/_Import..."
 msgstr "/bestand/_importeren..."
 
-#: src/cong-menus.c:1246
+#: src/cong-menus.c:1250
 #, fuzzy
 msgid "/File/_Export..."
 msgstr "/bestand/_exporteren..."
 
-#: src/cong-menus.c:1248
+#: src/cong-menus.c:1252
 #, fuzzy
 msgid "/File/Proper_ties"
 msgstr "/bestand/ei_genschappen"
 
-#: src/cong-menus.c:1250 src/cong-menus.c:1312
+#: src/cong-menus.c:1254 src/cong-menus.c:1316
 #, fuzzy
 msgid "/File/_Close"
 msgstr "/bestand/sl_uiten"
 
-#: src/cong-menus.c:1251 src/cong-menus.c:1313
+#: src/cong-menus.c:1255 src/cong-menus.c:1317
 #, fuzzy
 msgid "/File/_Quit"
 msgstr "/bestand/afslui_ten"
 
-#: src/cong-menus.c:1253
+#: src/cong-menus.c:1257
 #, fuzzy
 msgid "/_Edit"
 msgstr "/b_ewerken"
 
-#: src/cong-menus.c:1254
+#: src/cong-menus.c:1258
 #, fuzzy
 msgid "/Edit/_Undo"
 msgstr "/bewerken/_ongedaan maken"
 
-#: src/cong-menus.c:1255
+#: src/cong-menus.c:1259
 #, fuzzy
 msgid "/Edit/_Redo"
 msgstr "/bewerken/_redo"
 
-#: src/cong-menus.c:1256 src/cong-menus.c:1260 src/cong-menus.c:1266
-#: src/cong-menus.c:1268
+#: src/cong-menus.c:1260 src/cong-menus.c:1264 src/cong-menus.c:1270
+#: src/cong-menus.c:1272
 #, fuzzy
 msgid "/Edit/"
 msgstr "/bewerken/"
 
-#: src/cong-menus.c:1257
+#: src/cong-menus.c:1261
 #, fuzzy
 msgid "/Edit/Cu_t"
 msgstr "/bewerken/_knippen"
 
-#: src/cong-menus.c:1258
+#: src/cong-menus.c:1262
 #, fuzzy
 msgid "/Edit/_Copy"
 msgstr "/bewerken/k_opiëren"
 
-#: src/cong-menus.c:1259
+#: src/cong-menus.c:1263
 #, fuzzy
 msgid "/Edit/_Paste"
 msgstr "/bewerken/_plakken"
 
-#: src/cong-menus.c:1262
+#: src/cong-menus.c:1266
 #, fuzzy
 msgid "/Edit/_Find..."
 msgstr "/bewerken/_zoeken..."
 
-#: src/cong-menus.c:1263
+#: src/cong-menus.c:1267
 #, fuzzy
 msgid "/Edit/Find Ne_xt"
 msgstr "/bewerken/_volgende zoeken"
 
-#: src/cong-menus.c:1264
+#: src/cong-menus.c:1268
 #, fuzzy
 msgid "/Edit/Find Pre_vious"
 msgstr "/bewerken/v_orige zoeken"
 
-#: src/cong-menus.c:1265
+#: src/cong-menus.c:1269
 #, fuzzy
 msgid "/Edit/R_eplace..."
 msgstr "/bewerken/ve_rvangen"
 
-#: src/cong-menus.c:1267
+#: src/cong-menus.c:1271
 #, fuzzy
 msgid "/Edit/_Insert..."
 msgstr "/bewerken/_invoegen..."
 
-#: src/cong-menus.c:1270
+#: src/cong-menus.c:1274
 #, fuzzy
 msgid "/Edit/View _Source"
 msgstr "/bewerken/_bron bekijken"
 
-#: src/cong-menus.c:1273 src/cong-menus.c:1316
+#: src/cong-menus.c:1277 src/cong-menus.c:1320
 msgid "/Debug"
 msgstr ""
 
-#: src/cong-menus.c:1274 src/cong-menus.c:1317
+#: src/cong-menus.c:1278 src/cong-menus.c:1321
 msgid "/Debug/Begin self-test of error-reporting system..."
 msgstr ""
 
-#: src/cong-menus.c:1275 src/cong-menus.c:1318
+#: src/cong-menus.c:1279 src/cong-menus.c:1322
 #, fuzzy
 msgid "/Debug/Document Types"
 msgstr "document-types"
 
-#: src/cong-menus.c:1276
+#: src/cong-menus.c:1280
 msgid "/Debug/Transform DocBook to HTML"
 msgstr ""
 
-#: src/cong-menus.c:1277
+#: src/cong-menus.c:1281
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr ""
 
-#: src/cong-menus.c:1278
+#: src/cong-menus.c:1282
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr ""
 
-#: src/cong-menus.c:1279
+#: src/cong-menus.c:1283
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr ""
 
-#: src/cong-menus.c:1280
+#: src/cong-menus.c:1284
 msgid "/Debug/Transform DocBook to FO"
 msgstr ""
 
-#: src/cong-menus.c:1282
+#: src/cong-menus.c:1286
 #, fuzzy
 msgid "/Debug/Preview XSL:FO"
 msgstr "XSL:FO afdrukken"
 
-#: src/cong-menus.c:1284
+#: src/cong-menus.c:1288
 msgid "/Debug/DTD"
 msgstr ""
 
-#: src/cong-menus.c:1285 src/cong-menus.c:1319
+#: src/cong-menus.c:1289 src/cong-menus.c:1323
 msgid "/Debug/Dialog"
 msgstr ""
 
-#: src/cong-menus.c:1286 src/cong-menus.c:1320
+#: src/cong-menus.c:1290 src/cong-menus.c:1324
 msgid "/Debug/Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1287
+#: src/cong-menus.c:1291
 msgid "/Debug/Document Message Log"
 msgstr ""
 
-#: src/cong-menus.c:1288
+#: src/cong-menus.c:1292
 msgid "/Debug/Document Signal Log"
 msgstr ""
 
-#: src/cong-menus.c:1289 src/cong-menus.c:1321
+#: src/cong-menus.c:1293 src/cong-menus.c:1325
 msgid "/Debug/Information Alert"
 msgstr ""
 
-#: src/cong-menus.c:1290 src/cong-menus.c:1322
+#: src/cong-menus.c:1294 src/cong-menus.c:1326
 msgid "/Debug/Glade Test"
 msgstr ""
 
-#: src/cong-menus.c:1291
+#: src/cong-menus.c:1295
 msgid "/Debug/Insert XML Fragment"
 msgstr ""
 
-#: src/cong-menus.c:1292
+#: src/cong-menus.c:1296
 #, fuzzy
 msgid "/Debug/Command Test"
 msgstr "document-types"
 
-#: src/cong-menus.c:1295
+#: src/cong-menus.c:1299
 msgid "/_Tools"
 msgstr "/_Gereedschap"
 
-#: src/cong-menus.c:1297 src/cong-menus.c:1325
+#: src/cong-menus.c:1301 src/cong-menus.c:1329
 msgid "/_Help"
 msgstr "/_Hulp"
 
-#: src/cong-menus.c:1298 src/cong-menus.c:1326
+#: src/cong-menus.c:1302 src/cong-menus.c:1330
 msgid "/Help/_Contents"
 msgstr "/Hulp/_Inhoud"
 
-#: src/cong-menus.c:1299 src/cong-menus.c:1327
+#: src/cong-menus.c:1303 src/cong-menus.c:1331
 msgid "/Help/_About"
 msgstr "/Hulp/_Over"
 
@@ -1401,25 +1502,25 @@ msgstr "/Hulp/_Over"
 msgid "XPath"
 msgstr "XPath"
 
-#: src/cong-node-properties-dialog.c:336
+#: src/cong-node-properties-dialog.c:335
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
 msgstr "Kenmerk \"%s\" hernoemen tot \"%s\""
 
-#: src/cong-node-properties-dialog.c:522
+#: src/cong-node-properties-dialog.c:486
 msgid "Raw Attributes"
 msgstr "Ruwe kenmerken"
 
-#: src/cong-node-properties-dialog.c:555
+#: src/cong-node-properties-dialog.c:519
 msgid "Value"
 msgstr "Waarde"
 
-#: src/cong-node-properties-dialog.c:644
+#: src/cong-node-properties-dialog.c:608
 #, c-format
 msgid "Attributes for <tt>%s</tt> tags"
 msgstr "Kenmerken voor <tt>%s</tt> secties"
 
-#: src/cong-node-properties-dialog.c:770 src/cong-node-properties-dialog.c:856
+#: src/cong-node-properties-dialog.c:734 src/cong-node-properties-dialog.c:821
 msgid "DTD"
 msgstr "DTD"
 
@@ -1427,21 +1528,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Onbekende data"
 
-#: src/cong-parser-error.c:171
+#: src/cong-parser-error.c:177
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Leesfouten bij laden %s"
 
-#: src/cong-parser-error.c:254
+#: src/cong-parser-error.c:185
+msgid "_Retry"
+msgstr ""
+
+#: src/cong-parser-error.c:264
 msgid "Line Number"
 msgstr "Lijn Nummer"
 
-#: src/cong-parser-error.c:316
+#: src/cong-parser-error.c:326
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s verstaat het interne formaat van het bestand niet."
 
-#: src/cong-parser-error.c:324
+#: src/cong-parser-error.c:334
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1451,102 +1556,94 @@ msgstr ""
 "veel striktere regels dan de meeste webbrowsers. Er is ook nog geen SGML-"
 "ondersteuning. We hopen deze problemen in een latere versie aan te pakken."
 
-#: src/cong-parser-error.c:325
+#: src/cong-parser-error.c:335
 msgid "Show Details"
 msgstr "Details Tonen"
 
-#: src/cong-plugin.c:946 src/cong-plugin.c:982
+#: src/cong-plugin.c:947 src/cong-plugin.c:983
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate kan geen scherminformatie vinden voor het nieuwe bestand"
 
-#: src/cong-primary-window.c:260 src/cong-primary-window.c:261
+#: src/cong-primary-window.c:286 src/cong-primary-window.c:287
 msgid "Open document"
 msgstr "Document openen"
 
-#: src/cong-primary-window.c:269 src/cong-primary-window.c:270
-msgid "Save document as..."
+#: src/cong-primary-window.c:300 src/cong-primary-window.c:301
+#, fuzzy
+msgid "Save document"
 msgstr "Document opslaan als ..."
 
-#: src/cong-primary-window.c:277 src/cong-primary-window.c:278
+#: src/cong-primary-window.c:308 src/cong-primary-window.c:309
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/cong-primary-window.c:284 src/cong-primary-window.c:285
+#: src/cong-primary-window.c:315 src/cong-primary-window.c:316
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: src/cong-primary-window.c:292 src/cong-primary-window.c:293 src/tree.c:199
-#: src/xmledit.c:72 src/xmledit.c:127
+#: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
+#: src/xmledit.c:44
 msgid "Cut"
 msgstr "Knippen"
 
-#: src/cong-primary-window.c:299 src/cong-primary-window.c:300
+#: src/cong-primary-window.c:341 src/cong-primary-window.c:342
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/cong-primary-window.c:306 src/cong-primary-window.c:307
-#: src/xmledit.c:198
+#: src/cong-primary-window.c:348 src/cong-primary-window.c:349
+#: src/xmledit.c:161
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/cong-primary-window.c:475
+#: src/cong-primary-window.c:517
 msgid "Overview"
 msgstr "Overzicht"
 
-#: src/cong-primary-window.c:485
+#: src/cong-primary-window.c:527
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: src/cong-primary-window.c:493
+#: src/cong-primary-window.c:535
 msgid "Raw XML"
 msgstr "Pure XML"
 
-#: src/cong-primary-window.c:551
+#: src/cong-primary-window.c:592 src/cong-primary-window.c:622
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welkom bij de Conglomerate editor"
 
-#: src/cong-primary-window.c:633
+#: src/cong-primary-window.c:704
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (bijgewerkt) - %s"
 
-#: src/cong-util.c:264 src/plugin-docbook.c:1006
+#: src/cong-util.c:272 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Bezig met afdrukken XSL formatteringsobjecten"
 
-#: src/cong-util.c:308
+#: src/cong-util.c:316
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Dit wordt ooit het resultaat van cong_util_print_xslfo"
 
-#: src/cursor.c:131
+#: src/cursor.c:99
 #, c-format
 msgid "Split %s tag"
 msgstr "Sectie %s opsplitsen"
 
-#: src/main.c:209
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
-msgstr "Conglomerate kan geen xds-bestanden laden uit de map \"%s\""
-
-#: src/main.c:211
-msgid "Conglomerate could not find any descriptions of document types."
-msgstr "Conglomerate kan geen beschrijvingen van documenttypes vinden."
-
-#: src/main.c:213
-#, fuzzy
-msgid ""
-"If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
+#: src/plugin-admonition.c:61
+msgid "Admonition"
 msgstr ""
-"U heeft waarschijnlijk Conglomerate gebouwd, maar niet geïnstalleerd. "
-"Installeren kan helpen."
 
-#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:454
+#: src/plugin-admonition.c:62
+#, fuzzy
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Een element voor het visualiseren van een lijst-lid"
+
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
 msgid "Cleanup XML Source"
 msgstr "XML-broncode Opruimen"
 
-#: src/plugin-cleanup-source.c:455 src/plugin-cleanup-source.c:458
-#: src/plugin-cleanup-source.c:459
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1554,15 +1651,15 @@ msgstr ""
 "Ruimt de XML-broncode van het document op. Dat maakt ze beter leesbaar in "
 "code-editors."
 
-#: src/plugin-cleanup-source.c:457
+#: src/plugin-cleanup-source.c:433
 msgid "_Clean the XML Source"
 msgstr "_XML-broncode opruimen"
 
-#: src/plugin-convert-case.c:117
+#: src/plugin-convert-case.c:118
 msgid "Export as \"lower case\" XML"
 msgstr "Exporteren als \"kleine letters\" XML"
 
-#: src/plugin-convert-case.c:118
+#: src/plugin-convert-case.c:119
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
@@ -1610,47 +1707,47 @@ msgstr "Bezig met converteren XSL formatteringsobjecten naar PDF"
 msgid "Printing DocBook file"
 msgstr "DocBook-bestand aan het afdrukken"
 
-#: src/plugin-docbook.c:1243
+#: src/plugin-docbook.c:1302
 msgid "DocBook Article"
 msgstr "DocBook-Artikel"
 
-#: src/plugin-docbook.c:1244
+#: src/plugin-docbook.c:1303
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Een artikel aanmaken in \"DocBook\"-formaat (voor een website of magazine?)"
 
-#: src/plugin-docbook.c:1251
+#: src/plugin-docbook.c:1310
 msgid "DocBook Book"
 msgstr "DocBook-Boek"
 
-#: src/plugin-docbook.c:1252
+#: src/plugin-docbook.c:1311
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Een boek in \"DocBook\"-formaat aanmaken"
 
-#: src/plugin-docbook.c:1259
+#: src/plugin-docbook.c:1318
 msgid "DocBook Set"
 msgstr "DocBook-Set"
 
-#: src/plugin-docbook.c:1260
+#: src/plugin-docbook.c:1319
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Een set van verwante boeken in \"DocBook\"-formaat"
 
-#: src/plugin-docbook.c:1268
+#: src/plugin-docbook.c:1327
 msgid "Import text as a DocBook article"
 msgstr "Tekst importeren als DocBook-artikel"
 
-#: src/plugin-docbook.c:1269
+#: src/plugin-docbook.c:1328
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr ""
 "Een vlakke tekst-bestand importeren naar \"DocBook\"-formaat als een artikel."
 
-#: src/plugin-docbook.c:1286
+#: src/plugin-docbook.c:1345
 msgid "Export DocBook as HTML"
 msgstr "DocBook naar HTML Exporteren"
 
-#: src/plugin-docbook.c:1287
+#: src/plugin-docbook.c:1346
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1658,11 +1755,11 @@ msgstr ""
 "Norman Walsh' DocBook-stijlbladen gebruiken om vanuit dit DocBook-bestand "
 "eeb webpagina te maken"
 
-#: src/plugin-docbook.c:1294
+#: src/plugin-docbook.c:1353
 msgid "Export DocBook as PDF"
 msgstr "DocBook naar PDF Exporteren"
 
-#: src/plugin-docbook.c:1295
+#: src/plugin-docbook.c:1354
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1670,11 +1767,11 @@ msgstr ""
 "Norman Walsh' DocBook-stijlbladen gebruiken om vanuit dit DocBook-bestand "
 "een PDF-bestand te maken"
 
-#: src/plugin-docbook.c:1302
+#: src/plugin-docbook.c:1361
 msgid "Export DocBook as XSL:FO"
 msgstr "DocBook naar XSL:FO Exporteren"
 
-#: src/plugin-docbook.c:1303
+#: src/plugin-docbook.c:1362
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1682,36 +1779,47 @@ msgstr ""
 "Norman Walsh' DocBook-stijlbladen gebruiken om vanuit dit DocBook-bestand "
 "een XSL:FO-bestand te maken dat u later kan afdrukken of naar PDF omzetten"
 
-#: src/plugin-docbook.c:1311
+#: src/plugin-docbook.c:1370
 msgid "Print DocBook"
 msgstr "DocBook Afdrukken"
 
-#: src/plugin-docbook.c:1320
+#: src/plugin-docbook.c:1379
 #, fuzzy
 msgid "Generic DocBook property dialog"
 msgstr "Generiek DocBook eigenschappen-dialoogvenster"
 
-#: src/plugin-docbook.c:1321
+#: src/plugin-docbook.c:1380
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr ""
 "Voorziet een Eigenschappen-dialoogvenster voor de meeste DocBook-knopen"
 
-#: src/plugin-docbook.c:1327
+#: src/plugin-docbook.c:1386
 #, fuzzy
 msgid "<orderedlist> property dialog"
 msgstr "Generiek DocBook eigenschappen-dialoogvenster"
 
-#: src/plugin-docbook.c:1328
+#: src/plugin-docbook.c:1387
 #, fuzzy
 msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr ""
 "Voorziet een Eigenschappen-dialoogvenster voor de meeste DocBook-knopen"
 
-#: src/plugin-docbook.c:1335
+#: src/plugin-docbook.c:1393
+#, fuzzy
+msgid "<ulink> property dialog"
+msgstr "Generiek DocBook eigenschappen-dialoogvenster"
+
+#: src/plugin-docbook.c:1394
+#, fuzzy
+msgid "Provides a Properties dialog for the <ulink> tag"
+msgstr ""
+"Voorziet een Eigenschappen-dialoogvenster voor de meeste DocBook-knopen"
+
+#: src/plugin-docbook.c:1401
 msgid "Promote Section"
 msgstr "Sectie promoveren"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1402
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -1719,86 +1827,86 @@ msgstr ""
 "Dit promoveert een DocBook sectie naar een hoger organisatorisch niveau "
 "binnen het document"
 
-#: src/plugin-docbook.c:1338
+#: src/plugin-docbook.c:1404
 msgid "Promote"
 msgstr "Promoveren"
 
-#: src/plugin-docbook.c:1339 src/plugin-docbook.c:1340
+#: src/plugin-docbook.c:1405 src/plugin-docbook.c:1406
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Dit promoveert de sectie naar een hoger organisatorisch niveau binnen het "
 "document"
 
-#: src/plugin-docbook.c:1346
+#: src/plugin-docbook.c:1412
 msgid "Demote Section"
 msgstr ""
 
-#: src/plugin-docbook.c:1347
+#: src/plugin-docbook.c:1413
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 
-#: src/plugin-docbook.c:1349
+#: src/plugin-docbook.c:1415
 msgid "Demote"
 msgstr ""
 
-#: src/plugin-docbook.c:1350 src/plugin-docbook.c:1351
+#: src/plugin-docbook.c:1416 src/plugin-docbook.c:1417
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 
-#: src/plugin-dtd.c:80
+#: src/plugin-dtd.c:81
 #, c-format
 msgid "Autogenerated document type based on %s"
 msgstr "Automatisch gegenereerd documenttype, gebaseerd op %s"
 
-#: src/plugin-dtd.c:81
+#: src/plugin-dtd.c:82
 #, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 "Deze Conglomerate schermspecificatie werd automatisch gegenereerd uit %s"
 
-#: src/plugin-dtd.c:156
+#: src/plugin-dtd.c:157
 #, fuzzy
 msgid "Convert DTD into a Conglomerate Display Specification"
 msgstr "DTD omzetten tot een Conglomerate Schermspecificatie"
 
-#: src/plugin-dtd.c:157
+#: src/plugin-dtd.c:158
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr ""
 "Een DTD-bestand importeren, om zo een Conglomerate schermspecificatie "
 "bestand aan te maken."
 
-#: src/plugin-dtd.c:164
+#: src/plugin-dtd.c:165
 msgid "Convert DTD into a Relax NG schema"
 msgstr "DTD omzetten tot een Relax NG-schema"
 
-#: src/plugin-dtd.c:165
+#: src/plugin-dtd.c:166
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
 msgstr "DTD-bestand importeren en omzetten tot een Relax NG-Schema."
 
-#: src/plugin-dtd.c:172
+#: src/plugin-dtd.c:173
 msgid "Convert DTD into W3C XML Schema"
 msgstr "DTD omzetten tot W3C XML Schema"
 
-#: src/plugin-dtd.c:173
+#: src/plugin-dtd.c:174
 msgid "Import a DTD file, converting it into a W3C XML Schema."
 msgstr "DTD-bestand importeren en omzetten tot een W3C XML-Schema"
 
-#: src/plugin-dtd.c:180
+#: src/plugin-dtd.c:181
 msgid "Convert DTD into a Schematron file"
 msgstr "DTD omzetten tot een Schematron-bestand"
 
-#: src/plugin-dtd.c:181
+#: src/plugin-dtd.c:182
 msgid "Import a DTD file, converting it into a Schematron Schema."
 msgstr "DTD importeren en omzetten tot een Schematron-Schema."
 
-#: src/plugin-dtd.c:188
+#: src/plugin-dtd.c:189
 msgid "Convert DTD into an Examplotron file"
 msgstr "DTD omzetten tot een Examplotron-bestand"
 
-#: src/plugin-dtd.c:189
+#: src/plugin-dtd.c:190
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "DTD-bestand importeren en omzetten tot een Examplotron-Schema."
 
@@ -1928,7 +2036,7 @@ msgstr "Het document \"%s\" is ongeldig."
 msgid "Click on the \"Details\" button for more information."
 msgstr "Klik op de knop \"Details\" voor meer informatie."
 
-#: src/plugin-validate.c:131 src/plugin-website.c:476
+#: src/plugin-validate.c:131 src/plugin-website.c:477
 msgid "_Details"
 msgstr "_Details"
 
@@ -1954,37 +2062,37 @@ msgstr ""
 msgid "_Validate Document"
 msgstr "Document _Valideren"
 
-#: src/plugin-website.c:461
+#: src/plugin-website.c:462
 msgid "Generating website"
 msgstr "Website aan het genereren"
 
-#: src/plugin-website.c:468
+#: src/plugin-website.c:469
 msgid "Finished generating website."
 msgstr "Klaar met genereren website."
 
-#: src/plugin-website.c:473
+#: src/plugin-website.c:474
 msgid "Conglomerate did not finish generating the website"
 msgstr "Conglomerate heeft de website niet volledig gegenereerd"
 
-#: src/plugin-website.c:474
+#: src/plugin-website.c:475
 msgid "One of the stages reported an error."
 msgstr "Een van de niveaus heeft een fout gemeld."
 
-#: src/plugin-website.c:475
+#: src/plugin-website.c:476
 msgid "Click on the \"Details\" button for more information"
 msgstr "Klik op de \"Details\"-knop voor meer informatie"
 
-#: src/plugin-website.c:493
+#: src/plugin-website.c:494
 msgid "Generate website"
 msgstr "Website genereren"
 
-#: src/plugin-website.c:494 src/plugin-website.c:497 src/plugin-website.c:498
+#: src/plugin-website.c:495 src/plugin-website.c:498 src/plugin-website.c:499
 msgid "Generates a collection of HTML pages from the website XML description"
 msgstr ""
 "Genereert een verzameling HTML-documenten op basis van de XML-beschrijving "
 "van de website"
 
-#: src/plugin-website.c:496
+#: src/plugin-website.c:497
 msgid "Generate _Website"
 msgstr "Website _Genereren"
 
@@ -2001,67 +2109,67 @@ msgstr ""
 msgid "(no description available)"
 msgstr "(geen beschrijving beschikbaar)"
 
-#: src/popup.c:186
+#: src/popup.c:177
 #, c-format
 msgid "Apply span tag: %s"
 msgstr ""
 
-#: src/popup.c:273
+#: src/popup.c:258
 #, fuzzy
 msgid "Remove Span Tag"
 msgstr "Span-tag verwijderen"
 
-#: src/popup.c:376
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "Span-tag verwijderen"
 
-#: src/popup.c:936
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Dit item verwijderen"
 
-#: src/popup.c:946
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr ""
 
-#: src/popup.c:954
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr ""
 
-#: src/popup.c:965
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "De tekst instellen"
 
-#: src/popup.c:996
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Plakken in"
 
-#: src/popup.c:1004
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Plakken voor"
 
-#: src/popup.c:1012
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Plakken na"
 
-#: src/popup.c:1029
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Nieuw sub-element"
 
-#: src/popup.c:1054
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr ""
 
-#: src/tree.c:42
+#: src/tree.c:41
 #, c-format
 msgid "Insert sibling: %s"
 msgstr ""
 
-#: src/tree.c:101
+#: src/tree.c:89
 #, c-format
 msgid "Insert child: %s"
 msgstr "Kind invoegen: %s"
 
-#: src/xmldata.c:430 src/xmldata.c:724
+#: src/xmldata.c:424
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -2071,22 +2179,22 @@ msgstr ""
 "volgende kindsoorten."
 
 #. select a dialog element
-#: src/xmldata.c:434 src/xmldata.c:728
+#: src/xmldata.c:428
 msgid "Required Children Choices"
 msgstr "Vereiste kinder keuzes"
 
-#: src/xmledit.c:330
+#: src/xmledit.c:239
 msgid "Paste Under"
 msgstr "Plakken onder"
 
-#: src/xmledit.c:395
+#: src/xmledit.c:282
 msgid "Paste Before"
 msgstr "Plakken voor"
 
-#: src/xmledit.c:458
+#: src/xmledit.c:324
 msgid "Paste After"
 msgstr "Plakken na"
 
-#: src/xmledit.c:519
+#: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Bron-aanzicht - Conglomerate"

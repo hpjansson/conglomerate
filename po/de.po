@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate 0.75\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-21 15:01+0200\n"
+"POT-Creation-Date: 2003-10-27 23:49+0000\n"
 "PO-Revision-Date: 2003-10-21 15:01+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -191,23 +191,25 @@ msgstr "Beschriftung"
 msgid "string_selection_dialog"
 msgstr "Dialog_zum_Festlegen_der_Beschriftung"
 
-#: src/cong-app.c:267
+#: src/cong-app.c:269
 msgid "XML Editor"
 msgstr "XML-Editor"
 
-#: src/cong-app.c:333
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
+#: src/cong-app.c:364
+#, fuzzy
+msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate konnte keine xds-Dateien aus dem Objekt »%s« laden"
 
-#: src/cong-app.c:335
+#: src/cong-app.c:366
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate konnte keine Dokumenttypbeschreibungen finden."
 
-#: src/cong-app.c:337
+#: src/cong-app.c:368
+#, fuzzy
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
 msgstr ""
 "Falls Sie diesen Fehler sehen, ist es wahrscheinlich, dass Sie Conglomerate "
 "kompiliert, jedoch nicht installiert haben. Versuchen Sie, es zu "
@@ -292,12 +294,12 @@ msgid "Changes from the past minute will be discarded."
 msgstr "Innerhalb der letzten Minute vorgenommene Änderungen werden verworfen."
 
 # CHECK - Registry <=> Registratur
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:86
 msgid "Conglomerate could not read its registry of document types."
 msgstr "Conglomerate konnte seine Dokumenttypenregistratur nicht lesen."
 
 # CHECK - Look at => überprüfen?
-#: src/cong-dispspec-registry.c:93
+#: src/cong-dispspec-registry.c:89
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Conglomerate hat versucht, alle Dateien am Speicherort zu überprüfen."
 
@@ -318,6 +320,44 @@ msgstr "(xpath fehlgeschlagen)"
 msgid "<untitled>"
 msgstr "<namenlos>"
 
+#: src/cong-document.c:660
+#, fuzzy, c-format
+msgid "Text \"%s\""
+msgstr "»%s« exportieren"
+
+#: src/cong-document.c:670
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr ""
+
+#: src/cong-document.c:673
+#, fuzzy, c-format
+msgid "Entity \"%s\""
+msgstr "»%s« drucken"
+
+#: src/cong-document.c:676
+msgid "XML Processing Instruction"
+msgstr ""
+
+#: src/cong-document.c:681
+#, fuzzy, c-format
+msgid "Comment \"%s\""
+msgstr "»%s« drucken"
+
+#: src/cong-document.c:687
+#, fuzzy
+msgid "Document"
+msgstr "Dokumenttypen"
+
+#: src/cong-document.c:698 src/cong-file-properties.c:116
+msgid "Document Type Declaration"
+msgstr "Dokumenttypdeklaration"
+
+#: src/cong-document.c:1398
+#, fuzzy, c-format
+msgid "Select %s"
+msgstr "Wort markieren"
+
 #: src/cong-dom-view.c:208
 msgid "UNKNOWN"
 msgstr "UNBEKANNT"
@@ -332,38 +372,43 @@ msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:752
+#: src/cong-editor-node-text.c:750
 msgid "Select word"
 msgstr "Wort markieren"
 
-#: src/cong-editor-node-text.c:777
+#: src/cong-editor-node-text.c:775
 msgid "Move cursor"
 msgstr "Caret verschieben"
 
-#: src/cong-editor-node-text.c:829
+#: src/cong-editor-node-text.c:833
 msgid "Drag out selection"
 msgstr "Markierung herausziehen"
 
-#: src/cong-editor-widget3.c:367
+#: src/cong-editor-widget3.c:396
 msgid "Expander Size"
 msgstr "Ausklappergröße"
 
-#: src/cong-editor-widget3.c:368
+#: src/cong-editor-widget3.c:397
 msgid "Size of the expander arrow"
 msgstr "Größe des Ausklapppfeils"
 
-#: src/cong-editor-widget3.c:1167
+#: src/cong-editor-widget3.c:867
+#, fuzzy
+msgid "Input Method"
+msgstr "Druckmethode:"
+
+# CHECK
+#: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
+msgid "Typing"
+msgstr "Eingabe"
+
+#: src/cong-editor-widget3.c:1370
 msgid "Cursor Movement"
 msgstr "Caretbewegung"
 
-#: src/cong-editor-widget3.c:1207 src/cong-editor-widget3.c:1220
+#: src/cong-editor-widget3.c:1410 src/cong-editor-widget3.c:1423
 msgid "Delete Selection"
 msgstr "Markierung löschen"
-
-# CHECK
-#: src/cong-editor-widget3.c:1243
-msgid "Typing"
-msgstr "Eingabe"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -1074,10 +1119,6 @@ msgstr "Geändert"
 msgid "XML Header"
 msgstr "XML-Kopfzeilen"
 
-#: src/cong-file-properties.c:116
-msgid "Document Type Declaration"
-msgstr "Dokumenttypdeklaration"
-
 #: src/cong-file-properties.c:118
 msgid "Version"
 msgstr "Version"
@@ -1138,35 +1179,35 @@ msgid "Save XML as..."
 msgstr "XML speichern unter..."
 
 # CHECK
-#: src/cong-location.c:266 src/cong-location.c:287
+#: src/cong-location.c:293 src/cong-location.c:314
 msgid "Merge tags"
 msgstr "Tags zusammenführen"
 
-#: src/cong-location.c:331
+#: src/cong-location.c:358
 msgid "Delete character"
 msgstr "Zeichen löschen"
 
-#: src/cong-location.c:746
+#: src/cong-location.c:798
 msgid "Calculating document start"
 msgstr "Dokumentanfang wird berechnet"
 
-#: src/cong-location.c:758
+#: src/cong-location.c:810
 msgid "Calculating line start"
 msgstr "Zeilenanfang wird berechnet"
 
-#: src/cong-location.c:771
+#: src/cong-location.c:823
 msgid "Calculating document end"
 msgstr "Dokumentende wird berechnet"
 
-#: src/cong-location.c:784
+#: src/cong-location.c:836
 msgid "Calculating line end"
 msgstr "Zeilenende wird berechnet"
 
-#: src/cong-location.c:797
+#: src/cong-location.c:849
 msgid "Calculating previous page"
 msgstr "Vorherige Seite wird berechnet"
 
-#: src/cong-location.c:810
+#: src/cong-location.c:862
 msgid "Calculating next page"
 msgstr "Nächste Seite wird berechnet"
 
@@ -1519,7 +1560,7 @@ msgid "Redo"
 msgstr "Wiederholen"
 
 #: src/cong-primary-window.c:334 src/cong-primary-window.c:335 src/tree.c:175
-#: src/xmledit.c:47
+#: src/xmledit.c:44
 msgid "Cut"
 msgstr "Ausschneiden"
 
@@ -1528,7 +1569,7 @@ msgid "Copy"
 msgstr "Kopieren"
 
 #: src/cong-primary-window.c:348 src/cong-primary-window.c:349
-#: src/xmledit.c:155
+#: src/xmledit.c:161
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -1554,11 +1595,11 @@ msgstr "Willkommen zum stark verzögerten Editor Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (verändert) - %s"
 
-#: src/cong-util.c:243 src/plugin-docbook.c:1006
+#: src/cong-util.c:272 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "XSL-Formatierobjekte werden gedruckt"
 
-#: src/cong-util.c:287
+#: src/cong-util.c:316
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Dies ist möglicherweise das Ergebnis von cong_util_print_xslfo"
 
@@ -1575,12 +1616,12 @@ msgstr "Warnung"
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "Ein Editorknoten zum Visualisieren von Tipps, Warnungen usw."
 
-#: src/plugin-cleanup-source.c:377 src/plugin-cleanup-source.c:411
+#: src/plugin-cleanup-source.c:396 src/plugin-cleanup-source.c:430
 msgid "Cleanup XML Source"
 msgstr "XML-Quelltext bereinigen"
 
-#: src/plugin-cleanup-source.c:412 src/plugin-cleanup-source.c:415
-#: src/plugin-cleanup-source.c:416
+#: src/plugin-cleanup-source.c:431 src/plugin-cleanup-source.c:434
+#: src/plugin-cleanup-source.c:435
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1588,7 +1629,7 @@ msgstr ""
 "Den XML-Quelltext des Dokuments bereinigen, um das Anzeigen in einem "
 "Quelltexteditor zu erleichtern."
 
-#: src/plugin-cleanup-source.c:414
+#: src/plugin-cleanup-source.c:433
 msgid "_Clean the XML Source"
 msgstr "Den XML-Quelltext be_reinigen"
 
@@ -2054,44 +2095,44 @@ msgstr "Span-Tag anwenden: %s"
 msgid "Remove Span Tag"
 msgstr "Span-Tag entfernen"
 
-#: src/popup.c:357
+#: src/popup.c:359
 msgid "Remove span tag"
 msgstr "span-Tag entfernen"
 
-#: src/popup.c:917
+#: src/popup.c:924
 msgid "Delete this item"
 msgstr "Dieses Objekt löschen"
 
-#: src/popup.c:927
+#: src/popup.c:934
 msgid "Add text node after"
 msgstr "Davor Textknoten einfügen"
 
-#: src/popup.c:935
+#: src/popup.c:942
 msgid "Add text node before"
 msgstr "Danach Textknoten einfügen"
 
-#: src/popup.c:946
+#: src/popup.c:953
 msgid "Set the text"
 msgstr "Den Text festlegen"
 
 # CHECK
-#: src/popup.c:977
+#: src/popup.c:984
 msgid "Paste into"
 msgstr "Innerhalb einfügen"
 
-#: src/popup.c:985
+#: src/popup.c:992
 msgid "Paste before"
 msgstr "Davor einfügen"
 
-#: src/popup.c:993
+#: src/popup.c:1000
 msgid "Paste after"
 msgstr "Danach einfügen"
 
-#: src/popup.c:1010
+#: src/popup.c:1017
 msgid "New sub-element"
 msgstr "Neues Unterelement"
 
-#: src/popup.c:1035
+#: src/popup.c:1042
 msgid "New sibling"
 msgstr "Neues Geschwister"
 
@@ -2119,18 +2160,18 @@ msgstr ""
 msgid "Required Children Choices"
 msgstr "Auswählen eines erforderlichen Kinds"
 
-#: src/xmledit.c:233
+#: src/xmledit.c:239
 msgid "Paste Under"
 msgstr "Darunter einfügen"
 
-#: src/xmledit.c:276
+#: src/xmledit.c:282
 msgid "Paste Before"
 msgstr "Davor einfügen"
 
-#: src/xmledit.c:318
+#: src/xmledit.c:324
 msgid "Paste After"
 msgstr "Danach einfügen"
 
-#: src/xmledit.c:357
+#: src/xmledit.c:363
 msgid "Source View - Conglomerate"
 msgstr "Quelltext - Conglomerate"
