@@ -182,7 +182,6 @@ src/plugin-xsl.c
 src/popup.c
 src/position.c
 src/select.c
-src/tchoice.c
 src/tests.c
 src/tree.c
 src/xmldata.c
