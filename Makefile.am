@@ -12,5 +12,6 @@ EXTRA_DIST = BUGS	\
   deb/changelog		\
   deb/control		\
   deb/copyright		\
+  deb/docs		\
   deb/rules		\
   deb/watch
