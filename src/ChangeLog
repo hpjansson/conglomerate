@@ -1,4 +1,10 @@
-2003-12-11  Geert Stappers <stappers@stappers.nl>
+2004-01-15  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-app.c
+
+	Suppress some debug logging
+
+2004-01-15  Geert Stappers <stappers@stappers.nl>
 
 	* plugin-templates.c
 

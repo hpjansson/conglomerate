@@ -813,6 +813,8 @@ cong_app_new (int   argc,
 
 	PRIVATE(app)->language_list = gnome_i18n_get_language_list (NULL);
 
+#if 0
+	/* Debug the language list: */
 	{
 		const GList *iter;
 
@@ -820,6 +822,7 @@ cong_app_new (int   argc,
 			g_message ("\"%s\"", (gchar*)iter->data);
 		}
 	}
+#endif
 
 	/* Load stylesheets: */
 	{
