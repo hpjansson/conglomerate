@@ -74,9 +74,11 @@ gboolean
 cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
 				 CongNodePtr node);
 
-/* Would-be "Protected" methods: */
+CongNodePtr
+cong_tree_view_get_selected_node (CongTreeView *cong_tree_view);
+
 GtkTreeStore* 
-cong_tree_view_get_tree_store (CongTreeView *tree_view);
+cong_tree_view_protected_get_tree_store (CongTreeView *tree_view);
 
 enum
 {

@@ -18,16 +18,13 @@ cong_location_is_valid(const CongLocation *loc)
 	g_return_val_if_fail(loc != NULL, FALSE);
 
 	if (loc->node==NULL) {
-		return (loc->byte_offset==0);
+		return (loc->byte_offset==-2);
 	} else {
 		type = cong_location_node_type(loc);
 
 		switch (type) {
-		default: g_assert_not_reached();
-
-		case CONG_NODE_TYPE_UNKNOWN:
-		case CONG_NODE_TYPE_ELEMENT:
-			return (loc->byte_offset==0);
+		default:
+			return (loc->byte_offset==-1);
 	
 		case CONG_NODE_TYPE_TEXT:
 		case CONG_NODE_TYPE_COMMENT:
@@ -51,7 +48,7 @@ cong_location_nullify(CongLocation *loc)
 	g_return_if_fail(loc != NULL);
 	
 	loc->node=NULL;
-	loc->byte_offset=0; /* for good measure */
+	loc->byte_offset=-2; /* for good measure */
 }
 
 void
@@ -61,7 +58,37 @@ cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
 	g_return_if_fail(node != NULL);
 
 	loc->node=node;
-	loc->byte_offset=0;
+
+	switch (cong_node_type (node)) {
+		default: 
+			loc->byte_offset = -1;
+			break;
+			
+		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_COMMENT:
+			loc->byte_offset = 0;
+			break;
+	}
+}
+
+void
+cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
+{
+	g_return_if_fail(loc != NULL);
+	g_return_if_fail(node != NULL);
+
+	loc->node=node;
+
+	switch (cong_node_type (node)) {
+		default: 
+			loc->byte_offset = -1;
+			break;
+			
+		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_COMMENT:
+			loc->byte_offset = strlen (node->content);
+			break;
+	}
 }
 
 void 

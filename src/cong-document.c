@@ -649,18 +649,54 @@ cong_document_get_node_name (CongDocument *doc,
 		break;
 
 	case CONG_NODE_TYPE_ATTRIBUTE:
+		g_assert_not_reached();
+		return g_strdup_printf("FIXME");
+
 	case CONG_NODE_TYPE_TEXT:
+		{
+			#define TRUNCATION_LENGTH 15
+
+			gchar *content_header = cong_util_text_header (node->content, TRUNCATION_LENGTH);
+			gchar *result = g_strdup_printf( _("Text \"%s\""), content_header);
+			g_free (content_header);
+			return result;
+		}
+
 	case CONG_NODE_TYPE_CDATA_SECTION:
+		g_assert_not_reached();
+		return g_strdup_printf("FIXME");
+
 	case CONG_NODE_TYPE_ENTITY_REF:
+		return g_strdup_printf (_("Reference to Entity \"%s\""), node->name);
+
 	case CONG_NODE_TYPE_ENTITY_NODE:
+		return g_strdup_printf (_("Entity \"%s\""), node->name);;
+
 	case CONG_NODE_TYPE_PI:
+		return g_strdup_printf (_("XML Processing Instruction"));
+
 	case CONG_NODE_TYPE_COMMENT:
+		{
+			gchar *content_header = cong_util_text_header (node->content, TRUNCATION_LENGTH);
+			gchar *result = g_strdup_printf( _("Comment \"%s\""), content_header);
+			g_free (content_header);
+			return result;
+		}
+
 	case CONG_NODE_TYPE_DOCUMENT:
+		return g_strdup_printf (_("Document"));		
+
 	case CONG_NODE_TYPE_DOCUMENT_TYPE:
 	case CONG_NODE_TYPE_DOCUMENT_FRAG:
 	case CONG_NODE_TYPE_NOTATION:
 	case CONG_NODE_TYPE_HTML_DOCUMENT:
+		g_assert_not_reached();
+		return g_strdup_printf("FIXME");
+		break;
+
 	case CONG_NODE_TYPE_DTD:
+		return g_strdup_printf (_("Document Type Declaration"));
+
 	case CONG_NODE_TYPE_ELEMENT_DECL:
 	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
 	case CONG_NODE_TYPE_ENTITY_DECL:
@@ -671,6 +707,8 @@ cong_document_get_node_name (CongDocument *doc,
 		return g_strdup_printf("FIXME");
 		break;
 	}
+
+	g_assert_not_reached();
 }
 
 static gboolean 
@@ -1347,6 +1385,35 @@ cong_document_redo (CongDocument *doc)
 
 	cong_command_history_redo (PRIVATE(doc)->history);
 }
+
+void
+cong_document_select_node (CongDocument *doc,
+			   CongNodePtr node)
+{	
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	if (!cong_selection_is_node (cong_document_get_selection (doc),node)) {
+		gchar *node_name = cong_document_get_node_name (doc, node);
+		gchar *cmd_name = g_strdup_printf (_("Select %s"), node_name);
+		CongCommand *cmd = cong_document_begin_command (doc, cmd_name, NULL);
+		CongLocation new_selection_start;
+		CongLocation new_selection_end;
+
+		cong_location_set_to_start_of_node(&new_selection_start, node);
+		cong_location_set_to_end_of_node(&new_selection_end, node);
+		
+		cong_command_add_selection_change (cmd,
+						   &new_selection_start,
+						   &new_selection_end);
+		
+		cong_document_end_command (doc, cmd);
+		
+		g_free (node_name);
+		g_free (cmd_name);
+	}	
+}
+
 
 
 /* Internal function definitions: */

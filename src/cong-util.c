@@ -27,6 +27,7 @@
 #include "cong-util.h"
 #include "cong-app.h"
 #include "cong-document.h"
+#include "cong-text-cache.h"
 
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
@@ -122,6 +123,35 @@ cong_util_cleanup_text (const xmlChar *src_text)
 
 	return buffer;
 }
+
+gchar* 
+cong_util_text_header (const xmlChar *text,
+		       guint truncation_length)
+{
+	CongTextCache* text_cache;
+	const gchar* stripped_text;
+	gchar *result;
+
+	text_cache = cong_text_cache_new (TRUE,
+					  text);
+
+	stripped_text = cong_text_cache_get_text (text_cache);
+
+	if (g_utf8_strlen (stripped_text, -1)>truncation_length) {
+		gchar *truncated = g_strndup (stripped_text, truncation_length);
+
+		result = g_strdup_printf ("%s...", truncated);
+
+		g_free (truncated);
+	} else {
+		result = g_strdup (stripped_text);
+	}
+
+	cong_text_cache_free (text_cache);
+
+	return result;
+}
+
 
 gchar*
 cong_utils_get_norman_walsh_stylesheet_path(void)

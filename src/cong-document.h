@@ -348,6 +348,10 @@ void
 cong_document_redo (CongDocument *doc);
 
 void
+cong_document_select_node (CongDocument *doc,
+			   CongNodePtr node);
+
+void
 cong_document_cut_selection (CongDocument *doc);
 
 void

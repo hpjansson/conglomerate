@@ -925,25 +925,8 @@ on_signal_button_press_for_area_with_node (CongEditorArea *editor_area,
 	case 1: /* Normally the left mouse button: */
 		{
 			CongNodePtr node = cong_editor_node_get_node (editor_node);
-			
-			if (!cong_selection_is_node (cong_document_get_selection (doc),node)) {
-				gchar *node_name = cong_document_get_node_name (doc, node);
-				gchar *cmd_name = g_strdup_printf (_("Select %s"), node_name);
-				CongCommand *cmd = cong_document_begin_command (doc, cmd_name, NULL);
-				CongLocation new_selection;
 
-				new_selection.node = node;
-				new_selection.byte_offset = 0;
-
-				cong_command_add_selection_change (cmd,
-								   &new_selection,
-								   &new_selection);
-
-				cong_document_end_command (doc, cmd);
-
-				g_free (node_name);
-				g_free (cmd_name);
-			}
+			cong_document_select_node (doc, node);
 		}
 		return TRUE;
 

@@ -57,6 +57,8 @@ typedef struct CongTreeViewDetails
 	/* need some kind of search structure - mapping from nodes to GtkTreeIter; the GtkTreeStore class guarantees persistant validity of a GtkTreeIter provided the node remains valid */
 	GTree *search_structure;
 
+	gulong gtk_tree_view_selection_changed_handler;
+
 } CongTreeViewDetails;
 
 #if 0
@@ -79,6 +81,10 @@ on_widget_destroy_event (GtkWidget *widget,
 static gint 
 tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
+static void        
+on_tree_view_selection_changed (GtkTreeSelection *treeselection,
+				gpointer user_data);
+
 #if 0
 static gboolean 
 node_search_callback(GtkTreeModel *model,
@@ -94,6 +100,9 @@ void value_destroy_func (gpointer data);
 
 static gboolean 
 get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkTreeIter* tree_iter);
+
+static CongNodePtr
+get_node_for_iter(CongTreeViewDetails *tree_view_details, GtkTreeIter* tree_iter);
 
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
@@ -224,6 +233,12 @@ cong_tree_view_new (CongDocument *doc,
 					  (GtkSignalFunc) tree_popup_show, 
 					  details->gtk_tree_view);
 
+		/* Deal with selection changes: */
+		details->gtk_tree_view_selection_changed_handler = g_signal_connect (G_OBJECT(gtk_tree_view_get_selection (details->gtk_tree_view)), 
+										     "changed",
+										     G_CALLBACK (on_tree_view_selection_changed),
+										     cong_tree_view);
+
 	}
 
 	/* Set up for cleanup: */
@@ -277,8 +292,22 @@ cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
 						     PRIVATE(cong_tree_view)->user_data);
 }
 
+CongNodePtr
+cong_tree_view_get_selected_node (CongTreeView *cong_tree_view)
+{
+	GtkTreeIter tree_iter;
+
+	if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view),
+					     NULL,
+                                             &tree_iter)) {
+		return get_node_for_iter (PRIVATE(cong_tree_view), &tree_iter);
+	} else {
+		return NULL;
+	}
+}
+
 GtkTreeStore* 
-cong_tree_view_get_tree_store (CongTreeView *tree_view)
+cong_tree_view_protected_get_tree_store (CongTreeView *tree_view)
 {
 	g_return_val_if_fail(tree_view, NULL);
 
@@ -331,7 +360,7 @@ tree_popup_show(GtkWidget *widget, GdkEvent *event)
 								   "cong_tree_view");
 				g_assert(cong_tree_view);
 
-				tree_model = GTK_TREE_MODEL(cong_tree_view_get_tree_store(cong_tree_view));
+				tree_model = GTK_TREE_MODEL(cong_tree_view_protected_get_tree_store(cong_tree_view));
 #if 0
 				gchar* msg = gtk_tree_path_to_string(path);
 				printf("right-click on path \"%s\"\n",msg);
@@ -372,6 +401,36 @@ tree_popup_show(GtkWidget *widget, GdkEvent *event)
 
 	return(FALSE);
 }
+
+static void        
+on_tree_view_selection_changed (GtkTreeSelection *treeselection,
+				gpointer user_data)
+{
+	CongTreeView *cong_tree_view = CONG_TREE_VIEW (user_data);
+	CongDocument *doc;
+	CongCommand *cmd;
+	CongNodePtr node;
+
+	g_message ("on_tree_view_selection_changed");
+
+
+	doc = cong_view_get_document (CONG_VIEW (cong_tree_view));
+
+	node = cong_tree_view_get_selected_node (cong_tree_view);
+
+
+	if (node) {
+		g_signal_handler_block ( G_OBJECT (gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view)),
+					 PRIVATE(cong_tree_view)->gtk_tree_view_selection_changed_handler);
+
+		cong_document_select_node (doc, node);
+
+		g_signal_handler_unblock ( G_OBJECT (gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view)),
+					   PRIVATE(cong_tree_view)->gtk_tree_view_selection_changed_handler);
+	}
+
+}
+
 
 #if 0
 static gboolean 
@@ -445,6 +504,19 @@ get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNodePtr node, GtkT
 
 	return search.found_it;
 #endif
+}
+
+static CongNodePtr
+get_node_for_iter(CongTreeViewDetails *tree_view_details, GtkTreeIter* tree_iter)
+{
+	CongNodePtr node = NULL;
+
+	gtk_tree_model_get (GTK_TREE_MODEL(tree_view_details->gtk_tree_store),
+			    tree_iter,
+			    CONG_TREE_VIEW_TREE_MODEL_NODE_COLUMN, &node,
+			    -1);
+
+	return node;
 }
 
 /* Definitions of the handler functions: */
@@ -693,15 +765,18 @@ static void on_selection_change(CongView *view)
 
 	tree_selection = gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view);
 	g_assert (tree_selection);
-
+	
 	doc = cong_view_get_document (view);
 	selection = cong_document_get_selection (doc);
-
+	
 	node = cong_location_node (cong_selection_get_logical_start (selection));
+	
+	g_signal_handler_block ( G_OBJECT (gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view)),
+				 PRIVATE(cong_tree_view)->gtk_tree_view_selection_changed_handler);
 	
 	if (node) {
 		GtkTreeIter tree_iter;
-
+		
 		if (get_iter_for_node(PRIVATE(cong_tree_view), node, &tree_iter)) {
 			gtk_tree_selection_select_iter  (tree_selection,
 							 &tree_iter);
@@ -709,6 +784,9 @@ static void on_selection_change(CongView *view)
 	} else {
 		gtk_tree_selection_unselect_all (tree_selection);
 	}
+	
+	g_signal_handler_unblock ( G_OBJECT (gtk_tree_view_get_selection (PRIVATE(cong_tree_view)->gtk_tree_view)),
+				   PRIVATE(cong_tree_view)->gtk_tree_view_selection_changed_handler);
 }
 
 static void on_cursor_change(CongView *view)

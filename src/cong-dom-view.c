@@ -105,7 +105,7 @@ node_creation_callback (CongTreeView *cong_tree_view,
 	g_return_if_fail (tree_iter);
 	g_return_if_fail (node);
 
-	gtk_tree_store = cong_tree_view_get_tree_store (cong_tree_view);
+	gtk_tree_store = cong_tree_view_protected_get_tree_store (cong_tree_view);
 
 	text = get_text_for_node (node);
 	g_assert(text);

@@ -1,5 +1,9 @@
 2003-10-21  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-dom-view.c, cong-editor-area.c, cong-location.c, cong-location.h, cong-overview-view.c, cong-tree-view.c, cong-tree-view.h, cong-util.c, cong-util.h
+
+	Clicking on tree views now updates the selection.
+	
 	* cong-document.c, cong-document.h, cong-editor-area-expander.c, cong-editor-area.c, cong-editor-area.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, cong-range.c, cong-range.h, cong-selection.h, cong-tree-view.c, select.c
 
 	Big overhaul of selection support within editor widget

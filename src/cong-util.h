@@ -38,14 +38,28 @@ cong_util_is_pure_whitespace (const gchar *utf8_text);
 /**
  * cong_util_cleanup_text:
  *
- * @text:  input xml text
+ * @text:  input UTF8 text
  *
- * Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into visible characters.
+ * Handy function for taking UTF8 text and turning it into something you can see in a log: tabs and carriage returns etc are turned into visible characters.
  *
  * Returns: a freshly-allocated string, with all tabs and carriage returns turned into their printf equivalents
  */
 gchar* 
 cong_util_cleanup_text (const xmlChar *text);
+
+/**
+ * cong_util_text_header
+ *
+ * @text:  input UTF8 text
+ *
+ * Handy function for taking UTF8 text and turning it into something you can use in short user-visible message: tabs and carriage returns etc are turned into spaces,
+ * and it is truncated with an ellipsis if above a certain length.
+ *
+ * Returns: a freshly-allocated string, cleaned up as described above
+ */
+gchar* 
+cong_util_text_header (const xmlChar *text,
+		       guint truncation_length);
 
 /**
  * cong_utils_get_norman_walsh_stylesheet_path:
