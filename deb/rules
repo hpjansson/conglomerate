@@ -36,7 +36,7 @@ config.status: configure patch-stamp
 
 build: build-stamp
 
-build-stamp:  config.status
+build-stamp:  config.status patch-stamp
 	dh_testdir
 
 	# Commands to compile the package.
@@ -46,7 +46,7 @@ build-stamp:  config.status
 	touch build-stamp
 
 
-clean: patch-stamp
+clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
@@ -68,6 +68,7 @@ endif
 
 # apply patches only once and surely at a `make clean`
 patch-stamp: debian/patches/P00000patch-stamp
+	rm -f patch-stamp
 	pfs=`ls debian/patches/P*` ; \
 	for pf in $$pfs ; do \
 	  patch --forward --silent < $$pf ; \
