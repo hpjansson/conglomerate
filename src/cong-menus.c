@@ -1479,6 +1479,7 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 	/* Sub-menus: */
 	{ "NewSubelement", NULL, N_("New sub-element") },
 	{ "NewSibling", NULL, N_("New sibling") },
+	{ "RemoveSpanTagSubmenu", NULL, N_("Remove span tag")},
 
 	/* Actions found in File menu: */
 	{ "New", GTK_STOCK_NEW, N_("_New..."), "<control>N", NULL, G_CALLBACK (action_callback_file_new) },
@@ -1615,6 +1616,7 @@ static const gchar *ui_description =
 "      <menuitem action='Preferences'/>"
 "      <menu action='NewSubelement'/>"
 "      <menu action='NewSibling'/>"
+"      <menu action='RemoveSpanTagSubmenu'/>"
 "    </menu>"
 #if ENABLE_DEBUG_MENU
 "    <menu action='DebugMenu'>"
@@ -1654,6 +1656,7 @@ static const gchar *ui_description =
 "      <separator name='ContextSep1'/>"
 "      <menu action='NewSubelement'/>"
 "      <menu action='NewSibling'/>"
+"      <menu action='RemoveSpanTagSubmenu'/>"
 "  </popup>"
 "  <toolbar name='MainToolBar'>"
 "      <toolitem action='New'/>"

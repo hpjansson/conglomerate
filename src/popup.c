@@ -268,7 +268,6 @@ cong_menu_add_action (CongPrimaryWindow *primary_window,
 		      GtkAction *action,
 		      GtkUIManagerItemType type)
 {
-#if 1
 	g_assert (primary_window);
 	g_assert (parent_ui_path);
 	g_assert (action);
@@ -285,18 +284,6 @@ cong_menu_add_action (CongPrimaryWindow *primary_window,
 			       gtk_action_get_name (action),
 			       type,
 			       FALSE);
-#else
-	g_return_val_if_fail (menu, NULL);
-	g_return_val_if_fail (action, NULL);
-
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), 
-			       GTK_WIDGET(action));
-	gtk_widget_set_sensitive (GTK_WIDGET (action),
-				  is_sensitive);
-	gtk_widget_show (GTK_WIDGET(item));
-
-	return item;
-#endif
 }
 
 static GtkAction*
@@ -443,14 +430,13 @@ add_node_tool_callback (CongServiceNodeTool *node_tool,
 
 
 static void
-span_tag_removal_popup_init (const gchar *label,
-			    CongDispspec *ds, 
-			    CongCursor *cursor, 
-			    gint (*callback)(GtkAction *action, CongNodePtr node_ptr),
-			    CongDocument *doc, 
-			    GList *list,
-			    GtkWindow *parent_window,
-			    CongPrimaryWindow *primary_window);
+span_tag_removal_popup_init (CongDispspec *ds, 
+			     CongCursor *cursor, 
+			     gint (*callback)(GtkAction *action, CongNodePtr node_ptr),
+			     CongDocument *doc, 
+			     GList *list,
+			     GtkWindow *parent_window,
+			     CongPrimaryWindow *primary_window);
 
 static gint editor_popup_callback_remove_span_tag(GtkAction *action, 
 						  CongNodePtr node_ptr);
@@ -791,8 +777,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 	if (present_span_tags_list != NULL) {
 		cong_util_add_menu_separator(UI_PATH_CONTEXT_MENU);
 		
-		span_tag_removal_popup_init (_("Remove span tag"),
-					     dispspec, 
+		span_tag_removal_popup_init (dispspec,
 					     cursor, 
 					     editor_popup_callback_remove_span_tag, 
 					     doc, 
@@ -892,8 +877,7 @@ make_submenu_ui_path (const gchar *menu_name)
 }
 
 static void
-span_tag_removal_popup_init (const gchar *label,
-			     CongDispspec *ds, 
+span_tag_removal_popup_init (CongDispspec *ds, 
 			     CongCursor *cursor, 
 			     gint (*callback)(GtkAction *action, CongNodePtr node_ptr),
 			     CongDocument *doc, 
@@ -901,27 +885,18 @@ span_tag_removal_popup_init (const gchar *label,
 			     GtkWindow *parent_window,
 			     CongPrimaryWindow *primary_window) 
 {
-	GtkAction *popup;
 	GList *current;
 	gchar *submenu_ui_path;
 
 #define REMOVE_SPAN_TAG_SUBMENU ("RemoveSpanTagSubmenu")
 	submenu_ui_path = make_submenu_ui_path (REMOVE_SPAN_TAG_SUBMENU);
 
-	popup = cong_action_new (REMOVE_SPAN_TAG_SUBMENU,
-				 label,
-				 NULL, /* FIXME:  ought to have a tooltip */
-				 NULL); /* FIXME:  ought to have an icon */
-	
-	cong_menu_add_action (primary_window,
-			      UI_PATH_CONTEXT_MENU,
-			      popup,
-			      GTK_UI_MANAGER_MENU);
-
 	for (current = g_list_last(list); current; current = g_list_previous(current)) {
 		
 		CongNodePtr node = (CongNodePtr)(current->data);
 		CongDispspecElement *ds_element = cong_dispspec_lookup_node(ds, node);
+
+		/* FIXME: if you have several span tags of the same kind, the actions end up with the same name */
 
 		GtkAction *action = cong_util_make_action_for_dispspec_element ("RemoveSpanTag",
 										ds_element); /* FIXME: should we composite a deletion icon onto the pixbuf? */
