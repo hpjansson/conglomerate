@@ -1,3 +1,11 @@
+2003-10-27  Geert Stappers <stappers@stappers.nl>
+
+	* mkgtkdoc
+	A more "small is beutifull, Unix a like" approach.
+
+	* README
+	mkgtkdoctypes, mkgtkdocoverrides and mkgtkdocsections are back.
+
 2003-10-29  Robert Varga <frozenfingers@xs4all.nl>
 
 	* mkgtkdoc:
