@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-30 17:27+0200\n"
-"PO-Revision-Date: 2003-09-30 17:28+0200\n"
+"POT-Creation-Date: 2003-10-04 11:38+0200\n"
+"PO-Revision-Date: 2003-10-04 11:41+0200\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -292,6 +292,30 @@ msgstr "Текст: \"<span foreground=\"%s\">%s</span>\""
 #, c-format
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+
+#: src/cong-editor-node-text.c:751
+msgid "Select word"
+msgstr "Изаберите реч"
+
+#: src/cong-editor-node-text.c:790
+msgid "Move cursor"
+msgstr "Померите курзор"
+
+#: src/cong-editor-node-text.c:853
+msgid "Drag out selection"
+msgstr "Извуци изабрано"
+
+#: src/cong-editor-widget3.c:1113
+msgid "Cursor Movement"
+msgstr "Кретање курзора"
+
+#: src/cong-editor-widget3.c:1185 src/cong-editor-widget3.c:1202
+msgid "Delete Selection"
+msgstr "Обриши изабрано"
+
+#: src/cong-editor-widget3.c:1229
+msgid "Typing"
+msgstr "Куцање"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -1017,27 +1041,35 @@ msgstr "Напредно"
 msgid "Save XML as..."
 msgstr "Сачувај XML као..."
 
-#: src/cong-location.c:783
+#: src/cong-location.c:358 src/cong-location.c:404
+msgid "Merge tags"
+msgstr "Споји ознаке"
+
+#: src/cong-location.c:455
+msgid "Delete character"
+msgstr "Обриши знак"
+
+#: src/cong-location.c:875
 msgid "Calculating document start"
 msgstr "Срачунава почетак документа"
 
-#: src/cong-location.c:795
+#: src/cong-location.c:887
 msgid "Calculating line start"
 msgstr "Срачунава почетак реда"
 
-#: src/cong-location.c:808
+#: src/cong-location.c:900
 msgid "Calculating document end"
 msgstr "Срачунава крај документа"
 
-#: src/cong-location.c:821
+#: src/cong-location.c:913
 msgid "Calculating line end"
 msgstr "Срачунава крај реда"
 
-#: src/cong-location.c:834
+#: src/cong-location.c:926
 msgid "Calculating previous page"
 msgstr "Срачунава претходну страницу"
 
-#: src/cong-location.c:847
+#: src/cong-location.c:939
 msgid "Calculating next page"
 msgstr "Срачунава наредну страницу"
 
@@ -1385,7 +1417,8 @@ msgstr "Опозови"
 msgid "Redo"
 msgstr "Понови"
 
-#: src/cong-primary-window.c:292 src/cong-primary-window.c:293
+#: src/cong-primary-window.c:292 src/cong-primary-window.c:293 src/tree.c:199
+#: src/xmledit.c:72
 msgid "Cut"
 msgstr "Исеци"
 
@@ -1394,6 +1427,7 @@ msgid "Copy"
 msgstr "Умножи"
 
 #: src/cong-primary-window.c:306 src/cong-primary-window.c:307
+#: src/xmledit.c:194
 msgid "Paste"
 msgstr "Убаци"
 
@@ -1418,13 +1452,18 @@ msgstr "Добродошли у много закаснели уређивач �
 msgid "%s (modified) - %s"
 msgstr "%s (измењен) — %s"
 
-#: src/cong-util.c:264 src/plugin-docbook.c:1004
+#: src/cong-util.c:264 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Штампање XSL објеката обликовања (FO)"
 
 #: src/cong-util.c:308
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ово ће једном постати резултат из cong_util_print_xslfo"
+
+#: src/cursor.c:132
+#, c-format
+msgid "Split %s tag"
+msgstr "Растави ознаку %s"
 
 #: src/main.c:209
 #, c-format
@@ -1444,19 +1483,19 @@ msgstr ""
 "Уколико видите ову грешку, највероватније сте изградили Конгломерат, али га "
 "нисте инсталирали. Покушајте да га инсталирате."
 
-#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:456
+#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:454
 msgid "Cleanup XML Source"
 msgstr "Очисти XML кôд"
 
-#: src/plugin-cleanup-source.c:457 src/plugin-cleanup-source.c:460
-#: src/plugin-cleanup-source.c:461
+#: src/plugin-cleanup-source.c:455 src/plugin-cleanup-source.c:458
+#: src/plugin-cleanup-source.c:459
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 msgstr ""
 "Чисти XML кôд документа, тако да га је лако читати у текстуалном уређивачу."
 
-#: src/plugin-cleanup-source.c:459
+#: src/plugin-cleanup-source.c:457
 msgid "_Clean the XML Source"
 msgstr "_Очисти XML кôд"
 
@@ -1492,66 +1531,66 @@ msgstr "Неименована књига"
 msgid "Untitled Set of Documents"
 msgstr "Неименовани скуп докумената"
 
-#: src/plugin-docbook.c:926
+#: src/plugin-docbook.c:928
 msgid "Exporting PDF file"
 msgstr "Извоз PDF датотеке"
 
-#: src/plugin-docbook.c:930 src/plugin-docbook.c:1002
+#: src/plugin-docbook.c:932 src/plugin-docbook.c:1004
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Претварање DocBook-а у XSL објекте обликовања (FO)"
 
-#: src/plugin-docbook.c:932
+#: src/plugin-docbook.c:934
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Исписивање XSL објеката обликовања (FO) као PDF датотеке"
 
-#: src/plugin-docbook.c:945 src/plugin-fo.c:74
+#: src/plugin-docbook.c:947 src/plugin-fo.c:74
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Претварање XSL објеката обликовања (FO) у PDF"
 
-#: src/plugin-docbook.c:998
+#: src/plugin-docbook.c:1000
 msgid "Printing DocBook file"
 msgstr "Штампање DocBook датотеке"
 
-#: src/plugin-docbook.c:1241
+#: src/plugin-docbook.c:1243
 msgid "DocBook Article"
 msgstr "DocBook чланак"
 
-#: src/plugin-docbook.c:1242
+#: src/plugin-docbook.c:1244
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Састави чланак, можда за веб страницу или часопис, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1249
+#: src/plugin-docbook.c:1251
 msgid "DocBook Book"
 msgstr "DocBook књига"
 
-#: src/plugin-docbook.c:1250
+#: src/plugin-docbook.c:1252
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Сложи књигу, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1257
+#: src/plugin-docbook.c:1259
 msgid "DocBook Set"
 msgstr "DocBook скуп"
 
-#: src/plugin-docbook.c:1258
+#: src/plugin-docbook.c:1260
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Сложи скуп сродних књига, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1266
+#: src/plugin-docbook.c:1268
 msgid "Import text as a DocBook article"
 msgstr "Увези текст као DocBook чланак"
 
-#: src/plugin-docbook.c:1267
+#: src/plugin-docbook.c:1269
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Увези обичан текст у „DocBook“ облик, као један чланак."
 
-#: src/plugin-docbook.c:1284
+#: src/plugin-docbook.c:1286
 msgid "Export DocBook as HTML"
 msgstr "Извези DocBook као HTML"
 
-#: src/plugin-docbook.c:1285
+#: src/plugin-docbook.c:1287
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1559,11 +1598,11 @@ msgstr ""
 "Користи описе стила за DocBook од Нормана Волша (Norman Walsh) за израду веб "
 "страница из ове DocBook датотеке"
 
-#: src/plugin-docbook.c:1292
+#: src/plugin-docbook.c:1294
 msgid "Export DocBook as PDF"
 msgstr "Извези DocBook као PDF"
 
-#: src/plugin-docbook.c:1293
+#: src/plugin-docbook.c:1295
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1571,11 +1610,11 @@ msgstr ""
 "Користи описе стила за DocBook од Нормана Волша (Norman Walsh) за израду PDF "
 "датотеке из ове DocBook датотеке"
 
-#: src/plugin-docbook.c:1300
+#: src/plugin-docbook.c:1302
 msgid "Export DocBook as XSL:FO"
 msgstr "Извези DocBook као XSL:FO"
 
-#: src/plugin-docbook.c:1301
+#: src/plugin-docbook.c:1303
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1584,59 +1623,59 @@ msgstr ""
 "FO датотеке из ове DocBook датотеке коју је могуће иштампати или накнадно "
 "претворити у PDF"
 
-#: src/plugin-docbook.c:1309
+#: src/plugin-docbook.c:1311
 msgid "Print DocBook"
 msgstr "Штампај DocBook"
 
-#: src/plugin-docbook.c:1318
+#: src/plugin-docbook.c:1320
 msgid "Generic DocBook property dialog"
 msgstr "Опште прозорче за DocBook особине"
 
-#: src/plugin-docbook.c:1319
+#: src/plugin-docbook.c:1321
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Обезбеђује прозорче са особинама за већину DocBook чворова"
 
-#: src/plugin-docbook.c:1325
+#: src/plugin-docbook.c:1327
 msgid "<orderedlist> property dialog"
 msgstr "Особине за <orderedlist>"
 
-#: src/plugin-docbook.c:1326
+#: src/plugin-docbook.c:1328
 msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr "Обезбеђује прозорче са особинама за ознаку <orderedlist>"
 
-#: src/plugin-docbook.c:1333
+#: src/plugin-docbook.c:1335
 msgid "Promote Section"
 msgstr "Издигни одељак"
 
-#: src/plugin-docbook.c:1334
+#: src/plugin-docbook.c:1336
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Издиже DocBook одељак на виши организациони ниво у документу"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1338
 msgid "Promote"
 msgstr "Издигни"
 
-#: src/plugin-docbook.c:1337 src/plugin-docbook.c:1338
+#: src/plugin-docbook.c:1339 src/plugin-docbook.c:1340
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Издигни одељак на виши организациони ниво у документу"
 
-#: src/plugin-docbook.c:1344
+#: src/plugin-docbook.c:1346
 msgid "Demote Section"
 msgstr "Спусти одељак"
 
-#: src/plugin-docbook.c:1345
+#: src/plugin-docbook.c:1347
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Спушта DocBook одељак на нижи организациони ниво у документу"
 
-#: src/plugin-docbook.c:1347
+#: src/plugin-docbook.c:1349
 msgid "Demote"
 msgstr "Спусти"
 
-#: src/plugin-docbook.c:1348 src/plugin-docbook.c:1349
+#: src/plugin-docbook.c:1350 src/plugin-docbook.c:1351
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Спусти одељак на нижи организациони ниво у документу"
 
@@ -1889,48 +1928,68 @@ msgstr "Елемент за осликавање шаблонских прави
 msgid "(no description available)"
 msgstr "(нема описа)"
 
+#: src/popup.c:186
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "Примени обухватну ознаку: %s"
+
 # bug: is "span" keyword
-#: src/popup.c:341
+#: src/popup.c:273
+msgid "Remove Span Tag"
+msgstr "Уклони обухватну ознаку"
+
+# bug: is "span" keyword
+#: src/popup.c:376
 msgid "Remove span tag"
 msgstr "Уклони обухватну ознаку"
 
-#: src/popup.c:899
+#: src/popup.c:936
 msgid "Delete this item"
 msgstr "Уклони ову ставку"
 
-#: src/popup.c:909
+#: src/popup.c:946
 msgid "Add text node after"
 msgstr "Додај текстуални чвор иза"
 
-#: src/popup.c:917
+#: src/popup.c:954
 msgid "Add text node before"
 msgstr "Додај текстуални чвор испред"
 
-#: src/popup.c:928
+#: src/popup.c:965
 msgid "Set the text"
 msgstr "Постави текст"
 
-#: src/popup.c:959
+#: src/popup.c:996
 msgid "Paste into"
 msgstr "Убаци у"
 
-#: src/popup.c:967
+#: src/popup.c:1004
 msgid "Paste before"
 msgstr "Убаци испред"
 
-#: src/popup.c:975
+#: src/popup.c:1012
 msgid "Paste after"
 msgstr "Убаци иза"
 
-#: src/popup.c:992
+#: src/popup.c:1029
 msgid "New sub-element"
 msgstr "Нови под-елемент"
 
-#: src/popup.c:1017
+#: src/popup.c:1054
 msgid "New sibling"
 msgstr "Ново гранање"
 
-#: src/xmldata.c:400
+#: src/tree.c:42
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "Уметни гранање: %s"
+
+#: src/tree.c:101
+#, c-format
+msgid "Insert child: %s"
+msgstr "Уметни поделемент: %s"
+
+#: src/xmldata.c:430 src/xmldata.c:724
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -1940,11 +1999,23 @@ msgstr ""
 "неки од следећих типова садржаних елемената."
 
 #. select a dialog element
-#: src/xmldata.c:404
+#: src/xmldata.c:434 src/xmldata.c:728
 msgid "Required Children Choices"
 msgstr "Обавезни избори за садржане елементе"
 
-#: src/xmledit.c:332
+#: src/xmledit.c:326
+msgid "Paste Under"
+msgstr "Убаци испод"
+
+#: src/xmledit.c:391
+msgid "Paste Before"
+msgstr "Убаци испред"
+
+#: src/xmledit.c:454
+msgid "Paste After"
+msgstr "Убаци иза"
+
+#: src/xmledit.c:515
 msgid "Source View - Conglomerate"
 msgstr "Преглед кôда — Конгломерат"
 
