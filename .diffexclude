@@ -2,6 +2,12 @@
 .#*
 .deps
 .intltool-*
+*.prj
+*.pws
+*.gmo
+conglomerate-C.omf.out
+conglomerate.desktop
+conglomerate
 CVS
 INSTALL
 Makefile*
