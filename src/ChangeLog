@@ -1,11 +1,13 @@
 2004-10-10  Dave Malcolm  <dmalcolm@redhat.com>
 
+	* cong-plugin.c: 
+
+	Cleanup the XML source of newly-created documents.
+
 	* cong-source-layout.h, cong-source-layout.c: 
 
 	Refactored the source layout cleanup so that it can be added to an
 	existing command.
-
-2004-10-10  Dave Malcolm  <dmalcolm@redhat.com>
 
 	* cong-document.c, cong-document.h: 
 

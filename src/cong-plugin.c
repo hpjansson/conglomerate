@@ -33,6 +33,7 @@
 #include "cong-util.h"
 #include "cong-vfs.h"
 #include "cong-traversal-node.h"
+#include "cong-source-layout.h"
 
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
@@ -539,8 +540,8 @@ cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
  * Returns:
  */
 CongDocument*
-cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
-					   GtkWindow *parent_window)
+cong_ui_new_document_from_manufactured_xml (xmlDocPtr xml_doc,
+					    GtkWindow *parent_window)
 {
 	CongDocument *cong_doc;
 	CongDispspec *ds;
@@ -568,6 +569,27 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	g_assert(xml_doc);
 
 	cong_doc = cong_document_new_from_xmldoc(xml_doc, ds, NULL);
+
+	/* Clean up the xml_doc; eventually there might be a user preference for this */
+	{
+		CongCommand *command;
+		CongSourceCleanupOptions options;
+
+		/* FIXME: get user preferences about preferred XML layout */
+		options.use_tabs = TRUE;
+		options.wrap_text = TRUE;
+		options.num_text_columns = 80;
+		
+		command = cong_document_begin_command (cong_doc,
+						       "",
+						       NULL);
+		
+		cong_command_add_cleanup_source (command,
+						 &options);
+		
+		cong_document_end_preprocessor_command (cong_doc,
+							command);
+	}
 
 	cong_primary_window_new(cong_doc);
 	g_object_unref(G_OBJECT(cong_doc));
