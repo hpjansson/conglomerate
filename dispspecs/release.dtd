@@ -2,6 +2,12 @@
 
 <!ELEMENT change ( #PCDATA | bug | person )* >
 
+<!ELEMENT translations ( translation+ ) >
+<!ATTLIST translations status (new | updated) #REQUIRED >
+
+<!ELEMENT translation ( person ) >
+<!ATTLIST translation lang CDATA #REQUIRED>
+
 <!ELEMENT enhancements ( change+ ) >
 
 <!ELEMENT fixes ( change+ ) >
@@ -10,7 +16,7 @@
 
 <!ELEMENT person ( #PCDATA ) >
 
-<!ELEMENT release ( title, para+, enhancements, fixes ) >
+<!ELEMENT release ( title, para+, translations*, enhancements, fixes ) >
 <!ATTLIST release date CDATA #REQUIRED >
 <!ATTLIST release version CDATA #REQUIRED >
 

@@ -19,6 +19,12 @@
     <element type="span" localName="a" whitespace="normalize">
       <name xml:lang="C">A</name>
     </element>
+    <element type="structural" localName="translations" whitespace="normalize">
+      <name xml:lang="C">Translations</name>
+    </element>
+    <element type="structural" localName="translation" whitespace="normalize">
+      <name xml:lang="C">Translation</name>
+    </element>
     <element type="structural" localName="enhancements" whitespace="normalize">
       <name xml:lang="C">Enhancements</name>
     </element>
