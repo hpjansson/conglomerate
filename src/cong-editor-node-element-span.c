@@ -205,40 +205,45 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 					in the WidgetPlayground branch of CVS.
 					
 					*/
+					CongDocument *doc = cong_editor_node_get_document (editor_node);
+					g_assert (doc);
 					
-					GtkDialog *dlg;
-					gchar *what_failed;
-					gchar *why_failed;
-					gchar *suggestions;
+					if (!doc->warned_about_bug_124507) {
+						GtkDialog *dlg;
+						gchar *what_failed;
+						gchar *why_failed;
+						gchar *suggestions;
+						
+						gchar *inner_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node_iter));
+						gchar *outer_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node));
+						gchar *xpath = cong_node_get_path (cong_editor_node_get_node (editor_node_iter));
 
-					gchar *inner_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node_iter));
-					gchar *outer_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node));
-					gchar *xpath = cong_node_get_path (cong_editor_node_get_node (editor_node_iter));
-
-
-					/* I have deliberately not marked these strings for translation as I hope to finish the workaround soon */
-					what_failed = g_strdup_printf ("There are parts of this document that Conglomerate cannot display due to a bug (filed as bug #124507 within the Bug Tracking System at http://bugzilla.gnome.org)");
-					why_failed = g_strdup_printf ("The current version of Conglomerate cannot display \"structural\" elements inside a \"span\" element (due to a design oversight) and is likely to crash after this dialog is dismissed.");
-					suggestions = g_strdup_printf ("The problem element is a structural &lt;%s&gt; nested inside a span &lt;%s&gt;; this has the XPath of \"%s\".  You may be able to fix this by editing the document in another application, hacking Conglomerate's xds files, or waiting for a later release of Conglomerate.", 
-								       inner_node_name, 
-								       outer_node_name, 
-								       xpath);
-
-					g_free (inner_node_name);
-					g_free (outer_node_name);
-					g_free (xpath);
-
-					dlg = cong_error_dialog_new (NULL,
-								     what_failed,
-								     why_failed,
-								     suggestions);
-
-					g_free (suggestions);
-					g_free (why_failed);
-					g_free (what_failed);
-
-					gtk_dialog_run (dlg);
-					gtk_widget_destroy (GTK_WIDGET (dlg));
+						doc->warned_about_bug_124507 = TRUE;						
+						
+						/* I have deliberately not marked these strings for translation as I hope to finish the workaround soon */
+						what_failed = g_strdup_printf ("There are parts of this document that Conglomerate cannot display due to a bug (filed as bug #124507 within the Bug Tracking System at http://bugzilla.gnome.org)");
+						why_failed = g_strdup_printf ("The current version of Conglomerate cannot display \"structural\" elements inside a \"span\" element (due to a design oversight).");
+						suggestions = g_strdup_printf ("The first problem element is a structural &lt;%s&gt; nested inside a span &lt;%s&gt;; this has the XPath of \"%s\".  Other problem elements may exist within the document. You may be able to fix this by editing the document in another application, hacking Conglomerate's xds files, or waiting for a later release of Conglomerate.", 
+									       inner_node_name, 
+									       outer_node_name, 
+									       xpath);
+						
+						g_free (inner_node_name);
+						g_free (outer_node_name);
+						g_free (xpath);
+						
+						dlg = cong_error_dialog_new (NULL,
+									     what_failed,
+									     why_failed,
+									     suggestions);
+						
+						g_free (suggestions);
+						g_free (why_failed);
+						g_free (what_failed);
+						
+						gtk_dialog_run (dlg);
+						gtk_widget_destroy (GTK_WIDGET (dlg));
+					}
 				}
 
 			}

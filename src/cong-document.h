@@ -60,6 +60,9 @@ struct CongDocument
 	GObject object;
 
 	CongDocumentDetails *private;
+
+	/* This feels just too obscure to have get/set methods, so it's in the public part of the struct until we finally kill this bug */
+	gboolean warned_about_bug_124507;
 };
 
 struct CongDocumentClass
