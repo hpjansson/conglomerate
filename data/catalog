@@ -1,0 +1,3 @@
+-- Mappings from <!DOCTYPE> public IDs to physical DTD files --
+
+PUBLIC "-//Gnome//DTD Conglomerate display spec 1.0//EN"	"xds.dtd"

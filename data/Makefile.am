@@ -4,7 +4,7 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 
-## bugzilla 122011 for catalog.xml
+## bugzilla 122011 for catalog & catalog.xml
 
 ## bugzilla 125579 for conglomerate.schemas
 
