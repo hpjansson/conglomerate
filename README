@@ -1,37 +1,27 @@
 About
 -----
 
-This is a pre-release of an editor, Conge, to show the Conglomerate design
-philosophy. It is based on structural document markup with XML. A totally
-rewritten version is coming up in late january. To avoid confusion with this
-release, the new one will probably be called "Congle".
+This is a work-in-progress version of an editor, Conge, to show the 
+Conglomerate design philosophy. It is based on structural document markup 
+with XML. 
+
+It was originally planned as a temporary prototype, with a totally rewritten 
+version called "Congle" intended to replace it.  But due to a lack of time
+the project languished for two years, until eventually the project was
+restarted using the original "conge" codebase, attempting to clean it up into
+a usable form.
 
 
 Compiling
 ---------
 
-Conge compilation should be quite simple, if you're lucky. You will need
-GTK/GDK 2.0.5 or later, as well as Flux 0.2.8, available from
-
-ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
-
-(20 september 2002: 0.2.8 is still the "current" flux for conge)
-You should configure, make, and install this to your development prefix.  You
-may then need to rename (prefix)/lib/libflux.a to (prefix)/lib/libflux-old.a
-This is a temporary workaround to deal with the fact that libflux has been
-under heavy development, whereas conge has been left untouched.
+Conglomerate is going to be a GNOME 2 application and we use various GNOME 
+components.  Hence you'll need a reasonably up-to-date install of GNOME 2 to
+build it.
 
 If you're compiling from CVS, type
 
   ./autogen.sh
-
-If Flux is not in your default prefix, you should do
-
-  ./autogen.sh --with-flux-prefix=/opt/flux-old
-
-(Or wherever you installed it to. I install it to /opt/flux-old to
-keep it separated from the rest of my system). It will link with -lflux-old,
-so you want to rename the library, or change that to -lflux in configure.in.
 
 Next type
 
@@ -40,17 +30,27 @@ Next type
 and see what happens. This should produce an executable called "conge" in
 the src/ current directory.
 
-Compiling on Windows should be equally simple, if you're using Cygwin
+Currently you need to run conge from "src" directory for it to work.
+
+In theory, compiling on Windows should be equally simple, if you're using Cygwin
 (http://www.cygnus.com/cygwin/). The process is basically the same as on Unix.
+However, to my knowledge (Dave Malcolm 20th October 2002), no-one has attempted
+to build a Windows version for a long time; please contact the development list
+(see below) if you attempt this to let us know how you get on.
+
+The code used to require an old version of the Flux library (http://www.fluxlib.org),
+though that dependency has now been removed.
 
 
 Running
 -------
 
+(Dave Malcolm 20 October 2002:  the text in this section is out of date; need to rewrite!!!)
+
 Conge needs two files to be able to run and display something. The first is
 an XML file (if it uses a DTD, this should be locatable as referred from the
 XML file - there will be no validation done, and DTD-less documents are fine).
-The second is a "displayspec", illustrated by "readme.ds" in the examples
+The second is a "displayspec", illustrated by "readme.xds" in the examples
 directory. This specifies how the tags are rendered.
 
 There are two ways to load a document into Conge. One is by specifying the
@@ -76,14 +76,11 @@ is disallowed to promote proper tag nesting.
 You can also right-click items in the left-hand treeview and see what
 happens.
 
+Many of the menu options are currently unimplemented.
+
 
 Contact
 -------
-
-All code herein is written by Hans Petter Jansson (hpj@styx.net), but please
-don't send angry mails to him about it. He knows the extent of its
-brokenness, and he is working on a nicely-implemented version, reusing no
-code whatsoever.
 
 Conglomerate has public mailinglists with web pages as follows:
 
@@ -99,8 +96,15 @@ The latest updates are available through anonymous CVS:
 
 cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
 [blank password, just hit enter]
-cvs checkout conge
+cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs checkout conge
 
 CVS is also web-browsable:
 
 http://cvs.copyleft.no/cgi/cvsweb.cgi/conge/
+
+The code was originally written by Hans Petter Jansson (hpj@styx.net), but please
+don't send angry mails to him about it. Most coding is currently being done by
+Dave Malcolm (david@davemalcolm.demon.co.uk), but you should direct questions to
+the development list (see above) for the moment.
+
+
