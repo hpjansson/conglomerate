@@ -1,4 +1,7 @@
-conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
+conglomerate (0.7.6cvs237-8) UNRELEASED; urgency=low
+
+  * Ready for New upstream release.
+   - included FAQ in the gnome help file. (closes: #218589)
 
   * dpatch compliant
 
@@ -11,7 +14,6 @@ conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
      because `dh_strip` takes care of that.
    Suggested by Joerg Jaspert, thanks.
 
-
   * NEWS:
    - Dropped the scrollkeeper item.
    Suggested by Joerg Jaspert, thanks.
@@ -19,7 +21,7 @@ conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
    Suggested by Martin Michlmayr, thanks.
    - Clearified the gtk-doc issue.
 
- -- Geert Stappers <stappers@stappers.nl>  Sat, 29 Nov 2003 08:14:14 +0100
+ -- Geert Stappers <stappers@stappers.nl>  Thu,  4 Dec 2003 19:55:27 +0100
 
 conglomerate (0.7.6-1) unstable; urgency=medium
 

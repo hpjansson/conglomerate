@@ -1,6 +1,7 @@
 2003-12-04  Geert Stappers  <stappers@stappers.nl>
 
 	* omf.make
+	- added omf include file.
 	- cleanup in the comment lines.
 
 2003-11-25  Geert Stappers  <stappers@stappers.nl>

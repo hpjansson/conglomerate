@@ -4,6 +4,10 @@
 
 	The FAQ is in this directory, not in ../../documentation.
 
+	* Makefile.am
+
+	Added omf include file.
+
 2003-11-10  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* faq.xml

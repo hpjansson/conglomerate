@@ -6,6 +6,7 @@ figdir = figures
 docname = conglomerate
 lang = C
 omffile = conglomerate-C.omf
+omfincfile = faq.xml
 entities = 
 
 include $(top_srcdir)/xmldocs.make

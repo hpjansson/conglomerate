@@ -34,10 +34,13 @@ omf_timestamp: $(omffile)
 	touch omf_timestamp
 
 install-data-hook-omf:
-	##-touch tochnog
 	$(mkinstalldirs) $(DESTDIR)$(omf_dest_dir)
 	for file in $(omffile); do \
 		$(INSTALL_DATA) $$file.out $(DESTDIR)$(omf_dest_dir)/$$file; \
+	done
+	echo $(omffile) $(omfincfile) debug
+	for file in $(omfincfile); do \
+		$(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$file; \
 	done
 	-scrollkeeper-update -p $(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
 

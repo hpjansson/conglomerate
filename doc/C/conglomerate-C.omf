@@ -8,13 +8,16 @@
     <maintainer>
       jeff@custommonkey.org 
     </maintainer>
+    <maintainer>
+      stappers@stappers.nl 
+    </maintainer>
     <title>
       Conglomerate
     </title>    
     <date>
-      2003-03-06
+      2003-12-04
     </date>
-    <version identifier="0.1" date="2003-03-06" description="First draft version"/>
+    <version identifier="0.2" date="2003-12-04" description="included FAQ"/>
     <subject category="GNOME|Applications"/>
     <description>
       User manual for the conglomerate XML editor. 
