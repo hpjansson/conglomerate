@@ -176,5 +176,4 @@ cong_service_exporter_get_type
 cong_service_importer_get_type
 cong_service_node_property_dialog_get_type
 cong_service_node_tool_get_type
-cong_service_print_method_get_type
 cong_plugin_get_type
