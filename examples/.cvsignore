@@ -1,0 +1,8 @@
+## #tricky #comment
+## #because #.cvsignore #does #not #support #comment
+##
+## #files #generated #by #./autogen.sh
+Makefile
+Makefile.in
+## #other #files
+##
