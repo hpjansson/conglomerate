@@ -1111,6 +1111,24 @@ cong_document_end_command (CongDocument *doc,
 	g_object_unref (G_OBJECT (cmd));
 }
 
+void
+cong_document_abort_command (CongDocument *doc,
+		     	      CongCommand *cmd)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	g_return_if_fail (doc == cong_command_get_document (cmd));
+	g_return_if_fail (cmd==PRIVATE(doc)->current_command);
+
+	cong_command_undo (cmd);
+
+	PRIVATE(doc)->current_command = NULL;
+
+	g_object_unref (G_OBJECT (cmd));
+
+	cong_document_end_edit (doc);
+}			      
+
 /* Public MVC hooks: */
 /**
  * cong_document_begin_edit:

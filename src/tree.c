@@ -52,13 +52,17 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 						 node);
 
 		/*  add any necessary sub elements it needs */
-		cong_command_add_xml_add_required_children (cmd, 
-							    new_node);
+	        if (cong_command_add_required_sub_elements (cmd,new_node)) {
 		
-		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-								      new_node);
+			cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+									      new_node);
 
-		cong_document_end_command (doc, cmd);		
+		        cong_document_end_command (doc, cmd);		
+		} else {
+
+			cong_document_abort_command (doc, cmd);
+
+		}
 	}
 
 	cong_document_end_edit(doc);
@@ -100,13 +104,15 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 						  node);
 
 		/*  add any necessary sub elements it needs */
-		cong_command_add_xml_add_required_children (cmd, 
-							    new_node);
+	        if (cong_command_add_required_sub_elements (cmd,new_node)) {
 		
-		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
-								      new_node);
+			cong_command_add_set_cursor_to_first_text_descendant (cmd, 
+									      new_node);
+		        cong_document_end_command (doc, cmd);		
 
-		cong_document_end_command (doc, cmd);
+		} else {
+			cong_document_abort_command (doc, cmd);
+		}
 	}
 
 	cong_document_end_edit(doc);
@@ -376,13 +382,14 @@ cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
 					CongNodePtr comment_node,
 					GtkWindow *parent_window)
 {
+	CongNodePtr new_nodes; 
+	CongNodePtr iter, iter_next;
+
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (comment_node);
 	g_return_if_fail (CONG_NODE_TYPE_COMMENT == cong_node_type (comment_node));
 	g_return_if_fail (comment_node->content);
 
-	CongNodePtr new_nodes; 
-	CongNodePtr iter, iter_next;
 
 	new_nodes = cong_document_make_nodes_from_source_fragment (doc, 
 								   comment_node->content);

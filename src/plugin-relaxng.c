@@ -44,10 +44,11 @@ doc_filter_is_rng (CongServiceDocTool *doc_tool,
 		   CongDocument *doc, 
 		   gpointer user_data)
 {
+	CongNodePtr root;
+
 	g_return_val_if_fail (IS_CONG_SERVICE_DOC_TOOL (doc_tool), FALSE);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), FALSE);
 
-	CongNodePtr root;
 
 	g_return_val_if_fail(doc, FALSE);
 

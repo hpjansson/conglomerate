@@ -19,7 +19,6 @@
 
 char fake_data[] = "";
 
-static gboolean cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node);
 static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean cong_command_add_xml_add_required_content(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
@@ -215,7 +214,7 @@ xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
 }
 
 /**
- * xml_add_required_children:
+ * cong_command_add_required_children:
  * @doc:
  * @node:
  *
@@ -226,59 +225,17 @@ xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
  * that the user may type. Along the way, if there are a
  * set of elements that the user is required to choose one
  * of, the user will be prompted with a dialog.  If the
- * user aborts, this function will remove any added
- * children and default to just adding one text node
- * to the input node.
+ * user aborts, this function will return %FALSE.
  *
  * If no DTD is present, this function will default to
  * simply adding a text node under the node as well.
  *
  * Returns: %TRUE if the structure of @node is valid under
- * a DTD, %FALSE otherwise.
+ * a DTD, %FALSE overwise or after user abort.
  */
 gboolean 
-cong_command_add_xml_add_required_children (CongCommand *cmd, 
-					    CongNodePtr node)
-{
-	gboolean success;
-	xmlNodePtr new_node;
-	CongDocument *doc;
-
-	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
-	g_return_val_if_fail (node, FALSE);
-
-	doc = cong_command_get_document (cmd);
-
-	success = cong_command_add_xml_add_required_sub_elements(cmd, node);
-	/*  if we fail, probably b/c of no DTD, */
-	/*  clean up the inside of the node  */
-	/*  and just toss in a text node */
-	if (! success) {
-		/*  free all children of the node */
-		if (node->children != NULL) {
-			g_assert(0); /* FIXME:  need to signal this to the MVC framework */
-			xmlFreeNodeList(node->children);
-		}
-		
-		/*  set the node to empty */
-		node->children = NULL;
-
-		/*  add a text node */
-		new_node = cong_node_new_text("", doc);
-		cong_command_add_node_set_parent(cmd, new_node, node);
-	}
-
-	return success;
-}
-		
-/**
- * Helper function to add the required children
- * to a node.
- *
- * Returns whether the node is now valid
- */
-static gboolean 
-cong_command_add_xml_add_required_sub_elements(CongCommand *cmd, CongNodePtr node) 
+cong_command_add_required_sub_elements (CongCommand *cmd, 
+				        CongNodePtr node)
 {
 	xmlDocPtr doc;
 	xmlElementPtr elemDecl = NULL;
@@ -413,7 +370,7 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
 			cong_command_add_node_set_parent(cmd, new_node, node);
 			
 			/*  recur on the new node to add anything it needs */
-			return cong_command_add_xml_add_required_sub_elements(cmd, new_node);
+			return cong_command_add_required_sub_elements(cmd, new_node);
 
 		case XML_ELEMENT_CONTENT_SEQ: 
 			/*  seq -- add the first of the list, and */
@@ -517,8 +474,8 @@ cong_command_add_xml_add_required_content_choice (CongCommand *cmd,
 		cong_element_description_free (selected_element_desc);
 		
 		/*  recur on the new node to add anything it needs */
-		return cong_command_add_xml_add_required_sub_elements (cmd, 
-								       new_node);
+		return cong_command_add_required_sub_elements (cmd, 
+							       new_node);
 	} else {
 		return FALSE;
 	}

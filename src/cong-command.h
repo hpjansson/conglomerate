@@ -266,8 +266,8 @@ cong_command_add_set_external_dtd (CongCommand *cmd,
 				   const gchar* system_id);
 
 gboolean 
-cong_command_add_xml_add_required_children (CongCommand *cmd, 
-					    CongNodePtr node);
+cong_command_add_required_sub_elements (CongCommand *cmd,
+				        CongNodePtr node);
 
 G_END_DECLS
 

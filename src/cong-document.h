@@ -331,6 +331,17 @@ void
 cong_document_end_command (CongDocument *doc,
 			   CongCommand *cmd);
 
+/**
+ * cong_document_abort_command:
+ * @doc: The #CongDocument upon which the command acted.
+ * @cmd: The #CongCommand which should be aborted
+ * 
+ * Finish command without applying it to document
+ */
+void
+cong_document_abort_command (CongDocument *doc,
+		     	      CongCommand *cmd);
+
 
 /** 
  * Update amortisation

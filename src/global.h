@@ -146,7 +146,6 @@ const char *xml_frag_name_nice(CongNodePtr x);
 GList *xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node);
 GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
-gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
 
 #define UNUSED_VAR(x)
 

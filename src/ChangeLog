@@ -1,9 +1,24 @@
+2004-06-16 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+    
+	* xmldata.c, tree.c, cong-command.h: More correctly
+	handle user cancel on addition of required children
+	elements. See bug #135865 for details. Now
+	the function is cong_command_add_required_sub_elements.
+	* cong-document.c, cong-document.h: add new function
+	cong_document_abort_command for end of command without
+	applying it and placing it in history.
+	* cong-util.c: Handle Cancel dialog responce in 
+	query sub-elements dialog.
+	* global.h, cong-util.c, plugin-relaxng.c :
+	Cleanups for correct work with old gcc, remove 
+	not existent function
+
 2004-06-14  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
  	
 	* cong-menus.c: Added new menu item Help/Homepage
  	that will open www.conglomerate.org in browser.
  	See bug #134966 for details.
- 
+
 2004-06-14  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-source-view.c: Fixed build problems

@@ -1034,6 +1034,7 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 	
         gtk_window_set_title (GTK_WINDOW (dialog), 
 			      title);
+	gtk_dialog_set_default_response (GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 	gtk_label_set_text (GTK_LABEL (label), 
 			    description);
 
@@ -1155,10 +1156,11 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 		g_object_unref (G_OBJECT (list_store));
 	}
 
-	gtk_dialog_run (GTK_DIALOG (dialog));
-
-	/* Get selection: */
+	result = NULL;
+	
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
 	{
+		/* Get selection: */
 		CongElementDescription *element_desc;
 		GtkTreeIter iter;
 
@@ -1171,10 +1173,7 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 					    -1);
 
 			/* need to clone: */
-			result = cong_element_description_clone (element_desc);;
-
-		} else {
-			result = NULL;
+			result = cong_element_description_clone (element_desc);
 		}
 	}
 				
