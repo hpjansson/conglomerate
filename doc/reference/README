@@ -22,11 +22,13 @@ conglomerate-docs.sgml
 
 conglomerate-overrides.txt
  Contains description of structures which description should be overrriden
- because there not much information in sources.  Lists the data types that gtkdoc doesn't notice.
+ because there not much information in sources.
+ Lists the data types that gtkdoc doesn't notice.
 
 
 conglomerate.types
- Lists the header files to be parsed for objects, and the object _get_type() functions.
+ Lists the header files to be parsed for objects,
+ and the object _get_type() functions.
 
 conglomerate-sections.txt
  The template files in the tmpl directory are generated from this.
