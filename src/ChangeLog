@@ -2,6 +2,10 @@
 
 	* cong-location.c
 
+	Fixed bug #109698 by making Home and End keys take you to the start/end of text within the current structural element, rather than the start/end of current line
+
+	* cong-location.c
+
 	Added references to bug #109698 where appropriate
 	
 	* plugin-website.c

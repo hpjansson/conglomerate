@@ -796,15 +796,72 @@ gboolean cong_location_calc_next_word(const CongLocation *input_loc,
 	}
 }
 
+static CongNodePtr
+get_root_node (CongNodePtr node)
+{
+	g_assert (node);
+
+	while (node->parent) {
+		node = node->parent;
+	}
+
+	return node;
+}
+
+static CongNodePtr
+get_enclosing_structural_element (CongNodePtr node,
+				  const CongDispspec *dispspec)
+{
+	g_assert (node);
+	g_assert (dispspec);
+
+	while (node) {
+		if (cong_node_type (node)==CONG_NODE_TYPE_ELEMENT) {
+			CongDispspecElement* element;
+
+			element = cong_dispspec_lookup_node(dispspec, node);
+			
+			switch (cong_dispspec_element_type (element)) {
+			default: g_assert_not_reached();
+			case CONG_ELEMENT_TYPE_STRUCTURAL:
+			case CONG_ELEMENT_TYPE_PLUGIN:
+				return node;
+				
+			case CONG_ELEMENT_TYPE_SPAN:
+			case CONG_ELEMENT_TYPE_INSERT:
+			case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
+			case CONG_ELEMENT_TYPE_UNKNOWN:
+				break;
+			}
+		}
+
+		node = node->parent;
+	}
+
+	/* Not found: */
+	return NULL;
+}
+
 gboolean cong_location_calc_document_start(const CongLocation *input_loc, 
 					   CongDispspec *dispspec,
 					   CongLocation *output_loc)
 {
+	CongNodePtr root_node;
+
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating document start"), 109698);
+	root_node = get_root_node (input_loc->node);
+	if (root_node) {
+		CongNodePtr node = calc_first_node_in_subtree_satisfying (dispspec,
+									  root_node, 
+									  is_valid_cursor_node);
+		if (node) {
+			cong_location_set_to_start_of_node (output_loc, node);
+			return TRUE;
+		}
+	}
 
 	return FALSE;
 }
@@ -812,11 +869,26 @@ gboolean cong_location_calc_line_start(const CongLocation *input_loc,
 				      CongDispspec *dispspec,
 				      CongLocation *output_loc)
 {
+	CongNodePtr enclosing_structural_element;
+
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating line start"), 109698);
+	/* This actually calculates the start of the text within the current structural node, rather than the start of the current line (as it's much easier).
+	   (This was part of bug #109698)
+	*/
+	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
+									 dispspec);
+	if (enclosing_structural_element) {
+		CongNodePtr node = calc_first_node_in_subtree_satisfying (dispspec,
+									  enclosing_structural_element, 
+									  is_valid_cursor_node);
+		if (node) {
+			cong_location_set_to_start_of_node (output_loc, node);
+			return TRUE;
+		}
+	}
 
 	return FALSE;
 }
@@ -825,11 +897,22 @@ gboolean cong_location_calc_document_end(const CongLocation *input_loc,
 					 CongDispspec *dispspec,
 					 CongLocation *output_loc)
 {
+	CongNodePtr root_node;
+
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating document end"), 109698);
+	root_node = get_root_node (input_loc->node);
+	if (root_node) {
+		CongNodePtr node = calc_final_node_in_subtree_satisfying (dispspec,
+									  root_node, 
+									  is_valid_cursor_node);
+		if (node) {
+			cong_location_set_to_end_of_node (output_loc, node);
+			return TRUE;
+		}
+	}
 
 	return FALSE;
 }
@@ -838,11 +921,26 @@ gboolean cong_location_calc_line_end(const CongLocation *input_loc,
 				     CongDispspec *dispspec,
 				     CongLocation *output_loc)
 {
+	CongNodePtr enclosing_structural_element;
+
 	g_return_val_if_fail(input_loc, FALSE);
 	g_return_val_if_fail(dispspec, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, _("Calculating line end"), 109698);
+	/* This actually calculates the end of the text within the current structural node, rather than the start of the current line (as it's much easier).
+	   (This was part of bug #109698)
+	*/
+	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
+									 dispspec);
+	if (enclosing_structural_element) {
+		CongNodePtr node = calc_final_node_in_subtree_satisfying (dispspec,
+									  enclosing_structural_element, 
+									  is_valid_cursor_node);
+		if (node) {
+			cong_location_set_to_end_of_node (output_loc, node);
+			return TRUE;
+		}
+	}
 
 	return FALSE;
 }
