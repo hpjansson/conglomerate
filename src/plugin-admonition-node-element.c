@@ -88,10 +88,11 @@ cong_editor_node_element_admonition_instance_init (CongEditorNodeElementAdmoniti
 /**
  * cong_editor_node_element_admonition_construct:
  * @editor_node_element_admonition:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementAdmonition*
 cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *editor_node_element_admonition,
@@ -111,6 +112,7 @@ cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_admonition_new (CongEditorWidget3* widget,

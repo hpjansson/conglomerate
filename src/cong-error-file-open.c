@@ -76,6 +76,7 @@ static void on_search(gpointer data)
  * @transient:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_error_what_failed_on_file_open_failure (const gchar *string_uri, 
@@ -121,6 +122,7 @@ cong_error_what_failed_on_file_open_failure (const gchar *string_uri,
  * @suggestions:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
@@ -162,6 +164,7 @@ cong_error_dialog_new_from_file_open_failure(GtkWindow *parent_window,
  * @convenience_data:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_window,
@@ -205,6 +208,7 @@ cong_error_dialog_new_from_file_open_failure_with_convenience(GtkWindow *parent_
  * @vfs_result:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_file_open_failure_with_vfs_result(GtkWindow *parent_window,
@@ -474,11 +478,14 @@ static void on_details(gpointer data)
  * cong_error_dialog_new_from_file_operation_failure:
  * @parent_window:
  * @what_failed:
- * @string_uri:
+ * @string_uri: the URI from which you tried to access file.
  * @vfs_result:
  * @technical_details:
- *
- * TODO: Write me
+ * 
+ * Routine to manufacture an error dialog for when some file operation fails that doesn't fall into one of the categories above.
+ * Displays what operation has failed, with a convenience button to get more techical information.
+ * 
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,

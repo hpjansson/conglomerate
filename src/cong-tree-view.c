@@ -144,6 +144,7 @@ static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTreeView *
 cong_tree_view_new (CongDocument *doc,
@@ -301,6 +302,7 @@ cong_tree_view_free(CongTreeView *tree_view)
  * @tree_view:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_tree_view_get_widget(CongTreeView *tree_view)
@@ -316,6 +318,7 @@ cong_tree_view_get_widget(CongTreeView *tree_view)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
@@ -336,6 +339,7 @@ cong_tree_view_should_show_node (CongTreeView *cong_tree_view,
  * @cong_tree_view:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_tree_view_get_selected_node (CongTreeView *cong_tree_view)
@@ -356,6 +360,7 @@ cong_tree_view_get_selected_node (CongTreeView *cong_tree_view)
  * @tree_view:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkTreeStore* 
 cong_tree_view_protected_get_tree_store (CongTreeView *tree_view)
@@ -535,6 +540,7 @@ node_search_callback (GtkTreeModel *model,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 key_compare_func (gconstpointer a, 
@@ -549,6 +555,7 @@ key_compare_func (gconstpointer a,
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 void 
 value_destroy_func (gpointer data)

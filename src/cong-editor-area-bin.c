@@ -92,6 +92,7 @@ cong_editor_area_bin_instance_init (CongEditorAreaBin *area_bin)
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
@@ -108,6 +109,7 @@ cong_editor_area_bin_construct (CongEditorAreaBin *area_bin,
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
@@ -126,6 +128,7 @@ cong_editor_area_bin_new (CongEditorWidget3 *editor_widget)
  * @area_bin:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_bin_get_child  (CongEditorAreaBin *area_bin)

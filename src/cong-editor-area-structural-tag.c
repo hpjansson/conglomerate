@@ -130,6 +130,7 @@ cong_editor_area_structural_tag_instance_init (CongEditorAreaStructuralTag *area
  * @text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_structural_tag,
@@ -163,6 +164,7 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
  * @text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_structural_tag_new (CongEditorWidget3 *editor_widget,

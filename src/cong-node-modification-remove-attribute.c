@@ -80,6 +80,7 @@ cong_node_modification_remove_attribute_instance_init (CongNodeModificationRemov
  * @name:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationRemoveAttribute*
 cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAttribute *node_modification_remove_attribute,
@@ -114,6 +115,7 @@ cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAtt
  * @name:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_remove_attribute_new (CongDocument *doc,

@@ -108,6 +108,7 @@ css_action_callback (CongServiceDocTool *doc_tool,
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_css_plugin_register (CongPlugin *plugin)
@@ -136,6 +137,7 @@ plugin_css_plugin_register (CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_css_plugin_configure (CongPlugin *plugin)

@@ -76,6 +76,7 @@ cong_editor_area_underline_instance_init (CongEditorAreaUnderline *area_underlin
  * @style:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_underline_construct (CongEditorAreaUnderline *area_underline,
@@ -99,6 +100,7 @@ cong_editor_area_underline_construct (CongEditorAreaUnderline *area_underline,
  * @style:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_underline_new (CongEditorWidget3 *editor_widget,

@@ -142,6 +142,7 @@ fo_print_method_action_callback(CongServicePrintMethod *print_method, CongDocume
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_fo_plugin_register(CongPlugin *plugin)
@@ -174,6 +175,7 @@ plugin_fo_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_fo_plugin_configure(CongPlugin *plugin)

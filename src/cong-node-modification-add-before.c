@@ -83,6 +83,7 @@ cong_node_modification_add_before_instance_init (CongNodeModificationAddBefore *
  * @younger_sibling:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationAddBefore*
 cong_node_modification_add_before_construct (CongNodeModificationAddBefore *node_modification_add_before,
@@ -121,6 +122,7 @@ cong_node_modification_add_before_construct (CongNodeModificationAddBefore *node
  * @younger_sibling:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_add_before_new (CongDocument *doc,

@@ -442,6 +442,7 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_cleanup_source_plugin_register(CongPlugin *plugin)
@@ -468,6 +469,7 @@ plugin_cleanup_source_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_cleanup_source_plugin_configure(CongPlugin *plugin)

@@ -49,6 +49,7 @@
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_prev(CongNodePtr node)
@@ -63,6 +64,7 @@ cong_node_prev(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_next(CongNodePtr node)
@@ -78,6 +80,7 @@ cong_node_next(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_first_child(CongNodePtr node)
@@ -92,6 +95,7 @@ cong_node_first_child(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_parent(CongNodePtr node)
@@ -106,6 +110,7 @@ cong_node_parent(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeType 
 cong_node_type(CongNodePtr node)
@@ -164,13 +169,15 @@ cong_node_type(CongNodePtr node)
 
 }
 
-/**
+/** 
  * cong_node_is_element:
  * @node:
  * @ns_uri:
  * @local_name:
  *
- * TODO: Write me
+ * Handy method for deciding if you've found a element with the given name, as opposed to text nodes, comments, elements with other names etc.
+ *
+ * Returns: TRUE if the node is an element with the correct name, FALSE otherwise
  */
 gboolean 
 cong_node_is_element (CongNodePtr node, 
@@ -193,15 +200,17 @@ cong_node_is_element (CongNodePtr node,
 	return FALSE;
 }
 
-/**
+/** 
  * cong_node_is_element_from_set:
  * @node:
- * @ns_uri:
- * @local_name_array:
- * @num_local_names:
- * @output_index:
+ * @ns_uri: URI of the namespace shared by all the element in the search set
+ * @local_name_array: array of element local names within the namespace
+ * @num_local_names: size of search array
+ * @output_index: pointer to write index of result to, or NULL if you don't care
  *
- * TODO: Write me
+ * Handy method for deciding if you've found a element with one of the given names in the set, as opposed to text nodes, comments, elements with other names etc.
+ *
+ * Returns: TRUE if the node is an element with the correct name, FALSE otherwise
  */
 gboolean 
 cong_node_is_element_from_set (CongNodePtr node, 
@@ -244,6 +253,7 @@ cong_node_is_element_from_set (CongNodePtr node,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlNsPtr
 cong_node_get_ns (CongNodePtr node)
@@ -258,6 +268,7 @@ cong_node_get_ns (CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_node_get_ns_uri (CongNodePtr node)
@@ -276,6 +287,7 @@ cong_node_get_ns_uri (CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_node_get_ns_prefix (CongNodePtr node)
@@ -294,6 +306,7 @@ cong_node_get_ns_prefix (CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar* 
 cong_node_get_local_name (CongNodePtr node)
@@ -306,9 +319,12 @@ cong_node_get_local_name (CongNodePtr node)
 
 /**
  * cong_node_get_qualified_name:
- * @node:
+ * @node: an XML element
  *
- * TODO: Write me
+ * Builds a string of the form "ns_prefix:local_name" for an element inside a namespace
+ * or simply "local_name" for the rest.
+ *
+ * Returns: a freshly-allocated string which the caller must g_free
  */
 gchar*
 cong_node_get_qualified_name (CongNodePtr node)
@@ -325,12 +341,15 @@ cong_node_get_qualified_name (CongNodePtr node)
 	}	
 }
 
-/**
+/*
  * cong_node_get_ns_for_uri:
- * @node:
- * @ns_uri:
+ * @node:  the context in which to look for the prefix
+ * @ns_uri: the namespace URI
  *
- * TODO: Write me
+ * Lookup a namespace URI; find the appropriate xmlNsPtr defined, 
+ * or NULL if not found.
+ *
+ * Returns:  the #xmlNsPtr if found, or NULL if not found.
  */
 xmlNsPtr
 cong_node_get_ns_for_uri (CongNodePtr node, 
@@ -341,12 +360,15 @@ cong_node_get_ns_for_uri (CongNodePtr node,
 				  ns_uri);
 }
 
-/**
+/*
  * cong_node_get_ns_for_prefix:
- * @node:
- * @prefix:
+ * @node:  the context in which to look for the prefix
+ * @prefix: the prefix
  *
- * TODO: Write me
+ * Lookup a namespace prefix; find the appropriate xmlNsPtr defined
+ * for that prefix, or NULL if not found.
+ *
+ * Returns:  the #xmlNsPtr if found, or NULL if not found.
  */
 xmlNsPtr
 cong_node_get_ns_for_prefix (CongNodePtr node, 
@@ -361,12 +383,17 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
 }
 
 /**
- * cong_node_get_attr_ns:
- * @node:
- * @qualified_name:
- * @output_name:
+ * conf_node_get_attr_ns:
+ * @node: an XML element
+ * @qualified_attr_name: An qualified attribute name with an optional namespace prefix.
+ * @output_attr_name: Stores the location of the local_name in @qualified_name.
  *
- * TODO: Write me
+ * Splits the qualified name into the prefix and the local name,
+ * and searches the namespace of the prefix. All namespaces of the
+ * @node are searched. If no prefix is availible NULL is returned.
+ * see: Namespaces in XML / 5.3 Uniqueness of Attributes.
+ *
+ * Returns: A pointer to the namespace, can be NULL.
  */
 xmlNsPtr 
 cong_node_get_attr_ns(CongNodePtr node, 
@@ -406,9 +433,11 @@ cong_node_get_attr_ns(CongNodePtr node,
 /* Method for getting an XPath to the node: */
 /**
  * cong_node_get_path:
- * @node:
+ * @node: an XML node
  *
- * TODO: Write me
+ * Method for getting an XPath to the node.
+ *
+ * Returns: the XPath as a freshly allocated string, which must be freed using g_free
  */
 gchar *
 cong_node_get_path(CongNodePtr node)
@@ -423,6 +452,7 @@ cong_node_get_path(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar *
 cong_node_debug_description(CongNodePtr node)
@@ -532,6 +562,7 @@ static const gchar* node_type_names[CONG_NODE_TYPE_NUM]=
  * @node_type:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar *
 cong_node_type_description(CongNodeType node_type)
@@ -545,11 +576,17 @@ cong_node_type_description(CongNodeType node_type)
 /* Methods for accessing attribute values: */
 /**
  * cong_node_get_attribute:
- * @node:
- * @ns_ptr:
- * @local_attribute_name:
+ * @node: XML node which has the attribute.
+ * @ns_ptr: Attribute's namespace, can be NULL
+ *          (if it is the default namespace it MUST NOT be NULL but the coresponding
+ *          xmlNs).
+ * @local_attribute_name: Name of the attribute, without namespace prefix.
  *
- * TODO: Write me
+ * Returns the content of the attribute specified through @local_attribute_name and
+ * @ns_ptr.
+ *
+ * Returns: The content of the attribute, to be freed by the caller.
+ *          Will be NULL if not found in node and no default in DTD available
  */
 CongXMLChar* 
 cong_node_get_attribute(CongNodePtr node,
@@ -568,11 +605,14 @@ cong_node_get_attribute(CongNodePtr node,
 
 /**
  * cong_node_has_attribute:
- * @node:
- * @ns_ptr:
- * @local_attribute_name:
+ * @node: XML node which has the attribute.
+ * @ns_ptr: Attribute's namespace, can be NULL
+ *             (if it is the default namespace it MUST NOT be NULL but the coresponding
+ *              xmlNs).
+ * @local_attribute_name: Name of the attribute, without namespace prefix.
  *
- * TODO: Write me
+ * Returns: Returns TRUE if the attribute specified through @local_attribute_name and
+ *          @ns_ptr is found in the node or as default in the DTD.
  */
 gboolean 
 cong_node_has_attribute(CongNodePtr node,
@@ -739,6 +779,7 @@ cong_node_self_test_recursive(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 int 
 cong_node_get_length(CongNodePtr node)
@@ -755,6 +796,7 @@ cong_node_get_length(CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_node_should_recurse(CongNodePtr node)
@@ -797,11 +839,12 @@ cong_node_should_recurse(CongNodePtr node)
 /* Construction: */
 /**
  * cong_node_new_element:
- * @xml_ns:
- * @local_name:
+ * @ns:
+ * @tagname:
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_new_element (xmlNsPtr xml_ns, 
@@ -824,6 +867,7 @@ cong_node_new_element (xmlNsPtr xml_ns,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_node_new_element_from_dispspec (CongDispspecElement *element, 
@@ -849,6 +893,7 @@ cong_node_new_element_from_dispspec (CongDispspecElement *element,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_new_text (const char *text, 
@@ -864,6 +909,7 @@ cong_node_new_text (const char *text,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_new_text_len (const char *text, 
@@ -904,9 +950,11 @@ cong_node_free(CongNodePtr node)
 
 /**
  * cong_node_generate_source:
- * @node:
+ * @node:  The node for which the XML source is to be generated
+ * 
+ * Generate XML source for the node 
  *
- * TODO: Write me
+ * Returns: the XML source for the node as a UTF8 string.  The caller is responsible for freeing this with g_free
  */
 gchar*
 cong_node_generate_source (CongNodePtr node)
@@ -943,9 +991,12 @@ cong_node_generate_source (CongNodePtr node)
 
 /**
  * cong_node_generate_child_source:
- * @node:
+ * @node:  The parent node
+ * 
+ * Generate XML source for the node's children, concatenated together as a UTF8 string.  Should handle entity references correctly.
+ * The result does not include the XML source for the node itself.
  *
- * TODO: Write me
+ * Returns: the XML source for the node's children as a UTF8 string.  The caller is responsible for freeing this with g_free
  */
 gchar*
 cong_node_generate_child_source (CongNodePtr node)
@@ -996,9 +1047,10 @@ cong_node_generate_child_source (CongNodePtr node)
 /**
  * cong_node_generate_source_from_byte_offset:
  * @node:
- * @start_byte_offset:
+ * @byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_node_generate_source_from_byte_offset (CongNodePtr node,
@@ -1022,9 +1074,10 @@ cong_node_generate_source_from_byte_offset (CongNodePtr node,
 /**
  * cong_node_generate_source_up_to_byte_offset:
  * @node:
- * @end_byte_offset:
+ * @byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
@@ -1052,6 +1105,7 @@ cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
  * @end_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_node_generate_source_between_byte_offsets (CongNodePtr node,
@@ -1121,6 +1175,7 @@ cong_node_recursive_set_doc(CongNodePtr node, xmlDocPtr xml_doc)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_recursive_dup(CongNodePtr node)
@@ -1141,6 +1196,7 @@ cong_node_recursive_dup(CongNodePtr node)
  * @potential_ancestor:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_node_is_descendant_of (CongNodePtr node,
@@ -1433,6 +1489,7 @@ cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
  * cong_node_private_set_parent:
  * @node:
  * @adoptive_parent:
+ * @add_to_end:
  *
  * TODO: Write me
  */
@@ -1573,11 +1630,13 @@ cong_node_private_remove_attribute(CongNodePtr node,
 /* Utilities: */
 /**
  * cong_node_get_child_by_name:
- * @node:
- * @ns_uri:
- * @local_name:
+ * @node:  the parent node
+ * @ns_uri: URI of namespace to search for, or NULL
+ * @local_name: the local name within any namespace of the element to search for
  *
- * TODO: Write me
+ * This function searches the children of @node looking for elements of the given name.
+ *
+ * Returns: the first child element matching the given name, or NULL if there are none
  */
 CongNodePtr 
 cong_node_get_child_by_name (CongNodePtr node, 
@@ -1603,6 +1662,7 @@ cong_node_get_child_by_name (CongNodePtr node,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_get_first_text_node_descendant (CongNodePtr node)
@@ -1632,6 +1692,7 @@ cong_node_get_first_text_node_descendant (CongNodePtr node)
  * @text_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongWhitespaceHandling
 cong_node_get_whitespace_handling (CongDocument *doc,
@@ -1654,9 +1715,15 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 
 /**
  * cong_node_should_be_visible_in_editor:
- * @node:
+ * @node:  a node to be tested
  *
- * TODO: Write me
+ * The function detemines if the node ought to be visible in the main editor view.
+ *
+ * As described in bug #123367, TEXT nodes that are either empty or purely whitespace
+ * should only appear in the main editor view if the DTD allows PCDATA at the location in the
+ * document.  Otherwise the text is probably merely formatting to prettify the source view. *
+ *
+ * Returns: a #gboolean which is TRUE iff the node ought to be visible in the main editor view
  */
 gboolean
 cong_node_should_be_visible_in_editor (CongNodePtr node)
@@ -1697,9 +1764,14 @@ cong_node_should_be_visible_in_editor (CongNodePtr node)
 
 /**
  * cong_node_is_valid_cursor_location:
- * @node:
+ * @node:  a node to be tested
  *
- * TODO: Write me
+ * The function detemines if the node is a suitable location for the cursor.
+ *
+ * It currently only tests for TEXT nodes, but will eventually be expanded to
+ * allow COMMENT nodes as well.
+ *
+ * Returns: a #gboolean which is TRUE iff it is safe to put the cursor inside this node
  */
 gboolean
 cong_node_is_valid_cursor_location (CongNodePtr node)
@@ -1740,6 +1812,7 @@ cong_node_supports_byte_offsets (CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_node_can_be_cut (CongNodePtr node)
@@ -1772,6 +1845,7 @@ cong_node_can_be_cut (CongNodePtr node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_node_can_be_copied (CongNodePtr node)
@@ -1786,6 +1860,7 @@ cong_node_can_be_copied (CongNodePtr node)
  * @n1:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_get_deepest_common_parent (CongNodePtr n0, 
@@ -1817,7 +1892,6 @@ cong_node_get_deepest_common_parent (CongNodePtr n0,
  * their locations in a depth-first traversal.
  *
  * Returns: negative if n0 is reached before n1, zero if they are the same node, positive if n0 is reached after n1
- * 
  */
 int 
 cong_node_get_ordering (CongNodePtr n0,
@@ -1884,7 +1958,6 @@ cong_node_get_ordering (CongNodePtr n0,
 
 /**
  * cong_node_calc_first_node_in_subtree_satisfying:
- *
  * @node: the top of the subtree
  * @predicate: the #CongNodePredicate to test nodes for
  * @user_data: user-supplied data passed to the predicate
@@ -1895,7 +1968,6 @@ cong_node_get_ordering (CongNodePtr n0,
  * Note that @node is the initial node of the tree (and hence is tested first)
  *
  * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
  */
 CongNodePtr
 cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
@@ -1929,7 +2001,6 @@ cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
 
 /**
  * cong_node_calc_final_node_in_subtree_satisfying:
- *
  * @node: the top of the subtree
  * @predicate: the #CongNodePredicate to test nodes for
  * @user_data: user-supplied data passed to the predicate
@@ -1940,7 +2011,6 @@ cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
  * Note that @node is the initial node of the tree (and hence is tested last)
  *
  * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
  */
 CongNodePtr
 cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node, 
@@ -1974,7 +2044,6 @@ cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node,
 
 /**
  * cong_node_calc_prev_node_satisfying:
- *
  * @node: the start of the search
  * @predicate: the #CongNodePredicate to test nodes for
  * @user_data: user-supplied data passed to the predicate
@@ -1983,7 +2052,6 @@ cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node,
  * in an imagined depth-first traversal of the document.  Includes ancestors.
  *
  * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
  */
 CongNodePtr
 cong_node_calc_prev_node_satisfying (CongNodePtr node, 
@@ -2024,7 +2092,6 @@ cong_node_calc_prev_node_satisfying (CongNodePtr node,
 
 /**
  * cong_node_calc_next_node_satisfying:
- *
  * @node: the start of the search
  * @predicate: the #CongNodePredicate to test nodes for
  * @user_data: user-supplied data passed to the predicate
@@ -2033,7 +2100,6 @@ cong_node_calc_prev_node_satisfying (CongNodePtr node,
  * in an imagined depth-first traversal of the document.   Includes ancestors.
  *
  * Returns: the appropriate node satisfying @predicate, or NULL if there are none
- *
  */
 CongNodePtr
 cong_node_calc_next_node_satisfying (CongNodePtr node,

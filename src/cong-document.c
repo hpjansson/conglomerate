@@ -355,6 +355,7 @@ gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selfte
  * @url:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_document_construct (CongDocument *doc,
@@ -424,11 +425,14 @@ cong_document_construct (CongDocument *doc,
 
 /**
  * cong_document_new_from_xmldoc:
- * @xml_doc:
+ * @xml_doc:  The #xmlDocPtr which the #CongDocument is to wrap.  It takes ownership of it.
  * @ds:
  * @url:
  *
- * TODO: Write me
+ * The new #CongDocument is created with a reference count of 1; 
+ * any views constructed of the document will increment its reference count 
+ *
+ * Returns: the new #CongDocument
  */
 CongDocument*
 cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
@@ -448,9 +452,12 @@ cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 
 /**
  * cong_document_get_xml:
- * @doc:
+ * @doc:  The #CongDocument.
  *
- * TODO: Write me
+ * Retrieve the #xmlDocPtr wrapped by a #CongDocument.  You should not attempt to modify it directly, but instead
+ * use methods of the #CongDocument
+ *
+ * Returns: the #xmlDocPtr wrapped by the #CongDocument
  */
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc)
@@ -465,6 +472,7 @@ cong_document_get_xml(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_document_get_root(CongDocument *doc)
@@ -487,6 +495,7 @@ cong_document_get_root(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocumentTraversal*
 cong_document_get_traversal (CongDocument *doc)
@@ -498,9 +507,12 @@ cong_document_get_traversal (CongDocument *doc)
 
 /**
  * cong_document_get_root_traversal_node:
- * @doc:
+ * @doc:  The #CongDocument of interest
  *
- * TODO: Write me
+ * The #CongDocument maintains #CongDocumentTraversal corresponding to a depth-first traversal of its xml tree,
+ * but with the entity references having only the entity definition as their sole child.
+ *
+ * Returns: the #CongDocumentTraversal owned by the document
  */
 CongTraversalNode*
 cong_document_get_root_traversal_node (CongDocument *doc)
@@ -515,6 +527,7 @@ cong_document_get_root_traversal_node (CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc)
@@ -530,6 +543,7 @@ cong_document_get_dispspec(CongDocument *doc)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
@@ -545,6 +559,7 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_document_get_filename(CongDocument *doc)
@@ -574,6 +589,7 @@ cong_document_get_filename(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_document_get_full_uri(CongDocument *doc) 
@@ -593,6 +609,7 @@ cong_document_get_full_uri(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_document_get_parent_uri(CongDocument *doc)
@@ -622,6 +639,7 @@ cong_document_get_parent_uri(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 const CongXMLChar*
 cong_document_get_dtd_public_identifier(CongDocument *doc)
@@ -639,10 +657,12 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 
 /**
  * cong_document_get_xml_ns:
- * @doc:
- * @ns_uri:
+ * @doc:  The #CongDocument of interest
+ * @ns_uri:  The URI of the namespace
  *
- * TODO: Write me
+ * Locates a namespace by URI within a CongDocument
+ *
+ * Returns: the #xmlNsPtr for the namespace, or NULL if not found
  */
 xmlNsPtr
 cong_document_get_xml_ns (CongDocument *doc, 
@@ -664,7 +684,7 @@ cong_document_get_xml_ns (CongDocument *doc,
  * cong_document_save:
  * @doc:
  * @filename:
- * @toplevel_window:
+ * @parent_window:
  *
  * TODO: Write me
  */
@@ -722,6 +742,7 @@ cong_document_save(CongDocument *doc,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_document_is_modified(CongDocument *doc)
@@ -759,6 +780,7 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongPrimaryWindow*
 cong_document_get_primary_window(CongDocument *doc)
@@ -807,6 +829,7 @@ cong_document_set_url(CongDocument *doc, const gchar *url)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
@@ -821,11 +844,13 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 }
 
 /**
- * cong_document_get_node_name:
- * @doc:
+ * cong_document_get_node_name
+ * @doc: 
  * @node:
- *
- * TODO: Write me
+ * 
+ * Generate a user-visible, translated string that is a name for this node.
+ * 
+ * Returns:  the node name, which must be deleted by the caller.
  */
 gchar*
 cong_document_get_node_name (CongDocument *doc, 
@@ -939,6 +964,7 @@ node_count_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, gu
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_document_get_num_nodes (CongDocument *doc)
@@ -961,8 +987,10 @@ cong_document_get_num_nodes (CongDocument *doc)
  * cong_document_node_ref:
  * @doc:
  * @node:
+ * 
+ * Add an "external reference" to the node; it will not be deleted until it has been both removed from the tree
+ * AND has lost all external references.
  *
- * This function is not currently implemented
  */
 void 
 cong_document_node_ref (CongDocument *doc,
@@ -978,8 +1006,10 @@ cong_document_node_ref (CongDocument *doc,
  * cong_document_node_unref:
  * @doc:
  * @node:
+ * 
+ * Remove an "external reference" to the node; it will be deleted if it has been both removed from the tree
+ * AND this was its last external reference.
  *
- * This function is not currently implemented
  */
 void 
 cong_document_node_unref (CongDocument *doc,
@@ -994,10 +1024,11 @@ cong_document_node_unref (CongDocument *doc,
 /**
  * cong_document_set_with_ref:
  * @doc:
- * @node_ptr:
- * @node:
+ * @node_ptr: A pointer to a #CongNodePtr
+ * @node: a ptr to a node, or NULL
+ * 
+ * Sets @node_ptr to @node, doing any necessary reference count modifications to the old and new value
  *
- * TODO: Write me
  */
 void
 cong_document_set_with_ref (CongDocument *doc,
@@ -1023,11 +1054,16 @@ cong_document_set_with_ref (CongDocument *doc,
 
 /**
  * cong_document_begin_command:
- * @doc:
- * @description:
- * @consolidation_id:
+ * @doc: The #CongDocument upon which the command is to act.
+ * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
+ * widget
+ * @consolidation_id: A string ID (or NULL) for this command to allow multiple similar commands to be consolidated into 
+ * a single command.  For example, multiple characters being typed at the keboard can be merged into a single "Typing" command.
+ * 
+ * Begins creating a named command which will act upon the document.  You can then add modifications to this command,
+ * and then finish with a call to cong_document_end_command()
  *
- * TODO: Write me
+ * Returns:  a #CongCommand to which modifications should be added
  */
 CongCommand*
 cong_document_begin_command (CongDocument *doc,
@@ -1080,10 +1116,12 @@ should_merge_commands (CongDocument *doc,
 
 /**
  * cong_document_end_command:
- * @doc:
- * @cmd:
+ * @doc: The #CongDocument upon which the command acted.
+ * @cmd: The #CongCommand which is now complete
+ * 
+ * Finish creating a command which has acted upon the document.  You should have created this command using a call
+ * to cong_document_begin_command()
  *
- * TODO: Write me
  */
 void
 cong_document_end_command (CongDocument *doc,
@@ -1117,6 +1155,13 @@ cong_document_end_command (CongDocument *doc,
 	g_object_unref (G_OBJECT (cmd));
 }
 
+/**
+ * cong_document_abort_command:
+ * @doc: The #CongDocument upon which the command acted.
+ * @cmd: The #CongCommand which should be aborted
+ * 
+ * Finish command without applying it to document
+ */
 void
 cong_document_abort_command (CongDocument *doc,
 		     	      CongCommand *cmd)
@@ -1188,6 +1233,7 @@ cong_document_end_edit (CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_document_is_within_edit(CongDocument *doc)
@@ -1544,6 +1590,7 @@ cong_document_unregister_view(CongDocument *doc, CongView *view)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCursor* 
 cong_document_get_cursor(CongDocument *doc)
@@ -1558,6 +1605,7 @@ cong_document_get_cursor(CongDocument *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongSelection* 
 cong_document_get_selection(CongDocument *doc)
@@ -1567,11 +1615,13 @@ cong_document_get_selection(CongDocument *doc)
 	return PRIVATE(doc)->selection;
 }
 
-/**
- * cong_document_get_selected_node:
- * @doc:
- *
- * TODO: Write me
+/** 
+ * cong_document_get_selected_node
+ * @doc: the document
+ * 
+ * Convenience wrapper around CongSelection for dealing with selection of specific nodes (as opposed to text ranges).
+ * 
+ * Returns: If a specific node is selected, returns that node.  If a text range is selected instead, or there is no selection, NULL is returned.
  */
 CongNodePtr
 cong_document_get_selected_node (CongDocument *doc)
@@ -1593,12 +1643,17 @@ cong_document_get_selected_node (CongDocument *doc)
 }
 
 
-/**
- * cong_document_get_language_for_node:
+/** 
+ * cong_document_get_language_for_node
  * @doc:
  * @node:
- *
- * TODO: Write me
+ * 
+ * Every node within a document has an implied language, although the logic to determine 
+ * this may depend on the dispspec, on attributes of the nodes, and perhaps even on user prefererences (and hence the value may change unexpectedly).
+ * 
+ * FIXME: what are the ownership/ref count semantics of this function?
+ * 
+ * Returns:
  */
 PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
@@ -1643,9 +1698,10 @@ cong_document_for_each_node_recurse (CongDocument *doc,
  * cong_document_for_each_node:
  * @doc:
  * @callback:
- * @user_data:
+ * @callback_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_document_for_each_node (CongDocument *doc, 
@@ -1670,6 +1726,7 @@ cong_document_for_each_node (CongDocument *doc,
  * @callback_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_document_for_each_child_of_node (CongDocument *doc, 
@@ -1698,6 +1755,7 @@ cong_document_for_each_child_of_node (CongDocument *doc,
  * @source_fragment:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
@@ -1739,11 +1797,16 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 }
 
 /**
- * cong_document_get_dtd_element:
+ * cong_document_get_dtd_element
  * @cong_doc:
  * @node:
- *
- * TODO: Write me
+ * 
+ * Helper function to get the xmlElementPtr within the DTD for a node
+ * Currently only looks at the actual DTD, but in future might attempt
+ * to use the dispspec to infer an DTD and return that
+ * So don't store the return value; it might get deleted etc
+ * 
+ * Returns:
  */
 xmlElementPtr 
 cong_document_get_dtd_element (CongDocument *cong_doc, 
@@ -1822,6 +1885,7 @@ cong_document_get_dtd_element (CongDocument *cong_doc,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongCommandHistory*
 cong_document_get_command_history (CongDocument *doc)
@@ -1928,21 +1992,26 @@ is_location_in_node_subtree (const CongLocation *loc,
  * cong_document_node_can_be_deleted:
  * @doc:
  * @node:
+ * 
+ * Helper function  that determines if a node can safely be deleted.
+ * It will fail if the node or its subtree contains the cursor or the start/end of the selection,
+ * to avoid these containing dangling pointers to dead memory.
+ * Used to fix bug #108530, to ensure that the cursor and selection are always moved out of the way.
  *
- * TODO: Write me
+ * Returns: TRUE if the node can be safely deleted, FALSE otherwise
  */
 gboolean
-cong_document_node_can_be_deleted (CongDocument *doc,
+cong_document_node_can_be_deleted (CongDocument *cong_doc,
 				   CongNodePtr node)
 {
 	CongCursor* cursor;
 	CongSelection* selection;
 
-	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (cong_doc), FALSE);
 	g_return_val_if_fail (node, FALSE);
 
-	cursor = cong_document_get_cursor (doc);
-	selection = cong_document_get_selection (doc);
+	cursor = cong_document_get_cursor (cong_doc);
+	selection = cong_document_get_selection (cong_doc);
 
 	/* Is the cursor's node within the subtree of the test node?  If so, return FALSE: */
 	if (is_location_in_node_subtree (&cursor->location, node)) {

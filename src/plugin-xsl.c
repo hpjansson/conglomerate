@@ -311,6 +311,7 @@ static CongElementEditor* manufacture_element(CongPluginEditorElement *plugin_ed
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_xsl_plugin_register(CongPlugin *plugin)
@@ -336,6 +337,7 @@ plugin_xsl_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_xsl_plugin_configure(CongPlugin *plugin)

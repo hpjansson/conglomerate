@@ -244,6 +244,7 @@ static void visit_paths(GSList* paths, GnomeVFSDirectoryVisitFunc visit_path,
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_templates_plugin_register(CongPlugin *plugin)
@@ -271,6 +272,7 @@ plugin_templates_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 plugin_templates_plugin_configure(CongPlugin *plugin)

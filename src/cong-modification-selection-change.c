@@ -85,6 +85,7 @@ cong_modification_selection_change_instance_init (CongModificationSelectionChang
  * @new_logical_end:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModificationSelectionChange*
 cong_modification_selection_change_construct (CongModificationSelectionChange *modification_selection_change,
@@ -116,6 +117,7 @@ cong_modification_selection_change_construct (CongModificationSelectionChange *m
  * @new_logical_end:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_modification_selection_change_new (CongDocument *doc,

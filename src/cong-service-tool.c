@@ -47,6 +47,7 @@ CONG_DEFINE_CLASS (CongServiceTool, cong_service_tool, CONG_SERVICE_TOOL, CongSe
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceTool*
 cong_service_tool_construct (CongServiceTool *tool,
@@ -82,6 +83,7 @@ cong_service_tool_construct (CongServiceTool *tool,
  * @tool:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_service_tool_get_menu_text (CongServiceTool *tool)
@@ -96,6 +98,7 @@ cong_service_tool_get_menu_text (CongServiceTool *tool)
  * @tool:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_service_tool_get_tip_text (CongServiceTool *tool)
@@ -110,6 +113,7 @@ cong_service_tool_get_tip_text (CongServiceTool *tool)
  * @tool:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_service_tool_get_tip_further_text (CongServiceTool *tool)
@@ -124,6 +128,7 @@ cong_service_tool_get_tip_further_text (CongServiceTool *tool)
  * @tool:
  *
  * TODO: Write me
+ * Returns:
  */
 gpointer
 cong_service_tool_get_user_data (CongServiceTool *tool)

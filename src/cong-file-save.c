@@ -38,6 +38,7 @@
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_save(GtkWidget *w, gpointer data)
@@ -54,6 +55,7 @@ toolbar_callback_save(GtkWidget *w, gpointer data)
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 save_document_as(CongDocument *doc, GtkWindow *parent_window)
@@ -92,6 +94,7 @@ save_document_as(CongDocument *doc, GtkWindow *parent_window)
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 save_document(CongDocument *doc, GtkWindow *parent_window) 

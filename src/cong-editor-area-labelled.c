@@ -99,6 +99,7 @@ cong_editor_area_labelled_instance_init (CongEditorAreaLabelled *area_labelled)
  * @label:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_labelled_construct (CongEditorAreaLabelled *area_labelled,
@@ -144,6 +145,7 @@ cong_editor_area_labelled_construct (CongEditorAreaLabelled *area_labelled,
  * @label:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_labelled_new (CongEditorWidget3 *editor_widget,

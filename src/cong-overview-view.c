@@ -70,6 +70,7 @@ struct CongOverviewDetails
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTreeView*
 cong_overview_view_new (CongDocument *doc)
@@ -284,6 +285,7 @@ node_creation_callback (CongTreeView *cong_tree_view,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf* pixbuf_callback (CongTreeView *cong_tree_view,
 			    CongNodePtr node,

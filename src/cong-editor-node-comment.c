@@ -94,10 +94,11 @@ cong_editor_node_comment_instance_init (CongEditorNodeComment *node_comment)
 /**
  * cong_editor_node_comment_construct:
  * @editor_node_comment:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
@@ -121,6 +122,7 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_comment_new (CongEditorWidget3 *widget,

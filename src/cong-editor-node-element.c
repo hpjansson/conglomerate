@@ -55,10 +55,11 @@ cong_editor_node_element_instance_init (CongEditorNodeElement *node_element)
 /**
  * cong_editor_node_element_construct:
  * @editor_node_element:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElement*
 cong_editor_node_element_construct (CongEditorNodeElement *editor_node_element,
@@ -77,6 +78,7 @@ cong_editor_node_element_construct (CongEditorNodeElement *editor_node_element,
  * @editor_node_element:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_editor_node_element_get_dispspec_element (CongEditorNodeElement *editor_node_element)

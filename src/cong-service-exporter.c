@@ -46,6 +46,7 @@ CONG_DEFINE_CLASS (CongServiceExporter, cong_service_exporter, CONG_SERVICE_EXPO
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceExporter*
 cong_service_exporter_construct (CongServiceExporter *exporter,
@@ -81,6 +82,7 @@ cong_service_exporter_construct (CongServiceExporter *exporter,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_exporter_supports_document(CongServiceExporter *exporter, CongDocument *doc)
@@ -125,6 +127,7 @@ cong_exporter_invoke(CongServiceExporter *exporter, CongDocument *doc, const gch
  * @exporter:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar *
 cong_exporter_get_preferred_uri(CongServiceExporter *exporter)

@@ -66,10 +66,11 @@ cong_editor_node_element_structural_instance_init (CongEditorNodeElementStructur
 /**
  * cong_editor_node_element_structural_construct:
  * @editor_node_element_structural:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementStructural*
 cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *editor_node_element_structural,
@@ -89,6 +90,7 @@ cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_structural_new (CongEditorWidget3* widget,

@@ -67,9 +67,9 @@ cong_cursor_uninit(CongCursor *curs)
 
 /**
  * cong_cursor_blink:
- * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 cong_cursor_blink(gpointer data)
@@ -102,6 +102,7 @@ cong_cursor_blink(gpointer data)
  * @curs:
  *
  * TODO: Write me
+ * Returns:
  */
 int 
 cong_cursor_paragraph_insert(CongCursor *curs)

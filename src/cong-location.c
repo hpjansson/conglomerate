@@ -16,6 +16,7 @@
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_location_is_valid(const CongLocation *loc)
@@ -128,7 +129,7 @@ cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
  * cong_location_set_node_and_byte_offset:
  * @loc:
  * @node:
- * @offset:
+ * @byte_offset:
  *
  * TODO: Write me
  */
@@ -187,6 +188,7 @@ cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glon
  * @loc:
  * 
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_exists(const CongLocation *loc)
@@ -202,6 +204,7 @@ cong_location_exists(const CongLocation *loc)
  * @loc1:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
@@ -226,6 +229,7 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeType
 cong_location_node_type(const CongLocation *loc)
@@ -241,6 +245,7 @@ cong_location_node_type(const CongLocation *loc)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gunichar 
 cong_location_get_unichar(const CongLocation *loc)
@@ -257,6 +262,7 @@ cong_location_get_unichar(const CongLocation *loc)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_location_get_utf8_pointer(const CongLocation *loc)
@@ -494,6 +500,7 @@ cong_location_del_next_char (CongDocument *doc,
  * @loc: a #CongLocation
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_location_xml_frag_prev(const CongLocation *loc)
@@ -506,6 +513,7 @@ cong_location_xml_frag_prev(const CongLocation *loc)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_location_xml_frag_next(const CongLocation *loc)
@@ -518,6 +526,7 @@ cong_location_xml_frag_next(const CongLocation *loc)
  * @loc:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_location_node(const CongLocation *loc)
@@ -530,6 +539,7 @@ cong_location_node(const CongLocation *loc)
  * @loc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_location_parent(const CongLocation *loc)
@@ -562,6 +572,7 @@ cong_location_copy(CongLocation *dst, const CongLocation *src)
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 static gboolean
 is_valid_cursor_node (CongNodePtr node,
@@ -575,11 +586,13 @@ is_valid_cursor_node (CongNodePtr node,
 
 /**
  * cong_location_calc_prev_char:
- * @input_loc:
- * @dispspec:
- * @output_loc:
+ * @input_loc: the current #CongLocation
+ * @dispspec: the #CongDispspec in use
+ * @output_loc: the #CongLocation that is computed
  *
- * TODO: Write me
+ * Calculates a new #CongLocation when the left key is pressed
+ * 
+ * Returns: %TRUE if succeeded
  */
 gboolean 
 cong_location_calc_prev_char(const CongLocation *input_loc, 
@@ -633,11 +646,13 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 
 /**
  * cong_location_calc_next_char:
- * @input_loc:
- * @dispspec:
- * @output_loc:
+ * @input_loc: the current #CongLocation
+ * @dispspec: the #CongDispspec in use
+ * @output_loc: the #CongLocation that is computed
  *
- * TODO: Write me
+ * Calculates a new #CongLocation when the right key is pressed
+ * 
+ * Returns: %TRUE if succeeded
  */
 gboolean 
 cong_location_calc_next_char(const CongLocation *input_loc,
@@ -736,6 +751,7 @@ make_pango_log_attr_for_node(CongDocument *doc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_prev_word(const CongLocation *input_loc, 
@@ -796,6 +812,7 @@ cong_location_calc_prev_word(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_next_word(const CongLocation *input_loc, 
@@ -851,6 +868,7 @@ cong_location_calc_next_word(const CongLocation *input_loc,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongNodePtr
 get_root_node (CongNodePtr node)
@@ -870,6 +888,7 @@ get_root_node (CongNodePtr node)
  * @dispspec:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongNodePtr
 get_enclosing_structural_element (CongNodePtr node,
@@ -912,6 +931,7 @@ get_enclosing_structural_element (CongNodePtr node,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_document_start(const CongLocation *input_loc, 
@@ -945,6 +965,7 @@ cong_location_calc_document_start(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_line_start(const CongLocation *input_loc, 
@@ -982,6 +1003,7 @@ cong_location_calc_line_start(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_document_end(const CongLocation *input_loc, 
@@ -1015,6 +1037,7 @@ cong_location_calc_document_end(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_line_end(const CongLocation *input_loc, 
@@ -1052,6 +1075,7 @@ cong_location_calc_line_end(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_prev_page(const CongLocation *input_loc, 
@@ -1074,6 +1098,7 @@ cong_location_calc_prev_page(const CongLocation *input_loc,
  * @output_loc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_location_calc_next_page(const CongLocation *input_loc, 
@@ -1097,6 +1122,7 @@ cong_location_calc_next_page(const CongLocation *input_loc,
  * @output_end_of_word:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_location_calc_word_extent(const CongLocation *input_loc, 

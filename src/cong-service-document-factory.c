@@ -51,6 +51,7 @@ CONG_DEFINE_CLASS (CongServiceDocumentFactory, cong_service_document_factory, CO
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceDocumentFactory*
 cong_service_document_factory_construct (CongServiceDocumentFactory* factory,
@@ -137,6 +138,7 @@ cong_document_factory_invoke_action_callback(CongServiceDocumentFactory *factory
  * @factory:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 cong_document_factory_get_icon(CongServiceDocumentFactory *factory)

@@ -77,6 +77,7 @@ cong_editor_area_border_instance_init (CongEditorAreaBorder *area_border)
  * @bottom_pixels:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
@@ -106,6 +107,7 @@ cong_editor_area_border_construct (CongEditorAreaBorder *area_border,
  * @bottom_pixels:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_border_new (CongEditorWidget3 *editor_widget,

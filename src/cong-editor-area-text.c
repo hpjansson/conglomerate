@@ -86,6 +86,7 @@ cong_editor_area_text_instance_init (CongEditorAreaText *area_text)
  * @use_markup:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_construct (CongEditorAreaText *area_text,
@@ -141,6 +142,7 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
  * @use_markup:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
@@ -214,6 +216,7 @@ cong_editor_area_text_set_markup (CongEditorAreaText *area_text,
  * @orientation:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text,
@@ -234,6 +237,7 @@ cong_editor_area_text_get_single_line_requisition (CongEditorAreaText *area_text
  * @trailing:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_text_xy_to_index (CongEditorAreaText *area_text,

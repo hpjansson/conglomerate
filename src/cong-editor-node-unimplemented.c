@@ -63,11 +63,12 @@ cong_editor_node_unimplemented_instance_init (CongEditorNodeUnimplemented *node_
 /**
  * cong_editor_node_unimplemented_construct:
  * @editor_node_unimplemented:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  * @description:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeUnimplemented*
 cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_node_unimplemented,
@@ -86,11 +87,12 @@ cong_editor_node_unimplemented_construct (CongEditorNodeUnimplemented *editor_no
 
 /**
  * cong_editor_node_unimplemented_new:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  * @description:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
@@ -112,6 +114,7 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)

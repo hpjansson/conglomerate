@@ -199,3 +199,12 @@
 <STRUCT>
 <NAME>CongEditorNodeElementParagraph</NAME>
 </STRUCT>
+<STRUCT>
+<NAME>CongDocumentTraversal</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CongTraversalNode</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>CongXPathExpression</NAME>
+</STRUCT>

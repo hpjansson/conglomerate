@@ -114,6 +114,7 @@ static void convert_case_exporter_action_callback(CongServiceExporter *exporter,
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_convert_case_plugin_register(CongPlugin *plugin)
@@ -136,6 +137,7 @@ plugin_convert_case_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_convert_case_plugin_configure(CongPlugin *plugin)

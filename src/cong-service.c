@@ -47,6 +47,7 @@ CONG_DEFINE_EMPTY_DISPOSE(cong_service)
  * @service_id:
  *
  * TODO: Write me
+ * Returns:
  */
 CongService*
 cong_service_construct (CongService* service,
@@ -71,6 +72,7 @@ cong_service_construct (CongService* service,
  * @service:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_service_get_name (CongService *service)
@@ -85,6 +87,7 @@ cong_service_get_name (CongService *service)
  * @service:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar* 
 cong_service_get_description (CongService *service)
@@ -99,6 +102,7 @@ cong_service_get_description (CongService *service)
  * @service:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar* 
 cong_service_get_id (CongService *service)
@@ -113,6 +117,7 @@ cong_service_get_id (CongService *service)
  * @service:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar* 
 cong_service_get_gconf_namespace (CongService* service)
@@ -128,8 +133,13 @@ cong_service_get_gconf_namespace (CongService* service)
  * cong_service_get_gconf_key:
  * @service:
  * @local_part:
- *
- * TODO: Write me
+ * 
+ * Convert a "local" GConf key for this plugin to a GConf key with a full-path.
+ * e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
+ *   
+ * Caller must delete returned string.
+ * 
+ * Returns:
  */
 gchar* 
 cong_service_get_gconf_key (CongService *service, 

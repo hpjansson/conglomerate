@@ -57,12 +57,13 @@ cong_traversal_node_instance_init (CongTraversalNode *traversal_node)
 
 /**
  * cong_traversal_node_construct:
- * @traversal_node:
+ * @area:
  * @doc_traversal:
  * @xml_node:
  * @traversal_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_construct (CongTraversalNode *traversal_node,
@@ -88,6 +89,7 @@ cong_traversal_node_construct (CongTraversalNode *traversal_node,
  * @traversal_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_new (CongDocumentTraversal *doc_traversal,
@@ -105,6 +107,7 @@ cong_traversal_node_new (CongDocumentTraversal *doc_traversal,
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocumentTraversal*
 cong_traversal_node_get_document_traversal (CongTraversalNode *traversal_node)
@@ -119,6 +122,7 @@ cong_traversal_node_get_document_traversal (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_traversal_node_get_document (CongTraversalNode *traversal_node)
@@ -133,6 +137,7 @@ cong_traversal_node_get_document (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_traversal_node_get_node (CongTraversalNode *traversal_node)
@@ -147,6 +152,7 @@ cong_traversal_node_get_node (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_get_parent (CongTraversalNode *traversal_node)
@@ -161,6 +167,7 @@ cong_traversal_node_get_parent (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_get_first_child (CongTraversalNode *traversal_node)
@@ -185,6 +192,7 @@ cong_traversal_node_get_first_child (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_get_prev (CongTraversalNode *traversal_node)
@@ -214,6 +222,7 @@ cong_traversal_node_get_prev (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_traversal_node_get_next (CongTraversalNode *traversal_node)
@@ -243,6 +252,7 @@ cong_traversal_node_get_next (CongTraversalNode *traversal_node)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_traversal_node_is_referenced_entity_decl (CongTraversalNode *traversal_node)

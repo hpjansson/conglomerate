@@ -209,6 +209,7 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 cong_file_properties_dialog_new (CongDocument *doc, 

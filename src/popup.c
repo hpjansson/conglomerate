@@ -105,6 +105,7 @@ callback_marshaller_Document_DispspecElement_Node (GtkWidget *widget,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem* 
 cong_menu_item_attach_callback_Document (GtkMenuItem *item,
@@ -135,6 +136,7 @@ cong_menu_item_attach_callback_Document (GtkMenuItem *item,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem*
 cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
@@ -177,6 +179,7 @@ cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem*
 cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item, 
@@ -228,6 +231,7 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem*
 cong_menu_item_attach_callback_legacy (GtkMenuItem *item,
@@ -264,6 +268,7 @@ cong_menu_item_attach_callback_legacy (GtkMenuItem *item,
  * @is_sensitive:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem* 
 cong_menu_add_item (GtkMenu *menu,
@@ -1135,6 +1140,7 @@ make_element_submenu (GtkMenu *tpopup,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_ui_popup_init(CongDocument *doc, 

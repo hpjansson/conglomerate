@@ -54,18 +54,6 @@ cong_service_get_id (CongService *service);
 gchar* 
 cong_service_get_gconf_namespace (CongService* service);
 
-/**
- * cong_service_get_gconf_key:
- * @service:
- * @local_part:
- * 
- * Convert a "local" GConf key for this plugin to a GConf key with a full-path.
- * e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
- *   
- * Caller must delete returned string.
- * 
- * Returns:
- */
 gchar* 
 cong_service_get_gconf_key (CongService *service, 
 			    const gchar *local_part);

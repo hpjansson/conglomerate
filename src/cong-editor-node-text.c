@@ -202,10 +202,11 @@ finalize (GObject *object)
 /**
  * cong_editor_node_text_construct:
  * @editor_node_text:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
@@ -281,6 +282,7 @@ dispose (GObject *object)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
@@ -303,6 +305,7 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
  * @stripped_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeText *editor_node_text,
@@ -321,6 +324,7 @@ cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeTe
  * @output_index:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_eel_pango_layout_calc_up (PangoLayout *layout,
@@ -370,6 +374,7 @@ cong_eel_pango_layout_calc_up (PangoLayout *layout,
  * @output_index:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_eel_pango_layout_calc_down (PangoLayout *layout,
@@ -416,6 +421,7 @@ cong_eel_pango_layout_calc_down (PangoLayout *layout,
  * @output_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_text_calc_up (CongEditorNodeText *editor_node_text,
@@ -454,6 +460,7 @@ cong_editor_node_text_calc_up (CongEditorNodeText *editor_node_text,
  * @output_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_text_calc_down (CongEditorNodeText *editor_node_text,
@@ -542,6 +549,7 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
  * @output:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_selection_get_start_byte_offset (CongSelection *selection, 
@@ -601,6 +609,7 @@ cong_selection_get_start_byte_offset (CongSelection *selection,
  * @output:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_selection_get_end_byte_offset (CongSelection *selection, 
@@ -662,6 +671,7 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
  * @initial_indent:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongEditorLineFragments*
 generate_line_areas_recursive (CongEditorNode *editor_node,

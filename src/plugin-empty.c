@@ -35,6 +35,7 @@
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_empty_plugin_register (CongPlugin *plugin)
@@ -52,6 +53,7 @@ plugin_empty_plugin_register (CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_empty_plugin_configure (CongPlugin *plugin)

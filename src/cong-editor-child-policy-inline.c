@@ -72,6 +72,7 @@ cong_editor_child_policy_inline_instance_init (CongEditorChildPolicyInline *chil
  * @inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_child_policy_inline_construct (CongEditorChildPolicyInline *child_policy_inline,
@@ -92,6 +93,7 @@ cong_editor_child_policy_inline_construct (CongEditorChildPolicyInline *child_po
  * @inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_child_policy_inline_new (CongEditorNode *editor_node,
@@ -120,6 +122,7 @@ cong_editor_child_policy_inline_new (CongEditorNode *editor_node,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongEditorChildPolicy* 
 insert_areas_for_node (CongEditorChildPolicy *child_policy,

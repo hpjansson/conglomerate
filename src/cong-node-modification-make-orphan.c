@@ -78,6 +78,7 @@ cong_node_modification_make_orphan_instance_init (CongNodeModificationMakeOrphan
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationMakeOrphan*
 cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *node_modification_make_orphan,
@@ -111,6 +112,7 @@ cong_node_modification_make_orphan_construct (CongNodeModificationMakeOrphan *no
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_make_orphan_new (CongDocument *doc,

@@ -75,6 +75,7 @@ extern char *ilogo_xpm[];
  * @text:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 make_uneditable_text(const gchar* text)

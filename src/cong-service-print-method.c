@@ -45,6 +45,7 @@ CONG_DEFINE_CLASS (CongServicePrintMethod, cong_service_print_method, CONG_SERVI
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServicePrintMethod *
 cong_service_print_method_construct (CongServicePrintMethod *print_method,
@@ -80,6 +81,7 @@ cong_service_print_method_construct (CongServicePrintMethod *print_method,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_print_method_supports_document(CongServicePrintMethod *print_method, CongDocument *doc)

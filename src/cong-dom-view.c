@@ -55,6 +55,7 @@ get_text_for_node(CongNodePtr node);
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_dom_view_new (CongDocument *doc)
@@ -147,6 +148,7 @@ clean_text(const gchar* txt)
  * @type:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_ui_get_colour_string(CongNodeType type)

@@ -64,17 +64,6 @@ cong_text_cache_span_new (int original_first_byte_offset,
 			  int byte_count);
 #endif
 
-/**
- * cong_text_cache_new:
- *
- * Create a new #CongTextCache.
- *
- * @strip_whitespace:  Should whitespace be stripped ("normalised") if TRUE, or preserved if FALSE
- * @string: the UTF8 string, must be non-NULL
- * @attr_list:  Pango attributes for the string; can be NULL if you don't care about them
- *
- * Returns: the new #CongTextCache
- */
 CongTextCache*
 cong_text_cache_new (gboolean strip_whitespace,
 		     const gchar *string,
@@ -84,25 +73,9 @@ void
 cong_text_cache_free (CongTextCache* text_cache);
 
 
-/**
- * cong_text_cache_get_output_text:
- *
- * Get the text from the cache, which will have had the appropriate operation performed on it.
- *
- * @text_cache: the text cache from which to get the result
- *
- * Returns: the result of the operation as a UTF-8 string (owned by the #CongTextCache)
- */
 const gchar*
 cong_text_cache_get_output_text (CongTextCache* text_cache);
 
-/**
- * cong_text_cache_get_output_attributes:
- *
- * Get the text attributes from the cache, which will have had the appropriate operation performed on it.
- *
- * Returns: the attributes, which you must unref when you are finished.
- */
 PangoAttrList*
 cong_text_cache_get_output_attributes (CongTextCache* text_cache);
 

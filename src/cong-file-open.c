@@ -52,6 +52,7 @@ force_load(gpointer data)
  * @filename_extension:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec* 
 query_for_forced_dispspec (gchar *what_failed, 
@@ -93,6 +94,7 @@ query_for_forced_dispspec (gchar *what_failed,
  * @uri:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 get_filename_extension (const GnomeVFSURI *uri)
@@ -225,6 +227,7 @@ open_document(GtkWindow *parent_window)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_open(GtkWidget *widget, gpointer data)

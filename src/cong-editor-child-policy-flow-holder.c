@@ -72,6 +72,7 @@ cong_editor_child_policy_flow_holder_instance_init (CongEditorChildPolicyFlowHol
  * @flow_holder:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_child_policy_flow_holder_construct (CongEditorChildPolicyFlowHolder *child_policy_flow_holder,
@@ -92,6 +93,7 @@ cong_editor_child_policy_flow_holder_construct (CongEditorChildPolicyFlowHolder 
  * @flow_holder:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_child_policy_flow_holder_new (CongEditorNode *editor_node,

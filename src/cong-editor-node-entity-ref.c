@@ -64,10 +64,11 @@ cong_editor_node_entity_ref_instance_init (CongEditorNodeEntityRef *node_entity_
 /**
  * cong_editor_node_entity_ref_construct:
  * @editor_node_entity_ref:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeEntityRef*
 cong_editor_node_entity_ref_construct (CongEditorNodeEntityRef *editor_node_entity_ref,
@@ -86,6 +87,7 @@ cong_editor_node_entity_ref_construct (CongEditorNodeEntityRef *editor_node_enti
  * @traversal_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_entity_ref_new (CongEditorWidget3 *widget,
@@ -105,6 +107,7 @@ cong_editor_node_entity_ref_new (CongEditorWidget3 *widget,
  * @editor_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)

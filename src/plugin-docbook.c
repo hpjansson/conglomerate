@@ -173,6 +173,7 @@ static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_
  * @title:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr 
 make_article(const xmlChar *title)
@@ -234,6 +235,7 @@ factory_action_callback_article(CongServiceDocumentFactory *factory, CongNewFile
  * @title:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr 
 make_book(const xmlChar *title)
@@ -302,6 +304,7 @@ factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFileAss
  * @title:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr 
 make_set(const xmlChar *title)
@@ -375,6 +378,7 @@ text_importer_filter_factory_callback (CongServiceImporter *importer)
  * @c:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_unichar_is_line_break(gunichar c)
@@ -927,6 +931,7 @@ text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 sourcecode_importer_mime_filter(CongServiceImporter *importer, const gchar *mime_type, gpointer user_data)
@@ -1151,6 +1156,7 @@ fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, co
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 docbook_print_method_document_filter (CongServicePrintMethod *print_method, 
@@ -1231,6 +1237,7 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
@@ -1280,6 +1287,7 @@ docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_proper
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
@@ -1409,6 +1417,7 @@ on_test_link_pressed (GtkButton *button,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
@@ -1569,6 +1578,7 @@ action_callback_demote (CongServiceNodeTool *tool,
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_docbook_plugin_register(CongPlugin *plugin)
@@ -1715,6 +1725,7 @@ plugin_docbook_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_docbook_plugin_configure(CongPlugin *plugin)

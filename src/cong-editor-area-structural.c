@@ -130,6 +130,7 @@ cong_editor_area_structural_instance_init (CongEditorAreaStructural *area_struct
  * @col_text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural,
@@ -277,6 +278,7 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
  * @col_text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_structural_new (CongEditorWidget3 *editor_widget,

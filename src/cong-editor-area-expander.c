@@ -134,6 +134,7 @@ cong_editor_area_connect_motion_notify_prelight (CongEditorArea *area)
  * @expanded:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
@@ -163,6 +164,7 @@ cong_editor_area_expander_construct (CongEditorAreaExpander *area_expander,
  * @expanded:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_expander_new (CongEditorWidget3 *editor_widget,
@@ -179,6 +181,7 @@ cong_editor_area_expander_new (CongEditorWidget3 *editor_widget,
  * @area_expander:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_expander_get_state (CongEditorAreaExpander *area_expander)
@@ -265,6 +268,7 @@ on_button_press (CongEditorArea *editor_area,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 on_timeout (gpointer user_data)

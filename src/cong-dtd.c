@@ -92,10 +92,13 @@ cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
 }
 
 /**
- * cong_dtd_element_guess_dispspec_type:
+ * cong_dtd_element_guess_dispspec_type
  * @element:
- *
- * TODO: Write me
+ * 
+ * Given a DTD element, make a guess as to an appropriate xds element type.
+ * Useful when autogenerating CongDispspec from DTD files
+ * 
+ * Returns: 
  */
 CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
@@ -117,6 +120,7 @@ cong_dtd_element_guess_dispspec_type (xmlElementPtr element)
  * @content:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
@@ -146,11 +150,13 @@ cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 }
 
 /**
- * cong_dtd_element_get_element_for_node:
- * @dtd:
- * @xml_node:
- *
- * TODO: Write me
+ * cong_dtd_get_element_for_node
+ * @dtd: the DTD
+ * @node: an xml node
+ * 
+ * Given a DTD and an XML node, try to find the #xmlElementPtr for that node in the DTD
+ * 
+ * Returns: the #xmlElementPtr if found, or NULL otherwise
  */
 xmlElementPtr
 cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
@@ -168,10 +174,13 @@ cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
 
 /**
  * cong_dtd_content_model_node_is_element:
- * @content:
- * @dtd_element:
+ * @content: a node in the content model tree for one of the elements in a DTD
+ * @dtd_element: one of the elements in a DTD (usually a different one)
  *
- * TODO: Write me
+ * Determine if this node in the content model is a direct cross-reference
+ * to the given element.  Useful for determining recursion, nesting of elements, etc
+ * 
+ * Returns: TRUE if it is the element, FALSE if it's another element, PCDATA, etc
  */
 gboolean
 cong_dtd_content_model_node_is_element (xmlElementContentPtr content,
@@ -225,7 +234,9 @@ find_content_callback (xmlElementPtr dtd_element,
  * @dtd:
  * @content:
  *
- * TODO: Write me
+ * Get the element in the DTD corresponding to a node in the content model (if any)
+ *
+ * Returns:
  */
 xmlElementPtr 
 cong_dtd_get_element_for_content (xmlDtdPtr dtd,
@@ -314,7 +325,11 @@ element_callback_visit_cross_references (xmlElementPtr dtd_element,
  * @callback:
  * @user_data:
  *
- * TODO: Write me
+ * Function to search through the content models in the DTD, calling the callback for any reference to the given element.
+ *
+ * Handles the case where the element is part of a recursive content model (which would allow arbitrary
+ * numbers of that element to be added) by treating each as a single cross-reference.
+ *
  */
 void
 cong_dtd_for_each_reference_to_element (xmlDtdPtr dtd,
@@ -349,13 +364,6 @@ element_reference_callback_count (xmlDtdPtr dtd,
 	(*count)++;
 }
 
-/**
- * cong_dtd_count_references_to_element:
- * @dtd:
- * @dtd_element:
- *
- * TODO: Write me
- */
 guint
 cong_dtd_count_references_to_element (xmlDtdPtr dtd,
 				      xmlElementPtr dtd_element)
@@ -383,11 +391,13 @@ element_callback_add_candidates (xmlElementPtr dtd_element,
 	}
 }
 
-/**
+/*
  * cong_dtd_guess_start_elements:
- * @dtd:
  *
- * TODO: Write me
+ * Try to guess the most likely root elements of the DTD.
+ * Currently implemented by finding those that aren't cross-referenced elsewhere in the DTD.
+ *
+ * Returns: a freshly allocated GList of xmlElementPtr
  */
 GList*
 cong_dtd_guess_start_elements (xmlDtdPtr dtd)

@@ -115,6 +115,7 @@ cong_editor_area_container_instance_init (CongEditorAreaContainer *area_containe
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_container_construct (CongEditorAreaContainer *area_container,

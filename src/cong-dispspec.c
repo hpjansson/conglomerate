@@ -211,6 +211,7 @@ make_model_from_dtd (xmlDtdPtr dtd)
  * cong_dispspec_new:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec* 
 cong_dispspec_new(void)
@@ -233,6 +234,7 @@ cong_dispspec_new(void)
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeVFSResult 
 cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
@@ -263,6 +265,7 @@ cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
  * @size:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec* 
 cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
@@ -292,6 +295,7 @@ cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
  * @description:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec* 
 cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
@@ -326,6 +330,7 @@ cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
  * @extension:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec *
 cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc,
@@ -389,6 +394,7 @@ cong_dispspec_delete (CongDispspec *dispspec)
  * @dispspec:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr 
 cong_dispspec_make_xml(CongDispspec *dispspec)
@@ -454,6 +460,7 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_get_name (const CongDispspec *ds)
@@ -473,6 +480,7 @@ cong_dispspec_get_name (const CongDispspec *ds)
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_get_description (const CongDispspec *ds)
@@ -491,6 +499,7 @@ cong_dispspec_get_description (const CongDispspec *ds)
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_dispspec_get_num_serialisation_formats (const CongDispspec *ds)
@@ -506,6 +515,7 @@ cong_dispspec_get_num_serialisation_formats (const CongDispspec *ds)
  * @index:
  *
  * TODO: Write me
+ * Returns:
  */
 const CongSerialisationFormat*
 cong_dispspec_get_serialisation_format (const CongDispspec *ds,
@@ -525,6 +535,7 @@ cong_dispspec_get_serialisation_format (const CongDispspec *ds,
  * @extension:
  *
  * TODO: Write me
+ * Returns:
  */
 const CongSerialisationFormat*
 cong_dispspec_lookup_filename_extension (const CongDispspec *ds,
@@ -552,6 +563,7 @@ cong_dispspec_lookup_filename_extension (const CongDispspec *ds,
  * @extension:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_dispspec_matches_filename_extension (const CongDispspec *ds,
@@ -569,6 +581,7 @@ cong_dispspec_matches_filename_extension (const CongDispspec *ds,
  * @model_type:
  *
  * TODO: Write me
+ * Returns:
  */
 const CongExternalDocumentModel*
 cong_dispspec_get_external_document_model (const CongDispspec *ds,
@@ -585,6 +598,7 @@ cong_dispspec_get_external_document_model (const CongDispspec *ds,
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf*
 cong_dispspec_get_icon(const CongDispspec *ds)
@@ -605,6 +619,7 @@ cong_dispspec_get_icon(const CongDispspec *ds)
  * @local_name:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_dispspec_lookup_element (const CongDispspec *ds, 
@@ -634,6 +649,7 @@ cong_dispspec_lookup_element (const CongDispspec *ds,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
@@ -675,6 +691,7 @@ cong_dispspec_type (CongDispspec *ds,
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds)
@@ -753,6 +770,7 @@ cong_dispspec_add_element (CongDispspec* ds,
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_dispspec_get_num_elements (CongDispspec *ds)
@@ -777,6 +795,7 @@ cong_dispspec_get_num_elements (CongDispspec *ds)
  * @index:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspecElement*
 cong_dispspec_get_element (CongDispspec *ds,
@@ -822,6 +841,7 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, CongDispspecGCUsage
  * @tog:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC *
 cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
@@ -835,14 +855,6 @@ cong_dispspec_name_gc_get(CongDispspec *ds, CongNodePtr t, int tog)
 	}
 }
 
-/**
- * cong_dispspec_gc_get:
- * @ds:
- * @x:
- * @tog:
- *
- * TODO: Write me
- */
 GdkGC *
 cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
 {
@@ -862,6 +874,7 @@ cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_dispspec_name_get (CongDispspec *ds, 
@@ -898,16 +911,17 @@ char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
  * cong_dispspec_element_structural:
  * @ds:
  * @ns_uri:
- * @name:
+ * @local_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_dispspec_element_structural (CongDispspec *ds, 
 				  const gchar *ns_uri, 
-				  const char *name)
+				  const char *local_name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, local_name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -920,16 +934,17 @@ cong_dispspec_element_structural (CongDispspec *ds,
  * cong_dispspec_element_collapse:
  * @ds:
  * @ns_uri:
- * @name:
+ * @local_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_dispspec_element_collapse (CongDispspec *ds, 
 				const gchar *ns_uri, 
-				const char *name)
+				const char *local_name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element (ds, ns_uri, local_name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -965,16 +980,17 @@ cong_dispspec_element_span (CongDispspec *ds,
  * cong_dispspec_element_insert:
  * @ds:
  * @ns_uri:
- * @name:
+ * @local_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_dispspec_element_insert (CongDispspec *ds, 
 			      const gchar *ns_uri, 
-			      const char *name)
+			      const char *local_name)
 {
-	CongDispspecElement* element = cong_dispspec_lookup_element(ds, ns_uri, name);
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, ns_uri, local_name);
 
 	if (NULL==element) {
 		return FALSE;
@@ -1254,6 +1270,7 @@ col_to_gcol(GdkColor *gcol, unsigned int col)
  * @model:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_external_document_model_get_public_id (const CongExternalDocumentModel* model)
@@ -1268,6 +1285,7 @@ cong_external_document_model_get_public_id (const CongExternalDocumentModel* mod
  * @model:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_external_document_model_get_system_id (const CongExternalDocumentModel* model)
@@ -1606,6 +1624,7 @@ load_dtd (xmlDocPtr doc)
  * @ds:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlNodePtr
 cong_dispspec_get_template(const CongDispspec *ds)
@@ -1650,6 +1669,7 @@ calc_coverage_recursive (const CongDispspec *ds,
  * @xml_doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gdouble
 cong_dispspec_calculate_coverage (const CongDispspec *ds,

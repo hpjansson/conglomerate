@@ -99,6 +99,7 @@ cong_editor_area_flow_holder_blocks_instance_init (CongEditorAreaFlowHolderBlock
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_flow_holder_blocks_construct (CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks,
@@ -127,6 +128,7 @@ cong_editor_area_flow_holder_blocks_construct (CongEditorAreaFlowHolderBlocks *a
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_flow_holder_blocks_new (CongEditorWidget3 *editor_widget)
@@ -146,6 +148,7 @@ cong_editor_area_flow_holder_blocks_new (CongEditorWidget3 *editor_widget)
  * @doc_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaFlowHolder*
 cong_editor_area_flow_holder_get_child_flow_holder_for_node (CongEditorAreaFlowHolderBlocks *area_flow_holder_blocks,

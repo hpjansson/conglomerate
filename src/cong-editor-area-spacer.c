@@ -109,6 +109,7 @@ cong_editor_area_spacer_new (CongEditorWidget3 *editor_widget,
  * @width_hint:
  *
  * TODO: Write me
+ * Returns:
  */
 static gint
 calc_requisition (CongEditorArea *area, 

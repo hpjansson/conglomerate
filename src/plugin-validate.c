@@ -237,6 +237,8 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
  * Registers validate plugin - plugin that provides menu item
  * that validates document agains DTD and show validation 
  * warining and errors.
+ *
+ * Returns:
  */
 gboolean 
 plugin_validate_plugin_register(CongPlugin *plugin)
@@ -262,6 +264,8 @@ plugin_validate_plugin_register(CongPlugin *plugin)
  * @plugin: Plugin
  *
  * This function should contain all code to configure validate plugin
+ *
+ * Returns: 
  */
 gboolean 
 plugin_validate_plugin_configure(CongPlugin *plugin)

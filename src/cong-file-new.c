@@ -107,6 +107,7 @@ set_pixbuf (GtkTreeViewColumn *tree_column,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 first_page_of_factory_back(GnomeDruidPage *druidpage,
@@ -127,6 +128,7 @@ first_page_of_factory_back(GnomeDruidPage *druidpage,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 last_page_of_factory_next(GnomeDruidPage *druidpage,
@@ -150,6 +152,7 @@ last_page_of_factory_next(GnomeDruidPage *druidpage,
  * @is_last_of_factory:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeDruidPageStandard *
 cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
@@ -214,6 +217,7 @@ cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage
  * @assistant:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWindow *
 cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
@@ -266,6 +270,7 @@ cong_new_file_assistant_set_data_for_factory (CongNewFileAssistant *assistant,
  * @document_factory:
  *
  * TODO: Write me
+ * Returns:
  */
 gpointer
 cong_new_file_assistant_get_data_for_factory (CongNewFileAssistant *assistant,
@@ -306,6 +311,7 @@ static void add_factory_callback(CongServiceDocumentFactory *factory, gpointer u
  * @assistant:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 make_type_selection_widget(CongNewFileAssistant *assistant)
@@ -407,6 +413,7 @@ second_page_prepare(GnomeDruidPage *druidpage,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 second_page_next(GnomeDruidPage *druidpage,
@@ -476,6 +483,7 @@ second_page_next(GnomeDruidPage *druidpage,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 final_page_back(GnomeDruidPage *druidpage,
@@ -497,6 +505,7 @@ final_page_back(GnomeDruidPage *druidpage,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 final_page_finish(GnomeDruidPage *druidpage,
@@ -663,10 +672,11 @@ new_document(GtkWindow *parent_window)
 
 /**
  * toolbar_callback_new:
- * @widget:
+ * @w:
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_new(GtkWidget *widget, gpointer data)

@@ -108,7 +108,7 @@ cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *
 /**
  * cong_editor_node_element_listitem_construct:
  * @editor_node_element_listitem:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
@@ -160,6 +160,7 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
  * @listitem:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem)

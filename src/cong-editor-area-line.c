@@ -90,11 +90,12 @@ cong_editor_area_line_instance_init (CongEditorAreaLine *line)
 /* Exported function definitions: */
 /**
  * cong_editor_area_line_construct:
- * @line:
+ * @area_line:
  * @editor_widget:
  * @width_limit:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_line_construct (CongEditorAreaLine *line,
@@ -123,6 +124,7 @@ cong_editor_area_line_construct (CongEditorAreaLine *line,
  * @width_limit:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_line_new (CongEditorWidget3 *editor_widget,
@@ -144,6 +146,7 @@ cong_editor_area_line_new (CongEditorWidget3 *editor_widget,
  * @area_line:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_line_get_width_limit (CongEditorAreaLine *area_line)
@@ -158,6 +161,7 @@ cong_editor_area_line_get_width_limit (CongEditorAreaLine *area_line)
  * @area_line:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_line_get_width_used (CongEditorAreaLine *area_line)
@@ -174,6 +178,7 @@ cong_editor_area_line_get_width_used (CongEditorAreaLine *area_line)
  * @area_line:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_line_get_width_free (CongEditorAreaLine *area_line)

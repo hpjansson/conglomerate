@@ -125,10 +125,11 @@ cong_editor_node_instance_init (CongEditorNode *node)
 /**
  * cong_editor_node_construct:
  * @editor_node:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
@@ -147,6 +148,7 @@ cong_editor_node_construct (CongEditorNode *editor_node,
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
@@ -306,6 +308,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node)
@@ -320,6 +323,7 @@ cong_editor_node_get_widget (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_editor_node_get_document (CongEditorNode *editor_node)
@@ -334,6 +338,7 @@ cong_editor_node_get_document (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node)
@@ -348,6 +353,7 @@ cong_editor_node_get_node (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_editor_node_get_traversal_node (CongEditorNode *editor_node)
@@ -362,6 +368,7 @@ cong_editor_node_get_traversal_node (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
@@ -381,6 +388,7 @@ cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_is_selected (CongEditorNode *editor_node)
@@ -416,6 +424,7 @@ cong_editor_node_private_set_selected (CongEditorNode *editor_node,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
@@ -437,6 +446,7 @@ cong_editor_node_generate_block_area (CongEditorNode *editor_node)
  * @initial_indent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorLineFragments*
 cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
@@ -478,6 +488,7 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node)
@@ -511,6 +522,7 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
@@ -529,6 +541,7 @@ cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_get_prev (CongEditorNode *editor_node)
@@ -568,6 +581,7 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node)
@@ -606,6 +620,7 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
@@ -627,6 +642,7 @@ cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_get_prev (CongEditorNode *editor_node)
@@ -657,6 +673,7 @@ cong_editor_node_get_prev (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_get_next (CongEditorNode *editor_node)
@@ -687,6 +704,7 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_node_get_child_policy (CongEditorNode *editor_node)
@@ -717,6 +735,7 @@ cong_editor_node_set_child_policy (CongEditorNode *editor_node,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_node_get_parents_child_policy (CongEditorNode *editor_node)

@@ -81,6 +81,7 @@ cong_node_modification_set_text_instance_init (CongNodeModificationSetText *node
  * @new_content:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationSetText*
 cong_node_modification_set_text_construct (CongNodeModificationSetText *node_modification_set_text,
@@ -105,6 +106,7 @@ cong_node_modification_set_text_construct (CongNodeModificationSetText *node_mod
  * @new_content:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_set_text_new (CongDocument *doc,

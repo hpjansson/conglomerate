@@ -59,6 +59,7 @@ cong_eel_rectangle_construct (GdkRectangle  *rectangle,
  * @layout_line:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_eel_pango_layout_line_get_text (PangoLayoutLine *layout_line)
@@ -125,6 +126,7 @@ cong_eel_rectangle_contains (const GdkRectangle *rectangle,
  * @b:
  *
  * TODO: Write me
+ * Returns:
  */
 guint32
 cong_eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
@@ -173,6 +175,7 @@ cong_eel_gdk_rgb_to_color_spec (const guint32 color)
  * @option_menu:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkMenuItem* 
 cong_eel_option_menu_get_selected_menu_item(GtkOptionMenu *option_menu)
@@ -247,6 +250,7 @@ split_xmlname(const gchar *xml_name)
  * @xml_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar *
 cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name)
@@ -276,6 +280,7 @@ cong_eel_prettify_xml_name_with_header_capitalisation(const gchar *xml_name)
  * @xml_name:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar *
 cong_eel_prettify_xml_name_with_sentence_capitalisation(const gchar *xml_name)

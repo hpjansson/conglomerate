@@ -116,6 +116,7 @@ cong_editor_area_span_tag_instance_init (CongEditorAreaSpanTag *area_span_tag)
  * @is_at_end:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
@@ -177,6 +178,7 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
  * @is_at_end:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_span_tag_new (CongEditorWidget3 *editor_widget,
@@ -312,7 +314,7 @@ calc_requisition (CongEditorArea *area,
  * @area: CongEditorArea for parent span element
  *
  * Given area allocated for span element, allocate two subareas (its inner_bin and its title).
- * 
+ *
  */
 static void
 allocate_child_space (CongEditorArea *area)

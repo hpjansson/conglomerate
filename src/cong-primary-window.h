@@ -40,16 +40,6 @@ G_BEGIN_DECLS
 CongPrimaryWindow*
 cong_primary_window_new (CongDocument *doc);
 
-/**
- * cong_primary_window_add_doc:
- * @primary_window:
- * @doc:
- * 
- * Adds the #CongDocument @doc to a given window. This function is called from 
- * cong_primary_window_new().
- * 
- * Returns: the window
- */
 
 void
 cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc);

@@ -12,9 +12,11 @@
  * @title:
  * @filename:
  * @parent_window:
- * @cong_action:
+ * @action:
+ * @list_of_filters:
  * 
  * TODO: Write me
+ * Returns:
  */
 
 gchar*

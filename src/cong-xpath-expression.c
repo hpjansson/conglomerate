@@ -98,6 +98,7 @@ cong_xpath_expression_instance_init (CongXPathExpression *node)
  * @xpath_expression_string:
  *
  * TODO: Write me
+ * Returns:
  */
 CongXPathExpression*
 cong_xpath_expression_construct (CongXPathExpression *xpath_expression,
@@ -122,6 +123,7 @@ cong_xpath_expression_construct (CongXPathExpression *xpath_expression,
  * @xpath_expression_string:
  *
  * TODO: Write me
+ * Returns:
  */
 CongXPathExpression*
 cong_xpath_expression_new (CongDocument *doc,
@@ -144,6 +146,7 @@ cong_xpath_expression_new (CongDocument *doc,
  * @xpath_expression:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_xpath_expression_get_document (CongXPathExpression *xpath_expression)
@@ -158,6 +161,7 @@ cong_xpath_expression_get_document (CongXPathExpression *xpath_expression)
  * @xpath_expression:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr
 cong_xpath_expression_get_context_node (CongXPathExpression *xpath_expression)
@@ -172,6 +176,7 @@ cong_xpath_expression_get_context_node (CongXPathExpression *xpath_expression)
  * @xpath_expression:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_xpath_expression_get_string_result (CongXPathExpression *xpath_expression)

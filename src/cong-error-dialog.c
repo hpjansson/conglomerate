@@ -71,6 +71,7 @@ cong_error_dialog_do(GtkDialog* dialog)
  * @suggestions:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog* 
 cong_error_dialog_new(GtkWindow *parent_window,
@@ -124,7 +125,6 @@ cong_error_dialog_new(GtkWindow *parent_window,
 
 /**
  * cong_error_dialog_new_with_convenience:
- *
  * @parent_window: Parent window for dialog.
  * @what_failed: The description of what failed
  * @why_failed: The reasons of failture
@@ -218,6 +218,7 @@ cong_error_dialog_new_with_convenience(GtkWindow *parent_window,
  * @linenum:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_unimplemented_feature(GtkWindow *parent_window,
@@ -249,6 +250,7 @@ cong_error_dialog_new_from_unimplemented_feature(GtkWindow *parent_window,
  * @bugzilla_id:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_unimplemented_feature_with_bugzilla_id(GtkWindow *parent_window,
@@ -298,6 +300,7 @@ static void on_gerror_details(gpointer data)
  * @error:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
@@ -350,6 +353,7 @@ cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
  * @command_line:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *parent_window,
@@ -425,7 +429,10 @@ cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *pa
  * @standard_error:
  * @argv:
  *
- * TODO: Write me
+ * Routine to manufacture an error dialog for when some shell operation fails, when you have access to the stderr output in the form of a string.
+ * argv is a NULL terminated array of strings.
+ *
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_window,

@@ -80,9 +80,10 @@ lighten_component (guchar cur_value)
 
 /**
  * eel_create_spotlight_pixbuf:
- * @src:
+ * @source_pixbuf:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_create_spotlight_pixbuf (GdkPixbuf* src)
@@ -132,11 +133,12 @@ eel_create_spotlight_pixbuf (GdkPixbuf* src)
 
 /**
  * eel_create_darkened_pixbuf:
- * @src:
+ * @source_pixbuf:
  * @saturation:
  * @darken:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_create_darkened_pixbuf (GdkPixbuf *src, int saturation, int darken)
@@ -193,12 +195,13 @@ eel_create_darkened_pixbuf (GdkPixbuf *src, int saturation, int darken)
 /* this routine colorizes the passed-in pixbuf by multiplying each pixel with the passed in color */
 /**
  * eel_create_colorized_pixbuf:
- * @src:
+ * @source_pixbuf:
  * @red_value:
  * @green_value:
  * @blue_value:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_create_colorized_pixbuf (GdkPixbuf *src,
@@ -291,6 +294,7 @@ draw_frame_column (GdkPixbuf *frame_image, int target_height, int source_height,
  * @fill_flag:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset,
@@ -358,6 +362,7 @@ eel_stretch_frame_image (GdkPixbuf *frame_image, int left_offset, int top_offset
  * @bottom_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_embed_image_in_frame (GdkPixbuf *source_image, GdkPixbuf *frame_image, int left_offset, int top_offset, int right_offset, int bottom_offset)
@@ -388,9 +393,10 @@ eel_embed_image_in_frame (GdkPixbuf *source_image, GdkPixbuf *frame_image, int l
    gdkpixmap and mask for the actual dragging */
 /**
  * eel_make_semi_transparent:
- * @src:
+ * @source_pixbuf:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf *
 eel_make_semi_transparent (GdkPixbuf *src)

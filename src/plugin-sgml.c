@@ -198,6 +198,7 @@ sgml_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_sgml_plugin_register(CongPlugin *plugin)
@@ -220,6 +221,7 @@ plugin_sgml_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_sgml_plugin_configure(CongPlugin *plugin)

@@ -135,6 +135,7 @@ cong_selection_end_from_curs (CongSelection *selection,
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongRange*
 cong_selection_get_logical_range (CongSelection *selection)
@@ -149,6 +150,7 @@ cong_selection_get_logical_range (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongRange*
 cong_selection_get_ordered_range (CongSelection *selection)
@@ -166,6 +168,7 @@ cong_selection_get_ordered_range (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongLocation*
 cong_selection_get_logical_start (CongSelection *selection)
@@ -180,6 +183,7 @@ cong_selection_get_logical_start (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongLocation*
 cong_selection_get_logical_end (CongSelection *selection)
@@ -194,6 +198,7 @@ cong_selection_get_logical_end (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongLocation*
 cong_selection_get_ordered_start (CongSelection *selection)
@@ -211,6 +216,7 @@ cong_selection_get_ordered_start (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 CongLocation*
 cong_selection_get_ordered_end (CongSelection *selection)
@@ -335,6 +341,7 @@ cong_selection_claim(CongSelection *selection)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_selection_is_node (CongSelection *selection,
@@ -366,6 +373,7 @@ cong_selection_nullify (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_selection_is_valid (CongSelection *selection)
@@ -386,6 +394,7 @@ cong_selection_is_valid (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC*
 cong_selection_legacy_get_gc_valid (CongSelection *selection)
@@ -398,6 +407,7 @@ cong_selection_legacy_get_gc_valid (CongSelection *selection)
  * @selection:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC*
 cong_selection_legacy_get_gc_invalid (CongSelection *selection)
@@ -420,6 +430,7 @@ update_ordered_selection (CongSelection *selection)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar* 
 cong_selection_get_selected_text (CongDocument *doc)

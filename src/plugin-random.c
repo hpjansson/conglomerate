@@ -671,6 +671,7 @@ factory_action_callback_random(CongServiceDocumentFactory *factory, CongNewFileA
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_random_plugin_register(CongPlugin *plugin)
@@ -694,6 +695,7 @@ plugin_random_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_random_plugin_configure(CongPlugin *plugin)

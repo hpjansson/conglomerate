@@ -65,6 +65,7 @@ manufacture_editor_node_listitem (CongServiceEditorNodeFactory *plugin_editor_no
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_lists_plugin_register(CongPlugin *plugin)
@@ -86,6 +87,7 @@ plugin_lists_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_lists_plugin_configure(CongPlugin *plugin)

@@ -78,6 +78,7 @@ cong_editor_area_flow_holder_instance_init (CongEditorAreaFlowHolder *area_flow_
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_flow_holder_construct (CongEditorAreaFlowHolder *area_flow_holder,
@@ -92,9 +93,10 @@ cong_editor_area_flow_holder_construct (CongEditorAreaFlowHolder *area_flow_hold
 /**
  * cong_editor_area_flow_holder_insert_areas_for_node:
  * @area_flow_holder:
- * @editor_widget:
+ * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_area_flow_holder_insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
@@ -110,7 +112,7 @@ cong_editor_area_flow_holder_insert_areas_for_node (CongEditorAreaFlowHolder *ar
 /**
  * cong_editor_area_flow_holder_remove_areas_for_node:
  * @area_flow_holder:
- * @editor_widget:
+ * @node:
  *
  * TODO: Write me
  */
@@ -126,10 +128,11 @@ cong_editor_area_flow_holder_remove_areas_for_node (CongEditorAreaFlowHolder *ar
 
 /**
  * cong_editor_area_flow_holder_manufacture:
- * @area_flow_holder:
+ * @editor_widget:
  * @flow_type:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaFlowHolder*
 cong_editor_area_flow_holder_manufacture (CongEditorWidget3 *editor_widget,

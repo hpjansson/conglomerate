@@ -83,6 +83,7 @@ cong_node_modification_add_after_instance_init (CongNodeModificationAddAfter *no
  * @older_sibling:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationAddAfter*
 cong_node_modification_add_after_construct (CongNodeModificationAddAfter *node_modification_add_after,
@@ -121,6 +122,7 @@ cong_node_modification_add_after_construct (CongNodeModificationAddAfter *node_m
  * @older_sibling:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_add_after_new (CongDocument *doc,

@@ -50,11 +50,12 @@ cong_plugin_manager_new(void)
 /**
  * cong_plugin_manager_register:
  * @plugin_manager:
- * @plugin_id:
+ * @id:
  * @register_callback:
  * @configure_callback:
  *
  * TODO: Write me
+ * Returns:
  */
 CongPlugin*
 cong_plugin_manager_register (CongPluginManager *plugin_manager,
@@ -249,9 +250,10 @@ cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (
 /**
  * cong_plugin_manager_locate_custom_property_dialog_by_id:
  * @plugin_manager:
- * @service_id:
+ * @plugin_id:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceNodePropertyDialog*
 cong_plugin_manager_locate_custom_property_dialog_by_id (CongPluginManager *plugin_manager, 
@@ -276,9 +278,10 @@ cong_plugin_manager_locate_custom_property_dialog_by_id (CongPluginManager *plug
 /**
  * cong_plugin_manager_locate_editor_node_factory_by_id:
  * @plugin_manager:
- * @service_id:
+ * @plugin_id:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceEditorNodeFactory*
 cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_manager,

@@ -123,6 +123,7 @@ cong_editor_area_flow_holder_inlines_instance_init (CongEditorAreaFlowHolderInli
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines,
@@ -154,6 +155,7 @@ cong_editor_area_flow_holder_inlines_construct (CongEditorAreaFlowHolderInlines 
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_flow_holder_inlines_new (CongEditorWidget3 *editor_widget)
@@ -172,6 +174,7 @@ cong_editor_area_flow_holder_inlines_new (CongEditorWidget3 *editor_widget)
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaLine*
 cong_editor_area_flow_holder_inlines_get_current_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
@@ -184,6 +187,7 @@ cong_editor_area_flow_holder_inlines_get_current_line (CongEditorAreaFlowHolderI
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_flow_holder_inlines_get_line_width (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
@@ -196,6 +200,7 @@ cong_editor_area_flow_holder_inlines_get_line_width (CongEditorAreaFlowHolderInl
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_flow_holder_inlines_get_current_indent (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
@@ -230,6 +235,7 @@ cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInli
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaLine*
 cong_editor_area_flow_holder_inlines_insert_line (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
@@ -305,6 +311,7 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_area_flow_holder_inlines_get_first_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
@@ -323,6 +330,7 @@ cong_editor_area_flow_holder_inlines_get_first_node (CongEditorAreaFlowHolderInl
  * @area_flow_holder_inlines:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_area_flow_holder_inlines_get_final_node (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)

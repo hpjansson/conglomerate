@@ -138,6 +138,7 @@ static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_save_dispspec_plugin_register(CongPlugin *plugin)
@@ -176,6 +177,7 @@ plugin_save_dispspec_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_save_dispspec_plugin_configure(CongPlugin *plugin)

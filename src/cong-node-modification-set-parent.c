@@ -79,9 +79,10 @@ cong_node_modification_set_parent_instance_init (CongNodeModificationSetParent *
  * @node_modification_set_parent:
  * @doc:
  * @node:
- * @new_parent:
+ * @adoptive_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationSetParent*
 cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node_modification_set_parent,
@@ -112,9 +113,10 @@ cong_node_modification_set_parent_construct (CongNodeModificationSetParent *node
  * cong_node_modification_set_parent_new:
  * @doc:
  * @node:
- * @new_parent:
+ * @adoptive_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_set_parent_new (CongDocument *doc,

@@ -213,6 +213,7 @@ cong_editor_area_instance_init (CongEditorArea *area)
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_construct (CongEditorArea *area,
@@ -242,6 +243,7 @@ cong_editor_area_construct (CongEditorArea *area,
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorWidget3*
 cong_editor_area_get_widget (CongEditorArea *area)
@@ -256,6 +258,7 @@ cong_editor_area_get_widget (CongEditorArea *area)
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_editor_area_get_document (CongEditorArea *area)
@@ -270,6 +273,7 @@ cong_editor_area_get_document (CongEditorArea *area)
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_editor_area_is_hidden (CongEditorArea *area)
@@ -305,9 +309,10 @@ cong_editor_area_hide (CongEditorArea *area)
 
 /**
  * cong_editor_area_get_state:
- * @area:
+ * @editor_area:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkStateType
 cong_editor_area_get_state (CongEditorArea *area)
@@ -319,7 +324,7 @@ cong_editor_area_get_state (CongEditorArea *area)
 
 /**
  * cong_editor_area_set_state:
- * @area:
+ * @editor_area:
  * @state:
  *
  * TODO: Write me
@@ -343,6 +348,7 @@ cong_editor_area_set_state (CongEditorArea *area,
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkCursor*
 cong_editor_area_get_cursor (CongEditorArea *area)
@@ -385,6 +391,7 @@ cong_editor_area_set_cursor (CongEditorArea *area,
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area)
@@ -402,6 +409,7 @@ cong_editor_area_get_window_coords (CongEditorArea *area)
  * @width_hint:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_editor_area_get_requisition (CongEditorArea *area,
@@ -454,6 +462,7 @@ cong_editor_area_get_requisition (CongEditorArea *area,
  * @width_hint:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_get_requisition_width (CongEditorArea *area,
@@ -471,6 +480,7 @@ cong_editor_area_get_requisition_width (CongEditorArea *area,
  * @width_hint:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_get_requisition_height (CongEditorArea *area,
@@ -487,6 +497,7 @@ cong_editor_area_get_requisition_height (CongEditorArea *area,
  * @orientation:
  *
  * TODO: Write me
+ * Returns:
  */
 gint
 cong_editor_area_get_cached_requisition (CongEditorArea *area,
@@ -582,6 +593,7 @@ cong_editor_area_debug_render_state (CongEditorArea *area)
  * @area:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_get_parent (CongEditorArea *area)
@@ -663,6 +675,7 @@ cong_editor_area_recursive_render (CongEditorArea *area,
  * @event:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_on_button_press (CongEditorArea *editor_area, 
@@ -687,6 +700,7 @@ cong_editor_area_on_button_press (CongEditorArea *editor_area,
  * @event:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_on_motion_notify (CongEditorArea *editor_area, 
@@ -711,6 +725,7 @@ cong_editor_area_on_motion_notify (CongEditorArea *editor_area,
  * @event:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_on_key_press (CongEditorArea *editor_area, 
@@ -736,6 +751,7 @@ cong_editor_area_on_key_press (CongEditorArea *editor_area,
  * @width_hint:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_editor_area_calc_requisition (CongEditorArea *editor_area, 
@@ -874,6 +890,7 @@ cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area,
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_for_all (CongEditorArea *editor_area, 
@@ -961,6 +978,7 @@ cong_editor_area_recurse (CongEditorArea *editor_area,
  * @y:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_covers_xy (CongEditorArea *editor_area, 
@@ -996,6 +1014,7 @@ static gboolean is_area_at_xy (CongEditorArea *editor_area,
  * @y:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_get_immediate_child_at (CongEditorArea *area,
@@ -1019,6 +1038,7 @@ cong_editor_area_get_immediate_child_at (CongEditorArea *area,
  * @y:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_get_deepest_child_at (CongEditorArea *area,
@@ -1056,6 +1076,7 @@ cong_editor_area_get_deepest_child_at (CongEditorArea *area,
  * @editor_area:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkWindow*
 cong_editor_area_get_gdk_window(CongEditorArea *editor_area)

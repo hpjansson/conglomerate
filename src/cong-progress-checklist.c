@@ -122,6 +122,7 @@ static void refresh_stages(CongProgressChecklistDetails *progress_checklist_deta
  * cong_progress_checklist_new:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_progress_checklist_new(void)
@@ -220,6 +221,7 @@ cong_progress_checklist_complete_stage(CongProgressChecklist *progress_checklist
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_progress_checklist_dialog_new(const gchar *title,
@@ -252,6 +254,7 @@ cong_progress_checklist_dialog_new(const gchar *title,
  * @progress_checklist_dialog:
  *
  * TODO: Write me
+ * Returns:
  */
 CongProgressChecklist *
 cong_progress_checklist_dialog_get_progress_checklist(CongProgressChecklistDialog *progress_checklist_dialog)

@@ -259,6 +259,7 @@ factory_action_callback_arbitrary(CongServiceDocumentFactory *factory, CongNewFi
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_arbitrary_plugin_register (CongPlugin *plugin)
@@ -283,6 +284,7 @@ plugin_arbitrary_plugin_register (CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_arbitrary_plugin_configure (CongPlugin *plugin)

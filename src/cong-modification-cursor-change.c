@@ -82,6 +82,7 @@ cong_modification_cursor_change_instance_init (CongModificationCursorChange *nod
  * @new_location:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModificationCursorChange*
 cong_modification_cursor_change_construct (CongModificationCursorChange *modification_cursor_change,
@@ -108,6 +109,7 @@ cong_modification_cursor_change_construct (CongModificationCursorChange *modific
  * @new_location:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_modification_cursor_change_new (CongDocument *doc,

@@ -132,6 +132,7 @@ cong_font_get_pango_description(CongFont *font)
  * @text: a string
  * @x: a #gint
  * @y: a #gint
+ * @y_pos:
  *
  * TODO: Write me
  */

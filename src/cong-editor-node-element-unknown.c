@@ -62,10 +62,11 @@ cong_editor_node_element_unknown_instance_init (CongEditorNodeElementUnknown *no
 /**
  * cong_editor_node_element_unknown_construct:
  * @editor_node_element_unknown:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementUnknown*
 cong_editor_node_element_unknown_construct (CongEditorNodeElementUnknown *editor_node_element_unknown,
@@ -85,6 +86,7 @@ cong_editor_node_element_unknown_construct (CongEditorNodeElementUnknown *editor
  * @traversal_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
@@ -105,6 +107,7 @@ cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
  * @editor_node:
  * 
  * TODO: Write me
+ * Returns:
  */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)

@@ -26,6 +26,7 @@ struct FoPrintContext
  * @gpc:
  *
  * TODO: Write me
+ * Returns:
  */
 FoPrintContext *
 fo_print_context_new_from_gnome_print(GnomePrintContext *gpc)

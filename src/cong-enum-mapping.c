@@ -33,6 +33,7 @@
  * @default_value:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_enum_mapping_lookup (const CongEnumMapping *enum_mapping,
@@ -65,6 +66,7 @@ cong_enum_mapping_lookup (const CongEnumMapping *enum_mapping,
  * @value:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_enum_mapping_lookup_string (const CongEnumMapping *enum_mapping,

@@ -26,6 +26,7 @@
  * @file_size:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window, 

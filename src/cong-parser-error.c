@@ -201,6 +201,7 @@ enum {
  * @parser_result:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog *
 cong_parser_result_dialog_new(CongParserResult *parser_result)
@@ -384,6 +385,7 @@ on_parser_error_details(gpointer data)
  * @parser_result:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkDialog*
 cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_uri, 
@@ -420,6 +422,7 @@ cong_error_dialog_new_file_open_failed_from_parser_error (const gchar* string_ur
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr 
 cong_ui_parse_buffer (const char* buffer,
@@ -482,6 +485,7 @@ cong_ui_parse_buffer (const char* buffer,
  * @parser_result:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlParserCtxtPtr
 cong_parse_from_filename (const gchar* string_uri,
@@ -520,6 +524,7 @@ cong_parse_from_filename (const gchar* string_uri,
  * @parser_result:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlParserCtxtPtr
 cong_parse_from_memory (const char* buffer, 

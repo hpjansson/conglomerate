@@ -41,7 +41,6 @@ struct CongFindDialogData
 
 /**
  * cong_document_find:
- *
  * @doc: the #CongDocument for which the find dialog is to be run
  *
  * Presents the Find dialog for this #CongDocument
@@ -52,7 +51,6 @@ cong_document_find (CongDocument *doc);
 
 /**
  * cong_document_find_next:
- *
  * @doc: the #CongDocument
  *
  * Perform an "Edit->Find Next" for this #CongDocument
@@ -63,7 +61,6 @@ cong_document_find_next (CongDocument *doc);
 
 /**
  * cong_document_find_prev:
- *
  * @doc: the #CongDocument
  *
  * Perform an "Edit->Find Next" for this #CongDocument
@@ -74,7 +71,6 @@ cong_document_find_prev (CongDocument *doc);
 
 /**
  * cong_document_replace:
- *
  * @doc: the #CongDocument for which the dialog is to be run
  *
  * Presents the Replace dialog for this #CongDocument

@@ -61,6 +61,7 @@ cong_range_nullify (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_is_valid (CongRange *range)
@@ -91,6 +92,7 @@ cong_range_is_valid (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_range_generate_source (CongRange *range)
@@ -151,6 +153,7 @@ cong_range_generate_source (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_exists (CongRange *range)
@@ -169,6 +172,7 @@ cong_range_exists (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_is_empty (CongRange *range)
@@ -191,6 +195,7 @@ cong_range_is_empty (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_is_ordered (CongRange *range)
@@ -221,6 +226,7 @@ cong_range_is_ordered (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_can_be_cut (CongRange *range)
@@ -255,6 +261,7 @@ cong_range_can_be_cut (CongRange *range)
  * @range:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_can_be_copied (CongRange *range)
@@ -317,6 +324,7 @@ cong_range_make_ordered (CongRange *range)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_range_is_node (CongRange *range,

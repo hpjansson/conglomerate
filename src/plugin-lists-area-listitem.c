@@ -65,6 +65,7 @@ cong_editor_area_listitem_instance_init (CongEditorAreaListitem *area_listitem)
  * @label:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
@@ -90,6 +91,7 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
  * @label:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_listitem_new (CongEditorWidget3 *editor_widget,

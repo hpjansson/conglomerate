@@ -116,6 +116,7 @@ cong_editor_area_composer_instance_init (CongEditorAreaComposer *area_composer)
  * @spacing:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_composer_construct (CongEditorAreaComposer *area_composer,
@@ -139,6 +140,7 @@ cong_editor_area_composer_construct (CongEditorAreaComposer *area_composer,
  * @spacing:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_composer_new (CongEditorWidget3 *editor_widget,
@@ -266,7 +268,7 @@ find_area (gconstpointer *a,
  * cong_editor_area_composer_pack_after:
  * @area_composer:
  * @new_child:
- * @ooh_relative_to:
+ * @relative_to:
  * @expand:
  * @fill:
  * @extra_padding:

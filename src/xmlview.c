@@ -58,6 +58,7 @@ not_eel_gdk_rgb_to_color_spec (const guint32 color)
  * @col:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 get_col_string(const GdkColor* col)

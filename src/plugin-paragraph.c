@@ -56,6 +56,7 @@ manufacture_editor_node_paragraph (CongServiceEditorNodeFactory *plugin_editor_n
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_paragraph_plugin_register(CongPlugin *plugin)
@@ -77,6 +78,7 @@ plugin_paragraph_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_paragraph_plugin_configure(CongPlugin *plugin)

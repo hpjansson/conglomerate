@@ -204,6 +204,7 @@ dtd_to_examplotron_importer_action_callback(CongServiceImporter *importer, const
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_dtd_plugin_register(CongPlugin *plugin)
@@ -259,6 +260,7 @@ plugin_dtd_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_dtd_plugin_configure(CongPlugin *plugin)

@@ -79,11 +79,13 @@ get_text_span_at_original_byte_offset (CongTextCache *text_cache,
 /* Exported function definitions: */
 /**
  * cong_text_cache_new:
- * @strip_whitespace:
- * @string:
- * @attr_list:
+ * @strip_whitespace:  Should whitespace be stripped ("normalised") if TRUE, or preserved if FALSE
+ * @string: the UTF8 string, must be non-NULL
+ * @attr_list:  Pango attributes for the string; can be NULL if you don't care about them
  *
- * TODO: Write me
+ * Create a new #CongTextCache.
+ *
+ * Returns: the new #CongTextCache
  */
 CongTextCache*
 cong_text_cache_new (gboolean strip_whitespace,
@@ -130,9 +132,11 @@ cong_text_cache_free (CongTextCache* text_cache)
 
 /**
  * cong_text_cache_get_output_text:
- * @text_cache:
+ * @text_cache: the text cache from which to get the result
  *
- * TODO: Write me
+ * Get the text from the cache, which will have had the appropriate operation performed on it.
+ *
+ * Returns: the result of the operation as a UTF-8 string (owned by the #CongTextCache)
  */
 const gchar*
 cong_text_cache_get_output_text (CongTextCache* text_cache)
@@ -151,7 +155,9 @@ cong_text_cache_get_output_text (CongTextCache* text_cache)
  * cong_text_cache_get_output_attributes:
  * @text_cache:
  *
- * TODO: Write me
+ * Get the text attributes from the cache, which will have had the appropriate operation performed on it.
+ *
+ * Returns: the attributes, which you must unref when you are finished.
  */
 PangoAttrList*
 cong_text_cache_get_output_attributes (CongTextCache* text_cache)
@@ -226,6 +232,7 @@ cong_text_cache_set_input_attributes (CongTextCache* text_cache,
  * @original_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_cache,
@@ -269,6 +276,7 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
  * @stripped_byte_offset:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_cache,

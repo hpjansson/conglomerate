@@ -1201,6 +1201,7 @@ cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget*
 cong_node_properties_dialog_new (CongDocument *doc, 

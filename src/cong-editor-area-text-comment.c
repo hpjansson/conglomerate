@@ -96,6 +96,7 @@ cong_editor_area_text_comment_instance_init (CongEditorAreaTextComment *area_tex
  * @use_markup:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_comment_construct (CongEditorAreaTextComment *area_text_comment,
@@ -140,6 +141,7 @@ cong_editor_area_text_comment_construct (CongEditorAreaTextComment *area_text_co
  * @use_markup:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_comment_new (CongEditorWidget3 *editor_widget,

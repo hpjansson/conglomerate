@@ -31,6 +31,7 @@
  * @view:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_view_get_document(CongView *view)
@@ -45,6 +46,7 @@ cong_view_get_document(CongView *view)
  * @view:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec*
 cong_view_get_dispspec(CongView *view)

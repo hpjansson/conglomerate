@@ -70,6 +70,7 @@ cong_modification_construct (CongModification *modification,
  * @modification:
  * 
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_modification_get_document (CongModification *modification)

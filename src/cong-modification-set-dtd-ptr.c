@@ -81,6 +81,7 @@ cong_modification_set_dtd_ptr_instance_init (CongModificationSetDtdPtr *node)
  * @dtd_ptr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModificationSetDtdPtr*
 cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification_set_dtd_ptr,
@@ -106,6 +107,7 @@ cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification
  * @dtd_ptr:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_modification_set_dtd_ptr_new (CongDocument *doc,

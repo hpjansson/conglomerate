@@ -63,10 +63,11 @@ cong_editor_node_dtd_instance_init (CongEditorNodeDtd *node_dtd)
 /**
  * cong_editor_node_dtd_construct:
  * @editor_node_dtd:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeDtd*
 cong_editor_node_dtd_construct (CongEditorNodeDtd *editor_node_dtd,
@@ -85,6 +86,7 @@ cong_editor_node_dtd_construct (CongEditorNodeDtd *editor_node_dtd,
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_dtd_new (CongEditorWidget3 *widget,
@@ -104,6 +106,7 @@ cong_editor_node_dtd_new (CongEditorWidget3 *widget,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)

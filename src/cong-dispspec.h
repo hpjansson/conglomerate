@@ -153,7 +153,7 @@ GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
 #endif
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
 #endif
-const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
+const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr node);
 
 #if 1
 gboolean cong_dispspec_element_structural(CongDispspec *ds, const gchar *ns_uri, const gchar *local_name);

@@ -124,6 +124,7 @@ action_callback_demote (CongServiceNodeTool *tool,
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_html_plugin_register (CongPlugin *plugin)
@@ -175,6 +176,7 @@ plugin_html_plugin_register (CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_html_plugin_configure (CongPlugin *plugin)

@@ -97,30 +97,10 @@ cong_location_parent(const CongLocation *loc);
 void
 cong_location_copy(CongLocation *dst, const CongLocation *src);
 
-/**
- * cong_location_calc_prev_char:
- * @input_loc: the current #CongLocation
- * @dispspec: the #CongDispspec in use
- * @output_loc: the #CongLocation that is computed
- *
- * Calculates a new #CongLocation when the left key is pressed
- * 
- * Returns: %TRUE if succeeded
- */
 gboolean
 cong_location_calc_prev_char(const CongLocation *input_loc, 
 			     CongDispspec *dispspec,
 			     CongLocation *output_loc);
-/**
- * cong_location_calc_next_char:
- * @input_loc: the current #CongLocation
- * @dispspec: the #CongDispspec in use
- * @output_loc: the #CongLocation that is computed
- *
- * Calculates a new #CongLocation when the right key is pressed
- * 
- * Returns: %TRUE if succeeded
- */
 gboolean
 cong_location_calc_next_char(const CongLocation *input_loc,
 			     CongDispspec *dispspec,

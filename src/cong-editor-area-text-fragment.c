@@ -92,6 +92,7 @@ cong_editor_area_text_fragment_instance_init (CongEditorAreaTextFragment *area_t
  * @baseline:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_fragment,
@@ -129,6 +130,7 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
  * @baseline:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
@@ -155,6 +157,7 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
  * @area_text_fragment:
  *
  * TODO: Write me
+ * Returns:
  */
 PangoLayoutLine*
 cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_text_fragment)
@@ -174,6 +177,7 @@ cong_editor_area_text_get_pango_layout_line (CongEditorAreaTextFragment *area_te
  * @area_text_fragment:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_text_fragment_is_final_line (CongEditorAreaTextFragment *area_text_fragment)
@@ -191,6 +195,7 @@ cong_editor_area_text_fragment_is_final_line (CongEditorAreaTextFragment *area_t
  * @trailing:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 cong_editor_area_text_fragment_x_to_index (CongEditorAreaTextFragment *area_text_fragment,

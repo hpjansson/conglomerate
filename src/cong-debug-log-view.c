@@ -523,6 +523,7 @@ make_window_etc(void)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_debug_message_log_view_new(CongDocument *doc)
@@ -774,6 +775,7 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_debug_signal_log_view_new(CongDocument *doc)

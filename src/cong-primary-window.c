@@ -118,6 +118,7 @@ struct CongPrimaryWindow
  * cong_gui_get_a_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_gui_get_a_window(void)
@@ -143,6 +144,7 @@ cong_gui_get_a_window(void)
  * @gui:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_gui_get_window(struct cong_gui* gui)
@@ -157,6 +159,7 @@ cong_gui_get_window(struct cong_gui* gui)
  * @gui:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_gui_get_popup(struct cong_gui* gui)
@@ -186,6 +189,7 @@ cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup)
  * @gui:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_gui_get_button_submit(struct cong_gui* gui)
@@ -200,6 +204,7 @@ cong_gui_get_button_submit(struct cong_gui* gui)
  * @gui:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkTreeStore* 
 cong_gui_get_tree_store(struct cong_gui* gui)
@@ -214,6 +219,7 @@ cong_gui_get_tree_store(struct cong_gui* gui)
  * @gui:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_gui_get_root(struct cong_gui* gui)
@@ -259,6 +265,7 @@ extern char *icon_submit[];
  * @xpm:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkPixmap* 
 cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
@@ -283,6 +290,7 @@ cong_primary_window_create_pixmap(CongPrimaryWindow *primary_window, char** xpm)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_undo(GtkWidget *w, gpointer data)
@@ -301,6 +309,7 @@ toolbar_callback_undo(GtkWidget *w, gpointer data)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_redo(GtkWidget *w, gpointer data)
@@ -319,6 +328,7 @@ toolbar_callback_redo(GtkWidget *w, gpointer data)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_cut(GtkWidget *w, gpointer data)
@@ -337,6 +347,7 @@ toolbar_callback_cut(GtkWidget *w, gpointer data)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_copy(GtkWidget *w, gpointer data)
@@ -355,6 +366,7 @@ toolbar_callback_copy(GtkWidget *w, gpointer data)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 toolbar_callback_paste(GtkWidget *w, gpointer data)
@@ -524,6 +536,7 @@ cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
  * @primary_window:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_primary_window_can_close(CongPrimaryWindow *primary_window)
@@ -582,6 +595,7 @@ cong_primary_window_can_close(CongPrimaryWindow *primary_window)
  * @data:
  *
  * TODO: Write me
+ * Returns:
  */
 gint 
 delete_event( GtkWidget *widget,
@@ -699,8 +713,10 @@ add_tree_layout_for_doc (CongPrimaryWindow *primary_window,
  * cong_primary_window_add_doc:
  * @primary_window:
  * @doc:
+ * 
+ * Adds the #CongDocument @doc to a given window. This function is called from 
+ * cong_primary_window_new().
  *
- * TODO: Write me
  */
 void
 cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc)
@@ -872,6 +888,7 @@ cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongPrimaryWindow *
 cong_primary_window_new(CongDocument *doc)
@@ -935,6 +952,7 @@ cong_primary_window_free(CongPrimaryWindow *primary_window)
  * @primary_window:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument *
 cong_primary_window_get_document(CongPrimaryWindow *primary_window)
@@ -985,6 +1003,7 @@ cong_primary_window_update_title(CongPrimaryWindow *primary_window)
  * @primary_window:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWindow *
 cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window)

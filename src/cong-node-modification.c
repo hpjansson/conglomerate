@@ -58,6 +58,7 @@ cong_node_modification_instance_init (CongNodeModification *node)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModification*
 cong_node_modification_construct (CongNodeModification *node_modification,
@@ -80,6 +81,7 @@ cong_node_modification_construct (CongNodeModification *node_modification,
  * @node_modification:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodePtr 
 cong_node_modification_get_node (CongNodeModification *node_modification)

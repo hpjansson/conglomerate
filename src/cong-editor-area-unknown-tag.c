@@ -100,6 +100,7 @@ cong_ui_get_colour_string(CongNodeType type);
  * @tagname:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_tag,
@@ -179,6 +180,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
  * @tagname:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,

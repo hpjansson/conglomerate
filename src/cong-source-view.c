@@ -316,6 +316,17 @@ static void on_document_set_dtd_ptr (CongView *view,
 	}
 }
 
+/* 
+ * cong_util_make_source_view:
+ * @source_mime_type:
+ * @output_text_view:
+ *
+ * Make a scrollable source view for a programming language, with syntax highlighting if available.
+ * The view is uneditable.
+ * The widget is already "shown".
+ *
+ * Returns:
+ */
 GtkWidget*
 cong_util_make_source_view (const gchar *source_mime_type,
 			    GtkTextView **output_text_view)

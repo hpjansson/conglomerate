@@ -39,6 +39,7 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, CongElementType t
  * @x:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar *
 xml_frag_data_nice(CongNodePtr x)
@@ -117,6 +118,7 @@ xml_fetch_clean_data(CongNodePtr x)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GList* 
 xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node) 
@@ -188,6 +190,7 @@ add_span_callback (CongDispspec *ds,
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GList*
 xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node) 
@@ -920,6 +923,7 @@ xml_get_elements_from_dispspec (CongDispspec* ds,
  * @value:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlAttrPtr
 xmlNewProp_NUMBER (xmlNodePtr node,

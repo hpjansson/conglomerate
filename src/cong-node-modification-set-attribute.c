@@ -82,6 +82,7 @@ cong_node_modification_set_attribute_instance_init (CongNodeModificationSetAttri
  * @value:
  *
  * TODO: Write me
+ * Returns:
  */
 CongNodeModificationSetAttribute*
 cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute *node_modification_set_attribute,
@@ -120,6 +121,7 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
  * @value:
  *
  * TODO: Write me
+ * Returns:
  */
 CongModification*
 cong_node_modification_set_attribute_new (CongDocument *doc,

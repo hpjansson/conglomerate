@@ -185,6 +185,7 @@ cong_document_traversal_instance_init (CongDocumentTraversal *doc)
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocumentTraversal*
 cong_document_traversal_construct (CongDocumentTraversal *doc_traversal,
@@ -217,6 +218,7 @@ cong_document_traversal_construct (CongDocumentTraversal *doc_traversal,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocumentTraversal*
 cong_document_traversal_new (CongDocument *doc)
@@ -230,6 +232,7 @@ cong_document_traversal_new (CongDocument *doc)
  * @doc_traversal:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument*
 cong_document_traversal_get_document(CongDocumentTraversal *doc_traversal)
@@ -244,6 +247,7 @@ cong_document_traversal_get_document(CongDocumentTraversal *doc_traversal)
  * @doc_traversal:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_document_traversal_get_root_traversal_node (CongDocumentTraversal *doc_traversal)
@@ -296,6 +300,7 @@ cong_document_traversal_for_each_traversal_node (CongDocumentTraversal *doc_trav
  * @traversal_parent:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_document_traversal_get_traversal_node (CongDocumentTraversal *doc_traversal,
@@ -338,6 +343,7 @@ foreach_cb_store (gpointer key,
  * @xml_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongTraversalNode*
 cong_document_traversal_get_a_traversal_node (CongDocumentTraversal *doc_traversal,
@@ -373,6 +379,7 @@ cong_document_traversal_get_a_traversal_node (CongDocumentTraversal *doc_travers
  * @xml_node:
  *
  * TODO: Write me
+ * Returns:
  */
 NodeMapping*
 cong_node_mapping_new (CongNodePtr xml_node)
@@ -782,6 +789,7 @@ dispose (GObject *object)
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean
 should_have_traversal_node (CongNodePtr node)

@@ -82,10 +82,11 @@ cong_editor_node_element_span_instance_init (CongEditorNodeElementSpan *node_ele
 /**
  * cong_editor_node_element_span_construct:
  * @editor_node_element_span:
- * @editor_widget:
+ * @widget:
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElementSpan*
 cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_element_span,
@@ -105,6 +106,7 @@ cong_editor_node_element_span_construct (CongEditorNodeElementSpan *editor_node_
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,

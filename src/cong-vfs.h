@@ -47,16 +47,6 @@ cong_vfs_new_buffer_from_file (const char* filename,
 			       char** buffer, 
 			       GnomeVFSFileSize* size);
 
-/**
- * cong_vfs_new_buffer_from_uri
- * @uri:
- * @buffer:
- * @size:
- * 
- * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
- * 
- * Returns:
-*/
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri (GnomeVFSURI *vfs_uri, 
 			      char** buffer, 

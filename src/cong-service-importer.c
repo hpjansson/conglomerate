@@ -40,11 +40,12 @@ CONG_DEFINE_CLASS (CongServiceImporter, cong_service_importer, CONG_SERVICE_IMPO
  * @name:
  * @description:
  * @id:
- * @mime_filter:
+ * @filter_factory_callback:
  * @action_callback:
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceImporter*
 cong_service_importer_construct (CongServiceImporter *importer,
@@ -80,6 +81,7 @@ cong_service_importer_construct (CongServiceImporter *importer,
  * @importer: the importer
  *
  * Run this importer's callback to create a GtkFileFilter for the File->Importer dialog
+ * Returns:
  */
 GtkFileFilter*
 cong_importer_make_file_filter (CongServiceImporter *importer)

@@ -346,6 +346,7 @@ factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNewFile
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_tests_plugin_register(CongPlugin *plugin)
@@ -373,6 +374,7 @@ plugin_tests_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_tests_plugin_configure(CongPlugin *plugin)

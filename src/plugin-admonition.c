@@ -65,6 +65,7 @@ manufacture_editor_node_admonition (CongServiceEditorNodeFactory *plugin_editor_
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_admonition_plugin_register(CongPlugin *plugin)
@@ -86,6 +87,7 @@ plugin_admonition_plugin_register(CongPlugin *plugin)
  * @plugin:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 plugin_admonition_plugin_configure(CongPlugin *plugin)

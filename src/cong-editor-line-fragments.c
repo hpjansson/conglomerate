@@ -74,6 +74,7 @@ cong_editor_line_fragments_new (void)
  * @line_fragments:
  *
  * TODO: Write me
+ * Returns:
  */
 GList*
 cong_editor_line_fragments_get_area_list (CongEditorLineFragments *line_fragments)

@@ -83,6 +83,7 @@ cong_editor_area_pixbuf_instance_init (CongEditorAreaPixbuf *area_pixbuf)
  * @pixbuf:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_pixbuf_construct (CongEditorAreaPixbuf *area_pixbuf,
@@ -109,6 +110,7 @@ cong_editor_area_pixbuf_construct (CongEditorAreaPixbuf *area_pixbuf,
  * @pixbuf:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_pixbuf_new (CongEditorWidget3 *editor_widget,
@@ -160,6 +162,7 @@ calc_requisition (CongEditorArea *area,
  * @area_pixbuf:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf*
 get_pixbuf (CongEditorAreaPixbuf *area_pixbuf)
@@ -181,6 +184,7 @@ get_pixbuf (CongEditorAreaPixbuf *area_pixbuf)
  * @state:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkPixbuf*
 generate_pixbuf_for_state (GdkPixbuf *normal_pixbuf,

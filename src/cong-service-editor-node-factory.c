@@ -44,6 +44,7 @@ CONG_DEFINE_CLASS (CongServiceEditorNodeFactory, cong_service_editor_node_factor
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceEditorNodeFactory*
 cong_service_editor_node_factory_construct (CongServiceEditorNodeFactory *editor_node_factory,
@@ -71,11 +72,12 @@ cong_service_editor_node_factory_construct (CongServiceEditorNodeFactory *editor
 
 /**
  * cong_plugin_editor_node_factory_invoke:
- * @service_editor_node_factory:
+ * @plugin_editor_node_factory:
  * @editor_widget: 
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongServiceEditorNodeFactory *service_editor_node_factory,

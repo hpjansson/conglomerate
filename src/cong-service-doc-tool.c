@@ -47,6 +47,7 @@ CONG_DEFINE_CLASS (CongServiceDocTool, cong_service_doc_tool, CONG_SERVICE_DOC_T
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceDocTool*
 cong_service_doc_tool_construct (CongServiceDocTool *tool,
@@ -82,10 +83,11 @@ cong_service_doc_tool_construct (CongServiceDocTool *tool,
 
 /**
  * cong_doc_tool_supports_document:
- * @tool:
+ * @doc_tool:
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 gboolean 
 cong_doc_tool_supports_document (CongServiceDocTool *tool, 
@@ -103,7 +105,7 @@ cong_doc_tool_supports_document (CongServiceDocTool *tool,
 
 /**
  * cong_doc_tool_invoke:
- * @tool:
+ * @doc_tool:
  * @primary_window:
  *
  * TODO: Write me

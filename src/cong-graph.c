@@ -38,7 +38,7 @@ cong_dependency_node_new_from_file(GnomeVFSURI *uri)
 /**
  * construct_dependency_node_from_file:
  * @node:
- * @klass
+ * @klass:
  * @uri:
  * 
  * TODO: Write me

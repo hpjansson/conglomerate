@@ -309,6 +309,7 @@ cong_eel_disconnect_all_with_data (gpointer instance,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorWidget3*
 cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
@@ -432,6 +433,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
  * @doc:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget* 
 cong_editor_widget3_new(CongDocument *doc)
@@ -448,6 +450,7 @@ cong_editor_widget3_new(CongDocument *doc)
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDocument *
 cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
@@ -462,6 +465,7 @@ cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongDispspec *
 cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
@@ -503,6 +507,7 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
  * @traversal_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *editor_widget,
@@ -545,7 +550,7 @@ for_each_editor_node_cb (CongDocumentTraversal *doc_traversal,
 
 /**
  * cong_editor_widget3_for_each_editor_node:
- * @editor_widget:
+ * @widget:
  * @xml_node:
  * @editor_node_callback:
  * @user_data:
@@ -577,9 +582,10 @@ cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *editor_widget,
 /**
  * cong_editor_widget3_get_an_editor_node:
  * @editor_widget:
- * @xml_node:
+ * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorNode*
 cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
@@ -606,6 +612,7 @@ cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_widget3_get_prehighlight_editor_area (CongEditorWidget3 *editor_widget)
@@ -668,6 +675,7 @@ cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widg
  * @editor_widget:
  *
  * TODO: Write me
+ * Returns:
  */
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
@@ -684,6 +692,7 @@ cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
  * @y:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
@@ -700,6 +709,7 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
  * @flow_type:
  *
  * TODO: Write me
+ * Returns:
  */
 const gchar*
 cong_flow_type_get_debug_string(CongFlowType flow_type)
@@ -1811,6 +1821,7 @@ cong_editor_widget3_get_child_policy_for_editor_node (CongEditorWidget3 *widget,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorChildPolicy*
 cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 *widget,
@@ -1835,6 +1846,7 @@ cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
@@ -1853,6 +1865,7 @@ cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaFlowHolder*
 cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *widget,
@@ -1871,6 +1884,7 @@ cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *w
  * @editor_node:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorAreaFlowHolder*
 cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *widget,

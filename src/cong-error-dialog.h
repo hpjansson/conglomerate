@@ -108,19 +108,6 @@ cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *pa
 								   const gchar *standard_error,
 								   const gchar *command_line);
 
-/**
- * cong_error_dialog_new_from_shell_command_failure_with_argv
- * @parent_window:
- * @what_failed:
- * @exit_status:
- * @standard_error:
- * @argv
- * 
- * Routine to manufacture an error dialog for when some shell operation fails, when you have access to the stderr output in the form of a string.
- * argv is a NULL terminated array of strings.
- * 
- * Returns: 
- */
 GtkDialog*
 cong_error_dialog_new_from_shell_command_failure_with_argv(GtkWindow *parent_window,
 							   const gchar *what_failed,
@@ -185,19 +172,6 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 					     GnomeVFSResult vfs_result, 
 					     const GnomeVFSFileSize* file_size);
 
-/**
- * cong_error_dialog_new_from_file_operation_failure
- * @parent_window:
- * @what_failed:
- * @string_uri: the URI from which you tried to access file.
- * @vfs_result:
- * @technical_details:
- * 
- * Routine to manufacture an error dialog for when some file operation fails that doesn't fall into one of the categories above.
- * Displays what operation has failed, with a convenience button to get more techical information.
- * 
- * Returns:
- */
 GtkDialog*
 cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 						  const gchar *what_failed,

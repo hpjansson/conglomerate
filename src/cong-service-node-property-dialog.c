@@ -43,6 +43,7 @@ CONG_DEFINE_CLASS (CongServiceNodePropertyDialog, cong_service_node_property_dia
  * @user_data:
  *
  * TODO: Write me
+ * Returns:
  */
 CongServiceNodePropertyDialog*
 cong_service_node_property_dialog_construct (CongServiceNodePropertyDialog* node_property_dialog,
@@ -69,11 +70,12 @@ cong_service_node_property_dialog_construct (CongServiceNodePropertyDialog* node
 
 /**
  * cong_custom_property_dialog_make:
- * @node_property_dialog:
+ * @custom_property_dialog:
  * @doc:
  * @node:
  *
  * TODO: Write me
+ * Returns:
  */
 GtkWidget *
 cong_custom_property_dialog_make(CongServiceNodePropertyDialog *node_property_dialog,

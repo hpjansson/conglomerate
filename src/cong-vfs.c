@@ -39,6 +39,7 @@
  * @bytes:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeVFSResult
 cong_vfs_read_bytes (GnomeVFSHandle* vfs_handle, 
@@ -63,6 +64,7 @@ cong_vfs_read_bytes (GnomeVFSHandle* vfs_handle,
  * @size:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeVFSResult
 cong_vfs_new_buffer_from_file (const char* filename, 
@@ -100,11 +102,13 @@ cong_vfs_new_buffer_from_file (const char* filename,
 
 /**
  * cong_vfs_new_buffer_from_uri:
- * @uri:
+ * @vfs_uri:
  * @buffer:
  * @size:
  *
- * TODO: Write me
+ * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+ *
+ * Returns:
  */
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri (GnomeVFSURI* uri, 
@@ -182,6 +186,7 @@ cong_vfs_new_buffer_from_uri (GnomeVFSURI* uri,
  * @parent_window:
  *
  * TODO: Write me
+ * Returns:
  */
 xmlDocPtr
 cong_vfs_load_xml_from_uri (const gchar *string_uri,
@@ -285,10 +290,11 @@ cong_vfs_load_xml_from_uri (const gchar *string_uri,
 /**
  * cong_vfs_save_xml_to_uri:
  * @doc_ptr:
- * @file_uri:
+ * @vfs_uri:
  * @output_file_size:
  *
  * TODO: Write me
+ * Returns:
  */
 GnomeVFSResult
 cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr, 
@@ -344,7 +350,7 @@ cong_vfs_save_xml_to_uri (xmlDocPtr doc_ptr,
 
 /**
  * cong_vfs_get_local_path_from_uri:
- * @uri: a #GnomeVFSURI
+ * @vfs_uri: a #GnomeVFSURI
  *
  * Returns: a #gchar containing @uri as a POSIX path, assuming it is
  * valid
@@ -442,6 +448,7 @@ cong_vfs_split_string_uri (const gchar* string_uri,
  * @string_uri:
  *
  * TODO: Write me
+ * Returns:
  */
 gchar*
 cong_vfs_extract_short_name (const gchar *string_uri)

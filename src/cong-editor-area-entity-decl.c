@@ -104,6 +104,7 @@ cong_editor_area_entity_decl_instance_init (CongEditorAreaEntityDecl *area_entit
  * @text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_entity_decl_construct (CongEditorAreaEntityDecl *area_entity_decl,
@@ -162,6 +163,7 @@ cong_editor_area_entity_decl_construct (CongEditorAreaEntityDecl *area_entity_de
  * @text:
  *
  * TODO: Write me
+ * Returns:
  */
 CongEditorArea*
 cong_editor_area_entity_decl_new (CongEditorWidget3 *editor_widget,
