@@ -19,6 +19,18 @@ cong_xml_editor_get_widget(CongXMLEditor *xed)
 	return xed->w;
 }
 
+void add_stuff_to_tt(TTREE* tt, int pos_y, TTREE* x, int draw_char)
+{
+	ttree_node_add(tt, (unsigned char*)&pos_y, sizeof(int));
+	ttree_node_add(tt, (unsigned char*)&x, sizeof(TTREE *));
+	ttree_node_add(tt, (unsigned char*)&draw_char, sizeof(int));
+}
+
+void add_stuff(CongXMLEditor *xed, int pos_y, TTREE* x, int draw_char)
+{
+	add_stuff_to_tt(xed->layout_cache.draw_line_t, pos_y, x, draw_char);
+}
+
 TTREE *add_line_to_tt(TTREE* parent, TTREE* tt, int i)
 {
 	TTREE *new_line;
@@ -26,8 +38,8 @@ TTREE *add_line_to_tt(TTREE* parent, TTREE* tt, int i)
 	g_return_val_if_fail(parent, NULL);
 
 	new_line = ttree_node_add(parent, "line", 4);  /* Add line */
-	ttree_node_add(new_line, &tt, sizeof(TTREE *));
-	ttree_node_add(new_line, &i, sizeof(int));
+	ttree_node_add(new_line, (unsigned char*)&tt, sizeof(TTREE *));
+	ttree_node_add(new_line, (unsigned char*)&i, sizeof(int));
 
 	return new_line;
 }
@@ -40,11 +52,11 @@ TTREE *cong_layout_cache_add_line(CongLayoutCache *layout_cache, TTREE* tt, int 
 	
 }
 
-TTREE *add_line(CongXMLEditor *xed, TTREE* tt, int i)
+void add_line(CongXMLEditor *xed, TTREE* tt, int i)
 {
-	g_return_val_if_fail(xed, NULL);
+	g_return_if_fail(xed);
 
-	return cong_layout_cache_add_line(&xed->layout_cache, tt, i);
+	xed->layout_cache.draw_line_t = cong_layout_cache_add_line(&xed->layout_cache, tt, i);
 }
 
 
@@ -67,8 +79,6 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
-
-
 	
 #if 0	
 	if (!xed->p)
@@ -114,7 +124,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 	/* Calculate height */
 	cong_layout_cache_clear(&xed->layout_cache);
 
-	xed->draw_x = 0;  /* FIXME: Out-of-context root node */
+	xed->draw_x = NULL;  /* FIXME: Out-of-context root node */
 	height = xed_xml_content_draw(xed, 0);  /* Or 0? */
 
 	if ((height > xed->w->allocation.height + 2 ||
@@ -180,7 +190,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 
 		cong_layout_cache_clear(&xed->layout_cache);
 
-		xed->draw_x = 0;  /* FIXME: Out-of-context root node */
+		xed->draw_x = NULL;  /* FIXME: Out-of-context root node */
 		xed_xml_content_draw(xed, 1);
 		if (xed == curs->xed) 
 		{			
@@ -201,11 +211,10 @@ void xed_redraw(CongXMLEditor *xed)
 	UNUSED_VAR(GtkRequisition req)
 	int height;
 
-
 	/* Calculate height */
 	cong_layout_cache_clear(&xed->layout_cache);
 
-	xed->draw_x = 0;  /* FIXME: Out-of-context root node */
+	xed->draw_x = NULL;  /* FIXME: Out-of-context root node */
 	height = xed_xml_content_draw(xed, 0);
 
 	if (height > xed->w->allocation.height + 2 ||
@@ -591,8 +600,10 @@ void xed_str_put(CongXMLEditor *xed, char *s)
 	GdkGC *gc;
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
 
-	gdk_draw_string(xed->p, xed->f, gc, xed->draw_pos_x,
-									xed->draw_pos_y, s);
+	gdk_draw_string(xed->p, xed->f, gc, 
+			xed->draw_pos_x,
+			xed->draw_pos_y, 
+			s);
 }
 
 
@@ -972,7 +983,9 @@ char *xed_word(TTREE *x, CongXMLEditor *xed, int *spc_before, int *spc_after)
 	/* Skip spaces before word */
 
 	for (p0 = xml_frag_data_nice(x) + xed->draw_char;
-			 p0 && (*p0 == ' ' || *p0 == '\n'); p0++, xed->draw_char++) *spc_before = 1;
+	     p0 && (*p0 == ' ' || *p0 == '\n'); p0++, xed->draw_char++) {
+		*spc_before = 1;
+	}
 
 	if (!p0) return(0);
 	
@@ -991,13 +1004,18 @@ char *xed_word(TTREE *x, CongXMLEditor *xed, int *spc_before, int *spc_after)
 
 	/* Span word: p0 = start, p1 = end */
 
-	for (p1 = p0; *p1 && *p1 != ' ' && *p1 != '\n'; p1++) ;
+	for (p1 = p0; *p1 && *p1 != ' ' && *p1 != '\n'; p1++) {
+		/* empty */
+	}
 
 	if (p0 == p1) return(0);  /* FIXME: Should never happen */
 	xed->draw_char += (p1 - p0);
 
-	if (*p1) *spc_after = 1;
-	else *spc_after = 0;
+	if (*p1) {
+		*spc_after = 1;
+	} else {
+		*spc_after = 0;
+	}
 	return(strndup(p0, p1 - p0));
 }
 
@@ -1033,13 +1051,17 @@ int xed_word_first_would_wrap(TTREE *x, CongXMLEditor *xed)
 			
 			/* Skip spaces before word */
 
-			for ( ; *p0 == ' ' || *p0 == '\n'; p0++) ;
+			for ( ; *p0 == ' ' || *p0 == '\n'; p0++) {
+				/* empty */
+			}
 			
 			if (*p0)
 			{
 				/* Span word: p0 = start, p1 = end */
 
-				for (p1 = p0; *p1 && *p1 != ' ' && *p1 != '\n'; p1++) ;
+				for (p1 = p0; *p1 && *p1 != ' ' && *p1 != '\n'; p1++) {
+					/* empty */
+				}
 				
 				/* Get width of word */
 				word = strndup(p0, p1 - p0);
@@ -1047,8 +1069,11 @@ int xed_word_first_would_wrap(TTREE *x, CongXMLEditor *xed)
 				free(word);
 
 				/* Does it fit? */
-				if (xed->draw_pos_x + width > xed->w->allocation.width) return(1);
-				else return(0);
+				if (xed->draw_pos_x + width > xed->w->allocation.width) {
+					return(1);
+				} else {
+					return(0);
+				}
 			}
 		}
 	}
@@ -1076,7 +1101,9 @@ int xed_xml_content_data(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 	{
 		/* Get width of word */
 		width = gdk_string_width(xed->f, word);
-		if (spc_before && xed->draw_pos_x > 1) width += gdk_char_width(xed->f, ' ');
+		if (spc_before && xed->draw_pos_x > 1) {
+			width += gdk_char_width(xed->f, ' ');
+		}
 
 		/* Does it fit? */
 		if (xed->draw_pos_x && xed->draw_pos_x + width > xed->w->allocation.width)
@@ -1091,8 +1118,12 @@ int xed_xml_content_data(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 
 		/* Draw and move pen */
 
-		if (spc_before && xed->draw_pos_x > 1) xed->draw_pos_x += gdk_char_width(xed->f, ' ');
-		if (xed->mode == 1) xed_str_put(xed, word);
+		if (spc_before && xed->draw_pos_x > 1) {
+			xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+		}
+		if (xed->mode == 1) {
+			xed_str_put(xed, word);
+		}
 
 		width = gdk_string_width(xed->f, word);
 		xed->draw_pos_x += width;  /* NOTE: Causes tag misalignment? (Nah...) */
@@ -1123,7 +1154,9 @@ int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 	{
 		/* Get width of word */
 		width = gdk_string_width(xed->f, word);
-		if (spc_before && xed->draw_pos_x > 1) width += gdk_char_width(xed->f, ' ');
+		if (spc_before && xed->draw_pos_x > 1) {
+			width += gdk_char_width(xed->f, ' ');
+		}
 
 		/* Does it fit? */
 		if (xed->draw_pos_x + width > xed->w->allocation.width)
@@ -1133,12 +1166,16 @@ int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 			xed->draw_pos_y += 8;                      /* Fixed line spacing */
 			xed->draw_pos_y += draw_tag_lev * xed->tag_height;
 
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1156,15 +1193,21 @@ int xed_xml_content_data_root(CongXMLEditor *xed, TTREE *x, int draw_tag_lev)
 
 		/* Draw and move pen */
 
-		if (spc_before && xed->draw_pos_x > 1) xed->draw_pos_x += gdk_char_width(xed->f, ' ');
-		if (xed->mode == 1) xed_str_put(xed, word);
+		if (spc_before && xed->draw_pos_x > 1) {
+			xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+		}
+		if (xed->mode == 1) {
+			xed_str_put(xed, word);
+		}
 
 		width = gdk_string_width(xed->f, word);
 		xed->draw_pos_x += width;  /* NOTE: Causes tag misalignment? (Nah...) */
 		free(word);
 	}
 
-	if (spc_before && xed->draw_pos_x > 1) xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+	if (spc_before && xed->draw_pos_x > 1) {
+		xed->draw_pos_x += gdk_char_width(xed->f, ' ');
+	}
 	return(wrap);
 }
 
@@ -1183,7 +1226,9 @@ int xed_xml_depth(TTREE *x)
 		if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
 			d = xed_xml_depth(x);
-			if (d > d_max) d_max = d;
+			if (d > d_max) {
+				d_max = d;
+			}
 		}
 	}
 
@@ -1202,7 +1247,9 @@ int xed_xml_depth_after_eol(CongXMLEditor *xed, TTREE *x)
 		if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
 			d = xed_xml_depth_after_eol(xed, xml_frag_enter(x));
-			if (d > d_max) d_max = d;
+			if (d > d_max) {
+				d_max = d;
+			}
 		}
 	}
 	
@@ -1234,8 +1281,13 @@ int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width,
 		else if (xml_frag_type(x) == XML_TAG_SPAN)
 		{
 			d = xed_xml_depth_before_eol(xed, x, pos_x, width, &eol);
-			if (d > d_max) d_max = d;
-			if (eol) { *eol_p = 1; return(d_max + 1); }
+			if (d > d_max) {
+				d_max = d;
+			}
+			if (eol) { 
+				*eol_p = 1; 
+				return(d_max + 1); 
+			}
 		}
 	}
 
@@ -1319,15 +1371,19 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 				xed_xml_tags_draw_eol(xed, draw_tag_lev, xed->mode);
 				xed->draw_pos_y += 8;                      /* Fixed line spacing */
+#if 1
+				add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 				ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 				ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 				ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 				xed->draw_line += 1;                       /* Goto next line */
 				xed->draw_pos_x = 1;                       /* Start at left margin */
 				xed->draw_tag_max = 0;
 
-				xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+				add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 
 				xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 				draw_tag_lev = 0;
@@ -1362,16 +1418,21 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 			xed_xml_tags_draw_eol(xed, draw_tag_lev, xed->mode);
 			xed->draw_pos_y += 32;                      /* Fixed line spacing */
+
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 			xed->draw_line += 1;                       /* Goto next line */
 			xed->draw_pos_x = 1;                       /* Start at left margin */
 			xed->draw_tag_max = 0;
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1386,18 +1447,16 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 		{
 			/* TABLE. Identifier on separate line */
 
-			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
-			else
-			{
-			  for (xed->draw_x_prev = x; ; )
-			  {
-				  xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-				  if (xml_frag_next(xed->draw_x_prev))
-				  {
-				  	xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
-				  	break;
-				  }
-			  }
+			if (xml_frag_next(x)) {
+				xed->draw_x_prev = xml_frag_next(x);
+			} else 	{
+				for (xed->draw_x_prev = x; ; ) {
+					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
+					if (xml_frag_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+						break;
+					}
+				}
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1407,12 +1466,16 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 			/* --- */
 			
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1427,15 +1490,15 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 			/* Draw table thing */
 			
-		  width = gdk_string_width(xed->f, "[TABLE]");
-	    if (xed->mode == 1)
+			width = gdk_string_width(xed->f, "[TABLE]");
+			if (xed->mode == 1)
 			{
-			  gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
-					     TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
-					     xed->f_asc + xed->f_desc + 2);
-			  gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
-					  (xed->w->allocation.width - width) / 2,
-					  xed->draw_pos_y, "[TABLE]");
+				gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
+						   TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
+						   xed->f_asc + xed->f_desc + 2);
+				gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
+						(xed->w->allocation.width - width) / 2,
+						xed->draw_pos_y, "[TABLE]");
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1444,12 +1507,16 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 			/* --- */
 			
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1481,7 +1548,9 @@ int xed_xml_content_tag(CongXMLEditor *xed, TTREE *x)
 
 	xed->draw_char = 0;
 	draw_tag_lev += 1;
-	if (draw_tag_lev > xed->draw_tag_max) xed->draw_tag_max = draw_tag_lev;
+	if (draw_tag_lev > xed->draw_tag_max) {
+		xed->draw_tag_max = draw_tag_lev;
+	}
 	return(draw_tag_lev);
 }
 
@@ -1527,7 +1596,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 	cong_layout_cache_init(&xed->layout_cache);
 
 #if 1
-	xed->draw_line_t = add_line(xed, xed->x, xed->draw_char);
+	add_line(xed, xed->x, xed->draw_char);
 #else
 	xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);
 	ttree_node_add(xed->draw_line_t, &xed->x, sizeof(TTREE *));
@@ -1536,22 +1605,24 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 
 	for (x = xed->x; x; x = xml_frag_next(x))
 	{
-    int type = xml_frag_type(x);
+		int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
 
-		if (type == XML_TAG_SPAN && strcasecmp("table", name))
-		{
+		if (type == XML_TAG_SPAN && strcasecmp("table", name)) {
 			if (cong_dispspec_element_span(xed->displayspec, name) /* ||
-					cong_dispspec_element_insert(xed->displayspec, name) */ )
-		  {
-			  draw_tag_lev_new = xed_xml_content_tag(xed, x);
-				if (draw_tag_lev_new > draw_tag_lev) draw_tag_lev = draw_tag_lev_new;
-		  }
+										  cong_dispspec_element_insert(xed->displayspec, name) */ ) {
+				draw_tag_lev_new = xed_xml_content_tag(xed, x);
+				if (draw_tag_lev_new > draw_tag_lev) {
+					draw_tag_lev = draw_tag_lev_new;
+				}
+			}
 			else if (cong_dispspec_element_structural(xed->displayspec, name)) break;
 		}
 		else if (type == XML_DATA)
 		{
-			if (xed_xml_content_data_root(xed, x, draw_tag_lev)) draw_tag_lev = 0;
+			if (xed_xml_content_data_root(xed, x, draw_tag_lev)) { 
+				draw_tag_lev = 0;
+			}
 		}
 		else if (type == XML_TAG_EMPTY && CONG_ELEMENT_TYPE_PARAGRAPH==cong_dispspec_type(ds, name))
 		{
@@ -1560,18 +1631,18 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 			printf("got paragraph in xed_xml_content_draw, name=<%s>\n",name);
 #endif
 
-			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
+			if (xml_frag_next(x)) {
+				xed->draw_x_prev = xml_frag_next(x);
+			}
 			else
 			{
-			  for (xed->draw_x_prev = x; ; )
-			  {
-				  xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-				  if (xml_frag_next(xed->draw_x_prev))
-				  {
-				  	xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
-				  	break;
-				  }
-			  }
+				for (xed->draw_x_prev = x; ; ) {
+					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
+					if (xml_frag_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+						break;
+					}
+				}
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1581,12 +1652,16 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 			xed->draw_pos_y += 32;                      /* Fixed line spacing */
 			xed->draw_pos_y += draw_tag_lev * xed->tag_height;
 
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1603,18 +1678,18 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 		{
 			/* TABLE. Identifier on separate line */
 
-			if (xml_frag_next(x)) xed->draw_x_prev = xml_frag_next(x);
+			if (xml_frag_next(x)) {
+				xed->draw_x_prev = xml_frag_next(x);
+			}
 			else
 			{
-			  for (xed->draw_x_prev = x; ; )
-			  {
-				  xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
-				  if (xml_frag_next(xed->draw_x_prev))
-				  {
-				  	xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
-				  	break;
-				  }
-			  }
+				for (xed->draw_x_prev = x; ; ) {
+					xed->draw_x_prev = xml_frag_exit(xed->draw_x_prev);
+					if (xml_frag_next(xed->draw_x_prev)) {
+						xed->draw_x_prev = xml_frag_next(xed->draw_x_prev);
+						break;
+					}
+				}
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1623,12 +1698,16 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 
 			/* --- */
 			
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1643,8 +1722,8 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 
 			/* Draw table thing */
 			
-		  width = gdk_string_width(xed->f, "[TABLE]");
-	    if (xed->mode == 1)
+			width = gdk_string_width(xed->f, "[TABLE]");
+			if (xed->mode == 1)
 			{
 				gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
 						   TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
@@ -1660,12 +1739,16 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 
 			/* --- */
 			
+#if 1
+			add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 			ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 			ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 			ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 
 #if 1
-			xed->draw_line_t = add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
+			add_line(xed, xed->draw_x_prev, xed->draw_char_prev);
 #else
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
@@ -1681,10 +1764,14 @@ int xed_xml_content_draw(CongXMLEditor *xed, unsigned int mode)
 	}
 
 	xed_xml_tags_draw_eol(xed, draw_tag_lev, xed->mode);
+#if 1
+	add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
+#else
 	ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
 /*	ttree_node_add(xed->draw_line_t, &xed->x, sizeof(TTREE *)); */
 	ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
 	ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
+#endif
 	return(xed->draw_pos_y);
 }
 

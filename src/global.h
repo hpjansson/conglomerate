@@ -132,8 +132,14 @@ cong_xml_editor_get_dispspec(CongXMLEditor *xed);
 
 typedef struct CongLayoutCache
 {
+	TTREE *draw_line_t;
 	TTREE *lines;
 } CongLayoutCache;
+
+typedef struct CongLayoutLine
+{
+	
+} CongLayoutLine;
 
 void
 cong_layout_cache_init(CongLayoutCache *layout_cache);
@@ -169,25 +175,19 @@ struct CongXMLEditor
 	int already_asked_for_size;
 
 	/* Drawing information (temporary) */
-
 	int mode;
 
-#if 0
-	CongLocation draw_loc;
-	CongLocation draw_prev;
-#else
 	TTREE *draw_x;      /* XML node currently at */
-	int draw_char;      /* Char to begin drawing (in node) */
 
 	TTREE *draw_x_prev;
 	int draw_char_prev;
-#endif
 
-	TTREE *draw_line_t;
 	int draw_line;      /* Line to draw at (in display) */
+	int draw_char;      /* Char to begin drawing (in node) */
 	int draw_pos_x;     /* Pixel to start drawing at */
 	int draw_pos_y;     /* Y position to start drawing at */
 	int draw_tag_max;
+
 
 	/* Data content */
 
