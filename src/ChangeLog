@@ -1,5 +1,9 @@
 2003-09-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-docbook.c
+
+	Fixed a bug in the text->docbook exporter: should now correctly terminate the input text buffer, rather than randomly continue until a zero byte is found on the heap
+
 	* cong-range.c
 
 	Added a missing header

@@ -36,12 +36,14 @@
 
 /* Splits input UTF8 into a GList of nul-terminated GUnichar strings */
 static GList*
-split_utf8_into_unichar_lines (const gchar *utf8_input);
+split_utf8_into_unichar_lines (const gchar *utf8_input,
+			       GnomeVFSFileSize size);
 
 static void
 parse_text_buffer_into_docbook (CongDocument *doc,
 				CongNodePtr root_node, 
-				const char* buffer);
+				const char* buffer,
+				GnomeVFSFileSize size);
 
 #if 0
 struct DocBookAuthorInfo
@@ -358,7 +360,8 @@ append_line (GList **result,
 }
 
 static GList*
-split_utf8_into_unichar_lines (const gchar *utf8_input)
+split_utf8_into_unichar_lines (const gchar *utf8_input,
+			       GnomeVFSFileSize size)
 {
 	GList *result = NULL;
 	gunichar* ucs4_full_string;
@@ -368,7 +371,7 @@ split_utf8_into_unichar_lines (const gchar *utf8_input)
 	g_return_val_if_fail (utf8_input, NULL);
 
 	ucs4_full_string = g_utf8_to_ucs4_fast (utf8_input,
-						-1,
+						size,
 						NULL);
 	
 	line_start = ucs4_full_string;
@@ -573,7 +576,8 @@ cong_util_merge_paras (CongDocument *doc)
 static void
 parse_text_buffer_into_docbook (CongDocument *doc,
 				CongNodePtr root_node, 
-				const char* buffer)
+				const char* buffer,
+				GnomeVFSFileSize size)
 {
 	g_return_if_fail (doc);
 	g_return_if_fail (root_node);
@@ -584,7 +588,8 @@ parse_text_buffer_into_docbook (CongDocument *doc,
 	#if 1
 	/* Split buffer into lines; add lines individually as paras, with some heuristics: */
 	{
-		GList* list = split_utf8_into_unichar_lines (buffer);
+		GList* list = split_utf8_into_unichar_lines (buffer,
+							     size);
 		GList *iter;
 		CongNodePtr current_sect = NULL;
 		CongNodePtr current_list = NULL;
@@ -802,7 +807,8 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 		if (doc) {
 			parse_text_buffer_into_docbook (doc,
 							root_node, 
-							buffer);
+							buffer,
+							size);
 		}
 
 		/* Finished building content: */
