@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-29 David Malcolm
+
+	* dispspec.c, new_doc.c, xmledit.c
+
+	Removing <strtool.h> in favour of GLib
+	
 2002-10-28 David Malcolm
 
 	* cong-document.c, cong-location.c, cong-test-view.c, cursor.c, global.h, popup.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c

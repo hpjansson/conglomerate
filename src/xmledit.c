@@ -5,7 +5,6 @@
 #include <gtk/gtk.h>
 
 #include <stdlib.h>
-#include <strtool.h>
 #include "global.h"
 
 
@@ -1402,7 +1401,7 @@ char *xed_word(CongNodePtr x, CongXMLEditor *xed, gboolean *spc_before, gboolean
 	} else {
 		*spc_after = FALSE;
 	}
-	return(strndup(p0, p1 - p0));
+	return g_strndup(p0, p1 - p0);
 }
 
 
@@ -1454,9 +1453,9 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 				}
 				
 				/* Get width of word */
-				word = strndup(p0, p1 - p0);
+				word = g_strndup(p0, p1 - p0);
 				width = gdk_string_width(body_font->gdk_font, word);
-				free(word);
+				g_free(word);
 
 				/* Does it fit? */
 				if (xed->draw_pos_x + width > xed->w->allocation.width) {
@@ -1740,7 +1739,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 		const char *name = xml_frag_name_nice(x);
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_span(xed->displayspec, name) &&
-				strcasecmp("table", name))
+				g_strcasecmp("table", name))
 		{
 			draw_tag_lev_new = xed_xml_content_tag(xed, x);
 			if (draw_tag_lev_new > draw_tag_lev)
@@ -1812,7 +1811,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 			cong_layout_stack_compress(&xed->layout_stack);
 		}
 #endif
-		else if (node_type == CONG_NODE_TYPE_ELEMENT && !strcasecmp("table", name))
+		else if (node_type == CONG_NODE_TYPE_ELEMENT && !g_strcasecmp("table", name))
 		{
 			/* TABLE. Identifier on separate line */
 
@@ -1947,7 +1946,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 #endif
 		const char *name = xml_frag_name_nice(x);
 
-		if (node_type == CONG_NODE_TYPE_ELEMENT && strcasecmp("table", name)) {
+		if (node_type == CONG_NODE_TYPE_ELEMENT && g_strcasecmp("table", name)) {
 			if (cong_dispspec_element_span(xed->displayspec, name) /* ||
 										  cong_dispspec_element_insert(xed->displayspec, name) */ ) {
 				draw_tag_lev_new = xed_xml_content_tag(xed, x);
@@ -2003,7 +2002,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 			draw_tag_lev = 0;
 		}
 #endif
-		else if (node_type == CONG_NODE_TYPE_ELEMENT && !strcasecmp("table", name))
+		else if (node_type == CONG_NODE_TYPE_ELEMENT && !g_strcasecmp("table", name))
 		{
 			/* TABLE. Identifier on separate line */
 

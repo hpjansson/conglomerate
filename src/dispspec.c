@@ -348,6 +348,7 @@ static void recurse_doc(CongDispspec *ds, xmlNodePtr node)
 		break;
 		
 	default:
+		break;
 	};
 }
 

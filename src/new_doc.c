@@ -2,6 +2,7 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include <string.h>
 
 GtkWidget *newdoc;
 
