@@ -1,5 +1,9 @@
 2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dummy-element-editor.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c, cong-editor-widget.c, cong-editor-widget.h, cong-editor-widget-impl.h
+
+	Removing source files for old widget from CVS (CongEditorWidget2)
+
 	* cong-plugin.c, cong-plugin.h, cong-primary-window.c, global.h, plugin-lists.c, plugin-paragraph.c, plugin-xsl.c, Makefile.am
 
 	Removed references to old editor widget (CongEditorWidget2)
