@@ -207,7 +207,7 @@ on_text_entry_changed (GtkEditable *editable,
         value = gtk_entry_get_text (GTK_ENTRY(PRIVATE(attribute_editor_nmtoken)->entry));
 
 	/* need to perform validation here */
-	if ( xmlValidateNmtokenValue(value) ) {
+	if ( xmlValidateNmtokenValue((xmlChar*)value) ) {
 		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_nmtoken), value);
 
 	} else {

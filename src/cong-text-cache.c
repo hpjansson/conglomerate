@@ -470,12 +470,12 @@ regenerate_output_attr_list (CongTextCache *text_cache)
 			
 			if (!cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
 										       cloned_attr->start_index,
-										       &cloned_attr->start_index)){
+										       (int*)&cloned_attr->start_index)){
 				g_warning ("unable to convert attribute start index %i", cloned_attr->start_index);
 			}
 			if (!cong_text_cache_convert_original_byte_offset_to_stripped (text_cache,
 										       cloned_attr->end_index,
-										       &cloned_attr->end_index)){
+										       (int*)&cloned_attr->end_index)){
 				g_warning ("unable to convert attribute end index %i", cloned_attr->end_index);
 			}
 			

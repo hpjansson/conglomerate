@@ -89,7 +89,10 @@ static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 	}
 
 	xml = cong_dispspec_make_xml(cong_document_get_default_dispspec(doc));
-	xmlCreateIntSubset(xml, "dispspec", NULL, "dispspec.dtd");
+	xmlCreateIntSubset (xml, 
+			    (const xmlChar*)"dispspec", 
+			    NULL, 
+			    (const xmlChar*)"dispspec.dtd");
 	xmlSaveFormatFile(new_doc_name, xml, TRUE);
 
 	/* FIXME: does this leak xml? */
@@ -111,7 +114,10 @@ static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 	doc = cong_primary_window_get_document(primary_window);
 
 	xml = cong_dispspec_make_xml(cong_document_get_default_dispspec(doc));
-	xmlCreateIntSubset(xml, "dispspec", NULL, "dispspec.dtd");
+	xmlCreateIntSubset (xml, 
+			    (const xmlChar*)"dispspec", 
+			    NULL, 
+			    (const xmlChar*)"dispspec.dtd");
 #if 1
 	cong_ui_new_document_from_imported_xml(xml,
 					       cong_primary_window_get_toplevel(primary_window));

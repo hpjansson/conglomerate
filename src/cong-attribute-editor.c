@@ -54,15 +54,15 @@ dispose (GObject *object);
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
-		  const xmlNs *ns_ptr,
-		  const xmlChar *name, 
-		  const xmlChar *value, 
+		  const xmlNsPtr ns_ptr,
+		  const gchar *name, 
+		  const gchar *value, 
 		  CongAttributeEditor *attribute_editor);
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
-		     const xmlNs *ns_ptr, 
-		     const xmlChar *name,
+		     const xmlNsPtr ns_ptr, 
+		     const gchar *name,
 		     CongAttributeEditor *attribute_editor);
 
 
@@ -303,7 +303,7 @@ cong_attribute_editor_new (CongDocument *doc,
 
 	/* ##FIXME: is this the right way? */
 	if(attr->prefix != NULL) {
-		ns_ptr = cong_node_get_ns_for_prefix(node, attr->prefix);
+		ns_ptr = cong_node_get_ns_for_prefix(node, (gchar*)attr->prefix);
 	} else {
 		ns_ptr = NULL;
 	}
@@ -314,7 +314,7 @@ cong_attribute_editor_new (CongDocument *doc,
 		return cong_attribute_editor_cdata_new (doc,
 							node,
 						        ns_ptr,
-							attr->name);
+							(gchar*)attr->name);
 
 	case XML_ATTRIBUTE_ID:
 		/* FIXME: extend NMTOKEN thing */
@@ -341,7 +341,7 @@ cong_attribute_editor_new (CongDocument *doc,
 		return cong_attribute_editor_nmtoken_new (doc,
 							  node,
 							  ns_ptr,
-							  attr->name);
+							  (gchar*)attr->name);
 		
 	case XML_ATTRIBUTE_NMTOKENS:
 		/* FIXME: use a list view, with buttons to add and delete? */
@@ -351,7 +351,7 @@ cong_attribute_editor_new (CongDocument *doc,
 		return cong_attribute_editor_enumeration_new (doc,
 							      node,
 							      ns_ptr,
-							      attr->name,
+							      (gchar*)attr->name,
 							      attr);
 
 	case XML_ATTRIBUTE_NOTATION:
@@ -404,9 +404,9 @@ dispose (GObject *object)
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
-		  const xmlNs *ns_ptr, 
-		  const xmlChar *name, 
-		  const xmlChar *value, 
+		  const xmlNsPtr ns_ptr, 
+		  const gchar *name, 
+		  const gchar *value, 
 		  CongAttributeEditor *attribute_editor)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));
@@ -425,8 +425,8 @@ on_set_attribute (CongDocument *doc,
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
-		     const xmlNs *ns_ptr, 
-		     const xmlChar *name,
+		     const xmlNsPtr ns_ptr, 
+		     const gchar *name,
 		     CongAttributeEditor *attribute_editor)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));

@@ -12,8 +12,8 @@ GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR("element", CongDispspecElement, dispsp
      GXX_STRUCT_ATTRIBUTE_ENUM("whitespace", whitespace, FALSE, CONG_WHITESPACE_NORMALIZE, whitespace_numeration)
      GXX_STRUCT_ATTRIBUTE_STRING("icon", icon_name, FALSE, "")
 
-     GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA("name", "lang", XML_XML_NAMESPACE, hash_of_language_to_user_name)
-     GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA("short-desc", "lang", XML_XML_NAMESPACE, hash_of_language_to_short_desc)
+     GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA("name", "lang", CONG_XML_NAMESPACE, hash_of_language_to_user_name)
+     GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA("short-desc", "lang", CONG_XML_NAMESPACE, hash_of_language_to_short_desc)
 
      GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT("header-info", header_info, header_info, FALSE)
 

@@ -333,7 +333,7 @@ do_ui_file_print(CongDocument *doc,
 					
 					gnome_print_job_close (gpj);
 					
-					preview_widget = gnome_print_job_preview_new (gpj, _("Print Preview"));
+					preview_widget = gnome_print_job_preview_new (gpj, (const guchar*) _("Print Preview"));
 					gtk_widget_show(preview_widget);
 				}
 			}

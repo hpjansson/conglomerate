@@ -46,7 +46,7 @@ static xmlXPathContextPtr create_xpath_context(xmlDocPtr doc)
 {
 	xmlXPathContextPtr xpathCtx; 
 	xpathCtx = xmlXPathNewContext(doc);
-	xmlXPathRegisterNs(xpathCtx, "cong", NAMESPACE);
+	xmlXPathRegisterNs(xpathCtx, (const xmlChar*)"cong", (const xmlChar*)NAMESPACE);
 	return xpathCtx;
 }
 
@@ -60,7 +60,7 @@ static void remove_template_def(xmlDocPtr template)
 
 	g_assert(xpathCtx);
 
-	xpathObj = xmlXPathEvalExpression("/*/cong:template", xpathCtx);
+	xpathObj = xmlXPathEvalExpression((const xmlChar*)"/*/cong:template", xpathCtx);
 
 	g_assert(xpathObj);
 
@@ -128,7 +128,7 @@ static GSList* get_template_paths(CongPlugin* plugin)
 	return template_paths;
 }
 
-static xmlChar* value_from_template(xmlDocPtr doc, xmlChar* path)
+static xmlChar* value_from_template(xmlDocPtr doc, const xmlChar* path)
 {
 	xmlXPathContextPtr xpathCtx; 
 	xmlXPathObjectPtr xpathObj; 
@@ -142,7 +142,7 @@ static xmlChar* value_from_template(xmlDocPtr doc, xmlChar* path)
 
 	g_assert(xpathObj);
 
-	value = g_strdup(xpathObj->stringval);
+	value = xmlStrdup (xpathObj->stringval);
 
 	xmlXPathFreeObject(xpathObj);
 	xmlXPathFreeContext(xpathCtx); 
@@ -153,13 +153,13 @@ static xmlChar* value_from_template(xmlDocPtr doc, xmlChar* path)
 static xmlChar* cong_get_template_name(xmlDocPtr doc)
 {
 	return value_from_template(doc,
-		"string(/*/cong:template/cong:name)");
+				   (const xmlChar*)"string(/*/cong:template/cong:name)");
 }
 
 static xmlChar* cong_get_template_description(xmlDocPtr doc)
 {
 	return value_from_template(doc,
-		"string(/*/cong:template/cong:description)");
+				   (const xmlChar*)"string(/*/cong:template/cong:description)");
 }
 
 static gboolean
@@ -194,9 +194,9 @@ register_template(const gchar *rel_path,
 	{
 		g_message("plugin: %s, %s, %s", name, description, file_name);
 		cong_plugin_register_document_factory(template->plugin, 
-			_(name), 
-			_(description),
-			name, 
+						      _((const char*)name), 
+						      _((const char*)description),
+			(const char*)name, 
 			factory_page_creation_callback_templates,
 			factory_action_callback_templates,
 			rel_path,

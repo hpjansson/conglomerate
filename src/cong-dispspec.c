@@ -143,10 +143,10 @@ add_xml_for_document_models (xmlDocPtr xml_doc,
 
 /* Subroutines for generating a CongDispspec from arbitrtary XML docs: */
 static gboolean
-contains_text (const xmlChar* string);
+contains_text (const gchar* string);
 
 static gboolean
-contains_carriage_return (const xmlChar* string);
+contains_carriage_return (const gchar* string);
 
 static void
 promote_element (CongDispspec * dispspec, 
@@ -206,8 +206,8 @@ make_model_from_dtd (xmlDtdPtr dtd)
 
 
 	return cong_external_document_model_new (CONG_DOCUMENT_MODE_TYPE_DTD,
-						 dtd->ExternalID,
-						 dtd->SystemID);
+						 (const gchar*)dtd->ExternalID,
+						 (const gchar*)dtd->SystemID);
 }
 
 /* Exported functions: */
@@ -422,11 +422,11 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
 	
 	
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 	
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "dispspec",
+				  (const xmlChar*)"dispspec",
 				  NULL);
 	
 	xmlDocSetRootElement(xml_doc,
@@ -446,12 +446,12 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
 		
 		element_list = xmlNewDocNode(xml_doc,
 					     NULL,
-					     "element-list",
+					     (const xmlChar*)"element-list",
 					     NULL);			
 		xmlAddChild(root_node, element_list);
 		
 		if (dispspec->ns_uri) {
-			xmlSetProp (element_list, "nsURI", dispspec->ns_uri);
+			xmlSetProp (element_list, (const xmlChar*)"nsURI", (const xmlChar*)dispspec->ns_uri);
 		}
 
 		/* Typical prefixes: */
@@ -461,11 +461,11 @@ cong_dispspec_make_xml(CongDispspec *dispspec)
 				const gchar* prefix = (const gchar*)(iter->data);
 				CongNodePtr prefix_node = xmlNewDocNode (xml_doc,
 									 NULL,
-									 "typical-prefix",
+									 (const xmlChar*)"typical-prefix",
 									 NULL);			
 				xmlAddChild (element_list, prefix_node);
 				if (prefix) {
-					xmlSetProp (prefix_node, "prefix", prefix);
+					xmlSetProp (prefix_node, (const xmlChar*)"prefix", (const xmlChar*)prefix);
 				}
 			}
 		}
@@ -1107,7 +1107,7 @@ element_callback_generate_dispspec_from_dtd (void *payload, void *ds, xmlChar * 
 
 	ds_element = cong_dispspec_element_new (dispspec,
 						/* element->prefix, */
-						name,
+						(const gchar*)name,
 						cong_dtd_element_guess_dispspec_type (element),
 						TRUE);
 
@@ -1205,7 +1205,7 @@ get_content_string_cb (xmlDocPtr xml_doc, CongNodePtr node)
 {
 #if 0
 #error
-	xmlChar* str = xmlNodeListGetString (xml_doc, node, 1);
+	gchar* str = xmlNodeListGetString (xml_doc, node, 1);
 	if (str) {
 		return g_strdup (str);
 	} else {
@@ -1215,7 +1215,7 @@ get_content_string_cb (xmlDocPtr xml_doc, CongNodePtr node)
 	/* FIXME: assumes only a single TEXT child, so will break in the presence of comments etc */
 	if (node->children) {
 		if (cong_node_type (node->children)==CONG_NODE_TYPE_TEXT) {
-			return g_strdup (node->children->content);
+			return g_strdup ((const gchar*)node->children->content);
 		}
 	}
 	return NULL;
@@ -1293,7 +1293,7 @@ parse_document_models (CongDispspec *ds,
 	DS_DEBUG_MSG1("got document-models\n");
 
 	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
-		if (0==strcmp(xml_element->name,"external-document-model")) {
+		if (0==strcmp((const char*)xml_element->name,"external-document-model")) {
 			parse_external_document_model (ds, 
 						       doc, 
 						       xml_element);
@@ -1422,7 +1422,7 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 	
 	metadata = xmlNewDocNode(xml_doc,
 				 NULL,
-				 "metadata",
+				 (const xmlChar*)"metadata",
 				 NULL);			
 	xmlAddChild(root, metadata);
 
@@ -1448,7 +1448,7 @@ add_xml_for_serialisation_formats  (xmlDocPtr xml_doc,
 
 		node_serialisation = xmlNewDocNode (xml_doc,
 						    NULL,
-						    "serialisation",
+						    (const xmlChar*)"serialisation",
 						    NULL);
 		xmlAddChild (root, 
 			     node_serialisation);
@@ -1473,7 +1473,7 @@ add_xml_for_document_models (xmlDocPtr xml_doc,
 	
 	node_document_models = xmlNewDocNode(xml_doc,
 					     NULL,
-					     "document-models",
+					     (const xmlChar*)"document-models",
 					     NULL);			
 	xmlAddChild (root, 
 		     node_document_models);
@@ -1497,7 +1497,7 @@ add_xml_for_document_models (xmlDocPtr xml_doc,
     Does the string contain any non-whitespace characters? 
 */
 static gboolean
-contains_text (const xmlChar* string)
+contains_text (const gchar* string)
 {
 	const gchar *iter;
 
@@ -1520,7 +1520,7 @@ contains_text (const xmlChar* string)
    Does the string contain any carriage returns?
  */
 static gboolean
-contains_carriage_return (const xmlChar* string)
+contains_carriage_return (const gchar* string)
 {
 	const gchar *iter;
 
@@ -1545,19 +1545,19 @@ promote_element (CongDispspec * dispspec,
 		 xmlNodePtr node)
 {
 
-	if (!strcmp (cong_dispspec_element_get_local_name (element), xmlDocGetRootElement (node->doc)->name)) {
+	if (!strcmp (cong_dispspec_element_get_local_name (element), (const char*)xmlDocGetRootElement (node->doc)->name)) {
 		return;
 	}
 
-	switch (cong_dispspec_type (dispspec, cong_node_get_ns_uri (node->parent), node->parent->name))
+	switch (cong_dispspec_type (dispspec, cong_node_get_ns_uri (node->parent), (const gchar*)node->parent->name))
 	{
 	default: break;
 		case CONG_ELEMENT_TYPE_SPAN:
 		{
-			if (contains_carriage_return(xmlNodeGetContent (node)))
+			if (contains_carriage_return((const gchar*)xmlNodeGetContent (node)))
 			{
 				CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-											     node->parent->name,
+											     (const gchar*)node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
 				g_assert (ds_element);
@@ -1567,10 +1567,10 @@ promote_element (CongDispspec * dispspec,
 		}
 		case CONG_ELEMENT_TYPE_STRUCTURAL:
 		{
-			if (contains_text (xmlNodeGetContent (node)))
+			if (contains_text ((const gchar*)xmlNodeGetContent (node)))
 			{
 				CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-											     node->parent->name,
+											     (const gchar*)node->parent->name,
 											     CONG_ELEMENT_TYPE_STRUCTURAL,
 											     TRUE);
 				g_assert (ds_element);
@@ -1591,21 +1591,21 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 	if (cur) {
 		if (xmlNodeIsText (cur)) {
 			if (cur->parent->type==XML_ELEMENT_NODE) {
-				element =  cong_dispspec_lookup_element (dispspec, cong_node_get_ns_uri (cur->parent), cur->parent->name);
+				element =  cong_dispspec_lookup_element (dispspec, cong_node_get_ns_uri (cur->parent), (const gchar*)cur->parent->name);
 				if (element) {
 					promote_element (dispspec, element, cur);
 				}
-				else if (contains_text (xmlNodeGetContent (cur))) {
-					if (contains_carriage_return(xmlNodeGetContent (cur))) {
+				else if (contains_text ((const gchar*)xmlNodeGetContent (cur))) {
+					if (contains_carriage_return((const gchar*)xmlNodeGetContent (cur))) {
 						CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-													     cur->parent->name,
+													     (const gchar*)cur->parent->name,
 													     CONG_ELEMENT_TYPE_STRUCTURAL,
 													     TRUE);
 						g_assert (ds_element);
 						cong_dispspec_add_element (dispspec, ds_element);
 					} else {
 						CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-													     cur->parent->name,
+													     (const gchar*)cur->parent->name,
 													     CONG_ELEMENT_TYPE_SPAN,
 													     TRUE);
 						g_assert (ds_element);
@@ -1613,7 +1613,7 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 					}
 				} else {
 					CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-												     cur->parent->name,
+												     (const gchar*)cur->parent->name,
 												     CONG_ELEMENT_TYPE_STRUCTURAL,
 												     TRUE);
 					g_assert (ds_element);
@@ -1686,7 +1686,7 @@ xml_to_dispspec (CongDispspec *dispspec,
 		xmlNodePtr root_element = xmlDocGetRootElement(doc);
 
 		CongDispspecElement *ds_element = cong_dispspec_element_new (dispspec,
-									     root_element->name,
+									     (const gchar*)root_element->name,
 									     CONG_ELEMENT_TYPE_STRUCTURAL,
 									     TRUE);
 		g_assert (ds_element);

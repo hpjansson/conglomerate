@@ -159,20 +159,20 @@ cong_command_add_node_set_parent (CongCommand *cmd,
 void 
 cong_command_add_node_set_text (CongCommand *cmd, 
 				CongNodePtr node, 
-				const xmlChar *new_content);
+				const gchar *new_content);
 
 void 
 cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
 				     xmlNs *ns_ptr,
-				     const xmlChar *name, 
-				     const xmlChar *value);
+				     const gchar *name, 
+				     const gchar *value);
 
 void 
 cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
 					xmlNs *ns_ptr,
-					const xmlChar *name);
+					const gchar *name);
 	
 void 
 cong_command_add_selection_change (CongCommand *cmd,

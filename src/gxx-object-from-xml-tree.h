@@ -33,12 +33,12 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
 
 #define GXX_STRUCT_ATTRIBUTE_STRING(attr_name, member_name, is_required, default_value) \
   { \
-    xmlChar *xml_value = xmlGetProp (xml_node, attr_name); \
+    xmlChar *xml_value = xmlGetProp (xml_node, (const xmlChar*)attr_name); \
     if (xml_value) { \
       if (inst->member_name) { \
         g_free (inst->member_name); \
       } \
-      inst->member_name = g_strdup (xml_value); \
+      inst->member_name = g_strdup ((const gchar*)xml_value);	\
       xmlFree (xml_value); \
     } else {\
       if (is_required) { \
@@ -49,11 +49,11 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
 
 #define GXX_STRUCT_ATTRIBUTE_ENUM(attr_name, member_name, is_required, default_value, enum_mapping) \
   { \
-    xmlChar *prop = xmlGetProp (xml_node, attr_name); \
+    xmlChar *prop = xmlGetProp (xml_node, (const xmlChar*)attr_name); \
     if (prop) { \
       inst->member_name = cong_enum_mapping_lookup (enum_mapping, \
 						    sizeof(enum_mapping)/sizeof(CongEnumMapping), \
-						    prop, \
+						    (const gchar*)prop,	\
 						    default_value); \
       xmlFree (prop); \
     } else { \
@@ -66,9 +66,9 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
 
 #define GXX_STRUCT_ATTRIBUTE_BOOLEAN(attr_name, member_name, is_required, default_value) \
   { \
-    xmlChar *xml_value = xmlGetProp (xml_node, attr_name); \
+    xmlChar *xml_value = xmlGetProp (xml_node, (const xmlChar*)attr_name); \
     if (xml_value) { \
-      inst->member_name = cong_util_string_to_bool (xml_value, default_value); \
+      inst->member_name = cong_util_string_to_bool ((const gchar*)xml_value, default_value); \
       xmlFree (xml_value); \
     } else {\
       if (is_required) { \
@@ -82,7 +82,7 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
   { \
     xmlNodePtr child; \
     for (child = xml_node->children; child; child=child->next) { \
-      if (0==strcmp(child->name,child_name)) { \
+      if (0==strcmp((const char*)child->name,child_name)) {	\
 	inst->member_name = gxx_generated_object_from_xml_tree_fn_##fn_name_frag (child); \
       } \
     } \
@@ -98,25 +98,25 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
     xmlNodePtr child; \
     gboolean is_required = FALSE; /* for now */ \
     for (child = xml_node->children; child; child=child->next) { \
-      if (0==strcmp(child->name,child_name)) { \
-        gchar *pcdata = xmlNodeListGetString(xml_node->doc, child->xmlChildrenNode, 1); \
+      if (0==strcmp((const char*)child->name,child_name)) {	\
+        xmlChar *pcdata = xmlNodeListGetString(xml_node->doc, child->xmlChildrenNode, 1); \
 	if (pcdata) { \
-          gchar *hash_attr = xmlGetNsProp (child, hashing_attribute_name, hashing_attribute_ns_uri); \
+	  xmlChar *hash_attr = xmlGetNsProp (child, (const xmlChar*)hashing_attribute_name, (const xmlChar*)hashing_attribute_ns_uri); \
           if (hash_attr) { \
             g_hash_table_insert (inst->hash_table_member_name, \
-				 g_strdup (hash_attr), \
-				 g_strdup (pcdata)); \
-	    g_free (hash_attr); \
+				 g_strdup ((const gchar*)hash_attr),	\
+				 g_strdup ((const gchar*)pcdata)); \
+	    xmlFree (hash_attr); \
 	  } else { \
             if (is_required) { \
                 g_warning("Missing attribute \"%s\" within <%s>", hashing_attribute_name, child_name); \
               } else { \
                 g_hash_table_insert (inst->hash_table_member_name, \
 				     NULL, \
-				     g_strdup (pcdata)); \
+				     g_strdup ((const gchar*)pcdata)); \
               } \
 	  } \
-          g_free (pcdata); \
+          xmlFree (pcdata); \
 	} else { \
 	  g_warning("Missing PCDATA within <%s>", child_name); \
 	} \

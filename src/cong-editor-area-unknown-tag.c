@@ -95,15 +95,15 @@ static void
 on_node_set_attribute (CongDocument *doc,
 		       CongNodePtr node, 
 		       xmlNs *ns_ptr, 
-		       const xmlChar *name, 
-		       const xmlChar *value,
+		       const gchar *name, 
+		       const gchar *value,
 		       CongEditorAreaUnknownTag *area_unknown_tag);
 
 static void
 on_node_remove_attribute (CongDocument *doc,
 			  CongNodePtr node, 
 			  xmlNs *ns_ptr, 
-			  const xmlChar *name, 
+			  const gchar *name, 
 			  CongEditorAreaUnknownTag *area_unknown_tag);
 
 static void
@@ -238,7 +238,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	if ((node->ns != NULL) && (node->ns->prefix != NULL)) {
 		tag_string = g_strdup_printf ("%s:%s", node->ns->prefix, node->name);
 	} else {
-		tag_string = g_strdup (node->name);
+		tag_string = g_strdup ((const gchar*)node->name);
 	}
 
 	start_tag_string_begin = g_strdup_printf("<span foreground=\"%s\">&lt;%s</span>",colour_string_element, tag_string);
@@ -539,7 +539,7 @@ add_areas_for_attribute (CongEditorAreaUnknownTag *area_unknown_tag,
 	if ((attr->ns != NULL) && (attr->ns->prefix != NULL)) {
 		attribute_name = g_strdup_printf ("%s:%s", attr->ns->prefix, attr->name);
 	} else {
-		attribute_name = g_strdup (attr->name);
+		attribute_name = g_strdup ((const gchar*)attr->name);
 	}
 					
 	attr_string = g_strdup_printf (" <span foreground=\"%s\">%s=\"%s\"</span>",colour_string_attribute, attribute_name, attr->children->content);
@@ -563,8 +563,8 @@ static void
 on_node_set_attribute (CongDocument *doc,
 		       CongNodePtr node, 
 		       xmlNs *ns_ptr, 
-		       const xmlChar *name, 
-		       const xmlChar *value,
+		       const gchar *name, 
+		       const gchar *value,
 		       CongEditorAreaUnknownTag *area_unknown_tag)
 {
 	if (node == PRIVATE(area_unknown_tag)->xml_node) {
@@ -576,7 +576,7 @@ static void
 on_node_remove_attribute (CongDocument *doc,
 			  CongNodePtr node, 
 			  xmlNs *ns_ptr, 
-			  const xmlChar *name, 
+			  const gchar *name, 
 			  CongEditorAreaUnknownTag *area_unknown_tag)
 {
 	if (node == PRIVATE(area_unknown_tag)->xml_node) {

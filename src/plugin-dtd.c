@@ -514,14 +514,14 @@ cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 
 
 	/* Build up the document and its content: */
-	converter->xml_doc = xmlNewDoc("1.0");
+	converter->xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 	
 	converter->grammar_node = xmlNewDocNode (converter->xml_doc,
 						 NULL, /* xmlNsPtr ns, */
-						 "grammar",
+						 (const xmlChar*)"grammar",
 						 NULL);
 	converter->xml_ns = xmlNewNs (converter->grammar_node, 
-				      RELAX_NG_NS_URI, 
+				      (const xmlChar*)RELAX_NG_NS_URI, 
 				      NULL);
 	xmlSetNs (converter->grammar_node, 
 		  converter->xml_ns);
@@ -534,7 +534,7 @@ cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 		GList *iter;
 		converter->start_node = xmlNewDocNode (converter->xml_doc,
 						       converter->xml_ns,
-						       "start",
+						       (const xmlChar*)"start",
 						       NULL);
 
 		xmlAddChild (converter->grammar_node,
@@ -547,7 +547,7 @@ cong_dtd2rng_converter_make_schema (CongDTD2RNGConverter *converter)
 		if (converter->list_of_start_elements->next) {
 			choice_node = xmlNewDocNode (converter->xml_doc,
 						     converter->xml_ns,
-						     "choice",
+						     (const xmlChar*)"choice",
 						     NULL);
 			xmlAddChild (converter->start_node,
 				     choice_node);
@@ -586,7 +586,7 @@ element_reference_callback_add_comment (xmlDtdPtr dtd,
 
 	xmlAddChild (xml_node,
 		     xmlNewDocComment (xml_node->doc,
-				       "element is cross-referenced"));
+				       (const xmlChar*)"element is cross-referenced"));
 }
 
 /* Adds the element either via a ref, or directly inline, depending on whether its referenced elsewhere or not: */
@@ -633,13 +633,13 @@ cong_dtd2rng_converter_add_rng_element_ref (CongDTD2RNGConverter *converter,
 {
 	CongNodePtr node_ref = xmlNewDocNode(parent_node->doc,
 					     converter->xml_ns, 
-					     "ref",
+					     (const xmlChar*)"ref",
 					     NULL);
 	xmlAddChild (parent_node, 
 		     node_ref);
 	
 	xmlSetProp (node_ref,
-		    "name",
+		    (const xmlChar*)"name",
 		    dtd_element->name);
 }
 
@@ -659,13 +659,13 @@ cong_dtd2rng_converter_add_rng_element_inline (CongDTD2RNGConverter *converter,
 {
 	CongNodePtr node_element = xmlNewDocNode(parent_node->doc,
 						 converter->xml_ns,
-						 "element",
+						 (const xmlChar*)"element",
 						 NULL);
 	xmlAddChild (parent_node, 
 		     node_element);
 	
 	xmlSetProp (node_element,
-		    "name",
+		    (const xmlChar*)"name",
 		    dtd_element->name);
 	
 	/* set up the content model */
@@ -695,13 +695,13 @@ element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 
 		node_define = xmlNewDocNode (converter->xml_doc,
 					     converter->xml_ns,
-					     "define",
+					     (const xmlChar*)"define",
 					     NULL);			
 		xmlAddChild (converter->grammar_node, 
 			     node_define);
 		
 		xmlSetProp (node_define,
-			    "name",
+			    (const xmlChar*)"name",
 			    dtd_element->name);
 		
 		
@@ -730,7 +730,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 
 	xml_ns = xmlSearchNsByHref (node_element->doc,
 				    node_element,
-				    RELAX_NG_NS_URI);
+				    (const xmlChar*)RELAX_NG_NS_URI);
 	g_assert (xml_ns);
 
 	switch (attr->def) {
@@ -740,7 +740,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 		/* Attribute is optional: */
 		node_occurrence = xmlNewDocNode(node_element->doc,
 						xml_ns,
-						"optional",
+						(const xmlChar*)"optional",
 						NULL);
 		
 		xmlAddChild (node_element,
@@ -757,13 +757,13 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 
 	node_attribute= xmlNewDocNode(node_element->doc,
 				      xml_ns,
-				      "attribute",
+				      (const xmlChar*)"attribute",
 				      NULL);			
 	xmlAddChild (node_occurrence,
 		     node_attribute);
 	
 	xmlSetProp (node_attribute,
-		    "name",
+		    (const xmlChar*)"name",
 		    attr->name);
 
 	/* FIXME: do we need to handle the default? */
@@ -807,7 +807,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 		{
 			CongNodePtr node_choice = xmlNewDocNode(node_element->doc,
 								xml_ns,
-								"choice",
+								(const xmlChar*)"choice",
 								NULL);
 			xmlAddChild (node_attribute, 
 				     node_choice);
@@ -819,7 +819,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 				for (iter = attr->tree; iter; iter=iter->next) {
 					CongNodePtr node_value = xmlNewDocNode(node_element->doc,
 									       xml_ns,
-									       "value",
+									       (const xmlChar*)"value",
 									       iter->name);
 					xmlAddChild (node_choice,
 						     node_value);
@@ -845,7 +845,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 
 	xml_ns = xmlSearchNsByHref (node_parent->doc,
 				    node_parent,
-				    RELAX_NG_NS_URI);
+				    (const xmlChar*)RELAX_NG_NS_URI);
 	g_assert (xml_ns);
 
 	switch (content->ocur) {
@@ -858,7 +858,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 	case XML_ELEMENT_CONTENT_OPT:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
 						xml_ns,
-						"optional",
+						(const xmlChar*)"optional",
 						NULL);
 		xmlAddChild (node_parent, 
 			     node_occurrence);
@@ -867,7 +867,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 	case XML_ELEMENT_CONTENT_MULT:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
 						xml_ns,
-						"zeroOrMore",
+						(const xmlChar*)"zeroOrMore",
 						NULL);
 		xmlAddChild (node_parent, 
 			     node_occurrence);
@@ -876,7 +876,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 	case XML_ELEMENT_CONTENT_PLUS:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
 						xml_ns,
-						"oneOrMore",
+						(const xmlChar*)"oneOrMore",
 						NULL);
 		xmlAddChild (node_parent, 
 			     node_occurrence);
@@ -892,7 +892,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 		{
 			CongNodePtr node_text = xmlNewDocNode(node_occurrence->doc,
 							      xml_ns,
-							      "text",
+							      (const xmlChar*)"text",
 							      NULL);
 			xmlAddChild (node_occurrence, 
 				     node_text);
@@ -920,7 +920,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 			} else {
 				CongNodePtr node_group = xmlNewDocNode(node_occurrence->doc,
 								       xml_ns,
-								       "group",
+								       (const xmlChar*)"group",
 								       NULL);
 				xmlAddChild (node_occurrence, 
 					     node_group);
@@ -954,7 +954,7 @@ add_content_subtree_to_rng (CongDTD2RNGConverter *converter,
 				/* Non-optimised case: */
 				CongNodePtr node_choice = xmlNewDocNode(node_occurrence->doc,
 									xml_ns, 
-									"choice",
+									(const xmlChar*)"choice",
 									NULL);
 				xmlAddChild (node_occurrence, 
 					     node_choice);

@@ -17,7 +17,7 @@
 
 #define DEBUG_VALID_INSERTIONS 0
 
-char fake_data[] = "";
+const gchar *empty_string="";
 
 static gboolean cong_command_add_xml_add_optional_text_nodes(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
 static gboolean cong_command_add_xml_add_required_content(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node);
@@ -35,40 +35,25 @@ static GList* xml_get_elements_from_dispspec(CongDispspec* ds, CongElementType t
 
 /* Other stuff: */
 /**
- * xml_frag_data_nice:
- * @x:
+ * cong_node_safe_get_content:
+ * @node: a node; must be a valid cursor location
  *
- * TODO: Write me
- * Returns:
+ * Returns: returns the content of the given node, or the empty string (never returns NULL)
  */
 const gchar *
-xml_frag_data_nice(CongNodePtr x)
+cong_node_safe_get_content(CongNodePtr node)
 {
-	const char *s;
+	const gchar *s;
 	
-	g_return_val_if_fail(cong_node_is_valid_cursor_location (x), NULL);
+	g_return_val_if_fail(cong_node_is_valid_cursor_location (node), NULL);
 	
-	s = x->content; /* FIXME:  hackish cast from xmlChar* to char* */
-	if (!s) s = fake_data;
+	s = (const gchar*)node->content;
+	if (!s) s = empty_string;
 	
 	return(s);
 }
-
-#if 0
-const gchar *xml_frag_name_nice(CongNodePtr x)
-{
-	const char *s;
-	
-	s = cong_node_name(x);
-	if (!s) s = fake_data;
-
-	return(s);
-}
-#endif
-
 
 /* Tested and works */
-
 static char *cat_string(char *head, const char *tail)
 {
 	char *new = g_malloc(strlen(head) + strlen(tail) + 1);
@@ -96,7 +81,7 @@ xml_fetch_clean_data(CongNodePtr x)
 	{
 		if (cong_node_type_is_textual_content (cong_node_type(n0)))
 		{
-			s = cat_string(s, xml_frag_data_nice(n0));
+			s = cat_string(s, cong_node_safe_get_content(n0));
 		}
 		else if (cong_node_type(n0) == CONG_NODE_TYPE_ELEMENT)
 		{
@@ -375,9 +360,9 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
 			/*  create the element and add it */
 			g_print("xml_add_required_content: adding new node %s under node %s\n", content->name, node->name);
 			xml_ns = cong_node_get_ns_for_prefix (node, 
-							      content->prefix);
+							      (const gchar*)content->prefix);
 			new_node = cong_node_new_element (xml_ns, 
-							  content->name, 
+							  (const gchar*)content->name, 
 							  cong_doc);
 			cong_command_add_node_set_parent(cmd, new_node, node);
 			
@@ -450,7 +435,7 @@ cong_command_add_xml_add_required_content_choice (CongCommand *cmd,
 #if 1
 	for (i = 0; i < length; i++) {
 		CongElementDescription *element_desc = cong_element_description_new (NULL, /* FIXME: we have no way of getting at this at the moment */
-										     names[i]);
+										     (const gchar*)(names[i]));
 		element_desc_list = g_list_prepend (element_desc_list,
 						    element_desc);
 	}
@@ -864,7 +849,7 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 #endif
 		
 		/* FIXME:  hack the ns to be NULL for now :-( */
-		element = cong_dispspec_lookup_element(ds, NULL, elements[i]);
+		element = cong_dispspec_lookup_element(ds, NULL, (const gchar*)(elements[i]));
 		if (element) {
 			if (should_include_element (element,
 						    tag_type )) {	
@@ -946,7 +931,7 @@ xmlNewProp_NUMBER (xmlNodePtr node,
 		   int value)
 {
 	gchar *textual_value = g_strdup_printf("%i", value);
-	xmlAttrPtr attr = xmlNewProp(node, name, textual_value);
+	xmlAttrPtr attr = xmlNewProp(node, name, (const xmlChar*)textual_value);
 
 	g_free(textual_value);
 

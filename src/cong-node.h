@@ -83,7 +83,8 @@ typedef struct CongEditorView CongEditorView;
 typedef struct CongSpanEditor CongSpanEditor; 
 
 typedef xmlNodePtr CongNodePtr;
-typedef xmlChar CongXMLChar;
+
+#define CONG_XML_NAMESPACE (const gchar*)XML_XML_NAMESPACE 
 
 CongNodePtr cong_node_prev(CongNodePtr node);
 CongNodePtr cong_node_next(CongNodePtr node);
@@ -149,12 +150,12 @@ cong_node_type_is_textual_content (CongNodeType node_type);
 
 /* Methods for accessing attribute values: */
 
-CongXMLChar* cong_node_get_attribute(CongNodePtr node,
-				     xmlNs* ns_ptr, 
-				     const CongXMLChar* local_attribute_name);
+gchar* cong_node_get_attribute(CongNodePtr node,
+			       xmlNsPtr ns_ptr, 
+			       const gchar *local_attribute_name);
 gboolean cong_node_has_attribute(CongNodePtr node,
-				 xmlNs* ns_ptr, 
-				 const CongXMLChar* local_attribute_name);
+				 xmlNsPtr ns_ptr, 
+				 const gchar *local_attribute_name);
 
 /* Selftest methods: */
 void cong_node_self_test(CongNodePtr node);
@@ -281,14 +282,14 @@ void cong_node_private_make_orphan(CongNodePtr node);
 void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling);
 void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling);
 void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
-void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
+void cong_node_private_set_text(CongNodePtr node, const gchar *new_content);
 void cong_node_private_set_attribute(CongNodePtr node,
 				     xmlNs *ns_ptr, 
-				     const xmlChar *local_attribute_name,
-				     const xmlChar *value);
+				     const gchar *local_attribute_name,
+				     const gchar *value);
 void cong_node_private_remove_attribute(CongNodePtr node,
 					xmlNs *ns_ptr, 
-					const xmlChar *local_attribute_name);
+					const gchar *local_attribute_name);
 
 /* Utilities: */
 

@@ -178,7 +178,7 @@ void
 log_set_text (CongDebugLogViewDetails *details, 
 	      gboolean before_event, 
 	      CongNodePtr node, 
-	      const xmlChar *new_content)
+	      const gchar *new_content)
 { 
 	gchar *node_name = cong_node_get_path(node);
 	gchar *cleaned_text = cong_util_cleanup_text(new_content);
@@ -205,8 +205,8 @@ log_set_attribute (CongDebugLogViewDetails *details,
 		   gboolean before_event, 
 		   CongNodePtr node, 
 		   xmlNs *ns_ptr, 
-		   const xmlChar *name, 
-		   const xmlChar *value) 
+		   const gchar *name, 
+		   const gchar *value) 
 { 
 	gchar *qualified_name = cong_util_get_qualified_attribute_name(ns_ptr, name);
 	gchar *node_name = cong_node_get_path(node);
@@ -234,7 +234,7 @@ log_remove_attribute (CongDebugLogViewDetails *details,
 		      gboolean before_event, 
 		      CongNodePtr node, 
 		      xmlNs *ns_ptr, 
-		      const xmlChar *name)
+		      const gchar *name)
 { 
 	gchar *qualified_name = cong_util_get_qualified_attribute_name(ns_ptr, name);
 	gchar *node_name = cong_node_get_path(node);
@@ -281,9 +281,9 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const gchar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -352,7 +352,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	log_set_parent (details, before_event, node, adoptive_parent, add_to_end);
 }
 
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const gchar *new_content)
 {
 	CongDebugLogView *debug_log_view;
 	CongDebugLogViewDetails* details;
@@ -368,7 +368,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	log_set_text (details, before_event, node, new_content);
 }
 
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value)
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value)
 {
 	CongDebugLogView *debug_log_view;
 	CongDebugLogViewDetails* details;
@@ -385,7 +385,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 	log_set_attribute (details, before_event, node, ns_ptr, name, value);
 }
 
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name)
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name)
 {
 	CongDebugLogView *debug_log_view;
 	CongDebugLogViewDetails* details;
@@ -593,7 +593,7 @@ static void on_signal_set_parent_notify_before (CongDocument *doc,
 
 static void on_signal_set_text_notify_before (CongDocument *doc, 
 				       CongNodePtr node, 
-				       const xmlChar *new_content, 
+				       const gchar *new_content, 
 				       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -604,8 +604,8 @@ static void on_signal_set_text_notify_before (CongDocument *doc,
 static void on_signal_set_attribute_notify_before (CongDocument *doc, 
 						   CongNodePtr node, 
 						   xmlNs *ns_ptr,
-						   const xmlChar *name, 
-						   const xmlChar *value, 
+						   const gchar *name, 
+						   const gchar *value, 
 						   gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -616,7 +616,7 @@ static void on_signal_set_attribute_notify_before (CongDocument *doc,
 static void on_signal_remove_attribute_notify_before (CongDocument *doc, 
 						      CongNodePtr node, 
 						      xmlNs *ns_ptr,
-						      const xmlChar *name, 
+						      const gchar *name, 
 						      gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -700,7 +700,7 @@ static void on_signal_set_parent_notify_after (CongDocument *doc,
 
 static void on_signal_set_text_notify_after (CongDocument *doc, 
 				       CongNodePtr node, 
-				       const xmlChar *new_content, 
+				       const gchar *new_content, 
 				       gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -711,8 +711,8 @@ static void on_signal_set_text_notify_after (CongDocument *doc,
 static void on_signal_set_attribute_notify_after (CongDocument *doc, 
 						  CongNodePtr node, 
 						  xmlNs *ns_ptr,
-						  const xmlChar *name, 
-						  const xmlChar *value, 
+						  const gchar *name, 
+						  const gchar *value, 
 						  gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 
@@ -723,7 +723,7 @@ static void on_signal_set_attribute_notify_after (CongDocument *doc,
 static void on_signal_remove_attribute_notify_after (CongDocument *doc, 
 						     CongNodePtr node, 
 						     xmlNs *ns_ptr,
-						     const xmlChar *name, 
+						     const gchar *name, 
 						     gpointer user_data) 
 { 
 	CongDebugLogViewDetails *details = (CongDebugLogViewDetails*)user_data; 

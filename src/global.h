@@ -134,8 +134,7 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 
 gint cong_cursor_blink();
 
-const char *xml_frag_data_nice(CongNodePtr x);
-const char *xml_frag_name_nice(CongNodePtr x);
+const gchar *cong_node_safe_get_content (CongNodePtr node);
 
 GList *xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node);
 GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);

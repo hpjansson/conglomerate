@@ -190,10 +190,10 @@ cong_dtd_content_model_node_is_element (xmlElementContentPtr content,
 	g_return_val_if_fail (dtd_element, FALSE);
 
 	if (content->type==XML_ELEMENT_CONTENT_ELEMENT) {
-		if (0==strcmp (content->name, dtd_element->name)) {
+		if (0==strcmp ((const char*)content->name, (const char*)dtd_element->name)) {
 			if (content->prefix) {
 				if (dtd_element->prefix) {
-					if (0==strcmp (content->prefix, dtd_element->prefix)) {
+					if (0==strcmp ((const char*)content->prefix, (const char*)dtd_element->prefix)) {
 						return TRUE;
 					}
 				}

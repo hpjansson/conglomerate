@@ -93,7 +93,7 @@ cong_node_modification_set_text_construct (CongNodeModificationSetText *node_mod
 					  doc,
 					  node);
 
-	PRIVATE (node_modification_set_text)->old_content = g_strdup (node->content);
+	PRIVATE (node_modification_set_text)->old_content = g_strdup ((const gchar*)node->content);
 	PRIVATE (node_modification_set_text)->new_content = g_strdup (new_content);
 
 	return node_modification_set_text;

@@ -61,16 +61,16 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 						CongDocument *doc,
 						CongNodePtr node,
 						xmlNs *ns_ptr,
-						const xmlChar *name, 
-						const xmlChar *value);
+						const gchar *name, 
+						const gchar *value);
      
 
 CongModification*
 cong_node_modification_set_attribute_new (CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
-					  const xmlChar *name, 
-					  const xmlChar *value);
+					  const gchar *name, 
+					  const gchar *value);
 
 
 G_END_DECLS

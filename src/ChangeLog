@@ -1,3 +1,33 @@
+2005-03-31  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-app.c, cong-attribute-editor-enumeration.c,
+	cong-attribute-editor-nmtoken.c, cong-attribute-editor.c,
+	cong-attribute-wrapper.c, cong-command.c, cong-command.h,
+	cong-debug-log-view.c, cong-dispspec-element-gxx.h,
+	cong-dispspec-element.c, cong-dispspec-registry.c,
+	cong-dispspec.c, cong-document.c, cong-document.h,
+	cong-dom-view.c, cong-dtd.c, cong-edit-find-and-replace.c,
+	cong-editor-area-unknown-tag.c, cong-editor-node-comment.c,
+	cong-editor-node-text.c, cong-error-file-save.c,
+	cong-file-print.c, cong-file-properties.c, cong-language.c,
+	cong-location.c, cong-modification.h,
+	cong-node-modification-remove-attribute.c,
+	cong-node-modification-set-attribute.c,
+	cong-node-modification-set-attribute.h,
+	cong-node-modification-set-text.c, cong-node-properties-dialog.c,
+	cong-node.c, cong-node.h, cong-source-layout.c,
+	cong-source-view.c, cong-stylesheet.c, cong-text-cache.c,
+	cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h,
+	cong-xpath-expression.c, global.h, gxx-impl-object-to-xml-tree.c,
+	gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h,
+	plugin-arbitrary.c, plugin-convert-case.c, plugin-docbook.c,
+	plugin-dtd.c, plugin-lists-node-element-listitem.c,
+	plugin-random.c, plugin-relaxng.c, plugin-save-dispspec.c,
+	plugin-templates.c, plugin-tests.c, tree.c, xmldata.c, xmlview.c:
+
+	Huge cleanup of character handling; got rid of CongXMLChar, and
+	use gchar and xmlChar as appropriate.	
+	
 2005-03-18 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-source-layout.c: Update location during

@@ -36,10 +36,10 @@ gboolean
 cong_util_is_pure_whitespace (const gchar *utf8_text);
 
 gchar* 
-cong_util_cleanup_text (const xmlChar *text);
+cong_util_cleanup_text (const gchar *text);
 
 gchar* 
-cong_util_text_header (const xmlChar *text,
+cong_util_text_header (const gchar *text,
 		       guint truncation_length);
 
 gchar*
@@ -101,15 +101,15 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
 
 xmlDtdPtr
 cong_util_make_dtd (xmlDocPtr xml_doc,
-		    const xmlChar *root_element,
-		    const xmlChar *ExternalID, 
-		    const xmlChar *SystemID);
+		    const gchar *root_element,
+		    const gchar *ExternalID, 
+		    const gchar *SystemID);
 
 xmlDtdPtr 
 cong_util_add_external_dtd (xmlDocPtr xml_doc, 
-			    const xmlChar *root_element,
-			    const xmlChar *ExternalID, 
-			    const xmlChar *SystemID);
+			    const gchar *root_element,
+			    const gchar *ExternalID, 
+			    const gchar *SystemID);
 
 void
 cong_util_run_add_dtd_dialog (CongDocument *doc,
@@ -238,7 +238,7 @@ cong_util_add_menu_separator (CongPrimaryWindow *primary_window,
 
 char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
-				       const xmlChar *local_attribute_name);
+				       const gchar *local_attribute_name);
 
 void
 cong_util_show_in_window (GtkWidget *content,
@@ -290,6 +290,10 @@ cong_str_or_null_hash (gconstpointer key);
 gboolean
 cong_str_or_null_equal (gconstpointer a,
 			gconstpointer b);
+
+gchar*
+cong_util_dup_and_free_xml_string (xmlChar *xml_string);
+
 
 G_END_DECLS
 

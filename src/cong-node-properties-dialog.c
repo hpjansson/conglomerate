@@ -52,9 +52,9 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const gchar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -165,7 +165,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	/* UNWRITTEN */
 }
 
-static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const gchar *new_content)
 {
 	CongAdvancedNodePropertiesView *properties_view;
 
@@ -182,7 +182,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	/* UNWRITTEN */
 }
 
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value)
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value)
 {
 	CongAdvancedNodePropertiesView *properties_view;
 
@@ -201,7 +201,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 			      &properties_view->raw_attr);
 }
 
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name)
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name)
 {
 	CongAdvancedNodePropertiesView *properties_view;
 
@@ -269,7 +269,7 @@ static void raw_attr_list_refresh(CongAdvancedNodePropertiesView *view,
 		
 		qualified_name = 
 			cong_util_get_qualified_attribute_name(attr_iter->ns,
-							       attr_iter->name);
+							       (const gchar*)attr_iter->name);
 		
 
 		gtk_list_store_append(raw_attr->list_store,
@@ -750,7 +750,7 @@ make_dtd_attribute_editor (CongDocument *doc,
 		gtk_widget_show (attr_editor);
 		
 		hbox = gtk_hbox_new(FALSE, 6);
-		label = gtk_label_new(attr->name);
+		label = gtk_label_new ((const gchar*)attr->name);
 		gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
 		gtk_size_group_add_widget(size_group, label);
 		gtk_container_add(GTK_CONTAINER(hbox), label);
@@ -835,7 +835,7 @@ add_content_for_type (GtkTreeStore *store,
 
 			set_node_text_for_element_by_name (store,
 							   &iter_new,
-							   content->name);
+							   (const gchar*)content->name);
 		}
 		break;
 	case XML_ELEMENT_CONTENT_SEQ:
@@ -975,7 +975,7 @@ make_tree_model_for_element_model (xmlElementPtr xml_element)
 
 	set_node_text_for_element_by_name (store,
 					   &root_iter,
-					   xml_element->name);  /* FIXME: namespace? */
+					   (const gchar*)xml_element->name);  /* FIXME: namespace? */
 
 	if (xml_element->content) {
 		populate_recursive (store, 

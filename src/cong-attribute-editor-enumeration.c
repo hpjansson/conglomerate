@@ -128,7 +128,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 		 * in that the widget would need to be torn down and re-built if the
 		 * DTD were to change, but I have left it in just in case.
 		 */
-		gchar *text = g_strdup (enum_ptr->name);
+		gchar *text = g_strdup ((gchar*)enum_ptr->name);
 		gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
 					   text);
 		g_ptr_array_add (PRIVATE(attribute_editor_enumeration)->combo_array,

@@ -89,18 +89,18 @@ struct CongDocumentClass
 
 	void (*node_set_text) (CongDocument *doc, 
 			  CongNodePtr node, 
-			  const xmlChar *new_content);
+			  const gchar *new_content);
 
 	void (*node_set_attribute) (CongDocument *doc, 
 				    CongNodePtr node, 
 				    xmlNs *ns_ptr,
-				    const xmlChar *name, 
-				    const xmlChar *value);
+				    const gchar *name, 
+				    const gchar *value);
 
 	void (*node_remove_attribute) (CongDocument *doc, 
 				       CongNodePtr node, 
 				       xmlNs *ns_ptr,
-				       const xmlChar *name);
+				       const gchar *name);
 	
 	void (*selection_change) (CongDocument *doc);
 
@@ -170,7 +170,7 @@ gchar*
 cong_document_get_parent_uri(CongDocument *doc);
 /* caller is responsible for freeeing */
 
-const CongXMLChar*
+const gchar*
 cong_document_get_dtd_public_identifier(CongDocument *doc);
 /* NULL if not present */
 
@@ -264,10 +264,10 @@ void cong_document_private_node_set_parent (CongDocument *doc,
 					    CongNodePtr node, 
 					    CongNodePtr adoptive_parent,
 					    gboolean add_to_end); /* adds to either the end (TRUE) or the start (FALSE) */
-void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
+void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const gchar *new_content);
 void cong_document_private_tag_remove(CongDocument *doc, CongNodePtr x);
-void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node,  xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
-void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node,  xmlNs *ns_ptr, const gchar *name, const gchar *value);
+void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 void cong_document_private_on_selection_change(CongDocument *doc);
 void cong_document_private_on_cursor_change(CongDocument *doc);
 void 

@@ -97,7 +97,7 @@ cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAtt
 					  node);
 
 	if (ns_ptr != NULL) {
-		private->ns_prefix = g_strdup(ns_ptr->prefix);
+		private->ns_prefix = g_strdup((const gchar*)ns_ptr->prefix);
 	} else {
 		private->ns_prefix = NULL;
 	}

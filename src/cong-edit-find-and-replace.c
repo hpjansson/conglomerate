@@ -624,7 +624,7 @@ contains_search_string (CongNodePtr node,
 	g_assert (node);
 
         if (cong_node_type_is_textual_content (cong_node_type (node))) {
-	  if (dlg_strstr (node->content, data->last_find, data))
+	  if (dlg_strstr ((gchar*)node->content, data->last_find, data))
 	    return TRUE;
 	}	
 
@@ -650,8 +650,8 @@ find_next (const CongLocation *start_loc,
 		gchar *content_copy;
 		gchar *prev_char;
 		
-		prev_char = g_utf8_find_prev_char(start_loc->node->content, 
-		             start_loc->node->content +start_loc->byte_offset);
+		prev_char = g_utf8_find_prev_char((const gchar*)start_loc->node->content, 
+						  (const gchar*)start_loc->node->content +start_loc->byte_offset);
                 
 		if (!prev_char)
 		 {
@@ -659,18 +659,18 @@ find_next (const CongLocation *start_loc,
 		 }
 		else
 		{
-        		content_copy = g_strndup (start_loc->node->content, prev_char - (gchar *)start_loc->node->content);
+        		content_copy = g_strndup ((const gchar*)start_loc->node->content, prev_char - (gchar *)start_loc->node->content);
 			result = dlg_strstr (content_copy,
 					     data->last_find, data);
 		
 			if (result)
-				result = start_loc->node->content + (result - content_copy);
+				result = (const gchar*)start_loc->node->content + (result - content_copy);
 			g_free (content_copy);
 		}
 	}
 	else
 	{
-		result = dlg_strstr (start_loc->node->content + start_loc->byte_offset,
+		result = dlg_strstr ((gchar*)start_loc->node->content + start_loc->byte_offset,
 					     data->last_find, data);
 	}
 
@@ -695,7 +695,8 @@ find_next (const CongLocation *start_loc,
                 }								 
 
 		if (next_node) {
-			result = dlg_strstr (next_node->content, data->last_find, data);
+
+			result = dlg_strstr ((gchar*)next_node->content, data->last_find, data);
 			g_assert (result);
 
 			cong_location_set_node_and_byte_offset (output, 
@@ -717,7 +718,7 @@ find_next (const CongLocation *start_loc,
 		                }								 
 
 			if (next_node) {
-				result = dlg_strstr (next_node->content, data->last_find, data);
+				result = dlg_strstr ((gchar*)next_node->content, data->last_find, data);
 				g_assert (result);
 
 				cong_location_set_node_and_byte_offset (output, 

@@ -93,18 +93,18 @@ cong_modification_node_set_parent_new (CongDocument *doc,
 CongModification* 
 cong_modification_node_set_text_new (CongDocument *doc, 
 				     CongNodePtr node, 
-				     const xmlChar *new_content);
+				     const gchar *new_content);
 
 CongModification* 
 cong_modification_node_set_attribute_new (CongDocument *doc, 
 					  CongNodePtr node, 
-					  const xmlChar *name, 
-					  const xmlChar *value);
+					  const gchar *name, 
+					  const gchar *value);
 
 CongModification* 
 cong_modification_node_remove_attribute_new (CongDocument *doc, 
 					     CongNodePtr node, 
-					     const xmlChar *name);
+					     const gchar *name);
 
 CongModification* 
 cong_modification_selection_change_new (CongDocument *doc);

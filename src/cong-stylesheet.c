@@ -29,6 +29,7 @@
 #include "cong-error-dialog.h"
 #include "cong-document.h"
 #include "cong-vfs.h"
+#include "cong-util.h"
 
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
@@ -49,11 +50,11 @@ cong_utils_get_norman_walsh_stylesheet_path(void)
        /* This should be changed if another catalog is in use, i guess */
        xmlChar *resolved_path = NULL;
 
-       resolved_path = xmlCatalogResolveURI ("http://docbook.sourceforge.net/release/xsl/current/");
+       resolved_path = xmlCatalogResolveURI ((const xmlChar*)"http://docbook.sourceforge.net/release/xsl/current/");
 
        g_message ("Norman Walsh XSL path: %s", resolved_path);
 
-       return resolved_path;
+       return cong_util_dup_and_free_xml_string (resolved_path);
 }
 
 /**
@@ -66,7 +67,7 @@ cong_utils_get_norman_walsh_stylesheet_path(void)
 gchar*
 cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 {
-	xmlChar *path;
+	gchar *path;
 	gchar *result;
 
 	g_return_val_if_fail(stylesheet_relative_path, NULL);
@@ -75,7 +76,7 @@ cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path)
 
 	result = g_strdup_printf("%s%s", path, stylesheet_relative_path);
 
-	xmlFree (path);
+	g_free (path);
 
 	return result;
 }
@@ -213,7 +214,7 @@ cong_ui_transform_doc(CongDocument *doc,
 	g_return_val_if_fail (doc, NULL);
 	g_return_val_if_fail (stylesheet_filename, NULL);
 
-	xsl = xsltParseStylesheetFile(stylesheet_filename);
+	xsl = xsltParseStylesheetFile((const xmlChar*)stylesheet_filename);
 
 	if (NULL==xsl) {
 		/*

@@ -390,7 +390,7 @@ calculate_label (CongEditorNodeElementListitem* listitem)
 		return cong_util_string_from_unichar (BULLET_UNICHAR);
 
 	} else if (cong_node_is_element(node_parent, NULL, "orderedlist")) {
-		CongXMLChar* attr_numeration = cong_node_get_attribute(node_parent, NULL, "numeration");
+		gchar* attr_numeration = cong_node_get_attribute(node_parent, NULL, "numeration");
 		enum CongNumeration numeration = cong_util_get_numeration_from_docbook_orderedlist_attr (attr_numeration);
 		guint child_index = get_child_index(listitem);
 

@@ -408,7 +408,7 @@ populate_element_from_content (RandomCreationInfo *rci,
 			{
 				gchar *text = random_text (rci);
 				xmlNodePtr child_node = xmlNewDocText (xml_doc,
-								       text);
+								       (const xmlChar*)text);
 				g_free (text);
 
 				xmlAddChild (xml_node, 
@@ -420,7 +420,7 @@ populate_element_from_content (RandomCreationInfo *rci,
 				xmlNodePtr child_node = xmlNewDocNode (xml_doc,
 								       NULL,
 								       content->name,
-								       ""); /* FIXME: namespace? */
+								       (const xmlChar*)""); /* FIXME: namespace? */
 				xmlAddChild (xml_node, 
 					     child_node);
 				populate_element (rci,
@@ -561,11 +561,11 @@ populate_element (RandomCreationInfo *rci,
 
 			child_node = xmlNewDocNode (xml_doc,
 						    NULL,
-						    cong_dispspec_element_get_local_name (ds_element),
-						    "");
+						    (const xmlChar*)cong_dispspec_element_get_local_name (ds_element),
+						    (const xmlChar*)"");
 			if (cong_dispspec_element_get_ns_uri (ds_element)) {
 				xmlNsPtr xml_ns = xmlNewNs (child_node, 
-							    cong_dispspec_element_get_ns_uri (ds_element),
+							    (const xmlChar*)cong_dispspec_element_get_ns_uri (ds_element),
 							    NULL);
 				xmlSetNs (child_node, 
 					  xml_ns);	
@@ -589,7 +589,7 @@ make_random_doc (RandomCreationInfo *rci)
 	xmlNodePtr root_node;
 	const CongExternalDocumentModel* dtd_model;
 	CongDispspecElement *ds_element_root;
-	const xmlChar *root_element;
+	const gchar *root_element;
 
 	g_assert (rci);
 	g_assert (rci->dispspec);
@@ -603,15 +603,15 @@ make_random_doc (RandomCreationInfo *rci)
 	dtd_model = cong_dispspec_get_external_document_model (rci->dispspec,
 							       CONG_DOCUMENT_MODE_TYPE_DTD);
 
-	xml_doc = xmlNewDoc ("1.0");
+	xml_doc = xmlNewDoc ((const xmlChar*)"1.0");
 
 	root_node = xmlNewDocNode (xml_doc,
 				   NULL, /* xmlNsPtr ns, */
-				   root_element,
+				   (const xmlChar*)root_element,
 				   NULL);
 	if (cong_dispspec_element_get_ns_uri (ds_element_root)) {
 		xmlNsPtr xml_ns = xmlNewNs (root_node, 
-					    cong_dispspec_element_get_ns_uri (ds_element_root),
+					    (const xmlChar*)cong_dispspec_element_get_ns_uri (ds_element_root),
 					    NULL);
 		xmlSetNs (root_node, 
 			  xml_ns);	

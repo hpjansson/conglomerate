@@ -115,9 +115,9 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_change,
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
-static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const gchar *new_content);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -796,7 +796,7 @@ static void regenerate_data_for_node(CongTreeView *cong_tree_view, CongNodePtr n
 	}
 }
 
-static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const gchar *new_content)
 {
 	CongTreeView *cong_tree_view;
 
@@ -815,7 +815,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 	}
 }
 
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value)
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value)
 {
 	CongTreeView *cong_tree_view;
 
@@ -833,7 +833,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 	}
 }
 
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name)
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const gchar *name)
 {
 	CongTreeView *cong_tree_view;
 

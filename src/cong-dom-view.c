@@ -247,13 +247,13 @@ get_text_for_node(CongNodePtr node)
 		text = g_strdup_printf("ATTRIBUTE");
 		break;		
 	case CONG_NODE_TYPE_TEXT:
-		cleaned_text = clean_text(node->content);
+		cleaned_text = clean_text((const gchar*)node->content);
 		text = g_strdup_printf("%s \"<span foreground=\"%s\">%s</span>\"", 
 				       _("Text:"), colour_string, cleaned_text);
 		g_free(cleaned_text);
 		break;
 	case CONG_NODE_TYPE_CDATA_SECTION:
-		cleaned_text = clean_text(node->content);
+		cleaned_text = clean_text((const gchar*)node->content);
 		text = g_strdup_printf("%s \"<span foreground=\"%s\">%s</span>\"", 
 				       _("CDATA:"), colour_string, cleaned_text);
 		g_free(cleaned_text);
@@ -268,7 +268,7 @@ get_text_for_node(CongNodePtr node)
 		text = g_strdup_printf("PI");
 		break;
 	case CONG_NODE_TYPE_COMMENT:
-		cleaned_text = clean_text(node->content);
+		cleaned_text = clean_text((const gchar*)node->content);
 		text = g_strdup_printf("<span foreground=\"%s\">&lt;!-- %s --&gt;</span>", colour_string, cleaned_text);
 		g_free(cleaned_text);
 		break;

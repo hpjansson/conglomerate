@@ -84,7 +84,7 @@ regenerate_rnc (CongDocument *doc,
 #endif
 	
 	gtk_text_buffer_set_text (GTK_TEXT_BUFFER(text_buffer),
-				  doc_txt_ptr,
+				  (const gchar*)doc_txt_ptr,
 				  doc_txt_len);
 	
 	xmlFree (doc_txt_ptr);

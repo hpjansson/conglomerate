@@ -46,7 +46,7 @@ CONG_EDITOR_NODE_DEFINE_SUBCLASS (Comment,
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
 				 CongNodePtr node, 
-				 const xmlChar *new_content, 
+				 const gchar *new_content, 
 				 gpointer user_data);
 
 static void 
@@ -75,7 +75,7 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    traversal_node);	
 
 	PRIVATE(editor_node_comment)->text_cache = cong_text_cache_new (FALSE, /* Don't strip whitespace */
-									cong_traversal_node_get_node (traversal_node)->content,
+									(const gchar*)cong_traversal_node_get_node (traversal_node)->content,
 									NULL);
 
 	return editor_node_comment;
@@ -158,7 +158,7 @@ generate_block_area (CongEditorNode *editor_node)
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
 				 CongNodePtr node, 
-				 const xmlChar *new_content, 
+				 const gchar *new_content, 
 				 gpointer user_data)
 {
 	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;

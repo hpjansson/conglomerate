@@ -509,7 +509,7 @@ cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
 
 
 	new_nodes = cong_document_make_nodes_from_source_fragment (doc, 
-								   comment_node->content);
+								   (const gchar*)comment_node->content);
 	if (NULL==new_nodes) {
 		/* Couldn't parse the source */
 		return;

@@ -163,7 +163,7 @@ factory_page_creation_callback_unified(CongServiceDocumentFactory *factory,
 /**
    Manufactures appropriate DocBook DTD, and assigns it to the given document, then adds it to the node tree (so it should show up when serialised)
  */
-static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_element)
+static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const gchar *root_element)
 {
 	xmlDtdPtr xml_dtd;
 
@@ -186,20 +186,20 @@ static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_
  * Returns:
  */
 xmlDocPtr 
-make_article(const xmlChar *title)
+make_article(const gchar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 	xmlNodePtr section_node;
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 
 	add_docbook_declaration(xml_doc, "article");
 
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "article",
+				  (const xmlChar*)"article",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -208,28 +208,28 @@ make_article(const xmlChar *title)
 	xmlAddChild(root_node,
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  title)
+				  (const xmlChar*)"title",
+				  (const xmlChar*)title)
 		    );
 
 	section_node = xmlNewDocNode(xml_doc,
 				     NULL,
-				     "section",
-				     "");
+				     (const xmlChar*)"section",
+				     (const xmlChar*)"");
 	xmlAddChild(root_node, section_node);
 
 	xmlAddChild(section_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  _("Untitled section"))
+				  (const xmlChar*)"title",
+				  (const xmlChar*)_("Untitled section"))
 		    );
 
 	xmlAddChild(section_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "para",
-				  _("Text of the article goes here"))
+				  (const xmlChar*)"para",
+				  (const xmlChar*)_("Text of the article goes here"))
 		    );
 
 	return xml_doc;
@@ -262,20 +262,20 @@ factory_action_callback_article(CongServiceDocumentFactory *factory, CongNewFile
  * Returns:
  */
 xmlDocPtr 
-make_book(const xmlChar *title)
+make_book(const gchar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 	xmlNodePtr chapter_node;
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 
 	add_docbook_declaration(xml_doc, "book");	
 
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "book",
+				  (const xmlChar*)"book",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -284,28 +284,28 @@ make_book(const xmlChar *title)
 	xmlAddChild(root_node,
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  title)
+				  (const xmlChar*)"title",
+				  (const xmlChar*)title)
 		    );
 
 	chapter_node = xmlNewDocNode(xml_doc,
 				     NULL,
-				     "chapter",
-				     "");
+				     (const xmlChar*)"chapter",
+				     (const xmlChar*)"");
 	xmlAddChild(root_node, chapter_node);
 
 	xmlAddChild(chapter_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  _("Untitled chapter"))
+				  (const xmlChar*)"title",
+				  (const xmlChar*)_("Untitled chapter"))
 		    );
 
 	xmlAddChild(chapter_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "para",
-				  _("Text of the first chapter goes here"))
+				  (const xmlChar*)"para",
+				  (const xmlChar*)_("Text of the first chapter goes here"))
 		    );
 
 	return xml_doc;
@@ -338,20 +338,20 @@ factory_action_callback_book(CongServiceDocumentFactory *factory, CongNewFileAss
  * Returns:
  */
 xmlDocPtr 
-make_set(const xmlChar *title)
+make_set(const gchar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 	xmlNodePtr book_node;
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 
 	add_docbook_declaration(xml_doc, "set");	
 
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "set",
+				  (const xmlChar*)"set",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -360,22 +360,22 @@ make_set(const xmlChar *title)
 	xmlAddChild(root_node,
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  title)
+				  (const xmlChar*)"title",
+				  (const xmlChar*)title)
 		    );
 
 	book_node = xmlNewDocNode(xml_doc,
 				     NULL,
-				     "book",
-				     "");
+				     (const xmlChar*)"book",
+				     (const xmlChar*)"");
 
 	xmlAddChild(root_node, book_node);
 
 	xmlAddChild(book_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
-				  _("Untitled book"))
+				  (const xmlChar*)"title",
+				  (const xmlChar*)_("Untitled book"))
 		    );
 
 	return xml_doc;
@@ -941,14 +941,14 @@ text_importer_action_callback(CongServiceImporter *importer, const gchar *uri, c
 		g_assert(buffer);
 
 		/* Build up the document and its content: */
-		xml_doc = xmlNewDoc("1.0");
+		xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 
 		add_docbook_declaration(xml_doc, "article");
 			
 		root_node = xmlNewDocNode(xml_doc,
 					  NULL, /* xmlNsPtr ns, */
-					  "article",
-					  NULL);
+					  (const xmlChar*)"article",
+					  (const xmlChar*)NULL);
 
 		xmlDocSetRootElement(xml_doc,
 				     root_node);
@@ -1018,11 +1018,11 @@ sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *
 		g_assert(buffer);
 
 		/* Build up the document and its content: */
-		xml_doc = xmlNewDoc("1.0");
+		xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 			
 		root_node = xmlNewDocNode(xml_doc,
 					  NULL, /* xmlNsPtr ns, */
-					  "article",
+					  (const xmlChar*)"article",
 					  NULL);
 
 		xmlDocSetRootElement(xml_doc,
@@ -1031,15 +1031,15 @@ sourcecode_importer_action_callback(CongServiceImporter *importer, const gchar *
 		xmlAddChild(root_node,
 			    xmlNewDocNode(xml_doc,
 					  NULL,
-					  "title",
-					  uri)
+					  (const xmlChar*)"title",
+					  (const xmlChar*)uri)
 			    );
 
 		xmlAddChild(root_node,
 			    xmlNewDocNode(xml_doc,
 					  NULL,
-					  "programlisting",
-					  buffer)
+					  (const xmlChar*)"programlisting",
+					  (const xmlChar*)buffer)
 			    );
 
 		/* Finished building content: */

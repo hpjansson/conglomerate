@@ -95,7 +95,7 @@ get_flow_type (CongEditorNode *editor_node);
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
 				 CongNodePtr node, 
-				 const xmlChar *new_content, 
+				 const gchar *new_content, 
 				 gpointer user_data);
 
 static void 
@@ -687,7 +687,7 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 			if (cong_node_get_ordering (start_loc->node, node)<0) {
 				/* Then this node is within a larger selection: */
 				g_assert (node->content);
-				*output = strlen (node->content);
+				*output = strlen ((const char*)node->content);
 				return TRUE;
 			}
 		}		
@@ -703,7 +703,7 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 static void 
 on_signal_set_text_notify_after (CongDocument *doc, 
 				 CongNodePtr node, 
-				 const xmlChar *new_content, 
+				 const gchar *new_content, 
 				 gpointer user_data)
 {
 	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;
@@ -1034,7 +1034,7 @@ get_flow_type(CongEditorNode *editor_node)
 static const gchar*
 get_text_cache_input_text (CongEditorNodeText *editor_node_text)
 {
-	return cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
+	return (const gchar*)cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content;
 }
 
 static PangoAttrList*
@@ -1120,12 +1120,12 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 										this_node);
 
 				list_of_words = cong_util_get_words (language,
-								     this_node->content);
+								     (const gchar*)this_node->content);
 				for (iter = list_of_words; iter; iter=iter->next) {
 					CongWord *word = (CongWord*)iter->data;
 
 					if (cong_util_spellcheck_word (language,
-								       this_node->content,
+								       (const gchar*)this_node->content,
 								       word)) {
 						add_attrs_for_error (attr_list,
 								     word->start_byte_offset,

@@ -38,7 +38,7 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
   xmlNodePtr xml_node; \
   g_return_val_if_fail (inst, NULL); \
   g_return_val_if_fail (xml_doc, NULL); \
-  xml_node = xmlNewDocNode (xml_doc, NULL, xml_name, NULL); 
+  xml_node = xmlNewDocNode (xml_doc, NULL, (const xmlChar*)xml_name, NULL); 
 
 #define GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR(xml_name, type_name, fn_name_frag) \
 xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *inst, xmlDocPtr xml_doc) { \
@@ -46,7 +46,7 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
   xmlNodePtr xml_node; \
   g_return_val_if_fail (inst, NULL); \
   g_return_val_if_fail (xml_doc, NULL); \
-  xml_node = xmlNewDocNode (xml_doc, NULL, xml_name, NULL); 
+  xml_node = xmlNewDocNode (xml_doc, NULL, (const xmlChar*)xml_name, NULL); 
 
 #define GXX_STRUCT_END_ELEMENT() \
   return xml_node; \
@@ -61,7 +61,7 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
 
 #define GXX_STRUCT_ATTRIBUTE_STRING(attr_name, member_name, is_required, default_value) \
   if (inst->member_name) { \
-    xmlNewProp (xml_node, attr_name, inst->member_name); \
+	  xmlNewProp (xml_node, (const xmlChar*)attr_name, (const xmlChar*)inst->member_name); \
   } else { \
     if (is_required) { \
       g_warning ("NULL string for attribute \"%s\" within <%s>", attr_name, tag_name); \
@@ -73,12 +73,12 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
     const gchar *attr_value = cong_enum_mapping_lookup_string (enum_mapping, \
 							       sizeof(enum_mapping)/sizeof(CongEnumMapping), \
 							       inst->member_name); \
-    xmlNewProp (xml_node, attr_name, attr_value); \
+    xmlNewProp (xml_node, (const xmlChar*)attr_name, (const xmlChar*)attr_value); \
   }
 
 #define GXX_STRUCT_ATTRIBUTE_BOOLEAN(attr_name, member_name, is_required, default_value) \
   { \
-    xmlNewProp (xml_node, attr_name, cong_util_bool_to_string (inst->member_name)); \
+    xmlNewProp (xml_node, (const xmlChar*)attr_name, (const xmlChar*)cong_util_bool_to_string (inst->member_name)); \
   }
 
 #define GXX_STRUCT_UNIQUE_CHILD_PTR_TO_STRUCT(child_name, member_name, fn_name_frag, is_required) \

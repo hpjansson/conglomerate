@@ -46,11 +46,11 @@ static void visit_node(xmlNodePtr node) {
 	/* Converts tags and attributes to lower case: */
 	if (node->type==XML_ELEMENT_NODE || node->type==XML_ATTRIBUTE_NODE) {
 		if (node->name) {
-			gchar *new_name = g_utf8_strdown (node->name, -1);
+			gchar *new_name = g_utf8_strdown ((const gchar*)node->name, -1);
 
 			g_message("Converting <%s> to <%s>", node->name, new_name);
 			xmlFree ((char*)node->name);
-			node->name = new_name;
+			node->name = (xmlChar*)new_name; /* FIXME: wrong allocator? */
 		}
 	}
 

@@ -25,6 +25,7 @@
 #include "global.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
+#include "cong-util.h"
 #include "cong-xpath-expression.h"
 #include <libxml/tree.h>
 #include <libxml/debugXML.h>
@@ -238,11 +239,11 @@ evaluate_expression (CongXPathExpression *xpath_expression)
 	/* g_message("searching xpath \"%s\"",element->header_info->xpath); */
 
 	/* FIXME: compile the path */
-	xpath_obj = xmlXPathEval(PRIVATE(xpath_expression)->string_expression,
+	xpath_obj = xmlXPathEval((const xmlChar*)PRIVATE(xpath_expression)->string_expression,
 				 PRIVATE(xpath_expression)->ctxt);	
 
 	if (xpath_obj) {
-		result = xmlXPathCastToString(xpath_obj);			
+		result = cong_util_dup_and_free_xml_string (xmlXPathCastToString(xpath_obj));			
 	} else {
 		result = g_strdup(_("(xpath failed)"));
 	}	

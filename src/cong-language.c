@@ -141,7 +141,7 @@ cong_per_language_data_new_from_xml (xmlDocPtr xml_doc,
 
 			if (lang) {
 				cong_per_language_set_data_for_lang (per_lang,
-								     g_strdup (lang),
+								     g_strdup ((const gchar*)lang),
 								     data);
 				xmlFree (lang);
 			} else {
@@ -190,7 +190,7 @@ data_to_xml_cb (gpointer key,
 		}
 		xmlSetNsProp (new_node,
 			      ns,
-			      "lang", 
+			      (const xmlChar*)"lang", 
 			      key);
 	}
 

@@ -89,8 +89,8 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 						CongDocument *doc,
 						CongNodePtr node,
 						xmlNs *ns_ptr,
-						const xmlChar *name, 
-						const xmlChar *value)
+						const gchar *name, 
+						const gchar *value)
 {
 	struct CongNodeModificationSetAttributeDetails *private;
 
@@ -101,7 +101,7 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 					  node);
 
 	if (ns_ptr != NULL) {
-		private->ns_prefix = g_strdup(ns_ptr->prefix);
+		private->ns_prefix = g_strdup((const gchar*)ns_ptr->prefix);
 	} else {
 		private->ns_prefix = NULL;
 	}
@@ -127,8 +127,8 @@ CongModification*
 cong_node_modification_set_attribute_new (CongDocument *doc,
 					  CongNodePtr node,
 					  xmlNs *ns_ptr,
-					  const xmlChar *name, 
-					  const xmlChar *value)
+					  const gchar *name, 
+					  const gchar *value)
 {
 	return CONG_MODIFICATION(cong_node_modification_set_attribute_construct (CONG_NODE_MODIFICATION_SET_ATTRIBUTE(g_object_new (CONG_NODE_MODIFICATION_SET_ATTRIBUTE_TYPE, NULL)),
 										 doc,

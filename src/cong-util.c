@@ -62,7 +62,7 @@
 gboolean 
 cong_util_is_docbook (CongDocument *doc) 
 {
-	const CongXMLChar* dtd_public_id;
+	const gchar* dtd_public_id;
 
 	g_return_val_if_fail(doc, FALSE);
 
@@ -120,7 +120,7 @@ cong_util_is_pure_whitespace (const gchar *utf8_text)
  * Returns: a freshly-allocated string, with all tabs and carriage returns turned into their printf equivalents
  */
 gchar* 
-cong_util_cleanup_text (const xmlChar *src_text) 
+cong_util_cleanup_text (const gchar *src_text) 
 {
 #if 0
 	gchar *buffer;
@@ -174,7 +174,7 @@ cong_util_cleanup_text (const xmlChar *src_text)
  * Returns: a freshly-allocated string, cleaned up as described above
  */
 gchar* 
-cong_util_text_header (const xmlChar *text,
+cong_util_text_header (const gchar *text,
 		       guint truncation_length)
 {
 	CongTextCache* text_cache;
@@ -390,17 +390,17 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
  */ 
 xmlDtdPtr
 cong_util_make_dtd (xmlDocPtr xml_doc,
-		    const xmlChar *root_element,
-		    const xmlChar *ExternalID, 
-		    const xmlChar *SystemID)
+		    const gchar *root_element,
+		    const gchar *ExternalID, 
+		    const gchar *SystemID)
 {
 #if 1
 	xmlDtdPtr  dtd_ptr;
 
 	g_message ("Trying to load DTD with PUBLIC \"%s\" SYSTEM \"%s\"", ExternalID, SystemID);
 
-	dtd_ptr = xmlParseDTD (ExternalID, 
-			       SystemID);
+	dtd_ptr = xmlParseDTD ((const xmlChar*)ExternalID, 
+			       (const xmlChar*)SystemID);
 	
 	if (dtd_ptr) {
 		g_message ("Succeeded");
@@ -412,7 +412,7 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 		if (dtd_ptr->name) {
 			xmlFree ((char*)dtd_ptr->name);
 		}
-		dtd_ptr->name = xmlStrdup(root_element);
+		dtd_ptr->name = xmlStrdup((const xmlChar*)root_element);
 
 		/* Set up ptr within the xml_doc: */
 		xml_doc->extSubset = dtd_ptr;
@@ -453,9 +453,9 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
  */
 xmlDtdPtr 
 cong_util_add_external_dtd (xmlDocPtr xml_doc, 
-			    const xmlChar *root_element,
-			    const xmlChar *ExternalID, 
-			    const xmlChar *SystemID)
+			    const gchar *root_element,
+			    const gchar *ExternalID, 
+			    const gchar *SystemID)
 {
 	xmlDtdPtr xml_dtd;
 
@@ -589,8 +589,8 @@ cong_util_ns_equality (const xmlNs *xml_ns1,
 	if (xml_ns1 == NULL || xml_ns2 == NULL)
 		return FALSE;
 
-	return cong_util_ns_uri_equality (xml_ns1->href, 
-					  xml_ns2->href);
+	return cong_util_ns_uri_equality ((const gchar*)xml_ns1->href, 
+					  (const gchar*)xml_ns2->href);
 }
 
 /**
@@ -720,11 +720,11 @@ cong_element_description_new_from_node (CongNodePtr node)
 	g_return_val_if_fail (node->type == XML_ELEMENT_NODE, NULL);
 
 	if (node->ns) {
-		return cong_element_description_new (node->ns->href,
-						     node->name);
+		return cong_element_description_new ((const gchar*)node->ns->href,
+						     (const gchar*)node->name);
 	} else {
 		return cong_element_description_new (NULL,
-						     node->name);
+						     (const gchar*)node->name);
 	}
 }
 				
@@ -819,12 +819,12 @@ cong_element_description_matches_node (const CongElementDescription *element_des
 		return FALSE;
 	}
 
-	if (0!=strcmp(node->name, element_desc->local_name)) {
+	if (0!=strcmp((const char*)node->name, element_desc->local_name)) {
 		return FALSE;
 	}
 
 	if (node->ns) {
-		return cong_util_ns_uri_equality (node->ns->href, element_desc->ns_uri);
+		return cong_util_ns_uri_equality ((const gchar*)node->ns->href, element_desc->ns_uri);
 	} else {
 		return (NULL == element_desc->ns_uri);
 	}
@@ -1522,7 +1522,7 @@ cong_util_add_menu_separator (CongPrimaryWindow *primary_window,
  */
 char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
-				       const xmlChar *local_attribute_name)
+				       const gchar *local_attribute_name)
 {
 	g_return_val_if_fail(local_attribute_name != NULL, NULL);
 
@@ -1636,7 +1636,7 @@ cong_util_run_add_dtd_dialog (CongDocument *doc,
 								_("Associate with DTD"),
 								NULL);
 		cong_command_add_set_external_dtd (cmd,
-						   cong_document_get_root_element (doc)->name,
+						   (const gchar*)cong_document_get_root_element (doc)->name,
 						   NULL,
 						   dtd_filename);
 		cong_document_end_command (doc,
@@ -1792,5 +1792,19 @@ cong_str_or_null_equal (gconstpointer a,
 	}
 
 	return (a==b);
+}
+
+/**
+ * cong_util_dup_and_free_xml_string
+ * @xml_string:
+ *
+ * Returns: makes a copy of the string using the GLib allocator, and frees the input using the libxml2 deallocator
+ */
+gchar*
+cong_util_dup_and_free_xml_string (xmlChar *xml_string)
+{
+	gchar *result = g_strdup ((const gchar*)xml_string);
+	xmlFree (xml_string);
+	return result;
 }
 

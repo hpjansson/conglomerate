@@ -201,8 +201,8 @@ typedef struct _CongCleanupSourceUpdateLocationData {
 	CongNodePtr node;
 	
 	/* Used in whitespace stripping */
-	gchar *old_content;
-	gchar *new_content;
+	const gchar *old_content;
+	const gchar *new_content;
 	
 	/* Used in indentation */
 	gint indent;
@@ -215,7 +215,7 @@ strip_whitespace_update_location_callback (CongDocument *doc,
 					   gpointer user_data)
 {
 	CongCleanupSourceUpdateLocationData *location_data = (CongCleanupSourceUpdateLocationData *) user_data;
-	gchar *old_content, *new_content;
+	const gchar *old_content, *new_content;
 	gunichar old_char, new_next_char;
 	gboolean valid = TRUE;
 
@@ -289,11 +289,11 @@ static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, g
 				}
 			}
 
-			new_content = cong_util_strip_whitespace_from_string (node->content,
+			new_content = cong_util_strip_whitespace_from_string ((const gchar*)node->content,
 									      strip_all_initial_whitespace);
 			
 			update_location_data.node = node;
-			update_location_data.old_content = node->content;
+			update_location_data.old_content = (const gchar*)node->content;
 			update_location_data.new_content = new_content;
 
 			cong_command_for_each_location (cleanup_data->cmd,
@@ -416,7 +416,7 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 
 	case CONG_NODE_TYPE_TEXT:
 		/* Clean up a text node, provided it's not one of the whitespace ones we've added ourselves: */
-		if (!cong_util_is_pure_whitespace (node->content))
+		if (!cong_util_is_pure_whitespace ((const gchar*)node->content))
 		{
 			if (cong_util_is_recursively_inline (doc, node->parent)) {
 				/* Do nothing: */

@@ -422,7 +422,7 @@ cong_command_add_node_set_parent (CongCommand *cmd,
 void 
 cong_command_add_node_set_text (CongCommand *cmd, 
 				CongNodePtr node, 
-				const xmlChar *new_content)
+				const gchar *new_content)
 {
 	CongModification *modification;
 	
@@ -450,8 +450,8 @@ void
 cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
 				     xmlNs *ns_ptr,
-				     const xmlChar *name, 
-				     const xmlChar *value)
+				     const gchar *name, 
+				     const gchar *value)
 {
 	CongModification *modification;
 	
@@ -480,7 +480,7 @@ void
 cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
 					xmlNs *ns_ptr,
-					const xmlChar *name)
+					const gchar *name)
 {
 	CongModification *modification;
 	
@@ -924,7 +924,7 @@ cong_command_add_delete_range (CongCommand *cmd,
 			} else {
 			
 				/* Split up textual content of node: */
-				gchar *text_before = g_strndup (loc0.node->content, loc0.byte_offset);
+				gchar *text_before = g_strndup ((gchar*)loc0.node->content, loc0.byte_offset);
 
 				gchar *new_text = g_strdup_printf("%s%s",text_before, loc1.node->content + loc1.byte_offset);
 
@@ -1006,7 +1006,8 @@ cong_command_add_insert_text_at_cursor (CongCommand *cmd,
 	CongCursor *curs;
 	CongLocation old_cursor_loc;
 	CongLocation new_cursor_loc;
-	xmlChar *new_content;
+	gchar *new_content;
+	gchar *new_content_end;
 	int byte_length;
 
 	g_return_if_fail (IS_CONG_COMMAND (cmd));
@@ -1029,23 +1030,23 @@ cong_command_add_insert_text_at_cursor (CongCommand *cmd,
 
 	byte_length = strlen(string);
 
-	new_content = xmlStrndup(old_cursor_loc.node->content, old_cursor_loc.byte_offset);
+	new_content = g_strndup ((const gchar*)old_cursor_loc.node->content, old_cursor_loc.byte_offset);
 	CONG_VALIDATE_UTF8(new_content);
 
-	new_content = xmlStrcat(new_content, string);
+	new_content_end = g_stpcpy (new_content, string);
 	CONG_VALIDATE_UTF8(new_content);
 
-	CONG_VALIDATE_UTF8(old_cursor_loc.node->content+old_cursor_loc.byte_offset);
-	new_content = xmlStrcat(new_content, old_cursor_loc.node->content+old_cursor_loc.byte_offset);
+	CONG_VALIDATE_UTF8((const gchar*)old_cursor_loc.node->content+old_cursor_loc.byte_offset);
+	new_content_end = g_stpcpy (new_content_end, (const gchar*)old_cursor_loc.node->content+old_cursor_loc.byte_offset);
 	CONG_VALIDATE_UTF8(new_content);
 
 	cong_command_add_node_set_text (cmd, 
 					old_cursor_loc.node,
 					new_content);
-	xmlFree(new_content);
+	g_free (new_content);
 
 	new_cursor_loc.byte_offset += byte_length;		
-	CONG_VALIDATE_UTF8(new_cursor_loc.node->content+new_cursor_loc.byte_offset);
+	CONG_VALIDATE_UTF8((const gchar*)new_cursor_loc.node->content+new_cursor_loc.byte_offset);
 
 	cong_command_add_cursor_change (cmd,
 					&new_cursor_loc);
@@ -1150,10 +1151,10 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 	} else if (len2==0) {
 		d = cong_node_new_textual (node_type, "", doc);
 	} else {
-		xmlChar* new_text = g_strndup(loc->node->content, len1); /* FIXME:  char type conversion? */
+		gchar* new_text = g_strndup((const gchar*)loc->node->content, len1);
 
 		/* Make split representation */
-		d = cong_node_new_textual_len (node_type, xml_frag_data_nice(loc->node) + len1, len2, doc); /* FIXME: check char ptr arithmetic; UTF8? */
+		d = cong_node_new_textual_len (node_type, cong_node_safe_get_content(loc->node) + len1, len2, doc); /* FIXME: check char ptr arithmetic; UTF8? */
 
 		/* Shrink original node */
 		cong_command_add_node_set_text(cmd, 
@@ -1196,7 +1197,7 @@ merge_text_update_location_callback (CongDocument *doc,
 
 	} else if (location->node == affected_node) {
 
-		location->byte_offset += strlen(affected_node->prev->content);
+		location->byte_offset += strlen((const char*)affected_node->prev->content);
 
 		return TRUE;
 	}
@@ -1539,9 +1540,9 @@ cong_command_add_node_split3 (CongCommand *cmd,
 	len3 = cong_node_get_length(node) - c1;
 
 	/* Make split representation */
-	d1 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
-	d2 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node) + len1, len2, doc);
-	d3 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node) + len1 + len2, len3, doc);
+	d1 = cong_node_new_textual_len (node_type, cong_node_safe_get_content(node), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
+	d2 = cong_node_new_textual_len (node_type, cong_node_safe_get_content(node) + len1, len2, doc);
+	d3 = cong_node_new_textual_len (node_type, cong_node_safe_get_content(node) + len1 + len2, len3, doc);
 
 	cong_document_begin_edit(doc);
 

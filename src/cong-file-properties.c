@@ -165,8 +165,8 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 				      _("_Remove this DTD"));
 		
 		set_dtd_info (dialog_details->xml,
-			      xml_doc->extSubset->ExternalID,
-			      xml_doc->extSubset->SystemID);	
+			      (const gchar*)xml_doc->extSubset->ExternalID,
+			      (const gchar*)xml_doc->extSubset->SystemID);	
 
 		gtk_label_set_text ( label_dtd_notes, 
 				     "");
@@ -280,10 +280,10 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	/* XML Header: */
 	{
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_xml_version")), 
-				     xml_doc->version);
+				     (const gchar*)xml_doc->version);
 		
 		{
-			const gchar *encoding_text = xml_doc->encoding;
+			const gchar *encoding_text = (const gchar*)xml_doc->encoding;
 			if (NULL==encoding_text) {
 				encoding_text = _("Unspecified");
 			}
@@ -380,7 +380,7 @@ on_dtd_button_clicked (GtkButton *button,
 									_("Associate with DTD"),
 									NULL);
 			cong_command_add_set_external_dtd (cmd,
-							   cong_document_get_root_element (doc)->name,
+							   (const gchar*)cong_document_get_root_element (doc)->name,
 							   cong_external_document_model_get_public_id (model_dtd),
 							   cong_external_document_model_get_system_id (model_dtd));
 			cong_document_end_command (doc,

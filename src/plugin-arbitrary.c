@@ -103,7 +103,7 @@ refresh_preview (ArbitraryGUI *arbitrary_gui)
 				   1);
 	
 	gtk_text_buffer_set_text (arbitrary_gui->preview_text_buffer,
-				  doc_txt_ptr,
+				  (const gchar*)doc_txt_ptr,
 				  doc_txt_len);	
 	xmlFree (doc_txt_ptr);
 	xmlFreeDoc (xml_doc);
@@ -205,15 +205,15 @@ make_arbitrary_doc (ArbitraryCreationInfo *aci)
 	g_assert (aci->ns_uri);
 	g_assert (aci->local_name);
 
-	xml_doc = xmlNewDoc ("1.0");
+	xml_doc = xmlNewDoc ((const xmlChar*)"1.0");
 
 	root_node = xmlNewDocNode (xml_doc,
 				   NULL,
-				   aci->local_name,
+				   (const xmlChar*)aci->local_name,
 				   NULL);
 	if (aci->ns_uri[0]!='\0') {
 		xmlNsPtr xml_ns = xmlNewNs (root_node, 
-					    aci->ns_uri, 
+					    (const xmlChar*)aci->ns_uri, 
 					    NULL);
 		xmlSetNs (root_node, 
 			  xml_ns);	

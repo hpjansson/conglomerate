@@ -651,10 +651,12 @@ cong_dispspec_element_get_title (CongDispspecElement *element,
 		
 		ctxt->node = x;
 		
-		xpath_obj = xmlXPathEval (xpath_string,
+		xpath_obj = xmlXPathEval ((const xmlChar*)xpath_string,
 					  ctxt);	
 		if (xpath_obj) {
-			result = xmlXPathCastToString (xpath_obj);			
+			xmlChar *xmlResult = xmlXPathCastToString (xpath_obj);
+			result = g_strdup ((const gchar*)xmlResult);
+			xmlFree (xmlResult);
 		} else {
 			result = g_strdup (_("(xpath failed)"));
 		}	
@@ -774,11 +776,11 @@ cong_dispspec_element_from_xml (CongDispspec *ds,
 	element->ds = ds;
 
 	if (element->type == CONG_ELEMENT_TYPE_PLUGIN) {
-		xmlChar* id = xmlGetProp(xml_element,"service-id");
+		xmlChar* id = xmlGetProp(xml_element,(const xmlChar*)"service-id");
 		
 		if (id) {
-			element->editor_service_id = g_strdup(id);
-			g_free (id);
+			element->editor_service_id = g_strdup ((const gchar*)id);
+			xmlFree (id);
 		}
 	}
 
@@ -795,12 +797,12 @@ cong_dispspec_element_from_xml (CongDispspec *ds,
   		for (child = xml_element->children; child; child=child->next) {
 
   			/* Handle "collapseto": */
-  			if (0==strcmp(child->name,"collapseto")) {
+  			if (0==strcmp((const char*)child->name,"collapseto")) {
   				element->collapseto = TRUE;
   			}
 
 			/* Handle "property-dialog": */
-  			if (0==strcmp(child->name,"property-dialog")) {
+  			if (0==strcmp((const char*)child->name,"property-dialog")) {
   				DS_DEBUG_MSG1("got property-dialog\n");
 				
 				element->property_dialog_service_id = cong_node_get_attribute(child, NULL, "service-id");
@@ -835,11 +837,11 @@ cong_dispspec_element_from_xml (CongDispspec *ds,
 
 	/* Extract colour: */
 	{
-		xmlChar* col_text = xmlGetProp(xml_element,"color");
+		xmlChar* col_text = xmlGetProp(xml_element,(const xmlChar*)"color");
 		unsigned int col;
 
 		if (col_text) {
-			col = cong_util_get_int_from_rgb_hex (col_text);
+			col = cong_util_get_int_from_rgb_hex ((const gchar*)col_text);
 		} else {
 			col = 0x00ffffff;  /* White is default */
 		}

@@ -970,7 +970,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_change,
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const gchar *new_content);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -1040,7 +1040,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_change, 
 
 }
 
-static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const gchar *new_content)
 {
 	CongEditorView *editor_view;
 

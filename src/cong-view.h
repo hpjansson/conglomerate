@@ -74,9 +74,9 @@ struct CongViewClass
 	void (*on_document_node_add_after)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 	void (*on_document_node_add_before)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
 	void (*on_document_node_set_parent)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
-	void (*on_document_node_set_text)(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
-	void (*on_document_node_set_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
-	void (*on_document_node_remove_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+	void (*on_document_node_set_text)(CongView *view, gboolean before_change, CongNodePtr node, const gchar *new_content);
+	void (*on_document_node_set_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value);
+	void (*on_document_node_remove_attribute)(CongView *view, gboolean before_change, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 	void (*on_selection_change)(CongView *view);
 	void (*on_cursor_change)(CongView *view);
 	void (*on_document_set_dtd_ptr) (CongView *view, 
@@ -122,7 +122,7 @@ struct CongDocumentEvent
 		} set_parent;
 		struct set_text {
 			CongNodePtr node;
-			const xmlChar *new_content;
+			const gchar *new_content;
 		} set_text;
 	} data;
 };

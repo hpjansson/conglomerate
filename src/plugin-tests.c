@@ -76,7 +76,7 @@ static xmlNodePtr make_head_row(xmlDocPtr xml_doc, const struct UnicodeCreationI
 
 	xmlNodePtr row = xmlNewDocNode(xml_doc,
 				       NULL,
-				       "row",
+				       (const xmlChar*)"row",
 				       NULL);
 
 	for (i=0;i<uci->cols_per_table;i++) {
@@ -87,8 +87,8 @@ static xmlNodePtr make_head_row(xmlDocPtr xml_doc, const struct UnicodeCreationI
 
 		entry = xmlNewDocNode(xml_doc,
 				      NULL,
-				      "entry",
-				      text);
+				      (const xmlChar*)"entry",
+				      (const xmlChar*)text);
 		xmlAddChild(row, entry);
 
 		g_free(text);
@@ -104,7 +104,7 @@ static xmlNodePtr make_body_row(xmlDocPtr xml_doc, const struct UnicodeCreationI
 
 	xmlNodePtr row = xmlNewDocNode(xml_doc,
 				       NULL,
-				       "row",
+				       (const xmlChar*)"row",
 				       NULL);
 
 	for (i=0;i<uci->cols_per_table;i++) {
@@ -115,8 +115,8 @@ static xmlNodePtr make_body_row(xmlDocPtr xml_doc, const struct UnicodeCreationI
 
 		entry = xmlNewDocNode(xml_doc,
 				      NULL,
-				      "entry",
-				      text);
+				      (const xmlChar*)"entry",
+				      (const xmlChar*)text);
 		xmlAddChild(row, entry);
 
 		g_free(text);
@@ -134,7 +134,7 @@ static xmlNodePtr make_unicode_table(xmlDocPtr xml_doc, const struct UnicodeCrea
 
 	table_node = xmlNewDocNode(xml_doc,
 				   NULL,
-				   "table",
+				   (const xmlChar*)"table",
 				   NULL);
 
 	/* Add title for this table: */
@@ -146,8 +146,8 @@ static xmlNodePtr make_unicode_table(xmlDocPtr xml_doc, const struct UnicodeCrea
 		xmlAddChild(table_node,
 			    xmlNewDocNode(xml_doc,
 					  NULL,
-					  "title",
-					  title)
+					  (const xmlChar*)"title",
+					  (const xmlChar*)title)
 			    );
 
 		g_free(title);
@@ -157,20 +157,20 @@ static xmlNodePtr make_unicode_table(xmlDocPtr xml_doc, const struct UnicodeCrea
 	{
 		xmlNodePtr tgroup = xmlNewDocNode(xml_doc,
 						  NULL,
-						  "tgroup",
+						  (const xmlChar*)"tgroup",
 						  NULL);
 		
 		xmlAddChild(table_node, tgroup);
 		
 		xmlNewProp_NUMBER(tgroup, 
-				  "cols",
+				  (const xmlChar*)"cols",
 				  uci->cols_per_table);
 
 		/* Add <thead> */
 		{
 			xmlNodePtr thead = xmlNewDocNode(xml_doc,
 							 NULL,
-							 "thead",
+							 (const xmlChar*)"thead",
 							NULL);
 			xmlAddChild(tgroup, thead);
 			xmlAddChild(thead, 
@@ -183,7 +183,7 @@ static xmlNodePtr make_unicode_table(xmlDocPtr xml_doc, const struct UnicodeCrea
 			int row;
 			xmlNodePtr tbody = xmlNewDocNode(xml_doc,
 							 NULL,
-							 "tbody",
+							 (const xmlChar*)"tbody",
 							 NULL);
 				
 			xmlAddChild(tgroup, tbody);
@@ -207,11 +207,11 @@ static xmlDocPtr make_unicode_tables(const struct UnicodeCreationInfo* uci)
 	g_return_val_if_fail(uci, NULL);
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 	
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "article",
+				  (const xmlChar*)"article",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -225,8 +225,8 @@ static xmlDocPtr make_unicode_tables(const struct UnicodeCreationInfo* uci)
 		xmlAddChild(root_node,
 			    xmlNewDocNode(xml_doc,
 					  NULL,
-					  "title",
-					  title)
+					  (const xmlChar*)"title",
+					  (const xmlChar*)title)
 			    );
 
 		g_free(title);
@@ -247,18 +247,18 @@ static xmlDocPtr make_unicode_tables(const struct UnicodeCreationInfo* uci)
 }
 
 #if 0
-xmlDocPtr make_book(const xmlChar *title)
+xmlDocPtr make_book(const gchar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 	xmlNodePtr chapter_node;
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 	
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "book",
+				  (const xmlChar*)"book",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -267,38 +267,38 @@ xmlDocPtr make_book(const xmlChar *title)
 	xmlAddChild(root_node,
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
+				  (const xmlChar*)"title",
 				  title)
 		    );
 
 	chapter_node = xmlNewDocNode(xml_doc,
 				     NULL,
-				     "chapter",
-				     "");
+				     (const xmlChar*)"chapter",
+				     (const xmlChar*)"");
 	xmlAddChild(root_node, chapter_node);
 
 	xmlAddChild(chapter_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "para",
-				  "")
+				  (const xmlChar*)"para",
+				  (const xmlChar*)"")
 		    );
 
 	return xml_doc;
 }
 
 
-xmlDocPtr make_set(const xmlChar *title)
+xmlDocPtr make_set(const gchar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
 
 	/* Build up the document and its content: */
-	xml_doc = xmlNewDoc("1.0");
+	xml_doc = xmlNewDoc((const xmlChar*)"1.0");
 	
 	root_node = xmlNewDocNode(xml_doc,
 				  NULL, /* xmlNsPtr ns, */
-				  "set",
+				  (const xmlChar*)"set",
 				  NULL);
 
 	xmlDocSetRootElement(xml_doc,
@@ -307,7 +307,7 @@ xmlDocPtr make_set(const xmlChar *title)
 	xmlAddChild(root_node,
 		    xmlNewDocNode(xml_doc,
 				  NULL,
-				  "title",
+				  (const xmlChar*)"title",
 				  title)
 		    );
 

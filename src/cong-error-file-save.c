@@ -144,20 +144,15 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 
 				char* file_size_string = gnome_vfs_format_file_size_for_display(*file_size);
 
+#if 0
 				GnomeVFSFileSize volume_capacity;
 
 				/* We call the "get space" function on the parent URI rather than the file URI since this function fails if
 				   the URI does not exist (it decides it's not a local URI as it can't stat the file) */
 
 				/* FIXME: this function only exists at the moment on my local version of GNOME VFS */
-#if 0
-				GnomeVFSResult volume_capacity_result = gnome_vfs_get_volume_capacity(parent_uri,
-												      &volume_capacity);
-#else
-				/* FIXME: This is the workaround: */
-				GnomeVFSResult volume_capacity_result = GNOME_VFS_ERROR_NOT_SUPPORTED;
-#endif
-
+				GnomeVFSResult volume_capacity_result = gnome_vfs_get_volume_capacity (parent_uri,
+												       &volume_capacity);
 				if (volume_capacity_result==GNOME_VFS_OK) {
 					char* volume_capacity_string = gnome_vfs_format_file_size_for_display(volume_capacity);
 				
@@ -169,6 +164,11 @@ cong_error_dialog_new_from_file_save_failure(GtkWindow *parent_window,
 					/* Can't get at the capacity for the device or "volume": */
 					why_failed = g_strdup_printf(_("The file is too big to fit on the device (file size would be %s)."), file_size_string);
 				}
+#else
+				/* FIXME: This is the workaround: */
+				why_failed = g_strdup_printf(_("The file is too big to fit on the device (file size would be %s)."), file_size_string);
+#endif
+
 
 				g_free(file_size_string);
 

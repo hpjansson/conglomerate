@@ -508,7 +508,7 @@ cong_dispspec_registry_get_dispspec_for_dtd (CongDispspecRegistry* registry,
 
 				if (dtd) {
 					if (cong_external_document_model_get_public_id (dtd)) {
-						if (0==strcmp (xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
+						if (0==strcmp ((const char*)xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
 							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID);
 							return ds;
 						}
@@ -519,7 +519,7 @@ cong_dispspec_registry_get_dispspec_for_dtd (CongDispspecRegistry* registry,
 
 		/* Check for matching SYSTEM ID: */
 		if (xml_doc->extSubset->SystemID) {
-			const unsigned char *sysID = xml_doc->extSubset->SystemID;
+			const xmlChar *sysID = xml_doc->extSubset->SystemID;
 			int i;
 			
 			for (i=0;i<cong_dispspec_registry_get_num (registry);i++) {
@@ -531,7 +531,7 @@ cong_dispspec_registry_get_dispspec_for_dtd (CongDispspecRegistry* registry,
 				if (model != NULL) {
 					this_id = cong_external_document_model_get_system_id (model);
 					if (this_id != NULL) {
-						if (!strcmp (sysID, this_id)) {
+						if (!strcmp ((const gchar*)sysID, this_id)) {
 							g_message("Found display spec based on matching system ID of DTD\n    %s\n", sysID);
 							return ds;
 						}

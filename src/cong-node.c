@@ -194,7 +194,7 @@ cong_node_is_element (CongNodePtr node,
 			return FALSE;
 		}
 		
-		return 0==strcmp (local_name, node->name);
+		return 0==strcmp (local_name, (const char*)node->name);
 	}
 
 	return FALSE;
@@ -233,7 +233,7 @@ cong_node_is_element_from_set (CongNodePtr node,
 		for (i=0;i<num_local_names;i++) {
 			g_assert (local_name_array[i]);
 
-			if (0==strcmp (local_name_array[i], node->name)) {
+			if (0==strcmp (local_name_array[i], (const char*)node->name)) {
 
 				if (output_index) {
 					*output_index = i;					
@@ -276,7 +276,7 @@ cong_node_get_ns_uri (CongNodePtr node)
 	g_return_val_if_fail(node, NULL);
 	
 	if (node->ns) {
-		return node->ns->href;
+		return (const gchar*)node->ns->href;
 	} else {
 		return NULL;
 	}
@@ -295,7 +295,7 @@ cong_node_get_ns_prefix (CongNodePtr node)
 	g_return_val_if_fail(node, NULL);
 	
 	if (node->ns) {
-		return node->ns->prefix;
+		return (const gchar*)node->ns->prefix;
 	} else {
 		return NULL;
 	}
@@ -314,7 +314,7 @@ cong_node_get_local_name (CongNodePtr node)
 	g_return_val_if_fail (node, NULL);
 	g_return_val_if_fail (node->type==XML_ELEMENT_NODE, NULL);
 
-	return node->name;
+	return (const gchar*)node->name;
 }
 
 /**
@@ -357,7 +357,7 @@ cong_node_get_ns_for_uri (CongNodePtr node,
 {
 	return xmlSearchNsByHref (node->doc,
 				  node,
-				  ns_uri);
+				  (const xmlChar*)ns_uri);
 }
 
 /*
@@ -379,7 +379,7 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
 
 	return xmlSearchNs (node->doc,
 			    node, /* FIXME: is this correct? */
-			    prefix);
+			    (const xmlChar*)prefix);
 }
 
 /**
@@ -444,7 +444,7 @@ cong_node_get_path(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
 
-	return xmlGetNodePath(node);
+	return cong_util_dup_and_free_xml_string (xmlGetNodePath(node));
 }
 
 /**
@@ -478,7 +478,7 @@ cong_node_debug_description(CongNodePtr node)
 		break;
 	case XML_ATTRIBUTE_NODE:
 	case XML_TEXT_NODE: 
-		cleaned_text = cong_util_cleanup_text(node->content);
+		cleaned_text = cong_util_cleanup_text((const gchar*)node->content);
 		result = g_strdup_printf("%s at %p, name=\"%s\", content=\"%s\", path=\"%s\"",
 					 cong_node_type_description(cong_node_type(node)),
 					 node,
@@ -491,7 +491,7 @@ cong_node_debug_description(CongNodePtr node)
 	case XML_ENTITY_NODE:
 	case XML_PI_NODE:
 	case XML_COMMENT_NODE: 
-		cleaned_text = cong_util_cleanup_text(node->content);
+		cleaned_text = cong_util_cleanup_text((const gchar*)node->content);
 		result = g_strdup_printf("%s at %p, name=\"%s\", content=\"%s\", path=\"%s\"",
 					 cong_node_type_description(cong_node_type(node)),
 					 node,
@@ -627,18 +627,18 @@ cong_node_type_is_textual_content (CongNodeType node_type)
  * Returns: The content of the attribute, to be freed by the caller.
  *          Will be NULL if not found in node and no default in DTD available
  */
-CongXMLChar* 
+gchar* 
 cong_node_get_attribute(CongNodePtr node,
 			xmlNs* ns_ptr, 
-			const CongXMLChar* local_attribute_name)
+			const gchar* local_attribute_name)
 {
 	g_return_val_if_fail(node, NULL);
 	g_return_val_if_fail(local_attribute_name, NULL);
 	
 	if(ns_ptr == NULL) {
-		return xmlGetNoNsProp(node, local_attribute_name);
+		return cong_util_dup_and_free_xml_string (xmlGetNoNsProp(node, (const xmlChar*)local_attribute_name));		
 	} else {
-		return xmlGetNsProp(node, local_attribute_name, ns_ptr->href);
+		return cong_util_dup_and_free_xml_string (xmlGetNsProp(node, (const xmlChar*)local_attribute_name, ns_ptr->href));
 	}
 }
 
@@ -656,13 +656,13 @@ cong_node_get_attribute(CongNodePtr node,
 gboolean 
 cong_node_has_attribute(CongNodePtr node,
 			xmlNs* ns_ptr, 
-			const CongXMLChar* local_attribute_name)
+			const gchar* local_attribute_name)
 {
 	g_return_val_if_fail(node, FALSE);
 	g_return_val_if_fail(local_attribute_name, FALSE);
 	
 	if(ns_ptr == NULL) {
-		xmlAttr *attr = xmlHasProp(node, local_attribute_name);
+		xmlAttr *attr = xmlHasProp(node, (const xmlChar*)local_attribute_name);
 
 		/* now check, if there is any namespace,
 		 * if there is a prefix. */
@@ -670,7 +670,7 @@ cong_node_has_attribute(CongNodePtr node,
 			return FALSE;
 		} else if (attr->ns != NULL &&
 			   attr->ns->prefix != NULL) {
-			if (strcmp(attr->ns->prefix, "") == 0) {
+			if (strcmp((const char*)attr->ns->prefix, "") == 0) {
 				return TRUE;
 			} else {
 				return FALSE;
@@ -679,7 +679,7 @@ cong_node_has_attribute(CongNodePtr node,
 			return TRUE;
 		}
 	} else {		
-		return xmlHasNsProp(node, local_attribute_name, ns_ptr->href) != NULL;
+		return xmlHasNsProp(node, (const xmlChar*)local_attribute_name, ns_ptr->href) != NULL;
 	}
 }
 
@@ -708,7 +708,7 @@ cong_node_self_test(CongNodePtr node)
 
 	default:
 		if (node->content) {
-			g_assert(g_utf8_validate(node->content,-1,NULL));
+			g_assert(g_utf8_validate((const gchar*)node->content,-1,NULL));
 		}
 		break;
 	}
@@ -896,7 +896,7 @@ cong_node_new_element (xmlNsPtr xml_ns,
 
 	return xmlNewDocNode (cong_document_get_xml (doc),
 			      xml_ns,
-			      local_name, 
+			      (const xmlChar*)local_name, 
 			      NULL); /* FIXME: audit the character types here */
 }
 
@@ -922,7 +922,7 @@ cong_node_new_element_from_dispspec (CongDispspecElement *element,
 
 	return xmlNewDocNode (cong_document_get_xml (doc), 
 			      xml_ns,
-			      cong_dispspec_element_get_local_name (element), 
+			      (const xmlChar*)cong_dispspec_element_get_local_name (element), 
 			      NULL);
 }
 
@@ -938,10 +938,10 @@ cong_node_new_element_full (xmlDocPtr xml_doc,
 
 	xml_ns = xmlSearchNsByHref (xml_doc,
 				    (xmlNodePtr)xml_doc, /* FIXME: is this correct? */
-				    ns_uri);
+				    (const xmlChar*)ns_uri);
 	return xmlNewDocNode (xml_doc,
 			      xml_ns,
-			      local_name, 
+			      (const xmlChar*)local_name, 
 			      NULL);
 }
 
@@ -959,11 +959,11 @@ cong_node_new_element_full_with_content (xmlDocPtr xml_doc,
 
 	xml_ns = xmlSearchNsByHref (xml_doc,
 				    (xmlNodePtr)xml_doc, /* FIXME: is this correct? */
-				    ns_uri);
+				    (const xmlChar*)ns_uri);
 	return xmlNewDocNode (xml_doc,
 			      xml_ns,
-			      local_name, 
-			      content);
+			      (const xmlChar*)local_name, 
+			      (const xmlChar*)content);
 }
 
 /**
@@ -998,7 +998,9 @@ cong_node_new_text_len (const char *text,
 	g_return_val_if_fail(text, NULL);
 	g_return_val_if_fail(doc, NULL);
 
-	return xmlNewDocTextLen(cong_document_get_xml(doc), text, len); /* FIXME: audit the character types here */
+	return xmlNewDocTextLen (cong_document_get_xml(doc), 
+				 (const xmlChar*)text, 
+				 len);
 }
 
 CongNodePtr
@@ -1014,7 +1016,7 @@ cong_node_new_cdata_section_len (const gchar *text,
 				 CongDocument *doc)
 {
 	return xmlNewCDataBlock	(cong_document_get_xml(doc),
-				 text,
+				 (const xmlChar*)text,
 				 len);
 }
 
@@ -1025,7 +1027,8 @@ cong_node_new_comment (const gchar *comment,
 	g_return_val_if_fail (comment, NULL);
 	g_return_val_if_fail (doc, NULL);
 
-	return xmlNewDocComment(cong_document_get_xml(doc), comment);
+	return xmlNewDocComment (cong_document_get_xml(doc), 
+				 (const xmlChar*)comment);
 }
 
 CongNodePtr
@@ -1042,7 +1045,8 @@ cong_node_new_comment_len (const gchar *comment,
 	/* There doesn't seem to be a xmlNewDocCommentLen function so we fake it: */
 	tmp_comment = g_strndup (comment, len);
 
-	result = xmlNewDocComment (cong_document_get_xml (doc), tmp_comment);
+	result = xmlNewDocComment (cong_document_get_xml (doc), 
+				   (const xmlChar*)tmp_comment);
 
 	g_free (tmp_comment);
 
@@ -1137,7 +1141,7 @@ cong_node_generate_source (CongNodePtr node)
 		break;
 	}
 
-	result = g_strdup (xmlBufferContent (xml_buffer));
+	result = g_strdup ((const gchar*)xmlBufferContent (xml_buffer));
 
 	xmlBufferFree (xml_buffer);
 
@@ -1192,7 +1196,7 @@ cong_node_generate_child_source (CongNodePtr node)
 
 	} while (1);
 
-	result = g_strdup (xmlBufferContent (xml_buffer));
+	result = g_strdup ((const gchar*)xmlBufferContent (xml_buffer));
 
 	xmlBufferFree (xml_buffer);
 
@@ -1212,11 +1216,11 @@ cong_node_generate_source_from_byte_offset (CongNodePtr node,
 					    int start_byte_offset)
 {
 	if (node->content) {
-		g_assert (start_byte_offset<=strlen(node->content));
+		g_assert (start_byte_offset<=strlen((const char*)node->content));
 
 		return cong_node_generate_source_between_byte_offsets (node,
 								       start_byte_offset,
-								       strlen(node->content));
+								       strlen((const gchar*)node->content));
 
 	} else {
 		return g_strdup("");
@@ -1239,7 +1243,7 @@ cong_node_generate_source_up_to_byte_offset (CongNodePtr node,
 					     int end_byte_offset)
 {
 	if (node->content) {
-		g_assert (end_byte_offset<=strlen(node->content));
+		g_assert (end_byte_offset<=xmlStrlen(node->content));
 
 		return cong_node_generate_source_between_byte_offsets (node,
 								       0,
@@ -1276,20 +1280,20 @@ cong_node_generate_source_between_byte_offsets (CongNodePtr node,
 	g_assert (node->doc);
 
 	if (node->content) {
-		g_assert (start_byte_offset<=strlen(node->content));
-		g_assert (end_byte_offset<=strlen(node->content));
+		g_assert (start_byte_offset<=xmlStrlen(node->content));
+		g_assert (end_byte_offset<=xmlStrlen(node->content));
 	} else {
 		return g_strdup("");
 	}
 
-	clipped_content = g_strndup (node->content + start_byte_offset, end_byte_offset - start_byte_offset);
+	clipped_content = g_strndup ((const gchar*)node->content + start_byte_offset, end_byte_offset - start_byte_offset);
 
 	g_message("clipped content = \"%s\"", clipped_content);
 
 	switch (node->type) {
 	default: g_assert_not_reached();
 	case XML_TEXT_NODE:
-		result = xmlEncodeSpecialChars(node->doc, clipped_content);
+		result = cong_util_dup_and_free_xml_string (xmlEncodeSpecialChars(node->doc, (const xmlChar*)clipped_content));
 		break;
 
 	case XML_COMMENT_NODE:
@@ -1395,7 +1399,7 @@ update_entities (CongNodePtr node)
 			}
 			
 			child_source = cong_node_generate_child_source (node);
-			ent->orig = xmlStrdup (child_source);
+			ent->orig = xmlStrdup ((const xmlChar*)child_source);
 			g_free (child_source);
 			break;
 
@@ -1715,14 +1719,14 @@ cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent, gboo
  * TODO: Write me
  */
 void 
-cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
+cong_node_private_set_text(CongNodePtr node, const gchar *new_content)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_text");
 
 	g_return_if_fail(node);
 	g_return_if_fail(new_content);
 
-	xmlNodeSetContent(node, new_content);
+	xmlNodeSetContent(node, (const xmlChar*)new_content);
 
 	update_entities (node);
 }
@@ -1739,8 +1743,8 @@ cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 void 
 cong_node_private_set_attribute(CongNodePtr node,
 				xmlNs *ns_ptr, 
-				const xmlChar *local_attribute_name,
-				const xmlChar *value)
+				const gchar *local_attribute_name,
+				const gchar *value)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_set_attribute");
 
@@ -1749,9 +1753,9 @@ cong_node_private_set_attribute(CongNodePtr node,
 	g_return_if_fail(value);
 	
 	if(ns_ptr == NULL)
-		xmlSetProp(node, local_attribute_name, value);
+		xmlSetProp(node, (const xmlChar*)local_attribute_name, (const xmlChar*)value);
 	else
-		xmlSetNsProp(node, ns_ptr, local_attribute_name, value);
+		xmlSetNsProp(node, ns_ptr, (const xmlChar*)local_attribute_name, (const xmlChar*)value);
 
 	update_entities (node);
 }
@@ -1767,7 +1771,7 @@ cong_node_private_set_attribute(CongNodePtr node,
 void 
 cong_node_private_remove_attribute(CongNodePtr node, 
 				   xmlNs *ns_ptr,
-				   const xmlChar *local_attribute_name)
+				   const gchar *local_attribute_name)
 {
 	LOG_NODE_PRIVATE_MODIFICATION("cong_node_private_remove_attribute");
 
@@ -1775,9 +1779,9 @@ cong_node_private_remove_attribute(CongNodePtr node,
 	g_return_if_fail(local_attribute_name);
 
 	if(ns_ptr == NULL)
-		xmlUnsetProp(node, local_attribute_name);
+		xmlUnsetProp(node, (const xmlChar*)local_attribute_name);
 	else
-		xmlUnsetNsProp(node, ns_ptr, local_attribute_name);
+		xmlUnsetNsProp(node, ns_ptr, (const xmlChar*)local_attribute_name);
 
 	update_entities (node);
 }
@@ -1900,7 +1904,7 @@ cong_node_should_be_visible_in_editor (CongNodePtr node)
 			if (dtd_entry) {
 				if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
 					return TRUE;
-				} else if (!cong_util_is_pure_whitespace (node->content)) {
+				} else if (!cong_util_is_pure_whitespace ((const gchar*)node->content)) {
 					return TRUE;
 				} else {
 					return FALSE;

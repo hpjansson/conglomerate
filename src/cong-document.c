@@ -52,13 +52,13 @@ static void
 cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 
 static void
-cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
+cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const gchar *new_content);
 
 static void
-cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
+cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const gchar *name, const gchar *value);
 
 static void
-cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
+cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const gchar *name);
 
 static void
 cong_document_handle_selection_change(CongDocument *doc);
@@ -709,7 +709,7 @@ cong_document_get_parent_uri(CongDocument *doc)
  * TODO: Write me
  * Returns:
  */
-const CongXMLChar*
+const gchar*
 cong_document_get_dtd_public_identifier(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
@@ -720,7 +720,7 @@ cong_document_get_dtd_public_identifier(CongDocument *doc)
 		return NULL;
 	}
 
-	return PRIVATE(doc)->xml_doc->extSubset->ExternalID;
+	return (const gchar*)PRIVATE(doc)->xml_doc->extSubset->ExternalID;
 }
 
 /**
@@ -743,7 +743,7 @@ cong_document_get_xml_ns (CongDocument *doc,
 
 	ns = xmlSearchNsByHref (PRIVATE(doc)->xml_doc,
 				(xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
-				ns_uri);
+				(const xmlChar*)ns_uri);
 
 	return ns;
 }
@@ -958,7 +958,7 @@ cong_document_get_node_name (CongDocument *doc,
 		{
 			#define TRUNCATION_LENGTH 15
 
-			gchar *content_header = cong_util_text_header (node->content, TRUNCATION_LENGTH);
+			gchar *content_header = cong_util_text_header ((const gchar*)node->content, TRUNCATION_LENGTH);
 			gchar *result = g_strdup_printf( _("Text \"%s\""), content_header);
 			g_free (content_header);
 			return result;
@@ -978,7 +978,7 @@ cong_document_get_node_name (CongDocument *doc,
 
 	case CONG_NODE_TYPE_COMMENT:
 		{
-			gchar *content_header = cong_util_text_header (node->content, TRUNCATION_LENGTH);
+			gchar *content_header = cong_util_text_header ((const gchar*)node->content, TRUNCATION_LENGTH);
 			gchar *result = g_strdup_printf( _("Comment \"%s\""), content_header);
 			g_free (content_header);
 			return result;
@@ -1463,7 +1463,7 @@ cong_document_private_node_set_parent (CongDocument *doc,
  * TODO: Write me
  */
 void 
-cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const gchar *new_content)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1496,8 +1496,8 @@ void
 cong_document_private_node_set_attribute(CongDocument *doc, 
 					 CongNodePtr node, 
 					 xmlNs *ns_ptr,
-					 const xmlChar *name, 
-					 const xmlChar *value)
+					 const gchar *name, 
+					 const gchar *value)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1532,7 +1532,7 @@ void
 cong_document_private_node_remove_attribute(CongDocument *doc, 
 					    CongNodePtr node, 
 					    xmlNs *ns_ptr,
-					    const xmlChar *name)
+					    const gchar *name)
 {
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
@@ -1769,9 +1769,9 @@ cong_document_get_language_for_node(CongDocument *doc,
 		while (node != NULL) {
 			
 			if (cong_node_type (node)==CONG_NODE_TYPE_ELEMENT) {
-				xmlChar *lang = xmlGetProp (node, "lang");
+				xmlChar *lang = xmlGetProp (node, (const xmlChar*)"lang");
 				if (lang != NULL) {
-					PangoLanguage *result = pango_language_from_string (lang);		
+					PangoLanguage *result = pango_language_from_string ((const gchar*)lang);
 					xmlFree (lang);
 					
 					return result;
@@ -1788,7 +1788,7 @@ cong_document_get_language_for_node(CongDocument *doc,
 		xmlChar *xml_lang = xmlNodeGetLang (node);
 
 		if (xml_lang) {
-			PangoLanguage *result = pango_language_from_string (xml_lang);		
+			PangoLanguage *result = pango_language_from_string ((const gchar*)xml_lang);		
 			xmlFree (xml_lang);
 			
 			return result;
@@ -1825,12 +1825,12 @@ cong_document_make_pango_log_attr_for_node (CongDocument *doc,
 
 	language = cong_document_get_language_for_node (doc, node);
 
-	*attrs_len = g_utf8_strlen (node->content,-1)+1;
+	*attrs_len = g_utf8_strlen ((const gchar*)node->content,-1)+1;
 
 	*pango_log_attrs = g_new (PangoLogAttr, (*attrs_len));
 	
-	pango_get_log_attrs (node->content,
-			     strlen(node->content), /* length in bytes */
+	pango_get_log_attrs ((const gchar*)node->content,
+			     strlen((const char*)node->content), /* length in bytes */
 			     -1,
 			     language,
 			     *pango_log_attrs,
@@ -2710,7 +2710,7 @@ cong_document_handle_node_set_parent(CongDocument *doc, CongNodePtr node, CongNo
 }
 
 static void
-cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
+cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const gchar *new_content)
 {
 	GList *iter;
 
@@ -2752,8 +2752,8 @@ static void
 cong_document_handle_node_set_attribute(CongDocument *doc, 
 					CongNodePtr node, 
 					xmlNs *ns_ptr,
-					const xmlChar *name, 
-					const xmlChar *value)
+					const gchar *name, 
+					const gchar *value)
 {
 	GList *iter;
 
@@ -2806,7 +2806,7 @@ static void
 cong_document_handle_node_remove_attribute(CongDocument *doc, 
 					   CongNodePtr node, 
 					   xmlNs *ns_ptr,
-					   const xmlChar *name)
+					   const gchar *name)
 {
 	GList *iter;
 

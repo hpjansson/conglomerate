@@ -47,7 +47,7 @@ cong_location_is_valid(const CongLocation *loc)
 				g_assert (loc->node->content);
 
 				/* The cursor is allowed to be one byte beyond the end of the content, but no further: */
-				if (loc->byte_offset>strlen(loc->node->content)) {
+				if (loc->byte_offset>strlen((const char*)loc->node->content)) {
 					return FALSE;
 				}
 				
@@ -123,7 +123,7 @@ cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
 		case CONG_NODE_TYPE_TEXT:
 		case CONG_NODE_TYPE_CDATA_SECTION:
 		case CONG_NODE_TYPE_COMMENT:
-			loc->byte_offset = strlen (node->content);
+			loc->byte_offset = strlen ((const char*)node->content);
 			break;
 	}
 }
@@ -177,7 +177,7 @@ cong_location_set_node_and_char_offset(CongLocation *loc, CongNodePtr node, glon
 	   Test that the char offset is in range, etc...
 	 */
 
-	result_pos = g_utf8_offset_to_pointer(node->content, char_offset);
+	result_pos = g_utf8_offset_to_pointer((const gchar*)node->content, char_offset);
 	g_assert(result_pos);
 	
 	loc->node = node;
@@ -245,10 +245,9 @@ cong_location_node_type(const CongLocation *loc)
 
 /**
  * cong_location_get_unichar:
- * @loc:
+ * @loc: a "textual" location in the document (text or comment node)
  *
- * TODO: Write me
- * Returns:
+ * Returns: the unicode character at that location
  */
 gunichar 
 cong_location_get_unichar(const CongLocation *loc)
@@ -257,7 +256,7 @@ cong_location_get_unichar(const CongLocation *loc)
 	g_return_val_if_fail(loc->node != NULL, '\0');
 	g_return_val_if_fail(cong_node_type_is_textual (cong_location_node_type(loc)), '\0');
 	
-	return g_utf8_get_char(xml_frag_data_nice(loc->node) + loc->byte_offset);
+	return g_utf8_get_char (cong_node_safe_get_content (loc->node) + loc->byte_offset);
 }
 
 /**
@@ -295,7 +294,7 @@ cong_node_is_same_tag (CongNodePtr n1,
 	if (CONG_NODE_TYPE_ELEMENT == cong_node_type(n1)) {
 		if (CONG_NODE_TYPE_ELEMENT == cong_node_type(n2)) {
 			if (cong_util_ns_equality (n1->ns,n2->ns)) {
-				if (0==strcmp(n1->name, n2->name)) {
+				if (0==strcmp((const char*)n1->name, (const char*)n2->name)) {
 					return TRUE;
 				}
 			}
@@ -318,7 +317,7 @@ cong_node_is_pure_whitespace_text_node (CongNodePtr node)
 	g_return_val_if_fail (node, FALSE);
 
 	if (CONG_NODE_TYPE_TEXT == cong_node_type(node)) {
-		if (cong_util_is_pure_whitespace (node->content)) {
+		if (cong_util_is_pure_whitespace ((const gchar*)node->content)) {
 			return TRUE;
 		}		
 	}
@@ -450,16 +449,16 @@ cong_location_del_next_char (CongDocument *doc,
 		const gchar *next_char;
 		const gchar *char_after_next;
 
-		new_text = xmlStrndup(xml_frag_data_nice(loc->node), loc->byte_offset);
+		new_text = g_strndup (cong_node_safe_get_content(loc->node), loc->byte_offset);
 		CONG_VALIDATE_UTF8(new_text);
 
-		next_char = xml_frag_data_nice(loc->node) + loc->byte_offset;
+		next_char = cong_node_safe_get_content(loc->node) + loc->byte_offset;
 		CONG_VALIDATE_UTF8(next_char);
 
 		char_after_next = g_utf8_find_next_char(next_char, NULL);
 		if (char_after_next) {
 			CONG_VALIDATE_UTF8(char_after_next);
-			new_text = xmlStrcat(new_text, char_after_next);
+			new_text = strcat (new_text, char_after_next);
 			CONG_VALIDATE_UTF8(new_text);
 		}
 
@@ -473,7 +472,7 @@ cong_location_del_next_char (CongDocument *doc,
 			cong_document_end_command (doc, cmd);
 		}
 
-		xmlFree(new_text);
+		g_free (new_text);
 	} else {
 		/* 
 		   We're at the end of a text node, trying to delete...
@@ -620,12 +619,12 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 
 		g_assert(input_loc->node);
 		g_assert(input_loc->node->content);
-		g_assert(g_utf8_validate(input_loc->node->content,-1,NULL));
+		g_assert(g_utf8_validate((const gchar*)input_loc->node->content,-1,NULL));
 
 		/* FIXME: Should we be looking at a PangoLogAttrs "is_cursor_position" instead? */
 
-		this_char = input_loc->node->content+input_loc->byte_offset;
-		prev_char = g_utf8_find_prev_char(input_loc->node->content, this_char);
+		this_char = (gchar*)input_loc->node->content+input_loc->byte_offset;
+		prev_char = g_utf8_find_prev_char((const gchar*)input_loc->node->content, this_char);
 		g_assert(prev_char);
 
 		cong_location_set_node_and_byte_offset(output_loc,input_loc->node, prev_char - (gchar*)input_loc->node->content);
@@ -640,7 +639,7 @@ cong_location_calc_prev_char(const CongLocation *input_loc,
 		g_assert (is_valid_cursor_node (n, doc));
 
 		/* FIXME: UTF-8 issues here! */
-		cong_location_set_node_and_byte_offset(output_loc,n, strlen(xml_frag_data_nice(n)));
+		cong_location_set_node_and_byte_offset(output_loc,n, strlen(cong_node_safe_get_content(n)));
 		return TRUE;
 	} else {
 		return FALSE;
@@ -681,10 +680,10 @@ cong_location_calc_next_char(const CongLocation *input_loc,
 
 		g_assert (n);
 		g_assert (n->content);
-		g_assert (g_utf8_validate (n->content, -1, NULL));
+		g_assert (g_utf8_validate ((const gchar*)n->content, -1, NULL));
 
 		/* FIXME: Should we be looking at a PangoLogAttrs "is_cursor_position" instead? */
-		this_char = n->content + input_loc->byte_offset;
+		this_char = (gchar*)n->content + input_loc->byte_offset;
 		next_char = g_utf8_find_next_char (this_char, NULL);
         
 		/* We still have characters left in this node, so just move the location one character
@@ -736,7 +735,8 @@ cong_location_calc_prev_word(const CongLocation *input_loc,
 				     &attrs_len);
 
 	if (pango_log_attr) {
-		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+		glong char_index = g_utf8_pointer_to_offset((const gchar*)input_loc->node->content, 
+							    (const gchar*)input_loc->node->content+input_loc->byte_offset);
 
 		g_assert(attrs_len>0);
 		
@@ -797,7 +797,8 @@ cong_location_calc_next_word(const CongLocation *input_loc,
 				     &attrs_len);
 
 	if (pango_log_attr) {
-		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+		glong char_index = g_utf8_pointer_to_offset((const gchar*)input_loc->node->content, 
+							    (const gchar*)input_loc->node->content+input_loc->byte_offset);
 
 		g_assert(attrs_len>0);
 
@@ -1121,7 +1122,8 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 				     &attrs_len);
 
 	if (pango_log_attr) {
-		glong char_index = g_utf8_pointer_to_offset(input_loc->node->content, input_loc->node->content+input_loc->byte_offset);
+		glong char_index = g_utf8_pointer_to_offset((const gchar*)input_loc->node->content, 
+							    (const gchar*)input_loc->node->content+input_loc->byte_offset);
 
 		g_assert(attrs_len>0);
 		g_assert(char_index<attrs_len);

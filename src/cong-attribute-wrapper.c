@@ -53,14 +53,14 @@ static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
 		  const xmlNs *ns_ptr,
-		  const xmlChar *name, 
-		  const xmlChar *value, 
+		  const gchar *name, 
+		  const gchar *value, 
 		  CongAttributeWrapper *attribute_wrapper);
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
 		     const xmlNs *ns_ptr,
-		     const xmlChar *name,
+		     const gchar *name,
 		     CongAttributeWrapper *attribute_wrapper);
 
 /* Exported function definitions: */
@@ -313,8 +313,8 @@ static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
 		  const xmlNs *ns_ptr,
-		  const xmlChar *name, 
-		  const xmlChar *value, 
+		  const gchar *name, 
+		  const gchar *value, 
 		  CongAttributeWrapper *attribute_wrapper)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
@@ -334,7 +334,7 @@ static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
 		     const xmlNs *ns_ptr,
-		     const xmlChar *name,
+		     const gchar *name,
 		     CongAttributeWrapper *attribute_wrapper)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));

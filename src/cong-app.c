@@ -368,7 +368,7 @@ convert_text_html (guchar *data,
 	return convert_ucs2_to_utf8 (data, length);
 #else
 	/* Assume that it's valid UTF-8 HTML: */
-	return g_strndup (data, length);
+	return g_strndup ((gchar*)data, length);
 #endif
 }
 
@@ -559,7 +559,7 @@ cong_app_get_clipboard_xml_source (CongApp *app,
 			
 			if (selection_data) {
 				/* Parse, potentially convert to another XML format, then output in the desired form: */
-				xmlDocPtr xml_doc = xmlParseMemory (selection_data->data,
+				xmlDocPtr xml_doc = xmlParseMemory ((const char*)selection_data->data,
 								    selection_data->length);
 
 				gtk_selection_data_free (selection_data);
@@ -669,7 +669,7 @@ clipboard_get_cb (GtkClipboard *clipboard,
 		gtk_selection_data_set (selection_data,
 					gdk_atom_intern ("text/xml", FALSE),
 					8,
-					cong_selection->utf8_xml_buffer,
+					(const guchar*)cong_selection->utf8_xml_buffer,
 					strlen (cong_selection->utf8_xml_buffer));
 		break;
 	}
@@ -685,7 +685,7 @@ static gchar*
 generate_xml_for_selection (const gchar* xml_fragment,
 			    CongDocument *source_doc)
 {
-	const CongXMLChar* dtd_public_identifier;
+	const gchar *dtd_public_identifier;
 
 	g_assert (xml_fragment);
 	g_assert (IS_CONG_DOCUMENT (source_doc));
@@ -735,7 +735,7 @@ generate_text_for_selection (CongApp *app,
 				g_assert (xml_doc_result->children == xml_doc_result->last);
 				g_assert (xml_doc_result->children->type == XML_TEXT_NODE);
 
-				result = g_strdup (xml_doc_result->children->content);		
+				result = g_strdup ((gchar*)xml_doc_result->children->content);		
 			} else {
 				result = g_strdup ("");
 			}
@@ -1035,7 +1035,7 @@ cong_app_new (int   argc,
 								    FALSE,
 								    NULL);
 
-		PRIVATE (app)->xsl_selection_to_text = xsltParseStylesheetFile (stylesheet_file);
+		PRIVATE (app)->xsl_selection_to_text = xsltParseStylesheetFile ((const xmlChar*)stylesheet_file);
 		if (PRIVATE (app)->xsl_selection_to_text==NULL) {
 			g_warning ("Couldn't parse stylesheet %s", stylesheet_file);
 		}
