@@ -270,6 +270,48 @@ void cong_node_free(CongNodePtr node)
 	
 }
 
+
+void cong_node_recursive_delete(CongNodePtr node)
+{
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr iter, next;
+
+	CONG_NODE_SELF_TEST(node);
+
+	iter = node->children; 
+
+	while (iter) {
+		next = iter->next;
+
+		CONG_NODE_SELF_TEST(iter);
+		
+		cong_node_recursive_delete(iter);
+
+		g_assert(iter->parent==NULL);
+
+		iter = next;
+	}
+
+	g_assert(node->children==NULL);
+	g_assert(node->last==NULL);
+
+	cong_node_make_orphan(node);
+
+	cong_node_free(node);
+#else
+	ttree_branch_remove(node);
+#endif
+}
+
+CongNodePtr cong_node_recursive_dup(CongNodePtr node)
+{
+#if NEW_XML_IMPLEMENTATION
+	return xmlCopyNode(node, TRUE);
+#else
+	return ttree_branch_dup(node);
+#endif
+}
+
 /* Tree manipulation: */
 #if NEW_XML_IMPLEMENTATION
 void cong_node_make_orphan(CongNodePtr node)

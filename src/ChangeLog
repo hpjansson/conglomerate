@@ -1,6 +1,12 @@
 creating ChangeLog
 2002-10-24 David Malcolm
 
+	*  cong-test-view.c, global.h, tree.c, xmldata.c, xmledit.c
+
+	Ported tree/clipboard ops to libxml2; enhanced test view
+	
+2002-10-24 David Malcolm
+
 	* Makefile.am, cong-test-view.c
 
 	Added cong-test-view.c

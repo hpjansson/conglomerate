@@ -101,42 +101,48 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
-	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
-	the_globals.clipboard = ttree_branch_dup(tag);
-	ttree_branch_remove(tag);
+	/* GREP FOR MVC */
+
+	if (the_globals.clipboard) cong_node_recursive_delete(the_globals.clipboard);
+	the_globals.clipboard = cong_node_recursive_dup(tag);
+	cong_node_recursive_delete(tag);
 
 	tree_coarse_update_of_view();
-#endif
+
 	return(TRUE);
 }
 
 
 gint tree_copy(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
-	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
-	the_globals.clipboard = ttree_branch_dup(tag);
-#endif	
+	/* GREP FOR MVC */
+
+	if (the_globals.clipboard) cong_node_recursive_delete(the_globals.clipboard);
+	the_globals.clipboard = cong_node_recursive_dup(tag);
+
 	return(TRUE);
 }
 
 
 gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr new_copy;
+#endif
 
 	if (!the_globals.clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
+
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	new_copy = cong_node_recursive_dup(the_globals.clipboard);
+
+	cong_node_set_parent(new_copy,tag);
+#else
 	
 	the_globals.clipboard->prev = 0;
 	the_globals.clipboard->next = tag->child->child;
@@ -147,26 +153,34 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 	tag->child->child = the_globals.clipboard;
 	the_globals.clipboard->parent = tag->child;
 	
-	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
+	the_globals.clipboard = cong_node_recursive_dup(the_globals.clipboard);
+#endif
 
 	tree_coarse_update_of_view();
-#endif
+
 	return(TRUE);
 }
 
 
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr new_copy;
+#endif
 
 	if (!the_globals.clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
-	
+
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	new_copy = cong_node_recursive_dup(the_globals.clipboard);
+
+	cong_node_add_before(new_copy,tag);
+#else
 	if (tag->prev)
 	{
 		tag->prev->next = the_globals.clipboard;
@@ -183,25 +197,34 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	the_globals.clipboard->parent = tag->parent;
 
 	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
+#endif
 	
 	tree_coarse_update_of_view();
-#endif
+
 	return(TRUE);
 }
 
 
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
+#if NEW_XML_IMPLEMENTATION
+	CongNodePtr new_copy;
+#endif
 
 	if (!the_globals.clipboard) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(tag))) return(TRUE);
 	if (!cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
-	
+
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	new_copy = cong_node_recursive_dup(the_globals.clipboard);
+
+	cong_node_add_after(new_copy,tag);
+#else
+
 	if (tag->next)
 	{
 		tag->next->prev = the_globals.clipboard;
@@ -213,9 +236,10 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 	the_globals.clipboard->parent = tag->parent;
 	
 	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
+#endif
 	
 	tree_coarse_update_of_view();
-#endif
+
 	return(TRUE);
 }
 

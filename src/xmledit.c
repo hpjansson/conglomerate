@@ -2153,9 +2153,6 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
 	int replace_xed = 0;
@@ -2170,15 +2167,26 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
 
-	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
-	
+	/* GREP FOR MVC */
+
+	if (the_globals.clipboard) {
+		cong_node_recursive_delete(the_globals.clipboard);
+	}
+
+#if 1
+	t = cong_node_new_element("dummy");
+#else
 	t = ttree_node_add(0, "tag_span", 8);
 	ttree_node_add(t, "dummy", 5);
+#endif
 
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	selection_reparent_all(selection, t);
-	the_globals.clipboard = ttree_branch_dup(t);
+	the_globals.clipboard = cong_node_recursive_dup(t);
 
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	if (t->child->child)
 	{
 		t->child->child->prev = t->prev;
@@ -2219,9 +2227,6 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 {
-#if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-#else
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
 	CongNodePtr t1 = NULL;
@@ -2235,12 +2240,17 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	ds = curs->xed->displayspec;
 
+	/* GREP FOR MVC */
+
 	if (!the_globals.clipboard)
 	{
-	  selection_import(selection);
-	  return(TRUE);
+		selection_import(selection);
+		return(TRUE);
 	}
 
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+#else
 	if (!the_globals.clipboard->child || !the_globals.clipboard->child->child) return(TRUE);
 	
 	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);

@@ -23,10 +23,40 @@ typedef struct CongTestViewDetails
 } CongTestViewDetails;
 
 #if NEW_XML_IMPLEMENTATION
+gchar* cleanup_text(xmlChar *text) {
+	gchar *buffer = g_malloc(strlen(text)*3); /* for safety's sake */
+	gchar *dst = buffer;
+
+	/* FIXME: audit for character set issues */
+
+	while (*text) {
+		switch (*text) {
+		default:
+			*(dst++) = *text;
+			break;
+		case '\n':
+			*(dst++) = '\\';
+			*(dst++) = 'n';
+			break;
+		case '\t':
+			*(dst++) = '\\';
+			*(dst++) = 't';
+			break;
+		}
+
+		text++;
+	}
+
+	*(dst++) = '\0';
+
+	return buffer;
+}
+
 void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr node, GtkTreeIter* tree_iter)
 {
 	CongNodePtr node_iter;
 	gchar *text = NULL;
+	gchar *cleaned_text = NULL;
 
 	switch (cong_node_type(node)) {
 	default: g_assert(0);
@@ -39,11 +69,15 @@ void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr nod
 		break;
 
 	case CONG_NODE_TYPE_TEXT:
-		text = g_strdup_printf("Text: %s", node->content);
+		cleaned_text = cleanup_text(node->content);
+		text = g_strdup_printf("Text: \"%s\"", cleaned_text);
+		g_free(cleaned_text);
 		break; 
 		
 	case CONG_NODE_TYPE_COMMENT:
-		text = g_strdup_printf("Comment: %s", node->content);
+		cleaned_text = cleanup_text(node->content);
+		text = g_strdup_printf("Comment: \"%s\"", cleaned_text);
+		g_free(cleaned_text);
 		break;
 	}
 

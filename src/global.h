@@ -62,6 +62,9 @@ const gchar *cong_node_type_description(enum CongNodeType node_type);
 void cong_node_self_test(CongNodePtr node);
 void cong_node_self_test_recursive(CongNodePtr node);
 
+void cong_node_recursive_delete(CongNodePtr node);
+CongNodePtr cong_node_recursive_dup(CongNodePtr node);
+
 
 #if 1
 #define CONG_NODE_SELF_TEST(node) cong_node_self_test(node)
