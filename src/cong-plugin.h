@@ -119,6 +119,10 @@ gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
 gboolean plugin_lists_plugin_register(CongPlugin *plugin);
 gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
 
+/* plugin-tests.c: */
+gboolean plugin_tests_plugin_register(CongPlugin *plugin);
+gboolean plugin_tests_plugin_configure(CongPlugin *plugin);
+
 /* plugin-xsl.c: */
 gboolean plugin_xsl_plugin_register(CongPlugin *plugin);
 gboolean plugin_xsl_plugin_configure(CongPlugin *plugin);
