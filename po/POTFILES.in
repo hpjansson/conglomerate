@@ -1,14 +1,17 @@
 data/conglomerate.desktop.in
 src/auth_off.c
 src/auth_on.c
+src/cong-app.c
 src/cong-debug-log-view.c
 src/cong-dialog.c
 src/cong-dispspec-registry.c
 src/cong-dispspec.c
 src/cong-document.c
 src/cong-dom-view.c
+src/cong-dtd.c
 src/cong-dummy-element-editor.c
 src/cong-editor-widget.c
+src/cong-editor-widget3.c
 src/cong-eel.c
 src/cong-element-editor.c
 src/cong-error-dialog.c
@@ -26,6 +29,7 @@ src/cong-graph.c
 src/cong-location.c
 src/cong-menus.c
 src/cong-node-properties-dialog.c
+src/cong-overview-view.c
 src/cong-parser-error.c
 src/cong-plugin.c
 src/cong-primary-window.c
@@ -49,8 +53,10 @@ src/icon_openfile.c
 src/icon_submit.c
 src/ilogo.c
 src/main.c
+src/plugin-cleanup-source.c
 src/plugin-convert-case.c
 src/plugin-docbook.c
+src/plugin-dtd.c
 src/plugin-empty.c
 src/plugin-fo.c
 src/plugin-lists.c

@@ -1,3 +1,13 @@
+2003-07-13  Geert Stappers  <Geert.Stappers@xs4all.nl>
+
+      * POTFILES.in:
+      added src/cong-app.c, src/cong-dtd.c, src/cong-editor-widget3.c,
+      src/cong-overview-view.c,
+      src/plugin-cleanup-source.c, src/plugin-dtd.c
+
+      * conglomerate.pot, es.po, ru.po:
+      Regenerated
+
 2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
        * es.po:
