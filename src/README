@@ -11,8 +11,12 @@ Compiling
 ---------
 
 Conge compilation should be quite simple, if you're lucky. You will need
-GTK/GDK 1.2.6 or later. There are no autoconf or automake scripts, only a
-basic makefile. On most modern Unices, this means you can type
+GTK/GDK 1.2.6 or later, as well as Flux 0.2.8, available from
+
+ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
+
+There are no autoconf or automake scripts, only a basic makefile. On most
+modern Unices, this means you can type
 
 make
 
