@@ -75,6 +75,8 @@ install: build
  	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
 	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
+	mv $(CURDIR)/debian/conglomerate/usr/share/conglomerate/dispspecs/dispspec-template.xds \
+	   $(CURDIR)/debian/conglomerate/usr/share/conglomerate/examples/
 
 	# and for the debug package conglomerate-dbg
 	mkdir -p $(CURDIR)/debian/conglomerate-dbg/usr/bin
