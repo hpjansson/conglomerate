@@ -1,3 +1,8 @@
+2003-08-20  Geert Stappers <stappers@stappers.nl>
+
+	* configure.in
+	Added 'dk' as translated language.
+
 2003-08-19  Geert Stappers <stappers@stappers.nl>
 
 	* configure.in
