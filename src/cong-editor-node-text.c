@@ -98,7 +98,9 @@ CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
 			   CongNodePtr node)
 {
+#if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_text_new(%s)", node->content);
+#endif
 
 	return CONG_EDITOR_NODE( cong_editor_node_text_construct (g_object_new (CONG_EDITOR_NODE_TEXT_TYPE, NULL),
 								  widget,
@@ -136,7 +138,7 @@ generate_area (CongEditorNode *editor_node)
 
 	PRIVATE(node_text)->area_text = 
 		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
-								  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+								  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
 								  stripped_text)
 				       );
 	g_free (stripped_text);

@@ -29,6 +29,8 @@
 
 G_BEGIN_DECLS
 
+#define DEBUG_EDITOR_NODE_LIFETIMES 0
+
 #define CONG_EDITOR_NODE_TYPE	      (cong_editor_node_get_type ())
 #define CONG_EDITOR_NODE(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_NODE_TYPE, CongEditorNode)
 #define CONG_EDITOR_NODE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_TYPE, CongEditorNodeClass)

@@ -77,7 +77,9 @@ CongEditorNode*
 cong_editor_node_element_span_new (CongEditorWidget3* widget,
 				   CongNodePtr node)
 {
+#if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_span_new(%s)", node->name);
+#endif
 
 	return CONG_EDITOR_NODE( cong_editor_node_element_span_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_SPAN_TYPE, NULL),

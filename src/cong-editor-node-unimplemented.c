@@ -80,8 +80,9 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 				    CongNodePtr node,
 				    const gchar *description)
 {
+#if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_unimplemented_new(%s)", description);
-
+#endif
 	return CONG_EDITOR_NODE( cong_editor_node_unimplemented_construct (g_object_new (CONG_EDITOR_NODE_UNIMPLEMENTED_TYPE, NULL),
 									   widget,
 									   node,

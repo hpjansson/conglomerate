@@ -75,8 +75,9 @@ CongEditorNode*
 cong_editor_node_document_new (CongEditorWidget3 *widget,
 			       CongNodePtr node)
 {
+#if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_document_new()");
-
+#endif
 	return CONG_EDITOR_NODE( cong_editor_node_document_construct (g_object_new (CONG_EDITOR_NODE_DOCUMENT_TYPE, NULL),
 								      widget,
 								      node)
