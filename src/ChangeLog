@@ -1,3 +1,9 @@
+2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am, cong-language.h, cong-language.c: 
+
+	Added new cong-language.[ch] files
+
 2004-10-25  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-vfs.c: 

@@ -90,6 +90,7 @@ conglomerate_SOURCES =      \
   cong-glade.c		    \
   cong-glade.h		    \
   cong-graph.h              \
+  cong-language.h           \
   cong-location.h           \
   cong-marshal.h            \
   cong-modification.h       \
@@ -218,6 +219,7 @@ conglomerate_SOURCES =      \
   cong-file-properties.c    \
   cong-font.c               \
   cong-graph.c              \
+  cong-language.c           \
   cong-location.c           \
   cong-marshal.c            \
   cong-menus.c              \
