@@ -27,6 +27,7 @@
 #include "plugin-lists-node-element-listitem.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
+#include "cong-util.h"
 
 #include "plugin-lists-area-listitem.h"
 
@@ -247,7 +248,9 @@ cong_enum_mapping_lookup (CongEnumMapping *enum_mapping,
 			return enum_mapping[i].numeric_value;
 		}
 	}
-	
+
+	/* Unrecognised value: */
+	return default_value;	
 }
 
 static CongEnumMapping docbook_orderedlist_numeration[] =

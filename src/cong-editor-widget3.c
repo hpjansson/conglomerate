@@ -1444,7 +1444,7 @@ populate_widget3(CongEditorWidget3 *widget)
 gboolean
 cong_editor_widget3_node_should_have_editor_node (CongNodePtr node)
 {
-	g_return_if_fail (node);
+	g_return_val_if_fail (node, FALSE);
 
 	/* CongNodePtrs should have CongEditorNodes iff they are part of a tree going up to the document node */
 

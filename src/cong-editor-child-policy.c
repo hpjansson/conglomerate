@@ -66,6 +66,8 @@ cong_editor_child_policy_construct (CongEditorChildPolicy *child_policy,
 				    CongEditorNode* editor_node)
 {
 	PRIVATE(child_policy)->editor_node = editor_node;
+
+	return child_policy;
 }
 
 

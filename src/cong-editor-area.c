@@ -177,6 +177,8 @@ cong_editor_area_construct (CongEditorArea *area,
 #if 0
 	PRIVATE(area)->requisition;
 #endif
+
+	return area;
 }
 
 
@@ -221,7 +223,7 @@ cong_editor_area_hide (CongEditorArea *area)
 const GdkRectangle*
 cong_editor_area_get_window_coords (CongEditorArea *area)
 {
-	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), NULL);
 
 	return &PRIVATE(area)->window_area;
 }
@@ -234,7 +236,7 @@ cong_editor_area_get_requisition (CongEditorArea *area,
 {
 	RequisitionCache *cache;
 
-	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), 0);
 
 	cache = &PRIVATE(area)->requisition_cache[orientation];
 
@@ -286,7 +288,7 @@ cong_editor_area_get_cached_requisition (CongEditorArea *area,
 {
 	RequisitionCache *cache;
 
-	g_return_if_fail (IS_CONG_EDITOR_AREA(area));
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), 0);
 
 	cache = &PRIVATE(area)->requisition_cache[orientation];
 
@@ -447,7 +449,7 @@ cong_editor_area_calc_requisition (CongEditorArea *editor_area,
 				   GtkOrientation orientation,
 				   int width_hint)
 {
-	g_return_if_fail (editor_area);
+	g_return_val_if_fail (editor_area, 0);
 
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
 						       editor_area,
@@ -530,8 +532,8 @@ cong_editor_area_for_all (CongEditorArea *editor_area,
 			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data)
 {
-	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
-	g_return_if_fail (func);
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA(editor_area), NULL);
+	g_return_val_if_fail (func, NULL);
 
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
 						       editor_area,

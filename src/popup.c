@@ -252,6 +252,8 @@ static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr
 	CongCursor *cursor = cong_document_get_cursor(doc);
 
 	cong_document_tag_remove(doc, node_ptr);
+
+	return TRUE;
 }
 
 static gint editor_popup_callback_cut(GtkWidget *widget, CongDocument *doc)

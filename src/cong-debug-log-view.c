@@ -214,8 +214,6 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 {
 	CongDebugLogView *debug_log_view;
 	CongDebugLogViewDetails* details;
-	GtkTreeIter tree_iter_sibling;
-	GtkTreeIter tree_iter_parent;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);

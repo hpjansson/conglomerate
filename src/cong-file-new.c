@@ -163,7 +163,7 @@ void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDrui
 
 GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 {
-	g_return_if_fail(assistant);
+	g_return_val_if_fail (assistant, NULL);
 
 	return GTK_WINDOW(assistant->window);
 }

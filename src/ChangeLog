@@ -1,5 +1,9 @@
 2003-08-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-debug-log-view.c, cong-editor-area-bin.c, cong-editor-area.c, cong-editor-child-policy.c, cong-editor-widget3.c, cong-file-new.c, plugin-lists-node-element-listitem.c, popup.c, xmldata.c 
+
+	Fixed some warnings
+	
 	* cong-document.c, cong-document.h, cong-editor-widget3.c
 
 	Support for deleting the selection

@@ -397,6 +397,7 @@ gboolean cong_node_should_recurse(CongNodePtr node)
 	g_return_val_if_fail(node, FALSE);
 
 	switch (node->type) {
+	default: g_assert_not_reached();
 	case XML_ELEMENT_NODE:
 	case XML_ATTRIBUTE_NODE:
 		return TRUE;
