@@ -1,5 +1,9 @@
 2003-12-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c
+
+	Fix for bug #130227 (Pasting simple text using the middle mouse button often causes assertion failures)
+
 	* cong-editor-area-flow-holder-blocks.c, cong-editor-node.c
 
 	Fix for bug #129907 (Elements appear in reverse order under certain circumstances); made CongEditorNode get_prev/next routines aware of nodes missing due to whitespace removal

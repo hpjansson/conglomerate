@@ -966,6 +966,8 @@ merge_text_update_location_callback (CongDocument *doc,
 
 	g_assert (affected_node);
 	g_assert (affected_node->prev);
+	g_assert (cong_node_type (affected_node)==CONG_NODE_TYPE_TEXT);
+	g_assert (cong_node_type (affected_node->prev)==CONG_NODE_TYPE_TEXT);
 
 	if (location->node == affected_node->prev) {
 		
@@ -1000,13 +1002,13 @@ merge_adjacent_text_callback (CongDocument *doc,
 
 				new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
 
+				cong_command_add_node_set_text (cmd, node, new_text);
+				g_free (new_text);
+
 				/* Update cursor and selection if necessary: */
 				cong_command_for_each_location (cmd,
 								merge_text_update_location_callback, 
 								node);
-
-				cong_command_add_node_set_text (cmd, node, new_text);
-				g_free (new_text);
 
 				cong_command_add_node_recursive_delete (cmd, node->prev);
 			}			
