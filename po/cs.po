@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-10 14:12+0200\n"
-"PO-Revision-Date: 2004-06-10 17:35+0200\n"
+"POT-Creation-Date: 2004-06-14 14:12+0200\n"
+"PO-Revision-Date: 2004-06-14 19:11+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +114,7 @@ msgstr "Verze"
 msgid "XML Header"
 msgstr "Hlavička XML"
 
-#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:184
 msgid "_Associate this DTD"
 msgstr "_Přiřadit tuto DTD"
 
@@ -1202,7 +1202,7 @@ msgstr "Žádný"
 msgid "_Remove this DTD"
 msgstr "_Odstranit tuto DTD"
 
-#: src/cong-file-properties.c:188
+#: src/cong-file-properties.c:190
 msgid ""
 "The document does not specify an external DTD, but Conglomerate believes the "
 "above information is appropriate.  Click on \"Associate this DTD\" to "
@@ -1212,23 +1212,27 @@ msgstr ""
 "informace výše. Určete tuto informaci v dokumentu explicitně kliknutím na "
 "\"Asociovat tuto DTD\"."
 
-#: src/cong-file-properties.c:197
+#: src/cong-file-properties.c:199
 msgid "No External Subset"
 msgstr "Žádná externí podmnožina"
 
-#: src/cong-file-properties.c:199
+#: src/cong-file-properties.c:201
 msgid "_Add a DTD"
 msgstr "_Přidat DTD"
 
-#: src/cong-file-properties.c:283
+#: src/cong-file-properties.c:272 src/cong-file-properties.c:274
+msgid "Unknown"
+msgstr "Neznámé"
+
+#: src/cong-file-properties.c:285
 msgid "Unspecified"
 msgstr "Neurčeno"
 
-#: src/cong-file-properties.c:358
+#: src/cong-file-properties.c:360
 msgid "Remove DTD"
 msgstr "Odstranit DTD"
 
-#: src/cong-file-properties.c:375
+#: src/cong-file-properties.c:377
 msgid "Associate with DTD"
 msgstr "Přiřadit DTD"
 
@@ -1988,6 +1992,18 @@ msgstr "Náhodný dokument"
 msgid "Create an XML document containing random content."
 msgstr "Vytvořit dokument XML obsahující náhodný obsah."
 
+#: src/plugin-relaxng.c:127
+msgid "Compact Syntax View"
+msgstr "Kompaktní zobrazení syntaxe"
+
+#: src/plugin-relaxng.c:145 src/plugin-relaxng.c:148
+msgid "View as Compact RELAX NG"
+msgstr "Zobrazit jako Compact Relax NG"
+
+#: src/plugin-relaxng.c:146
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr "Zobrazit kompaktní formu syntaxe schématu RELAX NG"
+
 #: src/plugin-save-dispspec.c:147
 msgid "Dump Display Spec"
 msgstr "Vypsat specifikaci zobrazování"
@@ -2177,39 +2193,39 @@ msgstr "Převést komentář obsahující zdrojový kód v XML na tento kód"
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:1170
+#: src/popup.c:1168
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:1180
+#: src/popup.c:1178
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:1188
+#: src/popup.c:1186
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:1199
+#: src/popup.c:1197
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:1232
+#: src/popup.c:1233
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:1241
+#: src/popup.c:1242
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:1250
+#: src/popup.c:1251
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:1269
+#: src/popup.c:1270
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1285
+#: src/popup.c:1286
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
