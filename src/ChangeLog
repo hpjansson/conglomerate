@@ -1,3 +1,9 @@
+2003-11-15  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* tree.c
+
+	Fix for bug #127026 (crash when using cut from popup menu)
+
 2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element.c, gxx-object-from-xml-tree.h

@@ -144,8 +144,8 @@ tree_cut_update_location_callback (CongDocument *doc,
 	CongNodePtr node = user_data;
 
 	if (location->node) {
-		if (cong_node_is_descendant_of (location->node,
-						node) ) {
+		if (location->node == node || cong_node_is_descendant_of (location->node,
+									  node) ) {
 			cong_location_nullify(location);
 			return TRUE;
 		}
