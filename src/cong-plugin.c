@@ -89,6 +89,10 @@ struct CongExporter
 struct CongPrintMethod
 {
 	CongFunctionality functionality; /* base class */
+
+	CongPrintMethodFpiFilter fpi_filter;
+	CongPrintMethodActionCallback action_callback;
+	gpointer user_data;
 };
 
 struct CongThumbnailer
@@ -181,6 +185,17 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 
 	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
 		cong_plugin_for_each_exporter(iter->data, callback, user_data);
+	}
+}
+
+void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
+{
+	GList *iter;
+	g_return_if_fail(plugin_manager);
+	g_return_if_fail(callback);
+
+	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
+		cong_plugin_for_each_print_method(iter->data, callback, user_data);
 	}
 }
 
@@ -284,6 +299,39 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	return exporter;
 }
 
+CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
+					    const gchar *name, 
+					    const gchar *description,
+					    const gchar *id,
+					    CongPrintMethodFpiFilter fpi_filter,
+					    CongPrintMethodActionCallback action_callback,
+					    gpointer user_data)
+{
+	CongPrintMethod *print_method;
+
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(name, NULL);
+	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(id, NULL);
+	g_return_val_if_fail(fpi_filter, NULL);
+	g_return_val_if_fail(action_callback, NULL);
+
+        print_method = g_new0(CongPrintMethod,1);
+
+	print_method->functionality.plugin = plugin;
+	print_method->functionality.name = g_strdup(name);
+	print_method->functionality.description = g_strdup(description);
+	print_method->functionality.functionality_id = g_strdup(id);
+	print_method->fpi_filter = fpi_filter;
+	print_method->action_callback = action_callback;
+	print_method->user_data = user_data;
+
+	/* Add to plugin's list: */
+	plugin->list_of_print_method = g_list_append(plugin->list_of_print_method, print_method);
+
+	return print_method;
+}
+
 CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
 							     const gchar *name, 
 							     const gchar *description,
@@ -336,6 +384,14 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 	g_return_if_fail(callback);
 
 	g_list_foreach(plugin->list_of_exporter, (GFunc)callback, user_data);
+}
+
+void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
+{
+	g_return_if_fail(plugin);
+	g_return_if_fail(callback);
+
+	g_list_foreach(plugin->list_of_print_method, (GFunc)callback, user_data);
 }
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
@@ -514,6 +570,28 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 				NULL);
 
 	g_free(gconf_key);
+}
+
+/* Implementation of CongPrintMethod: */
+gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi)
+{
+	g_return_val_if_fail(print_method, FALSE);
+	g_return_val_if_fail(fpi, FALSE);
+
+	g_assert(print_method->fpi_filter);
+
+	return print_method->fpi_filter(print_method, fpi, print_method->user_data);
+}
+
+void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window)
+{
+	g_return_if_fail(print_method);
+	g_return_if_fail(doc);
+	g_return_if_fail(gpc);
+	
+	g_assert(print_method->action_callback);
+
+	return print_method->action_callback(print_method, doc, gpc, print_method->user_data, toplevel_window);
 }
 
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,

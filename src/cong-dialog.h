@@ -64,7 +64,6 @@ GtkDialog *cong_dialog_revert_confirmation_alert_new(GtkWindow *parent,
 						     const gchar *document_name,
 						     glong seconds_since_last_save_or_load);
 
-
 G_END_DECLS
 
 #endif

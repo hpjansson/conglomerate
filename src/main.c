@@ -162,9 +162,15 @@ void insert_element_init()
 
 void fonts_load()
 {
+#if 1
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 8");
+#else
 	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
 	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
 	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 6");
+#endif
 }
 
 

@@ -27,10 +27,8 @@
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
-
-#if 1
+#include "fo.h"
 #include "cong-progress-checklist.h"
-#endif
 
 #if 0
 struct DocBookAuthorInfo
@@ -514,6 +512,109 @@ void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, cons
 	g_free(stylesheet_path);
 }
 
+gboolean docbook_print_method_fpi_filter(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data)
+{
+	g_return_val_if_fail(print_method, FALSE);
+	g_return_val_if_fail(fpi, FALSE);
+
+	return TRUE; /* for now */
+}
+
+void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)
+{
+	GtkWidget *progress_checklist_dialog;
+	CongProgressChecklist *progress_checklist;
+	xmlDocPtr fo_doc;
+
+	g_message("docbook_print_method_action_callback");
+
+	progress_checklist_dialog = cong_progress_checklist_dialog_new("Printing DocBook file", toplevel_window);
+	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
+
+	cong_progress_checklist_add_stage(progress_checklist,
+					  "Transforming DocBook into XSL Formatting Objects");
+	cong_progress_checklist_add_stage(progress_checklist,
+					  "Printing XSL Formatting Objects");
+
+	gtk_widget_show(progress_checklist_dialog);
+
+	{
+		gchar *stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
+		g_assert(stylesheet_path);
+
+		fo_doc = cong_ui_transform_doc(doc,
+					       stylesheet_path,
+					       toplevel_window);
+
+		g_free(stylesheet_path);
+	}
+
+	if (fo_doc) {
+		cong_progress_checklist_complete_stage(progress_checklist);
+
+		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Printing XSL Formatting Objects", 108468);
+
+#if 0
+		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
+		{
+			FoPrintContext *fpc;
+			FoParserResult *parser_result;
+			FoSolverResult *solver_result;
+
+			fpc = fo_print_context_new_from_gnome_print(gpc);
+
+			parser_result = fo_parser_result_new_from_xmldoc(fo_doc);
+			
+			if (parser_result) {
+				
+#if 1
+				/* View solver result: */
+				solver_result = fo_solver_result_new_from_parser_result(parser_result);
+				
+				if (solver_result) {
+					fo_solver_result_render(solver_result, fpc);
+					
+					fo_solver_result_delete(solver_result);
+				}
+#else
+				/* View parser result: */
+				fo_parser_result_test_render(parser_result, fpc);
+#endif
+				
+				fo_parser_result_delete(parser_result);
+				
+			}
+
+			fo_print_context_delete(fpc);
+		}
+#else
+		/* Some test code: */
+		{
+			GnomeFont *font;
+			font = gnome_font_find_closest ("Helvetica", 12);
+			
+			gnome_print_beginpage (gpc, "1");
+			
+			gnome_print_setfont (gpc, font);
+			gnome_print_moveto (gpc, 100, 400);
+			gnome_print_show (gpc, "This will eventually be the text from DocBook print method");
+			
+			gnome_print_moveto (gpc, 100, 200);
+			gnome_print_lineto (gpc, 200, 200);
+			gnome_print_stroke (gpc);
+			
+			gnome_print_showpage (gpc);
+		}
+#endif
+		
+		xmlFreeDoc(fo_doc);
+	}
+
+
+	gtk_widget_destroy(progress_checklist_dialog);
+
+
+}
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
@@ -582,6 +683,14 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 				      docbook_exporter_fpi_filter,
 				      fo_exporter_action_callback,
 				      NULL);
+
+	cong_plugin_register_print_method(plugin, 
+					  "Print DocBook",
+					  "",
+					  "docbook-print",
+					  docbook_print_method_fpi_filter,
+					  docbook_print_method_action_callback,
+					  NULL);
 
 	return TRUE;
 }

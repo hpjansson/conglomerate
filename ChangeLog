@@ -1,3 +1,7 @@
+2003-04-28  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in: Initial support for printing
+	
 2003-04-03  Dmitry G. Mastrukov <dmitry@taurussoft.org>
 
 	* Makefile.am, configure.in, examples/Makefile.am: Install examples and dispspecs to global directory.

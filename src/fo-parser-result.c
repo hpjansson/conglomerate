@@ -13,8 +13,6 @@
 #include "global.h"
 #include "fo.h"
 
-#if PRINT_TESTS
-
 /* FoParserResult internals: */
 static FoUnit get_distance_property(xmlNodePtr node, const xmlChar *property)
 {
@@ -23,16 +21,19 @@ static FoUnit get_distance_property(xmlNodePtr node, const xmlChar *property)
 	int len;
 	xmlChar *units;
 
-	g_assert(value);
+	if (NULL==value) {
+		g_message("missing property \"%s\"", property);
+		return 0;
+	}
 
 	/* 
 	   How to parse?  
-
+	   
 	   Units might be "in", "pt", "mm", "pc", "px"... other units?
-
+	   
 	   My initial implementation just used sscanf and didn't work.
 	*/
-
+	
 	/* FIXME: bad char type */
 	len = strlen(value);
 
@@ -78,7 +79,6 @@ static FoUnit get_distance_property(xmlNodePtr node, const xmlChar *property)
         g_message("%s =\"%s\" (interpreted as %fmm)\n", property, value, number);
 
 	xmlFree(value);
-
 	return number;
 }
 
@@ -585,4 +585,3 @@ FoPageSequenceMaster *fo_parser_result_lookup_page_sequence_master(FoParserResul
 	return NULL;
 }
 
-#endif /* #if PRINT_TESTS */

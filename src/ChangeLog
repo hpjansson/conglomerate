@@ -1,3 +1,13 @@
+2003-04-28  David Malcolm
+
+	* Makefile.am, cong-file-print.c, cong-menus.c, cong-plugin.c, cong-plugin.h, cong-progress-checklist.c, fo-parser-result.c, fo-print-context.c, fo-rect.c, fo.h, global.h, main.c, plugin-docbook.c
+
+	Added printing support
+
+	* cong-file-print.c
+
+	New file
+
 2003-04-26  David Malcolm 
 
 	* cong-error-dialog.c:

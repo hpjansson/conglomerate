@@ -71,8 +71,15 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 					    const gchar *name, 
 					    const gchar *description,
 					    const gchar *id,
-					    CongExporterFpiFilter fip_filter,
+					    CongExporterFpiFilter fpi_filter,
 					    CongExporterActionCallback action_callback,
+					    gpointer user_data);
+CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
+					    const gchar *name, 
+					    const gchar *description,
+					    const gchar *id,
+					    CongPrintMethodFpiFilter fpi_filter,
+					    CongPrintMethodActionCallback action_callback,
 					    gpointer user_data);
 CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
 							     const gchar *name, 
@@ -84,7 +91,7 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_printmethod(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 
 
@@ -122,6 +129,9 @@ gboolean cong_exporter_supports_fpi(CongExporter *exporter, const gchar *fpi);
 void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window);
 gchar *cong_exporter_get_preferred_uri(CongExporter *exporter);
 void cong_exporter_set_preferred_ui(CongExporter *exporter, const gchar *uri);
+
+gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi);
+void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window);
 
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,

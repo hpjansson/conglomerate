@@ -13,8 +13,6 @@
 #include "global.h"
 #include "fo.h"
 
-#if PRINT_TESTS
-
 void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm)
 {
 	GnomePrintContext *gpc;
@@ -75,5 +73,3 @@ void cong_gnome_print_render_xslfo(xmlDocPtr xml_doc, GnomePrintMaster *gpm)
 	fo_print_context_delete(fpc);
 	
 }
-
-#endif /* #if PRINT_TESTS */

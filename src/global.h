@@ -37,8 +37,8 @@ enum
 #define PRINT_TESTS 0
 #define USE_CONG_EDITOR_WIDGET 1
 
-#if PRINT_TESTS
 #include <libgnomeprint/gnome-print.h>
+#if PRINT_TESTS
 #include <libgnomeprint/gnome-print-master.h>
 #endif
 
@@ -556,6 +556,8 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
+typedef gboolean (*CongPrintMethodFpiFilter)(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data);
+typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
 

@@ -187,6 +187,7 @@ void cong_progress_checklist_complete_stage(CongProgressChecklist *progress_chec
 
 	details = g_object_get_data(G_OBJECT(progress_checklist),
 				    "details");
+	g_assert(details);
 
 	details->stages_completed++;
 	refresh_stages(details);
@@ -225,6 +226,7 @@ CongProgressChecklist *cong_progress_checklist_dialog_get_progress_checklist(Con
 	
 	details = g_object_get_data(G_OBJECT(progress_checklist_dialog),
 				    "details");
+	g_assert(details);
 
 	return details->progress_checklist;
 }

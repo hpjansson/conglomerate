@@ -214,6 +214,32 @@ static void menu_callback_file_export(gpointer callback_data,
 			    cong_primary_window_get_toplevel(primary_window));
 }
 
+static void menu_callback_file_print_preview(gpointer callback_data,
+					     guint callback_action,
+					     GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
+
+	cong_ui_file_print_preview(doc,
+				   cong_primary_window_get_toplevel(primary_window));
+}
+
+static void menu_callback_file_print(gpointer callback_data,
+				      guint callback_action,
+				      GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
+
+	/* FIXME: this option should be disabled if there are no print routines installed that are appropriate for this FPI */
+
+	cong_ui_file_print(doc,
+			   cong_primary_window_get_toplevel(primary_window));
+}
+
 static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc, 
 						      GtkWindow *parent_window)
 {
@@ -1058,7 +1084,7 @@ static void menu_callback_about(gpointer callback_data,
  	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
  					   PACKAGE_VERSION,
  					   _("(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm"),
- 					   _("Conglomerate will be a user-friendly XML editor for GNOME"),
+ 					   _("Conglomerate: a free, user-friendly XML editor"),
  					   (const char **)authors,
  					   (const char **)documenters,
  					   strcmp(translator_credits, "translator_credits") != 0 ?
@@ -1084,7 +1110,10 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/_Save"),           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
 	{ N_("/File/Save _As..."),     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
 	{ N_("/File/Sa_ve a Copy..."), "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
 #if ENABLE_UNIMPLEMENTED_MENUS
+	{ N_("/File/Print Previe_w..."),   "<shift><control>P", menu_callback_file_print_preview, 0, "<StockItem>", GTK_STOCK_PRINT_PREVIEW },
+	{ N_("/File/_Print..."),           "<control>P", menu_callback_file_print, 0, "<StockItem>", GTK_STOCK_PRINT },
 	{ N_("/File/_Revert"),         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },

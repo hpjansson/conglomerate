@@ -34,8 +34,6 @@
 #ifndef __FO_H__
 #define __FO_H__
 
-#if PRINT_TESTS
-
 /* Include GnomePrint headers; these will eventually only be required by part of the interface */
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-master.h>
@@ -421,6 +419,5 @@ void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y);
 
 G_END_DECLS
 
-#endif /* #if PRINT_TESTS */
 
 #endif

@@ -13,8 +13,6 @@
 #include "global.h"
 #include "fo.h"
 
-#if PRINT_TESTS
-
 void fo_solver_area_add_child(FoSolverArea *area, FoSolverArea *child)
 {
 	g_assert(child->parent==NULL);
@@ -449,8 +447,5 @@ void fo_solver_result_render(FoSolverResult *result, FoPrintContext *fpc)
 	}
 
 }
-
-#endif /* #if PRINT_TESTS */
-
 
 
