@@ -46,7 +46,7 @@ extra_files = version.xml.in
 # contains GtkObjects/GObjects and you want to document signals and properties.
 GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src
 GTKDOC_LIBS = $(CONGLOMERATE_LIBS) $(GTKSOURCEVIEW_LIBS) $(PRINTING_LIBS) \
-	$(filter-out $(top_srcdir)/src/main.o,$(wildcard $(top_srcdir)/src/*.o))
+	$(filter-out ../../src/main.o,$(wildcard ../../src/*.o))
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
