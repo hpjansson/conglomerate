@@ -2,7 +2,7 @@ conglomerate (0.7.16-2) UNRELEASED; urgency=low
 
   * expecting new upstream version
 
- -- Geert Stappers <stappers@stappers.nl>  Tue, 23 Nov 2004 15:20:10 +0100
+ -- Geert Stappers <stappers@debian.org>  Sat,  1 Jan 2005 15:58:34 +0100
 
 conglomerate (0.7.16-1) unstable; urgency=low
 
