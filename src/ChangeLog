@@ -2,7 +2,7 @@
 
 	* cong-command.c, cong-command.h, cong-document.c, cong-document.h, cong-file-properties.c, cong-source-view.c, cong-view.h
 
-	Integrated DTD chanes into undo/redo system
+	Integrated DTD changes into undo/redo system
 
 	* cong-modification-set-dtd-ptr.c, cong-modification-set-dtd-ptr.h, Makefile.am
 
