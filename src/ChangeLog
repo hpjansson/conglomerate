@@ -1,3 +1,10 @@
+2004-08-27  Douglas Burke <dburke@cfa.harvard.edu>
+
+	* cong-attribute-editor-enumeration.c
+
+	Enumerations are now set to the attribute value on creation, rather
+	than being left at "(unspecified)" (if the attribute is actually set).
+	
 2004-08-26  Douglas Burke <dburke@cfa.harvard.edu>
 
 	* cong-menus.c

@@ -89,6 +89,8 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 					     xmlAttributePtr attr)
 {
 	xmlEnumerationPtr enum_ptr;
+	gchar *attr_value;
+	guint enum_ctr = 0, enum_pos =0;
 
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor_enumeration), NULL);
 
@@ -104,8 +106,11 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 
 	gtk_menu_shell_append (GTK_MENU_SHELL(PRIVATE(attribute_editor_enumeration)->menu), 
 			       gtk_menu_item_new_with_label(_("(unspecified)")));
-	
-	for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
+
+	/* what is the current attribute setting? */
+	attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
+
+	for (enum_ptr=attr->tree, enum_ctr=1; enum_ptr; enum_ptr=enum_ptr->next, enum_ctr++) {
 		GtkWidget *menu_item = gtk_menu_item_new_with_label(enum_ptr->name);
 		
 		g_object_set_data (G_OBJECT(menu_item),
@@ -114,11 +119,19 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 		
 		gtk_menu_shell_append(GTK_MENU_SHELL(PRIVATE(attribute_editor_enumeration)->menu), 
 				      menu_item);
+
+		/* is this the value of the current attribute? */
+		if (cong_util_attribute_value_equality (attr_value,enum_ptr->name))
+			enum_pos = enum_ctr;
 	}
 	
 	gtk_option_menu_set_menu(GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu), 
 				 PRIVATE(attribute_editor_enumeration)->menu);
 	
+	/* Set the initial value of the menu (defaults to unspecified if not found) */
+	gtk_option_menu_set_history (GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu),
+				     enum_pos);
+
 	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->option_menu),
 				"changed",
 				G_CALLBACK(on_option_menu_changed),
@@ -129,7 +142,10 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 	gtk_container_add (GTK_CONTAINER(attribute_editor_enumeration),
 			   GTK_WIDGET(PRIVATE(attribute_editor_enumeration)->option_menu));
 
-	
+	if (attr_value) {
+		g_free (attr_value);
+	}
+
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_enumeration);
 }
 
