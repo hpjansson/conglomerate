@@ -27,7 +27,7 @@
 #include <libgnome/gnome-macros.h>
 
 #include "cong-editor-area-composer.h"
-#include "cong-editor-area-flow-holder.h"
+#include "cong-editor-area-container.h"
 
 #define DEBUG_LINE 0
 
@@ -89,8 +89,8 @@ cong_editor_area_line_construct (CongEditorAreaLine *line,
 				 CongEditorWidget3 *editor_widget,
 				 gint width_limit)
 {
-	cong_editor_area_flow_holder_construct (CONG_EDITOR_AREA(line),
-						editor_widget);
+	cong_editor_area_container_construct (CONG_EDITOR_AREA_CONTAINER(line),
+					      editor_widget);
 
 	PRIVATE(line)->outer_compose = CONG_EDITOR_AREA_COMPOSER( cong_editor_area_composer_new (editor_widget,
 												 GTK_ORIENTATION_HORIZONTAL,
