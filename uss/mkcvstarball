@@ -3,6 +3,7 @@
 ./autogen.sh
 make distcheck
 if [ $? -ne 0 ]
+then
  echo make distcheck failed
  exit 1
 fi
