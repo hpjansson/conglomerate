@@ -30,6 +30,9 @@ data/conglomerate.desktop.in
 data/conglomerate.schemas.in
 HERE
 
+# document types
+find examples -name "*.xds.in" | sort >> ${FPPI}
+
 # found glade files
 find glade -name "*.glade" | sort >> ${FPPI}
 
@@ -44,17 +47,18 @@ echo "# end of file" >> ${FPPI}
 
 function make_fresh_po_ChangeLog
 {
-  date +"%Y-%m-%d  mkpotfiles runner  <@>" > ${FPCL}
+ #date +"%F  mkpotfiles runner  <@>" > ${FPCL}
+  date +"%F  Geert Stappers  <stappers@stappers.nl>" > ${FPCL}
   echo >> ${FPCL}
   echo -e "\tPOTFILES.in:" >> ${FPCL}
   echo -e "\tRegenerated, with uss/mkpotfilesin version ${VERSION}," >> ${FPCL}
-  echo -e "\tthis will effect several PO files." >> ${FPCL}
+  echo -e "\tthis will effect the .po files." >> ${FPCL}
   echo >> ${FPCL}
   cat ${PCL} >> ${FPCL}
 }
 
 # Okay, we have the fresh file, but do we need to do more
-if [ $( diff ${PPI} ${FPPI} | wc -l ) -ne 0 ]
+if [ $( diff ${PPI} ${FPPI} | wc -l ) -gt 0 ]
 then
 	# use the fresh POTFILES.in
 	mv ${FPPI} ${PPI}
@@ -62,8 +66,9 @@ then
 	make_fresh_po_ChangeLog
 	mv ${FPCL} ${PCL}
 	# ask user for help
-	echo put your name in po/ChangeLog
-	echo and do a CVS commit
+	echo update the name in po/ChangeLog
+	echo and do 
+	echo  cvs commit -m\"po/ updated with $0\" po
 else
 	: # kiep kwijt  ;-)
 fi
