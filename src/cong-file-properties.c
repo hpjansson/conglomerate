@@ -172,10 +172,12 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 				     "");
 	
 	} else {
-		const CongExternalDocumentModel* model_dtd;
-		
-		model_dtd = cong_dispspec_get_external_document_model (ds,
-								       CONG_DOCUMENT_MODE_TYPE_DTD);
+		const CongExternalDocumentModel* model_dtd = NULL;
+
+		if (ds) {		
+			model_dtd = cong_dispspec_get_external_document_model (ds,
+									       CONG_DOCUMENT_MODE_TYPE_DTD);
+		}
 		
 		if (model_dtd) {
 			gtk_button_set_label (button_dtd,
@@ -267,9 +269,9 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	/* Fields from dispspec: */
 	{
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typename")),
-				     cong_dispspec_get_name (ds));
+				     ds ? cong_dispspec_get_name (ds) : _("Unknown"));
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typedesc")),
-				     cong_dispspec_get_description (ds));
+				     ds ? cong_dispspec_get_description (ds) : _("Unknown"));
 	}
 	
 	/* XML Header: */

@@ -1,5 +1,8 @@
 2004-06-11  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-file-properties.c: 
+	Allow dispspec to be NULL
+
 	* plugin-save-dispspec.c (doc_filter): 
 
 	Tool should only appear if doc has a dispspec
