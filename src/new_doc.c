@@ -110,12 +110,12 @@ GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *a
 		g_hash_table_insert(assistant->hash_table_of_factory_to_page, document_factory, page);
 
 		/* "Back" should take us to the druid's second page: */
-		gtk_signal_connect(GTK_OBJECT(page), "back", first_page_of_factory_back, assistant);
+		g_signal_connect(GTK_OBJECT(page), "back", G_CALLBACK(first_page_of_factory_back), assistant);
 	}
 
 	if (is_last_of_factory) {
 		/* "Forward" should take us to the druid's final page: */
-		gtk_signal_connect(GTK_OBJECT(page), "next", last_page_of_factory_next, assistant);
+		g_signal_connect(GTK_OBJECT(page), "next", G_CALLBACK(last_page_of_factory_next), assistant);
 	}
 
 	return page;
@@ -370,8 +370,8 @@ void new_document(GtkWindow *parent_window)
 	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->second_page));
 	gtk_widget_show(GTK_WIDGET(assistant->second_page));
 
-	gtk_signal_connect(GTK_OBJECT(assistant->second_page), "prepare", second_page_prepare, assistant);
-	gtk_signal_connect(GTK_OBJECT(assistant->second_page), "next", second_page_next, assistant);
+	g_signal_connect(GTK_OBJECT(assistant->second_page), "prepare", G_CALLBACK(second_page_prepare), assistant);
+	g_signal_connect(GTK_OBJECT(assistant->second_page), "next", G_CALLBACK(second_page_next), assistant);
 
 	assistant->final_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_FINISH,
 								    TRUE,
@@ -382,8 +382,8 @@ void new_document(GtkWindow *parent_window)
 								    assistant->top_watermark);
 	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->final_page));
 	gtk_widget_show(GTK_WIDGET(assistant->final_page));
-	gtk_signal_connect(GTK_OBJECT(assistant->final_page), "back", final_page_back, assistant);
-	gtk_signal_connect(GTK_OBJECT(assistant->final_page), "finish", final_page_finish, assistant);
+	g_signal_connect(GTK_OBJECT(assistant->final_page), "back", G_CALLBACK(final_page_back), assistant);
+	g_signal_connect(GTK_OBJECT(assistant->final_page), "finish", G_CALLBACK(final_page_finish), assistant);
 
 	/* 
 	   There doesn't seem to be a way to delete pages from a druid.  Hence we have to create the GUI for all of the factories
@@ -477,28 +477,28 @@ int gui_window_new_document_make()
 	w1 = gtk_button_new_with_label("Capsula");
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
-  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) capsula_str);
+  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) capsula_str);
 
 #if 0	
 	w1 = gtk_button_new_with_label("Extracta");
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
-  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) extracta_str);
+  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) extracta_str);
 
 	w1 = gtk_button_new_with_label("Informa");
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
-  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) informa_str);
+  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) informa_str);
 
 	w1 = gtk_button_new_with_label("Selecta");
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
-  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) selecta_str);
+  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) selecta_str);
 
 	w1 = gtk_button_new_with_label("Analiza");
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
 	gtk_widget_show(w1);
-  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) analiza_str);
+  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) analiza_str);
 #endif
 	
 	gtk_widget_show(newdoc);
