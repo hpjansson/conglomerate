@@ -1,4 +1,4 @@
-data/conge.desktop.in
+data/conglomerate.desktop.in
 src/cong-dialog.c
 src/cong-dispspec-registry.c
 src/cong-dispspec.c
