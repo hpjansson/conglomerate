@@ -1,3 +1,9 @@
+2003-09-27  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
+ 
+         * cong-parser-error.c
+ 
+	Added syntax highlighting to the parser error dialog.
+
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-document.h, cong-util.h

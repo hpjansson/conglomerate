@@ -1,6 +1,12 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 #include <gtk/gtk.h>
+
+#ifdef ENABLE_GTKSOURCEVIEW
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
+#endif
+
 #include "global.h"
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
@@ -93,7 +99,11 @@ typedef struct CongErrorReport
 {
 	CongParserResult *parser_result;
 	GtkListStore *store;
-	GtkTextBuffer *text_buffer;
+#ifdef ENABLE_GTKSOURCEVIEW
+	GtkSourceBuffer *text_buffer;
+#else
+        GtkTextBuffer *text_buffer;
+#endif
 	GtkWidget *text_view;
 } CongErrorReport;
 
@@ -116,7 +126,7 @@ void  on_row_activated(GtkTreeView *treeview,
 
 		gtk_tree_model_get(GTK_TREE_MODEL(report->store), &tree_iter, PARSER_ERROR_LINENUM_NUMERIC_COLUMN, &line_number, -1);
 		
-		gtk_text_buffer_get_iter_at_line(report->text_buffer,
+		gtk_text_buffer_get_iter_at_line(GTK_TEXT_BUFFER (report->text_buffer),
 						 &text_iter,
 						 line_number);
 
@@ -137,7 +147,13 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	GtkWidget *dialog;
 	gchar *title, *filename;
 	GtkWidget *text_view;
-	GtkTextBuffer *text_buffer;
+#ifdef ENABLE_GTKSOURCEVIEW
+        GtkSourceBuffer *text_buffer;
+        GtkSourceLanguagesManager *lang_manager;
+        GtkSourceLanguage *lang;
+#else
+        GtkTextBuffer *text_buffer;
+#endif
 	GtkWidget *scrolled_window;
 	GtkWidget *scrolled_window2;
 	GtkListStore *store;
@@ -166,16 +182,28 @@ GtkDialog *cong_parser_result_dialog_new(CongParserResult *parser_result)
 	g_free(title);
 
 
-	text_view = gtk_text_view_new ();
-
-	text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-
-#if 1
-	gtk_text_buffer_set_text (text_buffer, parser_result->buffer, parser_result->size);
+#ifdef ENABLE_GTKSOURCEVIEW
+        lang_manager = gtk_source_languages_manager_new();
+        lang = gtk_source_languages_manager_get_language_from_mime_type(lang_manager, "text/xml");
+        text_buffer = gtk_source_buffer_new_with_language(lang);
+        text_view = gtk_source_view_new_with_buffer(text_buffer);
+        gtk_source_buffer_set_highlight(text_buffer, TRUE);
+        gtk_source_view_set_show_line_numbers(GTK_SOURCE_VIEW(text_view), TRUE);
+        g_object_unref(lang_manager);
+        g_object_unref(lang);
 #else
-	gtk_text_buffer_set_text (text_buffer, "Hello, this is some text", -1);
+	text_view = gtk_text_view_new ();
+	text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
 #endif
 
+#if 1
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER(text_buffer), parser_result->buffer, parser_result->size);
+#else
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER(text_buffer), "Hello, this is some text", -1);
+#endif
+
+        gtk_text_view_set_editable(GTK_TEXT_VIEW (text_view), FALSE);
+        gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW (text_view), FALSE);
 
 	scrolled_window = gtk_scrolled_window_new(NULL, NULL);
 		
