@@ -287,6 +287,8 @@ static gboolean key_release_event_handler(GtkWidget *w, GdkEventKey *event, gpoi
 static void size_request_handler(GtkWidget *widget,
  				 GtkRequisition *requisition,
  				 gpointer user_data);
+static gint focus_in_event_handler(GtkWidget *w, GdkEventFocus *event);
+static gint focus_out_event_handler(GtkWidget *w, GdkEventFocus *event);
 
 /* Declarations of the CongDocument event handlers: */
 /* Signal handling callbacks: */
@@ -388,6 +390,9 @@ cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
 
 	widget_class->realize = realize;
 	widget_class->unrealize = unrealize;
+
+	widget_class->focus_in_event = focus_in_event_handler;
+	widget_class->focus_out_event = focus_out_event_handler;
 
 #define _EXPANDER_SIZE 10
     
@@ -950,22 +955,9 @@ commit_cb (GtkIMContext *context,
 	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
 	CongCursor *cursor = cong_document_get_cursor (doc);
 	CongSelection *selection = cong_document_get_selection  (doc);
-	gchar *utf8_string;
-
-	/*
-	  According to this mail message:
-	  http://mail.gnome.org/archives/gtk-list/2002-June/msg00105.html
-
-	  the string is in the locale encoding, rather than in UTF8, and must be converted.
-	*/
-	utf8_string = g_locale_to_utf8 (str,
-					-1,
-					NULL,
-					NULL,
-					NULL);
 
 #if DEBUG_IM_CONTEXT
-	g_message ("commit_cb: \"%s\" -> \"%s\"", str, utf8_string);
+	g_message ("commit_cb: \"%s\"", str);
 #endif
 
 	cmd = cong_document_begin_command (doc, 
@@ -981,13 +973,12 @@ commit_cb (GtkIMContext *context,
 		}
 	}
 
-	cong_command_add_insert_text_at_cursor (cmd, utf8_string);
+	cong_command_add_insert_text_at_cursor (cmd, str);
 	cong_command_add_nullify_selection (cmd);
 	
 	cong_document_end_command (doc,
 				   cmd);
 
-	g_free (utf8_string);
 }
 
 static void     
@@ -1514,6 +1505,22 @@ static void size_request_handler(GtkWidget *widget,
 		requisition->width = root_req.width;
 	}
  	requisition->height = root_req.height;
+}
+
+static gint
+focus_in_event_handler(GtkWidget *w, GdkEventFocus *event)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (w);
+	gtk_im_context_focus_in(PRIVATE(editor_widget)->im_context);
+	return FALSE;
+}
+
+static gint
+focus_out_event_handler(GtkWidget *w, GdkEventFocus *event)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (w);
+	gtk_im_context_focus_out(PRIVATE(editor_widget)->im_context);
+	return FALSE;
 }
 
 /* Definitions of the CongDocument event handlers: */

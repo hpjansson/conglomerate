@@ -1,3 +1,9 @@
+2003-11-03 Yukihiro Nakai <ynakai@redhat.com>
+
+	* cong-editor-widget3.c
+
+	Get strings from immodule as UTF8, notify immodule of focus in/out (bug 125993)
+
 2003-11-01  Paul Smith  <conglomerate@pcs.uklinux.net>
 
 	* cong-primary-window.c, cong-menus.c
