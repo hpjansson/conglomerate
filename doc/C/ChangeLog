@@ -1,3 +1,15 @@
+2003-07-28  Geert Stappers <Stappers@Stappers.nl>
+
+	* README
+	Added information on files like faq.xml.
+	Added the Unix manual page information.
+
+	* conglomerate-refentry.xml, manpage.make, conglomerate.1
+	New files, man page stuff.
+
+	* Makefile.am
+	Added the new files.
+
 2003-07-19  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* conglomerate-C.omf

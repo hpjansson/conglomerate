@@ -1,4 +1,5 @@
 more_C_docs = \
+  conglomerate-refentry.xml manpage.make conglomerate.1 \
   faq.xml
 
 figdir = figures
