@@ -340,6 +340,7 @@ void xmlview_destroy(int free_xml);
 
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
 CongDispspec* cong_dispspec_new_from_xds_file(const char *name);
+CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
 void cong_dispspec_delete(CongDispspec *dispspec);
 
 char *cong_dispspec_name_name_get(TTREE *t);
@@ -429,16 +430,60 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
 
-/* Error handling facilities: */
+/* 
+   Error handling facilities: 
+
+   Although these have a "cong" prefix, I hope to eventually factor these out into a useful library for other apps to use (the prefix will then get changed).
+*/
+
+/**
+ * Routine to manufacture a GNOME HIG-compliant error dialog.
+ */
 GtkWidget* 
 cong_error_dialog_new(const gchar* what_failed, 
 		      const gchar* why_failed, 
 		      const gchar* suggestions);
 
+/**
+ * Routine to get at the application name in a form suitable for use in error reports.  Returns a freshly-allocated string.
+ */
+gchar* 
+cong_error_get_appname(void);
+
+
+/* Temporary routine; will be removed once transition to GnomeVFS is complete. */
 GtkWidget*
 cong_error_dialog_new_file_open_failed(const gchar* filename);
 /* should this be a URI? */
 
+#include <libgnomevfs/gnome-vfs.h>
+
+/**
+ * Routine to manufacture an error dialog for when File->Open fails.
+ * @vfs_uri:  the URI to which you tried to save the file.
+ * @vfs_result: the error code that occurred.
+ */
+GtkWidget*
+cong_error_dialog_new_file_open_failed2(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result);
+
+/**
+ * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.
+ * @vfs_uri:  the URI to which you tried to save the file.
+ * @vfs_result: the error code that occurred.
+ * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
+ */
+GtkWidget*
+cong_error_dialog_new_file_save_failed(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result, const GnomeVFSFileSize* file_size);
+
+/** 
+ * A bunch of self-tests.
+ */
 void
 cong_error_tests(void);
+
+/**
+ * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+*/
+GnomeVFSResult
+cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
 
