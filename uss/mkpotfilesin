@@ -27,6 +27,7 @@ HERE
 # several enumerated files
 cat << HERE >> ${FPPI}
 data/conglomerate.desktop.in
+data/conglomerate.keys.in
 data/conglomerate.schemas.in
 HERE
 
