@@ -5,6 +5,13 @@
  */
 
 #include <gtk/gtk.h>
+
+#ifdef ENABLE_GTKSOURCEVIEW
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
+#include <gtksourceview/gtksourcelanguage.h>
+#endif
+
 #include "global.h"
 #include "cong-document.h"
 #include "cong-view.h"
@@ -24,8 +31,13 @@ typedef struct CongSourceViewDetails
 
 	GtkScrolledWindow *scrolled_window;
 	
-	GtkTextBuffer *text_buffer;
-	GtkTextView *text_view;
+#ifdef ENABLE_GTKSOURCEVIEW
+        GtkSourceBuffer *text_buffer;
+        GtkSourceView *text_view;
+#else
+        GtkTextBuffer *text_buffer;
+        GtkTextView *text_view;
+#endif
 	
 	gboolean is_buffer_up_to_date;
 
@@ -81,7 +93,7 @@ void regenerate_text_buffer(CongSourceView *source_view)
 					  "UTF-8",
 					  (details->format ? 1 : 0));
 
-		gtk_text_buffer_set_text(details->text_buffer,
+		gtk_text_buffer_set_text(GTK_TEXT_BUFFER(details->text_buffer),
 					 doc_txt_ptr,
 					 doc_txt_len);
 
@@ -90,7 +102,7 @@ void regenerate_text_buffer(CongSourceView *source_view)
 
 	details->is_buffer_up_to_date = TRUE;
 #else
-	gtk_text_buffer_set_text(details->text_buffer,
+	gtk_text_buffer_set_text(GTK_TEXT_BUFFER(details->text_buffer),
 				 "fubar",
 				 -1);
 #endif
@@ -318,6 +330,10 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	GtkCellRenderer *renderer;
  	GtkTreeViewColumn *column;
 	GtkTreeIter root_iter;
+#ifdef ENABLE_GTKSOURCEVIEW
+        GtkSourceLanguagesManager *lang_manager;
+        GtkSourceLanguage *lang;
+#endif
 
 	g_return_val_if_fail(doc, NULL);
 
@@ -350,11 +366,21 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
 
+#ifdef ENABLE_GTKSOURCEVIEW
+        lang_manager = gtk_source_languages_manager_new();
+        lang = gtk_source_languages_manager_get_language_from_mime_type(lang_manager, "text/xml");
+        details->text_buffer = gtk_source_buffer_new_with_language(lang);
+	details->text_view = GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(details->text_buffer));
+        gtk_source_buffer_set_highlight(details->text_buffer, TRUE);
+        g_object_unref(lang_manager);
+        g_object_unref(lang);
+#else
         details->text_buffer = gtk_text_buffer_new(NULL);
-	details->text_view = GTK_TEXT_VIEW(gtk_text_view_new_with_buffer(details->text_buffer));
+        details->text_view = GTK_TEXT_VIEW(gtk_text_view_new_with_buffer(details->text_buffer));
+#endif
 
-	gtk_text_view_set_editable(details->text_view, FALSE);
-	gtk_text_view_set_cursor_visible(details->text_view, FALSE);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(details->text_view), FALSE);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(details->text_view), FALSE);
 
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(details->scrolled_window), GTK_WIDGET(details->text_view));
 
