@@ -1,5 +1,13 @@
 2003-07-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-span-tag.c, cong-editor-area.c
+
+	Underline rendering for span tags
+
+	* cong-editor-area-underline.c, cong-editor-area-underline.h, Makefile.am
+
+	More new source files - nice underline rendering for span tags
+
 	* cong-editor-area-bin.c, cong-editor-area-composer.c, cong-editor-area-composer.h, cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c
 
 	Packing options for CongEditorAreaComposer, similar to GtkBox

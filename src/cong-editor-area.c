@@ -169,7 +169,7 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 				    (GdkRectangle*)cong_editor_area_get_window_coords(area),
 				    &intersected_area)) {
 
-#if 1
+#if 0
 		/* Render test rectangle to show this area directly: */		
 		{
 			

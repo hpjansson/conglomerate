@@ -31,6 +31,7 @@
 #include "cong-editor-area-text.h"
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-spacer.h"
+#include "cong-editor-area-underline.h"
 #include "cong-editor-area-pixbuf.h"
 #include "cong-dispspec.h"
 
@@ -141,9 +142,8 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 		{
 			CongEditorArea *anon_disappear;
 			
-			PRIVATE(area_span_tag)->span_line_left = cong_editor_area_text_new (editor_widget,
-											    cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
-											    "LHS---");
+			PRIVATE(area_span_tag)->span_line_left = cong_editor_area_underline_new (editor_widget,
+												 CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_START);
 			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_hcompose),
 							       PRIVATE(area_span_tag)->span_line_left);
 				
@@ -183,9 +183,8 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 				}
 			}
 			
-			PRIVATE(area_span_tag)->span_line_right = cong_editor_area_text_new (editor_widget,
-											     cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
-											     "---RHS");
+			PRIVATE(area_span_tag)->span_line_right = cong_editor_area_underline_new (editor_widget,
+												  CONG_EDITOR_AREA_UNDERLINE_STYLE_SPAN_TAG_END);
 			cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(anon_hcompose),
 							       PRIVATE(area_span_tag)->span_line_right);
 		}

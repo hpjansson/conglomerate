@@ -30,6 +30,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-text.h   \
   cong-editor-area-span-tag.h \
   cong-editor-area-structural-tag.h \
+  cong-editor-area-underline.h \
   cong-editor-area-unknown-tag.h   \
   cong-editor-node.h        \
   cong-editor-node-document.h \
@@ -74,6 +75,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-text.c   \
   cong-editor-area-span-tag.c \
   cong-editor-area-structural-tag.c \
+  cong-editor-area-underline.c \
   cong-editor-area-unknown-tag.c   \
   cong-editor-node.c        \
   cong-editor-node-document.c \
