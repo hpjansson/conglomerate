@@ -8,55 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-12-01 12:44+0100\n"
-"PO-Revision-Date: 2004-12-01 12:49+0100\n"
+"POT-Creation-Date: 2004-12-28 10:16+0100\n"
+"PO-Revision-Date: 2004-12-28 10:16+0100\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
-
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
-#: src/cong-primary-window.c:547 src/cong-primary-window.c:732
-#: src/cong-primary-window.c:734 src/cong-primary-window.c:740
-msgid "Conglomerate XML Editor"
-msgstr "Éditeur XML Conglomerate"
-
-#: data/conglomerate.desktop.in.h:2
-msgid "Edit XML files"
-msgstr "Éditeur de fichiers XML"
-
-#: data/conglomerate.schemas.in.h:1
-msgid ""
-"A list of custom directories where Conglomerate should look for the display "
-"specification (called dispspec, or .xds) files, in addition to the standard "
-"installation path. When documents are loaded a matching dispspec is searched "
-"for in these directories, and the first matching dispspec file is used."
-msgstr ""
-"Liste personnalisée de répertoires dans lesquels Conglomerate recherche les "
-"fichiers de spécification d'affichage (appelées dispspec, ou .xds), en plus "
-"du chemin d'installation par défaut. Lors du chargement de fichiers, le "
-"premier fichier de spécification correspondant trouvé dans ces répertoires "
-"est utilisé."
-
-#: data/conglomerate.schemas.in.h:2
-msgid ""
-"A list of directories where Conglomerate should look for template xml files. "
-"These documents will be used by the new document assistant as types of "
-"documents which can be created by the user."
-msgstr ""
-"Liste de répertoires dans lesquels Conglomerate recherche des fichiers "
-"modèles xml. Ces modèles seront utilisés par l'assistant nouveau document "
-"comme types de documents pouvant être créés par l'utilisateur."
-
-#: data/conglomerate.schemas.in.h:3
-msgid "Custom locations for display specification files."
-msgstr "Emplacement personnalisé des fichiers de spécification d'affichage"
-
-#: data/conglomerate.schemas.in.h:4
-msgid "Locations for template files."
-msgstr "Emplacement des fichiers modèles"
 
 #: dispspecs/dispspec.xds.in.h:1
 msgid "Collapseto"
@@ -1285,6 +1244,47 @@ msgstr "Variable"
 msgid "XHTML 1.0 (strict)"
 msgstr "XHTML 1.0 (strict)"
 
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
+#: src/cong-primary-window.c:547 src/cong-primary-window.c:732
+#: src/cong-primary-window.c:734 src/cong-primary-window.c:740
+msgid "Conglomerate XML Editor"
+msgstr "Éditeur XML Conglomerate"
+
+#: data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "Éditeur de fichiers XML"
+
+#: data/conglomerate.schemas.in.h:1
+msgid ""
+"A list of custom directories where Conglomerate should look for the display "
+"specification (called dispspec, or .xds) files, in addition to the standard "
+"installation path. When documents are loaded a matching dispspec is searched "
+"for in these directories, and the first matching dispspec file is used."
+msgstr ""
+"Liste personnalisée de répertoires dans lesquels Conglomerate recherche les "
+"fichiers de spécification d'affichage (appelées dispspec, ou .xds), en plus "
+"du chemin d'installation par défaut. Lors du chargement de fichiers, le "
+"premier fichier de spécification correspondant trouvé dans ces répertoires "
+"est utilisé."
+
+#: data/conglomerate.schemas.in.h:2
+msgid ""
+"A list of directories where Conglomerate should look for template xml files. "
+"These documents will be used by the new document assistant as types of "
+"documents which can be created by the user."
+msgstr ""
+"Liste de répertoires dans lesquels Conglomerate recherche des fichiers "
+"modèles xml. Ces modèles seront utilisés par l'assistant nouveau document "
+"comme types de documents pouvant être créés par l'utilisateur."
+
+#: data/conglomerate.schemas.in.h:3
+msgid "Custom locations for display specification files."
+msgstr "Emplacement personnalisé des fichiers de spécification d'affichage"
+
+#: data/conglomerate.schemas.in.h:4
+msgid "Locations for template files."
+msgstr "Emplacement des fichiers modèles"
+
 #: glade/cong-file-import.glade.h:1
 msgid "File Import Options"
 msgstr "Options d'importation de fichiers"
@@ -1592,11 +1592,12 @@ msgstr ""
 "vous ne l'avez pas installé. Essayez de l'installer. Si vous avez changé le "
 "chemin par défaut des fichiers de spécification, vérifiez qu'il est correct."
 
-#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
-#: src/cong-node-properties-dialog.c:424
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
+#: src/cong-node-properties-dialog.c:470
 #, c-format
-msgid "Set attribute \"%s\" to \"%s\""
-msgstr "Donner à l'attribut \"%s\" la valeur \"%s\""
+msgid "Add attribute \"%s\""
+msgstr "Ajouter l'attribut  \"%s\""
 
 #: src/cong-attribute-editor-cdata.c:232
 #: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-editor.c:253
@@ -1604,13 +1605,6 @@ msgstr "Donner à l'attribut \"%s\" la valeur \"%s\""
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Supprimer l'attribut \"%s\""
-
-#: src/cong-attribute-editor-cdata.c:206
-#: src/cong-attribute-editor-nmtoken.c:272
-#: src/cong-node-properties-dialog.c:470
-#, c-format
-msgid "Add attribute \"%s\""
-msgstr "Ajouter l'attribut  \"%s\""
 
 #: src/cong-attribute-editor-enumeration.c:122
 msgid "(unspecified)"
@@ -1742,6 +1736,12 @@ msgstr ""
 "alphanumériques et/ou des idéogrammes, ainsi les symboles _, -, . et :. Ils "
 "ne doivent contenir aucun espace."
 
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
+#: src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Donner à l'attribut \"%s\" la valeur \"%s\""
+
 #: src/cong-dialog.c:301
 msgid "_Close without Saving"
 msgstr "_Fermer sans enregistrer"
@@ -1804,14 +1804,6 @@ msgid "Changes from the past minute will be discarded."
 msgstr ""
 "Les modifications apportées pendant la dernière minute seront supprimées."
 
-#: src/cong-dispspec.c:513
-msgid "unnamed"
-msgstr "sans nom"
-
-#: src/cong-dispspec.c:536
-msgid "No description available."
-msgstr "Aucune description disponible"
-
 #: src/cong-dispspec-element.c:659 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(Échec de xpath)"
@@ -1839,6 +1831,14 @@ msgstr "Type de fichier"
 #: src/cong-dispspec-registry.c:344
 msgid "Coverage"
 msgstr "Champ d'application"
+
+#: src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "sans nom"
+
+#: src/cong-dispspec.c:536
+msgid "No description available."
+msgstr "Aucune description disponible"
 
 #: src/cong-document.c:651
 msgid "(Untitled)"
@@ -1918,15 +1918,15 @@ msgstr "Fin d'XInclude"
 msgid "Select %s"
 msgstr "Sélectionner %s"
 
-#: src/cong-dom-view.c:224
+#: src/cong-dom-view.c:225
 msgid "UNKNOWN"
 msgstr "INCONNU"
 
-#: src/cong-dom-view.c:251
+#: src/cong-dom-view.c:252
 msgid "Text:"
 msgstr "Texte :"
 
-#: src/cong-dom-view.c:257
+#: src/cong-dom-view.c:258
 msgid "CDATA:"
 msgstr "Données textuelles"
 
@@ -1964,19 +1964,19 @@ msgstr "Taille de la zone de pliage"
 msgid "Size of the expander arrow"
 msgstr "Taille de la flèche de pliage"
 
-#: src/cong-editor-widget3.c:746
+#: src/cong-editor-widget3.c:747
 msgid "Input Method"
 msgstr "Méthode de saisie"
 
-#: src/cong-editor-widget3.c:876 src/cong-editor-widget3.c:1407
+#: src/cong-editor-widget3.c:877 src/cong-editor-widget3.c:1408
 msgid "Typing"
 msgstr "Saisie"
 
-#: src/cong-editor-widget3.c:1308
+#: src/cong-editor-widget3.c:1309
 msgid "Cursor Movement"
 msgstr "Mouvement du curseur"
 
-#: src/cong-editor-widget3.c:1348 src/cong-editor-widget3.c:1361
+#: src/cong-editor-widget3.c:1349 src/cong-editor-widget3.c:1362
 msgid "Delete Selection"
 msgstr "Supprimer la sélection"
 
@@ -2691,13 +2691,20 @@ msgstr ""
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate ne peut ouvrir le résultat de la transformation"
 
-#: src/cong-menus.c:528
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:528 src/cong-stylesheet.c:225
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 "Un problème s'est produit lors de la lecture de la feuille de styles \"%s\""
 
-#: src/cong-menus.c:531 src/cong-menus.c:555
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-stylesheet.c:227
+#: src/cong-stylesheet.c:290
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate n'a pas réussi à transformer le document"
 
@@ -2753,11 +2760,11 @@ msgid "_Help"
 msgstr "_Aide"
 
 #. Sub-menus:
-#: src/cong-menus.c:1490 src/popup.c:1099
+#: src/cong-menus.c:1490 src/popup.c:1100
 msgid "New sub-element"
 msgstr "Nouveau sous-élément"
 
-#: src/cong-menus.c:1491 src/popup.c:1113
+#: src/cong-menus.c:1491 src/popup.c:1114
 msgid "New sibling"
 msgstr "Nouvel enfant"
 
@@ -2854,7 +2861,7 @@ msgstr "_Rétablir"
 msgid "Cu_t"
 msgstr "Cou_per"
 
-#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1051
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1052
 msgid "_Copy"
 msgstr "_Copier"
 
@@ -2958,7 +2965,7 @@ msgstr "Modèle de contenu pour les éléments <tt>%s</tt>"
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:206
+#: src/cong-overview-view.c:207
 msgid "Unknown data"
 msgstr "Données inconnues"
 
@@ -3036,6 +3043,34 @@ msgstr "%s (modifié) - %s"
 #: src/cong-source-layout.c:413 src/plugin-cleanup-source.c:73
 msgid "Cleanup XML Source"
 msgstr "Optimisation du source XML"
+
+#: src/cong-stylesheet.c:229
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+"Conglomerate n'a pas réussi à lire la feuille de styles. Il est donc "
+"probable que le fichier catalogue XML ne soit pas installé correctement sur "
+"votre système. Voir http://www.xmlsoft.org/catalog.html pour de plus amples "
+"informations sur les catalogues."
+
+#: src/cong-stylesheet.c:260
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr ""
+"Un problème s'est produit lors de l'application de la feuille de styles \"%s"
+"\" à \"%s\""
+
+#: src/cong-stylesheet.c:277
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"Les paramètres de feuille de styles suivants ont été utilisés :\n"
 
 #: src/cong-util.c:321 src/plugin-docbook.c:1402
 msgid "Printing XSL Formatting Objects"
@@ -3635,11 +3670,11 @@ msgstr ""
 "Convertir un commentaire contenant du code source XML dans le code "
 "correspondant"
 
-#: src/popup.c:708 src/popup.c:1025
+#: src/popup.c:708 src/popup.c:1026
 msgid "_Properties"
 msgstr "Propr_iétés"
 
-#: src/popup.c:742 src/popup.c:1042
+#: src/popup.c:742 src/popup.c:1043
 msgid "_Cut"
 msgstr "Cou_per"
 
@@ -3647,15 +3682,15 @@ msgstr "Cou_per"
 msgid "Other XML element..."
 msgstr "Autre élément XML..."
 
-#: src/popup.c:1061
+#: src/popup.c:1062
 msgid "Paste into"
 msgstr "Insérer dans"
 
-#: src/popup.c:1071
+#: src/popup.c:1072
 msgid "Paste before"
 msgstr "Insérer avant"
 
-#: src/popup.c:1081
+#: src/popup.c:1082
 msgid "Paste after"
 msgstr "Insérer après"
 
