@@ -1731,3 +1731,15 @@ cong_util_get_words (PangoLanguage *language,
 
 	return result;
 }
+
+/* Return TRUE if there's an error */
+gboolean
+cong_util_spellcheck_word (PangoLanguage *language,
+			   const gchar *string,
+			   const CongWord *word)
+{
+	g_return_val_if_fail (string, FALSE);
+	g_return_val_if_fail (word, FALSE);
+
+	return TRUE; /* for now */
+}

@@ -1,5 +1,9 @@
 2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-util.c, cong-util.h:
+
+	Added function cong_util_spellcheck_word
+
 	* cong-document.c, cong-document.h: 
 
 	Added function cong_document_should_spellcheck_node

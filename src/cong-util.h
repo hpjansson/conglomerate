@@ -262,6 +262,11 @@ GList*
 cong_util_get_words (PangoLanguage *language,
 		     const gchar *string);
 
+gboolean
+cong_util_spellcheck_word (PangoLanguage *language,
+			   const gchar *string,
+			   const CongWord *word);
+
 G_END_DECLS
 
 #endif
