@@ -1,9 +1,9 @@
-conglomerate (0.7.6cvs237-3) UNRELEASED; urgency=low
+conglomerate (0.7.6cvs237-4) UNRELEASED; urgency=low
 
   * dpatch compliant
 
   * rules:
-  Upstream has up to date config.guess and config.sub
+  Upstream has an up-to-date config.guess and config.sub
 
  -- Geert Stappers <stappers@stappers.nl>  Sun,  2 Nov 2003 22:29:00 +0000
 
