@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# 22 februari 2004,
+# Spoke Dag Wieers at FOSDEM
+# ( visit http://www.fosdem.org for information on that great event)
+#
+#  - It is Okay to put his .spec file in CVS
+#  - The URL is to the spec file is stable
+#  - Dag is leading, we will send updates we get to hime
+#
+#      --GSt
+#
+rm conglomerate.spec
+wget -q http://dag.wieers.com/packages/conglomerate/conglomerate.spec
+sed -e '3,9s/Version: .*$/Version: @VERSION@/' \
+  conglomerate.spec > conglomerate.spec.in
+# last line of this script
