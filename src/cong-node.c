@@ -1184,12 +1184,12 @@ cong_node_get_ordering (CongNodePtr n0,
 		
 		/* Different parents, and the nodes are not each other's parents - ordering is determined by both nodes parents provided we don't go to their deepest common parent (or above): */
 		if (n0->parent) {
-			if (n0->parent!=deepest_common_parent) {
+			if (n0!=deepest_common_parent && n0->parent!=deepest_common_parent) {
 				n0=n0->parent;
 			}
 		}
 		if (n1->parent) {
-			if (n1->parent!=deepest_common_parent) {
+			if (n1!=deepest_common_parent && n1->parent!=deepest_common_parent) {
 				n1=n1->parent;
 			}
 		}
