@@ -1,6 +1,11 @@
 2003-09-22  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
+	compat and conglomerate_icon.xpm should go also in the tarball.
+
+2003-09-22  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
 	New file, the Debian packaging stuff has now it own Makefile.am.
 
 	* ChangeLog

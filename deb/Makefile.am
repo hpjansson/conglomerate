@@ -9,7 +9,9 @@ NULL =
 # files for building the Debian package
 debian_DISTS = \
     changelog \
+    compat \
     conglomerate.menu \
+    conglomerate_icon.xpm \
     control \
     copyright \
     rules \
