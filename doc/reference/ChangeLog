@@ -1,3 +1,9 @@
+2003-10-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* conglomerate-docs.sgml
+
+	Added a hand-written version containing overviews of how the major parts of the program work
+
 2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am

@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="index" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Conglomerate Programmer's Reference Manual</title>
+  </bookinfo>
+
+  <chapter>
+    <title>High-level Classes</title>
+    <para>There is a single #CongApp object representing the entire application; this owns a collection of #CongPrimaryWindow objects, each represents one of the application's primary windows.  A primary window corresponds to a particular #CongDocument.</para>
+    <para>In addition, the #CongApp owns certain global resources, including the #CongDispspecRegistry.</para>
+    <para>A CongDocument is a wrapper around the libxml2 document tree, together with a cursor location, and a selection range.  It references a CongDispspec.  It is a GObject, and it emits signals when things change.  </para>
+    <para>There is also an earlier system, in which there are CongView structs which manually register themselves with CongDocument objects and receive all updates.  This is now deprecated.</para>
+    <para>A dispspec is a "display specification"; it is a way of looking up tags in the xml document and deciding if they are "structural" and hence should appear as big blocks in the view, or "spans", in which case they can merely be rendered as an underline.  But it also supports looking up icons to use, and in theory, localisation of the tag names.</para>
+    <para>The display specifications are generally loaded from ".xds" files, but can also be created at run-time. </para>
+    <xi:include href="xml/cong-app.xml"/>
+    <xi:include href="xml/cong-document.xml"/>
+    <xi:include href="xml/cong-dispspec.xml"/>
+    <xi:include href="xml/cong-dispspec-registry.xml"/>
+    <xi:include href="xml/cong-dtd.xml"/>
+    <xi:include href="xml/cong-primary-window.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>XML Handling</title>
+    <para>A #CongNodePtr is a libxml2 xmlNodePtr; originally it was something else, though.  It's a node in the DOM tree of the document.  Everything is stored in UTF-8 internally.  There are some CongNode operations, and these are generally convenience wrappers around libxml2.</para>
+    <para>A #CongLocation is a small struct which identifies a "location" in the document (e.g. for storing the cursor location).  It's got a pointer to a node in the document tree, together with an offset into the content of the node, which is only relevant for TEXT and COMMENT nodes.  It's the number of bytes, rather than the number of characters.</para>
+    <xi:include href="xml/cong-node.xml"/>
+    <xi:include href="xml/cong-location.xml"/>
+    <xi:include href="xml/cong-range.xml"/>
+    <xi:include href="xml/cong-selection.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Undo/Redo System</title>
+    <para>All changes to a #CongDocument should be done using #CongCommand objects.  Each #CongDocument has a #CongCommandHistory which stores all of the commands that have been applied to that command which can be undone, and all that can be redone.</para>
+    <para>In order to modify the document, you should do something like this:
+<programlisting>
+CongCommand *cmd = cong_document_begin_command (doc, _("User-visible name of command"), NULL);
+
+cong_command_add_modification_do_something (cmd, param1);
+cong_command_add_modification_do_something_else (cmd, param2, param3, param4);
+
+cong_document_end_command (doc, cmd);
+</programlisting>
+    </para>
+    <para>All commands are built up of modifications, all of which break down into a small number of atomic modifications.  Each type of modification corresponds to a subclass of #CongModification, and contains enough information to be able to redo and undo the command</para>
+    <para>As the atomic modifications are done/undone, they call the appropriate CongDocument methods which have the word "private" in their names e.g. cong_document_private_node_add_after().  These emit signals which are listened to by the various views, widgets etc.  The CongDocument also handles the signal by calling a correspong cong_node_private function e.g. cong_node_private_add_after(), which actual makes the change to the libxml2 representation of the document.</para>
+    <xi:include href="xml/cong-command.xml"/>
+    <xi:include href="xml/cong-command-history.xml"/>
+    <xi:include href="xml/cong-modification.xml"/>
+    <xi:include href="xml/cong-node-modification.xml"/>
+    <xi:include href="xml/cong-node-modification-add-after.xml"/>
+    <xi:include href="xml/cong-node-modification-add-before.xml"/>
+    <xi:include href="xml/cong-node-modification-make-orphan.xml"/>
+    <xi:include href="xml/cong-node-modification-remove-attribute.xml"/>
+    <xi:include href="xml/cong-node-modification-set-attribute.xml"/>
+    <xi:include href="xml/cong-node-modification-set-parent.xml"/>
+    <xi:include href="xml/cong-node-modification-set-text.xml"/>
+    <xi:include href="xml/cong-modification-cursor-change.xml"/>
+    <xi:include href="xml/cong-modification-selection-change.xml"/>
+    <xi:include href="xml/cong-modification-set-dtd-ptr.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>The Editor Widget</title>
+    <para>For every xml node in the document, there is a CongEditorNode for each editor_widget3.  There is a class hierarchy of CongEditorNode subclasses, so, for instance, there's a CongEditorNodeElementStructuralTag which is used for structural tags, and a CongEditorNodeComment for comments.  This way, we only have to figure out what type a node is once, rather than every time we visit it, plus we can store useful state in the CongEditorNode objects.  For example, in a CongEditorNodeText, we store a PangoLayout.</para>
+    <para>There is also a collection of CongEditorArea objects.  These form a hierarchical tree of rectangular areas which divide up the space allocated to the widget.  They know how to draw themselves, can be clicked on, handle size negotiation etc.  They are a little bit like a lightweight version of GtkWidgets, although the analogy isn't perfect. </para>
+    <para>CongEditorArea objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. CongEditorAreaComposer which exists purely to manage the sizing of its children).</para>
+    <para>CongEditorNode objects work behind the scenes.  They are responsible for creating CongEditorArea objects to represent themselves.</para>
+    <para>There are a few other classes involved: CongEditorAreaFlowHolder, and CongEditorChildPolicy.  These are responsible for generating paragraph-like areas, which the editor nodes "pour" their CongEditorAreas into.  This allows us to get the nice underlines, which is achieved by using a PangoLayout for every text node, splitting all the PangoLayoutLines into separate CongEditorArea objects, and then merging them, together with a few extra CongEditorAreas. </para>
+    <para> If you want to see the CongEditorAreas, then go to src/cong-editor-area.c and play around with the #define settings; in particular DEBUG_RENDER_ALLOCATIONS can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
+    <xi:include href="xml/cong-editor-widget.xml"/>
+    <xi:include href="xml/cong-editor-widget3-impl.xml"/>
+    <xi:include href="xml/cong-editor-line-fragments.xml"/>
+
+    <sect1><title>Child Policies</title>
+    <xi:include href="xml/cong-editor-child-policy.xml"/>
+    <xi:include href="xml/cong-editor-child-policy-flow-holder.xml"/>
+    <xi:include href="xml/cong-editor-child-policy-inline.xml"/>
+    </sect1>
+
+    <sect1><title>Editor Nodes</title>
+    <xi:include href="xml/cong-editor-node.xml"/>
+    <xi:include href="xml/cong-editor-node-comment.xml"/>
+    <xi:include href="xml/cong-editor-node-document.xml"/>
+    <xi:include href="xml/cong-editor-node-dtd.xml"/>
+    <xi:include href="xml/cong-editor-node-element-span.xml"/>
+    <xi:include href="xml/cong-editor-node-element-structural.xml"/>
+    <xi:include href="xml/cong-editor-node-element-unknown.xml"/>
+    <xi:include href="xml/cong-editor-node-element.xml"/>
+    <xi:include href="xml/cong-editor-node-entity-decl.xml"/>
+    <xi:include href="xml/cong-editor-node-entity-ref.xml"/>
+    <xi:include href="xml/cong-editor-node-text.xml"/>
+    <xi:include href="xml/cong-editor-node-unimplemented.xml"/>
+    </sect1>
+
+    <sect1><title>Editor Areas</title>
+    <xi:include href="xml/cong-editor-area.xml"/>
+    <xi:include href="xml/cong-editor-area-bin.xml"/>
+    <xi:include href="xml/cong-editor-area-border.xml"/>
+    <xi:include href="xml/cong-editor-area-composer.xml"/>
+    <xi:include href="xml/cong-editor-area-container.xml"/>
+    <xi:include href="xml/cong-editor-area-entity-decl.xml"/>
+    <xi:include href="xml/cong-editor-area-entity-ref.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-blocks.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-inlines.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-single.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder.xml"/>
+    <xi:include href="xml/cong-editor-area-line.xml"/>
+    <xi:include href="xml/cong-editor-area-pixbuf.xml"/>
+    <xi:include href="xml/cong-editor-area-spacer.xml"/>
+    <xi:include href="xml/cong-editor-area-span-tag.xml"/>
+    <xi:include href="xml/cong-editor-area-structural-tag.xml"/>
+    <xi:include href="xml/cong-editor-area-structural.xml"/>
+    <xi:include href="xml/cong-editor-area-text-comment.xml"/>
+    <xi:include href="xml/cong-editor-area-text-fragment.xml"/>
+    <xi:include href="xml/cong-editor-area-text.xml"/>
+    <xi:include href="xml/cong-editor-area-underline.xml"/>
+    <xi:include href="xml/cong-editor-area-unknown-tag.xml"/>
+    </sect1>
+  </chapter>
+
+  <chapter>
+    <title>Other Views of the Document</title>
+    <xi:include href="xml/cong-view.xml"/>
+    <xi:include href="xml/cong-tree-view.xml"/>
+    <xi:include href="xml/cong-overview-view.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Plugins</title>
+    <xi:include href="xml/cong-plugin.xml"/>
+    <xi:include href="xml/cong-fake-plugin-hooks.xml"/>
+    <xi:include href="xml/plugin-lists-area-listitem.xml"/>
+    <xi:include href="xml/plugin-lists-node-element-listitem.xml"/>
+    <xi:include href="xml/plugin-paragraph-area-paragraph.xml"/>
+    <xi:include href="xml/plugin-paragraph-node-element-paragraph.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Helper Routines and Widgets</title>
+    <xi:include href="xml/cong-attribute-editor.xml"/>
+    <xi:include href="xml/cong-attribute-editor-cdata.xml"/>
+    <xi:include href="xml/cong-attribute-editor-enumeration.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper-check-button.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper-radio-button.xml"/>
+    <xi:include href="xml/cong-dialog.xml"/>
+    <xi:include href="xml/cong-eel.xml"/>
+    <xi:include href="xml/cong-enum-mapping.xml"/>
+    <xi:include href="xml/cong-error-dialog.xml"/>
+    <xi:include href="xml/cong-util.xml"/>
+    <xi:include href="xml/cong-text-cache.xml"/>
+    <xi:include href="xml/cong-progress-checklist.xml"/>
+  </chapter>
+
+  <chapter>
+    <title>Miscellaneous</title>
+    <xi:include href="xml/cong-font.xml"/>
+    <xi:include href="xml/cong-graph.xml"/>
+    <xi:include href="xml/cong-marshal.xml"/>
+    <xi:include href="xml/cong-parser-error.xml"/>
+    <xi:include href="xml/fo.xml"/>
+    <xi:include href="xml/global.xml"/>
+    <xi:include href="xml/cong-vfs.xml"/>
+  </chapter>
+</book>
