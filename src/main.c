@@ -4,55 +4,12 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
-#include "cong-dialog.h"
-#include "cong-error-dialog.h"
-#include "cong-dispspec.h"
-#include "cong-dispspec-registry.h"
-#include "cong-document.h"
-#include "cong-plugin.h"
-#include "cong-font.h"
 #include "cong-app.h"
-#include "cong-fake-plugin-hooks.h"
 #include "cong-primary-window.h"
-
-#define TEST_BIG_FONTS 0
 
 /*
 #define AUTOGENERATE_DS
 */
-
-void insert_element_init()
-{
-	GdkColor gcol;
-
-	cong_app_singleton()->insert_element_gc = gdk_gc_new(cong_gui_get_a_window()->window);
-	gdk_gc_copy(cong_app_singleton()->insert_element_gc, cong_gui_get_a_window()->style->white_gc);
-	col_to_gcol(&gcol, 0x00e0e0e0);
-	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(cong_app_singleton()->insert_element_gc, &gcol);
-}
-
-
-
-
-
-
-
-void fonts_load()
-{
-#if TEST_BIG_FONTS
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 20");
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 24");
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 16");
-#else
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 10");
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 12");
-	  cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 8");
-#endif
-}
-
-
-
 
 void status_update()
 {
@@ -63,142 +20,6 @@ void status_update()
 static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 {
 	return(TRUE);
-}
-
-gboolean main_load_displayspecs(GtkWindow *toplevel_window)
-{
-#if 1
-	gchar*      xds_directory = gnome_program_locate_file(cong_app_singleton()->gnome_program,
-							      GNOME_FILE_DOMAIN_APP_DATADIR,
-							      "conglomerate/dispspecs",
-							      FALSE,
-							      NULL);
-#else
-	gchar* current_dir = g_get_current_dir();
-	gchar* xds_directory = g_strdup_printf(DATADIR"/conge/dispspecs",current_dir);
-	g_free(current_dir);
-#endif
-
-	g_message(DATADIR);
-
-	if (xds_directory) {
-		g_message("Loading xds files from \"%s\"\n", xds_directory);
-		cong_app_singleton()->ds_registry = cong_dispspec_registry_new(xds_directory, toplevel_window);
-
-		/* If no xds files were found, perhaps the program hasn't been installed yet (merely built): */
-		if (cong_dispspec_registry_get_num(cong_app_singleton()->ds_registry)==0) {
-
-			gchar *why_failed = g_strdup_printf(_("Conglomerate could not load any xds files from the directory \"%s\""), xds_directory);
-			GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-								  _("Conglomerate could not find any descriptions of document types."),
-								  why_failed,
-								  _("If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it."));
-			g_free(why_failed);
-			cong_error_dialog_run(GTK_DIALOG(dialog));
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-			return FALSE;
-		}
-		
-		g_free(xds_directory);
-		
-		if (cong_app_singleton()->ds_registry==NULL) {
-			return FALSE;
-		}
-		
-		cong_dispspec_registry_dump(cong_app_singleton()->ds_registry);
-	} else {
-		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-							  "Conglomerate could not find its registry of document types.",
-							  "You must run the program from the \"src\" directory used to build it.",
-							  "This is a known problem and will be fixed.");
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-void register_plugin(const gchar *id,
-		     CongPluginCallbackRegister register_callback,
-		     CongPluginCallbackConfigure configure_callback)
-{
-	g_return_if_fail(id);
-	g_return_if_fail(register_callback);
-
-	g_assert(cong_app_singleton()->plugin_manager);
-
-	cong_plugin_manager_register(cong_app_singleton()->plugin_manager,
-				     id,
-				     register_callback, 
-				     configure_callback);
-}
-
-
-
-void main_load_plugins(void)
-{
-	/* For the moment, there aren't any actual plugins; instead we fake it. */
-
-	register_plugin("docbook",
-			plugin_docbook_plugin_register,
-			plugin_docbook_plugin_configure);
-
-	register_plugin("empty",
-			plugin_empty_plugin_register,
-			plugin_empty_plugin_configure);
-
-	register_plugin("fo",
-			plugin_fo_plugin_register,
-			plugin_fo_plugin_configure);
-
-	register_plugin("lists",
-			plugin_lists_plugin_register,
-			plugin_lists_plugin_configure);
-
-	register_plugin("sgml",
-			plugin_sgml_plugin_register,
-			plugin_sgml_plugin_configure);
-
-	register_plugin("tests",
-			plugin_tests_plugin_register,
-			plugin_tests_plugin_configure);
-
-	register_plugin("validate",
-			plugin_validate_plugin_register,
-			plugin_validate_plugin_configure);
-
-	register_plugin("website",
-			plugin_website_plugin_register,
-			plugin_website_plugin_configure);
-
-	register_plugin("xsl",
-			plugin_xsl_plugin_register,
-			plugin_xsl_plugin_configure);
-
-	register_plugin("convert-case",
-			plugin_convert_case_plugin_register,
-			plugin_convert_case_plugin_configure);
-
-	register_plugin("cleanup-source",
-			plugin_cleanup_source_plugin_register,
-			plugin_cleanup_source_plugin_configure);
-
-	register_plugin("dtd",
-			plugin_dtd_plugin_register,
-			plugin_dtd_plugin_configure);
-
-	register_plugin("paragraph",
-			plugin_paragraph_plugin_register,
-			plugin_paragraph_plugin_configure);
-
-	register_plugin("save-dispspec",
-			plugin_save_dispspec_plugin_register,
-			plugin_save_dispspec_plugin_configure);
-
-	register_plugin("doc-from-xds",
-			plugin_doc_from_xds_plugin_register,
-			plugin_doc_from_xds_plugin_configure);
 }
 
 int main( int   argc,
@@ -215,34 +36,13 @@ int main( int   argc,
 	cong_app_construct_singleton (argc, 
 				      argv);
 
-	fonts_load();
-	editor_popup_init(NULL); /* FIXME */
-
-	cong_app_singleton()->tooltips = gtk_tooltips_new();
-
+	/* This code requires the app singleton ptr to be set: */
 	cong_primary_window_new(NULL);
-	
-	/* Load all the displayspec (xds) files: */
-	/* 
-	   FIXME: currently this function requires a primary window to exist, so it can manipulate graphics contexts... 
-	   Ideally we would only create a "document-less" window if no file was specified on the command line.
-	*/
-	if (!main_load_displayspecs(NULL)) {
+
+	/* Various things require that a primary window exists: */
+	if (cong_app_post_init_hack (cong_app_singleton())) {
 		return 1;
 	}
-
-	/* 
-	   Load all the plugins.  We do this after loading the xds files in case some of the plugins want to operate on the registry
-	   of displayspecs
-	 */
-	cong_app_singleton()->plugin_manager = cong_plugin_manager_new();
-	main_load_plugins();
-
-	insert_element_init();
-
-#if 0
-	cong_app_singleton()->clipboard = NULL;
-#endif
 
 #if 1
 	/* 
@@ -254,7 +54,6 @@ int main( int   argc,
 		open_document_do(argv[argc-1], NULL);
 	}
 #endif
-
 
 	/* The main loop: */
 	gtk_main();

@@ -114,7 +114,8 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 					       cong_editor_area_text_new (editor_widget,
-									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+									  cong_app_get_font (cong_app_singleton(),
+											     CONG_FONT_ROLE_TITLE_TEXT),
 									  NULL,
 									  tag_string_begin,
 									  TRUE)
@@ -138,7 +139,8 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 					       cong_editor_area_text_new (editor_widget,
-									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+									  cong_app_get_font (cong_app_singleton(),
+											     CONG_FONT_ROLE_TITLE_TEXT), 
 									  NULL,
 									  tag_string_end,
 									  TRUE)

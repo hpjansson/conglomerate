@@ -338,6 +338,9 @@ generate_block_area (CongEditorNode *editor_node)
 
 	g_free (label);
 
+	/* Connect to various signals: */
+	/* FIXME */
+
 	cong_editor_area_connect_node_signals (new_area,
 					       editor_node);
 

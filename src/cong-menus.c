@@ -398,7 +398,7 @@ gint debug_document_types(/*GtkWidget *w, gpointer data, */GtkWindow *parent_win
 
 	/* Populate the store based on the ds-registry: */
 	{
-		CongDispspecRegistry* registry = cong_app_singleton()->ds_registry;
+		CongDispspecRegistry* registry = cong_app_get_dispspec_registry (cong_app_singleton());
 		int i;
 
 		for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
@@ -485,7 +485,7 @@ void open_transformed_window_for_doc(xmlDocPtr doc,
 
 	g_return_if_fail(doc);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 							      doc,
 							      NULL);
 
@@ -1106,7 +1106,7 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 
-	gchar* glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
+	gchar* glade_filename = gnome_program_locate_file(cong_app_get_gnome_program (cong_app_singleton()),
 							  GNOME_FILE_DOMAIN_APP_DATADIR,
 							  "conglomerate/test.glade",
 							  FALSE,
@@ -1426,7 +1426,9 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 			g_assert(callback_data.tools_menu);
 			callback_data.menu_tips = gtk_tooltips_new();
 
-			cong_plugin_manager_for_each_doc_tool(cong_app_singleton()->plugin_manager, add_tool_callback, &callback_data);
+			cong_plugin_manager_for_each_doc_tool (cong_app_get_plugin_manager (cong_app_singleton()), 
+							       add_tool_callback, 
+							       &callback_data);
 		}
 
 		/* Connect undo/redo sensitivity to the command history: */

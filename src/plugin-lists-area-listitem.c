@@ -100,7 +100,8 @@ cong_editor_area_listitem_construct (CongEditorAreaListitem *area_listitem,
 					       0);
 
 	PRIVATE(area_listitem)->label = CONG_EDITOR_AREA_TEXT(cong_editor_area_text_new (editor_widget,
-											 cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+											 cong_app_get_font (cong_app_singleton(),
+													    CONG_FONT_ROLE_TITLE_TEXT), 
 											 NULL,
 											 label,
 											 FALSE));

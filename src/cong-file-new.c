@@ -203,8 +203,9 @@ GtkWidget *make_type_selection_widget(CongNewFileAssistant *assistant)
 #endif
 
 	/* Populate the list based on the plugins: */
-	cong_plugin_manager_for_each_document_factory(cong_app_singleton()->plugin_manager, add_factory_callback, assistant);
-
+	cong_plugin_manager_for_each_document_factory (cong_app_get_plugin_manager (cong_app_singleton()), 
+						       add_factory_callback, 
+						       assistant);
 
 	/* The "File Type" column: */
 	column = gtk_tree_view_column_new();
@@ -442,7 +443,9 @@ void new_document(GtkWindow *parent_window)
 	   at the creation of the druid, rather than "on-demand".
 	 */
 	assistant->hash_table_of_factory_to_page = g_hash_table_new(g_direct_hash, g_direct_equal);
-	cong_plugin_manager_for_each_document_factory(cong_app_singleton()->plugin_manager, add_pages_for_factory_callback, assistant);
+	cong_plugin_manager_for_each_document_factory (cong_app_get_plugin_manager (cong_app_singleton()), 
+						       add_pages_for_factory_callback, 
+						       assistant);
 
 	gtk_widget_show(GTK_WIDGET(assistant->window));
 

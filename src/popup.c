@@ -100,10 +100,10 @@ static GtkMenuItem* make_menu_item(const gchar *label,
 	}
 
 	if (tip) {
-		gtk_tooltips_set_tip(cong_app_singleton()->tooltips,
-				     GTK_WIDGET(item),
-				     tip,
-				     tip);
+		gtk_tooltips_set_tip (cong_app_get_tooltips (cong_app_singleton()),
+				      GTK_WIDGET(item),
+				      tip,
+				      tip);
 	}
 
 	return GTK_MENU_ITEM(item);
@@ -247,6 +247,8 @@ void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 
 void editor_popup_init(CongDocument *doc)
 {
+	g_return_if_fail (cong_app_singleton());
+
 	if (cong_app_singleton()->popup) gtk_widget_destroy(cong_app_singleton()->popup);
 	cong_app_singleton()->popup = gtk_menu_new();
 
@@ -1066,7 +1068,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 		callback_data.node = node;
 		callback_data.parent_window = parent_window;
 
-		cong_plugin_manager_for_each_node_tool (cong_app_singleton()->plugin_manager, 
+		cong_plugin_manager_for_each_node_tool (cong_app_get_plugin_manager (cong_app_singleton()), 
 							add_node_tool_callback,
 							&callback_data);
 	}
@@ -1095,11 +1097,11 @@ gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *
 	GtkWidget *dialog, *label, *combo;
 	gchar *text;
 
-	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
-						   GNOME_FILE_DOMAIN_APP_DATADIR,
-						   "conglomerate/glade/string_selection_dialog.glade",
-						   FALSE,
-						   NULL);
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/string_selection_dialog.glade",
+						    FALSE,
+						    NULL);
 
 	xml = glade_xml_new(glade_filename, NULL, NULL);
 	glade_xml_signal_autoconnect(xml);

@@ -85,7 +85,7 @@ gboolean plugin_doc_from_xds_plugin_register(CongPlugin *plugin)
 
 	g_return_val_if_fail(plugin, FALSE);
 
-	registry = cong_app_singleton()->ds_registry;
+	registry = cong_app_get_dispspec_registry (cong_app_singleton());
 	
 
 	for (i = 0;i < cong_dispspec_registry_get_num(registry);i++)

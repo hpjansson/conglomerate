@@ -118,7 +118,7 @@ static void monitor_exporter(CongExportDialogDetails *dialog_details)
 		gchar *exporter_namespace  = cong_functionality_get_gconf_namespace(CONG_FUNCTIONALITY(exporter));
 
 		/* g_message("adding notification for \"%s\"", exporter_namespace); */
-		dialog_details->connection_id = gconf_client_notify_add(cong_app_singleton()->gconf_client,
+		dialog_details->connection_id = gconf_client_notify_add(cong_app_get_gconf_client (cong_app_singleton()),
 									exporter_namespace,
 									gconf_notify_func,
 									dialog_details,
@@ -169,7 +169,7 @@ static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
 	g_message("on_exporter_selection_changed");
 
 	/* Stop monitoring GConf for old plugin: */
-	gconf_client_notify_remove(cong_app_singleton()->gconf_client,
+	gconf_client_notify_remove(cong_app_get_gconf_client (cong_app_singleton()),
 				   details->connection_id);
 
 	/* Monitor new plugin; set up stuff accordingly: */
@@ -258,7 +258,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc,
 		gtk_option_menu_set_menu(dialog_details->select_exporter_option_menu,
 					 dialog_details->select_exporter_menu);
 		
-		cong_plugin_manager_for_each_exporter(cong_app_singleton()->plugin_manager, add_exporter_to_menu, dialog_details);
+		cong_plugin_manager_for_each_exporter(cong_app_get_plugin_manager (cong_app_singleton()), add_exporter_to_menu, dialog_details);
 
 		gtk_option_menu_set_history(dialog_details->select_exporter_option_menu,0);
 	}
@@ -369,7 +369,7 @@ cong_ui_file_export(CongDocument *doc,
 		}
 
 		/* FIXME: Somewhat hackish cleanup: */
-		gconf_client_notify_remove(cong_app_singleton()->gconf_client,
+		gconf_client_notify_remove(cong_app_get_gconf_client(cong_app_singleton()),
 					   dialog_details->connection_id);
 	} else {
 		/* There are no plugins which can handle this document: */

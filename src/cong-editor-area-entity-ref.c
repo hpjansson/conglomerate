@@ -116,10 +116,11 @@ cong_editor_area_entity_ref_construct (CongEditorAreaEntityRef *area_entity_ref,
 	markup = g_strdup_printf ("\"<span>%s</span>\" =", text);
 
 	PRIVATE(area_entity_ref)->title_text = cong_editor_area_text_new (editor_widget,
-									   cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
-									   NULL,
-									   markup,
-									   TRUE);
+									  cong_app_get_font (cong_app_singleton(),
+											     CONG_FONT_ROLE_TITLE_TEXT), 
+									  NULL,
+									  markup,
+									  TRUE);
 	g_free(markup);
 
 	cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_entity_ref)->outer_hcompose),

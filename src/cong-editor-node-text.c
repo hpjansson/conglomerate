@@ -195,7 +195,8 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 	g_free (markup);
 
 	pango_layout_set_font_description (PRIVATE(editor_node_text)->pango_layout,
-					   cong_font_get_pango_description(cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT]));
+					   cong_font_get_pango_description( cong_app_get_font (cong_app_singleton(),
+											       CONG_FONT_ROLE_BODY_TEXT)));
 	
 	return editor_node_text;
 }

@@ -129,7 +129,8 @@ generate_block_area (CongEditorNode *editor_node)
 
 	PRIVATE(node_comment)->area_text_comment = 
 		CONG_EDITOR_AREA_TEXT_COMMENT( cong_editor_area_text_comment_new (cong_editor_node_get_widget (editor_node),
-										  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT], 
+										  cong_app_get_font (cong_app_singleton(),
+												     CONG_FONT_ROLE_BODY_TEXT), 
 										  NULL,
 										  cong_text_cache_get_text (PRIVATE(node_comment)->text_cache),
 										  FALSE)

@@ -34,23 +34,8 @@ typedef struct CongAppPrivate CongAppPrivate;
 
 struct CongApp
 {
-	GnomeProgram *gnome_program;
-
-	CongPluginManager *plugin_manager;
-
-	GList *primary_windows;
-
-	CongFont *fonts[CONG_FONT_ROLE_NUM];
-
-	GdkGC *insert_element_gc;
-
-	CongDispspecRegistry* ds_registry;
-
 	GtkWidget *popup;
-
-	GConfClient* gconf_client;
-
-	GtkTooltips *tooltips;
+	GList *primary_windows;
 
 	CongAppPrivate *private;
 };
@@ -66,12 +51,34 @@ cong_app_construct_singleton(int   argc,
 void
 cong_app_destroy_singleton(void);
 
+int
+cong_app_post_init_hack (CongApp *app);
+
 const gchar*
 cong_app_get_clipboard (CongApp *app);
 
 void
 cong_app_set_clipboard (CongApp *app, 
 			const gchar* text);
+
+GnomeProgram*
+cong_app_get_gnome_program (CongApp *app);
+
+GtkTooltips*
+cong_app_get_tooltips (CongApp *app);
+
+CongFont*
+cong_app_get_font (CongApp *app,
+		   enum CongFontRole role);
+
+CongPluginManager*
+cong_app_get_plugin_manager (CongApp *app);
+
+CongDispspecRegistry*
+cong_app_get_dispspec_registry (CongApp *app);
+
+GConfClient*
+cong_app_get_gconf_client (CongApp *app);
 
 G_END_DECLS
 

@@ -1047,11 +1047,11 @@ GtkWidget* docbook_generic_node_factory_method(CongCustomPropertyDialog *custom_
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
-						   GNOME_FILE_DOMAIN_APP_DATADIR,
-						   "conglomerate/glade/docbook-common-properties.glade",
-						   FALSE,
-						   NULL);
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-common-properties.glade",
+						    FALSE,
+						    NULL);
 
 	global_glade_doc_ptr = doc;
 	global_glade_node_ptr = node;
@@ -1087,11 +1087,11 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongCustomPropertyDialo
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	glade_filename = gnome_program_locate_file(cong_app_singleton()->gnome_program,
-						   GNOME_FILE_DOMAIN_APP_DATADIR,
-						   "conglomerate/glade/docbook-orderedlist-properties.glade",
-						   FALSE,
-						   NULL);
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "conglomerate/glade/docbook-orderedlist-properties.glade",
+						    FALSE,
+						    NULL);
 
 	global_glade_doc_ptr = doc;
 	global_glade_node_ptr = node;

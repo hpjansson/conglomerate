@@ -442,10 +442,10 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 					       title);
 
 	gtk_window_set_default_icon_from_file(
-		gnome_program_locate_file(cong_app_singleton()->gnome_program,
-					  GNOME_FILE_DOMAIN_APP_PIXMAP,
-					  "conglomerate-icon-32.png", FALSE, 
-					  NULL), 
+		gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+					   GNOME_FILE_DOMAIN_APP_PIXMAP,
+					   "conglomerate-icon-32.png", FALSE, 
+					   NULL), 
 		NULL);
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",

@@ -161,7 +161,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 				case CONG_ELEMENT_TYPE_PLUGIN:
 					{
 						const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id (ds_element);
-						CongPluginEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_singleton()->plugin_manager,
+						CongPluginEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_get_plugin_manager (cong_app_singleton()),
 																	     plugin_id);
 						
 						if (factory) {

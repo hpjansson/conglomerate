@@ -207,7 +207,8 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 			
 			/* Add the title text: */
 			PRIVATE(area_structural)->title_text = cong_editor_area_text_new (editor_widget,
-											  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+											  cong_app_get_font (cong_app_singleton(),
+													     CONG_FONT_ROLE_TITLE_TEXT),
 											  PRIVATE(area_structural)->col_array[CONG_DISPSPEC_GC_USAGE_TEXT],
 											  text,
 											  FALSE);

@@ -85,11 +85,11 @@ cong_modification_set_dtd_ptr_construct (CongModificationSetDtdPtr *modification
 				     doc);
 
 	cong_document_set_with_ref (doc,
-				    &PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
-				    cong_document_get_xml (doc)->extSubset);
+				    (CongNodePtr**)&PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
+				    (CongNodePtr)cong_document_get_xml (doc)->extSubset);
 	cong_document_set_with_ref (doc,
-				    &PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
-				    dtd_ptr);
+				    (CongNodePtr**)&PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
+				    (CongNodePtr)dtd_ptr);
 
 	return modification_set_dtd_ptr;
 }
@@ -133,10 +133,10 @@ dispose (GObject *object)
 	
 	/* Cleanup: */
 	cong_document_set_with_ref (doc,
-				    &PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
+				    (CongNodePtr**)&PRIVATE(modification_set_dtd_ptr)->old_dtd_ptr,
 				    NULL);
 	cong_document_set_with_ref (doc,
-				    &PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
+				    (CongNodePtr**)&PRIVATE(modification_set_dtd_ptr)->new_dtd_ptr,
 				    NULL);
 
 	/* Call the parent method: */		

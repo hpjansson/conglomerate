@@ -139,7 +139,7 @@ open_document_do (const gchar* doc_name,
 
 		filename_extension = get_filename_extension (file_uri);
 
-		ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+		ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 								      doc,
 								      filename_extension);
 		if (ds==NULL) {

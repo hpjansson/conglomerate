@@ -813,9 +813,9 @@ gchar *cong_exporter_get_preferred_uri(CongExporter *exporter)
 
 	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
 	
-	preferred_uri = gconf_client_get_string(cong_app_singleton()->gconf_client,
-						gconf_key,
-						NULL);
+	preferred_uri = gconf_client_get_string( cong_app_get_gconf_client (cong_app_singleton()),
+						 gconf_key,
+						 NULL);
 
 	g_free(gconf_key);
 
@@ -831,9 +831,9 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 
 	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
 
-	gconf_client_set_string(cong_app_singleton()->gconf_client,
-				gconf_key,
-				uri,
+	gconf_client_set_string( cong_app_get_gconf_client (cong_app_singleton()),
+				 gconf_key,
+				 uri,
 				NULL);
 
 	g_free(gconf_key);
@@ -939,7 +939,7 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	
 	g_return_val_if_fail (xml_doc, NULL);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 							      xml_doc,
 							      NULL);
 
@@ -975,7 +975,7 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	
 	g_return_val_if_fail (xml_doc, NULL);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_get_dispspec_registry (cong_app_singleton()), 
 							      xml_doc,
 							      NULL);
 
