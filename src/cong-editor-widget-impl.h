@@ -36,7 +36,9 @@ G_BEGIN_DECLS
 /*
   The idea: we have a tree of CongElementEditors (or should these be CongNodeEditors?)
 
-  We pipe the tree notifications in at the root and let each editor manage its children, creating and destroying as necessary.
+  We pipe most tree notifications in at the root and let each editor manage its children, creating and destroying as necessary.
+
+  We also have a mapping from nodes to element editors, so that we can do directly in this direction.  This is used for the "set text" notification.
 
   Initially we have two types of ElementEditor: span text edit, and structural wrapper.  Could have more, and also support plugins.
 
@@ -99,6 +101,8 @@ struct CongEditorWidgetDetails
 	CongEditorWidgetView *view;
 
 	CongElementEditor *root_editor;
+
+	GHashTable *hash_of_node_to_editor; /* holds all nodes which are _directly_ under the control of an editor; descendants aren't stored, but can't be determined. */
 };
 
 /* The widget "owns" a CongView, which in turn, holds a ptr back to its widget. */
@@ -133,6 +137,11 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 
 CongFont*
 cong_span_text_editor_get_font(CongSpanTextEditor *span_text, enum CongFontRole role);
+
+/* Internal utility functions: */
+void cong_editor_widget_register_element_editor(CongEditorWidget *widget, CongElementEditor *element_editor);
+void cong_editor_widget_unregister_element_editor(CongEditorWidget *widget, CongElementEditor *element_editor);
+CongElementEditor* cong_editor_widget_get_element_editor_for_node(CongEditorWidget *widget, CongNodePtr node);
 
 G_END_DECLS
 

@@ -72,7 +72,15 @@ static CongElementEditorClass section_head_editor_class =
 
 static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor)
 {
-	/* FIXME: unimplemented */
+	GList *iter;
+	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
+
+	for (iter = section_head->list_of_child; iter; iter=iter->next) {
+		CongElementEditor *child_editor = iter->data;
+		g_assert(child_editor);
+
+		cong_element_editor_recursive_delete(child_editor);
+	}
 }
 
 static void section_head_editor_on_recursive_self_test(CongElementEditor *element_editor)
@@ -122,10 +130,9 @@ static void section_head_editor_on_recursive_self_test(CongElementEditor *elemen
 	}
 }
 
-static void regenerate_children(CongSectionHeadEditor *section_head)
+static void delete_children(CongSectionHeadEditor *section_head)
 {
-	CongEditorWidget *editor_widget = section_head->element_editor.widget;
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+/*  	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget); */
 	GList *iter;
 
 	/* Delete all child editors: */
@@ -140,10 +147,25 @@ static void regenerate_children(CongSectionHeadEditor *section_head)
 		iter=iter_next;
 	}
 		
+}
+
+static void generate_children(CongSectionHeadEditor *section_head)
+{
+	CongEditorWidget *editor_widget = section_head->element_editor.widget;
+
 	/* Regenerate the child editors: */
 	recursively_create_children(section_head);
 
 	cong_editor_widget_force_layout_update(editor_widget);
+}
+
+static void regenerate_children(CongSectionHeadEditor *section_head, gboolean before_event) 
+{
+	if (before_event) {
+		delete_children(section_head);
+	} else {
+		generate_children(section_head);
+	}
 }
 
 
@@ -160,43 +182,99 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 	switch (event->type) {
 	default: g_assert_not_reached();
 	case CONG_DOCUMENT_EVENT_MAKE_ORPHAN:
+		/* If this editor is responsible for the node then delete and regenerate our children.  Otherwise,
+		   pass the message on to all children? */
+		if (element_editor->first_node == event->data.make_orphan.former_parent) {
+			regenerate_children(section_head, event->before_event);
+
+			return TRUE;
+		} else {
+			/* Recurse: */
+			for (iter = section_head->list_of_child; iter; iter=iter->next) {
+				CongElementEditor *child_editor = iter->data;
+				g_assert(child_editor);
+
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+		
+	case CONG_DOCUMENT_EVENT_ADD_AFTER:
+		/* If the sibling is in our list, add it to our children in the correct place; otherwise delegate to children: */
+		if (element_editor->first_node == event->data.add_after.older_sibling->parent) {
+			regenerate_children(section_head, event->before_event);
+
+			return TRUE;
+		} else {
+			/* Recurse: */
+			for (iter = section_head->list_of_child; iter; iter=iter->next) {
+				CongElementEditor *child_editor = iter->data;
+				g_assert(child_editor);
+
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+
+	case CONG_DOCUMENT_EVENT_ADD_BEFORE:
+		/* If the sibling is in our list, add it to our children in the correct place; otherwise delegate to children: */
+		if (element_editor->first_node == event->data.add_before.younger_sibling->parent) {
+			regenerate_children(section_head, event->before_event);
+			
+			return TRUE;
+		} else {
+			/* Recurse: */
+			for (iter = section_head->list_of_child; iter; iter=iter->next) {
+				CongElementEditor *child_editor = iter->data;
+				g_assert(child_editor);
+
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+		
+	case CONG_DOCUMENT_EVENT_SET_PARENT:
+		/* If this is the parent, add it to the children (at the end); otherwise delegate to children: */
+		if (element_editor->first_node == event->data.set_parent.adoptive_parent) {
+			regenerate_children(section_head, event->before_event);
+
+			return TRUE;
+		} else {
+			for (iter = section_head->list_of_child; iter; iter=iter->next) {
+				CongElementEditor *child_editor = iter->data;
+				g_assert(child_editor);
+				
+				if (cong_element_editor_on_document_event(child_editor, event)) {
+					return TRUE;
+				}
+			}
+		}
+		break;
+
+	case CONG_DOCUMENT_EVENT_SET_TEXT:
+		/* This should never be sent to this type of editor: */
+		g_assert_not_reached();
+		break;
+	}
+#else
+	switch (event->type) {
+	default: g_assert_not_reached();
+	case CONG_DOCUMENT_EVENT_MAKE_ORPHAN:
 		/* Search for the node amongst the (direct) children; if found, then delete that child.  Otherwise,
 		   pass the message on to all children? */
 		for (iter = section_head->list_of_child; iter; iter=iter->next) {
 			CongElementEditor *child_editor = iter->data;
 			g_assert(child_editor);
 
+			#error this will never succeed on the post-processing phase...
 			if (cong_element_editor_responsible_for_node(child_editor,event->data.make_orphan.node)) {
-#if 1
-				regenerate_children(section_head);
-#else
-				/* Delete this editor, and regenerate editors for any remaining range, if required */
-				CongNodePtr first_node = cong_element_editor_get_first_node(child_editor);
-				CongNodePtr final_node = cong_element_editor_get_final_node(child_editor);
-				GList *iter_prev = iter->prev;
-
-				/* Delete the editor: */
-				cong_element_editor_recursive_delete(child_editor);
-				section_head->list_of_child = g_list_delete_link(section_head->list_of_child, iter);
-				
-				/* Recompute the sibling range, deleting the deleted node: */
-				if (event->data.make_orphan.node==first_node) {
-					first_node = first_node->next;
-				}
-
-				if (event->data.make_orphan.node==final_node) {
-					final_node = final_node->prev;
-				}
-
-				/* Rebuild editors if necessary: */
-				if (first_node!=NULL) {
-					g_assert(final_node!=NULL);
-
-					create_children_for_range(section_head, first_node, final_node, iter_prev);
-				}
-
-				cong_editor_widget_force_layout_update(editor_widget);
-#endif
+				regenerate_children(section_head, event->before_event);
 
 				return TRUE;
 			} else {
@@ -215,7 +293,7 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 			g_assert(child_editor);
 
 			if (cong_element_editor_responsible_for_node(child_editor,event->data.add_after.older_sibling)) {
-				regenerate_children(section_head);
+				regenerate_children(section_head, event->before_event);
 
 				return TRUE;
 			} else {
@@ -234,7 +312,7 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 			g_assert(child_editor);
 
 			if (cong_element_editor_responsible_for_node(child_editor,event->data.add_before.younger_sibling)) {
-				regenerate_children(section_head);
+				regenerate_children(section_head, event->before_event);
 
 				return TRUE;
 			} else {
@@ -249,7 +327,7 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 	case CONG_DOCUMENT_EVENT_SET_PARENT:
 		/* If this is the parent, add it to the children (at the end); otherwise delegate to children: */
 		if (element_editor->first_node == event->data.set_parent.adoptive_parent) {
-			regenerate_children(section_head);
+			regenerate_children(section_head, event->before_event);
 
 			return TRUE;
 		} else {
@@ -265,16 +343,8 @@ static gboolean section_head_editor_on_document_event(CongElementEditor *element
 		break;
 
 	case CONG_DOCUMENT_EVENT_SET_TEXT:
-		/* Delegate to children: */
-		for (iter = section_head->list_of_child; iter; iter=iter->next) {
-			CongElementEditor *child_editor = iter->data;
-			g_assert(child_editor);
-
-			if (cong_element_editor_on_document_event(child_editor, event)) {
-				return TRUE;
-			}			
-		}
-
+		/* This should never be sent to this type of editor: */
+		g_assert_not_reached();
 		break;
 	}
 #endif
@@ -683,6 +753,8 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	section_head->element_editor.final_node = node;
 	section_head->expanded = TRUE;
 	section_head->element = element;
+
+	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(section_head));
 
 	section_head->title_bar_pango_layout = pango_layout_new(gdk_pango_context_get());
 	g_assert(section_head->title_bar_pango_layout);

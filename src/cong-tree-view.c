@@ -103,11 +103,11 @@ static gboolean get_iter_for_node(CongTreeView *tree_view, CongNodePtr node, Gtk
 
 /* Prototypes of the handler functions: */
 static void on_document_coarse_update(CongView *view);
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -137,7 +137,7 @@ static void on_document_coarse_update(CongView *view)
 
 }
 
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongTreeView *tree_view;
 	GtkTreeIter tree_iter;
@@ -151,15 +151,17 @@ static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 
 	tree_view = CONG_TREE_VIEW(view);
 
-	if ( get_iter_for_node(tree_view, node, &tree_iter) ) {
-
-		/* Remove this branch of the tree: */
-		gtk_tree_store_remove(tree_view->gtk_tree_store, &tree_iter);
-
+	if (!before_change) {
+		if ( get_iter_for_node(tree_view, node, &tree_iter) ) {
+			
+			/* Remove this branch of the tree: */
+			gtk_tree_store_remove(tree_view->gtk_tree_store, &tree_iter);
+			
+		}
 	}
 }
 
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling)
 {
 	CongTreeView *tree_view;
 	GtkTreeIter tree_iter_sibling;
@@ -174,6 +176,10 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 	#endif
 
 	tree_view = CONG_TREE_VIEW(view);
+
+	if (before_change) {
+		return;
+	}
 
 	if ( get_iter_for_node(tree_view, older_sibling, &tree_iter_sibling) ) {
 
@@ -196,7 +202,7 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 	}
 }
 
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	CongTreeView *tree_view;
 	GtkTreeIter tree_iter_sibling;
@@ -214,7 +220,7 @@ static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNo
 
 }
 
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	CongTreeView *tree_view;
 	GtkTreeIter tree_iter_node;
@@ -232,7 +238,7 @@ static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNo
 
 }
 
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
 {
 	CongTreeView *tree_view;
 	GtkTreeIter tree_iter;
@@ -489,7 +495,7 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 
  	/* Wire up the context-menu callback */
  	gtk_signal_connect_object(GTK_OBJECT(tree_view->gtk_tree_view), "event",
- 				  (GtkSignalFunc) tpopup_show, tree_view->gtk_tree_view);
+ 				  (GtkSignalFunc) tree_popup_show, tree_view->gtk_tree_view);
 
 	cong_tree_view_populate_tree(tree_view);
 

@@ -211,7 +211,16 @@ static void regenerate_plaintext_recursive(CongSpanTextEditor *span_text_editor,
 
 		/* Recurse: */
 		for (child=node->children; child; child = child->next) {
-			regenerate_plaintext_recursive(span_text_editor, child, (text_range!=NULL)?depth+1:depth, strip_whitespace);
+			/* We're slightly picky about the recursion; was having lots of problems with entity refs etc: */
+			switch (cong_node_type(child)) {
+			case CONG_NODE_TYPE_TEXT:
+			case CONG_NODE_TYPE_ELEMENT:
+				regenerate_plaintext_recursive(span_text_editor, child, (text_range!=NULL)?depth+1:depth, strip_whitespace);
+				break;
+
+			default: /* do nothing */
+				break;
+			}
 		}
 
 		if (text_range) {
@@ -373,14 +382,13 @@ static gboolean span_text_editor_on_document_event(CongElementEditor *element_ed
 	switch (event->type) {
 	default: break;
 	case CONG_DOCUMENT_EVENT_SET_TEXT:
-		if (cong_element_editor_responsible_for_node(element_editor, event->data.set_text.node)) {
+		/* These messages go direct from the widget to the relevant element editor: */
+		if (!event->before_event) {
 			regenerate_plaintext(span_text);			
-
-			/* FIXME: but what about descendants? */
-
+		
 			/* hackish redraw: */
 			gtk_widget_queue_draw(GTK_WIDGET(element_editor->widget));		
-
+			
 			return TRUE;
 		}
 		break;
@@ -819,11 +827,44 @@ static void span_text_editor_recursive_render(CongElementEditor *element_editor,
 
 static void span_text_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)
 {
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
 	CongEditorWidget *editor_widget = element_editor->widget;
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	/* FIXME: unimplemented */
+	g_message("span_text_editor_on_button_press");
+
+	doc = cong_editor_widget_get_document(editor_widget);
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+	
+	if (event->button == 1) {
+#if 0
+		cursor->w = widget;
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+#endif
+
+
+#if 0
+		cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
+		cong_selection_start_from_curs(selection, cursor);
+		cong_selection_end_from_curs(selection, cursor);
+		cong_document_on_selection_change(doc);
+		cong_document_on_cursor_change(doc);
+
+		return;
+#endif
+	} else if (event->button == 3) {
+
+		editor_popup_build(doc);
+		editor_popup_show(the_globals.popup, event);
+
+	}
+	
 }
 
 /* Public API: */
@@ -846,6 +887,8 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 	span_text->element_editor.widget = widget;
 	span_text->element_editor.first_node = first_node;
 	span_text->element_editor.final_node = final_node;
+
+	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(span_text));
 
 	span_text->pango_layout = pango_layout_new(gdk_pango_context_get() /*the_globals.pango_context*/);
 	g_assert(span_text->pango_layout);

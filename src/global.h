@@ -204,14 +204,17 @@ struct CongViewClass
 {
 	/* 
 	   Hooks for the various change signals; eventually do this by listening to signals emitted from the document, porting to the standard 
-	   GObject framework
+	   GObject framework.
+
+	   Many of the signals are sent twice; once before the change occurs, and once afterwards.  The boolean "before_change" is TRUE the first 
+	   time and FALSE the second.
 	*/
 	void (*on_document_coarse_update)(CongView *view);
-	void (*on_document_node_make_orphan)(CongView *view, CongNodePtr node);
-	void (*on_document_node_add_after)(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
-	void (*on_document_node_add_before)(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
-	void (*on_document_node_set_parent)(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-	void (*on_document_node_set_text)(CongView *view, CongNodePtr node, const xmlChar *new_content);
+	void (*on_document_node_make_orphan)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
+	void (*on_document_node_add_after)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
+	void (*on_document_node_add_before)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
+	void (*on_document_node_set_parent)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+	void (*on_document_node_set_text)(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 	void (*on_selection_change)(CongView *view);
 	void (*on_cursor_change)(CongView *view);
 };
@@ -537,19 +540,17 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
-void cong_span_editor_cut(CongSpanEditor *span_editor);
-void cong_span_editor_copy(CongSpanEditor *span_editor);
-void cong_span_editor_paste(CongSpanEditor *span_editor, GtkWidget *widget);
+void cong_document_cut(CongDocument *doc);
+void cong_document_copy(CongDocument *doc);
+void cong_document_paste(CongDocument *doc, GtkWidget *widget);
 
-gint xed_cut(GtkWidget *widget, struct CongSpanEditor *xed);
-gint xed_copy(GtkWidget *widget, struct CongSpanEditor *xed);
-gint xed_paste(GtkWidget *widget, struct CongSpanEditor *xed);
-
+#if 0
 gint insert_meta_hook(GtkWidget *w, struct CongSpanEditor *xed);
 gint insert_media_hook(GtkWidget *w, struct CongSpanEditor *xed);
 gint select_vector(GtkWidget *w);
 
 gint xed_insert_table(GtkWidget *w, struct CongSpanEditor *xed);
+#endif
 
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
@@ -623,12 +624,15 @@ void cong_selection_draw(CongSelection *selection, CongCursor *curs);
 void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs);
 void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs);
 
-void popup_show(GtkWidget *widget, GdkEventButton *bevent);
-void popup_build(CongSpanEditor *xed);
-void popup_init();
+/* Popup (context) menus for editor view: */
+void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
+void editor_popup_build(CongDocument *doc);
+void editor_popup_init();
 
-GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x);
-gint tpopup_show(GtkWidget *widget, GdkEvent *event);
+/* Popup (context) menus for tree view: */
+GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x);
+gint tree_popup_show(GtkWidget *widget, GdkEvent *event);
+
 
 void xv_style_r(GtkWidget *widget, gpointer data);
 
@@ -653,10 +657,6 @@ cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* 
 /* Menu hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data);
-
-void xed_cut_wrap(GtkWidget *widget, gpointer data);
-void xed_copy_wrap(GtkWidget *widget, gpointer data);
-void xed_paste_wrap(GtkWidget *widget, gpointer data);
 
 void test_open_wrap(GtkWidget *widget, gpointer data);
 void test_error_wrap(GtkWidget *widget, gpointer data);
@@ -774,12 +774,15 @@ enum CongDocumentEventType
 
 struct CongDocumentEvent
 {
+	gboolean before_event;
+
 	enum CongDocumentEventType type;
 
 	union
 	{
 		struct make_orphan {
 			CongNodePtr node;
+			CongNodePtr former_parent;
 		} make_orphan;
 		struct add_after {
 			CongNodePtr node;

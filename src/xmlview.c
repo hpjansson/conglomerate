@@ -1265,11 +1265,11 @@ void xmlview_destroy(int free_xml)
 
 /* Prototypes of the handler functions: */
 static void on_document_coarse_update(CongView *view);
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -1293,7 +1293,7 @@ static void on_document_coarse_update(CongView *view)
 	cong_editor_populate_ui(editor_view);
 }
 
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongEditorView *editor_view;
 
@@ -1308,7 +1308,7 @@ static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 
 }
 
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling)
 {
 	CongEditorView *editor_view;
 
@@ -1324,7 +1324,7 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 
 }
 
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	CongEditorView *editor_view;
 
@@ -1340,7 +1340,7 @@ static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNo
 
 }
 
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	CongEditorView *editor_view;
 
@@ -1356,7 +1356,7 @@ static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNo
 
 }
 
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
 {
 	CongEditorView *editor_view;
 

@@ -8,27 +8,28 @@
 #include "cong-dispspec.h"
 #include "cong-document.h"
 
-/* 
-   The popup menu widget (and some items) have a pointer to the xed widget set as a user property named "xed".
-*/
 
-static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
+/*
+  EDITOR POPUP CODE:
+ */
+/* 
+   The popup menu widget (and some items) have a pointer to the CongDocument set as a user property named "doc":
+*/
+static gint editor_popup_callback_item_selected(GtkWidget *widget, CongDispspecElement *element)
 {
 	CongNodePtr new_element;
 	CongNodePtr r;
 
-	CongSpanEditor *xed;
 	CongDocument *doc;
 	CongSelection *selection;
 	CongCursor *cursor;
 
 	g_return_val_if_fail(element, TRUE);
 
-	xed = g_object_get_data(G_OBJECT(widget),
-				"xed");
-	g_assert(xed);
+	doc = g_object_get_data(G_OBJECT(widget),
+				"doc");
+	g_assert(doc);
 
-	doc = xed->doc;
 	selection = cong_document_get_selection(doc);
 	cursor = cong_document_get_cursor(doc);
 
@@ -99,7 +100,7 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 	return(FALSE);
 }
 
-void popup_show(GtkWidget *widget, GdkEventButton *bevent)
+void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 {
 	gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL, bevent->button,
 								 bevent->time);
@@ -107,23 +108,22 @@ void popup_show(GtkWidget *widget, GdkEventButton *bevent)
 	return;
 }
 
-void popup_init(CongSpanEditor *xed)
+void editor_popup_init(CongDocument *doc)
 {
 	if (the_globals.popup) gtk_widget_destroy(the_globals.popup);
 	the_globals.popup = gtk_menu_new();
 
 	g_object_set_data(G_OBJECT(the_globals.popup),
-			  "xed",
-			  xed);
+			  "doc",
+			  doc);
 
 	gtk_menu_set_title(GTK_MENU(the_globals.popup), "Editing menu");
 }
 
-void popup_tag_remove_inner(GtkWidget *widget, CongSpanEditor *xed)
+static void editor_popup_callback_tag_remove_inner(GtkWidget *widget, CongDocument *doc)
 {
 	CongNodePtr n0;
 
-	CongDocument *doc = xed->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	
@@ -137,11 +137,10 @@ void popup_tag_remove_inner(GtkWidget *widget, CongSpanEditor *xed)
 	if (cursor->xed) xed_redraw(cursor->xed);
 }
 
-void popup_tag_remove_outer(GtkWidget *widget, CongSpanEditor *xed)
+static void editor_popup_callback_tag_remove_outer(GtkWidget *widget, CongDocument *doc)
 {
 	CongNodePtr n0;
 
-	CongDocument *doc = xed->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	
@@ -155,19 +154,45 @@ void popup_tag_remove_outer(GtkWidget *widget, CongSpanEditor *xed)
 	if (cursor->xed) xed_redraw(cursor->xed);
 }
 
-void popup_build(CongSpanEditor *xed)
+static gint editor_popup_callback_cut(GtkWidget *widget, CongDocument *doc)
+{
+	g_assert(doc);
+	
+	cong_document_cut(doc);
+	return TRUE;
+}
+
+static gint editor_popup_callback_copy(GtkWidget *widget, CongDocument *doc)
+{
+	g_assert(doc);
+	
+	cong_document_copy(doc);
+	return TRUE;
+}
+
+static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
+{
+	g_assert(doc);
+	
+	cong_document_paste(doc, widget);
+	return TRUE;
+}
+
+
+void editor_popup_build(CongDocument *doc)
 {
 	GtkWidget *item, *w0;
+	CongDispspec *dispspec;
 	CongDispspecElement *n0;
 	CongCursor *cursor;
 	
-	g_return_if_fail(xed);
+	g_return_if_fail(doc);
 
-	g_assert(xed->doc);
-	cursor = cong_document_get_cursor(xed->doc);
+	dispspec = cong_document_get_dispspec(doc);
+	cursor = cong_document_get_cursor(doc);
 
 	if (the_globals.popup) gtk_widget_destroy(the_globals.popup);
-	popup_init(xed);
+	editor_popup_init(doc);
 	
 #ifndef RELEASE
 	printf("Building menu.\n");
@@ -179,24 +204,24 @@ void popup_build(CongSpanEditor *xed)
 						  NULL); 
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(xed_cut), xed);
+			   GTK_SIGNAL_FUNC(editor_popup_callback_cut), doc);
 	gtk_widget_show(item);
 
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY,
 						  NULL); 
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(xed_copy), xed);
+			   GTK_SIGNAL_FUNC(editor_popup_callback_copy), doc);
 	gtk_widget_show(item);
 	
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE,
 						  NULL);
 	gtk_menu_append(GTK_MENU(the_globals.popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(xed_paste), xed);
+			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	if (/* cursor->set && */ cursor->location.tt_loc && xml_inner_span_element(xed->displayspec, cursor->location.tt_loc))
+	if (/* cursor->set && */ cursor->location.tt_loc && xml_inner_span_element(dispspec, cursor->location.tt_loc))
 	{
 		item = gtk_menu_item_new();
 		w0 = gtk_hseparator_new();
@@ -209,13 +234,13 @@ void popup_build(CongSpanEditor *xed)
 		item = gtk_menu_item_new_with_label("Remove inner tag");
 		gtk_menu_append(GTK_MENU(the_globals.popup), item);
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC(popup_tag_remove_inner), xed);
+				   GTK_SIGNAL_FUNC(editor_popup_callback_tag_remove_inner), doc);
 		gtk_widget_show(item);
 		
 		item = gtk_menu_item_new_with_label("Remove outer tag");
 		gtk_menu_append(GTK_MENU(the_globals.popup), item);
 		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC(popup_tag_remove_outer), xed);
+				   GTK_SIGNAL_FUNC(editor_popup_callback_tag_remove_outer), doc);
 		gtk_widget_show(item);
 	}
 	
@@ -228,7 +253,7 @@ void popup_build(CongSpanEditor *xed)
 	gtk_widget_show(item);
 
 	/* Build list of dynamic tag insertion tools */
-	for (n0 = cong_dispspec_get_first_element(xed->displayspec); n0; n0 = cong_dispspec_element_next(n0))
+	for (n0 = cong_dispspec_get_first_element(dispspec); n0; n0 = cong_dispspec_element_next(n0))
 	{
 		if (cong_dispspec_element_is_span(n0))
 		{
@@ -236,19 +261,22 @@ void popup_build(CongSpanEditor *xed)
 			gtk_menu_append(GTK_MENU(the_globals.popup), item);
 			
 			gtk_signal_connect(GTK_OBJECT(item), "activate",
-					   GTK_SIGNAL_FUNC(popup_item_selected), n0);
+					   GTK_SIGNAL_FUNC(editor_popup_callback_item_selected), n0);
 			
 			g_object_set_data(G_OBJECT(item),
-					  "xed",
-					  xed);
+					  "doc",
+					  doc);
 			gtk_widget_show(item);
 		}
 	}
 
 }
 
+/*
+  TREE POPUP CODE:
+ */
 /* the treeview widget has the userdata "cong_tree_view" set on it */
-gint tpopup_show(GtkWidget *widget, GdkEvent *event)
+gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 {
 	if (event->type == GDK_BUTTON_PRESS)
 	{
@@ -291,7 +319,7 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 					
 					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), tt));
 					
-					menu = tpopup_init(cong_tree_view, tt);
+					menu = tree_popup_init(cong_tree_view, tt);
 					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
 						       bevent->time);		      
 				}
@@ -309,11 +337,11 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 }
 
 /* the popup items have the data "cong_tree_view" set on them: */
-void add_item_to_popup(GtkMenu *menu,
-		       const gchar *label,
-		       gint (*func)(GtkWidget *widget, CongNodePtr tag),
-		       CongTreeView *cong_tree_view,
-		       CongNodePtr x)
+static void add_item_to_popup(GtkMenu *menu,
+			      const gchar *label,
+			      gint (*func)(GtkWidget *widget, CongNodePtr tag),
+			      CongTreeView *cong_tree_view,
+			      CongNodePtr x)
 {
 	GtkWidget *item = gtk_menu_item_new_with_label(label);
 	gtk_menu_append(menu, item);
@@ -325,11 +353,11 @@ void add_item_to_popup(GtkMenu *menu,
 	gtk_widget_show(item);
 }
 
-void add_stock_item_to_popup(GtkMenu *menu,
-			     const gchar *stock_id,
-			     gint (*func)(GtkWidget *widget, CongNodePtr tag),
-			     CongTreeView *cong_tree_view,
-			     CongNodePtr x)
+static void add_stock_item_to_popup(GtkMenu *menu,
+				    const gchar *stock_id,
+				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
+				    CongTreeView *cong_tree_view,
+				    CongNodePtr x)
 {
 	GtkWidget *item = gtk_image_menu_item_new_from_stock(stock_id,
 							     NULL); 
@@ -342,7 +370,7 @@ void add_stock_item_to_popup(GtkMenu *menu,
 	gtk_widget_show(item);
 }
 
-GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x)
+GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 {
 	GtkMenu *tpopup;
 	GtkWidget *item, *w0;

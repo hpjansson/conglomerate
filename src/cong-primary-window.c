@@ -254,12 +254,10 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 	if (cong_document_is_modified(primary_window->doc)) {
 		gint result; 
 		GtkWidget *dialog;
-		GTimeVal current_time;
-		g_get_current_time(&current_time);
 
 		dialog = GTK_WIDGET( cong_dialog_save_confirmation_alert_new(GTK_WINDOW(primary_window->window),
 									     cong_document_get_filename(primary_window->doc),
-									     current_time.tv_sec - cong_document_get_seconds_since_last_save_or_load(primary_window->doc)));
+									     cong_document_get_seconds_since_last_save_or_load(primary_window->doc)));
 
 		/* Bring the modified buffer to the top */
 		gtk_window_present(GTK_WINDOW(primary_window->window));
@@ -301,38 +299,28 @@ void unimplemented_menu_item(gpointer callback_data,
 	CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
 }
 
-static void dispatch_span_editor_command(void (*span_editor_command)(CongSpanEditor *span_editor), gpointer callback_data)
+static void dispatch_document_command(void (*document_command)(CongDocument *doc), gpointer callback_data)
 {
 	CongPrimaryWindow *primary_window = callback_data;
-	CongCursor *cursor;
 
-	g_assert(span_editor_command);
+	g_assert(document_command);
 	g_assert(primary_window);
 
 	g_return_if_fail(primary_window->doc);
 
-	cursor = cong_document_get_cursor(primary_window->doc);
-
-	g_assert(cursor);
-
-	(*span_editor_command)(cursor->xed);	
+	(*document_command)(primary_window->doc);	
 }
 
-static void dispatch_span_editor_command2(void (*span_editor_command)(CongSpanEditor *span_editor, GtkWidget *widget), gpointer callback_data, GtkWidget *widget)
+static void dispatch_document_command2(void (*document_command)(CongDocument *doc, GtkWidget *widget), gpointer callback_data, GtkWidget *widget)
 {
 	CongPrimaryWindow *primary_window = callback_data;
-	CongCursor *cursor;
 
-	g_assert(span_editor_command);
+	g_assert(document_command);
 	g_assert(primary_window);
 
 	g_return_if_fail(primary_window->doc);
 
-	cursor = cong_document_get_cursor(primary_window->doc);
-
-	g_assert(cursor);
-
-	(*span_editor_command)(cursor->xed, widget);	
+	(*document_command)(primary_window->doc, widget);	
 }
 
 static GtkWidget* make_uneditable_text(const gchar* text)
@@ -393,7 +381,34 @@ static void menu_callback_file_revert(gpointer callback_data,
 				      guint callback_action,
 				      GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = primary_window->doc;
+
+	g_return_if_fail(doc);
+
+	if (cong_document_is_modified(doc)) {
+		gchar* filename;
+		GtkDialog *dialog;
+		gint result;
+
+		filename = cong_document_get_filename(doc);
+
+		dialog = cong_dialog_revert_confirmation_alert_new(NULL, /* FIXME:  use correct window */
+								   filename,
+								   cong_document_get_seconds_since_last_save_or_load(doc));
+
+		g_free(filename);
+
+		result = gtk_dialog_run(dialog);
+
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		if (result != CONG_REVERT_CONFIRMATION_RESULT_REVERT) {
+			return;
+		}
+
+		CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
+	} 
 }
 
 struct add_importer_to_list_data
@@ -703,21 +718,21 @@ static void menu_callback_cut(gpointer callback_data,
 			      guint callback_action,
 			      GtkWidget *widget)
 {
-	dispatch_span_editor_command(cong_span_editor_cut, callback_data);
+	dispatch_document_command(cong_document_cut, callback_data);
 }
 
 static void menu_callback_copy(gpointer callback_data,
 			       guint callback_action,
 			       GtkWidget *widget)
 {
-	dispatch_span_editor_command(cong_span_editor_copy, callback_data);
+	dispatch_document_command(cong_document_copy, callback_data);
 }
 
 static void menu_callback_paste(gpointer callback_data,
 				guint callback_action,
 				GtkWidget *widget)
 {
-	dispatch_span_editor_command2(cong_span_editor_paste, callback_data, widget);
+	dispatch_document_command2(cong_document_paste, callback_data, widget);
 }
 
 /* Callbacks for "Help" menu: */
@@ -730,17 +745,17 @@ static void menu_callback_about(gpointer callback_data,
 
 	gchar* documenters[] = { NULL };
 
-	gchar* translator_credits = _("translator_credits");
-
-	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
-					   PACKAGE_VERSION,
-					   _("(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm"),
-					   _("Conglomerate will be a user-friendly XML editor for GNOME"),
-					   (const char **)authors,
-					   (const char **)documenters,
-					   strcmp(translator_credits, "translator_credits") != 0 ?
-						    translator_credits : NULL,
-					   logo_pixbuf);
+ 	gchar* translator_credits = _("translator_credits");
+  
+ 	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
+ 					   PACKAGE_VERSION,
+ 					   _("(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm"),
+ 					   _("Conglomerate will be a user-friendly XML editor for GNOME"),
+ 					   (const char **)authors,
+ 					   (const char **)documenters,
+ 					   strcmp(translator_credits, "translator_credits") != 0 ?
+ 						    translator_credits : NULL,
+  					   logo_pixbuf);
 	gdk_pixbuf_unref(logo_pixbuf);
 
 	gtk_dialog_run(GTK_DIALOG(about));
@@ -844,7 +859,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	/* --- Main window --- */
 	primary_window->window = gnome_app_new(PACKAGE_NAME,
-						title);
+					       title);
 
 	{	
 		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);

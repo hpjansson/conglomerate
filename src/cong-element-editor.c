@@ -70,7 +70,9 @@ void cong_element_editor_recursive_delete(CongElementEditor *element_editor)
 	g_assert(element_editor->klass);
 	g_assert(element_editor->klass->on_recursive_delete);
 
-	return element_editor->klass->on_recursive_delete(element_editor);
+	cong_editor_widget_unregister_element_editor(element_editor->widget, element_editor);
+
+	element_editor->klass->on_recursive_delete(element_editor);
 }
 
 void cong_element_editor_recursive_self_test(CongElementEditor *element_editor)

@@ -30,10 +30,6 @@
 void get_example(GtkWidget *w, gpointer data);
 gint set_vectors(GtkWidget *w, gpointer data);
 
-void xed_cut_wrap(GtkWidget *widget, gpointer data) { xed_cut(widget, 0); }
-void xed_copy_wrap(GtkWidget *widget, gpointer data) { xed_copy(widget, 0); }
-void xed_paste_wrap(GtkWidget *widget, gpointer data) { xed_paste(widget, 0); }
-
 /*
 #define AUTOGENERATE_DS
 */
@@ -716,14 +712,14 @@ GtkWidget *test_dialog_new(void)
 	yetmorestuff_category = cong_dialog_content_add_category(advanced_content, "Yet More Stuff");
 
 	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(general_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(general_category, "A very long label", gtk_entry_new());
+	cong_dialog_category_add_field(general_category, "Another label", gtk_entry_new());
 	cong_dialog_category_add_selflabelled_field(general_category, gtk_toggle_button_new_with_label("Bar") );
 	cong_dialog_category_add_selflabelled_field(general_category, gtk_check_button_new_with_label("Crikey") );
 
 	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
 	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
-	cong_dialog_category_add_field(fubar_category, "Foo", gtk_entry_new());
+	cong_dialog_category_add_field(fubar_category, "Here we go again", gtk_entry_new());
 	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_toggle_button_new_with_label("Bar") );
 	cong_dialog_category_add_selflabelled_field(fubar_category, gtk_check_button_new_with_label("Crikey") );
 
@@ -892,7 +888,7 @@ int main( int   argc,
 
 
 	fonts_load();
-	popup_init(NULL); /* FIXME */
+	editor_popup_init(NULL); /* FIXME */
 
 #if 0
 	the_globals.pango_context = pango_context_new();

@@ -338,9 +338,13 @@ cong_document_set_url(CongDocument *doc, const gchar *url)
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 {
+	GTimeVal current_time;
+
 	g_return_val_if_fail(doc, 0);
 
-	return doc->time_of_last_save.tv_sec;
+	g_get_current_time(&current_time);
+
+	return current_time.tv_sec - doc->time_of_last_save.tv_sec;
 }
 
 #define DEBUG_MVC 1
@@ -371,6 +375,7 @@ void cong_document_coarse_update(CongDocument *doc)
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 	GList *iter;
+	CongNodePtr former_parent;
 
 	/* This is a special case, in that doc is allowed to be NULL (to handle the clipboard) */
 
@@ -379,6 +384,21 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	#if DEBUG_MVC
 	g_message("cong_document_node_make_orphan\n");
 	#endif
+
+	former_parent = node->parent;
+
+	if (doc) {
+		/* Notify listeners: */
+		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			g_assert(view->klass->on_document_node_make_orphan);
+			view->klass->on_document_node_make_orphan(view, TRUE, node, former_parent);
+		}
+		
+		cong_document_set_modified(doc, TRUE);
+	}
 
 	/* Make the change: */
 	cong_node_make_orphan(node);
@@ -390,7 +410,7 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 			
 			g_assert(view->klass);
 			g_assert(view->klass->on_document_node_make_orphan);
-			view->klass->on_document_node_make_orphan(view, node);
+			view->klass->on_document_node_make_orphan(view, FALSE, node, former_parent);
 		}
 		
 		cong_document_set_modified(doc, TRUE);
@@ -409,6 +429,15 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 	g_message("cong_document_node_add_after\n");
 	#endif
 
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_add_after);
+		view->klass->on_document_node_add_after(view, TRUE, node, older_sibling);
+	}
+
 	/* Make the change: */
 	cong_node_add_after(node, older_sibling);
 
@@ -418,7 +447,7 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 		
 		g_assert(view->klass);
 		g_assert(view->klass->on_document_node_add_after);
-		view->klass->on_document_node_add_after(view, node, older_sibling);
+		view->klass->on_document_node_add_after(view, FALSE, node, older_sibling);
 	}
 
 	cong_document_set_modified(doc, TRUE);
@@ -435,6 +464,15 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 	g_message("cong_document_node_add_before\n");
 	#endif
 
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_add_before);
+		view->klass->on_document_node_add_before(view, TRUE, node, younger_sibling);
+	}
+
 	/* Make the change: */
 	cong_node_add_before(node, younger_sibling);
 
@@ -444,7 +482,7 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 		
 		g_assert(view->klass);
 		g_assert(view->klass->on_document_node_add_before);
-		view->klass->on_document_node_add_before(view, node, younger_sibling);
+		view->klass->on_document_node_add_before(view, FALSE, node, younger_sibling);
 	}
 
 	cong_document_set_modified(doc, TRUE);
@@ -461,6 +499,15 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 	g_message("cong_document_node_set_parent\n");
 	#endif
 
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_parent);
+		view->klass->on_document_node_set_parent(view, TRUE, node, adoptive_parent);
+	}
+
 	/* Make the change: */
 	cong_node_set_parent(node, adoptive_parent);
 
@@ -470,7 +517,7 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 		
 		g_assert(view->klass);
 		g_assert(view->klass->on_document_node_set_parent);
-		view->klass->on_document_node_set_parent(view, node, adoptive_parent);
+		view->klass->on_document_node_set_parent(view, FALSE, node, adoptive_parent);
 	}
 
 	cong_document_set_modified(doc, TRUE);
@@ -488,6 +535,15 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	g_message("cong_document_node_set_text\n");
 	#endif
 
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_text);
+		view->klass->on_document_node_set_text(view, TRUE, node, new_content);
+	}
+
 	/* Make the change: */
 	cong_node_set_text(node, new_content);
 
@@ -497,7 +553,7 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 		
 		g_assert(view->klass);
 		g_assert(view->klass->on_document_node_set_text);
-		view->klass->on_document_node_set_text(view, node, new_content);
+		view->klass->on_document_node_set_text(view, FALSE, node, new_content);
 	}
 
 	cong_document_set_modified(doc, TRUE);

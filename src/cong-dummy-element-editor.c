@@ -158,6 +158,8 @@ CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongN
 	dummy_element->element_editor.first_node = node;
 	dummy_element->element_editor.final_node = node;
 
+	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(dummy_element));
+
 	return CONG_ELEMENT_EDITOR(dummy_element);
 }
 

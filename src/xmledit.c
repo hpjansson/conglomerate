@@ -424,8 +424,8 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongSpa
 	}
 	else if (event->button == 3)
 	{
-		popup_build(xed);
-		popup_show(the_globals.popup, event);
+		editor_popup_build(doc);
+		editor_popup_show(the_globals.popup, event);
 		return(TRUE);
 	}
 	
@@ -578,8 +578,8 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 		if (bevent->button != 3) return(FALSE);
 
 		printf("FIXME:  passing NULL for xed ptr to popup_build\n");
-		popup_build(NULL);
-		popup_show(the_globals.popup, bevent);
+		editor_popup_build(NULL);
+		editor_popup_show(the_globals.popup, bevent);
 		return(TRUE);
 	}
 
@@ -623,7 +623,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongSpan
 	 *   dummy->child = 0;                                                             
 	 *   ttree_branch_remove(dummy);                                                   
 	 * */                                                                              
-	xed_paste(cursor->w, cursor->xed);                                                  
+	cong_document_paste(doc, cursor->w);
 
 	return(TRUE);  
 
@@ -654,11 +654,11 @@ static gboolean is_affected_by_node(CongSpanEditor *span_editor, CongNodePtr nod
 
 /* Prototypes of the handler functions: */
 static void on_document_coarse_update(CongView *view);
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -683,7 +683,7 @@ static void on_document_coarse_update(CongView *view)
 #endif
 }
 
-static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongSpanEditor *span_editor;
 
@@ -704,7 +704,7 @@ static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 #endif
 }
 
-static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling)
 {
 	CongSpanEditor *span_editor;
 
@@ -723,7 +723,7 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 	}
 }
 
-static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling)
 {
 	CongSpanEditor *span_editor;
 
@@ -742,7 +742,7 @@ static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNo
 	}
 }
 
-static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	CongSpanEditor *span_editor;
 
@@ -761,7 +761,7 @@ static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNo
 	}
 }
 
-static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content)
 {
 	CongSpanEditor *span_editor;
 
@@ -2216,24 +2216,15 @@ void xed_cutcopy_update(CongCursor *curs)
 	}
 }
 
-gint xed_cut(GtkWidget *widget, CongSpanEditor *xed)
-{
-	cong_span_editor_cut(xed);
-	return TRUE;
-}
-
-void cong_span_editor_cut(CongSpanEditor *span_editor)
+void cong_document_cut(CongDocument *doc)
 {
 	CongNodePtr t;
 	int replace_xed = 0;
 
-	CongDocument *doc;
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(span_editor);
-	doc = span_editor->doc;
-	g_assert(doc);
+	g_return_if_fail(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
@@ -2271,27 +2262,17 @@ void cong_span_editor_cut(CongSpanEditor *span_editor)
 	xed_cutcopy_update(curs);
 }
 
-
-gint xed_copy(GtkWidget *widget, CongSpanEditor *xed)
-{
-	cong_span_editor_copy(xed);
-	return TRUE;
-}
-
-void cong_span_editor_copy(CongSpanEditor *span_editor)
+void cong_document_copy(CongDocument *doc)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
 	CongNodePtr t_next = NULL;
 	int replace_xed = 0;
 
-	CongDocument *doc;
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(span_editor);
-	doc = span_editor->doc;
-	g_assert(doc);
+	g_return_if_fail(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
@@ -2342,13 +2323,7 @@ void cong_span_editor_copy(CongSpanEditor *span_editor)
 }
 
 
-gint xed_paste(GtkWidget *widget, CongSpanEditor *xed)
-{
-	cong_span_editor_paste(xed, widget);
-	return TRUE;
-}
-
-void cong_span_editor_paste(CongSpanEditor *span_editor, GtkWidget *widget)
+void cong_document_paste(CongDocument *doc, GtkWidget *widget)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2356,14 +2331,11 @@ void cong_span_editor_paste(CongSpanEditor *span_editor, GtkWidget *widget)
 	CongNodePtr clip;
 	CongNodePtr t_next;
 
-	CongDocument *doc;
 	CongDispspec *ds;
 	CongSelection *selection;
 	CongCursor *curs;
 
-	g_assert(span_editor);
-	doc = span_editor->doc;
-	g_assert(doc);
+	g_return_if_fail(doc);
 
 	selection = cong_document_get_selection(doc);
 	curs = cong_document_get_cursor(doc);
