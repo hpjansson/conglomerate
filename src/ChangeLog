@@ -1,5 +1,9 @@
 2004-06-17  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am: 
+	
+	Get comilation flags from configure.in, fixing bug 134747
+
 	* xmledit.c, select.c, cong-source-view.c, cong-edit-find-and-replace.c, cong-document.c: 
 
 	Warning fixes
