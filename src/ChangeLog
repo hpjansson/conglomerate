@@ -1,3 +1,8 @@
+2003-11-19  Duraid Madina
+
+	* global.h
+	portability bugfix
+	
 2003-11-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* tree.c

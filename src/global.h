@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 #endif
 
 #if 1
-#define CONG_VALIDATE_UTF8(str) (g_assert(g_utf8_validate((str), -1, NULL)))
+#define CONG_VALIDATE_UTF8(str) ({g_assert(g_utf8_validate((str), -1, NULL));})
 #else
 #define CONG_VALIDATE_UTF8(str) ((void)0)
 #endif
