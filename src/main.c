@@ -25,7 +25,7 @@ void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget
 
 
 
-/* 
+/*
 #define AUTOGENERATE_DS
 */
 
@@ -229,7 +229,7 @@ gint test_document_types(GtkWidget *w, gpointer data)
 
 	gtk_widget_show (GTK_WIDGET(list_view));
 
-	gtk_container_add (GTK_CONTAINER( GTK_DIALOG (dialog)->vbox ), 
+	gtk_container_add (GTK_CONTAINER( GTK_DIALOG (dialog)->vbox ),
 			   list_view);
 
 	gtk_dialog_add_button(GTK_DIALOG(dialog),
@@ -308,21 +308,21 @@ void insert_element_init()
 
 void fonts_load()
 {
-#ifdef WINDOWS_BUILD                                                            
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
+#ifdef WINDOWS_BUILD
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");
 	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TAG] = cong_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");           
-#else                                                                           
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");        
-	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");       
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-iso8859-1");            
-#endif                                                                         
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");
+#else
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-*-*");
+#endif
 
-#ifdef WINDOWS_BUILD                                                            
-	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT]->asc -= 2;                                                                   
-	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT]->asc -= 4;                                                                  
-	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG]asc -= 8;                                                                  
-#endif     
+#ifdef WINDOWS_BUILD
+	  the_globals.fonts[CONG_FONT_ROLE_BODY_TEXT]->asc -= 2;
+	  the_globals.fonts[CONG_FONT_ROLE_TITLE_TEXT]->asc -= 4;
+	  the_globals.fonts[CONG_FONT_ROLE_SPAN_TAG]asc -= 8;
+#endif
 }
 
 
