@@ -22,8 +22,6 @@
 
 #include "cong-error-dialog.h"
 
-#define ENABLE_RAW_TREE_MANIPULATION 0
-
 /* Callback marshallers for the various UI hooks: */
 static gint
 callback_marshaller_Document (GtkWidget *widget, 
@@ -548,37 +546,6 @@ void popup_item_handlers_destroy(GtkWidget *widget, gpointer data)
 	UNUSED_VAR(int sig);
 }
 
-#if 0
-static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
-{
-	UNUSED_VAR(int sig);
-
-#ifndef RELEASE
-	printf("Menu deactivated.\n");
-#endif
-	
-#if 0
-	
-#if 1
-	gtk_container_foreach(GTK_CONTAINER(widget), popup_item_handlers_destroy, 0);
-	gtk_signal_handlers_destroy(GTK_OBJECT(widget));
-#else
-	sig = gtk_signal_lookup("activate", GTK_MENUITEM);
-	gtk_signal_handler_block(GTK_OBJECT(widget), sig);
-#endif
-	gtk_widget_destroy(widget);
-
-#ifndef RELEASE
-  printf("Menu destroyed.\n");
-#endif
-	popup_init();
-
-#endif	
-	
-	return(FALSE);
-}
-#endif
-
 /**
  * editor_popup_show:
  * @widget:
@@ -852,64 +819,10 @@ editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_window)
 /*
   TREE POPUP CODE:
  */
-#if 0
-static gint
-callback_to_tree_callback_marshaller (GtkWidget *widget, 
-				      CongNodePtr node)
-{	
-	CongDocument *doc;
-	GtkWindow *parent_window;
-	CongMenuCallback_Document_Node_ParentWindow tree_callback;
-
-	doc = g_object_get_data(G_OBJECT(widget),"document");
-	g_assert(doc);
-
-	parent_window = g_object_get_data(G_OBJECT(widget),
-					  "parent_window");
-
-
-	tree_callback = g_object_get_data(G_OBJECT(widget),"tree_callback");
-	g_assert(tree_callback);
-
-	tree_callback (doc, 
-		       node,
-		       parent_window);
-
-	return TRUE;
-}
-#endif
 
 
 /* the popup items have the data "document" set on them: */
 
-#if 0
-static GtkMenuItem*
-add_item_to_popup_with_callback_legacy (GtkMenu *menu,
-					GtkMenuItem *item, 
-					gint (*callback)(GtkWidget *widget, CongNodePtr node),
-					CongDocument *doc,
-					CongNodePtr node,
-					GtkWindow *parent_window,
-					gboolean is_sensitive)
-{
-	g_return_val_if_fail (menu, NULL);
-	g_return_val_if_fail (item, NULL);
-	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	g_return_val_if_fail (callback, NULL);
-	g_return_val_if_fail (node, NULL);
-
-	cong_menu_item_attach_callback_legacy (item,
-					       callback,					       
-					       doc,
-					       node,
-					       parent_window);
-	cong_menu_add_item (menu,
-			    item,
-			    is_sensitive);
-
-	return item;
-}
-#endif
 
 static GtkWidget*
 add_item_to_popup_with_callback_Document_Node_ParentWindow (GtkMenu *menu,
@@ -973,19 +886,6 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds,
 	return popup;
 }
 
-
-#if 0
-static GList*
-make_list_of_element_description (CongDocument *doc)
-{
-	GList *list = NULL;
-	
-	CongElementDescription
-		}
-#endif
-
-
-		
 static GtkWidget*
 structural_tag_popup_init (CongUICallback_Document_ElementDescription_Node callback,
 			   CongDocument *doc,
@@ -1045,139 +945,6 @@ structural_tag_popup_init (CongUICallback_Document_ElementDescription_Node callb
 	gtk_widget_show(popup);
 	return popup;
 }
-
-#if 0
-static gchar*
-get_text (GtkWindow *parent_window,
-	  const gchar *initial_text) 
-{
-	GtkDialog *dlg = GTK_DIALOG (gtk_dialog_new_with_buttons (NULL,
-								  parent_window,
-								  GTK_DIALOG_MODAL,
-								  GTK_STOCK_CANCEL,
-								  GTK_RESPONSE_REJECT,
-								  GTK_STOCK_OK,
-								  GTK_RESPONSE_ACCEPT,
-								  NULL));
-	GtkEntry *entry = GTK_ENTRY (gtk_entry_new ());
-
-	gtk_entry_set_text (entry,
-			    initial_text);
-
-	gtk_widget_show (GTK_WIDGET (entry));
-	
-	gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dlg)->vbox),
-			   GTK_WIDGET (entry));
-
-	if (gtk_dialog_run (dlg)==GTK_RESPONSE_ACCEPT) {
-		gchar *result = g_strdup (gtk_entry_get_text (entry));
-
-		gtk_widget_destroy (GTK_WIDGET (dlg));
-
-		return result;
-	} else {
-
-		gtk_widget_destroy (GTK_WIDGET (dlg));
-		return NULL;
-	}	
-}
-
-static void
-debug_delete_node (CongDocument *doc,
-		   CongNodePtr node,
-		   GtkWindow *parent_window);
-static void
-debug_add_text_node_after (CongDocument *doc,
-			   CongNodePtr node,
-			   GtkWindow *parent_window);
-static void
-debug_add_text_node_before (CongDocument *doc,
-			    CongNodePtr node,
-			    GtkWindow *parent_window);
-static void
-debug_set_text (CongDocument *doc,
-		CongNodePtr node,
-		GtkWindow *parent_window);
-
-
-static void
-debug_delete_node (CongDocument *doc,
-		   CongNodePtr node,
-		   GtkWindow *parent_window)
-{
-	cong_document_begin_edit (doc);
-	cong_document_node_recursive_delete (doc, 
-					     node);
-	cong_document_end_edit (doc);	
-}
-
-static void
-debug_add_text_node_after (CongDocument *doc,
-			   CongNodePtr node,
-			   GtkWindow *parent_window)
-{	
-	gchar *new_text;
-	CongNodePtr new_node;
-
-	new_text = get_text (parent_window,
-			     "");
-	
-	new_node = cong_node_new_text (new_text,
-				       doc);
-	
-	cong_document_begin_edit (doc);
-	cong_document_node_add_after (doc, 
-				      new_node,
-				      node);
-	cong_document_end_edit (doc);	
-
-	g_free (new_text);
-}
-
-static void
-debug_add_text_node_before (CongDocument *doc,
-			    CongNodePtr node,
-			    GtkWindow *parent_window)
-{
-	gchar *new_text;
-	CongNodePtr new_node;
-
-	new_text = get_text (parent_window,
-			     "");
-	
-	new_node = cong_node_new_text (new_text,
-				       doc);
-	
-	cong_document_begin_edit (doc);
-	cong_document_node_add_before (doc, 
-				       new_node,
-				       node);
-	cong_document_end_edit (doc);	
-
-	g_free (new_text);
-}
-
-static void
-debug_set_text (CongDocument *doc,
-		CongNodePtr node,
-		GtkWindow *parent_window)
-{
-	gchar *new_text;
-
-	g_assert (cong_node_type(node)==CONG_NODE_TYPE_TEXT);
-
-	new_text = get_text (parent_window,
-			     node->content);
-	
-	cong_document_begin_edit (doc);
-	cong_document_node_set_text (doc, 
-				     node,
-				     new_text);
-	cong_document_end_edit (doc);	
-
-	g_free (new_text);
-}
-#endif
 
 static void
 make_element_submenu (GtkMenu *tpopup,
@@ -1240,54 +1007,6 @@ cong_ui_popup_init(CongDocument *doc,
 								    node,
 								    parent_window,
 								    TRUE);	
-
-#if ENABLE_RAW_TREE_MANIPULATION
-	{
-		/* Add debug stuff: */
-		add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
-						      cong_util_make_menu_item (_("Delete this item"),
-										NULL, /* FIXME:  ought to have a tooltip */
-										NULL), /* FIXME:  ought to have an icon */
-						      debug_delete_node,
-						      doc,
-						      node,
-						      parent_window);
-		
-		if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
-							      cong_util_make_menu_item (_("Add text node after"),
-											NULL, /* FIXME:  ought to have a tooltip */
-											NULL), /* FIXME:  ought to have an icon */
-							      debug_add_text_node_after,
-							      doc,
-							      node,
-							      parent_window);
-			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
-							      cong_util_make_menu_item (_("Add text node before"),
-											NULL, /* FIXME:  ought to have a tooltip */
-											NULL), /* FIXME:  ought to have an icon */
-							      debug_add_text_node_before,
-							      doc,
-							      node,
-							      parent_window);
-		}
-		
-		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
-			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
-							      cong_util_make_menu_item (_("Set the text"),
-											NULL, /* FIXME:  ought to have a tooltip */
-											NULL), /* FIXME:  ought to have an icon */
-							      debug_set_text,
-							      doc,
-							      node,
-							      parent_window);
-		}
-
-		cong_util_add_menu_separator(GTK_MENU(tpopup));
-	}
-#endif
-
-
 
 	/* Add clipboard operations: */
 	/* FIXME:  the clipboard stuff only currently works for elements, hence we should filter on these for now: */

@@ -1,5 +1,9 @@
 2004-08-08  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c: 
+
+	Removed dead code
+
 	* cong-fake-plugin-hooks.h, cong-fake-plugin-hooks.c, cong-app.c, Makefile.am:
 
 	Added new file: cong-fake-plugin-hooks.c, to contain the part of cong-app.c that was always changing when adding new plugins
