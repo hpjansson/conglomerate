@@ -1,0 +1,181 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE module SYSTEM "http://rhaptos.ece.rice.edu/developers/rainking/cnxml/cnxml_plain_no_attr.dtd">
+<module xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="m0000">
+  
+  <name xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">Themes</name>
+
+<metadata xmlns="http://cnx.rice.edu/cnxml/0.4" xmlns:md="http://cnx.rice.edu/mdml/0.4">
+    <md:version xmlns:md="http://cnx.rice.edu/mdml/0.4">2.9</md:version>
+    <md:created xmlns:md="http://cnx.rice.edu/mdml/0.4">2000-06-20</md:created>
+    <md:revised xmlns:md="http://cnx.rice.edu/mdml/0.4">2001-06-05</md:revised>
+<md:authorlist xmlns:md="http://cnx.rice.edu/mdml/0.4">
+    <md:author xmlns:md="http://cnx.rice.edu/mdml/0.4" id="dhj">
+      <md:firstname xmlns:md="http://cnx.rice.edu/mdml/0.4">Don</md:firstname>
+      <md:othername xmlns:md="http://cnx.rice.edu/mdml/0.4">H.</md:othername>
+      <md:surname xmlns:md="http://cnx.rice.edu/mdml/0.4">Johnson</md:surname>
+      <md:email xmlns:md="http://cnx.rice.edu/mdml/0.4">dhj@rice.edu</md:email>
+    </md:author>
+  </md:authorlist>
+
+  <md:maintainerlist xmlns:md="http://cnx.rice.edu/mdml/0.4">
+    <md:maintainer xmlns:md="http://cnx.rice.edu/mdml/0.4" id="dhj">
+      <md:firstname xmlns:md="http://cnx.rice.edu/mdml/0.4">Don</md:firstname>
+      <md:othername xmlns:md="http://cnx.rice.edu/mdml/0.4">H.</md:othername>
+      <md:surname xmlns:md="http://cnx.rice.edu/mdml/0.4">Johnson</md:surname>
+      <md:email xmlns:md="http://cnx.rice.edu/mdml/0.4">dhj@rice.edu</md:email>
+    </md:maintainer>
+    <md:maintainer xmlns:md="http://cnx.rice.edu/mdml/0.4" id="rha"> 
+      <md:firstname xmlns:md="http://cnx.rice.edu/mdml/0.4">Roy</md:firstname>
+      <md:surname xmlns:md="http://cnx.rice.edu/mdml/0.4">Ha</md:surname>
+      <md:email xmlns:md="http://cnx.rice.edu/mdml/0.4">rha@rice.edu</md:email>
+    </md:maintainer>
+  </md:maintainerlist>
+  
+  <md:keywordlist xmlns:md="http://cnx.rice.edu/mdml/0.4">
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">history of electrical engineering</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">themes of electrical engineering</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">James Maxwell</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">Heinrich Hertz</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">Oliver Heaviside</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">information theory</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">electrical engineering</md:keyword>
+    <md:keyword xmlns:md="http://cnx.rice.edu/mdml/0.4">information</md:keyword>
+  </md:keywordlist>
+
+  <md:abstract xmlns:md="http://cnx.rice.edu/mdml/0.4">
+    This module contains an introduction to the study of electrical engineering
+    and some of the historical points of interest which formed the basis of study
+    in the field.
+  </md:abstract>
+</metadata>
+<content xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">
+
+    
+  <para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para1">
+    From its beginnings in the late nineteenth century, electrical
+    engineering has blossomed from focusing on electrical circuits
+    for power, telegraphy and telephony to focusing on a much broader
+    range of disciplines.  However, the underlying themes are
+    relevant today: <term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">Power</term> creation and
+    transmission and <term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">information</term> have been the underlying
+    themes of electrical engineering for a century and a<term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4"> half.  This course
+    concentrates on </term>the latter theme: the <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">representation,
+    manipulation, transmission, and reception of information by
+    electrical means</emphasis>.  This course describes what
+    information is, how engineers quantify information, and how
+    electrical <term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">signals</term> represent information.
+  </para>
+  
+  <para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para2">
+    Information can take a variety of forms.  When you speak to a friend,
+    your thoughts are translated by your brain into motor commands
+    that cause various vocal tract components--the jaw, the
+    tongue, the lips--to move in a coordinated fashion.
+    Information arises in your thoughts and is represented by speech,
+    which must have a well defined, broadly known structure so that
+    someone else can understand what you say.  Utterances convey
+    information in sound pressure waves, which propagate to your
+    friend's ear.  There, sound energy is converted back to neural
+    activity, and, if what you say makes sense, she understands what
+    you say.  Your words could have been recorded on a compact disc
+    (CD), mailed to your friend and listened to by her on her stereo.
+    Information can take the form of a text file you type into your
+    word processor.  You might send the file via e-mail to a friend,
+    who reads it and understands it.  From an information theoretic
+    viewpoint, all of these scenarios are equivalent, although the
+    forms of the information representation--sound waves,
+    plastic and computer files--are very different.
+  </para>
+
+<para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para2a">
+    Engineers, who don't care about information <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">content</emphasis>,
+    catagorize information into two different forms: <term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">analog</term> and
+    <term xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">digital</term>.  Analog information is continuous valued; examples
+     are audio and video.  Digital information is discrete valued; examples are
+     text (like what you are reading now) and DNA sequences.
+</para>
+
+  <para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para3">
+    The conversion of information-bearing signals from one energy form
+    into another is known as <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">energy conversion</emphasis> or
+    <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">transduction</emphasis>.  All
+    conversion systems are inefficient since some input energy is
+    lost as heat, but this loss does not necessarily mean that the
+    conveyed information is lost. Conceptually we could
+    use any form of energy to represent information, but electric
+    signals are uniquely well-suited for information representation,
+    transmission (signals can be broadcast from antennas or sent
+    through wires), and manipulation (circuits can be built to reduce
+    noise and computers can be used to modify information).  Thus, we
+    will be concerned with how to
+
+    <list xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="goallist">
+      <item xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">
+	<emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">represent</emphasis> all forms of information with
+	electrical signals, 
+      </item>
+      <item xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">
+	<emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">encode</emphasis> information as voltages, currents,
+	and electromagnetic waves, 
+      </item> 
+      <item xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">
+	<emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">manipulate</emphasis> information-bearing electric
+	signals with circuits and computers, and 
+      </item> 
+      <item xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">
+	<emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">receive</emphasis> electric signals and convert the
+	information expressed by electric signals back into a useful
+	form. 
+      </item>
+    </list>
+  </para>
+
+  <para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para4">
+    Telegraphy represents the earliest electrical information system,
+    and it dates from 1837.  At that time, electrical science was
+    largely empirical, and only those with experience and intuition
+    could develop telegraph systems.  Electrical science came of age
+    when <link xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" src="http://www-groups.dcs.st-andrews.ac.uk/~history/Mathematicians/Maxwell.html">James
+    Clerk Maxwell</link> proclaimed in 1864 a set of equations that he
+    claimed governed all electrical phenomena.  These equations
+    predicted that light was an electromagnetic wave, and that energy
+    could propagate.  Because of the complexity of Maxwell's
+    presentation, the development of the telephone in 1876 was due
+    largely to empirical work.  Once Heinrich Hertz confirmed Maxwell's
+    prediction of what we now call radio waves in about 1882,
+    Maxwell's equations were simplified by Oliver Heaviside and
+    others, and were widely read.  This understanding of fundamentals
+    led to a quick succession of inventions--the wireless
+    telegraph (1899), the vacuum tube (1905), and radio
+    broadcasting--that marked the true emergence of the
+    communications age.
+  </para>
+
+  <para xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" id="para5">
+    During the first part of the twentieth century, circuit theory and
+    electromagnetic theory were all an electrical engineer needed to
+    know to be qualified and produce first-rate designs.
+    Consequently, circuit theory served as the foundation
+    and the framework of all of electrical engineering education.  At
+    mid-century, three &quot;inventions&quot; changed the ground rules.  These
+    were the first public demonstration of the first electronic
+    computer (1946), the invention of the transistor (1947), and the
+    publication of <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">A Mathematical Theory of
+    Communication</emphasis> by <link xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4" src="http://www.lucent.com/minds/infotheory/">Claude
+    Shannon</link> (1948).  Although conceived separately, these
+    creations gave birth to the information age, in which digital and
+    analog communication systems interact and compete for design
+    preferences.  About twenty years later, the laser was invented,
+    which opened even more design possibilities.  Thus, the primary
+    focus shifted from <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">how</emphasis> to build communication
+    systems (the circuit theory era) to <emphasis xmlns:md="http://cnx.rice.edu/mdml/0.4" xmlns="http://cnx.rice.edu/cnxml/0.4">what</emphasis>
+    communications systems were intended to accomplish. 
+    Only once the intended system is specified can an
+    implementation be selected.  Today's electrical engineer must be
+    mindful of the system's ultimate goal, and understand the
+    tradeoffs between digital and analog alternatives, and between
+    hardware and software configurations in designing information
+    systems.
+  </para>
+ </content>
+</module>
