@@ -1,3 +1,9 @@
+2003-07-25  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-util.c
+
+	Use the default catalog rather than load our own, to avoid path issues
+
 2003-07-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* plugin-lists-area-listitem.c

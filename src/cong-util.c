@@ -83,14 +83,8 @@ cong_utils_get_norman_walsh_stylesheet_path(void)
 {
        /* This should be changed if another catalog is in use, i guess */
        xmlChar *resolved_path = NULL;
-       xmlCatalogPtr cat = NULL;
 
-       cat = xmlLoadACatalog ("/etc/xml/catalog");
-
-       resolved_path = xmlACatalogResolveURI (cat,
-					      "http://docbook.sourceforge.net/release/xsl/current/");
-
-       xmlFreeCatalog (cat);
+       resolved_path = xmlCatalogResolveURI ("http://docbook.sourceforge.net/release/xsl/current/");
 
        g_message ("Norman Walsh XSL path: %s", resolved_path);
 
