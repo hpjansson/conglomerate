@@ -28,6 +28,7 @@
 #include "cong-eel.h"
 
 #include "cong-editor-area-entity-decl.h"
+#include "cong-editor-area-structural-tag.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -92,11 +93,48 @@ static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
 	CongEditorArea *new_area;
+	gchar *title;
+	GdkColor col_bold;
+	GdkColor col_dim;
+	GdkColor col_background;
+	GdkColor col_text;
 
 	g_return_val_if_fail (editor_node, NULL);
 
+#if 1
+	title = g_strdup_printf ("Entity declaration: \"%s\"", 
+				 cong_editor_node_get_node (editor_node)->name);
+
+	cong_eel_rgb_to_gdk_color (&col_bold,
+				   0x00,
+				   0x00,
+				   0x00);
+	cong_eel_rgb_to_gdk_color (&col_dim,
+				   0x00,
+				   0x00,
+				   0x00);
+	cong_eel_rgb_to_gdk_color (&col_background,
+				   0xff,
+				   0xff,
+				   0xff);
+	cong_eel_rgb_to_gdk_color (&col_text,
+				   0x00,
+				   0x00,
+				   0x00);
+
+	new_area = cong_editor_area_structural_new (cong_editor_node_get_widget (editor_node),
+						    NULL,
+						    title,
+						    &col_bold,
+						    &col_dim,
+						    &col_background,
+						    &col_text);
+
+	g_free (title);
+#else
 	new_area = cong_editor_area_entity_decl_new (cong_editor_node_get_widget (editor_node),
 						     cong_editor_node_get_node (editor_node)->name);
+#endif
 
 	return new_area;
 }

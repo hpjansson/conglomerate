@@ -1,5 +1,9 @@
 2003-09-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-entity-decl.c, cong-editor-node-entity-ref.c
+
+	Use of CongEditorAreaStructural to make entity declarations and entity references look funky
+
 	* cong-editor-area-structural-tag.c, cong-editor-area-structural-tag.h
 
 	CongEditorAreaStructuralTag is now a subclass of the new CongEditorAreaStructural, rather than CongEditorAreaBin
