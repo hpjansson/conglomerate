@@ -23,7 +23,7 @@ fi
 
 DEBIAN_FILES="rules control changelog copyright docs compat
  conglomerate.menu conglomerate_icon.xpm
- NEWS watch"
+ NEWS README watch"
 
 #
 if [ ! -f debian/control ]
