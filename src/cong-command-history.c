@@ -119,7 +119,9 @@ cong_command_history_undo (CongCommandHistory *command_history)
 {
 	g_return_if_fail (IS_CONG_COMMAND_HISTORY(command_history));
 
+#if 0
 	g_message ("cong_command_history_undo()");
+#endif
 
 	if (PRIVATE(command_history)->list_of_commands_to_undo) {
 		
@@ -144,7 +146,9 @@ cong_command_history_redo (CongCommandHistory *command_history)
 {
 	g_return_if_fail (IS_CONG_COMMAND_HISTORY(command_history));
 
+#if 0
 	g_message ("cong_command_history_redo()");
+#endif
 
 	if (PRIVATE(command_history)->list_of_commands_to_redo) {
 		

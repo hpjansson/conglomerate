@@ -1,5 +1,9 @@
 2003-10-05  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command-history.c, cong-document.c
+
+	Reduced the amount of debug spew
+
 	* cong-command-history.c, cong-command.c, cong-command.h, cong-document.c
 
 	Implemented command merging

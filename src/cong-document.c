@@ -734,7 +734,9 @@ cong_document_end_command (CongDocument *doc,
 						   cmd);
 		
 	if (cmd_to_merge_into) {
+#if 0
 		g_message ("Merging command \"%s\" into existing undo history", cong_command_get_description(cmd));
+#endif
 
 		cong_command_merge (cmd_to_merge_into,
 				    cmd);
@@ -1708,7 +1710,9 @@ cong_document_undo (CongDocument *doc)
 {
 	g_return_if_fail (IS_CONG_DOCUMENT(doc));
 
+#if 0
 	g_message ("cong_document_undo");
+#endif
 
 	cong_command_history_undo (PRIVATE(doc)->history);
 }
@@ -1718,7 +1722,9 @@ cong_document_redo (CongDocument *doc)
 {
 	g_return_if_fail (IS_CONG_DOCUMENT(doc));
 
+#if 0
 	g_message ("cong_document_redo");
+#endif
 
 	cong_command_history_redo (PRIVATE(doc)->history);
 }
