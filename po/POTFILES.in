@@ -9,6 +9,7 @@ examples/forrest-document.xds.in
 examples/kernel-traffic-newsletter.xds.in
 examples/xhtml1-strict.xds.in
 glade/cong-file-import.glade
+glade/cong-file-properties.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade
 glade/docbook-ulink-properties.glade
