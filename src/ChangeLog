@@ -1,3 +1,9 @@
+2004-08-04  Geert Stappers  <stappers@stappers.nl>
+
+	*  plugin-docbook.c
+
+	Added a title at creation time of a article.
+
 2004-08-01  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-primary-window.c, cong-menus.c: 

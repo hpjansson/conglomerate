@@ -216,6 +216,13 @@ make_article(const xmlChar *title)
 	xmlAddChild(section_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
+				  "title",
+				  _("Untitled section"))
+		    );
+
+	xmlAddChild(section_node, 
+		    xmlNewDocNode(xml_doc,
+				  NULL,
 				  "para",
 				  _("Text of the article goes here"))
 		    );
