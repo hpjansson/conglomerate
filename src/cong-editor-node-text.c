@@ -231,8 +231,9 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 	CongEditorLineFragments *result;
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
-#if 0
-	g_message("CongEditorNodeText::generate_line_areas_recursive");
+#if 1
+	g_message("CongEditorNodeText::generate_line_areas_recursive, cached text =\"%s\"", 
+		  cong_text_cache_get_text (PRIVATE(node_text)->text_cache));
 #endif
 
 	result = cong_editor_line_fragments_new();
@@ -333,14 +334,18 @@ on_signal_set_text_notify_after (CongDocument *doc,
 		cong_text_cache_set_text (PRIVATE(editor_node_text)->text_cache,
 					  cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content);
 
+		pango_layout_set_text (PRIVATE(editor_node_text)->pango_layout,
+				       cong_text_cache_get_text (PRIVATE(editor_node_text)->text_cache),
+				       -1);
+
+		cong_editor_node_line_regeneration_required (CONG_EDITOR_NODE(editor_node_text));
+
 #if 0
 		if (PRIVATE(editor_node_text)->area_text) {
 			cong_editor_area_text_set_text (PRIVATE(editor_node_text)->area_text,
 							cong_text_cache_get_text(PRIVATE(editor_node_text)->text_cache));
 		}
 #endif
-
-		/* FIXME: also need to generate reflow events for any inline flow_holder gubbins */
 	}
 }
 
@@ -364,7 +369,9 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 					       &trailing)) {
 		int original_byte_offset;
 
+#if 0
 		g_message("(%i,%i) -> index %i", x,y, index_);
+#endif
 
 		index_ += cong_editor_area_text_fragment_get_text_offset (editor_area_text_fragment);
 

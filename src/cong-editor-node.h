@@ -57,6 +57,8 @@ struct CongEditorNodeClass
 	CongEditorLineFragments* (*generate_line_areas_recursive) (CongEditorNode *editor_node,
 								   gint line_width,
 								   gint initial_indent);
+
+	void (*line_regeneration_required) (CongEditorNode *editor_node);
 	
 	enum CongFlowType (*get_flow_type) (CongEditorNode *editor_node);
 };
@@ -105,6 +107,9 @@ CongEditorLineFragments*
 cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint line_width,
 						gint initial_indent);
+
+void
+cong_editor_node_line_regeneration_required (CongEditorNode *editor_node);
 
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);

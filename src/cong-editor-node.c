@@ -40,6 +40,14 @@
 
 #define PRIVATE(x) ((x)->private)
 
+enum {
+	LINE_REGENERATION_REQUIRED,
+
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = {0};
+
 struct CongEditorNodeDetails
 {
 	CongEditorWidget3 *widget;
@@ -75,6 +83,15 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
 					      generate_line_areas_recursive);
+
+	signals[LINE_REGENERATION_REQUIRED] = g_signal_new ("line_regeneration_required",
+							    CONG_EDITOR_NODE_TYPE,
+							    G_SIGNAL_RUN_FIRST,
+							    0,
+							    NULL, NULL,
+							    g_cclosure_marshal_VOID__VOID,
+							    G_TYPE_NONE, 
+							    0);
 
 	klass->get_flow_type = get_flow_type;
 }
@@ -244,7 +261,7 @@ cong_editor_node_get_area (CongEditorNode *editor_node)
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
-	g_return_if_fail (editor_node);
+	g_return_val_if_fail (editor_node, NULL);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
@@ -257,12 +274,21 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint line_width,
 						gint initial_indent)
 {
-	g_return_if_fail (editor_node);
+	g_return_val_if_fail (editor_node, NULL);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
 						       generate_line_areas_recursive, 
 						       (editor_node, line_width, initial_indent));
+}
+
+void
+cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
+{
+	g_return_if_fail (editor_node);
+
+	g_signal_emit (G_OBJECT(editor_node),
+		       signals[LINE_REGENERATION_REQUIRED], 0);
 }
 
 enum CongFlowType

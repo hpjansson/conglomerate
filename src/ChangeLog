@@ -1,5 +1,9 @@
 2003-08-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-inlines.c, cong-editor-node-text.c, cong-editor-node.c, cong-editor-node.h
+
+	Text update for the new inline blocks fixed a bug with losing initial text fragments when updating an inline.
+	
 	* cong-file-new.c, cong-plugin.c, plugin-tests.c
 
 	Disabled lots of stray debug messages

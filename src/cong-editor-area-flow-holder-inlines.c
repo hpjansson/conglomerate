@@ -167,6 +167,7 @@ void
 cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
 	cong_editor_area_remove_all_children ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_flow_holder_inlines)->line_composer));
+	PRIVATE(area_flow_holder_inlines)->last_line = NULL;
 }
 
 
@@ -386,6 +387,15 @@ for_all (CongEditorArea *editor_area,
 	return NULL;
 }
 
+static void
+on_line_regeneration_required (CongEditorNode *editor_node,
+			       gpointer user_data)
+{
+	CongEditorAreaFlowHolderInlines *area_flow_holder_inlines = CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(user_data);
+
+	cong_editor_area_flow_holder_inlines_reflow_required(area_flow_holder_inlines);
+}
+
 static CongEditorChildPolicy*
 insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node)
@@ -406,6 +416,12 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes = g_list_append (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes, 
 											 editor_node);
 	}
+
+	g_signal_connect (G_OBJECT(editor_node),
+			  "line_regeneration_required",
+			  G_CALLBACK(on_line_regeneration_required),
+			  area_flow_holder);
+
 	cong_editor_area_flow_holder_inlines_reflow_required(area_flow_holder_inlines);
 
 	return cong_editor_child_policy_inline_new (editor_node,
