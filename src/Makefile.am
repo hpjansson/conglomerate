@@ -1,6 +1,9 @@
 
 NULL =
 
+## for bugzilla 134747 and 123003
+CFLAGS += -Wall -Werror
+
 bin_PROGRAMS = conglomerate
 
 if ENABLE_PRINTING
