@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-11-07 David Malcolm
 
+	* cong-document.c, cong-primary-window.c, global.h, main.c, open.c, save.c
+
+	XSLT experiments and Open/Save cleanups
+
 	* cong-document.c, cong-primary-window.c, cong-tree-view.c, cursor.c, global.h
 
 	Document cleanups and "(modified)" hint in window title.

@@ -600,13 +600,22 @@ void open_document_do(const gchar* doc_name)
 
 
 
-gint open_document(GtkWidget *w, gpointer data)
+void open_document(void)
 {
 	const char *doc_name, *ds_name;
 	
 	doc_name = get_file_name("Select an XML document");
-	if (!doc_name) return(TRUE);
+
+	if (!doc_name) {
+		return;
+	}
 
 	open_document_do(doc_name);
-	return(TRUE);  
+}
+
+gint toolbar_callback_open(GtkWidget *widget, gpointer data)
+{
+	open_document();
+
+	return TRUE;
 }

@@ -86,6 +86,14 @@ cong_document_delete(CongDocument *doc)
 	g_free(doc);
 }
 
+xmlDocPtr
+cong_document_get_xml(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	return doc->xml_doc;
+}
+
 CongNodePtr
 cong_document_get_root(CongDocument *doc)
 {

@@ -23,13 +23,6 @@ void xed_cut_wrap(GtkWidget *widget, gpointer data) { xed_cut(widget, 0); }
 void xed_copy_wrap(GtkWidget *widget, gpointer data) { xed_copy(widget, 0); }
 void xed_paste_wrap(GtkWidget *widget, gpointer data) { xed_paste(widget, 0); }
 
-#if 1
-void open_document_wrap(GtkWidget *widget, gpointer data) { open_document(widget, 0); }
-void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget, 0); }
-#endif
-
-
-
 /*
 #define AUTOGENERATE_DS
 */
@@ -299,11 +292,14 @@ void open_transformed_window_for_doc(xmlDocPtr doc)
 }
 
 
-gint test_transform(GtkWidget *w, gpointer data)
+void menu_callback_test_transform(gpointer callback_data,
+				  guint callback_action,
+				  GtkWidget *widget)
 {
-#if 1
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc;
+
 	/* Hackish test of libxslt */
-	xmlDocPtr doc;
 	xsltStylesheetPtr xsl;
 	xmlDocPtr result;
 
@@ -312,17 +308,28 @@ gint test_transform(GtkWidget *w, gpointer data)
 	xmlLoadExtDtdDefaultValue(1);
 #endif
 	
-	doc = xmlParseFile("../examples/test-docbook.xml");
-	g_assert(doc);
+	doc = cong_primary_window_get_document(primary_window);
 
-	xsl = xsltParseStylesheetFile("../examples/test-docbook-to-html.xsl");
-	g_assert(xsl);
+	g_return_if_fail(doc);
 
-	result = xsltApplyStylesheet(xsl, doc, NULL);
+	#define STYLESHEET_FILE ("../examples/test-docbook-to-html.xsl")
+
+	xsl = xsltParseStylesheetFile(STYLESHEET_FILE);
+
+	if (NULL==xsl) {
+		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",STYLESHEET_FILE);
+
+		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not transform the document",
+							  why_failed,
+							  "FIXME");
+	
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		return;
+	}
+
+	result = xsltApplyStylesheet(xsl, cong_document_get_xml(doc), NULL);
 	g_assert(result);
-
-
-#if 1
 
 #if 0
 	open_preview_window_for_doc(result); /* takes ownership of the result */
@@ -330,29 +337,15 @@ gint test_transform(GtkWidget *w, gpointer data)
 	open_transformed_window_for_doc(result); /* takes ownership of the result */
 	/* FIXME: do as a document?  or have a special preview window? */
 #endif
-
-#else
-	xsltSaveResultToFile(stdout, result, xsl);
-	xmlFreeDoc(result);
-#endif
 	
 	xsltFreeStylesheet(xsl);
-	xmlFreeDoc(doc);
 
 	/* do we need to clean up the globals? */
 #if 0
 	xmlSubstituteEntitiesDefault(0);
 	xmlLoadExtDtdDefaultValue(0);
 #endif
-
-#endif
-	return TRUE;
 }
-
-void test_transform_wrap(GtkWidget *widget, gpointer data) { test_transform(widget, 0); }
-
-
-
 
 
 

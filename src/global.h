@@ -185,6 +185,9 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 void
 cong_document_delete(CongDocument *doc);
 
+xmlDocPtr
+cong_document_get_xml(CongDocument *doc);
+
 CongNodePtr
 cong_document_get_root(CongDocument *doc);
 
@@ -520,6 +523,7 @@ struct CongFont
 
 CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
 void cong_primary_window_free(CongPrimaryWindow *primary_window);
+CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window);
 void cong_primary_window_update_title(CongPrimaryWindow *primary_window);
 
 CongTreeView *cong_tree_view_new(CongDocument *doc);
@@ -640,8 +644,10 @@ GtkWidget *gui_metachoice_box(TTREE *choices, int many, int selectability, GtkSi
 GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
 #endif
 
-gint open_document(GtkWidget *w, gpointer data);
+void open_document(void);
+#if 0
 gint save_document(GtkWidget *w, gpointer data);
+#endif
 
 const char *get_file_name(char *title);
 char *pick_structural_tag(CongDispspec *ds);
@@ -769,6 +775,7 @@ void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_span_editor_redraw(CongSpanEditor *xed);
 
 void cong_cursor_init(CongCursor *curs);
+void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
 void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int y);
@@ -937,8 +944,8 @@ void
 cong_dispspec_registry_dump(CongDispspecRegistry* registry);
 
 /* Menu hooks: */
-void open_document_wrap(GtkWidget *widget, gpointer data);
-void save_document_wrap(GtkWidget *widget, gpointer data);
+gint toolbar_callback_open(GtkWidget *widget, gpointer data);
+gint toolbar_callback_save_as(GtkWidget *w, gpointer data);
 
 void xed_cut_wrap(GtkWidget *widget, gpointer data);
 void xed_copy_wrap(GtkWidget *widget, gpointer data);
@@ -947,4 +954,6 @@ void xed_paste_wrap(GtkWidget *widget, gpointer data);
 void test_open_wrap(GtkWidget *widget, gpointer data);
 void test_error_wrap(GtkWidget *widget, gpointer data);
 void test_document_types_wrap(GtkWidget *widget, gpointer data);
-void test_transform_wrap(GtkWidget *widget, gpointer data);
+void menu_callback_test_transform(gpointer callback_data,
+				  guint callback_action,
+				  GtkWidget *widget);

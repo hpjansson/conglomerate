@@ -27,12 +27,13 @@
 
 #include "global.h"
 
-gint save_document(GtkWidget *w, gpointer data)
+gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 {
-	CongDocument *doc = data;
+	CongPrimaryWindow *primary_window = data;
+	CongDocument *doc = cong_primary_window_get_document(primary_window);
 	const char *doc_name;
 
-	g_assert(doc);
+	g_return_val_if_fail(doc, FALSE);
 
 	doc_name = get_file_name("Save XML as...");
 	if (!doc_name) return(TRUE);

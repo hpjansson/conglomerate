@@ -220,17 +220,17 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 									    "Open document",
 									    "Open document",
 									    icon_openfile, 
-									    open_document,
+									    toolbar_callback_open,
 									    primary_window);
 	
 	/* Submit */
 	primary_window->butt_submit = cong_primary_window_toolbar_create_item(primary_window,
 									      GTK_TOOLBAR(primary_window->toolbar),
-									      "Save", 
-									      "Save document",
-									      "Save document", 
+									      "Save as...", 
+									      "Save document as...",
+									      "Save document as...", 
 									      icon_submit,
-									      save_document,
+									      toolbar_callback_save_as,
 									      primary_window);
 }
 
@@ -284,6 +284,13 @@ static void menu_callback_file_new(gpointer callback_data,
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
 }
 
+static void menu_callback_file_open(gpointer callback_data,
+				    guint callback_action,
+				    GtkWidget *widget)
+{
+	open_document();
+}
+
 static void menu_callback_file_save(gpointer callback_data,
 				    guint callback_action,
 				    GtkWidget *widget)
@@ -295,8 +302,18 @@ static void menu_callback_file_save_as(gpointer callback_data,
 				       guint callback_action,
 				       GtkWidget *widget)
 {
-	/* this has been implemented; need to figure out the exact wiring */
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = primary_window->doc;
+	const char *doc_name;
+
+	g_return_if_fail(doc);
+
+	doc_name = get_file_name("Save XML as...");
+	if (!doc_name) {
+		return;
+	}
+	
+	cong_document_save(doc, doc_name);
 }
 
 static void menu_callback_file_save_copy(gpointer callback_data,
@@ -378,10 +395,10 @@ static GtkItemFactoryEntry menu_items[] =
 {
 	{ "/_File",             NULL, NULL, 0, "<Branch>" },
 	{ "/File/_New...",       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
-	{ "/File/_Open...",      NULL, open_document_wrap, 0, "<StockItem>", GTK_STOCK_OPEN },
+	{ "/File/_Open...",      NULL, menu_callback_file_open, 0, "<StockItem>", GTK_STOCK_OPEN },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
 	{ "/File/_Save",           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
-	{ "/File/Save _As...",     NULL, save_document_wrap, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
+	{ "/File/Save _As...",     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
 	{ "/File/Sa_ve a Copy...", "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
 	{ "/File/_Revert",         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
@@ -409,7 +426,7 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
 	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
 	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
-	{ "/Tests/Transform",       NULL, test_transform_wrap, 0, NULL },
+	{ "/Tests/Transform DocBook to HTML",       NULL, menu_callback_test_transform, 0, NULL },
 
 	{ "/_Help",        NULL, NULL, 0, "<Branch>" },
 	{ "/Help/_Contents", "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
@@ -623,6 +640,13 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);	
 
 	g_free(primary_window);
+}
+
+CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window)
+{
+	g_return_val_if_fail(primary_window, NULL);
+
+	return primary_window->doc;
 }
 
 void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
