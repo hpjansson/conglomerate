@@ -8,6 +8,16 @@
 #include "cong-dispspec.h"
 #include "cong-document.h"
 
+static GtkWidget* add_item_to_popup(GtkMenu *menu, const gchar *label,
+				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
+				    gpointer popup_data_item,
+				    CongNodePtr x);
+
+static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds, CongCursor *cursor, 
+						gint (*callback)(GtkWidget *widget, CongNodePtr node_ptr),
+						CongDocument *doc, GList *list);
+
+static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr node_ptr);
 
 /*
   EDITOR POPUP CODE:
@@ -105,6 +115,8 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 	return(FALSE);
 }
 
+
+
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent)
 {
 	gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL, bevent->button,
@@ -125,39 +137,12 @@ void editor_popup_init(CongDocument *doc)
 	gtk_menu_set_title(GTK_MENU(the_globals.popup), "Editing menu");
 }
 
-static void editor_popup_callback_tag_remove_inner(GtkWidget *widget, CongDocument *doc)
-{
-	CongNodePtr n0;
+static gint editor_popup_callback_remove_span_tag(GtkWidget *widget, CongNodePtr node_ptr) { 
 
-	CongDispspec *ds = cong_document_get_dispspec(doc);
+	CongDocument *doc = (CongDocument*)(g_object_get_data(G_OBJECT(widget), "popup_data_item"));
 	CongCursor *cursor = cong_document_get_cursor(doc);
-	
-	if (!cong_location_exists(&cursor->location)) return;
 
-	n0 = xml_inner_span_element(ds, cursor->location.tt_loc);
-
-	/* GREP FOR MVC */
-
-	if (n0) cong_document_tag_remove(doc, n0);
-#if !USE_CONG_EDITOR_WIDGET
-	if (cursor->xed) xed_redraw(cursor->xed);
-#endif
-}
-
-static void editor_popup_callback_tag_remove_outer(GtkWidget *widget, CongDocument *doc)
-{
-	CongNodePtr n0;
-
-	CongDispspec *ds = cong_document_get_dispspec(doc);
-	CongCursor *cursor = cong_document_get_cursor(doc);
-	
-	if (!cong_location_exists(&cursor->location)) return;
-	
-	n0 = xml_outer_span_element(ds, cursor->location.tt_loc);
-
-	/* GREP FOR MVC */
-
-	if (n0) cong_document_tag_remove(doc, n0);
+	cong_document_tag_remove(doc, node_ptr);
 #if !USE_CONG_EDITOR_WIDGET
 	if (cursor->xed) xed_redraw(cursor->xed);
 #endif
@@ -190,10 +175,11 @@ static gint editor_popup_callback_paste(GtkWidget *widget, CongDocument *doc)
 
 void editor_popup_build(CongDocument *doc)
 {
-	GtkWidget *item, *w0;
+	GtkWidget *item, *w0, *sub_popup;
 	CongDispspec *dispspec;
 	CongDispspecElement *n0;
 	CongCursor *cursor;
+	GList *span_tags_list;
 	
 	g_return_if_fail(doc);
 
@@ -230,7 +216,10 @@ void editor_popup_build(CongDocument *doc)
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	if (/* cursor->set && */ cursor->location.tt_loc && xml_inner_span_element(dispspec, cursor->location.tt_loc))
+	// build list of available span tags at current location
+	span_tags_list = xml_all_span_elements(dispspec, cursor->location.tt_loc);
+
+	if (span_tags_list != NULL)
 	{
 		item = gtk_menu_item_new();
 		w0 = gtk_hseparator_new();
@@ -240,18 +229,17 @@ void editor_popup_build(CongDocument *doc)
 		gtk_widget_show(w0);
 		gtk_widget_show(item);
 		
-		item = gtk_menu_item_new_with_label("Remove inner tag");
-		gtk_menu_append(GTK_MENU(the_globals.popup), item);
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC(editor_popup_callback_tag_remove_inner), doc);
-		gtk_widget_show(item);
-		
-		item = gtk_menu_item_new_with_label("Remove outer tag");
-		gtk_menu_append(GTK_MENU(the_globals.popup), item);
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-				   GTK_SIGNAL_FUNC(editor_popup_callback_tag_remove_outer), doc);
-		gtk_widget_show(item);
+		item = add_item_to_popup(GTK_MENU(the_globals.popup), "Remove span tag", NULL, NULL, NULL);		
+
+		// XXX fix me insert callback function to perform action
+		sub_popup = span_tag_removal_popup_init(dispspec, cursor, 
+							  editor_popup_callback_remove_span_tag, doc, span_tags_list);
+		gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+
 	}
+	
+	g_list_free(span_tags_list);
+	
 	
 	item = gtk_menu_item_new();
 	w0 = gtk_hseparator_new();
@@ -349,16 +337,18 @@ gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 static GtkWidget* add_item_to_popup(GtkMenu *menu,
 			      const gchar *label,
 			      gint (*func)(GtkWidget *widget, CongNodePtr tag),
-			      CongTreeView *cong_tree_view,
+			      gpointer popup_data_item,
 			      CongNodePtr x)
 {
 	GtkWidget *item = gtk_menu_item_new_with_label(label);
 	gtk_menu_append(menu, item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(func), x);
+	if (func != NULL) {
+		gtk_signal_connect(GTK_OBJECT(item), "activate",
+				   GTK_SIGNAL_FUNC(func), x);
+	}
 	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
+			  "popup_data_item",
+			  popup_data_item);
 	gtk_widget_show(item);
 
 	return item;
@@ -367,7 +357,7 @@ static GtkWidget* add_item_to_popup(GtkMenu *menu,
 static GtkWidget* add_stock_item_to_popup(GtkMenu *menu,
 				    const gchar *stock_id,
 				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
-				    CongTreeView *cong_tree_view,
+				    gpointer popup_data_item,
 				    CongNodePtr x)
 {
 	GtkWidget *item = gtk_image_menu_item_new_from_stock(stock_id,
@@ -376,12 +366,40 @@ static GtkWidget* add_stock_item_to_popup(GtkMenu *menu,
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(func), x);
 	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
+			  "popup_data_item",
+			  popup_data_item);
 	gtk_widget_show(item);
 
 	return item;
 }
+
+static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds, CongCursor *cursor, 
+						gint (*callback)(GtkWidget *widget, CongNodePtr node_ptr),
+						CongDocument *doc, GList *list) 
+{
+	GtkWidget *popup, *item;
+	CongNodePtr node;
+	GList *current;
+
+
+	popup = gtk_menu_new();
+	gtk_menu_set_title(GTK_MENU(popup), "Span tag menu");
+
+	for (current = g_list_last(list); current; current = g_list_previous(current)) {
+		
+		node = (CongNodePtr)(current->data);
+
+		add_item_to_popup(GTK_MENU(popup),
+				  cong_dispspec_name_get(ds, node),
+				  callback,
+				  (gpointer)doc,
+				  node);
+	}
+
+	gtk_widget_show(popup);
+	return popup;
+}
+					 
 
 
 GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
@@ -400,11 +418,11 @@ GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidge
 			item = add_item_to_popup(GTK_MENU(popup),
 						 cong_dispspec_element_username(n0),
 						 callback,
-						 cong_tree_view,
+						 (gpointer)cong_tree_view,
 						 x);
 			g_object_set_data(G_OBJECT(item),
 					  "label",
-					  cong_dispspec_element_tagname(n0));
+					  (gpointer)(cong_dispspec_element_tagname(n0)));
 
 		}
 	}

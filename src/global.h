@@ -576,8 +576,7 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
-CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
-CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x);
+GList *xml_all_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
 
 #if 0

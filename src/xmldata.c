@@ -535,63 +535,37 @@ char *xml_fetch_clean_data(CongNodePtr x)
 }
 
 
-CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x)
+GList* xml_all_span_elements(CongDispspec *ds, CongNodePtr node) 
 {
+	GList* list = NULL;
+
 	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(x, NULL);
+	g_return_val_if_fail(node, NULL);
 
-	if (cong_node_parent(x)) {
-
-		x = cong_node_parent(x);
-
-	} else {
-		return NULL;
+	// we should be at text node.  grab span element above
+	if (node->parent) {
+	       node = node->parent;
+	} 
+	else {
+	       return NULL;
 	}
 	
-	if (cong_node_type(x)==CONG_NODE_TYPE_ELEMENT) {
-		CongDispspecElement* element = cong_dispspec_lookup_node(ds, x);
+	while( (cong_node_type(node) == CONG_NODE_TYPE_ELEMENT) && 
+	       (cong_dispspec_element_span(ds, cong_node_name(node)) ) ) {
 
-		if (element) {
-			if (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element)) {
-				return(x);
-			}
+		// prepend node to list
+		list = g_list_prepend(list, (gpointer *) node);
+
+		// move up tree
+		if (node->parent) {
+			node = node->parent;
 		}
-	}
-
-	return NULL;
-
-}
-
-
-CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
-{
-	CongNodePtr n0 = NULL;
-
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(x, NULL);
-
-	if (x->parent) {
-		x = x->parent;
-	} else {
-		return NULL;
-	}
-
-	for (;;)
-	{
-		if ( cong_node_type(x) == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_span(ds, cong_node_name(x))) {
-			n0 = x;
-		} else { 
-			break;
-		}
-		
-		if (x->parent) {
-			x = x->parent;
-		} else {
+		else {
 			break;
 		}
 	}
 
-	return(n0);
+	return list;
 }
 
 /*

@@ -22,7 +22,7 @@ void tree_coarse_update_of_view(CongTreeView *cong_tree_view)
 #endif
 }
 
-/* the popup items have the data "cong_tree_view" set on them: */
+/* the popup items have the data "popup_data_item" set on them: */
 
 gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
@@ -35,7 +35,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	label = g_object_get_data(G_OBJECT(widget),
 				  "label");
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-					   "cong_tree_view");
+					   "popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	
@@ -75,7 +75,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	label = g_object_get_data(G_OBJECT(widget),
 				  "label");
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-					   "cong_tree_view");
+					   "popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 
@@ -109,7 +109,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	CongDispspec *ds;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-					   "cong_tree_view");
+					   "popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -126,7 +126,7 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	CongDispspec *ds;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-					   "cong_tree_view");
+					   "popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -163,7 +163,7 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 	CongNodePtr new_copy;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-					   "cong_tree_view");
+					   "popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -193,7 +193,7 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	CongNodePtr new_copy;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+				"popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -223,7 +223,7 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 	CongNodePtr new_copy;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+				"popup_data_item");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
