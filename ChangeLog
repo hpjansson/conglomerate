@@ -1,3 +1,8 @@
+2003-08-10  Geert Stappers <stappers@stappers.nl>
+
+	* configure.in
+	Checking for 'libbonobo' and 'libbonoboui'.
+
 2003-07-28  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am
