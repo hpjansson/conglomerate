@@ -1,5 +1,9 @@
 2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h: 
+
+	Added function cong_document_should_spellcheck_node
+
 	* cong-editor-node-text.c: 
 
 	Start of spell-checking support

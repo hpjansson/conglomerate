@@ -285,6 +285,10 @@ cong_document_make_pango_log_attr_for_node (CongDocument *doc,
 					    PangoLogAttr **pango_log_attrs,
 					    int *attrs_len);
 
+gboolean
+cong_document_should_spellcheck_node (CongDocument *doc, 
+				      CongNodePtr node);
+
 CongCommandHistory*
 cong_document_get_command_history (CongDocument *doc);
 

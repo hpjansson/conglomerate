@@ -1707,6 +1707,28 @@ cong_document_make_pango_log_attr_for_node (CongDocument *doc,
 			     *attrs_len);
 }
 
+/** 
+ * cong_document_should_spellcheck_node:
+ * @doc: a CongDocument
+ * @node: a text or comment node in the document
+ * 
+ * Determine whether the node should be spell-checked or not.  This depends on the
+ * dispspec; for example, you probably don't want to spell-check filenames or environment
+ * variables in a DocBook document.
+ * 
+ * Returns: TRUE iff the node should be spellchecked
+ */
+gboolean
+cong_document_should_spellcheck_node (CongDocument *doc, 
+				      CongNodePtr node)
+{
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(node, FALSE);
+
+	return TRUE; /* for now */
+}
+
+
 static gboolean 
 cong_document_for_each_node_recurse (CongDocument *doc, 
 				     CongNodePtr node, 
