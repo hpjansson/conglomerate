@@ -10,8 +10,18 @@ and other are "blue sky" goals for the future.
 
 I've added some rough estimates of the complexity of each job.
 
-CODING:
-- either port to the current Flux API (Easy) or remove Flux dependency (Hard)	
+CODING BEFORE RELEASE
+- finish and check removal of Flux dependency, including from the autotools
+- sort out font crash
+- improve the configuration tests
+- remove the preprocessor cruft (the old unused versions of code)
+
+OTHER JOBS BEFORE RELEASE
+- get the website more up-to-date
+- improve the look of the website
+- write some documentation on the state of the code
+
+CODING AFTER RELEASE
 - implement a proper MVC separation, with fine-grained updates (Hard)
 - get autoheader dependency working, 
  then break global.h into separate header files  (Easy)
@@ -59,12 +69,17 @@ CODING:
  DocBook to make it easier to play around with structure?
 - Undo/Redo support (Hard)
 - rewrite xmlview.c/xmledit.c to avoid the GtkDrawingArea mess (Hard)
+- Use Pango within xmledit.c (Hard?)
+- Allow multi-charset input (using Pango?)
+- audit the use of different char types (Medium)
+- stronger use of DTD information (Hard)
+- fix the paragraph support (Medium)
+- write some kind of code overview (Easy)
 
-OTHER:
+OTHER JOBS AFTER RELEASE:
 - improvements to existing xds files (Easy)
 - more xds files to cover other DTDs out there (Easy)
 - design icons for dispspec elements?  (we _might_ support this in future)
-- get the website more up-to-date
 - do translations when we have the i18n support,
  both for the program and for the xds files  (Easy)
 - use Conglomerate and see what needs improving, find bugs etc
