@@ -7,8 +7,8 @@
 ## DP: People who interrest in API and such, should
 ## DP:   apt-get source conglomerate
 
-if [ $# -ne 1 ]; then
-    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+if [ $# -lt 1 ]; then
+    echo >&2 "`basename $0`: script needs an argument"
     exit 1
 fi
 

@@ -5,8 +5,8 @@
 #  All lines beginning with `## DP:' are a description of the patch.
 ## DP: avoid `scrollkeeper-update` during "make install"
 
-if [ $# -ne 1 ]; then
-    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
+if [ $# -lt 1 ]; then
+    echo >&2 "`basename $0`: script expects an argument"
     exit 1
 fi
 
