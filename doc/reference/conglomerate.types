@@ -1,0 +1,156 @@
+#include "global.h"
+#include "cong-app.h"
+#include "cong-attribute-editor-cdata.h"
+#include "cong-attribute-editor-enumeration.h"
+#include "cong-attribute-editor.h"
+#include "cong-attribute-wrapper-check-button.h"
+#include "cong-attribute-wrapper-radio-button.h"
+#include "cong-attribute-wrapper.h"
+#include "cong-command-history.h"
+#include "cong-command.h"
+#include "cong-dialog.h"
+#include "cong-dispspec-registry.h"
+#include "cong-dispspec.h"
+#include "cong-document.h"
+#include "cong-dtd.h"
+#include "cong-editor-area-bin.h"
+#include "cong-editor-area-border.h"
+#include "cong-editor-area-composer.h"
+#include "cong-editor-area-container.h"
+#include "cong-editor-area-entity-decl.h"
+#include "cong-editor-area-entity-ref.h"
+#include "cong-editor-area-flow-holder-blocks.h"
+#include "cong-editor-area-flow-holder-inlines.h"
+#include "cong-editor-area-flow-holder-single.h"
+#include "cong-editor-area-flow-holder.h"
+#include "cong-editor-area-line.h"
+#include "cong-editor-area-pixbuf.h"
+#include "cong-editor-area-spacer.h"
+#include "cong-editor-area-span-tag.h"
+#include "cong-editor-area-structural-tag.h"
+#include "cong-editor-area-structural.h"
+#include "cong-editor-area-text-comment.h"
+#include "cong-editor-area-text-fragment.h"
+#include "cong-editor-area-text.h"
+#include "cong-editor-area-underline.h"
+#include "cong-editor-area-unknown-tag.h"
+#include "cong-editor-area.h"
+#include "cong-editor-child-policy-flow-holder.h"
+#include "cong-editor-child-policy-inline.h"
+#include "cong-editor-child-policy.h"
+#include "cong-editor-line-fragments.h"
+#include "cong-editor-node-comment.h"
+#include "cong-editor-node-document.h"
+#include "cong-editor-node-dtd.h"
+#include "cong-editor-node-element-span.h"
+#include "cong-editor-node-element-structural.h"
+#include "cong-editor-node-element-unknown.h"
+#include "cong-editor-node-element.h"
+#include "cong-editor-node-entity-decl.h"
+#include "cong-editor-node-entity-ref.h"
+#include "cong-editor-node-text.h"
+#include "cong-editor-node-unimplemented.h"
+#include "cong-editor-node.h"
+#include "cong-editor-widget.h"
+#include "cong-eel.h"
+#include "cong-enum-mapping.h"
+#include "cong-error-dialog.h"
+#include "cong-fake-plugin-hooks.h"
+#include "cong-font.h"
+#include "cong-graph.h"
+#include "cong-location.h"
+#include "cong-marshal.h"
+#include "cong-modification-cursor-change.h"
+#include "cong-modification-selection-change.h"
+#include "cong-modification-set-dtd-ptr.h"
+#include "cong-modification.h"
+#include "cong-node-modification-add-after.h"
+#include "cong-node-modification-add-before.h"
+#include "cong-node-modification-make-orphan.h"
+#include "cong-node-modification-remove-attribute.h"
+#include "cong-node-modification-set-attribute.h"
+#include "cong-node-modification-set-parent.h"
+#include "cong-node-modification-set-text.h"
+#include "cong-node-modification.h"
+#include "cong-node.h"
+#include "cong-overview-view.h"
+#include "cong-parser-error.h"
+#include "cong-plugin.h"
+#include "cong-primary-window.h"
+#include "cong-progress-checklist.h"
+#include "cong-range.h"
+#include "cong-selection.h"
+#include "cong-text-cache.h"
+#include "cong-tree-view.h"
+#include "cong-util.h"
+#include "cong-view.h"
+#include "fo.h"
+#include "plugin-lists-area-listitem.h"
+#include "plugin-lists-node-element-listitem.h"
+#include "plugin-paragraph-area-paragraph.h"
+#include "plugin-paragraph-node-element-paragraph.h"
+
+cong_attribute_editor_cdata_get_type
+cong_attribute_editor_enumeration_get_type
+cong_attribute_editor_get_type
+cong_attribute_wrapper_check_button_get_type
+cong_attribute_wrapper_radio_button_get_type
+cong_attribute_wrapper_get_type
+cong_command_history_get_type
+cong_command_get_type
+cong_document_get_type
+cong_editor_area_bin_get_type
+cong_editor_area_border_get_type
+cong_editor_area_composer_get_type
+cong_editor_area_container_get_type
+cong_editor_area_entity_decl_get_type
+cong_editor_area_entity_ref_get_type
+cong_editor_area_flow_holder_blocks_get_type
+cong_editor_area_flow_holder_inlines_get_type
+cong_editor_area_flow_holder_single_get_type
+cong_editor_area_flow_holder_get_type
+cong_editor_area_line_get_type
+cong_editor_area_pixbuf_get_type
+cong_editor_area_spacer_get_type
+cong_editor_area_span_tag_get_type
+cong_editor_area_structural_tag_get_type
+cong_editor_area_structural_get_type
+cong_editor_area_text_comment_get_type
+cong_editor_area_text_fragment_get_type
+cong_editor_area_text_get_type
+cong_editor_area_underline_get_type
+cong_editor_area_unknown_tag_get_type
+cong_editor_area_get_type
+cong_editor_child_policy_flow_holder_get_type
+cong_editor_child_policy_inline_get_type
+cong_editor_child_policy_get_type
+cong_editor_line_fragments_get_type
+cong_editor_node_comment_get_type
+cong_editor_node_document_get_type
+cong_editor_node_dtd_get_type
+cong_editor_node_element_span_get_type
+cong_editor_node_element_structural_get_type
+cong_editor_node_element_unknown_get_type
+cong_editor_node_element_get_type
+cong_editor_node_entity_decl_get_type
+cong_editor_node_entity_ref_get_type
+cong_editor_node_text_get_type
+cong_editor_node_unimplemented_get_type
+cong_editor_node_get_type
+cong_editor_widget3_get_type
+cong_modification_cursor_change_get_type
+cong_modification_selection_change_get_type
+cong_modification_set_dtd_ptr_get_type
+cong_modification_get_type
+cong_node_modification_add_after_get_type
+cong_node_modification_add_before_get_type
+cong_node_modification_make_orphan_get_type
+cong_node_modification_remove_attribute_get_type
+cong_node_modification_set_attribute_get_type
+cong_node_modification_set_parent_get_type
+cong_node_modification_set_text_get_type
+cong_node_modification_get_type
+cong_editor_area_listitem_get_type
+cong_editor_node_element_listitem_get_type
+cong_editor_area_paragraph_get_type
+cong_editor_node_element_paragraph_get_type
