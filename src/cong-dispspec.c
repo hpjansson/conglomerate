@@ -1744,10 +1744,16 @@ calc_coverage_recursive (const CongDispspec *ds,
 	}
 
 	/* FIXME:  this gives slightly skewed results for entities */
-	for (iter = node->children; iter; iter=iter->next) {
-		calc_coverage_recursive (ds,
-					 iter,
+	if (node->type==XML_ENTITY_REF_NODE) {
+		calc_coverage_recursive (ds, 
+					 node->children,
 					 coverage_data);
+	} else {						  
+		for (iter = node->children; iter; iter=iter->next) {
+			calc_coverage_recursive (ds,
+						 iter,
+						 coverage_data);
+		}
 	}
 }
 

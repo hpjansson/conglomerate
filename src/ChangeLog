@@ -1,3 +1,8 @@
+2004-10-17  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+	
+	* cong-dispspec.c : Fix bug with document coverage and
+	external entities. See #155629 for details.	
+
 2004-10-15  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-lang.c, cong-attribute-editor-lang.h, cong-attribute-editor-nmtoken.c, cong-attribute-editor-nmtoken.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-glade.c:
