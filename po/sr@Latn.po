@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-27 23:49+0000\n"
-"PO-Revision-Date: 2003-10-27 14:32+0100\n"
+"POT-Creation-Date: 2003-10-28 04:32+0100\n"
+"PO-Revision-Date: 2003-10-28 04:32+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -159,8 +159,8 @@ msgid ""
 "<small>Some DocBook applications allow the behaviour of the link to be "
 "customised using this \"type\" attribute. </small>"
 msgstr ""
-"<small>Neke primene DocBook-a dozvoljavaju da se ponašanje veza prilagodi "
-"ovim atributom „type“. </small>"
+"<small>Neke primene DocBook-a dozvoljavaju da se ponašanje veza prilagodi ovim "
+"atributom „type“. </small>"
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
@@ -255,8 +255,8 @@ msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
-"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li časova će "
-"biti zanemarene."
+"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li časova će biti "
+"zanemarene."
 
 # bug: plural-forms
 #: src/cong-dialog.c:253
@@ -265,8 +265,8 @@ msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
 msgstr ""
-"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li minuta će "
-"biti zanemarene."
+"Ukoliko zatvorite bez čuvanja, izmene učinjene u prethodnih %li minuta će biti "
+"zanemarene."
 
 # bug: plural-forms
 #: src/cong-dialog.c:255
@@ -398,9 +398,8 @@ msgid "Size of the expander arrow"
 msgstr "Veličina strelice razgranika"
 
 #: src/cong-editor-widget3.c:867
-#, fuzzy
 msgid "Input Method"
-msgstr "Način štampanje:"
+msgstr "Način unosa"
 
 #: src/cong-editor-widget3.c:972 src/cong-editor-widget3.c:1447
 msgid "Typing"
