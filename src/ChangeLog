@@ -1,3 +1,8 @@
+2003-09-21  Geert Stappers <stappers@stappers.nl>
+
+	* cong-file-print.c & cong-file-export.c
+	Unmarked empty strings for translation.
+
 2003-09-21  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* main.c
