@@ -612,11 +612,9 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   			}
 
   			/* Handle "header-info": */
-  			if (0==strcmp(child->name,"header-info")) {
+  			if (0==strcmp(child->name,"header-info")) {				
   				DS_DEBUG_MSG1("got header info\n");
-  				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
-				element->header_info->xpath = cong_node_get_attribute(child, "xpath");
-				element->header_info->tagname = cong_node_get_attribute(child, "tag");
+				element->header_info = gxx_generated_object_from_xml_tree_fn_header_info (child);
   			}
 
 			/* Handle "property-dialog": */
@@ -703,6 +701,12 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 		xmlAddChild (xml_node, desc_node);		
 	}
 
+	if (element->header_info) {
+		xmlAddChild (xml_node, 
+			     gxx_generated_object_to_xml_tree_fn_header_info (element->header_info, xml_doc));
+	}
+
+
 	/* FIXME:  Need to store these: */
 #if 0
 	GdkPixbuf *icon16;
@@ -716,8 +720,6 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	GdkColor col;
 	GdkGC* gc;
 #endif
-
-	CongDispspecElementHeaderInfo *header_info;
 
 	gchar *editor_plugin_id;
 	gchar *property_dialog_plugin_id;

@@ -13,4 +13,8 @@ GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR("element", CongDispspecElement, dispsp
      GXX_STRUCT_ATTRIBUTE_ENUM("whitespace", whitespace, FALSE, CONG_WHITESPACE_NORMALIZE, whitespace_numeration)
 GXX_STRUCT_END_ELEMENT()
 
+GXX_STRUCT_BEGIN_ELEMENT("header-info", CongDispspecElementHeaderInfo, header_info)
+     GXX_STRUCT_ATTRIBUTE_STRING("xpath", xpath, FALSE, "")
+     GXX_STRUCT_ATTRIBUTE_STRING("tag", tagname, FALSE, "")
+GXX_STRUCT_END_ELEMENT()
 
