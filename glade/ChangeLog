@@ -1,3 +1,9 @@
+2004-10-23  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-file-properties.glade: 
+
+	Change "OK" button to "Close" since the dialog is instant-apply
+
 2004-10-13  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* plugin-random.glade:
