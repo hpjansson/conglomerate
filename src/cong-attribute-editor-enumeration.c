@@ -43,9 +43,11 @@ static void
 set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
 remove_attribute_handler (CongAttributeEditor *attribute_editor);
+static void
+do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration);
 
 static void
-on_combo_box_changed (GtkComboBox *combo_box,
+on_selection_changed (GtkComboBox *combo_box,
 		      CongAttributeEditorENUMERATION *attribute_editor_enumeration);
 
 /* Exported function definitions: */
@@ -72,13 +74,14 @@ cong_attribute_editor_enumeration_instance_init (CongAttributeEditorENUMERATION 
 /**
  * cong_attribute_editor_enumeration_construct:
  * @attribute_editor_enumeration:
- * @doc:
- * @node:
+ * @doc: Document to which the node belongs.
+ * @node: Node containing the attribute.
  * @ns_ptr:
- * @attribute_name:
- * @attr:
+ * @attribute_name: Name of the attribute.
+ * @attr: Pointer to the attribute.
  *
- * TODO: Write me
+ * Constructor for the widget.
+ *
  * Returns:
  */
 CongAttributeEditor*
@@ -90,8 +93,6 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 					     xmlAttributePtr attr)
 {
 	xmlEnumerationPtr enum_ptr;
-	gchar *attr_value;
-	guint enum_ctr = 0, enum_pos = 0;
 
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor_enumeration), NULL);
 
@@ -104,61 +105,53 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 
 	/*
 	 * We store the xmlAttributePtr in the object so that we can access the values
-	 * from the on_combo_box_changed handler. An alternative implementation would
+	 * from the on_selection_changed handler. An alternative implementation would
 	 * be to create a list of the enumerated values and store that in the object,
 	 * but that involves more work for a small speed gain
+	 *
+	 * Is accessing the xmlAttributePtr in the handler going to cause problems
+	 * e.g. if the DTD changes, as discussed in bug # 122028 ?
 	 */
 	PRIVATE(attribute_editor_enumeration)->attr_ptr = attr;
-
-	/* what is the current attribute setting? */
-	attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 
 	/* Build widgetry: */
 	PRIVATE(attribute_editor_enumeration)->combo_box = gtk_combo_box_new_text();
 	
 	gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
 				   _("(unspecified)"));
-
-	for (enum_ptr=attr->tree, enum_ctr=1; enum_ptr; enum_ptr=enum_ptr->next, enum_ctr++) {
+	for (enum_ptr=attr->tree; enum_ptr; enum_ptr=enum_ptr->next) {
 		gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
 					   enum_ptr->name);
-
-		/* is this the value of the current attribute? */
-		if (cong_util_attribute_value_equality (attr_value,enum_ptr->name))
-			enum_pos = enum_ctr;
 	}
 	
-	/* Set the initial value of the combo box (defaults to unspecified if not found) */
-	gtk_combo_box_set_active (GTK_COMBO_BOX(PRIVATE(attribute_editor_enumeration)->combo_box),
-				  enum_pos);
-
 	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->combo_box),
 											    "changed",
-											    G_CALLBACK(on_combo_box_changed),
+											    G_CALLBACK(on_selection_changed),
 											    attribute_editor_enumeration);
 	
-	gtk_widget_show_all (PRIVATE(attribute_editor_enumeration)->combo_box);
-
 	gtk_container_add (GTK_CONTAINER(attribute_editor_enumeration),
 			   GTK_WIDGET(PRIVATE(attribute_editor_enumeration)->combo_box));
 
-	if (attr_value) {
-		g_free (attr_value);
-	}
+	/* not sure whether gtk_show_all() should be after the refresh call */
+	do_refresh (attribute_editor_enumeration);
+	gtk_widget_show_all (PRIVATE(attribute_editor_enumeration)->combo_box);
 
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_enumeration);
 }
 
 /**
  * cong_attribute_editor_enumeration_new:
- * @doc:
- * @node:
+ * @doc: Document to which the node belongs.
+ * @node: Node containing the attribute.
  * @ns_ptr:
- * @attribute_name:
- * @attr:
+ * @attribute_name: Name of the attribute.
+ * @attr: Pointer to the attribute.
  *
- * TODO: Write me
- * Returns:
+ * Creates a widget that allows a user to create, edit, and delete
+ * the value of an attribute (@attr and @attribute) of type
+ * XML_ATTRIBUTE_ENUMERATION.
+ *
+ * Returns: 
  */
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
@@ -180,21 +173,53 @@ cong_attribute_editor_enumeration_new (CongDocument *doc,
 static void
 set_attribute_handler (CongAttributeEditor *attribute_editor)
 {
-	/* FIXME */
+	do_refresh (CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor));
 }
 
 static void
 remove_attribute_handler (CongAttributeEditor *attribute_editor)
 {
-	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION (attribute_editor);
-	
-	/* The initial item is the "unspecified" one: */
-	gtk_combo_box_set_active (GTK_COMBO_BOX(PRIVATE(attribute_editor_enumeration)->combo_box),
-				  0);
+	do_refresh (CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor));
 }
 
 static void
-on_combo_box_changed (GtkComboBox *combo_box,
+do_refresh (CongAttributeEditorENUMERATION *attribute_editor_enumeration)
+{
+	gchar *attr_value;
+	guint enum_pos = 0;
+
+	/* what is the current attribute setting? */
+	attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
+
+	/* only loop if the attribute is defined */
+	if (NULL!=attr_value) {
+		xmlEnumerationPtr enum_ptr;
+		guint enum_ctr;
+		
+		for (enum_ptr=PRIVATE(attribute_editor_enumeration)->attr_ptr->tree, enum_ctr=1;
+		     enum_ptr;
+		     enum_ptr=enum_ptr->next, enum_ctr++) {
+			/* is this the value of the current attribute? */
+			if (cong_util_attribute_value_equality (attr_value,enum_ptr->name))
+				enum_pos = enum_ctr;
+		}
+
+		g_free (attr_value);
+	}
+
+	/*
+	 * set the widget, taking care to block/unblock the changed signal
+	 */
+	g_signal_handler_block (G_OBJECT(PRIVATE(attribute_editor_enumeration)->combo_box),
+				PRIVATE(attribute_editor_enumeration)->handler_id_changed);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(PRIVATE(attribute_editor_enumeration)->combo_box),
+				  enum_pos);
+	g_signal_handler_unblock (G_OBJECT(PRIVATE(attribute_editor_enumeration)->combo_box),
+				  PRIVATE(attribute_editor_enumeration)->handler_id_changed);
+}
+
+static void
+on_selection_changed (GtkComboBox *combo_box,
 		      CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 {
 	xmlEnumerationPtr enum_ptr;
@@ -206,6 +231,7 @@ on_combo_box_changed (GtkComboBox *combo_box,
 		for (ctr=1; ctr<selected; ctr++) {
 			enum_ptr = enum_ptr->next;
 		}
+		g_assert (enum_ptr!=NULL); /* this should not be possible, but just in case */
 		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
 						     enum_ptr->name);
 	} else {

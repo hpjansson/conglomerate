@@ -1,3 +1,9 @@
+2004-08-31  Douglas Burke <dburke@cfa.harvard.edu>
+ 
+	* cong-attribute-editor-enumeration.c
+
+	Widget is now updated correctly on undo/redo.
+ 
 2004-08-30  Douglas Burke <dburke@cfa.harvard.edu>
  
 	* cong-node-properties-dialog.c
