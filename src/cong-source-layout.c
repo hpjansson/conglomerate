@@ -43,7 +43,6 @@ struct CongSourceCleanupData
 	const CongSourceCleanupOptions *options;
 };
 
-
 static gchar*
 generate_indentation(const CongSourceCleanupOptions *options, guint indent_level)
 {
@@ -198,9 +197,78 @@ cong_util_strip_whitespace_from_string (const gchar* input_string,
 	return result_string;	
 }
 
+typedef struct _CongCleanupSourceUpdateLocationData {
+	CongNodePtr node;
+	
+	/* Used in whitespace stripping */
+	gchar *old_content;
+	gchar *new_content;
+	
+	/* Used in indentation */
+	gint indent;
+
+} CongCleanupSourceUpdateLocationData;
+
+static gboolean
+strip_whitespace_update_location_callback (CongDocument *doc,
+		    			   CongLocation *location, 
+					   gpointer user_data)
+{
+	CongCleanupSourceUpdateLocationData *location_data = (CongCleanupSourceUpdateLocationData *) user_data;
+	gchar *old_content, *new_content;
+	gunichar old_char, new_next_char;
+	gboolean valid = TRUE;
+
+	g_assert (location_data->node);
+	g_assert (cong_node_type (location_data->node)==CONG_NODE_TYPE_TEXT);
+	
+	old_content = location_data->old_content;
+	new_content = location_data->new_content;
+
+	if (location->node == location_data->node) {
+		if (*new_content != ' ') {
+			new_next_char = g_utf8_get_char (new_content);
+			while (g_utf8_get_char (old_content) != new_next_char && *old_content != 0)
+				old_content = g_utf8_next_char (old_content);
+		}	
+		
+		while (*old_content != 0 && *new_content != 0 ) {
+
+		    if (valid) {
+			if (old_content - location_data->old_content >= location->byte_offset) 
+			    break;
+		    } else {
+			valid = TRUE;    
+		    }
+		
+		    if (*new_content == ' ') {
+			new_next_char = g_utf8_get_char (new_content + 1);
+			old_char = g_utf8_get_char (old_content);
+
+			if (new_next_char != old_char) {
+			    old_content = g_utf8_next_char (old_content);
+			    valid = FALSE;
+			} else {
+			    new_content = new_content + 1;
+			}
+		    } else {
+			    old_content = g_utf8_next_char (old_content);
+			    new_content = g_utf8_next_char (new_content);
+		    }
+		} 
+
+		location->byte_offset = new_content - location_data->new_content;	
+		
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
 	CongSourceCleanupData *cleanup_data = user_data;
+	CongCleanupSourceUpdateLocationData update_location_data;
 
 	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
 		if (cong_node_get_whitespace_handling (doc, node)==CONG_WHITESPACE_NORMALIZE) {
@@ -223,7 +291,15 @@ static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, g
 
 			new_content = cong_util_strip_whitespace_from_string (node->content,
 									      strip_all_initial_whitespace);
+			
+			update_location_data.node = node;
+			update_location_data.old_content = node->content;
+			update_location_data.new_content = new_content;
 
+			cong_command_for_each_location (cleanup_data->cmd,
+							strip_whitespace_update_location_callback, 
+							&update_location_data);
+			
 			cong_command_add_node_set_text (cleanup_data->cmd,
 							node,
 							new_content);
@@ -261,6 +337,24 @@ add_indentation_and_cr_nodes (CongDocument *doc,
 	}
 }
 
+static gboolean
+add_indentation_update_location_callback (CongDocument *doc,
+		    			   CongLocation *location, 
+					     gpointer user_data)
+{
+	CongCleanupSourceUpdateLocationData *location_data = (CongCleanupSourceUpdateLocationData *) user_data;
+
+	g_assert (location_data->node);
+	g_assert (cong_node_type (location_data->node)==CONG_NODE_TYPE_TEXT);
+	
+	if (location->node == location_data->node) {
+		location->byte_offset += location_data->indent;	
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
 	CongSourceCleanupData *cleanup_data = user_data;
@@ -269,8 +363,6 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 	g_assert (doc);
 	g_assert (options);
 	g_assert (node);
-
-/* 	g_message("cleanup_source_callback(%s)", cong_node_debug_description(node)); */
 
 	if (node->parent) {
 		if (cong_util_is_recursively_inline (doc, node)) {
@@ -329,11 +421,19 @@ static gboolean add_indentation_callback(CongDocument *doc, CongNodePtr node, gp
 			if (cong_util_is_recursively_inline (doc, node->parent)) {
 				/* Do nothing: */
 			} else {
+				CongCleanupSourceUpdateLocationData update_location_data;
+				
 				gchar *indentation = generate_indentation (options, recursion_level);
-				gchar *new_content = g_strdup_printf ("%s%s\n", indentation, node->content);
+				gchar *new_content = g_strconcat (indentation, node->content, NULL);
 				
 				cong_command_add_node_set_text (cleanup_data->cmd, node, new_content);
 				
+				update_location_data.node = node;
+				update_location_data.indent = strlen (indentation);
+				
+				cong_command_for_each_location (cleanup_data->cmd,
+		    						add_indentation_update_location_callback, 
+	    							&update_location_data);
 				g_free (indentation);
 				g_free (new_content);
 			}

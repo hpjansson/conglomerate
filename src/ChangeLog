@@ -1,3 +1,13 @@
+2005-03-18 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* cong-source-layout.c: Update location during
+	cleanup source operations.
+
+	* cong-document.h: A little cleanup.
+	
+	* cong-primary-window.c, cong-primary-window.h: Fix crash
+	when close primary window with source view left open.
+
 2005-02-18  Marcus Meissner
 
 	* cong-editor-widget3.c:
