@@ -111,12 +111,10 @@ cong_document_construct (CongDocument *doc,
 /**
  * cong_document_new_from_xmldoc:
  * @xmldoc:  The #xmlDocPtr which the #CongDocument is to wrap.  It takes ownership of it.
- *
  * @ds:
- *
  * @url:
  *
- * The new CongDocument is created with a reference count of 1; 
+ * The new #CongDocument is created with a reference count of 1; 
  * any views constructed of the document will increment its reference count 
  *
  * Returns: the new #CongDocument
@@ -192,7 +190,9 @@ cong_document_get_num_nodes (CongDocument *doc);
 
 /**
  * cong_document_node_ref:
- *
+ * @doc:
+ * @node:
+ * 
  * Add an "external reference" to the node; it will not be deleted until it has been both removed from the tree
  * AND has lost all external references.
  *
@@ -203,7 +203,9 @@ cong_document_node_ref (CongDocument *doc,
 
 /**
  * cong_document_node_unref:
- *
+ * @doc:
+ * @node:
+ * 
  * Remove an "external reference" to the node; it will be deleted if it has been both removed from the tree
  * AND this was its last external reference.
  *
@@ -249,11 +251,17 @@ CongCursor* cong_document_get_cursor(CongDocument *doc);
 CongSelection* cong_document_get_selection(CongDocument *doc);
 
 /** 
-    Every node within a document has an implied language, although the logic to determine 
-    this may depend on the dispspec, on attributes of the nodes, and perhaps even on user prefererences (and hence the value may change unexpectedly): 
-
-    FIXME: what are the ownership/ref count semantics of this function?
-*/
+ * cong_document_get_language_for_node
+ * @doc:
+ * @node:
+ * 
+ * Every node within a document has an implied language, although the logic to determine 
+ * this may depend on the dispspec, on attributes of the nodes, and perhaps even on user prefererences (and hence the value may change unexpectedly).
+ * 
+ * FIXME: what are the ownership/ref count semantics of this function?
+ * 
+ * Returns:
+ */
 PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node);
@@ -379,10 +387,16 @@ cong_document_node_split2 (CongDocument *doc,
 			   int c);
 
 /**
+ * cong_document_get_dtd_element
+ * @cong_doc:
+ * @node:
+ * 
  * Helper function to get the xmlElementPtr within the DTD for a node
  * Currently only looks at the actual DTD, but in future might attempt
  * to use the dispspec to infer an DTD and return that
  * So don't store the return value; it might get deleted etc
+ * 
+ * Returns:
  */
 xmlElementPtr
 cong_document_get_dtd_element (CongDocument *cong_doc, 

@@ -26,8 +26,10 @@
 #define __CONG_LOCATION_H__
 
 /**
-   Struct representing a location within a document, with both a node ptr and a byte offset into the text.
-   The text is stored as UTF-8, and the offset is a byte offset, not a character offset.
+ * CongLocation
+ * 
+ * Struct representing a location within a document, with both a node ptr and a byte offset into the text.
+ * The text is stored as UTF-8, and the offset is a byte offset, not a character offset.
  */
 typedef struct _CongLocation
 {

@@ -172,10 +172,17 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
 }
 
 /**
+ * cong_dispspec_registry_get_appropriate_dispspec
+ * @registry:
+ * @doc:
+ * @filename_extension:
+ * 
  * Routine to figure out an appropriate dispspec for use with this file.
  * Looks for a DTD; if found, it looks up the DTD in a mapping.
  * If this fails, it looks at the top-level tag and makes a guess, but asks the user for confirmation.
  * If this fails, it asks the user.
+ * 
+ * Returns:
  */
 CongDispspec*
 cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 

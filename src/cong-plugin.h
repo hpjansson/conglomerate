@@ -223,10 +223,16 @@ void cong_plugin_for_each_custom_property_dialog(CongPlugin *plugin, void (*call
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin);
 
 /**
-   Convert a "local" GConf key for this plugin to a GConf key with a full-path.
-   e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
-   
-   Caller must delete returned string.
+ * cong_plugin_get_gconf_key
+ * @plugin:
+ * @local_part:
+ * 
+ * Convert a "local" GConf key for this plugin to a GConf key with a full-path.
+ * e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
+ *  
+ * Caller must delete returned string.
+ * 
+ * Returns:
  */
 gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part);
 
@@ -237,10 +243,16 @@ const gchar* cong_functionality_get_description(CongFunctionality *functionality
 gchar* cong_functionality_get_gconf_namespace(CongFunctionality* functionality);
 
 /**
-   Convert a "local" GConf key for this plugin to a GConf key with a full-path.
-   e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
-   
-   Caller must delete returned string.
+ * cong_plugin_functionality_get_gconf_key
+ * @functionality:
+ * @local_part:
+ * 
+ * Convert a "local" GConf key for this plugin to a GConf key with a full-path.
+ * e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
+ *   
+ * Caller must delete returned string.
+ * 
+ * Returns:
  */
 gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const gchar *local_part);
 

@@ -31,6 +31,8 @@ typedef struct CongTextCache CongTextCache;
 
 #if 0
 /**
+ * CongTextCacheSpan
+ * 
  * Struct representing a run of characters within a plaintext cache from a specific text node; 
  * useful for converting from PangoLayoutLines back to the underlying XML: 
  * There can be more than one of these for a particular text node; each is a subset of the characters

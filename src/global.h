@@ -170,14 +170,28 @@ query_for_forced_dispspec (gchar *what_failed,
 			   const gchar *filename_extension);
 
 /**
+ * cong_vfs_new_buffer_from_file
+ * @filename:
+ * @buffer:
+ * @size:
+ * 
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
  * (I believe that CVS gnome-vfs has a routine gnome_vfs_read_entire_file that does this)
-*/
+ * 
+ * Returns:
+ */
 GnomeVFSResult
 cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
 
 /**
+ * cong_vfs_new_buffer_from_uri
+ * @uri:
+ * @buffer:
+ * @size:
+ * 
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+ * 
+ * Returns:
 */
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);

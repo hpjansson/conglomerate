@@ -1089,10 +1089,17 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 
 
 /**
+ * string_selection_dialog
+ * @title:
+ * @element_description:
+ * @elements:
+ * 
  * Popup a modal, blocking dialog to obtain
  * the user's choice between a list of char *.
  * Returns a new char * of the element name 
  * selected, which must be freed by caller.
+ * 
+ * Returns:
  */
 gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *elements) 
 {

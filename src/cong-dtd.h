@@ -48,8 +48,13 @@ cong_dtd_for_each_attribute (xmlElementPtr dtd_element,
 			     gpointer user_data);
 
 /**
+ * cong_dtd_element_guess_dispspec_type
+ * @element:
+ * 
  * Given a DTD element, make a guess as to an appropriate xds element type.
  * Useful when autogenerating CongDispspec from DTD files
+ * 
+ * Returns: 
  */
 enum CongElementType
 cong_dtd_element_guess_dispspec_type (xmlElementPtr element);

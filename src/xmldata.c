@@ -170,6 +170,10 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
 }
 
 /**
+ * xml_add+required_children
+ * @doc:
+ * @node:
+ *
  * In the presence of a DTD, adds all children required
  * by the DTD to the node.  This is a recursive process,
  * and as such will add subchildren if necessary.
@@ -184,7 +188,7 @@ GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node)
  * If no DTD is present, this function will default to
  * simply adding a text node under the node as well.
  *
- * Returns a boolean telling whether the structure of the
+ * Returns: a boolean telling whether the structure of the
  * node passed is now valid under a DTD.  If no DTD exists,
  * this will return FALSE.
  */
@@ -512,10 +516,14 @@ gboolean xml_add_required_children(CongDocument *doc, CongNodePtr node) {
 }
 		
 /**
+ * xml_add_required_sub_elements
+ * @cong_doc:
+ * node:
+ * 
  * Helper function to add the required children
  * to a node.
  *
- * Returns whether the node is now valid
+ * Returns: whether the node is now valid
  */
 static gboolean xml_add_required_sub_elements(CongDocument *cong_doc, CongNodePtr node) {
 	xmlDocPtr doc;
@@ -615,10 +623,15 @@ static gboolean xml_add_required_sub_elements(CongDocument *cong_doc, CongNodePt
 }
 
 /**
+ * xml_add_required_content
+ * @cong_doc:
+ * @content:
+ * @node:
+ * 
  * Adds required children from an
  * input content model.
  *
- * Returns whether all required content was added
+ * Returns: whether all required content was added
  */
 static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node) {
 	xmlNodePtr new_node;
@@ -672,11 +685,16 @@ static gboolean xml_add_required_content(CongDocument *cong_doc, xmlElementConte
 }
 
 /**
+ * xml_add_required_content_choice
+ * @cong_doc:
+ * @content:
+ * @node:
+ * 
  * Allows the user to select between a set
  * of choices for a required content element.
  * Adds that choice to the node.
  *
- * Returns whether the choice was correctly selected and added
+ * Returns: whether the choice was correctly selected and added
  */
 static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node) {
 	GString *description;
@@ -730,11 +748,16 @@ static gboolean xml_add_required_content_choice(CongDocument *cong_doc, xmlEleme
 	
  
 /**
+ * xml_add_optional_text_nodes
+ * @cong_doc:
+ * @content:
+ * node:
+ * 
  * Adds an optional text node when it
  * conforms to the content model, such that
  * the user may type.
  *
- * @return whether a text node has been added
+ * Returns: whether a text node has been added
  */
 static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementContentPtr content, xmlNodePtr node) {
 	xmlNodePtr new_node;
@@ -763,10 +786,18 @@ static gboolean xml_add_optional_text_nodes(CongDocument *cong_doc, xmlElementCo
 /**** end of the add_required stuff ****/
 
 /**
+ * xml_valid_get_potential_element_children
+ * @ctree:
+ * @list:
+ * @len:
+ * @max:
+ * 
  * Reimplementation of xmlValidGetPotentialChildren that *only*
  * returns children of element type, not of PCDATA type.
  *
  * Otherwise, behaves the same as xmlValidGetPotentialChildren.
+ * 
+ * Returns:
  */
 static gint 
 xml_valid_get_potential_element_children(xmlElementContent *ctree, 
@@ -804,12 +835,21 @@ xml_valid_get_potential_element_children(xmlElementContent *ctree,
 }
 
 /**
+ * wrap_xml_valid_get_valid_elements
+ * @doc:
+ * @parent:
+ * @next_sibling:
+ * @elements:
+ * @max:
+ * 
  * Wrapper function for libxml's xmlValidGetValidElements that
  * handles the corner case of when the parent has no children.
  * xmlValidGetValidElements parameter structure cannot handle this case.
  *
  * Otherwise, behaves the same as xmlValidGetValidElements.
  * Being rewritten: now uses CongDocument, so may be able to get at DTD information even if none attached...
+ * 
+ * Returns:
  */
 static gint 
 wrap_xml_valid_get_valid_elements (CongDocument *doc, 
@@ -885,6 +925,11 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
 #define MAX_ELEMENTS 256
 
 /**
+ * cong_document_get_valid_new_child_elements
+ * @doc:
+ * @node: node for which to get valid children
+ * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
+ * 
  * Get the set of valid children for a node.  If the document
  * contains a DTD, this function will return the intersection
  * of the valid children and elements in the display spec of 
@@ -892,9 +937,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * @param node CongNodePtr node for which to get valid children
- * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
- * @return GList of CongDispspecElement
+ * Returns: GList of CongDispspecElement
  */
 GList*
 cong_document_get_valid_new_child_elements (CongDocument *doc,
@@ -921,6 +964,11 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 
 
 /**
+ * cong_document_get_valid_new_previous_sibling_elements
+ * @doc:
+ * @node: CongNodePtr node for which to get valid previous siblings
+ * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
+ * 
  * Get the set of valid previous siblings for a node.  If the document
  * contains a DTD, this function will return the intersection
  * of the valid previous siblings and elements in the display spec of 
@@ -928,9 +976,7 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * @param node CongNodePtr node for which to get valid previous siblings
- * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
- * @return GList of CongDispspecElement
+ * Returns: GList of CongDispspecElement
  */
 GList* 
 cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
@@ -952,6 +998,11 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 }
 
 /**
+ * cong_document_get_valid_new_next_sibling_elements
+ * @doc:
+ * @node: node for which to get valid next siblings
+ * @tag_type: either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
+ * 
  * Get the set of valid next siblings for a node.  If the document
  * contains a DTD, this function will return the intersection
  * of the valid next siblings and elements in the display spec of 
@@ -959,10 +1010,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * @param ds CongDispsec* display spec
- * @param node CongNodePtr node for which to get valid next siblings
- * @param tag_type either CONG_ELEMENT_TYPE_STRUCTURAL, CONG_ELEMENT_TYPE_SPAN, or CONG_ELEMENT_TYPE_ALL
- * @return GList of CongDispspecElement
+ * Returns: GList of CongDispspecElement
  */
 GList* 
 cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
@@ -1008,9 +1056,17 @@ should_include_element (CongDispspecElement *element,
 }
 
 /**
+ * xml_filter_valid_children_with_dispspec
+ * @ds:
+ * @elements:
+ * @elements_length:
+ * @tag_type:
+ * 
  * Find the intersection of a list of valid children
  * and a displayspec, returning a list of the displayspec elements
  * that are in the intersection.
+ * 
+ * Returns:
  */
 static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, gint elements_length, enum CongElementType tag_type) {
 	CongDispspecElement *element;
@@ -1041,8 +1097,14 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 }
 
 /**
+ * xml_get_elements_from_dispspec
+ * @ds:
+ * @tag_type:
+ * 
  * Get all elements from the display spec that
  * are of tag_type.
+ * 
+ * Returns:
  */
 static GList* xml_get_elements_from_dispspec(CongDispspec* ds, enum CongElementType tag_type) {
 	CongDispspecElement *element;

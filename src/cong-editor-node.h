@@ -40,6 +40,8 @@ typedef struct CongEditorNodeDetails CongEditorNodeDetails;
 
 
 /**
+ * CongEditorNode
+ * 
  * A CongEditorNode is a per-editor-widget GObject, and represents a node that is visited in a traversal of the xml tree.
  * Hence there is generally a 1-1 mapping between xml nodes and CongEditorNodes.  When an xmlnode is added or removed from the tree, 
  * even temporarily, then a corresponding CongEditorNode is added/removed.
@@ -138,10 +140,15 @@ enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node);
 
 /**
+ * cong_editor_node_is_referenced_entity_decl
+ * @editor_node:
+ *
  *  Entity decls can be visited in the tree both below the DTD node, and below each entity ref node that references them.
  *  This function returns TRUE iff the editor_node represents the latter case.
  *  This is useful e.g. if you want to know the "effective siblings" of the node, which should be the other entity decls in the
  *  former case, and should be NULL in the latter case.
+ *
+ * Returns:
  */
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node);
