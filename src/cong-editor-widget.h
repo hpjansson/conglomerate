@@ -171,6 +171,9 @@ cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
 CongPrimaryWindow*
 cong_editor_widget_get_primary_window(CongEditorWidget3 *editor_widget);
 
+xmlDocPtr
+cong_editor_widget_debug_dump_area_tree (CongEditorWidget3 *editor_widget);
+
 G_END_DECLS
 
 #endif

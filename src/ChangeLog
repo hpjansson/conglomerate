@@ -1,3 +1,29 @@
+2005-04-05  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-util.h: 
+	* cong-util.c: 
+	Added various utility functions to make it easier to create XML
+	files programatically.
+
+	* plugin-debug.c: 
+	* cong-fake-plugin-hooks.h: 
+	* cong-fake-plugin-hooks.c: 
+	* cong-editor-widget3.c: 
+	* cong-editor-widget.h: 
+	* cong-editor-area.h: 
+	* cong-editor-area.c: 
+	Added new debug plugin (must be enabled with
+	--enable-debug-plugin=yes), which adds a debug item to the Tools
+	menu to dump the CongEditorArea tree as XML (and open the
+	resulting file).
+
+	* cong-command.c: fixed some API documentation
+
+2005-04-05  David Malcolm  <cmalcolm@redhat.com>
+
+	* Makefile.am: 
+	
+
 2005-03-31  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-app.c, cong-attribute-editor-enumeration.c,

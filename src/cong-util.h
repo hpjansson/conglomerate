@@ -294,6 +294,17 @@ cong_str_or_null_equal (gconstpointer a,
 gchar*
 cong_util_dup_and_free_xml_string (xmlChar *xml_string);
 
+xmlDocPtr
+cong_util_new_xml_doc (void);
+
+xmlNodePtr
+cong_util_new_xml_element (xmlDocPtr xml_doc, const gchar* local_name);
+
+void
+cong_util_set_attribute_bool (xmlNodePtr xml_node, const gchar* name, gboolean value);
+
+void
+cong_util_set_attribute_int (xmlNodePtr xml_node, const gchar* name, int value);
 
 G_END_DECLS
 

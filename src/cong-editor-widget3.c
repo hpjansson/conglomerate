@@ -28,6 +28,7 @@
 
 #include "cong-app.h"
 #include "cong-eel.h"
+#include "cong-util.h"
 
 #include <gtk/gtkdrawingarea.h>
 
@@ -1796,4 +1797,57 @@ CongPrimaryWindow*
 cong_editor_widget_get_primary_window(CongEditorWidget3 *editor_widget)
 {
 	return PRIVATE(editor_widget)->primary_window;
+}
+
+struct add_editor_node_cb_data
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr parent_xml_node;
+};
+
+static gboolean
+recursively_add_editor_area (CongEditorArea *editor_area, gpointer user_data)
+{
+	xmlNodePtr xml_node;
+	struct add_editor_node_cb_data *cb_data = (struct add_editor_node_cb_data *)user_data;
+	struct add_editor_node_cb_data child_cb_data;
+
+	g_assert (editor_area);
+	g_assert (cb_data);
+	g_assert (cb_data->xml_doc);
+	g_assert (cb_data->parent_xml_node);
+
+	xml_node = cong_editor_area_make_debug_xml_element (editor_area, cb_data->xml_doc);
+	xmlAddChild(cb_data->parent_xml_node, xml_node);
+
+	child_cb_data.xml_doc = cb_data->xml_doc;
+	child_cb_data.parent_xml_node = xml_node;
+
+	cong_editor_area_for_all (editor_area,
+				  recursively_add_editor_area,
+				  &child_cb_data);
+
+	return FALSE;
+}
+
+xmlDocPtr
+cong_editor_widget_debug_dump_area_tree (CongEditorWidget3 *editor_widget)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr xml_node;
+	struct add_editor_node_cb_data cb_data;
+
+	g_return_val_if_fail (editor_widget, NULL);
+
+	xml_doc = cong_util_new_xml_doc ();
+	xml_node = cong_util_new_xml_element (xml_doc, "conglomerate-area-debug-dump-v0");
+	xmlDocSetRootElement(xml_doc,
+			     xml_node);	
+
+	cb_data.xml_doc = xml_doc;
+	cb_data.parent_xml_node = xml_node;
+
+	recursively_add_editor_area (PRIVATE(editor_widget)->root_area, &cb_data);	
+
+	return xml_doc;
 }

@@ -15,6 +15,12 @@ cong-marshal.c: cong.marshal
 
 ## http://bugzilla.gnome.org/show_bug.cgi?id=137248
 
+if ENABLE_DEBUG_PLUGIN
+DEBUG_PLUGIN_CFLAGS=-DENABLE_DEBUG_PLUGIN
+else
+DEBUG_PLUGIN_CFLAGS=
+endif
+
 conglomerate_SOURCES =      \
   global.h                  \
   cong-app.h                \
@@ -283,8 +289,8 @@ conglomerate_SOURCES =      \
   plugin-cleanup-source.c   \
   plugin-convert-case.c     \
   plugin-css.c              \
+  plugin-debug.c            \
   plugin-docbook.c          \
-  plugin-templates.c        \
   plugin-dtd.c              \
   plugin-empty.c            \
   plugin-fo.c               \
@@ -305,6 +311,7 @@ conglomerate_SOURCES =      \
   plugin-save-dispspec.c    \
   plugin-sgml.c             \
   plugin-table.c            \
+  plugin-templates.c        \
   plugin-tests.c            \
   plugin-tei.c              \
   plugin-validate.c         \
@@ -318,6 +325,7 @@ INCLUDES = $(BASE_CFLAGS) \
 	$(LIBFO_CFLAGS) \
 	$(SEWFOX_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
+	$(DEBUG_PLUGIN_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)/conglomerate"\" \

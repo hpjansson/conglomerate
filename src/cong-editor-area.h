@@ -261,6 +261,9 @@ void
 cong_editor_area_protected_set_parent (CongEditorArea *area,
 				       CongEditorArea *parent);
 
+xmlNodePtr
+cong_editor_area_make_debug_xml_element (CongEditorArea *area, 
+					 xmlDocPtr xml_doc);
 
 G_END_DECLS
 

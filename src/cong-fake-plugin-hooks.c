@@ -65,6 +65,10 @@ cong_fake_plugin_hook_register_the_whole_shebang (CongApp *app)
 			 plugin_css_plugin_register,
 			 plugin_css_plugin_configure);
 
+	register_plugin (app,"debug",
+			 plugin_debug_plugin_register,
+			 plugin_debug_plugin_configure);
+
 	register_plugin (app,"docbook",
 			 plugin_docbook_plugin_register,
 			 plugin_docbook_plugin_configure);

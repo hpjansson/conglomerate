@@ -1318,7 +1318,7 @@ cong_command_can_add_reparent_selection (CongCommand *cmd,
  * @cmd:
  * @node:
  *
- * TODO: Write me
+ * Splits the selected nodes as necessary and adds as a child of the input node
  * Returns:
  */
 CongNodePtr
@@ -1500,7 +1500,6 @@ split3_location_callback (CongDocument *doc,
 	return FALSE;
 }
 
-/* Splits a data node in 3 and returns pointer to the middle one */
 /**
  * cong_command_add_node_split3:
  * @cmd:
@@ -1508,8 +1507,8 @@ split3_location_callback (CongDocument *doc,
  * @c0:
  * @c1:
  *
- * TODO: Write me
- * Returns:
+ * Splits a text or comment node into 3 nodes, and returns a pointer to the middle one
+ * Returns: the middle node of the three newly-created nodes
  */
 CongNodePtr
 cong_command_add_node_split3 (CongCommand *cmd, 

@@ -31,6 +31,7 @@
 #include "cong-document.h"
 #include "cong-selection.h"
 #include "cong-ui-hooks.h"
+#include "cong-util.h"
 
 #undef PRIVATE
 #define PRIVATE(x) ((x)->private)
@@ -1207,6 +1208,37 @@ cong_editor_area_protected_set_parent (CongEditorArea *area,
 	/* FIXME: refcount issues? */
 }
 
+/**
+ * cong_editor_area_make_debug_xml_element:
+ * @area:
+ * @xml_doc:
+ *
+ * Create a xmlNode representing this area for a debug dump of the area tree.  Does not recurse into children.
+ */
+xmlNodePtr
+cong_editor_area_make_debug_xml_element (CongEditorArea *area, 
+					 xmlDocPtr xml_doc)
+{
+	xmlNodePtr xml_node;
+
+	xml_node = cong_util_new_xml_element (xml_doc, "area");
+	xmlSetProp (xml_node, (const xmlChar*)"class", (const xmlChar*)G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(area)));	
+	cong_util_set_attribute_int (xml_node, "allocated-x", PRIVATE(area)->window_area.x);
+	cong_util_set_attribute_int (xml_node, "allocated-y", PRIVATE(area)->window_area.y);
+	cong_util_set_attribute_int (xml_node, "allocated-w", PRIVATE(area)->window_area.width);
+	cong_util_set_attribute_int (xml_node, "allocated-h", PRIVATE(area)->window_area.height);
+	/* If this area is directly associated with an editor_node, this is it: */
+	if (PRIVATE(area)->editor_node) {
+		CongNodePtr node = cong_editor_node_get_node (PRIVATE(area)->editor_node);
+		gchar *path = cong_node_get_path (node);
+
+		xmlSetProp (xml_node, (const xmlChar*)"node-xpath", (const xmlChar*)path);
+		
+		g_free (path);
+	}
+
+	return xml_node;
+}
 
 /* Signal handler definitions: */
 static void

@@ -1808,3 +1808,43 @@ cong_util_dup_and_free_xml_string (xmlChar *xml_string)
 	return result;
 }
 
+xmlDocPtr
+cong_util_new_xml_doc (void)
+{
+	return xmlNewDoc((const xmlChar*)"1.0");
+}
+
+xmlNodePtr
+cong_util_new_xml_element (xmlDocPtr xml_doc, const gchar* local_name)
+{
+	g_return_val_if_fail (xml_doc, NULL);
+	g_return_val_if_fail (local_name, NULL);
+
+	return xmlNewDocNode(xml_doc,
+			     NULL, /* xmlNsPtr ns, */
+			     (const xmlChar*)local_name,
+			     NULL);
+}
+
+void
+cong_util_set_attribute_bool (xmlNodePtr xml_node, const gchar* name, gboolean value)
+{
+	g_return_if_fail (xml_node);
+	g_return_if_fail (name);
+
+	xmlSetProp (xml_node, (const xmlChar*)name, (const xmlChar*)cong_util_bool_to_string (value));
+
+}
+
+void
+cong_util_set_attribute_int (xmlNodePtr xml_node, const gchar* name, int value)
+{
+	gchar *textual_value;
+
+	g_return_if_fail (xml_node);
+	g_return_if_fail (name);
+
+	textual_value = g_strdup_printf("%i", value);
+	xmlSetProp (xml_node, (const xmlChar*)name, (const xmlChar*)textual_value);
+	g_free(textual_value);
+}

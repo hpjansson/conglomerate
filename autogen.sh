@@ -18,8 +18,8 @@ which gnome-autogen.sh || {
         exit 1
 }
 
-# Ensure that we always configure with --enable-werror when building from CVS:
+# Ensure that we always configure with --enable-werror and --enable-debug-plugin when building from CVS:
 #REQUIRED_AUTOMAKE_VERSION="1.7" \
-USE_GNOME2_MACROS=1 . gnome-autogen.sh "$@" --enable-werror
+USE_GNOME2_MACROS=1 . gnome-autogen.sh "$@" --enable-werror --enable-debug-plugin
 
 # last line of autogen.sh

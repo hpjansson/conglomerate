@@ -57,6 +57,10 @@ gboolean plugin_convert_case_plugin_configure(CongPlugin *plugin);
 gboolean plugin_css_plugin_register(CongPlugin *plugin);
 gboolean plugin_css_plugin_configure(CongPlugin *plugin);
 
+/* plugin-debug.c: */
+gboolean plugin_debug_plugin_register(CongPlugin *plugin);
+gboolean plugin_debug_plugin_configure(CongPlugin *plugin);
+
 /* plugin-docbook.c: */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
 gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
