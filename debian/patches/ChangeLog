@@ -3,6 +3,7 @@
 	* release
 
 	Use another string after which empty lines are deleted.
+	Stripping is on an architecture dependent package.
 
 2004-05-17  Geert Stappers <stappers@stappers.nl>
 

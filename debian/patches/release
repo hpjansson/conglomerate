@@ -24,7 +24,7 @@ function regular_release_changes
 
  mv debian/rules debian/rules.orig
  sed -e '/enable-debug/d' \
-     -e 's/dh_strip --exclude.*/dh_strip/' \
+     -e 's/dh_strip -a --exclude.*/dh_strip -a/' \
      -e '/conglomerate-dbg/d' debian/rules.orig > debian/rules
  chmod +x debian/rules
 
