@@ -1,5 +1,9 @@
 2003-09-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-dtd.c
+
+	Added some attribute support to DTD->RELAX NG importer
+
 	* cong-dtd.c, cong-dtd.h
 
 	Added easy traversal routine for DTD attributes

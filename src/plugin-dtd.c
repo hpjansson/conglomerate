@@ -47,6 +47,11 @@ element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 					gpointer user_data);
 
 static void
+attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
+					  xmlAttributePtr attr,
+					  gpointer user_data);
+
+static void
 add_content_subtree_to_rng (CongNodePtr node_parent,
 			    xmlElementContentPtr content);
 
@@ -283,11 +288,128 @@ element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 			    dtd_element->name);
 
 		/* set up the content model */
-		if (dtd_element->content) {
-			add_content_subtree_to_rng (node_element,
-						    dtd_element->content);
+		{
+			cong_dtd_for_each_attribute (dtd_element,
+						     attribute_callback_generate_rng_from_dtd,
+						     node_element);
+			
+			if (dtd_element->content) {
+				add_content_subtree_to_rng (node_element,
+							    dtd_element->content);
+			}
 		}
 	}	
+}
+
+static void
+attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
+					  xmlAttributePtr attr,
+					  gpointer user_data)
+{
+	CongNodePtr node_element = (CongNodePtr)user_data;
+	CongNodePtr node_occurrence = NULL;
+	CongNodePtr node_attribute;
+
+	switch (attr->def) {
+	default: g_assert_not_reached ();
+	case XML_ATTRIBUTE_NONE:
+	case XML_ATTRIBUTE_IMPLIED:
+		/* Attribute is optional: */
+		node_occurrence = xmlNewDocNode(node_element->doc,
+						NULL,
+						"optional",
+						NULL);
+		
+		xmlAddChild (node_element,
+			     node_occurrence);
+		break;
+	case XML_ATTRIBUTE_REQUIRED:
+	case XML_ATTRIBUTE_FIXED:
+		/* Attribute is required; no need to wrap with an occurrence tag */
+		node_occurrence = node_element;
+		break;
+	}
+
+	g_assert (node_occurrence);
+
+	node_attribute= xmlNewDocNode(node_element->doc,
+				      NULL,
+				      "attribute",
+				      NULL);			
+	xmlAddChild (node_occurrence,
+		     node_attribute);
+	
+	xmlSetProp (node_attribute,
+		    "name",
+		    attr->name);
+
+	/* FIXME: do we need to handle the default? */
+
+	/* Define content model: */
+	switch (attr->atype) {
+	default: g_assert_not_reached ();
+	case XML_ATTRIBUTE_CDATA:
+		/* no need to add anything? */
+		break;
+	case XML_ATTRIBUTE_ID:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_IDREF:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_IDREFS:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_ENTITY:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_ENTITIES:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_NMTOKEN:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_NMTOKENS:
+		/* FIXME */
+		break;
+
+	case XML_ATTRIBUTE_ENUMERATION:
+		/* Add a <choice> tag: */
+		{
+			CongNodePtr node_choice = xmlNewDocNode(node_element->doc,
+								NULL,
+								"choice",
+								NULL);
+			xmlAddChild (node_attribute, 
+				     node_choice);
+
+			/* Add the enum values: */
+			{
+				xmlEnumerationPtr iter;	
+
+				for (iter = attr->tree; iter; iter=iter->next) {
+					CongNodePtr node_value = xmlNewDocNode(node_element->doc,
+									       NULL,
+									       "value",
+									       iter->name);
+					xmlAddChild (node_choice,
+						     node_value);
+					
+				}
+			}	
+		}
+		break;
+
+	case XML_ATTRIBUTE_NOTATION:	
+		/* FIXME */
+		break;
+	}
 }
 
 static void
@@ -416,3 +538,4 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		break;
 	}
 }
+
