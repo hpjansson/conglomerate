@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 
 /* cong-dispspec-registry */
 CongDispspecRegistry*
-cong_dispspec_registry_new(const gchar* xds_directory);
+cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window);
 
 void
 cong_dispspec_registry_free(CongDispspecRegistry* registry);

@@ -794,7 +794,7 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 
 		/* If no child editor has been created, create a dummy one: */
 		if (child_editor==NULL) {
-			gchar *message = g_strdup_printf("Dummy element for tag <%s>", this_node->name);
+			gchar *message = g_strdup_printf(_("Dummy element for tag <%s>"), this_node->name);
 
 			child_editor = cong_dummy_element_editor_new(editor_widget, this_node, message);
 

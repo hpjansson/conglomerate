@@ -126,7 +126,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 					  "parent_window");
 
 	/* FIXME: Test implementation: */
-	dialog = gtk_dialog_new_with_buttons("Placeholder Properties Dialog",
+	dialog = gtk_dialog_new_with_buttons(_("Placeholder Properties Dialog"),
 					     parent_window,
 					     GTK_DIALOG_MODAL,
 					     GTK_STOCK_OK, GTK_RESPONSE_OK,
@@ -142,7 +142,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	dialog_content = cong_dialog_content_new(TRUE);
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),
 				 cong_dialog_content_get_widget(dialog_content),
-				 gtk_label_new("Advanced")
+				 gtk_label_new(_("Advanced"))
 				 );
 
 	xml_element = xml_get_dtd_element(doc, tag);
@@ -150,7 +150,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	if (xml_element) {
 		xmlAttributePtr attr;
 		category_dtdschema = cong_dialog_content_add_category(dialog_content, 
-								      "Properties from DTD/schema");
+								      _("Properties from DTD/schema"));
 
 		for (attr=xml_element->attributes; attr; attr=attr->nexth) {
 			switch (attr->atype) {
@@ -218,7 +218,7 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	}
 
 	category_custom = cong_dialog_content_add_category(dialog_content, 
-							   "Custom Properties");
+							   _("Custom Properties"));
 
 
 	gtk_widget_show_all (dialog);

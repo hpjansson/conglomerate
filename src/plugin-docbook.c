@@ -204,7 +204,7 @@ void factory_action_callback_article(CongDocumentFactory *factory, CongNewFileAs
 {
 	xmlDocPtr xml_doc;
 
-	xml_doc = make_article("Untitled Article");
+	xml_doc = make_article(_("Untitled Article"));
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
 						   cong_new_file_assistant_get_toplevel(assistant));
@@ -257,7 +257,7 @@ void factory_action_callback_book(CongDocumentFactory *factory, CongNewFileAssis
 {
 	xmlDocPtr xml_doc;
 
-	xml_doc = make_book("Untitled Book");
+	xml_doc = make_book(_("Untitled Book"));
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
 						   cong_new_file_assistant_get_toplevel(assistant));
@@ -296,7 +296,7 @@ void factory_action_callback_set(CongDocumentFactory *factory, CongNewFileAssist
 {
 	xmlDocPtr xml_doc;
 
-	xml_doc = make_set("Untitled Set");
+	xml_doc = make_set(_("Untitled Set"));
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
 						   cong_new_file_assistant_get_toplevel(assistant));
@@ -457,13 +457,13 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
 	g_assert(stylesheet_path);
 
-	progress_checklist_dialog = cong_progress_checklist_dialog_new("Exporting PDF file", toplevel_window);
+	progress_checklist_dialog = cong_progress_checklist_dialog_new(_("Exporting PDF file"), toplevel_window);
 	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
 
 	cong_progress_checklist_add_stage(progress_checklist,
-					  "Transforming DocBook into XSL Formatting Objects");
+					  _("Transforming DocBook into XSL Formatting Objects"));
 	cong_progress_checklist_add_stage(progress_checklist,
-					  "Laying out XSL Formatting Objects as a PDF file");
+					  _("Laying out XSL Formatting Objects as a PDF file"));
 
 	gtk_widget_show(progress_checklist_dialog);
 
@@ -476,7 +476,7 @@ void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, con
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
 
-		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Converting XSL Formatting Objects to PDF", 108467);
+		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, _("Converting XSL Formatting Objects to PDF"), 108467);
 		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
 		
 		xmlFreeDoc(fo_doc);
@@ -512,6 +512,7 @@ void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, cons
 	g_free(stylesheet_path);
 }
 
+#if ENABLE_PRINTING
 gboolean docbook_print_method_fpi_filter(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data)
 {
 	g_return_val_if_fail(print_method, FALSE);
@@ -528,13 +529,13 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 
 	g_message("docbook_print_method_action_callback");
 
-	progress_checklist_dialog = cong_progress_checklist_dialog_new("Printing DocBook file", toplevel_window);
+	progress_checklist_dialog = cong_progress_checklist_dialog_new(_("Printing DocBook file"), toplevel_window);
 	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
 
 	cong_progress_checklist_add_stage(progress_checklist,
-					  "Transforming DocBook into XSL Formatting Objects");
+					  _("Transforming DocBook into XSL Formatting Objects"));
 	cong_progress_checklist_add_stage(progress_checklist,
-					  "Printing XSL Formatting Objects");
+					  _("Printing XSL Formatting Objects"));
 
 	gtk_widget_show(progress_checklist_dialog);
 
@@ -552,7 +553,7 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
 
-		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Printing XSL Formatting Objects", 108468);
+		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, _("Printing XSL Formatting Objects"), 108468);
 
 #if 0
 		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
@@ -597,7 +598,7 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 			
 			gnome_print_setfont (gpc, font);
 			gnome_print_moveto (gpc, 100, 400);
-			gnome_print_show (gpc, "This will eventually be the text from DocBook print method");
+			gnome_print_show (gpc, _("This will eventually be the text from DocBook print method"));
 			
 			gnome_print_moveto (gpc, 100, 200);
 			gnome_print_lineto (gpc, 200, 200);
@@ -615,6 +616,7 @@ void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDoc
 
 
 }
+#endif /* #if ENABLE_PRINTING */
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
@@ -622,36 +624,36 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	g_return_val_if_fail(plugin, FALSE);
 	
 	cong_plugin_register_document_factory(plugin, 
-					      "DocBook Article", 
-					      "Create an article, perhaps for a website or a magazine, using the \"DocBook\" format",
+					      _("DocBook Article"), 
+					      _("Create an article, perhaps for a website or a magazine, using the \"DocBook\" format"),
 					      "docbook-article-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_article,
 					      "article");
 	cong_plugin_register_document_factory(plugin, 
-					      "DocBook Book", 
-					      "Create a book, using the \"DocBook\" format",
+					      _("DocBook Book"), 
+					      _("Create a book, using the \"DocBook\" format"),
 					      "docbook-book-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_book,
 					      "book");
 	cong_plugin_register_document_factory(plugin, 
-					      "DocBook Set", 
-					      "Create a set of related books, using the \"DocBook\" format",
+					      _("DocBook Set"), 
+					      _("Create a set of related books, using the \"DocBook\" format"),
 					      "docbook-set-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_set,
 					      "set");	
 
 	cong_plugin_register_importer(plugin, 
-				      "Import text as a DocBook article", 
-				      "Import a plain text file into the \"DocBook\" format, as an article.",
+				      _("Import text as a DocBook article"), 
+				      _("Import a plain text file into the \"DocBook\" format, as an article."),
 				      "docbook-plaintext-import",
 				      text_importer_mime_filter,
 				      text_importer_action_callback,
 				      NULL);
 
-
+#if 0
 	cong_plugin_register_importer(plugin, 
 				      "Import program code as a DocBook article", 
 				      "Import program source code into the \"DocBook\" format, as an article.",
@@ -659,9 +661,10 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 				      sourcecode_importer_mime_filter,
 				      sourcecode_importer_action_callback,
 				      NULL);
+#endif
 
 	cong_plugin_register_exporter(plugin, 
-				      "Export DocBook as HTML", 
+				      _("Export DocBook as HTML"), 
 				      "",
 				      "docbook-HTML-export",
 				      docbook_exporter_fpi_filter,
@@ -669,7 +672,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
-				      "Export DocBook as PDF", 
+				      _("Export DocBook as PDF"), 
 				      "",
 				      "docbook-PDF-export",
 				      docbook_exporter_fpi_filter,
@@ -677,20 +680,22 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
-				      "Export DocBook as XSL:FO",
+				      _("Export DocBook as XSL:FO"),
 				      "",
 				      "docbook-XSLFO-export",
 				      docbook_exporter_fpi_filter,
 				      fo_exporter_action_callback,
 				      NULL);
 
+#if ENABLE_PRINTING
 	cong_plugin_register_print_method(plugin, 
-					  "Print DocBook",
+					  _("Print DocBook"),
 					  "",
 					  "docbook-print",
 					  docbook_print_method_fpi_filter,
 					  docbook_print_method_action_callback,
 					  NULL);
+#endif
 
 	return TRUE;
 }

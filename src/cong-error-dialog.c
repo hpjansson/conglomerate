@@ -177,11 +177,11 @@ cong_error_dialog_new_unimplemented(GtkWindow *parent_window,
 {
 	GtkDialog* dialog;
 	
-	gchar* suggestion =  g_strdup_printf("If you are a programmer, the problem is in file %s at line %i\n", filename, linenum);
+	gchar* suggestion =  g_strdup_printf(_("If you are a programmer, the problem is in file %s at line %i\n"), filename, linenum);
 
 	dialog =  cong_error_dialog_new(parent_window,
 					what_failed,
-					"That feature has not yet been implemented.  Sorry.",
+					_("That feature has not yet been implemented.  Sorry."),
 					suggestion);
 
 	g_free(suggestion);
@@ -199,13 +199,13 @@ cong_error_dialog_new_unimplemented_with_bugzilla_id(GtkWindow *parent_window,
 {
 	GtkDialog* dialog;
 	
-	gchar* why_failed = g_strdup_printf("That feature has not yet been implemented.  Sorry.\n\nThis is a known problem; it is bug #%i within the Bug Tracking System at %s",
+	gchar* why_failed = g_strdup_printf(_("That feature has not yet been implemented.  Sorry.\n\nThis is a known problem; it is bug #%i within the Bug Tracking System at %s"),
 					    bugzilla_id,
 					    bugzilla_url); 
 
 	/* FIXME: would be nice to have convenience buttons/hyperlinks for the bug */
 
-	gchar* suggestion =  g_strdup_printf("If you are a programmer, the problem is in file %s at line %i\n", filename, linenum);
+	gchar* suggestion =  g_strdup_printf(_("If you are a programmer, the problem is in file %s at line %i\n"), filename, linenum);
 
 	dialog =  cong_error_dialog_new(parent_window,
 					what_failed,

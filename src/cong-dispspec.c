@@ -423,7 +423,7 @@ cong_dispspec_get_name(const CongDispspec *ds)
 	if (ds->name) {
 		return ds->name;
 	} else {
-		return "unnamed";
+		return _("unnamed");
 	}
 
 }
@@ -436,7 +436,7 @@ cong_dispspec_get_description(const CongDispspec *ds)
 	if (ds->desc) {
 		return ds->desc;
 	} else {
-		return "No description available.";
+		return _("No description available.");
 	}
 }
 
@@ -668,82 +668,6 @@ int strcasestr(char *haystack, char *needle)
 }
 #endif
 
-/* Routines for working with raw TTREEs, where the supplied ptr is to the root name of the element */
-#if 0
-const char*
-cong_dispspec_ttree_username(TTREE* tt)
-{
-	TTREE* n1;
-
-	n1 = ttree_node_find1(tt, "name", 4, 0);
-	if (!n1) return "could not find name";
-	
-	if (!n1->child) return "no name specified";
-	n1 = n1->child;
-
-	return n1->data;
-}
-
-
-enum CongElementType
-cong_dispspec_ttree_type(TTREE* tt)
-{
-	TTREE *n0 = ttree_node_find1(tt, "type", 4, 0);
-	if (!n0) {
-		DS_DEBUG_MSG1("\"type\" not found, so type is unknown\n");
-		
-		return CONG_ELEMENT_TYPE_UNKNOWN;
-	}
-	
-	if (!n0->child) {
-		DS_DEBUG_MSG1("No child found, so type is unknown\n");
-	  
-		return CONG_ELEMENT_TYPE_UNKNOWN;
-	}
-
-	if (!strcasecmp("structural", n0->child->data)) {
-		DS_DEBUG_MSG1("Child has \"structural\" text, so it is structural\n");
-		return CONG_ELEMENT_TYPE_STRUCTURAL;
-	}
-
-	if (!strcasecmp("span", n0->child->data)) {
-		DS_DEBUG_MSG1("Child has \"span\" text, so it is a span\n");
-		return CONG_ELEMENT_TYPE_SPAN;
-	}  
-
-	if (!strcasecmp("insert", n0->child->data)) {
-		DS_DEBUG_MSG1("Child has \"insert\" text, so it is an insert\n");
-		return CONG_ELEMENT_TYPE_INSERT;
-	}
-
-	if (!strcasecmp("plugin", n0->child->data)) {
-		DS_DEBUG_MSG1("Child has \"insert\" text, so it is an insert\n");
-		return CONG_ELEMENT_TYPE_INSERT;
-	}
-
-	return CONG_ELEMENT_TYPE_UNKNOWN;
-}
-
-gboolean
-cong_dispspec_ttree_collapseto(TTREE* tt)
-{
-	TTREE* n0 = ttree_node_find1(tt, "collapseto", 10, 0);
-	if (n0) return TRUE;
-  
-	return FALSE;
-}
-
-unsigned int 
-cong_dispspec_ttree_colour_get(TTREE* tt)
-{
-	if ((tt = ttree_node_find1(tt, "color", 5, 0)) && tt->child) {
-		return(get_rgb_hex(tt->child->data));
-	}
-
-	return(0x00ffffff);  /* White is default */
-}
-#endif
-
 /*
   We now use the GTree search structure for speed
  */
@@ -938,7 +862,7 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
 		}
 
 		/* FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property? */
-		return g_strdup_printf("%s : %s", cong_dispspec_element_username(element), "<untitled>");
+		return g_strdup_printf("%s : %s", cong_dispspec_element_username(element), _("<untitled>"));
 		
 	} else {
 

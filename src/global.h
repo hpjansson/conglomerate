@@ -34,10 +34,10 @@ enum
 };
 
 #define NEW_LOOK 1
-#define PRINT_TESTS 0
+#define ENABLE_PRINTING 0
 
+#if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
-#if PRINT_TESTS
 #include <libgnomeprint/gnome-print-master.h>
 #endif
 
@@ -276,7 +276,9 @@ typedef struct CongFunctionality CongFunctionality;
 typedef struct CongDocumentFactory CongDocumentFactory;
 typedef struct CongImporter CongImporter;
 typedef struct CongExporter CongExporter;
+#if ENABLE_PRINTING
 typedef struct CongPrintMethod CongPrintMethod;
+#endif
 typedef struct CongThumbnailer CongThumbnailer;
 typedef struct CongPluginEditorElement CongPluginEditorElement;
 
@@ -297,8 +299,12 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
+
+#if ENABLE_PRINTING
 typedef gboolean (*CongPrintMethodFpiFilter)(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data);
 typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
+#endif
+
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
 

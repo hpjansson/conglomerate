@@ -216,10 +216,10 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 	return(TRUE);
 }
 
-gboolean main_load_displayspecs(void)
+gboolean main_load_displayspecs(GtkWindow *toplevel_window)
 {
-#if 0
-	gchar*      xds_directory = gnome_program_locate_file(the_gui.gnome_program,
+#if 1
+	gchar*      xds_directory = gnome_program_locate_file(the_globals.gnome_program,
 							      GNOME_FILE_DOMAIN_APP_DATADIR,
 							      "conge/dispspecs",
 							      FALSE,
@@ -230,9 +230,25 @@ gboolean main_load_displayspecs(void)
 	g_free(current_dir);
 #endif
 
+	g_message(DATADIR);
+
 	if (xds_directory) {
 		g_message("Loading xds files from \"%s\"\n", xds_directory);
-		the_globals.ds_registry = cong_dispspec_registry_new(xds_directory);
+		the_globals.ds_registry = cong_dispspec_registry_new(xds_directory, toplevel_window);
+
+		/* If no xds files were found, perhaps the program hasn't been installed yet (merely built): */
+		if (cong_dispspec_registry_get_num(the_globals.ds_registry)==0) {
+
+			gchar *why_failed = g_strdup_printf(_("Conglomerate could not load any xds files from the directory \"%s\""), xds_directory);
+			GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
+								  _("Conglomerate could not find any descriptions of document types."),
+								  why_failed,
+								  _("If you see this error, it is likely that you built Conglomerate, but did not install it.  Try installing it."));
+			g_free(why_failed);
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+			return FALSE;
+		}
 		
 		g_free(xds_directory);
 		
@@ -242,7 +258,7 @@ gboolean main_load_displayspecs(void)
 		
 		cong_dispspec_registry_dump(the_globals.ds_registry);
 	} else {
-		GtkDialog* dialog = cong_error_dialog_new(NULL, /* FIXME: need to establish an appropriate parent window here */
+		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
 							  "Conglomerate could not find its registry of document types.",
 							  "You must run the program from the \"src\" directory used to build it.",
 							  "This is a known problem and will be fixed.");
@@ -324,7 +340,7 @@ int main( int   argc,
 	   FIXME: currently this function requires a primary window to exist, so it can manipulate graphics contexts... 
 	   Ideally we would only create a "document-less" window if no file was specified on the command line.
 	*/
-	if (!main_load_displayspecs()) {
+	if (!main_load_displayspecs(NULL)) {
 		return 1;
 	}
 

@@ -47,7 +47,7 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 
 	current_doc_name = cong_document_get_full_uri(doc);
 	
-	new_doc_name = cong_get_file_name("Save XML as...", 
+	new_doc_name = cong_get_file_name(_("Save XML as..."), 
 					  current_doc_name,
 					  parent_window);
 

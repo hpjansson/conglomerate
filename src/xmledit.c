@@ -192,7 +192,7 @@ void cong_document_view_source(CongDocument *doc)
 	g_return_if_fail(doc);
 
 	window = gnome_app_new(PACKAGE_NAME,
-			       "Source View - Conglomerate");
+			       _("Source View - Conglomerate"));
 	source_view = cong_source_view_new(doc);
 
 	gnome_app_set_contents(GNOME_APP(window), source_view);

@@ -1,32 +1,14 @@
 
-This is the conge TODO file.
+This was the conge TODO file.  It is now out of date.
 
-If you're going to work on one of these,
-please email conglomerate-devel@lists.copyleft.no
-to avoid duplication of work.
+The items in the list that are still relevant should be moved to the Bugzilla database.
 
 Some of the jobs are quite easy, other are hard,
 and other are "blue sky" goals for the future.
 
 I've added some rough estimates of the complexity of each job.
 
-CODING BEFORE RELEASE
-- sort out font crash
-- improve the configuration tests
-- remove the preprocessor cruft (the old unused versions of code)
-- update AM_INIT_AUTOMAKE in configure.in
-- update README about the congle/conge name
-- update README about running conge
-
-OTHER JOBS BEFORE RELEASE
-- get the website more up-to-date
-- improve the look of the website
-- write some documentation on the state of the code
-
-CODING AFTER RELEASE
-- implement a proper MVC separation, with fine-grained updates (Hard)
-- get autoheader dependency working, 
- then break global.h into separate header files  (Easy)
+CODING
 - fix the violations of the GNOME coding style guidelines (Easy)
 - comment the internal interfaces in gtk-doc style (Easy)
 - adding i18n support (Medium)
@@ -37,12 +19,9 @@ CODING AFTER RELEASE
  (done using Bonobo so as to get menu merging?) (Easy)
 - make font choices a user prefererence?
  (using GConf and a preferences dialog)  (Medium)
-- add a spellcheck feature (Hard)
 - add a grammar check feature (Hard)
   (possibly look at AbiWord bug #3281, and
    http://www.gnu.org/software/diction/diction.html)
-- add an irritating animated paperclip that says:
- "It looks like you're trying to write a structured document" :-)
 - nicer GUI
  (various ideas have been posted to the list - logical groupings of tags)
 - fix all the FIXMEs in the code
@@ -63,22 +42,18 @@ CODING AFTER RELEASE
 - implement a table-editing component (Hard)
 - make Conglomerate a Bonobo control; get it working in Nautilus, Evolution etc
   (Medium)
-- some kind of template support (maybe a Create New File helper/druid) (Easy)
 - some kind of transformation view,
  showing results of a transformation of the file into HTML
  or printable form "live" as you edit (Hard)
 - perhaps a promote/demote facility for things like sect1 through to sect5 in 
  DocBook to make it easier to play around with structure?
-- Undo/Redo support (Hard)
-- rewrite xmlview.c/xmledit.c to avoid the GtkDrawingArea mess (Hard)
-- Use Pango within xmledit.c (Hard?)
 - Allow multi-charset input (using Pango?)
 - audit the use of different char types (Medium)
 - stronger use of DTD information (Hard)
 - fix the paragraph support (Medium)
 - write some kind of code overview (Easy)
 
-OTHER JOBS AFTER RELEASE:
+OTHER JOBS
 - improvements to existing xds files (Easy)
 - more xds files to cover other DTDs out there (Easy)
 - design icons for dispspec elements?  (we _might_ support this in future)
@@ -86,8 +61,6 @@ OTHER JOBS AFTER RELEASE:
  both for the program and for the xds files  (Easy)
 - use Conglomerate and see what needs improving, find BUGS etc
 - write some documentation (Medium)
-
-ANYTIME JOBS
 - use the file AUTHORS to generate authors in the About box
 
 Any other ideas?

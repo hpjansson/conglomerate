@@ -212,7 +212,7 @@ void on_parser_error_details(gpointer data)
 	g_assert(result->file_uri);
 
 	filename = gnome_vfs_uri_extract_short_name(result->file_uri);
-	title = g_strdup_printf("Parse errors loading %s", filename);
+	title = g_strdup_printf(_("Parse errors loading %s"), filename);
 
 	g_free(filename);
 
@@ -283,12 +283,12 @@ void on_parser_error_details(gpointer data)
 
 	text_renderer = gtk_cell_renderer_text_new ();
 
-	column = gtk_tree_view_column_new_with_attributes ("Line Number", text_renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Line Number"), text_renderer,
 							   "text", PARSER_ERROR_LINENUM_TEXT_COLUMN,
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (error_list_view), column);
 
-	column = gtk_tree_view_column_new_with_attributes ("Description", text_renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Description"), text_renderer,
 							   "text", PARSER_ERROR_DESCRIPTION_TEXT_COLUMN,
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (error_list_view), column);
@@ -336,7 +336,7 @@ cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file
 
 	gchar* app_name = cong_error_get_appname();
 	
-	gchar* why_failed = g_strdup_printf("%s cannot understand the internal format of the file.", app_name);
+	gchar* why_failed = g_strdup_printf(_("%s cannot understand the internal format of the file."), app_name);
 
 	g_assert(parser_result);
 
@@ -344,8 +344,8 @@ cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file
 									  file_uri, 
 									  FALSE,
 									  why_failed,
-									  "FIXME",
-									  "Show Details",
+									  _("Conglomerate currently requires documents to be \"well-formed\"; it has much stricter rules than most web browsers.  It also does not yet support SGML.  We hope to fix these problems in a later release."),
+									  _("Show Details"),
 									  on_parser_error_details,
 									  parser_result);
 
@@ -450,9 +450,9 @@ CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWi
 
 	dialog = cong_error_dialog_new_with_convenience(parent_window,
 							what_failed,
-							"The internal structure of the document does not match any of the types known to Conglomerate.", 
-							"You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal.",
-							"Force",
+							_("The internal structure of the document does not match any of the types known to Conglomerate."), 
+							_("You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal."),
+							_("Force"),
 							force_load,
 							&the_dlg);
 	
@@ -560,7 +560,7 @@ void open_document(GtkWindow *parent_window)
 
 	g_return_if_fail(parent_window);
 	
-	doc_name = cong_get_file_name("Select an XML document",
+	doc_name = cong_get_file_name(_("Select an XML document"),
 				      NULL,
 				      parent_window);
 

@@ -1,3 +1,13 @@
+2003-05-03  David Malcolm
+
+	* Makefile.am
+
+	Added various header files so that "make distcheck" works
+
+	* cong-dialog.c, cong-dispspec.c, cong-dom-view.c, cong-error-dialog.c, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-file-export.c, cong-file-new.c, cong-file-open.c, cong-file-print.c, cong-file-save.c, cong-location.c, cong-menus.c, cong-plugin.c, cong-plugin.h, cong-primary-window.c, cong-section-head-editor.c, cong-tree-view.c, global.h, main.c, plugin-docbook.c, plugin-lists.c, plugin-tests.c, plugin-xsl.c, popup.c, tree.c, xmldata.c, xmledit.c, cong-dispspec-registry.[ch], cong-error-dialog.h
+
+	Marked numerous strings for translation; various small cleanups; disabled printing support; improved error handling
+	
 2003-04-28  David Malcolm
 
 	* dispspec.c -> cong-dispspec.c

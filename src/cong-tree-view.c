@@ -495,7 +495,7 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 
 	/* Create a column, associating the "text" attribute of the
 	 * cell_renderer to the first column of the model */
-	column = gtk_tree_view_column_new_with_attributes ("Element", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Element"), renderer,
 							   "text", TREEVIEW_TITLE_COLUMN,
 							   "foreground", TREEVIEW_FOREGROUND_COLOR_COLUMN,
 							   "background", TREEVIEW_BACKGROUND_COLOR_COLUMN,

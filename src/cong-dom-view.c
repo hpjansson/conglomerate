@@ -98,7 +98,7 @@ static void populate_tree_store_recursive(CongDOMViewDetails *details, CongNodeP
 	switch (cong_node_type(node)) {
 	default: g_assert(0);
 	case CONG_NODE_TYPE_UNKNOWN: 
-		text = g_strdup("UNKNOWN");
+		text = g_strdup(_("UNKNOWN"));
 		break;
 
 	case CONG_NODE_TYPE_ELEMENT: 
@@ -107,13 +107,13 @@ static void populate_tree_store_recursive(CongDOMViewDetails *details, CongNodeP
 
 	case CONG_NODE_TYPE_TEXT:
 		cleaned_text = cong_util_cleanup_text(node->content);
-		text = g_strdup_printf("Text: \"%s\"", cleaned_text);
+		text = g_strdup_printf(_("Text: \"%s\""), cleaned_text);
 		g_free(cleaned_text);
 		break; 
 		
 	case CONG_NODE_TYPE_COMMENT:
 		cleaned_text = cong_util_cleanup_text(node->content);
-		text = g_strdup_printf("Comment: \"%s\"", cleaned_text);
+		text = g_strdup_printf(_("Comment: \"%s\""), cleaned_text);
 		g_free(cleaned_text);
 		break;
 	}
@@ -312,7 +312,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 		g_assert(cong_node_type(node) == CONG_NODE_TYPE_TEXT);
 
 		cleaned_text = cong_util_cleanup_text(node->content);
-		text = g_strdup_printf("Text: \"%s\"", cleaned_text);
+		text = g_strdup_printf(_("Text: \"%s\""), cleaned_text);
 		g_free(cleaned_text);
 		
 		g_assert(text);
@@ -377,7 +377,7 @@ GtkWidget *cong_dom_view_new(CongDocument *doc)
 
 	/* Create a column, associating the "text" attribute of the
 	 * cell_renderer to the first column of the model */
-	column = gtk_tree_view_column_new_with_attributes ("Element", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Element"), renderer,
 							   "text", DOMVIEW_COLUMN_TEXT,
 							   NULL);
 

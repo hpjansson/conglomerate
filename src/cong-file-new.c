@@ -93,7 +93,7 @@ GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *a
 	g_return_val_if_fail(assistant, NULL);
 	g_return_val_if_fail(document_factory, NULL);
 
-	title = g_strdup_printf("Creating a new file (%s)", 
+	title = g_strdup_printf(_("Creating a new file (%s)"), 
 				cong_functionality_get_name(CONG_FUNCTIONALITY(document_factory)));
 
 	page = GNOME_DRUID_PAGE_STANDARD(gnome_druid_page_standard_new_with_vals(title,
@@ -177,14 +177,14 @@ GtkWidget *make_type_selection_widget(CongNewFileAssistant *assistant)
 
 	renderer = gtk_cell_renderer_text_new ();
 
-	column = gtk_tree_view_column_new_with_attributes ("File Type", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("File Type"), renderer,
 							   "text", NEWDOCTYPELIST_NAME_COLUMN,
 							   NULL);
 
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (assistant->list_view), column);
 
-	column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Description"), renderer,
 							   "text", NEWDOCTYPELIST_DESCRIPTION_COLUMN,
 							   NULL);
 
@@ -343,15 +343,15 @@ void new_document(GtkWindow *parent_window)
 
 	/* FIXME:  what if no document factories found? */
 
-	assistant->druid = GNOME_DRUID(gnome_druid_new_with_window("Creating a new file",
+	assistant->druid = GNOME_DRUID(gnome_druid_new_with_window(_("Creating a new file"),
 								   parent_window,
 								   TRUE,
 								   &assistant->window));
 
 	assistant->first_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_START,
 								   TRUE,
-								   "Creating a new file",
-								   "This assistant will guide you through creating a new file.\n\nVarious types of file are available, and Conglomerate may be able to supply some of the \"boilerplate\" content for you.\n\nWe hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system.",
+								   _("Creating a new file"),
+								   _("This assistant will guide you through creating a new file.\n\nVarious types of file are available, and Conglomerate may be able to supply some of the \"boilerplate\" content for you.\n\nWe hope that in future versions of Conglomerate you will be able to create \"template documents\" to add to this system."),
 								   assistant->logo,
 								   assistant->watermark,
 								   assistant->top_watermark);
@@ -364,9 +364,9 @@ void new_document(GtkWindow *parent_window)
 
 	assistant->type_selection_widget = make_type_selection_widget(assistant);
 	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(assistant->second_page),
-					      "What type of file would you like to create?",
+					      _("What type of file would you like to create?"),
 					      assistant->type_selection_widget,
-					      "Highlight one of the items in the list and select \"Forward\" to continue");
+					      _("Highlight one of the items in the list and select \"Forward\" to continue"));
 	gnome_druid_append_page(assistant->druid, GNOME_DRUID_PAGE(assistant->second_page));
 	gtk_widget_show(GTK_WIDGET(assistant->second_page));
 
@@ -375,8 +375,8 @@ void new_document(GtkWindow *parent_window)
 
 	assistant->final_page = gnome_druid_page_edge_new_with_vals(GNOME_EDGE_FINISH,
 								    TRUE,
-								    "Creating a new file",
-								    "Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it.",
+								    _("Creating a new file"),
+								    _("Conglomerate now has the information it needs to create the document.  Press \"Apply\" to create it.  You will need to save the document if you wish to keep it."),
 								    assistant->logo,
 								    assistant->watermark,
 								    assistant->top_watermark);
@@ -400,108 +400,3 @@ void new_document(GtkWindow *parent_window)
 
 	/* FIXME:  need to sort out memory leaks */
 }
-
-#if 0
-
-GtkWidget *newdoc;
-
-int capsula_mode = 0;
-
-char *capsula_str = "capsula";
-char *extracta_str = "extracta";
-char *selecta_str = "selecta";
-char *informa_str = "informa";
-char *analiza_str = "analiza";
-
-
-
-
-static gint new_document_from_template(GtkWidget *w, char *type)
-{
-	gtk_widget_destroy(newdoc);
-
-#ifndef RELEASE
-	fputs(type, stdout);
-	printf("\n");
-#endif	
-
-	if (capsula_mode && !strcmp(type, "capsula"))
-	{
-/*		
-		add_capsula_template();
- */
-	}
-	else
-	{
-	  xmlview_destroy(TRUE);
-/*		
-	  get_template(type);
- */
-	}
-
-	gtk_widget_set_sensitive(cong_gui_get_button_submit(&the_gui), TRUE);
-
-	if (!strcmp(type, "capsula"))
-	{
-/*		
-		vect_win_open();
- */
-		capsula_mode = 1;
-	}
-	else capsula_mode = 0;
-
-	return(TRUE);
-}
-
-
-int gui_window_new_document_make()
-{
-	GtkWidget *w0, *w1;
-
-  newdoc = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_container_set_border_width(GTK_CONTAINER(newdoc), 10);
-  gtk_widget_set_usize(GTK_WIDGET(newdoc), 240, 120);
-  gtk_window_set_title(GTK_WINDOW(newdoc), "Select document class");
-  gtk_window_set_position(GTK_WINDOW(newdoc), GTK_WIN_POS_MOUSE);
-	gtk_window_set_modal(GTK_WINDOW(newdoc), 1);
-	gtk_window_set_policy(GTK_WINDOW(newdoc), 0, 0, 1);
-
-  /* --- Window -> vbox --- */
-
-  w0 = gtk_vbox_new(TRUE, 1);
-  gtk_container_add(GTK_CONTAINER(newdoc), w0);
-  gtk_widget_show(w0);
-
-	/* Window -> vbox -> buttons */
-
-	w1 = gtk_button_new_with_label("Capsula");
-	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-	gtk_widget_show(w1);
-  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) capsula_str);
-
-#if 0	
-	w1 = gtk_button_new_with_label("Extracta");
-	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-	gtk_widget_show(w1);
-  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) extracta_str);
-
-	w1 = gtk_button_new_with_label("Informa");
-	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-	gtk_widget_show(w1);
-  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) informa_str);
-
-	w1 = gtk_button_new_with_label("Selecta");
-	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-	gtk_widget_show(w1);
-  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) selecta_str);
-
-	w1 = gtk_button_new_with_label("Analiza");
-	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-	gtk_widget_show(w1);
-  g_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) new_document_from_template, (gpointer) analiza_str);
-#endif
-	
-	gtk_widget_show(newdoc);
-	return(1);
-}
-#endif

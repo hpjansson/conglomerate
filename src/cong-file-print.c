@@ -33,6 +33,8 @@
 #include "cong-dialog.h"
 #include "cong-plugin.h"
 #include "cong-eel.h"
+
+#if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print-master.h>
 
 typedef struct CongPrintDialogDetails
@@ -294,7 +296,7 @@ do_ui_file_print(CongDocument *doc,
 
 				gnome_print_master_close (gpm);
 
-				preview_widget = gnome_print_master_preview_new (gpm, "Print Preview");
+				preview_widget = gnome_print_master_preview_new (gpm, _("Print Preview"));
 				gtk_widget_show(preview_widget);
 			}
 		}
@@ -330,3 +332,5 @@ cong_ui_file_print(CongDocument *doc,
 			 toplevel_window,
 			 FALSE);
 }
+
+#endif /* #if ENABLE_PRINTING */

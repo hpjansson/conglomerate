@@ -61,7 +61,7 @@ visit_func(const gchar *rel_path,
 }
 
 CongDispspecRegistry*
-cong_dispspec_registry_new(const gchar* xds_directory)
+cong_dispspec_registry_new(const gchar* xds_directory, GtkWindow *toplevel_window)
 {
 	CongDispspecRegistry* registry;
 	GnomeVFSResult vfs_result;
@@ -82,10 +82,11 @@ cong_dispspec_registry_new(const gchar* xds_directory)
 					       (gpointer)&details);
 
 	if (vfs_result!=GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new(NULL, /* FIXME: need to set up parent window correctly */
-							  "Conglomerate could not read its registry of document types.",
-							  "You must run the program from the location in which you built it.",
-							  "This is a known problem and will be fixed.");
+		GtkDialog* dialog = cong_error_dialog_new_file_operation_failed(toplevel_window,
+										_("Conglomerate could not read its registry of document types."),
+										details.path_uri, 
+										vfs_result, 
+										_("Conglomerate attempted to look at all the files in the location."));
 		cong_error_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(GTK_WIDGET(dialog));
 

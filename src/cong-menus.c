@@ -55,7 +55,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 0
+#define ENABLE_DEBUG_MENU 1
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
@@ -214,6 +214,7 @@ static void menu_callback_file_export(gpointer callback_data,
 			    cong_primary_window_get_toplevel(primary_window));
 }
 
+#if ENABLE_PRINTING
 static void menu_callback_file_print_preview(gpointer callback_data,
 					     guint callback_action,
 					     GtkWidget *widget)
@@ -239,6 +240,7 @@ static void menu_callback_file_print(gpointer callback_data,
 	cong_ui_file_print(doc,
 			   cong_primary_window_get_toplevel(primary_window));
 }
+#endif /* #if ENABLE_PRINTING */
 
 static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc, 
 						      GtkWindow *parent_window)
@@ -410,7 +412,7 @@ gint debug_document_types(/*GtkWidget *w, gpointer data, */GtkWindow *parent_win
 
 	dialog = gtk_dialog_new();
 
-	gtk_window_set_title(GTK_WINDOW(dialog), "Document Types");
+	gtk_window_set_title(GTK_WINDOW(dialog), _("Document Types"));
 
 	store = gtk_list_store_new (DOCTYPELIST_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
 
@@ -440,14 +442,14 @@ gint debug_document_types(/*GtkWidget *w, gpointer data, */GtkWindow *parent_win
 
 	renderer = gtk_cell_renderer_text_new ();
 
-	column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
 							   "text", DOCTYPELIST_NAME_COLUMN,
 							   NULL);
 
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
 
-	column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Description"), renderer,
 							   "text", DOCTYPELIST_DESCRIPTION_COLUMN,
 							   NULL);
 
@@ -512,7 +514,7 @@ void open_transformed_window_for_doc(xmlDocPtr doc,
 	ds = cong_dispspec_registry_get_appropriate_dispspec(doc);
 
 	if (ds==NULL) {
-		ds = query_for_forced_dispspec("Conglomerate cannot open the result of the transformation", 
+		ds = query_for_forced_dispspec(_("Conglomerate cannot open the result of the transformation"), 
 					       doc,
 					       parent_window);
 
@@ -569,10 +571,10 @@ void debug_transform(CongPrimaryWindow *primary_window,
 	}
 
 	if (NULL==xsl) {
-		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",stylesheet_filename);
+		gchar *why_failed = g_strdup_printf(_("There was a problem reading the stylesheet file \"%s\""),stylesheet_filename);
 
 		GtkDialog* dialog = cong_error_dialog_new(parent_window,
-							  "Conglomerate could not transform the document",
+							  _("Conglomerate could not transform the document"),
 							  why_failed,
 							  "FIXME");
 	
@@ -593,10 +595,10 @@ void debug_transform(CongPrimaryWindow *primary_window,
 	xmlFreeDoc(input_clone);
 
 	if (result->children==NULL) {
-		gchar *why_failed = g_strdup_printf("There was a problem applying the stylesheet file");
+		gchar *why_failed = g_strdup_printf(_("There was a problem applying the stylesheet file"));
 
 		GtkDialog* dialog = cong_error_dialog_new(parent_window,
-							  "Conglomerate could not transform the document",
+							  _("Conglomerate could not transform the document"),
 							  why_failed,
 							  "FIXME");
 	
@@ -734,7 +736,7 @@ void menu_callback_debug_preview_fo(gpointer callback_data,
 
 	gnome_print_master_close (gpm);
 
-	preview_widget = gnome_print_master_preview_new (gpm, "Print Preview");
+	preview_widget = gnome_print_master_preview_new (gpm, _("Print Preview"));
 	gtk_widget_show(preview_widget);
 }
 #endif /* #if PRINT_TESTS */
@@ -1046,11 +1048,11 @@ void menu_callback_debug_progress_checklist(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 	int i;
 
-	debug_data.dialog = CONG_PROGRESS_CHECKLIST_DIALOG(cong_progress_checklist_dialog_new("Test Progress Checklist", cong_primary_window_get_toplevel(primary_window)));
+	debug_data.dialog = CONG_PROGRESS_CHECKLIST_DIALOG(cong_progress_checklist_dialog_new(_("Test Progress Checklist"), cong_primary_window_get_toplevel(primary_window)));
 	debug_data.progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(debug_data.dialog);
 	
 	for (i=0;i<10;i++) {
-		gchar *stage_name = g_strdup_printf("This is stage %i", i);
+		gchar *stage_name = g_strdup_printf(_("This is stage %i"), i);
 		cong_progress_checklist_add_stage(debug_data.progress_checklist,
 						  stage_name);
 		g_free(stage_name);
@@ -1078,7 +1080,7 @@ void menu_callback_debug_document_message_log(gpointer callback_data,
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
 	window = gnome_app_new(PACKAGE_NAME,
-			       "Message Log - Conglomerate");
+			       _("Message Log - Conglomerate"));
 	log_view = cong_debug_log_view_new(doc);
 
 	gnome_app_set_contents(GNOME_APP(window), log_view);
@@ -1109,7 +1111,15 @@ static void menu_callback_about(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 
 	GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
-	gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
+	gchar* authors[] = {"Hans Petter Jansson", 
+			    "David Malcolm", 
+			    "Joakim Ziegler", 
+			    "Steiner Bang", 
+			    "Geert Stappers", 
+			    "Brent Hendricks", 
+			    "Doug Daniels", 
+			    "Dmitry Mastrukov", 
+			    NULL};
 
 	gchar* documenters[] = { NULL };
 
@@ -1144,10 +1154,13 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/_Save"),           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
 	{ N_("/File/Save _As..."),     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
 	{ N_("/File/Sa_ve a Copy..."), "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+#if ENABLE_PRINTING
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
-#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/File/Print Previe_w..."),   "<shift><control>P", menu_callback_file_print_preview, 0, "<StockItem>", GTK_STOCK_PRINT_PREVIEW },
 	{ N_("/File/_Print..."),           "<control>P", menu_callback_file_print, 0, "<StockItem>", GTK_STOCK_PRINT },
+#endif
+#if ENABLE_UNIMPLEMENTED_MENUS
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/File/_Revert"),         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },

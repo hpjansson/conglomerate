@@ -144,6 +144,18 @@ cong_error_dialog_new_file_save_failed(GtkWindow *parent_window,
 				       GnomeVFSResult vfs_result, 
 				       const GnomeVFSFileSize* file_size);
 
+/**
+ * Routine to manufacture an error dialog for when some file operation fails that doesn't fall into one of the categories above.
+ * Displays what operation has failed, with a convenience button to get more techical information.
+ * @vfs_uri:  the URI from which you tried to access file.
+ */
+GtkDialog*
+cong_error_dialog_new_file_operation_failed(GtkWindow *parent_window,
+					    const gchar *what_failed,
+					    const GnomeVFSURI *file_uri, 
+					    GnomeVFSResult vfs_result, 
+					    const gchar *technical_details);
+
 /** 
  * A bunch of self-tests.
  */

@@ -9,7 +9,13 @@ conge_SOURCES =             \
   cong-editor-widget-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
+  cong-font.h               \
+  cong-location.h           \
+  cong-node.h               \
   cong-plugin.h             \
+  cong-progress-checklist.h \
+  cong-view.h               \
+  fo.h                      \
   cong-debug-log-view.c     \
   cong-dialog.c             \
   cong-dispspec.c           \

@@ -308,8 +308,8 @@ gboolean plugin_xsl_plugin_register(CongPlugin *plugin)
 	g_return_val_if_fail(plugin, FALSE);
 	
 	cong_plugin_register_editor_element(plugin, 
-					    "XSL Template Element", 
-					    "An element for visualising template rules in an XSL stylesheet",
+					    _("XSL Template Element"), 
+					    _("An element for visualising template rules in an XSL stylesheet"),
 					    "xsl-template",
 					    manufacture_element,
 					    NULL);

@@ -1,3 +1,17 @@
+2003-05-03  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* AUTHORS:  Added an initial list of people
+
+	* BUGS: Deprecated the file in favour of Bugzilla
+
+	* README:  Various small cleanups
+
+	* TODO: Deprecated the file in favour of Bugzilla
+
+	* configure.in:  Bumped version to 0.5.0; added libgnome-print-2.0 dependency
+
+	
+	
 2003-04-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in:  Addded "es" to ALL_LINGUAS

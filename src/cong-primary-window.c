@@ -425,7 +425,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
 					 w2,
-					 gtk_label_new("Overview")
+					 gtk_label_new(_("Overview"))
 					 );
 		
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
@@ -435,14 +435,14 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 #if 0
 		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
 					 cong_bookmark_view_new(primary_window->doc),
-					 gtk_label_new("Bookmarks")
+					 gtk_label_new(_("Bookmarks"))
 					 );
 #endif
 	
 		/* --- Raw XML view --- */
 		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
 					 cong_dom_view_new(primary_window->doc),
-					 gtk_label_new("Raw XML")
+					 gtk_label_new(_("Raw XML"))
 					 );
 
 		/* --- Scrolling area --- */

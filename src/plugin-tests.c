@@ -48,7 +48,7 @@ void factory_page_creation_callback_unicode(CongDocumentFactory *factory, CongNe
 						TRUE);
 
 	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(page),
-					      "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options",
+					      _("This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options"),
 					      gtk_calendar_new(),
 					      user_data);
 
@@ -126,7 +126,7 @@ static xmlNodePtr make_unicode_table(xmlDocPtr xml_doc, const struct UnicodeCrea
 
 	/* Add title for this table: */
 	{
-		gchar *title = g_strdup_printf("Unicode Characters 0x%04X-0x%04X", 
+		gchar *title = g_strdup_printf(_("Unicode Characters 0x%04X-0x%04X"), 
 						uci->starting_character + (table_index*uci->rows_per_table*uci->cols_per_table), 
 						uci->starting_character + ((table_index+1)*uci->rows_per_table*uci->cols_per_table)-1);
 		
@@ -205,7 +205,7 @@ static xmlDocPtr make_unicode_tables(const struct UnicodeCreationInfo* uci)
 			     root_node);
 
 	{
-		gchar *title = g_strdup_printf("Unicode Characters 0x%04X-0x%04X", 
+		gchar *title = g_strdup_printf(_("Unicode Characters 0x%04X-0x%04X"), 
 						uci->starting_character, 
 						uci->starting_character + (uci->num_tables*uci->rows_per_table*uci->cols_per_table));
 		
@@ -324,8 +324,8 @@ gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 	g_return_val_if_fail(plugin, FALSE);
 	
 	cong_plugin_register_document_factory(plugin, 
-					      "Unicode Character Reference", 
-					      "Create a table listing a part of the Unicode character set as a DocBook article",
+					      _("Unicode Character Reference"), 
+					      _("Create a table listing a part of the Unicode character set as a DocBook article"),
 					      "tests-unicode-character-reference-factory",
 					      factory_page_creation_callback_unicode,
 					      factory_action_callback_unicode,

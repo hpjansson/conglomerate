@@ -211,8 +211,8 @@ gboolean plugin_lists_plugin_register(CongPlugin *plugin)
 	g_return_val_if_fail(plugin, FALSE);
 	
 	cong_plugin_register_editor_element(plugin, 
-					    "List Member Element", 
-					    "An element for visualising member of a list",
+					    _("List Member Element"), 
+					    _("An element for visualising member of a list"),
 					    "listitem",
 					    manufacture_element,
 					    NULL);

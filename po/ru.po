@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2002-11-29 10:11+0300\n"
+"POT-Creation-Date: 2003-05-03 11:33+0000\n"
 "PO-Revision-Date: 2002-11-29 09:06+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -15,309 +15,280 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conge.desktop.in.h:1
-msgid "Edit xml files"
-msgstr "Редактировать файлы в формате XML"
-
-#: data/conge.desktop.in.h:2 src/main.c:886
-msgid "XML Editor"
-msgstr "Редактор файлов в формате XML"
-
-#: src/cong-primary-window.c:226
-msgid "Open"
-msgstr "Открыть"
-
-#: src/cong-primary-window.c:227 src/cong-primary-window.c:228
-msgid "Open document"
-msgstr "Открыть документ"
-
-#: src/cong-primary-window.c:236
-msgid "Save as..."
-msgstr "Сохранить как..."
-
-#: src/cong-primary-window.c:237 src/cong-primary-window.c:238
-msgid "Save document as..."
-msgstr "Сохранить документ как..."
-
-#: src/cong-primary-window.c:301 src/cong-primary-window.c:389
-#: src/cong-primary-window.c:396
-msgid "The selected menu item has not yet been implemented."
-msgstr "Выбранный пункт меню ещё не работает."
-
-#. FIXME: this option should be disabled if there are no importers installed
-#: src/cong-primary-window.c:421
-msgid "Import file..."
-msgstr "Импортировать файл..."
-
-#. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-primary-window.c:451
-msgid "Could not import the file."
-msgstr "Не удалось импортировать файл."
-
-#: src/cong-primary-window.c:452
-#, c-format
-msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-msgstr "Дополнения редактора Conglomerate не могут загружать файлы типа \"%s\""
-
-#: src/cong-primary-window.c:453
-msgid "FIXME"
-msgstr "ДОДЕЛАТЬ"
-
-#. There's more than one valid importer...
-#: src/cong-primary-window.c:469
-msgid ""
-"More than one importer can handle that file type; the selection dialog has "
-"yet to be implemented.  You will have to use the first one that the plugin "
-"manager found."
-msgstr ""
-"Несколько дополнений могут обрабатывать файлы этого типа, а диалог выбора "
-"ещё не работает. Будет использовано первое из дополнений, что Диспетчер "
-"дополнений найдёт."
-
-#: src/cong-primary-window.c:522
-#, c-format
-msgid "Export \"%s\""
-msgstr "Экспортировать \"%s\""
-
-#: src/cong-primary-window.c:524
-msgid "Export"
-msgstr "Экспортировать"
-
-#: src/cong-primary-window.c:537 src/cong-primary-window.c:623
-msgid "General"
-msgstr "Общие"
-
-#: src/cong-primary-window.c:547
-msgid "File:"
-msgstr "Файл:"
-
-#: src/cong-primary-window.c:548
-msgid "Exporter:"
-msgstr "Дополнение экспорта:"
-
-#: src/cong-primary-window.c:550
-msgid "Export Options"
-msgstr "Опции экспорта"
-
-#: src/cong-primary-window.c:560 src/cong-primary-window.c:629
-#: src/cong-primary-window.c:633
-msgid "Name"
-msgstr "Имя"
-
-#: src/cong-primary-window.c:561 src/cong-primary-window.c:634
-msgid "Description"
-msgstr "Описание"
-
-#: src/cong-primary-window.c:613
-msgid "Properties"
-msgstr "Изменить свойства"
-
-#: src/cong-primary-window.c:624
-msgid "Type"
-msgstr "Тип"
-
-#: src/cong-primary-window.c:630
-msgid "Location"
-msgstr "Местоположение"
-
-#: src/cong-primary-window.c:631
-msgid "Modified"
-msgstr "Изменён"
-
-#: src/cong-primary-window.c:733
-msgid "translator_credits"
-msgstr "Дмитрий Мастрюков <dmitry@taurussoft.org>"
-
-#: src/cong-primary-window.c:735 src/cong-primary-window.c:840
-#: src/cong-primary-window.c:842 src/cong-primary-window.c:1047
-#: src/cong-primary-window.c:1049 src/cong-primary-window.c:1055
+#: data/conge.desktop.in.h:1 src/cong-primary-window.c:350
+#: src/cong-primary-window.c:352 src/cong-primary-window.c:578
+#: src/cong-primary-window.c:580 src/cong-primary-window.c:586
 msgid "Conglomerate XML Editor"
 msgstr "Редактор Conglomerate файлов в формате XML"
 
-#: src/cong-primary-window.c:737
-msgid ""
-"(C) 1999 Hans Petter Jansson\n"
-"(C) 2002 David Malcolm"
+#: data/conge.desktop.in.h:2
+msgid "Edit xml files"
+msgstr "Редактировать файлы в формате XML"
+
+#: src/cong-primary-window.c:226 src/cong-primary-window.c:227
+msgid "Open document"
+msgstr "Открыть документ"
+
+#: src/cong-primary-window.c:235 src/cong-primary-window.c:236
+msgid "Save document as..."
+msgstr "Сохранить документ как..."
+
+#: src/cong-primary-window.c:243 src/cong-primary-window.c:244
+msgid "Cut"
 msgstr ""
-"(C) 1999 Hans Petter Jansson\n"
-"(C) 2002 David Malcolm"
 
-#: src/cong-primary-window.c:738
-msgid "Conglomerate will be a user-friendly XML editor for GNOME"
+#: src/cong-primary-window.c:250 src/cong-primary-window.c:251
+msgid "Copy"
 msgstr ""
-"Программа Conglomerate будет дружественным редактором файлов в формате XML "
-"для среды GNOME"
 
-#: src/cong-primary-window.c:754
-msgid "/_File"
-msgstr "/_Файл"
+#: src/cong-primary-window.c:257 src/cong-primary-window.c:258
+msgid "Paste"
+msgstr ""
 
-#: src/cong-primary-window.c:755
-msgid "/File/_New..."
-msgstr "/Файл/_Создать..."
+#: src/cong-primary-window.c:428
+msgid "Overview"
+msgstr ""
 
-#: src/cong-primary-window.c:756
-msgid "/File/_Open..."
-msgstr "/Файл/_Открыть..."
+#: src/cong-primary-window.c:438
+msgid "Bookmarks"
+msgstr ""
 
-#: src/cong-primary-window.c:757 src/cong-primary-window.c:762
-#: src/cong-primary-window.c:765 src/cong-primary-window.c:767
-msgid "/File/"
-msgstr "/Файл/"
+#: src/cong-primary-window.c:445
+msgid "Raw XML"
+msgstr ""
 
-#: src/cong-primary-window.c:758
-msgid "/File/_Save"
-msgstr "/Файл/Со_хранить"
-
-#: src/cong-primary-window.c:759
-msgid "/File/Save _As..."
-msgstr "/Файл/Сохранить _как..."
-
-#: src/cong-primary-window.c:760
-msgid "/File/Sa_ve a Copy..."
-msgstr "/Файл/Сохранить копи_ю..."
-
-#: src/cong-primary-window.c:761
-msgid "/File/_Revert"
-msgstr "/Файл/Восста_новить"
-
-#: src/cong-primary-window.c:763
-msgid "/File/_Import..."
-msgstr "/Файл/_Импортировать..."
-
-#: src/cong-primary-window.c:764
-msgid "/File/_Export..."
-msgstr "/Файл/_Экспортировать..."
-
-#: src/cong-primary-window.c:766
-msgid "/File/Proper_ties"
-msgstr "/Файл/Из_менить свойства"
-
-#: src/cong-primary-window.c:768
-msgid "/File/_Close"
-msgstr "/Файл/_Закрыть"
-
-#: src/cong-primary-window.c:769
-msgid "/File/_Quit"
-msgstr "/Файл/В_ыйти"
-
-#: src/cong-primary-window.c:771
-msgid "/_Edit"
-msgstr "/_Правка"
-
-#: src/cong-primary-window.c:772
-msgid "/Edit/_Undo"
-msgstr "/Правка/_Откатить"
-
-#: src/cong-primary-window.c:773
-msgid "/Edit/_Redo"
-msgstr "/Правка/Возв_ратить"
-
-#: src/cong-primary-window.c:774 src/cong-primary-window.c:778
-#: src/cong-primary-window.c:783
-msgid "/Edit/"
-msgstr "/Правка/"
-
-#: src/cong-primary-window.c:775
-msgid "/Edit/Cu_t"
-msgstr "/Правка/_Вырезать"
-
-#: src/cong-primary-window.c:776
-msgid "/Edit/_Copy"
-msgstr "/Правка/С_копировать"
-
-#: src/cong-primary-window.c:777
-msgid "/Edit/_Paste"
-msgstr "/Правка/Вст_авть"
-
-#: src/cong-primary-window.c:779
-msgid "/Edit/_Find..."
-msgstr "/Правка/_Найти..."
-
-#: src/cong-primary-window.c:780
-msgid "/Edit/Find Ne_xt"
-msgstr "/Правка/Найти с_ледующее"
-
-#: src/cong-primary-window.c:781
-msgid "/Edit/Find Pre_vious"
-msgstr "/Правка/Найти пред_ыдущее"
-
-#: src/cong-primary-window.c:782
-msgid "/Edit/R_eplace..."
-msgstr "/Правка/_Заменить"
-
-#: src/cong-primary-window.c:784
-msgid "/Edit/_Insert..."
-msgstr "/Правка/Вставить _из..."
-
-#: src/cong-primary-window.c:786
-msgid "/Tests"
-msgstr "/Тесты"
-
-#: src/cong-primary-window.c:787
-msgid "/Tests/Open..."
-msgstr "/Тесты/Открыть"
-
-#: src/cong-primary-window.c:788
-msgid "/Tests/Error"
-msgstr "/Тесты/Ошибка"
-
-#: src/cong-primary-window.c:789
-msgid "/Tests/Document Types"
-msgstr "/Тесты/Типы документов"
-
-#: src/cong-primary-window.c:790
-msgid "/Tests/Transform DocBook to HTML"
-msgstr "/Тесты/Трансформировать формат DocBook в формат HTML"
-
-#: src/cong-primary-window.c:791
-msgid "/Tests/Transform DocBook to XHTML"
-msgstr "/Тесты/Трансформировать формат DocBook в формат XHTML"
-
-#: src/cong-primary-window.c:792
-msgid "/Tests/Transform DocBook to HTML Help"
-msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате HTML"
-
-#: src/cong-primary-window.c:793
-msgid "/Tests/Transform DocBook to Java Help"
-msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате Java"
-
-#: src/cong-primary-window.c:794
-msgid "/Tests/Transform DocBook to FO"
-msgstr "/Тесты/Трансформировать формат DocBook в формат FO"
-
-#: src/cong-primary-window.c:796
-msgid "/Tests/Preview XSL:FO"
-msgstr "/Тесты/Посмотреть образец XSL:FO"
-
-#: src/cong-primary-window.c:798
-msgid "/Tests/DTD"
-msgstr "/Тесты/DTD"
-
-#: src/cong-primary-window.c:799
-msgid "/Tests/Dialog"
-msgstr "/Тесты/Диалог"
-
-#: src/cong-primary-window.c:800
-msgid "/_Help"
-msgstr "/_Справка"
-
-#: src/cong-primary-window.c:801
-msgid "/Help/_Contents"
-msgstr "/Справка/_Содержание"
-
-#: src/cong-primary-window.c:802
-msgid "/Help/_About"
-msgstr "/Справка/_О программе"
-
-#: src/cong-primary-window.c:974
-msgid "Welcome to the much-too-early Conglomerate editor."
+#: src/cong-primary-window.c:497
+#, fuzzy
+msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Добро пожаловать в версию для разработчиков редактора Conglomerate."
 
-#: src/cong-primary-window.c:1047
+#: src/cong-primary-window.c:578
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (изменён) - %s"
+
+#: src/main.c:242
+#, c-format
+msgid "Conglomerate could not load any xds files from the directory \"%s\""
+msgstr ""
+
+#: src/main.c:244
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr ""
+
+#: src/main.c:246
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it."
+msgstr ""
+
+#: src/main.c:322
+msgid "XML Editor"
+msgstr "Редактор файлов в формате XML"
+
+#~ msgid "Open"
+#~ msgstr "Открыть"
+
+#~ msgid "Save as..."
+#~ msgstr "Сохранить как..."
+
+#~ msgid "The selected menu item has not yet been implemented."
+#~ msgstr "Выбранный пункт меню ещё не работает."
+
+#~ msgid "Import file..."
+#~ msgstr "Импортировать файл..."
+
+#~ msgid "Could not import the file."
+#~ msgstr "Не удалось импортировать файл."
+
+#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+#~ msgstr ""
+#~ "Дополнения редактора Conglomerate не могут загружать файлы типа \"%s\""
+
+#~ msgid "FIXME"
+#~ msgstr "ДОДЕЛАТЬ"
+
+#~ msgid ""
+#~ "More than one importer can handle that file type; the selection dialog "
+#~ "has yet to be implemented.  You will have to use the first one that the "
+#~ "plugin manager found."
+#~ msgstr ""
+#~ "Несколько дополнений могут обрабатывать файлы этого типа, а диалог выбора "
+#~ "ещё не работает. Будет использовано первое из дополнений, что Диспетчер "
+#~ "дополнений найдёт."
+
+#~ msgid "Export \"%s\""
+#~ msgstr "Экспортировать \"%s\""
+
+#~ msgid "Export"
+#~ msgstr "Экспортировать"
+
+#~ msgid "General"
+#~ msgstr "Общие"
+
+#~ msgid "File:"
+#~ msgstr "Файл:"
+
+#~ msgid "Exporter:"
+#~ msgstr "Дополнение экспорта:"
+
+#~ msgid "Export Options"
+#~ msgstr "Опции экспорта"
+
+#~ msgid "Name"
+#~ msgstr "Имя"
+
+#~ msgid "Description"
+#~ msgstr "Описание"
+
+#~ msgid "Properties"
+#~ msgstr "Изменить свойства"
+
+#~ msgid "Type"
+#~ msgstr "Тип"
+
+#~ msgid "Location"
+#~ msgstr "Местоположение"
+
+#~ msgid "Modified"
+#~ msgstr "Изменён"
+
+#~ msgid "translator_credits"
+#~ msgstr "Дмитрий Мастрюков <dmitry@taurussoft.org>"
+
+#~ msgid ""
+#~ "(C) 1999 Hans Petter Jansson\n"
+#~ "(C) 2002 David Malcolm"
+#~ msgstr ""
+#~ "(C) 1999 Hans Petter Jansson\n"
+#~ "(C) 2002 David Malcolm"
+
+#~ msgid "Conglomerate will be a user-friendly XML editor for GNOME"
+#~ msgstr ""
+#~ "Программа Conglomerate будет дружественным редактором файлов в формате "
+#~ "XML для среды GNOME"
+
+#~ msgid "/_File"
+#~ msgstr "/_Файл"
+
+#~ msgid "/File/_New..."
+#~ msgstr "/Файл/_Создать..."
+
+#~ msgid "/File/_Open..."
+#~ msgstr "/Файл/_Открыть..."
+
+#~ msgid "/File/"
+#~ msgstr "/Файл/"
+
+#~ msgid "/File/_Save"
+#~ msgstr "/Файл/Со_хранить"
+
+#~ msgid "/File/Save _As..."
+#~ msgstr "/Файл/Сохранить _как..."
+
+#~ msgid "/File/Sa_ve a Copy..."
+#~ msgstr "/Файл/Сохранить копи_ю..."
+
+#~ msgid "/File/_Revert"
+#~ msgstr "/Файл/Восста_новить"
+
+#~ msgid "/File/_Import..."
+#~ msgstr "/Файл/_Импортировать..."
+
+#~ msgid "/File/_Export..."
+#~ msgstr "/Файл/_Экспортировать..."
+
+#~ msgid "/File/Proper_ties"
+#~ msgstr "/Файл/Из_менить свойства"
+
+#~ msgid "/File/_Close"
+#~ msgstr "/Файл/_Закрыть"
+
+#~ msgid "/File/_Quit"
+#~ msgstr "/Файл/В_ыйти"
+
+#~ msgid "/_Edit"
+#~ msgstr "/_Правка"
+
+#~ msgid "/Edit/_Undo"
+#~ msgstr "/Правка/_Откатить"
+
+#~ msgid "/Edit/_Redo"
+#~ msgstr "/Правка/Возв_ратить"
+
+#~ msgid "/Edit/"
+#~ msgstr "/Правка/"
+
+#~ msgid "/Edit/Cu_t"
+#~ msgstr "/Правка/_Вырезать"
+
+#~ msgid "/Edit/_Copy"
+#~ msgstr "/Правка/С_копировать"
+
+#~ msgid "/Edit/_Paste"
+#~ msgstr "/Правка/Вст_авть"
+
+#~ msgid "/Edit/_Find..."
+#~ msgstr "/Правка/_Найти..."
+
+#~ msgid "/Edit/Find Ne_xt"
+#~ msgstr "/Правка/Найти с_ледующее"
+
+#~ msgid "/Edit/Find Pre_vious"
+#~ msgstr "/Правка/Найти пред_ыдущее"
+
+#~ msgid "/Edit/R_eplace..."
+#~ msgstr "/Правка/_Заменить"
+
+#~ msgid "/Edit/_Insert..."
+#~ msgstr "/Правка/Вставить _из..."
+
+#~ msgid "/Tests"
+#~ msgstr "/Тесты"
+
+#~ msgid "/Tests/Open..."
+#~ msgstr "/Тесты/Открыть"
+
+#~ msgid "/Tests/Error"
+#~ msgstr "/Тесты/Ошибка"
+
+#~ msgid "/Tests/Document Types"
+#~ msgstr "/Тесты/Типы документов"
+
+#~ msgid "/Tests/Transform DocBook to HTML"
+#~ msgstr "/Тесты/Трансформировать формат DocBook в формат HTML"
+
+#~ msgid "/Tests/Transform DocBook to XHTML"
+#~ msgstr "/Тесты/Трансформировать формат DocBook в формат XHTML"
+
+#~ msgid "/Tests/Transform DocBook to HTML Help"
+#~ msgstr ""
+#~ "/Тесты/Трансформировать формат DocBook в формат Справка в формате HTML"
+
+#~ msgid "/Tests/Transform DocBook to Java Help"
+#~ msgstr ""
+#~ "/Тесты/Трансформировать формат DocBook в формат Справка в формате Java"
+
+#~ msgid "/Tests/Transform DocBook to FO"
+#~ msgstr "/Тесты/Трансформировать формат DocBook в формат FO"
+
+#~ msgid "/Tests/Preview XSL:FO"
+#~ msgstr "/Тесты/Посмотреть образец XSL:FO"
+
+#~ msgid "/Tests/DTD"
+#~ msgstr "/Тесты/DTD"
+
+#~ msgid "/Tests/Dialog"
+#~ msgstr "/Тесты/Диалог"
+
+#~ msgid "/_Help"
+#~ msgstr "/_Справка"
+
+#~ msgid "/Help/_Contents"
+#~ msgstr "/Справка/_Содержание"
+
+#~ msgid "/Help/_About"
+#~ msgstr "/Справка/_О программе"
 
 #~ msgid "Conglomerate"
 #~ msgstr "Conglomerate"

@@ -1,7 +1,9 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
-  Testbed for working with MVC
+  Testbed for working with MVC.
+
+  Has not yet had strings marked for translation.
  */
 
 #include <gtk/gtk.h>

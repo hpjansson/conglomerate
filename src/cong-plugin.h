@@ -43,7 +43,9 @@ void cong_plugin_manager_for_each_plugin(CongPluginManager *plugin_manager, void
 void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
+#if ENABLE_PRINTING
 void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
+#endif
 void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 
 /* 
@@ -74,6 +76,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 					    CongExporterFpiFilter fpi_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data);
+#if ENABLE_PRINTING
 CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
@@ -81,6 +84,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 					    CongPrintMethodFpiFilter fpi_filter,
 					    CongPrintMethodActionCallback action_callback,
 					    gpointer user_data);
+#endif
 CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
 							     const gchar *name, 
 							     const gchar *description,
@@ -91,7 +95,9 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
+#if ENABLE_PRINTING
 void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
+#endif
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 
 
@@ -130,8 +136,10 @@ void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar
 gchar *cong_exporter_get_preferred_uri(CongExporter *exporter);
 void cong_exporter_set_preferred_ui(CongExporter *exporter, const gchar *uri);
 
+#if ENABLE_PRINTING
 gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi);
 void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window);
+#endif
 
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,

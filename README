@@ -15,20 +15,25 @@ a usable form.
 Compiling
 ---------
 
-Conglomerate is going to be a GNOME 2 application and we use various GNOME 
-components.  Hence you'll need a reasonably up-to-date install of GNOME 2 to
-build it.
+Conglomerate uses various GNOME 2 components (though it should run fine under
+both GNOME and KDE).  Hence you'll need a reasonably up-to-date install of GNOME 2
+(and the developer packages) to build it.
 
   ./configure
   make
+  (switch to superuser if necessary)
+  make install
 
 If you're compiling from CVS, type
 
   ./autogen.sh   	# which does generate and run ./configure
   make
+  (switch to superuser if necessary)
+  make install
 
 and see what happens. This should produce an executable called "conge" in
-the src/ current directory.
+the src/ current directory.  Typing "make install" installs the program and
+its data files into a hopefully sensible location.
 
 On some systems, example given Red Hat 8, you have to type
 
@@ -49,9 +54,7 @@ to build a Windows version for a long time; please contact the development list
 Running
 -------
 
-Currently you need to run conge from "src" directory for it to work.
-
-(Dave Malcolm 20 October 2002:  the text in this section is out of date; need to rewrite!!!)
+Currently you need to install conge for it to work (so that it can find its data files)
 
 Conge needs two files to be able to run and display something. The first is
 an XML file (if it uses a DTD, this should be locatable as referred from the
@@ -60,17 +63,13 @@ The second is a "displayspec", illustrated by "readme.xds" in the examples
 directory. This specifies how the tags are rendered.
 
 There are two ways to load a document into Conge. One is by specifying the
-XML and displayspec files on the commandline, like this:
+XML on the commandline, like this:
 
-conge readme.xml readme.ds
+conge file:///home/david/readme.xml
+(currently you have to use a GnomeVFS URI)
 
 The other is by using the GUI open dialogs. The readme example used above is
 located in the examples directory, from the package root.
-
-NOTE: It looks like the file requester is not working properly on Windows,
-and I don't have the time to figure out why. The command line arguments
-should work fine, though.
-
 
 Using
 -----
@@ -100,9 +99,7 @@ http://www.conglomerate.org/
 
 The latest updates are available through anonymous CVS:
 
-cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
-[blank password, just hit enter]
-cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs checkout conge
+cvs -z3 -d :ext:anonymous@cvs.copyleft.no:/cvs checkout conge
 
 CVS is also web-browsable:
 

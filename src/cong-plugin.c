@@ -46,7 +46,9 @@ struct CongPlugin
 	GList *list_of_document_factory; /* ptrs of type CongDocumentFactory */
 	GList *list_of_importer; /* ptrs of type CongImporter */
 	GList *list_of_exporter; /* ptrs of type CongExporter */
+#if ENABLE_PRINTING
 	GList *list_of_print_method; /* ptrs of type CongPrintMethod */
+#endif
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
 };
@@ -86,6 +88,7 @@ struct CongExporter
 	gpointer user_data;
 };
 
+#if ENABLE_PRINTING
 struct CongPrintMethod
 {
 	CongFunctionality functionality; /* base class */
@@ -94,6 +97,7 @@ struct CongPrintMethod
 	CongPrintMethodActionCallback action_callback;
 	gpointer user_data;
 };
+#endif
 
 struct CongThumbnailer
 {
@@ -188,6 +192,8 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 	}
 }
 
+
+#if ENABLE_PRINTING
 void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
@@ -198,6 +204,7 @@ void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager
 		cong_plugin_for_each_print_method(iter->data, callback, user_data);
 	}
 }
+#endif
 
 /* Implementation of CongPlugin: */
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
@@ -299,6 +306,7 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	return exporter;
 }
 
+#if ENABLE_PRINTING
 CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
@@ -331,6 +339,7 @@ CongPrintMethod *cong_plugin_register_print_method(CongPlugin *plugin,
 
 	return print_method;
 }
+#endif
 
 CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
 							     const gchar *name, 
@@ -386,6 +395,7 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 	g_list_foreach(plugin->list_of_exporter, (GFunc)callback, user_data);
 }
 
+#if ENABLE_PRINTING
 void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
@@ -393,6 +403,7 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 
 	g_list_foreach(plugin->list_of_print_method, (GFunc)callback, user_data);
 }
+#endif
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
@@ -572,6 +583,7 @@ void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
 	g_free(gconf_key);
 }
 
+#if ENABLE_PRINTING
 /* Implementation of CongPrintMethod: */
 gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gchar *fpi)
 {
@@ -593,6 +605,7 @@ void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, 
 
 	return print_method->action_callback(print_method, doc, gpc, print_method->user_data, toplevel_window);
 }
+#endif
 
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 						GtkWindow *parent_window)
@@ -610,9 +623,9 @@ void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 		gchar *why_failed;
 		gchar *suggestions;
 		
-		what_failed = g_strdup_printf("Conglomerate could not create the file");
-		why_failed = g_strdup_printf("Conglomerate could not find display information for the new file");
-		suggestions = g_strdup_printf("There may a problem with your installation, or a bug in the importer");
+		what_failed = g_strdup_printf(_("Conglomerate could not create the file"));
+		why_failed = g_strdup_printf(_("Conglomerate could not find display information for the new file"));
+		suggestions = g_strdup_printf(_("There may a problem with your installation, or a bug in the importer"));
 		
 		dialog = cong_error_dialog_new(parent_window,
 					       what_failed,
@@ -654,9 +667,9 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 		gchar *why_failed;
 		gchar *suggestions;
 		
-		what_failed = g_strdup_printf("Conglomerate could not import the file");
-		why_failed = g_strdup_printf("Conglomerate could not find display information for the new file");
-		suggestions = g_strdup_printf("There may a problem with your installation, or a bug in the importer");
+		what_failed = g_strdup_printf(_("Conglomerate could not import the file"));
+		why_failed = g_strdup_printf(_("Conglomerate could not find display information for the new file"));
+		suggestions = g_strdup_printf(_("There may a problem with your installation, or a bug in the importer"));
 		
 		dialog = cong_error_dialog_new(parent_window,
 					       what_failed,
@@ -697,10 +710,10 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 	xsl = xsltParseStylesheetFile(stylesheet_filename);
 
 	if (NULL==xsl) {
-		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",stylesheet_filename);
+		gchar *why_failed = g_strdup_printf(_("There was a problem reading the stylesheet file \"%s\""),stylesheet_filename);
 
 		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-							  "Conglomerate could not transform the document",
+							  _("Conglomerate could not transform the document"),
 							  why_failed,
 							  "FIXME");
 	
@@ -721,10 +734,10 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 	xmlFreeDoc(input_clone);
 
 	if (result->children==NULL) {
-		gchar *why_failed = g_strdup_printf("There was a problem applying the stylesheet file");
+		gchar *why_failed = g_strdup_printf(_("There was a problem applying the stylesheet file"));
 
 		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
-							  "Conglomerate could not transform the document",
+							  _("Conglomerate could not transform the document"),
 							  why_failed,
 							  "FIXME");
 	
@@ -845,7 +858,7 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 
 	/* Handle the "plugin not found" case: */
 	{
-		message = g_strdup_printf("Unrecognised plugin (id=\"%s\")", cong_dispspec_element_get_plugin_id(element));
+		message = g_strdup_printf(_("Unrecognised plugin (id=\"%s\")"), cong_dispspec_element_get_plugin_id(element));
 		element_editor = cong_dummy_element_editor_new(editor_widget, node, message);
 
 		g_free(message);
