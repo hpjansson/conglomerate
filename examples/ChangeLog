@@ -1,3 +1,9 @@
+2003-09-09  David Malcolm
+
+	* Makefile.am, xhtml1-strict.xds
+
+	Added new dispspec for strict XHTML
+	
 2003-09-08  David Malcolm
 
 	* cnxml.xds, dispspec.xds, docbook.xds, kernel-traffic-newsletter.xds, readme.xds, relax-ng.xds, website-layout.xds, website-webpage.xds, xsl.xds
