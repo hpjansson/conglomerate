@@ -50,6 +50,8 @@ struct CongEditorAreaFlowHolderInlinesDetails
 
 	/* We keep a list of all the editor nodes that are "directly" in this inline; we keep it in order corresponding to the document nodes: */
 	GList *list_of_editor_nodes;
+
+	gulong signal_handler_id_pending_reflow;
 };
 
 /* Method implementation prototypes: */
@@ -73,10 +75,18 @@ static void
 remove_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		       CongEditorNode *editor_node);
 
+static void
+on_end_edit (CongDocument *doc,
+	     CongEditorAreaFlowHolderInlines *area_flow_holder_inlines);
+
 /* Internal utilties: */
 static void
 add_line_fragments (CongEditorAreaFlowHolderInlines *inlines,
 		    CongEditorLineFragments *line_fragments);
+
+static void
+do_line_regeneration (CongEditorAreaFlowHolderInlines *inlines);
+
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaFlowHolderInlines, 
@@ -199,79 +209,12 @@ void
 cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
 #if 1
-	CongEditorNode* editor_node_iter;
-	CongEditorNode* editor_node_final;
 	
 #if DEBUG_LINE_FLOWS
 	g_message ("cong_editor_area_flow_holder_inlines_reflow_required");
 #endif
 
 	g_return_if_fail (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area_flow_holder_inlines));
-
-	/* Destroy all child areas (the lines); this ought to destroy all of their children */
-	cong_editor_area_flow_holder_inlines_destroy_lines (area_flow_holder_inlines);
-
-	/* Iterate through the nodes of this inline, pouring text: */
-	{
-		editor_node_iter = cong_editor_area_flow_holder_inlines_get_first_node (area_flow_holder_inlines);
-		editor_node_final = cong_editor_area_flow_holder_inlines_get_final_node (area_flow_holder_inlines);
-		
-		while (editor_node_iter) {
-			CongEditorLineFragments *line_fragments;
-#if DEBUG_LINE_FLOWS
-			g_message("generate_line_areas for %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_node_iter)));
-#endif
-
-			g_assert(CONG_FLOW_TYPE_INLINE == cong_editor_node_get_flow_type(editor_node_iter));
-
-			line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
-											 cong_editor_area_flow_holder_inlines_get_line_width (area_flow_holder_inlines),
-											 cong_editor_area_flow_holder_inlines_get_current_indent (area_flow_holder_inlines));
-
-			/* Add the line fragments here: */
-			add_line_fragments (area_flow_holder_inlines,
-					    line_fragments);
-			
-			g_object_unref (G_OBJECT(line_fragments));
-			
-			if (editor_node_iter == editor_node_final) {
-				break;
-			} else {
-				editor_node_iter = cong_editor_node_get_next(editor_node_iter);
-			}			
-		}
-	}
-#else
-	/* RANDOM THOUGHTS FOLLOW: */
-	/* OK - we can figure out which nodes we contain; scan backwards to first node... 
-	   (should have an API function for this)
-	 */
-	/* Add all areas for nodes again: */
-	/* Iterate through all the nodes... we know the width of the area, we don't yet know what its height ought to be... */
-	/* As you reach each node, you know how far across the current line it is, and hence how much to indent the first line.
-	   Text nodes can be easily added.  But what about span tags?  Need to pass some sort of context to the span tag, so that
-	   they can add their areas?  But what if the span tag hasnt had its areas created yet?
-	   Perhaps a span tag should wait until its children create their areas, and then "annotate" them?  Or provide some kind of nested
-	   policy for creating child areas...
-	   
-	   Perhaps the create_areas/remove_areas hooks should be replaced with more generalised on_node_added/on_node_removed hooks???
-	*/
-	
-	/* I think we need a "recursive_pour_lines" routine for editor_nodes, which adds area into the lines of a flow_holder_inline...
-	   Though we have to deal with the case where the editor_nodes havent yet been created for the doc_nodes (esp. for the children
-	   of a node).
-	   We probably need some sort of caching, so that the inlines only get generated once everything has stabilised (because it's so
-	   expensive to deal with child changes)...
-	*/
-	
-	/*
-	  But which should do it?  This is an area, not a node.  Perhaps we should have a signal "reflow_required" which the editor_node listens to, 
-	  and regenerates the children accordingly?  Hopefully this means we can amortise changes somehow...
-	*/
-	
-	/* standard handler might be for the block holder, because it knows exactly which nodes are "in" the inline...*/
-	/* it will empty the existing lines, then iterate through the top-level nodes "in" the inline, recursively asking them to add stuff to the lines.
-	   Could have an optimisation in which adding stuff at the end of the inlines doesn't require a reflow, although the extent to which this gets used in practice might be negligible.*/
 
 	/*
 	  Amortisation strategy: separate the reflow_required from the do_the_reflow routine.
@@ -281,6 +224,20 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
 	  This ought to be easy, efficient, and stop almost all redundant caclulations.
 	 */
 	
+	CongDocument *doc = cong_editor_area_get_document (CONG_EDITOR_AREA (area_flow_holder_inlines));
+	g_assert (doc);
+
+	if (cong_document_is_within_edit (doc)) {
+		if (0==PRIVATE (area_flow_holder_inlines)->signal_handler_id_pending_reflow) {
+			PRIVATE (area_flow_holder_inlines)->signal_handler_id_pending_reflow = g_signal_connect (G_OBJECT (doc),
+														 "end_edit",
+														 G_CALLBACK(on_end_edit),
+														 area_flow_holder_inlines);
+		} /* otherwise you've already got a pending reflow, and we've optimised away some work */
+	} else {
+		do_line_regeneration (area_flow_holder_inlines);
+	}
+#else
 	/* Test: add three lines: */
 	{
 		int i;
@@ -413,20 +370,25 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	CongEditorAreaFlowHolderInlines *area_flow_holder_inlines = CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area_flow_holder);
 #if 1
 	CongEditorNode *editor_node_next = cong_editor_node_get_next (editor_node);
-	
-	/* We keep the list of editor nodes in the "document order": */
-	GList *iter = g_list_find (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes,
-				   editor_node_next);
-	if (iter) {
-		PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes = g_list_insert_before (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes,
-												iter,
-												editor_node);
+
+	if (editor_node_next) {
+		/* We keep the list of editor nodes in the "document order": */
+		GList *iter = g_list_find (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes,
+					   editor_node_next);
+		if (iter) {
+			PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes = g_list_insert_before (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes,
+													iter,
+													editor_node);
+		} else {
+			/* Couldn't find the node after this one (if any); insert at end of list (perhaps the next editor node is a structural node): */
+			PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes = g_list_append (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes, 
+												 editor_node);
+		}
 	} else {
-		/* Couldn't find the node after this one (if any); insert at end of list: */
 		PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes = g_list_append (PRIVATE(area_flow_holder_inlines)->list_of_editor_nodes, 
 											 editor_node);
 	}
-
+		
 	g_signal_connect (G_OBJECT(editor_node),
 			  "line_regeneration_required",
 			  G_CALLBACK(on_line_regeneration_required),
@@ -507,6 +469,22 @@ remove_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 #endif
 }
 
+static void
+on_end_edit (CongDocument *doc,
+	     CongEditorAreaFlowHolderInlines *inlines)
+{
+	g_assert (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(inlines));
+
+	/* Disconnect from signal: */
+	g_signal_handler_disconnect (doc,
+				     PRIVATE(inlines)->signal_handler_id_pending_reflow);
+
+	PRIVATE(inlines)->signal_handler_id_pending_reflow = 0;
+
+	/* Regenerate the lines: */
+	do_line_regeneration (inlines);
+}
+
 /* Internal utilties: */
 static void
 add_line_fragments (CongEditorAreaFlowHolderInlines *inlines,
@@ -552,4 +530,80 @@ add_line_fragments (CongEditorAreaFlowHolderInlines *inlines,
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(line),
 						      area_fragment);
 	}
+}
+
+static void
+do_line_regeneration (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
+{
+	CongEditorNode* editor_node_iter;
+	CongEditorNode* editor_node_final;
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area_flow_holder_inlines));
+
+	/* Destroy all child areas (the lines); this ought to destroy all of their children */
+	cong_editor_area_flow_holder_inlines_destroy_lines (area_flow_holder_inlines);
+
+	/* Iterate through the nodes of this inline, pouring text: */
+	{
+		editor_node_iter = cong_editor_area_flow_holder_inlines_get_first_node (area_flow_holder_inlines);
+		editor_node_final = cong_editor_area_flow_holder_inlines_get_final_node (area_flow_holder_inlines);
+		
+		while (editor_node_iter) {
+			CongEditorLineFragments *line_fragments;
+#if DEBUG_LINE_FLOWS
+			g_message("generate_line_areas for %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_node_iter)));
+#endif
+
+			g_assert(CONG_FLOW_TYPE_INLINE == cong_editor_node_get_flow_type(editor_node_iter));
+
+			line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
+											 cong_editor_area_flow_holder_inlines_get_line_width (area_flow_holder_inlines),
+											 cong_editor_area_flow_holder_inlines_get_current_indent (area_flow_holder_inlines));
+
+			/* Add the line fragments here: */
+			add_line_fragments (area_flow_holder_inlines,
+					    line_fragments);
+			
+			g_object_unref (G_OBJECT(line_fragments));
+			
+			if (editor_node_iter == editor_node_final) {
+				break;
+			} else {
+				editor_node_iter = cong_editor_node_get_next(editor_node_iter);
+			}			
+		}
+	}
+
+
+	/* RANDOM THOUGHTS FOLLOW: */
+	/* OK - we can figure out which nodes we contain; scan backwards to first node... 
+	   (should have an API function for this)
+	 */
+	/* Add all areas for nodes again: */
+	/* Iterate through all the nodes... we know the width of the area, we don't yet know what its height ought to be... */
+	/* As you reach each node, you know how far across the current line it is, and hence how much to indent the first line.
+	   Text nodes can be easily added.  But what about span tags?  Need to pass some sort of context to the span tag, so that
+	   they can add their areas?  But what if the span tag hasnt had its areas created yet?
+	   Perhaps a span tag should wait until its children create their areas, and then "annotate" them?  Or provide some kind of nested
+	   policy for creating child areas...
+	   
+	   Perhaps the create_areas/remove_areas hooks should be replaced with more generalised on_node_added/on_node_removed hooks???
+	*/
+	
+	/* I think we need a "recursive_pour_lines" routine for editor_nodes, which adds area into the lines of a flow_holder_inline...
+	   Though we have to deal with the case where the editor_nodes havent yet been created for the doc_nodes (esp. for the children
+	   of a node).
+	   We probably need some sort of caching, so that the inlines only get generated once everything has stabilised (because it's so
+	   expensive to deal with child changes)...
+	*/
+	
+	/*
+	  But which should do it?  This is an area, not a node.  Perhaps we should have a signal "reflow_required" which the editor_node listens to, 
+	  and regenerates the children accordingly?  Hopefully this means we can amortise changes somehow...
+	*/
+	
+	/* standard handler might be for the block holder, because it knows exactly which nodes are "in" the inline...*/
+	/* it will empty the existing lines, then iterate through the top-level nodes "in" the inline, recursively asking them to add stuff to the lines.
+	   Could have an optimisation in which adding stuff at the end of the inlines doesn't require a reflow, although the extent to which this gets used in practice might be negligible.*/
+
 }
