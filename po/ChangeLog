@@ -1,3 +1,7 @@
+2003-09-23  Duarte Loreto <happyguy_pt@hotmail.com>
+
+	* pt.po: Added Portuguese translation.
+
 2003-09-22  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* POTFILES.in:  Removed old files that should no longer be part of Conglomerate
