@@ -63,8 +63,6 @@ CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWi
 
 void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 {
-	char *p;
-	FILE *xml_f;
 	CongDispspec *ds;
 	CongDocument *cong_doc;
 	xmlDocPtr doc = NULL;

@@ -25,6 +25,7 @@
 
 #include "global.h"
 #include "cong-tree-view.h"
+#include "cong-document.h"
 
 #define PRIVATE(tree_view) ((tree_view)->private)
 

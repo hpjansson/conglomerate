@@ -144,7 +144,6 @@ static void setup_description(CongExportDialogDetails *dialog_details)
 {
 	CongExporter* exporter = get_selected_exporter(dialog_details);
 	const gchar *desc;
-	gchar *text;
 
 	g_assert(dialog_details);
 	g_assert(exporter);

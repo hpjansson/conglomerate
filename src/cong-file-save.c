@@ -28,6 +28,7 @@
 #include "global.h"
 
 #include "cong-document.h"
+#include "cong-primary-window.h"
 
 gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 {

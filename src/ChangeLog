@@ -1,3 +1,13 @@
+2003-08-28  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-node.h, cong-util.c, cong-util.h, tree.c, xmldata.c
+
+	Initial cursor placement, and placement of cursor when tags are added; some warnings fixed
+
+	* cong-editor-widget3.c, cong-file-export.c, cong-file-open.c, cong-file-save.c, cong-tree-view.c
+
+	Fixed some warnings
+	
 2003-08-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-debug-log-view.c, cong-editor-area-bin.c, cong-editor-area.c, cong-editor-child-policy.c, cong-editor-widget3.c, cong-file-new.c, plugin-lists-node-element-listitem.c, popup.c, xmldata.c 

@@ -31,6 +31,7 @@
 #include <gtk/gtkdrawingarea.h>
 
 #include "cong-editor-area-flow-holder.h"
+#include "cong-editor-area-flow-holder-blocks.h"
 #include "cong-editor-child-policy.h"
 #include "cong-editor-child-policy-flow-holder.h"
 
@@ -461,9 +462,6 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 {
-	CongEditorWidget3 *widget;
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail(doc, NULL);
 
 	return GTK_WIDGET( cong_editor_widget3_construct (g_object_new (CONG_EDITOR_WIDGET3_TYPE, NULL),
@@ -988,7 +986,6 @@ key_press_event_handler (GtkWidget *w,
 	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
 	CongCursor *cursor = cong_document_get_cursor (doc);
 	CongSelection *selection = cong_document_get_selection  (doc);
-	CongElementEditor *element_editor;
 
 	LOG_GTK_WIDGET_SIGNAL1("key_press_event_handler");
 
@@ -1112,7 +1109,6 @@ static void size_request_handler(GtkWidget *widget,
  				 GtkRequisition *requisition,
  				 gpointer user_data)
 {
- 	CongDocument *doc;
  	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
 	GtkRequisition root_req;
  
