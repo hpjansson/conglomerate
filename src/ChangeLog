@@ -1,5 +1,9 @@
 2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node.h, cong-node.c, cong-location.c
+
+	Cleaned up node searching functions into a public API; fixed various comments to keep gtk-doc happy
+
 	* cong-edit-find-and-replace.c
 
 	Initial primitive implementation of Find functionality

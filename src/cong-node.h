@@ -25,6 +25,8 @@
 #ifndef __CONG_NODE_H__
 #define __CONG_NODE_H__
 
+G_BEGIN_DECLS
+
 enum CongNodeType
 {
 	CONG_NODE_TYPE_UNKNOWN,
@@ -100,8 +102,14 @@ CongNodePtr cong_node_parent(CongNodePtr node);
 enum CongNodeType cong_node_type(CongNodePtr node);
 
 /** 
-    Handy method for deciding if you've found a tag with the given name, as opposed to text nodes, comments, tags with other names etc.
-*/
+ * cong_node_is_tag:
+ *
+ * Handy method for deciding if you've found a tag with the given name, as opposed to text nodes, comments, tags with other names etc.
+ *
+ * Misnamed; it should be called cong_node_is_element
+ *
+ * Returns: TRUE if the node is an element with the correct name, FALSE otherwise
+ */
 gboolean 
 cong_node_is_tag (CongNodePtr node, 
 		  const gchar *xmlns, 
@@ -110,8 +118,18 @@ cong_node_is_tag (CongNodePtr node,
 const gchar*
 cong_node_get_xmlns (CongNodePtr node);
 
-/* Method for getting an XPath to the node: */
-gchar *cong_node_get_path(CongNodePtr node);
+/**
+ * cong_node_get_path:
+ *
+ * @node: an XML node
+ *
+ * Method for getting an XPath to the node.
+ *
+ * Returns: the XPath as a freshly allocated string, which must be freed using g_free
+ * 
+ */
+gchar*
+cong_node_get_path (CongNodePtr node);
 
 /* Handy debug methods for writing log info: */
 gchar *cong_node_debug_description(CongNodePtr node);
@@ -222,7 +240,21 @@ void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, cons
 void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name);
 
 /* Utilities: */
-CongNodePtr cong_node_get_child_by_name (CongNodePtr node, const gchar *xmlns, const gchar *tagname);
+
+/**
+ * cong_node_get_child_by_name:
+ * @node:  the parent node
+ * @xmlns: namespace to search for, or NULL
+ * @tagname: the name of the element to search for
+ *
+ * This function searches the children of @node looking for elements of the given name.
+ *
+ * Returns: the first child element matching the given name, or NULL of there are none
+ */
+CongNodePtr 
+cong_node_get_child_by_name (CongNodePtr node, 
+			     const gchar *xmlns, 
+			     const gchar *tagname);
 
 CongNodePtr 
 cong_node_get_first_text_node_descendant (CongNodePtr node);
@@ -293,5 +325,94 @@ cong_node_can_be_copied (CongNodePtr node);
 int 
 cong_node_get_ordering (CongNodePtr n0,
 			CongNodePtr n1);
+
+
+/**
+ * CongNodePredicate:
+ *
+ * A predicate function for searching for nodes in various ways
+ */
+typedef gboolean 
+(*CongNodePredicate) (CongNodePtr node,
+		      gpointer user_data);
+		      
+
+/**
+ * cong_node_calc_first_node_in_subtree_satisfying:
+ *
+ * @node: the top of the subtree
+ * @predicate: the #CongNodePredicate to test nodes for
+ * @user_data: user-supplied data passed to the predicate
+ *
+ * Finds the first node in a depth-first traversal of the subtree below this node
+ * that satisfies the predicate.
+ *
+ * Note that @node is the initial node of the tree (and hence is tested first)
+ *
+ * Returns: the appropriate node satisfying @predicate, or NULL if there are none
+ *
+ */
+CongNodePtr
+cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
+						 CongNodePredicate predicate,
+						 gpointer user_data);
+
+/**
+ * cong_node_calc_final_node_in_subtree_satisfying:
+ *
+ * @node: the top of the subtree
+ * @predicate: the #CongNodePredicate to test nodes for
+ * @user_data: user-supplied data passed to the predicate
+ *
+ * Finds the final node in a depth-first traversal of the subtree below this node
+ * that satisfies the predicate.
+ *
+ * Note that @node is the initial node of the tree (and hence is tested last)
+ *
+ * Returns: the appropriate node satisfying @predicate, or NULL if there are none
+ *
+ */
+CongNodePtr
+cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node, 
+						 CongNodePredicate predicate,
+						 gpointer user_data);
+
+/**
+ * cong_node_calc_prev_node_satisfying:
+ *
+ * @node: the start of the search
+ * @predicate: the #CongNodePredicate to test nodes for
+ * @user_data: user-supplied data passed to the predicate
+ *
+ * Finds the first preceding node relative to the input that satisfies the predicate,
+ * in an imagined depth-first traversal of the document.  Includes ancestors.
+ *
+ * Returns: the appropriate node satisfying @predicate, or NULL if there are none
+ *
+ */
+CongNodePtr
+cong_node_calc_prev_node_satisfying (CongNodePtr node, 
+				     CongNodePredicate predicate,
+				     gpointer user_data);
+
+/**
+ * cong_node_calc_next_node_satisfying:
+ *
+ * @node: the start of the search
+ * @predicate: the #CongNodePredicate to test nodes for
+ * @user_data: user-supplied data passed to the predicate
+ *
+ * Finds the first following node relative to the input that satisfies the predicate,
+ * in an imagined depth-first traversal of the document.   Includes ancestors.
+ *
+ * Returns: the appropriate node satisfying @predicate, or NULL if there are none
+ *
+ */
+CongNodePtr
+cong_node_calc_next_node_satisfying (CongNodePtr node,
+				     CongNodePredicate predicate,
+				     gpointer user_data);
+
+G_END_DECLS
 
 #endif

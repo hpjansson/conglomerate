@@ -431,143 +431,12 @@ cong_location_copy(CongLocation *dst, const CongLocation *src)
 	*dst = *src;
 }
 
-typedef gboolean (*CongNodePredicate) (CongDispspec *dispspec,
-				       CongNodePtr node);
-
-/* Search for prev node, assuming a depth-first traversal: */
-static CongNodePtr
-calc_final_node_in_subtree_satisfying (CongDispspec *dispspec,
-				       CongNodePtr node, 
-				       CongNodePredicate predicate)
-{
-	CongNodePtr iter;
-
-	/* "node" is treated as being in its own subtree */
-
-	for (iter = node->last; iter; iter=iter->prev) {
-		CongNodePtr final = calc_final_node_in_subtree_satisfying (dispspec,
-									   iter,
-									   predicate);
-		
-		if (final) {
-			return final;
-		}		
-	}
-
-	/* Not found in any children of this node, try this node: */
-	if (predicate (dispspec, node)) {
-		return node;
-	} else {
-		return NULL;
-	}
-}
-
-static CongNodePtr
-calc_first_node_in_subtree_satisfying (CongDispspec *dispspec,
-				       CongNodePtr node,
-				       CongNodePredicate predicate)
-{
-	CongNodePtr iter;
-
-	/* If the current node matches the predicates, return it. */
-	if (predicate (dispspec, node)) {
-		return node;
-	}
-
-	/* Otherwise run through its children, and recursively find the first
-	 * satisfying node. */
-	for (iter = node->children; iter; iter = iter->next) {
-		CongNodePtr first = calc_first_node_in_subtree_satisfying (dispspec, 
-									   iter, 
-									   predicate);
-
-		if (first) {
-			return first;
-		}
-	}
-
-	return NULL;
-}
-
-static CongNodePtr
-calc_prev_node_satisfying (CongDispspec *dispspec,
-			   CongNodePtr node, 
-			   CongNodePredicate predicate)
-{
-	g_return_val_if_fail (dispspec, NULL);
-	g_return_val_if_fail (node, NULL);
-	g_return_val_if_fail (predicate, NULL);
-
-	/* Search through subtrees of siblings to the left of this node: */
-	{
-		CongNodePtr iter;
-
-		for (iter = node->prev; iter; iter = iter->prev) {
-			CongNodePtr final = calc_final_node_in_subtree_satisfying (dispspec,
-										   iter, 
-										   predicate);
-			
-			if (final) {
-				return final;
-			}
-		}
-	}
-
-	/* If not found, try parent node, and then recurse: */
-	if (node->parent) {
-		if (predicate(dispspec, node->parent)) {
-			return node->parent;
-		} else {
-			return calc_prev_node_satisfying (dispspec,
-							  node->parent, 
-							  predicate);				
-		} 
-	} else {
-		return NULL;
-	}
-}
-
-static CongNodePtr
-calc_next_node_satisfying (CongDispspec *dispspec,
-			   CongNodePtr node,
-			   CongNodePredicate predicate)
-{
-	CongNodePtr iter;
-	
-	g_return_val_if_fail (dispspec, NULL);
-	g_return_val_if_fail (node, NULL);
-	g_return_val_if_fail (predicate, NULL);
-
-	/* Search through subtrees of siblings to the right of this node */
-	for (iter = node->next; iter; iter = iter->next) {
-		CongNodePtr first = calc_first_node_in_subtree_satisfying (dispspec, 
-					 				   iter, 
-									   predicate);
-
-		if (first) {
-			return first;
-		}
-	}
-
-	/* If not found, try parent node, and then recurse: */
-	if (node->parent) {
-		if (predicate (dispspec, node->parent)) {
-			return node->parent;
-		} else {
-			return calc_next_node_satisfying (dispspec,
-							  node->parent,
-							  predicate);
-		}
-	} else {
-		return NULL;
-	}
-}
-
 static gboolean
-is_valid_cursor_node (CongDispspec *dispspec,
-		      CongNodePtr node) 
+is_valid_cursor_node (CongNodePtr node,
+		      gpointer user_data)
 {
 	g_return_val_if_fail (node, FALSE);
+	g_return_val_if_fail (user_data, FALSE); /* user_data is a CongDispspec */
 
 	return cong_node_is_valid_cursor_location (node);
 }
@@ -587,7 +456,7 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 	g_return_val_if_fail(output_loc, FALSE);
 	
 	n = input_loc->node;
-	if (is_valid_cursor_node(dispspec, input_loc->node) && input_loc->byte_offset) { 
+	if (is_valid_cursor_node(input_loc->node, dispspec) && input_loc->byte_offset) { 
 
 		gchar *this_char;
 		gchar *prev_char;
@@ -606,10 +475,12 @@ gboolean cong_location_calc_prev_char(const CongLocation *input_loc,
 
 		return TRUE;
 	}
-	n = calc_prev_node_satisfying (dispspec, n, is_valid_cursor_node);
+	n = cong_node_calc_prev_node_satisfying (n, 
+						 is_valid_cursor_node, 
+						 dispspec);
 
 	if (n) {
-		g_assert (is_valid_cursor_node (dispspec, n));
+		g_assert (is_valid_cursor_node (n, dispspec));
 
 		/* FIXME: UTF-8 issues here! */
 		cong_location_set_node_and_byte_offset(output_loc,n, strlen(xml_frag_data_nice(n)));
@@ -637,7 +508,7 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 
 	n = input_loc->node;
 
-	if (is_valid_cursor_node (dispspec, n) && cong_location_get_unichar(input_loc)) {
+	if (is_valid_cursor_node (n, dispspec) && cong_location_get_unichar(input_loc)) {
 		gchar *this_char;
 		gchar *next_char;
 
@@ -657,7 +528,9 @@ gboolean cong_location_calc_next_char(const CongLocation *input_loc,
 	
 	/* We're either at the end  of the current node, or the current node is not a valid cursor node,
 	 * so we find the next node satisfying is_valid_cursor_node. */ 
-	n = calc_next_node_satisfying (dispspec, n, is_valid_cursor_node);
+	n = cong_node_calc_next_node_satisfying (n, 
+						 is_valid_cursor_node, 
+						 dispspec);
 
 	if (n) {
 		/* Found next node, so we return a CongLocation pointing to its first character. */
@@ -854,9 +727,9 @@ gboolean cong_location_calc_document_start(const CongLocation *input_loc,
 
 	root_node = get_root_node (input_loc->node);
 	if (root_node) {
-		CongNodePtr node = calc_first_node_in_subtree_satisfying (dispspec,
-									  root_node, 
-									  is_valid_cursor_node);
+		CongNodePtr node = cong_node_calc_first_node_in_subtree_satisfying (root_node, 
+										    is_valid_cursor_node,
+										    dispspec);
 		if (node) {
 			cong_location_set_to_start_of_node (output_loc, node);
 			return TRUE;
@@ -881,9 +754,9 @@ gboolean cong_location_calc_line_start(const CongLocation *input_loc,
 	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
 									 dispspec);
 	if (enclosing_structural_element) {
-		CongNodePtr node = calc_first_node_in_subtree_satisfying (dispspec,
-									  enclosing_structural_element, 
-									  is_valid_cursor_node);
+		CongNodePtr node = cong_node_calc_first_node_in_subtree_satisfying (enclosing_structural_element, 
+										    is_valid_cursor_node,
+										    dispspec);
 		if (node) {
 			cong_location_set_to_start_of_node (output_loc, node);
 			return TRUE;
@@ -905,9 +778,9 @@ gboolean cong_location_calc_document_end(const CongLocation *input_loc,
 
 	root_node = get_root_node (input_loc->node);
 	if (root_node) {
-		CongNodePtr node = calc_final_node_in_subtree_satisfying (dispspec,
-									  root_node, 
-									  is_valid_cursor_node);
+		CongNodePtr node = cong_node_calc_final_node_in_subtree_satisfying (root_node, 									  
+										    is_valid_cursor_node,
+										    dispspec);
 		if (node) {
 			cong_location_set_to_end_of_node (output_loc, node);
 			return TRUE;
@@ -933,9 +806,9 @@ gboolean cong_location_calc_line_end(const CongLocation *input_loc,
 	enclosing_structural_element = get_enclosing_structural_element (input_loc->node,
 									 dispspec);
 	if (enclosing_structural_element) {
-		CongNodePtr node = calc_final_node_in_subtree_satisfying (dispspec,
-									  enclosing_structural_element, 
-									  is_valid_cursor_node);
+		CongNodePtr node = cong_node_calc_final_node_in_subtree_satisfying (enclosing_structural_element, 
+										    is_valid_cursor_node,
+										    dispspec);
 		if (node) {
 			cong_location_set_to_end_of_node (output_loc, node);
 			return TRUE;

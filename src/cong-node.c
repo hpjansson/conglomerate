@@ -1251,11 +1251,18 @@ cong_node_get_ordering (CongNodePtr n0,
 {
 	CongNodePtr deepest_common_parent;
 
+#if 0
+	g_assert (n0);
+	g_assert (n1);
+	g_assert (n0->parent || cong_node_type (n0)==CONG_NODE_TYPE_DOCUMENT);
+	g_assert (n1->parent || cong_node_type (n1)==CONG_NODE_TYPE_DOCUMENT);
+#endif
+
 	g_return_val_if_fail (n0, 0);
 	g_return_val_if_fail (n1, 0);
 	g_return_val_if_fail (n0->doc == n1->doc, 0);
-	g_return_val_if_fail (n0->parent, 0);
-	g_return_val_if_fail (n1->parent, 0);
+	g_return_val_if_fail (n0->parent || cong_node_type (n0)==CONG_NODE_TYPE_DOCUMENT, 0);
+	g_return_val_if_fail (n1->parent || cong_node_type (n1)==CONG_NODE_TYPE_DOCUMENT, 0);
 
 	deepest_common_parent = cong_node_get_deepest_common_parent (n0, n1);
 
@@ -1300,6 +1307,139 @@ cong_node_get_ordering (CongNodePtr n0,
 		}
 	}
 }
+
+CongNodePtr
+cong_node_calc_first_node_in_subtree_satisfying (CongNodePtr node,
+						 CongNodePredicate predicate,
+						 gpointer user_data)
+{
+	CongNodePtr iter;
+
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* If the current node matches the predicates, return it. */
+	if (predicate (node, user_data)) {
+		return node;
+	}
+
+	/* Otherwise run through its children, and recursively find the first
+	 * satisfying node. */
+	for (iter = node->children; iter; iter = iter->next) {
+		CongNodePtr first = cong_node_calc_first_node_in_subtree_satisfying (iter, 
+										     predicate,
+										     user_data);
+
+		if (first) {
+			return first;
+		}
+	}
+
+	return NULL;
+}
+
+CongNodePtr
+cong_node_calc_final_node_in_subtree_satisfying (CongNodePtr node, 
+						 CongNodePredicate predicate,
+						 gpointer user_data)
+{
+	CongNodePtr iter;
+
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* "node" is treated as being in its own subtree */
+
+	for (iter = node->last; iter; iter=iter->prev) {
+		CongNodePtr final = cong_node_calc_final_node_in_subtree_satisfying (iter,
+										     predicate,
+										     user_data);
+		
+		if (final) {
+			return final;
+		}		
+	}
+
+	/* Not found in any children of this node, try this node: */
+	if (predicate (node, user_data)) {
+		return node;
+	} else {
+		return NULL;
+	}
+}
+
+CongNodePtr
+cong_node_calc_prev_node_satisfying (CongNodePtr node, 
+				     CongNodePredicate predicate,
+				     gpointer user_data)
+{
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* Search through subtrees of siblings to the left of this node: */
+	{
+		CongNodePtr iter;
+
+		for (iter = node->prev; iter; iter = iter->prev) {
+			CongNodePtr final = cong_node_calc_final_node_in_subtree_satisfying (iter, 
+											     predicate,
+											     user_data);
+			
+			if (final) {
+				return final;
+			}
+		}
+	}
+
+	/* If not found, try parent node, and then recurse: */
+	if (node->parent) {
+		if (predicate(node->parent, user_data)) {
+			return node->parent;
+		} else {
+			return cong_node_calc_prev_node_satisfying (node->parent, 
+								    predicate,
+								    user_data);
+		} 
+	} else {
+		return NULL;
+	}
+}
+
+CongNodePtr
+cong_node_calc_next_node_satisfying (CongNodePtr node,
+				     CongNodePredicate predicate,
+				     gpointer user_data)
+{
+	CongNodePtr iter;
+	
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (predicate, NULL);
+
+	/* Search through subtrees of siblings to the right of this node */
+	for (iter = node->next; iter; iter = iter->next) {
+		CongNodePtr first = cong_node_calc_first_node_in_subtree_satisfying (iter, 
+										     predicate,
+										     user_data);
+
+		if (first) {
+			return first;
+		}
+	}
+
+	/* If not found, try parent node, and then recurse: */
+	if (node->parent) {
+		if (predicate (node->parent, user_data)) {
+			return node->parent;
+		} else {
+			return cong_node_calc_next_node_satisfying (node->parent,
+								    predicate,
+								    user_data);
+		}
+	} else {
+		return NULL;
+	}
+}
+
 
 /* Internal function definitions: */
 
