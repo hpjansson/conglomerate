@@ -1,5 +1,4 @@
 #include <ttree.h>
-
 #include <stdlib.h>
 
 #include <gdk/gdk.h>
@@ -9,6 +8,11 @@
 
 
 GtkWidget *tchoice_win;
+
+
+
+// DHM: This uses GtkTreeItem; what do we need for Gtk2?
+#if 0
 
 struct tchoice_data
 {
@@ -444,3 +448,4 @@ GtkWidget *gui_tchoice_entry(TTREE *choices)
 	gtk_signal_connect(GTK_OBJECT(w0), "activate", GTK_SIGNAL_FUNC(gui_tchoice_entry_activate), (gpointer) td);
 	return(w0);
 }
+#endif
