@@ -35,6 +35,7 @@ G_BEGIN_DECLS
 */
 CongPluginManager *cong_plugin_manager_new(void);
 CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager, 
+					 const gchar *id,
 					 CongPluginCallbackRegister register_callback,
 					 CongPluginCallbackConfigure configure_callback);
 void cong_plugin_manager_unregister(CongPluginManager *plugin_manager, CongPlugin *plugin);
@@ -55,18 +56,21 @@ void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager,
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
 							   const gchar *name, 
 							   const gchar *description,
+							   const gchar *id,
 							   CongDocumentFactoryPageCreationCallback page_creation_callback,
 							   CongDocumentFactoryActionCallback action_callback,
 							   gpointer user_data);
 CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
+					    const gchar *id,
 					    CongImporterMimeFilter mime_filter,
 					    CongImporterActionCallback action_callback,
 					    gpointer user_data);
 CongExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
+					    const gchar *id,
 					    CongExporterFpiFilter fip_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data);
@@ -84,20 +88,50 @@ void cong_plugin_for_each_printmethod(CongPlugin *plugin, void (*callback)(CongP
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 
 
+gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin);
+
+/**
+   Convert a "local" GConf key for this plugin to a GConf key with a full-path.
+   e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
+   
+   Caller must delete returned string.
+ */
+gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part);
+
+
 const gchar* cong_functionality_get_name(CongFunctionality *functionality);
 const gchar* cong_functionality_get_description(CongFunctionality *functionality);
+
+gchar* cong_functionality_get_gconf_namespace(CongFunctionality* functionality);
+
+/**
+   Convert a "local" GConf key for this plugin to a GConf key with a full-path.
+   e.g. converts "enable-fubar" to "/apps/conglomerate/plugins/docbook/enable-fubar"
+   
+   Caller must delete returned string.
+ */
+gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const gchar *local_part);
 
 void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
 void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
 
 gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
-void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type);
+void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window);
+
+gboolean cong_exporter_supports_fpi(CongExporter *exporter, const gchar *fpi);
+void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window);
+gchar *cong_exporter_get_preferred_uri(CongExporter *exporter);
+void cong_exporter_set_preferred_ui(CongExporter *exporter, const gchar *uri);
 
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 						GtkWindow *parent_window);
 void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 					    GtkWindow *parent_window);
+
+xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
+				const gchar *stylesheet_filename,
+				GtkWindow *toplevel_window);
 
 /* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
    navigation easier */

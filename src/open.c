@@ -555,11 +555,12 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 
 void open_document(GtkWindow *parent_window)
 {
-	const char *doc_name, *ds_name;
+	char *doc_name;
 
 	g_return_if_fail(parent_window);
 	
 	doc_name = cong_get_file_name("Select an XML document",
+				      NULL,
 				      parent_window);
 
 	if (!doc_name) {
@@ -567,6 +568,8 @@ void open_document(GtkWindow *parent_window)
 	}
 
 	open_document_do(doc_name, parent_window);
+
+	g_free(doc_name);
 }
 
 gint toolbar_callback_open(GtkWidget *widget, gpointer data)

@@ -9,8 +9,12 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <gconf/gconf-client.h>
 
 G_BEGIN_DECLS
+
+#define STYLESHEET_PATH "/usr/share/sgml/docbkxsl/"
+#define CONG_GCONF_PATH "/apps/conglomerate/"
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
@@ -672,8 +676,9 @@ gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
 
 
 
-const gchar *cong_get_file_name(const gchar *title, 
-				GtkWindow *parent_window);
+gchar *cong_get_file_name(const gchar *title, 
+			  const gchar *filename,
+			  GtkWindow *parent_window);
 
 char *pick_structural_tag(CongDispspec *ds);
 
@@ -827,9 +832,9 @@ typedef gboolean (*CongPluginCallbackConfigure)(CongPlugin *plugin);  /* exposed
 typedef void (*CongDocumentFactoryPageCreationCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
 typedef void (*CongDocumentFactoryActionCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
 typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
-typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data);
+typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
-typedef void (*CongExporterActionCallback)(CongExporter *exporter, const gchar *uri, gpointer user_data);
+typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
 typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
 
@@ -852,9 +857,7 @@ struct CongGlobals
 
 	GtkWidget *popup;
 
-#if 0
-	PangoContext *pango_context;
-#endif
+	GConfClient* gconf_client;
 };
 
 extern struct CongGlobals the_globals;
@@ -913,6 +916,11 @@ cong_ui_file_import(GtkWindow *toplevel_window);
 void
 cong_ui_file_export(CongDocument *doc,
 		    GtkWindow *toplevel_window);
+
+GnomeVFSResult
+cong_xml_save_to_vfs(xmlDocPtr doc_ptr, 
+		     GnomeVFSURI *file_uri,	
+		     GnomeVFSFileSize *output_file_size);
 
 /* Extensions to libxml: */
 xmlAttrPtr	xmlNewProp_NUMBER	(xmlNodePtr node,

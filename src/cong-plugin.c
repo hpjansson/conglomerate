@@ -28,6 +28,9 @@
 #include "cong-document.h"
 #include "cong-dispspec-registry.h"
 
+#include <libxslt/xsltInternals.h>
+#include <libxslt/transform.h>
+
 /* Private definitions of the types: */
 struct CongPluginManager
 {
@@ -36,8 +39,11 @@ struct CongPluginManager
 
 struct CongPlugin
 {
+#if 0
 	gchar *name;
 	gchar *description;
+#endif
+	gchar *id;
 
 	CongPluginCallbackConfigure configure_callback;
 
@@ -51,8 +57,10 @@ struct CongPlugin
 
 struct CongFunctionality
 {
+	CongPlugin *plugin;
 	gchar *name;
 	gchar *description;
+	gchar *id;
 };
 
 struct CongDocumentFactory
@@ -111,18 +119,21 @@ CongPluginManager *cong_plugin_manager_new(void)
 	return manager;
 }
 
-CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager, 
+CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager,
+					 const gchar *id,
 					 CongPluginCallbackRegister register_callback,
 					 CongPluginCallbackConfigure configure_callback)
 {
 	CongPlugin *plugin;
 
 	g_return_val_if_fail(plugin_manager, NULL);
+	g_return_val_if_fail(id, NULL);
 	g_return_val_if_fail(register_callback, NULL);
 	/* the configure callback is allowed to be NULL */
 
 	plugin = g_new0(CongPlugin,1);
 
+	plugin->id = g_strdup(id);
 	plugin->configure_callback = configure_callback;
 
 	/* Add to list of plugins: */
@@ -178,11 +189,11 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 	}
 }
 
-
 /* Implementation of CongPlugin: */
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
 							   const gchar *name, 
 							   const gchar *description,
+							   const gchar *id,
 							   CongDocumentFactoryPageCreationCallback page_creation_callback,
 							   CongDocumentFactoryActionCallback action_callback,
 							   gpointer user_data)
@@ -192,13 +203,16 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(id, NULL);
 	g_return_val_if_fail(page_creation_callback, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
 	factory = g_new0(CongDocumentFactory,1);
 
+	factory->functionality.plugin = plugin;
 	factory->functionality.name = g_strdup(name);
 	factory->functionality.description = g_strdup(description);
+	factory->functionality.id = g_strdup(id);
 	factory->page_creation_callback = page_creation_callback;
 	factory->action_callback = action_callback;
 	factory->user_data = user_data;
@@ -212,6 +226,7 @@ CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin,
 CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
+					    const gchar *id,
 					    CongImporterMimeFilter mime_filter,
 					    CongImporterActionCallback action_callback,
 					    gpointer user_data)
@@ -221,13 +236,16 @@ CongImporter *cong_plugin_register_importer(CongPlugin *plugin,
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(id, NULL);
 	g_return_val_if_fail(mime_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
         importer = g_new0(CongImporter,1);
 
+	importer->functionality.plugin = plugin;
 	importer->functionality.name = g_strdup(name);
 	importer->functionality.description = g_strdup(description);
+	importer->functionality.id = g_strdup(id);
 	importer->mime_filter = mime_filter;
 	importer->action_callback = action_callback;
 	importer->user_data = user_data;
@@ -241,6 +259,7 @@ CongImporter *cong_plugin_register_importer(CongPlugin *plugin,
 CongExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
 					    const gchar *name, 
 					    const gchar *description,
+					    const gchar *id,
 					    CongExporterFpiFilter fpi_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data)
@@ -250,13 +269,16 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(id, NULL);
 	g_return_val_if_fail(fpi_filter, NULL);
 	g_return_val_if_fail(action_callback, NULL);
 
         exporter = g_new0(CongExporter,1);
 
+	exporter->functionality.plugin = plugin;
 	exporter->functionality.name = g_strdup(name);
 	exporter->functionality.description = g_strdup(description);
+	exporter->functionality.id = g_strdup(id);
 	exporter->fpi_filter = fpi_filter;
 	exporter->action_callback = action_callback;
 	exporter->user_data = user_data;
@@ -283,9 +305,10 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 
         editor_element_factory = g_new0(CongPluginEditorElement,1);
 
+	editor_element_factory->functionality.plugin = plugin;
 	editor_element_factory->functionality.name = g_strdup(name);
 	editor_element_factory->functionality.description = g_strdup(description);
-	editor_element_factory->plugin_id = g_strdup(id);
+	editor_element_factory->functionality.id = g_strdup(id);
 	editor_element_factory->make_element = factory_method;
 	editor_element_factory->user_data = user_data;
 
@@ -320,6 +343,25 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 	g_list_foreach(plugin->list_of_exporter, (GFunc)callback, user_data);
 }
 
+gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
+{
+	g_return_val_if_fail(plugin, NULL);
+
+	g_assert(plugin->id);
+
+	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s"), plugin->id);
+}
+
+gchar* cong_plugin_get_gconf_key(CongPlugin *plugin, const gchar *local_part)
+{
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(local_part, NULL);
+
+	g_assert(plugin->id);
+
+	return g_strdup_printf( (CONG_GCONF_PATH "plugins/%s/%s"), plugin->id, local_part);
+}
+
 /* Implementation of CongFunctionality: */
 const gchar* cong_functionality_get_name(CongFunctionality *functionality)
 {
@@ -335,6 +377,44 @@ const gchar* cong_functionality_get_description(CongFunctionality *functionality
 	return functionality->description;
 }
 
+gchar* cong_functionality_get_gconf_namespace(CongFunctionality* functionality)
+{
+	gchar *plugin_namespace;
+	gchar *result;
+
+	g_return_val_if_fail(functionality, NULL);
+
+	g_assert(functionality->plugin);
+	g_assert(functionality->id);
+
+	plugin_namespace = cong_plugin_get_gconf_namespace(functionality->plugin);
+
+	result = g_strdup_printf("%s/%s", plugin_namespace, functionality->id);
+
+	g_free(plugin_namespace);
+
+	return result;
+}
+
+gchar* cong_functionality_get_gconf_key(CongFunctionality *functionality, const gchar *local_part)
+{
+	gchar *scoped_local_part;
+	gchar *functionality_path;
+
+	g_return_val_if_fail(functionality, NULL);
+	g_return_val_if_fail(local_part, NULL);
+
+	g_assert(functionality->plugin);
+	g_assert(functionality->id);
+
+	scoped_local_part =  g_strdup_printf("%s/%s", functionality->id, local_part);
+
+	functionality_path = cong_plugin_get_gconf_key(functionality->plugin, scoped_local_part);
+
+	g_free(scoped_local_part);
+
+	return functionality_path;
+}
 
 /* Implementation of CongDocumentFactory: */
 void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant)
@@ -373,7 +453,7 @@ gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *m
 
 }
 
-void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type)
+void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(importer);
 	g_return_if_fail(filename);
@@ -381,7 +461,64 @@ void cong_importer_invoke(CongImporter *importer, const gchar *filename, const g
 	
 	g_assert(importer->action_callback);
 
-	return importer->action_callback(importer, filename, mime_type, importer->user_data);
+	return importer->action_callback(importer, filename, mime_type, importer->user_data, toplevel_window);
+}
+
+/* Implementation of CongExporter: */
+gboolean cong_exporter_supports_fpi(CongExporter *exporter, const gchar *fpi)
+{
+	g_return_val_if_fail(exporter, FALSE);
+	g_return_val_if_fail(fpi, FALSE);
+
+	g_assert(exporter->fpi_filter);
+
+	return exporter->fpi_filter(exporter, fpi, exporter->user_data);
+}
+
+void cong_exporter_invoke(CongExporter *exporter, CongDocument *doc, const gchar *uri, GtkWindow *toplevel_window)
+{
+	g_return_if_fail(exporter);
+	g_return_if_fail(doc);
+	g_return_if_fail(uri);
+	
+	g_assert(exporter->action_callback);
+
+	return exporter->action_callback(exporter, doc, uri, exporter->user_data, toplevel_window);
+}
+
+gchar *cong_exporter_get_preferred_uri(CongExporter *exporter)
+{
+	gchar *gconf_key;
+	gchar *preferred_uri;
+
+	g_return_val_if_fail(exporter, NULL);
+
+	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
+	
+	preferred_uri = gconf_client_get_string(the_globals.gconf_client,
+						gconf_key,
+						NULL);
+
+	g_free(gconf_key);
+
+	return preferred_uri;
+}
+
+void cong_exporter_set_preferred_uri(CongExporter *exporter, const gchar *uri)
+{
+	gchar *gconf_key;
+
+	g_return_if_fail(exporter);
+	g_return_if_fail(uri);
+
+	gconf_key = cong_functionality_get_gconf_key(CONG_FUNCTIONALITY(exporter), "preferred-uri");
+
+	gconf_client_set_string(the_globals.gconf_client,
+				gconf_key,
+				uri,
+				NULL);
+
+	g_free(gconf_key);
 }
 
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
@@ -471,6 +608,104 @@ void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	cong_primary_window_new(cong_doc);
 
 	cong_document_unref(cong_doc);
+}
+
+xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
+				const gchar *stylesheet_filename,
+				GtkWindow *toplevel_window)
+{
+	xsltStylesheetPtr xsl;
+	xmlDocPtr input_clone;
+	xmlDocPtr result;
+
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(stylesheet_filename, NULL);
+
+	xsl = xsltParseStylesheetFile(stylesheet_filename);
+
+	if (NULL==xsl) {
+		gchar *why_failed = g_strdup_printf("There was a problem reading the stylesheet file \"%s\"",stylesheet_filename);
+
+		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
+							  "Conglomerate could not transform the document",
+							  why_failed,
+							  "FIXME");
+	
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		return NULL;
+	}
+
+	/* DHM 14/11/2002:  document nodes seemed to being corrupted when applying the stylesheet.
+	   So We now work with a clone of the document
+	*/
+	input_clone = xmlCopyDoc(cong_document_get_xml(doc), TRUE);
+	g_assert(input_clone);
+
+	result = xsltApplyStylesheet(xsl, input_clone, NULL);
+	g_assert(result);
+
+	xmlFreeDoc(input_clone);
+
+	if (result->children==NULL) {
+		gchar *why_failed = g_strdup_printf("There was a problem applying the stylesheet file");
+
+		GtkDialog* dialog = cong_error_dialog_new(toplevel_window,
+							  "Conglomerate could not transform the document",
+							  why_failed,
+							  "FIXME");
+	
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		return NULL;
+	}
+
+	xsltFreeStylesheet(xsl);
+
+	return result;
+}
+
+void cong_ui_transform_doc_to_uri(CongDocument *doc,
+				  const gchar *stylesheet_filename,
+				  const gchar *uri,
+				  GtkWindow *toplevel_window)
+{
+	xmlDocPtr doc_ptr;
+	GnomeVFSURI *file_uri;
+	GnomeVFSResult vfs_result;
+	GnomeVFSFileSize file_size;
+
+	g_return_if_fail(doc);
+	g_return_if_fail(stylesheet_filename);
+	g_return_if_fail(uri);
+
+	/* FIXME:  need some kind of feedback e.g. a busy cursor */
+
+	doc_ptr = cong_ui_transform_doc(doc,
+					stylesheet_filename,
+					toplevel_window);
+
+	if (doc_ptr) {
+		file_uri = gnome_vfs_uri_new(uri);
+	
+		vfs_result = cong_xml_save_to_vfs(doc_ptr, 
+						  file_uri,	
+						  &file_size);
+		
+		if (vfs_result != GNOME_VFS_OK) {
+			GtkDialog* dialog = cong_error_dialog_new_file_save_failed(toplevel_window,
+										   file_uri, 
+										   vfs_result, 
+										   &file_size);
+			
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+		}
+		
+		gnome_vfs_uri_unref(file_uri);
+
+		xmlFreeDoc(doc_ptr);
+	}
 }
 
 /* Handy methods for "Import" methods; doing the necessary UI hooks: */

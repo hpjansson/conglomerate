@@ -29,6 +29,10 @@
 #include "cong-error-dialog.h"
 
 #if 0
+#include "cong-progress-checklist.h"
+#endif
+
+#if 0
 struct DocBookAuthorInfo
 {
 };
@@ -41,22 +45,86 @@ struct DocBookCreationInfo
 
 void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
 {
-	GnomeDruidPageStandard *page;
+#if 0
+	GnomeDruidPageStandard *which_settings_page;
+	GnomeDruidPageStandard *create_new_settings_authorship_page;
+	GnomeDruidPageStandard *create_new_settings_legal_page;
+	GnomeDruidPageStandard *create_new_settings_name_the_settings_page;
 
 	g_message("factory_page_creation_callback_unified <%s>", (char*)user_data);
 
-	page = cong_new_file_assistant_new_page(assistant, 
-						factory, 
-						TRUE,
-						TRUE);
+	{
+		GtkWidget *radio1, *radio2, *radio3, *box;
+		which_settings_page = cong_new_file_assistant_new_page(assistant, 
+								       factory, 
+								       TRUE,
+								       FALSE);
+		box = gtk_vbox_new (TRUE, 2);
+   
+		radio1 = gtk_radio_button_new_with_label (NULL,
+							  "None");   
+   
+		radio2 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1),
+								      "Create and use new authorship information.");
 
-	gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(page),
-					      "This is a dummy calendar control; it's a placeholder and will eventually be replaced with some useful options",
-					      gtk_calendar_new(),
-					      user_data);
+		radio3 = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (radio1),
+								      "Use existing authorship information.");
 
-#if 0
-	cong_new_file_assistant_set_page(assistant, GNOME_DRUID_PAGE(page));
+		gtk_widget_set_sensitive(GTK_WIDGET(radio3), FALSE); /* FIXME: this is unimplemented */
+		
+		/* Pack them into a box, then show all the widgets */
+		gtk_box_pack_start (GTK_BOX (box), radio1, TRUE, TRUE, 2);
+		gtk_box_pack_start (GTK_BOX (box), radio2, TRUE, TRUE, 2);
+		gtk_box_pack_start (GTK_BOX (box), radio3, TRUE, TRUE, 2);
+		gtk_widget_show_all (box);
+		gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(which_settings_page),
+						      "Conglomerate can automatically add \"metadata\" to the document \ni.e. information about the author and copyright status.\n\nWhat metadata would you like the document to contain?",
+						      box,
+						      user_data);
+	}
+
+	/* 
+	   Authorship page to contain info on firstname, surname, optional affiliation and optional email 
+	*/
+	{
+		create_new_settings_authorship_page = cong_new_file_assistant_new_page(assistant, 
+										       factory, 
+										       FALSE,
+										       FALSE);
+		
+		gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(create_new_settings_authorship_page),
+						      "authorship page",
+						      gtk_calendar_new(),
+						      user_data);
+	}
+
+	/* 
+	   Legal page to have option to add a copyright of current year. with a holder string based on name from previous page.
+	   Also, a choice of different licenses, and a button to preview the licenses.
+	*/
+	{
+		create_new_settings_legal_page = cong_new_file_assistant_new_page(assistant, 
+										  factory, 
+										  FALSE,
+										  FALSE);
+		
+		gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(create_new_settings_legal_page),
+						      "Would you like Conglomerate to add a copyright notice to the doccument?",
+						      gtk_calendar_new(),
+						      user_data);
+	}
+
+	{
+		create_new_settings_name_the_settings_page = cong_new_file_assistant_new_page(assistant, 
+											      factory, 
+											      FALSE,
+											      TRUE);
+		
+		gnome_druid_page_standard_append_item(GNOME_DRUID_PAGE_STANDARD(create_new_settings_name_the_settings_page),
+						      "If you wish, you may now name these settings so that you can reuse them at a later date (NOT YET IMPLEMENED)",
+						      gtk_calendar_new(),
+						      user_data);
+	}
 #endif
 }
 
@@ -252,7 +320,7 @@ gboolean text_importer_mime_filter(CongImporter *importer, const gchar *mime_typ
 	}
 }
 
-void text_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data)
+void text_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -281,7 +349,7 @@ void text_importer_action_callback(CongImporter *importer, const gchar *uri, con
 
 		/* Do appropriate UI stuff: */
 		cong_ui_new_document_from_imported_xml(xml_doc,
-						       NULL /* FIXME: need a way to set up toplevel window effectively */);
+						       toplevel_window);
 	}
 }
 
@@ -299,7 +367,7 @@ gboolean sourcecode_importer_mime_filter(CongImporter *importer, const gchar *mi
 	}
 }
 
-void sourcecode_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data)
+void sourcecode_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)
 {
 	char* buffer;
 	GnomeVFSFileSize size;
@@ -341,40 +409,87 @@ void sourcecode_importer_action_callback(CongImporter *importer, const gchar *ur
 
 		/* Do appropriate UI stuff: */
 		cong_ui_new_document_from_imported_xml(xml_doc,
-						       NULL /* FIXME: need a way to set up toplevel window effectively */);
+						       toplevel_window);
 	}
 }
 
-gboolean docbook_exporter_fip_filter(CongExporter *exporter, const gchar *fip, gpointer user_data)
+gboolean docbook_exporter_fpi_filter(CongExporter *exporter, const gchar *fpi, gpointer user_data)
 {
 	g_return_val_if_fail(exporter, FALSE);
-	g_return_val_if_fail(fip, FALSE);
+	g_return_val_if_fail(fpi, FALSE);
 
 	return TRUE; /* for now */
 }
 
-void html_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpointer user_data)
+void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(exporter);
+	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to HTML");
+	g_message("html_exporter_action_callback");
+
+	cong_ui_transform_doc_to_uri(doc,
+				     (STYLESHEET_PATH "html/docbook.xsl"),
+				     uri,
+				     toplevel_window);
 }
 
-void pdf_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpointer user_data)
+void pdf_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
+	g_message("pdf_exporter_action_callback");
+
+#if 0
+	GtkWidget *progress_checklist_dialog;
+	CongProgressChecklist *progress_checklist;
+	xmlDocPtr fo_doc;
+
 	g_return_if_fail(exporter);
+	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to PDF");
+	progress_checklist_dialog = cong_progress_checklist_dialog_new(toplevel_window);
+	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
+
+	cong_progress_checklist_add_stage(progress_checklist,
+					  "Transforming DocBook into XSL Formatting Objects");
+	cong_progress_checklist_add_stage(progress_checklist,
+					  "Laying out XSL Formatting Objects as a PDF file");
+
+	gtk_widget_show(progress_checklist_dialog);
+
+	fo_doc = cong_ui_transform_doc(doc,
+				       (STYLESHEET_PATH "fo/docbook.xsl"),
+				       toplevel_window);
+
+	if (fo_doc) {
+		cong_progess_checklist_complete_stage(progress_checklist);
+
+		CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Converting XSL Formatting Objects to PDF");
+		/* FIXME: ultimately we probably want to use xmlroff to do this stage */
+		
+		xmlFreeDoc(fo_doc);
+	}
+
+
+	gtk_widget_destroy(progress_checklist_dialog);
+#else
+	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Exporting DocBook as PDF");	
+#endif
 }
 
-void fo_exporter_action_callback(CongExporter *exporter, const gchar *uri, gpointer user_data)
+void fo_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	g_return_if_fail(exporter);
+	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, "Export DocBook to FO");
+	g_message("fo_exporter_action_callback");
+
+	cong_ui_transform_doc_to_uri(doc,
+				     (STYLESHEET_PATH "fo/docbook.xsl"),
+				     uri,
+				     toplevel_window);
 }
 
 
@@ -386,18 +501,21 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Article", 
 					      "Create an article, perhaps for a website or a magazine, using the \"DocBook\" format",
+					      "docbook-article-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_article,
 					      "article");
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Book", 
 					      "Create a book, using the \"DocBook\" format",
+					      "docbook-book-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_book,
 					      "book");
 	cong_plugin_register_document_factory(plugin, 
 					      "DocBook Set", 
 					      "Create a set of related books, using the \"DocBook\" format",
+					      "docbook-set-factory",
 					      factory_page_creation_callback_unified,
 					      factory_action_callback_set,
 					      "set");	
@@ -405,6 +523,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_importer(plugin, 
 				      "Import text as a DocBook article", 
 				      "Import a plain text file into the \"DocBook\" format, as an article.",
+				      "docbook-plaintext-import",
 				      text_importer_mime_filter,
 				      text_importer_action_callback,
 				      NULL);
@@ -413,6 +532,7 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_importer(plugin, 
 				      "Import program code as a DocBook article", 
 				      "Import program source code into the \"DocBook\" format, as an article.",
+				      "docbook-sourcecode-import",
 				      sourcecode_importer_mime_filter,
 				      sourcecode_importer_action_callback,
 				      NULL);
@@ -420,21 +540,24 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_exporter(plugin, 
 				      "Export DocBook as HTML", 
 				      "",
-				      docbook_exporter_fip_filter,
+				      "docbook-HTML-export",
+				      docbook_exporter_fpi_filter,
 				      html_exporter_action_callback,
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
 				      "Export DocBook as PDF", 
 				      "",
-				      docbook_exporter_fip_filter,
+				      "docbook-PDF-export",
+				      docbook_exporter_fpi_filter,
 				      pdf_exporter_action_callback,
 				      NULL);
 
 	cong_plugin_register_exporter(plugin, 
 				      "Export DocBook as XSL:FO",
 				      "",
-				      docbook_exporter_fip_filter,
+				      "docbook-XSLFO-export",
+				      docbook_exporter_fpi_filter,
 				      fo_exporter_action_callback,
 				      NULL);
 

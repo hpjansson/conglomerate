@@ -264,82 +264,24 @@ cong_document_get_parent_uri(CongDocument *doc)
 void
 cong_document_save(CongDocument *doc, 
 		   const char* filename, 
-		   GtkWindow *parent_window)
+		   GtkWindow *toplevel_window)
 {
-	xmlChar* mem;
-	int size;
-
-	GnomeVFSFileSize file_size;
-	GnomeVFSFileSize written_size;
 
 	GnomeVFSURI *file_uri;
 	GnomeVFSResult vfs_result;
-	GnomeVFSHandle* vfs_handle;
+	GnomeVFSFileSize file_size;
 
 	g_return_if_fail(doc);
 	g_return_if_fail(filename);
 
-	/* Dump to a memory buffer. then write out buffer to GnomeVFS: */
-
-	xmlDocDumpMemory(doc->xml_doc,
-			 &mem,
-			 &size);
-
-	g_assert(mem);
-	g_assert(size>0);
-
-	file_size = size;
-
 	file_uri = gnome_vfs_uri_new(filename);
-
-	vfs_result = gnome_vfs_create_uri(&vfs_handle,
-					  file_uri,
-					  GNOME_VFS_OPEN_WRITE,
-					  FALSE,
-					  0644
-					);
+	
+	vfs_result = cong_xml_save_to_vfs(doc->xml_doc, 
+					  file_uri,	
+					  &file_size);
 
 	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(parent_window,
-									   file_uri, 
-									   vfs_result, 
-									   NULL);
-			
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-
-		gnome_vfs_uri_unref(file_uri);
-
-		return;
-	}
-
-	vfs_result = gnome_vfs_write(vfs_handle,
-				     mem,
-				     file_size,
-				     &written_size);
-
-	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(parent_window,
-									   file_uri, 
-									   vfs_result, 
-									   &file_size);
-			
-		cong_error_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(GTK_WIDGET(dialog));
-
-		gnome_vfs_uri_unref(file_uri);
-
-		gnome_vfs_close(vfs_handle);
-
-		return;
-	}
-
-	g_assert(file_size == written_size);
-
-	vfs_result = gnome_vfs_close(vfs_handle);
-
-	if (vfs_result != GNOME_VFS_OK) {
-		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(parent_window,
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(toplevel_window,
 									   file_uri, 
 									   vfs_result, 
 									   &file_size);

@@ -39,17 +39,29 @@ gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 
 gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 {
-	const char *doc_name;
+	char *current_doc_name;
+	char *new_doc_name;
 
 	g_return_val_if_fail(doc, FALSE);
 	g_return_val_if_fail(parent_window, FALSE);
+
+	current_doc_name = cong_document_get_full_uri(doc);
 	
-	doc_name = cong_get_file_name("Save XML as...", parent_window);
-	if (!doc_name) {
+	new_doc_name = cong_get_file_name("Save XML as...", 
+					  current_doc_name,
+					  parent_window);
+
+	if (current_doc_name) {
+		g_free(current_doc_name);
+	}
+
+	if (!new_doc_name) {
 		return TRUE;
 	}
 	
-	cong_document_save(doc, doc_name, parent_window);
+	cong_document_save(doc, new_doc_name, parent_window);
+
+	g_free(new_doc_name);
 	
 	return TRUE;
 }

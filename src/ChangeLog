@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-04-11 David Malcolm
+
+	* cong-document.c, cong-eel.c, cong-eel.h, cong-error-file-save.c, cong-file-export.c, cong-file-import.c, cong-menus.c, cong-plugin.c, cong-plugin.h, file.c, global.h, main.c, open.c, plugin-docbook.c, plugin-tests.c, save.c, xmldata.c
+
+	Lots of work on exporter plugins, and various small fixes along the way.	
+	
 2003-04-08 David Malcolm
 
 	* cong-menus.c, global.h

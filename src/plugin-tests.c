@@ -326,6 +326,7 @@ gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 	cong_plugin_register_document_factory(plugin, 
 					      "Unicode Character Reference", 
 					      "Create a table listing a part of the Unicode character set as a DocBook article",
+					      "tests-unicode-character-reference-factory",
 					      factory_page_creation_callback_unicode,
 					      factory_action_callback_unicode,
 					      NULL);

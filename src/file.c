@@ -6,6 +6,50 @@
 #include <gtk/gtk.h>
 #include "global.h"
 
+#if 1
+gchar *cong_get_file_name(const gchar *title, 
+			  const gchar *filename,
+			  GtkWindow *parent_window)
+{
+	GtkFileSelection *file_selection;
+	gint result_int;
+	gchar *result_filename;
+
+	g_return_val_if_fail(title, NULL);
+	g_return_val_if_fail(parent_window, NULL);
+
+	/* Create a new file selection widget */
+	file_selection = GTK_FILE_SELECTION(gtk_file_selection_new (title));
+
+	if (filename) {
+		gtk_file_selection_set_filename(file_selection, 
+						filename);
+	}
+
+	gtk_window_set_transient_for(GTK_WINDOW(file_selection), 
+				     parent_window);
+
+	result_int = gtk_dialog_run(GTK_DIALOG(file_selection));
+
+	switch (result_int) {
+	default: g_assert(0);
+	case GTK_RESPONSE_DELETE_EVENT:
+	case GTK_RESPONSE_NONE:
+	case GTK_RESPONSE_CANCEL:
+		result_filename = NULL;
+		break;
+
+	case GTK_RESPONSE_OK:
+		result_filename = g_strdup(gtk_file_selection_get_filename(file_selection));
+		break;
+	}
+
+	gtk_widget_destroy(GTK_WIDGET(file_selection));
+
+	return result_filename;
+}
+
+#else
 static GtkWidget *filew;
 static const char *file_name_selected;
 
@@ -56,3 +100,4 @@ const gchar *cong_get_file_name(const gchar *title,
 	gtk_main();
 	return(file_name_selected);
 }
+#endif

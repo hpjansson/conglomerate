@@ -55,7 +55,6 @@
 extern char *ilogo_xpm[];
 
 #define ENABLE_DEBUG_MENU 1
-#define STYLESHEET_PATH "/usr/share/sgml/docbkxsl/"
 
 GtkWidget* make_uneditable_text(const gchar* text)
 {

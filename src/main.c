@@ -196,14 +196,17 @@ gboolean main_load_displayspecs(void)
 	return TRUE;
 }
 
-void register_plugin(CongPluginCallbackRegister register_callback,
+void register_plugin(const gchar *id,
+		     CongPluginCallbackRegister register_callback,
 		     CongPluginCallbackConfigure configure_callback)
 {
+	g_return_if_fail(id);
 	g_return_if_fail(register_callback);
 
 	g_assert(the_globals.plugin_manager);
 
 	cong_plugin_manager_register(the_globals.plugin_manager,
+				     id,
 				     register_callback, 
 				     configure_callback);
 }
@@ -214,16 +217,20 @@ void main_load_plugins(void)
 {
 	/* For the moment, there aren't any actual plugins; instead we fake it. */
 
-	register_plugin(plugin_docbook_plugin_register,
+	register_plugin("docbook",
+			plugin_docbook_plugin_register,
 			plugin_docbook_plugin_configure);
 
-	register_plugin(plugin_lists_plugin_register,
+	register_plugin("lists",
+			plugin_lists_plugin_register,
 			plugin_lists_plugin_configure);
 
-	register_plugin(plugin_tests_plugin_register,
+	register_plugin("tests",
+			plugin_tests_plugin_register,
 			plugin_tests_plugin_configure);
 
-	register_plugin(plugin_xsl_plugin_register,
+	register_plugin("xsl",
+			plugin_xsl_plugin_register,
 			plugin_xsl_plugin_configure);
 }
 
@@ -254,6 +261,12 @@ int main( int   argc,
 	gtk_init(&argc, &argv);
 #endif
 
+	/* Set up usage of GConf: */
+	the_globals.gconf_client = gconf_client_get_default();
+	gconf_client_add_dir(the_globals.gconf_client,
+			     "/apps/conglomerate",
+			     GCONF_CLIENT_PRELOAD_NONE,
+			     NULL);
 
 	fonts_load();
 	editor_popup_init(NULL); /* FIXME */

@@ -50,9 +50,11 @@ static void add_importer_to_list(CongImporter *importer, gpointer user_data)
 void
 cong_ui_file_import(GtkWindow *toplevel_window)
 {
-	const char *filename;
+	gchar *filename;
 
-	filename = cong_get_file_name(_("Import file..."), toplevel_window);
+	filename = cong_get_file_name(_("Import file..."), 
+				      NULL, 
+				      toplevel_window);
 
 	if (filename) {
 		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
@@ -93,7 +95,8 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 			gtk_widget_destroy(GTK_WIDGET(dialog));
 			
 			g_list_free(list_of_valid);
-			
+
+			g_free(filename);			
 			return;
 		}
 
@@ -112,7 +115,9 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 		g_assert(importer);
 		
-		cong_importer_invoke(importer, filename, mime_type);
+		cong_importer_invoke(importer, filename, mime_type, toplevel_window);
+
+		g_free(filename);
 	}
 
 }

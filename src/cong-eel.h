@@ -23,6 +23,8 @@ guint32             cong_eel_rgb16_to_rgb                   (gushort            
 guint32             cong_eel_gdk_color_to_rgb               (const GdkColor      *color);
 char *              cong_eel_gdk_rgb_to_color_spec          (guint32              color);
 
+/* This isn't from eel, but perhaps should be: */
+GtkMenuItem*        cong_eel_option_menu_get_selected_menu_item (GtkOptionMenu *option_menu);
 
 
 G_END_DECLS
