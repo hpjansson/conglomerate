@@ -687,10 +687,40 @@ cong_document_begin_command (CongDocument *doc,
 	return cmd;
 }
 
+static CongCommand*
+should_merge_commands (CongDocument *doc,
+		       CongCommand *cmd)
+{
+	g_return_val_if_fail (IS_CONG_DOCUMENT(doc), NULL);
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), NULL);
+	
+	/* Merge if applicable: */
+	if (cong_command_get_consolidation_id (cmd)) {
+		/* If there is redo history, then we shouldn't merge: */
+		if (NULL == cong_command_history_get_next_redo_command (PRIVATE(doc)->history)) {
+			CongCommand *last_cmd = cong_command_history_get_next_undo_command (PRIVATE(doc)->history);
+
+			if (last_cmd) {
+				if (!cong_command_has_ever_been_undone (last_cmd)) {
+					if (cong_command_get_consolidation_id (last_cmd)) {
+						/* Only merge if they both have the same consolidation ID; both must be non-NULL: */
+						if (0==strcmp(cong_command_get_consolidation_id (last_cmd), cong_command_get_consolidation_id (cmd))) {
+							return last_cmd;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	return NULL;
+}
+
 void
 cong_document_end_command (CongDocument *doc,
 			   CongCommand *cmd)
 {
+	CongCommand *cmd_to_merge_into;
 	g_return_if_fail (IS_CONG_DOCUMENT(doc));
 	g_return_if_fail (IS_CONG_COMMAND(cmd));
 	g_return_if_fail (doc == cong_command_get_document (cmd));
@@ -700,8 +730,19 @@ cong_document_end_command (CongDocument *doc,
 
 	PRIVATE(doc)->current_command = NULL;
 
-	cong_command_history_add_command (PRIVATE(doc)->history,
-					  cmd);
+	cmd_to_merge_into = should_merge_commands (doc,
+						   cmd);
+		
+	if (cmd_to_merge_into) {
+		g_message ("Merging command \"%s\" into existing undo history", cong_command_get_description(cmd));
+
+		cong_command_merge (cmd_to_merge_into,
+				    cmd);
+	} else {
+		cong_command_history_add_command (PRIVATE(doc)->history,
+						  cmd);
+	}
+
 	g_object_unref (G_OBJECT (cmd));
 }
 

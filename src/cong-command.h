@@ -118,6 +118,20 @@ void
 cong_command_merge (CongCommand *dst,
 		    CongCommand *src);
 
+/*
+ * cong_command_has_ever_been_undone:
+ *
+ * @cmd:
+ *
+ * A function used by the command consolidation/merging system.  If you undo then redo a command,
+ * further similar operations should get separate entries in the undo/redo histroy, rather than being
+ * merged.
+ *
+ * Returns: A #gboolean, answering the question "has this command ever been undone?"
+ */
+gboolean
+cong_command_has_ever_been_undone (CongCommand *cmd);
+
 /* Adding Atomic Modifications: */
 void
 cong_command_add_modification (CongCommand *cmd,

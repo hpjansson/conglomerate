@@ -163,6 +163,30 @@ cong_command_history_redo (CongCommandHistory *command_history)
 	}
 }
 
+CongCommand*
+cong_command_history_get_next_undo_command (CongCommandHistory *command_history)
+{
+	g_return_val_if_fail (IS_CONG_COMMAND_HISTORY(command_history), NULL);
+
+	if (PRIVATE(command_history)->list_of_commands_to_undo) {
+		return CONG_COMMAND (PRIVATE(command_history)->list_of_commands_to_undo->data);
+	} else {
+		return NULL;
+	} 
+}
+
+CongCommand*
+cong_command_history_get_next_redo_command (CongCommandHistory *command_history)
+{
+	g_return_val_if_fail (IS_CONG_COMMAND_HISTORY(command_history), NULL);
+
+	if (PRIVATE(command_history)->list_of_commands_to_redo) {
+		return CONG_COMMAND (PRIVATE(command_history)->list_of_commands_to_redo->data);
+	} else {
+		return NULL;
+	} 
+}
+
 /* Internal stuff: */
 static void
 emit_changed (CongCommandHistory *history)

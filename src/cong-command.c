@@ -61,7 +61,7 @@ struct CongCommandDetails
 	CongDocument *doc;
 	gchar *description;
 	gchar *consolidation_id;
-
+	gboolean has_ever_been_undone;
 	GList *list_of_modification;
 };
 
@@ -93,6 +93,7 @@ cong_command_construct (CongCommand *command,
 	if (consolidation_id) {
 		PRIVATE(command)->consolidation_id = g_strdup (consolidation_id);
 	}
+	PRIVATE(command)->has_ever_been_undone = FALSE;
 
 	return command;
 }
@@ -124,6 +125,14 @@ cong_command_get_description (CongCommand *command)
 	return PRIVATE(command)->description;
 }
 
+const gchar*
+cong_command_get_consolidation_id (CongCommand *command)
+{
+	g_return_val_if_fail (IS_CONG_COMMAND(command), NULL);
+	
+	return PRIVATE(command)->consolidation_id;
+}
+
 void
 cong_command_undo (CongCommand *command)
 {
@@ -133,6 +142,8 @@ cong_command_undo (CongCommand *command)
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
 	g_message ("cong_command_undo(\"%s\")", cong_command_get_description(command));
+
+	PRIVATE(command)->has_ever_been_undone = TRUE;
 
 	doc = cong_command_get_document (command);
 
@@ -185,6 +196,31 @@ cong_command_redo (CongCommand *command)
 
 	cong_document_end_edit (doc);
 }
+
+void
+cong_command_merge (CongCommand *dst,
+		    CongCommand *src)
+{
+	GList *iter;
+
+	g_return_if_fail (IS_CONG_COMMAND(dst));
+	g_return_if_fail (IS_CONG_COMMAND(src));
+
+	PRIVATE(dst)->list_of_modification = g_list_concat (PRIVATE(dst)->list_of_modification,
+							    PRIVATE(src)->list_of_modification);
+
+	PRIVATE(src)->list_of_modification = NULL;
+}
+
+
+gboolean
+cong_command_has_ever_been_undone (CongCommand *cmd)
+{
+	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+
+	return PRIVATE(cmd)->has_ever_been_undone;
+}
+
 
 /* Adding Atomic modifications: */
 void
