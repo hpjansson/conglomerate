@@ -20,7 +20,6 @@ src/cong-dispspec.c
 src/cong-document.c
 src/cong-dom-view.c
 src/cong-dtd.c
-src/cong-dummy-element-editor.c
 src/cong-editor-area-bin.c
 src/cong-editor-area-border.c
 src/cong-editor-area-composer.c
@@ -58,10 +57,8 @@ src/cong-editor-node-entity-ref.c
 src/cong-editor-node-text.c
 src/cong-editor-node-unimplemented.c
 src/cong-editor-node.c
-src/cong-editor-widget.c
 src/cong-editor-widget3.c
 src/cong-eel.c
-src/cong-element-editor.c
 src/cong-enum-mapping.c
 src/cong-error-dialog.c
 src/cong-error-file-open.c
@@ -86,9 +83,7 @@ src/cong-plugin.c
 src/cong-primary-window.c
 src/cong-progress-checklist.c
 src/cong-range.c
-src/cong-section-head-editor.c
 src/cong-source-view.c
-src/cong-span-text-editor.c
 src/cong-text-cache.c
 src/cong-tree-view.c
 src/cong-util.c

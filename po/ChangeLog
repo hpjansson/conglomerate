@@ -1,3 +1,7 @@
+2003-09-22  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* POTFILES.in:  Removed old files that should no longer be part of Conglomerate
+
 2003-09-21  Danilo Šegan  <dsegan@gmx.net>
 
 	* sr.po, sr@Latn.po: Added Serbian translation.
