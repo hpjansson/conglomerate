@@ -67,3 +67,20 @@ echo one directory level up, are these .deb files:
 ls -ltr ../*.deb
 
 # end of script
+
+exit
+
+## below stuff from the old "polish" script
+# generate  the .diff.gz
+CWD=$(basename $(pwd) )
+( cd .. ; dpkg-source -b ${CWD} )
+
+
+#
+dpkg-genchanges
+
+#
+echo do debrsign manual
+
+
+# end of file

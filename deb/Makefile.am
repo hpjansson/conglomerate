@@ -26,7 +26,6 @@ debian_DISTS = \
 deb_DISTS = \
     Readme \
     build \
-    polish \
     $(NULL)
 
 ## but for the GNU autotools they are all the same
