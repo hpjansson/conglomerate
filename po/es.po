@@ -1,3 +1,4 @@
+# translation of es.po to 
 # traducción de es.po al Spanish
 # translation of es.po to Spanish
 # translation of conglomerate.HEAD.po to Spanish
@@ -12,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 20:22+0200\n"
-"PO-Revision-Date: 2004-08-21 18:07+0200\n"
-"Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
-"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"POT-Creation-Date: 2004-11-07 20:57+0100\n"
+"PO-Revision-Date: 2004-11-07 21:37+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,9 +24,9 @@ msgstr ""
 "X-Generator: KBabel 1.3.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1434
-#: src/cong-primary-window.c:555 src/cong-primary-window.c:740
-#: src/cong-primary-window.c:742 src/cong-primary-window.c:748
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
+#: src/cong-primary-window.c:547 src/cong-primary-window.c:732
+#: src/cong-primary-window.c:734 src/cong-primary-window.c:740
 msgid "Conglomerate XML Editor"
 msgstr "Editor de XML Conglomerate"
 
@@ -39,8 +40,7 @@ msgid ""
 "specification (called dispspec, or .xds) files, in addition to the standard "
 "installation path. When documents are loaded a matching dispspec is searched "
 "for in these directories, and the first matching dispspec file is used."
-msgstr ""
-"A lista de personalizado para en a ruta a es para en y primero archivo es."
+msgstr "A lista de personalizado para en a ruta a es para en y primero archivo es."
 
 #: data/conglomerate.schemas.in.h:2
 msgid ""
@@ -58,6 +58,1227 @@ msgstr ""
 #: data/conglomerate.schemas.in.h:4
 msgid "Locations for template files."
 msgstr "Ubicaciones para las plantillas."
+
+#: dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr ""
+
+#: dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "Especificación de visualización de Conglomerate"
+
+#: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:250
+#: src/cong-file-export.c:339 src/cong-file-new.c:363
+#: src/cong-file-print.c:250 src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Descripción"
+
+#: dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "Modelos de documento"
+
+#: dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "Modelo de documento externo"
+
+#: dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "Formato"
+
+#: dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "IGU"
+
+#: dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "Información de la cabecera"
+
+#: dispspecs/dispspec.xds.in.h:9
+msgid "Information that tells Conglomerate how to display a particular type of file."
+msgstr "Información que le indica a Conglomerate cómo mostrar un tipo de archivo particular."
+
+#: dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "Lista de elementos XML"
+
+#: dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "Lista de tipos de archivo para este tipo de documento"
+
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
+msgid "Metadata"
+msgstr "Metadatos"
+
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:154
+#: src/cong-edit-preferences.c:242 src/cong-file-export.c:338
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Nombre"
+
+#: dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "Nombre de un elemento XML"
+
+#: dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "Lista de tipos de serialización"
+
+#: dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "Descripción corta"
+
+#: dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "Descripción corta de un elemento XML"
+
+#: dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "Descripción corta del tipo de documento"
+
+#: dispspecs/dispspec.xds.in.h:19
+msgid "XML Element"
+msgstr "Elemento XML"
+
+#: dispspecs/docbook.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "Un enlace URL (quizá a un sitio web)"
+
+#: dispspecs/docbook.xds.in.h:2
+msgid ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
+msgstr "Un libro, con un título, y quizás con algo de material bibliográfico, además del contenido actual del libro."
+
+#: dispspecs/docbook.xds.in.h:3
+msgid "A brief description of the version of a document."
+msgstr "Una descripción breve de la versión del documento."
+
+#: dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "Una colección de libros."
+
+#: dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "Una división de alto nivel de un libro."
+
+#: dispspecs/docbook.xds.in.h:6
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "Un trozo de dato específico de un sistema de computación, a ser tomado literalmente."
+
+#: dispspecs/docbook.xds.in.h:7
+msgid "A subsection within a section"
+msgstr "Una subsección dentro de una sección"
+
+#: dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "Un resumen"
+
+#: dispspecs/docbook.xds.in.h:9
+msgid "A top-level section of document"
+msgstr "Una sección de alto nivel de un documento"
+
+#: dispspecs/docbook.xds.in.h:10 dispspecs/forrest-document.xds.in.h:1
+msgid "Abstract"
+msgstr "Resumen"
+
+#: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
+#: dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "Acrónimo"
+
+#: dispspecs/docbook.xds.in.h:12
+msgid "Additional metadata"
+msgstr "Metadatos adicionales"
+
+#: dispspecs/docbook.xds.in.h:13 dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "Dirección"
+
+#: dispspecs/docbook.xds.in.h:14
+msgid "An email address"
+msgstr "Una dirección de correo-e"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: dispspecs/docbook.xds.in.h:16
+msgid "Anchor Point"
+msgstr "Punto de anclaje"
+
+#: dispspecs/docbook.xds.in.h:17
+msgid "Answer"
+msgstr "Respuesta"
+
+#: dispspecs/docbook.xds.in.h:18
+msgid "Appendix"
+msgstr "Apéndice"
+
+#: dispspecs/docbook.xds.in.h:19
+msgid "Application"
+msgstr "Solicitud"
+
+#: dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr "Artículo"
+
+#: dispspecs/docbook.xds.in.h:21
+msgid "Article Header"
+msgstr "Cabecera de artículo"
+
+#: dispspecs/docbook.xds.in.h:22
+msgid "Article Information"
+msgstr "Información de artículo"
+
+#: dispspecs/docbook.xds.in.h:23
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:3
+msgid "Author"
+msgstr "Autor"
+
+#: dispspecs/docbook.xds.in.h:24
+msgid "Author Initials"
+msgstr "Iniciales del autor"
+
+#: dispspecs/docbook.xds.in.h:25
+msgid "Authorship Information"
+msgstr "Información de autoría"
+
+#: dispspecs/docbook.xds.in.h:26
+msgid "Bibliographic Information"
+msgstr "Información bibliográfica"
+
+#: dispspecs/docbook.xds.in.h:27
+msgid "Bibliography"
+msgstr "Bibliografía"
+
+#: dispspecs/docbook.xds.in.h:28
+msgid "Book"
+msgstr "Libro"
+
+#: dispspecs/docbook.xds.in.h:29
+msgid "Book Information"
+msgstr "Información del libro"
+
+#: dispspecs/docbook.xds.in.h:30 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "Etiqueta"
+
+#: dispspecs/docbook.xds.in.h:31
+msgid "Caution"
+msgstr "Precaución"
+
+#: dispspecs/docbook.xds.in.h:32
+msgid "Chapter"
+msgstr "Capítulo"
+
+#: dispspecs/docbook.xds.in.h:33
+msgid "City"
+msgstr "Ciudad"
+
+#: dispspecs/docbook.xds.in.h:34
+msgid "Colophon"
+msgstr "Colofón"
+
+#: dispspecs/docbook.xds.in.h:35
+msgid "Command"
+msgstr "Comando"
+
+#: dispspecs/docbook.xds.in.h:36
+msgid "Command Synopsis"
+msgstr "Sinopsis de comandos"
+
+#: dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "Salida de computadora"
+
+#: dispspecs/docbook.xds.in.h:38
+msgid "Copyright"
+msgstr "Copyright"
+
+#: dispspecs/docbook.xds.in.h:39
+msgid "Copyright Holder"
+msgstr "Poseedor del copyright"
+
+#: dispspecs/docbook.xds.in.h:40
+msgid "Corporate Name"
+msgstr "Nombre corporativo"
+
+#: dispspecs/docbook.xds.in.h:41
+msgid "Cross-reference"
+msgstr "Referencias cruzadas"
+
+#: dispspecs/docbook.xds.in.h:42
+msgid "Date"
+msgstr "Fecha"
+
+#: dispspecs/docbook.xds.in.h:43
+msgid "Date of Publication"
+msgstr "Fecha de publicación"
+
+#: dispspecs/docbook.xds.in.h:44
+msgid "Defined terms"
+msgstr "Términos definidos"
+
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "Definición"
+
+#: dispspecs/docbook.xds.in.h:46
+msgid "DocBook"
+msgstr "DocBook"
+
+#: dispspecs/docbook.xds.in.h:47
+msgid ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+msgstr "DocBook es un tipo de documento que se corresponde con lo que la mayoría de la gente piensa que es «un libro»; es apropiado para escribir libros y artículos, tanto para publicación web como impresa."
+
+#: dispspecs/docbook.xds.in.h:48
+msgid "Edition"
+msgstr "Edición"
+
+#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:11
+msgid "Editor"
+msgstr "Editor"
+
+#: dispspecs/docbook.xds.in.h:50
+msgid "Email Address"
+msgstr "Dirección de correo-e"
+
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "Énfasis"
+
+#: dispspecs/docbook.xds.in.h:52
+msgid "Entry"
+msgstr "Entrada"
+
+#: dispspecs/docbook.xds.in.h:53
+msgid "Environment Variable"
+msgstr "Variable de entorno"
+
+#: dispspecs/docbook.xds.in.h:54
+msgid "Example (formal)"
+msgstr "Ejemplo (formal)"
+
+#: dispspecs/docbook.xds.in.h:55
+msgid "Example (informal)"
+msgstr "Ejemplo (informal)"
+
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
+msgid "Figure"
+msgstr "Figura"
+
+#: dispspecs/docbook.xds.in.h:57
+msgid "Figure (informal)"
+msgstr "Figura (informal)"
+
+#: dispspecs/docbook.xds.in.h:58
+msgid "Filename"
+msgstr "Archivo"
+
+#: dispspecs/docbook.xds.in.h:59
+msgid "First Name"
+msgstr "Nombre"
+
+#: dispspecs/docbook.xds.in.h:60
+msgid "First Term"
+msgstr "Primer término"
+
+#: dispspecs/docbook.xds.in.h:61
+msgid "Footnote"
+msgstr "Nota a pie de página"
+
+#: dispspecs/docbook.xds.in.h:62
+msgid "Free-floating Heading"
+msgstr "Cabecera flotante libre"
+
+#: dispspecs/docbook.xds.in.h:63
+msgid "Function"
+msgstr "Función"
+
+#. various related localNames need to be added
+#: dispspecs/docbook.xds.in.h:65
+msgid "Function Synopsis"
+msgstr "Synopsis de la función"
+
+#: dispspecs/docbook.xds.in.h:66
+msgid "GUI Button"
+msgstr "Botón del IGU"
+
+#: dispspecs/docbook.xds.in.h:67
+msgid "GUI Label"
+msgstr "Etiqueta del IGU"
+
+#: dispspecs/docbook.xds.in.h:68
+msgid "GUI Menu"
+msgstr "Menu del IGU"
+
+#: dispspecs/docbook.xds.in.h:69
+msgid "GUI Menu Item"
+msgstr "Elemento del menú del GUI"
+
+#: dispspecs/docbook.xds.in.h:70
+msgid "GUI Submenu"
+msgstr "Submenú del GUI"
+
+#: dispspecs/docbook.xds.in.h:71
+msgid "Glossary"
+msgstr "Glosario"
+
+#: dispspecs/docbook.xds.in.h:72
+msgid "Glossary Entry"
+msgstr "Entrada del glosario"
+
+#: dispspecs/docbook.xds.in.h:73
+msgid "Graphic"
+msgstr "Gráfico"
+
+#: dispspecs/docbook.xds.in.h:74
+msgid "ISBN"
+msgstr "ISBN"
+
+#: dispspecs/docbook.xds.in.h:75
+msgid "ISSN"
+msgstr "ISSN"
+
+#: dispspecs/docbook.xds.in.h:76
+msgid "Image Data"
+msgstr "Datos de la imagen"
+
+#: dispspecs/docbook.xds.in.h:77
+msgid "Image Object"
+msgstr "Objeto de imagen"
+
+#: dispspecs/docbook.xds.in.h:78
+msgid "Important"
+msgstr "Importante"
+
+#: dispspecs/docbook.xds.in.h:79
+msgid "Index Term"
+msgstr "Término del índice"
+
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19
+msgid "Introduction"
+msgstr "Introducción"
+
+#: dispspecs/docbook.xds.in.h:81
+msgid "Key Caption"
+msgstr ""
+
+#: dispspecs/docbook.xds.in.h:82
+msgid "Legal Notice"
+msgstr "Aviso legal"
+
+#: dispspecs/docbook.xds.in.h:83
+msgid "List (itemised)"
+msgstr "Lista (itemizada)"
+
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "Lista (ordenada)"
+
+#: dispspecs/docbook.xds.in.h:85
+msgid "List (simple)"
+msgstr "Lista (simple)"
+
+#: dispspecs/docbook.xds.in.h:86
+msgid "List (terms and definitions)"
+msgstr "Lista (términos y definiciones)"
+
+#: dispspecs/docbook.xds.in.h:87
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "Elemento de lista"
+
+#: dispspecs/docbook.xds.in.h:88
+msgid "List Member"
+msgstr "Miembro de lista"
+
+#: dispspecs/docbook.xds.in.h:89
+msgid "Literal"
+msgstr "Literal"
+
+#: dispspecs/docbook.xds.in.h:90
+msgid "Media Object"
+msgstr "Objeto de media"
+
+#: dispspecs/docbook.xds.in.h:91
+msgid "Menu Choice"
+msgstr "Elección de menú"
+
+#: dispspecs/docbook.xds.in.h:92
+msgid "Meta-information about a Reference Page"
+msgstr "Meta-información acerca de una página de referencia"
+
+#: dispspecs/docbook.xds.in.h:93
+msgid "Meta-information for a book"
+msgstr "Metainformación para un libro"
+
+#: dispspecs/docbook.xds.in.h:94
+msgid "Meta-information for an article"
+msgstr "Metainformación para un artículo"
+
+#: dispspecs/docbook.xds.in.h:96
+msgid "Miscellaneous Bibliographic Information"
+msgstr "Información bibliográfica miscelánea"
+
+#: dispspecs/docbook.xds.in.h:98
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "Nombre, propósito y clasificación acerca de una Página de referencia"
+
+#: dispspecs/docbook.xds.in.h:99
+msgid "Naming"
+msgstr "Nombrado"
+
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
+msgid "Note"
+msgstr "Nota"
+
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "Párrafo"
+
+#: dispspecs/docbook.xds.in.h:102
+msgid "Paragraph (titled)"
+msgstr "Párrafo (titulado)"
+
+#: dispspecs/docbook.xds.in.h:103
+msgid "Part"
+msgstr "Parte"
+
+#: dispspecs/docbook.xds.in.h:104
+msgid "Preface"
+msgstr "Prefacio"
+
+#: dispspecs/docbook.xds.in.h:105
+msgid "Printing History"
+msgstr "Histórico de impresión"
+
+#: dispspecs/docbook.xds.in.h:106
+msgid "Procedure"
+msgstr "Procedimiento"
+
+#: dispspecs/docbook.xds.in.h:107
+msgid "Product Name"
+msgstr "Nombre del producto"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: dispspecs/docbook.xds.in.h:116
+msgid "Program Listing"
+msgstr "Listado de programa"
+
+#: dispspecs/docbook.xds.in.h:117
+msgid "Prompt"
+msgstr ""
+
+#: dispspecs/docbook.xds.in.h:118
+msgid "Publisher"
+msgstr "Editor"
+
+#: dispspecs/docbook.xds.in.h:119
+msgid "Publisher Name"
+msgstr "Nombre del editor"
+
+#: dispspecs/docbook.xds.in.h:120
+msgid "Purpose"
+msgstr "Propósito"
+
+#: dispspecs/docbook.xds.in.h:121
+msgid "Question"
+msgstr "Pregunta"
+
+#: dispspecs/docbook.xds.in.h:122
+msgid "Question-and-Answer"
+msgstr "Pregunta y respuesta"
+
+#: dispspecs/docbook.xds.in.h:123
+msgid "Question-and-Answer Set"
+msgstr "Conjunto de pregunta y respuesta"
+
+#: dispspecs/docbook.xds.in.h:124
+msgid "Question-and-Answer Subset"
+msgstr "Subconjunto de pregunta y respuesta"
+
+#: dispspecs/docbook.xds.in.h:125
+msgid "Quote"
+msgstr "Cita"
+
+#: dispspecs/docbook.xds.in.h:126
+msgid "Reference"
+msgstr "Referencia"
+
+#: dispspecs/docbook.xds.in.h:127
+msgid "Reference Page"
+msgstr "Página de referencia"
+
+#: dispspecs/docbook.xds.in.h:128
+msgid "Release Information"
+msgstr "Información de publicación"
+
+#: dispspecs/docbook.xds.in.h:129
+msgid "Replaceable Text"
+msgstr "Texto reemplazable"
+
+#: dispspecs/docbook.xds.in.h:130
+msgid "Revision"
+msgstr "Revisión"
+
+#: dispspecs/docbook.xds.in.h:131
+msgid "Revision History"
+msgstr "Histórico de revisiones"
+
+#: dispspecs/docbook.xds.in.h:132
+msgid "Revision Remark"
+msgstr "Remarca de revisión"
+
+#: dispspecs/docbook.xds.in.h:133
+msgid "SGML Tag"
+msgstr "Etiqueta SGML"
+
+#: dispspecs/docbook.xds.in.h:134
+msgid "Screen"
+msgstr "Pantalla"
+
+#: dispspecs/docbook.xds.in.h:135
+msgid "Screenshot"
+msgstr "Pantallazo"
+
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:29
+msgid "Section"
+msgstr "Sección"
+
+#: dispspecs/docbook.xds.in.h:137
+msgid "Section (level 5)"
+msgstr "Sección (nivel 5)"
+
+#: dispspecs/docbook.xds.in.h:138
+msgid "Set"
+msgstr "Conjunto"
+
+#: dispspecs/docbook.xds.in.h:139
+msgid "Step"
+msgstr "Paso"
+
+#: dispspecs/docbook.xds.in.h:140
+msgid "Structure Name"
+msgstr "Nombre de estructura"
+
+#: dispspecs/docbook.xds.in.h:141
+msgid "Subsection"
+msgstr "Subsección"
+
+#: dispspecs/docbook.xds.in.h:142
+msgid "Subsection (level 3)"
+msgstr "Subsección (nivel 3)"
+
+#: dispspecs/docbook.xds.in.h:143
+msgid "Subsection (level 4)"
+msgstr "Subsección (nivel 4)"
+
+#: dispspecs/docbook.xds.in.h:144
+msgid "Substeps"
+msgstr "Subpasos"
+
+#: dispspecs/docbook.xds.in.h:145
+msgid "Subsubsection"
+msgstr "Subsubsección"
+
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
+msgid "Subtitle"
+msgstr "Subtítulo"
+
+#: dispspecs/docbook.xds.in.h:147
+msgid "Surname"
+msgstr "Apellidos"
+
+#: dispspecs/docbook.xds.in.h:148
+msgid "Symbol"
+msgstr "Símbolo"
+
+#: dispspecs/docbook.xds.in.h:149
+msgid "Synopsis (syntax)"
+msgstr "Sinopsis (sintaxis)"
+
+#: dispspecs/docbook.xds.in.h:150
+msgid "Table (informal)"
+msgstr "Tabla (informal)"
+
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "Cuerpo de la tabla"
+
+#: dispspecs/docbook.xds.in.h:152
+msgid "Table Column Specification"
+msgstr "Especificación de columna de tabla"
+
+#: dispspecs/docbook.xds.in.h:153
+msgid "Table Entry"
+msgstr "Entrada de tabla"
+
+#: dispspecs/docbook.xds.in.h:154
+msgid "Table Entry (subtable)"
+msgstr "Entrada de tabla (subtabla)"
+
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "Pie de tabla"
+
+#: dispspecs/docbook.xds.in.h:156
+msgid "Table Group"
+msgstr "Grupo de tabla"
+
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "Cabecera de tabla"
+
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
+msgid "Table Row"
+msgstr "Fila de tabla"
+
+#: dispspecs/docbook.xds.in.h:159
+msgid "Term"
+msgstr "Término"
+
+#: dispspecs/docbook.xds.in.h:160
+msgid "Text Object"
+msgstr "Objeto de texto"
+
+#: dispspecs/docbook.xds.in.h:161
+msgid "The International Standard Book Number of a document."
+msgstr "El número International Standard Book Number de un documento."
+
+#: dispspecs/docbook.xds.in.h:162
+msgid "The International Standard Serial Number of a periodical."
+msgstr "El número International Standard Serial Number de un periódico."
+
+#: dispspecs/docbook.xds.in.h:163
+msgid "The first place where a word or term occurs in a particular context"
+msgstr "El primer lugar donde una palabra o término aparece en un contexto determinado"
+
+#: dispspecs/docbook.xds.in.h:164
+msgid "The name of a function, subroutine or procedure"
+msgstr "El nombre de una función, subrutina o procedimiento"
+
+#: dispspecs/docbook.xds.in.h:165
+msgid "The printed text on a particular key on a keyboard"
+msgstr "El texto impreso en una tecla particular en un teclado"
+
+#: dispspecs/docbook.xds.in.h:166
+msgid "Tip"
+msgstr "Consejo"
+
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "Título"
+
+#: dispspecs/docbook.xds.in.h:168
+msgid "Title Citation"
+msgstr "Cita del título"
+
+#: dispspecs/docbook.xds.in.h:169
+msgid "URL Link"
+msgstr "Enlace URL"
+
+#: dispspecs/docbook.xds.in.h:170
+msgid "User Input"
+msgstr "Entrada de usuario"
+
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "Advertencia"
+
+#: dispspecs/docbook.xds.in.h:172
+msgid "Year"
+msgstr "Año"
+
+#: dispspecs/forrest-document.xds.in.h:3 dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "Ancla"
+
+#: dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "Apache Documentation DTD v1.2"
+
+#: dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "Autores"
+
+#: dispspecs/forrest-document.xds.in.h:7
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "Código"
+
+#: dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "Término definido"
+
+#: dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "Lista de definición"
+
+#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:988
+msgid "Document"
+msgstr "Documento"
+
+#: dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "Cuerpo del documento"
+
+#: dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "Arréglame"
+
+#: dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "Pie"
+
+#: dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "Bifurcación"
+
+#: dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "Cabecera"
+
+#: dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "Icono"
+
+#: dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "Img"
+
+#: dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "Salto"
+
+#: dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "Info legal"
+
+#: dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "Salto de línea"
+
+#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Enlace"
+
+#: dispspecs/forrest-document.xds.in.h:27
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "Lista (no ordenada)"
+
+#: dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "Elemento de lista"
+
+#: dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "Nota"
+
+#: dispspecs/forrest-document.xds.in.h:32
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "Persona"
+
+#: dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "Origen"
+
+#: dispspecs/forrest-document.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "Remarcado"
+
+#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "Subíndice"
+
+#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "Superíndice"
+
+#: dispspecs/forrest-document.xds.in.h:39 dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "Tabla"
+
+#: dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "Celda de tabla"
+
+#: dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "Celda de cabecera de tabla"
+
+#: dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "Fila de tabla"
+
+#: dispspecs/forrest-document.xds.in.h:43
+msgid ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://xml."
+"apache.org/forrest ."
+msgstr ""
+
+#: dispspecs/forrest-document.xds.in.h:45
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Tipo"
+
+#: dispspecs/forrest-document.xds.in.h:46
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "Versión"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "&quot;Kernel Traffic&quot; Newsletter"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid ""
+"A newsletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+msgstr ""
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "Comentario en bloque"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "Negrita"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "Salto (manual)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "Centrado"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "Cita"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "Corrección"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "Editorializar"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "Tipo"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "Cabecera (nivel 1)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "Cabecera (nivel 2)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "Cabecera (nivel 3)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "Hiperenlace"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "Emisión"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "Italizado"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "Kernel Cousin Newsletter"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "Entrecomillado"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:30
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "Tema"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Translator"
+msgstr "Traductor"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Underlined"
+msgstr "Subrayado"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Activity"
+msgstr "Actividad de control de versiones"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Statistics"
+msgstr "Estadísticas del control de versiones"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
+msgid "Version Control Tree"
+msgstr "Árbol de control de versiones"
+
+#: dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "Formulario abreviado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr ""
+
+#: dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "Área"
+
+#: dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "Base"
+
+#: dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr ""
+
+#: dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "Grande"
+
+#: dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "Comentario de bloque"
+
+#: dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "Cuerpo"
+
+#: dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "Botón"
+
+#: dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "Anotación"
+
+#: dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "Columna"
+
+#: dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "Grupo de columna"
+
+#: dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "Lista de definición"
+
+#: dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "Término de definición"
+
+#: dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "Texto borrado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "División"
+
+#: dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "Salto de línea forzado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "formulario de control"
+
+#: dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "Grupo de formulario de control"
+
+#: dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "Página HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "Cabecera"
+
+#: dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "Cabecera (nivel 4)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "Cabecera (nivel 5)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "Cabecera (nivel 6)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "Regla horizontal"
+
+#: dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "Imagen"
+
+#: dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "Mapa de imágen"
+
+#: dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "Entrecomillado en línea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "Texto insertado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "Formulario interactivo"
+
+#: dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "Itálica"
+
+#: dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "Etiqueta"
+
+#: dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "Leyenda"
+
+#: dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "Metainformación"
+
+#: dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "Campo de texto multiínea"
+
+#: dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "Objeto"
+
+#: dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "Grupo de opciones"
+
+#: dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "Selector de opciones"
+
+#: dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "Parámetro"
+
+#: dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "texto preformateado"
+
+#: dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "Muestra"
+
+#: dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "Escritura"
+
+#: dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "Opción seleccionable"
+
+#: dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "Pequeño"
+
+#: dispspecs/xhtml1-strict.xds.in.h:62 glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Expandir"
+
+#: dispspecs/xhtml1-strict.xds.in.h:64
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Estilo"
+
+#: dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "Celda de tabla (data)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "Celda de tabla (cabecea)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "Teletipo"
+
+#: dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "La versión XML estricta de HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "Variable"
+
+#: dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (stricto)"
 
 #: glade/cong-file-import.glade.h:1
 msgid "File Import Options"
@@ -80,14 +1301,7 @@ msgstr "Avanzado"
 msgid "Basic"
 msgstr "Básico"
 
-#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
-#: src/cong-file-export.c:341 src/cong-file-new.c:363
-#: src/cong-file-print.c:250 src/cong-parser-error.c:320
-msgid "Description"
-msgstr "Descripción"
-
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
 msgid "Document Type Declaration"
 msgstr "Declaración de tipo de documento"
 
@@ -112,12 +1326,6 @@ msgstr "Ubicación"
 msgid "Modified"
 msgstr "Modificado"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
-#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
-msgid "Name"
-msgstr "Nombre"
-
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
@@ -133,15 +1341,6 @@ msgstr "En solitario"
 #: glade/cong-file-properties.glade.h:13
 msgid "System ID"
 msgstr "ID de sistema"
-
-#: glade/cong-file-properties.glade.h:14
-#: glade/docbook-ulink-properties.glade.h:5
-msgid "Type"
-msgstr "Tipo"
-
-#: glade/cong-file-properties.glade.h:15
-msgid "Version"
-msgstr "Versión"
 
 #: glade/cong-file-properties.glade.h:16
 msgid "XML Header"
@@ -220,10 +1419,6 @@ msgstr "Tipo de elemento"
 #: glade/custom-element.glade.h:5
 msgid "I Don't Care"
 msgstr "No preocuparse"
-
-#: glade/custom-element.glade.h:6
-msgid "Span"
-msgstr "Expandir"
 
 #: glade/custom-element.glade.h:7
 msgid "Structural"
@@ -311,10 +1506,6 @@ msgstr "Minimizar el espacio vertical"
 msgid "Numbering"
 msgstr "Numeración"
 
-#: glade/docbook-orderedlist-properties.glade.h:10
-msgid "Style"
-msgstr "Estilo"
-
 #: glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
 msgstr "a, b, c, ..."
@@ -330,10 +1521,6 @@ msgid ""
 msgstr ""
 "<small>Algunas aplicaciones DocBook permiten que el comportamiento del "
 "enlace pueda ser personalizado usando el atributo \"type\". </small>"
-
-#: glade/docbook-ulink-properties.glade.h:2
-msgid "Link"
-msgstr "Enlace"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -371,7 +1558,7 @@ msgstr "Parámetros de creación"
 msgid "Depth"
 msgstr "Profundidad"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:984
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
 msgid "Document Type"
 msgstr "Tipo de documento"
 
@@ -389,8 +1576,7 @@ msgstr "Conglomerate no pudo cargar ningún archivo xds"
 
 #: src/cong-app.c:1133
 msgid "Conglomerate could not find any descriptions of document types."
-msgstr ""
-"Conglomerate no pudo encontrar ninguna descripción de tipos de documento."
+msgstr "Conglomerate no pudo encontrar ninguna descripción de tipos de documento."
 
 #: src/cong-app.c:1135
 msgid ""
@@ -402,21 +1588,27 @@ msgstr ""
 "instalado. Pruebe a instalarlo.  Si ha cambiado la configuración "
 "predeterminada para la ruta de espec. de la pantalla, compruebe eso también."
 
-#: src/cong-attribute-editor-cdata.c:218
-#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
+#: src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Establecer atributo «%s» a «%s»"
+
+#: src/cong-attribute-editor.c:253 src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-wrapper.c:263
+#: src/cong-node-properties-dialog.c:506
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Borrar atributo «%s»"
+
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
 #: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Añadir atributo «%s»"
 
-#: src/cong-attribute-editor-cdata.c:244
-#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-editor.c:267
-#: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
-#, c-format
-msgid "Delete attribute \"%s\""
-msgstr "Borrar atributo «%s»"
-
-#: src/cong-attribute-editor-enumeration.c:121
+#: src/cong-attribute-editor-enumeration.c:122
 msgid "(unspecified)"
 msgstr "(no especificado)"
 
@@ -512,32 +1704,36 @@ msgstr "Sueco"
 msgid "Ukrainian"
 msgstr "Ucraniano"
 
-#: src/cong-attribute-editor-lang.c:159
+#: src/cong-attribute-editor-lang.c:157
 msgid "No Language"
 msgstr "Sin idioma"
 
-#. are there mem leaks here
-#: src/cong-attribute-editor-nmtoken.c:210
-#, fuzzy, c-format
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
+#, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
-msgstr "Establecer atributo «%s» a «%s»"
+msgstr "Imposible establecer el atributo «%s» a «%s»"
 
-#: src/cong-attribute-editor-nmtoken.c:222
+#: src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
-msgstr ""
+msgstr "El valor del atributo debe ser un nombre de token XML"
 
-#: src/cong-attribute-editor-nmtoken.c:223
+#: src/cong-attribute-editor-nmtoken.c:237
 msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
 "characters."
 msgstr ""
-
-#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
-#: src/cong-node-properties-dialog.c:424
-#, c-format
-msgid "Set attribute \"%s\" to \"%s\""
-msgstr "Establecer atributo «%s» a «%s»"
 
 #: src/cong-dialog.c:301
 msgid "_Close without Saving"
@@ -567,8 +1763,7 @@ msgstr ""
 "se descartarán."
 
 #: src/cong-dialog.c:325
-msgid ""
-"If you close without saving, changes from the past minute will be discarded."
+msgid "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
 "Si cierra sin guardar, los cambios realizados en el último minuto se "
 "descartarán."
@@ -592,12 +1787,20 @@ msgstr "Los cambios realizados en los últimos %li minutos serán descartados."
 msgid "Changes from the past minute will be discarded."
 msgstr "Los cambios realizados en el último minuto serán descartados."
 
-#: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
+#: src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "sin nombre"
+
+#: src/cong-dispspec.c:536
+msgid "No description available."
+msgstr "No hay descripción disponible."
+
+#: src/cong-dispspec-element.c:705 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath falló)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:771
+#: src/cong-dispspec-element.c:741
 msgid "<untitled>"
 msgstr "<sin título>"
 
@@ -617,92 +1820,80 @@ msgstr "Tipo de archivo"
 msgid "Coverage"
 msgstr "Cubierta"
 
-#: src/cong-dispspec.c:501
-msgid "unnamed"
-msgstr "sin nombre"
-
-#: src/cong-dispspec.c:521
-msgid "No description available."
-msgstr "No hay descripción disponible."
-
-#: src/cong-document.c:649
+#: src/cong-document.c:651
 msgid "(Untitled)"
 msgstr "(Sin título)"
 
-#: src/cong-document.c:948
+#: src/cong-document.c:955
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Atributo «%s»"
 
-#: src/cong-document.c:955
+#: src/cong-document.c:962
 #, c-format
 msgid "Text \"%s\""
 msgstr "Texto \"%s\""
 
-#: src/cong-document.c:961
+#: src/cong-document.c:968
 msgid "Character Data"
 msgstr "Datos de carácter"
 
-#: src/cong-document.c:964
+#: src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Referencia a entidad «%s»"
 
-#: src/cong-document.c:967
+#: src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entidad «%s»"
 
-#: src/cong-document.c:970
+#: src/cong-document.c:977
 msgid "XML Processing Instruction"
 msgstr "Instrucción de proceso XML"
 
-#: src/cong-document.c:975
+#: src/cong-document.c:982
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Comentario «%s»"
 
-#: src/cong-document.c:981
-msgid "Document"
-msgstr "Documento"
-
-#: src/cong-document.c:987
+#: src/cong-document.c:994
 msgid "Document Fragment"
 msgstr "Fragmento de documento"
 
-#: src/cong-document.c:990
+#: src/cong-document.c:997
 msgid "Notation"
 msgstr "Anotación"
 
-#: src/cong-document.c:993
+#: src/cong-document.c:1000
 msgid "HTML Document"
 msgstr "Documento HTML"
 
-#: src/cong-document.c:999
+#: src/cong-document.c:1006
 msgid "Element Declaration"
 msgstr "Declaración de elemento"
 
-#: src/cong-document.c:1002
+#: src/cong-document.c:1009
 msgid "Attribute Declaration"
 msgstr "Declaración de atributo"
 
-#: src/cong-document.c:1005
+#: src/cong-document.c:1012
 msgid "Entity Declaration"
 msgstr "Declaración de entidad"
 
-#: src/cong-document.c:1008
+#: src/cong-document.c:1015
 msgid "Namespace Declaration"
 msgstr "Declaración de espacio de nombres"
 
-#: src/cong-document.c:1011
+#: src/cong-document.c:1018
 msgid "XInclude Start"
 msgstr "Inicio XInclude"
 
-#: src/cong-document.c:1014
+#: src/cong-document.c:1021
 msgid "XInclude End"
 msgstr "Fin XInclude"
 
-#: src/cong-document.c:2173
+#: src/cong-document.c:2180
 #, c-format
 msgid "Select %s"
 msgstr "Seleccionar %s"
@@ -733,39 +1924,39 @@ msgstr "Reemplazar _todos"
 msgid "Find"
 msgstr "Buscar"
 
-#: src/cong-editor-node-text.c:984
+#: src/cong-editor-node-text.c:898
 msgid "Select word"
 msgstr "Seleccionar palabra"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:923
 msgid "Move cursor"
 msgstr "Mover cursor"
 
-#: src/cong-editor-node-text.c:1095
+#: src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
 msgstr "Arrastrar selección"
 
-#: src/cong-editor-widget3.c:260
+#: src/cong-editor-widget3.c:268
 msgid "Expander Size"
 msgstr "Tamaño del expansor"
 
-#: src/cong-editor-widget3.c:261
+#: src/cong-editor-widget3.c:269
 msgid "Size of the expander arrow"
 msgstr "Tamaño de la flecha del expansor"
 
-#: src/cong-editor-widget3.c:745
+#: src/cong-editor-widget3.c:735
 msgid "Input Method"
 msgstr "Método de entrada"
 
-#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
+#: src/cong-editor-widget3.c:865 src/cong-editor-widget3.c:1396
 msgid "Typing"
 msgstr "Tecleo"
 
-#: src/cong-editor-widget3.c:1289
+#: src/cong-editor-widget3.c:1297
 msgid "Cursor Movement"
 msgstr "Movimiento del cursor"
 
-#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
+#: src/cong-editor-widget3.c:1337 src/cong-editor-widget3.c:1350
 msgid "Delete Selection"
 msgstr "Borrar selección"
 
@@ -921,8 +2112,7 @@ msgid "The contents of the file seem to be corrupt."
 msgstr "El contenido del archivo parece estar corrompido."
 
 #: src/cong-error-file-open.c:339
-msgid ""
-"Try again.  If it fails again, try looking for a backup copy of the file."
+msgid "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 "Inténtelo otra vez. Si falla de nuevo, pruebe a buscar una copia de respaldo "
 "del archivo."
@@ -1076,8 +2266,7 @@ msgstr ""
 
 #: src/cong-error-file-save.c:164
 #, c-format
-msgid ""
-"The size of the file would be %s, but the device only has a capacity of %s."
+msgid "The size of the file would be %s, but the device only has a capacity of %s."
 msgstr ""
 "El tamaño del archivo debería ser %s, pero el dispositivo sólo tiene una "
 "capacidad de %s."
@@ -1101,8 +2290,7 @@ msgstr "Pruebe a guardar el archivo en una ubicación diferente."
 
 #: src/cong-error-file-save.c:208
 #, c-format
-msgid ""
-"The size of the file would be %s, but you only have %s free on that device."
+msgid "The size of the file would be %s, but you only have %s free on that device."
 msgstr ""
 "El tamaño del archivo podría ser %s, pero sólo tiene %s libres en ese "
 "dispositivo."
@@ -1190,8 +2378,7 @@ msgstr ""
 
 #: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
 msgid "Try again. If it fails again, try saving to another location."
-msgstr ""
-"Intente de nuevo. Si falla otra vez, intente guardar en otra ubicación."
+msgstr "Intente de nuevo. Si falla otra vez, intente guardar en otra ubicación."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:346
@@ -1227,8 +2414,7 @@ msgstr "comprobando fallo genérico de  «%s» con resultado %s"
 
 #: src/cong-error-tests.c:40
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr ""
-"Conglomerate está simulando el fallo de una operación de archivado genérica."
+msgstr "Conglomerate está simulando el fallo de una operación de archivado genérica."
 
 #: src/cong-error-tests.c:43
 msgid "This dialog was generated by the automated testing routine"
@@ -1263,16 +2449,13 @@ msgstr "Archivo:"
 msgid "Export Options"
 msgstr "Opciones de exportación"
 
-#: src/cong-file-export.c:436
-#, c-format
-msgid "Conglomerate cannot export \"%s\""
-msgstr "No se ha podido exportar «%s»"
+#: src/cong-file-export.c:431
+msgid "No output file specified"
+msgstr "No se especificó un fichero de salida"
 
-#: src/cong-file-export.c:439
-msgid "None of Conglomerate's plugins know how to export files of that type."
-msgstr ""
-"Ninguno de los complementos de Conglomerate sabe como cargar archivos de ese "
-"tipo."
+#: src/cong-file-export.c:432
+msgid "Please specify a file name."
+msgstr "Especifique un nombre de archivo."
 
 #: src/cong-file-import.c:80
 msgid "Import file..."
@@ -1311,8 +2494,7 @@ msgid "What type of file would you like to create?"
 msgstr "¿Qué tipo de archivo quiere crear?"
 
 #: src/cong-file-new.c:634
-msgid ""
-"Highlight one of the items in the list and select \"Forward\" to continue"
+msgid "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Resalte uno de los elementos y pulse «Adelante» para continuar"
 
 #: src/cong-file-new.c:644
@@ -1345,7 +2527,7 @@ msgstr ""
 msgid "Force"
 msgstr "Forzar"
 
-#: src/cong-file-open.c:210
+#: src/cong-file-open.c:218
 msgid "Select an XML document"
 msgstr "Seleccione un documento XML"
 
@@ -1366,7 +2548,7 @@ msgstr "Método de impresión:"
 msgid "Print Options"
 msgstr "Opciones de impresión"
 
-#: src/cong-file-print.c:336 src/cong-menus.c:731
+#: src/cong-file-print.c:336 src/cong-menus.c:727
 msgid "Print Preview"
 msgstr "Vista previa de la impresión"
 
@@ -1427,7 +2609,7 @@ msgstr "No especificado"
 msgid "Remove DTD"
 msgstr "Eliminar DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1674
+#: src/cong-file-properties.c:380 src/cong-util.c:1683
 msgid "Associate with DTD"
 msgstr "Asociar con DTD"
 
@@ -1436,23 +2618,22 @@ msgid "Save XML as..."
 msgstr "Guardar XML como..."
 
 #: src/cong-file-save.c:110
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "El documento «%s» es válido."
+msgstr "El documento «%s» es de sólo lectura.\n"
 
 #: src/cong-file-save.c:113
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr ""
+msgstr "Ya existe un archivo llamado «%s».\n"
 
 #: src/cong-file-save.c:121
-#, fuzzy
 msgid "_Replace"
-msgstr "Reemplazar"
+msgstr "_Reemplazar"
 
 #: src/cong-file-save.c:131
 msgid "Do you want to replace it with the one you are saving?"
-msgstr ""
+msgstr "¿Quiere reemplazarlo con el que está guardando?"
 
 #: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
@@ -1470,53 +2651,59 @@ msgstr "Calculando página anterior"
 msgid "Calculating next page"
 msgstr "Calculando página siguiente"
 
-#: src/cong-menus.c:114 src/cong-menus.c:167 src/cong-menus.c:201
+#: src/cong-menus.c:112 src/cong-menus.c:165 src/cong-menus.c:199
 msgid "The selected menu item has not yet been implemented."
 msgstr "El elemento de menú seleccionado todavía no ha sido implementado."
 
-#: src/cong-menus.c:467
+#: src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate no puede abrir el resultado de la transformación"
 
-#: src/cong-menus.c:532 src/cong-plugin.c:699
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: src/cong-menus.c:528 src/cong-plugin.c:734
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Hubo un problema al leer el archivo de la hoja de estilos «%s»"
 
-#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:702
-#: src/cong-plugin.c:732
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-plugin.c:736
+#: src/cong-plugin.c:799
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate no pudo transformar el documento"
 
-#: src/cong-menus.c:556 src/cong-plugin.c:729
+#: src/cong-menus.c:552
 msgid "There was a problem applying the stylesheet file"
 msgstr "Hubo un problema al aplicar el archivo de la hoja de estilos"
 
-#: src/cong-menus.c:1117
+#: src/cong-menus.c:1113
 msgid "Test Progress Checklist"
 msgstr "Lista de comprobación de progreso"
 
-#: src/cong-menus.c:1121
+#: src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
 msgstr "Esta es la fase %i"
 
-#: src/cong-menus.c:1172
+#: src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
 msgstr "Registro de mensajes - Conglomerate"
 
-#: src/cong-menus.c:1191
+#: src/cong-menus.c:1187
 msgid "Signal Log - Conglomerate"
 msgstr "Registro de señales - Conglomerate"
 
-#: src/cong-menus.c:1432
+#: src/cong-menus.c:1427
 msgid "translator_credits"
 msgstr ""
 "Francisco Javier F. <franciscojavier.fernandez.serrador@hispalinux.es>Juan "
 "Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Germán Poo Caamaño <gpoo@ubiobio.cl>"
 
-#: src/cong-menus.c:1436
+#: src/cong-menus.c:1446
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -1524,163 +2711,163 @@ msgstr ""
 "© 1999 Hans Petter Jansson\n"
 "© 2004 David Malcolm"
 
-#: src/cong-menus.c:1437
+#: src/cong-menus.c:1447
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate:un editor de XML amigable"
 
 #. Menus:
-#: src/cong-menus.c:1471
+#: src/cong-menus.c:1481
 msgid "_File"
 msgstr "_Archivo"
 
-#: src/cong-menus.c:1472
+#: src/cong-menus.c:1482
 msgid "_Edit"
 msgstr "_Editar"
 
-#: src/cong-menus.c:1477
+#: src/cong-menus.c:1487
 msgid "_Help"
 msgstr "A_yuda"
 
 #. Sub-menus:
-#: src/cong-menus.c:1480 src/popup.c:1099
+#: src/cong-menus.c:1490 src/popup.c:1099
 msgid "New sub-element"
 msgstr "Sub-elemento nuevo"
 
-#: src/cong-menus.c:1481 src/popup.c:1113
+#: src/cong-menus.c:1491 src/popup.c:1113
 msgid "New sibling"
 msgstr "Silabeo nuevo"
 
-#: src/cong-menus.c:1482
+#: src/cong-menus.c:1492
 msgid "Remove span tag"
 msgstr "Eliminar etiqueta de expansión"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1485
+#: src/cong-menus.c:1495
 msgid "_New..."
 msgstr "_Nuevo..."
 
-#: src/cong-menus.c:1486
+#: src/cong-menus.c:1496
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: src/cong-menus.c:1487
+#: src/cong-menus.c:1497
 msgid "_Import..."
 msgstr "_Importar..."
 
-#: src/cong-menus.c:1488
+#: src/cong-menus.c:1498
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: src/cong-menus.c:1489
+#: src/cong-menus.c:1499
 msgid "_Quit"
 msgstr "_Salir"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1493
-msgid "Prefere_nces"
+#: src/cong-menus.c:1503
+msgid "Pr_eferences"
 msgstr "Prefere_ncias"
 
 #. Actions found in Help menu:
-#: src/cong-menus.c:1506
+#: src/cong-menus.c:1516
 msgid "_Contents"
 msgstr "_Índice"
 
-#: src/cong-menus.c:1507
+#: src/cong-menus.c:1517
 msgid "_Homepage"
 msgstr "_Página de inicio"
 
-#: src/cong-menus.c:1508
+#: src/cong-menus.c:1518
 msgid "_About"
 msgstr "A_cerca de"
 
-#: src/cong-menus.c:1514
+#: src/cong-menus.c:1524
 msgid "_Tools"
 msgstr "_Herramientas"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1518
+#: src/cong-menus.c:1528
 msgid "_Save"
 msgstr "_Guardar"
 
-#: src/cong-menus.c:1519
+#: src/cong-menus.c:1529
 msgid "Save _as..."
 msgstr "Guardar _como..."
 
-#: src/cong-menus.c:1520
+#: src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
 msgstr "_Guardar una copia..."
 
-#: src/cong-menus.c:1522
+#: src/cong-menus.c:1532
 msgid "Print Previe_w..."
 msgstr "Pre_visualizar impresión..."
 
-#: src/cong-menus.c:1523
+#: src/cong-menus.c:1533
 msgid "_Print"
 msgstr "Im_primir"
 
-#: src/cong-menus.c:1526
+#: src/cong-menus.c:1536
 msgid "_Revert"
 msgstr "_Revertir"
 
-#: src/cong-menus.c:1528
+#: src/cong-menus.c:1538
 msgid "_Export..."
 msgstr "_Exportar..."
 
-#: src/cong-menus.c:1529
+#: src/cong-menus.c:1539
 msgid "Proper_ties"
 msgstr "Pr_opiedades"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1533 src/cong-menus.c:1756
+#: src/cong-menus.c:1543 src/cong-menus.c:1768
 msgid "_Undo"
 msgstr "_Deshacer"
 
-#: src/cong-menus.c:1534 src/cong-menus.c:1766
+#: src/cong-menus.c:1544 src/cong-menus.c:1778
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: src/cong-menus.c:1535
+#: src/cong-menus.c:1545
 msgid "Cu_t"
 msgstr "Cor_tar"
 
-#: src/cong-menus.c:1536 src/popup.c:755 src/popup.c:1051
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1051
 msgid "_Copy"
 msgstr "_Copiar"
 
-#: src/cong-menus.c:1537 src/popup.c:769
+#: src/cong-menus.c:1547 src/popup.c:769
 msgid "_Paste"
 msgstr "_Pegar"
 
-#: src/cong-menus.c:1538
+#: src/cong-menus.c:1548
 msgid "_Find..."
 msgstr "_Buscar..."
 
-#: src/cong-menus.c:1539
+#: src/cong-menus.c:1549
 msgid "Find Ne_xt"
 msgstr "Buscar _siguiente"
 
-#: src/cong-menus.c:1540
+#: src/cong-menus.c:1550
 msgid "Find Pre_vious"
 msgstr "Buscar _anterior"
 
-#: src/cong-menus.c:1541
+#: src/cong-menus.c:1551
 msgid "R_eplace..."
 msgstr "R_eemplazar..."
 
-#: src/cong-menus.c:1543
+#: src/cong-menus.c:1553
 msgid "_Insert..."
 msgstr "_Insertar..."
 
-#: src/cong-menus.c:1544
+#: src/cong-menus.c:1554
 msgid "View _Source"
 msgstr "Ver _fuente"
 
-#: src/cong-menus.c:1752
+#: src/cong-menus.c:1764
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Deshacer: %s"
 
-#: src/cong-menus.c:1762
+#: src/cong-menus.c:1774
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Rehacer : %s"
@@ -1787,35 +2974,57 @@ msgstr "Mostrar detalles"
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate no pudo mostrar información para el archivo nuevo"
 
+#: src/cong-plugin.c:738
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+
+#: src/cong-plugin.c:769
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "Hubo un problema al aplicar el archivo de la hoja de estilos «%s» a «%s»"
+
+#: src/cong-plugin.c:786
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"Se usaron los siguientes parámetros de la hoja de estilo:\n"
+
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1204
+#: src/cong-plugin.c:1283
 #, c-format
 msgid "<%s> property dialog"
 msgstr "diálogo de propiedades <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1207
+#: src/cong-plugin.c:1286
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Proporciona un diálogo de Propiedades para el elemento <%s>"
 
-#: src/cong-primary-window.c:382
+#: src/cong-primary-window.c:374
 msgid "Overview"
 msgstr "Vista general"
 
-#: src/cong-primary-window.c:393
+#: src/cong-primary-window.c:385
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: src/cong-primary-window.c:403
+#: src/cong-primary-window.c:395
 msgid "Raw XML"
 msgstr "XML en bruto"
 
-#: src/cong-primary-window.c:608 src/cong-primary-window.c:627
+#: src/cong-primary-window.c:600 src/cong-primary-window.c:619
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Bienvenido al muy inmaduro editor Conglomerate."
 
-#: src/cong-primary-window.c:740
+#: src/cong-primary-window.c:732
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (modificado) - %s"
@@ -1824,7 +3033,7 @@ msgstr "%s (modificado) - %s"
 msgid "Cleanup XML Source"
 msgstr "Limpiar fuente XML"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1301
+#: src/cong-util.c:368 src/plugin-docbook.c:1401
 msgid "Printing XSL Formatting Objects"
 msgstr "Imprimiendo objetos de formateo XSL"
 
@@ -1836,11 +3045,11 @@ msgstr "Esto será eventualmente el resultado de cong_util_print_xslfo"
 msgid "(no description available)"
 msgstr "(no hay descripción disponible)"
 
-#: src/cong-util.c:1663
+#: src/cong-util.c:1672
 msgid "DTD files"
 msgstr "Archivos DTD"
 
-#: src/cong-util.c:1666
+#: src/cong-util.c:1675
 msgid "Select a DTD"
 msgstr "Seleccionar una DTD"
 
@@ -1857,11 +3066,11 @@ msgstr "Archivos XML"
 msgid "All Files"
 msgstr "Todos los archivos"
 
-#: src/plugin-admonition.c:76
+#: src/plugin-admonition.c:77
 msgid "Admonition"
 msgstr "Admonición"
 
-#: src/plugin-admonition.c:77
+#: src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr "Un nodo de edición para visualizar consejos, advertencias, etc"
 
@@ -1903,63 +3112,95 @@ msgstr ""
 "el documento a minúsculas. Útil cuando se trabaja con documentos SGML "
 "heredados."
 
-#: src/plugin-docbook.c:220
+#: src/plugin-docbook.c:224
 msgid "Untitled section"
 msgstr "Sección sin título"
 
-#: src/plugin-docbook.c:227
+#: src/plugin-docbook.c:231
 msgid "Text of the article goes here"
 msgstr "El texto del artículo va aquí"
 
-#: src/plugin-docbook.c:246
+#: src/plugin-docbook.c:250
 msgid "Untitled Article"
 msgstr "Artículo sin título"
 
-#: src/plugin-docbook.c:296
+#: src/plugin-docbook.c:300
 msgid "Untitled chapter"
 msgstr "Capítulo sin título"
 
-#: src/plugin-docbook.c:303
+#: src/plugin-docbook.c:307
 msgid "Text of the first chapter goes here"
 msgstr "El texto dep primer capítulo va aquí"
 
-#: src/plugin-docbook.c:322
+#: src/plugin-docbook.c:326
 msgid "Untitled Book"
 msgstr "Libro sin título"
 
-#: src/plugin-docbook.c:373
+#: src/plugin-docbook.c:377
 msgid "Untitled book"
 msgstr "Libro sin título"
 
-#: src/plugin-docbook.c:392
+#: src/plugin-docbook.c:396
 msgid "Untitled Set of Documents"
 msgstr "Conjunto de documentos sin título"
 
-#: src/plugin-docbook.c:1169
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: src/plugin-docbook.c:1102
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr "Conglomerate no puede encontrar la hoja de estilo usada para convertir DocBook a %s"
+
+#: src/plugin-docbook.c:1105
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Imposible ubicar las hojas de estilo DocBook"
+
+#: src/plugin-docbook.c:1107
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr "Asegúrese de que las hojas de estilo de DocBook de norman Walsh , disponibles en http://docbook.sourceforge.net/projects/xsl/ están instaladas y están añadidas a su fichero de catálogos XML (vea  http://www.xmlsoft.org/catalog.html para más información acerca de los catálogos)."
+
+#: src/plugin-docbook.c:1143
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"conversión de %s completa.\n"
+"\n"
+"%s se convirtió a %s en %s"
+
+#: src/plugin-docbook.c:1267
 msgid "Exporting PDF file"
 msgstr "Exportando archivo PDF"
 
-#: src/plugin-docbook.c:1173 src/plugin-docbook.c:1299
+#: src/plugin-docbook.c:1271 src/plugin-docbook.c:1399
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transformar DocBook en Objetos de Formato XSL"
 
-#: src/plugin-docbook.c:1175
+#: src/plugin-docbook.c:1273
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Maquetar Objetos de Formato XSL como un archivo PDF"
 
-#: src/plugin-docbook.c:1190 src/plugin-fo.c:97
+#: src/plugin-docbook.c:1288 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Convirtiendo Objetos de Formato XSL a PDF"
 
-#: src/plugin-docbook.c:1295
+#: src/plugin-docbook.c:1395
 msgid "Printing DocBook file"
 msgstr "Imprimiendo archivo DocBook"
 
-#: src/plugin-docbook.c:1694
+#: src/plugin-docbook.c:1795
 msgid "DocBook Article"
 msgstr "Artículo DocBook"
 
-#: src/plugin-docbook.c:1695
+#: src/plugin-docbook.c:1796
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -1967,37 +3208,35 @@ msgstr ""
 "Crear un artículo, quizá para un sitio web o revista, usando el formato "
 "\"DocBook\""
 
-#: src/plugin-docbook.c:1702
+#: src/plugin-docbook.c:1803
 msgid "DocBook Book"
 msgstr "Libro DocBook"
 
-#: src/plugin-docbook.c:1703
+#: src/plugin-docbook.c:1804
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Crear un libro, usando el formato \"DocBook\""
 
-#: src/plugin-docbook.c:1710
+#: src/plugin-docbook.c:1811
 msgid "DocBook Set"
 msgstr "Conjunto DocBook"
 
-#: src/plugin-docbook.c:1711
+#: src/plugin-docbook.c:1812
 msgid "Create a set of related books, using the \"DocBook\" format"
-msgstr ""
-"Crear un conjunto de libros relacionados, usando el formato \"DocBook\""
+msgstr "Crear un conjunto de libros relacionados, usando el formato \"DocBook\""
 
-#: src/plugin-docbook.c:1719
+#: src/plugin-docbook.c:1820
 msgid "Import text as a DocBook article"
 msgstr "Importar texto como un artículo DocBook"
 
-#: src/plugin-docbook.c:1720
+#: src/plugin-docbook.c:1821
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
-msgstr ""
-"Importar un archivo de texto plano al formato «DocBook», como un artículo."
+msgstr "Importar un archivo de texto plano al formato «DocBook», como un artículo."
 
-#: src/plugin-docbook.c:1738
+#: src/plugin-docbook.c:1839
 msgid "Export DocBook as HTML"
 msgstr "Exportar DocBook como HTML"
 
-#: src/plugin-docbook.c:1739
+#: src/plugin-docbook.c:1840
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -2005,11 +3244,11 @@ msgstr ""
 "Usar las hojas de estilos de Norman Walsh para crear una página web desde "
 "este archivo DocBook"
 
-#: src/plugin-docbook.c:1747
+#: src/plugin-docbook.c:1848
 msgid "Export DocBook as PDF"
 msgstr "Exportar DocBook como PDF"
 
-#: src/plugin-docbook.c:1748
+#: src/plugin-docbook.c:1849
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -2017,11 +3256,11 @@ msgstr ""
 "Usar las hojas de estilos de Norman Walsh para crear un archivo PDF desde "
 "este archivo DocBook"
 
-#: src/plugin-docbook.c:1756
+#: src/plugin-docbook.c:1857
 msgid "Export DocBook as XSL:FO"
 msgstr "Exportar DocBook como XSL:FO"
 
-#: src/plugin-docbook.c:1757
+#: src/plugin-docbook.c:1858
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -2029,29 +3268,28 @@ msgstr ""
 "Usar las hojas de estilos de Norman Walsh para crear un archivo XSL:FO desde "
 "este archivo DocBook que pueda imprimirse o convertirse a PDF posteriormente"
 
-#: src/plugin-docbook.c:1766
+#: src/plugin-docbook.c:1867
 msgid "Print DocBook"
 msgstr "Imprimir DocBook"
 
-#: src/plugin-docbook.c:1775
+#: src/plugin-docbook.c:1876
 msgid "Generic DocBook property dialog"
 msgstr "Diálogo de propiedades DocBook genérico"
 
-#: src/plugin-docbook.c:1776
+#: src/plugin-docbook.c:1877
 msgid "Provides a Properties dialog for most DocBook nodes"
-msgstr ""
-"Proporciona un diálogo de propiedades para la mayoría de los nodos DocBook"
+msgstr "Proporciona un diálogo de propiedades para la mayoría de los nodos DocBook"
 
-#: src/plugin-docbook.c:1794 src/plugin-docbook.c:1797 src/plugin-html.c:137
+#: src/plugin-docbook.c:1895 src/plugin-docbook.c:1898 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Abrir enlace en el navegador"
 
-#: src/plugin-docbook.c:1806
+#: src/plugin-docbook.c:1907
 msgid "Promote Section"
 msgstr "Promover sección"
 
-#: src/plugin-docbook.c:1807
+#: src/plugin-docbook.c:1908
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -2059,32 +3297,29 @@ msgstr ""
 "Promociona una sección DocBook a un nivel organizativo más alto dentro del "
 "documento"
 
-#: src/plugin-docbook.c:1809 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1910 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Promocionar"
 
-#: src/plugin-docbook.c:1810 src/plugin-docbook.c:1811
-msgid ""
-"Promote the section to a higher organisational level within the document"
-msgstr ""
-"Promocionar la sección a un nivel organizativo mayor dentro del documento"
+#: src/plugin-docbook.c:1911 src/plugin-docbook.c:1912
+msgid "Promote the section to a higher organisational level within the document"
+msgstr "Promocionar la sección a un nivel organizativo mayor dentro del documento"
 
-#: src/plugin-docbook.c:1817
+#: src/plugin-docbook.c:1918
 msgid "Demote Section"
 msgstr "Degradar sección"
 
-#: src/plugin-docbook.c:1818
-msgid ""
-"Demotes a DocBook section to a lower organisational level within the document"
+#: src/plugin-docbook.c:1919
+msgid "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Degrada una sección DocBook a un nivel organizativo menor dentro del "
 "documento"
 
-#: src/plugin-docbook.c:1820 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1921 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Degradar"
 
-#: src/plugin-docbook.c:1821 src/plugin-docbook.c:1822
+#: src/plugin-docbook.c:1922 src/plugin-docbook.c:1923
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Degrada la sección a un nivel organizativo menor dentro del documento"
 
@@ -2095,8 +3330,7 @@ msgstr "Tipo de documento autogenerado basado en %s"
 
 #: src/plugin-dtd.c:94
 #, c-format
-msgid ""
-"This Conglomerate display specification was automatically generated from %s"
+msgid "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 "Esta especificación de visualización de Conglomerate fue generada "
 "automáticamente desde %s"
@@ -2155,19 +3389,15 @@ msgstr "Generar un archivo PDF desde la información XSL:FO"
 msgid "Print XSL:FO"
 msgstr "Imprimir XSL:FO"
 
-#: src/plugin-lists.c:76
+#: src/plugin-lists.c:77
 msgid "List Member Element"
 msgstr "Elemento de miembro de lista"
 
-#: src/plugin-lists.c:77
+#: src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
 msgstr "Un nodo de editor para visualizar un miembro de una lista"
 
-#: src/plugin-paragraph.c:67
-msgid "Paragraph"
-msgstr "Párrafo"
-
-#: src/plugin-paragraph.c:68
+#: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "Un nodo del editor para visualizar un párrafo"
 
@@ -2278,8 +3508,7 @@ msgid "The document \"%s\" cannot be checked for validity."
 msgstr "No pudo comprobarse la validez del documento «%s»."
 
 #: src/plugin-validate.c:170
-msgid ""
-"You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgid "You can fix this by adding a Document Type Declaration (DTD) to the document"
 msgstr "por a Documento Tipo a documento"
 
 #: src/plugin-validate.c:215
@@ -2335,8 +3564,7 @@ msgstr "Generar sitio web"
 
 #: src/plugin-website.c:509 src/plugin-website.c:512 src/plugin-website.c:513
 msgid "Generates a collection of HTML pages from the website XML description"
-msgstr ""
-"Genera una colección de páginas HTML desde una descripción XML de sitio web"
+msgstr "Genera una colección de páginas HTML desde una descripción XML de sitio web"
 
 #: src/plugin-website.c:511
 msgid "Generate _Website"
@@ -2370,8 +3598,7 @@ msgid "Uncomment"
 msgstr "Descomentar"
 
 #: src/popup.c:628
-msgid ""
-"Convert a comment containing XML source code into the corresponding code"
+msgid "Convert a comment containing XML source code into the corresponding code"
 msgstr "Convertir a XML"
 
 #: src/popup.c:708 src/popup.c:1025
@@ -2452,169 +3679,3 @@ msgstr "Pegar después"
 msgid "Source View - Conglomerate"
 msgstr "Vista del fuente - Conglomerate"
 
-#~ msgid "Delete this item"
-#~ msgstr "Borrar este elemento"
-
-#~ msgid "Add text node after"
-#~ msgstr "Añadir nodo de texto después"
-
-#~ msgid "Add text node before"
-#~ msgstr "Añadir nodo de texto antes"
-
-#~ msgid "Set the text"
-#~ msgstr "Establecer el texto"
-
-#~ msgid "/File/_New..."
-#~ msgstr "/Archivo/_Nuevo..."
-
-#~ msgid "/File/_Open..."
-#~ msgstr "/Archivo/_Abrir..."
-
-#~ msgid "/File/"
-#~ msgstr "/Archivo/"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/Archivo/Guardar _como..."
-
-#~ msgid "/File/Print Previe_w..."
-#~ msgstr "/Archivo/Vista pre_via..."
-
-#~ msgid "/File/_Print..."
-#~ msgstr "/Archivo/_Importar..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/Archivo/_Propiedades"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Editar/_Deshacer"
-
-#~ msgid "/Edit/_Redo"
-#~ msgstr "/Editar/_Rehacer"
-
-#~ msgid "/Edit/"
-#~ msgstr "/Editar/"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Editar/C_ortar"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Editar/_Copiar"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Editar/_Pegar"
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Editar/Buscar _siguiente"
-
-#~ msgid "/Debug"
-#~ msgstr "/Depurar"
-
-#~ msgid "/Debug/Begin self-test of error-reporting system..."
-#~ msgstr "/Depurar/Iniciar auto-comprobación"
-
-#~ msgid "/Debug/Transform DocBook to HTML"
-#~ msgstr "/Depurar/Transformar DocBook a HTML"
-
-#~ msgid "/Debug/Transform DocBook to XHTML"
-#~ msgstr "/Depurar/Transformar DocBook a XHTML"
-
-#~ msgid "/Debug/Transform DocBook to HTML Help"
-#~ msgstr "/Depurar/Transformar DocBook a ayuda de HTML"
-
-#~ msgid "/Debug/Transform DocBook to Java Help"
-#~ msgstr "/Depurar/Transformar DocBook a ayuda de Java"
-
-#~ msgid "/Debug/Transform DocBook to FO"
-#~ msgstr "/Depurar/Transformar DocBook a FO"
-
-#~ msgid "/Debug/Preview XSL:FO"
-#~ msgstr "/Depurar/Previsualizar XSL:FO"
-
-#~ msgid "/Debug/DTD"
-#~ msgstr "/Depurar/DTD"
-
-#~ msgid "/Debug/Dialog"
-#~ msgstr "/Depurar/Diálogo"
-
-#~ msgid "/Debug/Progress Checklist"
-#~ msgstr "/Depurar/Lista de comprobación de progreso"
-
-#~ msgid "/Debug/Document Message Log"
-#~ msgstr "/Depurar/Registro de mensajes de documento"
-
-#~ msgid "/Debug/Document Signal Log"
-#~ msgstr "/Depurar/Registro de señales del documento"
-
-#~ msgid "/Debug/Information Alert"
-#~ msgstr "/Depurar/Alerta de información"
-
-#~ msgid "/Debug/Glade Test"
-#~ msgstr "/Depurar/Prueba Glade"
-
-#~ msgid "/Debug/Insert XML Fragment"
-#~ msgstr "/Depurar/Insertar fragmento XML"
-
-#~ msgid "/Debug/Command Test"
-#~ msgstr "/Depurar/Prueba de comando"
-
-#~ msgid "Open document"
-#~ msgstr "Abrir documento"
-
-#~ msgid "New document"
-#~ msgstr "Crear documento"
-
-#~ msgid "Save document"
-#~ msgstr "Guardar documento"
-
-#~ msgid "Could not import the file."
-#~ msgstr "No se ha podido importar el archivo."
-
-#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-#~ msgstr ""
-#~ "Ninguno de los complementos de Conglomerate sabe cómo cargar archivos del "
-#~ "tipo «%s»"
-
-#~ msgid "FIXME"
-#~ msgstr "ARRÉGLAME"
-
-#~ msgid ""
-#~ "In a future version of Conglomerate we may have a feature that lets you "
-#~ "attach a document type to a document."
-#~ msgstr ""
-#~ "En una versión futura de conglomerate quizá tengamos una característica "
-#~ "que permita adjuntar un tipo de documento a un documento."
-
-#~ msgid "The document \"%s\" is not valid."
-#~ msgstr "El documento «%s» no es válido."
-
-#~ msgid "Click on the \"Details\" button for more information."
-#~ msgstr "Pulse en el botón «Detalles» para más información."
-
-#~ msgid ""
-#~ "This is a placeholder page.  Eventually you will be able to edit the "
-#~ "language of the text here.\n"
-#~ "\n"
-#~ "This is listed in Bugzilla as bug #122536"
-#~ msgstr ""
-#~ "Esta es una página placeholder. Eventualmente podrá editar el idioma del "
-#~ "texto aquí.\n"
-#~ "\n"
-#~ "Esto se lista en Bugzilla como el bug #122536"
-
-#~ msgid "label"
-#~ msgstr "etiqueta"
-
-#~ msgid "Find:"
-#~ msgstr "Buscar:"
-
-#~ msgid "Text: \"<span foreground=\"%s\">%s</span>\""
-#~ msgstr "Texto:\"<span foreground=\"%s\">%s</span>\""
-
-#~ msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-#~ msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-
-#~ msgid "<small>(No description available)</small>"
-#~ msgstr "<small>(Sin descripción disponible)</small>"
-
-#~ msgid "/Debug/Document Types"
-#~ msgstr "/Depurar/Tipos de documento"
