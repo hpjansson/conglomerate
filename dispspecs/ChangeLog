@@ -1,3 +1,9 @@
+2004-03-04  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* relax-ng.xds
+
+	Renamed <grammar> element; fixed title of <attribute> element.
+
 2004-03-04  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

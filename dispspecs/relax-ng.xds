@@ -10,7 +10,7 @@
 	<document-models/>
 	<element-list>
 		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="grammar" type="structural">
-			<name>Grammar</name>
+			<name>RELAX NG Grammar</name>
 		</element>
 		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="define" type="structural">
 			<name>Define</name>			
@@ -22,7 +22,7 @@
 		</element>
 		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="attribute" type="structural">
 			<name>XML Attribute</name>			
-			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
+			<header-info xpath="concat(&quot;@&quot;, @name)"/>
 		</element>
 		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="zeroOrMore" type="structural">
 			<name>ZeroOrMore</name>			
