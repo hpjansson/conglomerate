@@ -6,7 +6,7 @@
 
 
 GtkWidget *filew;
-char *file_name_selected;
+const char *file_name_selected;
 
 
 static void destroy( GtkWidget *widget, gpointer   data )
@@ -31,7 +31,7 @@ static void file_ok_sel( GtkWidget *w, GtkFileSelection *fs )
 
 
 
-char *get_file_name(char *title)
+const char *get_file_name(char *title)
 {
 	          
 	/* Create a new file selection widget */
