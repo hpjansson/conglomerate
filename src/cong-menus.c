@@ -1527,7 +1527,9 @@ enum ActionMarkers {
 	ACTION_MARKER_CUT,
 	ACTION_MARKER_COPY,
 	ACTION_MARKER_PASTE,
-	ACTION_MARKER_TOOLS_MENU
+	ACTION_MARKER_TOOLS_MENU,
+	ACTION_MARKER_PRINT_PREVIEW,
+	ACTION_MARKER_PRINT
 };
 
 
@@ -1542,8 +1544,8 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/File/Sa_ve a Copy..."), NULL, menu_callback_file_save_copy, 0, "<Item>" },
 #if ENABLE_PRINTING
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
-	{ N_("/File/Print Previe_w..."),   "<shift><control>P", menu_callback_file_print_preview, 0, "<StockItem>", GTK_STOCK_PRINT_PREVIEW },
-	{ N_("/File/_Print..."),           "<control>P", menu_callback_file_print, 0, "<StockItem>", GTK_STOCK_PRINT },
+	{ N_("/File/Print Previe_w..."),   "<shift><control>P", menu_callback_file_print_preview, ACTION_MARKER_PRINT_PREVIEW, "<StockItem>", GTK_STOCK_PRINT_PREVIEW },
+	{ N_("/File/_Print..."),           "<control>P", menu_callback_file_print, ACTION_MARKER_PRINT, "<StockItem>", GTK_STOCK_PRINT },
 #endif
 #if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
@@ -1793,6 +1795,12 @@ cong_menus_create_items(GtkItemFactory *item_factory,
 			GtkWidget *paste =  gtk_item_factory_get_widget_by_action(item_factory,
 										 ACTION_MARKER_PASTE);
 			/* FIXME: What signal to connect paste to in order to update sensitivity? */
+#if ENABLE_PRINTING
+			GtkWidget *print =  gtk_item_factory_get_widget_by_action(item_factory,
+										  ACTION_MARKER_PRINT);
+			GtkWidget *print_preview =  gtk_item_factory_get_widget_by_action(item_factory,
+											  ACTION_MARKER_PRINT_PREVIEW);
+#endif
 
 			g_signal_connect (G_OBJECT(history),
 					  "changed",
@@ -1816,6 +1824,11 @@ cong_menus_create_items(GtkItemFactory *item_factory,
 			gtk_widget_set_sensitive (paste, cong_document_can_paste(doc));
 			gtk_widget_set_sensitive (copy, FALSE);
 			gtk_widget_set_sensitive (cut, FALSE);
+
+#if ENABLE_PRINTING
+			gtk_widget_set_sensitive (print, cong_document_can_print(doc));
+			gtk_widget_set_sensitive (print_preview, cong_document_can_print(doc));
+#endif
 		}
 
 	} else {

@@ -1,3 +1,11 @@
+2004-06-03  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-menus.c (cong_menus_create_items): Setup sensitivity of printing menu
+	options appropriately
+
+	* cong-document.h, cong-document.c (cong_document_can_print): New function
+	to determine if we have a way of printing a document
+
 2004-06-03 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-error-dialog.h, cong-error-dialog.c: Add new

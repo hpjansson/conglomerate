@@ -1947,6 +1947,45 @@ cong_document_can_paste(CongDocument *doc)
 	/* FIXMEPCS: conditions? */
 }
 
+#if ENABLE_PRINTING
+struct can_print_data
+{
+	CongDocument *doc;
+	gint num_print_methods;
+};
+
+static void
+callback_can_print (CongServicePrintMethod *print_method, 
+		    gpointer user_data)
+{
+	struct can_print_data *print_data = (struct can_print_data*)user_data;
+
+	if (cong_print_method_supports_document(print_method, print_data->doc)) {
+		print_data->doc++;
+	}
+}
+
+/**
+ * cong_document_can_print:
+ * @doc:
+ *
+ * Returns:
+ */
+gboolean
+cong_document_can_print (CongDocument *doc)
+{
+	struct can_print_data print_data;
+	print_data.doc = doc;
+	print_data.num_print_methods=0;
+
+	cong_plugin_manager_for_each_print_method (cong_app_get_plugin_manager (cong_app_singleton ()),
+						   callback_can_print,
+						   &print_data);
+
+	return print_data.num_print_methods>0;
+}
+#endif
+
 /* Internal function definitions: */
 static void
 cong_document_finalize (GObject *object)

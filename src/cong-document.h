@@ -419,6 +419,11 @@ cong_document_copy_selection (CongDocument *doc);
 gboolean
 cong_document_can_paste (CongDocument *doc);
 
+#if ENABLE_PRINTING
+gboolean
+cong_document_can_print (CongDocument *doc);
+#endif
+
 void 
 cong_document_paste_clipboard_or_selection (CongDocument *doc, 
 					    GtkWidget *widget);
