@@ -27,7 +27,7 @@ exit 0
 
 @DPATCH@
 --- doc/reference/Makefile.in.tarball	2004-01-07 16:16:39.000000000 +0100
-+++ Mdoc/reference/akefile.in	2004-01-08 00:09:15.000000000 +0100
++++ doc/reference/Makefile.in	2004-01-08 00:09:15.000000000 +0100
 @@ -259,11 +259,11 @@
  install-data: install-data-am
  
