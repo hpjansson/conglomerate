@@ -2,7 +2,7 @@
 
 	* cong-app.c, cong-document.c
 
-	Update PRIMARY when selection changes, fixing bug #130248
+	Update PRIMARY when selection changes, fixing bug #130248 and #126039
 
 	* cong-app.c, cong-document.c
 
