@@ -1,3 +1,9 @@
+2004-09-23  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-primary-window.c: 
+
+	Cleanup of statusbar updating
+
 2004-09-22  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-primary-window.h

@@ -438,6 +438,20 @@ add_tree_layout_for_doc (CongPrimaryWindow *primary_window,
 	gnome_app_set_contents(GNOME_APP(primary_window->window),widget);
 }
 
+static void
+refresh_statusbar (CongPrimaryWindow *primary_window)
+{
+	gchar *status_text;
+
+	g_assert (primary_window);
+
+	status_text = g_strdup(cong_dispspec_get_name( cong_document_get_default_dispspec(primary_window->doc) ));
+
+	gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
+				 status_text);
+	g_free(status_text);
+}
+
 /**
  * cong_primary_window_add_doc:
  * @primary_window:
@@ -457,7 +471,6 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 	g_assert (primary_window);
 
 	if (doc) {
-		gchar *status_text;
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
 
@@ -484,18 +497,8 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 			style->bg[i] = gcol;
 		}
 		
-		/* update the statusbar */
-		
-		status_text = g_strdup(cong_dispspec_get_name( cong_document_get_default_dispspec(primary_window->doc) ));
-#if 1
-		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
-			 status_text);
-#else
-		gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
-				   primary_window->status_main_ctx,
-				   status_text);
-#endif
-		g_free(status_text);
+		refresh_statusbar (primary_window);
+
 		cong_document_set_primary_window(doc, primary_window);
 	} /* if (doc) */
 	
