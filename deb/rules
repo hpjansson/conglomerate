@@ -37,9 +37,9 @@ config.status: configure
 	--datadir=\$${prefix}/share || cat config.log
 
 
-build: build-stamp patch
+build: build-stamp
 
-build-stamp:  config.status
+build-stamp: patch config.status
 	dh_testdir
 
 	# Commands to compile the package.

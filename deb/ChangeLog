@@ -1,3 +1,8 @@
+2003-11-05  Geert Stappers <stappers@stappers.nl>
+
+	* rules:
+	- patch before running configure
+
 2003-11-02  Geert Stappers <stappers@stappers.nl>
 
 	* build
