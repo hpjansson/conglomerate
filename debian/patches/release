@@ -14,18 +14,18 @@
 
 function regular_release_changes
 {
- mv debian/changelog debian/changelog.in
+ mv debian/changelog debian/changelog.orig
  sed -e '1s/UNRELEASED/unstable/' \
-     -e '3s/expecting //' debian/changelog.in > debian/changelog
+     -e '3s/expecting //' debian/changelog.orig > debian/changelog
 
- mv debian/control debian/control.in
- sed -e '/Package: conglomerate-dbg/,$d' debian/control.in | \
+ mv debian/control debian/control.orig
+ sed -e '/Package: conglomerate-dbg/,$d' debian/control.orig | \
  sed -e '$d' > debian/control
 
- mv debian/rules debian/rules.in
+ mv debian/rules debian/rules.orig
  sed -e '/enable-debug/d' \
      -e 's/dh_strip --exclude.*/dh_strip/' \
-     -e '/conglomerate-dbg/d' debian/rules.in > debian/rules
+     -e '/conglomerate-dbg/d' debian/rules.orig > debian/rules
  chmod +x debian/rules
 
  echo Don\'t forgot to update the NEWS file.
@@ -37,17 +37,17 @@ then
 else
  case "${1}" in
   unpatch)
-   test -f debian/changelog.in && mv debian/changelog.in debian/changelog
-   test -f debian/control.in && mv debian/control.in debian/control
-   test -f debian/rules.in && mv debian/rules.in debian/rules
+   test -f debian/changelog.orig && mv debian/changelog.orig debian/changelog
+   test -f debian/control.orig && mv debian/control.orig debian/control
+   test -f debian/rules.orig && mv debian/rules.orig debian/rules
   ;;
   *\.*\.*-*)
    regular_release_changes
    dch -v ${1} # set version and current date
    # plus a clean up
-   rm debian/changelog.in
-   rm debian/control.in
-   rm debian/rules.in
+   rm debian/changelog.orig
+   rm debian/control.orig
+   rm debian/rules.orig
   ;;
   *)
    echo \'${1}\' is not supported

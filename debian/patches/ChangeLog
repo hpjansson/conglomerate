@@ -2,6 +2,7 @@
 
 	* release
 	-Make debian/rules executable
+	-Proper name for the original files
 
 2004-01-19  Geert Stappers <stappers@stapers.nl>
 
