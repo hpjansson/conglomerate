@@ -206,6 +206,16 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 				 );
 }
 
+gboolean
+cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeText *editor_node_text,
+								int original_byte_offset,
+								int *stripped_byte_offset)
+{
+	return cong_text_cache_convert_original_byte_offset_to_stripped (PRIVATE(editor_node_text)->text_cache,
+									 original_byte_offset,
+									 stripped_byte_offset);
+}
+
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -344,6 +354,7 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 #endif
 
 			text_fragment = cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
+									    node_text,
 									    PRIVATE(node_text)->pango_layout,
 									    index,
 									    - logical_rect.y);

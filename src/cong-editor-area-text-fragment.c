@@ -26,11 +26,13 @@
 #include "cong-editor-area-text-fragment.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-font.h"
+#include "cong-document.h"
 
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaTextFragmentDetails
 {
+	CongEditorNodeText *editor_node_text;
 	PangoLayout *pango_layout;
 	guint line_index;
 	int baseline;
@@ -83,6 +85,7 @@ cong_editor_area_text_fragment_instance_init (CongEditorAreaTextFragment *area_t
 CongEditorArea*
 cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_fragment,
 					  CongEditorWidget3 *editor_widget,
+					  CongEditorNodeText *editor_node_text,
 					  PangoLayout *pango_layout,
 					  guint line_index,
 					  int baseline)
@@ -90,6 +93,7 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 	cong_editor_area_construct (CONG_EDITOR_AREA(area_text_fragment),
 				    editor_widget);
 
+	PRIVATE(area_text_fragment)->editor_node_text = editor_node_text;
 	PRIVATE(area_text_fragment)->pango_layout = pango_layout;
 	PRIVATE(area_text_fragment)->line_index = line_index;
 	PRIVATE(area_text_fragment)->baseline = baseline;
@@ -99,6 +103,7 @@ cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_
 
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
+				    CongEditorNodeText *editor_node_text,
 				    PangoLayout *pango_layout,
 				    guint line_index,
 				    int baseline)
@@ -110,6 +115,7 @@ cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
 	return cong_editor_area_text_fragment_construct
 		(g_object_new (CONG_EDITOR_AREA_TEXT_FRAGMENT_TYPE, NULL),
 		 editor_widget,
+		 editor_node_text,
 		 pango_layout,
 		 line_index,
 		 baseline);
@@ -162,6 +168,8 @@ render_self (CongEditorArea *area,
 	PangoLayoutLine* line = cong_editor_area_text_get_pango_layout_line (area_text_fragment);
 	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
 	GdkWindow *window = cong_editor_area_get_gdk_window(area);
+	CongCursor *cursor = cong_document_get_cursor( cong_editor_widget3_get_document( cong_editor_area_get_widget(area)));
+	g_assert(cursor);
 
 	/* y-coord is that of the baseline, not the top or bottom; we must adjust it: */
 	gdk_draw_layout_line (window, 
@@ -169,6 +177,39 @@ render_self (CongEditorArea *area,
 			      rect->x,
 			      rect->y + PRIVATE(area_text_fragment)->baseline,
 			      line);
+
+	/* Render the cursor if present in this node: */
+	if (cursor->on) {
+
+		if (cursor->location.node==cong_editor_node_get_node (CONG_EDITOR_NODE(PRIVATE(area_text_fragment)->editor_node_text))) {
+			int cursor_stripped_offset;
+			
+			if (cong_editor_node_text_convert_original_byte_offset_to_stripped (PRIVATE(area_text_fragment)->editor_node_text,
+											    cursor->location.byte_offset,
+											    &cursor_stripped_offset)) {
+				if (cursor_stripped_offset >= line->start_index) {
+					if (cursor_stripped_offset < line->start_index+line->length) {
+						int cursor_x;
+						
+						pango_layout_line_index_to_x(line,
+									     cursor_stripped_offset,
+									     FALSE,
+									     &cursor_x);	
+						cursor_x /= PANGO_SCALE;
+						cursor_x += rect->x;
+						
+						/* Render it: */
+						gdk_draw_line (GDK_DRAWABLE(window), 
+							       cursor->gc, 
+							       cursor_x, rect->y,
+							       cursor_x, rect->y + rect->height);
+						
+					}
+				}
+			}
+		}
+	}
+
 }
 
 static gint

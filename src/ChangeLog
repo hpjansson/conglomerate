@@ -1,5 +1,9 @@
 2003-08-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-text-fragment.c, cong-editor-area-text-fragment.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-widget3.c
+
+	Rendering of the cursor
+	
 	* cong-editor-node-text.c, cong-text-cache.c, cong-text-cache.h
 
 	Rendering of the selection

@@ -944,12 +944,8 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_after");
 #endif
 
-	/* empty so far */
-
-#if 0
 	/* Force a redraw: */
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));	
-#endif
 }
 
 /* Definitions of CongEditorArea event handlers: */

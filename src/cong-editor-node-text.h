@@ -64,6 +64,12 @@ CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
 			   CongNodePtr node);
 
+gboolean
+cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeText *editor_node_text,
+								int original_byte_offset,
+								int *stripped_byte_offset);
+
+
 G_END_DECLS
 
 #endif

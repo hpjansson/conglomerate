@@ -26,6 +26,7 @@
 #define __CONG_EDITOR_AREA_TEXT_FRAGMENT_H__
 
 #include "cong-editor-area-text.h"
+#include "cong-editor-node-text.h"
 
 G_BEGIN_DECLS
 
@@ -56,12 +57,14 @@ cong_editor_area_text_fragment_get_type (void);
 CongEditorArea*
 cong_editor_area_text_fragment_construct (CongEditorAreaTextFragment *area_text_fragment,
 					  CongEditorWidget3 *editor_widget,
+					  CongEditorNodeText *editor_node_text,
 					  PangoLayout *pango_layout,
 					  guint line_index,
 					  int baseline);
 
 CongEditorArea*
 cong_editor_area_text_fragment_new (CongEditorWidget3 *editor_widget,
+				    CongEditorNodeText *editor_node_text,
 				    PangoLayout *pango_layout,
 				    guint line_index,
 				    int baseline);
