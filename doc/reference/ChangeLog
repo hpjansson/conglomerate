@@ -1,3 +1,10 @@
+2003-10-28  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am:
+	- Removed calling the upstream mkgtkdoc scripts.
+	- DOC_OVERRIDES only defined once.
+	- original 'dist-hook directories'
+
 2003-10-26  Robert Varga <frozenfingers@home.ro>
 
 	* conglomerate-docs.sgml:
