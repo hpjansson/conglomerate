@@ -317,7 +317,7 @@ struct section_fold_cb_data
 	GtkVBox* vbox;
 };
 
-void xv_section_fold_cb(GtkWidget* widget, gpointer data)
+static void xv_section_fold_cb(GtkWidget* widget, gpointer data)
 {
 	struct section_fold_cb_data* cb_data = (struct section_fold_cb_data*)data;
 
@@ -333,35 +333,47 @@ void xv_section_fold_cb(GtkWidget* widget, gpointer data)
 	}
 }
 
+
+
 static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, GtkVBox *vbox)
 {
 	struct section_fold_cb_data cb_data;
 
-#if 1
 	CongSectionHead *section_head = g_object_get_data(G_OBJECT(vbox), "section_head");
 	g_assert(section_head);
 
-	section_head->expanded = !section_head->expanded;
-#else
-	gpointer expanded = g_object_get_data(G_OBJECT(vbox), "expanded");
-	expanded = GINT_TO_POINTER(!expanded);
-	g_object_set_data(G_OBJECT(vbox), "expanded", expanded);
-#endif
+	switch (event->button) {
+	default: return FALSE;
+	case 1: /* Normally the left mouse button: */
+		{
+			/* Toggle the expand/collapse status of the area: */
+			section_head->expanded = !section_head->expanded;
 
-	/* We will want a redraw of the drawing area, since the appearance of the title bar has changed: */
-	gtk_widget_queue_draw_area(w, 0,0, w->allocation.width, w->allocation.height);
+			/* We will want a redraw of the drawing area, since the appearance of the title bar has changed: */
+			gtk_widget_queue_draw_area(w, 0,0, w->allocation.width, w->allocation.height);
 
-	cb_data.done_first = FALSE;
-	cb_data.vbox = vbox;
-	cb_data.expanded = section_head->expanded;
+			cb_data.done_first = FALSE;
+			cb_data.vbox = vbox;
+			cb_data.expanded = section_head->expanded;
 
-	printf("xv_section_head_button_press\n");
+			g_message("xv_section_head_button_press");
 
-	gtk_container_forall(GTK_CONTAINER(vbox), 
-			     xv_section_fold_cb,
-			     &cb_data);
-
-	return TRUE;
+			gtk_container_forall(GTK_CONTAINER(vbox), 
+					     xv_section_fold_cb,
+					     &cb_data);
+			
+			return TRUE;
+		}
+		break;
+		
+	case 3: /* Normally the right mouse button: */
+		{
+			do_node_heading_context_menu(section_head->doc,
+						     section_head->node);
+			return TRUE;
+		}
+		break;
+	}
 }
 
 CongSectionHead *cong_section_head_new(CongDocument *doc, CongNodePtr x)
@@ -390,15 +402,8 @@ CongSectionHead *cong_section_head_new(CongDocument *doc, CongNodePtr x)
 	section_head->title = gtk_drawing_area_new();
 
 	/* FIXME: this will leak */
-
-#if 1
 	g_object_set_data(G_OBJECT(section_head->vbox), "section_head", section_head);
 	g_object_set_data(G_OBJECT(section_head->title), "section_head", section_head);
-#else
-	g_object_set_data(G_OBJECT(section_head->vbox), "expanded", GINT_TO_POINTER(1));
-	g_object_set_data(G_OBJECT(section_head->vbox), "dispspec", ds);
-	g_object_set_data(G_OBJECT(section_head->title), "vbox", section_head->vbox);
-#endif
 
 	gtk_box_pack_start(GTK_BOX(section_head->vbox), section_head->title, TRUE, TRUE, 0);
 	gtk_drawing_area_size(GTK_DRAWING_AREA(section_head->title), 300, title_font->asc + title_font->desc + 4 /* up and down borders */ + 4 /* space below */);

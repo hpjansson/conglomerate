@@ -29,6 +29,14 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDispspec *ds, gint (
 static GtkWidget *new_sub_element_structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
 							    CongTreeView *cong_tree_view, CongNodePtr x);
 
+void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node)
+{
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	g_message("do_node_heading_context_menu");
+}
+
 
 /*
   EDITOR POPUP CODE:

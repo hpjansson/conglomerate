@@ -571,9 +571,23 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 	if ( cong_eel_rectangle_contains(&section_head->title_bar_window_rect, 
 					 event->x,
 					 event->y) ){
-		section_head->expanded = !section_head->expanded;
-
-		cong_editor_widget_force_layout_update(editor_widget);
+		/* Which button was pressed? */
+		switch (event->button) {
+		default: return;
+		case 1: /* Normally the left mouse button: */
+			{
+				section_head->expanded = !section_head->expanded;
+				cong_editor_widget_force_layout_update(editor_widget);
+			}
+			break;
+			
+		case 3: /* Normally the right mouse button: */
+			{
+				do_node_heading_context_menu(CONG_VIEW(details->view)->doc,
+							     CONG_ELEMENT_EDITOR(section_head)->first_node);
+			}
+			break;
+		}		
 
 	} else {
 		/* See if a child is "under" this event; delegate to the child: */

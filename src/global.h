@@ -828,5 +828,6 @@ struct CongDocumentEvent
 	} data;
 };
 
+void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node);
 
 G_END_DECLS
