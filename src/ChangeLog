@@ -1,3 +1,41 @@
+2003-06-24 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am, main.c
+
+	Changed executable from "conge" to "conglomerate"
+
+	* cong-dispspec.[ch], cong-plugin.[ch], global.h
+
+	Added plugin node property dialogs
+
+	* cong-document.c
+
+	Allow views only to to bother handling the signals they care about
+
+	* cong-menus.c
+
+	Added a Glade test to the hidden debug menus
+
+	* cong-node-properties.c
+
+	Big rewrite, allowing for plugin property dialogs, and for attribute renaming.
+
+	* cong-view.c
+
+	Fixed a warning
+
+	* cong-view.h
+
+	Added some documentation
+
+	* plugin-docbook.c
+
+	Added custom DocBook properties dialog.
+
+	* tree.c
+
+	Made the node properties dialogs modeless.
+	
 2003-06-13 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-section-head-editor.c

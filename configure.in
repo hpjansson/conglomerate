@@ -4,7 +4,7 @@ dnl ---------------------------------------------
 
 AC_PREREQ(2.52)
 
-AC_INIT(conglomerate, 0.5.3)
+AC_INIT(conglomerate, 0.5.4)
 AC_CONFIG_SRCDIR(src/main.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -35,18 +35,16 @@ dnl --- Package configuration ---
 
 LIBXML_REQUIRED=2.0.0
 LIBXSLT_REQUIRED=1.0.0
-GNOMEUI_REQUIRED=2.0.0
-BONOBOUI_REQUIRED=1.0.0
-EEL_REQUIRED=2.0.0
+LIBGNOMEUI_REQUIRED=2.0.0
 LIBGNOMEPRINT_REQUIRED=1.116.0
 LIBGNOMEPRINTUI_REQUIRED=1.116.0
+LIBGLADE2_REQUIRED=2.0.0
 
 PKG_CHECK_MODULES(CONGLOMERATE,		\
   libxml-2.0 >= $LIBXML_REQUIRED	\
   libxslt >= $LIBXSLT_REQUIRED		\
-  libbonoboui-2.0 > $BONOBOUI_REQUIRED	\
-  libgnomeui-2.0 > $GNOMEUI_REQUIRED	\
-  eel-2.0 >= $EEL_REQUIRED)              
+  libgnomeui-2.0 > $LIBGNOMEUI_REQUIRED    \
+  libglade-2.0 >= $LIBGLADE2_REQUIRED)
 
 AC_SUBST(CONGLOMERATE_LIBS)
 AC_SUBST(CONGLOMERATE_CFLAGS)
@@ -129,6 +127,7 @@ dnl --- Output ---
 AC_OUTPUT(Makefile 
           po/Makefile.in
 	  data/Makefile
+	  glade/Makefile
 	  pixmaps/Makefile
 	  examples/Makefile 
           src/Makefile)

@@ -1,3 +1,17 @@
+2003-06-24  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am
+
+	Added glade subdirectory
+
+	* README
+
+	Changed "conge" to "conglomerate"
+
+	* configure.in
+
+	Increased version number to 0.5.4; removed eel and libbonoboui dependencies, added dependency on libglade
+	
 2003-06-14  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* deb/watch, another "debian" file added

@@ -284,7 +284,7 @@ gboolean main_load_displayspecs(GtkWindow *toplevel_window)
 #if 1
 	gchar*      xds_directory = gnome_program_locate_file(the_globals.gnome_program,
 							      GNOME_FILE_DOMAIN_APP_DATADIR,
-							      "conge/dispspecs",
+							      "conglomerate/dispspecs",
 							      FALSE,
 							      NULL);
 #else

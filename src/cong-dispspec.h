@@ -157,7 +157,10 @@ CongFont*
 cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
 
 const gchar*
-cong_dispspec_element_get_plugin_id(CongDispspecElement *element);
+cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element);
+
+const gchar*
+cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element);
 
 G_END_DECLS
 

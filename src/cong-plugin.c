@@ -26,6 +26,7 @@
 #include "cong-plugin.h"
 #include "cong-error-dialog.h"
 #include "cong-document.h"
+#include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
 
 #include <libxslt/xsltInternals.h>
@@ -52,6 +53,7 @@ struct CongPlugin
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
 	GList *list_of_tool; /* ptrs of type CongTool */
+	GList *list_of_property_dialog; /* ptrs of type CongCustomPropertyDialog */
 };
 
 struct CongFunctionality
@@ -124,6 +126,13 @@ struct CongTool
 	const gchar *tooltip_further_text;
 	CongToolDocumentFilter doc_filter;
 	CongToolActionCallback action_callback;
+	gpointer user_data;
+};
+
+struct CongCustomPropertyDialog
+{
+	CongFunctionality functionality; /* base class */
+	CongCustomPropertyFactoryMethod factory_method;
 	gpointer user_data;
 };
 
@@ -231,6 +240,27 @@ void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (
 	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
 		cong_plugin_for_each_tool(iter->data, callback, user_data);
 	}
+}
+
+CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_id(CongPluginManager *plugin_manager, const gchar *plugin_id)
+{
+	GList *plugin_iter;
+
+	g_return_val_if_fail(plugin_manager, NULL);
+	g_return_val_if_fail(plugin_id, NULL);
+
+	for (plugin_iter=plugin_manager->list_of_plugin; plugin_iter; plugin_iter = plugin_iter->next) {
+		GList *factory_iter;
+
+		for (factory_iter = ((CongPlugin*)plugin_iter->data)->list_of_property_dialog; factory_iter; factory_iter=factory_iter->next) {
+			CongCustomPropertyDialog* factory = factory_iter->data;
+			if (0==strcmp(plugin_id, CONG_FUNCTIONALITY(factory)->functionality_id)) {
+				return factory;
+			}
+		}
+	}
+	
+	return NULL;
 }
 
 
@@ -440,6 +470,36 @@ CongTool *cong_plugin_register_tool(CongPlugin *plugin,
 	plugin->list_of_tool = g_list_append(plugin->list_of_tool, tool);
 
 	return tool;
+
+}
+
+CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin *plugin,
+								      const gchar *name, 
+								      const gchar *description,
+								      const gchar *functionality_id,
+								      CongCustomPropertyFactoryMethod factory_method,
+								      gpointer user_data)
+{
+	CongCustomPropertyDialog *property_dialog;
+
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(name, NULL);
+	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(functionality_id, NULL);
+
+        property_dialog = g_new0(CongCustomPropertyDialog,1);
+
+	property_dialog->functionality.plugin = plugin;
+	property_dialog->functionality.name = g_strdup(name);
+	property_dialog->functionality.description = g_strdup(description);
+	property_dialog->functionality.functionality_id = g_strdup(functionality_id);
+	property_dialog->factory_method = factory_method;
+	property_dialog->user_data = user_data;
+
+	/* Add to plugin's list: */
+	plugin->list_of_property_dialog = g_list_append(plugin->list_of_property_dialog, property_dialog);
+
+	return property_dialog;
 
 }
 
@@ -963,7 +1023,7 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 {
 	CongElementEditor *element_editor;
 	gchar *message;
-	gchar *plugin_id = cong_dispspec_element_get_plugin_id(element);
+	const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id(element);
 
 #if 1
 	GList *plugin_iter;
@@ -988,7 +1048,7 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 
 	/* Handle the "plugin not found" case: */
 	{
-		message = g_strdup_printf(_("Unrecognised plugin (id=\"%s\")"), cong_dispspec_element_get_plugin_id(element));
+		message = g_strdup_printf(_("Unrecognised plugin (id=\"%s\")"), cong_dispspec_element_get_editor_plugin_id(element));
 		element_editor = cong_dummy_element_editor_new(editor_widget, node, message);
 
 		g_free(message);
@@ -1002,4 +1062,17 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 
 	return element_editor;
 
+}
+
+GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,
+					    CongDocument *doc,
+					    CongNodePtr node)
+{
+	g_return_val_if_fail(custom_property_dialog, NULL);
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	g_assert(custom_property_dialog->factory_method);
+
+	return custom_property_dialog->factory_method(custom_property_dialog, doc, node);
 }

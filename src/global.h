@@ -273,6 +273,7 @@ typedef struct CongPrintMethod CongPrintMethod;
 typedef struct CongThumbnailer CongThumbnailer;
 typedef struct CongPluginEditorElement CongPluginEditorElement;
 typedef struct CongTool CongTool;
+typedef struct CongCustomPropertyDialog CongCustomPropertyDialog;
 
 /* The File->New GUI: */
 typedef struct CongNewFileAssistant CongNewFileAssistant;
@@ -293,6 +294,7 @@ typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *f
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongToolDocumentFilter)(CongTool *tool, CongDocument *doc, gpointer user_data);
 typedef void (*CongToolActionCallback)(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data);
+typedef GtkWidget* (*CongCustomPropertyFactoryMethod)(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node);
 
 #if ENABLE_PRINTING
 typedef gboolean (*CongPrintMethodFpiFilter)(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data);

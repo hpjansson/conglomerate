@@ -31,7 +31,7 @@ If you're compiling from CVS, type
   (switch to superuser if necessary)
   make install
 
-and see what happens. This should produce an executable called "conge" in
+and see what happens. This should produce an executable called "conglomerate" in
 the src/ current directory.  Typing "make install" installs the program and
 its data files into a hopefully sensible location.
 
@@ -69,10 +69,10 @@ XML file - there will be no validation done, and DTD-less documents are fine).
 The second is a "displayspec", illustrated by "readme.xds" in the examples
 directory. This specifies how the tags are rendered.
 
-There are two ways to load a document into Conge. One is by specifying the
+There are two ways to load a document into Conglomerate. One is by specifying the
 XML on the commandline, like this:
 
-conge file:///home/david/readme.xml
+conglomerate file:///home/david/readme.xml
 (currently you have to use a GnomeVFS URI)
 
 The other is by using the GUI open dialogs. The readme example used above is

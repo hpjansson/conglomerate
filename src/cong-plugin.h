@@ -48,6 +48,8 @@ void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager,
 #endif
 void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_custom_property_dialog(CongPluginManager *plugin_manager, void (*callback)(CongCustomPropertyDialog *custom_property_dialog, gpointer user_data), gpointer user_data);
+CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_id(CongPluginManager *plugin_manager, const gchar *plugin_id);
 
 /* 
    CongPlugin 
@@ -104,6 +106,13 @@ CongTool *cong_plugin_register_tool(CongPlugin *plugin,
 				    CongToolActionCallback action_callback,
 				    gpointer user_data);
 
+CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin *plugin,
+								      const gchar *name, 
+								      const gchar *description,
+								      const gchar *functionality_id,
+								      CongCustomPropertyFactoryMethod factory_method,
+								      gpointer user_data);
+
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
@@ -112,6 +121,7 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 #endif
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_tool(CongPlugin *plugin, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_custom_property_dialog(CongPlugin *plugin, void (*callback)(CongCustomPropertyDialog *custom_property_dialog, gpointer user_data), gpointer user_data);
 
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin);
@@ -176,6 +186,10 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 				const gchar *stylesheet_filename,
 				GtkWindow *toplevel_window);
 
+void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
+						  CongDocument *doc, 
+						  CongNodePtr node);
+
 /* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
    navigation easier */
 GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
@@ -190,7 +204,10 @@ GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widget, 
 						  CongNodePtr node, 
 						  CongDispspecElement *element);
-
+						 
+GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,
+					    CongDocument *doc,
+					    CongNodePtr node);
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
 /* plugin-convert-case.c: */

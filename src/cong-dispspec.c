@@ -51,7 +51,8 @@ struct CongDispspecElement
 
 	CongDispspecElementHeaderInfo *header_info;
 
-	gchar *plugin_id;
+	gchar *editor_plugin_id;
+	gchar *property_dialog_plugin_id;
 
 	struct CongDispspecElement* next;	
 };
@@ -889,11 +890,19 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 }
 
 const gchar*
-cong_dispspec_element_get_plugin_id(CongDispspecElement *element)
+cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element, NULL);
 
-	return element->plugin_id;
+	return element->editor_plugin_id;
+}
+
+const gchar*
+cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->property_dialog_plugin_id;
 }
 
 
@@ -963,7 +972,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 				id = xmlGetProp(xml_element,"plugin-id");
 				
 				if (id) {
-  					element->plugin_id = g_strdup(id);
+  					element->editor_plugin_id = g_strdup(id);
   				}
   			}
   		}
@@ -1011,6 +1020,13 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
   				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
 				element->header_info->xpath = cong_node_get_attribute(child, "xpath");
 				element->header_info->tagname = cong_node_get_attribute(child, "tag");
+  			}
+
+			/* Handle "property-dialog": */
+  			if (0==strcmp(child->name,"property-dialog")) {
+  				DS_DEBUG_MSG1("got property-dialog\n");
+				
+				element->property_dialog_plugin_id = cong_node_get_attribute(child, "plugin-id");
   			}
 			
 		}

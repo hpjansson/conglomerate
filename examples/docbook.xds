@@ -16,6 +16,7 @@
 		<element tag="set" type="structural" color="a0b0c0" icon="cong-docbook-set">
 			<name locale="en">Set</name>
 			<short-desc>A collection of books.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="book" type="structural" color="a0b0c0" icon="cong-docbook-book">
@@ -29,340 +30,420 @@
 			-->
 			<header-info tag="title"></header-info>
 			<name locale="en">Book</name>
-
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="bookinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<header-info tag="title"></header-info>
 			<name locale="en">Book Information</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="article" type="structural" color="a0b0c0" icon="cong-docbook-article">
 			<name locale="en">Article</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="artheader" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Article Header</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
 			<collapseto></collapseto>
 			<name locale="en">Title</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="subtitle" type="structural" color="a0b0c0" icon="cong-title">
 			<collapseto></collapseto>
 			<name locale="en">Subtitle</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="authorgroup" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Authorship Information</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
 			<name locale="en">Author</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="editor" type="structural" color="a0b0c0" icon="cong-editor">
 			<name locale="en">Editor</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="publisher" type="structural" color="a0b0c0" icon="cong-publisher">
 			<name locale="en">Publisher</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="publishername" type="structural" color="a0b0c0" icon="cong-name">
 			<name locale="en">Publisher Name</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="address" type="structural" color="a0b0c0" icon="cong-address">
 			<name locale="en">Address</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="printhistory" type="structural" color="a0b0c0" icon="cong-history">
 			<name locale="en">Printing History</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="isbn" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">ISBN</name>
 			<short-desc>The International Standard Book Number of a document.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="issn" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">ISSN</name>
 			<short-desc>The International Standard Serial Number of a periodical.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="releaseinfo" type="structural" color="a0b0c0" icon="cong-history">
 			<name locale="en">Release Information</name>
 			<short-desc>A brief description of the version of a document.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="pubdate" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Date of Publication</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="copyright" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Copyright</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="year" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Year</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="holder" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Copyright Holder</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="docinfo" type="structural" color="a0b0c0"  icon="cong-metadata">
 			<name locale="en">Bibliographic Information</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="abstract" type="structural" color="a0b0c0"  icon="cong-metadata">
 			<name locale="en">Abstract</name>
 			<short-desc>A sumamry.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="para" type = "structural" icon="cong-paragraph">
 			<name locale="en">Paragraph</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Legal Notice</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="colophon" type="structural" color="a0b0c0" icon="cong-metadata"> 
 			<name locale="en">Colophon</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="qandaset" type="structural" color="a0b0c0" icon="cong-faq">
 			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Set</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="qandadiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Subset</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="qandaentry" type="structural" color="a0b0c0" icon="cong-faq">
 			<name locale="en">Question-and-Answer</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="question" type="structural" color="a0b0c0" icon="cong-question">
 			<collapseto></collapseto>
 			<name locale="en">Question</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="answer" type="structural" color="a0b0c0" icon="cong-answer">
 			<collapseto></collapseto>
 			<name locale="en">Answer</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="bibliography" type="structural" color="a0b0c0" icon="cong-bibliography">
 			<name locale="en">Bibliography</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="biblioentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<name locale="en">Entry</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="bibliodiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Section</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="bridgehead" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Free-floating Heading</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="footnote" type="structural" color="a0b0c0" icon="cong-footnote">
 			<name locale="en">Footnote</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<!-- The various sections -->
 		<element tag="preface" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Preface</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="part" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Part</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="partintro" type="structural" color="a0b0c0">
 			<name locale="en">Introduction</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="chapter" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Chapter</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sect1" type="structural" color="a1b0c0" icon="cong-subsection">
 			<name locale="en">Section</name>
 			<short-desc>A top-level section of document</short-desc>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection</name>
-			<short-desc>A subsection within an <element>sect1</element></short-desc>
+			<short-desc>A subsection within an <element>sect1</element>.</short-desc>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection (level 3)</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sect4" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection (level 4)</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sect5" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Section (level 5)</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="reference" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Reference</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refentry" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Reference Page</name>
 			<header-info xpath="normalize-space(child::refmeta/refentrytitle)"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refmeta" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Metadata</name>
 			<short-desc locale="en">Meta-information about a Reference Page</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refentrytitle" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Title</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refmiscinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Additional metadata</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="indexterm" type="structural" color="a0b0c0" icon="cong-indexterm">
 			<name locale="en">Index Term</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 
 		<element tag="refnamediv" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Naming</name>
 			<short-desc locale="en">Name, purpose and classification about a Reference Page</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refname" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Name</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refpurpose" type="structural" color="a0b0c0" icon="cong-summary">
 			<name locale="en">Purpose</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refsynopsisdiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Synopsis (syntax)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refsect1" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Section</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refsect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="refsect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsubsection</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="appendix" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Appendix</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="glossary" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Glossary</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="glossentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<name locale="en">Glossary Entry</name>
 			<header-info tag="glossterm"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="glossterm" type="structural" color="a0b0c0">
 			<name locale="en">Term</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="glossdef" type="structural" color="a0b0c0">
 			<name locale="en">Definition</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 
 		<element tag="informalexample" type="structural" color="a0b0c0">
 			<name locale="en">Example (informal)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="informaltable" type="structural" color="a0b0c0" icon="cong-table">
 			<name locale="en">Table (informal)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="simplelist" type="structural" color="a0b0c0" icon="cong-list">
 			<name locale="en">List (simple)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<!-- List support -->
 		<element tag="itemizedlist" type="structural" color="a0b0c0" icon="cong-bulleted-list">
 			<name locale="en">List (itemised)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="orderedlist" type="structural" color="a0b0c0" icon="cong-numbered-list">
 			<name locale="en">List (ordered)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="listitem" type="structural" color="a0b0c0" icon="cong-list-item">
 			<name locale="en">List Item</name>
 			<collapseto></collapseto>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="member" type="structural" color="a0b0c0" icon="cong-list-item">
 			<collapseto></collapseto>
 			<name locale="en">List Member</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="variablelist" type="structural" color="a0b0c0" icon="cong-definition-list">
 			<name locale="en">List (terms and definitions)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="varlistentry" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Defined terms</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<!-- Miscellanous stuff -->
 		<element tag="anchor" type="structural" color="a0b0c0">
 			<!-- FIXME:  EMPTY content model should have a special type of tag -->
 			<name locale="en">Anchor Point</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="figure" type="structural" color="a0b0c0">
 			<name locale="en">Figure</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="screenshot" type="structural" color="a0b0c0">
 			<name locale="en">Screenshot</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="informalfigure" type="structural" color="a0b0c0">
 			<name locale="en">Figure (informal)</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="mediaobject" type="structural" color="a0b0c0">
 			<name locale="en">Media Object</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="imageobject" type="structural" color="a0b0c0">
 			<name locale="en">Image Object</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="imagedata" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
 			<name locale="en">Image Data</name>
 			<!-- fileref is assumed for now -->
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="textobject" type="structural" color="a0b0c0">
 			<name locale="en">Text Object</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="caption" type="structural" color="a0b0c0">
 			<name locale="en">Caption</name>
 			<collapseto></collapseto>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="graphic" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
 			<name locale="en">Graphic</name>	
 			<!-- fileref is assumed for now -->
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment">
@@ -375,33 +456,40 @@
 				Even better would be to invoke a Scintilla control and have syntax highlighting!
 			-->
 			<name locale="en">Program Listing</name>				
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="funcsynopsis" type="structural" color="a0b0c0">
 			<!-- various related tags need to be added -->
 			<name locale="en">Function Synopsis</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="screen" type="structural" color="a0b0c0">
 			<name locale="en">Screen</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="cmdsynopsis" type="structural" color="a0b0c0">
 			<name locale="en">Command Synopsis</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="procedure" type="structural" color="a0b0c0">
 			<name locale="en">Procedure</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="step" type="structural" color="a0b0c0">
 			<name locale="en">Step</name>
 			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element tag="substeps" type="structural" color="a0b0c0">
 			<name locale="en">Substeps</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 
@@ -409,102 +497,133 @@
 
 		<element tag="acronym" type="span" color="a0b0c0">
 			<name locale="en">Acronym</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
  		<element tag="application" type="span" color="a0b0c0">
 			<name locale="en">Application</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
  		<element tag="bibliomisc" type="span" color="a0b0c0">
 			<name locale="en">Miscellaneous Bibliographic Information</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="citetitle" type="span" color="a0b0c0">
 			<name locale="en">Title Citation</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="city" type="span" color="a0b0c0">
 			<name locale="en">City</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="edition" type="span" color="a0b0c0">
 			<name locale="en">Edition</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="email" type="span" color="a0b0c0">
 			<name locale="en">email</name>
 			<short-desc locale="en">An email address</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="emphasis" type="span" color="a2b0c0">
 			<name locale="en">Emphasis</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="filename" type="span" color="a0b0c0">
 			<name locale="en">Filename</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="firstname" type="span" color="a0b0c0">
 			<name locale="en">First Name</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="firstterm" type="span" color="a0b0c0">
 			<name locale="en">First Term </name>
 			<short-desc locale="en">The first place where a word or term occurs in a particular context</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="function" type="span" color="a0b0c0">
 			<name locale="en">Function</name>
 			<short-desc locale="en">The name of a function, subroutine or procedure</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="literal" type="span" color="a0b0c0">
 			<name locale="en">Literal</name>
 			<short-desc locale="en">A specific piece of data from a computer system, to be taken literally.</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="primary" type="span" color="a0b0c0">
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="productname" type="span" color="a0b0c0">
 			<name locale="en">Product Name</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="replaceable" type="span" color="a0b0c0">
 			<name locale="en">Replaceable Text</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="secondary" type="span" color="a0b0c0">
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="sgmltag" type="span" color="a0b0c0">
 			<name locale="en">SGML Tag</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="structname" type="span" color="a0b0c0">
 			<name locale="en">Structure Name</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="surname" type="span" color="a0b0c0">
 			<name locale="en">Surname</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="symbol" type="span" color="a0b0c0">
 			<name locale="en">Symbol</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="term" type="span" color="a0b0c0">
 			<name locale="en">Term</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="ulink" type="span" color="a0b0c0">
 			<name locale="en">URL Link</name>
 			<short-desc locale="en">A URL link (perhaps to a web site)</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="xref" type="span" color="a0b0c0">
 			<name locale="en">Cross-reference</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 
 		<element tag="guibutton" type="span" color="a0b0c0">
 			<name locale="en">GUI Button</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="guilabel" type="span" color="a0b0c0">
 			<name locale="en">GUI Label</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="guimenu" type="span" color="a0b0c0">
 			<name locale="en">GUI Menu</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="guisubmenu" type="span" color="a0b0c0">
 			<name locale="en">GUI Submenu</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="guimenuitem" type="span" color="a0b0c0">
 			<name locale="en">GUI Menu Item</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="keycap" type="span" color="a0b0c0">
 			<name locale="en">Key Caption</name>
 			<short-desc locale="en">The printed text on a particular key on a keyboard</short-desc>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 		<element tag="menuchoice" type="span" color="a0b0c0">
 			<name locale="en">Menu Choice</name>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
 		<!-- etc -->

@@ -1,4 +1,4 @@
-bin_PROGRAMS = conge
+bin_PROGRAMS = conglomerate
 
 if ENABLE_PRINTING
 printing_sources = \
@@ -12,7 +12,7 @@ else
 printing_sources = 
 endif
 
-conge_SOURCES =             \
+conglomerate_SOURCES =      \
   global.h                  \
   cong-dialog.h             \
   cong-dispspec.h           \
@@ -99,5 +99,5 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 	$(PRINTING_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DDATADIR=\""$(datadir)"\"
-conge_LDADD  = $(CONGLOMERATE_LIBS) \
+conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(PRINTING_LIBS)

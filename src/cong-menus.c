@@ -52,6 +52,7 @@
 #endif
 
 #include "cong-dispspec-registry.h"
+#include <glade/glade.h>
 
 extern char *ilogo_xpm[];
 
@@ -347,6 +348,11 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc,
 			   cong_dialog_content_get_widget(content));
 #endif
 
+	g_signal_connect_swapped (G_OBJECT(dialog), 
+				  "response", 
+				  G_CALLBACK (gtk_widget_destroy),
+				  GTK_OBJECT (dialog));
+
 	gtk_widget_show_all(dialog);
 
 	return dialog;
@@ -366,9 +372,7 @@ static void menu_callback_file_properties(gpointer callback_data,
 	dialog = cong_document_properties_dialog_new(doc,
 						     cong_primary_window_get_toplevel(primary_window));
 
-	gtk_dialog_run(GTK_DIALOG(dialog));
-
-	gtk_widget_destroy(dialog);
+	gtk_widget_show_all(dialog);
 
 	/* FIXME: memory leaks */
 }
@@ -1174,6 +1178,24 @@ void menu_callback_debug_information_alert(gpointer callback_data,
 	gtk_widget_destroy(GTK_WIDGET(dialog));
 }
 
+void menu_callback_debug_glade_test(gpointer callback_data,
+					   guint callback_action,
+					   GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+
+	gchar* glade_filename = gnome_program_locate_file(the_globals.gnome_program,
+							  GNOME_FILE_DOMAIN_APP_DATADIR,
+							  "conglomerate/test.glade",
+							  FALSE,
+							  NULL);
+
+	GladeXML *xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+
+	g_free(glade_filename);
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1283,6 +1305,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 	{ N_("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
 	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
+	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },
@@ -1314,6 +1337,7 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
+	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },

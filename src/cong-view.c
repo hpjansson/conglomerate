@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-view.h"
+#include "cong-document.h"
 
 CongDocument*
 cong_view_get_document(CongView *view)

@@ -94,9 +94,13 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 
 	properties_dialog = cong_node_properties_dialog_new(doc, tag, parent_window);
 
+#if 1
+	gtk_widget_show_all(properties_dialog);
+#else
 	/* FIXME:  Make this modeless */
 	gtk_dialog_run(GTK_DIALOG(properties_dialog));
 	gtk_widget_destroy(properties_dialog);
+#endif
 
 	return TRUE;
 }

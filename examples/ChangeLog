@@ -1,4 +1,14 @@
 creating ChangeLog
+2003-06-24  David Malcolm
+
+	* Makefile.am
+
+	Changed from "conge" to "conglomerate"; added test-docbook.xml to distributed files
+
+	* docbook.xds
+
+	Added plugin node properties dialogs to tags.
+	
 2003-06-10  David Malcolm
 
 	* docbook.xds

@@ -27,15 +27,18 @@
 #include "cong-view.h"
 #include "cong-document.h"
 #include "cong-error-dialog.h"
+#include "cong-dispspec.h"
+#include "cong-plugin.h"
 
-#define CONG_NODE_PROPERTIES_VIEW(x) ((CongNodePropertiesView*)(x))
-typedef struct CongNodePropertiesView CongNodePropertiesView;
+#define CONG_ADVANCED_NODE_PROPERTIES_VIEW(x) ((CongAdvancedNodePropertiesView*)(x))
+typedef struct CongAdvancedNodePropertiesView CongAdvancedNodePropertiesView;
 
 #define DEBUG_PROPERTIES_VIEW 0
+#define DEBUG_DTD_PROPERTIES_HACK 0
 
 struct RawAttr;
 
-static void raw_attr_list_refresh(CongNodePropertiesView *view,
+static void raw_attr_list_refresh(CongAdvancedNodePropertiesView *view,
 				  struct RawAttr* raw_attr);
 
 /* Prototypes of the handler functions: */
@@ -78,12 +81,14 @@ struct RawAttr
 	GtkWidget *delete_button;
 };
 
-struct CongNodePropertiesView
+struct CongAdvancedNodePropertiesView
 {
 	CongView view;
 	CongNodePtr node;
 
+#if 0
 	GtkWidget *notebook;
+#endif
 
 	CongDialogContent *dialog_content;
 
@@ -95,24 +100,24 @@ struct CongNodePropertiesView
 /* Definitions of the handler functions: */
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
 	g_return_if_fail(node);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_make_orphan\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_make_orphan\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	/* UNWRITTEN */
 }
 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter_sibling;
 	GtkTreeIter tree_iter_parent;
 
@@ -121,17 +126,17 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	g_return_if_fail(older_sibling);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_add_after\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_add_after\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	/* UNWRITTEN */
 }
 
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter_sibling;
 	GtkTreeIter tree_iter_parent;
 
@@ -140,17 +145,17 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	g_return_if_fail(younger_sibling);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_add_before\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_add_before\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	/* UNWRITTEN */
 }
 
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter_node;
 	GtkTreeIter tree_iter_parent;
 
@@ -159,17 +164,17 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	g_return_if_fail(adoptive_parent);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_set_parent\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_set_parent\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	/* UNWRITTEN */
 }
 
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
@@ -177,17 +182,17 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	g_return_if_fail(new_content);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_set_text\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_set_text\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	/* UNWRITTEN */
 }
 
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
@@ -196,10 +201,10 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 	g_return_if_fail(value);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_set_attribute\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_set_attribute\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	raw_attr_list_refresh(properties_view,
 			      &properties_view->raw_attr);
@@ -207,7 +212,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name)
 {
-	CongNodePropertiesView *properties_view;
+	CongAdvancedNodePropertiesView *properties_view;
 	GtkTreeIter tree_iter;
 
 	g_return_if_fail(view);
@@ -215,10 +220,10 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 	g_return_if_fail(name);
 
 	#if DEBUG_PROPERTIES_VIEW
-	g_message("CongNodePropertiesView - on_document_node_remove_attribute\n");
+	g_message("CongAdvancedNodePropertiesView - on_document_node_remove_attribute\n");
 	#endif
 
-	properties_view = CONG_NODE_PROPERTIES_VIEW(view);
+	properties_view = CONG_ADVANCED_NODE_PROPERTIES_VIEW(view);
 
 	raw_attr_list_refresh(properties_view,
 			      &properties_view->raw_attr);
@@ -233,7 +238,7 @@ static void on_cursor_change(CongView *view)
 }
 
 
-void init_view_xpath_view(CongNodePropertiesView *view,
+void init_view_xpath_view(CongAdvancedNodePropertiesView *view,
 			  struct XPathView* xpath_view)
 {
 	gchar *xpath;
@@ -251,7 +256,7 @@ void init_view_xpath_view(CongNodePropertiesView *view,
 	g_free(xpath);
 }
 
-void init_view_modelled_attr(CongNodePropertiesView *view,
+void init_view_modelled_attr(CongAdvancedNodePropertiesView *view,
 			     struct ModelledAttr *modelled_attr)
 {
 	xmlElementPtr xml_element;
@@ -331,7 +336,7 @@ void init_view_modelled_attr(CongNodePropertiesView *view,
 
 }
 
-static void raw_attr_list_refresh(CongNodePropertiesView *view,
+static void raw_attr_list_refresh(CongAdvancedNodePropertiesView *view,
 				  struct RawAttr* raw_attr)
 {
 	xmlAttrPtr attr_iter;
@@ -351,7 +356,7 @@ static void raw_attr_list_refresh(CongNodePropertiesView *view,
 	}
 }
 
-static gchar* get_attr_name_for_tree_iter(CongNodePropertiesView *view, GtkTreeIter *iter)
+static gchar* get_attr_name_for_tree_iter(CongAdvancedNodePropertiesView *view, GtkTreeIter *iter)
 {
 	GValue *value = g_new0(GValue, 1);
 	gchar *result = NULL;
@@ -369,7 +374,7 @@ static gchar* get_attr_name_for_tree_iter(CongNodePropertiesView *view, GtkTreeI
 	return result;
 }
 
-static gchar* get_attr_name_for_tree_path(CongNodePropertiesView *view, const gchar *path_string)
+static gchar* get_attr_name_for_tree_path(CongAdvancedNodePropertiesView *view, const gchar *path_string)
 {
 	GtkTreePath* tree_path;
 	GtkTreeIter iter;
@@ -398,14 +403,23 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 {
 	/* FIXME: arg1 appears to be path; arg2 is value; is this really the case? */
 
-	CongNodePropertiesView *view = user_data;
+	CongAdvancedNodePropertiesView *view = user_data;
 	gchar* attr_name = get_attr_name_for_tree_path(view, arg1);
+	gchar *attr_value = cong_node_get_attribute(view->node, attr_name);
 
 	g_message("on_name_edited");
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("Editing name of attribute"));
-
+	/* Ignore if the node already has an attribute of that name: */
+	if (!xmlHasProp(view->node, arg2)) {
+		/* Remove old attribute: */
+		cong_document_node_remove_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, attr_name);
+	
+		/* Add new attribute: */
+		cong_document_node_set_attribute(cong_view_get_document(CONG_VIEW(view)), view->node, arg2, attr_value);
+	}
+	
 	g_free(attr_name);
+	g_free(attr_value);
 }
 
 static void on_value_edited(GtkCellRendererText *cellrenderertext,
@@ -415,7 +429,7 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 {
 	/* FIXME: arg1 appears to be path; arg2 is value; is this really the case? */
 
-	CongNodePropertiesView *view = user_data;
+	CongAdvancedNodePropertiesView *view = user_data;
 	gchar* attr_name = get_attr_name_for_tree_path(view, arg1);
 
 	g_message("on_value_edited %s = %s", attr_name, arg2);
@@ -431,7 +445,7 @@ static void on_add_attribute(GtkButton *button,
 	int num = 0;
 	gchar *attr_name;
 
-	CongNodePropertiesView *view = user_data;
+	CongAdvancedNodePropertiesView *view = user_data;
 
 	/* Generate a unique name: */
 	while (1) {
@@ -453,7 +467,7 @@ static void on_add_attribute(GtkButton *button,
 static void on_delete_attribute(GtkButton *button,
 			     gpointer user_data)
 {
-	CongNodePropertiesView *view = user_data;
+	CongAdvancedNodePropertiesView *view = user_data;
 	GtkTreeSelection* selection = gtk_tree_view_get_selection(view->raw_attr.tree_view);
 	GtkTreeIter iter;
 
@@ -471,7 +485,7 @@ static void on_delete_attribute(GtkButton *button,
 static void on_tree_view_selection_change(GtkTreeSelection *treeselection,
 					  gpointer user_data)
 {
-	CongNodePropertiesView *view = user_data;
+	CongAdvancedNodePropertiesView *view = user_data;
 
 	if (view->raw_attr.delete_button) {
 		gtk_widget_set_sensitive(view->raw_attr.delete_button, gtk_tree_selection_get_selected (treeselection, NULL, NULL));
@@ -479,7 +493,7 @@ static void on_tree_view_selection_change(GtkTreeSelection *treeselection,
 	
 }
 
-void init_view_raw_attr(CongNodePropertiesView *view,
+void init_view_raw_attr(CongAdvancedNodePropertiesView *view,
 			struct RawAttr* raw_attr)
 {
 	/* FIXME: use libglade for this... */
@@ -543,6 +557,8 @@ void init_view_raw_attr(CongNodePropertiesView *view,
 		gtk_container_add(GTK_CONTAINER(hbox), add_button);
 		gtk_container_add(GTK_CONTAINER(hbox), raw_attr->delete_button);
 
+		gtk_widget_set_sensitive(raw_attr->delete_button, FALSE);
+
 		g_signal_connect(G_OBJECT(add_button), "clicked", G_CALLBACK(on_add_attribute), view);
 		g_signal_connect(G_OBJECT(raw_attr->delete_button), "clicked", G_CALLBACK(on_delete_attribute), view);
 	}
@@ -553,28 +569,17 @@ void init_view_raw_attr(CongNodePropertiesView *view,
 	cong_dialog_category_add_selflabelled_field(raw_attr->category, vbox);
 }
 
-GtkWidget *cong_node_properties_dialog_new(CongDocument *doc, 
-					   CongNodePtr node, 
-					   GtkWindow *parent_window)
+GtkWidget *cong_node_properties_dialog_advanced_new(CongDocument *doc, 
+						    CongNodePtr node,
+						    gboolean within_notebook)
 {
-	CongNodePropertiesView *view;
-	CongDispspec *ds;
-	GtkWidget *dialog, *vbox;
+	CongAdvancedNodePropertiesView *view;
+	GtkWidget *widget;
 
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	ds = cong_document_get_dispspec(doc);
-
-	/* FIXME: Test implementation: */
-	/* FIXME: should it be modal? */
-	dialog = gtk_dialog_new_with_buttons(_("Placeholder Properties Dialog"),
-					     parent_window,
-					     GTK_DIALOG_MODAL,
-					     GTK_STOCK_OK, GTK_RESPONSE_OK,
-					     NULL);
-
-	view = g_new0(CongNodePropertiesView,1);
+	view = g_new0(CongAdvancedNodePropertiesView,1);
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
@@ -587,48 +592,104 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 	view->view.klass->on_selection_change = on_selection_change;
 	view->view.klass->on_cursor_change = on_cursor_change;
 
+	view->node = node;
+
 	cong_document_register_view( doc, CONG_VIEW(view) );
 
-	g_object_set_data(G_OBJECT(dialog),
-			  "cong_view",
-			  view);
-	/* FIXME: memory leak, and leak of the view! */
+	view->dialog_content = cong_dialog_content_new(within_notebook);
 
-	view->node = node;
-				
-	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+	init_view_xpath_view(view, &view->xpath_view);
 
-	vbox = GTK_DIALOG(dialog)->vbox;
-
-	view->notebook = gtk_notebook_new();
-	gtk_box_pack_start(GTK_BOX(vbox), view->notebook, FALSE, FALSE, 0);	
-
-	view->dialog_content = cong_dialog_content_new(TRUE);
-
-	/* Add any plugin property pages for this node type: */
-	{
-		/* WRITEME! */
+	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
+#if DEBUG_DTD_PROPERTIES_HACK
+		init_view_modelled_attr(view, &view->modelled_attr);
+#endif /* #if DEBUG_DTD_PROPERTIES_HACK */
+		
+		init_view_raw_attr(view, &view->raw_attr);
 	}
+		
+	widget = cong_dialog_content_get_widget(view->dialog_content);
 
-	/* Handle advanced property page: */
-	{
-		gtk_notebook_append_page(GTK_NOTEBOOK(view->notebook),
-					 cong_dialog_content_get_widget(view->dialog_content),
-					 gtk_label_new(_("Advanced"))
-					 );
-		
-		
-		init_view_xpath_view(view, &view->xpath_view);
+	gtk_widget_show_all (widget);
 
-		if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-			init_view_modelled_attr(view, &view->modelled_attr);
-		
-			init_view_raw_attr(view, &view->raw_attr);
+	return widget;
+}
+
+void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
+						  CongDocument *doc, 
+						  CongNodePtr node)
+{
+	g_return_if_fail(notebook);
+	g_return_if_fail(doc);
+	g_return_if_fail(node);
+
+	gtk_notebook_append_page(notebook,
+				 cong_node_properties_dialog_advanced_new(doc, 
+									  node,
+									  TRUE),
+				 gtk_label_new(_("Advanced"))
+				 );
+}
+
+GtkWidget *cong_node_properties_dialog_new(CongDocument *doc, 
+					   CongNodePtr node, 
+					   GtkWindow *parent_window)
+{
+	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	/* Should we use a plugin for this node?: */
+	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
+		CongDispspec *ds;
+		CongDispspecElement* element;
+		const gchar* plugin_id;
+
+		ds = cong_document_get_dispspec(doc);
+		g_assert(ds);
+
+		element = cong_dispspec_lookup_node(ds, node);
+		if (element) {
+			plugin_id = cong_dispspec_element_get_property_dialog_plugin_id(element);
+
+			/* Is there a plugin for this type of node? */
+			if (plugin_id) {
+				CongCustomPropertyDialog *dialog_factory = cong_plugin_manager_locate_custom_property_dialog_by_id(the_globals.plugin_manager, plugin_id);
+
+				if (dialog_factory) {
+					GtkWidget *dialog = cong_custom_property_dialog_make(dialog_factory, doc, node);
+
+					return dialog;
+				}
+			}
 		}
-		
-		gtk_widget_show_all (dialog);
 	}
 
-	return GTK_WIDGET(dialog);
+
+	/* Otherwise: */
+	{
+		GtkWidget *dialog, *vbox;
+		GtkWidget *advanced_properties;
+
+		dialog = gtk_dialog_new_with_buttons(_("Properties"),
+						     parent_window,
+						     GTK_DIALOG_MODAL,
+						     GTK_STOCK_OK, GTK_RESPONSE_OK,
+						     NULL);		
+
+		gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+
+		vbox = GTK_DIALOG(dialog)->vbox;
+		advanced_properties = cong_node_properties_dialog_advanced_new(doc, 
+									       node,
+									       FALSE);
+		gtk_box_pack_start(GTK_BOX(vbox), advanced_properties, FALSE, FALSE, 0);
+
+		g_signal_connect_swapped (G_OBJECT (dialog), 
+					  "response", 
+					  G_CALLBACK (gtk_widget_destroy),
+					  GTK_OBJECT (dialog));
+
+		return GTK_WIDGET(dialog);
+	}
 }
 
