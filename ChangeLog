@@ -5,6 +5,10 @@
 	Whitespace issues (mainly "<foo>bar</foo>leg", rather than
 	"<foo>bar</foo> leg") and tarball is now with double LL
 
+	* README
+
+	Regenerated, now it has the proper spaces inserted.
+
 2004-01-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am

@@ -47,8 +47,8 @@ make
     4.
 make install
 
-   If you're compiling from CVS, you will need the
-   gnome-commonmodule from GNOME CVS installed. Then type
+   If you're compiling from CVS, you will need the gnome-common
+   module from GNOME CVS installed. Then type
     1.
 ./autogen.sh
                         which generates and runs
@@ -60,9 +60,9 @@ make
 make install
 
    and see what happens. This should produce an executable called
-   conglomeratein the srcdirectory. Typing make installinstalls
-   the program and its data files into a hopefully sensible
-   location.
+   conglomerate in the src directory. Typing make install
+   installs the program and its data files into a hopefully
+   sensible location.
 
    On some systems, example given Red Hat 8, you have to type
     1.
@@ -76,11 +76,11 @@ make
 
 Debian
 
-   If you want to make a debian package from the tarbal, type
+   If you want to make a debian package from the tarball, type
 
    fakeroot dpkg-buildpackage -uc -us
 
-   and when you have a deb-src line in /etc/apt/sourcetype
+   and when you have a deb-src line in /etc/apt/source type
 
    apt-get source -b conglomerate
 
@@ -104,15 +104,15 @@ Mac OS X
 
 Running
 
-   Currently you need to install conglomeratefor it to work (so
+   Currently you need to install conglomerate for it to work (so
    that it can find its data files)
 
    Conglomerate needs two files to be able to run and display
    something. The first is an XML file (if it uses a DTD, this
    should be locatable as referred from the XML file - there will
    be no validation done, and DTD-less documents are fine). The
-   second is a "displayspec", illustrated by readme.xdsin the
-   examplesdirectory. This specifies how the tags are rendered.
+   second is a "displayspec", illustrated by readme.xds in the
+   examples directory. This specifies how the tags are rendered.
 
    There are two ways to load a document into Conglomerate. One
    is by specifying the XML on the commandline, like this:
