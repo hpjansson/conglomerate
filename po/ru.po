@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-05-05 08:40+0400\n"
+"POT-Creation-Date: 2003-06-05 17:07+0000\n"
 "PO-Revision-Date: 2002-11-29 09:06+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conge.desktop.in.h:1 src/cong-menus.c:1128
+#: data/conge.desktop.in.h:1 src/cong-menus.c:1139
 #: src/cong-primary-window.c:350 src/cong-primary-window.c:352
 #: src/cong-primary-window.c:578 src/cong-primary-window.c:580
 #: src/cong-primary-window.c:586
@@ -26,50 +26,50 @@ msgstr "Редактор Conglomerate файлов в формате XML"
 msgid "Edit xml files"
 msgstr "Редактировать файлы в формате XML"
 
-#: src/cong-dialog.c:188
+#: src/cong-dialog.c:194
 msgid "_Close without Saving"
 msgstr ""
 
-#: src/cong-dialog.c:203
+#: src/cong-dialog.c:209
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
 msgstr ""
 
-#: src/cong-dialog.c:208
+#: src/cong-dialog.c:214
 #, c-format
 msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
 
-#: src/cong-dialog.c:210
+#: src/cong-dialog.c:216
 #, c-format
 msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
 msgstr ""
 
-#: src/cong-dialog.c:212
+#: src/cong-dialog.c:218
 msgid ""
 "If you close without saving, changes from the past minute will be discarded."
 msgstr ""
 
-#: src/cong-dialog.c:257
+#: src/cong-dialog.c:263
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 
-#: src/cong-dialog.c:262
+#: src/cong-dialog.c:268
 #, c-format
 msgid "Changes from the past %li hours will be discarded."
 msgstr ""
 
-#: src/cong-dialog.c:264
+#: src/cong-dialog.c:270
 #, c-format
 msgid "Changes from the past %li minutes will be discarded."
 msgstr ""
 
-#: src/cong-dialog.c:266
+#: src/cong-dialog.c:272
 msgid "Changes from the past minute will be discarded."
 msgstr ""
 
@@ -81,36 +81,40 @@ msgstr ""
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr ""
 
-#: src/cong-dispspec.c:426
+#: src/cong-dispspec.c:411
 msgid "unnamed"
 msgstr ""
 
-#: src/cong-dispspec.c:439
+#: src/cong-dispspec.c:424
 msgid "No description available."
 msgstr ""
 
+#: src/cong-dispspec.c:825
+msgid "(xpath failed)"
+msgstr ""
+
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec.c:865
+#: src/cong-dispspec.c:870
 msgid "<untitled>"
 msgstr ""
 
-#: src/cong-dom-view.c:101
+#: src/cong-dom-view.c:176
 msgid "UNKNOWN"
 msgstr ""
 
-#: src/cong-dom-view.c:110 src/cong-dom-view.c:315
-#, fuzzy, c-format
-msgid "Text: \"%s\""
-msgstr "Экспортировать \"%s\""
-
-#: src/cong-dom-view.c:116
+#: src/cong-dom-view.c:187
 #, c-format
-msgid "Comment: \"%s\""
+msgid "Text: \"<span foreground=\"%s\">%s</span>\""
+msgstr ""
+
+#: src/cong-dom-view.c:204
+#, c-format
+msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr ""
 
 #. Create a column, associating the "text" attribute of the
 #. * cell_renderer to the first column of the model
-#: src/cong-dom-view.c:380 src/cong-tree-view.c:498
+#: src/cong-dom-view.c:548
 msgid "Element"
 msgstr ""
 
@@ -131,6 +135,47 @@ msgid ""
 "That feature has not yet been implemented.  Sorry.\n"
 "\n"
 "This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-dialog.c:248
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr ""
+
+#: src/cong-error-dialog.c:251
+#, c-format
+msgid ""
+"A GError occurred; the error report was:\n"
+"<i>%s</i>"
+msgstr ""
+
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:442
+msgid "An unexpected error occurred."
+msgstr ""
+
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:443
+msgid "For more information, click on the \"Details\" button."
+msgstr ""
+
+#: src/cong-error-dialog.c:264 src/cong-error-file-open.c:445
+msgid "Details"
+msgstr ""
+
+#. Add upper content:
+#: src/cong-error-dialog.c:300
+#, c-format
+msgid ""
+"An error occurred whilst running this system command:\n"
+"\n"
+"<tt>%s</tt>"
+msgstr ""
+
+#: src/cong-error-dialog.c:301
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
 msgstr ""
 
 #. FIXME: ought to set up the parent window properly
@@ -305,18 +350,6 @@ msgstr ""
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "Filing System."
-msgstr ""
-
-#: src/cong-error-file-open.c:442
-msgid "An unexpected error occurred."
-msgstr ""
-
-#: src/cong-error-file-open.c:443
-msgid "For more information, click on the \"Details\" button."
-msgstr ""
-
-#: src/cong-error-file-open.c:445
-msgid "Details"
 msgstr ""
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
@@ -525,7 +558,7 @@ msgstr "Опции экспорта"
 msgid "Name"
 msgstr "Имя"
 
-#: src/cong-file-export.c:266 src/cong-file-new.c:187 src/cong-file-open.c:291
+#: src/cong-file-export.c:266 src/cong-file-new.c:187
 #: src/cong-file-print.c:234 src/cong-menus.c:282 src/cong-menus.c:452
 msgid "Description"
 msgstr "Описание"
@@ -601,48 +634,23 @@ msgid ""
 "keep it."
 msgstr ""
 
-#: src/cong-file-open.c:215
-#, c-format
-msgid "Parse errors loading %s"
-msgstr ""
-
-#: src/cong-file-open.c:286
-msgid "Line Number"
-msgstr ""
-
-#: src/cong-file-open.c:339
-#, c-format
-msgid "%s cannot understand the internal format of the file."
-msgstr ""
-
-#: src/cong-file-open.c:347
-msgid ""
-"Conglomerate currently requires documents to be \"well-formed\"; it has much "
-"stricter rules than most web browsers.  It also does not yet support SGML.  "
-"We hope to fix these problems in a later release."
-msgstr ""
-
-#: src/cong-file-open.c:348
-msgid "Show Details"
-msgstr ""
-
-#: src/cong-file-open.c:453
+#: src/cong-file-open.c:44
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
 msgstr ""
 
-#: src/cong-file-open.c:454
+#: src/cong-file-open.c:45
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
 msgstr ""
 
-#: src/cong-file-open.c:455
+#: src/cong-file-open.c:46
 msgid "Force"
 msgstr ""
 
-#: src/cong-file-open.c:563
+#: src/cong-file-open.c:154
 #, fuzzy
 msgid "Select an XML document"
 msgstr "Открыть документ"
@@ -710,7 +718,7 @@ msgstr "Изменить свойства"
 msgid "Type"
 msgstr "Тип"
 
-#: src/cong-menus.c:278
+#: src/cong-menus.c:278 src/tree.c:151
 msgid "Location"
 msgstr "Местоположение"
 
@@ -727,17 +735,17 @@ msgstr "/Тесты/Типы документов"
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr ""
 
-#: src/cong-menus.c:574 src/cong-plugin.c:713
+#: src/cong-menus.c:574 src/cong-plugin.c:821
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 
-#: src/cong-menus.c:577 src/cong-menus.c:601 src/cong-plugin.c:716
-#: src/cong-plugin.c:740
+#: src/cong-menus.c:577 src/cong-menus.c:601 src/cong-plugin.c:824
+#: src/cong-plugin.c:848
 msgid "Conglomerate could not transform the document"
 msgstr ""
 
-#: src/cong-menus.c:598 src/cong-plugin.c:737
+#: src/cong-menus.c:598 src/cong-plugin.c:845
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 
@@ -755,11 +763,11 @@ msgstr ""
 msgid "Message Log - Conglomerate"
 msgstr "Conglomerate"
 
-#: src/cong-menus.c:1126
+#: src/cong-menus.c:1137
 msgid "translator_credits"
 msgstr "Дмитрий Мастрюков <dmitry@taurussoft.org>"
 
-#: src/cong-menus.c:1130
+#: src/cong-menus.c:1141
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2002 David Malcolm"
@@ -767,223 +775,230 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2002 David Malcolm"
 
-#: src/cong-menus.c:1131
+#: src/cong-menus.c:1142
 #, fuzzy
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr ""
 "Программа Conglomerate будет дружественным редактором файлов в формате XML "
 "для среды GNOME"
 
-#: src/cong-menus.c:1150 src/cong-menus.c:1225
+#: src/cong-menus.c:1163 src/cong-menus.c:1241
 msgid "/_File"
 msgstr "/_Файл"
 
-#: src/cong-menus.c:1151 src/cong-menus.c:1226
+#: src/cong-menus.c:1164 src/cong-menus.c:1242
 msgid "/File/_New..."
 msgstr "/Файл/_Создать..."
 
-#: src/cong-menus.c:1152 src/cong-menus.c:1227
+#: src/cong-menus.c:1165 src/cong-menus.c:1243
 msgid "/File/_Open..."
 msgstr "/Файл/_Открыть..."
 
-#: src/cong-menus.c:1153 src/cong-menus.c:1158 src/cong-menus.c:1163
-#: src/cong-menus.c:1166 src/cong-menus.c:1169 src/cong-menus.c:1171
-#: src/cong-menus.c:1228 src/cong-menus.c:1230
+#: src/cong-menus.c:1166 src/cong-menus.c:1171 src/cong-menus.c:1176
+#: src/cong-menus.c:1179 src/cong-menus.c:1182 src/cong-menus.c:1184
+#: src/cong-menus.c:1244 src/cong-menus.c:1246
 msgid "/File/"
 msgstr "/Файл/"
 
-#: src/cong-menus.c:1154
+#: src/cong-menus.c:1167
 msgid "/File/_Save"
 msgstr "/Файл/Со_хранить"
 
-#: src/cong-menus.c:1155
+#: src/cong-menus.c:1168
 msgid "/File/Save _As..."
 msgstr "/Файл/Сохранить _как..."
 
-#: src/cong-menus.c:1156
+#: src/cong-menus.c:1169
 msgid "/File/Sa_ve a Copy..."
 msgstr "/Файл/Сохранить копи_ю..."
 
-#: src/cong-menus.c:1159
+#: src/cong-menus.c:1172
 #, fuzzy
 msgid "/File/Print Previe_w..."
 msgstr "/Файл/_Создать..."
 
-#: src/cong-menus.c:1160
+#: src/cong-menus.c:1173
 #, fuzzy
 msgid "/File/_Print..."
 msgstr "/Файл/_Экспортировать..."
 
-#: src/cong-menus.c:1164
+#: src/cong-menus.c:1177
 msgid "/File/_Revert"
 msgstr "/Файл/Восста_новить"
 
-#: src/cong-menus.c:1167 src/cong-menus.c:1229
+#: src/cong-menus.c:1180 src/cong-menus.c:1245
 msgid "/File/_Import..."
 msgstr "/Файл/_Импортировать..."
 
-#: src/cong-menus.c:1168
+#: src/cong-menus.c:1181
 msgid "/File/_Export..."
 msgstr "/Файл/_Экспортировать..."
 
-#: src/cong-menus.c:1170
+#: src/cong-menus.c:1183
 msgid "/File/Proper_ties"
 msgstr "/Файл/Из_менить свойства"
 
-#: src/cong-menus.c:1172 src/cong-menus.c:1231
+#: src/cong-menus.c:1185 src/cong-menus.c:1247
 msgid "/File/_Close"
 msgstr "/Файл/_Закрыть"
 
-#: src/cong-menus.c:1173 src/cong-menus.c:1232
+#: src/cong-menus.c:1186 src/cong-menus.c:1248
 msgid "/File/_Quit"
 msgstr "/Файл/В_ыйти"
 
-#: src/cong-menus.c:1175
+#: src/cong-menus.c:1188
 msgid "/_Edit"
 msgstr "/_Правка"
 
-#: src/cong-menus.c:1177
+#: src/cong-menus.c:1190
 msgid "/Edit/_Undo"
 msgstr "/Правка/_Откатить"
 
-#: src/cong-menus.c:1178
+#: src/cong-menus.c:1191
 msgid "/Edit/_Redo"
 msgstr "/Правка/Возв_ратить"
 
-#: src/cong-menus.c:1179 src/cong-menus.c:1184 src/cong-menus.c:1190
-#: src/cong-menus.c:1192
+#: src/cong-menus.c:1192 src/cong-menus.c:1197 src/cong-menus.c:1203
+#: src/cong-menus.c:1205
 msgid "/Edit/"
 msgstr "/Правка/"
 
-#: src/cong-menus.c:1181
+#: src/cong-menus.c:1194
 msgid "/Edit/Cu_t"
 msgstr "/Правка/_Вырезать"
 
-#: src/cong-menus.c:1182
+#: src/cong-menus.c:1195
 msgid "/Edit/_Copy"
 msgstr "/Правка/С_копировать"
 
-#: src/cong-menus.c:1183
+#: src/cong-menus.c:1196
 msgid "/Edit/_Paste"
 msgstr "/Правка/Вст_авть"
 
-#: src/cong-menus.c:1186
+#: src/cong-menus.c:1199
 msgid "/Edit/_Find..."
 msgstr "/Правка/_Найти..."
 
-#: src/cong-menus.c:1187
+#: src/cong-menus.c:1200
 msgid "/Edit/Find Ne_xt"
 msgstr "/Правка/Найти с_ледующее"
 
-#: src/cong-menus.c:1188
+#: src/cong-menus.c:1201
 msgid "/Edit/Find Pre_vious"
 msgstr "/Правка/Найти пред_ыдущее"
 
-#: src/cong-menus.c:1189
+#: src/cong-menus.c:1202
 msgid "/Edit/R_eplace..."
 msgstr "/Правка/_Заменить"
 
-#: src/cong-menus.c:1191
+#: src/cong-menus.c:1204
 msgid "/Edit/_Insert..."
 msgstr "/Правка/Вставить _из..."
 
-#: src/cong-menus.c:1194
+#: src/cong-menus.c:1207
 msgid "/Edit/View _Source"
 msgstr ""
 
-#: src/cong-menus.c:1197 src/cong-menus.c:1235
+#: src/cong-menus.c:1210 src/cong-menus.c:1251
 msgid "/Debug"
 msgstr ""
 
-#: src/cong-menus.c:1198 src/cong-menus.c:1236
-#, fuzzy
-msgid "/Debug/Error"
-msgstr "/Тесты/Ошибка"
+#: src/cong-menus.c:1211 src/cong-menus.c:1252
+msgid "/Debug/Begin self-test of error-reporting system..."
+msgstr ""
 
-#: src/cong-menus.c:1199 src/cong-menus.c:1237
+#: src/cong-menus.c:1212 src/cong-menus.c:1253
 #, fuzzy
 msgid "/Debug/Document Types"
 msgstr "/Тесты/Типы документов"
 
-#: src/cong-menus.c:1200
+#: src/cong-menus.c:1213
 #, fuzzy
 msgid "/Debug/Transform DocBook to HTML"
 msgstr "/Тесты/Трансформировать формат DocBook в формат HTML"
 
-#: src/cong-menus.c:1201
+#: src/cong-menus.c:1214
 #, fuzzy
 msgid "/Debug/Transform DocBook to XHTML"
 msgstr "/Тесты/Трансформировать формат DocBook в формат XHTML"
 
-#: src/cong-menus.c:1202
+#: src/cong-menus.c:1215
 #, fuzzy
 msgid "/Debug/Transform DocBook to HTML Help"
 msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате HTML"
 
-#: src/cong-menus.c:1203
+#: src/cong-menus.c:1216
 #, fuzzy
 msgid "/Debug/Transform DocBook to Java Help"
 msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате Java"
 
-#: src/cong-menus.c:1204
+#: src/cong-menus.c:1217
 #, fuzzy
 msgid "/Debug/Transform DocBook to FO"
 msgstr "/Тесты/Трансформировать формат DocBook в формат FO"
 
-#: src/cong-menus.c:1206
+#: src/cong-menus.c:1219
 #, fuzzy
 msgid "/Debug/Preview XSL:FO"
 msgstr "/Тесты/Посмотреть образец XSL:FO"
 
-#: src/cong-menus.c:1208
+#: src/cong-menus.c:1221
 #, fuzzy
 msgid "/Debug/DTD"
 msgstr "/Тесты/DTD"
 
-#: src/cong-menus.c:1209 src/cong-menus.c:1238
+#: src/cong-menus.c:1222 src/cong-menus.c:1254
 #, fuzzy
 msgid "/Debug/Dialog"
 msgstr "/Тесты/Диалог"
 
-#: src/cong-menus.c:1210 src/cong-menus.c:1239
+#: src/cong-menus.c:1223 src/cong-menus.c:1255
 msgid "/Debug/Progress Checklist"
 msgstr ""
 
-#: src/cong-menus.c:1211
+#: src/cong-menus.c:1224
 msgid "/Debug/Document Message Log"
 msgstr ""
 
-#: src/cong-menus.c:1214 src/cong-menus.c:1242
+#: src/cong-menus.c:1225 src/cong-menus.c:1256
+msgid "/Debug/Information Alert"
+msgstr ""
+
+#: src/cong-menus.c:1228
+msgid "/_Tools"
+msgstr ""
+
+#: src/cong-menus.c:1230 src/cong-menus.c:1259
 msgid "/_Help"
 msgstr "/_Справка"
 
-#: src/cong-menus.c:1216 src/cong-menus.c:1244
+#: src/cong-menus.c:1232 src/cong-menus.c:1261
 msgid "/Help/_Contents"
 msgstr "/Справка/_Содержание"
 
-#: src/cong-menus.c:1218 src/cong-menus.c:1246
+#: src/cong-menus.c:1234 src/cong-menus.c:1263
 msgid "/Help/_About"
 msgstr "/Справка/_О программе"
 
-#: src/cong-plugin.c:626
+#: src/cong-plugin.c:734
 #, fuzzy
 msgid "Conglomerate could not create the file"
 msgstr "Не удалось импортировать файл."
 
-#: src/cong-plugin.c:627 src/cong-plugin.c:671
+#: src/cong-plugin.c:735 src/cong-plugin.c:779
 msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 
-#: src/cong-plugin.c:628 src/cong-plugin.c:672
+#: src/cong-plugin.c:736 src/cong-plugin.c:780
 msgid "There may a problem with your installation, or a bug in the importer"
 msgstr ""
 
-#: src/cong-plugin.c:670
+#: src/cong-plugin.c:778
 #, fuzzy
 msgid "Conglomerate could not import the file"
 msgstr "Не удалось импортировать файл."
 
-#: src/cong-plugin.c:861
+#: src/cong-plugin.c:969
 #, c-format
 msgid "Unrecognised plugin (id=\"%s\")"
 msgstr ""
@@ -1035,22 +1050,22 @@ msgstr "%s (изменён) - %s"
 msgid "Dummy element for tag <%s>"
 msgstr ""
 
-#: src/main.c:242
+#: src/main.c:271
 #, c-format
 msgid "Conglomerate could not load any xds files from the directory \"%s\""
 msgstr ""
 
-#: src/main.c:244
+#: src/main.c:273
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr ""
 
-#: src/main.c:246
+#: src/main.c:275
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it."
 msgstr ""
 
-#: src/main.c:322
+#: src/main.c:371
 msgid "XML Editor"
 msgstr "Редактор файлов в формате XML"
 
@@ -1181,45 +1196,57 @@ msgstr ""
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 
-#: src/popup.c:560
+#: src/popup.c:104
+msgid "(no description available)"
+msgstr ""
+
+#: src/popup.c:306
+msgid "Remove span tag"
+msgstr ""
+
+#: src/popup.c:689
 msgid "Paste into"
 msgstr ""
 
-#: src/popup.c:566
+#: src/popup.c:697
 msgid "Paste before"
 msgstr ""
 
-#: src/popup.c:572
+#: src/popup.c:705
 msgid "Paste after"
 msgstr ""
 
-#: src/popup.c:587
+#: src/popup.c:722
 msgid "New sub-element"
 msgstr ""
 
-#: src/popup.c:598
+#: src/popup.c:735
 msgid "New sibling"
 msgstr ""
 
 #. FIXME: Test implementation:
-#: src/tree.c:129
+#: src/tree.c:131
 msgid "Placeholder Properties Dialog"
 msgstr ""
 
-#: src/tree.c:145
+#: src/tree.c:147
 msgid "Advanced"
 msgstr ""
 
 #: src/tree.c:153
+msgid "XPath"
+msgstr ""
+
+#: src/tree.c:163
 msgid "Properties from DTD/schema"
 msgstr ""
 
-#: src/tree.c:221
+#: src/tree.c:231
 #, fuzzy
 msgid "Custom Properties"
 msgstr "Изменить свойства"
 
-#: src/xmldata.c:922
+#: src/xmldata.c:1105
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid.  Please choose one of the "
@@ -1227,7 +1254,7 @@ msgid ""
 msgstr ""
 
 #. select a dialog element
-#: src/xmldata.c:926
+#: src/xmldata.c:1109
 msgid "Required Children Choices"
 msgstr ""
 
@@ -1235,6 +1262,14 @@ msgstr ""
 #, fuzzy
 msgid "Source View - Conglomerate"
 msgstr "Conglomerate"
+
+#, fuzzy
+#~ msgid "Text: \"%s\""
+#~ msgstr "Экспортировать \"%s\""
+
+#, fuzzy
+#~ msgid "/Debug/Error"
+#~ msgstr "/Тесты/Ошибка"
 
 #~ msgid "Open"
 #~ msgstr "Открыть"

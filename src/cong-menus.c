@@ -55,7 +55,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 1
+#define ENABLE_DEBUG_MENU 0
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)

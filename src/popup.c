@@ -290,7 +290,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);
 	gtk_widget_show(item);
 
-	span_tags_list = xml_all_span_elements(dispspec, cursor->location.node);
+	span_tags_list = xml_all_present_span_elements(dispspec, cursor->location.node);
 
 	if (span_tags_list != NULL)
 	{
@@ -334,13 +334,17 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 
 	/* Build list of dynamic tag insertion tools */
 	/*  build the list of valid inline tags here */
-	
-	for (dispspec_element = cong_dispspec_get_first_element(dispspec); dispspec_element; dispspec_element = cong_dispspec_element_next(dispspec_element))
-	{
-		if (cong_dispspec_element_is_span(dispspec_element))
-		{
+	span_tags_list = xml_all_valid_span_elements(dispspec, cursor->location.node);
+	span_tags_list = sort_menu(span_tags_list);
+
+	if (span_tags_list) {
+		GList *iter;
+
+		for (iter=span_tags_list; iter; iter=iter->next) {
+			CongDispspecElement *dispspec_element = (CongDispspecElement *)iter->data;
+
 			item = GTK_WIDGET(make_menu_item_for_dispspec_element(dispspec_element));
-			/* FIXME: perhaps we should composite a "deletion" icon to the element's icon? */
+			/* FIXME: perhaps we should composite an "add" icon to the element's icon? */
 
 			gtk_menu_append(GTK_MENU(the_globals.popup), item);
 
@@ -354,6 +358,7 @@ void editor_popup_build(CongDocument *doc, GtkWindow *parent_window)
 		}
 	}
 
+	g_list_free(span_tags_list);
 }
 
 /*
@@ -535,7 +540,7 @@ static gint my_compare_func(gconstpointer a, gconstpointer b)
 	g_assert(name_a);
 	g_assert(name_b);
 
-	g_message("comparing \"%s\" and \"%s\"", name_a, name_b);
+	/* g_message("comparing \"%s\" and \"%s\"", name_a, name_b); */
 
 	folded_a = g_utf8_casefold(name_a,-1);
 	folded_b = g_utf8_casefold(name_b,-1);

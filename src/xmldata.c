@@ -730,7 +730,7 @@ char *xml_fetch_clean_data(CongNodePtr x)
 }
 
 
-GList* xml_all_span_elements(CongDispspec *ds, CongNodePtr node) 
+GList* xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node) 
 {
 	GList* list = NULL;
 
@@ -757,6 +757,35 @@ GList* xml_all_span_elements(CongDispspec *ds, CongNodePtr node)
 		}
 		else {
 			break;
+		}
+	}
+
+	return list;
+}
+
+GList* xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node) 
+{
+	GList* list = NULL;
+	CongDispspecElement *ds_element;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	/*  we should be at text node.  grab span element above */
+	if (node->parent) {
+	       node = node->parent;
+	} 
+	else {
+	       return NULL;
+	}
+
+	/* FIXME: this adds all span tags; it makes no validity checks */
+
+	for (ds_element = cong_dispspec_get_first_element(ds); ds_element; ds_element = cong_dispspec_element_next(ds_element))
+	{
+		if (cong_dispspec_element_is_span(ds_element)) {
+			/*  prepend node to list */
+			list = g_list_prepend(list, (gpointer *) ds_element);			
 		}
 	}
 

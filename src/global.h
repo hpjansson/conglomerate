@@ -129,7 +129,8 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
 void cong_selection_delete(CongSelection *selection, CongDocument *doc);
 
-GList *xml_all_span_elements(CongDispspec *ds, CongNodePtr node);
+GList *xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node);
+GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
 gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
 xmlElementPtr xml_get_dtd_element(CongDocument *cong_doc, CongNodePtr node);

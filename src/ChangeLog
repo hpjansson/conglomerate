@@ -1,3 +1,13 @@
+2003-06-05 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-menus.c
+
+	Disabled debug menus
+
+	* global.h, popup.c, xmldata.c
+
+	The span tag popup menu is now sorted alphabetically
+	
 2003-06-04 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c, cong-dispspec.h, cong-document.c, cong-document.h, cong-editor-widget.c, cong-tree-view.c, cong-view.h, global.h, main.c, popup.c, 
