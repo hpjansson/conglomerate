@@ -1730,10 +1730,17 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 	}
 	
 	/* Recurse: */
-	for (iter = node->children; iter; iter=iter->next) {
+	if (node->type==XML_ENTITY_REF_NODE) {
+		g_assert (node->children == node->last);
 		recursive_add_nodes (widget, 
-				     iter,
+				     node->children,
 				     editor_node);
+	} else {
+		for (iter = node->children; iter; iter=iter->next) {
+			recursive_add_nodes (widget, 
+					     iter,
+					     editor_node);
+		}
 	}
 }
 
@@ -1763,10 +1770,17 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 	g_assert(editor_node);
 
 	/* Recurse: */
-	for (iter = node->children; iter; iter=iter->next) {
+	if (node->type==XML_ENTITY_REF_NODE) {
+		g_assert (node->children == node->last);
 		recursive_remove_nodes (widget, 
-					iter,
-					editor_node);		
+					node->children,
+					editor_node);
+	} else {
+		for (iter = node->children; iter; iter=iter->next) {
+			recursive_remove_nodes (widget, 
+						iter,
+						editor_node);		
+		}
 	}
 
 	destroy_areas (widget,

@@ -367,7 +367,11 @@ void cong_node_self_test(CongNodePtr node)
 		/* Special case:
 
 		FIXME: Then the child of this node is the entity decl, and hence has a different node as their parent (the DTD): */
+		g_assert (node->children == node->last);
 
+#if 1
+		g_assert (node->children->type == XML_ENTITY_DECL);
+#else
 		/* FIXME: are boththese cases needed?  try examples/file-roller.xml */
 		for (iter=node->children; iter; iter=iter->next) {
 			switch (iter->type) {
@@ -385,6 +389,7 @@ void cong_node_self_test(CongNodePtr node)
 				g_assert_not_reached();
 			}
 		}
+#endif
 	} else {
 		/* Normally, all children of this node should hade this node as their parent: */
 		for (iter=node->children; iter; iter=iter->next) {

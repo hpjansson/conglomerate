@@ -1,3 +1,9 @@
+2003-10-10  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-widget3.c, cong-node.c
+
+	Fixes for bug #124011 (entity ref children)
+
 2003-10-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-document.c, xmledit.c
