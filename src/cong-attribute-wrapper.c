@@ -197,9 +197,12 @@ cong_attribute_wrapper_get_attribute_name (CongAttributeWrapper *attribute_wrapp
  * cong_attribute_wrapper_get_attribute_value:
  * @attribute_wrapper:
  *
- * TODO: Write me
- * Returns:
+ * Returns the content of the attribute represented by @attribute_wrapper.
+ *
+ * Returns: The content of the attribute, to be freed by the caller.
+ *          Can be NULL.
  */
+
 gchar*
 cong_attribute_wrapper_get_attribute_value (CongAttributeWrapper *attribute_wrapper)
 {

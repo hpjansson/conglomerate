@@ -87,7 +87,7 @@ cong_attribute_editor_nmtoken_instance_init (CongAttributeEditorNMTOKEN *area)
  * @ns_ptr:
  * @attribute_name:
  *
- * Constructror called by #cong_attribute_editor_nmtoken_new()
+ * Constructor called by #cong_attribute_editor_nmtoken_new()
  *
  * Returns:
  */
@@ -112,16 +112,24 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
 	PRIVATE(attribute_editor_nmtoken)->add_btn = GTK_BUTTON(gtk_button_new_from_stock (GTK_STOCK_ADD));
 	PRIVATE(attribute_editor_nmtoken)->delete_btn = GTK_BUTTON(gtk_button_new_from_stock (GTK_STOCK_DELETE));
 
-	gtk_box_pack_end(PRIVATE(attribute_editor_nmtoken)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->delete_btn), FALSE, FALSE, 0);
-	gtk_box_pack_end(PRIVATE(attribute_editor_nmtoken)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->entry), TRUE, TRUE, 0);
-
-	gtk_box_pack_end(PRIVATE(attribute_editor_nmtoken)->hbox, GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->add_btn), FALSE, FALSE, 0);
+	gtk_box_pack_end (PRIVATE(attribute_editor_nmtoken)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->delete_btn),
+			  FALSE,
+			  FALSE,
+			  0);
+	gtk_box_pack_end (PRIVATE(attribute_editor_nmtoken)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->entry),
+			  TRUE,
+			  TRUE,
+			  0);
+	gtk_box_pack_end (PRIVATE(attribute_editor_nmtoken)->hbox,
+			  GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->add_btn),
+			  FALSE,
+			  FALSE,
+			  0);
 
 	gtk_container_add (GTK_CONTAINER(attribute_editor_nmtoken),
 			   GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->hbox));
-
-	do_refresh (attribute_editor_nmtoken);
-
 	gtk_widget_show (GTK_WIDGET(PRIVATE(attribute_editor_nmtoken)->hbox));
 
 	PRIVATE(attribute_editor_nmtoken)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
@@ -136,6 +144,9 @@ cong_attribute_editor_nmtoken_construct (CongAttributeEditorNMTOKEN *attribute_e
 				"clicked",
 				G_CALLBACK(on_delete_button),
 				attribute_editor_nmtoken);
+
+	/* must be called after the signals are created */
+	do_refresh (attribute_editor_nmtoken);
 
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_nmtoken);
 }
@@ -200,15 +211,24 @@ on_text_entry_changed (GtkEditable *editable,
 		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_nmtoken), value);
 
 	} else {
-		/* are there mem leaks here */
+		/*
+		 * Use a dialog to tell the user that the last character they entered
+		 * is not valid. It is rather disruptive, but I am not sure how elde to do
+		 * it. We could change the background colour of the text entry
+		 * to indicate a problem (it avoids the intrusive-ness of the dialog
+		 * and allows a user to delete all the contents and start editing),
+		 * but I'm not sure it's a good piece of UI.
+		 *
+		 * We need to clean up value since it if contains < or > (perhaps others)
+		 * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+		 */
 		gchar *what_failed = g_strdup_printf (_("Unable to set attribute \"%s\" to \"%s\""),
 						      cong_attribute_editor_get_attribute_name (CONG_ATTRIBUTE_EDITOR(attribute_editor_nmtoken)),
 						      value);
 		CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_nmtoken));
 		GtkWindow *parent_window;
 		GtkDialog *dialog;
-
-		const gchar *curr_value;
+		gchar *curr_value;
 
 		parent_window = cong_primary_window_get_toplevel (cong_document_get_primary_window (doc));
 		dialog = cong_error_dialog_new (parent_window,
@@ -219,6 +239,8 @@ on_text_entry_changed (GtkEditable *editable,
 
 		cong_error_dialog_run (dialog);
 		gtk_widget_destroy (GTK_WIDGET(dialog));
+
+		g_free (what_failed);
 
 		/* 
 		 * restore the previous value: should this be done *before* the dialog is called
@@ -233,6 +255,7 @@ on_text_entry_changed (GtkEditable *editable,
 		g_signal_handler_unblock ( G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
 					 PRIVATE(attribute_editor_nmtoken)->handler_id_changed);
 
+		g_free (curr_value);
 		return;
 	}
 }
@@ -295,11 +318,11 @@ do_refresh (CongAttributeEditorNMTOKEN *attribute_editor_nmtoken)
 	gchar *attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_nmtoken));
 	
 	if (attr_value) {
-		g_signal_handler_block ( G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
-					 PRIVATE(attribute_editor_nmtoken)->handler_id_changed);
+		g_signal_handler_block (G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
+					PRIVATE(attribute_editor_nmtoken)->handler_id_changed);
 		gtk_entry_set_text (GTK_ENTRY (PRIVATE(attribute_editor_nmtoken)->entry),
 				    attr_value);
-		g_signal_handler_unblock ( G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
+		g_signal_handler_unblock (G_OBJECT(PRIVATE(attribute_editor_nmtoken)->entry),
 					 PRIVATE(attribute_editor_nmtoken)->handler_id_changed);
 
 		g_free (attr_value);

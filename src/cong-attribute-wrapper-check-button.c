@@ -237,19 +237,14 @@ static gboolean
 should_button_be_active (CongAttributeWrapperCheckButton *attribute_wrapper)
 {
 	gchar *attribute_value = cong_attribute_wrapper_get_attribute_value (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
+	gboolean retval = FALSE;
 
 	if (attribute_value) {
-
 		if (0==strcmp(attribute_value, 
 			      PRIVATE(attribute_wrapper)->attribute_value_checked)) {
-			
-			g_free (attribute_value);
-			return TRUE;			
-		} else {
-			g_free (attribute_value);
-			return FALSE;
+			retval = TRUE;
 		}
-	} else {
-		return FALSE;
+		g_free (attribute_value);
 	}
+	return retval;
 }

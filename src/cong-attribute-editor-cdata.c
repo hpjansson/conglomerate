@@ -125,9 +125,6 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 			  0);
 	gtk_container_add (GTK_CONTAINER(attribute_editor_cdata),
 			   GTK_WIDGET(PRIVATE(attribute_editor_cdata)->hbox));
-
-	do_refresh (attribute_editor_cdata);
-
 	gtk_widget_show (GTK_WIDGET(PRIVATE(attribute_editor_cdata)->hbox));
 
 	PRIVATE(attribute_editor_cdata)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
@@ -142,6 +139,9 @@ cong_attribute_editor_cdata_construct (CongAttributeEditorCDATA *attribute_edito
 				"clicked",
 				G_CALLBACK(on_delete_button),
 				attribute_editor_cdata);
+
+	/* must be called after the signals are created */
+	do_refresh (attribute_editor_cdata);
 
 	return CONG_ATTRIBUTE_EDITOR (attribute_editor_cdata);
 }
@@ -252,12 +252,12 @@ do_refresh (CongAttributeEditorCDATA *attribute_editor_cdata)
 	gchar *attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_cdata));
 	
 	if (attr_value) {
-		g_signal_handler_block ( G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
-					 PRIVATE(attribute_editor_cdata)->handler_id_changed);
+		g_signal_handler_block (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
+					PRIVATE(attribute_editor_cdata)->handler_id_changed);
 		gtk_entry_set_text (GTK_ENTRY (PRIVATE(attribute_editor_cdata)->entry),
 				    attr_value);
-		g_signal_handler_unblock ( G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
-					 PRIVATE(attribute_editor_cdata)->handler_id_changed);
+		g_signal_handler_unblock (G_OBJECT(PRIVATE(attribute_editor_cdata)->entry),
+					  PRIVATE(attribute_editor_cdata)->handler_id_changed);
 
 		g_free (attr_value);
 

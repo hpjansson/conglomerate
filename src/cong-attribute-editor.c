@@ -201,8 +201,11 @@ cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor)
  * cong_attribute_editor_get_attribute_value:
  * @attribute_editor:
  *
- * TODO: Write me
- * Returns:
+ * Returns the value of the attribute represented by this editor
+ * (@attribute_editor).
+ *
+ * Returns: The contents of the attribute, to be freed by the called.
+ *          Will be NULL if the attribute is not defined.
  */
 gchar*
 cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor)
@@ -243,10 +246,12 @@ cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, cons
 		gchar *desc;
 
 		if (new_attr_value) {
-    			desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_attr_value);
-			
+    			desc = g_strdup_printf (_("Set attribute \"%s\" to \"%s\""),
+						attribute_name, 
+						new_attr_value);
 		} else {
-			desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
+			desc = g_strdup_printf (_("Delete attribute \"%s\""),
+						attribute_name);
 		}
 
 		cmd = cong_document_begin_command (doc,
@@ -268,6 +273,7 @@ cong_attribute_editor_try_set_value (CongAttributeEditor *attribute_editor, cons
 
 		cong_document_end_command (doc,
 					   cmd);
+		g_free (desc);
 	}
 
 	if (old_attr_value) {
@@ -380,9 +386,12 @@ dispose (GObject *object)
 	
 		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_editor)->doc),
 					     PRIVATE(attribute_editor)->handler_id_node_set_attribute);
+		PRIVATE(attribute_editor)->handler_id_node_set_attribute = 0;
+
 		g_signal_handler_disconnect (G_OBJECT (PRIVATE(attribute_editor)->doc),
 					     PRIVATE(attribute_editor)->handler_id_node_remove_attribute);
-		
+		PRIVATE(attribute_editor)->handler_id_node_remove_attribute = 0;
+
 		g_object_unref (G_OBJECT (PRIVATE(attribute_editor)->doc));
 		PRIVATE(attribute_editor)->doc = NULL;
 		

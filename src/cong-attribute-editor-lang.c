@@ -261,10 +261,7 @@ cong_attribute_editor_lang_do_refresh (CongAttributeEditorLang *attribute_editor
         valid = gtk_tree_model_get_iter_first (model, &iter);
  
  	if (attr_value) {
-	              
-	       
 	       /* Skip first row - no language */
-	       
 	       valid = gtk_tree_model_iter_next (model, &iter);
 
 	       while (valid) {
@@ -285,6 +282,8 @@ cong_attribute_editor_lang_do_refresh (CongAttributeEditorLang *attribute_editor
 		    g_free (value);
 	    	    valid = gtk_tree_model_iter_next (model, &iter);
 	       }
+
+	       g_free (attr_value);
 	} else {
    	       gtk_tree_selection_select_iter (selection, &iter);
 	}
