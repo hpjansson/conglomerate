@@ -102,6 +102,8 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	text_node = cong_node_new_text(" ");
 	cong_document_node_set_parent(doc, text_node, tag);
 
+	tree_coarse_update_of_view(cong_tree_view);
+
 	return(TRUE);
 }
 
