@@ -1,5 +1,9 @@
 2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-edit-find-and-replace.c
+
+	Find functionality now traverses the tree properly; created a CongFileParameters struct in case we decide to add funkier searches
+
 	* cong-node.h, cong-node.c, cong-location.c
 
 	Cleaned up node searching functions into a public API; fixed various comments to keep gtk-doc happy

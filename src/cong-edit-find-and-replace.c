@@ -102,53 +102,106 @@ cong_document_replace (CongDocument *doc)
 }
 
 /* Utility routines: */
+typedef struct CongFindParameters CongFindParameters;
+
+struct CongFindParameters
+{
+	const gchar *search_string;
+	gboolean match_case;
+
+	/* might add a filter like Only Text Nodes vs Only Comments vs Both */
+};
+
+const gchar*
+cong_util_strstr_with_case (const gchar *haystack,
+			    const gchar *needle,
+			    gboolean match_case)
+{
+	/* FIXME: case sensitive for now */
+	/* FIXME: is strstr safe enough? */
+
+	return strstr (haystack, needle);
+}
+
+static gboolean 
+contains_search_string (CongNodePtr node,
+			gpointer user_data)
+{
+	const CongFindParameters *params = (const CongFindParameters*)user_data;
+	g_assert (node);
+
+	if (cong_node_type (node)==CONG_NODE_TYPE_TEXT) {
+		if (cong_util_strstr_with_case (node->content,
+						params->search_string,
+						params->match_case)) {
+			return TRUE;
+		}
+	}	
+
+	return FALSE;
+}
 
 /* Find start of next occurrence of string: */
 static gboolean
 find_next (const CongLocation *start_loc,
-	   const gchar *search_string,
-	   gboolean match_case,
+	   const CongFindParameters *params,
 	   CongLocation *output)
 {
 	const gchar *result;
 	g_return_val_if_fail (start_loc, FALSE);
-	g_return_val_if_fail (search_string, FALSE);
+	g_return_val_if_fail (params, FALSE);
 	g_return_val_if_fail (output, FALSE);
 
-	/* FIXME: case sensitive for now */
-	/* FIXME: is strstr safe enough? */
-	result = strstr (start_loc->node->content + start_loc->byte_offset, search_string);
+	/* Search in current node: */
+	result = cong_util_strstr_with_case (start_loc->node->content + start_loc->byte_offset,
+					     params->search_string,
+					     params->match_case);
 
-	/* FIXME: scan through other nodes */
 	if (result) {
 		cong_location_set_node_and_byte_offset (output, 
 							start_loc->node, 
 							result - (const gchar*)start_loc->node->content);
 		return TRUE;
 	} else {
-		return FALSE;
+		/* Not found in this node; scan through other nodes: */
+		CongNodePtr next_node;
+
+		next_node = cong_node_calc_next_node_satisfying (start_loc->node, 
+								 contains_search_string,
+								 (gpointer)params);
+
+		if (next_node) {
+			result = cong_util_strstr_with_case (next_node->content, 
+							     params->search_string,
+							     params->match_case);
+			g_assert (result);
+
+			cong_location_set_node_and_byte_offset (output, 
+								next_node, 
+								result - (const gchar*)next_node->content);
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 }
 
 /* Find dialog implementation details: */
 static void
 do_find_next (CongDocument *doc,
-	      const gchar *search_string,
-	      gboolean match_case)
+	      const CongFindParameters *params)
 {
 	CongCursor *cursor;
 	CongLocation result;
 
 	g_assert (IS_CONG_DOCUMENT (doc));
-	g_assert (search_string);
 
-	g_message ("find \"%s\" with match_case: %s", search_string, ( match_case?"TRUE":"FALSE"));
+	g_message ("find \"%s\" with match_case: %s", params->search_string, ( params->match_case?"TRUE":"FALSE"));
 
 	cursor = cong_document_get_cursor (doc);
 
 	if (find_next (&cursor->location,
-		       search_string,
-		       match_case,
+		       params,
 		       &result)) {
 		/* "result" contains start of an occurrence of a search_string */
 		CongLocation string_end;
@@ -159,7 +212,7 @@ do_find_next (CongDocument *doc,
 
 		cong_location_set_node_and_byte_offset (&string_end,
 							result.node,
-							result.byte_offset+strlen (search_string));
+							result.byte_offset+strlen (params->search_string));
 
 		cong_command_add_selection_change (cmd,
 						   &result,
@@ -181,17 +234,15 @@ static void
 on_find_dialog_find (GtkWidget *widget,
 		     CongFindDialogDetails *dialog_details)
 {
-	const gchar *search_string;
-	gboolean match_case;
+	CongFindParameters params;
 
 	g_assert (dialog_details);
 
-	search_string = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget(dialog_details->xml, "finddlg_combo-entry_find")));
-	match_case = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget(dialog_details->xml, "checkbutton_finddlg_matchcase")));
+	params.search_string = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget(dialog_details->xml, "finddlg_combo-entry_find")));
+	params.match_case = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget(dialog_details->xml, "checkbutton_finddlg_matchcase")));
 
 	do_find_next (dialog_details->doc,
-		      search_string,
-		      match_case);
+		      &params);
 }
 
 static gboolean
