@@ -129,6 +129,11 @@
 			<name locale="en">Paragraph</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
+		<element tag="formalpara" type = "structural" icon="cong-paragraph">
+			<name locale="en">Paragraph (titled)</name>
+			<header-info tag="title"></header-info>
+			<property-dialog plugin-id="docbook-generic-node-properties"/>
+		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Legal Notice</name>
 			<property-dialog plugin-id="docbook-generic-node-properties"/>

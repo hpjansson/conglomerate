@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
-"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <book>
   <bookinfo>
       <authorgroup>
@@ -29,9 +28,7 @@
       <para>
 	This document may be distributed subject to the terms and
         conditions set forth in the Open Publication License, v1.0 or
-        later (the latest version is presently available at <ulink
-        url=" http://www.opencontent.org/openpub/"
-        type="http">http://www.opencontent.org/openpub/</ulink> )
+        later (the latest version is presently available at <ulink url=" http://www.opencontent.org/openpub/" type="http">http://www.opencontent.org/openpub/</ulink> )
       </para>
     </legalnotice>
 
@@ -65,6 +62,13 @@
 <para>Inconceivable!</para>
 </sect1>
 
+<sect1><title>Test of &lt;formalpara&gt;</title>
+<formalpara><title>Activity</title><para>Jumped over the lazy dog.</para></formalpara>
+<formalpara><title>Speed</title><para>Quick</para></formalpara>
+<formalpara><title>Colour</title><para>Brown</para></formalpara>
+<formalpara><title>Was it a fox?</title><para>Now that you mention it...</para></formalpara> 
+</sect1>
+
 <!-- Here is another test comment -->
 
 <sect1><title>Test of images</title>
@@ -90,13 +94,3 @@ This is a test document for trying out DocBook features.
 </para>
 </colophon>
 </book>
-
-
-
-
-
-
-
-
-
-

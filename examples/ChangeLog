@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-06-26  David Malcolm
+
+	* docbook.xds, test-docbook.xml
+
+	Added formalpara support and a testcase
+	
 2003-06-24  David Malcolm
 
 	* Makefile.am
