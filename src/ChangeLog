@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-20 David Malcolm
+
+        * cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-editor-widget-impl.h, cong-span-text-editor.c
+
+	Initial imports
+	
 2002-11-19 David Malcolm
 
 	* cong-plugin.c, cong-primary-window.c, global.h, new_doc.c, plugin-docbook.c
