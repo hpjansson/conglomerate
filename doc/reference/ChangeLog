@@ -1,0 +1,5 @@
+2003-09-26  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am, conglomerate-docs.sgml, conglomerate.types.bkp, version.xml.in
+	Created the reference directory and added these files (from a patch by Varga Robert for bug #122900)
+	

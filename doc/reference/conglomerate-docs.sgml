@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<book id="index" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <title>Conglomewrate Reference Manual</title>
+    <releaseinfo>for Conglomerate v. &version;</releaseinfo>
+  </bookinfo>
+
+  <xi:include href="../C/conglomerate.xml"/>
+
+  <chapter id="file_index">
+    <title>API reference</title>
+    <xi:include href="xml/cong-app.xml"/>
+    <xi:include href="xml/cong-attribute-editor-cdata.xml"/>
+    <xi:include href="xml/cong-attribute-editor-enumeration.xml"/>
+    <xi:include href="xml/cong-attribute-editor.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper-check-button.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper-radio-button.xml"/>
+    <xi:include href="xml/cong-attribute-wrapper.xml"/>
+    <xi:include href="xml/cong-dialog.xml"/>
+    <xi:include href="xml/cong-dispspec-registry.xml"/>
+    <xi:include href="xml/cong-dispspec.xml"/>
+    <xi:include href="xml/cong-document.xml"/>
+    <xi:include href="xml/cong-dtd.xml"/>
+    <xi:include href="xml/fo.xml"/>
+    <xi:include href="xml/cong-editor-area-bin.xml"/>
+    <xi:include href="xml/cong-editor-area-border.xml"/>
+    <xi:include href="xml/cong-editor-area-composer.xml"/>
+    <xi:include href="xml/cong-editor-area-container.xml"/>
+    <xi:include href="xml/cong-editor-area-entity-decl.xml"/>
+    <xi:include href="xml/cong-editor-area-entity-ref.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-blocks.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-inlines.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder-single.xml"/>
+    <xi:include href="xml/cong-editor-area-flow-holder.xml"/>
+    <xi:include href="xml/cong-editor-area-line.xml"/>
+    <xi:include href="xml/cong-editor-area-pixbuf.xml"/>
+    <xi:include href="xml/cong-editor-area-spacer.xml"/>
+    <xi:include href="xml/cong-editor-area-span-tag.xml"/>
+    <xi:include href="xml/cong-editor-area-structural-tag.xml"/>
+    <xi:include href="xml/cong-editor-area-text-comment.xml"/>
+    <xi:include href="xml/cong-editor-area-text-fragment.xml"/>
+    <xi:include href="xml/cong-editor-area-text.xml"/>
+    <xi:include href="xml/cong-editor-area-underline.xml"/>
+    <xi:include href="xml/cong-editor-area-unknown-tag.xml"/>
+    <xi:include href="xml/cong-editor-area.xml"/>
+    <xi:include href="xml/cong-editor-child-policy-flow-holder.xml"/>
+    <xi:include href="xml/cong-editor-child-policy-inline.xml"/>
+    <xi:include href="xml/cong-editor-child-policy.xml"/>
+    <xi:include href="xml/cong-editor-line-fragments.xml"/>
+    <xi:include href="xml/cong-editor-node-comment.xml"/>
+    <xi:include href="xml/cong-editor-node-document.xml"/>
+    <xi:include href="xml/cong-editor-node-dtd.xml"/>
+    <xi:include href="xml/cong-editor-node-element-span.xml"/>
+    <xi:include href="xml/cong-editor-node-element-structural.xml"/>
+    <xi:include href="xml/cong-editor-node-element-unknown.xml"/>
+    <xi:include href="xml/cong-editor-node-element.xml"/>
+    <xi:include href="xml/cong-editor-node-entity-decl.xml"/>
+    <xi:include href="xml/cong-editor-node-entity-ref.xml"/>
+    <xi:include href="xml/cong-editor-node-text.xml"/>
+    <xi:include href="xml/cong-editor-node-unimplemented.xml"/>
+    <xi:include href="xml/cong-editor-node.xml"/>
+    <xi:include href="xml/cong-editor-widget3-impl.xml"/>
+    <xi:include href="xml/cong-eel.xml"/>
+    <xi:include href="xml/cong-enum-mapping.xml"/>
+    <xi:include href="xml/cong-error-dialog.xml"/>
+    <xi:include href="xml/cong-fake-plugin-hooks.xml"/>
+    <xi:include href="xml/cong-font.xml"/>
+    <xi:include href="xml/cong-graph.xml"/>
+    <xi:include href="xml/cong-location.xml"/>
+    <xi:include href="xml/cong-marshal.xml"/>
+    <xi:include href="xml/cong-node.xml"/>
+    <xi:include href="xml/cong-overview-view.xml"/>
+    <xi:include href="xml/cong-parser-error.xml"/>
+    <xi:include href="xml/cong-plugin.xml"/>
+    <xi:include href="xml/cong-primary-window.xml"/>
+    <xi:include href="xml/cong-progress-checklist.xml"/>
+    <xi:include href="xml/cong-range.xml"/>
+    <xi:include href="xml/cong-selection.xml"/>
+    <xi:include href="xml/cong-text-cache.xml"/>
+    <xi:include href="xml/cong-tree-view.xml"/>
+    <xi:include href="xml/cong-util.xml"/>
+    <xi:include href="xml/cong-view.xml"/>
+    <xi:include href="xml/global.xml"/>
+    <xi:include href="xml/plugin-lists-area-listitem.xml"/>
+    <xi:include href="xml/plugin-lists-node-element-listitem.xml"/>
+    <xi:include href="xml/plugin-paragraph-area-paragraph.xml"/>
+    <xi:include href="xml/plugin-paragraph-node-element-paragraph.xml"/>
+    <xi:include href="xml/cong-editor-widget.xml"/>
+  </chapter>
+</book>
