@@ -30,6 +30,7 @@
 #include "cong-editor-area-text.h"
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-spacer.h"
+#include "cong-editor-area-expander.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -42,10 +43,14 @@ struct CongEditorAreaUnknownTagDetails
 
 	CongEditorArea *outer_vcompose;
 	CongEditorArea *top_row;
+		
 	/**/ CongEditorArea *namespace_decl_vcompose;
 	/**/ CongEditorArea *attribute_vcompose;
-	CongEditorArea *inner_row;
-	CongEditorArea *inner_area;
+	/**/ CongEditorArea *expander_row;
+	/****/ CongEditorArea *inner_expander;
+
+	/**/ CongEditorArea *inner_row;
+ 	/****/ CongEditorArea *inner_area;
 };
 
 static void
@@ -98,6 +103,10 @@ on_node_remove_attribute (CongDocument *doc,
 			  CongEditorAreaUnknownTag *area_unknown_tag);
 
 static void
+on_expansion_changed (CongEditorAreaExpander *area_expander,
+		      gpointer user_data);
+
+static void
 refresh_attribute_areas (CongEditorAreaUnknownTag *area_unknown_tag);
 
 
@@ -130,10 +139,58 @@ cong_editor_area_unknown_tag_instance_init (CongEditorAreaUnknownTag *area_unkno
 	area_unknown_tag->private = g_new0(CongEditorAreaUnknownTagDetails,1);
 }
 
-const gchar*
-cong_ui_get_colour_string(CongNodeType type);
+static const gchar*
+cong_ui_get_colour_string(CongNodeType type)
+{
+	/* FIXME: this should be linked to the theme and/or the GtkSourceView settings */
 
-/* Exported function definitions: */
+	switch (type) {
+	default: g_assert_not_reached();
+	case CONG_NODE_TYPE_UNKNOWN:
+		return "#000000";
+	case CONG_NODE_TYPE_ELEMENT:
+		return "#0080ff";
+	case CONG_NODE_TYPE_ATTRIBUTE:
+		return "#000000";
+	case CONG_NODE_TYPE_TEXT:
+		return "#ff0000";
+	case CONG_NODE_TYPE_CDATA_SECTION:
+		return "#000000";
+	case CONG_NODE_TYPE_ENTITY_REF:
+		return "#000000";
+	case CONG_NODE_TYPE_ENTITY_NODE:
+		return "#000000";
+	case CONG_NODE_TYPE_PI:
+		return "#000000";
+	case CONG_NODE_TYPE_COMMENT:
+		return "#0000FF";
+	case CONG_NODE_TYPE_DOCUMENT:
+		return "#0080ff";
+	case CONG_NODE_TYPE_DOCUMENT_TYPE:
+		return "#000000";
+	case CONG_NODE_TYPE_DOCUMENT_FRAG:
+		return "#000000";
+	case CONG_NODE_TYPE_NOTATION:
+		return "#000000";
+	case CONG_NODE_TYPE_HTML_DOCUMENT:
+		return "#000000";
+	case CONG_NODE_TYPE_DTD:
+		return "#0000FF";
+	case CONG_NODE_TYPE_ELEMENT_DECL:
+		return "#000000";
+	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
+		return "#000000";
+	case CONG_NODE_TYPE_ENTITY_DECL:
+		return "#000000";
+	case CONG_NODE_TYPE_NAMESPACE_DECL:
+		return "#000000";
+	case CONG_NODE_TYPE_XINCLUDE_START:
+		return "#000000";
+	case CONG_NODE_TYPE_XINCLUDE_END:
+		return "#000000";
+	}
+}
+
 /**
  * cong_editor_area_unknown_tag_construct:
  * @area_unknown_tag:
@@ -178,6 +235,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 										   GTK_ORIENTATION_VERTICAL,
 										   0);
 
+
 	/* Set up top row: */
 	{
 		PRIVATE(area_unknown_tag)->top_row = cong_editor_area_composer_new (editor_widget,
@@ -186,7 +244,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 		
 		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 						       PRIVATE(area_unknown_tag)->top_row);
-
+		
 		/* Opening "<ns-prefix:element-name": */
 		cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_unknown_tag)->top_row),
 						     cong_editor_area_text_new (editor_widget,
@@ -198,7 +256,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 						     FALSE,
 						     FALSE,
 						     0);
-
+		
 		/* Namespace declarations: */
 		{
 			PRIVATE(area_unknown_tag)->namespace_decl_vcompose = cong_editor_area_composer_new (editor_widget,
@@ -235,7 +293,6 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 			refresh_attribute_areas (area_unknown_tag);
 		}
 		
-
 		/* Closing ">" */
 		cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER (PRIVATE(area_unknown_tag)->top_row),
 						     cong_editor_area_text_new (editor_widget,
@@ -250,22 +307,41 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 		/* FIXME: add expander to control display of child nodes */
 
 	}
+
 	
-	PRIVATE(area_unknown_tag)->inner_row = cong_editor_area_composer_new (editor_widget,
+	PRIVATE(area_unknown_tag)->expander_row = cong_editor_area_composer_new (editor_widget,
 						   GTK_ORIENTATION_HORIZONTAL,
 						   0);
-	
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
-					       PRIVATE(area_unknown_tag)->inner_row);	
+					       PRIVATE(area_unknown_tag)->expander_row);	
 
-	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
-					       cong_editor_area_spacer_new (editor_widget,
-									    GTK_ORIENTATION_HORIZONTAL,
-									    50));
+	PRIVATE(area_unknown_tag)->inner_expander = cong_editor_area_expander_new (editor_widget, TRUE);
 
-	PRIVATE(area_unknown_tag)->inner_area = cong_editor_area_bin_new (editor_widget);
-	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
-					       PRIVATE(area_unknown_tag)->inner_area);	
+	cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_unknown_tag)->expander_row),
+					    PRIVATE(area_unknown_tag)->inner_expander,
+					    FALSE,
+					    FALSE,
+					    0);		
+	
+	/* Inner container for children */				       
+	{
+		PRIVATE(area_unknown_tag)->inner_row = cong_editor_area_composer_new (editor_widget,
+							   GTK_ORIENTATION_HORIZONTAL,
+							   0);
+	
+		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
+						       PRIVATE(area_unknown_tag)->inner_row);	
+
+		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
+						       cong_editor_area_spacer_new (editor_widget,
+										    GTK_ORIENTATION_HORIZONTAL,
+										    50));
+
+		PRIVATE(area_unknown_tag)->inner_area = cong_editor_area_bin_new (editor_widget);
+		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
+						       PRIVATE(area_unknown_tag)->inner_area);	
+
+	}
 	
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 					       cong_editor_area_text_new (editor_widget,
@@ -295,6 +371,11 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 											 "node_remove_attribute",
 											 G_CALLBACK (on_node_remove_attribute),
 											 area_unknown_tag);
+
+	g_signal_connect (G_OBJECT(PRIVATE(area_unknown_tag)->inner_expander),
+			  "expansion_changed",
+			  G_CALLBACK(on_expansion_changed),
+			  area_unknown_tag);
 
 	return CONG_EDITOR_AREA (area_unknown_tag);
 }
@@ -349,16 +430,14 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
+
 	CongEditorAreaUnknownTag *unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG(area);
 
-	if (PRIVATE(unknown_tag)->outer_vcompose) {
-
-		return cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose,
-							 orientation,
-							 width_hint);
-	} else {
-		return 0;
-	}
+	return  cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose,
+							  	    orientation,
+								    width_hint);
+								    
+								    
 }
 
 static void
@@ -429,7 +508,7 @@ add_areas_for_nsdef (CongEditorAreaUnknownTag *area_unknown_tag,
 		cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_unknown_tag)->namespace_decl_vcompose),
 						     cong_editor_area_text_new (editor_widget,
 										cong_app_get_font (cong_app_singleton(),
-												   CONG_FONT_ROLE_TITLE_TEXT),
+												   CONG_FONT_ROLE_BODY_TEXT),
 										NULL,
 										ns_string,
 										TRUE),
@@ -463,7 +542,7 @@ add_areas_for_attribute (CongEditorAreaUnknownTag *area_unknown_tag,
 	cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_unknown_tag)->attribute_vcompose),
 					     cong_editor_area_text_new (editor_widget,
 									cong_app_get_font (cong_app_singleton(),
-											   CONG_FONT_ROLE_TITLE_TEXT),
+											   CONG_FONT_ROLE_BODY_TEXT),
 									NULL,
 									attr_string,
 									TRUE),
@@ -517,3 +596,17 @@ refresh_attribute_areas (CongEditorAreaUnknownTag *area_unknown_tag)
 }
 
 
+static void
+on_expansion_changed (CongEditorAreaExpander *area_expander,
+		      gpointer user_data)
+{
+	CongEditorAreaUnknownTag *area_unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG (user_data);
+
+	if (cong_editor_area_expander_get_state (CONG_EDITOR_AREA_EXPANDER(PRIVATE(area_unknown_tag)->inner_expander))) {
+		cong_editor_area_show (PRIVATE(area_unknown_tag)->inner_area);
+	} else {
+		cong_editor_area_hide (PRIVATE(area_unknown_tag)->inner_area);
+	}
+	
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_unknown_tag), GTK_ORIENTATION_VERTICAL);
+}

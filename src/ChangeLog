@@ -1,5 +1,13 @@
 2004-08-23  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
+	* cong-editor-area-unknown-tag.c:
+
+	Added expander to show/hide children
+	
+	* cong-editor-area-structural-tag.c, cong-editor-area-structural.c:
+
+	Simplified expander-handling based on hidden CongEditorAreas having zero size
+
 	* cong-editor-area.c: 
 
 	Hidden areas have zero size
@@ -9,8 +17,7 @@
 	* cong-editor-area-flow-holder-inlines.c, cong-editor-line-fragments.c, cong-editor-line-fragments.h, cong-editor-node-element-span.c, cong-editor-node-text.c:
  
  	Displaying new-line characters in whitespace=preserve areas,
- 	is this part of bug#108404.
- 
+ 	is this part of bug#108404. 
 
 2004-08-20  Michèle Garoche  <michele.garoche@easyconnect.fr>
 

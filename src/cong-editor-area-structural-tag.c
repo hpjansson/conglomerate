@@ -270,8 +270,8 @@ render_self (CongEditorArea *area,
 		/* Bottom of title bar: */
 		gdk_draw_line (window, 
 			       gc, 
-			       rect->x + 1, rect->y + title_bar_height+1,
-			       rect->x + rect->width, rect->y + title_bar_height+1);
+			       rect->x + 1, rect->y + title_bar_height + 1,
+			       rect->x + rect->width, rect->y + title_bar_height + 1);
 	}
 }
 
@@ -284,6 +284,7 @@ calc_requisition (CongEditorArea *area,
 		return width_hint;
 	} else {
 		gint title_req;
+		gint inner_req;
 		
 		CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(area);
 
@@ -291,16 +292,11 @@ calc_requisition (CongEditorArea *area,
 							      orientation,
 							      width_hint-1);
 
-		if (PRIVATE(structural_tag)->expanded) {
-			gint inner_req;
-		
-			inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
-								      orientation,
-								      width_hint-1);
-			return title_req + inner_req+3;	
-		} else {
-			return title_req + 2;	
-		}
+
+     	        inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
+							      orientation,
+							      width_hint-1);
+		return title_req + inner_req + 2;	
 	}
 }
 
