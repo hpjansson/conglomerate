@@ -1,3 +1,9 @@
+2003-09-24  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
+
+        * cong-menus.c
+
+        Added Ctrl+U keybinding for View Source (bug #123064).
+
 2003-09-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cursor.c

@@ -1248,7 +1248,7 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */
-	{ N_("/Edit/View _Source"),     NULL, menu_callback_view_source, 0, NULL },
+	{ N_("/Edit/View _Source"),     "<control>U", menu_callback_view_source, 0, NULL },
 
 #if ENABLE_DEBUG_MENU
 	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
