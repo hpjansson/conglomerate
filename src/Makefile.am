@@ -14,6 +14,7 @@ endif
 
 conglomerate_SOURCES =      \
   global.h                  \
+  cong-app.h                \
   cong-dialog.h             \
   cong-dispspec.h           \
   cong-dispspec-registry.h  \
@@ -22,6 +23,7 @@ conglomerate_SOURCES =      \
   cong-editor-widget-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
+  cong-fake-plugin-hooks.h  \
   cong-font.h               \
   cong-graph.h              \
   cong-location.h           \
