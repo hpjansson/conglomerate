@@ -1,4 +1,7 @@
 #include <stdlib.h>
+
+#define GTK_ENABLE_BROKEN
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include <ttree.h>
@@ -94,7 +97,6 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 										2 + ft_asc, "fuentes");
 	}
 }
-
 
 GtkWidget *xv_section_head(TTREE *ds, TTREE *x)
 {
@@ -439,7 +441,6 @@ GtkWidget *xv_section_tail(TTREE *ds, TTREE *x)
 	return(line);
 }
 
-
 TTREE *xv_editor_elements_skip(TTREE *x, TTREE *ds)
 {
 	TTREE *x0;
@@ -458,7 +459,6 @@ TTREE *xv_editor_elements_skip(TTREE *x, TTREE *ds)
 	return(x);
 }
 
-
 void xv_style_r(GtkWidget *widget, gpointer data)
 {
 	GtkStyle *style;
@@ -472,7 +472,6 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 													xv_style_r, style);
 	}
 }
-
 
 GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, GtkWidget *tree_parent)
 {
@@ -594,8 +593,6 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 	return(root);
 }
 
-
-
 struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 {
 	struct xview *xv;
@@ -603,6 +600,7 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 	GtkWidget *w, *glaebb_tree;
 	int i;
 
+	g_message("xmlview_new called\n");
 	
 	curs.set = 0;
 	curs.xed = 0;
@@ -643,8 +641,10 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 
 	for ( ; x; x = xml_frag_next(x))
 	{
-    int type = xml_frag_type(x);
-		char *name = xml_frag_name_nice(x);
+	  int type = xml_frag_type(x);
+	  char *name = xml_frag_name_nice(x);
+
+	  g_message("examining frag \"%s\"\n",name);
 		
 		if (type == XML_TAG_SPAN && ds_element_structural(displayspec, name))
 		{
@@ -669,7 +669,6 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 	
 	return(xv);
 }
-
 
 void xmlview_destroy(int free_xml)
 {
