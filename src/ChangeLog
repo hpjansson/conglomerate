@@ -1,5 +1,13 @@
 2004-08-14  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* popup.c, cong-menus.c: 
+
+	Move context menu's Cut and Copy operation out of auto-generated code and into XML description
+
+	* tree.c, popup.c, cong-ui-hooks.h:
+
+	Replaced Document_Node_ParentWindow callbacks to Document_SelectedNode_ParentWindow
+
 2004-08-13  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* popup.c, cong-ui-hooks.h: 

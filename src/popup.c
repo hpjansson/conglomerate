@@ -748,6 +748,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 
 	
 	/* Fixed editing tools */
+#if 0
 	action = cong_action_new_from_stock ("NodeCut",
 					     _("_Cut"),
 					     GTK_STOCK_CUT);
@@ -773,6 +774,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 			      UI_PATH_CONTEXT_MENU,
 			      action,
 			      GTK_UI_MANAGER_MENUITEM);
+#endif
 	
 	action = cong_action_new_from_stock ("NodePaste",
 					     _("_Paste"),
@@ -1044,10 +1046,10 @@ make_element_submenu (const gchar *action_prefix,
  * TODO: Write me
  */
 void
-cong_ui_popup_init(CongDocument *doc, 
-		   CongNodePtr node,
-		   GtkWindow *parent_window,
-		   CongPrimaryWindow *primary_window)
+cong_ui_popup_init (CongDocument *doc, 
+		    CongNodePtr node,
+		    GtkWindow *parent_window,
+		    CongPrimaryWindow *primary_window)
 {
 	CongDispspec *ds;
 
@@ -1085,6 +1087,7 @@ cong_ui_popup_init(CongDocument *doc,
 	/* FIXME:  the clipboard stuff only currently works for elements, hence we should filter on these for now: */
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
 
+#if 0
 		cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
 
 		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
@@ -1105,6 +1108,7 @@ cong_ui_popup_init(CongDocument *doc,
 										      parent_window,
 										      cong_node_can_be_copied (node),
 										      primary_window);
+#endif
 		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
 										      cong_action_new ("NodePasteInto",
 												       _("Paste into"),
