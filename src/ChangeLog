@@ -1,3 +1,9 @@
+2004-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-xpath-expression.c, cong-dispspec-element.c
+
+	Added #include <libxml/xpath.h> to fix bug #130820; fixed ChangeLog entries to be 2004 - wake up Dave :-)
+
 2004-01-08  Paul Smith <conglomerate@pcs.uklinux.net>
 
 	* cong-document.c, cong-document.h, cong-menus.c, cong-primary-window.c, popup.c
@@ -5,7 +11,7 @@
 	Links Paste sensitivity to cong_document_can_paste.  Currently always returns true (therefore button is always sensitive)
 	This work on #126089
 
-2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
+2004-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-edit-find-and-replace.c
 

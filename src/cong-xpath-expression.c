@@ -28,6 +28,7 @@
 #include "cong-xpath-expression.h"
 #include <libxml/tree.h>
 #include <libxml/debugXML.h>
+#include <libxml/xpath.h>
 
 #define PRIVATE(x) ((x)->private)
 

@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <glib.h>
 #include <libxml/parser.h>
+#include <libxml/xpath.h>
 #include "cong-node.h"
 #include "cong-app.h"
 #include "cong-eel.h"
