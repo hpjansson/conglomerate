@@ -1,7 +1,14 @@
-0.7.5-1:
- There is gtk-doc, but it will not go into the debian package.
+conglomerate (0.7.5-1) unstable; urgency=low
+
+ * There is gtk-doc, but it will not go into the debian package.
  ( it is blocked by patching doc/reference/Makefile.in )
 
-0.7.2-1:
- Start calling scrollkeeper-update programm on Install 'postinst'
+ -- Geert Stappers <stappers@stappers.nl>  Wed,  8 Oct 2003 13:48:26 +0000
+
+
+conglomerate (0.7.2-1) unstable; urgency=low
+
+ * Start calling scrollkeeper-update programm on Install 'postinst'
  and Remove 'postrm'.
+
+ -- Geert Stappers <stappers@stappers.nl>  Fri, 19 Sep 2003 16:20:37 +0000
