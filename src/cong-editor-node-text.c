@@ -485,37 +485,70 @@ cong_selection_get_start_byte_offset (CongSelection *selection,
 				      CongNodePtr node,
 				      gint *output)
 {
-	CongLocation* loc = cong_selection_get_ordered_start (selection);
+	const CongLocation *start_loc = cong_selection_get_ordered_start (selection);
 
-	if (NULL==loc->node) {
+	if (NULL==start_loc->node) {
 		return FALSE;
 	}
 
-	if (loc->node == node) {
-		*output = loc->byte_offset;
+	if (start_loc->node == node) {
+		*output = start_loc->byte_offset;
 		return TRUE;
 
 	} else {
-		return FALSE; /* for now */ 
+		/* Is the selection start node before this node? */
+		if (cong_node_get_ordering (start_loc->node, node)<0) {
+			const CongLocation *end_loc = cong_selection_get_ordered_end (selection);
+
+			if (NULL==end_loc->node) {
+				return FALSE;
+			}
+
+			/* Is the selection end node after this node?: */
+			if (cong_node_get_ordering (end_loc->node, node)>0) {
+				/* Then this node is within a larger selection: */
+				*output = 0;
+				return TRUE;
+			}
+		}
 	}
 
+	return FALSE;
 }
+
 gboolean
 cong_selection_get_end_byte_offset (CongSelection *selection, 
 				    CongNodePtr node,
 				    gint *output)
 {
-	CongLocation* loc = cong_selection_get_ordered_end (selection);
+	CongLocation* end_loc = cong_selection_get_ordered_end (selection);
 
-	if (NULL==loc->node) {
+	if (NULL==end_loc->node) {
 		return FALSE;
 	}
 
-	if (loc->node == node) {
-		*output = loc->byte_offset;
+	if (end_loc->node == node) {
+		*output = end_loc->byte_offset;
 		return TRUE;
 
 	} else {
+		/* Is the selection end node after this node? */
+		if (cong_node_get_ordering (end_loc->node, node)>0) {
+			const CongLocation *start_loc = cong_selection_get_ordered_start (selection);
+
+			if (NULL==start_loc->node) {
+				return FALSE;
+			}
+
+			/* Is the selection start node before this node?: */
+			if (cong_node_get_ordering (start_loc->node, node)<0) {
+				/* Then this node is within a larger selection: */
+				g_assert (node->content);
+				*output = strlen (node->content);
+				return TRUE;
+			}
+		}		
+
 		return FALSE; /* for now */ 
 	}
 
@@ -928,16 +961,18 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 				event->x, 
 				event->y, 
 				&new_location)) {
-		CongCommand *cmd = cong_document_begin_command (doc, 
-								_("Drag out selection"), 
-								"cong-drag-selection");		
-		cong_command_add_cursor_change (cmd,
-						&new_location);
-		cong_command_add_selection_change (cmd, 
-						   cong_selection_get_logical_start (selection),
-						   &new_location);		
-		cong_document_end_command (doc, cmd);
-
+		if (!cong_location_equals (&new_location, cong_selection_get_logical_end (selection))) {
+			CongCommand *cmd = cong_document_begin_command (doc, 
+									_("Drag out selection"), 
+									"cong-drag-selection");		
+			cong_command_add_cursor_change (cmd,
+							&new_location);
+			cong_command_add_selection_change (cmd, 
+							   cong_selection_get_logical_start (selection),
+							   &new_location);		
+			cong_document_end_command (doc, cmd);
+		}
+			
 		return TRUE;
 	}
 
@@ -995,17 +1030,22 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 		got_selection_end = cong_selection_get_end_byte_offset (selection, 
 									this_node, 
 									&selection_end);
+
 		if (got_selection_start) {
 
 			add_attrs_for_state (attr_list, 0, selection_start, FRAG_NORMAL);
 
-			if (got_selection_end) {				
+			if (got_selection_end) {
 				/* we've got a self-contained selection within this node, or one that entirely encloses it: */
 				add_attrs_for_state (attr_list, selection_start, selection_end, select_state);
 				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
+				
+				g_message ("\"%s\" got sel start and end [%i,%i)", text, selection_start, selection_end);
 			} else {
 				/* we've got a selection that starts in this node but carries on past the end: */
 				add_attrs_for_state (attr_list, selection_start, strlen(text), select_state);
+
+				g_message ("\"%s\" got sel start %i", text, selection_start);
 			}
 		} else {
 
@@ -1013,13 +1053,14 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				/* we've got a selection that starts before this node and carries on past the end: */
 				add_attrs_for_state (attr_list, 0, selection_end, select_state);
 				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
+
+				g_message ("\"%s\" got sel end %i", text, selection_end);
+
 			} else {
 				/* no selections present: */
 				add_attrs_for_state (attr_list, 0, strlen(text), FRAG_NORMAL);
 			}
-		}
-
-		
+		}		
 	}
 #else
 	/* Big hack: */
@@ -1453,10 +1494,12 @@ add_attrs_for_state (PangoAttrList *attr_list,
 		     guint end_index,
 		     enum FragmentState state)
 {
-	pango_attr_list_insert (attr_list,
-				make_pango_attr_foreground (start_index, end_index, state));
-	pango_attr_list_insert (attr_list,
-				make_pango_attr_background (start_index, end_index, state));
+	if (start_index!=end_index) {
+		pango_attr_list_insert (attr_list,
+					make_pango_attr_foreground (start_index, end_index, state));
+		pango_attr_list_insert (attr_list,
+					make_pango_attr_background (start_index, end_index, state));
+	}
 }
 
 static void

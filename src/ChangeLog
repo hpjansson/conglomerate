@@ -1,5 +1,9 @@
 2003-12-19  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.c
+
+	Fixed various bugs in the calculation of selection highlighting; added an early reject to throw away unnecessary updates when dragging out a selection with the mouse
+
 	* cong-node.h, cong-node.c, cong-range.c
 
 	Added ordering function for comparing nodes; fixed long-standing bug in CongRange reordering function which was causing glitches in the selection code
