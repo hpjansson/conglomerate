@@ -10,6 +10,16 @@
 #include "global.h"
 #include "cong-eel.h"
 
+void 
+cong_eel_log_ref_count (const gchar *name, 
+			GObject *obj)
+{
+	g_message("Current ref count of %s = %i (%s)", 
+		  name,
+		  obj->ref_count,
+		  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(obj)));
+}
+
 void            
 cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 			      gint                  x,

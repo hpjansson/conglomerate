@@ -12,6 +12,17 @@
 
 G_BEGIN_DECLS
 
+#if 1
+#define CONG_EEL_LOG_REF_COUNT(name, obj) cong_eel_log_ref_count(name, obj)
+#else
+#define CONG_EEL_LOG_REF_COUNT(name, obj) ((void)0)
+#endif
+
+void 
+cong_eel_log_ref_count (const gchar *name, 
+			GObject *obj);
+
+
 void            
 cong_eel_rectangle_construct (GdkRectangle  *rectangle,
 			      gint                  x,

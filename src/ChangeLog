@@ -1,5 +1,9 @@
 2003-07-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-eel.c, cong-eel.h
+
+	Added some debug code to help track down reference leaks
+	
 	* cong-editor-node-text.c
 
 	Fixed a bug: was failing to clean up signals
