@@ -30,9 +30,10 @@ fi
 
 echo coping the deb directory into debian
 cp -a deb debian
+rm -f debian/Readme debian/build # for a cleaner *diff.gz
 
 # assuming the user has debian development stuff installed
-# ( this is place where a test on such executables should done )
+# ( this is the place where a test on such executables should done )
 
 echo gonna build the package
 dpkg-buildpackage -rfakeroot -us -uc
