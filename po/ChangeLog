@@ -1,3 +1,10 @@
+2004-06-21  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	Regenerated, with uss/mkpotfilesin version 1.7,
+	this will effect the .po files.
+	Thanks to Marcel Telka.
+
 2004-06-21  Miloslav Trmac  <mitr@volny.cz>
 
 	* cs.po: Updated Czech translation.

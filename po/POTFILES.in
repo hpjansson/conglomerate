@@ -15,6 +15,7 @@ glade/cong-preferences.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade
 glade/docbook-ulink-properties.glade
+glade/plugin-arbitrary.glade
 glade/plugin-random.glade
 glade/string_selection_dialog.glade
 src/auth_off.c
@@ -22,6 +23,7 @@ src/auth_on.c
 src/cong-app.c
 src/cong-attribute-editor-cdata.c
 src/cong-attribute-editor-enumeration.c
+src/cong-attribute-editor-lang.c
 src/cong-attribute-editor.c
 src/cong-attribute-wrapper-check-button.c
 src/cong-attribute-wrapper-radio-button.c
@@ -95,6 +97,7 @@ src/cong-file-print.c
 src/cong-file-properties.c
 src/cong-file-save.c
 src/cong-font.c
+src/cong-glade.c
 src/cong-graph.c
 src/cong-location.c
 src/cong-marshal.c
@@ -156,8 +159,10 @@ src/main.c
 src/plugin-abiword.c
 src/plugin-admonition-node-element.c
 src/plugin-admonition.c
+src/plugin-arbitrary.c
 src/plugin-cleanup-source.c
 src/plugin-convert-case.c
+src/plugin-css.c
 src/plugin-doc-from-xds.c
 src/plugin-docbook.c
 src/plugin-dtd.c
