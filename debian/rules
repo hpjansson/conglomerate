@@ -76,7 +76,7 @@ install: build
 	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 
-	# and for the debug package
+	# and for the debug package conglomerate-dbg
 	mkdir -p $(CURDIR)/debian/conglomerate-dbg/usr/bin
 	cp src/conglomerate-dbg $(CURDIR)/debian/conglomerate-dbg/usr/bin/
 	chmod 755 $(CURDIR)/debian/conglomerate-dbg/usr/bin/conglomerate-dbg

@@ -3,20 +3,30 @@
 # script to help doing a release
 #
 # debian/patches/release
-#   should be harmless
+#   is harmless, it can be reverted
 #
 # debian/patches/release unpatch
 #   reverts the "release" changes
 #
 # debian/patches/release 4.3.2-1
-#   does the things to be done on a release
+#   sets the version number and deletes the original files
 #
 
 function regular_release_changes
 {
- echo Doing the release changes...
+ mv debian/changelog debian/changelog.in
+ sed -e '1s/UNRELEASED/unstable/' \
+     -e '3s/expecting //' debian/changelog.in > debian/changelog
+
+ mv debian/control debian/control.in
+ sed -e '/Package: conglomerate-dbg/,$d' debian/control.in | \
+ sed -e '$d' > debian/control
+
  mv debian/rules debian/rules.in
- sed -e '/enable-debug/d' debian/rules.in > debian/rules
+ sed -e '/enable-debug/d' \
+     -e 's/dh_strip --exclude.*/dh_strip/' \
+     -e '/conglomerate-dbg/d' debian/rules.in > debian/rules
+
  echo Don\'t forgot to update the NEWS file.
 }
 
@@ -26,11 +36,16 @@ then
 else
  case "${1}" in
   unpatch)
+   test -f debian/changelog.in && mv debian/changelog.in debian/changelog
+   test -f debian/control.in && mv debian/control.in debian/control
    test -f debian/rules.in && mv debian/rules.in debian/rules
   ;;
   *\.*\.*-*)
    regular_release_changes
+   dch -v ${1} # set version and current date
    # plus a clean up
+   rm debian/changelog.in
+   rm debian/control.in
    rm debian/rules.in
   ;;
   *)

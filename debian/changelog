@@ -7,7 +7,7 @@ conglomerate (0.7.10-4) UNRELEASED; urgency=low
   The patch is updated for better disabling of gtkdoc.
 
   * conglomerate-dbg
-  package with debugging information
+  package with debugging information, but not intented as official package.
 
   * rules
   enabled debug, however this should not go into the distributed packages.
