@@ -10,9 +10,9 @@ release, the new one will probably be called "Congle".
 Compiling
 ---------
 
-Conge compilation should be quite simple, if you're lucky. There are no
-autoconf or automake scripts, only a basic makefile. On most modern Unices,
-this means you can type
+Conge compilation should be quite simple, if you're lucky. You will need
+GTK/GDK 1.2.6 or later. There are no autoconf or automake scripts, only a
+basic makefile. On most modern Unices, this means you can type
 
 make
 
@@ -44,6 +44,10 @@ conge readme.xml readme.ds
 
 The other is by using the GUI open dialogs. The readme example used above is
 located in the examples directory, from the package root.
+
+NOTE: It looks like the file requester is not working properly on Windows,
+and I don't have the time to figure out why. The command line arguments
+should work fine, though.
 
 
 Using
