@@ -72,7 +72,6 @@ static void debug_low_view_add_message(CongDebugLogView *debug_log_view,
 }
 
 /* Prototypes of the handler functions: */
-static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
@@ -82,17 +81,6 @@ static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
 /* Definitions of the handler functions: */
-static void on_document_coarse_update(CongView *view)
-{
-	CongDebugLogView *debug_log_view;
-
-	g_return_if_fail(view);
-
-	debug_log_view = CONG_DEBUG_LOG_VIEW(view);
-
-	debug_low_view_add_message(debug_log_view, "Coarse update", FALSE, "", "");
-}
-
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongDebugLogView *debug_log_view;
@@ -218,7 +206,6 @@ GtkWidget *cong_debug_log_view_new(CongDocument *doc)
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
-	view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;

@@ -597,8 +597,14 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 			
 		case 3: /* Normally the right mouse button: */
 			{
-				do_node_heading_context_menu(CONG_VIEW(details->view)->doc,
-							     CONG_ELEMENT_EDITOR(section_head)->first_node);
+				GtkWidget* menu;
+				CongDocument* doc;
+					
+				menu = cong_ui_popup_init(CONG_VIEW(details->view)->doc, 
+							  CONG_ELEMENT_EDITOR(section_head)->first_node, 
+							  GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget))));
+				gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, event->button,
+					       event->time);		      
 			}
 			break;
 		}		

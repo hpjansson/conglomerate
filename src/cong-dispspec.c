@@ -18,7 +18,7 @@
 #if 0
 #define DS_DEBUG_MSG1(x)    g_message((x))
 #define DS_DEBUG_MSG2(x, a) g_message((x), (a))
-#define DS_DEBUG_MSG2(x, a, b) g_message((x), (a), (b))
+#define DS_DEBUG_MSG3(x, a, b) g_message((x), (a), (b))
 #else
 #define DS_DEBUG_MSG1(x)    ((void)0)
 #define DS_DEBUG_MSG2(x, a) ((void)0)

@@ -44,6 +44,17 @@
 
 #define CONG_TREE_VIEW(x) ((CongTreeView*)(x))
 
+enum
+{
+	CONG_OVERVIEW_TREEMODEL_TITLE_COLUMN,
+	CONG_OVERVIEW_TREEMODEL_NODE_COLUMN,
+	CONG_OVERVIEW_TREEMODEL_DOC_COLUMN,
+	CONG_OVERVIEW_TREEMODEL_FOREGROUND_COLOR_COLUMN,
+	CONG_OVERVIEW_TREEMODEL_BACKGROUND_COLOR_COLUMN,
+	CONG_OVERVIEW_TREEMODEL_N_COLUMNS
+};
+
+
 struct CongTreeView
 {
 	CongView view;
@@ -118,8 +129,72 @@ static gboolean get_iter_for_node(CongTreeViewDetails *tree_view_details, CongNo
 	return search.found_it;
 }
 
+/* the treeview widget has the userdata "cong_tree_view" set on it */
+static gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
+{
+	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(widget));
+
+	if (event->type == GDK_BUTTON_PRESS)
+	{
+		GdkEventButton *bevent = (GdkEventButton *) event;
+		if (bevent->button != 3) return(FALSE);
+		
+ 		/* printf("button 3\n"); */
+ 		{
+			GtkTreePath* path;
+			if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
+							    bevent->x,
+							    bevent->y,
+							    &path,
+							    NULL,
+							    NULL, 
+							    NULL)
+			     ) { 
+				CongTreeView *cong_tree_view;
+				GtkTreeModel* tree_model;
+				GtkTreeIter iter;
+
+				cong_tree_view = g_object_get_data(G_OBJECT(widget),
+								   "cong_tree_view");
+				g_assert(cong_tree_view);
+
+				tree_model = GTK_TREE_MODEL(cong_tree_view_get_tree_store(cong_tree_view));
+#if 0
+				gchar* msg = gtk_tree_path_to_string(path);
+				printf("right-click on path \"%s\"\n",msg);
+				g_free(msg);
+#endif
+		    
+				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
+					CongNodePtr node;
+					GtkWidget* menu;
+					CongDocument* doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
+					
+					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_NODE_COLUMN, &node, -1);
+					gtk_tree_model_get(tree_model, &iter, CONG_OVERVIEW_TREEMODEL_DOC_COLUMN, &doc, -1);
+					
+					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), node));
+					
+					menu = cong_ui_popup_init(doc, 
+								  node, 
+								  parent_window);
+					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
+						       bevent->time);		      
+				}
+				
+				
+				gtk_tree_path_free(path);		  
+			}
+
+ 		}
+
+		return(TRUE);
+	}
+
+	return(FALSE);
+}
+
 /* Prototypes of the handler functions: */
-static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
@@ -129,29 +204,6 @@ static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
 /* Definitions of the handler functions: */
-static void on_document_coarse_update(CongView *view)
-{
-	CongTreeView *cong_tree_view;
-	GtkTreeIter tree_iter;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_TREE_VIEW
-	CONG_TREE_VIEW_DEBUG_MSG1("CongTreeView - on_document_coarse_update\n");
-	#endif
-
-	cong_tree_view = CONG_TREE_VIEW(view);
-
-#if 1
-	/* Ignore this for now: */
-#else
-	/* Empty and then repopulate the tree store: */
-	gtk_tree_store_clear(cong_tree_view->gtk_tree_store);
-	cong_tree_view_populate_tree(cong_tree_view);
-#endif
-
-}
-
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongTreeView *cong_tree_view;
@@ -629,7 +681,6 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 
 	cong_tree_view->view.doc = doc;
 	cong_tree_view->view.klass = g_new0(CongViewClass,1);
-	cong_tree_view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	cong_tree_view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	cong_tree_view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	cong_tree_view->view.klass->on_document_node_add_before = on_document_node_add_before;

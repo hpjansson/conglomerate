@@ -22,17 +22,6 @@ G_BEGIN_DECLS
 # define isblank(c) ((c) == ' ' || (c) == '\n' || (c) == '\r' || (c) == '\t')
 #endif
 
-/* FIXME: eventually move this to cong-tree-view.c, along with bits of popup.c: */
-enum
-{
-	CONG_OVERVIEW_TREEMODEL_TITLE_COLUMN,
-	CONG_OVERVIEW_TREEMODEL_NODE_COLUMN,
-	CONG_OVERVIEW_TREEMODEL_DOC_COLUMN,
-	CONG_OVERVIEW_TREEMODEL_FOREGROUND_COLOR_COLUMN,
-	CONG_OVERVIEW_TREEMODEL_BACKGROUND_COLOR_COLUMN,
-	CONG_OVERVIEW_TREEMODEL_N_COLUMNS
-};
-
 #define NEW_LOOK 1
 
 #if ENABLE_PRINTING
@@ -185,9 +174,8 @@ void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void editor_popup_build(CongDocument *doc, GtkWindow *parent_window);
 void editor_popup_init();
 
-/* Popup (context) menus for tree view: */
-GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x, GtkWindow *parent_window);
-gint tree_popup_show(GtkWidget *widget, GdkEvent *event);
+/* Popup (context) menus for tree view and for section headings: */
+GtkWidget* cong_ui_popup_init(CongDocument *doc, CongNodePtr node, GtkWindow *parent_window);
 
 /* dialog to select from a list of string */
 gchar* string_selection_dialog(gchar *title, gchar *element_description, GList *elements);
@@ -339,8 +327,6 @@ extern struct CongGlobals the_globals;
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);
-
-void do_node_heading_context_menu(CongDocument *doc, CongNodePtr node);
 
 /* UI routines for invocation by menus/toolbars: */
 void

@@ -91,7 +91,6 @@ glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
 
 /* MVC-related methods on the document: */
-void cong_document_coarse_update(CongDocument *doc);
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);

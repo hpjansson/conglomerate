@@ -382,31 +382,6 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 	return current_time.tv_sec - doc->time_of_last_save.tv_sec;
 }
 
-void cong_document_coarse_update(CongDocument *doc)
-{
-	GList *iter;
-
-	g_return_if_fail(doc);
-
-	#if DEBUG_MVC
-	g_message("cong_document_coarse_update\n");
-	#endif
-
-#if 0
-	doc->curs.w = NULL; /* should this be part of the editor_view ? */
-#endif
-
-	/* Notify listeners: */
-	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
-		CongView *view = CONG_VIEW(iter->data);
-		
-		g_assert(view->klass);
-		g_assert(view->klass->on_document_coarse_update);
-		view->klass->on_document_coarse_update(view);
-	}
-
-}
-
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 	GList *iter;

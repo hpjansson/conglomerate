@@ -1274,7 +1274,6 @@ void xmlview_destroy(int free_xml)
 }
 
 /* Prototypes of the handler functions: */
-static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
@@ -1286,23 +1285,6 @@ static void on_cursor_change(CongView *view);
 #define DEBUG_EDITOR_VIEW 1
 
 /* Definitions of the handler functions: */
-static void on_document_coarse_update(CongView *view)
-{
-	CongEditorView *editor_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_EDITOR_VIEW
-	g_message("CongEditorView - on_document_coarse_update\n");
-	#endif
-
-	editor_view = CONG_EDITOR_VIEW(view);
-
-	gtk_widget_destroy(editor_view->inner);
-	
-	cong_editor_populate_ui(editor_view);
-}
-
 static void on_document_node_make_orphan(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongEditorView *editor_view;
@@ -1400,7 +1382,6 @@ CongEditorView *cong_editor_view_new(CongDocument *doc)
 
 	editor_view->view.doc = doc;
 	editor_view->view.klass = g_new0(CongViewClass,1);
-	editor_view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	editor_view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	editor_view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	editor_view->view.klass->on_document_node_add_before = on_document_node_add_before;

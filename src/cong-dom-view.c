@@ -12,9 +12,10 @@
 #define DEBUG_DOM_VIEW 0
 
 enum {
-	DOMVIEW_COLUMN_TEXT,
-	DOMVIEW_COLUMN_NODE,
-	DOMVIEW_NUM_COLUMNS
+	CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT,
+	CONG_DOM_VIEW_TREEMODEL_COLUMN_NODE,
+	CONG_DOM_VIEW_TREEMODEL_COLUMN_DOCUMENT,
+	CONG_DOM_VIEW_TREEMODEL_NUM_COLUMNS
 };
 
 #define CONG_DOM_VIEW(x) ((CongDOMView*)(x))
@@ -28,7 +29,7 @@ typedef struct CongDOMView
 
 typedef struct CongDOMViewDetails
 {
-
+	CongDOMView *dom_view;
 	GtkScrolledWindow *scrolled_window;
 	GtkTreeStore *tree_store;
 	GtkTreeView *tree_view;
@@ -59,7 +60,7 @@ static gboolean search_for_node(GtkTreeModel *model,
 
 	gtk_tree_model_get(model,
 			   iter,
-			   DOMVIEW_COLUMN_NODE,
+			   CONG_DOM_VIEW_TREEMODEL_COLUMN_NODE,
 			   &this_node,
 			   -1);
 
@@ -271,13 +272,13 @@ static gchar *get_text_for_node(CongNodePtr node)
 
 static void populate_tree_store_recursive(CongDOMViewDetails *details, CongNodePtr node, GtkTreeIter* tree_iter)
 {
+	CongDocument *doc;
 	CongNodePtr node_iter;
 	gchar* text;
 
 	g_return_if_fail(details);
 	g_return_if_fail(node);
 	g_return_if_fail(tree_iter);
-
 
 #if 0
 	{
@@ -287,13 +288,16 @@ static void populate_tree_store_recursive(CongDOMViewDetails *details, CongNodeP
 	}
 #endif
 
+	doc = cong_view_get_document(CONG_VIEW(details->dom_view));
+
 	text = get_text_for_node(node);
 	g_assert(text);
 
 	gtk_tree_store_set (details->tree_store, 
 			    tree_iter,
-			    DOMVIEW_COLUMN_TEXT, text,
-			    DOMVIEW_COLUMN_NODE, node,
+			    CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT, text,
+			    CONG_DOM_VIEW_TREEMODEL_COLUMN_NODE, node,
+			    CONG_DOM_VIEW_TREEMODEL_COLUMN_DOCUMENT, doc,
 			    -1);
 
 	g_free(text);
@@ -308,8 +312,71 @@ static void populate_tree_store_recursive(CongDOMViewDetails *details, CongNodeP
 	}
 }
 
+static gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
+{
+	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(widget));
+
+	if (event->type == GDK_BUTTON_PRESS)
+	{
+		GdkEventButton *bevent = (GdkEventButton *) event;
+		if (bevent->button != 3) return(FALSE);
+		
+ 		/* printf("button 3\n"); */
+ 		{
+			GtkTreePath* path;
+			if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
+							    bevent->x,
+							    bevent->y,
+							    &path,
+							    NULL,
+							    NULL, 
+							    NULL)
+			     ) { 
+				CongDOMView *cong_dom_view;
+				GtkTreeModel* tree_model;
+				GtkTreeIter iter;
+
+				cong_dom_view = g_object_get_data(G_OBJECT(widget),
+								   "cong_dom_view");
+				g_assert(cong_dom_view);
+
+				tree_model = GTK_TREE_MODEL(cong_dom_view->private->tree_store);
+#if 0
+				gchar* msg = gtk_tree_path_to_string(path);
+				printf("right-click on path \"%s\"\n",msg);
+				g_free(msg);
+#endif
+		    
+				if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
+					CongNodePtr node;
+					GtkWidget* menu;
+					CongDocument* doc = cong_view_get_document(CONG_VIEW(cong_dom_view));
+					
+					gtk_tree_model_get(tree_model, &iter, CONG_DOM_VIEW_TREEMODEL_COLUMN_NODE, &node, -1);
+					gtk_tree_model_get(tree_model, &iter, CONG_DOM_VIEW_TREEMODEL_COLUMN_DOCUMENT, &doc, -1);
+					
+					printf("got node \"%s\"\n",cong_dispspec_name_get(cong_document_get_dispspec(doc), node));
+					
+					menu = cong_ui_popup_init(doc, 
+								  node, 
+								  parent_window);
+					gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
+						       bevent->time);		      
+				}
+				
+				
+				gtk_tree_path_free(path);		  
+			}
+
+ 		}
+
+		return(TRUE);
+	}
+
+	return(FALSE);
+}
+
 /* Prototypes of the handler functions: */
-static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
@@ -319,21 +386,6 @@ static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
 /* Definitions of the handler functions: */
-static void on_document_coarse_update(CongView *view)
-{
-	CongDOMView *test_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_DOM_VIEW
-	g_message("CongDOMView - on_document_coarse_update\n");
-	#endif
-
-	test_view = CONG_DOM_VIEW(view);
-
-	/* Ignore for now */
-}
-
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongDOMView *test_view;
@@ -486,7 +538,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 
 		gtk_tree_store_set(test_view->private->tree_store, 
 				   &tree_iter,
-				   DOMVIEW_COLUMN_TEXT, text,
+				   CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT, text,
 				   -1);
 
 		g_free(text);
@@ -516,10 +568,11 @@ GtkWidget *cong_dom_view_new(CongDocument *doc)
 	details = g_new0(CongDOMViewDetails,1);
 	
 	view->private = details;
+
+	details->dom_view=view;
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
-	view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
@@ -536,8 +589,12 @@ GtkWidget *cong_dom_view_new(CongDocument *doc)
 				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_usize(GTK_WIDGET(details->scrolled_window), 100, 50);
 
-        details->tree_store = gtk_tree_store_new (DOMVIEW_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+        details->tree_store = gtk_tree_store_new (CONG_DOM_VIEW_TREEMODEL_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_POINTER);
 	details->tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(details->tree_store)));
+
+	g_object_set_data(G_OBJECT(details->tree_view),
+			  "cong_dom_view",
+			  view);
 
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(details->scrolled_window), GTK_WIDGET(details->tree_view));
 
@@ -547,11 +604,15 @@ GtkWidget *cong_dom_view_new(CongDocument *doc)
 	 * cell_renderer to the first column of the model */
 	column = gtk_tree_view_column_new_with_attributes (_("Element"), 
 							   renderer,
-							   "markup", DOMVIEW_COLUMN_TEXT,
+							   "markup", CONG_DOM_VIEW_TREEMODEL_COLUMN_TEXT,
 							   NULL);
 
 	/* Add the column to the view. */
 	gtk_tree_view_append_column (GTK_TREE_VIEW (details->tree_view), column);
+
+ 	/* Wire up the context-menu callback */
+ 	gtk_signal_connect_object(GTK_OBJECT(details->tree_view), "event",
+ 				  (GtkSignalFunc) tree_popup_show, details->tree_view);
 
 	gtk_widget_show(GTK_WIDGET(details->tree_view));
 	gtk_widget_show(GTK_WIDGET(details->scrolled_window));

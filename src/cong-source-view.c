@@ -28,7 +28,6 @@ typedef struct CongSourceViewDetails
 } CongSourceViewDetails;
 
 /* Prototypes of the handler functions: */
-static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
@@ -77,22 +76,6 @@ void regenerate_text_buffer(CongSourceView *source_view)
 }
 
 /* Definitions of the handler functions: */
-static void on_document_coarse_update(CongView *view)
-{
-	CongSourceView *source_view;
-
-	g_return_if_fail(view);
-
-	#if DEBUG_SOURCE_VIEW
-	g_message("CongSourceView - on_document_coarse_update\n");
-	#endif
-
-	source_view = CONG_SOURCE_VIEW(view);
-
-	regenerate_text_buffer(source_view);
-	
-}
-
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongSourceView *source_view;
@@ -220,7 +203,6 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
-	view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;

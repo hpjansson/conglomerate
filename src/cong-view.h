@@ -48,7 +48,6 @@ struct CongViewClass
 	   Many of the signals are sent twice; once before the change occurs, and once afterwards.  The boolean "before_change" is TRUE the first 
 	   time and FALSE the second.
 	*/
-	void (*on_document_coarse_update)(CongView *view);
 	void (*on_document_node_make_orphan)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr former_parent);
 	void (*on_document_node_add_after)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr older_sibling);
 	void (*on_document_node_add_before)(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
