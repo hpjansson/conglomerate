@@ -1661,6 +1661,7 @@ static const gchar *ui_description =
 "  <toolbar name='MainToolBar'>"
 "      <toolitem action='New'/>"
 "      <toolitem action='Open'/>"
+"      <toolitem action='Save'/>"
 "      <separator name='ToolSep1'/>"
 "      <toolitem action='Undo'/>"
 "      <toolitem action='Redo'/>"
