@@ -18,7 +18,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 
-	CongNodePtr text_node, new_node;
+	CongNodePtr new_node;
 #if 1
 	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
 							 "element");
@@ -36,23 +36,15 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
-	/* Text node before new element */
-	text_node = cong_node_new_text(" ", doc);
-	cong_document_node_add_after(doc, text_node, tag);
-
 	/* New element */
 	new_node = cong_node_new_element_from_dispspec(element, doc);
-	cong_document_node_add_after(doc, new_node, text_node);
+	cong_document_node_add_after(doc, new_node, tag);
 
 	/*  add any necessary sub elements it needs */
 	xml_add_required_children(doc, new_node);
 
 	cong_util_set_cursor_to_first_text_descendant (doc, 
 						       new_node);
-
-	/* Text node after new element */
-	text_node = cong_node_new_text(" ", doc);
-	cong_document_node_add_after(doc, text_node, new_node);
 
 	cong_document_end_edit(doc);
 
@@ -65,7 +57,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
 
-	CongNodePtr text_node, new_node;
+	CongNodePtr new_node;
 #if 1
 	CongDispspecElement *element = g_object_get_data(G_OBJECT(widget),
 							 "element");
@@ -82,10 +74,6 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
-	/* Text node before new element */
-	text_node = cong_node_new_text(" ", doc);
-	cong_document_node_set_parent(doc, text_node, tag);
-
 	/* New element */
 	new_node = cong_node_new_element_from_dispspec(element, doc);
 	cong_document_node_set_parent(doc, new_node, tag);
@@ -95,10 +83,6 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	cong_util_set_cursor_to_first_text_descendant (doc, 
 						       new_node);
-
-	/* Text node after new element */
-	text_node = cong_node_new_text(" ", doc);
-	cong_document_node_set_parent(doc, text_node, tag);
 
 	cong_document_end_edit(doc);
 

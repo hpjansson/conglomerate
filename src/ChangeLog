@@ -1,6 +1,12 @@
+2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* tree.c
+
+	Removed redundant whitespace nodes that were added when adding new structural elements
+	
 2003-09-27  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
  
-         * cong-parser-error.c
+        * cong-parser-error.c
  
 	Added syntax highlighting to the parser error dialog.
 
