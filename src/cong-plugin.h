@@ -243,12 +243,24 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 				CongNodeToolActionCallback action_callback,
 				gpointer user_data);
 
-CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin *plugin,
-								      const gchar *name, 
-								      const gchar *description,
-								      const gchar *functionality_id,
-								      CongCustomPropertyFactoryMethod factory_method,
-								      gpointer user_data);
+CongCustomPropertyDialog*
+cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
+					     const gchar *name, 
+					     const gchar *description,
+					     const gchar *functionality_id,
+					     CongCustomPropertyFactoryMethod factory_method,
+					     gpointer user_data);
+
+/* 
+   Utility to reduce the number of strings needing translation (addressing bug #124780); this
+   is a wrapper around cong_plugin_register_custom_property_dialog 
+*/
+CongCustomPropertyDialog*
+cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
+							 const gchar *element_name,
+							 const gchar *functionality_id,
+							 CongCustomPropertyFactoryMethod factory_method,
+							 gpointer user_data);
 
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);

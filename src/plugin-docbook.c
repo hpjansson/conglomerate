@@ -1382,19 +1382,17 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 						    docbook_generic_node_factory_method,
 						    NULL);
 
-	cong_plugin_register_custom_property_dialog(plugin,
-						    _("<orderedlist> property dialog"), 
-						    _("Provides a Properties dialog for the <orderedlist> tag"),
-						    "docbook-orderedlist-properties",
-						    docbook_orderedlist_properties_factory_method,
-						    NULL);
+	cong_plugin_register_custom_property_dialog_for_element (plugin,
+								 "orderedlist",
+								 "docbook-orderedlist-properties",
+								 docbook_orderedlist_properties_factory_method,
+								 NULL);
 
-	cong_plugin_register_custom_property_dialog(plugin,
-						    _("<ulink> property dialog"), 
-						    _("Provides a Properties dialog for the <ulink> tag"),
-						    "docbook-ulink-properties",
-						    docbook_ulink_properties_factory_method,
-						    NULL);
+	cong_plugin_register_custom_property_dialog_for_element (plugin,
+								 "ulink",
+								 "docbook-ulink-properties",
+								 docbook_ulink_properties_factory_method,
+								 NULL);
 
 #if 0
 	cong_plugin_register_node_tool (plugin,

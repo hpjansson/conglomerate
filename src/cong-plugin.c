@@ -566,12 +566,13 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 
 }
 
-CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin *plugin,
-								      const gchar *name, 
-								      const gchar *description,
-								      const gchar *functionality_id,
-								      CongCustomPropertyFactoryMethod factory_method,
-								      gpointer user_data)
+CongCustomPropertyDialog*
+cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
+					     const gchar *name, 
+					     const gchar *description,
+					     const gchar *functionality_id,
+					     CongCustomPropertyFactoryMethod factory_method,
+					     gpointer user_data)
 {
 	CongCustomPropertyDialog *property_dialog;
 
@@ -594,6 +595,39 @@ CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin
 
 	return property_dialog;
 
+}
+
+CongCustomPropertyDialog*
+cong_plugin_register_custom_property_dialog_for_element (CongPlugin *plugin,
+							 const gchar *element_name,
+							 const gchar *functionality_id,
+							 CongCustomPropertyFactoryMethod factory_method,
+							 gpointer user_data)
+{
+	CongCustomPropertyDialog *property_dialog;
+	gchar *name;
+	gchar *description;	
+
+	g_return_val_if_fail (plugin, NULL);
+	g_return_val_if_fail (element_name, NULL);
+	g_return_val_if_fail (functionality_id, NULL);
+
+	/* Generate a user-visible name for this plugin property dialog (property dialog for an XML element)*/
+	name = g_strdup_printf (_("<%s> property dialog"), element_name);
+
+	/* Generate a user-visible description for this plugin (property dialog for an XML element)*/
+	description = g_strdup_printf (_("Provides a Properties dialog for the <%s> element"), element_name);
+
+	property_dialog = cong_plugin_register_custom_property_dialog (plugin,
+								       name, 
+								       description,
+								       functionality_id,
+								       factory_method,
+								       user_data);
+	g_free (name);
+	g_free (description);
+	
+	return property_dialog;
 }
 
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data)
