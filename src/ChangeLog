@@ -1,5 +1,9 @@
 2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c
+
+	Dispspec creation now stores DTD information for (i) DTD import and for (ii) dispspec autogeneration from XML if a DTD is present
+
 	* cong-util.c, plugin-doc-from-xds.c
 
 	Document templates now associate themselves with the DTD, if available; DTD now always appears at top of document

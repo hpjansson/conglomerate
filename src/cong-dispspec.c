@@ -181,6 +181,35 @@ xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd);
 static xmlDtdPtr
 load_dtd (xmlDocPtr doc);
 
+static CongExternalDocumentModel*
+cong_external_document_model_new (enum CongDocumentModelType model_type,
+				  const gchar *public_id,
+				  const gchar *system_id)
+{
+	CongExternalDocumentModel* model;
+
+	model = g_new0 (CongExternalDocumentModel, 1);
+
+	model->model_type = model_type;
+
+	model->public_id = g_strdup (public_id);
+	model->system_id = g_strdup (system_id);
+	
+	return model;
+}
+
+static CongExternalDocumentModel*
+make_model_from_dtd (xmlDtdPtr dtd)
+{
+	g_return_val_if_fail (dtd, NULL);
+
+	G_BREAKPOINT();
+
+	return cong_external_document_model_new (CONG_DOCUMENT_MODE_TYPE_DTD,
+						 dtd->ExternalID,
+						 dtd->SystemID);
+}
+
 #if NEW_LOOK
 /* Hackish colour calculations in RGB space (ugh!) */
 static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
@@ -348,6 +377,8 @@ CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
 		ds->desc = g_strdup(description);
 	}
 
+	ds->document_models[CONG_DOCUMENT_MODE_TYPE_DTD] = make_model_from_dtd (dtd);
+	
 	/* Traverse the DTD; building stuff */
 	xmlHashScan (dtd->elements, element_callback_generate_dispspec_from_dtd, ds);
 
@@ -902,21 +933,18 @@ parse_external_document_model (CongDispspec *ds,
 	type = cong_node_get_attribute (node, "type");
 
 	if (type) {
-		CongExternalDocumentModel *model;
+		enum CongDocumentModelType model_type = cong_enum_mapping_lookup (document_model_enum_mapping,
+										  sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
+										  "type",
+										  CONG_DOCUMENT_MODE_TYPE_DTD);
+		gchar *public_id = cong_node_get_attribute (node, "public-id");
+		gchar *system_id = cong_node_get_attribute (node, "system-id");
 
-		model = g_new0 (CongExternalDocumentModel, 1);
-
-		model->model_type = cong_enum_mapping_lookup (document_model_enum_mapping,
-							      sizeof(document_model_enum_mapping)/sizeof(CongEnumMapping),
-							      "type",
-							      CONG_DOCUMENT_MODE_TYPE_DTD);
-
-		model->public_id = cong_node_get_attribute (node, "public-id");
-		model->system_id = cong_node_get_attribute (node, "system-id");
-
-		ds->document_models[model->model_type] = model;
-
+		ds->document_models[model_type] = cong_external_document_model_new (model_type,
+										    public_id,
+										    system_id);
 		g_free (type);
+
 	} else {
 		g_message ("Missing document-model type");
 	}
@@ -1819,6 +1847,8 @@ xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
 
 	if (dtd)
 	{
+		dispspec->document_models[CONG_DOCUMENT_MODE_TYPE_DTD] = make_model_from_dtd (dtd);
+
 		xmlHashScan (dtd->elements, element_callback_generate_dispspec_from_dtd, dispspec);
 	}
 
