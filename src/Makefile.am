@@ -34,6 +34,7 @@ conglomerate_SOURCES =      \
   cong-dispspec-element-gxx.h \
   cong-dispspec-registry.h  \
   cong-document.h           \
+  cong-document-traversal.h \
   cong-dtd.h                \
   cong-editor-area.h        \
   cong-editor-area-bin.h    \
@@ -107,6 +108,7 @@ conglomerate_SOURCES =      \
   cong-range.h              \
   cong-selection.h          \
   cong-text-cache.h         \
+  cong-traversal-node.h     \
   cong-tree-view.h          \
   cong-util.h               \
   cong-vfs.h                \
@@ -133,6 +135,7 @@ conglomerate_SOURCES =      \
   cong-dispspec-element.c   \
   cong-dispspec-registry.c  \
   cong-document.c           \
+  cong-document-traversal.c \
   cong-dom-view.c           \
   cong-dtd.c                \
   cong-editor-area.c        \
@@ -217,6 +220,7 @@ conglomerate_SOURCES =      \
   cong-range.c              \
   cong-source-view.c        \
   cong-text-cache.c         \
+  cong-traversal-node.c     \
   cong-tree-view.c          \
   cong-util.c               \
   cong-vfs.c                \
