@@ -1,5 +1,9 @@
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h, gxx-undefine-shared-macros.h, cong-dispspec-element-gxx.h, Makefile.am, cong-dispspec-element.c
+
+	Macro-based boilerplate generation of XML load/save routines
+	
 	* cong-editor-node-text.c
 
 	Fixed a warning

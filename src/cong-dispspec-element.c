@@ -520,15 +520,9 @@ static const CongEnumMapping whitespace_numeration[] =
 };
 
 CongDispspecElement*
-cong_dispspec_element_from_xml (xmlNodePtr xml_element)
+gxx_callback_construct_dispspec_element(void)
 {
-	CongDispspecElement* element;
-
-	g_return_val_if_fail (cong_node_is_tag (xml_element, NULL, "element"), NULL);
-
-	DS_DEBUG_MSG1("got xml element\n");
-
-	element = g_new0(CongDispspecElement,1);
+	CongDispspecElement *element = g_new0(CongDispspecElement,1);
 
 	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 
@@ -537,23 +531,29 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 							 g_free,
 							 g_free);
 
-	/* Extract tag namespace: */
-	{
-		xmlChar* xmlns = xmlGetProp(xml_element, "ns");
-		if (xmlns) {
-			element->xmlns = g_strdup(xmlns);
-		}
-	}
+	return element;
+}
 
-	/* Extract tagname: */
-	{
-		xmlChar* tag = xmlGetProp(xml_element, "tag");
-		if (tag) {
-			element->tagname = g_strdup(tag);			
-		} else {
-			element->tagname = g_strdup("unknown-tag");
-		}
-	}
+#if 1
+#include "gxx-object-from-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+#endif
+
+#if 1
+#include "gxx-object-to-xml-tree.h"
+#include "cong-dispspec-element-gxx.h"
+#endif
+
+CongDispspecElement*
+cong_dispspec_element_from_xml (xmlNodePtr xml_element)
+{
+	CongDispspecElement* element;
+
+	g_return_val_if_fail (cong_node_is_tag (xml_element, NULL, "element"), NULL);
+
+	DS_DEBUG_MSG1("got xml element\n");
+
+	element = gxx_generated_object_from_xml_tree_fn_dispspec_element (xml_element);
 
 	/* Extract type: */
 	{
@@ -596,6 +596,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 		}
 	}
 
+#if 0
 	/* Extract whitespace: */
 	{
 		xmlChar* prop = xmlGetProp(xml_element, "whitespace");
@@ -607,6 +608,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 			xmlFree(prop);
 		}
 	}
+#endif
 
   	/* Process children: */
   	{
@@ -695,22 +697,14 @@ xmlNodePtr
 cong_dispspec_element_to_xml (const CongDispspecElement *element,
 			      xmlDocPtr xml_doc)
 {
-	CongNodePtr element_node;
+	CongNodePtr xml_node;
 
 	g_assert(element);
 	g_assert(xml_doc);
 
-	element_node = xmlNewDocNode (xml_doc,
-				      NULL,
-				      "element",
-				      NULL);			
-	if (element->xmlns) {
-		xmlSetProp (element_node, "ns", element->xmlns);
-	}
+	xml_node = gxx_generated_object_to_xml_tree_fn_dispspec_element (element, xml_doc);
 
-	g_assert (element->tagname);
-	xmlSetProp (element_node, "tag", element->tagname);
-	xmlSetProp (element_node, "type", element_type_to_string(element->type));
+	xmlSetProp (xml_node, "type", element_type_to_string(element->type));
 
 	/* Handle name: */
 	if (element->username)
@@ -722,7 +716,7 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 						       );
 		xmlSetProp (name_node, "locale", "en");
 
-		xmlAddChild (element_node, name_node);		
+		xmlAddChild (xml_node, name_node);		
 	}
 	
 	/* Handle short-desc: */
@@ -733,7 +727,7 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 						       "short-desc",
 						       element->short_desc
 						       );
-		xmlAddChild (element_node, desc_node);		
+		xmlAddChild (xml_node, desc_node);		
 	}
 
 	/* FIXME:  Need to store these: */
@@ -756,7 +750,7 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	gchar *property_dialog_plugin_id;
 #endif
 
-	return element_node;
+	return xml_node;
 }
 
 static const gchar* 

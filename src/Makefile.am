@@ -26,6 +26,7 @@ conglomerate_SOURCES =      \
   cong-dialog.h             \
   cong-dispspec.h           \
   cong-dispspec-element.h   \
+  cong-dispspec-element-gxx.h \
   cong-dispspec-registry.h  \
   cong-document.h           \
   cong-dtd.h                \
@@ -105,6 +106,9 @@ conglomerate_SOURCES =      \
   cong-vfs.h                \
   cong-view.h               \
   fo.h                      \
+  gxx-object-from-xml-tree.h \
+  gxx-object-to-xml-tree.h \
+  gxx-undefine-shared-macros.h \
   cong-app.c                \
   cong-attribute-editor.c   \
   cong-attribute-editor-cdata.c \
