@@ -74,7 +74,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaSpanTag, 
@@ -381,12 +382,14 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(area_container);
 
 	g_assert(PRIVATE(span_tag)->inner_bin);
 
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(span_tag)->inner_bin),
-					       child);
+					       child,
+					       add_to_end);
 }

@@ -34,35 +34,8 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_ADMONITION_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_ADMONITION_TYPE, CongEditorNodeElementAdmonitionClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_ADMONITION(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_ADMONITION_TYPE)
 
-typedef struct CongEditorNodeElementAdmonition CongEditorNodeElementAdmonition;
-typedef struct CongEditorNodeElementAdmonitionClass CongEditorNodeElementAdmonitionClass;
-typedef struct CongEditorNodeElementAdmonitionDetails CongEditorNodeElementAdmonitionDetails;
+CONG_EDITOR_NODE_DECLARE_PLUGIN_SUBCLASS(Admonition, admonition)
 
-struct CongEditorNodeElementAdmonition
-{
-	CongEditorNodeElement editor_node_element;
-
-	CongEditorNodeElementAdmonitionDetails *private;
-};
-
-struct CongEditorNodeElementAdmonitionClass
-{
-	CongEditorNodeElementClass klass;
-
-	/* Methods? */
-};
-
-GType
-cong_editor_node_element_admonition_get_type (void);
-
-CongEditorNodeElementAdmonition*
-cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *editor_node_element_admonition,
-					       CongEditorWidget3* widget,
-					       CongTraversalNode *traversal_node);
-
-CongEditorNode*
-cong_editor_node_element_admonition_new (CongEditorWidget3* widget,
-					 CongTraversalNode *traversal_node);
 G_END_DECLS
 
 #endif

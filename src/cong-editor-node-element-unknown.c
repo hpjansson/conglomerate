@@ -29,6 +29,7 @@
 
 #include "cong-editor-area-unknown-tag.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeElementUnknownDetails
@@ -36,8 +37,7 @@ struct CongEditorNodeElementUnknownDetails
 	int dummy;
 };
 
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
+CONG_EDITOR_NODE_DECLARE_HOOKS
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementUnknown, 
@@ -48,9 +48,7 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeElementUnknown,
 static void
 cong_editor_node_element_unknown_class_init (CongEditorNodeElementUnknownClass *klass)
 {
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	node_klass->generate_block_area = generate_block_area;
+	CONG_EDITOR_NODE_CONNECT_HOOKS
 }
 
 static void
@@ -102,13 +100,31 @@ cong_editor_node_element_unknown_new (CongEditorWidget3* widget,
 				  traversal_node));
 }
 
-/**
- * generate_block_area:
- * @editor_node:
- * 
- * TODO: Write me
- * Returns:
- */
+
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
+{
+	CongEditorArea *block_area;
+
+	g_return_if_fail (editor_node);
+
+	block_area = cong_editor_area_unknown_tag_new (cong_editor_node_get_widget (editor_node),
+						       cong_editor_node_get_node(editor_node));
+
+	/* FIXME: should this be done by the helper function? */
+	cong_editor_area_connect_node_signals (block_area,
+					       editor_node);
+
+	cong_editor_node_create_block_area (editor_node,
+					    creation_info,
+					    block_area,
+					    TRUE);
+}
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -117,10 +133,11 @@ generate_block_area (CongEditorNode *editor_node)
 	g_return_val_if_fail (editor_node, NULL);
 
 	new_area = cong_editor_area_unknown_tag_new (cong_editor_node_get_widget (editor_node),
-						     cong_editor_node_get_node (editor_node));
+						     cong_editor_node_get_node(editor_node));
 
 	cong_editor_area_connect_node_signals (new_area,
 					       editor_node);
 
 	return new_area;
 }
+#endif

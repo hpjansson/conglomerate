@@ -32,6 +32,7 @@
 #include "cong-selection.h"
 #include "cong-ui-hooks.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 #define DEBUG_REQUISITIONS 0
@@ -420,6 +421,10 @@ cong_editor_area_get_requisition (CongEditorArea *area,
 
 	g_return_val_if_fail (IS_CONG_EDITOR_AREA(area), 0);
 
+	if (PRIVATE(area)->is_hidden) {
+	        return 0;
+	}
+
 	cache = &PRIVATE(area)->requisition_cache[orientation];
 
 	/* If not up-to-date, call fn to regenerate cache: */
@@ -759,15 +764,11 @@ cong_editor_area_calc_requisition (CongEditorArea *editor_area,
 				   int width_hint)
 {
 	g_return_val_if_fail (editor_area, 0);
-	
-	if (PRIVATE(editor_area)->is_hidden) {
-	        return 0;
-        } else {
-		return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
+
+	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_AREA_CLASS,
 						       editor_area,
 						       calc_requisition, 
 						       (editor_area, orientation, width_hint));
-        }						       
 }
 
 /**

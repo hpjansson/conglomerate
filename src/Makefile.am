@@ -20,10 +20,9 @@ conglomerate_SOURCES =      \
   cong-app.h                \
   cong-attribute-editor.h   \
   cong-attribute-editor-cdata.h \
-  cong-attribute-editor-lang.c	\
   cong-attribute-editor-lang.h	\
   cong-attribute-editor-enumeration.h \
-  cong-attribute-editor-nmtoken.h \
+  cong-attribute-editor-nmtoken.h  \
   cong-attribute-wrapper.h   \
   cong-attribute-wrapper-check-button.h \
   cong-attribute-wrapper-radio-button.h \
@@ -47,12 +46,9 @@ conglomerate_SOURCES =      \
   cong-editor-area-entity-decl.h \
   cong-editor-area-entity-ref.h \
   cong-editor-area-expander.h \
-  cong-editor-area-flow-holder.h \
-  cong-editor-area-flow-holder-blocks.h \
-  cong-editor-area-flow-holder-inlines.h \
-  cong-editor-area-flow-holder-single.h \
   cong-editor-area-labelled.h \
   cong-editor-area-line.h \
+  cong-editor-area-lines.h \
   cong-editor-area-pixbuf.h \
   cong-editor-area-spacer.h \
   cong-editor-area-text.h   \
@@ -63,10 +59,13 @@ conglomerate_SOURCES =      \
   cong-editor-area-structural-tag.h \
   cong-editor-area-underline.h \
   cong-editor-area-unknown-tag.h   \
-  cong-editor-child-policy.h \
-  cong-editor-child-policy-flow-holder.h \
-  cong-editor-child-policy-inline.h \
-  cong-editor-line-fragments.h \
+  cong-editor-creation-record.h   \
+  cong-editor-line-iter.h \
+  cong-editor-line-iter-simple.h \
+  cong-editor-line-iter-span-wrapper.h \
+  cong-editor-line-manager.h \
+  cong-editor-line-manager-simple.h \
+  cong-editor-line-manager-span-wrapper.h \
   cong-editor-node.h        \
   cong-editor-node-comment.h \
   cong-editor-node-document.h \
@@ -90,7 +89,7 @@ conglomerate_SOURCES =      \
   cong-glade.c		    \
   cong-glade.h		    \
   cong-graph.h              \
-  cong-language.h           \
+  cong-language.h	    \
   cong-location.h           \
   cong-marshal.h            \
   cong-modification.h       \
@@ -125,8 +124,8 @@ conglomerate_SOURCES =      \
   cong-service-node-tool.h  \
   cong-service-print-method.h \
   cong-service-tool.h \
-  cong-source-layout.h \
-  cong-spell.h \
+  cong-source-layout.h   \
+  cong-spell.h			\
   cong-text-cache.h         \
   cong-traversal-node.h     \
   cong-tree-view.h          \
@@ -143,6 +142,7 @@ conglomerate_SOURCES =      \
   cong-app.c                \
   cong-attribute-editor.c   \
   cong-attribute-editor-cdata.c \
+  cong-attribute-editor-lang.c	\
   cong-attribute-editor-enumeration.c \
   cong-attribute-editor-nmtoken.c \
   cong-attribute-wrapper.c   \
@@ -169,12 +169,9 @@ conglomerate_SOURCES =      \
   cong-editor-area-entity-decl.c \
   cong-editor-area-entity-ref.c \
   cong-editor-area-expander.c \
-  cong-editor-area-flow-holder.c \
-  cong-editor-area-flow-holder-blocks.c \
-  cong-editor-area-flow-holder-inlines.c \
-  cong-editor-area-flow-holder-single.c \
   cong-editor-area-labelled.c \
   cong-editor-area-line.c \
+  cong-editor-area-lines.c \
   cong-editor-area-pixbuf.c \
   cong-editor-area-spacer.c \
   cong-editor-area-text.c   \
@@ -185,10 +182,13 @@ conglomerate_SOURCES =      \
   cong-editor-area-structural-tag.c \
   cong-editor-area-underline.c \
   cong-editor-area-unknown-tag.c   \
-  cong-editor-child-policy.c \
-  cong-editor-child-policy-flow-holder.c \
-  cong-editor-child-policy-inline.c \
-  cong-editor-line-fragments.c \
+  cong-editor-creation-record.c   \
+  cong-editor-line-iter.c \
+  cong-editor-line-iter-simple.c \
+  cong-editor-line-iter-span-wrapper.c \
+  cong-editor-line-manager.c \
+  cong-editor-line-manager-simple.c \
+  cong-editor-line-manager-span-wrapper.c \
   cong-editor-node.c        \
   cong-editor-node-comment.c \
   cong-editor-node-document.c \
@@ -206,10 +206,10 @@ conglomerate_SOURCES =      \
   cong-eel-graphic-effects.c \
   cong-enum-mapping.c       \
   cong-error-dialog.c       \
+  cong-fake-plugin-hooks.c  \
   cong-error-file-open.c    \
   cong-error-file-save.c    \
   cong-error-tests.c        \
-  cong-fake-plugin-hooks.c  \
   cong-file-new.c           \
   cong-file-open.c          \
   cong-file-save.c          \
@@ -219,7 +219,7 @@ conglomerate_SOURCES =      \
   cong-file-properties.c    \
   cong-font.c               \
   cong-graph.c              \
-  cong-language.c           \
+  cong-language.c	    \
   cong-location.c           \
   cong-marshal.c            \
   cong-menus.c              \
@@ -237,6 +237,7 @@ conglomerate_SOURCES =      \
   cong-node-modification-set-attribute.c  \
   cong-node-modification-remove-attribute.c  \
   cong-node-properties-dialog.c \
+  cong-object.c             \
   cong-overview-view.c      \
   cong-parser-error.c       \
   cong-plugin.c             \
@@ -254,8 +255,7 @@ conglomerate_SOURCES =      \
   cong-service-node-tool.c  \
   cong-service-print-method.c \
   cong-service-tool.c       \
-  cong-spell.c              \
-  cong-source-layout.c      \
+  cong-source-layout.c	    \
   cong-source-view.c        \
   cong-text-cache.c         \
   cong-traversal-node.c     \
@@ -265,7 +265,6 @@ conglomerate_SOURCES =      \
   cong-view.c               \
   cong-xpath-expression.c   \
   gxx-impl-object-to-xml-tree.c \
-  position.c                \
   cursor.c                  \
   select.c                  \
   popup.c                   \
@@ -274,7 +273,6 @@ conglomerate_SOURCES =      \
   file.c                    \
   xmldata.c                 \
   xmledit.c                 \
-  xmlload.c                 \
   xmlview.c                 \
   plugin-abiword.c          \
   plugin-admonition.c       \
@@ -300,7 +298,8 @@ conglomerate_SOURCES =      \
   plugin-paragraph-area-paragraph.c \
   plugin-paragraph-node-element-paragraph.h \
   plugin-paragraph-node-element-paragraph.c \
-  plugin-random.c    \
+  plugin-print-source.c     \
+  plugin-random.c           \
   plugin-relaxng.c          \
   plugin-save-dispspec.c    \
   plugin-sgml.c             \
@@ -309,7 +308,7 @@ conglomerate_SOURCES =      \
   plugin-validate.c         \
   plugin-website.c          \
   plugin-xsl.c              \
-  main.c
+  main.c		    
 
 INCLUDES = $(BASE_CFLAGS) \
 	$(CONGLOMERATE_CFLAGS) \
@@ -317,7 +316,6 @@ INCLUDES = $(BASE_CFLAGS) \
 	$(LIBFO_CFLAGS) \
 	$(SEWFOX_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
-	$(ENCHANT_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DPREFIX=\""$(prefix)"\" \
 	-DSYSCONFDIR=\""$(sysconfdir)/conglomerate"\" \
@@ -330,11 +328,8 @@ conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(LIBFO_LIBS) \
 	$(SEWFOX_LIBS) \
 	$(GTKSOURCEVIEW_LIBS) \
-	$(ENCHANT_LIBS) \
 	$(NULL)
 
-EXTRA_DIST = Makefile.win \
-	cong.marshal marshal.make \
-	$(NULL)
+EXTRA_DIST = Makefile.win cong.marshal marshal.make
 
 ## Last Line

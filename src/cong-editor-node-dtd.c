@@ -29,36 +29,12 @@
 
 #include "cong-editor-area-bin.h"
 
-#define PRIVATE(x) ((x)->private)
-
-struct CongEditorNodeDtdDetails
-{
-	int dummy;
-};
-
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
-
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeDtd, 
-			cong_editor_node_dtd,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
-
-static void
-cong_editor_node_dtd_class_init (CongEditorNodeDtdClass *klass)
-{
-
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	node_klass->generate_block_area = generate_block_area;
-}
-
-static void
-cong_editor_node_dtd_instance_init (CongEditorNodeDtd *node_dtd)
-{
-	node_dtd->private = g_new0(CongEditorNodeDtdDetails,1);
-}
+CONG_EDITOR_NODE_DEFINE_SUBCLASS(Dtd, 
+				 dtd,
+				 CONG_EDITOR_NODE_DTD,
+				 int dummy;
+				 )
 
 /**
  * cong_editor_node_dtd_construct:
@@ -80,34 +56,21 @@ cong_editor_node_dtd_construct (CongEditorNodeDtd *editor_node_dtd,
 	return editor_node_dtd;
 }
 
-/**
- * cong_editor_node_dtd_new:
- * @widget:
- * @traversal_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorNode*
-cong_editor_node_dtd_new (CongEditorWidget3 *widget,
-			  CongTraversalNode *traversal_node)
+CONG_EDITOR_NODE_IMPLEMENT_EMPTY_DISPOSE(dtd)
+
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
 {
-#if DEBUG_EDITOR_NODE_LIFETIMES
-	g_message("cong_editor_node_dtd_new()");
-#endif
-	return CONG_EDITOR_NODE( cong_editor_node_dtd_construct (g_object_new (CONG_EDITOR_NODE_DTD_TYPE, NULL),
-								 widget,
-								 traversal_node)
-				 );
+	cong_editor_node_empty_create_area (editor_node,
+					    creation_info,
+					    TRUE);
 }
 
-/**
- * generate_block_area:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
+CONG_EDITOR_NODE_DEFINE_EMPTY_AREA_REGENERATION_HOOK
+
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -119,3 +82,4 @@ generate_block_area (CongEditorNode *editor_node)
 
 	return new_area;
 }
+#endif

@@ -64,7 +64,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
 static void
 add_child_after (CongEditorAreaContainer *area_container,
 		 CongEditorArea *new_child,
@@ -361,6 +362,21 @@ cong_editor_area_composer_set_child_packing (CongEditorAreaComposer *area_compos
 						  PRIVATE(area_composer)->orientation);
 }
 
+GList*
+cong_editor_area_composer_get_child_area_iter_first (CongEditorAreaComposer *area_composer)
+{
+	return PRIVATE (area_composer)->list_of_child_details;
+}
+
+CongEditorArea*
+cong_editor_area_composer_get_child_area (CongEditorAreaComposer *area_composer,
+					  GList *iter)
+{
+	CongEditorAreaComposerChildDetails *child_details = (CongEditorAreaComposerChildDetails*)iter->data;
+
+	return child_details->child;
+}
+
 /* Method implementation definitions: */
 static gint
 calc_requisition (CongEditorArea *area, 
@@ -580,15 +596,24 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child ( CongEditorAreaContainer *area_container,
-	    CongEditorArea *child)
+	    CongEditorArea *child,
+	    gboolean add_to_end)
 {
 	CongEditorAreaComposer *area_composer = CONG_EDITOR_AREA_COMPOSER(area_container);
 
-	cong_editor_area_composer_pack_end (area_composer,
-					    child,
-					    TRUE,
-					    TRUE,
-					    0);
+	if (add_to_end) {
+		cong_editor_area_composer_pack_end (area_composer,
+						    child,
+						    TRUE,
+						    TRUE,
+						    0);
+	} else {
+		cong_editor_area_composer_pack_start (area_composer,
+						      child,
+						      TRUE,
+						      TRUE,
+						      0);
+	}
 	
 }
 
@@ -636,7 +661,7 @@ remove_child ( CongEditorAreaContainer *area_container,
 	}
 
 	/* Not found: */
-	g_error ("CongEditorAreaComposer::remove_child called for an area that wawn't a child");
+	g_error ("CongEditorAreaComposer::remove_child called for an area that wasn't a child");
 }
 
 static void

@@ -31,11 +31,6 @@
 
 #include <gtk/gtkdrawingarea.h>
 
-#include "cong-editor-area-flow-holder.h"
-#include "cong-editor-area-flow-holder-blocks.h"
-#include "cong-editor-child-policy.h"
-#include "cong-editor-child-policy-flow-holder.h"
-
 /* Test code: */
 #include "cong-editor-area-border.h"
 #include "cong-editor-area-composer.h"
@@ -44,9 +39,11 @@
 #include "cong-editor-node-text.h"
 #include "cong-command.h"
 #include "cong-traversal-node.h"
+#include "cong-editor-line-manager.h"
+#include "cong-editor-line-manager-simple.h"
+#include "cong-editor-area-lines.h"
 #include "cong-dispspec-element.h"
 #include "cong-ui-hooks.h"
-
 
 #define SHOW_CURSOR_SPEW 0
 #define DEBUG_IM_CONTEXT 1
@@ -59,6 +56,7 @@
 */
 
 
+#undef PRIVATE
 #define PRIVATE(foo) ((foo)->private)
 
 struct CongEditorWidget3Details
@@ -70,8 +68,13 @@ struct CongEditorWidget3Details
 	GHashTable *hash_of_traversal_node_to_editor_node;
 
 	CongEditorArea *root_area;
+
+#if 1
+	CongEditorLineManager *root_line_manager;
+#else
 	CongEditorAreaFlowHolder *root_flow_holder;
 	CongEditorChildPolicy *root_child_policy;
+#endif
 
 	CongEditorArea *prehighlight_area;
 
@@ -119,9 +122,14 @@ struct CongEditorWidget3Details
 #if LOG_EDITOR_NODES
 #define LOG_EDITOR_NODE1(x) g_message(x)
 #define LOG_EDITOR_NODE2(x, a) g_message((x), (a))
+static void
+log_editor_node_event (const gchar *msg,
+		       CongEditorNode *editor_node);
+#define LOG_EDITOR_NODE_EVENT(msg, node) log_editor_node_event (msg, node)
 #else
 #define LOG_EDITOR_NODE1(x) ((void)0)
 #define LOG_EDITOR_NODE2(x, a) ((void)0)
+#define LOG_EDITOR_NODE_EVENT(msg, node) ((void)0)
 #endif
 
 #if LOG_EDITOR_AREAS
@@ -309,6 +317,7 @@ cong_eel_disconnect_all_with_data (gpointer instance,
  * cong_editor_widget3_construct:
  * @editor_widget:
  * @doc:
+ * @primary_window:
  *
  * TODO: Write me
  * Returns:
@@ -390,20 +399,16 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	/* Set up root area: */
 	{
-		PRIVATE(editor_widget)->root_area = cong_editor_area_bin_new (editor_widget);
+		PRIVATE(editor_widget)->root_area = cong_editor_area_lines_new (editor_widget);
 	
 		g_signal_connect (G_OBJECT(PRIVATE(editor_widget)->root_area),
 				  "flush_requisition_cache",
 				  G_CALLBACK(on_root_requisition_change),
 				  editor_widget);
-		
-		PRIVATE(editor_widget)->root_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_blocks_new(editor_widget));
 
-		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(PRIVATE(editor_widget)->root_area),
-						      CONG_EDITOR_AREA(PRIVATE(editor_widget)->root_flow_holder));
-
-		PRIVATE(editor_widget)->root_child_policy = cong_editor_child_policy_flow_holder_new (NULL,
-												      PRIVATE(editor_widget)->root_flow_holder);
+		/* Set up root line manager: */
+		PRIVATE (editor_widget)->root_line_manager = cong_editor_line_manager_simple_new (editor_widget,
+												  CONG_EDITOR_AREA_LINES (PRIVATE(editor_widget)->root_area));
 	}
 
 	/* Traverse the doc, adding EditorNodes and EditorAreas: */
@@ -465,21 +470,6 @@ cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
 	g_return_val_if_fail(editor_widget, NULL);
 
 	return PRIVATE(editor_widget)->doc;
-}
-
-/**
- * cong_editor_widget_get_default_dispspec:
- * @editor_widget:
- *
- * TODO: Write me
- * Returns:
- */
-CongDispspec *
-cong_editor_widget_get_default_dispspec(CongEditorWidget3 *editor_widget)
-{
-	g_return_val_if_fail(editor_widget, NULL);
-
-	return cong_document_get_default_dispspec (PRIVATE(editor_widget)->doc);
 }
 
 #if 0
@@ -784,6 +774,24 @@ cong_editor_widget3_get_preedit_data (CongEditorWidget3 *editor_widget,
 
 
 /* Internal function implementations: */
+#if LOG_EDITOR_NODES
+static void
+log_editor_node_event (const gchar *msg,
+		       CongEditorNode *editor_node)
+{
+	gchar *debug_desc;
+
+	g_assert (msg);
+	g_assert (editor_node);
+
+	debug_desc = cong_node_debug_description (cong_editor_node_get_node (editor_node));
+
+	g_message ("%s:%s: %s", msg, G_OBJECT_TYPE_NAME (G_OBJECT (editor_node)), debug_desc);
+
+	g_free (debug_desc);
+}
+#endif
+
 /* Definitions of misc stuff: */
 #if 0
 static void 
@@ -1353,7 +1361,7 @@ key_press_event_handler (GtkWidget *w,
 	case GDK_Return:
 		{
 			if  (cong_location_exists(&cursor->location)) {
-				if (cong_node_type_is_textual_content (cong_location_node_type(&cursor->location))) {
+				if (cong_location_node_type(&cursor->location) == CONG_NODE_TYPE_TEXT) {
 					CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node(doc, cursor->location.node->parent);
 
 					if (ds_element) {
@@ -1556,6 +1564,8 @@ potentially_add_editor_node (CongEditorWidget3 *editor_widget,
 				     traversal_node,
 				     editor_node);
 
+		LOG_EDITOR_NODE_EVENT("Adding editor node", editor_node);
+
 		create_areas (editor_widget,
 			      editor_node);
 	}	
@@ -1582,6 +1592,8 @@ potentially_remove_editor_node (CongEditorWidget3 *editor_widget,
 		if (xml_node == PRIVATE (editor_widget)->selected_xml_node) {
 			PRIVATE (editor_widget)->selected_xml_node = NULL;
 		}
+
+		LOG_EDITOR_NODE_EVENT("Removing editor node", editor_node);
 		
 		destroy_areas (editor_widget,
 			       editor_node);
@@ -1681,17 +1693,41 @@ cong_editor_widget3_node_should_have_editor_node (CongNodePtr node)
 	}
 }
 
+static CongEditorLineManager*
+get_line_manager_for_node (CongEditorWidget3 *widget,
+			   CongEditorNode *editor_node)
+{
+	CongNodePtr node = cong_editor_node_get_node (editor_node);
+
+	/* Determine the parent area where the new area should be inserted: */
+	if (node->parent) {
+		CongEditorNode *parent_editor_node;
+		
+		parent_editor_node = cong_editor_node_get_traversal_parent (editor_node);
+		g_assert (parent_editor_node);
+		
+		return cong_editor_node_get_line_manager_for_children (parent_editor_node);
+		
+	} else {
+		/* Root of the document; insert below the widget's root_area: */
+		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
+		
+		return PRIVATE (widget)->root_line_manager;
+	}
+}
+
 static void 
 create_areas(CongEditorWidget3 *widget,
 	     CongEditorNode *editor_node)
 {
-	CongEditorChildPolicy *parents_child_policy = NULL;
-	CongEditorChildPolicy *this_child_policy = NULL;
-	CongFlowType flow_type;
-	CongNodePtr node = cong_editor_node_get_node (editor_node);
+	CongEditorLineManager *parent_line_manager = NULL;
+#if 0
+	enum CongFlowType flow_type;
+#endif
 
 #if LOG_EDITOR_AREAS
 	{
+		CongNodePtr node = cong_editor_node_get_node (editor_node);
 		gchar *node_desc = cong_node_debug_description(node);
 
 		LOG_EDITOR_AREA2("create_areas for %s", node_desc);
@@ -1700,77 +1736,32 @@ create_areas(CongEditorWidget3 *widget,
 	}
 #endif
 
+#if 0
 	flow_type = cong_editor_node_get_flow_type (editor_node);
 
 #if LOG_EDITOR_AREAS
 	g_message("flow type = %s", cong_flow_type_get_debug_string(flow_type));
 #endif
-
-	/* Determine the parent area where the new area should be inserted: */
-	{
-		if (node->parent) {
-			CongEditorNode *parent_editor_node;
-			
-			parent_editor_node = cong_editor_node_get_traversal_parent (editor_node);
-			
-			parents_child_policy = cong_editor_widget3_get_child_policy_for_editor_node (widget,
-												     parent_editor_node);
-			
-		} else {
-			/* Root of the document; insert below the widget's root_area: */
-			g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-
-			parents_child_policy = PRIVATE(widget)->root_child_policy;
-		}
-
-		cong_editor_node_set_parents_child_policy (editor_node,
-							   parents_child_policy);
-
-		g_assert(parents_child_policy);
-	}
-
-#if 1
-	this_child_policy = cong_editor_child_policy_insert_areas_for_node (parents_child_policy,
-									    editor_node);
-
-	cong_editor_node_set_child_policy (editor_node,
-					   this_child_policy);
-
-#else
-	this_area = cong_editor_area_flow_holder_insert_areas_for_node (parent_flow_holder,
-									editor_node);	
-
-	g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
-			     editor_node,
-			     this_area);
-
-	/* If this node can ever have children, we need to add a container for them:
-	   FIXME:  slightly hackish test */
-	if (IS_CONG_EDITOR_AREA_CONTAINER(this_area) ) {
-		CongEditorAreaFlowHolder *flow_holder;
-
-		flow_holder = cong_editor_area_flow_holder_manufacture (widget,
-									flow_type);
-
-		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (this_area),
-						      CONG_EDITOR_AREA(flow_holder));
-
-		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_flow_holder,
-				     editor_node,
-				     flow_holder);
-	}
 #endif
+
+	parent_line_manager = get_line_manager_for_node (widget,
+							 editor_node);
+	g_assert (parent_line_manager);
+	g_assert (IS_CONG_EDITOR_LINE_MANAGER (parent_line_manager));
+
+	cong_editor_line_manager_add_node (parent_line_manager,
+					   editor_node);	
 }
 
 static void 
 destroy_areas(CongEditorWidget3 *widget,
 	      CongEditorNode *editor_node)
 {
-	CongEditorChildPolicy *parents_child_policy = NULL;
-	CongNodePtr node = cong_editor_node_get_node (editor_node);
+	CongEditorLineManager *parent_line_manager = NULL;
 
 #if LOG_EDITOR_AREAS
 	{
+		CongNodePtr node = cong_editor_node_get_node (editor_node);
 		gchar *node_desc = cong_node_debug_description(node);
 
 		LOG_EDITOR_AREA2("destroy_areas for %s", node_desc);
@@ -1779,131 +1770,15 @@ destroy_areas(CongEditorWidget3 *widget,
 	}
 #endif
 
-	if (node->parent) {
-		parents_child_policy = cong_editor_widget3_get_parents_child_policy_for_editor_node (widget,
-												     editor_node);
-	} else {
-		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-		parents_child_policy = PRIVATE(widget)->root_child_policy;
-	}
+	parent_line_manager = get_line_manager_for_node (widget,
+							 editor_node);
+	g_assert (parent_line_manager);
+	g_assert (IS_CONG_EDITOR_LINE_MANAGER (parent_line_manager));
 
-	g_assert(parents_child_policy);
-
-	cong_editor_child_policy_remove_areas_for_node (parents_child_policy,
-							editor_node);
-
-	cong_editor_node_set_parents_child_policy (editor_node,
-						   NULL);
-	cong_editor_node_set_child_policy (editor_node,
-					   NULL);
-
-#if 0
-	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
-			     editor_node);
-	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
-			     editor_node);
-#endif
+	cong_editor_line_manager_remove_node (parent_line_manager,
+					      editor_node);
 }
 
-#if 1
-CongEditorChildPolicy*
-cong_editor_widget3_get_child_policy_for_editor_node (CongEditorWidget3 *widget,
-						      CongEditorNode *editor_node)
-{
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
-
-#if 1
-	return cong_editor_node_get_child_policy (editor_node);						  
-#else
-	return CONG_EDITOR_CHILD_POLICY(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_policy,
-							     editor_node));
-#endif
-	
-}
-
-/**
- * cong_editor_widget3_get_parents_child_policy_for_editor_node:
- * @widget:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorChildPolicy*
-cong_editor_widget3_get_parents_child_policy_for_editor_node (CongEditorWidget3 *widget,
-							      CongEditorNode *editor_node)
-{
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
-
-#if 1
-	return cong_editor_node_get_parents_child_policy (editor_node);
-#else
-	return CONG_EDITOR_CHILD_POLICY(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parents_child_policy,
-							     editor_node));
-#endif
-	
-}
-#else
-
-/**
- * cong_editor_widget3_get_primary_area_for_editor_node:
- * @widget:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorArea*
-cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
-						      CongEditorNode *editor_node)
-{
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
-
-	return CONG_EDITOR_AREA(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
-						     editor_node));
-}
-
-/**
- * cong_editor_widget3_get_parent_flow_holder_for_editor_node:
- * @widget:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorAreaFlowHolder*
-cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *widget,
-							    CongEditorNode *editor_node)
-{
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
-
-	return CONG_EDITOR_AREA_FLOW_HOLDER(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parent_flow_holder,
-								 editor_node));
-}
-
-/**
- * cong_editor_widget3_get_child_flow_holder_for_editor_node:
- * @widget:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorAreaFlowHolder*
-cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *widget,
-							   CongEditorNode *editor_node)
-{
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
-
-	return CONG_EDITOR_AREA_FLOW_HOLDER(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_flow_holder,
-								editor_node));
-}
-#endif
 
 CongPrimaryWindow*
 cong_editor_widget_get_primary_window(CongEditorWidget3 *editor_widget)

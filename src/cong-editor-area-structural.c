@@ -78,7 +78,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
 
 static void
 on_expansion_changed (CongEditorAreaExpander *area_expander,
@@ -462,14 +463,16 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaStructural *structural = CONG_EDITOR_AREA_STRUCTURAL(area_container);
 
 	g_assert(PRIVATE(structural)->inner_bin);
 
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(structural)->inner_bin),
-					       child);
+					       child,
+					       add_to_end);
 }
 
 static void

@@ -43,6 +43,14 @@
 #include "cong-editor-node-unimplemented.h"
 #include "cong-plugin-manager.h"
 #include "cong-traversal-node.h"
+#include "cong-editor-area.h"
+#include "cong-editor-line-manager.h"
+#include "cong-editor-line-manager-simple.h"
+#include "cong-editor-area-composer.h"
+#include "cong-editor-area-border.h"
+#include "cong-editor-area-lines.h"
+#include "cong-editor-line-iter.h"
+#include "cong-service-editor-node-factory.h"
 
 #define PRIVATE(x) ((x)->priv)
 
@@ -56,14 +64,18 @@ enum {
 
 static guint signals[LAST_SIGNAL] = {0};
 
-struct CongEditorNodeDetails
+struct CongEditorNodePrivate
 {
 	CongEditorWidget3 *widget;
 
 	CongTraversalNode *traversal_node;
 
+#if 1
+	CongEditorLineManager *line_manager_for_children;
+#else
 	CongEditorChildPolicy *child_policy;
 	CongEditorChildPolicy *parents_child_policy;
+#endif
 
 	gboolean is_selected;
 };
@@ -78,14 +90,11 @@ CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_line_areas_r
 
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNode, 
+CONG_DEFINE_CLASS_BEGIN(CongEditorNode, 
 			cong_editor_node,
+			CONG_EDITOR_NODE,
 			GObject,
-			G_TYPE_OBJECT );
-
-static void
-cong_editor_node_class_init (CongEditorNodeClass *klass)
-{
+			G_TYPE_OBJECT )
 #if 0
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
@@ -114,13 +123,7 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 						     0);
 
 	klass->get_flow_type = get_flow_type;
-}
-
-static void
-cong_editor_node_instance_init (CongEditorNode *node)
-{
-	node->priv = g_new0(CongEditorNodeDetails,1);
-}
+CONG_DEFINE_CLASS_END()
 
 /**
  * cong_editor_node_construct:
@@ -140,6 +143,17 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->traversal_node = traversal_node;
 
 	return editor_node;
+}
+
+static void
+cong_editor_node_dispose (GObject *object)
+{
+	CongEditorNode *editor_node = CONG_EDITOR_NODE (object);
+
+	if (PRIVATE (editor_node)->line_manager_for_children) {
+		g_object_unref (G_OBJECT (PRIVATE (editor_node)->line_manager_for_children));
+		PRIVATE (editor_node)->line_manager_for_children = NULL;
+	}	
 }
 
 /**
@@ -224,10 +238,16 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		}
 		
 	case CONG_NODE_TYPE_TEXT:
-	case CONG_NODE_TYPE_CDATA_SECTION:
 		{
 			return cong_editor_node_text_new (widget, 
 							  traversal_node);
+		}
+		
+	case CONG_NODE_TYPE_CDATA_SECTION:
+		{
+			return cong_editor_node_unimplemented_new (widget, 
+								   traversal_node,
+								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_ENTITY_REF:
@@ -413,6 +433,51 @@ cong_editor_node_private_set_selected (CongEditorNode *editor_node,
 	}	
 }
 
+gboolean
+cong_editor_node_needs_area_regeneration (CongEditorNode *editor_node,
+					  const CongAreaCreationGeometry *old_creation_geometry,
+					  const CongAreaCreationGeometry *new_creation_geometry)
+{
+	gboolean result;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), FALSE);
+	g_return_val_if_fail (old_creation_geometry, FALSE);
+	g_return_val_if_fail (new_creation_geometry, FALSE);
+
+#if 1
+	g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->needs_area_regeneration != NULL);
+	
+	result = CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
+							 editor_node,
+							 needs_area_regeneration, 
+							 (editor_node, old_creation_geometry, new_creation_geometry));
+#else
+	/* For now, always regenerate everything (expensive): */
+	/* FIXME: we can't hope to interpret these iter objects;
+	   probably should be being passed some simple structure containing line ptr, width, indent etc */
+	result = TRUE;
+#endif
+
+#if 1
+	{
+		gchar *desc = cong_node_debug_description (cong_editor_node_get_node (editor_node));
+
+		g_message ("cong_editor_node_needs_area_regeneration returning %s old:(line %p, width: %i indent: %i) new: (line %p, width: %i indent: %i), node: %s",
+			   (result?"TRUE":"FALSE"),
+			   old_creation_geometry->area_line, old_creation_geometry->line_width, old_creation_geometry->line_indent, 
+			   new_creation_geometry->area_line, new_creation_geometry->line_width, new_creation_geometry->line_indent, 
+			   desc);
+
+		g_free (desc);
+		
+	}
+#endif
+
+
+	return result;
+}
+
+#if 0
 /**
  * cong_editor_node_generate_block_area:
  * @editor_node:
@@ -461,6 +526,7 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						       generate_line_areas_recursive, 
 						       (editor_node, line_width, initial_indent));
 }
+#endif
 
 /**
  * cong_editor_node_line_regeneration_required:
@@ -497,6 +563,7 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 							    get_flow_type, 
 							    (editor_node));
 
+#if 0
 	switch (flow_type) {
 	default: g_assert_not_reached();
 	case CONG_FLOW_TYPE_BLOCK:
@@ -506,6 +573,7 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 		g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive != NULL);
 		break;
 	}
+#endif
 	
 	return flow_type;
 }
@@ -693,6 +761,31 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 }
 #endif
 
+
+#if 1
+CongEditorLineManager*
+cong_editor_node_get_line_manager_for_children (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	return PRIVATE(editor_node)->line_manager_for_children;
+}
+
+void
+cong_editor_node_set_line_manager_for_children (CongEditorNode *editor_node,
+						CongEditorLineManager *line_manager)
+{
+	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
+	g_return_if_fail (IS_CONG_EDITOR_LINE_MANAGER (line_manager));
+
+	if (PRIVATE(editor_node)->line_manager_for_children) {
+		g_object_unref (G_OBJECT (PRIVATE(editor_node)->line_manager_for_children));
+	}
+
+	PRIVATE(editor_node)->line_manager_for_children = line_manager;
+	g_object_ref (G_OBJECT (line_manager));
+}
+#else
 /**
  * cong_editor_node_get_child_policy:
  * @editor_node:
@@ -753,6 +846,102 @@ cong_editor_node_set_parents_child_policy (CongEditorNode *editor_node,
 	g_return_if_fail (IS_CONG_EDITOR_NODE(editor_node));
 
 	PRIVATE(editor_node)->parents_child_policy = child_policy;
+}
+#endif
+
+static void
+set_up_line_manager (CongEditorNode *editor_node,
+		     CongEditorArea *block_area)
+{
+	CongEditorLineManager *line_manager;
+	CongEditorArea *area_lines;
+	CongEditorArea *area_border;
+	CongEditorWidget3 *widget;
+
+	g_assert (IS_CONG_EDITOR_AREA_CONTAINER (block_area));
+
+	widget = cong_editor_node_get_widget (editor_node);
+
+	/* Set up area for children: */
+	area_lines = cong_editor_area_lines_new (widget);
+
+	/* Add a border between the block_area and the area_lines in the hierarchy */
+	area_border = cong_editor_area_border_new (widget, 
+						   5,
+						   0,
+						   5,
+						   5);
+
+	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER (block_area),
+					       area_border,
+					       TRUE);
+
+	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER (area_border),
+					       area_lines,
+					       TRUE);
+
+	/* Set up line manager: */
+	line_manager = cong_editor_line_manager_simple_new (widget,
+							    CONG_EDITOR_AREA_LINES (area_lines));
+	cong_editor_node_set_line_manager_for_children (editor_node,
+							line_manager);
+	g_object_unref (G_OBJECT (line_manager));
+
+	/* FIXME: If this area is removed, we need to destroy the line manager: */
+}
+
+void
+cong_editor_node_create_block_area (CongEditorNode *editor_node,
+				    const CongAreaCreationInfo *creation_info,
+				    CongEditorArea *block_area,
+				    gboolean allow_children)
+{
+	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
+	g_return_if_fail (creation_info);
+	g_return_if_fail (IS_CONG_EDITOR_AREA (block_area));
+
+	g_assert (IS_CONG_EDITOR_LINE_MANAGER (creation_info->line_manager));
+
+	cong_editor_line_manager_begin_line (creation_info->line_manager,
+					     creation_info->creation_record,
+					     creation_info->line_iter);
+	cong_editor_line_manager_add_to_line (creation_info->line_manager,
+					      creation_info->creation_record,
+					      creation_info->line_iter,
+					      block_area);
+	cong_editor_line_manager_end_line (creation_info->line_manager,
+					   creation_info->creation_record,
+					   creation_info->line_iter);
+
+	if (allow_children) {
+		g_assert (IS_CONG_EDITOR_AREA_CONTAINER (block_area));
+
+		set_up_line_manager (editor_node,
+				     block_area);
+	}
+}
+
+void
+cong_editor_node_empty_create_area (CongEditorNode *editor_node,
+				    const CongAreaCreationInfo *creation_info,
+				    gboolean allow_children)
+{
+	CongEditorArea *dummy_area;
+
+	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
+	g_return_if_fail (creation_info);
+
+	dummy_area = cong_editor_area_lines_new (cong_editor_node_get_widget (editor_node));
+
+	cong_editor_line_manager_add_to_line (creation_info->line_manager,
+					      creation_info->creation_record,
+					      creation_info->line_iter,
+					      dummy_area);
+
+	if (allow_children) {
+		set_up_line_manager (editor_node,
+				     dummy_area);
+	}
 }
 
 static CongFlowType

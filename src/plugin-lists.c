@@ -33,6 +33,7 @@
 #include "cong-font.h"
 
 #include "cong-fake-plugin-hooks.h"
+#include "cong-service-editor-node-factory.h"
 
 #include "plugin-lists-node-element-listitem.h"
 

@@ -34,35 +34,7 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_DOCUMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_DOCUMENT_TYPE, CongEditorNodeDocumentClass)
 #define IS_CONG_EDITOR_NODE_DOCUMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_DOCUMENT_TYPE)
 
-typedef struct CongEditorNodeDocument CongEditorNodeDocument;
-typedef struct CongEditorNodeDocumentClass CongEditorNodeDocumentClass;
-typedef struct CongEditorNodeDocumentDetails CongEditorNodeDocumentDetails;
-
-struct CongEditorNodeDocument
-{
-	CongEditorNode node;
-
-	CongEditorNodeDocumentDetails *private;
-};
-
-struct CongEditorNodeDocumentClass
-{
-	CongEditorNodeClass klass;
-
-	/* Methods? */
-};
-
-GType
-cong_editor_node_document_get_type (void);
-
-CongEditorNodeDocument*
-cong_editor_node_document_construct (CongEditorNodeDocument *editor_node_document,
-				     CongEditorWidget3* widget,
-				     CongTraversalNode *traversal_node);
-
-CongEditorNode*
-cong_editor_node_document_new (CongEditorWidget3* widget,
-			       CongTraversalNode *traversal_node);
+CONG_EDITOR_NODE_DECLARE_SUBCLASS(Document, document)
 
 G_END_DECLS
 

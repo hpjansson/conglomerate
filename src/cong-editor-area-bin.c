@@ -48,7 +48,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
 static void
 add_child_after (CongEditorAreaContainer *area_container,
 		 CongEditorArea *new_child,
@@ -196,7 +197,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(area_container);
 

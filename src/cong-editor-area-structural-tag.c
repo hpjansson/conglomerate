@@ -252,8 +252,8 @@ render_self (CongEditorArea *area,
 		/* Bottom of title bar: */
 		gdk_draw_line (window, 
 			       gc, 
-			       rect->x + 1, rect->y + title_bar_height+1,
-			       rect->x + rect->width, rect->y + title_bar_height+1);
+			       rect->x + 1, rect->y + title_bar_height + 1,
+			       rect->x + rect->width, rect->y + title_bar_height + 1);
 
 		/* Short horizontal line along very bottom of area: */
 		cong_util_draw_blended_line (GTK_WIDGET(cong_editor_area_get_widget (area)),
@@ -270,8 +270,8 @@ render_self (CongEditorArea *area,
 		/* Bottom of title bar: */
 		gdk_draw_line (window, 
 			       gc, 
-			       rect->x + 1, rect->y + title_bar_height + 1,
-			       rect->x + rect->width, rect->y + title_bar_height + 1);
+			       rect->x + 1, rect->y + title_bar_height+1,
+			       rect->x + rect->width, rect->y + title_bar_height+1);
 	}
 }
 
@@ -292,8 +292,7 @@ calc_requisition (CongEditorArea *area,
 							      orientation,
 							      width_hint-1);
 
-
-     	        inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
+		inner_req = cong_editor_area_get_requisition (PRIVATE(structural_tag)->inner_bin,
 							      orientation,
 							      width_hint-1);
 		return title_req + inner_req + 2;	

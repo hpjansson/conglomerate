@@ -1,3 +1,7 @@
+2004-10-28 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* lots of files: Merged WidgetPlayground branch.
+
 2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* popup.c: 

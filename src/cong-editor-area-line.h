@@ -66,6 +66,21 @@ cong_editor_area_line_get_width_limit (CongEditorAreaLine *area_line);
 gint
 cong_editor_area_line_get_width_used (CongEditorAreaLine *area_line);
 
+/**
+ * cong_editor_area_line_get_width_used_up_to:
+ *
+ * @area_line: the line of interest
+ * @child_area: final child to consider width for. Can be NULL (i.e. consider none of the children)
+ * 
+ * Calculate the width used by a subset of the child areas, from the first child up to and 
+ * including @child_area.
+ *
+ * Returns: width in pixels
+*/
+gint
+cong_editor_area_line_get_width_used_up_to (CongEditorAreaLine *area_line,
+					    CongEditorArea *child_area);					    
+
 gint
 cong_editor_area_line_get_width_free (CongEditorAreaLine *area_line);
 

@@ -34,6 +34,9 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_LISTITEM_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE, CongEditorNodeElementListitemClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_LISTITEM(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE)
 
+#if 1
+CONG_EDITOR_NODE_DECLARE_PLUGIN_SUBCLASS(Listitem, listitem)
+#else
 typedef struct CongEditorNodeElementListitem CongEditorNodeElementListitem;
 typedef struct CongEditorNodeElementListitemClass CongEditorNodeElementListitemClass;
 typedef struct CongEditorNodeElementListitemDetails CongEditorNodeElementListitemDetails;
@@ -63,6 +66,7 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
 CongEditorNode*
 cong_editor_node_element_listitem_new (CongEditorWidget3 *widget,
 				       CongTraversalNode *traversal_node);
+#endif
 
 const gchar*
 cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem);

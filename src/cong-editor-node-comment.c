@@ -3,7 +3,7 @@
 /*
  * cong-editor-node-comment.c
  *
- * Copyright (C) 2003 David Malcolm
+ * Copyright (C) 2004 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -32,20 +32,14 @@
 #include "cong-editor-area-text-comment.h"
 #include "cong-traversal-node.h"
 
-#define PRIVATE(x) ((x)->private)
-
-struct CongEditorNodeCommentDetails
-{
-	CongTextCache* text_cache;
-
-	CongEditorAreaTextComment *area_text_comment;
-
-	gulong handler_id_node_set_text;
-	gulong handler_id_selection_change;
-};
-
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
+CONG_EDITOR_NODE_DEFINE_SUBCLASS (Comment,
+				  comment,
+				  CONG_EDITOR_NODE_COMMENT,
+				  CongTextCache* text_cache;
+				  CongEditorAreaTextComment *area_text_comment;				  
+				  gulong handler_id_node_set_text;
+				  gulong handler_id_selection_change;
+				  )
 
 /* Declarations of the CongDocument event handlers: */
 #if 0
@@ -71,35 +65,6 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 #endif
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeComment, 
-			cong_editor_node_comment,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
-
-static void
-cong_editor_node_comment_class_init (CongEditorNodeCommentClass *klass)
-{
-
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	node_klass->generate_block_area = generate_block_area;
-}
-
-static void
-cong_editor_node_comment_instance_init (CongEditorNodeComment *node_comment)
-{
-	node_comment->private = g_new0(CongEditorNodeCommentDetails,1);
-}
-
-/**
- * cong_editor_node_comment_construct:
- * @editor_node_comment:
- * @widget:
- * @traversal_node:
- *
- * TODO: Write me
- * Returns:
- */
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    CongEditorWidget3* editor_widget,
@@ -116,27 +81,36 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 	return editor_node_comment;
 }
 
-/**
- * cong_editor_node_comment_new:
- * @widget:
- * @traversal_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorNode*
-cong_editor_node_comment_new (CongEditorWidget3 *widget,
-			      CongTraversalNode *traversal_node)
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_BEGIN(Comment, comment, CONG_EDITOR_NODE_COMMENT)
+     if (PRIVATE(editor_node_comment)->text_cache) {
+	     cong_text_cache_free (PRIVATE(editor_node_comment)->text_cache);
+	     PRIVATE(editor_node_comment)->text_cache = NULL;
+     }
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END()
+
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
 {
-#if DEBUG_EDITOR_NODE_LIFETIMES
-	g_message("cong_editor_node_comment_new()");
-#endif
-	return CONG_EDITOR_NODE( cong_editor_node_comment_construct (g_object_new (CONG_EDITOR_NODE_COMMENT_TYPE, NULL),
-								     widget,
-								     traversal_node)
-				 );
+	CongEditorNodeComment *node_comment = CONG_EDITOR_NODE_COMMENT(editor_node);
+
+	CongEditorArea *block_area = cong_editor_area_text_comment_new (cong_editor_node_get_widget (editor_node),
+									cong_app_get_font (cong_app_singleton(),
+											   CONG_FONT_ROLE_BODY_TEXT), 
+									NULL,
+									cong_text_cache_get_output_text (PRIVATE(node_comment)->text_cache),
+									FALSE);
+	cong_editor_node_create_block_area (editor_node,
+					    creation_info,
+					    block_area,
+					    FALSE);
+	/* FIXME: should we attach signals, or store the area anywhere? */
 }
 
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -177,6 +151,7 @@ generate_block_area (CongEditorNode *editor_node)
 
 	return CONG_EDITOR_AREA(PRIVATE(node_comment)->area_text_comment);
 }
+#endif
 
 /* Definitions of the CongDocument event handlers: */
 #if 0

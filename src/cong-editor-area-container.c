@@ -136,7 +136,8 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
  */
 void
 cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
-				       CongEditorArea *child)
+				       CongEditorArea *child,
+				       gboolean add_to_end)
 {
 	g_return_if_fail (IS_CONG_EDITOR_AREA(area_container));
 	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
@@ -148,7 +149,7 @@ cong_editor_area_container_add_child ( CongEditorAreaContainer *area_container,
 	CONG_EEL_CALL_METHOD (CONG_EDITOR_AREA_CONTAINER_CLASS,
 			      area_container,
 			      add_child, 
-			      (area_container, child));
+			      (area_container, child, add_to_end));
 
 	cong_editor_area_container_children_changed ( area_container);
 }

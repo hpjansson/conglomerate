@@ -31,13 +31,13 @@
 #include "cong-editor-area-text.h"
 #include "cong-text-cache.h"
 #include "cong-document.h"
-#include "cong-editor-line-fragments.h"
 #include "cong-font.h"
 #include "cong-editor-area-text-fragment.h"
 #include "cong-selection.h"
 #include "cong-dispspec.h"
 #include "cong-command.h"
 #include "cong-traversal-node.h"
+#include "cong-editor-line-manager.h"
 #include "cong-ui-hooks.h"
 #include "cong-util.h"
 
@@ -67,7 +67,6 @@ add_attrs_for_error (PangoAttrList *attr_list,
 		     guint start_index,
 		     guint end_index);
 
-#define PRIVATE(x) ((x)->private)
 
 typedef struct CongEditorNodeTextSelectionState CongEditorNodeTextSelectionState;
 
@@ -84,36 +83,12 @@ struct CongEditorNodeTextSelectionState
 #endif
 };
 
-struct CongEditorNodeTextDetails
-{
-	CongTextCache* text_cache;
+CONG_EDITOR_NODE_DECLARE_HOOKS
 
-	gboolean selection_state_valid;
-	CongEditorNodeTextSelectionState cached_selection_state;
-	
-	gulong handler_id_node_set_text;
-	gulong handler_id_selection_change;
-
-	PangoLayout *pango_layout;
-	GList *list_of_text_fragments;
-};
-
-static void
-finalize (GObject *object);
-
-static void
-dispose (GObject *object);
-
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
-
-static CongEditorLineFragments*
-generate_line_areas_recursive (CongEditorNode *editor_node,
-			       gint line_width,
-			       gint initial_indent);
-
-static CongFlowType
+#if 0
+static enum CongFlowType
 get_flow_type (CongEditorNode *editor_node);
+#endif
 
 /* FIXME:  We probably shouldn't have every text node in the doc listening to every text node change... probably should allow for a dispatch mechanism within the widget */
 /* Declarations of the CongDocument event handlers: */
@@ -168,40 +143,20 @@ static void
 refresh_pango_layout (CongEditorNodeText *editor_node_text);
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeText, 
-			cong_editor_node_text,
-			CongEditorNode,
-			CONG_EDITOR_NODE_TYPE );
+CONG_EDITOR_NODE_DEFINE_SUBCLASS(Text, 
+				 text,
+				 CONG_EDITOR_NODE_TEXT,
+				 CongTextCache* text_cache;
 
-static void
-cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
-{
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	G_OBJECT_CLASS (klass)->finalize = finalize;
-	G_OBJECT_CLASS (klass)->dispose = dispose;
-
-	node_klass->generate_block_area = generate_block_area;
-	node_klass->generate_line_areas_recursive = generate_line_areas_recursive;
-	node_klass->get_flow_type = get_flow_type;
-}
-
-static void
-cong_editor_node_text_instance_init (CongEditorNodeText *node_text)
-{
-	node_text->private = g_new0(CongEditorNodeTextDetails,1);
-}
-
-static void
-finalize (GObject *object)
-{
-	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(object);
-
-	g_free (editor_node_text->private);
-	editor_node_text->private = NULL;
+				 gboolean selection_state_valid;
+				 CongEditorNodeTextSelectionState cached_selection_state;
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
+				 gulong handler_id_node_set_text;
+				 gulong handler_id_selection_change;
+				 
+				 PangoLayout *pango_layout;
+				 GList *list_of_text_fragments;				 
+				 );
 
 /**
  * cong_editor_node_text_construct:
@@ -267,40 +222,12 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 	return editor_node_text;
 }
 
-static void
-dispose (GObject *object)
-{
-	CongEditorNodeText *editor_node_text = CONG_EDITOR_NODE_TEXT(object);
-
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_BEGIN(Text, text, CONG_EDITOR_NODE_TEXT) \
 	g_signal_handler_disconnect (G_OBJECT(cong_editor_node_get_document(CONG_EDITOR_NODE(object))),
 				     PRIVATE(editor_node_text)->handler_id_node_set_text);	
 	g_signal_handler_disconnect (G_OBJECT(cong_editor_node_get_document(CONG_EDITOR_NODE(object))),
 				     PRIVATE(editor_node_text)->handler_id_selection_change);	
-
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
-}
-
-/**
- * cong_editor_node_text_new:
- * @widget:
- * @traversal_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorNode*
-cong_editor_node_text_new (CongEditorWidget3 *widget,
-			   CongTraversalNode *traversal_node)
-{
-#if DEBUG_EDITOR_NODE_LIFETIMES
-	g_message("cong_editor_node_text_new(%s)", node->content);
-#endif
-
-	return CONG_EDITOR_NODE( cong_editor_node_text_construct (g_object_new (CONG_EDITOR_NODE_TEXT_TYPE, NULL),
-								  widget,
-								  traversal_node)
-				 );
-}
+CONG_EDITOR_NODE_IMPLEMENT_DISPOSE_END()
 
 /**
  * cong_editor_node_text_convert_original_byte_offset_to_stripped:
@@ -494,7 +421,109 @@ cong_editor_node_text_calc_down (CongEditorNodeText *editor_node_text,
 									 output_byte_offset);
 }
 
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
+{
+	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
+#if 0
+	g_message("CongEditorNodeText::create_areas, cached text =\"%s\"", 
+		  cong_text_cache_get_text (PRIVATE(node_text)->text_cache));
+#endif
+
+
+	/* Set the "geometry" of the PangoLayout: */
+	pango_layout_set_width (PRIVATE(node_text)->pango_layout,
+				PANGO_SCALE * cong_editor_line_manager_get_line_width (creation_info->line_manager,
+										       creation_info->line_iter));
+
+	pango_layout_set_indent (PRIVATE(node_text)->pango_layout,
+				 PANGO_SCALE * cong_editor_line_manager_get_current_indent (creation_info->line_manager,
+											    creation_info->line_iter));
+
+	/* Add areas for the PangoLayoutLines: */
+	{
+		int index;
+		PangoLayoutIter *layout_iter = pango_layout_get_iter (PRIVATE(node_text)->pango_layout);
+
+
+		/* CAUTION: this is internal data of the PangoLayout */
+		for (index=0; index<pango_layout_get_line_count(PRIVATE(node_text)->pango_layout); index++, pango_layout_iter_next_line(layout_iter)) {
+			PangoLayoutLine *line = pango_layout_iter_get_line (layout_iter);
+			CongEditorArea *text_fragment;
+			PangoRectangle ink_rect;
+			PangoRectangle logical_rect;
+			
+			g_assert(line);
+
+			pango_layout_line_get_pixel_extents (line,
+							     &ink_rect,
+							     &logical_rect);
+
+#if 0
+			g_message("baseline = %i, logical rect.y = %i",
+				  (pango_layout_iter_get_baseline(layout_iter)/PANGO_SCALE),
+				  logical_rect.y);
+#endif
+
+			text_fragment = cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
+									    node_text,
+									    PRIVATE(node_text)->pango_layout,
+									    index,
+									    - logical_rect.y);
+			/* FIXME: the calculation of how to offset each baseline is a hack, and might break */
+
+			g_signal_connect (text_fragment,
+					  "button_press_event",
+					  G_CALLBACK(on_signal_button_press),
+					  editor_node);
+			
+			g_signal_connect (text_fragment,
+					  "motion_notify_event",
+					  G_CALLBACK(on_signal_motion_notify),
+					  editor_node);
+			
+#if 0
+			g_signal_connect (text_fragment,
+					  "key_press_event",
+					  G_CALLBACK(on_signal_key_press),
+					  editor_node);
+#endif
+
+			cong_editor_line_manager_add_to_line (creation_info->line_manager,
+							      creation_info->creation_record,
+							      creation_info->line_iter,
+							      text_fragment);
+			/* FIXME: will eventually need to end the lines if we're preserving whitespace */
+
+		}
+
+		pango_layout_iter_free (layout_iter);
+			     
+	}
+
+
+}
+gboolean
+needs_area_regeneration (CongEditorNode *editor_node,
+			 const CongAreaCreationGeometry *old_creation_geometry,
+			 const CongAreaCreationGeometry *new_creation_geometry)
+{	
+	if (old_creation_geometry->area_line==new_creation_geometry->area_line) {
+		if (old_creation_geometry->line_width==new_creation_geometry->line_width) {
+			if (old_creation_geometry->line_indent==new_creation_geometry->line_indent) {
+				/* Nothing has changed; don't need to regenerate: */
+				return TRUE;
+			}
+		}
+	}
+	
+	/* Something has changed; need to regenerate: */
+	return TRUE;
+}
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -536,6 +565,7 @@ generate_block_area (CongEditorNode *editor_node)
 #endif
 	
 }
+#endif
 
 #if 1
 gboolean
@@ -668,122 +698,6 @@ cong_selection_get_end_byte_offset (CongSelection *selection,
 }
 #endif
 
-/**
- * generate_line_areas_recursive:
- * @editor_node:
- * @line_width:
- * @initial_indent:
- *
- * TODO: Write me
- * Returns:
- */
-static CongEditorLineFragments*
-generate_line_areas_recursive (CongEditorNode *editor_node,
-			       gint line_width,
-			       gint initial_indent)
-{
-	CongEditorLineFragments *result;
-	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
-
-	/*
-	 * DJB 2004/08/20
-	 * We base the "whitespace handling" of this set of line fragments on the
-	 * value of the whitespace attribute of the dispspec element for this
-	 * node. Is this the best way to get this information?
-	 */
-	CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_node_get_document (editor_node),
-										    cong_editor_node_get_node (editor_node));
-
-#if 0
-	g_message("CongEditorNodeText::generate_line_areas_recursive, cached text =\"%s\"", 
-		  cong_text_cache_get_text (PRIVATE(node_text)->text_cache));
-#endif
-
-	result = cong_editor_line_fragments_new (whitespace);
-
-#if 1
-	/* Set the "geometry" of the PangoLayout: */
-	pango_layout_set_width (PRIVATE(node_text)->pango_layout,
-				line_width*PANGO_SCALE);
-
-	pango_layout_set_indent (PRIVATE(node_text)->pango_layout,
-				initial_indent*PANGO_SCALE);
-
-	/* Add areas for the PangoLayoutLines: */
-	{
-		int index;
-		PangoLayoutIter* layout_iter = pango_layout_get_iter (PRIVATE(node_text)->pango_layout);
-
-
-		/* CAUTION: this is internal data of the PangoLayout */
-		for (index=0; index<pango_layout_get_line_count(PRIVATE(node_text)->pango_layout); index++, pango_layout_iter_next_line(layout_iter)) {
-			PangoLayoutLine *line = pango_layout_iter_get_line (layout_iter);
-			CongEditorArea *text_fragment;
-			PangoRectangle ink_rect;
-			PangoRectangle logical_rect;
-			
-			g_assert(line);
-
-			pango_layout_line_get_pixel_extents (line,
-							     &ink_rect,
-							     &logical_rect);
-
-#if 0
-			g_message("baseline = %i, logical rect.y = %i",
-				  (pango_layout_iter_get_baseline(layout_iter)/PANGO_SCALE),
-				  logical_rect.y);
-#endif
-
-			text_fragment = cong_editor_area_text_fragment_new (cong_editor_node_get_widget (editor_node),
-									    node_text,
-									    PRIVATE(node_text)->pango_layout,
-									    index,
-									    - logical_rect.y);
-			/* FIXME: the calculation of how to offset each baseline is a hack, and might break */
-
-			g_signal_connect (text_fragment,
-					  "button_press_event",
-					  G_CALLBACK(on_signal_button_press),
-					  editor_node);
-			
-			g_signal_connect (text_fragment,
-					  "motion_notify_event",
-					  G_CALLBACK(on_signal_motion_notify),
-					  editor_node);
-			
-#if 0
-			g_signal_connect (text_fragment,
-					  "key_press_event",
-					  G_CALLBACK(on_signal_key_press),
-					  editor_node);
-#endif
-
-			cong_editor_line_fragments_add_area (result,
-							     text_fragment);
-
-
-		}
-
-		pango_layout_iter_free (layout_iter);
-			     
-	}
-#else
-	{
-		g_message("TEST: generating 1 line");
-
-		cong_editor_line_fragments_add_area (result,
-						     cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
-										cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT],
-										NULL,
-										g_strndup (cong_text_cache_get_text (PRIVATE(node_text)->text_cache),
-											   20),
-										FALSE)
-						     );
-	}
-#endif
-
-	return result;
-}
 
 /* Definitions of the CongDocument event handlers: */
 static void 
@@ -1108,11 +1022,13 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	return FALSE;
 }
 
-static CongFlowType
+#if 0
+static enum CongFlowType
 get_flow_type(CongEditorNode *editor_node)
 {
 	return CONG_FLOW_TYPE_INLINE;
 }
+#endif
 
 /* Internal utilities: */
 static const gchar*
@@ -1190,7 +1106,7 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				add_attrs_for_state (attr_list, 0, strlen(text), FRAG_NORMAL);
 			}
 		}		
-
+		
 		/* Spellcheck hack: */
 		{
 			CongDocument *doc = cong_editor_node_get_document (CONG_EDITOR_NODE (editor_node_text));
@@ -1218,6 +1134,7 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				}
 			}
 		}
+
 	}
 #else
 	/* Big hack: */
@@ -1228,13 +1145,8 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 	}
 #endif
 
-
 	return attr_list;
 }
-
-
-
-	   
 
 #if 0
 gboolean

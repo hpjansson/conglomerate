@@ -33,12 +33,10 @@
 
 #include "plugin-lists-area-listitem.h"
 
-#define PRIVATE(x) ((x)->private)
 
-struct CongEditorNodeElementListitemDetails
+struct CongEditorNodeElementListitemPrivate
 {
 	gchar *cached_label;
-
 	gulong handler_id_document_end_edit;
 };
 
@@ -55,14 +53,22 @@ static guint signals[LAST_SIGNAL] = {0};
 static gchar*
 calculate_label (CongEditorNodeElementListitem* listitem);
 
+#if 0
 static void
 finalize (GObject *object);
 
 static void
 dispose (GObject *object);
+#endif
 
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info);
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
+#endif
 
 static void 
 on_end_edit (CongDocument *doc,
@@ -72,38 +78,24 @@ static void
 on_label_changed (CongEditorNodeElementListitem *listitem,
 		  gpointer user_data);
 
+CONG_EDITOR_NODE_DECLARE_HOOKS
+CONG_DEFINE_CLASS_BEGIN(CongEditorNodeElementListitem, cong_editor_node_element_listitem, CONG_EDITOR_NODE_ELEMENT_LISTITEM, CongEditorNodeElement, CONG_EDITOR_NODE_ELEMENT_TYPE )
+     CONG_EDITOR_NODE_CONNECT_HOOKS
+     signals[LABEL_CHANGED] = g_signal_new ("label_changed",
+					    CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE,
+					    G_SIGNAL_RUN_FIRST,
+					    0,
+					    NULL, NULL,
+					    g_cclosure_marshal_VOID__VOID,
+					    G_TYPE_NONE, 
+					    0);
+CONG_DEFINE_CLASS_END()
+CONG_EDITOR_NODE_IMPLEMENT_NEW(element_listitem)
+     /*CONG_EDITOR_NODE_IMPLEMENT_EMPTY_DISPOSE(element_listitem) */
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_CREATION_HOOK_SPECIAL(Listitem, listitem, CONG_EDITOR_NODE_ELEMENT_LISTITEM)
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
 
 /* Exported function definitions: */
-GNOME_CLASS_BOILERPLATE(CongEditorNodeElementListitem, 
-			cong_editor_node_element_listitem,
-			CongEditorNodeElement,
-			CONG_EDITOR_NODE_ELEMENT_TYPE );
-
-static void
-cong_editor_node_element_listitem_class_init (CongEditorNodeElementListitemClass *klass)
-{
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	G_OBJECT_CLASS (klass)->finalize = finalize;
-	G_OBJECT_CLASS (klass)->dispose = dispose;
-
-	node_klass->generate_block_area = generate_block_area;
-
-	signals[LABEL_CHANGED] = g_signal_new ("label_changed",
-					       CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE,
-					       G_SIGNAL_RUN_FIRST,
-					       0,
-					       NULL, NULL,
-					       g_cclosure_marshal_VOID__VOID,
-					       G_TYPE_NONE, 
-					       0);
-}
-
-static void
-cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *node_element_listitem)
-{
-	node_element_listitem->private = g_new0(CongEditorNodeElementListitemDetails,1);
-}
 
 /**
  * cong_editor_node_element_listitem_construct:
@@ -131,28 +123,6 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
 												editor_node_element_listitem);
 
 	return editor_node_element_listitem;
-}
-
-/**
- * cong_editor_node_element_listitem_new:
- * @widget:
- * @traversal_node:
- *
- * TODO: Write me
- * Returns:
- */
-CongEditorNode*
-cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
-				       CongTraversalNode *traversal_node)
-{
-#if DEBUG_EDITOR_NODE_LIFETIMES
-	g_message("cong_editor_node_element_listitem_new(%s)", node->name);
-#endif
-
-	return CONG_EDITOR_NODE( cong_editor_node_element_listitem_construct
-				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE, NULL),
-				  widget,
-				  traversal_node));
 }
 
 /**
@@ -434,23 +404,11 @@ calculate_label (CongEditorNodeElementListitem* listitem)
 
 /* Internal function definitions: */
 static void
-finalize (GObject *object)
+cong_editor_node_element_listitem_dispose (GObject *object)
 {
 	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (object);
 
-	g_free (editor_node_element_listitem->private);
-	editor_node_element_listitem->private = NULL;
-	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
-}
-
-static void
-dispose (GObject *object)
-{
-	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (object);
-
-	g_assert (editor_node_element_listitem->private);
+	g_assert (editor_node_element_listitem->priv);
 	
 	/* Cleanup: */
 
@@ -470,26 +428,19 @@ dispose (GObject *object)
 }
 
 static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node)
+create_block_area (CongEditorNodeElementListitem *editor_node_element_listitem)
 {
-	CongEditorArea *new_area;
-	CongEditorNodeElementListitem *editor_node_element_listitem = CONG_EDITOR_NODE_ELEMENT_LISTITEM (editor_node);
-
-	g_return_val_if_fail (editor_node, NULL);
-
-	new_area = cong_editor_area_listitem_new (cong_editor_node_get_widget (editor_node),
-						  PRIVATE(editor_node_element_listitem)->cached_label);
-
+	CongEditorNode *editor_node = CONG_EDITOR_NODE (editor_node_element_listitem);
+	CongEditorArea *block_area = cong_editor_area_listitem_new (cong_editor_node_get_widget (editor_node),
+								    PRIVATE(editor_node_element_listitem)->cached_label);
+	
 	/* Connect to signal: */
 	g_signal_connect (G_OBJECT (editor_node),
 			  "label_changed",
 			  G_CALLBACK (on_label_changed),
-			  new_area);
+			  block_area);
 
-	cong_editor_area_connect_node_signals (new_area,
-					       editor_node);
-
-	return new_area;
+	return block_area;
 }
 
 static void 

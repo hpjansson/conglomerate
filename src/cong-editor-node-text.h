@@ -34,35 +34,7 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_TEXT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_TEXT_TYPE, CongEditorNodeTextClass)
 #define IS_CONG_EDITOR_NODE_TEXT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_TEXT_TYPE)
 
-typedef struct CongEditorNodeText CongEditorNodeText;
-typedef struct CongEditorNodeTextClass CongEditorNodeTextClass;
-typedef struct CongEditorNodeTextDetails CongEditorNodeTextDetails;
-
-struct CongEditorNodeText
-{
-	CongEditorNode editor_node;
-
-	CongEditorNodeTextDetails *private;
-};
-
-struct CongEditorNodeTextClass
-{
-	CongEditorNodeClass klass;
-
-	/* Methods? */
-};
-
-GType
-cong_editor_node_text_get_type (void);
-
-CongEditorNodeText*
-cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
-				 CongEditorWidget3* widget,
-				 CongTraversalNode *traversal_node);
-
-CongEditorNode*
-cong_editor_node_text_new (CongEditorWidget3 *widget,
-			   CongTraversalNode *traversal_node);
+CONG_EDITOR_NODE_DECLARE_SUBCLASS(Text, text)
 
 gboolean
 cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeText *editor_node_text,

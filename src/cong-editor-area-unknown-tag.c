@@ -76,7 +76,11 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
+
+static void
+refresh_attribute_areas (CongEditorAreaUnknownTag *area_unknown_tag);
 
 static void
 add_areas_for_nsdef (CongEditorAreaUnknownTag *area_unknown_tag, 
@@ -106,10 +110,6 @@ static void
 on_expansion_changed (CongEditorAreaExpander *area_expander,
 		      gpointer user_data);
 
-static void
-refresh_attribute_areas (CongEditorAreaUnknownTag *area_unknown_tag);
-
-
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaUnknownTag, 
 			cong_editor_area_unknown_tag,
@@ -137,6 +137,20 @@ static void
 cong_editor_area_unknown_tag_instance_init (CongEditorAreaUnknownTag *area_unknown_tag)
 {
 	area_unknown_tag->private = g_new0(CongEditorAreaUnknownTagDetails,1);
+}
+
+static void
+dispose (GObject *object)
+{
+	CongEditorAreaUnknownTag *area_unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG (object);
+	CongDocument *doc = cong_editor_area_get_document (CONG_EDITOR_AREA (area_unknown_tag));
+
+	g_signal_handler_disconnect (G_OBJECT(doc),
+				     PRIVATE(area_unknown_tag)->handler_id_set_attribute);	
+	g_signal_handler_disconnect (G_OBJECT(doc),
+				     PRIVATE(area_unknown_tag)->handler_id_remove_attribute);	
+
+	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
 static const gchar*
@@ -191,11 +205,13 @@ cong_ui_get_colour_string(CongNodeType type)
 	}
 }
 
+
+/* Exported function definitions: */
 /**
  * cong_editor_area_unknown_tag_construct:
  * @area_unknown_tag:
  * @editor_widget:
- * @node:
+ * @tagname:
  *
  * TODO: Write me
  * Returns:
@@ -243,7 +259,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 										    0);
 		
 		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
-						       PRIVATE(area_unknown_tag)->top_row);
+						       PRIVATE(area_unknown_tag)->top_row, TRUE);
 		
 		/* Opening "<ns-prefix:element-name": */
 		cong_editor_area_composer_pack_end ( CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_unknown_tag)->top_row),
@@ -313,7 +329,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 						   GTK_ORIENTATION_HORIZONTAL,
 						   0);
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
-					       PRIVATE(area_unknown_tag)->expander_row);	
+					       PRIVATE(area_unknown_tag)->expander_row, TRUE);	
 
 	PRIVATE(area_unknown_tag)->inner_expander = cong_editor_area_expander_new (editor_widget, TRUE);
 
@@ -330,16 +346,16 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 							   0);
 	
 		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
-						       PRIVATE(area_unknown_tag)->inner_row);	
+						       PRIVATE(area_unknown_tag)->inner_row, TRUE);	
 
 		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
 						       cong_editor_area_spacer_new (editor_widget,
 										    GTK_ORIENTATION_HORIZONTAL,
-										    50));
+										    50), TRUE);
 
 		PRIVATE(area_unknown_tag)->inner_area = cong_editor_area_bin_new (editor_widget);
 		cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->inner_row),
-						       PRIVATE(area_unknown_tag)->inner_area);	
+						       PRIVATE(area_unknown_tag)->inner_area, TRUE);	
 
 	}
 	
@@ -349,8 +365,8 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 											     CONG_FONT_ROLE_TITLE_TEXT), 
 									  NULL,
 									  end_tag_string,
-									  TRUE)
-					       );
+									  TRUE),
+					       TRUE);
 
 	g_free (start_tag_string_begin);
 	g_free (start_tag_string_end);
@@ -377,13 +393,12 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 			  G_CALLBACK(on_expansion_changed),
 			  area_unknown_tag);
 
-	return CONG_EDITOR_AREA (area_unknown_tag);
-}
+	return CONG_EDITOR_AREA (area_unknown_tag);}
 
 /**
  * cong_editor_area_unknown_tag_new:
  * @editor_widget:
- * @node:
+ * @tagname:
  *
  * TODO: Write me
  * Returns:
@@ -394,27 +409,13 @@ cong_editor_area_unknown_tag_new (CongEditorWidget3 *editor_widget,
 
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
-	g_message("cong_editor_area_unknown_tag_new(%s)", node->name);
+	g_message("cong_editor_area_unknown_tag_new(%s)", tagname);
 #endif
 
 	return cong_editor_area_unknown_tag_construct
 		(g_object_new (CONG_EDITOR_AREA_UNKNOWN_TAG_TYPE, NULL),
 		 editor_widget,
 		 node);
-}
-
-static void
-dispose (GObject *object)
-{
-	CongEditorAreaUnknownTag *area_unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG (object);
-	CongDocument *doc = cong_editor_area_get_document (CONG_EDITOR_AREA (area_unknown_tag));
-
-	g_signal_handler_disconnect (G_OBJECT(doc),
-				     PRIVATE(area_unknown_tag)->handler_id_set_attribute);	
-	g_signal_handler_disconnect (G_OBJECT(doc),
-				     PRIVATE(area_unknown_tag)->handler_id_remove_attribute);	
-
-	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
 /* Method implementation definitions: */
@@ -430,14 +431,16 @@ calc_requisition (CongEditorArea *area,
 		  GtkOrientation orientation,
 		  int width_hint)
 {
-
 	CongEditorAreaUnknownTag *unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG(area);
 
-	return  cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose,
-							  	    orientation,
-								    width_hint);
-								    
-								    
+	if (PRIVATE(unknown_tag)->outer_vcompose) {
+
+		return cong_editor_area_get_requisition (PRIVATE(unknown_tag)->outer_vcompose,
+							 orientation,
+							 width_hint);
+	} else {
+		return 0;
+	}
 }
 
 static void
@@ -475,14 +478,16 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaUnknownTag *unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG(area_container);
 
 	g_assert(PRIVATE(unknown_tag)->inner_area);
 
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(unknown_tag)->inner_area),
-					       child);
+					       child,
+					       add_to_end);
 }
 
 void

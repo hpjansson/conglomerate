@@ -40,6 +40,12 @@ typedef struct CongEditorWidget3 CongEditorWidget3;
 typedef struct CongEditorWidget3Class CongEditorWidget3Class;
 typedef struct CongEditorWidget3Details CongEditorWidget3Details;
 
+typedef struct CongEditorLineIter CongEditorLineIter;
+typedef struct CongEditorLineManager CongEditorLineManager;
+typedef struct CongEditorLineManagerSimple CongEditorLineManagerSimple;
+typedef struct CongEditorLineManagerSpanWrapper CongEditorLineManagerSpanWrapper;
+typedef struct CongEditorCreationRecord CongEditorCreationRecord;
+
 /* CongEditorArea and some common subclasses: */
 typedef struct CongEditorArea CongEditorArea;
 typedef struct CongEditorAreaClass CongEditorAreaClass;
@@ -55,7 +61,6 @@ typedef struct CongEditorAreaLineClass CongEditorAreaLineClass;
 
 /* CongEditorNode and some common subclasses: */
 typedef struct CongEditorNode CongEditorNode;
-typedef struct CongEditorNodeClass CongEditorNodeClass;
 
 typedef struct CongEditorNodeElement CongEditorNodeElement;
 typedef struct CongEditorNodeElementClass CongEditorNodeElementClass;
@@ -95,9 +100,6 @@ cong_editor_widget3_new(CongDocument *doc,
 
 CongDocument*
 cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget);
-
-CongDispspec*
-cong_editor_widget3_get_default_dispspec(CongEditorWidget3 *editor_widget);
 
 void 
 cong_editor_widget3_force_layout_update (CongEditorWidget3 *editor_widget);

@@ -56,7 +56,17 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
+
+static void
+add_child_after (CongEditorAreaContainer *area_container,
+		 CongEditorArea *child,
+		 CongEditorArea *relative_to);
+
+static void
+remove_child ( CongEditorAreaContainer *area_container,
+	       CongEditorArea *child);
 
 static gboolean 
 set_to_not_expand_cb (CongEditorArea *editor_area, 
@@ -79,6 +89,8 @@ cong_editor_area_line_class_init (CongEditorAreaLineClass *klass)
 	area_klass->for_all = for_all;
 
 	container_klass->add_child = add_child;
+	container_klass->add_child_after = add_child_after;
+	container_klass->remove_child = remove_child;
 }
 
 static void
@@ -163,6 +175,42 @@ cong_editor_area_line_get_width_limit (CongEditorAreaLine *area_line)
  * TODO: Write me
  * Returns:
  */
+gint
+cong_editor_area_line_get_width_used_up_to (CongEditorAreaLine *area_line,
+					    CongEditorArea *child_area)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA_LINE (area_line), 0);
+
+	if (child_area) {
+		GList *iter;
+		gint width = 0;
+
+		g_return_val_if_fail (IS_CONG_EDITOR_AREA (child_area), 0);
+
+		iter = cong_editor_area_composer_get_child_area_iter_first (PRIVATE (area_line)->outer_compose);
+
+		while (iter) {
+			CongEditorArea *iter_child_area = cong_editor_area_composer_get_child_area (PRIVATE (area_line)->outer_compose,
+												    iter);
+			g_assert (iter_child_area);
+
+			width += cong_editor_area_get_requisition_width (iter_child_area,
+									 PRIVATE(area_line)->width_limit);
+			
+			if (child_area==iter_child_area) {
+				return width;
+			}
+
+			iter=iter->next;
+		}
+
+		g_error ("child_area not found in CongEditorAreaLine");
+		return 0;
+	} else {
+		return 0;
+	}
+}
+
 gint
 cong_editor_area_line_get_width_used (CongEditorAreaLine *area_line)
 {
@@ -259,7 +307,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaLine *line = CONG_EDITOR_AREA_LINE(area_container);
 
@@ -271,14 +320,47 @@ add_child (CongEditorAreaContainer *area_container,
 				  PRIVATE(line)->outer_compose);
 	
 	/* Make the new child expand to fill to the end of the line: */
-	cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
-					    child,
-					    TRUE,
-					    TRUE,
-					    0);
-
-
+	if (add_to_end) {
+		cong_editor_area_composer_pack_end (CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
+						    child,
+						    TRUE,
+						    TRUE,
+						    0);
+	} else {
+		cong_editor_area_composer_pack_start (CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
+						      child,
+						      TRUE,
+						      TRUE,
+						      0);
+	}
 }	
+
+static void
+add_child_after (CongEditorAreaContainer *area_container,
+		 CongEditorArea *child,
+		 CongEditorArea *relative_to)
+{
+	CongEditorAreaLine *line = CONG_EDITOR_AREA_LINE(area_container);
+
+	/* Delegate, set not to expand: */
+	cong_editor_area_composer_pack_after (CONG_EDITOR_AREA_COMPOSER (PRIVATE(line)->outer_compose),
+					      child,
+					      relative_to,
+					      FALSE,
+					      FALSE,
+					      0);
+}
+
+static void
+remove_child ( CongEditorAreaContainer *area_container,
+	       CongEditorArea *child)
+{
+	CongEditorAreaLine *line = CONG_EDITOR_AREA_LINE(area_container);
+
+	/* Delegate: */
+	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (PRIVATE(line)->outer_compose),
+						 child);
+}
 
 static gboolean 
 set_to_not_expand_cb (CongEditorArea *editor_area, 

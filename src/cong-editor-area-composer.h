@@ -92,6 +92,15 @@ cong_editor_area_composer_set_child_packing (CongEditorAreaComposer *area_compos
 					     gboolean expand,
 					     gboolean fill,
 					     guint extra_padding);
+
+GList*
+cong_editor_area_composer_get_child_area_iter_first (CongEditorAreaComposer *area_composer);
+
+CongEditorArea*
+cong_editor_area_composer_get_child_area (CongEditorAreaComposer *area_composer,
+					  GList *iter);
+
+
 G_END_DECLS
 
 #endif

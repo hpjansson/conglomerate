@@ -34,35 +34,7 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_COMMENT_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_COMMENT_TYPE, CongEditorNodeCommentClass)
 #define IS_CONG_EDITOR_NODE_COMMENT(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_COMMENT_TYPE)
 
-typedef struct CongEditorNodeComment CongEditorNodeComment;
-typedef struct CongEditorNodeCommentClass CongEditorNodeCommentClass;
-typedef struct CongEditorNodeCommentDetails CongEditorNodeCommentDetails;
-
-struct CongEditorNodeComment
-{
-	CongEditorNode node;
-
-	CongEditorNodeCommentDetails *private;
-};
-
-struct CongEditorNodeCommentClass
-{
-	CongEditorNodeClass klass;
-
-	/* Methods? */
-};
-
-GType
-cong_editor_node_comment_get_type (void);
-
-CongEditorNodeComment*
-cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
-				    CongEditorWidget3* widget,
-				    CongTraversalNode *traversal_node);
-
-CongEditorNode*
-cong_editor_node_comment_new (CongEditorWidget3* widget,
-			      CongTraversalNode *traversal_node);
+CONG_EDITOR_NODE_DECLARE_SUBCLASS(Comment, comment)
 
 G_END_DECLS
 

@@ -30,6 +30,7 @@
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeUnimplementedDetails
@@ -37,8 +38,7 @@ struct CongEditorNodeUnimplementedDetails
 	gchar *description;
 };
 
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
+CONG_EDITOR_NODE_DECLARE_HOOKS
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented, 
@@ -49,9 +49,7 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented,
 static void
 cong_editor_node_unimplemented_class_init (CongEditorNodeUnimplementedClass *klass)
 {
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	node_klass->generate_block_area = generate_block_area;
+	CONG_EDITOR_NODE_CONNECT_HOOKS
 }
 
 static void
@@ -109,13 +107,36 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 				 );
 }
 
-/**
- * generate_block_area:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
+
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
+{
+	CongEditorNodeUnimplemented *editor_node_unimplemented = CONG_EDITOR_NODE_UNIMPLEMENTED(editor_node);
+	CongEditorArea *block_area;
+	
+	block_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
+						cong_app_get_font (cong_app_singleton(),
+								   CONG_FONT_ROLE_TITLE_TEXT),
+						NULL,
+						PRIVATE(editor_node_unimplemented)->description,
+						FALSE);
+
+	cong_editor_node_create_block_area (editor_node,
+					    creation_info,
+					    block_area,
+					    FALSE);
+}
+gboolean
+needs_area_regeneration (CongEditorNode *editor_node,
+			 const CongAreaCreationGeometry *old_creation_geometry,
+			 const CongAreaCreationGeometry *new_creation_geometry)
+{
+	/* Block areas don't need regenerating: */
+	return FALSE;
+}
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -131,3 +152,4 @@ generate_block_area (CongEditorNode *editor_node)
 
 	return new_area;
 }
+#endif

@@ -55,7 +55,8 @@ struct CongEditorAreaContainerClass
 	CongEditorAreaClass klass;
 
 	void (*add_child) ( CongEditorAreaContainer *area_container,
-			    CongEditorArea *child);
+			    CongEditorArea *child,
+			    gboolean add_to_end);
 
 	void (*add_child_after) ( CongEditorAreaContainer *area_container,
 				  CongEditorArea *new_child,
@@ -82,7 +83,8 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
 
 void
 cong_editor_area_container_add_child (CongEditorAreaContainer *area_container,
-				      CongEditorArea *child);
+				      CongEditorArea *child,
+				      gboolean add_to_end);
 
 void
 cong_editor_area_container_add_child_after (CongEditorAreaContainer *area_container,

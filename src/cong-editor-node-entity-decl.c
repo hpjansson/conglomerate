@@ -30,6 +30,7 @@
 #include "cong-editor-area-entity-decl.h"
 #include "cong-editor-area-structural-tag.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeEntityDeclDetails
@@ -37,8 +38,7 @@ struct CongEditorNodeEntityDeclDetails
 	int dummy;
 };
 
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node);
+CONG_EDITOR_NODE_DECLARE_HOOKS
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityDecl, 
@@ -49,10 +49,7 @@ GNOME_CLASS_BOILERPLATE(CongEditorNodeEntityDecl,
 static void
 cong_editor_node_entity_decl_class_init (CongEditorNodeEntityDeclClass *klass)
 {
-
-	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
-
-	node_klass->generate_block_area = generate_block_area;
+	CONG_EDITOR_NODE_CONNECT_HOOKS
 }
 
 static void
@@ -102,13 +99,64 @@ cong_editor_node_entity_decl_new (CongEditorWidget3 *widget,
 				 );
 }
 
-/**
- * generate_block_area:
- * @editor_node:
- *
- * TODO: Write me
- * Returns:
- */
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
+{
+	CongEditorArea *block_area;
+	gchar *title;
+	GdkColor col_bold;
+	GdkColor col_dim;
+	GdkColor col_background;
+	GdkColor col_text;
+
+	g_return_if_fail (editor_node);
+
+#if 1
+	title = g_strdup_printf ("Entity declaration: \"%s\"", 
+				 cong_editor_node_get_node (editor_node)->name);
+
+	cong_eel_rgb_to_gdk_color (&col_bold,
+				   0x00,
+				   0x00,
+				   0x00);
+	cong_eel_rgb_to_gdk_color (&col_dim,
+				   0x00,
+				   0x00,
+				   0x00);
+	cong_eel_rgb_to_gdk_color (&col_background,
+				   0xff,
+				   0xff,
+				   0xff);
+	cong_eel_rgb_to_gdk_color (&col_text,
+				   0x00,
+				   0x00,
+				   0x00);
+
+	block_area = cong_editor_area_structural_new (cong_editor_node_get_widget (editor_node),
+						      NULL,
+						      title,
+						      &col_bold,
+						      &col_dim,
+						      &col_background,
+						      &col_text);
+
+	g_free (title);
+#else
+	block_area = cong_editor_area_entity_decl_new (cong_editor_node_get_widget (editor_node),
+						       cong_editor_node_get_node (editor_node)->name);
+#endif
+
+	cong_editor_node_create_block_area (editor_node,
+					    creation_info,
+					    block_area,
+					    TRUE);
+}
+
+CONG_EDITOR_NODE_DEFINE_BLOCK_AREA_REGENERATION_HOOK
+
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node)
 {
@@ -158,3 +206,4 @@ generate_block_area (CongEditorNode *editor_node)
 
 	return new_area;
 }
+#endif

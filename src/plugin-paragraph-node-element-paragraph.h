@@ -34,35 +34,7 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_ELEMENT_PARAGRAPH_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_ELEMENT_PARAGRAPH_TYPE, CongEditorNodeElementParagraphClass)
 #define IS_CONG_EDITOR_NODE_ELEMENT_PARAGRAPH(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_ELEMENT_PARAGRAPH_TYPE)
 
-typedef struct CongEditorNodeElementParagraph CongEditorNodeElementParagraph;
-typedef struct CongEditorNodeElementParagraphClass CongEditorNodeElementParagraphClass;
-typedef struct CongEditorNodeElementParagraphDetails CongEditorNodeElementParagraphDetails;
-
-struct CongEditorNodeElementParagraph
-{
-	CongEditorNodeElement editor_node_element;
-
-	CongEditorNodeElementParagraphDetails *private;
-};
-
-struct CongEditorNodeElementParagraphClass
-{
-	CongEditorNodeElementClass klass;
-
-	/* Methods? */
-};
-
-GType
-cong_editor_node_element_paragraph_get_type (void);
-
-CongEditorNodeElementParagraph*
-cong_editor_node_element_paragraph_construct (CongEditorNodeElementParagraph *editor_node_element_paragraph,
-					      CongEditorWidget3 *widget,
-					      CongTraversalNode *traversal_node);
-
-CongEditorNode*
-cong_editor_node_element_paragraph_new (CongEditorWidget3 *widget,
-					CongTraversalNode *traversal_node);
+CONG_EDITOR_NODE_DECLARE_PLUGIN_SUBCLASS(Paragraph, paragraph)
 
 G_END_DECLS
 

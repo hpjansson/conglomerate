@@ -29,10 +29,11 @@
 
 #include "cong-editor-area-span-tag.h"
 #include "cong-dispspec-element.h"
-#include "cong-editor-line-fragments.h"
 #include "cong-traversal-node.h"
+#include "cong-editor-line-manager-span-wrapper.h"
 #include "cong-error-dialog.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeElementSpanDetails
@@ -40,6 +41,12 @@ struct CongEditorNodeElementSpanDetails
 	int dummy;
 };
 
+
+#if 1
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info);
+#else
 static CongEditorArea*
 generate_block_area (CongEditorNode *editor_node);
 
@@ -47,15 +54,18 @@ static CongEditorLineFragments*
 generate_line_areas_recursive (CongEditorNode *editor_node,
 			       gint line_width,
 			       gint initial_indent);
+#endif
 
 static CongFlowType
 get_flow_type(CongEditorNode *editor_node);
 
 /* Extra stuff: */
+#if 0
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node,
 	       gboolean is_at_start,
 	       gboolean is_at_end);
+#endif
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementSpan, 
@@ -68,8 +78,12 @@ cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
+#if 1
+	node_klass->create_areas = create_areas;
+#else
 	node_klass->generate_block_area = generate_block_area;
 	node_klass->generate_line_areas_recursive = generate_line_areas_recursive;
+#endif
 	node_klass->get_flow_type = get_flow_type;
 }
 
@@ -122,176 +136,27 @@ cong_editor_node_element_span_new (CongEditorWidget3* widget,
 				  traversal_node));
 }
 
-static CongEditorArea*
-generate_block_area (CongEditorNode *editor_node)
-{
-	return generate_area (editor_node,
-			      TRUE,
-			      TRUE);
-}
-
-static CongEditorLineFragments*
-generate_line_areas_recursive (CongEditorNode *editor_node,
-			       gint line_width,
-			       gint initial_indent)
-{
-	CongEditorLineFragments *result;
-
-#if 0
-	g_message("CongEditorNodeElementSpan::generate_line_areas_recursive");
-#endif
-
-	/*
-	 * DJB 2004/08/20
-	 * I am assuming here that a span element can not have the
-	 * preserve="whitespace" attribute (I think). This may well be
-	 * wrong. I have not looked at what happens if I create this
-	 * CongEditorLineFragments object with CONG_WHITESPACE_PRESERVE.
-	 * 
-	 */
-	result = cong_editor_line_fragments_new (CONG_WHITESPACE_NORMALIZE);
-
-	/* Iterate over children, getting their line fragments, embellishing them, and adding them to the result: */
-	{
 #if 1
-		CongTraversalNode *iter;
+static void 
+create_areas (CongEditorNode *editor_node,
+	      const CongAreaCreationInfo *creation_info)
+{
+	CongEditorLineManager *line_manager;
 
-		for (iter = cong_traversal_node_get_first_child (cong_editor_node_get_traversal_node (editor_node)); iter; iter=cong_traversal_node_get_next (iter)) {
+	/* Create no areas; the children will add their areas via our LineManager, and this will create the wrapper areas */
 
-			CongEditorNode *editor_node_iter = cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
-														   iter);
+	/* Need to set up the line manager though: */
+	line_manager = cong_editor_line_manager_span_wrapper_new (cong_editor_node_get_widget (editor_node),
+								  editor_node,
+								  creation_info->line_manager,
+								  creation_info->creation_record,
+								  creation_info->line_iter);
 
-			if (editor_node_iter) {
-				CongEditorLineFragments *child_line_fragments;
-
-				child_line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
-												       line_width,
-												       initial_indent);
-				
-				if (child_line_fragments) {
-					GList* list_of_areas;
-					gboolean is_first = TRUE;
-					
-					list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
-					
-					while (list_of_areas) {
-						
-						CongEditorArea *child_area = CONG_EDITOR_AREA(list_of_areas->data);
-						
-						CongEditorArea *enclosing_area = generate_area(editor_node,
-											       is_first,
-											       (NULL==list_of_areas->next));
-						
-						cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (enclosing_area),
-										      child_area);
-						
-						cong_editor_line_fragments_add_area (result,
-										     enclosing_area);
-						
-						is_first = FALSE;
-						list_of_areas = list_of_areas->next;
-					}
-					
-					g_object_unref (child_line_fragments);
-				} else {
-					/* David Malcolm 2004/02/17:
-					   
-					The big distinction between block and line areas means we have to deal with all four
-					possible nesting combinations as separate cases, and the code can't deal with the case
-					of a structural area nested inside a span/line area (the file "examples/test-nesting.xml" has an example
-					of this.
-					
-					I think this is a design flaw in this version of the code and am working on a redesign, to be found
-					in the WidgetPlayground branch of CVS.
-					
-					*/
-					CongDocument *doc = cong_editor_node_get_document (editor_node);
-					g_assert (doc);
-					
-					if (!doc->warned_about_bug_124507) {
-						GtkDialog *dlg;
-						gchar *what_failed;
-						gchar *why_failed;
-						gchar *suggestions;
-						
-						gchar *inner_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node_iter));
-						gchar *outer_node_name = cong_node_get_qualified_name (cong_editor_node_get_node (editor_node));
-						gchar *xpath = cong_node_get_path (cong_editor_node_get_node (editor_node_iter));
-
-						doc->warned_about_bug_124507 = TRUE;						
-						
-						/* I have deliberately not marked these strings for translation as I hope to finish the workaround soon */
-						what_failed = g_strdup_printf ("There are parts of this document that Conglomerate cannot display due to a bug (filed as bug #124507 within the Bug Tracking System at http://bugzilla.gnome.org)");
-						why_failed = g_strdup_printf ("The current version of Conglomerate cannot display \"structural\" elements inside a \"span\" element (due to a design oversight).");
-						suggestions = g_strdup_printf ("The first problem element is a structural &lt;%s&gt; nested inside a span &lt;%s&gt;; this has the XPath of \"%s\".  Other problem elements may exist within the document. You may be able to fix this by editing the document in another application, hacking Conglomerate's xds files, or waiting for a later release of Conglomerate.", 
-									       inner_node_name, 
-									       outer_node_name, 
-									       xpath);
-						
-						g_free (inner_node_name);
-						g_free (outer_node_name);
-						g_free (xpath);
-						
-						dlg = cong_error_dialog_new (NULL,
-									     what_failed,
-									     why_failed,
-									     suggestions);
-						
-						g_free (suggestions);
-						g_free (why_failed);
-						g_free (what_failed);
-						
-						gtk_dialog_run (dlg);
-						gtk_widget_destroy (GTK_WIDGET (dlg));
-					}
-				}
-
-			}
-		}
-#else
-		CongNodePtr iter;
-
-		for (iter = cong_editor_node_get_node(editor_node)->children; iter; iter=iter->next) {
-
-			CongEditorNode *editor_node_iter = cong_editor_widget3_get_editor_node (cong_editor_node_get_widget (editor_node),
-												iter,
-												editor_node);
-
-			if (editor_node_iter) {
-				CongEditorLineFragments *child_line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
-																line_width,
-																initial_indent);
-
-				GList* list_of_areas = cong_editor_line_fragments_get_area_list (child_line_fragments);
-
-				gboolean is_first = TRUE;
-
-				while (list_of_areas) {
-					
-					CongEditorArea *child_area = CONG_EDITOR_AREA(list_of_areas->data);
-
-					CongEditorArea *enclosing_area = generate_area(editor_node,
-										       is_first,
-										       (NULL==list_of_areas->next));
-					
-					cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (enclosing_area),
-									      child_area);
-
-					cong_editor_line_fragments_add_area (result,
-									     enclosing_area);
-
-					is_first = FALSE;
-					list_of_areas = list_of_areas->next;
-				}
-
-				g_object_unref (child_line_fragments);
-			}
-		}
-#endif
-	}
-	
-	return result;
+	cong_editor_node_set_line_manager_for_children (editor_node,
+							line_manager);
+	g_object_unref (G_OBJECT (line_manager));
 }
+#endif
 
 static CongFlowType
 get_flow_type(CongEditorNode *editor_node)
@@ -300,6 +165,7 @@ get_flow_type(CongEditorNode *editor_node)
 }
 
 /* Extra stuff: */
+#if 0
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node,
 	       gboolean is_at_start,
@@ -334,3 +200,4 @@ generate_area (CongEditorNode *editor_node,
 
 	return area;
 }
+#endif

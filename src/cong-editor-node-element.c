@@ -28,6 +28,7 @@
 #include "cong-eel.h"
 #include "cong-document.h"
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorNodeElementDetails

@@ -67,7 +67,8 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child);
+	   CongEditorArea *child,
+	   gboolean add_to_end);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaEntityRef, 
@@ -313,12 +314,14 @@ for_all (CongEditorArea *editor_area,
 
 static void
 add_child (CongEditorAreaContainer *area_container,
-	   CongEditorArea *child)
+	   CongEditorArea *child,
+	   gboolean add_to_end)
 {
 	CongEditorAreaEntityRef *entity_ref = CONG_EDITOR_AREA_ENTITY_REF(area_container);
 
 	g_assert(PRIVATE(entity_ref)->inner_bin);
 
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER( PRIVATE(entity_ref)->inner_bin),
-					       child);
+					       child,
+					       add_to_end);
 }
