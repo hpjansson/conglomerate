@@ -668,7 +668,7 @@ char *pick_structural_tag(CongDispspec *ds)
 	
   pickstruct = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(pickstruct), 10);
-  gtk_widget_set_usize(GTK_WIDGET(pickstruct), 240, 240);
+  gtk_widget_set_usize(GTK_WIDGET(pickstruct), 240, 740);
   gtk_window_set_title(GTK_WINDOW(pickstruct), "Select element");
   gtk_window_set_position(GTK_WINDOW(pickstruct), GTK_WIN_POS_MOUSE);
   gtk_window_set_modal(GTK_WINDOW(pickstruct), 1);

@@ -1,4 +1,8 @@
 creating ChangeLog
+2002-12-12 Jerritt Collord
+
+	* dispspec.c: changed widget_usize for element chooser
+
 2002-12-11 David Malcolm
 
 	* cong-dialog.c, cong-dialog.h
