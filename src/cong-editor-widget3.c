@@ -36,6 +36,7 @@
 
 #include "cong-eel.h"
 
+#include <gtk/gtkdrawingarea.h>
 
 /* Test code: */
 #include "cong-editor-area-border.h"
@@ -264,6 +265,119 @@ on_root_requisition_change (CongEditorArea *child_area,
 			    gpointer user_data);
 
 /* Implementations of public functions: */
+GNOME_CLASS_BOILERPLATE(CongEditorWidget3, 
+			cong_editor_widget3,
+			GtkDrawingArea,
+			GTK_TYPE_DRAWING_AREA );
+
+static void
+cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
+{
+}
+
+static void
+cong_editor_widget3_instance_init (CongEditorWidget3 *widget)
+{
+	widget->private = g_new0(CongEditorWidget3Details,1);
+}
+
+CongEditorWidget3*
+cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
+			       CongDocument *doc)
+{
+	PRIVATE(editor_widget)->doc = doc;
+
+	g_object_ref(G_OBJECT(doc));
+
+	PRIVATE(editor_widget)->hash_of_node_to_editor = g_hash_table_new (NULL,
+							    NULL);
+	PRIVATE(editor_widget)->hash_of_editor_node_to_primary_area = g_hash_table_new (NULL,
+									 NULL);
+	PRIVATE(editor_widget)->hash_of_editor_node_to_parent_insertion_area = g_hash_table_new (NULL,
+										  NULL);
+	PRIVATE(editor_widget)->hash_of_editor_node_to_child_insertion_area = g_hash_table_new (NULL,
+										 NULL);
+
+	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
+	
+	/* Connect to GtkWidget events: */
+	gtk_signal_connect(GTK_OBJECT(editor_widget), 
+			   "expose_event",
+			   (GtkSignalFunc) expose_event_handler, 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(editor_widget), 
+			   "configure_event",
+			   (GtkSignalFunc) configure_event_handler, 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(editor_widget), 
+			   "button_press_event",
+			   (GtkSignalFunc) button_press_event_handler, 
+			   NULL);
+	gtk_signal_connect(GTK_OBJECT(editor_widget), 
+			   "motion_notify_event",
+			   (GtkSignalFunc) motion_notify_event_handler, 
+			   NULL);
+	gtk_signal_connect_after(GTK_OBJECT(editor_widget), 
+				 "key_press_event",
+				 (GtkSignalFunc) key_press_event_handler, 
+				 NULL);
+	gtk_signal_connect(GTK_OBJECT(editor_widget),
+ 			   "size-request",
+ 			   (GtkSignalFunc) size_request_handler,
+ 			   NULL);
+
+	gtk_widget_set_events(GTK_WIDGET(editor_widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
+
+	gtk_widget_set(GTK_WIDGET(editor_widget), "can_focus", (gboolean) TRUE, 0);
+	gtk_widget_set(GTK_WIDGET(editor_widget), "can_default", (gboolean) TRUE, 0);
+
+	/* Set up root area: */
+	{
+		PRIVATE(editor_widget)->root_area = cong_editor_area_border_new (editor_widget, 5);
+	
+		g_signal_connect (G_OBJECT(PRIVATE(editor_widget)->root_area),
+				  "flush_requisition_cache",
+				  G_CALLBACK(on_root_requisition_change),
+				  editor_widget);
+	}
+
+	/* Traverse the doc, adding EditorNodes and EditorAreas: */
+	{
+		populate_widget3(editor_widget);
+	}
+
+	/* Connect to CongDocument events: */
+	{
+		/* attach signal handlers to document for notification before change happens: */
+		g_signal_connect (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_before), editor_widget);
+		g_signal_connect (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_before), editor_widget);
+		
+		/* attach signal handlers to document for notification after change happens: */
+		g_signal_connect_after (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_after), editor_widget);
+		g_signal_connect_after (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_after), editor_widget);
+	}
+
+	return editor_widget;
+}
+
 GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 {
 	CongEditorWidget3 *widget;
@@ -271,126 +385,23 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 
 	g_return_val_if_fail(doc, NULL);
 
-	widget = GTK_DRAWING_AREA(gtk_drawing_area_new());
-
-	details = g_new0(CongEditorWidget3Details,1);
-
-	g_object_set_data(G_OBJECT(widget),
-			  "details",
-			  details);
-
-	details->doc = doc;
-	g_object_ref(G_OBJECT(doc));
-
-	details->hash_of_node_to_editor = g_hash_table_new (NULL,
-							    NULL);
-	details->hash_of_editor_node_to_primary_area = g_hash_table_new (NULL,
-									 NULL);
-	details->hash_of_editor_node_to_parent_insertion_area = g_hash_table_new (NULL,
-										  NULL);
-	details->hash_of_editor_node_to_child_insertion_area = g_hash_table_new (NULL,
-										 NULL);
-
-	details->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
-	
-	/* Connect to GtkWidget events: */
-	gtk_signal_connect(GTK_OBJECT(widget), 
-			   "expose_event",
-			   (GtkSignalFunc) expose_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(widget), 
-			   "configure_event",
-			   (GtkSignalFunc) configure_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(widget), 
-			   "button_press_event",
-			   (GtkSignalFunc) button_press_event_handler, 
-			   NULL);
-	gtk_signal_connect(GTK_OBJECT(widget), 
-			   "motion_notify_event",
-			   (GtkSignalFunc) motion_notify_event_handler, 
-			   NULL);
-	gtk_signal_connect_after(GTK_OBJECT(widget), 
-				 "key_press_event",
-				 (GtkSignalFunc) key_press_event_handler, 
-				 NULL);
-	gtk_signal_connect(GTK_OBJECT(widget),
- 			   "size-request",
- 			   (GtkSignalFunc) size_request_handler,
- 			   NULL);
-
-	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
-
-	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
-	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);
-
-	/* Set up root area: */
-	{
-		details->root_area = cong_editor_area_border_new (widget, 5);
-	
-		g_signal_connect (G_OBJECT(details->root_area),
-				  "flush_requisition_cache",
-				  G_CALLBACK(on_root_requisition_change),
-				  widget);
-	}
-
-	/* Traverse the doc, adding EditorNodes and EditorAreas: */
-	{
-		populate_widget3(widget);
-	}
-
-	/* Connect to CongDocument events: */
-	{
-		/* attach signal handlers to document for notification before change happens: */
-		g_signal_connect (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_before), widget);
-		g_signal_connect (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_before), widget);
-		
-		/* attach signal handlers to document for notification after change happens: */
-		g_signal_connect_after (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_add_after", G_CALLBACK(on_signal_add_after_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_add_before", G_CALLBACK(on_signal_add_before_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_set_parent", G_CALLBACK(on_signal_set_parent_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_after), widget);
-		g_signal_connect_after (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_after), widget);
-	}
-
-	return GTK_WIDGET(widget);
+	return GTK_WIDGET( cong_editor_widget3_construct (g_object_new (CONG_EDITOR_WIDGET3_TYPE, NULL),
+							  doc)
+			   );
 }
 
 CongDocument *cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail(editor_widget, NULL);
 
-	details = GET_DETAILS(editor_widget);
-
-	return details->doc;
+	return PRIVATE(editor_widget)->doc;
 }
 
 CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail(editor_widget, NULL);
 
-	details = GET_DETAILS(editor_widget);
-
-	return cong_document_get_dispspec(details->doc);
+	return cong_document_get_dispspec(PRIVATE(editor_widget)->doc);
 }
 
 #if 0
@@ -408,11 +419,11 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 #if 1
  	gtk_widget_queue_resize(GTK_WIDGET(editor_widget));
 #else
-	cong_element_editor_get_size_requisition(details->root_editor, GTK_WIDGET(editor_widget)->allocation.width);
+	cong_element_editor_get_size_requisition(PRIVATE(editor_widget)->root_editor, GTK_WIDGET(editor_widget)->allocation.width);
 
 	gtk_widget_set_size_request(GTK_WIDGET(editor_widget),
-				    details->root_editor->requisition.width,
-				    details->root_editor->requisition.height);
+				    PRIVATE(editor_widget)->root_editor->requisition.width,
+				    PRIVATE(editor_widget)->root_editor->requisition.height);
 	
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));
 #endif
@@ -423,27 +434,19 @@ CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 				     CongNodePtr node)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail (editor_widget, NULL);
 	g_return_val_if_fail (node, NULL);
 
-	details = GET_DETAILS(editor_widget);
-
-	return g_hash_table_lookup (details->hash_of_node_to_editor, 
+	return g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor, 
 				    node);
 }
 
 GdkGC*
 cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail (editor_widget, NULL);
 
-	details = GET_DETAILS(editor_widget);
-	
-	return details->test_gc;
+	return PRIVATE(editor_widget)->test_gc;
 }
 
 
@@ -452,9 +455,7 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 				 gint x,
 				 gint y)
 {
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
-
-	return cong_editor_area_get_deepest_child_at (details->root_area, 
+	return cong_editor_area_get_deepest_child_at (PRIVATE(editor_widget)->root_area, 
 						      x,
 						      y);
 }
@@ -477,7 +478,6 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 {
 	CongDocument *doc;
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
 	LOG_GTK_WIDGET_SIGNAL1("expose_event_handler");
 
@@ -493,7 +493,7 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 			   event->area.height);	
 
 	/* Render the areas: */
-	cong_editor_area_recursive_render (details->root_area,
+	cong_editor_area_recursive_render (PRIVATE(editor_widget)->root_area,
 					   &event->area);
 
 #if 0
@@ -509,22 +509,21 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 
 	LOG_GTK_WIDGET_SIGNAL3("configure_event_handler; w/h = %i,%i", event->width, event->height);
 
 #if 0
-	if (event->width != cong_editor_area_get_cached_width_hint (details->root_area)) {
+	if (event->width != cong_editor_area_get_cached_width_hint (PRIVATE(editor_widget)->root_area)) {
 		
 	}
 #endif
 
 #if 0
-  	cong_editor_area_update_requisition(details->root_area, event->width);
+  	cong_editor_area_update_requisition(PRIVATE(editor_widget)->root_area, event->width);
 #endif
 
 	/* Pass all of the allocation to root editor; this will recursively allocate space to its children: */
-	cong_editor_area_set_allocation (details->root_area, 
+	cong_editor_area_set_allocation (PRIVATE(editor_widget)->root_area, 
 					 event->x,
 					 event->y,
 					 event->width,
@@ -567,7 +566,6 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event, gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 	CongEditorArea* area;
 
 	LOG_GTK_WIDGET_SIGNAL1("motion_notify_event_handler");
@@ -612,7 +610,6 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 	CongDocument *doc = cong_editor_widget3_get_document(editor_widget);
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	CongElementEditor *element_editor;
@@ -631,7 +628,6 @@ static void size_request_handler(GtkWidget *widget,
 {
  	CongDocument *doc;
  	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
- 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
 	const GtkRequisition* req;
  
  	LOG_GTK_WIDGET_SIGNAL1("size_request_handler");
@@ -639,7 +635,7 @@ static void size_request_handler(GtkWidget *widget,
  	g_assert(widget);
  	g_assert(requisition);
 
-	req = cong_editor_area_get_requisition (details->root_area,
+	req = cong_editor_area_get_requisition (PRIVATE(editor_widget)->root_area,
 						widget->allocation.width); 
 
 	/* Only request up to the width you've already been allocated; don't grow in width unless your container gives you more room. */
@@ -950,7 +946,6 @@ static void
 populate_widget3(CongEditorWidget3 *widget)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(widget);
-	CongEditorWidget3Details *details = GET_DETAILS(editor_widget);
 	CongDocument *doc;
 
 	doc = cong_editor_widget3_get_document(widget);
@@ -977,9 +972,7 @@ gboolean
 cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
 					      CongNodePtr node)
 {
-	CongEditorWidget3Details *details = GET_DETAILS(widget);
-
-	return 	g_hash_table_lookup(details->hash_of_node_to_editor,node)!=NULL;
+	return 	g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor,node)!=NULL;
 
 }
 
@@ -987,7 +980,6 @@ static void
 recursive_add_nodes(CongEditorWidget3 *widget,
 		    CongNodePtr node)
 {
-	CongEditorWidget3Details *details = GET_DETAILS(widget);
 	CongDocument *doc;
 	CongNodePtr iter;
 
@@ -1098,7 +1090,7 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 
 		g_assert(editor_node);
 
-		g_hash_table_insert (details->hash_of_node_to_editor, 
+		g_hash_table_insert (PRIVATE(widget)->hash_of_node_to_editor, 
 				     node,
 				     editor_node);
 
@@ -1117,7 +1109,6 @@ static void
 recursive_remove_nodes (CongEditorWidget3 *widget,
 			CongNodePtr node)
 {
-	CongEditorWidget3Details *details = GET_DETAILS(widget);
 	CongEditorNode *editor_node;
 	CongNodePtr iter;
 
@@ -1133,7 +1124,7 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 
-	g_assert(g_hash_table_lookup(details->hash_of_node_to_editor,node)!=NULL);
+	g_assert(g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor,node)!=NULL);
 	
 	/* Recurse: */
 	for (iter = node->children; iter; iter=iter->next) {
@@ -1144,11 +1135,11 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 	destroy_areas (widget,
 		       node);
 	
-	editor_node = g_hash_table_lookup (details->hash_of_node_to_editor,
+	editor_node = g_hash_table_lookup (PRIVATE(widget)->hash_of_node_to_editor,
 					   node);
 	
 	/* Remove this editor_node: */
-	g_hash_table_remove (details->hash_of_node_to_editor, 
+	g_hash_table_remove (PRIVATE(widget)->hash_of_node_to_editor, 
 			     node);
 
 	CONG_EEL_LOG_REF_COUNT("redundant editor node", G_OBJECT(editor_node));
@@ -1161,7 +1152,6 @@ static void
 create_areas(CongEditorWidget3 *widget,
 	     CongNodePtr node)
 {
-	CongEditorWidget3Details *details = GET_DETAILS(widget);
 	CongEditorNode *editor_node = NULL;
 	CongEditorArea *this_area = NULL;
 	CongEditorArea *parent_insertion_area = NULL;
@@ -1185,7 +1175,7 @@ create_areas(CongEditorWidget3 *widget,
 	{
 		this_area = cong_editor_node_generate_area (editor_node);
 		
-		g_hash_table_insert (details->hash_of_editor_node_to_primary_area,
+		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
 				     editor_node,
 				     this_area);
 	}
@@ -1199,17 +1189,17 @@ create_areas(CongEditorWidget3 *widget,
 										  node->parent);
 			
 			/* What is the parent's child insertion area? */
-			parent_insertion_area = g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
+			parent_insertion_area = g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
 								     parent_editor_node);
 			
 		} else {
 			/* Root of the document; insert below the widget's root_area: */
 			g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-			parent_insertion_area = details->root_area;
+			parent_insertion_area = PRIVATE(widget)->root_area;
 			
 		}
 
-		g_hash_table_insert (details->hash_of_editor_node_to_parent_insertion_area,
+		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
 				     editor_node,
 				     parent_insertion_area);
 		
@@ -1230,11 +1220,11 @@ create_areas(CongEditorWidget3 *widget,
 
 			if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
 				cong_editor_area_composer_pack_after (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
-								       this_area,
-								       older_sibling_primary_area,
-								       FALSE,
-								       FALSE,
-								       0);
+								      this_area,
+								      older_sibling_primary_area,
+								      FALSE,
+								      FALSE,
+								      0);
 			} else {
 				cong_editor_area_container_add_child_after (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
 									    this_area,
@@ -1269,7 +1259,7 @@ create_areas(CongEditorWidget3 *widget,
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (this_area),
 						      vcomposer);
 
-		g_hash_table_insert (details->hash_of_editor_node_to_child_insertion_area,
+		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
 				     editor_node,
 				     vcomposer);
 	}
@@ -1279,7 +1269,6 @@ static void
 destroy_areas(CongEditorWidget3 *widget,
 	      CongNodePtr node)
 {
-	CongEditorWidget3Details *details = GET_DETAILS(widget);
 	CongEditorNode *editor_node;
 	CongEditorArea *this_area;
 	CongEditorArea *parent_insertion_area;
@@ -1297,7 +1286,7 @@ destroy_areas(CongEditorWidget3 *widget,
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node);
 
-	this_area = g_hash_table_lookup (details->hash_of_editor_node_to_primary_area,
+	this_area = g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
 					 editor_node);
 
 	if (node->parent) {
@@ -1305,17 +1294,17 @@ destroy_areas(CongEditorWidget3 *widget,
 												       editor_node);
 	} else {
 		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-		parent_insertion_area = details->root_area;
+		parent_insertion_area = PRIVATE(widget)->root_area;
 	}
 	
 	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (parent_insertion_area),
 						 this_area);
 
-	g_hash_table_remove (details->hash_of_editor_node_to_primary_area,
+	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
 			     editor_node);
-	g_hash_table_remove (details->hash_of_editor_node_to_parent_insertion_area,
+	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
 			     editor_node);
-	g_hash_table_remove (details->hash_of_editor_node_to_child_insertion_area,
+	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
 			     editor_node);
 
 #if 0
@@ -1328,14 +1317,10 @@ CongEditorArea*
 cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
 						      CongEditorNode *editor_node)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	details = GET_DETAILS(widget);
-
-	return g_hash_table_lookup (details->hash_of_editor_node_to_primary_area,
+	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
 				    editor_node);
 }
 
@@ -1343,14 +1328,10 @@ CongEditorArea*
 cong_editor_widget3_get_parent_insertion_area_for_editor_node (CongEditorWidget3 *widget,
 							       CongEditorNode *editor_node)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	details = GET_DETAILS(widget);
-
-	return g_hash_table_lookup (details->hash_of_editor_node_to_parent_insertion_area,
+	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
 				    editor_node);
 }
 
@@ -1358,13 +1339,9 @@ CongEditorArea*
 cong_editor_widget3_get_child_insertion_area_for_editor_node (CongEditorWidget3 *widget,
 							      CongEditorNode *editor_node)
 {
-	CongEditorWidget3Details *details;
-
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	details = GET_DETAILS(widget);
-
-	return g_hash_table_lookup (details->hash_of_editor_node_to_child_insertion_area,
+	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
 				    editor_node);
 }

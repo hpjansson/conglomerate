@@ -28,8 +28,35 @@
 G_BEGIN_DECLS
 
 /* Third attempt at an editor widget: */
-typedef GtkDrawingArea CongEditorWidget3;
-#define CONG_EDITOR_WIDGET3(x) ((CongEditorWidget3*)(x))
+#define CONG_EDITOR_WIDGET3_TYPE	 (cong_editor_widget3_get_type ())
+#define CONG_EDITOR_WIDGET3(obj)         G_TYPE_CHECK_INSTANCE_CAST (obj, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3)
+#define CONG_EDITOR_WIDGET3_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_WIDGET3_TYPE, CongEditorWidget3Class)
+#define IS_CONG_EDITOR_WIDGET3(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_WIDGET3_TYPE)
+
+typedef struct CongEditorWidget3 CongEditorWidget3;
+typedef struct CongEditorWidget3Class CongEditorWidget3Class;
+typedef struct CongEditorWidget3Details CongEditorWidget3Details;
+
+struct CongEditorWidget3
+{
+	GtkDrawingArea drawing_area;
+
+	CongEditorWidget3Details *private;
+};
+
+struct CongEditorWidget3Class
+{
+	GtkDrawingAreaClass klass;
+
+	/* Methods? */
+};
+
+GType
+cong_editor_widget_get_type (void);
+
+CongEditorWidget3*
+cong_editor_widget_construct (CongEditorWidget3 *editor_widget,
+			      CongDocument *doc);
 
 GtkWidget*
 cong_editor_widget3_new(CongDocument *doc);

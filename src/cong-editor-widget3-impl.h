@@ -63,12 +63,6 @@ cong_editor_element_generate_areas (CongEditorNode *editor_node,
 void cong_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 #endif
 
-typedef struct CongEditorWidget3Details CongEditorWidget3Details;
-
-/* Macro for getting details of a widget; this will eventually be a simple field lookup */
-#define GET_DETAILS(editor_widget) ((CongEditorWidget3Details*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
-
-
 /* Methods on CongEditorNode: */
 typedef void 
 (*CongEditorAreaCallback) (CongEditorArea *area,

@@ -1,5 +1,9 @@
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget.h, cong-editor-widget3-impl.h, cong-editor-widget3.c
+
+	Made the new editor widget be a genuine subclass of GtkDrawingArea, rather than a hack
+
 	* cong-editor-node-text.c
 
 	Improved a cast
