@@ -1,5 +1,9 @@
 2004-06-20  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+        * configure.in: Post-release version bump to 0.7.14
+
+	--- 0.7.13 ---
+	
 	* configure.in: Added requirement for GTK 2.4.0 or later
 
 2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
