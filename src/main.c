@@ -282,7 +282,7 @@ void gui_window_main_make()
 																	 &style->bg[GTK_STATE_NORMAL],
 																	 (gchar **) ilogo_xpm);
 	logo = gtk_pixmap_new(p, mask);
-	gtk_box_pack_start(GTK_BOX(w1), logo, FALSE, TRUE, 4);
+	gtk_box_pack_start(GTK_BOX(w1), logo, FALSE, TRUE, 0);
 	gtk_widget_show(logo);
 
 	/* --- Main window -> hpane --- */

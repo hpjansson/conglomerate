@@ -46,6 +46,17 @@ The other is by using the GUI open dialogs. The readme example used above is
 located in the examples directory, from the package root.
 
 
+Using
+-----
+
+Very basic. Try marking some text and right-clicking. The selection field
+will be yellow for legal tag insertion points, and red-ish wherever insertion
+is disallowed to promote proper tag nesting.
+
+You can also right-click items in the left-hand treeview and see what
+happens.
+
+
 Contact
 -------
 
