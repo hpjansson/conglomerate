@@ -1,4 +1,6 @@
 # translation of es.po to 
+# translation of es.po to
+# translation of es.po to
 # traducción de es.po al Spanish
 # translation of es.po to Spanish
 # translation of conglomerate.HEAD.po to Spanish
@@ -14,7 +16,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-11-07 20:57+0100\n"
-"PO-Revision-Date: 2004-11-07 21:37+0100\n"
+"PO-Revision-Date: 2004-11-18 19:20+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2464,12 +2466,12 @@ msgstr "Importar archivo..."
 #: src/cong-file-new.c:169
 #, c-format
 msgid "Creating a new file (%s)"
-msgstr "Creando un archivo nuevo (%s)"
+msgstr "Crear un archivo nuevo (%s)"
 
 #: src/cong-file-new.c:595 src/cong-file-new.c:618 src/cong-file-new.c:626
 #: src/cong-file-new.c:643
 msgid "Creating a new file"
-msgstr "Creando un archivo nuevo"
+msgstr "Crear un archivo nuevo"
 
 #: src/cong-file-new.c:619
 msgid ""
@@ -3130,7 +3132,7 @@ msgstr "Capítulo sin título"
 
 #: src/plugin-docbook.c:307
 msgid "Text of the first chapter goes here"
-msgstr "El texto dep primer capítulo va aquí"
+msgstr "El texto del primer capítulo va aquí"
 
 #: src/plugin-docbook.c:326
 msgid "Untitled Book"
