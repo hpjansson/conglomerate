@@ -623,7 +623,7 @@ void stack_print(TTREE *t)
 
 void cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 
 	t = cong_layout_stack_top(layout_stack);
 #if DEBUG_STACK
@@ -678,7 +678,7 @@ void xed_stack_push(CongXMLEditor *xed, char *s, TTREE *x, int n)
 #if 1
 void cong_layout_stack_change_level_of_top_tag(CongLayoutStack *layout_stack, int lev)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 
 	t = cong_layout_stack_top(layout_stack);
 
@@ -698,7 +698,7 @@ void xed_stack_change_level_of_top_tag(CongXMLEditor *xed, int lev)
 #if 1
 void cong_layout_stack_elevate(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 	int i;
 
 	t = cong_layout_stack_top(layout_stack);
@@ -727,12 +727,12 @@ void xed_stack_elevate(CongXMLEditor *xed)
 #if 1
 void cong_layout_stack_compress(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 	int i;
 
 	t = cong_layout_stack_top(layout_stack);
 
-	for (i = 0; t; t = t->parent, i++) {
+	for (i = 0; t; t = cong_layout_stack_entry_below(t), i++) {
 		((int) *((int *) t->child->next->next->next->data)) = i;
 	}
 }
@@ -752,7 +752,7 @@ void xed_stack_compress(CongXMLEditor *xed)
 
 void cong_layout_stack_pop(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 
 	g_return_if_fail(layout_stack);
 
@@ -782,14 +782,14 @@ void xed_stack_pop(CongXMLEditor *xed)
 CongLayoutStackEntry*
 cong_layout_stack_top(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 
 	t = layout_stack->tags;
 	if (!t) {
 		return NULL;
 	}
 
-	for ( ; t->child->next->next->next->next; t = t->child->next->next->next->next) {
+	for ( ; cong_layout_stack_entry_next(t); t = cong_layout_stack_entry_next(t)) {
 		/* empty */
 	}
 	return(t);	
@@ -810,13 +810,13 @@ TTREE *xed_stack_top(CongXMLEditor *xed)
 #if 1
 int cong_layout_stack_depth(CongLayoutStack *layout_stack)
 {
-	TTREE *t;
+	CongLayoutStackEntry *t;
 	int d;
 	
 	t = layout_stack->tags;
 	if (!t) return(0);
 	
-	for (d = 1; t->child->next->next->next->next; t = t->child->next->next->next->next) {
+	for (d = 1; cong_layout_stack_entry_next(t); t = cong_layout_stack_entry_next(t)) {
 		d++;
 	}
 
@@ -838,6 +838,14 @@ int xed_stack_depth(CongXMLEditor *xed)
 	return(d);
 }
 #endif
+
+CongLayoutStackEntry*
+cong_layout_stack_entry_next(CongLayoutStackEntry *entry)
+{
+	g_return_val_if_fail(entry, NULL);
+
+	return entry->child->next->next->next->next;
+}
 
 CongLayoutStackEntry*
 cong_layout_stack_entry_below(CongLayoutStackEntry *entry)
@@ -965,7 +973,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, int mode)
 	xed->draw_pos_y = draw_pos_y;
 #endif
 	
-	for ( ; t && (int) *((int *) t->child->data) <= xed->draw_line; t = t->parent)
+	for ( ; t && cong_layout_stack_entry_get_line(t) <= xed->draw_line; t = cong_layout_stack_entry_below(t) )
 	{
 		x0 = 0;
 		x1 = xed->w->allocation.width;
@@ -1040,11 +1048,11 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, int mode)
 	draw_pos_y = xed->draw_pos_y + xed->f_desc + 3 + (xed->tag_height * draw_tag_lev);
 
 	t = cong_layout_stack_top(&xed->layout_stack);
-	line = (int) *((int *) t->child->data);
+	line = cong_layout_stack_entry_get_line(t);
 
 	if (line == xed->draw_line)  /* Opened on this line */
 	{
-		x0 = (int) *((int *) t->child->next->data);
+		x0 = cong_layout_stack_entry_get_pos_x(t);
 		x1 = xed->draw_pos_x;
 #if 0
 		printf("[Tag Draw] (%s) %d - %d.\n", t->data, x0, x1);

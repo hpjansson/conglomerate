@@ -1,6 +1,12 @@
 creating ChangeLog
 2002-10-09 David Malcolm
 
+	* xmledit.c
+
+	More work on the stack code.
+	
+2002-10-09 David Malcolm
+
 	* global.h, xmledit.c
 
 	Started moving the stack code into a separate special-purpose data structure.
