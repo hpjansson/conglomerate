@@ -529,6 +529,21 @@ cong_util_get_int_from_rgb_hex (const gchar *string)
 	return(col);
 }
 
+
+gboolean
+cong_util_ns_equality (const xmlNs *xml_ns1,
+		       const xmlNs *xml_ns2)
+{
+	if (xml_ns1 == NULL && xml_ns2 == NULL)
+		return TRUE;
+
+	if (xml_ns1 == NULL || xml_ns2 == NULL)
+		return FALSE;
+
+	return cong_util_ns_uri_equality (xml_ns1->href, 
+					  xml_ns2->href);
+}
+
 gboolean
 cong_util_ns_uri_equality (const gchar* uri0, 
 			   const gchar* uri1)

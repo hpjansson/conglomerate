@@ -53,8 +53,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -182,7 +182,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	/* UNWRITTEN */
 }
 
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value)
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value)
 {
 	CongAdvancedNodePropertiesView *properties_view;
 
@@ -201,7 +201,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 			      &properties_view->raw_attr);
 }
 
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name)
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name)
 {
 	CongAdvancedNodePropertiesView *properties_view;
 
@@ -330,21 +330,23 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 	gchar *qualified_attr_name = get_attr_name_for_tree_path(view, path);
 
 	const char *local_name;
-	xmlNs *namespace = cong_node_get_attr_namespace(view->node, 
+	xmlNs *ns_ptr = cong_node_get_attr_ns(view->node, 
 							qualified_attr_name,
 							&local_name);
 	const char *new_local_name;
-	xmlNs *new_namespace = cong_node_get_attr_namespace(view->node, 
+	xmlNs *new_ns_ptr = cong_node_get_attr_ns(view->node, 
 							    new_text,
 							    &new_local_name);
 
 	gchar *attr_value = cong_node_get_attribute(view->node, 
-						    namespace,
+						    ns_ptr,
 						    local_name);
 
 	g_message("on_name_edited");
 
-	if(new_namespace == NULL && new_local_name != new_text) {
+	/* ##FIXME: Add name check for qualified attribute name  */
+
+	if(new_ns_ptr == NULL && new_local_name != new_text) {
 		/* new unknown namespace */
 		gchar *msg = g_strdup_printf ("Creation of new namespace for attribute \"%s\"", 
 					      new_text);
@@ -364,7 +366,7 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 
 
 	/* Ignore if the node already has an attribute of that name: */
-	if (!cong_node_has_attribute(view->node, new_namespace, new_local_name)) {
+	if (!cong_node_has_attribute(view->node, new_ns_ptr, new_local_name)) {
 		CongDocument *doc = cong_view_get_document(CONG_VIEW(view));
 
 		gchar *desc = g_strdup_printf(_("Rename attribute \"%s\" as \"%s\""),
@@ -377,11 +379,11 @@ static void on_name_edited(GtkCellRendererText *cellrenderertext,
 
 		cong_command_add_node_remove_attribute (cmd,
 							view->node,
-							namespace,
+							ns_ptr,
 							local_name);
 		cong_command_add_node_set_attribute (cmd,
 						     view->node,
-						     new_namespace,
+						     new_ns_ptr,
 						     new_local_name,
 						     attr_value);
 		cong_document_end_command (doc,
@@ -403,7 +405,7 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 	CongAdvancedNodePropertiesView *view = user_data;
 	gchar* qualified_name = get_attr_name_for_tree_path(view, path);
 	const char *local_name;
-	xmlNs *namespace = cong_node_get_attr_namespace(view->node, 
+	xmlNs *ns_ptr = cong_node_get_attr_ns(view->node, 
 							qualified_name,
 							&local_name);
 
@@ -422,7 +424,7 @@ static void on_value_edited(GtkCellRendererText *cellrenderertext,
 
 		cong_command_add_node_set_attribute (cmd,
 						     view->node,
-						     namespace,
+						     ns_ptr,
 						     local_name,
 						     new_text);
 		cong_document_end_command (doc,
@@ -490,7 +492,7 @@ static void on_delete_attribute(GtkButton *button,
                                              &iter)) {
 		char *qualified_name = get_attr_name_for_tree_iter(view, &iter);
 		const char *local_name;
-		xmlNs *namespace = cong_node_get_attr_namespace(view->node, 
+		xmlNs *ns_ptr = cong_node_get_attr_ns(view->node, 
 								qualified_name,
 								&local_name);
 
@@ -503,7 +505,7 @@ static void on_delete_attribute(GtkButton *button,
 
 		cong_command_add_node_remove_attribute (cmd,
 							view->node,
-							namespace,
+							ns_ptr,
 							local_name);
 		cong_document_end_command (doc,
 					   cmd);

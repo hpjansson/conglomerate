@@ -70,7 +70,7 @@ CongAttributeEditor*
 cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *attribute_editor_enumeration,
 					     CongDocument *doc,
 					     CongNodePtr node,
-					     xmlNs *namespace,
+					     xmlNs *ns_ptr,
 					     const gchar *attribute_name,
 					     xmlAttributePtr attr)
 {
@@ -81,7 +81,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 	cong_attribute_editor_construct (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
 					 doc,
 					 node,
-					 namespace,
+					 ns_ptr,
 					 attribute_name,
 					 attr);
 	/* Build widgetry: */
@@ -122,7 +122,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,
-				       xmlNs *namespace,
+				       xmlNs *ns_ptr,
 				       const gchar *attribute_name,
 				       xmlAttributePtr attr)
 {
@@ -130,7 +130,7 @@ cong_attribute_editor_enumeration_new (CongDocument *doc,
 			   (g_object_new (CONG_ATTRIBUTE_EDITOR_ENUMERATION_TYPE, NULL),
 			    doc,
 			    node,
-			    namespace,
+			    ns_ptr,
 			    attribute_name,
 			    attr));			   
 }
@@ -159,7 +159,7 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 	CongDocument *doc = cong_attribute_editor_get_document (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 	CongNodePtr node = cong_attribute_editor_get_node (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 	xmlAttributePtr attr = cong_attribute_editor_get_attribute (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
-	xmlNs *namespace = cong_attribute_editor_get_namespace (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
+	xmlNs *ns_ptr = cong_attribute_editor_get_ns (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 
 	GtkMenuItem *selected_menu_item;
 	const gchar *new_attr_value;
@@ -193,13 +193,13 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 		if (new_attr_value) {
 			cong_command_add_node_set_attribute (cmd, 
 							     node, 
-							     namespace,
+							     ns_ptr,
 							     attr->name, 
 							     new_attr_value);
 		} else {
 			cong_command_add_node_remove_attribute (cmd, 
 								node, 
-								namespace,
+								ns_ptr,
 								attr->name);
 		}
 

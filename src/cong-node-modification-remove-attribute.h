@@ -60,13 +60,13 @@ CongNodeModificationRemoveAttribute*
 cong_node_modification_remove_attribute_construct (CongNodeModificationRemoveAttribute *node_modification_remove_attribute,
 						   CongDocument *doc,
 						   CongNodePtr node,
-						   xmlNs *namespace,
+						   xmlNs *ns_ptr,
 						   const gchar *name);
 
 CongModification*
 cong_node_modification_remove_attribute_new (CongDocument *doc,
 					     CongNodePtr node,
-					     xmlNs *namespace,
+					     xmlNs *ns_ptr,
 					     const gchar *name);
 
 G_END_DECLS

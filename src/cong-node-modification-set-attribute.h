@@ -60,7 +60,7 @@ CongNodeModificationSetAttribute*
 cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute *node_modification_set_attribute,
 						CongDocument *doc,
 						CongNodePtr node,
-						xmlNs *namespace,
+						xmlNs *ns_ptr,
 						const xmlChar *name, 
 						const xmlChar *value);
      
@@ -68,7 +68,7 @@ cong_node_modification_set_attribute_construct (CongNodeModificationSetAttribute
 CongModification*
 cong_node_modification_set_attribute_new (CongDocument *doc,
 					  CongNodePtr node,
-					  xmlNs *namespace,
+					  xmlNs *ns_ptr,
 					  const xmlChar *name, 
 					  const xmlChar *value);
 

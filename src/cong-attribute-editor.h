@@ -62,7 +62,7 @@ CongAttributeEditor*
 cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 				 CongDocument *doc,
 				 CongNodePtr node,
-				 xmlNs *namespace,
+				 xmlNs *ns_ptr,
 				 const gchar *attribute_name,
 				 xmlAttributePtr attr);
 
@@ -77,7 +77,7 @@ xmlAttributePtr
 cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor);
 
 xmlNs *
-cong_attribute_editor_get_namespace (CongAttributeEditor *attribute_editor);
+cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor);
 
 const gchar*
 cong_attribute_editor_get_attribute_name (CongAttributeEditor *attribute_editor);
@@ -96,48 +96,48 @@ cong_attribute_editor_new (CongDocument *doc,
 GtkWidget*
 cong_attribute_editor_id_new (CongDocument *doc,
 			      CongNodePtr node,
-			      xmlNs *namespace,
+			      xmlNs *ns_ptr,
 			      const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_idref_new (CongDocument *doc,
 				 CongNodePtr node,
-				 xmlNs *namespace,
+				 xmlNs *ns_ptr,
 				 const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_idrefs_new (CongDocument *doc,
 				  CongNodePtr node,
-				  xmlNs *namespace,
+				  xmlNs *ns_ptr,
 				  const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_entity_new (CongDocument *doc,
 				  CongNodePtr node,
-				  xmlNs *namespace,
+				  xmlNs *ns_ptr,
 				  const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_entities_new (CongDocument *doc,
 				    CongNodePtr node,
-				    xmlNs *namespace,
+				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_nmtoken_new (CongDocument *doc,
 				   CongNodePtr node,
-				   xmlNs *namespace,
+				   xmlNs *ns_ptr,
 				   const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_nmtokens_new (CongDocument *doc,
 				    CongNodePtr node,
-				    xmlNs *namespace,
+				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
 GtkWidget*
 cong_attribute_editor_enumeration_new (CongDocument *doc,
 				       CongNodePtr node,
-				       xmlNs *namespace,
+				       xmlNs *ns_ptr,
 				       const gchar *attribute_name,
 				       xmlAttributePtr attr);
 GtkWidget*
 cong_attribute_editor_notation_new (CongDocument *doc,
 				    CongNodePtr node,
-				    xmlNs *namespace,
+				    xmlNs *ns_ptr,
 				    const gchar *attribute_name);
 
 /* Glade hooks for various attribute types: */
@@ -161,7 +161,7 @@ void
 cong_bind_radio_button (GtkRadioButton *radio_button,
 			CongDocument *doc,
 			CongNodePtr node,
-			xmlNs *namespace,
+			xmlNs *ns_ptr,
 			const gchar *attribute_name,
 			const gchar *attribute_value);
 
@@ -170,7 +170,7 @@ void
 cong_bind_check_button (GtkCheckButton *check_button,
 			CongDocument *doc,
 			CongNodePtr node,
-			xmlNs *namespace,
+			xmlNs *ns_ptr,
 			const gchar *attribute_name,
 			const gchar *attribute_value_unchecked,
 			const gchar *attribute_value_checked);

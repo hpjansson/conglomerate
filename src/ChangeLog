@@ -1,3 +1,9 @@
+2004-03-03  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-attribute-editor-cdata.c, cong-attribute-editor-cdata.h, cong-attribute-editor-enumeration.c, cong-attribute-editor-enumeration.h, cong-attribute-editor.c, cong-attribute-editor.h, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, cong-command.c, cong-command.h, cong-debug-log-view.c, cong-document.c, cong-document.h, cong-location.c, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-source-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cong-view.h
+	
+	Big patch by Johannes Hölzl <johannes.hoelzl@gmx.de> slightly reworked by me that: renames variable to fit naming convention, adds some namespace tests, added cong_util_ns_equality function
+
 2004-03-02  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* gxx-impl-object-to-xml-tree.c

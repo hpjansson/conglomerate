@@ -195,6 +195,21 @@ cong_util_draw_blended_line (GtkWidget *w,
 unsigned int
 cong_util_get_int_from_rgb_hex (const gchar *string);
 
+
+/**
+ * cong_util_ns_equality
+ *
+ * @xml_ns1: A namespace. Can be NULL.
+ * @xml_ns2: Another namespace. Can be NULL.
+ *
+ * Compares the namespace URIs of both namespaces. 
+ * The prefixes are not checked. If both are NULL
+ * they are also equal.
+ */
+gboolean 
+cong_util_ns_equality (const xmlNs *xml_ns1,
+		       const xmlNs *xml_ns2);
+
 /**
  * cong_util_ns_uri_equality:
  * 

@@ -30,6 +30,7 @@
 #include "cong-attribute-wrapper-radio-button.h"
 #include "cong-attribute-wrapper-check-button.h"
 #include "cong-eel.h"
+#include "cong-util.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -38,7 +39,7 @@ struct CongAttributeEditorDetails
 {
 	CongDocument *doc;
 	CongNodePtr node;
-	xmlNs *namespace;
+	xmlNs *ns_ptr;
 	gchar *attribute_name;
 	xmlAttributePtr attr; /* can be NULL */
 
@@ -56,14 +57,14 @@ dispose (GObject *object);
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
-		  const xmlNs *namespace,
+		  const xmlNs *ns_ptr,
 		  const xmlChar *name, 
 		  const xmlChar *value, 
 		  CongAttributeEditor *attribute_editor);
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
-		     const xmlNs *namespace, 
+		     const xmlNs *ns_ptr, 
 		     const xmlChar *name,
 		     CongAttributeEditor *attribute_editor);
 
@@ -105,7 +106,7 @@ CongAttributeEditor*
 cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 				 CongDocument *doc,
 				 CongNodePtr node,
-				 xmlNs *namespace,
+				 xmlNs *ns_ptr,
 				 const gchar *attribute_name,
 				 xmlAttributePtr attr)
 {
@@ -118,7 +119,7 @@ cong_attribute_editor_construct (CongAttributeEditor *attribute_editor,
 	PRIVATE(attribute_editor)->attribute_name = g_strdup(attribute_name); /* FIXME: need to release */
 	PRIVATE(attribute_editor)->attr = attr;
 
-	PRIVATE(attribute_editor)->namespace = namespace;
+	PRIVATE(attribute_editor)->ns_ptr = ns_ptr;
 
 	PRIVATE(attribute_editor)->handler_id_node_set_attribute = g_signal_connect_after (G_OBJECT(doc),
 											   "node_set_attribute",
@@ -158,11 +159,11 @@ cong_attribute_editor_get_attribute (CongAttributeEditor *attribute_editor)
 }
 
 xmlNs *
-cong_attribute_editor_get_namespace (CongAttributeEditor *attribute_editor)
+cong_attribute_editor_get_ns (CongAttributeEditor *attribute_editor)
 {
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
 
-	return PRIVATE(attribute_editor)->namespace;	
+	return PRIVATE(attribute_editor)->ns_ptr;	
 }
 
 const gchar*
@@ -179,7 +180,7 @@ cong_attribute_editor_get_attribute_value (CongAttributeEditor *attribute_editor
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor), NULL);
 
 	return cong_node_get_attribute (PRIVATE(attribute_editor)->node, 
-					PRIVATE(attribute_editor)->namespace,
+					PRIVATE(attribute_editor)->ns_ptr,
 					PRIVATE(attribute_editor)->attribute_name);
 }
 
@@ -188,7 +189,7 @@ cong_attribute_editor_new (CongDocument *doc,
 			   CongNodePtr node,
 			   xmlAttributePtr attr)
 {
-	xmlNs *namespace;
+	xmlNs *ns_ptr;
 
 	g_return_val_if_fail (doc, NULL);
 	g_return_val_if_fail (node, NULL);
@@ -196,9 +197,9 @@ cong_attribute_editor_new (CongDocument *doc,
 
 	/* ##FIXME: is this the right way? */
 	if(attr->prefix != NULL) {
-		namespace = cong_node_get_ns_for_prefix(node, attr->prefix);
+		ns_ptr = cong_node_get_ns_for_prefix(node, attr->prefix);
 	} else {
-		namespace = NULL;
+		ns_ptr = NULL;
 	}
 
 	switch (attr->atype) {
@@ -206,7 +207,7 @@ cong_attribute_editor_new (CongDocument *doc,
 	case XML_ATTRIBUTE_CDATA:
 		return cong_attribute_editor_cdata_new (doc,
 							node,
-						        namespace,
+						        ns_ptr,
 							attr->name,
 							attr);
 	case XML_ATTRIBUTE_ID:
@@ -240,7 +241,7 @@ cong_attribute_editor_new (CongDocument *doc,
 	case XML_ATTRIBUTE_ENUMERATION:
 		return cong_attribute_editor_enumeration_new (doc,
 							      node,
-							      namespace,
+							      ns_ptr,
 							      attr->name,
 							      attr);
 	case XML_ATTRIBUTE_NOTATION:
@@ -268,18 +269,16 @@ create_cdata_editor (GladeXML *xml,
 #if 1
 	/* for some reason, the string1 stuff is coming through in func_name on my machine: */
 
-	/* FIXME: is there a better way to transmit the namespace?
-	 * The prefix is currently probably simpel kicked out,
-	 * because there is no namespace with the prefix availible. Or?*/
+	/* FIXME: Should we store the namespace URI somewhere or is the prefix enough. */
 
 	const char *local_name;
-	xmlNs *namespace = cong_node_get_attr_namespace(global_glade_node_ptr,
-							func_name,
-							&local_name);
+	xmlNs *ns_ptr = cong_node_get_attr_ns(global_glade_node_ptr,
+					      func_name,
+					      &local_name);
 
 	custom_widget = cong_attribute_editor_cdata_new (global_glade_doc_ptr, 
 							 global_glade_node_ptr, 
-							 namespace,
+							 ns_ptr,
 							 local_name,
 							 NULL);
 #else
@@ -300,13 +299,13 @@ void
 cong_bind_radio_button (GtkRadioButton *radio_button,
 			CongDocument *doc,
 			CongNodePtr node,
-			xmlNs *namespace,
+			xmlNs *ns_ptr,
 			const gchar *attribute_name,
 			const gchar *attribute_value)
 {
 	CongAttributeWrapperRadioButton* wrapper = cong_attribute_wrapper_radio_button_new ( doc,
 											     node,
-											     namespace,
+											     ns_ptr,
 											     attribute_name,
 											     NULL,
 											     radio_button,
@@ -320,14 +319,14 @@ void
 cong_bind_check_button (GtkCheckButton *check_button,
 			CongDocument *doc,
 			CongNodePtr node,
-			xmlNs *namespace,
+			xmlNs *ns_ptr,
 			const gchar *attribute_name,
 			const gchar *attribute_value_unchecked,
 			const gchar *attribute_value_checked)
 {
 	CongAttributeWrapperCheckButton* wrapper = cong_attribute_wrapper_check_button_new ( doc,
 											     node,
-											     namespace,
+											     ns_ptr,
 											     attribute_name,
 											     NULL,
 											     check_button,
@@ -374,17 +373,16 @@ dispose (GObject *object)
 static void
 on_set_attribute (CongDocument *doc, 
 		  CongNodePtr node, 
-		  const xmlNs *namespace, 
+		  const xmlNs *ns_ptr, 
 		  const xmlChar *name, 
 		  const xmlChar *value, 
 		  CongAttributeEditor *attribute_editor)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));
 
-	/* FIXME: this seems to ignore the "namespace" parameter */
-
 	if (node == cong_attribute_editor_get_node (attribute_editor)) {
-		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
+		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor)) &&
+		    cong_util_ns_equality (ns_ptr, cong_attribute_editor_get_ns (attribute_editor))) {
 			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,
 					      attribute_editor,
 					      set_attribute_handler, 
@@ -396,16 +394,15 @@ on_set_attribute (CongDocument *doc,
 static void
 on_remove_attribute (CongDocument *doc, 
 		     CongNodePtr node, 
-		     const xmlNs *namespace, 
+		     const xmlNs *ns_ptr, 
 		     const xmlChar *name,
 		     CongAttributeEditor *attribute_editor)
 {
 	g_return_if_fail (IS_CONG_ATTRIBUTE_EDITOR(attribute_editor));
 
-	/* FIXME: this seems to ignore the "namespace" parameter */
-
 	if (node == cong_attribute_editor_get_node (attribute_editor)) {
-		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor))) {
+		if (0 == strcmp(name, cong_attribute_editor_get_attribute_name (attribute_editor)) &&
+		    cong_util_ns_equality (ns_ptr, cong_attribute_editor_get_ns (attribute_editor))) {
 			CONG_EEL_CALL_METHOD (CONG_ATTRIBUTE_EDITOR_CLASS,
 					      attribute_editor,
 					      remove_attribute_handler,

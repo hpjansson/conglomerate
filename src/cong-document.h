@@ -88,13 +88,13 @@ struct CongDocumentClass
 
 	void (*node_set_attribute) (CongDocument *doc, 
 				    CongNodePtr node, 
-				    xmlNs *namespace,
+				    xmlNs *ns_ptr,
 				    const xmlChar *name, 
 				    const xmlChar *value);
 
 	void (*node_remove_attribute) (CongDocument *doc, 
 				       CongNodePtr node, 
-				       xmlNs *namespace,
+				       xmlNs *ns_ptr,
 				       const xmlChar *name);
 	
 	void (*selection_change) (CongDocument *doc);
@@ -341,8 +341,8 @@ void cong_document_private_node_add_before(CongDocument *doc, CongNodePtr node, 
 void cong_document_private_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
 void cong_document_private_tag_remove(CongDocument *doc, CongNodePtr x);
-void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node,  xmlNs *namespace, const xmlChar *name, const xmlChar *value);
-void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *namespace, const xmlChar *name);
+void cong_document_private_node_set_attribute(CongDocument *doc, CongNodePtr node,  xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
+void cong_document_private_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
 void cong_document_private_on_selection_change(CongDocument *doc);
 void cong_document_private_on_cursor_change(CongDocument *doc);
 void 

@@ -47,10 +47,10 @@ static void
 cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
 
 static void
-cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value);
+cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
 
 static void
-cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *namespace, const xmlChar *name);
+cong_document_handle_node_remove_attribute(CongDocument *doc, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
 
 static void
 cong_document_handle_selection_change(CongDocument *doc);
@@ -1045,7 +1045,7 @@ void cong_document_private_node_set_text(CongDocument *doc, CongNodePtr node, co
 
 void cong_document_private_node_set_attribute(CongDocument *doc, 
 					      CongNodePtr node, 
-					      xmlNs *namespace,
+					      xmlNs *ns_ptr,
 					      const xmlChar *name, 
 					      const xmlChar *value)
 {
@@ -1064,14 +1064,14 @@ void cong_document_private_node_set_attribute(CongDocument *doc,
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_SET_ATTRIBUTE], 0,
 		       node,
-		       namespace,
+		       ns_ptr,
 		       name,
 		       value);
 }
 
 void cong_document_private_node_remove_attribute(CongDocument *doc, 
 						 CongNodePtr node, 
-						 xmlNs *namespace,
+						 xmlNs *ns_ptr,
 						 const xmlChar *name)
 {
 	g_return_if_fail(doc);
@@ -1088,7 +1088,7 @@ void cong_document_private_node_remove_attribute(CongDocument *doc,
 	g_signal_emit (G_OBJECT(doc),
 		       signals[NODE_REMOVE_ATTRIBUTE], 0,
 		       node,
-		       namespace,
+		       ns_ptr,
 		       name);
 }
 
@@ -1921,7 +1921,7 @@ cong_document_handle_node_set_text(CongDocument *doc, CongNodePtr node, const xm
 static void
 cong_document_handle_node_set_attribute(CongDocument *doc, 
 					CongNodePtr node, 
-					xmlNs *namespace,
+					xmlNs *ns_ptr,
 					const xmlChar *name, 
 					const xmlChar *value)
 {
@@ -1945,14 +1945,14 @@ cong_document_handle_node_set_attribute(CongDocument *doc,
 			view->klass->on_document_node_set_attribute(view, 
 								    TRUE, 
 								    node, 
-								    namespace,
+								    ns_ptr,
 								    name, 
 								    value);
 		}
 	}
 
 	/* Make the change: */
-	cong_node_private_set_attribute(node, namespace, name, value);
+	cong_node_private_set_attribute(node, ns_ptr, name, value);
 
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
@@ -1963,7 +1963,7 @@ cong_document_handle_node_set_attribute(CongDocument *doc,
 			view->klass->on_document_node_set_attribute(view, 
 								    FALSE, 
 								    node, 
-								    namespace,
+								    ns_ptr,
 								    name, 
 								    value);
 		}
@@ -1975,7 +1975,7 @@ cong_document_handle_node_set_attribute(CongDocument *doc,
 static void
 cong_document_handle_node_remove_attribute(CongDocument *doc, 
 					   CongNodePtr node, 
-					   xmlNs *namespace,
+					   xmlNs *ns_ptr,
 					   const xmlChar *name)
 {
 	GList *iter;
@@ -1997,13 +1997,13 @@ cong_document_handle_node_remove_attribute(CongDocument *doc,
 			view->klass->on_document_node_remove_attribute(view, 
 								       TRUE, 
 								       node, 
-								       namespace,
+								       ns_ptr,
 								       name);
 		}
 	}
 
 	/* Make the change: */
-	cong_node_private_remove_attribute(node, namespace, name);
+	cong_node_private_remove_attribute(node, ns_ptr, name);
 
 	/* Notify listeners: */
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
@@ -2014,7 +2014,7 @@ cong_document_handle_node_remove_attribute(CongDocument *doc,
 			view->klass->on_document_node_remove_attribute(view, 
 								       FALSE, 
 								       node, 
-								       namespace,
+								       ns_ptr,
 								       name);
 		}
 	}

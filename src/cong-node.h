@@ -189,7 +189,7 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
 			     const gchar *prefix);
 
 /**
- * conf_node_get_attr_namespace:
+ * conf_node_get_attr_ns:
  *
  * @node: an XML element
  * @qualified_attr_name: An qualified attribute name with an optional namespace prefix.
@@ -203,9 +203,9 @@ cong_node_get_ns_for_prefix (CongNodePtr node,
  * Returns: A pointer to the namespace, can be NULL.
  */
 xmlNsPtr
-cong_node_get_attr_namespace(CongNodePtr node, 
-			     const char *qualified_name, 
-			     const char **output_name);
+cong_node_get_attr_ns(CongNodePtr node, 
+		      const char *qualified_name, 
+		      const char **output_name);
 
 /**
  * cong_node_get_path:
@@ -231,34 +231,34 @@ const gchar *cong_node_type_description(enum CongNodeType node_type);
  * cong_node_get_attribute
  *
  * @node: XML node which has the attribute.
- * @namespace: Attribute's namespace, can be NULL
- *             (if it is the default namespace it MUST NOT be NULL but the coresponding
- *              xmlNs).
+ * @ns_ptr: Attribute's namespace, can be NULL
+ *          (if it is the default namespace it MUST NOT be NULL but the coresponding
+ *          xmlNs).
  * @local_attribute_name: Name of the attribute, without namespace prefix.
  *
  * Returns the content of the attribute specified through @local_attribute_name and
- * @namespace.
+ * @ns_ptr.
  *
  * Returns: The content of the attribute, to be freed by the caller.
  *          Will be NULL if not found in node and no default in DTD available
  */
 CongXMLChar* cong_node_get_attribute(CongNodePtr node,
-				     xmlNs* namespace, 
+				     xmlNs* ns_ptr, 
 				     const CongXMLChar* local_attribute_name);
 /**
  * cong_node_has_attribute
  *
  * @node: XML node which has the attribute.
- * @namespace: Attribute's namespace, can be NULL
+ * @ns_ptr: Attribute's namespace, can be NULL
  *             (if it is the default namespace it MUST NOT be NULL but the coresponding
  *              xmlNs).
  * @local_attribute_name: Name of the attribute, without namespace prefix.
  *
  * Returns: Returns TRUE if the attribute specified through @local_attribute_name and
- *          @namespace is found in the node or as default in the DTD.
+ *          @ns_ptr is found in the node or as default in the DTD.
  */
 gboolean cong_node_has_attribute(CongNodePtr node,
-				 xmlNs* namespace, 
+				 xmlNs* ns_ptr, 
 				 const CongXMLChar* local_attribute_name);
 
 /* Selftest methods: */
@@ -371,11 +371,11 @@ void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
 void cong_node_private_set_attribute(CongNodePtr node,
-				     xmlNs *namespace, 
+				     xmlNs *ns_ptr, 
 				     const xmlChar *local_attribute_name,
 				     const xmlChar *value);
 void cong_node_private_remove_attribute(CongNodePtr node,
-					xmlNs *namespace, 
+					xmlNs *ns_ptr, 
 					const xmlChar *local_attribute_name);
 
 /* Utilities: */

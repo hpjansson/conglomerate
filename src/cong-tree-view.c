@@ -114,8 +114,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_change, C
 static void on_document_node_add_before(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, gboolean before_change, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, gboolean before_change, CongNodePtr node, const xmlChar *new_content);
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value);
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name);
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
@@ -721,7 +721,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_change, Co
 	}
 }
 
-static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name, const xmlChar *value)
+static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value)
 {
 	CongTreeView *cong_tree_view;
 
@@ -739,7 +739,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 	}
 }
 
-static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *namespace, const xmlChar *name)
+static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name)
 {
 	CongTreeView *cong_tree_view;
 

@@ -61,7 +61,7 @@ CongAttributeWrapper*
 cong_attribute_wrapper_construct (CongAttributeWrapper *attribute_wrapper,
 				  CongDocument *doc,
 				  CongNodePtr node,
-				  xmlNs *namespace,
+				  xmlNs *ns_ptr,
 				  const gchar *attribute_name,
 				  xmlAttributePtr attr);
 
@@ -76,7 +76,7 @@ xmlAttributePtr
 cong_attribute_wrapper_get_attribute (CongAttributeWrapper *attribute_wrapper);
 
 xmlNs *
-cong_attribute_wrapper_get_namespace (CongAttributeWrapper *attribute_wrapper);
+cong_attribute_wrapper_get_ns (CongAttributeWrapper *attribute_wrapper);
 
 const gchar*
 cong_attribute_wrapper_get_attribute_name (CongAttributeWrapper *attribute_wrapper);
