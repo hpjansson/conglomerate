@@ -1,3 +1,9 @@
+2004-03-08  David Hoover <karma@deadmoose.com>
+
+	* cong-dom-view.c, cong-error-dialog.c, cong-file-export.c, cong-file-properties.c
+
+	Fixes for Bug #122813; eliminate markup inside translated strings
+
 2004-03-02  Geert Stappers <stappers@stappers.nl>
 
 	* cong-primary-window.c, cong-util.c, plugin-admonition-node-element.c

@@ -248,7 +248,8 @@ cong_error_dialog_new_from_gerror(GtkWindow *toplevel_window,
 	secondary_text = g_strdup_printf(_("An error was reported whilst attempting the operation \"%s\""), 
 					 details
 					 );
-	technical_details = g_strdup_printf(_("A GError occurred; the error report was:\n<i>%s</i>"),
+	technical_details = g_strdup_printf("%s\n<i>%s</i>",
+					    _("A GError occurred; the error report was:"),
 					    error->message);
 	details_dialog = cong_error_dialog_new(toplevel_window,
 					       what_failed, 
@@ -297,7 +298,10 @@ cong_error_dialog_new_from_shell_command_failure_with_command_line(GtkWindow *pa
 							NULL));
 
 	/* Add upper content: */
-	why_failed = g_strdup_printf(_("An error occurred whilst running this system command:\n\n<tt>%s</tt>"),command_line);
+	why_failed = g_strdup_printf("%s\n<tt>%s</tt>",
+                                     _("An error occurred whilst running this system command:"),
+                                     command_line);
+
 	tertiary_text  = g_strdup_printf(_("The error number reported was %d.  Below is the error text that was output by the command."), exit_status);
 	content = cong_alert_content_new(GTK_STOCK_DIALOG_ERROR,
 					 what_failed, 

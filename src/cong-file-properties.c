@@ -176,16 +176,18 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 								       CONG_DOCUMENT_MODE_TYPE_DTD);
 		
 		if (model_dtd) {
+			gchar * text;
 			gtk_button_set_label (button_dtd,
 					      _("_Associate this DTD"));
 			set_dtd_info (dialog_details->xml,
 				      cong_external_document_model_get_public_id (model_dtd),
 				      cong_external_document_model_get_system_id (model_dtd));
 
-			gtk_label_set_markup ( label_dtd_notes,
-					       _("<small>The document does not specify an external DTD, but Conglomerate believes the above information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document.</small>"));
-			
-			
+			text = g_strdup_printf("<small>%s</small>",
+					       _("The document does not specify an external DTD, but Conglomerate believes the above information is appropriate.  Click on \"Associate this DTD\" to specify this information explicitly in the document."));
+					       
+			gtk_label_set_markup ( label_dtd_notes, text );
+			g_free(text);
 		} else {
 			set_dtd_info (dialog_details->xml,
 				      "",

@@ -152,14 +152,10 @@ static void setup_description(CongExportDialogDetails *dialog_details)
 
 	desc = cong_service_get_description(CONG_SERVICE(exporter));
 
-	if (desc) {
-		gchar * text = g_strdup_printf("<small>%s</small>", desc);
-		gtk_label_set_markup(dialog_details->description, text);
-		g_free(text);
-
-	} else {
-		gtk_label_set_markup(dialog_details->description, _("<small>(No description available)</small>"));
-	}
+	gchar * text = g_strdup_printf("<small>%s</small>", 
+                                       (desc ? desc : _("(No description available)")));
+	gtk_label_set_markup(dialog_details->description, text);
+	g_free(text);
 }
 
 static void on_exporter_selection_changed(GtkOptionMenu *optionmenu,
