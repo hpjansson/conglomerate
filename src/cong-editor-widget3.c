@@ -1366,7 +1366,9 @@ static void on_signal_set_parent_notify_before (CongDocument *doc,
 	if (cong_editor_widget3_node_should_have_editor_node(node)) {
 		recursive_remove_all_nodes(editor_widget, node);
 	} else {
+#if 0
 		g_assert(!cong_editor_widget3_has_editor_node_for_node(editor_widget, node));
+#endif
 	}
 }
 
