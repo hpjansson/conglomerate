@@ -1,3 +1,9 @@
+2004-08-30  Douglas Burke <dburke@cfa.harvard.edu>
+
+	* cong-attribute-editor-enumeration.c
+
+	Updated to use GtkComboBox rather than GtkOptionMenu.
+
 2004-08-27  Douglas Burke <dburke@cfa.harvard.edu>
 
 	* cong-attribute-editor-enumeration.c

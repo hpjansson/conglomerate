@@ -32,20 +32,21 @@
 
 struct CongAttributeEditorENUMERATIONDetails
 {
-	GtkWidget *option_menu;
-	GtkWidget *menu;
-	
+	GtkWidget *combo_box;
+	xmlAttributePtr attr_ptr;
+
 	guint handler_id_changed;
 };
 
+/* Internal function declarations: */
 static void
 set_attribute_handler (CongAttributeEditor *attribute_editor);
 static void
 remove_attribute_handler (CongAttributeEditor *attribute_editor);
 
 static void
-on_option_menu_changed (GtkOptionMenu *option_menu,
-			CongAttributeEditorENUMERATION *attribute_editor_enumeration);
+on_combo_box_changed (GtkComboBox *combo_box,
+		      CongAttributeEditorENUMERATION *attribute_editor_enumeration);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongAttributeEditorENUMERATION, 
@@ -90,7 +91,7 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 {
 	xmlEnumerationPtr enum_ptr;
 	gchar *attr_value;
-	guint enum_ctr = 0, enum_pos =0;
+	guint enum_ctr = 0, enum_pos = 0;
 
 	g_return_val_if_fail (IS_CONG_ATTRIBUTE_EDITOR_ENUMERATION(attribute_editor_enumeration), NULL);
 
@@ -100,47 +101,46 @@ cong_attribute_editor_enumeration_construct (CongAttributeEditorENUMERATION *att
 					 ns_ptr,
 					 attribute_name,
 					 attr);
-	/* Build widgetry: */
-	PRIVATE(attribute_editor_enumeration)->option_menu = gtk_option_menu_new();
-	PRIVATE(attribute_editor_enumeration)->menu = gtk_menu_new();
 
-	gtk_menu_shell_append (GTK_MENU_SHELL(PRIVATE(attribute_editor_enumeration)->menu), 
-			       gtk_menu_item_new_with_label(_("(unspecified)")));
+	/*
+	 * We store the xmlAttributePtr in the object so that we can access the values
+	 * from the on_combo_box_changed handler. An alternative implementation would
+	 * be to create a list of the enumerated values and store that in the object,
+	 * but that involves more work for a small speed gain
+	 */
+	PRIVATE(attribute_editor_enumeration)->attr_ptr = attr;
 
 	/* what is the current attribute setting? */
 	attr_value = cong_attribute_editor_get_attribute_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration));
 
+	/* Build widgetry: */
+	PRIVATE(attribute_editor_enumeration)->combo_box = gtk_combo_box_new_text();
+	
+	gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
+				   _("(unspecified)"));
+
 	for (enum_ptr=attr->tree, enum_ctr=1; enum_ptr; enum_ptr=enum_ptr->next, enum_ctr++) {
-		GtkWidget *menu_item = gtk_menu_item_new_with_label(enum_ptr->name);
-		
-		g_object_set_data (G_OBJECT(menu_item),
-				   "attr_value",
-				   (gpointer)enum_ptr->name);
-		
-		gtk_menu_shell_append(GTK_MENU_SHELL(PRIVATE(attribute_editor_enumeration)->menu), 
-				      menu_item);
+		gtk_combo_box_append_text (GTK_COMBO_BOX (PRIVATE(attribute_editor_enumeration)->combo_box),
+					   enum_ptr->name);
 
 		/* is this the value of the current attribute? */
 		if (cong_util_attribute_value_equality (attr_value,enum_ptr->name))
 			enum_pos = enum_ctr;
 	}
 	
-	gtk_option_menu_set_menu(GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu), 
-				 PRIVATE(attribute_editor_enumeration)->menu);
-	
-	/* Set the initial value of the menu (defaults to unspecified if not found) */
-	gtk_option_menu_set_history (GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu),
-				     enum_pos);
+	/* Set the initial value of the combo box (defaults to unspecified if not found) */
+	gtk_combo_box_set_active (GTK_COMBO_BOX(PRIVATE(attribute_editor_enumeration)->combo_box),
+				  enum_pos);
 
-	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->option_menu),
-				"changed",
-				G_CALLBACK(on_option_menu_changed),
-				attribute_editor_enumeration);
+	PRIVATE(attribute_editor_enumeration)->handler_id_changed = g_signal_connect_after (G_OBJECT(PRIVATE(attribute_editor_enumeration)->combo_box),
+											    "changed",
+											    G_CALLBACK(on_combo_box_changed),
+											    attribute_editor_enumeration);
 	
-	gtk_widget_show_all (PRIVATE(attribute_editor_enumeration)->option_menu);
+	gtk_widget_show_all (PRIVATE(attribute_editor_enumeration)->combo_box);
 
 	gtk_container_add (GTK_CONTAINER(attribute_editor_enumeration),
-			   GTK_WIDGET(PRIVATE(attribute_editor_enumeration)->option_menu));
+			   GTK_WIDGET(PRIVATE(attribute_editor_enumeration)->combo_box));
 
 	if (attr_value) {
 		g_free (attr_value);
@@ -189,20 +189,29 @@ remove_attribute_handler (CongAttributeEditor *attribute_editor)
 	CongAttributeEditorENUMERATION *attribute_editor_enumeration = CONG_ATTRIBUTE_EDITOR_ENUMERATION (attribute_editor);
 	
 	/* The initial item is the "unspecified" one: */
-	gtk_option_menu_set_history (GTK_OPTION_MENU(PRIVATE(attribute_editor_enumeration)->option_menu),
-				     0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(PRIVATE(attribute_editor_enumeration)->combo_box),
+				  0);
 }
 
 static void
-on_option_menu_changed (GtkOptionMenu *option_menu,
-			CongAttributeEditorENUMERATION *attribute_editor_enumeration)
+on_combo_box_changed (GtkComboBox *combo_box,
+		      CongAttributeEditorENUMERATION *attribute_editor_enumeration)
 {
-	GtkMenuItem *selected_menu_item;
-	const gchar *new_attr_value;
+	xmlEnumerationPtr enum_ptr;
+	gint selected, ctr;
 
-	selected_menu_item = cong_eel_option_menu_get_selected_menu_item (option_menu);
-	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
-					    "attr_value");
-	cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration), new_attr_value);
+	selected = gtk_combo_box_get_active (combo_box);
+	if (selected) {
+		enum_ptr = PRIVATE(attribute_editor_enumeration)->attr_ptr->tree;
+		for (ctr=1; ctr<selected; ctr++) {
+			enum_ptr = enum_ptr->next;
+		}
+		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
+						     enum_ptr->name);
+	} else {
+		/* this deletes the attribute */
+		cong_attribute_editor_try_set_value (CONG_ATTRIBUTE_EDITOR(attribute_editor_enumeration),
+						     NULL);
+	}
 }
 
