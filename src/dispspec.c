@@ -792,6 +792,15 @@ cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 }
 
 CongDispspecElement*
+cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node)
+{
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	return cong_dispspec_lookup_element(ds, cong_node_name(node));
+}
+
+CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds)
 {
 	g_return_val_if_fail(ds, NULL);

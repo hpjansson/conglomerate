@@ -101,7 +101,12 @@ cong_location_xml_frag_data_nice_split2(CongLocation *loc)
 void
 cong_location_insert_chars(CongLocation *loc, const char* s)
 {
+#if NEW_XML_IMPLEMENTATION
+	xmlChar *new_content;
+#else
 	TTREE *n;
+#endif
+
 	int len;
 
 	g_return_if_fail(cong_location_exists(loc));
@@ -110,9 +115,20 @@ cong_location_insert_chars(CongLocation *loc, const char* s)
 
 	len = strlen(s);
 
+	/* GREP FOR MVC */
+
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+	new_content = xmlStrndup(loc->tt_loc->content, loc->char_loc);
+	new_content = xmlStrcat(new_content, s); /* FIXME: xmlChar versus char */
+	new_content = xmlStrcat(new_content, loc->tt_loc->content+loc->char_loc); /* FIXME: pointer arithmetic will fail with UTF8 etc */
+
+	xmlNodeSetContent(loc->tt_loc, new_content);
+
+	xmlFree(new_content);
+
+	loc->char_loc += len;		
 #else	
+
 	n = loc->tt_loc->child;
 	n->data = realloc(n->data, (n->size + 1) + len);
 	
@@ -127,6 +143,8 @@ void
 cong_location_del_next_char(CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
+
+	/* GREP FOR MVC */
 
 #if NEW_XML_IMPLEMENTATION
 	g_assert(0);

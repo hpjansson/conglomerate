@@ -545,8 +545,8 @@ TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
 
 CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
-TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x);
-TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x);
+CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
+CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x);
 char *xml_fetch_clean_data(CongNodePtr x);
 
 TTREE *get_upper_section(TTREE *x);
@@ -613,6 +613,9 @@ cong_dispspec_type(CongDispspec *ds, const char* tagname);
 /* New API for getting at elements within a dispspec */
 CongDispspecElement*
 cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname);
+
+CongDispspecElement*
+cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node);
 
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds);

@@ -1,6 +1,12 @@
 creating ChangeLog
 2002-10-21 David Malcolm
 
+	* cong-location.c, dispspec.c, global.h, popup.c, xmldata.c
+
+	Further Flux->libxml2 porting; marking areas with GREP FOR MVC
+	
+2002-10-21 David Malcolm
+
 	* cong-document.c, global.h, main.c, open.c, xmlview.c
 
 	Enhancements to the tree view

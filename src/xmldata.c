@@ -214,8 +214,31 @@ char *xml_fetch_clean_data(CongNodePtr x)
 }
 
 
-TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x)
+CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x)
 {
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(x, NULL);
+
+#if NEW_XML_IMPLEMENTATION
+	if (cong_node_parent(x)) {
+
+		x = cong_node_parent(x);
+
+	} else {
+		return NULL;
+	}
+	
+	if (cong_node_type(x)==CONG_NODE_TYPE_ELEMENT) {
+		CongDispspecElement* element = cong_dispspec_lookup_node(ds, x);
+
+		if (element) {
+			if (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element)) {
+				return(x);
+			}
+		}
+	}
+
+#else
 	if (x->parent) x = x->parent;
 	else return(0);
 
@@ -225,12 +248,19 @@ TTREE *xml_inner_span_element(CongDispspec *ds, TTREE *x)
 	if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data))
 		return(x);
 
-	return(0);
+#endif
+
+	return NULL;
+
 }
 
 
-TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x)
+CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 {
+#if NEW_XML_IMPLEMENTATION
+	g_assert(0);
+	return NULL;
+#else
 	TTREE *n0 = 0;
 	
 	if (x->parent) x = x->parent;
@@ -253,15 +283,53 @@ TTREE *xml_outer_span_element(CongDispspec *ds, TTREE *x)
 	}
 
 	return(n0);
+#endif
 }
 
-
-void xml_tag_remove(TTREE *x)
+/*
+  Function to remove a node x from the tree; all its children become children of x's parents in the natural place in the tree.
+ */
+void xml_tag_remove(CongNodePtr x)
 {
-	TTREE *n0;
+	CongNodePtr n0;
+
+	g_return_if_fail(x);
+
+	/* GREP FOR MVC */
+
+#if NEW_XML_IMPLEMENTATION
+	n0 = cong_node_first_child(x);
+
+	if (n0) {
+		n0->prev = x->prev;
+	}
+
+	if (NULL==x->prev) {
+		x->parent->children = n0;
+	} else {
+		x->prev->next = n0;
+	}
+
+	for (; n0->next; n0 = n0->next) {
+		n0->parent = x->parent;
+	}
+	n0->parent = x->parent;
+
+	n0->next = x->next;
+	if (x->next) {
+		x->next->prev = n0;
+	} else {
+		x->parent->last = n0;
+	}
 	
-	if (!x) return;  /* He. */
-	
+	x->next = NULL;
+	x->prev = NULL;
+	x->parent = NULL;
+	x->children = NULL;
+	x->last = NULL;
+
+	xmlFreeNode(x);
+#else
 	n0 = x->child->child;
 	n0->prev = x->prev;
 	if (!x->prev) x->parent->child = n0;
@@ -276,6 +344,13 @@ void xml_tag_remove(TTREE *x)
 	x->next = 0;
 	x->prev = 0;
 	x->parent = 0;
-  if (x->child) x->child->child = 0;
+	if (x->child) x->child->child = 0;
 	ttree_branch_remove(x);
+#endif
 }
+
+
+
+
+
+
