@@ -123,6 +123,7 @@ conglomerate_SOURCES =      \
   cong-text-cache.h         \
   cong-traversal-node.h     \
   cong-tree-view.h          \
+  cong-ui-hooks.h           \
   cong-util.h               \
   cong-vfs.h                \
   cong-view.h               \

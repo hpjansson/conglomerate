@@ -1,5 +1,9 @@
 2004-02-11  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-ui-hooks.h, Makefile.am
+
+	New file
+
 	* popup.c
 
 	More tidying up
