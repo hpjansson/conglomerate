@@ -27,7 +27,7 @@ dispspec_DATA = \
 	$(dispspec_in_files:.xds.in=.xds)
 
 #INTLTOOL_XML_RULE assumes that the file extension is xml, not xds:
-%.xds:       %.xds.in       $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -x -u -c $(top_builddir)/po/.intltool-merge-cache
+%.xds:       %.xds.in       $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -x -c $(top_builddir)/po/.intltool-merge-cache
 
 #@INTLTOOL_XML_RULE@
 
@@ -37,6 +37,6 @@ dtddir 	 = $(datadir)/conglomerate/dtd
 dtd_DATA	= xds.dtd
 
 EXTRA_DIST = $(example_DATA)	\
-	$(dtd_DATA)	\
-	$(dispspec_DATA)			
+	$(dispspec_DATA)	\
+	$(dtd_DATA)
 
