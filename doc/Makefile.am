@@ -1,1 +1,2 @@
-SUBDIRS = devel C reference
+##  #124195 SUBDIRS = devel C reference
+SUBDIRS = devel C
