@@ -1,4 +1,8 @@
-Top line of ChangeLog $Revision$, update below this line.
+2004-08-19  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-edit-preferences.c: 
+
+	Fix crash due to double g_free of dialog_details on close; added Plugins tab to preferences dialog
 
 2004-08-19  Keith Sharp  <kms@passback.co.uk>
 
