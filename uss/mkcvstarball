@@ -22,8 +22,12 @@ else
     configure.in.tm > configure.in
 fi
 
+# don't spent time on the poor gtk-doc stuff
+mv doc/Makefile.am doc/Makefile.am.withGtkDoc
+sed -e 's/SUBDIRS = \(.*\)reference\(.*\)/SUBDIRS = \1 \2/' doc/Makefile.am.withGtkDoc > doc/Makefile.am
+
 # regenerate the makefile
-# (needed to create "pre" in the tarball name)
+# (needed to create "pre" in the tarball name and skipping doc/reference)
 ./autogen.sh
 
 # make the tarball and check it
@@ -39,6 +43,7 @@ for TM in ${TMPMOD}
 do
   mv ${TM}.tm ${TM}
 done
+mv doc/Makefile.am.withGtkDoc doc/Makefile.am
 
 # show the MD5 checksum of the fresh tarball
 md5sum $( ls -t *.tar.gz | head -1 )
