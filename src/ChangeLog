@@ -1,6 +1,6 @@
 2004-08-14  David Malcolm  <david@davemalcolm.demon.co.uk>
 
-	* cong-menus.c: 
+	* popup.c, cong-menus.c: 
 
 	Moved the Remove Span Tag submenu (but not its content) into the XML UI description
 
