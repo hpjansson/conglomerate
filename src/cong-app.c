@@ -112,6 +112,7 @@ cong_app_new(void)
 
 
 	/* Set up usage of GConf: */
+	g_type_init(); /* GSt: fix attempt on 119755 */
 	app->gconf_client = gconf_client_get_default();
 	gconf_client_add_dir (app->gconf_client,
 			      "/apps/conglomerate",
