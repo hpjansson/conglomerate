@@ -67,6 +67,7 @@ endif
 	dh_clean
 
 # apply patches only once and surely at a `make clean`
+# this could/should be done by 'dbs' or 'dpatch'
 patch-stamp: debian/patches/P00000patch-stamp
 	rm -f patch-stamp
 	pfs=`ls debian/patches/P*` ; \
