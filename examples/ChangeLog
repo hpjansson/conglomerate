@@ -1,5 +1,9 @@
 2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am
+
+	Added a custom rule (due to non-standard xds extension) that uses intltool to generate xds files from xds.in files
+	
 	* dispspec.xds.in, docbook.xds.in, forrest-document.xds.in, kernel-traffic-newsletter.xds.in, xhtml1-strict.xds.in
 
 	New files
