@@ -1,10 +1,10 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /* 
-   cong-dispspec-element-gxx.h
-   
-   This file will be included multiple times, with different results.
-*/
+ * cong-dispspec-element-gxx.h
+ *  
+ * This file will be included multiple times, with different results.
+ */
 
 GXX_STRUCT_BEGIN_ELEMENT_WITH_CONSTRUCTOR("element", CongDispspecElement, dispspec_element)
      GXX_STRUCT_ATTRIBUTE_ENUM("type", type, TRUE, CONG_ELEMENT_TYPE_UNKNOWN, type_numeration)
