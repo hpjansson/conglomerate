@@ -131,27 +131,20 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 	}
 
 	if (text_cache->strip_whitespace) {
-		gunichar *unichar_string;
-		glong num_chars;
 		gchar *dst;
-		int i;
+		const gchar *src = input_string;
 		gboolean last_char_was_space=FALSE;
  		CongTextCacheSpan *text_span;
 		int original_byte_offset_start_of_span = 0;
 		int stripped_byte_offset_start_of_span = 0;
-
 		
-		unichar_string = g_utf8_to_ucs4_fast(input_string,
-						     -1,
-						     &num_chars);
-
 		g_assert (NULL==text_cache->stripped_string);
-		text_cache->stripped_string = g_malloc((num_chars*8)+1);
+		text_cache->stripped_string = g_malloc((strlen(input_string)*8)+1);
 		
 		dst = text_cache->stripped_string;
 		
-		for (i=0;i<num_chars;i++) {
-			gunichar c = unichar_string[i];
+		while (*src) {			
+			gunichar c = g_utf8_get_char (src);
 			gboolean this_char_is_space = g_unichar_isspace(c);
 			
 			if (this_char_is_space) {
@@ -164,17 +157,17 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 					/* Add stuff to the list of spans */
 					text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 									      stripped_byte_offset_start_of_span,
-									      (i+1-original_byte_offset_start_of_span));
+									      (dst-text_cache->stripped_string) - stripped_byte_offset_start_of_span);
 					text_cache->list_of_span = g_list_append(text_cache->list_of_span, 
 										 text_span);
-					
+
 				}
 				
 			} else {
 				
 				if (last_char_was_space) {
 					/* We're starting what will be a new span; record where we've got to: */
-					original_byte_offset_start_of_span = i;
+					original_byte_offset_start_of_span = (src-input_string); 
 					stripped_byte_offset_start_of_span = (dst-text_cache->stripped_string);
 				}
 				
@@ -183,15 +176,15 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 			}
 			
 			last_char_was_space = this_char_is_space;
+
+			src = g_utf8_next_char(src);
 		}
-		
-		g_free(unichar_string);
 		
 		if (!last_char_was_space) {
 			/* Add stuff to the list of spans */
 			text_span = cong_text_cache_span_new (original_byte_offset_start_of_span,
 							      stripped_byte_offset_start_of_span,
-							      (i-original_byte_offset_start_of_span));
+							      (dst-text_cache->stripped_string) - stripped_byte_offset_start_of_span);
 			text_cache->list_of_span = g_list_append (text_cache->list_of_span, 
 								  text_span);
 		}
@@ -220,7 +213,20 @@ cong_text_cache_set_text (CongTextCache* text_cache,
 		g_message("stripped \"%s\" into \"%s\"", cleaned_input, cleaned_output);
 
 		g_free(cleaned_input);
-		g_free(cleaned_output);
+		g_free(cleaned_output);		
+	}
+	{
+		GList *iter;
+
+		for (iter = text_cache->list_of_span; iter; iter = iter->next) {
+			CongTextCacheSpan *text_span = iter->data;
+			g_assert(text_span);
+
+			g_printf ("[%i->%i/%i->%i)", 
+				  text_span->original_first_byte_offset, text_span->original_first_byte_offset+text_span->stripped_byte_count,
+				  text_span->stripped_first_byte_offset, text_span->stripped_first_byte_offset+text_span->stripped_byte_count);
+		}		
+		g_printf("\n");
 	}
 #endif
 }
@@ -275,9 +281,16 @@ cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_ca
 	text_span = get_text_span_at_original_byte_offset(text_cache, original_byte_offset);
 	
 	if (text_span) {
+		int byte_count_into_span;
 
 		g_assert (original_byte_offset >= text_span->original_first_byte_offset);
-		*stripped_byte_offset = text_span->stripped_first_byte_offset + (original_byte_offset - text_span->original_first_byte_offset);
+
+		byte_count_into_span = original_byte_offset - text_span->original_first_byte_offset;
+		if (byte_count_into_span <= text_span->stripped_byte_count) {
+			*stripped_byte_offset = text_span->stripped_first_byte_offset + byte_count_into_span;
+		} else {
+			*stripped_byte_offset = text_span->stripped_first_byte_offset + text_span->stripped_byte_count;
+		}
 
 		g_assert (*stripped_byte_offset>=0);
 		g_assert (*stripped_byte_offset<=strlen(text_cache->stripped_string));
@@ -302,7 +315,9 @@ cong_text_cache_span_new(int original_first_byte_offset,
 			 int stripped_first_byte_offset,			 
 			 int stripped_byte_count)
 {
-	CongTextCacheSpan *text_span = g_new0(CongTextCacheSpan,1);
+	CongTextCacheSpan *text_span;
+
+	text_span = g_new0(CongTextCacheSpan,1);
 	text_span->original_first_byte_offset = original_first_byte_offset;
 	text_span->stripped_first_byte_offset = stripped_first_byte_offset;
 	text_span->stripped_byte_count = stripped_byte_count;

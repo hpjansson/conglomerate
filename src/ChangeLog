@@ -1,5 +1,9 @@
 2003-10-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-text-cache.c
+
+	Fixed a char versus byte confusion that broke i18n text.
+
 	* cong-editor-node-comment.c, cong-editor-node-text.c, cong-editor-widget.h, cong-editor-widget3.c, global.h, popup.c
 
 	Initial support for GTK Input Methods; filter span tags using DTD if available; fixed Glade path for tags selection dialog
