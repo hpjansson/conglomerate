@@ -1,5 +1,9 @@
-pixmapdir = $(datadir)/pixmaps
-pixmap_DATA = conglomerate-icon-16.png \
+dtidir = $(datadir)/pixmaps
+dti_DATA = conglomerate-icon-16.png
+
+# application icons
+appiconsdir = $(datadir)/pixmaps
+appicons_DATA = \
 	cong-docbook-set-16.png \
 	cong-docbook-book-16.png \
 	cong-docbook-article-16.png \
@@ -29,4 +33,4 @@ pixmap_DATA = conglomerate-icon-16.png \
 	cong-definition-list-16.png \
 	cong-code-fragment-16.png
 
-EXTRA_DIST = $(pixmap_DATA)
+EXTRA_DIST = $(dti_DATA appicons_DATA)

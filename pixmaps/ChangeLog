@@ -1,3 +1,11 @@
+2003-09-09  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+	Splitting desktop and application icons
+
+	* README
+	telling about http://bugzilla.gnome.org/show_bug.cgi?id=121676
+
 2003-06-27  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* conglomerate-icon-16.png
