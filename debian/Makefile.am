@@ -24,8 +24,6 @@ pkg_DISTS = \
     conglomerate-common.dirs \
     conglomerate-common.docs \
     conglomerate-common.menu \
-    conglomerate-common.postinst \
-    conglomerate-common.prerm \
     conglomerate-dbg.dirs \
     conglomerate_icon.xpm \
     $(NULL)
