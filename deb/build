@@ -51,7 +51,8 @@ fi
 update()
 # changes in 'debian' should go back into 'deb'
 {
-  echo update
+  echo Take manually care of \"^Only in\"
+  diff -r debian deb | grep "^Only in de"
 }
 
 diffgz()
@@ -65,9 +66,9 @@ diffgz()
 if [ $# > 1 ]
 then
   case $1 in
-  version*)
-    echo version
-    dch -v "$1" "New upstream release."
+  version=*)
+    NWRLS=$( echo $1 | awk -F= '{print $2}')
+    dch -v $NWRLS "New upstream release."
   ;;
   update*)
     echo generating deb.update
