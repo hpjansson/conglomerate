@@ -84,6 +84,10 @@ gboolean plugin_xsl_plugin_configure(CongPlugin *plugin);
 gboolean plugin_save_dispspec_plugin_register(CongPlugin *plugin);
 gboolean plugin_save_dispspec_plugin_configure(CongPlugin *plugin);
 
+/* plugin-doc-from-xds.c */
+gboolean plugin_doc_from_xds_plugin_register(CongPlugin *plugin);
+gboolean plugin_doc_from_xds_plugin_configure(CongPlugin *plugin);
+
 /* more plugins please! */
 
 G_END_DECLS

@@ -60,6 +60,9 @@ cong_dispspec_get_name(const CongDispspec *ds);
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
+xmlNodePtr
+cong_dispspec_get_template(const CongDispspec *ds);
+
 /**
  *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
  */

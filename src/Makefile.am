@@ -185,6 +185,7 @@ conglomerate_SOURCES =      \
   plugin-cleanup-source.c   \
   plugin-convert-case.c     \
   plugin-docbook.c          \
+  plugin-doc-from-xds.c     \
   plugin-dtd.c              \
   plugin-empty.c            \
   plugin-fo.c               \

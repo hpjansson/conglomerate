@@ -300,6 +300,10 @@ void main_load_plugins(void)
 	register_plugin("save-dispspec",
 			plugin_save_dispspec_plugin_register,
 			plugin_save_dispspec_plugin_configure);
+
+	register_plugin("doc-from-xds",
+			plugin_doc_from_xds_plugin_register,
+			plugin_doc_from_xds_plugin_configure);
 }
 
 int main( int   argc,

@@ -87,6 +87,7 @@ struct CongDispspec
 	GdkPixbuf *icon;
 
 	CongDispspecElement *paragraph;
+	xmlNodePtr template;
 };
 
 /* Internal function declarations: */
@@ -109,6 +110,10 @@ parse_xmldoc (xmlDocPtr doc);
 static void 
 parse_metadata (CongDispspec *ds, 
 		xmlDocPtr doc, 
+		xmlNodePtr node);
+
+static void 
+parse_template (CongDispspec *ds, 
 		xmlNodePtr node);
 
 static CongDispspecElement*
@@ -773,8 +778,14 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 							}
 						}
 						
-					} else if (0==strcmp(cur->name,"metadata")) {
+					}
+					else if (0==strcmp(cur->name,"metadata"))
+					{
 						parse_metadata(ds, doc, cur);
+					}
+					else if (0==strcmp(cur->name, "document-template"))
+					{
+						parse_template(ds, cur);
 					}
 				}
 			}
@@ -804,6 +815,18 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 			if (str) {
 				ds->desc = g_strdup(str);
 			}
+		}
+	}
+}
+
+static void
+parse_template(CongDispspec *ds, xmlNodePtr node)
+{
+	for (node = node->children; node; node=node->next) {
+		if(node->type == XML_ELEMENT_NODE)
+		{
+			ds->template = xmlCopyNode(node, TRUE);
+			return;
 		}
 	}
 }
@@ -1649,3 +1672,8 @@ load_dtd (xmlDocPtr doc)
 }
 
 
+xmlNodePtr
+cong_dispspec_get_template(const CongDispspec *ds)
+{
+	return  ds->template;
+}

@@ -1,3 +1,9 @@
+2003-09-02  Jeff Martin <jeff@custommonkey.org>
+
+	* plugin-doc-from-xds.c, cong-dispspec.c, cong-dispspec.h, cong-fake-plugin-hooks.h, main.c, Makefile.am
+
+	New plugin to read contents of document-template from a dispspec and use this in the new document wizard as a template document.
+	
 2003-09-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-attribute-editor.c, cong-attribute-editor.h, cong-dialog.c, cong-node-properties-dialog.c, tree.c
