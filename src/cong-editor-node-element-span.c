@@ -141,7 +141,15 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 	g_message("CongEditorNodeElementSpan::generate_line_areas_recursive");
 #endif
 
-	result = cong_editor_line_fragments_new();
+	/*
+	 * DJB 2004/08/20
+	 * I am assuming here that a span element can not have the
+	 * preserve="whitespace" attribute (I think). This may well be
+	 * wrong. I have not looked at what happens if I create this
+	 * CongEditorLineFragments object with CONG_WHITESPACE_PRESERVE.
+	 * 
+	 */
+	result = cong_editor_line_fragments_new (CONG_WHITESPACE_NORMALIZE);
 
 	/* Iterate over children, getting their line fragments, embellishing them, and adding them to the result: */
 	{

@@ -32,6 +32,20 @@
 struct CongEditorLineFragmentsDetails
 {
 	GList *list_of_areas;
+
+	/*
+	 * DJB 2004/08/20
+	 * Added the whitespace attribute so that the generate_line_areas_recursive()
+	 * method of nodes can access this information. It "works for me" being
+	 * an attribute of the CongEditorLineFragments class, but I am not 100%
+	 * convinced this is sufficient. Also, should the attribute be called
+	 * "whitespace" or "preserve_line_breaks" or something that better captures
+         * the semantics; I stick with whitespace for now since it maps directly to the
+	 * dispspec?
+	 * 
+	 * This attribute is currently read only.
+	 */
+	CongWhitespaceHandling whitespace;
 };
 
 /* Exported function definitions: */
@@ -52,21 +66,25 @@ cong_editor_line_fragments_instance_init (CongEditorLineFragments *line_fragment
 }
 
 CongEditorLineFragments*
-cong_editor_line_fragments_construct (CongEditorLineFragments *line_fragments)
+cong_editor_line_fragments_construct (CongEditorLineFragments *line_fragments,
+				      CongWhitespaceHandling whitespace)
 {
+	PRIVATE(line_fragments)->whitespace = whitespace;
 	return line_fragments;
 }
 
 /**
  * cong_editor_line_fragments_new:
+ * @whitespace: The value for whitespace handling for this fragment
  *
  * Returns: a new #CongEditorLineFragments
  */
 CongEditorLineFragments*
-cong_editor_line_fragments_new (void)
+cong_editor_line_fragments_new (CongWhitespaceHandling whitespace)
 {
 	return cong_editor_line_fragments_construct
-		(g_object_new (CONG_EDITOR_LINE_FRAGMENTS_TYPE, NULL));
+		(g_object_new (CONG_EDITOR_LINE_FRAGMENTS_TYPE, NULL),
+		 whitespace);
 }
 
 /**
@@ -95,4 +113,17 @@ cong_editor_line_fragments_add_area (CongEditorLineFragments *line_fragments,
 {
 	PRIVATE(line_fragments)->list_of_areas = g_list_append (PRIVATE(line_fragments)->list_of_areas,
 								area);
+}
+
+/**
+ * cong_editor_line_fragments_get_whitespace
+ * @line_fragments:
+ *
+ * Get the #CongWhitespaceHandling behaviour for this element
+ * Returns:  
+ */
+CongWhitespaceHandling
+cong_editor_line_fragments_get_whitespace (CongEditorLineFragments *line_fragments)
+{
+      return PRIVATE(line_fragments)->whitespace;
 }

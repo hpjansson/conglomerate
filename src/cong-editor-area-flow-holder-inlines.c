@@ -563,39 +563,68 @@ add_line_fragments (CongEditorAreaFlowHolderInlines *inlines,
 		    CongEditorLineFragments *line_fragments)
 {
 	GList* iter;
+	gboolean whitespace_flag;
 
 	g_assert (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(inlines));
 	g_assert (IS_CONG_EDITOR_LINE_FRAGMENTS(line_fragments));
 
+	/*
+	 * DJB 2004/08/20
+	 *
+	 * Currently the choice of whether we preserve whitespace or not is:
+	 *   a) applied per CongEditorLineFragments object
+	 *   b) probably only has an affect on whether new-lines create line breaks
+	 *
+	 * Loop throuch each line in the fragment
+         *   if preserving whitespace,
+         *   or if we do not have an existing line,
+         *   or if there is not enough space on the line
+         *     display the new contents on its own line
+         *   otherwise
+	 *     add it to the previous line's contents
+	 *
+	 * Should we really be checking the whitespace-preserving properties of each
+	 * area_fragment?
+	 */
+	whitespace_flag = (CONG_WHITESPACE_PRESERVE == cong_editor_line_fragments_get_whitespace (line_fragments));
+
 	for (iter = cong_editor_line_fragments_get_area_list (line_fragments); iter; iter=iter->next) {
 		CongEditorArea *area_fragment = CONG_EDITOR_AREA(iter->data);
+		CongEditorAreaLine *line;
 
-		CongEditorAreaLine *line = cong_editor_area_flow_holder_inlines_get_current_line (inlines);
-
-		/* Do we have an existing line? */
-		if (line) {
-			/* Can it hold the next fragment? If not create a new line: */
-			gint width_required = cong_editor_area_get_requisition_width (area_fragment,
-										      cong_editor_area_flow_holder_inlines_get_line_width (inlines));
-
-			gint width_free = cong_editor_area_line_get_width_free(line);
-
-#if DEBUG_LINE_FLOWS
-			g_message ("got existing line with free = %i; width required = %i", 
-				   width_free,
-				   width_required);
-#endif
-
-			if (width_required > width_free) {
-				line = cong_editor_area_flow_holder_inlines_insert_line (inlines);
-			}
-		} else {
-#if DEBUG_LINE_FLOWS
-			g_message ("no existing line");
-#endif
-
+		if ( whitespace_flag ) {
 			line = cong_editor_area_flow_holder_inlines_insert_line (inlines);
-		} 
+#if DEBUG_LINE_FLOWS
+			g_message ("got line and preserving whitespace");
+#endif
+		} else {
+
+			line = cong_editor_area_flow_holder_inlines_get_current_line (inlines);
+
+			if (line) {
+				/* Can the current line hold the next fragment? If not create a new line: */
+				gint width_required = cong_editor_area_get_requisition_width (area_fragment,
+											      cong_editor_area_flow_holder_inlines_get_line_width (inlines));
+
+				gint width_free = cong_editor_area_line_get_width_free(line);
+
+#if DEBUG_LINE_FLOWS
+				g_message ("got existing line with free = %i; width required = %i", 
+					   width_free,
+					   width_required);
+#endif
+
+				if (width_required > width_free) {
+					line = cong_editor_area_flow_holder_inlines_insert_line (inlines);
+				}
+			} else {
+#if DEBUG_LINE_FLOWS
+				g_message ("no existing line and not preserving whitespace");
+#endif
+				
+				line = cong_editor_area_flow_holder_inlines_insert_line (inlines);
+			} 
+		}
 
 		g_assert(line);
 

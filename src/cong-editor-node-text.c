@@ -685,12 +685,21 @@ generate_line_areas_recursive (CongEditorNode *editor_node,
 	CongEditorLineFragments *result;
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 
+	/*
+	 * DJB 2004/08/20
+	 * We base the "whitespace handling" of this set of line fragments on the
+	 * value of the whitespace attribute of the dispspec element for this
+	 * node. Is this the best way to get this information?
+	 */
+	CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_node_get_document (editor_node),
+										    cong_editor_node_get_node (editor_node));
+
 #if 0
 	g_message("CongEditorNodeText::generate_line_areas_recursive, cached text =\"%s\"", 
 		  cong_text_cache_get_text (PRIVATE(node_text)->text_cache));
 #endif
 
-	result = cong_editor_line_fragments_new();
+	result = cong_editor_line_fragments_new (whitespace);
 
 #if 1
 	/* Set the "geometry" of the PangoLayout: */

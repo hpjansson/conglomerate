@@ -54,10 +54,11 @@ GType
 cong_editor_line_fragments_get_type (void);
 
 CongEditorLineFragments*
-cong_editor_line_fragments_construct (CongEditorLineFragments *line_fragments);
+cong_editor_line_fragments_construct (CongEditorLineFragments *line_fragments,
+				      CongWhitespaceHandling whitespace);
 
 CongEditorLineFragments*
-cong_editor_line_fragments_new (void);
+cong_editor_line_fragments_new (CongWhitespaceHandling whitespace);
 
 /* FIXME: perhaps we should make this a for_each, with a callback? */
 GList*
@@ -66,6 +67,9 @@ cong_editor_line_fragments_get_area_list (CongEditorLineFragments *line_fragment
 void
 cong_editor_line_fragments_add_area (CongEditorLineFragments *line_fragments,
 				     CongEditorArea *area);
+
+CongWhitespaceHandling
+cong_editor_line_fragments_get_whitespace (CongEditorLineFragments *line_fragments);
 
 G_END_DECLS
 
