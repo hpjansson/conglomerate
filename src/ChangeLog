@@ -1,3 +1,9 @@
+2004-07-27  David Malcolm  <dmalcolm@redhat.com>
+
+	* xmlload.c: 
+
+	Removed contents of this file: dead code
+
 2004-07-27  Geert Stappers  <stappers@stappers.nl>
 
 	* cong-menus.c:
