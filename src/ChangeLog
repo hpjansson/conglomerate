@@ -1,3 +1,9 @@
+2004-06-18  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-attribute-editor-lang.c, cong-document.c: 
+
+	Warning fixes
+
 2004-06-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* xmldata.c (cong_command_add_required_sub_elements): 

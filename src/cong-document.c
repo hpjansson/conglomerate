@@ -18,6 +18,11 @@
 #include "cong-document-traversal.h"
 #include "cong-edit-find-and-replace.h"
 
+#if ENABLE_PRINTING
+#include "cong-service-print-method.h"
+#include "cong-plugin-manager.h"
+#endif 
+
 /* Internal functions: */
 static void
 cong_document_finalize (GObject *object);
@@ -80,6 +85,7 @@ cong_document_handle_set_url (CongDocument *doc,
 #define LOG_TRAVERSAL_NODE2(x, a) ((void)0)
 #endif
 
+#undef PRIVATE
 #define PRIVATE(x) ((x)->private)
 
 enum {

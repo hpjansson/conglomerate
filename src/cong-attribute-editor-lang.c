@@ -316,8 +316,6 @@ cong_attribute_editor_lang_do_refresh (CongAttributeEditorLang *attribute_editor
 	       valid = gtk_tree_model_iter_next (model, &iter);
 
 	       while (valid) {
-	            gchar *code;
-		    
 		    gtk_tree_model_get (model, &iter, COLUMN_CODE, &value, -1);
 		    
 		    if (strcmp (value, attr_value) == 0) 
