@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Conglomerate 0.74\n"
+"Project-Id-Version: Conglomerate 0.75\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2003-10-21 15:01+0200\n"
-"PO-Revision-Date: 2003-09-26 15:55+0200\n"
+"PO-Revision-Date: 2003-10-21 15:01+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
