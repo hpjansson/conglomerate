@@ -1,3 +1,8 @@
+2003-08-18  Jeff Martin <jeff@custommonkey.org>
+
+       * conglomerate.spec
+       Fix accidently excaped = signs
+
 2003-08-18  Michael Rasmussen <mir@datanom.net>
 
 	* conglomerate.spec

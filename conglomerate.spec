@@ -28,15 +28,15 @@ storage, searching, revision control, transformation and publishing.
 %setup -q
  
 %build
-export CXXFLAGS=3D"${RPM_OPT_FLAGS}";
-./configure --prefix=3D%{prefix}
+export CXXFLAGS="${RPM_OPT_FLAGS}";
+./configure --prefix=%{prefix}
  
 make
  
 %install
 [ -d ${RPM_BUILD_ROOT} ] && rm -rf ${RPM_BUILD_ROOT};
 mkdir -p ${RPM_BUILD_ROOT}
-make prefix=3D${RPM_BUILD_ROOT}%{prefix} install-strip
+make prefix=${RPM_BUILD_ROOT}%{prefix} install-strip
  
 %clean
 [ -d ${RPM_BUILD_ROOT} ] && rm -rf ${RPM_BUILD_ROOT};
