@@ -36,6 +36,8 @@ struct CongEditorNodeTextDetails
 {
 	int dummy;
 
+	CongEditorAreaText *area_text;
+	
 #if 0
 	CongEditorAreaComposer *flow_test;
 	PangoLayout *pango_layout;
@@ -45,6 +47,15 @@ struct CongEditorNodeTextDetails
 
 static CongEditorArea*
 generate_area (CongEditorNode *editor_node);
+
+
+/* FIXME:  We probably shouldn't have every text node in the doc listening to every text node change... probably should allow for a dispatch mechanism within the widget */
+/* Declarations of the CongDocument event handlers: */
+static void 
+on_signal_set_text_notify_after (CongDocument *doc, 
+				 CongNodePtr node, 
+				 const xmlChar *new_content, 
+				 gpointer user_data);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeText, 
@@ -75,6 +86,11 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				    editor_widget,
 				    node);
 
+	g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
+				"node_set_text",
+				G_CALLBACK(on_signal_set_text_notify_after),
+				editor_node_text);
+
 	return editor_node_text;
 }
 
@@ -94,7 +110,6 @@ static CongEditorArea*
 generate_area (CongEditorNode *editor_node)
 {
 	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
-	CongEditorArea *new_area;
 	gchar* stripped_text;
 
 	g_return_val_if_fail (editor_node, NULL);
@@ -119,12 +134,39 @@ generate_area (CongEditorNode *editor_node)
 	}
 #else
 
-	new_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
-					      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
-					      stripped_text);
-
+	PRIVATE(node_text)->area_text = 
+		CONG_EDITOR_AREA_TEXT( cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
+								  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+								  stripped_text)
+				       );
 	g_free (stripped_text);
 	
-	return new_area;
+	return CONG_EDITOR_AREA(PRIVATE(node_text)->area_text);
 #endif
 }
+
+/* Definitions of the CongDocument event handlers: */
+static void 
+on_signal_set_text_notify_after (CongDocument *doc, 
+				 CongNodePtr node, 
+				 const xmlChar *new_content, 
+				 gpointer user_data)
+{
+	CongEditorNodeText *editor_node_text = (CongEditorNodeText*)user_data;
+	gchar* stripped_text;
+	
+	g_return_if_fail (IS_CONG_EDITOR_NODE_TEXT(editor_node_text));
+
+	/* FIXME: need smarter dispatch mechanism: */
+	if (node == cong_editor_node_get_node( CONG_EDITOR_NODE(editor_node_text))) {
+
+		stripped_text = cong_util_strip_whitespace_from_string (cong_editor_node_get_node (CONG_EDITOR_NODE(editor_node_text))->content);
+
+		g_assert(PRIVATE(editor_node_text)->area_text);
+		cong_editor_area_text_set_text (PRIVATE(editor_node_text)->area_text,
+						stripped_text);
+
+		g_free (stripped_text);
+	}
+}
+

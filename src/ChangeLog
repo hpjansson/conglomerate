@@ -1,5 +1,9 @@
 2003-07-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-area.c, cong-editor-area.h, cong-editor-node-text.c, cong-editor-widget3-impl.h, cong-editor-widget3.c
+
+	CongEditorWidget3 no longer uses CongView; beginning to hook up change notifcations directly.
+	
 	* cong-debug-log-view.c, cong-document.c, cong-document.h, cong-file-open.c, cong-menus.c, cong-plugin.c, cong-primary-window.c, cong-view.h, global.h
 
 	GObject-ification of CongDocument

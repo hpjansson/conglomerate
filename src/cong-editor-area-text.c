@@ -90,7 +90,7 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 	pango_layout_set_text (PRIVATE(area_text)->pango_layout,
 			       text,
 			       -1);
-	/* in theory should call pango_layout_set_text instead, though this causes errors with colormaps */
+	/* in theory should call pango_layout_set_markup instead, though this causes errors with colormaps */
 
 	PRIVATE(area_text)->font = font;
 	g_assert(PRIVATE(area_text)->font);
@@ -115,6 +115,23 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 		 font,
 		 text);
 }
+
+void
+cong_editor_area_text_set_text (CongEditorAreaText *area_text,
+				const gchar *text)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA_TEXT(area_text));
+	g_return_if_fail (text);
+
+	pango_layout_set_text (PRIVATE(area_text)->pango_layout,
+			       text,
+			       -1);
+
+	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text) );
+
+	/* FIXME: will eventually need to signal a requisition change */
+}
+
 
 /* Method implementation definitions: */
 static void 

@@ -64,6 +64,10 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
 			   const gchar *text);
 
+void
+cong_editor_area_text_set_text (CongEditorAreaText *area_text,
+				const gchar *text);
+
 G_END_DECLS
 
 #endif

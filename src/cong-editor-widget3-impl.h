@@ -30,7 +30,6 @@
 #define __CONG_EDITOR_WIDGET3_IMPL_H__
 
 #include <gtk/gtkenums.h>
-#include "cong-view.h"
 #include "cong-editor-area.h"
 #include "cong-editor-node.h"
 
@@ -65,28 +64,6 @@ void cong_element_editor_recursive_render(CongElementEditor *element_editor, con
 #endif
 
 typedef struct CongEditorWidget3Details CongEditorWidget3Details;
-typedef struct CongEditorWidget3View CongEditorWidget3View;
-#define CONG_EDITOR_WIDGET3_VIEW(x) ((CongEditorWidget3View*)(x))
-
-struct CongEditorWidget3Details
-{
-	CongEditorWidget3 *widget;
-	CongEditorWidget3View *view;
-
-	GHashTable *hash_of_node_to_editor;
-
-	CongEditorArea *test_area;
-
-	GdkGC *test_gc;
-};
-
-/* The widget "owns" a CongView, which in turn, holds a ptr back to its widget. */
-struct CongEditorWidget3View
-{
-	CongView view;
-
-	CongEditorWidget3 *widget;
-};
 
 /* Macro for getting details of a widget; this will eventually be a simple field lookup */
 #define GET_DETAILS(editor_widget) ((CongEditorWidget3Details*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
@@ -99,19 +76,19 @@ typedef void
 
 void
 cong_editor_node_for_each_area (CongEditorNode *editor_node,
-				   CongEditorAreaCallback callback,	   
-				   gpointer user_data);
+				CongEditorAreaCallback callback,	   
+				gpointer user_data);
 
 /* Manufacture a debug editor node: */
 CongEditorNode*
 cong_editor_node_dummy_new (CongEditorWidget3 *widget, 
-			       CongNodePtr node, 
-			       const gchar* message);
+			    CongNodePtr node, 
+			    const gchar* message);
 
 /* Manufacture an appropriate editor node: */
 CongEditorNode*
 cong_editor_node_new (CongEditorWidget3 *widget, 
-			 CongNodePtr node);
+		      CongNodePtr node);
 
 /* Constructors for different types of concrete CongEditorNode subclasses: */
 CongEditorNode*

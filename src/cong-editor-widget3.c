@@ -45,7 +45,22 @@
 
 #define PRIVATE(foo) ((foo)->private)
 
-#define DEBUG_EDITOR_WIDGET_VIEW 1
+struct CongEditorWidget3Details
+{
+	CongDocument *doc;
+#if 0
+	CongEditorWidget3 *widget;
+#endif
+
+	GHashTable *hash_of_node_to_editor;
+
+	CongEditorArea *test_area;
+
+	GdkGC *test_gc;
+};
+
+
+#define DEBUG_EDITOR_WIDGET_VIEW 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -84,7 +99,7 @@ recursive_create_areas(CongEditorWidget3 *widget,
 		       CongNodePtr node,
 		       CongEditorArea *parent_area);
 
-/* Declarations of the widget event handlers: */
+/* Declarations of the GtkWidget event handlers: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
 static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, gpointer user_data);
 static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, gpointer user_data);
@@ -94,6 +109,27 @@ static void size_request_handler(GtkWidget *widget,
  				 GtkRequisition *requisition,
  				 gpointer user_data);
 
+/* Declarations of the CongDocument event handlers: */
+static void 
+on_signal_set_text_notify_after (CongDocument *doc, 
+				 CongNodePtr node, 
+				 const xmlChar *new_content, 
+				 gpointer user_data);
+
+static void 
+on_signal_set_attribute_notify_after (CongDocument *doc, 
+				      CongNodePtr node, 
+				      const xmlChar *name, 
+				      const xmlChar *value, 
+				      gpointer user_data); 
+
+static void 
+on_signal_remove_attribute_notify_after (CongDocument *doc, 
+					 CongNodePtr node, 
+					 const xmlChar *name, 
+					 gpointer user_data); 
+
+#if 0
 /* Declarations of the MVC handler functions: */
 static void on_document_begin_edit(CongView *view);
 static void on_document_end_edit(CongView *view);
@@ -106,49 +142,33 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name);
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
+#endif
 
 /* Implementations of public functions: */
 GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 {
 	CongEditorWidget3 *widget;
 	CongEditorWidget3Details *details;
-	CongEditorWidget3View *view;
 
 	g_return_val_if_fail(doc, NULL);
 
 	widget = GTK_DRAWING_AREA(gtk_drawing_area_new());
 
 	details = g_new0(CongEditorWidget3Details,1);
-	view = g_new0(CongEditorWidget3View,1);
 
 	g_object_set_data(G_OBJECT(widget),
 			  "details",
 			  details);
-	details->widget = widget;
-	details->view = view;
-	view->widget = widget;
+
+	details->doc = doc;
+	g_object_ref(G_OBJECT(doc));
 
 	details->hash_of_node_to_editor = g_hash_table_new (NULL,
 							    NULL);
 
 	details->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
-	view->view.doc = doc;
-	view->view.klass = g_new0(CongViewClass,1);
-	view->view.klass->on_document_begin_edit = on_document_begin_edit;
-	view->view.klass->on_document_end_edit = on_document_end_edit;
-	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
-	view->view.klass->on_document_node_add_after = on_document_node_add_after;
-	view->view.klass->on_document_node_add_before = on_document_node_add_before;
-	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
-	view->view.klass->on_document_node_set_text = on_document_node_set_text;
-	view->view.klass->on_document_node_set_attribute = on_document_node_set_attribute;
-	view->view.klass->on_document_node_remove_attribute = on_document_node_remove_attribute;
-	view->view.klass->on_selection_change = on_selection_change;
-	view->view.klass->on_cursor_change = on_cursor_change;
-
-	cong_document_register_view( doc, CONG_VIEW(view) );
-
+	/* Connect to GtkWidget events: */
 	gtk_signal_connect(GTK_OBJECT(widget), 
 			   "expose_event",
 			   (GtkSignalFunc) expose_event_handler, 
@@ -178,6 +198,7 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 
 	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);
+
 
 #if 1
 	populate_widget3(widget);
@@ -250,6 +271,10 @@ GtkWidget* cong_editor_widget3_new(CongDocument *doc)
 							"this is a test");
 #endif
 
+	/* Connect to CongDocument events: */
+	{
+	}
+
 	return GTK_WIDGET(widget);
 }
 
@@ -261,7 +286,7 @@ CongDocument *cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
 
 	details = GET_DETAILS(editor_widget);
 
-	return details->view->view.doc;
+	return details->doc;
 }
 
 CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
@@ -272,7 +297,7 @@ CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
 
 	details = GET_DETAILS(editor_widget);
 
-	return cong_document_get_dispspec(details->view->view.doc);
+	return cong_document_get_dispspec(details->doc);
 }
 
 void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
@@ -339,7 +364,7 @@ render_area (CongEditorArea *area,
 #endif
 }
 
-/* Definitions of the widget event handlers: */
+/* Definitions of the GtkWidget event handlers: */
 /* Event handlers for widget: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data)
 {
@@ -451,7 +476,40 @@ static void size_request_handler(GtkWidget *widget,
  	requisition->height = req->height;
 }
 
+/* Definitions of the CongDocument event handlers: */
+#if 0
+static void 
+on_signal_set_text_notify_after (CongDocument *doc, 
+				  CongNodePtr node, 
+				  const xmlChar *new_content, 
+				  gpointer user_data)
+{
+	g_assert_not_reached();
+}
+
+static void 
+on_signal_set_attribute_notify_after (CongDocument *doc, 
+				       CongNodePtr node, 
+				       const xmlChar *name, 
+				       const xmlChar *value, 
+				       gpointer user_data)
+{
+	g_assert_not_reached();
+}
+
+static void 
+on_signal_remove_attribute_notify_after (CongDocument *doc, 
+					  CongNodePtr node, 
+					  const xmlChar *name, 
+					  gpointer user_data)
+{
+	g_assert_not_reached();
+}
+#endif
+
+
 /* Definitions of the MVC handler functions: */
+#if 0
 static void on_document_begin_edit(CongView *view)
 {
 	/* UNWRITTEN */
@@ -547,6 +605,7 @@ static void on_cursor_change(CongView *view)
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));
 #endif
 }
+#endif
 
 static void 
 populate_widget3(CongEditorWidget3 *widget)

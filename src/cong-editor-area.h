@@ -121,6 +121,8 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 				 gint width,
 				 gint height);
 
+void
+cong_editor_area_queue_redraw (CongEditorArea *editor_area);
 
 /* Iterate over all children of this area, even "internal" ones: */
 void

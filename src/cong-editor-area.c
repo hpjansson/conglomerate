@@ -169,7 +169,7 @@ cong_editor_area_recursive_render (CongEditorArea *area,
 				    (GdkRectangle*)cong_editor_area_get_window_coords(area),
 				    &intersected_area)) {
 
-#if 0
+#if 1
 		/* Render test rectangle to show this area directly: */		
 		{
 			
@@ -227,7 +227,11 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 {
 	g_return_if_fail (editor_area);
 
+#if 0
 	g_message("cong_editor_area_set_allocation(%i,%i,%i,%i)", x, y, width, height);
+#endif
+
+	cong_editor_area_queue_redraw (editor_area);
 
 	PRIVATE(editor_area)->window_area.x = x;
 	PRIVATE(editor_area)->window_area.y = y;
@@ -239,6 +243,8 @@ cong_editor_area_set_allocation (CongEditorArea *editor_area,
 			      editor_area,
 			      allocate_child_space, 
 			      (editor_area));
+
+	cong_editor_area_queue_redraw (editor_area);
 }
 
 void
@@ -265,4 +271,18 @@ cong_editor_area_get_gdk_window(CongEditorArea *editor_area)
 	return GTK_WIDGET(cong_editor_area_get_widget (editor_area))->window;
 }
 
-
+void
+cong_editor_area_queue_redraw (CongEditorArea *editor_area)
+{
+	const GdkRectangle *rect;
+	
+	g_return_if_fail (IS_CONG_EDITOR_AREA(editor_area));
+	
+	rect = &PRIVATE(editor_area)->window_area;
+	
+	gtk_widget_queue_draw_area (GTK_WIDGET(cong_editor_area_get_widget (editor_area)),
+				    rect->x,
+				    rect->y,
+				    rect->width,
+				    rect->height);
+}
