@@ -1,3 +1,9 @@
+2004-10-26  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-util.h, cong-util.c, cong-dispspec-element.c: 
+
+	Moved hash functions for strings with NULL support to cong-util
+
 2004-10-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec.c: 

@@ -1863,3 +1863,34 @@ cong_stylesheet_parameter_list_debug (GList *list_of_parameters)
 	}
 
 }
+
+guint 
+cong_str_or_null_hash (gconstpointer key)
+{
+	if (key) {
+		return g_str_hash (key);
+	} else {
+		return 0;
+	}
+}
+
+/**
+ * cong_str_or_null_equal:
+ * @a:
+ * @b:
+ *
+ * TODO: Write me
+ */
+gboolean
+cong_str_or_null_equal (gconstpointer a,
+			gconstpointer b)
+{
+	if (a) {
+		if (b) {
+			return g_str_equal (a, b);
+		}
+	}
+
+	return (a==b);
+}
+

@@ -78,36 +78,6 @@ struct CongDispspecElement
 
 
 /* Internal data structure declarations: */
-static guint 
-g_str_or_null_hash (gconstpointer key)
-{
-	if (key) {
-		return g_str_hash (key);
-	} else {
-		return 0;
-	}
-}
-
-/**
- * g_str_or_null_equal:
- * @a:
- * @b:
- *
- * TODO: Write me
- */
-gboolean
-g_str_or_null_equal (gconstpointer a,
-		     gconstpointer b)
-{
-	if (a) {
-		if (b) {
-			return g_str_equal (a, b);
-		}
-	}
-
-	return (a==b);
-}
-
 /* Internal function prototypes: */
 static gpointer
 find_best_value_for_language (GHashTable *hash_of_language);
@@ -144,12 +114,12 @@ gxx_callback_construct_dispspec_element(void)
 
 	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 
-	element->hash_of_language_to_user_name = g_hash_table_new_full (g_str_or_null_hash,
-									g_str_or_null_equal,
+	element->hash_of_language_to_user_name = g_hash_table_new_full (cong_str_or_null_hash,
+									cong_str_or_null_equal,
 									g_free,
 									g_free);
-	element->hash_of_language_to_short_desc = g_hash_table_new_full (g_str_or_null_hash,
-									 g_str_or_null_equal,
+	element->hash_of_language_to_short_desc = g_hash_table_new_full (cong_str_or_null_hash,
+									 cong_str_or_null_equal,
 									 g_free,
 									 g_free);	
 	element->key_value_hash = g_hash_table_new_full (g_str_hash,

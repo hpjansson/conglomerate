@@ -284,6 +284,13 @@ cong_action_new (const gchar *name,
 		 const gchar *tooltip,
 		 GdkPixbuf *pixbuf);
 
+guint 
+cong_str_or_null_hash (gconstpointer key);
+
+gboolean
+cong_str_or_null_equal (gconstpointer a,
+			gconstpointer b);
+
 G_END_DECLS
 
 #endif
