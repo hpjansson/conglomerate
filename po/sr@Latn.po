@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-07 13:30+0200\n"
-"PO-Revision-Date: 2003-10-07 13:34+0200\n"
+"POT-Creation-Date: 2003-10-13 23:10+0200\n"
+"PO-Revision-Date: 2003-10-13 23:13+0200\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Jezik"
 
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
-#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:787
+#: src/cong-file-properties.c:85 src/cong-node-properties-dialog.c:788
 msgid "Properties"
 msgstr "Osobine"
 
@@ -120,7 +120,7 @@ msgid "Continue numbering from previous list"
 msgstr "Nastavite brojanje na prethodni spisak"
 
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
-#: src/cong-error-file-open.c:446
+#: src/cong-error-file-open.c:449
 msgid "Details"
 msgstr "Detalji"
 
@@ -165,9 +165,27 @@ msgstr "oznaka"
 msgid "string_selection_dialog"
 msgstr "prozorče_za_izbor_niski"
 
-#: src/cong-app.c:122
+#: src/cong-app.c:267
 msgid "XML Editor"
 msgstr "XML uređivač"
+
+#: src/cong-app.c:333
+#, c-format
+msgid "Conglomerate could not load any xds files from the directory \"%s\""
+msgstr ""
+"Konglomerat ne može da učita nikakve XDS datoteke iz direktorijuma „%s“"
+
+#: src/cong-app.c:335
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "Konglomerat ne može da pronađe opise tipova dokumenata."
+
+#: src/cong-app.c:337
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it."
+msgstr ""
+"Ukoliko vidite ovu grešku, najverovatnije ste izgradili Konglomerat, ali ga "
+"niste instalirali. Pokušajte da ga instalirate."
 
 #: src/cong-attribute-editor-cdata.c:178
 #: src/cong-attribute-editor-enumeration.c:174
@@ -251,12 +269,12 @@ msgstr "Izmene učinjene u prethodnih %li minuta će biti zanemarene."
 msgid "Changes from the past minute will be discarded."
 msgstr "Izmene učinjene u prethodnom minutu će biti zanemarene."
 
-#: src/cong-dispspec-registry.c:87
+#: src/cong-dispspec-registry.c:90
 msgid "Conglomerate could not read its registry of document types."
 msgstr ""
 "Konglomerat ne može da učita svoj registar prijavljenih vrsti dokumenata."
 
-#: src/cong-dispspec-registry.c:90
+#: src/cong-dispspec-registry.c:93
 msgid "Conglomerate attempted to look at all the files in the location."
 msgstr "Konglomerat je pokušao da pregleda sve datoteke u putanji."
 
@@ -293,15 +311,15 @@ msgstr "Tekst: \"<span foreground=\"%s\">%s</span>\""
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 
-#: src/cong-editor-node-text.c:750
+#: src/cong-editor-node-text.c:751
 msgid "Select word"
 msgstr "Izaberite reč"
 
-#: src/cong-editor-node-text.c:775
+#: src/cong-editor-node-text.c:776
 msgid "Move cursor"
 msgstr "Pomerite kurzor"
 
-#: src/cong-editor-node-text.c:827
+#: src/cong-editor-node-text.c:828
 msgid "Drag out selection"
 msgstr "Izvuci izabrano"
 
@@ -353,11 +371,11 @@ msgstr ""
 "Dogodila se greška (GError); dobijeni izveštaj je:\n"
 "<i>%s</i>"
 
-#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:443
+#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
 msgstr "Dogodila se neočekivana greška."
 
-#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:444
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
 msgstr "Za više podataka, kliknite na dugme „Detalji“."
 
@@ -382,28 +400,28 @@ msgstr ""
 "Broj uočene greške je %d.  Ispod je tekst greške koji je ispisala naredba."
 
 #. FIXME: ought to set up the parent window properly
-#: src/cong-error-file-open.c:52
+#: src/cong-error-file-open.c:54
 msgid "Conglomerate could not run the Search Tool.\n"
 msgstr "Konglomerat nije uspeo da pokrene alat za pretragu.\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
-#: src/cong-error-file-open.c:77
+#: src/cong-error-file-open.c:82
 #, c-format
 msgid "%s cannot read \"%s\" from %s."
 msgstr "%s ne može da učita „%s“ iz %s."
 
 # bug: what's the difference from '%s cannot read "%s" from %s.' -- must they be different?
 #. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-open.c:80
+#: src/cong-error-file-open.c:85
 #, c-format
 msgid "%s could not read \"%s\" from %s."
 msgstr "%s ne može da učita „%s“ iz %s."
 
-#: src/cong-error-file-open.c:200 src/cong-error-file-save.c:79
+#: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
 msgstr "Dogodila se neočekivana unutrašnja greška."
 
-#: src/cong-error-file-open.c:201 src/cong-error-file-save.c:80
+#: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
 "Try again.  If it fails again, file a bug report with the maintainer of this "
 "application."
@@ -411,11 +429,11 @@ msgstr ""
 "Pokušajte ponovo. Ukoliko ni tada ne uspe, prijavite grešku održavaocu ovog "
 "programa."
 
-#: src/cong-error-file-open.c:227
+#: src/cong-error-file-open.c:234
 msgid "There is no file with that name at that location."
 msgstr "Ne postoji datoteka takvog imena na tom mestu."
 
-#: src/cong-error-file-open.c:228
+#: src/cong-error-file-open.c:235
 msgid ""
 "(i) Try checking that you spelt the file's name correctly.  Remember that "
 "capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
@@ -427,16 +445,16 @@ msgstr ""
 "„mojadatoteka“).\n"
 "(b) Probajte da nađete vašu datoteku alatom za pretragu."
 
-#: src/cong-error-file-open.c:229 src/cong-error-file-open.c:238
-#: src/cong-error-file-open.c:293 src/cong-error-file-open.c:334
+#: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
+#: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
 msgid "Search"
 msgstr "Pretraga"
 
-#: src/cong-error-file-open.c:236 src/cong-error-file-save.c:97
+#: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
 msgid "The location does not exist."
 msgstr "Ova putanja ne postoji."
 
-#: src/cong-error-file-open.c:237
+#: src/cong-error-file-open.c:244
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -449,12 +467,12 @@ msgstr ""
 "(b) Probajte da nađete vašu datoteku alatom za pretragu."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-open.c:250
+#: src/cong-error-file-open.c:257
 #, c-format
 msgid "The location \"%s\" does not support the reading of files."
 msgstr "Putanja „%s“ ne podržava čitanje datoteka."
 
-#: src/cong-error-file-open.c:254
+#: src/cong-error-file-open.c:261
 msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
@@ -464,36 +482,36 @@ msgstr ""
 "administratorom."
 
 # bug: there's same message with "content" instead of "contents"
-#: src/cong-error-file-open.c:264
+#: src/cong-error-file-open.c:271
 msgid "There were problems reading the content of the file."
 msgstr "Bilo je problema pri čitanju sadržaja ove datoteke."
 
-#: src/cong-error-file-open.c:265 src/cong-error-file-open.c:283
-#: src/cong-error-file-open.c:322
+#: src/cong-error-file-open.c:272 src/cong-error-file-open.c:290
+#: src/cong-error-file-open.c:329
 msgid "Try again.  If it fails again, contact your system administrator."
 msgstr ""
 "Pokušajte ponovo. Ako opet ne uspe, stupite u vezu sa vašim administratorom."
 
-#: src/cong-error-file-open.c:274
+#: src/cong-error-file-open.c:281
 msgid "The contents of the file seem to be corrupt."
 msgstr "Čini se da je sadržaj datoteke neispravan."
 
-#: src/cong-error-file-open.c:275
+#: src/cong-error-file-open.c:282
 msgid ""
 "Try again.  If it fails again, try looking for a backup copy of the file."
 msgstr ""
 "Pokušajte ponovo. Ako opet ne uspe, potražite rezervni primerak datoteke."
 
 # bug: there's same message with "content" instead of "contents"
-#: src/cong-error-file-open.c:282 src/cong-error-file-open.c:321
+#: src/cong-error-file-open.c:289 src/cong-error-file-open.c:328
 msgid "There were problems reading the contents of the file."
 msgstr "Bilo je problema pri čitanju sadržaja ove datoteke."
 
-#: src/cong-error-file-open.c:291 src/cong-error-file-save.c:238
+#: src/cong-error-file-open.c:298 src/cong-error-file-save.c:241
 msgid "The system does not recognise that as a valid location."
 msgstr "Sistem ovo ne smatra ispravnom putanjom."
 
-#: src/cong-error-file-open.c:292
+#: src/cong-error-file-open.c:299
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -504,20 +522,20 @@ msgstr ""
 "slova bitna („http“ nije isto što i „Http“ ili „HTTP“).\n"
 "(b) Probajte da nađete vašu datoteku alatom za pretragu."
 
-#: src/cong-error-file-open.c:303
+#: src/cong-error-file-open.c:310
 msgid "You do not have permission to read that file."
 msgstr "Nemate ovlašćenja za čitanje te datoteke."
 
-#: src/cong-error-file-open.c:304
+#: src/cong-error-file-open.c:311
 msgid "Try asking your system administrator to give you permission."
 msgstr "Tražite ovlašćenja od administratora vašeg sistema."
 
-#: src/cong-error-file-open.c:311 src/cong-error-file-save.c:261
+#: src/cong-error-file-open.c:318 src/cong-error-file-save.c:264
 msgid "The system is trying to operate on too many files at once."
 msgstr "Sistem pokušava da radi sa previše datoteka odjednom."
 
-#: src/cong-error-file-open.c:312 src/cong-error-file-open.c:346
-#: src/cong-error-file-save.c:262 src/cong-error-file-save.c:281
+#: src/cong-error-file-open.c:319 src/cong-error-file-open.c:353
+#: src/cong-error-file-save.c:265 src/cong-error-file-save.c:284
 msgid ""
 "Try again.  If it fails again, try closing unwanted applications, or contact "
 "your system administrator."
@@ -526,30 +544,30 @@ msgstr ""
 "u vezu sa administratorom vašeg sistema."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-open.c:329
+#: src/cong-error-file-open.c:336
 #, c-format
 msgid "\"%s\" is a directory, rather than a file."
 msgstr "„%s“ je direktorijum, a ne datoteka."
 
-#: src/cong-error-file-open.c:333
+#: src/cong-error-file-open.c:340
 msgid "Try using the Search Tool to find your file."
 msgstr "Pokušajte da nađete vašu datoteku alatom za pretragu."
 
-#: src/cong-error-file-open.c:345 src/cong-error-file-save.c:280
+#: src/cong-error-file-open.c:352 src/cong-error-file-save.c:283
 msgid "The system ran out of memory."
 msgstr "Sistemu je ponestalo memorije."
 
-#: src/cong-error-file-open.c:354 src/cong-error-file-open.c:363
-#: src/cong-error-file-open.c:372 src/cong-error-file-save.c:289
-#: src/cong-error-file-save.c:298 src/cong-error-file-save.c:307
+#: src/cong-error-file-open.c:361 src/cong-error-file-open.c:370
+#: src/cong-error-file-open.c:379 src/cong-error-file-save.c:292
+#: src/cong-error-file-save.c:301 src/cong-error-file-save.c:310
 msgid "The server could not be contacted."
 msgstr "Ne mogu da stupim u vezu sa serverom."
 
-#: src/cong-error-file-open.c:355
+#: src/cong-error-file-open.c:362
 msgid "Try again.  If it fails again, the server may be down."
 msgstr "Pokušajte ponovo. Ukoliko opet ne uspe, možda server nije uključen."
 
-#: src/cong-error-file-open.c:364 src/cong-error-file-open.c:373
+#: src/cong-error-file-open.c:371 src/cong-error-file-open.c:380
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down."
@@ -557,26 +575,27 @@ msgstr ""
 "(a) Proverite da li ste ispravno uneli putanju.\n"
 "(b) Pokušajte ponovo. Ako opet ne uspe, možda je server ugašen."
 
-#: src/cong-error-file-open.c:381 src/cong-error-file-save.c:316
+#: src/cong-error-file-open.c:388 src/cong-error-file-save.c:319
 msgid "The system could not login to the location."
 msgstr "Sistem ne može da se prijavi na datu putanju."
 
-#: src/cong-error-file-open.c:382 src/cong-error-file-open.c:392
+#: src/cong-error-file-open.c:389 src/cong-error-file-open.c:399
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
 "Pokušajte ponovo. Ako opet ne uspe, stupite u vezu sa administratorom vašeg "
 "sistema."
 
-#: src/cong-error-file-open.c:391 src/cong-error-file-save.c:325
+#: src/cong-error-file-open.c:398 src/cong-error-file-save.c:328
 msgid "The location was too busy."
 msgstr "Putanja je prezauzeta."
 
-#: src/cong-error-file-open.c:430
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: src/cong-error-file-open.c:435
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
 msgstr "Prijavljena je greška „%s“ pri pristupu „%s“"
 
-#: src/cong-error-file-open.c:436
+#: src/cong-error-file-open.c:439
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "File System."
@@ -585,18 +604,18 @@ msgstr ""
 "sistema datoteka (VFS)."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
-#: src/cong-error-file-save.c:48
+#: src/cong-error-file-save.c:51
 #, c-format
 msgid "%s cannot save \"%s\" to %s."
 msgstr "%s ne može da sačuva „%s“ u %s."
 
 #. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
-#: src/cong-error-file-save.c:51
+#: src/cong-error-file-save.c:54
 #, c-format
 msgid "%s could not save \"%s\" to %s."
 msgstr "%s ne može da sačuva „%s“ u %s."
 
-#: src/cong-error-file-save.c:98
+#: src/cong-error-file-save.c:101
 msgid ""
 "(i) Try checking that you spelt the location's name correctly.  Remember "
 "that capitalisation is significant (\"MyDirectory\" is not the same as "
@@ -609,47 +628,47 @@ msgstr ""
 "(b) Probajte da sačuvate na nekom drugom mestu."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:106 src/cong-error-file-save.c:225
+#: src/cong-error-file-save.c:109 src/cong-error-file-save.c:228
 #, c-format
 msgid "The location \"%s\" does not support the writing of files."
 msgstr "Putanja „%s“ ne podržava upis datoteka."
 
-#: src/cong-error-file-save.c:110 src/cong-error-file-save.c:229
-#: src/cong-error-file-save.c:337
+#: src/cong-error-file-save.c:113 src/cong-error-file-save.c:232
+#: src/cong-error-file-save.c:340
 msgid "Try saving to a different location."
 msgstr "Pokušajte da sačuvate na nekom drugom mestu."
 
-#: src/cong-error-file-save.c:121
+#: src/cong-error-file-save.c:124
 msgid "There were problems writing the content of the file."
 msgstr "Došlo je do neprilika pri upisu sadržaja datoteke."
 
-#: src/cong-error-file-save.c:122
+#: src/cong-error-file-save.c:125
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr "Pokušajte ponovo. Ako opet ne uspe, sačuvajte na nekom drugom mestu."
 
-#: src/cong-error-file-save.c:151
+#: src/cong-error-file-save.c:154
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
 msgstr "Veličina datoteke bi bila %s, a uređaj je veličine svega %s."
 
 #. Can't get at the capacity for the device or "volume":
-#: src/cong-error-file-save.c:157
+#: src/cong-error-file-save.c:160
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
 "Datoteka je prevelika da bi stala na disk (veličina datoteke bi bila %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:165
+#: src/cong-error-file-save.c:168
 msgid "The file is too big to fit on the device."
 msgstr "Datoteka je prevelika da bi stala na disk."
 
-#: src/cong-error-file-save.c:174
+#: src/cong-error-file-save.c:177
 msgid "Try saving the file to a different location."
 msgstr "Pokušajte da sačuvate na nekom drugom mestu."
 
-#: src/cong-error-file-save.c:195
+#: src/cong-error-file-save.c:198
 #, c-format
 msgid ""
 "The size of the file would be %s, but you only have %s free on that device."
@@ -658,7 +677,7 @@ msgstr ""
 "prostora na tom disku."
 
 #. Can't get at the free space for the device or "volume":
-#: src/cong-error-file-save.c:201
+#: src/cong-error-file-save.c:204
 #, c-format
 msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
@@ -668,11 +687,11 @@ msgstr ""
 "datoteke bi bila %s)."
 
 #. We don't know the size of the file:
-#: src/cong-error-file-save.c:209
+#: src/cong-error-file-save.c:212
 msgid "The file is too big to fit in the remaining space on the device."
 msgstr "Datoteka je prevelika da bi stala u preostali prostor na disku."
 
-#: src/cong-error-file-save.c:218
+#: src/cong-error-file-save.c:221
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
@@ -680,7 +699,7 @@ msgstr ""
 "Probajte da sačuvate na neko drugo mesto, ili oslobodite nešto mesta "
 "premeštanjem neželjenih datoteka sa tog uređaja u smeće."
 
-#: src/cong-error-file-save.c:239
+#: src/cong-error-file-save.c:242
 msgid ""
 "(i) Try checking that you spelt the location correctly.  Remember that "
 "capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
@@ -691,11 +710,11 @@ msgstr ""
 "slova bitna („http“ nije isto što i „Http“ ili „HTTP“).\n"
 "(b) Probajte da sačuvate na neko drugo mesto."
 
-#: src/cong-error-file-save.c:253
+#: src/cong-error-file-save.c:256
 msgid "You do not have permission to write to that location."
 msgstr "Niste ovlašćeni da upisujete na to mesto."
 
-#: src/cong-error-file-save.c:254
+#: src/cong-error-file-save.c:257
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
@@ -704,19 +723,19 @@ msgstr ""
 "sistema da vam da ovlašćenja."
 
 #. FIXME:  capitalisation issues
-#: src/cong-error-file-save.c:268
+#: src/cong-error-file-save.c:271
 #, c-format
 msgid "\"%s\" is a directory."
 msgstr "„%s“ je direktorijum."
 
-#: src/cong-error-file-save.c:272
+#: src/cong-error-file-save.c:275
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
 msgstr ""
 "Morate sačuvati datoteku unutar direktorijuma, a ne na sam direktorijum."
 
-#: src/cong-error-file-save.c:290
+#: src/cong-error-file-save.c:293
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
@@ -724,7 +743,7 @@ msgstr ""
 "Pokušajte ponovo. Ako opet ne uspe, možda je server nedostupan; pokušajte da "
 "sačuvate na neko drugo mesto."
 
-#: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
+#: src/cong-error-file-save.c:302 src/cong-error-file-save.c:311
 msgid ""
 "(i) Try checking that you spelt the location correctly.\n"
 "(ii) Try again. If it fails again, the server may be down; try saving to "
@@ -734,48 +753,48 @@ msgstr ""
 "(b) Pokušajte ponovo. Ako opet ne uspe, možda je server nedostupan; "
 "pokušajte da sačuvate na neko drugo mesto."
 
-#: src/cong-error-file-save.c:317 src/cong-error-file-save.c:326
+#: src/cong-error-file-save.c:320 src/cong-error-file-save.c:329
 msgid "Try again. If it fails again, try saving to another location."
 msgstr "Pokušajte ponovo. Ako opet ne uspe, sačuvajte na nekom drugom mestu."
 
 #. FIXME: need some thought about the messages for this
-#: src/cong-error-file-save.c:333
+#: src/cong-error-file-save.c:336
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
 msgstr "Putanja „%s“ dozvoljava samo čitanje datoteka, ne i pisanje."
 
 # bug: you sure do have to think more about these messages
 #. FIXME: need to think more about these messages
-#: src/cong-error-file-save.c:345
+#: src/cong-error-file-save.c:348
 #, c-format
 msgid "The name \"%s\" is too long for the location to manage."
 msgstr "Ime „%s“ je predugačko za baratanje putanjom."
 
-#: src/cong-error-file-save.c:349
+#: src/cong-error-file-save.c:352
 msgid "Try again with a shorter file name."
 msgstr "Pokušajte ponovo sa kraćim imenom datoteke."
 
 #. 5 megabytes, for a test
-#: src/cong-error-tests.c:17
+#: src/cong-error-tests.c:16
 #, c-format
 msgid "Testing File->Open failure of \"%s\" with result %s"
 msgstr "Isprobavanje greške pri Datoteka->Otvori za „%s“ sa rezultatom %s"
 
-#: src/cong-error-tests.c:23
+#: src/cong-error-tests.c:22
 #, c-format
 msgid "Testing File->Save failure of \"%s\" with result %s"
 msgstr "Isprobavanje greške pri Datoteka->Sačuvaj za „%s“ sa rezultatom %s"
 
-#: src/cong-error-tests.c:29
+#: src/cong-error-tests.c:28
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
 msgstr "Isprobavanje obične greške „%s“ sa rezultatom %s"
 
-#: src/cong-error-tests.c:32
+#: src/cong-error-tests.c:31
 msgid "Conglomerate is simulating the failure of a generic file operation."
 msgstr "Konglomerat oponaša grešku u običnoj operaciji sa datotekom."
 
-#: src/cong-error-tests.c:35
+#: src/cong-error-tests.c:34
 msgid "This dialog was generated by the automated testing routine"
 msgstr "Ovo prozorče je sačinila automatska funkcija za isprobavanje"
 
@@ -819,9 +838,9 @@ msgstr "Opcije izvoza"
 msgid "Name"
 msgstr "Ime"
 
-#: src/cong-file-export.c:305 src/cong-file-new.c:231
+#: src/cong-file-export.c:305 src/cong-file-new.c:232
 #: src/cong-file-print.c:242 src/cong-file-properties.c:107
-#: src/cong-menus.c:426 src/cong-parser-error.c:259
+#: src/cong-menus.c:426 src/cong-parser-error.c:269
 msgid "Description"
 msgstr "Opis"
 
@@ -834,21 +853,21 @@ msgstr "Konglomerat ne može da izveze „%s“"
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr "Nijedan od dodataka Konglomerata ne može da izveze datoteke tog tipa."
 
-#: src/cong-file-import.c:64
+#: src/cong-file-import.c:65
 msgid "Import file..."
 msgstr "Uvezi datoteku..."
 
 #. FIXME:  eventually provide a convenience dialog to force things
-#: src/cong-file-import.c:95
+#: src/cong-file-import.c:98
 msgid "Could not import the file."
 msgstr "Ne mogu da uvezem datoteku."
 
-#: src/cong-file-import.c:96
+#: src/cong-file-import.c:99
 #, c-format
 msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
 msgstr "Nijedan od dodataka Konglomerata ne može da učita datoteke tipa „%s“"
 
-#: src/cong-file-import.c:97
+#: src/cong-file-import.c:100
 msgid "FIXME"
 msgstr "POPRAVI"
 
@@ -857,16 +876,16 @@ msgstr "POPRAVI"
 msgid "Creating a new file (%s)"
 msgstr "Pravljenje nove datoteke (%s)"
 
-#: src/cong-file-new.c:211
+#: src/cong-file-new.c:212
 msgid "File Type"
 msgstr "Tip datoteke"
 
 #. FIXME:  what if no document factories found?
-#: src/cong-file-new.c:398 src/cong-file-new.c:405 src/cong-file-new.c:430
+#: src/cong-file-new.c:399 src/cong-file-new.c:406 src/cong-file-new.c:431
 msgid "Creating a new file"
 msgstr "Pravljenje nove datoteke"
 
-#: src/cong-file-new.c:406
+#: src/cong-file-new.c:407
 msgid ""
 "This assistant will guide you through creating a new file.\n"
 "\n"
@@ -884,16 +903,16 @@ msgstr ""
 "Nadamo se da će Konglomerat moći u budućim izdanjima da obrazuje „šablonske "
 "dokumente“ koje ćemo dodati ovom sistemu."
 
-#: src/cong-file-new.c:419
+#: src/cong-file-new.c:420
 msgid "What type of file would you like to create?"
 msgstr "Dokument kojeg tipa želite da napravite?"
 
-#: src/cong-file-new.c:421
+#: src/cong-file-new.c:422
 msgid ""
 "Highlight one of the items in the list and select \"Forward\" to continue"
 msgstr "Istaknite jednu od stavki iz spiska i izaberite „Napred“ da nastavite"
 
-#: src/cong-file-new.c:431
+#: src/cong-file-new.c:432
 msgid ""
 "Conglomerate now has the information it needs to create the document.  Press "
 "\"Apply\" to create it.  You will need to save the document if you wish to "
@@ -903,7 +922,7 @@ msgstr ""
 "„Primeni“ da ga obrazujete. Moraćete da sačuvate dokument ukoliko želite da "
 "ga zadržite."
 
-#: src/cong-file-open.c:53
+#: src/cong-file-open.c:54
 msgid ""
 "The internal structure of the document does not match any of the types known "
 "to Conglomerate."
@@ -911,7 +930,7 @@ msgstr ""
 "Unutrašnja struktura dokumenta se ne poklapa ni sa jednim tipom za koji "
 "Konglomerat zna."
 
-#: src/cong-file-open.c:54
+#: src/cong-file-open.c:55
 msgid ""
 "You can force Conglomerate to load the document by clicking on the \"Force\" "
 "button below, but results may not be ideal."
@@ -919,11 +938,11 @@ msgstr ""
 "Možete naterati Konglomerata da silom učita dokument klikom na dugme „Silom“ "
 "ispod, ali rezultati možda neće biti sjajni."
 
-#: src/cong-file-open.c:55
+#: src/cong-file-open.c:56
 msgid "Force"
 msgstr "Silom"
 
-#: src/cong-file-open.c:194
+#: src/cong-file-open.c:168
 msgid "Select an XML document"
 msgstr "Izaberite XML dokument"
 
@@ -1033,7 +1052,7 @@ msgid "Basic"
 msgstr "Osnovno"
 
 #: src/cong-file-properties.c:194 src/cong-node-properties-dialog.c:742
-#: src/cong-node-properties-dialog.c:825
+#: src/cong-node-properties-dialog.c:826
 msgid "Advanced"
 msgstr "Napredno"
 
@@ -1093,17 +1112,17 @@ msgstr "Tipovi dokumenta"
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Konglomerat ne može da otvori rezultat preinačenja"
 
-#: src/cong-menus.c:551 src/cong-plugin.c:1018
+#: src/cong-menus.c:551 src/cong-plugin.c:1019
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "Došlo je do neprilika pri učitavanju datoteke sa opisom stila „%s“"
 
-#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1021
-#: src/cong-plugin.c:1045
+#: src/cong-menus.c:554 src/cong-menus.c:578 src/cong-plugin.c:1022
+#: src/cong-plugin.c:1046
 msgid "Conglomerate could not transform the document"
 msgstr "Konglomerat ne može da preinači dokument"
 
-#: src/cong-menus.c:575 src/cong-plugin.c:1042
+#: src/cong-menus.c:575 src/cong-plugin.c:1043
 msgid "There was a problem applying the stylesheet file"
 msgstr "Došlo je do neprilika pri primeni datoteke sa opisom stila"
 
@@ -1369,7 +1388,7 @@ msgstr "Vrednost"
 msgid "Attributes for <tt>%s</tt> tags"
 msgstr "Atributi za oznake <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:734 src/cong-node-properties-dialog.c:820
+#: src/cong-node-properties-dialog.c:734 src/cong-node-properties-dialog.c:821
 msgid "DTD"
 msgstr "DTD"
 
@@ -1377,21 +1396,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Nepoznati podaci"
 
-#: src/cong-parser-error.c:171
+#: src/cong-parser-error.c:177
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Greške u obradi pri učitavanju %s"
 
-#: src/cong-parser-error.c:254
+#: src/cong-parser-error.c:185
+msgid "_Retry"
+msgstr "_Ponovi"
+
+#: src/cong-parser-error.c:264
 msgid "Line Number"
 msgstr "Broj reda"
 
-#: src/cong-parser-error.c:316
+#: src/cong-parser-error.c:326
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s ne može da razume unutrašnji oblik datoteke."
 
-#: src/cong-parser-error.c:324
+#: src/cong-parser-error.c:334
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1401,11 +1424,11 @@ msgstr ""
 "formed); koristi mnogo strožija pravila od većina čitača veba. Takođe, još "
 "uvek ne podržava SGML. Nadamo se da ćemo ovo ispraviti u narednim izdanjima."
 
-#: src/cong-parser-error.c:325
+#: src/cong-parser-error.c:335
 msgid "Show Details"
 msgstr "Prikaži detalje"
 
-#: src/cong-plugin.c:946 src/cong-plugin.c:982
+#: src/cong-plugin.c:947 src/cong-plugin.c:983
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Konglomerat ne može da pronađe podatke o prikazu za novu datoteku"
 
@@ -1435,7 +1458,7 @@ msgid "Copy"
 msgstr "Umnoži"
 
 #: src/cong-primary-window.c:342 src/cong-primary-window.c:343
-#: src/xmledit.c:149
+#: src/xmledit.c:155
 msgid "Paste"
 msgstr "Ubaci"
 
@@ -1460,11 +1483,11 @@ msgstr "Dobrodošli u mnogo zakasneli uređivač Konglomerat."
 msgid "%s (modified) - %s"
 msgstr "%s (izmenjen) — %s"
 
-#: src/cong-util.c:380 src/plugin-docbook.c:1006
+#: src/cong-util.c:243 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Štampanje XSL objekata oblikovanja (FO)"
 
-#: src/cong-util.c:424
+#: src/cong-util.c:287
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ovo će jednom postati rezultat iz cong_util_print_xslfo"
 
@@ -1472,24 +1495,6 @@ msgstr "Ovo će jednom postati rezultat iz cong_util_print_xslfo"
 #, c-format
 msgid "Split %s tag"
 msgstr "Rastavi oznaku %s"
-
-#: src/main.c:91
-#, c-format
-msgid "Conglomerate could not load any xds files from the directory \"%s\""
-msgstr ""
-"Konglomerat ne može da učita nikakve XDS datoteke iz direktorijuma „%s“"
-
-#: src/main.c:93
-msgid "Conglomerate could not find any descriptions of document types."
-msgstr "Konglomerat ne može da pronađe opise tipova dokumenata."
-
-#: src/main.c:95
-msgid ""
-"If you see this error, it is likely that you built Conglomerate, but did not "
-"install it.  Try installing it."
-msgstr ""
-"Ukoliko vidite ovu grešku, najverovatnije ste izgradili Konglomerat, ali ga "
-"niste instalirali. Pokušajte da ga instalirate."
 
 #: src/plugin-cleanup-source.c:376 src/plugin-cleanup-source.c:410
 msgid "Cleanup XML Source"
@@ -1507,11 +1512,11 @@ msgstr ""
 msgid "_Clean the XML Source"
 msgstr "_Očisti XML kôd"
 
-#: src/plugin-convert-case.c:117
+#: src/plugin-convert-case.c:118
 msgid "Export as \"lower case\" XML"
 msgstr "Izvezi kao XML „malim slovima“"
 
-#: src/plugin-convert-case.c:118
+#: src/plugin-convert-case.c:119
 msgid ""
 "Exports as an XML file, converting all the tags and attributes in the "
 "document to lowercase.  Useful when working with legacy SGML documents."
@@ -1687,56 +1692,56 @@ msgstr "Spusti"
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Spusti odeljak na niži organizacioni nivo u dokumentu"
 
-#: src/plugin-dtd.c:80
+#: src/plugin-dtd.c:81
 #, c-format
 msgid "Autogenerated document type based on %s"
 msgstr "Samosačinjen tip dokumenta zasnovan na %s"
 
-#: src/plugin-dtd.c:81
+#: src/plugin-dtd.c:82
 #, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 "Ova datoteka naznake Konglomeratovog prikaza je automatski sačinjena iz %s"
 
-#: src/plugin-dtd.c:156
+#: src/plugin-dtd.c:157
 msgid "Convert DTD into a Conglomerate Display Specification"
 msgstr "Pretvori DTD u datoteku naznake Konglomeratovog prikaza."
 
-#: src/plugin-dtd.c:157
+#: src/plugin-dtd.c:158
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr ""
 "Uvezi datoteku DTD, stvarajući datoteku naznake Konglomeratovog prikaza."
 
-#: src/plugin-dtd.c:164
+#: src/plugin-dtd.c:165
 msgid "Convert DTD into a Relax NG schema"
 msgstr "Pretvori DTD u Relax NG datoteku"
 
-#: src/plugin-dtd.c:165
+#: src/plugin-dtd.c:166
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
 msgstr "Uvezi datoteku DTD, pretvarajući je u RELAX NG šemu."
 
-#: src/plugin-dtd.c:172
+#: src/plugin-dtd.c:173
 msgid "Convert DTD into W3C XML Schema"
 msgstr "Pretvori DTD u W3C XML datoteku"
 
-#: src/plugin-dtd.c:173
+#: src/plugin-dtd.c:174
 msgid "Import a DTD file, converting it into a W3C XML Schema."
 msgstr "Uvezi datoteku DTD, pretvarajući je u W3C XML šemu."
 
-#: src/plugin-dtd.c:180
+#: src/plugin-dtd.c:181
 msgid "Convert DTD into a Schematron file"
 msgstr "Pretvori DTD u Schematron datoteku"
 
-#: src/plugin-dtd.c:181
+#: src/plugin-dtd.c:182
 msgid "Import a DTD file, converting it into a Schematron Schema."
 msgstr "Uvezi datoteku DTD, pretvarajući je u Schematron šemu."
 
-#: src/plugin-dtd.c:188
+#: src/plugin-dtd.c:189
 msgid "Convert DTD into an Examplotron file"
 msgstr "Pretvori DTD u Examplotron datoteku"
 
-#: src/plugin-dtd.c:189
+#: src/plugin-dtd.c:190
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "Uvezi datoteku DTD, pretvarajući je u Examplotron šemu."
 
@@ -1866,7 +1871,7 @@ msgstr "Dokument „%s“ nije ispravan."
 msgid "Click on the \"Details\" button for more information."
 msgstr "Kliknite na dugme „Detalji“ za više podataka."
 
-#: src/plugin-validate.c:131 src/plugin-website.c:476
+#: src/plugin-validate.c:131 src/plugin-website.c:477
 msgid "_Details"
 msgstr "_Detalji"
 
@@ -1892,35 +1897,35 @@ msgstr ""
 msgid "_Validate Document"
 msgstr "Proveri ispra_vnost dokumenta"
 
-#: src/plugin-website.c:461
+#: src/plugin-website.c:462
 msgid "Generating website"
 msgstr "Izrađuje veb stranice"
 
-#: src/plugin-website.c:468
+#: src/plugin-website.c:469
 msgid "Finished generating website."
 msgstr "Završena je izrada veb stranica."
 
-#: src/plugin-website.c:473
+#: src/plugin-website.c:474
 msgid "Conglomerate did not finish generating the website"
 msgstr "Konglomerat nije završio sa izradom veb stranica"
 
-#: src/plugin-website.c:474
+#: src/plugin-website.c:475
 msgid "One of the stages reported an error."
 msgstr "Neki od koraka je prijavio grešku."
 
-#: src/plugin-website.c:475
+#: src/plugin-website.c:476
 msgid "Click on the \"Details\" button for more information"
 msgstr "Kliknite na dugme „Detalji“ za više podataka."
 
-#: src/plugin-website.c:493
+#: src/plugin-website.c:494
 msgid "Generate website"
 msgstr "Izradi veb stranice"
 
-#: src/plugin-website.c:494 src/plugin-website.c:497 src/plugin-website.c:498
+#: src/plugin-website.c:495 src/plugin-website.c:498 src/plugin-website.c:499
 msgid "Generates a collection of HTML pages from the website XML description"
 msgstr "Izrađuje skup HTML stranica iz XML opisa veb stranice"
 
-#: src/plugin-website.c:496
+#: src/plugin-website.c:497
 msgid "Generate _Website"
 msgstr "Izradi _veb stranicu"
 
@@ -1942,48 +1947,48 @@ msgid "Apply span tag: %s"
 msgstr "Primeni obuhvatnu oznaku: %s"
 
 # bug: is "span" keyword
-#: src/popup.c:264
+#: src/popup.c:266
 msgid "Remove Span Tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
 # bug: is "span" keyword
-#: src/popup.c:363
+#: src/popup.c:365
 msgid "Remove span tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
-#: src/popup.c:923
+#: src/popup.c:925
 msgid "Delete this item"
 msgstr "Ukloni ovu stavku"
 
-#: src/popup.c:933
+#: src/popup.c:935
 msgid "Add text node after"
 msgstr "Dodaj tekstualni čvor iza"
 
-#: src/popup.c:941
+#: src/popup.c:943
 msgid "Add text node before"
 msgstr "Dodaj tekstualni čvor ispred"
 
-#: src/popup.c:952
+#: src/popup.c:954
 msgid "Set the text"
 msgstr "Postavi tekst"
 
-#: src/popup.c:983
+#: src/popup.c:985
 msgid "Paste into"
 msgstr "Ubaci u"
 
-#: src/popup.c:991
+#: src/popup.c:993
 msgid "Paste before"
 msgstr "Ubaci ispred"
 
-#: src/popup.c:999
+#: src/popup.c:1001
 msgid "Paste after"
 msgstr "Ubaci iza"
 
-#: src/popup.c:1016
+#: src/popup.c:1018
 msgid "New sub-element"
 msgstr "Novi pod-element"
 
-#: src/popup.c:1041
+#: src/popup.c:1043
 msgid "New sibling"
 msgstr "Novo grananje"
 
@@ -1997,7 +2002,7 @@ msgstr "Umetni grananje: %s"
 msgid "Insert child: %s"
 msgstr "Umetni podelement: %s"
 
-#: src/xmldata.c:422
+#: src/xmldata.c:424
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -2007,23 +2012,23 @@ msgstr ""
 "neki od sledećih tipova sadržanih elemenata."
 
 #. select a dialog element
-#: src/xmldata.c:426
+#: src/xmldata.c:428
 msgid "Required Children Choices"
 msgstr "Obavezni izbori za sadržane elemente"
 
-#: src/xmledit.c:227
+#: src/xmledit.c:233
 msgid "Paste Under"
 msgstr "Ubaci ispod"
 
-#: src/xmledit.c:270
+#: src/xmledit.c:276
 msgid "Paste Before"
 msgstr "Ubaci ispred"
 
-#: src/xmledit.c:312
+#: src/xmledit.c:318
 msgid "Paste After"
 msgstr "Ubaci iza"
 
-#: src/xmledit.c:351
+#: src/xmledit.c:357
 msgid "Source View - Conglomerate"
 msgstr "Pregled kôda — Konglomerat"
 
