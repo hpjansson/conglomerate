@@ -31,6 +31,7 @@ config.status: configure
 	--build=$(DEB_BUILD_GNU_TYPE) \
 	--prefix=/usr --mandir=\$${prefix}/share/man \
 	--sysconfdir=/etc \
+	--enable-debug \
 	--infodir=\$${prefix}/share/info \
 	--enable-gtk-doc=no \
 	--datadir=\$${prefix}/share || cat config.log
