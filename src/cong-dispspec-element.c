@@ -575,14 +575,10 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 		}
 	}
 
-	/* Extract pixbuf: */
+	/* Load pixbuf: */
+	if (element->icon_name)
 	{
-		xmlChar* prop = xmlGetProp(xml_element, "icon");
-		if (prop) {
-			element->icon16 = cong_util_load_icon(prop);
-
-			xmlFree(prop);
-		}
+		element->icon16 = cong_util_load_icon(element->icon_name);
 	}
 
   	/* Process children: */
@@ -709,8 +705,6 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 
 	/* FIXME:  Need to store these: */
 #if 0
-	GdkPixbuf *icon16;
-
 	gboolean collapseto;
 
 #if NEW_LOOK

@@ -1,5 +1,9 @@
 2003-11-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h
+
+	Added gxx support for element icon attribute, now outputs this correctly when saving xds files
+
 	* cong-dispspec-element-gxx.h, cong-dispspec-element.c
 
 	Added gxx support for <header-info> tags, fixing a long-standing bug in xds saving

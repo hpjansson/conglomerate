@@ -38,6 +38,7 @@ struct CongDispspecElement
 	gchar *tagname;
 	gchar *username;
 	gchar *short_desc;
+	gchar *icon_name;
 	GdkPixbuf *icon16;
 	enum CongWhitespaceHandling whitespace;
 
