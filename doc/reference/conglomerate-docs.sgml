@@ -285,8 +285,22 @@ cong_document_end_command (doc, cmd);
 
   <part id="plugins">
     <title>Plugins</title>
+    <partintro>
+    <para>The singleton <link linkend="CongApp">CongApp</link> object owns a singleton <link linkend="CongPluginManager">CongPluginManager</link>.  This in turn owns a collection of <link linkend="CongPlugin">CongPlugin</link> objects, each of which represents a plugin.  In turn, these each contain a collection of <link linkend="CongService">CongService</link> objects which they register with the program.  The various subclasses of <link linkend="CongService">CongService</link> are the various kinds of functionality offered by plugins to the progam.</para>
+    <para>The plugins aren't actually compiled into separate dynamic libraries yet, but instead are all compiled into the main executable.  Registration hooks are called manually within <filename>cong-fake-plugin-hooks.c</filename>.  Our current plan is to move to a genuine plugin system by using the libgoffice library (when it is released).</para>
+    </partintro>
     &cong-plugin;
     &cong-plugin-manager;
+    &cong-service;
+    &cong-service-tool;
+    &cong-service-doc-tool;
+    &cong-service-document-factory;
+    &cong-service-editor-node-factory;
+    &cong-service-exporter;
+    &cong-service-importer;
+    &cong-service-node-property-dialog;
+    &cong-service-node-tool;
+    &cong-service-print-method;
     &cong-fake-plugin-hooks;
     &plugin-admonition-node-element;
     &plugin-lists-area-listitem;
@@ -323,16 +337,6 @@ cong_document_end_command (doc, cmd);
 
   <part id="misc">
     <title>Miscellaneous</title>
-    &cong-service;
-    &cong-service-tool;
-    &cong-service-doc-tool;
-    &cong-service-document-factory;
-    &cong-service-editor-node-factory;
-    &cong-service-exporter;
-    &cong-service-importer;
-    &cong-service-node-property-dialog;
-    &cong-service-node-tool;
-    &cong-service-print-method;
     &cong-font;
     &cong-graph;
     &cong-marshal;
@@ -348,8 +352,8 @@ cong_document_end_command (doc, cmd);
 -->
   </part>
 
-  <part id="object-tree">
-    <title>Object Tree</title>
+  <part id="class-hierarchy">
+    <title>Class Hierarchy</title>
     &tree_index;
   </part>
 
