@@ -370,14 +370,12 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	primary_window->window = gnome_app_new(PACKAGE_NAME,
 					       title);
 
-	{	
-		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
-
-		gtk_window_set_icon(GTK_WINDOW(primary_window->window),
-				    icon_pixbuf);
-
-		gdk_pixbuf_unref(icon_pixbuf);
-	}
+	gtk_window_set_default_icon_from_file(
+		gnome_program_locate_file(cong_app_singleton()->gnome_program,
+					  GNOME_FILE_DOMAIN_APP_PIXMAP,
+					  "conglomerate-icon-32.png", FALSE, 
+					  NULL), 
+		NULL);
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",
 			   GTK_SIGNAL_FUNC(delete_event), primary_window);

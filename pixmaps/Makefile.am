@@ -1,5 +1,5 @@
 dtidir = $(datadir)/pixmaps
-dti_DATA = conglomerate-icon-16.png
+dti_DATA = conglomerate-icon-16.png conglomerate-icon-32.png
 
 ##appiconsdir = $(pkgdatadir)/icons
 ##appiconsdir = $(datadir)/conglomerate/icons
