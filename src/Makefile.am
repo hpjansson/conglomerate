@@ -15,6 +15,7 @@ endif
 conglomerate_SOURCES =      \
   global.h                  \
   cong-app.h                \
+  cong-attribute-editor.h   \
   cong-dialog.h             \
   cong-dispspec.h           \
   cong-dispspec-registry.h  \
@@ -81,6 +82,7 @@ conglomerate_SOURCES =      \
   cong-view.h               \
   fo.h                      \
   cong-app.c                \
+  cong-attribute-editor.c   \
   cong-debug-log-view.c     \
   cong-dialog.c             \
   cong-dispspec.c           \

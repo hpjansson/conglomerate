@@ -1,3 +1,9 @@
+2003-09-02  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-attribute-editor.c, cong-attribute-editor.h, Makefile.am
+
+	New files
+	
 2003-09-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* plugin-docbook.c
