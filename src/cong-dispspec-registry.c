@@ -43,7 +43,12 @@ visit_func(const gchar *rel_path,
 		GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri_filename, &ds);
 
 		if (vfs_result==GNOME_VFS_OK) {
-			cong_dispspec_registry_add(details->registry, ds);
+			
+			if (ds!=NULL) {
+				cong_dispspec_registry_add(details->registry, ds);
+			} else {
+				g_message("Problem parsing xds file\n");
+			}
 		} else {
 			g_message("Problem loading xds file\n");
 		}
