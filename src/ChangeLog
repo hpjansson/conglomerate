@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-12-12 David Malcolm
+
+	* cong-span-text-editor.c
+
+	Fixes to whitespace stripping/CongTextSpan code
+	
 2002-12-12 Jerritt Collord
 
 	* dispspec.c: changed widget_usize for element chooser

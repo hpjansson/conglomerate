@@ -33,12 +33,19 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render);
 
 typedef struct CongTextSpan CongTextSpan;
 
-/* Struct representing a run of characters within the plaintext cache from a specific text node; useful for converting from PangoLayoutLines back to the underlying XML: */
+/**
+ * Struct representing a run of characters within the plaintext cache from a specific text node; 
+ * useful for converting from PangoLayoutLines back to the underlying XML: 
+ * There can be more than one of these for a particular text node; each is a subset of the characters
+ * within the text node - this is to cope with the case where surplus whitespace characters are
+ * stripped when the plaintext cache is built.
+ */
 struct CongTextSpan
 {
-	int first_byte_offset;
-	int byte_count;
-	CongNodePtr text_node;
+	int original_first_byte_offset; /* offset into the text within the original node */
+	int stripped_first_byte_offset; /* offset into the stripped plaintext cache */
+	int byte_count; /* number of bytes within the stripped plaintext cache */
+	CongNodePtr text_node; /* the original node */
 };
 
 typedef struct CongTextRange CongTextRange;
@@ -71,7 +78,7 @@ struct CongSpanTextEditor
 static void regenerate_plaintext(CongSpanTextEditor *span_text_editor);
 static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
 static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
-static CongTextSpan *get_text_span_for_node(CongSpanTextEditor *span_text_editor, CongNodePtr node);
+static gboolean get_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset);
 
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor);
 static void span_text_editor_on_recursive_self_test(CongElementEditor *element_editor);
@@ -93,8 +100,25 @@ static CongElementEditorClass span_text_editor_class =
 	span_text_editor_on_button_press
 };
 
-/* Strips repeated whitespace from strings; converts all into spaces: */
-gchar* strip_whitespace_from_string(const gchar* input_string)
+CongTextSpan* cong_text_span_new(int original_first_byte_offset,
+				 int stripped_first_byte_offset,
+				 int byte_count,
+				 CongNodePtr text_node)
+{
+	CongTextSpan *text_span = g_new0(CongTextSpan,1);
+	text_span->original_first_byte_offset = original_first_byte_offset;
+	text_span->stripped_first_byte_offset = stripped_first_byte_offset;
+	text_span->byte_count = byte_count;
+	text_span->text_node = text_node;
+
+	return text_span;
+}
+
+/* Strips repeated whitespace from strings; converts all into spaces; adds text spans accordingly to the list: */
+gchar* strip_whitespace_from_string(const gchar* input_string,
+				    GList **list_of_cong_text_span,
+				    int byte_offset_start_of_text,
+				    CongNodePtr node)
 {
 	gunichar *unichar_string;
 	glong num_chars;
@@ -102,8 +126,12 @@ gchar* strip_whitespace_from_string(const gchar* input_string)
 	gchar *dst;
 	int i;
 	gboolean last_char_was_space=FALSE;
+	CongTextSpan *text_span;
+	int original_byte_offset_start_of_span = 0;
+	int stripped_byte_offset_start_of_span = byte_offset_start_of_text;
 
 	g_return_val_if_fail(input_string, NULL);
+	g_return_val_if_fail(list_of_cong_text_span, NULL);
 
 	unichar_string = g_utf8_to_ucs4_fast(input_string,
                                              -1,
@@ -123,9 +151,24 @@ gchar* strip_whitespace_from_string(const gchar* input_string)
 				
 				/* Write a space into the buffer: */
 				*(dst++) = ' ';
+
+				/* Add stuff to the list of spans */
+				text_span = cong_text_span_new(original_byte_offset_start_of_span,
+							       stripped_byte_offset_start_of_span,
+							       (i-original_byte_offset_start_of_span),
+							       node);
+				*list_of_cong_text_span = g_list_append(*list_of_cong_text_span, 
+									text_span);
+
 			}
 
 		} else {
+
+			if (last_char_was_space) {
+				/* We're starting what will be a new span; record where we've got to: */
+				original_byte_offset_start_of_span = i;
+				stripped_byte_offset_start_of_span = byte_offset_start_of_text + (dst-result_string);
+			}
 
 			/* Write character as utf-8 into buffer: */
 			dst += g_unichar_to_utf8(c, dst);
@@ -135,6 +178,16 @@ gchar* strip_whitespace_from_string(const gchar* input_string)
 	}
 
 	g_free(unichar_string);
+
+	if (!last_char_was_space) {
+		/* Add stuff to the list of spans */
+		text_span = cong_text_span_new(original_byte_offset_start_of_span,
+					       stripped_byte_offset_start_of_span,
+					       (i-original_byte_offset_start_of_span),
+					       node);
+		*list_of_cong_text_span = g_list_append(*list_of_cong_text_span, 
+							text_span);
+	}
 
 	/* Terminate the string: */
 	*dst = '\0';
@@ -153,19 +206,22 @@ static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node, gbo
 	g_return_if_fail(cong_node_type(node)==CONG_NODE_TYPE_TEXT);
 	g_return_if_fail(node->content);
 
-	/* Add stuff to the list of spans */
-	text_span = g_new0(CongTextSpan,1);
-	text_span->first_byte_offset = strlen(span_text_editor->plain_text);
-
 	if (strip_whitespace) {
-		string_to_append = strip_whitespace_from_string(node->content);
+		string_to_append = strip_whitespace_from_string(node->content,
+								&span_text_editor->list_of_cong_text_span,
+								strlen(span_text_editor->plain_text),
+								node);
 	} else {
 		string_to_append = g_strdup(node->content);
+
+		/* Add stuff to the list of spans */
+		text_span = cong_text_span_new(0,
+					       strlen(span_text_editor->plain_text),
+					       strlen(string_to_append),
+					       node);
+		span_text_editor->list_of_cong_text_span = g_list_append(span_text_editor->list_of_cong_text_span, text_span);
 	}
 
-	text_span->byte_count = strlen(string_to_append);
-	text_span->text_node = node;
-	span_text_editor->list_of_cong_text_span = g_list_append(span_text_editor->list_of_cong_text_span, text_span);
 	
 	/* Add to the big plaintext string: */
 	new_value = g_strdup_printf("%s%s", span_text_editor->plain_text, string_to_append);
@@ -315,6 +371,7 @@ static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor,
 	}
 }
 
+/* Currently unused, but will be used for hit testing etc: */
 static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
 {
 	GList *iter;
@@ -326,9 +383,9 @@ static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_
 		CongTextSpan *text_span = iter->data;
 		g_assert(text_span);
 		
-		g_assert(byte_offset >= text_span->first_byte_offset);
+		g_assert(byte_offset >= text_span->stripped_first_byte_offset);
 
-		if (byte_offset < (text_span->first_byte_offset + text_span->byte_count) ) {
+		if (byte_offset < (text_span->stripped_first_byte_offset + text_span->byte_count) ) {
 			return text_span;
 		}
 	}
@@ -336,24 +393,43 @@ static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_
 	return NULL;
 }
 
-static CongTextSpan *get_text_span_for_node(CongSpanTextEditor *span_text_editor, CongNodePtr node)
+static gboolean get_byte_offset_at_location(CongSpanTextEditor *span_text_editor, const CongLocation *location, int *byte_offset)
 {
 	GList *iter;
 
-	g_return_val_if_fail(span_text_editor, NULL);
-	g_return_val_if_fail(node, NULL);
-	
+	g_return_val_if_fail(span_text_editor, FALSE);
+	g_return_val_if_fail(location, FALSE);
+	g_return_val_if_fail(byte_offset, FALSE);
+
 	/* Scan through the text spans, looking for the node: */
 	for (iter = span_text_editor->list_of_cong_text_span; iter; iter = iter->next) {
 		CongTextSpan *text_span = iter->data;
 		g_assert(text_span);
 		
-		if (text_span->text_node==node) {
-			return text_span;
+		if (text_span->text_node==location->tt_loc) {
+			if (location->char_loc < text_span->original_first_byte_offset) {
+				/* Then the location is between the last span and this span; it's probably a whitespace
+				   character that isn't directly represented within the plaintext cache.
+				   The trailing character of the last span should be whitespace, so it's a good candidate for the return
+				   value:
+				*/
+				g_assert(iter->prev);
+				g_assert(text_span->stripped_first_byte_offset>0);
+
+				*byte_offset = text_span->stripped_first_byte_offset;
+				return TRUE;
+			}
+
+			if (location->char_loc < text_span->original_first_byte_offset + text_span->byte_count) {
+				/* Found the text span: */
+				*byte_offset = text_span->stripped_first_byte_offset + (location->char_loc - text_span->original_first_byte_offset);
+				return TRUE;
+			}
 		}
 	}
 
-	return NULL;
+	/* Node not found: */
+	return FALSE;
 }
 
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor)
@@ -609,9 +685,9 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
 	const CongSelection *selection = cong_document_get_selection(doc);
 	const CongCursor *cursor = cong_document_get_cursor(doc);
-	CongTextSpan *selection_start_span = NULL;
-	CongTextSpan *selection_end_span = NULL;
-	CongTextSpan *cursor_span = NULL;
+	gboolean got_selection_start_byte_offset = FALSE;
+	gboolean got_selection_end_byte_offset = FALSE;
+	gboolean got_cursor_byte_offset = FALSE;
 	int selection_start_byte_offset;
 	int selection_end_byte_offset;
 	int cursor_byte_offset;
@@ -626,25 +702,19 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 		g_assert(cong_node_type(selection->loc0.tt_loc)==CONG_NODE_TYPE_TEXT);
 		g_assert(cong_node_type(selection->loc1.tt_loc)==CONG_NODE_TYPE_TEXT);
 
-		selection_start_span = get_text_span_for_node(span_text, selection->loc0.tt_loc);
-		selection_end_span = get_text_span_for_node(span_text, selection->loc1.tt_loc);
+		got_selection_start_byte_offset = get_byte_offset_at_location(span_text, &selection->loc0, &selection_start_byte_offset);
+		got_selection_end_byte_offset = get_byte_offset_at_location(span_text, &selection->loc1, &selection_end_byte_offset);
 
-		if (selection_start_span) {
-			selection_start_byte_offset = selection_start_span->first_byte_offset + selection->loc0.char_loc;
-		}
-		
-		if (selection_end_span) {
-			selection_end_byte_offset = selection_end_span->first_byte_offset + selection->loc1.char_loc;
+		if (selection_end_byte_offset<selection_start_byte_offset) {
+			int tmp = selection_end_byte_offset;
+			selection_end_byte_offset = selection_start_byte_offset;
+			selection_start_byte_offset = tmp;
 		}
 	}
 
 	if (cong_location_exists(&cursor->location)) {
 		if (cursor->on) {
-			cursor_span = get_text_span_for_node(span_text, cursor->location.tt_loc);
-
-			if (cursor_span) {
-				cursor_byte_offset = cursor_span->first_byte_offset + cursor->location.char_loc;
-			}		
+			got_cursor_byte_offset = get_byte_offset_at_location(span_text, &cursor->location, &cursor_byte_offset);
 		}
 	}
 
@@ -686,7 +756,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 		
 		if (render) {
 			/* If selection applies, render it underneath the layout_line: */
-			if (selection_start_span && selection_end_span) {
+			if (got_selection_start_byte_offset && got_selection_end_byte_offset) {
 				/* Then selection exists within this span_text_editor: */
 				GdkGC *selection_gc;
 				int start_x, end_x;
@@ -741,7 +811,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 			}
 
 			/* Render the cursor under the text: */
-			if (cursor_span) {
+			if (got_cursor_byte_offset) {
 				if (cursor_byte_offset >= line->start_index) {
 					if (cursor_byte_offset < line->start_index+line->length) {
 						int cursor_x;
