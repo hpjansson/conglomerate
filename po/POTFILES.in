@@ -14,6 +14,7 @@ glade/cong-find-replace.glade
 glade/docbook-common-properties.glade
 glade/docbook-orderedlist-properties.glade
 glade/docbook-ulink-properties.glade
+glade/plugin-random.glade
 glade/string_selection_dialog.glade
 src/auth_off.c
 src/auth_on.c
@@ -165,6 +166,7 @@ src/plugin-lists.c
 src/plugin-paragraph-area-paragraph.c
 src/plugin-paragraph-node-element-paragraph.c
 src/plugin-paragraph.c
+src/plugin-random.c
 src/plugin-save-dispspec.c
 src/plugin-sgml.c
 src/plugin-templates.c
