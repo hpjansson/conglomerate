@@ -4,6 +4,12 @@
 
 	Added German (de) to ALL_LINGUAS.
 
+2003-08-30  Michael Rasmussen <mir@datanom.net>
+
+	* conglomerate.spec
+	Updated it to version 0.7.0
+	added an instruction to include scrollkeeper files i RPM package
+	
 2003-08-29  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am

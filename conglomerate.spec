@@ -2,7 +2,7 @@
 # This "spec" file is for creating a rpm package.
 #
 %define name    conglomerate
-%define version 0.5.4
+%define version 0.7.0
 %define release 1
 %define prefix  /usr
  
@@ -47,11 +47,13 @@ make prefix=${RPM_BUILD_ROOT}%{prefix} install-strip
  
 %{prefix}/bin/conglomerate
 %{prefix}/share/*
- 
+%{prefix}/var/*
+
 %changelog
+* Fri Aug 29 2003 Michael Rasmussen <mir@datanom.net> (0.7 release)
+- Updated to version 0.7.0
+
 * Sat Jun 06 2003 Michael Rasmussen <mir@datanom.net> (0.5.3 release)
 - First version of this spec file
- 
- 
- 
+
 # end of file
