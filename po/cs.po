@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-15 10:40+0200\n"
-"PO-Revision-Date: 2004-10-15 21:25+0200\n"
+"POT-Creation-Date: 2004-10-19 10:40+0200\n"
+"PO-Revision-Date: 2004-10-19 14:57+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -56,6 +56,1226 @@ msgstr "Vlastní umístění pro soubory specifikace zobrazování."
 msgid "Locations for template files."
 msgstr "Umístění souborů se šablonami."
 
+#: dispspecs/dispspec.xds.in.h:1
+msgid "Collapseto"
+msgstr "Sbalitdo"
+
+#: dispspecs/dispspec.xds.in.h:2
+msgid "Conglomerate Display Specification"
+msgstr "Specifikace zobrazování Conglomerate"
+
+#: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
+#: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
+#: src/cong-edit-preferences.c:271 src/cong-file-export.c:341
+#: src/cong-file-new.c:363 src/cong-file-print.c:250
+#: src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Popis"
+
+#: dispspecs/dispspec.xds.in.h:4
+msgid "Document Models"
+msgstr "Modely dokumentů"
+
+#: dispspecs/dispspec.xds.in.h:5
+msgid "External Document Model"
+msgstr "Externí model dokumentu"
+
+#: dispspecs/dispspec.xds.in.h:6
+msgid "Format"
+msgstr "Formát"
+
+#: dispspecs/dispspec.xds.in.h:7
+msgid "GUI"
+msgstr "GUI"
+
+#: dispspecs/dispspec.xds.in.h:8
+msgid "Header Information"
+msgstr "Informace o hlavičce"
+
+#: dispspecs/dispspec.xds.in.h:9
+msgid ""
+"Information that tells Conglomerate how to display a particular type of file."
+msgstr "Informace, která Conglomerate říká, jak zobrazovat určitý typ souboru."
+
+#: dispspecs/dispspec.xds.in.h:10
+msgid "List of XML Elements"
+msgstr "Seznam elementů XML"
+
+#: dispspecs/dispspec.xds.in.h:11
+msgid "List of file types for this type of document"
+msgstr "Seznam typů souborů pro tento typ dokumentu"
+
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:94
+msgid "Metadata"
+msgstr "Metadata"
+
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:96
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
+#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Název"
+
+#: dispspecs/dispspec.xds.in.h:14
+msgid "Name of an XML element"
+msgstr "Název elementu XML"
+
+#: dispspecs/dispspec.xds.in.h:15
+msgid "Serialisation Type List"
+msgstr "Seznam typů pro serializaci"
+
+#: dispspecs/dispspec.xds.in.h:16
+msgid "Short Description"
+msgstr "Krátký popis"
+
+#: dispspecs/dispspec.xds.in.h:17
+msgid "Short Description of an XML element"
+msgstr "Krátký popis elementu XML"
+
+#: dispspecs/dispspec.xds.in.h:18
+msgid "Short Description of the document type"
+msgstr "Krátký popis typu dokumentu"
+
+#: dispspecs/dispspec.xds.in.h:19
+msgid "XML Element"
+msgstr "Element XML"
+
+#: dispspecs/docbook.xds.in.h:1
+msgid "A URL link (perhaps to a web site)"
+msgstr "Odkaz na URL (třeba na WWW stránky)"
+
+#: dispspecs/docbook.xds.in.h:2
+msgid ""
+"A book, with a title, and perhaps with some bibliographical material, in "
+"addition to the actual content of the book."
+msgstr "Kniha s názvem a možná bibliografickým materiálem spolu s vlastním obsahem knihy."
+
+#: dispspecs/docbook.xds.in.h:3
+msgid "A brief description of the version of a document."
+msgstr "Krátký popis verze dokumentu."
+
+#: dispspecs/docbook.xds.in.h:4
+msgid "A collection of books."
+msgstr "Soubor knih."
+
+#: dispspecs/docbook.xds.in.h:5
+msgid "A high-level division of a book."
+msgstr "Oddíl knihy na vyšší úrovni."
+
+#: dispspecs/docbook.xds.in.h:6
+msgid "A specific piece of data from a computer system, to be taken literally."
+msgstr "Konkrétní typ dat z počítačového systému, který má být vzat doslovně."
+
+#: dispspecs/docbook.xds.in.h:7
+msgid "A subsection within a section"
+msgstr "Podsekce v sekci"
+
+#: dispspecs/docbook.xds.in.h:8
+msgid "A summary."
+msgstr "Souhrn."
+
+#: dispspecs/docbook.xds.in.h:9
+msgid "A top-level section of document"
+msgstr "Oddíl dokumentu na nejvyšší úrovni"
+
+#: dispspecs/docbook.xds.in.h:10 dispspecs/forrest-document.xds.in.h:1
+msgid "Abstract"
+msgstr "Sourhn"
+
+#: dispspecs/docbook.xds.in.h:11 dispspecs/forrest-document.xds.in.h:2
+#: dispspecs/xhtml1-strict.xds.in.h:2
+msgid "Acronym"
+msgstr "Zkratka"
+
+#: dispspecs/docbook.xds.in.h:12
+msgid "Additional metadata"
+msgstr "Další metadata"
+
+#: dispspecs/docbook.xds.in.h:13 dispspecs/xhtml1-strict.xds.in.h:3
+msgid "Address"
+msgstr "Adresa"
+
+#: dispspecs/docbook.xds.in.h:14
+msgid "An email address"
+msgstr "E-mailová adresa"
+
+#. FIXME:  EMPTY content model should have a special type of localName
+#: dispspecs/docbook.xds.in.h:16
+msgid "Anchor Point"
+msgstr "Místo ukotvení"
+
+#: dispspecs/docbook.xds.in.h:17
+msgid "Answer"
+msgstr "Odpověď"
+
+#: dispspecs/docbook.xds.in.h:18
+msgid "Appendix"
+msgstr "Příloha"
+
+#: dispspecs/docbook.xds.in.h:19
+msgid "Application"
+msgstr "Aplikace"
+
+#: dispspecs/docbook.xds.in.h:20
+msgid "Article"
+msgstr "Článek"
+
+#: dispspecs/docbook.xds.in.h:21
+msgid "Article Header"
+msgstr "Hlavička článku"
+
+#: dispspecs/docbook.xds.in.h:22
+msgid "Article Information"
+msgstr "Informace o článku"
+
+#: dispspecs/docbook.xds.in.h:23
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:3
+msgid "Author"
+msgstr "Autor"
+
+#: dispspecs/docbook.xds.in.h:24
+msgid "Author Initials"
+msgstr "Iniciály autora"
+
+#: dispspecs/docbook.xds.in.h:25
+msgid "Authorship Information"
+msgstr "Informace o autorství "
+
+#: dispspecs/docbook.xds.in.h:26
+msgid "Bibliographic Information"
+msgstr "Bibliografické informace"
+
+#: dispspecs/docbook.xds.in.h:27
+msgid "Bibliography"
+msgstr "Bibliografie"
+
+#: dispspecs/docbook.xds.in.h:28
+msgid "Book"
+msgstr "Kniha"
+
+#: dispspecs/docbook.xds.in.h:29
+msgid "Book Information"
+msgstr "Informace o knize"
+
+#: dispspecs/docbook.xds.in.h:30 dispspecs/forrest-document.xds.in.h:6
+#: dispspecs/xhtml1-strict.xds.in.h:14
+msgid "Caption"
+msgstr "Nadpis"
+
+#: dispspecs/docbook.xds.in.h:31
+msgid "Caution"
+msgstr "Upozornění"
+
+#: dispspecs/docbook.xds.in.h:32
+msgid "Chapter"
+msgstr "Kapitola"
+
+#: dispspecs/docbook.xds.in.h:33
+msgid "City"
+msgstr "Město"
+
+#: dispspecs/docbook.xds.in.h:34
+msgid "Colophon"
+msgstr "Tiráž"
+
+#: dispspecs/docbook.xds.in.h:35
+msgid "Command"
+msgstr "Příkaz"
+
+#: dispspecs/docbook.xds.in.h:36
+msgid "Command Synopsis"
+msgstr "Souhrn příkazu"
+
+#: dispspecs/docbook.xds.in.h:37
+msgid "Copyright"
+msgstr "Copyright"
+
+#: dispspecs/docbook.xds.in.h:38
+msgid "Copyright Holder"
+msgstr "Držitel copyrightu"
+
+#: dispspecs/docbook.xds.in.h:39
+msgid "Corporate Name"
+msgstr "Název společnosti"
+
+#: dispspecs/docbook.xds.in.h:40
+msgid "Cross-reference"
+msgstr "Křížový odkaz"
+
+#: dispspecs/docbook.xds.in.h:41
+msgid "Date"
+msgstr "Datum"
+
+#: dispspecs/docbook.xds.in.h:42
+msgid "Date of Publication"
+msgstr "Datum vydání"
+
+#: dispspecs/docbook.xds.in.h:43
+msgid "Defined terms"
+msgstr "Definované pojmy"
+
+#: dispspecs/docbook.xds.in.h:44 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:19
+msgid "Definition"
+msgstr "Definice"
+
+#: dispspecs/docbook.xds.in.h:45
+msgid "DocBook"
+msgstr "DocBook"
+
+#: dispspecs/docbook.xds.in.h:46
+msgid ""
+"DocBook is a document type that broadly corresponds to what most people "
+"think of as \"a book\"; it is well-suited for writing books and articles, "
+"for both print and web-based publication."
+msgstr "DocBook je typ dokumentu, který zhruba odpovídá tomu, co většina lidí považuje za \"knihu\"; je vhodný pro psaní knih a článků, publikovaných tiskem i na WWW."
+
+#: dispspecs/docbook.xds.in.h:47
+msgid "Edition"
+msgstr "Vydání"
+
+#: dispspecs/docbook.xds.in.h:48
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:11
+msgid "Editor"
+msgstr "Redaktor"
+
+#: dispspecs/docbook.xds.in.h:49
+msgid "Email Address"
+msgstr "E-mailová adresa"
+
+#: dispspecs/docbook.xds.in.h:50 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:13
+#: dispspecs/xhtml1-strict.xds.in.h:24
+msgid "Emphasis"
+msgstr "Zvýraznění"
+
+#: dispspecs/docbook.xds.in.h:51
+msgid "Entry"
+msgstr "Položka"
+
+#: dispspecs/docbook.xds.in.h:52
+msgid "Environment Variable"
+msgstr "Proměnná prostředí"
+
+#: dispspecs/docbook.xds.in.h:53
+msgid "Example (formal)"
+msgstr "Příklad (formální)"
+
+#: dispspecs/docbook.xds.in.h:54
+msgid "Example (informal)"
+msgstr "Příklad (neformální)"
+
+#: dispspecs/docbook.xds.in.h:55 dispspecs/forrest-document.xds.in.h:14
+msgid "Figure"
+msgstr "Obrázek"
+
+#: dispspecs/docbook.xds.in.h:56
+msgid "Figure (informal)"
+msgstr "Obrázek (neformální)"
+
+#: dispspecs/docbook.xds.in.h:57
+msgid "Filename"
+msgstr "Název souboru"
+
+#: dispspecs/docbook.xds.in.h:58
+msgid "First Name"
+msgstr "Křestní jméno"
+
+#: dispspecs/docbook.xds.in.h:59
+msgid "First Term"
+msgstr "První termín"
+
+#: dispspecs/docbook.xds.in.h:60
+msgid "Footnote"
+msgstr "Poznámka pod čarou"
+
+#: dispspecs/docbook.xds.in.h:61
+msgid "Free-floating Heading"
+msgstr "Volně plovoucí nadpis"
+
+#: dispspecs/docbook.xds.in.h:62
+msgid "Function"
+msgstr "Funkce"
+
+#. various related localNames need to be added
+#: dispspecs/docbook.xds.in.h:64
+msgid "Function Synopsis"
+msgstr "Souhrn funkce"
+
+#: dispspecs/docbook.xds.in.h:65
+msgid "GUI Button"
+msgstr "GUI tlačítko"
+
+#: dispspecs/docbook.xds.in.h:66
+msgid "GUI Label"
+msgstr "GUI popisek"
+
+#: dispspecs/docbook.xds.in.h:67
+msgid "GUI Menu"
+msgstr "GUI menu"
+
+#: dispspecs/docbook.xds.in.h:68
+msgid "GUI Menu Item"
+msgstr "GUI položka menu"
+
+#: dispspecs/docbook.xds.in.h:69
+msgid "GUI Submenu"
+msgstr "GUI podmenu"
+
+#: dispspecs/docbook.xds.in.h:70
+msgid "Glossary"
+msgstr "Slovník pojmů"
+
+#: dispspecs/docbook.xds.in.h:71
+msgid "Glossary Entry"
+msgstr "Položka slovníku pojmů"
+
+#: dispspecs/docbook.xds.in.h:72
+msgid "Graphic"
+msgstr "Grafika"
+
+#: dispspecs/docbook.xds.in.h:73
+msgid "ISBN"
+msgstr "ISBN"
+
+#: dispspecs/docbook.xds.in.h:74
+msgid "ISSN"
+msgstr "ISSN"
+
+#: dispspecs/docbook.xds.in.h:75
+msgid "Image Data"
+msgstr "Data obrázku"
+
+#: dispspecs/docbook.xds.in.h:76
+msgid "Image Object"
+msgstr "Objekt obrázku"
+
+#: dispspecs/docbook.xds.in.h:77
+msgid "Important"
+msgstr "Důležité"
+
+#: dispspecs/docbook.xds.in.h:78
+msgid "Index Term"
+msgstr "Položka rejstříku"
+
+#: dispspecs/docbook.xds.in.h:79 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:19
+msgid "Introduction"
+msgstr "Úvod"
+
+#: dispspecs/docbook.xds.in.h:80
+msgid "Key Caption"
+msgstr "Hlavní nadpis"
+
+#: dispspecs/docbook.xds.in.h:81
+msgid "Legal Notice"
+msgstr "Právní upozornění"
+
+#: dispspecs/docbook.xds.in.h:82
+msgid "List (itemised)"
+msgstr "Seznam (s položkami)"
+
+#: dispspecs/docbook.xds.in.h:83 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:23
+#: dispspecs/xhtml1-strict.xds.in.h:47
+msgid "List (ordered)"
+msgstr "Seznam (seřazený)"
+
+#: dispspecs/docbook.xds.in.h:84
+msgid "List (simple)"
+msgstr "Seznam (jednoduchý)"
+
+#: dispspecs/docbook.xds.in.h:85
+msgid "List (terms and definitions)"
+msgstr "Seznam (pojmy a deifnice)"
+
+#: dispspecs/docbook.xds.in.h:86
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:25
+#: dispspecs/xhtml1-strict.xds.in.h:49
+msgid "List Item"
+msgstr "Položka seznamu"
+
+#: dispspecs/docbook.xds.in.h:87
+msgid "List Member"
+msgstr "Položka seznamu"
+
+#: dispspecs/docbook.xds.in.h:88
+msgid "Literal"
+msgstr "Literál"
+
+#: dispspecs/docbook.xds.in.h:89
+msgid "Media Object"
+msgstr "Objekt médií"
+
+#: dispspecs/docbook.xds.in.h:90
+msgid "Menu Choice"
+msgstr "Výběr v menu"
+
+#: dispspecs/docbook.xds.in.h:91
+msgid "Meta-information about a Reference Page"
+msgstr "Metainformace o stránce s referencemi"
+
+#: dispspecs/docbook.xds.in.h:92
+msgid "Meta-information for a book"
+msgstr "Metainformace o knize"
+
+#: dispspecs/docbook.xds.in.h:93
+msgid "Meta-information for an article"
+msgstr "metainformace o článku"
+
+#: dispspecs/docbook.xds.in.h:95
+msgid "Miscellaneous Bibliographic Information"
+msgstr "Různé bibliografické informace"
+
+#: dispspecs/docbook.xds.in.h:97
+msgid "Name, purpose and classification about a Reference Page"
+msgstr "Název, účel a klasifikace o stránce s referencemi"
+
+#: dispspecs/docbook.xds.in.h:98
+msgid "Naming"
+msgstr "Pojmenovávání"
+
+#: dispspecs/docbook.xds.in.h:99 dispspecs/forrest-document.xds.in.h:29
+msgid "Note"
+msgstr "Poznámka"
+
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:26
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
+msgid "Paragraph"
+msgstr "Odstavec"
+
+#: dispspecs/docbook.xds.in.h:101
+msgid "Paragraph (titled)"
+msgstr "Odstavec (s nadpisem)"
+
+#: dispspecs/docbook.xds.in.h:102
+msgid "Part"
+msgstr "Část"
+
+#: dispspecs/docbook.xds.in.h:103
+msgid "Preface"
+msgstr "Předmluva"
+
+#: dispspecs/docbook.xds.in.h:104
+msgid "Printing History"
+msgstr "Historie tisku"
+
+#: dispspecs/docbook.xds.in.h:105
+msgid "Procedure"
+msgstr "Procedura"
+
+#: dispspecs/docbook.xds.in.h:106
+msgid "Product Name"
+msgstr "Název produktu"
+
+#.
+#. perhaps this should use a fixed-space font
+#. Perhaps we need a boolean to determine whether something
+#. should appear in the regular proportional spacing or in
+#. fixed-space? (defaults to proportional).
+#. Could also do with a verbatim flag which respects carriage returns...
+#. Even better would be to invoke a Scintilla control and have syntax highlighting!
+#.
+#: dispspecs/docbook.xds.in.h:115
+msgid "Program Listing"
+msgstr "Výpis programu"
+
+#: dispspecs/docbook.xds.in.h:116
+msgid "Prompt"
+msgstr "Výzva"
+
+#: dispspecs/docbook.xds.in.h:117
+msgid "Publisher"
+msgstr "Vydavatel"
+
+#: dispspecs/docbook.xds.in.h:118
+msgid "Publisher Name"
+msgstr "Název vydavatele"
+
+#: dispspecs/docbook.xds.in.h:119
+msgid "Purpose"
+msgstr "Účel"
+
+#: dispspecs/docbook.xds.in.h:120
+msgid "Question"
+msgstr "Otázka"
+
+#: dispspecs/docbook.xds.in.h:121
+msgid "Question-and-Answer"
+msgstr "Otázka a odpověď"
+
+#: dispspecs/docbook.xds.in.h:122
+msgid "Question-and-Answer Set"
+msgstr "Množina otázek a odpovědí"
+
+#: dispspecs/docbook.xds.in.h:123
+msgid "Question-and-Answer Subset"
+msgstr "Podmnožina otázek a odpovědí"
+
+#: dispspecs/docbook.xds.in.h:124
+msgid "Quote"
+msgstr "Citát"
+
+#: dispspecs/docbook.xds.in.h:125
+msgid "Reference"
+msgstr "Odkaz"
+
+#: dispspecs/docbook.xds.in.h:126
+msgid "Reference Page"
+msgstr "Stránka s odkazy"
+
+#: dispspecs/docbook.xds.in.h:127
+msgid "Release Information"
+msgstr "Informace o vydání"
+
+#: dispspecs/docbook.xds.in.h:128
+msgid "Replaceable Text"
+msgstr "Nahraditelný text"
+
+#: dispspecs/docbook.xds.in.h:129
+msgid "Revision"
+msgstr "Revize"
+
+#: dispspecs/docbook.xds.in.h:130
+msgid "Revision History"
+msgstr "Historie revizí"
+
+#: dispspecs/docbook.xds.in.h:131
+msgid "Revision Remark"
+msgstr "Poznámka o revizi"
+
+#: dispspecs/docbook.xds.in.h:132
+msgid "SGML Tag"
+msgstr "Tag SGML"
+
+#: dispspecs/docbook.xds.in.h:133
+msgid "Screen"
+msgstr "Obrazovka"
+
+#: dispspecs/docbook.xds.in.h:134
+msgid "Screenshot"
+msgstr "Snímek obrazovky"
+
+#: dispspecs/docbook.xds.in.h:135 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:29
+msgid "Section"
+msgstr "Oddíl"
+
+#: dispspecs/docbook.xds.in.h:136
+msgid "Section (level 5)"
+msgstr "Oddíl (úroveň 5)"
+
+#: dispspecs/docbook.xds.in.h:137
+msgid "Set"
+msgstr "Sada"
+
+#: dispspecs/docbook.xds.in.h:138
+msgid "Step"
+msgstr "Krok"
+
+#: dispspecs/docbook.xds.in.h:139
+msgid "Structure Name"
+msgstr "Název struktury"
+
+#: dispspecs/docbook.xds.in.h:140
+msgid "Subsection"
+msgstr "Podsekce"
+
+#: dispspecs/docbook.xds.in.h:141
+msgid "Subsection (level 3)"
+msgstr "Podsekce (úroveň 3)"
+
+#: dispspecs/docbook.xds.in.h:142
+msgid "Subsection (level 4)"
+msgstr "Podsekce (úroveň 4)"
+
+#: dispspecs/docbook.xds.in.h:143
+msgid "Substeps"
+msgstr "Podkroky"
+
+#: dispspecs/docbook.xds.in.h:144
+msgid "Subsubsection"
+msgstr "Podpodsekce"
+
+#: dispspecs/docbook.xds.in.h:145 dispspecs/forrest-document.xds.in.h:37
+msgid "Subtitle"
+msgstr "Podtitul"
+
+#: dispspecs/docbook.xds.in.h:146
+msgid "Surname"
+msgstr "Příjmení"
+
+#: dispspecs/docbook.xds.in.h:147
+msgid "Symbol"
+msgstr "Symbol"
+
+#: dispspecs/docbook.xds.in.h:148
+msgid "Synopsis (syntax)"
+msgstr "Souhrn (syntaxe)"
+
+#: dispspecs/docbook.xds.in.h:149
+msgid "Table (informal)"
+msgstr "Tabulka (neformální)"
+
+#: dispspecs/docbook.xds.in.h:150 dispspecs/xhtml1-strict.xds.in.h:68
+msgid "Table Body"
+msgstr "Tělo tabulky"
+
+#: dispspecs/docbook.xds.in.h:151
+msgid "Table Column Specification"
+msgstr "Specifikace sloupce tabulky"
+
+#: dispspecs/docbook.xds.in.h:152
+msgid "Table Entry"
+msgstr "Položka tabulky"
+
+#: dispspecs/docbook.xds.in.h:153
+msgid "Table Entry (subtable)"
+msgstr "Položka tabulky (podtabulka)"
+
+#: dispspecs/docbook.xds.in.h:154 dispspecs/xhtml1-strict.xds.in.h:71
+msgid "Table Footer"
+msgstr "Patička tabulky"
+
+#: dispspecs/docbook.xds.in.h:155
+msgid "Table Group"
+msgstr "Skupina tabulek"
+
+#: dispspecs/docbook.xds.in.h:156 dispspecs/xhtml1-strict.xds.in.h:72
+msgid "Table Header"
+msgstr "Hlavička tabulky"
+
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:73
+msgid "Table Row"
+msgstr "Řádek tabulky"
+
+#: dispspecs/docbook.xds.in.h:158
+msgid "Term"
+msgstr "Pojem"
+
+#: dispspecs/docbook.xds.in.h:159
+msgid "Text Object"
+msgstr "Objekt textu"
+
+#: dispspecs/docbook.xds.in.h:160
+msgid "The International Standard Book Number of a document."
+msgstr "International Standard Book Number dokumentu."
+
+#: dispspecs/docbook.xds.in.h:161
+msgid "The International Standard Serial Number of a periodical."
+msgstr "International Standard Serial Number časopisu."
+
+#: dispspecs/docbook.xds.in.h:162
+msgid "The first place where a word or term occurs in a particular context"
+msgstr "První místo, kde se slovo nebo pojem objevuje v určitém kontextu"
+
+#: dispspecs/docbook.xds.in.h:163
+msgid "The name of a function, subroutine or procedure"
+msgstr "Název funkce, subrutiny nebo procedury"
+
+#: dispspecs/docbook.xds.in.h:164
+msgid "The printed text on a particular key on a keyboard"
+msgstr "Text na konkrétní klávese na klávesnici"
+
+#: dispspecs/docbook.xds.in.h:165
+msgid "Tip"
+msgstr "Tip"
+
+#: dispspecs/docbook.xds.in.h:166 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:32
+#: dispspecs/xhtml1-strict.xds.in.h:76
+msgid "Title"
+msgstr "Název"
+
+#: dispspecs/docbook.xds.in.h:167
+msgid "Title Citation"
+msgstr "Citace názvu"
+
+#: dispspecs/docbook.xds.in.h:168
+msgid "URL Link"
+msgstr "Odkaz na URL"
+
+#: dispspecs/docbook.xds.in.h:169
+msgid "User Input"
+msgstr "Vstup uživatele"
+
+#: dispspecs/docbook.xds.in.h:170 dispspecs/forrest-document.xds.in.h:47
+msgid "Warning"
+msgstr "Varování"
+
+#: dispspecs/docbook.xds.in.h:171
+msgid "Year"
+msgstr "Rok"
+
+#: dispspecs/forrest-document.xds.in.h:3 dispspecs/xhtml1-strict.xds.in.h:5
+msgid "Anchor"
+msgstr "Kotva"
+
+#: dispspecs/forrest-document.xds.in.h:4
+msgid "Apache Documentation DTD v1.2"
+msgstr "DTD dokumentace Apache v1.2"
+
+#: dispspecs/forrest-document.xds.in.h:5
+msgid "Authors"
+msgstr "Autoři"
+
+#: dispspecs/forrest-document.xds.in.h:7
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:9
+#: dispspecs/xhtml1-strict.xds.in.h:16
+msgid "Code"
+msgstr "Kód"
+
+#: dispspecs/forrest-document.xds.in.h:8
+msgid "Defined term"
+msgstr "Definovaný pojem"
+
+#: dispspecs/forrest-document.xds.in.h:10
+msgid "Definition list"
+msgstr "Seznam definic"
+
+#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:981
+msgid "Document"
+msgstr "Dokument"
+
+#: dispspecs/forrest-document.xds.in.h:12
+msgid "Document body"
+msgstr "Tělo dokumentu"
+
+#: dispspecs/forrest-document.xds.in.h:15
+msgid "Fixme"
+msgstr "Fixme"
+
+#: dispspecs/forrest-document.xds.in.h:16
+msgid "Footer"
+msgstr "Patička"
+
+#: dispspecs/forrest-document.xds.in.h:17
+msgid "Fork"
+msgstr "Rozdělení"
+
+#: dispspecs/forrest-document.xds.in.h:18
+msgid "Header"
+msgstr "Hlavička"
+
+#: dispspecs/forrest-document.xds.in.h:19
+msgid "Icon"
+msgstr "Ikona"
+
+#: dispspecs/forrest-document.xds.in.h:20
+msgid "Img"
+msgstr "Obrázek"
+
+#: dispspecs/forrest-document.xds.in.h:22
+msgid "Jump"
+msgstr "Skok"
+
+#: dispspecs/forrest-document.xds.in.h:23
+msgid "Legal info"
+msgstr "Právní informace"
+
+#: dispspecs/forrest-document.xds.in.h:24
+msgid "Line break"
+msgstr "Konec řádku"
+
+#: dispspecs/forrest-document.xds.in.h:25 dispspecs/xhtml1-strict.xds.in.h:46
+#: glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Odkaz"
+
+#: dispspecs/forrest-document.xds.in.h:27
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:24
+#: dispspecs/xhtml1-strict.xds.in.h:48
+msgid "List (unordered)"
+msgstr "Seznam (neseřazený)"
+
+#: dispspecs/forrest-document.xds.in.h:28
+msgid "List item"
+msgstr "Položka seznamu"
+
+#: dispspecs/forrest-document.xds.in.h:30
+msgid "Notice"
+msgstr "Upozornění"
+
+#: dispspecs/forrest-document.xds.in.h:32
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:27
+msgid "Person"
+msgstr "Osoba"
+
+#: dispspecs/forrest-document.xds.in.h:34
+msgid "Source"
+msgstr "Zdroj"
+
+#: dispspecs/forrest-document.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:31
+#: dispspecs/xhtml1-strict.xds.in.h:63
+msgid "Strong"
+msgstr "Tučně"
+
+#: dispspecs/forrest-document.xds.in.h:36 dispspecs/xhtml1-strict.xds.in.h:65
+msgid "Subscript"
+msgstr "Dolní index"
+
+#: dispspecs/forrest-document.xds.in.h:38 dispspecs/xhtml1-strict.xds.in.h:66
+msgid "Superscript"
+msgstr "Horní index"
+
+#: dispspecs/forrest-document.xds.in.h:39 dispspecs/xhtml1-strict.xds.in.h:67
+msgid "Table"
+msgstr "Tabulka"
+
+#: dispspecs/forrest-document.xds.in.h:40
+msgid "Table cell"
+msgstr "Buňka tabulky"
+
+#: dispspecs/forrest-document.xds.in.h:41
+msgid "Table header cell"
+msgstr "Buňka hlavičky tabulky"
+
+#: dispspecs/forrest-document.xds.in.h:42
+msgid "Table row"
+msgstr "Řádek tabulky"
+
+#: dispspecs/forrest-document.xds.in.h:43
+msgid ""
+"This DTD was developed to create a simple yet powerful document type for "
+"software documentation for use with the Apache projects. It is an XML-"
+"compliant DTD and it's maintained by the Apache XML project. See http://xml."
+"apache.org/forrest ."
+msgstr "Tato DTD byla vyvinuta pro tvorbu jednoduchého, ale mocného typu dokumentu pro dokumentaci software používanou v projektech Apache. Je to DTD vyhovující XML a spravuje ji projekt Apache XML. Viz http://xml.apache.org/forrest ."
+
+#: dispspecs/forrest-document.xds.in.h:45
+#: glade/cong-file-properties.glade.h:14
+#: glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Typ"
+
+#: dispspecs/forrest-document.xds.in.h:46
+#: glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "Verze"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:1
+msgid "&quot;Kernel Traffic&quot; Newsletter"
+msgstr "Novinky &quot;Kernel Traffic&quot;"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:2
+msgid ""
+"A newletter tracking the technical development of a project within the Free/"
+"Open Source Software world"
+msgstr "Novinky sledující technický vývoj projektu ve světě Free/Open Source Software"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:4
+msgid "Block Quote"
+msgstr "Odsazený citát"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:5
+#: dispspecs/xhtml1-strict.xds.in.h:12
+msgid "Bold"
+msgstr "Tučně"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:6
+msgid "Break (manual)"
+msgstr "Konec řádku (ručně)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:7
+msgid "Centered"
+msgstr "Vycentrováno"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:8
+msgid "Cite"
+msgstr "Citace"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:10
+msgid "Correction"
+msgstr "Oprava"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:12
+msgid "Editorialize"
+msgstr "Komentáře"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:14
+msgid "Font"
+msgstr "Písmo"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:15
+#: dispspecs/xhtml1-strict.xds.in.h:30
+msgid "Heading (level 1)"
+msgstr "Nadpis (úroveň 1)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:16
+#: dispspecs/xhtml1-strict.xds.in.h:31
+msgid "Heading (level 2)"
+msgstr "Nadpis (úroveň 2)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:17
+#: dispspecs/xhtml1-strict.xds.in.h:32
+msgid "Heading (level 3)"
+msgstr "Nadpis (úroveň 3)"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:18
+msgid "Hyperlink"
+msgstr "Odkaz"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:20
+msgid "Issue"
+msgstr "Vydání"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:21
+msgid "Italicised"
+msgstr "Kurzívou"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:22
+msgid "Kernel Cousin Newsletter"
+msgstr "Novinky Kernel Cousin"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:28
+msgid "Quotation"
+msgstr "Citát"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:30
+msgid "Statistics"
+msgstr "Statistika"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:33
+msgid "Topic"
+msgstr "Téma"
+
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+msgid "Translator"
+msgstr "Překladatel"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+msgid "Underlined"
+msgstr "Podrženo"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+msgid "Version Control Activity"
+msgstr "Aktivita správy verzí"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+msgid "Version Control Statistics"
+msgstr "Statistika správy verzí"
+
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
+msgid "Version Control Tree"
+msgstr "Strom správy verzí"
+
+#: dispspecs/xhtml1-strict.xds.in.h:1
+msgid "Abbreviated Form"
+msgstr "Zkrátcený tvar"
+
+#: dispspecs/xhtml1-strict.xds.in.h:4
+msgid "Alternative Non-Scripted Content"
+msgstr "Alternativní obsah bez skriptů"
+
+#: dispspecs/xhtml1-strict.xds.in.h:6
+msgid "Area"
+msgstr "Oblast"
+
+#: dispspecs/xhtml1-strict.xds.in.h:7
+msgid "Base"
+msgstr "Základ"
+
+# ...
+#: dispspecs/xhtml1-strict.xds.in.h:8
+msgid "Bidirectional Override"
+msgstr "Nahrazení obousměrnosti"
+
+#: dispspecs/xhtml1-strict.xds.in.h:9
+msgid "Big"
+msgstr "Velké"
+
+#: dispspecs/xhtml1-strict.xds.in.h:10
+msgid "Block Quotation"
+msgstr "Odsazený citát"
+
+#: dispspecs/xhtml1-strict.xds.in.h:11
+msgid "Body"
+msgstr "Tělo"
+
+#: dispspecs/xhtml1-strict.xds.in.h:13
+msgid "Button"
+msgstr "Tlačítko"
+
+#: dispspecs/xhtml1-strict.xds.in.h:15
+msgid "Citation"
+msgstr "Citát"
+
+#: dispspecs/xhtml1-strict.xds.in.h:17
+msgid "Column"
+msgstr "Sloupec"
+
+#: dispspecs/xhtml1-strict.xds.in.h:18
+msgid "Column Group"
+msgstr "Skupina sloupců"
+
+#: dispspecs/xhtml1-strict.xds.in.h:20
+msgid "Definition List"
+msgstr "Seznam definic"
+
+#: dispspecs/xhtml1-strict.xds.in.h:21
+msgid "Definition Term"
+msgstr "Definovaný pojem"
+
+#: dispspecs/xhtml1-strict.xds.in.h:22
+msgid "Deleted Text"
+msgstr "Odstraněný text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:23
+msgid "Division"
+msgstr "Oddíl"
+
+#: dispspecs/xhtml1-strict.xds.in.h:25
+msgid "Forced Line Break"
+msgstr "Vynucený konec řádky"
+
+#: dispspecs/xhtml1-strict.xds.in.h:26
+msgid "Form Control"
+msgstr "Řízení formuláře"
+
+#: dispspecs/xhtml1-strict.xds.in.h:27
+msgid "Form Control Group"
+msgstr "Skupina řízení formuláře"
+
+#: dispspecs/xhtml1-strict.xds.in.h:28
+msgid "HTML Page"
+msgstr "Stránka HTML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:29
+msgid "Head"
+msgstr "Hlavička"
+
+#: dispspecs/xhtml1-strict.xds.in.h:33
+msgid "Heading (level 4)"
+msgstr "Nadpis (úroveň 4)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:34
+msgid "Heading (level 5)"
+msgstr "Nadpis (úroveň 5)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:35
+msgid "Heading (level 6)"
+msgstr "Nadpis (úroveň 6)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:36
+msgid "Horizontal Rule"
+msgstr "Vodorovná čára"
+
+#: dispspecs/xhtml1-strict.xds.in.h:37
+msgid "Image"
+msgstr "Obrázek"
+
+#: dispspecs/xhtml1-strict.xds.in.h:38
+msgid "Image Map"
+msgstr "Mapa obrázku"
+
+#: dispspecs/xhtml1-strict.xds.in.h:39
+msgid "Inline Quotation"
+msgstr "Vložený citát"
+
+#: dispspecs/xhtml1-strict.xds.in.h:40
+msgid "Inserted Text"
+msgstr "Vložený text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:41
+msgid "Interactive Form"
+msgstr "Interaktivní formulář"
+
+#: dispspecs/xhtml1-strict.xds.in.h:42
+msgid "Italic"
+msgstr "Kurzíva"
+
+#: dispspecs/xhtml1-strict.xds.in.h:43
+msgid "Keyboard"
+msgstr "Klávesnice"
+
+#: dispspecs/xhtml1-strict.xds.in.h:44
+msgid "Label"
+msgstr "Popisek"
+
+#: dispspecs/xhtml1-strict.xds.in.h:45
+msgid "Legend"
+msgstr "Legenda"
+
+#: dispspecs/xhtml1-strict.xds.in.h:50
+msgid "Metainformation"
+msgstr "Metainformace"
+
+#: dispspecs/xhtml1-strict.xds.in.h:51
+msgid "Multi-line Text Field"
+msgstr "Textové pole s více řádky"
+
+#: dispspecs/xhtml1-strict.xds.in.h:52
+msgid "Object"
+msgstr "Objekt"
+
+#: dispspecs/xhtml1-strict.xds.in.h:53
+msgid "Option Group"
+msgstr "Skupina možností"
+
+#: dispspecs/xhtml1-strict.xds.in.h:54
+msgid "Option Selector"
+msgstr "Výběr možnosti"
+
+#: dispspecs/xhtml1-strict.xds.in.h:56
+msgid "Parameter"
+msgstr "Parametr"
+
+#: dispspecs/xhtml1-strict.xds.in.h:57
+msgid "Preformatted Text"
+msgstr "Předformátovaný text"
+
+#: dispspecs/xhtml1-strict.xds.in.h:58
+msgid "Sample"
+msgstr "Příklad"
+
+#: dispspecs/xhtml1-strict.xds.in.h:59
+msgid "Script"
+msgstr "Skript"
+
+#: dispspecs/xhtml1-strict.xds.in.h:60
+msgid "Selectable Choice"
+msgstr "Vybratelná volba"
+
+#: dispspecs/xhtml1-strict.xds.in.h:61
+msgid "Small"
+msgstr "Malé"
+
+#: dispspecs/xhtml1-strict.xds.in.h:62 glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Rozsah"
+
+#: dispspecs/xhtml1-strict.xds.in.h:64
+#: glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Styl"
+
+#: dispspecs/xhtml1-strict.xds.in.h:69
+msgid "Table Cell (data)"
+msgstr "Buňka tabulky (data)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:70
+msgid "Table Cell (header)"
+msgstr "Buňka tabulky (hlavička)"
+
+#: dispspecs/xhtml1-strict.xds.in.h:74
+msgid "Teletype"
+msgstr "Dálnopis"
+
+#: dispspecs/xhtml1-strict.xds.in.h:75
+msgid "The strict XML version of HTML"
+msgstr "Verze HTML ve striktním XML"
+
+#: dispspecs/xhtml1-strict.xds.in.h:77
+msgid "Variable"
+msgstr "Proměnná"
+
+#: dispspecs/xhtml1-strict.xds.in.h:78
+msgid "XHTML 1.0 (strict)"
+msgstr "XHTML 1.0 (strict)"
+
 #: glade/cong-file-import.glade.h:1
 msgid "File Import Options"
 msgstr "Možnosti importu souborů"
@@ -76,13 +1296,6 @@ msgstr "Pokročilé"
 #: glade/cong-file-properties.glade.h:2
 msgid "Basic"
 msgstr "Základní"
-
-#: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
-#: src/cong-file-export.c:341 src/cong-file-new.c:363
-#: src/cong-file-print.c:250 src/cong-parser-error.c:320
-msgid "Description"
-msgstr "Popis"
 
 #: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
 msgid "Document Type Declaration"
@@ -109,12 +1322,6 @@ msgstr "Umístění"
 msgid "Modified"
 msgstr "Změněn"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
-#: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
-msgid "Name"
-msgstr "Název"
-
 #: glade/cong-file-properties.glade.h:11
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
@@ -130,15 +1337,6 @@ msgstr "Samostatný"
 #: glade/cong-file-properties.glade.h:13
 msgid "System ID"
 msgstr "Systémové ID"
-
-#: glade/cong-file-properties.glade.h:14
-#: glade/docbook-ulink-properties.glade.h:5
-msgid "Type"
-msgstr "Typ"
-
-#: glade/cong-file-properties.glade.h:15
-msgid "Version"
-msgstr "Verze"
 
 #: glade/cong-file-properties.glade.h:16
 msgid "XML Header"
@@ -217,10 +1415,6 @@ msgstr "Typ elementu"
 #: glade/custom-element.glade.h:5
 msgid "I Don't Care"
 msgstr "Je mi to jedno"
-
-#: glade/custom-element.glade.h:6
-msgid "Span"
-msgstr "Rozsah"
 
 #: glade/custom-element.glade.h:7
 msgid "Structural"
@@ -307,10 +1501,6 @@ msgstr "Minimalizovat vertikální prostor"
 msgid "Numbering"
 msgstr "Číslování"
 
-#: glade/docbook-orderedlist-properties.glade.h:10
-msgid "Style"
-msgstr "Styl"
-
 #: glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
 msgstr "a, b, c, ..."
@@ -326,10 +1516,6 @@ msgid ""
 msgstr ""
 "<small>Některé aplikace DocBooku umožňují upravit chování odkazu pomocí "
 "atributu \"type\". </small>"
-
-#: glade/docbook-ulink-properties.glade.h:2
-msgid "Link"
-msgstr "Odkaz"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -397,21 +1583,27 @@ msgstr ""
 "ale nenainstalovali. Zkuste jej nainstalovat. Pokud jste změnili implicitní "
 "nastaven9 specifikací zobrazení, zkontrolujte je prosím také."
 
-#: src/cong-attribute-editor-cdata.c:218
-#: src/cong-attribute-editor-nmtoken.c:255
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
+#: src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Nastavit atribut \"%s\" na \"%s\""
+
+#: src/cong-attribute-editor.c:253 src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-wrapper.c:263
+#: src/cong-node-properties-dialog.c:506
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Odstranit atribut \"%s\""
+
+#: src/cong-attribute-editor-cdata.c:206
+#: src/cong-attribute-editor-nmtoken.c:272
 #: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Přidat atribut \"%s\""
 
-#: src/cong-attribute-editor-cdata.c:244
-#: src/cong-attribute-editor-nmtoken.c:281 src/cong-attribute-editor.c:267
-#: src/cong-attribute-wrapper.c:279 src/cong-node-properties-dialog.c:506
-#, c-format
-msgid "Delete attribute \"%s\""
-msgstr "Odstranit atribut \"%s\""
-
-#: src/cong-attribute-editor-enumeration.c:123
+#: src/cong-attribute-editor-enumeration.c:122
 msgid "(unspecified)"
 msgstr "(neurčeno)"
 
@@ -507,21 +1699,31 @@ msgstr "Švédština"
 msgid "Ukrainian"
 msgstr "Ukrajinština"
 
-#: src/cong-attribute-editor-lang.c:159
+#: src/cong-attribute-editor-lang.c:157
 msgid "No Language"
 msgstr "Žádný jazyk"
 
-#. are there mem leaks here
-#: src/cong-attribute-editor-nmtoken.c:210
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
 #, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
 msgstr "Nemohu nastavit atribut \"%s\" na \"%s\""
 
-#: src/cong-attribute-editor-nmtoken.c:222
+#: src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
 msgstr "Hodnota atributu musí být atom názvu v XML."
 
-#: src/cong-attribute-editor-nmtoken.c:223
+#: src/cong-attribute-editor-nmtoken.c:237
 msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
@@ -529,12 +1731,6 @@ msgid ""
 msgstr ""
 "Atomy názvu v XML mohou obsahovat jen alfanumerické nebo ideografické znaky "
 "a interpunkci _,-, ., a :. Nemohou obsahovat mezery."
-
-#: src/cong-attribute-editor.c:264 src/cong-attribute-wrapper.c:248
-#: src/cong-node-properties-dialog.c:424
-#, c-format
-msgid "Set attribute \"%s\" to \"%s\""
-msgstr "Nastavit atribut \"%s\" na \"%s\""
 
 #: src/cong-dialog.c:301
 msgid "_Close without Saving"
@@ -588,6 +1784,14 @@ msgstr "Změny za posledních %li minut budou zahozeny."
 msgid "Changes from the past minute will be discarded."
 msgstr "Změny za poslední minutu budou zahozeny."
 
+#: src/cong-dispspec.c:501
+msgid "unnamed"
+msgstr "nepojmenovaný"
+
+#: src/cong-dispspec.c:521
+msgid "No description available."
+msgstr "Popis není k dispozici"
+
 #: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath selhalo)"
@@ -612,14 +1816,6 @@ msgstr "Typ souboru"
 #: src/cong-dispspec-registry.c:344
 msgid "Coverage"
 msgstr "Pokrytí"
-
-#: src/cong-dispspec.c:501
-msgid "unnamed"
-msgstr "nepojmenovaný"
-
-#: src/cong-dispspec.c:521
-msgid "No description available."
-msgstr "Popis není k dispozici"
 
 #: src/cong-document.c:649
 msgid "(Untitled)"
@@ -657,10 +1853,6 @@ msgstr "Instrukce zpracování XML"
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Komentář \"%s\""
-
-#: src/cong-document.c:981
-msgid "Document"
-msgstr "Dokument"
 
 #: src/cong-document.c:987
 msgid "Document Fragment"
@@ -1248,7 +2440,8 @@ msgstr "Conglomerate nemůže exportovat \"%s\""
 
 #: src/cong-file-export.c:429
 msgid "None of Conglomerate's plugins know how to export files of this type."
-msgstr "Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
+msgstr ""
+"Žádný zásuvný modul Conglomerate neví, jak exportovat soubory tohoto typu."
 
 #: src/cong-file-export.c:462
 msgid "No output file specified"
@@ -1776,7 +2969,10 @@ msgid ""
 "Since Conglomerate could not read the stylesheet it is possible that your "
 "XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
 "html for more information on catalogs."
-msgstr "Protože Conglomerate nemůže číst stylesheet, je možné, že váš soubor katalogu XML není nastaven správně. Pro více informací o katalozích viz http://www.xmlsoft.org/catalog.html"
+msgstr ""
+"Protože Conglomerate nemůže číst stylesheet, je možné, že váš soubor "
+"katalogu XML není nastaven správně. Pro více informací o katalozích viz "
+"http://www.xmlsoft.org/catalog.html"
 
 #: src/cong-plugin.c:769
 #, c-format
@@ -1788,7 +2984,10 @@ msgid ""
 "\n"
 "\n"
 "The following stylesheet parameters were used:\n"
-msgstr "\n\nByly použity následující parametry stylesheetu:\n"
+msgstr ""
+"\n"
+"\n"
+"Byly použity následující parametry stylesheetu:\n"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
 #: src/cong-plugin.c:1283
@@ -1942,7 +3141,8 @@ msgstr "Nepojmenovaná sada dokumentů"
 #: src/plugin-docbook.c:1102
 #, c-format
 msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
-msgstr "Conglomerate nemůže najít stylesheet používaný pro převod DocBooku do %s"
+msgstr ""
+"Conglomerate nemůže najít stylesheet používaný pro převod DocBooku do %s"
 
 #: src/plugin-docbook.c:1105
 msgid "Unable to locate the DocBook stylesheets"
@@ -1954,7 +3154,11 @@ msgid ""
 "docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
 "XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
 "information on catalogs)."
-msgstr "Zajistěte, aby stylesheety Normana Walshe pro DocBook XSL, dostupné na http://docbook.sourceforge.net/projects/xsl/, byly nainstalovány a přidány do vašeho souboru katalogu XML (pro více informací o katalozích viz http://www.xmlsoft.org/catalog.html)."
+msgstr ""
+"Zajistěte, aby stylesheety Normana Walshe pro DocBook XSL, dostupné na "
+"http://docbook.sourceforge.net/projects/xsl/, byly nainstalovány a přidány "
+"do vašeho souboru katalogu XML (pro více informací o katalozích viz http://"
+"www.xmlsoft.org/catalog.html)."
 
 #: src/plugin-docbook.c:1143
 #, c-format
@@ -2183,10 +3387,6 @@ msgstr "Element položky seznamu"
 #: src/plugin-lists.c:77
 msgid "An editor node for visualising a member of a list"
 msgstr "Uzel editoru pro zobrazení položky seznamu"
-
-#: src/plugin-paragraph.c:67
-msgid "Paragraph"
-msgstr "Odstavec"
 
 #: src/plugin-paragraph.c:68
 msgid "An editor node for visualising a paragraph"
