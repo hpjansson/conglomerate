@@ -1519,7 +1519,7 @@ static GtkActionEntry primary_window_document_action_entries[] = {
 	{ "SaveAs", GTK_STOCK_SAVE_AS, N_("Save _as..."), "<shift><control>S", NULL, G_CALLBACK (action_callback_file_save_as) },
 	{ "SaveACopy", NULL, N_("Sa_ve a Copy..."), NULL, NULL, G_CALLBACK (action_callback_file_save_copy) },
 #if ENABLE_PRINTING
-	{ "PrintPreview", GTK_STOCK_PRINT_PREVIEW, N_("Print Previe_w..."), "<shit><control>P", NULL, G_CALLBACK (action_callback_file_print_preview) },
+	{ "PrintPreview", GTK_STOCK_PRINT_PREVIEW, N_("Print Previe_w..."), "<shift><control>P", NULL, G_CALLBACK (action_callback_file_print_preview) },
 	{ "Print", GTK_STOCK_PRINT, N_("_Print"), "<control>P", NULL, G_CALLBACK (action_callback_file_print) },
 #endif /* #if ENABLE_PRINTING */
 #if ENABLE_UNIMPLEMENTED_MENUS

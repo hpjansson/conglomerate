@@ -1,5 +1,9 @@
 2004-10-13  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-menus.c: 
+
+	Fixed a profane typo in the keybindings for Print Preview
+
 	* cong-document.c: 
 
 	Fixed a stupid bug in cong_document_can_print that made it always return FALSE
