@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<dispspec>
+
+	<element-list>
+		<element tag="document" type="structural" color="a0b0c0">
+			<name locale="en">Document</name>
+		</element>
+
+		<!-- Wow - we can have comments in this version of the format -->
+
+		<!-- Why did introduction have two color values? (second value was c1cdc1) -->
+		<!-- Should all translatable stuff go into po files? -->
+		<!-- What does collapseto mean? -->
+
+		<element tag="introduction" type = "structural" color = "e0eee0">
+			<name locale="en">Introduction</name>
+		</element>
+
+		<element tag="section" type = "structural" color = "a0b0c0">
+			<name locale="en">Section</name>
+		</element>
+
+		<element tag="section.title" type = "structural">
+			<name locale="en">Title</name>
+			<collapseto>section subsection subsubsection</collapseto>
+		</element>
+
+		<element tag="section.signature" type = "structural">
+			<name locale="en">Signature</name>
+			<collapseto>section subsection subsubsection</collapseto>	
+		</element>
+
+		<!-- Here come the spans: -->
+
+		<element tag="quote" type = "span" color = "8b0000">
+			<name locale="en">Quote</name>
+		</element>
+
+		<element tag="admission" type = "span" color = "b22222">
+			<name locale="en">Admission</name>
+		</element>
+
+		<element tag="excuse" type = "span" color = "b22222">
+			<name locale="en">Excuse</name>
+		</element>
+
+		<element tag="corporate" type = "span" color = "00008b">
+			<name locale="en">Corp jargon</name>
+		</element>
+
+		<element tag="disclaimer" type = "span" color = "698b22">
+			<name locale="en">Disclaimer</name>
+		</element>
+
+		<element tag="emph" type = "span" color = "cd1076">
+			<name locale="en">Emphasis</name>
+		</element>
+
+		<element tag="inspirational" type = "span" color = "08b8b">
+			<name locale="en">Inspirational</name>
+		</element>
+
+		<element tag="optimistic" type = "span" color = "458b74">
+			<name locale="en">Optimistic</name>
+		</element>
+
+	</element-list>
+
+</dispspec>
