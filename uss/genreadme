@@ -1,6 +1,8 @@
 #!/bin/bash
 
-xmlto html-nochunk README.xml
+set -x
+xmlto html-nochunks README.xml
+echo ignore the those warnings from XMLTO.
 lynx -dump README.html > README
 rm -f README.html
 
