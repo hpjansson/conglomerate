@@ -1,3 +1,8 @@
+2004-05-22 David Malcolm <david@localhost.localdomain>
+
+	* cong-location.c (cong_location_calc_word_extent): 
+	Applied patch by hondaguru@earthlink.net for bug #132884
+
 2004-05-02 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* plugin-admonition-node-element.c

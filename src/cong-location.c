@@ -1145,7 +1145,7 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 		/* Scan forwards to next is_word_end: */
 		{
 			glong end_char_index = char_index;
-			while (end_char_index<attrs_len) {
+			while (end_char_index<(attrs_len-1)) {
 				
 				if (pango_log_attr[++end_char_index].is_word_end) {
 					break;
