@@ -1,5 +1,6 @@
 
 # this is very very raw material
+# see also last lines of this file.
 
 #
 
@@ -69,3 +70,5 @@ $ patch -p1 < ../changes
 
 
 # let Geert Stappers know that it is in/after Januari 2003 still raw text
+# October 28th. 2003: me, Geert, didn't get any enhencement request
+#                     document not updated.
