@@ -234,21 +234,52 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 									      primary_window);
 }
 
+void unimplemented_menu_item(GtkWidget *widget, gpointer data)
+{
+	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
 static GtkItemFactoryEntry menu_items[] =
 {
-	{ "/_Document",             NULL, NULL, 0, "<Branch>" },
-	{ "/Document/Open...",      NULL, open_document_wrap, 0, NULL },
-	{ "/Document/Save As...",   NULL, save_document_wrap, 0, NULL },
-	{ "/Document/Quit",         NULL, gtk_main_quit, 0, NULL },
+	{ "/_File",             NULL, NULL, 0, "<Branch>" },
+	{ "/File/_New...",       NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_NEW },
+	{ "/File/_Open...",      NULL, open_document_wrap, 0, "<StockItem>", GTK_STOCK_OPEN },
+	{ "/File/", NULL, NULL, 0, "<Separator>" },
+	{ "/File/_Save",           "<control>S", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_SAVE },
+	{ "/File/Save _As...",     NULL, save_document_wrap, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
+	{ "/File/Sa_ve a Copy...", "<shift><control>S", unimplemented_menu_item, 0, "<Item>" },
+	{ "/File/_Revert",         NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
+	{ "/File/", NULL, NULL, 0, "<Separator>" },
+	{ "/File/Proper_ties",     NULL, unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ "/File/", NULL, NULL, 0, "<Separator>" },
+	{ "/File/_Close",         "<control>W", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_CLOSE },
+	{ "/File/_Quit",         "<control>Q", gtk_main_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
+
 	{ "/_Edit",                 NULL, 0, 0, "<Branch>" },
-	{ "/Edit/Cut",              "<control>X", xed_cut_wrap, 0, 0 },
-	{ "/Edit/Copy",             "<control>C", xed_copy_wrap, 0, 0 },
-	{ "/Edit/Paste",            "<control>V", xed_paste_wrap, 0, 0 },
+	{ "/Edit/_Undo",              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
+	{ "/Edit/_Redo",              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
+	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
+	{ "/Edit/Cu_t",              "<control>X", xed_cut_wrap, 0, "<StockItem>", GTK_STOCK_CUT },
+	{ "/Edit/_Copy",             "<control>C", xed_copy_wrap, 0, "<StockItem>", GTK_STOCK_COPY },
+	{ "/Edit/_Paste",            "<control>V", xed_paste_wrap, 0, "<StockItem>", GTK_STOCK_PASTE },
+	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
+	{ "/Edit/_Find...",         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
+	{ "/Edit/Find Ne_xt",       "<control>G", unimplemented_menu_item, 0, "<Item>" },
+	{ "/Edit/Find Pre_vious",   "<shift><control>G", unimplemented_menu_item, 0, "<Item>" },
+	{ "/Edit/R_eplace...",      "<control>R", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
+	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
+	{ "/Edit/_Insert...",       NULL, unimplemented_menu_item, 0, "<Item>" },
+
 	{ "/Tests",                 NULL, NULL, 0, "<Branch>" },
 	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
 	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
 	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
-	{ "/Tests/Transform",       NULL, test_transform_wrap, 0, NULL }
+	{ "/Tests/Transform",       NULL, test_transform_wrap, 0, NULL },
+
+	{ "/_Help",        NULL, NULL, 0, "<Branch>" },
+	{ "/Help/_Contents", "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
+	{ "/Help/_About",    NULL, unimplemented_menu_item, 0, "<Item>" }
+
 };
 
 gint delete_event( GtkWidget *widget,
@@ -292,6 +323,15 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	/* --- Main window --- */
 	primary_window->window = gnome_app_new("Conglomerate",
 					       title);
+
+	{	
+		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
+
+		gtk_window_set_icon(GTK_WINDOW(primary_window->window),
+				    icon_pixbuf);
+
+		gdk_pixbuf_unref(icon_pixbuf);
+	}
 
 	gtk_signal_connect(GTK_OBJECT(primary_window->window), "delete_event",
 			   GTK_SIGNAL_FUNC(delete_event), NULL);
