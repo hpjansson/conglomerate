@@ -86,6 +86,35 @@
 					<para>It is designed to work alongside DTDs or XSchema files to provide information which is more specific to Conglomerate. For example, it can suggest icons that should be used for a particular XML tag. </para>
 				</answer>
 			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>How do I add support for a new type of document to Conglomerate?</para>
+				</question>
+				<answer>
+					<para>You will need to create a display specification to tell how to display the various elements of that type. </para>
+					<para>The easiest way to do this is to let Conglomerate create the display specification itself. Load an example document of the type you wish to support, ideally one with a Document Type Declaration referencing a PUBLIC ID with a SYSTEM ID referencing the document type definition via http .</para>
+					<para>Conglomerate will complain that it doesn't recognise the document type, and ask if you wish to load it anyway. Click on the <guibutton>Force</guibutton> button, and Conglomerate will generate a display specification as it loads the file. You can then go to the <guimenu>Tools</guimenu> menu and select <guimenuitem>Dump Display Spec</guimenuitem>. You should save the file into the <filename>examples</filename> subdirectory, giving it a &quot;.xds&quot; extension. You should then edit <filename>examples/Makefile.am</filename> and add the filename of the new display specification to <symbol>dispspec_DATA</symbol>. You should then re-run <userinput>make</userinput>, then (possibly as root) <userinput>make install</userinput>, and restart <application>conglomerate</application>. Try loading your document; Conglomerate should now handle it without complaining. Please email the conglomerate-devel mailing list with a patch that adds the document type, so that we can add it to CVS, and into the next release.</para>
+					<para>Once you have a working xds file for a document type, you can fine-tune it in some of these ways:</para>
+					<itemizedlist>
+						<listitem>
+							<para>Change whether elements are &quot;structural&quot; or &quot;span&quot; elements. The display specification generation routine tries to guess this based upon the example document and on the DTD, but it sometimes makes mistakes.</para>
+						</listitem>
+						<listitem>
+							<para>Set up human-readable names for elements, together with descriptions of what they do. Currently this is in English only, though we plan to allow localisable versions of these strings (patches welcome!)</para>
+						</listitem>
+						<listitem>
+							<para>Set up icons for elements, for use in the menus and in the main widget.</para>
+						</listitem>
+						<listitem>
+							<para>Write custom XPath rules for generating the title string to be used for an element.</para>
+						</listitem>
+						<listitem>
+							<para>Use plugins to better represent an element. For example, there are already plugins aimed at rendering paragraphs, and items within lists. You can even create custom property dialogs for an element type, those this requires writing some code.</para>
+						</listitem>
+					</itemizedlist>
+					<para>The best thing to do is to look through the examples/docbook.xds file, which has examples of how to do these things, and to ask on the conglomerate-devel mailing list.</para>
+				</answer>
+			</qandaentry>
 		</qandadiv>
 		<qandadiv id="gnomefaq">
 			<title>Gnome questions</title>
