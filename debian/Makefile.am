@@ -20,6 +20,8 @@ debian_DISTS = \
 # package related files
 pkg_DISTS = \
     conglomerate.menu \
+    conglomerate.postinst \
+    conglomerate.prerm \
     conglomerate_icon.xpm \
     $(NULL)
 
