@@ -1,8 +1,8 @@
 2003-12-21  Geert Stappers <stappers@stappers.nl>
 
 	* configure.in
-
-	Support for gconf schema install
+	 - Support for gconf schema install
+	 - Updated gtk-doc tools
 
 2003-12-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
