@@ -21,4 +21,3 @@ EXTRA_DIST = BUGS	\
   examples/test-table.xml            \
   examples/test-docbook-to-html.xsl
 
-ACLOCAL_AMFLAGS = -I m4
