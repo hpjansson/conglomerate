@@ -7,7 +7,7 @@
 	</metadata>
 
 	<document-models>
-		<external-document-model type="dtd" system-id="<insert OPML DTD system id>"/>
+		<external-document-model type="dtd" system-id="'insert OPML DTD system id'"/>
 	</document-models>
 
 	<element-list>
