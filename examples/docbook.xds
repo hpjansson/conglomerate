@@ -7,7 +7,11 @@
 		<description>DocBook is a document type that broadly corresponds to what most people think of as "a book"; it is well-suited for writing books and articles, for both print and web-based publication.</description>
 	</metadata>
 	
-	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
+	<!-- Specify the DTD that this annotates; hence we can get at the DTD if it wasn't supplied in the document: -->
+	<document-models>
+		<external-document-model type="dtd" public-id="-//OASIS//DTD DocBook XML V4.1.2//EN" system-id="http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"/>
+		<!-- this allows room for other types of document model e.g. W3C XML Schema, RELAX NG; and we can even embed schema in-place below here... -->
+	</document-models>
 
 	<element-list>
 			

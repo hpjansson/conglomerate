@@ -6,6 +6,10 @@
 		<description>Test CNXML ds</description>
 	</metadata>
 
+	<document-models>
+		<external-document-model type="dtd" system-id="http://rhaptos.ece.rice.edu/developers/rainking/cnxml/cnxml_plain_no_attr.dtd"/>
+	</document-models>
+
 	<element-list>
 		<element tag="module" type="structural" color="a0b0c0">
 			<name locale="en">module</name>
