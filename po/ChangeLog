@@ -1,3 +1,7 @@
+2003-11-12  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* POTFILES.in: Added examples/*.xds.in and src/cong-dispspec-element.c
+
 2003-11-12  Duarte Loreto <happyguy_pt@hotmail.com>
 
 	* pt.po: Updated Portuguese translation.
