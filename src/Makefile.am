@@ -160,6 +160,7 @@ conglomerate_SOURCES =      \
   cong-location.c           \
   cong-marshal.c            \
   cong-menus.c              \
+  cong-node.c               \
   cong-node-properties-dialog.c \
   cong-overview-view.c      \
   cong-parser-error.c       \

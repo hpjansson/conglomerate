@@ -1,3 +1,9 @@
+2003-09-14  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-node.c, Makefile.am, xmldata.c
+
+	Moved parts of xmldata.c into a new file (cong-node.c)
+
 2003-09-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-location.c, cong-util.c, cong-util.h, plugin-cleanup-source.c
