@@ -1,5 +1,9 @@
 2003-10-20  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-structural.c, cong-editor-widget3.c
+
+	Structural headers now have an animated disclosure triangle for folding the content
+	
 	* cong-editor-area-expander.c, cong-editor-area-expander.h, Makefile.am
 
 	New files: CongEditorAreaExpander subclass

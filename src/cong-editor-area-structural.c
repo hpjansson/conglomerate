@@ -28,6 +28,7 @@
 
 #include "cong-app.h"
 #include "cong-editor-area-text.h"
+#include "cong-editor-area-expander.h"
 #include "cong-editor-area-composer.h"
 #include "cong-editor-area-spacer.h"
 #include "cong-editor-area-pixbuf.h"
@@ -43,8 +44,6 @@
 
 struct CongEditorAreaStructuralDetails
 {
-	gboolean expanded;
-
 	GdkColor *col_array[CONG_DISPSPEC_GC_USAGE_NUM];
 	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
 
@@ -52,6 +51,7 @@ struct CongEditorAreaStructuralDetails
 	/****/ /* anon v-spacer */
 	/****/ CongEditorArea *title_hcompose;
 	/********/ /* anon h-spacer */
+	/********/ CongEditorArea *title_expander;
 	/********/ CongEditorArea *title_pixbuf;
 	/********/ CongEditorArea *title_text;
 	/****/ /* anon v-spacer */
@@ -80,11 +80,9 @@ static void
 add_child (CongEditorAreaContainer *area_container,
 	   CongEditorArea *child);
 
-static gboolean
-on_button_press (CongEditorArea *editor_area, 
-		 GdkEventButton *event,
-		 gpointer user_data);
-
+static void
+on_expansion_changed (CongEditorAreaExpander *area_expander,
+		      gpointer user_data);
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaStructural, 
@@ -145,8 +143,6 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 	}
 
 
-	PRIVATE(area_structural)->expanded = TRUE;
-
 	PRIVATE(area_structural)->title_vcompose = cong_editor_area_composer_new (editor_widget,
 										  GTK_ORIENTATION_VERTICAL,
 										  0);
@@ -193,6 +189,15 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 							FALSE,
 							FALSE,
 							0);
+
+			/* Add the expander: */
+			PRIVATE(area_structural)->title_expander = cong_editor_area_expander_new (editor_widget,
+												  TRUE);
+			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural)->title_hcompose),
+							PRIVATE(area_structural)->title_expander,
+							FALSE,
+							FALSE,
+							0);		
 			
 			/* Add the pixbuf (if any): */
 			if (pixbuf) {
@@ -232,11 +237,12 @@ cong_editor_area_structural_construct (CongEditorAreaStructural *area_structural
 	cong_editor_area_protected_set_parent (PRIVATE(area_structural)->inner_bin,
 					       CONG_EDITOR_AREA (area_structural));
 
-	/* Click handling for title bar: */
-	g_signal_connect (G_OBJECT(PRIVATE(area_structural)->title_hcompose),
-			  "button_press_event",
-			  G_CALLBACK(on_button_press),
+	g_signal_connect (G_OBJECT(PRIVATE(area_structural)->title_expander),
+			  "expansion_changed",
+			  G_CALLBACK(on_expansion_changed),
 			  area_structural);
+
+
 
 	return CONG_EDITOR_AREA (area_structural);
 }
@@ -321,7 +327,7 @@ render_self (CongEditorArea *area,
 			    rect->width - 1, title_bar_height);
 	
 	/* Bottom */  
-	if (PRIVATE(area_structural)->expanded) {
+	if (cong_editor_area_expander_get_state (CONG_EDITOR_AREA_EXPANDER(PRIVATE (area_structural)->title_expander))) {
 		gc = PRIVATE(area_structural)->gc_array[CONG_DISPSPEC_GC_USAGE_DIM_LINE];
 		g_assert(gc);
 
@@ -373,7 +379,7 @@ calc_requisition (CongEditorArea *area,
 							      orientation,
 							      width_hint-1);
 
-		if (PRIVATE(structural)->expanded) {
+		if (cong_editor_area_expander_get_state (CONG_EDITOR_AREA_EXPANDER (PRIVATE(structural)->title_expander))) {
 			gint inner_req;
 		
 			inner_req = cong_editor_area_get_requisition (PRIVATE(structural)->inner_bin,
@@ -444,33 +450,18 @@ add_child (CongEditorAreaContainer *area_container,
 					       child);
 }
 
-static gboolean
-on_button_press (CongEditorArea *editor_area, 
-		 GdkEventButton *event,
-		 gpointer user_data)
+static void
+on_expansion_changed (CongEditorAreaExpander *area_expander,
+		      gpointer user_data)
 {
 	CongEditorAreaStructural *area_structural = CONG_EDITOR_AREA_STRUCTURAL (user_data);
 
-	if (1==event->button) {
-		/* Normally the left mouse button: */
-
-#if 0
-		g_message ("folding toggle");
-#endif
-
-		PRIVATE(area_structural)->expanded = !PRIVATE(area_structural)->expanded;
-
-		if (PRIVATE(area_structural)->expanded) {
-			cong_editor_area_show (PRIVATE(area_structural)->inner_bin);
-		} else {
-			cong_editor_area_hide (PRIVATE(area_structural)->inner_bin);
-		}
-
-		cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_structural),
-							  GTK_ORIENTATION_VERTICAL );
-
-		return TRUE;
+	if (cong_editor_area_expander_get_state (CONG_EDITOR_AREA_EXPANDER(PRIVATE(area_structural)->title_expander))) {
+		cong_editor_area_show (PRIVATE(area_structural)->inner_bin);
 	} else {
-		return FALSE;
+		cong_editor_area_hide (PRIVATE(area_structural)->inner_bin);
 	}
+	
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_structural),
+						  GTK_ORIENTATION_VERTICAL );
 }

@@ -354,8 +354,22 @@ GNOME_CLASS_BOILERPLATE(CongEditorWidget3,
 static void
 cong_editor_widget3_class_init (CongEditorWidget3Class *klass)
 {
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
 	G_OBJECT_CLASS (klass)->finalize = cong_editor_widget3_finalize;
 	G_OBJECT_CLASS (klass)->dispose = cong_editor_widget3_dispose;
+
+
+#define _EXPANDER_SIZE 10
+    
+	gtk_widget_class_install_style_property (widget_class,
+						 g_param_spec_int ("expander_size",
+								   _("Expander Size"),
+								   _("Size of the expander arrow"),
+								   0,
+								   G_MAXINT,
+								   _EXPANDER_SIZE,
+								   G_PARAM_READABLE));
 }
 
 static void
