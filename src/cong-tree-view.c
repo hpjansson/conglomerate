@@ -70,6 +70,11 @@ struct search_struct
 #endif
 
 /* Internal function prototypes: */
+static gboolean
+on_widget_destroy_event (GtkWidget *widget,
+			 gpointer user_data);
+
+
 static gint 
 tree_popup_show(GtkWidget *widget, GdkEvent *event);
 
@@ -221,7 +226,10 @@ cong_tree_view_new (CongDocument *doc,
 	}
 
 	/* Set up for cleanup: */
-	
+	g_signal_connect (G_OBJECT (details->gtk_tree_view),
+			  "destroy",
+			  G_CALLBACK (on_widget_destroy_event),
+			  cong_tree_view);
 	
 	/* Show the tree view: */
 	gtk_widget_show(GTK_WIDGET(details->gtk_tree_view));
@@ -233,7 +241,9 @@ void cong_tree_view_free(CongTreeView *tree_view)
 {
 	g_return_if_fail(tree_view);
 
+#if 0
 	g_message ("cong_tree_view_free");
+#endif
 
 	/* FIXME: should we delete the widgetry as well? */
 	/* FIXME: should we unref the tree store? */
@@ -277,6 +287,21 @@ cong_tree_view_get_tree_store (CongTreeView *tree_view)
 
 
 /* Internal function implementations: */
+static gboolean
+on_widget_destroy_event (GtkWidget *widget,
+			 gpointer user_data)
+{
+	CongTreeView *cong_tree_view = user_data;
+
+#if 0
+	g_message ("on_widget_destroy_event");
+#endif
+
+	cong_tree_view_free (cong_tree_view);
+
+	return FALSE;
+}
+
 /* the treeview widget has the userdata "cong_tree_view" set on it */
 static gint 
 tree_popup_show(GtkWidget *widget, GdkEvent *event)

@@ -89,8 +89,6 @@ struct CongPrimaryWindow
 
 /*  	GtkWidget *w; */
 
-	CongTreeView *cong_overview_view;
-
 #if USE_WIDGET2
 	GtkWidget *cong_editor_widget2;
 	GtkWidget *scroller2;
@@ -435,7 +433,6 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gtk_widget_show(w1);
 
 	if (primary_window->doc) {
-		g_assert(primary_window->cong_overview_view);
 #if USE_WIDGET2
 		g_assert(primary_window->cong_editor_widget2);
 #endif
@@ -451,6 +448,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
 
 		/* --- Tree view --- */
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
 		
 		w2 = gtk_scrolled_window_new(NULL, NULL);
 		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
@@ -462,9 +460,9 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 					 w2,
 					 gtk_label_new(_("Overview"))
 					 );
-		
+
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-						      cong_tree_view_get_widget(primary_window->cong_overview_view));
+						      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
 		
 		/* --- Bookmark view --- */
 #if 0
@@ -601,12 +599,10 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	CongPrimaryWindow *primary_window = g_new0(CongPrimaryWindow, 1);
 
+
 	if (doc) {
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
-
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
-		primary_window->cong_overview_view = cong_overview_view_new (doc);
 
 #if USE_WIDGET2
 		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v2 widget");
@@ -614,12 +610,8 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 #endif
 
 #if USE_WIDGET3
-#if 1
 		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
 		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
-#else
-		primary_window->cong_editor_widget3 = gtk_calendar_new();
-#endif
 #endif
 	}
 
@@ -646,11 +638,10 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
+	g_message ("cong_primary_window_free");
+
 	if (primary_window->doc) {
-		cong_tree_view_free(primary_window->cong_overview_view);
 		g_object_unref(G_OBJECT(primary_window->doc));
-	} else {
-		g_assert(primary_window->cong_overview_view==NULL);
 	}
 
 	cong_app_singleton()->primary_windows = g_list_remove(cong_app_singleton()->primary_windows, primary_window);	

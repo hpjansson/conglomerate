@@ -1,3 +1,9 @@
+2003-09-10  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-primary-window.c, cong-tree-view.c
+
+	More cleanup fixes - CongDocument now appears to be correctly unrefed, disposed and finalised when its window is closed
+
 2003-09-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget3.c, cong-tree-view.c, select.c
