@@ -3,7 +3,10 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
     <!ENTITY cong-app   			SYSTEM "xml/cong-app.xml">
     <!ENTITY cong-document			SYSTEM "xml/cong-document.xml">
+    <!ENTITY cong-document-traversal		SYSTEM "xml/cong-document-traversal.xml">
+    <!ENTITY cong-traversal-node		SYSTEM "xml/cong-traversal-node.xml">
     <!ENTITY cong-dispspec			SYSTEM "xml/cong-dispspec.xml">
+    <!ENTITY cong-dispspec-element		SYSTEM "xml/cong-dispspec-element.xml">
     <!ENTITY cong-dispspec-registry		SYSTEM "xml/cong-dispspec-registry.xml">
     <!ENTITY cong-dtd				SYSTEM "xml/cong-dtd.xml">
     <!ENTITY cong-primary-window		SYSTEM "xml/cong-primary-window.xml">
@@ -72,19 +75,25 @@
     <!ENTITY cong-tree-view                           SYSTEM "xml/cong-tree-view.xml">
     <!ENTITY cong-overview-view                           SYSTEM "xml/cong-overview-view.xml">
     <!ENTITY cong-plugin                           SYSTEM "xml/cong-plugin.xml">
+    <!ENTITY cong-plugin-manager                           SYSTEM "xml/cong-plugin-manager.xml">
     <!ENTITY cong-fake-plugin-hooks                           SYSTEM "xml/cong-fake-plugin-hooks.xml">
     <!ENTITY plugin-admonition-node-element                           SYSTEM "xml/plugin-admonition-node-element.xml">
     <!ENTITY plugin-lists-area-listitem                           SYSTEM "xml/plugin-lists-area-listitem.xml">
     <!ENTITY plugin-lists-node-element-listitem                           SYSTEM "xml/plugin-lists-node-element-listitem.xml">
     <!ENTITY plugin-paragraph-area-paragraph                           SYSTEM "xml/plugin-paragraph-area-paragraph.xml">
     <!ENTITY plugin-paragraph-node-element-paragraph                           SYSTEM "xml/plugin-paragraph-node-element-paragraph.xml">
+
     <!ENTITY cong-attribute-editor                           SYSTEM "xml/cong-attribute-editor.xml">
     <!ENTITY cong-attribute-editor-cdata                           SYSTEM "xml/cong-attribute-editor-cdata.xml">
     <!ENTITY cong-attribute-editor-enumeration                           SYSTEM "xml/cong-attribute-editor-enumeration.xml">
+    <!ENTITY cong-attribute-editor-lang                           SYSTEM "xml/cong-attribute-editor-lang.xml">
     <!ENTITY cong-attribute-wrapper                           SYSTEM "xml/cong-attribute-wrapper.xml">
     <!ENTITY cong-attribute-wrapper-check-button                           SYSTEM "xml/cong-attribute-wrapper-check-button.xml">
     <!ENTITY cong-attribute-wrapper-radio-button                           SYSTEM "xml/cong-attribute-wrapper-radio-button.xml">
     <!ENTITY cong-dialog                           SYSTEM "xml/cong-dialog.xml">
+
+    <!ENTITY cong-glade                           SYSTEM "xml/cong-glade.xml">
+    <!ENTITY cong-object                        SYSTEM "xml/cong-object.xml">
     <!ENTITY cong-eel                           SYSTEM "xml/cong-eel.xml">
     <!ENTITY cong-eel-graphic-effects                           SYSTEM "xml/cong-eel-graphic-effects.xml">
     <!ENTITY cong-enum-mapping                           SYSTEM "xml/cong-enum-mapping.xml">
@@ -92,6 +101,22 @@
     <!ENTITY cong-util                           SYSTEM "xml/cong-util.xml">
     <!ENTITY cong-text-cache                           SYSTEM "xml/cong-text-cache.xml">
     <!ENTITY cong-progress-checklist                           SYSTEM "xml/cong-progress-checklist.xml">
+    <!ENTITY cong-file-selection                           SYSTEM "xml/cong-file-selection.xml">
+    <!ENTITY cong-edit-find-and-replace                           SYSTEM "xml/cong-edit-find-and-replace.xml">
+    <!ENTITY cong-ui-hooks                           SYSTEM "xml/cong-ui-hooks.xml">
+    <!ENTITY cong-xpath-expression                           SYSTEM "xml/cong-xpath-expression.xml">
+
+    <!ENTITY cong-service  SYSTEM "xml/cong-service.xml">
+    <!ENTITY cong-service-tool  SYSTEM "xml/cong-service-tool.xml">
+    <!ENTITY cong-service-doc-tool  SYSTEM "xml/cong-service-doc-tool.xml">
+    <!ENTITY cong-service-document-factory  SYSTEM "xml/cong-service-document-factory.xml">
+    <!ENTITY cong-service-editor-node-factory  SYSTEM "xml/cong-service-editor-node-factory.xml">
+    <!ENTITY cong-service-exporter  SYSTEM "xml/cong-service-exporter.xml">
+    <!ENTITY cong-service-importer  SYSTEM "xml/cong-service-importer.xml">
+    <!ENTITY cong-service-node-property-dialog  SYSTEM "xml/cong-service-node-property-dialog.xml">
+    <!ENTITY cong-service-node-tool  SYSTEM "xml/cong-service-node-tool.xml">
+    <!ENTITY cong-service-print-method  SYSTEM "xml/cong-service-print-method.xml">
+
     <!ENTITY cong-font                           SYSTEM "xml/cong-font.xml">
     <!ENTITY cong-graph                           SYSTEM "xml/cong-graph.xml">
     <!ENTITY cong-marshal                           SYSTEM "xml/cong-marshal.xml">
@@ -99,6 +124,14 @@
     <!ENTITY fo                           SYSTEM "xml/fo.xml">
     <!ENTITY global                           SYSTEM "xml/global.xml">
     <!ENTITY cong-vfs                           SYSTEM "xml/cong-vfs.xml">
+
+<!--
+    <!ENTITY gxx-declare-object-from-xml-tree    SYSTEM  "xml/gxx-declare-object-from-xml-tree.xml">
+    <!ENTITY gxx-declare-object-to-xml-tree      SYSTEM  "xml/gxx-declare-object-to-xml-tree.xml">
+    <!ENTITY gxx-object-from-xml-tree            SYSTEM  "xml/gxx-object-from-xml-tree.xml">
+    <!ENTITY gxx-object-to-xml-tree              SYSTEM  "xml/gxx-object-to-xml-tree.xml">
+-->
+
     <!ENTITY tree_index                           SYSTEM "xml/tree_index.sgml">
     ]>
 <book id="index">
@@ -108,15 +141,21 @@
 
   <chapter>
     <title>High-level Classes</title>
-    <para>There is a single #CongApp object representing the entire application; this owns a collection of #CongPrimaryWindow objects, each represents one of the application's primary windows.  A primary window corresponds to a particular #CongDocument.</para>
-    <para>In addition, the #CongApp owns certain global resources, including the #CongDispspecRegistry.</para>
-    <para>A CongDocument is a wrapper around the libxml2 document tree, together with a cursor location, and a selection range.  It references a CongDispspec.  It is a GObject, and it emits signals when things change.  </para>
-    <para>There is also an earlier system, in which there are CongView structs which manually register themselves with CongDocument objects and receive all updates.  This is now deprecated.</para>
-    <para>A dispspec is a "display specification"; it is a way of looking up tags in the xml document and deciding if they are "structural" and hence should appear as big blocks in the view, or "spans", in which case they can merely be rendered as an underline.  But it also supports looking up icons to use, and in theory, localisation of the tag names.</para>
+    <para>There is a single <link linkend="conglomerate-cong-app">CongApp</link> object representing the entire application; this owns a collection of <link linkend="conglomerate-cong-primary-window">CongPrimaryWindow</link> objects, each represents one of the application's primary windows.  A primary window corresponds to a particular <link linkend="CongDocument">CongDocument</link>.</para>
+    <para>In addition, the <classname>CongApp</classname> owns certain global resources, including the <link linkend="conglomerate-cong-dispspec-registry">CongDispspecRegistry</link>.</para>
+    <para>A <classname>CongDocument</classname> is a wrapper around the libxml2 document tree, together with a cursor location, and a selection range.  It references a <link linkend="conglomerate-cong-dispspec">CongDispspec</link>.  It is a <classname>GObject</classname>, and it emits signals when things change.  </para>
+    <warning>
+      <title>Deprecated system</title>
+      <para>There is also an earlier system, in which there are <link linkend="conglomerate-cong-view">CongView</link> structs which manually register themselves with <classname>CongDocument</classname> objects and receive all updates.  This is now deprecated.</para>
+    </warning>
+    <para>A dispspec is a "display specification"; it is a way of looking up tags in the xml document and deciding if they are "structural" and hence should appear as big blocks in the view, or "spans", in which case they can merely be rendered as an underline.  It also supports looking up icons to use, and, in theory, localisation of the tag names.</para>
     <para>The display specifications are generally loaded from ".xds" files, but can also be created at run-time. </para>
     &cong-app;
     &cong-document;
+    &cong-document-traversal;
+    &cong-traversal-node;
     &cong-dispspec;
+    &cong-dispspec-element;
     &cong-dispspec-registry;
     &cong-dtd;
     &cong-primary-window;
@@ -124,8 +163,8 @@
 
   <chapter>
     <title>XML Handling</title>
-    <para>A #CongNodePtr is a libxml2 xmlNodePtr; originally it was something else, though.  It's a node in the DOM tree of the document.  Everything is stored in UTF-8 internally.  There are some CongNode operations, and these are generally convenience wrappers around libxml2.</para>
-    <para>A #CongLocation is a small struct which identifies a "location" in the document (e.g. for storing the cursor location).  It's got a pointer to a node in the document tree, together with an offset into the content of the node, which is only relevant for TEXT and COMMENT nodes.  It's the number of bytes, rather than the number of characters.</para>
+    <para>A <link linkend="CongNodePtr">CongNodePtr</link> is a libxml2 xmlNodePtr; originally it was something else, though.  It's a node in the DOM tree of the document.  Everything is stored in UTF-8 internally.  There are some CongNode operations, and these are generally convenience wrappers around libxml2.</para>
+    <para>A <link linkend="conglomerate-cong-location">CongLocation</link> is a small struct which identifies a "location" in the document (e.g. for storing the cursor location).  It's got a pointer to a node in the document tree, together with an offset into the content of the node, which is only relevant for TEXT and COMMENT nodes.  It's the number of bytes, rather than the number of characters.</para>
     &cong-node;
     &cong-location;
     &cong-range;
@@ -134,7 +173,7 @@
 
   <chapter>
     <title>Undo/Redo System</title>
-    <para>All changes to a #CongDocument should be done using #CongCommand objects.  Each #CongDocument has a #CongCommandHistory which stores all of the commands that have been applied to that command which can be undone, and all that can be redone.</para>
+    <para>All changes to a <link linkend="CongDocument">CongDocument</link> should be done using <link linkend="CongCommand">CongCommand</link> objects.  Each <classname>CongDocument</classname> has a <link linkend="CongCommandHistory">CongCommandHistory</link> which stores all of the commands that have been applied to that command which can be undone, and all that can be redone.</para>
     <para>In order to modify the document, you should do something like this:
 <programlisting>
 CongCommand *cmd = cong_document_begin_command (doc, _("User-visible name of command"), NULL);
@@ -145,8 +184,8 @@ cong_command_add_modification_do_something_else (cmd, param2, param3, param4);
 cong_document_end_command (doc, cmd);
 </programlisting>
     </para>
-    <para>All commands are built up of modifications, all of which break down into a small number of atomic modifications.  Each type of modification corresponds to a subclass of #CongModification, and contains enough information to be able to redo and undo the command</para>
-    <para>As the atomic modifications are done/undone, they call the appropriate CongDocument methods which have the word "private" in their names e.g. cong_document_private_node_add_after().  These emit signals which are listened to by the various views, widgets etc.  The CongDocument also handles the signal by calling a correspong cong_node_private function e.g. cong_node_private_add_after(), which actual makes the change to the libxml2 representation of the document.</para>
+    <para>All commands are built up of modifications, all of which break down into a small number of atomic modifications.  Each type of modification corresponds to a subclass of <link linkend="CongModification">CongModification</link>, and contains enough information to be able to redo and undo the command</para>
+    <para>As the atomic modifications are done/undone, they call the appropriate <classname>CongDocument</classname> methods which have the word "private" in their names e.g. <function>cong_document_private_node_add_after</function>.  These emit signals which are listened to by the various views, widgets etc.  The CongDocument also handles the signal by calling a correspong cong_node_private function e.g. <function>cong_node_private_add_after</function>, which actual makes the change to the libxml2 representation of the document.</para>
     &cong-command;
     &cong-command-history;
     &cong-modification;
@@ -165,12 +204,12 @@ cong_document_end_command (doc, cmd);
 
   <chapter>
     <title>The Editor Widget</title>
-    <para>For every xml node in the document, there is a CongEditorNode for each editor_widget3.  There is a class hierarchy of CongEditorNode subclasses, so, for instance, there's a CongEditorNodeElementStructuralTag which is used for structural tags, and a CongEditorNodeComment for comments.  This way, we only have to figure out what type a node is once, rather than every time we visit it, plus we can store useful state in the CongEditorNode objects.  For example, in a CongEditorNodeText, we store a PangoLayout.</para>
-    <para>There is also a collection of CongEditorArea objects.  These form a hierarchical tree of rectangular areas which divide up the space allocated to the widget.  They know how to draw themselves, can be clicked on, handle size negotiation etc.  They are a little bit like a lightweight version of GtkWidgets, although the analogy isn't perfect. </para>
-    <para>CongEditorArea objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. CongEditorAreaComposer which exists purely to manage the sizing of its children).</para>
-    <para>CongEditorNode objects work behind the scenes.  They are responsible for creating CongEditorArea objects to represent themselves.</para>
-    <para>There are a few other classes involved: CongEditorAreaFlowHolder, and CongEditorChildPolicy.  These are responsible for generating paragraph-like areas, which the editor nodes "pour" their CongEditorAreas into.  This allows us to get the nice underlines, which is achieved by using a PangoLayout for every text node, splitting all the PangoLayoutLines into separate CongEditorArea objects, and then merging them, together with a few extra CongEditorAreas. </para>
-    <para> If you want to see the CongEditorAreas, then go to src/cong-editor-area.c and play around with the #define settings; in particular DEBUG_RENDER_ALLOCATIONS can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
+    <para>For every xml node in the document, there is a <link linkend="CongEditorNode">CongEditorNode</link> for each editor_widget3.  There is a class hierarchy of <classname>CongEditorNode</classname> subclasses, so, for instance, there's a <link linkend="CongEditorNodeElementStructural">CongEditorNodeElementStructural</link> which is used for structural tags, and a <link linkend="CongEditorNodeComment">CongEditorNodeComment</link> for comments.  This way, we only have to figure out what type a node is once, rather than every time we visit it, plus we can store useful state in the <classname>CongEditorNode</classname> objects.  For example, in a <link linkend="CongEditorNodeText">CongEditorNodeText</link>, we store a <classname>PangoLayout</classname>.</para>
+    <para>There is also a collection of <link linkend="CongEditorArea">CongEditorArea</link> objects.  These form a hierarchical tree of rectangular areas which divide up the space allocated to the widget.  They know how to draw themselves, can be clicked on, handle size negotiation etc.  They are a little bit like a lightweight version of <classname>GtkWidgets</classname>, although the analogy isn't perfect. </para>
+    <para><classname>CongEditorArea</classname> objects are what you see and click on when interacting with the editor_widget3, although not all of them are visible (e.g. <link linked="CongEditorAreaComposer">CongEditorAreaComposer</link> which exists purely to manage the sizing of its children).</para>
+    <para><classname>CongEditorNode</classname> objects work behind the scenes.  They are responsible for creating <classname>CongEditorArea</classname> objects to represent themselves.</para>
+    <para>There are a few other classes involved: <link linkend="CongEditorAreaFlowHolder">CongEditorAreaFlowHolder</link>, and <link linkend="CongEditorChildPolicy">CongEditorChildPolicy</link>.  These are responsible for generating paragraph-like areas, which the editor nodes "pour" their <classname>CongEditorAreas</classname> into.  This allows us to get the nice underlines, which is achieved by using a <classname>PangoLayout</classname> for every text node, splitting all the <classname>PangoLayoutLines</classname> into separate <classname>CongEditorArea</classname> objects, and then merging them, together with a few extra <classname>CongEditorAreas</classname>. </para>
+    <para> If you want to see the <classname>CongEditorAreas</classname>, then go to <filename>src/cong-editor-area.c</filename> and play around with the #define settings; in particular <constant>DEBUG_RENDER_ALLOCATIONS</constant> can be used to render rectangles to indicate all of the bounding boxes of the CongEditorAreas.</para>
     &cong-editor-widget;
     &cong-editor-line-fragments;
 
@@ -233,6 +272,7 @@ cong_document_end_command (doc, cmd);
   <chapter>
     <title>Plugins</title>
     &cong-plugin;
+    &cong-plugin-manager;
     &cong-fake-plugin-hooks;
     &plugin-admonition-node-element;
     &plugin-lists-area-listitem;
@@ -246,10 +286,13 @@ cong_document_end_command (doc, cmd);
     &cong-attribute-editor;
     &cong-attribute-editor-cdata;
     &cong-attribute-editor-enumeration;
+    &cong-attribute-editor-lang;
     &cong-attribute-wrapper;
     &cong-attribute-wrapper-check-button;
     &cong-attribute-wrapper-radio-button;
     &cong-dialog;
+    &cong-glade;
+    &cong-object;
     &cong-eel;
     &cong-eel-graphic-effects;
     &cong-enum-mapping;
@@ -257,10 +300,24 @@ cong_document_end_command (doc, cmd);
     &cong-util;
     &cong-text-cache;
     &cong-progress-checklist;
+    &cong-file-selection;
+    &cong-edit-find-and-replace;
+    &cong-ui-hooks;
+    &cong-xpath-expression;
   </chapter>
 
   <chapter>
     <title>Miscellaneous</title>
+    &cong-service;
+    &cong-service-tool;
+    &cong-service-doc-tool;
+    &cong-service-document-factory;
+    &cong-service-editor-node-factory;
+    &cong-service-exporter;
+    &cong-service-importer;
+    &cong-service-node-property-dialog;
+    &cong-service-node-tool;
+    &cong-service-print-method;
     &cong-font;
     &cong-graph;
     &cong-marshal;
@@ -268,6 +325,12 @@ cong_document_end_command (doc, cmd);
     &fo;
     &global;
     &cong-vfs;
+<!-- these create warning messages about multiple "IDs" for constraint linkend
+    &gxx-declare-object-from-xml-tree;
+    &gxx-declare-object-to-xml-tree;
+    &gxx-object-from-xml-tree;
+    &gxx-object-to-xml-tree;
+-->
   </chapter>
   
   <chapter>

@@ -1,3 +1,15 @@
+2004-09-01 Douglas Burke <dburke@cfa.harvard.edu>
+
+	* conglomerate-docs.sgml
+
+	Added missing pages (some may not be added to the best
+	section) and updated the existing text to include links
+	to pages.
+
+	* conglomerate.types
+
+	Added some missing include files/_get_type() functions.
+	
 2004-06-23 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* README: Update.

@@ -13,6 +13,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-dispspec.h"
 #include "cong-document.h"
+#include "cong-document-traversal.h"
 #include "cong-dtd.h"
 #include "cong-editor-area-bin.h"
 #include "cong-editor-area-border.h"
@@ -20,10 +21,12 @@
 #include "cong-editor-area-container.h"
 #include "cong-editor-area-entity-decl.h"
 #include "cong-editor-area-entity-ref.h"
+#include "cong-editor-area-expander.h"
 #include "cong-editor-area-flow-holder-blocks.h"
 #include "cong-editor-area-flow-holder-inlines.h"
 #include "cong-editor-area-flow-holder-single.h"
 #include "cong-editor-area-flow-holder.h"
+#include "cong-editor-area-labelled.h"
 #include "cong-editor-area-line.h"
 #include "cong-editor-area-pixbuf.h"
 #include "cong-editor-area-spacer.h"
@@ -82,14 +85,17 @@
 #include "cong-range.h"
 #include "cong-selection.h"
 #include "cong-text-cache.h"
+#include "cong-traversal-node.h"
 #include "cong-tree-view.h"
 #include "cong-util.h"
 #include "cong-view.h"
+#include "cong-xpath-expression.h"
 #include "fo.h"
 #include "plugin-lists-area-listitem.h"
 #include "plugin-lists-node-element-listitem.h"
 #include "plugin-paragraph-area-paragraph.h"
 #include "plugin-paragraph-node-element-paragraph.h"
+#include "plugin-admonition-node-element.h"
 
 cong_attribute_editor_cdata_get_type
 cong_attribute_editor_enumeration_get_type
@@ -101,16 +107,19 @@ cong_attribute_wrapper_get_type
 cong_command_history_get_type
 cong_command_get_type
 cong_document_get_type
+cong_document_traversal_get_type
 cong_editor_area_bin_get_type
 cong_editor_area_border_get_type
 cong_editor_area_composer_get_type
 cong_editor_area_container_get_type
 cong_editor_area_entity_decl_get_type
 cong_editor_area_entity_ref_get_type
+cong_editor_area_expander_get_type
 cong_editor_area_flow_holder_blocks_get_type
 cong_editor_area_flow_holder_inlines_get_type
 cong_editor_area_flow_holder_single_get_type
 cong_editor_area_flow_holder_get_type
+cong_editor_area_labelled_get_type
 cong_editor_area_line_get_type
 cong_editor_area_pixbuf_get_type
 cong_editor_area_spacer_get_type
@@ -130,6 +139,7 @@ cong_editor_line_fragments_get_type
 cong_editor_node_comment_get_type
 cong_editor_node_document_get_type
 cong_editor_node_dtd_get_type
+cong_editor_node_element_admonition_get_type
 cong_editor_node_element_span_get_type
 cong_editor_node_element_structural_get_type
 cong_editor_node_element_unknown_get_type
@@ -156,3 +166,5 @@ cong_editor_area_listitem_get_type
 cong_editor_node_element_listitem_get_type
 cong_editor_area_paragraph_get_type
 cong_editor_node_element_paragraph_get_type
+cong_traversal_node_get_type
+cong_xpath_expression_get_type
