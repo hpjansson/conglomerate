@@ -47,7 +47,7 @@ extra_files = version.xml.in
 # CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
 # contains GtkObjects/GObjects and you want to document signals and properties.
 GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src
-GTKDOC_LIBS = $(CONGLOMERATE_LIBS) $(filter-out $(top_srcdir)/src/main.o,$(wildcard $(top_srcdir)/src/*.o))
+GTKDOC_LIBS = $(CONGLOMERATE_LIBS) $(GTKSOURCEVIEW_LIBS) $(PRINTING_LIBS) $(filter-out $(top_srcdir)/src/main.o,$(wildcard $(top_srcdir)/src/*.o))
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)

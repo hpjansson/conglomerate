@@ -1,3 +1,9 @@
+2003-10-06  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* Makefile.am
+
+	Added $(GTKSOURCEVIEW_LIBS) and $(PRINTING_LIBS) to GTKDOC_LIBS
+
 2003-10-06  Robert Varga
 
 	* Makefile.am
