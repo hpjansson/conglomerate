@@ -873,12 +873,15 @@ cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 	
 	g_return_val_if_fail (xml_doc, NULL);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, xml_doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+							      xml_doc,
+							      NULL);
 
 	if (ds == NULL) {
-		ds = query_for_forced_dispspec(_("Conglomerate could not find display information for the new file"), 
-					       xml_doc, 
-					       parent_window);
+		ds = query_for_forced_dispspec (_("Conglomerate could not find display information for the new file"), 
+						xml_doc, 
+						parent_window,
+						NULL);
 
 		if (NULL == ds) {
 			xmlFreeDoc(xml_doc);
@@ -906,12 +909,15 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	
 	g_return_val_if_fail (xml_doc, NULL);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, xml_doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+							      xml_doc,
+							      NULL);
 
 	if (ds == NULL) {
-		ds = query_for_forced_dispspec(_("Conglomerate could not find display information for the new file"), 
-					       xml_doc, 
-					       parent_window);
+		ds = query_for_forced_dispspec (_("Conglomerate could not find display information for the new file"), 
+						xml_doc, 
+						parent_window,
+						NULL);
 
 		if (NULL == ds) {
 			xmlFreeDoc(xml_doc);

@@ -13,6 +13,7 @@
 #include "cong-font.h"
 #include "cong-app.h"
 #include "cong-fake-plugin-hooks.h"
+#include "cong-primary-window.h"
 
 #define TEST_BIG_FONTS 0
 

@@ -32,7 +32,7 @@
 #include "cong-fake-plugin-hooks.h"
 
 #include "cong-util.h"
-
+#include "cong-dtd.h"
 
 /* Internal function declarations: */
 static xmlDtdPtr 

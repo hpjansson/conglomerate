@@ -1,3 +1,9 @@
+2003-09-11  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-dispspec.h, cong-file-open.c, cong-menus.c, cong-plugin.c, global.h, main.c, plugin-dtd.c
+
+	Support for fileformat extension hints in dispspecs; warning fixes
+	
 2003-09-10  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget3.c, cong-source-view.c, cong-tree-view.c

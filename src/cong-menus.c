@@ -469,12 +469,15 @@ void open_transformed_window_for_doc(xmlDocPtr doc,
 
 	g_return_if_fail(doc);
 
-	ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, doc);
+	ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+							      doc,
+							      NULL);
 
 	if (ds==NULL) {
 		ds = query_for_forced_dispspec(_("Conglomerate cannot open the result of the transformation"), 
 					       doc,
-					       parent_window);
+					       parent_window,
+					       NULL);
 
 		if (NULL==ds) {
 			xmlFreeDoc(doc);

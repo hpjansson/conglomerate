@@ -159,7 +159,11 @@ gchar* string_selection_dialog(gchar *title, gchar *element_description, GList *
 
 void xv_style_r(GtkWidget *widget, gpointer data);
 
-CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWindow* parent_window);
+CongDispspec* 
+query_for_forced_dispspec (gchar *what_failed, 
+			   xmlDocPtr doc, 
+			   GtkWindow* parent_window,
+			   const gchar *filename_extension);
 
 /**
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)

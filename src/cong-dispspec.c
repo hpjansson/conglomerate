@@ -74,6 +74,13 @@ struct SearchTreeKey
 	gchar* name;
 };
 
+typedef CongSerialisationFormat* CongSerialisationFormatPtr;
+
+struct CongSerialisationFormat
+{
+	gchar *extension;
+};
+
 struct CongExternalDocumentModel
 {
 	enum CongDocumentModelType model_type;
@@ -83,6 +90,10 @@ struct CongExternalDocumentModel
 
 struct CongDispspec
 {
+	/* The serialisation formats: */
+	guint num_serialisation_formats;
+	CongSerialisationFormat **serialisation_formats;
+
 	/* The CongDocumentModels: */
 	CongExternalDocumentModel *document_models[NUM_CONG_DOCUMENT_MODEL_TYPES];
 
@@ -95,6 +106,7 @@ struct CongDispspec
 
 	gchar *name;
 	gchar *desc;
+	gchar *filename_extension;
 	GdkPixbuf *icon;
 
 	CongDispspecElement *paragraph;
@@ -124,6 +136,16 @@ parse_metadata (CongDispspec *ds,
 		xmlNodePtr node);
 
 static void 
+parse_serialisation (CongDispspec *ds, 
+		     xmlDocPtr doc, 
+		     xmlNodePtr node);
+
+static CongSerialisationFormat*
+parse_format (CongDispspec *ds, 
+	      xmlDocPtr doc, 
+	      xmlNodePtr node);
+
+static void 
 parse_document_models (CongDispspec *ds, 
 		       xmlDocPtr doc, 
 		       xmlNodePtr node);
@@ -148,6 +170,12 @@ static void
 add_xml_for_metadata (xmlDocPtr xml_doc, 
 		      CongNodePtr root, 
 		      CongDispspec *dispspec);
+
+static void 
+add_xml_for_serialisation_formats  (xmlDocPtr xml_doc, 
+				    CongNodePtr root, 
+				    CongDispspec *dispspec);
+
 static void
 add_xml_for_document_models (xmlDocPtr xml_doc, 
 			     CongNodePtr root, 
@@ -176,10 +204,27 @@ static void
 ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur);
 
 static void
-xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd);
+xml_to_dispspec (CongDispspec *dispspec, 
+		 xmlDocPtr doc, 
+		 xmlDtdPtr dtd,
+		 const gchar *extension);
 
 static xmlDtdPtr
 load_dtd (xmlDocPtr doc);
+
+static CongSerialisationFormat*
+cong_serialisation_format_new (const gchar *extension)
+{
+	CongSerialisationFormat* format;
+
+	g_return_val_if_fail (extension, NULL);
+
+	format = g_new0(CongSerialisationFormat, 1);
+
+	format->extension = g_strdup(extension);
+
+	return format;
+}
 
 static CongExternalDocumentModel*
 cong_external_document_model_new (enum CongDocumentModelType model_type,
@@ -386,13 +431,20 @@ CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd,
 }
 
 CongDispspec *
-cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc)
+cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc,
+					  const gchar *extension)
 {
 	CongDispspec *dispspec;
 
+	g_return_val_if_fail (doc, NULL);
+	g_return_val_if_fail (extension, NULL);
+
 	dispspec = cong_dispspec_new();
 
-	xml_to_dispspec (dispspec, doc, load_dtd (doc));
+	xml_to_dispspec (dispspec, 
+			 doc, 
+			 load_dtd (doc), 
+			 extension);
 
 	return dispspec;
 }
@@ -450,6 +502,9 @@ xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec)
 	/* Add the metadata node: */
 	add_xml_for_metadata(xml_doc, root_node, dispspec);
 
+	/* Add the serialisation formats: */
+	add_xml_for_serialisation_formats(xml_doc, root_node, dispspec);
+
 	add_xml_for_document_models (xml_doc, root_node, dispspec);
 	
 	/* The <element-list> node: */
@@ -501,6 +556,56 @@ cong_dispspec_get_description (const CongDispspec *ds)
 	} else {
 		return _("No description available.");
 	}
+}
+
+guint
+cong_dispspec_get_num_serialisation_formats (const CongDispspec *ds)
+{
+	g_return_val_if_fail (ds, 0);
+
+	return ds->num_serialisation_formats;
+}
+
+const CongSerialisationFormat*
+cong_dispspec_get_serialisation_format (const CongDispspec *ds,
+					guint index)
+{
+	g_return_val_if_fail (ds, NULL);
+
+	g_assert (index<ds->num_serialisation_formats);
+
+	return ds->serialisation_formats[index];
+}
+
+/* Returns NULL if it can't find a serialisation format with that extension */
+const CongSerialisationFormat*
+cong_dispspec_lookup_filename_extension (const CongDispspec *ds,
+					 const gchar *extension)
+{
+	guint i;
+	g_return_val_if_fail (ds, NULL);
+
+	for (i=0;i<ds->num_serialisation_formats;i++) {
+		const CongSerialisationFormat* format = ds->serialisation_formats[i];
+		g_assert (format);
+	
+		if (0==strcmp(extension, format->extension)) {
+			return format;
+		}
+	}
+
+	return NULL;
+}
+
+/* Returns whether the dispspec uses that extension */
+gboolean
+cong_dispspec_matches_filename_extension (const CongDispspec *ds,
+					  const gchar *extension)
+{
+	g_return_val_if_fail (ds, FALSE);
+
+	return (NULL!=cong_dispspec_lookup_filename_extension (ds,
+							       extension));
 }
 
 const CongExternalDocumentModel*
@@ -848,17 +953,13 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 							}
 						}
 						
-					}
-					else if (0==strcmp(cur->name,"metadata"))
-					{
+					} else if (0==strcmp(cur->name,"metadata")) {
 						parse_metadata(ds, doc, cur);
-					}
-					else if (0==strcmp(cur->name,"document-models"))
-					{
+					} else if  (0==strcmp(cur->name,"serialisation")) {
+						parse_serialisation (ds, doc, cur);
+					} else if (0==strcmp(cur->name,"document-models")) {
 						parse_document_models(ds, doc, cur);
-					}
-					else if (0==strcmp(cur->name, "document-template"))
-					{
+					} else if (0==strcmp(cur->name, "document-template")) {
 						parse_template(ds, cur);
 					}
 				}
@@ -890,6 +991,59 @@ parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 				ds->desc = g_strdup(str);
 			}
 		}
+	}
+}
+
+static void 
+parse_serialisation (CongDispspec *ds, 
+		     xmlDocPtr doc, 
+		     xmlNodePtr node)
+{
+	guint index;
+	xmlNodePtr xml_element;
+	DS_DEBUG_MSG1("got serialisation\n");
+
+	g_assert (0==ds->num_serialisation_formats);
+	g_assert (NULL==ds->serialisation_formats);
+	
+	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
+		if (cong_node_is_tag (xml_element, NULL,"format")) {
+			ds->num_serialisation_formats++;
+		}
+	}
+
+	ds->serialisation_formats = g_new0(CongSerialisationFormatPtr, ds->num_serialisation_formats);
+
+	index = 0;
+	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
+		if (cong_node_is_tag (xml_element, NULL,"format")) {
+			ds->serialisation_formats[index++] = parse_format (ds, doc, xml_element);
+		}
+	}
+}
+
+static CongSerialisationFormat*
+parse_format (CongDispspec *ds, 
+	      xmlDocPtr doc, 
+	      xmlNodePtr node)
+{
+	gchar *extension;
+
+	DS_DEBUG_MSG1("got format\n");
+
+	extension = cong_node_get_attribute (node,
+					     "extension");
+
+	if (extension) {
+		CongSerialisationFormat* result;
+
+		result = cong_serialisation_format_new (extension);
+
+		g_free (extension);
+
+		return result;
+	} else {
+		return NULL;
 	}
 }
 
@@ -1533,6 +1687,46 @@ static void add_xml_for_metadata (xmlDocPtr xml_doc,
 
 }
 
+static void 
+add_xml_for_serialisation_formats  (xmlDocPtr xml_doc, 
+				    CongNodePtr root, 
+				    CongDispspec *dispspec)
+{
+	if (dispspec->serialisation_formats) {
+		guint i;
+		CongNodePtr node_serialisation;
+
+		node_serialisation = xmlNewDocNode (xml_doc,
+						    NULL,
+						    "serialisation",
+						    NULL);
+		xmlAddChild (root, 
+			     node_serialisation);
+
+		for (i=0;i<dispspec->num_serialisation_formats; i++) {
+			CongNodePtr node_format;
+			CongSerialisationFormat *format = dispspec->serialisation_formats[i];
+			g_assert (format);
+
+			node_format = xmlNewDocNode (xml_doc,
+						     NULL,
+						     "format",
+						     NULL);
+
+			xmlAddChild (node_serialisation, 
+				     node_format);
+
+			if (format->extension) {
+				xmlSetProp (node_format,
+					    "extension",
+					    format->extension);
+			}
+
+			
+		}
+	}
+}
+
 static void
 add_xml_for_document_models (xmlDocPtr xml_doc, 
 			     CongNodePtr root, 
@@ -1831,8 +2025,22 @@ ensure_all_elements_covered (CongDispspec * dispspec, xmlNodePtr cur)
 }
 
 static void
-xml_to_dispspec (CongDispspec * dispspec, xmlDocPtr doc, xmlDtdPtr dtd)
+xml_to_dispspec (CongDispspec *dispspec, 
+		 xmlDocPtr doc, 
+		 xmlDtdPtr dtd,
+		 const gchar *extension)
 {
+	if (extension) {
+		g_assert (0==dispspec->num_serialisation_formats);
+		g_assert (NULL==dispspec->serialisation_formats);
+
+		if (0!=strcmp("xml", extension)) {
+			dispspec->num_serialisation_formats = 1;
+			dispspec->serialisation_formats = g_new0 (CongSerialisationFormatPtr, 1);
+			dispspec->serialisation_formats[0] = cong_serialisation_format_new (extension);
+		}
+	}
+
 	if (doc)
 	{
 		xmlNodePtr root_element = xmlDocGetRootElement(doc);

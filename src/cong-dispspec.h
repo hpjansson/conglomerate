@@ -36,6 +36,7 @@ enum CongDocumentModelType
 	NUM_CONG_DOCUMENT_MODEL_TYPES
 };
 
+typedef struct CongSerialisationFormat CongSerialisationFormat;
 typedef struct CongExternalDocumentModel CongExternalDocumentModel;
 
 /*******************************
@@ -51,18 +52,23 @@ GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** 
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
 
 /* Constructors that try to generate from another format: */
-CongDispspec* cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc);
-CongDispspec* cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
-						   const gchar *name, 
-						   const gchar *description);
+CongDispspec* 
+cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc,
+					  const gchar *extension);
+CongDispspec* 
+cong_dispspec_new_generate_from_dtd (xmlDtdPtr dtd, 
+				     const gchar *name, 
+				     const gchar *description);
 
 /* Destruction: */
-void cong_dispspec_delete(CongDispspec *dispspec);
+void
+cong_dispspec_delete (CongDispspec *dispspec);
 
 /**
  *  Routine to manufacture a XML representation of the dispspec.  Can be saved to disk, used as a CongDocument etc
  */
-xmlDocPtr cong_dispspec_make_xml(CongDispspec *dispspec);
+xmlDocPtr
+cong_dispspec_make_xml (CongDispspec *dispspec);
 
 /* Data for the dispspec: */
 const gchar*
@@ -70,6 +76,24 @@ cong_dispspec_get_name(const CongDispspec *ds);
 
 const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
+
+guint
+cong_dispspec_get_num_serialisation_formats (const CongDispspec *ds);
+
+const CongSerialisationFormat*
+cong_dispspec_get_serialisation_format (const CongDispspec *ds,
+					guint index);
+
+/* Returns NULL if it can't find a serialisation format with that extension */
+const CongSerialisationFormat*
+cong_dispspec_lookup_filename_extension (const CongDispspec *ds,
+					 const gchar *extension);
+
+/* Returns whether the dispspec uses that extension */
+gboolean
+cong_dispspec_matches_filename_extension (const CongDispspec *ds,
+					  const gchar *extension);
+
 
 const CongExternalDocumentModel*
 cong_dispspec_get_external_document_model (const CongDispspec *ds,
@@ -223,6 +247,10 @@ cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element);
 
 const gchar*
 cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element);
+
+/* Serialisation format stuff: */
+const gchar*
+cong_serialisation_format_get_extension (const CongSerialisationFormat* format);
 
 
 /* Document model stuff: */

@@ -178,7 +178,9 @@ get_toplevel_tag(xmlDocPtr doc, gchar** xmlns, gchar** tagname)
  * If this fails, it asks the user.
  */
 CongDispspec*
-cong_dispspec_registry_get_appropriate_dispspec(CongDispspecRegistry* registry, xmlDocPtr doc)
+cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 
+						 xmlDocPtr doc,
+						 const gchar *filename_extension)
 {
 	gchar* toplevel_xmlns;
 	gchar* toplevel_tag;
@@ -186,7 +188,7 @@ cong_dispspec_registry_get_appropriate_dispspec(CongDispspecRegistry* registry, 
 	g_return_val_if_fail(registry,NULL);
 	g_return_val_if_fail(doc,NULL);
 
-	/* FIXME: check for a DTD */
+	/* FIXME bug #121984: check for a DTD */
 #if 0
 	if (doc->) {
 	}

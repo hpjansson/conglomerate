@@ -47,7 +47,9 @@ void
 cong_dispspec_registry_dump(CongDispspecRegistry* registry);
 
 CongDispspec*
-cong_dispspec_registry_get_appropriate_dispspec(CongDispspecRegistry* registry, xmlDocPtr doc);
+cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry, 
+						 xmlDocPtr doc,
+						 const gchar *filename_extension);
 
 G_END_DECLS
 

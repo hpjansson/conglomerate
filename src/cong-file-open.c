@@ -18,6 +18,7 @@ struct force_dialog
 	int was_forced;
 	xmlDocPtr doc;
 	CongDispspec *ds;
+	const gchar *filename_extension;
 };
 
 void force_load(gpointer data)
@@ -28,17 +29,23 @@ void force_load(gpointer data)
 	g_assert(the_dlg->doc);
 
 	the_dlg->was_forced=TRUE;
-	the_dlg->ds = cong_dispspec_new_generate_from_xml_file(the_dlg->doc);
+	the_dlg->ds = cong_dispspec_new_generate_from_xml_file (the_dlg->doc,
+								the_dlg->filename_extension);
 
 	g_assert(the_dlg->ds);
 }
 
-CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWindow *parent_window)
+CongDispspec* 
+query_for_forced_dispspec (gchar *what_failed, 
+			   xmlDocPtr doc, 
+			   GtkWindow *parent_window,
+			   const gchar *filename_extension)
 {
 	GtkDialog *dialog;
 	struct force_dialog the_dlg;
-	the_dlg.was_forced=FALSE;
-	the_dlg.doc=doc;
+	the_dlg.was_forced = FALSE;
+	the_dlg.doc = doc;
+	the_dlg.filename_extension = filename_extension;
 
 
 	dialog = cong_error_dialog_new_with_convenience(parent_window,
@@ -61,7 +68,31 @@ CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc, GtkWi
 	}
 }
 
-void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
+gchar*
+get_filename_extension (const GnomeVFSURI *uri)
+{
+	gchar *result = NULL;
+	gchar *short_name;
+	gchar *separator;
+
+	g_return_val_if_fail (uri, NULL);
+
+	short_name = gnome_vfs_uri_extract_short_name (uri);
+
+	separator = g_strrstr (short_name, ".");
+
+	if (separator) {
+		result = g_strdup (separator+1);
+	}
+
+	g_free (short_name);
+
+	return result;
+}
+
+void 
+open_document_do (const gchar* doc_name, 
+		  GtkWindow *parent_window)
 {
 	CongDispspec *ds;
 	CongDocument *cong_doc;
@@ -70,6 +101,7 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 	/* Use libxml to load the doc: */
 	{
 		GnomeVFSURI* file_uri = gnome_vfs_uri_new(doc_name);
+		gchar *filename_extension;
 
 		/* Load using GnomeVFS: */
 		{
@@ -104,26 +136,39 @@ void open_document_do(const gchar* doc_name, GtkWindow *parent_window)
 			return;
 		}
 
-		ds = cong_dispspec_registry_get_appropriate_dispspec(cong_app_singleton()->ds_registry, doc);
+		filename_extension = get_filename_extension (file_uri);
 
+		ds = cong_dispspec_registry_get_appropriate_dispspec (cong_app_singleton()->ds_registry, 
+								      doc,
+								      filename_extension);
 		if (ds==NULL) {
 			gchar *what_failed;
 
 			what_failed = cong_error_what_failed_on_file_open_failure(file_uri, FALSE);
 
-			ds = query_for_forced_dispspec(what_failed, doc, parent_window);
+			ds = query_for_forced_dispspec (what_failed, 
+							doc, 
+							parent_window,
+							filename_extension);
 			
 			g_free(what_failed);
 
 			if (NULL==ds) {
 				xmlFreeDoc(doc);
 				gnome_vfs_uri_unref(file_uri);
+
+				if (filename_extension) {
+					g_free (filename_extension);
+				}
 				return;
 			}
 		}
 
 		gnome_vfs_uri_unref(file_uri);
-		
+
+		if (filename_extension) {
+			g_free (filename_extension);
+		}		
 	}
 
 	g_assert(ds);
