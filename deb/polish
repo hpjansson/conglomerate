@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# polish, the finishing touch after 'build'
+#  I not happy with it, despite I put it in the tarball.
+#
+
+# for a clean .diff.gz file
+make clean > /dev/null
+rm -f doc/C/conglomerate-C.omf.out
+rm -f intltool-extract intltool-merge intltool-update po/.intltool-merge-cache
+rm -rf debian/tmp
+#
+
+# generate  the .diff.gz
+CWD=$(basename $(pwd) )
+( cd .. ; dpkg-source -b ${CWD} )
+
+
+#
+dpkg-genchanges
+
+#
+echo do debrsign manual
+
+
+# end of file
