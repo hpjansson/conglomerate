@@ -45,6 +45,9 @@ struct CongPluginPrivate
 
 	CongPluginCallbackConfigure configure_callback;
 
+#if 1
+	GList *list_of_service; /* ptrs of type CongService */
+#else
 	GList *list_of_document_factory; /* ptrs of type CongServiceDocumentFactory */
 	GList *list_of_importer; /* ptrs of type CongServiceImporter */
 	GList *list_of_exporter; /* ptrs of type CongServiceExporter */
@@ -57,6 +60,7 @@ struct CongPluginPrivate
 	GList *list_of_doc_tool; /* ptrs of type CongServiceDocTool */
 	GList *list_of_node_tool; /* ptrs of type CongServiceNodeTool */
 	GList *list_of_property_dialog; /* ptrs of type CongServiceNodePropertyDialog */
+#endif
 };
 
 CONG_DEFINE_CLASS (CongPlugin, cong_plugin, CONG_PLUGIN, GObject, G_TYPE_OBJECT)
@@ -102,12 +106,96 @@ cong_plugin_construct (CongPlugin *plugin,
 	return plugin;
 }
 
+void
+cong_plugin_add_service (CongPlugin *plugin,
+			 CongService *service)
+{
+	g_return_if_fail (IS_CONG_PLUGIN (plugin));
+	g_return_if_fail (IS_CONG_SERVICE (service));
+
+	/* Add to plugin's list: */
+	PRIVATE (plugin)->list_of_service = g_list_append (PRIVATE (plugin)->list_of_service, 
+							   service);
+}
+
+
+void
+cong_plugin_for_each_service (CongPlugin *plugin, 
+			      void 
+			      (*callback) (CongService *service,
+					   gpointer user_data),
+			      gpointer user_data)
+{
+	g_return_if_fail (IS_CONG_PLUGIN (plugin));
+	g_return_if_fail (callback);
+
+	g_list_foreach(PRIVATE(plugin)->list_of_service, (GFunc)callback, user_data);	
+}
+
+void
+cong_plugin_for_each_service_of_type (CongPlugin *plugin, 
+				      GType type,
+				      void 
+				      (*callback) (CongService *service,
+						   gpointer user_data),
+				      gpointer user_data)
+{
+	GList *iter;
+
+	g_return_if_fail (IS_CONG_PLUGIN (plugin));
+	g_return_if_fail (callback);
+
+	for (iter=PRIVATE(plugin)->list_of_service;iter;iter=iter->next) {
+		CongService *service = CONG_SERVICE (iter->data);
+		if (g_type_check_instance_is_a ((GTypeInstance*)service, type)) {
+			(*callback)(service, 
+				    user_data);
+		}
+	}
+}
+
+CongService*
+cong_plugin_locate_service_by_id (CongPlugin *plugin, 
+				  GType type,
+				  const gchar *service_id)
+{
+	GList *iter;
+
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+	g_return_val_if_fail (service_id, NULL);
+
+	for (iter=PRIVATE(plugin)->list_of_service;iter;iter=iter->next) {
+		CongService *service = CONG_SERVICE (iter->data);
+
+		if (g_type_check_instance_is_a ((GTypeInstance*)service, type)) {
+			g_message ("searching for \"%s\" found \"%s\"", service_id, cong_service_get_id (service));
+			if (0==strcmp(service_id, cong_service_get_id (service))) {
+				return service;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+
+typedef void
+(CongServiceCallback) (CongService *service,
+		       gpointer user_data);
+
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_DOCUMENT_FACTORY_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE(plugin)->list_of_document_factory, (GFunc)callback, user_data);
+#endif
 }
 
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data)
@@ -115,7 +203,14 @@ void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongServ
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_IMPORTER_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE (plugin)->list_of_importer, (GFunc)callback, user_data);
+#endif
 }
 
 void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data)
@@ -123,7 +218,14 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongServ
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_EXPORTER_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE (plugin)->list_of_exporter, (GFunc)callback, user_data);
+#endif
 }
 
 #if ENABLE_PRINTING
@@ -132,7 +234,14 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_PRINT_METHOD_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE (plugin)->list_of_print_method, (GFunc)callback, user_data);
+#endif
 }
 #endif
 
@@ -141,7 +250,14 @@ void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongServ
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_DOC_TOOL_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE (plugin)->list_of_doc_tool, (GFunc)callback, user_data);
+#endif
 }
 
 void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongServiceNodeTool *node_tool, gpointer user_data), gpointer user_data)
@@ -149,10 +265,59 @@ void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongSer
 	g_return_if_fail (IS_CONG_PLUGIN (plugin));
 	g_return_if_fail (callback);
 
+#if 1
+	cong_plugin_for_each_service_of_type (plugin, 
+					      CONG_SERVICE_NODE_TOOL_TYPE,
+					      (CongServiceCallback*)callback,
+					      user_data);
+#else
 	g_list_foreach(PRIVATE (plugin)->list_of_node_tool, (GFunc)callback, user_data);
+#endif
 }
 
 
+#if 1
+CongServiceNodePropertyDialog*
+cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin, 
+						 const gchar *service_id)
+{	
+	CongService *service;
+
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+	g_return_val_if_fail (service_id, NULL);
+
+	service = cong_plugin_locate_service_by_id (plugin, 
+						    CONG_SERVICE_NODE_PROPERTY_DIALOG_TYPE,
+						    service_id);
+
+	if (service) {
+		return CONG_SERVICE_NODE_PROPERTY_DIALOG (service);
+	} else {
+		return NULL;
+	}
+}
+
+CongServiceEditorNodeFactory*
+cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
+					      const gchar *service_id)
+{
+	CongService *service;
+
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+	g_return_val_if_fail (service_id, NULL);
+
+	service = cong_plugin_locate_service_by_id (plugin, 
+						    CONG_SERVICE_EDITOR_NODE_FACTORY_TYPE,
+						    service_id);
+
+	if (service) {
+		return CONG_SERVICE_EDITOR_NODE_FACTORY (service);
+	} else {
+		return NULL;
+	}
+
+}
+#else
 CongServiceNodePropertyDialog*
 cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin, 
 						 const gchar *service_id)
@@ -192,6 +357,7 @@ cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 
 	return NULL;
 }
+#endif
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
@@ -445,9 +611,8 @@ cong_plugin_register_document_factory (CongPlugin *plugin,
 							   icon,
 							   user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_document_factory = g_list_append(PRIVATE (plugin)->list_of_document_factory, 
-								   factory);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (factory));
 
 	return factory;
 }
@@ -482,9 +647,8 @@ cong_plugin_register_doc_tool (CongPlugin *plugin,
 						action_callback,
 						user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_doc_tool = g_list_append (PRIVATE (plugin)->list_of_doc_tool, 
-							    tool);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (tool));
 
 	return tool;
 
@@ -520,9 +684,8 @@ cong_plugin_register_node_tool (CongPlugin *plugin,
 						 action_callback,
 						 user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_node_tool = g_list_append (PRIVATE (plugin)->list_of_node_tool, 
-							     tool);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (tool));
 
 	return tool;
 
@@ -550,9 +713,8 @@ CongServiceEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugi
 									  factory_method,
 									  user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_editor_node_factory = g_list_append (PRIVATE (plugin)->list_of_editor_node_factory, 
-								       editor_node_factory);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (editor_node_factory));
 
 	return editor_node_factory;
 }
@@ -584,9 +746,8 @@ cong_plugin_register_exporter (CongPlugin *plugin,
 						    action_callback,
 						    user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_exporter = g_list_append (PRIVATE (plugin)->list_of_exporter, 
-							    exporter);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (exporter));
 
 	return exporter;
 }
@@ -617,9 +778,8 @@ cong_plugin_register_importer (CongPlugin *plugin,
 						    action_callback,
 						    user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_importer = g_list_append (PRIVATE (plugin)->list_of_importer, 
-							    importer);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (importer));
 
 	return importer;
 }
@@ -646,9 +806,8 @@ cong_plugin_register_custom_property_dialog (CongPlugin *plugin,
 								       factory_method,
 								       user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_property_dialog = g_list_append (PRIVATE (plugin)->list_of_property_dialog, 
-								   property_dialog);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (property_dialog));
 
 	return property_dialog;
 
@@ -714,9 +873,8 @@ cong_plugin_register_print_method (CongPlugin *plugin,
 							    action_callback,
 							    user_data);
 
-	/* Add to plugin's list: */
-	PRIVATE (plugin)->list_of_print_method = g_list_append (PRIVATE (plugin)->list_of_print_method, 
-								print_method);
+	cong_plugin_add_service (plugin,
+				 CONG_SERVICE (print_method));
 
 	return print_method;
 }

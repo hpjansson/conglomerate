@@ -52,6 +52,34 @@ cong_plugin_manager_for_each_plugin (CongPluginManager *plugin_manager,
 						  gpointer user_data),
 				     gpointer user_data);
 
+void
+cong_plugin_manager_for_each_service (CongPluginManager *plugin_manager, 
+				      void 
+				      (*callback) (CongService *service,
+						   gpointer user_data),
+				      gpointer user_data);
+
+void
+cong_plugin_manager_for_each_service_of_type (CongPluginManager *plugin_manager, 
+					      GType type,
+					      void 
+					      (*callback) (CongService *service,
+							   gpointer user_data),
+					      gpointer user_data);
+
+CongService*
+cong_plugin_manager_locate_service_by_id (CongPluginManager *plugin_manager, 
+					  GType type,
+					  const gchar *service_id);
+
+void
+cong_plugin_manager_for_each_service_of_type (CongPluginManager *plugin_manager, 
+					      GType type,
+					      void 
+					      (*callback) (CongService *service,
+							   gpointer user_data),
+					      gpointer user_data);
+
 void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongServiceDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongServiceImporter *importer, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongServiceExporter *exporter, gpointer user_data), gpointer user_data);

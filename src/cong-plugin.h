@@ -80,6 +80,26 @@ void
 cong_plugin_add_service (CongPlugin *plugin,
 			 CongService *service);
 
+void
+cong_plugin_for_each_service (CongPlugin *plugin, 
+			      void 
+			      (*callback) (CongService *service,
+					   gpointer user_data),
+			      gpointer user_data);
+
+void
+cong_plugin_for_each_service_of_type (CongPlugin *plugin, 
+				      GType type,
+				      void 
+				      (*callback) (CongService *service,
+						   gpointer user_data),
+				      gpointer user_data);
+
+CongService*
+cong_plugin_locate_service_by_id (CongPlugin *plugin, 
+				  GType type,
+				  const gchar *service_id);
+
 CongServiceNodePropertyDialog*
 cong_plugin_locate_custom_property_dialog_by_id (CongPlugin *plugin, 
 						 const gchar *service_id);
