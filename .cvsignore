@@ -1,0 +1,17 @@
+## #tricky #comment
+##
+## #files #generated #by #./autogen.sh
+Makefile
+Makefile.in
+aclocal.m4
+config.cache
+config.h
+config.h.in
+config.log
+config.status
+configure
+libtool
+stamp-h
+stamp-h.in
+## #other #files
+##
