@@ -11,7 +11,6 @@ and other are "blue sky" goals for the future.
 I've added some rough estimates of the complexity of each job.
 
 CODING BEFORE RELEASE
-- finish and check removal of Flux dependency, including from the autotools
 - sort out font crash
 - improve the configuration tests
 - remove the preprocessor cruft (the old unused versions of code)

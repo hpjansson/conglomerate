@@ -37,12 +37,6 @@ PKG_CHECK_MODULES(ALL,                     \
   libbonoboui-2.0 > $BONOBOUI_REQUIRED     \
   libgnomeui-2.0 > $GNOMEUI_REQUIRED)
 
-dnl --- Check Flux prefix ---
-
-AC_ARG_WITH(flux-prefix,
-[  --with-flux-prefix      pre-0.5 Flux prefix],
-    flux_prefix=$withval, flux_prefix=)
-
 dnl --- General compilation options ---
 
 AC_MSG_CHECKING([whether to support debugging])

@@ -25,24 +25,14 @@ Here's what to do to make conge compile:
  4. change "unstable" back to "testing" in /etc/apt/sources.list, and do
     the following command to avoid installing more from unstable/SID:
         apt-get update
- 5. download and compile v. 0.2.8 of the flux library:
-        cd ~/src/
-        wget ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
-        tar xzf libflux-0.2.8.tar.gz
-        cd libflux-0.2.8/
-        ./configure --prefix=/home/myuser/apps
-        make
-        make install
-        cd ~/apps/lib/
-        ln -s ./libflux.a libflux-old.a
- 6. do a CVS checkout, autoconf, configure and build of conge:
+ 5. do a CVS checkout, autoconf, configure and build of conge:
         cd ~/src/
         cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
 	# just hit enter, the anonymouse user has no password
         cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs co conge
 	# now you have an other copy of _this_ file
         cd conge/
-        ./autoconf.sh
+        ./autogen.sh
         ./configure --prefix=/home/myuser/apps --with-flux-prefix=/home/myuser/apps
         make
 

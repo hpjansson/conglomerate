@@ -38,9 +38,6 @@ However, to my knowledge (Dave Malcolm 20th October 2002), no-one has attempted
 to build a Windows version for a long time; please contact the development list
 (see below) if you attempt this to let us know how you get on.
 
-The code used to require an old version of the Flux library (http://www.fluxlib.org),
-though that dependency has now been removed.
-
 
 Running
 -------
