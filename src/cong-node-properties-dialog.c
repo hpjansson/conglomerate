@@ -1064,23 +1064,21 @@ void cong_ui_append_advanced_node_properties_page(GtkNotebook *notebook,
 				 );
 }
 
-GtkWidget *cong_node_properties_dialog_new(CongDocument *doc, 
-					   CongNodePtr node, 
-					   GtkWindow *parent_window)
+GtkWidget*
+cong_node_properties_dialog_new (CongDocument *doc, 
+				 CongNodePtr node, 
+				 GtkWindow *parent_window)
 {
-	g_return_val_if_fail(doc, NULL);
-	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail (doc, NULL);
+	g_return_val_if_fail (node, NULL);
 
 	/* Should we use a plugin for this node?: */
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-		CongDispspec *ds;
-		CongDispspecElement* element;
-		const gchar* service_id;
+		CongDispspecElement *element;
+		const gchar *service_id;
 
-		ds = cong_document_get_dispspec(doc);
-		g_assert(ds);
-
-		element = cong_dispspec_lookup_node(ds, node);
+		element = cong_document_get_dispspec_element_for_node (doc,
+								       node);
 		if (element) {
 			service_id = cong_dispspec_element_get_property_dialog_service_id(element);
 
@@ -1090,8 +1088,9 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 																	 service_id);
 
 				if (dialog_factory) {
-					GtkWidget *dialog = cong_custom_property_dialog_make(dialog_factory, doc, node);
-
+					GtkWidget *dialog = cong_custom_property_dialog_make (dialog_factory, 
+											      doc, 
+											      node);
 					return dialog;
 				}
 			}

@@ -676,9 +676,8 @@ cong_document_get_node_name (CongDocument *doc,
 	default: g_assert_not_reached();
 	case CONG_NODE_TYPE_ELEMENT:
 		{
-			CongDispspecElement *ds_element = cong_dispspec_lookup_node (cong_document_get_dispspec (doc),
-										     node);
-			
+			CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node (doc,
+												       node);
 			if (ds_element) {
 				return g_strdup (cong_dispspec_element_username (ds_element));
 			} else {

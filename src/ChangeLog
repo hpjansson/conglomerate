@@ -1,3 +1,9 @@
+2004-02-10  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-file-export.c, cong-file-print.c, cong-node-properties-dialog.c, xmledit.c
+
+	Removing redundant usage of CongDispspec
+
 2004-02-07  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* plugin-fo.c

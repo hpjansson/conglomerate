@@ -180,7 +180,6 @@ cong_document_print_dialog_new (CongDocument *doc,
 				GtkWindow *parent_window)
 {
 	xmlDocPtr xml_doc;
-	CongDispspec* ds;
 	GtkWidget *dialog;
 	CongDialogContent *content;
 	CongDialogCategory *general_category;
@@ -192,7 +191,6 @@ cong_document_print_dialog_new (CongDocument *doc,
 	g_return_val_if_fail(doc, NULL);
 
 	xml_doc = cong_document_get_xml(doc);
-	ds = cong_document_get_dispspec(doc);
 
 	filename = cong_document_get_filename(doc);
 
