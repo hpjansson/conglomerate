@@ -137,6 +137,7 @@ src/cong-service.c
 src/cong-source-layout.c
 src/cong-source-view.c
 src/cong-spell.c
+src/cong-stylesheet.c
 src/cong-text-cache.c
 src/cong-traversal-node.c
 src/cong-tree-view.c

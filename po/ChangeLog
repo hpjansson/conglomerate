@@ -1,3 +1,9 @@
+2004-12-05  Geert Stappers  <stappers@stappers.nl>
+
+	* POTFILES.in:
+	src/cong-stylesheet.c was added.
+	Thanks to Marcel Telka.
+
 2004-12-01 Michèle Garoche  <michele.garoche@easyconnect.fr>
  
 	* fr.po: Updated French translation.
