@@ -1,6 +1,8 @@
 2004-01-15  Geert Stappers <stappers@stappers.nl>
 
-	* configure.in: Added "fr" to ALL_LINGUAS.
+	* configure.in:
+	 - Added "fr" to ALL_LINGUAS.
+	 - Disabled the gtk-doc stuff (introducing Bugzilla#131600)
 
 2004-01-13  Laurent Dhima  <laurenti@alblinux.net>
 

@@ -205,42 +205,45 @@ BASE_CFLAGS="$BASE_CFLAGS -Wall"
 
 ##################################################
 # Check for gtk-doc.
+#  for the time being disabed
+#  http://bugzilla.gnome.org/show_bug.cgi?id=131600
 ##################################################
-GTK_DOC_CHECK
-
-AC_ARG_WITH(html-dir, [  --with-html-dir=PATH path to installed docs ])
-
-if test "x$with_html_dir" = "x" ; then
-  HTML_DIR='${datadir}/gtk-doc/html'
-else
-  HTML_DIR=$with_html_dir
-fi
-
-AC_SUBST(HTML_DIR)
-
-gtk_doc_min_version=1.0
-AC_MSG_CHECKING([gtk-doc version >= $gtk_doc_min_version])
-if pkg-config --atleast-version=$gtk_doc_min_version gtk-doc; then
-  AC_MSG_RESULT(yes)
-  GTKDOC=true
-else
-  AC_MSG_RESULT(no)
-  GTKDOC=false
-fi
-
-dnl Let people disable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=yes]], enable_gtk_doc="$enableval", enable_gtk_doc=yes)
-
-dnl if test x$enable_gtk_doc = xauto ; then
-dnl   if test x$GTKDOC = xtrue ; then
-    enable_gtk_doc=yes
-dnl   else
-dnl     enable_gtk_doc=no
-dnl   fi
-dnl fi
-
-AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
-
+#GTK_DOC_CHECK
+#
+#AC_ARG_WITH(html-dir, [  --with-html-dir=PATH path to installed docs ])
+#
+#if test "x$with_html_dir" = "x" ; then
+#  HTML_DIR='${datadir}/gtk-doc/html'
+#else
+#  HTML_DIR=$with_html_dir
+#fi
+#
+#AC_SUBST(HTML_DIR)
+#
+#gtk_doc_min_version=1.0
+#AC_MSG_CHECKING([gtk-doc version >= $gtk_doc_min_version])
+#if pkg-config --atleast-version=$gtk_doc_min_version gtk-doc; then
+#  AC_MSG_RESULT(yes)
+#  GTKDOC=true
+#else
+#  AC_MSG_RESULT(no)
+#  GTKDOC=false
+#fi
+#
+#dnl Let people disable the gtk-doc stuff.
+#AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=yes]], enable_gtk_doc="$enableval", enable_gtk_doc=yes)
+#
+#dnl if test x$enable_gtk_doc = xauto ; then
+#dnl   if test x$GTKDOC = xtrue ; then
+#    enable_gtk_doc=yes
+#dnl   else
+#dnl     enable_gtk_doc=no
+#dnl   fi
+#dnl fi
+#
+#AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
+#
+enable_gtk_doc=no
 
 dnl --- Output ---
 
@@ -255,8 +258,6 @@ AC_OUTPUT(Makefile
 	  doc/Makefile
 	  doc/devel/Makefile
 	  doc/C/Makefile
-	  doc/reference/Makefile
-	  doc/reference/version.xml
 	  glade/Makefile
 	  pixmaps/Makefile
 	  examples/Makefile 

@@ -1,3 +1,8 @@
+2004-01-15  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+	Disabled the reference directory (introducing bug #131600)
+
 2003-09-26  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am
