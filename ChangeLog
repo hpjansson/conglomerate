@@ -1,3 +1,8 @@
+2003-11-02  Geert Stappers  <stappers@stappers.nl>
+
+	* configure.in
+	version 0.7.6cvs237 for tarball releases
+
 2003-10-28  Jordi Mallach  <jordi@sindominio.net>
 
 	* configure.in (ALL_LINGUAS): Added "ca" (Catalan).
