@@ -8,24 +8,10 @@ for more information on conglomerate.
 For Debian related issues, I advice
  http://packages.qa.debian.org/conglomerate
 
-Use
- http://bugs.debian.org/conglomerate
-to see what is on the todo list for the package.
-
 Some words about the dependencies:
  Conglomerate is a XML editor, not a DocBook-XML only editor,
  that is why it just suggests docbook-xml. Their is no need
  to force installing the docbook-xml package.
 
-
-I need help on Debian bug #217443
- http://bugs.debian.org/217443
-it is about a probably cripple installation.
-You do help me when you report your milage, such as
-
-  - Conglomerate did first not work
-  - when I did  ....[your observation]....
-  - then it works fine
- 
 
 Geert Stappers
