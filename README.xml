@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" >
 <book>
+<article>
 	<sect1>
 		<title>About Conglomerate</title>
 		<para>This is a work-in-progress version of the Conglomerate editor. It is based on structural document markup with XML. </para>
@@ -9,36 +10,38 @@
 		<title>Compiling</title>
 		<para>Conglomerate uses various GNOME 2 components (though it should run fine under both GNOME and KDE). Hence you'll need a reasonably up-to-date install of GNOME 2 (and the developer packages) to build it.</para>
 		<procedure>
-			<step><command>./configure</command></step>
-			<step><command>make</command></step>
+			<step><programlisting><command>./configure</command></programlisting></step>
+			<step><programlisting><command>make</command></programlisting></step>
 			<step>
 				<para>Switch to superuser if necessary</para>
 			</step>
-			<step><command>make install</command></step>
+			<step><programlisting><command>make install</command></programlisting></step>
 		</procedure>
 		<para>If you're compiling from CVS, you will need the <application>gnome-common</application>module from GNOME CVS installed. Then type</para>
 		<procedure>
-			<step><command>./autogen.sh</command>which generates and runs <command>./configure</command></step>
-			<step><command>make</command></step>
+			<step><programlisting><command>./autogen.sh</command>
+			which generates and runs
+			<command>./configure</command></programlisting></step>
+			<step><programlisting><command>make</command></programlisting></step>
 			<step>
 				<para>Switch to superuser if necessary</para>
 			</step>
-			<step><command>make install</command></step>
+			<step><programlisting>make install</programlisting></step>
 		</procedure>
 		<para>and see what happens. This should produce an executable called <application>conglomerate</application>in the <filename>src</filename>directory. Typing <command>make install</command>installs the program and its data files into a hopefully sensible location. </para>
 		<para>On some systems, example given Red Hat 8, you have to type</para>
 		<procedure>
-			<step><command>libtoolize --automake</command></step>
-			<step><command>./configure</command></step>
-			<step><command>make</command></step>
+			<step><programlisting><command>libtoolize --automake</command></programlisting></step>
+			<step><programlisting><command>./configure</command></programlisting></step>
+			<step><programlisting><command>make</command></programlisting></step>
 		</procedure>
 		<para>see also the file <filename>doc/devel/CompileIssues</filename></para>
 		<sect2>
 			<title>Debian</title>
 			<para>If you want to make a debian package from the tarbal or CVS type</para>
-			<command>deb/build</command>
+			<para><command>deb/build</command></para>
 			<para>and when you have a deb-src line in <filename>/etc/apt/source</filename>type</para>
-			<command>apt-get source -b conglomerate</command>
+			 <para><command>apt-get source -b conglomerate</command></para>
 		</sect2>
 		<sect2>
 			<title>Windows</title>
@@ -89,8 +92,11 @@
 		<para>The Conglomerate web site is at:</para>
 		<para><ulink url="http://www.conglomerate.org/">http://www.conglomerate.org/</ulink></para>
 		<para>The latest updates are available through anonymous CVS from GNOME's CVS server:</para>
+		<para>
 		<command>cvs -z3 -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome checkout conglomerate</command>
+		</para>
 		<para>CVS is also web-browsable: <ulink url="http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=conglomerate">http://cvs.gnome.org/bonsai/rview.cgi?cvsroot=/cvs/gnome&amp;dir=conglomerate</ulink></para>
 		<para>The code was originally written by Hans Petter Jansson (hpj@styx.net), but please don't send angry mails to him about it. Most coding is currently being done by Dave Malcolm (david@davemalcolm.demon.co.uk), but you should direct questions to the development list (see above) for the moment.</para>
 	</sect1>
+</article>
 </book>

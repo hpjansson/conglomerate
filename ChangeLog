@@ -1,3 +1,13 @@
+2003-09-23  Geert Stappers <stappers@stappers.nl>
+
+	* README.xml
+	Made it valid against the DTD.
+
+	* README
+	completely generated:
+	- xmlto html-nochunks README.xml
+	- lynx -dump README.html > README
+
 2003-09-23  Duarte Loreto <happyguy_pt@hotmail.com>
 
 	* configure.in: Added Portuguese (pt) to ALL_LINGUAS.
