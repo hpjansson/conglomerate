@@ -1,8 +1,5 @@
-#
-# This "spec" file is for creating a rpm package.
-#
 %define name    conglomerate
-%define version 0.5.4
+%define version 0.5.5
 %define release 1
 %define prefix  /usr
  
@@ -18,8 +15,10 @@ Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}
  
 %description
-Conglomerate is a complete system for working with documents. It lets the user
-create, revise, archive, search, convert and publish information in several
+Conglomerate is a complete system for working with documents. It lets
+the user
+create, revise, archive, search, convert and publish information in
+several
 media, using a single source document.The system consists of a graphical
 frontend for all user operations, and a server/database which performs
 storage, searching, revision control, transformation and publishing.
@@ -47,6 +46,7 @@ make prefix=3D${RPM_BUILD_ROOT}%{prefix} install-strip
  
 %{prefix}/bin/conglomerate
 %{prefix}/share/*
+%{prefix}/var/*
  
 %changelog
 * Sat Jun 06 2003 Michael Rasmussen <mir@datanom.net> (0.5.3 release)
@@ -54,4 +54,4 @@ make prefix=3D${RPM_BUILD_ROOT}%{prefix} install-strip
  
  
  
-# end of file
+
