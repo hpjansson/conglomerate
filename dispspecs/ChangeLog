@@ -1,3 +1,9 @@
+2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* xds.dtd, xhtml1-strict.xds.in:
+
+	Added <typical-prefix> element
+
 2004-07-16  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* relax-ng.xds, xds.dtd, xhtml1-strict.xds.in, xsl.xds: 

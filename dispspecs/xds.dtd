@@ -46,9 +46,14 @@
 <!-- ===================================================================== -->
 <!-- <element-list>: A list of elements of various kinds:                  -->
 <!-- ===================================================================== -->
-<!ELEMENT element-list ( (element|structural-element|span-element|plugin-element)*) >
+<!ELEMENT element-list ( (typical-prefix*),( (element|structural-element|span-element|plugin-element)*)) >
 <!ATTLIST element-list  
    nsURI               CDATA                                                           #IMPLIED
+>
+
+<!ELEMENT typical-prefix EMPTY>
+<!ATTLIST typical-prefix
+   prefix  NMTOKEN  #IMPLIED
 >
 
 <!-- ===================================================================== -->
