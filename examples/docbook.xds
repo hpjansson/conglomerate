@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!-- Experimental XML-based DispSpec for DocBook -->
+<dispspec>
+	
+	<!-- probably should specify the DTD that this annotates -->
+
+	<element-list>
+			
+		<!-- The high-level divisions -->
+	
+		<element tag="set" type="structural" color="a0b0c0">
+		</element>
+		<element tag="book" type="structural" color="a0b0c0">
+		</element>
+		<element tag="bookinfo" type="structural" color="a0b0c0">
+		</element>
+		<element tag="title" type="structural" color="a0b0c0">
+			<collapseto></collapseto>
+		</element>
+		<element tag="subtitle" type="structural" color="a0b0c0">
+			<collapseto></collapseto>
+		</element>
+		<element tag="authorgroup" type="structural" color="a0b0c0">
+		</element>
+		<element tag="author" type="structural" color="a0b0c0">
+		</element>
+		<element tag="title" type="structural" color="a0b0c0">
+		</element>
+		<element tag="abstract" type="structural" color="a0b0c0">
+		</element>
+		<element tag="para" type="structural" color="a0b0c0">
+		</element>
+		<element tag="legalnotice" type="structural" color="a0b0c0">
+		</element>
+
+		<!-- The various sections -->
+
+		<element tag="chapter" type="structural" color="a0b0c0">
+		</element>
+		<element tag="sect1" type="structural" color="a0b0c0">
+		</element>
+		<element tag="sect2" type="structural" color="a0b0c0">
+		</element>
+		<element tag="sect3" type="structural" color="a0b0c0">
+		</element>
+		<element tag="sect4" type="structural" color="a0b0c0">
+		</element>
+		<element tag="sect5" type="structural" color="a0b0c0">
+		</element>
+
+		
+
+		<!-- List support -->
+		<element tag="itemizedlist" type="structural" color="a0b0c0">
+		</element>
+		<element tag="listitem" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="variablelist" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="varlistentry" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="programlisting" type="structural" color="a0b0c0">
+			<!-- 
+				perhaps this should use a fixed-space font
+				Perhaps we need a boolean to determine whether something
+				should appear in the regular proportional spacing or in
+				fixed-space? (defaults to proportional).
+				Could also do with a verbatim flag which respects carriage returns...
+				Even better would be to invoke a Scintilla control and have syntax highlighting!
+			-->
+			
+		</element>
+
+		<element tag="funcsynopsis" type="structural" color="a0b0c0">
+			<!-- various related tags need to be added -->
+		</element>
+
+
+		<!-- Various inline elements, done as spans follow: -->
+
+		<element tag="application" type="span" color="a0b0c0">
+		</element>
+		<element tag="email" type="span" color="a0b0c0">
+		</element>
+		<element tag="emphasis" type="span" color="a0b0c0">
+		</element>
+		<element tag="filename" type="span" color="a0b0c0">
+		</element>
+		<element tag="firstterm" type="span" color="a0b0c0">
+		</element>
+		<element tag="function" type="span" color="a0b0c0">
+		</element>
+		<element tag="literal" type="span" color="a0b0c0">
+		</element>
+		<element tag="replaceable" type="span" color="a0b0c0">
+		</element>
+		<element tag="structname" type="span" color="a0b0c0">
+		</element>
+		<element tag="symbol" type="span" color="a0b0c0">
+		</element>
+		<element tag="term" type="span" color="a0b0c0">
+		</element>
+		<element tag="ulink" type="span" color="a0b0c0">
+		</element>
+		<element tag="xref" type="span" color="a0b0c0">
+		</element>
+
+		<!-- etc -->
+
+	</element-list>
+
+	<gui>
+	</gui>
+
+</dispspec>
