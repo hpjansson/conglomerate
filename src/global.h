@@ -134,11 +134,11 @@ typedef struct CongLayoutCache
 {
 	TTREE *draw_line_t;
 	TTREE *lines;
+
 } CongLayoutCache;
 
 typedef struct CongLayoutLine
 {
-	
 } CongLayoutLine;
 
 void
@@ -155,6 +155,39 @@ cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i);
 
 TTREE*
 cong_layout_cache_get_last_line(CongLayoutCache *layout_cache);
+
+typedef struct CongLayoutStack
+{
+	TTREE *tags;
+	
+} CongLayoutStack;
+
+typedef TTREE CongLayoutStackEntry;
+
+CongLayoutStackEntry*
+cong_layout_stack_top(CongLayoutStack *layout_stack);
+
+void
+cong_layout_stack_push(CongLayoutStack *layout_stack, char* s, int line, int pos_x, TTREE *x, int lev);
+
+
+
+/* gets the next entry i.e. the entry above, heading from bottom to top */
+CongLayoutStackEntry*
+cong_layout_stack_entry_next(CongLayoutStackEntry *entry);
+
+/* gets the parent entry i.e. the entry below */
+CongLayoutStackEntry*
+cong_layout_stack_entry_below(CongLayoutStackEntry *entry);
+
+/* Various access methods: */
+int cong_layout_stack_entry_get_line(CongLayoutStackEntry *entry);
+int cong_layout_stack_entry_get_pos_x(CongLayoutStackEntry *entry);
+TTREE *cong_layout_stack_entry_get_ttree_x(CongLayoutStackEntry *entry);
+int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry);
+
+
+
 
 struct CongXMLEditor
 {
@@ -193,9 +226,8 @@ struct CongXMLEditor
 
 	TTREE *x;
 
-	struct CongLayoutCache layout_cache;
-
-	TTREE *tags;
+	CongLayoutCache layout_cache;
+	CongLayoutStack layout_stack;
 
 	/* Cursor information */
 	TTREE *curs_x;      /* XML node currently at */

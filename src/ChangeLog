@@ -3,6 +3,12 @@ creating ChangeLog
 
 	* global.h, xmledit.c
 
+	Started moving the stack code into a separate special-purpose data structure.
+
+2002-10-09 David Malcolm
+
+	* global.h, xmledit.c
+
 	Moved draw_line_t from CongXMLEditor into CongLayoutCache; various code layout cleanups
 	
 2002-10-08 David Malcolm
