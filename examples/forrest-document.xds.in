@@ -152,7 +152,7 @@
     <element tag="version" type="span">
       <_name>Version</_name>
     </element>
-    <element tag="warning" type="plugin" plugin-id="admonition">
+    <element tag="warning" type="plugin" service-id="admonition">
       <_name>Warning</_name>
     </element>
   </element-list>

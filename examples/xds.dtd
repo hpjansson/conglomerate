@@ -85,14 +85,14 @@
 <!ELEMENT plugin-element     %element.content; >
 <!ATTLIST plugin-element      
    %element.att;
-   plugin-id           NMTOKEN                                                           #IMPLIED
+   service-id           NMTOKEN                                                          #IMPLIED
 >
 
 <!ELEMENT element     %element.content; >
 <!ATTLIST element      
    %element.att;
    type                ( plugin | embed-external-file | span | structural )              #REQUIRED
-   plugin-id           NMTOKEN                                                           #IMPLIED
+   service-id           NMTOKEN                                                          #IMPLIED
 >
 
 <!-- ===================================================================== -->
@@ -122,7 +122,7 @@
 
 <!ELEMENT property-dialog EMPTY >
 <!ATTLIST property-dialog 
-   plugin-id  NMTOKEN  #REQUIRED
+   service-id  NMTOKEN  #REQUIRED
 >
 
 <!ELEMENT key-value-list (key-value-pair)* >

@@ -95,7 +95,7 @@
 		<element tag="dl" type="structural">
 			<_name>Definition List</_name>
 		</element>
-		<element tag="li" type="plugin" plugin-id="listitem">
+		<element tag="li" type="plugin" service-id="listitem">
 			<_name>List Item</_name>
 		</element>
 		<element tag="ol" type="structural">

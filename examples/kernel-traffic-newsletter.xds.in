@@ -82,7 +82,7 @@
 			<_name>List (ordered)</_name>
 		</element>
 
-		<element tag="p" type="plugin" plugin-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
+		<element tag="p" type="plugin" service-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
 			<_name>Paragraph</_name>
 		</element>
 

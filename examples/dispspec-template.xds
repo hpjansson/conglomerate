@@ -44,7 +44,7 @@
 
    Plugin elements only:
 
-     plugin-id (NMTOKEN #IMPLIED)
+     service-id (NMTOKEN #IMPLIED)
 -->
 
 <!-- sub-elements of element element (all optional):

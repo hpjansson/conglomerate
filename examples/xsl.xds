@@ -11,7 +11,7 @@
 			<name xml:lang="en">Stylesheet</name>
 		</element>
 
-		<element tag="template" type="plugin" plugin-id="xsl-template">
+		<element tag="template" type="plugin" service-id="xsl-template">
 			<name xml:lang="en">Template-matching Rule</name>
 		</element>
 
