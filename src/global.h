@@ -20,6 +20,7 @@ enum
 	TREEVIEW_N_COLUMNS
 };
 
+#define NEW_LOOK 0
 #define NEW_XML_IMPLEMENTATION 0
 
 #if NEW_XML_IMPLEMENTATION
@@ -528,8 +529,21 @@ const gchar*
 cong_dispspec_get_description(const CongDispspec *ds);
 
 char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
+#if NEW_LOOK
+enum CongDispspecGCUsage
+{
+	CONG_DISPSPEC_GC_USAGE_BOLD_LINE,
+	CONG_DISPSPEC_GC_USAGE_DIM_LINE,
+	CONG_DISPSPEC_GC_USAGE_BACKGROUND,
+	CONG_DISPSPEC_GC_USAGE_TEXT,
+
+	CONG_DISPSPEC_GC_USAGE_NUM
+};
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);
+#else
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
 GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
+#endif
 char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
 
 gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name);
@@ -580,8 +594,16 @@ cong_dispspec_element_is_span(CongDispspecElement *element);
 unsigned int
 cong_dispspec_element_color(CongDispspecElement *element);
 
+#if NEW_LOOK
+GdkGC*
+cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage);
+
+const GdkColor*
+cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage);
+#else
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element);
+#endif
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_xml_editor_redraw(CongXMLEditor *xed);

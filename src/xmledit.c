@@ -1033,13 +1033,20 @@ xed_line_last(CongXMLEditor *xed)
 
 
 /* xed->draw_pos_x = last pixel of line */
-
+#if NEW_LOOK
+GdkGC *get_gc_for_stack_entry(CongDispspec *ds, CongLayoutStackEntry *entry, enum CongDispspecGCUsage usage)
+#else
 GdkGC *get_gc_for_stack_entry(CongDispspec *ds, CongLayoutStackEntry *entry, int tog)
+#endif
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, cong_layout_stack_entry_get_text(entry));
 
 	if (element) {
+#if NEW_LOOK
+		return cong_dispspec_element_gc(element, usage);
+#else
 		return cong_dispspec_element_gc(element);
+#endif
 	} else {
 		return NULL;
 	}

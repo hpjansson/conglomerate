@@ -25,8 +25,13 @@ struct CongDispspecElement
 	enum CongElementType type;
 	gboolean collapseto;
 
+#if NEW_LOOK
+	GdkColor col_array[CONG_DISPSPEC_GC_USAGE_NUM];
+	GdkGC* gc_array[CONG_DISPSPEC_GC_USAGE_NUM];
+#else
 	GdkColor col;
 	GdkGC* gc;
+#endif
 
 	struct CongDispspecElement* next;	
 };
@@ -55,6 +60,91 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 
 CongDispspecElement*
 cong_dispspec_element_new(const char* tagname, enum CongElementType type);
+
+#if NEW_LOOK
+/* Hackish colour calculations in RGB space (ugh!) */
+static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
+{
+	dst->red = src->red / bodge_factor;
+	dst->green = src->green / bodge_factor;
+	dst->blue = src->blue / bodge_factor;
+}
+
+
+unsigned int hacked_cols[] =
+{
+	0x6381ff,
+	0xd5d2ff,
+	0xe6e2ff,
+	0x414083
+};
+
+static void get_col(GdkColor *dst, const GdkColor *src, enum CongDispspecGCUsage usage)
+{
+	col_to_gcol(dst, hacked_cols[usage]);
+}
+#endif /* #if NEW_LOOK */
+
+static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigned int col)
+{
+	g_assert(element);
+
+#if NEW_LOOK
+	{
+		GdkColor gdk_col;
+		int i;
+
+		col_to_gcol(&gdk_col, col);
+
+		for (i=0; i<CONG_DISPSPEC_GC_USAGE_NUM; i++) {
+			GdkColor this_col;
+			GdkGC *gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+
+#if 1
+			get_col(&this_col, &gdk_col, i);
+#else
+			/* failed attempt to calculate relative colours */
+			switch (i) {
+			default: g_assert(0);
+			case CONG_DISPSPEC_GC_USAGE_BOLD_LINE:
+				/* Double intensity for this: */
+				generate_col(&this_col,&gdk_col, 2.0f);
+				break;
+
+			case CONG_DISPSPEC_GC_USAGE_DIM_LINE:
+				/* Use the exact colour for this */
+				generate_col(&this_col,&gdk_col, 1.0f);
+				break;
+
+			case CONG_DISPSPEC_GC_USAGE_BACKGROUND:
+				/* Use a 50-50 blend with white of the colour for this? */
+				generate_col(&this_col,&gdk_col, 0.5);
+				break;
+
+			case CONG_DISPSPEC_GC_USAGE_TEXT:
+				/* Triple intensity for this? */
+				generate_col(&this_col,&gdk_col, 3.0f);
+				break;
+			}
+#endif
+
+			element->col_array[i] = this_col;
+			element->gc_array[i] = gc;
+			gdk_gc_copy(gc, cong_gui_get_window(&the_gui)->style->white_gc);
+			gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &this_col, FALSE, TRUE);
+			gdk_gc_set_foreground(gc, &this_col);
+		}
+	}
+#else
+	col_to_gcol(&element->col, col);
+
+	/* We don't make any attempt to share GCs between different elements for now */
+	element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+	gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
+	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, FALSE, TRUE);
+	gdk_gc_set_foreground(element->gc, &element->col);
+#endif	
+}
 
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 {
@@ -421,7 +511,20 @@ char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t)
   
 	return(t->data);
 }
+#if NEW_LOOK
+#if 0
+GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage)
+{
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, );
 
+	if (element) {
+		return cong_dispspec_element_gc(element, usage);
+	} else {
+		return NULL;
+	}
+}
+#endif
+#else
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog)
 {
 	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
@@ -444,6 +547,7 @@ GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog)
 		return NULL;
 	}
 }
+#endif
 
 
 #if 0
@@ -752,6 +856,26 @@ cong_dispspec_element_is_span(CongDispspecElement *element)
 	}
 }
 
+#if NEW_LOOK
+GdkGC*
+cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage)
+{
+	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail(usage<CONG_DISPSPEC_GC_USAGE_NUM, NULL);
+
+	return element->gc_array[usage];
+}
+
+const GdkColor*
+cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage)
+{
+	g_return_val_if_fail(element, NULL);
+	g_return_val_if_fail(usage<CONG_DISPSPEC_GC_USAGE_NUM, NULL);
+
+	return &element->col_array[usage];
+}
+
+#else
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element)
 {
@@ -759,6 +883,7 @@ cong_dispspec_element_gc(CongDispspecElement *element)
 
 	return element->gc;
 }
+#endif
 
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt)
@@ -774,13 +899,8 @@ cong_dispspec_element_new_from_ttree(TTREE* tt)
 	element->collapseto = cong_dispspec_ttree_collapseto(tt);
 
 	col = cong_dispspec_ttree_colour_get(tt);
-	col_to_gcol(&element->col, col);
 
-	/* We don't make any attempt to share GCs between different elements for now */
-	element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-	gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
-	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
-	gdk_gc_set_foreground(element->gc, &element->col);
+	cong_dispspec_element_init_col(element, col);
 
 	return element;
 }
@@ -865,13 +985,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 			col = 0x00ffffff;  /* White is default */
 		}
 
-		col_to_gcol(&element->col, col);
-
-		/* We don't make any attempt to share GCs between different elements for now */
-		element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-		gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
-		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
-		gdk_gc_set_foreground(element->gc, &element->col);
+		cong_dispspec_element_init_col(element, col);
 	}
 
 	return element;
@@ -892,15 +1006,13 @@ cong_dispspec_element_new(const char* tagname, enum CongElementType type)
 
 	/* Extract colour: */
 	{
-		int col = 0x00ffffff;  /* White is default */
+#if NEW_LOOK
+		unsigned int col = 0x00000000;  /* Black is default for the new look */
+#else
+		unsigned int col = 0x00ffffff;  /* White is default */
+#endif
 
-		col_to_gcol(&element->col, col);
-
-		/* We don't make any attempt to share GCs between different elements for now */
-		element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-		gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
-		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, 0, 1);
-		gdk_gc_set_foreground(element->gc, &element->col);
+		cong_dispspec_element_init_col(element, col);
 	}
 
 	return element;

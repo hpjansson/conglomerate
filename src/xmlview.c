@@ -15,6 +15,48 @@ GtkStyle *style_white;
 
 #include <bonobo/bonobo-widget.h>
 
+/* Dodgy blend func: */
+void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
+{
+	float one_minus = 1.0f - proportion;
+
+	dst->red = ((float)src1->red*proportion) + ((float)src0->red*one_minus);
+	dst->green = ((float)src1->green*proportion) + ((float)src0->green*one_minus);
+	dst->blue = ((float)src1->blue*proportion) + ((float)src0->blue*one_minus);
+}
+
+static GdkColor white = {0, 0xffff, 0xffff, 0xffff};
+
+/* Dodgy hack to do lines that blend to white: */
+void draw_blended_line(GtkWidget *w,
+		       const GdkColor *col,
+		       int x0, int y0,
+		       int x1)
+{
+	/* inefficient: claim a gc to do this! (ideally we'd just invoke the hardware... grrr... arrg...) */
+	GdkGC *gc = gdk_gc_new(w->window);
+	int x;
+	float proportion;
+	GdkColor blended_col;
+
+	g_assert(x0!=x1);
+
+	for (x=x0; x<x1; x++) {
+		proportion = (float)(x-x0)/(float)(x1-x0);
+		proportion = (proportion>0.5f)?((proportion-0.5f)*2.0f):0.0f;
+
+		blend_col(&blended_col, col, &white, proportion);
+
+		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &blended_col, FALSE, TRUE);
+
+		gdk_gc_set_foreground(gc,&blended_col);
+
+		gdk_draw_point(w->window, gc, x, y0);
+	}
+
+	gdk_gc_unref(gc);
+}
+
 /*
   We handle folding by showing/hiding all but the first child of the vbox at the root of a xv_section_head.
   We store a boolean "expanded" data on the vbox.
@@ -22,6 +64,11 @@ GtkStyle *style_white;
   We store a ptr to the vbox within the title/GtkDrawingArea called "vbox" so it can query this when it draws itself.
   Probably would be cleaner to have a new widget subclass...
  */
+
+#define V_SPACING (4)
+#define H_SPACING (4)
+#define H_INDENT (4)
+#define FRAGMENT_WIDTH (45)
 
 static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNodePtr x)
 {
@@ -32,7 +79,55 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
 	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
 	CongDispspec *ds = g_object_get_data(G_OBJECT(vbox), "dispspec");
+
+#if NEW_LOOK
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_assert(element);
+
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
+	g_assert(gc);
+
+	/* Draw the frame rectangle "open" on the right-hand side : */
+	/* Top */
+	gdk_draw_line(w->window, gc, 
+		      H_SPACING, 0, 
+		      w->allocation.width, 0);
+
+	/* Left */
+	gdk_draw_line(w->window, gc, 
+		      H_SPACING, 0,
+		      H_SPACING, expanded ? w->allocation.height-1 : w->allocation.height-1-V_SPACING);	
+
+	/* Bottom */  
+	if (expanded) {
+		gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_DIM_LINE);
+		g_assert(gc);
+	}
+
+	gdk_draw_line(w->window, gc, 
+		      1 + H_SPACING, w->allocation.height-1-V_SPACING,
+		      w->allocation.width, w->allocation.height-1-V_SPACING);
+
+	/* Fill the inside of the rectangle: */
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND);
+	g_assert(gc);
 	
+	gdk_draw_rectangle(w->window, gc, 
+			   TRUE, 
+			   1 + H_SPACING, 1, 
+			   w->allocation.width - 1 - H_SPACING, w->allocation.height - 2 - V_SPACING);
+
+	/* Render the text: */
+#if 1
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
+	gdk_draw_string(w->window,
+			the_globals.ft,
+			gc, 
+			H_SPACING + H_INDENT, 2 + the_globals.ft_asc,
+			cong_dispspec_element_username(element));
+#endif
+	
+#else	
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 300 ? str_width : 300;
 
@@ -117,6 +212,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 				10 - gdk_string_width(the_globals.ft, "fuentes"),
 				2 + the_globals.ft_asc, "fuentes");
 	}
+#endif
 
 	return TRUE;
 }
@@ -210,6 +306,48 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 
 	CongDispspec *ds = g_object_get_data(G_OBJECT(w), "dispspec");
 	
+#if NEW_LOOK
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_assert(element);
+
+	/* Top: */
+	draw_blended_line(w,
+			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+			  H_SPACING + 1, 0, 
+			  H_SPACING + FRAGMENT_WIDTH);
+
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
+	g_assert(gc);
+
+	/* Left: */
+	gdk_draw_line(w->window, gc, 
+		      H_SPACING, 1,
+		      H_SPACING, w->allocation.height-1);	
+
+	/* Bottom: */
+	draw_blended_line(w,
+			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_DIM_LINE),
+			  H_SPACING + 1, w->allocation.height-1-V_SPACING,
+			  H_SPACING + FRAGMENT_WIDTH);
+
+	/* Fill the inside of the rectangle: */
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND);
+	g_assert(gc);
+	
+	gdk_draw_rectangle(w->window, gc, 
+			   TRUE, 
+			   1 + H_SPACING, 1,
+			   FRAGMENT_WIDTH, w->allocation.height - 2 - V_SPACING);
+
+	/* Render the text: */
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
+	gdk_draw_string(w->window,
+			the_globals.ft,
+			gc, 
+			H_SPACING + H_INDENT, 2 + the_globals.ft_asc,
+			cong_dispspec_element_username(element));
+
+#else
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
@@ -277,6 +415,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
 									cong_dispspec_name_get(ds, x));
+#endif
 	
 	return(TRUE);
 }
@@ -292,18 +431,37 @@ GtkWidget *xv_fragment_head(CongDispspec *ds, CongNodePtr x)
 
 	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, the_globals.ft_asc + the_globals.ft_desc + 4 /* framing and inside space */ + 4 /* below space */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
-										 (GtkSignalFunc) xv_fragment_head_expose, x);
+			   (GtkSignalFunc) xv_fragment_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
-										 (GtkSignalFunc) xv_fragment_head_expose, x);
-  gtk_widget_set_events(title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
+			   (GtkSignalFunc) xv_fragment_head_expose, x);
+	gtk_widget_set_events(title, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
 
 	gtk_widget_show(title);
 	return(title);
 }
 
 
-static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *gc)
+static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
+#if NEW_LOOK
+	GdkGC *gc;
+
+	/* Short horizontal line: */
+	draw_blended_line(w,
+			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+			  H_SPACING, 0, 
+			  H_SPACING + 45);
+
+	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
+	g_assert(gc);
+
+	/* Line down left-hand side: */
+	gdk_draw_line(w->window, gc, 
+		      H_SPACING, 1,
+		      H_SPACING, w->allocation.height-1);	
+
+#else
+	GdkGC *gc = cong_dispspec_element_gc(element);
 	if (!gc) gc = w->style->black_gc;
 	
 	/* Coloured line in the middle */
@@ -329,6 +487,7 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *
 	/* / */
 	
 	gdk_draw_line(w->window, w->style->black_gc, 7, 0, 3, 4);
+#endif
 	
 	return(TRUE);
 }
@@ -340,13 +499,14 @@ GtkWidget *xv_fragment_tail(CongDispspec *ds, CongNodePtr x)
 	UNUSED_VAR(GtkStyle *style)
 	GtkWidget *line;
 	UNUSED_VAR(int i)
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(cong_node_parent(x)));
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 5);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-			   (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, cong_node_parent(x), 0));
+			   (GtkSignalFunc) xv_fragment_tail_expose, element);
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-			   (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, cong_node_parent(x), 0));
+			   (GtkSignalFunc) xv_fragment_tail_expose, element);
 	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 	xv_style_r(line, style_white);
@@ -355,9 +515,13 @@ GtkWidget *xv_fragment_tail(CongDispspec *ds, CongNodePtr x)
 }
 
 
-static gint xv_section_indent_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *gc)
+static gint xv_section_indent_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
+#if NEW_LOOK
+#else
+	GdkGC *gc = cong_dispspec_element_gc(element);
 	if (!gc) gc = w->style->black_gc;
+
 	/* Coloured line in the middle */
 
 	gdk_draw_line(w->window, gc, 1, 0, 1, w->allocation.height);
@@ -366,17 +530,37 @@ static gint xv_section_indent_expose(GtkWidget *w, GdkEventExpose *event, GdkGC 
 	/* Black vertical lines right and left */
 
 	gdk_draw_line(w->window, w->style->black_gc, 0, 0, 0,
-								w->allocation.height);
+		      w->allocation.height);
 
 	gdk_draw_line(w->window, w->style->black_gc, 3, 0, 3,
-								w->allocation.height);
+		      w->allocation.height);
+#endif
 	
 	return(TRUE);
 }
 
 
-static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *gc)
+static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
+#if NEW_LOOK
+	/* Vertical line: */
+	GdkGC *gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE);
+	g_assert(gc);
+
+	/* White space: */
+	gdk_draw_rectangle(w->window, w->style->white_gc, 
+			   TRUE, 
+			   0,0,
+			   w->allocation.width-1, w->allocation.height);
+
+	/* Vertical line: */
+	gdk_draw_line(w->window, gc, 
+		      H_SPACING, 0, 
+		      H_SPACING, w->allocation.height);
+
+
+#else
+	GdkGC *gc = cong_dispspec_element_gc(element);
 	if (!gc) gc = w->style->black_gc;
 	/* Coloured line in the middle */
 	
@@ -386,23 +570,30 @@ static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *even
 	/* Black vertical lines right and left */
 
 	gdk_draw_line(w->window, w->style->black_gc, 0, 0, 0,
-								w->allocation.height);
+		      w->allocation.height);
 
 	gdk_draw_line(w->window, w->style->black_gc, 3, 0, 3,
-								w->allocation.height);
+		      w->allocation.height);
 
 	/* White space */
 	
 	gdk_draw_rectangle(w->window, w->style->white_gc, 1, 4, 0, 5, w->allocation.height);
-	
+#endif	
 	return(TRUE);
 }
 
 
-static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *gc)
+static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
+#if NEW_LOOK
+	draw_blended_line(w,
+			  cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
+			  H_SPACING, 0, 
+			  H_SPACING + 180);
+#else
   UNUSED_VAR(GdkColor gcol)
 
+	GdkGC *gc = cong_dispspec_element_gc(element);
 	if (!gc) gc = w->style->black_gc;
 	
 #if 0	
@@ -439,6 +630,7 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *g
 	gdk_draw_line(w->window, gc, 1, 5, 3, 5);
 	gdk_draw_line(w->window, gc, 1, 6, 2, 6);
 	gdk_draw_line(w->window, gc, 1, 7, 1, 7);
+#endif
 	
 	return(TRUE);
 }
@@ -447,14 +639,15 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *g
 GtkWidget *xv_section_vline(CongDispspec *ds, CongNodePtr x)
 {
 	GtkWidget *line;
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 4, 0);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_indent_expose, cong_dispspec_gc_get(ds, x, 0));
+			   (GtkSignalFunc) xv_section_indent_expose, element);
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_indent_expose, cong_dispspec_gc_get(ds, x, 0));
-  gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+			   (GtkSignalFunc) xv_section_indent_expose, element);
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 
 	gtk_widget_show(line);
@@ -465,14 +658,15 @@ GtkWidget *xv_section_vline(CongDispspec *ds, CongNodePtr x)
 GtkWidget *xv_section_vline_and_space(CongDispspec *ds, CongNodePtr x)
 {
 	GtkWidget *line;
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 0);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_vline_and_space_expose, cong_dispspec_gc_get(ds, x, 0));
+			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_vline_and_space_expose, cong_dispspec_gc_get(ds, x, 0));
-  gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 
 	gtk_widget_show(line);
@@ -515,14 +709,15 @@ GtkWidget *xv_section_tail(CongDispspec *ds, CongNodePtr x)
 	UNUSED_VAR(GtkStyle *style)
 	GtkWidget *line;
 	UNUSED_VAR(int i)
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 10, 10);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_tail_expose, cong_dispspec_gc_get(ds, x, 0));
+			   (GtkSignalFunc) xv_section_tail_expose, element);
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_tail_expose, cong_dispspec_gc_get(ds, x, 0));
-  gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+			   (GtkSignalFunc) xv_section_tail_expose, element);
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 	gtk_widget_show(line);
 	return(line);
