@@ -133,7 +133,7 @@
 	<varlistentry>
 	  <term>Why it failed:</term>
 	  <listitem>
-	    The file seems to be corrupt.
+	    <para>The file seems to be corrupt.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
