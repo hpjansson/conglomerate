@@ -31,7 +31,7 @@
 #include "cong-app.h"
 #include "cong-primary-window.h"
 
-static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
@@ -58,7 +58,7 @@ gchar* change_to_xds(gchar* filename)
 	return result;
 }
 
-static void save_dispspec(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void save_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	gchar *new_doc_name;
 	gchar *old_doc_name;
@@ -89,7 +89,7 @@ static void save_dispspec(CongTool *tool, CongPrimaryWindow *primary_window, gpo
 
 }
 
-static void edit_dispspec(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void edit_dispspec(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongDocument *doc;
 	xmlDocPtr xml;
@@ -125,28 +125,28 @@ gboolean plugin_save_dispspec_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
-	cong_plugin_register_tool(plugin, 
-				  _("Dump Display Spec"),
-				  _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
-				  "save_dispspec",
-				  _("_Dump Display Spec"),
-				  _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
-				  _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
-				  doc_filter,
-				  save_dispspec,
-				  NULL);
-
-	cong_plugin_register_tool(plugin, 
-				  _("Edit Display Spec"),
-				  _("Opens the current display spec as a conglomerate document."),
-				  "edit_dispspec",
-				  _("_Edit Display Spec"),
-				  _("Opens the current display spec as a conglomerate document."),
-				  _("Opens the current display spec as a conglomerate document."),
-				  doc_filter,
-				  edit_dispspec,
-				  NULL);
-
+	cong_plugin_register_doc_tool(plugin, 
+				      _("Dump Display Spec"),
+				      _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
+				      "save_dispspec",
+				      _("_Dump Display Spec"),
+				      _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
+				      _("Writes the current display spec into a display spec xml file. This file can then be customized by the conglomerate user"),
+				      doc_filter,
+				      save_dispspec,
+				      NULL);
+	
+	cong_plugin_register_doc_tool(plugin, 
+				      _("Edit Display Spec"),
+				      _("Opens the current display spec as a conglomerate document."),
+				      "edit_dispspec",
+				      _("_Edit Display Spec"),
+				      _("Opens the current display spec as a conglomerate document."),
+				      _("Opens the current display spec as a conglomerate document."),
+				      doc_filter,
+				      edit_dispspec,
+				      NULL);
+	
 
 	return TRUE;
 }

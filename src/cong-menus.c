@@ -1319,20 +1319,20 @@ static void on_tool_menu_item_activation(GtkMenuItem *menuitem,
 					 gpointer user_data)
 {
 	CongPrimaryWindow *primary_window = user_data;
-	CongTool *tool = g_object_get_data(G_OBJECT(menuitem), "cong-tool");
+	CongDocTool *tool = g_object_get_data(G_OBJECT(menuitem), "cong-tool");
 	
 	g_assert(primary_window);
 	g_assert(tool);
 
-	cong_tool_invoke(tool, primary_window);
+	cong_doc_tool_invoke(tool, primary_window);
 }
 
-static void add_tool_callback(CongTool *tool, gpointer user_data)
+static void add_tool_callback(CongDocTool *tool, gpointer user_data)
 {
 	struct add_tool_callback_data *callback_data = user_data;
 
-	if (cong_tool_supports_document(tool, cong_primary_window_get_document(callback_data->primary_window))) {
-		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_mnemonic(cong_tool_get_menu_text(tool)));
+	if (cong_doc_tool_supports_document(tool, cong_primary_window_get_document(callback_data->primary_window))) {
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_mnemonic(cong_tool_get_menu_text(CONG_TOOL(tool))));
 
 		g_signal_connect(G_OBJECT(menu_item), 
 				 "activate", 
@@ -1345,8 +1345,8 @@ static void add_tool_callback(CongTool *tool, gpointer user_data)
 
 		gtk_tooltips_set_tip(callback_data->menu_tips,
 				     GTK_WIDGET(menu_item),
-				     cong_tool_get_tip_text(tool),
-				     cong_tool_get_tip_further_text(tool));
+				     cong_tool_get_tip_text(CONG_TOOL(tool)),
+				     cong_tool_get_tip_further_text(CONG_TOOL(tool)));
 
 		gtk_widget_show(GTK_WIDGET(menu_item));
 
@@ -1380,7 +1380,7 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 			g_assert(callback_data.tools_menu);
 			callback_data.menu_tips = gtk_tooltips_new();
 
-			cong_plugin_manager_for_each_tool(cong_app_singleton()->plugin_manager, add_tool_callback, &callback_data);
+			cong_plugin_manager_for_each_doc_tool(cong_app_singleton()->plugin_manager, add_tool_callback, &callback_data);
 		}
 
 	} else {

@@ -50,7 +50,12 @@ typedef struct CongPrintMethod CongPrintMethod;
 typedef struct CongThumbnailer CongThumbnailer;
 typedef struct CongPluginEditorElement CongPluginEditorElement;
 typedef struct CongPluginEditorNodeFactory CongPluginEditorNodeFactory;
+
 typedef struct CongTool CongTool;
+#define CONG_TOOL(x) ((CongTool*)(x))
+typedef struct CongDocTool CongDocTool;
+typedef struct CongNodeTool CongNodeTool;
+
 typedef struct CongCustomPropertyDialog CongCustomPropertyDialog;
 
 /* The File->New GUI: */
@@ -70,8 +75,26 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongExporterDocumentFilter)(CongExporter *exporter, CongDocument *doc, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
-typedef gboolean (*CongToolDocumentFilter)(CongTool *tool, CongDocument *doc, gpointer user_data);
-typedef void (*CongToolActionCallback)(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data);
+
+typedef gboolean 
+(*CongDocToolFilter) (CongDocTool *doc_tool, 
+		      CongDocument *doc, 
+		      gpointer user_data);
+typedef void 
+(*CongDocToolActionCallback) (CongDocTool *doc_tool, 
+			      CongPrimaryWindow *primary_window, 
+			      gpointer user_data);
+typedef gboolean 
+(*CongNodeToolFilter) (CongNodeTool *node_tool, 
+		       CongDocument *doc, 
+		       CongNodePtr node,
+		       gpointer user_data);
+typedef void 
+(*CongNodeToolActionCallback) (CongNodeTool *tool, 
+			       CongPrimaryWindow *primary_window, 
+			       CongNodePtr node,
+			       gpointer user_data);
+
 typedef GtkWidget* (*CongCustomPropertyFactoryMethod)(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node);
 
 #if ENABLE_PRINTING
@@ -99,7 +122,8 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
 #endif
 void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongDocTool *doc_tool, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongNodeTool *node_tool, gpointer user_data), gpointer user_data);
 void cong_plugin_manager_for_each_custom_property_dialog(CongPluginManager *plugin_manager, void (*callback)(CongCustomPropertyDialog *custom_property_dialog, gpointer user_data), gpointer user_data);
 
 CongCustomPropertyDialog*
@@ -161,16 +185,29 @@ CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin
 								      const gchar *plugin_id,
 								      CongEditorNodeFactoryMethod factory_method,
 								      gpointer user_data);
-CongTool *cong_plugin_register_tool(CongPlugin *plugin,
-				    const gchar *name, 
-				    const gchar *description,
-				    const gchar *functionality_id,
-				    const gchar *menu_text,
-				    const gchar *tooltip_text,
-				    const gchar *tooltip_further_text,
-				    CongToolDocumentFilter doc_filter,
-				    CongToolActionCallback action_callback,
-				    gpointer user_data);
+CongDocTool*
+cong_plugin_register_doc_tool(CongPlugin *plugin,
+			      const gchar *name, 
+			      const gchar *description,
+			      const gchar *functionality_id,
+			      const gchar *menu_text,
+			      const gchar *tooltip_text,
+			      const gchar *tooltip_further_text,
+			      CongDocToolFilter doc_filter,
+			      CongDocToolActionCallback action_callback,
+			      gpointer user_data);
+
+CongNodeTool*
+cong_plugin_register_node_tool (CongPlugin *plugin,
+				const gchar *name, 
+				const gchar *description,
+				const gchar *functionality_id,
+				const gchar *menu_text,
+				const gchar *tooltip_text,
+				const gchar *tooltip_further_text,
+				CongNodeToolFilter node_filter,
+				CongNodeToolActionCallback action_callback,
+				gpointer user_data);
 
 CongCustomPropertyDialog *cong_plugin_register_custom_property_dialog(CongPlugin *plugin,
 								      const gchar *name, 
@@ -186,8 +223,10 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
 #endif
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_tool(CongPlugin *plugin, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongDocTool *doc_tool, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongNodeTool *node_tool, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_custom_property_dialog(CongPlugin *plugin, void (*callback)(CongCustomPropertyDialog *custom_property_dialog, gpointer user_data), gpointer user_data);
+
 
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin);
@@ -231,11 +270,30 @@ gboolean cong_print_method_supports_document(CongPrintMethod *print_method, Cong
 void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window);
 #endif
 
-gboolean cong_tool_supports_document(CongTool *tool, CongDocument *doc);
-void cong_tool_invoke(CongTool *tool, CongPrimaryWindow *primary_window);
-const gchar *cong_tool_get_menu_text(CongTool *tool);
-const gchar *cong_tool_get_tip_text(CongTool *tool);
-const gchar *cong_tool_get_tip_further_text(CongTool *tool);
+const gchar*
+cong_tool_get_menu_text(CongTool *tool);
+
+const gchar*
+cong_tool_get_tip_text(CongTool *tool);
+
+const gchar*
+cong_tool_get_tip_further_text(CongTool *tool);
+
+gboolean 
+cong_doc_tool_supports_document (CongDocTool *doc_tool, 
+				 CongDocument *doc);
+void 
+cong_doc_tool_invoke (CongDocTool *doc_tool, 
+		      CongPrimaryWindow *primary_window);
+
+gboolean 
+cong_node_tool_supports_node (CongNodeTool *node_tool, 
+			      CongDocument *doc,
+			      CongNodePtr node);
+void 
+cong_node_tool_invoke (CongNodeTool *node_tool, 
+		       CongPrimaryWindow *primary_window,
+		       CongNodePtr node);
 
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
 CongDocument* 
@@ -293,8 +351,6 @@ cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_edit
 GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,
 					    CongDocument *doc,
 					    CongNodePtr node);
-
-
 G_END_DECLS
 
 #endif

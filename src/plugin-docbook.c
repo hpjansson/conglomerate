@@ -1162,6 +1162,75 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongCustomPropertyDialo
 	return glade_xml_get_widget(xml, "common_dialog");
 }
 
+gboolean 
+node_filter_promote (CongNodeTool *node_tool, 
+		     CongDocument *doc, 
+		     CongNodePtr node,
+		     gpointer user_data)
+{
+	if (cong_util_is_docbook(doc)) {
+		if (cong_node_is_tag(node, NULL, "sect2")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect3")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect4")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect5")) {
+			return TRUE;
+		}
+
+		/* FIXME: handle <sect> tags */
+	}
+
+	return FALSE;
+}
+
+void
+action_callback_promote (CongNodeTool *tool, 
+			 CongPrimaryWindow *primary_window, 
+			 CongNodePtr node,
+			 gpointer user_data)
+{
+	g_message ("action_callback_promote");
+
+	/* Unwritten */
+}
+
+gboolean 
+node_filter_demote (CongNodeTool *node_tool, 
+		    CongDocument *doc, 
+		    CongNodePtr node,
+		    gpointer user_data)
+{
+	if (cong_util_is_docbook(doc)) {
+		if (cong_node_is_tag(node, NULL, "sect1")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect2")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect3")) {
+			return TRUE;
+		} else if (cong_node_is_tag(node, NULL, "sect4")) {
+			return TRUE;
+		}
+
+		/* FIXME: handle <sect> tags */
+	}
+
+	return FALSE;
+}
+
+void
+action_callback_demote (CongNodeTool *tool, 
+			CongPrimaryWindow *primary_window, 
+			CongNodePtr node,
+			gpointer user_data)
+{
+	g_message ("action_callback_demote");
+
+	/* Unwritten */
+}
+
+
 
  /* would be exposed as "plugin_register"? */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
@@ -1258,6 +1327,30 @@ gboolean plugin_docbook_plugin_register(CongPlugin *plugin)
 						    "docbook-orderedlist-properties",
 						    docbook_orderedlist_properties_factory_method,
 						    NULL);
+
+#if 0
+	cong_plugin_register_node_tool (plugin,
+					_("Promote Section"), 
+					_("Promotes a DocBook section to a higher organisational level within the document"),
+					"docbook-promote",
+					_("Promote"),
+					_("Promote the section to a higher organisational level within the document"),
+					_("Promote the section to a higher organisational level within the document"),
+					node_filter_promote,
+					action_callback_promote,
+					NULL);
+
+	cong_plugin_register_node_tool (plugin,
+					_("Demote Section"), 
+					_("Demotes a DocBook section to a lower organisational level within the document"),
+					"docbook-demote",
+					_("Demote"),
+					_("Demote the section to a lower organisational level within the document"),
+					_("Demote the section to a lower organisational level within the document"),
+					node_filter_demote,
+					action_callback_demote,
+					NULL);
+#endif
 
 	return TRUE;
 }

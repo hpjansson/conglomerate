@@ -33,7 +33,7 @@
 #include "cong-fake-plugin-hooks.h"
 #include "cong-dispspec.h"
 
-static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
@@ -370,7 +370,7 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 	cong_document_end_edit (doc);
 }
 
-static void action_callback(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongSourceCleanupOptions options;
 
@@ -387,16 +387,16 @@ gboolean plugin_cleanup_source_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
-	cong_plugin_register_tool(plugin, 
-				  _("Cleanup XML Source"),
-				  _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
-				  "cleanup",
-				  _("_Clean the XML Source"),
-				  _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
-				  _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
-				  doc_filter,
-				  action_callback,
-				  NULL);
+	cong_plugin_register_doc_tool(plugin, 
+				      _("Cleanup XML Source"),
+				      _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
+				      "cleanup",
+				      _("_Clean the XML Source"),
+				      _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
+				      _("Cleans up the XML source of the document, so that it is easy to read in a code editor."),
+				      doc_filter,
+				      action_callback,
+				      NULL);
 
 	return TRUE;
 }

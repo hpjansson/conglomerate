@@ -1,5 +1,9 @@
 2003-09-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-menus.c, cong-plugin.c, cong-plugin.h, plugin-cleanup-source.c, plugin-docbook.c, plugin-save-dispspec.c, plugin-validate.c, plugin-website.c, popup.c
+
+	Split CongTool into CongDocTool and CongNodeTool
+
 	* cong-document.c, global.h, xmldata.c
 
 	Bugfix for element filtering

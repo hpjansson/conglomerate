@@ -391,7 +391,7 @@ static void build_node_graph(GenerateWebsiteWorkspace *workspace)
 }
 
 
-static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	const CongXMLChar* dtd_public_id = cong_document_get_dtd_public_identifier(doc);
 	
@@ -418,7 +418,7 @@ static void on_error_details(gpointer data)
 }
 
 
-static void action_callback(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	GenerateWebsiteWorkspace *workspace = g_new0(GenerateWebsiteWorkspace,1);
 	GError *error = NULL;
@@ -489,16 +489,16 @@ gboolean plugin_website_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
-	cong_plugin_register_tool(plugin, 
-				  _("Generate website"),
-				  _("Generates a collection of HTML pages from the website XML description"),
-				  "generate-website",
-				  _("Generate _Website"),
-				  _("Generates a collection of HTML pages from the website XML description"),
-				  _("Generates a collection of HTML pages from the website XML description"),
-				  doc_filter,
-				  action_callback,
-				  NULL);
+	cong_plugin_register_doc_tool(plugin, 
+				      _("Generate website"),
+				      _("Generates a collection of HTML pages from the website XML description"),
+				      "generate-website",
+				      _("Generate _Website"),
+				      _("Generates a collection of HTML pages from the website XML description"),
+				      _("Generates a collection of HTML pages from the website XML description"),
+				      doc_filter,
+				      action_callback,
+				      NULL);
 
 
 	return TRUE;

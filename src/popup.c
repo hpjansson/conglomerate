@@ -811,6 +811,48 @@ debug_set_text (CongDocument *doc,
 	g_free (new_text);
 }
 
+static void
+invoke_node_tool (CongDocument *doc,
+		  CongNodePtr node,
+		  GtkWindow *parent_window)
+{
+#if 0
+	cong_node_tool_invoke (CongNodeTool *node_tool, 
+			       parent_window,
+			       node);
+#error
+#endif
+}
+     
+
+struct add_node_tool_callback_data
+{
+	GtkMenu *tpopup;
+	CongDocument *doc;
+	CongNodePtr node;
+	GtkWindow *parent_window;
+};
+
+static void
+add_node_tool_callback (CongNodeTool *node_tool, 
+			gpointer user_data)
+{
+	struct add_node_tool_callback_data *callback_data = user_data;
+
+	if ( cong_node_tool_supports_node (node_tool, 
+					   callback_data->doc,
+					   callback_data->node)) {
+		add_item_to_popup_with_tree_callback (callback_data->tpopup,
+						      make_menu_item (cong_tool_get_menu_text (CONG_TOOL(node_tool)),
+								      cong_tool_get_tip_text(CONG_TOOL(node_tool)),
+								      NULL), /* FIXME:  ought to have an icon */
+						      invoke_node_tool,
+						      callback_data->doc,
+						      callback_data->node,
+						      callback_data->parent_window);
+		
+	}
+}
 
 
 GtkWidget* cong_ui_popup_init(CongDocument *doc, 
@@ -959,6 +1001,20 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 							  node, 
 							  parent_window);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
+
+	/* Add any plugin tools for this node: */
+	{
+		struct add_node_tool_callback_data callback_data;
+
+		callback_data.tpopup = tpopup;
+		callback_data.doc = doc;
+		callback_data.node = node;
+		callback_data.parent_window = parent_window;
+
+		cong_plugin_manager_for_each_node_tool (cong_app_singleton()->plugin_manager, 
+							add_node_tool_callback,
+							&callback_data);
+	}
 
 	return GTK_WIDGET(tpopup);
 }

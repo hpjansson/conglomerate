@@ -73,13 +73,13 @@ static void on_details(gpointer data)
 	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, "Can't supply details about validation failure", 113758);
 }
 
-static gboolean doc_filter(CongTool *tool, CongDocument *doc, gpointer user_data)
+static gboolean doc_filter(CongDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Always appropriate: */
 	return TRUE;
 }
 
-static void action_callback(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
+static void action_callback(CongDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 	xmlDocPtr xml_doc = cong_document_get_xml(doc);
@@ -161,16 +161,16 @@ gboolean plugin_validate_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
-	cong_plugin_register_tool(plugin, 
-				  _("Validate Document"),
-				  _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
-				  "validate",
-				  _("_Validate Document"),
-				  _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
-				  _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
-				  doc_filter,
-				  action_callback,
-				  NULL);
+	cong_plugin_register_doc_tool(plugin, 
+				      _("Validate Document"),
+				      _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
+				      "validate",
+				      _("_Validate Document"),
+				      _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
+				      _("Checks to see if the document is \"valid\" i.e. that it matches a set of rules given by the corresponding document type or schema"),
+				      doc_filter,
+				      action_callback,
+				      NULL);
 
 	return TRUE;
 }

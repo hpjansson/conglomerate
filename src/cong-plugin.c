@@ -56,7 +56,8 @@ struct CongPlugin
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
 	GList *list_of_editor_node_factory; /* ptrs of type CongPluginEditorNodeFactory */
-	GList *list_of_tool; /* ptrs of type CongTool */
+	GList *list_of_doc_tool; /* ptrs of type CongDocTool */
+	GList *list_of_node_tool; /* ptrs of type CongNodeTool */
 	GList *list_of_property_dialog; /* ptrs of type CongCustomPropertyDialog */
 };
 
@@ -135,9 +136,21 @@ struct CongTool
 	const gchar *menu_text;
 	const gchar *tooltip_text;
 	const gchar *tooltip_further_text;
-	CongToolDocumentFilter doc_filter;
-	CongToolActionCallback action_callback;
 	gpointer user_data;
+};
+
+struct CongDocTool
+{
+	CongTool tool; /* base class */
+	CongDocToolFilter doc_filter;
+	CongDocToolActionCallback action_callback;
+};
+
+struct CongNodeTool
+{
+	CongTool tool; /* base class */
+	CongNodeToolFilter node_filter;
+	CongNodeToolActionCallback action_callback;
 };
 
 struct CongCustomPropertyDialog
@@ -242,14 +255,25 @@ void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager
 }
 #endif
 
-void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data)
+void cong_plugin_manager_for_each_doc_tool(CongPluginManager *plugin_manager, void (*callback)(CongDocTool *tool, gpointer user_data), gpointer user_data)
 {
 	GList *iter;
 	g_return_if_fail(plugin_manager);
 	g_return_if_fail(callback);
 
 	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
-		cong_plugin_for_each_tool(iter->data, callback, user_data);
+		cong_plugin_for_each_doc_tool(iter->data, callback, user_data);
+	}
+}
+
+void cong_plugin_manager_for_each_node_tool(CongPluginManager *plugin_manager, void (*callback)(CongNodeTool *tool, gpointer user_data), gpointer user_data)
+{
+	GList *iter;
+	g_return_if_fail(plugin_manager);
+	g_return_if_fail(callback);
+
+	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
+		cong_plugin_for_each_node_tool(iter->data, callback, user_data);
 	}
 }
 
@@ -498,39 +522,79 @@ CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin
 	return editor_node_factory;
 }
 
-CongTool *cong_plugin_register_tool(CongPlugin *plugin,
-				    const gchar *name, 
-				    const gchar *description,
-				    const gchar *functionality_id,
-				    const gchar *menu_text,
-				    const gchar *tooltip_text,
-				    const gchar *tooltip_further_text,
-				    CongToolDocumentFilter doc_filter,
-				    CongToolActionCallback action_callback,
-				    gpointer user_data)
+CongDocTool*
+cong_plugin_register_doc_tool (CongPlugin *plugin,
+			       const gchar *name, 
+			       const gchar *description,
+			       const gchar *functionality_id,
+			       const gchar *menu_text,
+			       const gchar *tooltip_text,
+			       const gchar *tooltip_further_text,
+			       CongDocToolFilter doc_filter,
+			       CongDocToolActionCallback action_callback,
+			       gpointer user_data)
 {
-	CongTool *tool;
+	CongDocTool *tool;
 
 	g_return_val_if_fail(plugin, NULL);
 	g_return_val_if_fail(name, NULL);
 	g_return_val_if_fail(description, NULL);
 	g_return_val_if_fail(functionality_id, NULL);
 
-        tool = g_new0(CongTool,1);
+        tool = g_new0(CongDocTool,1);
 
-	tool->functionality.plugin = plugin;
-	tool->functionality.name = g_strdup(name);
-	tool->functionality.description = g_strdup(description);
-	tool->functionality.functionality_id = g_strdup(functionality_id);
-	tool->menu_text = g_strdup(menu_text);
-	tool->tooltip_text = g_strdup(tooltip_text);
-	tool->tooltip_further_text = g_strdup(tooltip_further_text);
+	tool->tool.functionality.plugin = plugin;
+	tool->tool.functionality.name = g_strdup(name);
+	tool->tool.functionality.description = g_strdup(description);
+	tool->tool.functionality.functionality_id = g_strdup(functionality_id);
+	tool->tool.menu_text = g_strdup(menu_text);
+	tool->tool.tooltip_text = g_strdup(tooltip_text);
+	tool->tool.tooltip_further_text = g_strdup(tooltip_further_text);
+	tool->tool.user_data = user_data;
 	tool->doc_filter = doc_filter;
 	tool->action_callback = action_callback;
-	tool->user_data = user_data;
 
 	/* Add to plugin's list: */
-	plugin->list_of_tool = g_list_append(plugin->list_of_tool, tool);
+	plugin->list_of_doc_tool = g_list_append(plugin->list_of_doc_tool, tool);
+
+	return tool;
+
+}
+
+CongNodeTool*
+cong_plugin_register_node_tool (CongPlugin *plugin,
+				const gchar *name, 
+				const gchar *description,
+				const gchar *functionality_id,
+				const gchar *menu_text,
+				const gchar *tooltip_text,
+				const gchar *tooltip_further_text,
+				CongNodeToolFilter node_filter,
+				CongNodeToolActionCallback action_callback,
+				gpointer user_data)
+{
+	CongNodeTool *tool;
+
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(name, NULL);
+	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(functionality_id, NULL);
+
+        tool = g_new0(CongNodeTool,1);
+
+	tool->tool.functionality.plugin = plugin;
+	tool->tool.functionality.name = g_strdup(name);
+	tool->tool.functionality.description = g_strdup(description);
+	tool->tool.functionality.functionality_id = g_strdup(functionality_id);
+	tool->tool.menu_text = g_strdup(menu_text);
+	tool->tool.tooltip_text = g_strdup(tooltip_text);
+	tool->tool.tooltip_further_text = g_strdup(tooltip_further_text);
+	tool->tool.user_data = user_data;
+	tool->node_filter = node_filter;
+	tool->action_callback = action_callback;
+
+	/* Add to plugin's list: */
+	plugin->list_of_node_tool = g_list_append(plugin->list_of_node_tool, tool);
 
 	return tool;
 
@@ -600,12 +664,20 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 }
 #endif
 
-void cong_plugin_for_each_tool(CongPlugin *plugin, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data)
+void cong_plugin_for_each_doc_tool(CongPlugin *plugin, void (*callback)(CongDocTool *doc_tool, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
 	g_return_if_fail(callback);
 
-	g_list_foreach(plugin->list_of_tool, (GFunc)callback, user_data);
+	g_list_foreach(plugin->list_of_doc_tool, (GFunc)callback, user_data);
+}
+
+void cong_plugin_for_each_node_tool(CongPlugin *plugin, void (*callback)(CongNodeTool *node_tool, gpointer user_data), gpointer user_data)
+{
+	g_return_if_fail(plugin);
+	g_return_if_fail(callback);
+
+	g_list_foreach(plugin->list_of_node_tool, (GFunc)callback, user_data);
 }
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
@@ -826,21 +898,50 @@ void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, 
 }
 #endif
 
-gboolean cong_tool_supports_document(CongTool *tool, CongDocument *doc)
+gboolean 
+cong_doc_tool_supports_document (CongDocTool *tool, 
+				 CongDocument *doc)
 {
 	g_return_val_if_fail(tool, FALSE);
 	g_return_val_if_fail(doc, FALSE);
 
 	g_assert(tool->doc_filter);
-	return tool->doc_filter(tool, doc, tool->user_data);
+	return tool->doc_filter(tool, doc, tool->tool.user_data);
 }
 
-void cong_tool_invoke(CongTool *tool, CongPrimaryWindow *primary_window)
+void 
+cong_doc_tool_invoke (CongDocTool *tool, 
+		      CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(tool);
 
 	g_assert(tool->action_callback);
-	return tool->action_callback(tool, primary_window, tool->user_data);
+	return tool->action_callback(tool, primary_window, tool->tool.user_data);
+}
+
+gboolean 
+cong_node_tool_supports_node (CongNodeTool *tool, 
+			      CongDocument *doc,
+			      CongNodePtr node)
+{
+	g_return_val_if_fail(tool, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+	g_return_val_if_fail(node, FALSE);
+
+	g_assert(tool->node_filter);
+	return tool->node_filter(tool, doc, node, tool->tool.user_data);
+}
+
+void 
+cong_node_tool_invoke (CongNodeTool *tool, 
+		       CongPrimaryWindow *primary_window,
+		       CongNodePtr node)
+{
+	g_return_if_fail(tool);
+	g_return_if_fail(node);
+
+	g_assert(tool->action_callback);
+	return tool->action_callback(tool, primary_window, node, tool->tool.user_data);
 }
 
 const gchar *cong_tool_get_menu_text(CongTool *tool)
