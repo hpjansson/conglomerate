@@ -29,6 +29,7 @@
 #include "cong-error-dialog.h"
 #include "cong-font.h"
 #include "cong-app.h"
+#include "cong-text-cache.h"
 
 #if 0
 #define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
@@ -1084,9 +1085,12 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 						cong_location_copy(&selection->loc1, &end_of_word);
 						cong_location_copy(&cursor->location, &end_of_word);
 					}						
-				
+
+					cong_document_begin_edit (doc);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
+					cong_document_end_edit (doc);
+
 				}
 			}
 			return;
@@ -1099,11 +1103,12 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 
 				if (get_click_location(span_text_editor, event->x, event->y, &cursor->location)) {
 					
+					cong_document_begin_edit (doc);	
 					cong_selection_start_from_curs(selection, cursor);
 					cong_selection_end_from_curs(selection, cursor);
 					cong_document_on_selection_change(doc);
 					cong_document_on_cursor_change(doc);
-						
+					cong_document_end_edit (doc);						
 				}
 			}
 
@@ -1153,8 +1158,12 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 							       text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
 			
 			cong_selection_end_from_curs(selection, cursor);
+
+			cong_document_begin_edit (doc);
 			cong_document_on_selection_change(doc);
 			cong_document_on_cursor_change(doc);			
+			cong_document_end_edit (doc);
+
 			return;
 		}
 	}
@@ -1337,6 +1346,8 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	selection = cong_document_get_selection(doc);
 	g_assert(selection);
 
+	cong_document_begin_edit (doc);
+
 	switch (event->keyval)
 	{
 	case GDK_Up:
@@ -1363,6 +1374,8 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 				/* Move the cursor to the new location: */
 				cong_location_copy(&cursor->location, &target_location);
 
+				cong_document_begin_edit (doc);
+
 				if (event->state & GDK_SHIFT_MASK) {
 					/* Then we should also drag out the selection to the new location: */
 					cong_selection_end_from_curs(selection, cursor);
@@ -1372,6 +1385,8 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 				}
 
 				cong_document_on_cursor_change(doc);
+
+				cong_document_end_edit (doc);	
 			}
 		}
 		break;
@@ -1421,6 +1436,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 
 	cong_document_on_cursor_change(doc);	
 
+	cong_document_end_edit (doc);
 }
 
 /* Public API: */

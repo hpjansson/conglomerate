@@ -1,3 +1,9 @@
+2003-08-08  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-span-text-editor.c
+
+	Added some begin/end edit pairs
+
 2003-08-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-structural-tag.c
