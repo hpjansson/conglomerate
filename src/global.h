@@ -2,7 +2,7 @@
 
 #include <ttree.h>
 #include <sock.h>
-
+#include <libgnomevfs/gnome-vfs.h>
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
@@ -13,9 +13,9 @@
 
 enum
 {
-   TITLE_COLUMN,
-   TTREE_COLUMN,
-   N_COLUMNS
+	TREEVIEW_TITLE_COLUMN,
+	TREEVIEW_TTREE_COLUMN,
+	TREEVIEW_N_COLUMNS
 };
 
 #if 0
@@ -41,7 +41,7 @@ enum CongElementType
 
 typedef struct CongDispspec CongDispspec;
 typedef struct CongDispspecElement CongDispspecElement;
-
+typedef struct CongDispspecRegistry CongDispspecRegistry;
 
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
@@ -255,6 +255,9 @@ struct cong_globals
 #if 0
   guint status_main_ctx;
 #endif
+
+	CongDispspecRegistry* ds_registry;
+
 };
 
 extern struct cong_globals the_globals;
@@ -330,7 +333,7 @@ gint save_document(GtkWidget *w, gpointer data);
 const char *get_file_name(char *title);
 char *pick_structural_tag();
 
-int open_document_do(const char *doc_name, const char *ds_name);
+void open_document_do(const gchar *doc_name);
 
 /* DHM: My new stuff goes here for now: */
 #define UNUSED_VAR(x)
@@ -339,9 +342,15 @@ int gui_window_new_document_make();
 void xmlview_destroy(int free_xml);
 
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
-CongDispspec* cong_dispspec_new_from_xds_file(const char *name);
+GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds);
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
 void cong_dispspec_delete(CongDispspec *dispspec);
+
+const gchar*
+cong_dispspec_get_name(const CongDispspec *ds);
+
+const gchar*
+cong_dispspec_get_description(const CongDispspec *ds);
 
 char *cong_dispspec_name_name_get(TTREE *t);
 GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
@@ -358,7 +367,7 @@ cong_dispspec_type(CongDispspec *ds, const char* tagname);
 
 /* New API for getting at elements within a dispspec */
 CongDispspecElement*
-cong_dispspec_lookup_element(CongDispspec *ds, const char* tagname);
+cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname);
 
 CongDispspecElement*
 cong_dispspec_get_first_element(CongDispspec *ds);
@@ -439,10 +448,33 @@ void xv_style_r(GtkWidget *widget, gpointer data);
 /**
  * Routine to manufacture a GNOME HIG-compliant error dialog.
  */
-GtkWidget* 
+GtkDialog* 
 cong_error_dialog_new(const gchar* what_failed, 
 		      const gchar* why_failed, 
 		      const gchar* suggestions);
+
+/**
+ * Routine to manufacture a GNOME HIG-compliant error dialog with a "convenience button" that does something relevant.
+ */
+GtkDialog* 
+cong_error_dialog_new_with_convenience(const gchar* what_failed, 
+				       const gchar* why_failed, 
+				       const gchar* suggestions,
+				       const gchar* convenience_label,
+				       void (*convenience_action)(gpointer data),
+				       gpointer convenience_data);
+
+/**
+ * Routine to run an error dialog.  Use in preference to gtk_dialog_run as it handles convenience buttons.
+ */
+void
+cong_error_dialog_run(GtkDialog* dialog);
+
+/**
+ * Routine to run an error dialog and destroy it afterwards.  Use in preference to gtk_dialog_run as it handles convenience buttons.
+ */
+void
+cong_error_dialog_do(GtkDialog* dialog);
 
 /**
  * Routine to get at the application name in a form suitable for use in error reports.  Returns a freshly-allocated string.
@@ -450,21 +482,51 @@ cong_error_dialog_new(const gchar* what_failed,
 gchar* 
 cong_error_get_appname(void);
 
+/**
+ * Routine to manufacture an error dialog for unimplemented functionality
+ */
+GtkDialog*
+cong_error_dialog_new_unimplemented(const gchar* what_failed, const char* filename, int linenum);
 
-/* Temporary routine; will be removed once transition to GnomeVFS is complete. */
-GtkWidget*
-cong_error_dialog_new_file_open_failed(const gchar* filename);
-/* should this be a URI? */
+#define CONG_DO_UNIMPLEMENTED_DIALOG(what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented(what_failed, __FILE__, __LINE__)))
 
-#include <libgnomevfs/gnome-vfs.h>
+/**
+ * Routine to manufacture an error dialog for when File->Open fails.
+ * @vfs_uri:  the URI to which you tried to save the file.
+ */
+GtkDialog*
+cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions);
+
+/**
+ * Routine to manufacture an error dialog for when File->Open fails.
+ * @vfs_uri:  the URI to which you tried to save the file.
+ */
+GtkDialog*
+cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_uri, 
+							gboolean transient, 
+							const gchar* why_failed, 
+							const gchar* suggestions,
+							const gchar* convenience_label,
+							void (*convenience_action)(gpointer data),
+							gpointer convenience_data);
+
 
 /**
  * Routine to manufacture an error dialog for when File->Open fails.
  * @vfs_uri:  the URI to which you tried to save the file.
  * @vfs_result: the error code that occurred.
  */
-GtkWidget*
-cong_error_dialog_new_file_open_failed2(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result);
+GtkDialog*
+cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result);
+
+
+/**
+ * Routine to manufacture an error dialog for when File->Open fails due to a parsing error.
+ * @vfs_uri:  the URI to which you tried to save the file.
+ * FIXME: more parameters?
+ */
+GtkDialog*
+cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri);
 
 /**
  * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.
@@ -472,7 +534,7 @@ cong_error_dialog_new_file_open_failed2(const GnomeVFSURI* file_uri, GnomeVFSRes
  * @vfs_result: the error code that occurred.
  * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
  */
-GtkWidget*
+GtkDialog*
 cong_error_dialog_new_file_save_failed(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result, const GnomeVFSFileSize* file_size);
 
 /** 
@@ -483,7 +545,32 @@ cong_error_tests(void);
 
 /**
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+ * (I believe that CVS gnome-vfs has a routine gnome_vfs_read_entire_file that does this)
 */
 GnomeVFSResult
 cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size);
 
+/**
+ * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+*/
+GnomeVFSResult
+cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
+
+/* cong-dispspec-registry */
+CongDispspecRegistry*
+cong_dispspec_registry_new(const gchar* xds_directory);
+
+void
+cong_dispspec_registry_free(CongDispspecRegistry* registry);
+
+unsigned int
+cong_dispspec_registry_get_num(CongDispspecRegistry* registry);
+
+const CongDispspec*
+cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i);
+
+void
+cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds);
+
+void
+cong_dispspec_registry_dump(CongDispspecRegistry* registry);

@@ -79,7 +79,7 @@ GtkWidget* cong_gui_get_root(struct cong_gui* gui)
 
 void cong_gui_destroy_tree_store(struct cong_gui* gui)
 {
-  gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
  
 #if 0
@@ -203,16 +203,35 @@ cong_vfs_read_bytes(GnomeVFSHandle* vfs_handle, char* buffer, GnomeVFSFileSize b
 GnomeVFSResult
 cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size)
 {
-	GnomeVFSHandle* vfs_handle;
 	GnomeVFSResult vfs_result;
+	GnomeVFSURI* uri;
 
 	g_return_val_if_fail(filename,GNOME_VFS_ERROR_BAD_PARAMETERS);
 	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
 	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
 
-	vfs_result = gnome_vfs_open(&vfs_handle,
-				    filename,
-				    GNOME_VFS_OPEN_READ);
+	uri = gnome_vfs_uri_new(filename);
+
+	vfs_result = cong_vfs_new_buffer_from_uri(uri, buffer, size);
+
+	gnome_vfs_uri_unref(uri);
+
+	return vfs_result;
+}
+
+GnomeVFSResult
+cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size)
+{
+	GnomeVFSResult vfs_result;
+	GnomeVFSHandle *vfs_handle;
+
+	g_return_val_if_fail(uri,GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
+
+	vfs_result = gnome_vfs_open_uri(&vfs_handle,
+					uri,
+					GNOME_VFS_OPEN_READ);
 
 	if (GNOME_VFS_OK!=vfs_result) {
 		return vfs_result;
@@ -260,7 +279,6 @@ cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileS
 	}
 }
 
-
 int test_open_do(const char *doc_name, const char *ds_name)
 {
 	char *p;
@@ -268,11 +286,21 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	FILE *xml_f;
 
 #ifndef AUTOGENERATE_DS
-	the_globals.ds = cong_dispspec_new_from_xds_file(ds_name);
-	if (!the_globals.ds) {
-	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
-	  return(TRUE);  /* Invalid displayspec. */
+	GnomeVFSURI *uri = gnome_vfs_uri_new(ds_name);
+	GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri, &the_globals.ds);
+	if (vfs_result!=GNOME_VFS_OK) {
+		GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(uri, vfs_result);
+			
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		gnome_vfs_uri_unref(uri);
+		
+		return(TRUE);  /* Invalid displayspec. */
 	}
+
+	gnome_vfs_uri_unref(uri);
+
 #endif
 
 #if 1
@@ -288,10 +316,10 @@ int test_open_do(const char *doc_name, const char *ds_name)
 			GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file(doc_name, &buffer, &size);
 
 			if (vfs_result!=GNOME_VFS_OK) {
-				GtkWidget* dialog = cong_error_dialog_new_file_open_failed2(file_uri, vfs_result);
+				GtkDialog* dialog = cong_error_dialog_new_file_open_failed_from_vfs_result(file_uri, vfs_result);
 			
-				gtk_dialog_run(GTK_DIALOG(dialog));
-				gtk_widget_destroy(dialog);
+				cong_error_dialog_run(GTK_DIALOG(dialog));
+				gtk_widget_destroy(GTK_WIDGET(dialog));
 
 				gnome_vfs_uri_unref(file_uri);
 
@@ -395,6 +423,85 @@ gint test_error(GtkWidget *w, gpointer data)
 
 void test_error_wrap(GtkWidget *widget, gpointer data) { test_error(widget, 0); }
 
+enum
+{
+	DOCTYPELIST_NAME_COLUMN,
+	DOCTYPELIST_DESCRIPTION_COLUMN,
+	DOCTYPELIST_N_COLUMNS
+};
+
+gint test_document_types(GtkWidget *w, gpointer data)
+{
+	GtkWidget* dialog;
+	GtkWidget* list_view;
+
+	GtkListStore *store;
+	GtkTreeViewColumn *column;
+	GtkCellRenderer *renderer;
+
+	dialog = gtk_dialog_new();
+
+	gtk_window_set_title(GTK_WINDOW(dialog), "Document Types");
+
+	store = gtk_list_store_new (DOCTYPELIST_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
+
+	list_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+
+	/* The view now holds a reference.  We can get rid of our own
+	 * reference */
+	g_object_unref (G_OBJECT (store));
+
+	/* Populate the store based on the ds-registry: */
+	{
+		CongDispspecRegistry* registry = the_globals.ds_registry;
+		int i;
+
+		for (i=0;i<cong_dispspec_registry_get_num(registry);i++) {
+			const CongDispspec* ds = cong_dispspec_registry_get(registry,i);
+			
+			GtkTreeIter iter;
+			gtk_list_store_append (store, &iter);  /* Acquire an iterator */
+			
+			gtk_list_store_set (store, &iter,
+					    DOCTYPELIST_NAME_COLUMN, cong_dispspec_get_name(ds),
+					    DOCTYPELIST_DESCRIPTION_COLUMN, cong_dispspec_get_description(ds),
+					    -1);
+		}
+	}
+
+	renderer = gtk_cell_renderer_text_new ();
+
+	column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
+							   "text", DOCTYPELIST_NAME_COLUMN,
+							   NULL);
+
+	/* Add the column to the view. */
+	gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
+
+	column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
+							   "text", DOCTYPELIST_DESCRIPTION_COLUMN,
+							   NULL);
+
+	/* Add the column to the view. */
+	gtk_tree_view_append_column (GTK_TREE_VIEW (list_view), column);
+
+	gtk_widget_show (GTK_WIDGET(list_view));
+
+	gtk_container_add (GTK_CONTAINER( GTK_DIALOG (dialog)->vbox ), 
+			   list_view);
+
+	gtk_dialog_add_button(GTK_DIALOG(dialog),
+			      "gtk-ok",
+			      GTK_RESPONSE_OK);
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+
+	return TRUE;
+}
+
+void test_document_types_wrap(GtkWidget *widget, gpointer data) { test_document_types(widget, 0); }
+
 
 static GtkItemFactoryEntry menu_items[] =
 {
@@ -408,7 +515,8 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/Edit/Paste",            "<control>V", xed_paste_wrap, 0, 0 },
 	{ "/Tests",                 NULL, NULL, 0, "<Branch>" },
 	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
-	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL }
+	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
+	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL }
 };
 
 
@@ -714,7 +822,7 @@ void gui_window_main_make()
 	gtk_widget_show(w2);
 
 #if 1
-        gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+        gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
 
 	gui->global_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(gui->global_tree_store)));
 
@@ -741,7 +849,7 @@ void gui_window_main_make()
 	/* Create a column, associating the "text" attribute of the
 	 * cell_renderer to the first column of the model */
 	column = gtk_tree_view_column_new_with_attributes ("Element", renderer,
-							   "text", TITLE_COLUMN,
+							   "text", TREEVIEW_TITLE_COLUMN,
 							   NULL);
 
 #endif
@@ -873,12 +981,48 @@ int main( int   argc,
 	gtk_init(&argc, &argv);
 #endif
 
+
 	fonts_load();
 	popup_init();
 	
 	gui_window_main_make();
 	gtk_window_set_default_size(GTK_WINDOW(the_gui.window), 400, 460);
 	gtk_widget_show(GTK_WIDGET(the_gui.window));
+
+
+	{
+#if 0
+		gchar*      xds_directory = gnome_program_locate_file(the_gui.gnome_program,
+								      GNOME_FILE_DOMAIN_APP_DATADIR,
+								      "dispspec",
+								      FALSE,
+								      NULL);
+#else
+		gchar* current_dir = g_get_current_dir();
+		gchar* xds_directory = g_strdup_printf("%s/../examples",current_dir);
+		g_free(current_dir);
+#endif
+
+		if (xds_directory) {
+			g_message("Loading xds files from \"%s\"\n", xds_directory);
+			the_globals.ds_registry = cong_dispspec_registry_new(xds_directory);
+
+			g_free(xds_directory);
+
+			if (the_globals.ds_registry==NULL) {
+				return(1);
+			}
+
+			cong_dispspec_registry_dump(the_globals.ds_registry);
+		} else {
+			GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not find its registry of document types.",
+ 								  "You must run the program from the location in which you built it.",
+ 								  "This is a known problem and will be fixed.");
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+			return(1);
+		}
+	}
 
 	curs_init(&the_globals.curs);
 	selection_init(&the_globals.selection);
@@ -893,8 +1037,9 @@ int main( int   argc,
 			   "Welcome to the much-too-early Conglomerate editor.");
 
 	/* --- */
-	
+#if 0	
 	if (argc > 2) open_document_do(argv[1], argv[2]);
+#endif
 	
 	gtk_main();
 

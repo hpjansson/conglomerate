@@ -36,6 +36,9 @@ struct CongDispspec
 	/* New implementation is an "intrusive list" of CongDispspecElement structs */ 
 	CongDispspecElement* first;
 	CongDispspecElement* last;
+
+	gchar* name;
+	gchar* desc;
 };
 
 void cong_dispspec_init(TTREE *ds);
@@ -79,22 +82,26 @@ CongDispspec* cong_dispspec_new_from_ds_file(const char *name)
 }
 
 static CongDispspec* parse_xmldoc(xmlDocPtr doc);
+static void parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node);
 
-CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
+GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds)
 {
-	CongDispspec* ds;
+	char* buffer;
+	GnomeVFSFileSize size;
+	GnomeVFSResult vfs_result;
 
-	xmlDocPtr doc = xmlParseFile(name);
+	g_return_val_if_fail(uri, GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(ds, GNOME_VFS_ERROR_BAD_PARAMETERS);
 
-	if (NULL==doc) {
-		return NULL;
+	vfs_result = cong_vfs_new_buffer_from_uri(uri, &buffer, &size);
+
+	if (vfs_result!=GNOME_VFS_OK) {
+		return vfs_result;
 	}
 
-	ds = parse_xmldoc(doc);
+	*ds = cong_dispspec_new_from_xds_buffer(buffer, size);
 
-	xmlFreeDoc(doc);
-
-	return ds;	
+	return vfs_result;	
 }
 
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size)
@@ -131,10 +138,8 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 				/* g_message("got dispspec\n"); */
 
 				for (cur = xml_dispspec->children; cur; cur=cur->next) {
-				/* Locate the <element-list> tag: */
 					if (0==strcmp(cur->name,"element-list")) {
 						
-
 						xmlNodePtr xml_element;
 						/* g_message("got element-list\n"); */
 
@@ -144,6 +149,8 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 							cong_dispspec_add_element(ds,element);
 						}
 						
+					} else if (0==strcmp(cur->name,"metadata")) {
+						parse_metadata(ds, doc, cur);
 					}
 				}
 			}
@@ -154,6 +161,29 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 }
 
 
+static void
+parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
+{
+	xmlNodePtr xml_element;
+	g_message("got metadata\n");
+	
+	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
+		if (0==strcmp(xml_element->name,"name")) {
+			xmlChar* str = xmlNodeListGetString(doc, xml_element->xmlChildrenNode, 1);
+			if (str) {
+				ds->name = g_strdup(str);
+			}
+		}
+
+		if (0==strcmp(xml_element->name,"description")) {
+			xmlChar* str = xmlNodeListGetString(doc, xml_element->xmlChildrenNode, 1);
+			if (str) {
+				ds->desc = g_strdup(str);
+			}
+		}
+	}
+}
+	
 static void recurse_doc(CongDispspec *ds, xmlNodePtr node);
  
 /*
@@ -253,6 +283,31 @@ TTREE *get_upper_section(TTREE *x)
 #define DS_DEBUG_MSG1(x)    ((void)0)
 #define DS_DEBUG_MSG2(x, a) ((void)0)
 #endif
+
+const gchar*
+cong_dispspec_get_name(const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds,NULL);
+
+	if (ds->name) {
+		return ds->name;
+	} else {
+		return "unnamed";
+	}
+
+}
+
+const gchar*
+cong_dispspec_get_description(const CongDispspec *ds)
+{
+	g_return_val_if_fail(ds,NULL);
+
+	if (ds->desc) {
+		return ds->desc;
+	} else {
+		return "No description available.";
+	}
+}
 
 
 gboolean cong_dispspec_element_structural(CongDispspec *ds, char *name)
@@ -592,7 +647,7 @@ cong_dispspec_ttree_colour_get(TTREE* tt)
   We now use the CongDispspecElement structs, rather than using TTREE data
  */
 CongDispspecElement*
-cong_dispspec_lookup_element(CongDispspec *ds, const char* tagname)
+cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname)
 {
 	CongDispspecElement* element = ds->first;
 
