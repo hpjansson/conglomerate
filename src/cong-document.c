@@ -1,7 +1,13 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <gtk/gtk.h>
 #include "global.h"
+#if !NEW_XML_IMPLEMENTATION
 #include "xml.h"
+#endif
+
+#define TEST_VIEW 1
+
+GtkWidget *cong_test_view_new(CongDocument *doc);
 
 struct _CongDocument
 {
@@ -31,6 +37,15 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	doc->xml_doc = xml_doc;
 	doc->ds = ds;
 	doc->url = g_strdup(url);
+
+	#if TEST_VIEW
+	{
+		GtkWindow *window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+		GtkWidget *test_view = cong_test_view_new(doc);
+		gtk_container_add(GTK_CONTAINER(window), test_view);
+		gtk_widget_show(GTK_WIDGET(window));		
+	}
+	#endif
 
 	return doc;
 }
@@ -119,13 +134,91 @@ cong_document_get_filename(CongDocument *doc)
 void
 cong_document_save(CongDocument *doc, const char* filename)
 {
+#if NEW_XML_IMPLEMENTATION
+	xmlChar* mem;
+	int size;
+
+	GnomeVFSFileSize file_size;
+	GnomeVFSFileSize written_size;
+
+	GnomeVFSURI *file_uri;
+	GnomeVFSResult vfs_result;
+	GnomeVFSHandle* vfs_handle;
+
+#else
 	FILE *xml_f;
+#endif
 
 	g_return_if_fail(doc);
 	g_return_if_fail(filename);
 
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
+	/* Dump to a memory buffer. then write out buffer to GnomeVFS: */
+
+	xmlDocDumpMemory(doc->xml_doc,
+			 &mem,
+			 &size);
+
+	g_assert(mem);
+	g_assert(size>0);
+
+	file_size = size;
+
+	file_uri = gnome_vfs_uri_new(filename);
+
+	vfs_result = gnome_vfs_create_uri(&vfs_handle,
+					  file_uri,
+					  GNOME_VFS_OPEN_WRITE,
+					  FALSE,
+					  0644
+					);
+
+	if (vfs_result != GNOME_VFS_OK) {
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, NULL);
+			
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		gnome_vfs_uri_unref(file_uri);
+
+		return;
+	}
+
+	vfs_result = gnome_vfs_write(vfs_handle,
+				     mem,
+				     file_size,
+				     &written_size);
+
+	if (vfs_result != GNOME_VFS_OK) {
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, &file_size);
+			
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		gnome_vfs_uri_unref(file_uri);
+
+		gnome_vfs_close(vfs_handle);
+
+		return;
+	}
+
+	g_assert(file_size == written_size);
+
+	vfs_result = gnome_vfs_close(vfs_handle);
+
+	if (vfs_result != GNOME_VFS_OK) {
+		GtkDialog* dialog = cong_error_dialog_new_file_save_failed(file_uri, vfs_result, &file_size);
+			
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+
+		gnome_vfs_uri_unref(file_uri);
+
+		return;
+	}
+	
+	gnome_vfs_uri_unref(file_uri);
+
 #else
 	xml_f = fopen(filename, "wt");
 	if (!xml_f) return;
@@ -134,4 +227,3 @@ cong_document_save(CongDocument *doc, const char* filename)
 	fclose(xml_f);
 #endif  /* #if NEW_XML_IMPLEMENTATION */
 }
-
