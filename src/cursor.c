@@ -8,7 +8,7 @@
 #include "global.h"
 #include <string.h>
 
-void curs_on(struct curs* curs)
+void cong_cursor_on(CongCursor *curs)
 {
 	CongFont *font;
 
@@ -24,7 +24,7 @@ void curs_on(struct curs* curs)
 }
 
 
-void curs_off(struct curs* curs)
+void cong_cursor_off(CongCursor *curs)
 {
 	GdkRectangle r;
 	CongFont *font;
@@ -63,7 +63,7 @@ void print_lines(TTREE *l)
 #endif
 
 
-void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y)
+void cong_cursor_place_in_xed(CongCursor *curs, CongXMLEditor *xed, int x, int y)
 {
 	struct pos *pos0, *pos1;
 	UNUSED_VAR(TTREE *l);
@@ -75,7 +75,7 @@ void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y)
 
 	/* Remove from previous location */
 
-	curs_off(curs);
+	cong_cursor_off(curs);
 
 	pos0 = pos_physical_to_logical(xed, x, y);
 	pos1 = pos_logical_to_physical(xed, pos0->node, pos0->c);
@@ -95,11 +95,11 @@ void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y)
 	
 	/* Draw immediately */
 
-	curs_on(curs);
+	cong_cursor_on(curs);
 }
 
 
-void curs_init(struct curs* curs)
+void cong_cursor_init(CongCursor *curs)
 {
 	GdkColor gcol;
 
@@ -114,36 +114,36 @@ void curs_init(struct curs* curs)
 	curs->c = 0;
 #endif
 
-	gtk_timeout_add(500, curs_blink, 0);
-	curs->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-	gdk_gc_copy(curs->gc, cong_gui_get_window(&the_gui)->style->black_gc);
+	gtk_timeout_add(500, cong_cursor_blink, curs);
+	curs->gc = gdk_gc_new(cong_gui_get_a_window()->window);
+	gdk_gc_copy(curs->gc, cong_gui_get_a_window()->style->black_gc);
 	col_to_gcol(&gcol, 0x00ff8c00);
-	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
+	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
 	gdk_gc_set_foreground(curs->gc, &gcol);
 }
 
 
-gint curs_blink(gpointer data)
+gint cong_cursor_blink(gpointer data)
 {
-	struct curs* curs = &the_globals.curs;
+	CongCursor *curs = data;
 
 	if (!curs->w) return(TRUE);
 
 	if (curs->on)
 	{
-		curs_off(curs);
+		cong_cursor_off(curs);
 		curs->on = 0;
 	}
 	else
 	{
-		curs_on(curs);
+		cong_cursor_on(curs);
 		curs->on = 1;
 	}
 	
 	return(TRUE);
 }
 
-gint curs_data_insert(struct curs* curs, char *s)
+gint cong_cursor_data_insert(CongCursor *curs, char *s)
 {
 	CongDocument *doc;
 	int len;
@@ -174,7 +174,7 @@ gint curs_data_insert(struct curs* curs, char *s)
 }
 
 
-int curs_paragraph_insert(struct curs* curs)
+int cong_cursor_paragraph_insert(CongCursor *curs)
 {
         CongNodePtr t;
 #if NEW_XML_IMPLEMENTATION
@@ -209,7 +209,11 @@ int curs_paragraph_insert(struct curs* curs)
 	tagname = cong_dispspec_element_tagname(para);
 #else
 	/* Dodgy hack for now: */
+#if 1
+	tagname = cong_node_name(curs->location.tt_loc->parent);
+#else
 	tagname = "para";
+#endif
 #endif
 
 	/* GREP FOR MVC */
@@ -232,8 +236,8 @@ int curs_paragraph_insert(struct curs* curs)
 	*/
 	new_element = cong_node_new_element(tagname);
 
-	cong_document_node_add_after(doc, new_element, curs->location.tt_loc);
-	cong_document_node_set_parent(doc, t, new_element);
+	cong_document_node_add_after(doc, new_element, t->parent);
+	cong_document_node_set_parent(doc, curs->location.tt_loc, new_element);
 
 	/* FIXME:  
 	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
@@ -258,7 +262,7 @@ int curs_paragraph_insert(struct curs* curs)
 }
 
 
-void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_prev_char(CongCursor *curs, CongXMLEditor *xed)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
@@ -324,7 +328,7 @@ void curs_prev_char(struct curs* curs, CongXMLEditor *xed)
 }
 
 
-void curs_next_char(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_next_char(CongCursor *curs, CongXMLEditor *xed)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
@@ -394,7 +398,7 @@ void curs_next_char(struct curs* curs, CongXMLEditor *xed)
 }
 
 
-void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_prev_line(CongCursor *curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
@@ -432,7 +436,7 @@ void curs_prev_line(struct curs* curs, CongXMLEditor *xed)
 }
 
 
-void curs_next_line(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_next_line(CongCursor *curs, CongXMLEditor *xed)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
@@ -474,7 +478,7 @@ void curs_next_line(struct curs* curs, CongXMLEditor *xed)
 }
 
 
-void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_del_prev_char(CongCursor *curs, CongXMLEditor *xed)
 {
 	CongDocument *doc;
 
@@ -489,7 +493,7 @@ void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 	if (!curs->t) return;
 #endif
 	
-	curs_prev_char(curs,xed);
+	cong_cursor_prev_char(curs,xed);
 
 #if 1
 	cong_location_del_next_char(doc, &curs->location);
@@ -506,7 +510,7 @@ void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed)
 }
 
 
-void curs_del_next_char(struct curs* curs, CongXMLEditor *xed)
+void cong_cursor_del_next_char(CongCursor *curs, CongXMLEditor *xed)
 {
 	CongDocument *doc;
 

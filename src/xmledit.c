@@ -208,8 +208,8 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 	int height;
 	UNUSED_VAR(int width_old)
 
-	struct selection* selection = &the_globals.selection;
-	struct curs* curs = &the_globals.curs;
+	CongSelection *selection = cong_document_get_selection(xed->doc);
+	CongCursor *curs = cong_document_get_cursor(xed->doc);
 
 #if USE_PANGO
 	pango_layout_set_width(xed->pango_layout, 
@@ -322,7 +322,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 				   widget->allocation.width,
 				   widget->allocation.height);
 
-		if (xed == the_globals.curs.xed && cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1))
+		if (xed == curs->xed && cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1))
 		{
 			pos = pos_logical_to_physical_new(xed, &selection->loc0);
 			selection->x0 = pos->x;
@@ -333,7 +333,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 			selection->x1 = pos->x;
 			selection->y1 = pos->y;
 			free(pos);
-			selection_draw(selection, curs);
+			cong_selection_draw(selection, curs);
 		}
 
 		/* Redraw */
@@ -360,6 +360,9 @@ void xed_redraw(CongXMLEditor *xed)
 {
 	UNUSED_VAR(GtkRequisition req)
 	int height;
+
+	CongSelection *selection = cong_document_get_selection(xed->doc);
+	CongCursor *curs = cong_document_get_cursor(xed->doc);
 
 	/* Calculate height */
 	cong_layout_cache_clear(&xed->layout_cache);
@@ -391,7 +394,7 @@ void xed_redraw(CongXMLEditor *xed)
 		
 		/* Redraw */
 
-		selection_draw(&the_globals.selection, &the_globals.curs);
+		cong_selection_draw(selection, curs);
 
 		cong_layout_cache_clear(&xed->layout_cache);
 
@@ -435,29 +438,40 @@ static gint expose_event (GtkWidget *widget, GdkEventExpose *event, CongXMLEdito
 
 static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
 {
+#if 1
+	/* FIXME: get this working again */
+#else
 	GdkCursor* cursor;
 
 	cursor = gdk_cursor_new(GDK_XTERM);
 	gdk_window_set_cursor(cong_gui_get_window(&the_gui)->window, cursor);
 	gdk_cursor_destroy(cursor);
+#endif
 	return(TRUE);
 }
 
 
 static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
 {
-  UNUSED_VAR(GdkCursor* cursor)
-	
+#if 1
+	/* FIXME: get this working again */
+#else
 	gdk_window_set_cursor(cong_gui_get_window(&the_gui)->window, 0);
+#endif
 	return(TRUE);
 }
 
 
 static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXMLEditor *xed)
 {
-	UNUSED_VAR(TTREE *dummy)
-	UNUSED_VAR(TTREE *n)
-	UNUSED_VAR(TTREE *r)
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	g_assert(xed);
+	doc = xed->doc;
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
 	
 	if (event->button == 1)
 	{
@@ -465,13 +479,13 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXML
 		printf("[Click] ");
 #endif
 		fflush(stdout);
-		the_globals.curs.w = widget;
+		cursor->w = widget;
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 
-		curs_place_in_xed(&the_globals.curs, xed, (int) event->x, (int) event->y);
-		selection_start_from_curs(&the_globals.selection, &the_globals.curs);
-		selection_end_from_curs(&the_globals.selection, &the_globals.curs);
+		cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
+		cong_selection_start_from_curs(selection, cursor);
+		cong_selection_end_from_curs(selection, cursor);
 
 		xed_redraw(xed);
 /*		
@@ -482,7 +496,7 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXML
 	else if (event->button == 3)
 	{
 		popup_build(xed);
-		popup_show(cong_gui_get_popup(&the_gui), event);
+		popup_show(the_globals.popup, event);
 		return(TRUE);
 	}
 	
@@ -493,8 +507,16 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXML
 static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor *xed)
 {
 	struct pos *pos;
-	UNUSED_VAR(char *s)
 	int r = FALSE;
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	g_assert(xed);
+	doc = xed->doc;
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+
 
 #ifndef RELEASE		
 	printf("Keyval: %d, State: %d\n", event->keyval, event->state);
@@ -506,43 +528,43 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 	fputs(event->string, stdout);
 #endif
 
-	curs_off(&the_globals.curs);
+	cong_cursor_off(cursor);
 		
 	switch (event->keyval)
 	{
 		case GDK_Up:
-		  curs_prev_line(&the_globals.curs, xed);
+		  cong_cursor_prev_line(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Down:
-		  curs_next_line(&the_globals.curs, xed);
+		  cong_cursor_next_line(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Left:
-		  curs_prev_char(&the_globals.curs, xed);
+		  cong_cursor_prev_char(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Right:
-		  curs_next_char(&the_globals.curs, xed);
+		  cong_cursor_next_char(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_BackSpace:
-		  curs_del_prev_char(&the_globals.curs, xed);
+		  cong_cursor_del_prev_char(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
 		  r = TRUE;
 		  break;
 		case GDK_Delete:
-		  curs_del_next_char(&the_globals.curs, xed);
+		  cong_cursor_del_next_char(cursor, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
@@ -550,7 +572,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 		  break;
 		case GDK_ISO_Enter:
 		case GDK_Return:
-		  curs_paragraph_insert(&the_globals.curs);
+		  cong_cursor_paragraph_insert(cursor);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
@@ -559,19 +581,19 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 		default:
 		
 		  if (event->length && event->string && strlen(event->string))
-					curs_data_insert(&the_globals.curs, event->string);
+					cong_cursor_data_insert(cursor, event->string);
 		  xed_redraw(xed);
 		  break;
 	}
 
-	pos = pos_logical_to_physical_new(xed, &the_globals.curs.location);
-	the_globals.curs.x = pos->x;
-	the_globals.curs.y = pos->y;
-	the_globals.curs.line = pos->line;
+	pos = pos_logical_to_physical_new(xed, &cursor->location);
+	cursor->x = pos->x;
+	cursor->y = pos->y;
+	cursor->line = pos->line;
 	free(pos);
 
-	curs_on(&the_globals.curs);
-	the_globals.curs.on = 0;
+	cong_cursor_on(cursor);
+	cursor->on = 0;
 
 #ifndef RELEASE
 	s = xml_fetch_clean_data(xed->x->parent->parent);
@@ -585,10 +607,19 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 
 static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, CongXMLEditor *xed)
 {
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	g_assert(xed);
+	doc = xed->doc;
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+
 	if (!(event->state & GDK_BUTTON1_MASK)) return(FALSE);
 	
-	curs_place_in_xed(&the_globals.curs, xed, (int) event->x, (int) event->y);
-	selection_end_from_curs(&the_globals.selection, &the_globals.curs);
+	cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
+	cong_selection_end_from_curs(selection, cursor);
 
 	xed_redraw(xed);
 	return(TRUE);
@@ -604,7 +635,7 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 
 		printf("FIXME:  passing NULL for xed ptr to popup_build\n");
 		popup_build(NULL);
-		popup_show(cong_gui_get_popup(&the_gui), bevent);
+		popup_show(the_globals.popup, bevent);
 		return(TRUE);
 	}
 
@@ -614,9 +645,16 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 
 static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
 {
-	CongNodePtr dummy;                                                                 
+	CongNodePtr dummy; 
 	CongDocument *doc;
-	                                                                                
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	g_assert(xed);
+	doc = xed->doc;
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+
 #ifndef RELEASE                                                                 
 	printf("In selection_received_event().\n");                                   
 #endif                                                                          
@@ -648,7 +686,7 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 	 *   dummy->child = 0;                                                             
 	 *   ttree_branch_remove(dummy);                                                   
 	 * */                                                                              
-	xed_paste(the_globals.curs.w, the_globals.curs.xed);                                                  
+	xed_paste(cursor->w, cursor->xed);                                                  
 
 	return(TRUE);  
 
@@ -2107,21 +2145,35 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 
 /* --- Cut/copy/paste --- */
 
-void selection_curs_unset()
+void selection_cursor_unset(CongDocument *doc)
 {
-	the_globals.curs.set = 0;
-	cong_location_nullify(&the_globals.curs.location);
-	cong_location_nullify(&the_globals.selection.loc0);
-	cong_location_nullify(&the_globals.selection.loc1);
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	g_return_if_fail(doc);
+
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+
+	cursor->set = 0;
+	cong_location_nullify(&cursor->location);
+	cong_location_nullify(&selection->loc0);
+	cong_location_nullify(&selection->loc1);
 }
 
-void xed_cutcopy_update(struct curs* curs)
+void xed_cutcopy_update(CongCursor *curs)
 {
 	if (!curs->xed->x)
 	{
+#if 1
+		CongDocument *doc = curs->xed->doc;
+		
+		cong_document_coarse_update(doc);
+#else
 		CongDocument *doc = the_globals.xv->doc;
 		xmlview_destroy(FALSE);
 		the_globals.xv = xmlview_new(doc);
+#endif
 	}
 	else
 	{
@@ -2134,16 +2186,19 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	CongNodePtr t;
 	int replace_xed = 0;
 
-	struct selection* selection = &the_globals.selection;
-	struct curs* curs = &the_globals.curs;
 	CongDocument *doc;
-
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+	CongSelection *selection;
+	CongCursor *curs;
 
 	g_assert(xed_disabled);
 	doc = xed_disabled->doc;
 	g_assert(doc);
+
+	selection = cong_document_get_selection(doc);
+	curs = cong_document_get_cursor(doc);
 	
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
 
@@ -2155,7 +2210,7 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	
-	selection_reparent_all(selection, t);
+	cong_selection_reparent_all(selection, t);
 
 #if NEW_XML_IMPLEMENTATION
 	if (t->prev)
@@ -2186,7 +2241,7 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	the_globals.clipboard = t;
 
-	selection_curs_unset();
+	selection_cursor_unset(doc);
 
 	xed_cutcopy_update(curs);
 
@@ -2201,15 +2256,19 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	CongNodePtr t_next = NULL;
 	int replace_xed = 0;
 
-	struct selection* selection = &the_globals.selection;
-	struct curs* curs = &the_globals.curs;
 	CongDocument *doc;
-
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+	CongSelection *selection;
+	CongCursor *curs;
 
 	g_assert(xed_disabled);
 	doc = xed_disabled->doc;
 	g_assert(doc);
+
+	selection = cong_document_get_selection(doc);
+	curs = cong_document_get_cursor(doc);
+	
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+
 	
 	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
 				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
@@ -2225,7 +2284,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	t = cong_node_new_element("dummy");
 
 	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
-	selection_reparent_all(selection, t);
+	cong_selection_reparent_all(selection, t);
 	the_globals.clipboard = cong_node_recursive_dup(t);
 
 	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
@@ -2270,7 +2329,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	ttree_branch_remove(t);
 #endif
 
-	selection_curs_unset();
+	selection_cursor_unset(doc);
 
 #ifndef RELEASE	
 	if (t0) ttree_fsave(t0->parent->parent->parent, stdout);
@@ -2291,24 +2350,27 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	CongNodePtr clip;
 	CongNodePtr t_next;
 
-	struct selection* selection = &the_globals.selection;
-	struct curs* curs = &the_globals.curs;
-	CongDispspec *ds;
 	CongDocument *doc;
-	
-	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
-
-	ds = curs->xed->displayspec;
+	CongDispspec *ds;
+	CongSelection *selection;
+	CongCursor *curs;
 
 	g_assert(xed_disabled);
 	doc = xed_disabled->doc;
 	g_assert(doc);
 
+	selection = cong_document_get_selection(doc);
+	curs = cong_document_get_cursor(doc);
+	
+	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
+
+	ds = curs->xed->displayspec;
+
 	/* GREP FOR MVC */
 
 	if (!the_globals.clipboard)
 	{
-		selection_import(selection);
+		cong_selection_import(selection, widget);
 		return(TRUE);
 	}
 

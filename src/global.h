@@ -1,9 +1,11 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
-/* #include <sock.h> */
-#include <libgnomevfs/gnome-vfs.h>
 #include <libxml/tree.h>
 #include <gtk/gtk.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
+#include <libgnomevfs/gnome-vfs.h>
+
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
@@ -61,6 +63,13 @@ typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
 typedef struct CongDispspecRegistry CongDispspecRegistry;
 
 typedef struct CongFont CongFont;
+
+typedef struct CongCursor CongCursor;
+typedef struct CongSelection CongSelection;
+typedef struct CongPrimaryWindow CongPrimaryWindow;
+typedef struct CongTreeView CongTreeView;
+typedef struct CongEditorView CongEditorView;
+
 
 #if NEW_XML_IMPLEMENTATION
 typedef xmlNodePtr CongNodePtr;
@@ -204,6 +213,7 @@ void
 cong_document_save(CongDocument *doc, const char* filename);
 
 /* MVC-related methods on the document: */
+void cong_document_coarse_update(CongDocument *doc);
 #if NEW_XML_IMPLEMENTATION
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
@@ -213,8 +223,13 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 #endif
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
 
+
 void cong_document_register_view(CongDocument *doc, CongView *view);
 void cong_document_unregister_view(CongDocument *doc, CongView *view);
+
+/* cursor and selections are now properties of the document: */
+CongCursor* cong_document_get_cursor(CongDocument *doc);
+CongSelection* cong_document_get_selection(CongDocument *doc);
 
 typedef struct CongXMLEditor CongXMLEditor;
 
@@ -427,12 +442,10 @@ struct CongXMLEditor
 #endif
 };
 
-
+#if 0
 struct xview
 {
-	CongDocument *doc;
 	
-	GtkWidget *w;
 #if 1
 #if 0
 	GtkTreeView* treeview; /* the tree view */
@@ -442,6 +455,7 @@ struct xview
 	GtkWidget *tree;
 #endif
 };
+#endif
 
 
 struct pos
@@ -464,7 +478,7 @@ struct pos
 
 
 
-struct curs
+struct CongCursor
 {
 	/* Visual representation */
 	CongXMLEditor *xed;
@@ -481,7 +495,7 @@ struct curs
 };
 
 
-struct selection
+struct CongSelection
 {
 	CongXMLEditor *xed;
 	GdkGC *gc_0, *gc_1, *gc_2, *gc_3;  /* 0 is brightest, 3 is darkest */
@@ -511,36 +525,34 @@ struct CongFont
 	
 };
 
-struct cong_globals
+
+CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
+void cong_primary_window_free(CongPrimaryWindow *primary_window);
+
+CongTreeView *cong_tree_view_new(CongDocument *doc);
+void cong_tree_view_free(CongTreeView *tree_view);
+GtkWidget* cong_tree_view_get_widget(CongTreeView *tree_view);
+GtkTreeStore* cong_tree_view_get_tree_store(CongTreeView *tree_view);
+
+CongEditorView *cong_editor_view_new(CongDocument *doc);
+void cong_editor_view_free(CongEditorView *editor_view);
+GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
+
+struct CongGlobals
 {
-	struct xview *xv;
-	struct curs curs;
-	struct selection selection;
+	GnomeProgram *gnome_program;
+
+	GList *primary_windows;
 
 	CongFont *fonts[CONG_FONT_ROLE_NUM];
 
 	GdkGC *insert_element_gc;
 
-#if 0
-  TTREE *vect_global;
-  TTREE *medias_global;
-  TTREE *class_global;
-  TTREE *users_global;
-  TTREE *user_data;
-  CongXMLEditor *meta_xed;
-#endif
 	CongNodePtr clipboard;
-#if 0
-  TTREE *insert_meta_section_tag;
-
-  char *server, *user, *pass;
-#endif
-
-#if 0
-  guint status_main_ctx;
-#endif
 
 	CongDispspecRegistry* ds_registry;
+
+	GtkWidget *popup;
 
 #if USE_PANGO
 	PangoContext *pango_context;
@@ -549,15 +561,17 @@ struct cong_globals
 #endif
 };
 
-extern struct cong_globals the_globals;
-extern struct cong_gui the_gui;
+extern struct CongGlobals the_globals;
 
 CongFont*
-cong_font_new(const gchar *font_name);
+cong_font_load(const gchar *font_name);
 
 void
 cong_font_delete(CongFont *font);
 
+#if 1
+GtkWidget* cong_gui_get_a_window(void);
+#else
 GtkWidget* cong_gui_get_window(struct cong_gui* gui);
 GtkWidget* cong_gui_get_popup(struct cong_gui* gui);
 void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup);
@@ -566,8 +580,9 @@ GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui);
 GtkTreeView* cong_gui_get_tree_view(struct cong_gui* gui);
 GtkWidget* cong_gui_get_root(struct cong_gui* gui);
 void cong_gui_destroy_tree_store(struct cong_gui* gui);
+#endif
 
-gint curs_blink();
+gint cong_cursor_blink();
 int login();
 int new_document();
 int find_document();
@@ -612,7 +627,7 @@ struct pos *pos_logical_to_physical_new(struct CongXMLEditor *xed, CongLocation 
 CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1);
 CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
 
-CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p);
+CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p);
 CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x);
 CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x);
 char *xml_fetch_clean_data(CongNodePtr x);
@@ -756,30 +771,30 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_xml_editor_redraw(CongXMLEditor *xed);
 
-void curs_init(struct curs* curs);
-void curs_on(struct curs* curs);
-void curs_off(struct curs* curs);
-void curs_place_in_xed(struct curs* curs, CongXMLEditor *xed, int x, int y);
-gint curs_data_insert(struct curs* curs, char *s);
-int curs_paragraph_insert(struct curs* curs);
-void curs_prev_char(struct curs* curs, CongXMLEditor *xed);
-void curs_next_char(struct curs* curs, CongXMLEditor *xed);
-void curs_prev_line(struct curs* curs, CongXMLEditor *xed);
-void curs_next_line(struct curs* curs, CongXMLEditor *xed);
-void curs_del_prev_char(struct curs* curs, CongXMLEditor *xed);
-void curs_del_next_char(struct curs* curs, CongXMLEditor *xed);
+void cong_cursor_init(CongCursor *curs);
+void cong_cursor_on(CongCursor *curs);
+void cong_cursor_off(CongCursor *curs);
+void cong_cursor_place_in_xed(CongCursor *curs, CongXMLEditor *xed, int x, int y);
+gint cong_cursor_data_insert(CongCursor *curs, char *s);
+int cong_cursor_paragraph_insert(CongCursor *curs);
+void cong_cursor_prev_char(CongCursor *curs, CongXMLEditor *xed);
+void cong_cursor_next_char(CongCursor *curs, CongXMLEditor *xed);
+void cong_cursor_prev_line(CongCursor *curs, CongXMLEditor *xed);
+void cong_cursor_next_line(CongCursor *curs, CongXMLEditor *xed);
+void cong_cursor_del_prev_char(CongCursor *curs, CongXMLEditor *xed);
+void cong_cursor_del_next_char(CongCursor *curs, CongXMLEditor *xed);
 
-void selection_init(struct selection* selection);
-void selection_import(struct selection* selection);
-void selection_draw(struct selection* selection, struct curs* curs);
-void selection_start_from_curs(struct selection* selection, struct curs* curs);
-void selection_end_from_curs(struct selection* selection, struct curs* curs);
+void cong_selection_init(CongSelection *selection);
+void cong_selection_import(CongSelection *selection, GtkWidget* widget);
+void cong_selection_draw(CongSelection *selection, CongCursor *curs);
+void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs);
+void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs);
 
 void popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void popup_build(CongXMLEditor *xed);
 void popup_init();
 
-GtkWidget* tpopup_init(CongNodePtr x);
+GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x);
 gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
@@ -804,6 +819,7 @@ struct CongViewClass
 	   Hooks for the various change signals; eventually do this by listening to signals emitted from the document, porting to the standard 
 	   GObject framework
 	*/
+	void (*on_document_coarse_update)(CongView *view);
 	void (*on_document_node_make_orphan)(CongView *view, CongNodePtr node);
 	void (*on_document_node_add_after)(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
 	void (*on_document_node_add_before)(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
@@ -945,3 +961,16 @@ cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds);
 
 void
 cong_dispspec_registry_dump(CongDispspecRegistry* registry);
+
+/* Menu hooks: */
+void open_document_wrap(GtkWidget *widget, gpointer data);
+void save_document_wrap(GtkWidget *widget, gpointer data);
+
+void xed_cut_wrap(GtkWidget *widget, gpointer data);
+void xed_copy_wrap(GtkWidget *widget, gpointer data);
+void xed_paste_wrap(GtkWidget *widget, gpointer data);
+
+void test_open_wrap(GtkWidget *widget, gpointer data);
+void test_error_wrap(GtkWidget *widget, gpointer data);
+void test_document_types_wrap(GtkWidget *widget, gpointer data);
+void test_transform_wrap(GtkWidget *widget, gpointer data);

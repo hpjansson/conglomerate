@@ -2,14 +2,12 @@
 #include <gtk/gtk.h>
 #include "global.h"
 
-#define TEST_VIEW 1
+#define TEST_VIEW 0
 
 GtkWidget *cong_test_view_new(CongDocument *doc);
 
 struct CongDocument
 {
-	char dummy[128];
-
 #if NEW_XML_IMPLEMENTATION
 	xmlDocPtr xml_doc;
 #else
@@ -21,6 +19,14 @@ struct CongDocument
 	gchar *url;
 
 	GList *views; /* a list of CongView* */
+
+	/* cursor and selections are now properties of the document: */
+	CongCursor curs;
+	CongSelection selection;
+
+#if 0
+	gboolean modified; /* has the document been modified since it was last loaded/saved? */
+#endif
 };
 
 #if NEW_XML_IMPLEMENTATION
@@ -46,6 +52,21 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	}
 	#endif
 
+	cong_cursor_init(&doc->curs);
+	cong_selection_init(&doc->selection);
+
+	doc->curs.set = 0;
+	doc->curs.xed = 0;
+	doc->curs.w = 0;
+	doc->selection.xed = 0;
+
+#if 1
+	cong_location_nullify(&doc->selection.loc0);
+	cong_location_nullify(&doc->selection.loc1);
+#else
+	doc->selection.t0 = doc->selection.t1 = 0;
+#endif
+
 	return doc;
 }
 #else
@@ -56,11 +77,26 @@ cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds, const gchar *url)
 
 	g_return_val_if_fail(tt!=NULL, NULL);
 
-	doc = g_new(struct CongDocument,1);
+	doc = g_new0(struct CongDocument,1);
 
 	doc->tt = tt;
 	doc->ds = ds;
 	doc->url = g_strdup(url);
+
+	cong_cursor_init(&doc->curs);
+	cong_selection_init(&doc->selection);
+
+	doc->curs.set = 0;
+	doc->curs.xed = 0;
+	doc->curs.w = 0;
+	doc->selection.xed = 0;
+
+#if 1
+	cong_location_nullify(&doc->selection.loc0);
+	cong_location_nullify(&doc->selection.loc1);
+#else
+	doc->selection.t0 = doc->selection.t1 = 0;
+#endif
 
 	return doc;
 }
@@ -227,8 +263,30 @@ cong_document_save(CongDocument *doc, const char* filename)
 #endif  /* #if NEW_XML_IMPLEMENTATION */
 }
 
-#if NEW_XML_IMPLEMENTATION
 #define DEBUG_MVC 1
+
+void cong_document_coarse_update(CongDocument *doc)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+
+	#if DEBUG_MVC
+	g_message("cong_document_coarse_update\n");
+	#endif
+
+	doc->curs.w = NULL; /* should this be part of the editor_view ? */
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		view->klass->on_document_coarse_update(view);
+	}
+}
+
+#if NEW_XML_IMPLEMENTATION
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 	GList *iter;
@@ -369,7 +427,7 @@ void cong_document_register_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
 
-	doc->views = g_list_prepend(doc->views,view);
+	doc->views = g_list_prepend(doc->views, view);
 }
 
 void cong_document_unregister_view(CongDocument *doc, CongView *view)
@@ -377,7 +435,20 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(doc);
 	g_return_if_fail(view);
 
-	g_assert(0); /* FIXME:  unwritten */
+	doc->views = g_list_remove(doc->views, view); 
 }
 
 
+CongCursor* cong_document_get_cursor(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	return &doc->curs;
+}
+
+CongSelection* cong_document_get_selection(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	return &doc->selection;
+}

@@ -7,7 +7,7 @@
 
 #include "global.h"
 
-void selection_start_from_curs(struct selection* selection, struct curs* curs)
+void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs)
 {
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
@@ -21,7 +21,7 @@ void selection_start_from_curs(struct selection* selection, struct curs* curs)
 }
 
 
-void selection_end_from_curs(struct selection* selection, struct curs* curs)
+void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs)
 {
 	g_assert(selection!=NULL);
 	g_assert(curs!=NULL);
@@ -32,7 +32,7 @@ void selection_end_from_curs(struct selection* selection, struct curs* curs)
 }
 
 
-void selection_draw(struct selection* selection, struct curs* curs)
+void cong_selection_draw(CongSelection *selection, CongCursor *curs)
 {
 	int x0, y0, x1, y1;
 	GdkGC *gc;
@@ -356,7 +356,7 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
   The selection is extracted (splitting text nodes at the front and rear if necessary), and then reparented below the second
   node, which is inserted into the position formerly occupied by the selection.
  */
-CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
+CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 {
 	CongLocation loc0, loc1;
 	CongNodePtr n0, n1, n2;
@@ -567,14 +567,14 @@ CongNodePtr selection_reparent_all(struct selection* selection, CongNodePtr p)
 	}
 }
 
-void selection_init(struct selection* selection)
+void cong_selection_init(CongSelection *selection)
 {
 	GdkColor gcol;
 	GtkWidget* window;
 
 	g_assert(selection!=NULL);
 
-	window = cong_gui_get_window(&the_gui);
+	window = cong_gui_get_a_window();
 	
 	selection->gc_0 = gdk_gc_new(window->window);
 	gdk_gc_copy(selection->gc_0, window->style->white_gc);
@@ -611,26 +611,19 @@ void gtk_selection_add_handler(GtkWidget            *widget,
 }
 
 
-void selection_import(struct selection* selection)
+void cong_selection_import(CongSelection *selection, GtkWidget* widget)
 {
-
-	gtk_selection_convert(the_globals.curs.xed->w, GDK_SELECTION_PRIMARY,
-												gdk_atom_intern("STRING", FALSE), GDK_CURRENT_TIME);
+	gtk_selection_convert(widget, GDK_SELECTION_PRIMARY,
+			      gdk_atom_intern("STRING", FALSE), GDK_CURRENT_TIME);
 
 #ifndef RELEASE	
-	printf("In selection_import().\n");
+	printf("In cong_selection_import().\n");
 #endif
 	
-#if 0	
-	gint gtk_selection_convert(GtkWidget *widget,
-														 GdkAtom    selection,
-														 GdkAtom    target,
-														 guint32    time);
-#endif
 }
 
 
-void selection_claim(struct selection* selection)
+void cong_selection_claim(CongSelection *selection)
 {
 
 #if 0	

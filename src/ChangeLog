@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-01 David Malcolm
+
+	* Makefile.am, cong-document.c, cursor.c, dispspec.c, global.h, main.c, new_doc.c, open.c, popup.c, save.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c
+
+	Big SDI reorganisation
+
+	* cong-primary-window.c, cong-tree-view.c, tests.c, cong-font.c
+
+	New files
+	
 2002-10-30 David Malcolm
 
 	* xmlload.c

@@ -4,6 +4,8 @@
 #include "global.h"
 #include <string.h>
 
+#if 0
+
 GtkWidget *newdoc;
 
 int capsula_mode = 0;
@@ -110,3 +112,4 @@ int gui_window_new_document_make()
 	gtk_widget_show(newdoc);
 	return(1);
 }
+#endif

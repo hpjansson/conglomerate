@@ -2,9 +2,6 @@
 
 #include <stdlib.h>
 
-/* Was using GTK_ENABLE_BROKEN to port over from old GtkTree to new GtkTreeView code */
-/* #define GTK_ENABLE_BROKEN */
-
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include "global.h"
@@ -16,6 +13,15 @@ GtkStyle *style_white;
 #if 0
 #include <eel/eel-gdk-extensions.h>
 #endif
+
+#define CONG_EDITOR_VIEW(x) ((CongEditorView*)(x))
+
+struct CongEditorView
+{
+	CongView view;
+	GtkWidget *root;
+	GtkWidget *inner;
+};
 
 /* Avoid introducing an eel dependency for now by copying the code from eel-gdk-extensions.c and making the functions static: */
 static guint32
@@ -88,7 +94,7 @@ void draw_blended_line(GtkWidget *w,
 
 		blend_col(&blended_col, col, &white, proportion);
 
-		gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &blended_col, FALSE, TRUE);
+		gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &blended_col, FALSE, TRUE);
 
 		gdk_gc_set_foreground(gc,&blended_col);
 
@@ -936,94 +942,16 @@ GtkWidget *xv_element_new(CongDocument *doc,
 			  CongNodePtr x, 
 			  CongDispspec *ds, 
 			  GtkWidget *root, 
-			  int collapsed, 
-			  GtkTreeStore* store, 
-			  GtkTreeIter* parent_iter)
+			  int collapsed)
 {
-	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
-	UNUSED_VAR(GdkGCValues     gc_values)
-
 	CongNodePtr x_orig;
-	UNUSED_VAR(TTREE *n0)
-	UNUSED_VAR(TTREE *n1)
-	UNUSED_VAR(GtkWidget *frame)
 	GtkWidget *sub = NULL, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
-	UNUSED_VAR(CongXMLEditor *xed)
-	UNUSED_VAR(unsigned int col)
-	UNUSED_VAR(int i)
-
-	GtkTreeIter new_tree_iter;
 
 	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
       	
-#if 1
-	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
-
-	gtk_tree_store_set (store, &new_tree_iter,
-			    TREEVIEW_TITLE_COLUMN, cong_dispspec_get_section_header_text(ds, x),
-			    TREEVIEW_NODE_COLUMN, x,
-			    TREEVIEW_DOC_COLUMN, doc,
-			    -1);
-
-	if (element) {
-#if NEW_LOOK
-		const GdkColor *col = cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_TEXT);
-		/* We hope this will contrast well against white */
-#else
-		const GdkColor *col = cong_dispspec_element_col(element);
-#endif
-
-		gchar *col_string = get_col_string(col);
-
-		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_FOREGROUND_COLOR_COLUMN, col_string,
-				    -1);
-
-		g_free(col_string);
-
-		/* Experimental attempt to show background colour; looks ugly */
-#if 0 /* NEW_LOOK */
-		col_string = get_col_string( cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND) );
-		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_BACKGROUND_COLOR_COLUMN, col_string,
-				    -1);
-
-		g_free(col_string);
-#endif
-
-	} else {
-		/* Use red for "tag not found" errors: */ 
-		gtk_tree_store_set (store, &new_tree_iter,
-				    TREEVIEW_FOREGROUND_COLOR_COLUMN, "#ff0000", 
-				    -1);
-	}
-
-
-	/* FIXME:  this will fail to update when the text is edited */
-#else
-	glaebb_tree = 0;
-
-	glaebb_item = gtk_tree_item_new_with_label();
-	gtk_tree_append(GTK_TREE(tree_parent), glaebb_item);
-	tpopup_init(glaebb_item, x);
-
-	gtk_widget_show(glaebb_item);
-#endif
-
-#if 0
-	frame = gtk_event_box_new();
-	gtk_widget_show(frame);
-#endif
-
-
 	x_orig = x;
-#if 0	
-	gtk_container_add(GTK_CONTAINER(frame), root);
-#endif
-	
 	
 	xv_style_r(root, style_white);
-
 
 	x = cong_node_first_child(x);
 	if (!x) return(0);
@@ -1041,28 +969,13 @@ GtkWidget *xv_element_new(CongDocument *doc,
 			{
 				if (cong_dispspec_element_collapse(ds, name))
 				{
-#if 0
-					if (!glaebb_tree)
-					{
-						glaebb_tree = gtk_tree_new();
-						gtk_tree_item_set_subtree(GTK_TREE_ITEM(glaebb_item), glaebb_tree);
-					}
-#endif
-					
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
-					sub = xv_element_new(doc, x, ds, root, 1, store, &new_tree_iter);
+					sub = xv_element_new(doc, x, ds, root, 1);
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
 				}
 				else
 				{
 					/* New structural element */
-#if 0					
-					if (!glaebb_tree)
-					{
-						glaebb_tree = gtk_tree_new();
-						gtk_tree_item_set_subtree(GTK_TREE_ITEM(glaebb_item), glaebb_tree);
-					}
-#endif
 					
 					hbox = gtk_hbox_new(FALSE, 0);
 					gtk_widget_show(hbox);
@@ -1072,7 +985,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 					xv_style_r(hbox, style_white);
 					poot = xv_section_head(ds, x);
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
-					sub = xv_element_new(doc, x, ds, poot, 0, store, &new_tree_iter);
+					sub = xv_element_new(doc, x, ds, poot, 0);
 
 
 					sub = xv_section_tail(ds, x);
@@ -1081,7 +994,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				}
 			}
 			else if (cong_dispspec_element_span(ds, name) ||
-							 cong_dispspec_element_insert(ds, name))
+				 cong_dispspec_element_insert(ds, name))
 			{
 				/* New editor window */
 				
@@ -1143,53 +1056,25 @@ GtkWidget *xv_element_new(CongDocument *doc,
 	}
 
 	xv_style_r(sub, style_white);
-#if 1
-	/* g_message("removed call to gtk_tree_item_expand\n"); */
-#else
-	gtk_tree_item_expand(GTK_TREE_ITEM(glaebb_item));
-#endif
 	return(root);
 
 }
 
-struct xview *xmlview_new(CongDocument *doc)
+void cong_editor_populate_ui(CongEditorView *editor_view)
 {
-	struct xview *xv;
 	GdkColor gcol;
-	GtkWidget *w; /* , *glaebb_tree; */
+	GtkWidget *w;
 	int i;
 	CongNodePtr x;
 
+	CongDocument *doc;
 	CongDispspec *displayspec;
 
-	gchar* filename;
-
-	GtkTreeIter root_iter;
-
-	g_message("xmlview_new called\n");
-
-	g_return_val_if_fail(doc, NULL);
+	g_return_if_fail(editor_view);
 	
+	doc = editor_view->view.doc;
 	displayspec = cong_document_get_dispspec(doc);
-	
-	the_globals.curs.set = 0;
-	the_globals.curs.xed = 0;
-	the_globals.curs.w = 0;
-	the_globals.selection.xed = 0;
-
-#if 1
-	cong_location_nullify(&the_globals.selection.loc0);
-	cong_location_nullify(&the_globals.selection.loc1);
-#else
-	the_globals.selection.t0 = the_globals.selection.t1 = 0;
-#endif
-	
-	xv = malloc(sizeof(*xv));
-	memset(xv, 0, sizeof(*xv));
-
-
-	xv->doc = doc;
-
+		
 	gcol.blue = 0xffff;
 	gcol.green = 0xffff;
 	gcol.red = 0xffff;
@@ -1197,35 +1082,17 @@ struct xview *xmlview_new(CongDocument *doc)
 	style_white = gtk_widget_get_default_style();
 	style_white = gtk_style_copy(style_white);
 
-	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
+	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
 
 	for (i = 0; i < 5; i++) style_white->bg[i] = gcol;
 
-	filename = cong_document_get_filename(doc);
 
-	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
-	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
-			    TREEVIEW_TITLE_COLUMN, filename,
-			    TREEVIEW_NODE_COLUMN, cong_document_get_root(doc),
-			    TREEVIEW_DOC_COLUMN, doc,
-			    /* TREEVIEW_COLOR_COLUMN, g_strdup_printf("#305050"), */
-			    -1);
-	/* FIXME: What colour should the Document node be? */
+	editor_view->inner = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(editor_view->inner);
 
-	g_free(filename);
+	gtk_box_pack_start(GTK_BOX(editor_view->root), editor_view->inner, FALSE, FALSE, 0);
 
-	xv->w = gtk_vbox_new(FALSE, 0);
-#if 1
-	gtk_widget_show(xv->w);
-#endif
-
-#if 1
-	/* Don't ignore root element: */
 	x = cong_document_get_root(doc);
-#else	
-	/* Ignore root element: */
-	x = cong_node_first_child(cong_document_get_root(doc));
-#endif
 
 	for ( ; x; x = cong_node_next(x))
 	{
@@ -1240,9 +1107,9 @@ struct xview *xmlview_new(CongDocument *doc)
 			/* New element */
 			GtkWidget* head = xv_section_head(displayspec, x);
 
-			gtk_box_pack_start(GTK_BOX(xv->w), head, TRUE, TRUE, 0);
+			gtk_box_pack_start(GTK_BOX(editor_view->inner), head, TRUE, TRUE, 0);
 			
-			xv_element_new(doc, x, displayspec, head, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
+			xv_element_new(doc, x, displayspec, head, 0);
 
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);
@@ -1250,20 +1117,15 @@ struct xview *xmlview_new(CongDocument *doc)
 		}
 	}
 
-
-#if 1
-	printf("removed call to gtk_tree_item_expand\n");
-#else
-	gtk_tree_item_expand(GTK_TREE_ITEM(xv->tree));
-#endif
+	gtk_widget_show_all(editor_view->inner);
 	
-	gtk_widget_show_all(xv->w);
-	
-	return(xv);
 }
 
 void xmlview_destroy(int free_xml)
 {
+#if 1
+	g_assert(0);
+#else
 	if (!the_globals.xv) return;
 
  	cong_gui_destroy_tree_store(&the_gui);
@@ -1279,4 +1141,154 @@ void xmlview_destroy(int free_xml)
 	
 	free(the_globals.xv);
 	the_globals.xv = 0;
+#endif
+}
+
+/* Prototypes of the handler functions: */
+static void on_document_coarse_update(CongView *view);
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+
+#define DEBUG_EDITOR_VIEW 1
+
+/* Definitions of the handler functions: */
+static void on_document_coarse_update(CongView *view)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_coarse_update\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+	gtk_widget_destroy(editor_view->inner);
+	
+	cong_editor_populate_ui(editor_view);
+}
+
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_node_make_orphan\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+}
+
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(older_sibling);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_node_add_after\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+}
+
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(younger_sibling);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_node_add_before\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+}
+
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(adoptive_parent);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_node_set_parent\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+}
+
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+{
+	CongEditorView *editor_view;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_EDITOR_VIEW
+	g_message("CongEditorView - on_document_node_set_text\n");
+	#endif
+
+	editor_view = CONG_EDITOR_VIEW(view);
+
+}
+
+
+
+CongEditorView *cong_editor_view_new(CongDocument *doc)
+{
+	CongEditorView *editor_view;
+	g_return_val_if_fail(doc, NULL);
+
+	editor_view = g_new0(CongEditorView, 1);
+
+	editor_view->view.doc = doc;
+	editor_view->view.klass = g_new0(CongViewClass,1);
+	editor_view->view.klass->on_document_coarse_update = on_document_coarse_update;
+	editor_view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
+	editor_view->view.klass->on_document_node_add_after = on_document_node_add_after;
+	editor_view->view.klass->on_document_node_add_before = on_document_node_add_before;
+	editor_view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
+	editor_view->view.klass->on_document_node_set_text = on_document_node_set_text;
+
+	cong_document_register_view( doc, CONG_VIEW(editor_view) );
+
+	editor_view->root = gtk_vbox_new(FALSE, 1);
+
+	cong_editor_populate_ui(editor_view);
+	gtk_widget_show(editor_view->root);
+
+	return editor_view;
+}
+
+void cong_editor_view_free(CongEditorView *editor_view)
+{
+	cong_document_unregister_view( editor_view->view.doc, CONG_VIEW(editor_view) );
+
+	g_assert(0); /* unwritten */
+}
+
+GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view)
+{
+	g_return_val_if_fail(editor_view,NULL);
+
+	return editor_view->root;
 }

@@ -114,7 +114,7 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 
 		for (i=0; i<CONG_DISPSPEC_GC_USAGE_NUM; i++) {
 			GdkColor this_col;
-			GdkGC *gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+			GdkGC *gc = gdk_gc_new(cong_gui_get_a_window()->window);
 
 #if 1
 			get_col(&this_col, &gdk_col, i);
@@ -146,8 +146,8 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 
 			element->col_array[i] = this_col;
 			element->gc_array[i] = gc;
-			gdk_gc_copy(gc, cong_gui_get_window(&the_gui)->style->white_gc);
-			gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &this_col, FALSE, TRUE);
+			gdk_gc_copy(gc, cong_gui_get_a_window()->style->white_gc);
+			gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &this_col, FALSE, TRUE);
 			gdk_gc_set_foreground(gc, &this_col);
 		}
 	}
@@ -155,9 +155,9 @@ static void cong_dispspec_element_init_col(CongDispspecElement* element, unsigne
 	col_to_gcol(&element->col, col);
 
 	/* We don't make any attempt to share GCs between different elements for now */
-	element->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
-	gdk_gc_copy(element->gc, cong_gui_get_window(&the_gui)->style->white_gc);
-	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &element->col, FALSE, TRUE);
+	element->gc = gdk_gc_new(cong_gui_get_a_window()->window);
+	gdk_gc_copy(element->gc, cong_gui_get_a_window()->style->white_gc);
+	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &element->col, FALSE, TRUE);
 	gdk_gc_set_foreground(element->gc, &element->col);
 #endif	
 }
