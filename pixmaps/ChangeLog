@@ -1,3 +1,9 @@
+2003-06-26  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am
+	Remove ChangeLog from the EXTRA_DIST, it goes by default in the
+	tarbal. Now the ChangeLog wouldn't be installed.
+
 2003-06-25  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am

@@ -1,5 +1,6 @@
 pixmapdir = $(datadir)/pixmaps
-pixmap_DATA = cong-docbook-set-16.png \
+pixmap_DATA = conglomerate-icon-16.png \
+	cong-docbook-set-16.png \
 	cong-docbook-book-16.png \
 	cong-docbook-article-16.png \
 	cong-metadata-16.png \
@@ -26,7 +27,6 @@ pixmap_DATA = cong-docbook-set-16.png \
 	cong-numbered-list-16.png \
 	cong-list-item-16.png \
 	cong-definition-list-16.png \
-	cong-code-fragment-16.png \
-	ChangeLog
+	cong-code-fragment-16.png
 
 EXTRA_DIST = $(pixmap_DATA)
