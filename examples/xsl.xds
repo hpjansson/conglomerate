@@ -2,17 +2,17 @@
 <dispspec>
 
 	<metadata>
-		<name language="en">XSL stylesheet</name>
-		<description language="en">An XSL stylesheet describes a way of transforming a document of one type into one in another form.   For example, it might describe a way of converting DocBook files into HTML web pages.</description>
+		<name xml:lang="en">XSL stylesheet</name>
+		<description xml:lang="en">An XSL stylesheet describes a way of transforming a document of one type into one in another form.   For example, it might describe a way of converting DocBook files into HTML web pages.</description>
 	</metadata>
 	<document-models/>
 	<element-list>
 		<element tag="stylesheet" type="structural" color="a0b0c0">
-			<name language="en">Stylesheet</name>
+			<name xml:lang="en">Stylesheet</name>
 		</element>
 
 		<element tag="template" type="plugin" plugin-id="xsl-template">
-			<name language="en">Template-matching Rule</name>
+			<name xml:lang="en">Template-matching Rule</name>
 		</element>
 
 	</element-list>

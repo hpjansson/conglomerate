@@ -2,8 +2,8 @@
 <!DOCTYPE dispspec SYSTEM "xds.dtd">
 <dispspec>
   <metadata>
-    <name language="en">Apache Documentation DTD v1.2</name>
-    <description language="en">This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://xml.apache.org/forrest .</description>
+    <name xml:lang="en">Apache Documentation DTD v1.2</name>
+    <description xml:lang="en">This DTD was developed to create a simple yet powerful document type for software documentation for use with the Apache projects. It is an XML-compliant DTD and it's maintained by the Apache XML project. See http://xml.apache.org/forrest .</description>
   </metadata>
   <document-models>
     <external-document-model
@@ -13,147 +13,147 @@
   </document-models>
   <element-list>
     <element tag="abstract" type="structural" icon="cong-summary">
-      <name language="en">Abstract</name>
+      <name xml:lang="en">Abstract</name>
     </element>
     <element tag="acronym" type="span">
-      <name language="en">Acronym</name>
+      <name xml:lang="en">Acronym</name>
     </element>
     <element tag="anchor" type="span">
-      <name language="en">Anchor</name>
+      <name xml:lang="en">Anchor</name>
     </element>
     <element tag="authors" type="structural" icon="cong-author">
-      <name language="en">Authors</name>
+      <name xml:lang="en">Authors</name>
     </element>
     <element tag="body" type="structural" icon="cong-wrapper">
-      <name language="en">Document body</name>
+      <name xml:lang="en">Document body</name>
     </element>
     <element tag="br" type="span">
-      <name language="en">Line break</name>
+      <name xml:lang="en">Line break</name>
     </element>
     <element tag="caption" type="span">
-      <name language="en">Caption</name>
+      <name xml:lang="en">Caption</name>
     </element>
     <element tag="code" type="span">
-      <name language="en">Code</name>
+      <name xml:lang="en">Code</name>
     </element>
     <element tag="dd" type="span">
-      <name language="en">Definition</name>
+      <name xml:lang="en">Definition</name>
     </element>
     <element tag="dl" type="structural" icon="cong-definition-list">
-      <name language="en">Definition list</name>
+      <name xml:lang="en">Definition list</name>
     </element>
     <element tag="document" type="structural" icon="cong-docbook-book">
-      <name language="en">Document</name>
+      <name xml:lang="en">Document</name>
       <header-info xpath="header/title"/>
     </element>
     <element tag="dt" type="span">
-      <name language="en">Defined term</name>
+      <name xml:lang="en">Defined term</name>
     </element>
     <element tag="em" type="span">
-      <name language="en">Emphasis</name>
+      <name xml:lang="en">Emphasis</name>
     </element>
     <element tag="figure" type="structural">
-      <name language="en">Figure</name>
+      <name xml:lang="en">Figure</name>
     </element>
     <element tag="fixme" type="structural">
-      <name language="en">Fixme</name>
+      <name xml:lang="en">Fixme</name>
     </element>
     <element tag="footer" type="structural" icon="cong-footnote">
-      <name language="en">Footer</name>
+      <name xml:lang="en">Footer</name>
     </element>
     <element tag="fork" type="span">
-      <name language="en">Fork</name>
+      <name xml:lang="en">Fork</name>
     </element>
     <element tag="header" type="structural">
-      <name language="en">Header</name>
+      <name xml:lang="en">Header</name>
     </element>
     <element tag="icon" type="structural">
-      <name language="en">Icon</name>
+      <name xml:lang="en">Icon</name>
     </element>
 <!-- <element tag="img" type="embed-external-file" filename-attribute="src"> -->
     <element tag="img" type="structural">
-      <name language="en">Img</name>
+      <name xml:lang="en">Img</name>
       <header-info xpath="@src"/>
     </element>
     <element tag="introduction" type="structural">
-      <name language="en">Introduction</name>
+      <name xml:lang="en">Introduction</name>
     </element>
     <element tag="jump" type="span">
-      <name language="en">Jump</name>
+      <name xml:lang="en">Jump</name>
     </element>
     <element tag="legal" type="structural">
-      <name language="en">Legal info</name>
+      <name xml:lang="en">Legal info</name>
     </element>
     <element tag="link" type="span">
-      <name language="en">Link</name>
+      <name xml:lang="en">Link</name>
     </element>
     <element tag="li" type="structural">
-      <name language="en">List item</name>
+      <name xml:lang="en">List item</name>
       <header-info xpath="count(preceding-sibling::li)+1"/>
     </element>
     <element tag="note" type="structural">
-      <name language="en">Note</name>
+      <name xml:lang="en">Note</name>
     </element>
     <element tag="notice" type="structural">
-      <name language="en">Notice</name>
+      <name xml:lang="en">Notice</name>
     </element>
     <element tag="ol" type="structural">
-      <name language="en">List (ordered)</name>
+      <name xml:lang="en">List (ordered)</name>
     </element>
     <element tag="person" type="structural" icon="cong-name">
-      <name language="en">Person</name>
+      <name xml:lang="en">Person</name>
       <header-info xpath="@name"/>
     </element>
     <element tag="p" type="structural" icon="cong-paragraph">
-      <name language="en">Paragraph</name>
+      <name xml:lang="en">Paragraph</name>
     </element>
     <element tag="section" type="structural" icon="cong-subsection">
-      <name language="en">Section</name>
+      <name xml:lang="en">Section</name>
       <header-info xpath="title"/>
     </element>
     <element tag="source" type="span">
-      <name language="en">Source</name>
+      <name xml:lang="en">Source</name>
     </element>
     <element tag="strong" type="span">
-      <name language="en">Strong</name>
+      <name xml:lang="en">Strong</name>
     </element>
     <element tag="subtitle" type="span">
-      <name language="en">Subtitle</name>
+      <name xml:lang="en">Subtitle</name>
     </element>
     <element tag="sub" type="span">
-      <name language="en">Subscript</name>
+      <name xml:lang="en">Subscript</name>
     </element>
     <element tag="sup" type="span">
-      <name language="en">Superscript</name>
+      <name xml:lang="en">Superscript</name>
     </element>
     <element tag="table" type="structural">
-      <name language="en">Table</name>
+      <name xml:lang="en">Table</name>
     </element>
     <element tag="td" type="structural">
-      <name language="en">Table cell</name>
+      <name xml:lang="en">Table cell</name>
     </element>
     <element tag="th" type="span">
-      <name language="en">Table header cell</name>
+      <name xml:lang="en">Table header cell</name>
     </element>
     <element tag="title" type="span">
-      <name language="en">Title</name>
+      <name xml:lang="en">Title</name>
     </element>
     <element tag="tr" type="structural">
-      <name language="en">Table row</name>
+      <name xml:lang="en">Table row</name>
       <header-info xpath="count(preceding-sibling::tr)+1"/>
     </element>
     <element tag="type" type="span">
-      <name language="en">Type</name>
+      <name xml:lang="en">Type</name>
     </element>
     <element tag="ul" type="structural" icon="cong-bulleted-list">
-      <name language="en">List (unordered)</name>
+      <name xml:lang="en">List (unordered)</name>
       <header-info xpath="concat(count(*), ' items')"/>
     </element>
     <element tag="version" type="span">
-      <name language="en">Version</name>
+      <name xml:lang="en">Version</name>
     </element>
     <element tag="warning" type="plugin" plugin-id="admonition">
-      <name language="en">Warning</name>
+      <name xml:lang="en">Warning</name>
     </element>
   </element-list>
 </dispspec>

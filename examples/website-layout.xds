@@ -3,8 +3,8 @@
 <dispspec>
 
 	<metadata>
-		<name language="en">Website Layout</name>
-		<description language="en"></description>
+		<name xml:lang="en">Website Layout</name>
+		<description xml:lang="en"></description>
 	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
@@ -13,46 +13,46 @@
 	<element-list>
 			
 		<element tag="layout" type="structural" color="a0b0c0">
-			<name language="en">Website Layout</name>
+			<name xml:lang="en">Website Layout</name>
 		</element>
 
 		<element tag="config" type="structural" color="a0b0c0">
-			<name language="en">Configuration Data</name>
+			<name xml:lang="en">Configuration Data</name>
 			<!-- Really need a new element type for this... -->
 		</element>
 
 		<element tag="copyright" type="structural" color="a0b0c0">
-			<name language="en">Copyright</name>
+			<name xml:lang="en">Copyright</name>
 		</element>
 
 		<element tag="year" type="structural" color="a0b0c0">
-			<name language="en">Year</name>
+			<name xml:lang="en">Year</name>
 		</element>
 
 		<element tag="holder" type="structural" color="a0b0c0">
-			<name language="en">Holder</name>
+			<name xml:lang="en">Holder</name>
 		</element>
 
 		<element tag="headlink" type="structural" color="a0b0c0">
-			<name language="en">Header Link</name>
+			<name xml:lang="en">Header Link</name>
 		</element>
 
 		<element tag="style" type="structural" color="a0b0c0">
-			<name language="en">Stylesheet</name>
+			<name xml:lang="en">Stylesheet</name>
 		</element>
 
 		<element tag="toc" type="structural" color="a0b0c0">
-			<name language="en">Table of Contents</name>
+			<name xml:lang="en">Table of Contents</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="tocentry" type="structural" color="a0b0c0">
-			<name language="en">Content</name>
+			<name xml:lang="en">Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
 		<element tag="notoc" type="structural" color="a0b0c0">
-			<name language="en">Additional Content</name>
+			<name xml:lang="en">Additional Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 

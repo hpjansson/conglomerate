@@ -3,8 +3,8 @@
 <dispspec>
 
 	<metadata>
-		<name language="en">Webpage</name>
-		<description language="en"></description>
+		<name xml:lang="en">Webpage</name>
+		<description xml:lang="en"></description>
 	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
@@ -14,76 +14,76 @@
 			
 		<!-- The high-level divisions -->
 		<element tag="webpage" type="structural" color="a0b0c0">
-			<name language="en">Web Page</name>
+			<name xml:lang="en">Web Page</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0">
-			<name language="en">Title</name>
+			<name xml:lang="en">Title</name>
 		</element>
 		<element tag="subtitle" type="structural" color="a0b0c0">
-			<name language="en">Subtitle</name>
+			<name xml:lang="en">Subtitle</name>
 		</element>
 		<element tag="authorgroup" type="structural" color="a0b0c0">
-			<name language="en">Authorship Information</name>
+			<name xml:lang="en">Authorship Information</name>
 		</element>
 		<element tag="author" type="structural" color="a0b0c0">
-			<name language="en">Author</name>
+			<name xml:lang="en">Author</name>
 		</element>
 		<element tag="editor" type="structural" color="a0b0c0">
-			<name language="en">Editor</name>
+			<name xml:lang="en">Editor</name>
 		</element>
 		<element tag="publisher" type="structural" color="a0b0c0">
-			<name language="en">Publisher</name>
+			<name xml:lang="en">Publisher</name>
 		</element>
 		<element tag="publishername" type="structural" color="a0b0c0">
-			<name language="en">Publisher Name</name>
+			<name xml:lang="en">Publisher Name</name>
 		</element>
 		<element tag="address" type="structural" color="a0b0c0">
-			<name language="en">Address</name>
+			<name xml:lang="en">Address</name>
 		</element>
 		<element tag="printhistory" type="structural" color="a0b0c0">
-			<name language="en">Printing History</name>
+			<name xml:lang="en">Printing History</name>
 		</element>
 		<element tag="isbn" type="structural" color="a0b0c0">
-			<name language="en">ISBN</name>
-			<short-desc language="en">The International Standard Book Number of a document.</short-desc>
+			<name xml:lang="en">ISBN</name>
+			<short-desc xml:lang="en">The International Standard Book Number of a document.</short-desc>
 		</element>
 		<element tag="issn" type="structural" color="a0b0c0">
-			<name language="en">ISSN</name>
-			<short-desc language="en">The International Standard Serial Number of a periodical.</short-desc>
+			<name xml:lang="en">ISSN</name>
+			<short-desc xml:lang="en">The International Standard Serial Number of a periodical.</short-desc>
 		</element>
 		<element tag="releaseinfo" type="structural" color="a0b0c0">
-			<name language="en">Release Information</name>
-			<short-desc language="en">A brief description of the version of a document.</short-desc>
+			<name xml:lang="en">Release Information</name>
+			<short-desc xml:lang="en">A brief description of the version of a document.</short-desc>
 		</element>
 		<element tag="pubdate" type="structural" color="a0b0c0">
-			<name language="en">Date of Publication</name>
+			<name xml:lang="en">Date of Publication</name>
 		</element>
 		<element tag="copyright" type="structural" color="a0b0c0">
-			<name language="en">Copyright</name>
+			<name xml:lang="en">Copyright</name>
 		</element>
 		<element tag="year" type="structural" color="a0b0c0">
-			<name language="en">Year</name>
+			<name xml:lang="en">Year</name>
 		</element>
 		<element tag="holder" type="structural" color="a0b0c0">
-			<name language="en">Copyright Holder</name>
+			<name xml:lang="en">Copyright Holder</name>
 		</element>
 		<element tag="docinfo" type="structural" color="a0b0c0">
-			<name language="en">Bibliographic Information</name>
+			<name xml:lang="en">Bibliographic Information</name>
 		</element>
 		<element tag="abstract" type="structural" color="a0b0c0">
-			<name language="en">Abstract</name>
-			<short-desc language="en">A sumamry.</short-desc>
+			<name xml:lang="en">Abstract</name>
+			<short-desc xml:lang="en">A sumamry.</short-desc>
 		</element>
 		<element tag="para" type = "structural">
-			<name language="en">Paragraph</name>
+			<name xml:lang="en">Paragraph</name>
 		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0">
-			<name language="en">Legal Notice</name>
+			<name xml:lang="en">Legal Notice</name>
 		</element>
 		<element tag="colophon" type="structural" color="a0b0c0">
-			<name language="en">Colophon</name>
+			<name xml:lang="en">Colophon</name>
 		</element>
 
 		<element tag="qandaset" type="structural" color="a0b0c0">
@@ -104,164 +104,164 @@
 		</element>
 
 		<element tag="bibliography" type="structural" color="a0b0c0">
-			<name language="en">Bibliography</name>
+			<name xml:lang="en">Bibliography</name>
 		</element>
 
 		<element tag="biblioentry" type="structural" color="a0b0c0">
-			<name language="en">Entry</name>
+			<name xml:lang="en">Entry</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="bibliodiv" type="structural" color="a0b0c0">
-			<name language="en">Section</name>
+			<name xml:lang="en">Section</name>
 		</element>
 
 		<element tag="bridgehead" type="structural" color="a0b0c0">
-			<name language="en">Free-floating Heading</name>
+			<name xml:lang="en">Free-floating Heading</name>
 		</element>
 
 		<!-- The various sections -->
 		<element tag="preface" type="structural" color="a0b0c0">
-			<name language="en">Preface</name>
+			<name xml:lang="en">Preface</name>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="part" type="structural" color="a0b0c0">
-			<name language="en">Part</name>
+			<name xml:lang="en">Part</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="partintro" type="structural" color="a0b0c0">
-			<name language="en">Part Introduction</name>
+			<name xml:lang="en">Part Introduction</name>
 		</element>
 
 		<element tag="chapter" type="structural" color="a0b0c0">
-			<name language="en">Chapter</name>
+			<name xml:lang="en">Chapter</name>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect1" type="structural" color="a1b0c0">
-			<name language="en">Section</name>
-			<short-desc language="en">A top-level section of document</short-desc>
+			<name xml:lang="en">Section</name>
+			<short-desc xml:lang="en">A top-level section of document</short-desc>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect2" type="structural" color="a0b0c0">
-			<name language="en">Subsection</name>
-			<short-desc language="en">A subsection within a section</short-desc>
+			<name xml:lang="en">Subsection</name>
+			<short-desc xml:lang="en">A subsection within a section</short-desc>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect3" type="structural" color="a0b0c0">
-			<name language="en">Subsection (level 3)</name>
+			<name xml:lang="en">Subsection (level 3)</name>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect4" type="structural" color="a0b0c0">
-			<name language="en">Subsection (level 4)</name>
+			<name xml:lang="en">Subsection (level 4)</name>
 			<header-info tag="title"></header-info>
 		</element>
 		<element tag="sect5" type="structural" color="a0b0c0">
-			<name language="en">Section (level 5)</name>
+			<name xml:lang="en">Section (level 5)</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="reference" type="structural" color="a0b0c0">
-			<name language="en">Reference</name>
+			<name xml:lang="en">Reference</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="refentry" type="structural" color="a0b0c0">
-			<name language="en">Reference Page</name>
+			<name xml:lang="en">Reference Page</name>
 			<header-info tag="refname"></header-info>
 		</element>
 
 		<element tag="refmeta" type="structural" color="a0b0c0">
-			<name language="en">Metadata</name>
-			<short-desc language="en">Meta-information about a Reference Page</short-desc>
+			<name xml:lang="en">Metadata</name>
+			<short-desc xml:lang="en">Meta-information about a Reference Page</short-desc>
 		</element>
 
 		<element tag="refentrytitle" type="structural" color="a0b0c0">
-			<name language="en">Title</name>
+			<name xml:lang="en">Title</name>
 		</element>
 
 		<element tag="refmiscinfo" type="structural" color="a0b0c0">
-			<name language="en">Additional metadata</name>
+			<name xml:lang="en">Additional metadata</name>
 		</element>
 
 		<element tag="indexterm" type="structural" color="a0b0c0">
-			<name language="en">Index Term</name>
+			<name xml:lang="en">Index Term</name>
 		</element>
 
 
 		<element tag="refnamediv" type="structural" color="a0b0c0">
-			<name language="en">Naming</name>
-			<short-desc language="en">Name, purpose and classification about a Reference Page</short-desc>
+			<name xml:lang="en">Naming</name>
+			<short-desc xml:lang="en">Name, purpose and classification about a Reference Page</short-desc>
 		</element>
 
 		<element tag="refname" type="structural" color="a0b0c0">
-			<name language="en">Name</name>
+			<name xml:lang="en">Name</name>
 		</element>
 
 		<element tag="refpurpose" type="structural" color="a0b0c0">
-			<name language="en">Purpose</name>
+			<name xml:lang="en">Purpose</name>
 		</element>
 
 		<element tag="refsynopsisdiv" type="structural" color="a0b0c0">
-			<name language="en">Synopsis (syntax)</name>
+			<name xml:lang="en">Synopsis (syntax)</name>
 		</element>
 
 		<element tag="refsect1" type="structural" color="a0b0c0">
-			<name language="en">Section</name>
+			<name xml:lang="en">Section</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="refsect2" type="structural" color="a0b0c0">
-			<name language="en">Subsection</name>
+			<name xml:lang="en">Subsection</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="refsect3" type="structural" color="a0b0c0">
-			<name language="en">Subsubsection</name>
+			<name xml:lang="en">Subsubsection</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="appendix" type="structural" color="a0b0c0">
-			<name language="en">Appendix</name>
+			<name xml:lang="en">Appendix</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="glossary" type="structural" color="a0b0c0">
-			<name language="en">Glossary</name>
+			<name xml:lang="en">Glossary</name>
 		</element>
 
 		<element tag="glossentry" type="structural" color="a0b0c0">
-			<name language="en">Glossary Entry</name>
+			<name xml:lang="en">Glossary Entry</name>
 			<header-info tag="glossterm"></header-info>
 		</element>
 
 		<element tag="glossterm" type="structural" color="a0b0c0">
-			<name language="en">Term</name>
+			<name xml:lang="en">Term</name>
 		</element>
 
 		<element tag="glossdef" type="structural" color="a0b0c0">
-			<name language="en">Definition</name>
+			<name xml:lang="en">Definition</name>
 		</element>
 
 
 		<element tag="informalexample" type="structural" color="a0b0c0">
-			<name language="en">Example (informal)</name>
+			<name xml:lang="en">Example (informal)</name>
 		</element>
 
 		<element tag="informaltable" type="structural" color="a0b0c0">
-			<name language="en">Table (informal)</name>
+			<name xml:lang="en">Table (informal)</name>
 		</element>
 
 		<element tag="simplelist" type="structural" color="a0b0c0">
-			<name language="en">List (simple)</name>
+			<name xml:lang="en">List (simple)</name>
 		</element>
 
 		<!-- List support -->
 		<element tag="itemizedlist" type="structural" color="a0b0c0">
-			<name language="en">List (itemised)</name>
+			<name xml:lang="en">List (itemised)</name>
 		</element>
 		<element tag="orderedlist" type="structural" color="a0b0c0">
-			<name language="en">List (ordered)</name>
+			<name xml:lang="en">List (ordered)</name>
 		</element>
 
 		<element tag="listitem" type="structural" color="a0b0c0">
@@ -328,128 +328,128 @@
 		</element>
 
 		<element tag="screen" type="structural" color="a0b0c0">
-			<name language="en">Screen</name>
+			<name xml:lang="en">Screen</name>
 		</element>
 
 		<element tag="cmdsynopsis" type="structural" color="a0b0c0">
-			<name language="en">Command Synopsis</name>
+			<name xml:lang="en">Command Synopsis</name>
 		</element>
 
 		<element tag="procedure" type="structural" color="a0b0c0">
-			<name language="en">Procedure</name>
+			<name xml:lang="en">Procedure</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="step" type="structural" color="a0b0c0">
-			<name language="en">Step</name>
+			<name xml:lang="en">Step</name>
 			<header-info tag="title"></header-info>
 		</element>
 
 		<element tag="substeps" type="structural" color="a0b0c0">
-			<name language="en">Substeps</name>
+			<name xml:lang="en">Substeps</name>
 		</element>
 
 
 		<!-- Various inline elements, done as spans follow: -->
 
 		<element tag="acronym" type="span" color="a0b0c0">
-			<name language="en">Acronym</name>
+			<name xml:lang="en">Acronym</name>
 		</element>
  		<element tag="application" type="span" color="a0b0c0">
-			<name language="en">Application</name>
+			<name xml:lang="en">Application</name>
 		</element>
  		<element tag="bibliomisc" type="span" color="a0b0c0">
-			<name language="en">Miscellaneous Bibliographic Information</name>
+			<name xml:lang="en">Miscellaneous Bibliographic Information</name>
 		</element>
 		<element tag="citetitle" type="span" color="a0b0c0">
-			<name language="en">Title Citation</name>
+			<name xml:lang="en">Title Citation</name>
 		</element>
 		<element tag="city" type="span" color="a0b0c0">
-			<name language="en">City</name>
+			<name xml:lang="en">City</name>
 		</element>
 		<element tag="edition" type="span" color="a0b0c0">
-			<name language="en">Edition</name>
+			<name xml:lang="en">Edition</name>
 		</element>
 		<element tag="email" type="span" color="a0b0c0">
-			<name language="en">email</name>
-			<short-desc language="en">An email address</short-desc>
+			<name xml:lang="en">email</name>
+			<short-desc xml:lang="en">An email address</short-desc>
 		</element>
 		<element tag="emphasis" type="span" color="a2b0c0">
-			<name language="en">Emphasis</name>
+			<name xml:lang="en">Emphasis</name>
 		</element>
 		<element tag="filename" type="span" color="a0b0c0">
-			<name language="en">Filename</name>
+			<name xml:lang="en">Filename</name>
 		</element>
 		<element tag="firstname" type="span" color="a0b0c0">
-			<name language="en">First Name</name>
+			<name xml:lang="en">First Name</name>
 		</element>
 		<element tag="firstterm" type="span" color="a0b0c0">
-			<name language="en">First Term </name>
-			<short-desc language="en">The first place where a word or term occurs in a particular context</short-desc>
+			<name xml:lang="en">First Term </name>
+			<short-desc xml:lang="en">The first place where a word or term occurs in a particular context</short-desc>
 		</element>
 		<element tag="function" type="span" color="a0b0c0">
-			<name language="en">Function</name>
-			<short-desc language="en">The name of a function, subroutine or procedure</short-desc>
+			<name xml:lang="en">Function</name>
+			<short-desc xml:lang="en">The name of a function, subroutine or procedure</short-desc>
 		</element>
 		<element tag="literal" type="span" color="a0b0c0">
-			<name language="en">Literal</name>
-			<short-desc language="en">A specific piece of data from a computer system, to be taken literally.</short-desc>
+			<name xml:lang="en">Literal</name>
+			<short-desc xml:lang="en">A specific piece of data from a computer system, to be taken literally.</short-desc>
 		</element>
 		<element tag="primary" type="span" color="a0b0c0">
 		</element>
 		<element tag="productname" type="span" color="a0b0c0">
-			<name language="en">Product Name</name>
+			<name xml:lang="en">Product Name</name>
 		</element>
 		<element tag="replaceable" type="span" color="a0b0c0">
-			<name language="en">Replaceable Text</name>
+			<name xml:lang="en">Replaceable Text</name>
 		</element>
 		<element tag="secondary" type="span" color="a0b0c0">
 		</element>
 		<element tag="sgmltag" type="span" color="a0b0c0">
-			<name language="en">SGML Tag</name>
+			<name xml:lang="en">SGML Tag</name>
 		</element>
 		<element tag="structname" type="span" color="a0b0c0">
-			<name language="en">Structure Name</name>
+			<name xml:lang="en">Structure Name</name>
 		</element>
 		<element tag="surname" type="span" color="a0b0c0">
-			<name language="en">Surname</name>
+			<name xml:lang="en">Surname</name>
 		</element>
 		<element tag="symbol" type="span" color="a0b0c0">
-			<name language="en">Symbol</name>
+			<name xml:lang="en">Symbol</name>
 		</element>
 		<element tag="term" type="span" color="a0b0c0">
-			<name language="en">Term</name>
+			<name xml:lang="en">Term</name>
 		</element>
 		<element tag="ulink" type="span" color="a0b0c0">
-			<name language="en">URL Link</name>
-			<short-desc language="en">A URL link (perhaps to a web site)</short-desc>
+			<name xml:lang="en">URL Link</name>
+			<short-desc xml:lang="en">A URL link (perhaps to a web site)</short-desc>
 		</element>
 		<element tag="xref" type="span" color="a0b0c0">
-			<name language="en">Cross-reference</name>
+			<name xml:lang="en">Cross-reference</name>
 		</element>
 
 
 		<element tag="guibutton" type="span" color="a0b0c0">
-			<name language="en">GUI Button</name>
+			<name xml:lang="en">GUI Button</name>
 		</element>
 		<element tag="guilabel" type="span" color="a0b0c0">
-			<name language="en">GUI Label</name>
+			<name xml:lang="en">GUI Label</name>
 		</element>
 		<element tag="guimenu" type="span" color="a0b0c0">
-			<name language="en">GUI Menu</name>
+			<name xml:lang="en">GUI Menu</name>
 		</element>
 		<element tag="guisubmenu" type="span" color="a0b0c0">
-			<name language="en">GUI Submenu</name>
+			<name xml:lang="en">GUI Submenu</name>
 		</element>
 		<element tag="guimenuitem" type="span" color="a0b0c0">
-			<name language="en">GUI Menu Item</name>
+			<name xml:lang="en">GUI Menu Item</name>
 		</element>
 		<element tag="keycap" type="span" color="a0b0c0">
-			<name language="en">Key Caption</name>
-			<short-desc language="en">The printed text on a particular key on a keyboard</short-desc>
+			<name xml:lang="en">Key Caption</name>
+			<short-desc xml:lang="en">The printed text on a particular key on a keyboard</short-desc>
 		</element>
 		<element tag="menuchoice" type="span" color="a0b0c0">
-			<name language="en">Menu Choice</name>
+			<name xml:lang="en">Menu Choice</name>
 		</element>
 
 		<!-- etc -->

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <dispspec>
 	<metadata>
-		<name language="en">RELAX NG</name>
-		<description language="en">RELAX NG is a schema language i.e. a language for describing the strucutre of an XML document.</description>
+		<name xml:lang="en">RELAX NG</name>
+		<description xml:lang="en">RELAX NG is a schema xml:lang i.e. a xml:lang for describing the strucutre of an XML document.</description>
 	</metadata>
 	<serialisation>
 		<format extension="rng"/>
@@ -10,50 +10,50 @@
 	<document-models/>
 	<element-list>
 		<element tag="grammar" type="structural">
-			<name language="en">Grammar</name>
+			<name xml:lang="en">Grammar</name>
 		</element>
 		<element tag="define" type="structural">
-			<name language="en">Define</name>			
+			<name xml:lang="en">Define</name>			
 			<header-info xpath="@name"/>
 		</element>
 		<element tag="element" type="structural">
-			<name language="en">XML Element</name>			
+			<name xml:lang="en">XML Element</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
 		<element tag="attribute" type="structural">
-			<name language="en">XML Attribute</name>			
+			<name xml:lang="en">XML Attribute</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
 		<element tag="zeroOrMore" type="structural">
-			<name language="en">ZeroOrMore</name>			
+			<name xml:lang="en">ZeroOrMore</name>			
 		</element>
 		<element tag="choice" type="structural">
-			<name language="en">Choice</name>			
+			<name xml:lang="en">Choice</name>			
 		</element>
 		<element tag="text" type="structural">
-			<name language="en">Text</name>			
+			<name xml:lang="en">Text</name>			
 		</element>
 		<element tag="ref" type="structural">
-			<name language="en">Reference</name>			
+			<name xml:lang="en">Reference</name>			
 			<header-info xpath="@name"/>
 		</element>
 		<element tag="oneOrMore" type="structural">
-			<name language="en">OneOrMore</name>			
+			<name xml:lang="en">OneOrMore</name>			
 		</element>
 		<element tag="group" type="structural">
-			<name language="en">Group</name>			
+			<name xml:lang="en">Group</name>			
 		</element>
 		<element tag="optional" type="structural">
-			<name language="en">Optional</name>			
+			<name xml:lang="en">Optional</name>			
 		</element>
 		<element tag="value" type="structural">
-			<name language="en">Value</name>			
+			<name xml:lang="en">Value</name>			
 		</element>
 		<element tag="start" type="structural">
-			<name language="en">Start</name>			
+			<name xml:lang="en">Start</name>			
 		</element>
 		<element tag="empty" type="structural">
-			<name language="en">Empty</name>			
+			<name xml:lang="en">Empty</name>			
 		</element>
 	</element-list>
 </dispspec>

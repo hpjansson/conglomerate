@@ -2,14 +2,14 @@
 <dispspec>
 
 	<metadata>
-		<name language="en">Experimental "readme" format</name>
-		<description language="en">This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</description>
+		<name xml:lang="en">Experimental "readme" format</name>
+		<description xml:lang="en">This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</description>
 	</metadata>
 	<document-models>
 	</document-models>
 	<element-list>
 		<element tag="document" type="structural" color="a0b0c0">
-			<name language="en">Document</name>
+			<name xml:lang="en">Document</name>
 		</element>
 
 		<!-- Wow - we can have comments in this version of the format -->
@@ -19,57 +19,57 @@
 		<!-- What does collapseto mean? -->
 
 		<element tag="introduction" type = "structural" color = "e0eee0">
-			<name language="en">Introduction</name>
+			<name xml:lang="en">Introduction</name>
 		</element>
 
 		<element tag="section" type = "structural" color = "a0b0c0">
-			<name language="en">Section</name>
+			<name xml:lang="en">Section</name>
 		</element>
 
 		<element tag="section.title" type = "structural">
-			<name language="en">Title</name>
+			<name xml:lang="en">Title</name>
 		</element>
 
 		<element tag="section.signature" type = "structural">
-			<name language="en">Signature</name>
+			<name xml:lang="en">Signature</name>
 		</element>
 
 		<!-- Here come the spans: -->
 
 		<element tag="quote" type = "span" color = "8b0000">
-			<name language="en">Quote</name>
+			<name xml:lang="en">Quote</name>
 		</element>
 
 		<element tag="admission" type = "span" color = "b22222">
-			<name language="en">Admission</name>
+			<name xml:lang="en">Admission</name>
 		</element>
 
 		<element tag="excuse" type = "span" color = "b22222">
-			<name language="en">Excuse</name>
+			<name xml:lang="en">Excuse</name>
 		</element>
 
 		<element tag="corporate" type = "span" color = "00008b">
-			<name language="en">Corp jargon</name>
+			<name xml:lang="en">Corp jargon</name>
 		</element>
 
 		<element tag="disclaimer" type = "span" color = "698b22">
-			<name language="en">Disclaimer</name>
+			<name xml:lang="en">Disclaimer</name>
 		</element>
 
 		<element tag="emph" type = "span" color = "cd1076">
-			<name language="en">Emphasis</name>
+			<name xml:lang="en">Emphasis</name>
 		</element>
 
 		<element tag="inspirational" type = "span" color = "08b8b">
-			<name language="en">Inspirational</name>
+			<name xml:lang="en">Inspirational</name>
 		</element>
 
 		<element tag="optimistic" type = "span" color = "458b74">
-			<name language="en">Optimistic</name>
+			<name xml:lang="en">Optimistic</name>
 		</element>
 
 		<element tag="p" type = "structural">
-			<name language="en">Paragraph</name>
+			<name xml:lang="en">Paragraph</name>
 		</element>
 		
 
