@@ -35,6 +35,7 @@
 #define __FO_H__
 
 /* Include GnomePrint headers; these will eventually only be required by part of the interface */
+#if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
 
@@ -418,6 +419,7 @@ void fo_print_context_pop_state(FoPrintContext *fpc);
 void fo_print_context_translate(FoPrintContext *fpc, FoUnit x, FoUnit y);
 
 G_END_DECLS
+#endif /* #if ENABLE_PRINTING */
 
 
 #endif

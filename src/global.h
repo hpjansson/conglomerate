@@ -34,7 +34,6 @@ enum
 };
 
 #define NEW_LOOK 1
-#define ENABLE_PRINTING 0
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>

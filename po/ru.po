@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-05-03 11:33+0000\n"
+"POT-Creation-Date: 2003-05-05 08:40+0400\n"
 "PO-Revision-Date: 2002-11-29 09:06+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -15,15 +15,978 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conge.desktop.in.h:1 src/cong-primary-window.c:350
-#: src/cong-primary-window.c:352 src/cong-primary-window.c:578
-#: src/cong-primary-window.c:580 src/cong-primary-window.c:586
+#: data/conge.desktop.in.h:1 src/cong-menus.c:1128
+#: src/cong-primary-window.c:350 src/cong-primary-window.c:352
+#: src/cong-primary-window.c:578 src/cong-primary-window.c:580
+#: src/cong-primary-window.c:586
 msgid "Conglomerate XML Editor"
 msgstr "Редактор Conglomerate файлов в формате XML"
 
 #: data/conge.desktop.in.h:2
 msgid "Edit xml files"
 msgstr "Редактировать файлы в формате XML"
+
+#: src/cong-dialog.c:188
+msgid "_Close without Saving"
+msgstr ""
+
+#: src/cong-dialog.c:203
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr ""
+
+#: src/cong-dialog.c:208
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr ""
+
+#: src/cong-dialog.c:210
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr ""
+
+#: src/cong-dialog.c:212
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:257
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr ""
+
+#: src/cong-dialog.c:262
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:264
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr ""
+
+#: src/cong-dialog.c:266
+msgid "Changes from the past minute will be discarded."
+msgstr ""
+
+#: src/cong-dispspec-registry.c:86
+msgid "Conglomerate could not read its registry of document types."
+msgstr ""
+
+#: src/cong-dispspec-registry.c:89
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr ""
+
+#: src/cong-dispspec.c:426
+msgid "unnamed"
+msgstr ""
+
+#: src/cong-dispspec.c:439
+msgid "No description available."
+msgstr ""
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: src/cong-dispspec.c:865
+msgid "<untitled>"
+msgstr ""
+
+#: src/cong-dom-view.c:101
+msgid "UNKNOWN"
+msgstr ""
+
+#: src/cong-dom-view.c:110 src/cong-dom-view.c:315
+#, fuzzy, c-format
+msgid "Text: \"%s\""
+msgstr "Экспортировать \"%s\""
+
+#: src/cong-dom-view.c:116
+#, c-format
+msgid "Comment: \"%s\""
+msgstr ""
+
+#. Create a column, associating the "text" attribute of the
+#. * cell_renderer to the first column of the model
+#: src/cong-dom-view.c:380 src/cong-tree-view.c:498
+msgid "Element"
+msgstr ""
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr ""
+
+#: src/cong-error-dialog.c:184
+#, fuzzy
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "Выбранный пункт меню ещё не работает."
+
+#: src/cong-error-dialog.c:202
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+
+#. FIXME: ought to set up the parent window properly
+#: src/cong-error-file-open.c:51
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: src/cong-error-file-open.c:76
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-open.c:79
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr ""
+
+#: src/cong-error-file-open.c:199 src/cong-error-file-save.c:110
+msgid "An unexpected internal error occurred."
+msgstr ""
+
+#: src/cong-error-file-open.c:200 src/cong-error-file-save.c:111
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+
+#: src/cong-error-file-open.c:226
+msgid "There is no file with that name at that location."
+msgstr ""
+
+#: src/cong-error-file-open.c:227
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:228 src/cong-error-file-open.c:237
+#: src/cong-error-file-open.c:292 src/cong-error-file-open.c:333
+msgid "Search"
+msgstr ""
+
+#: src/cong-error-file-open.c:235 src/cong-error-file-save.c:128
+msgid "The location does not exist."
+msgstr ""
+
+#: src/cong-error-file-open.c:236
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-open.c:249
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr ""
+
+#: src/cong-error-file-open.c:253
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:263
+msgid "There were problems reading the content of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:264 src/cong-error-file-open.c:282
+#: src/cong-error-file-open.c:321
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:273
+msgid "The contents of the file seem to be corrupt."
+msgstr ""
+
+#: src/cong-error-file-open.c:274
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:281 src/cong-error-file-open.c:320
+msgid "There were problems reading the contents of the file."
+msgstr ""
+
+#: src/cong-error-file-open.c:290 src/cong-error-file-save.c:269
+msgid "The system does not recognise that as a valid location."
+msgstr ""
+
+#: src/cong-error-file-open.c:291
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:302
+msgid "You do not have permission to read that file."
+msgstr ""
+
+#: src/cong-error-file-open.c:303
+msgid "Try asking your system administrator to give you permission."
+msgstr ""
+
+#: src/cong-error-file-open.c:310 src/cong-error-file-save.c:292
+msgid "The system is trying to operate on too many files at once."
+msgstr ""
+
+#: src/cong-error-file-open.c:311 src/cong-error-file-open.c:345
+#: src/cong-error-file-save.c:293 src/cong-error-file-save.c:312
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-open.c:328
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr ""
+
+#: src/cong-error-file-open.c:332
+msgid "Try using the Search Tool to find your file."
+msgstr ""
+
+#: src/cong-error-file-open.c:344 src/cong-error-file-save.c:311
+msgid "The system ran out of memory."
+msgstr ""
+
+#: src/cong-error-file-open.c:353 src/cong-error-file-open.c:362
+#: src/cong-error-file-open.c:371 src/cong-error-file-save.c:320
+#: src/cong-error-file-save.c:329 src/cong-error-file-save.c:338
+msgid "The server could not be contacted."
+msgstr ""
+
+#: src/cong-error-file-open.c:354
+msgid "Try again.  If it fails again, the server may be down."
+msgstr ""
+
+#: src/cong-error-file-open.c:363 src/cong-error-file-open.c:372
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+
+#: src/cong-error-file-open.c:380 src/cong-error-file-save.c:347
+msgid "The system could not login to the location."
+msgstr ""
+
+#: src/cong-error-file-open.c:381 src/cong-error-file-open.c:391
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr ""
+
+#: src/cong-error-file-open.c:390 src/cong-error-file-save.c:356
+msgid "The location was too busy."
+msgstr ""
+
+#: src/cong-error-file-open.c:429
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr ""
+
+#: src/cong-error-file-open.c:435
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"Filing System."
+msgstr ""
+
+#: src/cong-error-file-open.c:442
+msgid "An unexpected error occurred."
+msgstr ""
+
+#: src/cong-error-file-open.c:443
+msgid "For more information, click on the \"Details\" button."
+msgstr ""
+
+#: src/cong-error-file-open.c:445
+msgid "Details"
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: src/cong-error-file-save.c:79
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr ""
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: src/cong-error-file-save.c:82
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr ""
+
+#: src/cong-error-file-save.c:129
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:137 src/cong-error-file-save.c:256
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr ""
+
+#: src/cong-error-file-save.c:141 src/cong-error-file-save.c:260
+#: src/cong-error-file-save.c:368
+msgid "Try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:152
+msgid "There were problems writing the content of the file."
+msgstr ""
+
+#: src/cong-error-file-save.c:153
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:182
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr ""
+
+#. Can't get at the capacity for the device or "volume":
+#: src/cong-error-file-save.c:188
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:196
+msgid "The file is too big to fit on the device."
+msgstr ""
+
+#: src/cong-error-file-save.c:205
+msgid "Try saving the file to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:226
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+
+#. Can't get at the free space for the device or "volume":
+#: src/cong-error-file-save.c:232
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+
+#. We don't know the size of the file:
+#: src/cong-error-file-save.c:240
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr ""
+
+#: src/cong-error-file-save.c:249
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+
+#: src/cong-error-file-save.c:270
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+
+#: src/cong-error-file-save.c:284
+msgid "You do not have permission to write to that location."
+msgstr ""
+
+#: src/cong-error-file-save.c:285
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr ""
+
+#. FIXME:  capitalisation issues
+#: src/cong-error-file-save.c:299
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr ""
+
+#: src/cong-error-file-save.c:303
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr ""
+
+#: src/cong-error-file-save.c:321
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr ""
+
+#: src/cong-error-file-save.c:330 src/cong-error-file-save.c:339
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+
+#: src/cong-error-file-save.c:348 src/cong-error-file-save.c:357
+msgid "Try again. If it fails again, try saving to another location."
+msgstr ""
+
+#. FIXME: need some thought about the messages for this
+#: src/cong-error-file-save.c:364
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr ""
+
+#. FIXME: need to think more about these messages
+#: src/cong-error-file-save.c:376
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr ""
+
+#: src/cong-error-file-save.c:380
+msgid "Try again with a shorter file name."
+msgstr ""
+
+#. 5 megabytes, for a test
+#: src/cong-error-tests.c:17
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:23
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:29
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr ""
+
+#: src/cong-error-tests.c:32
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr ""
+
+#: src/cong-error-tests.c:35
+msgid "This dialog was generated by the automated testing routine"
+msgstr ""
+
+#: src/cong-file-export.c:165
+msgid "Select file to export to"
+msgstr ""
+
+#: src/cong-file-export.c:201
+#, c-format
+msgid "Export \"%s\""
+msgstr "Экспортировать \"%s\""
+
+#: src/cong-file-export.c:205
+msgid "Export"
+msgstr "Экспортировать"
+
+#: src/cong-file-export.c:221 src/cong-file-print.c:208 src/cong-menus.c:271
+msgid "General"
+msgstr "Общие"
+
+#: src/cong-file-export.c:252
+msgid "Exporter:"
+msgstr "Дополнение экспорта:"
+
+#: src/cong-file-export.c:253
+msgid "File:"
+msgstr "Файл:"
+
+#: src/cong-file-export.c:257
+msgid "Export Options"
+msgstr "Опции экспорта"
+
+#: src/cong-file-export.c:265 src/cong-file-print.c:233 src/cong-menus.c:277
+#: src/cong-menus.c:281 src/cong-menus.c:445
+msgid "Name"
+msgstr "Имя"
+
+#: src/cong-file-export.c:266 src/cong-file-new.c:187 src/cong-file-open.c:291
+#: src/cong-file-print.c:234 src/cong-menus.c:282 src/cong-menus.c:452
+msgid "Description"
+msgstr "Описание"
+
+#: src/cong-file-import.c:55
+msgid "Import file..."
+msgstr "Импортировать файл..."
+
+#. FIXME:  eventually provide a convenience dialog to force things
+#: src/cong-file-import.c:87
+msgid "Could not import the file."
+msgstr "Не удалось импортировать файл."
+
+#: src/cong-file-import.c:88
+#, c-format
+msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+msgstr "Дополнения редактора Conglomerate не могут загружать файлы типа \"%s\""
+
+#: src/cong-file-import.c:89
+msgid "FIXME"
+msgstr "ДОДЕЛАТЬ"
+
+#. There's more than one valid importer...
+#: src/cong-file-import.c:107
+msgid ""
+"More than one importer can handle that file type; the selection dialog has "
+"yet to be implemented.  You will have to use the first one that the plugin "
+"manager found."
+msgstr ""
+"Несколько дополнений могут обрабатывать файлы этого типа, а диалог выбора "
+"ещё не работает. Будет использовано первое из дополнений, что Диспетчер "
+"дополнений найдёт."
+
+#: src/cong-file-new.c:96
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr ""
+
+#: src/cong-file-new.c:180
+#, fuzzy
+msgid "File Type"
+msgstr "Тип"
+
+#. FIXME:  what if no document factories found?
+#: src/cong-file-new.c:346 src/cong-file-new.c:353 src/cong-file-new.c:378
+msgid "Creating a new file"
+msgstr ""
+
+#: src/cong-file-new.c:354
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+
+#: src/cong-file-new.c:367
+msgid "What type of file would you like to create?"
+msgstr ""
+
+#: src/cong-file-new.c:369
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+
+#: src/cong-file-new.c:379
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+
+#: src/cong-file-open.c:215
+#, c-format
+msgid "Parse errors loading %s"
+msgstr ""
+
+#: src/cong-file-open.c:286
+msgid "Line Number"
+msgstr ""
+
+#: src/cong-file-open.c:339
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr ""
+
+#: src/cong-file-open.c:347
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+
+#: src/cong-file-open.c:348
+msgid "Show Details"
+msgstr ""
+
+#: src/cong-file-open.c:453
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+
+#: src/cong-file-open.c:454
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+
+#: src/cong-file-open.c:455
+msgid "Force"
+msgstr ""
+
+#: src/cong-file-open.c:563
+#, fuzzy
+msgid "Select an XML document"
+msgstr "Открыть документ"
+
+#: src/cong-file-print.c:188
+#, fuzzy, c-format
+msgid "Print \"%s\""
+msgstr "Экспортировать \"%s\""
+
+#: src/cong-file-print.c:192
+msgid "Print"
+msgstr ""
+
+#: src/cong-file-print.c:221
+msgid "Print Method:"
+msgstr ""
+
+#: src/cong-file-print.c:225
+#, fuzzy
+msgid "Print Options"
+msgstr "Опции экспорта"
+
+#: src/cong-file-print.c:299 src/cong-menus.c:739
+msgid "Print Preview"
+msgstr ""
+
+#: src/cong-file-save.c:50
+#, fuzzy
+msgid "Save XML as..."
+msgstr "Сохранить как..."
+
+#: src/cong-location.c:571
+msgid "Calculating document start"
+msgstr ""
+
+#: src/cong-location.c:583
+msgid "Calculating line start"
+msgstr ""
+
+#: src/cong-location.c:596
+msgid "Calculating document end"
+msgstr ""
+
+#: src/cong-location.c:609
+msgid "Calculating line end"
+msgstr ""
+
+#: src/cong-location.c:622
+msgid "Calculating previous page"
+msgstr ""
+
+#: src/cong-location.c:635
+msgid "Calculating next page"
+msgstr ""
+
+#: src/cong-menus.c:84 src/cong-menus.c:156 src/cong-menus.c:189
+msgid "The selected menu item has not yet been implemented."
+msgstr "Выбранный пункт меню ещё не работает."
+
+#: src/cong-menus.c:261
+msgid "Properties"
+msgstr "Изменить свойства"
+
+#: src/cong-menus.c:272
+msgid "Type"
+msgstr "Тип"
+
+#: src/cong-menus.c:278
+msgid "Location"
+msgstr "Местоположение"
+
+#: src/cong-menus.c:279
+msgid "Modified"
+msgstr "Изменён"
+
+#: src/cong-menus.c:415
+#, fuzzy
+msgid "Document Types"
+msgstr "/Тесты/Типы документов"
+
+#: src/cong-menus.c:517
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr ""
+
+#: src/cong-menus.c:574 src/cong-plugin.c:713
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr ""
+
+#: src/cong-menus.c:577 src/cong-menus.c:601 src/cong-plugin.c:716
+#: src/cong-plugin.c:740
+msgid "Conglomerate could not transform the document"
+msgstr ""
+
+#: src/cong-menus.c:598 src/cong-plugin.c:737
+msgid "There was a problem applying the stylesheet file"
+msgstr ""
+
+#: src/cong-menus.c:1051
+msgid "Test Progress Checklist"
+msgstr ""
+
+#: src/cong-menus.c:1055
+#, c-format
+msgid "This is stage %i"
+msgstr ""
+
+#: src/cong-menus.c:1083
+#, fuzzy
+msgid "Message Log - Conglomerate"
+msgstr "Conglomerate"
+
+#: src/cong-menus.c:1126
+msgid "translator_credits"
+msgstr "Дмитрий Мастрюков <dmitry@taurussoft.org>"
+
+#: src/cong-menus.c:1130
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2002 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2002 David Malcolm"
+
+#: src/cong-menus.c:1131
+#, fuzzy
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr ""
+"Программа Conglomerate будет дружественным редактором файлов в формате XML "
+"для среды GNOME"
+
+#: src/cong-menus.c:1150 src/cong-menus.c:1225
+msgid "/_File"
+msgstr "/_Файл"
+
+#: src/cong-menus.c:1151 src/cong-menus.c:1226
+msgid "/File/_New..."
+msgstr "/Файл/_Создать..."
+
+#: src/cong-menus.c:1152 src/cong-menus.c:1227
+msgid "/File/_Open..."
+msgstr "/Файл/_Открыть..."
+
+#: src/cong-menus.c:1153 src/cong-menus.c:1158 src/cong-menus.c:1163
+#: src/cong-menus.c:1166 src/cong-menus.c:1169 src/cong-menus.c:1171
+#: src/cong-menus.c:1228 src/cong-menus.c:1230
+msgid "/File/"
+msgstr "/Файл/"
+
+#: src/cong-menus.c:1154
+msgid "/File/_Save"
+msgstr "/Файл/Со_хранить"
+
+#: src/cong-menus.c:1155
+msgid "/File/Save _As..."
+msgstr "/Файл/Сохранить _как..."
+
+#: src/cong-menus.c:1156
+msgid "/File/Sa_ve a Copy..."
+msgstr "/Файл/Сохранить копи_ю..."
+
+#: src/cong-menus.c:1159
+#, fuzzy
+msgid "/File/Print Previe_w..."
+msgstr "/Файл/_Создать..."
+
+#: src/cong-menus.c:1160
+#, fuzzy
+msgid "/File/_Print..."
+msgstr "/Файл/_Экспортировать..."
+
+#: src/cong-menus.c:1164
+msgid "/File/_Revert"
+msgstr "/Файл/Восста_новить"
+
+#: src/cong-menus.c:1167 src/cong-menus.c:1229
+msgid "/File/_Import..."
+msgstr "/Файл/_Импортировать..."
+
+#: src/cong-menus.c:1168
+msgid "/File/_Export..."
+msgstr "/Файл/_Экспортировать..."
+
+#: src/cong-menus.c:1170
+msgid "/File/Proper_ties"
+msgstr "/Файл/Из_менить свойства"
+
+#: src/cong-menus.c:1172 src/cong-menus.c:1231
+msgid "/File/_Close"
+msgstr "/Файл/_Закрыть"
+
+#: src/cong-menus.c:1173 src/cong-menus.c:1232
+msgid "/File/_Quit"
+msgstr "/Файл/В_ыйти"
+
+#: src/cong-menus.c:1175
+msgid "/_Edit"
+msgstr "/_Правка"
+
+#: src/cong-menus.c:1177
+msgid "/Edit/_Undo"
+msgstr "/Правка/_Откатить"
+
+#: src/cong-menus.c:1178
+msgid "/Edit/_Redo"
+msgstr "/Правка/Возв_ратить"
+
+#: src/cong-menus.c:1179 src/cong-menus.c:1184 src/cong-menus.c:1190
+#: src/cong-menus.c:1192
+msgid "/Edit/"
+msgstr "/Правка/"
+
+#: src/cong-menus.c:1181
+msgid "/Edit/Cu_t"
+msgstr "/Правка/_Вырезать"
+
+#: src/cong-menus.c:1182
+msgid "/Edit/_Copy"
+msgstr "/Правка/С_копировать"
+
+#: src/cong-menus.c:1183
+msgid "/Edit/_Paste"
+msgstr "/Правка/Вст_авть"
+
+#: src/cong-menus.c:1186
+msgid "/Edit/_Find..."
+msgstr "/Правка/_Найти..."
+
+#: src/cong-menus.c:1187
+msgid "/Edit/Find Ne_xt"
+msgstr "/Правка/Найти с_ледующее"
+
+#: src/cong-menus.c:1188
+msgid "/Edit/Find Pre_vious"
+msgstr "/Правка/Найти пред_ыдущее"
+
+#: src/cong-menus.c:1189
+msgid "/Edit/R_eplace..."
+msgstr "/Правка/_Заменить"
+
+#: src/cong-menus.c:1191
+msgid "/Edit/_Insert..."
+msgstr "/Правка/Вставить _из..."
+
+#: src/cong-menus.c:1194
+msgid "/Edit/View _Source"
+msgstr ""
+
+#: src/cong-menus.c:1197 src/cong-menus.c:1235
+msgid "/Debug"
+msgstr ""
+
+#: src/cong-menus.c:1198 src/cong-menus.c:1236
+#, fuzzy
+msgid "/Debug/Error"
+msgstr "/Тесты/Ошибка"
+
+#: src/cong-menus.c:1199 src/cong-menus.c:1237
+#, fuzzy
+msgid "/Debug/Document Types"
+msgstr "/Тесты/Типы документов"
+
+#: src/cong-menus.c:1200
+#, fuzzy
+msgid "/Debug/Transform DocBook to HTML"
+msgstr "/Тесты/Трансформировать формат DocBook в формат HTML"
+
+#: src/cong-menus.c:1201
+#, fuzzy
+msgid "/Debug/Transform DocBook to XHTML"
+msgstr "/Тесты/Трансформировать формат DocBook в формат XHTML"
+
+#: src/cong-menus.c:1202
+#, fuzzy
+msgid "/Debug/Transform DocBook to HTML Help"
+msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате HTML"
+
+#: src/cong-menus.c:1203
+#, fuzzy
+msgid "/Debug/Transform DocBook to Java Help"
+msgstr "/Тесты/Трансформировать формат DocBook в формат Справка в формате Java"
+
+#: src/cong-menus.c:1204
+#, fuzzy
+msgid "/Debug/Transform DocBook to FO"
+msgstr "/Тесты/Трансформировать формат DocBook в формат FO"
+
+#: src/cong-menus.c:1206
+#, fuzzy
+msgid "/Debug/Preview XSL:FO"
+msgstr "/Тесты/Посмотреть образец XSL:FO"
+
+#: src/cong-menus.c:1208
+#, fuzzy
+msgid "/Debug/DTD"
+msgstr "/Тесты/DTD"
+
+#: src/cong-menus.c:1209 src/cong-menus.c:1238
+#, fuzzy
+msgid "/Debug/Dialog"
+msgstr "/Тесты/Диалог"
+
+#: src/cong-menus.c:1210 src/cong-menus.c:1239
+msgid "/Debug/Progress Checklist"
+msgstr ""
+
+#: src/cong-menus.c:1211
+msgid "/Debug/Document Message Log"
+msgstr ""
+
+#: src/cong-menus.c:1214 src/cong-menus.c:1242
+msgid "/_Help"
+msgstr "/_Справка"
+
+#: src/cong-menus.c:1216 src/cong-menus.c:1244
+msgid "/Help/_Contents"
+msgstr "/Справка/_Содержание"
+
+#: src/cong-menus.c:1218 src/cong-menus.c:1246
+msgid "/Help/_About"
+msgstr "/Справка/_О программе"
+
+#: src/cong-plugin.c:626
+#, fuzzy
+msgid "Conglomerate could not create the file"
+msgstr "Не удалось импортировать файл."
+
+#: src/cong-plugin.c:627 src/cong-plugin.c:671
+msgid "Conglomerate could not find display information for the new file"
+msgstr ""
+
+#: src/cong-plugin.c:628 src/cong-plugin.c:672
+msgid "There may a problem with your installation, or a bug in the importer"
+msgstr ""
+
+#: src/cong-plugin.c:670
+#, fuzzy
+msgid "Conglomerate could not import the file"
+msgstr "Не удалось импортировать файл."
+
+#: src/cong-plugin.c:861
+#, c-format
+msgid "Unrecognised plugin (id=\"%s\")"
+msgstr ""
 
 #: src/cong-primary-window.c:226 src/cong-primary-window.c:227
 msgid "Open document"
@@ -67,6 +1030,11 @@ msgstr "Добро пожаловать в версию для разработ�
 msgid "%s (modified) - %s"
 msgstr "%s (изменён) - %s"
 
+#: src/cong-section-head-editor.c:797
+#, c-format
+msgid "Dummy element for tag <%s>"
+msgstr ""
+
 #: src/main.c:242
 #, c-format
 msgid "Conglomerate could not load any xds files from the directory \"%s\""
@@ -86,209 +1054,193 @@ msgstr ""
 msgid "XML Editor"
 msgstr "Редактор файлов в формате XML"
 
+#: src/plugin-docbook.c:207
+msgid "Untitled Article"
+msgstr ""
+
+#: src/plugin-docbook.c:260
+msgid "Untitled Book"
+msgstr ""
+
+#: src/plugin-docbook.c:299
+msgid "Untitled Set"
+msgstr ""
+
+#: src/plugin-docbook.c:460
+msgid "Exporting PDF file"
+msgstr ""
+
+#: src/plugin-docbook.c:464 src/plugin-docbook.c:536
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr ""
+
+#: src/plugin-docbook.c:466
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr ""
+
+#: src/plugin-docbook.c:479
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr ""
+
+#: src/plugin-docbook.c:532
+msgid "Printing DocBook file"
+msgstr ""
+
+#: src/plugin-docbook.c:538 src/plugin-docbook.c:556
+msgid "Printing XSL Formatting Objects"
+msgstr ""
+
+#: src/plugin-docbook.c:601
+msgid "This will eventually be the text from DocBook print method"
+msgstr ""
+
+#: src/plugin-docbook.c:627
+msgid "DocBook Article"
+msgstr ""
+
+#: src/plugin-docbook.c:628
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:634
+msgid "DocBook Book"
+msgstr ""
+
+#: src/plugin-docbook.c:635
+msgid "Create a book, using the \"DocBook\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:641
+msgid "DocBook Set"
+msgstr ""
+
+#: src/plugin-docbook.c:642
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr ""
+
+#: src/plugin-docbook.c:649
+msgid "Import text as a DocBook article"
+msgstr ""
+
+#: src/plugin-docbook.c:650
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr ""
+
+#: src/plugin-docbook.c:667
+msgid "Export DocBook as HTML"
+msgstr ""
+
+#: src/plugin-docbook.c:675
+msgid "Export DocBook as PDF"
+msgstr ""
+
+#: src/plugin-docbook.c:683
+msgid "Export DocBook as XSL:FO"
+msgstr ""
+
+#: src/plugin-docbook.c:692
+msgid "Print DocBook"
+msgstr ""
+
+#: src/plugin-lists.c:214
+msgid "List Member Element"
+msgstr ""
+
+#: src/plugin-lists.c:215
+msgid "An element for visualising member of a list"
+msgstr ""
+
+#: src/plugin-tests.c:51
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+
+#: src/plugin-tests.c:129 src/plugin-tests.c:208
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr ""
+
+#: src/plugin-tests.c:327
+msgid "Unicode Character Reference"
+msgstr ""
+
+#: src/plugin-tests.c:328
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr ""
+
+#: src/plugin-xsl.c:311
+msgid "XSL Template Element"
+msgstr ""
+
+#: src/plugin-xsl.c:312
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr ""
+
+#: src/popup.c:560
+msgid "Paste into"
+msgstr ""
+
+#: src/popup.c:566
+msgid "Paste before"
+msgstr ""
+
+#: src/popup.c:572
+msgid "Paste after"
+msgstr ""
+
+#: src/popup.c:587
+msgid "New sub-element"
+msgstr ""
+
+#: src/popup.c:598
+msgid "New sibling"
+msgstr ""
+
+#. FIXME: Test implementation:
+#: src/tree.c:129
+msgid "Placeholder Properties Dialog"
+msgstr ""
+
+#: src/tree.c:145
+msgid "Advanced"
+msgstr ""
+
+#: src/tree.c:153
+msgid "Properties from DTD/schema"
+msgstr ""
+
+#: src/tree.c:221
+#, fuzzy
+msgid "Custom Properties"
+msgstr "Изменить свойства"
+
+#: src/xmldata.c:922
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid.  Please choose one of the "
+"following child types."
+msgstr ""
+
+#. select a dialog element
+#: src/xmldata.c:926
+msgid "Required Children Choices"
+msgstr ""
+
+#: src/xmledit.c:195
+#, fuzzy
+msgid "Source View - Conglomerate"
+msgstr "Conglomerate"
+
 #~ msgid "Open"
 #~ msgstr "Открыть"
-
-#~ msgid "Save as..."
-#~ msgstr "Сохранить как..."
-
-#~ msgid "The selected menu item has not yet been implemented."
-#~ msgstr "Выбранный пункт меню ещё не работает."
-
-#~ msgid "Import file..."
-#~ msgstr "Импортировать файл..."
-
-#~ msgid "Could not import the file."
-#~ msgstr "Не удалось импортировать файл."
-
-#~ msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
-#~ msgstr ""
-#~ "Дополнения редактора Conglomerate не могут загружать файлы типа \"%s\""
-
-#~ msgid "FIXME"
-#~ msgstr "ДОДЕЛАТЬ"
-
-#~ msgid ""
-#~ "More than one importer can handle that file type; the selection dialog "
-#~ "has yet to be implemented.  You will have to use the first one that the "
-#~ "plugin manager found."
-#~ msgstr ""
-#~ "Несколько дополнений могут обрабатывать файлы этого типа, а диалог выбора "
-#~ "ещё не работает. Будет использовано первое из дополнений, что Диспетчер "
-#~ "дополнений найдёт."
-
-#~ msgid "Export \"%s\""
-#~ msgstr "Экспортировать \"%s\""
-
-#~ msgid "Export"
-#~ msgstr "Экспортировать"
-
-#~ msgid "General"
-#~ msgstr "Общие"
-
-#~ msgid "File:"
-#~ msgstr "Файл:"
-
-#~ msgid "Exporter:"
-#~ msgstr "Дополнение экспорта:"
-
-#~ msgid "Export Options"
-#~ msgstr "Опции экспорта"
-
-#~ msgid "Name"
-#~ msgstr "Имя"
-
-#~ msgid "Description"
-#~ msgstr "Описание"
-
-#~ msgid "Properties"
-#~ msgstr "Изменить свойства"
-
-#~ msgid "Type"
-#~ msgstr "Тип"
-
-#~ msgid "Location"
-#~ msgstr "Местоположение"
-
-#~ msgid "Modified"
-#~ msgstr "Изменён"
-
-#~ msgid "translator_credits"
-#~ msgstr "Дмитрий Мастрюков <dmitry@taurussoft.org>"
-
-#~ msgid ""
-#~ "(C) 1999 Hans Petter Jansson\n"
-#~ "(C) 2002 David Malcolm"
-#~ msgstr ""
-#~ "(C) 1999 Hans Petter Jansson\n"
-#~ "(C) 2002 David Malcolm"
-
-#~ msgid "Conglomerate will be a user-friendly XML editor for GNOME"
-#~ msgstr ""
-#~ "Программа Conglomerate будет дружественным редактором файлов в формате "
-#~ "XML для среды GNOME"
-
-#~ msgid "/_File"
-#~ msgstr "/_Файл"
-
-#~ msgid "/File/_New..."
-#~ msgstr "/Файл/_Создать..."
-
-#~ msgid "/File/_Open..."
-#~ msgstr "/Файл/_Открыть..."
-
-#~ msgid "/File/"
-#~ msgstr "/Файл/"
-
-#~ msgid "/File/_Save"
-#~ msgstr "/Файл/Со_хранить"
-
-#~ msgid "/File/Save _As..."
-#~ msgstr "/Файл/Сохранить _как..."
-
-#~ msgid "/File/Sa_ve a Copy..."
-#~ msgstr "/Файл/Сохранить копи_ю..."
-
-#~ msgid "/File/_Revert"
-#~ msgstr "/Файл/Восста_новить"
-
-#~ msgid "/File/_Import..."
-#~ msgstr "/Файл/_Импортировать..."
-
-#~ msgid "/File/_Export..."
-#~ msgstr "/Файл/_Экспортировать..."
-
-#~ msgid "/File/Proper_ties"
-#~ msgstr "/Файл/Из_менить свойства"
-
-#~ msgid "/File/_Close"
-#~ msgstr "/Файл/_Закрыть"
-
-#~ msgid "/File/_Quit"
-#~ msgstr "/Файл/В_ыйти"
-
-#~ msgid "/_Edit"
-#~ msgstr "/_Правка"
-
-#~ msgid "/Edit/_Undo"
-#~ msgstr "/Правка/_Откатить"
-
-#~ msgid "/Edit/_Redo"
-#~ msgstr "/Правка/Возв_ратить"
-
-#~ msgid "/Edit/"
-#~ msgstr "/Правка/"
-
-#~ msgid "/Edit/Cu_t"
-#~ msgstr "/Правка/_Вырезать"
-
-#~ msgid "/Edit/_Copy"
-#~ msgstr "/Правка/С_копировать"
-
-#~ msgid "/Edit/_Paste"
-#~ msgstr "/Правка/Вст_авть"
-
-#~ msgid "/Edit/_Find..."
-#~ msgstr "/Правка/_Найти..."
-
-#~ msgid "/Edit/Find Ne_xt"
-#~ msgstr "/Правка/Найти с_ледующее"
-
-#~ msgid "/Edit/Find Pre_vious"
-#~ msgstr "/Правка/Найти пред_ыдущее"
-
-#~ msgid "/Edit/R_eplace..."
-#~ msgstr "/Правка/_Заменить"
-
-#~ msgid "/Edit/_Insert..."
-#~ msgstr "/Правка/Вставить _из..."
 
 #~ msgid "/Tests"
 #~ msgstr "/Тесты"
 
 #~ msgid "/Tests/Open..."
 #~ msgstr "/Тесты/Открыть"
-
-#~ msgid "/Tests/Error"
-#~ msgstr "/Тесты/Ошибка"
-
-#~ msgid "/Tests/Document Types"
-#~ msgstr "/Тесты/Типы документов"
-
-#~ msgid "/Tests/Transform DocBook to HTML"
-#~ msgstr "/Тесты/Трансформировать формат DocBook в формат HTML"
-
-#~ msgid "/Tests/Transform DocBook to XHTML"
-#~ msgstr "/Тесты/Трансформировать формат DocBook в формат XHTML"
-
-#~ msgid "/Tests/Transform DocBook to HTML Help"
-#~ msgstr ""
-#~ "/Тесты/Трансформировать формат DocBook в формат Справка в формате HTML"
-
-#~ msgid "/Tests/Transform DocBook to Java Help"
-#~ msgstr ""
-#~ "/Тесты/Трансформировать формат DocBook в формат Справка в формате Java"
-
-#~ msgid "/Tests/Transform DocBook to FO"
-#~ msgstr "/Тесты/Трансформировать формат DocBook в формат FO"
-
-#~ msgid "/Tests/Preview XSL:FO"
-#~ msgstr "/Тесты/Посмотреть образец XSL:FO"
-
-#~ msgid "/Tests/DTD"
-#~ msgstr "/Тесты/DTD"
-
-#~ msgid "/Tests/Dialog"
-#~ msgstr "/Тесты/Диалог"
-
-#~ msgid "/_Help"
-#~ msgstr "/_Справка"
-
-#~ msgid "/Help/_Contents"
-#~ msgstr "/Справка/_Содержание"
-
-#~ msgid "/Help/_About"
-#~ msgstr "/Справка/_О программе"
-
-#~ msgid "Conglomerate"
-#~ msgstr "Conglomerate"

@@ -1,3 +1,7 @@
+2003-05-05  Dmitry G. Mastrukov <dmitry@taurussoft.org>
+
+	* configure.in: Added --enable-printing option.
+
 2003-05-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* AUTHORS:  Added an initial list of people

@@ -1,5 +1,17 @@
 bin_PROGRAMS = conge
 
+if ENABLE_PRINTING
+printing_sources = \
+  fo.h                      \
+  fo-parser-result.c        \
+  fo-print-context.c 	    \
+  fo-rect.c                 \
+  fo-solver-result.c        \
+  fo-tests.c
+else
+printing_sources = 
+endif
+
 conge_SOURCES =             \
   global.h                  \
   cong-dialog.h             \
@@ -65,20 +77,16 @@ conge_SOURCES =             \
   xmledit.c                 \
   xmlload.c                 \
   xmlview.c                 \
-  fo.h                      \
-  fo-parser-result.c        \
-  fo-print-context.c        \
-  fo-rect.c                 \
-  fo-solver-result.c        \
-  fo-tests.c                \
   plugin-docbook.c          \
   plugin-lists.c            \
   plugin-tests.c            \
   plugin-xsl.c              \
-  main.c
+  main.c		    \
+  $(printing_sources)
 
 INCLUDES = $(CONGLOMERATE_CFLAGS) \
+	$(PRINTING_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
 	-DDATADIR=\""$(datadir)"\"
-conge_LDADD  = $(CONGLOMERATE_LIBS)
-
+conge_LDADD  = $(CONGLOMERATE_LIBS) \
+	$(PRINTING_LIBS)
