@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-19 13:03-0400\n"
-"PO-Revision-Date: 2004-08-19 15:29-0400\n"
+"POT-Creation-Date: 2004-08-22 19:54-0400\n"
+"PO-Revision-Date: 2004-08-22 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -78,9 +78,9 @@ msgid "Basic"
 msgstr "Basic"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
-#: src/cong-edit-preferences.c:149 src/cong-file-export.c:332
-#: src/cong-file-new.c:363 src/cong-file-print.c:252
-#: src/cong-parser-error.c:326
+#: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
+#: src/cong-file-export.c:332 src/cong-file-new.c:363
+#: src/cong-file-print.c:252 src/cong-parser-error.c:326
 msgid "Description"
 msgstr "Description"
 
@@ -109,9 +109,9 @@ msgstr "Location"
 msgid "Modified"
 msgstr "Modified"
 
-#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:141
-#: src/cong-file-export.c:331 src/cong-file-print.c:251
-#: src/cong-node-properties-dialog.c:609
+#: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:331
+#: src/cong-file-print.c:251 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Name"
 
@@ -197,6 +197,10 @@ msgstr "Conglomerate Preferences"
 #: glade/cong-preferences.glade.h:2
 msgid "Document Types"
 msgstr "Document Types"
+
+#: glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "Plugins"
 
 #: glade/custom-element.glade.h:2
 msgid "Adhoc Element"
