@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-05 09:38-0400\n"
-"PO-Revision-Date: 2004-09-05 15:29-0400\n"
+"POT-Creation-Date: 2004-10-12 16:43-0400\n"
+"PO-Revision-Date: 2004-10-12 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1434
-#: src/cong-primary-window.c:528 src/cong-primary-window.c:713
-#: src/cong-primary-window.c:715 src/cong-primary-window.c:721
+#: src/cong-primary-window.c:555 src/cong-primary-window.c:740
+#: src/cong-primary-window.c:742 src/cong-primary-window.c:748
 msgid "Conglomerate XML Editor"
 msgstr "Conglomerate XML Editor"
 
@@ -80,7 +80,7 @@ msgstr "Basic"
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:355
 #: src/cong-edit-preferences.c:157 src/cong-edit-preferences.c:271
 #: src/cong-file-export.c:332 src/cong-file-new.c:363
-#: src/cong-file-print.c:252 src/cong-parser-error.c:326
+#: src/cong-file-print.c:252 src/cong-parser-error.c:320
 msgid "Description"
 msgstr "Description"
 
@@ -162,11 +162,11 @@ msgid "Match _entire word only"
 msgstr "Match _entire word only"
 
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:187
-#: src/cong-edit-find-and-replace.c:832 src/cong-edit-find-and-replace.c:846
+#: src/cong-edit-find-and-replace.c:835 src/cong-edit-find-and-replace.c:849
 msgid "Replace"
 msgstr "Replace"
 
-#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:904
+#: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:907
 msgid "Replace All"
 msgstr "Replace All"
 
@@ -700,7 +700,7 @@ msgstr "XInclude Start"
 msgid "XInclude End"
 msgstr "XInclude End"
 
-#: src/cong-document.c:2130
+#: src/cong-document.c:2173
 #, c-format
 msgid "Select %s"
 msgstr "Select %s"
@@ -726,8 +726,8 @@ msgstr "The text \"%s\" was not found."
 msgid "Replace _All"
 msgstr "Replace _All"
 
-#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:757
-#: src/cong-edit-find-and-replace.c:955 src/cong-edit-find-and-replace.c:996
+#: src/cong-edit-find-and-replace.c:307 src/cong-edit-find-and-replace.c:760
+#: src/cong-edit-find-and-replace.c:958 src/cong-edit-find-and-replace.c:999
 msgid "Find"
 msgstr "Find"
 
@@ -1402,13 +1402,31 @@ msgstr "Unspecified"
 msgid "Remove DTD"
 msgstr "Remove DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1680
+#: src/cong-file-properties.c:380 src/cong-util.c:1678
 msgid "Associate with DTD"
 msgstr "Associate with DTD"
 
-#: src/cong-file-save.c:71
+#: src/cong-file-save.c:75
 msgid "Save XML as..."
 msgstr "Save XML as..."
+
+#: src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "The file \"%s\" is read-only.\n"
+
+#: src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "A file named \"%s\" already exists.\n"
+
+#: src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "_Replace"
+
+#: src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Do you want to replace it with the one you are saving?"
 
 #: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
@@ -1434,17 +1452,17 @@ msgstr "The selected menu item has not yet been implemented."
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate cannot open the result of the transformation"
 
-#: src/cong-menus.c:532 src/cong-plugin.c:677
+#: src/cong-menus.c:532 src/cong-plugin.c:699
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "There was a problem reading the stylesheet file \"%s\""
 
-#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:680
-#: src/cong-plugin.c:710
+#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:702
+#: src/cong-plugin.c:732
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate could not transform the document"
 
-#: src/cong-menus.c:556 src/cong-plugin.c:707
+#: src/cong-menus.c:556 src/cong-plugin.c:729
 msgid "There was a problem applying the stylesheet file"
 msgstr "There was a problem applying the stylesheet file"
 
@@ -1704,25 +1722,25 @@ msgstr "DTD"
 msgid "Unknown data"
 msgstr "Unknown data"
 
-#: src/cong-parser-error.c:234
+#: src/cong-parser-error.c:228
 #, c-format
 msgid "Parse errors loading %s"
 msgstr "Parse errors loading %s"
 
-#: src/cong-parser-error.c:242
+#: src/cong-parser-error.c:236
 msgid "_Retry"
 msgstr "_Retry"
 
-#: src/cong-parser-error.c:321
+#: src/cong-parser-error.c:315
 msgid "Line Number"
 msgstr "Line Number"
 
-#: src/cong-parser-error.c:398
+#: src/cong-parser-error.c:393
 #, c-format
 msgid "%s cannot understand the internal format of the file."
 msgstr "%s cannot understand the internal format of the file."
 
-#: src/cong-parser-error.c:406
+#: src/cong-parser-error.c:401
 msgid ""
 "Conglomerate currently requires documents to be \"well-formed\"; it has much "
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
@@ -1732,22 +1750,22 @@ msgstr ""
 "stricter rules than most web browsers.  It also does not yet support SGML.  "
 "We hope to fix these problems in a later release."
 
-#: src/cong-parser-error.c:407
+#: src/cong-parser-error.c:402
 msgid "Show Details"
 msgstr "Show Details"
 
-#: src/cong-plugin.c:556 src/cong-plugin.c:600
+#: src/cong-plugin.c:557 src/cong-plugin.c:622
 msgid "Conglomerate could not find display information for the new file"
 msgstr "Conglomerate could not find display information for the new file"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1182
+#: src/cong-plugin.c:1204
 #, c-format
 msgid "<%s> property dialog"
 msgstr "<%s> property dialog"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1185
+#: src/cong-plugin.c:1207
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Provides a Properties dialog for the <%s> element"
@@ -1764,32 +1782,36 @@ msgstr "Bookmarks"
 msgid "Raw XML"
 msgstr "Raw XML"
 
-#: src/cong-primary-window.c:581 src/cong-primary-window.c:600
+#: src/cong-primary-window.c:608 src/cong-primary-window.c:627
 msgid "Welcome to the much-delayed Conglomerate editor."
 msgstr "Welcome to the much-delayed Conglomerate editor."
 
-#: src/cong-primary-window.c:713
+#: src/cong-primary-window.c:740
 #, c-format
 msgid "%s (modified) - %s"
 msgstr "%s (modified) - %s"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1301
+#: src/cong-source-layout.c:413 src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "Cleanup XML Source"
+
+#: src/cong-util.c:366 src/plugin-docbook.c:1301
 msgid "Printing XSL Formatting Objects"
 msgstr "Printing XSL Formatting Objects"
 
-#: src/cong-util.c:412
+#: src/cong-util.c:410
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "This will eventually be the result from cong_util_print_xslfo"
 
-#: src/cong-util.c:1484
+#: src/cong-util.c:1482
 msgid "(no description available)"
 msgstr "(no description available)"
 
-#: src/cong-util.c:1669
+#: src/cong-util.c:1667
 msgid "DTD files"
 msgstr "DTD files"
 
-#: src/cong-util.c:1672
+#: src/cong-util.c:1670
 msgid "Select a DTD"
 msgstr "Select a DTD"
 
@@ -1826,12 +1848,8 @@ msgstr "Empty XML Document"
 msgid "Create an empty XML document of an arbitrary type."
 msgstr "Create an empty XML document of an arbitrary type."
 
-#: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:453
-msgid "Cleanup XML Source"
-msgstr "Cleanup XML Source"
-
-#: src/plugin-cleanup-source.c:454 src/plugin-cleanup-source.c:457
-#: src/plugin-cleanup-source.c:458
+#: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
+#: src/plugin-cleanup-source.c:78
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1839,7 +1857,7 @@ msgstr ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 
-#: src/plugin-cleanup-source.c:456
+#: src/plugin-cleanup-source.c:76
 msgid "_Clean the XML Source"
 msgstr "_Clean the XML Source"
 
@@ -1899,7 +1917,7 @@ msgstr "Transforming DocBook into XSL Formatting Objects"
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Laying out XSL Formatting Objects as a PDF file"
 
-#: src/plugin-docbook.c:1190 src/plugin-fo.c:98
+#: src/plugin-docbook.c:1190 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Converting XSL Formatting Objects to PDF"
 
@@ -2088,15 +2106,15 @@ msgstr "Convert DTD into an Examplotron file"
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "Import a DTD file, converting it into an Examplotron Schema."
 
-#: src/plugin-fo.c:153
+#: src/plugin-fo.c:152
 msgid "Export XSL-FO as PDF"
 msgstr "Export XSL-FO as PDF"
 
-#: src/plugin-fo.c:154
+#: src/plugin-fo.c:153
 msgid "Generate a PDF file from the XSL:FO information"
 msgstr "Generate a PDF file from the XSL:FO information"
 
-#: src/plugin-fo.c:163
+#: src/plugin-fo.c:162
 msgid "Print XSL:FO"
 msgstr "Print XSL:FO"
 

@@ -1,5 +1,9 @@
 Top line of ChangeLog $Revision$, update below this line.
 
+2004-10-12  Adam Weinberger  <adamw@gnome.org>
+
+	* en_CA.po: Updated Canadian English translation.
+
 2004-10-10  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* POTFILES.in: added src/cong-source-layout.c
