@@ -22,8 +22,10 @@ your current directory.
 Compiling on Windows should be equally simple, if you're using Cygwin
 (http://www.cygnus.com/cygwin/):
 
+0) Make sure you have the Windows DLLs for GTK/GDK. Put them in the src/ dir.
 1) Edit global.h, change #undef WINDOWS_BUILD to #define WINDOWS_BUILD 1
-2) make
+2) Copy "Makefile.win" to "Makefile".
+3) make
 
 
 Running
