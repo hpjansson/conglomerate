@@ -1,3 +1,9 @@
+2004-02-20  Geert Stappers <stappers@stappers.nl>
+
+	* configure.in
+	
+	Added switch for -Werror compile option. ( bugzilla #134747 )
+
 2004-02-18  Geert Stappers <stappers@stappers.nl>
 
 	* NEWS

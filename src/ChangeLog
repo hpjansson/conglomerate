@@ -1,10 +1,16 @@
-2004-02-19  Geert Stappers <stapppers@stappers.nl>
+2004-02-20  Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am
+
+	CFLAG -Werror is now optional
+
+2004-02-19  Geert Stappers <stappers@stappers.nl>
 
 	* ilogo.c
 
 	Updated with the new logo, fixes bugzilla #134749.
 
-2004-02-18  Geert Stappers <stapppers@stappers.nl>
+2004-02-18  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
 
