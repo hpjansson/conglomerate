@@ -273,3 +273,5 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \
 	$(PRINTING_LIBS) \
 	$(GTKSOURCEVIEW_LIBS)
+
+## reminder: include Makefile.win into the dist.tar.gz
