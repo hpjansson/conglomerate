@@ -32,16 +32,17 @@ gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	return save_document_as(doc);
+	return save_document_as(doc, cong_primary_window_get_toplevel(primary_window));
 }
 
-gint save_document_as(CongDocument *doc) 
+gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
 {
 	const char *doc_name;
 
 	g_return_val_if_fail(doc, FALSE);
-
-	doc_name = get_file_name("Save XML as...");
+	g_return_val_if_fail(parent_window, FALSE);
+	
+	doc_name = cong_get_file_name("Save XML as...", parent_window);
 	if (!doc_name) {
 		return TRUE;
 	}
@@ -51,7 +52,7 @@ gint save_document_as(CongDocument *doc)
 	return TRUE;
 }
 
-gint save_document(CongDocument *doc) 
+gint save_document(CongDocument *doc, GtkWindow *parent_window) 
 {
 	gchar *doc_name;
 
@@ -60,7 +61,7 @@ gint save_document(CongDocument *doc)
 	doc_name = cong_document_get_full_uri(doc);
 
 	if (!doc_name) {
-		return save_document_as(doc);
+		return save_document_as(doc, parent_window);
 	}
 
 	cong_document_save(doc, doc_name);

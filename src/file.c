@@ -1,12 +1,13 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <stdlib.h>
 #include <string.h>
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include "global.h"
 
-
-GtkWidget *filew;
-const char *file_name_selected;
+static GtkWidget *filew;
+static const char *file_name_selected;
 
 
 static void destroy( GtkWidget *widget, gpointer   data )
@@ -31,9 +32,12 @@ static void file_ok_sel( GtkWidget *w, GtkFileSelection *fs )
 
 
 
-const char *get_file_name(char *title)
+const gchar *cong_get_file_name(const gchar *title, 
+				GtkWindow *parent_window)
 {
-	          
+	g_return_val_if_fail(title, NULL);
+	g_return_val_if_fail(parent_window, NULL);
+
 	/* Create a new file selection widget */
 	filew = gtk_file_selection_new (title);
 	          
@@ -45,7 +49,10 @@ const char *get_file_name(char *title)
 	/* Connect the cancel_button to destroy the widget */
 	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION(filew)->cancel_button), "clicked", (GtkSignalFunc) file_cancel_sel, GTK_OBJECT (filew));
 
+	gtk_window_set_transient_for(GTK_WINDOW(filew), parent_window);
+
 	gtk_widget_show(filew);
+
 	gtk_main();
 	return(file_name_selected);
 }

@@ -562,6 +562,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
 void cong_primary_window_free(CongPrimaryWindow *primary_window);
 CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window);
 void cong_primary_window_update_title(CongPrimaryWindow *primary_window);
+GtkWindow *cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window);
 
 CongTreeView *cong_tree_view_new(CongDocument *doc);
 void cong_tree_view_free(CongTreeView *tree_view);
@@ -665,13 +666,15 @@ GtkWidget *gui_metachoice_box(TTREE *choices, int many, int selectability, GtkSi
 GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSignalFunc *sig_func, char *id);
 #endif
 
-void open_document(void);
-gint save_document(CongDocument *doc);
-gint save_document_as(CongDocument *doc);
+void open_document(GtkWindow *parent_window);
+gint save_document(CongDocument *doc, GtkWindow *parent_window);
+gint save_document_as(CongDocument *doc, GtkWindow *parent_window);
 
 
 
-const char *get_file_name(char *title);
+const gchar *cong_get_file_name(const gchar *title, 
+				GtkWindow *parent_window);
+
 char *pick_structural_tag(CongDispspec *ds);
 
 void open_document_do(const gchar *doc_name);

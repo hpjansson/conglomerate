@@ -141,10 +141,10 @@ gint test_open(GtkWidget *w, gpointer data)
 #if 1
 	const char *doc_name, *ds_name;
 	
-	doc_name = get_file_name("Select an XML document");
+	doc_name = cong_get_file_name("Select an XML document", NULL);
 	if (!doc_name) return(TRUE);
 
-	ds_name = get_file_name("Select a matching XDS displayspec");
+	ds_name = cong_get_file_name("Select a matching XDS displayspec", NULL);
 	if (!ds_name) return(TRUE);
 
 	test_open_do(doc_name, ds_name);

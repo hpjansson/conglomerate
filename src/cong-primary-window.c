@@ -277,7 +277,7 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 		switch (result) {
 		default: g_assert_not_reached();
 		case CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE:
-			save_document(primary_window->doc);
+			save_document(primary_window->doc, cong_primary_window_get_toplevel(primary_window));
 			break;
 
 		case CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING:
@@ -353,7 +353,8 @@ static void menu_callback_file_open(gpointer callback_data,
 				    guint callback_action,
 				    GtkWidget *widget)
 {
-	open_document();
+	CongPrimaryWindow *primary_window = callback_data;
+	open_document(cong_primary_window_get_toplevel(primary_window));
 }
 
 static void menu_callback_file_save(gpointer callback_data,
@@ -363,7 +364,7 @@ static void menu_callback_file_save(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = primary_window->doc;
 
-	save_document(doc);
+	save_document(doc, cong_primary_window_get_toplevel(primary_window));
 }
 
 static void menu_callback_file_save_as(gpointer callback_data,
@@ -373,7 +374,7 @@ static void menu_callback_file_save_as(gpointer callback_data,
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = primary_window->doc;
 
-	save_document_as(doc);
+	save_document_as(doc, cong_primary_window_get_toplevel(primary_window));
 }
 
 static void menu_callback_file_save_copy(gpointer callback_data,
@@ -435,11 +436,12 @@ static void menu_callback_file_import(gpointer callback_data,
 				      guint callback_action,
 				      GtkWidget *widget)
 {
+	CongPrimaryWindow *primary_window = callback_data;
 	const char *filename;
 
 	/* FIXME: this option should be disabled if there are no importers installed */
 
-	filename = get_file_name(_("Import file..."));
+	filename = cong_get_file_name(_("Import file..."), cong_primary_window_get_toplevel(primary_window));
 
 	if (filename) {
 		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
@@ -1145,4 +1147,11 @@ void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
 			      title);
 
 	g_free(title);
+}
+
+GtkWindow *cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window)
+{
+	g_return_val_if_fail(primary_window, NULL);
+
+	return GTK_WINDOW(primary_window->window);
 }
