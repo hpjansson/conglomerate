@@ -1,5 +1,11 @@
 2003-09-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cursor.c
+
+	Applied patch by Raphael Jacquot to make the cursor black for greater visibility
+	
+	--- Version 0.7.3 ---	
+
 	* Makefile.am
 
 	Added cong-editor-widget.h back
