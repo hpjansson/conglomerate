@@ -1669,6 +1669,44 @@ cong_document_get_language_for_node(CongDocument *doc,
 	return NULL; /* for now */
 }
 
+/**
+ * cong_document_make_pango_log_attr_for_node:
+ * @doc:
+ * @node: a text or comment node
+ * @pango_log_attrs: pointer for output
+ * @attrs_len: pointer for output
+ *
+ * Generate Pango logical attributes for the given node, which must be either
+ * text or a comment.
+ */
+void 
+cong_document_make_pango_log_attr_for_node (CongDocument *doc,
+					    CongNodePtr node,
+					    PangoLogAttr **pango_log_attrs,
+					    int *attrs_len)
+{
+	PangoLanguage *language;
+
+	g_return_if_fail (doc);
+	g_return_if_fail (node);
+	g_return_if_fail (node->content);
+	g_return_if_fail (pango_log_attrs);
+	g_return_if_fail (attrs_len);
+
+	language = cong_document_get_language_for_node (doc, node);
+
+	*attrs_len = g_utf8_strlen (node->content,-1)+1;
+
+	*pango_log_attrs = g_new (PangoLogAttr, (*attrs_len));
+	
+	pango_get_log_attrs (node->content,
+			     strlen(node->content), /* length in bytes */
+			     -1,
+			     language,
+			     *pango_log_attrs,
+			     *attrs_len);
+}
+
 static gboolean 
 cong_document_for_each_node_recurse (CongDocument *doc, 
 				     CongNodePtr node, 

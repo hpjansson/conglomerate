@@ -1,5 +1,9 @@
 2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-location.c: 
+
+	Converted make_pango_log_attr_for_node from a static fucntion into the global cong_document_make_pango_log_attr_for_node
+
 	* cong-util.h, cong-util.c:
 
 	Added routines to get a list of all words in a string, and to convert from characters in a UTF-8 string to byte offsets; fixed bugs in CongElementDescription manipulation code 

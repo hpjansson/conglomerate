@@ -707,44 +707,6 @@ cong_location_calc_next_char(const CongLocation *input_loc,
 }
 
 /**
- * make_pango_log_attr_for_node:
- * @doc:
- * @node:
- * @pango_log_attrs:
- * @attrs_len:
- *
- * TODO: Write me
- */
-static void 
-make_pango_log_attr_for_node(CongDocument *doc,
-			     CongNodePtr node,
-			     PangoLogAttr **pango_log_attrs,
-			     int *attrs_len)
-{
-	PangoLanguage *language;
-
-	g_return_if_fail(doc);
-	g_return_if_fail(node);
-	g_return_if_fail(node->content);
-	g_return_if_fail(pango_log_attrs);
-	g_return_if_fail(attrs_len);
-
-	language = cong_document_get_language_for_node(doc, node);
-
-	*attrs_len = g_utf8_strlen(node->content,-1)+1;
-
-	*pango_log_attrs = g_new(PangoLogAttr, (*attrs_len));
-	
-	pango_get_log_attrs(node->content,
-			    strlen(node->content), /* length in bytes */
-			    -1,
-			    language,
-			    *pango_log_attrs,
-			    *attrs_len);
-
-}
-
-/**
  * cong_location_calc_prev_word:
  * @input_loc:
  * @doc:
@@ -765,7 +727,7 @@ cong_location_calc_prev_word(const CongLocation *input_loc,
 	g_return_val_if_fail(doc, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	make_pango_log_attr_for_node(doc,
+	cong_document_make_pango_log_attr_for_node(doc,
 				     input_loc->node,
 				     &pango_log_attr,
 				     &attrs_len);
@@ -826,7 +788,7 @@ cong_location_calc_next_word(const CongLocation *input_loc,
 	g_return_val_if_fail(doc, FALSE);
 	g_return_val_if_fail(output_loc, FALSE);
 
-	make_pango_log_attr_for_node(doc, 
+	cong_document_make_pango_log_attr_for_node(doc, 
 				     input_loc->node,
 				     &pango_log_attr,
 				     &attrs_len);
@@ -1144,7 +1106,7 @@ cong_location_calc_word_extent(const CongLocation *input_loc,
 		   input_loc->node->content);
 #endif
 
-	make_pango_log_attr_for_node(doc,
+	cong_document_make_pango_log_attr_for_node(doc,
 				     input_loc->node,
 				     &pango_log_attr,
 				     &attrs_len);

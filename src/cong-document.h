@@ -279,6 +279,11 @@ PangoLanguage*
 cong_document_get_language_for_node(CongDocument *doc, 
 				    CongNodePtr node);
 
+void 
+cong_document_make_pango_log_attr_for_node (CongDocument *doc,
+					    CongNodePtr node,
+					    PangoLogAttr **pango_log_attrs,
+					    int *attrs_len);
 
 CongCommandHistory*
 cong_document_get_command_history (CongDocument *doc);
