@@ -101,6 +101,7 @@ void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *t
 
 	hbox = gtk_hbox_new(FALSE, 6);
 	label = gtk_label_new(title);
+	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(category->dialog_content->size_group, label);
 	gtk_container_add(GTK_CONTAINER(hbox), label);
 	gtk_container_add(GTK_CONTAINER(hbox), widget);
@@ -209,6 +210,60 @@ GtkDialog *cong_dialog_save_confirmation_alert_new(GtkWindow *parent,
 		secondary_text = g_strdup_printf("If you close without saving, changes from the past %li minutes will be discarded.", minutes);
 	} else {
 		secondary_text = g_strdup_printf("If you close without saving, changes from the past minute will be discarded.");
+	}
+
+	content = cong_alert_content_new(GTK_STOCK_DIALOG_WARNING,
+					 primary_text, 
+					 secondary_text, 
+					 NULL);
+
+
+	g_free(primary_text);
+	g_free(secondary_text);
+
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), content);
+	gtk_widget_show_all(dialog);
+
+	return GTK_DIALOG(dialog);
+}
+
+
+GtkDialog *cong_dialog_revert_confirmation_alert_new(GtkWindow *parent, 
+						     const gchar *document_name,
+						     glong seconds_since_last_save_or_load)
+{
+	GtkWidget *dialog, *content;
+	gchar *primary_text, *secondary_text;
+	glong minutes;
+
+	g_return_val_if_fail(document_name, NULL);
+
+	dialog = gtk_dialog_new_with_buttons(NULL, /* empty title string */
+					     parent,
+					     GTK_DIALOG_MODAL,
+
+					     GTK_STOCK_CANCEL,
+					     CONG_REVERT_CONFIRMATION_RESULT_CANCEL,
+
+					     GTK_STOCK_REVERT_TO_SAVED,
+					     CONG_REVERT_CONFIRMATION_RESULT_REVERT,
+
+					     NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog),
+					CONG_REVERT_CONFIRMATION_RESULT_REVERT);
+					
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+
+	primary_text = g_strdup_printf("Revert unsaved changes to document \"%s\"?", document_name);
+
+	minutes = seconds_since_last_save_or_load/60;
+
+	if (minutes>120) {
+		secondary_text = g_strdup_printf("Changes from the past %li hours will be discarded.", (minutes/60));
+	} else if (minutes>1) {
+		secondary_text = g_strdup_printf("Changes from the past %li minutes will be discarded.", minutes);
+	} else {
+		secondary_text = g_strdup_printf("Changes from the past minute will be discarded.");
 	}
 
 	content = cong_alert_content_new(GTK_STOCK_DIALOG_WARNING,

@@ -1,3 +1,14 @@
+creating ChangeLog
+2002-12-11 David Malcolm
+
+	* cong-dialog.c, cong-dialog.h
+
+	Layout fixes, new dialog to confirm reverts
+
+	* cong-document.c, cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-primary-window.c, cong-section-head-editor.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, global.h, main.c, popup.c, xmledit.c, xmlview.c
+
+	Overhaul of document change notification system, mapping from document nodes to element editors, confirmation for file->revert, popup/context menu for CongEditorWidget
+
 2002-12-11 Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am: added cong-plugin.h to make it into the dist
