@@ -58,7 +58,7 @@ cong_ui_hook_edit_preferences (GtkWindow *toplevel_window)
 
 	dialog_details = g_new0 (CongPreferencesDialogDetails, 1);
 
-	dialog_details->xml = cong_util_load_glade_file ("glade/cong-preferences.glade", 
+	dialog_details->xml = cong_util_load_glade_file ("conglomerate/glade/cong-preferences.glade", 
 							 "preferences_dialog",
 							 NULL,
 							 NULL);

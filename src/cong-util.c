@@ -820,7 +820,7 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (elements, NULL);
 
-	xml = cong_util_load_glade_file ("glade/string_selection_dialog.glade",
+	xml = cong_util_load_glade_file ("conglomerate/glade/string_selection_dialog.glade",
 					 NULL,
 					 doc,
 					 NULL);

@@ -45,7 +45,7 @@ cong_document_find (CongDocument *doc)
 
 	dialog_details = g_new0 (CongFindDialogDetails, 1);
 
-	dialog_details->xml = cong_util_load_glade_file ("glade/cong-find-replace.glade", 
+	dialog_details->xml = cong_util_load_glade_file ("conglomerate/glade/cong-find-replace.glade", 
 							 "find_dialog",
 							 doc,
 							 NULL);
@@ -92,7 +92,7 @@ cong_document_replace (CongDocument *doc)
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 
-	xml = cong_util_load_glade_file ("glade/cong-find-replace.glade", 
+	xml = cong_util_load_glade_file ("conglomerate/glade/cong-find-replace.glade", 
 					 "replace_dialog",
 					 doc,
 					 NULL);

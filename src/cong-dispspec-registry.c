@@ -224,7 +224,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
 
 	g_assert (coverage_array);
 
-	xml = cong_util_load_glade_file ("glade/cong-dispspec-selector.glade",
+	xml = cong_util_load_glade_file ("conglomerate/glade/cong-dispspec-selector.glade",
 					 NULL,
 					 NULL,
 					 NULL);

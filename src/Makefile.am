@@ -318,7 +318,10 @@ INCLUDES = $(CONGLOMERATE_CFLAGS) \
 	$(LIBFO_CFLAGS) \
 	$(GTKSOURCEVIEW_CFLAGS) \
 	-DLOCALEDIR=\""$(datadir)/locale"\" \
-	-DPKGDATADIR=\""$(pkgdatadir)"\" \
+	-DPREFIX=\""$(prefix)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/conglomerate"\" \
+	-DDATADIR=\""$(datadir)"\" \
+	-DLIBDIR=\""$(libdir)/conglomerate"\" \
 	$(NULL)
 
 conglomerate_LDADD  = $(CONGLOMERATE_LIBS) \

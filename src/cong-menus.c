@@ -1067,7 +1067,7 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 
 	gchar* glade_filename = gnome_program_locate_file(cong_app_get_gnome_program (cong_app_singleton()),
 							  GNOME_FILE_DOMAIN_APP_DATADIR,
-							  "test.glade",
+							  "conglomerate/glade/test.glade",
 							  FALSE,
 							  NULL);
 

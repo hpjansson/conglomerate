@@ -230,7 +230,7 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	dialog_details->doc = doc; 
 	g_object_ref (G_OBJECT (doc));
 
-	dialog_details->xml = cong_util_load_glade_file ("glade/cong-file-properties.glade",
+	dialog_details->xml = cong_util_load_glade_file ("conglomerate/glade/cong-file-properties.glade",
 							 NULL,
 							 doc,
 							 NULL);		

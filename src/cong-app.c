@@ -801,8 +801,8 @@ cong_app_new (int   argc,
 							  argc,argv,
 							  GNOME_PARAM_HUMAN_READABLE_NAME,
 							  _("XML Editor"),
-							  GNOME_PARAM_APP_DATADIR, PKGDATADIR,
-							  /* GSt: bugzilla # 128544 reminder */
+							  GNOME_PROGRAM_STANDARD_PROPERTIES,
+							  /* GSt: bugzilla # 135345 reminder */
 							  NULL);
 
 	/* Set up usage of GConf: */
@@ -833,7 +833,7 @@ cong_app_new (int   argc,
 	{
 		gchar *stylesheet_file = gnome_program_locate_file (PRIVATE(app)->gnome_program,
 								    GNOME_FILE_DOMAIN_APP_DATADIR,
-								    "stylesheets/selection-to-text.xsl",
+								    "conglomerate/stylesheets/selection-to-text.xsl",
 								    FALSE,
 								    NULL);
 
@@ -915,7 +915,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 	{
 		gchar* xds_directory = gnome_program_locate_file (PRIVATE(app)->gnome_program,
 								  GNOME_FILE_DOMAIN_APP_DATADIR,
-								  "dispspecs",
+								  "conglomerate/dispspecs",
 								  FALSE,
 								  NULL);
 

@@ -1058,7 +1058,7 @@ GtkWidget* docbook_generic_node_factory_method(CongServiceNodePropertyDialog *cu
 
 	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "glade/docbook-common-properties.glade",
+						    "conglomerate/glade/docbook-common-properties.glade",
 						    FALSE,
 						    NULL);
 
@@ -1098,7 +1098,7 @@ GtkWidget* docbook_orderedlist_properties_factory_method(CongServiceNodeProperty
 
 	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "glade/docbook-orderedlist-properties.glade",
+						    "conglomerate/glade/docbook-orderedlist-properties.glade",
 						    FALSE,
 						    NULL);
 
@@ -1218,7 +1218,7 @@ GtkWidget* docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog
 
 	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
 						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "glade/docbook-ulink-properties.glade",
+						    "conglomerate/glade/docbook-ulink-properties.glade",
 						    FALSE,
 						    NULL);
 

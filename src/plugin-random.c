@@ -128,7 +128,7 @@ void factory_page_creation_callback_random(CongServiceDocumentFactory *factory, 
 
 	random_gui = g_new0 (RandomGUI, 1);
 	
-	random_gui->xml = cong_util_load_glade_file ("glade/plugin-random.glade",
+	random_gui->xml = cong_util_load_glade_file ("conglomerate/glade/plugin-random.glade",
 						     "middle_page",
 						     NULL,
 						     NULL);

@@ -1,3 +1,29 @@
+2004-03-05  Toshio Kuratomi <toshio@tiki-lounge.com>
+	Changes to fix Bug #135345
+	* cong-app.c: Use GNOME_PROGRAM_STANDARD_PROPERTIES to pull in
+	  standard directories (needed to get help functional) and remove the
+	  PKGDATADIR definition.  (PARAM_APP_DATADIR isn't supposed to work
+	  with PKGDATADIR)
+	* Makefile.am:
+	  - Define paths needed by GNOME_PROGRAM_STANDARD_PROPERTIES
+	  - Revert pkgdatadir to datadir which changed in Bug #121676
+	* cong-file-import.c: Revert file path to use conglomerate
+	  directory instead of including in GNOME_FILE_DOMAIN_APP_DATADIR
+	  which changed in Bug #121676)
+	* cong-menus.c: Change file path for debug_glade_test to point to
+	  the installed glade directory.  Couldn't find test.glade in the
+	  distribution, tarball, though.  Is it still valid?
+	* plugin-docbook.c: Change file path in three places.  Reverts
+	  Bug #121676
+	* cong-app.c: Change file path in two places.  Reverts Bug #121676
+	* cong-util.c, src/cong-util.h: Changed cong_util_load_glade_file
+	  to take datadir relative paths instead of project relative paths.
+	* cong-dispspec-registry.c, src/cong-file-properties.c,
+	  src/cong-edit-find-and-replace.c, src/plugin-random.c,
+	  src/cong-util.c, src/cong-edit-preferences.c:
+	  Change paths to use datadir relative path in calls to
+	  cong_util_load_glade_file
+
 2004-03-05  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec.c

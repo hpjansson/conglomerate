@@ -163,7 +163,7 @@ cong_file_import_dialog_run (GtkWindow *toplevel_window,
 
 	glade_filename = gnome_program_locate_file( cong_app_get_gnome_program (cong_app_singleton()),
 						    GNOME_FILE_DOMAIN_APP_DATADIR,
-						    "glade/cong-file-import.glade",
+						    "conglomerate/glade/cong-file-import.glade",
 						    FALSE,
 						    NULL);
 	
