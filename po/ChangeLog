@@ -1,5 +1,10 @@
 2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
 
+       * es.po:
+       Reverting the  '" %" \n "s"' into '" " \n "%s"' change.
+
+2003-07-04  Geert Stappers  <Geert.Stappers@xs4all.nl>
+
        * conglomerate.pot:
        Added this automatic generated file into CVS.
        It goes into the PACKAGE-VERSION.tar.gz by `make dist`.
