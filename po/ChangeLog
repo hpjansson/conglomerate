@@ -1,3 +1,8 @@
+2003-08-19  Mark Van den Borre <mark@markvdb.be>
+
+      * nl.po:
+      New file with early release of translation to Dutch.
+
 2003-08-08  Geert Stappers  <stappers@stappers.nl>
 
       * POTFILES.in:
