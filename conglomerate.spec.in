@@ -3,7 +3,7 @@
 
 Summary: Information authoring, management, and transformation system.
 Name: conglomerate
-Version: 0.7.12
+Version: @VERSION@
 Release: 0
 License: GPL
 Group: Applications/Text
