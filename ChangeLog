@@ -1,3 +1,7 @@
+2003-04-03  Dmitry G. Mastrukov <dmitry@taurussoft.org>
+
+	* Makefile.am, configure.in, examples/Makefile.am: Install examples and dispspecs to global directory.
+
 2002-12-12  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* configure.in: increment of minor versionnumber

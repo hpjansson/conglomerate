@@ -99,5 +99,6 @@ dnl --- Output ---
 
 AC_OUTPUT(Makefile 
           po/Makefile.in
-	  data/Makefile 
+	  data/Makefile
+	  examples/Makefile 
           src/Makefile)
