@@ -1,2 +1,11 @@
 <?xml version="1.0"?>
-<book><title>Untitled Book</title><chapter><para>This is an attempt to have some non-Roman characters: <emphasis>&#x65E5;&#x672C;&#x8A9E;</emphasis>.  Hopefully that was the Kanji for <foreignphrase>nihongo</foreignphrase> i.e. the Japanese language.</para></chapter></book>
+<book>
+<title>Untitled Book</title>
+<chapter>
+<para>This is an attempt to have some non-Roman characters: 
+ <emphasis>&#x65E5;&#x672C;&#x8A9E;</emphasis>.
+ Hopefully that was the Kanji for <foreignphrase>nihongo</foreignphrase>
+ i.e. the Japanese language.
+</para>
+</chapter>
+</book>
