@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-07 David Malcolm
+
+	* cong-document.c, cong-primary-window.c, cong-tree-view.c, cursor.c, global.h
+
+	Document cleanups and "(modified)" hint in window title.
+
+	* xmlview.c
+
+	More cleanups
+	
 2002-11-06 David Malcolm
 
 	* cong-error-file-save.c, global.h, main.c, open.c

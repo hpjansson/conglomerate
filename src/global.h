@@ -202,6 +202,15 @@ cong_document_get_parent_uri(CongDocument *doc);
 void
 cong_document_save(CongDocument *doc, const char* filename);
 
+gboolean
+cong_document_is_modified(CongDocument *doc);
+
+void
+cong_document_set_modified(CongDocument *doc, gboolean modified);
+
+void
+cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window);
+
 /* MVC-related methods on the document: */
 void cong_document_coarse_update(CongDocument *doc);
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
@@ -473,6 +482,8 @@ struct CongCursor
 	CongLocation location;
 
 	int set;
+
+	guint timeout_id;
 };
 
 
@@ -509,6 +520,7 @@ struct CongFont
 
 CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
 void cong_primary_window_free(CongPrimaryWindow *primary_window);
+void cong_primary_window_update_title(CongPrimaryWindow *primary_window);
 
 CongTreeView *cong_tree_view_new(CongDocument *doc);
 void cong_tree_view_free(CongTreeView *tree_view);

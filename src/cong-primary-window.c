@@ -447,7 +447,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	GdkColor gcol;
 	GtkStyle *style;
 	GtkItemFactory *item_factory;
-	gchar *title;
+	gchar *title, *filename;
 	int i;
 
 	g_assert(primary_window);
@@ -455,7 +455,8 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gdk_rgb_init();
 
 	if (primary_window->doc) {
-		title = g_strdup_printf("%s - %s", cong_document_get_filename(primary_window->doc), "Conglomerate Editor");
+		filename = cong_document_get_filename(primary_window->doc);
+		title = g_strdup_printf("%s - %s", filename, "Conglomerate Editor");
 	} else {
 		title = g_strdup("Conglomerate Editor");
 	}
@@ -605,6 +606,8 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	the_globals.primary_windows = g_list_prepend(the_globals.primary_windows, primary_window);
 
+	cong_document_set_primary_window(doc, primary_window);
+
 	return primary_window;
 	
 }
@@ -613,7 +616,40 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
-	/*g_assert(0);  FIXME: unwritten */
+	cong_tree_view_free(primary_window->cong_tree_view);
+	cong_editor_view_free(primary_window->cong_editor_view);
+	cong_document_delete(primary_window->doc);
 
-	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);
+	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);	
+
+	g_free(primary_window);
+}
+
+void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
+{
+	gchar *title;
+	gchar *filename;
+
+	g_return_if_fail(primary_window);
+
+	if (primary_window->doc) {
+
+		filename = cong_document_get_filename(primary_window->doc);
+
+		if (cong_document_is_modified( primary_window->doc ) ) {
+			title = g_strdup_printf("%s (modified) - %s", filename, "Conglomerate Editor");
+		} else {
+			title = g_strdup_printf("%s - %s", filename, "Conglomerate Editor");
+		}
+
+		g_free(filename);
+
+	} else {
+		title = g_strdup("Conglomerate Editor");
+	}
+
+	gtk_window_set_title( GTK_WINDOW(primary_window->window),
+			      title);
+
+	g_free(title);
 }

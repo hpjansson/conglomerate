@@ -114,12 +114,19 @@ void cong_cursor_init(CongCursor *curs)
 	curs->c = 0;
 #endif
 
-	gtk_timeout_add(500, cong_cursor_blink, curs);
+	curs->timeout_id = gtk_timeout_add(500, cong_cursor_blink, curs);
 	curs->gc = gdk_gc_new(cong_gui_get_a_window()->window);
 	gdk_gc_copy(curs->gc, cong_gui_get_a_window()->style->black_gc);
 	col_to_gcol(&gcol, 0x00ff8c00);
 	gdk_colormap_alloc_color(cong_gui_get_a_window()->style->colormap, &gcol, 0, 1);
 	gdk_gc_set_foreground(curs->gc, &gcol);
+}
+
+void cong_cursor_uninit(CongCursor *curs)
+{
+	g_assert(curs);
+
+	gtk_timeout_remove(curs->timeout_id);
 }
 
 

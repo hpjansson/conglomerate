@@ -485,9 +485,15 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 
 void cong_tree_view_free(CongTreeView *tree_view)
 {
-	g_assert(0); /* unwritten */
+	g_return_if_fail(tree_view);
+
+	/* FIXME: should we delete the widgetry as well? */
+	/* FIXME: should we unref the tree store? */
 
 	cong_document_unregister_view( tree_view->view.doc, CONG_VIEW(tree_view) );
+
+	g_free(tree_view->view.klass);
+	g_free(tree_view);
 }
 
 GtkWidget* cong_tree_view_get_widget(CongTreeView *tree_view)

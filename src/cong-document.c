@@ -20,9 +20,12 @@ struct CongDocument
 	CongCursor curs;
 	CongSelection selection;
 
-#if 0
 	gboolean modified; /* has the document been modified since it was last loaded/saved? */
-#endif
+
+	/* We have an SDI interface, so there should be just one primary window associated with each doc.
+	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
+	*/
+	CongPrimaryWindow *primary_window; 
 };
 
 CongDocument*
@@ -70,7 +73,11 @@ cong_document_delete(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
-	g_assert(0);
+	g_assert(doc->views == NULL); /* There must not be any views left referencing this document */
+
+	cong_cursor_uninit(&doc->curs);
+
+	xmlFreeDoc(doc->xml_doc);
 
 	if (doc->url) {
 		g_free(doc->url);
@@ -225,6 +232,37 @@ cong_document_save(CongDocument *doc, const char* filename)
 	gnome_vfs_uri_unref(file_uri);
 }
 
+gboolean
+cong_document_is_modified(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, FALSE);
+
+	return doc->modified;
+}
+
+void
+cong_document_set_modified(CongDocument *doc, gboolean modified)
+{
+	g_return_if_fail(doc);
+
+	doc->modified = modified;
+
+	/* get at primary window; set title */
+	if (doc->primary_window) {
+		cong_primary_window_update_title(doc->primary_window);
+	}
+}
+
+void
+cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window)
+{
+	g_return_if_fail(doc);
+	g_return_if_fail(window);
+
+	g_assert(doc->primary_window==NULL);
+	doc->primary_window = window;
+}
+
 #define DEBUG_MVC 1
 
 void cong_document_coarse_update(CongDocument *doc)
@@ -247,6 +285,7 @@ void cong_document_coarse_update(CongDocument *doc)
 		g_assert(view->klass->on_document_coarse_update);
 		view->klass->on_document_coarse_update(view);
 	}
+
 }
 
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
@@ -273,6 +312,8 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 			g_assert(view->klass->on_document_node_make_orphan);
 			view->klass->on_document_node_make_orphan(view, node);
 		}
+		
+		cong_document_set_modified(doc, TRUE);
 	}
 }
 
@@ -299,6 +340,8 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 		g_assert(view->klass->on_document_node_add_after);
 		view->klass->on_document_node_add_after(view, node, older_sibling);
 	}
+
+	cong_document_set_modified(doc, TRUE);
 }
 
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
@@ -323,6 +366,8 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 		g_assert(view->klass->on_document_node_add_before);
 		view->klass->on_document_node_add_before(view, node, younger_sibling);
 	}
+
+	cong_document_set_modified(doc, TRUE);
 }
 
 void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
@@ -347,6 +392,8 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 		g_assert(view->klass->on_document_node_set_parent);
 		view->klass->on_document_node_set_parent(view, node, adoptive_parent);
 	}
+
+	cong_document_set_modified(doc, TRUE);
 }
 
 void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
@@ -372,6 +419,8 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 		g_assert(view->klass->on_document_node_set_text);
 		view->klass->on_document_node_set_text(view, node, new_content);
 	}
+
+	cong_document_set_modified(doc, TRUE);
 }
 
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
