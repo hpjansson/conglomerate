@@ -1,5 +1,9 @@
 2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c
+		
+	Optimised the title bar handling
+
 	* xmldata.c
 
 	Fixed a run-time warning

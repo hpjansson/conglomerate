@@ -46,7 +46,7 @@ cong_document_handle_cursor_change(CongDocument *doc);
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
-#define DEBUG_MVC 1
+#define DEBUG_MVC 0
 
 #define PRIVATE(x) ((x)->private)
 
@@ -564,11 +564,14 @@ cong_document_set_modified(CongDocument *doc, gboolean modified)
 {
 	g_return_if_fail(doc);
 
-	PRIVATE(doc)->modified = modified;
+	if (PRIVATE(doc)->modified != modified) {
 
-	/* get at primary window; set title */
-	if (PRIVATE(doc)->primary_window) {
-		cong_primary_window_update_title(PRIVATE(doc)->primary_window);
+		PRIVATE(doc)->modified = modified;
+
+		/* get at primary window; set title */
+		if (PRIVATE(doc)->primary_window) {
+			cong_primary_window_update_title(PRIVATE(doc)->primary_window);
+		}
 	}
 }
 
