@@ -773,7 +773,13 @@ on_signal_button_press (CongEditorArea *editor_area,
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
 	
-	if (event->button == 1) {
+	switch (event->button) {
+	default: 
+		/* Unknown button; can't handle it: */
+		return FALSE;
+		
+	case 1:
+		/* Main mouse button: "left" for most users */
 		switch (event->type) {
 		default: return FALSE; /* do nothing */
 #if 0
@@ -850,10 +856,39 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 			return TRUE;
 		}
-	} else if (event->button == 3) {
+		break;
+
+	case 2:
+		/* Middle mouse button:  Attempt to paste PRIMARY selection at click location: */
+		{
+			CongLocation new_location;
+			
+			if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {
+				GtkClipboard* clipboard;
+				gchar *selected_text;
+
+				clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
+					
+				/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
+				selected_text = gtk_clipboard_wait_for_text (clipboard);
+
+				if (selected_text) {
+					cong_document_paste_source_at (doc, 
+								       &new_location, 
+								       selected_text);
+					
+					g_free (selected_text);
+				}
+			}
+		}
+		
+		return TRUE;
+
+	case 3:
+		/* Right mouse button for most users:  Context menu: */
 		editor_popup_build(editor_widget, parent_window);
 		editor_popup_show(cong_app_singleton()->popup, event);
-
+		
 		return TRUE;
 	}
 
