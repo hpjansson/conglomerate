@@ -1,3 +1,9 @@
+2004-06-11  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* plugin-save-dispspec.c (doc_filter): 
+
+	Tool should only appear if doc has a dispspec
+
 2004-06-10  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* popup.c (cong_ui_popup_init): 

@@ -34,8 +34,8 @@
 
 static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
-	/* Always appropriate: */
-	return TRUE;
+	/* Only appropriate if the doc has a dispspec: */
+	return NULL!=cong_document_get_dispspec (doc);
 }
 
 /**
