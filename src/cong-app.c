@@ -67,6 +67,9 @@ struct CongAppPrivate
 
 	CongSelectionData clipboard_selection;
 	CongSelectionData primary_selection;
+
+	xsltStylesheetPtr xsl_selection_to_text;
+
 };
 
 
@@ -575,13 +578,15 @@ generate_xml_for_selection (const gchar* xml_fragment,
 }
 
 static gchar*
-generate_text_for_selection (const gchar* xml_fragment,
+generate_text_for_selection (CongApp *app,
+			     const gchar* xml_fragment,
 			     CongDocument *source_doc)
 {
 	gchar *doc_source;
 	xmlDocPtr xml_doc_input;
 	xmlDocPtr xml_doc_result;
 
+	g_assert (app);
 	g_assert (xml_fragment);
 	g_assert (IS_CONG_DOCUMENT (source_doc));
 
@@ -592,27 +597,8 @@ generate_text_for_selection (const gchar* xml_fragment,
 	g_free (doc_source);
 	
 	if (xml_doc_input) {
-		xsltStylesheetPtr xsl;
-		
-		/* FIXME: amortize the parsing... */
-		gchar *stylesheet_file = gnome_program_locate_file (PRIVATE(cong_app_singleton())->gnome_program,
-								    GNOME_FILE_DOMAIN_APP_DATADIR,
-								    "stylesheets/selection-to-text.xsl",
-								    FALSE,
-								    NULL);
-
-		xsl = xsltParseStylesheetFile (stylesheet_file);
-		if (xsl==NULL) {
-			g_warning ("Couldn't parse stylesheet %s", stylesheet_file);
-			g_free (stylesheet_file);
-			xmlFreeDoc (xml_doc_input);
-			return NULL;
-		}
-		g_free (stylesheet_file);
-		
-		xml_doc_result = xsltApplyStylesheet(xsl, xml_doc_input, NULL);
+		xml_doc_result = xsltApplyStylesheet (PRIVATE(app)->xsl_selection_to_text, xml_doc_input, NULL);
 		xmlFreeDoc (xml_doc_input);
-		xsltFreeStylesheet (xsl);
 
 		if (xml_doc_result) {
 			gchar *result;
@@ -626,7 +612,9 @@ generate_text_for_selection (const gchar* xml_fragment,
 			xmlFreeDoc (xml_doc_result);
 
 			return result;
-		}		
+		} else {
+			g_warning ("Couldn't apply stylesheet");
+		}
 	}
 
 	return NULL;
@@ -634,7 +622,8 @@ generate_text_for_selection (const gchar* xml_fragment,
 
 
 static void
-regenerate_selection (CongSelectionData *cong_selection,
+regenerate_selection (CongApp *app,
+		      CongSelectionData *cong_selection,
 		      const gchar* xml_fragment,
 		      CongDocument *source_doc)
 {
@@ -657,7 +646,9 @@ regenerate_selection (CongSelectionData *cong_selection,
 			g_free (cong_selection->utf8_text);
 		}
 
-		cong_selection->utf8_text = generate_text_for_selection (xml_fragment, source_doc);
+		cong_selection->utf8_text = generate_text_for_selection (app,
+									 xml_fragment, 
+									 source_doc);
 
 		/* FIXME: reduce debug spew as well! */
 	}
@@ -681,7 +672,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 
 	clipboard = gtk_clipboard_get (selection);
 
-#if 1
 	if (selection==GDK_SELECTION_CLIPBOARD) {
 		cong_selection = &(PRIVATE(app)->clipboard_selection);
 	} else {
@@ -689,7 +679,8 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 	}
 
 	/* For now we build all possible types in advance and store, ready to be supply whatever is requested.  Eventually we might try to be smarter about this: */
-	regenerate_selection (cong_selection,
+	regenerate_selection (app,
+			      cong_selection,
 			      xml_fragment,
 			      source_doc);
 
@@ -699,10 +690,6 @@ cong_app_set_clipboard_from_xml_fragment (CongApp *app,
 				     clipboard_get_cb,
 				     clipboard_clear_cb,
 				     cong_selection);
-#else
-	/* FIXME: Do as UTF-8 text for now, ultimately should support multiple formats... */
-	gtk_clipboard_set_text (clipboard, xml_fragment, -1);
-#endif
 
 	g_message("Clipboard set to \"%s\"", xml_fragment);
 
@@ -810,6 +797,20 @@ cong_app_new (int   argc,
 		}
 	}
 
+	/* Load stylesheets: */
+	{
+		gchar *stylesheet_file = gnome_program_locate_file (PRIVATE(app)->gnome_program,
+								    GNOME_FILE_DOMAIN_APP_DATADIR,
+								    "stylesheets/selection-to-text.xsl",
+								    FALSE,
+								    NULL);
+
+		PRIVATE (app)->xsl_selection_to_text = xsltParseStylesheetFile (stylesheet_file);
+		if (PRIVATE (app)->xsl_selection_to_text==NULL) {
+			g_warning ("Couldn't parse stylesheet %s", stylesheet_file);
+		}
+		g_free (stylesheet_file);
+	}
 
 	return app;	
 }
@@ -818,6 +819,8 @@ static void
 cong_app_free (CongApp *app)
 {
 	g_return_if_fail (app);
+
+	xsltFreeStylesheet (PRIVATE (app)->xsl_selection_to_text);
 
 	g_free(app->private);
 	g_free(app);

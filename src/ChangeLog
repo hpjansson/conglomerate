@@ -1,5 +1,9 @@
 2003-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-app.c
+
+	Load and parse selection-handling stylesheet once, rather than every time a selection changes
+
 	* cong-app.c, cong-app.h
 
 	Big rewrite of selection handling: now attempts to intelligently offer and receive data in both text and XML formats, fixing bug #129731
