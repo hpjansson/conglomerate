@@ -43,6 +43,8 @@ typedef struct CongExternalDocumentModel CongExternalDocumentModel;
    cong_dispspec stuff: 
 *******************************/
 
+GdkGC* generate_gc_for_col(const GdkColor *col);
+
 /* Barebones constructor: */
 CongDispspec* cong_dispspec_new(void);
 
@@ -289,6 +291,9 @@ cong_external_document_model_get_public_id (const CongExternalDocumentModel* mod
 /* e.g. for DocBook 4.1.2: "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" */
 const gchar*
 cong_external_document_model_get_system_id (const CongExternalDocumentModel* model);
+
+xmlNodePtr
+cong_dispspec_get_template(const CongDispspec *ds);
 
 G_END_DECLS
 

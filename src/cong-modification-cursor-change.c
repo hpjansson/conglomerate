@@ -26,6 +26,7 @@
 #include "cong-modification-cursor-change.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
+#include "cong-command.h"
 
 #define PRIVATE(x) ((x)->private)
 

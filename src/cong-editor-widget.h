@@ -91,11 +91,11 @@ struct CongEditorWidget3Class
 };
 
 GType
-cong_editor_widget_get_type (void);
+cong_editor_widget3_get_type (void);
 
 CongEditorWidget3*
-cong_editor_widget_construct (CongEditorWidget3 *editor_widget,
-			      CongDocument *doc);
+cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
+			       CongDocument *doc);
 
 GtkWidget*
 cong_editor_widget3_new(CongDocument *doc);

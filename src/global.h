@@ -142,6 +142,9 @@ void cong_cursor_del_next_char(CongCursor *curs, CongDocument *doc);
 void cong_cursor_home(CongCursor *curs, CongDocument *doc);
 void cong_cursor_end(CongCursor *curs, CongDocument *doc);
 
+const CongLocation*
+cong_cursor_get_location (const CongCursor *cursor);
+
 /* Popup (context) menus for editor view: */
 void editor_popup_show(GtkWidget *widget, GdkEventButton *bevent);
 void editor_popup_build(CongDocument *doc, GtkWindow *parent_window);
@@ -160,6 +163,11 @@ query_for_forced_dispspec (gchar *what_failed,
 			   xmlDocPtr doc, 
 			   GtkWindow* parent_window,
 			   const gchar *filename_extension);
+
+GtkWidget* make_uneditable_text(const gchar* text);
+
+gchar*
+get_col_string (const GdkColor* col);
 
 /* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
