@@ -105,9 +105,6 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 const char *xml_frag_data_nice(CongNodePtr x);
 const char *xml_frag_name_nice(CongNodePtr x);
 
-CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1);
-CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c);
-
 CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *doc, CongNodePtr p);
 void cong_selection_delete(CongSelection *selection, CongDocument *doc);
 

@@ -283,8 +283,10 @@ void cong_node_self_test(CongNodePtr node)
 
 	g_assert(node->doc);
 
-	if (node->content) {
-		g_assert(g_utf8_validate(node->content,-1,NULL));
+	if (node->type!=XML_DOCUMENT_NODE) {
+		if (node->content) {
+			g_assert(g_utf8_validate(node->content,-1,NULL));
+		}
 	}
 
 	if (node->prev) {
@@ -506,6 +508,26 @@ CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 
 	return new_node;
 }
+
+gboolean
+cong_node_is_descendant_of (CongNodePtr node,
+			    CongNodePtr potential_ancestor)
+{
+	g_return_val_if_fail (node, FALSE);
+	g_return_val_if_fail (potential_ancestor, FALSE);
+	
+	if (node->parent) {
+		if (node->parent == potential_ancestor) {
+			return TRUE;
+		} else {
+			return cong_node_is_descendant_of (node->parent,
+							   potential_ancestor);
+		}
+	} else {
+		return FALSE;
+	}
+}
+
 
 /* Tree manipulation: */
 void cong_node_private_make_orphan(CongNodePtr node)
@@ -1516,7 +1538,7 @@ void xml_tag_remove(CongDocument *doc, CongNodePtr x)
 
 	cong_document_node_make_orphan(doc, x);
 
-	cong_node_free(x);
+	cong_document_node_recursive_delete (doc, x);
 #else
 	n0 = cong_node_first_child(x);
 

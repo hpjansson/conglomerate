@@ -130,6 +130,10 @@ cong_node_recursive_set_doc (CongNodePtr node,
 CongNodePtr
 cong_node_recursive_dup (CongNodePtr node);
 
+gboolean
+cong_node_is_descendant_of (CongNodePtr node,
+			    CongNodePtr potential_ancestor);
+
 /* Method to test if it's safe to recurse over the children of this node.  It's generally not a good idea to recurse over the children of an entity reference.  
    FIXME: why? 
 */

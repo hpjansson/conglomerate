@@ -79,7 +79,7 @@ struct CongDocumentDetails
 	GList *views; /* a list of CongView* */
 
 	/* cursor and selections are now properties of the document: */
-	CongCursor curs;
+	CongCursor cursor;
 	CongSelection selection;
 
 	gboolean modified; /* has the document been modified since it was last loaded/saved? */
@@ -328,7 +328,7 @@ cong_document_construct (CongDocument *doc,
 	}
 	#endif
 
-	cong_cursor_init(&PRIVATE(doc)->curs, doc);
+	cong_cursor_init(&PRIVATE(doc)->cursor, doc);
 	cong_selection_init(&PRIVATE(doc)->selection);
 
 #if 0
@@ -693,10 +693,12 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 
 	g_assert (cong_document_is_within_edit(doc));
 
-	/* Emit signal: */
-	g_signal_emit (G_OBJECT(doc),
-		       signals[NODE_MAKE_ORPHAN], 0,
-		       node);
+	if (node->parent) {		
+		/* Emit signal: */
+		g_signal_emit (G_OBJECT(doc),
+			       signals[NODE_MAKE_ORPHAN], 0,
+			       node);
+	}
 }
 
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling)
@@ -881,6 +883,7 @@ void cong_document_on_cursor_change(CongDocument *doc)
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 {
 	GList *iter;
+	CongNodePtr parent;
 
 	g_return_if_fail(doc);
 	g_return_if_fail(x);
@@ -889,9 +892,14 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 	g_message("cong_document_tag_remove");
 	#endif
 
+	parent = x->parent;
+
 	cong_document_begin_edit(doc);
 
 	xml_tag_remove(doc, x); /* this is now a compound operation */
+
+	cong_document_merge_adjacent_text_children_of_node (doc, 
+							    parent);
 
 	cong_document_end_edit(doc);
 }
@@ -919,7 +927,7 @@ CongCursor* cong_document_get_cursor(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return &PRIVATE(doc)->curs;
+	return &PRIVATE(doc)->cursor;
 }
 
 CongSelection* cong_document_get_selection(CongDocument *doc)
@@ -1012,19 +1020,54 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 	return FALSE;
 }
 
+static gboolean
+merge_text_update_location_callback (CongDocument *doc,
+				     CongLocation *location, 
+				     gpointer user_data)
+{
+	CongNodePtr affected_node = user_data;
+
+	g_assert (affected_node);
+	g_assert (affected_node->prev);
+
+	if (location->node == affected_node->prev) {
+		
+		location->node = affected_node;
+
+		return TRUE;
+
+	} else if (location->node == affected_node) {
+
+		location->byte_offset += strlen(affected_node->prev->content);
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static gboolean merge_adjacent_text_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
 	/* We have to "look behind" at the previous sibling, since the iteration moes forward: */
 	if (node->prev) {
 		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
 			if (cong_node_type(node->prev)==CONG_NODE_TYPE_TEXT) {
+				CongCursor *cursor = cong_document_get_cursor (doc);				
+
 				/* Merge preceding node's text into this one, then delete it: */
-				gchar *new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
+				gchar *new_text;
+
+				new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
+
+				/* Update cursor and selection if necessary: */
+				cong_document_for_each_location (doc,
+								 merge_text_update_location_callback, 
+								 node);
 
 				cong_document_node_set_text (doc, node, new_text);
 				g_free (new_text);
 
-				cong_document_tag_remove (doc, node->prev);
+				cong_document_node_recursive_delete (doc, node->prev);
 			}			
 		}
 	}
@@ -1067,6 +1110,13 @@ cong_document_node_recursive_delete (CongDocument *doc,
 
 	CONG_NODE_SELF_TEST(node);
 
+	/* You must ensure the cursor and/or selection locations don't retain a pointer to this node: */
+	if (doc) {
+		g_assert (PRIVATE(doc)->cursor.location.node!=node);
+		g_assert (PRIVATE(doc)->selection.loc0.node!=node);
+		g_assert (PRIVATE(doc)->selection.loc1.node!=node);
+	}
+
 	iter = node->children; 
 
 	while (iter) {
@@ -1082,10 +1132,13 @@ cong_document_node_recursive_delete (CongDocument *doc,
 	g_assert(node->children==NULL);
 	g_assert(node->last==NULL);
 
-	cong_document_node_make_orphan(doc, node);
+	if (node->parent) {
+		cong_document_node_make_orphan(doc, node);
+	}
 
 	cong_node_free(node);
 }
+
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment)
@@ -1123,6 +1176,33 @@ cong_document_make_nodes_from_source_fragment (CongDocument *doc,
 	
 	return result;
 
+}
+
+void
+cong_document_for_each_location (CongDocument *doc, 
+				 CongUpdateLocationCallback callback, 
+				 gpointer user_data)
+{
+	g_return_if_fail (doc);
+	g_return_if_fail (callback);
+
+	if ( callback (doc,
+		       &PRIVATE(doc)->cursor.location,
+		       user_data)) {
+		cong_document_on_cursor_change (doc);
+	}
+
+	if ( callback (doc,
+		       &PRIVATE(doc)->selection.loc0,
+		       user_data)) {
+		cong_document_on_selection_change (doc);
+	}
+
+	if (callback (doc,
+		      &PRIVATE(doc)->selection.loc1,
+		      user_data)) {
+		cong_document_on_selection_change (doc);
+	}
 }
 
 /* Implementation of default signal handlers: */

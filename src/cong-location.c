@@ -168,7 +168,9 @@ cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *l
 	
 	/* GREP FOR MVC */
 
-	return xml_frag_data_nice_split2(doc, loc->node, loc->byte_offset);
+	return cong_document_node_split2 (doc, 
+					  loc->node, 
+					  loc->byte_offset);
 }
 
 void

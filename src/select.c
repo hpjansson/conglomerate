@@ -27,8 +27,49 @@ void cong_selection_end_from_curs(CongSelection *selection, CongCursor *curs)
 	cong_location_copy(&selection->loc1, &curs->location);
 }
 
+struct split3_userdata
+{
+	CongNodePtr s;
+	int c0;
+	int c1;
+
+	CongNodePtr d1;
+	CongNodePtr d2;
+	CongNodePtr d3;
+};
+
+static gboolean
+split3_location_callback (CongDocument *doc,
+			  CongLocation *location, 
+			  gpointer user_data)
+{
+	struct split3_userdata* split3_data = user_data;
+	
+	if (location->node == split3_data->s) {
+		if (location->byte_offset<split3_data->c0) {
+			location->node = split3_data->d1;
+		} else {
+			if (location->byte_offset<split3_data->c1) {
+				location->node = split3_data->d2;
+				location->byte_offset -= split3_data->c0;
+			} else {
+				location->node = split3_data->d3;
+				location->byte_offset -= split3_data->c1;
+			}
+		}
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 /* Splits a data node in 3 and returns pointer to the middle one */
-CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, int c1)
+CongNodePtr
+cong_document_node_split3 (CongDocument *doc, 
+			   CongNodePtr s, 
+			   int c0, 
+			   int c1)
 {
 	CongNodePtr d1, d2, d3;
 	int len1, len2, len3;
@@ -50,16 +91,34 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 	d2 = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2, doc);
 	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3, doc);
 
-	/* Link it in */
 	cong_document_begin_edit(doc);
+
+	/* Link it in */
 	cong_document_node_add_after(doc, d1, s);
 	cong_document_node_add_after(doc, d2, d1);
 	cong_document_node_add_after(doc, d3, d2);
 	cong_document_node_make_orphan(doc, s);
-	cong_document_end_edit(doc);
+
+	/* Update the cursor and selection as necessary: */
+	{
+		struct split3_userdata user_data;
+		
+		user_data.s = s;
+		user_data.c0 = c0;
+		user_data.c1 = c1;
+		user_data.d1 = d1;
+		user_data.d2 = d2;
+		user_data.d3 = d3;
+		
+		cong_document_for_each_location (doc, 
+						 split3_location_callback,
+						 &user_data);
+	}
 
 	/* Unlink old node */
-	cong_node_free(s);
+	cong_document_node_recursive_delete (doc, s);
+
+	cong_document_end_edit(doc);
 
 	CONG_NODE_SELF_TEST(d2);
 
@@ -68,10 +127,15 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 
 
 /* Splits a data node in 2 and returns pointer to first one */
-CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
+CongNodePtr
+cong_document_node_split2 (CongDocument *doc, 
+			   CongNodePtr s, 
+			   int c)
 {
 	CongNodePtr d = NULL;
 	int len1, len2;
+
+	g_return_val_if_fail(cong_node_type(s) == CONG_NODE_TYPE_TEXT, NULL);
 
 	CONG_NODE_SELF_TEST(s);
 
@@ -236,9 +300,7 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongDocument *
 		{
 			if (loc0.byte_offset == loc1.byte_offset) return(0); /* The end is the beginning is the end */
 			
-			loc0.node = loc1.node = xml_frag_data_nice_split3(doc, loc0.node, loc0.byte_offset, loc1.byte_offset);
-			selection->loc0.node = loc0.node;
-			selection->loc1.node = loc0.node->next;
+			loc0.node = loc1.node = cong_document_node_split3(doc, loc0.node, loc0.byte_offset, loc1.byte_offset);
 		}
 
 		selection->loc0.byte_offset = 0;

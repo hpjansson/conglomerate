@@ -123,6 +123,26 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	return TRUE;
 }
 
+
+static gboolean
+tree_cut_update_location_callback (CongDocument *doc,
+				   CongLocation *location, 
+				   gpointer user_data)
+{
+	CongNodePtr node = user_data;
+
+	if (location->node) {
+		if (cong_node_is_descendant_of (location->node,
+						node) ) {
+			cong_location_nullify(location);
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+
 gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 {
 	CongDocument *doc;
@@ -141,6 +161,11 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	CONG_NODE_SELF_TEST(cong_app_singleton()->clipboard);
 
 	cong_document_begin_edit(doc);
+
+	cong_document_for_each_location (doc, 
+					 tree_cut_update_location_callback,
+					 tag);
+
 	cong_document_node_recursive_delete(doc, tag);
 	cong_document_end_edit(doc);
 

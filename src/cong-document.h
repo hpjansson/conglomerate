@@ -254,6 +254,34 @@ CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
 					       const gchar *source_fragment);
 
+/* Return true if you modify the location */
+typedef gboolean
+(*CongUpdateLocationCallback) (CongDocument *doc,
+			       CongLocation *location, 
+			       gpointer user_data);
+
+/* Invoke the callback for the cursor and selection locations; allowing you to do something sane with them when manipulating the tree */
+void
+cong_document_for_each_location (CongDocument *doc, 
+				 CongUpdateLocationCallback callback, 
+				 gpointer user_data);
+
+/**
+ * Splits a data node in 3 and returns pointer to the middle one 
+ */
+CongNodePtr
+cong_document_node_split3 (CongDocument *doc, 
+			   CongNodePtr s, 
+			   int c0, 
+			   int c1);
+
+CongNodePtr 
+cong_document_node_split2 (CongDocument *doc, 
+			   CongNodePtr s, 
+			   int c);
+
+
+
 G_END_DECLS
 
 #endif

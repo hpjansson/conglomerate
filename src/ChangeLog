@@ -1,3 +1,9 @@
+2003-08-12  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-document.h, cong-location.c, cong-node.h, global.h, select.c, tree.c, xmldata.c
+
+	Added debug checking, and hooks to handle cursor and selection locations when things get edited
+	
 2003-08-12  Jeff Martin <jeff@custommonkey.org>
 
 	* cong-menus.c
