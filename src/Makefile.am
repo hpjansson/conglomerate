@@ -70,6 +70,7 @@ conglomerate_SOURCES =      \
   cong-editor-node-unimplemented.h \
   cong-editor-widget.h      \
   cong-eel.h                \
+  cong-eel-graphic-effects.h \
   cong-enum-mapping.h       \
   cong-error-dialog.h       \
   cong-fake-plugin-hooks.h  \
@@ -161,6 +162,7 @@ conglomerate_SOURCES =      \
   cong-editor-node-unimplemented.c \
   cong-editor-widget3.c     \
   cong-eel.c                \
+  cong-eel-graphic-effects.c \
   cong-enum-mapping.c       \
   cong-error-dialog.c       \
   cong-error-file-open.c    \

@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-eel-graphic-effects.c, cong-eel-graphic-effects.h, Makefile.am
+
+	New files, copied and pasted from eel
+	
 	* cong-node.c
 
 	Self-test now handles children of an entity reference correctly
