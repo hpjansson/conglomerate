@@ -1,3 +1,14 @@
+2003-07-31  Jeff Martin <jeff@custommonkey.org>
+
+	* cong-dispspec.c
+
+	Bug fixes in dispspec generation and loading
+
+	* plugin-save-dispspec.c, cong-fake-plugin-hooks.h, main.c, Makefile.am
+
+	Added plugin to extract dispspec as a dom tree and either save it
+	straight to a file or open it as a CongDocument
+
 2003-07-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-flow-holder-inlines.c

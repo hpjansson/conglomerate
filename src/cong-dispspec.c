@@ -761,12 +761,15 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 						DS_DEBUG_MSG1("got element-list\n");
 
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
-							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
-							
-							cong_dispspec_add_element(ds,element);
+							if(xml_element->type==XML_ELEMENT_NODE)
+							{
+								CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
+								
+								cong_dispspec_add_element(ds,element);
 
-							if (element->type==CONG_ELEMENT_TYPE_PARAGRAPH){
-								ds->paragraph=element;
+								if (element->type==CONG_ELEMENT_TYPE_PARAGRAPH){
+									ds->paragraph=element;
+								}
 							}
 						}
 						
@@ -1372,7 +1375,7 @@ static void add_xml_for_element (xmlDocPtr xml_doc,
 	}
 
 	g_assert (element->tagname);
-	xmlSetProp (element_node, "name", element->tagname);
+	xmlSetProp (element_node, "tag", element->tagname);
 	xmlSetProp (element_node, "type", element_type_to_string(element->type));
 
 	/* Handle name: */
