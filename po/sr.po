@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-25 18:27+0100\n"
-"PO-Revision-Date: 2004-02-25 18:27+0100\n"
+"POT-Creation-Date: 2004-03-26 16:59+0100\n"
+"PO-Revision-Date: 2004-03-26 17:00+0100\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
-"Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
+"Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,8 +39,8 @@ msgstr "Увозник"
 msgid "Options"
 msgstr "Опције"
 
-#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1063
-#: src/cong-node-properties-dialog.c:1146
+#: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1125
+#: src/cong-node-properties-dialog.c:1208
 msgid "Advanced"
 msgstr "Напредно"
 
@@ -49,7 +49,7 @@ msgid "Basic"
 msgstr "Основно"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:289
-#: src/cong-edit-preferences.c:137 src/cong-file-export.c:305
+#: src/cong-edit-preferences.c:137 src/cong-file-export.c:302
 #: src/cong-file-new.c:291 src/cong-file-print.c:252
 #: src/cong-parser-error.c:271
 msgid "Description"
@@ -67,12 +67,12 @@ msgstr "Кодирање"
 msgid "External ID"
 msgstr "Спољни ИД"
 
-#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:252
+#: glade/cong-file-properties.glade.h:7 src/cong-file-export.c:249
 #: src/cong-file-print.c:219
 msgid "General"
 msgstr "Опште"
 
-#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:239
+#: glade/cong-file-properties.glade.h:8 src/cong-node-properties-dialog.c:240
 msgid "Location"
 msgstr "Путања"
 
@@ -81,8 +81,8 @@ msgid "Modified"
 msgstr "Мењано"
 
 #: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:129
-#: src/cong-file-export.c:304 src/cong-file-print.c:251
-#: src/cong-node-properties-dialog.c:527
+#: src/cong-file-export.c:301 src/cong-file-print.c:251
+#: src/cong-node-properties-dialog.c:589
 msgid "Name"
 msgstr "Име"
 
@@ -90,7 +90,7 @@ msgstr "Име"
 #: glade/docbook-common-properties.glade.h:3
 #: glade/docbook-orderedlist-properties.glade.h:9
 #: glade/docbook-ulink-properties.glade.h:3 glade/plugin-random.glade.h:4
-#: src/cong-node-properties-dialog.c:1108
+#: src/cong-node-properties-dialog.c:1170
 msgid "Properties"
 msgstr "Особине"
 
@@ -115,7 +115,7 @@ msgstr "Верзија"
 msgid "XML Header"
 msgstr "XML заглавље"
 
-#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:180
+#: glade/cong-file-properties.glade.h:17 src/cong-file-properties.c:182
 msgid "_Associate this DTD"
 msgstr "_Намени ову ДТД"
 
@@ -268,7 +268,7 @@ msgstr "А, Б, В, ..."
 msgid "Continue numbering from previous list"
 msgstr "Наставите бројање на претходни списак"
 
-#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:264
+#: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:265
 #: src/cong-error-file-open.c:449
 msgid "Details"
 msgstr "Детаљи"
@@ -346,7 +346,7 @@ msgstr "ознака"
 msgid "string_selection_dialog"
 msgstr "прозорче_за_избор_ниски"
 
-#: src/cong-app.c:803
+#: src/cong-app.c:804
 msgid "XML Editor"
 msgstr "XML уређивач"
 
@@ -368,26 +368,26 @@ msgstr ""
 "нисте инсталирали. Покушајте да га инсталирате. Уколико сте изменили "
 "подразумевано подешавање путање за дефиницију приказа, проверите и то."
 
-#: src/cong-attribute-editor-cdata.c:178
-#: src/cong-attribute-editor-enumeration.c:174
-#: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:364
+#: src/cong-attribute-editor-cdata.c:183
+#: src/cong-attribute-editor-enumeration.c:183
+#: src/cong-attribute-wrapper.c:187 src/cong-node-properties-dialog.c:417
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
 msgstr "Постави атрибут „%s“ на „%s“"
 
-#: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:408
+#: src/cong-attribute-editor-cdata.c:209 src/cong-node-properties-dialog.c:463
 #, c-format
 msgid "Add attribute \"%s\""
 msgstr "Додај атрибут „%s“"
 
-#: src/cong-attribute-editor-cdata.c:226
-#: src/cong-attribute-editor-enumeration.c:177
-#: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:438
+#: src/cong-attribute-editor-cdata.c:235
+#: src/cong-attribute-editor-enumeration.c:186
+#: src/cong-attribute-wrapper.c:212 src/cong-node-properties-dialog.c:499
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Обриши атрибут „%s“"
 
-#: src/cong-attribute-editor-enumeration.c:89
+#: src/cong-attribute-editor-enumeration.c:92
 msgid "(unspecified)"
 msgstr "(ненаведено)"
 
@@ -450,13 +450,13 @@ msgstr "Измене учињене у претходних %li минута ћ�
 msgid "Changes from the past minute will be discarded."
 msgstr "Измене учињене у претходном минуту ће бити занемарене."
 
-#: src/cong-dispspec-element.c:535 src/cong-dispspec-element.c:571
+#: src/cong-dispspec-element.c:567 src/cong-dispspec-element.c:603
 #: src/cong-xpath-expression.c:207
 msgid "(xpath failed)"
 msgstr "(неуспешан xpath)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:617
+#: src/cong-dispspec-element.c:649
 msgid "<untitled>"
 msgstr "<без наслова>"
 
@@ -477,11 +477,11 @@ msgstr "Тип датотеке"
 msgid "Coverage"
 msgstr "Покриће"
 
-#: src/cong-dispspec.c:409
+#: src/cong-dispspec.c:408
 msgid "unnamed"
 msgstr "неименован"
 
-#: src/cong-dispspec.c:422
+#: src/cong-dispspec.c:421
 msgid "No description available."
 msgstr "Нема описа."
 
@@ -558,7 +558,7 @@ msgstr "Почетак XInclude-а"
 msgid "XInclude End"
 msgstr "Крај XInclude-а"
 
-#: src/cong-document.c:1447
+#: src/cong-document.c:1456
 #, c-format
 msgid "Select %s"
 msgstr "Изаберите %s"
@@ -567,17 +567,9 @@ msgstr "Изаберите %s"
 msgid "UNKNOWN"
 msgstr "НЕПОЗНАТО"
 
-# bug: no translating for most of it
-#: src/cong-dom-view.c:234
-#, c-format
-msgid "Text: \"<span foreground=\"%s\">%s</span>\""
-msgstr "Текст: \"<span foreground=\"%s\">%s</span>\""
-
-# bug: no l10n here I guess
-#: src/cong-dom-view.c:251
-#, c-format
-msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
-msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+#: src/cong-dom-view.c:235
+msgid "Text:"
+msgstr "Текст:"
 
 #: src/cong-editor-node-text.c:883
 msgid "Select word"
@@ -642,36 +634,23 @@ msgstr ""
 msgid "An error was reported whilst attempting the operation \"%s\""
 msgstr "Пријављена је грешка при покушају извршавања операције „%s“"
 
-#: src/cong-error-dialog.c:251
-#, c-format
-msgid ""
-"A GError occurred; the error report was:\n"
-"<i>%s</i>"
-msgstr ""
-"Догодила се грешка (GError); добијени извештај је:\n"
-"<i>%s</i>"
+#: src/cong-error-dialog.c:252
+msgid "A GError occurred; the error report was:"
+msgstr "Догодила се грешка (GError); добијени извештај је:"
 
-#: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
+#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
 msgstr "Догодила се неочекивана грешка."
 
-#: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
+#: src/cong-error-dialog.c:263 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
 msgstr "За више података, кликните на дугме „Детаљи“."
 
-#. Add upper content:
-#: src/cong-error-dialog.c:300
-#, c-format
-msgid ""
-"An error occurred whilst running this system command:\n"
-"\n"
-"<tt>%s</tt>"
-msgstr ""
-"Догодила се грешка при покретању ове системске наредбе:\n"
-"\n"
-"<tt>%s</tt>"
+#: src/cong-error-dialog.c:302
+msgid "An error occurred whilst running this system command:"
+msgstr "Догодила се грешка при покретању ове системске наредбе:"
 
-#: src/cong-error-dialog.c:301
+#: src/cong-error-dialog.c:305
 #, c-format
 msgid ""
 "The error number reported was %d.  Below is the error text that was output "
@@ -1078,41 +1057,41 @@ msgstr "Конгломерат опонаша грешку у обичној о�
 msgid "This dialog was generated by the automated testing routine"
 msgstr "Ово прозорче је сачинила аутоматска функција за испробавање"
 
-#: src/cong-file-export.c:161
-msgid "<small>(No description available)</small>"
-msgstr "<small>(Нема описа)</small>"
+#: src/cong-file-export.c:157
+msgid "(No description available)"
+msgstr "(Опис није доступан)"
 
-#: src/cong-file-export.c:197
+#: src/cong-file-export.c:194
 msgid "Select file to export to"
 msgstr "Изаберите датотеку да извезете"
 
-#: src/cong-file-export.c:231
+#: src/cong-file-export.c:228
 #, c-format
 msgid "Export \"%s\""
 msgstr "Извези „%s“"
 
-#: src/cong-file-export.c:236
+#: src/cong-file-export.c:233
 msgid "Export"
 msgstr "Извези"
 
-#: src/cong-file-export.c:287
+#: src/cong-file-export.c:284
 msgid "Exporter:"
 msgstr "Извозник:"
 
-#: src/cong-file-export.c:289
+#: src/cong-file-export.c:286
 msgid "File:"
 msgstr "Датотека:"
 
-#: src/cong-file-export.c:296
+#: src/cong-file-export.c:293
 msgid "Export Options"
 msgstr "Опције извоза"
 
-#: src/cong-file-export.c:377
+#: src/cong-file-export.c:374
 #, c-format
 msgid "Conglomerate cannot export \"%s\""
 msgstr "Конгломерат не може да извезе „%s“"
 
-#: src/cong-file-export.c:380
+#: src/cong-file-export.c:377
 msgid "None of Conglomerate's plugins know how to export files of that type."
 msgstr "Ниједан од додатака Конгломерата не може да извезе датотеке тог типа."
 
@@ -1247,37 +1226,34 @@ msgstr "Не"
 msgid "None"
 msgstr "Ништа"
 
-#: src/cong-file-properties.c:163
+#: src/cong-file-properties.c:165
 msgid "_Remove this DTD"
 msgstr "У_клони ову ДТД"
 
-#: src/cong-file-properties.c:186
+#: src/cong-file-properties.c:188
 msgid ""
-"<small>The document does not specify an external DTD, but Conglomerate "
-"believes the above information is appropriate.  Click on \"Associate this DTD"
-"\" to specify this information explicitly in the document.</small>"
-msgstr ""
-"<small>Овај документ не наводи спољашњу ДТД, али Конгломерат сматра да су "
-"наредни подаци одговарајући. Кликните на „Намени ову ДТД“ да изричито "
-"наведете ове податке у документу.</small>"
+"The document does not specify an external DTD, but Conglomerate believes the "
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr "Овај документ не наводи спољашњу ДТД, али Конгломерат сматра да су наредни подаци одговарајући. Кликните на „Намени ову ДТД“ да изричито наведете ове податке у документу."
 
-#: src/cong-file-properties.c:194
+#: src/cong-file-properties.c:197
 msgid "No External Subset"
 msgstr "Без спољашњег подскупа"
 
-#: src/cong-file-properties.c:196
+#: src/cong-file-properties.c:199
 msgid "_Add a DTD"
 msgstr "_Додај ДТД"
 
-#: src/cong-file-properties.c:273
+#: src/cong-file-properties.c:276
 msgid "Unspecified"
 msgstr "Ненаведени"
 
-#: src/cong-file-properties.c:348
+#: src/cong-file-properties.c:351
 msgid "Remove DTD"
 msgstr "Уклони ДТД"
 
-#: src/cong-file-properties.c:365
+#: src/cong-file-properties.c:368
 msgid "Associate with DTD"
 msgstr "Намени ову ДТД"
 
@@ -1285,19 +1261,19 @@ msgstr "Намени ову ДТД"
 msgid "Save XML as..."
 msgstr "Сачувај XML као..."
 
-#: src/cong-location.c:300 src/cong-location.c:321
+#: src/cong-location.c:289 src/cong-location.c:310
 msgid "Merge tags"
 msgstr "Споји ознаке"
 
-#: src/cong-location.c:365
+#: src/cong-location.c:354
 msgid "Delete character"
 msgstr "Обриши знак"
 
-#: src/cong-location.c:830
+#: src/cong-location.c:819
 msgid "Calculating previous page"
 msgstr "Срачунава претходну страницу"
 
-#: src/cong-location.c:843
+#: src/cong-location.c:832
 msgid "Calculating next page"
 msgstr "Срачунава наредну страницу"
 
@@ -1563,65 +1539,65 @@ msgstr "/Помоћ/_Садржај"
 msgid "/Help/_About"
 msgstr "/Помоћ/_О програму"
 
-#: src/cong-node-properties-dialog.c:246
+#: src/cong-node-properties-dialog.c:247
 msgid "XPath"
 msgstr "XPath"
 
-#: src/cong-node-properties-dialog.c:327
+#: src/cong-node-properties-dialog.c:372
 #, c-format
 msgid "Rename attribute \"%s\" as \"%s\""
 msgstr "Преименуј атрибут „%s“ на „%s“"
 
-#: src/cong-node-properties-dialog.c:485
+#: src/cong-node-properties-dialog.c:547
 msgid "Namespace"
 msgstr "Простор имена"
 
-#: src/cong-node-properties-dialog.c:506
+#: src/cong-node-properties-dialog.c:568
 msgid "Raw Attributes"
 msgstr "Чисти атрибути"
 
-#: src/cong-node-properties-dialog.c:539
+#: src/cong-node-properties-dialog.c:601
 msgid "Value"
 msgstr "Вредност"
 
-#: src/cong-node-properties-dialog.c:619
+#: src/cong-node-properties-dialog.c:681
 #, c-format
 msgid "Attributes for <tt>%s</tt> elements"
 msgstr "Атрибути за елементе <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:733
+#: src/cong-node-properties-dialog.c:795
 msgid "Text"
 msgstr "Текст"
 
-#: src/cong-node-properties-dialog.c:785
+#: src/cong-node-properties-dialog.c:847
 msgid "Choice"
 msgstr "Избор"
 
-#: src/cong-node-properties-dialog.c:820
+#: src/cong-node-properties-dialog.c:882
 msgid "Optional"
 msgstr "Необавезно"
 
-#: src/cong-node-properties-dialog.c:836
+#: src/cong-node-properties-dialog.c:898
 msgid "Zero or more"
 msgstr "Нула или више"
 
-#: src/cong-node-properties-dialog.c:852
+#: src/cong-node-properties-dialog.c:914
 msgid "One or more"
 msgstr "Један или више"
 
 #. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
-#: src/cong-node-properties-dialog.c:908
+#: src/cong-node-properties-dialog.c:970
 msgid "Valid Content"
 msgstr "Исправан садржај"
 
 #. To translators: "content" is a noun; this is XML jargon
-#: src/cong-node-properties-dialog.c:933
+#: src/cong-node-properties-dialog.c:995
 #, c-format
 msgid "Content model for <tt>%s</tt> elements"
 msgstr "Модел садржаја за ознаке <tt>%s</tt>"
 
-#: src/cong-node-properties-dialog.c:1055
-#: src/cong-node-properties-dialog.c:1141
+#: src/cong-node-properties-dialog.c:1117
+#: src/cong-node-properties-dialog.c:1203
 msgid "DTD"
 msgstr "ДТД"
 
@@ -1740,7 +1716,7 @@ msgstr "Штампање XSL објеката обликовања (FO)"
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ово ће једном постати резултат из cong_util_print_xslfo"
 
-#: src/cong-util.c:998
+#: src/cong-util.c:1033
 msgid "(no description available)"
 msgstr "(нема описа)"
 
@@ -1825,46 +1801,46 @@ msgstr "Претварање XSL објеката обликовања (FO) у P
 msgid "Printing DocBook file"
 msgstr "Штампање DocBook датотеке"
 
-#: src/plugin-docbook.c:1357
+#: src/plugin-docbook.c:1365
 msgid "DocBook Article"
 msgstr "DocBook чланак"
 
-#: src/plugin-docbook.c:1358
+#: src/plugin-docbook.c:1366
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Састави чланак, можда за веб страницу или часопис, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1365
+#: src/plugin-docbook.c:1373
 msgid "DocBook Book"
 msgstr "DocBook књига"
 
-#: src/plugin-docbook.c:1366
+#: src/plugin-docbook.c:1374
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Сложи књигу, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1373
+#: src/plugin-docbook.c:1381
 msgid "DocBook Set"
 msgstr "DocBook скуп"
 
-#: src/plugin-docbook.c:1374
+#: src/plugin-docbook.c:1382
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Сложи скуп сродних књига, помоћу „DocBook“ записа"
 
-#: src/plugin-docbook.c:1382
+#: src/plugin-docbook.c:1390
 msgid "Import text as a DocBook article"
 msgstr "Увези текст као DocBook чланак"
 
-#: src/plugin-docbook.c:1383
+#: src/plugin-docbook.c:1391
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Увези обичан текст у „DocBook“ облик, као један чланак."
 
-#: src/plugin-docbook.c:1400
+#: src/plugin-docbook.c:1408
 msgid "Export DocBook as HTML"
 msgstr "Извези DocBook као HTML"
 
-#: src/plugin-docbook.c:1401
+#: src/plugin-docbook.c:1409
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1872,11 +1848,11 @@ msgstr ""
 "Користи описе стила за DocBook од Нормана Волша (Norman Walsh) за израду веб "
 "страница из ове DocBook датотеке"
 
-#: src/plugin-docbook.c:1408
+#: src/plugin-docbook.c:1416
 msgid "Export DocBook as PDF"
 msgstr "Извези DocBook као PDF"
 
-#: src/plugin-docbook.c:1409
+#: src/plugin-docbook.c:1417
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1884,11 +1860,11 @@ msgstr ""
 "Користи описе стила за DocBook од Нормана Волша (Norman Walsh) за израду PDF "
 "датотеке из ове DocBook датотеке"
 
-#: src/plugin-docbook.c:1416
+#: src/plugin-docbook.c:1424
 msgid "Export DocBook as XSL:FO"
 msgstr "Извези DocBook као XSL:FO"
 
-#: src/plugin-docbook.c:1417
+#: src/plugin-docbook.c:1425
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1897,109 +1873,109 @@ msgstr ""
 "FO датотеке из ове DocBook датотеке коју је могуће иштампати или накнадно "
 "претворити у PDF"
 
-#: src/plugin-docbook.c:1425
+#: src/plugin-docbook.c:1433
 msgid "Print DocBook"
 msgstr "Штампај DocBook"
 
-#: src/plugin-docbook.c:1434
+#: src/plugin-docbook.c:1442
 msgid "Generic DocBook property dialog"
 msgstr "Опште прозорче за DocBook особине"
 
-#: src/plugin-docbook.c:1435
+#: src/plugin-docbook.c:1443
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Обезбеђује прозорче са особинама за већину DocBook чворова"
 
-#: src/plugin-docbook.c:1453 src/plugin-docbook.c:1456 src/plugin-html.c:130
+#: src/plugin-docbook.c:1461 src/plugin-docbook.c:1464 src/plugin-html.c:130
 #: src/plugin-html.c:133
 msgid "Open Link in Browser"
 msgstr "Отвори везу у читачу"
 
-#: src/plugin-docbook.c:1465
+#: src/plugin-docbook.c:1473
 msgid "Promote Section"
 msgstr "Издигни одељак"
 
-#: src/plugin-docbook.c:1466
+#: src/plugin-docbook.c:1474
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Издиже DocBook одељак на виши организациони ниво у документу"
 
-#: src/plugin-docbook.c:1468 src/plugin-html.c:141 src/plugin-html.c:144
+#: src/plugin-docbook.c:1476 src/plugin-html.c:141 src/plugin-html.c:144
 msgid "Promote"
 msgstr "Издигни"
 
-#: src/plugin-docbook.c:1469 src/plugin-docbook.c:1470
+#: src/plugin-docbook.c:1477 src/plugin-docbook.c:1478
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Издигни одељак на виши организациони ниво у документу"
 
-#: src/plugin-docbook.c:1476
+#: src/plugin-docbook.c:1484
 msgid "Demote Section"
 msgstr "Спусти одељак"
 
-#: src/plugin-docbook.c:1477
+#: src/plugin-docbook.c:1485
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Спушта DocBook одељак на нижи организациони ниво у документу"
 
-#: src/plugin-docbook.c:1479 src/plugin-html.c:152 src/plugin-html.c:155
+#: src/plugin-docbook.c:1487 src/plugin-html.c:152 src/plugin-html.c:155
 msgid "Demote"
 msgstr "Спусти"
 
-#: src/plugin-docbook.c:1480 src/plugin-docbook.c:1481
+#: src/plugin-docbook.c:1488 src/plugin-docbook.c:1489
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Спусти одељак на нижи организациони ниво у документу"
 
-#: src/plugin-dtd.c:83
+#: src/plugin-dtd.c:80
 #, c-format
 msgid "Autogenerated document type based on %s"
 msgstr "Самосачињен тип документа заснован на %s"
 
-#: src/plugin-dtd.c:84
+#: src/plugin-dtd.c:81
 #, c-format
 msgid ""
 "This Conglomerate display specification was automatically generated from %s"
 msgstr ""
 "Ова датотека назнаке Конгломератовог приказа је аутоматски сачињена из %s"
 
-#: src/plugin-dtd.c:159
+#: src/plugin-dtd.c:153
 msgid "Convert DTD into a Conglomerate Display Specification"
 msgstr "Претвори ДТД у датотеку назнаке Конгломератовог приказа."
 
-#: src/plugin-dtd.c:160
+#: src/plugin-dtd.c:154
 msgid "Import a DTD file, creating a Conglomerate display specification file."
 msgstr ""
 "Увези датотеку ДТД, стварајући датотеку назнаке Конгломератовог приказа."
 
-#: src/plugin-dtd.c:167
+#: src/plugin-dtd.c:161
 msgid "Convert DTD into a Relax NG schema"
 msgstr "Претвори ДТД у Relax NG датотеку"
 
-#: src/plugin-dtd.c:168
+#: src/plugin-dtd.c:162
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
 msgstr "Увези датотеку ДТД, претварајући је у RELAX NG шему."
 
-#: src/plugin-dtd.c:175
+#: src/plugin-dtd.c:169
 msgid "Convert DTD into W3C XML Schema"
 msgstr "Претвори ДТД у W3C XML датотеку"
 
-#: src/plugin-dtd.c:176
+#: src/plugin-dtd.c:170
 msgid "Import a DTD file, converting it into a W3C XML Schema."
 msgstr "Увези датотеку ДТД, претварајући је у W3C XML шему."
 
-#: src/plugin-dtd.c:183
+#: src/plugin-dtd.c:177
 msgid "Convert DTD into a Schematron file"
 msgstr "Претвори ДТД у Schematron датотеку"
 
-#: src/plugin-dtd.c:184
+#: src/plugin-dtd.c:178
 msgid "Import a DTD file, converting it into a Schematron Schema."
 msgstr "Увези датотеку ДТД, претварајући је у Schematron шему."
 
-#: src/plugin-dtd.c:191
+#: src/plugin-dtd.c:185
 msgid "Convert DTD into an Examplotron file"
 msgstr "Претвори ДТД у Examplotron датотеку"
 
-#: src/plugin-dtd.c:192
+#: src/plugin-dtd.c:186
 msgid "Import a DTD file, converting it into an Examplotron Schema."
 msgstr "Увези датотеку ДТД, претварајући је у Examplotron шему."
 
@@ -2269,7 +2245,7 @@ msgid "Insert child: %s"
 msgstr "Уметни поделемент: %s"
 
 #. create description for dialog
-#: src/xmldata.c:461
+#: src/xmldata.c:473
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -2280,7 +2256,7 @@ msgstr ""
 
 #. FIXME: put in a better description for the name
 #. select a dialog element
-#: src/xmldata.c:466
+#: src/xmldata.c:478
 msgid "Required Children Choices"
 msgstr "Обавезни избори за садржане елементе"
 
@@ -2299,6 +2275,17 @@ msgstr "Убаци иза"
 #: src/xmledit.c:359
 msgid "Source View - Conglomerate"
 msgstr "Преглед кôда — Конгломерат"
+
+# bug: no translating for most of it
+#~ msgid "Text: \"<span foreground=\"%s\">%s</span>\""
+#~ msgstr "Текст: \"<span foreground=\"%s\">%s</span>\""
+
+# bug: no l10n here I guess
+#~ msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+#~ msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+
+#~ msgid "<small>(No description available)</small>"
+#~ msgstr "<small>(Нема описа)</small>"
 
 #~ msgid "/Debug/Document Types"
 #~ msgstr "/Грешке/Типови докумената"
