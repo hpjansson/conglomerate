@@ -297,7 +297,7 @@ cong_dispspec_new_generate_from_xml_file (xmlDocPtr doc,
 	CongDispspec *dispspec;
 
 	g_return_val_if_fail (doc, NULL);
-	g_return_val_if_fail (extension, NULL);
+	/* Extension can be NULL if none was found */
 
 	dispspec = cong_dispspec_new();
 

@@ -1,5 +1,9 @@
 2004-01-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c
+
+	Fixed crash when loading file without a dispspec with no extension in its filename
+
 	* Makefile.am, cong-util.c, cong-util.h, plugin-docbook.c, plugin-fo.c
 
 	Split ENABLE_LIBFO out from ENABLE_PRINTING to allow print plugins that work in other ways
