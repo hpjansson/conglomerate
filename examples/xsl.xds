@@ -7,11 +7,11 @@
 	</metadata>
 	<document-models/>
 	<element-list>
-		<element tag="stylesheet" type="structural" color="a0b0c0">
+		<element localName="stylesheet" type="structural" color="a0b0c0">
 			<name xml:lang="en">Stylesheet</name>
 		</element>
 
-		<element tag="template" type="plugin" service-id="xsl-template">
+		<element localName="template" type="plugin" service-id="xsl-template">
 			<name xml:lang="en">Template-matching Rule</name>
 		</element>
 

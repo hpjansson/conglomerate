@@ -1,3 +1,9 @@
+2004-02-07  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cnxml.xds, dispspec-template.xds, dispspec.xds.in, docbook.xds.in, forrest-document.xds.in, kernel-traffic-newsletter.xds.in, readme.xds, relax-ng.xds, teixlite.xds, website-layout.xds, website-webpage.xds, xds.dtd, xhtml1-strict.xds.in, xsl.xds
+
+	s/tag/localName for <element>, s/tag/childElement for <header-info>, manually correcting where this went wrong (I may have missed a few)
+
 2004-02-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* teixlite.xds

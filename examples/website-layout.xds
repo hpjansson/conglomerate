@@ -12,46 +12,46 @@
 
 	<element-list>
 			
-		<element tag="layout" type="structural" color="a0b0c0">
+		<element localName="layout" type="structural" color="a0b0c0">
 			<name xml:lang="en">Website Layout</name>
 		</element>
 
-		<element tag="config" type="structural" color="a0b0c0">
+		<element localName="config" type="structural" color="a0b0c0">
 			<name xml:lang="en">Configuration Data</name>
 			<!-- Really need a new element type for this... -->
 		</element>
 
-		<element tag="copyright" type="structural" color="a0b0c0">
+		<element localName="copyright" type="structural" color="a0b0c0">
 			<name xml:lang="en">Copyright</name>
 		</element>
 
-		<element tag="year" type="structural" color="a0b0c0">
+		<element localName="year" type="structural" color="a0b0c0">
 			<name xml:lang="en">Year</name>
 		</element>
 
-		<element tag="holder" type="structural" color="a0b0c0">
+		<element localName="holder" type="structural" color="a0b0c0">
 			<name xml:lang="en">Holder</name>
 		</element>
 
-		<element tag="headlink" type="structural" color="a0b0c0">
+		<element localName="headlink" type="structural" color="a0b0c0">
 			<name xml:lang="en">Header Link</name>
 		</element>
 
-		<element tag="style" type="structural" color="a0b0c0">
+		<element localName="style" type="structural" color="a0b0c0">
 			<name xml:lang="en">Stylesheet</name>
 		</element>
 
-		<element tag="toc" type="structural" color="a0b0c0">
+		<element localName="toc" type="structural" color="a0b0c0">
 			<name xml:lang="en">Table of Contents</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
-		<element tag="tocentry" type="structural" color="a0b0c0">
+		<element localName="tocentry" type="structural" color="a0b0c0">
 			<name xml:lang="en">Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>
 
-		<element tag="notoc" type="structural" color="a0b0c0">
+		<element localName="notoc" type="structural" color="a0b0c0">
 			<name xml:lang="en">Additional Content</name>
 			<header-info xpath="@page"></header-info>
 		</element>

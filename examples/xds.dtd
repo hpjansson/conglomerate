@@ -61,13 +61,13 @@
 <!-- Attributes shared by all types of element: -->
 <!ENTITY % element.att
 "  
-   ns                  NMTOKEN                                                           #IMPLIED
-   tag                 ID                                                                #REQUIRED
+   nsUri               NMTOKEN                                                           #IMPLIED
+   localName           ID                                                                #REQUIRED
    icon                CDATA                                                             #IMPLIED
    whitespace          (normalize | preserve)                                            'normalize'
 
    color               CDATA                                                             #IMPLIED
-   filename-xpath      CDATA                                                             #IMPLIED
+   filenameXPath       CDATA                                                             #IMPLIED
 ">
 
 <!-- The element types themselves: -->
@@ -101,7 +101,7 @@
 
 <!ELEMENT header-info EMPTY >
 <!ATTLIST header-info 
-   tag    IDREF  #IMPLIED
+   childElement IDREF  #IMPLIED
    xpath  CDATA  #IMPLIED
 >
 

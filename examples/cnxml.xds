@@ -11,78 +11,78 @@
 	</document-models>
 
 	<element-list>
-		<element tag="module" type="structural" color="a0b0c0">
+		<element localName="module" type="structural" color="a0b0c0">
 			<name xml:lang="en">module</name>
 		</element>
 
-		<element tag="metadata" type="structural" color="a0b0c0">
+		<element localName="metadata" type="structural" color="a0b0c0">
 			<name xml:lang="en">metadata</name>
 		</element>
-		<element tag="content" type="structural" color="a0b0c0">
+		<element localName="content" type="structural" color="a0b0c0">
 			<name xml:lang="en">content</name>
 		</element>
 
-		<element tag="section" type="structural" color="a0b0c0">
+		<element localName="section" type="structural" color="a0b0c0">
 			<name xml:lang="en">section</name>
 		</element>
 
-		<element tag="equation" type="structural" color="a0b0c0">
+		<element localName="equation" type="structural" color="a0b0c0">
 			<name xml:lang="en">equation</name>
 		</element>
 
-		<element tag="note" type="structural" color="a0b0c0">
+		<element localName="note" type="structural" color="a0b0c0">
 			<name xml:lang="en">note</name>
 		</element>
 
-		<element tag="codeblock" type="structural" color="a0b0c0">
+		<element localName="codeblock" type="structural" color="a0b0c0">
 			<name xml:lang="en">codeblock</name>
 		</element>
 
-		<element tag="codeline" type="structural" color="a0b0c0">
+		<element localName="codeline" type="structural" color="a0b0c0">
 			<name xml:lang="en">codeline</name>
 		</element>
 
-		<element tag="rule" type="structural" color="a0b0c0">
+		<element localName="rule" type="structural" color="a0b0c0">
 			<name xml:lang="en">rule</name>
 		</element>
 
-		<element tag="statement" type="structural" color="a0b0c0">
+		<element localName="statement" type="structural" color="a0b0c0">
 			<name xml:lang="en">statement</name>
 		</element>
 
-		<element tag="proof" type="structural" color="a0b0c0">
+		<element localName="proof" type="structural" color="a0b0c0">
 			<name xml:lang="en">proof</name>
 		</element>
 
-		<element tag="para" type="structural" color="a0b0c0">
+		<element localName="para" type="structural" color="a0b0c0">
 			<name xml:lang="en">para</name>
 		</element>
 
-		<element tag="list" type="structural" color="a0b0c0">
+		<element localName="list" type="structural" color="a0b0c0">
 			<name xml:lang="en">list</name>
 		</element>
 
-		<element tag="item" type="structural" color="a0b0c0">
+		<element localName="item" type="structural" color="a0b0c0">
 			<name xml:lang="en">item</name>
 		</element>
 
-		<element tag="emphasis" type="span" color="a0b0c0">
+		<element localName="emphasis" type="span" color="a0b0c0">
 			<name xml:lang="en">emphasis</name>
 		</element>
 
-		<element tag="term" type="span" color="a0b0c0">
+		<element localName="term" type="span" color="a0b0c0">
 			<name xml:lang="en">term</name>
 		</element>
 
-		<element tag="link" type="span" color="a0b0c0">
+		<element localName="link" type="span" color="a0b0c0">
 			<name xml:lang="en">link</name>
 		</element>
 
-		<element tag="cite" type="span" color="a0b0c0">
+		<element localName="cite" type="span" color="a0b0c0">
 			<name xml:lang="en">cite</name>
 		</element>
 
-		<element tag="cnxn" type="span" color="a0b0c0">
+		<element localName="cnxn" type="span" color="a0b0c0">
 			<name xml:lang="en">cnxn</name>
 		</element>
 	</element-list>

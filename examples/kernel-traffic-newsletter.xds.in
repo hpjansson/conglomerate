@@ -9,176 +9,176 @@
 	</document-models>
 	<element-list>
 			
-		<element tag="kc" type="structural" color="a0b0c0">
+		<element localName="kc" type="structural" color="a0b0c0">
 			<_name>Kernel Cousin Newsletter</_name>
 			<header-info xpath="concat(normalize-space(child::title/text()), &quot; #&quot;, normalize-space(child::issue/@num))"></header-info>
 		</element>
 
-		<element tag="kcref" type="structural" color="a0b0c0">
+		<element localName="kcref" type="structural" color="a0b0c0">
 		</element>
 
-		<element tag="quote" type="structural" color="a0b0c0"  icon="cong-paragraph"> 
+		<element localName="quote" type="structural" color="a0b0c0"  icon="cong-paragraph"> 
 			<_name>Quotation</_name>
 			<header-info xpath="normalize-space(@who)"></header-info>
 		</element>
 
-		<element tag="section" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="section" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Section</_name>
 			<header-info xpath="concat(normalize-space(@title), &quot; (&quot;, normalize-space(@subject), &quot;)&quot;)"></header-info>
 		</element>
 
-		<element tag="stats" type="structural" color="a0b0c0"  icon="cong-metadata"> 
+		<element localName="stats" type="structural" color="a0b0c0"  icon="cong-metadata"> 
 			<_name>Statistics</_name>
 		</element>
 
-		<element tag="person" type="structural" color="a0b0c0"  icon="cong-author"> 
+		<element localName="person" type="structural" color="a0b0c0"  icon="cong-author"> 
 			<_name>Person</_name>
 		</element>
 
-		<element tag="vcelement" type="structural" color="a0b0c0"> 
+		<element localName="vcelement" type="structural" color="a0b0c0"> 
 			<_name>Version Control Activity</_name>
 		</element>
 
-		<element tag="vcstats" type="structural" color="a0b0c0"> 
+		<element localName="vcstats" type="structural" color="a0b0c0"> 
 			<_name>Version Control Statistics</_name>
 		</element>
 
-		<element tag="vctree" type="structural" color="a0b0c0"> 
+		<element localName="vctree" type="structural" color="a0b0c0"> 
 			<_name>Version Control Tree</_name>
 		</element>
 
-		<element tag="intro" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="intro" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Introduction</_name>
 		</element>
 
-		<element tag="issue" type="structural" color="a0b0c0" icon="cong-metadata"> 
+		<element localName="issue" type="structural" color="a0b0c0" icon="cong-metadata"> 
 			<_name>Issue</_name>
 		</element>
 
-		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
+		<element localName="author" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Author</_name>
 		</element>
 
-		<element tag="translator" type="structural" color="a0b0c0" icon="cong-author"> 
+		<element localName="translator" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Translator</_name>
 		</element>
 
-		<element tag="editor" type="structural" color="a0b0c0" icon="cong-author"> 
+		<element localName="editor" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Editor</_name>
 		</element>
 
-		<element tag="correction" type="structural" color="a0b0c0" icon="cong-author"> 
+		<element localName="correction" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Correction</_name>
 		</element>
-		<element tag="editorialize" type="structural" color="a0b0c0" icon="cong-author"> 
+		<element localName="editorialize" type="structural" color="a0b0c0" icon="cong-author"> 
 			<_name>Editorialize</_name>
 		</element>
 
-		<element tag="li" type="structural" color="a0b0c0"  icon="cong-list-item"> 
+		<element localName="li" type="structural" color="a0b0c0"  icon="cong-list-item"> 
 			<_name>List Item</_name>
 		</element>
 
-		<element tag="ol" type="structural" color="a0b0c0"  icon="cong-numbered-list"> 
+		<element localName="ol" type="structural" color="a0b0c0"  icon="cong-numbered-list"> 
 			<_name>List (ordered)</_name>
 		</element>
 
-		<element tag="p" type="plugin" service-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
+		<element localName="p" type="plugin" service-id="paragraph" color="a0b0c0"  icon="cong-paragraph"> 
 			<_name>Paragraph</_name>
 		</element>
 
-		<element tag="pre" type="structural" color="a0b0c0"> 
+		<element localName="pre" type="structural" color="a0b0c0"> 
 		</element>
 
-		<element tag="a" type="span" color="a0b0c0"> 
+		<element localName="a" type="span" color="a0b0c0"> 
 			<_name>Hyperlink</_name>
 		</element>
 
-		<element tag="b" type="span" color="a0b0c0"> 
+		<element localName="b" type="span" color="a0b0c0"> 
 			<_name>Bold</_name>
 		</element>
 
-		<element tag="blockquote" type="structural" color="a0b0c0"> 
+		<element localName="blockquote" type="structural" color="a0b0c0"> 
 			<_name>Block Quote</_name>
 		</element>
 
-		<element tag="br" type="structural" color="a0b0c0"> 
+		<element localName="br" type="structural" color="a0b0c0"> 
 			<_name>Break (manual)</_name>
 		</element>
 
-		<element tag="center" type="structural" color="a0b0c0"> 
+		<element localName="center" type="structural" color="a0b0c0"> 
 			<_name>Centered</_name>
 		</element>
 
-		<element tag="cite" type="span" color="a0b0c0"> 
+		<element localName="cite" type="span" color="a0b0c0"> 
 			<_name>Cite</_name>
 		</element>
 
-		<element tag="code" type="structural" color="a0b0c0">
+		<element localName="code" type="structural" color="a0b0c0">
 			<_name>Code</_name>
 		</element>
 
-		<element tag="em" type="span" color="a0b0c0"> 
+		<element localName="em" type="span" color="a0b0c0"> 
 			<_name>Emphasis</_name>
 		</element>
 
-		<element tag="font" type="span" color="a0b0c0"> 
+		<element localName="font" type="span" color="a0b0c0"> 
 			<_name>Font</_name>
 		</element>
 
-		<element tag="h1" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="h1" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Heading (level 1)</_name>
 		</element>
 
-		<element tag="h2" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="h2" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Heading (level 2)</_name>
 		</element>
 
-		<element tag="h3" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="h3" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Heading (level 3)</_name>
 		</element>
 
-		<element tag="headquote" type="structural" color="a0b0c0"> 
+		<element localName="headquote" type="structural" color="a0b0c0"> 
 		</element>
 
-		<element tag="hr" type="structural" color="a0b0c0"> 
+		<element localName="hr" type="structural" color="a0b0c0"> 
 		</element>
 
-		<element tag="i" type="span" color="a0b0c0"> 
+		<element localName="i" type="span" color="a0b0c0"> 
 			<_name>Italicised</_name>
 		</element>
-		<element tag="strong" type="span" color="a0b0c0"> 
+		<element localName="strong" type="span" color="a0b0c0"> 
 			<_name>Strong</_name>
 		</element>
 
-		<element tag="table" type="structural" color="a0b0c0">
+		<element localName="table" type="structural" color="a0b0c0">
 		<!-- FIXME: use table plugin -->
 		</element>
 
-		<element tag="td" type="structural" color="a0b0c0">
+		<element localName="td" type="structural" color="a0b0c0">
 		<!-- FIXME: use table plugin -->
 		</element>
 
-		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
+		<element localName="title" type="structural" color="a0b0c0" icon="cong-title">
 			<_name>Title</_name>
 		</element>
 
 
-		<element tag="topic" type="structural" color="a0b0c0" icon="cong-subsection"> 
+		<element localName="topic" type="structural" color="a0b0c0" icon="cong-subsection"> 
 			<_name>Topic</_name>
 		</element>
 
-		<element tag="tr" type="structural" color="a0b0c0">
+		<element localName="tr" type="structural" color="a0b0c0">
 		<!-- FIXME: use table plugin -->
 		</element>
 
-		<element tag="tt" type="structural" color="a0b0c0">
+		<element localName="tt" type="structural" color="a0b0c0">
 		</element>
 
-		<element tag="u" type="span" color="a0b0c0"> 
+		<element localName="u" type="span" color="a0b0c0"> 
 			<_name>Underlined</_name>
 		</element>
 
-		<element tag="ul" type="structural" color="a0b0c0"  icon="cong-bulleted-list"> 
+		<element localName="ul" type="structural" color="a0b0c0"  icon="cong-bulleted-list"> 
 			<_name>List (unordered)</_name>
 		</element>
 

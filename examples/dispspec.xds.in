@@ -11,49 +11,49 @@
 	<external-document-model type="dtd" public-id="-//Conglomerate//Conglomerate Display Specification V0.1.0//EN"/>
   </document-models>
   <element-list>
-    <element tag="collapseto" type="structural">
+    <element localName="collapseto" type="structural">
       <_name>Collapseto</_name>
     </element>
-    <element tag="description" type="structural">
+    <element localName="description" type="structural">
       <_name>Description</_name>
       <_short-desc>Short Description of the document type</_short-desc>
     </element>
-    <element tag="dispspec" type="structural">
+    <element localName="dispspec" type="structural">
       <_name>Conglomerate Display Specification</_name>
-    </element><element tag="document-models" type="structural">
+    </element><element localName="document-models" type="structural">
       <_name>Document Models</_name>
-    </element><element tag="external-document-model" type="structural">
+    </element><element localName="external-document-model" type="structural">
       <_name>External Document Model</_name>
     </element>
-    <element tag="element" type="structural">
+    <element localName="element" type="structural">
       <_name>XML Element</_name>
-      <header-info xpath="concat(&quot;&lt;&quot;, @tag, &quot;&gt;&quot;)"/>
+      <header-info xpath="concat(&quot;&lt;&quot;, @localName, &quot;&gt;&quot;)"/>
     </element>
-    <element tag="element-list" type="structural">
+    <element localName="element-list" type="structural">
       <_name>List of XML Elements</_name>
     </element>
-    <element tag="format" type="structural">
+    <element localName="format" type="structural">
       <_name>Format</_name>
       <header-info xpath="concat(&quot;filename extension &quot;, @extension)"/>
     </element>
-    <element tag="gui" type="structural">
+    <element localName="gui" type="structural">
       <_name>GUI</_name>
     </element>
-    <element tag="header-info" type="structural">
+    <element localName="header-info" type="structural">
       <_name>Header Information</_name>
     </element>
-    <element tag="metadata" type="structural">
+    <element localName="metadata" type="structural">
       <_name>Metadata</_name>
     </element>
-    <element tag="name" type="structural">
+    <element localName="name" type="structural">
       <_name>Name</_name>
       <_short-desc>Name of an XML element</_short-desc>
     </element>
-    <element tag="serialisation" type="structural">
+    <element localName="serialisation" type="structural">
       <_name>Serialisation Type List</_name>
       <_short-desc>List of file types for this type of document</_short-desc>
     </element>
-    <element tag="short-desc" type="structural">
+    <element localName="short-desc" type="structural">
       <_name>Short Description</_name>
       <_short-desc>Short Description of an XML element</_short-desc>
     </element>

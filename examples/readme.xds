@@ -8,7 +8,7 @@
 	<document-models>
 	</document-models>
 	<element-list>
-		<element tag="document" type="structural" color="a0b0c0">
+		<element localName="document" type="structural" color="a0b0c0">
 			<name xml:lang="en">Document</name>
 		</element>
 
@@ -18,57 +18,57 @@
 		<!-- Should all translatable stuff go into po files? -->
 		<!-- What does collapseto mean? -->
 
-		<element tag="introduction" type = "structural" color = "e0eee0">
+		<element localName="introduction" type = "structural" color = "e0eee0">
 			<name xml:lang="en">Introduction</name>
 		</element>
 
-		<element tag="section" type = "structural" color = "a0b0c0">
+		<element localName="section" type = "structural" color = "a0b0c0">
 			<name xml:lang="en">Section</name>
 		</element>
 
-		<element tag="section.title" type = "structural">
+		<element localName="section.title" type = "structural">
 			<name xml:lang="en">Title</name>
 		</element>
 
-		<element tag="section.signature" type = "structural">
+		<element localName="section.signature" type = "structural">
 			<name xml:lang="en">Signature</name>
 		</element>
 
 		<!-- Here come the spans: -->
 
-		<element tag="quote" type = "span" color = "8b0000">
+		<element localName="quote" type = "span" color = "8b0000">
 			<name xml:lang="en">Quote</name>
 		</element>
 
-		<element tag="admission" type = "span" color = "b22222">
+		<element localName="admission" type = "span" color = "b22222">
 			<name xml:lang="en">Admission</name>
 		</element>
 
-		<element tag="excuse" type = "span" color = "b22222">
+		<element localName="excuse" type = "span" color = "b22222">
 			<name xml:lang="en">Excuse</name>
 		</element>
 
-		<element tag="corporate" type = "span" color = "00008b">
+		<element localName="corporate" type = "span" color = "00008b">
 			<name xml:lang="en">Corp jargon</name>
 		</element>
 
-		<element tag="disclaimer" type = "span" color = "698b22">
+		<element localName="disclaimer" type = "span" color = "698b22">
 			<name xml:lang="en">Disclaimer</name>
 		</element>
 
-		<element tag="emph" type = "span" color = "cd1076">
+		<element localName="emph" type = "span" color = "cd1076">
 			<name xml:lang="en">Emphasis</name>
 		</element>
 
-		<element tag="inspirational" type = "span" color = "08b8b">
+		<element localName="inspirational" type = "span" color = "08b8b">
 			<name xml:lang="en">Inspirational</name>
 		</element>
 
-		<element tag="optimistic" type = "span" color = "458b74">
+		<element localName="optimistic" type = "span" color = "458b74">
 			<name xml:lang="en">Optimistic</name>
 		</element>
 
-		<element tag="p" type = "structural">
+		<element localName="p" type = "structural">
 			<name xml:lang="en">Paragraph</name>
 		</element>
 		

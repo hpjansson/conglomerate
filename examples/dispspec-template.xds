@@ -19,7 +19,7 @@
 
    Required attribute:
 
-     tag (ID #IMPLIED) which tag (element name) is being defined here
+     localName (ID #IMPLIED) which tag (element name) is being defined here
 
      type, can be
        structural  : render element as a box with title bar
@@ -51,7 +51,7 @@
    name : what name to use in gui for this element
    short-desc (locale=en) : description, used where???
    header-info [for structural] empty element with attributes:
-      tag ???
+      localName ???
       xpath, expression which is used to construct the title information
    collapseto [for structural] ???
    property-dialog : points to external plugin

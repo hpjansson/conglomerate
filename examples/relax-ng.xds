@@ -9,50 +9,50 @@
 	</serialisation>
 	<document-models/>
 	<element-list>
-		<element tag="grammar" type="structural">
+		<element localName="grammar" type="structural">
 			<name xml:lang="en">Grammar</name>
 		</element>
-		<element tag="define" type="structural">
+		<element localName="define" type="structural">
 			<name xml:lang="en">Define</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element tag="element" type="structural">
+		<element localName="element" type="structural">
 			<name xml:lang="en">XML Element</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
-		<element tag="attribute" type="structural">
+		<element localName="attribute" type="structural">
 			<name xml:lang="en">XML Attribute</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
-		<element tag="zeroOrMore" type="structural">
+		<element localName="zeroOrMore" type="structural">
 			<name xml:lang="en">ZeroOrMore</name>			
 		</element>
-		<element tag="choice" type="structural">
+		<element localName="choice" type="structural">
 			<name xml:lang="en">Choice</name>			
 		</element>
-		<element tag="text" type="structural">
+		<element localName="text" type="structural">
 			<name xml:lang="en">Text</name>			
 		</element>
-		<element tag="ref" type="structural">
+		<element localName="ref" type="structural">
 			<name xml:lang="en">Reference</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element tag="oneOrMore" type="structural">
+		<element localName="oneOrMore" type="structural">
 			<name xml:lang="en">OneOrMore</name>			
 		</element>
-		<element tag="group" type="structural">
+		<element localName="group" type="structural">
 			<name xml:lang="en">Group</name>			
 		</element>
-		<element tag="optional" type="structural">
+		<element localName="optional" type="structural">
 			<name xml:lang="en">Optional</name>			
 		</element>
-		<element tag="value" type="structural">
+		<element localName="value" type="structural">
 			<name xml:lang="en">Value</name>			
 		</element>
-		<element tag="start" type="structural">
+		<element localName="start" type="structural">
 			<name xml:lang="en">Start</name>			
 		</element>
-		<element tag="empty" type="structural">
+		<element localName="empty" type="structural">
 			<name xml:lang="en">Empty</name>			
 		</element>
 	</element-list>
