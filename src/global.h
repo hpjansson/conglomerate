@@ -198,6 +198,7 @@ get_col_string (const GdkColor* col);
 
 /* Toolbar hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
+gint toolbar_callback_new(GtkWidget *w, gpointer data);
 gint toolbar_callback_save(GtkWidget *w, gpointer data);
 gint toolbar_callback_cut(GtkWidget *w, gpointer data);
 gint toolbar_callback_copy(GtkWidget *w, gpointer data);

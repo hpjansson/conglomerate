@@ -1,3 +1,9 @@
+2004-01-16  Daniel van Eeden  <daniel_e@dds.nl>
+
+	* cong-file-new.c, cong-primary-window.c & global.h
+
+	There should be a "new document" button if no document is loaded.
+
 2004-01-16  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-widget3.c, cong-node.c:

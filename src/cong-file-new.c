@@ -457,3 +457,11 @@ void new_document(GtkWindow *parent_window)
 
 	/* FIXME:  need to sort out memory leaks */
 }
+gint toolbar_callback_new(GtkWidget *widget, gpointer data)
+{
+	CongPrimaryWindow *primary_window = data;
+
+	new_document(cong_primary_window_get_toplevel(primary_window));
+
+	return TRUE;
+}

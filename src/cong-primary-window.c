@@ -308,13 +308,24 @@ on_selection_changed_cut (CongDocument *document,
 
 void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 {
-	if ( !(primary_window->doc) )gtk_toolbar_insert_stock(primary_window->toolbar, 
+	if ( !(primary_window->doc) ) {
+		gtk_toolbar_insert_stock(primary_window->toolbar, 
 				 GTK_STOCK_OPEN,
 				 _("Open document"),
 				 _("Open document"),
 				 GTK_SIGNAL_FUNC(toolbar_callback_open),
 				 primary_window,
 				 -1);
+		
+		gtk_toolbar_insert_stock(primary_window->toolbar,
+				GTK_STOCK_NEW,
+				_("New document"),
+				_("New document"),
+				GTK_SIGNAL_FUNC(toolbar_callback_new),
+				primary_window,
+				-1);
+
+	}
 
 	if (primary_window->doc) {
 		CongDocument *doc = cong_primary_window_get_document (primary_window);
