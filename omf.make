@@ -40,7 +40,7 @@ install-data-hook-omf:
 	done
 	echo $(omffile) $(omfincfile) debug
 	for file in $(omfincfile); do \
-		$(INSTALL_DATA) $$file $(DESTDIR)$(docdir)/$$file; \
+		$(INSTALL_DATA) $(scrdir)/$$file $(DESTDIR)$(docdir)/$$file; \
 	done
 	-scrollkeeper-update -p $(scrollkeeper_localstate_dir) -o $(DESTDIR)$(omf_dest_dir)
 

@@ -1,3 +1,8 @@
+2004-01-16  Geert Stappers <stappers@stappers.nl>
+
+	* no_scrollkeeper-update.dpatch
+	Updated the patch manually (fuzz 2).
+
 2004-01-13  Geert Stappers <stappers@stappers.nl>
 
 	* release
