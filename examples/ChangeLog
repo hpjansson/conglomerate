@@ -1,4 +1,9 @@
-creating ChangeLog
+2003-09-02  Jeff Martin
+
+	* xds.dtd
+
+	DTD for xds files
+
 2003-08-29  David Malcolm
 
 	* Makefile.am
@@ -9,12 +14,6 @@ creating ChangeLog
 
 	display spec for xds files
 	
-2003-09-02  Jeff Martin
-
-	* xds.dtd
-
-	DTD for xds files
-
 2003-08-29  David Malcolm
 
 	* docbook.xds, kernel-traffic-newsletter.xds
