@@ -39,9 +39,7 @@ struct CongEditorNodeElementStructuralDetails
 };
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area);
-
+generate_area (CongEditorNode *editor_node);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeElementStructural, 
@@ -54,7 +52,7 @@ cong_editor_node_element_structural_class_init (CongEditorNodeElementStructuralC
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->add_area = add_area;
+	node_klass->generate_area = generate_area;
 }
 
 static void
@@ -88,17 +86,17 @@ cong_editor_node_element_structural_new (CongEditorWidget3* widget,
 }
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area)
+generate_area (CongEditorNode *editor_node)
 {
+#if 0
 	CongEditorArea *outer_area;
+#endif
 	CongEditorArea *inner_area;
 	CongDispspecElement *ds_element;
 	GdkPixbuf *pixbuf;
 	gchar *title_text;
 
 	g_return_val_if_fail (editor_node, NULL);
-	g_return_val_if_fail (parent_area, NULL);
 
 	ds_element = cong_editor_node_element_get_dispspec_element (CONG_EDITOR_NODE_ELEMENT(editor_node));
 
@@ -108,9 +106,10 @@ add_area (CongEditorNode *editor_node,
 								    cong_editor_node_get_node (editor_node));
 
 
-
+#if 0
 	outer_area = cong_editor_area_border_new (cong_editor_node_get_widget (editor_node),
 						  5);
+#endif
 
 	inner_area = cong_editor_area_structural_tag_new (cong_editor_node_get_widget (editor_node),
 							  ds_element,
@@ -123,10 +122,12 @@ add_area (CongEditorNode *editor_node,
 
 	g_free (title_text);
 
+#if 0
 	cong_editor_area_container_add_child (parent_area,
 					      outer_area);
 	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(outer_area),
 					      inner_area);
+#endif
 
 	return inner_area;
 }

@@ -38,8 +38,7 @@ struct CongEditorNodeUnimplementedDetails
 };
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area);
+generate_area (CongEditorNode *editor_node);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeUnimplemented, 
@@ -52,7 +51,7 @@ cong_editor_node_unimplemented_class_init (CongEditorNodeUnimplementedClass *kla
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->add_area = add_area;
+	node_klass->generate_area = generate_area;
 }
 
 static void
@@ -92,20 +91,14 @@ cong_editor_node_unimplemented_new (CongEditorWidget3 *widget,
 
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area)
+generate_area (CongEditorNode *editor_node)
 {
 	CongEditorNodeUnimplemented *editor_node_unimplemented = CONG_EDITOR_NODE_UNIMPLEMENTED(editor_node);
 	CongEditorArea *new_area;
 
-	g_return_val_if_fail (parent_area, NULL);
-
 	new_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
 					      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT],
 					      PRIVATE(editor_node_unimplemented)->description);
-
-	cong_editor_area_container_add_child (parent_area,
-					      new_area);
 
 	return new_area;
 }

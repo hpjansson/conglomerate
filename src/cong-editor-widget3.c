@@ -730,8 +730,10 @@ recursive_create_areas(CongEditorWidget3 *widget,
 	CongEditorNode *editor_node = cong_editor_widget3_get_editor_node (widget,
 									   node);
 
-	CongEditorArea *this_area = cong_editor_node_add_area (editor_node,
-							       CONG_EDITOR_AREA_CONTAINER(parent_area));
+	CongEditorArea *this_area = cong_editor_node_generate_area (editor_node);
+
+	cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_area),
+					      this_area);
 
 	CongEditorArea *vcomposer;
 

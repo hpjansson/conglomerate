@@ -38,8 +38,7 @@ struct CongEditorNodeElementSpanDetails
 };
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area);
+generate_area (CongEditorNode *editor_node);
 
 
 /* Exported function definitions: */
@@ -53,7 +52,7 @@ cong_editor_node_element_span_class_init (CongEditorNodeElementSpanClass *klass)
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->add_area = add_area;
+	node_klass->generate_area = generate_area;
 }
 
 static void
@@ -87,8 +86,7 @@ cong_editor_node_element_span_new (CongEditorWidget3* widget,
 }
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area)
+generate_area (CongEditorNode *editor_node)
 {
 	CongEditorArea *area;
 	CongDispspecElement *ds_element;
@@ -96,7 +94,6 @@ add_area (CongEditorNode *editor_node,
 	gchar *title_text;
 	
 	g_return_val_if_fail (editor_node, NULL);
-	g_return_val_if_fail (parent_area, NULL);
 	
 	ds_element = cong_editor_node_element_get_dispspec_element (CONG_EDITOR_NODE_ELEMENT(editor_node));
 	
@@ -115,9 +112,6 @@ add_area (CongEditorNode *editor_node,
 	}
 
 	g_free (title_text);
-
-	cong_editor_area_container_add_child (parent_area,
-					      area);
 
 	return area;
 }

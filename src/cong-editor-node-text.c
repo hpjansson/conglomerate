@@ -35,11 +35,16 @@
 struct CongEditorNodeTextDetails
 {
 	int dummy;
+
+#if 0
+	CongEditorAreaComposer *flow_test;
+	PangoLayout *pango_layout;
+	GList *list_of_text_fragments;
+#endif
 };
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area);
+generate_area (CongEditorNode *editor_node);
 
 /* Exported function definitions: */
 GNOME_CLASS_BOILERPLATE(CongEditorNodeText, 
@@ -52,7 +57,7 @@ cong_editor_node_text_class_init (CongEditorNodeTextClass *klass)
 {
 	CongEditorNodeClass *node_klass = CONG_EDITOR_NODE_CLASS(klass);
 
-	node_klass->add_area = add_area;
+	node_klass->generate_area = generate_area;
 }
 
 static void
@@ -86,17 +91,33 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 }
 
 static CongEditorArea*
-add_area (CongEditorNode *editor_node,
-	  CongEditorAreaContainer *parent_area)
+generate_area (CongEditorNode *editor_node)
 {
+	CongEditorNodeText *node_text = CONG_EDITOR_NODE_TEXT(editor_node);
 	CongEditorArea *new_area;
 	gchar* stripped_text;
 
 	g_return_val_if_fail (editor_node, NULL);
-	g_return_val_if_fail (parent_area, NULL);
 
 	/* strip out surplus whitespace; use that for the cong_editor_area_text: */
 	stripped_text = cong_util_strip_whitespace_from_string (cong_editor_node_get_node (editor_node)->content);
+
+#if 0
+	{	
+
+#error
+		/* FIXME: this is really broken WRT lifetimes */
+		PRIVATE(node_text)->flow_test = ;
+		PRIVATE(node_text)->pango_layout = pango_layout_new(gdk_pango_context_get());
+		/* can't get children until we set set width which we can't do until we've got a requisition! */
+		PRIVATE(node_text)->list_of_text_fragments = ;
+
+		cong_editor_area_container_add_child (parent_area,
+						      CONG_EDITOR_AREA( PRIVATE(node_text)->flow_test ));
+
+		return PRIVATE(node_text)->flow_test;
+	}
+#else
 
 	new_area = cong_editor_area_text_new (cong_editor_node_get_widget (editor_node),
 					      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
@@ -104,8 +125,6 @@ add_area (CongEditorNode *editor_node,
 
 	g_free (stripped_text);
 	
-	cong_editor_area_container_add_child (parent_area,
-					      new_area);
-
 	return new_area;
+#endif
 }

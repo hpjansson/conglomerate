@@ -25,7 +25,7 @@
 #ifndef __CONG_EDITOR_NODE_H__
 #define __CONG_EDITOR_NODE_H__
 
-#include "cong-editor-area-container.h"
+#include "cong-editor-area.h"
 
 G_BEGIN_DECLS
 
@@ -52,8 +52,7 @@ struct CongEditorNodeClass
 	/* Methods? */
 
 	/* Simplistic interface for now: */
-	CongEditorArea* (*add_area) (CongEditorNode *editor_node,
-				     CongEditorAreaContainer *parent_area);
+	CongEditorArea* (*generate_area) (CongEditorNode *editor_node);
 };
 
 GType
@@ -73,13 +72,19 @@ cong_editor_node_get_document (CongEditorNode *editor_node);
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node);
 
-/* Simplistic node->area interface (1-1 for now): */
+/* 
+   Simplistic node->area interface (1-1 for now).
+*/
+#if 0
 CongEditorArea*
-cong_editor_node_get_area (CongEditorNode *editor_node);
+cong_editor_node_get_primary_area (CongEditorNode *editor_node);
 
 CongEditorArea*
-cong_editor_node_add_area (CongEditorNode *editor_node,
-			   CongEditorAreaContainer *parent_area);
+cong_editor_node_get_inner_area (CongEditorNode *editor_node);
+#endif
+
+CongEditorArea*
+cong_editor_node_generate_area (CongEditorNode *editor_node);
 
 
 G_END_DECLS

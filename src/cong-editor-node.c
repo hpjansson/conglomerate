@@ -35,9 +35,14 @@ struct CongEditorNodeDetails
 
 	/* An editor node applies to a specific document node; there is a 1-1 mapping: */
 	CongNodePtr node;
+
+#if 0
+	CongEditorArea *primary_area;
+	CongEditorArea *inner_area;
+#endif
 };
 
-CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, add_area);
+CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_node, generate_area);
 
 
 /* Exported function definitions: */
@@ -51,7 +56,7 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 {
 	CONG_EEL_ASSIGN_MUST_OVERRIDE_SIGNAL (klass,
 					      cong_editor_node,
-					      add_area);
+					      generate_area);
 }
 
 static void
@@ -98,18 +103,17 @@ cong_editor_node_get_node (CongEditorNode *editor_node)
 CongEditorArea*
 cong_editor_node_get_area (CongEditorNode *editor_node)
 {
+#error
 }
 #endif
 
 CongEditorArea*
-cong_editor_node_add_area (CongEditorNode *editor_node,
-			   CongEditorAreaContainer *parent_area)     
+cong_editor_node_generate_area (CongEditorNode *editor_node)
 {
 	g_return_if_fail (editor_node);
-	g_return_if_fail (parent_area);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
-						       add_area, 
-						       (editor_node, parent_area));	
+						       generate_area, 
+						       (editor_node));
 }

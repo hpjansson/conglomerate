@@ -1,3 +1,9 @@
+2003-07-16  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-node-document.c, cong-editor-node-element-span.c, cong-editor-node-element-structural.c, cong-editor-node-element-unknown.c, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.c, cong-editor-node.h, cong-editor-widget3.c 
+
+	Adding areas is now the responsibility of the widget in a single place in the code, not the handler method in each of the different node subclasses.
+
 2003-07-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-span-tag.c, cong-editor-area.c
