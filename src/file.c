@@ -8,26 +8,30 @@
 #include "cong-file-selection.h"
 
 /**
- * cong_get_file_name:
- * @title:
- * @filename:
- * @parent_window:
- * @action:
- * @list_of_filters:
+ * cong_get_file_name: 
+ * @title: Title of the dialog.
+ * @uri: File or path to start with. Can be NULL.
+ * @parent_window: Window to place dialog over. Can be @NULL.
+ * @action: CongFileChooserAction, for example, @CONG_FILE_CHOOSER_ACTION_OPEN
+ * @list_of_filters: GList of GtkFileFilter, often you can create it with
+ * cong_file_selection_make_xml_filter_list.
  * 
- * TODO: Write me
- * Returns:
+ * This function can be used to present file chooser dialog and allow user
+ * to select a file.
+ *
+ * Returns: file URI string (Note that it is valid escaped uri, not 
+ * usual filename, since in theory conglomerate fully use gnome-vfs.
  */
 
 gchar*
 cong_get_file_name (const gchar *title, 
-		    const gchar *filename,
+		    const gchar *uri,
 		    GtkWindow *parent_window,
 		    CongFileChooserAction cong_action,
 		    GList *list_of_filters)
 {
 	return cong_get_file_name_with_filter (title, 
-					       filename,
+					       uri,
 					       parent_window,
 					       cong_action,
 					       list_of_filters,
@@ -36,7 +40,7 @@ cong_get_file_name (const gchar *title,
 
 gchar*
 cong_get_file_name_with_filter (const gchar *title, 
-				const gchar *filename,
+				const gchar *uri,
 				GtkWindow *parent_window,
 				CongFileChooserAction cong_action,
 				GList *list_of_filters,
@@ -68,8 +72,8 @@ cong_get_file_name_with_filter (const gchar *title,
 					      (gtk_action==GTK_FILE_CHOOSER_ACTION_SAVE)?GTK_STOCK_SAVE:GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					      NULL);
 
-	if (filename) {
-		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (dialog), filename);
+	if (uri) {
+		gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (dialog), uri);
 	}
 
 	for (iter = list_of_filters; iter; iter=iter->next) {
@@ -78,7 +82,7 @@ cong_get_file_name_with_filter (const gchar *title,
 	}
 
 	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
-		result = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		result = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (dialog));
 
 		if (output_filter) {
 			GtkFileFilter *filter = gtk_file_chooser_get_filter (GTK_FILE_CHOOSER (dialog));

@@ -35,7 +35,7 @@ typedef enum
 
 gchar*
 cong_get_file_name (const gchar *title, 
-		    const gchar *filename,
+		    const gchar *uri,
 		    GtkWindow *parent_window,
 		    CongFileChooserAction action,
 		    GList *list_of_filters);
