@@ -74,6 +74,12 @@ install: build
 	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
 
+	# and using src/Makefile to get files into the debug package
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes \
+ 	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate-dbg
+	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate-dbg/usr/share/pixmaps/conglomerate_icon.xpm
+	chmod 644 $(CURDIR)/debian/conglomerate-dbg/usr/share/pixmaps/conglomerate_icon.xpm
+
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -90,7 +96,7 @@ binary-arch: build install
 	dh_installman doc/C/conglomerate.1
 	dh_scrollkeeper
 	dh_link
-	dh_strip
+	dh_strip --dbg-package=conglomerate-dbg
 	dh_compress
 	dh_fixperms
 	dh_installdeb

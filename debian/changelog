@@ -5,7 +5,10 @@ conglomerate (0.7.10-2) UNRELEASED; urgency=low
   * patches/dont_install_generated_gtkdoc.dpatch
   The patch is updated for better disabling of gtkdoc.
 
- -- Geert Stappers <stappers@stappers.nl>  Thu,  8 Jan 2004 21:12:22 +0100
+  * conglomerate-dbg
+  package with debugging information
+
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 12 Jan 2004 23:02:32 +0000
 
 conglomerate (0.7.10-1) unstable; urgency=low
 
@@ -14,6 +17,7 @@ conglomerate (0.7.10-1) unstable; urgency=low
   * better disabling of gtkdoc
    - manual patched doc/reference/Makefile.in
    - temporary disabled patches/dont_install_generated_gtkdoc.dpatch
+
   * expecting new upstream version
 
  -- Geert Stappers <stappers@stappers.nl>  Thu,  8 Jan 2004 21:12:05 +0100
