@@ -1,3 +1,9 @@
+2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-document.h
+
+	Added cong_document_node_can_be_deleted test function
+
 2003-11-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-dispspec-element-gxx.h, gxx-declare-object-from-xml-tree.h, gxx-declare-object-to-xml-tree.h, gxx-impl-object-to-xml-tree.c, gxx-object-from-xml-tree.h, gxx-object-to-xml-tree.h

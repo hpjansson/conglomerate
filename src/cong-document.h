@@ -438,6 +438,23 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 						   CongNodePtr node, 
 						   enum CongElementType tag_type);
 
+/**
+ * cong_document_node_can_be_deleted:
+ * @cong_doc:
+ * @node:
+ * 
+ * Helper function  that determines if a node can safely be deleted.
+ * It will fail if the node or its subtree contains the cursor or the start/end of the selection,
+ * to avoid these containing dangling pointers to dead memory.
+ * Used to fix bug #108530, to ensure that the cursor and selection are always moved out of the way.
+ *
+ * Returns: TRUE if the node can be safely deleted, FALSE otherwise
+ * 
+ */
+gboolean
+cong_document_node_can_be_deleted (CongDocument *doc,
+				   CongNodePtr node);
+
 G_END_DECLS
 
 #endif

@@ -1415,6 +1415,58 @@ cong_document_select_node (CongDocument *doc,
 	}	
 }
 
+/* Helper function for cong_document_node_can_be_deleted
+   Is the location within the subtree of the test node? */
+static gboolean
+is_location_in_node_subtree (const CongLocation *loc,
+			     CongNodePtr test_node)
+{
+	g_assert (loc);
+	g_assert (test_node);
+
+	if (loc->node) {
+		if (loc->node == test_node) {
+			return TRUE;
+		}
+
+		if (cong_node_is_descendant_of (loc->node, test_node)) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+gboolean
+cong_document_node_can_be_deleted (CongDocument *doc,
+				   CongNodePtr node)
+{
+	CongCursor* cursor;
+	CongSelection* selection;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	cursor = cong_document_get_cursor (doc);
+	selection = cong_document_get_selection (doc);
+
+	/* Is the cursor's node within the subtree of the test node?  If so, return FALSE: */
+	if (is_location_in_node_subtree (&cursor->location, node)) {
+		return FALSE;
+	}
+
+	/* Similar tests for the selection start/end: */
+	if (is_location_in_node_subtree (cong_selection_get_logical_start (selection), node)) {
+		return FALSE;
+	}
+
+	if (is_location_in_node_subtree (cong_selection_get_logical_end (selection), node)) {
+		return FALSE;
+	}
+
+	/* Passed all tests; it's save to delete this node: */
+	return TRUE; 
+}
 
 
 /* Internal function definitions: */
