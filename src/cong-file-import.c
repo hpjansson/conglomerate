@@ -39,6 +39,7 @@
 #include "cong-file-selection.h"
 #include "cong-service-importer.h"
 #include "cong-plugin-manager.h"
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 
 CongServiceImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
