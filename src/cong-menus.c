@@ -1912,6 +1912,7 @@ cong_menus_setup_document_action_group (CongPrimaryWindow *primary_window)
  * @primary_window:
  *
  * TODO: Write me
+ * Returns:
  */
 guint
 cong_menus_setup_ui_layout (CongPrimaryWindow *primary_window)

@@ -144,6 +144,7 @@ static void recursive_remove_from_tree_store(CongTreeView *cong_tree_view,
  * @node_creation_callback:
  * @pixbuf_callback:
  * @user_data:
+ * @primary_window:
  *
  * TODO: Write me
  * Returns:

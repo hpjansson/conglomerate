@@ -1,3 +1,12 @@
+2004-12-01  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* cong-dom-view.c, cong-editor-area-container.c,
+	cong-editor-area-unknown-tag.c, cong-editor-widget3.c,
+	cong-menus.c, cong-overview-view.c, cong-tree-view.c, 
+	popup.c:
+	
+	Adding and correcting elements for doc.
+	
 2004-11-28  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* plugin-docbook.c: added #include of cong-stylesheet.h

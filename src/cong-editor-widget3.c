@@ -442,6 +442,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 /**
  * cong_editor_widget3_new:
  * @doc:
+ * @primary_window:
  *
  * TODO: Write me
  * Returns:

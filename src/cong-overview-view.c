@@ -69,6 +69,7 @@ struct CongOverviewDetails
 /**
  * cong_overview_view_new:
  * @doc:
+ * @primary_window:
  *
  * TODO: Write me
  * Returns:

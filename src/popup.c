@@ -989,6 +989,7 @@ structural_tag_popup_init (const gchar *label,
  * @doc:
  * @node:
  * @parent_window:
+ * @primary_window:
  *
  * TODO: Write me
  */

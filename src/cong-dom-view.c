@@ -53,6 +53,7 @@ get_text_for_node(CongNodePtr node);
 /**
  * cong_dom_view_new:
  * @doc:
+ * @primary_window:
  *
  * TODO: Write me
  * Returns:

@@ -131,6 +131,7 @@ cong_editor_area_container_construct (CongEditorAreaContainer *area_container,
  * cong_editor_area_container_add_child:
  * @area_container:
  * @child:
+ * @add_to_end:
  *
  * TODO: Write me
  */

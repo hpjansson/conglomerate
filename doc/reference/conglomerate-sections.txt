@@ -52,7 +52,6 @@ cong_attribute_editor_get_type
 cong_attribute_editor_construct
 cong_attribute_editor_get_document
 cong_attribute_editor_get_node
-cong_attribute_editor_get_attribute
 cong_attribute_editor_get_ns
 cong_attribute_editor_get_attribute_name
 cong_attribute_editor_get_attribute_value
@@ -103,7 +102,6 @@ cong_attribute_wrapper_get_type
 cong_attribute_wrapper_construct
 cong_attribute_wrapper_get_document
 cong_attribute_wrapper_get_node
-cong_attribute_wrapper_get_attribute
 cong_attribute_wrapper_get_ns
 cong_attribute_wrapper_get_attribute_name
 cong_attribute_wrapper_get_attribute_value
@@ -263,7 +261,6 @@ cong_dispspec_add_element
 cong_dispspec_get_num_elements
 cong_dispspec_get_element
 cong_dispspec_gc_get
-cong_dispspec_name_gc_get
 cong_dispspec_name_get
 cong_dispspec_element_structural
 cong_dispspec_element_collapse
@@ -305,11 +302,11 @@ cong_document_get_type
 cong_document_construct
 cong_document_new_from_xmldoc
 cong_document_get_xml
-cong_document_get_root
+cong_document_get_root_element
 cong_document_get_traversal
 cong_document_get_root_traversal_node
 cong_document_get_find_dialog_data
-cong_document_get_dispspec
+cong_document_get_dispspec_element
 cong_document_get_dispspec_element_for_node
 cong_document_get_filename
 cong_document_get_full_uri
@@ -360,7 +357,7 @@ cong_document_cut_selection
 cong_document_copy_selection
 cong_document_can_paste
 cong_document_can_print
-cong_document_paste_clipboard_or_selection
+cong_document_paste_clipboard
 cong_document_paste_source_at
 cong_document_paste_source_under
 cong_document_paste_source_before
@@ -827,8 +824,6 @@ cong_editor_node_get_traversal_node
 cong_editor_node_get_traversal_parent
 cong_editor_node_is_selected
 cong_editor_node_private_set_selected
-cong_editor_node_get_primary_area
-cong_editor_node_get_inner_area
 cong_editor_node_generate_block_area
 cong_editor_node_generate_line_areas_recursive
 cong_editor_node_line_regeneration_required
@@ -852,7 +847,6 @@ cong_editor_widget3_get_type
 cong_editor_widget3_construct
 cong_editor_widget3_new
 cong_editor_widget3_get_document
-cong_editor_widget3_get_dispspec
 cong_editor_widget3_force_layout_update
 CongEditorNodeCallback
 cong_editor_widget3_for_each_editor_node
@@ -901,7 +895,6 @@ CONG_EEL_ACCESS_METHOD
 CONG_EEL_INVOKE_METHOD
 CONG_EEL_ASSERT_METHOD
 CONG_EEL_INVOKE_METHOD_IF
-cong_eel_option_menu_get_selected_menu_item
 cong_eel_prettify_xml_name_with_header_capitalisation
 cong_eel_prettify_xml_name_with_sentence_capitalisation
 cong_eel_set_string
@@ -1615,8 +1608,8 @@ cong_tree_view_protected_force_node_update
 <SECTION>
 <FILE>cong-ui-hooks</FILE>
 cong_menu_item_attach_callback_Document
-cong_menu_item_attach_callback_Document_Node_ParentWindow
-cong_menu_item_attach_callback_Document_DispspecElement_Node
+cong_menu_item_attach_callback_Document_SelectedNode_ParentWindow
+cong_menu_item_attach_callback_Document_ElementDescription_SelectedNode
 cong_menu_add_item
 cong_ui_hook_file_import
 cong_ui_hook_file_export
@@ -1701,8 +1694,6 @@ cong_element_description_list_free
 cong_util_modal_element_selection_dialog
 cong_util_make_menu_item
 cong_util_make_stock_menu_item
-cong_util_make_menu_item_for_dispspec_element
-cong_util_make_menu_item_for_element_desc
 cong_util_add_menu_separator
 cong_util_get_qualified_attribute_name
 cong_util_show_in_window
@@ -1725,7 +1716,7 @@ cong_vfs_extract_short_name
 <FILE>cong-view</FILE>
 CONG_VIEW
 cong_view_get_document
-cong_view_get_dispspec
+cong_view_get_default_dispspec
 </SECTION>
 
 <SECTION>
@@ -1748,8 +1739,6 @@ cong_xpath_expression_get_string_result
 <FILE>global</FILE>
 CONG_GCONF_PATH
 RELEASE
-isblank
-NEW_LOOK
 CONG_VALIDATE_UTF8
 cong_editor_view_new
 cong_editor_view_free
