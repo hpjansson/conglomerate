@@ -1,0 +1,40 @@
+creating ChangeLog
+2000-01-08  Hans Petter Jansson  
+
+	* cursor.c, position.c:
+
+	Cursor fixes.
+
+1999-12-09  Hans Petter Jansson  
+
+	* README:
+
+	Added note about Flux.
+
+	* README:
+
+	Added note about file requester on Windows.
+
+	* README, ilogo.c, main.c:
+
+	New logo and usage description.
+
+	* open.c:
+
+	Fixed interactive opening.
+
+	* README:
+
+	Windows build comments.
+
+	* README:
+
+	Windows building and CVS info.
+
+	* COPYING, Makefile, Makefile.win, README, auth_off.c, auth_on.c, cursor.c, dispspec.c, file.c, global.h, icon_assemble.c, icon_connect.c, icon_new.c, icon_openfile.c, icon_submit.c, ilogo.c, main.c, new_doc.c, open.c, popup.c, position.c, save.c, select.c, tchoice.c, tree.c, xmldata.c, xmledit.c, xmlview.c:
+
+	Initial import.
+
+	* COPYING, Makefile, Makefile.win, README, auth_off.c, auth_on.c, cursor.c, dispspec.c, file.c, global.h, icon_assemble.c, icon_connect.c, icon_new.c, icon_openfile.c, icon_submit.c, ilogo.c, main.c, new_doc.c, open.c, popup.c, position.c, save.c, select.c, tchoice.c, tree.c, xmldata.c, xmledit.c, xmlview.c:
+	New file.
+

@@ -1,0 +1,9 @@
+creating ChangeLog
+1999-12-09  Hans Petter Jansson  
+
+	* readme.ds, readme.xml:
+
+	Initial import.
+
+	* readme.ds, readme.xml: New file.
+
