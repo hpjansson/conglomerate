@@ -1050,11 +1050,7 @@ msgstr "Topic"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:34
 msgid "Translator"
-msgstr ""
-"Abigail Brady <morwen@evilmagi_c.org>\n"
-"Bastien Nocera <hadess@hadess.net>\n"
-"Gareth Owen <gowen72@yahoo.com>\n"
-"David Lodge <dave@cirt.net>"
+msgstr "Translator"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:35
 msgid "Underlined"

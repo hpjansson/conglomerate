@@ -1047,9 +1047,7 @@ msgstr "Тема"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:34
 msgid "Translator"
-msgstr ""
-"Дмитрий Мастрюков <dmitry@taurussoft.org>\n"
-"Виталий Липатов <lav@etersoft.ru>"
+msgstr "Переводчик"
 
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:35
 msgid "Underlined"

@@ -1,3 +1,7 @@
+2004-10-19  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+
+	* kernel-traffic.xds.in : Warn translator about possible bug.
+
 2004-10-13  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* docbook.xds.in, opml.xds, release.xds, website-webpage.xds:

@@ -60,6 +60,7 @@
 		</element>
 
 		<element localName="translator" type="structural" color="a0b0c0" icon="cong-author"> 
+			<!-- Translators: It is just a word "Translator" that should be translated, not replaced by your initials :) -->
 			<_name>Translator</_name>
 		</element>
 
