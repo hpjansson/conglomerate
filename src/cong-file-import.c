@@ -75,7 +75,8 @@ cong_ui_hook_file_import (GtkWindow *toplevel_window)
 	filename = cong_get_file_name(_("Import file..."), 
 				      NULL, 
 				      toplevel_window,
-				      CONG_FILE_CHOOSER_ACTION_OPEN);
+				      CONG_FILE_CHOOSER_ACTION_OPEN,
+				      NULL /* FIXME: for now */);
 
 	if (filename) {
 		char* mime_type = gnome_vfs_get_mime_type (filename);

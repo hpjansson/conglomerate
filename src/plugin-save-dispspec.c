@@ -80,7 +80,8 @@ static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 	new_doc_name = cong_get_file_name("Save Display Specification",
 					  old_doc_name, 
 					  cong_primary_window_get_toplevel (primary_window),
-					  CONG_FILE_CHOOSER_ACTION_SAVE);
+					  CONG_FILE_CHOOSER_ACTION_SAVE,
+					  NULL /* FIXME */);
 
 	if (!new_doc_name) {
 		g_free (old_doc_name);

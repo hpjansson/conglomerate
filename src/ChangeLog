@@ -1,5 +1,12 @@
 2004-06-20  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+
+	* cong-file-export.c, cong-file-import.c, cong-file-open.c, cong-file-save.c, cong-file-selection.h, file.c, plugin-save-dispspec.c
+
+	Added list of file filters as an argument; fixed buttons
+
+	-- 0.7.13 --
+
 	* file.c (cong_get_file_name): Use GtkFileChooser rather than GtkFileSelector; we now
 	require GTK 2.4 in configure.in
 

@@ -37,8 +37,11 @@ gchar*
 cong_get_file_name (const gchar *title, 
 		    const gchar *filename,
 		    GtkWindow *parent_window,
-		    CongFileChooserAction action);
+		    CongFileChooserAction action,
+		    GList *list_of_filters);
 
+GList*
+cong_file_selection_make_xml_filter_list (void);
 
 G_END_DECLS
 

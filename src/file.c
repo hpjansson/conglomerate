@@ -7,20 +7,26 @@
 #include "global.h"
 #include "cong-file-selection.h"
 
-/*
-  This file isolates the API change-over between gtk_file_selection and gtk_file_chooser.
+/**
+ * cong_get_file_name:
+ * @title:
+ * @filename:
+ * @parent_window:
+ * @cong_action:
+ * 
+ * TODO: Write me
  */
-#if 1
-/* Implementation in terms of gtk_file_chooser: */
 gchar*
 cong_get_file_name (const gchar *title, 
 		    const gchar *filename,
 		    GtkWindow *parent_window,
-		    CongFileChooserAction cong_action)
+		    CongFileChooserAction cong_action,
+		    GList *list_of_filters)
 {
 	gchar *result = NULL;
 	GtkWidget *dialog;
 	GtkFileChooserAction gtk_action;
+	GList *iter;
 
 	g_return_val_if_fail (title, NULL);
 	g_return_val_if_fail (parent_window, NULL);
@@ -40,11 +46,16 @@ cong_get_file_name (const gchar *title,
 					      parent_window,
 					      gtk_action,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+					      (gtk_action==GTK_FILE_CHOOSER_ACTION_SAVE)?GTK_STOCK_SAVE:GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					      NULL);
 
 	if (filename) {
 		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (dialog), filename);
+	}
+
+	for (iter = list_of_filters; iter; iter=iter->next) {
+		gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (dialog),
+					     GTK_FILE_FILTER (iter->data));
 	}
 #if 0
 	GtkFileFilter *filter = gtk_file_filter_new ();
@@ -69,59 +80,17 @@ cong_get_file_name (const gchar *title,
 	
 	return result;
 }
-#else
 
-/* Implementation in terms of gtk_file_selection: */
-/**
- * cong_get_file_name:
- * @title:
- * @filename:
- * @parent_window:
- * @cong_action:
- * 
- * TODO: Write me
- */
-gchar*
-cong_get_file_name (const gchar *title, 
-		    const gchar *filename,
-		    GtkWindow *parent_window,
-		    CongFileChooserAction cong_action)
+GList*
+cong_file_selection_make_xml_filter_list (void)
 {
-	GtkFileSelection *file_selection;
-	gint result_int;
-	gchar *result_filename;
+	GList *list = NULL;
+	GtkFileFilter *test_filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (test_filter, _("XML Files"));
+	gtk_file_filter_add_mime_type (test_filter, "text/xml");
+	gtk_file_filter_add_mime_type (test_filter, "x-directory/normal");
+	list = g_list_append(list, test_filter);
 
-	g_return_val_if_fail (title, NULL);
-	g_return_val_if_fail (parent_window, NULL);
-
-	/* Create a new file selection widget */
-	file_selection = GTK_FILE_SELECTION(gtk_file_selection_new (title));
-
-	if (filename) {
-		gtk_file_selection_set_filename(file_selection, 
-						filename);
-	}
-
-	gtk_window_set_transient_for(GTK_WINDOW(file_selection), 
-				     parent_window);
-
-	result_int = gtk_dialog_run(GTK_DIALOG(file_selection));
-
-	switch (result_int) {
-	default: g_assert(0);
-	case GTK_RESPONSE_DELETE_EVENT:
-	case GTK_RESPONSE_NONE:
-	case GTK_RESPONSE_CANCEL:
-		result_filename = NULL;
-		break;
-
-	case GTK_RESPONSE_OK:
-		result_filename = g_strdup(gtk_file_selection_get_filename(file_selection));
-		break;
-	}
-
-	gtk_widget_destroy(GTK_WIDGET(file_selection));
-
-	return result_filename;
+ 	return list;	
 }
-#endif
+

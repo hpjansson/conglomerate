@@ -194,7 +194,8 @@ static void on_select_filename_button_clicked(GtkButton *button,
 	new_uri = cong_get_file_name(_("Select file to export to"),
 				     export_uri,
 				     GTK_WINDOW(details->dialog),
-				     CONG_FILE_CHOOSER_ACTION_SAVE);
+				     CONG_FILE_CHOOSER_ACTION_SAVE,
+				     NULL /* For now */);
 
 	if (new_uri) {
 		cong_exporter_set_preferred_uri(exporter, new_uri);

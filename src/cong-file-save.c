@@ -69,8 +69,8 @@ save_document_as(CongDocument *doc, GtkWindow *parent_window)
 	new_doc_name = cong_get_file_name(_("Save XML as..."), 
 					  current_doc_name,
 					  parent_window,
-					  CONG_FILE_CHOOSER_ACTION_SAVE);
-
+					  CONG_FILE_CHOOSER_ACTION_SAVE,
+					  cong_file_selection_make_xml_filter_list ());
 	if (current_doc_name) {
 		g_free(current_doc_name);
 	}

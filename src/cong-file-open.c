@@ -208,8 +208,8 @@ open_document(GtkWindow *parent_window)
 	doc_name = cong_get_file_name(_("Select an XML document"),
 				      NULL,
 				      parent_window,
-				      CONG_FILE_CHOOSER_ACTION_OPEN);
-
+				      CONG_FILE_CHOOSER_ACTION_OPEN,
+				      cong_file_selection_make_xml_filter_list());
 	if (!doc_name) {
 		return;
 	}
