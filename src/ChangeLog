@@ -1,5 +1,9 @@
 2003-12-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c
+
+	Big purge of dead code from pre-CongDocumentTraversal implementation
+
 	* cong-document-traversal.c, cong-editor-widget3.c
 
 	Reduced excessive debug logging
