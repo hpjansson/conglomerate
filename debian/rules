@@ -56,6 +56,8 @@ build-indep: build-indep-stamp
 build-indep-stamp: patch config.status
 	dh_testdir
 
+	# skip gtkdoc
+	sed -ie 's/SUBDIRS = \(.*\)reference\(.*\)/SUBDIRS = \1 \2/' doc/Makefile
 	# Commands to compile the indep part of the package.
 	$(MAKE)
 	# `cd doc/C ; ./manpage.make` # manual should up-to-date
