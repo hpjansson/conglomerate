@@ -1,11 +1,9 @@
+## desk top icon
 dtidir = $(datadir)/pixmaps
 dti_DATA = conglomerate-icon-16.png conglomerate-icon-32.png
 
-##appiconsdir = $(pkgdatadir)/icons
-##appiconsdir = $(datadir)/conglomerate/icons
-## this is work in progress by GSt
 # application icons
-appiconsdir = $(datadir)/pixmaps
+appiconsdir = $(pkgdatadir)/icons
 appicons_DATA = \
 	cong-docbook-set-16.png \
 	cong-docbook-book-16.png \

@@ -1,4 +1,4 @@
-gladedir 	 = $(datadir)/conglomerate/glade
+gladedir 	 = $(pkgdatadir)/glade
 glade_DATA 	 = docbook-common-properties.glade \
                    docbook-orderedlist-properties.glade \
 		   string_selection_dialog.glade \

@@ -265,7 +265,7 @@ cong_app_new (int   argc,
 							  argc,argv,
 							  GNOME_PARAM_HUMAN_READABLE_NAME,
 							  _("XML Editor"),
-							  GNOME_PARAM_APP_DATADIR, DATADIR,
+							  GNOME_PARAM_APP_DATADIR, PKGDATADIR,
 							  NULL);
 
 	/* Set up usage of GConf: */
@@ -312,7 +312,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 #if 1
 	gchar*      xds_directory = gnome_program_locate_file(PRIVATE(app)->gnome_program,
 							      GNOME_FILE_DOMAIN_APP_DATADIR,
-							      "conglomerate/dispspecs",
+							      "dispspecs",
 							      FALSE,
 							      NULL);
 #else
@@ -321,7 +321,7 @@ cong_app_private_load_displayspecs (CongApp *app,
 	g_free(current_dir);
 #endif
 
-	g_message(DATADIR);
+	g_message(PKGDATADIR);
 
 	if (xds_directory) {
 		g_message("Loading xds files from \"%s\"\n", xds_directory);
