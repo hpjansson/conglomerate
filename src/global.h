@@ -105,7 +105,7 @@ GList *xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node);
 GList *xml_all_valid_span_elements(CongDispspec *ds, CongNodePtr node);
 char *xml_fetch_clean_data(CongNodePtr x);
 gboolean xml_add_required_children(CongDocument *cong_doc, CongNodePtr node);
-xmlElementPtr xml_get_dtd_element(CongDocument *cong_doc, CongNodePtr node);
+
 GList* xml_get_valid_children(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
 GList* xml_get_valid_previous_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);
 GList* xml_get_valid_next_sibling(CongDispspec* ds, CongNodePtr node, enum CongElementType tag_type);

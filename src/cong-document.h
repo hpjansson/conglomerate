@@ -324,6 +324,29 @@ cong_document_node_split2 (CongDocument *doc,
 			   CongNodePtr s, 
 			   int c);
 
+/**
+ * Helper function to get the xmlElementPtr within the DTD for a node
+ * Currently only looks at the actual DTD, but in future might attempt
+ * to use the dispspec to infer an DTD and return that
+ * So don't store the return value; it might get deleted etc
+ */
+xmlElementPtr
+cong_document_get_dtd_element (CongDocument *cong_doc, 
+			       CongNodePtr node);
+
+
+GList* 
+cong_document_get_valid_new_child_elements (CongDocument *doc,
+					    CongNodePtr node, 
+					    enum CongElementType tag_type);
+GList* 
+cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
+						       CongNodePtr node, 
+						       enum CongElementType tag_type);
+GList* 
+cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
+						   CongNodePtr node, 
+						   enum CongElementType tag_type);
 
 G_END_DECLS
 

@@ -589,24 +589,21 @@ static GList *sort_menu(GList *list_of_dispspec_element)
 					 
 static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc, 
 							gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							CongNodePtr x,
+							CongNodePtr node,
 							GtkWindow *parent_window) 
 {
-	CongDispspec *ds;
 	GList *list;
 	GtkWidget *popup;
 
 	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
 
-	ds = cong_document_get_dispspec(doc);
-
-	list = xml_get_valid_next_sibling(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
-
-	list = sort_menu(list);
-
+	list = cong_document_get_valid_new_next_sibling_elements (doc, 
+								  node, 
+								  CONG_ELEMENT_TYPE_STRUCTURAL);
 	popup = structural_tag_popup_init(doc, 
 					  callback, 
-					  x, 
+					  node, 
 					  list,
 					  parent_window);
 	
@@ -617,24 +614,22 @@ static GtkWidget *new_sibling_structural_tag_popup_init(CongDocument *doc,
 					 
 static GtkWidget *new_sub_element_structural_tag_popup_init(CongDocument *doc,
 							    gint (*callback)(GtkWidget *widget, CongNodePtr tag),
-							    CongNodePtr x,
+							    CongNodePtr node,
 							    GtkWindow *parent_window) 
 {
-	CongDispspec *ds;
 	GList *list;
 	GtkWidget *popup;
 
 	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail(node, NULL);
 
-	ds = cong_document_get_dispspec(doc);
-
-	list = xml_get_valid_children(ds, x, CONG_ELEMENT_TYPE_STRUCTURAL);
-
-	list = sort_menu(list);
+	list = cong_document_get_valid_new_child_elements (doc,
+							   node, 
+							   CONG_ELEMENT_TYPE_STRUCTURAL);
 
 	popup = structural_tag_popup_init(doc, 
 					  callback, 
-					  x, 
+					  node, 
 					  list,
 					  parent_window);
 	
@@ -662,6 +657,8 @@ static GtkWidget *structural_tag_popup_init(CongDocument *doc,
 
 	popup = gtk_menu_new();
 	gtk_menu_set_title(GTK_MENU(popup), "Sub menu");
+
+	list = sort_menu(list);
 	
 	for (current = g_list_first(list); current; current = g_list_next(current)) {
 

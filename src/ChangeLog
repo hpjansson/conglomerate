@@ -1,5 +1,9 @@
 2003-09-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, global.h, popup.c, xmldata.c
+
+	Moved the get_dtd_element code into CongDocument; wrapped the popup code with a call to CongDocument pending support for inferred DTDs
+
 	* cong-node.c, Makefile.am, xmldata.c
 
 	Moved parts of xmldata.c into a new file (cong-node.c)
