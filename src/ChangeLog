@@ -1,5 +1,9 @@
 2003-09-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-radio-button.c
+
+	Block/unblock signals when handling attribute changes to avoid polluting undo histroy with excess generated attribute changes commands
+
 	* plugin-cleanup-source.c
 
 	First attempt at undo/redo for source cleanup

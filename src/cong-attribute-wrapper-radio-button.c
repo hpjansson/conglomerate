@@ -33,6 +33,8 @@ struct CongAttributeWrapperRadioButtonDetails
 {
 	GtkRadioButton *radio_button;
 	gchar *attribute_value;	
+
+	gulong handler_id_toggled;
 };
 
 /* Internal function declarations: */
@@ -102,11 +104,10 @@ cong_attribute_wrapper_radio_button_construct (CongAttributeWrapperRadioButton *
 	PRIVATE(attribute_wrapper)->radio_button = radio_button;
 	PRIVATE(attribute_wrapper)->attribute_value = g_strdup (attribute_value);	
 
-	g_signal_connect (G_OBJECT (radio_button),
-			  "toggled",
-			  G_CALLBACK (on_toggled),
-			  attribute_wrapper);
-
+	PRIVATE(attribute_wrapper)->handler_id_toggled = g_signal_connect (G_OBJECT (radio_button),
+									   "toggled",
+									   G_CALLBACK (on_toggled),
+									   attribute_wrapper);	
 	do_refresh (attribute_wrapper);
 	
 	return attribute_wrapper;
@@ -195,8 +196,13 @@ do_refresh (CongAttributeWrapperRadioButton *attribute_wrapper)
 	gboolean should_be_active = should_button_be_active (attribute_wrapper);
 		
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (PRIVATE(attribute_wrapper)->radio_button))!=should_be_active) {
+		g_signal_handler_block ( G_OBJECT(PRIVATE(attribute_wrapper)->radio_button),
+					 PRIVATE(attribute_wrapper)->handler_id_toggled);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (PRIVATE(attribute_wrapper)->radio_button),
 					      should_be_active);
+		g_signal_handler_unblock ( G_OBJECT(PRIVATE(attribute_wrapper)->radio_button),
+					   PRIVATE(attribute_wrapper)->handler_id_toggled);
+		
 	}
 }
 
