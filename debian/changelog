@@ -11,7 +11,9 @@ conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
    because `dh_strip` takes care of that.
 
   * NEWS:
-  In same format as changelog.
+   - Dropped the scrollkeeper item.
+   - Clearified the gtk-doc issue.
+   - In same format as changelog.
 
  -- Geert Stappers <stappers@stappers.nl>  Tue, 25 Nov 2003 13:36:10 +0000
 
