@@ -59,16 +59,4 @@
     </element>
   </element-list>
 
-  <document-template>
-    <dispspec>
-      <metadata>
-        <name>New Conglomerate Display Specification</name>
-	<description/>
-      </metadata>
-      <document-models>
-      </document-models>
-      <element-list>
-      </element-list>
-    </dispspec>
-  </document-template>
 </dispspec>

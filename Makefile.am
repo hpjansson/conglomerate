@@ -1,4 +1,4 @@
-SUBDIRS = src po data doc examples pixmaps glade deb
+SUBDIRS = src po data doc examples pixmaps glade deb templates
 
 NULL =
 

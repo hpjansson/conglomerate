@@ -271,12 +271,4 @@
 			<name locale="en">Legend</name>
 		</element>
 	</element-list>
-	<document-template>
-		<html>
-			<head>
-				<title>New Web Page</title>
-			</head>
-			<body><p>The content of the web page goes here.</p></body>
-		</html>
-	</document-template>
 </dispspec>

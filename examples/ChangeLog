@@ -1,3 +1,9 @@
+2003-10-24  Jeff Martin <jeff@custommonkey.org>
+
+	* dispspec.xds xhtml1-strict.xds
+
+	Moved templates from xds files into templates directory
+
 2003-10-20  Boris Goldowsky <bgoldowsky@rcn.com>
 
 	* dispspec.xds

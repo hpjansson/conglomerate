@@ -211,4 +211,5 @@ AC_OUTPUT(Makefile
 	  glade/Makefile
 	  pixmaps/Makefile
 	  examples/Makefile 
+	  templates/Makefile 
           src/Makefile)

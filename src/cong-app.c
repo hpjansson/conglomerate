@@ -444,9 +444,9 @@ cong_app_private_load_plugins (CongApp *app)
 			plugin_save_dispspec_plugin_register,
 			plugin_save_dispspec_plugin_configure);
 
-	register_plugin(app,"doc-from-xds",
-			plugin_doc_from_xds_plugin_register,
-			plugin_doc_from_xds_plugin_configure);
+	register_plugin(app,"templates",
+			plugin_templates_plugin_register,
+			plugin_templates_plugin_configure);
 }
 
 static void 
