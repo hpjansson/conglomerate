@@ -61,6 +61,10 @@ Enhancements
         
       * Internal improvements to GUI button sensitivity logic (Paul
         Smith)
+
+      * User manual extended (Sean Wheller)
+
+      * Extended User manual source files into tarball (Jeff Martin)
         
 
 Fixes
