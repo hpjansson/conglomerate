@@ -18,7 +18,7 @@
 
 	* cong-editor-node-text.c
 
-	Fixed various bugs in the calculation of selection highlighting; added an early reject to throw away unnecessary updates when dragging out a selection with the mouse
+	Fixed various bugs in the calculation of selection highlighting (including bug #124130); added an early reject to throw away unnecessary updates when dragging out a selection with the mouse
 
 	* cong-node.h, cong-node.c, cong-range.c
 
