@@ -130,32 +130,6 @@ void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNe
 #endif
 }
 
-static gboolean is_docbook(CongDocument *doc) 
-{
-	const CongXMLChar* dtd_public_id;
-
-	g_return_val_if_fail(doc, FALSE);
-
-	dtd_public_id = cong_document_get_dtd_public_identifier(doc);
-	
-	if (NULL==dtd_public_id) {
-		return FALSE;
-	}
-
-	/* FIXME: we may want to add more public IDs here */
-	if (0==strcmp(dtd_public_id, "-//OASIS//DTD DocBook XML V4.1.2//EN")) {
-		return TRUE;
-	} 
-
-	/* FIXME:  this has been used by some of the GNOME docs; e.g. the GNOME accessibility guide; is it correct? */
-	if (0==strcmp(dtd_public_id, "-//OASIS/DTD DocBookXML V4.1.2//EN")) {
-		return TRUE;
-	}
-
-
-	return FALSE;
-}
-
 /**
    Manufactures appropriate DocBook DTD, and assigns it to the given document; doesn't add it to the node tree.
  */
@@ -446,7 +420,7 @@ gboolean docbook_exporter_document_filter(CongExporter *exporter, CongDocument *
 	g_return_val_if_fail(exporter, FALSE);
 	g_return_val_if_fail(doc, FALSE);
 
-	return is_docbook(doc);
+	return cong_util_is_docbook(doc);
 }
 
 void html_exporter_action_callback(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
@@ -548,7 +522,7 @@ gboolean docbook_print_method_document_filter(CongPrintMethod *print_method, Con
 	g_return_val_if_fail(print_method, FALSE);
 	g_return_val_if_fail(doc, FALSE);
 
-	return is_docbook(doc);
+	return cong_util_is_docbook(doc);
 }
 
 void docbook_print_method_action_callback(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window)

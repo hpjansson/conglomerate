@@ -29,6 +29,9 @@ G_BEGIN_DECLS
 
 /* Handy utility functions: */
 
+gboolean 
+cong_util_is_docbook (CongDocument *doc);
+
 /**
    Handy function for taking xml text and turning it into something you can see in a log: tabs and carriage returns etc are turned into escape sequences.
 */

@@ -39,6 +39,32 @@
 #endif
 #endif
 
+gboolean 
+cong_util_is_docbook (CongDocument *doc) 
+{
+	const CongXMLChar* dtd_public_id;
+
+	g_return_val_if_fail(doc, FALSE);
+
+	dtd_public_id = cong_document_get_dtd_public_identifier(doc);
+	
+	if (NULL==dtd_public_id) {
+		return FALSE;
+	}
+
+	/* FIXME: we may want to add more public IDs here */
+	if (0==strcmp(dtd_public_id, "-//OASIS//DTD DocBook XML V4.1.2//EN")) {
+		return TRUE;
+	} 
+
+	/* FIXME:  this has been used by some of the GNOME docs; e.g. the GNOME accessibility guide; is it correct? */
+	if (0==strcmp(dtd_public_id, "-//OASIS/DTD DocBookXML V4.1.2//EN")) {
+		return TRUE;
+	}
+
+
+	return FALSE;
+}
 
 gchar* 
 cong_util_cleanup_text (const xmlChar *src_text) 

@@ -1,5 +1,9 @@
 2003-08-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-util.c, cong-util.h, plugin-docbook.c
+	
+	Moved Docbook detection from plugin-docbook.c into cong-util.c
+
 	* cong-document.c, cong-node.h, plugin-lists-node-element-listitem.c, plugin-website.c, xmldata.c
 
 	Added namespace support to cong_node_is_tag, plus some other utility functions on nodes
