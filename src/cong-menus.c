@@ -68,7 +68,7 @@
 extern char *ilogo_xpm[];
 
 #define ENABLE_DEBUG_MENU 0
-#define ENABLE_UNIMPLEMENTED_MENUS 1
+#define ENABLE_UNIMPLEMENTED_MENUS 0
 
 /**
  * make_uneditable_text:
@@ -187,6 +187,7 @@ static void menu_callback_file_save_copy(gpointer callback_data,
 				     _("The selected menu item has not yet been implemented."));
 }
 
+#if ENABLE_UNIMPLEMENTED_MENUS
 static void menu_callback_file_revert(gpointer callback_data,
 				      guint callback_action,
 				      GtkWidget *widget)
@@ -222,6 +223,7 @@ static void menu_callback_file_revert(gpointer callback_data,
 							      118770);
 	} 
 }
+#endif /* ENABLE_UNIMPLEMENTED_MENUS */
 
 static void menu_callback_file_import(gpointer callback_data,
 				      guint callback_action,
@@ -1575,12 +1577,12 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, ACTION_MARKER_COPY, "<StockItem>", GTK_STOCK_COPY },
 	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, ACTION_MARKER_PASTE, "<StockItem>", GTK_STOCK_PASTE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
-#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Edit/_Find..."),         "<control>F", menu_callback_find, 0, "<StockItem>", GTK_STOCK_FIND },
 	{ N_("/Edit/Find Ne_xt"),       "<control>G", menu_callback_find_next, 0, "<Item>" },
 	{ N_("/Edit/Find Pre_vious"),   "<shift><control>G", menu_callback_find_prev, 0, "<Item>" },
 	{ N_("/Edit/R_eplace..."),      "<control>R", menu_callback_replace, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+#if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 #endif /* #if ENABLE_UNIMPLEMENTED_MENUS */

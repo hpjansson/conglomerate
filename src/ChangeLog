@@ -1,3 +1,7 @@
+2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-menus.c: Minor menu cleanups
+
 2004-06-18  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-attribute-editor-lang.c, cong-document.c: 
