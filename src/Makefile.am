@@ -269,7 +269,6 @@ conglomerate_SOURCES =      \
   select.c                  \
   popup.c                   \
   tree.c                    \
-  tchoice.c                 \
   file.c                    \
   xmldata.c                 \
   xmledit.c                 \

@@ -1,5 +1,9 @@
 2004-11-27  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am: Removed tchoice.c
+
+	* tchoice.c: Removed; this is very dead code from years ago!
+
 	* cong-dispspec-element.c: Removed NEW_LOOK macro and the unused
 	old look code since it doesn't compile and I don't plan to revive
 	it.
