@@ -1,3 +1,9 @@
+2004-06-10  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* popup.c (cong_ui_popup_init): 
+
+	Fixed minor visual problem with separators in menu
+
 2004-06-09  David Malcolm  <dmalcolm@redhat.com>
 
 	* popup.c: 

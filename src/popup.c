@@ -1159,9 +1159,7 @@ cong_ui_popup_init(CongDocument *doc,
 								    doc,
 								    node,
 								    parent_window,
-								    TRUE);
-	
-	cong_util_add_menu_separator(GTK_MENU(tpopup));
+								    TRUE);	
 
 #if ENABLE_RAW_TREE_MANIPULATION
 	{
@@ -1214,6 +1212,9 @@ cong_ui_popup_init(CongDocument *doc,
 	/* Add clipboard operations: */
 	/* FIXME:  the clipboard stuff only currently works for elements, hence we should filter on these for now: */
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
+
+		cong_util_add_menu_separator(GTK_MENU(tpopup));
+
 		add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
 				   cong_util_make_stock_menu_item (GTK_STOCK_CUT),
 				   cong_ui_hook_tree_cut,
