@@ -1,4 +1,19 @@
 creating ChangeLog
+2002-08-13  David Malcolm
+
+        * Makefile
+
+	Added -Wall to compilation options
+	
+	* cursor.c, dispspec.c, global.h, main.c, new_doc.c, open.c, popup.c, position.c, save.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c:
+
+	Moved most of the global vars into cong_globals and cong_gui structs; added UNUSED_VAR macro to reduce warning count; ported from GtkTree to GtkTreeView widget; added arguments to various cursor and selection functions to make their target explicit; replaced usage of assert with g_assert.
+
+	* file.c
+
+	Fixed a const-correctness problem
+	
+
 2002-08-08  David Malcolm
 
 	* dispspec.c, new_doc.c:
