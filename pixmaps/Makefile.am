@@ -1,10 +1,10 @@
 dtidir = $(datadir)/pixmaps
 dti_DATA = conglomerate-icon-16.png
 
+##appiconsdir = $(pkgdatadir)/icons
+##appiconsdir = $(datadir)/conglomerate/icons
+## this is work in progress by GSt
 # application icons
-#appiconsdir = $(pkgdatadir)/icons
-#appiconsdir = $(datadir)/conglomerate/icons
-# this is work in progress by GSt
 appiconsdir = $(datadir)/pixmaps
 appicons_DATA = \
 	cong-docbook-set-16.png \
@@ -37,3 +37,4 @@ appicons_DATA = \
 	cong-code-fragment-16.png
 
 EXTRA_DIST = $(dti_DATA) $(appicons_DATA)
+## End of Makefile.am
