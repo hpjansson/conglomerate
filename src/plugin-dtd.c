@@ -100,7 +100,7 @@ void dtd_to_rng_importer_action_callback(CongImporter *importer, const gchar *ur
 {
 	g_message("dtd_to_rng_importer_action_callback");
 
-	CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, "Importing DTD as RELAX NG Schema");
+	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, "Importing DTD as RELAX NG Schema", 118768);
 }
 
 void dtd_to_w3c_xml_schema_importer_action_callback(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window)

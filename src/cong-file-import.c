@@ -105,7 +105,9 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 
 		if (list_of_valid->next) {
 			/* There's more than one valid importer... */
-			CONG_DO_UNIMPLEMENTED_DIALOG(toplevel_window, _("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found."));
+			CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(toplevel_window, 
+								      _("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found."), 
+								      118769);
 
 			importer = list_of_valid->data;
 		} else {

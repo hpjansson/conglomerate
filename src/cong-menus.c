@@ -193,7 +193,9 @@ static void menu_callback_file_revert(gpointer callback_data,
 			return;
 		}
 
-		CONG_DO_UNIMPLEMENTED_DIALOG(NULL, _("The selected menu item has not yet been implemented."));
+		CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, 
+							      _("The selected menu item has not yet been implemented."),
+							      118770);
 	} 
 }
 

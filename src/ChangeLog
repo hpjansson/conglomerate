@@ -1,3 +1,9 @@
+2003-07-31  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-file-import.c, cong-menus.c, plugin-dtd.c
+
+	Added some Bugzilla IDs
+
 2003-07-31  Jeff Martin <jeff@custommonkey.org>
 
 	* cong-dispspec.c
