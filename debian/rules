@@ -4,6 +4,8 @@
 
 PACKAGE = conglomerate
 
+upstreamversion=$(shell dpkg-parsechangelog | grep Version | head -1 | sed -e 's/Version: //g' -e 's/-[A-Za-z0-9\.]*$$//g')
+
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
@@ -35,28 +37,39 @@ config.status: configure
 	--infodir=\$${prefix}/share/info \
 	--enable-gtk-doc=no \
 	--datadir=\$${prefix}/share || cat config.log
+	# the src directory has the architecture specific part
+	sed -ie 's/^SUBDIRS = src/SUBDIRS =/' Makefile
 
+build: build-arch build-indep
 
-build: build-stamp
-
-build-stamp: patch config.status
+build-arch: build-arch-stamp
+build-arch-stamp: patch config.status
 	dh_testdir
 
-	# Commands to compile the package.
-	$(MAKE)
-	# `cd doc/C ; ./manpage.make` # manual should up-to-date
+	# Commands to compile the arch part of the package.
+	cd src ; $(MAKE)
 	cp src/conglomerate src/conglomerate-dbg
 
-	touch build-stamp
+	touch build-arch-stamp
+
+build-indep: build-indep-stamp
+build-indep-stamp: patch config.status
+	dh_testdir
+
+	# Commands to compile the indep part of the package.
+	$(MAKE)
+	# `cd doc/C ; ./manpage.make` # manual should up-to-date
+
+	touch build-indep-stamp
 
 
 clean: unpatch
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp
+	rm -f build-arch-stamp build-indep-stamp
 
 	# Commands to clean up after the build process.
-	-$(MAKE) distclean
+	-$(MAKE) distclean ; cd src ; $(MAKE) distclean
 	rm -f doc/C/conglomerate-C.omf.out
 	rm -f intltool-extract intltool-merge intltool-update
 	rm -f po/.intltool-merge-cache
@@ -64,17 +77,29 @@ clean: unpatch
 
 	dh_clean
 
-install: build
+
+install: install-indep install-arch
+install-indep: build-indep
 	dh_testdir
 	dh_testroot
-	dh_clean -k
-	dh_installdirs
+	dh_clean -k -i
+	dh_installdirs -i
 
-	# using src/Makefile to get files into the package
+	# using source Makefile to get files into the package
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes \
- 	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
-	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
-	chmod 644 $(CURDIR)/debian/conglomerate/usr/share/pixmaps/conglomerate_icon.xpm
+ 	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate-common
+	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate-common/usr/share/pixmaps/conglomerate_icon.xpm
+	chmod 644 $(CURDIR)/debian/conglomerate-common/usr/share/pixmaps/conglomerate_icon.xpm
+
+install-arch: build-arch
+	dh_testdir
+	dh_testroot
+	dh_clean -k -s
+	dh_installdirs -s
+
+	mkdir -p $(CURDIR)/debian/conglomerate/usr/bin
+	cp src/conglomerate $(CURDIR)/debian/conglomerate/usr/bin/
+	chmod 755 $(CURDIR)/debian/conglomerate/usr/bin/conglomerate
 
 	# and for the debug package conglomerate-dbg
 	mkdir -p $(CURDIR)/debian/conglomerate-dbg/usr/bin
@@ -83,28 +108,34 @@ install: build
 
 
 # Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
+binary-indep: build-indep install-indep
+	dh_testdir -i
+	dh_testroot -i
+	dh_installchangelogs -i ChangeLog
+	dh_installdocs -i
+	dh_installexamples -i
+	dh_installmenu -i
+	dh_installman -i doc/C/conglomerate.1
+	dh_scrollkeeper -i
+	dh_gconf -i
+	dh_link -i
+	dh_compress -i
+	dh_installdeb -i
+	dh_gencontrol -i -v
+	dh_md5sums -i
+	dh_builddeb -i
 
 # Build architecture-dependent files here.
-binary-arch: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs ChangeLog
-	dh_installdocs
-	dh_installexamples
-	dh_installmenu
-	dh_installman doc/C/conglomerate.1
-	dh_scrollkeeper
-	dh_link
-	dh_strip --exclude=conglomerate-dbg
-	dh_compress
-	dh_fixperms
-	dh_installdeb
-	dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+binary-arch: build-arch install-arch
+	dh_testdir -a
+	dh_testroot -a
+	dh_strip -a --exclude=conglomerate-dbg
+	dh_compress -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a -v -- -VUpstream-Version=$(upstreamversion)
+	dh_md5sums -a
+	dh_builddeb -a
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install patch
+.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch patch

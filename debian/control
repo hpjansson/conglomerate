@@ -8,13 +8,24 @@ Standards-Version: 3.6.1
 
 Package: conglomerate
 Architecture: any
-Depends: gconf2, ${shlibs:Depends}, ${misc:Depends}
+Depends: conglomerate-common (>= ${Upstream-Version}), ${shlibs:Depends}
 Recommends: xml-core
 Suggests: docbook-xml, docbook-xsl
 Description: userfriendly XML editor
  Conglomerate is a free, as in GPL, userfriendly XML-file editor,
  for DocBook and other document types.
  It aims to hide the complexity and jargon of XML behind a friendly GUI.
+ .
+ Homepage: http://www.conglomerate.org
+
+Package: conglomerate-common
+Architecture: all
+Depends: conglomerate, ${misc:Depends}
+Description: common files for the userfriendly XML editor
+ Conglomerate is a free, as in GPL, userfriendly XML-file editor,
+ for DocBook and other document types.
+ In this package documentation, PO files, examples
+ and other files that are architecture independent.
  .
  Homepage: http://www.conglomerate.org
 
