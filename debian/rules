@@ -140,5 +140,5 @@ binary-arch: build-arch install-arch
 	dh_builddeb -p conglomerate
 	##dh_builddeb -p conglomerate-dbg
 
-binary: binary-indep binary-arch
+binary: binary-arch binary-indep
 .PHONY: build clean binary-indep binary-arch binary install install-indep install-arch patch
