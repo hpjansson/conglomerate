@@ -66,6 +66,24 @@ cong_plugin_manager_register (CongPluginManager *plugin_manager,
 	return plugin;
 }
 
+void
+cong_plugin_manager_for_each_plugin (CongPluginManager *plugin_manager, 
+				     void 
+				     (*callback) (CongPlugin *plugin, 
+						  gpointer user_data),
+				     gpointer user_data)
+{
+	GList *iter;
+
+	g_return_if_fail (plugin_manager);
+	g_return_if_fail (callback);
+
+	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
+		(*callback) (CONG_PLUGIN (iter->data),
+			     user_data);
+	}
+}
+
 void 
 cong_plugin_manager_for_each_document_factory (CongPluginManager *plugin_manager, 
 					       void 
@@ -74,7 +92,7 @@ cong_plugin_manager_for_each_document_factory (CongPluginManager *plugin_manager
 					       gpointer user_data)
 {
 	GList *iter;
-	g_return_if_fail (plugin_manager);
+	g_return_if_fail(plugin_manager);
 	g_return_if_fail (callback);
 
 	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {

@@ -108,7 +108,11 @@ cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 					      const gchar *service_id);
 
 
+
 /* void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongServiceThumbnailer *thumbnailer, gpointer user_data), gpointer user_data); */
+
+const gchar* 
+cong_plugin_get_id (CongPlugin *plugin);
 
 gchar* 
 cong_plugin_get_gconf_namespace (CongPlugin *plugin);

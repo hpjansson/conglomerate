@@ -1,5 +1,9 @@
 2004-02-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-menus.c, cong-plugin-manager.c, cong-plugin.c, cong-plugin.h
+
+	Removed unnecessary translation markings from debug menu strings; added item to debug menu to dump plugin information into an XML file
+
 	* cong-file-import.c
 
 	Fix for a warning, courtesy of Danilo Segan

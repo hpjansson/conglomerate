@@ -389,6 +389,7 @@ static void menu_callback_view_source(gpointer callback_data,
 }
 
 /* Callbacks for "Debug" menu: */
+#if ENABLE_DEBUG_MENU
 void debug_error(CongPrimaryWindow *primary_window)
 {
 	cong_error_tests(cong_primary_window_get_toplevel(primary_window));
@@ -1155,6 +1156,107 @@ void menu_callback_debug_glade_test(gpointer callback_data,
 	(void)primary_window; /* suppress warnings */
 }
 
+/* Code for dumping an XML representation of the loaded plugins: */
+static void 
+add_xml_for_service (CongService *service,
+		     gpointer user_data)
+{
+	xmlNodePtr plugin_node = (xmlNodePtr)user_data;
+	xmlNodePtr service_node;
+	
+	g_assert (IS_CONG_SERVICE (service));
+
+	service_node = xmlNewDocNode (plugin_node->doc,
+				      NULL,
+				      "CongService",
+				      NULL);	
+	xmlAddChild (plugin_node,
+		     service_node);
+
+
+	xmlSetProp (service_node, 
+		    "serviceID", 
+		    cong_service_get_id (service));
+
+	xmlSetProp (service_node, 
+		    "serviceClass", 
+		    G_OBJECT_TYPE_NAME (G_OBJECT (service)));
+
+	xmlAddChild (service_node,
+		     xmlNewDocNode (service_node->doc,
+				    NULL,
+				    "Name",
+				    cong_service_get_name (service)));
+
+	xmlAddChild (service_node,
+		     xmlNewDocNode (service_node->doc,
+				    NULL,
+				    "Description",
+				    cong_service_get_description (service)));
+}
+
+static void
+add_xml_for_plugin (CongPlugin *plugin,
+		    gpointer user_data)
+{
+	xmlNodePtr root_node = (xmlNodePtr)user_data;
+	xmlNodePtr plugin_node;
+
+	g_assert (IS_CONG_PLUGIN (plugin));
+
+	plugin_node = xmlNewDocNode (root_node->doc,
+				     NULL,
+				     "CongPlugin",
+				     NULL);	
+	xmlAddChild (root_node, 
+		     plugin_node);
+
+	xmlSetProp (plugin_node, 
+		    "pluginID", 
+		    cong_plugin_get_id (plugin));
+
+	cong_plugin_for_each_service (plugin, 
+				      add_xml_for_service,
+				      plugin_node);
+}
+
+static xmlDocPtr
+make_plugin_info_xml (CongPluginManager *plugin_manager)
+{
+	xmlDocPtr xml_doc;
+	xmlNodePtr root_node;
+
+	g_return_val_if_fail (plugin_manager, NULL);
+
+	xml_doc = xmlNewDoc("1.0");
+	
+	root_node = xmlNewDocNode(xml_doc,
+				  NULL, /* xmlNsPtr ns, */
+				  "CongPluginData",
+				  NULL);
+	
+	xmlDocSetRootElement (xml_doc,
+			      root_node);
+
+	cong_plugin_manager_for_each_plugin (plugin_manager, 
+					     add_xml_for_plugin,
+					     root_node);
+	return xml_doc;	
+
+	
+}
+
+static void 
+menu_callback_debug_plugin_info (gpointer callback_data,
+				 guint callback_action,
+				 GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+
+	cong_ui_new_document_from_imported_xml (make_plugin_info_xml (cong_app_get_plugin_manager (cong_app_singleton ())),
+						cong_primary_window_get_toplevel (primary_window));
+}
+
 
 static gchar*
 get_test_fragment(CongPrimaryWindow *primary_window)
@@ -1199,6 +1301,7 @@ void menu_callback_debug_command_test (gpointer callback_data,
 	cong_document_end_command (doc,
 				   cmd);
 }
+#endif /* #if ENABLE_DEBUG_MENU */
 
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
@@ -1357,13 +1460,14 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
 #if ENABLE_DEBUG_MENU
-	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
-	{ N_("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
-	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
-	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
-	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
-	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
-	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
+	{ ("/Debug"),                 NULL, NULL, 0, "<Branch>" },
+	{ ("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
+	{ ("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
+	{ ("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
+	{ ("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
+	{ ("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
+	{ ("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
+	{ ("/Debug/Get Plugin Information as XML"),           NULL, menu_callback_debug_plugin_info, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },

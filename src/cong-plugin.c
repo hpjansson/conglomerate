@@ -359,6 +359,14 @@ cong_plugin_locate_editor_node_factory_by_id (CongPlugin *plugin,
 }
 #endif
 
+const gchar* 
+cong_plugin_get_id (CongPlugin *plugin)
+{
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
+
+	return PRIVATE (plugin)->plugin_id;
+}
+
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
 	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), NULL);
