@@ -1,3 +1,11 @@
+2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-composer.c, cong-editor-area-composer.h
+
+	Ability to change child packing after child is added
+
+	--- Version 0.7.4 ---
+
 2003-09-24  Geert-Jan Van den Bogaerde <gvdbogaerde@pandora.be>
 
 	* cong-source-view.c, Makefile.am

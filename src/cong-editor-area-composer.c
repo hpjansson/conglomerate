@@ -75,6 +75,10 @@ remove_child (CongEditorAreaContainer *area_container,
 static void
 remove_all_children (CongEditorAreaContainer *area_container);
 
+static CongEditorAreaComposerChildDetails*
+get_child_details (CongEditorAreaComposer *area_composer,
+		   CongEditorArea *child);
+
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaComposer, 
 			cong_editor_area_composer,
@@ -235,6 +239,32 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
+void 
+cong_editor_area_composer_set_child_packing (CongEditorAreaComposer *area_composer,
+					     CongEditorArea *child,
+					     gboolean expand,
+					     gboolean fill,
+					     guint extra_padding)
+{
+	CongEditorAreaComposerChildDetails* child_details;
+
+	g_return_if_fail (IS_CONG_EDITOR_AREA_COMPOSER(area_composer));
+	g_return_if_fail (IS_CONG_EDITOR_AREA(child));
+
+	child_details = get_child_details (area_composer,
+					   child);
+
+	g_return_if_fail (child_details);
+
+	child_details->expand = expand;
+	child_details->fill = fill;
+	child_details->extra_padding = extra_padding;
+
+	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA (area_composer),
+						  PRIVATE(area_composer)->orientation);
+	cong_editor_area_flush_requisition_cache (child,
+						  PRIVATE(area_composer)->orientation);
+}
 
 /* Method implementation definitions: */
 static gint
@@ -533,4 +563,20 @@ remove_all_children (CongEditorAreaContainer *area_container)
 										    iter);
 		g_object_unref (iter_child);
 	}
+}
+
+static CongEditorAreaComposerChildDetails* 
+get_child_details (CongEditorAreaComposer *area_composer,
+		   CongEditorArea *child)
+{
+	GList *iter;
+
+	for (iter = PRIVATE(area_composer)->list_of_child_details; iter; iter = iter->next) {
+		CongEditorAreaComposerChildDetails *iter_details = (CongEditorAreaComposerChildDetails*)(iter->data);
+		if (iter_details->child == child) {
+			return iter_details;
+		}
+	}
+
+	return NULL;
 }

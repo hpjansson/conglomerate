@@ -80,6 +80,12 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 				      gboolean fill,
 				      guint extra_padding);
 
+void 
+cong_editor_area_composer_set_child_packing (CongEditorAreaComposer *area_composer,
+					     CongEditorArea *child,
+					     gboolean expand,
+					     gboolean fill,
+					     guint extra_padding);
 G_END_DECLS
 
 #endif
