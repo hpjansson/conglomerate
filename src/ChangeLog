@@ -1,6 +1,18 @@
 creating ChangeLog
 2003-04-08 David Malcolm
 
+	* cong-menus.c
+
+	Bulk of import/export UI moved into new files
+	
+	* cong-file-import.c, cong-file-export.c
+
+	Initial import
+	
+	* Makefile.am
+
+	Added cong-file-import.c and cong-file-export.c
+	
 	* cong-document.c, cong-document.h, cong-span-text-editor.c, global.h, popup.c, save.c, tree.c
 
 	More transient window fixes
