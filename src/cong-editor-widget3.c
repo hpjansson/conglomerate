@@ -40,6 +40,8 @@
 
 #include <gtk/gtkdrawingarea.h>
 
+#include "cong-editor-area-flow-holder.h"
+
 /* Test code: */
 #include "cong-editor-area-border.h"
 #include "cong-editor-area-composer.h"
@@ -70,9 +72,6 @@ cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
 struct CongEditorWidget3Details
 {
 	CongDocument *doc;
-#if 0
-	CongEditorWidget3 *widget;
-#endif
 
 	GHashTable *hash_of_node_to_editor;
 
@@ -80,12 +79,13 @@ struct CongEditorWidget3Details
 	GHashTable *hash_of_editor_node_to_primary_area;
 
 	/* Record the area each editor node's primary area was inserted into: */
-	GHashTable *hash_of_editor_node_to_parent_insertion_area;
+	GHashTable *hash_of_editor_node_to_parent_flow_holder;
 
 	/* Record the "insetion area" for each editor node: */
-	GHashTable *hash_of_editor_node_to_child_insertion_area;
+	GHashTable *hash_of_editor_node_to_child_flow_holder;
 
 	CongEditorArea *root_area;
+	CongEditorAreaFlowHolder *root_flow_holder;
 
 	GdkGC *test_gc;
 };
@@ -95,7 +95,7 @@ struct CongEditorWidget3Details
 #define LOG_GTK_WIDGET_SIGNALS    1
 #define LOG_CONG_DOCUMENT_SIGNALS 0
 #define LOG_EDITOR_NODES 0
-#define LOG_EDITOR_AREAS 0
+#define LOG_EDITOR_AREAS 1
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -166,12 +166,12 @@ destroy_areas(CongEditorWidget3 *widget,
 CongEditorArea*
 cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
 						      CongEditorNode *editor_node);
-CongEditorArea*
-cong_editor_widget3_get_parent_insertion_area_for_editor_node (CongEditorWidget3 *widget,
-							      CongEditorNode *editor_node);
-CongEditorArea*
-cong_editor_widget3_get_child_insertion_area_for_editor_node (CongEditorWidget3 *widget,
-							      CongEditorNode *editor_node);
+CongEditorAreaFlowHolder*
+cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *widget,
+							    CongEditorNode *editor_node);
+CongEditorAreaFlowHolder*
+cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *widget,
+							   CongEditorNode *editor_node);
 
 /* Declarations of the GtkWidget event handlers: */
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data);
@@ -295,10 +295,10 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 							    NULL);
 	PRIVATE(editor_widget)->hash_of_editor_node_to_primary_area = g_hash_table_new (NULL,
 									 NULL);
-	PRIVATE(editor_widget)->hash_of_editor_node_to_parent_insertion_area = g_hash_table_new (NULL,
-										  NULL);
-	PRIVATE(editor_widget)->hash_of_editor_node_to_child_insertion_area = g_hash_table_new (NULL,
-										 NULL);
+	PRIVATE(editor_widget)->hash_of_editor_node_to_parent_flow_holder = g_hash_table_new (NULL,
+											      NULL);
+	PRIVATE(editor_widget)->hash_of_editor_node_to_child_flow_holder = g_hash_table_new (NULL,
+											     NULL);
 
 	PRIVATE(editor_widget)->test_gc =  gdk_gc_new(cong_gui_get_a_window()->window);
 	
@@ -341,6 +341,11 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 				  "flush_requisition_cache",
 				  G_CALLBACK(on_root_requisition_change),
 				  editor_widget);
+		
+		PRIVATE(editor_widget)->root_flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_new(editor_widget));
+
+		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(PRIVATE(editor_widget)->root_area),
+						      CONG_EDITOR_AREA(PRIVATE(editor_widget)->root_flow_holder));
 	}
 
 	/* Traverse the doc, adding EditorNodes and EditorAreas: */
@@ -460,6 +465,16 @@ cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
 	return cong_editor_area_get_deepest_child_at (PRIVATE(editor_widget)->root_area, 
 						      x,
 						      y);
+}
+
+const gchar*
+cong_flow_type_get_debug_string(enum CongFlowType flow_type)
+{
+	switch (flow_type) {
+	default: g_assert_not_reached();
+	case CONG_FLOW_TYPE_BLOCK: return "FLOW_TYPE_BLOCK";
+	case CONG_FLOW_TYPE_INLINE: return "FLOW_TYPE_INLINE";
+	}
 }
 
 /* Internal function implementations: */
@@ -1179,16 +1194,17 @@ create_areas(CongEditorWidget3 *widget,
 {
 	CongEditorNode *editor_node = NULL;
 	CongEditorArea *this_area = NULL;
-	CongEditorArea *parent_insertion_area = NULL;
+	CongEditorAreaFlowHolder* parent_flow_holder = NULL;
 	CongEditorNode *older_sibling_node = NULL;
 	CongEditorArea *older_sibling_primary_area = NULL;
+	enum CongFlowType flow_type;
 
 #if LOG_EDITOR_AREAS
 	{
 		gchar *node_desc = cong_node_debug_description(node);
 
 		LOG_EDITOR_AREA2("create_areas for %s", node_desc);
-		
+
 		g_free(node_desc);
 	}
 #endif
@@ -1196,16 +1212,13 @@ create_areas(CongEditorWidget3 *widget,
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node);
 
-	/* Generate the area for this node: */
-	{
-		this_area = cong_editor_node_generate_area (editor_node);
-		
-		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
-				     editor_node,
-				     this_area);
-	}
+	flow_type = cong_editor_node_get_flow_type (editor_node);
 
-	/* Determine where the parent area where the new area should be inserted: */
+#if LOG_EDITOR_AREAS
+	g_message("flow type = %s", cong_flow_type_get_debug_string(flow_type));
+#endif
+
+	/* Determine the parent area where the new area should be inserted: */
 	{
 		if (node->parent) {
 			CongEditorNode *parent_editor_node;
@@ -1213,80 +1226,43 @@ create_areas(CongEditorWidget3 *widget,
 			parent_editor_node = cong_editor_widget3_get_editor_node (widget,
 										  node->parent);
 			
-			/* What is the parent's child insertion area? */
-			parent_insertion_area = g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
-								     parent_editor_node);
+			parent_flow_holder = cong_editor_widget3_get_child_flow_holder_for_editor_node (widget,
+													parent_editor_node);
 			
 		} else {
 			/* Root of the document; insert below the widget's root_area: */
 			g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-			parent_insertion_area = PRIVATE(widget)->root_area;
-			
+
+			parent_flow_holder = PRIVATE(widget)->root_flow_holder;			
 		}
 
-		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
+		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_parent_flow_holder,
 				     editor_node,
-				     parent_insertion_area);
+				     parent_flow_holder);
 		
-		g_assert(parent_insertion_area);
+		g_assert(parent_flow_holder);
 	}
 
-	/* Do the insertion, respecting position WRT any siblings: */
-	{
-		if (node->prev) {
-			/* Insert this area relative to an area already present in the parent's insertion area: */
-			older_sibling_node = cong_editor_widget3_get_editor_node (widget,
-										  node->prev);
-			g_assert(older_sibling_node);
-			
-			older_sibling_primary_area = cong_editor_widget3_get_primary_area_for_editor_node (widget,
-													   older_sibling_node);
-			g_assert(older_sibling_primary_area);
+	this_area = cong_editor_area_flow_holder_insert_areas_for_node (parent_flow_holder,
+									editor_node);	
 
-			if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
-				cong_editor_area_composer_pack_after (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
-								      this_area,
-								      older_sibling_primary_area,
-								      FALSE,
-								      FALSE,
-								      0);
-			} else {
-				cong_editor_area_container_add_child_after (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
-									    this_area,
-									    older_sibling_primary_area);
-			}
-			
-		} else {
-			/* Insert this area after any already present in the parent's insertion area: */
-			if (IS_CONG_EDITOR_AREA_COMPOSER(parent_insertion_area)) {
-				
-				cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(parent_insertion_area),
-								this_area,
-								FALSE,
-								FALSE,
-								0);
-			} else {
-				cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER(parent_insertion_area),
-								      this_area);
-			}
-		}
-	}
+	g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
+			     editor_node,
+			     this_area);
 
 	/* If this node can ever have children, we need to add a container for them:
 	   FIXME:  slightly hackish test */
 	if (IS_CONG_EDITOR_AREA_CONTAINER(this_area) ) {
-		CongEditorArea *vcomposer;
+		CongEditorAreaFlowHolder *flow_holder;
 
-		vcomposer = cong_editor_area_composer_new (widget,
-							   GTK_ORIENTATION_VERTICAL,
-							   0);
+		flow_holder = CONG_EDITOR_AREA_FLOW_HOLDER(cong_editor_area_flow_holder_new (widget));
 
 		cong_editor_area_container_add_child (CONG_EDITOR_AREA_CONTAINER (this_area),
-						      vcomposer);
+						      CONG_EDITOR_AREA(flow_holder));
 
-		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
+		g_hash_table_insert (PRIVATE(widget)->hash_of_editor_node_to_child_flow_holder,
 				     editor_node,
-				     vcomposer);
+				     flow_holder);
 	}
 }
 
@@ -1296,7 +1272,7 @@ destroy_areas(CongEditorWidget3 *widget,
 {
 	CongEditorNode *editor_node;
 	CongEditorArea *this_area;
-	CongEditorArea *parent_insertion_area;
+	CongEditorAreaFlowHolder *parent_flow_holder;
 
 #if LOG_EDITOR_AREAS
 	{
@@ -1311,26 +1287,24 @@ destroy_areas(CongEditorWidget3 *widget,
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node);
 
-	this_area = g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
-					 editor_node);
-
 	if (node->parent) {
-		parent_insertion_area = cong_editor_widget3_get_parent_insertion_area_for_editor_node (widget,
-												       editor_node);
+		parent_flow_holder = cong_editor_widget3_get_parent_flow_holder_for_editor_node (widget,
+												 editor_node);
 	} else {
 		g_assert(cong_node_type(node) == CONG_NODE_TYPE_DOCUMENT);
-		parent_insertion_area = PRIVATE(widget)->root_area;
+		parent_flow_holder = PRIVATE(widget)->root_flow_holder;
 	}
-	
-	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (parent_insertion_area),
-						 this_area);
+
+	cong_editor_area_flow_holder_remove_areas_for_node (parent_flow_holder,
+							    editor_node);
 
 	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
 			     editor_node);
-	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
+	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_parent_flow_holder,
 			     editor_node);
-	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
+	g_hash_table_remove (PRIVATE(widget)->hash_of_editor_node_to_child_flow_holder,
 			     editor_node);
+
 
 #if 0
 	cong_editor_area_container_remove_child (CONG_EDITOR_AREA_CONTAINER (this_area),
@@ -1345,28 +1319,29 @@ cong_editor_widget3_get_primary_area_for_editor_node (CongEditorWidget3 *widget,
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
-				    editor_node);
+	return CONG_EDITOR_AREA(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_primary_area,
+						     editor_node));
 }
 
-CongEditorArea*
-cong_editor_widget3_get_parent_insertion_area_for_editor_node (CongEditorWidget3 *widget,
-							       CongEditorNode *editor_node)
+CongEditorAreaFlowHolder*
+cong_editor_widget3_get_parent_flow_holder_for_editor_node (CongEditorWidget3 *widget,
+							    CongEditorNode *editor_node)
 {
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parent_insertion_area,
-				    editor_node);
+	return CONG_EDITOR_AREA_FLOW_HOLDER(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_parent_flow_holder,
+								 editor_node));
 }
 
-CongEditorArea*
-cong_editor_widget3_get_child_insertion_area_for_editor_node (CongEditorWidget3 *widget,
-							      CongEditorNode *editor_node)
+CongEditorAreaFlowHolder*
+cong_editor_widget3_get_child_flow_holder_for_editor_node (CongEditorWidget3 *widget,
+							   CongEditorNode *editor_node)
 {
 	g_return_val_if_fail (widget, NULL);
 	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
 
-	return g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_insertion_area,
-				    editor_node);
+	return CONG_EDITOR_AREA_FLOW_HOLDER(g_hash_table_lookup (PRIVATE(widget)->hash_of_editor_node_to_child_flow_holder,
+								editor_node));
 }
+
