@@ -76,7 +76,7 @@
  * |       O <- split pane                  |
  * |       |                                |
  * |----------------------------------------|
- * | Statusbar                       | Tray |
+ * | AppBar                                 |
  * `----------------------------------------'
  * 
  */
@@ -92,11 +92,16 @@ struct CongPrimaryWindow
 
 	GtkWidget *window, *menus;
 	GtkToolbar *toolbar;
-	GtkWidget *status, *tray;
+#if 1
+	GtkWidget *app_bar;
+#else
+	GtkWidget *status;
+#endif
 	GtkWidget *auth, *butt_submit, *butt_find;
 	
-
+#if 0
 	guint status_main_ctx;
+#endif
 
 	GtkAccelGroup *accel;
 
@@ -291,10 +296,10 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 		GtkWidget *redo;
 
 		gtk_toolbar_insert_stock(primary_window->toolbar, 
-					 GTK_STOCK_SAVE_AS,
-					 _("Save document as..."),
-					 _("Save document as..."), 
-					 GTK_SIGNAL_FUNC(toolbar_callback_save_as),
+					 GTK_STOCK_SAVE,
+					 _("Save document"),
+					 _("Save document"), 
+					 GTK_SIGNAL_FUNC(toolbar_callback_save),
 					 primary_window,
 					 -1);
 		gtk_toolbar_append_space(primary_window->toolbar);
@@ -566,10 +571,39 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 		
 	} /* if (primary_window->doc) { */
 
-	/* --- Main window -> vbox -> hbox --- */
+	/* --- Main window -> status area --- */
+#if 1
+	primary_window->app_bar = gnome_appbar_new (TRUE,
+						    TRUE,
+						    GNOME_PREFERENCES_NEVER);
+
+	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->app_bar);
+
+	{
+		gchar *status_text;
+
+		if (primary_window->doc) {
+			status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
+
+			
+
+		} else {
+
+			status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
+
+		}
+
+		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
+					 status_text);
+
+		g_free(status_text);
+	}
+	
+#else
 	primary_window->status = gtk_statusbar_new();
+
 	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->status);
-		
+
 	/* --- Putting it together --- */
 
 	primary_window->status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(primary_window->status), 
@@ -595,7 +629,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 		g_free(status_text);
 	}
-
+#endif
 }
 
 

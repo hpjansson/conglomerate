@@ -30,12 +30,12 @@
 #include "cong-document.h"
 #include "cong-primary-window.h"
 
-gint toolbar_callback_save_as(GtkWidget *w, gpointer data)
+gint toolbar_callback_save(GtkWidget *w, gpointer data)
 {
 	CongPrimaryWindow *primary_window = data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 
-	return save_document_as(doc, cong_primary_window_get_toplevel(primary_window));
+	return save_document(doc, cong_primary_window_get_toplevel(primary_window));
 }
 
 gint save_document_as(CongDocument *doc, GtkWindow *parent_window)
