@@ -1,5 +1,9 @@
 2003-09-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node.c
+
+	Fixed warnings
+
 	* cong-editor-area-pixbuf.c, cong-eel.c, cong-eel.h
 
 	Removed gdk_draw_pixbuf (it required GDK 2.2, which isn't yet widespread)

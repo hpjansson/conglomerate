@@ -113,6 +113,8 @@ cong_editor_node_construct (CongEditorNode *editor_node,
 	PRIVATE(editor_node)->widget = editor_widget;
 	PRIVATE(editor_node)->node = node;
 	PRIVATE(editor_node)->traversal_parent = traversal_parent;
+
+	return editor_node;
 }
 
 CongEditorNode*
@@ -357,7 +359,7 @@ cong_editor_node_line_regeneration_required (CongEditorNode *editor_node)
 enum CongFlowType
 cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 {
-	g_return_if_fail (editor_node);
+	g_return_val_if_fail (editor_node, CONG_FLOW_TYPE_BLOCK);
 	
 	return CONG_EEL_CALL_METHOD_WITH_RETURN_VALUE (CONG_EDITOR_NODE_CLASS,
 						       editor_node,
