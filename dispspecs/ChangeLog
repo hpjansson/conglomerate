@@ -1,3 +1,9 @@
+2004-07-16  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* relax-ng.xds, xds.dtd, xhtml1-strict.xds.in, xsl.xds: 
+
+	Moved the nsURI attribute from <element> to <element-list>
+
 2004-07-15  Jeff Martin  <jeff@custtommonkey.org>
 
 	* xds.dtd: Added spellcheck attribute, corrected case for nsURI was 

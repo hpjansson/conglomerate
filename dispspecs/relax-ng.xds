@@ -8,51 +8,51 @@
 		<format extension="rng"/>
 	</serialisation>
 	<document-models/>
-	<element-list>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="grammar" type="structural">
+	<element-list nsURI="http://relaxng.org/ns/structure/1.0">
+		<element localName="grammar" type="structural">
 			<name>RELAX NG Grammar</name>
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="define" type="structural">
+		<element localName="define" type="structural">
 			<name>Define</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="element" type="structural">
+		<element localName="element" type="structural">
 			<name>XML Element</name>			
 			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="attribute" type="structural">
+		<element localName="attribute" type="structural">
 			<name>XML Attribute</name>			
 			<header-info xpath="concat(&quot;@&quot;, @name)"/>
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="zeroOrMore" type="structural">
+		<element localName="zeroOrMore" type="structural">
 			<name>ZeroOrMore</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="choice" type="structural">
+		<element localName="choice" type="structural">
 			<name>Choice</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="text" type="structural">
+		<element localName="text" type="structural">
 			<name>Text</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="ref" type="structural">
+		<element localName="ref" type="structural">
 			<name>Reference</name>			
 			<header-info xpath="@name"/>
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="oneOrMore" type="structural">
+		<element localName="oneOrMore" type="structural">
 			<name>OneOrMore</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="group" type="structural">
+		<element localName="group" type="structural">
 			<name>Group</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="optional" type="structural">
+		<element localName="optional" type="structural">
 			<name>Optional</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="value" type="structural">
+		<element localName="value" type="structural">
 			<name>Value</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="start" type="structural">
+		<element localName="start" type="structural">
 			<name>Start</name>			
 		</element>
-		<element nsURI="http://relaxng.org/ns/structure/1.0" localName="empty" type="structural">
+		<element localName="empty" type="structural">
 			<name>Empty</name>			
 		</element>
 	</element-list>

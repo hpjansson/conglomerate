@@ -17,7 +17,7 @@
 <!-- ===================================================================== -->
 <!ELEMENT dispspec ( metadata, 
                      serialisation?,
-                     document-models, 
+                     document-models?, 
                      element-list ) >
 
 <!-- <metadata>:  High-level information about this dispspec -->
@@ -47,6 +47,9 @@
 <!-- <element-list>: A list of elements of various kinds:                  -->
 <!-- ===================================================================== -->
 <!ELEMENT element-list ( (element|structural-element|span-element|plugin-element)*) >
+<!ATTLIST element-list  
+   nsURI               CDATA                                                           #IMPLIED
+>
 
 <!-- ===================================================================== -->
 <!-- The various types of element:                                         -->
@@ -61,7 +64,6 @@
 <!-- Attributes shared by all types of element: -->
 <!ENTITY % element.att
 "  
-   nsURI               CDATA                                                           #IMPLIED
    localName           ID                                                                #REQUIRED
    icon                CDATA                                                             #IMPLIED
    whitespace          (normalize | preserve)                                            'normalize'

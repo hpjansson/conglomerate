@@ -10,264 +10,264 @@
 	<document-models>
 		<external-document-model type="dtd" public-id="-//W3C//DTD XHTML 1.0 Strict//EN" system-id="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
 	</document-models>
-	<element-list>
+	<element-list nsURI="http://www.w3.org/1999/xhtml">
 	
 		<!-- Skeletal LocalNames -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="body" type="structural">
+		<element localName="body" type="structural">
 			<_name>Body</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="head" type="structural">
+		<element localName="head" type="structural">
 			<_name>Head</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="html" type="structural">
+		<element localName="html" type="structural">
 			<_name>HTML Page</_name>
 		</element>
 
 		<!-- Header LocalNames -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="base" type="structural">
+		<element localName="base" type="structural">
 			<_name>Base</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="link" type="structural">
+		<element localName="link" type="structural">
 			<_name>Link</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="meta" type="structural">
+		<element localName="meta" type="structural">
 			<_name>Metainformation</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="style" type="structural">
+		<element localName="style" type="structural">
 			<_name>Style</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="title" type="structural">
+		<element localName="title" type="structural">
 			<_name>Title</_name>
 		</element>
 
 		<!-- Hyperlinks -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="a" type="span">
+		<element localName="a" type="span">
 			<_name>Anchor</_name>
 		</element>
 
 		<!-- Text Markup: Physical-based -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="b" type="span">
+		<element localName="b" type="span">
 			<_name>Bold</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="big" type="span">
+		<element localName="big" type="span">
 			<_name>Big</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="i" type="span">
+		<element localName="i" type="span">
 			<_name>Italic</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="small" type="span">
+		<element localName="small" type="span">
 			<_name>Small</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="sub" type="span">
+		<element localName="sub" type="span">
 			<_name>Subscript</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="tt" type="span">
+		<element localName="tt" type="span">
 			<_name>Teletype</_name>
 		</element>
 
 		<!-- Text Markup: Content-based -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="cite" type="span">
+		<element localName="cite" type="span">
 			<_name>Citation</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="code" type="span">
+		<element localName="code" type="span">
 			<_name>Code</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="dfn" type="span">
+		<element localName="dfn" type="span">
 			<_name>Definition</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="em" type="span">
+		<element localName="em" type="span">
 			<_name>Emphasis</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="kbd" type="span">
+		<element localName="kbd" type="span">
 			<_name>Keyboard</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="samp" type="span">
+		<element localName="samp" type="span">
 			<_name>Sample</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="strong" type="span">
+		<element localName="strong" type="span">
 			<_name>Strong</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="var" type="span">
+		<element localName="var" type="span">
 			<_name>Variable</_name>
 		</element>
 
 		<!-- Lists -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="dl" type="structural">
+		<element localName="dl" type="structural">
 			<_name>Definition List</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="li" type="plugin" service-id="listitem">
+		<element localName="li" type="plugin" service-id="listitem">
 			<_name>List Item</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="ol" type="structural">
+		<element localName="ol" type="structural">
 			<_name>List (ordered)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="ul" type="structural">
+		<element localName="ul" type="structural">
 			<_name>List (unordered)</_name>
 		</element>
 
 		<!-- Forms -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="form" type="structural">
+		<element localName="form" type="structural">
 			<_name>Interactive Form</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="input" type="structural">
+		<element localName="input" type="structural">
 			<_name>Form Control</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="option" type="structural">
+		<element localName="option" type="structural">
 			<_name>Selectable Choice</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="select" type="structural">
+		<element localName="select" type="structural">
 			<_name>Option Selector</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="textarea" type="structural">
+		<element localName="textarea" type="structural">
 			<_name>Multi-line Text Field</_name>
 		</element>
 
 		<!-- Rules, images and multimedia -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="img" type="structural">
+		<element localName="img" type="structural">
 			<_name>Image</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="map" type="structural">
+		<element localName="map" type="structural">
 			<_name>Image Map</_name>
 		</element>
 
 		<!-- Tables -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="caption" type="span">
+		<element localName="caption" type="span">
 			<_name>Caption</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="col" type="span">
+		<element localName="col" type="span">
 			<_name>Column</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="colgroup" type="structural">
+		<element localName="colgroup" type="structural">
 			<_name>Column Group</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="table" type="structural">
+		<element localName="table" type="structural">
 			<_name>Table</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="tbody" type="structural">
+		<element localName="tbody" type="structural">
 			<_name>Table Body</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="td" type="span">
+		<element localName="td" type="span">
 			<_name>Table Cell (data)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="tfoot" type="structural">
+		<element localName="tfoot" type="structural">
 			<_name>Table Footer</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="th" type="span">
+		<element localName="th" type="span">
 			<_name>Table Cell (header)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="thead" type="structural">
+		<element localName="thead" type="structural">
 			<_name>Table Header</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="tr" type="structural">
+		<element localName="tr" type="structural">
 			<_name>Table Row</_name>
 		</element>
 
 		<!-- Executable Content -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="object" type="structural">
+		<element localName="object" type="structural">
 			<_name>Object</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="script" type="structural">
+		<element localName="script" type="structural">
 			<_name>Script</_name>
 		</element>
 
 		<!-- Content Presentation and Flow -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="address" type="span">
+		<element localName="address" type="span">
 			<_name>Address</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="blockquote" type="structural">
+		<element localName="blockquote" type="structural">
 			<_name>Block Quotation</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="br" type="span">
+		<element localName="br" type="span">
 			<_name>Forced Line Break</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="div" type="span">
+		<element localName="div" type="span">
 			<_name>Division</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h1" type="structural">
+		<element localName="h1" type="structural">
 			<_name>Heading (level 1)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h2" type="structural">
+		<element localName="h2" type="structural">
 			<_name>Heading (level 2)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h3" type="structural">
+		<element localName="h3" type="structural">
 			<_name>Heading (level 3)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h4" type="structural">
+		<element localName="h4" type="structural">
 			<_name>Heading (level 4)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h5" type="structural">
+		<element localName="h5" type="structural">
 			<_name>Heading (level 5)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="h6" type="structural">
+		<element localName="h6" type="structural">
 			<_name>Heading (level 6)</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="hr" type="structural">
+		<element localName="hr" type="structural">
 			<_name>Horizontal Rule</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="p" type="structural">
+		<element localName="p" type="structural">
 			<_name>Paragraph</_name>
 		</element>
 
 		<!-- Unclassified localNames -->
 
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="param" type="span">
+		<element localName="param" type="span">
 			<_name>Parameter</_name>
 		</element>
 
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="button" type="span">
+		<element localName="button" type="span">
 			<_name>Button</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="dt" type="span">
+		<element localName="dt" type="span">
 			<_name>Definition Term</_name>
 		</element>
 
 		<!-- Ongoing classification -->
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="area" type="span">
+		<element localName="area" type="span">
 			<_name>Area</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="dd" type="span">
+		<element localName="dd" type="span">
 			<_name>Definition</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="fieldset" type="span">
+		<element localName="fieldset" type="span">
 			<_name>Form Control Group</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="ins" type="span">
+		<element localName="ins" type="span">
 			<_name>Inserted Text</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="span" type="span">
+		<element localName="span" type="span">
 			<_name>Span</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="label" type="span">
+		<element localName="label" type="span">
 			<_name>Label</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="acronym" type="span">
+		<element localName="acronym" type="span">
 			<_name>Acronym</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="noscript" type="structural">
+		<element localName="noscript" type="structural">
 			<_name>Alternative Non-Scripted Content</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="sup" type="span">
+		<element localName="sup" type="span">
 			<_name>Superscript</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="optgroup" type="structural">
+		<element localName="optgroup" type="structural">
 			<_name>Option Group</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="pre" type="span">
+		<element localName="pre" type="span">
 			<_name>Preformatted Text</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="bdo" type="span">
+		<element localName="bdo" type="span">
 			<_name>Bidirectional Override</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="del" type="span">
+		<element localName="del" type="span">
 			<_name>Deleted Text</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="q" type="span">
+		<element localName="q" type="span">
 			<_name>Inline Quotation</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="abbr" type="span">
+		<element localName="abbr" type="span">
 			<_name>Abbreviated Form</_name>
 		</element>
-		<element nsURI="http://www.w3.org/1999/xhtml" localName="legend" type="span">
+		<element localName="legend" type="span">
 			<_name>Legend</_name>
 		</element>
 	</element-list>
