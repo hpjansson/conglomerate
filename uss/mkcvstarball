@@ -1,6 +1,11 @@
 #!/bin/bash
 
-make dist
+make distcheck
+if [ $? -ne 0 ]
+ echo make distcheck failed
+ exit 1
+fi
+
 TARBALL=$( ls -t *.tar.gz | head -1 )
 echo put here commands for uploading ${TARBALL}
 
