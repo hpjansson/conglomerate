@@ -1,3 +1,9 @@
+2003-12-17  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Increased version number to 0.7.8 prior to new release
+
 2003-12-09  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in
