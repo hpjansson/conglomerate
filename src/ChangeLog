@@ -1,3 +1,11 @@
+2003-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* plugin-website.c
+
+	Disabled this plugin; it's too broken to be worth fixing (see Bugzilla #113001 for some of the problems)
+
+	--- Version 0.7.9 ---
+
 2003-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c

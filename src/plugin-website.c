@@ -490,6 +490,8 @@ gboolean plugin_website_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
 
+	/* Disabled this plugin as it's too broken to be fixed.  See Bugzilla #113001 */
+#if 0
 	cong_plugin_register_doc_tool(plugin, 
 				      _("Generate website"),
 				      _("Generates a collection of HTML pages from the website XML description"),
@@ -500,6 +502,7 @@ gboolean plugin_website_plugin_register(CongPlugin *plugin)
 				      doc_filter,
 				      action_callback,
 				      NULL);
+#endif
 
 
 	return TRUE;
