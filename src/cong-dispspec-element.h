@@ -150,6 +150,8 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 CongDispspecElement*
 cong_dispspec_element_from_xml (xmlNodePtr xml_element);
 
+CongElementDescription*
+cong_dispspec_element_make_element_description (const CongDispspecElement *ds_element);
 
 G_END_DECLS
 

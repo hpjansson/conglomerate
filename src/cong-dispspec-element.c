@@ -1029,3 +1029,12 @@ find_best_string_for_language (GHashTable *hash_of_language)
 {
 	return (const gchar*)find_best_value_for_language (hash_of_language);
 }
+
+CongElementDescription*
+cong_dispspec_element_make_element_description (const CongDispspecElement *ds_element)
+{
+	g_return_val_if_fail (ds_element, NULL);
+
+	return cong_element_description_new (ds_element->ns_uri,
+					     ds_element->local_name);
+}

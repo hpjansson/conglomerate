@@ -686,7 +686,7 @@ wrap_xml_valid_get_valid_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: #GList of #CongDispspecElement
+ * Returns: #GList of #CongElementDescription
  */
 GList*
 cong_document_get_valid_new_child_elements (CongDocument *doc,
@@ -700,17 +700,22 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 	if (node->parent==NULL) {
 		return NULL;
 	}
-
+	
 	switch (cong_node_type(node)) {
 	default: return NULL;
 	case CONG_NODE_TYPE_ELEMENT:
+
 		result = wrap_xml_valid_get_valid_elements(doc, node, node->last, elements, MAX_ELEMENTS);
 		if (result != -1) {
 			g_assert (result<=MAX_ELEMENTS);
 			return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 		}
 		else {
-			return xml_get_elements_from_dispspec(ds, tag_type);
+			if (ds) {
+				return xml_get_elements_from_dispspec(ds, tag_type);
+			} else {
+				return cong_util_make_element_description_list (doc);
+			}
 		}
 	}
 }
@@ -729,7 +734,7 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: #GList of #CongDispspecElement
+ * Returns: #GList of #CongElementDescription
  */
 GList* 
 cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
@@ -743,14 +748,18 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 	if (node->parent==NULL) {
 		return NULL;
 	}
-	
+
 	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node, elements, MAX_ELEMENTS);
 	if (result != -1) {
 		g_assert (result<=MAX_ELEMENTS);
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
-		return xml_get_elements_from_dispspec(ds, tag_type);
+		if (ds) {
+			return xml_get_elements_from_dispspec(ds, tag_type);
+		} else {
+			return cong_util_make_element_description_list (doc);
+		}
 	}
 }
 
@@ -767,7 +776,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
  * If the document does not contain a dtd, the function will fallback
  * on returning the elements in the display spec of type tag_type.
  *
- * Returns: #GList of #CongDispspecElement
+ * Returns: #GList of #CongElementDescription
  */
 GList* 
 cong_document_get_valid_new_next_sibling_elements (CongDocument* doc, 
@@ -781,19 +790,21 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 	if (node->parent==NULL) {
 		return NULL;
 	}
-		
+
 	result = wrap_xml_valid_get_valid_elements(doc, node->parent, node->next, elements, MAX_ELEMENTS);
 	if (result != -1) {
 		g_assert (result<=MAX_ELEMENTS);
+
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
 		if (ds) {
 			return xml_get_elements_from_dispspec(ds, tag_type);
 		} else {
-			return NULL;
+			return cong_util_make_element_description_list (doc);
 		}
 	}
+
 }
 
 /**
@@ -835,10 +846,10 @@ should_include_element (CongDispspecElement *element,
  * @tag_type:
  * 
  * Find the intersection of a list of valid children
- * and a displayspec, returning a list of the displayspec elements
+ * and a displayspec, returning a list of the elements
  * that are in the intersection.
  * 
- * Returns:
+ * Returns: list of CongElementDescription
  */
 static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xmlChar **elements, gint elements_length, CongElementType tag_type) {
 	CongDispspecElement *element;
@@ -854,8 +865,10 @@ static GList *xml_filter_valid_children_with_dispspec(CongDispspec* ds, const xm
 		element = cong_dispspec_lookup_element(ds, NULL, elements[i]);
 		if (element) {
 			if (should_include_element (element,
-						    tag_type )) {				
-				list = g_list_prepend(list, element);
+						    tag_type )) {	
+
+				list = g_list_prepend(list, 
+						      cong_dispspec_element_make_element_description (element));
 			}
 
 		} else {
@@ -883,8 +896,8 @@ add_element_cb (CongDispspec *ds,
 
 	if (should_include_element (ds_element,
 				    add_element_data->tag_type)) {
-		add_element_data->list = g_list_prepend (add_element_data->list, 
-							 ds_element);
+		add_element_data->list = g_list_prepend (add_element_data->list,
+							 cong_dispspec_element_make_element_description (ds_element));
 	}
 }
 		
@@ -897,7 +910,7 @@ add_element_cb (CongDispspec *ds,
  * Get all elements from the display spec that
  * are of tag_type.
  * 
- * Returns:
+ * Returns: a list of CongElementDescription
  */
 static GList* 
 xml_get_elements_from_dispspec (CongDispspec* ds,

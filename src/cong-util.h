@@ -152,17 +152,12 @@ gboolean
 cong_util_attribute_value_equality (const gchar *value0,
 				    const gchar *value1);
 
-typedef struct CongElementDescription CongElementDescription;
-
-struct CongElementDescription 
-{
-	gchar *ns_uri;
-	gchar *local_name;
-};
-
 CongElementDescription*
 cong_element_description_new (const gchar *ns_uri,
 			      const gchar *local_name);
+
+CongElementDescription*
+cong_element_description_new_from_node (CongNodePtr node);
 
 CongElementDescription*
 cong_element_description_clone (const CongElementDescription *element_desc);
@@ -175,6 +170,10 @@ cong_element_description_make_node (const CongElementDescription *element_desc,
 				    CongDocument *doc,
 				    CongNodePtr ns_search_node);
 
+gboolean
+cong_element_description_matches_node (const CongElementDescription *element_desc,
+				       CongNodePtr node);
+
 CongDispspecElement*
 cong_element_description_get_dispspec_element_for_doc (const CongElementDescription *element_desc,
 						       CongDocument *doc);
@@ -185,8 +184,23 @@ cong_element_description_get_dispspec_element_for_dispspec (const CongElementDes
 
 #if 0
 gchar*
-cong_element_description_get_qualified_name (const CongElementDescription *element_desc);
+cong_element_description_get_qualified_name (const CongElementDescription *element_desc,
+					     CongDispspec *ds);
 #endif
+
+gchar*
+cong_element_description_make_user_name (const CongElementDescription *element_desc,
+					 CongDispspec *ds);
+const gchar*
+cong_element_description_get_sort_string (const CongElementDescription *element_desc,
+					  CongDispspec *ds);
+
+GList*
+cong_element_description_list_sort (GList *list_of_element_desc,
+				    CongDispspec *dispspec);
+
+const gchar*
+cong_element_description_get_user_name (const CongElementDescription *element_desc);
 
 void
 cong_element_description_list_free (GList *list_of_element_desc);
@@ -196,6 +210,9 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 					  const gchar *description,
 					  CongDocument *doc,
 					  GList *elements);
+
+GList*
+cong_util_make_element_description_list (CongDocument *doc);
 
 /* Simple UI manipulation: */
 GtkMenuItem* 

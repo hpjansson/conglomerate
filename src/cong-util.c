@@ -752,6 +752,28 @@ cong_element_description_new (const gchar *ns_uri,
 }
 
 /**
+ * cong_element_description_new_from_node:
+ * @node:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+CongElementDescription*
+cong_element_description_new_from_node (CongNodePtr node)
+{
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (node->type == XML_ELEMENT_NODE, NULL);
+
+	if (node->ns) {
+		return cong_element_description_new (node->ns->href,
+						     node->name);
+	} else {
+		return cong_element_description_new (NULL,
+						     node->name);
+	}
+}
+				
+/**
  * cong_element_description_clone:
  * @element_desc:
  *
@@ -823,6 +845,38 @@ cong_element_description_make_node (const CongElementDescription *element_desc,
 }
 
 /**
+ * cong_element_description_matches_node:
+ * @element_desc:
+ * @node:
+ *
+ * TODO: Write me
+ * Returns:
+ */
+gboolean
+cong_element_description_matches_node (const CongElementDescription *element_desc,
+				       CongNodePtr node)
+{
+	g_return_val_if_fail (element_desc, FALSE);
+	g_return_val_if_fail (node, FALSE);
+
+	
+	if (node->type!=XML_ELEMENT_NODE) {
+		return FALSE;
+	}
+
+	if (0!=strcmp(node->name, element_desc->local_name)) {
+		return FALSE;
+	}
+
+	if (node->ns) {
+		return 0==strcmp(node->ns->href, element_desc->ns_uri);
+	} else {
+		return (NULL == element_desc->ns_uri);
+	}
+}
+
+
+/**
  * cong_element_description_get_dispspec_element_for_doc:
  * @element_desc:
  * @doc:
@@ -840,10 +894,12 @@ cong_element_description_get_dispspec_element_for_doc (const CongElementDescript
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	
 	ds = cong_document_get_dispspec (doc);
-	g_assert (ds);
-
-	return cong_element_description_get_dispspec_element_for_dispspec (element_desc,
-									   ds);
+	if (ds) {
+		return cong_element_description_get_dispspec_element_for_dispspec (element_desc,
+										   ds);
+	} else {
+		return NULL;
+	}
 }
 
 /**
@@ -875,6 +931,100 @@ cong_element_description_get_qualified_name (const CongElementDescription *eleme
 	return ;
 }
 #endif
+
+gchar*
+cong_element_description_make_user_name (const CongElementDescription *element_desc,
+					 CongDispspec *ds)
+{
+	g_return_val_if_fail (element_desc, NULL);
+	
+	if (ds) {
+		CongDispspecElement* ds_element = cong_element_description_get_dispspec_element_for_dispspec (element_desc,
+													      ds);
+
+		if (ds_element) {
+			return g_strdup (cong_dispspec_element_username (ds_element));
+		}
+	}
+	
+	if (element_desc->ns_uri) {
+		return g_strdup_printf("<%s xmls=\"%s\"/>", element_desc->local_name, element_desc->ns_uri);
+	} else {
+		return g_strdup_printf("<%s />", element_desc->local_name);
+	}
+}
+
+const gchar*
+cong_element_description_get_sort_string (const CongElementDescription *element_desc,
+					  CongDispspec *ds)
+{
+	g_return_val_if_fail (element_desc, NULL);
+	
+	if (ds) {
+		CongDispspecElement* ds_element = cong_element_description_get_dispspec_element_for_dispspec (element_desc,
+													      ds);
+
+		if (ds_element) {
+			if (cong_dispspec_element_username (ds_element)) {
+				return cong_dispspec_element_username (ds_element);
+			} else {
+				return cong_dispspec_element_get_local_name (ds_element);
+			}
+		}
+	}
+	
+	return element_desc->local_name;
+}
+
+static gint 
+element_desc_compare_func (gconstpointer a, 
+			   gconstpointer b,
+			   gpointer user_data)
+{
+	CongDispspec *ds = (CongDispspec *)user_data;
+	const CongElementDescription *element_desc_a;
+	const CongElementDescription *element_desc_b;
+	const gchar *sort_a;
+	const gchar *sort_b;
+	gchar *folded_a;
+	gchar *folded_b;
+	gint result;
+
+	element_desc_a = (const CongElementDescription *)a;
+	element_desc_b = (const CongElementDescription *)b;
+
+	sort_a = cong_element_description_get_sort_string (element_desc_a,
+							   ds);
+	sort_b = cong_element_description_get_sort_string (element_desc_b,
+							   ds);
+
+	g_assert(sort_a);
+	g_assert(sort_b);
+
+	/* g_message("comparing \"%s\" and \"%s\"", sort_a, sort_b); */
+
+	folded_a = g_utf8_casefold(sort_a,-1);
+	folded_b = g_utf8_casefold(sort_b,-1);
+	result = g_utf8_collate(folded_a, folded_b);
+
+	g_free(folded_a);
+	g_free(folded_b);
+
+	return result;
+}
+
+
+GList*
+cong_element_description_list_sort (GList *list_of_element_desc,
+				    CongDispspec *dispspec)
+{
+	/* Sort the list into alphabetical order of user-visible names: */
+	return g_list_sort_with_data (list_of_element_desc, 
+				      element_desc_compare_func,
+				      dispspec);
+}
+
+
 
 /**
  * cong_element_description_list_free:
@@ -1188,6 +1338,53 @@ cong_util_modal_element_selection_dialog (const gchar *title,
 	return result;
 }
 
+static gboolean 
+make_element_description_list_callback (CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
+{
+	GList **list = (GList**)user_data;
+
+	if (node->type == XML_ELEMENT_NODE) {
+		/* Check it's not already present: */
+		GList *iter = *list;
+
+		while (iter) {
+			if (cong_element_description_matches_node ((const CongElementDescription*)iter->data,
+								   node)) {
+				/* Got a match; bail out: */
+				return FALSE;
+			}
+		}
+
+		/* Nothing matched: add to the list: */
+		*list = g_list_prepend (*list,
+					cong_element_description_new_from_node (node));
+	}
+
+	return FALSE;
+}
+
+/**
+ * cong_util_make_element_description_list:
+ * @doc:
+ *
+ * Make a list of all CongElementDescription already in the document
+ * Returns: a list of CongElementDescription
+ */
+GList*
+cong_util_make_element_description_list (CongDocument *doc)
+{
+	/* FIXME: this will be slow */
+	GList *list = NULL;
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+
+	cong_document_for_each_node (doc, 
+				     make_element_description_list_callback,
+				     &list);
+
+	return list;	
+}
+
 /**
  * cong_util_make_menu_item:
  * @label:
@@ -1295,9 +1492,16 @@ cong_util_make_menu_item_for_element_desc (const CongElementDescription *element
 	if (ds_element) {
 		return cong_util_make_menu_item_for_dispspec_element (ds_element);
 	} else {
-		return cong_util_make_menu_item (element_desc->local_name,
-						 NULL,
-						 NULL);
+
+		gchar *username = cong_element_description_make_user_name (element_desc,
+									   NULL);
+
+		GtkMenuItem *item = cong_util_make_menu_item (username,
+							      NULL,
+							      NULL);
+		g_free (username);
+
+		return item;
 	}
 }
 

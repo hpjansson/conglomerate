@@ -1,3 +1,10 @@
+2004-06-25  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-dispspec-element.c, cong-dispspec-element.h, cong-ui-hooks.h, cong-util.c, cong-util.h, global.h, popup.c, tree.c, xmldata.c:
+
+	Rewrite of popup menus so that they work with lists of CongElementDescription rather than CongDispspecElement, so that we don't
+	need a dispspec, and can add elements that aren't in the dispspec if there is one.
+
 2004-06-24 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	Changes in LOTS of files to cleanup gtk-doc usage and 

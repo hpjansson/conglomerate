@@ -41,6 +41,11 @@ typedef void
 						 CongDispspecElement *ds_element,
 						 CongNodePtr node);
 
+typedef void 
+(*CongUICallback_Document_ElementDescription_Node) (CongDocument *doc,
+						    CongElementDescription *element_desc,
+						    CongNodePtr node);
+
 /* Functions to hook up the callback types to a GtkMenuItem */
 GtkMenuItem* 
 cong_menu_item_attach_callback_Document (GtkMenuItem *item,
@@ -60,6 +65,13 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
 							      CongDocument *doc,
 							      CongDispspecElement *ds_element,
 							      CongNodePtr node);
+
+GtkMenuItem* 
+cong_menu_item_attach_callback_Document_ElementDescription_Node (GtkMenuItem *item, 
+								 CongUICallback_Document_ElementDescription_Node callback,
+								 CongDocument *doc,
+								 CongElementDescription *element_desc,
+								 CongNodePtr node);
 /*
  * Simple utility function.
  * Adds the item to the menu with appropriate sensitivity, and ensures that the item is "shown"
@@ -102,11 +114,11 @@ cong_ui_hook_edit_preferences (GtkWindow *toplevel_window);
 /* Tree editing hooks: */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,
-			       CongDispspecElement *ds_element,
+			       CongElementDescription *element_desc,
 			       CongNodePtr node);
 void
 cong_ui_hook_tree_new_sub_element (CongDocument *doc,
-				   CongDispspecElement *ds_element,
+				   CongElementDescription *element_desc,
 				   CongNodePtr node);
 void
 cong_ui_hook_tree_properties (CongDocument *doc,

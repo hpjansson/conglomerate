@@ -27,26 +27,34 @@
  */
 void 
 cong_ui_hook_tree_new_sibling (CongDocument *doc,
-			       CongDispspecElement *ds_element,
+			       CongElementDescription *element_desc,
 			       CongNodePtr node)
 {
 	CongNodePtr new_node;
+	CongDispspec *ds;
+	gchar *username;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (ds_element);
+	g_return_if_fail (element_desc);
 	g_return_if_fail (node);
+
+	ds = cong_document_get_dispspec(doc);
+
+	username = cong_element_description_make_user_name (element_desc,
+							    ds);
 
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
 	{
-		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (ds_element));
+		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), username);
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
 		g_free (desc);
 
 		/* New element */
-		new_node = cong_node_new_element_from_dispspec (ds_element, 
-								doc);
+		new_node = cong_element_description_make_node (element_desc, 
+							       doc,
+							       node->parent);
 		cong_command_add_node_add_after (cmd, 
 						 new_node, 
 						 node);
@@ -66,6 +74,8 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 	}
 
 	cong_document_end_edit(doc);
+
+	g_free (username);
 	
 }
 
@@ -79,26 +89,33 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
  */
 void
 cong_ui_hook_tree_new_sub_element (CongDocument *doc,
-				   CongDispspecElement *ds_element,
+				   CongElementDescription *element_desc,
 				   CongNodePtr node)
 {
 	CongNodePtr new_node;
+	CongDispspec *ds;
+	gchar *username;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
-	g_return_if_fail (ds_element);
+	g_return_if_fail (element_desc);
 	g_return_if_fail (node);
 
+	ds = cong_document_get_dispspec(doc);
+
+	username = cong_element_description_make_user_name (element_desc,
+							    ds);
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
 
 	{
-		gchar *desc = g_strdup_printf (_("Insert child: %s"), cong_dispspec_element_username (ds_element));
+		gchar *desc = g_strdup_printf (_("Insert child: %s"), username);
 		CongCommand *cmd = cong_document_begin_command (doc, desc, NULL);
 		g_free (desc);
 
 		/* New element */
-		new_node = cong_node_new_element_from_dispspec (ds_element, 
-								doc);
+		new_node = cong_element_description_make_node (element_desc, 
+							       doc,
+							       node);
 		cong_command_add_node_set_parent (cmd, 
 						  new_node, 
 						  node);

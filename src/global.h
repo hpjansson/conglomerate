@@ -116,6 +116,14 @@ struct CongCursor
 	CongDocument *doc;
 };
 
+typedef struct CongElementDescription CongElementDescription;
+
+struct CongElementDescription 
+{
+	gchar *ns_uri;
+	gchar *local_name;
+};
+
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
