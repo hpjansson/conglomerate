@@ -30,6 +30,7 @@
 #include "cong-editor-area-span-tag.h"
 #include "cong-dispspec-element.h"
 #include "cong-editor-line-fragments.h"
+#include "cong-traversal-node.h"
 
 #define PRIVATE(x) ((x)->private)
 

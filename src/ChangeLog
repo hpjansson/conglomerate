@@ -1,5 +1,9 @@
 2003-12-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-element-span.c
+
+	Fixed warnings
+
 	* cong-node.c
 
 	Fixed crash when testing text nodes as being irrelevant whitespace in the case where they haven't yet been added to the tree
