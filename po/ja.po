@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: conglomerate 0.7.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-02-10 17:49+0900\n"
-"PO-Revision-Date: 2004-02-11 09:17+0900\n"
+"PO-Revision-Date: 2004-02-16 01:39+0900\n"
 "Last-Translator: Mitsuru Oka <oka326@parkcity.ne.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -119,47 +119,47 @@ msgstr "この DTD を結び付ける(_A)"
 
 #: glade/cong-file-properties.glade.h:18
 msgid "label_dtd_external_id"
-msgstr ""
+msgstr "label_dtd_external_id"
 
 #: glade/cong-file-properties.glade.h:19
 msgid "label_dtd_notes"
-msgstr ""
+msgstr "label_dtd_notes"
 
 #: glade/cong-file-properties.glade.h:20
 msgid "label_dtd_system_id"
-msgstr ""
+msgstr "label_dtd_system_id"
 
 #: glade/cong-file-properties.glade.h:21
 msgid "label_location"
-msgstr ""
+msgstr "label_location"
 
 #: glade/cong-file-properties.glade.h:22
 msgid "label_modified"
-msgstr ""
+msgstr "label_modified"
 
 #: glade/cong-file-properties.glade.h:23
 msgid "label_name"
-msgstr ""
+msgstr "label_name"
 
 #: glade/cong-file-properties.glade.h:24
 msgid "label_typedesc"
-msgstr ""
+msgstr "label_typedesc"
 
 #: glade/cong-file-properties.glade.h:25
 msgid "label_typename"
-msgstr ""
+msgstr "label_typename"
 
 #: glade/cong-file-properties.glade.h:26
 msgid "label_xml_encoding"
-msgstr ""
+msgstr "label_xml_encoding"
 
 #: glade/cong-file-properties.glade.h:27
 msgid "label_xml_standalone"
-msgstr ""
+msgstr "label_xml_standalone"
 
 #: glade/cong-file-properties.glade.h:28
 msgid "label_xml_version"
-msgstr ""
+msgstr "label_xml_version"
 
 #: glade/cong-find-replace.glade.h:1 glade/string_selection_dialog.glade.h:1
 msgid "*"
@@ -304,7 +304,7 @@ msgstr ""
 
 #: glade/plugin-random.glade.h:1
 msgid "Creation Parameters"
-msgstr ""
+msgstr "パラメータ作成"
 
 #: glade/plugin-random.glade.h:2
 msgid "Depth"
@@ -320,7 +320,7 @@ msgstr ""
 
 #: glade/string_selection_dialog.glade.h:3
 msgid "string_selection_dialog"
-msgstr ""
+msgstr "string_selection_dialog"
 
 #: src/cong-app.c:801
 msgid "XML Editor"
@@ -328,11 +328,11 @@ msgstr "XML エディタ"
 
 #: src/cong-app.c:931
 msgid "Conglomerate could not load any xds files"
-msgstr ""
+msgstr "Conglomerate はいかなる xds ファイルも読みこめませんでした"
 
 #: src/cong-app.c:933
 msgid "Conglomerate could not find any descriptions of document types."
-msgstr ""
+msgstr "Conglomerate は文書型のいかなる説明も見つけられませんでした"
 
 #: src/cong-app.c:935
 msgid ""
@@ -346,19 +346,19 @@ msgstr ""
 #: src/cong-attribute-wrapper.c:170 src/cong-node-properties-dialog.c:364
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
-msgstr ""
+msgstr "属性 \"%s\" を \"%s\" に設定"
 
 #: src/cong-attribute-editor-cdata.c:202 src/cong-node-properties-dialog.c:408
 #, c-format
 msgid "Add attribute \"%s\""
-msgstr ""
+msgstr "属性 \"%s\" を追加"
 
 #: src/cong-attribute-editor-cdata.c:226
 #: src/cong-attribute-editor-enumeration.c:177
 #: src/cong-attribute-wrapper.c:193 src/cong-node-properties-dialog.c:438
 #, c-format
 msgid "Delete attribute \"%s\""
-msgstr ""
+msgstr "属性 \"%s\" を削除"
 
 #: src/cong-attribute-editor-enumeration.c:89
 msgid "(unspecified)"
@@ -366,12 +366,12 @@ msgstr ""
 
 #: src/cong-dialog.c:231
 msgid "_Close without Saving"
-msgstr ""
+msgstr "保存せずに閉じる(_C)"
 
 #: src/cong-dialog.c:246
 #, c-format
 msgid "Save changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "閉じる前に文書 \"%s\" への変更を保存しますか?"
 
 #: src/cong-dialog.c:251
 #, c-format
@@ -379,13 +379,14 @@ msgid ""
 "If you close without saving, changes from the past %li hours will be "
 "discarded."
 msgstr ""
+"保存せずに閉じた場合、%li 時間内に行った変更は破棄されます。"
 
 #: src/cong-dialog.c:253
 #, c-format
 msgid ""
 "If you close without saving, changes from the past %li minutes will be "
 "discarded."
-msgstr ""
+msgstr "保存せずに閉じた場合、%li 分前までの変更は破棄されます。"
 
 #: src/cong-dialog.c:255
 msgid ""
@@ -395,21 +396,21 @@ msgstr ""
 #: src/cong-dialog.c:300
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr ""
+msgstr "文書 \"%s\" への未保存の変更を戻しますか?"
 
 #: src/cong-dialog.c:305
 #, c-format
 msgid "Changes from the past %li hours will be discarded."
-msgstr ""
+msgstr "%li 時間内の変更は破棄されます。"
 
 #: src/cong-dialog.c:307
 #, c-format
 msgid "Changes from the past %li minutes will be discarded."
-msgstr ""
+msgstr "%li 分内に行った変更は破棄されます。"
 
 #: src/cong-dialog.c:309
 msgid "Changes from the past minute will be discarded."
-msgstr ""
+msgstr "1数分前までの変更は破棄されます。"
 
 #: src/cong-dispspec-element.c:534 src/cong-dispspec-element.c:570
 #: src/cong-xpath-expression.c:207
@@ -443,17 +444,17 @@ msgstr ""
 
 #: src/cong-dispspec.c:422
 msgid "No description available."
-msgstr ""
+msgstr "説明がありません。"
 
 #: src/cong-document.c:695
 #, c-format
 msgid "Attribute \"%s\""
-msgstr ""
+msgstr "属性 \"%s\""
 
 #: src/cong-document.c:702
 #, c-format
 msgid "Text \"%s\""
-msgstr ""
+msgstr "テキス \"%s\""
 
 #: src/cong-document.c:708
 msgid "Character Data"
@@ -467,7 +468,7 @@ msgstr ""
 #: src/cong-document.c:714
 #, c-format
 msgid "Entity \"%s\""
-msgstr ""
+msgstr "実体 \"%s\""
 
 #: src/cong-document.c:717
 msgid "XML Processing Instruction"
@@ -476,7 +477,7 @@ msgstr ""
 #: src/cong-document.c:722
 #, c-format
 msgid "Comment \"%s\""
-msgstr ""
+msgstr "コメント \"%s\""
 
 #: src/cong-document.c:728
 msgid "Document"
@@ -500,7 +501,7 @@ msgstr "要素宣言"
 
 #: src/cong-document.c:749
 msgid "Attribute Declaration"
-msgstr ""
+msgstr "属性宣言"
 
 #: src/cong-document.c:752
 msgid "Entity Declaration"
@@ -581,7 +582,7 @@ msgstr ""
 
 #: src/cong-error-dialog.c:184
 msgid "That feature has not yet been implemented.  Sorry."
-msgstr ""
+msgstr "この機能はまだ実装されていません。申し訳ありません。"
 
 #: src/cong-error-dialog.c:202
 #, c-format
@@ -603,10 +604,12 @@ msgid ""
 "A GError occurred; the error report was:\n"
 "<i>%s</i>"
 msgstr ""
+"GError が発生しました。エラーレポートは次のとおりです:\n"
+"<i>%s</i>"
 
 #: src/cong-error-dialog.c:261 src/cong-error-file-open.c:446
 msgid "An unexpected error occurred."
-msgstr ""
+msgstr "予期しないエラーが発生しました。"
 
 #: src/cong-error-dialog.c:262 src/cong-error-file-open.c:447
 msgid "For more information, click on the \"Details\" button."
@@ -631,7 +634,7 @@ msgstr ""
 #. FIXME: ought to set up the parent window properly
 #: src/cong-error-file-open.c:54
 msgid "Conglomerate could not run the Search Tool.\n"
-msgstr ""
+msgstr "Conglomerate は検索ツールを実行できませんでした。\n"
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
 #: src/cong-error-file-open.c:82
@@ -647,7 +650,7 @@ msgstr ""
 
 #: src/cong-error-file-open.c:207 src/cong-error-file-save.c:82
 msgid "An unexpected internal error occurred."
-msgstr ""
+msgstr "予期しない内部エラーが発生しました。"
 
 #: src/cong-error-file-open.c:208 src/cong-error-file-save.c:83
 msgid ""
@@ -657,7 +660,7 @@ msgstr ""
 
 #: src/cong-error-file-open.c:234
 msgid "There is no file with that name at that location."
-msgstr ""
+msgstr "その場所にそのような名前のファイルはありません。"
 
 #: src/cong-error-file-open.c:235
 msgid ""
@@ -670,7 +673,7 @@ msgstr ""
 #: src/cong-error-file-open.c:236 src/cong-error-file-open.c:245
 #: src/cong-error-file-open.c:300 src/cong-error-file-open.c:341
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: src/cong-error-file-open.c:243 src/cong-error-file-save.c:100
 msgid "The location does not exist."
@@ -973,7 +976,7 @@ msgstr ""
 
 #: src/cong-error-tests.c:34
 msgid "This dialog was generated by the automated testing routine"
-msgstr ""
+msgstr "このダイアログは自動テストルーチンから生成されました"
 
 #: src/cong-file-export.c:161
 msgid "<small>(No description available)</small>"
@@ -986,7 +989,7 @@ msgstr "書き出すファイルを選択"
 #: src/cong-file-export.c:233
 #, c-format
 msgid "Export \"%s\""
-msgstr ""
+msgstr "\"%s\" を書き出す"
 
 #: src/cong-file-export.c:238
 msgid "Export"
@@ -1007,11 +1010,11 @@ msgstr "書き出しオプション"
 #: src/cong-file-export.c:379
 #, c-format
 msgid "Conglomerate cannot export \"%s\""
-msgstr ""
+msgstr "Conglomerate は \"%s\" を出力できません"
 
 #: src/cong-file-export.c:382
 msgid "None of Conglomerate's plugins know how to export files of that type."
-msgstr ""
+msgstr "この型のファイルを書き出せる Conglomerate プラグインがありません。"
 
 #: src/cong-file-import.c:68
 msgid "Import file..."
@@ -1020,7 +1023,7 @@ msgstr "ファイルの読み込み..."
 #. FIXME:  eventually provide a convenience dialog to force things
 #: src/cong-file-import.c:102
 msgid "Could not import the file."
-msgstr ""
+msgstr "ファイルを読み込めません。"
 
 #: src/cong-file-import.c:103
 #, c-format
@@ -1034,7 +1037,7 @@ msgstr ""
 #: src/cong-file-new.c:138
 #, c-format
 msgid "Creating a new file (%s)"
-msgstr "新規ファイル作成 (%s)"
+msgstr "新規ファイルの作成 (%s)"
 
 #. FIXME:  what if no document factories found?
 #: src/cong-file-new.c:471 src/cong-file-new.c:478 src/cong-file-new.c:503
@@ -1098,7 +1101,7 @@ msgstr "XML 文書を選択"
 #: src/cong-file-print.c:199
 #, c-format
 msgid "Print \"%s\""
-msgstr ""
+msgstr "\"%s\" を印刷"
 
 #: src/cong-file-print.c:205
 msgid "Print"
@@ -1106,7 +1109,7 @@ msgstr "印刷"
 
 #: src/cong-file-print.c:237
 msgid "Print Method:"
-msgstr ""
+msgstr "印刷方法:"
 
 #: src/cong-file-print.c:245
 msgid "Print Options"
@@ -1182,15 +1185,15 @@ msgstr "文字を削除"
 
 #: src/cong-location.c:830
 msgid "Calculating previous page"
-msgstr ""
+msgstr "前のページを計算中"
 
 #: src/cong-location.c:843
 msgid "Calculating next page"
-msgstr ""
+msgstr "次のページを計算中"
 
 #: src/cong-menus.c:98 src/cong-menus.c:170 src/cong-menus.c:204
 msgid "The selected menu item has not yet been implemented."
-msgstr ""
+msgstr "選択されたメニューアイテムはまだ実装されていません。"
 
 #: src/cong-menus.c:423
 msgid "Document Types"
@@ -1208,7 +1211,7 @@ msgstr ""
 #: src/cong-menus.c:588 src/cong-menus.c:612 src/cong-plugin.c:472
 #: src/cong-plugin.c:496
 msgid "Conglomerate could not transform the document"
-msgstr ""
+msgstr "Conglomerate はこのドキュメントを変換できませんでした"
 
 #: src/cong-menus.c:609 src/cong-plugin.c:493
 msgid "There was a problem applying the stylesheet file"
@@ -1225,7 +1228,7 @@ msgstr ""
 
 #: src/cong-menus.c:1111
 msgid "Message Log - Conglomerate"
-msgstr ""
+msgstr "メッセージログ - Conglomerate"
 
 #: src/cong-menus.c:1123
 msgid "Signal Log - Conglomerate"
@@ -1233,7 +1236,7 @@ msgstr ""
 
 #: src/cong-menus.c:1223
 msgid "translator_credits"
-msgstr ""
+msgstr "translator_credits"
 
 #: src/cong-menus.c:1227
 msgid ""
@@ -1452,7 +1455,7 @@ msgstr "/ヘルプ/情報"
 
 #: src/cong-node-properties-dialog.c:246
 msgid "XPath"
-msgstr ""
+msgstr "XPath"
 
 #: src/cong-node-properties-dialog.c:327
 #, c-format
@@ -1527,7 +1530,7 @@ msgstr ""
 
 #: src/cong-parser-error.c:266
 msgid "Line Number"
-msgstr ""
+msgstr "行数"
 
 #: src/cong-parser-error.c:328
 #, c-format
@@ -1543,7 +1546,7 @@ msgstr ""
 
 #: src/cong-parser-error.c:337
 msgid "Show Details"
-msgstr ""
+msgstr "詳細を表示"
 
 #: src/cong-plugin.c:397 src/cong-plugin.c:433
 msgid "Conglomerate could not find display information for the new file"
@@ -1714,11 +1717,11 @@ msgstr ""
 
 #: src/plugin-docbook.c:1319
 msgid "DocBook Book"
-msgstr ""
+msgstr "DocBook ブック"
 
 #: src/plugin-docbook.c:1320
 msgid "Create a book, using the \"DocBook\" format"
-msgstr ""
+msgstr "\"DocBook\" 形式で本を作成する"
 
 #: src/plugin-docbook.c:1327
 msgid "DocBook Set"
@@ -1827,43 +1830,43 @@ msgstr ""
 
 #: src/plugin-dtd.c:159
 msgid "Convert DTD into a Conglomerate Display Specification"
-msgstr ""
+msgstr "DTD を Conglomerate 表示仕様に変換する"
 
 #: src/plugin-dtd.c:160
 msgid "Import a DTD file, creating a Conglomerate display specification file."
-msgstr ""
+msgstr "DTD ファイルを読み込み、Conglomerate 表示仕様ファイルを作成する"
 
 #: src/plugin-dtd.c:167
 msgid "Convert DTD into a Relax NG schema"
-msgstr ""
+msgstr "DTD を Relax NG スキーマに変換する"
 
 #: src/plugin-dtd.c:168
 msgid "Import a DTD file, converting it into a RELAX NG Schema."
-msgstr ""
+msgstr "DTD ファイルを読み込み、Relax NG スキーマに変換する"
 
 #: src/plugin-dtd.c:175
 msgid "Convert DTD into W3C XML Schema"
-msgstr ""
+msgstr "DTD を W3C XML Schema に変換する"
 
 #: src/plugin-dtd.c:176
 msgid "Import a DTD file, converting it into a W3C XML Schema."
-msgstr ""
+msgstr "DTD ファイルを読み込み、W3C XML スキーマに変換する"
 
 #: src/plugin-dtd.c:183
 msgid "Convert DTD into a Schematron file"
-msgstr ""
+msgstr "DTD を Schematron ファイルに変換する"
 
 #: src/plugin-dtd.c:184
 msgid "Import a DTD file, converting it into a Schematron Schema."
-msgstr ""
+msgstr "DTD ファイルを読み込み、Schematron スキーマに変換する"
 
 #: src/plugin-dtd.c:191
 msgid "Convert DTD into an Examplotron file"
-msgstr ""
+msgstr "DTD を Examplotron ファイルに変換する"
 
 #: src/plugin-dtd.c:192
 msgid "Import a DTD file, converting it into an Examplotron Schema."
-msgstr ""
+msgstr "DTD ファイルを読み込み、Examplotron スキーマに変換する"
 
 #: src/plugin-fo.c:99
 msgid "Export XSL-FO as PDF"
@@ -1871,7 +1874,7 @@ msgstr "XSL-FO を PDF として書き出し"
 
 #: src/plugin-fo.c:100
 msgid "Generate a PDF file from the XSL:FO information"
-msgstr ""
+msgstr "XSL FO 情報から PDF ファイルを生成する"
 
 #: src/plugin-fo.c:108
 msgid "Print XSL:FO"
@@ -1936,7 +1939,7 @@ msgstr "表示スペックを編集(_E)"
 #: src/plugin-sgml.c:36
 #, c-format
 msgid "Conglomerate could not import the file \"%s\""
-msgstr ""
+msgstr "Conglomerate は \"%s\" を読み込めませんでした"
 
 #: src/plugin-sgml.c:115
 msgid "Attempting to run the sgml2xml tool"
@@ -1963,7 +1966,7 @@ msgstr ""
 #: src/plugin-tests.c:133 src/plugin-tests.c:212
 #, c-format
 msgid "Unicode Characters 0x%04X-0x%04X"
-msgstr ""
+msgstr "ユニコード文字 0x%04X-0x%04X"
 
 #: src/plugin-tests.c:333
 msgid "Unicode Character Reference"
@@ -1978,7 +1981,7 @@ msgstr ""
 #: src/plugin-validate.c:98
 #, c-format
 msgid "The document \"%s\" cannot be checked for validity."
-msgstr ""
+msgstr "文書 \"%s\" の妥当性が検査できませんでした。"
 
 #: src/plugin-validate.c:105
 msgid ""
@@ -1989,7 +1992,7 @@ msgstr ""
 #: src/plugin-validate.c:125
 #, c-format
 msgid "The document \"%s\" is not valid."
-msgstr ""
+msgstr "文書 \"%s\" は妥当ではありません。"
 
 #: src/plugin-validate.c:132
 msgid "Click on the \"Details\" button for more information."
@@ -2002,7 +2005,7 @@ msgstr ""
 #: src/plugin-validate.c:147
 #, c-format
 msgid "The document \"%s\" is valid."
-msgstr ""
+msgstr "文書 \"%s\" は妥当です。"
 
 #: src/plugin-validate.c:167
 msgid "Validate Document"
@@ -2021,7 +2024,7 @@ msgstr "文書を検証(_V)"
 
 #: src/plugin-website.c:465
 msgid "Generating website"
-msgstr ""
+msgstr "ウェブサイトを生成中"
 
 #: src/plugin-website.c:472
 msgid "Finished generating website."
@@ -2041,19 +2044,19 @@ msgstr ""
 
 #: src/plugin-website.c:500
 msgid "Generate website"
-msgstr ""
+msgstr "ウェブサイトを生成"
 
 #: src/plugin-website.c:501 src/plugin-website.c:504 src/plugin-website.c:505
 msgid "Generates a collection of HTML pages from the website XML description"
-msgstr ""
+msgstr "ウェブサイト XML 説明から一連の HTML ページを生成"
 
 #: src/plugin-website.c:503
 msgid "Generate _Website"
-msgstr ""
+msgstr "ウェブサイトを生成(_W)"
 
 #: src/plugin-xsl.c:316
 msgid "XSL Template Element"
-msgstr ""
+msgstr "XSL テンプレート要素"
 
 #: src/plugin-xsl.c:317
 msgid "An element for visualising template rules in an XSL stylesheet"
@@ -2106,21 +2109,21 @@ msgstr "直後に貼り付け"
 
 #: src/popup.c:1047
 msgid "New sub-element"
-msgstr ""
+msgstr "部分要素を新規作成"
 
 #: src/popup.c:1072
 msgid "New sibling"
-msgstr ""
+msgstr "兄弟要素を新規作成"
 
 #: src/tree.c:42
 #, c-format
 msgid "Insert sibling: %s"
-msgstr ""
+msgstr "兄弟要素を挿入: %s"
 
 #: src/tree.c:90
 #, c-format
 msgid "Insert child: %s"
-msgstr ""
+msgstr "子供を挿入: %s"
 
 #: src/xmldata.c:446
 #, c-format
@@ -2128,11 +2131,12 @@ msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
 "following child types."
 msgstr ""
+"要素 \"%s\" は子供が妥当である必要があります。以下の子供の型のいずれかを選択してください。"
 
 #. select a dialog element
 #: src/xmldata.c:450
 msgid "Required Children Choices"
-msgstr ""
+msgstr "要求される子供達の選択肢"
 
 #: src/xmledit.c:244
 msgid "Paste Under"
@@ -2148,5 +2152,5 @@ msgstr "直後に貼り付け"
 
 #: src/xmledit.c:368
 msgid "Source View - Conglomerate"
-msgstr ""
+msgstr "ソースビュー - Conglomerate"
 
