@@ -1,5 +1,9 @@
 2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* configure.in
+
+	Increased version number to 0.7.3
+
 	* Makefile.am
 
 	Added README.xml to EXTRA_DIST
