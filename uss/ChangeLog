@@ -1,3 +1,8 @@
+2004-01-16  Geert Stappers <stappers@stappers.nl>
+
+	* mkcvstarball:
+	Disable installation of gconf schema ( progress on bugzilla #125736 )
+
 2003-11-24  Geert Stappers <stappers@stappers.nl>
 
 	* mkpotfilesin, 1.6:
