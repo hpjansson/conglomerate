@@ -2037,7 +2037,8 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 {
 	CongEditorNode* editor_node;
 	CongNodePtr iter;
-
+	xmlElementPtr dtd_entry;
+	gboolean text_node, should_add_node;
 
 #if LOG_EDITOR_NODES
 	{
@@ -2052,9 +2053,36 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 #if 0
 	g_assert(cong_editor_widget3_node_should_have_editor_node(node));
 #endif
+	text_node = (cong_node_type (node) == CONG_NODE_TYPE_TEXT);
+	if (text_node) {
+		/* If the DTD doesn't allow #PCDATA in this node and it only
+		   contains whitespace we should ignore it (if it does it
+		   shouldn't validate we should add an error marked element).
 
-	/* Add this node: */
-	{
+		   However we want it stored so that we're as unintrusive as
+		   possible (loading and saving a document shouldn't change it.)
+		*/
+		dtd_entry = xmlGetDtdElementDesc (node->doc->extSubset, node->parent->name);
+		if (dtd_entry) {
+			if (cong_dtd_element_content_can_contain_pcdata (dtd_entry->content)) {
+				should_add_node = TRUE;
+			} else if (!cong_util_is_pure_whitespace (node->content)) {
+				should_add_node = TRUE;
+			} else {
+				should_add_node = FALSE;
+			}
+#if 0
+			printf ("DTD %s -> %s\n", node->parent->name, should_add_node ? "TRUE" : "FALSE");
+#endif
+		} else {
+			should_add_node = TRUE;
+		}
+	} else {
+		should_add_node = TRUE;
+	}
+
+	if (should_add_node) {
+		/* Add this node: */
 		editor_node = cong_editor_node_manufacture (widget,
 							    node,
 							    traversal_parent);
@@ -2077,6 +2105,8 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 		*/
 		create_areas (widget,
 			      editor_node);
+	} else {
+		editor_node = traversal_parent;
 	}
 	
 	/* Recurse: */
@@ -2117,10 +2147,17 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 	editor_node = cong_editor_widget3_get_editor_node (widget,
 							   node,
 							   traversal_parent);
-	g_assert(editor_node);
 
-	if (node == PRIVATE (widget)->selected_xml_node) {
-		PRIVATE (widget)->selected_xml_node = NULL;
+	if (editor_node) {
+
+		g_assert(editor_node);
+		
+		if (node == PRIVATE (widget)->selected_xml_node) {
+			PRIVATE (widget)->selected_xml_node = NULL;
+		}
+		
+	} else {
+		editor_node = traversal_parent;
 	}
 
 	/* Recurse: */
@@ -2137,14 +2174,17 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 		}
 	}
 
-	destroy_areas (widget,
-		       editor_node);
-	
-	/* Remove this editor_node: */
-	remove_node_mapping (widget,
-			     node,
-			     editor_node,
-			     traversal_parent);
+	if (editor_node != traversal_parent) {
+		
+		destroy_areas (widget,
+			       editor_node);
+		
+		/* Remove this editor_node: */
+		remove_node_mapping (widget,
+				     node,
+				     editor_node,
+				     traversal_parent);
+	}
 }
 
 static void 

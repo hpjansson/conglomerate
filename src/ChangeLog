@@ -1,5 +1,9 @@
 2003-12-01  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-flow-holder-blocks.c, cong-editor-widget3.c
+
+	Fixes for bug #123367 by Anders Petersson <demitar@worldforge.org>
+
 	* file.c
 
 	Cleanups of source

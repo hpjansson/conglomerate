@@ -412,6 +412,12 @@ insert_child_flow_holder_into_composer (CongEditorAreaFlowHolderBlocks *area_flo
 	}
 
 	if (prev_node) {
+		if(cong_editor_area_flow_holder_get_child_flow_holder_for_node(area_flow_holder_blocks, prev_node) == NULL) {
+			prev_node = NULL;
+		}
+	}
+	
+	if (prev_node) {
 		CongEditorAreaFlowHolder* prev_flow_holder = cong_editor_area_flow_holder_get_child_flow_holder_for_node (area_flow_holder_blocks,
 															  prev_node);
 
