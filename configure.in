@@ -33,6 +33,7 @@ AM_GLIB_GNU_GETTEXT
 
 dnl --- Package configuration ---
 
+GTK2_REQUIRED=2.4.0
 LIBXML_REQUIRED=2.0.0
 LIBXSLT_REQUIRED=1.0.0
 LIBBONOBO_REQUIRED=2.0.0
@@ -49,6 +50,7 @@ GTKSOURCEVIEW_REQUIRED=0.6
 dnl --- Fundamentals ---
 
 PKG_CHECK_MODULES(CONGLOMERATE,		\
+  gtk+-2.0 >= $GTK2_REQUIRED            \
   gconf-2.0 >= $GCONF2_REQUIRED		\
   libxml-2.0 >= $LIBXML_REQUIRED	\
   libxslt >= $LIBXSLT_REQUIRED		\
