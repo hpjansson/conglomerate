@@ -1,3 +1,10 @@
+2005-02-18  Marcus Meissner
+
+	* cong-editor-widget3.c:
+
+	Two times a 0 replaced with NULL
+	( http://bugzilla.gnome.org/show_bug.cgi?id=167439 )
+
 2004-12-01  Michèle Garoche  <michele.garoche@easyconnect.fr>
 
 	* cong-dom-view.c, cong-editor-area-container.c,

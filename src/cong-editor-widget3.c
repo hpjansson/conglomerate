@@ -380,8 +380,8 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	gtk_widget_set_events(GTK_WIDGET(editor_widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK | GDK_KEY_PRESS_MASK);
 
-	gtk_widget_set(GTK_WIDGET(editor_widget), "can_focus", (gboolean) TRUE, 0);
-	gtk_widget_set(GTK_WIDGET(editor_widget), "can_default", (gboolean) TRUE, 0);
+	gtk_widget_set(GTK_WIDGET(editor_widget), "can_focus", (gboolean) TRUE, NULL);
+	gtk_widget_set(GTK_WIDGET(editor_widget), "can_default", (gboolean) TRUE, NULL);
 
 	/* Set up GTK Input Method support: */
 	{
