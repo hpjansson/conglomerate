@@ -30,7 +30,7 @@ typedef struct CongSourceViewDetails
 {
 	gboolean format;
 
-#ifdef ENABLE_GTKSOURCEVIEW
+#if 0
         GtkSourceBuffer *text_buffer;
         GtkSourceView *text_view;
 #else
@@ -342,7 +342,7 @@ cong_util_make_source_view (const gchar *source_mime_type,
 									 source_mime_type);
         text_buffer = gtk_source_buffer_new_with_language (lang);
 	text_view = GTK_SOURCE_VIEW (gtk_source_view_new_with_buffer (text_buffer));
-        gtk_source_buffer_set_highlight (details->text_buffer, 
+        gtk_source_buffer_set_highlight (text_buffer, 
 					 TRUE);
         g_object_unref(lang_manager);
         g_object_unref(lang);
@@ -359,7 +359,7 @@ cong_util_make_source_view (const gchar *source_mime_type,
 	gtk_widget_show (GTK_WIDGET (text_view));
 	gtk_widget_show (GTK_WIDGET (scrolled_window));
 
-	*output_text_view = text_view;
+	*output_text_view = GTK_TEXT_VIEW (text_view);
 
 	return GTK_WIDGET (scrolled_window);
 }
