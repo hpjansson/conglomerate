@@ -303,11 +303,11 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 	CongDispspecElementHeaderInfo *header_info;
 #endif
 
-	if (element->editor_plugin_id) {
-		g_free (element->editor_plugin_id);
+	if (element->editor_service_id) {
+		g_free (element->editor_service_id);
 	}
-	if (element->property_dialog_plugin_id) {
-		g_free (element->property_dialog_plugin_id);
+	if (element->property_dialog_service_id) {
+		g_free (element->property_dialog_service_id);
 	}
 
 	g_free (element);
@@ -632,19 +632,19 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 }
 
 const gchar*
-cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element)
+cong_dispspec_element_get_editor_service_id(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element, NULL);
 
-	return element->editor_plugin_id;
+	return element->editor_service_id;
 }
 
 const gchar*
-cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element)
+cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element, NULL);
 
-	return element->property_dialog_plugin_id;
+	return element->property_dialog_service_id;
 }
 
 CongDispspecElement*
@@ -659,10 +659,10 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 	element = gxx_generated_object_from_xml_tree_fn_dispspec_element (xml_element);
 
 	if (element->type == CONG_ELEMENT_TYPE_PLUGIN) {
-		xmlChar* id = xmlGetProp(xml_element,"plugin-id");
+		xmlChar* id = xmlGetProp(xml_element,"service-id");
 		
 		if (id) {
-			element->editor_plugin_id = g_strdup(id);
+			element->editor_service_id = g_strdup(id);
 			g_free (id);
 		}
 	}
@@ -688,7 +688,7 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
   			if (0==strcmp(child->name,"property-dialog")) {
   				DS_DEBUG_MSG1("got property-dialog\n");
 				
-				element->property_dialog_plugin_id = cong_node_get_attribute(child, "plugin-id");
+				element->property_dialog_service_id = cong_node_get_attribute(child, "service-id");
   			}
 
 			/* Handle "key-value-list": */
@@ -758,8 +758,8 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	GdkGC* gc;
 #endif
 
-	gchar *editor_plugin_id;
-	gchar *property_dialog_plugin_id;
+	gchar *editor_service_id;
+	gchar *property_dialog_service_id;
 #endif
 
 	return xml_node;

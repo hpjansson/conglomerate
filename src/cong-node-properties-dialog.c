@@ -1055,19 +1055,19 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
 		CongDispspec *ds;
 		CongDispspecElement* element;
-		const gchar* plugin_id;
+		const gchar* service_id;
 
 		ds = cong_document_get_dispspec(doc);
 		g_assert(ds);
 
 		element = cong_dispspec_lookup_node(ds, node);
 		if (element) {
-			plugin_id = cong_dispspec_element_get_property_dialog_plugin_id(element);
+			service_id = cong_dispspec_element_get_property_dialog_service_id(element);
 
 			/* Is there a plugin for this type of node? */
-			if (plugin_id) {
+			if (service_id) {
 				CongServiceNodePropertyDialog *dialog_factory = cong_plugin_manager_locate_custom_property_dialog_by_id (cong_app_get_plugin_manager (cong_app_singleton()), 
-																	 plugin_id);
+																	 service_id);
 
 				if (dialog_factory) {
 					GtkWidget *dialog = cong_custom_property_dialog_make(dialog_factory, doc, node);

@@ -57,8 +57,8 @@ struct CongDispspecElement
 
 	CongDispspecElementHeaderInfo *header_info;
 
-	gchar *editor_plugin_id;
-	gchar *property_dialog_plugin_id;
+	gchar *editor_service_id;
+	gchar *property_dialog_service_id;
 
 	GHashTable *key_value_hash;
 
@@ -201,10 +201,10 @@ CongFont*
 cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
 
 const gchar*
-cong_dispspec_element_get_editor_plugin_id(CongDispspecElement *element);
+cong_dispspec_element_get_editor_service_id(CongDispspecElement *element);
 
 const gchar*
-cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element);
+cong_dispspec_element_get_property_dialog_service_id(CongDispspecElement *element);
 
 /**
  * cong_dispspec_element_to_xml:

@@ -173,9 +173,9 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 					
 				case CONG_ELEMENT_TYPE_PLUGIN:
 					{
-						const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id (ds_element);
+						const gchar *service_id = cong_dispspec_element_get_editor_service_id (ds_element);
 						CongServiceEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_get_plugin_manager (cong_app_singleton()),
-																	     plugin_id);
+																	      service_id);
 						
 						if (factory) {
 							return  CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
@@ -183,7 +183,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 															  traversal_node)
 										  );
 						} else {
-							g_message("plugin not found \"%s\"", plugin_id);
+							g_message ("plugin not found \"%s\"", service_id);
 							return cong_editor_node_element_unknown_new (widget,
 												     traversal_node);
 						}							

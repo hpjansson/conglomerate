@@ -1,3 +1,9 @@
+2004-02-03  Dave Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-element.c, cong-dispspec-element.h, cong-editor-node.c, cong-node-properties-dialog.c
+
+	Rename of plugin-id to service-id where appropriate
+
 2004-01-22  Geert Stappers <stappers@stappers.nl>
 
 	* plugin-random.c
