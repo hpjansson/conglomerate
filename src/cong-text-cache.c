@@ -234,11 +234,17 @@ cong_text_cache_convert_stripped_byte_offset_to_original (CongTextCache *text_ca
 
 	g_return_val_if_fail(text_cache, FALSE);
 	g_return_val_if_fail(original_byte_offset, FALSE);
+	g_return_val_if_fail(stripped_byte_offset>=0, FALSE);
+	g_return_val_if_fail(stripped_byte_offset<=strlen(text_cache->unstripped_string), FALSE);
 
 	text_span = get_text_span_at_stripped_byte_offset(text_cache, stripped_byte_offset);
 	
 	if (text_span) {
+		g_assert (stripped_byte_offset >= text_span->stripped_first_byte_offset);
 		*original_byte_offset = text_span->original_first_byte_offset + (stripped_byte_offset - text_span->stripped_first_byte_offset);
+
+		g_assert (*original_byte_offset>=0);
+		g_assert (*original_byte_offset<=strlen(text_cache->unstripped_string));
 
 #if 0
 		g_message("stripped byte offset %i -> original offset %i", stripped_byte_offset, *original_byte_offset);
@@ -258,11 +264,18 @@ cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_ca
 
 	g_return_val_if_fail(text_cache, FALSE);
 	g_return_val_if_fail(stripped_byte_offset, FALSE);
+	g_return_val_if_fail(original_byte_offset>=0, FALSE);
+	g_return_val_if_fail(original_byte_offset<=strlen(text_cache->unstripped_string), FALSE);
 
 	text_span = get_text_span_at_original_byte_offset(text_cache, original_byte_offset);
 	
 	if (text_span) {
+
+		g_assert (original_byte_offset >= text_span->original_first_byte_offset);
 		*stripped_byte_offset = text_span->stripped_first_byte_offset + (original_byte_offset - text_span->original_first_byte_offset);
+
+		g_assert (*stripped_byte_offset>=0);
+		g_assert (*stripped_byte_offset<=strlen(text_cache->stripped_string));
 
 #if 0
 		g_message("original byte offset %i -> stripped offset %i", original_byte_offset, *stripped_byte_offset);
@@ -270,6 +283,7 @@ cong_text_cache_convert_original_byte_offset_to_stripped (CongTextCache *text_ca
 		return TRUE;
 	}
 
+	return FALSE;
 }
 
 
