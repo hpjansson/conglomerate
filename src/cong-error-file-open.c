@@ -433,7 +433,7 @@ cong_error_dialog_new_from_file_operation_failure(GtkWindow *parent_window,
 					 );
 	g_free(uri_string);
 	details_dialog = cong_error_dialog_new(parent_window,
-						_("The program unexpectedly received an error report from the GNOME Virtual Filing System."), 
+						_("The program unexpectedly received an error report from the GNOME Virtual File System."), 
 						secondary_text, 
 						technical_details);
 
