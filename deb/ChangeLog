@@ -1,3 +1,8 @@
+2003-11-02  Geert Stappers <stappers@stappers.nl>
+
+	* build
+	- remove generated debian/*.debhelper files before `update`
+
 2003-10-28  Geert Stappers <stappers@stappers.nl>
 
 	* build

@@ -96,6 +96,7 @@ then
     dch -v $NWRLS "New upstream release."
   ;;
   update*)
+    rm -f debian/*.debhelper # no use to keep these generated files
     echo generating deb.update
     update > deb.update
     exit
