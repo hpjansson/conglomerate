@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY Test1 "This is an <emph>important</emph> fragment of text">
+<!ENTITY Test2 "This is an unimportant bit of text">
+]>
+<article><para>This is a test. &Test1;  &Test1; &Test2; &Test2; That was a test</para></article>
