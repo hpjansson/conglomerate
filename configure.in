@@ -203,8 +203,8 @@ AC_OUTPUT(Makefile
 	  data/conglomerate.keys
 	  data/conglomerate.schemas
 	  data/Makefile
-	  deb/Makefile
-	  deb/patches/Makefile
+	  debian/Makefile
+	  debian/patches/Makefile
 	  doc/Makefile
 	  doc/devel/Makefile
 	  doc/C/Makefile

@@ -1,6 +1,9 @@
 2003-11-25  Geert Stappers  <stappers@stappers.nl>
 
 	* Transition of deb/ into debian/
+	- Makefile.am: switch of the directory.
+	- configure: generate other files.
+	- README.xml: updated information how to generate the package.
 
 2003-11-23  Geert Stappers  <stappers@stappers.nl>
 
