@@ -1,3 +1,16 @@
+2003-08-08  Geert Stappers  <stappers@stappers.nl>
+
+      * POTFILES.in:
+      Added src/cong-attribute-editor-cdata.c,
+      src/cong-attribute-editor-enumeration.c, src/cong-attribute-editor.c,
+      src/cong-attribute-wrapper-check-button.c,
+      src/cong-attribute-wrapper-radio-button.c, src/cong-attribute-wrapper.c,
+      src/cong-enum-mapping.c, src/cong-file-properties.c and
+      src/plugin-doc-from-xds.c.
+
+      * conglomerate.pot, es.po, da.po, de, nl.po and ru.po:
+      Regenerated.
+
 2003-08-30  Christian Neumair  <chris@gnome-de.org>
 
 	* de.po
