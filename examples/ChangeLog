@@ -1,3 +1,9 @@
+2003-09-24  David Malcolm
+
+	* relax-ng.xds
+
+	Patch by Adam Olsen to fix indentation and add <start> and <empty> elements
+
 2003-09-22  David Malcolm
 
 	* docbook.xds

@@ -1,66 +1,73 @@
 <?xml version="1.0"?>
 <dispspec>
-		<metadata>
-			<name>RELAX NG</name>
-			<description>RELAX NG is a schema language i.e. a language for describing the strucutre of an XML document.</description>
-		</metadata>
-		<serialisation>
-			<format extension="rng"/>
-		</serialisation>
-		<document-models>
-		</document-models>
-		<element-list>
-			<element tag="grammar" type="structural">
-				<name locale="en">Grammar</name>
-				<short-desc/>
-			</element>
-			<element tag="define" type="structural">
-				<name locale="en">Define</name>
-				<short-desc/>
-				<header-info xpath="@name"/>
-			</element>
-			<element tag="element" type="structural">
-				<name locale="en">XML Element</name>
-				<short-desc/>
-				<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
-			</element>
-			<element tag="attribute" type="structural">
-				<name locale="en">XML Attribute</name>
-				<short-desc/>
-				<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
-			</element>
-			<element tag="zeroOrMore" type="structural">
-				<name locale="en">ZeroOrMore</name>
-				<short-desc/>
-			</element>
-			<element tag="choice" type="structural">
-				<name locale="en">Choice</name>
-				<short-desc/>
-			</element>
-			<element tag="text" type="structural">
-				<name locale="en">Text</name>
-				<short-desc/>
-			</element>
-			<element tag="ref" type="structural">
-				<name locale="en">Reference</name>
-				<short-desc/>
-				<header-info xpath="@name"/>
-			</element>
-			<element tag="oneOrMore" type="structural">
-				<name locale="en">OneOrMore</name>
-				<short-desc/>
-			</element>
-			<element tag="group" type="structural">
-				<name locale="en">Group</name>
-				<short-desc/>
-			</element>
-			<element tag="optional" type="structural">
-				<name locale="en">Optional</name>
-				<short-desc/>
-			</element>
-			<element tag="value" type="structural">
-				<name locale="en">Value</name>
-				<short-desc/>
-			</element>
-		</element-list>
-	</dispspec>
+	<metadata>
+		<name>RELAX NG</name>
+		<description>RELAX NG is a schema language i.e. a language for describing the strucutre of an XML document.</description>
+	</metadata>
+	<serialisation>
+		<format extension="rng"/>
+	</serialisation>
+	<document-models/>
+	<element-list>
+		<element tag="grammar" type="structural">
+			<name locale="en">Grammar</name>
+			<short-desc/>
+		</element>
+		<element tag="define" type="structural">
+			<name locale="en">Define</name>
+			<short-desc/>
+			<header-info xpath="@name"/>
+		</element>
+		<element tag="element" type="structural">
+			<name locale="en">XML Element</name>
+			<short-desc/>
+			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
+		</element>
+		<element tag="attribute" type="structural">
+			<name locale="en">XML Attribute</name>
+			<short-desc/>
+			<header-info xpath="concat(&quot;&lt;&quot;, @name, &quot;&gt;&quot;)"/>
+		</element>
+		<element tag="zeroOrMore" type="structural">
+			<name locale="en">ZeroOrMore</name>
+			<short-desc/>
+		</element>
+		<element tag="choice" type="structural">
+			<name locale="en">Choice</name>
+			<short-desc/>
+		</element>
+		<element tag="text" type="structural">
+			<name locale="en">Text</name>
+			<short-desc/>
+		</element>
+		<element tag="ref" type="structural">
+			<name locale="en">Reference</name>
+			<short-desc/>
+			<header-info xpath="@name"/>
+		</element>
+		<element tag="oneOrMore" type="structural">
+			<name locale="en">OneOrMore</name>
+			<short-desc/>
+		</element>
+		<element tag="group" type="structural">
+			<name locale="en">Group</name>
+			<short-desc/>
+		</element>
+		<element tag="optional" type="structural">
+			<name locale="en">Optional</name>
+			<short-desc/>
+		</element>
+		<element tag="value" type="structural">
+			<name locale="en">Value</name>
+			<short-desc/>
+		</element>
+		<element tag="start" type="structural">
+			<name locale="en">Start</name>
+			<short-desc/>
+		</element>
+		<element tag="empty" type="structural">
+			<name locale="en">Empty</name>
+			<short-desc/>
+		</element>
+	</element-list>
+</dispspec>
