@@ -35,6 +35,8 @@
 #include "cong-util.h"
 #include "cong-dtd.h"
 
+#define RELAX_NG_NS_URI ("http://relaxng.org/ns/structure/1.0")
+
 /* Internal function declarations: */
 static xmlDtdPtr 
 load_dtd (const gchar *uri, 
@@ -232,6 +234,7 @@ make_rng_from_dtd (xmlDtdPtr dtd)
 {
 	xmlDocPtr xml_doc;
 	CongNodePtr root_node;
+	xmlNsPtr xml_ns;
 
 	g_return_val_if_fail (dtd, NULL);
 
@@ -243,6 +246,12 @@ make_rng_from_dtd (xmlDtdPtr dtd)
 				  NULL, /* xmlNsPtr ns, */
 				  "grammar",
 				  NULL);
+
+	xml_ns = xmlNewNs (root_node, 
+			   RELAX_NG_NS_URI, 
+			   NULL);
+	xmlSetNs (root_node, 
+		  xml_ns);
 	
 	xmlDocSetRootElement(xml_doc,
 			     root_node);
@@ -263,9 +272,15 @@ element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 {
 	CongNodePtr root_node = (CongNodePtr)user_data;
 	CongNodePtr node_define;
-	
+	xmlNsPtr xml_ns;
+
+	xml_ns = xmlSearchNsByHref (root_node->doc,
+				    root_node,
+				    RELAX_NG_NS_URI);
+	g_assert (xml_ns);
+
 	node_define = xmlNewDocNode(root_node->doc,
-				    NULL,
+				    xml_ns,
 				    "define",
 				    NULL);			
 	xmlAddChild (root_node, 
@@ -278,7 +293,7 @@ element_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 	/* Create the <element> tag: */
 	{
 		CongNodePtr node_element = xmlNewDocNode(root_node->doc,
-							 NULL,
+							 xml_ns,
 							 "element",
 							 NULL);
 		xmlAddChild (node_define, 
@@ -310,6 +325,12 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 	CongNodePtr node_element = (CongNodePtr)user_data;
 	CongNodePtr node_occurrence = NULL;
 	CongNodePtr node_attribute;
+	xmlNsPtr xml_ns;
+
+	xml_ns = xmlSearchNsByHref (node_element->doc,
+				    node_element,
+				    RELAX_NG_NS_URI);
+	g_assert (xml_ns);
 
 	switch (attr->def) {
 	default: g_assert_not_reached ();
@@ -317,7 +338,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 	case XML_ATTRIBUTE_IMPLIED:
 		/* Attribute is optional: */
 		node_occurrence = xmlNewDocNode(node_element->doc,
-						NULL,
+						xml_ns,
 						"optional",
 						NULL);
 		
@@ -334,7 +355,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 	g_assert (node_occurrence);
 
 	node_attribute= xmlNewDocNode(node_element->doc,
-				      NULL,
+				      xml_ns,
 				      "attribute",
 				      NULL);			
 	xmlAddChild (node_occurrence,
@@ -384,7 +405,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 		/* Add a <choice> tag: */
 		{
 			CongNodePtr node_choice = xmlNewDocNode(node_element->doc,
-								NULL,
+								xml_ns,
 								"choice",
 								NULL);
 			xmlAddChild (node_attribute, 
@@ -396,7 +417,7 @@ attribute_callback_generate_rng_from_dtd (xmlElementPtr dtd_element,
 
 				for (iter = attr->tree; iter; iter=iter->next) {
 					CongNodePtr node_value = xmlNewDocNode(node_element->doc,
-									       NULL,
+									       xml_ns,
 									       "value",
 									       iter->name);
 					xmlAddChild (node_choice,
@@ -418,6 +439,12 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 			    xmlElementContentPtr content)
 {
 	CongNodePtr node_occurrence = NULL;
+	xmlNsPtr xml_ns;
+
+	xml_ns = xmlSearchNsByHref (node_parent->doc,
+				    node_parent,
+				    RELAX_NG_NS_URI);
+	g_assert (xml_ns);
 
 	switch (content->ocur) {
 	default: g_assert_not_reached ();
@@ -428,7 +455,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 
 	case XML_ELEMENT_CONTENT_OPT:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
-						NULL,
+						xml_ns,
 						"optional",
 						NULL);
 		xmlAddChild (node_parent, 
@@ -437,7 +464,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 
 	case XML_ELEMENT_CONTENT_MULT:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
-						NULL,
+						xml_ns,
 						"zeroOrMore",
 						NULL);
 		xmlAddChild (node_parent, 
@@ -446,7 +473,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		
 	case XML_ELEMENT_CONTENT_PLUS:
 		node_occurrence = xmlNewDocNode(node_parent->doc,
-						NULL,
+						xml_ns,
 						"oneOrMore",
 						NULL);
 		xmlAddChild (node_parent, 
@@ -462,7 +489,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		/* Add an empty <text> tag: */
 		{
 			CongNodePtr node_text = xmlNewDocNode(node_occurrence->doc,
-							      NULL,
+							      xml_ns,
 							      "text",
 							      NULL);
 			xmlAddChild (node_occurrence, 
@@ -473,7 +500,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		/* Add a <ref name="foobar"> tag: */
 		{
 			CongNodePtr node_ref = xmlNewDocNode(node_occurrence->doc,
-							     NULL,
+							     xml_ns, 
 							     "ref",
 							     NULL);
 			xmlAddChild (node_occurrence, 
@@ -487,14 +514,14 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 	case XML_ELEMENT_CONTENT_SEQ:
 		/* Add a <group> tag, and recurse; optimise away the cae where the parent is a <group> tag: */
 		{
-			if (cong_node_is_element (node_occurrence, NULL, "group")) {
+			if (cong_node_is_element (node_occurrence, RELAX_NG_NS_URI, "group")) {
 				add_content_subtree_to_rng (node_occurrence,
 							    content->c1);
 				add_content_subtree_to_rng (node_occurrence,
 							    content->c2);
 			} else {
 				CongNodePtr node_group = xmlNewDocNode(node_occurrence->doc,
-								       NULL,
+								       xml_ns,
 								       "group",
 								       NULL);
 				xmlAddChild (node_occurrence, 
@@ -515,7 +542,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		   So we spot simple <choice> in the tag above, and merge into it if possible; <choice> is associative and hence bracketing should make no difference...
 		 */
 		{
-			if (cong_node_is_element (node_occurrence, NULL, "choice")) {
+			if (cong_node_is_element (node_occurrence, RELAX_NG_NS_URI, "choice")) {
 				/* Optimised case: */
 				add_content_subtree_to_rng (node_occurrence,
 							    content->c1);
@@ -524,7 +551,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 			} else {
 				/* Non-optimised case: */
 				CongNodePtr node_choice = xmlNewDocNode(node_occurrence->doc,
-									NULL,
+									xml_ns, 
 									"choice",
 									NULL);
 				xmlAddChild (node_occurrence, 

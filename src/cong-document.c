@@ -557,9 +557,9 @@ cong_document_get_xml_ns (CongDocument *doc,
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (ns_uri, NULL);
 
-	ns = xmlSearchNs (PRIVATE(doc)->xml_doc,
-			  (xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
-			  ns_uri);
+	ns = xmlSearchNsByHref (PRIVATE(doc)->xml_doc,
+				(xmlNodePtr)PRIVATE(doc)->xml_doc, /* FIXME: is this correct? */
+				ns_uri);
 
 	return ns;
 }

@@ -1,5 +1,9 @@
 2004-02-07  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, plugin-dtd.c
+
+	Sorted out namespaces in the DTD->RELAX NG importer
+
 	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec-registry.c, cong-dispspec.c, cong-dispspec.h, cong-document.c, cong-document.h, cong-dom-view.c, cong-node-properties-dialog.c, cong-node.c, cong-node.h, cong-overview-view.c, cong-tree-view.c, cong-util.c, cong-util.h, cursor.c, plugin-docbook.c, plugin-dtd.c, plugin-fo.c, plugin-lists-node-element-listitem.c, plugin-random.c, plugin-website.c, popup.c, xmldata.c
 
 	Big fix of namespace handling (use URIs rather than prefixes)
