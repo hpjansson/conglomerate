@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# uss/sync
+#
+# an other script that reduces 
+#  typing two lines into
+#  typing one line
+#
+#
+# revert changes that might cause a conflict
+# also takes out M marked files  (
+#  M omf.make
+#  M src/cong-menus.c
+# wouldn't show up )
+debian/rules unpatch
+#
+# the real synchronisation
+cvs -q update -dP
+#
+# end of script
