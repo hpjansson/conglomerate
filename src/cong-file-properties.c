@@ -37,21 +37,34 @@
 
 typedef struct CongFilePropertiesDialogDetails CongFilePropertiesDialogDetails;
 
+#include <glade/glade.h>
+
 struct CongFilePropertiesDialogDetails
 {
+	GladeXML *xml;
+	CongDocument *doc;
+
+	gulong sigid_end_edit;
+	gulong sigid_set_dtd;
 };
 
+static gboolean
+on_dialog_destroy (GtkWidget *widget,
+		   gpointer user_data);
 
 static void
 on_dtd_button_clicked (GtkButton *button,
 		       CongDocument *doc);
 
 static void
+on_doc_end_edit (CongDocument *doc,
+		 gpointer user_data);
+
+static void
 on_doc_set_dtd_ptr (CongDocument *doc,
 		    xmlDtdPtr dtd_ptr,
 		    gpointer user_data);
 
-#include <glade/glade.h>
 #include "cong-attribute-editor.h"
 
 /*
@@ -101,6 +114,14 @@ get_modified_string (CongDocument *doc)
 }
 
 static void
+refresh_modified (CongFilePropertiesDialogDetails *dialog_details,
+		  CongDocument *doc)
+{			
+	gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_modified")), 
+			     get_modified_string (doc) );
+}
+
+static void
 set_dtd_info (GladeXML *xml,
 	      const gchar *ExternalID,
 	      const gchar *SystemID)
@@ -121,7 +142,7 @@ set_dtd_info (GladeXML *xml,
 }
 
 static void
-refresh_dtd_stuff (GladeXML *xml, 
+refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 		   CongDocument *doc)
 {
 	xmlDocPtr xml_doc;
@@ -130,7 +151,8 @@ refresh_dtd_stuff (GladeXML *xml,
 	GtkButton *button_dtd;
 	GtkLabel *label_dtd_notes;
 
-	g_assert (xml);
+	g_assert (dialog_details);
+	g_assert (dialog_details->xml);
 	g_assert (IS_CONG_DOCUMENT (doc));
 
 	xml_doc = cong_document_get_xml (doc);
@@ -138,17 +160,17 @@ refresh_dtd_stuff (GladeXML *xml,
 
 	g_message ("refresh_dtd_stuff, extSubset=%p", xml_doc->extSubset);
 
-	button_dtd = GTK_BUTTON (glade_xml_get_widget (xml,"button_dtd"));
+	button_dtd = GTK_BUTTON (glade_xml_get_widget (dialog_details->xml,"button_dtd"));
 	g_assert (button_dtd);
 
-	label_dtd_notes = GTK_LABEL (glade_xml_get_widget (xml,"label_dtd_notes"));
+	label_dtd_notes = GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_dtd_notes"));
 	g_assert (label_dtd_notes);
 
 	if (xml_doc->extSubset) {
 		gtk_button_set_label (button_dtd,
 				      _("_Remove this DTD"));
 		
-		set_dtd_info (xml,
+		set_dtd_info (dialog_details->xml,
 			      xml_doc->extSubset->ExternalID,
 			      xml_doc->extSubset->SystemID);	
 
@@ -164,7 +186,7 @@ refresh_dtd_stuff (GladeXML *xml,
 		if (model_dtd) {
 			gtk_button_set_label (button_dtd,
 					      _("_Associate this DTD"));
-			set_dtd_info (xml,
+			set_dtd_info (dialog_details->xml,
 				      cong_external_document_model_get_public_id (model_dtd),
 				      cong_external_document_model_get_system_id (model_dtd));
 
@@ -173,7 +195,7 @@ refresh_dtd_stuff (GladeXML *xml,
 			
 			
 		} else {
-			set_dtd_info (xml,
+			set_dtd_info (dialog_details->xml,
 				      "",
 				      "");
 			gtk_label_set_text ( label_dtd_notes,
@@ -191,6 +213,7 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	xmlDocPtr xml_doc;
 	CongDispspec* ds;
 	GtkWidget *dialog;
+#if 0
 	GtkNotebook *notebook;
 	CongDialogContent *basic_content;
 	CongDialogCategory *general_category;
@@ -198,10 +221,12 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	CongDialogContent *advanced_content;
 	CongDialogCategory *header_category;
 	CongDialogCategory *dtd_category;
+#endif
 	CongFilePropertiesDialogDetails *dialog_details;
-
+#if 0
 	struct _xmlDtd  *extSubset;     /* the document external subset */
 	struct _xmlDtd  *intSubset;     /* the document internal subset */
+#endif
 
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 
@@ -211,91 +236,117 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	xml_doc = cong_document_get_xml(doc);
 	ds = cong_document_get_dispspec(doc);
 
+	dialog_details->doc = doc; 
+	g_object_ref (G_OBJECT (doc));
+	/* FIXME: this leaks the reference to the doc */
+
+	dialog_details->xml = cong_util_load_glade_file ("glade/cong-file-properties.glade",
+							 doc,
+							 NULL);		
+
+	dialog = glade_xml_get_widget(dialog_details->xml, "common_dialog");
+
+	/* Filename: */
 	{
-		GladeXML *xml = cong_util_load_glade_file ("glade/cong-file-properties.glade",
-							   doc,
-							   NULL);		
+		gchar *filename;
+		filename = cong_document_get_filename (doc);
 		
-		dialog = glade_xml_get_widget(xml, "common_dialog");
-
-		/* Filename: */
-		{
-			gchar *filename;
-			filename = cong_document_get_filename (doc);
-			
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_name")), 
-					     filename);
-			g_free (filename);			
-
-		}
-
-		/* Location: */
-		{
-			gchar *path;
-			path = cong_document_get_parent_uri (doc);
-			
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_location")), 
-					     path);
-			g_free (path);
-		}
-
-		/* FIXME: wire up a signal to update name and location */
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_name")), 
+				     filename);
+		g_free (filename);			
 		
-		/* Modified: */
-		{
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_modified")), 
-					     get_modified_string (doc) );
-			/* FIXME: should wire up a signal to update this as necessary */
-		}
-
-		/* Fields from dispspec: */
-		{
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_typename")),
-					     cong_dispspec_get_name (ds));
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_typedesc")),
-					     cong_dispspec_get_description (ds));
-		}
-
-		/* XML Header: */
-		{
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_xml_version")), 
-					     xml_doc->version);
-			
-			{
-				const gchar *encoding_text = xml_doc->encoding;
-				if (NULL==encoding_text) {
-					encoding_text = _("Unspecified");
-				}
-				gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_xml_encoding")), 
-						     encoding_text);
-			}
-			
-			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (xml,"label_xml_standalone")), 
-					     xml_doc->standalone?"yes":"no");
-			/* FIXME: should this be localised? */
-		}
-
-		/* DTD Stuff: */
-		{
-			refresh_dtd_stuff (xml, doc);
-
-			g_signal_connect (G_OBJECT (glade_xml_get_widget (xml,"button_dtd")),
-					  "clicked",
-					  G_CALLBACK (on_dtd_button_clicked),
-					  doc);
-
-			g_signal_connect_after (G_OBJECT (doc),
-						"set_dtd_ptr",
-						G_CALLBACK (on_doc_set_dtd_ptr),
-						xml);
-
-			/* FIXME: need to clean up signal */
-		}
 	}
+	
+	/* Location: */
+	{
+		gchar *path;
+		path = cong_document_get_parent_uri (doc);
+		
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_location")), 
+				     path);
+		g_free (path);
+	}
+	
+	/* FIXME: wire up a signal to update name and location */
+	
+	/* Modified: */
+	{
+		refresh_modified (dialog_details, doc);
+	}
+	
+	dialog_details->sigid_end_edit =  g_signal_connect_after (G_OBJECT (doc),
+								  "end_edit",
+								  G_CALLBACK (on_doc_end_edit),
+								  dialog_details);	
+	/* Fields from dispspec: */
+	{
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typename")),
+				     cong_dispspec_get_name (ds));
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typedesc")),
+				     cong_dispspec_get_description (ds));
+	}
+	
+	/* XML Header: */
+	{
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_xml_version")), 
+				     xml_doc->version);
+		
+		{
+			const gchar *encoding_text = xml_doc->encoding;
+			if (NULL==encoding_text) {
+				encoding_text = _("Unspecified");
+			}
+			gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_xml_encoding")), 
+					     encoding_text);
+		}
+		
+		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_xml_standalone")), 
+				     xml_doc->standalone?"yes":"no");
+		/* FIXME: should this be localised? */
+	}
+	
+	/* DTD Stuff: */
+	{
+		refresh_dtd_stuff (dialog_details, doc);
+		
+		g_signal_connect (G_OBJECT (glade_xml_get_widget (dialog_details->xml,"button_dtd")),
+				  "clicked",
+				  G_CALLBACK (on_dtd_button_clicked),
+				  doc);
+		
+		dialog_details->sigid_set_dtd  = g_signal_connect_after (G_OBJECT (doc),
+									 "set_dtd_ptr",
+									 G_CALLBACK (on_doc_set_dtd_ptr),
+									 dialog_details);
+	}
+
+	/* Add a cleanup hookup: */
+	g_signal_connect (G_OBJECT (dialog),
+			  "destroy",
+			  G_CALLBACK (on_dialog_destroy),
+			  dialog_details);
 
 	gtk_widget_show_all(dialog);
 
 	return dialog;
+}
+
+static gboolean
+on_dialog_destroy (GtkWidget *widget,
+		   gpointer user_data)
+{
+	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
+
+	g_message ("on_dialog_destroy");
+
+	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
+				     dialog_details->sigid_end_edit);
+	g_signal_handler_disconnect (G_OBJECT (dialog_details->doc),
+				     dialog_details->sigid_set_dtd);
+
+	g_object_unref (G_OBJECT (dialog_details->doc));
+
+	return FALSE;
 }
 
 static void
@@ -348,15 +399,29 @@ on_dtd_button_clicked (GtkButton *button,
 }
 
 static void
+on_doc_end_edit (CongDocument *doc,
+		 gpointer user_data)
+{
+	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+	g_message ("on_doc_end_edit");
+
+	refresh_modified (dialog_details, 
+			  doc);
+}
+
+
+static void
 on_doc_set_dtd_ptr (CongDocument *doc,
 		    xmlDtdPtr dtd_ptr,
 		    gpointer user_data)
 {
-	GladeXML *xml = (GladeXML*)user_data;
+	CongFilePropertiesDialogDetails *dialog_details = (CongFilePropertiesDialogDetails*)user_data;
 	g_assert (IS_CONG_DOCUMENT (doc));
 
 	g_message ("on_doc_set_dtd_ptr");
 
-	refresh_dtd_stuff (xml, 
+	refresh_dtd_stuff (dialog_details, 
 			   doc);
 }
