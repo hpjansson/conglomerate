@@ -1,3 +1,9 @@
+2003-12-21  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-location.c
+
+	Fix for bug #129752 (nested entity edit)
+
 2003-12-20  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-node.c, cong-node.h

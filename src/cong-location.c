@@ -385,9 +385,11 @@ cong_location_del_next_char (CongDocument *doc,
 			   Interpret this as an attempt to merge the tag containing this text with its next sibling.
 			   See http://bugzilla.gnome.org/show_bug.cgi?id=121970
 			*/
-
-			handle_tag_merging (doc,
-					    loc->node->parent);
+			
+			if (CONG_NODE_TYPE_ELEMENT == cong_node_type(loc->node->parent)) {
+				handle_tag_merging (doc,
+						    loc->node->parent);
+			}
 		}
 	}
 }
