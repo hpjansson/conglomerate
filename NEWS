@@ -6,71 +6,71 @@ Conglomerate 0.7.5 - "Now You See It, Now You Don't" Released
 Conglomerate is becoming more usable, and is regularly used by the
 author for small documents, including these release notes. However it is
 still UNSTABLE, and not yet ready for heavy-duty production use.
-                                                                                
+
 In keeping with Gnome tradition, this release of Conglomerate is
 codenamed with a phrase that makes no sense to most people reading the
 release announcement. Enjoy :-)
-                                                                                
-                                                                                
+
+
 Enhancements
       * Undo/Redo now works, with an unlimited history. Large amounts of
         the program was rewritten to allow this. (me)
-                                                                                
+
       * Allow clicking beyond the end of the fragment of text, to make
         it easy to select past the end of a line (bug #121066) (me)
-                                                                                
+
       * Improvements to the "Required Child" dialog to use Glade and be
         more HIG-compliant (David Hoover)
-                                                                                
+
       * Parser error dialog now supports syntax highlighting if
         GtkSourceView is available (Geert-Jan Van den Bogaerde)
-                                                                                
+
       * Display Specifications can now specify if whitespace is
         significant within an XML element. It is respected by the
         Cleanup XML Source tool, and there is some support in the main
         editor view. DocBook's <programlisting> tag is flagged to work
         this way. (me)
-                                                                                
+
       * We now generate API documentation, using gtk-doc (Robert Varga,
         Geert Stappers, me)
-                                                                                
+
       * New translation: cs - Czech (Miloslav Trmac)
-                                                                                
+
       * Updated translations: de (Christian Neumair), sv (Christian
         Rose), pl (Artur Flinta), sr, sr@Latn (Danilo Segan), nl (Elros
         Cryiatan)
-                                                                                
-                                                                                
+
+
 Fixes
       * Allow going one character beyond the end of text buffers, to
         allow for sane cursor movement (bug #121066 again) (me)
-                                                                                
+
       * Stopped unnecessary addition of whitespace nodes when adding new
         structural elements (me)
-                                                                                
-                                                                                
+
+
 Thanks to
       * David Hoover
-                                                                                
+
       * Geert-Jan Van den Bogaerde
-                                                                                
+
       * Robert Varga
-                                                                                
+
       * Geert Stappers
-                                                                                
+
       * Miloslav Trmac
-                                                                                
+
       * Christian Neumair
-                                                                                
+
       * Christian Rose
-                                                                                
+
       * Artur Flinta
-                                                                                
+
       * Danilo Segan
-                                                                                
+
       * Elros Cryiatan
-                                                                                
-                                                                                
+
+
 ..and anyone else I missed (sorry!)
 
 David Malcolm
