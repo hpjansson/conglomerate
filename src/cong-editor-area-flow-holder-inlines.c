@@ -31,7 +31,7 @@
 #include "cong-editor-child-policy-inline.h"
 #include "cong-editor-line-fragments.h"
 
-#define DEBUG_LINE_FLOWS 0
+#define DEBUG_LINE_FLOWS 1
 
 
 #define PRIVATE(x) ((x)->private)
@@ -169,6 +169,8 @@ cong_editor_area_flow_holder_inlines_get_current_indent (CongEditorAreaFlowHolde
 void
 cong_editor_area_flow_holder_inlines_destroy_lines (CongEditorAreaFlowHolderInlines *area_flow_holder_inlines)
 {
+	g_return_if_fail (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area_flow_holder_inlines));
+
 	cong_editor_area_remove_all_children ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_flow_holder_inlines)->line_composer));
 	PRIVATE(area_flow_holder_inlines)->last_line = NULL;
 }
@@ -204,6 +206,8 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
 	g_message ("cong_editor_area_flow_holder_inlines_reflow_required");
 #endif
 
+	g_return_if_fail (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(area_flow_holder_inlines));
+
 	/* Destroy all child areas (the lines); this ought to destroy all of their children */
 	cong_editor_area_flow_holder_inlines_destroy_lines (area_flow_holder_inlines);
 
@@ -217,6 +221,9 @@ cong_editor_area_flow_holder_inlines_reflow_required (CongEditorAreaFlowHolderIn
 #if DEBUG_LINE_FLOWS
 			g_message("generate_line_areas for %s", G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(editor_node_iter)));
 #endif
+
+			g_assert(CONG_FLOW_TYPE_INLINE == cong_editor_node_get_flow_type(editor_node_iter));
+
 			line_fragments = cong_editor_node_generate_line_areas_recursive (editor_node_iter,
 											 cong_editor_area_flow_holder_inlines_get_line_width (area_flow_holder_inlines),
 											 cong_editor_area_flow_holder_inlines_get_current_indent (area_flow_holder_inlines));
@@ -506,8 +513,9 @@ add_line_fragments (CongEditorAreaFlowHolderInlines *inlines,
 		    CongEditorLineFragments *line_fragments)
 {
 	GList* iter;
-	g_assert (inlines);
-	g_assert (line_fragments);
+
+	g_assert (IS_CONG_EDITOR_AREA_FLOW_HOLDER_INLINES(inlines));
+	g_assert (IS_CONG_EDITOR_LINE_FRAGMENTS(line_fragments));
 
 	for (iter = cong_editor_line_fragments_get_area_list (line_fragments); iter; iter=iter->next) {
 		CongEditorArea *area_fragment = CONG_EDITOR_AREA(iter->data);
