@@ -39,6 +39,7 @@
 #include "cong-command.h"
 #include "cong-traversal-node.h"
 #include "cong-ui-hooks.h"
+#include "cong-util.h"
 
 enum FragmentState {
 	FRAG_NORMAL,
@@ -61,7 +62,10 @@ add_attrs_for_state (PangoAttrList *attr_list,
 		     guint start_index,
 		     guint end_index,
 		     enum FragmentState state);
-
+static void
+add_attrs_for_error (PangoAttrList *attr_list,
+		     guint start_index,
+		     guint end_index);
 
 #define PRIVATE(x) ((x)->private)
 
@@ -1175,6 +1179,29 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				add_attrs_for_state (attr_list, 0, strlen(text), FRAG_NORMAL);
 			}
 		}		
+
+		/* Spellcheck hack: */
+		{
+			if (TRUE) {
+				PangoLanguage *language;
+				GList *list_of_words;
+				GList *iter;
+
+				language = cong_document_get_language_for_node (cong_editor_node_get_document (CONG_EDITOR_NODE (editor_node_text)), 
+										this_node);
+
+				list_of_words = cong_util_get_words (language,
+								     this_node->content);
+				for (iter = list_of_words; iter; iter=iter->next) {
+					CongWord *word = (CongWord*)iter->data;
+
+					/* FIXME: actually spellcheck the words, and only highlight the ones that are errors: */
+					add_attrs_for_error (attr_list,
+							     word->start_byte_offset,
+							     word->start_byte_offset+word->length_in_bytes);
+				}
+			}
+		}
 	}
 #else
 	/* Big hack: */
@@ -1185,8 +1212,13 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 	}
 #endif
 
+
 	return attr_list;
 }
+
+
+
+	   
 
 #if 0
 gboolean
@@ -1616,6 +1648,22 @@ add_attrs_for_state (PangoAttrList *attr_list,
 		pango_attr_list_insert (attr_list,
 					make_pango_attr_background (start_index, end_index, state));
 	}
+}
+
+static void
+add_attrs_for_error (PangoAttrList *attr_list,
+		     guint start_index,
+		     guint end_index)
+{
+	if (start_index!=end_index) {
+		PangoAttribute *attr;
+		
+		attr = pango_attr_underline_new (PANGO_UNDERLINE_ERROR);
+		attr->start_index = start_index;
+		attr->end_index = end_index;
+		
+		pango_attr_list_insert (attr_list, attr);
+	}	
 }
 
 static void
