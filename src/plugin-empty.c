@@ -5,7 +5,7 @@
  *
  * Empty plugin, for use as a template
  *
- * Copyright (C) 2003 David Malcolm
+ * Copyright (C) 2004 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -30,19 +30,21 @@
 #include "cong-fake-plugin-hooks.h"
 
  /* would be exposed as "plugin_register"? */
-gboolean plugin_empty_plugin_register(CongPlugin *plugin)
+gboolean 
+plugin_empty_plugin_register (CongPlugin *plugin)
 {
-	g_return_val_if_fail(plugin, FALSE);
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), FALSE);
 
-	/* Register your service here */
+	/* Register your services here: */
 	
 	return TRUE;
 }
 
 /* exposed as "plugin_configure"? legitimate for it not to be present */
-gboolean plugin_empty_plugin_configure(CongPlugin *plugin)
+gboolean 
+plugin_empty_plugin_configure (CongPlugin *plugin)
 {
-	g_return_val_if_fail(plugin, FALSE);
+	g_return_val_if_fail (IS_CONG_PLUGIN (plugin), FALSE);
 
 	return TRUE;
 }
