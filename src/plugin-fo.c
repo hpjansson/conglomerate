@@ -34,6 +34,8 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#define FO_NS_URI ("http://www.w3.org/1999/XSL/Format")
+
 static gboolean is_fo(CongDocument *doc) 
 {
 	CongNodePtr root;
@@ -42,13 +44,8 @@ static gboolean is_fo(CongDocument *doc)
 
 	root = cong_document_get_root(doc);
 
-	/* FIXME: do this via URI */
-	if (cong_node_get_ns_prefix (root)) {
-		if (0==strcmp(cong_node_get_ns_prefix (root), "fo")) {
-			if (0==strcmp(cong_node_get_local_name(root), "root")) {
-				return TRUE;
-			}
-		}
+	if (cong_node_is_element (root, FO_NS_URI, "root")) {
+		return TRUE;
 	}
 
 	return FALSE;

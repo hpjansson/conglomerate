@@ -1,5 +1,9 @@
 2004-02-07  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* plugin-fo.c
+
+	Use namespace URI rather than looking for fo prefix when determining if a document is an XSL-FO file.
+
 	* cong-document.c, plugin-dtd.c
 
 	Sorted out namespaces in the DTD->RELAX NG importer
