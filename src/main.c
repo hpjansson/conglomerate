@@ -296,6 +296,8 @@ void open_transformed_window_for_doc(xmlDocPtr doc)
 	g_assert(cong_doc);
 
 	cong_primary_window_new(cong_doc);
+
+	cong_document_unref(cong_doc);
 }
 
 

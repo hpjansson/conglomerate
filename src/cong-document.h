@@ -31,12 +31,16 @@ G_BEGIN_DECLS
    CongDocument functions
  */
 
-/* takes ownership of xml_doc */
+/* takes ownership of xml_doc; the new CongDocument is created with a reference count of 1; any views constructed of the document will increment its reference count */
 CongDocument*
 cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url);
 
+/* FIXME: eventually this will be a GObject, and the ref/unref functions will be redundant: */
 void
-cong_document_delete(CongDocument *doc);
+cong_document_ref(CongDocument *doc);
+
+void
+cong_document_unref(CongDocument *doc);
 
 xmlDocPtr
 cong_document_get_xml(CongDocument *doc);
@@ -88,7 +92,7 @@ void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
 void cong_document_on_selection_change(CongDocument *doc);
 void cong_document_on_cursor_change(CongDocument *doc);
 
-
+/* These functions internally ref and unref the document:, as well as adding the view to the doc's list */
 void cong_document_register_view(CongDocument *doc, CongView *view);
 void cong_document_unregister_view(CongDocument *doc, CongView *view);
 

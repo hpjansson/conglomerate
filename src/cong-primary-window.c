@@ -739,6 +739,13 @@ static void menu_callback_paste(gpointer callback_data,
 	dispatch_document_command2(cong_document_paste, callback_data, widget);
 }
 
+static void menu_callback_view_source(gpointer callback_data,
+				guint callback_action,
+				GtkWidget *widget)
+{
+	dispatch_document_command(cong_document_view_source, callback_data);
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -801,6 +808,8 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/Edit/R_eplace..."),      "<control>R", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
+	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/Edit/View _Source"),     NULL, menu_callback_view_source, 0, NULL },
 
 	{ N_("/Tests"),                 NULL, NULL, 0, "<Branch>" },
 	{ N_("/Tests/Open..."),         NULL, test_open_wrap, 0, NULL },
@@ -1026,6 +1035,8 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 	CongPrimaryWindow *primary_window = g_new0(CongPrimaryWindow, 1);
 
 	primary_window->doc = doc;
+	cong_document_ref(doc);
+
 	primary_window->cong_tree_view = cong_tree_view_new(doc);
 #if USE_CONG_EDITOR_WIDGET
 #if 0
@@ -1048,7 +1059,7 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 
 	the_globals.primary_windows = g_list_prepend(the_globals.primary_windows, primary_window);
 
-	cong_document_set_primary_window(doc, primary_window);
+	cong_document_set_primary_window(doc, primary_window);	
 
 	return primary_window;
 	
@@ -1062,7 +1073,7 @@ void cong_primary_window_free(CongPrimaryWindow *primary_window)
 #if !USE_CONG_EDITOR_WIDGET
 	cong_editor_view_free(primary_window->cong_editor_view);
 #endif
-	cong_document_delete(primary_window->doc);
+	cong_document_unref(primary_window->doc);
 
 	the_globals.primary_windows = g_list_remove(the_globals.primary_windows, primary_window);	
 

@@ -49,6 +49,7 @@ conge_SOURCES =             \
   cong-plugin.c             \
   cong-primary-window.c     \
   cong-section-head-editor.c \
+  cong-source-view.c        \
   cong-span-text-editor.c   \
   cong-test-view.c          \
   cong-tree-view.c          \

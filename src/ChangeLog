@@ -1,4 +1,13 @@
 creating ChangeLog
+2003-03-14 David Malcolm
+	
+	* Makefile.am, cong-document.c, cong-document.h, cong-plugin.c, cong-primary-window.c, cong-test-view.c, global.h, main.c, open.c, xmldata.c, xmledit.c, cong-source-view.c
+	Documents are now reference-counted, support for new source view, cong_node methods are now labelled as private
+	
+	* cong-source-view.c
+
+	New file: "source" view
+	
 2003-03-05 David Malcolm
 
 	* global.h, tree.c, xmldata.c

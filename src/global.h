@@ -128,14 +128,15 @@ CongNodePtr cong_node_new_text_len(const char *text, int len); /* FIXME: what ch
 void cong_node_free(CongNodePtr node);
 
 /* 
-   Direct tree manipulation; these functions are deprecated in favour of the cong_document_ versions below, which, in turn,
-   will get converted to an apporach involving atomic and compound modification objects, which will give us Undo/Redo
+   Direct tree manipulation; these functions are "private" and should only be called by the cong_document_ versions below, which send notifications
+   to views of the document.
+   (Eventually we will deprecate those as well and convert to an apporach involving atomic and compound modification objects, which will give us Undo/Redo)
 */
-void cong_node_make_orphan(CongNodePtr node);
-void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling);
-void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling);
-void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-void cong_node_set_text(CongNodePtr node, const xmlChar *new_content);
+void cong_node_private_make_orphan(CongNodePtr node);
+void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling);
+void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling);
+void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content);
 
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
@@ -493,7 +494,6 @@ struct CongFont
 	
 };
 
-
 CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
 void cong_primary_window_free(CongPrimaryWindow *primary_window);
 CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window);
@@ -507,6 +507,9 @@ GtkTreeStore* cong_tree_view_get_tree_store(CongTreeView *tree_view);
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
+
+GtkWidget *cong_test_view_new(CongDocument *doc);
+GtkWidget *cong_source_view_new(CongDocument *doc);
 
 CongFont*
 cong_font_load(const gchar *font_name);
@@ -552,6 +555,7 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 void cong_document_cut(CongDocument *doc);
 void cong_document_copy(CongDocument *doc);
 void cong_document_paste(CongDocument *doc, GtkWidget *widget);
+void cong_document_view_source(CongDocument *doc);
 
 #if 0
 gint insert_meta_hook(GtkWidget *w, struct CongSpanEditor *xed);

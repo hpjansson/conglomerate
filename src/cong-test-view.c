@@ -86,7 +86,7 @@ static gboolean get_iter_for_node(CongTestViewDetails *details, CongNodePtr node
 	return search.found_it;
 }
 
-gchar* cleanup_text(xmlChar *text) {
+static gchar* cleanup_text(xmlChar *text) {
 	gchar *buffer = g_malloc((strlen(text)*3)+1); /* for safety's sake */
 	gchar *dst = buffer;
 
@@ -115,7 +115,7 @@ gchar* cleanup_text(xmlChar *text) {
 	return buffer;
 }
 
-void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr node, GtkTreeIter* tree_iter)
+static void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr node, GtkTreeIter* tree_iter)
 {
 	CongNodePtr node_iter;
 	gchar *text = NULL;

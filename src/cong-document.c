@@ -7,10 +7,10 @@
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
 
-GtkWidget *cong_test_view_new(CongDocument *doc);
-
 struct CongDocument
 {
+	int ref_count;
+
 	xmlDocPtr xml_doc;
 
 	CongDispspec *ds;
@@ -41,6 +41,7 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 
 	doc = g_new0(struct CongDocument,1);
 
+	doc->ref_count=1; /* created with an initial ref_count of 1, with all this implies */
 	doc->xml_doc = xml_doc;
 	doc->ds = ds;
 	doc->url = g_strdup(url);
@@ -72,6 +73,7 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 						      test_editor_view);
 
 		gtk_container_add(GTK_CONTAINER(window), scroller);
+
 		gtk_widget_show_all(GTK_WIDGET(window));		
 	}
 	#endif
@@ -99,25 +101,32 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 }
 
 void
-cong_document_delete(CongDocument *doc)
+cong_document_ref(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
-#if !TEST_VIEW
-#if !TEST_EDITOR_VIEW
-	g_assert(doc->views == NULL); /* There must not be any views left referencing this document */
-#endif
-#endif
+	doc->ref_count++;
+}
 
-	cong_cursor_uninit(&doc->curs);
 
-	xmlFreeDoc(doc->xml_doc);
+void
+cong_document_unref(CongDocument *doc)
+{
+	g_return_if_fail(doc);
 
-	if (doc->url) {
-		g_free(doc->url);
-	}
+	if ((--doc->ref_count)==0) {
+		g_assert(doc->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */
+
+		cong_cursor_uninit(&doc->curs);
 	
-	g_free(doc);
+		xmlFreeDoc(doc->xml_doc);
+
+		if (doc->url) {
+			g_free(doc->url);
+		}
+	
+		g_free(doc);
+	}
 }
 
 xmlDocPtr
@@ -405,7 +414,7 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 	}
 
 	/* Make the change: */
-	cong_node_make_orphan(node);
+	cong_node_private_make_orphan(node);
 
 	if (doc) {
 		/* Notify listeners: */
@@ -443,7 +452,7 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 	}
 
 	/* Make the change: */
-	cong_node_add_after(node, older_sibling);
+	cong_node_private_add_after(node, older_sibling);
 
 	/* Notify listeners: */
 	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
@@ -478,7 +487,7 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 	}
 
 	/* Make the change: */
-	cong_node_add_before(node, younger_sibling);
+	cong_node_private_add_before(node, younger_sibling);
 
 	/* Notify listeners: */
 	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
@@ -513,7 +522,7 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 	}
 
 	/* Make the change: */
-	cong_node_set_parent(node, adoptive_parent);
+	cong_node_private_set_parent(node, adoptive_parent);
 
 	/* Notify listeners: */
 	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
@@ -549,7 +558,7 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	}
 
 	/* Make the change: */
-	cong_node_set_text(node, new_content);
+	cong_node_private_set_text(node, new_content);
 
 	/* Notify listeners: */
 	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
@@ -623,6 +632,7 @@ void cong_document_register_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(view);
 
 	doc->views = g_list_prepend(doc->views, view);
+	cong_document_ref(doc);
 }
 
 void cong_document_unregister_view(CongDocument *doc, CongView *view)
@@ -631,6 +641,7 @@ void cong_document_unregister_view(CongDocument *doc, CongView *view)
 	g_return_if_fail(view);
 
 	doc->views = g_list_remove(doc->views, view); 
+	cong_document_unref(doc);
 }
 
 

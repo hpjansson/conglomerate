@@ -263,7 +263,7 @@ CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 }
 
 /* Tree manipulation: */
-void cong_node_make_orphan(CongNodePtr node)
+void cong_node_private_make_orphan(CongNodePtr node)
 {
 	CongNodePtr former_parent;
 	CongNodePtr former_prev;
@@ -346,7 +346,7 @@ void cong_node_make_orphan(CongNodePtr node)
 	}
 }
 
-void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
+void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 {
 	g_return_if_fail(node);
 	g_return_if_fail(older_sibling);
@@ -356,7 +356,7 @@ void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
 	CONG_NODE_SELF_TEST(node);
 	CONG_NODE_SELF_TEST(older_sibling);
 
-	cong_node_make_orphan(node);
+	cong_node_private_make_orphan(node);
 #if 1
 	node->parent = older_sibling->parent;
 	node->prev = older_sibling;
@@ -397,7 +397,7 @@ void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
 
 }
 
-void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
+void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 {
 	g_return_if_fail(node);
 	g_return_if_fail(younger_sibling);
@@ -407,7 +407,7 @@ void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 	CONG_NODE_SELF_TEST(node);
 	CONG_NODE_SELF_TEST(younger_sibling);
 
-	cong_node_make_orphan(node);
+	cong_node_private_make_orphan(node);
 
 #if 1
 	node->parent = younger_sibling->parent;
@@ -449,7 +449,7 @@ void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 
 }
 
-void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
+void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	g_return_if_fail(node);
 	g_return_if_fail(adoptive_parent);
@@ -458,11 +458,11 @@ void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 	CONG_NODE_SELF_TEST(node);
 	CONG_NODE_SELF_TEST(adoptive_parent);
 
-	cong_node_make_orphan(node);
+	cong_node_private_make_orphan(node);
 
 #if 1
 	if (adoptive_parent->last) {
-		cong_node_add_after(node, adoptive_parent->last);
+		cong_node_private_add_after(node, adoptive_parent->last);
 	} else {
 		g_assert(adoptive_parent->children == NULL);
 
@@ -486,7 +486,7 @@ void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 
 }
 
-void cong_node_set_text(CongNodePtr node, const xmlChar *new_content)
+void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 {
 	g_return_if_fail(node);
 	g_return_if_fail(new_content);
