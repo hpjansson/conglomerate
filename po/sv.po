@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
-"POT-Creation-Date: 2003-09-28 02:39+0200\n"
-"PO-Revision-Date: 2003-09-28 02:41+0200\n"
+"POT-Creation-Date: 2003-09-28 13:20+0200\n"
+"PO-Revision-Date: 2003-09-28 13:22+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -383,6 +383,8 @@ msgid ""
 "Try loading a file from a different location.  If you think that you ought "
 "to be able to read this file, contact your system administrator."
 msgstr ""
+"Försök att läsa in en fil från en annan plats. Om du tror att du borde kunna "
+"läsa denna fil bör du kontakta din systemadministratör."
 
 #: src/cong-error-file-open.c:264
 msgid "There were problems reading the content of the file."
@@ -464,7 +466,7 @@ msgstr "Servern kunde inte kontaktas."
 
 #: src/cong-error-file-open.c:355
 msgid "Try again.  If it fails again, the server may be down."
-msgstr ""
+msgstr "Försök igen. Om det misslyckas igen kan servern vara nere."
 
 #: src/cong-error-file-open.c:364 src/cong-error-file-open.c:373
 msgid ""
@@ -474,26 +476,27 @@ msgstr ""
 
 #: src/cong-error-file-open.c:381 src/cong-error-file-save.c:316
 msgid "The system could not login to the location."
-msgstr ""
+msgstr "Systemet kunde inte logga in till platsen."
 
 #: src/cong-error-file-open.c:382 src/cong-error-file-open.c:392
 msgid "Try again. If it fails again, contact your system administrator."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du kontakta din systemadministratör."
 
 #: src/cong-error-file-open.c:391 src/cong-error-file-save.c:325
 msgid "The location was too busy."
-msgstr ""
+msgstr "Platsen var för upptagen."
 
 #: src/cong-error-file-open.c:430
 #, c-format
 msgid "The error \"%s\" was reported whilst accessing \"%s\""
-msgstr ""
+msgstr "Felet \"%s\" rapporterades vid åtkomst av \"%s\""
 
 #: src/cong-error-file-open.c:436
 msgid ""
 "The program unexpectedly received an error report from the GNOME Virtual "
 "Filing System."
-msgstr ""
+msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
 #: src/cong-error-file-save.c:48
@@ -533,18 +536,21 @@ msgstr "Det förekom problem vid skrivandet av innehåll för den filen."
 #: src/cong-error-file-save.c:122
 msgid "Try again.  If it fails again, try saving to a different location."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du prova att spara på en annan plats."
 
 #: src/cong-error-file-save.c:151
 #, c-format
 msgid ""
 "The size of the file would be %s, but the device only has a capacity of %s."
 msgstr ""
+"Storleken på filen skulle bli %s, men enheten har endast kapacitet för %s."
 
 #. Can't get at the capacity for the device or "volume":
 #: src/cong-error-file-save.c:157
 #, c-format
 msgid "The file is too big to fit on the device (file size would be %s)."
 msgstr ""
+"Filen är för stor för att rymmas på enheten (filstorleken skulle bli %s)."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:165
@@ -569,17 +575,21 @@ msgid ""
 "The file is too big to fit in the remaining space on the device (file size "
 "would be %s)."
 msgstr ""
+"Filen är för stor för att rymmas i återstående utrymme på enheten "
+"(filstorleken skulle bli %s)."
 
 #. We don't know the size of the file:
 #: src/cong-error-file-save.c:209
 msgid "The file is too big to fit in the remaining space on the device."
-msgstr ""
+msgstr "Filen är för stor för att rymmas i återstående utrymme på enheten."
 
 #: src/cong-error-file-save.c:218
 msgid ""
 "Try saving the file to a different location, or making more space by moving "
 "unwanted files from that device to the trash."
 msgstr ""
+"Försök spara filen på en annan plats, eller skapa mer utrymme genom att "
+"flytta oönskade filer från den enheten till papperskorgen."
 
 #: src/cong-error-file-save.c:239
 msgid ""
@@ -591,31 +601,37 @@ msgstr ""
 
 #: src/cong-error-file-save.c:253
 msgid "You do not have permission to write to that location."
-msgstr ""
+msgstr "Du har inte rättigheter att skriva till den platsen."
 
 #: src/cong-error-file-save.c:254
 msgid ""
 "Try saving to a different location, or ask your system administrator to give "
 "you permission."
 msgstr ""
+"Försök spara på en annan plats eller be din systemadministratör att ge dig "
+"rättigheter."
 
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:268
 #, c-format
 msgid "\"%s\" is a directory."
-msgstr ""
+msgstr "\"%s\" är en katalog."
 
 #: src/cong-error-file-save.c:272
 msgid ""
 "You must save to a file within a directory, rather than to the directory "
 "itself."
 msgstr ""
+"Du måste spara till en fil inuti en katalog, istället för till själva "
+"katalogen."
 
 #: src/cong-error-file-save.c:290
 msgid ""
 "Try again.  If it fails again, the server may be down; try saving to another "
 "location."
 msgstr ""
+"Försök igen. Om det mislyckas igen kan servern vara nere. Försök spara till "
+"en annan plats."
 
 #: src/cong-error-file-save.c:299 src/cong-error-file-save.c:308
 msgid ""
@@ -627,22 +643,23 @@ msgstr ""
 #: src/cong-error-file-save.c:317 src/cong-error-file-save.c:326
 msgid "Try again. If it fails again, try saving to another location."
 msgstr ""
+"Försök igen. Om det misslyckas igen bör du försöka spara till en annan plats."
 
 #. FIXME: need some thought about the messages for this
 #: src/cong-error-file-save.c:333
 #, c-format
 msgid "The location \"%s\" only allows files to be read, not written."
-msgstr ""
+msgstr "Platsen \"%s\" tillåter endast att filer läses, inte att de skrivs."
 
 #. FIXME: need to think more about these messages
 #: src/cong-error-file-save.c:345
 #, c-format
 msgid "The name \"%s\" is too long for the location to manage."
-msgstr ""
+msgstr "Namnet \"%s\" är för långt för att platsen ska kunna hantera det."
 
 #: src/cong-error-file-save.c:349
 msgid "Try again with a shorter file name."
-msgstr ""
+msgstr "Försök igen med ett kortare filnamn."
 
 #. 5 megabytes, for a test
 #: src/cong-error-tests.c:17
@@ -658,15 +675,15 @@ msgstr ""
 #: src/cong-error-tests.c:29
 #, c-format
 msgid "Testing generic failure of \"%s\" with result %s"
-msgstr ""
+msgstr "Testar allmänt fel \"%s\" med resultatet %s"
 
 #: src/cong-error-tests.c:32
 msgid "Conglomerate is simulating the failure of a generic file operation."
-msgstr ""
+msgstr "Conglomerate simulerar misslyckandet av en allmän filåtgärd."
 
 #: src/cong-error-tests.c:35
 msgid "This dialog was generated by the automated testing routine"
-msgstr ""
+msgstr "Detta dialogfönster genererades av den automatiserade testrutinen"
 
 #: src/cong-file-export.c:159
 msgid "<small>(No description available)</small>"
@@ -952,12 +969,12 @@ msgstr "Dokumenttyper"
 
 #: src/cong-menus.c:477
 msgid "Conglomerate cannot open the result of the transformation"
-msgstr ""
+msgstr "Conglomerate kan inte öppna resultatet av transformeringen"
 
 #: src/cong-menus.c:535 src/cong-plugin.c:1018
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
-msgstr ""
+msgstr "Ett fel inträffade vid läsning av stilmallsfilen \"%s\""
 
 #: src/cong-menus.c:538 src/cong-menus.c:562 src/cong-plugin.c:1021
 #: src/cong-plugin.c:1045
@@ -970,7 +987,7 @@ msgstr "Ett fel inträffade vid tillämpning av stilmallsfilen"
 
 #: src/cong-menus.c:1012
 msgid "Test Progress Checklist"
-msgstr ""
+msgstr "Testa förloppskontrollista"
 
 #: src/cong-menus.c:1016
 #, c-format
@@ -1116,7 +1133,7 @@ msgstr "/Redigera/_Infoga..."
 
 #: src/cong-menus.c:1251
 msgid "/Edit/View _Source"
-msgstr ""
+msgstr "/Redigera/Visa _källa"
 
 #: src/cong-menus.c:1254 src/cong-menus.c:1296
 msgid "/Debug"
@@ -1128,7 +1145,7 @@ msgstr ""
 
 #: src/cong-menus.c:1256 src/cong-menus.c:1298
 msgid "/Debug/Document Types"
-msgstr ""
+msgstr "/Felsök/Dokumenttyper"
 
 #: src/cong-menus.c:1257
 msgid "/Debug/Transform DocBook to HTML"
@@ -1797,6 +1814,11 @@ msgstr "Nödvändiga barnval"
 #: src/xmledit.c:436
 msgid "Source View - Conglomerate"
 msgstr "Källkodsvy - Conglomerate"
+
+#~ msgid ""
+#~ "The program unexpectedly received an error report from the GNOME Virtual "
+#~ "File System."
+#~ msgstr "Programmet fick oväntat en felrapport från GNOME-VFS."
 
 #~ msgid "Creating a new file..."
 #~ msgstr "Skapar en ny fil..."
