@@ -1,5 +1,8 @@
 2004-06-03  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-primary-window.c (add_standard_layout_for_doc): New function, factoring
+	out the bulk of cong_primary_window_add_doc
+
 	* cong-menus.c (cong_menus_create_items): Setup sensitivity of printing menu
 	options appropriately
 

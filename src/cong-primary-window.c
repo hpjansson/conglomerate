@@ -610,6 +610,83 @@ destroy( GtkWidget *widget,
 	}
 }
 
+static void
+add_standard_layout_for_doc (CongPrimaryWindow *primary_window, 
+			     CongDocument *doc)
+{
+	GtkWidget *w1 = NULL, *w2 = NULL;
+	GtkWidget *sidebar_notebook = NULL;
+
+	/* --- Main window -> hpane --- */
+	w1 = gtk_hpaned_new();
+	gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
+	gtk_widget_show(w1);
+	
+	/* --- Notebook to appear in the sidebar: --- */
+	sidebar_notebook = gtk_notebook_new();
+	gtk_widget_show(sidebar_notebook);
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
+	
+	gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
+	
+	/* --- Tree view --- */
+	LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
+	
+	w2 = gtk_scrolled_window_new(NULL, NULL);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
+				       GTK_POLICY_AUTOMATIC);
+	gtk_widget_set_size_request(GTK_WIDGET(w2), 100, 0);
+	gtk_widget_show(w2);
+	
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 w2,
+				 gtk_label_new(_("Overview"))
+				 );
+	
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
+					      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
+	
+	/* --- Bookmark view --- */
+#if 0
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 cong_bookmark_view_new(primary_window->doc),
+				 gtk_label_new(_("Bookmarks"))
+				 );
+	
+#endif
+	
+	/* --- Raw XML view --- */
+	LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
+	gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+				 cong_dom_view_new(primary_window->doc),
+				 gtk_label_new(_("Raw XML"))
+				 );
+	
+		/* Set up the editor_widget v3: */
+#if ENABLE_MAIN_WIDGET
+	{
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
+		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
+		
+		/* --- Scrolling area for editor widget 3--- */
+		primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
+		
+		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+						GTK_POLICY_AUTOMATIC,
+						GTK_POLICY_ALWAYS);
+		
+		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+						       GTK_WIDGET(primary_window->cong_editor_widget3));
+		gtk_widget_show (primary_window->cong_editor_widget3);
+		gtk_widget_show(primary_window->scroller3);
+		
+		gtk_paned_add2 (GTK_PANED(w1), 
+				primary_window->scroller3);
+	}
+#endif
+	
+}
+
 /**
  * cong_primary_window_add_doc:
  * @primary_window:
@@ -620,9 +697,6 @@ destroy( GtkWidget *widget,
 void
 cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc)
 {
-/* Not sure if these doc != NULL tests area still needed here */
-	GtkWidget *w1 = NULL, *w2 = NULL;
-	GtkWidget *sidebar_notebook = NULL;
 	GdkColor gcol;
 	GtkStyle *style;
 	int i;
@@ -635,73 +709,8 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
 
-		/* --- Main window -> hpane --- */
-		w1 = gtk_hpaned_new();
-		gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
-		gtk_widget_show(w1);
-		
-		/* --- Notebook to appear in the sidebar: --- */
-		sidebar_notebook = gtk_notebook_new();
-		gtk_widget_show(sidebar_notebook);
-		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
-
-		gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
-
-		/* --- Tree view --- */
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
-		
-		w2 = gtk_scrolled_window_new(NULL, NULL);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_AUTOMATIC);
-		gtk_widget_set_size_request(GTK_WIDGET(w2), 100, 0);
-		gtk_widget_show(w2);
-
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 w2,
-					 gtk_label_new(_("Overview"))
-					 );
-
-		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-						      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
-		
-		/* --- Bookmark view --- */
-#if 0
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 cong_bookmark_view_new(primary_window->doc),
-					 gtk_label_new(_("Bookmarks"))
-					 );
-
-#endif
-	
-		/* --- Raw XML view --- */
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 cong_dom_view_new(primary_window->doc),
-					 gtk_label_new(_("Raw XML"))
-					 );
-		
-		/* Set up the editor_widget v3: */
-#if ENABLE_MAIN_WIDGET
-		{
-			LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
-			primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
-
-			/* --- Scrolling area for editor widget 3--- */
-			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
-			
-			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
-							GTK_POLICY_AUTOMATIC,
-							GTK_POLICY_ALWAYS);
-			
-			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
-							       GTK_WIDGET(primary_window->cong_editor_widget3));
-			gtk_widget_show (primary_window->cong_editor_widget3);
-			gtk_widget_show(primary_window->scroller3);
-
-			gtk_paned_add2 (GTK_PANED(w1), 
-					primary_window->scroller3);
-		}
-#endif
+		add_standard_layout_for_doc (primary_window, 
+					     doc);
 
 		/* TEMPORARY: Set white background */
 		
