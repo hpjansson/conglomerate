@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <dispspec>
 
+	<metadata>
+		<name>Experimental "readme" format</name>
+		<description>This is a document type associated with the "readme" file distributed with the initial prototype of Conglomerate.</description>
+	</metadata>
+
 	<element-list>
 		<element tag="document" type="structural" color="a0b0c0">
 			<name locale="en">Document</name>

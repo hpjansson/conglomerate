@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <!-- Experimental XML-based DispSpec for DocBook -->
 <dispspec>
+
+	<metadata>
+		<name>DocBook</name>
+		<description>DocBook is a document type that broadly corresponds to what most people think of as "a book"; it is well-suited for writing books and articles, for both print and web-based publication.</description>
+	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
 

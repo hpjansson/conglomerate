@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-08-26  David Malcolm
+
+	* docbook.xds, readme.xds
+
+	Added "metadata" tags to the files
+	
 2002-08-23  David Malcolm
 
 	* error-proposal.xml
