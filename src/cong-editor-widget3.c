@@ -777,21 +777,13 @@ cong_editor_widget3_dispose (GObject *object)
 	GNOME_CALL_PARENT (G_OBJECT_CLASS, dispose, (object));
 }
 
-/* IM Context Callbacks
- */
-static void     
-commit_cb (GtkIMContext *context,
-	   const gchar  *str,
-	   CongEditorWidget3     *editor_widget)
+static void
+add_typing_command (CongDocument *doc,
+		    const gchar *str)
 {
 	CongCommand *cmd;
-	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
 	CongCursor *cursor = cong_document_get_cursor (doc);
 	CongSelection *selection = cong_document_get_selection  (doc);
-
-#if DEBUG_IM_CONTEXT
-	g_message ("commit_cb: \"%s\"", str);
-#endif
 
 	cmd = cong_document_begin_command (doc, 
 					   _("Typing"),
@@ -811,6 +803,23 @@ commit_cb (GtkIMContext *context,
 	
 	cong_document_end_command (doc,
 				   cmd);
+}
+
+/* IM Context Callbacks
+ */
+static void     
+commit_cb (GtkIMContext *context,
+	   const gchar  *str,
+	   CongEditorWidget3     *editor_widget)
+{
+	CongDocument *doc = cong_editor_widget3_get_document (editor_widget);
+
+#if DEBUG_IM_CONTEXT
+	g_message ("commit_cb: \"%s\"", str);
+#endif
+
+	add_typing_command (doc, str);
+
 
 }
 
@@ -1274,7 +1283,29 @@ key_press_event_handler (GtkWidget *w,
 
 	case GDK_ISO_Enter:
 	case GDK_Return:
-		cong_cursor_paragraph_insert(cursor);
+		{
+			if  (cong_location_exists(&cursor->location)) {
+				if (cong_location_node_type(&cursor->location) == CONG_NODE_TYPE_TEXT) {
+					CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node(doc, cursor->location.node->parent);
+
+					if (ds_element) {
+						switch (cong_dispspec_element_get_whitespace (ds_element)) {
+						default: g_assert_not_reached ();
+						case CONG_WHITESPACE_NORMALIZE:
+							cong_cursor_paragraph_insert (cursor);
+							break;
+							
+						case CONG_WHITESPACE_PRESERVE:
+							add_typing_command (doc,
+									    "\n");
+							break;
+						}
+					} else {
+						cong_cursor_paragraph_insert (cursor);
+					}
+				}			
+			}
+		}
 		break;
 
 	case GDK_Tab:

@@ -1,5 +1,9 @@
 2003-12-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-widget3.c
+
+	Fix for bug #123490 (Carriage return should add a carriage return if whitespace is being preserved)
+
 	* cong-editor-node-text.c
 
 	Added some assertions
