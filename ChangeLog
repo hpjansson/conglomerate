@@ -1,5 +1,9 @@
 2003-09-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* README
+
+	Removed all content and replaced with instructions about viewing README.xml
+	
 	* README.xml
 
 	New file:  DocBook XML version of the README information, with (I hope) fully up-to-date content
