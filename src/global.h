@@ -32,8 +32,14 @@ typedef struct _cong_location
 void
 cong_location_set(cong_location *loc, TTREE *tt, int offset);
 
+void
+cong_location_nullify(cong_location *loc);
+
 gboolean
 cong_location_exists(cong_location *loc);
+
+gboolean
+cong_location_equals(const cong_location *loc0, const cong_location *loc1);
 
 int
 cong_location_frag_type(cong_location *loc);
@@ -58,6 +64,12 @@ cong_location_xml_frag_next(cong_location *loc);
 
 TTREE*
 cong_location_node(cong_location *loc);
+
+TTREE*
+cong_location_parent(cong_location *loc);
+
+void
+cong_location_copy(cong_location *dst, const cong_location *src);
 
 
 /* Include these here to help Cygwin a bit */
@@ -182,7 +194,7 @@ struct selection
 
 	int x0, y0, x1, y1;
 
-#if 0
+#if 1
 	cong_location loc0;
 	cong_location loc1;
 #else

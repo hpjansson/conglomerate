@@ -24,7 +24,11 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
 
+#if 1
+	if (the_globals.selection.loc0.tt_loc == the_globals.curs.xed->x)
+#else
 	if (the_globals.selection.t0 == the_globals.curs.xed->x)
+#endif
 	{
 		r = selection_reparent_all(&the_globals.selection, n);
 		if (r) the_globals.curs.xed->x = r;

@@ -18,13 +18,8 @@ void selection_start_from_curs(struct selection* selection, struct curs* curs)
 	selection->x0 = selection->x1 = curs->x;
 	selection->y0 = selection->y1 = curs->y;
 
-#if 1
-	selection->t0 = selection->t1 = curs->location.tt_loc;
-	selection->c0 = selection->c1 = curs->location.char_loc;
-#else
-	selection->t0 = selection->t1 = curs->t;
-	selection->c0 = selection->c1 = curs->c;
-#endif
+	cong_location_copy(&selection->loc0, &curs->location);
+	cong_location_copy(&selection->loc1, &curs->location);
 }
 
 
@@ -35,13 +30,7 @@ void selection_end_from_curs(struct selection* selection, struct curs* curs)
 
 	selection->x1 = curs->x;
 	selection->y1 = curs->y;
-#if 1
-	selection->t1 = curs->location.tt_loc;
-	selection->c1 = curs->location.char_loc;
-#else
-	selection->t1 = curs->t;
-	selection->c1 = curs->c;
-#endif
+	cong_location_copy(&selection->loc1, &curs->location);
 }
 
 
@@ -57,9 +46,8 @@ void selection_draw(struct selection* selection, struct curs* curs)
 	if (!curs->xed) return;
 	
 	/* Determine selection's usefulness code */
-	
-	if (selection->t0 && selection->t1 &&
-			selection->t0->parent == selection->t1->parent)
+	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
+	    cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))
 		gc = selection->gc_0;
 	else
 		gc = selection->gc_3;
@@ -318,63 +306,59 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 
 TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
 {
-	TTREE *t0, *t1, *n0, *n1, *n2;
-	int c0, c1;
+	cong_location loc0, loc1;
+	TTREE *n0, *n1, *n2;
 	UNUSED_VAR(int len)
 	UNUSED_VAR(char *p_data)
 	TTREE *p_node;
 
-  g_assert(selection!=NULL);
+	g_assert(selection!=NULL);
 
 	/* Validate selection */
-
-	if (!(selection->t0 && selection->t1 &&
-				selection->t0->parent == selection->t1->parent))
+	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
+	      cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1)))
 		return(0);
 
 	/* --- Processing for multiple nodes --- */
 
-	if (selection->t0 != selection->t1)
+	if (selection->loc0.tt_loc != selection->loc1.tt_loc)
 	{
 		/* Selection is valid, now order first/last nodes */
 		
-		for (n0 = selection->t0; n0 && n0 != selection->t1; n0 = n0->next) ;
+		for (n0 = selection->loc0.tt_loc; n0 && n0 != selection->loc1.tt_loc; n0 = n0->next) ;
 		
 		if (!n0)
 		{
-			t0 = selection->t1;
-			t1 = selection->t0;
-			c0 = selection->c1;
-			c1 = selection->c0;
+			cong_location_copy(&loc0, &selection->loc1);
+			cong_location_copy(&loc1, &selection->loc0);
 		}
 		else
 		{
-			t0 = selection->t0;
-			t1 = selection->t1;
-			c0 = selection->c0;
-			c1 = selection->c1;
+			cong_location_copy(&loc0, &selection->loc0);
+			cong_location_copy(&loc1, &selection->loc1);
 		}
 
 		/* Split, first */
 	
-		if (c0 && xml_frag_type(t0) == XML_DATA)
+		if (loc0.char_loc && xml_frag_type(loc0.tt_loc) == XML_DATA)
 		{
-			p_node = xml_frag_data_nice_split2(t0, c0);
-			t0 = selection->t0 = p_node->next;
+			p_node = cong_location_xml_frag_data_nice_split2(&loc0);
+			loc0.tt_loc = selection->loc0.tt_loc = p_node->next;
+		} else {
+			p_node = loc0.tt_loc;
 		}
-		else p_node = t0;
 		
-		selection->c0 = 0;
+		selection->loc0.char_loc = 0;
 
-		if (t0->prev) t0->prev->next = p;
-		else if (t0->parent) t0->parent->child = p;
+		if (loc0.tt_loc->prev) loc0.tt_loc->prev->next = p;
+		else if (loc0.tt_loc->parent) loc0.tt_loc->parent->child = p;
 
-		p->prev = t0->prev;
-		p->parent = t0->parent;
+		p->prev = loc0.tt_loc->prev;
+		p->parent = loc0.tt_loc->parent;
 
 		/* Reparent, first & middle */
 
-		for (n0 = t0, n1 = 0; n0 != t1; n0 = n2)
+		for (n0 = loc0.tt_loc, n1 = 0; n0 != loc1.tt_loc; n0 = n2)
 		{
 			n2 = n0->next;
 			
@@ -390,23 +374,23 @@ TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
 
 		/* Split, last */
 
-		if (c1 && xml_frag_type(t1) == XML_DATA)
+		if (loc1.char_loc && xml_frag_type(loc1.tt_loc) == XML_DATA)
 		{
-			t1 = xml_frag_data_nice_split2(t1, c1);
-			selection->t1 = t1->next;
+			loc1.tt_loc = cong_location_xml_frag_data_nice_split2(&loc1);
+			selection->loc1.tt_loc = loc1.tt_loc->next;
 		}
 
-		selection->c1 = 0;
+		selection->loc1.char_loc = 0;
 
 		/* Reparent, last */
 
-		t1->parent = p->child;
-		t1->prev = n1;
-		n1->next = t1;
-		if (t1->next) t1->next->prev = p;
-		p->next = t1->next;
-		t1->next = 0;
-		if (!p->child->child) p->child->child = t1;
+		loc1.tt_loc->parent = p->child;
+		loc1.tt_loc->prev = n1;
+		n1->next = loc1.tt_loc;
+		if (loc1.tt_loc->next) loc1.tt_loc->next->prev = p;
+		p->next = loc1.tt_loc->next;
+		loc1.tt_loc->next = 0;
+		if (!p->child->child) p->child->child = loc1.tt_loc;
 
 #ifndef RELEASE		
 		if (p_node->parent->parent)
@@ -418,56 +402,53 @@ TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
 		return(p_node);
 	}
 
-	/* --- Processing for single node (t0 == t1) --- */
+	/* --- Processing for single node (loc0.tt_loc == loc1.tt_loc) --- */
 
 	else
 	{
-		t0 = selection->t0;
-		t1 = selection->t1;
-
-		if (selection->c0 < selection->c1)
+		if (selection->loc0.char_loc < selection->loc1.char_loc)
 		{
-			c0 = selection->c0;
-			c1 = selection->c1;
+			cong_location_copy(&loc0,&selection->loc0);
+			cong_location_copy(&loc1,&selection->loc1);
 		}
 		else
 		{
-			c0 = selection->c1;
-			c1 = selection->c0;
+			cong_location_copy(&loc0,&selection->loc1);
+			cong_location_copy(&loc1,&selection->loc0);
 		}
 
-		if (xml_frag_type(t0) == XML_DATA)
+		if (xml_frag_type(loc0.tt_loc) == XML_DATA)
 		{
-			if (c0 == c1) return(0); /* The end is the beginning is the end */
+			if (loc0.char_loc == loc1.char_loc) return(0); /* The end is the beginning is the end */
 			
-			t0 = t1 = xml_frag_data_nice_split3(t0, c0, c1);
-			selection->t0 = t0;
-			selection->t1 = t0->next;
+			loc0.tt_loc = loc1.tt_loc = xml_frag_data_nice_split3(loc0.tt_loc, loc0.char_loc, loc1.char_loc);
+			selection->loc0.tt_loc = loc0.tt_loc;
+			selection->loc1.tt_loc = loc0.tt_loc->next;
 		}
 
-		selection->c0 = 0;
-		selection->c1 = 0;
+		selection->loc0.char_loc = 0;
+		selection->loc1.char_loc = 0;
 		
-		if (t0->prev) t0->prev->next = p;
-		else if (t0->parent) t0->parent->child = p;
+		if (loc0.tt_loc->prev) loc0.tt_loc->prev->next = p;
+		else if (loc0.tt_loc->parent) loc0.tt_loc->parent->child = p;
 
-		if (t0->next) t0->next->prev = p;
-		p->parent = t0->parent;
-		p->next = t0->next;
-		p->prev = t0->prev;
-		p->child->child = t0;
-		t0->parent = p->child;
-		t0->next = 0;
-		t0->prev = 0;
+		if (loc0.tt_loc->next) loc0.tt_loc->next->prev = p;
+		p->parent = loc0.tt_loc->parent;
+		p->next = loc0.tt_loc->next;
+		p->prev = loc0.tt_loc->prev;
+		p->child->child = loc0.tt_loc;
+		loc0.tt_loc->parent = p->child;
+		loc0.tt_loc->next = 0;
+		loc0.tt_loc->prev = 0;
 
 #ifndef RELEASE		
-		if (t0->parent->parent->parent->parent)
+		if (loc0.tt_loc->parent->parent->parent->parent)
 		{
-			ttree_fsave(t0->parent->parent->parent, stdout);
+			ttree_fsave(loc0.tt_loc->parent->parent->parent, stdout);
 		}
 #endif
 		
-		return(t0->parent->parent->prev);
+		return(loc0.tt_loc->parent->parent->prev);
 	}
 }
 

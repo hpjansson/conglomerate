@@ -14,12 +14,37 @@ void cong_location_set(cong_location *loc, TTREE *tt, int offset)
 	
 }
 
+void
+cong_location_nullify(cong_location *loc)
+{
+	g_return_if_fail(loc != NULL);
+	
+	loc->tt_loc=NULL;
+}
+
+
 gboolean cong_location_exists(cong_location *loc)
 {
 	g_return_val_if_fail(loc != NULL, FALSE);
 	
 	return (loc->tt_loc!=NULL);
 }
+
+gboolean
+cong_location_equals(const cong_location *loc0, const cong_location *loc1)
+{
+	g_return_val_if_fail(loc0 != NULL, FALSE);
+	g_return_val_if_fail(loc1 != NULL, FALSE);
+	
+	if (loc0->tt_loc == loc1->tt_loc) {
+		if (loc0->char_loc == loc1->char_loc) {
+			return TRUE;
+		}		
+	}
+
+	return FALSE;	
+}
+
 
 int cong_location_frag_type(cong_location *loc)
 {
@@ -102,4 +127,23 @@ TTREE*
 cong_location_node(cong_location *loc)
 {
 	return loc->tt_loc;
+}
+
+TTREE*
+cong_location_parent(cong_location *loc)
+{
+	g_return_val_if_fail(loc != NULL, NULL);
+	g_return_val_if_fail(loc->tt_loc != NULL, NULL);
+
+	return loc->tt_loc->parent;
+}
+
+
+void
+cong_location_copy(cong_location *dst, const cong_location *src)
+{
+	g_return_if_fail(dst != NULL);
+	g_return_if_fail(src != NULL);
+	
+	*dst = *src;
 }

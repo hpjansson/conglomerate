@@ -129,13 +129,14 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 											 widget->allocation.width,
 											 widget->allocation.height);
 
-		if (xed == the_globals.curs.xed && selection->t0 && selection->t1)
+		if (xed == the_globals.curs.xed && cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1))
 		{
-			pos = pos_logical_to_physical(xed, selection->t0, selection->c0);
+			pos = pos_logical_to_physical_new(xed, &selection->loc0);
 			selection->x0 = pos->x;
 			selection->y0 = pos->y;
 			free(pos);
-			pos = pos_logical_to_physical(xed, selection->t1, selection->c1);
+
+			pos = pos_logical_to_physical_new(xed, &selection->loc1);
 			selection->x1 = pos->x;
 			selection->y1 = pos->y;
 			free(pos);
@@ -1105,7 +1106,7 @@ int xed_xml_content_data_root(struct xed *xed, TTREE *x, int draw_tag_lev)
 
 			xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);  /* Add line */
 			ttree_node_add(xed->draw_line_t, &xed->draw_x_prev, sizeof(TTREE *));
-      ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
+			ttree_node_add(xed->draw_line_t, &xed->draw_char_prev, sizeof(int));
 
 			xed->draw_pos_y += xed->f_asc;             /* Super-baseline text */
 			xed->draw_line += 1;                       /* Goto next line */
@@ -1620,9 +1621,9 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 void selection_curs_unset()
 {
 	the_globals.curs.set = 0;
-	the_globals.curs.location.tt_loc = NULL;
-	
-	the_globals.selection.t0 = the_globals.selection.t1 = 0;
+	cong_location_nullify(&the_globals.curs.location);
+	cong_location_nullify(&the_globals.selection.loc0);
+	cong_location_nullify(&the_globals.selection.loc1);
 }
 
 
@@ -1634,23 +1635,19 @@ gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
 
-#if 1
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
-#else
-	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
-#endif
 	
-	if (!(selection->t0 && selection->t1 &&
-				selection->t0->parent == selection->t1->parent)) return(TRUE);
+	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
+				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
 
-	if (selection->t0 == selection->t1 && selection->c0 == selection->c1) return(TRUE);
+	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
 	
 	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	
 	t = ttree_node_add(0, "tag_span", 8);
 	ttree_node_add(t, "dummy", 5);
 
-	if (selection->t0 == curs->xed->x) replace_xed = 1;
+	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	
 	selection_reparent_all(selection, t);
 
@@ -1695,23 +1692,19 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
 
-#if 1
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
-#else
-	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
-#endif
-	
-	if (!(selection->t0 && selection->t1 &&
-				selection->t0->parent == selection->t1->parent)) return(TRUE);
 
-	if (selection->t0 == selection->t1 && selection->c0 == selection->c1) return(TRUE);
+	if (!(cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1) &&
+				cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1))) return(TRUE);
+
+	if (cong_location_equals(&selection->loc0, &selection->loc1)) return(TRUE);
 
 	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	
 	t = ttree_node_add(0, "tag_span", 8);
 	ttree_node_add(t, "dummy", 5);
 
-	if (selection->t0 == curs->xed->x) replace_xed = 1;
+	if (selection->loc0.tt_loc == curs->xed->x) replace_xed = 1;
 	selection_reparent_all(selection, t);
 	the_globals.clipboard = ttree_branch_dup(t);
 
@@ -1768,11 +1761,7 @@ gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
 	
-#if 1
 	if (!curs->w || !curs->xed || !cong_location_exists(&curs->location)) return(TRUE);
-#else
-	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
-#endif
 
 	if (!the_globals.clipboard)
 	{
@@ -1827,7 +1816,8 @@ gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
 	t->next = t1;
 	if (t1) t1->prev = t;
 
-	selection->t0 = selection->t1 = 0;
+	cong_location_nullify(&selection->loc0);
+	cong_location_nullify(&selection->loc1);
 
 	xed_redraw(curs->xed);
 	return(TRUE);

@@ -709,7 +709,13 @@ struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
 	the_globals.curs.xed = 0;
 	the_globals.curs.w = 0;
 	the_globals.selection.xed = 0;
+
+#if 1
+	cong_location_nullify(&the_globals.selection.loc0);
+	cong_location_nullify(&the_globals.selection.loc1);
+#else
 	the_globals.selection.t0 = the_globals.selection.t1 = 0;
+#endif
 	
 	xv = malloc(sizeof(*xv));
 	memset(xv, 0, sizeof(*xv));
