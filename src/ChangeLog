@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-09 David Malcolm
+
+	* fo.h, fo-parser-result.c, fo-print-context.c, fo-rect.c, fo-solver-result.c, fo-tests.c 
+
+	Initial import
+	
 2002-11-07 David Malcolm
 
 	* cong-document.c, cong-primary-window.c, global.h, main.c, open.c, save.c
