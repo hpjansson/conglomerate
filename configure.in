@@ -199,13 +199,13 @@ fi
 dnl Let people disable the gtk-doc stuff.
 AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=yes]], enable_gtk_doc="$enableval", enable_gtk_doc=yes)
 
-if test x$enable_gtk_doc = xauto ; then
-  if test x$GTKDOC = xtrue ; then
+dnl if test x$enable_gtk_doc = xauto ; then
+dnl   if test x$GTKDOC = xtrue ; then
     enable_gtk_doc=yes
-  else
-    enable_gtk_doc=no
-  fi
-fi
+dnl   else
+dnl     enable_gtk_doc=no
+dnl   fi
+dnl fi
 
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
