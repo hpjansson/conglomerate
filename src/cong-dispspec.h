@@ -136,7 +136,8 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
 CongFont*
 cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
 
-
+const gchar*
+cong_dispspec_element_get_plugin_id(CongDispspecElement *element);
 
 G_END_DECLS
 

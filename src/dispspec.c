@@ -41,6 +41,8 @@ struct CongDispspecElement
 
 	CongDispspecElementHeaderInfo *header_info;
 
+	gchar *plugin_id;
+
 	struct CongDispspecElement* next;	
 };
 
@@ -718,6 +720,11 @@ cong_dispspec_ttree_type(TTREE* tt)
 		return CONG_ELEMENT_TYPE_INSERT;
 	}
 
+	if (!strcasecmp("plugin", n0->child->data)) {
+		DS_DEBUG_MSG1("Child has \"insert\" text, so it is an insert\n");
+		return CONG_ELEMENT_TYPE_INSERT;
+	}
+
 	return CONG_ELEMENT_TYPE_UNKNOWN;
 }
 
@@ -955,6 +962,15 @@ cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole r
 
 }
 
+const gchar*
+cong_dispspec_element_get_plugin_id(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->plugin_id;
+}
+
+
 #if SUPPORT_OLD_LOADERS
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt)
@@ -1013,34 +1029,44 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 				element->type = CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE;
 			} else if (0==strcmp(type,"paragraph")) {
 				element->type = CONG_ELEMENT_TYPE_PARAGRAPH;
-			}
-		}
-	}
+			} else if (0==strcmp(type,"plugin")) {
+				xmlChar* id;
 
-	/* Process children: */
-	{
-		xmlNodePtr child;
+				element->type = CONG_ELEMENT_TYPE_PLUGIN;
 
-		for (child = xml_element->children; child; child=child->next) {
-			/* Extract names: */
-			if (0==strcmp(child->name,"name")) {
-				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
-				if (str) {
-					element->username = g_strdup(str);					
-				}
-			}
+				id = xmlGetProp(xml_element,"plugin-id");
+				
+				if (id) {
+  					element->plugin_id = g_strdup(id);
+  				}
+  			}
+  		}
+  	}
 
-			/* Handle "collapseto": */
-			if (0==strcmp(child->name,"collapseto")) {
-				element->collapseto = TRUE;
-			}
+  	/* Process children: */
+  	{
+  		xmlNodePtr child;
 
-			/* Handle "header-info": */
-			if (0==strcmp(child->name,"header-info")) {
-				printf("got header info\n");
-				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
-				/* FIXME:  we don't actually extract anything at the moment from the XML; <title> is hardcoded as the header tag */
-			}
+  		for (child = xml_element->children; child; child=child->next) {
+  			/* Extract names: */
+  			if (0==strcmp(child->name,"name")) {
+  				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
+  				if (str) {
+  					element->username = g_strdup(str);					
+  				}
+  			}
+
+  			/* Handle "collapseto": */
+  			if (0==strcmp(child->name,"collapseto")) {
+  				element->collapseto = TRUE;
+  			}
+
+  			/* Handle "header-info": */
+  			if (0==strcmp(child->name,"header-info")) {
+  				printf("got header info\n");
+  				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
+  				/* FIXME:  we don't actually extract anything at the moment from the XML; <title> is hardcoded as the header tag */
+  			}
 			
 		}
 

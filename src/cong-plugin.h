@@ -25,6 +25,8 @@
 #ifndef __CONG_PLUGIN_H__
 #define __CONG_PLUGIN_H__
 
+#include "cong-editor-widget-impl.h"
+
 G_BEGIN_DECLS
 
 
@@ -68,6 +70,12 @@ CongExporter *cong_plugin_register_exporter(CongPlugin *plugin,
 					    CongExporterFpiFilter fip_filter,
 					    CongExporterActionCallback action_callback,
 					    gpointer user_data);
+CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin, 
+							     const gchar *name, 
+							     const gchar *description,
+							     const gchar *plugin_id,
+							     CongEditorElementFactoryMethod factory_method,
+							     gpointer user_data);
 
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
@@ -97,11 +105,23 @@ GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *a
 							 gboolean is_last_of_factory);
 void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage *page);
 
+CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widget, 
+						  CongNodePtr node, 
+						  CongDispspecElement *element);
+
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
 /* plugin-docbook.c: */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
 gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
+
+/* plugin-lists.c: */
+gboolean plugin_lists_plugin_register(CongPlugin *plugin);
+gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
+
+/* plugin-xsl.c: */
+gboolean plugin_xsl_plugin_register(CongPlugin *plugin);
+gboolean plugin_xsl_plugin_configure(CongPlugin *plugin);
 
 /* more plugins please! */
 

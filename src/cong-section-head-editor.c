@@ -682,6 +682,7 @@ static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongN
 }
 #endif
 
+
 /* 
    Given an intitial node that can be used for a span text editor, find a younger sibling
    that is the final node of a range of siblings suitable for control by a single span text editor.
@@ -702,6 +703,10 @@ static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongDispspec *ds)
 		}
 
 		if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_type(ds, name)) {
+			return(cong_node_prev(x));
+		}
+
+		if (CONG_ELEMENT_TYPE_PLUGIN==cong_dispspec_type(ds, name)) {
 			return(cong_node_prev(x));
 		}
 	}
@@ -760,6 +765,9 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 
 				} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
 				/* unwritten */
+				} else if (CONG_ELEMENT_TYPE_PLUGIN==cong_dispspec_element_type(element)) {
+					child_editor = cong_plugin_element_editor_new(editor_widget, this_node, element);
+					next_node = this_node->next;					
 				}
 			}	
 		} else if (node_type == CONG_NODE_TYPE_TEXT) {
@@ -772,7 +780,11 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 
 		/* If no child editor has been created, create a dummy one: */
 		if (child_editor==NULL) {
-			child_editor = cong_dummy_element_editor_new(editor_widget, this_node);
+			gchar *message = g_strdup_printf("Dummy element for tag <%s>", this_node->name);
+
+			child_editor = cong_dummy_element_editor_new(editor_widget, this_node, message);
+
+			g_free(message);
 		}
 
 		/* add any child editor that's been created at the correct position: */

@@ -33,7 +33,7 @@ enum
 #define NEW_LOOK 1
 #define USE_PANGO 0
 #define PRINT_TESTS 0
-#define USE_CONG_EDITOR_WIDGET 0
+#define USE_CONG_EDITOR_WIDGET 1
 
 #if PRINT_TESTS
 #include <libgnomeprint/gnome-print.h>
@@ -62,6 +62,8 @@ enum CongElementType
 	CONG_ELEMENT_TYPE_PARAGRAPH,
 
 	/* Other types?  Table? Plugin widget/Bonobo control? */
+
+	CONG_ELEMENT_TYPE_PLUGIN,
 
 	CONG_ELEMENT_TYPE_UNKNOWN,
 
@@ -716,6 +718,16 @@ void menu_callback_test_dialog(gpointer callback_data,
 			       guint callback_action,
 			       GtkWidget *widget);
 
+/* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
+typedef GtkDrawingArea CongEditorWidget;
+typedef struct CongElementEditor CongElementEditor;
+
+GtkWidget *cong_editor_widget_new(CongDocument *doc);
+CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget);
+CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget);
+void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget);
+#define CONG_EDITOR_WIDGET(x) ((CongEditorWidget*)(x))
+
 /* PLUGIN INTERFACE: 
    These types are fully opaque, to try to minimise ABI issues.
 */
@@ -731,6 +743,7 @@ typedef struct CongImporter CongImporter;
 typedef struct CongExporter CongExporter;
 typedef struct CongPrintMethod CongPrintMethod;
 typedef struct CongThumbnailer CongThumbnailer;
+typedef struct CongPluginEditorElement CongPluginEditorElement;
 
 /* The File->New GUI: */
 typedef struct CongNewFileAssistant CongNewFileAssistant;
@@ -749,6 +762,7 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, const gchar *uri, gpointer user_data);
+typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
 
 
 /* The globals: */
@@ -776,15 +790,6 @@ struct CongGlobals
 };
 
 extern struct CongGlobals the_globals;
-
-/* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
-typedef GtkDrawingArea CongEditorWidget;
-
-GtkWidget *cong_editor_widget_new(CongDocument *doc);
-CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget);
-CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget);
-void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget);
-#define CONG_EDITOR_WIDGET(x) ((CongEditorWidget*)(x))
 
 typedef struct CongDocumentEvent CongDocumentEvent;
 

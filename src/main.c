@@ -859,6 +859,12 @@ void main_load_plugins(void)
 
 	register_plugin(plugin_docbook_plugin_register,
 			plugin_docbook_plugin_configure);
+
+	register_plugin(plugin_lists_plugin_register,
+			plugin_lists_plugin_configure);
+
+	register_plugin(plugin_xsl_plugin_register,
+			plugin_xsl_plugin_configure);
 }
 
 int main( int   argc,

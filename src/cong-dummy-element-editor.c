@@ -31,6 +31,7 @@
 struct CongDummyElementEditor
 {
 	CongElementEditor element_editor;
+	gchar *message;
 };
 
 static void dummy_element_editor_on_recursive_delete(CongElementEditor *element_editor);
@@ -105,7 +106,6 @@ static void dummy_element_editor_recursive_render(CongElementEditor *element_edi
 	GList *iter;
 	GdkGC *gc;
 	int str_width;
-	gchar *title_text;
 
 	CongDocument *doc;
 	CongDispspec *ds;
@@ -141,11 +141,22 @@ static void dummy_element_editor_recursive_render(CongElementEditor *element_edi
 	g_assert(title_font);
 
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
+	
+	/* Render a rectangle to indicate the area covered by this element_editor: */
+	gdk_draw_rectangle(window,
+			   gc,
+			   FALSE,
+			   window_area->x,
+			   window_area->y,
+			   window_area->width,
+			   window_area->height);
+
+	/* Render the string: */
 	gdk_draw_string(window,
 			title_font->gdk_font,
 			gc, 
 			window_area->x, 2 + title_font->asc + window_area->y,
-			"Dummy element");
+			dummy_element->message);
 }
 
 static void dummy_element_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)
@@ -164,13 +175,14 @@ static void dummy_element_on_key_press(CongElementEditor *element_editor, GdkEve
 }
 
 /* Public API: */
-CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node)
+CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node, const gchar *message)
 {
 	CongDummyElementEditor *dummy_element = g_new0(CongDummyElementEditor,1);
 	dummy_element->element_editor.klass = &dummy_element_editor_class;
 	dummy_element->element_editor.widget = widget;
 	dummy_element->element_editor.first_node = node;
 	dummy_element->element_editor.final_node = node;
+	dummy_element->message = g_strdup(message);
 
 	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(dummy_element));
 

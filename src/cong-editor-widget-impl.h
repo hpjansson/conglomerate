@@ -50,7 +50,6 @@ G_BEGIN_DECLS
 
   Idea:  Render and click methods to be passed offset coords by parent; this way we make all of this state extrinsic?
 */
-typedef struct CongElementEditor CongElementEditor;
 typedef struct CongElementEditorClass CongElementEditorClass;
 typedef struct CongDummyElementEditor CongDummyElementEditor;
 typedef struct CongSectionHeadEditor CongSectionHeadEditor;
@@ -135,7 +134,7 @@ void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 /* these are in window coords */
 
 
-CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node);
+CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node, const gchar* message);
 CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNodePtr node);
 CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodePtr first_node, CongNodePtr final_node);
 
