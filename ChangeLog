@@ -1,3 +1,7 @@
+2003-04-30  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in:  Addded "es" to ALL_LINGUAS
+	
 2003-04-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* configure.in: Initial support for printing

@@ -1,0 +1,319 @@
+# Conglomerate translation to Spanish.
+# Copyright (C) 2003 Quique <quique@sindominio.net>
+# This file is distributed under the same license as the Conglomerate package.
+# First author: Quique <quique@sindominio.net>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Conglomerate\n"
+"POT-Creation-Date: 2002-11-29 10:11+0300\n"
+"PO-Revision-Date: 2003-04-29 10:53CET\n"
+"Last-Translator: Quique <quique@sindominio.net>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
+
+#: data/conge.desktop.in.h:1
+msgid "Edit xml files"
+msgstr "Editar ficheros xml"
+
+#: data/conge.desktop.in.h:2 src/main.c:886
+msgid "XML Editor"
+msgstr "Editor XML"
+
+#: src/cong-primary-window.c:226
+msgid "Open"
+msgstr "Abrir"
+
+#: src/cong-primary-window.c:227 src/cong-primary-window.c:228
+msgid "Open document"
+msgstr "Abrir documento"
+
+#: src/cong-primary-window.c:236
+msgid "Save as..."
+msgstr "Guardar como..."
+
+#: src/cong-primary-window.c:237 src/cong-primary-window.c:238
+msgid "Save document as..."
+msgstr "Guardar documento como..."
+
+#: src/cong-primary-window.c:301 src/cong-primary-window.c:389
+#: src/cong-primary-window.c:396
+msgid "The selected menu item has not yet been implemented."
+msgstr "El elemento de menú seleccionado todavía no ha sido implementado."
+
+#. FIXME: this option should be disabled if there are no importers installed
+#: src/cong-primary-window.c:421
+msgid "Import file..."
+msgstr "Importar fichero..."
+
+#. FIXME:  eventually provide a convenience dialog to force things
+#: src/cong-primary-window.c:451
+msgid "Could not import the file."
+msgstr "No se ha podido importar el fichero."
+
+#: src/cong-primary-window.c:452
+#, c-format
+msgid "None of Conglomerate's plugins know how to load files of type \"%s\""
+msgstr "Ninguno de los módulos de Conglomerate sabe como cargar ficheros del tipo \"%s\""
+
+#: src/cong-primary-window.c:453
+msgid "FIXME"
+msgstr "ARRÉGLAME"
+
+#. There's more than one valid importer...
+#: src/cong-primary-window.c:469
+msgid ""
+"More than one importer can handle that file type; the selection dialog has "
+"yet to be implemented.  You will have to use the first one that the plugin "
+"manager found."
+msgstr ""
+"Este tipo de fichero lo puede manejar más de un importador; la ventana "
+"de selección todavía está por implementar. Tendrá que usar el primero "
+"que encuentre el gestor de módulos."
+
+#: src/cong-primary-window.c:522
+#, c-format
+msgid "Export \"%s\""
+msgstr "Exportar \"%s\""
+
+#: src/cong-primary-window.c:524
+msgid "Export"
+msgstr "Exportar"
+
+#: src/cong-primary-window.c:537 src/cong-primary-window.c:623
+msgid "General"
+msgstr "General"
+
+#: src/cong-primary-window.c:547
+msgid "File:"
+msgstr "Fichero:"
+
+#: src/cong-primary-window.c:548
+msgid "Exporter:"
+msgstr "Exportador:"
+
+#: src/cong-primary-window.c:550
+msgid "Export Options"
+msgstr "Opciones de exportación"
+
+#: src/cong-primary-window.c:560 src/cong-primary-window.c:629
+#: src/cong-primary-window.c:633
+msgid "Name"
+msgstr "Nombre"
+
+#: src/cong-primary-window.c:561 src/cong-primary-window.c:634
+msgid "Description"
+msgstr "Descripción"
+
+#: src/cong-primary-window.c:613
+msgid "Properties"
+msgstr "Propiedades"
+
+#: src/cong-primary-window.c:624
+msgid "Type"
+msgstr "Tipo"
+
+#: src/cong-primary-window.c:630
+msgid "Location"
+msgstr "Ubicación"
+
+#: src/cong-primary-window.c:631
+msgid "Modified"
+msgstr "Modificado"
+
+#: src/cong-primary-window.c:733
+msgid "translator_credits"
+msgstr "Quique <quique@sindominio.net>"
+
+#: src/cong-primary-window.c:735 src/cong-primary-window.c:840
+#: src/cong-primary-window.c:842 src/cong-primary-window.c:1047
+#: src/cong-primary-window.c:1049 src/cong-primary-window.c:1055
+msgid "Conglomerate XML Editor"
+msgstr "Editor de XML Conglomerate"
+
+#: src/cong-primary-window.c:737
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2002 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2002 David Malcolm"
+
+#: src/cong-primary-window.c:738
+msgid "Conglomerate will be a user-friendly XML editor for GNOME"
+msgstr "Conglomerate será un amigable editor de XML para GNOME"
+
+#: src/cong-primary-window.c:754
+msgid "/_File"
+msgstr "/_Fichero"
+
+#: src/cong-primary-window.c:755
+msgid "/File/_New..."
+msgstr "/Fichero/_Nuevo..."
+
+#: src/cong-primary-window.c:756
+msgid "/File/_Open..."
+msgstr "/Fichero/_Abrir..."
+
+#: src/cong-primary-window.c:757 src/cong-primary-window.c:762
+#: src/cong-primary-window.c:765 src/cong-primary-window.c:767
+msgid "/File/"
+msgstr "/Fichero/"
+
+#: src/cong-primary-window.c:758
+msgid "/File/_Save"
+msgstr "/Fichero/_Guardar"
+
+#: src/cong-primary-window.c:759
+msgid "/File/Save _As..."
+msgstr "/Fichero/Gu_ardar como..."
+
+#: src/cong-primary-window.c:760
+msgid "/File/Sa_ve a Copy..."
+msgstr "/Fichero/Guardar una _copia..."
+
+#: src/cong-primary-window.c:761
+msgid "/File/_Revert"
+msgstr "/Fichero/_Revertir"
+
+#: src/cong-primary-window.c:763
+msgid "/File/_Import..."
+msgstr "/Fichero/_Importar..."
+
+#: src/cong-primary-window.c:764
+msgid "/File/_Export..."
+msgstr "/Fichero/_Exportar..."
+
+#: src/cong-primary-window.c:766
+msgid "/File/Proper_ties"
+msgstr ""
+
+#: src/cong-primary-window.c:768
+msgid "/File/_Close"
+msgstr "/Fichero/_Cerrar"
+
+#: src/cong-primary-window.c:769
+msgid "/File/_Quit"
+msgstr "/Fichero/_Salir"
+
+#: src/cong-primary-window.c:771
+msgid "/_Edit"
+msgstr "/_Edición"
+
+#: src/cong-primary-window.c:772
+msgid "/Edit/_Undo"
+msgstr "/Edición/_Deshacer"
+
+#: src/cong-primary-window.c:773
+msgid "/Edit/_Redo"
+msgstr "/Edición/_Rehacer"
+
+#: src/cong-primary-window.c:774 src/cong-primary-window.c:778
+#: src/cong-primary-window.c:783
+msgid "/Edit/"
+msgstr "/Edición/"
+
+#: src/cong-primary-window.c:775
+msgid "/Edit/Cu_t"
+msgstr "/Edición/C_ortar"
+
+#: src/cong-primary-window.c:776
+msgid "/Edit/_Copy"
+msgstr "/Edición/_Copiar"
+
+#: src/cong-primary-window.c:777
+msgid "/Edit/_Paste"
+msgstr "/Edición/_Pegar"
+
+#: src/cong-primary-window.c:779
+msgid "/Edit/_Find..."
+msgstr "/Edición/_Buscar..."
+
+#: src/cong-primary-window.c:780
+msgid "/Edit/Find Ne_xt"
+msgstr "/Edición/Buscar _siguiente"
+
+#: src/cong-primary-window.c:781
+msgid "/Edit/Find Pre_vious"
+msgstr "/Edición/Buscar _anterior"
+
+#: src/cong-primary-window.c:782
+msgid "/Edit/R_eplace..."
+msgstr "/Edición/_Reemplazar"
+
+#: src/cong-primary-window.c:784
+msgid "/Edit/_Insert..."
+msgstr "/Edición/_Insertar..."
+
+#: src/cong-primary-window.c:786
+msgid "/Tests"
+msgstr "/Pruebas"
+
+#: src/cong-primary-window.c:787
+msgid "/Tests/Open..."
+msgstr "/Pruebas/Abrir..."
+
+#: src/cong-primary-window.c:788
+msgid "/Tests/Error"
+msgstr "/Pruebas/Error"
+
+#: src/cong-primary-window.c:789
+msgid "/Tests/Document Types"
+msgstr "/Pruebas/Tipos de documento"
+
+#: src/cong-primary-window.c:790
+msgid "/Tests/Transform DocBook to HTML"
+msgstr "/Pruebas/Transformar DocBook a HTML"
+
+#: src/cong-primary-window.c:791
+msgid "/Tests/Transform DocBook to XHTML"
+msgstr "/Pruebas/Transformar DocBook a XHTML"
+
+#: src/cong-primary-window.c:792
+msgid "/Tests/Transform DocBook to HTML Help"
+msgstr "/Pruebas/Transformar DocBook a ayuda de HTML"
+
+#: src/cong-primary-window.c:793
+msgid "/Tests/Transform DocBook to Java Help"
+msgstr "/Pruebas/Transformar DocBook a ayuda de Java"
+
+#: src/cong-primary-window.c:794
+msgid "/Tests/Transform DocBook to FO"
+msgstr "/Pruebas/Transformar DocBook a FO"
+
+#: src/cong-primary-window.c:796
+msgid "/Tests/Preview XSL:FO"
+msgstr "/Pruebas/Previsualizar XSL:FO"
+
+#: src/cong-primary-window.c:798
+msgid "/Tests/DTD"
+msgstr "/Pruebas/DTD"
+
+#: src/cong-primary-window.c:799
+msgid "/Tests/Dialog"
+msgstr "/Pruebas/Diálogo"
+
+#: src/cong-primary-window.c:800
+msgid "/_Help"
+msgstr "/A_yuda"
+
+#: src/cong-primary-window.c:801
+msgid "/Help/_Contents"
+msgstr "/Ayuda/_Contenido"
+
+#: src/cong-primary-window.c:802
+msgid "/Help/_About"
+msgstr "/Ayuda/_Acerca de"
+
+#: src/cong-primary-window.c:974
+msgid "Welcome to the much-too-early Conglomerate editor."
+msgstr "Bienvenido al muy inmaduro editor Conglomerate."
+
+#: src/cong-primary-window.c:1047
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s (modificado) - %s"
+
