@@ -82,9 +82,9 @@ static void xsltemplate_element_editor_on_recursive_self_test(CongElementEditor 
 
 static gboolean xsltemplate_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongXSLTemplateElementEditor *xsltemplate_element = CONG_XSLTEMPLATE_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 
 	g_return_val_if_fail(event, FALSE);
@@ -94,9 +94,9 @@ static gboolean xsltemplate_element_editor_on_document_event(CongElementEditor *
 
 static void xsltemplate_element_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongXSLTemplateElementEditor *xsltemplate_element = CONG_XSLTEMPLATE_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GtkRequisition *requisition = &element_editor->requisition;
 	GList *iter;
 
@@ -112,9 +112,9 @@ static void xsltemplate_element_editor_allocate_child_space(CongElementEditor *e
 
 static void xsltemplate_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongXSLTemplateElementEditor *xsltemplate_element = CONG_XSLTEMPLATE_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkGC *gc;
 	int str_width;
@@ -159,7 +159,7 @@ static void xsltemplate_element_editor_recursive_render(CongElementEditor *eleme
 	left_box_x = centre_x - ((ARROW_SCALE*4) + BOX_PADDING + box_width);
 	right_box_x = centre_x + ((ARROW_SCALE*4) + BOX_PADDING);
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 	x = CONG_ELEMENT_EDITOR(xsltemplate_element)->first_node;
 	element = cong_dispspec_get_first_element(ds);
@@ -284,7 +284,7 @@ static void xsltemplate_element_on_key_press(CongElementEditor *element_editor, 
 }
 
 static CongElementEditor* manufacture_element(CongPluginEditorElement *plugin_editor_element, 
-					      CongEditorWidget *editor_widget, 
+					      CongEditorWidget2 *editor_widget, 
 					      CongNodePtr node, 
 					      gpointer user_data)
 {
@@ -296,7 +296,7 @@ static CongElementEditor* manufacture_element(CongPluginEditorElement *plugin_ed
 	xsltemplate_element->element_editor.final_node = node;
 	xsltemplate_element->message = g_strdup("this is slowly becoming the XSL template element editor thingy");
 
-	cong_editor_widget_register_element_editor(editor_widget, CONG_ELEMENT_EDITOR(xsltemplate_element));
+	cong_editor_widget2_register_element_editor(editor_widget, CONG_ELEMENT_EDITOR(xsltemplate_element));
 
 	return CONG_ELEMENT_EDITOR(xsltemplate_element);
 #else

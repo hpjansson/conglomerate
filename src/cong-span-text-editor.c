@@ -282,7 +282,7 @@ static void regenerate_plaintext_recursive(CongSpanTextEditor *span_text_editor,
 		CongNodePtr child;
 
 		CongTextRange *text_range = NULL;
-		CongDispspecElement* element = cong_dispspec_lookup_node(cong_editor_widget_get_dispspec(CONG_ELEMENT_EDITOR(span_text_editor)->widget), 
+		CongDispspecElement* element = cong_dispspec_lookup_node(cong_editor_widget2_get_dispspec(CONG_ELEMENT_EDITOR(span_text_editor)->widget), 
 									 node);
 
 		if (element) {
@@ -520,7 +520,7 @@ static gboolean span_text_editor_on_document_event(CongElementEditor *element_ed
 			regenerate_plaintext(span_text);			
 
 			/* Ensure layout is regenerated: */
-			cong_editor_widget_force_layout_update(element_editor->widget);
+			cong_editor_widget2_force_layout_update(element_editor->widget);
 
 			/* And force a redraw for good measure: */
 			gtk_widget_queue_draw(GTK_WIDGET(element_editor->widget));		
@@ -534,7 +534,7 @@ static gboolean span_text_editor_on_document_event(CongElementEditor *element_ed
 
 static void span_text_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	pango_layout_set_width(span_text->pango_layout,
@@ -737,11 +737,11 @@ static void render_text_range(CongNodePtr key,
  */
 static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor visitor, struct CongHitTest *hit_test)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = element_editor->widget;
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 	GtkWidget *w = GTK_WIDGET(editor_widget);
-	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
+	CongDocument *doc = cong_editor_widget2_get_document(editor_widget);
 	const CongSelection *selection = cong_document_get_selection(doc);
 	const CongCursor *cursor = cong_document_get_cursor(doc);
 	gboolean got_selection_start_byte_offset = FALSE;
@@ -953,7 +953,7 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	GtkWidget *w = GTK_WIDGET(editor_widget);
 
 	GdkRectangle intersected_area;
@@ -1030,7 +1030,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	CongCursor *cursor;
 	CongSelection *selection;
 
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	GtkWindow *parent_window = GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget)));
@@ -1038,7 +1038,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	/* FIXME: unimplemented */
 	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_button_press");
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
 	
@@ -1126,14 +1126,14 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 	CongCursor *cursor;
 	CongSelection *selection;
 
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_motion_notify");
 
 	if (!(event->state & GDK_BUTTON1_MASK)) return;
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
 	
@@ -1323,7 +1323,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	CongCursor *cursor;
 	CongSelection *selection;
 
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_key_press");
@@ -1332,7 +1332,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	printf("Keyval: %d, State: %d\n", event->keyval, event->state);
 #endif
 	
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
 	g_assert(selection);
@@ -1424,7 +1424,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 }
 
 /* Public API: */
-CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodePtr first_node, CongNodePtr final_node)
+CongElementEditor *cong_span_text_editor_new(CongEditorWidget2 *widget, CongNodePtr first_node, CongNodePtr final_node)
 {
 	CongSpanTextEditor *span_text;
 
@@ -1444,7 +1444,7 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 	span_text->element_editor.first_node = first_node;
 	span_text->element_editor.final_node = final_node;
 
-	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(span_text));
+	cong_editor_widget2_register_element_editor(widget, CONG_ELEMENT_EDITOR(span_text));
 
 	span_text->pango_layout = pango_layout_new(gdk_pango_context_get() /*cong_app_singleton()->pango_context*/);
 	g_assert(span_text->pango_layout);

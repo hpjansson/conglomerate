@@ -74,12 +74,6 @@ enum CongFontRole
 	CONG_FONT_ROLE_NUM
 };
 
-CongPrimaryWindow *cong_primary_window_new(CongDocument *doc);
-void cong_primary_window_free(CongPrimaryWindow *primary_window);
-CongDocument *cong_primary_window_get_document(CongPrimaryWindow *primary_window);
-void cong_primary_window_update_title(CongPrimaryWindow *primary_window);
-GtkWindow *cong_primary_window_get_toplevel(CongPrimaryWindow *primary_window);
-
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
@@ -240,14 +234,23 @@ void menu_callback_debug_dialog(gpointer callback_data,
 				GtkWidget *widget);
 
 /* Experimental new implementation of the editor as a custom widget; to be a fully MVC view from the beginning; currently it's a GtkDrawingArea */
-typedef GtkDrawingArea CongEditorWidget;
+typedef GtkDrawingArea CongEditorWidget2;
 typedef struct CongElementEditor CongElementEditor;
 
-GtkWidget *cong_editor_widget_new(CongDocument *doc);
-CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget);
-CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget);
-void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget);
-#define CONG_EDITOR_WIDGET(x) ((CongEditorWidget*)(x))
+GtkWidget *cong_editor_widget2_new(CongDocument *doc);
+CongDocument *cong_editor_widget2_get_document(CongEditorWidget2 *editor_widget);
+CongDispspec *cong_editor_widget2_get_dispspec(CongEditorWidget2 *editor_widget);
+void cong_editor_widget2_force_layout_update(CongEditorWidget2 *editor_widget);
+#define CONG_EDITOR_WIDGET2(x) ((CongEditorWidget2*)(x))
+
+/* Third attempt at an editor widget: */
+typedef GtkDrawingArea CongEditorWidget3;
+
+GtkWidget *cong_editor_widget3_new(CongDocument *doc);
+CongDocument *cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget);
+CongDispspec *cong_editor_widget3_get_dispspec(CongEditorWidget3 *editor_widget);
+void cong_editor_widget3_force_layout_update(CongEditorWidget3 *editor_widget);
+#define CONG_EDITOR_WIDGET3(x) ((CongEditorWidget3*)(x))
 
 /* PLUGIN INTERFACE: 
    These types are fully opaque, to try to minimise ABI issues.
@@ -296,7 +299,7 @@ typedef gboolean (*CongPrintMethodDocumentFilter)(CongPrintMethod *print_method,
 typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
 #endif
 
-typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget *editor_widget, CongNodePtr node, gpointer user_data);
+typedef CongElementEditor* (*CongEditorElementFactoryMethod)(CongPluginEditorElement *plugin_editor_element, CongEditorWidget2 *editor_widget, CongNodePtr node, gpointer user_data);
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window);

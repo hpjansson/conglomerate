@@ -21,6 +21,7 @@ conglomerate_SOURCES =      \
   cong-document.h           \
   cong-dtd.h                \
   cong-editor-widget-impl.h \
+  cong-editor-widget3-impl.h \
   cong-eel.h                \
   cong-error-dialog.h       \
   cong-fake-plugin-hooks.h  \
@@ -31,6 +32,7 @@ conglomerate_SOURCES =      \
   cong-overview-view.h      \
   cong-parser-error.h       \
   cong-plugin.h             \
+  cong-primary-window.h     \
   cong-progress-checklist.h \
   cong-tree-view.h          \
   cong-view.h               \
@@ -45,6 +47,7 @@ conglomerate_SOURCES =      \
   cong-dtd.c                \
   cong-dummy-element-editor.c  \
   cong-editor-widget.c      \
+  cong-editor-widget3.c      \
   cong-eel.c                \
   cong-element-editor.c     \
   cong-error-dialog.c       \

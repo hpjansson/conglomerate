@@ -24,49 +24,26 @@
 
 
 /*
- * Implementation details for the CongEditorWidget2
+ * Implementation details for the CongEditorWidget
  */
-#ifndef __CONG_EDITOR_WIDGET2_IMPL_H__
-#define __CONG_EDITOR_WIDGET2_IMPL_H__
+#ifndef __CONG_EDITOR_WIDGET3_IMPL_H__
+#define __CONG_EDITOR_WIDGET3_IMPL_H__
 
 #include "cong-view.h"
 
 G_BEGIN_DECLS
 
-/* currently implemented as a GtkDrawingArea with user_data "details" pointing to a CongEditorWidget2Details */
+/* currently implemented as a GtkDrawingArea with user_data "details" pointing to a CongEditorWidget3Details */
 
 /*
-  The idea: we have a tree of CongElementEditors (or should these be CongNodeEditors?)
-
-  We pipe most tree notifications in at the root and let each editor manage its children, creating and destroying as necessary.
-
-  We also have a mapping from nodes to element editors, so that we can do directly in this direction.  This is used for the "set text" notification.
-
-  Initially we have two types of ElementEditor: span text edit, and structural wrapper.  Could have more, and also support plugins.
-
-  Other children (handy as "use cases") might be:
-  - table editor
-  - MathML editor
-
-  Issues:  where are the children stored?  perhaps in the derived classes?
-
-  Idea:  Render and click methods to be passed offset coords by parent; this way we make all of this state extrinsic?
 */
-typedef struct CongElementEditorClass CongElementEditorClass;
-typedef struct CongDummyElementEditor CongDummyElementEditor;
-typedef struct CongSectionHeadEditor CongSectionHeadEditor;
-typedef struct CongSpanTextEditor CongSpanTextEditor;
 
-#define CONG_ELEMENT_EDITOR(x) ((CongElementEditor*)(x))
-#define CONG_DUMMY_ELEMENT_EDITOR(x) ((CongDummyElementEditor*)(x))
-#define CONG_SECTION_HEAD_EDITOR(x) ((CongSectionHeadEditor*)(x))
-#define CONG_SPAN_TEXT_EDITOR(x) ((CongSpanTextEditor*)(x))
-
+#if 0
 struct CongElementEditor
 {
 	const CongElementEditorClass *klass;
 
-	CongEditorWidget2 *widget;
+	CongEditorWidget3 *widget;
 
 	/* An element editor actually applies to a range of sibling elements; could be a single node: */
 	CongNodePtr first_node;
@@ -95,32 +72,36 @@ void cong_element_editor_recursive_render(CongElementEditor *element_editor, con
 void cong_element_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
 void cong_element_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
 void cong_element_editor_on_key_press(CongElementEditor *element_editor, GdkEventKey *event);
+#endif
 
-typedef struct CongEditorWidget2Details CongEditorWidget2Details;
-typedef struct CongEditorWidget2View CongEditorWidget2View;
-#define CONG_EDITOR_WIDGET2_VIEW(x) ((CongEditorWidget2View*)(x))
+typedef struct CongEditorWidget3Details CongEditorWidget3Details;
+typedef struct CongEditorWidget3View CongEditorWidget3View;
+#define CONG_EDITOR_WIDGET3_VIEW(x) ((CongEditorWidget3View*)(x))
 
-struct CongEditorWidget2Details
+struct CongEditorWidget3Details
 {
-	CongEditorWidget2 *widget;
-	CongEditorWidget2View *view;
+	CongEditorWidget3 *widget;
+	CongEditorWidget3View *view;
 
+#if 0
 	CongElementEditor *root_editor;
 
 	GHashTable *hash_of_node_to_editor; /* holds all nodes which are _directly_ under the control of an editor; descendants aren't stored, but can't be determined. */
+#endif
 };
 
 /* The widget "owns" a CongView, which in turn, holds a ptr back to its widget. */
-struct CongEditorWidget2View
+struct CongEditorWidget3View
 {
 	CongView view;
 
-	CongEditorWidget2 *widget;
+	CongEditorWidget3 *widget;
 };
 
 /* Macro for getting details of a widget; this will eventually be a simple field lookup */
-#define GET_DETAILS(editor_widget) ((CongEditorWidget2Details*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
+#define GET_DETAILS(editor_widget) ((CongEditorWidget3Details*)(g_object_get_data(G_OBJECT(editor_widget), "details")))
 
+#if 0
 CongNodePtr cong_element_editor_get_first_node(CongElementEditor *element_editor);
 CongNodePtr cong_element_editor_get_final_node(CongElementEditor *element_editor);
 gboolean cong_element_editor_responsible_for_node(CongElementEditor *element_editor, CongNodePtr node);
@@ -134,19 +115,14 @@ void cong_element_editor_set_allocation(CongElementEditor *element_editor,
 					gint width,
 					gint height);
 /* these are in window coords */
+#endif
 
+#if 0
+CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget3 *widget, CongNodePtr node, const gchar* message);
+CongElementEditor *cong_section_head_editor_new(CongEditorWidget3 *widget, CongNodePtr node);
+CongElementEditor *cong_span_text_editor_new(CongEditorWidget3 *widget, CongNodePtr first_node, CongNodePtr final_node);
+#endif
 
-CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget2 *widget, CongNodePtr node, const gchar* message);
-CongElementEditor *cong_section_head_editor_new(CongEditorWidget2 *widget, CongNodePtr node);
-CongElementEditor *cong_span_text_editor_new(CongEditorWidget2 *widget, CongNodePtr first_node, CongNodePtr final_node);
-
-CongFont*
-cong_span_text_editor_get_font(CongSpanTextEditor *span_text, enum CongFontRole role);
-
-/* Internal utility functions: */
-void cong_editor_widget2_register_element_editor(CongEditorWidget2 *widget, CongElementEditor *element_editor);
-void cong_editor_widget2_unregister_element_editor(CongEditorWidget2 *widget, CongElementEditor *element_editor);
-CongElementEditor* cong_editor_widget2_get_element_editor_for_node(CongEditorWidget2 *widget, CongNodePtr node);
 
 G_END_DECLS
 

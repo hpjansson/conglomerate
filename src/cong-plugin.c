@@ -990,7 +990,7 @@ gboolean cong_ui_load_imported_file_content(const gchar *uri,
 	return TRUE;
 }
 
-CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widget, 
+CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widget, 
 						  CongNodePtr node, 
 						  CongDispspecElement *element)
 {

@@ -34,13 +34,16 @@
 #include "cong-plugin.h"
 #include "cong-app.h"
 #include "cong-overview-view.h"
+#include "cong-primary-window.h"
 
-#if 1
+#if 0
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
+
+#define TEST_WIDGET3 0
 
 /* Main window layout:
  * 
@@ -76,12 +79,21 @@ struct CongPrimaryWindow
 /*  	GtkWidget *w; */
 
 	CongTreeView *cong_overview_view;
-	GtkWidget *cong_editor_widget;
+
+	GtkWidget *cong_editor_widget2;
+	GtkWidget *scroller2;
+
+#if TEST_WIDGET3
+	GtkWidget *test_pane;
+	GtkWidget *cong_editor_widget3;
+	GtkWidget *scroller3;
+#endif
 
 	GtkWidget *window, *menus;
 	GtkToolbar *toolbar;
-	GtkWidget *status, *tray, *scroller,
-		*auth, *butt_submit, *butt_find;
+	GtkWidget *status, *tray;
+	GtkWidget *auth, *butt_submit, *butt_find;
+	
 
 	guint status_main_ctx;
 
@@ -408,7 +420,10 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	if (primary_window->doc) {
 		g_assert(primary_window->cong_overview_view);
-		g_assert(primary_window->cong_editor_widget);
+		g_assert(primary_window->cong_editor_widget2);
+#if TEST_WIDGET3
+		g_assert(primary_window->cong_editor_widget3);
+#endif
 
 		/* --- Notebook to appear in the sidebar: --- */
 		sidebar_notebook = gtk_notebook_new();
@@ -447,17 +462,60 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 					 gtk_label_new(_("Raw XML"))
 					 );
 
-		/* --- Scrolling area --- */
-		primary_window->scroller = gtk_scrolled_window_new(NULL, NULL);
-		gtk_paned_add2(GTK_PANED(w1), primary_window->scroller);
+		
+#if TEST_WIDGET3
+		{
+			primary_window->test_pane = gtk_vpaned_new();
 
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(primary_window->scroller), GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_ALWAYS);
-		
-		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(primary_window->scroller), 
-						      GTK_WIDGET(primary_window->cong_editor_widget));
-		gtk_widget_show(primary_window->cong_editor_widget);
-		
+			gtk_paned_add2 (GTK_PANED(w1), 
+					primary_window->test_pane);
+			gtk_widget_show(primary_window->test_pane);
+
+			/* --- Scrolling area for editor widget 2--- */
+			primary_window->scroller2 = gtk_scrolled_window_new(NULL, NULL);
+			gtk_paned_add1 (GTK_PANED(primary_window->test_pane), 
+					primary_window->scroller2);
+			
+			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
+							GTK_POLICY_AUTOMATIC,
+							GTK_POLICY_ALWAYS);
+			
+			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
+							       GTK_WIDGET(primary_window->cong_editor_widget2));
+			gtk_widget_show (primary_window->cong_editor_widget2);
+			gtk_widget_show(primary_window->scroller2);
+			
+			/* --- Scrolling area for editor widget 3--- */
+			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
+			gtk_paned_add2 (GTK_PANED(primary_window->test_pane),
+					primary_window->scroller3);
+			
+			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+							GTK_POLICY_AUTOMATIC,
+							GTK_POLICY_ALWAYS);
+			
+			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+							       GTK_WIDGET(primary_window->cong_editor_widget3));
+			gtk_widget_show (primary_window->cong_editor_widget3);
+			gtk_widget_show(primary_window->scroller3);
+		}
+#else
+		{
+			/* --- Scrolling area for editor widget 2--- */
+			primary_window->scroller2 = gtk_scrolled_window_new(NULL, NULL);
+			gtk_paned_add2 (GTK_PANED(w1), 
+					primary_window->scroller2);
+			
+			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
+							GTK_POLICY_AUTOMATIC,
+							GTK_POLICY_ALWAYS);
+			
+			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller2), 
+							       GTK_WIDGET(primary_window->cong_editor_widget2));
+			gtk_widget_show (primary_window->cong_editor_widget2);
+			gtk_widget_show(primary_window->scroller2);
+		}
+#endif
 		
 		/* TEMPORARY: Set white background */
 		
@@ -474,7 +532,6 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 			style->bg[i] = gcol;
 		}
 		
-		gtk_widget_show(primary_window->scroller);
 	} /* if (primary_window->doc) { */
 
 	/* --- Main window -> vbox -> hbox --- */
@@ -521,10 +578,13 @@ CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 		cong_document_ref(doc);
 
 		primary_window->cong_overview_view = cong_overview_view_new (doc);
-#if 0
-		primary_window->cong_editor_widget = gtk_calendar_new();
+		primary_window->cong_editor_widget2 = cong_editor_widget2_new(doc);
+#if TEST_WIDGET3
+#if 1
+		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
 #else
-		primary_window->cong_editor_widget = cong_editor_widget_new(doc);
+		primary_window->cong_editor_widget3 = gtk_calendar_new();
+#endif
 #endif
 	}
 

@@ -42,21 +42,21 @@ static void on_cursor_change(CongView *view);
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
-#define CONG_EDITOR_WIDGET_DEBUG_MSG1(x)    g_message((x))
-#define CONG_EDITOR_WIDGET_DEBUG_MSG2(x, a) g_message((x), (a))
-#define CONG_EDITOR_WIDGET_DEBUG_MSG3(x, a, b) g_message((x), (a), (b))
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG1(x)    g_message((x))
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG2(x, a) g_message((x), (a))
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG3(x, a, b) g_message((x), (a), (b))
 #else
 #define CONG_EDITOR_VIEW_SELF_TEST(details) ((void)0)
-#define CONG_EDITOR_WIDGET_DEBUG_MSG1(x)    ((void)0)
-#define CONG_EDITOR_WIDGET_DEBUG_MSG2(x, a) ((void)0)
-#define CONG_EDITOR_WIDGET_DEBUG_MSG3(x, a, b) ((void)0)
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG1(x)    ((void)0)
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG2(x, a) ((void)0)
+#define CONG_EDITOR_WIDGET2_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
 /* Definitions of the handler functions: */
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
-	CongEditorWidgetView *editor_widget_view;
-	CongEditorWidgetDetails* details;
+	CongEditorWidget2View *editor_widget_view;
+	CongEditorWidget2Details* details;
 	CongDocumentEvent event;
 	CongElementEditor *element_editor;
 
@@ -64,10 +64,10 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	g_return_if_fail(node);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_make_orphan\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_document_node_make_orphan\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 	details = GET_DETAILS(editor_widget_view->widget);
 
 	if (before_event) {
@@ -79,7 +79,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	event.data.make_orphan.node = node;
 	event.data.make_orphan.former_parent = former_parent;
 
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, former_parent);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget_view->widget, former_parent);
 	g_assert(element_editor);
 
 	cong_element_editor_on_document_event(element_editor, &event);
@@ -92,8 +92,8 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling)
 {
-	CongEditorWidgetView *editor_widget_view;
-	CongEditorWidgetDetails* details;
+	CongEditorWidget2View *editor_widget_view;
+	CongEditorWidget2Details* details;
 	CongDocumentEvent event;
 	CongElementEditor *element_editor;
 
@@ -102,10 +102,10 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	g_return_if_fail(older_sibling);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_add_after\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_document_node_add_after\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 	details = GET_DETAILS(editor_widget_view->widget);
 
 	if (before_event) {
@@ -117,7 +117,7 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	event.data.add_after.node = node;
 	event.data.add_after.older_sibling = older_sibling;
 
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, older_sibling->parent);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget_view->widget, older_sibling->parent);
 	g_assert(element_editor);
 
 	cong_element_editor_on_document_event(element_editor, &event);
@@ -129,8 +129,8 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling)
 {
-	CongEditorWidgetView *editor_widget_view;
-	CongEditorWidgetDetails* details;
+	CongEditorWidget2View *editor_widget_view;
+	CongEditorWidget2Details* details;
 	CongDocumentEvent event;
 	CongElementEditor *element_editor;
 
@@ -139,10 +139,10 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	g_return_if_fail(younger_sibling);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_add_before\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_document_node_add_before\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 	details = GET_DETAILS(editor_widget_view->widget);
 
 	if (before_event) {
@@ -154,7 +154,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	event.data.add_before.node = node;
 	event.data.add_before.younger_sibling = younger_sibling;
 
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, younger_sibling->parent);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget_view->widget, younger_sibling->parent);
 	g_assert(element_editor);
 
 	cong_element_editor_on_document_event(element_editor, &event);
@@ -166,8 +166,8 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
 {
-	CongEditorWidgetView *editor_widget_view;
-	CongEditorWidgetDetails* details;
+	CongEditorWidget2View *editor_widget_view;
+	CongEditorWidget2Details* details;
 	CongDocumentEvent event;
 	CongElementEditor *element_editor;
 
@@ -176,10 +176,10 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	g_return_if_fail(adoptive_parent);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_set_parent\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_document_node_set_parent\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 	details = GET_DETAILS(editor_widget_view->widget);
 
 	if (before_event) {
@@ -191,7 +191,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	event.data.set_parent.node = node;
 	event.data.set_parent.adoptive_parent = adoptive_parent;
 
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, adoptive_parent);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget_view->widget, adoptive_parent);
 	g_assert(element_editor);
 
 	cong_element_editor_on_document_event(element_editor, &event);
@@ -203,8 +203,8 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
 {
-	CongEditorWidgetView *editor_widget_view;
-	CongEditorWidgetDetails* details;
+	CongEditorWidget2View *editor_widget_view;
+	CongEditorWidget2Details* details;
 	CongDocumentEvent event;
 	CongElementEditor *element_editor;
 
@@ -213,10 +213,10 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	g_return_if_fail(new_content);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_set_text\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_document_node_set_text\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 	details = GET_DETAILS(editor_widget_view->widget);
 
 	if (before_event) {
@@ -229,7 +229,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	event.data.set_text.new_content = new_content;
 
 	/* This message goes direct to the node concerned, rather than to the root node: */
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget_view->widget, node);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget_view->widget, node);
 	g_assert(element_editor);
 
 	cong_element_editor_on_document_event(element_editor, &event);
@@ -251,15 +251,15 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 
 static void on_selection_change(CongView *view)
 {
-	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidget2View *editor_widget_view;
 
 	g_return_if_fail(view);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_selection_change\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_selection_change\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 
 	/* Force a redraw: */
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));	
@@ -267,15 +267,15 @@ static void on_selection_change(CongView *view)
 
 static void on_cursor_change(CongView *view)
 {
-	CongEditorWidgetView *editor_widget_view;
+	CongEditorWidget2View *editor_widget_view;
 
 	g_return_if_fail(view);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_cursor_change\n");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("CongEditorWidget2View - on_cursor_change\n");
 	#endif
 
-	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+	editor_widget_view = CONG_EDITOR_WIDGET2_VIEW(view);
 
 	/* Force a redraw: */
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));
@@ -287,12 +287,12 @@ static void on_cursor_change(CongView *view)
 static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpointer user_data)
 {
 	CongDocument *doc;
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(w);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("expose_event_handler");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("expose_event_handler");
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 
 	/* Fill the rectangle with the background colour: */
 	gdk_draw_rectangle(GDK_DRAWABLE(w->window),
@@ -313,10 +313,10 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 
 static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, gpointer user_data)
 {
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(w);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG3("configure_event_handler; w/h = %i,%i", event->width, event->height);
+	CONG_EDITOR_WIDGET2_DEBUG_MSG3("configure_event_handler; w/h = %i,%i", event->width, event->height);
  
  	cong_element_editor_get_size_requisition(details->root_editor, event->width);
 
@@ -332,10 +332,10 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 
 static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, gpointer user_data)
 {
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(w);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("button_press_event_handler");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("button_press_event_handler");
 
 	cong_element_editor_on_button_press(details->root_editor, event);
 
@@ -344,10 +344,10 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 
 static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event, gpointer user_data)
 {
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(w);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("motion_notify_event_handler");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("motion_notify_event_handler");
 
 	cong_element_editor_on_motion_notify(details->root_editor, event);
 
@@ -356,18 +356,18 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 
 static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data)
 {
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
-	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(w);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
+	CongDocument *doc = cong_editor_widget2_get_document(editor_widget);
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	CongElementEditor *element_editor;
 
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("key_press_event_handler");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("key_press_event_handler");
 
 	g_return_val_if_fail(cursor->location.node, FALSE);
 
 	/* Get element for cursor location; get it to handle the message: */
-	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget, cursor->location.node);
+	element_editor = cong_editor_widget2_get_element_editor_for_node(editor_widget, cursor->location.node);
 	g_assert(element_editor);
 
 	cong_element_editor_on_key_press(element_editor, event);
@@ -380,10 +380,10 @@ static void size_request_handler(GtkWidget *widget,
  				 gpointer user_data)
 {
  	CongDocument *doc;
- 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(widget);
- 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+ 	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(widget);
+ 	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
  
- 	CONG_EDITOR_WIDGET_DEBUG_MSG1("size_request_handler");
+ 	CONG_EDITOR_WIDGET2_DEBUG_MSG1("size_request_handler");
  
  	g_assert(widget);
  	g_assert(requisition);
@@ -420,7 +420,7 @@ void recursively_populate_ui(CongEditorView *editor_view,
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
 
-		/* CONG_EDITOR_WIDGET_DEBUG_MSG1("Examining frag %s\n",name); */
+		/* CONG_EDITOR_WIDGET2_DEBUG_MSG1("Examining frag %s\n",name); */
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
 		{
@@ -513,10 +513,10 @@ void recursively_populate_ui(CongEditorView *editor_view,
 }
 #endif
 
-void populate_widget(CongEditorWidget *widget)
+static void populate_widget2(CongEditorWidget2 *widget)
 {
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(widget);
-	CongEditorWidgetDetails *details = GET_DETAILS(editor_widget);
+	CongEditorWidget2 *editor_widget = CONG_EDITOR_WIDGET2(widget);
+	CongEditorWidget2Details *details = GET_DETAILS(editor_widget);
 	CongDocument *doc;
 	CongDispspec *displayspec;
 	CongSectionHeadEditor *section_head;
@@ -526,7 +526,7 @@ void populate_widget(CongEditorWidget *widget)
 
 	/* FIXME: ultimately we might want a special-purpose root element editor class */
 	
-	doc = cong_editor_widget_get_document(widget);
+	doc = cong_editor_widget2_get_document(widget);
 	displayspec = cong_document_get_dispspec(doc);
 		
 	x = cong_document_get_root(doc);
@@ -538,7 +538,7 @@ void populate_widget(CongEditorWidget *widget)
 		const char *xmlns = cong_node_xmlns(x);
 		const char *name = xml_frag_name_nice(x);
 
-		CONG_EDITOR_WIDGET_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
+		CONG_EDITOR_WIDGET2_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_type(displayspec, xmlns, name)==CONG_ELEMENT_TYPE_STRUCTURAL)
 		{
@@ -553,18 +553,18 @@ void populate_widget(CongEditorWidget *widget)
 
 /* Public interface: */
 
-GtkWidget* cong_editor_widget_new(CongDocument *doc)
+GtkWidget* cong_editor_widget2_new(CongDocument *doc)
 {
-	CongEditorWidget *widget;
-	CongEditorWidgetDetails *details;
-	CongEditorWidgetView *view;
+	CongEditorWidget2 *widget;
+	CongEditorWidget2Details *details;
+	CongEditorWidget2View *view;
 
 	g_return_val_if_fail(doc, NULL);
 
 	widget = GTK_DRAWING_AREA(gtk_drawing_area_new());
 
-	details = g_new0(CongEditorWidgetDetails,1);
-	view = g_new0(CongEditorWidgetView,1);
+	details = g_new0(CongEditorWidget2Details,1);
+	view = g_new0(CongEditorWidget2View,1);
 
 	g_object_set_data(G_OBJECT(widget),
 			  "details",
@@ -620,7 +620,7 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);
 
-	populate_widget(widget);
+	populate_widget2(widget);
 
 	/* Recursively update all the size requisitions: */
 	cong_element_editor_get_size_requisition(details->root_editor, 100);
@@ -634,9 +634,9 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 	return GTK_WIDGET(widget);
 }
 
-CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget)
+CongDocument *cong_editor_widget2_get_document(CongEditorWidget2 *editor_widget)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 
 	g_return_val_if_fail(editor_widget, NULL);
 
@@ -645,9 +645,9 @@ CongDocument *cong_editor_widget_get_document(CongEditorWidget *editor_widget)
 	return details->view->view.doc;
 }
 
-CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget)
+CongDispspec *cong_editor_widget2_get_dispspec(CongEditorWidget2 *editor_widget)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 
 	g_return_val_if_fail(editor_widget, NULL);
 
@@ -656,16 +656,16 @@ CongDispspec *cong_editor_widget_get_dispspec(CongEditorWidget *editor_widget)
 	return cong_document_get_dispspec(details->view->view.doc);
 }
 
-void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget)
+void cong_editor_widget2_force_layout_update(CongEditorWidget2 *editor_widget)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 
 	g_return_if_fail(editor_widget);
 
 	details = GET_DETAILS(editor_widget);
 
 	/* Recursively update all the size requisitions: */
-	CONG_EDITOR_WIDGET_DEBUG_MSG1("cong_editor_widget_force_layout_update");
+	CONG_EDITOR_WIDGET2_DEBUG_MSG1("cong_editor_widget2_force_layout_update");
  
 #if 1
  	gtk_widget_queue_resize(GTK_WIDGET(editor_widget));
@@ -681,9 +681,9 @@ void cong_editor_widget_force_layout_update(CongEditorWidget *editor_widget)
 }
 
 /* Internal utility functions: */
-void cong_editor_widget_register_element_editor(CongEditorWidget *widget, CongElementEditor *element_editor)
+void cong_editor_widget2_register_element_editor(CongEditorWidget2 *widget, CongElementEditor *element_editor)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 	CongNodePtr node;
 
 	g_return_if_fail(widget);
@@ -709,9 +709,9 @@ void cong_editor_widget_register_element_editor(CongEditorWidget *widget, CongEl
 	
 }
 
-void cong_editor_widget_unregister_element_editor(CongEditorWidget *widget, CongElementEditor *element_editor)
+void cong_editor_widget2_unregister_element_editor(CongEditorWidget2 *widget, CongElementEditor *element_editor)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 	CongNodePtr node;
 
 	g_return_if_fail(widget);
@@ -736,9 +736,9 @@ void cong_editor_widget_unregister_element_editor(CongEditorWidget *widget, Cong
 
 }
 
-CongElementEditor* cong_editor_widget_get_element_editor_for_node(CongEditorWidget *widget, CongNodePtr node)
+CongElementEditor* cong_editor_widget2_get_element_editor_for_node(CongEditorWidget2 *widget, CongNodePtr node)
 {
-	CongEditorWidgetDetails *details;
+	CongEditorWidget2Details *details;
 	CongElementEditor* editor;
 
 	g_return_val_if_fail(widget, NULL);
@@ -755,6 +755,6 @@ CongElementEditor* cong_editor_widget_get_element_editor_for_node(CongEditorWidg
 	} else {
 		/* Recurse to parent node: */
 		g_assert(node->parent);
-		return cong_editor_widget_get_element_editor_for_node(widget, node->parent);
+		return cong_editor_widget2_get_element_editor_for_node(widget, node->parent);
 	}
 }

@@ -140,7 +140,7 @@ static void section_head_editor_on_recursive_self_test(CongElementEditor *elemen
 
 static void delete_children(CongSectionHeadEditor *section_head)
 {
-/*  	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget); */
+/*  	CongEditorWidget2Details* details = GET_DETAILS(editor_widget); */
 	GList *iter;
 
 	/* Delete all child editors: */
@@ -159,12 +159,12 @@ static void delete_children(CongSectionHeadEditor *section_head)
 
 static void generate_children(CongSectionHeadEditor *section_head)
 {
-	CongEditorWidget *editor_widget = section_head->element_editor.widget;
+	CongEditorWidget2 *editor_widget = section_head->element_editor.widget;
 
 	/* Regenerate the child editors: */
 	recursively_create_children(section_head);
 
-	cong_editor_widget_force_layout_update(editor_widget);
+	cong_editor_widget2_force_layout_update(editor_widget);
 }
 
 static void regenerate_children(CongSectionHeadEditor *section_head, gboolean before_event) 
@@ -179,9 +179,9 @@ static void regenerate_children(CongSectionHeadEditor *section_head, gboolean be
 
 static gboolean section_head_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 
 	g_return_val_if_fail(event, FALSE);
@@ -377,9 +377,9 @@ static gint section_head_get_title_bar_height(CongSectionHeadEditor *section_hea
 
 static void section_head_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GtkRequisition *requisition = &element_editor->requisition;
 	GList *iter;
 	gint title_bar_height = section_head_get_title_bar_height(section_head);
@@ -407,9 +407,9 @@ static void section_head_editor_get_size_requisition(CongElementEditor *element_
 
 static void section_head_editor_allocate_child_space(CongElementEditor *element_editor)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkRectangle free_rectangle;
 	gint title_bar_height = section_head_get_title_bar_height(section_head);
@@ -447,9 +447,9 @@ static void section_head_editor_allocate_child_space(CongElementEditor *element_
 
 static void section_head_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkGC *gc;
 	int str_width;
@@ -481,7 +481,7 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 		return;
 	}
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 	x = CONG_ELEMENT_EDITOR(section_head)->first_node;
 
@@ -579,9 +579,9 @@ static void section_head_editor_recursive_render(CongElementEditor *element_edit
 
 static void section_head_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
 	/* Test to see if the header bar was clicked: */
 	if ( cong_eel_rectangle_contains(&section_head->title_bar_window_rect, 
@@ -593,7 +593,7 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 		case 1: /* Normally the left mouse button: */
 			{
 				section_head->expanded = !section_head->expanded;
-				cong_editor_widget_force_layout_update(editor_widget);
+				cong_editor_widget2_force_layout_update(editor_widget);
 			}
 			break;
 			
@@ -632,9 +632,9 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 
 static void section_head_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 
 	/* Test to see if the header bar was clicked: */
 	if ( cong_eel_rectangle_contains(&section_head->title_bar_window_rect, 
@@ -665,16 +665,16 @@ static void section_head_on_key_press(CongElementEditor *element_editor, GdkEven
 }
 
 #if 0
-static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node)
+static CongEditorWidget2 *create_child(CongSectionHeadEditor *section_head, CongNodePtr child_node)
 {
-	CongEditorWidget *editor_widget;
+	CongEditorWidget2 *editor_widget;
 	CongDocument *doc;
 	CongDispspec *ds;
 	enum CongNodeType node_type = cong_node_type(child_node);
 	const char *name = xml_frag_name_nice(child_node);
 
 	editor_widget = section_head->element_editor.widget;
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 
 	if (node_type == CONG_NODE_TYPE_ELEMENT) {
@@ -682,20 +682,20 @@ static CongEditorWidget *create_child(CongSectionHeadEditor *section_head, CongN
 		
 		if (element) {
 			if (cong_dispspec_element_is_structural(element)) {
-				return CONG_EDITOR_WIDGET( cong_section_head_editor_new(editor_widget, child_node) );
+				return CONG_EDITOR_WIDGET2( cong_section_head_editor_new(editor_widget, child_node) );
 				/*  collapsed_child = cong_dispspec_element_collapseto(element); */
 				
 			} else if (cong_dispspec_element_is_span(element) ||
 				   CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element)) {
 				
-				return CONG_EDITOR_WIDGET( cong_span_text_editor_new(editor_widget, child_node, child_node) );
+				return CONG_EDITOR_WIDGET2( cong_span_text_editor_new(editor_widget, child_node, child_node) );
 				
 			} else if (CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE==cong_dispspec_element_type(element)) {
 				/* unwritten */
 			}
 		}	
 	} else if (node_type == CONG_NODE_TYPE_TEXT) {
-		return CONG_EDITOR_WIDGET( cong_span_text_editor_new(editor_widget, child_node, child_node) );
+		return CONG_EDITOR_WIDGET2( cong_span_text_editor_new(editor_widget, child_node, child_node) );
 	}
 
 	
@@ -742,7 +742,7 @@ static CongNodePtr get_final_node_of_span_text(CongNodePtr x, CongDispspec *ds)
 
 static void recursively_create_children(CongSectionHeadEditor *section_head)
 {
-	CongEditorWidget *editor_widget;
+	CongEditorWidget2 *editor_widget;
 	CongDocument *doc;
 	CongDispspec *ds;
 	CongNodePtr this_node;
@@ -751,7 +751,7 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 	g_return_if_fail(section_head);
 
 	editor_widget = section_head->element_editor.widget;
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 
       	this_node = CONG_ELEMENT_EDITOR(section_head)->first_node->children;
@@ -828,7 +828,7 @@ static void recursively_create_children(CongSectionHeadEditor *section_head)
 }
 
 /* Public API: */
-CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNodePtr node)
+CongElementEditor *cong_section_head_editor_new(CongEditorWidget2 *widget, CongNodePtr node)
 {
 	CongSectionHeadEditor *section_head;
 	CongDocument *doc;
@@ -837,7 +837,7 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	CongFont *title_font;
 	gchar *title_text;
 
-	doc = cong_editor_widget_get_document(widget);
+	doc = cong_editor_widget2_get_document(widget);
 	ds = cong_document_get_dispspec(doc);
 	element = cong_dispspec_lookup_element(ds, cong_node_xmlns(node), cong_node_name(node));
 	g_assert(element);
@@ -850,7 +850,7 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	section_head->expanded = TRUE;
 	section_head->element = element;
 
-	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(section_head));
+	cong_editor_widget2_register_element_editor(widget, CONG_ELEMENT_EDITOR(section_head));
 
 	section_head->title_bar_pango_layout = pango_layout_new(gdk_pango_context_get());
 	g_assert(section_head->title_bar_pango_layout);

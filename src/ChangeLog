@@ -1,5 +1,17 @@
 2003-07-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-plugin.c, cong-plugin.h, cong-primary-window.c, cong-section-head-editor.c, cong-span-text-editor.c, global.h, plugin-lists.c, plugin-xsl.c
+
+	Changed existing editor widget to have a suffix of 2, added a test for CongEditorWidget3
+
+	* cong-file-open.c, cong-menus.c, plugin-cleanup-source.c, plugin-validate.c, plugin-website.c
+
+	Added cong-primary-window.h header
+	
+	* cong-editor-widget3-impl.h, cong-editor-widget3.c, cong-primary-window.h, Makefile.am
+
+	New files
+
 	* cong-app.c, Makefile.am
 
 	New file

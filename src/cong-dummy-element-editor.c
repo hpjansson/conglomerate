@@ -71,9 +71,9 @@ static void dummy_element_editor_on_recursive_self_test(CongElementEditor *eleme
 
 static gboolean dummy_element_editor_on_document_event(CongElementEditor *element_editor, CongDocumentEvent *event)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongDummyElementEditor *dummy_element = CONG_DUMMY_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 
 	g_return_val_if_fail(event, FALSE);
@@ -83,9 +83,9 @@ static gboolean dummy_element_editor_on_document_event(CongElementEditor *elemen
 
 static void dummy_element_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongDummyElementEditor *dummy_element = CONG_DUMMY_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GtkRequisition *requisition = &element_editor->requisition;
 	GList *iter;
 
@@ -101,9 +101,9 @@ static void dummy_element_editor_allocate_child_space(CongElementEditor *element
 
 static void dummy_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
 {
-	CongEditorWidget *editor_widget = element_editor->widget;
+	CongEditorWidget2 *editor_widget = element_editor->widget;
 	CongDummyElementEditor *dummy_element = CONG_DUMMY_ELEMENT_EDITOR(element_editor);
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+	CongEditorWidget2Details* details = GET_DETAILS(editor_widget);
 	GList *iter;
 	GdkGC *gc;
 	int str_width;
@@ -132,7 +132,7 @@ static void dummy_element_editor_recursive_render(CongElementEditor *element_edi
 		return;
 	}
 
-	doc = cong_editor_widget_get_document(editor_widget);
+	doc = cong_editor_widget2_get_document(editor_widget);
 	ds = cong_document_get_dispspec(doc);
 	x = CONG_ELEMENT_EDITOR(dummy_element)->first_node;
 	element = cong_dispspec_get_first_element(ds);
@@ -178,7 +178,7 @@ static void dummy_element_on_key_press(CongElementEditor *element_editor, GdkEve
 }
 
 /* Public API: */
-CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongNodePtr node, const gchar *message)
+CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget2 *widget, CongNodePtr node, const gchar *message)
 {
 	CongDummyElementEditor *dummy_element = g_new0(CongDummyElementEditor,1);
 	dummy_element->element_editor.klass = &dummy_element_editor_class;
@@ -187,7 +187,7 @@ CongElementEditor *cong_dummy_element_editor_new(CongEditorWidget *widget, CongN
 	dummy_element->element_editor.final_node = node;
 	dummy_element->message = g_strdup(message);
 
-	cong_editor_widget_register_element_editor(widget, CONG_ELEMENT_EDITOR(dummy_element));
+	cong_editor_widget2_register_element_editor(widget, CONG_ELEMENT_EDITOR(dummy_element));
 
 	return CONG_ELEMENT_EDITOR(dummy_element);
 }
