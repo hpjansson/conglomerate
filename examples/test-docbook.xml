@@ -70,9 +70,36 @@
 <listitem><para>Yet more text</para></listitem>
 </itemizedlist>
 </sect2>
-
-<sect2><title>Test of &lt;orderedlist&gt;</title>
-<orderedlist>
+<sect2><title>Test of &lt;orderedlist&gt; with arabic numbering</title>
+<orderedlist numeration="arabic">
+<listitem><para>The first item</para></listitem>
+<listitem><para>The second item</para></listitem>
+<listitem><para>The third item</para></listitem>
+</orderedlist>
+</sect2>
+<sect2><title>Test of &lt;orderedlist&gt; with lower-case alphabetic numbering</title>
+<orderedlist numeration="loweralpha">
+<listitem><para>The first item</para></listitem>
+<listitem><para>The second item</para></listitem>
+<listitem><para>The third item</para></listitem>
+</orderedlist>
+</sect2>
+<sect2><title>Test of &lt;orderedlist&gt; with lower-case roman numbering</title>
+<orderedlist numeration="lowerroman">
+<listitem><para>The first item</para></listitem>
+<listitem><para>The second item</para></listitem>
+<listitem><para>The third item</para></listitem>
+</orderedlist>
+</sect2>
+<sect2><title>Test of &lt;orderedlist&gt; with upper-case alphabetic numbering</title>
+<orderedlist numeration="upperalpha">
+<listitem><para>The first item</para></listitem>
+<listitem><para>The second item</para></listitem>
+<listitem><para>The third item</para></listitem>
+</orderedlist>
+</sect2>
+<sect2><title>Test of &lt;orderedlist&gt; with upper-case roman numbering</title>
+<orderedlist numeration="upperroman">
 <listitem><para>The first item</para></listitem>
 <listitem><para>The second item</para></listitem>
 <listitem><para>The third item</para></listitem>
@@ -85,6 +112,15 @@
 <formalpara><title>Speed</title><para>Quick</para></formalpara>
 <formalpara><title>Colour</title><para>Brown</para></formalpara>
 <formalpara><title>Was it a fox?</title><para>Now that you mention it...</para></formalpara> 
+</sect1>
+
+<sect1><title>Test of admonitions</title>
+<para>Here is some text.</para>
+      <caution><para>Be careful.</para></caution>
+      <important><para>This is important!</para></important>
+      <note><para>This is a note.</para></note>
+      <tip><para>This is a tip.</para></tip>
+      <warning><para>This is a warning.</para></warning>
 </sect1>
 
 

@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-07-28  David Malcolm
+
+	* test-docbook.xml
+
+	Added list and admonition tests
+
 2003-07-04  David Malcolm
 
 	* kernel-cousin.xds, Makefile.am
