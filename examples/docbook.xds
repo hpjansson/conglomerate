@@ -56,6 +56,27 @@
 		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0">
 		</element>
+		<element tag="colophon" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="qandaset" type="structural" color="a0b0c0">
+			<header-info tag="title"></header-info>
+		</element>
+
+		<element tag="qandadiv" type="structural" color="a0b0c0">
+			<header-info tag="title"></header-info>
+		</element>
+
+		<element tag="qandaentry" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="question" type="structural" color="a0b0c0">
+			<collapseto></collapseto>
+		</element>
+
+		<element tag="answer" type="structural" color="a0b0c0">
+			<collapseto></collapseto>
+		</element>
 
 		<!-- The various sections -->
 
@@ -99,6 +120,12 @@
 		</element>
 
 		<!-- Miscellanous stuff -->
+
+		<element tag="figure" type="structural" color="a0b0c0">
+		</element>
+
+		<element tag="screenshot" type="structural" color="a0b0c0">
+		</element>
 
 		<element tag="informalfigure" type="structural" color="a0b0c0">
 		</element>
@@ -172,6 +199,22 @@
 		<element tag="ulink" type="span" color="a0b0c0">
 		</element>
 		<element tag="xref" type="span" color="a0b0c0">
+		</element>
+
+
+		<element tag="guibutton" type="span" color="a0b0c0">
+		</element>
+		<element tag="guilabel" type="span" color="a0b0c0">
+		</element>
+		<element tag="guimenu" type="span" color="a0b0c0">
+		</element>
+		<element tag="guisubmenu" type="span" color="a0b0c0">
+		</element>
+		<element tag="guimenuitem" type="span" color="a0b0c0">
+		</element>
+		<element tag="keycap" type="span" color="a0b0c0">
+		</element>
+		<element tag="menuchoice" type="span" color="a0b0c0">
 		</element>
 
 		<!-- etc -->

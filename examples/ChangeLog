@@ -1,4 +1,16 @@
 creating ChangeLog
+2002-11-30  David Malcolm
+
+	* docbook.xds
+
+	Added Q&A tags
+	
+2002-11-23  David Malcolm
+
+	* file-roller.xml
+
+	Initial import
+	
 2002-11-07  David Malcolm
 
 	* test-docbook.xml
