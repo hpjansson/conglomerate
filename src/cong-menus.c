@@ -37,6 +37,8 @@
 #include "cong-util.h"
 #include "cong-command.h"
 #include "cong-command-history.h"
+#include "cong-selection.h"
+#include "cong-range.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -1223,6 +1225,9 @@ static void menu_callback_help(gpointer callback_data,
 enum ActionMarkers {
 	ACTION_MARKER_UNDO = 1,
 	ACTION_MARKER_REDO,
+	ACTION_MARKER_CUT,
+	ACTION_MARKER_COPY,
+	ACTION_MARKER_PASTE,
 	ACTION_MARKER_TOOLS_MENU
 };
 
@@ -1258,9 +1263,9 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/_Undo"),              "<control>Z", menu_callback_undo, ACTION_MARKER_UNDO, "<StockItem>", GTK_STOCK_UNDO },
 	{ N_("/Edit/_Redo"),              "<shift><control>Z", menu_callback_redo, ACTION_MARKER_REDO, "<StockItem>", GTK_STOCK_REDO },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
-	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
-	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
-	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
+	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, ACTION_MARKER_CUT, "<StockItem>", GTK_STOCK_CUT },
+	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, ACTION_MARKER_COPY, "<StockItem>", GTK_STOCK_COPY },
+	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, ACTION_MARKER_PASTE, "<StockItem>", GTK_STOCK_PASTE },
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 #if ENABLE_UNIMPLEMENTED_MENUS
 	{ N_("/Edit/_Find..."),         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
@@ -1390,6 +1395,7 @@ on_history_changed_undo_menu (CongCommandHistory *history,
 
 	/* FIXME: is there a way to set the menu item text to reflect the new content? */
 }
+
 static void 
 on_history_changed_redo_menu (CongCommandHistory *history,
 			      gpointer user_data)
@@ -1400,6 +1406,32 @@ on_history_changed_redo_menu (CongCommandHistory *history,
 				  cong_command_history_can_redo (history));
 
 	/* FIXME: is there a way to set the menu item text to reflect the new content? */
+}
+
+static void 
+on_selection_changed_copy (CongDocument *document,
+			      gpointer user_data)
+{
+	GtkWidget *copy = GTK_WIDGET (user_data);
+
+	CongSelection *selection = cong_document_get_selection(document);
+	/* FIXME: logical or ordered range? */
+	CongRange *range = cong_selection_get_logical_range(selection);
+	gtk_widget_set_sensitive (copy,
+				  cong_range_can_be_cut (range));
+}
+
+static void 
+on_selection_changed_cut (CongDocument *document,
+			      gpointer user_data)
+{
+	GtkWidget *cut = GTK_WIDGET (user_data);
+
+	CongSelection *selection = cong_document_get_selection(document);
+	/* FIXME: logical or ordered range? */
+	CongRange *range = cong_selection_get_logical_range(selection);
+	gtk_widget_set_sensitive (cut,
+				  cong_range_can_be_cut (range));
 }
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
@@ -1432,6 +1464,7 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 		}
 
 		/* Connect undo/redo sensitivity to the command history: */
+		/* Connect Cut/Copy sensitivity to CongDocument "selection change" signal PCS*/
 		{
 			CongDocument *doc = cong_primary_window_get_document (primary_window);
 			CongCommandHistory *history = cong_document_get_command_history (doc);
@@ -1440,6 +1473,11 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 										 ACTION_MARKER_UNDO);
 			GtkWidget *redo =  gtk_item_factory_get_widget_by_action(item_factory,
 										 ACTION_MARKER_REDO);
+			GtkWidget *copy =  gtk_item_factory_get_widget_by_action(item_factory,
+										 ACTION_MARKER_COPY);
+			GtkWidget *cut =  gtk_item_factory_get_widget_by_action(item_factory,
+										 ACTION_MARKER_CUT);
+			/* FIXME: What signal to connect paste to? */
 
 			g_signal_connect (G_OBJECT(history),
 					  "changed",
@@ -1449,9 +1487,19 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 					  "changed",
 					  G_CALLBACK(on_history_changed_redo_menu),
 					  redo);
+			g_signal_connect (G_OBJECT(doc),
+					  "selection_change",
+					  G_CALLBACK(on_selection_changed_copy),
+					  copy);
+			g_signal_connect (G_OBJECT(doc),
+					  "selection_change",
+					  G_CALLBACK(on_selection_changed_cut),
+					  cut);
 
 			gtk_widget_set_sensitive (undo, FALSE);
 			gtk_widget_set_sensitive (redo, FALSE);
+			gtk_widget_set_sensitive (copy, FALSE);
+			gtk_widget_set_sensitive (cut, FALSE);
 		}
 
 	} else {
