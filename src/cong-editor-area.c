@@ -27,6 +27,7 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 #include "cong-marshal.h"
+#include "cong-editor-node.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -75,6 +76,11 @@ static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
 				  GtkOrientation orientation,
 				  gpointer user_data);
+
+static gboolean
+on_signal_button_press_for_area_with_node (CongEditorArea *editor_area, 
+					   GdkEventButton *event,
+					   gpointer user_data);
 
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, calc_requisition);
 CONG_EEL_IMPLEMENT_MUST_OVERRIDE_SIGNAL (cong_editor_area, allocate_child_space);
@@ -686,6 +692,20 @@ cong_editor_area_get_gdk_window(CongEditorArea *editor_area)
 	return GTK_WIDGET(cong_editor_area_get_widget (editor_area))->window;
 }
 
+/* Associate the editor area with a particular editor node: */
+void
+cong_editor_area_connect_node_signals (CongEditorArea *area,
+				       CongEditorNode *editor_node)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA (area));
+	g_return_if_fail (IS_CONG_EDITOR_NODE (editor_node));
+
+	g_signal_connect (area,
+			  "button_press_event",
+			  G_CALLBACK(on_signal_button_press_for_area_with_node),
+			  editor_node);
+}
+
 /* Protected stuff: */
 void
 cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
@@ -715,6 +735,7 @@ cong_editor_area_protected_set_parent (CongEditorArea *area,
 	/* FIXME: refcount issues? */
 }
 
+
 /* Signal handler definitions: */
 static void
 on_child_flush_requisition_cache (CongEditorArea *child_area,
@@ -733,4 +754,39 @@ on_child_flush_requisition_cache (CongEditorArea *child_area,
 	/* FIXME: we flush our cache in both axes, just to be sure... */
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area), GTK_ORIENTATION_HORIZONTAL);
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(fake_parent_area), GTK_ORIENTATION_VERTICAL);
+}
+
+static gboolean
+on_signal_button_press_for_area_with_node (CongEditorArea *editor_area, 
+					   GdkEventButton *event,
+					   gpointer user_data)
+{
+
+	CongEditorNode *editor_node = CONG_EDITOR_NODE(user_data);
+
+	CongEditorWidget3* editor_widget;			
+	CongDocument* doc;
+
+	editor_widget = cong_editor_area_get_widget (editor_area);			
+	doc = cong_editor_area_get_document (editor_area);
+
+	/* Which button was pressed? */
+	switch (event->button) {
+	default: return FALSE;
+	case 3: /* Normally the right mouse button: */
+		{
+			GtkWidget* menu;
+
+			menu = cong_ui_popup_init(doc, 
+						  cong_editor_node_get_node (editor_node),
+						  GTK_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(editor_widget))));
+			gtk_menu_popup (GTK_MENU(menu), 
+					NULL, 
+					NULL, 
+					NULL, 
+					NULL, event->button,
+					event->time);		      
+		}
+		return TRUE;
+	}		
 }

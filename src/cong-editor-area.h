@@ -220,6 +220,11 @@ cong_editor_area_get_deepest_child_at (CongEditorArea *area,
 GdkWindow*
 cong_editor_area_get_gdk_window(CongEditorArea *editor_area);
 
+/* Associate the editor area with a particular editor node: */
+void
+cong_editor_area_connect_node_signals (CongEditorArea *area,
+				       CongEditorNode *editor_node);
+
 /* Protected stuff: */
 void
 cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
@@ -228,6 +233,7 @@ cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
 void
 cong_editor_area_protected_set_parent (CongEditorArea *area,
 				       CongEditorArea *parent);
+
 
 G_END_DECLS
 

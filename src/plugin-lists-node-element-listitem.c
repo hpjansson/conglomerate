@@ -338,5 +338,8 @@ generate_block_area (CongEditorNode *editor_node)
 
 	g_free (label);
 
+	cong_editor_area_connect_node_signals (new_area,
+					       editor_node);
+
 	return new_area;
 }

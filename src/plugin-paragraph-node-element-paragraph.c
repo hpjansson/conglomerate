@@ -99,5 +99,8 @@ generate_block_area (CongEditorNode *editor_node)
 
 	new_area = cong_editor_area_paragraph_new (cong_editor_node_get_widget (editor_node));
 
+	cong_editor_area_connect_node_signals (new_area,
+					       editor_node);
+
 	return new_area;
 }
