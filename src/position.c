@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#include <ctype.h>
+
 #include <ttree.h>
 #include <xml.h>
 #include "global.h"
@@ -10,18 +12,11 @@
 
 #define WIDTH_WRAP(disp_w, x, word_w) (((x) + (word_w)) > (disp_w - 1))
 
-
-void assert(void *a)
-{
-	
-}
-
-
 void pos_pl_data(struct xed *xed, struct pos *pos)
 {
 	char *data;
-	int word_x_offset = 0;
-	int i_last_space = 0;
+	UNUSED_VAR(int word_x_offset = 0)
+	UNUSED_VAR(int i_last_space = 0)
 	int i;
 
 	for (i = pos->c_given, data = xml_frag_data_nice(pos->node); data[i]; )
@@ -91,7 +86,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 	TTREE *node_prev2;
 	TTREE *node_first;
 
-	assert(pos->node);
+	g_assert(pos->node);
 	
 	node_first = pos->node;
 
@@ -132,7 +127,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 
 			else if (xml_frag_type(pos->node) == XML_TAG_SPAN)
 			{
-				if (ds_element_structural(ds_global, xml_frag_name_nice(pos->node)))
+				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(pos->node)))
 				{
 					pos->node = node_prev2;
 					if (xml_frag_type(pos->node) == XML_DATA) 
@@ -191,7 +186,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 		
 		while (pos->node)
 		{
-			if (ds_element_structural(ds_global, xml_frag_name_nice(pos->node)))
+			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(pos->node)))
 			{ pos->node = 0; break; }
 				
 			node_prev = pos->node;
@@ -232,8 +227,8 @@ struct pos *pos_physical_to_logical(struct xed *xed, int x, int y)
 
 	/* Find line by y coord */
 
-	assert(xed->lines);
-	assert(xed->lines->child);
+	g_assert(xed->lines);
+	g_assert(xed->lines->child);
 
 	for (i = 0, l = xed->lines->child; l->next; i++, l = l->next)
 	{
@@ -360,7 +355,7 @@ void pos_lp(struct xed *xed, struct pos *pos)
 	TTREE *node_prev;
 	TTREE *node_first;
 
-	assert(pos->node);
+	g_assert(pos->node);
 	
 	node_first = pos->node;
 
@@ -484,15 +479,15 @@ struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c)
 
 	pos_lp(xed, pos);
 
-	assert(xed->lines);
-	assert(xed->lines->child);
+	g_assert(xed->lines);
+	g_assert(xed->lines->child);
 
 #ifndef RELEASE
 	printf("\nGot line: %d.\n", pos->line);
 #endif
 	for (i = pos->line, l = xed->lines->child; i && l->next; i--) l = l->next;
 
-	assert(l);
+	g_assert(l);
 	
 	if (l->prev) pos->y = (int) *((int *) l->prev->child->next->next->data);
 	else pos->y = 0;

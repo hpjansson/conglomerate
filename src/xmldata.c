@@ -36,7 +36,8 @@ char *xml_frag_name_nice(TTREE *x)
 
 char *xml_fetch_clean_data(TTREE *x)
 {
-	TTREE *n0, *n1;
+	TTREE *n0;
+	UNUSED_VAR(TTREE *n1)
 	char *s = 0, *s_sub;
 
 	n0 = x->child->child;
@@ -74,7 +75,7 @@ TTREE *xml_inner_span_element(TTREE *x)
 	if (x->parent) x = x->parent;
 	else return(0);
 
-	if (!strcmp("tag_span", x->data) && ds_element_span(ds_global, x->child->data))
+	if (!strcmp("tag_span", x->data) && ds_element_span(the_globals.ds_global, x->child->data))
 		return(x);
 
 	return(0);
@@ -93,7 +94,7 @@ TTREE *xml_outer_span_element(TTREE *x)
 
 	for (;;)
 	{
-	  if (!strcmp("tag_span", x->data) && ds_element_span(ds_global, x->child->data))
+	  if (!strcmp("tag_span", x->data) && ds_element_span(the_globals.ds_global, x->child->data))
 		  n0 = x;
 		else break;
 		

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
-#define GTK_ENABLE_BROKEN
+/* Was using GTK_ENABLE_BROKEN to port over from old GtkTree to new GtkTreeView code */
+/* #define GTK_ENABLE_BROKEN */
 
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
@@ -10,7 +11,6 @@
 
 GtkStyle *style_white;
 
-void xv_style_r(GtkWidget *widget, gpointer data);
 
 
 static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x)
@@ -19,13 +19,13 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	int str_width;
 	TTREE *n0;
 
-	str_width = gdk_string_width(ft, xml_frag_name_nice(x));
+	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 300 ? str_width : 300;
 
 	
 	str_width = w->allocation.width - 4;
 	
-	gc = ds_gc_get(ds_global, x, 0);
+	gc = ds_gc_get(the_globals.ds_global, x, 0);
 	if (!gc) gc = w->style->black_gc;
 	
 	/* Fill the header box */
@@ -71,7 +71,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 
 	/* Section identifier */
 
-	gdk_draw_string(w->window, ft, w->style->black_gc, 4, 2 + ft_asc,
+	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
 									ds_name_get(x));
 
 	/* Metadata indicator */
@@ -80,9 +80,9 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	n0 = ttree_branch_walk_str(n0, "tag_span metadata");
 	if (n0)
 	{
-		gdk_draw_string(w->window, ft, w->style->black_gc, 
-										w->allocation.width - 4 - gdk_string_width(ft, "meta"),
-										2 + ft_asc, "meta");
+		gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 
+				w->allocation.width - 4 - gdk_string_width(the_globals.ft, "meta"),
+				2 + the_globals.ft_asc, "meta");
 	}
 
 	/* Medios indicator */
@@ -91,22 +91,24 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	n0 = ttree_branch_walk_str(n0, "tag_span metadata tag_span metadata.sourceset");
 	if (n0)
 	{
-		gdk_draw_string(w->window, ft, w->style->black_gc, 
-										w->allocation.width - 4 - gdk_string_width(ft, "meta") -
-										10 - gdk_string_width(ft, "fuentes"),
-										2 + ft_asc, "fuentes");
+		gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 
+				w->allocation.width - 4 - gdk_string_width(the_globals.ft, "meta") -
+				10 - gdk_string_width(the_globals.ft, "fuentes"),
+				2 + the_globals.ft_asc, "fuentes");
 	}
+
+	return TRUE;
 }
 
 GtkWidget *xv_section_head(TTREE *ds, TTREE *x)
 {
-	TTREE *n0;
+	UNUSED_VAR(TTREE *n0)
 	GtkWidget *vbox, *title;
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	title = gtk_drawing_area_new();
 	gtk_box_pack_start(GTK_BOX(vbox), title, TRUE, TRUE, 0);
-	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, ft_asc + ft_desc + 4 /* up and down borders */ + 4 /* space below */);
+	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 300, the_globals.ft_asc + the_globals.ft_desc + 4 /* up and down borders */ + 4 /* space below */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
 										 (GtkSignalFunc) xv_section_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
@@ -125,10 +127,10 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 	int str_width;
 	int i;
 	
-	str_width = gdk_string_width(ft, xml_frag_name_nice(x));
+	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
-	gc = ds_gc_get(ds_global, xml_frag_exit(x), 0);
+	gc = ds_gc_get(the_globals.ds_global, xml_frag_exit(x), 0);
 	if (!gc) gc = w->style->black_gc;
 
 	/* Fill the header box */
@@ -190,7 +192,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 
 	/* Section identifier */
 
-	gdk_draw_string(w->window, ft, w->style->black_gc, 4, 2 + ft_asc,
+	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
 									ds_name_get(x));
 	
 	return(TRUE);
@@ -199,11 +201,11 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 
 GtkWidget *xv_fragment_head(TTREE *ds, TTREE *x)
 {
-	TTREE *n0;
+	UNUSED_VAR(TTREE *n0)
 	GtkWidget *title;
 
 	title = gtk_drawing_area_new();
-	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, ft_asc + ft_desc + 4 /* framing and inside space */ + 4 /* below space */);
+	gtk_drawing_area_size(GTK_DRAWING_AREA(title), 200, the_globals.ft_asc + the_globals.ft_desc + 4 /* framing and inside space */ + 4 /* below space */);
 	gtk_signal_connect(GTK_OBJECT(title), "expose_event",
 										 (GtkSignalFunc) xv_fragment_head_expose, x);
 	gtk_signal_connect(GTK_OBJECT(title), "configure_event",
@@ -249,10 +251,10 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *
 
 GtkWidget *xv_fragment_tail(TTREE *ds, TTREE *x)
 {
-	GdkColor gcol;
-	GtkStyle *style;
+        UNUSED_VAR(GdkColor gcol)
+	UNUSED_VAR(GtkStyle *style)
 	GtkWidget *line;
-	int i;
+	UNUSED_VAR(int i)
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 5);
@@ -314,7 +316,7 @@ static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *even
 
 static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *gc)
 {
-	GdkColor gcol;
+  UNUSED_VAR(GdkColor gcol)
 
 	if (!gc) gc = w->style->black_gc;
 	
@@ -424,10 +426,10 @@ GtkWidget *xv_section_data(TTREE *x, TTREE *ds, int collapsed)
 
 GtkWidget *xv_section_tail(TTREE *ds, TTREE *x)
 {
-	GdkColor gcol;
-	GtkStyle *style;
+	UNUSED_VAR(GdkColor gcol)
+	UNUSED_VAR(GtkStyle *style)
 	GtkWidget *line;
-	int i;
+	UNUSED_VAR(int i)
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 10, 10);
@@ -443,7 +445,7 @@ GtkWidget *xv_section_tail(TTREE *ds, TTREE *x)
 
 TTREE *xv_editor_elements_skip(TTREE *x, TTREE *ds)
 {
-	TTREE *x0;
+	UNUSED_VAR(TTREE *x0);
 
 	for ( ; x; x = xml_frag_next(x))
 	{
@@ -473,25 +475,38 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
-GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, GtkWidget *tree_parent)
+GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
-	GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */;
-	GdkGCValues     gc_values;
+	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
+	UNUSED_VAR(GdkGCValues     gc_values)
 
 	TTREE *x_orig;
-	TTREE *n0, *n1;
-	GtkWidget *frame, *sub, *hbox, *poot, *glaebb_item, *glaebb_tree;
-	struct xed *xed;
-	unsigned int col;
-	int i;
+	UNUSED_VAR(TTREE *n0)
+	UNUSED_VAR(TTREE *n1)
+	UNUSED_VAR(GtkWidget *frame)
+	GtkWidget *sub, *hbox, *poot; /*  *glaebb_item, *glaebb_tree; */
+	UNUSED_VAR(struct xed *xed)
+	UNUSED_VAR(unsigned int col)
+	UNUSED_VAR(int i)
 
+	GtkTreeIter new_tree_iter;
+
+#if 1
+	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
+	gtk_tree_store_set (store, &new_tree_iter,
+			    TITLE_COLUMN, ds_name_get(x),
+			    TTREE_COLUMN, x,
+			    -1);
+	printf("FIXME replace call to tpopup_init\n");
+#else
 	glaebb_tree = 0;
 
-	glaebb_item = gtk_tree_item_new_with_label(ds_name_get(x));
+	glaebb_item = gtk_tree_item_new_with_label();
 	gtk_tree_append(GTK_TREE(tree_parent), glaebb_item);
 	tpopup_init(glaebb_item, x);
 
 	gtk_widget_show(glaebb_item);
+#endif
 
 #if 0
 	frame = gtk_event_box_new();
@@ -522,25 +537,32 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 			{
 				if (ds_element_collapse(ds, name))
 				{
+#if 0
 					if (!glaebb_tree)
 					{
 						glaebb_tree = gtk_tree_new();
 						gtk_tree_item_set_subtree(GTK_TREE_ITEM(glaebb_item), glaebb_tree);
 					}
+#endif
 					
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_head(ds, x), FALSE, TRUE, 0);
+#if 1
+					sub = xv_element_new(x, ds, root, 1, store, &new_tree_iter);
+#else
 					sub = xv_element_new(x, ds, root, 1, glaebb_tree);
+#endif
 					gtk_box_pack_start(GTK_BOX(root), xv_fragment_tail(ds, x), FALSE, TRUE, 0);
 				}
 				else
 				{
 					/* New structural element */
-					
+#if 0					
 					if (!glaebb_tree)
 					{
 						glaebb_tree = gtk_tree_new();
 						gtk_tree_item_set_subtree(GTK_TREE_ITEM(glaebb_item), glaebb_tree);
 					}
+#endif
 					
 					hbox = gtk_hbox_new(FALSE, 0);
 					gtk_widget_show(hbox);
@@ -550,7 +572,11 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 					xv_style_r(hbox, style_white);
 					poot = xv_section_head(ds, x);
 					gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
+#if 1
+					sub = xv_element_new(x, ds, poot, 0, store, &new_tree_iter);
+#else
 					sub = xv_element_new(x, ds, poot, 0, glaebb_tree);
+#endif
 
 
 					sub = xv_section_tail(ds, x);
@@ -589,7 +615,11 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 	}
 
 	xv_style_r(sub, style_white);
+#if 1
+	printf("removed call to gtk_tree_item_expand\n");
+#else
 	gtk_tree_item_expand(GTK_TREE_ITEM(glaebb_item));
+#endif
 	return(root);
 }
 
@@ -597,16 +627,18 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 {
 	struct xview *xv;
 	GdkColor gcol;
-	GtkWidget *w, *glaebb_tree;
+	GtkWidget *w; /* , *glaebb_tree; */
 	int i;
+
+	GtkTreeIter root_iter;
 
 	g_message("xmlview_new called\n");
 	
-	curs.set = 0;
-	curs.xed = 0;
-	curs.w = 0;
-	selection.xed = 0;
-	selection.t0 = selection.t1 = 0;
+	the_globals.curs.set = 0;
+	the_globals.curs.xed = 0;
+	the_globals.curs.w = 0;
+	the_globals.selection.xed = 0;
+	the_globals.selection.t0 = the_globals.selection.t1 = 0;
 	
 	xv = malloc(sizeof(*xv));
 	memset(xv, 0, sizeof(*xv));
@@ -621,16 +653,24 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 	style_white = gtk_widget_get_default_style();
 	style_white = gtk_style_copy(style_white);
 
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
+	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
 
 	for (i = 0; i < 5; i++) style_white->bg[i] = gcol;
 
+#if 1
+	gtk_tree_store_append (cong_gui_get_tree_store(&the_gui), &root_iter, NULL);  /* Acquire a top-level iterator */
+	gtk_tree_store_set (cong_gui_get_tree_store(&the_gui), &root_iter,
+			    TITLE_COLUMN, "Document",
+			    TTREE_COLUMN, x,
+			    -1);
+#else
 	xv->tree = gtk_tree_item_new_with_label("Document");
 	gtk_tree_append(GTK_TREE(tree), xv->tree);
 	gtk_widget_show(xv->tree);
 
 	glaebb_tree = gtk_tree_new();
 	gtk_tree_item_set_subtree(GTK_TREE_ITEM(xv->tree), glaebb_tree);
+#endif
 
 	xv->w = gtk_vbox_new(FALSE, 0);
 #if 1
@@ -653,7 +693,11 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 			w = xv_section_head(displayspec, x);
 			gtk_box_pack_start(GTK_BOX(xv->w), w, TRUE, TRUE, 0);
 			
+#if 1
+			xv_element_new(x, displayspec, xv->w, 0, cong_gui_get_tree_store(&the_gui), &root_iter);
+#else
 			xv_element_new(x, displayspec, xv->w, 0, glaebb_tree);
+#endif
 
 			w = xv_section_tail(displayspec, x);
 			xv_style_r(w, style_white);
@@ -661,7 +705,11 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 		}
 	}
 
+#if 1
+	printf("removed call to gtk_tree_item_expand\n");
+#else
 	gtk_tree_item_expand(GTK_TREE_ITEM(xv->tree));
+#endif
 	
 #if 1
 	gtk_widget_show_all(xv->w);
@@ -672,12 +720,12 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 
 void xmlview_destroy(int free_xml)
 {
-	if (!xv) return;
+	if (!the_globals.xv) return;
 
-	gtk_widget_destroy(xv->tree);
-	gtk_widget_destroy(xv->w);
-	if (free_xml) ttree_branch_remove(xv->x);
+	cong_gui_destroy_tree_store(&the_gui);
+	gtk_widget_destroy(the_globals.xv->w);
+	if (free_xml) ttree_branch_remove(the_globals.xv->x);
 	
-	free(xv);
-	xv = 0;
+	free(the_globals.xv);
+	the_globals.xv = 0;
 }

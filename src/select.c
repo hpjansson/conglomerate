@@ -7,81 +7,87 @@
 #include <xml.h>
 #include "global.h"
 
-struct selection selection;
-
-
-void selection_start_from_curs()
+void selection_start_from_curs(struct selection* selection, struct curs* curs)
 {
-	selection.xed = curs.xed;
-	selection.x0 = selection.x1 = curs.x;
-	selection.y0 = selection.y1 = curs.y;
-	selection.t0 = selection.t1 = curs.t;
-	selection.c0 = selection.c1 = curs.c;
+  g_assert(selection!=NULL);
+  g_assert(curs!=NULL);
+
+	selection->xed = curs->xed;
+	selection->x0 = selection->x1 = curs->x;
+	selection->y0 = selection->y1 = curs->y;
+	selection->t0 = selection->t1 = curs->t;
+	selection->c0 = selection->c1 = curs->c;
 }
 
 
-void selection_end_from_curs()
+void selection_end_from_curs(struct selection* selection, struct curs* curs)
 {
-	selection.x1 = curs.x;
-	selection.y1 = curs.y;
-	selection.t1 = curs.t;
-	selection.c1 = curs.c;
+  g_assert(selection!=NULL);
+  g_assert(curs!=NULL);
+
+	selection->x1 = curs->x;
+	selection->y1 = curs->y;
+	selection->t1 = curs->t;
+	selection->c1 = curs->c;
 }
 
 
-void selection_draw()
+void selection_draw(struct selection* selection, struct curs* curs)
 {
 	int x0, y0, x1, y1;
 	GdkGC *gc;
 	TTREE *l;
 
-	if (!curs.xed) return;
+  g_assert(selection!=NULL);
+  g_assert(curs!=NULL);
+
+	if (!curs->xed) return;
 	
 	/* Determine selection's usefulness code */
 	
-	if (selection.t0 && selection.t1 &&
-			selection.t0->parent == selection.t1->parent)
-		gc = selection.gc_0;
+	if (selection->t0 && selection->t1 &&
+			selection->t0->parent == selection->t1->parent)
+		gc = selection->gc_0;
 	else
-		gc = selection.gc_3;
+		gc = selection->gc_3;
 
 	/* Find start/end x, y */
 
-	if (selection.y0 == selection.y1)
+	if (selection->y0 == selection->y1)
 	{
-		y0 = selection.y0;
-		y1 = selection.y1;
+		y0 = selection->y0;
+		y1 = selection->y1;
 /*		y1 += f_asc + f_desc; */
 
-		if (selection.x0 <= selection.x1)
+		if (selection->x0 <= selection->x1)
 		{
-			x0 = selection.x0;
-			x1 = selection.x1;
+			x0 = selection->x0;
+			x1 = selection->x1;
 		}
 		else
 		{
-			x0 = selection.x1;
-			x1 = selection.x0;
+			x0 = selection->x1;
+			x1 = selection->x0;
 		}
 	}
-	else if (selection.y0 < selection.y1)
+	else if (selection->y0 < selection->y1)
 	{
-		y0 = selection.y0;
-		y1 = selection.y1;
-		x0 = selection.x0;
-		x1 = selection.x1;
+		y0 = selection->y0;
+		y1 = selection->y1;
+		x0 = selection->x0;
+		x1 = selection->x1;
 	}
 	else
 	{
-		y0 = selection.y1;
-		y1 = selection.y0;
-		x0 = selection.x1;
-		x1 = selection.x0;
+		y0 = selection->y1;
+		y1 = selection->y0;
+		x0 = selection->x1;
+		x1 = selection->x0;
 	}
 
 	/* Find first line */
 
-	for (l = curs.xed->lines->child; l && l->next; l = l->next)
+	for (l = curs->xed->lines->child; l && l->next; l = l->next)
 	{
 #ifndef RELEASE
 		printf("[%d : %d]\n", y0, (int) *((int *) l->child->next->next->data));
@@ -102,10 +108,10 @@ void selection_draw()
 #endif
 		y0 = l->prev ? (int) *((int *) l->prev->child->next->next->data) : 0;
 		if (y0 == y1) break;
-		gdk_draw_rectangle(curs.xed->p, gc, 1,
-											 x0, y0, curs.xed->w->allocation.width - x0,
+		gdk_draw_rectangle(curs->xed->p, gc, 1,
+											 x0, y0, curs->xed->w->allocation.width - x0,
 											 l ? (int) *((int *) l->child->next->next->data) - y0 :
-											     curs.xed->w->allocation.height - y0);
+											    curs->xed->w->allocation.height - y0);
 		l = l->next;
 		x0 = 0;
 	}
@@ -116,10 +122,10 @@ void selection_draw()
 	printf("X");
 #endif
 	
-	gdk_draw_rectangle(curs.xed->p, gc, 1,
+	gdk_draw_rectangle(curs->xed->p, gc, 1,
 										 x0, y0, x1 - x0, 
 										 l ? (int) *((int *) l->child->next->next->data) - y0 /* == y1 */ - (l->next ? 4 : 0) :
-										     curs.xed->w->allocation.height - y0);
+										     curs->xed->w->allocation.height - y0);
 
 #ifndef RELEASE
 	printf("\n");
@@ -128,10 +134,11 @@ void selection_draw()
 
 
 /* Splits a data node in 3 and returns pointer to the middle one */
-
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1)
 {
-	TTREE *dummy, *d1, *d2, *d3, *n0, *n1;
+	TTREE *dummy, *d1, *d2, *d3;
+	UNUSED_VAR(TTREE *n0)
+	UNUSED_VAR(TTREE *n1)
 	int len1, len2, len3;
 
 	if (xml_frag_type(s) != XML_DATA)
@@ -296,41 +303,43 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 }
 
 
-TTREE *selection_reparent_all(TTREE *p)
+TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
 {
 	TTREE *t0, *t1, *n0, *n1, *n2;
 	int c0, c1;
-	int len;
-	char *p_data;
+	UNUSED_VAR(int len)
+	UNUSED_VAR(char *p_data)
 	TTREE *p_node;
+
+  g_assert(selection!=NULL);
 
 	/* Validate selection */
 
-	if (!(selection.t0 && selection.t1 &&
-				selection.t0->parent == selection.t1->parent))
+	if (!(selection->t0 && selection->t1 &&
+				selection->t0->parent == selection->t1->parent))
 		return(0);
 
 	/* --- Processing for multiple nodes --- */
 
-	if (selection.t0 != selection.t1)
+	if (selection->t0 != selection->t1)
 	{
 		/* Selection is valid, now order first/last nodes */
 		
-		for (n0 = selection.t0; n0 && n0 != selection.t1; n0 = n0->next) ;
+		for (n0 = selection->t0; n0 && n0 != selection->t1; n0 = n0->next) ;
 		
 		if (!n0)
 		{
-			t0 = selection.t1;
-			t1 = selection.t0;
-			c0 = selection.c1;
-			c1 = selection.c0;
+			t0 = selection->t1;
+			t1 = selection->t0;
+			c0 = selection->c1;
+			c1 = selection->c0;
 		}
 		else
 		{
-			t0 = selection.t0;
-			t1 = selection.t1;
-			c0 = selection.c0;
-			c1 = selection.c1;
+			t0 = selection->t0;
+			t1 = selection->t1;
+			c0 = selection->c0;
+			c1 = selection->c1;
 		}
 
 		/* Split, first */
@@ -338,11 +347,11 @@ TTREE *selection_reparent_all(TTREE *p)
 		if (c0 && xml_frag_type(t0) == XML_DATA)
 		{
 			p_node = xml_frag_data_nice_split2(t0, c0);
-			t0 = selection.t0 = p_node->next;
+			t0 = selection->t0 = p_node->next;
 		}
 		else p_node = t0;
 		
-		selection.c0 = 0;
+		selection->c0 = 0;
 
 		if (t0->prev) t0->prev->next = p;
 		else if (t0->parent) t0->parent->child = p;
@@ -371,10 +380,10 @@ TTREE *selection_reparent_all(TTREE *p)
 		if (c1 && xml_frag_type(t1) == XML_DATA)
 		{
 			t1 = xml_frag_data_nice_split2(t1, c1);
-			selection.t1 = t1->next;
+			selection->t1 = t1->next;
 		}
 
-		selection.c1 = 0;
+		selection->c1 = 0;
 
 		/* Reparent, last */
 
@@ -400,18 +409,18 @@ TTREE *selection_reparent_all(TTREE *p)
 
 	else
 	{
-		t0 = selection.t0;
-		t1 = selection.t1;
+		t0 = selection->t0;
+		t1 = selection->t1;
 
-		if (selection.c0 < selection.c1)
+		if (selection->c0 < selection->c1)
 		{
-			c0 = selection.c0;
-			c1 = selection.c1;
+			c0 = selection->c0;
+			c1 = selection->c1;
 		}
 		else
 		{
-			c0 = selection.c1;
-			c1 = selection.c0;
+			c0 = selection->c1;
+			c1 = selection->c0;
 		}
 
 		if (xml_frag_type(t0) == XML_DATA)
@@ -419,12 +428,12 @@ TTREE *selection_reparent_all(TTREE *p)
 			if (c0 == c1) return(0); /* The end is the beginning is the end */
 			
 			t0 = t1 = xml_frag_data_nice_split3(t0, c0, c1);
-			selection.t0 = t0;
-			selection.t1 = t0->next;
+			selection->t0 = t0;
+			selection->t1 = t0->next;
 		}
 
-		selection.c0 = 0;
-		selection.c1 = 0;
+		selection->c0 = 0;
+		selection->c1 = 0;
 		
 		if (t0->prev) t0->prev->next = p;
 		else if (t0->parent) t0->parent->child = p;
@@ -449,34 +458,38 @@ TTREE *selection_reparent_all(TTREE *p)
 	}
 }
 
-
-void selection_init()
+void selection_init(struct selection* selection)
 {
 	GdkColor gcol;
+	GtkWidget* window;
+
+	g_assert(selection!=NULL);
+
+	window = cong_gui_get_window(&the_gui);
 	
-	selection.gc_0 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection.gc_0, window->style->white_gc);
+	selection->gc_0 = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_0, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffffd0);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection.gc_0, &gcol);
+	gdk_gc_set_foreground(selection->gc_0, &gcol);
 
-	selection.gc_1 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection.gc_1, window->style->white_gc);
+	selection->gc_1 = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_1, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffffb0);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection.gc_1, &gcol);
+	gdk_gc_set_foreground(selection->gc_1, &gcol);
 	
-	selection.gc_2 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection.gc_2, window->style->white_gc);
+	selection->gc_2 = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_2, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffff90);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection.gc_2, &gcol);
+	gdk_gc_set_foreground(selection->gc_2, &gcol);
 	
-	selection.gc_3 = gdk_gc_new(window->window);
-	gdk_gc_copy(selection.gc_3, window->style->white_gc);
+	selection->gc_3 = gdk_gc_new(window->window);
+	gdk_gc_copy(selection->gc_3, window->style->white_gc);
 	col_to_gcol(&gcol, 0x00ffd0d0);
 	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(selection.gc_3, &gcol);
+	gdk_gc_set_foreground(selection->gc_3, &gcol);
 
 #if 0	
 void gtk_selection_add_handler(GtkWidget            *widget, 
@@ -489,9 +502,10 @@ void gtk_selection_add_handler(GtkWidget            *widget,
 }
 
 
-void selection_import()
+void selection_import(struct selection* selection)
 {
-	gtk_selection_convert(curs.xed->w, GDK_SELECTION_PRIMARY,
+
+	gtk_selection_convert(the_globals.curs.xed->w, GDK_SELECTION_PRIMARY,
 												gdk_atom_intern("STRING", FALSE), GDK_CURRENT_TIME);
 
 #ifndef RELEASE	
@@ -507,7 +521,7 @@ void selection_import()
 }
 
 
-void selection_claim()
+void selection_claim(struct selection* selection)
 {
 
 #if 0	

@@ -7,16 +7,96 @@
 #include <xml.h>
 #include "global.h"
 
-GtkWidget *window, *menus, *toolbar, *status, *tray, *tree, *scroller, *root,
+#if 1
+struct cong_gui
+{
+  GtkWidget *window, *menus, *toolbar, *status, *tray, *scroller, *root,
+    *auth, *butt_submit, *butt_find;
+
+  guint status_main_ctx;
+
+  GtkAccelGroup *accel;
+
+  GtkWidget *popup;
+
+  GtkTreeView *global_tree_view;
+  GtkTreeStore *global_tree_store;
+
+};
+
+GtkWidget* cong_gui_get_window(struct cong_gui* gui)
+{
+  g_assert(gui!=NULL);
+
+  return gui->window;
+}
+
+GtkWidget* cong_gui_get_popup(struct cong_gui* gui)
+{
+  g_assert(gui!=NULL);
+
+  return gui->popup;
+}
+
+void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup)
+{
+  g_assert(gui!=NULL);
+
+  gui->popup=popup;
+}
+
+GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui)
+{
+  g_assert(gui!=NULL);
+
+  return gui->butt_submit;
+}
+
+GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui)
+{
+  g_assert(gui!=NULL);
+
+  return gui->global_tree_store;
+}
+
+GtkWidget* cong_gui_get_root(struct cong_gui* gui)
+{
+  g_assert(gui!=NULL);
+
+  return gui->root;
+}
+
+void cong_gui_destroy_tree_store(struct cong_gui* gui)
+{
+  gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
+
+#if 0
+  gtk_widget_destroy(GTK_WIDGET(gui->global_tree_view));
+
+  gui->global_tree_view=NULL;
+#endif
+}
+
+struct cong_globals the_globals;
+struct cong_gui the_gui;
+
+#else
+GtkWidget *window, *menus, *toolbar, *status, *tray, /* *tree, */ *scroller, *root,
           *auth, *popup = 0, *butt_new, *butt_submit, *butt_find;
+
+GtkTreeView *global_tree_view;
+GtkTreeStore *global_tree_store;
 
 GdkGC *insert_element_gc;
 
 guint status_main_ctx;
+#endif
 
 void get_example(GtkWidget *w, gpointer data);
 gint set_vectors(GtkWidget *w, gpointer data);
 
+#if 0
 GdkFont *f, *fm, *ft;
 int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
 
@@ -26,11 +106,11 @@ TTREE *medias_global = 0;
 TTREE *class_global = 0;
 TTREE *clipboard = 0;
 
-GtkAccelGroup *accel;
 
 struct xed *xed;
 struct xview *xv = 0;
 struct curs curs;
+#endif
 
 
 void xed_cut_wrap(GtkWidget *widget, gpointer data) { xed_cut(widget, 0); }
@@ -60,11 +140,11 @@ void insert_element_init()
 {
 	GdkColor gcol;
 
-	insert_element_gc = gdk_gc_new(window->window);
-	gdk_gc_copy(insert_element_gc, window->style->white_gc);
+	the_globals.insert_element_gc = gdk_gc_new(the_gui.window->window);
+	gdk_gc_copy(the_globals.insert_element_gc, the_gui.window->style->white_gc);
 	col_to_gcol(&gcol, 0x00e0e0e0);
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(insert_element_gc, &gcol);
+	gdk_colormap_alloc_color(the_gui.window->style->colormap, &gcol, 0, 1);
+	gdk_gc_set_foreground(the_globals.insert_element_gc, &gcol);
 }
 
 
@@ -94,23 +174,23 @@ char font_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 void fonts_load()
 {
 #ifdef WINDOWS_BUILD                                                            
-	  f = gdk_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
-	  ft = gdk_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
-		  fm = gdk_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");           
+	  the_globals.f = gdk_font_load("-*-arial-*-r-normal-*-14-*-*-*-*-*-iso8859-1");            
+	  the_globals.ft = gdk_font_load("-*-MS Sans Serif-bold-r-normal-*-12-*-*-*-*-*-iso8859-1");
+	  the_globals.fm = gdk_font_load("-*-arial-*-*-normal-*-12-*-*-*-c-*-iso8859-1");           
 #else                                                                           
-	  f = gdk_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");        
-	  ft = gdk_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");       
-	  fm = gdk_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-iso8859-1");            
+	  the_globals.f = gdk_font_load("-*-helvetica-*-r-normal-*-10-*-*-*-*-*-iso8859-1");        
+	  the_globals.ft = gdk_font_load("-*-helvetica-*-r-normal-*-12-*-*-*-*-*-iso8859-1");       
+	  the_globals.fm = gdk_font_load("-*-clean-*-*-normal-*-6-*-*-*-c-*-iso8859-1");            
 #endif                                                                          
 	                                                                                
-	  gdk_string_extents(f, font_chars, 0, 0, 0, &f_asc, &f_desc);                  
-	  gdk_string_extents(fm, font_chars, 0, 0, 0, &fm_asc, &fm_desc);               
-	  gdk_string_extents(ft, font_chars, 0, 0, 0, &ft_asc, &ft_desc);               
+	  gdk_string_extents(the_globals.f, font_chars, 0, 0, 0, &the_globals.f_asc, &the_globals.f_desc);                  
+	  gdk_string_extents(the_globals.fm, font_chars, 0, 0, 0, &the_globals.fm_asc, &the_globals.fm_desc);               
+	  gdk_string_extents(the_globals.ft, font_chars, 0, 0, 0, &the_globals.ft_asc, &the_globals.ft_desc);               
 	                                                                                
 #ifdef WINDOWS_BUILD                                                            
-	  f_asc -= 2;                                                                   
-	  ft_asc -= 4;                                                                  
-	  fm_asc -= 8;                                                                  
+	  the_globals.f_asc -= 2;                                                                   
+	  the_globals.ft_asc -= 4;                                                                  
+	  the_globals.fm_asc -= 8;                                                                  
 #endif     
 }
 
@@ -160,32 +240,38 @@ void gui_window_main_make()
 	GdkColor gcol;
 	GtkStyle *style;
 	GtkItemFactory *item_factory;
-	TTREE *x_in, *displayspec;
+	UNUSED_VAR(TTREE *x_in)
+	UNUSED_VAR(*displayspec)
 	int i;
 
+ 	GtkTreeViewColumn *column;
+ 	GtkCellRenderer *renderer;
+ 
+ 	struct cong_gui* gui = &the_gui;
+ 
 	gdk_rgb_init();
 
 	/* --- Main window --- */
 
-	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_widget_set_usize(GTK_WIDGET(window), 360, 240);
-	gtk_window_set_default_size(GTK_WINDOW(window), 480, 480);
-	gtk_window_set_title(GTK_WINDOW(window), "Conglomerate Editor 0.1.0");
+	gui->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_widget_set_usize(GTK_WIDGET(gui->window), 360, 240);
+	gtk_window_set_default_size(GTK_WINDOW(gui->window), 480, 480);
+	gtk_window_set_title(GTK_WINDOW(gui->window), "Conglomerate Editor 0.1.0");
 
-	gtk_signal_connect(GTK_OBJECT(window), "delete_event",
+	gtk_signal_connect(GTK_OBJECT(gui->window), "delete_event",
 										 GTK_SIGNAL_FUNC(delete_event), NULL);
 
-	gtk_signal_connect(GTK_OBJECT(window), "destroy",
+	gtk_signal_connect(GTK_OBJECT(gui->window), "destroy",
 										 GTK_SIGNAL_FUNC(destroy), NULL);
 
-	gtk_container_set_border_width(GTK_CONTAINER(window), 0);
+	gtk_container_set_border_width(GTK_CONTAINER(gui->window), 0);
 
-	gtk_widget_realize(window);
+	gtk_widget_realize(gui->window);
 
 	/* --- Main window -> vbox --- */
 
 	w0 = gtk_vbox_new(FALSE, 1);
-	gtk_container_add(GTK_CONTAINER(window), w0);
+	gtk_container_add(GTK_CONTAINER(gui->window), w0);
 	gtk_widget_show(w0);
 
 	/* --- Main window -> vbox -> hbox --- */
@@ -202,15 +288,15 @@ void gui_window_main_make()
 
 	/* --- Menus --- */
 
-	accel = gtk_accel_group_new();
-	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", accel);
+	gui->accel = gtk_accel_group_new();
+	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", gui->accel);
 	gtk_item_factory_create_items(item_factory, sizeof(menu_items) / sizeof(menu_items[0]),
 																menu_items, NULL);
-	gtk_window_add_accel_group(GTK_WINDOW(window), accel);
+	gtk_window_add_accel_group(GTK_WINDOW(gui->window), gui->accel);
 
-	menus = gtk_item_factory_get_widget(item_factory, "<main>");
-	gtk_box_pack_start(GTK_BOX(w2), menus, TRUE, TRUE, 0);
-	gtk_widget_show(menus);
+	gui->menus = gtk_item_factory_get_widget(item_factory, "<main>");
+	gtk_box_pack_start(GTK_BOX(w2), gui->menus, TRUE, TRUE, 0);
+	gtk_widget_show(gui->menus);
 	
 	/* --- Toolbar --- */
 	
@@ -219,23 +305,23 @@ void gui_window_main_make()
 	gtk_box_pack_start(GTK_BOX(w2), w3, FALSE, TRUE, 0);
 	gtk_widget_show(w3);
 
-	toolbar = gtk_toolbar_new();
-	gtk_container_add(GTK_CONTAINER(w3), toolbar);
-	gtk_widget_show(toolbar);
+	gui->toolbar = gtk_toolbar_new();
+	gtk_container_add(GTK_CONTAINER(w3), gui->toolbar);
+	gtk_widget_show(gui->toolbar);
 
 	/* --- Toolbar icons --- */
 
-	gtk_widget_realize(window);
-	style = gtk_widget_get_style(window);
+	gtk_widget_realize(gui->window);
+	style = gtk_widget_get_style(gui->window);
 
   /* Open file */
 	
-	p = gdk_pixmap_create_from_xpm_d(window->window, &mask,
+	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
 																	 &style->bg[GTK_STATE_NORMAL],
 																	 (gchar **) icon_openfile);
 	w3 = gtk_pixmap_new(p, mask);
 	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
-	w2 = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar), "Open", "Open document",
+	w2 = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Open", "Open document",
 															 "Open document", w3, 0, 0);
 	gtk_widget_show(w3);
 /*
@@ -245,24 +331,24 @@ void gui_window_main_make()
 
 	gtk_signal_connect(GTK_OBJECT(w2), "clicked", GTK_SIGNAL_FUNC(open_document), 0);
 
-  butt_find = w2;
+	gui->butt_find = w2;
 	
 	/* Submit */
 
-	p = gdk_pixmap_create_from_xpm_d(window->window, &mask,
+	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
 																	 &style->bg[GTK_STATE_NORMAL],
 																	 (gchar **) icon_submit);
 	w3 = gtk_pixmap_new(p, mask);
 	gtk_pixmap_set_build_insensitive(GTK_PIXMAP(w3), 1);
-	butt_submit = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar), "Save", "Save document",
+	gui->butt_submit = gtk_toolbar_append_item(GTK_TOOLBAR(gui->toolbar), "Save", "Save document",
 															 "Save document", w3, 0, 0);
 	gtk_widget_show(w3);
 /*
-	gtk_widget_set_sensitive(butt_submit, 0);
+	gtk_widget_set_sensitive(gui->butt_submit, 0);
  */
-	gtk_button_set_relief(GTK_BUTTON(butt_submit), GTK_RELIEF_NONE);
+	gtk_button_set_relief(GTK_BUTTON(gui->butt_submit), GTK_RELIEF_NONE);
 
-	gtk_signal_connect(GTK_OBJECT(butt_submit), "clicked", GTK_SIGNAL_FUNC(save_document), 0);
+	gtk_signal_connect(GTK_OBJECT(gui->butt_submit), "clicked", GTK_SIGNAL_FUNC(save_document), 0);
 
 
 	/* --- Logo --- */
@@ -276,9 +362,9 @@ void gui_window_main_make()
 	gtk_container_add(GTK_CONTAINER(w2), w1);
 	gtk_widget_show(w1);
 
-	p = gdk_pixmap_create_from_xpm_d(window->window, &mask,
-																	 &style->bg[GTK_STATE_NORMAL],
-																	 (gchar **) ilogo_xpm);
+	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
+					 &style->bg[GTK_STATE_NORMAL],
+					 (gchar **) ilogo_xpm);
 	logo = gtk_pixmap_new(p, mask);
 	gtk_box_pack_start(GTK_BOX(w1), logo, FALSE, TRUE, 0);
 	gtk_widget_show(logo);
@@ -294,13 +380,58 @@ void gui_window_main_make()
 	w2 = gtk_scrolled_window_new(NULL, NULL);
 	gtk_paned_add1(GTK_PANED(w1), w2);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
-																 GTK_POLICY_AUTOMATIC);
+				       GTK_POLICY_AUTOMATIC);
 	gtk_widget_set_usize(GTK_WIDGET(w2), 100, 0);
 	gtk_widget_show(w2);
 
+#if 1
+
+        gui->global_tree_store = gtk_tree_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+
+	gui->global_tree_view = GTK_TREE_VIEW(gtk_tree_view_new_with_model (GTK_TREE_MODEL(gui->global_tree_store)));
+
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), GTK_WIDGET(gui->global_tree_view));
+#if 0
+	column = gtk_tree_view_column_new ();
+	cell = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, cell, FALSE);
+	gtk_tree_view_column_set_attributes (column, cell,
+					     "pixbuf", GCONF_TREE_MODEL_CLOSED_ICON_COLUMN,
+					     "pixbuf_expander_closed", GCONF_TREE_MODEL_CLOSED_ICON_COLUMN,
+					     "pixbuf_expander_open", GCONF_TREE_MODEL_OPEN_ICON_COLUMN,
+					     NULL);
+	cell = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (column, cell, TRUE);
+	gtk_tree_view_column_set_attributes (column, cell,
+					     "text", GCONF_TREE_MODEL_NAME_COLUMN,
+					     NULL);
+#endif
+
+#if 1
+	renderer = gtk_cell_renderer_text_new ();
+
+	/* Create a column, associating the "text" attribute of the
+	 * cell_renderer to the first column of the model */
+	column = gtk_tree_view_column_new_with_attributes ("Element", renderer,
+							   "text", TITLE_COLUMN,
+							   NULL);
+
+#endif
+
+	/* Add the column to the view. */
+	gtk_tree_view_append_column (GTK_TREE_VIEW (gui->global_tree_view), column);
+
+	/* Wire up the context-menu callback */
+	gtk_signal_connect_object(GTK_OBJECT(gui->global_tree_view), "event",
+				  (GtkSignalFunc) tpopup_show, gui->global_tree_view);
+
+
+	gtk_widget_show(GTK_WIDGET(gui->global_tree_view));
+#else
 	tree = gtk_tree_new();
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), tree);
 	gtk_widget_show(tree);
+#endif
 
 #if 0
 	w2 = gtk_tree_item_new_with_label("Document");
@@ -324,14 +455,14 @@ void gui_window_main_make()
 
 	/* --- Scrolling area --- */
 
-	scroller = gtk_scrolled_window_new(NULL, NULL);
-	gtk_paned_add2(GTK_PANED(w1), scroller);
+	gui->scroller = gtk_scrolled_window_new(NULL, NULL);
+	gtk_paned_add2(GTK_PANED(w1), gui->scroller);
 
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroller), GTK_POLICY_AUTOMATIC,
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(gui->scroller), GTK_POLICY_AUTOMATIC,
 																 GTK_POLICY_ALWAYS);
 
-	root = gtk_vbox_new(FALSE, 1);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroller), root);
+	gui->root = gtk_vbox_new(FALSE, 1);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(gui->scroller), gui->root);
 	
 	
 	/* TEMPORARY: Set white background */
@@ -343,13 +474,13 @@ void gui_window_main_make()
 	style = gtk_widget_get_default_style();
 	style = gtk_style_copy(style);
 
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
+	gdk_colormap_alloc_color(gui->window->style->colormap, &gcol, 0, 1);
 
 	for (i = 0; i < 5; i++) style->bg[i] = gcol;
-	xv_style_r(scroller, style);
+	xv_style_r(gui->scroller, style);
 
-	gtk_widget_show(scroller);
-	gtk_widget_show(root);
+	gtk_widget_show(gui->scroller);
+	gtk_widget_show(gui->root);
 
 
 	/* --- Main window -> vbox -> hbox --- */
@@ -360,9 +491,9 @@ void gui_window_main_make()
 
 	/* --- Statusbar --- */
 
-	status = gtk_statusbar_new();
-	gtk_box_pack_start(GTK_BOX(w1), status, TRUE, TRUE, 0);
-	gtk_widget_show(status);
+	gui->status = gtk_statusbar_new();
+	gtk_box_pack_start(GTK_BOX(w1), gui->status, TRUE, TRUE, 0);
+	gtk_widget_show(gui->status);
 
 	/* --- Statustray --- */
 
@@ -371,18 +502,18 @@ void gui_window_main_make()
 	gtk_box_pack_start(GTK_BOX(w1), w0, FALSE, TRUE, 0);
 	gtk_widget_show(w0);
 
-	tray = gtk_hbox_new(FALSE, 1);
-	gtk_container_add(GTK_CONTAINER(w0), tray);
-	gtk_widget_show(tray);
+	gui->tray = gtk_hbox_new(FALSE, 1);
+	gtk_container_add(GTK_CONTAINER(w0), gui->tray);
+	gtk_widget_show(gui->tray);
 
 	/* --- Indicator: Auth --- */
 
-	p = gdk_pixmap_create_from_xpm_d(window->window, &mask,
+	p = gdk_pixmap_create_from_xpm_d(gui->window->window, &mask,
 																	 &style->bg[GTK_STATE_NORMAL],
 																	 (gchar **) auth_off_xpm);
-	auth = gtk_pixmap_new(p, mask);
-	gtk_box_pack_start(GTK_BOX(tray), auth, FALSE, TRUE, 2);
-	gtk_widget_show(auth);
+	gui->auth = gtk_pixmap_new(p, mask);
+	gtk_box_pack_start(GTK_BOX(gui->tray), gui->auth, FALSE, TRUE, 2);
+	gtk_widget_show(gui->auth);
 }
 
 
@@ -407,26 +538,26 @@ int main( int   argc,
 	popup_init();
 	
 	gui_window_main_make();
-	gtk_window_set_default_size(GTK_WINDOW(window), 400, 460);
-	gtk_widget_show(GTK_WIDGET(window));
+	gtk_window_set_default_size(GTK_WINDOW(the_gui.window), 400, 460);
+	gtk_widget_show(GTK_WIDGET(the_gui.window));
 
-	curs_init();
-	selection_init();
+	curs_init(&the_globals.curs);
+	selection_init(&the_globals.selection);
 	insert_element_init();
 
-	clipboard = 0;
+	the_globals.clipboard = 0;
 
 	/* --- Putting it together --- */
 
-	status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(status), "Main");
-	gtk_statusbar_push(GTK_STATUSBAR(status), status_main_ctx,
-										 "Welcome to the much-too-early Conglomerate editor.");
+	the_gui.status_main_ctx = gtk_statusbar_get_context_id(GTK_STATUSBAR(the_gui.status), "Main");
+	gtk_statusbar_push(GTK_STATUSBAR(the_gui.status), the_gui.status_main_ctx,
+			   "Welcome to the much-too-early Conglomerate editor.");
 
 	/* --- */
 	
 	if (argc > 2) open_document_do(argv[1], argv[2]);
 	
-  gtk_main();
+	gtk_main();
 
 	return(0);
 }

@@ -9,6 +9,14 @@
 # define isblank(c) ((c) == ' ' || (c) == '\n' || (c) == '\r' || (c) == '\t')
 #endif
 
+enum
+{
+   TITLE_COLUMN,
+   TTREE_COLUMN,
+   N_COLUMNS
+};
+
+
 /* Include these here to help Cygwin a bit */
 
 struct xed
@@ -60,10 +68,17 @@ struct xed
 
 struct xview
 {
-	TTREE *x;
+  TTREE *x;
 	
   GtkWidget *w;
-	GtkWidget *tree;
+#if 1
+#if 0
+  GtkTreeView* treeview; /* the tree view */
+  GtkTreeStore* treestore; /* the tree model */
+#endif
+#else
+  GtkWidget *tree;
+#endif
 };
 
 
@@ -116,28 +131,43 @@ struct selection
 };
 
 
-extern struct xview *xv;
-extern struct curs curs;
-extern struct selection selection;
+struct cong_globals
+{
+  struct xview *xv;
+  struct curs curs;
+  struct selection selection;
 
-extern GtkWidget *window, *popup, *tree, *status, *root, *butt_new, *butt_submit, *butt_find;
-extern GdkFont *f, *fm, *ft;
-extern GdkGC *insert_element_gc;
-extern int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
+  GdkFont *f, *fm, *ft;
+  GdkGC *insert_element_gc;
+  int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
+  
+  TTREE *ds_global;
+  TTREE *vect_global;
+  TTREE *medias_global;
+  TTREE *class_global;
+  TTREE *users_global;
+  TTREE *user_data;
+  struct xed *meta_xed;
+  TTREE *clipboard;
+  TTREE *insert_meta_section_tag;
 
-extern TTREE *ds_global;
-extern TTREE *vect_global;
-extern TTREE *medias_global;
-extern TTREE *class_global;
-extern TTREE *users_global;
-extern TTREE *user_data;
-extern struct xed *meta_xed;
-extern TTREE *clipboard;
-extern TTREE *insert_meta_section_tag;
+  char *server, *user, *pass;
 
-extern char *server, *user, *pass;
+#if 0
+  guint status_main_ctx;
+#endif
+};
 
-extern guint status_main_ctx;
+extern struct cong_globals the_globals;
+extern struct cong_gui the_gui;
+
+GtkWidget* cong_gui_get_window(struct cong_gui* gui);
+GtkWidget* cong_gui_get_popup(struct cong_gui* gui);
+void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup);
+GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui);
+GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui);
+GtkWidget* cong_gui_get_root(struct cong_gui* gui);
+void cong_gui_destroy_tree_store(struct cong_gui* gui);
 
 gint curs_blink();
 int login();
@@ -170,7 +200,10 @@ char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
 struct xview *xmlview_new(TTREE *x, TTREE *displayspec);
+
+#if 0
 SOCK *server_login();
+#endif
 
 struct pos *pos_physical_to_logical(struct xed *xed, int x, int y);
 struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c);
@@ -178,7 +211,7 @@ struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c);
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
 
-TTREE *selection_reparent_all(TTREE *p);
+TTREE *selection_reparent_all(struct selection* selection, TTREE *p);
 TTREE *xml_inner_span_element(TTREE *x);
 TTREE *xml_outer_span_element(TTREE *x);
 char *xml_fetch_clean_data(TTREE *x);
@@ -197,7 +230,59 @@ GtkWidget *gui_taxochoice_box(TTREE *choices, int many, int selectability, GtkSi
 gint open_document(GtkWidget *w, gpointer data);
 gint save_document(GtkWidget *w, gpointer data);
 
-char *get_file_name(char *title);
+const char *get_file_name(char *title);
 char *pick_structural_tag();
 
-int open_document_do(char *doc_name, char *ds_name);
+int open_document_do(const char *doc_name, const char *ds_name);
+
+/* DHM: My new stuff goes here for now: */
+#define UNUSED_VAR(x)
+
+int gui_window_new_document_make();
+void xmlview_destroy(int free_xml);
+
+int ds_element_structural(TTREE *ds, char *name);
+int ds_element_collapse(TTREE *ds, char *name);
+int ds_element_span(TTREE *ds, char *name);
+int ds_element_insert(TTREE *ds, char *name);
+TTREE *ds_get_first_structural(TTREE *ds);
+TTREE *ds_get_next_structural(TTREE *prev);
+TTREE *ds_get_first_span(TTREE *ds);
+TTREE *ds_get_next_span(TTREE *prev);
+void ds_init(TTREE *ds);
+
+
+void col_to_gcol(GdkColor *gcol, unsigned int col);
+void xed_redraw(struct xed *xed);
+
+void curs_init(struct curs* curs);
+void curs_on(struct curs* curs);
+void curs_off(struct curs* curs);
+void curs_place_in_xed(struct curs* curs, struct xed *xed, int x, int y);
+gint curs_data_insert(struct curs* curs, char *s);
+int curs_paragraph_insert(struct curs* curs);
+void curs_prev_char(struct curs* curs, struct xed *xed);
+void curs_next_char(struct curs* curs, struct xed *xed);
+void curs_prev_line(struct curs* curs, struct xed *xed);
+void curs_next_line(struct curs* curs, struct xed *xed);
+void curs_del_prev_char(struct curs* curs, struct xed *xed);
+void curs_del_next_char(struct curs* curs, struct xed *xed);
+
+void selection_init(struct selection* selection);
+void selection_import(struct selection* selection);
+void selection_draw(struct selection* selection, struct curs* curs);
+void selection_start_from_curs(struct selection* selection, struct curs* curs);
+void selection_end_from_curs(struct selection* selection, struct curs* curs);
+
+void popup_show(GtkWidget *widget, GdkEventButton *bevent);
+void popup_build(struct xed *xed);
+void popup_init();
+
+#if 1
+GtkWidget* tpopup_init(TTREE *x);
+#else
+void tpopup_init(GtkWidget *treeitem, TTREE *x);
+#endif
+gint tpopup_show(GtkWidget *widget, GdkEvent *event);
+
+void xv_style_r(GtkWidget *widget, gpointer data);

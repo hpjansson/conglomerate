@@ -22,16 +22,16 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
 
-	if (selection.t0 == curs.xed->x)
+	if (the_globals.selection.t0 == the_globals.curs.xed->x)
 	{
-		r = selection_reparent_all(n);
-		if (r) curs.xed->x = r;
+		r = selection_reparent_all(&the_globals.selection, n);
+		if (r) the_globals.curs.xed->x = r;
 		else ttree_branch_remove(n);
 	}
-	else if (!selection_reparent_all(n)) ttree_branch_remove(n);
+	else if (!selection_reparent_all(&the_globals.selection, n)) ttree_branch_remove(n);
 
-	xed_redraw(curs.xed);
-	curs.xed = 0;
+	xed_redraw(the_globals.curs.xed);
+	the_globals.curs.xed = 0;
 
 	return(TRUE);
 }
@@ -39,14 +39,14 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 
 void popup_item_handlers_destroy(GtkWidget *widget, gpointer data)
 {
-	int sig;
+	UNUSED_VAR(int sig);
 
 }
 
 
 static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 {
-	int sig;
+	UNUSED_VAR(int sig);
 
 #ifndef RELEASE
   printf("Menu deactivated.\n");
@@ -85,10 +85,10 @@ void popup_show(GtkWidget *widget, GdkEventButton *bevent)
 
 void popup_init()
 {
-	if (popup) gtk_widget_destroy(popup);
-  popup = gtk_menu_new();
+	if (cong_gui_get_popup(&the_gui)) gtk_widget_destroy(cong_gui_get_popup(&the_gui));
+	cong_gui_set_popup(&the_gui,gtk_menu_new());
 
-	gtk_menu_set_title(GTK_MENU(popup), "Editing menu");
+	gtk_menu_set_title(GTK_MENU(cong_gui_get_popup(&the_gui)), "Editing menu");
 }
 
 
@@ -96,33 +96,34 @@ void popup_tag_remove_inner()
 {
 	TTREE *n0;
 	
-  if (!curs.t) return;
+  if (!the_globals.curs.t) return;
 
-	n0 = xml_inner_span_element(curs.t);
+	n0 = xml_inner_span_element(the_globals.curs.t);
 	if (n0) xml_tag_remove(n0);
 	
-	if (curs.xed) xed_redraw(curs.xed);
+	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
 }
 
 void popup_tag_remove_outer()
 {
 	TTREE *n0;
 	
-  if (!curs.t) return;
+  if (!the_globals.curs.t) return;
 	
-	n0 = xml_outer_span_element(curs.t);
+	n0 = xml_outer_span_element(the_globals.curs.t);
 	if (n0) xml_tag_remove(n0);
 	
-	if (curs.xed) xed_redraw(curs.xed);
+	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
 }
 
 
 void popup_build(struct xed *xed)
 {
 	GtkWidget *item, *w0;
-	TTREE *n0, *n1;
+	TTREE *n0;
+	UNUSED_VAR(TTREE *n1);
 
-	if (popup) gtk_widget_destroy(popup);
+	if (cong_gui_get_popup(&the_gui)) gtk_widget_destroy(cong_gui_get_popup(&the_gui));
 	popup_init();
 	
 #ifndef RELEASE
@@ -132,41 +133,41 @@ void popup_build(struct xed *xed)
 	/* Fixed editing tools */
 
 	item = gtk_menu_item_new_with_label("Cut");
-	gtk_menu_append(GTK_MENU(popup), item);
+	gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 										 GTK_SIGNAL_FUNC(xed_cut), xed);
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("Copy");
-	gtk_menu_append(GTK_MENU(popup), item);
+	gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 										 GTK_SIGNAL_FUNC(xed_copy), xed);
 	gtk_widget_show(item);
 	
 	item = gtk_menu_item_new_with_label("Paste");
-	gtk_menu_append(GTK_MENU(popup), item);
+	gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 										 GTK_SIGNAL_FUNC(xed_paste), xed);
 	gtk_widget_show(item);
 
-	if (/* curs.set && */ curs.t && xml_inner_span_element(curs.t))
+	if (/* the_globals.curs.set && */ the_globals.curs.t && xml_inner_span_element(the_globals.curs.t))
 	{
 	  item = gtk_menu_item_new();
 	  w0 = gtk_hseparator_new();
 	  gtk_container_add(GTK_CONTAINER(item), w0);
-	  gtk_menu_append(GTK_MENU(popup), item);
+	  gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	  gtk_widget_set_sensitive(item, 0);
 	  gtk_widget_show(w0);
 	  gtk_widget_show(item);
 
 	  item = gtk_menu_item_new_with_label("Remove inner tag");
-	  gtk_menu_append(GTK_MENU(popup), item);
+	  gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	  gtk_signal_connect(GTK_OBJECT(item), "activate",
 	  									 GTK_SIGNAL_FUNC(popup_tag_remove_inner), xed);
 	  gtk_widget_show(item);
 
 	  item = gtk_menu_item_new_with_label("Remove outer tag");
-	  gtk_menu_append(GTK_MENU(popup), item);
+	  gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	  gtk_signal_connect(GTK_OBJECT(item), "activate",
 	  									 GTK_SIGNAL_FUNC(popup_tag_remove_outer), xed);
 	  gtk_widget_show(item);
@@ -175,19 +176,19 @@ void popup_build(struct xed *xed)
 	item = gtk_menu_item_new();
 	w0 = gtk_hseparator_new();
 	gtk_container_add(GTK_CONTAINER(item), w0);
-	gtk_menu_append(GTK_MENU(popup), item);
+	gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 	gtk_widget_set_sensitive(item, 0);
 	gtk_widget_show(w0);
 	gtk_widget_show(item);
 
 	/* Build list of dynamic tag insertion tools */
 
-	for (n0 = ds_global->child; n0; n0 = n0->next)
+	for (n0 = the_globals.ds_global->child; n0; n0 = n0->next)
 	{
 		if (ttree_branch_walk_str(n0, "type span"))
 		{
 			item = gtk_menu_item_new_with_label(ds_name_name_get(n0));
-			gtk_menu_append(GTK_MENU(popup), item);
+			gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 			
 			gtk_signal_connect(GTK_OBJECT(item), "activate",
 												 GTK_SIGNAL_FUNC(popup_item_selected), n0);
@@ -205,25 +206,71 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 		GdkEventButton *bevent = (GdkEventButton *) event;
 		if (bevent->button != 3) return(FALSE);
 		
+		#if 1
+		printf("button 3\n");
+		{
+		  GtkTreePath* path;
+		  if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
+						      bevent->x,
+						      bevent->y,
+						      &path,
+						      NULL,
+						      NULL, 
+						      NULL)
+		       ) { 
+
+		    GtkTreeIter iter;
+		    GtkTreeModel* tree_model = GTK_TREE_MODEL(cong_gui_get_tree_store(&the_gui));
+#if 0
+		    gchar* msg = gtk_tree_path_to_string(path);
+		    printf("right-click on path \"%s\"\n",msg);
+		    g_free(msg);
+#endif
+
+		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
+		      TTREE* tt;
+		      GtkWidget* menu;
+
+		      gtk_tree_model_get(tree_model, &iter, TTREE_COLUMN, &tt, -1);
+
+		      printf("got node \"%s\"\n",ds_name_get(tt));
+
+		      menu = tpopup_init(tt);
+		      gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
+				     bevent->time);		      
+		    }
+
+				 
+		  gtk_tree_path_free(path);		  
+		  }
+		}
+                #else
 		gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL, bevent->button,
 									 bevent->time);
+		#endif
+
 		return(TRUE);
 	}
 
 	return(FALSE);
 }
 
-
+#if 1
+GtkWidget* tpopup_init(TTREE *x)
+#else
 void tpopup_init(GtkWidget *treeitem, TTREE *x)
+#endif
 {
 	GtkWidget *item, *tpopup, *w0;
 
 	tpopup = gtk_menu_new();
 	gtk_menu_set_title(GTK_MENU(tpopup), "Structure menu");
 
+#if 0
   gtk_signal_connect_object(GTK_OBJECT(treeitem), "event",
 														(GtkSignalFunc) tpopup_show, GTK_OBJECT(tpopup));
-	
+  #endif
+
 	/* Fixed editing tools */
 
 	item = gtk_menu_item_new_with_label("Cut");
@@ -281,5 +328,9 @@ void tpopup_init(GtkWidget *treeitem, TTREE *x)
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 										 GTK_SIGNAL_FUNC(tree_new_sibling), x);
 	gtk_widget_show(item);
+
+	#if 1
+	return tpopup;
+#endif
 }
 

@@ -29,10 +29,10 @@ gint tree_new_sibling(GtkWidget *widget, TTREE *tag)
 	n0->prev = tag;
 	tag->next = n0;
 
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return(TRUE);
 }
@@ -54,10 +54,10 @@ gint tree_new_sub_element(GtkWidget *widget, TTREE *tag)
 	n0 = ttree_node_add(tag->child, "data", 4);
 	ttree_node_add(n0, " ", 1);
 
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 	
 	return(TRUE);
 }
@@ -67,14 +67,14 @@ gint tree_cut(GtkWidget *widget, TTREE *tag)
 {
 	TTREE *x;
 
-	if (clipboard) ttree_branch_remove(clipboard);
-	clipboard = ttree_branch_dup(tag);
+	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
+	the_globals.clipboard = ttree_branch_dup(tag);
 	ttree_branch_remove(tag);
 
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return(TRUE);
 }
@@ -82,8 +82,8 @@ gint tree_cut(GtkWidget *widget, TTREE *tag)
 
 gint tree_copy(GtkWidget *widget, TTREE *tag)
 {
-	if (clipboard) ttree_branch_remove(clipboard);
-	clipboard = ttree_branch_dup(tag);
+	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
+	the_globals.clipboard = ttree_branch_dup(tag);
 	
 	return(TRUE);
 }
@@ -93,25 +93,25 @@ gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 {
 	TTREE *x;
 
-	if (!clipboard) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(tag))) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(clipboard))) return(TRUE);
+	if (!the_globals.clipboard) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(tag))) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
-	clipboard->prev = 0;
-	clipboard->next = tag->child->child;
+	the_globals.clipboard->prev = 0;
+	the_globals.clipboard->next = tag->child->child;
 
 	if (tag->child->child)
-		tag->child->child->prev = clipboard;
+		tag->child->child->prev = the_globals.clipboard;
 	
-	tag->child->child = clipboard;
-	clipboard->parent = tag->child;
+	tag->child->child = the_globals.clipboard;
+	the_globals.clipboard->parent = tag->child;
 	
-	clipboard = ttree_branch_dup(clipboard);
+	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return(TRUE);
 }
@@ -121,31 +121,31 @@ gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 {
 	TTREE *x;
 	
-	if (!clipboard) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(tag))) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(clipboard))) return(TRUE);
+	if (!the_globals.clipboard) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(tag))) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	if (tag->prev)
 	{
-		tag->prev->next = clipboard;
-		clipboard->prev = tag->prev;
-		tag->prev = clipboard;
+		tag->prev->next = the_globals.clipboard;
+		the_globals.clipboard->prev = tag->prev;
+		tag->prev = the_globals.clipboard;
 	}
 	else if (tag->parent)
 	{
-		clipboard->prev = 0;
-		tag->parent->child = clipboard;
+		the_globals.clipboard->prev = 0;
+		tag->parent->child = the_globals.clipboard;
 	}
 
-	clipboard->next = tag;
-	clipboard->parent = tag->parent;
+	the_globals.clipboard->next = tag;
+	the_globals.clipboard->parent = tag->parent;
 
-	clipboard = ttree_branch_dup(clipboard);
+	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 	
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return(TRUE);
 }
@@ -155,26 +155,26 @@ gint tree_paste_after(GtkWidget *widget, TTREE *tag)
 {
 	TTREE *x;
 	
-	if (!clipboard) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(tag))) return(TRUE);
-	if (!ds_element_structural(ds_global, xml_frag_name_nice(clipboard))) return(TRUE);
+	if (!the_globals.clipboard) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(tag))) return(TRUE);
+	if (!ds_element_structural(the_globals.ds_global, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
 	if (tag->next)
 	{
-		tag->next->prev = clipboard;
+		tag->next->prev = the_globals.clipboard;
 	}
 	
-	clipboard->next = tag->next;
-	tag->next = clipboard;
-	clipboard->prev = tag;
-	clipboard->parent = tag->parent;
+	the_globals.clipboard->next = tag->next;
+	tag->next = the_globals.clipboard;
+	the_globals.clipboard->prev = tag;
+	the_globals.clipboard->parent = tag->parent;
 	
-	clipboard = ttree_branch_dup(clipboard);
+	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
 	
-	x = xv->x;
+	x = the_globals.xv->x;
 	xmlview_destroy(FALSE);
-	xv = xmlview_new(x, ds_global);
-  gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(x, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return(TRUE);
 }

@@ -6,25 +6,29 @@
 #include <ttree.h>
 #include <xml.h>
 #include "global.h"
+#include <string.h>
 
-
-void curs_on()
+void curs_on(struct curs* curs)
 {
-	if (curs.w)
-	  gdk_draw_line(curs.w->window, curs.gc, curs.x - 1 + 1, curs.y - 4,
-								  curs.x - 1 + 1, curs.y + f_asc + f_desc + 4);
+	g_assert(curs!=NULL);
+
+	if (curs->w)
+	  gdk_draw_line(curs->w->window, curs->gc, curs->x - 1 + 1, curs->y - 4,
+								  curs->x - 1 + 1, curs->y + the_globals.f_asc + the_globals.f_desc + 4);
 }
 
 
-void curs_off()
+void curs_off(struct curs* curs)
 {
 	GdkRectangle r;
 
-	r.x = curs.x - 1 + 1;
-	r.y = curs.y - 4;
-	r.height = f_asc + f_desc + 9;
+	g_assert(curs!=NULL);
+
+	r.x = curs->x - 1 + 1;
+	r.y = curs->y - 4;
+	r.height = the_globals.f_asc + the_globals.f_desc + 9;
 	r.width = 1;
-	if (curs.w) gtk_widget_draw(curs.w, &r);
+	if (curs->w) gtk_widget_draw(curs->w, &r);
 }
 
 
@@ -47,105 +51,114 @@ void print_lines(TTREE *l)
 }
 
 
-void curs_place_in_xed(struct xed *xed, int x, int y)
+void curs_place_in_xed(struct curs* curs, struct xed *xed, int x, int y)
 {
 	struct pos *pos0, *pos1;
-	TTREE *l;
-	int i;
+	UNUSED_VAR(TTREE *l);
+	UNUSED_VAR(int i);
 
-	curs.xed = xed;
+	g_assert(curs!=NULL);
+
+	curs->xed = xed;
 
 	/* Remove from previous location */
 
-	curs_off();
+	curs_off(curs);
 
 	pos0 = pos_physical_to_logical(xed, x, y);
 	pos1 = pos_logical_to_physical(xed, pos0->node, pos0->c);
-	curs.t = pos0->node;
-	curs.c = pos0->c;
+	curs->t = pos0->node;
+	curs->c = pos0->c;
 	free(pos0);
 
-	curs.x = pos1->x;
-	curs.y = pos1->y;
-	curs.line = pos1->line;
+	curs->x = pos1->x;
+	curs->y = pos1->y;
+	curs->line = pos1->line;
 	free(pos1);
 	
 	/* Draw immediately */
 
-	curs_on();
+	curs_on(curs);
 }
 
 
-void curs_init()
+void curs_init(struct curs* curs)
 {
 	GdkColor gcol;
 
-  curs.w = 0;
-	curs.x = curs.y = 0;
-	curs.t = 0;
-	curs.c = 0;
+	g_assert(curs!=NULL);
+
+	curs->w = 0;
+	curs->x = curs->y = 0;
+	curs->t = 0;
+	curs->c = 0;
 
 	gtk_timeout_add(500, curs_blink, 0);
-	curs.gc = gdk_gc_new(window->window);
-	gdk_gc_copy(curs.gc, window->style->black_gc);
+	curs->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+	gdk_gc_copy(curs->gc, cong_gui_get_window(&the_gui)->style->black_gc);
 	col_to_gcol(&gcol, 0x00ff8c00);
-	gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
-	gdk_gc_set_foreground(curs.gc, &gcol);
+	gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
+	gdk_gc_set_foreground(curs->gc, &gcol);
 }
 
 
 gint curs_blink(gpointer data)
 {
-	if (!curs.w) return(TRUE);
+	struct curs* curs = &the_globals.curs;
 
-	if (curs.on)
+	if (!curs->w) return(TRUE);
+
+	if (curs->on)
 	{
-		curs_off();
-		curs.on = 0;
+		curs_off(curs);
+		curs->on = 0;
 	}
 	else
 	{
-		curs_on();
-		curs.on = 1;
+		curs_on(curs);
+		curs->on = 1;
 	}
 	
 	return(TRUE);
 }
 
-
-gint curs_data_insert(char *s)
+gint curs_data_insert(struct curs* curs, char *s)
 {
 	TTREE *n;
 	int len;
 
+	g_assert(curs!=NULL);
+
 	len = strlen(s);
 
-	if (!curs.t) return(0);
-	if (xml_frag_type(curs.t) != XML_DATA) return(0);
+	if (!curs->t) return(0);
+	if (xml_frag_type(curs->t) != XML_DATA) return(0);
 
-	n = curs.t->child;
+	n = curs->t->child;
   n->data = realloc(n->data, (n->size + 1) + len);
 
-	memmove(n->data + curs.c + len, n->data + curs.c, (n->size + 1) - curs.c);
-	memcpy(n->data + curs.c, s, len);
+	memmove(n->data + curs->c + len, n->data + curs->c, (n->size + 1) - curs->c);
+	memcpy(n->data + curs->c, s, len);
 	n->size += len;
-	curs.c += len;
+	curs->c += len;
 	return(1);
 }
 
 
-int curs_paragraph_insert()
+int curs_paragraph_insert(struct curs* curs)
 {
 	TTREE *t, *dummy;
+
+	g_assert(curs!=NULL);
 	
-	if (!curs.xed) return(0);
+	if (!curs->xed) return(0);
 	
-	if (!curs.t) return(0);
-	if (xml_frag_type(curs.t) != XML_DATA) return(0);
+	if (!curs->t) return(0);
+	if (xml_frag_type(curs->t) != XML_DATA) return(0);
 	
-	t = xml_frag_data_nice_split2(curs.t, curs.c);
-	curs.t = t->next;
-	curs.c = 0;
+	t = xml_frag_data_nice_split2(curs->t, curs->c);
+	curs->t = t->next;
+	curs->c = 0;
 
 	dummy = ttree_node_add(0, "dummy", 5);
 	
@@ -163,19 +176,21 @@ int curs_paragraph_insert()
 }
 
 
-void curs_prev_char(struct xed *xed)
+void curs_prev_char(struct curs* curs, struct xed *xed)
 {
 	TTREE *n, *n0;
-	int c;
+	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
 	printf("<- [curs]\n");
 #endif
-	
-	if (!curs.xed) return;
 
-	n = curs.t;
-	if (xml_frag_type(n) == XML_DATA && curs.c) { curs.c--; return; }
+	g_assert(curs!=NULL);
+	
+	if (!curs->xed) return;
+
+	n = curs->t;
+	if (xml_frag_type(n) == XML_DATA && curs->c) { curs->c--; return; }
 
 	do
 	{
@@ -188,7 +203,7 @@ void curs_prev_char(struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (ds_element_structural(ds_global, xml_frag_name_nice(n)))
+				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -212,7 +227,7 @@ void curs_prev_char(struct xed *xed)
 
 		while (n)
 		{
-			if (ds_element_structural(ds_global, xml_frag_name_nice(n))) { n = 0; break; }
+			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_prev(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}
@@ -222,27 +237,29 @@ void curs_prev_char(struct xed *xed)
 	
 	if (n) 
   {
-		curs.t = n;
-	  curs.c = strlen(xml_frag_data_nice(n));
+		curs->t = n;
+	  curs->c = strlen(xml_frag_data_nice(n));
 	}
 }
 
 
-void curs_next_char(struct xed *xed)
+void curs_next_char(struct curs* curs, struct xed *xed)
 {
 	TTREE *n, *n0;
-	int c;
+	UNUSED_VAR(int c);
 
 #ifndef RELEASE	
 	printf("[curs] ->\n");
 #endif
-	
-	if (!curs.xed) return;
 
-	n = curs.t;
-	if (xml_frag_type(n) == XML_DATA && *(xml_frag_data_nice(n) + curs.c))
+	g_assert(curs!=NULL);
+	
+	if (!curs->xed) return;
+
+	n = curs->t;
+	if (xml_frag_type(n) == XML_DATA && *(xml_frag_data_nice(n) + curs->c))
 	{ 
-		curs.c++; 
+		curs->c++; 
 		return; 
 	}
 
@@ -257,7 +274,7 @@ void curs_next_char(struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{				 
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (ds_element_structural(ds_global, xml_frag_name_nice(n)))
+				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -281,7 +298,7 @@ void curs_next_char(struct xed *xed)
 
 		while (n)
 		{
-			if (ds_element_structural(ds_global, xml_frag_name_nice(n))) { n = 0; break; }
+			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_next(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}
@@ -290,89 +307,95 @@ void curs_next_char(struct xed *xed)
 
 	if (n)
 	{
-		curs.t = n;
-		curs.c = 0;
+		curs->t = n;
+		curs->c = 0;
 	}
 }
 
 
-void curs_prev_line(struct xed *xed)
+void curs_prev_line(struct curs* curs, struct xed *xed)
 {
 	struct pos *pos;
 	int i;
 	TTREE *l;
 	
+	g_assert(curs!=NULL);
 	
-	if (curs.line == 0) return;
+	if (curs->line == 0) return;
 	
-	curs.line--;
+	curs->line--;
 
-	for (i = 0, l = xed->lines->child; l && i < curs.line; i++, l = l->next) ;
+	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) ;
 
 	if (!l) return;
 
-	curs.y = (int) *((int *) l->child->next->next->data);
-	pos = pos_physical_to_logical(xed, curs.x, curs.y);
+	curs->y = (int) *((int *) l->child->next->next->data);
+	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
-	curs.t = pos->node;
-	curs.c = pos->c;
+	curs->t = pos->node;
+	curs->c = pos->c;
 	free(pos);
 }
 
 
-void curs_next_line(struct xed *xed)
+void curs_next_line(struct curs* curs, struct xed *xed)
 {
 	struct pos *pos;
 	int i;
 	TTREE *l;
 
+	g_assert(curs!=NULL);
 
-	for (i = 0, l = xed->lines->child; l && i < curs.line; i++, l = l->next) ;
+	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) ;
 
 	if (!l) return;
 	l = l->next;
 	if (!l) return;
 
-	curs.line++;
+	curs->line++;
 
-	curs.y = (int) *((int *) l->child->next->next->data) - 1;
-	pos = pos_physical_to_logical(xed, curs.x, curs.y);
+	curs->y = (int) *((int *) l->child->next->next->data) - 1;
+	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
-	curs.t = pos->node;
-	curs.c = pos->c;
+	curs->t = pos->node;
+	curs->c = pos->c;
 	free(pos);
 }
 
 
-void curs_del_prev_char(struct xed *xed)
+void curs_del_prev_char(struct curs* curs, struct xed *xed)
 {
-	if (!curs.t) return;
+	g_assert(curs!=NULL);
+
+	if (!curs->t) return;
 	
-	curs_prev_char(xed);
+	curs_prev_char(curs,xed);
 	
-	if (*(xml_frag_data_nice(curs.t) + curs.c))
+	if (*(xml_frag_data_nice(curs->t) + curs->c))
 	{
-		memmove(xml_frag_data_nice(curs.t) + curs.c, xml_frag_data(curs.t) + curs.c + 1,
-						strlen(xml_frag_data_nice(curs.t) + curs.c));
-		curs.t->child->size--;
+		memmove(xml_frag_data_nice(curs->t) + curs->c, xml_frag_data(curs->t) + curs->c + 1,
+						strlen(xml_frag_data_nice(curs->t) + curs->c));
+		curs->t->child->size--;
 	}
-	else if (curs.t->next && xml_frag_type(curs.t->next) == XML_TAG_EMPTY)
-		ttree_branch_remove(curs.t->next);
+	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
+		ttree_branch_remove(curs->t->next);
 }
 
 
-void curs_del_next_char(struct xed *xed)
+void curs_del_next_char(struct curs* curs, struct xed *xed)
 {
-	if (!curs.t) return;
+	g_assert(curs!=NULL);
+
+	if (!curs->t) return;
 	
-	if (*(xml_frag_data_nice(curs.t) + curs.c))
+	if (*(xml_frag_data_nice(curs->t) + curs->c))
 	{
-		memmove(xml_frag_data_nice(curs.t) + curs.c, xml_frag_data(curs.t) + curs.c + 1,
-						strlen(xml_frag_data_nice(curs.t) + curs.c));
-		curs.t->child->size--;
+		memmove(xml_frag_data_nice(curs->t) + curs->c, xml_frag_data(curs->t) + curs->c + 1,
+						strlen(xml_frag_data_nice(curs->t) + curs->c));
+		curs->t->child->size--;
 	}
-	else if (curs.t->next && xml_frag_type(curs.t->next) == XML_TAG_EMPTY)
-		ttree_branch_remove(curs.t->next);
+	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
+		ttree_branch_remove(curs->t->next);
 }
 
 

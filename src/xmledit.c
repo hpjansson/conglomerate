@@ -12,6 +12,7 @@
 
 
 TTREE *xed_stack_top(struct xed *xed);
+int xed_xml_content_draw(struct xed *xed, unsigned int mode);
 
 
 /* Create a new backing pixmap of the appropriate size, redraw content */
@@ -19,11 +20,16 @@ TTREE *xed_stack_top(struct xed *xed);
 static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct xed *xed)
 {
 	struct pos *pos;
-	GtkRequisition req;
-	GtkAllocation alloc;
+	UNUSED_VAR(GtkRequisition req)
+	UNUSED_VAR(GtkAllocation alloc)
 	int height;
-	int width_old;
+	UNUSED_VAR(int width_old)
 
+	struct selection* selection = &the_globals.selection;
+	struct curs* curs = &the_globals.curs;
+
+
+	
 #if 0	
 	if (!xed->p)
 	{
@@ -121,17 +127,17 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 											 widget->allocation.width,
 											 widget->allocation.height);
 
-		if (xed == curs.xed && selection.t0 && selection.t1)
+		if (xed == the_globals.curs.xed && selection->t0 && selection->t1)
 		{
-			pos = pos_logical_to_physical(xed, selection.t0, selection.c0);
-			selection.x0 = pos->x;
-			selection.y0 = pos->y;
+			pos = pos_logical_to_physical(xed, selection->t0, selection->c0);
+			selection->x0 = pos->x;
+			selection->y0 = pos->y;
 			free(pos);
-			pos = pos_logical_to_physical(xed, selection.t1, selection.c1);
-			selection.x1 = pos->x;
-			selection.y1 = pos->y;
+			pos = pos_logical_to_physical(xed, selection->t1, selection->c1);
+			selection->x1 = pos->x;
+			selection->y1 = pos->y;
 			free(pos);
-			selection_draw();
+			selection_draw(selection, curs);
 		}
 
 		/* Redraw */
@@ -144,11 +150,11 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 
 		xed->draw_x = 0;  /* FIXME: Out-of-context root node */
 		xed_xml_content_draw(xed, 1);
-		if (xed == curs.xed) 
+		if (xed == curs->xed) 
 		{			
-			pos = pos_logical_to_physical(xed, curs.t, curs.c);
-			curs.x = pos->x;
-			curs.y = pos->y;
+			pos = pos_logical_to_physical(xed, curs->t, curs->c);
+			curs->x = pos->x;
+			curs->y = pos->y;
 			free(pos);
 		}
 	}
@@ -160,7 +166,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, struct
 
 void xed_redraw(struct xed *xed)
 {
-	GtkRequisition req;
+	UNUSED_VAR(GtkRequisition req)
 	int height;
 
 
@@ -199,7 +205,7 @@ void xed_redraw(struct xed *xed)
 		
 		/* Redraw */
 
-		selection_draw();
+		selection_draw(&the_globals.selection, &the_globals.curs);
 
 		if (xed->lines)
 		{
@@ -248,7 +254,7 @@ static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, struct 
 	GdkCursor* cursor;
 
 	cursor = gdk_cursor_new(GDK_XTERM);
-	gdk_window_set_cursor(window->window, cursor);
+	gdk_window_set_cursor(cong_gui_get_window(&the_gui)->window, cursor);
 	gdk_cursor_destroy(cursor);
 	return(TRUE);
 }
@@ -256,16 +262,18 @@ static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, struct 
 
 static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, struct xed *xed)
 {
-	GdkCursor* cursor;
+  UNUSED_VAR(GdkCursor* cursor)
 	
-	gdk_window_set_cursor(window->window, 0);
+	gdk_window_set_cursor(cong_gui_get_window(&the_gui)->window, 0);
 	return(TRUE);
 }
 
 
 static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct xed *xed)
 {
-	TTREE *dummy, *n, *r;
+	UNUSED_VAR(TTREE *dummy)
+	UNUSED_VAR(TTREE *n)
+	UNUSED_VAR(TTREE *r)
 	
 	if (event->button == 1)
 	{
@@ -273,13 +281,13 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct 
 		printf("[Click] ");
 #endif
 		fflush(stdout);
-		curs.w = widget;
+		the_globals.curs.w = widget;
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 
-		curs_place_in_xed(xed, (int) event->x, (int) event->y);
-		selection_start_from_curs();
-		selection_end_from_curs();
+		curs_place_in_xed(&the_globals.curs, xed, (int) event->x, (int) event->y);
+		selection_start_from_curs(&the_globals.selection, &the_globals.curs);
+		selection_end_from_curs(&the_globals.selection, &the_globals.curs);
 
 		xed_redraw(xed);
 /*		
@@ -290,7 +298,7 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct 
 	else if (event->button == 3)
 	{
 		popup_build(xed);
-		popup_show(popup, event);
+		popup_show(cong_gui_get_popup(&the_gui), event);
 		return(TRUE);
 	}
 	
@@ -301,7 +309,7 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, struct 
 static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *xed)
 {
 	struct pos *pos;
-	char *s;
+	UNUSED_VAR(char *s)
 	int r = FALSE;
 
 #ifndef RELEASE		
@@ -314,43 +322,43 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *x
 	fputs(event->string, stdout);
 #endif
 
-	curs_off();
+	curs_off(&the_globals.curs);
 		
 	switch (event->keyval)
 	{
 		case GDK_Up:
-		  curs_prev_line(xed);
+		  curs_prev_line(&the_globals.curs, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Down:
-	    curs_next_line(xed);
+		  curs_next_line(&the_globals.curs, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Left:
-	    curs_prev_char(xed);
+		  curs_prev_char(&the_globals.curs, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  r = TRUE;
 		  break;
 		case GDK_Right:
-	    curs_next_char(xed);
-	    gtk_widget_grab_focus(widget);
-	    gtk_widget_grab_default(widget);
+		  curs_next_char(&the_globals.curs, xed);
+		  gtk_widget_grab_focus(widget);
+		  gtk_widget_grab_default(widget);
 		  r = TRUE;
-	    break;
+		  break;
 		case GDK_BackSpace:
-	    curs_del_prev_char(xed);
-	    gtk_widget_grab_focus(widget);
-	    gtk_widget_grab_default(widget);
+		  curs_del_prev_char(&the_globals.curs, xed);
+		  gtk_widget_grab_focus(widget);
+		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
 		  r = TRUE;
 		  break;
 		case GDK_Delete:
-		  curs_del_next_char(xed);
+		  curs_del_next_char(&the_globals.curs, xed);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
@@ -358,7 +366,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *x
 		  break;
 		case GDK_ISO_Enter:
 		case GDK_Return:
-		  curs_paragraph_insert();
+		  curs_paragraph_insert(&the_globals.curs);
 		  gtk_widget_grab_focus(widget);
 		  gtk_widget_grab_default(widget);
 		  xed_redraw(xed);
@@ -367,19 +375,19 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, struct xed *x
 		default:
 		
 		  if (event->length && event->string && strlen(event->string))
-					curs_data_insert(event->string);
+					curs_data_insert(&the_globals.curs, event->string);
 		  xed_redraw(xed);
 		  break;
 	}
 
-	pos = pos_logical_to_physical(xed, curs.t, curs.c);
-	curs.x = pos->x;
-	curs.y = pos->y;
-	curs.line = pos->line;
+	pos = pos_logical_to_physical(xed, the_globals.curs.t, the_globals.curs.c);
+	the_globals.curs.x = pos->x;
+	the_globals.curs.y = pos->y;
+	the_globals.curs.line = pos->line;
 	free(pos);
 
-	curs_on();
-	curs.on = 0;
+	curs_on(&the_globals.curs);
+	the_globals.curs.on = 0;
 
 #ifndef RELEASE
 	s = xml_fetch_clean_data(xed->x->parent->parent);
@@ -395,8 +403,8 @@ static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, struct
 {
 	if (!(event->state & GDK_BUTTON1_MASK)) return(FALSE);
 	
-	curs_place_in_xed(xed, (int) event->x, (int) event->y);
-	selection_end_from_curs();
+	curs_place_in_xed(&the_globals.curs, xed, (int) event->x, (int) event->y);
+	selection_end_from_curs(&the_globals.selection, &the_globals.curs);
 
 	xed_redraw(xed);
 	return(TRUE);
@@ -410,8 +418,9 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 		GdkEventButton *bevent = (GdkEventButton *) event;
 		if (bevent->button != 3) return(FALSE);
 
-		popup_build();
-		popup_show(popup, bevent);
+		printf("FIXME:  passing NULL for xed ptr to popup_build\n");
+		popup_build(NULL);
+		popup_show(cong_gui_get_popup(&the_gui), bevent);
 		return(TRUE);
 	}
 
@@ -436,22 +445,22 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, struct x
 	  ttree_node_add(dummy, "dummy", 5);                                            
 	  ttree_node_add(dummy->child, "data", 4);                                      
 	  ttree_node_add(dummy->child->child, d->data, d->length);                      
-	  clipboard = dummy;                                                            
+	  the_globals.clipboard = dummy;                                                            
 	/*                                                                              
 	 *   dummy->child->parent = 0;                                                     
 	 *   dummy->child = 0;                                                             
 	 *   ttree_branch_remove(dummy);                                                   
 	 * */                                                                              
-	  xed_paste(curs.w, curs.xed);                                                  
+	  xed_paste(the_globals.curs.w, the_globals.curs.xed);                                                  
 	  return(TRUE);  
 }
 
 
 struct xed *xmledit_new(TTREE *x, TTREE *displayspec)
 {
-	GdkCursor* cursor;
+        UNUSED_VAR(GdkCursor* cursor)
 	struct xed *xed;
-	int sig;
+	UNUSED_VAR(int sig)
 	
 	xed = malloc(sizeof(*xed));
 	memset(xed, 0, sizeof(*xed));
@@ -526,13 +535,13 @@ struct xed *xmledit_new(TTREE *x, TTREE *displayspec)
 	gtk_widget_set(xed->w, "can_focus", (gboolean) TRUE, 0);
 	gtk_widget_set(xed->w, "can_default", (gboolean) TRUE, 0);
 	
-	xed->f = f;
-	xed->fm = fm;
+	xed->f = the_globals.f;
+	xed->fm = the_globals.fm;
 
-	xed->f_asc = f_asc;
-	xed->f_desc = f_desc;
-	xed->fm_asc = fm_asc;
-	xed->fm_desc = fm_desc;
+	xed->f_asc = the_globals.f_asc;
+	xed->f_desc = the_globals.f_desc;
+	xed->fm_asc = the_globals.fm_asc;
+	xed->fm_desc = the_globals.fm_desc;
 
 	xed->tag_height = (xed->fm_asc + xed->fm_desc) / 2;
 	if (xed->tag_height < 3) xed->tag_height = 3;
@@ -712,10 +721,10 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 	GdkGC *gc;
 	int draw_pos_y;
 
-	int line;
+	UNUSED_VAR(int line)
 	int x0, x1, width, text_width;
 	int y, text_y;
-	int eol = 0;
+	UNUSED_VAR(int eol = 0)
 
 
 	l = xed_line_last(xed);
@@ -742,8 +751,9 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 
 		if (mode == 1 && (gc = ds_name_gc_get(xed->displayspec, t, 0)))
 		{
-			TTREE *n0, *n1;
-			unsigned int col;
+			UNUSED_VAR(TTREE *n0)
+			UNUSED_VAR(TTREE *n1)
+			UNUSED_VAR(unsigned int col)
 			
 			/* Insert text if it fits */
 
@@ -795,8 +805,9 @@ void xed_xml_tags_draw_eol(struct xed *xed, int draw_tag_lev, int mode)
 
 		if (mode == 1 && (gc = ds_name_gc_get(xed->displayspec, t, 0)))
 		{
-			TTREE *n0, *n1;
-			unsigned int col;
+			UNUSED_VAR(TTREE *n0)
+			UNUSED_VAR(TTREE *n1)
+			UNUSED_VAR(unsigned int col)
 			
 			/* Insert text if it fits */
 
@@ -831,7 +842,7 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 	int line;
 	int x0, x1, width, text_width;
 	int y, text_y;
-	unsigned int col;
+	UNUSED_VAR(unsigned int col)
 
 	/* --- Set drawing style --- */
 #if 0
@@ -870,7 +881,8 @@ void xed_xml_tags_draw_eot(struct xed *xed, int draw_tag_lev, int mode)
 #endif
 	if (mode == 1 && (gc = ds_name_gc_get(xed->displayspec, t, 0)))
 	{
-		TTREE *n0, *n1;
+	  UNUSED_VAR(TTREE *n0)
+	  UNUSED_VAR(TTREE *n1)
 
 		/* Insert text if it fits */
 
@@ -911,7 +923,7 @@ void xed_str_micro_put(struct xed *xed, char *s)
 
 char *xed_word(TTREE *x, struct xed *xed, int *spc_before, int *spc_after)
 {
-	int i;
+	UNUSED_VAR(int i)
 	char *p0, *p1;
 
 	if (*spc_after) { *spc_before = 1; *spc_after = 0; }
@@ -1014,7 +1026,7 @@ int xed_xml_content_data(struct xed *xed, TTREE *x, int draw_tag_lev)
 {
 	char *word;
 	int width;
-	int wrap = 0;
+	UNUSED_VAR(int wrap = 0)
 	int spc_before = 0, spc_after = 0;
 
 #if 0	
@@ -1195,8 +1207,10 @@ int xed_xml_depth_before_eol(struct xed *xed, TTREE *x, int pos_x, int width, in
 
 int xed_xml_content_tag(struct xed *xed, TTREE *x)
 {
-	int hold = 0;
-	int draw_tag_lev, i0, pushed = 0;
+	UNUSED_VAR(int hold = 0)
+	int draw_tag_lev;
+	UNUSED_VAR(int i0)
+	UNUSED_VAR(int pushed = 0)
 	int draw_tag_lev_new;
 	int width;
 
@@ -1365,12 +1379,12 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 		  width = gdk_string_width(xed->f, "[TABLE]");
 	    if (xed->mode == 1)
 			{
-				gdk_draw_rectangle(xed->p, insert_element_gc,
-											     TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
-											     xed->f_asc + xed->f_desc + 2);
-	      gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
-												(xed->w->allocation.width - width) / 2,
-									      xed->draw_pos_y, "[TABLE]");
+			  gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
+					     TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
+					     xed->f_asc + xed->f_desc + 2);
+			  gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
+					  (xed->w->allocation.width - width) / 2,
+					  xed->draw_pos_y, "[TABLE]");
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1427,8 +1441,9 @@ int xed_xml_content_tag(struct xed *xed, TTREE *x)
 
 int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 {
-	TTREE *x, *first;
-	int height = 0;
+	TTREE *x;
+	UNUSED_VAR(TTREE *first)
+	UNUSED_VAR(int height = 0)
 	int draw_tag_lev = 0, draw_tag_lev_new;
 	int width;
 
@@ -1558,12 +1573,12 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 		  width = gdk_string_width(xed->f, "[TABLE]");
 	    if (xed->mode == 1)
 			{
-				gdk_draw_rectangle(xed->p, insert_element_gc,
-											     TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
-											     xed->f_asc + xed->f_desc + 2);
-	      gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
-												(xed->w->allocation.width - width) / 2,
-									      xed->draw_pos_y, "[TABLE]");
+				gdk_draw_rectangle(xed->p, the_globals.insert_element_gc,
+						   TRUE, 2, xed->draw_pos_y - xed->f_asc - 1, xed->w->allocation.width - 4,
+						   xed->f_asc + xed->f_desc + 2);
+				gdk_draw_string(xed->p, xed->f, xed->w->style->fg_gc[GTK_STATE_NORMAL],
+						(xed->w->allocation.width - width) / 2,
+						xed->draw_pos_y, "[TABLE]");
 			}
 			
 			xed->draw_char_prev = 0;
@@ -1601,10 +1616,10 @@ int xed_xml_content_draw(struct xed *xed, unsigned int mode)
 
 void selection_curs_unset()
 {
-	curs.set = 0;
-	curs.t = 0;
+	the_globals.curs.set = 0;
+	the_globals.curs.t = 0;
 	
-	selection.t0 = selection.t1 = 0;
+	the_globals.selection.t0 = the_globals.selection.t1 = 0;
 }
 
 
@@ -1613,49 +1628,52 @@ gint xed_cut(GtkWidget *widget, struct xed *xed_disabled)
 	TTREE *t;
 	int replace_xed = 0;
 
-	if (!curs.w || !curs.xed || !curs.t) return(TRUE);
-	
-	if (!(selection.t0 && selection.t1 &&
-				selection.t0->parent == selection.t1->parent)) return(TRUE);
+	struct selection* selection = &the_globals.selection;
+	struct curs* curs = &the_globals.curs;
 
-	if (selection.t0 == selection.t1 && selection.c0 == selection.c1) return(TRUE);
+	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
 	
-	if (clipboard) ttree_branch_remove(clipboard);
+	if (!(selection->t0 && selection->t1 &&
+				selection->t0->parent == selection->t1->parent)) return(TRUE);
+
+	if (selection->t0 == selection->t1 && selection->c0 == selection->c1) return(TRUE);
+	
+	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	
 	t = ttree_node_add(0, "tag_span", 8);
 	ttree_node_add(t, "dummy", 5);
 
-	if (selection.t0 == curs.xed->x) replace_xed = 1;
+	if (selection->t0 == curs->xed->x) replace_xed = 1;
 	
-	selection_reparent_all(t);
+	selection_reparent_all(selection, t);
 
 	if (t->prev)
 	{
 		t->prev->next = t->next;
-		if (replace_xed) curs.xed->x = t->prev;
+		if (replace_xed) curs->xed->x = t->prev;
 	}
 	else
 	{
-		curs.xed->x = t->next;
+		curs->xed->x = t->next;
 		if (t->parent) t->parent->child = t->next;
 	}
 	
 	if (t->next) t->next->prev = t->prev;
 	t->prev = t->next = t->parent = 0;
 
-	clipboard = t;
+	the_globals.clipboard = t;
 
 	selection_curs_unset();
 	
-	if (!curs.xed->x)
+	if (!curs->xed->x)
 	{
-		t = xv->x;
+		t = the_globals.xv->x;
 		xmlview_destroy(FALSE);
-		xv = xmlview_new(t, ds_global);
+		the_globals.xv = xmlview_new(t, the_globals.ds_global);
 	}
 	else
 	{
-		xed_redraw(curs.xed);
+		xed_redraw(curs->xed);
 	}
 
 	return(TRUE);
@@ -1667,26 +1685,29 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 	TTREE *t, *t0 = 0;
 	int replace_xed = 0;
 
-	if (!curs.w || !curs.xed || !curs.t) return(TRUE);
+	struct selection* selection = &the_globals.selection;
+	struct curs* curs = &the_globals.curs;
+
+	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
 	
-	if (!(selection.t0 && selection.t1 &&
-				selection.t0->parent == selection.t1->parent)) return(TRUE);
+	if (!(selection->t0 && selection->t1 &&
+				selection->t0->parent == selection->t1->parent)) return(TRUE);
 
-	if (selection.t0 == selection.t1 && selection.c0 == selection.c1) return(TRUE);
+	if (selection->t0 == selection->t1 && selection->c0 == selection->c1) return(TRUE);
 
-	if (clipboard) ttree_branch_remove(clipboard);
+	if (the_globals.clipboard) ttree_branch_remove(the_globals.clipboard);
 	
 	t = ttree_node_add(0, "tag_span", 8);
 	ttree_node_add(t, "dummy", 5);
 
-	if (selection.t0 == curs.xed->x) replace_xed = 1;
-	selection_reparent_all(t);
-	clipboard = ttree_branch_dup(t);
+	if (selection->t0 == curs->xed->x) replace_xed = 1;
+	selection_reparent_all(selection, t);
+	the_globals.clipboard = ttree_branch_dup(t);
 
 	if (t->child->child)
 	{
 		t->child->child->prev = t->prev;
-		if (replace_xed) curs.xed->x = t->prev;
+		if (replace_xed) curs->xed->x = t->prev;
 		t->child->child->parent = t->parent;
 		
 		for (t0 = t->child->child; t0->next; t0 = t0->next)
@@ -1714,15 +1735,15 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 	if (t0) ttree_fsave(t0->parent->parent->parent, stdout);
 #endif
 
-	if (!curs.xed->x)
+	if (!curs->xed->x)
 	{
-		t = xv->x;
+		t = the_globals.xv->x;
 		xmlview_destroy(FALSE);
-		xv = xmlview_new(t, ds_global);
+		the_globals.xv = xmlview_new(t, the_globals.ds_global);
 	}
 	else
 	{
-		xed_redraw(curs.xed);
+		xed_redraw(curs->xed);
 	}
 
 	return(TRUE);
@@ -1732,64 +1753,67 @@ gint xed_copy(GtkWidget *widget, struct xed *xed_disabled)
 gint xed_paste(GtkWidget *widget, struct xed *xed_disabled)
 {
 	TTREE *t, *t0 = 0, *t1 = 0, *clip;
-	
-	if (!curs.w || !curs.xed || !curs.t) return(TRUE);
 
-  if (!clipboard)
+	struct selection* selection = &the_globals.selection;
+	struct curs* curs = &the_globals.curs;
+	
+	if (!curs->w || !curs->xed || !curs->t) return(TRUE);
+
+	if (!the_globals.clipboard)
 	{
-		selection_import();
+	  selection_import(selection);
 	  return(TRUE);
 	}
 
-	if (!clipboard->child || !clipboard->child->child) return(TRUE);
+	if (!the_globals.clipboard->child || !the_globals.clipboard->child->child) return(TRUE);
 	
-	if (ds_element_structural(ds_global, xml_frag_name_nice(clipboard))) return(TRUE);
+	if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
-	if (xml_frag_type(curs.t) == XML_DATA)
+	if (xml_frag_type(curs->t) == XML_DATA)
 	{
-		if (!curs.c)
+		if (!curs->c)
 		{
-			t0 = xml_frag_prev(curs.t);
-			t1 = curs.t;
+			t0 = xml_frag_prev(curs->t);
+			t1 = curs->t;
 		}
-		else if (!*(xml_frag_data_nice(curs.t) + curs.c))
+		else if (!*(xml_frag_data_nice(curs->t) + curs->c))
 		{
-			t0 = curs.t;
-			t1 = xml_frag_next(curs.t);
+			t0 = curs->t;
+			t1 = xml_frag_next(curs->t);
 		}
 		else
 		{
 			/* Split data node */
 			
-			xml_frag_data_nice_split2(curs.t, curs.c);
-			curs.c = 0;
-			t0 = curs.t;
-			t1 = xml_frag_next(curs.t);
-			if (xml_frag_next(curs.t)) curs.t = xml_frag_next(curs.t);
+			xml_frag_data_nice_split2(curs->t, curs->c);
+			curs->c = 0;
+			t0 = curs->t;
+			t1 = xml_frag_next(curs->t);
+			if (xml_frag_next(curs->t)) curs->t = xml_frag_next(curs->t);
 		}
 	}
-	else t0 = curs.t;
+	else t0 = curs->t;
 	
-	clip = ttree_branch_dup(clipboard);
+	clip = ttree_branch_dup(the_globals.clipboard);
 	t = clip->child->child;
 
 	if (!t) return(TRUE);
 	
 	t->prev = t0;
 	if (t0) t0->next = t;
-	else curs.t->parent->child = t;
+	else curs->t->parent->child = t;
 
 	for (; t->next; t = t->next)
 	{
-		t->parent = curs.t->parent;
+		t->parent = curs->t->parent;
 	}
-	t->parent = curs.t->parent;
+	t->parent = curs->t->parent;
 
 	t->next = t1;
 	if (t1) t1->prev = t;
 
-	selection.t0 = selection.t1 = 0;
+	selection->t0 = selection->t1 = 0;
 
-	xed_redraw(curs.xed);
+	xed_redraw(curs->xed);
 	return(TRUE);
 }

@@ -44,7 +44,7 @@ static gint new_document_from_template(GtkWidget *w, char *type)
  */
 	}
 
-	gtk_widget_set_sensitive(butt_submit, TRUE);
+	gtk_widget_set_sensitive(cong_gui_get_button_submit(&the_gui), TRUE);
 
 	if (!strcmp(type, "capsula"))
 	{

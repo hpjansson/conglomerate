@@ -4,14 +4,15 @@
 #include <xml.h>
 #include "global.h"
 
+#include <unistd.h> /* for chdir */
 
-int open_document_do(char *doc_name, char *ds_name)
+int open_document_do(const char *doc_name, const char *ds_name)
 {
 	char *p;
 	TTREE *ds_temp, *xml_in;
 	FILE *xml_f;
 
-	ds_temp = ttree_load(ds_name);
+	ds_temp = ttree_load((char*)ds_name);
 	if (!ds_temp) {
 	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
 	  return(TRUE);  /* Invalid displayspec. */
@@ -38,12 +39,12 @@ int open_document_do(char *doc_name, char *ds_name)
 
 	fclose(xml_f);
 	
-	ds_global = ds_temp;
-	ds_init(ds_global);
+	the_globals.ds_global = ds_temp;
+	ds_init(the_globals.ds_global);
 
 	xml_t_trim(xml_in);
-	xv = xmlview_new(xml_in, ds_global);
-	gtk_box_pack_start(GTK_BOX(root), xv->w, FALSE, FALSE, 0);
+	the_globals.xv = xmlview_new(xml_in, the_globals.ds_global);
+	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
 
 	return (TRUE);
 }
@@ -51,7 +52,7 @@ int open_document_do(char *doc_name, char *ds_name)
 
 gint open_document(GtkWidget *w, gpointer data)
 {
-	char *doc_name, *ds_name;
+	const char *doc_name, *ds_name;
 	
 	doc_name = get_file_name("Select an XML document");
 	if (!doc_name) return(TRUE);

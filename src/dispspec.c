@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <ctype.h>
+
 #include <ttree.h>
 #include <xml.h>
 
@@ -233,7 +235,7 @@ char *ds_name_get(TTREE *x)
 {
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(ds_global, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
+  n0 = ttree_node_find1(the_globals.ds_global, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "name", 4, 0);
@@ -252,7 +254,7 @@ char *ds_name_name_get(TTREE *t)
 {
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(ds_global, t->data, t->size, 0);
+  n0 = ttree_node_find1(the_globals.ds_global, t->data, t->size, 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "name", 4, 0);
@@ -269,7 +271,7 @@ char *ds_name_name_get(TTREE *t)
 
 GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog)
 {
-  GdkGC *gc;
+  UNUSED_VAR(GdkGC *gc)
   TTREE *n0, *n1;
   
   n0 = ttree_node_find1(ds, t->data, t->size, 0);
@@ -290,7 +292,7 @@ GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog)
 
 GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog)
 {
-  GdkGC *gc;
+  UNUSED_VAR(GdkGC *gc)
   TTREE *n0, *n1;
   
   n0 = ttree_node_find1(ds, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
@@ -351,10 +353,10 @@ void ds_init(TTREE *ds)
 	    {
 				/* No, allocate */
 	      
-	      gc = gdk_gc_new(window->window);
-	      gdk_gc_copy(gc, window->style->white_gc);
+	      gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
+	      gdk_gc_copy(gc, cong_gui_get_window(&the_gui)->style->white_gc);
 	      col_to_gcol(&gcol, get_rgb_hex(n1->child->data));
-	      gdk_colormap_alloc_color(window->style->colormap, &gcol, 0, 1);
+	      gdk_colormap_alloc_color(cong_gui_get_window(&the_gui)->style->colormap, &gcol, 0, 1);
 	      gdk_gc_set_foreground(gc, &gcol);
 #if 0
 	      gdk_rgb_gc_set_foreground(gc, get_rgb_hex(n1->child->data));
@@ -403,7 +405,7 @@ char *pick_structural_tag()
 
   /* Window -> vbox -> buttons */
 
-	for (n0 = ds_get_first_structural(ds_global); n0; n0 = ds_get_next_structural(n0))
+	for (n0 = ds_get_first_structural(the_globals.ds_global); n0; n0 = ds_get_next_structural(n0))
 	{
     n1 = ttree_node_find1(n0, "name", 4, 0);
     if (!n1) continue;
