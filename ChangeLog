@@ -1,3 +1,7 @@
+2003-09-28  Artur Flinta  <aflinta@cvs.gnome.org>
+
+	* configure.in: Added pl to ALL_LINGUAS.
+
 2003-09-26  Varga Robert <frozenfingers@home.ro>
 
 	* configure.in: Added gtkdoc support
