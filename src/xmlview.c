@@ -1270,6 +1270,8 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_selection_change(CongView *view);
+static void on_cursor_change(CongView *view);
 
 #define DEBUG_EDITOR_VIEW 1
 
@@ -1370,6 +1372,13 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 
 }
 
+static void on_selection_change(CongView *view)
+{
+}
+
+static void on_cursor_change(CongView *view)
+{
+}
 
 
 CongEditorView *cong_editor_view_new(CongDocument *doc)
@@ -1387,6 +1396,8 @@ CongEditorView *cong_editor_view_new(CongDocument *doc)
 	editor_view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	editor_view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	editor_view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	editor_view->view.klass->on_selection_change = on_selection_change;
+	editor_view->view.klass->on_cursor_change = on_cursor_change;
 
 	cong_document_register_view( doc, CONG_VIEW(editor_view) );
 

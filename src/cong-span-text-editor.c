@@ -31,7 +31,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render);
 
 typedef struct CongTextSpan CongTextSpan;
 
-/* Struct representing a run of characters within the plaintext cache from a specific text node; not sure if this ever get used: */
+/* Struct representing a run of characters within the plaintext cache from a specific text node; useful for converting from PangoLayoutLines back to the underlying XML: */
 struct CongTextSpan
 {
 	int first_byte_offset;
@@ -67,6 +67,9 @@ struct CongSpanTextEditor
 };
 
 static void regenerate_plaintext(CongSpanTextEditor *span_text_editor);
+static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
+static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset);
+static CongTextSpan *get_text_span_for_node(CongSpanTextEditor *span_text_editor, CongNodePtr node);
 
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor);
 static void span_text_editor_on_recursive_self_test(CongElementEditor *element_editor);
@@ -160,7 +163,7 @@ static void add_text(CongSpanTextEditor *span_text_editor, CongNodePtr node, gbo
 
 	text_span->byte_count = strlen(string_to_append);
 	text_span->text_node = node;
-	g_list_append(span_text_editor->list_of_cong_text_span, text_span);
+	span_text_editor->list_of_cong_text_span = g_list_append(span_text_editor->list_of_cong_text_span, text_span);
 	
 	/* Add to the big plaintext string: */
 	new_value = g_strdup_printf("%s%s", span_text_editor->plain_text, string_to_append);
@@ -285,6 +288,62 @@ static void regenerate_plaintext(CongSpanTextEditor *span_text_editor)
 			       -1);
 }
 
+static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
+{
+	CongTextSpan *text_span;
+
+	g_return_val_if_fail(span_text_editor, NULL);
+
+	text_span = get_text_span_at_byte_offset(span_text_editor, byte_offset);
+
+	if (text_span) {
+		return text_span->text_node;
+	} else {
+		return NULL;
+	}
+}
+
+static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
+{
+	GList *iter;
+
+	g_return_val_if_fail(span_text_editor, NULL);
+	
+	/* Scan through the text spans, looking for the byte offset: */
+	for (iter = span_text_editor->list_of_cong_text_span; iter; iter = iter->next) {
+		CongTextSpan *text_span = iter->data;
+		g_assert(text_span);
+		
+		g_assert(byte_offset >= text_span->first_byte_offset);
+
+		if (byte_offset < (text_span->first_byte_offset + text_span->byte_count) ) {
+			return text_span;
+		}
+	}
+
+	return NULL;
+}
+
+static CongTextSpan *get_text_span_for_node(CongSpanTextEditor *span_text_editor, CongNodePtr node)
+{
+	GList *iter;
+
+	g_return_val_if_fail(span_text_editor, NULL);
+	g_return_val_if_fail(node, NULL);
+	
+	/* Scan through the text spans, looking for the node: */
+	for (iter = span_text_editor->list_of_cong_text_span; iter; iter = iter->next) {
+		CongTextSpan *text_span = iter->data;
+		g_assert(text_span);
+		
+		if (text_span->text_node==node) {
+			return text_span;
+		}
+	}
+
+	return NULL;
+}
+
 static void span_text_editor_on_recursive_delete(CongElementEditor *element_editor)
 {
 	/* FIXME: unimplemented */
@@ -329,9 +388,7 @@ static gboolean span_text_editor_on_document_event(CongElementEditor *element_ed
 static void span_text_editor_get_size_requisition(CongElementEditor *element_editor, int width_hint)
 {
 	CongEditorWidget *editor_widget = element_editor->widget;
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
-	CongNodePtr node = element_editor->first_node;
 
 	pango_layout_set_width(span_text->pango_layout,
 			       (width_hint-H_SPACING)*PANGO_SCALE);
@@ -354,6 +411,46 @@ static void span_text_editor_allocate_child_space(CongElementEditor *element_edi
 			       (element_editor->window_area.width-H_SPACING)*PANGO_SCALE);
 }
 
+#if 0
+struct RenderAnySelectionData
+{
+	CongSpanTextEditor *span_text;
+	PangoLayoutLine *line;
+
+	const CongSelection *selection;
+	GdkGC *gc;
+};
+
+static void render_any_selection(CongTextSpan *text_span,
+				 struct RenderAnySelectionData *data)
+{
+	g_assert(text_span);
+	g_assert(data);
+
+	/* is this span present on the given line? */
+	if (text_span->final_byte_offset < data->line->start_index) {
+		/* Reject; the span ends before this line */
+		return;
+	}
+	
+	if (text_span->first_byte_offset > data->line->start_index+data->line->length) {
+		/* Reject; the span starts after this line */
+		return;
+	}
+
+	/* OK; at least part of this text_span is present on this line: */
+	
+#error
+	struct CongTextSpan
+	{
+		int first_byte_offset;
+		int byte_count;
+		CongNodePtr text_node;
+	};
+
+} 
+#endif
+
 struct CalculateSpanHeightData
 {
 	CongSpanTextEditor *span_text;
@@ -366,7 +463,7 @@ static void calculate_span_height(CongNodePtr key,
 				  CongTextRange *text_range,
 				  struct CalculateSpanHeightData *data)
 {
-	/* is this span present on the given line? */
+	/* is this range present on the given line? */
 	if (text_range->final_byte_offset < data->line->start_index) {
 		/* Reject; the range ends before this line */
 		return;
@@ -487,6 +584,8 @@ static void render_text_range(CongNodePtr key,
 	}
 }
 
+#define INTER_LINE_SPACING (8)
+
 /**
  * Return value: total height used
  */
@@ -496,11 +595,33 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 	GtkWidget *w = GTK_WIDGET(editor_widget);
+	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
+	const CongSelection *selection = cong_document_get_selection(doc);
+	CongTextSpan *selection_start_span = NULL;
+	CongTextSpan *selection_end_span = NULL;
+	int selection_start_byte_offset;
+	int selection_end_byte_offset;
 
 	GSList *line_iter;
 	GList *text_span_iter = span_text->list_of_cong_text_span;	
 
 	int y = element_editor->window_area.y;
+
+	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1)) {
+		g_assert(cong_node_type(selection->loc0.tt_loc)==CONG_NODE_TYPE_TEXT);
+		g_assert(cong_node_type(selection->loc1.tt_loc)==CONG_NODE_TYPE_TEXT);
+
+		selection_start_span = get_text_span_for_node(span_text, selection->loc0.tt_loc);
+		selection_end_span = get_text_span_for_node(span_text, selection->loc1.tt_loc);
+
+		if (selection_start_span) {
+			selection_start_byte_offset = selection_start_span->first_byte_offset + selection->loc0.char_loc;
+		}
+		
+		if (selection_end_span) {
+			selection_end_byte_offset = selection_end_span->first_byte_offset + selection->loc1.char_loc;
+		}
+	}
 
 	for (line_iter=pango_layout_get_lines(span_text->pango_layout); line_iter; line_iter = line_iter->next) {
 		struct CalculateSpanHeightData calculate_span_height_data;				
@@ -525,16 +646,6 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 			  logical_rect.width,
 			  logical_rect.height);
 #endif
-			
-
-		if (render) {
-			/* Render the PangoLayoutLine: */
-			gdk_draw_layout_line(GDK_DRAWABLE(w->window),
-					     w->style->black_gc,
-					     element_editor->window_area.x + H_SPACING,
-					     (y - logical_rect.y),
-					     line);
-		}
 
 		/* Calculate height of all spans applying to this line: */
 		{
@@ -544,10 +655,74 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 			
 			g_assert(span_text->hash_of_node_to_text_range);
 			g_hash_table_foreach(span_text->hash_of_node_to_text_range,
-					     calculate_span_height,
+					     (GHFunc)calculate_span_height,
 					     &calculate_span_height_data);
-		}
+		}		
 		
+		if (render) {
+			/* If selection applies, render it underneath the layout_line: */
+			if (selection_start_span && selection_end_span) {
+				/* Then selection exists within this span_text_editor: */
+				GdkGC *selection_gc;
+				int start_x, end_x;
+
+				if (cong_location_parent(&selection->loc0) == cong_location_parent(&selection->loc1)) {
+					selection_gc = selection->gc_0;
+				} else {
+					selection_gc = selection->gc_3;
+				}
+
+				/* Check that the selection is to be rendered on this layout_line: */
+				if (selection_end_byte_offset >= line->start_index) {
+					if (selection_start_byte_offset <= line->start_index+line->length) {
+						/* OK, render the selection on this layout_line: */
+						if (selection_start_byte_offset >= line->start_index) {
+							/* selection starts somewhere on this line: */
+							pango_layout_line_index_to_x(line,
+										     selection_start_byte_offset,
+										     FALSE,
+										     &start_x);	
+							start_x /= PANGO_SCALE;
+							start_x += element_editor->window_area.x + H_SPACING;
+							
+						} else {
+							/* selection started somewhere before this line: */
+							start_x = element_editor->window_area.x + H_SPACING;
+						}
+						
+						if (selection_end_byte_offset <= line->start_index+line->length) {
+							/* selection finishes somewhere on this line: */
+							pango_layout_line_index_to_x(line,
+										     selection_end_byte_offset,
+										     TRUE,
+										     &end_x);	
+							end_x /= PANGO_SCALE;
+							end_x += element_editor->window_area.x + H_SPACING;
+						} else {
+							/* selection finishes somewhere after this line: */
+							end_x = element_editor->window_area.x + element_editor->window_area.width;
+						}
+						
+						/* Render it: */
+						gdk_draw_rectangle(GDK_DRAWABLE(w->window),
+								   selection_gc, 
+								   TRUE,
+								   start_x,
+								   y,
+								   end_x-start_x,
+								   logical_rect.height + INTER_LINE_SPACING + (calculate_span_height_data.max_depth * span_text->tag_height));
+					}
+				}
+			}
+			
+			/* Render the PangoLayoutLine: */
+			gdk_draw_layout_line(GDK_DRAWABLE(w->window),
+					     w->style->black_gc,
+					     element_editor->window_area.x + H_SPACING,
+					     (y - logical_rect.y),
+					     line);
+		}
+
 		/* Render spans: */
 		if (render) {
 			struct RenderTextRangeData render_text_range_data;
@@ -560,12 +735,10 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 			
 			g_assert(span_text->hash_of_node_to_text_range);
 			g_hash_table_foreach(span_text->hash_of_node_to_text_range,
-					     render_text_range,
+					     (GHFunc)render_text_range,
 					     &render_text_range_data);
 		}
 		
-#define INTER_LINE_SPACING (8)
-
 		y += logical_rect.height + INTER_LINE_SPACING + (calculate_span_height_data.max_depth * span_text->tag_height);
 	}
 
@@ -575,8 +748,6 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect)
 {
 	CongEditorWidget *editor_widget = element_editor->widget;
-	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
-	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
 	GtkWidget *w = GTK_WIDGET(editor_widget);
 
 	GdkRectangle intersected_area;

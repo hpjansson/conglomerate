@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-11-27 David Malcolm
 
+	* cong-document.c, cong-editor-widget.c, cong-location.c, cong-span-text-editor.c, cong-test-view.c, cong-tree-view.c, global.h, xmledit.c, xmlview.c
+
+	Selection rendering in new widget
+
 	* cong-span-text-editor.c
 
 	Layout fixes

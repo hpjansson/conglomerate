@@ -462,6 +462,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 	{
 	case GDK_Up:
 		cong_cursor_prev_line(cursor, xed);
+		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		r = TRUE;
@@ -469,6 +470,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 	
 	case GDK_Down:
 		cong_cursor_next_line(cursor, xed);
+		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		r = TRUE;
@@ -476,6 +478,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 	
 	case GDK_Left:
 		cong_cursor_prev_char(cursor, xed);
+		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		r = TRUE;
@@ -483,6 +486,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEdito
 	
 	case GDK_Right:
 		cong_cursor_next_char(cursor, xed);
+		cong_document_on_cursor_change(doc);
 		gtk_widget_grab_focus(widget);
 		gtk_widget_grab_default(widget);
 		r = TRUE;
@@ -555,6 +559,8 @@ static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, CongSp
 	
 	cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
 	cong_selection_end_from_curs(selection, cursor);
+	cong_document_on_selection_change(doc);
+	cong_document_on_cursor_change(doc);
 
 	xed_redraw(xed);
 	return(TRUE);
@@ -650,6 +656,8 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_selection_change(CongView *view);
+static void on_cursor_change(CongView *view);
 
 #define DEBUG_SPAN_EDITOR 1
 
@@ -769,6 +777,14 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 	}
 }
 
+static void on_selection_change(CongView *view)
+{
+}
+
+static void on_cursor_change(CongView *view)
+{
+}
+
 
 CongSpanEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec)
 {
@@ -785,6 +801,8 @@ CongSpanEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *disp
 	xed->view.klass->on_document_node_add_before = on_document_node_add_before;
 	xed->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	xed->view.klass->on_document_node_set_text = on_document_node_set_text;
+	xed->view.klass->on_selection_change = on_selection_change;
+	xed->view.klass->on_cursor_change = on_cursor_change;
 
 	/* Not stable enough yet to be registered as a view: */
 #if 0

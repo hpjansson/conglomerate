@@ -106,6 +106,8 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_selection_change(CongView *view);
+static void on_cursor_change(CongView *view);
 
 #define DEBUG_TREE_VIEW 1
 
@@ -243,6 +245,14 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 
 	tree_view = CONG_TREE_VIEW(view);
 
+}
+
+static void on_selection_change(CongView *view)
+{
+}
+
+static void on_cursor_change(CongView *view)
+{
 }
 
 CongNodePtr tree_editor_elements_skip(CongNodePtr x, CongDispspec *ds)
@@ -449,6 +459,8 @@ CongTreeView *cong_tree_view_new(CongDocument *doc)
 	tree_view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	tree_view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	tree_view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	tree_view->view.klass->on_selection_change = on_selection_change;
+	tree_view->view.klass->on_cursor_change = on_cursor_change;
 
 	cong_document_register_view( doc, CONG_VIEW(tree_view) );
 

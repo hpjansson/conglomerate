@@ -3,6 +3,7 @@
 #include "global.h"
 
 #define TEST_VIEW 0
+#define TEST_EDITOR_VIEW 0
 
 GtkWidget *cong_test_view_new(CongDocument *doc);
 
@@ -53,6 +54,26 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	}
 	#endif
 
+	#if TEST_EDITOR_VIEW
+	{
+		GtkWindow *window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+		GtkWidget *test_editor_view = cong_editor_widget_new(doc);
+		GtkWidget *scroller;
+
+		scroller = gtk_scrolled_window_new(NULL, NULL);
+
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroller), 
+					       GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_ALWAYS);
+
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroller), 
+						      test_editor_view);
+
+		gtk_container_add(GTK_CONTAINER(window), scroller);
+		gtk_widget_show_all(GTK_WIDGET(window));		
+	}
+	#endif
+
 	cong_cursor_init(&doc->curs);
 	cong_selection_init(&doc->selection);
 
@@ -76,7 +97,11 @@ cong_document_delete(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
+#if !TEST_VIEW
+#if !TEST_EDITOR_VIEW
 	g_assert(doc->views == NULL); /* There must not be any views left referencing this document */
+#endif
+#endif
 
 	cong_cursor_uninit(&doc->curs);
 
@@ -474,6 +499,46 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 	}
 
 	cong_document_set_modified(doc, TRUE);
+}
+
+void cong_document_on_selection_change(CongDocument *doc)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+
+	#if DEBUG_MVC
+	g_message("cong_document_on_selection_change\n");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_selection_change);
+		view->klass->on_selection_change(view);
+	}
+}
+
+void cong_document_on_cursor_change(CongDocument *doc)
+{
+	GList *iter;
+
+	g_return_if_fail(doc);
+
+	#if DEBUG_MVC
+	g_message("cong_document_node_set_text\n");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		g_assert(view->klass->on_cursor_change);
+		view->klass->on_cursor_change(view);
+	}
 }
 
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)

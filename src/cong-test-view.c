@@ -169,6 +169,8 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_selection_change(CongView *view);
+static void on_cursor_change(CongView *view);
 
 #define DEBUG_TEST_VIEW 1
 
@@ -331,6 +333,14 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 	}
 }
 
+static void on_selection_change(CongView *view)
+{
+}
+
+static void on_cursor_change(CongView *view)
+{
+}
+
 GtkWidget *cong_test_view_new(CongDocument *doc)
 {
 	CongTestViewDetails *details;
@@ -354,6 +364,8 @@ GtkWidget *cong_test_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_selection_change = on_selection_change;
+	view->view.klass->on_cursor_change = on_cursor_change;
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
 	

@@ -22,7 +22,7 @@ cong_location_nullify(CongLocation *loc)
 }
 
 
-gboolean cong_location_exists(CongLocation *loc)
+gboolean cong_location_exists(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, FALSE);
 	
@@ -46,14 +46,14 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 
 
 enum CongNodeType
-cong_location_node_type(CongLocation *loc)
+cong_location_node_type(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, 0);
 
 	return cong_node_type(loc->tt_loc);
 }
 
-char cong_location_get_char(CongLocation *loc)
+char cong_location_get_char(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, '\0');
 	g_return_val_if_fail(loc->tt_loc != NULL, '\0');
@@ -63,7 +63,7 @@ char cong_location_get_char(CongLocation *loc)
 }
 
 CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongDocument *doc, CongLocation *loc)
+cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(cong_location_exists(loc), NULL);
@@ -106,7 +106,7 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s)
 }
 
 void
-cong_location_del_next_char(CongDocument *doc, CongLocation *loc)
+cong_location_del_next_char(CongDocument *doc, const CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
 
@@ -128,25 +128,25 @@ cong_location_del_next_char(CongDocument *doc, CongLocation *loc)
 }
 
 CongNodePtr
-cong_location_xml_frag_prev(CongLocation *loc)
+cong_location_xml_frag_prev(const CongLocation *loc)
 {
 	return cong_node_prev(loc->tt_loc);
 }
 
 CongNodePtr
-cong_location_xml_frag_next(CongLocation *loc)
+cong_location_xml_frag_next(const CongLocation *loc)
 {
 	return cong_node_next(loc->tt_loc);
 }
 
 CongNodePtr
-cong_location_node(CongLocation *loc)
+cong_location_node(const CongLocation *loc)
 {
 	return loc->tt_loc;
 }
 
 CongNodePtr
-cong_location_parent(CongLocation *loc)
+cong_location_parent(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(loc->tt_loc != NULL, NULL);

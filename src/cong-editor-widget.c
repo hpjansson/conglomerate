@@ -32,6 +32,8 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+static void on_selection_change(CongView *view);
+static void on_cursor_change(CongView *view);
 
 #define DEBUG_EDITOR_WIDGET_VIEW 1
 
@@ -207,6 +209,39 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 
 	CONG_EDITOR_VIEW_SELF_TEST();
 }
+
+static void on_selection_change(CongView *view)
+{
+	CongEditorWidgetView *editor_widget_view;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_EDITOR_WIDGET_VIEW
+	g_message("CongEditorWidgetView - on_selection_change\n");
+	#endif
+
+	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+
+	/* Force a redraw: */
+	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));	
+}
+
+static void on_cursor_change(CongView *view)
+{
+	CongEditorWidgetView *editor_widget_view;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_EDITOR_WIDGET_VIEW
+	g_message("CongEditorWidgetView - on_cursor_change\n");
+	#endif
+
+	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
+
+	/* Force a redraw: */
+	gtk_widget_queue_draw(GTK_WIDGET(editor_widget_view->widget));
+}
+
 
 
 /* Event handlers for widget: */
@@ -451,6 +486,8 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
 	view->view.klass->on_document_node_set_parent = on_document_node_set_parent;
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
+	view->view.klass->on_selection_change = on_selection_change;
+	view->view.klass->on_cursor_change = on_cursor_change;
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
 

@@ -147,37 +147,37 @@ void
 cong_location_nullify(CongLocation *loc);
 
 gboolean
-cong_location_exists(CongLocation *loc);
+cong_location_exists(const CongLocation *loc);
 
 gboolean
 cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
 
 enum CongNodeType
-cong_location_node_type(CongLocation *loc);
+cong_location_node_type(const CongLocation *loc);
 
 char
-cong_location_get_char(CongLocation *loc);
+cong_location_get_char(const CongLocation *loc);
 
 CongNodePtr
-cong_location_xml_frag_data_nice_split2(CongDocument *doc, CongLocation *loc);
+cong_location_xml_frag_data_nice_split2(CongDocument *doc, const CongLocation *loc);
 
 void
 cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s);
 
 void
-cong_location_del_next_char(CongDocument *doc, CongLocation *loc);
+cong_location_del_next_char(CongDocument *doc, const CongLocation *loc);
 
 CongNodePtr
-cong_location_xml_frag_prev(CongLocation *loc);
+cong_location_xml_frag_prev(const CongLocation *loc);
 
 CongNodePtr
-cong_location_xml_frag_next(CongLocation *loc);
+cong_location_xml_frag_next(const CongLocation *loc);
 
 CongNodePtr
-cong_location_node(CongLocation *loc);
+cong_location_node(const CongLocation *loc);
 
 CongNodePtr
-cong_location_parent(CongLocation *loc);
+cong_location_parent(const CongLocation *loc);
 
 void
 cong_location_copy(CongLocation *dst, const CongLocation *src);
@@ -240,6 +240,8 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
+void cong_document_on_selection_change(CongDocument *doc);
+void cong_document_on_cursor_change(CongDocument *doc);
 
 
 void cong_document_register_view(CongDocument *doc, CongView *view);
@@ -275,6 +277,8 @@ struct CongViewClass
 	void (*on_document_node_add_before)(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 	void (*on_document_node_set_parent)(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 	void (*on_document_node_set_text)(CongView *view, CongNodePtr node, const xmlChar *new_content);
+	void (*on_selection_change)(CongView *view);
+	void (*on_cursor_change)(CongView *view);
 };
 
 
