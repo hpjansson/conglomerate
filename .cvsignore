@@ -19,8 +19,8 @@ libtool
 ltmain.sh
 stamp-h
 stamp-h.in
-##new-tarballs
-conglomerate-*.tar.gz
+##new-tarballs_and_their_create_directory
+conglomerate-?.?.*
 ## #other #files
 debian
 build-stamp
