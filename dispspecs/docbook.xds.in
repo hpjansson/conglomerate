@@ -26,13 +26,13 @@
 		<element localName="book" type="structural" color="a0b0c0" icon="cong-docbook-book">
 			<_name>Book</_name>
 			<_short-desc>A book, with a title, and perhaps with some bibliographical material, in addition to the actual content of the book.</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="bookinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<_name>Book Information</_name>
 			<_short-desc>Meta-information for a book</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -43,7 +43,7 @@
 		<element localName="articleinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<_name>Article Information</_name>
 			<_short-desc>Meta-information for an article</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -146,7 +146,7 @@
 		</element>
 		<element localName="formalpara" type = "structural" icon="cong-paragraph">
 			<_name>Paragraph (titled)</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="legalnotice" type="structural" color="a0b0c0" icon="cong-metadata">
@@ -160,13 +160,13 @@
 
 		<element localName="qandaset" type="structural" color="a0b0c0" icon="cong-faq">
 			<_name>Question-and-Answer Set</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="qandadiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<_name>Question-and-Answer Subset</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -192,7 +192,7 @@
 
 		<element localName="biblioentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<_name>Entry</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -203,6 +203,7 @@
 
 		<element localName="bridgehead" type="structural" color="a0b0c0" icon="cong-title">
 			<_name>Free-floating Heading</_name>
+			<header-info xpath="normalize-space(.)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -214,13 +215,13 @@
 		<!-- The various sections -->
 		<element localName="preface" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Preface</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="part" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Part</_name>
 			<_short-desc>A high-level division of a book.</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -231,46 +232,46 @@
 
 		<element localName="chapter" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Chapter</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="sect1" type="structural" color="a1b0c0" icon="cong-subsection">
 			<_name>Section</_name>
 			<_short-desc>A top-level section of document</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="sect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Subsection</_name>
 			<_short-desc>A subsection within a section</_short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="sect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Subsection (level 3)</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="sect4" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Subsection (level 4)</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 		<element localName="sect5" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Section (level 5)</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="section" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Section</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="reference" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Reference</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -325,25 +326,25 @@
 
 		<element localName="refsect1" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Section</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="refsect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Subsection</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="refsect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Subsubsection</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="appendix" type="structural" color="a0b0c0" icon="cong-subsection">
 			<_name>Appendix</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -354,7 +355,7 @@
 
 		<element localName="glossentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<_name>Glossary Entry</_name>
-			<header-info childElement="glossterm"></header-info>
+			<header-info xpath="normalize-space(child::glossterm)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -371,6 +372,7 @@
 
 		<element localName="example" type="structural" color="a0b0c0">
 			<_name>Example (formal)</_name>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
@@ -576,13 +578,13 @@
 
 		<element localName="procedure" type="structural" color="a0b0c0">
 			<_name>Procedure</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
 		<element localName="step" type="structural" color="a0b0c0">
 			<_name>Step</_name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 

@@ -15,7 +15,7 @@
 		<!-- The high-level divisions -->
 		<element localName="webpage" type="structural" color="a0b0c0">
 			<name xml:lang="en">Web Page</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="title" type="structural" color="a0b0c0">
@@ -87,11 +87,11 @@
 		</element>
 
 		<element localName="qandaset" type="structural" color="a0b0c0">
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="qandadiv" type="structural" color="a0b0c0">
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="qandaentry" type="structural" color="a0b0c0">
@@ -109,7 +109,7 @@
 
 		<element localName="biblioentry" type="structural" color="a0b0c0">
 			<name xml:lang="en">Entry</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="bibliodiv" type="structural" color="a0b0c0">
@@ -123,11 +123,11 @@
 		<!-- The various sections -->
 		<element localName="preface" type="structural" color="a0b0c0">
 			<name xml:lang="en">Preface</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="part" type="structural" color="a0b0c0">
 			<name xml:lang="en">Part</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="partintro" type="structural" color="a0b0c0">
@@ -136,39 +136,39 @@
 
 		<element localName="chapter" type="structural" color="a0b0c0">
 			<name xml:lang="en">Chapter</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="sect1" type="structural" color="a1b0c0">
 			<name xml:lang="en">Section</name>
 			<short-desc xml:lang="en">A top-level section of document</short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="sect2" type="structural" color="a0b0c0">
 			<name xml:lang="en">Subsection</name>
 			<short-desc xml:lang="en">A subsection within a section</short-desc>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="sect3" type="structural" color="a0b0c0">
 			<name xml:lang="en">Subsection (level 3)</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="sect4" type="structural" color="a0b0c0">
 			<name xml:lang="en">Subsection (level 4)</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="sect5" type="structural" color="a0b0c0">
 			<name xml:lang="en">Section (level 5)</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="reference" type="structural" color="a0b0c0">
 			<name xml:lang="en">Reference</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="refentry" type="structural" color="a0b0c0">
 			<name xml:lang="en">Reference Page</name>
-			<header-info childElement="refname"></header-info>
+			<header-info xpath="normalize-space(child::refname)"/>
 		</element>
 
 		<element localName="refmeta" type="structural" color="a0b0c0">
@@ -208,22 +208,22 @@
 
 		<element localName="refsect1" type="structural" color="a0b0c0">
 			<name xml:lang="en">Section</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="refsect2" type="structural" color="a0b0c0">
 			<name xml:lang="en">Subsection</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="refsect3" type="structural" color="a0b0c0">
 			<name xml:lang="en">Subsubsection</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="appendix" type="structural" color="a0b0c0">
 			<name xml:lang="en">Appendix</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="glossary" type="structural" color="a0b0c0">
@@ -232,7 +232,7 @@
 
 		<element localName="glossentry" type="structural" color="a0b0c0">
 			<name xml:lang="en">Glossary Entry</name>
-			<header-info childElement="glossterm"></header-info>
+			<header-info xpath="normalize-space(child::glossterm)"/>
 		</element>
 
 		<element localName="glossterm" type="structural" color="a0b0c0">
@@ -337,12 +337,12 @@
 
 		<element localName="procedure" type="structural" color="a0b0c0">
 			<name xml:lang="en">Procedure</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="step" type="structural" color="a0b0c0">
 			<name xml:lang="en">Step</name>
-			<header-info childElement="title"></header-info>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 
 		<element localName="substeps" type="structural" color="a0b0c0">

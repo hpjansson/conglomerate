@@ -1,3 +1,21 @@
+2004-10-13  Douglas Burke  <dburke@cfa.harvard.edu>
+
+	* docbook.xds.in, opml.xds, release.xds, website-webpage.xds:
+
+	Converted childElement attributes into xpath attributes for
+	header-info tags. Added header-info tags for the bridgehead and
+	example tags in docbook.xds.in.
+
+	* validate-all-xds.sh:
+
+	Now displays the name of each file it is processing to make it
+	easier to spot where the errors are.
+	
+	* xds.dtd:
+
+	Removed the childElement attribute from the header-info tag
+	as it is not used by Conglomerate.
+
 2004-10-08  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* docbook.xds.in: 

@@ -16,7 +16,7 @@
 		</element>
 		<element localName="head" type="structural" color="a0b0c0">
 			<name xml:lang="C">Head</name>
-			<header-info childElement="title"/>
+			<header-info xpath="normalize-space(child::title)"/>
 		</element>
 		<element localName="title" type="span" color="a0b0c0">
 			<name xml:lang="C">Title</name>

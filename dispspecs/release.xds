@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE dispspec SYSTEM "dispspec.dtd">
+<!DOCTYPE dispspec SYSTEM "xds.dtd">
 <dispspec>
   <metadata>
     <name>Conglomerate Release Notes</name>
@@ -8,7 +8,7 @@
   <element-list>
     <element type="structural" localName="release" whitespace="normalize">
       <name xml:lang="C">Release</name>
-      <header-info childElement="title"/>
+      <header-info xpath="normalize-space(child::title)"/>
     </element>
     <element type="structural" localName="title" whitespace="normalize">
       <name xml:lang="C">Title</name>

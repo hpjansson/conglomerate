@@ -109,7 +109,6 @@
 
 <!ELEMENT header-info EMPTY >
 <!ATTLIST header-info 
-   childElement IDREF  #IMPLIED
    xpath  CDATA  #IMPLIED
 >
 
