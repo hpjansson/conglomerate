@@ -1,3 +1,6 @@
+
+NULL =
+
 bin_PROGRAMS = conglomerate
 
 if ENABLE_PRINTING
