@@ -46,7 +46,7 @@ cong_document_handle_cursor_change(CongDocument *doc);
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
-#define DEBUG_MVC 1
+#define DEBUG_MVC 0
 
 #define PRIVATE(x) ((x)->private)
 
@@ -189,7 +189,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	signals[NODE_SET_ATTRIBUTE] = g_signal_new ("node_set_attribute",
 						    CONG_DOCUMENT_TYPE,
 						    G_SIGNAL_RUN_FIRST,
-						    G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
+						    G_STRUCT_OFFSET(CongDocumentClass, node_set_attribute),
 						    NULL, NULL,
 						    cong_cclosure_marshal_VOID__CONGNODEPTR_STRING_STRING,
 						    G_TYPE_NONE, 
@@ -198,7 +198,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	signals[NODE_REMOVE_ATTRIBUTE] = g_signal_new ("node_remove_attribute",
 						       CONG_DOCUMENT_TYPE,
 						       G_SIGNAL_RUN_FIRST,
-						       G_STRUCT_OFFSET(CongDocumentClass, node_set_text),
+						       G_STRUCT_OFFSET(CongDocumentClass, node_remove_attribute),
 						       NULL, NULL,
 						       cong_cclosure_marshal_VOID__CONGNODEPTR_STRING,
 						       G_TYPE_NONE, 
