@@ -1,3 +1,9 @@
+2004-08-19  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-preferences.glade: 
+
+	Removed reference to bugzilla 125455; added Plugins tab
+
 2004-08-19  Geert Stappers  <stappers@stappers.nl>
 
 	* cong-preferences.glade:
