@@ -1,6 +1,42 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+Conglomerate 0.7.4, announced september 24th 2003
+
+Conglomerate is currently UNSTABLE, and not suitable for production use.
+Having said that, I used it to write these release notes: the dog-food
+is getting tastier!
+
+Enhancements
+      * Source View now has syntax highlighting, provided you have
+        GtkSourceView installed. It is optional. (Geert-Jan Van den
+        Bogaerde)
+      * Keyboard shortcut for "View Source" - Ctrl-U, the same as
+        Mozilla (Geert-Jan Van den Bogaerde)
+      * Entity declarations and entity references now appear in the
+        document with black borders, similar to structural tags (me)
+      * Cursor is now much more visible - we made it black! (Raphael
+        Jacquot)
+      * Cursor->left can now go through structural tags (Raphael Jacquot
+        and me - stay tuned for the wonderful world of cursor->right)
+      * Portugese translation (Duarte Loreto)
+      * README is now generated from DocBook README.xml (Geert Stappers)
+
+Fixes
+      * Fix for bug 122967 and its many dups (assertion failure loading
+        examples/file-roller.xml) (me)
+
+Thanks to
+      * Duarte Loreto
+      * Geert-Jan Van den Bogaerde
+      * Raphael Jacquot
+      * Alan Horkan
+      * Geert Stappers
+..and anyone else I missed (sorry!)
+
+Dave Malcolm
+                                                                                
+
 Conglomerate 0.7.3, announced september 23th 2003
   
  - Optimisations:  cursor movement and mouse dragging are now
