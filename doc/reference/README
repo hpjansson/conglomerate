@@ -8,7 +8,7 @@ ChangeLog:
 
 Makefile.am
  Source file for Makefile.in, this the one we keep in CVS.
- Consider this file a source file of the complete directory
+ Consider this file a master file of the complete directory
 
 Makefile.in
  Generated from Makefile.am and source for Makefile
@@ -21,5 +21,12 @@ conglomerate-docs.sgml
  so when you add/remove a *.h file from the source, please add/remove
  the reference to the corresponding xml file to/from conglomerate-docs.sgml.
 
+conglomerate-overrides.txt
+ function unknown, FIXME when time permits.
+ the file is updated by uss/mkgtkdocoverrides
+
 other files:
  please help
+
+Documentation to gtkdoc usage
+ URL: FIXME
