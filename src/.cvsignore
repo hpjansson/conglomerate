@@ -3,5 +3,6 @@
 ## #files #generated #by #./autogen.sh
 Makefile
 Makefile.in
+.libs #a #directory
 ## #other #files
 ##
