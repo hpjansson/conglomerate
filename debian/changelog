@@ -1,3 +1,9 @@
+conglomerate (0.7.7next1-1) UNRELEASED; urgency=low
+
+  * preparing for New upstream release.
+
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 15 Dec 2003 13:15:22 +0000
+
 conglomerate (0.7.7-1) unstable; urgency=low
 
   * New upstream release.
