@@ -199,6 +199,7 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	CongEditorAreaFlowHolder *child_flow_holder = NULL;
 	CongNodePtr doc_node;
 	CongEditorNode *iter;
+	GList *list_of_removed_nodes = NULL;
 
 	enum CongFlowType flow_type;
 
@@ -212,7 +213,6 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 	case CONG_FLOW_TYPE_BLOCK:
 		{
 			CongEditorNode *editor_node_prev, *editor_node_next;
-			GList *list_of_removed_nodes = NULL;
 
 			/* FIXME: what about the case where a new block node is inserted between existing inline nodes; we need to split the existing inline flow into two separate ones... */
 
@@ -250,29 +250,6 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 			insert_child_flow_holder_into_composer (area_flow_holder_blocks,
 								child_flow_holder, 
 								editor_node);
-
-			/* Add back any inlines you may have removed: */
-			{
-				GList *iter;
-				
-				for (iter = list_of_removed_nodes; iter; iter=iter->next) {
-
-					CongEditorNode *removed_node = CONG_EDITOR_NODE (iter->data);
-					CongEditorChildPolicy* child_policy_for_removed_node;
-					
-					g_assert (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(removed_node));
-
-					child_policy_for_removed_node = insert_areas_for_node (area_flow_holder,
-											       removed_node);
-
-					g_object_unref (G_OBJECT (removed_node));
-
-					cong_editor_node_set_child_policy (removed_node,
-									   child_policy_for_removed_node);					
-				}
-
-				g_list_free (list_of_removed_nodes);
-			}
 		}
 		break;
 
@@ -325,6 +302,29 @@ insert_areas_for_node (CongEditorAreaFlowHolder *area_flow_holder,
 		g_hash_table_insert (PRIVATE(area_flow_holder_blocks)->hash_of_doc_node_to_child_flow_holder,
 				     doc_node,
 				     child_flow_holder);
+	}
+
+	/* Add back any inlines you may have removed: */
+	{
+		GList *iter;
+		
+		for (iter = list_of_removed_nodes; iter; iter=iter->next) {
+			
+			CongEditorNode *removed_node = CONG_EDITOR_NODE (iter->data);
+			CongEditorChildPolicy* child_policy_for_removed_node;
+			
+			g_assert (CONG_FLOW_TYPE_INLINE==cong_editor_node_get_flow_type(removed_node));
+			
+			child_policy_for_removed_node = insert_areas_for_node (area_flow_holder,
+									       removed_node);
+			
+			g_object_unref (G_OBJECT (removed_node));
+			
+			cong_editor_node_set_child_policy (removed_node,
+							   child_policy_for_removed_node);					
+		}
+		
+		g_list_free (list_of_removed_nodes);
 	}
 	
 	/* Delegate: Add to the child flow-holder: */
