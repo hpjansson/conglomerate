@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-09 10:39+0100\n"
-"PO-Revision-Date: 2004-11-09 14:23+0100\n"
+"POT-Creation-Date: 2004-11-17 10:40+0100\n"
+"PO-Revision-Date: 2004-11-17 11:10+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -734,7 +734,7 @@ msgstr "Tělo tabulky"
 msgid "Table Column Specification"
 msgstr "Specifikace sloupce tabulky"
 
-#: dispspecs/docbook.xds.in.h:153
+#: dispspecs/docbook.xds.in.h:153 src/plugin-table.c:199
 msgid "Table Entry"
 msgstr "Položka tabulky"
 
@@ -746,7 +746,7 @@ msgstr "Položka tabulky (podtabulka)"
 msgid "Table Footer"
 msgstr "Patička tabulky"
 
-#: dispspecs/docbook.xds.in.h:156
+#: dispspecs/docbook.xds.in.h:156 src/plugin-table.c:187
 msgid "Table Group"
 msgstr "Skupina tabulek"
 
@@ -755,6 +755,7 @@ msgid "Table Header"
 msgstr "Hlavička tabulky"
 
 #: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
+#: src/plugin-table.c:193
 msgid "Table Row"
 msgstr "Řádek tabulky"
 
@@ -3394,6 +3395,15 @@ msgstr "Uzel editoru pro zobrazení položky seznamu"
 #: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "Uzel editoru pro zobrazení odstavce"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Vytisknout zdroj XML"
 
 #: src/plugin-random.c:148
 msgid "What kind of random XML document would you like to create?"
