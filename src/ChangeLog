@@ -13,7 +13,8 @@
 	* Makefile.am
 
 	CFLAG -Werror is now optional
-
+	Had to disable it, due breakage on automake1.6
+	
 2004-02-19  Geert Stappers <stappers@stappers.nl>
 
 	* ilogo.c

@@ -2,10 +2,10 @@
 NULL =
 
 ## for bugzilla 134747 and 123003
-CFLAGS += -Wall
-if ENABLE_WERROR
-  CFLAGS += -Werror
-endif
+##CFLAGS += -Wall
+##if ENABLE_WERROR
+##  CFLAGS += -Werror
+##endif
 
 bin_PROGRAMS = conglomerate
 
