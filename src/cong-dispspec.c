@@ -1648,10 +1648,13 @@ calc_coverage_recursive (const CongDispspec *ds,
 	g_assert (node);
 
 	if (node->type == XML_ELEMENT_NODE) {
-		coverage_data->total_elements++;
-
-		if (NULL!=cong_dispspec_lookup_node (ds, node)) {
-			coverage_data->covered_elements++;
+		/* Only deal with elements outside a namespace: */
+		if (NULL==node->ns) {
+			coverage_data->total_elements++;
+			
+			if (NULL!=cong_dispspec_lookup_node (ds, node)) {
+				coverage_data->covered_elements++;
+			}
 		}
 	}
 
@@ -1665,11 +1668,12 @@ calc_coverage_recursive (const CongDispspec *ds,
 
 /**
  * cong_dispspec_calculate_coverage:
- * @ds:
- * @xml_doc:
+ * @ds: a dispspec
+ * @xml_doc: a document
  *
- * TODO: Write me
- * Returns:
+ * Calculate the proportion of elements without namespaces in the document that
+ * are covered by this dispspec.
+ * Returns: a fraction between 0.0 and 1.0.  If all elements have namespaces, 0.0 is returned
  */
 gdouble
 cong_dispspec_calculate_coverage (const CongDispspec *ds,

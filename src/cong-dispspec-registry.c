@@ -376,7 +376,7 @@ run_coverage_selector_dialog (struct CongDispspecCoverage *coverage_array,
  * @doc:
  * @filename_extension:
  * 
- * Routine to figure out an appropriate dispspec for use with this file.
+ * Routine to figure out an appropriate default dispspec for use with this file.
  * Looks for a DTD; if found, it looks up the DTD in a mapping.
  * If this fails, it looks at the top-level tag and makes a guess, but asks the user for confirmation.
  * If this fails, it asks the user.
@@ -447,6 +447,7 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 
 #if 1
 	/* Scan the entire document and figure out what tags are present and how well they match those in the various dispspecs, and then produce a sorted list of dispspecs to choose from: */
+	/* We only look at elements without namespaces for this calculation */
 	{
 		int i;
 		struct CongDispspecCoverage *coverage_array;
@@ -523,5 +524,79 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 #endif
 
 
+	return NULL;
+}
+
+CongDispspecElement*
+cong_dispspec_registry_get_dispspec_element_for_node (CongDispspecRegistry *registry, 
+						      CongDispspec *default_ds, 
+						      CongNodePtr node)
+{
+	CongDispspecElement *result;
+	int i;
+
+	g_return_val_if_fail (registry, NULL);
+	g_return_val_if_fail (node, NULL);
+
+	/* Search for noe in default ds, if any: */
+	if (default_ds) {
+		result = cong_dispspec_lookup_node (default_ds, 
+						    node);
+
+		if (result) {
+			return result;
+		}
+	}
+
+	/* If the node is in a namespace, look in the various other dispspecs: */
+	if (node->ns) {
+		for (i=0;i<registry->num;i++) {
+			result = cong_dispspec_lookup_node (registry->array[i], 
+							    node);
+			
+			if (result) {
+				return result;
+			}
+		}	
+	}
+	
+	return NULL;
+}
+
+CongDispspecElement*
+cong_dispspec_registry_get_dispspec_element_for_description (CongDispspecRegistry *registry, 
+							     const CongElementDescription *desc,
+							     const CongDispspec *default_ds)
+{
+	CongDispspecElement *result;
+	int i;
+
+	g_return_val_if_fail (registry, NULL);
+	g_return_val_if_fail (desc, NULL);
+
+	/* Search in default ds, if any: */
+	if (default_ds) {
+		result = cong_dispspec_lookup_element (default_ds, 
+						       desc->ns_uri,
+						       desc->local_name);
+
+		if (result) {
+			return result;
+		}
+	}
+
+	/* If the node is in a namespace, look in the various other dispspecs: */
+	if (desc->ns_uri) {
+		for (i=0;i<registry->num;i++) {
+			result = cong_dispspec_lookup_element (registry->array[i], 
+							       desc->ns_uri,
+							       desc->local_name);
+			
+			if (result) {
+				return result;
+			}
+		}	
+	}
+	
 	return NULL;
 }

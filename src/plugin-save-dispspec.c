@@ -35,7 +35,7 @@
 static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
 {
 	/* Only appropriate if the doc has a dispspec: */
-	return NULL!=cong_document_get_dispspec (doc);
+	return NULL!=cong_document_get_default_dispspec (doc);
 }
 
 /**
@@ -88,7 +88,7 @@ static void save_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 		return;
 	}
 
-	xml = cong_dispspec_make_xml(cong_document_get_dispspec(doc));
+	xml = cong_dispspec_make_xml(cong_document_get_default_dispspec(doc));
 	xmlCreateIntSubset(xml, "dispspec", NULL, "dispspec.dtd");
 	xmlSaveFormatFile(new_doc_name, xml, TRUE);
 
@@ -110,7 +110,7 @@ static void edit_dispspec(CongServiceDocTool *tool, CongPrimaryWindow *primary_w
 
 	doc = cong_primary_window_get_document(primary_window);
 
-	xml = cong_dispspec_make_xml(cong_document_get_dispspec(doc));
+	xml = cong_dispspec_make_xml(cong_document_get_default_dispspec(doc));
 	xmlCreateIntSubset(xml, "dispspec", NULL, "dispspec.dtd");
 #if 1
 	cong_ui_new_document_from_imported_xml(xml,

@@ -1,3 +1,8 @@
+2004-07-15  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec-registry.c, cong-dispspec-registry.h, cong-dispspec.c, cong-document.c, cong-document.h, cong-editor-widget.h, cong-editor-widget3.c, cong-file-properties.c, cong-overview-view.c, cong-primary-window.c, cong-tree-view.c, cong-util.c, cong-view.c, cong-view.h, cursor.c, plugin-save-dispspec.c, popup.c, tree.c, xmldata.c:
+
+	Attempt to handle hybrid documents better: the dispspec for a CongDocument is now just a default, for searching for elements lacking a namespace; search all dispspecs for elements, rather than just the default one. 
 2004-07-14  Jeff Martin  <jeff@custommonkey.org>
 
 	* popup.c

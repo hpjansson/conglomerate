@@ -84,7 +84,7 @@ cong_ui_hook_tree_new_sibling (CongDocument *doc,
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (node);
 
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
@@ -165,7 +165,7 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (node);
 
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	/* GREP FOR MVC */
 	cong_document_begin_edit(doc);
@@ -364,7 +364,7 @@ cong_ui_hook_tree_paste_under (CongDocument *doc,
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (node);
 
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
 							      GDK_SELECTION_CLIPBOARD,
@@ -395,7 +395,7 @@ cong_ui_hook_tree_paste_before (CongDocument *doc,
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (node);
 
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
 							      GDK_SELECTION_CLIPBOARD,
@@ -426,7 +426,7 @@ cong_ui_hook_tree_paste_after (CongDocument *doc,
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
 	g_return_if_fail (node);
 
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	clipboard_source = cong_app_get_clipboard_xml_source (cong_app_singleton(),
 							      GDK_SELECTION_CLIPBOARD,

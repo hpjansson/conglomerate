@@ -144,7 +144,10 @@ CongFindDialogData *
 cong_document_get_find_dialog_data  (CongDocument *doc);
 
 CongDispspec*
-cong_document_get_dispspec(CongDocument *doc);
+cong_document_get_default_dispspec(CongDocument *doc);
+
+CongDispspec*
+cong_document_get_root_dispspec(CongDocument *doc);
 
 CongDispspecElement*
 cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node);

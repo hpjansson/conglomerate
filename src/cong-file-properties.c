@@ -150,7 +150,7 @@ refresh_dtd_stuff (CongFilePropertiesDialogDetails *dialog_details,
 	g_assert (IS_CONG_DOCUMENT (doc));
 
 	xml_doc = cong_document_get_xml (doc);
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	g_message ("refresh_dtd_stuff, extSubset=%p", xml_doc->extSubset);
 
@@ -238,7 +238,7 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	dialog_details = g_new0 (CongFilePropertiesDialogDetails,1);
 
 	xml_doc = cong_document_get_xml(doc);
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	dialog_details->doc = doc; 
 	g_object_ref (G_OBJECT (doc));
@@ -353,7 +353,7 @@ on_dtd_button_clicked (GtkButton *button,
 	g_assert (IS_CONG_DOCUMENT (doc));
 
 	xml_doc = cong_document_get_xml (doc);
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	if (xml_doc->extSubset) {
 		/* Then button is "Remove this DTD": */

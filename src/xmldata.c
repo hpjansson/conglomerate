@@ -695,7 +695,7 @@ cong_document_get_valid_new_child_elements (CongDocument *doc,
 {
 	const xmlChar *elements[MAX_ELEMENTS];
 	gint result;
-	CongDispspec *ds = cong_document_get_dispspec(doc);
+	CongDispspec *ds = cong_document_get_default_dispspec(doc);
 
 	if (node->parent==NULL) {
 		return NULL;
@@ -743,7 +743,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 {
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
-	CongDispspec *ds = cong_document_get_dispspec(doc); 
+	CongDispspec *ds = cong_document_get_default_dispspec(doc); 
 
 	if (node->parent==NULL) {
 		return NULL;
@@ -755,6 +755,7 @@ cong_document_get_valid_new_previous_sibling_elements (CongDocument *doc,
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
+
 		if (ds) {
 			return xml_get_elements_from_dispspec(ds, tag_type);
 		} else {
@@ -785,7 +786,7 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 {
 	const xmlChar  *elements[MAX_ELEMENTS];
 	gint result;
-	CongDispspec *ds = cong_document_get_dispspec(doc); 
+	CongDispspec *ds = cong_document_get_default_dispspec(doc); 
 
 	if (node->parent==NULL) {
 		return NULL;
@@ -798,6 +799,7 @@ cong_document_get_valid_new_next_sibling_elements (CongDocument* doc,
 		return xml_filter_valid_children_with_dispspec(ds, elements, result, tag_type);
 	}
 	else {
+
 		if (ds) {
 			return xml_get_elements_from_dispspec(ds, tag_type);
 		} else {

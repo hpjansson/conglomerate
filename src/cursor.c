@@ -189,7 +189,7 @@ cong_cursor_del_prev_char(CongCursor *curs, CongDocument *doc)
 		return;
 	}
 	
- 	if (cong_location_calc_prev_char(&curs->location, cong_document_get_dispspec(doc), &prev_char)) {
+ 	if (cong_location_calc_prev_char(&curs->location, cong_document_get_default_dispspec(doc), &prev_char)) {
 		cong_location_copy(&curs->location, &prev_char);
 		
 		cong_location_del_next_char(doc, &curs->location);

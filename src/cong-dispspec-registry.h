@@ -54,6 +54,16 @@ cong_dispspec_registry_get_appropriate_dispspec (CongDispspecRegistry* registry,
 						 xmlDocPtr doc,
 						 const gchar *filename_extension);
 
+CongDispspecElement*
+cong_dispspec_registry_get_dispspec_element_for_node (CongDispspecRegistry *registry, 
+						      CongDispspec *default_ds, 
+						      CongNodePtr node);
+
+
+CongDispspecElement*
+cong_dispspec_registry_get_dispspec_element_for_description (CongDispspecRegistry *registry, 
+							     const CongElementDescription *desc,
+							     const CongDispspec *default_ds);
 G_END_DECLS
 
 #endif

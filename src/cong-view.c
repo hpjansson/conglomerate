@@ -42,16 +42,16 @@ cong_view_get_document(CongView *view)
 }
 
 /**
- * cong_view_get_dispspec
+ * cong_view_get_default_dispspec
  * @view:
  *
  * TODO: Write me
  * Returns:
  */
 CongDispspec*
-cong_view_get_dispspec(CongView *view)
+cong_view_get_default_dispspec(CongView *view)
 {
 	g_return_val_if_fail(view, NULL);
 
-	return cong_document_get_dispspec(view->doc);
+	return cong_document_get_default_dispspec (view->doc);
 }

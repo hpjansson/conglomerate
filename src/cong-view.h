@@ -132,6 +132,6 @@ CongDocument*
 cong_view_get_document(CongView *view);
 
 CongDispspec*
-cong_view_get_dispspec(CongView *view);
+cong_view_get_default_dispspec(CongView *view);
 
 #endif

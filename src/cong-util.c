@@ -40,6 +40,7 @@
 #include "cong-file-selection.h"
 
 #include "cong-command.h"
+#include "cong-dispspec-registry.h"
 
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
@@ -888,18 +889,14 @@ CongDispspecElement*
 cong_element_description_get_dispspec_element_for_doc (const CongElementDescription *element_desc,
 						       CongDocument *doc)
 {
-	CongDispspec *ds;
+	/* CongDispspec *ds; */
 
 	g_return_val_if_fail (element_desc, NULL);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	
-	ds = cong_document_get_dispspec (doc);
-	if (ds) {
-		return cong_element_description_get_dispspec_element_for_dispspec (element_desc,
-										   ds);
-	} else {
-		return NULL;
-	}
+
+	return cong_dispspec_registry_get_dispspec_element_for_description (cong_app_get_dispspec_registry (cong_app_singleton ()),
+									    element_desc,
+									    cong_document_get_default_dispspec (doc));
 }
 
 /**

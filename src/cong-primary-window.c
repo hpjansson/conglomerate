@@ -733,7 +733,7 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 		primary_window->doc = doc;
 		g_object_ref(G_OBJECT(doc));
 
-		if (cong_document_get_dispspec (doc)) {
+		if (1 /* cong_document_get_default_dispspec (doc) */) {
 			add_standard_layout_for_doc (primary_window, 
 						     doc);
 		} else {
@@ -758,7 +758,7 @@ cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *do
 		
 		/* update the statusbar */
 		
-		status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
+		status_text = g_strdup(cong_dispspec_get_name( cong_document_get_default_dispspec(primary_window->doc) ));
 #if 1
 		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
 			 status_text);

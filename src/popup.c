@@ -506,7 +506,7 @@ static gint editor_popup_callback_item_selected (GtkWidget *widget,
 				"doc");
 	g_assert(doc);
 
-	ds = cong_document_get_dispspec (doc);
+	ds = cong_document_get_default_dispspec (doc);
 
 	selection = cong_document_get_selection(doc);
 	cursor = cong_document_get_cursor(doc);
@@ -719,7 +719,7 @@ editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_window)
 	g_return_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget));
 
 	doc = cong_editor_widget3_get_document (editor_widget);
-	dispspec = cong_document_get_dispspec(doc);
+	dispspec = cong_document_get_default_dispspec(doc);
 	cursor = cong_document_get_cursor(doc);
 	selection = cong_document_get_selection(doc);
 	range = cong_selection_get_ordered_range(selection);
@@ -1001,7 +1001,7 @@ structural_tag_popup_init (CongUICallback_Document_ElementDescription_Node callb
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (node, NULL);
 
-	ds = cong_document_get_dispspec (doc);
+	ds = cong_document_get_default_dispspec (doc);
 
 	popup = gtk_menu_new();
 	gtk_menu_set_title(GTK_MENU(popup), "Sub menu");
@@ -1226,7 +1226,7 @@ cong_ui_popup_init(CongDocument *doc,
 	CongDispspec *ds;
 
 	g_assert(doc);				
-	ds = cong_document_get_dispspec(doc);
+	ds = cong_document_get_default_dispspec(doc);
 
 	tpopup = GTK_MENU(gtk_menu_new());
 	gtk_menu_set_title(GTK_MENU(tpopup), "Structure menu");

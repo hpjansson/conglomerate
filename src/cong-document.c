@@ -17,6 +17,7 @@
 #include "cong-app.h"
 #include "cong-document-traversal.h"
 #include "cong-edit-find-and-replace.h"
+#include "cong-dispspec-registry.h"
 
 #if ENABLE_PRINTING
 #include "cong-service-print-method.h"
@@ -112,7 +113,7 @@ struct CongDocumentDetails
 {
 	xmlDocPtr xml_doc;
 
-	CongDispspec *ds;
+	CongDispspec *default_ds;
 
 	CongDocumentTraversal *traversal;
 
@@ -369,7 +370,7 @@ cong_document_construct (CongDocument *doc,
 	g_return_val_if_fail (xml_doc, NULL);
 
 	PRIVATE(doc)->xml_doc = xml_doc;
-	PRIVATE(doc)->ds = ds;
+	PRIVATE(doc)->default_ds = ds;
 	PRIVATE(doc)->url = g_strdup(url);
 
 	g_get_current_time(&PRIVATE(doc)->time_of_last_save);
@@ -523,18 +524,18 @@ cong_document_get_root_traversal_node (CongDocument *doc)
 }
 
 /**
- * cong_document_get_dispspec:
+ * cong_document_get_default_dispspec:
  * @doc:
  *
  * TODO: Write me
  * Returns:
  */
 CongDispspec*
-cong_document_get_dispspec(CongDocument *doc)
+cong_document_get_default_dispspec(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-	return PRIVATE(doc)->ds;
+	return PRIVATE(doc)->default_ds;
 }
 
 /**
@@ -551,11 +552,9 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	if (PRIVATE(doc)->ds) {
-		return cong_dispspec_lookup_node (PRIVATE(doc)->ds, node);
-	} else {
-		return NULL;
-	}
+	return cong_dispspec_registry_get_dispspec_element_for_node (cong_app_get_dispspec_registry (cong_app_singleton ()),
+								     PRIVATE(doc)->default_ds,
+								     node);
 }
 
 /**
@@ -2202,12 +2201,12 @@ cong_document_dispose (GObject *object)
 	}
 
 #if 1
-	if (PRIVATE(doc)->ds) {
+	if (PRIVATE(doc)->default_ds) {
 		/* FIXME: need to make CongDispsec into a GObject */
 #if 0
-		g_object_unref (G_OBJECT (doc->ds));
+		g_object_unref (G_OBJECT (doc->default_ds));
 #endif
-		PRIVATE(doc)->ds = NULL;
+		PRIVATE(doc)->default_ds = NULL;
 	}
 #endif
 	

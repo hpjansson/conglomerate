@@ -461,18 +461,18 @@ cong_editor_widget3_get_document(CongEditorWidget3 *editor_widget)
 }
 
 /**
- * cong_editor_widget_get_dispspec:
+ * cong_editor_widget_get_default_dispspec:
  * @editor_widget:
  *
  * TODO: Write me
  * Returns:
  */
 CongDispspec *
-cong_editor_widget_get_dispspec(CongEditorWidget3 *editor_widget)
+cong_editor_widget_get_default_dispspec(CongEditorWidget3 *editor_widget)
 {
 	g_return_val_if_fail(editor_widget, NULL);
 
-	return cong_document_get_dispspec(PRIVATE(editor_widget)->doc);
+	return cong_document_get_default_dispspec (PRIVATE(editor_widget)->doc);
 }
 
 #if 0
@@ -1182,7 +1182,7 @@ cong_editor_widget3_get_destination_location_for_keypress (CongEditorWidget3 *ed
 
 	doc = cong_editor_widget3_get_document (editor_widget);
 	cursor = cong_document_get_cursor (doc);
-	dispspec = cong_document_get_dispspec (doc);
+	dispspec = cong_document_get_default_dispspec (doc);
 
 	switch (keyval) {
 	default: 

@@ -122,7 +122,7 @@ node_filter (CongTreeView *cong_tree_view,
 
 	case CONG_NODE_TYPE_ELEMENT:
 		{
-			CongDispspecElement* element = cong_dispspec_lookup_node(cong_view_get_dispspec(CONG_VIEW(cong_tree_view)), node);
+			CongDispspecElement* element = cong_document_get_dispspec_element_for_node (cong_view_get_document (CONG_VIEW(cong_tree_view)), node);
 			
 			if (element) {
 				switch (cong_dispspec_element_type(element)) {
@@ -183,7 +183,6 @@ node_creation_callback (CongTreeView *cong_tree_view,
 	GtkTreeStore *gtk_tree_store;
 	CongNodeType node_type;
 	CongDocument *doc;
-	CongDispspec *ds;
 
 	g_return_if_fail (cong_tree_view);
 	g_return_if_fail (tree_iter);
@@ -194,7 +193,6 @@ node_creation_callback (CongTreeView *cong_tree_view,
 	node_type = cong_node_type(node);
 
 	doc = cong_view_get_document (CONG_VIEW(cong_tree_view));
-	ds = cong_view_get_dispspec (CONG_VIEW(cong_tree_view));
 
 	switch (node_type) {
 	default: g_assert_not_reached();
@@ -212,7 +210,7 @@ node_creation_callback (CongTreeView *cong_tree_view,
 			CongDispspecElement *element;
 			gchar *text;
 
-			element = cong_dispspec_lookup_node(ds, node);
+			element = cong_document_get_dispspec_element_for_node (cong_view_get_document (CONG_VIEW(cong_tree_view)), node);
 
 			if (element) {
 				const GdkColor *col;

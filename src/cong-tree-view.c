@@ -922,7 +922,6 @@ static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
 					  GtkTreeIter* tree_iter)
 {
 	CongDocument *doc;
-	CongDispspec *ds;
 	CongNodePtr child_node;
 
 	g_return_if_fail(cong_tree_view);
@@ -932,7 +931,6 @@ static void recursive_add_to_tree_store(CongTreeView *cong_tree_view,
 	g_assert(cong_tree_view_should_show_node(cong_tree_view,node));
 
 	doc = cong_view_get_document(CONG_VIEW(cong_tree_view));
-	ds = cong_view_get_dispspec(CONG_VIEW(cong_tree_view));
 
 	gtk_tree_store_set (PRIVATE(cong_tree_view)->gtk_tree_store, 
 			    tree_iter,
