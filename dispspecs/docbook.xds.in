@@ -540,7 +540,7 @@
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element localName="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment" whitespace="preserve">
+		<element localName="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment" whitespace="preserve" spellcheck="no">
 			<!-- 
 				perhaps this should use a fixed-space font
 				Perhaps we need a boolean to determine whether something
@@ -589,11 +589,11 @@
 
 		<!-- Various inline elements, done as spans follow: -->
 
-		<element localName="acronym" type="span" color="a0b0c0">
+		<element localName="acronym" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Acronym</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
- 		<element localName="application" type="span" color="a0b0c0">
+ 		<element localName="application" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Application</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
@@ -617,7 +617,7 @@
 			<_name>Edition</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element type="span" localName="envar" color="a0b0c0">
+		<element type="span" localName="envar" color="a0b0c0" spellcheck="no">
 			<_name>Environment Variable</_name>
 			<property-dialog service-id="docbook-generic-node-properties" />
 		</element>
@@ -625,7 +625,7 @@
 			<_name>Date</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element localName="email" type="span" color="a0b0c0">
+		<element localName="email" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Email Address</_name>
 			<_short-desc>An email address</_short-desc>
 			<property-dialog service-id="docbook-generic-node-properties"/>
@@ -634,7 +634,7 @@
 			<_name>Emphasis</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element localName="filename" type="span" color="a0b0c0">
+		<element localName="filename" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Filename</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
@@ -652,7 +652,7 @@
 			<_short-desc>The name of a function, subroutine or procedure</_short-desc>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element localName="literal" type="span" color="a0b0c0">
+		<element localName="literal" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Literal</_name>
 			<_short-desc>A specific piece of data from a computer system, to be taken literally.</_short-desc>
 			<property-dialog service-id="docbook-generic-node-properties"/>
@@ -690,7 +690,7 @@
 		<element localName="secondary" type="span" color="a0b0c0">
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element localName="sgmltag" type="span" color="a0b0c0">
+		<element localName="sgmltag" type="span" color="a0b0c0" spellcheck="no">
 			<_name>SGML Tag</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
@@ -755,7 +755,7 @@
 			<_name>User Input</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>
-		<element localName="command" type="span" color="a0b0c0">
+		<element localName="command" type="span" color="a0b0c0" spellcheck="no">
 			<_name>Command</_name>
 			<property-dialog service-id="docbook-generic-node-properties"/>
 		</element>

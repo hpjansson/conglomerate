@@ -1,3 +1,7 @@
+2004-07-06  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* docbook.xds.in: Added spellcheck attributes
+
 2004-06-22  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* docbook.xds.in: Added envar, based on bug 144739, thanks to Lars Trieloff
