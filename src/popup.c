@@ -44,13 +44,12 @@ action_marshaller_Document (GtkAction *action,
 }
 
 static void
-action_marshaller_Document_Node_ParentWindow (GtkAction *action, 
-					      gpointer user_data)
+action_marshaller_Document_SelectedNode_ParentWindow (GtkAction *action, 
+						      gpointer user_data)
 {
 	CongDocument *doc;
-	CongNodePtr node = (CongNodePtr)user_data;
 	GtkWindow *parent_window;
-	CongUICallback_Document_Node_ParentWindow wrapped_callback;
+	CongUICallback_Document_SelectedNode_ParentWindow wrapped_callback;
 
 	doc = g_object_get_data (G_OBJECT (action),
 				 "document");
@@ -64,7 +63,6 @@ action_marshaller_Document_Node_ParentWindow (GtkAction *action,
 	g_assert (wrapped_callback);
 
 	wrapped_callback (doc, 
-			  node,
 			  parent_window);
 }
 
@@ -122,27 +120,24 @@ cong_action_attach_callback_Document (GtkAction *action,
 }
 
 /**
- * cong_action_attach_callback_Document_Node_ParentWindow:
+ * cong_action_attach_callback_Document_SelectedNode_ParentWindow:
  * @action:
  * @callback:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  * Returns:
  */
 GtkAction*
-cong_action_attach_callback_Document_Node_ParentWindow (GtkAction *action,
-							CongUICallback_Document_Node_ParentWindow callback,
+cong_action_attach_callback_Document_SelectedNode_ParentWindow (GtkAction *action,
+							CongUICallback_Document_SelectedNode_ParentWindow callback,
 							CongDocument *doc,
-							CongNodePtr node,
 							GtkWindow *parent_window)
 {
 	g_return_val_if_fail (action, NULL);
 	g_return_val_if_fail (callback, NULL);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
-	g_return_val_if_fail (node, NULL);
 
 	g_object_set_data (G_OBJECT (action),
 			   "wrapped_callback",
@@ -150,8 +145,8 @@ cong_action_attach_callback_Document_Node_ParentWindow (GtkAction *action,
 
 	g_signal_connect (G_OBJECT (action), 
 			  "activate",
-			  G_CALLBACK (action_marshaller_Document_Node_ParentWindow), 
-			  node);
+			  G_CALLBACK (action_marshaller_Document_SelectedNode_ParentWindow), 
+			  NULL);
 
 	g_object_set_data (G_OBJECT (action),
 			   "document",
@@ -305,14 +300,13 @@ cong_menu_add_action (CongPrimaryWindow *primary_window,
 }
 
 static GtkAction*
-add_action_to_popup_with_callback_Document_Node_ParentWindow (const gchar *parent_ui_path,
-							      GtkAction *action, 
-							      CongUICallback_Document_Node_ParentWindow tree_callback,
-							      CongDocument *doc,
-							      CongNodePtr node,
-							      GtkWindow *parent_window,
-							      gboolean is_sensitive,
-							      CongPrimaryWindow *primary_window);
+add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (const gchar *parent_ui_path,
+								      GtkAction *action, 
+								      CongUICallback_Document_SelectedNode_ParentWindow tree_callback,
+								      CongDocument *doc,
+								      GtkWindow *parent_window,
+								      gboolean is_sensitive,
+								      CongPrimaryWindow *primary_window);
 
 static void
 callback_invoke_node_tool (GtkAction *action, 
@@ -629,11 +623,10 @@ add_comment_menu_actions (CongDocument *doc,
 					      UI_PATH_CONTEXT_MENU,
 					      action,
 					      GTK_UI_MANAGER_MENUITEM);
-			cong_action_attach_callback_Document_Node_ParentWindow (action, 
-										cong_ui_hook_tree_convert_to_comment,
-										doc,
-										node,
-										parent_window);
+			cong_action_attach_callback_Document_SelectedNode_ParentWindow (action, 
+											cong_ui_hook_tree_convert_to_comment,
+											doc,
+											parent_window);
 		}
 		break;
 
@@ -649,11 +642,10 @@ add_comment_menu_actions (CongDocument *doc,
 					      UI_PATH_CONTEXT_MENU, 
 					      action,
 					      GTK_UI_MANAGER_MENUITEM);
-			cong_action_attach_callback_Document_Node_ParentWindow (action, 
-										cong_ui_hook_tree_convert_from_comment,
-										doc,
-										node,
-										parent_window);
+			cong_action_attach_callback_Document_SelectedNode_ParentWindow (action, 
+											cong_ui_hook_tree_convert_from_comment,
+											doc,
+											parent_window);
 			/* FIXME: set sensitivity */
 		}
 		break;
@@ -726,11 +718,10 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 		action = cong_action_new_from_stock ("NodeProperties",
 						     _("_Properties"),
 						     GTK_STOCK_PROPERTIES);
-		cong_action_attach_callback_Document_Node_ParentWindow (action, 
-									cong_ui_hook_tree_properties,
-									doc,
-									node,
-									parent_window);
+		cong_action_attach_callback_Document_SelectedNode_ParentWindow (action, 
+										cong_ui_hook_tree_properties,
+										doc,
+										parent_window);
 
 		cong_menu_add_action (primary_window,
 				      UI_PATH_CONTEXT_MENU,
@@ -862,26 +853,23 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 
 
 static GtkAction*
-add_action_to_popup_with_callback_Document_Node_ParentWindow (const gchar *parent_ui_path,
-							      GtkAction *action, 
-							      CongUICallback_Document_Node_ParentWindow callback,
-							      CongDocument *doc,
-							      CongNodePtr node,
-							      GtkWindow *parent_window,
-							      gboolean is_sensitive,
-							      CongPrimaryWindow *primary_window)
+add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (const gchar *parent_ui_path,
+								      GtkAction *action, 
+								      CongUICallback_Document_SelectedNode_ParentWindow callback,
+								      CongDocument *doc,
+								      GtkWindow *parent_window,
+								      gboolean is_sensitive,
+								      CongPrimaryWindow *primary_window)
 {
 	g_return_val_if_fail (parent_ui_path, NULL);
 	g_return_val_if_fail (action, NULL);
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (callback, NULL);	
-	g_return_val_if_fail (node, NULL);
 
-	cong_action_attach_callback_Document_Node_ParentWindow (action,
-								callback,
-								doc,
-								node,
-								parent_window);
+	cong_action_attach_callback_Document_SelectedNode_ParentWindow (action,
+									callback,
+									doc,
+									parent_window);
 	cong_action_set_sensitive (action,
 				   is_sensitive);   
 
@@ -1083,16 +1071,15 @@ cong_ui_popup_init(CongDocument *doc,
 	s_action_group = gtk_action_group_new ("ContextMenu");
 
 	/* Add "Properties" action: */
-	add_action_to_popup_with_callback_Document_Node_ParentWindow (UI_PATH_CONTEXT_MENU,
-								      cong_action_new_from_stock ("NodeProperties",
-												  _("_Properties"),
-												  GTK_STOCK_PROPERTIES),
-								      cong_ui_hook_tree_properties,
-								      doc,
-								      node,
-								      parent_window,
-								      TRUE,
-								      primary_window);	
+	add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+									      cong_action_new_from_stock ("NodeProperties",
+													  _("_Properties"),
+													  GTK_STOCK_PROPERTIES),
+									      cong_ui_hook_tree_properties,
+									      doc,
+									      parent_window,
+									      TRUE,
+									      primary_window);	
 
 	/* Add clipboard operations: */
 	/* FIXME:  the clipboard stuff only currently works for elements, hence we should filter on these for now: */
@@ -1100,61 +1087,56 @@ cong_ui_popup_init(CongDocument *doc,
 
 		cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
 
-		add_action_to_popup_with_callback_Document_Node_ParentWindow (UI_PATH_CONTEXT_MENU,
-									      cong_action_new_from_stock ("NodeCut",
-													  _("_Cut"),
-													  GTK_STOCK_CUT),
-									      cong_ui_hook_tree_cut,
-									      doc,
-									      node,
-									      parent_window,
-									      cong_node_can_be_cut (node),
-									      primary_window);
-		add_action_to_popup_with_callback_Document_Node_ParentWindow (UI_PATH_CONTEXT_MENU,
-									      cong_action_new_from_stock ("NodeCopy",
-													  _("_Copy"),
-													  GTK_STOCK_COPY),
-									      cong_ui_hook_tree_copy,
-									      doc,
-									      node,
-									      parent_window,
-									      cong_node_can_be_copied (node),
-									      primary_window);
-		add_action_to_popup_with_callback_Document_Node_ParentWindow(UI_PATH_CONTEXT_MENU,
-									     cong_action_new ("NodePasteInto",
-											      _("Paste into"),
-											      NULL, /* FIXME:  ought to have a tooltip */
-											      NULL), /* FIXME:  ought to have an icon */
-									     cong_ui_hook_tree_paste_under,
-									     doc,
-									     node,
-									     parent_window,
-									     TRUE,
-									     primary_window);
-		add_action_to_popup_with_callback_Document_Node_ParentWindow(UI_PATH_CONTEXT_MENU,
-									     cong_action_new ("NodePasteBefore",
-											      _("Paste before"),
-											      NULL, /* FIXME:  ought to have a tooltip */
-											      NULL), /* FIXME:  ought to have an icon */
-									     cong_ui_hook_tree_paste_before,
-									     doc,
-									     node,
-									     parent_window,
-									     TRUE,
-									     primary_window);
-		add_action_to_popup_with_callback_Document_Node_ParentWindow(UI_PATH_CONTEXT_MENU,
-									     cong_action_new ("NodePasteAfter",
-											      _("Paste after"),
-											      NULL, /* FIXME:  ought to have a tooltip */
-											      NULL), /* FIXME:  ought to have an icon */
-									     cong_ui_hook_tree_paste_after,
-									     doc,
-									     node,
-									     parent_window,
-									     TRUE,
-									     primary_window);
+		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+										      cong_action_new_from_stock ("NodeCut",
+														  _("_Cut"),
+														  GTK_STOCK_CUT),
+										      cong_ui_hook_tree_cut,
+										      doc,
+										      parent_window,
+										      cong_node_can_be_cut (node),
+										      primary_window);
+		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+										      cong_action_new_from_stock ("NodeCopy",
+														  _("_Copy"),
+														  GTK_STOCK_COPY),
+										      cong_ui_hook_tree_copy,
+										      doc,
+										      parent_window,
+										      cong_node_can_be_copied (node),
+										      primary_window);
+		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+										      cong_action_new ("NodePasteInto",
+												       _("Paste into"),
+												       NULL, /* FIXME:  ought to have a tooltip */
+												       NULL), /* FIXME:  ought to have an icon */
+										      cong_ui_hook_tree_paste_under,
+										      doc,
+										      parent_window,
+										      TRUE,
+										      primary_window);
+		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+										      cong_action_new ("NodePasteBefore",
+												       _("Paste before"),
+												       NULL, /* FIXME:  ought to have a tooltip */
+												       NULL), /* FIXME:  ought to have an icon */
+										      cong_ui_hook_tree_paste_before,
+										      doc,
+										      parent_window,
+										      TRUE,
+										      primary_window);
+		add_action_to_popup_with_callback_Document_SelectedNode_ParentWindow (UI_PATH_CONTEXT_MENU,
+										      cong_action_new ("NodePasteAfter",
+												       _("Paste after"),
+												       NULL, /* FIXME:  ought to have a tooltip */
+												       NULL), /* FIXME:  ought to have an icon */
+										      cong_ui_hook_tree_paste_after,
+										      doc,
+										      parent_window,
+										      TRUE,
+										      primary_window);
 	}
-
+	
 	cong_util_add_menu_separator (UI_PATH_CONTEXT_MENU);
 
 

@@ -229,25 +229,26 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 /**
  * cong_ui_hook_tree_properties:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void
 cong_ui_hook_tree_properties (CongDocument *doc,
-			      CongNodePtr node,
 			      GtkWindow *parent_window)
 {
 	GtkWidget *properties_dialog;
+	CongNodePtr node;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	properties_dialog = cong_node_properties_dialog_new (doc, 
 							     node, 
 							     parent_window);
-
+	
 #if 1
 	gtk_widget_show (properties_dialog);
 #else
@@ -279,64 +280,65 @@ tree_cut_update_location_callback (CongDocument *doc,
 /**
  * cong_ui_hook_tree_cut:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void 
 cong_ui_hook_tree_cut (CongDocument *doc,
-		       CongNodePtr node,
 		       GtkWindow *parent_window)
 {
 	gchar *source;
-
+	CongNodePtr node;
+		
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
-	/* GREP FOR MVC */
 	source = cong_node_generate_source(node);
-
+	
 	/* FIXME: set clipboard state within command? */
 	cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
 						  GDK_SELECTION_CLIPBOARD,
 						  source,
 						  doc);
 	g_free(source);
-
+	
 	cong_document_begin_edit(doc);
-
+	
 	{
 		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"), NULL);
-
+		
 		cong_command_for_each_location (cmd, 
 						tree_cut_update_location_callback,
 						node);
 		
 		cong_command_add_node_recursive_delete(cmd, node);
-
+		
 		cong_document_end_command (doc, cmd);
 	}
-
+	
 	cong_document_end_edit(doc);
 }
 
 /**
  * cong_ui_hook_tree_copy:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void 
 cong_ui_hook_tree_copy (CongDocument *doc,
-			CongNodePtr node,
 			GtkWindow *parent_window)
 {
 	gchar *source;
+	CongNodePtr node;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	/* GREP FOR MVC */
@@ -352,20 +354,21 @@ cong_ui_hook_tree_copy (CongDocument *doc,
 /**
  * cong_ui_hook_tree_paste_under:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void 
 cong_ui_hook_tree_paste_under (CongDocument *doc,
-			       CongNodePtr node,
 			       GtkWindow *parent_window)
 {
 	CongDispspec *ds;
+	CongNodePtr node;
 	const gchar *clipboard_source;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	ds = cong_document_get_default_dispspec(doc);
@@ -383,20 +386,21 @@ cong_ui_hook_tree_paste_under (CongDocument *doc,
 /**
  * cong_ui_hook_tree_paste_before:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void
 cong_ui_hook_tree_paste_before (CongDocument *doc,
-				CongNodePtr node,
 				GtkWindow *parent_window)
 {
 	CongDispspec *ds;
+	CongNodePtr node;
 	const gchar *clipboard_source;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	ds = cong_document_get_default_dispspec(doc);
@@ -414,20 +418,21 @@ cong_ui_hook_tree_paste_before (CongDocument *doc,
 /**
  * cong_ui_hook_tree_paste_after:
  * @doc:
- * @node:
  * @parent_window:
  *
  * TODO: Write me
  */
 void
 cong_ui_hook_tree_paste_after (CongDocument *doc,
-			       CongNodePtr node,
 			       GtkWindow *parent_window)
 {
 	CongDispspec *ds;
+	CongNodePtr node;
 	const gchar *clipboard_source;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	ds = cong_document_get_default_dispspec(doc);
@@ -444,13 +449,15 @@ cong_ui_hook_tree_paste_after (CongDocument *doc,
 
 void
 cong_ui_hook_tree_convert_to_comment (CongDocument *doc,
-				      CongNodePtr node,
 				      GtkWindow *parent_window)
 {
 	gchar *source;
+	CongNodePtr node;
 	CongNodePtr comment_node;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	node = cong_document_get_selected_node (doc);
 	g_return_if_fail (node);
 
 	source = cong_node_generate_source(node);
@@ -487,13 +494,15 @@ cong_ui_hook_tree_convert_to_comment (CongDocument *doc,
 
 void
 cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
-					CongNodePtr comment_node,
 					GtkWindow *parent_window)
 {
+	CongNodePtr comment_node;
 	CongNodePtr new_nodes; 
 	CongNodePtr iter, iter_next;
 
 	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	comment_node = cong_document_get_selected_node (doc);
 	g_return_if_fail (comment_node);
 	g_return_if_fail (CONG_NODE_TYPE_COMMENT == cong_node_type (comment_node));
 	g_return_if_fail (comment_node->content);

@@ -32,9 +32,8 @@ typedef void
 (*CongUICallback_Document) (CongDocument *doc);
 
 typedef void
-(*CongUICallback_Document_Node_ParentWindow) (CongDocument *doc,
-					      CongNodePtr node,
-					      GtkWindow *parent_window);
+(*CongUICallback_Document_SelectedNode_ParentWindow) (CongDocument *doc,
+						      GtkWindow *parent_window);
 
 typedef void 
 (*CongUICallback_Document_ElementDescription_SelectedNode) (CongDocument *doc,
@@ -47,11 +46,10 @@ cong_menu_item_attach_callback_Document (GtkMenuItem *item,
 					 CongDocument *doc);
 
 GtkMenuItem* 
-cong_menu_item_attach_callback_Document_Node_ParentWindow (GtkMenuItem *item,
-							   CongUICallback_Document_Node_ParentWindow callback,
-							   CongDocument *doc,
-							   CongNodePtr node,
-							   GtkWindow *parent_window);
+cong_menu_item_attach_callback_Document_SelectedNode_ParentWindow (GtkMenuItem *item,
+								   CongUICallback_Document_SelectedNode_ParentWindow callback,
+								   CongDocument *doc,
+								   GtkWindow *parent_window);
 
 GtkMenuItem* 
 cong_menu_item_attach_callback_Document_ElementDescription_SelectedNode (GtkMenuItem *item, 
@@ -101,35 +99,27 @@ cong_ui_hook_tree_new_sub_element (CongDocument *doc,
 				   CongElementDescription *element_desc);
 void
 cong_ui_hook_tree_properties (CongDocument *doc,
-			      CongNodePtr node,
 			      GtkWindow *parent_window);
 void 
 cong_ui_hook_tree_cut (CongDocument *doc,
-		       CongNodePtr node,
 		       GtkWindow *parent_window);
 void
 cong_ui_hook_tree_copy (CongDocument *doc,
-			CongNodePtr node,
 			GtkWindow *parent_window);
 void
 cong_ui_hook_tree_paste_under (CongDocument *doc,
-			       CongNodePtr node,
 			       GtkWindow *parent_window);
 void
 cong_ui_hook_tree_paste_before (CongDocument *doc,
-				CongNodePtr node,
 				GtkWindow *parent_window);
 void
 cong_ui_hook_tree_paste_after (CongDocument *doc,
-			       CongNodePtr node,
 			       GtkWindow *parent_window);
 void
 cong_ui_hook_tree_convert_to_comment (CongDocument *doc,
-				      CongNodePtr node,
 				      GtkWindow *parent_window);
 void
 cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
-					CongNodePtr node,
 					GtkWindow *parent_window);
 
 /** Legacy UI Hooks without clean marshalling (to be cleanup up eventually): **/
