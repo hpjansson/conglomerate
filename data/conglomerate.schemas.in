@@ -7,7 +7,7 @@
       <type>list</type>
       <list_type>string</list_type>
       <default>[~/.conglomerate/dispspecs]</default>
-      <locale name="en">
+      <locale name="C">
 	<short>Custom locations for display specification files.</short>
 	<long>A list of custom directories where Conglomerate should look for the display specification (called dispspec, or .xds) files, in addition to the standard installation path.  When documents are loaded a matching dispspec is searched for in these directories, and the first matching dispspec file is used.</long>
       </locale>
@@ -19,7 +19,7 @@
       <type>list</type>
       <list_type>string</list_type>
       <default>[~/.conglomerate/templates]</default>
-      <locale name="en">
+      <locale name="C">
 	<short>Locations for template files.</short>
 	<long>A list of directories where Conglomerate should look for template xml files.  These documents will be used by the new document assistant as types of documents which can be created by the user.</long>
       </locale>
