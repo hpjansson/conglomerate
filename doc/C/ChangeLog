@@ -1,3 +1,9 @@
+2003-12-04  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.xml
+
+	The FAQ is in this directory, not in ../../documentation.
+
 2003-11-10  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* faq.xml

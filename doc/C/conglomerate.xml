@@ -187,6 +187,6 @@ predefined document types.
   </sect1>
   <sect1 id="faq">
     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-      href="../../documentation/faq.xml#xpointer(/article/*)"/>
+      href="./faq.xml#xpointer(/article/*)"/>
   </sect1>
 </article>
