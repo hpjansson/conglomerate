@@ -1,0 +1,71 @@
+
+# this is very very raw material
+
+#
+
+make two directories with the source tree
+
+from the tarball
+
+/usr/src
+$ tar xzf conge/conglomerate-0.3.110uo1210.tar.gz
+/usr/src
+$ mv conglomerate-0.3.110uo1210/ conglomerate-vanilla
+/usr/src
+$ tar xzf conge/conglomerate-0.3.110uo1210.tar.gz
+/usr/src
+$ mv conglomerate-0.3.110uo1210/ conglomerate-my-work
+/usr/src
+
+
+or from CVS 
+
+/usr/src
+$ CVSROOT=:pserver:anonymous@cvs.copyleft.no:/cvs cvs login
+Logging in to :pserver:anonymous@cvs.copyleft.no:2401/cvs
+CVS password:
+/usr/src
+$ CVSROOT=:pserver:anonymous@cvs.copyleft.no:/cvs cvs checkout conge
+cvs server: Updating conge
+ [ more output of the CVS check out ]
+/usr/src
+$ mv conge conge-my-work
+/usr/src
+$ CVSROOT=:pserver:anonymous@cvs.copyleft.no:/cvs cvs checkout conge
+cvs server: Updating conge
+ [ more output of the CVS check out ]
+/usr/src
+
+
+
+$ cd my-work
+/usr/src/conge-my-work
+$ # make your changes and check it
+/usr/src/conge-my-work
+
+
+$ cd ..   # go a level up
+/usr/src
+$ diff -urN -exclude-from=my-work/.diffexclude \
+  vanilla my-work > changes
+/usr/src
+$
+
+
+
+
+Check that the patch can cleanly applied.
+
+
+$ tar xzf conge/conglomerate-0.3.110uo1210.tar.gz
+/usr/src
+$ mv conglomerate-0.3.110uo1210/ conglomerate-testpatch
+/usr/src
+$ cd !$
+cd conglomerate-testpatch
+/usr/src/conglomerate-testpatch
+$ patch -p1 < ../changes
+
+
+
+# let Geert Stappers know that it is in/after Januari 2003 still raw text

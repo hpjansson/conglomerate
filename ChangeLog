@@ -1,3 +1,12 @@
+2002-12-12  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* documention/ContribDemo: new file
+
+	* .diffexclude: new file
+
+	* Makefile.am: Added documention/ContribDemo
+	and .diffexclude at extra_dist
+
 2002-11-30  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* Makefile.am: Added documention/faq.xml at extra_dist

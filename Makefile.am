@@ -1,6 +1,7 @@
 SUBDIRS = src po data
 
 EXTRA_DIST = BUGS	\
+  .diffexclude		\
   intltool-extract.in	\
   intltool-merge.in	\
   intltool-update.in	\
