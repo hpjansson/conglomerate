@@ -34,7 +34,6 @@
 #endif
 
 /* Internal data structure declarations: */
-
 struct CongDispspecElementHeaderInfo
 {
 	gchar *xpath; /* if present, this is the XPath to use when determining the title of the tag */
@@ -48,6 +47,7 @@ struct CongDispspecElement
 	gchar *username;
 	gchar *short_desc;
 	GdkPixbuf *icon16;
+	enum CongWhitespaceHandling whitespace;
 
 	enum CongElementType type;
 	gboolean collapseto;
@@ -1167,6 +1167,8 @@ cong_dispspec_element_new (const gchar* xmlns,
 
 	element = g_new0(CongDispspecElement,1);
 
+	g_message("cong_dispspec_element_new (\"%s\",\"%s\",)", xmlns, tagname);
+
 	if (xmlns) {
 		element->xmlns = g_strdup(xmlns);
 	}
@@ -1181,6 +1183,7 @@ cong_dispspec_element_new (const gchar* xmlns,
 		/* username remains NULL */
 	}
 
+	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 	element->type = type;
 
 	/* Extract colour: */
@@ -1302,6 +1305,23 @@ cong_dispspec_element_type(CongDispspecElement *element)
 	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
 
 	return element->type;
+}
+
+enum CongWhitespaceHandling
+cong_dispspec_element_get_whitespace (CongDispspecElement *element)
+{
+	g_return_val_if_fail (element, CONG_WHITESPACE_NORMALIZE);
+
+	return element->whitespace;
+}
+
+void
+cong_dispspec_element_set_whitespace (CongDispspecElement *element,
+				      enum CongWhitespaceHandling whitespace)
+{	
+	g_return_if_fail (element);
+
+	element->whitespace = whitespace;
 }
 
 
@@ -1488,6 +1508,12 @@ cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element
 	return element->property_dialog_plugin_id;
 }
 
+static const CongEnumMapping whitespace_numeration[] =
+{
+	{"preserve", CONG_WHITESPACE_PRESERVE},
+	{"normalize", CONG_WHITESPACE_NORMALIZE}
+};
+
 CongDispspecElement*
 cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element)
 {
@@ -1496,6 +1522,8 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 	DS_DEBUG_MSG1("got xml element\n");
 
 	element = g_new0(CongDispspecElement,1);
+
+	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 
 	/* Extract tag namespace: */
 	{
@@ -1552,6 +1580,18 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 		if (prop) {
 			element->icon16 = cong_util_load_icon(prop);
 
+			xmlFree(prop);
+		}
+	}
+
+	/* Extract whitespace: */
+	{
+		xmlChar* prop = xmlGetProp(xml_element, "whitespace");
+		if (prop) {
+			element->whitespace = cong_enum_mapping_lookup (whitespace_numeration,
+									sizeof(whitespace_numeration)/sizeof(CongEnumMapping),
+									prop,
+									CONG_WHITESPACE_NORMALIZE);
 			xmlFree(prop);
 		}
 	}
@@ -1964,36 +2004,40 @@ handle_elements_from_xml (CongDispspec * dispspec, xmlNodePtr cur)
 
 	if (cur) {
 		if (xmlNodeIsText (cur)) {
-			element =  cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur->parent), cur->parent->name);
-			if (element) {
-				promote_element (dispspec, element, cur);
-			}
-			else if (contains_text (xmlNodeGetContent (cur))) {
-				if (contains_carriage_return(xmlNodeGetContent (cur))) {
-					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
-												     cur->parent->name,
-												     CONG_ELEMENT_TYPE_PARAGRAPH,
-												     TRUE);
-					g_assert (ds_element);
-					cong_dispspec_add_element (dispspec, ds_element);
+			if (cur->parent->type==XML_ELEMENT_NODE) {
+				element =  cong_dispspec_lookup_element (dispspec, cong_node_xmlns(cur->parent), cur->parent->name);
+				if (element) {
+					promote_element (dispspec, element, cur);
+				}
+				else if (contains_text (xmlNodeGetContent (cur))) {
+					if (contains_carriage_return(xmlNodeGetContent (cur))) {
+						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+													     cur->parent->name,
+													     CONG_ELEMENT_TYPE_PARAGRAPH,
+													     TRUE);
+						g_assert (ds_element);
+						cong_dispspec_add_element (dispspec, ds_element);
+					} else {
+						CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
+													     cur->parent->name,
+													     CONG_ELEMENT_TYPE_SPAN,
+													     TRUE);
+						g_assert (ds_element);
+						cong_dispspec_add_element (dispspec, ds_element);
+					}
 				} else {
 					CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
 												     cur->parent->name,
-												     CONG_ELEMENT_TYPE_SPAN,
+												     CONG_ELEMENT_TYPE_STRUCTURAL,
 												     TRUE);
 					g_assert (ds_element);
 					cong_dispspec_add_element (dispspec, ds_element);
 				}
-			} else {
-				CongDispspecElement *ds_element = cong_dispspec_element_new (cong_node_xmlns(cur->parent),
-											     cur->parent->name,
-											     CONG_ELEMENT_TYPE_STRUCTURAL,
-											     TRUE);
-				g_assert (ds_element);
-				cong_dispspec_add_element (dispspec, ds_element);
 			}
 		}
 	}
+
+	/* Recurse over children: */
 	
 	cur = cur->xmlChildrenNode;
 	

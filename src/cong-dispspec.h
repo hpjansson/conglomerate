@@ -99,9 +99,6 @@ const CongExternalDocumentModel*
 cong_dispspec_get_external_document_model (const CongDispspec *ds,
 					   enum CongDocumentModelType model_type);
 
-xmlNodePtr
-cong_dispspec_get_template(const CongDispspec *ds);
-
 /**
  *  Get a pixbuf (if any) for this dispspec; caller is repsonsible for unrefing the pixbuf
  */
@@ -161,7 +158,16 @@ gboolean cong_dispspec_element_insert(CongDispspec *ds, const gchar *xmlns, cons
    cong_dispspec_element stuff: 
 *******************************/
 
-/* Construction  */
+/** 
+ * cong_dispspec_element_new:
+ * @xmlns: the string prefix of the namespace, or NULL
+ * @tagname: the "tag name" for the new element; must be non-NULL
+ * @type:
+ * @autogenerate_username:  if TRUE, then generate a sane user-visible name for the element,
+ * using "header capitalisation"
+ *
+ * Constructs a new #CongDispspecElement, initialising fields to sane defaults.
+ **/
 CongDispspecElement*
 cong_dispspec_element_new (const gchar* xmlns, 
 			   const gchar* tagname, 
@@ -203,6 +209,28 @@ cong_dispspec_element_next(CongDispspecElement* element);
 
 enum CongElementType
 cong_dispspec_element_type(CongDispspecElement *element);
+
+
+/**
+ * cong_dispspec_element_get_whitespace:
+ * @element:  The element of the display spec
+ *
+ * Get the #CongWhitespaceHandling behaviour for this element
+ * Returns:  
+ */
+enum CongWhitespaceHandling
+cong_dispspec_element_get_whitespace (CongDispspecElement *element);
+
+/**
+ * cong_dispspec_element_set_whitespace:
+ * @element:  The element of the display spec
+ * @whitespace: The new value for whitespace handling
+ *
+ * Set the #CongWhitespaceHandling behaviour for this element
+ */
+void
+cong_dispspec_element_set_whitespace (CongDispspecElement *element,
+				      enum CongWhitespaceHandling whitespace);
 
 gboolean
 cong_dispspec_element_collapseto(CongDispspecElement *element);

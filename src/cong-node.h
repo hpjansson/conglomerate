@@ -210,4 +210,7 @@ CongNodePtr cong_node_get_child_by_name (CongNodePtr node, const gchar *xmlns, c
 CongNodePtr 
 cong_node_get_first_text_node_descendant (CongNodePtr node);
 
+enum CongWhitespaceHandling
+cong_node_get_whitespace_handling (CongDocument *doc,
+				   CongNodePtr text_node);
 #endif

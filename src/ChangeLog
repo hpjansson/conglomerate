@@ -1,3 +1,9 @@
+2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c, cong-dispspec.h, cong-editor-node-text.c, cong-node.c, cong-node.h, global.h, plugin-cleanup-source.c
+
+	Added whitespace attribute to dispspec elements, made Cleanup Source respect it, made beginnings of support in main editor view
+
 2003-09-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* tree.c

@@ -330,6 +330,7 @@ void cong_node_self_test(CongNodePtr node)
 	switch (node->type) {
 	case XML_DOCUMENT_NODE:
 	case XML_DTD_NODE:
+	case XML_ATTRIBUTE_DECL:
 		/* The "content" field is meaningless; don't test */
 		break;
 
@@ -373,6 +374,8 @@ void cong_node_self_test(CongNodePtr node)
 			case XML_COMMENT_NODE:
 			case XML_ENTITY_NODE:
 			case XML_ENTITY_DECL:
+			case XML_ATTRIBUTE_DECL:
+			case XML_ELEMENT_DECL:
 				g_assert (iter->parent->type == XML_DTD_NODE);
 				g_assert (iter->parent!=node);
 				break;
@@ -987,5 +990,25 @@ cong_node_get_first_text_node_descendant (CongNodePtr node)
 		return NULL;
 	}
 }
+
+enum CongWhitespaceHandling
+cong_node_get_whitespace_handling (CongDocument *doc,
+				   CongNodePtr text_node)
+{
+	g_return_val_if_fail (doc, CONG_WHITESPACE_NORMALIZE);
+	g_return_val_if_fail (text_node, CONG_WHITESPACE_NORMALIZE);
+	g_return_val_if_fail (cong_node_type (text_node)==CONG_NODE_TYPE_TEXT, CONG_WHITESPACE_NORMALIZE);
+
+	if (cong_node_type (text_node->parent)==CONG_NODE_TYPE_ELEMENT) {
+		CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node  (doc, text_node->parent);
+
+		if (ds_element) {
+			return cong_dispspec_element_get_whitespace (ds_element);
+		}
+	}
+	
+	return CONG_WHITESPACE_NORMALIZE;
+}
+
 
 /* Internal function definitions: */

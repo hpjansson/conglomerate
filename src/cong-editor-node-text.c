@@ -35,6 +35,7 @@
 #include "cong-font.h"
 #include "cong-editor-area-text-fragment.h"
 #include "cong-selection.h"
+#include "cong-dispspec.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -152,21 +153,23 @@ finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongEditorWidget3* editor_widget,
 				 CongNodePtr node,
 				 CongEditorNode *traversal_parent)
 {
-	gchar *markup;
+	gchar *markup;	
+	enum CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_widget3_get_document (editor_widget),
+										    node);
 
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_text),
 				    editor_widget,
 				    node,
 				    traversal_parent);
 
-	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new (TRUE,
+
+	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new ((whitespace==CONG_WHITESPACE_NORMALIZE),
 								     get_text_cache_input (editor_node_text));
 
 	PRIVATE(editor_node_text)->handler_id_node_set_text = g_signal_connect_after (G_OBJECT(cong_editor_widget3_get_document(editor_widget)), 
@@ -656,7 +659,7 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 						       &trailing)) {
 		int original_byte_offset;
 
-#if 0
+#if 1
 		g_message("(%i,%i) -> index %i", x,y, index_);
 #endif
 

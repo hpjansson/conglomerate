@@ -192,13 +192,14 @@ gchar* cong_util_strip_whitespace_from_string (const gchar* input_string)
 	return result_string;	
 }
 
-
 static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
 {
 	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
-		gchar *new_content = cong_util_strip_whitespace_from_string(node->content);
-		cong_document_node_set_text (doc, node, new_content);
-		g_free(new_content);
+		if (cong_node_get_whitespace_handling (doc, node)==CONG_WHITESPACE_NORMALIZE) {
+			gchar *new_content = cong_util_strip_whitespace_from_string(node->content);
+			cong_document_node_set_text (doc, node, new_content);
+			g_free(new_content);
+		}
 	}
 
 	return FALSE;

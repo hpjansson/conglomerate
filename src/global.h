@@ -38,6 +38,12 @@ G_BEGIN_DECLS
 #include "cong-node.h"
 #include "cong-location.h"
 
+enum CongWhitespaceHandling {
+	CONG_WHITESPACE_NORMALIZE,
+	CONG_WHITESPACE_PRESERVE
+};
+
+
 typedef struct CongRange CongRange;
 
 struct CongCursor
