@@ -26,6 +26,9 @@ conglomerate_SOURCES =      \
   cong-editor-area-composer.h \
   cong-editor-area-container.h \
   cong-editor-area-flow-holder.h \
+  cong-editor-area-flow-holder-blocks.h \
+  cong-editor-area-flow-holder-inlines.h \
+  cong-editor-area-flow-holder-single.h \
   cong-editor-area-pixbuf.h \
   cong-editor-area-spacer.h \
   cong-editor-area-text.h   \
@@ -75,6 +78,9 @@ conglomerate_SOURCES =      \
   cong-editor-area-composer.c \
   cong-editor-area-container.c \
   cong-editor-area-flow-holder.c \
+  cong-editor-area-flow-holder-blocks.c \
+  cong-editor-area-flow-holder-inlines.c \
+  cong-editor-area-flow-holder-single.c \
   cong-editor-area-pixbuf.c \
   cong-editor-area-spacer.c \
   cong-editor-area-text.c   \
