@@ -2,6 +2,10 @@
 
 	* popup.c
 
+	More cleanups: making it easier to get rid of the final traces of GObject hackery
+
+	* popup.c
+
 	Cleaned up fiddly special-casing of stock items
 
 	* cong-app.c, cong-dispspec-element.c, cong-dispspec-registry.c, cong-editor-area-text-comment.c, cong-editor-area-text.c, cong-editor-area-underline.c, cong-editor-area.c, cong-editor-node-text.c, cong-editor-widget3.c, cong-eel.c, cong-file-save.c, cong-menus.c, cong-node-properties-dialog.c, cong-primary-window.c, cong-tree-view.c, cong-util.c, cong-util.h, cursor.c, global.h, main.c, plugin-paragraph-area-paragraph.c, popup.c, select.c, tree.c, xmledit.c

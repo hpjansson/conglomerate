@@ -143,6 +143,42 @@ cong_menu_item_attach_callback_Document_DispspecElement_Node (GtkMenuItem *item,
 	return item;
 }
 
+/* 
+   Set up the callback, but ensure item's GObject data has the following set:
+  
+   "document" -> the CongDocument
+   "parent_window" -> the  parent_window
+  
+   The CongNodePtr is passed to the callback function
+*/
+GtkMenuItem*
+cong_menu_item_attach_callback_legacy (GtkMenuItem *item,
+				       gint (*callback)(GtkWidget *widget, CongNodePtr node),
+				       CongDocument *doc,
+				       CongNodePtr node,
+				       GtkWindow *parent_window)
+{
+	g_return_val_if_fail (item, NULL);
+	g_return_val_if_fail (callback, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (node, NULL);
+
+	gtk_signal_connect (GTK_OBJECT(item), 
+			    "activate",
+			    GTK_SIGNAL_FUNC(callback), 
+			    node);
+
+	g_object_set_data (G_OBJECT(item),
+			   "document",
+			   doc);
+
+	g_object_set_data (G_OBJECT(item),
+			   "parent_window",
+			   parent_window);
+
+	return item;
+}
+
 GtkMenuItem* 
 cong_menu_add_item (GtkMenu *menu,
 		    GtkMenuItem *item,
@@ -164,17 +200,25 @@ cong_menu_add_item (GtkMenu *menu,
 
 
 #if 1
-static GtkWidget* 
-add_item_to_popup (GtkMenu *menu,
-		   GtkMenuItem *item, 
-		   CongDocument *doc,
-		   gint (*func)(GtkWidget *widget, CongNodePtr tag),
-		   CongNodePtr callback_data,
-		   GtkWindow *parent_window,
-		   gboolean is_sensitive);
-
+/*
+  Add the item to the menu, etc.
+  Set up the callback, but ensure item's GObject data has the following set:
+  
+  "document" -> the CongDocument
+  "parent_window" -> the  parent_window
+  
+  The CongNodePtr is passed to the callback function
+ */
+static GtkMenuItem* 
+add_item_to_popup_with_callback_legacy (GtkMenu *menu,
+					GtkMenuItem *item, 
+					gint (*callback)(GtkWidget *widget, CongNodePtr node),
+					CongDocument *doc,
+					CongNodePtr node,
+					GtkWindow *parent_window,
+					gboolean is_sensitive);
 static GtkWidget*
-add_item_to_popup_with_tree_callback (GtkMenu *menu,
+add_item_to_popup_with_callback_Document_Node_ParentWindow (GtkMenu *menu,
 				      GtkMenuItem *item, 
 				      CongUICallback_Document_Node_ParentWindow tree_callback,
 				      CongDocument *doc,
@@ -502,47 +546,40 @@ callback_to_tree_callback_marshaller (GtkWidget *widget,
 /* the popup items have the data "document" set on them: */
 
 
-static GtkWidget*
-add_item_to_popup (GtkMenu *menu,
-		   GtkMenuItem *item, 
-		   CongDocument *doc,
-		   gint (*func)(GtkWidget *widget, CongNodePtr tag),
-		   CongNodePtr callback_data,
-		   GtkWindow *parent_window,
-		   gboolean is_sensitive)
+static GtkMenuItem*
+add_item_to_popup_with_callback_legacy (GtkMenu *menu,
+					GtkMenuItem *item, 
+					gint (*callback)(GtkWidget *widget, CongNodePtr node),
+					CongDocument *doc,
+					CongNodePtr node,
+					GtkWindow *parent_window,
+					gboolean is_sensitive)
 {
-	g_return_val_if_fail(menu, NULL);
-	g_return_val_if_fail(item, NULL);
-	g_return_val_if_fail(doc, NULL);
+	g_return_val_if_fail (menu, NULL);
+	g_return_val_if_fail (item, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (callback, NULL);
+	g_return_val_if_fail (node, NULL);
 
-	if (func != NULL) {
-		gtk_signal_connect(GTK_OBJECT(item), 
-				   "activate",
-				   GTK_SIGNAL_FUNC(func), 
-				   callback_data);
-	}
-
-	g_object_set_data(G_OBJECT(item),
-			  "document",
-			  doc);
-	g_object_set_data(G_OBJECT(item),
-			  "parent_window",
-			  parent_window);
-
+	cong_menu_item_attach_callback_legacy (item,
+					       callback,					       
+					       doc,
+					       node,
+					       parent_window);
 	cong_menu_add_item (menu,
 			    item,
 			    is_sensitive);
 
-	return GTK_WIDGET(item);
+	return item;
 }
 
 static GtkWidget*
-add_item_to_popup_with_tree_callback (GtkMenu *menu,
-				      GtkMenuItem *item, 
-				      CongUICallback_Document_Node_ParentWindow callback,
-				      CongDocument *doc,
-				      CongNodePtr node,
-				      GtkWindow *parent_window)
+add_item_to_popup_with_callback_Document_Node_ParentWindow (GtkMenu *menu,
+							    GtkMenuItem *item, 
+							    CongUICallback_Document_Node_ParentWindow callback,
+							    CongDocument *doc,
+							    CongNodePtr node,
+							    GtkWindow *parent_window)
 {
 	g_return_val_if_fail (menu, NULL);
 	g_return_val_if_fail (item, NULL);
@@ -580,13 +617,13 @@ static GtkWidget* span_tag_removal_popup_init(CongDispspec *ds,
 		CongNodePtr node = (CongNodePtr)(current->data);
 		CongDispspecElement *element = cong_dispspec_lookup_node(ds, node);
 
-		GtkWidget *item = add_item_to_popup (GTK_MENU(popup),
-						     cong_util_make_menu_item_for_dispspec_element(element), /* FIXME: should we composite a deletion icon onto the pixbuf? */
-						     doc,
-						     callback,
-						     node,
-						     parent_window,
-						     TRUE);
+		GtkMenuItem *item = add_item_to_popup_with_callback_legacy (GTK_MENU(popup),
+									    cong_util_make_menu_item_for_dispspec_element(element), /* FIXME: should we composite a deletion icon onto the pixbuf? */
+									    callback,
+									    doc,
+									    node,
+									    parent_window,
+									    TRUE);
 
 		g_object_set_data(G_OBJECT(item),
 				  "document",
@@ -849,7 +886,7 @@ add_node_tool_callback (CongServiceNodeTool *node_tool,
 	if ( cong_node_tool_supports_node (node_tool, 
 					   callback_data->doc,
 					   callback_data->node)) {
-		add_item_to_popup_with_tree_callback (callback_data->tpopup,
+		add_item_to_popup_with_callback_Document_Node_ParentWindow (callback_data->tpopup,
 						      cong_util_make_menu_item (cong_service_tool_get_menu_text (CONG_SERVICE_TOOL(node_tool)),
 								      cong_service_tool_get_tip_text(CONG_SERVICE_TOOL(node_tool)),
 								      NULL), /* FIXME:  ought to have an icon */
@@ -914,10 +951,10 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 
 
 	/* Add "Properties" action: */
-	add_item_to_popup (tpopup,
+	add_item_to_popup_with_callback_legacy (tpopup,
 			   cong_util_make_stock_menu_item (GTK_STOCK_PROPERTIES),
-			   doc,
 			   tree_properties,
+			   doc,
 			   node,
 			   parent_window,
 			   TRUE);
@@ -927,7 +964,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 #if ENABLE_RAW_TREE_MANIPULATION
 	{
 		/* Add debug stuff: */
-		add_item_to_popup_with_tree_callback (tpopup,
+		add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
 						      cong_util_make_menu_item (_("Delete this item"),
 										NULL, /* FIXME:  ought to have a tooltip */
 										NULL), /* FIXME:  ought to have an icon */
@@ -937,7 +974,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 						      parent_window);
 		
 		if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-			add_item_to_popup_with_tree_callback (tpopup,
+			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
 							      cong_util_make_menu_item (_("Add text node after"),
 											NULL, /* FIXME:  ought to have a tooltip */
 											NULL), /* FIXME:  ought to have an icon */
@@ -945,7 +982,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 							      doc,
 							      node,
 							      parent_window);
-			add_item_to_popup_with_tree_callback (tpopup,
+			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
 							      cong_util_make_menu_item (_("Add text node before"),
 											NULL, /* FIXME:  ought to have a tooltip */
 											NULL), /* FIXME:  ought to have an icon */
@@ -956,7 +993,7 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 		}
 		
 		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
-			add_item_to_popup_with_tree_callback (tpopup,
+			add_item_to_popup_with_callback_Document_Node_ParentWindow (tpopup,
 							      cong_util_make_menu_item (_("Set the text"),
 											NULL, /* FIXME:  ought to have a tooltip */
 											NULL), /* FIXME:  ought to have an icon */
@@ -975,44 +1012,44 @@ GtkWidget* cong_ui_popup_init(CongDocument *doc,
 	/* Add clipboard operations: */
 	/* FIXME:  the clipboard stuff only currently works for elements, hence we should filter on these for now: */
 	if (cong_node_type(node)==CONG_NODE_TYPE_ELEMENT) {
-		add_item_to_popup (tpopup,
+		add_item_to_popup_with_callback_legacy (tpopup,
 				   cong_util_make_stock_menu_item (GTK_STOCK_CUT),
-				   doc,
 				   tree_cut,
+				   doc,
 				   node,
 				   parent_window,
 				   cong_node_can_be_cut (node));
-		add_item_to_popup (tpopup,
+		add_item_to_popup_with_callback_legacy (tpopup,
 				   cong_util_make_stock_menu_item (GTK_STOCK_COPY),
-				   doc,
 				   tree_copy,
+				   doc,
 				   node,
 				   parent_window,
 				   cong_node_can_be_copied (node));
-		add_item_to_popup(tpopup,
+		add_item_to_popup_with_callback_legacy(tpopup,
 				  cong_util_make_menu_item(_("Paste into"),
 						 NULL, /* FIXME:  ought to have a tooltip */
 						 NULL), /* FIXME:  ought to have an icon */
-				  doc,
 				  tree_paste_under,
+				  doc,
 				  node,
 				  parent_window,
 				  TRUE);
-		add_item_to_popup(tpopup,
+		add_item_to_popup_with_callback_legacy(tpopup,
 				  cong_util_make_menu_item(_("Paste before"),
 						 NULL, /* FIXME:  ought to have a tooltip */
 						 NULL), /* FIXME:  ought to have an icon */
-				  doc,
 				  tree_paste_before,
+				  doc,
 				  node,
 				  parent_window,
 				  TRUE);
-		add_item_to_popup(tpopup,
+		add_item_to_popup_with_callback_legacy(tpopup,
 				  cong_util_make_menu_item(_("Paste after"),
 						 NULL, /* FIXME:  ought to have a tooltip */
 						 NULL), /* FIXME:  ought to have an icon */
-				  doc,
 				  tree_paste_after,
+				  doc,
 				  node,
 				  parent_window,
 				  TRUE);
