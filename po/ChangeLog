@@ -1,5 +1,7 @@
 2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* POTFILES.skip: new file, skipping src/cong-object.c for now
+
 	* POTFILES.in: added src/plugin-print-source.c and
 	src/plugin-table.c
 
