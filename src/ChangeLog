@@ -1,6 +1,10 @@
 creating ChangeLog
 2002-12-12 David Malcolm
 
+	* cong-dummy-element-editor.c, cong-editor-widget-impl.h, cong-editor-widget.c, cong-element-editor.c, cong-section-head-editor.c, cong-span-text-editor.c
+
+	Click/drag support for span text editor
+
 	* cong-span-text-editor.c
 
 	Fixes to whitespace stripping/CongTextSpan code

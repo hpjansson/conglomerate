@@ -339,6 +339,18 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 	return TRUE;
 }
 
+static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event, gpointer user_data)
+{
+	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+
+	g_message("motion_notify_event_handler");
+
+	cong_element_editor_on_motion_notify(details->root_editor, event);
+
+	return TRUE;
+}
+
 #if 0
 void recursively_populate_ui(CongEditorView *editor_view,
 			     CongNodePtr x, 
@@ -544,8 +556,15 @@ GtkWidget* cong_editor_widget_new(CongDocument *doc)
 			   "button_press_event",
 			   (GtkSignalFunc) button_press_event_handler, 
 			   NULL);
+	gtk_signal_connect(GTK_OBJECT(widget), 
+			   "motion_notify_event",
+			   (GtkSignalFunc) motion_notify_event_handler, 
+			   NULL);
 
-	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_events(GTK_WIDGET(widget), GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_POINTER_MOTION_MASK);
+
+	gtk_widget_set(GTK_WIDGET(widget), "can_focus", (gboolean) TRUE, 0);
+	gtk_widget_set(GTK_WIDGET(widget), "can_default", (gboolean) TRUE, 0);
 
 	populate_widget(widget);
 

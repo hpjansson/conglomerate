@@ -57,6 +57,7 @@ static void section_head_editor_get_size_requisition(CongElementEditor *element_
 static void section_head_editor_allocate_child_space(CongElementEditor *element_editor);
 static void section_head_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void section_head_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
+static void section_head_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
 
 static CongElementEditorClass section_head_editor_class =
 {
@@ -67,7 +68,8 @@ static CongElementEditorClass section_head_editor_class =
 	section_head_editor_get_size_requisition,
 	section_head_editor_allocate_child_space,
 	section_head_editor_recursive_render,
-	section_head_on_button_press
+	section_head_on_button_press,
+	section_head_on_motion_notify
 };
 
 static void section_head_editor_on_recursive_delete(CongElementEditor *element_editor)
@@ -588,6 +590,35 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 		}
 	}
 
+}
+
+static void section_head_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
+{
+	CongEditorWidget *editor_widget = element_editor->widget;
+	CongSectionHeadEditor *section_head = CONG_SECTION_HEAD_EDITOR(element_editor);
+	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
+
+	/* Test to see if the header bar was clicked: */
+	if ( cong_eel_rectangle_contains(&section_head->title_bar_window_rect, 
+					 event->x,
+					 event->y) ){
+		/* empty */
+	} else {
+		/* See if a child is "under" this event; delegate to the child: */
+
+		GList *iter;
+
+		for (iter = section_head->list_of_child; iter; iter=iter->next) {
+			CongElementEditor *child_editor = iter->data;
+			g_assert(child_editor);
+
+			if ( cong_eel_rectangle_contains(&child_editor->window_area, 
+							 event->x,
+							 event->y) ){
+				cong_element_editor_on_motion_notify(child_editor, event);
+			}
+		}
+	}
 }
 
 #if 0

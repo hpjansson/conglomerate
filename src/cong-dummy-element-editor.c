@@ -40,6 +40,7 @@ static void dummy_element_editor_get_size_requisition(CongElementEditor *element
 static void dummy_element_editor_allocate_child_space(CongElementEditor *element_editor);
 static void dummy_element_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void dummy_element_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
+static void dummy_element_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
 
 static CongElementEditorClass dummy_element_editor_class =
 {
@@ -50,7 +51,8 @@ static CongElementEditorClass dummy_element_editor_class =
 	dummy_element_editor_get_size_requisition,
 	dummy_element_editor_allocate_child_space,
 	dummy_element_editor_recursive_render,
-	dummy_element_on_button_press
+	dummy_element_on_button_press,
+	dummy_element_on_motion_notify
 };
 
 static void dummy_element_editor_on_recursive_delete(CongElementEditor *element_editor)
@@ -145,6 +147,11 @@ static void dummy_element_editor_recursive_render(CongElementEditor *element_edi
 }
 
 static void dummy_element_on_button_press(CongElementEditor *element_editor, GdkEventButton *event)
+{
+	/* empty */
+}
+
+static void dummy_element_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
 {
 	/* empty */
 }

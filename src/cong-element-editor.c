@@ -148,3 +148,14 @@ void cong_element_editor_on_button_press(CongElementEditor *element_editor, GdkE
 
 	element_editor->klass->on_button_press(element_editor, event);
 }
+
+void cong_element_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
+{
+	g_return_if_fail(element_editor);
+	g_return_if_fail(event);
+
+	g_assert(element_editor->klass);
+	g_assert(element_editor->klass->on_motion_notify);
+
+	element_editor->klass->on_motion_notify(element_editor, event);
+}

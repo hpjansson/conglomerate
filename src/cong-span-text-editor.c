@@ -29,7 +29,24 @@
 
 #define H_SPACING (4)
 
-static int visit_lines(CongElementEditor *element_editor, gboolean render);
+enum CongLineVisitor
+{
+	CONG_LINE_VISITOR_CALCULATE_HEIGHT,
+	CONG_LINE_VISITOR_RENDER,
+	CONG_LINE_VISITOR_HIT_TEST
+};
+
+struct CongHitTest
+{
+	/* Inputs: */
+	GdkPoint window_coord;
+
+	/* Outputs: */
+	gboolean got_hit;
+	int byte_offset;
+};
+
+static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor visitor, struct CongHitTest *hit_test);
 
 typedef struct CongTextSpan CongTextSpan;
 
@@ -87,6 +104,7 @@ static void span_text_editor_get_size_requisition(CongElementEditor *element_edi
 static void span_text_editor_allocate_child_space(CongElementEditor *element_editor);
 static void span_text_editor_recursive_render(CongElementEditor *element_editor, const GdkRectangle *window_rect);
 static void span_text_editor_on_button_press(CongElementEditor *element_editor, GdkEventButton *event);
+static void span_text_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event);
 
 static CongElementEditorClass span_text_editor_class =
 {
@@ -97,7 +115,8 @@ static CongElementEditorClass span_text_editor_class =
 	span_text_editor_get_size_requisition,
 	span_text_editor_allocate_child_space,
 	span_text_editor_recursive_render,
-	span_text_editor_on_button_press
+	span_text_editor_on_button_press,
+	span_text_editor_on_motion_notify
 };
 
 CongTextSpan* cong_text_span_new(int original_first_byte_offset,
@@ -155,7 +174,7 @@ gchar* strip_whitespace_from_string(const gchar* input_string,
 				/* Add stuff to the list of spans */
 				text_span = cong_text_span_new(original_byte_offset_start_of_span,
 							       stripped_byte_offset_start_of_span,
-							       (i-original_byte_offset_start_of_span),
+							       (i+1-original_byte_offset_start_of_span),
 							       node);
 				*list_of_cong_text_span = g_list_append(*list_of_cong_text_span, 
 									text_span);
@@ -371,7 +390,6 @@ static CongNodePtr get_node_at_byte_offset(CongSpanTextEditor *span_text_editor,
 	}
 }
 
-/* Currently unused, but will be used for hit testing etc: */
 static CongTextSpan *get_text_span_at_byte_offset(CongSpanTextEditor *span_text_editor, int byte_offset)
 {
 	GList *iter;
@@ -482,7 +500,7 @@ static void span_text_editor_get_size_requisition(CongElementEditor *element_edi
 
 #if 1
 	element_editor->requisition.width = width_hint;
-	element_editor->requisition.height = visit_lines(element_editor, FALSE);
+	element_editor->requisition.height = visit_lines(element_editor, CONG_LINE_VISITOR_CALCULATE_HEIGHT, NULL);
 #else
 	pango_layout_get_pixel_size(span_text->pango_layout,
 				    &element_editor->requisition.width,
@@ -676,7 +694,7 @@ static void render_text_range(CongNodePtr key,
 /**
  * Return value: total height used
  */
-static int visit_lines(CongElementEditor *element_editor, gboolean render)
+static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor visitor, struct CongHitTest *hit_test)
 {
 	CongEditorWidget *editor_widget = element_editor->widget;
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
@@ -753,8 +771,26 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 					     (GHFunc)calculate_span_height,
 					     &calculate_span_height_data);
 		}		
+
+		if (visitor==CONG_LINE_VISITOR_HIT_TEST) {
+			int index, trailing;
+			g_assert(hit_test);
+
+			if (hit_test->window_coord.y>=y) {
+				if (hit_test->window_coord.y< (y + logical_rect.height + INTER_LINE_SPACING + (calculate_span_height_data.max_depth * span_text->tag_height))) {
+					if ( pango_layout_line_x_to_index(line,
+									  (hit_test->window_coord.x - offset_x) * PANGO_SCALE,
+									  &index,
+									  &trailing)) {
+						hit_test->got_hit = TRUE;
+						hit_test->byte_offset = index;
+						return 0;
+					}
+				}
+			}
+		}
 		
-		if (render) {
+		if (visitor==CONG_LINE_VISITOR_RENDER) {
 			/* If selection applies, render it underneath the layout_line: */
 			if (got_selection_start_byte_offset && got_selection_end_byte_offset) {
 				/* Then selection exists within this span_text_editor: */
@@ -844,7 +880,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 		}
 
 		/* Render spans: */
-		if (render) {
+		if (visitor==CONG_LINE_VISITOR_RENDER) {
 			struct RenderTextRangeData render_text_range_data;
 			render_text_range_data.span_text = span_text;
 			render_text_range_data.line = line;
@@ -881,7 +917,7 @@ static void span_text_editor_recursive_render(CongElementEditor *element_editor,
 				     &intersected_area)) {
 		
 #if 1
-		visit_lines(element_editor, TRUE);
+		visit_lines(element_editor, CONG_LINE_VISITOR_RENDER, NULL);
 #else
 		gdk_draw_layout(GDK_DRAWABLE(w->window),
 				w->style->black_gc,
@@ -902,7 +938,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	CongSelection *selection;
 
 	CongEditorWidget *editor_widget = element_editor->widget;
-	CongSpanTextEditor *span_text = CONG_SPAN_TEXT_EDITOR(element_editor);
+	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	/* FIXME: unimplemented */
 	g_message("span_text_editor_on_button_press");
@@ -918,16 +954,30 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 		gtk_widget_grab_default(widget);
 #endif
 
+		struct CongHitTest hit_test;
 
-#if 0
-		cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
-		cong_selection_start_from_curs(selection, cursor);
-		cong_selection_end_from_curs(selection, cursor);
-		cong_document_on_selection_change(doc);
-		cong_document_on_cursor_change(doc);
+		hit_test.window_coord.x = event->x;
+		hit_test.window_coord.y = event->y;
+		hit_test.got_hit = FALSE;
 
-		return;
-#endif
+		visit_lines(element_editor, CONG_LINE_VISITOR_HIT_TEST, &hit_test);
+
+		if (hit_test.got_hit) {
+			CongTextSpan *text_span = get_text_span_at_byte_offset(span_text_editor, hit_test.byte_offset);
+
+			if (text_span) {
+				cong_location_set(&cursor->location,
+						  text_span->text_node,
+						  text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
+
+				cong_selection_start_from_curs(selection, cursor);
+				cong_selection_end_from_curs(selection, cursor);
+				cong_document_on_selection_change(doc);
+				cong_document_on_cursor_change(doc);
+
+				return;
+			}
+		}
 	} else if (event->button == 3) {
 
 		editor_popup_build(doc);
@@ -935,6 +985,48 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 
 	}
 	
+}
+
+static void span_text_editor_on_motion_notify(CongElementEditor *element_editor, GdkEventMotion *event)
+{
+	struct CongHitTest hit_test;
+
+	CongDocument *doc;
+	CongCursor *cursor;
+	CongSelection *selection;
+
+	CongEditorWidget *editor_widget = element_editor->widget;
+	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
+
+	g_message("span_text_editor_on_motion_notify");
+
+	if (!(event->state & GDK_BUTTON1_MASK)) return;
+
+	doc = cong_editor_widget_get_document(editor_widget);
+	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+	
+
+	hit_test.window_coord.x = event->x;
+	hit_test.window_coord.y = event->y;
+	hit_test.got_hit = FALSE;
+
+	visit_lines(element_editor, CONG_LINE_VISITOR_HIT_TEST, &hit_test);
+
+	if (hit_test.got_hit) {
+		CongTextSpan *text_span = get_text_span_at_byte_offset(span_text_editor, hit_test.byte_offset);
+		
+		if (text_span) {
+			cong_location_set(&cursor->location,
+					  text_span->text_node,
+					  text_span->original_first_byte_offset + (hit_test.byte_offset - text_span->stripped_first_byte_offset));
+			
+			cong_selection_end_from_curs(selection, cursor);
+			cong_document_on_selection_change(doc);
+			cong_document_on_cursor_change(doc);			
+			return;
+		}
+	}
 }
 
 /* Public API: */
