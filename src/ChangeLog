@@ -1,3 +1,9 @@
+2004-07-05  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-util.c (make_element_description_list_callback): 
+
+	Fix bug; it helps to change the variant if you want a while loop to finish
+
 2004-07-05 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-file-selection.h, file.c: Partial fix for #145422. 

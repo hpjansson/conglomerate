@@ -1353,6 +1353,7 @@ make_element_description_list_callback (CongDocument *doc, CongNodePtr node, gpo
 				/* Got a match; bail out: */
 				return FALSE;
 			}
+			iter=iter->next;
 		}
 
 		/* Nothing matched: add to the list: */
