@@ -33,7 +33,6 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-command.h"
-#include "cong-error-dialog.h"
 #include "cong-util.h"
 #include "cong-glade.h"
 
@@ -386,7 +385,7 @@ on_dtd_button_clicked (GtkButton *button,
 			
 		} else {
 			/* Then button is "Add a DTD": */
-			CONG_DO_UNIMPLEMENTED_DIALOG (NULL, "Adding a DTD");
+			cong_util_run_add_dtd_dialog (doc);
 		}
 	}
 }

@@ -253,12 +253,12 @@ cong_alert_content_new(const gchar* stock_icon,
 	
 	image1 = gtk_image_new_from_stock (stock_icon, GTK_ICON_SIZE_DIALOG);
 	gtk_widget_show (image1);
-	gtk_box_pack_start (GTK_BOX (hbox1), image1, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox1), image1, FALSE, TRUE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image1), 0.5, 0);
 	
 	label1 = gtk_label_new (msg);
 	gtk_widget_show (label1);
-	gtk_box_pack_start (GTK_BOX (hbox1), label1, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox1), label1, TRUE, TRUE, 0);
 	gtk_label_set_use_markup (GTK_LABEL(label1), TRUE);
 	gtk_label_set_justify (GTK_LABEL (label1), GTK_JUSTIFY_LEFT);
 	gtk_label_set_line_wrap (GTK_LABEL (label1), TRUE);

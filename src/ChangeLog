@@ -1,3 +1,14 @@
+2004-06-21  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-util.c (cong_util_run_add_dtd_dialog): 
+
+	New placeholder function
+
+2004-06-21 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+    
+	* plugin-validate.c : Show details of validation.
+	* cong-dialog.c : Fix layout of alert widget contents.
+
 2004-06-21  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-plugin.c (cong_ui_new_document_from_manufactured_xml): 

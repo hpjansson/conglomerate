@@ -24,6 +24,7 @@
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
  */
 
+
 #include "global.h"
 #include "cong-plugin.h"
 #include "cong-document.h"
@@ -34,43 +35,50 @@
 #include <libxml/valid.h>
 
 #include "cong-fake-plugin-hooks.h"
-
 #include "cong-util.h"
 
-struct validation_attempt
-{
-};
+#define WARNING_TAG "warning"
+#define ERROR_TAG   "error"
 
-static void on_validation_error(void *ctx,
+typedef struct _ValidationDetails {
+  GtkTextBuffer *buffer;
+} ValidationDetails;
+
+static void on_validation_error(void * ctxt,
 				const char *msg,
 				...)
 {
-	gchar *str;
+  va_list args;
+  gchar *buf;
+  GtkTextIter end;
+   ValidationDetails *details = (ValidationDetails*) ctxt;
+  va_start (args, msg);
+  buf = g_strdup_vprintf (msg, args);
+  va_end (args);
 
-	CONG_GET_VAR_STR(msg,str)
+  gtk_text_buffer_get_end_iter (details->buffer, &end);
+  gtk_text_buffer_insert_with_tags_by_name (details->buffer, &end, buf, -1, ERROR_TAG, NULL);
 
-	g_message("on_validation_error: \"%s\"", str);
-
-	g_free(str);
-
+  g_free (buf);
 }
 
 static void on_validation_warning(void *ctx,
 				  const char *msg,
 				  ...)
 {
-	gchar *str;
+  ValidationDetails *details = (ValidationDetails *) ctx;
+  va_list args;
+  gchar *buf;
+  GtkTextIter end;
+    
+  va_start (args, msg);
+  buf = g_strdup_vprintf (msg, args);
+  va_end (args);
 
-	CONG_GET_VAR_STR(msg,str)
-
-	g_message("on_validation_warning: \"%s\"", str);
-
-	g_free(str);
-}
-
-static void on_details(gpointer data)
-{
-	CONG_DO_UNIMPLEMENTED_DIALOG_WITH_BUGZILLA_ID(NULL, "Can't supply details about validation failure", 113758);
+  gtk_text_buffer_get_end_iter (details->buffer, &end);
+  gtk_text_buffer_insert (details->buffer, &end, buf, -1);
+  
+  g_free (buf);
 }
 
 static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer user_data)
@@ -79,30 +87,90 @@ static gboolean doc_filter(CongServiceDocTool *tool, CongDocument *doc, gpointer
 	return TRUE;
 }
 
+static GtkTextBuffer * create_buffer (void) {
+  GtkTextBuffer *buffer;
+  
+  buffer = gtk_text_buffer_new (NULL);
+  
+  gtk_text_buffer_create_tag (buffer, WARNING_TAG, NULL);
+  gtk_text_buffer_create_tag (buffer, ERROR_TAG, 
+			      "weight", PANGO_WEIGHT_BOLD, 
+			      "weight-set", TRUE,
+			      NULL);
+  
+  return buffer;
+}
+
+static GtkWidget *create_dialog (const gchar *doc_name, GtkWindow* parent, GtkTextBuffer *buffer) {
+
+  GtkWidget *dialog;
+  GtkWidget *text_view;
+  GtkWidget *alert;
+  GtkWidget *expander;
+  GtkWidget *sw;
+  gchar *title;
+  
+  dialog = gtk_dialog_new_with_buttons ("Validation failed", parent, 
+					GTK_DIALOG_DESTROY_WITH_PARENT,
+					GTK_STOCK_CLOSE, GTK_RESPONSE_OK, 
+					NULL);
+  text_view = gtk_text_view_new_with_buffer (buffer);    
+
+  title = g_strdup_printf ("Document \"%s\" is not valid", doc_name);
+  alert = cong_alert_content_new (GTK_STOCK_DIALOG_INFO, title, NULL, NULL);
+  g_free (title);
+
+  expander = gtk_expander_new_with_mnemonic ("_Details");
+  sw = gtk_scrolled_window_new (NULL, NULL);
+
+  gtk_container_add (GTK_CONTAINER (sw), text_view);
+  gtk_container_add (GTK_CONTAINER(expander), sw);  
+  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), alert, FALSE, FALSE, 6);
+  gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), expander, TRUE, TRUE, 6);
+
+  gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+  gtk_widget_set_size_request (sw, -1, 200);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), 
+				  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW(text_view), FALSE);				  
+
+  gtk_widget_show_all (GTK_DIALOG(dialog)->vbox);
+  
+  return dialog;
+}
+
+static void 
+on_add_dtd(gpointer data)
+{
+	CongDocument *doc = CONG_DOCUMENT (data);
+
+	cong_util_run_add_dtd_dialog (doc);
+}
+
 static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
 {
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
 	xmlDocPtr xml_doc = cong_document_get_xml(doc);
-#if 0
-	GtkWidget *window;
-	GtkWidget *log_view;
-#endif
 
 	int result;
-
-	xmlValidCtxt ctxt; /* Is there a better way of manipulating this? */
-
-	g_message("action_callback");
-
+	xmlValidCtxtPtr ctxt; 
+	ValidationDetails *details;
+	
 	if ((xml_doc->intSubset == NULL) && (xml_doc->extSubset == NULL)) {
 		gchar *what_failed = g_strdup_printf(_("The document \"%s\" cannot be checked for validity."), cong_document_get_filename(doc));
 		gchar* why_failed = g_strdup_printf("The document does not identify what set of rules it is supposed to comply with (known as a \"document type\").");
 		GtkDialog * dialog;
 			
-		dialog = cong_error_dialog_new(cong_primary_window_get_toplevel(primary_window),
-					       what_failed,
-					       why_failed,
-					       _("In a future version of Conglomerate we may have a feature that lets you attach a document type to a document."));
+		dialog = cong_error_dialog_new_with_convenience (cong_primary_window_get_toplevel(primary_window),
+								 what_failed,
+								 why_failed,
+								 _("You can fix this by adding a Document Type Declaration (DTD) to the document"),
+								 _("_Add a DTD"),
+								 _("_Cancel"),
+								 TRUE,
+								 on_add_dtd,
+								 doc);
 		
 		g_free(what_failed);
 		g_free(why_failed);
@@ -112,37 +180,33 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 		return;
 	}
 
-	ctxt.error = on_validation_error;
-	ctxt.warning = on_validation_warning;
+	details = g_new (ValidationDetails, 1);
+	details->buffer = create_buffer ();	
 
-	result = xmlValidateDocument(&ctxt,
+	ctxt = xmlNewValidCtxt ();
+	
+	ctxt->error = on_validation_error;
+	ctxt->warning = on_validation_warning;
+	ctxt->userData = details;
+
+	result = xmlValidateDocument(ctxt,
 				     xml_doc);
+	xmlFreeValidCtxt (ctxt);
 
 	switch (result) {
 	default: g_assert_not_reached();
 	case 0: /* Failure: */
 		{
-			gchar *what_failed = g_strdup_printf(_("The document \"%s\" is not valid."), cong_document_get_filename(doc));
-			gchar* why_failed = g_strdup_printf("FIXME");
-			GtkDialog * dialog;
-
-			dialog = cong_error_dialog_new_with_convenience(cong_primary_window_get_toplevel(primary_window),
-									what_failed,
-									why_failed,
-									_("Click on the \"Details\" button for more information."),
-									_("_Details"),
-									GTK_STOCK_CANCEL,
-									FALSE,
-									on_details,
-									NULL);
-
-			g_free(what_failed);
-			g_free(why_failed);
-
-			cong_error_dialog_run(dialog);
-			gtk_widget_destroy(GTK_WIDGET(dialog));
+		GtkWidget *dialog;
+		
+		dialog = create_dialog (cong_document_get_filename(doc),
+					cong_primary_window_get_toplevel(primary_window),
+				        details->buffer);
+					
+		gtk_dialog_run (GTK_DIALOG(dialog));
+		gtk_widget_destroy (dialog);
 		}
-		return;
+		break;
 
 	case 1: /* Success: */
 		{
@@ -155,17 +219,22 @@ static void action_callback(CongServiceDocTool *tool, CongPrimaryWindow *primary
 			gtk_dialog_run(dialog);
 			gtk_widget_destroy(GTK_WIDGET(dialog));
 		}
-		return;
+		break;
 	}
-	
+    
+	g_object_unref (details->buffer);
+	g_free (details);
+
+	return;
 }
 
-/* would be exposed as "plugin_register"? */
 /**
- * plugin_validate_plugin_register:
- * @plugin:
+ * plugin_validate_plugin_register: Register
+ * @plugin: Plugin
  *
- * TODO: Write me
+ * Registers validate plugin - plugin that provides menu item
+ * that validates document agains DTD and show validation 
+ * warining and errors.
  */
 gboolean 
 plugin_validate_plugin_register(CongPlugin *plugin)
@@ -186,12 +255,11 @@ plugin_validate_plugin_register(CongPlugin *plugin)
 	return TRUE;
 }
 
-/* exposed as "plugin_configure"? legitimate for it not to be present */
 /**
- * plugin_validate_plugin_configure:
- * @plugin:
+ * plugin_validate_plugin_configure: Configure validate plugin
+ * @plugin: Plugin
  *
- * TODO: Write me
+ * This function should contain all code to configure validate plugin
  */
 gboolean 
 plugin_validate_plugin_configure(CongPlugin *plugin)

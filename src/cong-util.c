@@ -33,6 +33,8 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
 
+#include "cong-error-dialog.h"
+
 #include "cong-ui-hooks.h"
 
 #include <libxml/globals.h>
@@ -1327,3 +1329,12 @@ cong_util_show_in_window (GtkWidget *content,
 
 	gtk_widget_show(GTK_WIDGET(window));
 }
+
+void
+cong_util_run_add_dtd_dialog (CongDocument *doc)
+{
+	g_return_if_fail (doc);
+
+	CONG_DO_UNIMPLEMENTED_DIALOG (NULL, "Adding a DTD");
+}
+

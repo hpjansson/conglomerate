@@ -151,6 +151,15 @@ cong_util_add_external_dtd (xmlDocPtr xml_doc,
 			    const xmlChar *ExternalID, 
 			    const xmlChar *SystemID);
 
+/**
+ * cong_util_run_add_dtd_dialog:
+ *
+ * Open a dialog for choosing a DTD to associate with the document
+ * 
+ */
+void
+cong_util_run_add_dtd_dialog (CongDocument *doc);
+
 /* Dodgy hack to do lines that blend to white: */
 void 
 cong_util_draw_blended_line (GtkWidget *w,
