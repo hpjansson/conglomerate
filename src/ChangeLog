@@ -1,3 +1,9 @@
+2003-08-12  Jeff Martin <jeff@custommonkey.org>
+
+	* cong-menus.c
+
+	Fixed a C99-ism
+
 2003-08-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* popup.c

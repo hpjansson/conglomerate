@@ -59,7 +59,7 @@
 
 extern char *ilogo_xpm[];
 
-#define ENABLE_DEBUG_MENU 1
+#define ENABLE_DEBUG_MENU 0
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
 GtkWidget* make_uneditable_text(const gchar* text)
@@ -1238,9 +1238,10 @@ void menu_callback_debug_insert_xml_fragment(gpointer callback_data,
 {
 	CongPrimaryWindow *primary_window = callback_data;
 	CongDocument *doc = cong_primary_window_get_document(primary_window);
+	gchar *source_fragment;
 	g_assert(doc);
 
-	gchar *source_fragment = get_test_fragment(primary_window);
+	source_fragment = get_test_fragment(primary_window);
 	g_assert(source_fragment);
 
 	cong_document_paste_text (doc, 
