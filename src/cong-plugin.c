@@ -619,6 +619,34 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 	return cong_doc;
 }
 
+
+static char**
+make_libxslt_params (GList *list_of_parameters)
+{
+	int num_params = g_list_length (list_of_parameters);
+	char **result = g_malloc0 (sizeof(char*) * ((num_params*2)+1));
+	int i;
+	GList *iter;
+
+	for (i=0, iter=list_of_parameters; iter; iter=iter->next, i++) {
+		CongStylesheetParameter *param = (CongStylesheetParameter*)iter->data;
+
+		/* shallow copy */
+		result[(2*i)] = param->name;
+		result[(2*i)+1] = param->value;
+	}
+	result[(2*i)] = NULL;
+
+	return result;
+}
+
+static void
+free_libxslt_params (char **libxslt_params)
+{
+	/* it was only a shallow copy */
+	g_free (libxslt_params);
+}
+
 /**
  * cong_ui_transform_doc:
  * @doc:
@@ -638,6 +666,7 @@ cong_ui_transform_doc(CongDocument *doc,
 	xsltStylesheetPtr xsl;
 	xmlDocPtr input_clone;
 	xmlDocPtr result;
+	char **libxslt_params;
 
 	g_return_val_if_fail (doc, NULL);
 	g_return_val_if_fail (stylesheet_filename, NULL);
@@ -663,12 +692,14 @@ cong_ui_transform_doc(CongDocument *doc,
 	input_clone = xmlCopyDoc(cong_document_get_xml(doc), TRUE);
 	g_assert(input_clone);
 
-
 	cong_stylesheet_parameter_list_debug (list_of_parameters);
 
-	/* #error FIXME: should build the parameter stuff here */
-	result = xsltApplyStylesheet(xsl, input_clone, NULL);
+	libxslt_params = make_libxslt_params (list_of_parameters);
+
+	result = xsltApplyStylesheet(xsl, input_clone, (const char**)libxslt_params);
 	g_assert(result);
+
+	free_libxslt_params (libxslt_params);
 
 	xmlFreeDoc(input_clone);
 

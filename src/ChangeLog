@@ -1,5 +1,9 @@
 2004-07-30  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-plugin.c (cong_ui_transform_doc): 
+
+	Convert our list of stylesheet parameters into the form libxslt in expecting.  Not tested yet.
+
 	* file.c: 
 
 	Added an "All Files" filter to help with debugging
