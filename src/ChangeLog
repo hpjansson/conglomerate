@@ -1,5 +1,11 @@
-2003-09-03  David Malcolm <david@davemalcolm.demon.co.uk>
+2003-09-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-wrapper-check-button.c, cong-attribute-wrapper-check-button.h, cong-attribute-wrapper-radio-button.c, cong-attribute-wrapper-radio-button.h, cong-attribute-wrapper.c, cong-attribute-wrapper.h, Makefile.am
+
+	New files
+
+2003-09-03  David Malcolm <david@davemalcolm.demon.co.uk>
+	
 	* plugin-doc-from-xds.c
 
 	Now sets the xmlDocPtr on the tree clone
