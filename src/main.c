@@ -881,8 +881,12 @@ int main( int   argc,
 	fonts_load();
 	popup_init(NULL); /* FIXME */
 
-#if USE_PANGO
 	the_globals.pango_context = pango_context_new();
+
+	pango_context_set_font_map( the_globals.pango_context,
+				    pango_ft2_font_map_for_display() );
+
+#if 0
 	the_globals.pango_font_description = pango_font_description_new();
 
 	pango_font_description_set_family(the_globals.pango_font_description,
@@ -898,8 +902,7 @@ int main( int   argc,
 							 the_globals.pango_font_description);
 
 	g_assert(the_globals.pango_font);
-
-#endif /* #if USE_PANGO */
+#endif
 	
 	cong_primary_window_new(NULL);
 

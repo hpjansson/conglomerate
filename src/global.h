@@ -531,6 +531,8 @@ enum CongFontRole
 
 struct CongFont
 {
+	PangoFontDescription *font_desc;
+	PangoFont *pango_font;
 	GdkFont *gdk_font;
 	int asc;
 	int desc;
@@ -1148,11 +1150,7 @@ struct CongGlobals
 
 	GtkWidget *popup;
 
-#if USE_PANGO
 	PangoContext *pango_context;
-	PangoFontDescription *pango_font_description;
-	PangoFont*  pango_font;
-#endif
 };
 
 extern struct CongGlobals the_globals;

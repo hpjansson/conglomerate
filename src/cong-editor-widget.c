@@ -364,18 +364,18 @@ void recursively_populate_ui(CongEditorView *editor_view,
 
 void populate_widget(CongEditorWidget *widget)
 {
-#if 0
-	GdkColor gcol;
-	GtkWidget *w;
-	int i;
-	CongNodePtr x;
-
+	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(widget);
+	CongEditorWidgetDetails *details = GET_DETAILS(editor_widget);
 	CongDocument *doc;
 	CongDispspec *displayspec;
+	CongSectionHeadEditor *section_head;
+	CongNodePtr x;
 
 	g_return_if_fail(widget);
+
+	/* FIXME: ultimately we might want a special-purpose root element editor class */
 	
-	doc = editor_view->view.doc;
+	doc = cong_editor_widget_get_document(widget);
 	displayspec = cong_document_get_dispspec(doc);
 		
 	x = cong_document_get_root(doc);
@@ -390,38 +390,12 @@ void populate_widget(CongEditorWidget *widget)
 		
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{
-			/* New element */
-			CongSectionHead *section_head;
-			GtkWidget* head;
-			section_head = cong_section_head_new(doc, x);
-			head = section_head->vbox;
-#error
-			gtk_box_pack_start(GTK_BOX(editor_view->inner), head, TRUE, TRUE, 0);
-			
-			cong_editor_recursively_populate_ui(editor_view, x, head, FALSE);
-
-			w = xv_section_tail(displayspec, x);
-			xv_style_r(w, style_white);
-			gtk_box_pack_start(GTK_BOX(head), w, FALSE, TRUE, 0);
+			section_head = cong_section_head_editor_new(widget, x);
+			details->root_editor = CONG_ELEMENT_EDITOR(section_head);
 		}
+
+		/* FIXME:  this is a dodgy hack; what if more than one such node? */
 	}
-#else
-	/* FIXME: unimplemented */
-	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(widget);
-	CongEditorWidgetDetails *details = GET_DETAILS(editor_widget);
-	CongDocument *doc;
-	CongDispspec *displayspec;
-	CongSectionHeadEditor *section_head;
-
-	g_return_if_fail(widget);
-	
-	doc = details->view->view.doc;
-	displayspec = cong_document_get_dispspec(doc);
-
-	section_head = cong_section_head_editor_new(widget, cong_document_get_root(doc));
-
-	details->root_editor = CONG_ELEMENT_EDITOR(section_head);
-#endif
 }
 
 
