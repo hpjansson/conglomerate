@@ -1,3 +1,9 @@
+2004-08-01  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cnxml.xds: 
+
+	Fixed the DTD location, thanks to Michèle Garoche
+
 2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* xds.dtd, xhtml1-strict.xds.in:

@@ -7,7 +7,7 @@
 	</metadata>
 
 	<document-models>
-		<external-document-model type="dtd" system-id="http://rhaptos.ece.rice.edu/developers/rainking/cnxml/cnxml_plain_no_attr.dtd"/>
+		<external-document-model type="dtd" system-id="http://cnx.rice.edu/cnxml/0.5/DTD/cnxml_plain.dtd"/>
 	</document-models>
 
 	<element-list>
