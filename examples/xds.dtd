@@ -67,7 +67,7 @@
    whitespace          (normalize | preserve)                                            'normalize'
 
    color               CDATA                                                             #IMPLIED
-   filename-attribute  NMTOKEN                                                           #IMPLIED
+   filename-xpath      CDATA                                                             #IMPLIED
 ">
 
 <!-- The element types themselves: -->

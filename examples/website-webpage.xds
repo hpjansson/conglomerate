@@ -293,7 +293,7 @@
 		<element tag="imageobject" type="structural" color="a0b0c0">
 		</element>
 
-		<element tag="imagedata" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
+		<element tag="imagedata" type="embed-external-file" filename-xpath="@fileref" color="a0b0c0">
 			<!-- fileref is assumed for now -->
 		</element>
 
@@ -307,7 +307,7 @@
 		<element tag="caption" type="structural" color="a0b0c0">
 		</element>
 
-		<element tag="graphic" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
+		<element tag="graphic" type="embed-external-file" filename-xpath="@fileref" color="a0b0c0">
 			<!-- fileref is assumed for now -->
 		</element>
 

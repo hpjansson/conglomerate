@@ -493,7 +493,7 @@
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element tag="imagedata" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
+		<element tag="imagedata" type="embed-external-file" filename-xpath="@fileref" color="a0b0c0">
 			<_name>Image Data</_name>
 			<!-- fileref is assumed for now -->
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
@@ -509,7 +509,7 @@
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element tag="graphic" type="embed-external-file" filename-attribute="fileref" color="a0b0c0">
+		<element tag="graphic" type="embed-external-file" filename-xpath="@fileref" color="a0b0c0">
 			<_name>Graphic</_name>	
 			<!-- fileref is assumed for now -->
 			<property-dialog plugin-id="docbook-generic-node-properties"/>

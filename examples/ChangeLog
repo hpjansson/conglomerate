@@ -1,5 +1,9 @@
 2003-11-12  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* docbook.xds.in, website-webpage.xds, xds.dtd
+
+	Replaced filename-attribute with filename-xpath
+
 	* xds.dtd
 
 	Made tag attribute REQUIRED
