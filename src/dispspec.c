@@ -13,47 +13,52 @@
 
 #include "global.h"
 
+
 /* Changing representation and file format: */
+struct CongDispspecElement
+{
+	char* tagname;
+	enum CongElementType type;
+	gboolean collapseto;
+
+	struct CongDispspecElement* next;	
+};
+
 struct _cong_dispspec
 {
+#if 0
+	/* New implementation will be an "intrusive list" of CongDispspecElement structs */ 
+	CongDispspecElement* first;
+#else
   int dummy[128];
   TTREE *tt;
+#endif
 };
 
 void cong_dispspec_init(TTREE *ds);
 
 cong_dispspec* cong_dispspec_new_from_file(const char *name)
 {
-  g_assert(0);
+	cong_dispspec* ds;
 
-  return NULL;
-}
+	TTREE* tt = ttree_load((char*)name);
+	if (!tt) {
+		g_warning("Problem loading dispspec file \"%s\"\n", name);
+		return NULL;  /* Invalid displayspec. */
+	}
 
-cong_dispspec* cong_dispspec_new_from_ttree(TTREE *t)
-{
-  cong_dispspec* ds;
+	ds = g_new(cong_dispspec,1);
+	ds->tt = tt;
 
-  g_return_val_if_fail(t!=NULL,NULL);
+	cong_dispspec_init(tt);
 
-  ds = g_new(cong_dispspec,1);
-  ds->tt = t;
-
-
-  cong_dispspec_init(t);
-
-  return ds;
+	return ds;
 }
 
 void cong_dispspec_delete(cong_dispspec *dispspec)
 {
   g_assert(0);
 }
-
-TTREE* cong_dispspec_ttree(cong_dispspec *dispspec)
-{
-  return dispspec->tt;
-}
-
 
 TTREE *get_upper_section(TTREE *x)
 {
@@ -82,159 +87,49 @@ TTREE *get_upper_section(TTREE *x)
 
 gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name)
 {
-  TTREE *n0;
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
-  DS_DEBUG_MSG2("cong_dispspec_element_structural(ds,\"%s\")\n",name);
-  
-  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
-  if (!n0) {
-    DS_DEBUG_MSG1("not found in dispspec, so not structural\n");
-    return FALSE;
-  }
-  
-  n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) {
-    DS_DEBUG_MSG1("\"type\" not found, so not structural\n");
+	if (NULL==element) {
+		return FALSE;
+	}
 
-    return FALSE;
-  }
-  
-  if (!n0->child) {
-    DS_DEBUG_MSG1("No child found, so not structural\n");
-
-    return FALSE;
-  }
-  
-  if (!strcasecmp("structural", n0->child->data)) {
-    DS_DEBUG_MSG1("Child has \"structural\" text, so it is structural\n");
-    return TRUE;
-  }
-
-  DS_DEBUG_MSG1("Falling through, so not structural\n");
-  
-  return FALSE;
+	return (CONG_ELEMENT_TYPE_STRUCTURAL == cong_dispspec_element_type(element));
 }
 
 
 gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name)
 {
-  TTREE *n0;
-  
-  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
-  if (!n0) return FALSE;
-  
-  n0 = ttree_node_find1(n0, "collapseto", 10, 0);
-  if (n0) return TRUE;
-  
-  return FALSE;
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+	
+	return cong_dispspec_element_collapseto(element);
 }
 
 
 gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name)
 {
-  TTREE *n0;
-  
-  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
-  if (!n0) return FALSE;
-  
-  n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) return FALSE;
-  
-  if (!n0->child) return FALSE;
-  
-  if (!strcasecmp("span", n0->child->data)) return TRUE;
-  
-  return FALSE;
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
+
+	if (NULL==element) {
+		return FALSE;
+	}
+
+	return (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element));
 }
 
 
 gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name)
 {
-  TTREE *n0;
-  
-  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
-  if (!n0) return FALSE;
-  
-  n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) return FALSE;
-  
-  if (!n0->child) return FALSE;
-  
-  if (!strcasecmp("insert", n0->child->data)) return TRUE;
-  
-  return FALSE;
-}
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, name);
 
-
-TTREE *cong_dispspec_get_first_structural(TTREE *ds)
-{
-	TTREE *n0, *n1;
-
-	for (n0 = ds->child; n0; n0 = n0->next)
-	{
-    n1 = ttree_node_find1(n0, "type", 4, 0);
-    if (!n1) continue;
-  
-    if (!n1->child) continue;
-  
-    if (!strcasecmp("structural", n1->child->data)) break;
+	if (NULL==element) {
+		return FALSE;
 	}
-	
-	return(n0);
-}
 
-
-TTREE *cong_dispspec_get_next_structural(TTREE *prev)
-{
-	TTREE *n0, *n1;
-
-	for (n0 = prev->next; n0; n0 = n0->next)
-	{
-    n1 = ttree_node_find1(n0, "type", 4, 0);
-    if (!n1) continue;
-  
-    if (!n1->child) continue;
-  
-    if (!strcasecmp("structural", n1->child->data)) break;
-	}
-	
-	return(n0);
-}
-
-
-TTREE *cong_dispspec_get_first_span(TTREE *ds)
-{
-	TTREE *n0, *n1;
-
-	for (n0 = ds->child; n0; n0 = n0->next)
-	{
-    n1 = ttree_node_find1(n0, "type", 4, 0);
-    if (!n1) continue;
-  
-    if (!n1->child) continue;
-  
-    if (!strcasecmp("span", n1->child->data)) break;
-	}
-	
-	return(n0);
-}
-
-
-TTREE *cong_dispspec_get_next_span(TTREE *prev)
-{
-	TTREE *n0, *n1;
-
-	for (n0 = prev->next; n0; n0 = n0->next)
-	{
-    n1 = ttree_node_find1(n0, "type", 4, 0);
-    if (!n1) continue;
-  
-    if (!n1->child) continue;
-  
-    if (!strcasecmp("span", n1->child->data)) break;
-	}
-	
-	return(n0);
+	return (CONG_ELEMENT_TYPE_INSERT == cong_dispspec_element_type(element));
 }
 
 
@@ -280,81 +175,47 @@ unsigned int cong_dispspec_colour_get(TTREE *ds, TTREE *x, int odd)
 
 char *cong_dispspec_name_get(TTREE *x)
 {
-  TTREE *n0, *n1;
-  
-  n0 = ttree_node_find1(the_globals.ds->tt, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
-  if (n0)
-    {
-      n1 = ttree_node_find1(n0, "name", 4, 0);
-      
-      if (n1 && n1->child)
-	{
-	  return(n1->child->data);
+	CongDispspecElement* element = cong_dispspec_lookup_element(the_globals.ds, xml_frag_name_nice(x));
+	if (element) {
+		return (char*)cong_dispspec_element_username(element);
 	}
-    }
   
-  return(xml_frag_name_nice(x));
+	return(xml_frag_name_nice(x));
 }
 
 
 char *cong_dispspec_name_name_get(TTREE *t)
 {
-  TTREE *n0, *n1;
-  
-  n0 = ttree_node_find1(the_globals.ds->tt, t->data, t->size, 0);
-  if (n0)
-    {
-      n1 = ttree_node_find1(n0, "name", 4, 0);
-      
-      if (n1 && n1->child)
-	{
-	  return(n1->child->data);
+	CongDispspecElement* element = cong_dispspec_lookup_element(the_globals.ds, t->data);
+	if (element) {
+		return (char*)cong_dispspec_element_username(element);
 	}
-    }
   
-  return(t->data);
+	return(t->data);
 }
 
 
 GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog)
 {
-  UNUSED_VAR(GdkGC *gc)
-  TTREE *n0, *n1;
-  
-  n0 = ttree_node_find1(ds->tt, t->data, t->size, 0);
-  if (n0)
-    {
-      n1 = ttree_node_find1(n0, "color", 5, 0);
-      if (!n1) n1 = ttree_node_find1(n0, "colour", 6, 0);
-      
-      if (n1 && n1->child && n1->child->child)
-	{
-	  return((GdkGC *) *((GdkGC **) n1->child->child->data));
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, t->data);
+
+	if (element) {
+		return cong_dispspec_element_gc(element);
+	} else {
+		return NULL;
 	}
-    }
-  
-  return(0);
 }
 
 
 GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog)
 {
-  UNUSED_VAR(GdkGC *gc)
-  TTREE *n0, *n1;
-  
-  n0 = ttree_node_find1(ds->tt, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
-  if (n0)
-    {
-      n1 = ttree_node_find1(n0, "color", 5, 0);
-      if (!n1) n1 = ttree_node_find1(n0, "colour", 6, 0);
-      
-      if (n1 && n1->child && n1->child->child)
-	{
-	  return((GdkGC *) *((GdkGC **) n1->child->child->data));
+	CongDispspecElement* element = cong_dispspec_lookup_element(ds, xml_frag_name_nice(x));
+
+	if (element) {
+		return cong_dispspec_element_gc(element);
+	} else {
+		return NULL;
 	}
-    }
-  
-  return(0);
 }
 
 
@@ -432,7 +293,7 @@ GtkWidget *pickstruct;
 char *pick_structural_tag()
 {
   GtkWidget *w0, *w1;
-	TTREE *n0, *n1;
+  CongDispspecElement *n0;
   
 	tag_picked_name = 0;
 	
@@ -451,20 +312,14 @@ char *pick_structural_tag()
   gtk_widget_show(w0);
 
   /* Window -> vbox -> buttons */
-
-	for (n0 = cong_dispspec_get_first_structural(cong_dispspec_ttree(the_globals.ds)); n0; n0 = cong_dispspec_get_next_structural(n0))
-	{
-    n1 = ttree_node_find1(n0, "name", 4, 0);
-    if (!n1) continue;
-		
-		if (!n1->child) continue;
-		n1 = n1->child;
-
-    w1 = gtk_button_new_with_label(n1->data);
-    gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-    gtk_widget_show(w1);
-    gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) tag_new_picked, (gpointer) n0->data);
-	}
+  for (n0 = cong_dispspec_get_first_element(the_globals.ds); n0; n0 = cong_dispspec_element_next(n0)) {
+	  if (cong_dispspec_element_is_structural(n0)) {
+		  w1 = gtk_button_new_with_label(cong_dispspec_element_username(n0));
+		  gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
+		  gtk_widget_show(w1);
+		  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) tag_new_picked, (gpointer) cong_dispspec_element_tagname(n0));
+	  }
+  }
 
   gtk_widget_show(pickstruct);
 	gtk_main();
@@ -495,3 +350,149 @@ int strcasestr(char *haystack, char *needle)
 	  return(r);                                                                    
 }
 #endif
+
+/*
+  For now we fake things, and pretend a CongDispspecElement* is a TTREE*
+ */
+CongDispspecElement*
+cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname)
+{
+	TTREE* n0 = ttree_node_find1(ds->tt, (char*)tagname, strlen(tagname), 0);
+
+	return (CongDispspecElement*)n0;
+}
+
+CongDispspecElement*
+cong_dispspec_get_first_element(cong_dispspec *ds)
+{
+	return (CongDispspecElement*)(ds->tt->child);
+}
+
+const char*
+cong_dispspec_element_tagname(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return ((TTREE*)element)->data;
+}
+
+const char*
+cong_dispspec_element_username(CongDispspecElement* element)
+{
+	TTREE* n1;
+
+	g_return_val_if_fail(element, NULL);
+
+	n1 = ttree_node_find1((TTREE*)element, "name", 4, 0);
+	if (!n1) return "could not find name";
+	
+	if (!n1->child) return "no name specified";
+	n1 = n1->child;
+
+	return n1->data;
+}
+
+const char*
+cong_dispspec_element_name_name_get(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return cong_dispspec_name_name_get((TTREE*)element);
+}
+
+CongDispspecElement*
+cong_dispspec_element_next(CongDispspecElement* element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return (CongDispspecElement*)(((TTREE*)element)->next);
+}
+
+enum CongElementType
+cong_dispspec_element_type(CongDispspecElement *element)
+{
+	TTREE *n0;
+	
+	g_return_val_if_fail(element, CONG_ELEMENT_TYPE_UNKNOWN);
+
+	n0 = ttree_node_find1((TTREE*)element, "type", 4, 0);
+	if (!n0) {
+		DS_DEBUG_MSG1("\"type\" not found, so type is unknown\n");
+		
+		return CONG_ELEMENT_TYPE_UNKNOWN;
+	}
+	
+	if (!n0->child) {
+		DS_DEBUG_MSG1("No child found, so type is unknown\n");
+	  
+		return CONG_ELEMENT_TYPE_UNKNOWN;
+	}
+
+	if (!strcasecmp("structural", n0->child->data)) {
+		DS_DEBUG_MSG1("Child has \"structural\" text, so it is structural\n");
+		return CONG_ELEMENT_TYPE_STRUCTURAL;
+	}
+
+	if (!strcasecmp("span", n0->child->data)) {
+		DS_DEBUG_MSG1("Child has \"span\" text, so it is a span\n");
+		return CONG_ELEMENT_TYPE_SPAN;
+	}  
+
+	if (!strcasecmp("insert", n0->child->data)) {
+		DS_DEBUG_MSG1("Child has \"insert\" text, so it is an insert\n");
+		return CONG_ELEMENT_TYPE_INSERT;
+	}
+
+	return CONG_ELEMENT_TYPE_UNKNOWN;
+}
+
+gboolean
+cong_dispspec_element_collapseto(CongDispspecElement *element)
+{
+	TTREE* n0 = ttree_node_find1((TTREE*)element, "collapseto", 10, 0);
+	if (n0) return TRUE;
+  
+	return FALSE;
+}
+
+
+gboolean
+cong_dispspec_element_is_structural(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, FALSE);
+
+	if (CONG_ELEMENT_TYPE_STRUCTURAL == cong_dispspec_element_type(element)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+gboolean
+cong_dispspec_element_is_span(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, FALSE);
+
+	if (CONG_ELEMENT_TYPE_SPAN == cong_dispspec_element_type(element)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+GdkGC*
+cong_dispspec_element_gc(CongDispspecElement *element)
+{
+	TTREE* n1;
+	
+	g_return_val_if_fail(element, NULL);
+
+	n1 = ttree_node_find1((TTREE*)element, "color", 5, 0);
+	if (!n1) n1 = ttree_node_find1((TTREE*)element, "colour", 6, 0);
+      
+	if (n1 && n1->child && n1->child->child) {
+		return((GdkGC *) *((GdkGC **) n1->child->child->data));
+	}
+
+	return NULL;
+}

@@ -9,13 +9,12 @@
 int open_document_do(const char *doc_name, const char *ds_name)
 {
 	char *p;
-	TTREE *ds_temp, *xml_in;
+	TTREE *xml_in;
 	FILE *xml_f;
 
-	ds_temp = ttree_load((char*)ds_name);
-	if (!ds_temp) {
-	  g_warning("Problem loading dispspec file \"%s\"\n", ds_name);
-	  return(TRUE);  /* Invalid displayspec. */
+	the_globals.ds = cong_dispspec_new_from_file(ds_name);
+	if (the_globals.ds==NULL) {
+	  return(TRUE);  /* Invalid displayspec. */	  
 	}
 
 	xml_f = fopen(doc_name, "rt");
@@ -37,9 +36,7 @@ int open_document_do(const char *doc_name, const char *ds_name)
 	  return(TRUE);  /* Invalid XML document. */
 	}
 
-	fclose(xml_f);
-	
-	the_globals.ds = cong_dispspec_new_from_ttree(ds_temp);
+	fclose(xml_f);	
 
 	xml_t_trim(xml_in);
 	the_globals.xv = xmlview_new(cong_document_new_from_ttree(xml_in), the_globals.ds);

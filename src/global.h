@@ -18,7 +18,28 @@ enum
    N_COLUMNS
 };
 
+#if 0
+#if 0
+typedef struct foo { TTREE* tt;} cong_node_ptr;
+#else
+typedef TTREE* cong_node_ptr;
+#endif
+#endif
+
+enum CongElementType
+{
+	CONG_ELEMENT_TYPE_STRUCTURAL,
+	CONG_ELEMENT_TYPE_SPAN,
+	CONG_ELEMENT_TYPE_INSERT,
+
+	/* Other types?  Table? Plugin widget/Bonobo control? */
+
+	CONG_ELEMENT_TYPE_UNKNOWN
+};
+
 typedef struct _cong_dispspec cong_dispspec;
+typedef struct CongDispspecElement CongDispspecElement;
+
 
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
@@ -99,11 +120,7 @@ struct xed
   GdkPixmap *p;  /* Backing pixmap */
 	GdkFont *f, *fm;
 
-#if 1
   cong_dispspec *displayspec;
-#else
-	TTREE *displayspec;
-#endif
 	
 	int f_asc, f_desc;
 	int fm_asc, fm_desc;
@@ -148,11 +165,7 @@ struct xed
 
 struct xview
 {
-#if 1
 	cong_document *doc;
-#else
-  TTREE *x;
-#endif
 	
   GtkWidget *w;
 #if 1
@@ -196,12 +209,7 @@ struct curs
 	int on;
 
 	/* Conceptual location */
-#if 1
 	cong_location location;
-#else
-	TTREE *t;
-	int c;
-#endif
 
 	int set;
 };
@@ -214,14 +222,8 @@ struct selection
 
 	int x0, y0, x1, y1;
 
-#if 1
 	cong_location loc0;
 	cong_location loc1;
-#else
-        TTREE *t0;
-	TTREE *t1;
-	int c0, c1;
-#endif
 };
 
 
@@ -295,11 +297,7 @@ gint xed_insert_table(GtkWidget *w, struct xed *xed);
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
-#if 1
 struct xview *xmlview_new(cong_document *doc, cong_dispspec *displayspec);
-#else
-struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec);
-#endif
 
 #if 0
 SOCK *server_login();
@@ -338,12 +336,8 @@ int open_document_do(const char *doc_name, const char *ds_name);
 int gui_window_new_document_make();
 void xmlview_destroy(int free_xml);
 
-#if 1
 cong_dispspec* cong_dispspec_new_from_file(const char *name);
-cong_dispspec* cong_dispspec_new_from_ttree(TTREE *t);
 void cong_dispspec_delete(cong_dispspec *dispspec);
-
-TTREE* cong_dispspec_ttree(cong_dispspec *dispspec);
 
 char *cong_dispspec_name_name_get(TTREE *t);
 GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog);
@@ -354,28 +348,42 @@ gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name);
 gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name);
 gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name);
 gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name);
-TTREE *cong_dispspec_get_first_structural(TTREE *ds);
-TTREE *cong_dispspec_get_next_structural(TTREE *prev);
-TTREE *cong_dispspec_get_first_span(TTREE *ds);
-TTREE *cong_dispspec_get_next_span(TTREE *prev);
 
-#else
-char *ds_name_name_get(TTREE *t);
-GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog);
-GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog);
-char *ds_name_get(TTREE *x);
+/* New API for getting at elements within a dispspec */
+CongDispspecElement*
+cong_dispspec_lookup_element(cong_dispspec *ds, const char* tagname);
 
-int ds_element_structural(TTREE *ds, char *name);
-int ds_element_collapse(TTREE *ds, char *name);
-int ds_element_span(TTREE *ds, char *name);
-int ds_element_insert(TTREE *ds, char *name);
-TTREE *ds_get_first_structural(TTREE *ds);
-TTREE *ds_get_next_structural(TTREE *prev);
-TTREE *ds_get_first_span(TTREE *ds);
-TTREE *ds_get_next_span(TTREE *prev);
-void ds_init(TTREE *ds);
-#endif
+CongDispspecElement*
+cong_dispspec_get_first_element(cong_dispspec *ds);
 
+/** Get the tagname in a parser-friendly form */
+const char*
+cong_dispspec_element_tagname(CongDispspecElement* element);
+
+/** Get the name in a user-friendly form */
+const char*
+cong_dispspec_element_username(CongDispspecElement* element);
+
+const char*
+cong_dispspec_element_name_name_get(CongDispspecElement* element);
+
+CongDispspecElement*
+cong_dispspec_element_next(CongDispspecElement* element);
+
+enum CongElementType
+cong_dispspec_element_type(CongDispspecElement *element);
+
+gboolean
+cong_dispspec_element_collapseto(CongDispspecElement *element);
+
+gboolean
+cong_dispspec_element_is_structural(CongDispspecElement *element);
+
+gboolean
+cong_dispspec_element_is_span(CongDispspecElement *element);
+
+GdkGC*
+cong_dispspec_element_gc(CongDispspecElement *element);
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void xed_redraw(struct xed *xed);

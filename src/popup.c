@@ -8,8 +8,11 @@
 #include <xml.h>
 #include "global.h"
 
-
+#if 1
+static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
+#else
 static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
+#endif
 {
 	TTREE *dummy, *n, *r;
 
@@ -19,7 +22,11 @@ static gint popup_item_selected(GtkWidget *widget, TTREE *tag)
 	
 	dummy = ttree_node_add(0, "d", 1);
 	n = ttree_node_add(dummy, "tag_span", 8);
+#if 1
+	ttree_node_add(n, cong_dispspec_element_tagname(element), strlen(cong_dispspec_element_tagname(element))+1);
+#else
 	ttree_node_add(n, tag->data, tag->size);
+#endif
 	n->parent = 0;
 	dummy->child = 0;
 	ttree_branch_remove(dummy);
@@ -134,7 +141,11 @@ void popup_tag_remove_outer()
 void popup_build(struct xed *xed)
 {
 	GtkWidget *item, *w0;
+#if 1
+	CongDispspecElement *n0;
+#else
 	TTREE *n0;
+#endif
 	UNUSED_VAR(TTREE *n1);
 
 	if (cong_gui_get_popup(&the_gui)) gtk_widget_destroy(cong_gui_get_popup(&the_gui));
@@ -196,7 +207,21 @@ void popup_build(struct xed *xed)
 	gtk_widget_show(item);
 
 	/* Build list of dynamic tag insertion tools */
-
+#if 1
+	for (n0 = cong_dispspec_get_first_element(the_globals.ds); n0; n0 = cong_dispspec_element_next(n0))
+	{
+		if (cong_dispspec_element_is_span(n0))
+		{
+			item = gtk_menu_item_new_with_label(cong_dispspec_element_name_name_get(n0));
+			gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
+			
+			gtk_signal_connect(GTK_OBJECT(item), "activate",
+					   GTK_SIGNAL_FUNC(popup_item_selected), n0);
+			
+			gtk_widget_show(item);
+		}
+	}
+#else
 	for (n0 = cong_dispspec_ttree(the_globals.ds)->child; n0; n0 = n0->next)
 	{
 		if (ttree_branch_walk_str(n0, "type span"))
@@ -210,6 +235,7 @@ void popup_build(struct xed *xed)
 			gtk_widget_show(item);
 		}
 	}
+#endif
 }
 
 
