@@ -17,6 +17,8 @@ enum
 	TREEVIEW_TITLE_COLUMN,
 	TREEVIEW_NODE_COLUMN,
 	TREEVIEW_DOC_COLUMN,
+	TREEVIEW_FOREGROUND_COLOR_COLUMN,
+	TREEVIEW_BACKGROUND_COLOR_COLUMN,
 	TREEVIEW_N_COLUMNS
 };
 
@@ -58,6 +60,7 @@ enum CongElementType
 
 typedef struct CongDispspec CongDispspec;
 typedef struct CongDispspecElement CongDispspecElement;
+typedef struct CongDispspecElementHeaderInfo CongDispspecElementHeaderInfo;
 typedef struct CongDispspecRegistry CongDispspecRegistry;
 
 /**
@@ -603,7 +606,16 @@ cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage
 #else
 GdkGC*
 cong_dispspec_element_gc(CongDispspecElement *element);
+
+const GdkColor*
+cong_dispspec_element_col(CongDispspecElement *element);
 #endif
+
+CongDispspecElementHeaderInfo*
+cong_dispspec_element_header_info(CongDispspecElement *element);
+
+gchar*
+cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x);
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_xml_editor_redraw(CongXMLEditor *xed);

@@ -15,8 +15,14 @@
 #include <libxml/debugXML.h>
 #include "global.h"
 
+struct CongDispspecElementHeaderInfo
+{
+	int dummy;
+#if 0
+	char *tagname;
+#endif
+};
 
-/* Changing representation and file format: */
 struct CongDispspecElement
 {
 	char* tagname;
@@ -32,6 +38,8 @@ struct CongDispspecElement
 	GdkColor col;
 	GdkGC* gc;
 #endif
+
+	CongDispspecElementHeaderInfo *header_info;
 
 	struct CongDispspecElement* next;	
 };
@@ -71,17 +79,22 @@ static void generate_col(GdkColor *dst, const GdkColor *src, float bodge_factor)
 }
 
 
-unsigned int hacked_cols[] =
+unsigned int hacked_cols[3][CONG_DISPSPEC_GC_USAGE_NUM] =
 {
-	0x6381ff,
-	0xd5d2ff,
-	0xe6e2ff,
-	0x414083
+	/* Blueish, section 1 in Joakim's mockup: */
+	{ 0x6381ff, 0xd5d2ff, 0xe6e2ff,	0x414083 },
+
+	/* Brownish; section 2 in the mockup: */
+	{ 0xd5b69c, 0xe6ded5, 0xeee6de, 0x836141 },
+
+	/* Dark brown; the underline in the mockup: */
+	{ 0x632829, 0x632829, 0x632829, 0x632829 }
 };
 
 static void get_col(GdkColor *dst, const GdkColor *src, enum CongDispspecGCUsage usage)
 {
-	col_to_gcol(dst, hacked_cols[usage]);
+	/* pick one of the test colour tables based on a dodgy hashing of the source colour: */
+	col_to_gcol(dst, hacked_cols[(src->red>>8)%2][usage]);
 }
 #endif /* #if NEW_LOOK */
 
@@ -353,6 +366,7 @@ void cong_dispspec_add_element(CongDispspec* ds, CongDispspecElement* element)
 
 void cong_dispspec_delete(CongDispspec *dispspec)
 {
+	/* FIXME:  unimplemented */
 	g_assert(0);
 }
 
@@ -883,7 +897,68 @@ cong_dispspec_element_gc(CongDispspecElement *element)
 
 	return element->gc;
 }
+
+const GdkColor*
+cong_dispspec_element_col(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return &element->col;
+}
 #endif
+
+CongDispspecElementHeaderInfo*
+cong_dispspec_element_header_info(CongDispspecElement *element)
+{
+	g_return_val_if_fail(element, NULL);
+
+	return element->header_info;
+}
+
+gchar*
+cong_dispspec_get_section_header_text(CongDispspec *ds, CongNodePtr x)
+{
+	CongDispspecElement *element;
+
+	g_return_val_if_fail(ds,NULL);
+	g_return_val_if_fail(x,NULL);
+
+	element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+	g_assert(element);
+
+	if (element->header_info) {
+
+		/* Search for a child node called "title" (for now): */
+
+		CongNodePtr i;
+
+		/* printf("searching for title for %s\n", cong_node_name(x)); */
+
+		for (i = cong_node_first_child(x); i; i = cong_node_next(i) ) {
+
+			/* printf("got node named \"%s\"\n", cong_node_name(i)); */
+
+			if (0==strcmp(cong_node_name(i),"title")) {
+				char *title_text = xml_fetch_clean_data(i);
+
+				char *result = g_strdup_printf("%s : %s", cong_dispspec_element_username(element), title_text);
+				
+				g_free(title_text);
+
+				return result;
+			}
+		}
+
+		/* FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property? */
+		return g_strdup_printf("%s : %s", cong_dispspec_element_username(element), "<untitled>");
+		
+	} else {
+
+		/* printf("no header info for %s\n", cong_node_name(x)); */
+		return g_strdup(cong_dispspec_element_username(element));
+	}
+}
+
 
 CongDispspecElement*
 cong_dispspec_element_new_from_ttree(TTREE* tt)
@@ -924,24 +999,6 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 		}
 	}
 
-	/* Extract username: */
-	{
-		xmlNodePtr child;
-
-		for (child = xml_element->children; child; child=child->next) {
-			if (0==strcmp(child->name,"name")) {
-				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
-				if (str) {
-					element->username = g_strdup(str);					
-				}
-			}
-		}
-		
-		if (NULL==element->username) {
-			element->username = g_strdup(element->tagname);
-		}
-	}
-
 	/* Extract type: */
 	{
 		xmlChar* type = xmlGetProp(xml_element,"type");
@@ -963,14 +1020,36 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 		}
 	}
 
-	/* Extract collapseto: */
+	/* Process children: */
 	{
 		xmlNodePtr child;
 
 		for (child = xml_element->children; child; child=child->next) {
+			/* Extract names: */
+			if (0==strcmp(child->name,"name")) {
+				xmlChar* str = xmlNodeListGetString(doc, child->xmlChildrenNode, 1);
+				if (str) {
+					element->username = g_strdup(str);					
+				}
+			}
+
+			/* Handle "collapseto": */
 			if (0==strcmp(child->name,"collapseto")) {
 				element->collapseto = TRUE;
 			}
+
+			/* Handle "header-info": */
+			if (0==strcmp(child->name,"header-info")) {
+				printf("got header info\n");
+				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
+				/* FIXME:  we don't actually extract anything at the moment from the XML; <title> is hardcoded as the header tag */
+			}
+			
+		}
+
+		/* Supply defaults where children not found: */
+		if (NULL==element->username) {
+			element->username = g_strdup(element->tagname);
 		}
 	}
 

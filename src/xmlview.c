@@ -15,6 +15,49 @@ GtkStyle *style_white;
 
 #include <bonobo/bonobo-widget.h>
 
+#if 0
+#include <eel/eel-gdk-extensions.h>
+#endif
+
+/* Avoid introducing an eel dependency for now by copying the code from eel-gdk-extensions.c and making the functions static: */
+static guint32
+not_eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
+{
+	guint32 result;
+
+	result = (0xff0000 | (r & 0xff00));
+	result <<= 8;
+	result |= ((g & 0xff00) | (b >> 8));
+
+	return result;
+}
+
+static guint32
+not_eel_gdk_color_to_rgb (const GdkColor *color)
+{
+	return not_eel_rgb16_to_rgb (color->red, color->green, color->blue);
+}
+
+static char *
+not_eel_gdk_rgb_to_color_spec (const guint32 color)
+{
+	return g_strdup_printf ("#%06X", (guint) (color & 0xFFFFFF));
+}
+
+
+gchar*
+get_col_string(const GdkColor* col)
+{
+
+	guint32 col32;
+
+	g_return_val_if_fail(col,NULL);
+
+	col32 = not_eel_gdk_color_to_rgb (col);
+	
+	return not_eel_gdk_rgb_to_color_spec(col32);
+}
+
 /* Dodgy blend func: */
 void blend_col(GdkColor *dst, const GdkColor *src0, const GdkColor *src1, float proportion)
 {
@@ -75,6 +118,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	GdkGC *gc;
 	int str_width;
 	TTREE *n0;
+	gchar *title_text;
 
 	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
 	gboolean expanded = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(vbox), "expanded"));
@@ -118,14 +162,16 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 			   w->allocation.width - 1 - H_SPACING, w->allocation.height - 2 - V_SPACING);
 
 	/* Render the text: */
-#if 1
+	title_text = cong_dispspec_get_section_header_text(ds,x);
 	gc = cong_dispspec_element_gc(element, CONG_DISPSPEC_GC_USAGE_TEXT);
 	gdk_draw_string(w->window,
 			the_globals.ft,
 			gc, 
 			H_SPACING + H_INDENT, 2 + the_globals.ft_asc,
-			cong_dispspec_element_username(element));
-#endif
+			title_text);
+	g_free(title_text);
+
+	/* FIXME:  this will fail to update when the text is edited */
 	
 #else	
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
@@ -321,7 +367,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 
 	/* Left: */
 	gdk_draw_line(w->window, gc, 
-		      H_SPACING, 1,
+		      H_SPACING, 0,
 		      H_SPACING, w->allocation.height-1);	
 
 	/* Bottom: */
@@ -876,13 +922,52 @@ GtkWidget *xv_element_new(CongDocument *doc,
 
 	GtkTreeIter new_tree_iter;
 
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+      	
 #if 1
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
+
 	gtk_tree_store_set (store, &new_tree_iter,
-			    TREEVIEW_TITLE_COLUMN, cong_dispspec_name_get(ds, x),
+			    TREEVIEW_TITLE_COLUMN, cong_dispspec_get_section_header_text(ds, x),
 			    TREEVIEW_NODE_COLUMN, x,
 			    TREEVIEW_DOC_COLUMN, doc,
 			    -1);
+
+	if (element) {
+#if NEW_LOOK
+		const GdkColor *col = cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_TEXT);
+		/* We hope this will contrast well against white */
+#else
+		const GdkColor *col = cong_dispspec_element_col(element);
+#endif
+
+		gchar *col_string = get_col_string(col);
+
+		gtk_tree_store_set (store, &new_tree_iter,
+				    TREEVIEW_FOREGROUND_COLOR_COLUMN, col_string,
+				    -1);
+
+		g_free(col_string);
+
+		/* Experimental attempt to show background colour; looks ugly */
+#if 0 /* NEW_LOOK */
+		col_string = get_col_string( cong_dispspec_element_col(element, CONG_DISPSPEC_GC_USAGE_BACKGROUND) );
+		gtk_tree_store_set (store, &new_tree_iter,
+				    TREEVIEW_BACKGROUND_COLOR_COLUMN, col_string,
+				    -1);
+
+		g_free(col_string);
+#endif
+
+	} else {
+		/* Use red for "tag not found" errors: */ 
+		gtk_tree_store_set (store, &new_tree_iter,
+				    TREEVIEW_FOREGROUND_COLOR_COLUMN, "#ff0000", 
+				    -1);
+	}
+
+
+	/* FIXME:  this will fail to update when the text is edited */
 #else
 	glaebb_tree = 0;
 
@@ -1083,7 +1168,9 @@ struct xview *xmlview_new(CongDocument *doc)
 			    TREEVIEW_TITLE_COLUMN, "Document",
 			    TREEVIEW_NODE_COLUMN, cong_document_get_root(doc),
 			    TREEVIEW_DOC_COLUMN, doc,
+			    /* TREEVIEW_COLOR_COLUMN, g_strdup_printf("#305050"), */
 			    -1);
+	/* FIXME: What colour should the Document node be? */
 #else
 	xv->tree = gtk_tree_item_new_with_label("Document");
 	gtk_tree_append(GTK_TREE(tree), xv->tree);
