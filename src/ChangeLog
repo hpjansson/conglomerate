@@ -1,5 +1,9 @@
 2003-09-30  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-cleanup-source.c
+
+	First attempt at undo/redo for source cleanup
+	
 	* cong-node-modification-add-after.c, cong-node-modification-add-before.c
 
 	Implementation of Undo/Redo for these tree operations
