@@ -20,72 +20,72 @@
 #if 1
 struct cong_gui
 {
-  GtkWidget *window, *menus, *toolbar, *status, *tray, *scroller, *root,
-    *auth, *butt_submit, *butt_find;
+	GtkWidget *window, *menus, *toolbar, *status, *tray, *scroller, *root,
+		*auth, *butt_submit, *butt_find;
 
-  guint status_main_ctx;
+	guint status_main_ctx;
 
-  GtkAccelGroup *accel;
+	GtkAccelGroup *accel;
 
-  GtkWidget *popup;
+	GtkWidget *popup;
 
-  GtkTreeView *global_tree_view;
-  GtkTreeStore *global_tree_store;
+	GtkTreeView *global_tree_view;
+	GtkTreeStore *global_tree_store;
 
 	GnomeProgram *gnome_program;
 };
 
 GtkWidget* cong_gui_get_window(struct cong_gui* gui)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  return GTK_WIDGET(gui->window);
+	return GTK_WIDGET(gui->window);
 }
 
 GtkWidget* cong_gui_get_popup(struct cong_gui* gui)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  return gui->popup;
+	return gui->popup;
 }
 
 void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  gui->popup=popup;
+	gui->popup=popup;
 }
 
 GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  return gui->butt_submit;
+	return gui->butt_submit;
 }
 
 GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  return gui->global_tree_store;
+	return gui->global_tree_store;
 }
 
 GtkWidget* cong_gui_get_root(struct cong_gui* gui)
 {
-  g_assert(gui!=NULL);
+	g_assert(gui!=NULL);
 
-  return gui->root;
+	return gui->root;
 }
 
 void cong_gui_destroy_tree_store(struct cong_gui* gui)
 {
-  gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
-  gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
+	gui->global_tree_store = gtk_tree_store_new (TREEVIEW_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+	gtk_tree_view_set_model(gui->global_tree_view, GTK_TREE_MODEL(gui->global_tree_store));
  
 #if 0
-  gtk_widget_destroy(GTK_WIDGET(gui->global_tree_view));
-   
-  gui->global_tree_view=NULL;
+	gtk_widget_destroy(GTK_WIDGET(gui->global_tree_view));
+	
+	gui->global_tree_view=NULL;
 #endif
 }
  
@@ -135,48 +135,48 @@ void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget
 
 void add_node_recursive(TTREE *tt, GtkTreeStore *store, GtkTreeIter *parent_iter)
 {
-  GtkTreeIter child_iter;  /* Child iter  */
+	GtkTreeIter child_iter;  /* Child iter  */
 
-  gtk_tree_store_append (store, &child_iter, parent_iter);  /* Acquire a child iterator */
+	gtk_tree_store_append (store, &child_iter, parent_iter);  /* Acquire a child iterator */
 
-  gtk_tree_store_set (store, &child_iter,
-		      0, tt->data,
-		      -1); 
+	gtk_tree_store_set (store, &child_iter,
+			    0, tt->data,
+			    -1); 
   
-  /* Recurse over children: */
-  {
-    TTREE *child_tt = tt->child;
-    while (child_tt != NULL) {
-      add_node_recursive(child_tt, store, &child_iter);
-      child_tt=child_tt->next;
-    }
-  }
+	/* Recurse over children: */
+	{
+		TTREE *child_tt = tt->child;
+		while (child_tt != NULL) {
+			add_node_recursive(child_tt, store, &child_iter);
+			child_tt=child_tt->next;
+		}
+	}
  
 }
 
 GtkWidget* do_ttree_test(TTREE* tt)
 {
-  GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
-  GtkWidget *tree;
-  GtkCellRenderer *renderer;
-  GtkTreeViewColumn *column;
-
-  g_return_val_if_fail(tt, NULL);
+	GtkTreeStore *store = gtk_tree_store_new (1, G_TYPE_STRING);
+	GtkWidget *tree;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	
+	g_return_val_if_fail(tt, NULL);
  
-  add_node_recursive(tt,store,NULL);
+	add_node_recursive(tt,store,NULL);
 
-  tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+	tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
 
-  renderer = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes ("Author",
-						     renderer,
-						     "text", 0,
-						     NULL);
-  gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
-
-  gtk_widget_show(tree);
-
-  return tree;
+	renderer = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes ("Author",
+							   renderer,
+							   "text", 0,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
+	
+	gtk_widget_show(tree);
+	
+	return tree;
 }
 
 /* 
@@ -363,14 +363,14 @@ int test_open_do(const char *doc_name, const char *ds_name)
 	/* Use the flux loaders to load the doc: */
 	xml_f = fopen(doc_name, "rt");
 	if (!xml_f) {
-	  g_warning("Problem opening doc file \"%s\"\n", doc_name);
-	  return(TRUE);
+		g_warning("Problem opening doc file \"%s\"\n", doc_name);
+		return(TRUE);
 	}
 
 	xml_in = xml_f_to_ttree(xml_f, 0);
 	if (!xml_in) {
-	  g_warning("Problem parsing doc file \"%s\"\n", doc_name);
-	  return(TRUE);  /* Invalid XML document. */
+		g_warning("Problem parsing doc file \"%s\"\n", doc_name);
+		return(TRUE);  /* Invalid XML document. */
 	}
 
 	fclose(xml_f);

@@ -109,7 +109,7 @@ void popup_tag_remove_inner()
 {
 	TTREE *n0;
 
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
 #if 1
@@ -128,7 +128,7 @@ void popup_tag_remove_outer()
 {
 	TTREE *n0;
 
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
 #if 1
@@ -276,7 +276,7 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
  		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
  		      TTREE* tt;
  		      GtkWidget* menu;
-		      cong_document* doc;
+		      CongDocument* doc;
  
  		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_TTREE_COLUMN, &tt, -1);
  		      gtk_tree_model_get(tree_model, &iter, TREEVIEW_DOC_COLUMN, &doc, -1);

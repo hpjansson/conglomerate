@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "xml.h"
 
-void cong_location_set(cong_location *loc, TTREE *tt, int offset)
+void cong_location_set(CongLocation *loc, CongNodePtr tt, int offset)
 {
 	g_return_if_fail(loc != NULL);
 	
@@ -15,7 +15,7 @@ void cong_location_set(cong_location *loc, TTREE *tt, int offset)
 }
 
 void
-cong_location_nullify(cong_location *loc)
+cong_location_nullify(CongLocation *loc)
 {
 	g_return_if_fail(loc != NULL);
 	
@@ -23,7 +23,7 @@ cong_location_nullify(cong_location *loc)
 }
 
 
-gboolean cong_location_exists(cong_location *loc)
+gboolean cong_location_exists(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, FALSE);
 	
@@ -31,7 +31,7 @@ gboolean cong_location_exists(cong_location *loc)
 }
 
 gboolean
-cong_location_equals(const cong_location *loc0, const cong_location *loc1)
+cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 {
 	g_return_val_if_fail(loc0 != NULL, FALSE);
 	g_return_val_if_fail(loc1 != NULL, FALSE);
@@ -46,7 +46,7 @@ cong_location_equals(const cong_location *loc0, const cong_location *loc1)
 }
 
 
-int cong_location_frag_type(cong_location *loc)
+int cong_location_frag_type(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, 0);
 	g_return_val_if_fail(loc->tt_loc != NULL, 0);
@@ -54,7 +54,7 @@ int cong_location_frag_type(cong_location *loc)
 	return xml_frag_type(loc->tt_loc);
 }
 
-char cong_location_get_char(cong_location *loc)
+char cong_location_get_char(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, '\0');
 	g_return_val_if_fail(loc->tt_loc != NULL, '\0');
@@ -64,7 +64,7 @@ char cong_location_get_char(cong_location *loc)
 }
 
 TTREE*
-cong_location_xml_frag_data_nice_split2(cong_location *loc)
+cong_location_xml_frag_data_nice_split2(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(cong_location_exists(loc), NULL);
@@ -74,7 +74,7 @@ cong_location_xml_frag_data_nice_split2(cong_location *loc)
 }
 
 void
-cong_location_insert_chars(cong_location *loc, const char* s)
+cong_location_insert_chars(CongLocation *loc, const char* s)
 {
 	TTREE *n;
 	int len;
@@ -95,7 +95,7 @@ cong_location_insert_chars(cong_location *loc, const char* s)
 }
 
 void
-cong_location_del_next_char(cong_location *loc)
+cong_location_del_next_char(CongLocation *loc)
 {
 	g_return_if_fail(cong_location_exists(loc));
 
@@ -112,25 +112,25 @@ cong_location_del_next_char(cong_location *loc)
 }
 
 TTREE*
-cong_location_xml_frag_prev(cong_location *loc)
+cong_location_xml_frag_prev(CongLocation *loc)
 {
 	return xml_frag_prev(loc->tt_loc);
 }
 
 TTREE*
-cong_location_xml_frag_next(cong_location *loc)
+cong_location_xml_frag_next(CongLocation *loc)
 {
 	return xml_frag_next(loc->tt_loc);
 }
 
 TTREE*
-cong_location_node(cong_location *loc)
+cong_location_node(CongLocation *loc)
 {
 	return loc->tt_loc;
 }
 
 TTREE*
-cong_location_parent(cong_location *loc)
+cong_location_parent(CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, NULL);
 	g_return_val_if_fail(loc->tt_loc != NULL, NULL);
@@ -140,7 +140,7 @@ cong_location_parent(cong_location *loc)
 
 
 void
-cong_location_copy(cong_location *dst, const cong_location *src)
+cong_location_copy(CongLocation *dst, const CongLocation *src)
 {
 	g_return_if_fail(dst != NULL);
 	g_return_if_fail(src != NULL);

@@ -306,7 +306,7 @@ TTREE *xml_frag_data_nice_split2(TTREE *s, int c)
 
 TTREE *selection_reparent_all(struct selection* selection, TTREE *p)
 {
-	cong_location loc0, loc1;
+	CongLocation loc0, loc1;
 	TTREE *n0, *n1, *n2;
 	UNUSED_VAR(int len)
 	UNUSED_VAR(char *p_data)

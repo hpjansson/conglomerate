@@ -3,21 +3,21 @@
 #include "global.h"
 #include "xml.h"
 
-struct _cong_document
+struct _CongDocument
 {
 	char dummy[128];
 	TTREE *tt;
 	CongDispspec *ds;
 };
 
-cong_document*
+CongDocument*
 cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds)
 {
-	cong_document *doc;
+	CongDocument *doc;
 
 	g_return_val_if_fail(tt!=NULL, NULL);
 
-	doc = g_new(cong_document,1);
+	doc = g_new(struct _CongDocument,1);
 
 	doc->tt=tt;
 	doc->ds=ds;
@@ -26,7 +26,7 @@ cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds)
 }
 
 void
-cong_document_delete(cong_document *doc)
+cong_document_delete(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
@@ -38,7 +38,7 @@ cong_document_delete(cong_document *doc)
 }
 
 TTREE*
-cong_document_get_root(cong_document *doc)
+cong_document_get_root(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
@@ -46,7 +46,7 @@ cong_document_get_root(cong_document *doc)
 }
 
 CongDispspec*
-cong_document_get_dispspec(cong_document *doc)
+cong_document_get_dispspec(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
@@ -54,7 +54,7 @@ cong_document_get_dispspec(cong_document *doc)
 }
 
 void
-cong_document_save(cong_document *doc, const char* filename)
+cong_document_save(CongDocument *doc, const char* filename)
 {
 	FILE *xml_f;
 

@@ -3,6 +3,7 @@
 #include <ttree.h>
 #include <sock.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libxml/tree.h>
 
 #define RELEASE 1
 #undef WINDOWS_BUILD
@@ -20,11 +21,9 @@ enum
 };
 
 #if 0
-#if 0
-typedef struct foo { TTREE* tt;} cong_node_ptr;
+typedef xmlNodePtr CongNodePtr;
 #else
-typedef TTREE* cong_node_ptr;
-#endif
+typedef TTREE* CongNodePtr;
 #endif
 
 enum CongElementType
@@ -49,73 +48,73 @@ typedef struct CongDispspecRegistry CongDispspecRegistry;
 /**
    Struct representing a location within a document, with both a node ptr and a character offset into the text.
  */
-typedef struct _cong_location
+typedef struct _CongLocation
 {
-  TTREE *tt_loc;
-  int char_loc;
-} cong_location;
+	CongNodePtr tt_loc;
+	int char_loc;
+} CongLocation;
 
 void
-cong_location_set(cong_location *loc, TTREE *tt, int offset);
+cong_location_set(CongLocation *loc, CongNodePtr tt, int offset);
 
 void
-cong_location_nullify(cong_location *loc);
+cong_location_nullify(CongLocation *loc);
 
 gboolean
-cong_location_exists(cong_location *loc);
+cong_location_exists(CongLocation *loc);
 
 gboolean
-cong_location_equals(const cong_location *loc0, const cong_location *loc1);
+cong_location_equals(const CongLocation *loc0, const CongLocation *loc1);
 
 int
-cong_location_frag_type(cong_location *loc);
+cong_location_frag_type(CongLocation *loc);
 
 char
-cong_location_get_char(cong_location *loc);
+cong_location_get_char(CongLocation *loc);
 
-TTREE*
-cong_location_xml_frag_data_nice_split2(cong_location *loc);
-
-void
-cong_location_insert_chars(cong_location *loc, const char* s);
+CongNodePtr
+cong_location_xml_frag_data_nice_split2(CongLocation *loc);
 
 void
-cong_location_del_next_char(cong_location *loc);
-
-TTREE*
-cong_location_xml_frag_prev(cong_location *loc);
-
-TTREE*
-cong_location_xml_frag_next(cong_location *loc);
-
-TTREE*
-cong_location_node(cong_location *loc);
-
-TTREE*
-cong_location_parent(cong_location *loc);
+cong_location_insert_chars(CongLocation *loc, const char* s);
 
 void
-cong_location_copy(cong_location *dst, const cong_location *src);
+cong_location_del_next_char(CongLocation *loc);
+
+CongNodePtr
+cong_location_xml_frag_prev(CongLocation *loc);
+
+CongNodePtr
+cong_location_xml_frag_next(CongLocation *loc);
+
+CongNodePtr
+cong_location_node(CongLocation *loc);
+
+CongNodePtr
+cong_location_parent(CongLocation *loc);
+
+void
+cong_location_copy(CongLocation *dst, const CongLocation *src);
 
 /**
    Struct representing a document, in an effort to decouple the code from TTREE
  */
-typedef struct _cong_document cong_document;
+typedef struct _CongDocument CongDocument;
 
-cong_document*
+CongDocument*
 cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds);
 
 void
-cong_document_delete(cong_document *doc);
+cong_document_delete(CongDocument *doc);
 
-TTREE*
-cong_document_get_root(cong_document *doc);
+CongNodePtr
+cong_document_get_root(CongDocument *doc);
 
 CongDispspec*
-cong_document_get_dispspec(cong_document *doc);
+cong_document_get_dispspec(CongDocument *doc);
 
 void
-cong_document_save(cong_document *doc, const char* filename);
+cong_document_save(CongDocument *doc, const char* filename);
 
 /* Include these here to help Cygwin a bit */
 
@@ -142,8 +141,8 @@ struct xed
 	int mode;
 
 #if 0
-	cong_location draw_loc;
-	cong_location draw_prev;
+	CongLocation draw_loc;
+	CongLocation draw_prev;
 #else
 	TTREE *draw_x;      /* XML node currently at */
 	int draw_char;      /* Char to begin drawing (in node) */
@@ -173,7 +172,7 @@ struct xed
 
 struct xview
 {
-	cong_document *doc;
+	CongDocument *doc;
 	
   GtkWidget *w;
 #if 1
@@ -189,19 +188,19 @@ struct xview
 
 struct pos
 {
-  int x, y;
-  int x_find;
+	int x, y;
+	int x_find;
 
-  int line;
-  TTREE *node;
-  TTREE *node_last;
-  TTREE *node_find;
-  int c, c_given;
-  int space;  /* 0 = have no space, 1 = have space */
+	int line;
+	TTREE *node;
+	TTREE *node_last;
+	TTREE *node_find;
+	int c, c_given;
+	int space;  /* 0 = have no space, 1 = have space */
 
-  int word_width;
-
-  int mode;  /* 0 = not found, 1 = found */
+	int word_width;
+	
+	int mode;  /* 0 = not found, 1 = found */
 };
 
 
@@ -217,7 +216,7 @@ struct curs
 	int on;
 
 	/* Conceptual location */
-	cong_location location;
+	CongLocation location;
 
 	int set;
 };
@@ -230,8 +229,8 @@ struct selection
 
 	int x0, y0, x1, y1;
 
-	cong_location loc0;
-	cong_location loc1;
+	CongLocation loc0;
+	CongLocation loc1;
 };
 
 
@@ -315,8 +314,8 @@ SOCK *server_login();
 #endif
 
 struct pos *pos_physical_to_logical(struct xed *xed, int x, int y);
-struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c);
-struct pos *pos_logical_to_physical_new(struct xed *xed, cong_location *loc);
+struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c);
+struct pos *pos_logical_to_physical_new(struct xed *xed, CongLocation *loc);
 
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
@@ -346,12 +345,13 @@ void open_document_do(const gchar *doc_name);
 
 int gui_window_new_document_make();
 
-struct xview *xmlview_new(cong_document *doc);
+struct xview *xmlview_new(CongDocument *doc);
 void xmlview_destroy(int free_xml);
 
 CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
 GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds);
 CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
+CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc);
 void cong_dispspec_delete(CongDispspec *dispspec);
 
 const gchar*
@@ -503,8 +503,15 @@ cong_error_dialog_new_unimplemented(const gchar* what_failed, const char* filena
 #define CONG_DO_UNIMPLEMENTED_DIALOG(what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented(what_failed, __FILE__, __LINE__)))
 
 /**
+ * Routine to manufacture a "what failed" string for when File->Open fails.
+ * @vfs_uri:  the URI from which you tried to open the file.
+ */
+gchar*
+cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, gboolean transient);
+
+/**
  * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI to which you tried to save the file.
+ * @vfs_uri:  the URI from which you tried to open the file.
  */
 GtkDialog*
 cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions);
@@ -531,14 +538,6 @@ cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_
 GtkDialog*
 cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result);
 
-
-/**
- * Routine to manufacture an error dialog for when File->Open fails due to a parsing error.
- * @vfs_uri:  the URI to which you tried to save the file.
- * FIXME: more parameters?
- */
-GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri);
 
 /**
  * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.

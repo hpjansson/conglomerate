@@ -659,7 +659,7 @@ GtkWidget *xv_section_embedded(TTREE * x,CongDispspec *ds, int collapsed)
 
 }
 
-GtkWidget *xv_element_new(cong_document *doc, TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
+GtkWidget *xv_element_new(CongDocument *doc, TTREE *x, CongDispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
 	UNUSED_VAR(GdkGCValues     gc_values)
@@ -829,7 +829,7 @@ GtkWidget *xv_element_new(cong_document *doc, TTREE *x, CongDispspec *ds, GtkWid
 	return(root);
 }
 
-struct xview *xmlview_new(cong_document *doc)
+struct xview *xmlview_new(CongDocument *doc)
 {
 	struct xview *xv;
 	GdkColor gcol;

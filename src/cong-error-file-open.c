@@ -48,21 +48,16 @@ void on_search(gpointer data)
 #endif
 }
 
-GtkDialog*
-cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions)
+gchar*
+cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, gboolean transient)
 {
-	GtkDialog* dialog = NULL;
-
 	gchar* app_name;
 	gchar* filename_alone;
 	gchar* path;
-	gchar* what_failed_permanent;
-	gchar* what_failed_transient;
+	gchar* what_failed;
 
 	g_return_val_if_fail(file_uri, NULL);
-	g_return_val_if_fail(why_failed, NULL);
-	g_return_val_if_fail(suggestions, NULL);
-	
+
 	app_name = cong_error_get_appname();
 
 	cong_error_split_uri(file_uri, &filename_alone, &path);
@@ -70,21 +65,40 @@ cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean tra
 	g_assert(filename_alone);
 	g_assert(path);
 
-	/* A "what failed" message when the failure is likely to be permanent; this URI won't be openable */
-	what_failed_permanent = g_strdup_printf("%s cannot read \"%s\" from %s.",app_name, filename_alone, path);
+	if (transient) {
+		/* A "what failed" message when the failure is likely to be permanent; this URI won't be openable */
+		what_failed = g_strdup_printf("%s cannot read \"%s\" from %s.",app_name, filename_alone, path);
+	} else	{
+		/* A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting. */
+		what_failed = g_strdup_printf("%s could not read \"%s\" from %s.",app_name, filename_alone, path);
+	}
 
-	/* A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting. */
-	what_failed_transient = g_strdup_printf("%s could not read \"%s\" from %s.",app_name, filename_alone, path);
+	g_free(filename_alone);
+	g_free(path);
+	g_free(app_name);	
 
-	dialog = cong_error_dialog_new(transient?what_failed_transient:what_failed_permanent,
+	return what_failed;
+}
+
+
+GtkDialog*
+cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions)
+{
+	GtkDialog* dialog = NULL;
+
+	gchar* what_failed;
+
+	g_return_val_if_fail(file_uri, NULL);
+	g_return_val_if_fail(why_failed, NULL);
+	g_return_val_if_fail(suggestions, NULL);
+
+	what_failed = cong_error_what_failed_on_file_open_failure(file_uri, transient);
+	
+	dialog = cong_error_dialog_new(what_failed,
 				       why_failed,
 				       suggestions);
 
-	g_free(what_failed_transient);
-	g_free(what_failed_permanent);
-	g_free(filename_alone);
-	g_free(path);
-	g_free(app_name);
+	g_free(what_failed);
 	
 	return dialog;
 }
@@ -100,41 +114,22 @@ cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_
 {
 	GtkDialog* dialog = NULL;
 
-	gchar* app_name;
-	gchar* filename_alone;
-	gchar* path;
-	gchar* what_failed_permanent;
-	gchar* what_failed_transient;
+	gchar* what_failed;
 
 	g_return_val_if_fail(file_uri, NULL);
 	g_return_val_if_fail(why_failed, NULL);
 	g_return_val_if_fail(suggestions, NULL);
+
+	what_failed = cong_error_what_failed_on_file_open_failure(file_uri, transient);
 	
-	app_name = cong_error_get_appname();
-
-	cong_error_split_uri(file_uri, &filename_alone, &path);
-
-	g_assert(filename_alone);
-	g_assert(path);
-
-	/* A "what failed" message when the failure is likely to be permanent; this URI won't be openable */
-	what_failed_permanent = g_strdup_printf("%s cannot read \"%s\" from %s.",app_name, filename_alone, path);
-
-	/* A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting. */
-	what_failed_transient = g_strdup_printf("%s could not read \"%s\" from %s.",app_name, filename_alone, path);
-
-	dialog = cong_error_dialog_new_with_convenience(transient?what_failed_transient:what_failed_permanent,
+	dialog = cong_error_dialog_new_with_convenience(what_failed,
 							why_failed,
 							suggestions,
 							convenience_label,
 							convenience_action,
 							convenience_data);
 
-	g_free(what_failed_transient);
-	g_free(what_failed_permanent);
-	g_free(filename_alone);
-	g_free(path);
-	g_free(app_name);
+	g_free(what_failed);
 	
 	return dialog;
 }
@@ -378,21 +373,3 @@ cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_u
 	return dialog;
 }
 
-GtkDialog*
-cong_error_dialog_new_file_open_failed_from_parser_error(const GnomeVFSURI* file_uri)
-{
-	GtkDialog* dialog = NULL;
-
-	gchar* app_name = cong_error_get_appname();
-	
-	gchar* why_failed = g_strdup_printf("%s cannot understand the internal format of the file.", app_name);
-
-	dialog =  cong_error_dialog_new_file_open_failed(file_uri, FALSE,
-							 why_failed,
-							 "FIXME");
-
-	g_free(why_failed);
-	g_free(app_name);
-
-	return dialog;
-}

@@ -10,7 +10,7 @@
 
 void tree_coarse_update_of_view()
 {
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	xmlview_destroy(FALSE);
 	the_globals.xv = xmlview_new(doc);
 	gtk_box_pack_start(GTK_BOX(cong_gui_get_root(&the_gui)), the_globals.xv->w, FALSE, FALSE, 0);
@@ -21,7 +21,7 @@ gint tree_new_sibling(GtkWidget *widget, TTREE *tag)
 	TTREE *n0, *n1, *n2;
 	char *s;
 
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 	
 	s = pick_structural_tag(ds);
@@ -52,7 +52,7 @@ gint tree_new_sub_element(GtkWidget *widget, TTREE *tag)
 	TTREE *n0, *n1;
 	char *s;
 
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
 	s = pick_structural_tag(ds);
@@ -95,7 +95,7 @@ gint tree_copy(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 {
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
 	if (!the_globals.clipboard) return(TRUE);
@@ -121,7 +121,7 @@ gint tree_paste_under(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 {
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
 	if (!the_globals.clipboard) return(TRUE);
@@ -153,7 +153,7 @@ gint tree_paste_before(GtkWidget *widget, TTREE *tag)
 
 gint tree_paste_after(GtkWidget *widget, TTREE *tag)
 {
-	cong_document *doc = the_globals.xv->doc;
+	CongDocument *doc = the_globals.xv->doc;
 	CongDispspec *ds = cong_document_get_dispspec(doc);
 
 	if (!the_globals.clipboard) return(TRUE);

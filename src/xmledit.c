@@ -1645,7 +1645,7 @@ void xed_cutcopy_update(struct curs* curs)
 {
 	if (!curs->xed->x)
 	{
-		cong_document* doc = the_globals.xv->doc;
+		CongDocument *doc = the_globals.xv->doc;
 		xmlview_destroy(FALSE);
 		the_globals.xv = xmlview_new(doc);
 	}

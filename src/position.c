@@ -459,7 +459,7 @@ void pos_lp(struct xed *xed, struct pos *pos)
 }
 
 
-struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c)
+struct pos *pos_logical_to_physical(struct xed *xed, CongNodePtr node, int c)
 {
 	struct pos *pos;
 	TTREE *l;
@@ -513,7 +513,7 @@ struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c)
 	return(pos);
 }
 
-struct pos *pos_logical_to_physical_new(struct xed *xed, cong_location *loc)
+struct pos *pos_logical_to_physical_new(struct xed *xed, CongLocation *loc)
 {
-  return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
+	return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
 }

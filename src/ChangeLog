@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-10-04 David Malcolm
+
+	* cong-document.c, cong-error-file-open.c, cong-location.c, global.h, main.c, open.c, popup.c, position.c, select.c, tree.c, xmledit.c, xmlview.c
+
+	Renamed various structs to match naming convention; improvements to error handling when loading files
+	
 2002-09-20 David Malcolm
 
 	* cong-dispspec-registry.c
