@@ -326,4 +326,72 @@ cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
 	}
 }
 
+/**
+   Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
+ */
+xmlDtdPtr
+cong_util_make_dtd (xmlDocPtr xml_doc,
+		    const xmlChar *root_element,
+		    const xmlChar *ExternalID, 
+		    const xmlChar *SystemID)
+{
+#if 1
+
+	xmlDtdPtr dtd_ptr = xmlParseDTD (ExternalID, 
+					 SystemID);
+
+	if (dtd_ptr) {
+		/* Then set the document and the root_element: */
+		cong_node_recursive_set_doc ((CongNodePtr)dtd_ptr, 
+					     xml_doc);
+
+		if (dtd_ptr->name) {
+			xmlFree (dtd_ptr->name);
+		}
+		dtd_ptr->name = xmlStrdup(root_element);
+
+		/* Set up ptr within the xml_doc: */
+		xml_doc->extSubset = dtd_ptr;
+
+		/* Nullify the tree descendants; we have to do this otherwise the entire DTD is in the tree and appears in the editor view etc etc (and is very slow for large DTDs): */
+		dtd_ptr->children = NULL;
+		dtd_ptr->last = NULL;
+
+		return dtd_ptr;
+	} else {
+		return NULL;
+	}
+#else
+	/* But this does not actually load the DTDs... */
+	return xmlNewDtd(xml_doc,
+			 root_element,
+			 ExternalID,
+			 SystemID);
+#endif
+}	
+
+/**
+   Make DTD declaration, assigns it to the given document, and add it to the tree.
+*/
+xmlDtdPtr 
+cong_util_add_external_dtd (xmlDocPtr xml_doc, 
+			    const xmlChar *root_element,
+			    const xmlChar *ExternalID, 
+			    const xmlChar *SystemID)
+{
+	xmlDtdPtr xml_dtd;
+
+	g_return_val_if_fail(xml_doc, NULL);
+	g_return_val_if_fail(root_element, NULL);
+
+	xml_dtd = cong_util_make_dtd (xml_doc,
+				      root_element,
+				      ExternalID, 
+				      SystemID);
+
+	xmlAddChild((xmlNodePtr)xml_doc,
+		    (xmlNodePtr)xml_dtd);
+
+	return xml_dtd;
+}
 

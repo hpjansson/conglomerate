@@ -1,3 +1,9 @@
+2003-08-29  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-document.c, cong-util.c, cong-util.h, plugin-docbook.c
+
+	Fix for bug #109869
+	
 2003-08-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-node-text.c

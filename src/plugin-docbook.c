@@ -131,26 +131,6 @@ void factory_page_creation_callback_unified(CongDocumentFactory *factory, CongNe
 }
 
 /**
-   Manufactures appropriate DocBook DTD, and assigns it to the given document; doesn't add it to the node tree.
- */
-static xmlDtdPtr make_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_element)
-{
-	g_return_val_if_fail(xml_doc, NULL);
-	g_return_val_if_fail(root_element, NULL);
-
-	return xmlNewDtd(xml_doc,
-			 root_element,
-			 "-//OASIS//DTD DocBook XML V4.1.2//EN",
-			 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd");
-	
-	/* An example of the desired output:
-	   <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
-	   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" []>
-	*/
-
-}
-
-/**
    Manufactures appropriate DocBook DTD, and assigns it to the given document, then adds it to the node tree (so it should show up when serialised)
  */
 static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_element)
@@ -160,11 +140,10 @@ static xmlDtdPtr add_docbook_declaration(xmlDocPtr xml_doc, const xmlChar *root_
 	g_return_val_if_fail(xml_doc, NULL);
 	g_return_val_if_fail(root_element, NULL);
 
-	xml_dtd = make_docbook_declaration(xml_doc,root_element);
-
-	/* The following line appears to be the correct one to get the doctype declaration to appear in the node hierarchy and hence get serialised */
-	xmlAddChild((xmlNodePtr)xml_doc,
-		    (xmlNodePtr)xml_dtd);
+	xml_dtd = cong_util_add_external_dtd (xml_doc, 
+					      root_element,
+					      "-//OASIS//DTD DocBook XML V4.1.2//EN",
+					      "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd");
 
 	return xml_dtd;
 }

@@ -403,10 +403,17 @@ cong_document_get_xml(CongDocument *doc)
 CongNodePtr
 cong_document_get_root(CongDocument *doc)
 {
+	CongNodePtr iter;
+
 	g_return_val_if_fail(doc, NULL);
 
-	return PRIVATE(doc)->xml_doc->children;
+	for (iter=PRIVATE(doc)->xml_doc->children; iter; iter=iter->next) {
+		if (iter->type==XML_ELEMENT_NODE) {
+			return iter;
+		}
+	}
 
+	return NULL;
 }
 
 CongDispspec*

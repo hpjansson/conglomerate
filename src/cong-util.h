@@ -111,6 +111,24 @@ void
 cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
 					       CongNodePtr node);
 
+/**
+   Make DTD declaration, and assigns it to the given document.  Doesn't add it to doc tree.
+ */
+xmlDtdPtr
+cong_util_make_dtd (xmlDocPtr xml_doc,
+		    const xmlChar *root_element,
+		    const xmlChar *ExternalID, 
+		    const xmlChar *SystemID);
+
+/**
+   Make DTD declaration, assigns it to the given document, and add it to the tree.
+*/
+xmlDtdPtr 
+cong_util_add_external_dtd (xmlDocPtr xml_doc, 
+			    const xmlChar *root_element,
+			    const xmlChar *ExternalID, 
+			    const xmlChar *SystemID);
+
 G_END_DECLS
 
 #endif
