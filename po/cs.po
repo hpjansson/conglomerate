@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-01 11:21+0200\n"
-"PO-Revision-Date: 2003-10-01 16:00+0200\n"
+"POT-Creation-Date: 2003-10-03 11:17+0200\n"
+"PO-Revision-Date: 2003-10-03 16:12+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -277,6 +277,30 @@ msgstr "Text: \"<span foreground=\"%s\">%s</span>\""
 #, c-format
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
+
+#: src/cong-editor-node-text.c:751
+msgid "Select word"
+msgstr "Vybrat slovo"
+
+#: src/cong-editor-node-text.c:792
+msgid "Move cursor"
+msgstr "Přesunout kurzor"
+
+#: src/cong-editor-node-text.c:855
+msgid "Drag out selection"
+msgstr "Vytáhnout výběr"
+
+#: src/cong-editor-widget3.c:1113
+msgid "Cursor Movement"
+msgstr "Pohyb kurzoru"
+
+#: src/cong-editor-widget3.c:1185 src/cong-editor-widget3.c:1202
+msgid "Delete Selection"
+msgstr "Odstranit výběr"
+
+#: src/cong-editor-widget3.c:1229
+msgid "Typing"
+msgstr "Psaní"
 
 #. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
 #: src/cong-error-dialog.c:180 src/cong-error-dialog.c:208
@@ -999,27 +1023,35 @@ msgstr "Pokročilé"
 msgid "Save XML as..."
 msgstr "Uložit XML jako..."
 
-#: src/cong-location.c:783
+#: src/cong-location.c:358 src/cong-location.c:404
+msgid "Merge tags"
+msgstr "Sloučit tagy"
+
+#: src/cong-location.c:455
+msgid "Delete character"
+msgstr "Odstranit znak"
+
+#: src/cong-location.c:875
 msgid "Calculating document start"
 msgstr "Počítám začátek dokumentu"
 
-#: src/cong-location.c:795
+#: src/cong-location.c:887
 msgid "Calculating line start"
 msgstr "Počítám začátek řádku"
 
-#: src/cong-location.c:808
+#: src/cong-location.c:900
 msgid "Calculating document end"
 msgstr "Počítám konec dokumentu"
 
-#: src/cong-location.c:821
+#: src/cong-location.c:913
 msgid "Calculating line end"
 msgstr "Počítám konec řádku"
 
-#: src/cong-location.c:834
+#: src/cong-location.c:926
 msgid "Calculating previous page"
 msgstr "Počítám předchozí stránku"
 
-#: src/cong-location.c:847
+#: src/cong-location.c:939
 msgid "Calculating next page"
 msgstr "Počítám následující stránku"
 
@@ -1363,7 +1395,8 @@ msgstr "Zpět"
 msgid "Redo"
 msgstr "Znovu"
 
-#: src/cong-primary-window.c:292 src/cong-primary-window.c:293
+#: src/cong-primary-window.c:292 src/cong-primary-window.c:293 src/tree.c:199
+#: src/xmledit.c:72 src/xmledit.c:127
 msgid "Cut"
 msgstr "Vyjmout"
 
@@ -1372,6 +1405,7 @@ msgid "Copy"
 msgstr "Kopírovat"
 
 #: src/cong-primary-window.c:306 src/cong-primary-window.c:307
+#: src/xmledit.c:198
 msgid "Paste"
 msgstr "Vložit"
 
@@ -1396,13 +1430,18 @@ msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
 
-#: src/cong-util.c:264 src/plugin-docbook.c:1004
+#: src/cong-util.c:264 src/plugin-docbook.c:1006
 msgid "Printing XSL Formatting Objects"
 msgstr "Tisk formátovacích objektů XSL"
 
 #: src/cong-util.c:308
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Toto bude časem výsledek cong_util_print_xslfo"
+
+#: src/cursor.c:132
+#, c-format
+msgid "Split %s tag"
+msgstr "Rozdělit tag %s"
 
 #: src/main.c:209
 #, c-format
@@ -1421,18 +1460,18 @@ msgstr ""
 "Pokud vidíte tuto chybu, je pravděpodobné, že jste Conglomerate přeložili, "
 "ale nenainstalovali. Zkuste jej nainstalovat."
 
-#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:456
+#: src/plugin-cleanup-source.c:398 src/plugin-cleanup-source.c:454
 msgid "Cleanup XML Source"
 msgstr "Vyčistit zdroj XML"
 
-#: src/plugin-cleanup-source.c:457 src/plugin-cleanup-source.c:460
-#: src/plugin-cleanup-source.c:461
+#: src/plugin-cleanup-source.c:455 src/plugin-cleanup-source.c:458
+#: src/plugin-cleanup-source.c:459
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
 msgstr "Vyčistí zdroj XML dokumentu, takže se snadno čte v editoru zdroje."
 
-#: src/plugin-cleanup-source.c:459
+#: src/plugin-cleanup-source.c:457
 msgid "_Clean the XML Source"
 msgstr "_Vyčistit zdroj XML"
 
@@ -1468,66 +1507,66 @@ msgstr "Nepojmenovaná kniha"
 msgid "Untitled Set of Documents"
 msgstr "Nepojmenovaná sada dokumentů"
 
-#: src/plugin-docbook.c:926
+#: src/plugin-docbook.c:928
 msgid "Exporting PDF file"
 msgstr "Exportuji soubor PDF"
 
-#: src/plugin-docbook.c:930 src/plugin-docbook.c:1002
+#: src/plugin-docbook.c:932 src/plugin-docbook.c:1004
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transformuji DocBook do formátovacích objektů XSL"
 
-#: src/plugin-docbook.c:932
+#: src/plugin-docbook.c:934
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Kreslím formátovací objekty XSL jako soubor PDF"
 
-#: src/plugin-docbook.c:945 src/plugin-fo.c:74
+#: src/plugin-docbook.c:947 src/plugin-fo.c:74
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Převádím formátovací objekty XSL do PDF"
 
-#: src/plugin-docbook.c:998
+#: src/plugin-docbook.c:1000
 msgid "Printing DocBook file"
 msgstr "Tisknu soubor DocBook"
 
-#: src/plugin-docbook.c:1241
+#: src/plugin-docbook.c:1243
 msgid "DocBook Article"
 msgstr "Článek DocBook"
 
-#: src/plugin-docbook.c:1242
+#: src/plugin-docbook.c:1244
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Vytvořit článek, možná WWW stránku nebo časopis, pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1249
+#: src/plugin-docbook.c:1251
 msgid "DocBook Book"
 msgstr "Kniha DocBook"
 
-#: src/plugin-docbook.c:1250
+#: src/plugin-docbook.c:1252
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Vytvořit knihu pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1257
+#: src/plugin-docbook.c:1259
 msgid "DocBook Set"
 msgstr "Sada DocBook"
 
-#: src/plugin-docbook.c:1258
+#: src/plugin-docbook.c:1260
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Vytvořit sadu souvisejících knih pomocí formátu \"DocBook\""
 
-#: src/plugin-docbook.c:1266
+#: src/plugin-docbook.c:1268
 msgid "Import text as a DocBook article"
 msgstr "Importovat text jako článek DocBook"
 
-#: src/plugin-docbook.c:1267
+#: src/plugin-docbook.c:1269
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Importovat čistý textový soubor do formátu \"DocBook\" jako článek"
 
-#: src/plugin-docbook.c:1284
+#: src/plugin-docbook.c:1286
 msgid "Export DocBook as HTML"
 msgstr "Exportovat DocBook jako HTML"
 
-#: src/plugin-docbook.c:1285
+#: src/plugin-docbook.c:1287
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1535,11 +1574,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření WWW stránky z tohoto "
 "souboru DocBook"
 
-#: src/plugin-docbook.c:1292
+#: src/plugin-docbook.c:1294
 msgid "Export DocBook as PDF"
 msgstr "Exportovat DocBook jako PDF"
 
-#: src/plugin-docbook.c:1293
+#: src/plugin-docbook.c:1295
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1547,11 +1586,11 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru PDF z tohoto "
 "souboru DocBook"
 
-#: src/plugin-docbook.c:1300
+#: src/plugin-docbook.c:1302
 msgid "Export DocBook as XSL:FO"
 msgstr "Exportovat DocBook jako XSL:FO"
 
-#: src/plugin-docbook.c:1301
+#: src/plugin-docbook.c:1303
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1559,59 +1598,59 @@ msgstr ""
 "Použít stylesheety DocBook Normana Walshe pro vytvoření souboru XSL:FO z "
 "tohoto souboru DocBook, který může být později vytištěn nebo převeden do PDF"
 
-#: src/plugin-docbook.c:1309
+#: src/plugin-docbook.c:1311
 msgid "Print DocBook"
 msgstr "Vytisknout DocBook"
 
-#: src/plugin-docbook.c:1318
+#: src/plugin-docbook.c:1320
 msgid "Generic DocBook property dialog"
 msgstr "Obecný dialog vlastností DocBook"
 
-#: src/plugin-docbook.c:1319
+#: src/plugin-docbook.c:1321
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Poskytuje dialog Vlastnosti pro většinu uzlů DocBook"
 
-#: src/plugin-docbook.c:1325
+#: src/plugin-docbook.c:1327
 msgid "<orderedlist> property dialog"
 msgstr "Dialog vlastností <orderedlist>"
 
-#: src/plugin-docbook.c:1326
+#: src/plugin-docbook.c:1328
 msgid "Provides a Properties dialog for the <orderedlist> tag"
 msgstr "Poskytuje dialog Vlastnosti pro tag <orderedlist>"
 
-#: src/plugin-docbook.c:1333
+#: src/plugin-docbook.c:1335
 msgid "Promote Section"
 msgstr "Povýšit oddíl"
 
-#: src/plugin-docbook.c:1334
+#: src/plugin-docbook.c:1336
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Povýší oddíl DocBook na vyšší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1338
 msgid "Promote"
 msgstr "Povýšit"
 
-#: src/plugin-docbook.c:1337 src/plugin-docbook.c:1338
+#: src/plugin-docbook.c:1339 src/plugin-docbook.c:1340
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Povýšit oddíl na vyšší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1344
+#: src/plugin-docbook.c:1346
 msgid "Demote Section"
 msgstr "Ponížit oddíl"
 
-#: src/plugin-docbook.c:1345
+#: src/plugin-docbook.c:1347
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Poníží oddíl DocBook na nižší úroveň organizace v dokumentu"
 
-#: src/plugin-docbook.c:1347
+#: src/plugin-docbook.c:1349
 msgid "Demote"
 msgstr "Ponížit"
 
-#: src/plugin-docbook.c:1348 src/plugin-docbook.c:1349
+#: src/plugin-docbook.c:1350 src/plugin-docbook.c:1351
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Ponížit oddíl DocBook na nižší úroveň organizace v dokumentu"
 
@@ -1863,47 +1902,66 @@ msgstr "Element pro zobrazení pravidel šablon ve stylesheetu XSL"
 msgid "(no description available)"
 msgstr "(popis není k dispozici)"
 
-#: src/popup.c:341
+#: src/popup.c:186
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "Použít tag span: %s"
+
+#: src/popup.c:273
+msgid "Remove Span Tag"
+msgstr "Odstranit tag span"
+
+#: src/popup.c:376
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:899
+#: src/popup.c:936
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:909
+#: src/popup.c:946
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:917
+#: src/popup.c:954
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:928
+#: src/popup.c:965
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:959
+#: src/popup.c:996
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:967
+#: src/popup.c:1004
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:975
+#: src/popup.c:1012
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:992
+#: src/popup.c:1029
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1017
+#: src/popup.c:1054
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
-#: src/xmldata.c:400
+#: src/tree.c:42
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "Vložit sourozence: %s"
+
+#: src/tree.c:101
+#, c-format
+msgid "Insert child: %s"
+msgstr "Vložit potomka: %s"
+
+#: src/xmldata.c:430 src/xmldata.c:724
 #, c-format
 msgid ""
 "The element \"%s\" requires a child to be valid. Please choose one of the "
@@ -1913,10 +1971,22 @@ msgstr ""
 "následujících typů potomků."
 
 #. select a dialog element
-#: src/xmldata.c:404
+#: src/xmldata.c:434 src/xmldata.c:728
 msgid "Required Children Choices"
 msgstr "Vyžadované volby potomků"
 
-#: src/xmledit.c:332
+#: src/xmledit.c:330
+msgid "Paste Under"
+msgstr "Vložit pod"
+
+#: src/xmledit.c:395
+msgid "Paste Before"
+msgstr "Vložit před"
+
+#: src/xmledit.c:458
+msgid "Paste After"
+msgstr "Vložit za"
+
+#: src/xmledit.c:519
 msgid "Source View - Conglomerate"
 msgstr "Pohled na zdroj - Conglomerate"
