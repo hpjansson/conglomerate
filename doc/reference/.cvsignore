@@ -1,5 +1,5 @@
 Makefile Makefile.in
 version.xml
-conglomerate.types
-conglomerate-docs.sgml
+conglomerate*
 *.stamp
+html tmpl xml
