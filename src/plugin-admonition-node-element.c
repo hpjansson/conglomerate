@@ -209,6 +209,7 @@ load_icon (const gchar *icon_filename)
 	pixbuf = gdk_pixbuf_new_from_file(full_path, NULL);
 	
 	g_free(full_path);
+	g_free(modified_icon_filename);
 
 	return pixbuf;
 }
