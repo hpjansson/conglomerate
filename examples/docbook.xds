@@ -455,7 +455,7 @@
 			<property-dialog plugin-id="docbook-generic-node-properties"/>
 		</element>
 
-		<element tag="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment">
+		<element tag="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment" whitespace="preserve">
 			<!-- 
 				perhaps this should use a fixed-space font
 				Perhaps we need a boolean to determine whether something

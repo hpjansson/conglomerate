@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm
 
+	* docbook.xds
+
+	Make <programlisting> preserve whitespace
+	
 	* xds.dtd
 
 	Added ns and whitespace attributes to DTD
