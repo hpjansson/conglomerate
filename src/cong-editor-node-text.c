@@ -37,6 +37,7 @@
 #include "cong-selection.h"
 #include "cong-dispspec.h"
 #include "cong-command.h"
+#include "cong-traversal-node.h"
 
 enum FragmentState {
 	FRAG_NORMAL,
@@ -200,19 +201,17 @@ finalize (GObject *object)
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongEditorWidget3* editor_widget,
-				 CongNodePtr node,
-				 CongEditorNode *traversal_parent)
+				 CongTraversalNode *traversal_node)
 {
 #if 0
 	gchar *markup;	
 #endif
 	enum CongWhitespaceHandling whitespace = cong_node_get_whitespace_handling (cong_editor_widget3_get_document (editor_widget),
-										    node);
+										    cong_traversal_node_get_node (traversal_node));
 
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_text),
 				    editor_widget,
-				    node,
-				    traversal_parent);
+				    traversal_node);
 
 
 	PRIVATE(editor_node_text)->text_cache = cong_text_cache_new ((whitespace==CONG_WHITESPACE_NORMALIZE),
@@ -270,8 +269,7 @@ dispose (GObject *object)
 
 CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
-			   CongNodePtr node,
-			   CongEditorNode *traversal_parent)
+			   CongTraversalNode *traversal_node)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_text_new(%s)", node->content);
@@ -279,8 +277,7 @@ cong_editor_node_text_new (CongEditorWidget3 *widget,
 
 	return CONG_EDITOR_NODE( cong_editor_node_text_construct (g_object_new (CONG_EDITOR_NODE_TEXT_TYPE, NULL),
 								  widget,
-								  node,
-								  traversal_parent)
+								  traversal_node)
 				 );
 }
 

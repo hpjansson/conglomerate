@@ -1,5 +1,9 @@
 2003-12-16  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-comment.c, cong-editor-node-comment.h, cong-editor-node-document.c, cong-editor-node-document.h, cong-editor-node-dtd.c, cong-editor-node-dtd.h, cong-editor-node-element-span.c, cong-editor-node-element-span.h, cong-editor-node-element-structural.c, cong-editor-node-element-structural.h, cong-editor-node-element-unknown.c, cong-editor-node-element-unknown.h, cong-editor-node-element.c, cong-editor-node-element.h, cong-editor-node-entity-decl.c, cong-editor-node-entity-decl.h, cong-editor-node-entity-ref.c, cong-editor-node-entity-ref.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-node-unimplemented.c, cong-editor-node-unimplemented.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget.h, cong-editor-widget3.c, cong-plugin.c, cong-plugin.h, cong-traversal-node.c, cong-traversal-node.h, plugin-admonition-node-element.c, plugin-admonition-node-element.h, plugin-admonition.c, plugin-lists-node-element-listitem.c, plugin-lists-node-element-listitem.h, plugin-lists.c, plugin-paragraph-node-element-paragraph.c, plugin-paragraph-node-element-paragraph.h, plugin-paragraph.c
+
+	Big refactoring of main editor widget and its node classes to use the CongDocumentTraversal information; updates to plugins to match changes to editor widget; tidy up of plugin prototypes
+	
 	* cong-document.c, cong-document.h
 
 	Added methods for getting at doc's traversal structure

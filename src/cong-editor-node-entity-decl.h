@@ -58,13 +58,11 @@ cong_editor_node_entity_decl_get_type (void);
 CongEditorNodeEntityDecl*
 cong_editor_node_entity_decl_construct (CongEditorNodeEntityDecl *editor_node_entity_decl,
 					CongEditorWidget3* widget,
-					CongNodePtr node,
-					CongEditorNode *traversal_parent);
+					CongTraversalNode *traversal_node);
 
 CongEditorNode*
 cong_editor_node_entity_decl_new (CongEditorWidget3* widget,
-				  CongNodePtr node,
-				  CongEditorNode *traversal_parent);
+				  CongTraversalNode *traversal_node);
 
 G_END_DECLS
 

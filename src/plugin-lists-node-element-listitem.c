@@ -108,13 +108,11 @@ cong_editor_node_element_listitem_instance_init (CongEditorNodeElementListitem *
 CongEditorNodeElementListitem*
 cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *editor_node_element_listitem,
 					     CongEditorWidget3* editor_widget,
-					     CongNodePtr node,
-					     CongEditorNode *traversal_parent)
+					     CongTraversalNode *traversal_node)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_listitem),
 					    editor_widget,
-					    node,
-					    traversal_parent);
+					    traversal_node);
 
 	PRIVATE(editor_node_element_listitem)->cached_label = calculate_label (editor_node_element_listitem);
 
@@ -128,8 +126,7 @@ cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *edit
 
 CongEditorNode*
 cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
-				       CongNodePtr node,
-				       CongEditorNode *traversal_parent)
+				       CongTraversalNode *traversal_node)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_listitem_new(%s)", node->name);
@@ -138,8 +135,7 @@ cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
 	return CONG_EDITOR_NODE( cong_editor_node_element_listitem_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_LISTITEM_TYPE, NULL),
 				  widget,
-				  node,
-				  traversal_parent));
+				  traversal_node));
 }
 
 const gchar*

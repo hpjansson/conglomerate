@@ -24,6 +24,7 @@
 
 #include "global.h"
 #include "cong-document.h"
+#include "cong-document-traversal.h"
 
 #include "cong-app.h"
 #include "cong-eel.h"
@@ -42,6 +43,7 @@
 #include "cong-selection.h"
 #include "cong-editor-node-text.h"
 #include "cong-command.h"
+#include "cong-traversal-node.h"
 
 #define SHOW_CURSOR_SPEW 0
 #define DEBUG_IM_CONTEXT 1
@@ -60,6 +62,7 @@
    on the EditorNodes.
 */
 
+#if 0
 gboolean
 cong_editor_widget3_node_should_have_editor_node (CongNodePtr node);
 
@@ -97,6 +100,7 @@ value_destroy_func (gpointer data)
 
 	cong_editor_mapping_free (mapping);
 }
+#endif
 
 
 #define PRIVATE(foo) ((foo)->private)
@@ -105,9 +109,13 @@ struct CongEditorWidget3Details
 {
 	CongDocument *doc;
 
+#if 1
+	GHashTable *hash_of_traversal_node_to_editor_node;
+#else
 	GHashTable *hash_of_node_to_editor_mapping;
+#endif
 
-#if 0
+#if 1
 	GHashTable *hash_of_editor_node_to_child_policy;
 	GHashTable *hash_of_editor_node_to_parents_child_policy;
 #endif
@@ -130,7 +138,7 @@ struct CongEditorWidget3Details
 #define DEBUG_EDITOR_WIDGET_VIEW  0
 #define LOG_GTK_WIDGET_SIGNALS    0
 #define LOG_CONG_DOCUMENT_SIGNALS 0
-#define LOG_EDITOR_NODES 0
+#define LOG_EDITOR_NODES 1
 #define LOG_EDITOR_AREAS 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
@@ -183,6 +191,7 @@ render_area (CongEditorArea *area,
 static void 
 populate_widget3(CongEditorWidget3 *widget);
 
+#if 0
 static void 
 recursive_add_all_nodes(CongEditorWidget3 *widget,
 			CongNodePtr node);
@@ -222,7 +231,7 @@ static void
 recursive_remove_nodes(CongEditorWidget3 *widget,
 		       CongNodePtr node,
 		       CongEditorNode *traversal_parent);
-
+#endif
 
 static void 
 create_areas(CongEditorWidget3 *widget,
@@ -368,6 +377,17 @@ static void on_signal_selection_change_notify_after (CongDocument *doc,
 static void on_signal_cursor_change_notify_after (CongDocument *doc, 
 					   gpointer user_data);
 
+/* Declarations of CongDocumentTraversal signal handlers: */
+static void
+on_traversal_node_added (CongDocumentTraversal *traversal, 
+			 CongTraversalNode *traversal_node,
+			 gpointer user_data);
+
+static void
+on_traversal_node_removed (CongDocumentTraversal *traversal, 
+			   CongTraversalNode *traversal_node,
+			   gpointer user_data);
+
 /* Declarations of CongEditorArea event handlers: */
 static void
 on_root_requisition_change (CongEditorArea *child_area,
@@ -448,12 +468,20 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	g_object_ref(G_OBJECT(doc));
 
+#if 1
+	/* FIXME: need to clean up properly: */
+	PRIVATE(editor_widget)->hash_of_traversal_node_to_editor_node = g_hash_table_new_full (NULL,
+											       NULL,
+											       NULL,
+											       NULL);
+#else
 	PRIVATE(editor_widget)->hash_of_node_to_editor_mapping = g_hash_table_new_full (NULL,
 											NULL,
 											NULL,
 											value_destroy_func);
+#endif
 
-#if 0
+#if 1
 	PRIVATE(editor_widget)->hash_of_editor_node_to_child_policy = g_hash_table_new (NULL,
 											NULL);
 	PRIVATE(editor_widget)->hash_of_editor_node_to_parents_child_policy = g_hash_table_new (NULL,
@@ -539,6 +567,7 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 		/* (These signal handlets get disconnected during the dispose handler) */
 
 		/* attach signal handlers to document for notification before change happens: */
+#if 0
 		g_signal_connect (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_before), editor_widget);
 		g_signal_connect (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_before), editor_widget);
 		g_signal_connect (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_before), editor_widget);
@@ -550,8 +579,10 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 		g_signal_connect (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_before), editor_widget);
 		g_signal_connect (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_before), editor_widget);
 		g_signal_connect (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_before), editor_widget);
+#endif
 		
 		/* attach signal handlers to document for notification after change happens: */
+#if 0
 		g_signal_connect_after (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_after), editor_widget);
 		g_signal_connect_after (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_after), editor_widget);
 		g_signal_connect_after (G_OBJECT(doc), "node_make_orphan", G_CALLBACK(on_signal_make_orphan_notify_after), editor_widget);
@@ -561,8 +592,20 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 		g_signal_connect_after (G_OBJECT(doc), "node_set_text", G_CALLBACK(on_signal_set_text_notify_after), editor_widget);
 		g_signal_connect_after (G_OBJECT(doc), "node_set_attribute", G_CALLBACK(on_signal_set_attribute_notify_after), editor_widget);
 		g_signal_connect_after (G_OBJECT(doc), "node_remove_attribute", G_CALLBACK(on_signal_remove_attribute_notify_after), editor_widget);
+#endif
 		g_signal_connect_after (G_OBJECT(doc), "selection_change", G_CALLBACK(on_signal_selection_change_notify_after), editor_widget);
 		g_signal_connect_after (G_OBJECT(doc), "cursor_change", G_CALLBACK(on_signal_cursor_change_notify_after), editor_widget);
+	}
+
+	/* Connect to CongDocumentTraversal events: */
+	{
+		/* (These signal handlets get disconnected during the dispose handler) */
+		CongDocumentTraversal *traversal = cong_document_get_traversal (doc);
+
+		g_signal_connect_after (G_OBJECT (traversal), "traversal_node_added", G_CALLBACK(on_traversal_node_added), editor_widget);
+		g_signal_connect (G_OBJECT (traversal), "traversal_node_removed", G_CALLBACK(on_traversal_node_removed), editor_widget);
+		
+		
 	}
 
 	return editor_widget;
@@ -617,28 +660,41 @@ void cong_editor_widget_force_layout_update(CongEditorWidget3 *editor_widget)
 }
 #endif
 
-struct for_each_in_hash_struct
+CongEditorNode*
+cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *editor_widget,
+							CongTraversalNode *traversal_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget), NULL);
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node), NULL);
+
+	return g_hash_table_lookup (PRIVATE (editor_widget)->hash_of_traversal_node_to_editor_node,
+				    traversal_node);
+}
+
+struct for_each_editor_node_struct
 {
 	CongEditorWidget3 *editor_widget;
-	CongNodePtr xml_node;
 	CongEditorNodeCallback editor_node_callback;
 	gpointer user_data;
 };
 
 static void
-for_each_in_hash_func (gpointer key,
-		       gpointer value,
-		       gpointer user_data)
+for_each_editor_node_cb (CongDocumentTraversal *doc_traversal, 
+			 CongTraversalNode *traversal_node,
+			 gpointer user_data)
 {
-	struct for_each_in_hash_struct *tmp_struct = (struct for_each_in_hash_struct*)user_data; 
+	struct for_each_editor_node_struct *tmp_struct = (struct for_each_editor_node_struct*)user_data; 
+	CongEditorNode *editor_node;
 
 	g_assert (tmp_struct);
 	g_assert (tmp_struct->editor_widget);
-	g_assert (tmp_struct->xml_node);
 	g_assert (tmp_struct->editor_node_callback);
 
+	editor_node = cong_editor_widget3_get_editor_node_for_traversal_node (tmp_struct->editor_widget,
+									      traversal_node);
+
 	tmp_struct->editor_node_callback (tmp_struct->editor_widget,
-					  CONG_EDITOR_NODE(value),
+					  editor_node,
 					  tmp_struct->user_data);
 	
 }
@@ -649,30 +705,23 @@ cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *editor_widget,
 					  CongEditorNodeCallback editor_node_callback,
 					  gpointer user_data)
 {
-	EditorMapping *editor_mapping;
-
+	struct for_each_editor_node_struct tmp_struct; 
+	
 	g_return_if_fail (editor_widget);
 	g_return_if_fail (xml_node);
 	g_return_if_fail (editor_node_callback);
 
-	editor_mapping = g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor_mapping,
-					      xml_node);
+	tmp_struct.editor_widget = editor_widget;
+	tmp_struct.editor_node_callback = editor_node_callback;
+	tmp_struct.user_data = user_data;
 
-	if (editor_mapping) {
-		struct for_each_in_hash_struct tmp_struct; 
-	
-		tmp_struct.editor_widget = editor_widget;
-		tmp_struct.xml_node = xml_node;
-		tmp_struct.editor_node_callback = editor_node_callback;
-		tmp_struct.user_data = user_data;
-
-		g_hash_table_foreach (editor_mapping->hash_of_traversal_parent_to_editor_node,
-				      for_each_in_hash_func,
-				      &tmp_struct);
-				      
-	}
+	cong_document_traversal_for_each_traversal_node (cong_document_get_traversal (cong_editor_widget3_get_document (editor_widget)),
+							 xml_node,
+							 for_each_editor_node_cb,
+							 &tmp_struct);
 }
 
+#if 0
 CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 				     CongNodePtr xml_node,
@@ -704,27 +753,23 @@ copy_to_result_hash_func (gpointer key,
 
 	*result = CONG_EDITOR_NODE (value);
 }
+#endif
 
 CongEditorNode*
 cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 					CongNodePtr xml_node)
 {
-	EditorMapping *editor_mapping;
+	CongTraversalNode *traversal_node;
 
 	g_return_val_if_fail (editor_widget, NULL);
 	g_return_val_if_fail (xml_node, NULL);
 
-	editor_mapping = g_hash_table_lookup (PRIVATE(editor_widget)->hash_of_node_to_editor_mapping,
-					      xml_node);
+	traversal_node = cong_document_traversal_get_a_traversal_node (cong_document_get_traversal (PRIVATE (editor_widget)->doc),
+								       xml_node);
 
-	if (editor_mapping) {
-		CongEditorNode *result = NULL;
-
-		g_hash_table_foreach (editor_mapping->hash_of_traversal_parent_to_editor_node,
-				      copy_to_result_hash_func,
-				      &result);
-
-		return result;
+	if (traversal_node) {
+		return cong_editor_widget3_get_editor_node_for_traversal_node (editor_widget,
+									       traversal_node);
 	} else {
 		return NULL;
 	}
@@ -779,6 +824,7 @@ cong_editor_widget3_set_prehighlight_editor_area (CongEditorWidget3 *editor_widg
 	}
 }
 
+#if 0
 EditorMapping*
 cong_editor_mapping_new (CongNodePtr xml_node)
 {
@@ -831,6 +877,7 @@ cong_editor_mapping_remove_editor_node (EditorMapping* mapping,
 	g_hash_table_remove (mapping->hash_of_traversal_parent_to_editor_node,
 			     traversal_parent);
 }
+#endif
 
 
 GdkGC*
@@ -1562,7 +1609,7 @@ focus_out_event_handler(GtkWidget *w, GdkEventFocus *event)
 /* Definitions of the CongDocument event handlers: */
 /* Signal handling callbacks: */
 /* Callbacks attached before the default handler: */
-
+#if 0
 static void on_signal_begin_edit_notify_before (CongDocument *doc,
 					 gpointer user_data) 
 { 
@@ -1700,9 +1747,10 @@ static void on_signal_cursor_change_notify_before (CongDocument *doc,
 
 	/* empty so far */
 }
-
+#endif
 
 /* Callbacks attached after the default handler: */
+#if 0
 static void on_signal_begin_edit_notify_after (CongDocument *doc,
 					 gpointer user_data) 
 { 
@@ -1812,6 +1860,7 @@ static void on_signal_remove_attribute_notify_after (CongDocument *doc,
 
 	/* empty so far */
 }
+#endif
 
 static void 
 set_editor_node_selection (CongEditorWidget3 *widget, 
@@ -1864,6 +1913,97 @@ static void on_signal_cursor_change_notify_after (CongDocument *doc,
 	gtk_widget_queue_draw(GTK_WIDGET(editor_widget));	
 }
 
+static void
+potentially_add_editor_node (CongEditorWidget3 *editor_widget,
+			     CongTraversalNode *traversal_node)
+{
+	gboolean should_add_node;
+	CongNodePtr xml_node;	
+
+	g_return_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget));
+	g_return_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node));
+
+	xml_node = cong_traversal_node_get_node (traversal_node);
+
+	should_add_node = cong_node_should_be_visible_in_editor (xml_node);
+
+	{
+		gchar *desc = cong_node_debug_description (xml_node);
+		g_message ("Should add node %s? %s", desc, should_add_node ? "TRUE" : "FALSE");
+		g_free (desc);
+	}
+
+
+	if (should_add_node) {
+		/* Add this node: */
+		CongEditorNode *editor_node = cong_editor_node_manufacture (editor_widget,
+									    traversal_node);
+		g_assert(editor_node);
+
+		g_hash_table_insert (PRIVATE (editor_widget)->hash_of_traversal_node_to_editor_node,
+				     traversal_node,
+				     editor_node);
+
+		create_areas (editor_widget,
+			      editor_node);
+	}	
+}
+
+static void
+potentially_remove_editor_node (CongEditorWidget3 *editor_widget,
+				CongTraversalNode *traversal_node)
+{
+	CongNodePtr xml_node;
+	CongEditorNode *editor_node;
+
+	g_return_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget));
+	g_return_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node));
+
+	xml_node = cong_traversal_node_get_node (traversal_node);
+
+	editor_node = cong_editor_widget3_get_editor_node_for_traversal_node (editor_widget,
+									      traversal_node);
+	if (editor_node) {
+
+		g_assert(editor_node);
+		
+		if (xml_node == PRIVATE (editor_widget)->selected_xml_node) {
+			PRIVATE (editor_widget)->selected_xml_node = NULL;
+		}
+		
+		destroy_areas (editor_widget,
+			       editor_node);
+		
+		/* Remove this editor_node: */
+		g_hash_table_remove (PRIVATE (editor_widget)->hash_of_traversal_node_to_editor_node,
+				     traversal_node);
+
+		g_object_unref (G_OBJECT (editor_node));
+	}
+}
+		 
+
+/* Declarations of CongDocumentTraversal signal handlers: */
+static void
+on_traversal_node_added (CongDocumentTraversal *traversal, 
+			 CongTraversalNode *traversal_node,
+			 gpointer user_data)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data);
+
+	potentially_add_editor_node (editor_widget, traversal_node);
+}
+
+static void
+on_traversal_node_removed (CongDocumentTraversal *traversal, 
+			   CongTraversalNode *traversal_node,
+			   gpointer user_data)
+{
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
+
+	potentially_remove_editor_node (editor_widget, traversal_node);	
+}
+
 /* Definitions of CongEditorArea event handlers: */
 static void
 on_root_requisition_change (CongEditorArea *child_area,
@@ -1877,6 +2017,25 @@ on_root_requisition_change (CongEditorArea *child_area,
 	gtk_widget_queue_resize (GTK_WIDGET(editor_widget));
 }
 
+static void
+recursive_add_editor_nodes (CongEditorWidget3 *editor_widget,
+			    CongTraversalNode *traversal_node)
+{
+	CongTraversalNode *iter;
+
+	g_return_if_fail (IS_CONG_EDITOR_WIDGET3 (editor_widget));
+	g_return_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node));
+
+	/* Add this node: */
+	potentially_add_editor_node (editor_widget, traversal_node);
+
+	/* Recurse over children: */
+	for (iter = cong_traversal_node_get_first_child (traversal_node); iter; iter = cong_traversal_node_get_next (iter)) {
+		recursive_add_editor_nodes (editor_widget,
+					    iter);		
+	}
+}
+
 static void 
 populate_widget3(CongEditorWidget3 *widget)
 {
@@ -1884,9 +2043,10 @@ populate_widget3(CongEditorWidget3 *widget)
 	CongDocument *doc;
 
 	doc = cong_editor_widget3_get_document(widget);
-
-	recursive_add_all_nodes (widget,
-				 (CongNodePtr)cong_document_get_xml (doc));		
+	
+	recursive_add_editor_nodes (editor_widget,
+				    cong_document_get_root_traversal_node (doc));
+       	/* FIXME: Also need to do the opposite when widget is destroyed */
 }
 
 gboolean
@@ -1903,13 +2063,16 @@ cong_editor_widget3_node_should_have_editor_node (CongNodePtr node)
 	}
 }
 
+#if 0
 gboolean
 cong_editor_widget3_has_editor_node_for_node (CongEditorWidget3 *widget,
 					      CongNodePtr node)
 {
 	return 	g_hash_table_lookup(PRIVATE(widget)->hash_of_node_to_editor_mapping,node)!=NULL;
 }
+#endif
 
+#if 0
 static void 
 recursive_add_all_nodes(CongEditorWidget3 *widget,
 			CongNodePtr node)
@@ -1963,7 +2126,9 @@ remove_node_callback (CongEditorWidget3 *widget,
 			       (CongNodePtr)user_data,
 			       editor_node /* CongEditorNode *traversal_parent*/);
 }
+#endif
 
+#if 0
 static void
 add_node_mapping (CongEditorWidget3 *widget,
 		  CongNodePtr xml_node,
@@ -2029,7 +2194,9 @@ remove_node_mapping (CongEditorWidget3 *widget,
 	/* Release our reference on the editor_node: */
 	g_object_unref (editor_node);
 }
+#endif
 
+#if 0
 static void 
 recursive_add_nodes(CongEditorWidget3 *widget,
 		    CongNodePtr node,
@@ -2163,6 +2330,7 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 				     traversal_parent);
 	}
 }
+#endif
 
 static void 
 create_areas(CongEditorWidget3 *widget,

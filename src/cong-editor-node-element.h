@@ -57,8 +57,7 @@ cong_editor_node_element_get_type (void);
 CongEditorNodeElement*
 cong_editor_node_element_construct (CongEditorNodeElement *editor_node_element,
 				    CongEditorWidget3* widget,
-				    CongNodePtr node,
-				    CongEditorNode *traversal_parent);
+				    CongTraversalNode *traversal_node);
 
 CongDispspecElement*
 cong_editor_node_element_get_dispspec_element (CongEditorNodeElement *editor_node_element);

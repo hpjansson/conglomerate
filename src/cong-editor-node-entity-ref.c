@@ -63,29 +63,25 @@ cong_editor_node_entity_ref_instance_init (CongEditorNodeEntityRef *node_entity_
 
 CongEditorNodeEntityRef*
 cong_editor_node_entity_ref_construct (CongEditorNodeEntityRef *editor_node_entity_ref,
-					CongEditorWidget3* editor_widget,
-					CongNodePtr node,
-					CongEditorNode *traversal_parent)
+				       CongEditorWidget3 *editor_widget,
+				       CongTraversalNode *traversal_node)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_entity_ref),
 				    editor_widget,
-				    node,
-				    traversal_parent);	
+				    traversal_node);	
 	return editor_node_entity_ref;
 }
 
 CongEditorNode*
 cong_editor_node_entity_ref_new (CongEditorWidget3 *widget,
-				  CongNodePtr node,
-				  CongEditorNode *traversal_parent)
+				 CongTraversalNode *traversal_node)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_entity_ref_new()");
 #endif
 	return CONG_EDITOR_NODE( cong_editor_node_entity_ref_construct (g_object_new (CONG_EDITOR_NODE_ENTITY_REF_TYPE, NULL),
 									 widget,
-									 node,
-									 traversal_parent)
+									 traversal_node)
 				 );
 }
 

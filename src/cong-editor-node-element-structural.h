@@ -58,13 +58,11 @@ cong_editor_node_element_structural_get_type (void);
 CongEditorNodeElementStructural*
 cong_editor_node_element_structural_construct (CongEditorNodeElementStructural *editor_node_element_structural,
 					       CongEditorWidget3* widget,
-					       CongNodePtr node,
-					       CongEditorNode *traversal_parent);
+					       CongTraversalNode *traversal_node);
 
 CongEditorNode*
 cong_editor_node_element_structural_new (CongEditorWidget3* widget,
-					 CongNodePtr node,
-					 CongEditorNode *traversal_parent);
+					 CongTraversalNode *traversal_node);
 
 G_END_DECLS
 

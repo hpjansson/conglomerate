@@ -57,14 +57,12 @@ cong_editor_node_entity_ref_get_type (void);
 
 CongEditorNodeEntityRef*
 cong_editor_node_entity_ref_construct (CongEditorNodeEntityRef *editor_node_entity_ref,
-					CongEditorWidget3* widget,
-					CongNodePtr node,
-					CongEditorNode *traversal_parent);
+				       CongEditorWidget3* widget,
+				       CongTraversalNode *traversal_node);
 
 CongEditorNode*
 cong_editor_node_entity_ref_new (CongEditorWidget3* widget,
-				  CongNodePtr node,
-				  CongEditorNode *traversal_parent);
+				 CongTraversalNode *traversal_node);
 
 G_END_DECLS
 

@@ -97,6 +97,17 @@ cong_traversal_node_for_each_child (CongTraversalNode *traversal_node,
 				    CongTraversalNodeCallback callback,
 				    gpointer user_data);
 
+CongTraversalNode*
+cong_traversal_node_get_first_child (CongTraversalNode *traversal_node);
+
+CongTraversalNode*
+cong_traversal_node_get_prev (CongTraversalNode *traversal_node);
+
+CongTraversalNode*
+cong_traversal_node_get_next (CongTraversalNode *traversal_node);
+
+gboolean
+cong_traversal_node_is_referenced_entity_decl (CongTraversalNode *traversal_node);
 
 G_END_DECLS
 

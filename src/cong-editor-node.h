@@ -25,6 +25,7 @@
 #ifndef __CONG_EDITOR_NODE_H__
 #define __CONG_EDITOR_NODE_H__
 
+#include "cong-document.h"
 #include "cong-editor-widget.h"
 
 G_BEGIN_DECLS
@@ -88,17 +89,14 @@ cong_editor_node_get_type (void);
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* widget,
-			    CongNodePtr node,
-			    CongEditorNode *traversal_parent);
-
+			    CongTraversalNode *traversal_node);
 
 /*
  * Factory method for creating editor nodes of an appropriate sub-class
  */
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
-			      CongNodePtr node,
-			      CongEditorNode *traversal_parent);
+			      CongTraversalNode *traversal_node);
 
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node);
@@ -108,6 +106,9 @@ cong_editor_node_get_document (CongEditorNode *editor_node);
 
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node);
+
+CongTraversalNode*
+cong_editor_node_get_traversal_node (CongEditorNode *editor_node);
 
 CongEditorNode*
 cong_editor_node_get_traversal_parent (CongEditorNode *editor_node);

@@ -116,3 +116,82 @@ cong_traversal_node_get_parent (CongTraversalNode *traversal_node)
 	return PRIVATE (traversal_node)->traversal_parent;
 }
 
+CongTraversalNode*
+cong_traversal_node_get_first_child (CongTraversalNode *traversal_node)
+{
+	CongNodePtr other_doc_node;
+
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE(traversal_node), NULL);
+
+	other_doc_node = cong_traversal_node_get_node(traversal_node)->children;
+
+	if (other_doc_node) {
+		return cong_document_traversal_get_traversal_node (PRIVATE (traversal_node)->doc_traversal,
+								   other_doc_node,
+								   traversal_node);
+	} else {
+		return NULL;
+	}
+}
+
+CongTraversalNode*
+cong_traversal_node_get_prev (CongTraversalNode *traversal_node)
+{
+	CongNodePtr other_doc_node;
+
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE(traversal_node), NULL);
+
+	/* If we're traversing below an entity ref node, visiting an entity decl node, then don't return the siblings (which are all the other entity decls in this document */
+	if (cong_traversal_node_is_referenced_entity_decl(traversal_node)) {
+		return NULL;
+	}
+
+	other_doc_node = cong_traversal_node_get_node(traversal_node)->prev;
+
+	if (other_doc_node) {
+		return cong_document_traversal_get_traversal_node (PRIVATE (traversal_node)->doc_traversal,
+								   other_doc_node,
+								   PRIVATE (traversal_node)->traversal_parent);
+	} else {
+		return NULL;
+	}
+}
+
+CongTraversalNode*
+cong_traversal_node_get_next (CongTraversalNode *traversal_node)
+{
+	CongNodePtr other_doc_node;
+
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE(traversal_node), NULL);
+
+	/* If we're traversing below an entity ref node, visiting an entity decl node, then don't return the siblings (which are all the other entity decls in this document */
+	if (cong_traversal_node_is_referenced_entity_decl(traversal_node)) {
+		return NULL;
+	}
+
+	other_doc_node = cong_traversal_node_get_node(traversal_node)->next;
+
+	if (other_doc_node) {
+		return cong_document_traversal_get_traversal_node (PRIVATE (traversal_node)->doc_traversal,
+								   other_doc_node,
+								   PRIVATE (traversal_node)->traversal_parent);
+	} else {
+		return NULL;
+	}
+}
+
+gboolean
+cong_traversal_node_is_referenced_entity_decl (CongTraversalNode *traversal_node)
+{
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE(traversal_node), FALSE);
+
+	if (cong_node_type (cong_traversal_node_get_node (traversal_node))==CONG_NODE_TYPE_ENTITY_DECL) {
+ 		if (cong_node_type (cong_traversal_node_get_node (cong_traversal_node_get_parent (traversal_node)))==CONG_NODE_TYPE_ENTITY_REF) {
+			g_message ("got a referenced entity decl");
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+

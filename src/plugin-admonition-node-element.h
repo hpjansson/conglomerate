@@ -58,13 +58,11 @@ cong_editor_node_element_admonition_get_type (void);
 CongEditorNodeElementAdmonition*
 cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *editor_node_element_admonition,
 					       CongEditorWidget3* widget,
-					       CongNodePtr node,
-					       CongEditorNode *traversal_parent);
+					       CongTraversalNode *traversal_node);
 
 CongEditorNode*
 cong_editor_node_element_admonition_new (CongEditorWidget3* widget,
-					 CongNodePtr node,
-					 CongEditorNode *traversal_parent);
+					 CongTraversalNode *traversal_node);
 G_END_DECLS
 
 #endif

@@ -32,6 +32,7 @@
 #include "cong-app.h"
 #include "cong-util.h"
 #include "cong-vfs.h"
+#include "cong-traversal-node.h"
 
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
@@ -1133,19 +1134,17 @@ gboolean cong_ui_load_imported_file_content(const gchar *string_uri,
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 
-					CongNodePtr node,
-					CongEditorNode *traversal_parent)
+					CongTraversalNode *traversal_node)
 {
 	g_return_val_if_fail(plugin_editor_node_factory, NULL);
 	g_return_val_if_fail(editor_widget, NULL);
-	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node), NULL);
 
 	g_assert(plugin_editor_node_factory->make_node);
 
 	return plugin_editor_node_factory->make_node (plugin_editor_node_factory, 
 						      editor_widget, 
-						      node, 
-						      traversal_parent,
+						      traversal_node,
 						      plugin_editor_node_factory->user_data);
 }
 

@@ -57,14 +57,12 @@ cong_editor_node_element_listitem_get_type (void);
 
 CongEditorNodeElementListitem*
 cong_editor_node_element_listitem_construct (CongEditorNodeElementListitem *editor_node_element_listitem,
-					     CongEditorWidget3* widget,
-					     CongNodePtr node,
-					     CongEditorNode *traversal_parent);
+					     CongEditorWidget3 *widget,
+					     CongTraversalNode *traversal_node);
 
 CongEditorNode*
-cong_editor_node_element_listitem_new (CongEditorWidget3* widget,
-				       CongNodePtr node,
-				       CongEditorNode *traversal_parent);
+cong_editor_node_element_listitem_new (CongEditorWidget3 *widget,
+				       CongTraversalNode *traversal_node);
 
 const gchar*
 cong_editor_node_element_listitem_get_label (CongEditorNodeElementListitem* listitem);

@@ -39,8 +39,7 @@
 static CongEditorNodeElement*  
 manufacture_editor_node_admonition (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
 				    CongEditorWidget3 *editor_widget, 
-				    CongNodePtr node, 
-				    CongEditorNode *traversal_parent,
+				    CongTraversalNode *traversal_node,
 				    gpointer user_data)
 {
 #if 0
@@ -48,8 +47,7 @@ manufacture_editor_node_admonition (CongPluginEditorNodeFactory *plugin_editor_n
 #endif
 
 	return CONG_EDITOR_NODE_ELEMENT( cong_editor_node_element_admonition_new (editor_widget,
-										  node,
-										  traversal_parent));
+										  traversal_node));
 }
 
  /* would be exposed as "plugin_register"? */

@@ -42,6 +42,7 @@
 #include "cong-editor-node-text.h"
 #include "cong-editor-node-unimplemented.h"
 #include "cong-plugin.h"
+#include "cong-traversal-node.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -59,8 +60,7 @@ struct CongEditorNodeDetails
 {
 	CongEditorWidget3 *widget;
 
-	CongNodePtr node;
-	CongEditorNode *traversal_parent;
+	CongTraversalNode *traversal_node;
 
 	CongEditorChildPolicy *child_policy;
 	CongEditorChildPolicy *parents_child_policy;
@@ -125,55 +125,51 @@ cong_editor_node_instance_init (CongEditorNode *node)
 CongEditorNode*
 cong_editor_node_construct (CongEditorNode *editor_node,
 			    CongEditorWidget3* editor_widget,
-			    CongNodePtr node,
-			    CongEditorNode *traversal_parent)
+			    CongTraversalNode *traversal_node)
 {
 	PRIVATE(editor_node)->widget = editor_widget;
-	PRIVATE(editor_node)->node = node;
-	PRIVATE(editor_node)->traversal_parent = traversal_parent;
+	PRIVATE(editor_node)->traversal_node = traversal_node;
 
 	return editor_node;
 }
 
 CongEditorNode*
 cong_editor_node_manufacture (CongEditorWidget3* widget,
-			      CongNodePtr node,
-			      CongEditorNode *traversal_parent)
+			      CongTraversalNode *traversal_node)
 {
 	CongDocument *doc;
+	CongNodePtr xml_node;
 	enum CongNodeType type;
 
-	g_return_val_if_fail (widget, NULL);
-	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_WIDGET3 (widget), NULL);
+	g_return_val_if_fail (IS_CONG_TRAVERSAL_NODE (traversal_node), NULL);
 
 	doc = cong_editor_widget3_get_document (widget);
-	type = cong_node_type (node);
+	xml_node = cong_traversal_node_get_node (traversal_node);
+	type = cong_node_type (xml_node);
 
 	switch (type) {
 	default: g_assert_not_reached();
 	case CONG_NODE_TYPE_ELEMENT:
 		{
 			CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node (doc, 
-												       node);
+												       xml_node);
 			
 			if (ds_element) {
 				switch (cong_dispspec_element_type(ds_element)) {
 				default: g_assert_not_reached();
 				case CONG_ELEMENT_TYPE_STRUCTURAL:
 					return  cong_editor_node_element_structural_new (widget,
-											 node,
-											 traversal_parent);
+											 traversal_node);
 					
 				case CONG_ELEMENT_TYPE_SPAN:
 					return  cong_editor_node_element_span_new (widget,
-										   node,
-										   traversal_parent);
+										   traversal_node);
 					
 				case CONG_ELEMENT_TYPE_INSERT:
 				case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
 					return  cong_editor_node_element_unknown_new (widget,
-										      node,
-										      traversal_parent);
+										      traversal_node);
 					
 				case CONG_ELEMENT_TYPE_PLUGIN:
 					{
@@ -183,81 +179,70 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 						
 						if (factory) {
 							return  CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
-															  widget, 
-															  node,
-															  traversal_parent)
+															  widget,
+															  traversal_node)
 										  );
 						} else {
 							g_message("plugin not found \"%s\"", plugin_id);
 							return cong_editor_node_element_unknown_new (widget,
-												     node,
-												     traversal_parent);
+												     traversal_node);
 						}							
 					}
 					
 				case CONG_ELEMENT_TYPE_UNKNOWN:
 					return cong_editor_node_element_unknown_new (widget,
-										     node,
-										     traversal_parent);
+										     traversal_node);
 				} 
 			} else {
 				return cong_editor_node_element_unknown_new (widget,
-									     node,
-									     traversal_parent);
+									     traversal_node);
 			}
 		}
 		
 	case CONG_NODE_TYPE_ATTRIBUTE:
 		{
 			return  cong_editor_node_unimplemented_new (widget, 
-								    node,
-								    traversal_parent,
+								    traversal_node,
 								    cong_node_type_description (type));
 		}
 		
 	case CONG_NODE_TYPE_TEXT:
 		{
 			return cong_editor_node_text_new (widget, 
-							  node,
-							  traversal_parent);
+							  traversal_node);
 		}
 		
 	case CONG_NODE_TYPE_CDATA_SECTION:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
-								   node,
-								   traversal_parent,
+								   traversal_node,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_ENTITY_REF:
 		{
 			return cong_editor_node_entity_ref_new (widget, 
-								node,
-								traversal_parent);
+								traversal_node);
 		}
 
 	case CONG_NODE_TYPE_ENTITY_NODE:
 	case CONG_NODE_TYPE_PI:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
-								   node,
-								   traversal_parent,
+								   traversal_node,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_COMMENT:			
 		{
 			return cong_editor_node_comment_new (widget, 
-							     node,
-							     traversal_parent);
+							     traversal_node);
 		}
 		
 	case CONG_NODE_TYPE_DOCUMENT:
 		{
 			return cong_editor_node_document_new (widget, 
-							      node,
-							      traversal_parent);
+							      traversal_node);
 		}
 
 	case CONG_NODE_TYPE_DOCUMENT_TYPE:
@@ -266,32 +251,28 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 	case CONG_NODE_TYPE_HTML_DOCUMENT:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
-								   node,
-								   traversal_parent,
+								   traversal_node,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_DTD:
 		{
 			return cong_editor_node_dtd_new (widget, 
-							 node,
-							 traversal_parent);
+							 traversal_node);
 		}
 
 	case CONG_NODE_TYPE_ELEMENT_DECL:
 	case CONG_NODE_TYPE_ATRRIBUTE_DECL:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
-								   node,
-								   traversal_parent,
+								   traversal_node,
 								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_ENTITY_DECL:
 		{
 			return cong_editor_node_entity_decl_new (widget, 
-								 node,
-								 traversal_parent);
+								 traversal_node);
 		}
 		
 	case CONG_NODE_TYPE_NAMESPACE_DECL:
@@ -299,8 +280,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 	case CONG_NODE_TYPE_XINCLUDE_END:
 		{
 			return cong_editor_node_unimplemented_new (widget, 
-								   node,
-								   traversal_parent,
+								   traversal_node,
 								   cong_node_type_description (type));
 		}
 	}
@@ -311,7 +291,7 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 CongEditorWidget3*
 cong_editor_node_get_widget (CongEditorNode *editor_node)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
 
 	return PRIVATE(editor_node)->widget;
 }
@@ -319,7 +299,7 @@ cong_editor_node_get_widget (CongEditorNode *editor_node)
 CongDocument*
 cong_editor_node_get_document (CongEditorNode *editor_node)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
 	
 	return cong_editor_widget3_get_document( cong_editor_node_get_widget(editor_node));
 }
@@ -327,17 +307,30 @@ cong_editor_node_get_document (CongEditorNode *editor_node)
 CongNodePtr
 cong_editor_node_get_node (CongEditorNode *editor_node)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
 
-	return PRIVATE(editor_node)->node;
+	return cong_traversal_node_get_node (PRIVATE(editor_node)->traversal_node);
+}
+
+CongTraversalNode*
+cong_editor_node_get_traversal_node (CongEditorNode *editor_node)
+{
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
+
+	return PRIVATE(editor_node)->traversal_node;	
 }
 
 CongEditorNode*
 cong_editor_node_get_traversal_parent (CongEditorNode *editor_node)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	CongTraversalNode *traversal_node_parent;
 
-	return PRIVATE(editor_node)->traversal_parent;	
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
+
+	traversal_node_parent = cong_traversal_node_get_parent (PRIVATE(editor_node)->traversal_node);
+
+	return cong_editor_widget3_get_editor_node_for_traversal_node (PRIVATE(editor_node)->widget,
+								       traversal_node_parent);
 }
 
 gboolean
@@ -366,7 +359,7 @@ cong_editor_node_private_set_selected (CongEditorNode *editor_node,
 CongEditorArea*
 cong_editor_node_generate_block_area (CongEditorNode *editor_node)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
 
 	g_assert (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_block_area != NULL);
 	
@@ -381,7 +374,7 @@ cong_editor_node_generate_line_areas_recursive (CongEditorNode *editor_node,
 						gint line_width,
 						gint initial_indent)
 {
-	g_return_val_if_fail (editor_node, NULL);
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE (editor_node), NULL);
 
 	/* Dubious hack: */
 	if (CONG_EDITOR_NODE_CLASS (G_OBJECT_GET_CLASS (editor_node))->generate_line_areas_recursive == NULL) {
@@ -431,6 +424,57 @@ cong_editor_node_get_flow_type (CongEditorNode *editor_node)
 	return flow_type;
 }
 
+#if 1
+gboolean
+cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
+{
+	CongTraversalNode *traversal_node;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), FALSE);
+
+	traversal_node = cong_editor_node_get_traversal_node (editor_node);
+
+	return cong_traversal_node_is_referenced_entity_decl (traversal_node);
+}
+
+CongEditorNode*
+cong_editor_node_get_prev (CongEditorNode *editor_node)
+{
+	CongTraversalNode *traversal_node;
+	CongTraversalNode *traversal_node_prev;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	traversal_node = cong_editor_node_get_traversal_node (editor_node);
+	traversal_node_prev = cong_traversal_node_get_prev (traversal_node);
+
+	if (traversal_node_prev) {
+		return cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
+									       traversal_node_prev);
+	} else {
+		return NULL;
+	}
+}
+
+CongEditorNode*
+cong_editor_node_get_next (CongEditorNode *editor_node)
+{
+	CongTraversalNode *traversal_node;
+	CongTraversalNode *traversal_node_next;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_NODE(editor_node), NULL);
+
+	traversal_node = cong_editor_node_get_traversal_node (editor_node);
+	traversal_node_next = cong_traversal_node_get_next (traversal_node);
+
+	if (traversal_node_next) {
+		return cong_editor_widget3_get_editor_node_for_traversal_node (cong_editor_node_get_widget (editor_node),
+									       traversal_node_next);
+	} else {
+		return NULL;
+	}
+}
+#else
 gboolean
 cong_editor_node_is_referenced_entity_decl (CongEditorNode *editor_node)
 {
@@ -492,6 +536,7 @@ cong_editor_node_get_next (CongEditorNode *editor_node)
 		return NULL;
 	}
 }
+#endif
 
 CongEditorChildPolicy*
 cong_editor_node_get_child_policy (CongEditorNode *editor_node)

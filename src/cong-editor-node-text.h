@@ -58,13 +58,11 @@ cong_editor_node_text_get_type (void);
 CongEditorNodeText*
 cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongEditorWidget3* widget,
-				 CongNodePtr node,
-				 CongEditorNode *traversal_parent);
+				 CongTraversalNode *traversal_node);
 
 CongEditorNode*
 cong_editor_node_text_new (CongEditorWidget3 *widget,
-			   CongNodePtr node,
-			   CongEditorNode *traversal_parent);
+			   CongTraversalNode *traversal_node);
 
 gboolean
 cong_editor_node_text_convert_original_byte_offset_to_stripped (CongEditorNodeText *editor_node_text,

@@ -87,22 +87,19 @@ cong_editor_node_element_admonition_instance_init (CongEditorNodeElementAdmoniti
 
 CongEditorNodeElementAdmonition*
 cong_editor_node_element_admonition_construct (CongEditorNodeElementAdmonition *editor_node_element_admonition,
-					     CongEditorWidget3* editor_widget,
-					     CongNodePtr node,
-					     CongEditorNode *traversal_parent)
+					       CongEditorWidget3* editor_widget,
+					       CongTraversalNode *traversal_node)
 {
 	cong_editor_node_element_construct (CONG_EDITOR_NODE_ELEMENT (editor_node_element_admonition),
 					    editor_widget,
-					    node,
-					    traversal_parent);
+					    traversal_node);
 
 	return editor_node_element_admonition;
 }
 
 CongEditorNode*
 cong_editor_node_element_admonition_new (CongEditorWidget3* widget,
-				       CongNodePtr node,
-				       CongEditorNode *traversal_parent)
+					 CongTraversalNode *traversal_node)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_element_admonition_new(%s)", node->name);
@@ -111,8 +108,7 @@ cong_editor_node_element_admonition_new (CongEditorWidget3* widget,
 	return CONG_EDITOR_NODE( cong_editor_node_element_admonition_construct
 				 (g_object_new (CONG_EDITOR_NODE_ELEMENT_ADMONITION_TYPE, NULL),
 				  widget,
-				  node,
-				  traversal_parent));
+				  traversal_node));
 }
 /* Internal function definitions: */
 static void

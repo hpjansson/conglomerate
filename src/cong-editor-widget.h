@@ -25,6 +25,8 @@
 #ifndef __CONG_EDITOR_WIDGET_H__
 #define __CONG_EDITOR_WIDGET_H__
 
+#include "cong-document.h"
+
 G_BEGIN_DECLS
 
 /* Third attempt at an editor widget: */
@@ -114,6 +116,11 @@ cong_editor_widget3_for_each_editor_node (CongEditorWidget3 *widget,
 					  gpointer user_data);
 
 CongEditorNode*
+cong_editor_widget3_get_editor_node_for_traversal_node (CongEditorWidget3 *editor_widget,
+							CongTraversalNode *traversal_node);
+
+#if 0
+CongEditorNode*
 cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 				     CongNodePtr node,
 				     CongEditorNode *traversal_parent);
@@ -121,6 +128,7 @@ cong_editor_widget3_get_editor_node (CongEditorWidget3 *editor_widget,
 CongEditorNode*
 cong_editor_widget3_get_an_editor_node (CongEditorWidget3 *editor_widget,
 					CongNodePtr node);
+#endif
 
 CongEditorArea*
 cong_editor_widget3_get_prehighlight_editor_area (CongEditorWidget3 *editor_widget);

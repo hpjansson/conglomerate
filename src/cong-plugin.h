@@ -25,6 +25,7 @@
 #ifndef __CONG_PLUGIN_H__
 #define __CONG_PLUGIN_H__
 
+#include "cong-document.h"
 #include "cong-editor-widget.h"
 #include "cong-editor-node-element.h"
 
@@ -67,12 +68,38 @@ typedef gboolean (*CongPluginCallbackRegister)(CongPlugin *plugin); /* exposed a
 typedef gboolean (*CongPluginCallbackConfigure)(CongPlugin *plugin);  /* exposed as "plugin_configure"? legitimate for it not to be present */
 
 /* Function pointers that are registered by plugins: */
-typedef void (*CongDocumentFactoryPageCreationCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
-typedef void (*CongDocumentFactoryActionCallback)(CongDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data);
-typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
-typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
-typedef gboolean (*CongExporterDocumentFilter)(CongExporter *exporter, CongDocument *doc, gpointer user_data);
-typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
+typedef void 
+(*CongDocumentFactoryPageCreationCallback) (CongDocumentFactory *factory, 
+					    CongNewFileAssistant *assistant, 
+					    gpointer user_data);
+
+typedef void 
+(*CongDocumentFactoryActionCallback) (CongDocumentFactory *factory, 
+				      CongNewFileAssistant *assistant, 
+				      gpointer user_data);
+
+typedef gboolean
+(*CongImporterMimeFilter) (CongImporter *importer, 
+			   const gchar *mime_type, 
+			   gpointer user_data);
+typedef void 
+(*CongImporterActionCallback) (CongImporter *importer, 
+			       const gchar *uri, 
+			       const gchar *mime_type, 
+			       gpointer user_data, 
+			       GtkWindow *toplevel_window);
+
+typedef gboolean 
+(*CongExporterDocumentFilter) (CongExporter *exporter, 
+			       CongDocument *doc, 
+			       gpointer user_data);
+
+typedef void 
+(*CongExporterActionCallback) (CongExporter *exporter, 
+			       CongDocument *doc, 
+			       const gchar *uri, 
+			       gpointer user_data, 
+			       GtkWindow *toplevel_window);
 
 typedef gboolean 
 (*CongDocToolFilter) (CongDocTool *doc_tool, 
@@ -93,14 +120,30 @@ typedef void
 			       CongNodePtr node,
 			       gpointer user_data);
 
-typedef GtkWidget* (*CongCustomPropertyFactoryMethod)(CongCustomPropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node);
+typedef GtkWidget* 
+(*CongCustomPropertyFactoryMethod) (CongCustomPropertyDialog *custom_property_dialog, 
+				    CongDocument *doc, 
+				    CongNodePtr node);
 
 #if ENABLE_PRINTING
-typedef gboolean (*CongPrintMethodDocumentFilter)(CongPrintMethod *print_method, CongDocument *doc, gpointer user_data);
-typedef void (*CongPrintMethodActionCallback)(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, gpointer user_data, GtkWindow *toplevel_window);
+typedef gboolean 
+(*CongPrintMethodDocumentFilter) (CongPrintMethod *print_method, 
+				  CongDocument *doc, 
+				  gpointer user_data);
+
+typedef void 
+(*CongPrintMethodActionCallback) (CongPrintMethod *print_method, 
+				  CongDocument *doc, 
+				  GnomePrintContext *gpc, 
+				  gpointer user_data, 
+				  GtkWindow *toplevel_window);
 #endif
 
-typedef CongEditorNodeElement* (*CongEditorNodeFactoryMethod)(CongPluginEditorNodeFactory *plugin_editor_node_factory, CongEditorWidget3 *editor_widget, CongNodePtr node, CongEditorNode *traversal_parent, gpointer user_data);
+typedef CongEditorNodeElement* 
+(*CongEditorNodeFactoryMethod) (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
+				CongEditorWidget3 *editor_widget, 
+				CongTraversalNode *traversal_node, 
+				gpointer user_data);
 
 /* 
    CongPluginManager
@@ -338,8 +381,7 @@ GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 CongEditorNodeElement*
 cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
 					CongEditorWidget3 *editor_widget, 
-					CongNodePtr node,
-					CongEditorNode *traversal_parent);
+					CongTraversalNode *traversal_node);
 
 
 GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,

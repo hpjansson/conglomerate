@@ -30,6 +30,7 @@
 #include "cong-app.h"
 
 #include "cong-editor-area-text-comment.h"
+#include "cong-traversal-node.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -91,16 +92,14 @@ cong_editor_node_comment_instance_init (CongEditorNodeComment *node_comment)
 CongEditorNodeComment*
 cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 				    CongEditorWidget3* editor_widget,
-				    CongNodePtr node,
-				    CongEditorNode *traversal_parent)
+				    CongTraversalNode *traversal_node)
 {
 	cong_editor_node_construct (CONG_EDITOR_NODE (editor_node_comment),
 				    editor_widget,
-				    node,
-				    traversal_parent);	
+				    traversal_node);	
 
 	PRIVATE(editor_node_comment)->text_cache = cong_text_cache_new (FALSE, /* Don't strip whitespace */
-									node->content,
+									cong_traversal_node_get_node (traversal_node)->content,
 									NULL);
 
 	return editor_node_comment;
@@ -108,16 +107,14 @@ cong_editor_node_comment_construct (CongEditorNodeComment *editor_node_comment,
 
 CongEditorNode*
 cong_editor_node_comment_new (CongEditorWidget3 *widget,
-			      CongNodePtr node,
-			      CongEditorNode *traversal_parent)
+			      CongTraversalNode *traversal_node)
 {
 #if DEBUG_EDITOR_NODE_LIFETIMES
 	g_message("cong_editor_node_comment_new()");
 #endif
 	return CONG_EDITOR_NODE( cong_editor_node_comment_construct (g_object_new (CONG_EDITOR_NODE_COMMENT_TYPE, NULL),
 								     widget,
-								     node,
-								     traversal_parent)
+								     traversal_node)
 				 );
 }
 
