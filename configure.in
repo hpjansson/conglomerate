@@ -10,7 +10,7 @@ BONOBOUI_REQUIRED=1.0.0
 
 dnl --- Package configuration ---
 
-AM_INIT_AUTOMAKE(conglomerate, 0.0.4)
+AM_INIT_AUTOMAKE(conglomerate, 0.3.110)
 AM_CONFIG_HEADER(config.h)
 dnl AM_ACLOCAL_INCLUDE(macros)
 
