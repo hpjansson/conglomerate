@@ -1,5 +1,9 @@
 2004-11-15  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-object.c: 
+
+	Removed unnecessary debug string from translations
+
 	* Makefile.am, cong-fake-plugin-hooks.c, cong-fake-plugin-hooks.h,
 	plugin-table.c: 
 

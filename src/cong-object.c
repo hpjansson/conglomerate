@@ -361,7 +361,7 @@ cong_object_debug_window (GtkWindow *parent_window)
 
 		renderer = gtk_cell_renderer_text_new ();
 		
-		column = gtk_tree_view_column_new_with_attributes (_("Class"), renderer,
+		column = gtk_tree_view_column_new_with_attributes ("Class", renderer,
 								   "text", NAME_FIELD,
 								   NULL);
 		
