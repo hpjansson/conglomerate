@@ -49,6 +49,7 @@ In theory, compiling on Windows should be equally simple, if you're using Cygwin
 However, to my knowledge (Dave Malcolm 20th October 2002), no-one has attempted
 to build a Windows version for a long time; please contact the development list
 (see below) if you attempt this to let us know how you get on.
+UPDATE: http://lists.copyleft.no/pipermail/conglomerate-devel/2003-September/001279.html
 
 
 If you want to make a debian package from the tarbal or CVS type
