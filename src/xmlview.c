@@ -121,9 +121,6 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 {
 	GdkGC *gc;
 	int str_width;
-#if !NEW_XML_IMPLEMENTATION
-	TTREE *n0;
-#endif
 	gchar *title_text;
 
 	GtkWidget* vbox = GTK_WIDGET(g_object_get_data(G_OBJECT(w), "vbox"));
@@ -184,6 +181,26 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	g_free(title_text);
 
 	/* FIXME:  this will fail to update when the text is edited */
+
+	/* Test of expanders: */
+#if 0
+	{
+		GdkRectangle area;
+		area.x=5;
+		area.y=5;
+		area.width=50;
+		area.height=50;
+		gtk_paint_expander(w->style,
+				   w->window,
+				   GTK_WIDGET_STATE(w),
+				   &area,
+				   NULL, /* w, */
+				   "", /* const gchar *detail, */
+				   5, /* gint x, */
+				   5, /* gint y, */
+				   expanded ? GTK_EXPANDER_EXPANDED : GTK_EXPANDER_COLLAPSED);
+	}
+#endif
 	
 #else	
 	str_width = gdk_string_width(title_font->gdk_font, xml_frag_name_nice(x));
@@ -248,7 +265,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 	gdk_draw_string(w->window, title_font->gdk_font, w->style->black_gc, 4, 2 + title_font->asc,
 									cong_dispspec_name_get(ds, x));
 
-#if !NEW_XML_IMPLEMENTATION
+#if 0
 	/* Metadata indicator */
 	
 	n0 = x->child;
@@ -271,7 +288,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, CongNode
 				10 - gdk_string_width(title_font->gdk_font, "fuentes"),
 				2 + title_font->asc, "fuentes");
 	}
-#endif /* #if !NEW_XML_IMPLEMENTATION */
+#endif
 
 #endif
 
@@ -442,7 +459,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, CongNod
 	for (i = 1; i < w->allocation.height; i++)
 	{
 		gdk_draw_line(w->window, gc, str_width + 3, i,
-									str_width + (w->allocation.height - i + 1 - 4), i);
+			      str_width + (w->allocation.height - i + 1 - 4), i);
 	}
 
 
@@ -625,6 +642,24 @@ static gint xv_section_indent_expose(GtkWidget *w, GdkEventExpose *event, CongDi
 	return(TRUE);
 }
 
+GtkWidget *xv_section_vline(CongDispspec *ds, CongNodePtr x)
+{
+	GtkWidget *line;
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+
+	line = gtk_drawing_area_new();
+	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 4, 0);
+	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
+			   (GtkSignalFunc) xv_section_indent_expose, element);
+	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
+			   (GtkSignalFunc) xv_section_indent_expose, element);
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+
+
+	gtk_widget_show(line);
+	return(line);
+}
+
 
 static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
@@ -669,6 +704,56 @@ static gint xv_section_vline_and_space_expose(GtkWidget *w, GdkEventExpose *even
 }
 
 
+
+GtkWidget *xv_section_vline_and_space(CongDispspec *ds, CongNodePtr x)
+{
+	GtkWidget *line;
+	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
+
+	line = gtk_drawing_area_new();
+	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 0);
+	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
+			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
+	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
+			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
+	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
+
+
+	gtk_widget_show(line);
+	return(line);
+}
+
+
+GtkWidget *xv_section_data(CongNodePtr x, CongDocument *doc, CongDispspec *ds, int collapsed)
+{
+	GtkWidget *hbox, *line;
+	CongSpanEditor *xed;
+
+	hbox = gtk_hbox_new(FALSE, 0);
+
+	line = xv_section_vline_and_space(ds, 
+					  collapsed ? cong_node_parent(cong_node_parent(x)) : cong_node_parent(x));
+
+	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
+
+	xed = xmledit_new(x, doc, ds);
+	/* FIXME: I believe these are getting leaked */
+
+#if 0
+	gtk_box_pack_start(GTK_BOX(hbox), xed->w, FALSE, TRUE, 0);
+#else
+	gtk_box_pack_start(GTK_BOX(hbox), xed->w, TRUE, TRUE, 0);
+#endif
+
+#if 1
+	gtk_widget_show(line);
+	gtk_widget_show(hbox);
+	gtk_widget_show(xed->w);
+	gtk_widget_queue_resize(xed->w);
+#endif
+	return(hbox);
+}
+
 static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDispspecElement *element)
 {
 #if NEW_LOOK
@@ -691,8 +776,8 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDisp
 	/* Clear to white */
 
 	gdk_draw_rectangle(w->window, w->style->white_gc, 1, 0, 0,
-										 w->allocation.width,
-										 w->allocation.height);
+			   w->allocation.width,
+			   w->allocation.height);
 
 	/* | */
 	
@@ -719,73 +804,6 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, CongDisp
 #endif
 	
 	return(TRUE);
-}
-
-
-GtkWidget *xv_section_vline(CongDispspec *ds, CongNodePtr x)
-{
-	GtkWidget *line;
-	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
-
-	line = gtk_drawing_area_new();
-	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 4, 0);
-	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-			   (GtkSignalFunc) xv_section_indent_expose, element);
-	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-			   (GtkSignalFunc) xv_section_indent_expose, element);
-	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
-
-
-	gtk_widget_show(line);
-	return(line);
-}
-
-
-GtkWidget *xv_section_vline_and_space(CongDispspec *ds, CongNodePtr x)
-{
-	GtkWidget *line;
-	CongDispspecElement *element = cong_dispspec_lookup_element(ds, cong_node_name(x));
-
-	line = gtk_drawing_area_new();
-	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 0);
-	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
-	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-			   (GtkSignalFunc) xv_section_vline_and_space_expose, element);
-	gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
-
-
-	gtk_widget_show(line);
-	return(line);
-}
-
-
-GtkWidget *xv_section_data(CongNodePtr x, CongDocument *doc, CongDispspec *ds, int collapsed)
-{
-	GtkWidget *hbox, *line;
-	CongXMLEditor *xed;
-
-	hbox = gtk_hbox_new(FALSE, 0);
-
-	line = xv_section_vline_and_space(ds, collapsed ? cong_node_parent(cong_node_parent(x)) :
-													cong_node_parent(x));
-
-	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
-
-	xed = xmledit_new(x, doc, ds);
-#if 0
-	gtk_box_pack_start(GTK_BOX(hbox), xed->w, FALSE, TRUE, 0);
-#else
-	gtk_box_pack_start(GTK_BOX(hbox), xed->w, TRUE, TRUE, 0);
-#endif
-
-#if 1
-	gtk_widget_show(line);
-	gtk_widget_show(hbox);
-	gtk_widget_show(xed->w);
-	gtk_widget_queue_resize(xed->w);
-#endif
-	return(hbox);
 }
 
 
@@ -839,7 +857,7 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	if (GTK_IS_CONTAINER(widget))
 	{
 		gtk_container_foreach(GTK_CONTAINER(widget),
-													xv_style_r, style);
+				      xv_style_r, style);
 	}
 }
 
@@ -877,6 +895,7 @@ GtkWidget* embedded_new(CongDocument *doc, CongNodePtr x,CongDispspec *ds)
 	g_message("embedded_new\n");
 
 #if 1
+	/* Get file from node attribute: */
 	file_ref = cong_node_get_attribute(x, "fileref"); /* FIXME: hardcoded attribute name for now */
 
 	if (file_ref) {
@@ -885,8 +904,10 @@ GtkWidget* embedded_new(CongDocument *doc, CongNodePtr x,CongDispspec *ds)
 		file_ref= g_strdup("");
 	}
 
+	/* Get at the document path: */
 	doc_path = cong_document_get_parent_uri(doc);
 
+	/* Generate moniker relative to the document path: */
 	moniker = g_strdup_printf("%s/%s",doc_path,file_ref);
 
 	g_free(doc_path);

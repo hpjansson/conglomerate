@@ -9,7 +9,6 @@
 
 #include "global.h"
 
-#if NEW_LAYOUT_IMPLEMENTATION
 void
 cong_layout_line_free(CongLayoutLine *line)
 {
@@ -17,14 +16,12 @@ cong_layout_line_free(CongLayoutLine *line)
 
 	g_free(line);
 }
-#endif
 
 void
 cong_layout_cache_init(CongLayoutCache *layout_cache)
 {
 	g_return_if_fail(layout_cache);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	while (layout_cache->first_line) {
 		CongLayoutLine *next = layout_cache->first_line->next;
 		
@@ -33,13 +30,6 @@ cong_layout_cache_init(CongLayoutCache *layout_cache)
 		layout_cache->first_line=next;		
 	}
 	layout_cache->last_line=NULL;
-#else
-	if (layout_cache->lines) {
-		ttree_branch_remove(layout_cache->lines);
-	}
-
-	layout_cache->lines = ttree_node_add(0, "lines", 5);
-#endif
 }
 
 void
@@ -47,7 +37,6 @@ cong_layout_cache_clear(CongLayoutCache *layout_cache)
 {
 	g_return_if_fail(layout_cache);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	while (layout_cache->first_line) {
 		CongLayoutLine *next = layout_cache->first_line->next;
 		
@@ -56,17 +45,6 @@ cong_layout_cache_clear(CongLayoutCache *layout_cache)
 		layout_cache->first_line=next;		
 	}
 	layout_cache->last_line=NULL;
-#else
-	if (layout_cache->lines)
-	{
-#if 0
-		printf("re-adding lines to xed\n");
-#endif
-
-		ttree_branch_remove(layout_cache->lines);
-		layout_cache->lines = ttree_node_add(0, "lines", 5);
-	}
-#endif
 }
 
 CongLayoutLine*
@@ -77,7 +55,6 @@ cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y)
 	/* Find line by y coord */
 	g_return_val_if_fail(layout_cache, NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	for (l = layout_cache->first_line; l->next; l = l->next)
 	{
 		if (cong_layout_line_get_second_y(l) >= y)
@@ -86,19 +63,6 @@ cong_layout_cache_get_line_by_y_coord(CongLayoutCache *layout_cache, int y)
 			break;
 		}
 	}
-#else
-	g_assert(layout_cache->lines);
-	g_assert(layout_cache->lines->child);
-
-	for (l = layout_cache->lines->child; l->next; l = l->next)
-	{
-		if ((int) *((int *) l->child->next->next->data) >= y)
-		{
-			/* Found the right line */
-			break;
-		}
-	}
-#endif
 
 	return l;
 }
@@ -111,18 +75,9 @@ cong_layout_cache_get_line_by_index(CongLayoutCache *layout_cache, int i)
 	g_return_val_if_fail(layout_cache, NULL);
 	g_return_val_if_fail(i>=0, NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	for (l = layout_cache->first_line; i && l->next; i--) {
 		l = l->next;
 	}
-#else
-	g_assert(layout_cache->lines);
-	g_assert(layout_cache->lines->child);
-
-	for (l = layout_cache->lines->child; i && l->next; i--) {
-		l = l->next;
-	}
-#endif
 
 	return l;
 }
@@ -134,41 +89,21 @@ cong_layout_cache_get_last_line(CongLayoutCache *layout_cache)
 
 	g_return_val_if_fail(layout_cache, NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
-	#if 1
 	t = layout_cache->last_line;
-	#else
-	if (NULL==layout_cache->first_line) {
-		return NULL;
-	}
-
-	for (t = layout_cache->first_line; t->next; t = t->next) {
-		/* empty */
-	}
-	#endif
-#else
-	t = layout_cache->lines;
-	if (!t || !t->child) return(0);
-	t = t->child;
-
-	for (t = layout_cache->lines; t->next; t = t->next) {
-		/* empty */
-	}
-#endif
 
 	return(t);
 }
 
 #define WIDTH_WRAP(disp_w, x, word_w) (((x) + (word_w)) > (disp_w - 1))
 
-void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
+void pos_pl_data(CongSpanEditor *xed, struct pos *pos)
 {
 	const char *data;
 	UNUSED_VAR(int word_x_offset = 0)
 	UNUSED_VAR(int i_last_space = 0)
 	int i;
 
-	CongFont *font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	CongFont *font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(font);
 
 	for (i = pos->c_given, data = xml_frag_data_nice(pos->node); data[i]; )
@@ -189,7 +124,7 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 			if (!pos->space)
 			{
 				/* If cumulated word width makes for a wrap, we're done */
-				if (WIDTH_WRAP(cong_xml_editor_get_widget(xed)->allocation.width, pos->x, pos->word_width))
+				if (WIDTH_WRAP(cong_span_editor_get_widget(xed)->allocation.width, pos->x, pos->word_width))
 				{
 #ifndef RELEASE					
 					fputc('\\', stdout);
@@ -232,7 +167,7 @@ void pos_pl_data(CongXMLEditor *xed, struct pos *pos)
 }
 
 
-void pos_pl(CongXMLEditor *xed, struct pos *pos)
+void pos_pl(CongSpanEditor *xed, struct pos *pos)
 {
 	CongNodePtr node_prev;
 	CongNodePtr node_prev2;
@@ -361,7 +296,7 @@ void pos_pl(CongXMLEditor *xed, struct pos *pos)
 }
 
 
-struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
+struct pos *pos_physical_to_logical(CongSpanEditor *xed, int x, int y)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
@@ -408,13 +343,13 @@ struct pos *pos_physical_to_logical(CongXMLEditor *xed, int x, int y)
 /* -------- */
 
 
-void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
+void pos_lp_data(CongSpanEditor *xed, struct pos *pos)
 {
 	const char *data;
 	int word_x_offset = 0;
 	int i;
 
-	CongFont *font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	CongFont *font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(font);
 
 
@@ -505,7 +440,7 @@ void pos_lp_data(CongXMLEditor *xed, struct pos *pos)
 }
 
 
-void pos_lp(CongXMLEditor *xed, struct pos *pos)
+void pos_lp(CongSpanEditor *xed, struct pos *pos)
 {
 	CongNodePtr node_prev;
 	CongNodePtr node_first;
@@ -616,7 +551,7 @@ void pos_lp(CongXMLEditor *xed, struct pos *pos)
 }
 
 
-struct pos *pos_logical_to_physical(CongXMLEditor *xed, CongNodePtr node, int c)
+struct pos *pos_logical_to_physical(CongSpanEditor *xed, CongNodePtr node, int c)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
@@ -678,7 +613,7 @@ struct pos *pos_logical_to_physical(CongXMLEditor *xed, CongNodePtr node, int c)
 	return(pos);
 }
 
-struct pos *pos_logical_to_physical_new(CongXMLEditor *xed, CongLocation *loc)
+struct pos *pos_logical_to_physical_new(CongSpanEditor *xed, CongLocation *loc)
 {
 	return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
 }

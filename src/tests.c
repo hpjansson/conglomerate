@@ -24,7 +24,7 @@
 
 #include "global.h"
 
-#if !NEW_XML_IMPLEMENTATION
+#if 0
 void add_node_recursive(TTREE *tt, GtkTreeStore *store, GtkTreeIter *parent_iter)
 {
 	GtkTreeIter child_iter;  /* Child iter  */
@@ -70,4 +70,4 @@ GtkWidget* do_ttree_test(TTREE* tt)
 	
 	return tree;
 }
-#endif /* #if !NEW_XML_IMPLEMENTATION */
+#endif

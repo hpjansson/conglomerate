@@ -15,7 +15,7 @@ static gint popup_item_selected(GtkWidget *widget, CongDispspecElement *element)
 	CongNodePtr new_element;
 	CongNodePtr r;
 
-	CongXMLEditor *xed;
+	CongSpanEditor *xed;
 	CongDocument *doc;
 	CongSelection *selection;
 	CongCursor *cursor;
@@ -105,7 +105,7 @@ void popup_show(GtkWidget *widget, GdkEventButton *bevent)
 	return;
 }
 
-void popup_init(CongXMLEditor *xed)
+void popup_init(CongSpanEditor *xed)
 {
 	if (the_globals.popup) gtk_widget_destroy(the_globals.popup);
 	the_globals.popup = gtk_menu_new();
@@ -117,7 +117,7 @@ void popup_init(CongXMLEditor *xed)
 	gtk_menu_set_title(GTK_MENU(the_globals.popup), "Editing menu");
 }
 
-void popup_tag_remove_inner(GtkWidget *widget, CongXMLEditor *xed)
+void popup_tag_remove_inner(GtkWidget *widget, CongSpanEditor *xed)
 {
 	CongNodePtr n0;
 
@@ -135,7 +135,7 @@ void popup_tag_remove_inner(GtkWidget *widget, CongXMLEditor *xed)
 	if (cursor->xed) xed_redraw(cursor->xed);
 }
 
-void popup_tag_remove_outer(GtkWidget *widget, CongXMLEditor *xed)
+void popup_tag_remove_outer(GtkWidget *widget, CongSpanEditor *xed)
 {
 	CongNodePtr n0;
 
@@ -153,7 +153,7 @@ void popup_tag_remove_outer(GtkWidget *widget, CongXMLEditor *xed)
 	if (cursor->xed) xed_redraw(cursor->xed);
 }
 
-void popup_build(CongXMLEditor *xed)
+void popup_build(CongSpanEditor *xed)
 {
 	GtkWidget *item, *w0;
 	CongDispspecElement *n0;

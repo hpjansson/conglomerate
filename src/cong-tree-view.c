@@ -39,6 +39,65 @@ struct CongTreeView
 };
 
 void cong_tree_view_populate_tree(CongTreeView *tree_view);
+void cong_tree_view_recursive_populate(CongDocument *doc, 
+				       CongNodePtr x, 
+				       gboolean collapsed, 
+				       GtkTreeStore* store, 
+				       GtkTreeIter* parent_iter);
+
+struct search_struct
+{
+	CongNodePtr node;
+
+	gboolean found_it;	
+	
+	GtkTreeIter *tree_iter;
+};
+
+static gboolean search_for_node(GtkTreeModel *model,
+				GtkTreePath *path,
+				GtkTreeIter *iter,
+				gpointer data)
+{
+	struct search_struct* search = (struct search_struct*)data;
+	CongNodePtr this_node;
+	
+	g_assert(model);
+	g_assert(path);
+	g_assert(iter);
+	g_assert(search);
+
+	gtk_tree_model_get(model,
+			   iter,
+			   TREEVIEW_NODE_COLUMN,
+			   &this_node,
+			   -1);
+
+	if (this_node==search->node) {
+		search->found_it = TRUE;
+		*search->tree_iter = *iter;
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+
+}
+
+static gboolean get_iter_for_node(CongTreeView *tree_view, CongNodePtr node, GtkTreeIter* tree_iter)
+{
+	/* FIXME: this is O(n), it ought to be O(1), by adding some kind of search structure */
+	struct search_struct search;
+	
+	search.node = node;
+	search.found_it = FALSE;
+	search.tree_iter = tree_iter;
+
+	gtk_tree_model_foreach(GTK_TREE_MODEL(tree_view->gtk_tree_store),
+			       search_for_node,
+			       &search);
+
+	return search.found_it;
+}
 
 /* Prototypes of the handler functions: */
 static void on_document_coarse_update(CongView *view);
@@ -64,9 +123,13 @@ static void on_document_coarse_update(CongView *view)
 
 	tree_view = CONG_TREE_VIEW(view);
 
+#if 0
+	/* Ignore this for now: */
+#else
 	/* Empty and then repopulate the tree store: */
 	gtk_tree_store_clear(tree_view->gtk_tree_store);
 	cong_tree_view_populate_tree(tree_view);
+#endif
 
 }
 
@@ -84,6 +147,12 @@ static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 
 	tree_view = CONG_TREE_VIEW(view);
 
+	if ( get_iter_for_node(tree_view, node, &tree_iter) ) {
+
+		/* Remove this branch of the tree: */
+		gtk_tree_store_remove(tree_view->gtk_tree_store, &tree_iter);
+
+	}
 }
 
 static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
@@ -102,6 +171,25 @@ static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNod
 
 	tree_view = CONG_TREE_VIEW(view);
 
+	if ( get_iter_for_node(tree_view, older_sibling, &tree_iter_sibling) ) {
+
+		if ( get_iter_for_node(tree_view, older_sibling->parent, &tree_iter_parent) ) {
+
+#if 0
+			GtkTreeIter new_tree_iter;
+			gtk_tree_store_insert_after(tree_view->tree_store, &new_tree_iter, &tree_iter_parent, &tree_iter_sibling);
+#endif
+
+#if 0
+			/* FIXME: this doesn't insert it in the correct place: */
+			cong_tree_view_recursive_populate(CONG_VIEW(tree_view)->doc, 
+							  node, 
+							  TRUE, /* gboolean collapsed, */
+							  tree_view->tree_store, 
+							  tree_iter_parent);
+#endif
+		}
+	}
 }
 
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)

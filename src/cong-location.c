@@ -45,26 +45,6 @@ cong_location_equals(const CongLocation *loc0, const CongLocation *loc1)
 }
 
 
-#if 0
-#if NEW_XML_IMPLEMENTATION
-int cong_location_frag_type(CongLocation *loc)
-{
-	g_return_val_if_fail(loc != NULL, 0);
-	g_return_val_if_fail(loc->tt_loc != NULL, 0);
-	
-	return XML_DATA;
-}
-#else
-int cong_location_frag_type(CongLocation *loc)
-{
-	g_return_val_if_fail(loc != NULL, 0);
-	g_return_val_if_fail(loc->tt_loc != NULL, 0);
-	
-	return xml_frag_type(loc->tt_loc);
-}
-#endif
-#endif
-
 enum CongNodeType
 cong_location_node_type(CongLocation *loc)
 {
@@ -97,11 +77,7 @@ cong_location_xml_frag_data_nice_split2(CongDocument *doc, CongLocation *loc)
 void
 cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s)
 {
-#if NEW_XML_IMPLEMENTATION
 	xmlChar *new_content;
-#else
-	TTREE *n;
-#endif
 
 	int len;
 
@@ -113,7 +89,6 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	new_content = xmlStrndup(loc->tt_loc->content, loc->char_loc);
 	new_content = xmlStrcat(new_content, s); /* FIXME: xmlChar versus char */
 	new_content = xmlStrcat(new_content, loc->tt_loc->content+loc->char_loc); /* FIXME: pointer arithmetic will fail with UTF8 etc */
@@ -128,16 +103,6 @@ cong_location_insert_chars(CongDocument *doc, CongLocation *loc, const char* s)
 	xmlFree(new_content);
 
 	loc->char_loc += len;		
-#else	
-
-	n = loc->tt_loc->child;
-	n->data = realloc(n->data, (n->size + 1) + len);
-	
-	memmove(n->data + loc->char_loc + len, n->data + loc->char_loc, (n->size + 1) - loc->char_loc);
-	memcpy(n->data + loc->char_loc, s, len);
-	n->size += len;
-	loc->char_loc += len;
-#endif
 }
 
 void
@@ -147,12 +112,10 @@ cong_location_del_next_char(CongDocument *doc, CongLocation *loc)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	/* FIXME: what should we do about "empty" tags?  Better para support instead? */
 	if (cong_location_get_char(loc))
 	{
 		/* FIXME:  audit the char types and ptr arithmetic here: */
-#if 1
 		char *new_text;
 
 		new_text = xmlStrndup(xml_frag_data_nice(loc->tt_loc), loc->char_loc);
@@ -161,25 +124,7 @@ cong_location_del_next_char(CongDocument *doc, CongLocation *loc)
 		cong_document_node_set_text(doc, loc->tt_loc, new_text);
 
 		xmlFree(new_text);
-#else
-		memmove(xml_frag_data_nice(loc->tt_loc) + loc->char_loc, 
-			xml_frag_data_nice(loc->tt_loc) + loc->char_loc + 1,
-			strlen(xml_frag_data_nice(loc->tt_loc) + loc->char_loc));
-#endif
 	}
-#else
-
-	if (cong_location_get_char(loc))
-	{
-		memmove(xml_frag_data_nice(loc->tt_loc) + loc->char_loc, 
-			xml_frag_data(loc->tt_loc) + loc->char_loc + 1,
-			strlen(xml_frag_data_nice(loc->tt_loc) + loc->char_loc));
-		loc->tt_loc->child->size--;
-	}
-	else if (loc->tt_loc->next && xml_frag_type(loc->tt_loc->next) == XML_TAG_EMPTY) {
-		ttree_branch_remove(loc->tt_loc->next);	
-	}
-#endif
 }
 
 CongNodePtr

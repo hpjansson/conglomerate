@@ -109,29 +109,14 @@ void cong_selection_draw(CongSelection *selection, CongCursor *curs)
 #ifndef RELEASE
 		printf("D");
 #endif
-#if 1
 		y0 = cong_layout_line_get_prev(l) ? cong_layout_line_get_second_y(cong_layout_line_get_prev(l)) : 0;
-#else
-		y0 = l->prev ? (int) *((int *) l->prev->child->next->next->data) : 0;
-#endif
 		if (y0 == y1) break;
-#if 1
 		gdk_draw_rectangle(curs->xed->p, gc, 1,
 				   x0, y0, curs->xed->w->allocation.width - x0,
 				   l ? cong_layout_line_get_second_y(l) - y0 :
 				   curs->xed->w->allocation.height - y0);
-#else
-		gdk_draw_rectangle(curs->xed->p, gc, 1,
-				   x0, y0, curs->xed->w->allocation.width - x0,
-				   l ? (int) *((int *) l->child->next->next->data) - y0 :
-				   curs->xed->w->allocation.height - y0);
-#endif
 
-#if 1
 		l = cong_layout_line_get_next(l);
-#else
-		l = l->next;
-#endif
 		x0 = 0;
 	}
 
@@ -177,47 +162,15 @@ CongNodePtr xml_frag_data_nice_split3(CongDocument *doc, CongNodePtr s, int c0, 
 	len3 = cong_node_get_length(s) - c1;
 
 	/* Make split representation */
-#if 1
 	d1 = cong_node_new_text_len(xml_frag_data_nice(s), len1); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
 	d2 = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2);
 	d3 = cong_node_new_text_len(xml_frag_data_nice(s) + len1 + len2, len3);
-#else
-	dummy = ttree_node_add(0, "d", 1);
-
-	d1 = ttree_node_add(dummy, "data", 4);
-	ttree_node_add(d1, xml_frag_data_nice(s), len1);
-	d2 = ttree_node_add(dummy, "data", 4);
-	ttree_node_add(d2, xml_frag_data_nice(s) + len1, len2);
-	d3 = ttree_node_add(dummy, "data", 4);
-	ttree_node_add(d3, xml_frag_data_nice(s) + len1 + len2, len3);
-
-	dummy->child = 0;
-	ttree_branch_remove(dummy);
-#endif
 
 	/* Link it in */
-#if NEW_XML_IMPLEMENTATION
 	cong_document_node_add_after(doc, d1, s);
 	cong_document_node_add_after(doc, d2, d1);
 	cong_document_node_add_after(doc, d3, d2);
 	cong_document_node_make_orphan(doc, s);
-#else
-
-	if (s->prev) s->prev->next = d1;
-	d1->prev = s->prev;
-	d1->next = d2;
-	d2->prev = d1;
-	d2->next = d3;
-	d3->prev = d2;
-	d3->next = s->next;
-	if (s->next) s->next->prev = d3;
-
-	d1->parent = s->parent;
-	d2->parent = s->parent;
-	d3->parent = s->parent;
-
-	if (!d1->prev && d1->parent) d1->parent->child = d1;
-#endif
 
 	/* Unlink old node */
 	cong_node_free(s);
@@ -242,107 +195,31 @@ CongNodePtr xml_frag_data_nice_split2(CongDocument *doc, CongNodePtr s, int c)
 	len2 = cong_node_get_length(s) - len1;
 
 	if (!len1 && !len2) {
-#if 1
 		d = cong_node_new_text("");
-#else
-		dummy = ttree_node_add(0, "d", 1);
-	  
-		d = ttree_node_add(dummy, "data", 4);
-		ttree_node_add(d, 0, 0);
-		
-		if (d->child->data) free(d->child->data);
-		d->child->size = 0;
-		d->child->data = malloc(1);
-		*(d->child->data) = 0;
-	
-		dummy->child = 0;
-		ttree_branch_remove(dummy);
-#endif
 	} else if (!len1) {
-#if 1
 		d = cong_node_new_text("");
-#else 
-		dummy = ttree_node_add(0, "d", 1);
-
-		d = ttree_node_add(dummy, "data", 4);
-		ttree_node_add(d, 0, 0);
-		
-		if (d->child->data) free(d->child->data);
-		d->child->size = 0;
-		d->child->data = malloc(1);
-		*(d->child->data) = 0;
-		
-		dummy->child = 0;
-		ttree_branch_remove(dummy);
-#endif
 
 		/* Link it in */
-#if NEW_XML_IMPLEMENTATION
 		cong_document_node_add_before(doc, d,s);
-#else
-		if (s->prev) s->prev->next = d;
-		d->next = s;
-		d->prev = s->prev;
-		s->prev = d;
-
-		d->parent = s->parent;
-#endif
 		return(d);
 	} else if (!len2) {
-#if 1
 		d = cong_node_new_text("");
-#else
-		dummy = ttree_node_add(0, "d", 1);
-
-		d = ttree_node_add(dummy, "data", 4);
-		ttree_node_add(d, 0, 0);
-		
-		if (d->child->data) free(d->child->data);
-		d->child->size = 0;
-		d->child->data = malloc(1);
-		*(d->child->data) = 0;
-	
-		dummy->child = 0;
-		ttree_branch_remove(dummy);
-#endif
 	} else {
-		/* Make split representation */
-#if 1
-		d = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2); /* FIXME: check char ptr arithmetic; UTF8? */
-#else
-		dummy = ttree_node_add(0, "d", 1);
+		xmlChar* new_text = g_strndup(s->content, len1); /* FIXME:  char type conversion? */
 
-		d = ttree_node_add(dummy, "data", 4);
-		ttree_node_add(d, xml_frag_data_nice(s) + len1, len2);
-	
-		dummy->child = 0;
-		ttree_branch_remove(dummy);
-#endif
+		/* Make split representation */
+		d = cong_node_new_text_len(xml_frag_data_nice(s) + len1, len2); /* FIXME: check char ptr arithmetic; UTF8? */
 
 		/* Shrink original node */
-#if NEW_XML_IMPLEMENTATION
-		s->content = xmlRealloc(s->content, len1+1); /* FIXME: check char ptr arithmetic; UTF8? */
-		*(s->content + len1) = '\0';
-#else
-		s->child->data = realloc(s->child->data, len1 + 1);
-		*(s->child->data + len1) = 0;
-		s->child->size = len1;
-#endif
+		cong_document_node_set_text(doc, s, new_text);
+
+		g_free(new_text);
 	}
 
 	g_assert(d);
 
 	/* Link it in */
-#if NEW_XML_IMPLEMENTATION
 	cong_document_node_add_after(doc, d, s);
-#else
-	if (s->next) s->next->prev = d;
-	d->prev = s;
-	d->next = s->next;
-	s->next = d;
-
-	d->parent = s->parent;
-#endif
 
 	CONG_NODE_SELF_TEST(s);
 
@@ -411,7 +288,6 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 		
 		selection->loc0.char_loc = 0;
 
-#if NEW_XML_IMPLEMENTATION
 		/* prev_node holds the previous node */
 
 		/* Position p within the tree: */
@@ -421,19 +297,8 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 		} else {
 			cong_document_node_set_parent(doc, p, loc0.tt_loc->parent);
 		}
-#else
-		if (loc0.tt_loc->prev) {
-			loc0.tt_loc->prev->next = p;
-		} else if (loc0.tt_loc->parent) {
-			loc0.tt_loc->parent->child = p;
-		}
-
-		p->prev = loc0.tt_loc->prev;
-		p->parent = loc0.tt_loc->parent;
-#endif
 
 		/* Reparent, first & middle */
-#if NEW_XML_IMPLEMENTATION
 		for (n0 = loc0.tt_loc; n0 != loc1.tt_loc; n0 = n2) {
 			n2 = n0->next;
 
@@ -445,22 +310,6 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 			CONG_NODE_SELF_TEST(n0);
 			CONG_NODE_SELF_TEST(p);
 		}
-#else
-		for (n0 = loc0.tt_loc, n1 = NULL; n0 != loc1.tt_loc; n0 = n2)
-		{
-
-			n2 = n0->next;
-
-			n0->parent = p->child;
-			n0->prev = n1;
-			n0->next = 0;
-			
-			if (!p->child->child) p->child->child = n0;
-			if (n0->prev) n0->prev->next = n0;
-					
-			n1 = n0;
-		}
-#endif
 
 		/* Split, last */
 
@@ -473,25 +322,7 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 		selection->loc1.char_loc = 0;
 
 		/* Reparent, last */
-#if NEW_XML_IMPLEMENTATION
 		cong_document_node_set_parent(doc, loc1.tt_loc, p);
-#else
-		loc1.tt_loc->parent = p->child;
-		loc1.tt_loc->prev = n1;
-		n1->next = loc1.tt_loc;
-		if (loc1.tt_loc->next) loc1.tt_loc->next->prev = p;
-		p->next = loc1.tt_loc->next;
-		loc1.tt_loc->next = 0;
-		if (!p->child->child) p->child->child = loc1.tt_loc;
-
-#ifndef RELEASE		
-		if (prev_node->parent->parent)
-		{
-			ttree_fsave(prev_node->parent->parent, stdout);
-		}
-#endif
-
-#endif
 		
 		return(prev_node);
 	}
@@ -524,7 +355,6 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 		selection->loc0.char_loc = 0;
 		selection->loc1.char_loc = 0;
 		
-#if NEW_XML_IMPLEMENTATION
 		/* Position p where the selection was: */
 		if (loc0.tt_loc->prev) {
 			cong_document_node_add_after(doc, p, loc0.tt_loc->prev);
@@ -533,37 +363,9 @@ CongNodePtr cong_selection_reparent_all(CongSelection *selection, CongNodePtr p)
 		}
 		/* Move the selection below p: */
 		cong_document_node_set_parent(doc, selection->loc0.tt_loc, p);
-#else
-		if (loc0.tt_loc->prev) {
-			loc0.tt_loc->prev->next = p;
-		} else if (loc0.tt_loc->parent) {
-			loc0.tt_loc->parent->child = p;
-		}
-
-		if (loc0.tt_loc->next) loc0.tt_loc->next->prev = p;
-		p->parent = loc0.tt_loc->parent;
-		p->next = loc0.tt_loc->next;
-		p->prev = loc0.tt_loc->prev;
-		p->child->child = loc0.tt_loc;
-		loc0.tt_loc->parent = p->child;
-		loc0.tt_loc->next = 0;
-		loc0.tt_loc->prev = 0;
-
-#ifndef RELEASE		
-		if (loc0.tt_loc->parent->parent->parent->parent)
-		{
-			ttree_fsave(loc0.tt_loc->parent->parent->parent, stdout);
-		}
-#endif
-
-#endif
 
 		/* Return node before p's new position (I think): */
-#if 1
 		return p->prev;
-#else
-		return(loc0.tt_loc->parent->parent->prev);
-#endif
 	}
 }
 

@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
 /*
- * tests.c
+ * cong-font.c
  *
  * Copyright (C) 2002 David Malcolm
  *
@@ -20,6 +20,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
+ * Based on code by Hans Petter Jansson <hpj@ximian.com>
  */
 
 #include "global.h"

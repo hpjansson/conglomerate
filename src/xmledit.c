@@ -11,25 +11,15 @@
 
 
 GtkWidget*
-cong_xml_editor_get_widget(CongXMLEditor *xed)
+cong_span_editor_get_widget(CongSpanEditor *xed)
 {
 	g_return_val_if_fail(xed, NULL);
 
 	return xed->w;
 }
 
-#if !NEW_LAYOUT_IMPLEMENTATION
-void add_stuff_to_tt(TTREE* tt, int pos_y, CongNodePtr x, int draw_char)
+void add_stuff(CongSpanEditor *xed, int pos_y, CongNodePtr x, int draw_char)
 {
-	ttree_node_add(tt, (unsigned char*)&pos_y, sizeof(int));
-	ttree_node_add(tt, (unsigned char*)&x, sizeof(CongNodePtr));
-	ttree_node_add(tt, (unsigned char*)&draw_char, sizeof(int));
-}
-#endif
-
-void add_stuff(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char)
-{
-#if NEW_LAYOUT_IMPLEMENTATION
 	g_assert(xed->layout_cache.last_line);
 	
 	g_assert(!xed->layout_cache.last_line->got_rest_of_data);
@@ -37,32 +27,13 @@ void add_stuff(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char)
 	xed->layout_cache.last_line->pos_y = pos_y;
 	xed->layout_cache.last_line->x = x;
 	xed->layout_cache.last_line->draw_char = draw_char;
-#else
-	add_stuff_to_tt(xed->layout_cache.draw_line_t, pos_y, x, draw_char);
-#endif
 }
-
-#if !NEW_LAYOUT_IMPLEMENTATION
-TTREE *add_line_to_tt(TTREE* parent, CongNodePtr tt, int i)
-{
-	TTREE *new_line;
-
-	g_return_val_if_fail(parent, NULL);
-
-	new_line = ttree_node_add(parent, "line", 4);  /* Add line */
-	ttree_node_add(new_line, (unsigned char*)&tt, sizeof(CongNodePtr));
-	ttree_node_add(new_line, (unsigned char*)&i, sizeof(int));
-
-	return new_line;
-}
-#endif
 
 CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, CongNodePtr tt, int i)
 {
 	CongLayoutLine *line;
 	g_return_val_if_fail(layout_cache, NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	line = g_new0(CongLayoutLine,1);
 	line->tt = tt;
 	line->i = i;
@@ -79,26 +50,18 @@ CongLayoutLine *cong_layout_cache_add_line(CongLayoutCache *layout_cache, CongNo
 		layout_cache->first_line = line;
 	}
 
-#else
-	line = add_line_to_tt(layout_cache->lines, tt, i);
-#endif
-
 	return line;
 	
 }
 
-void add_line(CongXMLEditor *xed, CongNodePtr tt, int i)
+void add_line(CongSpanEditor *xed, CongNodePtr tt, int i)
 {
 	g_return_if_fail(xed);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	cong_layout_cache_add_line(&xed->layout_cache, tt, i);
-#else
-	xed->layout_cache.draw_line_t = cong_layout_cache_add_line(&xed->layout_cache, tt, i);
-#endif
 }
 
-void add_stuff_then_add_line(CongXMLEditor *xed, int pos_y, CongNodePtr x, int draw_char, CongNodePtr tt, int i)
+void add_stuff_then_add_line(CongSpanEditor *xed, int pos_y, CongNodePtr x, int draw_char, CongNodePtr tt, int i)
 {
 	add_stuff(xed,pos_y, x, draw_char);
 	add_line(xed, tt, i);
@@ -125,17 +88,8 @@ cong_layout_line_get_second_y(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,0);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	g_assert(line->got_rest_of_data);
 	return line->pos_y;
-#else 
-	g_assert(line->child);
-	g_assert(line->child->next);
-	g_assert(line->child->next->next);
-	g_assert(line->child->next->next->data);
-
-	return *((int *) line->child->next->next->data);
-#endif
 }
 
 CongNodePtr
@@ -143,14 +97,7 @@ cong_layout_line_get_node(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	return line->tt;
-#else 
-	g_assert(line->child);
-	g_assert(line->child->data);
-
-	return *((TTREE **) line->child->data);
-#endif
 }
 
 CongNodePtr
@@ -158,18 +105,8 @@ cong_layout_line_get_node_last(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,NULL);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	g_assert(line->got_rest_of_data);
 	return line->x;
-#else
-	g_assert(line->child);
-	g_assert(line->child->next);
-	g_assert(line->child->next->next);
-	g_assert(line->child->next->next->next);
-	g_assert(line->child->next->next->next->data);
-
-	return *((TTREE **) line->child->next->next->next->data);
-#endif
 }
 
 int
@@ -177,30 +114,19 @@ cong_layout_line_get_c_given(CongLayoutLine *line)
 {
 	g_return_val_if_fail(line,0);
 
-#if NEW_LAYOUT_IMPLEMENTATION
 	return line->i;
-#else
-	g_assert(line->child);
-	g_assert(line->child->next);
-	g_assert(line->child->next->data);
-
-	return *((int *) line->child->next->data);
-#endif
 }
 
 
 #define ttree_node_add(a, b, c) ttree_node_add(a, (unsigned char *) b, c)
 
 
-#if 0
-TTREE *xed_stack_top(CongXMLEditor *xed);
-#endif
-int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode);
+int xed_xml_content_draw(CongSpanEditor *xed, enum CongDrawMode mode);
 
 
 /* Create a new backing pixmap of the appropriate size, redraw content */
 
-static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXMLEditor *xed)
+static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongSpanEditor *xed)
 {
 	struct pos *pos;
 	UNUSED_VAR(GtkRequisition req)
@@ -356,7 +282,7 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 }
 
 
-void xed_redraw(CongXMLEditor *xed)
+void xed_redraw(CongSpanEditor *xed)
 {
 	UNUSED_VAR(GtkRequisition req)
 	int height;
@@ -413,7 +339,7 @@ void xed_redraw(CongXMLEditor *xed)
 
 /* Redraw the area from the backing pixmap */
 
-static gint expose_event (GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
+static gint expose_event (GtkWidget *widget, GdkEventExpose *event, CongSpanEditor *xed)
 {
 	if (xed->initial)
 	{
@@ -436,7 +362,7 @@ static gint expose_event (GtkWidget *widget, GdkEventExpose *event, CongXMLEdito
 
 /* Mouse pointer enters */
 
-static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
+static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, CongSpanEditor *xed)
 {
 #if 1
 	/* FIXME: get this working again */
@@ -451,7 +377,7 @@ static gint enter_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXML
 }
 
 
-static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXMLEditor *xed)
+static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, CongSpanEditor *xed)
 {
 #if 1
 	/* FIXME: get this working again */
@@ -462,7 +388,7 @@ static gint leave_notify_event(GtkWidget *widget, GdkEventExpose *event, CongXML
 }
 
 
-static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXMLEditor *xed)
+static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongSpanEditor *xed)
 {
 	CongDocument *doc;
 	CongCursor *cursor;
@@ -504,7 +430,7 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongXML
 }
 
 
-static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor *xed)
+static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongSpanEditor *xed)
 {
 	struct pos *pos;
 	int r = FALSE;
@@ -528,62 +454,71 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 	fputs(event->string, stdout);
 #endif
 
+	/* GREP FOR MVC */
+
 	cong_cursor_off(cursor);
 		
 	switch (event->keyval)
 	{
-		case GDK_Up:
-		  cong_cursor_prev_line(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  r = TRUE;
-		  break;
-		case GDK_Down:
-		  cong_cursor_next_line(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  r = TRUE;
-		  break;
-		case GDK_Left:
-		  cong_cursor_prev_char(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  r = TRUE;
-		  break;
-		case GDK_Right:
-		  cong_cursor_next_char(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  r = TRUE;
-		  break;
-		case GDK_BackSpace:
-		  cong_cursor_del_prev_char(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  xed_redraw(xed);
-		  r = TRUE;
-		  break;
-		case GDK_Delete:
-		  cong_cursor_del_next_char(cursor, xed);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  xed_redraw(xed);
-		  r = TRUE;
-		  break;
-		case GDK_ISO_Enter:
-		case GDK_Return:
-		  cong_cursor_paragraph_insert(cursor);
-		  gtk_widget_grab_focus(widget);
-		  gtk_widget_grab_default(widget);
-		  xed_redraw(xed);
-		  r = TRUE;
-		  break;
-		default:
-		
-		  if (event->length && event->string && strlen(event->string))
-					cong_cursor_data_insert(cursor, event->string);
-		  xed_redraw(xed);
-		  break;
+	case GDK_Up:
+		cong_cursor_prev_line(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		r = TRUE;
+		break;
+	
+	case GDK_Down:
+		cong_cursor_next_line(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		r = TRUE;
+		break;
+	
+	case GDK_Left:
+		cong_cursor_prev_char(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		r = TRUE;
+		break;
+	
+	case GDK_Right:
+		cong_cursor_next_char(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		r = TRUE;
+		break;
+	
+	case GDK_BackSpace:
+		cong_cursor_del_prev_char(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		xed_redraw(xed);
+		r = TRUE;
+		break;
+	
+	case GDK_Delete:
+		cong_cursor_del_next_char(cursor, xed);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		xed_redraw(xed);
+		r = TRUE;
+		break;
+	
+	case GDK_ISO_Enter:
+	case GDK_Return:
+		cong_cursor_paragraph_insert(cursor);
+		gtk_widget_grab_focus(widget);
+		gtk_widget_grab_default(widget);
+		xed_redraw(xed);
+		r = TRUE;
+		break;
+	
+	default:
+		if (event->length && event->string && strlen(event->string)) {
+			cong_cursor_data_insert(cursor, event->string);
+		}
+		xed_redraw(xed);
+		break;
 	}
 
 	pos = pos_logical_to_physical_new(xed, &cursor->location);
@@ -605,7 +540,7 @@ static gint key_press_event(GtkWidget *widget, GdkEventKey *event, CongXMLEditor
 }
 
 
-static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, CongXMLEditor *xed)
+static gint motion_notify_event(GtkWidget *widget, GdkEventMotion *event, CongSpanEditor *xed)
 {
 	CongDocument *doc;
 	CongCursor *cursor;
@@ -643,7 +578,7 @@ static gint popup_event(GtkWidget *widget, GdkEvent *event)
 }
 
 
-static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLEditor *xed)
+static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongSpanEditor *xed)
 {
 	CongNodePtr dummy; 
 	CongDocument *doc;
@@ -668,15 +603,8 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 	fputs("\n", stdout);
 
 	/* GREP FOR MVC */
-#if NEW_XML_IMPLEMENTATION	                                                                                
 	dummy = cong_node_new_element("dummy");
 	cong_document_node_set_parent( doc, cong_node_new_text_len(d->data, d->length), dummy );
-#else
-	  dummy = ttree_node_add(0, "tag_span", 8);                                     
-	  ttree_node_add(dummy, "dummy", 5);                                            
-	  ttree_node_add(dummy->child, "data", 4);                                      
-	  ttree_node_add(dummy->child->child, d->data, d->length);                      
-#endif
 
 	the_globals.clipboard = dummy;                                                            
 
@@ -692,17 +620,176 @@ static gint selection_received_event(GtkWidget *w, GtkSelectionData *d, CongXMLE
 
 }
 
-
-CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec)
+static gboolean is_affected_by_node(CongSpanEditor *span_editor, CongNodePtr node)
 {
-        UNUSED_VAR(GdkCursor* cursor)
-	CongXMLEditor *xed;
-	UNUSED_VAR(int sig)
+	g_return_val_if_fail(span_editor, FALSE);
+	g_return_val_if_fail(node, FALSE);
+
+#if 1
+	return TRUE;
+#else
+	/* We only need to redraw our widget if the changed node is at or below the widget's node: */
+	while (node) {
+		if (node==span_editor->x) {
+			g_message("affected\n");
+			return TRUE;
+		}
+
+		node = node->parent;
+	}
+
+	return FALSE;
+#endif
+}
+
+
+/* Prototypes of the handler functions: */
+static void on_document_coarse_update(CongView *view);
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content);
+
+#define DEBUG_SPAN_EDITOR 1
+
+/* Definitions of the handler functions: */
+static void on_document_coarse_update(CongView *view)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_coarse_update\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	/* FIXME:  can't do this until the view itself gets destroyed at appropriate times by the editor widget */
+#if 0
+	xed_redraw(span_editor);
+#endif
+}
+
+static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_node_make_orphan\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	/* FIXME:  can't do this until the view itself gets destroyed at appropriate times by the editor widget */
+#if 0
+	if (is_affected_by_node(span_editor, node)) {
+		xed_redraw(span_editor);	
+	}
+#endif
+}
+
+static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(older_sibling);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_node_add_after\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	if (is_affected_by_node(span_editor, node) || is_affected_by_node(span_editor, older_sibling)) {
+		xed_redraw(span_editor);	
+	}
+}
+
+static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(younger_sibling);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_node_add_before\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	if (is_affected_by_node(span_editor, node) || is_affected_by_node(span_editor, younger_sibling)) {
+		xed_redraw(span_editor);	
+	}
+}
+
+static void on_document_node_set_parent(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(adoptive_parent);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_node_set_parent\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	if (is_affected_by_node(span_editor, node) || is_affected_by_node(span_editor, adoptive_parent)) {
+		xed_redraw(span_editor);	
+	}
+}
+
+static void on_document_node_set_text(CongView *view, CongNodePtr node, const xmlChar *new_content)
+{
+	CongSpanEditor *span_editor;
+
+	g_return_if_fail(view);
+	g_return_if_fail(node);
+	g_return_if_fail(new_content);
+
+	#if DEBUG_SPAN_EDITOR
+	g_message("CongSpanEditor - on_document_node_set_text\n");
+	#endif
+
+	span_editor = CONG_SPAN_EDITOR(view);
+
+	if (is_affected_by_node(span_editor, node)) {
+		xed_redraw(span_editor);	
+	}
+}
+
+
+CongSpanEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displayspec)
+{
+	CongSpanEditor *xed;
 
 	CongFont *font;
 	
-	xed = malloc(sizeof(*xed));
-	memset(xed, 0, sizeof(*xed));
+	xed = g_new0(CongSpanEditor, 1);
+	xed->view.doc = doc;
+	xed->view.klass = g_new0(CongViewClass,1);
+	xed->view.klass->on_document_coarse_update = on_document_coarse_update;
+	xed->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
+	xed->view.klass->on_document_node_add_after = on_document_node_add_after;
+	xed->view.klass->on_document_node_add_before = on_document_node_add_before;
+	xed->view.klass->on_document_node_set_parent = on_document_node_set_parent;
+	xed->view.klass->on_document_node_set_text = on_document_node_set_text;
+
+	/* Not stable enough yet to be registered as a view: */
+#if 0
+	cong_document_register_view( doc, CONG_VIEW(xed) );
+#endif
 
 	xed->x = x;
 #if 0	
@@ -784,7 +871,7 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displ
 	xed->fm_desc = the_globals.fm_desc;
 #endif
 
-	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
 	g_assert(font);
 
 	xed->tag_height = (font->asc + font->desc) / 2;
@@ -809,7 +896,7 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displ
 }
 
 CongFont*
-cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role)
+cong_span_editor_get_font(CongSpanEditor *xed, enum CongFontRole role)
 {
 	g_return_val_if_fail(xed, NULL);
 	g_return_val_if_fail(role<CONG_FONT_ROLE_NUM, NULL);
@@ -819,12 +906,12 @@ cong_xml_editor_get_font(CongXMLEditor *xed, enum CongFontRole role)
 }
 
 
-void xed_char_put_at_curs(CongXMLEditor *xed, char c)
+void xed_char_put_at_curs(CongSpanEditor *xed, char c)
 {
 	GdkGC *gc;
 	CongFont *font;
 
-	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(font);
 
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
@@ -833,14 +920,14 @@ void xed_char_put_at_curs(CongXMLEditor *xed, char c)
 }
 
 
-void xed_str_put(CongXMLEditor *xed, char *s)
+void xed_str_put(CongSpanEditor *xed, char *s)
 {
 	GdkGC *gc;
 	CongFont *font;
 
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
 
-	font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(font);
 
 	gdk_draw_string(xed->p, font->gdk_font, gc, 
@@ -854,16 +941,9 @@ void stack_print(CongLayoutStackEntry *t)
 {
 	printf("\n STACK:\n");
 
-#if NEW_STACK_IMPLEMENTATION
 	for (; t; t = t->above) {
 		printf("<%s %d>\n", t->text, t->line);
 	}
-#else
-	for (; t; t = t->parent) {
-		printf("<%s %d>\n", t->data,
-		       (int) *(t->child->next->data));
-	}
-#endif
 	printf("\n\n");
 }
 
@@ -879,7 +959,6 @@ void cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int li
 	if (top_entry) stack_print(top_entry);
 #endif
 
-#if NEW_STACK_IMPLEMENTATION
 	new_entry = g_new0(CongLayoutStackEntry,1);
 	if (!layout_stack->bottom) layout_stack->bottom = new_entry;
 
@@ -896,16 +975,6 @@ void cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int li
 		top_entry->above = new_entry;
 	}
 	     
-#else
-	new_entry = ttree_node_add(top_entry, s, strlen(s));
-	if (!layout_stack->bottom) layout_stack->bottom = new_entry;
-
-	ttree_node_add(new_entry, &(line), sizeof(int));
-	ttree_node_add(new_entry, &(pos_x), sizeof(int));
-	ttree_node_add(new_entry, &x, sizeof(TTREE *));
-	ttree_node_add(new_entry, &lev, sizeof(int));
-#endif
-
 #if DEBUG_STACK
 	printf("[Tag Push] (%s) line=%d\n", s, line);
 #endif
@@ -917,7 +986,7 @@ void cong_layout_stack_push(CongLayoutStack *layout_stack, const char* s, int li
 #endif
 }
 
-void xed_stack_push(CongXMLEditor *xed, const char *s, CongNodePtr x, gboolean new_line)
+void xed_stack_push(CongSpanEditor *xed, const char *s, CongNodePtr x, gboolean new_line)
 {
 	int line, pos_x;
 	int lev = 0;
@@ -940,11 +1009,7 @@ void cong_layout_stack_change_level_of_top_tag(CongLayoutStack *layout_stack, in
 
 	t = cong_layout_stack_top(layout_stack);
 
-#if NEW_STACK_IMPLEMENTATION
 	t->lev=lev;
-#else
-	memcpy(t->child->next->next->next->data, &lev, sizeof(int));
-#endif
 }
 
 void cong_layout_stack_elevate(CongLayoutStack *layout_stack)
@@ -954,16 +1019,9 @@ void cong_layout_stack_elevate(CongLayoutStack *layout_stack)
 
 	t = cong_layout_stack_top(layout_stack);
 	
-#if NEW_STACK_IMPLEMENTATION
 	for (i = 1; t && t->lev < i; t = t->below, i++) {
 		t->lev++;
 	}
-#else
-	for (i = 1; t && (int) *((int *) t->child->next->next->next->data) < i;
-	     t = t->parent, i++) {
-		((int) *((int *) t->child->next->next->next->data))++;
-	}
-#endif
 }
 
 void cong_layout_stack_compress(CongLayoutStack *layout_stack)
@@ -974,11 +1032,7 @@ void cong_layout_stack_compress(CongLayoutStack *layout_stack)
 	t = cong_layout_stack_top(layout_stack);
 
 	for (i = 0; t; t = cong_layout_stack_entry_below(t), i++) {
-#if NEW_STACK_IMPLEMENTATION
 		t->lev = i;
-#else
-		((int) *((int *) t->child->next->next->next->data)) = i;
-#endif
 	}
 }
 
@@ -999,7 +1053,6 @@ void cong_layout_stack_pop(CongLayoutStack *layout_stack)
 		layout_stack->bottom = NULL;
 	}
 
-#if NEW_STACK_IMPLEMENTATION
 	g_assert(t->above==NULL);
 	if (t->below) {
 		g_assert(t->below->above==t);
@@ -1010,16 +1063,13 @@ void cong_layout_stack_pop(CongLayoutStack *layout_stack)
 	g_free(t->text);
 
 	g_free(t);
-#else
-	ttree_branch_remove(t);
-#endif
 
 #if DEBUG_STACK
 	printf("[Tag pop]\n");
 #endif
 }
 
-void xed_stack_pop(CongXMLEditor *xed)
+void xed_stack_pop(CongSpanEditor *xed)
 {
 	cong_layout_stack_pop(&xed->layout_stack);
 }
@@ -1066,11 +1116,7 @@ cong_layout_stack_entry_next(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, NULL);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->above;
-#else
-	return entry->child->next->next->next->next;
-#endif
 }
 
 CongLayoutStackEntry*
@@ -1078,44 +1124,28 @@ cong_layout_stack_entry_below(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, NULL);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->below;
-#else
-	return entry->parent;
-#endif
 }
 
 char *cong_layout_stack_entry_get_text(CongLayoutStackEntry *entry) 
 {
 	g_return_val_if_fail(entry, NULL);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->text;
-#else
-	return entry->data;
-#endif
 }
 
 int cong_layout_stack_entry_get_line(CongLayoutStackEntry *entry) 
 {
 	g_return_val_if_fail(entry, 0);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->line;
-#else
-	return *((int*) entry->child->data);
-#endif
 }
 
 int cong_layout_stack_entry_get_pos_x(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, 0);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->pos_x;
-#else
-	return *((int *) entry->child->next->data);
-#endif
 }
 
 #if 0
@@ -1130,16 +1160,12 @@ int cong_layout_stack_entry_get_lev(CongLayoutStackEntry *entry)
 {
 	g_return_val_if_fail(entry, 0);
 
-#if NEW_STACK_IMPLEMENTATION
 	return entry->lev;
-#else
-	return *((int *) entry->child->next->next->next->data);
-#endif
 }
 
 
 CongLayoutLine*
-xed_line_last(CongXMLEditor *xed)
+xed_line_last(CongSpanEditor *xed)
 {
 	return cong_layout_cache_get_last_line(&xed->layout_cache);
 }
@@ -1177,7 +1203,7 @@ const char *get_uistring_for_stack_entry(CongDispspec *ds, CongLayoutStackEntry 
 }		
 
 
-void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMode mode)
+void xed_xml_tags_draw_eol(CongSpanEditor *xed, int draw_tag_lev, enum CongDrawMode mode)
 {
 	CongLayoutLine *l;
 	CongLayoutStackEntry *t;
@@ -1195,10 +1221,10 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 	CongFont *body_font;
 	CongFont *span_font;
 
-	body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+	body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
-	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	span_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
 	g_assert(span_font);
 
 #if 0
@@ -1312,7 +1338,7 @@ void xed_xml_tags_draw_eol(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 }
 
 
-void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMode mode)
+void xed_xml_tags_draw_eot(CongSpanEditor *xed, int draw_tag_lev, enum CongDrawMode mode)
 {
 	CongLayoutLine *l;
 	CongLayoutStackEntry *t;
@@ -1328,10 +1354,10 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 	CongFont *body_font;
 	CongFont *span_font;
 
- 	body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
-	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	span_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
 	g_assert(span_font);
 
 #if 0
@@ -1407,21 +1433,21 @@ void xed_xml_tags_draw_eot(CongXMLEditor *xed, int draw_tag_lev, enum CongDrawMo
 }
 
 
-void xed_str_micro_put(CongXMLEditor *xed, char *s)
+void xed_str_micro_put(CongSpanEditor *xed, char *s)
 {
 	GdkGC *gc;
 	CongFont *span_font;
 
 	gc = xed->w->style->fg_gc[GTK_STATE_NORMAL];
 	
-	span_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
+	span_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_SPAN_TAG);
 	g_assert(span_font);
 
 	gdk_draw_string(xed->p, span_font->gdk_font, gc, 0, 30, s);
 }
 
 
-char *xed_word(CongNodePtr x, CongXMLEditor *xed, gboolean *spc_before, gboolean *spc_after)
+char *xed_word(CongNodePtr x, CongSpanEditor *xed, gboolean *spc_before, gboolean *spc_after)
 {
 	UNUSED_VAR(int i)
 	const char *p0, *p1;
@@ -1472,7 +1498,7 @@ char *xed_word(CongNodePtr x, CongXMLEditor *xed, gboolean *spc_before, gboolean
 }
 
 
-void xed_word_rewind(CongXMLEditor *xed)
+void xed_word_rewind(CongSpanEditor *xed)
 {
 	xed->draw_x = xed->draw_x_prev;
 	xed->draw_char = xed->draw_char_prev;
@@ -1482,13 +1508,13 @@ void xed_word_rewind(CongXMLEditor *xed)
 /* --- */
 
 
-int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
+int xed_word_first_would_wrap(CongNodePtr x, CongSpanEditor *xed)
 {
 	const char *p0, *p1;
 	char *word;
 	int width;
 
- 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	CongFont *body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
 	x = cong_node_first_child(x);
@@ -1540,7 +1566,7 @@ int xed_word_first_would_wrap(CongNodePtr x, CongXMLEditor *xed)
 
 /* --- */
 
-int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
+int xed_xml_content_data(CongSpanEditor *xed, CongNodePtr x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1548,7 +1574,7 @@ int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 	gboolean spc_before = FALSE;
 	gboolean spc_after = FALSE;
 
- 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	CongFont *body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
 #if 0	
@@ -1599,7 +1625,7 @@ int xed_xml_content_data(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
 
 /* --- */
 
-int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_lev)
+int xed_xml_content_data_root(CongSpanEditor *xed, CongNodePtr x, int draw_tag_lev)
 {
 	char *word;
 	int width;
@@ -1607,7 +1633,7 @@ int xed_xml_content_data_root(CongXMLEditor *xed, CongNodePtr x, int draw_tag_le
 	gboolean spc_before = FALSE;
 	gboolean spc_after = FALSE;
 
- 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	CongFont *body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
 	xed->draw_char = 0;
@@ -1689,7 +1715,7 @@ int xed_xml_depth(CongNodePtr x)
 
 /* --- */
 
-int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
+int xed_xml_depth_after_eol(CongSpanEditor *xed, CongNodePtr x)
 {
 	int d = 0, d_max = 0;
 
@@ -1712,7 +1738,7 @@ int xed_xml_depth_after_eol(CongXMLEditor *xed, CongNodePtr x)
 
 /* Not sure this actually gets called... */
 #if 0
-int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width, int *eol_p)
+int xed_xml_depth_before_eol(CongSpanEditor *xed, TTREE *x, int pos_x, int width, int *eol_p)
 {
 	int d = 0, d_max = 0;
 	int eol = 0;
@@ -1750,7 +1776,7 @@ int xed_xml_depth_before_eol(CongXMLEditor *xed, TTREE *x, int pos_x, int width,
 /* --- */
 
 
-int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
+int xed_xml_content_tag(CongSpanEditor *xed, CongNodePtr x)
 {
 	UNUSED_VAR(int hold = 0)
 	int draw_tag_lev;
@@ -1759,7 +1785,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 	int draw_tag_lev_new;
 	int width;
 	CongDispspec *ds = xed->displayspec;
- 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	CongFont *body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
 #if 0
@@ -1961,7 +1987,7 @@ int xed_xml_content_tag(CongXMLEditor *xed, CongNodePtr x)
 	return(draw_tag_lev);
 }
 
-int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
+int xed_xml_content_draw(CongSpanEditor *xed, enum CongDrawMode mode)
 {
 	CongNodePtr x;
 	UNUSED_VAR(TTREE *first)
@@ -1970,7 +1996,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	int width;
 	CongDispspec *ds = xed->displayspec;
 
- 	CongFont *body_font = cong_xml_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
+ 	CongFont *body_font = cong_span_editor_get_font(xed, CONG_FONT_ROLE_BODY_TEXT);
 	g_assert(body_font);
 
 #if 0
@@ -1996,21 +2022,11 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 
 	cong_layout_cache_init(&xed->layout_cache);
 
-#if 1
 	add_line(xed, xed->x, xed->draw_char);
-#else
-	xed->draw_line_t = ttree_node_add(xed->lines, "line", 4);
-	ttree_node_add(xed->draw_line_t, &xed->x, sizeof(TTREE *));
-	ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
-#endif
 
 	for (x = xed->x; x; x = cong_node_next(x))
 	{
-#if 1
 		enum CongNodeType node_type = cong_node_type(x);
-#else
-		int type = xml_frag_type(x);
-#endif
 		const char *name = xml_frag_name_nice(x);
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT && g_strcasecmp("table", name)) {
@@ -2131,14 +2147,7 @@ int xed_xml_content_draw(CongXMLEditor *xed, enum CongDrawMode mode)
 	}
 
 	xed_xml_tags_draw_eol(xed, draw_tag_lev, xed->mode);
-#if 1
 	add_stuff(xed, xed->draw_pos_y, x, xed->draw_char);
-#else
-	ttree_node_add(xed->draw_line_t, &xed->draw_pos_y, sizeof(int));
-/*	ttree_node_add(xed->draw_line_t, &xed->x, sizeof(TTREE *)); */
-	ttree_node_add(xed->draw_line_t, &x, sizeof(TTREE *));
-	ttree_node_add(xed->draw_line_t, &xed->draw_char, sizeof(int));
-#endif
 	return(xed->draw_pos_y);
 }
 
@@ -2181,7 +2190,7 @@ void xed_cutcopy_update(CongCursor *curs)
 	}
 }
 
-gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
+gint xed_cut(GtkWidget *widget, CongSpanEditor *xed_disabled)
 {
 	CongNodePtr t;
 	int replace_xed = 0;
@@ -2212,7 +2221,6 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	
 	cong_selection_reparent_all(selection, t);
 
-#if NEW_XML_IMPLEMENTATION
 	if (t->prev)
 	{
 		if (replace_xed) curs->xed->x = t->prev;
@@ -2223,21 +2231,6 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 	}
 	
 	cong_document_node_make_orphan(doc, t);
-#else
-	if (t->prev)
-	{
-		t->prev->next = t->next;
-		if (replace_xed) curs->xed->x = t->prev;
-	}
-	else
-	{
-		curs->xed->x = t->next;
-		if (t->parent) t->parent->child = t->next;
-	}
-	
-	if (t->next) t->next->prev = t->prev;
-	t->prev = t->next = t->parent = 0;
-#endif
 
 	the_globals.clipboard = t;
 
@@ -2249,7 +2242,7 @@ gint xed_cut(GtkWidget *widget, CongXMLEditor *xed_disabled)
 }
 
 
-gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
+gint xed_copy(GtkWidget *widget, CongSpanEditor *xed_disabled)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2289,7 +2282,6 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	/* FIXME: doesn't this approach leave us with extra TEXT nodes abutting each other? */
 
-#if NEW_XML_IMPLEMENTATION
 	if (replace_xed) {
 		curs->xed->x = t->prev;
 	}
@@ -2301,33 +2293,6 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	cong_document_node_make_orphan(doc,t);
 	cong_node_free(t);
-#else
-	if (t->child->child)
-	{
-		t->child->child->prev = t->prev;
-		if (replace_xed) curs->xed->x = t->prev;
-		t->child->child->parent = t->parent;
-		
-		for (t0 = t->child->child; t0->next; t0 = t0->next)
-		{
-			t0->parent = t->parent;
-		}
-		
-		t0->parent = t->parent;
-		t0->next = t->next;
-	}
-
-	if (t->prev) t->prev->next = t->child->child;
-	else if (t->parent) t->parent->child = t->child->child;
-
-	if (t->next) t->next->prev = t0;
-
-	t->child->child = 0;
-	t->next = 0;
-	t->prev = 0;
-
-	ttree_branch_remove(t);
-#endif
 
 	selection_cursor_unset(doc);
 
@@ -2342,7 +2307,7 @@ gint xed_copy(GtkWidget *widget, CongXMLEditor *xed_disabled)
 }
 
 
-gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
+gint xed_paste(GtkWidget *widget, CongSpanEditor *xed_disabled)
 {
 	CongNodePtr t;
 	CongNodePtr t0 = NULL;
@@ -2374,11 +2339,7 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 		return(TRUE);
 	}
 
-#if NEW_XML_IMPLEMENTATION
 	if (!the_globals.clipboard->children) return(TRUE);
-#else
-	if (!the_globals.clipboard->child || !the_globals.clipboard->child->child) return(TRUE);
-#endif
 	
 	if (cong_dispspec_element_structural(ds, xml_frag_name_nice(the_globals.clipboard))) return(TRUE);
 	
@@ -2415,25 +2376,10 @@ gint xed_paste(GtkWidget *widget, CongXMLEditor *xed_disabled)
 
 	if (!t) return(TRUE);
 	
-#if NEW_XML_IMPLEMENTATION
 	for (; t; t = t_next) {
 		t_next = t->next;
 		cong_document_node_add_before(doc, t, t1);
 	}
-#else
-	t->prev = t0;
-	if (t0) t0->next = t;
-	else curs->location.tt_loc->parent->child = t;
-
-	for (; t->next; t = t->next)
-	{
-		t->parent = curs->location.tt_loc->parent;
-	}
-	t->parent = curs->location.tt_loc->parent;
-
-	t->next = t1;
-	if (t1) t1->prev = t;
-#endif
 
 	cong_location_nullify(&selection->loc0);
 	cong_location_nullify(&selection->loc1);

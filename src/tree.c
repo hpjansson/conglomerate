@@ -32,7 +32,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	char *s;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -42,7 +42,6 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	n0 = cong_node_new_text(" ");
 	cong_document_node_add_after(doc, n0, tag);
 
@@ -51,21 +50,6 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 
 	n2 = cong_node_new_text(" ");
 	cong_document_node_set_parent(doc, n2, n1);
-#else
-	n0 = ttree_node_add(tag->parent, "data", 4);
-	ttree_node_add(n0, " ", 1);
-
-	n1 = ttree_node_add(tag->parent, "tag_span", 8);
-	n2 = ttree_node_add(n1, s, strlen(s));
-	n2 = ttree_node_add(n2, "data", 4);
-	ttree_node_add(n2, " ", 1);
-
-	if (n0->prev) n0->prev->next = 0;
-	if (tag->next) tag->next->prev = n1;
-	n1->next = tag->next;
-	n0->prev = tag;
-	tag->next = n0;
-#endif
 
 	tree_coarse_update_of_view(cong_tree_view);
 
@@ -84,7 +68,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	char *s;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -94,7 +78,6 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	n0 = cong_node_new_element(s);
 	cong_document_node_set_parent(doc, n0, tag);
 
@@ -103,15 +86,6 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	n0 = cong_node_new_text(" ");
 	cong_document_node_set_parent(doc, n0, tag);
-#else	
-	n0 = ttree_node_add(tag->child, "tag_span", 8);
-	n1 = ttree_node_add(n0, s, strlen(s));
-	n1 = ttree_node_add(n1, "data", 4);
-	ttree_node_add(n1, " ", 1);
-	
-	n0 = ttree_node_add(tag->child, "data", 4);
-	ttree_node_add(n0, " ", 1);
-#endif
 
 	tree_coarse_update_of_view(cong_tree_view);
 
@@ -126,7 +100,7 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 	CongDispspec *ds;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -160,12 +134,10 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 	CongDispspec *ds;
 
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr new_copy;
-#endif
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
-				"cong_tree_view");
+					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
 	ds = cong_document_get_dispspec(doc);
@@ -176,23 +148,9 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	new_copy = cong_node_recursive_dup(the_globals.clipboard);
 
 	cong_document_node_set_parent(doc, new_copy,tag);
-#else
-	
-	the_globals.clipboard->prev = 0;
-	the_globals.clipboard->next = tag->child->child;
-
-	if (tag->child->child)
-		tag->child->child->prev = the_globals.clipboard;
-	
-	tag->child->child = the_globals.clipboard;
-	the_globals.clipboard->parent = tag->child;
-	
-	the_globals.clipboard = cong_node_recursive_dup(the_globals.clipboard);
-#endif
 
 	tree_coarse_update_of_view(cong_tree_view);
 
@@ -206,9 +164,7 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 	CongDispspec *ds;
 
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr new_copy;
-#endif
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 				"cong_tree_view");
@@ -222,28 +178,9 @@ gint tree_paste_before(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	new_copy = cong_node_recursive_dup(the_globals.clipboard);
 
 	cong_document_node_add_before(doc, new_copy,tag);
-#else
-	if (tag->prev)
-	{
-		tag->prev->next = the_globals.clipboard;
-		the_globals.clipboard->prev = tag->prev;
-		tag->prev = the_globals.clipboard;
-	}
-	else if (tag->parent)
-	{
-		the_globals.clipboard->prev = 0;
-		tag->parent->child = the_globals.clipboard;
-	}
-
-	the_globals.clipboard->next = tag;
-	the_globals.clipboard->parent = tag->parent;
-
-	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
-#endif
 	
 	tree_coarse_update_of_view(cong_tree_view);
 
@@ -257,9 +194,7 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 	CongDocument *doc;
 	CongDispspec *ds;
 
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr new_copy;
-#endif
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 				"cong_tree_view");
@@ -273,24 +208,9 @@ gint tree_paste_after(GtkWidget *widget, CongNodePtr tag)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 	new_copy = cong_node_recursive_dup(the_globals.clipboard);
 
 	cong_document_node_add_after(doc, new_copy,tag);
-#else
-
-	if (tag->next)
-	{
-		tag->next->prev = the_globals.clipboard;
-	}
-	
-	the_globals.clipboard->next = tag->next;
-	tag->next = the_globals.clipboard;
-	the_globals.clipboard->prev = tag;
-	the_globals.clipboard->parent = tag->parent;
-	
-	the_globals.clipboard = ttree_branch_dup(the_globals.clipboard);
-#endif
 	
 	tree_coarse_update_of_view(cong_tree_view);
 

@@ -63,7 +63,7 @@ void print_lines(TTREE *l)
 #endif
 
 
-void cong_cursor_place_in_xed(CongCursor *curs, CongXMLEditor *xed, int x, int y)
+void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int y)
 {
 	struct pos *pos0, *pos1;
 	UNUSED_VAR(TTREE *l);
@@ -177,11 +177,7 @@ gint cong_cursor_data_insert(CongCursor *curs, char *s)
 int cong_cursor_paragraph_insert(CongCursor *curs)
 {
         CongNodePtr t;
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr new_element;
-#else
-	CongNodePtr dummy;
-#endif
 	CongDispspec *ds;
 	CongDispspecElement *para;
 	const char *tagname;
@@ -227,7 +223,6 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	curs->c = 0;
 #endif
 
-#if NEW_XML_IMPLEMENTATION
 	/* New approach, aimed at DocBook support: 
 	   Assume that we've just split up a text node below a <para> node below some parent into two
 	   text nodes below that para.
@@ -242,27 +237,12 @@ int cong_cursor_paragraph_insert(CongCursor *curs)
 	/* FIXME:  
 	   Stepping through the code, it appears to work.  However the second para won't appear, as we need this to happen via the MVC framework.
 	*/
-#else
-	dummy = ttree_node_add(0, "dummy", 5);
-	
-	ttree_node_add(dummy, "tag_empty", 9);
-	ttree_node_add(dummy->child, tagname, strlen(tagname));
 
-	printf("inserting paragraph using tag <%s>\n",tagname);
-
-	t->next->prev = dummy->child;
-	dummy->child->next = t->next;
-	dummy->child->prev = t;
-	t->next = dummy->child;
-	dummy->child->parent = t->parent;
-	dummy->child = 0;
-	ttree_branch_remove(dummy);
-#endif
 	return(1);
 }
 
 
-void cong_cursor_prev_char(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_prev_char(CongCursor *curs, CongSpanEditor *xed)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
@@ -328,7 +308,7 @@ void cong_cursor_prev_char(CongCursor *curs, CongXMLEditor *xed)
 }
 
 
-void cong_cursor_next_char(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_next_char(CongCursor *curs, CongSpanEditor *xed)
 {
 	CongNodePtr n;
 	CongNodePtr n0;
@@ -398,7 +378,7 @@ void cong_cursor_next_char(CongCursor *curs, CongXMLEditor *xed)
 }
 
 
-void cong_cursor_prev_line(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_prev_line(CongCursor *curs, CongSpanEditor *xed)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
@@ -409,63 +389,36 @@ void cong_cursor_prev_line(CongCursor *curs, CongXMLEditor *xed)
 	
 	curs->line--;
 
-#if 1
 	l = cong_layout_cache_get_line_by_index(&xed->layout_cache, curs->line);
-#else
-	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) {
-		/* empty */
-	}
-#endif
 
 	if (!l) return;
 
-#if 1
 	curs->y = cong_layout_line_get_second_y(l);
-#else
-	curs->y = (int) *((int *) l->child->next->next->data);
-#endif
+
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
-#if 1
 	cong_location_set(&curs->location, pos->node, pos->c);
-#else
-	curs->t = pos->node;
-	curs->c = pos->c;
-#endif
+
 	free(pos);
 }
 
 
-void cong_cursor_next_line(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_next_line(CongCursor *curs, CongSpanEditor *xed)
 {
 	struct pos *pos;
 	CongLayoutLine *l;
 
 	g_assert(curs!=NULL);
 
-#if 1
 	l = cong_layout_cache_get_line_by_index(&xed->layout_cache, curs->line);
-#else
-	for (i = 0, l = xed->lines->child; l && i < curs->line; i++, l = l->next) {
-		/* empty */
-	}
-#endif
 
 	if (!l) return;
-#if 1
 	l = cong_layout_line_get_next(l);
-#else
-	l = l->next;
-#endif
 	if (!l) return;
 
 	curs->line++;
 
-#if 1
 	curs->y = cong_layout_line_get_second_y(l) - 1;
-#else
-	curs->y = (int) *((int *) l->child->next->next->data) - 1;
-#endif
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
 #if 1
@@ -478,7 +431,7 @@ void cong_cursor_next_line(CongCursor *curs, CongXMLEditor *xed)
 }
 
 
-void cong_cursor_del_prev_char(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_del_prev_char(CongCursor *curs, CongSpanEditor *xed)
 {
 	CongDocument *doc;
 
@@ -495,22 +448,11 @@ void cong_cursor_del_prev_char(CongCursor *curs, CongXMLEditor *xed)
 	
 	cong_cursor_prev_char(curs,xed);
 
-#if 1
 	cong_location_del_next_char(doc, &curs->location);
-#else	
-	if (*(xml_frag_data_nice(curs->t) + curs->c))
-	{
-		memmove(xml_frag_data_nice(curs->t) + curs->c, xml_frag_data(curs->t) + curs->c + 1,
-						strlen(xml_frag_data_nice(curs->t) + curs->c));
-		curs->t->child->size--;
-	}
-	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
-		ttree_branch_remove(curs->t->next);
-#endif
 }
 
 
-void cong_cursor_del_next_char(CongCursor *curs, CongXMLEditor *xed)
+void cong_cursor_del_next_char(CongCursor *curs, CongSpanEditor *xed)
 {
 	CongDocument *doc;
 
@@ -519,22 +461,12 @@ void cong_cursor_del_next_char(CongCursor *curs, CongXMLEditor *xed)
 
 	doc = xed->doc;
 
-#if 1
 	if (!cong_location_exists(&curs->location)) return;
 
 	cong_location_del_next_char(doc, &curs->location);
-#else
-	if (!curs->t) return;
-	
-	if (*(xml_frag_data_nice(curs->t) + curs->c))
-	{
-		memmove(xml_frag_data_nice(curs->t) + curs->c, xml_frag_data(curs->t) + curs->c + 1,
-						strlen(xml_frag_data_nice(curs->t) + curs->c));
-		curs->t->child->size--;
-	}
-	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
-		ttree_branch_remove(curs->t->next);
-#endif
 }
+
+
+
 
 

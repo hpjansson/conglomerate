@@ -85,7 +85,6 @@ static gboolean get_iter_for_node(CongTestViewDetails *details, CongNodePtr node
 	return search.found_it;
 }
 
-#if NEW_XML_IMPLEMENTATION
 gchar* cleanup_text(xmlChar *text) {
 	gchar *buffer = g_malloc((strlen(text)*3)+1); /* for safety's sake */
 	gchar *dst = buffer;
@@ -164,6 +163,7 @@ void populate_tree_store_recursive(CongTestViewDetails *details, CongNodePtr nod
 }
 
 /* Prototypes of the handler functions: */
+static void on_document_coarse_update(CongView *view);
 static void on_document_node_make_orphan(CongView *view, CongNodePtr node);
 static void on_document_node_add_after(CongView *view, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
@@ -173,6 +173,21 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 #define DEBUG_TEST_VIEW 1
 
 /* Definitions of the handler functions: */
+static void on_document_coarse_update(CongView *view)
+{
+	CongTestView *test_view;
+
+	g_return_if_fail(view);
+
+	#if DEBUG_TEST_VIEW
+	g_message("CongTestView - on_document_coarse_update\n");
+	#endif
+
+	test_view = CONG_TEST_VIEW(view);
+
+	/* Ignore for now */
+}
+
 static void on_document_node_make_orphan(CongView *view, CongNodePtr node)
 {
 	CongTestView *test_view;
@@ -315,7 +330,6 @@ static void on_document_node_set_text(CongView *view, CongNodePtr node, const xm
 		g_free(text);
 	}
 }
-#endif /* #if NEW_XML_IMPLEMENTATION */
 
 GtkWidget *cong_test_view_new(CongDocument *doc)
 {
@@ -334,7 +348,7 @@ GtkWidget *cong_test_view_new(CongDocument *doc)
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
-#if NEW_XML_IMPLEMENTATION
+	view->view.klass->on_document_coarse_update = on_document_coarse_update;
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;
@@ -342,7 +356,6 @@ GtkWidget *cong_test_view_new(CongDocument *doc)
 	view->view.klass->on_document_node_set_text = on_document_node_set_text;
 
 	cong_document_register_view( doc, CONG_VIEW(view) );
-#endif
 	
 	details->scrolled_window = GTK_SCROLLED_WINDOW( gtk_scrolled_window_new(NULL, NULL) );
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 
@@ -372,9 +385,7 @@ GtkWidget *cong_test_view_new(CongDocument *doc)
 	/* Populate the tree: */
 	gtk_tree_store_append (details->tree_store, &root_iter, NULL);  /* Acquire a top-level iterator */
 
-#if NEW_XML_IMPLEMENTATION
 	populate_tree_store_recursive(details, cong_document_get_root(doc), &root_iter);
-#endif
 
 	return GTK_WIDGET(details->scrolled_window);	
 }

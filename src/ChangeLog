@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-04 David Malcolm
+
+	* cong-document.c, cong-font.c, cong-location.c, cong-test-view.c, cong-tree-view.c, cursor.c, global.h, open.c, popup.c, position.c, select.c, tests.c, tree.c, xmldata.c, xmledit.c, xmlload.c, xmlview.c
+
+	Removal of old implementations; rename of CongXMLEditor to CongSpanEditor; bug fixing.
+	
 2002-11-02 David Malcolm
 
 	* cong-document.c, global.h, xmldata.c, xmlview.c

@@ -10,7 +10,6 @@
 
 char fake_data[] = "";
 
-#if NEW_XML_IMPLEMENTATION
 const char* cong_node_name(CongNodePtr node)
 {
 	g_return_val_if_fail(node, NULL);
@@ -46,13 +45,11 @@ CongNodePtr cong_node_parent(CongNodePtr node)
 
 	return node->parent;
 }
-#endif
 
 enum CongNodeType cong_node_type(CongNodePtr node)
 {
 	g_return_val_if_fail(node, CONG_NODE_TYPE_UNKNOWN);
 
-#if NEW_XML_IMPLEMENTATION
 	switch (node->type) {
 
 	default: g_assert(0);
@@ -88,30 +85,6 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 #endif
 		return CONG_NODE_TYPE_UNKNOWN;
 	}
-#else
-	switch (xml_frag_type(node)) {
-
-	default: g_assert(0);
-
-	case XML_UNKNOWN:
-		return CONG_NODE_TYPE_UNKNOWN;
-
-	case XML_TAG_EMPTY:
-		/* the code shouldn't support these TTREE node types as CongNode */
-		g_assert(0);
-
-	case XML_ATTR:
-		/* the code shouldn't support these TTREE node types as CongNode; however they do occur at the moment, so we handle them gracefully */
-		return CONG_NODE_TYPE_UNKNOWN;		
-
-	case XML_DATA:
-		return CONG_NODE_TYPE_TEXT;
-
-	case XML_TAG_SPAN:
-		return CONG_NODE_TYPE_ELEMENT;
-
-	}
-#endif
 
 }
 
@@ -139,16 +112,11 @@ CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attrib
 	g_return_val_if_fail(node, NULL);
 	g_return_val_if_fail(attribute_name, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	return xmlGetProp(node, attribute_name);
-#else
-	return NULL; /* not implemented */
-#endif
 }
 
 void cong_node_self_test(CongNodePtr node)
 {
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr iter;
 
 	g_return_if_fail(node);
@@ -196,57 +164,33 @@ void cong_node_self_test(CongNodePtr node)
 		}
 		g_assert(iter==node);
 	}
-#endif
 }
 
 void cong_node_self_test_recursive(CongNodePtr node)
 {
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr iter;
 	cong_node_self_test(node);
 
 	for (iter=node->children; iter; iter=iter->next) {
 		cong_node_self_test_recursive(iter);
 	}
-#endif
 }
 
 int cong_node_get_length(CongNodePtr node)
 {
-	/* get length of content; does not include the zero terminator (to correspond to the TTREE size field) */
+	/* get length of content; does not include the zero terminator */
 	g_return_val_if_fail( (cong_node_type(node) == CONG_NODE_TYPE_TEXT) || (cong_node_type(node) == CONG_NODE_TYPE_COMMENT), 0);
 
-#if NEW_XML_IMPLEMENTATION
 	return xmlStrlen(node->content);
-#else
-	return node->child->size;
-#endif
 	
 }
 
 /* Construction: */
 CongNodePtr cong_node_new_element(const char *tagname)
 {
-#if !NEW_XML_IMPLEMENTATION
-	TTREE *dummy;
-	CongNodePtr new_node;
-#endif
 	g_return_val_if_fail(tagname, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	return xmlNewNode(NULL, tagname); /* FIXME: audit the character types here */
-#else
-	/* Have to create as a child of something, for some reason: */
-	dummy = ttree_node_add(0, "d", 1);
-
-	new_node = ttree_node_add(dummy, "tag_span", 8);
-	ttree_node_add(new_node, tagname, strlen(tagname));
-
-	dummy->child = 0;
-	ttree_branch_remove(dummy);
-
-	return new_node;
-#endif
 }
 
 CongNodePtr cong_node_new_text(const char *text)
@@ -256,29 +200,9 @@ CongNodePtr cong_node_new_text(const char *text)
 
 CongNodePtr cong_node_new_text_len(const char *text, int len)
 {
-#if !NEW_XML_IMPLEMENTATION
-	TTREE *dummy;
-	CongNodePtr new_node;
-#endif
-
 	g_return_val_if_fail(text, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	return xmlNewTextLen(text, len); /* FIXME: audit the character types here */
-#else
-	/* Have to create as a child of something, for some reason: */
-	dummy = ttree_node_add(0, "d", 1);
-
-	new_node = ttree_node_add(dummy, "data", 4);
-	ttree_node_add(new_node, text, len);
-
-	dummy->child = 0;
-	ttree_branch_remove(dummy);
-
-	return new_node;
-#endif
-	
-
 }
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
@@ -287,26 +211,12 @@ void cong_node_free(CongNodePtr node)
 {
 	g_return_if_fail(node);
 
-#if NEW_XML_IMPLEMENTATION
 	xmlFreeNode(node);
-#else
-	g_assert(cong_node_type(node)==CONG_NODE_TYPE_TEXT); /* for now */
-	if (node->child)
-	{
-		if (node->child->data) free(node->child->data);
-		free(node->child);
-	}
-
-	if (node->data) free(node->data);
-	free(node);
-#endif
-	
 }
 
 
 void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 {
-#if NEW_XML_IMPLEMENTATION
 	CongNodePtr iter, next;
 
 	CONG_NODE_SELF_TEST(node);
@@ -329,22 +239,14 @@ void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node)
 	cong_document_node_make_orphan(doc, node);
 
 	cong_node_free(node);
-#else
-	ttree_branch_remove(node);
-#endif
 }
 
 CongNodePtr cong_node_recursive_dup(CongNodePtr node)
 {
-#if NEW_XML_IMPLEMENTATION
 	return xmlCopyNode(node, TRUE);
-#else
-	return ttree_branch_dup(node);
-#endif
 }
 
 /* Tree manipulation: */
-#if NEW_XML_IMPLEMENTATION
 void cong_node_make_orphan(CongNodePtr node)
 {
 	CongNodePtr former_parent;
@@ -427,9 +329,7 @@ void cong_node_make_orphan(CongNodePtr node)
 		}
 	}
 }
-#endif
 
-#if NEW_XML_IMPLEMENTATION
 void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
 {
 	g_return_if_fail(node);
@@ -475,9 +375,7 @@ void cong_node_add_after(CongNodePtr node, CongNodePtr older_sibling)
 		}
 	}
 }
-#endif
 
-#if NEW_XML_IMPLEMENTATION
 void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 {
 	g_return_if_fail(node);
@@ -523,9 +421,7 @@ void cong_node_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 		}
 	}
 }
-#endif
 
-#if NEW_XML_IMPLEMENTATION
 void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 {
 	g_return_if_fail(node);
@@ -556,9 +452,7 @@ void cong_node_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 		CONG_NODE_SELF_TEST(adoptive_parent);
 	}
 }
-#endif
 
-#if NEW_XML_IMPLEMENTATION
 void cong_node_set_text(CongNodePtr node, const xmlChar *new_content)
 {
 	g_return_if_fail(node);
@@ -566,22 +460,15 @@ void cong_node_set_text(CongNodePtr node, const xmlChar *new_content)
 
 	xmlNodeSetContent(node, new_content);
 }
-#endif
-
 
 const char *xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;
 	
-#if NEW_XML_IMPLEMENTATION
 	g_return_val_if_fail(x->type==XML_TEXT_NODE, NULL);
 	
 	s = x->content; /* FIXME:  hackish cast from xmlChar* to char* */
 	if (!s) s = fake_data;
-#else
-	s = xml_frag_data(x);
-	if (!s) s = fake_data;
-#endif
 	
 	return(s);
 }
@@ -591,13 +478,8 @@ const char *xml_frag_name_nice(CongNodePtr x)
 {
 	const char *s;
 	
-#if NEW_XML_IMPLEMENTATION
 	s = cong_node_name(x);
 	if (!s) s = fake_data;
-#else
-	s = xml_frag_name(x);
-	if (!s) s = fake_data;
-#endif
 
 	return(s);
 }
@@ -653,7 +535,6 @@ CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x)
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(x, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	if (cong_node_parent(x)) {
 
 		x = cong_node_parent(x);
@@ -672,18 +553,6 @@ CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x)
 		}
 	}
 
-#else
-	if (x->parent) x = x->parent;
-	else return(0);
-
-	if (x->parent) x = x->parent;
-	else return(0);
-
-	if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data))
-		return(x);
-
-#endif
-
 	return NULL;
 
 }
@@ -696,7 +565,6 @@ CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 	g_return_val_if_fail(ds, NULL);
 	g_return_val_if_fail(x, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	if (x->parent) {
 		x = x->parent;
 	} else {
@@ -717,35 +585,6 @@ CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 			break;
 		}
 	}
-#else
-	
-	if (x->parent) x = x->parent;
-	else return(0);
-
-	if (x->parent) x = x->parent;
-	else return(0);
-
-	for (;;)
-	{
-		if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data)) {
-			n0 = x;
-		} else { 
-			break;
-		}
-		
-		if (x->parent) {
-			x = x->parent;
-		} else {
-			break;
-		}
-
-		if (x->parent) {
-			x = x->parent;
-		} else {
-			break;
-		}
-	}
-#endif
 
 	return(n0);
 }
@@ -762,12 +601,11 @@ void xml_tag_remove(CongDocument *doc, CongNodePtr x)
 
 	/* GREP FOR MVC */
 
-#if NEW_XML_IMPLEMENTATION
 #if 1
 	for (n0 = x->children; n0; n0 = n0_next) {
 		n0_next = n0->next;
 		
-		cong_document_node_add_after(doc, n0, x);
+		cong_document_node_add_before(doc, n0, x);
 	}
 
 	cong_document_node_make_orphan(doc, x);
@@ -805,24 +643,6 @@ void xml_tag_remove(CongDocument *doc, CongNodePtr x)
 	x->last = NULL;
 
 	xmlFreeNode(x);
-#endif
-#else
-	n0 = x->child->child;
-	n0->prev = x->prev;
-	if (!x->prev) x->parent->child = n0;
-	else x->prev->next = n0;
-	
-	for (; n0->next; n0 = n0->next) n0->parent = x->parent;
-	
-	n0->parent = x->parent;
-	n0->next = x->next;
-	if (x->next) x->next->prev = n0;
-	
-	x->next = 0;
-	x->prev = 0;
-	x->parent = 0;
-	if (x->child) x->child->child = 0;
-	ttree_branch_remove(x);
 #endif
 }
 

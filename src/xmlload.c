@@ -39,7 +39,7 @@
 #include "global.h" 
 /* purely to get at build settings */
 
-#if !NEW_XML_IMPLEMENTATION
+#if 0
 #include <ttree.h>
 
 void
@@ -140,4 +140,4 @@ convert_libxml_to_ttree_doc(xmlDocPtr doc)
 	
 	return node_root;
 }
-#endif /* #if !NEW_XML_IMPLEMENTATION */
+#endif

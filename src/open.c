@@ -493,9 +493,6 @@ void force_load(gpointer data)
 void open_document_do(const gchar* doc_name)
 {
 	char *p;
-#if !NEW_XML_IMPLEMENTATION
-	TTREE *xml_in;
-#endif
 	FILE *xml_f;
 	CongDispspec *ds;
 	CongDocument *cong_doc;
@@ -572,21 +569,12 @@ void open_document_do(const gchar* doc_name)
 
 		gnome_vfs_uri_unref(file_uri);
 		
-		#if !NEW_XML_IMPLEMENTATION
-		xml_in = convert_libxml_to_ttree_doc(doc);
-
-		xmlFreeDoc(doc);
-		#endif /* #if NEW_XML_IMPLEMENTATION */
 	}
 
 	g_assert(ds);
-#if NEW_XML_IMPLEMENTATION
 	cong_doc = cong_document_new_from_xmldoc(doc, ds, doc_name); /* takes ownership of doc */
 
 	cong_node_self_test_recursive(cong_document_get_root(cong_doc));
-#else	
-	cong_doc = cong_document_new_from_ttree(xml_in, ds, doc_name);
-#endif
 
 	g_assert(cong_doc);
 

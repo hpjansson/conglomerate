@@ -8,11 +8,7 @@ GtkWidget *cong_test_view_new(CongDocument *doc);
 
 struct CongDocument
 {
-#if NEW_XML_IMPLEMENTATION
 	xmlDocPtr xml_doc;
-#else
-	TTREE *tt;
-#endif  /* #if NEW_XML_IMPLEMENTATION */
 
 	CongDispspec *ds;
 
@@ -29,7 +25,6 @@ struct CongDocument
 #endif
 };
 
-#if NEW_XML_IMPLEMENTATION
 CongDocument*
 cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url)
 {
@@ -69,51 +64,13 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 
 	return doc;
 }
-#else
-CongDocument*
-cong_document_new_from_ttree(TTREE *tt, CongDispspec *ds, const gchar *url)
-{
-	CongDocument *doc;
-
-	g_return_val_if_fail(tt!=NULL, NULL);
-
-	doc = g_new0(struct CongDocument,1);
-
-	doc->tt = tt;
-	doc->ds = ds;
-	doc->url = g_strdup(url);
-
-	cong_cursor_init(&doc->curs);
-	cong_selection_init(&doc->selection);
-
-	doc->curs.set = 0;
-	doc->curs.xed = 0;
-	doc->curs.w = 0;
-	doc->selection.xed = 0;
-
-#if 1
-	cong_location_nullify(&doc->selection.loc0);
-	cong_location_nullify(&doc->selection.loc1);
-#else
-	doc->selection.t0 = doc->selection.t1 = 0;
-#endif
-
-	return doc;
-}
-#endif  /* #if NEW_XML_IMPLEMENTATION */
 
 void
 cong_document_delete(CongDocument *doc)
 {
 	g_return_if_fail(doc);
 
-#if NEW_XML_IMPLEMENTATION
 	g_assert(0);
-#else
-	g_assert(doc->tt);
-
-	ttree_branch_remove(doc->tt);
-#endif  /* #if NEW_XML_IMPLEMENTATION */
 
 	if (doc->url) {
 		g_free(doc->url);
@@ -127,11 +84,7 @@ cong_document_get_root(CongDocument *doc)
 {
 	g_return_val_if_fail(doc, NULL);
 
-#if NEW_XML_IMPLEMENTATION
 	return doc->xml_doc->children;
-#else
-	return doc->tt->child;
-#endif /* #if NEW_XML_IMPLEMENTATION */
 
 }
 
@@ -192,7 +145,6 @@ cong_document_get_parent_uri(CongDocument *doc)
 void
 cong_document_save(CongDocument *doc, const char* filename)
 {
-#if NEW_XML_IMPLEMENTATION
 	xmlChar* mem;
 	int size;
 
@@ -203,14 +155,9 @@ cong_document_save(CongDocument *doc, const char* filename)
 	GnomeVFSResult vfs_result;
 	GnomeVFSHandle* vfs_handle;
 
-#else
-	FILE *xml_f;
-#endif
-
 	g_return_if_fail(doc);
 	g_return_if_fail(filename);
 
-#if NEW_XML_IMPLEMENTATION
 	/* Dump to a memory buffer. then write out buffer to GnomeVFS: */
 
 	xmlDocDumpMemory(doc->xml_doc,
@@ -276,14 +223,6 @@ cong_document_save(CongDocument *doc, const char* filename)
 	}
 	
 	gnome_vfs_uri_unref(file_uri);
-
-#else
-	xml_f = fopen(filename, "wt");
-	if (!xml_f) return;
-
-	xml_t_to_f(cong_document_get_root(doc), xml_f);
-	fclose(xml_f);
-#endif  /* #if NEW_XML_IMPLEMENTATION */
 }
 
 #define DEBUG_MVC 1
@@ -305,11 +244,11 @@ void cong_document_coarse_update(CongDocument *doc)
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
+		g_assert(view->klass->on_document_coarse_update);
 		view->klass->on_document_coarse_update(view);
 	}
 }
 
-#if NEW_XML_IMPLEMENTATION
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 {
 	GList *iter;
@@ -331,6 +270,7 @@ void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
 			CongView *view = CONG_VIEW(iter->data);
 			
 			g_assert(view->klass);
+			g_assert(view->klass->on_document_node_make_orphan);
 			view->klass->on_document_node_make_orphan(view, node);
 		}
 	}
@@ -356,6 +296,7 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_add_after);
 		view->klass->on_document_node_add_after(view, node, older_sibling);
 	}
 }
@@ -379,6 +320,7 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_add_before);
 		view->klass->on_document_node_add_before(view, node, younger_sibling);
 	}
 }
@@ -402,6 +344,7 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_parent);
 		view->klass->on_document_node_set_parent(view, node, adoptive_parent);
 	}
 }
@@ -426,10 +369,10 @@ void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlC
 		CongView *view = CONG_VIEW(iter->data);
 		
 		g_assert(view->klass);
+		g_assert(view->klass->on_document_node_set_text);
 		view->klass->on_document_node_set_text(view, node, new_content);
 	}
 }
-#endif
 
 void cong_document_tag_remove(CongDocument *doc, CongNodePtr x)
 {
