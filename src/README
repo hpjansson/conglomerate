@@ -1,0 +1,60 @@
+About
+-----
+
+This is a pre-release of an editor, Conge, to show the Conglomerate design
+philosophy. It is based on structural document markup with XML. A totally
+rewritten version is coming up in late january. To avoid confusion with this
+release, the new one will probably be called "Congle".
+
+
+Compiling
+---------
+
+Conge compilation should be quite simple, if you're lucky. There are no
+autoconf or automake scripts, only a basic makefile. On most modern Unices,
+this means you can type
+
+make
+
+and see what happens. This should produce an executable called "conge" in
+your current directory.
+
+
+Running
+-------
+
+Conge needs two files to be able to run and display something. The first is
+an XML file (if it uses a DTD, this should be locatable as referred from the
+XML file - there will be no validation done, and DTD-less documents are fine).
+The second is a "displayspec", illustrated by "readme.ds" in the examples
+directory. This specifies how the tags are rendered.
+
+There are two ways to load a document into Conge. One is by specifying the
+XML and displayspec files on the commandline, like this:
+
+conge readme.xml readme.ds
+
+The other is by using the GUI open dialogs. The readme example used above is
+located in the examples directory, from the package root.
+
+
+Contact
+-------
+
+All code herein is written by Hans Petter Jansson (hpj@styx.net), but please
+don't send angry mails to him about it. He knows the extent of its
+brokenness, and he is working on a nicely-implemented version, reusing no
+code whatsoever.
+
+Conglomerate has public mailinglists with web pages as follows:
+
+Announcements:    http://lists.styx.net/mailman/listinfo/conglomerate-announce
+User discussion:  http://lists.styx.net/mailman/listinfo/conglomerate
+Development:      http://lists.styx.net/mailman/listinfo/conglomerate-devel
+
+The Conglomerate web site is at:
+
+http://www.conglomerate.org/
+
+The latest updates are available through anonymous CVS to:
+

@@ -1,0 +1,91 @@
+document
+{
+  name {Document}
+  type {structural}
+  color {a0b0c0}
+}
+
+
+introduction
+{
+  name {Introduction}
+  type {structural}
+  color {e0eee0 c1cdc1}
+}
+
+section
+{
+  name {Section}
+  type {structural}
+  color {a0b0c0}
+}
+
+section.title
+{
+  name { "Title" }
+  type {structural}
+  collapseto {section subsection subsubsection}
+}
+
+section.signature
+{
+  name { "Signature" }
+  type {structural}
+  collapseto {section subsection subsubsection}
+}
+
+quote
+{
+  name {Quote}
+  type {span}
+  color {8b0000}
+}
+
+admission
+{
+  name {Admission}
+  type {span}
+  color {b22222}
+}
+
+excuse
+{
+  name {Excuse}
+  type {span}
+  color {b22222}
+}
+
+corporate
+{
+  name {"Corp jargon"}
+  type {span}
+  color {00008b}
+}
+
+disclaimer
+{
+  name {Disclaimer}
+  type {span}
+  color {698b22}
+}
+
+emph
+{
+  name {Emphasis}
+  type {span}
+  color {cd1076}
+}
+
+inspirational
+{
+  name {Inspirational}
+  type {span}
+  color {008b8b}
+}
+
+optimistic
+{
+  name {Optimistic}
+  type {span}
+  color {458b74}
+}
