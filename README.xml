@@ -38,7 +38,7 @@
 		<para>see also the file <filename>doc/devel/CompileIssues</filename></para>
 		<sect2>
 			<title>Debian</title>
-			<para>If you want to make a debian package from the tarbal, type</para>
+			<para>If you want to make a debian package from the tarball, type</para>
 			<para><command>fakeroot dpkg-buildpackage -uc -us</command></para>
 			<para>and when you have a deb-src line in <filename>/etc/apt/source</filename> type</para>
 			 <para><command>apt-get source -b conglomerate</command></para>
