@@ -144,6 +144,17 @@ cong_editor_area_listitem_new (CongEditorWidget3 *editor_widget,
 		 label);
 }
 
+void
+cong_editor_area_listitem_set_label (CongEditorAreaListitem *area_listitem,
+				     const gchar *label)
+{
+	g_return_if_fail (IS_CONG_EDITOR_AREA_LISTITEM (area_listitem));
+	g_return_if_fail (label);
+
+	cong_editor_area_text_set_text (PRIVATE(area_listitem)->label,
+					label);
+}
+
 /* Method implementation definitions: */
 static gint
 calc_requisition (CongEditorArea *area, 

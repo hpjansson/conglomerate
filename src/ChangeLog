@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-lists-area-listitem.c, plugin-lists-area-listitem.h
+
+	Added set_label method
+
 	* xmledit.c
 
 	Removed dead code from clipboard functions

@@ -62,6 +62,10 @@ CongEditorArea*
 cong_editor_area_listitem_new (CongEditorWidget3 *editor_widget,
 			       const gchar *label);
 
+void
+cong_editor_area_listitem_set_label (CongEditorAreaListitem *area_listitem,
+				     const gchar *label);
+
 G_END_DECLS
 
 #endif
