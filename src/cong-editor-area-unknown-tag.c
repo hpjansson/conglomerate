@@ -101,7 +101,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 
 #if 1
 	tag_string_begin = g_strdup_printf("<span foreground=\"%s\">&lt;%s&gt;</span>",colour_string, tagname);
-	tag_string_end = g_strdup_printf("<span foreground=\"%s\">/&lt;%s&gt;</span>",colour_string, tagname);
+	tag_string_end = g_strdup_printf("<span foreground=\"%s\">&lt;/%s&gt;</span>",colour_string, tagname);
 #else
 	tag_string_begin = g_strdup_printf("<%s>",tagname);
 	tag_string_end = g_strdup_printf("</%s>",tagname);
