@@ -6,6 +6,7 @@
 
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-document.h"
 
 enum {
 	TESTVIEW_COLUMN_TEXT,

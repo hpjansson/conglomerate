@@ -24,7 +24,9 @@
 
 #include "global.h"
 #include "cong-editor-widget-impl.h"
-#include <eel/eel-gdk-extensions.h>
+#include "cong-eel.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 struct CongDummyElementEditor
 {

@@ -5,6 +5,8 @@
 
 #include <stdlib.h>
 #include "global.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 void tree_coarse_update_of_view(CongTreeView *cong_tree_view)
 {

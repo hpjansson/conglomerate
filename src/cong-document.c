@@ -1,6 +1,8 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-document.h"
+#include "cong-error-dialog.h"
 
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
@@ -74,7 +76,7 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	}
 	#endif
 
-	cong_cursor_init(&doc->curs);
+	cong_cursor_init(&doc->curs, doc);
 	cong_selection_init(&doc->selection);
 
 	doc->curs.set = 0;

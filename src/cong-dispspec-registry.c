@@ -3,6 +3,9 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-dispspec.h"
+#include "cong-dispspec-registry.h"
+#include "cong-error-dialog.h"
 
 struct CongDispspecRegistry
 {

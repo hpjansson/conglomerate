@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "global.h"
+#include "cong-document.h"
 
 void cong_selection_start_from_curs(CongSelection *selection, CongCursor *curs)
 {

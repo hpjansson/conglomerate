@@ -11,6 +11,7 @@
 #include <libxml/tree.h>
 #include <libxml/debugXML.h>
 #include "global.h"
+#include "cong-dispspec.h"
 
 #define SUPPORT_OLD_LOADERS 0
 

@@ -5,14 +5,13 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
+#include "cong-eel.h"
 
 GtkStyle *style_white;
 
 #include <bonobo/bonobo-widget.h>
-
-#if 0
-#include <eel/eel-gdk-extensions.h>
-#endif
 
 #define CONG_EDITOR_VIEW(x) ((CongEditorView*)(x))
 
@@ -23,6 +22,7 @@ struct CongEditorView
 	GtkWidget *inner;
 };
 
+#if 0
 /* Avoid introducing an eel dependency for now by copying the code from eel-gdk-extensions.c and making the functions static: */
 static guint32
 not_eel_rgb16_to_rgb (gushort r, gushort g, gushort b)
@@ -47,7 +47,7 @@ not_eel_gdk_rgb_to_color_spec (const guint32 color)
 {
 	return g_strdup_printf ("#%06X", (guint) (color & 0xFFFFFF));
 }
-
+#endif
 
 gchar*
 get_col_string(const GdkColor* col)
@@ -57,9 +57,9 @@ get_col_string(const GdkColor* col)
 
 	g_return_val_if_fail(col,NULL);
 
-	col32 = not_eel_gdk_color_to_rgb (col);
+	col32 = cong_eel_gdk_color_to_rgb (col);
 	
-	return not_eel_gdk_rgb_to_color_spec(col32);
+	return cong_eel_gdk_rgb_to_color_spec(col32);
 }
 
 /* Dodgy blend func: */

@@ -28,6 +28,7 @@
 
 #include "global.h"
 #include <string.h>
+#include "cong-plugin.h"
 
 enum
 {

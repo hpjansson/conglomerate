@@ -3,6 +3,7 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "cong-error-dialog.h"
 
 void cong_error_test_file_ops(const gchar* filename, GnomeVFSResult vfs_result)
 {

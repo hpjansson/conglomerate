@@ -8,6 +8,7 @@
 #include <ctype.h>
 
 #include "global.h"
+#include "cong-dispspec.h"
 
 void
 cong_layout_line_free(CongLayoutLine *line)

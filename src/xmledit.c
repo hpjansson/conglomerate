@@ -6,7 +6,8 @@
 
 #include <stdlib.h>
 #include "global.h"
-
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 
 
@@ -412,6 +413,8 @@ static gint button_press_event(GtkWidget *widget, GdkEventButton *event, CongSpa
 		cong_cursor_place_in_xed(cursor, xed, (int) event->x, (int) event->y);
 		cong_selection_start_from_curs(selection, cursor);
 		cong_selection_end_from_curs(selection, cursor);
+		cong_document_on_selection_change(doc);
+		cong_document_on_cursor_change(doc);
 
 		xed_redraw(xed);
 /*		

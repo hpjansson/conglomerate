@@ -4,6 +4,12 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "cong-dialog.h"
+#include "cong-error-dialog.h"
+#include "cong-dispspec.h"
+#include "cong-dispspec-registry.h"
+#include "cong-document.h"
+#include "cong-plugin.h"
 
 #include <libxml/tree.h>
 

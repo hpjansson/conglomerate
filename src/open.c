@@ -3,6 +3,10 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-dispspec.h"
+#include "cong-dispspec-registry.h"
+#include "cong-document.h"
+#include "cong-error-dialog.h"
 
 #include <unistd.h> /* for chdir */
 
@@ -432,6 +436,9 @@ xmlDocPtr parse_buffer(const char* buffer, GnomeVFSFileSize size, GnomeVFSURI* f
 	g_assert(ctxt->sax);
 	ctxt->sax->error=on_sax_error;
 	ctxt->sax->warning=on_sax_warning;
+	ctxt->loadsubset = TRUE; /* try to get DTDs to be loaded */
+
+	xmlCatalogSetDebug(TRUE);
 
 	g_assert(global_parser_result==NULL);
 

@@ -12,6 +12,8 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "cong-dialog.h"
+#include "cong-error-dialog.h"
 
 #define CONVENIENCE_BUTTON_ID (0)
 

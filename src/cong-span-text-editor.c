@@ -24,6 +24,8 @@
 
 #include "global.h"
 #include "cong-editor-widget-impl.h"
+#include "cong-dispspec.h"
+#include "cong-document.h"
 
 #define H_SPACING (4)
 
@@ -251,6 +253,7 @@ static void regenerate_plaintext(CongSpanTextEditor *span_text_editor)
 		g_free(list_iter->data);
 	}
 	g_list_free(span_text_editor->list_of_cong_text_span);
+	span_text_editor->list_of_cong_text_span = NULL;
 
 	if (span_text_editor->hash_of_node_to_text_range) {
 		g_hash_table_destroy(span_text_editor->hash_of_node_to_text_range);
@@ -597,14 +600,18 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 	GtkWidget *w = GTK_WIDGET(editor_widget);
 	CongDocument *doc = cong_editor_widget_get_document(editor_widget);
 	const CongSelection *selection = cong_document_get_selection(doc);
+	const CongCursor *cursor = cong_document_get_cursor(doc);
 	CongTextSpan *selection_start_span = NULL;
 	CongTextSpan *selection_end_span = NULL;
+	CongTextSpan *cursor_span = NULL;
 	int selection_start_byte_offset;
 	int selection_end_byte_offset;
+	int cursor_byte_offset;
 
 	GSList *line_iter;
 	GList *text_span_iter = span_text->list_of_cong_text_span;	
 
+	int offset_x = element_editor->window_area.x + H_SPACING;
 	int y = element_editor->window_area.y;
 
 	if (cong_location_exists(&selection->loc0) && cong_location_exists(&selection->loc1)) {
@@ -620,6 +627,16 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 		
 		if (selection_end_span) {
 			selection_end_byte_offset = selection_end_span->first_byte_offset + selection->loc1.char_loc;
+		}
+	}
+
+	if (cong_location_exists(&cursor->location)) {
+		if (cursor->on) {
+			cursor_span = get_text_span_for_node(span_text, cursor->location.tt_loc);
+
+			if (cursor_span) {
+				cursor_byte_offset = cursor_span->first_byte_offset + cursor->location.char_loc;
+			}		
 		}
 	}
 
@@ -683,7 +700,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 										     FALSE,
 										     &start_x);	
 							start_x /= PANGO_SCALE;
-							start_x += element_editor->window_area.x + H_SPACING;
+							start_x += offset_x;
 							
 						} else {
 							/* selection started somewhere before this line: */
@@ -697,7 +714,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 										     TRUE,
 										     &end_x);	
 							end_x /= PANGO_SCALE;
-							end_x += element_editor->window_area.x + H_SPACING;
+							end_x += offset_x;
 						} else {
 							/* selection finishes somewhere after this line: */
 							end_x = element_editor->window_area.x + element_editor->window_area.width;
@@ -714,13 +731,38 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 					}
 				}
 			}
+
+			/* Render the cursor under the text: */
+			if (cursor_span) {
+				if (cursor_byte_offset >= line->start_index) {
+					if (cursor_byte_offset < line->start_index+line->length) {
+						int cursor_x;
+						
+						pango_layout_line_index_to_x(line,
+									     cursor_byte_offset,
+									     FALSE,
+									     &cursor_x);	
+						cursor_x /= PANGO_SCALE;
+						cursor_x += offset_x;
+						
+						/* Render it: */
+						gdk_draw_line(GDK_DRAWABLE(w->window), 
+							      cursor->gc, 
+							      cursor_x, y,
+							      cursor_x, y + logical_rect.height);
+						
+					}
+				}
+			}
 			
 			/* Render the PangoLayoutLine: */
 			gdk_draw_layout_line(GDK_DRAWABLE(w->window),
 					     w->style->black_gc,
-					     element_editor->window_area.x + H_SPACING,
+					     offset_x,
 					     (y - logical_rect.y),
 					     line);
+
+
 		}
 
 		/* Render spans: */
@@ -728,7 +770,7 @@ static int visit_lines(CongElementEditor *element_editor, gboolean render)
 			struct RenderTextRangeData render_text_range_data;
 			render_text_range_data.span_text = span_text;
 			render_text_range_data.line = line;
-			render_text_range_data.offset_x = element_editor->window_area.x + H_SPACING;
+			render_text_range_data.offset_x = offset_x;
 			render_text_range_data.offset_y = y + logical_rect.height + (calculate_span_height_data.max_depth * span_text->tag_height);
 			render_text_range_data.max_x = element_editor->window_area.x + element_editor->window_area.width;
 			render_text_range_data.drawable = GDK_DRAWABLE(w->window);				

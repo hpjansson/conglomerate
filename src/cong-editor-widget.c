@@ -24,6 +24,8 @@
 
 #include "global.h"
 #include "cong-editor-widget-impl.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 /* Prototypes of the handler functions: */
 static void on_document_coarse_update(CongView *view);

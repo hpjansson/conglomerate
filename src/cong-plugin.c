@@ -23,6 +23,9 @@
  */
 
 #include "global.h"
+#include "cong-plugin.h"
+#include "cong-error-dialog.h"
+#include "cong-document.h"
 
 /* Private definitions of the types: */
 struct CongPluginManager

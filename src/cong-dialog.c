@@ -12,6 +12,7 @@
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "cong-dialog.h"
 
 struct CongDialogContent
 {

@@ -182,74 +182,6 @@ cong_location_parent(const CongLocation *loc);
 void
 cong_location_copy(CongLocation *dst, const CongLocation *src);
 
-/**
-   CongDocument functions
- */
-
-/* takes ownership of xml_doc */
-CongDocument*
-cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *url);
-
-void
-cong_document_delete(CongDocument *doc);
-
-xmlDocPtr
-cong_document_get_xml(CongDocument *doc);
-
-CongNodePtr
-cong_document_get_root(CongDocument *doc);
-
-CongDispspec*
-cong_document_get_dispspec(CongDocument *doc);
-
-gchar*
-cong_document_get_filename(CongDocument *doc);
-/* caller is responsible for freeeing */
-
-gchar*
-cong_document_get_full_uri(CongDocument *doc);
-/* caller is responsible for freeeing */
-
-gchar*
-cong_document_get_parent_uri(CongDocument *doc);
-/* caller is responsible for freeeing */
-
-void
-cong_document_save(CongDocument *doc, const char* filename);
-
-gboolean
-cong_document_is_modified(CongDocument *doc);
-
-void
-cong_document_set_modified(CongDocument *doc, gboolean modified);
-
-void
-cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window);
-
-void 
-cong_document_set_url(CongDocument *doc, const gchar *url);
-
-glong
-cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
-
-/* MVC-related methods on the document: */
-void cong_document_coarse_update(CongDocument *doc);
-void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
-void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
-void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
-void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
-void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content);
-void cong_document_tag_remove(CongDocument *doc, CongNodePtr x);
-void cong_document_on_selection_change(CongDocument *doc);
-void cong_document_on_cursor_change(CongDocument *doc);
-
-
-void cong_document_register_view(CongDocument *doc, CongView *view);
-void cong_document_unregister_view(CongDocument *doc, CongView *view);
-
-/* cursor and selections are now properties of the document: */
-CongCursor* cong_document_get_cursor(CongDocument *doc);
-CongSelection* cong_document_get_selection(CongDocument *doc);
 
 #define CONG_VIEW(x) ((CongView*)(x))
 
@@ -509,6 +441,8 @@ struct CongCursor
 	int set;
 
 	guint timeout_id;
+
+	CongDocument *doc;
 };
 
 
@@ -663,119 +597,10 @@ int gui_window_new_document_make();
 struct xview *xmlview_new(CongDocument *doc);
 void xmlview_destroy(int free_xml);
 
-CongDispspec* cong_dispspec_new_from_ds_file(const char *name);
-GnomeVFSResult cong_dispspec_new_from_xds_file(GnomeVFSURI *uri, CongDispspec** ds);
-CongDispspec* cong_dispspec_new_from_xds_buffer(const char *buffer, size_t size);
-CongDispspec* cong_dispspec_new_from_xml_file(xmlDocPtr doc);
-void cong_dispspec_delete(CongDispspec *dispspec);
-
-const gchar*
-cong_dispspec_get_name(const CongDispspec *ds);
-
-const gchar*
-cong_dispspec_get_description(const CongDispspec *ds);
-
-#if 0
-char *cong_dispspec_name_name_get(CongDispspec *ds, TTREE *t);
-#endif
-
-#if NEW_LOOK
-enum CongDispspecGCUsage
-{
-	CONG_DISPSPEC_GC_USAGE_BOLD_LINE,
-	CONG_DISPSPEC_GC_USAGE_DIM_LINE,
-	CONG_DISPSPEC_GC_USAGE_BACKGROUND,
-	CONG_DISPSPEC_GC_USAGE_TEXT,
-
-	CONG_DISPSPEC_GC_USAGE_NUM
-};
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, enum CongDispspecGCUsage usage);
-#else
-#if 0
-GdkGC *cong_dispspec_name_gc_get(CongDispspec *ds, TTREE *t, int tog);
-#endif
-GdkGC *cong_dispspec_gc_get(CongDispspec *ds, CongNodePtr x, int tog);
-#endif
-const char *cong_dispspec_name_get(CongDispspec *ds, CongNodePtr x);
-
-gboolean cong_dispspec_element_structural(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_collapse(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_span(CongDispspec *ds, const char *name);
-gboolean cong_dispspec_element_insert(CongDispspec *ds, const char *name);
-
-enum CongElementType
-cong_dispspec_type(CongDispspec *ds, const char* tagname);
-
-/* New API for getting at elements within a dispspec */
-CongDispspecElement*
-cong_dispspec_lookup_element(const CongDispspec *ds, const char* tagname);
-
-CongDispspecElement*
-cong_dispspec_lookup_node(const CongDispspec *ds, CongNodePtr node);
-
-CongDispspecElement*
-cong_dispspec_get_first_element(CongDispspec *ds);
-
-/* Will return NULL if no such tag exists */
-CongDispspecElement*
-cong_dispspec_get_paragraph(CongDispspec *ds);
-
-/** Get the tagname in a parser-friendly form */
-const char*
-cong_dispspec_element_tagname(CongDispspecElement* element);
-
-/** Get the name in a user-friendly form */
-const char*
-cong_dispspec_element_username(CongDispspecElement* element);
-
-const char*
-cong_dispspec_element_name_name_get(CongDispspecElement* element);
-
-CongDispspecElement*
-cong_dispspec_element_next(CongDispspecElement* element);
-
-enum CongElementType
-cong_dispspec_element_type(CongDispspecElement *element);
-
-gboolean
-cong_dispspec_element_collapseto(CongDispspecElement *element);
-
-gboolean
-cong_dispspec_element_is_structural(CongDispspecElement *element);
-
-gboolean
-cong_dispspec_element_is_span(CongDispspecElement *element);
-
-unsigned int
-cong_dispspec_element_color(CongDispspecElement *element);
-
-#if NEW_LOOK
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element, enum CongDispspecGCUsage usage);
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element, enum CongDispspecGCUsage usage);
-#else
-GdkGC*
-cong_dispspec_element_gc(CongDispspecElement *element);
-
-const GdkColor*
-cong_dispspec_element_col(CongDispspecElement *element);
-#endif
-
-CongDispspecElementHeaderInfo*
-cong_dispspec_element_header_info(CongDispspecElement *element);
-
-gchar*
-cong_dispspec_element_get_section_header_text(CongDispspecElement *element, CongNodePtr x);
-
-CongFont*
-cong_dispspec_element_get_font(CongDispspecElement *element, enum CongFontRole role);
-
 void col_to_gcol(GdkColor *gcol, unsigned int col);
 void cong_span_editor_redraw(CongSpanEditor *xed);
 
-void cong_cursor_init(CongCursor *curs);
+void cong_cursor_init(CongCursor *curs, CongDocument *doc);
 void cong_cursor_uninit(CongCursor *curs);
 void cong_cursor_on(CongCursor *curs);
 void cong_cursor_off(CongCursor *curs);
@@ -809,109 +634,6 @@ get_appropriate_dispspec(xmlDocPtr doc);
 
 CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc);
 
-/* 
-   Error handling facilities: 
-
-   Although these have a "cong" prefix, I hope to eventually factor these out into a useful library for other apps to use (the prefix will then get changed).
-*/
-
-/**
- * Routine to manufacture a GNOME HIG-compliant error dialog.
- */
-GtkDialog* 
-cong_error_dialog_new(const gchar* what_failed, 
-		      const gchar* why_failed, 
-		      const gchar* suggestions);
-
-/**
- * Routine to manufacture a GNOME HIG-compliant error dialog with a "convenience button" that does something relevant.
- */
-GtkDialog* 
-cong_error_dialog_new_with_convenience(const gchar* what_failed, 
-				       const gchar* why_failed, 
-				       const gchar* suggestions,
-				       const gchar* convenience_label,
-				       void (*convenience_action)(gpointer data),
-				       gpointer convenience_data);
-
-/**
- * Routine to run an error dialog.  Use in preference to gtk_dialog_run as it handles convenience buttons.
- */
-void
-cong_error_dialog_run(GtkDialog* dialog);
-
-/**
- * Routine to run an error dialog and destroy it afterwards.  Use in preference to gtk_dialog_run as it handles convenience buttons.
- */
-void
-cong_error_dialog_do(GtkDialog* dialog);
-
-/**
- * Routine to get at the application name in a form suitable for use in error reports.  Returns a freshly-allocated string.
- */
-gchar* 
-cong_error_get_appname(void);
-
-/**
- * Routine to manufacture an error dialog for unimplemented functionality
- */
-GtkDialog*
-cong_error_dialog_new_unimplemented(const gchar* what_failed, const char* filename, int linenum);
-
-#define CONG_DO_UNIMPLEMENTED_DIALOG(what_failed) (cong_error_dialog_do(cong_error_dialog_new_unimplemented(what_failed, __FILE__, __LINE__)))
-
-/**
- * Routine to manufacture a "what failed" string for when File->Open fails.
- * @vfs_uri:  the URI from which you tried to open the file.
- */
-gchar*
-cong_error_what_failed_on_file_open_failure(const GnomeVFSURI* file_uri, gboolean transient);
-
-/**
- * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI from which you tried to open the file.
- */
-GtkDialog*
-cong_error_dialog_new_file_open_failed(const GnomeVFSURI* file_uri, gboolean transient, const gchar* why_failed, const gchar* suggestions);
-
-/**
- * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI to which you tried to save the file.
- */
-GtkDialog*
-cong_error_dialog_new_file_open_failed_with_convenience(const GnomeVFSURI* file_uri, 
-							gboolean transient, 
-							const gchar* why_failed, 
-							const gchar* suggestions,
-							const gchar* convenience_label,
-							void (*convenience_action)(gpointer data),
-							gpointer convenience_data);
-
-
-/**
- * Routine to manufacture an error dialog for when File->Open fails.
- * @vfs_uri:  the URI to which you tried to save the file.
- * @vfs_result: the error code that occurred.
- */
-GtkDialog*
-cong_error_dialog_new_file_open_failed_from_vfs_result(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result);
-
-
-/**
- * Routine to manufacture an error dialog for when File->Save (or File->Save as...) fails.
- * @vfs_uri:  the URI to which you tried to save the file.
- * @vfs_result: the error code that occurred.
- * @file_size: pointer to the size of the file if known, or NULL if not (useful if the error was due to lack of space)
- */
-GtkDialog*
-cong_error_dialog_new_file_save_failed(const GnomeVFSURI* file_uri, GnomeVFSResult vfs_result, const GnomeVFSFileSize* file_size);
-
-/** 
- * A bunch of self-tests.
- */
-void
-cong_error_tests(void);
-
 /**
  * A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
  * (I believe that CVS gnome-vfs has a routine gnome_vfs_read_entire_file that does this)
@@ -924,64 +646,6 @@ cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileS
 */
 GnomeVFSResult
 cong_vfs_new_buffer_from_uri(GnomeVFSURI* uri, char** buffer, GnomeVFSFileSize* size);
-
-/*
-  Dialog-handling functions.
-
-  Handy functions for building HIG-compliant property dialogs etc.
-*/
-typedef struct CongDialogContent CongDialogContent;
-typedef struct CongDialogCategory CongDialogCategory;
-
-/* An object suitable for use either as the innards of a dialog, or for a page in a property dialog */
-CongDialogContent *cong_dialog_content_new(gboolean within_notebook);
-GtkWidget *cong_dialog_content_get_widget(CongDialogContent *dialog_content);
-
-/* Category headings within a CongDialogContent */
-CongDialogCategory *cong_dialog_content_add_category(CongDialogContent *dialog_content, const gchar *title);
-
-/* Method to add left-side labelled controls such as text boxes, option menus etc */
-void cong_dialog_category_add_field(CongDialogCategory *category, const gchar *title, GtkWidget *widget);
-
-/* Method to add right-side labelled controls usch as check boxes and radio buttons: */
-void cong_dialog_category_add_selflabelled_field(CongDialogCategory *category, GtkWidget *widget);
-
-/* Function to manufacture the "content area" of a dialog */
-GtkWidget* 
-cong_alert_content_new(const gchar* stock_icon,
-		       const gchar* primary_text, 
-		       const gchar* secondary_text, 
-		       const gchar* tertiary_text);
-
-enum CongSaveConfirmationResult
-{
-	CONG_SAVE_CONFIRMATION_RESULT_SAVE_AND_CLOSE = 1,
-	CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING,
-	CONG_SAVE_CONFIRMATION_RESULT_CANCEL,
-};
-
-GtkDialog *cong_dialog_save_confirmation_alert_new(GtkWindow *parent, 
-						   const gchar *document_name,
-						   glong seconds_since_last_save_or_load);
-
-/* cong-dispspec-registry */
-CongDispspecRegistry*
-cong_dispspec_registry_new(const gchar* xds_directory);
-
-void
-cong_dispspec_registry_free(CongDispspecRegistry* registry);
-
-unsigned int
-cong_dispspec_registry_get_num(CongDispspecRegistry* registry);
-
-const CongDispspec*
-cong_dispspec_registry_get(CongDispspecRegistry* registry, unsigned int i);
-
-void
-cong_dispspec_registry_add(CongDispspecRegistry* registry, CongDispspec* ds);
-
-void
-cong_dispspec_registry_dump(CongDispspecRegistry* registry);
 
 /* Menu hooks: */
 gint toolbar_callback_open(GtkWidget *widget, gpointer data);
@@ -1057,83 +721,6 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, const gchar *uri, gpointer user_data);
-
-/* 
-   CongPluginManager
-*/
-CongPluginManager *cong_plugin_manager_new(void);
-CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager, 
-					 CongPluginCallbackRegister register_callback,
-					 CongPluginCallbackConfigure configure_callback);
-void cong_plugin_manager_unregister(CongPluginManager *plugin_manager, CongPlugin *plugin);
-void cong_plugin_manager_for_each_plugin(CongPluginManager *plugin_manager, void (*callback)(CongPlugin *plugin, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
-void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
-
-/* 
-   CongPlugin 
-
-   These are manufactured by the CongPluginManager and passed to the registration/unregistration hooks exposed by the .so/.dll files.
-
-   There are various methods to allow plugins to register their functionality with the app.
-*/
-CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
-							   const gchar *name, 
-							   const gchar *description,
-							   CongDocumentFactoryPageCreationCallback page_creation_callback,
-							   CongDocumentFactoryActionCallback action_callback,
-							   gpointer user_data);
-CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
-					    const gchar *name, 
-					    const gchar *description,
-					    CongImporterMimeFilter mime_filter,
-					    CongImporterActionCallback action_callback,
-					    gpointer user_data);
-CongExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
-					    const gchar *name, 
-					    const gchar *description,
-					    CongExporterFpiFilter fip_filter,
-					    CongExporterActionCallback action_callback,
-					    gpointer user_data);
-
-void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_printmethod(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
-void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
-
-
-const gchar* cong_functionality_get_name(CongFunctionality *functionality);
-const gchar* cong_functionality_get_description(CongFunctionality *functionality);
-
-void cong_document_factory_invoke_page_creation_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
-void cong_document_factory_invoke_action_callback(CongDocumentFactory *factory, CongNewFileAssistant *assistant);
-
-gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
-void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type);
-
-/* Helpful functions for implementing plugins: */
-void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc);
-void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc);
-
-/* The DocumentFactory objects all create pages within one big Druid; the booleans provide hints to make
-   navigation easier */
-GnomeDruidPageStandard *cong_new_file_assistant_new_page(CongNewFileAssistant *assistant, 
-							 CongDocumentFactory *document_factory, 
-							 gboolean is_first_of_factory,
-							 gboolean is_last_of_factory);
-void cong_new_file_assistant_set_page(CongNewFileAssistant *assistant, GnomeDruidPage *page);
-
-
-/* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
-/* plugin-docbook.c: */
-gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
-gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
-
-/* more plugins please! */
 
 
 /* The globals: */

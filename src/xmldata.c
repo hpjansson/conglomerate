@@ -7,6 +7,8 @@
 #include <string.h>
 
 #include "global.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 char fake_data[] = "";
 

@@ -7,6 +7,8 @@
 
 #include "global.h"
 #include <string.h>
+#include "cong-dispspec.h"
+#include "cong-document.h"
 
 void cong_cursor_on(CongCursor *curs)
 {
@@ -99,11 +101,14 @@ void cong_cursor_place_in_xed(CongCursor *curs, CongSpanEditor *xed, int x, int 
 }
 
 
-void cong_cursor_init(CongCursor *curs)
+void cong_cursor_init(CongCursor *curs, CongDocument *doc)
 {
 	GdkColor gcol;
 
 	g_assert(curs!=NULL);
+	g_assert(doc!=NULL);
+
+	curs->doc = doc;
 
 	curs->w = 0;
 	curs->x = curs->y = 0;
@@ -146,6 +151,8 @@ gint cong_cursor_blink(gpointer data)
 		cong_cursor_on(curs);
 		curs->on = 1;
 	}
+
+	cong_document_on_cursor_change(curs->doc);
 	
 	return(TRUE);
 }

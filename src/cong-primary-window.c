@@ -27,6 +27,11 @@
 #include <gtk/gtk.h>
 #include "global.h"
 #include "../config.h"
+#include "cong-dispspec.h"
+#include "cong-document.h"
+#include "cong-error-dialog.h"
+#include "cong-dialog.h"
+#include "cong-plugin.h"
 
 #if 1
 #include <libgnome/libgnome.h>
@@ -724,7 +729,7 @@ static void menu_callback_about(gpointer callback_data,
 	const gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
 
 	GtkWidget *about = gnome_about_new("Conglomerate",
-					   VERSION, 
+					   NULL, /*  VERSION,  */
 					   "(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm",
 					   "Conglomerate will be a user-friendly XML editor for GNOME",
 					   authors,

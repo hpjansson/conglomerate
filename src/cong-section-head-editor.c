@@ -24,7 +24,9 @@
 
 #include "global.h"
 #include "cong-editor-widget-impl.h"
-#include <eel/eel-gdk-extensions.h>
+#include "cong-eel.h"
+#include "cong-dispspec.h"
+#include "cong-document.h"
 
 static void recursively_create_children(CongSectionHeadEditor *section_head);
 
@@ -492,9 +494,9 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
 	/* Test to see if the header bar was clicked: */
-	if ( eel_rectangle_contains(&section_head->title_bar_window_rect, 
-				    event->x,
-				    event->y) ){
+	if ( cong_eel_rectangle_contains(&section_head->title_bar_window_rect, 
+					 event->x,
+					 event->y) ){
 		section_head->expanded = !section_head->expanded;
 
 		cong_editor_widget_force_layout_update(editor_widget);
@@ -508,9 +510,9 @@ static void section_head_on_button_press(CongElementEditor *element_editor, GdkE
 			CongElementEditor *child_editor = iter->data;
 			g_assert(child_editor);
 
-			if ( eel_rectangle_contains(&child_editor->window_area, 
-						    event->x,
-						    event->y) ){
+			if ( cong_eel_rectangle_contains(&child_editor->window_area, 
+							 event->x,
+							 event->y) ){
 				cong_element_editor_on_button_press(child_editor, event);
 			}
 		}

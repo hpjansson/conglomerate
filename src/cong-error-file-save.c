@@ -1,8 +1,19 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
+/*
+ * cong-error-file-save.c
+ *
+ * Copyright (C) 2002 David Malcolm
+ *
+ * FIXME:  This file is currently licensed under the GPL, but is intended to eventually become part of a library licensed under the LGPL
+ *
+ * Authors: David Malcolm <david@davemalcolm.demon.co.uk>
+ */
+
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "cong-error-dialog.h"
 
 /* FIXME: i18n! */
 

@@ -26,6 +26,8 @@
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 #include "global.h"
+#include "cong-document.h"
+#include "cong-dispspec.h"
 
 #define CONG_TREE_VIEW(x) ((CongTreeView*)(x))
 
