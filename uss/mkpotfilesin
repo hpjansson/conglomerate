@@ -50,7 +50,7 @@ function make_fresh_po_ChangeLog
  #date +"%F  mkpotfiles runner  <@>" > ${FPCL}
   date +"%F  Geert Stappers  <stappers@stappers.nl>" > ${FPCL}
   echo >> ${FPCL}
-  echo -e "\tPOTFILES.in:" >> ${FPCL}
+  echo -e "\t* POTFILES.in:" >> ${FPCL}
   echo -e "\tRegenerated, with uss/mkpotfilesin version ${VERSION}," >> ${FPCL}
   echo -e "\tthis will effect the .po files." >> ${FPCL}
   echo >> ${FPCL}
