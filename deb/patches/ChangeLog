@@ -1,3 +1,13 @@
+2003-11-03 Geert Stappers <stappers@stappers.nl>
+
+	* Makefile.am:
+	updated for dpatch
+
+	* 00list, 00patch-opts, 49_dont_install_generated_gtkdoc.dpatch,
+	49_no_scrollkeeper-update.dpatch: new files
+
+	* P*: removed
+
 2003-10-04 Geert Stappers <stappers@stappers.nl>
 
 	* ChangeLog, README, Makefile.am, .cvsignore, P00000patch-stamp

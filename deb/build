@@ -35,8 +35,10 @@ then
   do
     cp deb/${DF} debian
   done
-  echo copy also the patch files
-  cp deb/patches/P* debian/patches
+  echo copy also the dpatch files
+  cp deb/patches/00list debian/patches
+  cp deb/patches/00patch-opts debian/patches
+  cp deb/patches/*.dpatch debian/patches
 fi
 
 #

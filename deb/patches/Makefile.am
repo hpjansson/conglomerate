@@ -4,8 +4,9 @@ NULL =
 
 # patches that travell with the package
 patch_DISTS = \
-	P000omf.make \
+	49_dont_install_generated_gtkdoc.dpatch \
+	49_no_scrollkeeper-update.dpatch \
 	$(NULL)
 
-EXTRA_DIST = P00000patch-stamp P99999patch-stamp $(patch_DISTS) 
+EXTRA_DIST = 00list 00patch-opts $(patch_DISTS) 
 ## eof

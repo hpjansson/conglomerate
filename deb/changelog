@@ -1,3 +1,9 @@
+conglomerate (0.7.6cvs237-1) UNRELEASED; urgency=low
+
+  * dpatch compliant
+
+ -- Geert Stappers <stappers@stappers.nl>  Sun,  2 Nov 2003 22:29:00 +0000
+
 conglomerate (0.7.6-1) unstable; urgency=medium
 
   * New upstream release.

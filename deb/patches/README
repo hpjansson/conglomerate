@@ -1,19 +1,28 @@
 Patches that you make on each packages release.
+"dpatch" helps you with that
 
 Name convention:
 
- Pddd[path-[path-]]file.name
+ XX_name.dpatch
 
-Where ddd are three digits. 'P' is mandority prefix.
+compliant with dpatch
 
 
 
 Creating the patch file:
 
+  zcat /usr/share/doc/dpatch/examples/sample.00template.gz > debian/patches/XX_name.patch
   cp path/file.name path/file.name.tarball
   vi path/file.name
-  diff -u path/file.name.tarball path/file.name > debian/patches/Pdddpath-file.name
+  diff -u path/file.name.tarball path/file.name >> debian/patches/XX_name.patch
 
 or for new files:
 
-  diff -Nu /dev/null path/file.name > debian/patches/Pdddpath-file.name
+  diff -Nu /dev/null path/file.name >> debian/patches/XX_name.patch
+
+
+  vi debian/patches/XX_name.patch \
+    s/-p1/-p0/
+    /^EOF/d
+
+Or use the dpatch tools
