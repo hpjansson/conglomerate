@@ -240,6 +240,9 @@ void
 cong_document_abort_command (CongDocument *doc,
 		     	      CongCommand *cmd);
 
+void
+cong_document_end_preprocessor_command (CongDocument *doc,
+					CongCommand *cmd);
 
 /** 
  * Update amortisation

@@ -1,3 +1,10 @@
+2004-10-10  Dave Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c, cong-document.h: 
+
+	Added a way to use a CongCommand as a preprocessing operation
+	without it being added to the CongCommandHistory
+
 2004-10-09  Dave Malcolm  <dmalcolm@redhat.com>
 
 	* plugin-cleanup-source.c (Module): 

@@ -1222,6 +1222,34 @@ cong_document_end_command (CongDocument *doc,
 }
 
 /**
+ * cong_document_end_preprocessor_command:
+ * @doc: The #CongDocument upon which the command acted.
+ * @cmd: The #CongCommand which is now complete
+ * 
+ * Finish a preprocessing-style command which has acted on the document before it is presented to the user.  The command will not appear in the undo/redo history.
+ */
+void
+cong_document_end_preprocessor_command (CongDocument *doc,
+					CongCommand *cmd)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	g_return_if_fail (doc == cong_command_get_document (cmd));
+	g_return_if_fail (cmd==PRIVATE(doc)->current_command);
+
+	/* this only makes sense if the command history is empty: */
+	g_return_if_fail (NULL == cong_command_history_get_next_redo_command (PRIVATE(doc)->history));
+	g_return_if_fail (NULL == cong_command_history_get_next_undo_command (PRIVATE(doc)->history));
+
+	cong_document_end_edit (doc);
+
+	PRIVATE(doc)->current_command = NULL;
+
+	g_object_unref (G_OBJECT (cmd));
+}
+
+
+/**
  * cong_document_abort_command:
  * @doc: The #CongDocument upon which the command acted.
  * @cmd: The #CongCommand which should be aborted
