@@ -29,6 +29,7 @@
 #include "cong-dispspec.h"
 #include "cong-dispspec-registry.h"
 #include "cong-app.h"
+#include "cong-util.h"
 
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
@@ -53,6 +54,7 @@ struct CongPlugin
 #endif
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
+	GList *list_of_editor_node_factory; /* ptrs of type CongPluginEditorNodeFactory */
 	GList *list_of_tool; /* ptrs of type CongTool */
 	GList *list_of_property_dialog; /* ptrs of type CongCustomPropertyDialog */
 };
@@ -116,6 +118,13 @@ struct CongPluginEditorElement
 {
 	CongFunctionality functionality; /* base class */
 	CongEditorElementFactoryMethod make_element;
+	gpointer user_data;
+};
+
+struct CongPluginEditorNodeFactory
+{
+	CongFunctionality functionality; /* base class */
+	CongEditorNodeFactoryMethod make_node;
 	gpointer user_data;
 };
 
@@ -255,6 +264,29 @@ CongCustomPropertyDialog *cong_plugin_manager_locate_custom_property_dialog_by_i
 
 		for (factory_iter = ((CongPlugin*)plugin_iter->data)->list_of_property_dialog; factory_iter; factory_iter=factory_iter->next) {
 			CongCustomPropertyDialog* factory = factory_iter->data;
+			if (0==strcmp(plugin_id, CONG_FUNCTIONALITY(factory)->functionality_id)) {
+				return factory;
+			}
+		}
+	}
+	
+	return NULL;
+}
+
+CongPluginEditorNodeFactory*
+cong_plugin_manager_locate_editor_node_factory_by_id (CongPluginManager *plugin_manager,
+						      const gchar *plugin_id)
+{
+	GList *plugin_iter;
+
+	g_return_val_if_fail(plugin_manager, NULL);
+	g_return_val_if_fail(plugin_id, NULL);
+
+	for (plugin_iter=plugin_manager->list_of_plugin; plugin_iter; plugin_iter = plugin_iter->next) {
+		GList *factory_iter;
+
+		for (factory_iter = ((CongPlugin*)plugin_iter->data)->list_of_editor_node_factory; factory_iter; factory_iter=factory_iter->next) {
+			CongPluginEditorNodeFactory* factory = factory_iter->data;
 			if (0==strcmp(plugin_id, CONG_FUNCTIONALITY(factory)->functionality_id)) {
 				return factory;
 			}
@@ -433,7 +465,36 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 	plugin->list_of_editor_element = g_list_append(plugin->list_of_editor_element, editor_element_factory);
 
 	return editor_element_factory;
+}
 
+CongPluginEditorNodeFactory *cong_plugin_register_editor_node_factory(CongPlugin *plugin, 
+								      const gchar *name, 
+								      const gchar *description,
+								      const gchar *plugin_id,
+								      CongEditorNodeFactoryMethod factory_method,
+								      gpointer user_data)
+{
+	CongPluginEditorNodeFactory *editor_node_factory;
+
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(name, NULL);
+	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(plugin_id, NULL);
+	g_return_val_if_fail(factory_method, NULL);
+
+        editor_node_factory = g_new0(CongPluginEditorNodeFactory,1);
+
+	editor_node_factory->functionality.plugin = plugin;
+	editor_node_factory->functionality.name = g_strdup(name);
+	editor_node_factory->functionality.description = g_strdup(description);
+	editor_node_factory->functionality.functionality_id = g_strdup(plugin_id);
+	editor_node_factory->make_node = factory_method;
+	editor_node_factory->user_data = user_data;
+
+	/* Add to plugin's list: */
+	plugin->list_of_editor_node_factory = g_list_append(plugin->list_of_editor_node_factory, editor_node_factory);
+
+	return editor_node_factory;
 }
 
 CongTool *cong_plugin_register_tool(CongPlugin *plugin,
@@ -1034,6 +1095,20 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget2 *editor_widg
 
 	return element_editor;
 
+}
+
+CongEditorNodeElement*
+cong_plugin_editor_node_factory_invoke (CongPluginEditorNodeFactory *plugin_editor_node_factory,
+					CongEditorWidget3 *editor_widget, 
+					CongNodePtr node)
+{
+	g_return_val_if_fail(plugin_editor_node_factory, NULL);
+	g_return_val_if_fail(editor_widget, NULL);
+	g_return_val_if_fail(node, NULL);
+
+	g_assert(plugin_editor_node_factory->make_node);
+
+	return plugin_editor_node_factory->make_node(plugin_editor_node_factory, editor_widget, node, plugin_editor_node_factory->user_data);
 }
 
 GtkWidget *cong_custom_property_dialog_make(CongCustomPropertyDialog *custom_property_dialog,

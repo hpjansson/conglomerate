@@ -33,7 +33,9 @@
 #include "cong-editor-node-text.h"
 #include "cong-editor-node-document.h"
 #include "cong-editor-node-unimplemented.h"
+#include "cong-plugin.h"
 
+#include "cong-app.h"
 #include "cong-eel.h"
 
 #include <gtk/gtkdrawingarea.h>
@@ -1016,14 +1018,37 @@ recursive_add_nodes(CongEditorWidget3 *widget,
 						editor_node = cong_editor_node_element_structural_new (widget,
 												       node);
 						break;
+
 					case CONG_ELEMENT_TYPE_SPAN:
 						editor_node = cong_editor_node_element_span_new (widget,
 												 node);
 						break;
+
 					case CONG_ELEMENT_TYPE_INSERT:
 					case CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE:
 					case CONG_ELEMENT_TYPE_PARAGRAPH:
+						editor_node = cong_editor_node_element_unknown_new (widget,
+												    node);
+						break;
+
 					case CONG_ELEMENT_TYPE_PLUGIN:
+						{
+							const gchar *plugin_id = cong_dispspec_element_get_editor_plugin_id (ds_element);
+							CongPluginEditorNodeFactory* factory = cong_plugin_manager_locate_editor_node_factory_by_id (cong_app_singleton()->plugin_manager,
+																		     plugin_id);
+							
+							if (factory) {
+								editor_node = CONG_EDITOR_NODE( cong_plugin_editor_node_factory_invoke (factory,
+																	widget, 
+																	node));
+							} else {
+								g_message("plugin not found \"%s\"", plugin_id);
+								editor_node = cong_editor_node_element_unknown_new (widget,
+														    node);
+							}							
+						}
+						break;
+
 					case CONG_ELEMENT_TYPE_UNKNOWN:
 						editor_node = cong_editor_node_element_unknown_new (widget,
 												    node);

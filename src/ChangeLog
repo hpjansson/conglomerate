@@ -1,5 +1,9 @@
 2003-07-23  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-app.h, cong-editor-widget3.c, cong-plugin.c, cong-plugin.h, plugin-lists.c
+
+	Added plugin editor nodes to the new editor widget; hooked up the <listitem> plugin.
+	
 	* cong-debug-log-view.c, cong-dispspec.c, cong-dom-view.c, cong-menus.c, cong-parser-error.c, global.h, main.c, plugin-docbook.c, plugin-dtd.c, plugin-validate.c, xmldata.c
 
 	Finished the refactoring of cong_util code

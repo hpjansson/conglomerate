@@ -35,6 +35,8 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#include "plugin-lists-node-element-listitem.h"
+
 typedef struct CongListitemElementEditor CongListitemElementEditor;
 struct CongListitemElementEditor
 {
@@ -207,6 +209,18 @@ static CongElementEditor* manufacture_element(CongPluginEditorElement *plugin_ed
 #endif
 }
 
+static CongEditorNodeElement*  
+manufacture_editor_node_listitem (CongPluginEditorNodeFactory *plugin_editor_node_factory, 
+				  CongEditorWidget3 *editor_widget, 
+				  CongNodePtr node, 
+				  gpointer user_data)
+{
+	g_message("manufacture_editor_node_listitem");
+
+	return CONG_EDITOR_NODE_ELEMENT( cong_editor_node_element_listitem_new (editor_widget,
+										node));
+}
+
  /* would be exposed as "plugin_register"? */
 gboolean plugin_lists_plugin_register(CongPlugin *plugin)
 {
@@ -218,7 +232,12 @@ gboolean plugin_lists_plugin_register(CongPlugin *plugin)
 					    "listitem",
 					    manufacture_element,
 					    NULL);
-
+	cong_plugin_register_editor_node_factory(plugin, 
+						 _("List Member Element"), 
+						 _("An editor node for visualising a member of a list"),
+						 "listitem",
+						 manufacture_editor_node_listitem,
+						 NULL);
 	return TRUE;
 }
 
