@@ -2,3 +2,6 @@
 
 	* ChangeLog:
 	Created this file.
+
+	* catalog.xml
+	File that Steinar Bang provided in bugzilla#122011.
