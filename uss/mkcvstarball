@@ -1,5 +1,6 @@
 #!/bin/bash
 
+./autogen.sh
 make distcheck
 if [ $? -ne 0 ]
  echo make distcheck failed
