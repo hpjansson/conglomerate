@@ -2,6 +2,10 @@
 
 	* cong-location.c
 
+	Fixed bad parameter mismatch spotted by Pav Lucistnik
+	
+	* cong-location.c
+
 	Added some bulletproofing to the get next/prev word routines for when the cursor is at the very end of a TEXT node
 	
 	* xmledit.c
