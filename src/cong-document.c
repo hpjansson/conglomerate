@@ -944,20 +944,28 @@ cong_document_get_language_for_node(CongDocument *doc,
 	return NULL; /* for now */
 }
 
-void cong_document_delete_selection(CongDocument *doc)
+void
+cong_document_delete_selection (CongDocument *doc)
 {
 	CongNodePtr t;
 	CongSelection *selection;
-	CongCursor *curs;
+	CongRange *range;
 
 	g_return_if_fail(doc);
 
-#if 0
-	CONG_DO_UNIMPLEMENTED_DIALOG(NULL,
-				     "Deletion of selection");
-#else
-	cong_selection_delete(cong_document_get_selection(doc), doc);
-#endif
+	selection = cong_document_get_selection(doc);
+	range = cong_selection_get_ordered_range (selection);
+
+	cong_document_begin_edit (doc);
+
+	cong_document_delete_range (doc, 
+				    cong_selection_get_ordered_range (selection));
+
+	cong_selection_nullify (selection);
+
+	cong_document_on_selection_change (doc);
+
+	cong_document_end_edit (doc);
 }
 
 static gboolean 
@@ -1196,14 +1204,14 @@ text_deletion_update_location_callback (CongDocument *doc,
 	struct text_deletion_userdata *text_deletion_userdata = user_data;
 
 	if (location->node == text_deletion_userdata->node) {
-		if (location->byte_offset < text_deletion_userdata->start_byte_offset) {
+		if (location->byte_offset <= text_deletion_userdata->start_byte_offset) {
 			return FALSE;
 		} else {
 			if (location->byte_offset < text_deletion_userdata->end_byte_offset) {
 				cong_location_nullify (location);
 				return TRUE;
 			} else {
-				location->byte_offset -= text_deletion_userdata->start_byte_offset;
+				location->byte_offset -= (text_deletion_userdata->end_byte_offset - text_deletion_userdata->start_byte_offset);
 				
 				return TRUE;				
 			}
@@ -1439,9 +1447,13 @@ cong_document_for_each_location (CongDocument *doc,
 	cong_location_copy (&logical_sel_start, cong_selection_get_logical_start (PRIVATE(doc)->selection));
 	cong_location_copy (&logical_sel_end, cong_selection_get_logical_end (PRIVATE(doc)->selection));
 
+	g_message ("test for update of cursor location from (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
+
 	if ( callback (doc,
 		       &PRIVATE(doc)->cursor.location,
 		       user_data)) {
+		g_message ("update of cursor location to (%p,%i)",PRIVATE(doc)->cursor.location.node, PRIVATE(doc)->cursor.location.byte_offset);
+
 		cong_document_on_cursor_change (doc);
 	}
 

@@ -1055,9 +1055,9 @@ key_press_event_handler (GtkWidget *w,
 		}
 		break;
 	
-#if 0
+#if 1
 	case GDK_BackSpace:
-		if (cong_selection_get_start()->node) {
+		if (cong_selection_get_logical_end(selection)->node) {
 			cong_document_delete_selection(doc);
 		} else {
 			cong_cursor_del_prev_char(cursor, doc);
@@ -1065,7 +1065,7 @@ key_press_event_handler (GtkWidget *w,
 		break;
 	
 	case GDK_Delete:
-		if (cong_selection_get_start()->node) {
+		if (cong_selection_get_logical_end(selection)->node) {
 			cong_document_delete_selection(doc);
 		} else {
 			cong_cursor_del_next_char(cursor, doc);

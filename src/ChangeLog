@@ -1,5 +1,13 @@
 2003-08-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-editor-widget3.c
+
+	Support for deleting the selection
+	
+	* cong-text-cache.c
+
+	Fixed a missing return value and added lots of assertions
+
 	* cong-text-cache.c
 
 	Fixed an assertion failure when moving the cursor through a region of stripped whitespace
