@@ -1,5 +1,9 @@
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-attribute-editor-cdata.c, cong-attribute-editor-enumeration.c, cong-attribute-wrapper.c, cong-command-history.c, cong-command.c, cong-command.h, cong-document.c, cong-document.h, global.h
+
+	More work on undo/redo
+	
 	* cong-modification.h, cong-modification.c, cong-node-modification-add-after.c, cong-node-modification-add-after.h, cong-node-modification-add-before.c, cong-node-modification-add-before.h, cong-node-modification-make-orphan.c, cong-node-modification-make-orphan.h, cong-node-modification-remove-attribute.c, cong-node-modification-remove-attribute.h, cong-node-modification-set-attribute.c, cong-node-modification-set-attribute.h, cong-node-modification-set-parent.c, cong-node-modification-set-parent.h, cong-node-modification-set-text.c, cong-node-modification-set-text.h, cong-node-modification.c, cong-node-modification.h, Makefile.am
 
 	New files, implementing the atomic modifications that make up commands

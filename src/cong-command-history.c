@@ -133,6 +133,8 @@ cong_command_history_undo (CongCommandHistory *command_history)
 		cong_command_undo (cmd);
 
 		emit_changed (command_history);
+	} else {
+		g_message ("Nothing to undo");
 	}
 
 }
@@ -156,6 +158,8 @@ cong_command_history_redo (CongCommandHistory *command_history)
 		cong_command_redo (cmd);
 
 		emit_changed (command_history);
+	} else {
+		g_message ("Nothing to redo");
 	}
 }
 

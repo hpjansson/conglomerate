@@ -32,6 +32,15 @@
 #include "cong-dispspec.h"
 #include "cong-command.h"
 #include "cong-plugin.h"
+#include "cong-modification.h"
+#include "cong-node-modification.h"
+#include "cong-node-modification-make-orphan.h"
+#include "cong-node-modification-add-after.h"
+#include "cong-node-modification-add-before.h"
+#include "cong-node-modification-set-parent.h"
+#include "cong-node-modification-set-text.h"
+#include "cong-node-modification-set-attribute.h"
+#include "cong-node-modification-remove-attribute.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -99,15 +108,245 @@ cong_command_get_description (CongCommand *command)
 void
 cong_command_undo (CongCommand *command)
 {
+	GList *iter;
+
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
 	g_message ("cong_command_undo(\"%s\")", cong_command_get_description(command));
+
+	/* Start at end of modification list, iterate backwards up to front: */
+	for (iter = g_list_last(PRIVATE(command)->list_of_modification); iter; iter=iter->prev) {
+		CongModification *modification = CONG_MODIFICATION (iter->data);
+
+		CONG_EEL_CALL_METHOD (CONG_MODIFICATION_CLASS, 
+				      modification, 
+				      undo, 
+				      (modification));
+	}
 }
 
 void
 cong_command_redo (CongCommand *command)
 {
+	GList *iter;
+
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
 	g_message ("cong_command_redo(\"%s\")", cong_command_get_description(command));
+
+	/* Start at front of modification list: */
+	for (iter = PRIVATE(command)->list_of_modification; iter; iter=iter->next) {
+		CongModification *modification = CONG_MODIFICATION (iter->data);
+
+		CONG_EEL_CALL_METHOD (CONG_MODIFICATION_CLASS, 
+				      modification,
+				      redo,
+				      (modification));
+	}
+}
+
+void
+cong_command_add_modification (CongCommand *cmd,
+			       CongModification *modification)
+{
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	g_return_if_fail (IS_CONG_MODIFICATION(modification));
+
+	PRIVATE(cmd)->list_of_modification = g_list_append (PRIVATE(cmd)->list_of_modification,
+							    modification);
+
+	g_object_ref (G_OBJECT(modification));
+
+	/* Carry out the modification (by calling its redo method): */
+	CONG_EEL_CALL_METHOD (CONG_MODIFICATION_CLASS, 
+			      modification,
+			      redo,
+			      (modification));
+}
+
+
+void
+cong_command_add_node_make_orphan (CongCommand *cmd,
+				   CongNodePtr node)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_make_orphan_new (cong_command_get_document(cmd),
+							       node);
+
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+
+}
+
+void
+cong_command_add_node_add_after (CongCommand *cmd, 
+				 CongNodePtr node, 
+				 CongNodePtr older_sibling)
+{
+	CongModification *modification;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	
+	modification = cong_node_modification_add_after_new (cong_command_get_document(cmd),
+							     node,
+							     older_sibling);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+
+
+void 
+cong_command_add_node_add_before (CongCommand *cmd, 
+				  CongNodePtr node, 
+				  CongNodePtr younger_sibling)
+{
+	CongModification *modification;
+
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_add_before_new (cong_command_get_document(cmd),
+							      node,
+							      younger_sibling);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+
+void 
+cong_command_add_node_set_parent (CongCommand *cmd, 
+				  CongNodePtr node,
+				  CongNodePtr adoptive_parent)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_set_parent_new (cong_command_get_document(cmd),
+							      node,
+							      adoptive_parent);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+
+void 
+cong_command_add_node_set_text (CongCommand *cmd, 
+				CongNodePtr node, 
+				const xmlChar *new_content)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_set_text_new (cong_command_get_document(cmd),
+							    node,
+							    new_content);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+
+void 
+cong_command_add_node_set_attribute (CongCommand *cmd, 
+				     CongNodePtr node, 
+				     const xmlChar *name, 
+				     const xmlChar *value)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_set_attribute_new (cong_command_get_document(cmd),
+								 node,
+								 name,
+								 value);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+
+void 
+cong_command_add_node_remove_attribute (CongCommand *cmd, 
+					CongNodePtr node, 
+					const xmlChar *name)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+	modification = cong_node_modification_remove_attribute_new (cong_command_get_document(cmd),
+								    node,
+								    name);
+
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+}
+	
+void 
+cong_command_add_selection_change (CongCommand *cmd)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+#if 0
+	modification = cong_node_modification_set_text_new (cong_command_get_document(cmd),
+							    node,
+							    new_content);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+#endif
+	g_assert_not_reached();
+
+
+}
+
+void 
+cong_command_add_cursor_change (CongCommand *cmd)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+#if 0
+	modification = cong_node_modification_set_text_new (cong_command_get_document(cmd),
+							    node,
+							    new_content);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+#endif
+
+	g_assert_not_reached();
+
+}
+
+void 
+cong_command_add_set_external_dtd (CongCommand *cmd,
+				   const gchar* root_element,
+				   const gchar* public_id,
+				   const gchar* system_id)
+{
+	CongModification *modification;
+	
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+
+#if 0
+	modification = cong_node_modification_set_text_new (cong_command_get_document(cmd),
+							    node,
+							    new_content);
+	cong_command_add_modification (cmd,
+				       modification);
+	g_object_unref (G_OBJECT(modification));
+#endif
+
+	g_assert_not_reached();
+
 }

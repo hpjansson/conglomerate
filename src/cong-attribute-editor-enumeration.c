@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-attribute-editor-enumeration.h"
 #include "cong-eel.h"
+#include "cong-command.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -165,6 +166,40 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 	new_attr_value = g_object_get_data (G_OBJECT(selected_menu_item),
 					    "attr_value");
 
+#if SUPPORT_UNDO
+	{
+		CongCommand *cmd;
+		gchar *desc;
+
+		if (new_attr_value) {
+			desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attr->name, new_attr_value);
+			
+		} else {
+			desc = g_strdup_printf ( _("Delete attribute \"%s\""), attr->name);
+		}
+
+		cmd = cong_command_new (doc,
+					desc);
+
+		if (new_attr_value) {
+			cong_command_add_node_set_attribute (cmd, 
+							     node, 
+							     attr->name, 
+							     new_attr_value);
+		} else {
+			cong_command_add_node_remove_attribute (cmd, 
+								node, 
+								attr->name);
+		}
+
+		cong_document_add_command (doc,
+					   cmd);
+		
+		g_object_unref (G_OBJECT (cmd));		
+
+	}
+#else
+
 	cong_document_begin_edit (doc);
 
 	if (new_attr_value) {
@@ -179,4 +214,5 @@ on_option_menu_changed (GtkOptionMenu *option_menu,
 	}
 
 	cong_document_end_edit (doc);
+#endif
 }

@@ -24,6 +24,8 @@ G_BEGIN_DECLS
 
 #define NEW_LOOK 1
 
+#define SUPPORT_UNDO 1
+
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>

@@ -645,7 +645,29 @@ cong_document_get_num_nodes (CongDocument *doc)
 	
 }
 
+void 
+cong_document_node_ref (CongDocument *doc,
+			CongNodePtr node)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	/* unwritten */
+}
+
+void 
+cong_document_node_unref (CongDocument *doc,
+			  CongNodePtr node)
+{
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+	g_return_if_fail (node);
+
+	/* unwritten */
+}
+
+
 /* Public MVC hooks: */
+#if 1
 void cong_document_begin_edit (CongDocument *doc)
 {
 	g_return_if_fail (doc);
@@ -897,6 +919,7 @@ cong_document_set_external_dtd (CongDocument *doc,
 		       public_id, 
 		       system_id);
 }
+#endif
 
 /* end of MVC user hooks */
 
@@ -1603,7 +1626,7 @@ cong_document_undo (CongDocument *doc)
 {
 	g_return_if_fail (IS_CONG_DOCUMENT(doc));
 
-	g_message ("cong_document_redo");
+	g_message ("cong_document_undo");
 
 	cong_command_history_undo (PRIVATE(doc)->history);
 }

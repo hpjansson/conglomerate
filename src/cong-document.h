@@ -190,6 +190,28 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
 guint
 cong_document_get_num_nodes (CongDocument *doc);
 
+/**
+ * cong_document_node_ref:
+ *
+ * Add an "external reference" to the node; it will not be deleted until it has been both removed from the tree
+ * AND has lost all external references.
+ *
+ */
+void 
+cong_document_node_ref (CongDocument *doc,
+			CongNodePtr node);
+
+/**
+ * cong_document_node_unref:
+ *
+ * Remove an "external reference" to the node; it will be deleted if it has been both removed from the tree
+ * AND this was its last external reference.
+ *
+ */
+void 
+cong_document_node_unref (CongDocument *doc,
+			  CongNodePtr node);
+
 /** 
  * Update amortisation
  *

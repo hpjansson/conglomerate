@@ -25,6 +25,7 @@
 #include "global.h"
 #include "cong-attribute-wrapper.h"
 #include "cong-eel.h"
+#include "cong-command.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -165,7 +166,23 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 	CongDocument *doc = cong_attribute_wrapper_get_document (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
-	
+
+#if SUPPORT_UNDO
+	gchar *desc = g_strdup_printf ( _("Set attribute \"%s\" to \"%s\""), attribute_name, new_value);
+
+	CongCommand *cmd = cong_command_new (doc,
+					     desc);
+
+	g_free (desc);
+
+	cong_command_add_node_remove_attribute (cmd,
+						node,
+						attribute_name);
+	cong_document_add_command (doc,
+				   cmd);
+
+	g_object_unref (G_OBJECT (cmd));				       
+#else
 	cong_document_begin_edit (doc);
 	
 	cong_document_node_set_attribute (doc,
@@ -174,6 +191,7 @@ cong_attribute_wrapper_set_value (CongAttributeWrapper *attribute_wrapper,
 					  new_value);
 	
 	cong_document_end_edit (doc);
+#endif
 }
 
 void
@@ -183,6 +201,22 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 	CongNodePtr node = cong_attribute_wrapper_get_node (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	const gchar *attribute_name = cong_attribute_wrapper_get_attribute_name (CONG_ATTRIBUTE_WRAPPER(attribute_wrapper));
 	
+#if SUPPORT_UNDO
+	gchar *desc = g_strdup_printf ( _("Delete attribute \"%s\""), attribute_name);
+
+	CongCommand *cmd = cong_command_new (doc,
+					     desc);
+
+	g_free (desc);
+
+	cong_command_add_node_remove_attribute (cmd,
+						node,
+						attribute_name);
+	cong_document_add_command (doc,
+				   cmd);
+
+	g_object_unref (G_OBJECT (cmd));				       
+#else
 	cong_document_begin_edit (doc);
 	
 	cong_document_node_remove_attribute (doc,
@@ -190,6 +224,7 @@ cong_attribute_wrapper_remove_value (CongAttributeWrapper *attribute_wrapper)
 					     attribute_name);
 	
 	cong_document_end_edit (doc);
+#endif
 }
 
 /* Internal function definitions: */

@@ -26,6 +26,7 @@
 #define __CONG_COMMAND_H__
 
 #include "cong-document.h"
+#include "cong-modification.h"
 
 G_BEGIN_DECLS
 
@@ -39,8 +40,6 @@ G_BEGIN_DECLS
 typedef struct CongCommandDetails CongCommandDetails;
 
 
-/**
- */
 struct CongCommand
 {
 	GObject object;
@@ -81,48 +80,52 @@ cong_command_redo (CongCommand *command);
 
 /* Modification: */
 void
-cong_command_add_node_make_orphan (CongCommand *command,
+cong_command_add_modification (CongCommand *cmd,
+			       CongModification *modification);
+
+void
+cong_command_add_node_make_orphan (CongCommand *cmd,
 				   CongNodePtr node);
 
 void
-cong_command_add_node_add_after (CongDocument *doc, 
+cong_command_add_node_add_after (CongCommand *cmd, 
 				 CongNodePtr node, 
 				 CongNodePtr older_sibling);
 
 void 
-cong_command_add_node_add_before (CongDocument *doc, 
+cong_command_add_node_add_before (CongCommand *cmd, 
 				  CongNodePtr node, 
 				  CongNodePtr younger_sibling);
 
 void 
-cong_command_add_node_set_parent (CongDocument *doc, 
+cong_command_add_node_set_parent (CongCommand *cmd, 
 				  CongNodePtr node,
 				  CongNodePtr adoptive_parent); /* added to end of child list */
 
 void 
-cong_command_add_node_set_text (CongDocument *doc, 
+cong_command_add_node_set_text (CongCommand *cmd, 
 				CongNodePtr node, 
 				const xmlChar *new_content);
 
 void 
-cong_command_add_node_set_attribute (CongDocument *doc, 
+cong_command_add_node_set_attribute (CongCommand *cmd, 
 				     CongNodePtr node, 
 				     const xmlChar *name, 
 				     const xmlChar *value);
 
 void 
-cong_command_add_node_remove_attribute (CongDocument *doc, 
+cong_command_add_node_remove_attribute (CongCommand *cmd, 
 					CongNodePtr node, 
 					const xmlChar *name);
 	
 void 
-cong_command_add_selection_change (CongDocument *doc);
+cong_command_add_selection_change (CongCommand *cmd);
 
 void 
-cong_command_add_cursor_change (CongDocument *doc);
+cong_command_add_cursor_change (CongCommand *cmd);
 
 void 
-cong_command_add_set_external_dtd (CongDocument *doc,
+cong_command_add_set_external_dtd (CongCommand *cmd,
 				   const gchar* root_element,
 				   const gchar* public_id,
 				   const gchar* system_id);
