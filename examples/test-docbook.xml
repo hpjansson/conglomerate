@@ -1,0 +1,52 @@
+<book>
+<chapter>
+<title>Test DocBook file</title>
+
+<sect1><title>Test of sect1</title>
+
+<sect2><title>Test of sect2</title>
+</sect2>
+
+</sect1>
+
+<sect1><title>Another test of sect1</title>
+The quick brown fox jumps over the lazy dog.
+</sect1>
+
+<sect1><title>Yet another test</title>
+The quick brown fox jumps over the lazy dog.
+</sect1>
+
+<sect1><title>Fubar</title>
+Inconceivable!
+</sect1>
+
+<sect1><title>Test of images</title>
+Here is some text.
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="../src/ilogo.c">
+</imagedata>
+</imageobject>
+<textobject>Conglomerate logo</textobject>
+<caption>This is the Conglomerate logo</caption>
+</mediaobject>
+</informalfigure>
+Here is some more text.
+</sect1>
+
+etc
+
+</chapter>
+</book>
+
+
+
+
+
+
+
+
+
+
