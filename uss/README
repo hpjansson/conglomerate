@@ -34,3 +34,4 @@ Calls the mkgtkdoc*s scripts
 
 * mkpotfilesin
 Makes a new po/POTFILES.in, run this script once in a while.
+It will update also the po/ChangeLog and ask for a CVS commit.

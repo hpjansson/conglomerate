@@ -1,5 +1,6 @@
 #!/bin/bash
 # $Id$
+VERSION=$( echo '$Revision$' | awk '{ print $2 }' )
 #
 # po strings update
 #
@@ -45,8 +46,9 @@ function make_fresh_po_ChangeLog
 {
   date +"%Y-%m-%d  mkpotfiles runner  <@>" > ${FPCL}
   echo >> ${FPCL}
-  echo "	* POTFILES.in" >> ${FPCL}
-  echo "	fresh generated, this will effect several PO files" >> ${FPCL}
+  echo -e "\tPOTFILES.in:" >> ${FPCL}
+  echo -e "\tRegenerated, with uss/mkpotfilesin version ${VERSION}," >> ${FPCL}
+  echo -e "\tthis will effect several PO files." >> ${FPCL}
   echo >> ${FPCL}
   cat ${PCL} >> ${FPCL}
 }
@@ -67,6 +69,6 @@ else
 fi
 
 # cleanup
-# rm -f ${FPPI} ${FPCL}  # we did a rename, no need for remove
+rm -f ${FPPI} ${FPCL}
 
 # end of script

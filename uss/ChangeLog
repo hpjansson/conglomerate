@@ -1,9 +1,18 @@
-2003-10-01  Robert Varga <frozenfingers@xs4all.nl>
+2003-11-03  Geert Stappers <stappers@stappers.nl>
+
+	* mkpotfilesin:
+	Get version from CVS Revision. Use version in ChangeLog update.
+	Cleanup of the temporary files. Minor cosmetic po/ChangeLog changes.
+
+	* README:
+	Tells more about the mkpotfilesin.
+
+2003-11-01  Robert Varga <frozenfingers@xs4all.nl>
 
 	* mkgtkdoc, mkgtkdoctypes, mkgtkdocoverrides, mkgtkdocsections:
-	Scripts work "Geert"-style, various fixes.
+	Scripts work more "Geert"-style, various fixes.
 	
-2003-10-27  Geert Stappers <stappers@stappers.nl>
+2003-10-30  Geert Stappers <stappers@stappers.nl>
 
 	* mkgtkdoc
 	A more "small is beutifull, Unix a like" approach.
