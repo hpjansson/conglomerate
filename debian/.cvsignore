@@ -4,6 +4,11 @@ conglomerate
 conglomerate.postinst.debhelper
 conglomerate.postrm.debhelper
 conglomerate.substvars
+conglomerate-common
+conglomerate-common.postinst.debhelper
+conglomerate-common.postrm.debhelper
+conglomerate-common.prerm.debhelper
+conglomerate-common.substvars
 conglomerate-dbg
 conglomerate-dbg.substvars
 files

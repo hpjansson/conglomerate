@@ -1,0 +1,16 @@
+#! /bin/sh
+ 
+set -e
+ 
+PACKAGE=conglomerate
+ 
+if [ "$1" = "configure" ]; then
+  cd /usr/share/doc/
+  ln -fs ${PACKAGE}-common ${PACKAGE}
+fi
+ 
+#DEBHELPER#
+ 
+exit 0
+ 
+# end of file

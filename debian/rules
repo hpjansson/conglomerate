@@ -88,8 +88,9 @@ install-indep: build-indep
 	# using source Makefile to get files into the package
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes \
  	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate-common
-	cp debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate-common/usr/share/pixmaps/conglomerate_icon.xpm
-	chmod 644 $(CURDIR)/debian/conglomerate-common/usr/share/pixmaps/conglomerate_icon.xpm
+	install -m 644 debian/conglomerate_icon.xpm $(CURDIR)/debian/conglomerate-common/usr/share/pixmaps/conglomerate_icon.xpm
+
+	install -m 644 debian/conglomerate-common.lintian-override $(CURDIR)/debian/conglomerate-common/usr/share/lintian/overrides/conglomerate-common
 
 install-arch: build-arch
 	dh_testdir
@@ -97,15 +98,12 @@ install-arch: build-arch
 	dh_clean -k -s
 	dh_installdirs -s
 
-	mkdir -p $(CURDIR)/debian/conglomerate/usr/bin
-	cp src/conglomerate $(CURDIR)/debian/conglomerate/usr/bin/
-	chmod 755 $(CURDIR)/debian/conglomerate/usr/bin/conglomerate
+	install -m 755 src/conglomerate $(CURDIR)/debian/conglomerate/usr/bin/conglomerate
+
+	install -m 644 debian/conglomerate.lintian-override $(CURDIR)/debian/conglomerate/usr/share/lintian/overrides/conglomerate
 
 	# and for the debug package conglomerate-dbg
-	mkdir -p $(CURDIR)/debian/conglomerate-dbg/usr/bin
-	cp src/conglomerate-dbg $(CURDIR)/debian/conglomerate-dbg/usr/bin/
-	chmod 755 $(CURDIR)/debian/conglomerate-dbg/usr/bin/conglomerate-dbg
-
+	install -m 755 src/conglomerate-dbg $(CURDIR)/debian/conglomerate-dbg/usr/bin/conglomerate-dbg
 
 # Build architecture-independent files here.
 binary-indep: build-indep install-indep
@@ -120,6 +118,7 @@ binary-indep: build-indep install-indep
 	dh_gconf -i
 	dh_link -i
 	dh_compress -i
+	dh_fixperms -i
 	dh_installdeb -i
 	dh_gencontrol -i -v
 	dh_md5sums -i
@@ -131,6 +130,7 @@ binary-arch: build-arch install-arch
 	dh_testroot -a
 	dh_strip -a --exclude=conglomerate-dbg
 	dh_compress -a
+	dh_fixperms -a
 	dh_installdeb -a
 	dh_shlibdeps -a
 	dh_gencontrol -a -v -- -VUpstream-Version=$(upstreamversion)

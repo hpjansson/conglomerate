@@ -2,17 +2,30 @@ conglomerate (0.7.14-4.1) UNRELEASED; urgency=low
 
   * expecting new upstream version
 
- -- Geert Stappers <stappers@stappers.nl>  Sun, 15 Aug 2004 12:43:31 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Tue, 17 Aug 2004 18:30:55 +0200
 
-conglomerate (0.7.14-2) unstable; urgency=low
+conglomerate (0.7.14-3) unstable; urgency=low
 
   * Multiple package, the architecture independent files
     have now their own package: conglomerate-common.
-  * install gconf2 schema with debhelper
-  * The new compile will pull in gcrypt11 and gnutls11,
-    this closes: #263701
+    - Great impact on the rules file
+    - Create symbolic link from /usr/share/doc/conglomerate-common
+      to /usr/share/doc/conglomerate
+  * Lintian overrides:
+    - copyright file is a common file
+    - the manual page is also a common file
+    - the program for the menu is in the binary package
+  * Install gconf2 schema with debhelper.
+  * Closes: #263701: Please use gcrypt11/gnutls11 instead of gcrypt7/gnutls10
+    - depend on libgnomeui-dev (>= 2.6.1.1-4)   Thanks to Matthias Urlichs
 
- -- Geert Stappers <stappers@stappers.nl>  Sun,  8 Aug 2004 11:07:42 +0200
+ -- Geert Stappers <stappers@stappers.nl>  Tue, 17 Aug 2004 15:27:23 +0200
+
+conglomerate (0.7.14-2) unreleased; urgency=low
+
+  * Was rejected due policy uncompliance.
+
+ -- Geert Stappers <stappers@stappers.nl>  Tue, 17 Aug 2004 12:33:37 +0200
 
 conglomerate (0.7.14-1) unstable; urgency=low
 

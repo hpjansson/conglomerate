@@ -18,6 +18,10 @@ debian_DISTS = \
 
 # package related files
 pkg_DISTS = \
+    conglomerate.postinst \
+    conglomerate.prerm \
+    conglomerate-common.postinst \
+    conglomerate-common.prerm \
     conglomerate-common.menu \
     conglomerate-common.docs \
     conglomerate_icon.xpm \

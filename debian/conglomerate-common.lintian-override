@@ -1,0 +1,4 @@
+conglomerate-common: menu-command-not-in-package /usr/lib/menu/conglomerate-common:6 /usr/bin/conglomerate
+conglomerate-common: pkg-not-in-package-test conglomerate /usr/lib/menu/conglomerate-common
+conglomerate-common: menu-command-not-in-package /usr/lib/menu/conglomerate-common:6 /usr/bin/conglomerate
+conglomerate-common: pkg-not-in-package-test conglomerate /usr/lib/menu/conglomerate-common
