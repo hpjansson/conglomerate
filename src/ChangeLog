@@ -1,3 +1,11 @@
+Top line of ChangeLog $Revision$, update below this line.
+
+2004-08-20  Michèle Garoche  <michele.garoche@easyconnect.fr>
+
+	* cong-menus.c Added patch slighlty modified from Nikolay V. Shmyrev
+	Fixed bug 150149:
+	Menus do not appear translated after Change to GTKUIManager
+
 2004-08-19  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-edit-preferences.c: 

@@ -1784,6 +1784,19 @@ cong_menus_setup_action_groups (CongPrimaryWindow *primary_window)
 	primary_window->action_group[CONG_ACTION_GROUP_DOCUMENT] = gtk_action_group_new ("DocumentActions");
 	primary_window->action_group[CONG_ACTION_GROUP_DOCUMENT_TOOLS] = gtk_action_group_new ("DocumentTools");
 
+	/* Allows translated menus */
+#ifdef ENABLE_NLS 
+	gtk_action_group_set_translation_domain 
+		(cong_primary_window_get_action_group (primary_window, 
+					CONG_ACTION_GROUP_APPLICATION), GETTEXT_PACKAGE); 
+	gtk_action_group_set_translation_domain 
+		(cong_primary_window_get_action_group (primary_window, 
+					CONG_ACTION_GROUP_DOCUMENT), GETTEXT_PACKAGE); 
+	gtk_action_group_set_translation_domain 
+		(cong_primary_window_get_action_group (primary_window, 
+					CONG_ACTION_GROUP_DOCUMENT_TOOLS), GETTEXT_PACKAGE); 	
+#endif /* ENABLE_NLS */ 
+	
 	gtk_action_group_add_actions (cong_primary_window_get_action_group (primary_window, CONG_ACTION_GROUP_APPLICATION), 
 				      primary_window_application_action_entries, 
 				      G_N_ELEMENTS (primary_window_application_action_entries), 
