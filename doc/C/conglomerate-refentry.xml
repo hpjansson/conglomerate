@@ -61,7 +61,7 @@ We like, as much as you, as few as possible bugs in
 If you find a bug in 
 <command>conglomerate</command>
 report it at
-<ulink url="http://bugzilla.gnome.org" />.
+<ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=conglomerate" />.
 If it is already reported, update the bugreport.
 So we known that a the bug did bite again.
 </para>
