@@ -1,5 +1,9 @@
 2003-08-28  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-text-fragment.c
+
+	Cursor is now visible when in right-most position within a run of text
+
 	* cong-document.c, cong-node.h, cong-util.c, cong-util.h, tree.c, xmldata.c
 
 	Initial cursor placement, and placement of cursor when tags are added; some warnings fixed

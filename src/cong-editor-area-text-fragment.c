@@ -189,30 +189,38 @@ render_self (CongEditorArea *area,
 
 		if (cursor->location.node==cong_editor_node_get_node (CONG_EDITOR_NODE(PRIVATE(area_text_fragment)->editor_node_text))) {
 			int cursor_stripped_offset;
+			gboolean got_cursor_x = FALSE;
+			int cursor_x;
 			
 			if (cong_editor_node_text_convert_original_byte_offset_to_stripped (PRIVATE(area_text_fragment)->editor_node_text,
 											    cursor->location.byte_offset,
 											    &cursor_stripped_offset)) {
 				if (cursor_stripped_offset >= line->start_index) {
 					if (cursor_stripped_offset < line->start_index+line->length) {
-						int cursor_x;
 						
 						pango_layout_line_index_to_x(line,
 									     cursor_stripped_offset,
 									     FALSE,
 									     &cursor_x);	
 						cursor_x /= PANGO_SCALE;
-						cursor_x += rect->x;
-						
-						/* Render it: */
-						gdk_draw_line (GDK_DRAWABLE(window), 
-							       cursor->gc, 
-							       cursor_x, rect->y,
-							       cursor_x, rect->y + rect->height);
+						cursor_x += rect->x;						
+						got_cursor_x = TRUE;
 						
 					}
 				}
+			} else {
+				cursor_x = rect->x + rect->width-1; 
+				got_cursor_x = TRUE;
 			}
+
+			if (got_cursor_x) {
+				
+				/* Render it: */
+				gdk_draw_line (GDK_DRAWABLE(window), 
+					       cursor->gc, 
+					       cursor_x, rect->y,
+					       cursor_x, rect->y + rect->height);
+			}			
 		}
 	}
 
@@ -240,7 +248,7 @@ calc_requisition (CongEditorArea *area,
 					     &logical_rect);
 
 	if (orientation == GTK_ORIENTATION_HORIZONTAL) {
-		return logical_rect.width;
+		return logical_rect.width+1; /* to allow for cursor */
 	} else {
 		return logical_rect.height;
 	}
