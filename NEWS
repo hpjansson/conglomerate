@@ -1,6 +1,92 @@
 
 NEWS: In this file the announce messages of recent releases.
 
+30-01-04
+Conglomerate 0.7.11 Released
+============================
+
+Conglomerate is a free, user-friendly XML editor. It is particularly
+aimed at DocBook, but should be able to handle any XML document type.
+
+This is still an unstable release; there are still some known repeatable
+crash bugs. Please download it and test that no new bugs have been
+introduced! 
+
+You can download it from the usual place:
+http://sourceforge.net/project/showfiles.php?group_id=82766
+
+Many thanks to everyone who contributed to this release; my apologies if
+I missed anyone from the credits below.
+
+
+Enhancements
+      * New translations: no (Kjaartan Marass), fr (Alban Browaeys), sq
+        (Laurent Dhima)
+        
+      * Updated translations: cs (Miloslav Trmac), es (Francisco Javier
+        F. Serrador), nl (Daniel van Eeden), no (Kjartan Maraas), pt
+        (Duarte Loreto), sr/sr@Latn (Danilo Šegan), 
+        
+      * The File->New assistant now has a "Random Document" plugin,
+        which is both great fun, and good for testing. If you select
+        this, you reach a page where you can select a document type from
+        those available (based on the dispspec files loaded). You can
+        also specify a "depth" which is used to give an idea of how deep
+        the document's tree should be. If a DTD is available,
+        Conglomerate will try to ensure that the document is valid
+        against that DTD. It also generates random text, to really push
+        the unicode support (it generates random strings using most of
+        the full range of Unicode). (me) 
+        
+      * If a DTD if found, the DTD tab of the Properties dialog for a
+        node now has a "content model" view, showing the valid child
+        elements that are allowed by the DTD in a tree form. (me)
+        
+      * First attempt at a "Find" dialog; improving this and the
+        "Replace" dialog would make great jobs for programmers wanting
+        to get involved. (me)
+        
+      * Big rewrite of the plugin code with the aim of eventually moving
+        over to libgnomeoffice's framework. Plugins contain services of
+        various kinds; everything is now a GObject subclass. (me)
+        
+      * The "--enable-printing" configuration option no longer requires
+        libfo; this is now enabled separately with a new
+        "--enable-libfo" option (me)
+        
+      * Change template code to use a <cong:template> element (Jeff
+        Martin)
+        
+      * Toolbar now has a "New Document" button (Daniel van Eeden)
+        
+      * Internal improvements to GUI button sensitivity logic (Paul
+        Smith)
+        
+
+Fixes
+      * Fix bug #130820 (me)
+        
+      * Fixed crash when loading file without a dispspec with no
+        extension in its filename (me)
+        
+      * Fixed a bug in the template code (Daniel Larson)
+        
+      * Fixes for C99ism build problems on gcc-2.95.4 (Geert Stappers)
+        
+      * Fixed whitespace issues in the README files (David Hoover)
+        
+      * Various build fixes, including disabling gtk-doc for now (Geert)
+        
+      * Added a couple of DocBook tags to the display specification
+        (Daniel Larsson)
+        
+      * Added a template file for display specifications to the examples
+        subfolder (Boris Goldowsky)
+        
+-- 
+David Malcolm
+www.conglomerate.org
+
 07-01-04
 Conglomerate 0.7.10 Released
 ============================
