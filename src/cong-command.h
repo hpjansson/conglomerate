@@ -44,7 +44,7 @@ struct CongCommand
 {
 	GObject object;
 
-	CongCommandDetails *private;
+	CongCommandDetails *priv;
 };
 
 struct CongCommandClass

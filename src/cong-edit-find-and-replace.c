@@ -3,7 +3,6 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-error-dialog.h"
-#include "cong-plugin.h"
 #include "cong-app.h"
 #include "cong-primary-window.h"
 #include "cong-edit-find-and-replace.h"

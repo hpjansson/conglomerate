@@ -30,6 +30,7 @@
 #include "cong-dispspec-registry.h"
 #include "cong-document.h"
 #include "cong-font.h"
+#include "cong-plugin-manager.h"
 
 #include <libgnomevfs/gnome-vfs.h>
 

@@ -25,8 +25,6 @@
 #ifndef __CONG_APP_H__
 #define __CONG_APP_H__
 
-#include "cong-plugin.h"
-
 G_BEGIN_DECLS
 
 typedef struct CongApp CongApp;

@@ -31,13 +31,13 @@
 #include "cong-document.h"
 #include "cong-error-dialog.h"
 #include "cong-dialog.h"
-#include "cong-plugin.h"
 #include "cong-app.h"
 #include "cong-eel.h"
 #include <glade/glade-xml.h>
 #include "cong-vfs.h"
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include "cong-file-selection.h"
+#include "cong-service-importer.h"
 
 CongServiceImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,

@@ -31,7 +31,6 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-modification.h"
-#include "cong-plugin.h"
 
 #define PRIVATE(x) ((x)->private)
 

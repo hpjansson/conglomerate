@@ -28,10 +28,10 @@
 
 #include "global.h"
 #include <string.h>
-#include "cong-plugin.h"
+#include "cong-service-document-factory.h"
 #include "cong-app.h"
 
-#define DEBUG_FILE_NEW_ASSISTANT 0 
+#define DEBUG_FILE_NEW_ASSISTANT 1
 
 
 enum
@@ -169,10 +169,12 @@ GtkWindow *cong_new_file_assistant_get_toplevel(CongNewFileAssistant *assistant)
 }
 
 static void add_factory_callback(CongServiceDocumentFactory *factory, gpointer user_data)
-{
+{	
 	CongNewFileAssistant *assistant = user_data;
-	
 	GtkTreeIter iter;
+
+	g_assert (IS_CONG_SERVICE_DOCUMENT_FACTORY (factory));
+
 	gtk_list_store_append (assistant->list_store, &iter);  /* Acquire an iterator */
 			
 	gtk_list_store_set (assistant->list_store, &iter,

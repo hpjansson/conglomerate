@@ -29,7 +29,8 @@
 #include "cong-error-dialog.h"
 #include "cong-dispspec.h"
 #include "cong-dispspec-element.h"
-#include "cong-plugin.h"
+#include "cong-service-node-property-dialog.h"
+#include "cong-plugin-manager.h"
 #include "cong-app.h"
 #include "cong-eel.h"
 #include "cong-attribute-editor.h"
@@ -767,7 +768,7 @@ GtkWidget *cong_node_properties_dialog_new(CongDocument *doc,
 			/* Is there a plugin for this type of node? */
 			if (plugin_id) {
 				CongServiceNodePropertyDialog *dialog_factory = cong_plugin_manager_locate_custom_property_dialog_by_id (cong_app_get_plugin_manager (cong_app_singleton()), 
-																    plugin_id);
+																	 plugin_id);
 
 				if (dialog_factory) {
 					GtkWidget *dialog = cong_custom_property_dialog_make(dialog_factory, doc, node);

@@ -41,10 +41,10 @@
 #include "cong-editor-node-entity-ref.h"
 #include "cong-editor-node-text.h"
 #include "cong-editor-node-unimplemented.h"
-#include "cong-plugin.h"
+#include "cong-plugin-manager.h"
 #include "cong-traversal-node.h"
 
-#define PRIVATE(x) ((x)->private)
+#define PRIVATE(x) ((x)->priv)
 
 enum {
 	LINE_REGENERATION_REQUIRED,
@@ -119,7 +119,7 @@ cong_editor_node_class_init (CongEditorNodeClass *klass)
 static void
 cong_editor_node_instance_init (CongEditorNode *node)
 {
-	node->private = g_new0(CongEditorNodeDetails,1);
+	node->priv = g_new0(CongEditorNodeDetails,1);
 }
 
 CongEditorNode*

@@ -85,6 +85,25 @@ enum CongDispspecGCUsage
 	CONG_DISPSPEC_GC_USAGE_NUM
 };
 
+
+typedef struct CongPlugin CongPlugin;
+typedef struct CongPluginManager CongPluginManager;
+
+typedef struct CongService CongService;
+typedef struct CongServiceDocumentFactory CongServiceDocumentFactory;
+typedef struct CongServiceImporter CongServiceImporter;
+typedef struct CongServiceExporter CongServiceExporter;
+#if ENABLE_PRINTING
+typedef struct CongServicePrintMethod CongServicePrintMethod;
+#endif
+typedef struct CongServiceEditorNodeFactory CongServiceEditorNodeFactory;
+
+typedef struct CongServiceTool CongServiceTool;
+typedef struct CongServiceDocTool CongServiceDocTool;
+typedef struct CongServiceNodeTool CongServiceNodeTool;
+
+typedef struct CongServiceNodePropertyDialog CongServiceNodePropertyDialog;
+
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);

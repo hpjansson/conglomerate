@@ -32,8 +32,8 @@
 #include "cong-document.h"
 #include "cong-dispspec.h"
 #include "cong-command.h"
-#include "cong-plugin.h"
 #include "cong-modification.h"
+#include "cong-object.h"
 
 #include "cong-error-dialog.h"
 
@@ -55,8 +55,6 @@
 #include "cong-selection.h"
 
 #define DEBUG_MODIFICATIONS 0
-
-#define PRIVATE(x) ((x)->private)
 
 struct CongCommandDetails
 {
@@ -83,7 +81,7 @@ cong_command_class_init (CongCommandClass *klass)
 static void
 cong_command_instance_init (CongCommand *node)
 {
-	node->private = g_new0(CongCommandDetails,1);
+	node->priv = g_new0(CongCommandDetails,1);
 }
 
 CongCommand*

@@ -13,6 +13,8 @@
 #include "cong-app.h"
 #include "cong-selection.h"
 #include "cong-range.h"
+#include "cong-editor-widget.h"
+#include "cong-service-tool.h"
 
 #define ENABLE_RAW_TREE_MANIPULATION 0
 
@@ -907,8 +909,8 @@ add_node_tool_callback (CongServiceNodeTool *node_tool,
 					   callback_data->doc,
 					   callback_data->node)) {
 		add_item_to_popup_with_tree_callback (callback_data->tpopup,
-						      make_menu_item (cong_tool_get_menu_text (CONG_TOOL(node_tool)),
-								      cong_tool_get_tip_text(CONG_TOOL(node_tool)),
+						      make_menu_item (cong_service_tool_get_menu_text (CONG_SERVICE_TOOL(node_tool)),
+								      cong_service_tool_get_tip_text(CONG_SERVICE_TOOL(node_tool)),
 								      NULL), /* FIXME:  ought to have an icon */
 						      invoke_node_tool,
 						      callback_data->doc,

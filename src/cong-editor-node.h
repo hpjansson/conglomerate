@@ -62,7 +62,7 @@ struct CongEditorNode
 {
 	GObject object;
 
-	CongEditorNodeDetails *private;
+	CongEditorNodeDetails *priv;
 };
 
 struct CongEditorNodeClass
