@@ -1,3 +1,9 @@
+2004-01-19  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* test-table2.xml
+
+	New file: test case for complicated table-handling, featuring a nested table using the <entrytbl> element
+
 2004-01-18  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* test-nesting.xml

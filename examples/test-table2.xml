@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
+<article>
+  <para>This file is another test of table support within <application>Conglomerate</application></para>
+  <table frame="all"><title>Test table</title><titleabbrev>Test</titleabbrev>
+    <tgroup cols="10">
+      <thead>
+	<row>
+	  <entry>Column 0 header</entry>
+	  <entry>Column 1 header</entry>
+	  <entry>Column 2 header</entry>
+	  <entry>Column 3 header</entry>
+	  <entry>Column 4 header</entry>
+	  <entry>Column 5 header</entry>
+	  <entry>Column 6 header</entry>
+	  <entry>Column 7 header</entry>
+	  <entry>Column 8 header</entry>
+	  <entry>Column 9 header</entry>
+	</row>
+      </thead>
+      <tfoot>
+	<row>
+	  <entry>Column 0 header</entry>
+	  <entry>Column 1 header</entry>
+	  <entry>Column 2 header</entry>
+	  <entry>Column 3 header</entry>
+	  <entry>Column 4 header</entry>
+	  <entry>Column 5 header</entry>
+	  <entry>Column 6 header</entry>
+	  <entry>Column 7 header</entry>
+	  <entry>Column 8 header</entry>
+	  <entry>Column 9 header</entry>
+	</row>
+      </tfoot>
+      <tbody>
+	<row>
+	  <entry>Row 0, Col 0</entry>
+	  <entry>Row 0, Col 1</entry>
+	  <entry>Row 0, Col 2</entry>
+	  <entry>Row 0, Col 3</entry>
+	  <entry>Row 0, Col 4</entry>
+	  <entry>Row 0, Col 5</entry>
+	  <entry>Row 0, Col 6</entry>
+	  <entry>Row 0, Col 7</entry>
+	  <entry>Row 0, Col 8</entry>
+	  <entry>Row 0, Col 9</entry>
+	</row>
+	<row>
+	  <entry>Row 1, Col 0</entry>
+	  <entry>Row 1, Col 1</entry>
+	  <entry>Row 1, Col 2</entry>
+	  <entry>Row 1, Col 3</entry>
+	  <entry>Row 1, Col 4</entry>
+	  <entry>Row 1, Col 5</entry>
+	  <entry>Row 1, Col 6</entry>
+	  <entry>Row 1, Col 7</entry>
+	  <entry>Row 1, Col 8</entry>
+	  <entry>Row 1, Col 9</entry>
+	</row>
+	<row>
+	  <entry>Row 2, Col 0</entry>
+	  <entry>Row 2, Col 1</entry>
+	  <entry>Row 2, Col 2</entry>
+	  <entry>Row 2, Col 3</entry>
+	  <entry>Row 2, Col 4</entry>
+	  <entrytbl cols="3">
+	    <thead>
+	      <row>
+		<entry>Inner Column 0 header</entry>
+		<entry>Inner Column 1 header</entry>
+		<entry>Inner Column 2 header</entry>
+	      </row>
+	    </thead>
+	    <tbody>
+	      <row>
+		<entry>Row 0, Col 0</entry>
+		<entry>Row 0, Col 1</entry>
+		<entry>Row 0, Col 2</entry>
+	      </row>
+	      <row>
+		<entry>Row 1, Col 0</entry>
+		<entry>Row 1, Col 1</entry>
+		<entry>Row 1, Col 2</entry>
+	      </row>
+	      <row>
+		<entry>Row 2, Col 0</entry>
+		<entry>Row 2, Col 1</entry>
+		<entry>Row 2, Col 2</entry>
+	      </row>
+	      <row>
+		<entry>Row 3, Col 0</entry>
+		<entry>Row 3, Col 1</entry>
+		<entry>Row 3, Col 2</entry>
+	      </row>
+	      <row>
+		<entry>Row 4, Col 0</entry>
+		<entry>Row 4, Col 1</entry>
+		<entry>Row 4, Col 2</entry>
+	      </row>
+	    </tbody>	
+	  </entrytbl>
+	  <entry>Row 2, Col 6</entry>
+	  <entry>Row 2, Col 7</entry>
+	  <entry>Row 2, Col 8</entry>
+	  <entry>Row 2, Col 9</entry>
+	</row>
+	  <row>
+	  <entry>Row 3, Col 0</entry>
+	  <entry>Row 3, Col 1</entry>
+	  <entry>Row 3, Col 2</entry>
+	  <entry>Row 3, Col 3</entry>
+	  <entry>Row 3, Col 4</entry>
+	  <entry>Row 3, Col 5</entry>
+	  <entry>Row 3, Col 6</entry>
+	  <entry>Row 3, Col 7</entry>
+	  <entry>Row 3, Col 8</entry>
+	  <entry>Row 3, Col 9</entry>
+	</row>
+	<row>
+	  <entry>Row 4, Col 0</entry>
+	  <entry>Row 4, Col 1</entry>
+	  <entry>Row 4, Col 2</entry>
+	  <entry>Row 4, Col 3</entry>
+	  <entry>Row 4, Col 4</entry>
+	  <entry>Row 4, Col 5</entry>
+	  <entry>Row 4, Col 6</entry>
+	  <entry>Row 4, Col 7</entry>
+	  <entry>Row 4, Col 8</entry>
+	  <entry>Row 4, Col 9</entry>
+	</row>
+      </tbody>	
+    </tgroup>
+    
+  </table>
+  <para>That was a test table</para>
+</article>
