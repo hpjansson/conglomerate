@@ -6,14 +6,18 @@ philosophy. It is based on structural document markup with XML. A totally
 rewritten version is coming up in late january. To avoid confusion with this
 release, the new one will probably be called "Congle".
 
-
 Compiling
 ---------
 
 Conge compilation should be quite simple, if you're lucky. You will need
-GTK/GDK 1.2.6 or later, as well as Flux 0.2.8, available from
+GTK/GDK 2.0.5 or later, as well as Flux 0.2.8, available from
 
 ftp://ftp.styx.net/projects/flux/libflux-0.2.8.tar.gz
+
+You should configure, make, and install this to your development prefix.  You
+may then need to rename (prefix)/lib/libflux.a to (prefix)/lib/libflux-old.a
+This is a temporary workaround to deal with the fact that libflux has been
+under heavy development, whereas conge has been left untouched.
 
 There are no autoconf or automake scripts, only a basic makefile. On most
 modern Unices, this means you can type
@@ -30,7 +34,6 @@ Compiling on Windows should be equally simple, if you're using Cygwin
 1) Edit global.h, change #undef WINDOWS_BUILD to #define WINDOWS_BUILD 1
 2) Copy "Makefile.win" to "Makefile".
 3) make
-
 
 Running
 -------
@@ -75,9 +78,9 @@ code whatsoever.
 
 Conglomerate has public mailinglists with web pages as follows:
 
-Announcements:    http://lists.styx.net/mailman/listinfo/conglomerate-announce
-User discussion:  http://lists.styx.net/mailman/listinfo/conglomerate
-Development:      http://lists.styx.net/mailman/listinfo/conglomerate-devel
+Announcements:    http://lists.copyleft.no/mailman/listinfo/conglomerate-announce
+User discussion:  http://lists.copyleft.no/mailman/listinfo/conglomerate
+Development:      http://lists.copyleft.no/mailman/listinfo/conglomerate-devel
 
 The Conglomerate web site is at:
 
@@ -85,10 +88,10 @@ http://www.conglomerate.org/
 
 The latest updates are available through anonymous CVS:
 
-cvs -d :pserver:anonymous@cvs.styx.net:/cvs login
+cvs -d :pserver:anonymous@cvs.copyleft.no:/cvs login
 [blank password, just hit enter]
 cvs checkout conglomerate
 
 CVS is also web-browsable:
 
-http://cvs.styx.net/cvsweb.pl/conglomerate/
+http://cvs.copyleft.no/cvsweb.pl/conglomerate/
