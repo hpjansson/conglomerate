@@ -1,11 +1,14 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <libxml/tree.h>
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <config.h>
 
 G_BEGIN_DECLS
 

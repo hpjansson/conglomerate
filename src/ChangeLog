@@ -1,4 +1,10 @@
 creating ChangeLog
+2002-11-29 Dmitry G. Mastrukov
+
+	* cong-primary-window.c, global.h, main.c
+	
+	I18n: fixes, about box, menus.
+	
 2002-11-28 Geert Stappers
 
 	* cong-primary-window.c

@@ -223,9 +223,9 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 	/* Open */
 	primary_window->butt_find = cong_primary_window_toolbar_create_item(primary_window,
 									    GTK_TOOLBAR(primary_window->toolbar),
-									    "Open", 
-									    "Open document",
-									    "Open document",
+									    _("Open"), 
+									    _("Open document"),
+									    _("Open document"),
 									    icon_openfile, 
 									    toolbar_callback_open,
 									    primary_window);
@@ -233,9 +233,9 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 	/* Submit */
 	primary_window->butt_submit = cong_primary_window_toolbar_create_item(primary_window,
 									      GTK_TOOLBAR(primary_window->toolbar),
-									      "Save as...", 
-									      "Save document as...",
-									      "Save document as...", 
+									      _("Save as..."), 
+									      _("Save document as..."),
+									      _("Save document as..."), 
 									      icon_submit,
 									      toolbar_callback_save_as,
 									      primary_window);
@@ -298,7 +298,7 @@ void unimplemented_menu_item(gpointer callback_data,
 			     guint callback_action,
 			     GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
 }
 
 static void dispatch_span_editor_command(void (*span_editor_command)(CongSpanEditor *span_editor), gpointer callback_data)
@@ -386,14 +386,14 @@ static void menu_callback_file_save_copy(gpointer callback_data,
 					 guint callback_action,
 					 GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
 }
 
 static void menu_callback_file_revert(gpointer callback_data,
 				      guint callback_action,
 				      GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CONG_DO_UNIMPLEMENTED_DIALOG(_("The selected menu item has not yet been implemented."));
 }
 
 struct add_importer_to_list_data
@@ -418,7 +418,7 @@ static void menu_callback_file_import(gpointer callback_data,
 
 	/* FIXME: this option should be disabled if there are no importers installed */
 
-	filename = get_file_name("Import file...");
+	filename = get_file_name(_("Import file..."));
 
 	if (filename) {
 		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
@@ -448,9 +448,9 @@ static void menu_callback_file_import(gpointer callback_data,
 
 			/* FIXME:  eventually provide a convenience dialog to force things */
 
-			what_failed = g_strdup_printf("Conglomerate could not import the file.");
-			why_failed = g_strdup_printf("None of Conglomerate's plugins know how to load files of type \"%s\"", gnome_vfs_mime_get_description(mime_type));
-			suggestions = g_strdup_printf("FIXME");
+			what_failed = g_strdup_printf(_("Could not import the file."));
+			why_failed = g_strdup_printf(_("None of Conglomerate's plugins know how to load files of type \"%s\""), gnome_vfs_mime_get_description(mime_type));
+			suggestions = g_strdup_printf(_("FIXME"));
 			dialog = cong_error_dialog_new(what_failed,
 						       why_failed,
 						       suggestions);
@@ -466,7 +466,7 @@ static void menu_callback_file_import(gpointer callback_data,
 
 		if (list_of_valid->next) {
 			/* There's more than one valid importer... */
-			CONG_DO_UNIMPLEMENTED_DIALOG("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found.");
+			CONG_DO_UNIMPLEMENTED_DIALOG(_("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found."));
 
 			importer = list_of_valid->data;
 		} else {
@@ -519,9 +519,9 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 
 	filename = cong_document_get_filename(doc);
 
-	title = g_strdup_printf("Export \"%s\"", filename);
+	title = g_strdup_printf(_("Export \"%s\""), filename);
 
-	dialog = gtk_dialog_new_with_buttons("Export",
+	dialog = gtk_dialog_new_with_buttons(_("Export"),
 					     NULL,
 					     0,
 					     GTK_STOCK_CANCEL,
@@ -534,7 +534,7 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
 
 	content = cong_dialog_content_new(FALSE);
-	general_category = cong_dialog_content_add_category(content, "General");
+	general_category = cong_dialog_content_add_category(content, _("General"));
 
 	select_exporter_option_menu = gtk_option_menu_new();
 	select_exporter_menu = gtk_menu_new();
@@ -544,10 +544,10 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 	cong_plugin_manager_for_each_exporter(the_globals.plugin_manager, add_exporter_to_menu, select_exporter_menu);
 	gtk_option_menu_set_history(GTK_OPTION_MENU(select_exporter_option_menu),0);
 
-	cong_dialog_category_add_field(general_category, "File:", make_uneditable_text("filename"));
-	cong_dialog_category_add_field(general_category, "Exporter:", select_exporter_option_menu);
+	cong_dialog_category_add_field(general_category, _("File:"), make_uneditable_text("filename"));
+	cong_dialog_category_add_field(general_category, _("Exporter:"), select_exporter_option_menu);
 
-	exporter_category = cong_dialog_content_add_category(content, "Export Options");
+	exporter_category = cong_dialog_content_add_category(content, _("Export Options"));
 
 #if 0
 	g_signal_connect(select_exporter_option_menu,
@@ -557,8 +557,8 @@ static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
 #endif
 
 #if 0
-	cong_dialog_category_add_field(exporter_category, "Name", make_uneditable_text(cong_dispspec_get_name(ds)));
-	cong_dialog_category_add_field(exporter_category, "Description", make_uneditable_text(cong_dispspec_get_description(ds)));
+	cong_dialog_category_add_field(exporter_category, _("Name"), make_uneditable_text(cong_dispspec_get_name(ds)));
+	cong_dialog_category_add_field(exporter_category, _("Description"), make_uneditable_text(cong_dispspec_get_description(ds)));
 #endif
 
 	g_free(title);
@@ -610,7 +610,7 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc)
 	xml_doc = cong_document_get_xml(doc);
 	ds = cong_document_get_dispspec(doc);
 
-	dialog = gtk_dialog_new_with_buttons("Properties",
+	dialog = gtk_dialog_new_with_buttons(_("Properties"),
 					     NULL,
 					     0,
 					     GTK_STOCK_OK,
@@ -620,18 +620,18 @@ static GtkWidget *cong_document_properties_dialog_new(CongDocument *doc)
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
 
 	content = cong_dialog_content_new(FALSE);
-	general_category = cong_dialog_content_add_category(content, "General");
-	doctype_category = cong_dialog_content_add_category(content, "Type");
+	general_category = cong_dialog_content_add_category(content, _("General"));
+	doctype_category = cong_dialog_content_add_category(content, _("Type"));
 
 	filename = cong_document_get_filename(doc);
 	path = cong_document_get_parent_uri(doc);
 
-	cong_dialog_category_add_field(general_category, "Name", make_uneditable_text(filename));
-	cong_dialog_category_add_field(general_category, "Location", make_uneditable_text(path));
-	cong_dialog_category_add_field(general_category, "Modified", make_uneditable_text(cong_document_is_modified(doc)?"Yes":"No"));
+	cong_dialog_category_add_field(general_category, _("Name"), make_uneditable_text(filename));
+	cong_dialog_category_add_field(general_category, _("Location"), make_uneditable_text(path));
+	cong_dialog_category_add_field(general_category, _("Modified"), make_uneditable_text(cong_document_is_modified(doc)?"Yes":"No"));
 
-	cong_dialog_category_add_field(doctype_category, "Name", make_uneditable_text(cong_dispspec_get_name(ds)));
-	cong_dialog_category_add_field(doctype_category, "Description", make_uneditable_text(cong_dispspec_get_description(ds)));
+	cong_dialog_category_add_field(doctype_category, _("Name"), make_uneditable_text(cong_dispspec_get_name(ds)));
+	cong_dialog_category_add_field(doctype_category, _("Description"), make_uneditable_text(cong_dispspec_get_description(ds)));
 
 	g_free(filename);
 	g_free(path);
@@ -726,21 +726,20 @@ static void menu_callback_about(gpointer callback_data,
 				GtkWidget *widget)
 {
 	GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
-	const gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
+	gchar* authors[] = {"Hans Petter Jansson", "David Malcolm", NULL};
 
-	const gchar* documenters[] = {"asb?,sb?" \
-			, "Your Name", NULL };
+	gchar* documenters[] = { NULL };
 
-	const gchar* translator_credits[] = {"ru:Dmitry G. Mastrukov" \
-			, "i18n:Your Name", NULL };
+	gchar* translator_credits = _("translator_credits");
 
-	GtkWidget *about = gnome_about_new("Conglomerate",
-					   VERSION,
-					   "(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm",
-					   "Conglomerate will be a user-friendly XML editor for GNOME",
-					   authors,
-					   documenters,
-					   translator_credits,
+	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
+					   PACKAGE_VERSION,
+					   _("(C) 1999 Hans Petter Jansson\n(C) 2002 David Malcolm"),
+					   _("Conglomerate will be a user-friendly XML editor for GNOME"),
+					   (const char **)authors,
+					   (const char **)documenters,
+					   strcmp(translator_credits, "translator_credits") != 0 ?
+						    translator_credits : NULL,
 					   logo_pixbuf);
 	gdk_pixbuf_unref(logo_pixbuf);
 
@@ -752,55 +751,55 @@ static void menu_callback_about(gpointer callback_data,
 /* The menus: */
 static GtkItemFactoryEntry menu_items[] =
 {
-	{ "/_File",             NULL, NULL, 0, "<Branch>" },
-	{ "/File/_New...",       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
-	{ "/File/_Open...",      NULL, menu_callback_file_open, 0, "<StockItem>", GTK_STOCK_OPEN },
-	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/_Save",           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
-	{ "/File/Save _As...",     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
-	{ "/File/Sa_ve a Copy...", "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
-	{ "/File/_Revert",         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
-	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/_Import...",           NULL, menu_callback_file_import, 0, "<Item>" },
-	{ "/File/_Export...",           NULL, menu_callback_file_export, 0, "<Item>" },
-	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/Proper_ties",     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
-	{ "/File/", NULL, NULL, 0, "<Separator>" },
-	{ "/File/_Close",         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
-	{ "/File/_Quit",         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
+	{ N_("/_File"),             NULL, NULL, 0, "<Branch>" },
+	{ N_("/File/_New..."),       NULL, menu_callback_file_new, 0, "<StockItem>", GTK_STOCK_NEW },
+	{ N_("/File/_Open..."),      NULL, menu_callback_file_open, 0, "<StockItem>", GTK_STOCK_OPEN },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/_Save"),           "<control>S", menu_callback_file_save, 0, "<StockItem>", GTK_STOCK_SAVE },
+	{ N_("/File/Save _As..."),     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
+	{ N_("/File/Sa_ve a Copy..."), "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
+	{ N_("/File/_Revert"),         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/_Import..."),           NULL, menu_callback_file_import, 0, "<Item>" },
+	{ N_("/File/_Export..."),           NULL, menu_callback_file_export, 0, "<Item>" },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/Proper_ties"),     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ N_("/File/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/File/_Close"),         "<control>W", menu_callback_file_close, 0, "<StockItem>", GTK_STOCK_CLOSE },
+	{ N_("/File/_Quit"),         "<control>Q", menu_callback_file_quit, 0, "<StockItem>", GTK_STOCK_QUIT },
 
-	{ "/_Edit",                 NULL, 0, 0, "<Branch>" },
-	{ "/Edit/_Undo",              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
-	{ "/Edit/_Redo",              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
-	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
-	{ "/Edit/Cu_t",              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
-	{ "/Edit/_Copy",             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
-	{ "/Edit/_Paste",            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
-	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
-	{ "/Edit/_Find...",         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
-	{ "/Edit/Find Ne_xt",       "<control>G", unimplemented_menu_item, 0, "<Item>" },
-	{ "/Edit/Find Pre_vious",   "<shift><control>G", unimplemented_menu_item, 0, "<Item>" },
-	{ "/Edit/R_eplace...",      "<control>R", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
-	{ "/Edit/", NULL, NULL, 0, "<Separator>" },
-	{ "/Edit/_Insert...",       NULL, unimplemented_menu_item, 0, "<Item>" },
+	{ N_("/_Edit"),                 NULL, 0, 0, "<Branch>" },
+	{ N_("/Edit/_Undo"),              "<control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_UNDO },
+	{ N_("/Edit/_Redo"),              "<shift><control>Z", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_REDO },
+	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/Edit/Cu_t"),              "<control>X", menu_callback_cut, 0, "<StockItem>", GTK_STOCK_CUT },
+	{ N_("/Edit/_Copy"),             "<control>C", menu_callback_copy, 0, "<StockItem>", GTK_STOCK_COPY },
+	{ N_("/Edit/_Paste"),            "<control>V", menu_callback_paste, 0, "<StockItem>", GTK_STOCK_PASTE },
+	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/Edit/_Find..."),         "<control>F", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND },
+	{ N_("/Edit/Find Ne_xt"),       "<control>G", unimplemented_menu_item, 0, "<Item>" },
+	{ N_("/Edit/Find Pre_vious"),   "<shift><control>G", unimplemented_menu_item, 0, "<Item>" },
+	{ N_("/Edit/R_eplace..."),      "<control>R", unimplemented_menu_item, 0, "<StockItem>", GTK_STOCK_FIND_AND_REPLACE },
+	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
+	{ N_("/Edit/_Insert..."),       NULL, unimplemented_menu_item, 0, "<Item>" },
 
-	{ "/Tests",                 NULL, NULL, 0, "<Branch>" },
-	{ "/Tests/Open...",         NULL, test_open_wrap, 0, NULL },
-	{ "/Tests/Error",           NULL, test_error_wrap, 0, NULL },
-	{ "/Tests/Document Types",  NULL, test_document_types_wrap, 0, NULL },
-	{ "/Tests/Transform DocBook to HTML",       NULL, menu_callback_test_transform_docbook_to_html, 0, NULL },
-	{ "/Tests/Transform DocBook to XHTML",       NULL, menu_callback_test_transform_docbook_to_xhtml, 0, NULL },
-	{ "/Tests/Transform DocBook to HTML Help",       NULL, menu_callback_test_transform_docbook_to_html_help, 0, NULL },
-	{ "/Tests/Transform DocBook to Java Help",       NULL, menu_callback_test_transform_docbook_to_javahelp, 0, NULL },
-	{ "/Tests/Transform DocBook to FO",       NULL, menu_callback_test_transform_docbook_to_fo, 0, NULL },
+	{ N_("/Tests"),                 NULL, NULL, 0, "<Branch>" },
+	{ N_("/Tests/Open..."),         NULL, test_open_wrap, 0, NULL },
+	{ N_("/Tests/Error"),           NULL, test_error_wrap, 0, NULL },
+	{ N_("/Tests/Document Types"),  NULL, test_document_types_wrap, 0, NULL },
+	{ N_("/Tests/Transform DocBook to HTML"),       NULL, menu_callback_test_transform_docbook_to_html, 0, NULL },
+	{ N_("/Tests/Transform DocBook to XHTML"),       NULL, menu_callback_test_transform_docbook_to_xhtml, 0, NULL },
+	{ N_("/Tests/Transform DocBook to HTML Help"),       NULL, menu_callback_test_transform_docbook_to_html_help, 0, NULL },
+	{ N_("/Tests/Transform DocBook to Java Help"),       NULL, menu_callback_test_transform_docbook_to_javahelp, 0, NULL },
+	{ N_("/Tests/Transform DocBook to FO"),       NULL, menu_callback_test_transform_docbook_to_fo, 0, NULL },
 #if PRINT_TESTS
-	{ "/Tests/Preview XSL:FO",       NULL, menu_callback_test_preview_fo, 0, NULL },
+	{ N_("/Tests/Preview XSL:FO"),       NULL, menu_callback_test_preview_fo, 0, NULL },
 #endif /* #if PRINT_TESTS */
-	{ "/Tests/DTD",             NULL, menu_callback_test_dtd, 0, NULL },
-	{ "/Tests/Dialog",             NULL, menu_callback_test_dialog, 0, NULL },
-	{ "/_Help",        NULL, NULL, 0, "<Branch>" },
-	{ "/Help/_Contents", "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
-	{ "/Help/_About",    NULL, menu_callback_about, 0, "<Item>" }
+	{ N_("/Tests/DTD"),             NULL, menu_callback_test_dtd, 0, NULL },
+	{ N_("/Tests/Dialog"),             NULL, menu_callback_test_dialog, 0, NULL },
+	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
+	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
+	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
 
@@ -838,14 +837,14 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	if (primary_window->doc) {
 		filename = cong_document_get_filename(primary_window->doc);
-		title = g_strdup_printf("%s - %s", filename, "Conglomerate Editor");
+		title = g_strdup_printf("%s - %s", filename, _("Conglomerate XML Editor"));
 	} else {
-		title = g_strdup("Conglomerate Editor");
+		title = g_strdup(_("Conglomerate XML Editor"));
 	}
 
 	/* --- Main window --- */
-	primary_window->window = gnome_app_new("Conglomerate",
-					       title);
+	primary_window->window = gnome_app_new(PACKAGE_NAME,
+						title);
 
 	{	
 		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
@@ -870,6 +869,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	primary_window->accel = gtk_accel_group_new();
 	item_factory = gtk_item_factory_new(GTK_TYPE_MENU_BAR, "<main>", primary_window->accel);
+	gtk_item_factory_set_translate_func(item_factory, (GtkTranslateFunc) gettext, NULL, NULL);
 	gtk_item_factory_create_items(item_factory, sizeof(menu_items) / sizeof(menu_items[0]),
 				      menu_items, primary_window);
 	gtk_window_add_accel_group(GTK_WINDOW(primary_window->window), primary_window->accel);
@@ -971,7 +971,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 		} else {
 
-			status_text = g_strdup("Welcome to the much-too-early Conglomerate editor.");	
+			status_text = g_strdup(_("Welcome to the much-too-early Conglomerate editor."));	
 
 		}
 
@@ -1044,15 +1044,15 @@ void cong_primary_window_update_title(CongPrimaryWindow *primary_window)
 		filename = cong_document_get_filename(primary_window->doc);
 
 		if (cong_document_is_modified( primary_window->doc ) ) {
-			title = g_strdup_printf("%s (modified) - %s", filename, "Conglomerate Editor");
+			title = g_strdup_printf(_("%s (modified) - %s"), filename, _("Conglomerate XML Editor"));
 		} else {
-			title = g_strdup_printf("%s - %s", filename, "Conglomerate Editor");
+			title = g_strdup_printf("%s - %s", filename, _("Conglomerate XML Editor"));
 		}
 
 		g_free(filename);
 
 	} else {
-		title = g_strdup("Conglomerate Editor");
+		title = g_strdup(_("Conglomerate XML Editor"));
 	}
 
 	gtk_window_set_title( GTK_WINDOW(primary_window->window),

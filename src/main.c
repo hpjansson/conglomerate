@@ -879,8 +879,7 @@ int main( int   argc,
 
 
 #if 1
-	the_globals.gnome_program = gnome_program_init("Conglomerate",
-						       "0.1.0",
+	the_globals.gnome_program = gnome_program_init(PACKAGE_NAME, PACKAGE_VERSION,
 						       LIBGNOMEUI_MODULE,
 						       argc,argv,
 						       GNOME_PARAM_HUMAN_READABLE_NAME,
