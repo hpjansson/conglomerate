@@ -18,13 +18,13 @@ cong_location_is_valid(const CongLocation *loc)
 	g_return_val_if_fail(loc != NULL, FALSE);
 
 	if (loc->node==NULL) {
-		return (loc->byte_offset==-2);
+		return (loc->byte_offset==CONG_LOCATION_BYTE_OFFSET_NULL_NODE);
 	} else {
 		type = cong_location_node_type(loc);
 
 		switch (type) {
 		default:
-			return (loc->byte_offset==-1);
+			return (loc->byte_offset==CONG_LOCATION_BYTE_OFFSET_MEANINGLESS);
 	
 		case CONG_NODE_TYPE_TEXT:
 		case CONG_NODE_TYPE_COMMENT:
@@ -48,7 +48,7 @@ cong_location_nullify(CongLocation *loc)
 	g_return_if_fail(loc != NULL);
 	
 	loc->node=NULL;
-	loc->byte_offset=-2; /* for good measure */
+	loc->byte_offset=CONG_LOCATION_BYTE_OFFSET_NULL_NODE; /* for good measure */
 }
 
 void
@@ -61,7 +61,7 @@ cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
 
 	switch (cong_node_type (node)) {
 		default: 
-			loc->byte_offset = -1;
+			loc->byte_offset = CONG_LOCATION_BYTE_OFFSET_MEANINGLESS;
 			break;
 			
 		case CONG_NODE_TYPE_TEXT:
@@ -81,7 +81,7 @@ cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
 
 	switch (cong_node_type (node)) {
 		default: 
-			loc->byte_offset = -1;
+			loc->byte_offset = CONG_LOCATION_BYTE_OFFSET_MEANINGLESS;
 			break;
 			
 		case CONG_NODE_TYPE_TEXT:

@@ -87,9 +87,13 @@ cong_range_generate_source (CongRange *range)
 
 	/* We have a single node: */
 	if (range->loc0.node==range->loc1.node) {
-		return cong_node_generate_source_between_byte_offsets (range->loc0.node,
-								       range->loc0.byte_offset,
-								       range->loc1.byte_offset);
+		if (cong_node_supports_byte_offsets (range->loc0.node)) {
+			return cong_node_generate_source_between_byte_offsets (range->loc0.node,
+									       range->loc0.byte_offset,
+									       range->loc1.byte_offset);
+		} else {
+			return cong_node_generate_source (range->loc0.node);
+		}
 	} else {
 		result = cong_node_generate_source_from_byte_offset (range->loc0.node, 
 								     range->loc0.byte_offset);
@@ -135,7 +139,15 @@ cong_range_is_empty (CongRange *range)
 {
 	g_return_val_if_fail (range, TRUE);
 	
-	return cong_location_equals(&range->loc0, &range->loc1);
+	if (cong_location_equals(&range->loc0, &range->loc1)) {
+		/* The range is empty iff we're expecting byte offsets to be valid: */
+		return cong_node_supports_byte_offsets (range->loc0.node);
+	} else {
+		/* Non-equal start/end: range is non-empty: */
+		return FALSE;
+	}
+
+
 }
 
 gboolean
@@ -201,8 +213,8 @@ cong_range_is_node (CongRange *range,
 {
 	g_return_val_if_fail (range, FALSE);
 
-	if (range->loc0.node==node && range->loc0.byte_offset==0) {
-		if (range->loc1.node==node && range->loc1.byte_offset==0) {
+	if (range->loc0.node==node && range->loc0.byte_offset==CONG_LOCATION_BYTE_OFFSET_MEANINGLESS) {
+		if (range->loc1.node==node && range->loc1.byte_offset==CONG_LOCATION_BYTE_OFFSET_MEANINGLESS) {
 			return TRUE;
 		}
 	}

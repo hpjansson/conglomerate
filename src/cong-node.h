@@ -229,4 +229,17 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 gboolean
 cong_node_is_valid_cursor_location (CongNodePtr node);
 
+/**
+ * cong_node_supports_byte_offsets:
+ * @node:  a node to be tested
+ *
+ * The function determines if #CongLocation objects that reference this node can have meaningful byte offsets
+ *
+ * Only TEXT and COMMENT nodes can currently have meaningful byte offsets.
+ * 
+ * Returns: a #gboolean which is TRUE iff #CongLocations that reference this node can have a meaningful byte offset 
+ */
+gboolean
+cong_node_supports_byte_offsets (CongNodePtr node);
+
 #endif

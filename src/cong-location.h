@@ -25,6 +25,10 @@
 #ifndef __CONG_LOCATION_H__
 #define __CONG_LOCATION_H__
 
+
+#define CONG_LOCATION_BYTE_OFFSET_NULL_NODE (-2)
+#define CONG_LOCATION_BYTE_OFFSET_MEANINGLESS (-1)
+
 /**
  * CongLocation
  * 
@@ -34,7 +38,9 @@
 typedef struct _CongLocation
 {
 	CongNodePtr node;
-	int byte_offset; /* byte offset, not a character offset; required to be -1 for nodes for which the offset is meaningless, and -2 for a NULL node ptr */
+	int byte_offset; /* byte offset, not a character offset; 
+			    required to be CONG_LOCATION_BYTE_OFFSET_MEANINGLESS for nodes for which the offset is meaningless, 
+			    and CONG_LOCATION_BYTE_OFFSET_NULL_NODE for a NULL node ptr */
 } CongLocation;
 
 /**

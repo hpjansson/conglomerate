@@ -1035,5 +1035,12 @@ cong_node_is_valid_cursor_location (CongNodePtr node)
 	
 }
 
+gboolean
+cong_node_supports_byte_offsets (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+	
+	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
+}
 
 /* Internal function definitions: */
