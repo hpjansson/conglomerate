@@ -1,3 +1,11 @@
+2004-11-22  David Malcolm  <dmalcolm@redhat.com>
+
+	* plugin-random.c: 
+
+	Correct "lore ipsum" to "Lore ipsum..." etc; getting hopefully the
+	standard fragment of latin text for doing dummy text; copied from
+	http://lipsum.com/
+
 2004-11-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* plugin-table.c: 
