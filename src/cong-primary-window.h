@@ -43,28 +43,14 @@ struct CongPrimaryWindow
 	GtkActionGroup *action_group[NUM_CONG_ACTION_GROUPS];
 	guint merge_id;
 
-/*  	GtkWidget *w; */
-
 	GtkWidget *cong_editor_widget3;
 	GtkWidget *scroller3;
 
 	GtkWidget *window, *menus;
 	GtkToolbar *toolbar;
-#if 1
 	GtkWidget *app_bar;
-#else
-	GtkWidget *status;
-#endif
-	GtkWidget *auth, *butt_submit, *butt_find;
-	
-#if 0
-	guint status_main_ctx;
-#endif
 
 	GtkAccelGroup *accel;
-
-
-
 };
 
 

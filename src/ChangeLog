@@ -1,3 +1,9 @@
+2004-09-22  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-primary-window.h
+
+	Removed unused fields from CongPrimaryWindow
+
 2004-09-20 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* cong-text-cache.c:
