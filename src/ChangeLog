@@ -1,5 +1,9 @@
 2003-09-24  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node.c
+
+	Rewrite of overzealous g_assert that was stopping entities working (cf bug #122967 and about 10 dups)
+
 	* cong-editor-node-entity-decl.c, cong-editor-node-entity-ref.c
 
 	Use of CongEditorAreaStructural to make entity declarations and entity references look funky
