@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-06 David Malcolm
+
+	* cong-error-file-save.c, global.h, main.c, open.c
+
+	Transformation tests
+
+	* cong-primary-window.c, popup.c, xmledit.c
+
+	Menu cleanups
+	
 2002-11-04 David Malcolm
 
 	* cong-document.c, cong-font.c, cong-location.c, cong-test-view.c, cong-tree-view.c, cursor.c, global.h, open.c, popup.c, position.c, select.c, tests.c, tree.c, xmldata.c, xmledit.c, xmlload.c, xmlview.c

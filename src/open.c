@@ -68,7 +68,7 @@ get_appropriate_dispspec(xmlDocPtr doc)
 		g_free(toplevel_tag);
 	}
 
-	/* Do a selection dialog for the user (including the ability to generate a new dispspec): */
+	/* FIXME:  Do a selection dialog for the user (including the ability to generate a new dispspec): */
 
 	return NULL;
 }
@@ -490,6 +490,33 @@ void force_load(gpointer data)
 	g_assert(the_dlg->ds);
 }
 
+CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc)
+{
+	GtkDialog *dialog;
+	struct force_dialog the_dlg;
+	the_dlg.was_forced=FALSE;
+	the_dlg.doc=doc;
+
+
+	dialog = cong_error_dialog_new_with_convenience(what_failed,
+							"The internal structure of the document does not match any of the types known to Conglomerate.", 
+							"You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal.",
+							"Force",
+							force_load,
+							&the_dlg);
+	
+	cong_error_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+
+	if (the_dlg.was_forced) {
+		/* We carry on, with the auto-generated dispspec: */
+		return the_dlg.ds;
+		/* FIXME:  This will eventually leak; the ds is never released and is never part of the global registry */
+	} else {
+		return NULL;
+	}
+}
+
 void open_document_do(const gchar* doc_name)
 {
 	char *p;
@@ -536,31 +563,15 @@ void open_document_do(const gchar* doc_name)
 		ds = get_appropriate_dispspec(doc);
 
 		if (ds==NULL) {
-			GtkDialog *dialog;
 			gchar *what_failed;
-			struct force_dialog the_dlg;
-			the_dlg.was_forced=FALSE;
-			the_dlg.doc=doc;
 
 			what_failed = cong_error_what_failed_on_file_open_failure(file_uri, FALSE);
 
-			dialog = cong_error_dialog_new_with_convenience(what_failed,
-									"The internal structure of the document does not match any of the types known to Conglomerate.", 
-									"You can force Conglomerate to load the document by clicking on the \"Force\" button below, but results may not be ideal.",
-									"Force",
-									force_load,
-									&the_dlg);
-
+			ds = query_for_forced_dispspec(what_failed, doc);
+			
 			g_free(what_failed);
 
-			cong_error_dialog_run(GTK_DIALOG(dialog));
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-
-			if (the_dlg.was_forced) {
-				/* We carry on, with the auto-generated dispspec: */
-				ds = the_dlg.ds;
-				/* FIXME:  This will eventually leak; the ds is never released and is never part of the global registry */
-			} else {
+			if (NULL==ds) {
 				xmlFreeDoc(doc);
 				gnome_vfs_uri_unref(file_uri);
 				return;

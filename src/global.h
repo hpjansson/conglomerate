@@ -584,6 +584,10 @@ gint tree_paste_under(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_before(GtkWidget *widget, CongNodePtr tag);
 gint tree_paste_after(GtkWidget *widget, CongNodePtr tag);
 
+void cong_span_editor_cut(CongSpanEditor *span_editor);
+void cong_span_editor_copy(CongSpanEditor *span_editor);
+void cong_span_editor_paste(CongSpanEditor *span_editor, GtkWidget *widget);
+
 gint xed_cut(GtkWidget *widget, struct CongSpanEditor *xed);
 gint xed_copy(GtkWidget *widget, struct CongSpanEditor *xed);
 gint xed_paste(GtkWidget *widget, struct CongSpanEditor *xed);
@@ -779,6 +783,11 @@ GtkWidget* tpopup_init(CongTreeView *cong_tree_view, CongNodePtr x);
 gint tpopup_show(GtkWidget *widget, GdkEvent *event);
 
 void xv_style_r(GtkWidget *widget, gpointer data);
+
+const CongDispspec*
+get_appropriate_dispspec(xmlDocPtr doc);
+
+CongDispspec* query_for_forced_dispspec(gchar *what_failed, xmlDocPtr doc);
 
 /* 
    Error handling facilities: 

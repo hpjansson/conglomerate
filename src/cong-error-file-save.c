@@ -20,6 +20,8 @@ cong_error_split_uri(const GnomeVFSURI* uri, gchar** filename_alone, gchar** pat
 	*filename_alone=gnome_vfs_uri_extract_short_name(uri);
 
 #if 1
+	g_assert(parent_uri);
+
 	/* This version seems better when dealing with e.g. http and ftp methods etc: */
 	*path=gnome_vfs_uri_to_string(parent_uri,
 				      GNOME_VFS_URI_HIDE_USER_NAME|GNOME_VFS_URI_HIDE_PASSWORD);

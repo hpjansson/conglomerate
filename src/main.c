@@ -7,8 +7,11 @@
 
 #include <libxml/tree.h>
 
-#if 0
 #include <libxslt/xsltInternals.h>
+#include <libxslt/transform.h>
+
+#if 0
+#include <libgtkhtml/gtkhtml.h>
 #endif
 
 
@@ -20,8 +23,10 @@ void xed_cut_wrap(GtkWidget *widget, gpointer data) { xed_cut(widget, 0); }
 void xed_copy_wrap(GtkWidget *widget, gpointer data) { xed_copy(widget, 0); }
 void xed_paste_wrap(GtkWidget *widget, gpointer data) { xed_paste(widget, 0); }
 
+#if 1
 void open_document_wrap(GtkWidget *widget, gpointer data) { open_document(widget, 0); }
 void save_document_wrap(GtkWidget *widget, gpointer data) { save_document(widget, 0); }
+#endif
 
 
 
@@ -244,9 +249,59 @@ gint test_document_types(GtkWidget *w, gpointer data)
 
 void test_document_types_wrap(GtkWidget *widget, gpointer data) { test_document_types(widget, 0); }
 
+void open_preview_window_for_doc(xmlDocPtr doc)
+{
+#if 1
+	/* Save it to a temp file and invoke user's favourite browser: */
+	g_assert(0);
+#else
+	GtkWidget* html_view;
+	HtmlDocument *html_document;
+
+	g_return_if_fail(doc);
+
+	html_view = html_view_new();
+
+	html_document = ;
+
+	html_view_set_document(HTML_VIEW(html_view), html_document);
+#endif
+}
+
+void open_transformed_window_for_doc(xmlDocPtr doc)
+{
+	/* Hackish test: */
+
+	const CongDispspec *ds;
+	CongDocument *cong_doc;
+
+	g_return_if_fail(doc);
+
+	ds = get_appropriate_dispspec(doc);
+
+	if (ds==NULL) {
+		ds = query_for_forced_dispspec("Conglomerate cannot open the result of the transformation", doc);
+
+		if (NULL==ds) {
+			xmlFreeDoc(doc);
+			return;
+		}
+	}
+
+	g_assert(ds);
+	cong_doc = cong_document_new_from_xmldoc(doc, ds, NULL); /* takes ownership of doc */
+
+	cong_node_self_test_recursive(cong_document_get_root(cong_doc));
+
+	g_assert(cong_doc);
+
+	cong_primary_window_new(cong_doc);
+}
+
+
 gint test_transform(GtkWidget *w, gpointer data)
 {
-#if 0
+#if 1
 	/* Hackish test of libxslt */
 	xmlDocPtr doc;
 	xsltStylesheetPtr xsl;
@@ -266,10 +321,22 @@ gint test_transform(GtkWidget *w, gpointer data)
 	result = xsltApplyStylesheet(xsl, doc, NULL);
 	g_assert(result);
 
+
+#if 1
+
+#if 0
+	open_preview_window_for_doc(result); /* takes ownership of the result */
+#else
+	open_transformed_window_for_doc(result); /* takes ownership of the result */
+	/* FIXME: do as a document?  or have a special preview window? */
+#endif
+
+#else
 	xsltSaveResultToFile(stdout, result, xsl);
+	xmlFreeDoc(result);
+#endif
 	
 	xsltFreeStylesheet(xsl);
-	xmlFreeDoc(result);
 	xmlFreeDoc(doc);
 
 	/* do we need to clean up the globals? */
