@@ -1,8 +1,6 @@
-conglomerate (0.7.5cvs237-2) UNRELEASED; urgency=low
+conglomerate (0.7.6-1) unstable; urgency=medium
 
-  * work in progress
-
-  * new from upstream:
+  * New upstream release.
    - application icons placed in /usr/share/conglomerate/pixmaps (closes: #208984)
    - improved font loading (closes: #217321)
    - cleaner support for 64-bit systems (closes: #216461)
@@ -13,7 +11,7 @@ conglomerate (0.7.5cvs237-2) UNRELEASED; urgency=low
   * rules:
    - noted that patches can be done by `dbs` or `dpatch`
 
- -- Geert Stappers <stappers@stappers.nl>  Thu,  9 Oct 2003 11:03:47 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Thu, 30 Oct 2003 14:14:41 +0000
 
 conglomerate (0.7.5-1) unstable; urgency=low
 
