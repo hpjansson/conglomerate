@@ -15,6 +15,14 @@
 
 #define SUPPORT_OLD_LOADERS 0
 
+#if 0
+#define DS_DEBUG_MSG1(x)    g_message((x))
+#define DS_DEBUG_MSG2(x, a) g_message((x), (a))
+#else
+#define DS_DEBUG_MSG1(x)    ((void)0)
+#define DS_DEBUG_MSG2(x, a) ((void)0)
+#endif
+
 struct CongDispspecElementHeaderInfo
 {
 	int dummy;
@@ -257,13 +265,13 @@ static CongDispspec* parse_xmldoc(xmlDocPtr doc)
 
 				xmlNodePtr cur;
 				
-				/* g_message("got dispspec\n"); */
+				/* DS_DEBUG_MSG1("got dispspec\n"); */
 
 				for (cur = xml_dispspec->children; cur; cur=cur->next) {
 					if (0==strcmp(cur->name,"element-list")) {
 						
 						xmlNodePtr xml_element;
-						/* g_message("got element-list\n"); */
+						/* DS_DEBUG_MSG1("got element-list\n"); */
 
 						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
 							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
@@ -291,7 +299,7 @@ static void
 parse_metadata(CongDispspec *ds, xmlDocPtr doc, xmlNodePtr node)
 {
 	xmlNodePtr xml_element;
-	g_message("got metadata\n");
+	DS_DEBUG_MSG1("got metadata\n");
 	
 	for (xml_element = node->children; xml_element; xml_element=xml_element->next) {
 		if (0==strcmp(xml_element->name,"name")) {
@@ -344,7 +352,7 @@ static void recurse_doc(CongDispspec *ds, xmlNodePtr node)
 				/* Tag not found, add it to the dispspec as a strucutral element: */
 				CongDispspecElement* element;
 
-				g_message("Adding <%s> to dispspec\n",node->name);
+				DS_DEBUG_MSG2("Adding <%s> to dispspec\n",node->name);
 
 				element = cong_dispspec_element_new(node->name, CONG_ELEMENT_TYPE_STRUCTURAL);
 				cong_dispspec_add_element(ds, element);
@@ -409,14 +417,6 @@ TTREE *get_upper_section(TTREE *x)
   
   return(x);
 }
-#endif
-
-#if 0
-#define DS_DEBUG_MSG1(x)    g_message((x))
-#define DS_DEBUG_MSG2(x, a) g_message((x), (a))
-#else
-#define DS_DEBUG_MSG1(x)    ((void)0)
-#define DS_DEBUG_MSG2(x, a) ((void)0)
 #endif
 
 const gchar*
@@ -998,7 +998,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
 {
 	CongDispspecElement* element;
 
-	/* g_message("got xml element\n"); */
+	/* DS_DEBUG_MSG1("got xml element\n"); */
 
 	element = g_new0(CongDispspecElement,1);
 

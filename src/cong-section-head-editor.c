@@ -364,7 +364,7 @@ static void section_head_editor_get_size_requisition(CongElementEditor *element_
 	GtkRequisition *requisition = &element_editor->requisition;
 	GList *iter;
 
-	requisition->width = 100; /* for now */
+	requisition->width = 300; /* for now */
 	requisition->height = TITLE_HEIGHT + 1 + V_SPACING;
 
 	if (section_head->expanded) {

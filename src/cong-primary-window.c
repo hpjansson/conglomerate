@@ -40,6 +40,8 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
 
+#define ENABLE_TEST_MENU 1
+
 /* Main window layout:
  * 
  * .----------------------------------------.
@@ -811,6 +813,7 @@ static GtkItemFactoryEntry menu_items[] =
 	{ N_("/Edit/"), NULL, NULL, 0, "<Separator>" },
 	{ N_("/Edit/View _Source"),     NULL, menu_callback_view_source, 0, NULL },
 
+#if ENABLE_TEST_MENU
 	{ N_("/Tests"),                 NULL, NULL, 0, "<Branch>" },
 	{ N_("/Tests/Open..."),         NULL, test_open_wrap, 0, NULL },
 	{ N_("/Tests/Error"),           NULL, test_error_wrap, 0, NULL },
@@ -825,6 +828,8 @@ static GtkItemFactoryEntry menu_items[] =
 #endif /* #if PRINT_TESTS */
 	{ N_("/Tests/DTD"),             NULL, menu_callback_test_dtd, 0, NULL },
 	{ N_("/Tests/Dialog"),             NULL, menu_callback_test_dialog, 0, NULL },
+#endif
+
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 	{ N_("/Help/_Contents"), "F1", unimplemented_menu_item, 0, "<StockItem>",GTK_STOCK_HELP },
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }

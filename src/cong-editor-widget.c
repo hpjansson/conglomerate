@@ -41,8 +41,14 @@ static void on_cursor_change(CongView *view);
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
+#define CONG_EDITOR_WIDGET_DEBUG_MSG1(x)    g_message((x))
+#define CONG_EDITOR_WIDGET_DEBUG_MSG2(x, a) g_message((x), (a))
+#define CONG_EDITOR_WIDGET_DEBUG_MSG3(x, a, b) g_message((x), (a), (b))
 #else
 #define CONG_EDITOR_VIEW_SELF_TEST(details) ((void)0)
+#define CONG_EDITOR_WIDGET_DEBUG_MSG1(x)    ((void)0)
+#define CONG_EDITOR_WIDGET_DEBUG_MSG2(x, a) ((void)0)
+#define CONG_EDITOR_WIDGET_DEBUG_MSG3(x, a, b) ((void)0)
 #endif
 
 /* Definitions of the handler functions: */
@@ -53,7 +59,7 @@ static void on_document_coarse_update(CongView *view)
 	g_return_if_fail(view);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_coarse_update\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_coarse_update\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -72,7 +78,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	g_return_if_fail(node);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_node_make_orphan\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_make_orphan\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -110,7 +116,7 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	g_return_if_fail(older_sibling);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_node_add_after\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_add_after\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -147,7 +153,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	g_return_if_fail(younger_sibling);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_node_add_before\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_add_before\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -184,7 +190,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	g_return_if_fail(adoptive_parent);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_node_set_parent\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_set_parent\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -221,7 +227,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	g_return_if_fail(new_content);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_document_node_set_text\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_document_node_set_text\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -254,7 +260,7 @@ static void on_selection_change(CongView *view)
 	g_return_if_fail(view);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_selection_change\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_selection_change\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -270,7 +276,7 @@ static void on_cursor_change(CongView *view)
 	g_return_if_fail(view);
 
 	#if DEBUG_EDITOR_WIDGET_VIEW
-	g_message("CongEditorWidgetView - on_cursor_change\n");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("CongEditorWidgetView - on_cursor_change\n");
 	#endif
 
 	editor_widget_view = CONG_EDITOR_WIDGET_VIEW(view);
@@ -288,7 +294,7 @@ static gboolean expose_event_handler(GtkWidget *w, GdkEventExpose *event, gpoint
 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	g_message("expose_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("expose_event_handler");
 
 	doc = cong_editor_widget_get_document(editor_widget);
 
@@ -314,7 +320,7 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	g_message("configure_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("configure_event_handler");
 
 	/* Pass all of the allocation to root editor; this will recursively allocate space to its children: */
 	cong_element_editor_set_allocation(details->root_editor, 
@@ -331,7 +337,7 @@ static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, 
 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	g_message("button_press_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("button_press_event_handler");
 
 	cong_element_editor_on_button_press(details->root_editor, event);
 
@@ -343,7 +349,7 @@ static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event,
 	CongEditorWidget *editor_widget = CONG_EDITOR_WIDGET(w);
 	CongEditorWidgetDetails* details = GET_DETAILS(editor_widget);
 
-	g_message("motion_notify_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("motion_notify_event_handler");
 
 	cong_element_editor_on_motion_notify(details->root_editor, event);
 
@@ -358,7 +364,9 @@ static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpoint
 	CongCursor *cursor = cong_document_get_cursor(doc);
 	CongElementEditor *element_editor;
 
-	g_message("key_press_event_handler");
+	CONG_EDITOR_WIDGET_DEBUG_MSG1("key_press_event_handler");
+
+	g_return_val_if_fail(cursor->location.tt_loc, FALSE);
 
 	/* Get element for cursor location; get it to handle the message: */
 	element_editor = cong_editor_widget_get_element_editor_for_node(editor_widget, cursor->location.tt_loc);
@@ -394,7 +402,7 @@ void recursively_populate_ui(CongEditorView *editor_view,
 		enum CongNodeType node_type = cong_node_type(x);
 		const char *name = xml_frag_name_nice(x);
 
-		/* g_message("Examining frag %s\n",name); */
+		/* CONG_EDITOR_WIDGET_DEBUG_MSG1("Examining frag %s\n",name); */
 
 		if (node_type == CONG_NODE_TYPE_ELEMENT)
 		{
@@ -511,7 +519,7 @@ void populate_widget(CongEditorWidget *widget)
 
 		const char *name = xml_frag_name_nice(x);
 
-		g_message("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
+		CONG_EDITOR_WIDGET_DEBUG_MSG3("examining frag \"%s\", type = %s\n", name, cong_node_type_description(type));
 		
 		if (type == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_structural(displayspec, name))
 		{

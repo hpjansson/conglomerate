@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-04-01 David Malcolm
+
+	* cong-editor-widget.c, cong-primary-window.c, cong-section-head-editor.c, cong-span-text-editor.c, dispspec.c
+
+	Cleanups of debugging and test code
+	
 2003-03-27 David Malcolm
 
 	* cong-span-text-editor.c

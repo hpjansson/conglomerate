@@ -27,6 +27,14 @@
 #include "cong-dispspec.h"
 #include "cong-document.h"
 
+#if 0
+#define CONG_SPAN_TEXT_DEBUG_MSG1(x)    g_message((x))
+#define CONG_SPAN_TEXT_DEBUG_MSG2(x, a) g_message((x), (a))
+#else
+#define CONG_SPAN_TEXT_DEBUG_MSG1(x)    ((void)0)
+#define CONG_SPAN_TEXT_DEBUG_MSG2(x, a) ((void)0)
+#endif
+
 #define H_SPACING (4)
 
 enum CongLineVisitor
@@ -776,7 +784,7 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 						    &logical_rect);
 		
 #if 0
-		g_message("ink_rect: (%i,%i,%i,%i), logical_rect:(%i,%i,%i,%i)",
+		CONG_SPAN_TEXT_DEBUG_MSG1("ink_rect: (%i,%i,%i,%i), logical_rect:(%i,%i,%i,%i)",
 			  ink_rect.x,
 			  ink_rect.y,
 			  ink_rect.width,
@@ -875,13 +883,13 @@ static int visit_lines(CongElementEditor *element_editor, enum CongLineVisitor v
 
 			/* Render the cursor under the text: */
 			#if 0
-			g_message("rendering cursor");
+			CONG_SPAN_TEXT_DEBUG_MSG1("rendering cursor");
 			#endif
 						
 			if (got_cursor_byte_offset) {
 				
 				#if 0
-				g_message("got cursor byte offset");
+				CONG_SPAN_TEXT_DEBUG_MSG1("got cursor byte offset");
 				#endif
 
 				if (cursor_byte_offset >= line->start_index) {
@@ -977,7 +985,7 @@ static void span_text_editor_on_button_press(CongElementEditor *element_editor, 
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
 	/* FIXME: unimplemented */
-	g_message("span_text_editor_on_button_press");
+	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_button_press");
 
 	doc = cong_editor_widget_get_document(editor_widget);
 	cursor = cong_document_get_cursor(doc);
@@ -1031,7 +1039,7 @@ static void span_text_editor_on_motion_notify(CongElementEditor *element_editor,
 	CongEditorWidget *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
-	g_message("span_text_editor_on_motion_notify");
+	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_motion_notify");
 
 	if (!(event->state & GDK_BUTTON1_MASK)) return;
 
@@ -1155,7 +1163,7 @@ static void span_text_editor_on_key_press(CongElementEditor *element_editor, Gdk
 	CongEditorWidget *editor_widget = element_editor->widget;
 	CongSpanTextEditor *span_text_editor = CONG_SPAN_TEXT_EDITOR(element_editor);
 
-	g_message("span_text_editor_on_key_press");
+	CONG_SPAN_TEXT_DEBUG_MSG1("span_text_editor_on_key_press");
 
 #ifndef RELEASE		
 	printf("Keyval: %d, State: %d\n", event->keyval, event->state);
@@ -1223,7 +1231,7 @@ CongElementEditor *cong_span_text_editor_new(CongEditorWidget *widget, CongNodeP
 	g_return_val_if_fail(final_node, NULL);
 	g_return_val_if_fail( (first_node->parent == final_node->parent), NULL);
 
-	g_message("cong_span_text_editor_new");
+	CONG_SPAN_TEXT_DEBUG_MSG1("cong_span_text_editor_new");
 
 	span_text = g_new0(CongSpanTextEditor,1);
 	span_text->element_editor.klass = &span_text_editor_class;
