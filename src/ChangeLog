@@ -1,5 +1,9 @@
 2004-03-02  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* gxx-impl-object-to-xml-tree.c
+
+	Fix for bug #135867 (crash when selecting Edit Display Spec) 
+
 	* cong-attribute-editor-enumeration.c, cong-util.c, cong-util.h
 
 	Added utility function for comparing attribute values; added test to enum attribute editor to ignore the case where nothing has changed	
