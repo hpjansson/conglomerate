@@ -249,7 +249,7 @@ conglomerate-$VERSION:
  
                            GConf: ${enable_gconf}
                   gtk_doc enable: ${enable_gtk_doc}
-            gtksourveview enable: ${enable_gtksourceview}
+            gtksourceview enable: ${enable_gtksourceview}
 "
 
 dnl -- end of configure.in

@@ -1,3 +1,9 @@
+2004-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Fixed typo in output log
+
 2003-12-24  Geert Stappers <stappers@stappers.nl>
 
 	* configure.in
