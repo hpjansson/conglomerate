@@ -27,6 +27,18 @@
 
 G_BEGIN_DECLS
 
+
+struct CongFindDialogData
+{
+   gchar *last_find;
+   gchar *last_replace;
+   
+   gboolean  is_wrap_around;
+   gboolean  is_entire_word;
+   gboolean  is_match_case;
+   gboolean  is_search_backwards;
+};
+
 /**
  * cong_document_find:
  *

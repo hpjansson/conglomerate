@@ -168,18 +168,42 @@ contains_search_string (CongNodePtr node,
 /* Find start of next occurrence of string: */
 static gboolean
 find_next (const CongLocation *start_loc,
-	   const CongFindParameters *params,
-	   CongLocation *output)
+           CongFindDialogData *data,
+	   CongLocation *output, CongDocument *doc)
 {
 	const gchar *result;
 	g_return_val_if_fail (start_loc, FALSE);
-	g_return_val_if_fail (params, FALSE);
 	g_return_val_if_fail (output, FALSE);
 
 	/* Search in current node: */
-	result = cong_util_strstr_with_case (start_loc->node->content + start_loc->byte_offset,
-					     params->search_string,
-					     params->match_case);
+	if (data->is_search_backwards)
+	{
+		gchar *content_copy;
+		gchar *prev_char;
+		
+		prev_char = g_utf8_find_prev_char(start_loc->node->content, 
+		             start_loc->node->content +start_loc->byte_offset);
+                
+		if (!prev_char)
+		 {
+		   result = NULL;
+		 }
+		else
+		{
+        		content_copy = g_strndup (start_loc->node->content, prev_char - (gchar *)start_loc->node->content);
+			result = dlg_strstr (content_copy,
+					     data->last_find, data);
+		
+			if (result)
+				result = start_loc->node->content + (result - content_copy);
+			g_free (content_copy);
+		}
+	}
+	else
+	{
+		result = dlg_strstr (start_loc->node->content + start_loc->byte_offset,
+					     data->last_find, data);
+	}
 
 	if (result) {
 		cong_location_set_node_and_byte_offset (output, 
@@ -190,14 +214,19 @@ find_next (const CongLocation *start_loc,
 		/* Not found in this node; scan through other nodes: */
 		CongNodePtr next_node;
 
+                if (data->is_search_backwards)
+		{
+		next_node = cong_node_calc_prev_node_satisfying (start_loc->node, 
+								 contains_search_string, data);
+                }								 
+		else
+		{
 		next_node = cong_node_calc_next_node_satisfying (start_loc->node, 
-								 contains_search_string,
-								 (gpointer)params);
+								 contains_search_string, data);
+                }								 
 
 		if (next_node) {
-			result = cong_util_strstr_with_case (next_node->content, 
-							     params->search_string,
-							     params->match_case);
+			result = dlg_strstr (next_node->content, data->last_find, data);
 			g_assert (result);
 
 			cong_location_set_node_and_byte_offset (output, 
@@ -205,29 +234,257 @@ find_next (const CongLocation *start_loc,
 								result - (const gchar*)next_node->content);
 			return TRUE;
 		} else {
-			return FALSE;
+		     if (data->is_wrap_around)
+		     {
+		         if (data->is_search_backwards)
+				{
+					next_node = cong_node_calc_final_node_in_subtree_satisfying (cong_document_get_root(doc), 
+								 contains_search_string, data);
+		                }								 
+	    		else
+				{
+					next_node = cong_node_calc_first_node_in_subtree_satisfying (cong_document_get_root (doc), 
+								 contains_search_string, data);
+		                }								 
+
+			if (next_node) {
+				result = dlg_strstr (next_node->content, data->last_find, data);
+				g_assert (result);
+
+				cong_location_set_node_and_byte_offset (output, 
+									next_node, 
+									result - (const gchar*)next_node->content);
+				return TRUE;
+				}
+		     }
 		}
 	}
+  return FALSE;
 }
 
-/* Find dialog implementation details: */
+
 static void
-do_find_next (CongDocument *doc,
-	      const CongFindParameters *params)
+dlg_find_button_pressed (CongDialogReplace *dialog)
+{
+	const gchar* search_string = NULL;
+	gboolean found;
+	CongCursor *cursor;
+	CongLocation result;
+	CongFindDialogData *data;
+
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	
+	g_return_if_fail (search_string != NULL);
+
+	if (strlen (search_string) <= 0)
+		return;
+
+	setup_find_data_from_dialog(dialog);
+	
+	data = cong_document_get_find_dialog_data (dialog->doc);
+	
+	cursor = cong_document_get_cursor (dialog->doc);
+
+	if (find_next (&cursor->location, data, &result, dialog->doc)) {
+		CongLocation string_end;
+
+		CongCommand *cmd = cong_document_begin_command (dialog->doc,
+								_("Find"),
+								NULL);
+
+		cong_location_set_node_and_byte_offset (&string_end,
+							result.node,
+							result.byte_offset+strlen (data->last_find));
+
+		cong_command_add_selection_change (cmd,
+						   &result,
+						   &string_end);
+
+		cong_command_add_cursor_change (cmd,
+						&string_end);
+		
+		cong_document_end_command (dialog->doc,
+					   cmd);
+
+         	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							CONG_RESPONSE_REPLACE, TRUE);
+	} else {
+	  text_not_found_dialog(data->last_find, NULL);
+     	  gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							CONG_RESPONSE_REPLACE, FALSE);
+	}
+
+	
+	update_menu_items_sensitivity (dialog->doc);
+}
+
+
+
+static void
+replace_dlg_replace_button_pressed (CongDialogReplace *dialog)
+{
+	const gchar* search_string = NULL;
+	const gchar* replace_string = NULL;
+
+	CongFindDialogData *data;
+
+	CongSelection *selection;
+	CongCursor *cursor;
+
+	CongRange *ordered_range;
+	CongLocation string_start;
+	CongLocation result;
+
+	CongCommand *cmd;
+
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	replace_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	
+	g_return_if_fail (search_string != NULL);
+
+	if (strlen (search_string) <= 0)
+		return;
+
+	setup_find_data_from_dialog(dialog);
+	
+	data = cong_document_get_find_dialog_data (dialog->doc);
+	
+	cursor = cong_document_get_cursor (dialog->doc);
+
+	selection = cong_document_get_selection(dialog->doc);
+
+	ordered_range = cong_selection_get_ordered_range (selection);
+
+	if (!cong_location_exists(&cursor->location)) return;
+
+	if (!cong_range_can_be_cut (ordered_range)) {
+		g_warning ("Selection cannot be cut - UI should be insensitive");
+		return;
+	}
+
+	cong_document_begin_edit (dialog->doc);
+
+	
+	cmd = cong_document_begin_command (dialog->doc, _("Replace"),
+							NULL);
+
+	cong_command_add_delete_range (cmd, ordered_range);
+
+	cong_command_add_insert_text_at_cursor (cmd, data->last_replace);	
+	cong_document_end_command (dialog->doc, cmd);
+
+	cong_document_end_edit (dialog->doc);
+
+	if (find_next (&cursor->location, data, &result, dialog->doc)) {
+		CongLocation string_end;
+
+		CongCommand *cmd = cong_document_begin_command (dialog->doc,
+								_("Replace"),
+								NULL);
+
+		cong_location_set_node_and_byte_offset (&string_end,
+							result.node,
+							result.byte_offset+strlen (data->last_find));
+
+		cong_command_add_selection_change (cmd,
+						   &result,
+						   &string_end);
+
+		cong_command_add_cursor_change (cmd,
+						&string_end);
+		
+		cong_document_end_command (dialog->doc,
+					   cmd);
+      	       gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							CONG_RESPONSE_REPLACE, TRUE);
+	} else {
+	  text_not_found_dialog(data->last_find, NULL);
+	  gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							CONG_RESPONSE_REPLACE, FALSE);
+	}
+
+	
+	update_menu_items_sensitivity (dialog->doc);
+}
+
+
+static void
+replace_dlg_replace_all_button_pressed (CongDialogReplace *dialog)
+{
+	const gchar* search_string = NULL;
+	const gchar* replace_string = NULL;
+
+	CongCursor *cursor;
+	CongLocation result;
+	CongLocation from;
+	CongFindDialogData *data;
+	CongCommand *cmd;
+
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	replace_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	
+	g_return_if_fail (search_string != NULL);
+
+	if (strlen (search_string) <= 0)
+		return;
+
+	setup_find_data_from_dialog(dialog);
+	
+	data = cong_document_get_find_dialog_data (dialog->doc);
+	
+	cursor = cong_document_get_cursor (dialog->doc);
+
+	cong_document_begin_edit (dialog->doc);
+
+        cmd =  cong_document_begin_command (dialog->doc,
+                 			     _("Replace All"),
+					     NULL);
+	
+	from = cursor->location;
+
+	while (find_next (&from, data, &result, dialog->doc)) {
+		CongLocation string_end;
+		CongRange range;
+
+		cong_location_set_node_and_byte_offset (&string_end,
+							result.node,
+							result.byte_offset+strlen (data->last_find));
+                
+		range.loc0 = result;
+		range.loc1 = string_end;
+		
+		
+		cong_command_add_delete_range (cmd, &range);
+
+		cong_command_add_cursor_change (cmd, &result);
+
+		cong_command_add_insert_text_at_cursor (cmd, data->last_replace);
+						
+		from = result;		
+	} 
+	cong_document_end_command (dialog->doc, cmd);
+	cong_document_end_edit (dialog->doc);
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+					   CONG_RESPONSE_REPLACE, FALSE);
+ 	
+	
+	update_menu_items_sensitivity (dialog->doc);
+}
+
+void
+cong_document_find_next (CongDocument *doc)
 {
 	CongCursor *cursor;
 	CongLocation result;
+	CongFindDialogData *data;
 
-	g_assert (IS_CONG_DOCUMENT (doc));
+	data = cong_document_get_find_dialog_data (doc);
 
-	g_message ("find \"%s\" with match_case: %s", params->search_string, ( params->match_case?"TRUE":"FALSE"));
-
+	data->is_search_backwards = FALSE;
+	
 	cursor = cong_document_get_cursor (doc);
 
-	if (find_next (&cursor->location,
-		       params,
-		       &result)) {
-		/* "result" contains start of an occurrence of a search_string */
+	if (find_next (&cursor->location, data, &result, doc)) {
 		CongLocation string_end;
 
 		CongCommand *cmd = cong_document_begin_command (doc,
@@ -236,7 +493,7 @@ do_find_next (CongDocument *doc,
 
 		cong_location_set_node_and_byte_offset (&string_end,
 							result.node,
-							result.byte_offset+strlen (params->search_string));
+							result.byte_offset+strlen (data->last_find));
 
 		cong_command_add_selection_change (cmd,
 						   &result,
@@ -247,41 +504,55 @@ do_find_next (CongDocument *doc,
 		
 		cong_document_end_command (doc,
 					   cmd);
+
 	} else {
-		/* No matches found */
-		/* FIXME: provide a useful dialog to handle this case */
-		g_message ("no match found");
+	  text_not_found_dialog(data->last_find, NULL);
 	}
+
+	update_menu_items_sensitivity (doc);
+}
+
+void
+cong_document_find_prev (CongDocument *doc)
+{
+	CongCursor *cursor;
+	CongLocation result;
+	CongFindDialogData *data;
+
+	data = cong_document_get_find_dialog_data (doc);
+
+	data->is_search_backwards = TRUE;
+	
+	cursor = cong_document_get_cursor (doc);
+
+	if (find_next (&cursor->location, data, &result, doc)) {
+		CongLocation string_end;
+
+		CongCommand *cmd = cong_document_begin_command (doc,
+								_("Find"),
+								NULL);
+
+		cong_location_set_node_and_byte_offset (&string_end,
+							result.node,
+							result.byte_offset+strlen (data->last_find));
+
+		cong_command_add_selection_change (cmd,
+						   &result,
+						   &string_end);
+
+		cong_command_add_cursor_change (cmd,
+						&string_end);
+		
+		cong_document_end_command (doc,
+					   cmd);
+
+	} else {
+	  text_not_found_dialog(data->last_find, NULL);
+        }
+	update_menu_items_sensitivity (doc);
 }
 
 static void
-on_find_dialog_find (GtkWidget *widget,
-		     CongFindDialogDetails *dialog_details)
+update_menu_items_sensitivity (CongDocument *document)
 {
-	CongFindParameters params;
-
-	g_assert (dialog_details);
-
-	params.search_string = gtk_entry_get_text (GTK_ENTRY (glade_xml_get_widget(dialog_details->xml, "finddlg_combo-entry_find")));
-	params.match_case = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (glade_xml_get_widget(dialog_details->xml, "checkbutton_finddlg_matchcase")));
-
-	do_find_next (dialog_details->doc,
-		      &params);
 }
-
-static gboolean
-on_find_dialog_destroy (GtkWidget *widget,
-			CongFindDialogDetails *dialog_details)
-{
-	g_assert (dialog_details);
-
-	g_object_unref (G_OBJECT (dialog_details->doc));
-	g_object_unref (G_OBJECT (dialog_details->xml));
-
-	g_free (dialog_details);
-
-	return FALSE;
-
-}
-
-/* Replace dialog implementation details: */

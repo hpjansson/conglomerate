@@ -51,6 +51,8 @@ typedef struct CongCommandClass CongCommandClass;
 typedef struct CongCommandHistory CongCommandHistory;
 typedef struct CongCommandHistoryClass CongCommandHistoryClass;
 
+typedef struct CongFindDialogData CongFindDialogData;
+
 struct CongDocument
 {
 	GObject object;
@@ -173,6 +175,9 @@ cong_document_get_traversal (CongDocument *doc);
 CongTraversalNode*
 cong_document_get_root_traversal_node (CongDocument *doc);
 
+CongFindDialogData *
+cong_document_get_find_dialog_data  (CongDocument *doc);
+
 CongDispspec*
 cong_document_get_dispspec(CongDocument *doc);
 
@@ -226,6 +231,9 @@ cong_document_set_modified(CongDocument *doc, gboolean modified);
 
 void
 cong_document_set_primary_window(CongDocument *doc, CongPrimaryWindow *window);
+
+CongPrimaryWindow*
+cong_document_get_primary_window(CongDocument *doc);
 
 void 
 cong_document_set_url(CongDocument *doc, const gchar *url);

@@ -16,6 +16,7 @@
 #include "cong-vfs.h"
 #include "cong-app.h"
 #include "cong-document-traversal.h"
+#include "cong-edit-find-and-replace.h"
 
 /* Internal functions: */
 static void
@@ -135,6 +136,9 @@ struct CongDocumentDetails
 	/* Stats about the document: */
 	gboolean num_nodes_valid;	
 	guint num_nodes;
+	
+	/* Search data */
+	CongFindDialogData *find_data;
 };
 
 /* Exported function definitions: */
@@ -407,6 +411,8 @@ cong_document_construct (CongDocument *doc,
 	PRIVATE(doc)->history = cong_command_history_new();
 
 	PRIVATE(doc)->traversal = cong_document_traversal_new (doc);
+	
+	PRIVATE(doc)->find_data = g_new0 (CongFindDialogData, 1);
 
 	return doc;
 }
@@ -670,7 +676,14 @@ cong_document_save(CongDocument *doc,
 	g_return_if_fail(doc);
 	g_return_if_fail(filename);
 
+	if (!g_path_is_absolute (filename) && !(g_str_has_prefix (filename, "file:"))) {
+
+		gchar *absolute_path = g_strconcat (g_get_current_dir(), GNOME_VFS_URI_PATH_STR, filename, NULL);
+    		file_uri = gnome_vfs_uri_new (absolute_path);
+		g_free (absolute_path);
+	} else {
 	file_uri = gnome_vfs_uri_new(filename);
+	}
 	
 	vfs_result = cong_vfs_save_xml_to_uri (PRIVATE(doc)->xml_doc, 
 					       file_uri,	
@@ -1978,6 +1991,11 @@ cong_document_dispose (GObject *object)
 		PRIVATE(doc)->traversal = NULL;
 	}
 
+	if (PRIVATE(doc)->find_data) {
+		g_free (PRIVATE(doc)->find_data);
+		PRIVATE(doc)->traversal = NULL;
+	}
+
 	/* FIXME: the primary_window doesn't hold a ref to the document; should it?  
 	   Should we hold a ref to the primary_window? 
 	   Should the primary_window be a GObject subclass
@@ -2493,3 +2511,9 @@ cong_document_handle_set_url (CongDocument *doc,
 	}
 }
 
+CongFindDialogData *
+cong_document_get_find_dialog_data  (CongDocument *doc)
+{ 
+       g_return_if_fail(doc);
+       return PRIVATE (doc)->find_data;
+}

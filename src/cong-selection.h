@@ -77,6 +77,9 @@ cong_selection_set_logical_range (CongSelection *selection,
 				  const CongLocation *start_loc,
 				  const CongLocation *end_loc);
 
+gchar* 
+cong_selection_get_selected_text (CongDocument *doc);
+
 gboolean
 cong_selection_is_node (CongSelection *selection,
 			CongNodePtr node);

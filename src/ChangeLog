@@ -1,3 +1,8 @@
+2004-04-26  Geert Stappers <stappers@stappers.nl>
+
+	* work on bugzilla #108527, part one
+	(You could have now a non building source ( work in progress ))
+
 2004-04-17  David Hoover <karma@deadmoose.com>
 
 	Changes to LOTS of files, adding gtk-doc style comments to most

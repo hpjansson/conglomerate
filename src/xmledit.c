@@ -74,45 +74,25 @@ cong_document_cut_selection(CongDocument *doc)
 void 
 cong_document_copy_selection(CongDocument *doc)
 {
-	CongSelection *selection;
-	CongCursor *curs;
 
-	g_return_if_fail(doc);
+	gchar *source;
 
-	selection = cong_document_get_selection(doc);
-	curs = cong_document_get_cursor(doc);
-	
-	if (!cong_location_exists(&curs->location)) return;
-	
-	if (!(cong_range_exists (cong_selection_get_logical_range (selection)) &&
-	      cong_range_is_valid (cong_selection_get_logical_range (selection)))) { 
-		return;
-	}
-
-	if (cong_range_is_empty (cong_selection_get_logical_range (selection))) {
-		return;
-	}
-
-	if (!cong_range_can_be_copied (cong_selection_get_ordered_range (selection))) {
-		g_warning ("Selection cannot be copied - UI should be insensitive");
-		return;
-	}
-
-	/* GREP FOR MVC */
-	cong_document_begin_edit (doc);
-
-	{
-		gchar *source = cong_range_generate_source (cong_selection_get_ordered_range (selection));
+	source = cong_selection_get_selected_text (doc);
 		
+	if (source)
+	{
+		/* GREP FOR MVC */
+		cong_document_begin_edit (doc);
+    
 		cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
 							  GDK_SELECTION_CLIPBOARD,
 							  source,
 							  doc);
-
+		cong_document_end_edit (doc);
+	
 		g_free (source);
 	}
 
-	cong_document_end_edit (doc);
 }
 
 /**
