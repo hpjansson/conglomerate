@@ -26,6 +26,7 @@
 #include "global.h"
 #include "cong-util.h"
 #include "cong-app.h"
+#include "cong-document.h"
 
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
@@ -301,5 +302,28 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
 }
 #endif
 
+void
+cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
+					       CongNodePtr node)
+{
+	CongNodePtr cursor_node;
+
+	g_return_if_fail (doc);
+	g_return_if_fail (node);
+
+	cursor_node = cong_node_get_first_text_node_descendant (node);
+	
+	if (cursor_node) {
+		CongCursor *cursor = cong_document_get_cursor (doc);
+		cong_document_begin_edit (doc);
+
+		cong_location_set_to_start_of_node (&cursor->location,
+						    cursor_node);
+
+		cong_document_on_cursor_change (doc);
+
+		cong_document_end_edit (doc);		
+	}
+}
 
 

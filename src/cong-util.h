@@ -107,6 +107,10 @@ cong_util_print_xslfo (GtkWindow *toplevel_window,
     }								\
 }
 
+void
+cong_util_set_cursor_to_first_text_descendant (CongDocument *doc,
+					       CongNodePtr node);
+
 G_END_DECLS
 
 #endif

@@ -46,6 +46,9 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	/*  add any necessary sub elements it needs */
 	xml_add_required_children(doc, new_node);
 
+	cong_util_set_cursor_to_first_text_descendant (doc, 
+						       new_node);
+
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ", doc);
 	cong_document_node_add_after(doc, text_node, new_node);
@@ -88,6 +91,9 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 
 	/*  add any necessary sub elements it needs */
 	xml_add_required_children(doc, new_node);
+
+	cong_util_set_cursor_to_first_text_descendant (doc, 
+						       new_node);
 
 	/* Text node after new element */
 	text_node = cong_node_new_text(" ", doc);

@@ -7,7 +7,8 @@
 #include "cong-dispspec.h"
 #include "cong-selection.h"
 #include <libgnome/gnome-macros.h>
-#include "cong-eel.h"
+#include "cong-util.h"
+#include "cong-primary-window.h"
 
 #include "cong-marshal.h"
 
@@ -337,6 +338,9 @@ cong_document_construct (CongDocument *doc,
 	PRIVATE(doc)->curs.w = 0;
 #endif
 
+	cong_util_set_cursor_to_first_text_descendant (doc,
+						       (CongNodePtr)PRIVATE(doc)->xml_doc);
+
 	return doc;
 }
 
@@ -346,8 +350,6 @@ cong_document_new_from_xmldoc (xmlDocPtr xml_doc,
 			       CongDispspec *ds, 
 			       const gchar *url)
 {
-	CongDocument *doc;
-
 	g_return_val_if_fail(xml_doc!=NULL, NULL);
 #if 0
 	g_return_val_if_fail(cong_xml_selftest_doc(xml_doc, NULL), NULL);
@@ -719,8 +721,6 @@ void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodeP
 
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling)
 {
-	GList *iter;
-
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
@@ -739,8 +739,6 @@ void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNode
 
 void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNodePtr adoptive_parent)
 {
-	GList *iter;
-
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 
@@ -759,8 +757,6 @@ void cong_document_node_set_parent(CongDocument *doc, CongNodePtr node, CongNode
 
 void cong_document_node_set_text(CongDocument *doc, CongNodePtr node, const xmlChar *new_content)
 {
-	GList *iter;
-
 	g_return_if_fail(doc);
 	g_return_if_fail(node);
 	g_return_if_fail(new_content);
@@ -947,7 +943,6 @@ cong_document_get_language_for_node(CongDocument *doc,
 void
 cong_document_delete_selection (CongDocument *doc)
 {
-	CongNodePtr t;
 	CongSelection *selection;
 	CongRange *range;
 
@@ -1065,8 +1060,6 @@ static gboolean merge_adjacent_text_callback(CongDocument *doc, CongNodePtr node
 	if (node->prev) {
 		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
 			if (cong_node_type(node->prev)==CONG_NODE_TYPE_TEXT) {
-				CongCursor *cursor = cong_document_get_cursor (doc);				
-
 				/* Merge preceding node's text into this one, then delete it: */
 				gchar *new_text;
 

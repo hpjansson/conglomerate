@@ -928,6 +928,27 @@ CongNodePtr cong_node_get_child_by_name (CongNodePtr node,
 	return NULL;
 }
 
+CongNodePtr 
+cong_node_get_first_text_node_descendant (CongNodePtr node)
+{
+	g_return_val_if_fail (node, NULL);
+
+	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
+		return node;
+	} else {
+		CongNodePtr iter;
+
+		for (iter = node->children; iter; iter=iter->next) {
+			CongNodePtr iter_result = cong_node_get_first_text_node_descendant (iter);
+
+			if (iter_result) {
+				return iter_result;
+			}
+		}
+
+		return NULL;
+	}
+}
 
 /* Other stuff: */
 const gchar *xml_frag_data_nice(CongNodePtr x)

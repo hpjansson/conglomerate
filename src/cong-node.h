@@ -207,4 +207,7 @@ void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name);
 /* Utilities: */
 CongNodePtr cong_node_get_child_by_name (CongNodePtr node, const gchar *xmlns, const gchar *tagname);
 
+CongNodePtr 
+cong_node_get_first_text_node_descendant (CongNodePtr node);
+
 #endif
