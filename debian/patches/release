@@ -16,7 +16,8 @@ function regular_release_changes
 {
  mv debian/changelog debian/changelog.orig
  sed -e '1s/UNRELEASED/unstable/' \
-     -e '3s/expecting //' debian/changelog.orig > debian/changelog
+     -e '3s/expecting //' \
+     debian/changelog.orig > debian/changelog
 
  echo Don\'t forgot to update the NEWS file.
 }

@@ -7,7 +7,8 @@
 
  mv debian/changelog debian/changelog.orig
  sed -e '1s/UNRELEASED/sarge/' \
-     -e '3s/expecting //' debian/changelog.orig > debian/changelog
+     -e '3s/expecting //' \
+     debian/changelog.orig > debian/changelog
 
 
  sed -ie 's/debian/sarge/' debian/patches/package_version.dpatch
