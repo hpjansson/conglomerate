@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-18 11:03+0200\n"
+"POT-Creation-Date: 2004-08-19 11:03+0200\n"
 "PO-Revision-Date: 2004-07-10 11:47+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -145,9 +145,10 @@ msgstr "_Shoqëroi këtë DTD"
 msgid "*"
 msgstr "*"
 
+#. GRUT modified this item
 #: glade/cong-find-replace.glade.h:2
 msgid "Find Next"
-msgstr "Gjej pasardhësin"
+msgstr "Gjej në vazhdim"
 
 #: glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
@@ -1048,7 +1049,6 @@ msgid ""
 "you permission."
 msgstr ""
 
-#. GRUT modified this item
 #. FIXME:  capitalisation issues
 #: src/cong-error-file-save.c:281
 #, c-format
@@ -1367,18 +1367,15 @@ msgstr ""
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr ""
 
-#. GRUT modified this item
 #. Menus:
 #: src/cong-menus.c:1471
 msgid "_File"
 msgstr "_File"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1472
 msgid "_Edit"
 msgstr "_Ndrysho"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1477
 msgid "_Help"
 msgstr "_Ndihmë"
@@ -1396,60 +1393,49 @@ msgstr ""
 msgid "Remove span tag"
 msgstr ""
 
-#. GRUT modified this item
 #. Actions found in File menu:
 #: src/cong-menus.c:1485
 msgid "_New..."
 msgstr "_I Ri..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1486
 msgid "_Open..."
 msgstr "_Hap..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1487
 msgid "_Import..."
 msgstr "_Importim..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1488
 msgid "_Close"
 msgstr "_Mbyll"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1489
 msgid "_Quit"
 msgstr "_Dalja"
 
-#. GRUT modified this item
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1493
 msgid "Prefere_nces"
 msgstr "Preferi_met"
 
-#. GRUT modified this item
 #. Actions found in Help menu:
 #: src/cong-menus.c:1506
 msgid "_Contents"
 msgstr "_Përmbajtja"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1507
 msgid "_Homepage"
 msgstr "_Faqja zyrtare"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1508
 msgid "_About"
 msgstr "_Informacione"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1514
 msgid "_Tools"
 msgstr "_Instrumentë"
 
-#. GRUT modified this item
 #. Actions found in File menu:
 #: src/cong-menus.c:1518
 msgid "_Save"
@@ -1465,73 +1451,59 @@ msgstr "Ruaj XML si..."
 msgid "Sa_ve a Copy..."
 msgstr "/File/Ru_aj një Kopje..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1522
 msgid "Print Previe_w..."
 msgstr "Pamja e _parë e printimit..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1523
 msgid "_Print"
 msgstr "_Printo"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1526
 msgid "_Revert"
 msgstr "_Kthe mbrapa"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1528
 msgid "_Export..."
 msgstr "_Eksportim..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1529
 msgid "Proper_ties"
 msgstr "Pronësi_të"
 
-#. GRUT modified this item
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1533 src/cong-menus.c:1755
 msgid "_Undo"
 msgstr "_Anullo"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1534 src/cong-menus.c:1765
 msgid "_Redo"
 msgstr "_Përsërit"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1535
 msgid "Cu_t"
 msgstr "Pre_je"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1536 src/popup.c:752 src/popup.c:1048
 msgid "_Copy"
 msgstr "_Kopjo"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1537 src/popup.c:766
 msgid "_Paste"
 msgstr "_Ngjite"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1538
 msgid "_Find..."
 msgstr "_Gjej..."
 
-#. GRUT modified this item
 #: src/cong-menus.c:1539
 msgid "Find Ne_xt"
 msgstr "Gjej në va_zhdim"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1540
 msgid "Find Pre_vious"
 msgstr "Gjej para_ardhësen"
 
-#. GRUT modified this item
 #: src/cong-menus.c:1541
 msgid "R_eplace..."
 msgstr "Z_ëvendëso..."
@@ -1539,22 +1511,24 @@ msgstr "Z_ëvendëso..."
 #. GRUT modified this item
 #: src/cong-menus.c:1543
 msgid "_Insert..."
-msgstr "_Shtim..."
+msgstr "_Ndërfut..."
 
 #: src/cong-menus.c:1544
 #, fuzzy
 msgid "View _Source"
 msgstr "/Ndrysho/Shiko _Burimin"
 
+#. GRUT modified this item
 #: src/cong-menus.c:1751
-#, fuzzy, c-format
+#, c-format
 msgid "_Undo: %s"
-msgstr "Anullo"
+msgstr "_Anullo: %s"
 
+#. GRUT modified this item
 #: src/cong-menus.c:1761
-#, fuzzy, c-format
+#, c-format
 msgid "_Redo: %s"
-msgstr "Përsërite"
+msgstr "_Përsërit: %s"
 
 #: src/cong-node-properties-dialog.c:254
 msgid "XPath"
@@ -1717,7 +1691,6 @@ msgstr ""
 msgid "XML Files"
 msgstr "Files XML"
 
-#. GRUT modified this item
 #: src/file.c:118
 msgid "All Files"
 msgstr "Të gjithë files"
@@ -2092,7 +2065,6 @@ msgstr ""
 msgid "Unicode Characters 0x%04X-0x%04X"
 msgstr ""
 
-#. GRUT modified this item
 #: src/plugin-tests.c:359
 msgid "Unicode Character Reference"
 msgstr "Riferimenti i simbolit Unicode"
@@ -2153,7 +2125,6 @@ msgstr ""
 msgid "Click on the \"Details\" button for more information"
 msgstr ""
 
-#. GRUT modified this item
 #: src/plugin-website.c:480
 msgid "_Details"
 msgstr "_Detaje"
@@ -2200,12 +2171,10 @@ msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 
-#. GRUT modified this item
 #: src/popup.c:705 src/popup.c:1022
 msgid "_Properties"
 msgstr "_Pronësitë"
 
-#. GRUT modified this item
 #: src/popup.c:739 src/popup.c:1039
 msgid "_Cut"
 msgstr "_Preje"
