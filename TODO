@@ -90,8 +90,6 @@ OTHER JOBS AFTER RELEASE:
 ANYTIME JOBS
 - remove of Makefile in the directories examples, documentation and deb
 - use the file AUTHORS to generate authors in the About box
-- RH8 says ../libtool ( note the double dots ) and has problems
- check and see if working system say ./libtool
 
 Any other ideas?
  tell them to the developers mailinglist
