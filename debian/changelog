@@ -1,4 +1,4 @@
-conglomerate (0.7.12-2.3) UNRELEASED; urgency=low
+conglomerate (0.7.12-2.5) UNRELEASED; urgency=low
 
   * expecting new upstream version
    - It has a new logo, that affects conglomeate_icons.xpm.
