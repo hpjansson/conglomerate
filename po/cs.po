@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-28 14:21+0200\n"
-"PO-Revision-Date: 2004-06-28 16:42+0200\n"
+"POT-Creation-Date: 2004-07-20 14:11+0200\n"
+"PO-Revision-Date: 2004-07-20 17:25+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "Základní"
 msgid "Description"
 msgstr "Popis"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:934
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
 msgid "Document Type Declaration"
 msgstr "Deklarace typu dokumentu"
 
@@ -148,7 +148,8 @@ msgstr "Hlavička XML"
 msgid "_Associate this DTD"
 msgstr "_Přiřadit tuto DTD"
 
-#: glade/cong-find-replace.glade.h:1 glade/plugin-arbitrary.glade.h:1
+#: glade/cong-find-replace.glade.h:1 glade/custom-element.glade.h:1
+#: glade/plugin-arbitrary.glade.h:1
 msgid "*"
 msgstr "*"
 
@@ -196,6 +197,30 @@ msgstr "Nastavení Conglomerate"
 #: glade/cong-preferences.glade.h:2
 msgid "Document Types"
 msgstr "Typy dokumentů"
+
+#: glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "Element adhoc"
+
+#: glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "Název elementu"
+
+#: glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "Typ elementu"
+
+#: glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "Je mi to jedno"
+
+#: glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Rozsah"
+
+#: glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "Strukturální"
 
 #: glade/docbook-common-properties.glade.h:1
 msgid ""
@@ -338,7 +363,7 @@ msgstr "Parametry vytváření"
 msgid "Depth"
 msgstr "Hloubka"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:922
+#: glade/plugin-random.glade.h:3 src/cong-document.c:984
 msgid "Document Type"
 msgstr "Typ dokumentu"
 
@@ -346,19 +371,19 @@ msgstr "Typ dokumentu"
 msgid "string_selection_dialog"
 msgstr "dialog_výběru_řetězce"
 
-#: src/cong-app.c:974
+#: src/cong-app.c:1001
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: src/cong-app.c:1103
+#: src/cong-app.c:1137
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate nemohl načíst žádný soubor xds"
 
-#: src/cong-app.c:1105
+#: src/cong-app.c:1139
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 
-#: src/cong-app.c:1107
+#: src/cong-app.c:1141
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -537,13 +562,13 @@ msgstr "Změny za posledních %li minut budou zahozeny."
 msgid "Changes from the past minute will be discarded."
 msgstr "Změny za poslední minutu budou zahozeny."
 
-#: src/cong-dispspec-element.c:724 src/cong-dispspec-element.c:760
+#: src/cong-dispspec-element.c:742 src/cong-dispspec-element.c:778
 #: src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(xpath selhalo)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:814
+#: src/cong-dispspec-element.c:832
 msgid "<untitled>"
 msgstr "<nepojmenovaný>"
 
@@ -563,88 +588,88 @@ msgstr "Typ souboru"
 msgid "Coverage"
 msgstr "Pokrytí"
 
-#: src/cong-dispspec.c:473
+#: src/cong-dispspec.c:501
 msgid "unnamed"
 msgstr "nepojmenovaný"
 
-#: src/cong-dispspec.c:493
+#: src/cong-dispspec.c:521
 msgid "No description available."
 msgstr "Popis není k dispozici"
 
-#: src/cong-document.c:886
+#: src/cong-document.c:948
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Atribut \"%s\""
 
-#: src/cong-document.c:893
+#: src/cong-document.c:955
 #, c-format
 msgid "Text \"%s\""
 msgstr "Text \"%s\""
 
-#: src/cong-document.c:899
+#: src/cong-document.c:961
 msgid "Character Data"
 msgstr "Znaková data"
 
-#: src/cong-document.c:902
+#: src/cong-document.c:964
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Odkaz na entitu \"%s\""
 
-#: src/cong-document.c:905
+#: src/cong-document.c:967
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entita \"%s\""
 
-#: src/cong-document.c:908
+#: src/cong-document.c:970
 msgid "XML Processing Instruction"
 msgstr "Instrukce zpracování XML"
 
-#: src/cong-document.c:913
+#: src/cong-document.c:975
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Komentář \"%s\""
 
-#: src/cong-document.c:919
+#: src/cong-document.c:981
 msgid "Document"
 msgstr "Dokument"
 
-#: src/cong-document.c:925
+#: src/cong-document.c:987
 msgid "Document Fragment"
 msgstr "Fragment dokumentu"
 
-#: src/cong-document.c:928
+#: src/cong-document.c:990
 msgid "Notation"
 msgstr "Zápis"
 
-#: src/cong-document.c:931
+#: src/cong-document.c:993
 msgid "HTML Document"
 msgstr "Dokument HTML"
 
-#: src/cong-document.c:937
+#: src/cong-document.c:999
 msgid "Element Declaration"
 msgstr "Deklarace elementu"
 
-#: src/cong-document.c:940
+#: src/cong-document.c:1002
 msgid "Attribute Declaration"
 msgstr "Deklarace atributu"
 
-#: src/cong-document.c:943
+#: src/cong-document.c:1005
 msgid "Entity Declaration"
 msgstr "Deklarace entity"
 
-#: src/cong-document.c:946
+#: src/cong-document.c:1008
 msgid "Namespace Declaration"
 msgstr "Deklarace prostoru jmen"
 
-#: src/cong-document.c:949
+#: src/cong-document.c:1011
 msgid "XInclude Start"
 msgstr "Začátek XInclude"
 
-#: src/cong-document.c:952
+#: src/cong-document.c:1014
 msgid "XInclude End"
 msgstr "Konec XInclude"
 
-#: src/cong-document.c:1954
+#: src/cong-document.c:2130
 #, c-format
 msgid "Select %s"
 msgstr "Vybrat %s"
@@ -671,15 +696,15 @@ msgstr "Nahradit _vše"
 msgid "Find"
 msgstr "Hledat"
 
-#: src/cong-editor-node-text.c:971
+#: src/cong-editor-node-text.c:975
 msgid "Select word"
 msgstr "Vybrat slovo"
 
-#: src/cong-editor-node-text.c:996
+#: src/cong-editor-node-text.c:1000
 msgid "Move cursor"
 msgstr "Přesunout kurzor"
 
-#: src/cong-editor-node-text.c:1080
+#: src/cong-editor-node-text.c:1084
 msgid "Drag out selection"
 msgstr "Vytáhnout výběr"
 
@@ -1331,19 +1356,19 @@ msgstr "Žádná externí podmnožina"
 msgid "_Add a DTD"
 msgstr "_Přidat DTD"
 
-#: src/cong-file-properties.c:273 src/cong-file-properties.c:275
+#: src/cong-file-properties.c:275 src/cong-file-properties.c:277
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: src/cong-file-properties.c:286
+#: src/cong-file-properties.c:288
 msgid "Unspecified"
 msgstr "Neurčeno"
 
-#: src/cong-file-properties.c:361
+#: src/cong-file-properties.c:363
 msgid "Remove DTD"
 msgstr "Odstranit DTD"
 
-#: src/cong-file-properties.c:378 src/cong-util.c:1643
+#: src/cong-file-properties.c:380 src/cong-util.c:1643
 msgid "Associate with DTD"
 msgstr "Přiřadit DTD"
 
@@ -1359,11 +1384,11 @@ msgstr "Sloučit tagy"
 msgid "Delete character"
 msgstr "Odstranit znak"
 
-#: src/cong-location.c:1089
+#: src/cong-location.c:1057
 msgid "Calculating previous page"
 msgstr "Počítám předchozí stránku"
 
-#: src/cong-location.c:1112
+#: src/cong-location.c:1080
 msgid "Calculating next page"
 msgstr "Počítám následující stránku"
 
@@ -1691,7 +1716,7 @@ msgstr "Model obsahu pro elementy <tt>%s</tt>"
 msgid "DTD"
 msgstr "DTD"
 
-#: src/cong-overview-view.c:205
+#: src/cong-overview-view.c:203
 msgid "Unknown data"
 msgstr "Neznámá data"
 
@@ -1763,7 +1788,7 @@ msgstr "Zpět"
 msgid "Redo"
 msgstr "Znovu"
 
-#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:219
+#: src/cong-primary-window.c:500 src/cong-primary-window.c:501 src/tree.c:306
 #: src/xmledit.c:51
 msgid "Cut"
 msgstr "Vyjmout"
@@ -1798,11 +1823,11 @@ msgstr "Vítejte ve velice opožděném editoru Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (upraven) - %s"
 
-#: src/cong-util.c:366 src/plugin-docbook.c:1201
+#: src/cong-util.c:367 src/plugin-docbook.c:1201
 msgid "Printing XSL Formatting Objects"
 msgstr "Tisk formátovacích objektů XSL"
 
-#: src/cong-util.c:410
+#: src/cong-util.c:411
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Toto bude časem výsledek cong_util_print_xslfo"
 
@@ -1823,7 +1848,7 @@ msgstr "Zvolte DTD"
 msgid "Split <%s> element"
 msgstr "Rozdělit element <%s>"
 
-#: src/file.c:100
+#: src/file.c:104
 msgid "XML Files"
 msgstr "Soubory XML"
 
@@ -2294,83 +2319,83 @@ msgstr "Element šablony XSL"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Element pro zobrazení pravidel šablon ve stylesheetu XSL"
 
-#: src/popup.c:516
+#: src/popup.c:522
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Použít tag span: %s"
 
-#: src/popup.c:616
+#: src/popup.c:622
 msgid "Remove Span Tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:661
+#: src/popup.c:667
 msgid "Convert to a comment"
 msgstr "Převést na komentář"
 
-#: src/popup.c:678 src/tree.c:421
+#: src/popup.c:684 src/tree.c:508
 msgid "Uncomment"
 msgstr "Odkomentovat"
 
-#: src/popup.c:679
+#: src/popup.c:685
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr "Převést komentář obsahující zdrojový kód v XML na tento kód"
 
-#: src/popup.c:798
+#: src/popup.c:804
 msgid "Remove span tag"
 msgstr "Odstranit tag span"
 
-#: src/popup.c:1029 src/popup.c:1045
+#: src/popup.c:1032
 msgid "Other XML element..."
 msgstr "Jiný element XML..."
 
-#: src/popup.c:1265
+#: src/popup.c:1248
 msgid "Delete this item"
 msgstr "Odstranit tuto položku"
 
-#: src/popup.c:1275
+#: src/popup.c:1258
 msgid "Add text node after"
 msgstr "Přidat uzel textu za"
 
-#: src/popup.c:1283
+#: src/popup.c:1266
 msgid "Add text node before"
 msgstr "Přidat uzel textu před"
 
-#: src/popup.c:1294
+#: src/popup.c:1277
 msgid "Set the text"
 msgstr "Nastavit text"
 
-#: src/popup.c:1330
+#: src/popup.c:1313
 msgid "Paste into"
 msgstr "Vložit do"
 
-#: src/popup.c:1339
+#: src/popup.c:1322
 msgid "Paste before"
 msgstr "Vložit před"
 
-#: src/popup.c:1348
+#: src/popup.c:1331
 msgid "Paste after"
 msgstr "Vložit za"
 
-#: src/popup.c:1367
+#: src/popup.c:1350
 msgid "New sub-element"
 msgstr "Nový podelement"
 
-#: src/popup.c:1381
+#: src/popup.c:1364
 msgid "New sibling"
 msgstr "Nový sourozenec"
 
-#: src/tree.c:50
+#: src/tree.c:102 src/tree.c:134
 #, c-format
 msgid "Insert sibling: %s"
 msgstr "Vložit sourozence: %s"
 
-#: src/tree.c:111
+#: src/tree.c:184 src/tree.c:212
 #, c-format
 msgid "Insert child: %s"
 msgstr "Vložit potomka: %s"
 
-#: src/tree.c:371
+#: src/tree.c:458
 msgid "Convert to comment"
 msgstr "Převést na komentář"
 
