@@ -10,7 +10,7 @@
 /*
   This file isolates the API change-over between gtk_file_selection and gtk_file_chooser.
  */
-#if 0
+#if 1
 /* Implementation in terms of gtk_file_chooser: */
 gchar*
 cong_get_file_name (const gchar *title, 

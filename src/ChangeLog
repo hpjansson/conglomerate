@@ -1,3 +1,8 @@
+2004-06-20  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* file.c (cong_get_file_name): Use GtkFileChooser rather than GtkFileSelector; we now
+	require GTK 2.4 in configure.in
+
 2004-06-19  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-menus.c: Minor menu cleanups
