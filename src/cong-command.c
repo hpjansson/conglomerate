@@ -109,10 +109,15 @@ void
 cong_command_undo (CongCommand *command)
 {
 	GList *iter;
+	CongDocument* doc;
 
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
 	g_message ("cong_command_undo(\"%s\")", cong_command_get_description(command));
+
+	doc = cong_command_get_document (command);
+
+	cong_document_begin_edit (doc);
 
 	/* Start at end of modification list, iterate backwards up to front: */
 	for (iter = g_list_last(PRIVATE(command)->list_of_modification); iter; iter=iter->prev) {
@@ -123,16 +128,23 @@ cong_command_undo (CongCommand *command)
 				      undo, 
 				      (modification));
 	}
+
+	cong_document_end_edit (doc);
 }
 
 void
 cong_command_redo (CongCommand *command)
 {
 	GList *iter;
+	CongDocument* doc;
 
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
 	g_message ("cong_command_redo(\"%s\")", cong_command_get_description(command));
+
+	doc = cong_command_get_document (command);
+
+	cong_document_begin_edit (doc);
 
 	/* Start at front of modification list: */
 	for (iter = PRIVATE(command)->list_of_modification; iter; iter=iter->next) {
@@ -143,6 +155,8 @@ cong_command_redo (CongCommand *command)
 				      redo,
 				      (modification));
 	}
+
+	cong_document_end_edit (doc);
 }
 
 void

@@ -1,3 +1,9 @@
+2003-09-30  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-command.c
+
+	Undo/redo of a command now wrapped with begin/end_edit
+
 2003-09-29  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-attribute-wrapper.c, cong-node-properties-dialog.c
