@@ -1,0 +1,27 @@
+# Conglomerate translation to Russian.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Conglomerate\n"
+"POT-Creation-Date: 2002-11-25 07:46+0300\n"
+"PO-Revision-Date: 2002-11-25 07:32+0300\n"
+"Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/conge.desktop.in.h:1
+msgid "Edit xml files"
+msgstr "Редактировать файлы в формате XML"
+
+#: data/conge.desktop.in.h:2 src/main.c:881
+msgid "XML Editor"
+msgstr "Редактор файлов формата XML"
+
+#~ msgid "Conglomerate"
+#~ msgstr "Conglomerate"

@@ -1,0 +1,5 @@
+2002-11-25  Dmitry G. Mastrukov  <dmitry@taurussoft.org>
+
+	* ru.po: Added Russian translation
+	* from Russian team <gnome-cyr@gnome.org>.
+	* FOTFILE.in: Added missing files.
