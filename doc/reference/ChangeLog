@@ -1,3 +1,12 @@
+2003-10-06  Robert Varga
+
+	* Makefile.am
+	Generate conglomerate-docs.sgml,
+	cleaner definition of source files
+	and a hack that generates conglomerate.types
+
+	* conglomerate.types.bkp is dropped
+
 2003-10-02  Geert Stappers <stappers@stappers.nl>
 
 	* README

@@ -46,8 +46,8 @@ extra_files = version.xml.in
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
 # contains GtkObjects/GObjects and you want to document signals and properties.
-GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS)
-GTKDOC_LIBS = $(CONGLOMERATE_LIBS)
+GTKDOC_CFLAGS = $(CONGLOMERATE_CFLAGS) -I$(top_srcdir)/src
+GTKDOC_LIBS = $(CONGLOMERATE_LIBS) $(filter-out $(top_srcdir)/src/main.o,$(wildcard $(top_srcdir)/src/*.o))
 
 GTKDOC_CC=$(LIBTOOL) --mode=compile $(CC)
 GTKDOC_LD=$(LIBTOOL) --mode=link $(CC)
@@ -90,6 +90,33 @@ all-local: html-build.stamp
 #### scan ####
 
 scan-build.stamp: $(HFILE_GLOB)
+	@echo '*** Building conglomerate.types ***'
+	@echo '#include "global.h"' > conglomerate.types
+	for i in $(top_srcdir)/src/*.h ; do \
+	    if [[  $$i != "$(top_srcdir)/src/cong-editor-widget3-impl.h" && $$i != "$(top_srcdir)/src/global.h" ]] ; then \
+		echo "#include \"`basename $$i`\"" >> conglomerate.types ; \
+	    fi ; \
+	done
+	echo >> conglomerate.types
+# here we have a hack that outputs cong_editor_widget3_get_type istead of cong_editor_widget_get_type
+# (found in cong-editor-widget.h)
+# also, we ignore cong-editor-widget3-impl.h and global.h
+	for i in $(top_srcdir)/src/*.h ; do \
+	    if [[ $$i != "$(top_srcdir)/src/cong-editor-widget3-impl.h" && $$i != "$(top_srcdir)/src/global.h" ]] ; \
+	    then \
+		A=`grep 'get_type' $$i | grep -v '#define'` ; \
+		if [[ $$A != "" ]] ; \
+		then \
+		    B=`echo $$A | sed '{s/\ .void.;//g}'` ; \
+		    if [[ $$B = "cong_editor_widget_get_type" ]] ; \
+		    then \
+			echo 'cong_editor_widget3_get_type' >> conglomerate.types ; \
+		    else \
+			echo $$B >> conglomerate.types ; \
+		    fi ; \
+		fi ; \
+	    fi ; \
+	done
 	@echo '*** Scanning header files ***'
 	if grep -l '^..*$$' $(srcdir)/$(DOC_MODULE).types > /dev/null ; then \
 	    CC="$(GTKDOC_CC)" LD="$(GTKDOC_LD)" CFLAGS="$(GTKDOC_CFLAGS)" LDFLAGS="$(GTKDOC_LIBS)" gtkdoc-scangobj $(SCANOBJ_OPTIONS) --module=$(DOC_MODULE) --output-dir=$(srcdir) ;\
@@ -137,8 +164,6 @@ html-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files)
 	@echo '-- Fixing Crossreferences' 
 	cd $(srcdir) && gtkdoc-fixxref --module-dir=html --html-dir=$(HTML_DIR) $(FIXXREF_OPTIONS)
 	touch html-build.stamp
-	test -d $(srcdir)/html/figures || mkdir $(srcdir)/html/figures
-	cp ../C/figures/*.png $(srcdir)/html/figures/
 endif
 
 ##############
@@ -178,12 +203,10 @@ dist-hook: dist-check-gtkdoc dist-hook-local
 	mkdir $(distdir)/tmpl
 	mkdir $(distdir)/xml
 	mkdir $(distdir)/html
-	mkdir $(distdir)/html/figures
 	-cp $(srcdir)/tmpl/*.sgml $(distdir)/tmpl
 	-cp $(srcdir)/sgml/*.xml $(distdir)/xml
 	-cp $(srcdir)/html/index.sgml $(distdir)/html
 	-cp $(srcdir)/html/*.html $(srcdir)/html/*.css $(distdir)/html
-	-cp $(srcdir)/html/figures
 
 	images=$(HTML_IMAGES) ;    	      \
 	for i in $$images ; do		      \
