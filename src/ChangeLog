@@ -1,3 +1,10 @@
+2004-07-22  Geert Stappers  <stappers@stappers.nl>
+
+	* plugin-docbook.c:
+	
+	Give the initial article a section, so the next sections
+	can be inserted. This is for bugzilla bugreport #148117.
+
 2004-07-18  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-util.c: 

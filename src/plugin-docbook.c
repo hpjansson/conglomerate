@@ -180,6 +180,7 @@ make_article(const xmlChar *title)
 {
 	xmlDocPtr xml_doc;
 	xmlNodePtr root_node;
+	xmlNodePtr section_node;
 
 	/* Build up the document and its content: */
 	xml_doc = xmlNewDoc("1.0");
@@ -201,7 +202,13 @@ make_article(const xmlChar *title)
 				  title)
 		    );
 
-	xmlAddChild(root_node, 
+	section_node = xmlNewDocNode(xml_doc,
+				     NULL,
+				     "section",
+				     "");
+	xmlAddChild(root_node, section_node);
+
+	xmlAddChild(section_node, 
 		    xmlNewDocNode(xml_doc,
 				  NULL,
 				  "para",
