@@ -8,7 +8,7 @@ Standards-Version: 3.6.1
 
 Package: conglomerate
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: gconf2, ${shlibs:Depends}, ${misc:Depends}
 Recommends: xml-core
 Suggests: docbook-xml, docbook-xsl
 Description: userfriendly XML editor

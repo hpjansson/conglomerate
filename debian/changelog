@@ -1,15 +1,16 @@
-conglomerate (0.7.8-2.1) UNRELEASED; urgency=low
+conglomerate (0.7.8-2.2) UNRELEASED; urgency=low
 
   * keeping it top fit
 
   * Installing gconf schema
+   - control: depend on gconf2
    - rules: configure with sysconfdir=/etc
    - rules: GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=yes added
      before `make install`
    - conglomerate.postinst: new file
    - conglomerate.prerm: new file
 
- -- Geert Stappers <stappers@stappers.nl>  Sun, 21 Dec 2003 14:44:11 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Sun, 21 Dec 2003 17:59:35 +0100
 
 conglomerate (0.7.8-1) unstable; urgency=low
 
