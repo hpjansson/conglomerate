@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 10:08+0000\n"
-"PO-Revision-Date: 2002-11-29 09:06+0300\n"
+"POT-Creation-Date: 2004-04-28 11:02+0400\n"
+"PO-Revision-Date: 2004-05-20 08:37+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,36 +19,32 @@ msgstr ""
 #: src/cong-primary-window.c:761 src/cong-primary-window.c:944
 #: src/cong-primary-window.c:946 src/cong-primary-window.c:952
 msgid "Conglomerate XML Editor"
-msgstr "Редактор Conglomerate файлов в формате XML"
+msgstr "Редактор разметки \"Конгломерат\""
 
 #: data/conglomerate.desktop.in.h:2
-#, fuzzy
 msgid "Edit XML files"
-msgstr "Редактировать файлы в формате XML"
+msgstr "Редактор файлов в формате XML"
 
 #: glade/cong-file-import.glade.h:1
-#, fuzzy
 msgid "File Import Options"
-msgstr "Опции экспорта"
+msgstr "Опции импорта файлов"
 
 #: glade/cong-file-import.glade.h:2
-#, fuzzy
 msgid "Importer"
-msgstr "Дополнение экспорта:"
+msgstr "Дополнение импорта"
 
 #: glade/cong-file-import.glade.h:3
-#, fuzzy
 msgid "Options"
-msgstr "Опции экспорта"
+msgstr "Опции"
 
 #: glade/cong-file-properties.glade.h:1 src/cong-node-properties-dialog.c:1193
 #: src/cong-node-properties-dialog.c:1284
 msgid "Advanced"
-msgstr ""
+msgstr "Расширенные"
 
 #: glade/cong-file-properties.glade.h:2
 msgid "Basic"
-msgstr ""
+msgstr "Основные"
 
 #: glade/cong-file-properties.glade.h:3 src/cong-dispspec-registry.c:352
 #: src/cong-edit-preferences.c:136 src/cong-file-export.c:302
@@ -59,13 +54,12 @@ msgid "Description"
 msgstr "Описание"
 
 #: glade/cong-file-properties.glade.h:4 src/cong-document.c:900
-#, fuzzy
 msgid "Document Type Declaration"
-msgstr "/Тесты/Типы документов"
+msgstr "Описание типа документа"
 
 #: glade/cong-file-properties.glade.h:5
 msgid "Encoding"
-msgstr ""
+msgstr "Кодировка"
 
 #: glade/cong-file-properties.glade.h:6
 msgid "External ID"
@@ -113,7 +107,7 @@ msgstr "Тип"
 
 #: glade/cong-file-properties.glade.h:15
 msgid "Version"
-msgstr ""
+msgstr "Версия"
 
 #: glade/cong-file-properties.glade.h:16
 #, fuzzy
@@ -124,9 +118,55 @@ msgstr "Редактор файлов в формате XML"
 msgid "_Associate this DTD"
 msgstr ""
 
+#: glade/cong-file-properties.glade.h:18
+msgid "label_dtd_external_id"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:19
+msgid "label_dtd_notes"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:20
+msgid "label_dtd_system_id"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:21
+#, fuzzy
+msgid "label_location"
+msgstr "Местоположение"
+
+#: glade/cong-file-properties.glade.h:22
+#, fuzzy
+msgid "label_modified"
+msgstr "Изменён"
+
+#: glade/cong-file-properties.glade.h:23
+msgid "label_name"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:24
+msgid "label_typedesc"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:25
+msgid "label_typename"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:26
+msgid "label_xml_encoding"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:27
+msgid "label_xml_standalone"
+msgstr ""
+
+#: glade/cong-file-properties.glade.h:28
+msgid "label_xml_version"
+msgstr ""
+
 #: glade/cong-find-replace.glade.h:1
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: glade/cong-find-replace.glade.h:2
 #, fuzzy
@@ -135,20 +175,25 @@ msgstr "/Правка/Найти с_ледующее"
 
 #: glade/cong-find-replace.glade.h:3
 msgid "Match _entire word only"
-msgstr ""
+msgstr "Совпадает _целое слово"
 
 #: glade/cong-find-replace.glade.h:4 src/cong-edit-find-and-replace.c:182
 #: src/cong-edit-find-and-replace.c:829 src/cong-edit-find-and-replace.c:843
 msgid "Replace"
-msgstr ""
+msgstr "Заменить"
 
 #: glade/cong-find-replace.glade.h:5 src/cong-edit-find-and-replace.c:901
+#, fuzzy
 msgid "Replace All"
 msgstr ""
+"#-#-#-#-#  compendium.po (glib 2.4)  #-#-#-#-#\n"
+"Заменить всё\n"
+"#-#-#-#-#  ru.po (gedit)  #-#-#-#-#\n"
+"Заменить все"
 
 #: glade/cong-find-replace.glade.h:6
 msgid "Replace _with: "
-msgstr ""
+msgstr "З_аменить на:"
 
 #: glade/cong-find-replace.glade.h:7
 msgid "Search _backwards"
@@ -156,15 +201,15 @@ msgstr ""
 
 #: glade/cong-find-replace.glade.h:8
 msgid "_Match case"
-msgstr ""
+msgstr "Совпадают п_рописные/строчные буквы"
 
 #: glade/cong-find-replace.glade.h:9
 msgid "_Search for: "
-msgstr ""
+msgstr "На_йти:"
 
 #: glade/cong-find-replace.glade.h:10
 msgid "_Wrap around"
-msgstr ""
+msgstr "Автоматически пере_ходить к началу документа"
 
 #: glade/cong-preferences.glade.h:1
 msgid "Conglomerate Preferences"
@@ -183,7 +228,7 @@ msgstr ""
 
 #: glade/docbook-common-properties.glade.h:2
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: glade/docbook-common-properties.glade.h:4
 msgid "Revisions"
@@ -240,7 +285,7 @@ msgstr ""
 #: glade/docbook-orderedlist-properties.glade.h:4 src/cong-error-dialog.c:326
 #: src/cong-error-file-open.c:510
 msgid "Details"
-msgstr ""
+msgstr "Подробности"
 
 #: glade/docbook-orderedlist-properties.glade.h:5
 msgid "I, II, III, ..."
@@ -260,7 +305,7 @@ msgstr ""
 
 #: glade/docbook-orderedlist-properties.glade.h:10
 msgid "Style"
-msgstr ""
+msgstr "Стиль"
 
 #: glade/docbook-orderedlist-properties.glade.h:11
 msgid "a, b, c, ..."
@@ -278,7 +323,7 @@ msgstr ""
 
 #: glade/docbook-ulink-properties.glade.h:2
 msgid "Link"
-msgstr ""
+msgstr "Ссылка"
 
 #: glade/docbook-ulink-properties.glade.h:4
 msgid "Target"
@@ -286,7 +331,7 @@ msgstr ""
 
 #: glade/docbook-ulink-properties.glade.h:6
 msgid "URL"
-msgstr ""
+msgstr "ссылка (URL)"
 
 #: glade/docbook-ulink-properties.glade.h:7
 msgid "_Test this Link"
@@ -307,7 +352,7 @@ msgstr "/Тесты/Типы документов"
 
 #: glade/string_selection_dialog.glade.h:1
 msgid "label"
-msgstr ""
+msgstr "метка"
 
 #: glade/string_selection_dialog.glade.h:2
 msgid "string_selection_dialog"
@@ -535,16 +580,21 @@ msgstr ""
 #: src/cong-edit-find-and-replace.c:93
 #, c-format
 msgid "The text \"%s\" was not found."
-msgstr ""
+msgstr "Подстрока \"%s\" не найдена."
 
 #: src/cong-edit-find-and-replace.c:195
 msgid "Replace _All"
-msgstr ""
+msgstr "Заменить вс_е"
 
 #: src/cong-edit-find-and-replace.c:302 src/cong-edit-find-and-replace.c:753
 #: src/cong-edit-find-and-replace.c:952 src/cong-edit-find-and-replace.c:993
+#, fuzzy
 msgid "Find"
 msgstr ""
+"#-#-#-#-#  compendium.po (glib 2.4)  #-#-#-#-#\n"
+"Найти\n"
+"#-#-#-#-#  ru.po (gucharmap-0.6.1)  #-#-#-#-#\n"
+"Поиск"
 
 #: src/cong-editor-node-text.c:961
 msgid "Select word"
@@ -560,11 +610,11 @@ msgstr ""
 
 #: src/cong-editor-widget3.c:258
 msgid "Expander Size"
-msgstr ""
+msgstr "Размер расширителя"
 
 #: src/cong-editor-widget3.c:259
 msgid "Size of the expander arrow"
-msgstr ""
+msgstr "Размер стрелки расширителя"
 
 #: src/cong-editor-widget3.c:728
 msgid "Input Method"
@@ -673,7 +723,7 @@ msgstr ""
 #: src/cong-error-file-open.c:287 src/cong-error-file-open.c:296
 #: src/cong-error-file-open.c:351 src/cong-error-file-open.c:392
 msgid "Search"
-msgstr ""
+msgstr "Найти"
 
 #: src/cong-error-file-open.c:294 src/cong-error-file-save.c:109
 msgid "The location does not exist."
@@ -1098,8 +1148,13 @@ msgid "Print \"%s\""
 msgstr "Экспортировать \"%s\""
 
 #: src/cong-file-print.c:203
+#, fuzzy
 msgid "Print"
 msgstr ""
+"#-#-#-#-#  compendium.po (glib 2.4)  #-#-#-#-#\n"
+"Напечатать\n"
+"#-#-#-#-#  ru.po (gpdf)  #-#-#-#-#\n"
+"Печать"
 
 #: src/cong-file-print.c:235
 msgid "Print Method:"
@@ -1112,7 +1167,7 @@ msgstr "Опции экспорта"
 
 #: src/cong-file-print.c:321 src/cong-menus.c:779
 msgid "Print Preview"
-msgstr ""
+msgstr "Просмотреть образец печати"
 
 #: src/cong-file-print.c:331
 #, fuzzy, c-format
@@ -1126,15 +1181,22 @@ msgstr "Дополнения редактора Conglomerate не могут з�
 
 #: src/cong-file-properties.c:105
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: src/cong-file-properties.c:105
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: src/cong-file-properties.c:124 src/cong-file-properties.c:127
+#, fuzzy
 msgid "None"
 msgstr ""
+"#-#-#-#-#  compendium.po (glib 2.4)  #-#-#-#-#\n"
+"#-#-#-#-#  compendium.po (glib 2.4)  #-#-#-#-#\n"
+"Нет\n"
+"#-#-#-#-#  ru.po (ggv)  #-#-#-#-#\n"
+"нет\n"
+"#-#-#-#-#  ru.po (gpdf)  #-#-#-#-#\n"
 
 #: src/cong-file-properties.c:165
 msgid "_Remove this DTD"
@@ -1485,7 +1547,7 @@ msgstr ""
 
 #: src/cong-node-properties-dialog.c:621
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 #: src/cong-node-properties-dialog.c:713
 #, c-format
@@ -1528,7 +1590,7 @@ msgstr ""
 #: src/cong-node-properties-dialog.c:1185
 #: src/cong-node-properties-dialog.c:1279
 msgid "DTD"
-msgstr ""
+msgstr "Ди-Ти-Ди(DTD)"
 
 #: src/cong-overview-view.c:204
 msgid "Unknown data"
@@ -1595,25 +1657,25 @@ msgstr "Сохранить документ как..."
 
 #: src/cong-primary-window.c:462 src/cong-primary-window.c:463
 msgid "Undo"
-msgstr ""
+msgstr "Откатить"
 
 #: src/cong-primary-window.c:469 src/cong-primary-window.c:470
 msgid "Redo"
-msgstr ""
+msgstr "Возвратить"
 
 #: src/cong-primary-window.c:488 src/cong-primary-window.c:489 src/tree.c:196
 #: src/xmledit.c:50
 msgid "Cut"
-msgstr ""
+msgstr "Вырезать"
 
 #: src/cong-primary-window.c:495 src/cong-primary-window.c:496
 msgid "Copy"
-msgstr ""
+msgstr "Скопировать"
 
 #: src/cong-primary-window.c:502 src/cong-primary-window.c:503
 #: src/xmledit.c:166
 msgid "Paste"
-msgstr ""
+msgstr "Вставить"
 
 #: src/cong-primary-window.c:661
 msgid "Overview"
@@ -1621,7 +1683,7 @@ msgstr ""
 
 #: src/cong-primary-window.c:671
 msgid "Bookmarks"
-msgstr ""
+msgstr "Закладки"
 
 #: src/cong-primary-window.c:680
 msgid "Raw XML"
@@ -2030,7 +2092,7 @@ msgstr ""
 
 #: src/plugin-validate.c:133 src/plugin-website.c:480
 msgid "_Details"
-msgstr ""
+msgstr "_Подробности"
 
 #: src/plugin-validate.c:147
 #, c-format
