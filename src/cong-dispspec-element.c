@@ -513,6 +513,17 @@ cong_dispspec_element_get_property_dialog_plugin_id(CongDispspecElement *element
 	return element->property_dialog_plugin_id;
 }
 
+static const CongEnumMapping type_numeration[] =
+{
+	{"structural", CONG_ELEMENT_TYPE_STRUCTURAL},
+	{"span", CONG_ELEMENT_TYPE_SPAN},
+	{"insert", CONG_ELEMENT_TYPE_INSERT},
+	{"embed-external-file", CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE},
+	{"paragraph", CONG_ELEMENT_TYPE_PARAGRAPH},
+	{"plugin", CONG_ELEMENT_TYPE_PLUGIN},
+	{"all", CONG_ELEMENT_TYPE_ALL}
+};
+
 static const CongEnumMapping whitespace_numeration[] =
 {
 	{"preserve", CONG_WHITESPACE_PRESERVE},
@@ -555,36 +566,14 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 
 	element = gxx_generated_object_from_xml_tree_fn_dispspec_element (xml_element);
 
-	/* Extract type: */
-	{
-		xmlChar* type = xmlGetProp(xml_element,"type");
-
-		element->type = CONG_ELEMENT_TYPE_UNKNOWN;			
+	if (element->type == CONG_ELEMENT_TYPE_PLUGIN) {
+		xmlChar* id = xmlGetProp(xml_element,"plugin-id");
 		
-		if (type) {
-			if (0==strcmp(type,"structural")) {
-				element->type = CONG_ELEMENT_TYPE_STRUCTURAL;			
-			} else if (0==strcmp(type,"span")) {
-				element->type = CONG_ELEMENT_TYPE_SPAN;			
-			} else if (0==strcmp(type,"insert")) {
-				element->type = CONG_ELEMENT_TYPE_INSERT;			
-			} else if (0==strcmp(type,"embed-external-file")) {
-				element->type = CONG_ELEMENT_TYPE_EMBED_EXTERNAL_FILE;
-			} else if (0==strcmp(type,"paragraph")) {
-				element->type = CONG_ELEMENT_TYPE_PARAGRAPH;
-			} else if (0==strcmp(type,"plugin")) {
-				xmlChar* id;
-
-				element->type = CONG_ELEMENT_TYPE_PLUGIN;
-
-				id = xmlGetProp(xml_element,"plugin-id");
-				
-				if (id) {
-  					element->editor_plugin_id = g_strdup(id);
-  				}
-  			}
-  		}
-  	}
+		if (id) {
+			element->editor_plugin_id = g_strdup(id);
+			g_free (id);
+		}
+	}
 
 	/* Extract pixbuf: */
 	{
@@ -595,20 +584,6 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 			xmlFree(prop);
 		}
 	}
-
-#if 0
-	/* Extract whitespace: */
-	{
-		xmlChar* prop = xmlGetProp(xml_element, "whitespace");
-		if (prop) {
-			element->whitespace = cong_enum_mapping_lookup (whitespace_numeration,
-									sizeof(whitespace_numeration)/sizeof(CongEnumMapping),
-									prop,
-									CONG_WHITESPACE_NORMALIZE);
-			xmlFree(prop);
-		}
-	}
-#endif
 
   	/* Process children: */
   	{
@@ -704,8 +679,6 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 
 	xml_node = gxx_generated_object_to_xml_tree_fn_dispspec_element (element, xml_doc);
 
-	xmlSetProp (xml_node, "type", element_type_to_string(element->type));
-
 	/* Handle name: */
 	if (element->username)
 	{
@@ -753,6 +726,7 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	return xml_node;
 }
 
+#if 0
 static const gchar* 
 element_type_to_string (enum CongElementType type) 
 {
@@ -777,3 +751,4 @@ element_type_to_string (enum CongElementType type)
 		return "all";
         }
 }
+#endif
