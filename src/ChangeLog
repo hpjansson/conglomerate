@@ -1,4 +1,10 @@
-2003-12-01  Robert Varga
+2003-12-09  Robert Varga <frozenfingers@xs4all.nl>
+
+	* cong-menus.c, cong-primary-window.c, cong-primary-window.h
+	
+	Fix for bug 123065 (open using empty window instead of whole new window), cleanups
+
+2003-12-01  Robert Varga <frozenfingers@xs4all.nl>
  
 	* cong-vfs.c
 

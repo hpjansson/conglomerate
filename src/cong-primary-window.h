@@ -27,8 +27,32 @@
 
 G_BEGIN_DECLS
 
+/**
+ * cong_primary_window_new:
+ * @doc: the document that should be loaded into the new window; if NULL, a document-less
+ * window is created
+ * 
+ * Creates a new conglomerate window; If @doc is NULL, only the GUI is created, if not,
+ * the @doc is added to the gui by calling cong_primary_window_add_doc().
+ * 
+ * Returns: The new created window
+ */
 CongPrimaryWindow*
 cong_primary_window_new (CongDocument *doc);
+
+/**
+ * cong_primary_window_add_doc:
+ * @primary_window:
+ * @doc:
+ * 
+ * Adds the #CongDocument @doc to a given window. This function is called from 
+ * cong_primary_window_new().
+ * 
+ * Returns: the window
+ */
+
+void
+cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc);
 
 void
 cong_primary_window_free (CongPrimaryWindow *primary_window);

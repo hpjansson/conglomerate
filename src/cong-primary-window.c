@@ -308,7 +308,7 @@ on_selection_changed_cut (CongDocument *document,
 
 void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 {
-	gtk_toolbar_insert_stock(primary_window->toolbar, 
+	if ( !(primary_window->doc) )gtk_toolbar_insert_stock(primary_window->toolbar, 
 				 GTK_STOCK_OPEN,
 				 _("Open document"),
 				 _("Open document"),
@@ -463,27 +463,139 @@ void destroy( GtkWidget *widget,
 	}
 }
 
-void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
+void
+cong_primary_window_add_doc (CongPrimaryWindow *primary_window, CongDocument *doc)
 {
-	GtkWidget *w1, *w2;
+/* Not sure if these doc != NULL tests area still needed here */
+	GtkWidget *w1 = NULL, *w2 = NULL;
+	GtkWidget *sidebar_notebook = NULL;
 	GdkColor gcol;
 	GtkStyle *style;
-	GtkItemFactory *item_factory;
-	GtkWidget *sidebar_notebook;
-	gchar *title, *filename;
 	int i;
+	GtkItemFactory *item_factory = NULL;
+	
+	g_assert (primary_window);
+
+	if (doc) {
+		primary_window->doc = doc;
+		g_object_ref(G_OBJECT(doc));
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
+		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
+
+		/* --- Main window -> hpane --- */
+		w1 = gtk_hpaned_new();
+		gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
+		gtk_widget_show(w1);
+		
+		/* --- Notebook to appear in the sidebar: --- */
+		sidebar_notebook = gtk_notebook_new();
+		gtk_widget_show(sidebar_notebook);
+		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
+
+		gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
+
+		/* --- Tree view --- */
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
+		
+		w2 = gtk_scrolled_window_new(NULL, NULL);
+		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
+					       GTK_POLICY_AUTOMATIC);
+		gtk_widget_set_size_request(GTK_WIDGET(w2), 100, 0);
+		gtk_widget_show(w2);
+
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 w2,
+					 gtk_label_new(_("Overview"))
+					 );
+
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
+						      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
+		
+		/* --- Bookmark view --- */
+#if 0
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 cong_bookmark_view_new(primary_window->doc),
+					 gtk_label_new(_("Bookmarks"))
+					 );
+
+#endif
+	
+		/* --- Raw XML view --- */
+		LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
+		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
+					 cong_dom_view_new(primary_window->doc),
+					 gtk_label_new(_("Raw XML"))
+					 );
+		
+		/* Set up the editor_widget v3: */
+		{
+			/* --- Scrolling area for editor widget 3--- */
+			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
+			
+			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+							GTK_POLICY_AUTOMATIC,
+							GTK_POLICY_ALWAYS);
+			
+			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
+							       GTK_WIDGET(primary_window->cong_editor_widget3));
+			gtk_widget_show (primary_window->cong_editor_widget3);
+			gtk_widget_show(primary_window->scroller3);
+		}
+
+		gtk_paned_add2 (GTK_PANED(w1), 
+				primary_window->scroller3);
+
+		/* TEMPORARY: Set white background */
+		
+		gcol.blue = 0xffff;
+		gcol.green = 0xffff;
+		gcol.red = 0xffff;
+		
+		style = gtk_widget_get_default_style();
+		style = gtk_style_copy(style);
+		
+		gdk_colormap_alloc_color(primary_window->window->style->colormap, &gcol, 0, 1);
+	
+		for (i = 0; i < 5; i++) {
+			style->bg[i] = gcol;
+		}
+		
+		/* update the statusbar */
+		
+		gchar *status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
+#if 1
+		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
+			 status_text);
+#else
+		gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
+				   primary_window->status_main_ctx,
+				   status_text);
+#endif
+		g_free(status_text);
+		cong_document_set_primary_window(doc, primary_window);
+	} /* if (doc) */
+	
+	/* toolbar update */
+	cong_primary_window_toolbar_populate (primary_window);
+	/* title update */
+	cong_primary_window_update_title (primary_window);
+	/* update the menus */
+	item_factory = gtk_item_factory_from_widget (primary_window->menus);
+	cong_menus_create_items(item_factory, primary_window);
+}
+
+
+void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
+{
+	GtkItemFactory *item_factory;
+	gchar *title, *filename;
 
 	g_assert(primary_window);
 
 	gdk_rgb_init();
 
-	if (primary_window->doc) {
-		filename = cong_document_get_filename(primary_window->doc);
-		title = g_strdup_printf("%s - %s", filename, _("Conglomerate XML Editor"));
-	} else {
-		title = g_strdup(_("Conglomerate XML Editor"));
-	}
-
+	title = g_strdup(_("Conglomerate XML Editor"));
+	
 	/* --- Main window --- */
 	primary_window->window = gnome_app_new(PACKAGE_NAME,
 					       title);
@@ -528,89 +640,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 	cong_primary_window_toolbar_populate(primary_window);
 
-	/* --- Main window -> hpane --- */
-
-	w1 = gtk_hpaned_new();
-	gnome_app_set_contents(GNOME_APP(primary_window->window),w1);
-	gtk_widget_show(w1);
-
-	if (primary_window->doc) {
-		g_assert(primary_window->cong_editor_widget3);
-
-		/* --- Notebook to appear in the sidebar: --- */
-		sidebar_notebook = gtk_notebook_new();
-		gtk_widget_show(sidebar_notebook);
-		gtk_notebook_set_tab_pos(GTK_NOTEBOOK(sidebar_notebook), GTK_POS_BOTTOM);
-
-		gtk_paned_add1(GTK_PANED(w1), sidebar_notebook);
-
-		/* --- Tree view --- */
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating overview");
-		
-		w2 = gtk_scrolled_window_new(NULL, NULL);
-		gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(w2), GTK_POLICY_AUTOMATIC,
-					       GTK_POLICY_AUTOMATIC);
-		gtk_widget_set_usize(GTK_WIDGET(w2), 100, 0);
-		gtk_widget_show(w2);
-
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 w2,
-					 gtk_label_new(_("Overview"))
-					 );
-
-		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(w2), 
-						      cong_tree_view_get_widget (cong_overview_view_new (primary_window->doc)));
-		
-		/* --- Bookmark view --- */
-#if 0
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 cong_bookmark_view_new(primary_window->doc),
-					 gtk_label_new(_("Bookmarks"))
-					 );
-#endif
-	
-		/* --- Raw XML view --- */
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating raw XML view");
-		gtk_notebook_append_page(GTK_NOTEBOOK(sidebar_notebook),
-					 cong_dom_view_new(primary_window->doc),
-					 gtk_label_new(_("Raw XML"))
-					 );
-
-		
-		/* Set up the editor_widget v3: */
-		{
-			/* --- Scrolling area for editor widget 3--- */
-			primary_window->scroller3 = gtk_scrolled_window_new(NULL, NULL);
-			
-			gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
-							GTK_POLICY_AUTOMATIC,
-							GTK_POLICY_ALWAYS);
-			
-			gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(primary_window->scroller3), 
-							       GTK_WIDGET(primary_window->cong_editor_widget3));
-			gtk_widget_show (primary_window->cong_editor_widget3);
-			gtk_widget_show(primary_window->scroller3);
-		}
-
-		gtk_paned_add2 (GTK_PANED(w1), 
-				primary_window->scroller3);
-
-		/* TEMPORARY: Set white background */
-		
-		gcol.blue = 0xffff;
-		gcol.green = 0xffff;
-		gcol.red = 0xffff;
-		
-		style = gtk_widget_get_default_style();
-		style = gtk_style_copy(style);
-		
-		gdk_colormap_alloc_color(primary_window->window->style->colormap, &gcol, 0, 1);
-	
-		for (i = 0; i < 5; i++) {
-			style->bg[i] = gcol;
-		}
-		
-	} /* if (primary_window->doc) { */
+	primary_window->doc = NULL;
 
 	/* --- Main window -> status area --- */
 #if 1
@@ -621,18 +651,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 	gnome_app_set_statusbar(GNOME_APP(primary_window->window), primary_window->app_bar);
 
 	{
-		gchar *status_text;
-
-		if (primary_window->doc) {
-			status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
-
-			
-
-		} else {
-
-			status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
-
-		}
+		gchar *status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
 
 		gnome_appbar_set_status (GNOME_APPBAR(primary_window->app_bar), 
 					 status_text);
@@ -651,18 +670,7 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 								       "Main");
 
 	{
-		gchar *status_text;
-
-		if (primary_window->doc) {
-			status_text = g_strdup(cong_dispspec_get_name( cong_document_get_dispspec(primary_window->doc) ));
-
-			
-
-		} else {
-
-			status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
-
-		}
+		gchar *status_text = g_strdup(_("Welcome to the much-delayed Conglomerate editor."));	
 
 		gtk_statusbar_push(GTK_STATUSBAR(primary_window->status), 
 				   primary_window->status_main_ctx,
@@ -676,32 +684,32 @@ void cong_primary_window_make_gui(CongPrimaryWindow *primary_window)
 
 CongPrimaryWindow *cong_primary_window_new(CongDocument *doc)
 {
-	/* is it valid to have a NULL document? */
 
-	CongPrimaryWindow *primary_window = g_new0(CongPrimaryWindow, 1);
-
-
-	if (doc) {
-		primary_window->doc = doc;
-		g_object_ref(G_OBJECT(doc));
-
-		LOG_PRIMARY_WINDOW_CREATION1 ("Creating v3 widget");
-		primary_window->cong_editor_widget3 = cong_editor_widget3_new(doc);
-	}
+	CongPrimaryWindow *prwin = (CongPrimaryWindow *)g_list_nth_data(cong_app_singleton()->primary_windows, 0);
+	CongPrimaryWindow *primary_window = NULL;
+	
+	if (doc && prwin && !(prwin->doc))	// we have an empty window
+	{
+		cong_primary_window_add_doc (prwin, doc);
+		LOG_PRIMARY_WINDOW_CREATION1 ("Finished adding document to empty primary window");
+		return g_list_nth_data (cong_app_singleton()->primary_windows, 0);
+	};
+	
+	primary_window = g_new0(CongPrimaryWindow, 1);
 
 	cong_primary_window_make_gui(primary_window);
 	gtk_window_set_default_size(GTK_WINDOW(primary_window->window), 400, 460);
 
 
 	LOG_PRIMARY_WINDOW_CREATION1 ("Showing the primary window");
-	gtk_widget_show(GTK_WIDGET(primary_window->window));
+	gtk_widget_show_all(GTK_WIDGET(primary_window->window));
 
 	cong_app_singleton()->primary_windows = g_list_prepend(cong_app_singleton()->primary_windows, primary_window);
 
 	if (doc) {
-		cong_document_set_primary_window(doc, primary_window);	
-	}
-
+		cong_primary_window_add_doc (primary_window, doc);
+	};
+	
 	LOG_PRIMARY_WINDOW_CREATION1 ("Finished creating primary window");
 
 	return primary_window;

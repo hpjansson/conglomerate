@@ -1439,6 +1439,10 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 	g_return_if_fail(primary_window);
 
 	if (cong_primary_window_get_document(primary_window)) {
+		gtk_item_factory_delete_entries (item_factory,
+					 sizeof(menu_items_without_doc) / sizeof (menu_items_without_doc[0]),
+					 menu_items_without_doc);
+		
 		gtk_item_factory_create_items(item_factory, 
 					      sizeof(menu_items_with_doc) / sizeof(menu_items_with_doc[0]),
 					      menu_items_with_doc, 
@@ -1507,4 +1511,3 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
 	}
 }
-
