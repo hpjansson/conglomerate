@@ -1,7 +1,8 @@
-conglomerate (0.7.10-4) UNRELEASED; urgency=low
+conglomerate (0.7.11-1) unstable; urgency=low
 
-  * expecting new upstream version
+  * new upstream version
    - includes french strings for the desktop file (closes: #227565)
+   - new "scrollkeeper document", which effects #229762
 
   * patches/dont_install_generated_gtkdoc.dpatch
   The patch is updated for better disabling of gtkdoc.
@@ -12,7 +13,7 @@ conglomerate (0.7.10-4) UNRELEASED; urgency=low
   * rules
   enabled debug, however this should not go into the distributed packages.
 
- -- Geert Stappers <stappers@stappers.nl>  Thu, 15 Jan 2004 13:29:07 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Sun,  8 Feb 2004 21:06:45 +0100
 
 conglomerate (0.7.10-1) unstable; urgency=low
 
