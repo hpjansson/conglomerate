@@ -150,6 +150,11 @@ conglomerate_SOURCES =      \
   plugin-lists-area-listitem.c \
   plugin-lists-node-element-listitem.h \
   plugin-lists-node-element-listitem.c \
+  plugin-paragraph.c            \
+  plugin-paragraph-area-paragraph.h \
+  plugin-paragraph-area-paragraph.c \
+  plugin-paragraph-node-element-paragraph.h \
+  plugin-paragraph-node-element-paragraph.c \
   plugin-sgml.c             \
   plugin-tests.c            \
   plugin-validate.c         \
