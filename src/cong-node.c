@@ -1010,5 +1010,20 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 	return CONG_WHITESPACE_NORMALIZE;
 }
 
+gboolean
+cong_node_is_valid_cursor_location (CongNodePtr node)
+{
+	g_return_val_if_fail (node, FALSE);
+
+#if 1
+	/* For now: */
+	return (node->type == XML_TEXT_NODE);
+#else
+	/* Eventually allow comment editing: */
+	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
+#endif
+	
+}
+
 
 /* Internal function definitions: */

@@ -213,4 +213,20 @@ cong_node_get_first_text_node_descendant (CongNodePtr node);
 enum CongWhitespaceHandling
 cong_node_get_whitespace_handling (CongDocument *doc,
 				   CongNodePtr text_node);
+
+
+/**
+ * cong_node_is_valid_cursor_location:
+ * @node:  a node to be tested
+ *
+ * The function detemines if the node is a suitable location for the cursor.
+ *
+ * It currently only tests for TEXT nodes, but will eventually be expanded to
+ * allow COMMENT nodes as well.
+ *
+ * Returns: a #gboolean which is TRUE iff it is safe to put the cursor inside this node
+ */
+gboolean
+cong_node_is_valid_cursor_location (CongNodePtr node);
+
 #endif

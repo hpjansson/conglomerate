@@ -32,7 +32,7 @@ const gchar *xml_frag_data_nice(CongNodePtr x)
 {
 	const char *s;
 	
-	g_return_val_if_fail(x->type==XML_TEXT_NODE, NULL);
+	g_return_val_if_fail(cong_node_is_valid_cursor_location (x), NULL);
 	
 	s = x->content; /* FIXME:  hackish cast from xmlChar* to char* */
 	if (!s) s = fake_data;

@@ -93,7 +93,10 @@ cong_cursor_data_insert (CongCursor *curs,
 #endif
 
 	if (!cong_location_exists(&curs->location)) return;
-	if (cong_location_node_type(&curs->location) != CONG_NODE_TYPE_TEXT) return;
+
+	if (!cong_node_is_valid_cursor_location (curs->location.node)) {
+		return;
+	}
 
 	cong_document_insert_text (doc, 
 				   &curs->location, 

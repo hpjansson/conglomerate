@@ -1390,7 +1390,7 @@ cong_document_insert_text (CongDocument *doc,
 	int byte_length;
 
 	g_return_if_fail(cong_location_exists(loc));
-	g_return_if_fail(cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT);
+	g_return_if_fail (cong_node_is_valid_cursor_location(loc->node));
 	g_return_if_fail(insertion!=NULL);
 	g_return_if_fail(g_utf8_validate(insertion, -1, NULL));
 
