@@ -14,9 +14,7 @@ CODING BEFORE RELEASE
 - sort out font crash
 - improve the configuration tests
 - remove the preprocessor cruft (the old unused versions of code)
-- update AUTHORS
 - update AM_INIT_AUTOMAKE in configure.in
-- add an about dialog box which has a VERSION
 - update README about the congle/conge name
 - update README about running conge
 
@@ -91,6 +89,7 @@ OTHER JOBS AFTER RELEASE:
 
 ANYTIME JOBS
 - remove of Makefile in the directories examples, documentation and deb
+- use the file AUTHORS to generate authors in the About box
 
 Any other ideas?
  tell them to the developers mailinglist
