@@ -1,3 +1,9 @@
+2004-09-27  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* cong-node-properties-dialog.c: 
+
+	Changed "OK" to "Close", since the dialog is instant-apply
+
 2004-09-23  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* cong-primary-window.c: 

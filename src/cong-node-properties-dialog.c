@@ -1283,7 +1283,7 @@ cong_node_properties_dialog_new (CongDocument *doc,
 		dialog = gtk_dialog_new_with_buttons(_("Properties"),
 						     parent_window,
 						     GTK_DIALOG_MODAL,
-						     GTK_STOCK_OK, GTK_RESPONSE_OK,
+						     GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
 						     NULL);		
 
 		gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
