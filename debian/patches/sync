@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# script to sync the release modifications to upstream
+# it assumes that you are in the tarball directory
+# and the same directory level is the CVS module conglomerate directory
+#
+cp -p debian/changelog ../conglomerate/debian
+cp -p NEWS ../conglomerate
+# end of this simple script

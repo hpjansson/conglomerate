@@ -5,6 +5,9 @@
 	-Proper name for the original files
 	-Better Usage
 
+	* sync
+	New script, to get the release modifications upstream
+
 2004-01-19  Geert Stappers <stappers@stapers.nl>
 
 	* release
