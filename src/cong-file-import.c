@@ -36,6 +36,7 @@
 #include "cong-eel.h"
 #include <glade/glade-xml.h>
 #include "cong-vfs.h"
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
 
 CongImporter*
 cong_file_import_dialog_run (GtkWindow *toplevel_window,
@@ -67,7 +68,7 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 				      toplevel_window);
 
 	if (filename) {
-		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
+		char* mime_type = gnome_vfs_get_mime_type (filename);
 		GList *list_of_valid = NULL; 
 		struct add_importer_to_list_data data;
 
@@ -107,7 +108,8 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 			
 			g_list_free(list_of_valid);
 
-			g_free(filename);			
+			g_free (mime_type);			
+			g_free (filename);			
 			return;
 		}
 
@@ -137,6 +139,7 @@ cong_ui_file_import(GtkWindow *toplevel_window)
 		}
 
 		g_list_free(list_of_valid);
+		g_free (mime_type);
 		g_free(filename);
 	}
 

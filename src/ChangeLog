@@ -1,5 +1,9 @@
 2003-10-20  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-file-import.c
+
+	Replaced gnome_vfs_mime_type_from_name with gnome_vfs_get_mime_type, added relevant header, to help fix 64-bit compilation
+	
 	* cong-dispspec.h, cong-editor-widget.h, cong-modification-cursor-change.c, global.h
 
 	Declaration fixes to help support 64-bit architectures, based on work by Andreas Schwab
