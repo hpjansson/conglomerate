@@ -1,3 +1,15 @@
+2004-08-30  Geert Stappers <stappers@stappers.nl>
+
+	* nmtoken.xml:
+
+	New file, provided by Douglas Burke. Original intent was to
+	prove the NMTOKEN code, but this nice little file with
+	his own DTD can serve other proposes.
+
+	* Makefile.am:
+
+	Ship the tarball with nmtoken.xml.
+
 2004-08-16  David Malcolm  <dmalcolm@redhat.com>
 
 	* test-docbook.xml: 

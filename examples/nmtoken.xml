@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+	<!ELEMENT foo (bar)>
+	<!ELEMENT bar EMPTY>
+	<!ATTLIST bar
+		title	CDATA	#REQUIRED
+		baz	NMTOKEN	#REQUIRED>
+]>
+<foo>
+	<bar title="a string" baz="nospaceshere"/>
+</foo>
+

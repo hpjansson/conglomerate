@@ -5,6 +5,7 @@ example_DATA 	 = \
 	error-proposal.xml \
 	file-roller.xml \
 	i18n.xml \
+	nmtoken.xml \
 	readme.xml \
 	test-docbook.xml \
 	test-entities.xml \
