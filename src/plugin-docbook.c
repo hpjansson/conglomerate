@@ -33,6 +33,8 @@
 #include "cong-util.h"
 #include "cong-fake-plugin-hooks.h"
 #include "cong-glade.h"
+#include "cong-dialog.h"
+#include "cong-vfs.h"
 
 #if ENABLE_PRINTING
 #include <libgnomeprint/gnome-print-config.h>
@@ -70,7 +72,9 @@ struct DocBookCreationInfo
  * TODO: Write me
  */
 void 
-factory_page_creation_callback_unified(CongServiceDocumentFactory *factory, CongNewFileAssistant *assistant, gpointer user_data)
+factory_page_creation_callback_unified(CongServiceDocumentFactory *factory,
+				       CongNewFileAssistant *assistant,
+				       gpointer user_data)
 {
 #if 0
 	GnomeDruidPageStandard *which_settings_page;
@@ -1063,6 +1067,95 @@ docbook_exporter_document_filter(CongServiceExporter *exporter, CongDocument *do
 	return cong_util_is_docbook(doc);
 }
 
+/*
+ * Returns the location of the DocBook stylesheet used to convert
+ * a DocBook file to the type argument (e.g. "html" or "fo"). The
+ * return value must be free-ed by the user. The label argument is
+ * used in the error dialog to describe the format being converted
+ * to (e.g. "HTML" or "XSL:FO").
+ *
+ * If no stylesheet can be found then an error dialog is created
+ * and NULL is returned.
+ *
+ */
+static gchar *
+get_and_check_stylesheet_path(gchar *type,
+			      gchar *label,
+			      GtkWindow *toplevel_window)
+{
+	GtkDialog *error_dialog;
+	gchar *msg;
+	gchar *tail;
+	gchar *stylesheet_path;
+
+	tail = g_strdup_printf ("%s/docbook.xsl", type);
+	stylesheet_path = cong_utils_get_norman_walsh_stylesheet (tail);
+	g_free (tail);
+	if (stylesheet_path!=NULL) {
+		return stylesheet_path;
+	}
+
+	/*
+	 * The text may not be very helpful.
+	 * It would be nice to make the URLs be actual links.
+	 */
+	msg = g_strdup_printf( _("Conglomerate can not find the stylesheet used to convert DocBook to %s"),
+			       label );
+	error_dialog = cong_error_dialog_new (toplevel_window,
+					      _("Unable to locate the DocBook stylesheets"),
+					      msg,
+					      _("Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://docbook.sourceforge.net/projects/xsl/, are installed and are added to your XML catalog file (see http://www.xmlsoft.org/catalog.html for more information on catalogs)."));
+	
+	gtk_dialog_run (error_dialog);
+	gtk_widget_destroy (GTK_WIDGET(error_dialog));
+	g_free (msg);
+	return NULL;
+}
+
+/*
+ * perhaps this should be part of cong_ui_transform_doc_to_uri() ?
+ */
+static void
+do_transform(gchar *type,
+	     CongDocument *doc,
+	     const gchar *stylesheet_path,
+	     GList *stylesheet_args,
+	     const gchar *string_uri,
+	     GtkWindow *toplevel_window)
+{
+	/*
+	 * If the call fails then we assume there will have been an
+	 * appropriate error dialog created, so we only need to create
+	 * a dialog on a successfull transform.
+	 */
+	if (cong_ui_transform_doc_to_uri(doc,
+					 stylesheet_path,
+					 stylesheet_args, 
+					 string_uri,
+					 toplevel_window)) {
+
+		GtkDialog *dialog;
+		gchar *filename_alone;
+		gchar *path;
+		gchar *message;
+		
+		cong_vfs_split_string_uri (string_uri, &filename_alone, &path);
+		message = g_strdup_printf (_("%s conversion complete.\n\nConverted %s to %s in %s"),
+					   type,
+					   cong_document_get_filename (doc),
+					   filename_alone,
+					   path);
+		dialog = cong_dialog_information_alert_new (toplevel_window,
+							    message);
+		
+		gtk_dialog_run (dialog);
+		gtk_widget_destroy (GTK_WIDGET(dialog));
+		g_free (message);
+		g_free (filename_alone);
+		g_free (path);
+	}
+}
+
 /**
  * html_exporter_action_callback:
  * @exporter:
@@ -1083,17 +1176,20 @@ html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, 
 	g_return_if_fail(uri);
 
 	g_message("html_exporter_action_callback");
-	
-	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("html/docbook.xsl");
-	g_assert(stylesheet_path);
 
-	cong_ui_transform_doc_to_uri(doc,
-				     stylesheet_path,
-				     NULL, 
-				     uri,
-				     toplevel_window);
+	stylesheet_path = get_and_check_stylesheet_path ("html","HTML",toplevel_window);
+	if (stylesheet_path==NULL) {
+		return;
+	}
 
-	g_free(stylesheet_path);
+	/* apply the transformation */
+	do_transform ("HTML",
+		      doc,
+		      stylesheet_path,
+		      NULL, 
+		      uri,
+		      toplevel_window);
+	g_free (stylesheet_path);
 }
 
 GList*
@@ -1161,8 +1257,10 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 	g_return_if_fail(doc);
 	g_return_if_fail(uri);
 
-	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
-	g_assert(stylesheet_path);
+	stylesheet_path = get_and_check_stylesheet_path ("fo","XSL:FO",toplevel_window);
+	if (stylesheet_path==NULL) {
+		return;
+	}
 
 	list_of_parameters = make_fo_export_params ();
 
@@ -1233,17 +1331,19 @@ fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, co
 
 	g_message("fo_exporter_action_callback");
 
-	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
-	g_assert(stylesheet_path);
+	stylesheet_path = get_and_check_stylesheet_path ("fo","XSL:FO",toplevel_window);
+	if (stylesheet_path==NULL) {
+		return;
+	}
 
+	/* apply the transformation */
 	list_of_parameters = make_fo_export_params ();
-
-	cong_ui_transform_doc_to_uri(doc,
-				     stylesheet_path,
-				     list_of_parameters,
-				     uri,
-				     toplevel_window);
-
+	do_transform ("XSL:FO",
+		      doc,
+		      stylesheet_path,
+		      list_of_parameters, 
+		      uri,
+		      toplevel_window);
 	g_free(stylesheet_path);
 	cong_stylesheet_parameter_list_free (list_of_parameters);
 }
@@ -1304,33 +1404,30 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
 
 	{
 		GList *list_of_parameters;	
-		gchar *stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
-		g_assert(stylesheet_path);
+		gchar *stylesheet_path = get_and_check_stylesheet_path ("fo","XSL:FO",toplevel_window);
+		if (stylesheet_path==NULL) {
+			/* what should we do on error here? */
+			return;
+		}
 
 		list_of_parameters = make_fo_export_params ();
-
 		fo_doc = cong_ui_transform_doc(doc,
 					       stylesheet_path,
 					       list_of_parameters,
 					       toplevel_window);
-
 		g_free(stylesheet_path);
 		cong_stylesheet_parameter_list_free (list_of_parameters);
 	}
 
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
-
 		cong_util_print_xslfo(toplevel_window, 
 				      gpc, 
 				      fo_doc);
-
 		xmlFreeDoc(fo_doc);
 	}
 
-
 	gtk_widget_destroy(progress_checklist_dialog);
-
 
 }
 #endif /* #if ENABLE_PRINTING */
@@ -1395,7 +1492,9 @@ docbook_generic_node_factory_method(CongServiceNodePropertyDialog *custom_proper
  * Returns:
  */
 GtkWidget* 
-docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+docbook_orderedlist_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog,
+					      CongDocument *doc,
+					      CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;
@@ -1525,7 +1624,9 @@ on_test_link_pressed (GtkButton *button,
  * Returns:
  */
 GtkWidget* 
-docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog, CongDocument *doc, CongNodePtr node)
+docbook_ulink_properties_factory_method(CongServiceNodePropertyDialog *custom_property_dialog,
+					CongDocument *doc,
+					CongNodePtr node)
 {
 	gchar* glade_filename;
 	GladeXML *xml;

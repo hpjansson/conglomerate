@@ -364,7 +364,7 @@ cong_document_export_dialog_delete (GtkWidget *dialog)
 					    "dialog_details");
 	g_assert (dialog_details);
 
-	if ( dialog_details->combo_array )
+	if (dialog_details->combo_array)
 		g_ptr_array_free (dialog_details->combo_array, FALSE);
 
 	gtk_widget_destroy (dialog);
@@ -376,15 +376,32 @@ cong_document_export_dialog_delete (GtkWidget *dialog)
  * @doc:
  * @toplevel_window:
  *
- * TODO: Write me
+ * Convert the document (@doc) to a different format. A dialog is
+ * displayed that lists all the registered exporters for this document
+ * type. If the user does not cancel then we check to see if a
+ * filename was given; if it was not the user is returned to the
+ * dialog, otherwise the chosen exporter is called.
+ *
+ * Open issues include:
+ * how to inform the user of what is going on, and
+ * whether we allow the user to stop an exporter whilst it is
+ * processing.
+ *
+ * At the moment the "Export" menu item can be called when there are
+ * no exporters registered for the document. We really should make the
+ * menu item insensitive in this situation to avoid this situation.
+ * (this is already pointed out in action_callback_file_export in
+ *  cong-menus.c)
  */
 void
 cong_ui_hook_file_export (CongDocument *doc,
 			  GtkWindow *toplevel_window)
 {
 	GtkWidget *dialog;
-	gint result;
 	CongExportDialogDetails *dialog_details;
+	CongServiceExporter* exporter = NULL;
+	gchar *export_uri = NULL;
+	gint flag = 1;
 
 	g_return_if_fail(doc);
 
@@ -395,55 +412,91 @@ cong_ui_hook_file_export (CongDocument *doc,
 					    "dialog_details");
 	g_assert(dialog_details);
 
-	if (dialog_details->got_any_exporters) {
-		gtk_widget_show_all(dialog);
+	/*
+	 * Temporary until we disable the Export menu item for
+	 * documents with no registered exporterd
+	 */
+	if (dialog_details->got_any_exporters==FALSE) {
+		GtkDialog* error_dialog;
+		gchar *what_failed;
 
-		result = gtk_dialog_run(GTK_DIALOG(dialog));
+		cong_document_export_dialog_delete (dialog);
 
+		what_failed = g_strdup_printf (_("Conglomerate cannot export \"%s\""),
+					       cong_document_get_filename(doc));
+		error_dialog = cong_error_dialog_new (toplevel_window,
+						      what_failed, 
+						      _("None of Conglomerate's plugins know how to export files of this type."),
+						      "");
 
-		switch (result) {
-		default: /* Do nothing; dialog was cancelled */
-			break;
-			
-		case GTK_RESPONSE_OK:
-			{
-				CongServiceExporter* exporter;
-				
-				/* Which plugin has been selected? */
-				exporter = get_selected_exporter(dialog_details);
-				if (exporter) {
-					gchar *export_uri = cong_exporter_get_preferred_uri(exporter);
-					g_message("Exporter invoked: \"%s\" to \"%s\"", cong_service_get_name(CONG_SERVICE(exporter)), export_uri);
-					
-					cong_exporter_invoke(exporter, 
-							     doc, 
-							     export_uri,
-							     toplevel_window);
-					
-					g_free(export_uri);
-					
-				}
+		gtk_dialog_run (error_dialog);
+		gtk_widget_destroy (GTK_WIDGET(error_dialog));
+		g_free (what_failed);
+		return;
+	}
+
+	gtk_widget_show_all (dialog);
+
+	/*
+	 * Outcome of the dialog:
+	 *    - cancelled
+	 *    - user selected ok, filename selected
+	 *    - user selected ok, no filename selected
+	 *
+	 * For the last case we want to throw up a dialog saying a filename is
+	 * needed and re-display the dialog, otherwise we end the loop.
+	 */
+	while (flag==1)
+	{
+		gint result = gtk_dialog_run (GTK_DIALOG(dialog));
+		flag = 0;
+
+		if (result==GTK_RESPONSE_OK) {
+			exporter = get_selected_exporter (dialog_details);
+			g_assert (exporter);
+
+			export_uri = cong_exporter_get_preferred_uri (exporter);
+			if (export_uri==NULL) {
+				GtkDialog* error_dialog;
+				error_dialog = cong_error_dialog_new (toplevel_window,
+								      _("No output file specified"), 
+								      _("Please specify a file name."),
+								      "");
+				gtk_dialog_run (error_dialog);
+				gtk_widget_destroy (GTK_WIDGET(error_dialog));
+				flag = 1;
+				exporter = NULL; /* in case the user decides to cancel the dialog */
 			}
-			break;
 		}
-
-		/* FIXME: Somewhat hackish cleanup: */
-		gconf_client_notify_remove(cong_app_get_gconf_client(cong_app_singleton()),
-					   dialog_details->connection_id);
-	} else {
-		/* There are no plugins which can handle this document: */
-		gchar *filename = cong_document_get_filename(doc);
-		gchar *what_failed = g_strdup_printf(_("Conglomerate cannot export \"%s\""), filename);
-		GtkDialog* error_dialog = cong_error_dialog_new(toplevel_window,
-								what_failed, 
-								_("None of Conglomerate's plugins know how to export files of that type."),
-								"");
-
-		gtk_dialog_run(error_dialog);
-		gtk_widget_destroy(GTK_WIDGET(error_dialog));
 	}
 
 	/* FIXME: Somewhat hackish cleanup: */
+	gconf_client_notify_remove(cong_app_get_gconf_client(cong_app_singleton()),
+				   dialog_details->connection_id);
 	cong_document_export_dialog_delete (dialog);
+
+	/*
+	 * We use the exporter variable to determine whether we continue with the processing.
+	 * Note that we destroy the dialog BEFORE we do this check, so that we do not
+	 * get a "hung" dialog window. The exporter should make sure that the busy cursor
+	 * is set in the top-level Conglomerate windows to tell the user that something
+	 * is happening. This probably needs some "UI love" to ensure it is usable.
+	 *
+	 * (due to the current design of cong_ui_transform_doc() in cong-plugins.c we
+         *  would not get the "busy" cursor in the dialog window if it were open when
+         *  we call the exporter)
+	 */
+	if (exporter) {
+		g_assert (export_uri);
+		g_message("Exporter invoked: \"%s\" to \"%s\"",
+			  cong_service_get_name(CONG_SERVICE(exporter)),
+			  export_uri);
+
+		cong_exporter_invoke (exporter, 
+				      doc, 
+				      export_uri,
+				      toplevel_window);
+		g_free (export_uri);
+	}
 
 }

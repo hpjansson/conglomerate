@@ -148,11 +148,11 @@ xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 				GList *list_of_parameters,
 				GtkWindow *toplevel_window);
 
-void cong_ui_transform_doc_to_uri(CongDocument *doc,
-				  const gchar *stylesheet_filename,
-				  GList *list_of_parameters,
-				  const gchar *uri,
-				  GtkWindow *toplevel_window);
+gboolean cong_ui_transform_doc_to_uri(CongDocument *doc,
+				      const gchar *stylesheet_filename,
+				      GList *list_of_parameters,
+				      const gchar *uri,
+				      GtkWindow *toplevel_window);
 
 gboolean cong_ui_load_imported_file_content(const gchar *uri,
 					    char** buffer,

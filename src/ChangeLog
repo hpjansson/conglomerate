@@ -1,3 +1,30 @@
+2004-10-14  Douglas Burke  <dburke@cfa.harvard.edu>
+ 
+	* cong-plugin.c, cong-plugin.h:
+ 
+ 	During cong_ui_transform_doc() the cursor of all the primary windows
+ 	will be set to GDK_WATCH whilst the transform is taking place.
+ 
+ 	Minor clean up to error dialogs that appeared when stylesheets could
+ 	not be found or applied.
+ 	
+ 	cong_ui_transform_doc_to_uri() now returns a gboolean indicating
+ 	whether the transform was successfull.
+ 
+	* cong-file-export.c:
+ 
+ 	cong_ui_hook_file_export() now destroys the dialog before calling the
+ 	transform, to avoid a "hung" dialog window and because the cursor change
+ 	in cong_ui_transform_doc() (to a busy cursor) only happens for primary
+ 	windows and not dialogs. The case of a user selecting an exporter but
+ 	not a filename is now handled.
+ 	
+	* plugin-docbook.c:
+ 
+ 	Let the user know, via an informational window, that a transform
+ 	(i.e. exporter) has succeeded. Provide feedback - via dialogs - when
+ 	Conglomerate is unable to locate the DocBook stylesheets.
+ 
 2004-10-14 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
  
 	* icon_assemble.xpm, icon_new.xpm, icon_save.xpm, ilogo.xpm:
