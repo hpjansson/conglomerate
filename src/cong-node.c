@@ -580,6 +580,53 @@ cong_node_generate_source (CongNodePtr node)
 }
 
 gchar*
+cong_node_generate_child_source (CongNodePtr node)
+{
+	xmlBufferPtr xml_buffer;
+	gchar *result;
+	CongNodePtr iter;
+
+	g_return_val_if_fail (node, NULL);
+
+	g_assert (node->doc);
+
+	xml_buffer = xmlBufferCreate();
+
+	iter = node->children;
+
+	do {
+		if (iter) {
+			switch (cong_node_type (iter)) {
+			case CONG_NODE_TYPE_DOCUMENT:
+				g_assert_not_reached();
+				break;
+			default:
+				xmlNodeDump (xml_buffer,
+					     iter->doc,
+					     iter,
+					     0,
+					     FALSE);
+				break;
+			}
+		}
+
+		if (iter==node->last) {
+			break;
+		} else {
+			iter=iter->next;
+		}
+
+	} while (1);
+
+	result = g_strdup (xmlBufferContent (xml_buffer));
+
+	xmlBufferFree (xml_buffer);
+
+	return result;	
+}
+
+
+gchar*
 cong_node_generate_source_from_byte_offset (CongNodePtr node,
 					    int start_byte_offset)
 {
@@ -704,6 +751,48 @@ cong_node_is_descendant_of (CongNodePtr node,
 	}
 }
 
+/* Utility for tree manipulation: */
+static void
+update_entities (CongNodePtr node)
+{
+	g_return_if_fail (node);
+
+	if (cong_node_type (node)==CONG_NODE_TYPE_ENTITY_DECL) {
+		xmlEntityPtr ent = (xmlEntityPtr)node;
+		gchar *child_source;
+
+		switch (ent->etype) {
+		case XML_INTERNAL_GENERAL_ENTITY:
+		case XML_INTERNAL_PARAMETER_ENTITY:
+			/* refresh entity source */
+			#if 0
+			g_message ("need to refresh entity \"%s\"", node->name);
+			#endif
+
+			if (ent->orig) {
+				xmlFree (ent->orig);
+			}
+			
+			child_source = cong_node_generate_child_source (node);
+			ent->orig = xmlStrdup (child_source);
+			g_free (child_source);
+			break;
+
+		case XML_EXTERNAL_GENERAL_PARSED_ENTITY:
+		case XML_EXTERNAL_GENERAL_UNPARSED_ENTITY:
+		case XML_EXTERNAL_PARAMETER_ENTITY:
+			/* FIXME: potentially update the document's file's "modified" information:  move to CongDocument level? */
+			break;
+
+		}
+
+		/* FIXME: amortize these updates... move to the CongDocument level? */
+	}
+
+	if (node->parent) {
+		update_entities (node->parent);
+	}
+}
 
 /* Tree manipulation: */
 void cong_node_private_make_orphan(CongNodePtr node)
@@ -767,6 +856,10 @@ void cong_node_private_make_orphan(CongNodePtr node)
 		g_assert(node->next == NULL);
 	}
 
+	if (former_parent) {
+		update_entities (former_parent);
+	}
+
 
 	/* Postconditions: */
 	{
@@ -799,7 +892,7 @@ void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 	g_return_if_fail(older_sibling);
 	g_return_if_fail(older_sibling->parent);
 	g_return_if_fail(node!=older_sibling);
-
+	
 	CONG_NODE_SELF_TEST(node);
 	CONG_NODE_SELF_TEST(older_sibling);
 
@@ -822,6 +915,8 @@ void cong_node_private_add_after(CongNodePtr node, CongNodePtr older_sibling)
 	}
 
 	older_sibling->next = node;
+
+	update_entities (node);
 
 	/* Postconditions: */
 	{
@@ -877,6 +972,8 @@ void cong_node_private_add_before(CongNodePtr node, CongNodePtr younger_sibling)
 
 	younger_sibling->prev = node;
 
+	update_entities (node);
+
 	/* Postconditions: */
 	{
 		g_assert( younger_sibling->prev == node );
@@ -922,6 +1019,8 @@ void cong_node_private_set_parent(CongNodePtr node, CongNodePtr adoptive_parent)
 		node->parent = adoptive_parent;
 	}
 
+	update_entities (node);
+
 	/* Postconditions: */
 	{
 		g_assert(node->parent == adoptive_parent);
@@ -945,6 +1044,8 @@ void cong_node_private_set_text(CongNodePtr node, const xmlChar *new_content)
 	g_return_if_fail(new_content);
 
 	xmlNodeSetContent(node, new_content);
+
+	update_entities (node);
 }
 
 void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, const xmlChar *value)
@@ -956,6 +1057,8 @@ void cong_node_private_set_attribute(CongNodePtr node, const xmlChar *name, cons
 	g_return_if_fail(value);
 
 	xmlSetProp(node, name, value);
+
+	update_entities (node);
 }
 
 void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
@@ -966,6 +1069,8 @@ void cong_node_private_remove_attribute(CongNodePtr node, const xmlChar *name)
 	g_return_if_fail(name);
 
 	xmlUnsetProp(node, name);
+
+	update_entities (node);
 }
 
 /* Utilities: */

@@ -1,5 +1,9 @@
 2003-12-20  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-node.c, cong-node.h
+
+	Fix for bug #124208 (entity modification is not saved)
+
 	* cong-document.c
 
 	Implemented various missing node types in cong_document_get_node_name, fixing a problem in the test data for bug #120976

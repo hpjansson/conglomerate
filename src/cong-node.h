@@ -160,9 +160,28 @@ CongNodePtr cong_node_new_text_len(const gchar *text, int len, CongDocument *doc
 void cong_node_free(CongNodePtr node);
 
 
-/* Generate XML source as a UTF8 string: */
+/**
+ * cong_node_generate_source:
+ * @node:  The node for which the XML source is to be generated
+ * 
+ * Generate XML source for the node 
+ *
+ * Returns: the XML source for the node as a UTF8 string.  The caller is responsible for freeing this with g_free
+ */
 gchar*
 cong_node_generate_source (CongNodePtr node);
+
+/**
+ * cong_node_generate_child_source:
+ * @node:  The parent node
+ * 
+ * Generate XML source for the node's children, concatenated together as a UTF8 string.  Should handle entity references correctly.
+ * The result does not include the XML source for the node itself.
+ *
+ * Returns: the XML source for the node's children as a UTF8 string.  The caller is responsible for freeing this with g_free
+ */
+gchar*
+cong_node_generate_child_source (CongNodePtr node);
 
 /* Generate XML source from TEXT and COMMENT nodes as a UTF8 string, from the byte offset into the UTF-8: */
 gchar*
