@@ -93,7 +93,18 @@ cong_document_set_url(CongDocument *doc, const gchar *url);
 glong
 cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc);
 
-/* MVC-related methods on the document: */
+/** 
+ * Update amortisation
+ *
+ * When making a large number of changes to a document, you can wrap them inside a begin_edit/end_edit pair
+ * Begin/End edits can be nested; the document keeps track of the depth.
+ * Views are notified when editing actually begins/ends; they are only notified on the outermost level of nesting.
+ */
+void cong_document_begin_edit(CongDocument *doc);
+void cong_document_end_edit(CongDocument *doc);
+gboolean cong_document_is_within_edit(CongDocument *doc);
+
+/* MVC: Change signals on the document: *
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);
@@ -129,6 +140,16 @@ void cong_document_copy_selection(CongDocument *doc);
 void cong_document_paste_selection(CongDocument *doc, GtkWidget *widget);
 void cong_document_view_source(CongDocument *doc);
 
+/* Handy ways to traverse the document, with a callback: */
+
+/* Return TRUE to stop the traversal */
+typedef gboolean (*CongDocumentRecursionCallback)(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level);
+
+/* Return TRUE if the traversal was stopped prematurely */
+gboolean cong_document_for_each_node(CongDocument *doc, CongDocumentRecursionCallback callback, gpointer callback_data);
+
+/* Handy utilities for manipulating the document: */
+void cong_document_merge_adjacent_text_nodes(CongDocument *doc);
 
 G_END_DECLS
 

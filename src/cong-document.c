@@ -81,6 +81,9 @@ struct CongDocument
 	   Knowing this lets us update the window title when it changes (eventually do as a signal on the document).
 	*/
 	CongPrimaryWindow *primary_window; 
+
+	/* Amortisation of updates: */
+	guint edit_depth;
 };
 
 CongDocument*
@@ -395,6 +398,55 @@ cong_document_get_seconds_since_last_save_or_load(const CongDocument *doc)
 	g_get_current_time(&current_time);
 
 	return current_time.tv_sec - doc->time_of_last_save.tv_sec;
+}
+
+void cong_document_begin_edit (CongDocument *doc)
+{
+	g_return_if_fail (doc);
+
+	doc->edit_depth++;
+
+	/* If we've just started the outermost level of a series of nested edits, then notify all the views: */
+	if (1 == doc->edit_depth) {
+		GList *iter;
+		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			if (view->klass->on_document_begin_edit) {
+				view->klass->on_document_begin_edit(view);
+			}
+		}
+	}
+}
+
+void cong_document_end_edit (CongDocument *doc)
+{
+	g_return_if_fail (doc);
+
+	g_assert(doc->edit_depth>0 && "If this assertion fails, then there is a mismatched pair of begin/end edit calls on the document");
+
+	doc->edit_depth--;
+
+	/* If we've just finished the outermost level of a series of nested edits, then notify all the views: */
+	if (0 == doc->edit_depth) {
+		GList *iter;
+		for (iter = doc->views; iter; iter = g_list_next(iter) ) {
+			CongView *view = CONG_VIEW(iter->data);
+			
+			g_assert(view->klass);
+			if (view->klass->on_document_begin_edit) {
+				view->klass->on_document_end_edit(view);
+			}
+		}
+	}
+}
+
+gboolean cong_document_is_within_edit(CongDocument *doc)
+{
+	g_return_val_if_fail (doc, FALSE);
+
+	return (doc->edit_depth>0);
 }
 
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node)
@@ -784,4 +836,73 @@ void cong_document_delete_selection(CongDocument *doc)
 #else
 	cong_selection_delete(cong_document_get_selection(doc), doc);
 #endif
+}
+
+static gboolean cong_document_for_each_node_recurse(CongDocument *doc, CongNodePtr node, CongDocumentRecursionCallback callback, gpointer user_data, guint recursion_level)
+{
+	g_assert(doc);
+	g_assert(node);
+	g_assert(callback);
+
+	if ((*callback)(doc, node, user_data, recursion_level)) {
+		return TRUE;
+	}
+	    
+	/* Recurse over children: */
+	{
+		CongNodePtr child_iter;
+
+		for (child_iter = node->children; child_iter; child_iter=child_iter->next) {
+			if (cong_document_for_each_node_recurse(doc, child_iter, callback, user_data, recursion_level+1)) {
+				return TRUE;
+			}
+		}
+	}
+
+	return FALSE;
+}
+
+gboolean cong_document_for_each_node(CongDocument *doc, CongDocumentRecursionCallback callback, gpointer user_data)
+{
+	g_return_val_if_fail (doc, TRUE);
+	g_return_val_if_fail (callback, TRUE);
+
+	return cong_document_for_each_node_recurse (doc,
+						    (CongNodePtr)cong_document_get_xml(doc), 
+						    callback, 
+						    user_data, 
+						    0);
+}
+
+static gboolean merge_adjacent_text_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
+{
+	/* We have to "look behind" at the previous sibling, since the iteration moes forward: */
+	if (node->prev) {
+		if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
+			if (cong_node_type(node->prev)==CONG_NODE_TYPE_TEXT) {
+				/* Merge preceding node's text into this one, then delete it: */
+				gchar *new_text = g_strdup_printf("%s%s", node->prev->content, node->content);
+
+				cong_document_node_set_text (doc, node, new_text);
+				g_free (new_text);
+
+				cong_document_tag_remove (doc, node->prev);
+			}			
+		}
+	}
+
+	/* Keep going: */
+	return FALSE;
+}
+
+void cong_document_merge_adjacent_text_nodes(CongDocument *doc)
+{
+	g_return_if_fail (doc);
+
+	cong_document_begin_edit (doc);
+
+	cong_document_for_each_node (doc, merge_adjacent_text_callback, NULL);
+
+	cong_document_end_edit (doc);
+
 }

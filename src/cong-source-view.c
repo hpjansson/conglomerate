@@ -26,10 +26,14 @@ typedef struct CongSourceViewDetails
 	
 	GtkTextBuffer *text_buffer;
 	GtkTextView *text_view;
+	
+	gboolean is_buffer_up_to_date;
 
 } CongSourceViewDetails;
 
 /* Prototypes of the handler functions: */
+static void on_document_begin_edit(CongView *view);
+static void on_document_end_edit(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
@@ -40,7 +44,7 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 static void on_selection_change(CongView *view);
 static void on_cursor_change(CongView *view);
 
-#define DEBUG_SOURCE_VIEW 1
+#define DEBUG_SOURCE_VIEW 0
 
 void regenerate_text_buffer(CongSourceView *source_view)
 {
@@ -70,6 +74,7 @@ void regenerate_text_buffer(CongSourceView *source_view)
 		xmlFree(doc_txt_ptr);
 	}
 
+	details->is_buffer_up_to_date = TRUE;
 #else
 	gtk_text_buffer_set_text(details->text_buffer,
 				 "fubar",
@@ -79,7 +84,47 @@ void regenerate_text_buffer(CongSourceView *source_view)
 
 }
 
+static void on_document_change(CongSourceView *source_view)
+{
+	CongSourceViewDetails *details;
+
+	g_assert(source_view);
+
+	details = source_view->private;
+
+	/* A change has occurred to the document... */ 
+	if ( cong_document_is_within_edit (cong_view_get_document (CONG_VIEW (source_view)))) {
+		/* We're within a nested series of edits: flag the buffer as invalid; we will update it when the nested editing is complete */
+		details->is_buffer_up_to_date = FALSE;
+	} else {
+		/* We're not within a nested series of edits; we must update now: */
+		regenerate_text_buffer(source_view);
+	}
+}
+
+
 /* Definitions of the handler functions: */
+static void on_document_begin_edit(CongView *view)
+{
+	/* empty */
+}
+
+static void on_document_end_edit(CongView *view)
+{
+	CongSourceView *source_view;
+	CongSourceViewDetails *details;
+
+	g_assert(source_view);
+
+	source_view = CONG_SOURCE_VIEW(view);
+	details = source_view->private;		
+	
+	if (!details->is_buffer_up_to_date) {
+		/* Then some changes occurred during the nested begin/end edit and we deferred them; regenerate the buffer now: */
+		regenerate_text_buffer(source_view);
+	}
+}
+
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
 	CongSourceView *source_view;
@@ -95,7 +140,7 @@ static void on_document_node_make_orphan(CongView *view, gboolean before_event, 
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -116,7 +161,7 @@ static void on_document_node_add_after(CongView *view, gboolean before_event, Co
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -137,7 +182,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -158,7 +203,7 @@ static void on_document_node_set_parent(CongView *view, gboolean before_event, C
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -178,7 +223,7 @@ static void on_document_node_set_text(CongView *view, gboolean before_event, Con
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -199,7 +244,7 @@ static void on_document_node_set_attribute(CongView *view, gboolean before_event
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -219,7 +264,7 @@ static void on_document_node_remove_attribute(CongView *view, gboolean before_ev
 	source_view = CONG_SOURCE_VIEW(view);
 
 	if (!before_event) {
-		regenerate_text_buffer(source_view);
+		on_document_change(source_view);
 	}
 }
 
@@ -248,6 +293,8 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 	
 	view->view.doc = doc;
 	view->view.klass = g_new0(CongViewClass,1);
+	view->view.klass->on_document_begin_edit = on_document_begin_edit;
+	view->view.klass->on_document_end_edit = on_document_end_edit;
 	view->view.klass->on_document_node_make_orphan = on_document_node_make_orphan;
 	view->view.klass->on_document_node_add_after = on_document_node_add_after;
 	view->view.klass->on_document_node_add_before = on_document_node_add_before;

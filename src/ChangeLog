@@ -1,5 +1,9 @@
 2003-07-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-source-view.c, cong-view.h, plugin-cleanup-source.c
+
+	Amortisation of view updates; generalised document node traversal; utility for merging adjacent text nodes
+
 	* Makefile.am, cong-dtd.c, cong-dtd.h, cong-dispspec.c, cong-dispspec.h, cong-eel.c
 
 	New files; refactoring of the dispspec generation code.

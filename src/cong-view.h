@@ -34,6 +34,8 @@
    views are any GObjects e.g. GtkWidgets, they connect to signals on the CongDocument:
 
    Signals on a CongDocument will be:
+   "begin_edit"
+   "end_edit"
    "make_orphan"
    "add_after"
    "add_before"
@@ -55,6 +57,12 @@ struct CongView
 
 struct CongViewClass
 {
+	/*
+	  Hooks for amortising updates:
+	 */
+	void (*on_document_begin_edit)(CongView *view);
+	void (*on_document_end_edit)(CongView *view);
+
 	/* 
 	   Hooks for the various change signals; eventually do this by listening to signals emitted from the document, porting to the standard 
 	   GObject framework.

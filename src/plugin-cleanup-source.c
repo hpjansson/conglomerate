@@ -65,13 +65,6 @@ generate_indentation(const CongSourceCleanupOptions *options, guint indent_level
 
 }
 
-/* Return TRUE to stop the traversal */
-typedef gboolean (*CongDocumentRecursionCallback)(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level);
-
-/* Return TRUE if the traversal was stopped prematurely */
-gboolean cong_document_for_each_node(CongDocument *doc, CongDocumentRecursionCallback callback, gpointer callback_data);
-
-
 gboolean cong_util_is_pure_whitespace (const gchar *utf8_text)
 {
 	gunichar ch;
@@ -136,43 +129,6 @@ gchar* cong_util_strip_whitespace_from_string (const gchar* input_string)
 
 	return result_string;	
 }
-
-static gboolean cong_document_for_each_node_recurse(CongDocument *doc, CongNodePtr node, CongDocumentRecursionCallback callback, gpointer user_data, guint recursion_level)
-{
-	g_assert(doc);
-	g_assert(node);
-	g_assert(callback);
-
-	if ((*callback)(doc, node, user_data, recursion_level)) {
-		return TRUE;
-	}
-	    
-	/* Recurse over children: */
-	{
-		CongNodePtr child_iter;
-
-		for (child_iter = node->children; child_iter; child_iter=child_iter->next) {
-			if (cong_document_for_each_node_recurse(doc, child_iter, callback, user_data, recursion_level+1)) {
-				return TRUE;
-			}
-		}
-	}
-
-	return FALSE;
-}
-
-gboolean cong_document_for_each_node(CongDocument *doc, CongDocumentRecursionCallback callback, gpointer user_data)
-{
-	g_return_val_if_fail (doc, TRUE);
-	g_return_val_if_fail (callback, TRUE);
-
-	return cong_document_for_each_node_recurse (doc,
-						    (CongNodePtr)cong_document_get_xml(doc), 
-						    callback, 
-						    user_data, 
-						    0);
-}
-
 
 
 static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, gpointer user_data, guint recursion_level)
@@ -318,21 +274,26 @@ static void cong_util_cleanup_source(CongDocument *doc, const CongSourceCleanupO
 	g_return_if_fail(doc);
 	g_return_if_fail(options);
 
-#if 1
 	/* FIXME: knowledge about where whitespace should be preserved? */
  	/* Traverse the document:
 	   - every text node should have its internal whitespace cleaned, then begin/end with an appropriate amount of indentation
 	   - every element node inside another element node should have whitespace containing a carriage return and then indentation...
 	*/
 
+	/* Allow views to amortise updates: */
+	cong_document_begin_edit (doc);
+
 	/* Stage 1:  strip out all non-significant whitespace: */
-	cong_document_for_each_node(doc, strip_whitespace_callback, &options);
+	cong_document_for_each_node (doc, strip_whitespace_callback, &options);
 
 	/* Stage 2:  add back whitespace to indicate the structure of the document: */
-	cong_document_for_each_node(doc, add_indentation_callback, &options);
-#else
-	CONG_DO_UNIMPLEMENTED_DIALOG(primary_window, "Cleanup XML source");
-#endif
+	cong_document_for_each_node (doc, add_indentation_callback, &options);
+
+	/* Stage 3: merge adjacent text nodes: */
+	cong_document_merge_adjacent_text_nodes(doc);
+
+	/* Allow views to amortise updates: */
+	cong_document_end_edit (doc);
 }
 
 static void action_callback(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data)
