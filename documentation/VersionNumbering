@@ -1,23 +1,4 @@
-Dave Malcolm wrote:
 
- > We need to think of a versioning scheme.  The old conge tarballs were
- >  labelled as "0.1.1" and "0.1.2". I propose the next release will be
- > 0.3.0, and that we follow something like the Linux Kernel numbering
- > scheme, with odd/even middle numbers to indicate unstable/stable
- > releases, and to only reach 1.0.0 when we reach some major milestone
- > that we're quite happy with.
-
-Basically I agree with this, I'd just call the next release 0.2.0 (this 
-indicates also that it's now a Gnome 2 application ;).
-
-This versioning scheme will also indicate that we'll be assumed to use a 
-split development model with stable and development branches, similar to 
-the kernel development (however, the first kernel was 0.01, not 0.0.1).
-
-
-Suggestion for the docs (and for us as a reminder):
-
-_<some_section>_
 Conglomerate Version Numbering.
 
 Conglomerate uses a numbering scheme similar to the Linux kernel version 
@@ -35,26 +16,23 @@ any even minor number version number refers to a stable version.
 	Represents addeed or tweaked functionality
 	on top of a largely coherent structure.
 
+	Even numbers are considered stable versions.
+
+	Odd numbers are development versions fresh from the CVS repository
+
+
 <patch level>:
 
 	Refers to releases fixing bugs.
+	These have odds and evens without any meaning.
+	Usually there is an increment of one.
+	However, development versions can have random increments.
+	It is even possible to have different development versions
+	with the same number.
 
-_</some_section>_
-
-
-_<some_section>_
-Release History
-
-0.2.0	First release for Gnome 2 on nn-Nov-2002
-
-0.1.2	Second release in (?)
-0.1.1	Initial release in 1999 (?)
-
-_</some_section>_
 
 
 References:
 
 Benjamin "Mako" Hill: Free Software Project Management HOWTO.
 
---asb
