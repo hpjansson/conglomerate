@@ -2,7 +2,7 @@
 
 	* configure.in
 	
-	Re-enabled gtk-doc. (working on bugzilla #131600)
+	gtk-doc is default disabled. (working on bugzilla #131600)
 
 2004-04-10  Adam Weinberger  <adamw@gnome.org>
 

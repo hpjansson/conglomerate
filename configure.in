@@ -211,6 +211,8 @@ BASE_CFLAGS="$BASE_CFLAGS -Wall"
 
 ##################################################
 # Check for gtk-doc.
+#  see also
+#  http://bugzilla.gnome.org/show_bug.cgi?id=131600
 ##################################################
 GTK_DOC_CHECK
 
@@ -234,16 +236,8 @@ else
   GTKDOC=false
 fi
 
-dnl Let people disable the gtk-doc stuff.
-AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=yes]], enable_gtk_doc="$enableval", enable_gtk_doc=yes)
-
-dnl if test x$enable_gtk_doc = xauto ; then
-dnl   if test x$GTKDOC = xtrue ; then
-    enable_gtk_doc=yes
-dnl   else
-dnl     enable_gtk_doc=no
-dnl   fi
-dnl fi
+dnl Let people enable the gtk-doc stuff.
+AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=no]], enable_gtk_doc="$enableval", enable_gtk_doc=no)
 
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
