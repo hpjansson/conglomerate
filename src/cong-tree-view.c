@@ -70,7 +70,7 @@ struct search_struct
 #endif
 
 /* Internal function prototypes: */
-static gboolean
+static void
 on_widget_destroy_event (GtkWidget *widget,
 			 gpointer user_data);
 
@@ -287,7 +287,7 @@ cong_tree_view_get_tree_store (CongTreeView *tree_view)
 
 
 /* Internal function implementations: */
-static gboolean
+static void
 on_widget_destroy_event (GtkWidget *widget,
 			 gpointer user_data)
 {
@@ -298,8 +298,6 @@ on_widget_destroy_event (GtkWidget *widget,
 #endif
 
 	cong_tree_view_free (cong_tree_view);
-
-	return FALSE;
 }
 
 /* the treeview widget has the userdata "cong_tree_view" set on it */

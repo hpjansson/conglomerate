@@ -31,6 +31,14 @@ typedef struct CongSourceViewDetails
 
 } CongSourceViewDetails;
 
+/* Internal function prototypes: */
+static void
+cong_source_view_free (CongSourceView *source_view);
+
+static void
+on_widget_destroy_event (GtkWidget *widget,
+			 gpointer user_data);
+
 /* Prototypes of the handler functions: */
 static void on_document_begin_edit(CongView *view);
 static void on_document_end_edit(CongView *view);
@@ -324,10 +332,45 @@ GtkWidget *cong_source_view_new(CongDocument *doc)
 
 	regenerate_text_buffer(view);
 
+	/* Set up for cleanup: */
+	g_signal_connect (G_OBJECT (details->text_view),
+			  "destroy",
+			  G_CALLBACK (on_widget_destroy_event),
+			  view);
+
 	gtk_widget_show(GTK_WIDGET(details->text_view));
 	gtk_widget_show(GTK_WIDGET(details->scrolled_window));
 
 	return GTK_WIDGET(details->scrolled_window);	
 }
 
+static void
+cong_source_view_free (CongSourceView *source_view)
+{
+	g_assert (source_view);
+
+#if 0
+	g_message ("cong_source_view_free");
+#endif
+
+	cong_document_unregister_view (source_view->view.doc, CONG_VIEW(source_view));
+
+	/* FIXME: do we need to unref the text buffer? */
+
+	g_free (source_view->private);
+	g_free (source_view);
+}
+
+static void
+on_widget_destroy_event (GtkWidget *widget,
+			 gpointer user_data)
+{
+	CongSourceView *source_view = user_data;
+
+#if 0
+	g_message ("on_widget_destroy_event");
+#endif
+
+	cong_source_view_free (source_view);
+}
 

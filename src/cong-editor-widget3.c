@@ -361,6 +361,34 @@ cong_editor_widget3_instance_init (CongEditorWidget3 *widget)
 	widget->private = g_new0(CongEditorWidget3Details,1);
 }
 
+/* Disconnects all signals from instance that have the supplied user_data as the closure data; returns the number disconnected: */
+guint
+cong_eel_disconnect_all_with_data (gpointer instance,
+				   gpointer user_data)
+{
+	guint count = 0;
+	while (1) {
+		gulong  handler_id;
+
+		handler_id = g_signal_handler_find (instance,
+						    G_SIGNAL_MATCH_DATA,
+						    0, /* guint signal_id, */
+						    0, /* GQuark detail, */
+						    NULL, /* GClosure *closure, */
+						    NULL, /* gpointer func, */
+						    user_data);
+
+		if (handler_id) {
+			g_signal_handler_disconnect (instance,
+						     handler_id);
+			count++;
+		} else {
+			/* No more handlers: */
+			return count;
+		}
+	}
+}
+
 CongEditorWidget3*
 cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 			       CongDocument *doc)
@@ -439,6 +467,8 @@ cong_editor_widget3_construct (CongEditorWidget3 *editor_widget,
 
 	/* Connect to CongDocument events: */
 	{
+		/* (These signal handlets get disconnected during the dispose handler) */
+
 		/* attach signal handlers to document for notification before change happens: */
 		g_signal_connect (G_OBJECT(doc), "begin_edit", G_CALLBACK(on_signal_begin_edit_notify_before), editor_widget);
 		g_signal_connect (G_OBJECT(doc), "end_edit", G_CALLBACK(on_signal_end_edit_notify_before), editor_widget);
@@ -750,10 +780,13 @@ cong_editor_widget3_dispose (GObject *object)
 	g_assert (editor_widget->private);
 
 	if (PRIVATE (editor_widget)->doc) {
+		/* Disconnect all the CongDocument signal handlers: */
+		cong_eel_disconnect_all_with_data (PRIVATE (editor_widget)->doc,
+						   object);
+
 		g_object_unref (G_OBJECT (PRIVATE (editor_widget)->doc));
 		PRIVATE (editor_widget)->doc = NULL;
 	}
-
 
 	/* FIXME: need to clean up this lot! */
 #if 0
@@ -1193,7 +1226,7 @@ static void size_request_handler(GtkWidget *widget,
 static void on_signal_begin_edit_notify_before (CongDocument *doc,
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_begin_edit_notify_before");
 
@@ -1203,7 +1236,7 @@ static void on_signal_begin_edit_notify_before (CongDocument *doc,
 static void on_signal_end_edit_notify_before (CongDocument *doc,
 				       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_end_edit_notify_before");
 
@@ -1214,7 +1247,7 @@ static void on_signal_make_orphan_notify_before (CongDocument *doc,
 						 CongNodePtr node, 
 						 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_make_orphan_notify_before");
 
@@ -1232,7 +1265,7 @@ static void on_signal_add_after_notify_before (CongDocument *doc,
 					CongNodePtr older_sibling, 
 					gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_before");
 
@@ -1244,7 +1277,7 @@ static void on_signal_add_before_notify_before (CongDocument *doc,
 					 CongNodePtr younger_sibling, 
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_before");
 
@@ -1256,7 +1289,7 @@ static void on_signal_set_parent_notify_before (CongDocument *doc,
 					 CongNodePtr adoptive_parent, 
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_before");
 
@@ -1272,7 +1305,7 @@ static void on_signal_set_text_notify_before (CongDocument *doc,
 				       const xmlChar *new_content, 
 				       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_text_notify_before");
 
@@ -1285,7 +1318,7 @@ static void on_signal_set_attribute_notify_before (CongDocument *doc,
 					    const xmlChar *value, 
 					    gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_attribute_notify_before");
 
@@ -1297,7 +1330,7 @@ static void on_signal_remove_attribute_notify_before (CongDocument *doc,
 					       const xmlChar *name, 
 					       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_remove_attribute_notify_before");
 
@@ -1307,7 +1340,7 @@ static void on_signal_remove_attribute_notify_before (CongDocument *doc,
 static void on_signal_selection_change_notify_before (CongDocument *doc, 
 					       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_selection_change_notify_before");
 
@@ -1317,7 +1350,7 @@ static void on_signal_selection_change_notify_before (CongDocument *doc,
 static void on_signal_cursor_change_notify_before (CongDocument *doc, 
 					    gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 #if SHOW_CURSOR_SPEW
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_before");
@@ -1331,7 +1364,7 @@ static void on_signal_cursor_change_notify_before (CongDocument *doc,
 static void on_signal_begin_edit_notify_after (CongDocument *doc,
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_begin_edit_notify_after");
 
@@ -1341,7 +1374,7 @@ static void on_signal_begin_edit_notify_after (CongDocument *doc,
 static void on_signal_end_edit_notify_after (CongDocument *doc,
 				       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_end_edit_notify_after");
 
@@ -1352,7 +1385,7 @@ static void on_signal_make_orphan_notify_after (CongDocument *doc,
 					 CongNodePtr node, 
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 	
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_make_orphan_notify_after");
 
@@ -1364,7 +1397,7 @@ static void on_signal_add_after_notify_after (CongDocument *doc,
 					CongNodePtr older_sibling, 
 					gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_after_notify_after");
 
@@ -1378,7 +1411,7 @@ static void on_signal_add_before_notify_after (CongDocument *doc,
 					 CongNodePtr younger_sibling, 
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_add_before_notify_after");
 
@@ -1392,7 +1425,7 @@ static void on_signal_set_parent_notify_after (CongDocument *doc,
 					 CongNodePtr adoptive_parent, 
 					 gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_parent_notify_after");
 
@@ -1406,7 +1439,7 @@ static void on_signal_set_text_notify_after (CongDocument *doc,
 				       const xmlChar *new_content, 
 				       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_text_notify_after");
 
@@ -1419,7 +1452,7 @@ static void on_signal_set_attribute_notify_after (CongDocument *doc,
 					   const xmlChar *value, 
 					   gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_set_attribute_notify_after");
 
@@ -1431,7 +1464,7 @@ static void on_signal_remove_attribute_notify_after (CongDocument *doc,
 					       const xmlChar *name, 
 					       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_remove_attribute_notify_after");
 
@@ -1441,7 +1474,7 @@ static void on_signal_remove_attribute_notify_after (CongDocument *doc,
 static void on_signal_selection_change_notify_after (CongDocument *doc, 
 					       gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_selection_change_notify_after");
 
@@ -1456,7 +1489,7 @@ static void on_signal_selection_change_notify_after (CongDocument *doc,
 static void on_signal_cursor_change_notify_after (CongDocument *doc, 
 					    gpointer user_data) 
 { 
-	CongEditorWidget3 *editor_widget = (CongEditorWidget3*)user_data; 
+	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(user_data); 
 
 #if SHOW_CURSOR_SPEW
 	LOG_CONG_DOCUMENT_SIGNAL1("(CongEditorWidget3) on_signal_cursor_change_notify_after");
