@@ -20,7 +20,7 @@ function regular_release_changes
 
  mv debian/control debian/control.orig
  sed -e '/Package: conglomerate-dbg/,$d' debian/control.orig | \
- sed -e '/Homepage:/,$ { /^$/d }' > debian/control
+ sed -e '/architecture independent/,$ { /^$/d }' > debian/control
 
  mv debian/rules debian/rules.orig
  sed -e '/enable-debug/d' \
