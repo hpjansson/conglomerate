@@ -2,7 +2,13 @@ bin_PROGRAMS = conge
 
 conge_SOURCES =             \
   global.h                  \
+  cong-dialog.h             \
+  cong-dispspec.h           \
+  cong-dispspec-registry.h  \
+  cong-document.h           \
   cong-editor-widget-impl.h \
+  cong-eel.h                \
+  cong-error-dialog.h       \
   icon_assemble.c           \
   icon_connect.c            \
   icon_new.c                \
@@ -31,6 +37,7 @@ conge_SOURCES =             \
   cong-document.c           \
   cong-dummy-element-editor.c  \
   cong-editor-widget.c      \
+  cong-eel.c                \
   cong-element-editor.c     \
   cong-error-dialog.c       \
   cong-error-file-open.c    \
