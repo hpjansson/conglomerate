@@ -1,5 +1,9 @@
 2004-01-19  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-dtd.c, cong-dtd.h, plugin-random.c
+
+	Random document plugin now makes use of DTD if available to try to generate valid random documents
+	
 	* plugin-random.c, Makefile.am, cong-app.c, cong-fake-plugin-hooks.h
 
 	New plugin for generating random documents

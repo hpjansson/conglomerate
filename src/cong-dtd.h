@@ -65,6 +65,19 @@ cong_dtd_element_guess_dispspec_type (xmlElementPtr element);
 gboolean
 cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content);
 
+/**
+ * cong_dtd_get_element_for_node
+ * @dtd: the DTD
+ * @node: an xml node
+ * 
+ * Given a DTD and an XML node, try to find the #xmlElementPtr for that node in the DTD
+ * 
+ * Returns: the #xmlElementPtr if found, or NULL otherwise
+ */
+xmlElementPtr
+cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
+				       xmlNodePtr xml_node);
+
 G_END_DECLS
 
 #endif

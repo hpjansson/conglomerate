@@ -117,6 +117,20 @@ cong_dtd_element_content_can_contain_pcdata (xmlElementContentPtr content)
 	return FALSE;
 }
 
+xmlElementPtr
+cong_dtd_element_get_element_for_node (xmlDtdPtr dtd,
+				       xmlNodePtr xml_node)
+{
+	g_return_val_if_fail (dtd, NULL);
+	g_return_val_if_fail (xml_node, NULL);
+	g_return_val_if_fail (XML_ELEMENT_NODE==xml_node->type, NULL);
+	g_return_val_if_fail (xml_node->name, NULL);
+
+	/* FIXME: doesn't handle namespaces yet: */
+	return xmlGetDtdElementDesc (dtd,
+				     xml_node->name);
+}
+
 /* Internal function definitions: */
 static void
 element_callback_marshall (void *payload, 
