@@ -298,7 +298,9 @@
 	  <child>
 	    <widget class="GtkLabel" id="label11">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">This is a placeholder page.  Eventually you will be able to edit the language of the text here.</property>
+	      <property name="label" translatable="yes">This is a placeholder page.  Eventually you will be able to edit the language of the text here.
+
+This is listed in Bugzilla as bug #122536</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -337,7 +339,9 @@
 	  <child>
 	    <widget class="GtkLabel" id="label12">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">This is a placeholder page.  Eventually you will be able to use this page to manipulate DocBook's simple version tracking information.</property>
+	      <property name="label" translatable="yes">This is a placeholder page.  Eventually you will be able to use this page to manipulate DocBook's simple version tracking information.
+
+This is listed in Bugzilla as bug #122538</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
