@@ -1,5 +1,9 @@
 2003-09-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-doc-from-xds.c
+
+	Now sets the xmlDocPtr on the tree clone
+	
 	* cong-attribute-editor.c
 
 	Should now clean up properly

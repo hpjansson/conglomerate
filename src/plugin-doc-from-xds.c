@@ -45,7 +45,12 @@ void factory_action_callback_doc_from_xds(CongDocumentFactory *factory,
 	template = cong_dispspec_get_template(dispspec);
 	if(template)
 	{
-		xmlDocSetRootElement(xml_doc, xmlCopyNode(template, TRUE));
+		xmlNodePtr clone = xmlCopyNode(template, TRUE);
+
+		cong_node_recursive_set_doc (clone, 
+					     xml_doc);
+
+		xmlDocSetRootElement(xml_doc, clone);
 	}
 
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
