@@ -1,6 +1,14 @@
 creating ChangeLog
 2002-11-15 David Malcolm
 
+        * Makefile.am, cong-primary-window.c, global.h, main.c, new_doc.c
+
+	Creation of plugin architecture
+	
+        * cong-plugin.c, plugin-docbook.c
+
+	Initial imports
+	
 	* cong-dialog.c, cong-document.c, cong-error-dialog.c, cong-primary-window.c, global.h
 
 	Dialog refactoring

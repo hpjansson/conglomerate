@@ -810,6 +810,64 @@ static gint popup_deactivate(GtkWidget *widget, GdkEvent *event)
 	return(TRUE);
 }
 
+gboolean main_load_displayspecs(void)
+{
+#if 0
+	gchar*      xds_directory = gnome_program_locate_file(the_gui.gnome_program,
+							      GNOME_FILE_DOMAIN_APP_DATADIR,
+							      "dispspec",
+							      FALSE,
+							      NULL);
+#else
+	gchar* current_dir = g_get_current_dir();
+	gchar* xds_directory = g_strdup_printf("%s/../examples",current_dir);
+	g_free(current_dir);
+#endif
+
+	if (xds_directory) {
+		g_message("Loading xds files from \"%s\"\n", xds_directory);
+		the_globals.ds_registry = cong_dispspec_registry_new(xds_directory);
+		
+		g_free(xds_directory);
+		
+		if (the_globals.ds_registry==NULL) {
+			return FALSE;
+		}
+		
+		cong_dispspec_registry_dump(the_globals.ds_registry);
+	} else {
+		GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not find its registry of document types.",
+							  "You must run the program from the location in which you built it.",
+							  "This is a known problem and will be fixed.");
+		cong_error_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(GTK_WIDGET(dialog));
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+void register_plugin(CongPluginCallbackRegister register_callback,
+		     CongPluginCallbackConfigure configure_callback)
+{
+	g_return_if_fail(register_callback);
+
+	g_assert(the_globals.plugin_manager);
+
+	cong_plugin_manager_register(the_globals.plugin_manager,
+				     register_callback, 
+				     configure_callback);
+}
+
+
+
+void main_load_plugins(void)
+{
+	/* For the moment, there aren't any actual plugins; instead we fake it. */
+
+	register_plugin(plugin_docbook_plugin_register,
+			plugin_docbook_plugin_configure);
+}
 
 int main( int   argc,
 	  char *argv[] )
@@ -858,39 +916,17 @@ int main( int   argc,
 	cong_primary_window_new(NULL);
 
 
-	{
-#if 0
-		gchar*      xds_directory = gnome_program_locate_file(the_gui.gnome_program,
-								      GNOME_FILE_DOMAIN_APP_DATADIR,
-								      "dispspec",
-								      FALSE,
-								      NULL);
-#else
-		gchar* current_dir = g_get_current_dir();
-		gchar* xds_directory = g_strdup_printf("%s/../examples",current_dir);
-		g_free(current_dir);
-#endif
-
-		if (xds_directory) {
-			g_message("Loading xds files from \"%s\"\n", xds_directory);
-			the_globals.ds_registry = cong_dispspec_registry_new(xds_directory);
-
-			g_free(xds_directory);
-
-			if (the_globals.ds_registry==NULL) {
-				return(1);
-			}
-
-			cong_dispspec_registry_dump(the_globals.ds_registry);
-		} else {
-			GtkDialog* dialog = cong_error_dialog_new("Conglomerate could not find its registry of document types.",
- 								  "You must run the program from the location in which you built it.",
- 								  "This is a known problem and will be fixed.");
-			cong_error_dialog_run(GTK_DIALOG(dialog));
-			gtk_widget_destroy(GTK_WIDGET(dialog));
-			return(1);
-		}
+	/* Load all the displayspec (xds) files: */
+	if (!main_load_displayspecs()) {
+		return 1;
 	}
+
+	/* 
+	   Load all the plugins.  We do this after loading the xds files in case some of the plugins want to operate on the registry
+	   of displayspecs
+	 */
+	the_globals.plugin_manager = cong_plugin_manager_new();
+	main_load_plugins();
 
 	insert_element_init();
 

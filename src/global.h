@@ -552,31 +552,6 @@ CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);
 
-struct CongGlobals
-{
-	GnomeProgram *gnome_program;
-
-	GList *primary_windows;
-
-	CongFont *fonts[CONG_FONT_ROLE_NUM];
-
-	GdkGC *insert_element_gc;
-
-	CongNodePtr clipboard;
-
-	CongDispspecRegistry* ds_registry;
-
-	GtkWidget *popup;
-
-#if USE_PANGO
-	PangoContext *pango_context;
-	PangoFontDescription *pango_font_description;
-	PangoFont*  pango_font;
-#endif
-};
-
-extern struct CongGlobals the_globals;
-
 CongFont*
 cong_font_load(const gchar *font_name);
 
@@ -598,7 +573,7 @@ void cong_gui_destroy_tree_store(struct cong_gui* gui);
 
 gint cong_cursor_blink();
 int login();
-int new_document();
+void new_document(GtkWindow *parent_window);
 int find_document();
 int find_documentmetacaps();
 int submit_do();
@@ -1041,4 +1016,123 @@ void menu_callback_test_dtd(gpointer callback_data,
 void menu_callback_test_dialog(gpointer callback_data,
 			       guint callback_action,
 			       GtkWidget *widget);
+
+/* PLUGIN INTERFACE: 
+   These types are fully opaque, to try to minimise ABI issues.
+*/
+typedef struct CongPlugin CongPlugin;
+typedef struct CongPluginManager CongPluginManager;
+typedef struct CongFunctionality CongFunctionality;
+#define CONG_FUNCTIONALITY(x) ((CongFunctionality*)(x))
+
+/* The following are all castable to CongFunctionality: */
+typedef struct CongDocumentFactory CongDocumentFactory;
+typedef struct CongImporter CongImporter;
+typedef struct CongExporter CongExporter;
+typedef struct CongPrintMethod CongPrintMethod;
+typedef struct CongThumbnailer CongThumbnailer;
+
+/* Function pointers to be exposed by .so/.dll files: */
+typedef gboolean (*CongPluginCallbackInit)(CongPlugin *plugin); /* exposed as "plugin_init"? */
+typedef gboolean (*CongPluginCallbackUninit)(CongPlugin *plugin); /* exposed as "plugin_uninit"? */
+typedef gboolean (*CongPluginCallbackRegister)(CongPlugin *plugin); /* exposed as "plugin_register"? */
+typedef gboolean (*CongPluginCallbackConfigure)(CongPlugin *plugin);  /* exposed as "plugin_configure"? legitimate for it not to be present */
+
+/* Function pointers that are registered by plugins: */
+typedef void (*CongDocumentFactoryCallback)(CongDocumentFactory *factory, gpointer user_data);
+typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *mime_type, gpointer user_data);
+typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data);
+typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
+typedef void (*CongExporterActionCallback)(CongExporter *exporter, const gchar *uri, gpointer user_data);
+
+/* 
+   CongPluginManager
+*/
+CongPluginManager *cong_plugin_manager_new(void);
+CongPlugin *cong_plugin_manager_register(CongPluginManager *plugin_manager, 
+					 CongPluginCallbackRegister register_callback,
+					 CongPluginCallbackConfigure configure_callback);
+void cong_plugin_manager_unregister(CongPluginManager *plugin_manager, CongPlugin *plugin);
+void cong_plugin_manager_for_each_plugin(CongPluginManager *plugin_manager, void (*callback)(CongPlugin *plugin, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_document_factory(CongPluginManager *plugin_manager, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_importer(CongPluginManager *plugin_manager, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
+
+/* 
+   CongPlugin 
+
+   These are manufactured by the CongPluginManager and passed to the registration/unregistration hooks exposed by the .so/.dll files.
+
+   There are various methods to allow plugins to register their functionality with the app.
+*/
+CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
+							   const gchar *name, 
+							   const gchar *description,
+							   CongDocumentFactoryCallback callback,
+							   gpointer user_data);
+CongImporter *cong_plugin_register_importer(CongPlugin *plugin, 
+					    const gchar *name, 
+					    const gchar *description,
+					    CongImporterMimeFilter mime_filter,
+					    CongImporterActionCallback action_callback,
+					    gpointer user_data);
+CongExporter *cong_plugin_register_exporter(CongPlugin *plugin, 
+					    const gchar *name, 
+					    const gchar *description,
+					    CongExporterFpiFilter fip_filter,
+					    CongExporterActionCallback action_callback,
+					    gpointer user_data);
+
+void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExporter *exporter, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_printmethod(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
+
+
+const gchar* cong_functionality_get_name(CongFunctionality *functionality);
+const gchar* cong_functionality_get_description(CongFunctionality *functionality);
+
+gboolean cong_importer_supports_mime_type(CongImporter *importer, const gchar *mime_type);
+void cong_importer_invoke(CongImporter *importer, const gchar *filename, const gchar *mime_type);
+
+/* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
+/* plugin-docbook.c: */
+gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
+gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
+
+/* more plugins please! */
+
+
+/* The globals: */
+struct CongGlobals
+{
+	GnomeProgram *gnome_program;
+
+	CongPluginManager *plugin_manager;
+
+	GList *primary_windows;
+
+	CongFont *fonts[CONG_FONT_ROLE_NUM];
+
+	GdkGC *insert_element_gc;
+
+	CongNodePtr clipboard;
+
+	CongDispspecRegistry* ds_registry;
+
+	GtkWidget *popup;
+
+#if USE_PANGO
+	PangoContext *pango_context;
+	PangoFontDescription *pango_font_description;
+	PangoFont*  pango_font;
+#endif
+};
+
+extern struct CongGlobals the_globals;
+
+
 G_END_DECLS

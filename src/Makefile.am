@@ -34,6 +34,7 @@ conge_SOURCES =             \
   cong-error-tests.c        \
   cong-font.c               \
   cong-location.c           \
+  cong-plugin.c             \
   cong-primary-window.c     \
   cong-test-view.c          \
   cong-tree-view.c          \
@@ -42,6 +43,7 @@ conge_SOURCES =             \
   fo-rect.c                 \
   fo-solver-result.c        \
   fo-tests.c                \
+  plugin-docbook.c          \
   main.c
 
 CFLAGS = $(CONGLOMERATE_CFLAGS)

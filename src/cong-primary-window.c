@@ -273,6 +273,8 @@ gboolean cong_primary_window_can_close(CongPrimaryWindow *primary_window)
 		case CONG_SAVE_CONFIRMATION_RESULT_CLOSE_WITHOUT_SAVING:
 			break;
 			
+		case GTK_RESPONSE_DELETE_EVENT:
+			/* (the dialog was deleted, probably by the user clicking on a window manager button) */
 		case CONG_SAVE_CONFIRMATION_RESULT_CANCEL:
 			gtk_widget_destroy (dialog);
 			return FALSE;
@@ -332,7 +334,8 @@ static void menu_callback_file_new(gpointer callback_data,
 				   guint callback_action,
 				   GtkWidget *widget)
 {
-	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+	CongPrimaryWindow *primary_window = callback_data;
+	new_document(GTK_WINDOW(primary_window->window));
 }
 
 static void menu_callback_file_open(gpointer callback_data,
@@ -374,6 +377,170 @@ static void menu_callback_file_revert(gpointer callback_data,
 				      GtkWidget *widget)
 {
 	CONG_DO_UNIMPLEMENTED_DIALOG("The selected menu item has not yet been implemented.");
+}
+
+struct add_importer_to_list_data
+{
+	const gchar *mime_type;
+	GList **list_head;
+};
+
+static void add_importer_to_list(CongImporter *importer, gpointer user_data)
+{
+	struct add_importer_to_list_data *data = user_data;
+	if (cong_importer_supports_mime_type(importer, data->mime_type) ) {
+		*data->list_head = g_list_append(*data->list_head, importer);
+	}
+}
+
+static void menu_callback_file_import(gpointer callback_data,
+				      guint callback_action,
+				      GtkWidget *widget)
+{
+	const char *filename;
+
+	/* FIXME: this option should be disabled if there are no importers installed */
+
+	filename = get_file_name("Import file...");
+
+	if (filename) {
+		const char* mime_type = gnome_vfs_mime_type_from_name(filename);
+		GList *list_of_valid = NULL; 
+		struct add_importer_to_list_data data;
+		CongImporter *importer = NULL;
+
+		g_message("Got mimetype: \"%s\"",mime_type);
+
+		data.mime_type = mime_type;
+		data.list_head = &list_of_valid;
+
+
+		/* Construct a list of importers that can handle this mimetype: */
+		cong_plugin_manager_for_each_importer(the_globals.plugin_manager, add_importer_to_list, &data);
+
+		/* OK:  there are three cases:
+		   (i) if no importers can handle this mimetype; then tell the user and give them the option of cancelling or forcing the use of a plugin (with a dialog to choose)
+		   (ii) if exactly one importer can handle the mimetype, then use it
+		   (iii) if more than one importer can handle it, then present the user with a choice dialog.
+		*/
+		if (NULL==list_of_valid) {
+			GtkDialog* dialog;
+			gchar *what_failed;
+			gchar *why_failed;
+			gchar *suggestions;
+
+			/* FIXME:  eventually provide a convenience dialog to force things */
+
+			what_failed = g_strdup_printf("Conglomerate could not import the file.");
+			why_failed = g_strdup_printf("None of Conglomerate's plugins know how to load files of type \"%s\"", gnome_vfs_mime_get_description(mime_type));
+			suggestions = g_strdup_printf("FIXME");
+			dialog = cong_error_dialog_new(what_failed,
+						       why_failed,
+						       suggestions);
+			cong_error_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(GTK_WIDGET(dialog));
+			
+			g_list_free(list_of_valid);
+			
+			return;
+		}
+
+		g_assert(list_of_valid);
+
+		if (list_of_valid->next) {
+			/* There's more than one valid importer... */
+			CONG_DO_UNIMPLEMENTED_DIALOG("More than one importer can handle that file type; the selection dialog has yet to be implemented.  You will have to use the first one that the plugin manager found.");
+
+			importer = list_of_valid->data;
+		} else {
+			importer = list_of_valid->data;
+		}
+
+		g_list_free(list_of_valid);
+
+		g_assert(importer);
+		
+		cong_importer_invoke(importer, filename, mime_type);
+	}
+
+}
+
+static GtkWidget *cong_document_export_dialog_new(CongDocument *doc)
+{
+	xmlDocPtr xml_doc;
+	CongDispspec* ds;
+	GtkWidget *dialog;
+	CongDialogContent *content;
+	CongDialogCategory *general_category;
+	CongDialogCategory *exporter_category;
+	gchar *filename, *title;
+
+	g_return_val_if_fail(doc, NULL);
+
+	xml_doc = cong_document_get_xml(doc);
+	ds = cong_document_get_dispspec(doc);
+
+	filename = cong_document_get_filename(doc);
+
+	title = g_strdup_printf("Export \"%s\"", filename);
+
+	dialog = gtk_dialog_new_with_buttons("Export",
+					     NULL,
+					     0,
+					     GTK_STOCK_CANCEL,
+					     GTK_RESPONSE_CANCEL,
+					     GTK_STOCK_OK,
+					     GTK_RESPONSE_OK,
+					     NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 12);
+
+	content = cong_dialog_content_new(FALSE);
+	general_category = cong_dialog_content_add_category(content, "General");
+	exporter_category = cong_dialog_content_add_category(content, "Options");
+
+
+	cong_dialog_category_add_field(general_category, "Write to _file:", make_uneditable_text("filename"));
+	cong_dialog_category_add_field(general_category, "_Exporter", make_uneditable_text("exporter"));
+
+#if 0
+	cong_dialog_category_add_field(exporter_category, "Name", make_uneditable_text(cong_dispspec_get_name(ds)));
+	cong_dialog_category_add_field(exporter_category, "Description", make_uneditable_text(cong_dispspec_get_description(ds)));
+#endif
+
+	g_free(title);
+	g_free(filename);
+
+	gtk_container_add (GTK_CONTAINER (GTK_DIALOG(dialog)->vbox),
+			   cong_dialog_content_get_widget(content));
+
+	gtk_widget_show_all(dialog);
+
+	return dialog;
+}
+
+static void menu_callback_file_export(gpointer callback_data,
+				      guint callback_action,
+				      GtkWidget *widget)
+{
+	GtkWidget *dialog;
+
+	CongPrimaryWindow *primary_window = callback_data;
+	CongDocument *doc = primary_window->doc;
+
+	/* FIXME: this option should be disabled if there are no importers installed */
+
+	g_return_if_fail(doc);
+
+	dialog = cong_document_export_dialog_new(doc);
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+
+	gtk_widget_destroy(dialog);
+
+	/* FIXME: memory leaks */
+
 }
 
 static GtkWidget* make_uneditable_text(const gchar* text)
@@ -545,6 +712,9 @@ static GtkItemFactoryEntry menu_items[] =
 	{ "/File/Save _As...",     NULL, menu_callback_file_save_as, 0, "<StockItem>", GTK_STOCK_SAVE_AS },
 	{ "/File/Sa_ve a Copy...", "<shift><control>S", menu_callback_file_save_copy, 0, "<Item>" },
 	{ "/File/_Revert",         NULL, menu_callback_file_revert, 0, "<StockItem>", GTK_STOCK_REVERT_TO_SAVED },
+	{ "/File/", NULL, NULL, 0, "<Separator>" },
+	{ "/File/_Import...",           NULL, menu_callback_file_import, 0, "<Item>" },
+	{ "/File/_Export...",           NULL, menu_callback_file_export, 0, "<Item>" },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
 	{ "/File/Proper_ties",     NULL, menu_callback_file_properties, 0, "<StockItem>", GTK_STOCK_PROPERTIES },
 	{ "/File/", NULL, NULL, 0, "<Separator>" },
