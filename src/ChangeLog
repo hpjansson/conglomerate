@@ -1,5 +1,9 @@
 2003-06-13 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-section-head-editor.c
+
+	Fix for warnings, plus an early initialisation of pango_layout text, suggested by Julian Satchell <j.satchell@eris.qinetiq.com>
+	
 	* Makefile.am
 
 	Added cong-node-properties-dialog.c

@@ -27,6 +27,8 @@
 #include "cong-eel.h"
 #include "cong-dispspec.h"
 #include "cong-document.h"
+#include "cong-font.h"
+#include "cong-plugin.h"
 
 static void recursively_create_children(CongSectionHeadEditor *section_head);
 
@@ -824,6 +826,7 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 	CongDispspec *ds;
 	CongDispspecElement *element;
 	CongFont *title_font;
+	gchar *title_text;
 
 	doc = cong_editor_widget_get_document(widget);
 	ds = cong_document_get_dispspec(doc);
@@ -842,6 +845,12 @@ CongElementEditor *cong_section_head_editor_new(CongEditorWidget *widget, CongNo
 
 	section_head->title_bar_pango_layout = pango_layout_new(gdk_pango_context_get());
 	g_assert(section_head->title_bar_pango_layout);
+
+	title_text = cong_dispspec_element_get_section_header_text(section_head->element, node);
+	pango_layout_set_text(section_head->title_bar_pango_layout,
+			      title_text,
+			      -1);
+	g_free(title_text);
 
 	section_head->title_font = cong_dispspec_element_get_font(element, CONG_FONT_ROLE_TITLE_TEXT);
 	g_assert(section_head->title_font);

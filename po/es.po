@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Conglomerate\n"
-"POT-Creation-Date: 2003-06-06 13:07+0000\n"
+"POT-Creation-Date: 2003-06-10 15:35+0000\n"
 "PO-Revision-Date: 2003-04-29 10:53CET\n"
 "Last-Translator: Quique <quique@sindominio.net>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -98,23 +98,23 @@ msgstr ""
 msgid "<untitled>"
 msgstr ""
 
-#: src/cong-dom-view.c:176
+#: src/cong-dom-view.c:177
 msgid "UNKNOWN"
 msgstr ""
 
-#: src/cong-dom-view.c:187
+#: src/cong-dom-view.c:188
 #, c-format
 msgid "Text: \"<span foreground=\"%s\">%s</span>\""
 msgstr ""
 
-#: src/cong-dom-view.c:204
+#: src/cong-dom-view.c:205
 #, c-format
 msgid "<span foreground=\"%s\">&lt;!-- %s --&gt;</span>"
 msgstr ""
 
 #. Create a column, associating the "text" attribute of the
 #. * cell_renderer to the first column of the model
-#: src/cong-dom-view.c:548
+#: src/cong-dom-view.c:605
 msgid "Element"
 msgstr ""
 
@@ -720,7 +720,7 @@ msgstr "Propiedades"
 msgid "Type"
 msgstr "Tipo"
 
-#: src/cong-menus.c:278 src/tree.c:151
+#: src/cong-menus.c:278 src/tree.c:126
 msgid "Location"
 msgstr "Ubicación"
 
@@ -1045,9 +1045,13 @@ msgstr "Bienvenido al muy inmaduro editor Conglomerate."
 msgid "%s (modified) - %s"
 msgstr "%s (modificado) - %s"
 
-#: src/cong-section-head-editor.c:797
+#: src/cong-section-head-editor.c:803
 #, c-format
 msgid "Dummy element for tag <%s>"
+msgstr ""
+
+#: src/cong-tree-view.c:582
+msgid "Unknown data"
 msgstr ""
 
 #: src/main.c:271
@@ -1204,52 +1208,52 @@ msgstr ""
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 
-#: src/popup.c:104
+#: src/popup.c:95
 msgid "(no description available)"
 msgstr ""
 
-#: src/popup.c:306
+#: src/popup.c:310
 msgid "Remove span tag"
 msgstr ""
 
-#: src/popup.c:689
+#: src/popup.c:636
 msgid "Paste into"
 msgstr ""
 
-#: src/popup.c:697
+#: src/popup.c:644
 msgid "Paste before"
 msgstr ""
 
-#: src/popup.c:705
+#: src/popup.c:652
 msgid "Paste after"
 msgstr ""
 
-#: src/popup.c:722
+#: src/popup.c:664
 msgid "New sub-element"
 msgstr ""
 
-#: src/popup.c:735
+#: src/popup.c:680
 msgid "New sibling"
 msgstr ""
 
 #. FIXME: Test implementation:
-#: src/tree.c:131
+#: src/tree.c:106
 msgid "Placeholder Properties Dialog"
 msgstr ""
 
-#: src/tree.c:147
+#: src/tree.c:122
 msgid "Advanced"
 msgstr ""
 
-#: src/tree.c:153
+#: src/tree.c:128
 msgid "XPath"
 msgstr ""
 
-#: src/tree.c:163
+#: src/tree.c:138
 msgid "Properties from DTD/schema"
 msgstr ""
 
-#: src/tree.c:231
+#: src/tree.c:206
 #, fuzzy
 msgid "Custom Properties"
 msgstr "Propiedades"

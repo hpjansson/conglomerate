@@ -1,5 +1,3 @@
-EXTRA_DIST = 
-
 pixmapdir = $(datadir)/pixmaps
 pixmap_DATA = cong-docbook-set-16.png \
 	cong-docbook-book-16.png \
@@ -29,3 +27,5 @@ pixmap_DATA = cong-docbook-set-16.png \
 	cong-list-item-16.png \
 	cong-definition-list-16.png \
 	cong-code-fragment-16.png
+
+EXTRA_DIST = $(pixmap_DATA)

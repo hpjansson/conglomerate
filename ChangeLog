@@ -1,3 +1,9 @@
+2003-06-13  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* configure.in
+
+	Increased version number to 0.5.3
+
 2003-06-10  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am
@@ -6,8 +12,7 @@
 
 	* configure.in
 
-	Increased version number to 0.5.2	
-
+	Increased version number to 0.5.2
 	
 2003-06-03  David Malcolm <david@davemalcolm.demon.co.uk>
 		
