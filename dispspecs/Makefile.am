@@ -13,6 +13,7 @@ dispspec_in_files = \
 dispspec_DATA = \
 	cnxml.xds \
 	dispspec-template.xds \
+	opml.xds \
 	readme.xds \
 	relax-ng.xds \
 	release.xds \
