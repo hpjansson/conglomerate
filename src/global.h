@@ -124,6 +124,26 @@ struct CongElementDescription
 	gchar *local_name;
 };
 
+typedef struct CongStylesheetParameter CongStylesheetParameter;
+struct CongStylesheetParameter
+{
+	gchar *name;
+	gchar *value;
+};
+
+CongStylesheetParameter*
+cong_stylesheet_parameter_new (const gchar *name,
+			       const gchar *value);
+
+void
+cong_stylesheet_parameter_free (CongStylesheetParameter *parameter);
+
+void
+cong_stylesheet_parameter_list_free (GList *list_of_parameters);
+
+void
+cong_stylesheet_parameter_list_debug (GList *list_of_parameters);
+
 CongEditorView *cong_editor_view_new(CongDocument *doc);
 void cong_editor_view_free(CongEditorView *editor_view);
 GtkWidget* cong_editor_view_get_widget(CongEditorView *editor_view);

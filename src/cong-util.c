@@ -1771,3 +1771,55 @@ cong_util_bool_to_string (gboolean value)
 }
 		
 
+CongStylesheetParameter*
+cong_stylesheet_parameter_new (const gchar *name,
+			       const gchar *value)
+{
+	CongStylesheetParameter *param;
+
+	g_return_val_if_fail (name, NULL);
+	g_return_val_if_fail (value, NULL);
+	
+	param = g_new0 (CongStylesheetParameter,1);
+	param->name = g_strdup (name);
+	param->value = g_strdup (value);
+	return param;
+}
+
+void
+cong_stylesheet_parameter_free (CongStylesheetParameter *parameter)
+{
+	g_return_if_fail (parameter);
+	
+	g_free (parameter->name);
+	g_free (parameter->value);
+	g_free (parameter);	
+}
+
+
+void
+cong_stylesheet_parameter_list_free (GList *list_of_parameters)
+{
+	GList *iter;
+
+	for (iter = list_of_parameters; iter; iter=iter->next) {
+		cong_stylesheet_parameter_free ((CongStylesheetParameter*)iter->data);
+	}
+
+	g_list_free (list_of_parameters);
+}
+
+void
+cong_stylesheet_parameter_list_debug (GList *list_of_parameters)
+{
+	GList *iter;
+
+	g_message ("Stylesheet parameters:");
+
+	for (iter = list_of_parameters; iter; iter=iter->next) {
+		CongStylesheetParameter *param = (CongStylesheetParameter*)iter->data;
+
+		g_message ("\"%s\"->\"%s\"", param->name, param->value);
+	}
+
+}

@@ -1,5 +1,10 @@
 2004-07-27  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-plugin.c, cong-plugin.h, cong-util.c, global.h, plugin-docbook.c: 
+
+	Added CongStylesheetParameter type and dummy code to handle this
+	when exporting PDFs and XSL:FO files.
+
 	* xmlload.c: 
 
 	Removed contents of this file: dead code

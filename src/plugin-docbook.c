@@ -1055,10 +1055,30 @@ html_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, 
 
 	cong_ui_transform_doc_to_uri(doc,
 				     stylesheet_path,
+				     NULL, 
 				     uri,
 				     toplevel_window);
 
 	g_free(stylesheet_path);
+}
+
+GList*
+make_fo_export_params (void)
+{
+	GList *result = NULL;
+
+	/* 
+In file:
+/usr/share/sgml/docbook/xsl-stylesheets-1.65.1-1/fo/
+<xsl:param name="paper.type" select="'USletter'"/>
+	*/
+
+#if 1
+	/* FIXME: this is a test; we probably should set this based on GnomePrint settings; or present a dialog */
+	result = g_list_append (result, cong_stylesheet_parameter_new ("paper.type", "A4"));
+#endif
+
+	return result;
 }
 
 /**
@@ -1079,6 +1099,7 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 	CongProgressChecklist *progress_checklist;
 	xmlDocPtr fo_doc;
 	gchar *stylesheet_path;
+	GList *list_of_parameters;
 
 	g_message("pdf_exporter_action_callback");
 
@@ -1088,6 +1109,8 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 
 	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
 	g_assert(stylesheet_path);
+
+	list_of_parameters = make_fo_export_params ();
 
 	progress_checklist_dialog = cong_progress_checklist_dialog_new(_("Exporting PDF file"), toplevel_window);
 	progress_checklist = cong_progress_checklist_dialog_get_progress_checklist(CONG_PROGRESS_CHECKLIST_DIALOG(progress_checklist_dialog));
@@ -1101,9 +1124,11 @@ pdf_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, c
 
 	fo_doc = cong_ui_transform_doc(doc,
 				       stylesheet_path,
+				       list_of_parameters,				       
 				       toplevel_window);
 
 	g_free(stylesheet_path);
+	cong_stylesheet_parameter_list_free (list_of_parameters);
 
 	if (fo_doc) {
 		cong_progress_checklist_complete_stage(progress_checklist);
@@ -1137,6 +1162,7 @@ void
 fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window)
 {
 	gchar *stylesheet_path;
+	GList *list_of_parameters;
 
 	g_return_if_fail(exporter);
 	g_return_if_fail(doc);
@@ -1147,12 +1173,16 @@ fo_exporter_action_callback(CongServiceExporter *exporter, CongDocument *doc, co
 	stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
 	g_assert(stylesheet_path);
 
+	list_of_parameters = make_fo_export_params ();
+
 	cong_ui_transform_doc_to_uri(doc,
 				     stylesheet_path,
+				     list_of_parameters,
 				     uri,
 				     toplevel_window);
 
 	g_free(stylesheet_path);
+	cong_stylesheet_parameter_list_free (list_of_parameters);
 }
 
 #if (ENABLE_PRINTING && ENABLE_LIBFO)
@@ -1210,14 +1240,19 @@ docbook_print_method_action_callback (CongServicePrintMethod *print_method,
 	gtk_widget_show(progress_checklist_dialog);
 
 	{
+		GList *list_of_parameters;	
 		gchar *stylesheet_path = cong_utils_get_norman_walsh_stylesheet("fo/docbook.xsl");
 		g_assert(stylesheet_path);
 
+		list_of_parameters = make_fo_export_params ();
+
 		fo_doc = cong_ui_transform_doc(doc,
 					       stylesheet_path,
+					       list_of_parameters,
 					       toplevel_window);
 
 		g_free(stylesheet_path);
+		cong_stylesheet_parameter_list_free (list_of_parameters);
 	}
 
 	if (fo_doc) {

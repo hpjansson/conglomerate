@@ -623,6 +623,7 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
  * cong_ui_transform_doc:
  * @doc:
  * @stylesheet_filename:
+ * @list_of_parameters: a #GList of #CongStylesheetParameter
  * @toplevel_window:
  *
  * TODO: Write me
@@ -631,6 +632,7 @@ cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 xmlDocPtr 
 cong_ui_transform_doc(CongDocument *doc,
 		      const gchar *stylesheet_filename,
+		      GList *list_of_parameters,
 		      GtkWindow *toplevel_window)
 {
 	xsltStylesheetPtr xsl;
@@ -661,6 +663,10 @@ cong_ui_transform_doc(CongDocument *doc,
 	input_clone = xmlCopyDoc(cong_document_get_xml(doc), TRUE);
 	g_assert(input_clone);
 
+
+	cong_stylesheet_parameter_list_debug (list_of_parameters);
+
+	/* #error FIXME: should build the parameter stuff here */
 	result = xsltApplyStylesheet(xsl, input_clone, NULL);
 	g_assert(result);
 
@@ -688,7 +694,8 @@ cong_ui_transform_doc(CongDocument *doc,
  * cong_ui_transform_doc_to_uri:
  * @doc:
  * @stylesheet_filename:
- * @uri:
+ * @list_of_parameters: a #GList of #CongStylesheetParameter
+ * @string_uri:
  * @toplevel_window:
  *
  * TODO: Write me
@@ -696,6 +703,7 @@ cong_ui_transform_doc(CongDocument *doc,
 void 
 cong_ui_transform_doc_to_uri(CongDocument *doc,
 			     const gchar *stylesheet_filename,
+			     GList *list_of_parameters,
 			     const gchar *string_uri,
 			     GtkWindow *toplevel_window)
 {
@@ -712,6 +720,7 @@ cong_ui_transform_doc_to_uri(CongDocument *doc,
 
 	doc_ptr = cong_ui_transform_doc(doc,
 					stylesheet_filename,
+					list_of_parameters,
 					toplevel_window);
 
 	if (doc_ptr) {
