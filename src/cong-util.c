@@ -1373,7 +1373,7 @@ make_element_description_list_callback (CongDocument *doc, CongNodePtr node, gpo
 GList*
 cong_util_make_element_description_list (CongDocument *doc)
 {
-	/* FIXME: this will be slow */
+	/* FIXME: this will be slow (bugzilla 145026)*/
 	GList *list = NULL;
 
 	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);

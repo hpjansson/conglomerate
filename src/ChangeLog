@@ -1,5 +1,9 @@
 2004-06-26  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-util.c: 
+
+	Added link to bug 145026
+
 	* cong-tree-view.c:
 
 	Removed debug spewage
