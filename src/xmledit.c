@@ -31,8 +31,7 @@ void cong_document_cut_selection(CongDocument *doc)
 	if (!cong_location_exists(&curs->location)) return;
 
 	if (!cong_range_can_be_cut (ordered_range)) {
-		/* FIXME: Make UI insensitive to block this */
-		g_message ("Selection cannot be cut");
+		g_warning ("Selection cannot be cut - UI should be insensitive");
 		return;
 	}
 
@@ -79,8 +78,7 @@ void cong_document_copy_selection(CongDocument *doc)
 	}
 
 	if (!cong_range_can_be_copied (cong_selection_get_ordered_range (selection))) {
-		/* FIXME: Make UI insensitive to block this */
-		g_message ("Selection cannot be copied");
+		g_warning ("Selection cannot be copied - UI should be insensitive");
 		return;
 	}
 
