@@ -1,3 +1,9 @@
+2004-08-05  Michèle Garoche  <michele.garoche@easyconnect.fr>
+ 
+ 	* cong-menus.c: 
+ 	
+ 	Added trailing ellipsis to Open and New File menu items
+ 
 2004-08-04  Geert Stappers  <stappers@stappers.nl>
 
 	*  plugin-docbook.c

@@ -1477,8 +1477,8 @@ static GtkActionEntry primary_window_application_action_entries[] = {
 
 
 	/* Actions found in File menu: */
-	{ "New", GTK_STOCK_NEW, N_("_New"), "<control>N", NULL, G_CALLBACK (action_callback_file_new) },
-	{ "Open", GTK_STOCK_OPEN, N_("_Open"), "<control>O", NULL, G_CALLBACK (action_callback_file_open) },
+	{ "New", GTK_STOCK_NEW, N_("_New..."), "<control>N", NULL, G_CALLBACK (action_callback_file_new) },
+	{ "Open", GTK_STOCK_OPEN, N_("_Open..."), "<control>O", NULL, G_CALLBACK (action_callback_file_open) },
 	{ "Import", NULL, N_("_Import..."), NULL, NULL, G_CALLBACK (action_callback_file_import) },
 	{ "Close", GTK_STOCK_CLOSE, N_("_Close"), "<control>W", NULL, G_CALLBACK (action_callback_file_close) },
 	{ "Quit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q", NULL, G_CALLBACK (action_callback_file_quit) },	
