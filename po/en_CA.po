@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-17 14:40-0400\n"
-"PO-Revision-Date: 2004-10-17 15:29-0400\n"
+"POT-Creation-Date: 2004-10-21 15:37-0400\n"
+"PO-Revision-Date: 2004-10-21 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1446
+#: data/conglomerate.desktop.in.h:1 src/cong-menus.c:1444
 #: src/cong-primary-window.c:547 src/cong-primary-window.c:732
 #: src/cong-primary-window.c:734 src/cong-primary-window.c:740
 msgid "Conglomerate XML Editor"
@@ -66,7 +66,7 @@ msgstr "Conglomerate Display Specification"
 
 #: dispspecs/dispspec.xds.in.h:3 glade/cong-file-properties.glade.h:3
 #: src/cong-dispspec-registry.c:355 src/cong-edit-preferences.c:157
-#: src/cong-edit-preferences.c:271 src/cong-file-export.c:341
+#: src/cong-edit-preferences.c:271 src/cong-file-export.c:339
 #: src/cong-file-new.c:363 src/cong-file-print.c:250
 #: src/cong-parser-error.c:320
 msgid "Description"
@@ -106,13 +106,13 @@ msgstr "List of XML Elements"
 msgid "List of file types for this type of document"
 msgstr "List of file types for this type of document"
 
-#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:94
+#: dispspecs/dispspec.xds.in.h:12 dispspecs/docbook.xds.in.h:95
 msgid "Metadata"
 msgstr "Metadata"
 
-#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:96
+#: dispspecs/dispspec.xds.in.h:13 dispspecs/docbook.xds.in.h:97
 #: glade/cong-file-properties.glade.h:10 src/cong-edit-preferences.c:149
-#: src/cong-edit-preferences.c:263 src/cong-file-export.c:340
+#: src/cong-edit-preferences.c:263 src/cong-file-export.c:338
 #: src/cong-file-print.c:249 src/cong-node-properties-dialog.c:609
 msgid "Name"
 msgstr "Name"
@@ -167,7 +167,8 @@ msgstr "A high-level division of a book."
 
 #: dispspecs/docbook.xds.in.h:6
 msgid "A specific piece of data from a computer system, to be taken literally."
-msgstr "A specific piece of data from a computer system, to be taken literally."
+msgstr ""
+"A specific piece of data from a computer system, to be taken literally."
 
 #: dispspecs/docbook.xds.in.h:7
 msgid "A subsection within a section"
@@ -290,43 +291,47 @@ msgid "Command Synopsis"
 msgstr "Command Synopsis"
 
 #: dispspecs/docbook.xds.in.h:37
+msgid "Computer Output"
+msgstr "Computer Output"
+
+#: dispspecs/docbook.xds.in.h:38
 msgid "Copyright"
 msgstr "Copyright"
 
-#: dispspecs/docbook.xds.in.h:38
+#: dispspecs/docbook.xds.in.h:39
 msgid "Copyright Holder"
 msgstr "Copyright Holder"
 
-#: dispspecs/docbook.xds.in.h:39
+#: dispspecs/docbook.xds.in.h:40
 msgid "Corporate Name"
 msgstr "Corporate Name"
 
-#: dispspecs/docbook.xds.in.h:40
+#: dispspecs/docbook.xds.in.h:41
 msgid "Cross-reference"
 msgstr "Cross-reference"
 
-#: dispspecs/docbook.xds.in.h:41
+#: dispspecs/docbook.xds.in.h:42
 msgid "Date"
 msgstr "Date"
 
-#: dispspecs/docbook.xds.in.h:42
+#: dispspecs/docbook.xds.in.h:43
 msgid "Date of Publication"
 msgstr "Date of Publication"
 
-#: dispspecs/docbook.xds.in.h:43
+#: dispspecs/docbook.xds.in.h:44
 msgid "Defined terms"
 msgstr "Defined terms"
 
-#: dispspecs/docbook.xds.in.h:44 dispspecs/forrest-document.xds.in.h:9
+#: dispspecs/docbook.xds.in.h:45 dispspecs/forrest-document.xds.in.h:9
 #: dispspecs/xhtml1-strict.xds.in.h:19
 msgid "Definition"
 msgstr "Definition"
 
-#: dispspecs/docbook.xds.in.h:45
+#: dispspecs/docbook.xds.in.h:46
 msgid "DocBook"
 msgstr "DocBook"
 
-#: dispspecs/docbook.xds.in.h:46
+#: dispspecs/docbook.xds.in.h:47
 msgid ""
 "DocBook is a document type that broadly corresponds to what most people "
 "think of as \"a book\"; it is well-suited for writing books and articles, "
@@ -336,242 +341,242 @@ msgstr ""
 "think of as \"a book\"; it is well-suited for writing books and articles, "
 "for both print and web-based publication."
 
-#: dispspecs/docbook.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:48
 msgid "Edition"
 msgstr "Edition"
 
-#: dispspecs/docbook.xds.in.h:48
+#: dispspecs/docbook.xds.in.h:49
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:11
 msgid "Editor"
 msgstr "Editor"
 
-#: dispspecs/docbook.xds.in.h:49
+#: dispspecs/docbook.xds.in.h:50
 msgid "Email Address"
 msgstr "Email Address"
 
-#: dispspecs/docbook.xds.in.h:50 dispspecs/forrest-document.xds.in.h:13
+#: dispspecs/docbook.xds.in.h:51 dispspecs/forrest-document.xds.in.h:13
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:13
 #: dispspecs/xhtml1-strict.xds.in.h:24
 msgid "Emphasis"
 msgstr "Emphasis"
 
-#: dispspecs/docbook.xds.in.h:51
+#: dispspecs/docbook.xds.in.h:52
 msgid "Entry"
 msgstr "Entry"
 
-#: dispspecs/docbook.xds.in.h:52
+#: dispspecs/docbook.xds.in.h:53
 msgid "Environment Variable"
 msgstr "Environment Variable"
 
-#: dispspecs/docbook.xds.in.h:53
+#: dispspecs/docbook.xds.in.h:54
 msgid "Example (formal)"
 msgstr "Example (formal)"
 
-#: dispspecs/docbook.xds.in.h:54
+#: dispspecs/docbook.xds.in.h:55
 msgid "Example (informal)"
 msgstr "Example (informal)"
 
-#: dispspecs/docbook.xds.in.h:55 dispspecs/forrest-document.xds.in.h:14
+#: dispspecs/docbook.xds.in.h:56 dispspecs/forrest-document.xds.in.h:14
 msgid "Figure"
 msgstr "Figure"
 
-#: dispspecs/docbook.xds.in.h:56
+#: dispspecs/docbook.xds.in.h:57
 msgid "Figure (informal)"
 msgstr "Figure (informal)"
 
-#: dispspecs/docbook.xds.in.h:57
+#: dispspecs/docbook.xds.in.h:58
 msgid "Filename"
 msgstr "Filename"
 
-#: dispspecs/docbook.xds.in.h:58
+#: dispspecs/docbook.xds.in.h:59
 msgid "First Name"
 msgstr "First Name"
 
-#: dispspecs/docbook.xds.in.h:59
+#: dispspecs/docbook.xds.in.h:60
 msgid "First Term"
 msgstr "First Term"
 
-#: dispspecs/docbook.xds.in.h:60
+#: dispspecs/docbook.xds.in.h:61
 msgid "Footnote"
 msgstr "Footnote"
 
-#: dispspecs/docbook.xds.in.h:61
+#: dispspecs/docbook.xds.in.h:62
 msgid "Free-floating Heading"
 msgstr "Free-floating Heading"
 
-#: dispspecs/docbook.xds.in.h:62
+#: dispspecs/docbook.xds.in.h:63
 msgid "Function"
 msgstr "Function"
 
 #. various related localNames need to be added
-#: dispspecs/docbook.xds.in.h:64
+#: dispspecs/docbook.xds.in.h:65
 msgid "Function Synopsis"
 msgstr "Function Synopsis"
 
-#: dispspecs/docbook.xds.in.h:65
+#: dispspecs/docbook.xds.in.h:66
 msgid "GUI Button"
 msgstr "GUI Button"
 
-#: dispspecs/docbook.xds.in.h:66
+#: dispspecs/docbook.xds.in.h:67
 msgid "GUI Label"
 msgstr "GUI Label"
 
-#: dispspecs/docbook.xds.in.h:67
+#: dispspecs/docbook.xds.in.h:68
 msgid "GUI Menu"
 msgstr "GUI Menu"
 
-#: dispspecs/docbook.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:69
 msgid "GUI Menu Item"
 msgstr "GUI Menu Item"
 
-#: dispspecs/docbook.xds.in.h:69
+#: dispspecs/docbook.xds.in.h:70
 msgid "GUI Submenu"
 msgstr "GUI Submenu"
 
-#: dispspecs/docbook.xds.in.h:70
+#: dispspecs/docbook.xds.in.h:71
 msgid "Glossary"
 msgstr "Glossary"
 
-#: dispspecs/docbook.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:72
 msgid "Glossary Entry"
 msgstr "Glossary Entry"
 
-#: dispspecs/docbook.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:73
 msgid "Graphic"
 msgstr "Graphic"
 
-#: dispspecs/docbook.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:74
 msgid "ISBN"
 msgstr "ISBN"
 
-#: dispspecs/docbook.xds.in.h:74
+#: dispspecs/docbook.xds.in.h:75
 msgid "ISSN"
 msgstr "ISSN"
 
-#: dispspecs/docbook.xds.in.h:75
+#: dispspecs/docbook.xds.in.h:76
 msgid "Image Data"
 msgstr "Image Data"
 
-#: dispspecs/docbook.xds.in.h:76
+#: dispspecs/docbook.xds.in.h:77
 msgid "Image Object"
 msgstr "Image Object"
 
-#: dispspecs/docbook.xds.in.h:77
+#: dispspecs/docbook.xds.in.h:78
 msgid "Important"
 msgstr "Important"
 
-#: dispspecs/docbook.xds.in.h:78
+#: dispspecs/docbook.xds.in.h:79
 msgid "Index Term"
 msgstr "Index Term"
 
-#: dispspecs/docbook.xds.in.h:79 dispspecs/forrest-document.xds.in.h:21
+#: dispspecs/docbook.xds.in.h:80 dispspecs/forrest-document.xds.in.h:21
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:19
 msgid "Introduction"
 msgstr "Introduction"
 
-#: dispspecs/docbook.xds.in.h:80
+#: dispspecs/docbook.xds.in.h:81
 msgid "Key Caption"
 msgstr "Key Caption"
 
-#: dispspecs/docbook.xds.in.h:81
+#: dispspecs/docbook.xds.in.h:82
 msgid "Legal Notice"
 msgstr "Legal Notice"
 
-#: dispspecs/docbook.xds.in.h:82
+#: dispspecs/docbook.xds.in.h:83
 msgid "List (itemised)"
 msgstr "List (itemized)"
 
-#: dispspecs/docbook.xds.in.h:83 dispspecs/forrest-document.xds.in.h:26
+#: dispspecs/docbook.xds.in.h:84 dispspecs/forrest-document.xds.in.h:26
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:23
 #: dispspecs/xhtml1-strict.xds.in.h:47
 msgid "List (ordered)"
 msgstr "List (ordered)"
 
-#: dispspecs/docbook.xds.in.h:84
+#: dispspecs/docbook.xds.in.h:85
 msgid "List (simple)"
 msgstr "List (simple)"
 
-#: dispspecs/docbook.xds.in.h:85
+#: dispspecs/docbook.xds.in.h:86
 msgid "List (terms and definitions)"
 msgstr "List (terms and definitions)"
 
-#: dispspecs/docbook.xds.in.h:86
+#: dispspecs/docbook.xds.in.h:87
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:25
 #: dispspecs/xhtml1-strict.xds.in.h:49
 msgid "List Item"
 msgstr "List Item"
 
-#: dispspecs/docbook.xds.in.h:87
+#: dispspecs/docbook.xds.in.h:88
 msgid "List Member"
 msgstr "List Member"
 
-#: dispspecs/docbook.xds.in.h:88
+#: dispspecs/docbook.xds.in.h:89
 msgid "Literal"
 msgstr "Literal"
 
-#: dispspecs/docbook.xds.in.h:89
+#: dispspecs/docbook.xds.in.h:90
 msgid "Media Object"
 msgstr "Media Object"
 
-#: dispspecs/docbook.xds.in.h:90
+#: dispspecs/docbook.xds.in.h:91
 msgid "Menu Choice"
 msgstr "Menu Choice"
 
-#: dispspecs/docbook.xds.in.h:91
+#: dispspecs/docbook.xds.in.h:92
 msgid "Meta-information about a Reference Page"
 msgstr "Meta-information about a Reference Page"
 
-#: dispspecs/docbook.xds.in.h:92
+#: dispspecs/docbook.xds.in.h:93
 msgid "Meta-information for a book"
 msgstr "Meta-information for a book"
 
-#: dispspecs/docbook.xds.in.h:93
+#: dispspecs/docbook.xds.in.h:94
 msgid "Meta-information for an article"
 msgstr "Meta-information for an article"
 
-#: dispspecs/docbook.xds.in.h:95
+#: dispspecs/docbook.xds.in.h:96
 msgid "Miscellaneous Bibliographic Information"
 msgstr "Miscellaneous Bibliographic Information"
 
-#: dispspecs/docbook.xds.in.h:97
+#: dispspecs/docbook.xds.in.h:98
 msgid "Name, purpose and classification about a Reference Page"
 msgstr "Name, purpose and classification about a Reference Page"
 
-#: dispspecs/docbook.xds.in.h:98
+#: dispspecs/docbook.xds.in.h:99
 msgid "Naming"
 msgstr "Naming"
 
-#: dispspecs/docbook.xds.in.h:99 dispspecs/forrest-document.xds.in.h:29
+#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:29
 msgid "Note"
 msgstr "Note"
 
-#: dispspecs/docbook.xds.in.h:100 dispspecs/forrest-document.xds.in.h:31
+#: dispspecs/docbook.xds.in.h:101 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
 #: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
 msgid "Paragraph"
 msgstr "Paragraph"
 
-#: dispspecs/docbook.xds.in.h:101
+#: dispspecs/docbook.xds.in.h:102
 msgid "Paragraph (titled)"
 msgstr "Paragraph (titled)"
 
-#: dispspecs/docbook.xds.in.h:102
+#: dispspecs/docbook.xds.in.h:103
 msgid "Part"
 msgstr "Part"
 
-#: dispspecs/docbook.xds.in.h:103
+#: dispspecs/docbook.xds.in.h:104
 msgid "Preface"
 msgstr "Preface"
 
-#: dispspecs/docbook.xds.in.h:104
+#: dispspecs/docbook.xds.in.h:105
 msgid "Printing History"
 msgstr "Printing History"
 
-#: dispspecs/docbook.xds.in.h:105
+#: dispspecs/docbook.xds.in.h:106
 msgid "Procedure"
 msgstr "Procedure"
 
-#: dispspecs/docbook.xds.in.h:106
+#: dispspecs/docbook.xds.in.h:107
 msgid "Product Name"
 msgstr "Product Name"
 
@@ -583,234 +588,234 @@ msgstr "Product Name"
 #. Could also do with a verbatim flag which respects carriage returns...
 #. Even better would be to invoke a Scintilla control and have syntax highlighting!
 #.
-#: dispspecs/docbook.xds.in.h:115
+#: dispspecs/docbook.xds.in.h:116
 msgid "Program Listing"
 msgstr "Program Listing"
 
-#: dispspecs/docbook.xds.in.h:116
+#: dispspecs/docbook.xds.in.h:117
 msgid "Prompt"
 msgstr "Prompt"
 
-#: dispspecs/docbook.xds.in.h:117
+#: dispspecs/docbook.xds.in.h:118
 msgid "Publisher"
 msgstr "Publisher"
 
-#: dispspecs/docbook.xds.in.h:118
+#: dispspecs/docbook.xds.in.h:119
 msgid "Publisher Name"
 msgstr "Publisher Name"
 
-#: dispspecs/docbook.xds.in.h:119
+#: dispspecs/docbook.xds.in.h:120
 msgid "Purpose"
 msgstr "Purpose"
 
-#: dispspecs/docbook.xds.in.h:120
+#: dispspecs/docbook.xds.in.h:121
 msgid "Question"
 msgstr "Question"
 
-#: dispspecs/docbook.xds.in.h:121
+#: dispspecs/docbook.xds.in.h:122
 msgid "Question-and-Answer"
 msgstr "Question-and-Answer"
 
-#: dispspecs/docbook.xds.in.h:122
+#: dispspecs/docbook.xds.in.h:123
 msgid "Question-and-Answer Set"
 msgstr "Question-and-Answer Set"
 
-#: dispspecs/docbook.xds.in.h:123
+#: dispspecs/docbook.xds.in.h:124
 msgid "Question-and-Answer Subset"
 msgstr "Question-and-Answer Subset"
 
-#: dispspecs/docbook.xds.in.h:124
+#: dispspecs/docbook.xds.in.h:125
 msgid "Quote"
 msgstr "Quote"
 
-#: dispspecs/docbook.xds.in.h:125
+#: dispspecs/docbook.xds.in.h:126
 msgid "Reference"
 msgstr "Reference"
 
-#: dispspecs/docbook.xds.in.h:126
+#: dispspecs/docbook.xds.in.h:127
 msgid "Reference Page"
 msgstr "Reference Page"
 
-#: dispspecs/docbook.xds.in.h:127
+#: dispspecs/docbook.xds.in.h:128
 msgid "Release Information"
 msgstr "Release Information"
 
-#: dispspecs/docbook.xds.in.h:128
+#: dispspecs/docbook.xds.in.h:129
 msgid "Replaceable Text"
 msgstr "Replaceable Text"
 
-#: dispspecs/docbook.xds.in.h:129
+#: dispspecs/docbook.xds.in.h:130
 msgid "Revision"
 msgstr "Revision"
 
-#: dispspecs/docbook.xds.in.h:130
+#: dispspecs/docbook.xds.in.h:131
 msgid "Revision History"
 msgstr "Revision History"
 
-#: dispspecs/docbook.xds.in.h:131
+#: dispspecs/docbook.xds.in.h:132
 msgid "Revision Remark"
 msgstr "Revision Remark"
 
-#: dispspecs/docbook.xds.in.h:132
+#: dispspecs/docbook.xds.in.h:133
 msgid "SGML Tag"
 msgstr "SGML Tag"
 
-#: dispspecs/docbook.xds.in.h:133
+#: dispspecs/docbook.xds.in.h:134
 msgid "Screen"
 msgstr "Screen"
 
-#: dispspecs/docbook.xds.in.h:134
+#: dispspecs/docbook.xds.in.h:135
 msgid "Screenshot"
 msgstr "Screenshot"
 
-#: dispspecs/docbook.xds.in.h:135 dispspecs/forrest-document.xds.in.h:33
+#: dispspecs/docbook.xds.in.h:136 dispspecs/forrest-document.xds.in.h:33
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:29
 msgid "Section"
 msgstr "Section"
 
-#: dispspecs/docbook.xds.in.h:136
+#: dispspecs/docbook.xds.in.h:137
 msgid "Section (level 5)"
 msgstr "Section (level 5)"
 
-#: dispspecs/docbook.xds.in.h:137
+#: dispspecs/docbook.xds.in.h:138
 msgid "Set"
 msgstr "Set"
 
-#: dispspecs/docbook.xds.in.h:138
+#: dispspecs/docbook.xds.in.h:139
 msgid "Step"
 msgstr "Step"
 
-#: dispspecs/docbook.xds.in.h:139
+#: dispspecs/docbook.xds.in.h:140
 msgid "Structure Name"
 msgstr "Structure Name"
 
-#: dispspecs/docbook.xds.in.h:140
+#: dispspecs/docbook.xds.in.h:141
 msgid "Subsection"
 msgstr "Subsection"
 
-#: dispspecs/docbook.xds.in.h:141
+#: dispspecs/docbook.xds.in.h:142
 msgid "Subsection (level 3)"
 msgstr "Subsection (level 3)"
 
-#: dispspecs/docbook.xds.in.h:142
+#: dispspecs/docbook.xds.in.h:143
 msgid "Subsection (level 4)"
 msgstr "Subsection (level 4)"
 
-#: dispspecs/docbook.xds.in.h:143
+#: dispspecs/docbook.xds.in.h:144
 msgid "Substeps"
 msgstr "Substeps"
 
-#: dispspecs/docbook.xds.in.h:144
+#: dispspecs/docbook.xds.in.h:145
 msgid "Subsubsection"
 msgstr "Subsubsection"
 
-#: dispspecs/docbook.xds.in.h:145 dispspecs/forrest-document.xds.in.h:37
+#: dispspecs/docbook.xds.in.h:146 dispspecs/forrest-document.xds.in.h:37
 msgid "Subtitle"
 msgstr "Subtitle"
 
-#: dispspecs/docbook.xds.in.h:146
+#: dispspecs/docbook.xds.in.h:147
 msgid "Surname"
 msgstr "Surname"
 
-#: dispspecs/docbook.xds.in.h:147
+#: dispspecs/docbook.xds.in.h:148
 msgid "Symbol"
 msgstr "Symbol"
 
-#: dispspecs/docbook.xds.in.h:148
+#: dispspecs/docbook.xds.in.h:149
 msgid "Synopsis (syntax)"
 msgstr "Synopsis (syntax)"
 
-#: dispspecs/docbook.xds.in.h:149
+#: dispspecs/docbook.xds.in.h:150
 msgid "Table (informal)"
 msgstr "Table (informal)"
 
-#: dispspecs/docbook.xds.in.h:150 dispspecs/xhtml1-strict.xds.in.h:68
+#: dispspecs/docbook.xds.in.h:151 dispspecs/xhtml1-strict.xds.in.h:68
 msgid "Table Body"
 msgstr "Table Body"
 
-#: dispspecs/docbook.xds.in.h:151
+#: dispspecs/docbook.xds.in.h:152
 msgid "Table Column Specification"
 msgstr "Table Column Specification"
 
-#: dispspecs/docbook.xds.in.h:152
+#: dispspecs/docbook.xds.in.h:153
 msgid "Table Entry"
 msgstr "Table Entry"
 
-#: dispspecs/docbook.xds.in.h:153
+#: dispspecs/docbook.xds.in.h:154
 msgid "Table Entry (subtable)"
 msgstr "Table Entry (subtable)"
 
-#: dispspecs/docbook.xds.in.h:154 dispspecs/xhtml1-strict.xds.in.h:71
+#: dispspecs/docbook.xds.in.h:155 dispspecs/xhtml1-strict.xds.in.h:71
 msgid "Table Footer"
 msgstr "Table Footer"
 
-#: dispspecs/docbook.xds.in.h:155
+#: dispspecs/docbook.xds.in.h:156
 msgid "Table Group"
 msgstr "Table Group"
 
-#: dispspecs/docbook.xds.in.h:156 dispspecs/xhtml1-strict.xds.in.h:72
+#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:72
 msgid "Table Header"
 msgstr "Table Header"
 
-#: dispspecs/docbook.xds.in.h:157 dispspecs/xhtml1-strict.xds.in.h:73
+#: dispspecs/docbook.xds.in.h:158 dispspecs/xhtml1-strict.xds.in.h:73
 msgid "Table Row"
 msgstr "Table Row"
 
-#: dispspecs/docbook.xds.in.h:158
+#: dispspecs/docbook.xds.in.h:159
 msgid "Term"
 msgstr "Term"
 
-#: dispspecs/docbook.xds.in.h:159
+#: dispspecs/docbook.xds.in.h:160
 msgid "Text Object"
 msgstr "Text Object"
 
-#: dispspecs/docbook.xds.in.h:160
+#: dispspecs/docbook.xds.in.h:161
 msgid "The International Standard Book Number of a document."
 msgstr "The International Standard Book Number of a document."
 
-#: dispspecs/docbook.xds.in.h:161
+#: dispspecs/docbook.xds.in.h:162
 msgid "The International Standard Serial Number of a periodical."
 msgstr "The International Standard Serial Number of a periodical."
 
-#: dispspecs/docbook.xds.in.h:162
+#: dispspecs/docbook.xds.in.h:163
 msgid "The first place where a word or term occurs in a particular context"
 msgstr "The first place where a word or term occurs in a particular context"
 
-#: dispspecs/docbook.xds.in.h:163
+#: dispspecs/docbook.xds.in.h:164
 msgid "The name of a function, subroutine or procedure"
 msgstr "The name of a function, subroutine or procedure"
 
-#: dispspecs/docbook.xds.in.h:164
+#: dispspecs/docbook.xds.in.h:165
 msgid "The printed text on a particular key on a keyboard"
 msgstr "The printed text on a particular key on a keyboard"
 
-#: dispspecs/docbook.xds.in.h:165
+#: dispspecs/docbook.xds.in.h:166
 msgid "Tip"
 msgstr "Tip"
 
-#: dispspecs/docbook.xds.in.h:166 dispspecs/forrest-document.xds.in.h:44
+#: dispspecs/docbook.xds.in.h:167 dispspecs/forrest-document.xds.in.h:44
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:32
 #: dispspecs/xhtml1-strict.xds.in.h:76
 msgid "Title"
 msgstr "Title"
 
-#: dispspecs/docbook.xds.in.h:167
+#: dispspecs/docbook.xds.in.h:168
 msgid "Title Citation"
 msgstr "Title Citation"
 
-#: dispspecs/docbook.xds.in.h:168
+#: dispspecs/docbook.xds.in.h:169
 msgid "URL Link"
 msgstr "URL Link"
 
-#: dispspecs/docbook.xds.in.h:169
+#: dispspecs/docbook.xds.in.h:170
 msgid "User Input"
 msgstr "User Input"
 
-#: dispspecs/docbook.xds.in.h:170 dispspecs/forrest-document.xds.in.h:47
+#: dispspecs/docbook.xds.in.h:171 dispspecs/forrest-document.xds.in.h:47
 msgid "Warning"
 msgstr "Warning"
 
-#: dispspecs/docbook.xds.in.h:171
+#: dispspecs/docbook.xds.in.h:172
 msgid "Year"
 msgstr "Year"
 
@@ -840,7 +845,7 @@ msgstr "Defined term"
 msgid "Definition list"
 msgstr "Definition list"
 
-#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:981
+#: dispspecs/forrest-document.xds.in.h:11 src/cong-document.c:988
 msgid "Document"
 msgstr "Document"
 
@@ -1053,23 +1058,24 @@ msgstr "Statistics"
 msgid "Topic"
 msgstr "Topic"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:34
+#. Translators: It is just a word "Translator" that should be translated, not replaced by your initials :)
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
 msgid "Translator"
 msgstr "Translator"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:35
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
 msgid "Underlined"
 msgstr "Underlined"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:36
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
 msgid "Version Control Activity"
 msgstr "Version Control Activity"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:37
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
 msgid "Version Control Statistics"
 msgstr "Version Control Statistics"
 
-#: dispspecs/kernel-traffic-newsletter.xds.in.h:38
+#: dispspecs/kernel-traffic-newsletter.xds.in.h:39
 msgid "Version Control Tree"
 msgstr "Version Control Tree"
 
@@ -1307,7 +1313,7 @@ msgstr "Advanced"
 msgid "Basic"
 msgstr "Basic"
 
-#: glade/cong-file-properties.glade.h:4 src/cong-document.c:996
+#: glade/cong-file-properties.glade.h:4 src/cong-document.c:1003
 msgid "Document Type Declaration"
 msgstr "Document Type Declaration"
 
@@ -1563,7 +1569,7 @@ msgstr "Creation Parameters"
 msgid "Depth"
 msgstr "Depth"
 
-#: glade/plugin-random.glade.h:3 src/cong-document.c:984
+#: glade/plugin-random.glade.h:3 src/cong-document.c:991
 msgid "Document Type"
 msgstr "Document Type"
 
@@ -1593,21 +1599,21 @@ msgstr ""
 "install it.  Try installing it.  If you have changed the default setting for "
 "the display spec path, please double check that as well."
 
-#: src/cong-attribute-editor.c:246 src/cong-attribute-wrapper.c:229
+#: src/cong-attribute-editor.c:249 src/cong-attribute-wrapper.c:232
 #: src/cong-node-properties-dialog.c:424
 #, c-format
 msgid "Set attribute \"%s\" to \"%s\""
 msgstr "Set attribute \"%s\" to \"%s\""
 
-#: src/cong-attribute-editor.c:249 src/cong-attribute-editor-cdata.c:232
-#: src/cong-attribute-editor-nmtoken.c:275 src/cong-attribute-wrapper.c:260
+#: src/cong-attribute-editor.c:253 src/cong-attribute-editor-cdata.c:232
+#: src/cong-attribute-editor-nmtoken.c:298 src/cong-attribute-wrapper.c:263
 #: src/cong-node-properties-dialog.c:506
 #, c-format
 msgid "Delete attribute \"%s\""
 msgstr "Delete attribute \"%s\""
 
 #: src/cong-attribute-editor-cdata.c:206
-#: src/cong-attribute-editor-nmtoken.c:249
+#: src/cong-attribute-editor-nmtoken.c:272
 #: src/cong-node-properties-dialog.c:470
 #, c-format
 msgid "Add attribute \"%s\""
@@ -1713,17 +1719,27 @@ msgstr "Ukrainian"
 msgid "No Language"
 msgstr "No Language"
 
-#. are there mem leaks here
-#: src/cong-attribute-editor-nmtoken.c:204
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: src/cong-attribute-editor-nmtoken.c:225
 #, c-format
 msgid "Unable to set attribute \"%s\" to \"%s\""
 msgstr "Unable to set attribute \"%s\" to \"%s\""
 
-#: src/cong-attribute-editor-nmtoken.c:216
+#: src/cong-attribute-editor-nmtoken.c:236
 msgid "The attribute value must be an XML name token."
 msgstr "The attribute value must be an XML name token."
 
-#: src/cong-attribute-editor-nmtoken.c:217
+#: src/cong-attribute-editor-nmtoken.c:237
 msgid ""
 "XML name tokens can only contain alphanumeric and/or ideographic characters "
 "and the punctuation marks _,-, ., and :. It can not contain whitespace "
@@ -1818,80 +1834,80 @@ msgstr "File Type"
 msgid "Coverage"
 msgstr "Coverage"
 
-#: src/cong-document.c:649
+#: src/cong-document.c:651
 msgid "(Untitled)"
 msgstr "(Untitled)"
 
-#: src/cong-document.c:948
+#: src/cong-document.c:955
 #, c-format
 msgid "Attribute \"%s\""
 msgstr "Attribute \"%s\""
 
-#: src/cong-document.c:955
+#: src/cong-document.c:962
 #, c-format
 msgid "Text \"%s\""
 msgstr "Text \"%s\""
 
-#: src/cong-document.c:961
+#: src/cong-document.c:968
 msgid "Character Data"
 msgstr "Character Data"
 
-#: src/cong-document.c:964
+#: src/cong-document.c:971
 #, c-format
 msgid "Reference to Entity \"%s\""
 msgstr "Reference to Entity \"%s\""
 
-#: src/cong-document.c:967
+#: src/cong-document.c:974
 #, c-format
 msgid "Entity \"%s\""
 msgstr "Entity \"%s\""
 
-#: src/cong-document.c:970
+#: src/cong-document.c:977
 msgid "XML Processing Instruction"
 msgstr "XML Processing Instruction"
 
-#: src/cong-document.c:975
+#: src/cong-document.c:982
 #, c-format
 msgid "Comment \"%s\""
 msgstr "Comment \"%s\""
 
-#: src/cong-document.c:987
+#: src/cong-document.c:994
 msgid "Document Fragment"
 msgstr "Document Fragment"
 
-#: src/cong-document.c:990
+#: src/cong-document.c:997
 msgid "Notation"
 msgstr "Notation"
 
-#: src/cong-document.c:993
+#: src/cong-document.c:1000
 msgid "HTML Document"
 msgstr "HTML Document"
 
-#: src/cong-document.c:999
+#: src/cong-document.c:1006
 msgid "Element Declaration"
 msgstr "Element Declaration"
 
-#: src/cong-document.c:1002
+#: src/cong-document.c:1009
 msgid "Attribute Declaration"
 msgstr "Attribute Declaration"
 
-#: src/cong-document.c:1005
+#: src/cong-document.c:1012
 msgid "Entity Declaration"
 msgstr "Entity Declaration"
 
-#: src/cong-document.c:1008
+#: src/cong-document.c:1015
 msgid "Namespace Declaration"
 msgstr "Namespace Declaration"
 
-#: src/cong-document.c:1011
+#: src/cong-document.c:1018
 msgid "XInclude Start"
 msgstr "XInclude Start"
 
-#: src/cong-document.c:1014
+#: src/cong-document.c:1021
 msgid "XInclude End"
 msgstr "XInclude End"
 
-#: src/cong-document.c:2173
+#: src/cong-document.c:2180
 #, c-format
 msgid "Select %s"
 msgstr "Select %s"
@@ -2432,20 +2448,11 @@ msgstr "File:"
 msgid "Export Options"
 msgstr "Export Options"
 
-#: src/cong-file-export.c:425
-#, c-format
-msgid "Conglomerate cannot export \"%s\""
-msgstr "Conglomerate cannot export \"%s\""
-
-#: src/cong-file-export.c:429
-msgid "None of Conglomerate's plugins know how to export files of this type."
-msgstr "None of Conglomerate's plugins know how to export files of this type."
-
-#: src/cong-file-export.c:462
+#: src/cong-file-export.c:431
 msgid "No output file specified"
 msgstr "No output file specified"
 
-#: src/cong-file-export.c:463
+#: src/cong-file-export.c:432
 msgid "Please specify a file name."
 msgstr "Please specify a filename."
 
@@ -2521,7 +2528,7 @@ msgstr ""
 msgid "Force"
 msgstr "Force"
 
-#: src/cong-file-open.c:210
+#: src/cong-file-open.c:218
 msgid "Select an XML document"
 msgstr "Select an XML document"
 
@@ -2542,7 +2549,7 @@ msgstr "Print Method:"
 msgid "Print Options"
 msgstr "Print Options"
 
-#: src/cong-file-print.c:336 src/cong-menus.c:729
+#: src/cong-file-print.c:336 src/cong-menus.c:727
 msgid "Print Preview"
 msgstr "Print Preview"
 
@@ -2647,7 +2654,7 @@ msgstr "Calculating next page"
 msgid "The selected menu item has not yet been implemented."
 msgstr "The selected menu item has not yet been implemented."
 
-#: src/cong-menus.c:465
+#: src/cong-menus.c:463
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate cannot open the result of the transformation"
 
@@ -2657,42 +2664,42 @@ msgstr "Conglomerate cannot open the result of the transformation"
 #. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
 #. * file. It would be nice to make the URL an actual link but that is a lot more work.
 #.
-#: src/cong-menus.c:530 src/cong-plugin.c:734
+#: src/cong-menus.c:528 src/cong-plugin.c:734
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr "There was a problem reading the stylesheet file \"%s\""
 
-#: src/cong-menus.c:533 src/cong-menus.c:557 src/cong-plugin.c:736
+#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-plugin.c:736
 #: src/cong-plugin.c:799
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate could not transform the document"
 
-#: src/cong-menus.c:554
+#: src/cong-menus.c:552
 msgid "There was a problem applying the stylesheet file"
 msgstr "There was a problem applying the stylesheet file"
 
-#: src/cong-menus.c:1115
+#: src/cong-menus.c:1113
 msgid "Test Progress Checklist"
 msgstr "Test Progress Checklist"
 
-#: src/cong-menus.c:1119
+#: src/cong-menus.c:1117
 #, c-format
 msgid "This is stage %i"
 msgstr "This is stage %i"
 
-#: src/cong-menus.c:1170
+#: src/cong-menus.c:1168
 msgid "Message Log - Conglomerate"
 msgstr "Message Log - Conglomerate"
 
-#: src/cong-menus.c:1189
+#: src/cong-menus.c:1187
 msgid "Signal Log - Conglomerate"
 msgstr "Signal Log - Conglomerate"
 
-#: src/cong-menus.c:1429
+#: src/cong-menus.c:1427
 msgid "translator_credits"
 msgstr "Adam Weinberger <adamw@gnome.org>"
 
-#: src/cong-menus.c:1448
+#: src/cong-menus.c:1446
 msgid ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
@@ -2700,163 +2707,163 @@ msgstr ""
 "(C) 1999 Hans Petter Jansson\n"
 "(C) 2004 David Malcolm"
 
-#: src/cong-menus.c:1449
+#: src/cong-menus.c:1447
 msgid "Conglomerate: a free, user-friendly XML editor"
 msgstr "Conglomerate: a free, user-friendly XML editor"
 
 #. Menus:
-#: src/cong-menus.c:1483
+#: src/cong-menus.c:1481
 msgid "_File"
 msgstr "_File"
 
-#: src/cong-menus.c:1484
+#: src/cong-menus.c:1482
 msgid "_Edit"
 msgstr "_Edit"
 
-#: src/cong-menus.c:1489
+#: src/cong-menus.c:1487
 msgid "_Help"
 msgstr "_Help"
 
 #. Sub-menus:
-#: src/cong-menus.c:1492 src/popup.c:1099
+#: src/cong-menus.c:1490 src/popup.c:1099
 msgid "New sub-element"
 msgstr "New sub-element"
 
-#: src/cong-menus.c:1493 src/popup.c:1113
+#: src/cong-menus.c:1491 src/popup.c:1113
 msgid "New sibling"
 msgstr "New sibling"
 
-#: src/cong-menus.c:1494
+#: src/cong-menus.c:1492
 msgid "Remove span tag"
 msgstr "Remove span tag"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1497
+#: src/cong-menus.c:1495
 msgid "_New..."
 msgstr "_New..."
 
-#: src/cong-menus.c:1498
+#: src/cong-menus.c:1496
 msgid "_Open..."
 msgstr "_Open..."
 
-#: src/cong-menus.c:1499
+#: src/cong-menus.c:1497
 msgid "_Import..."
 msgstr "_Import..."
 
-#: src/cong-menus.c:1500
+#: src/cong-menus.c:1498
 msgid "_Close"
 msgstr "_Close"
 
-#: src/cong-menus.c:1501
+#: src/cong-menus.c:1499
 msgid "_Quit"
 msgstr "_Quit"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1505
+#: src/cong-menus.c:1503
 msgid "Prefere_nces"
 msgstr "Prefere_nces"
 
 #. Actions found in Help menu:
-#: src/cong-menus.c:1518
+#: src/cong-menus.c:1516
 msgid "_Contents"
 msgstr "_Contents"
 
-#: src/cong-menus.c:1519
+#: src/cong-menus.c:1517
 msgid "_Homepage"
 msgstr "_Homepage"
 
-#: src/cong-menus.c:1520
+#: src/cong-menus.c:1518
 msgid "_About"
 msgstr "_About"
 
-#: src/cong-menus.c:1526
+#: src/cong-menus.c:1524
 msgid "_Tools"
 msgstr "_Tools"
 
 #. Actions found in File menu:
-#: src/cong-menus.c:1530
+#: src/cong-menus.c:1528
 msgid "_Save"
 msgstr "_Save"
 
-#: src/cong-menus.c:1531
+#: src/cong-menus.c:1529
 msgid "Save _as..."
 msgstr "Save _as..."
 
-#: src/cong-menus.c:1532
+#: src/cong-menus.c:1530
 msgid "Sa_ve a Copy..."
 msgstr "Sa_ve a Copy..."
 
-#: src/cong-menus.c:1534
+#: src/cong-menus.c:1532
 msgid "Print Previe_w..."
 msgstr "Print Previe_w..."
 
-#: src/cong-menus.c:1535
+#: src/cong-menus.c:1533
 msgid "_Print"
 msgstr "_Print"
 
-#: src/cong-menus.c:1538
+#: src/cong-menus.c:1536
 msgid "_Revert"
 msgstr "_Revert"
 
-#: src/cong-menus.c:1540
+#: src/cong-menus.c:1538
 msgid "_Export..."
 msgstr "_Export..."
 
-#: src/cong-menus.c:1541
+#: src/cong-menus.c:1539
 msgid "Proper_ties"
 msgstr "Proper_ties"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1545 src/cong-menus.c:1768
+#: src/cong-menus.c:1543 src/cong-menus.c:1769
 msgid "_Undo"
 msgstr "_Undo"
 
-#: src/cong-menus.c:1546 src/cong-menus.c:1778
+#: src/cong-menus.c:1544 src/cong-menus.c:1779
 msgid "_Redo"
 msgstr "_Redo"
 
-#: src/cong-menus.c:1547
+#: src/cong-menus.c:1545
 msgid "Cu_t"
 msgstr "Cu_t"
 
-#: src/cong-menus.c:1548 src/popup.c:755 src/popup.c:1051
+#: src/cong-menus.c:1546 src/popup.c:755 src/popup.c:1051
 msgid "_Copy"
 msgstr "_Copy"
 
-#: src/cong-menus.c:1549 src/popup.c:769
+#: src/cong-menus.c:1547 src/popup.c:769
 msgid "_Paste"
 msgstr "_Paste"
 
-#: src/cong-menus.c:1550
+#: src/cong-menus.c:1548
 msgid "_Find..."
 msgstr "_Find..."
 
-#: src/cong-menus.c:1551
+#: src/cong-menus.c:1549
 msgid "Find Ne_xt"
 msgstr "Find Ne_xt"
 
-#: src/cong-menus.c:1552
+#: src/cong-menus.c:1550
 msgid "Find Pre_vious"
 msgstr "Find Pre_vious"
 
-#: src/cong-menus.c:1553
+#: src/cong-menus.c:1551
 msgid "R_eplace..."
 msgstr "R_eplace..."
 
-#: src/cong-menus.c:1555
+#: src/cong-menus.c:1553
 msgid "_Insert..."
 msgstr "_Insert..."
 
-#: src/cong-menus.c:1556
+#: src/cong-menus.c:1554
 msgid "View _Source"
 msgstr "View _Source"
 
-#: src/cong-menus.c:1764
+#: src/cong-menus.c:1765
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Undo: %s"
 
-#: src/cong-menus.c:1774
+#: src/cong-menus.c:1775
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Redo: %s"
