@@ -6,6 +6,7 @@ philosophy. It is based on structural document markup with XML. A totally
 rewritten version is coming up in late january. To avoid confusion with this
 release, the new one will probably be called "Congle".
 
+
 Compiling
 ---------
 
@@ -20,34 +21,28 @@ may then need to rename (prefix)/lib/libflux.a to (prefix)/lib/libflux-old.a
 This is a temporary workaround to deal with the fact that libflux has been
 under heavy development, whereas conge has been left untouched.
 
-Type
+If you're compiling from CVS, type
 
-  ./autogen.sh --with-flux-prefix=
+  ./autogen.sh
 
 If Flux is not in your default prefix, you should do
 
   ./autogen.sh --with-flux-prefix=/opt/flux-old
 
-(Or wherever you installed it to. I installed it to /opt/flux-old to
-keep it separated from the rest of my system). It will still link to
--lflux-old, so you want to do the rename trick, or change that to -lflux
-in configure.in.
+(Or wherever you installed it to. I install it to /opt/flux-old to
+keep it separated from the rest of my system). It will link with -lflux-old,
+so you want to rename the library, or change that to -lflux in configure.in.
 
 Next type
 
   make
 
 and see what happens. This should produce an executable called "conge" in
-your current directory.
+the src/ current directory.
 
 Compiling on Windows should be equally simple, if you're using Cygwin
-(http://www.cygnus.com/cygwin/):
+(http://www.cygnus.com/cygwin/). The process is basically the same as on Unix.
 
-0) Make sure you have the Windows DLLs for GTK/GDK. Put them in the src/ dir.
-1) Edit global.h, change #undef WINDOWS_BUILD to #define WINDOWS_BUILD 1
-2) Copy "Makefile.win" to "Makefile".
-3) make
-          ***** Please confirm if it still compiles on Win32 *****
 
 Running
 -------

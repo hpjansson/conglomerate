@@ -41,7 +41,7 @@ dnl --- Check Flux prefix ---
 
 AC_ARG_WITH(flux-prefix,
 [  --with-flux-prefix      pre-0.5 Flux prefix],
-    flux_prefix=$withval, flux_prefix=$prefix)
+    flux_prefix=$withval, flux_prefix=)
 
 dnl --- General compilation options ---
 
