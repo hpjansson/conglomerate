@@ -1176,6 +1176,10 @@ key_press_event_handler (GtkWidget *w,
 	default:
 		/* Is the user typing text? */
 		if (event->length && event->string && strlen(event->string)) {
+                        if (cong_selection_get_logical_end(selection)->node) {
+                                cong_document_delete_selection(doc);
+                        }
+
 			cong_cursor_data_insert(cursor, event->string);
 
 			cong_selection_nullify (selection);
