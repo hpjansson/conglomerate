@@ -1,4 +1,10 @@
-conglomerate (0.5.3-0.1) experimental; urgency=low
+conglomerate (0.5.4-0.2) experimental; urgency=low
+
+  * new stuff in CVS
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri, 27 Jun 2003 14:11:56 +0200
+
+conglomerate (0.5.4-0.1) experimental; urgency=low
 
   * new upstream version is scheduled as 0.5.4
 
