@@ -9,6 +9,7 @@ EXTRA_DIST = acconfig.h            \
   examples/ChangeLog                 \
   examples/docbook.xds               \
   examples/error-proposal.xml        \
+  examples/file-roller.xml           \
   examples/readme.ds                 \
   examples/readme.xds                \
   examples/readme.xml                \
