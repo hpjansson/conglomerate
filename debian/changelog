@@ -1,4 +1,4 @@
-conglomerate (0.7.12-3.2) UNRELEASED; urgency=low
+conglomerate (0.7.12-3.3) UNRELEASED; urgency=low
 
   * expecting new upstream version
    - It has a new logo, that affects conglomeate_icons.xpm.
@@ -6,7 +6,7 @@ conglomerate (0.7.12-3.2) UNRELEASED; urgency=low
    - No move dispspec-template.xds to examples, it is handled upstream.
   * conglomerate.menu: quoted all the strings.
 
- -- Geert Stappers <stappers@stappers.nl>  Mon, 17 May 2004 17:53:49 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Mon, 17 May 2004 18:44:46 +0000
 
 conglomerate (0.7.12-2) unstable; urgency=low
 
