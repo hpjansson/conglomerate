@@ -1,3 +1,9 @@
+2004-08-16  David Malcolm  <dmalcolm@redhat.com>
+
+	* xmledit.c, xmldata.c, cong-node.h, cong-node.c, cong-location.c, cong-editor-widget3.c, cong-editor-node.c, cong-edit-find-and-replace.c, cong-dom-view.c, cong-command.c:
+
+	Added support for CDATA sections, generalising text editing code where necessary to support these (and some comment editing support where it seemed appropriate)
+
 2004-08-14  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* popup.c, cong-menus.c: 
