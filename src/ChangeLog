@@ -1,5 +1,10 @@
 2004-07-26  David Malcolm  <dmalcolm@redhat.com>
 
+	* cong-menus.c: 
+
+	Removed translation markers for debug menus; added stubbed option
+	to debug menu for debugging spell-checking support
+
 	* Makefile.am, cong-spell.h, cong-spell.c: 
 
 	Added files to handle spell-checking support

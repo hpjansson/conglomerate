@@ -3,7 +3,7 @@
 /*
  * cong-menus.c
  *
- * Copyright (C) 2003 David Malcolm
+ * Copyright (C) 2004 David Malcolm
  *
  * Conglomerate is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -1465,6 +1465,17 @@ menu_callback_debug_command_test (gpointer callback_data,
 	cong_document_end_command (doc,
 				   cmd);
 }
+
+void 
+menu_callback_debug_gnome_spell (gpointer callback_data,
+				 guint callback_action,
+				 GtkWidget *widget)
+{
+	/* CongPrimaryWindow *primary_window = callback_data; */
+	/* CongDocument *doc = cong_primary_window_get_document(primary_window); */
+
+	g_message("fubar");
+}
 #endif /* #if ENABLE_DEBUG_MENU */
 
 /* Callbacks for "Help" menu: */
@@ -1592,25 +1603,26 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Edit/Prefere_nces"),     NULL, menu_callback_preferences, 0, NULL },
 
 #if ENABLE_DEBUG_MENU
-	{ N_("/Debug"),                 NULL, NULL, 0, "<Branch>" },
-	{ N_("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
-	{ N_("/Debug/Transform DocBook to HTML"),       NULL, menu_callback_debug_transform_docbook_to_html, 0, NULL },
-	{ N_("/Debug/Transform DocBook to XHTML"),       NULL, menu_callback_debug_transform_docbook_to_xhtml, 0, NULL },
-	{ N_("/Debug/Transform DocBook to HTML Help"),       NULL, menu_callback_debug_transform_docbook_to_html_help, 0, NULL },
-	{ N_("/Debug/Transform DocBook to Java Help"),       NULL, menu_callback_debug_transform_docbook_to_javahelp, 0, NULL },
-	{ N_("/Debug/Transform DocBook to FO"),       NULL, menu_callback_debug_transform_docbook_to_fo, 0, NULL },
+	{ ("/Debug"),                 NULL, NULL, 0, "<Branch>" },
+	{ ("/Debug/Begin self-test of error-reporting system..."),           NULL, menu_callback_debug_error, 0, NULL },
+	{ ("/Debug/Transform DocBook to HTML"),       NULL, menu_callback_debug_transform_docbook_to_html, 0, NULL },
+	{ ("/Debug/Transform DocBook to XHTML"),       NULL, menu_callback_debug_transform_docbook_to_xhtml, 0, NULL },
+	{ ("/Debug/Transform DocBook to HTML Help"),       NULL, menu_callback_debug_transform_docbook_to_html_help, 0, NULL },
+	{ ("/Debug/Transform DocBook to Java Help"),       NULL, menu_callback_debug_transform_docbook_to_javahelp, 0, NULL },
+	{ ("/Debug/Transform DocBook to FO"),       NULL, menu_callback_debug_transform_docbook_to_fo, 0, NULL },
 #if PRINT_TESTS
-	{ N_("/Debug/Preview XSL:FO"),       NULL, menu_callback_debug_preview_fo, 0, NULL },
+	{ ("/Debug/Preview XSL:FO"),       NULL, menu_callback_debug_preview_fo, 0, NULL },
 #endif /* #if PRINT_TESTS */
-	{ N_("/Debug/DTD"),             NULL, menu_callback_debug_dtd, 0, NULL },
-	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
-	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
-	{ N_("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
-	{ N_("/Debug/Document Signal Log"),           NULL, menu_callback_debug_document_signal_log, 0, NULL },	
-	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
-	{ N_("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
-	{ N_("/Debug/Insert XML Fragment"),           NULL, menu_callback_debug_insert_xml_fragment, 0, NULL },	
-	{ N_("/Debug/Command Test"),           NULL, menu_callback_debug_command_test, 0, NULL },	
+	{ ("/Debug/DTD"),             NULL, menu_callback_debug_dtd, 0, NULL },
+	{ ("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
+	{ ("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
+	{ ("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
+	{ ("/Debug/Document Signal Log"),           NULL, menu_callback_debug_document_signal_log, 0, NULL },	
+	{ ("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
+	{ ("/Debug/Glade Test"),           NULL, menu_callback_debug_glade_test, 0, NULL },	
+	{ ("/Debug/Insert XML Fragment"),           NULL, menu_callback_debug_insert_xml_fragment, 0, NULL },	
+	{ ("/Debug/Command Test"),           NULL, menu_callback_debug_command_test, 0, NULL },	
+	{ ("/Debug/Spell"),           NULL, menu_callback_debug_gnome_spell, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Tools"),        NULL, NULL, ACTION_MARKER_TOOLS_MENU, "<Branch>" },
