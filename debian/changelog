@@ -1,6 +1,6 @@
 conglomerate (0.7.8-2.3) UNRELEASED; urgency=low
 
-  * Keeping it top fit for New upstream release
+  * Keeping it top fit for new upstream version
 
   * Installing gconf schema
    - control: depend on gconf2
