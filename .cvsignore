@@ -23,6 +23,6 @@ stamp-h.in
 conglomerate-?.?.*
 ## #other #files
 #debian
-build-stamp
+build-*stamp
 patch-stamp
 ##
