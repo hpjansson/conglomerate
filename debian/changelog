@@ -8,14 +8,18 @@ conglomerate (0.7.6cvs237-7) UNRELEASED; urgency=low
   * rules:
    - Upstream has an up-to-date config.guess and config.sub.
    - Removed 'INSTALL_PROGRAM += -s' with test on DEB_BUILD_OPTIONS,
-   because `dh_strip` takes care of that.
+     because `dh_strip` takes care of that.
+   Suggested by Joerg Jaspert, thanks.
+
 
   * NEWS:
    - Dropped the scrollkeeper item.
-   - Clearified the gtk-doc issue.
+   Suggested by Joerg Jaspert, thanks.
    - In same format as changelog.
+   Suggested by Martin Michlmayr, thanks.
+   - Clearified the gtk-doc issue.
 
- -- Geert Stappers <stappers@stappers.nl>  Tue, 25 Nov 2003 13:36:10 +0000
+ -- Geert Stappers <stappers@stappers.nl>  Sat, 29 Nov 2003 08:14:14 +0100
 
 conglomerate (0.7.6-1) unstable; urgency=medium
 
