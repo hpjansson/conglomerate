@@ -1584,7 +1584,6 @@ cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 }
 
 
-extern char *ilogo_xpm[];
 
 /**
  * cong_util_show_in_window:
@@ -1611,12 +1610,22 @@ cong_util_show_in_window (GtkWidget *content,
 
 	/* Set up the window nicely: */
 	{	
-		GdkPixbuf *icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
+		gchar *logo_path;
+		GdkPixbuf *pixbuf;
 		
+		logo_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						       GNOME_FILE_DOMAIN_APP_PIXMAP,
+						       "conglomerate/conglomerate-logo.png",
+						       FALSE,
+						       NULL);
+		pixbuf = gdk_pixbuf_new_from_file(logo_path, NULL);
+	
+		g_free(logo_path);
+	
 		gtk_window_set_icon(GTK_WINDOW(window),
-				    icon_pixbuf);
+				    pixbuf);
 
-		gdk_pixbuf_unref(icon_pixbuf);
+		gdk_pixbuf_unref(pixbuf);
 
 	}
 

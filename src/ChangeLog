@@ -1,3 +1,17 @@
+2004-10-14 Nickolay V. Shmyrev <nshmyrev@yandex.ru>
+ 
+	* icon_assemble.xpm, icon_new.xpm, icon_save.xpm, ilogo.xpm:
+ 	
+	Removed files
+ 
+	* Makefile.am, cong-utils.c, cong-menus.c, cong-primary-window.c:
+ 	
+ 	Remove xpm unused images.
+ 	
+	* global.h, cong-service-print-method.h, cong-service-print-method.c :
+ 	
+ 	Fix documentation build with --disable-printing. 	
+ 
 2004-10-14  Douglas Burke  <dburke@cfa.harvard.edu>
 
 	* cong-attribute-editor-enumeration.c:

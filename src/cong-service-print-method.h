@@ -25,7 +25,6 @@
 #ifndef __CONG_PRINT_METHOD_H__
 #define __CONG_PRINT_METHOD_H__
 
-#if ENABLE_PRINTING
 
 #include "cong-plugin.h"
 
@@ -36,6 +35,8 @@ G_BEGIN_DECLS
 #define CONG_SERVICE_PRINT_METHOD_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_SERVICE_PRINT_METHOD_TYPE, CongServicePrintMethodClass)
 #define IS_CONG_SERVICE_PRINT_METHOD(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_SERVICE_PRINT_METHOD_TYPE)
 CONG_DECLARE_CLASS (CongServicePrintMethod, cong_service_print_method, CongService)
+
+#if ENABLE_PRINTING
 
 typedef gboolean 
 (*CongServicePrintMethodDocumentFilter) (CongServicePrintMethod *print_method, 

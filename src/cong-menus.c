@@ -65,8 +65,6 @@
 
 #include "cong-edit-find-and-replace.h"
 
-extern char *ilogo_xpm[];
-
 #define ENABLE_DEBUG_MENU 0
 #define ENABLE_UNIMPLEMENTED_MENUS 0
 
@@ -1415,7 +1413,6 @@ static void
 action_callback_about (GtkAction *action,
 		       CongPrimaryWindow *primary_window)
 {
-	GdkPixbuf *logo_pixbuf = gdk_pixbuf_new_from_xpm_data((const char**)ilogo_xpm);
 	gchar* authors[] = {"Hans Petter Jansson", 
 			    "David Malcolm", 
 			    "Joakim Ziegler", 
@@ -1430,8 +1427,23 @@ action_callback_about (GtkAction *action,
 	gchar* documenters[] = { NULL };
 
  	gchar* translator_credits = _("translator_credits");
+
+        gchar *logo_path;
+
+	GdkPixbuf *logo_pixbuf;
   
- 	GtkWidget *about = gnome_about_new(_("Conglomerate XML Editor"),
+ 	GtkWidget *about;
+	
+	logo_path = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+					       GNOME_FILE_DOMAIN_APP_PIXMAP,
+					       "conglomerate/conglomerate-logo.png",
+					       FALSE,
+					       NULL);
+	logo_pixbuf = gdk_pixbuf_new_from_file(logo_path, NULL);
+	
+	g_free(logo_path);
+	
+	about  = gnome_about_new(_("Conglomerate XML Editor"),
  					   PACKAGE_VERSION,
  					   _("(C) 1999 Hans Petter Jansson\n(C) 2004 David Malcolm"),
  					   _("Conglomerate: a free, user-friendly XML editor"),

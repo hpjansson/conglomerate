@@ -90,9 +90,7 @@ typedef struct CongService CongService;
 typedef struct CongServiceDocumentFactory CongServiceDocumentFactory;
 typedef struct CongServiceImporter CongServiceImporter;
 typedef struct CongServiceExporter CongServiceExporter;
-#if ENABLE_PRINTING
 typedef struct CongServicePrintMethod CongServicePrintMethod;
-#endif
 typedef struct CongServiceEditorNodeFactory CongServiceEditorNodeFactory;
 
 typedef struct CongServiceTool CongServiceTool;

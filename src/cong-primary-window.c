@@ -223,14 +223,6 @@ cong_gui_destroy_tree_store(struct cong_gui* gui)
  
 struct CongApp the_app;
 
-extern char *ilogo_xpm[];
-extern char *auth_off_xpm[];
-extern char *icon_connect[];
-extern char *icon_new[];
-extern char *icon_assemble[];
-extern char *icon_openfile[];
-extern char *icon_submit[];
-
 /**
  * cong_primary_window_create_pixmap:
  * @primary_window:

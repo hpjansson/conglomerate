@@ -40,7 +40,8 @@ appicons_DATA = \
 	cong-important-48.png \
 	cong-note-48.png \
 	cong-tip-48.png \
-	cong-warning-48.png
+	cong-warning-48.png \
+	conglomerate-logo.png
 
 
 EXTRA_DIST = $(dti_DATA) $(appicons_DATA)

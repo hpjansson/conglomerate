@@ -19,8 +19,6 @@ glade/docbook-ulink-properties.glade
 glade/plugin-arbitrary.glade
 glade/plugin-random.glade
 glade/string_selection_dialog.glade
-src/auth_off.c
-src/auth_on.c
 src/cong-app.c
 src/cong-attribute-editor-cdata.c
 src/cong-attribute-editor-enumeration.c
@@ -147,12 +145,6 @@ src/cong-xpath-expression.c
 src/cursor.c
 src/file.c
 src/gxx-impl-object-to-xml-tree.c
-src/icon_assemble.c
-src/icon_connect.c
-src/icon_new.c
-src/icon_openfile.c
-src/icon_submit.c
-src/ilogo.c
 src/main.c
 src/plugin-abiword.c
 src/plugin-admonition-node-element.c

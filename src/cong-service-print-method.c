@@ -25,14 +25,17 @@
 #include "global.h"
 #include "cong-service-print-method.h"
 
-#if ENABLE_PRINTING
 struct CongServicePrintMethodPrivate
 {
+#if ENABLE_PRINTING
 	CongServicePrintMethodDocumentFilter doc_filter;
 	CongServicePrintMethodActionCallback action_callback;
+#endif
 	gpointer user_data;
 };
 CONG_DEFINE_CLASS (CongServicePrintMethod, cong_service_print_method, CONG_SERVICE_PRINT_METHOD, CongService, CONG_SERVICE_TYPE)
+
+#if ENABLE_PRINTING
 
 /**
  * cong_service_print_method_construct:

@@ -263,14 +263,6 @@ conglomerate_SOURCES =      \
   cong-view.c               \
   cong-xpath-expression.c   \
   gxx-impl-object-to-xml-tree.c \
-  icon_assemble.c           \
-  icon_connect.c            \
-  icon_new.c                \
-  icon_openfile.c           \
-  icon_submit.c             \
-  ilogo.c                   \
-  auth_on.c                 \
-  auth_off.c                \
   position.c                \
   cursor.c                  \
   select.c                  \
