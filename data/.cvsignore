@@ -2,3 +2,4 @@ Makefile
 Makefile.in
 conglomerate.desktop
 conglomerate.schema
+conglomerate.schemas
