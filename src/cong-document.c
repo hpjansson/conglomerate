@@ -5,6 +5,7 @@
 #include "cong-view.h"
 #include "cong-error-dialog.h"
 #include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
 #include "cong-selection.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-util.h"

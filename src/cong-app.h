@@ -80,6 +80,9 @@ cong_app_get_dispspec_registry (CongApp *app);
 GConfClient*
 cong_app_get_gconf_client (CongApp *app);
 
+const GList*
+cong_app_get_language_list (CongApp *app);
+
 G_END_DECLS
 
 #endif

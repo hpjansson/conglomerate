@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
   gxx-object-to-xml-tree.h
 
@@ -12,6 +13,24 @@
 /* Get rid of all gxx macros: */
 #include "gxx-undefine-shared-macros.h"
 
+G_BEGIN_DECLS
+
+/* Types and prototypes used by the generated code: */
+void
+gxx_hash_table_of_children_with_pcdata_to_xml_tree (gpointer key,
+						    gpointer value,
+						    gpointer user_data);
+
+typedef struct GXXCallbackData_HashTableOfChildrenWithPCDATA GXXCallbackData_HashTableOfChildrenWithPCDATA;
+
+struct GXXCallbackData_HashTableOfChildrenWithPCDATA
+{
+	xmlNodePtr xml_node;
+	const gchar *str_child_name;
+	const gchar *str_hashing_attribute_name;
+};
+
+/* Macro definitions: */
 #define GXX_STRUCT_BEGIN_ELEMENT(xml_name, type_name, fn_name_frag) \
 xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *inst, xmlDocPtr xml_doc) { \
   const gchar * const tag_name = xml_name; \
@@ -67,3 +86,16 @@ xmlNodePtr gxx_generated_object_to_xml_tree_fn_##fn_name_frag (const type_name *
       } \
     } \
   }
+
+#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hash_table_member_name) \
+  { \
+    GXXCallbackData_HashTableOfChildrenWithPCDATA cb_data; \
+    cb_data.xml_node = xml_node; \
+    cb_data.str_child_name = child_name; \
+    cb_data.str_hashing_attribute_name = hashing_attribute_name; \
+    g_hash_table_foreach (inst->hash_table_member_name, \
+			  gxx_hash_table_of_children_with_pcdata_to_xml_tree, \
+			  &cb_data); \
+  }
+
+G_END_DECLS

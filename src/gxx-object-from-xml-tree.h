@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
   gxx-object-from-xml-tree.h
 
@@ -75,5 +76,29 @@ type_name *gxx_generated_object_from_xml_tree_fn_##fn_name_frag (xmlNodePtr xml_
      if (NULL==inst->member_name) { \
        g_warning("Missing child <%s> within <%s>", child_name, tag_name); \
      } \
+    } \
+  }
+
+#define GXX_STRUCT_HASH_TABLE_OF_CHILDREN_WITH_PCDATA(child_name, hashing_attribute_name, hash_table_member_name) \
+  { \
+    xmlNodePtr child; \
+    for (child = xml_node->children; child; child=child->next) { \
+      if (0==strcmp(child->name,child_name)) { \
+        gchar *hash_attr = xmlGetProp (child, hashing_attribute_name); \
+        if (hash_attr) { \
+          gchar *pcdata = xmlNodeListGetString(xml_node->doc, child->xmlChildrenNode, 1); \
+	  if (pcdata) { \
+            g_hash_table_insert (inst->hash_table_member_name, \
+				 g_strdup (hash_attr), \
+				 g_strdup (pcdata)); \
+	    g_free (pcdata); \
+	  } else { \
+	    g_warning("Missing PCDATA within <%s>", child_name); \
+	  } \
+	  g_free (hash_attr); \
+	} else { \
+	  g_warning("Missing attribute \"%s\" within <%s>", hashing_attribute_name, child_name); \
+	} \
+      } \
     } \
   }

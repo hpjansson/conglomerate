@@ -38,8 +38,11 @@
 /* Internal data structure declarations: */
 
 /* Internal function prototypes: */
-static const gchar* 
-element_type_to_string (enum CongElementType type);
+static gpointer
+find_best_value_for_language (GHashTable *hash_of_language);
+
+static const gchar*
+find_best_string_for_language (GHashTable *hash_of_language);
 
 /* Use gxx to generate XML load/save routines: */
 static const CongEnumMapping type_numeration[] =
@@ -66,6 +69,14 @@ gxx_callback_construct_dispspec_element(void)
 
 	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 
+	element->hash_of_language_to_user_name = g_hash_table_new_full (g_str_hash,
+									g_str_equal,
+									g_free,
+									g_free);
+	element->hash_of_language_to_short_desc = g_hash_table_new_full (g_str_hash,
+									 g_str_equal,
+									 g_free,
+									 g_free);	
 	element->key_value_hash = g_hash_table_new_full (g_str_hash,
 							 g_str_equal,
 							 g_free,
@@ -200,10 +211,11 @@ cong_dispspec_element_new (const gchar* xmlns,
 	CongDispspecElement* element;
 
 	g_return_val_if_fail(tagname,NULL);
-
-	element = g_new0(CongDispspecElement,1);
-
+	
 	g_message("cong_dispspec_element_new (\"%s\",\"%s\",)", xmlns, tagname);
+
+	/* Use shared constructor code: */
+	element = gxx_callback_construct_dispspec_element();
 
 	if (xmlns) {
 		element->xmlns = g_strdup(xmlns);
@@ -211,15 +223,15 @@ cong_dispspec_element_new (const gchar* xmlns,
 	element->tagname = g_strdup(tagname);	
 
 	if (autogenerate_username) {
-
-		/* Try to prettify the username if possible: */
-		element->username = cong_eel_prettify_xml_name_with_header_capitalisation(tagname);
-
+		/* Try to prettify the username if possible; 
+		   FIXME: which language should this go into? */
+		g_hash_table_insert (element->hash_of_language_to_user_name,
+				     "C",
+				     cong_eel_prettify_xml_name_with_header_capitalisation(tagname));
 	} else {
-		/* username remains NULL */
+		/* username remains unset */
 	}
 
-	element->whitespace = CONG_WHITESPACE_NORMALIZE;
 	element->type = type;
 
 	/* Extract colour: */
@@ -233,11 +245,6 @@ cong_dispspec_element_new (const gchar* xmlns,
 		cong_dispspec_element_init_col(element, col);
 	}
 
-	element->key_value_hash = g_hash_table_new_full (g_str_hash,
-							 g_str_equal,
-							 g_free,
-							 g_free);
-
 	return element;
 }
 
@@ -247,18 +254,15 @@ cong_dispspec_element_destroy (CongDispspecElement *element)
 {
 	g_return_if_fail (element);
 
+	/* FIXME: could autogenerate this code: */
 	if (element->xmlns) {
 		g_free (element->xmlns);
 	}
 	if (element->tagname) {
 		g_free (element->tagname);
 	}
-	if (element->username) {
-		g_free (element->username);
-	}
-	if (element->short_desc) {
-		g_free (element->short_desc);
-	}
+	g_hash_table_destroy (element->hash_of_language_to_user_name);
+	g_hash_table_destroy (element->hash_of_language_to_short_desc);
 
 	if (element->icon16) {
 		g_object_unref (G_OBJECT(element->icon16));
@@ -308,9 +312,16 @@ cong_dispspec_element_tagname(CongDispspecElement* element)
 const gchar*
 cong_dispspec_element_username(CongDispspecElement* element)
 {
+	gchar *result;
 	g_return_val_if_fail(element, NULL);
 
-	return element->username;
+	result = find_best_string_for_language (element->hash_of_language_to_user_name);
+
+	if (result) {
+		return result;
+	} else {
+		return element->tagname;
+	}
 }
 
 const gchar*
@@ -318,7 +329,7 @@ cong_dispspec_element_get_description(CongDispspecElement *element)
 {
 	g_return_val_if_fail(element,NULL);
 
-	return element->short_desc;
+	return find_best_string_for_language (element->hash_of_language_to_short_desc);
 }
 
 GdkPixbuf*
@@ -592,22 +603,6 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 
   		for (child = xml_element->children; child; child=child->next) {
 
-  			/* Extract names: */
-  			if (0==strcmp(child->name,"name")) {
-  				xmlChar* str = xmlNodeListGetString(xml_element->doc, child->xmlChildrenNode, 1);
-  				if (str) {
-  					element->username = g_strdup(str);					
-  				}
-  			}
-
-  			/* Extract short-desc: */
-  			if (0==strcmp(child->name,"short-desc")) {
-  				xmlChar* str = xmlNodeListGetString(xml_element->doc, child->xmlChildrenNode, 1);
-  				if (str) {
-  					element->short_desc = g_strdup(str);
-  				}
-  			}
-
   			/* Handle "collapseto": */
   			if (0==strcmp(child->name,"collapseto")) {
   				element->collapseto = TRUE;
@@ -637,11 +632,13 @@ cong_dispspec_element_from_xml (xmlNodePtr xml_element)
 				}
 		            	
 			}
-			
+
+#if 0			
 			/* Supply defaults where children not found: */
 			if (NULL==element->username) {
 				element->username = g_strdup(element->tagname);
 			}
+#endif
 		}
 	}
 
@@ -673,30 +670,6 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 
 	xml_node = gxx_generated_object_to_xml_tree_fn_dispspec_element (element, xml_doc);
 
-	/* Handle name: */
-	if (element->username)
-	{
-		CongNodePtr name_node = xmlNewDocNode (xml_doc,
-						       NULL,
-						       "name",
-						       element->username
-						       );
-		xmlSetProp (name_node, "locale", "en");
-
-		xmlAddChild (xml_node, name_node);		
-	}
-	
-	/* Handle short-desc: */
-	if (element->short_desc)
-	{
-		CongNodePtr desc_node = xmlNewDocNode (xml_doc,
-						       NULL,
-						       "short-desc",
-						       element->short_desc
-						       );
-		xmlAddChild (xml_node, desc_node);		
-	}
-
 	/* FIXME:  Need to store these: */
 #if 0
 	gboolean collapseto;
@@ -716,3 +689,27 @@ cong_dispspec_element_to_xml (const CongDispspecElement *element,
 	return xml_node;
 }
 
+static gpointer
+find_best_value_for_language (GHashTable *hash_of_language)
+{
+	const GList *iter;
+
+	g_assert (hash_of_language);
+
+	for (iter = cong_app_get_language_list (cong_app_singleton ()); iter; iter=iter->next) {
+		gpointer value = g_hash_table_lookup (hash_of_language,
+						      (gchar*)iter->data);
+
+		if (value) {
+			return value;
+		}					       
+	}
+	
+	return NULL;
+}
+
+static const gchar*
+find_best_string_for_language (GHashTable *hash_of_language)
+{
+	return (const gchar*)find_best_value_for_language (hash_of_language);
+}

@@ -36,8 +36,10 @@ struct CongDispspecElement
 {
 	gchar *xmlns;
 	gchar *tagname;
-	gchar *username;
-	gchar *short_desc;
+
+	GHashTable *hash_of_language_to_user_name;
+	GHashTable *hash_of_language_to_short_desc;
+
 	gchar *icon_name;
 	GdkPixbuf *icon16;
 	enum CongWhitespaceHandling whitespace;

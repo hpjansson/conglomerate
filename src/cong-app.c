@@ -56,6 +56,8 @@ struct CongAppPrivate
 #if !CORRECT_CLIPBOARD
 	gchar *clipboard; /* can be NULL to signify nothing in clipboard*/
 #endif
+
+	const GList *language_list;
 };
 
 
@@ -250,6 +252,15 @@ cong_app_get_gconf_client (CongApp *app)
 	return PRIVATE(app)->gconf_client;
 }
 
+const GList*
+cong_app_get_language_list (CongApp *app)
+{
+	g_return_val_if_fail (app, NULL);
+
+	return PRIVATE(app)->language_list;
+}
+
+
 
 /* Internal function definitions: */
 static CongApp*
@@ -280,6 +291,17 @@ cong_app_new (int   argc,
 	cong_app_private_load_fonts (app);
 
 	PRIVATE(app)->tooltips = gtk_tooltips_new();
+
+	PRIVATE(app)->language_list = gnome_i18n_get_language_list (NULL);
+
+	{
+		const GList *iter;
+
+		for (iter = PRIVATE(app)->language_list; iter; iter=iter->next) {
+			g_message ("\"%s\"", (gchar*)iter->data);
+		}
+	}
+
 
 	return app;	
 }
