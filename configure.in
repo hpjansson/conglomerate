@@ -1,0 +1,101 @@
+AC_INIT(configure.in)
+
+dnl ---------------------------------------------
+dnl Automake/autoconf input file for Conglomerate
+dnl ---------------------------------------------
+
+LIBXML_REQUIRED=2.0.0
+GNOMEUI_REQUIRED=2.0.0
+BONOBOUI_REQUIRED=1.0.0
+
+dnl --- Package configuration ---
+
+AM_INIT_AUTOMAKE(conglomerate, 0.0.1)
+AM_CONFIG_HEADER(config.h)
+dnl AM_ACLOCAL_INCLUDE(macros)
+
+AC_SUBST(VERSION)
+AC_SUBST(PACKAGE)
+
+AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
+AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
+
+AM_SANITY_CHECK
+AM_MAINTAINER_MODE
+AC_CANONICAL_HOST
+
+AC_C_CONST
+AC_ISC_POSIX
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AM_DISABLE_STATIC
+AM_PROG_LIBTOOL
+
+PKG_CHECK_MODULES(ALL,                     \
+  libxml-2.0 >= $LIBXML_REQUIRED           \
+  libbonoboui-2.0 > $BONOBOUI_REQUIRED     \
+  libgnomeui-2.0 > $GNOMEUI_REQUIRED)
+
+dnl --- Check Flux prefix ---
+
+AC_ARG_WITH(flux-prefix,
+[  --with-flux-prefix      pre-0.5 Flux prefix],
+    flux_prefix=$withval, flux_prefix=$prefix)
+
+dnl --- General compilation options ---
+
+AC_MSG_CHECKING([whether to support debugging])
+AC_ARG_ENABLE(debug,
+[  --enable-debug          enable debugging of application],
+    debug=$enableval, debug=no)
+AC_MSG_RESULT($debug)
+
+AC_MSG_CHECKING([whether to support profiling])
+AC_ARG_ENABLE(profile,
+[  --enable-profile        enable profiling of application],
+    profile=$enableval, profile=no)
+AC_MSG_RESULT($profile)
+
+AC_MSG_CHECKING([whether to optimize])
+AC_ARG_ENABLE(optimization,
+[  --enable-optimization        enable optimization of application],
+    optimize=$enableval, optimize=no)
+AC_MSG_RESULT($optimize)
+
+if test "$debug" = yes; then
+  BASE_CFLAGS="$BASE_CFLAGS -g"
+fi
+
+if test "$profile" = yes; then
+  BASE_CFLAGS="$BASE_CFLAGS -pg"
+fi
+
+if test "$optimize" = yes; then
+  BASE_CFLAGS="$BASE_CFLAGS -O3 -fomit-frame-pointer"
+
+  case "${target}" in
+    i486*) BASE_CFLAGS="$BASE_CFLAGS -march=i486 -mcpu=i486"
+           ;;
+    i586*) BASE_CFLAGS="$BASE_CFLAGS -march=i586 -mcpu=i586"
+           ;;
+    i686*) BASE_CFLAGS="$BASE_CFLAGS -march=i686 -mcpu=i686"
+           ;;
+  esac
+fi
+
+dnl --- Set compiler flags ---
+
+BASE_CFLAGS="$BASE_CFLAGS -Wall"
+
+CONGLOMERATE_LIBS="$BASE_LIBS `pkg-config --libs gtk+-2.0 libxml-2.0 libbonoboui-2.0 libgnomeui-2.0` -L$flux_prefix/lib -lflux-old"
+CONGLOMERATE_CFLAGS="$BASE_CFLAGS `pkg-config --cflags gtk+-2.0 libxml-2.0 libbonoboui-2.0 libgnomeui-2.0` -I$flux_prefix/include"
+
+AC_SUBST(CONGLOMERATE_LIBS)
+AC_SUBST(CONGLOMERATE_CFLAGS)
+
+dnl --- Output ---
+
+AC_OUTPUT(Makefile                \
+          src/Makefile            \
+          examples/Makefile)
