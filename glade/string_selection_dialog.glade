@@ -10,7 +10,9 @@
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
-  <property name="resizable">False</property>
+  <property name="default_width">400</property>
+  <property name="default_height">400</property>
+  <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
   <property name="has_separator">False</property>
 
@@ -68,39 +70,29 @@
       </child>
 
       <child>
-	<widget class="GtkCombo" id="combo">
+	<widget class="GtkScrolledWindow" id="scrolledwindow1">
 	  <property name="visible">True</property>
-	  <property name="value_in_list">False</property>
-	  <property name="allow_empty">True</property>
-	  <property name="case_sensitive">False</property>
-	  <property name="enable_arrow_keys">True</property>
-	  <property name="enable_arrows_always">False</property>
+	  <property name="can_focus">True</property>
+	  <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
+	  <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+	  <property name="shadow_type">GTK_SHADOW_NONE</property>
+	  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
-	  <child internal-child="entry">
-	    <widget class="GtkEntry" id="combo-entry">
+	  <child>
+	    <widget class="GtkTreeView" id="treeview1">
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="editable">True</property>
-	      <property name="visibility">True</property>
-	      <property name="max_length">0</property>
-	      <property name="text" translatable="yes"></property>
-	      <property name="has_frame">True</property>
-	      <property name="invisible_char" translatable="yes">*</property>
-	      <property name="activates_default">False</property>
-	    </widget>
-	  </child>
-
-	  <child internal-child="list">
-	    <widget class="GtkList" id="combo-list">
-	      <property name="visible">True</property>
-	      <property name="selection_mode">GTK_SELECTION_BROWSE</property>
+	      <property name="headers_visible">True</property>
+	      <property name="rules_hint">False</property>
+	      <property name="reorderable">True</property>
+	      <property name="enable_search">True</property>
 	    </widget>
 	  </child>
 	</widget>
 	<packing>
 	  <property name="padding">0</property>
-	  <property name="expand">False</property>
-	  <property name="fill">False</property>
+	  <property name="expand">True</property>
+	  <property name="fill">True</property>
 	</packing>
       </child>
     </widget>
