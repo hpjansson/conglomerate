@@ -4,3 +4,6 @@
 # updated version of these files in the tarball
 # makes it easy to compile them on the many architectures
 #
+#
+# wget ftp://ftp.gnu.org/gnu/config/config.guess
+# wget ftp://ftp.gnu.org/gnu/config/config.sub
