@@ -1,5 +1,9 @@
 2003-07-27  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node-text.h, cong-editor-widget.h
+
+	Added some missing prototypes
+	
 	* cong-editor-area-flow-holder.c, cong-editor-area-flow-holder.h, cong-editor-node.c, cong-editor-node.h, cong-editor-widget3.c	
 
 	Reorganised editor_area creation so that the flow_holders are responsible for it, with a class hierarchy.

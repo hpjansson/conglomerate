@@ -60,6 +60,10 @@ cong_editor_node_text_construct (CongEditorNodeText *editor_node_text,
 				 CongEditorWidget3* widget,
 				 CongNodePtr node);
 
+CongEditorNode*
+cong_editor_node_text_new (CongEditorWidget3 *widget,
+			   CongNodePtr node);
+
 G_END_DECLS
 
 #endif
