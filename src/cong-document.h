@@ -86,6 +86,11 @@ struct CongDocumentClass
 	void (*selection_change) (CongDocument *doc);
 
 	void (*cursor_change) (CongDocument *doc);
+
+	void (*set_external_dtd) (CongDocument *doc,
+				  const gchar* root_element,
+				  const gchar* public_id,
+				  const gchar* system_id);
 };
 
 GType

@@ -1,5 +1,9 @@
 2003-09-11  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.c, cong-document.h, cong-file-properties.c, cong-marshal.c, cong-marshal.h, cong-source-view.c, cong-view.h, xmldata.c
+
+	DTD add/removal now works from File->Properties dialog;  change notification for DTD external subset
+	
 	* cong-editor-node.c
 
 	Fixed warnings

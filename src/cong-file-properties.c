@@ -34,6 +34,9 @@
 #include "cong-dispspec.h"
 
 static void
+on_remove_dtd_button_clicked (GtkButton *button,
+			       CongDocument *doc);
+static void
 on_specify_dtd_button_clicked (GtkButton *button,
 			       CongDocument *doc);
 
@@ -123,9 +126,20 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	cong_dialog_category_add_field(header_category, _("Standalone"), make_uneditable_text(xml_doc->standalone?"yes":"no"));
 
 	if (xml_doc->extSubset) {
+		GtkWidget *remove_dtd_button = gtk_button_new_with_mnemonic (_("_Remove this DTD"));
+
 		add_dtd_info (dtd_category,
 			      xml_doc->extSubset->ExternalID,
 			      xml_doc->extSubset->SystemID);
+
+		cong_dialog_category_add_selflabelled_field (dtd_category, 
+							     remove_dtd_button);			
+		
+		g_signal_connect (G_OBJECT (remove_dtd_button),
+				  "clicked",
+				  G_CALLBACK (on_remove_dtd_button_clicked),
+				  doc);
+		
 	} else {
 		const CongExternalDocumentModel* model_dtd;
 
@@ -190,6 +204,22 @@ cong_file_properties_dialog_new (CongDocument *doc,
 }
 
 static void
+on_remove_dtd_button_clicked (GtkButton *button,
+			      CongDocument *doc)
+{
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+	cong_document_begin_edit (doc);
+
+	cong_document_set_external_dtd (doc,
+					NULL,
+					NULL,
+					NULL);
+
+	cong_document_end_edit (doc);
+}
+
+static void
 on_specify_dtd_button_clicked (GtkButton *button,
 			       CongDocument *doc)
 {
@@ -206,8 +236,12 @@ on_specify_dtd_button_clicked (GtkButton *button,
 	
 	g_assert (model_dtd);
 
+	cong_document_begin_edit (doc);
+
 	cong_document_set_external_dtd (doc,
 					cong_document_get_root(doc)->name,
 					cong_external_document_model_get_public_id (model_dtd),
 					cong_external_document_model_get_system_id (model_dtd));
+
+	cong_document_end_edit (doc);
 }

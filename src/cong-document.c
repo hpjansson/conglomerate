@@ -53,6 +53,12 @@ cong_document_handle_selection_change(CongDocument *doc);
 static void
 cong_document_handle_cursor_change(CongDocument *doc);
 
+static void
+cong_document_handle_set_external_dtd (CongDocument *doc,
+				       const gchar* root_element,
+				       const gchar* public_id,
+				       const gchar* system_id);
+
 #define TEST_VIEW 0
 #define TEST_EDITOR_VIEW 0
 #define DEBUG_MVC 0
@@ -71,6 +77,7 @@ enum {
 	NODE_REMOVE_ATTRIBUTE,
 	SELECTION_CHANGE,
 	CURSOR_CHANGE,
+	SET_EXTERNAL_DTD,
 
 	LAST_SIGNAL
 };
@@ -131,6 +138,7 @@ cong_document_class_init (CongDocumentClass *klass)
 	klass->node_remove_attribute = cong_document_handle_node_remove_attribute;
 	klass->selection_change = cong_document_handle_selection_change;
 	klass->cursor_change = cong_document_handle_cursor_change;
+	klass->set_external_dtd = cong_document_handle_set_external_dtd;
 
 	/* Set up the various signals: */
 	signals[BEGIN_EDIT] = g_signal_new ("begin_edit",
@@ -232,6 +240,14 @@ cong_document_class_init (CongDocumentClass *klass)
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE, 
 					       0);
+	signals[SET_EXTERNAL_DTD] = g_signal_new ("set_external_dtd",
+						  CONG_DOCUMENT_TYPE,
+						  G_SIGNAL_RUN_LAST,
+						  G_STRUCT_OFFSET(CongDocumentClass, set_external_dtd),
+						  NULL, NULL,
+						  cong_cclosure_marshal_VOID__STRING_STRING_STRING,
+						  G_TYPE_NONE, 
+						  3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 }
 
 static void
@@ -854,16 +870,27 @@ void cong_document_on_cursor_change(CongDocument *doc)
 void 
 cong_document_set_external_dtd (CongDocument *doc,
 				const xmlChar *root_element,
-				const xmlChar *ExternalID, 
-				const xmlChar *SystemID)
+				const xmlChar *public_id, 
+				const xmlChar *system_id)
 {
 	g_return_if_fail(doc);
 
-	/* For now, just do it, without worrying about signals: */
-	cong_util_add_external_dtd (PRIVATE(doc)->xml_doc, 
-				    root_element,
-				    ExternalID, 
-				    SystemID);
+	g_return_if_fail(doc);
+
+#if 0
+	#if DEBUG_MVC
+	g_message("cong_document_node_on_cursor_change");
+	#endif
+#endif
+
+	g_assert (cong_document_is_within_edit(doc));
+
+	/* Emit signal: */
+	g_signal_emit (G_OBJECT(doc),
+		       signals[SET_EXTERNAL_DTD], 0,
+		       root_element,
+		       public_id, 
+		       system_id);
 }
 
 /* end of MVC user hooks */
@@ -1816,7 +1843,7 @@ cong_document_handle_node_set_attribute(CongDocument *doc, CongNodePtr node, con
 	g_return_if_fail(value);
 
 	#if DEBUG_MVC
-	g_message("coeng_document_node_handle_set_attribute");
+	g_message("cong_document_node_handle_set_attribute");
 	#endif
 
 	/* Notify listeners: */
@@ -1900,6 +1927,92 @@ cong_document_handle_cursor_change(CongDocument *doc)
 	g_message("cong_document_handle_cursor_change");
 	#endif
 #endif
+}
+
+static void
+cong_document_handle_set_external_dtd (CongDocument *doc,
+				       const gchar* root_element,
+				       const gchar* public_id,
+				       const gchar* system_id)
+{
+	GList *iter;
+
+	#if DEBUG_MVC
+	g_message("cong_document_handle_set_external_dtd");
+	#endif
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_set_external_dtd) {
+			view->klass->on_document_set_external_dtd (view, 
+								   TRUE, 
+								   root_element,
+								   public_id,
+								   system_id);
+		}
+	}
+
+	/* Make the change: */
+	{
+		xmlDocPtr xml_doc = PRIVATE(doc)->xml_doc;
+
+		/* Remove any existing DTD: */
+		{
+			if (xml_doc->extSubset) {
+				cong_document_node_make_orphan (doc,
+								(xmlNodePtr)xml_doc->extSubset);
+
+				cong_document_node_recursive_delete (doc, 
+								     (xmlNodePtr)xml_doc->extSubset);
+
+				xml_doc->extSubset = NULL;
+			}
+		}
+
+		/* Add the new DTD (if any): */
+		if (root_element) {
+			xmlDtdPtr dtd_ptr = cong_util_make_dtd (xml_doc,
+								root_element,
+								public_id, 
+								system_id);
+			
+			if (dtd_ptr) {			
+				if (xml_doc->children) {
+					cong_document_node_add_before (doc,
+								       (xmlNodePtr)dtd_ptr,
+								       (xmlNodePtr)xml_doc->children);
+				} else {
+					cong_document_node_set_parent (doc,
+								       (xmlNodePtr)dtd_ptr,
+								       (xmlNodePtr)xml_doc);
+				}
+				
+				/* Ensure the DTD ptr is still set up within the xml_doc; the tree manipulation seems to make it lose the extSubset pointer: */
+				xml_doc->extSubset = dtd_ptr;
+			}
+		}
+	}
+
+	/* Document is now modified: */
+	cong_document_set_modified(doc, TRUE);
+
+	/* Notify listeners: */
+	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
+		CongView *view = CONG_VIEW(iter->data);
+		
+		g_assert(view->klass);
+		if (view->klass->on_document_set_external_dtd) {
+			view->klass->on_document_set_external_dtd (view, 
+								   FALSE,
+								   root_element,
+								   public_id,
+								   system_id);
+		}
+	}
+
 }
 
 

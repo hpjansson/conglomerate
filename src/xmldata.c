@@ -319,10 +319,18 @@ void cong_node_self_test(CongNodePtr node)
 
 	g_assert(node->doc);
 
-	if (node->type!=XML_DOCUMENT_NODE) {
+	/* Test content for valid UTF-8, if appropriate for this node type: */
+	switch (node->type) {
+	case XML_DOCUMENT_NODE:
+	case XML_DTD_NODE:
+		/* The "content" field is meaningless; don't test */
+		break;
+
+	default:
 		if (node->content) {
 			g_assert(g_utf8_validate(node->content,-1,NULL));
 		}
+		break;
 	}
 
 	if (node->prev) {
