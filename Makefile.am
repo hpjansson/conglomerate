@@ -9,6 +9,7 @@ EXTRA_DIST = BUGS	\
   documentation/CodingStyle        \
   documentation/VersionNumbering   \
   documentation/CompileIssues      \
+  documentation/faq.xml		\
   examples/ChangeLog                 \
   examples/docbook.xds               \
   examples/error-proposal.xml        \

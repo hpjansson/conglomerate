@@ -1,3 +1,7 @@
+2002-11-30  Geert Stappers <Geert.Stappers@xs4all.nl>
+
+	* Makefile.am: Added documention/faq.xml at extra_dist
+
 2002-11-29  Dmitry G. Mastrtukov  <dmitry@taurussoft.org>
 
 	* configure.in: Remove unnecessary PACKAGE and VERSION variables.

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                      "http://www.docbook.org/xml/4.1.2/docbookx.dtd" []>
+
+<?xml-stylesheet type="text/css" href="http://localhost/xml/styles/docbook.css"?>
+
+
+<article>
+    <title>Conglomerate FAQ</title>
+    <para>This is a list of frequently asked questions for the Conglomerate XML editor.</para> 
+
+    <qandaset>
+      <qandadiv id="gnomefaq">
+	<title>Gnome questions</title>
+
+	<qandaentry>
+	  <question>
+	    <para>I use the KDE desktop.  Do I have to install Gnome instead, to be able to run Conglomerate?</para>
+	  </question>
+	  <answer>
+	    <para>No.  Conglomerate will run perfectly well under KDE, provided you have installed all Gnome 2 shared libraries neccessary for Conglomerate to run.</para>
+	  </answer>
+	</qandaentry>
+
+	<qandaentry>
+	  <question>
+	    <para>Can I embed KDE applications in Conglomerate?</para>
+	  </question>
+	  <answer>
+	    <para>No, you can only embed Gnome 2 applications.  I.e. if you wish to use an embedded spreadsheet program to edit tables, you have to use gnumeric.  You cannot use KCalc.</para>
+	  </answer>
+	</qandaentry>
+	
+      </qandadiv>
+    </qandaset>
+  
+</article>
+
