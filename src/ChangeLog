@@ -1,5 +1,9 @@
 2003-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-node.c
+
+	Fixed copy & paste typo in cong_editor_node_get_next
+
 	* cong-overview-view.c, cong-tree-view.c, cong-tree-view.h
 
 	Update root of Overview tree when URL changes, fixing bug #130728
