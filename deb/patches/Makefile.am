@@ -7,5 +7,5 @@ patch_DISTS = \
 	P000omf.make \
 	$(NULL)
 
-EXTRA_DIST = $(patch_DISTS)
+EXTRA_DIST = P00000patch-stamp P99999patch-stamp $(patch_DISTS) 
 ## eof
