@@ -1,4 +1,5 @@
-dch --increment "expecting new upstream version"
+dch --increment "expecting new upstream version                         (
+ready to run \`debian/patches/release 4.3.2-1\` )"
 cp debian/changelog debian/changelog.copy
 sed -e '1s/unstable/UNRELEASED/' debian/changelog.copy > debian/changelog
 rm debian/changelog.copy
