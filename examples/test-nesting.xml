@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article>
+	<title>Test of nesting</title>
+	<para>
+		This is a test of nesting. 
+		<emphasis>
+			Here is some emphasised text, to test span tags. Here is a nested span tag 
+			<filename>/usr/local/bin</filename>
+			. Here is some more text. Here is a tested structural tag 
+			<sect1>
+				<title>Title of section</title>
+				<para>
+					Some random text with an 
+					<emphasis>emphasised fragment to test this</emphasis>
+					which hopefully will work
+				</para>
+			</sect1>
+			and here is the text after the nested structural tag
+		</emphasis>
+		and here is some text after the span tag
+	</para>
+	<para>Here's another paragraph for good measure</para>
+</article>

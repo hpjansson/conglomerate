@@ -1,3 +1,9 @@
+2004-01-18  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* test-nesting.xml
+
+	New file: a test case for fixing bug #124507 (crash when nesting block elements inside a span tag) and bug #130235 (improve the look of nested span tags)
+
 2004-01-13  Daniel Larsson <Daniel.Larsson@servicefactory.se>
 
 	* docbook.xds.in
