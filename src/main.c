@@ -1055,6 +1055,26 @@ int main( int   argc,
 
 	fonts_load();
 	popup_init();
+
+#if USE_PANGO
+	the_globals.pango_context = pango_context_new();
+	the_globals.pango_font_description = pango_font_description_new();
+
+	pango_font_description_set_family(the_globals.pango_font_description,
+					  "helvetica");
+	pango_font_description_set_size(the_globals.pango_font_description,
+			       PANGO_SCALE*12);
+
+	pango_context_set_font_description(the_globals.pango_context,
+					   the_globals.pango_font_description);
+
+
+	the_globals.pango_font = pango_context_load_font(the_globals.pango_context,
+							 the_globals.pango_font_description);
+
+	g_assert(the_globals.pango_font);
+
+#endif /* #if USE_PANGO */
 	
 	gui_window_main_make();
 	gtk_window_set_default_size(GTK_WINDOW(the_gui.window), 400, 460);

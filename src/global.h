@@ -23,6 +23,7 @@ enum
 
 #define NEW_LOOK 0
 #define NEW_XML_IMPLEMENTATION 0
+#define USE_PANGO 0
 
 enum CongNodeType
 {
@@ -418,6 +419,11 @@ struct CongXMLEditor
 	TTREE *curs_x;      /* XML node currently at */
 #endif
 	int curs_char;      /* Cursor positioned after this char (in node) */
+
+#if USE_PANGO
+	/* Experimental Pango support */
+	PangoLayout *pango_layout;
+#endif
 };
 
 
@@ -535,6 +541,11 @@ struct cong_globals
 
 	CongDispspecRegistry* ds_registry;
 
+#if USE_PANGO
+	PangoContext *pango_context;
+	PangoFontDescription *pango_font_description;
+	PangoFont*  pango_font;
+#endif
 };
 
 extern struct cong_globals the_globals;
@@ -797,7 +808,6 @@ struct CongViewClass
 	void (*on_document_node_add_before)(CongView *view, CongNodePtr node, CongNodePtr younger_sibling);
 	void (*on_document_node_set_parent)(CongView *view, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
 	void (*on_document_node_set_text)(CongView *view, CongNodePtr node, const xmlChar *new_content);
-	void (*on_document_node_tag_remove)(CongView *view, CongNodePtr node);	
 };
 
 /* 

@@ -210,6 +210,25 @@ static gint configure_event (GtkWidget *widget, GdkEventConfigure *event, CongXM
 
 	struct selection* selection = &the_globals.selection;
 	struct curs* curs = &the_globals.curs;
+
+#if USE_PANGO
+	pango_layout_set_width(xed->pango_layout, 
+			       widget->allocation.width);
+
+	#if 1
+	{
+		int i;
+		for (i=0; i<pango_layout_get_line_count(xed->pango_layout); i++) {
+
+			PangoLayoutLine* line = pango_layout_get_line(xed->pango_layout,
+								      i);
+
+			printf("Line: %d; start_index: %d length: %d\n", i, line->start_index, line->length);
+
+		}
+	}
+	#endif
+#endif /* #if USE_PANGO */
 	
 #if 0	
 	if (!xed->p)
@@ -738,6 +757,16 @@ CongXMLEditor *xmledit_new(CongNodePtr x, CongDocument *doc, CongDispspec *displ
 	xed->displayspec = displayspec;
 	xed->doc = doc;
 	xed->initial = 1;
+
+#if USE_PANGO
+	xed->pango_layout = pango_layout_new(the_globals.pango_context);
+	{
+		gchar *text = xml_fetch_clean_data(x);
+		pango_layout_set_text(xed->pango_layout, text, -1);
+		g_free(text);
+	}
+#endif /* #if USE_PANGO */
+
 	return(xed);
 }
 
