@@ -82,26 +82,39 @@ CongDispspec* cong_dispspec_new_from_xds_file(const char *name)
 	xmlDocPtr doc = xmlParseFile(name);
 	xmlDebugDumpDocument(stdout,doc);
 
+	if (NULL==doc) {
+		return NULL;
+	}
+
 	ds = g_new0(CongDispspec,1);
 
 	/* Convert the XML into our internal representation: */
 	if (doc->children)
 	{
-		if (doc->children) {
-			/* doc->children->name should equal "dispspec"*/
-			xmlNodePtr cur;
+		xmlNodePtr xml_dispspec;
 
-			for (cur = doc->children->children; cur; cur=cur->next) {
+		for (xml_dispspec=doc->children; xml_dispspec; xml_dispspec = xml_dispspec->next) {
+			if (0==strcmp(xml_dispspec->name,"dispspec")) {
+
+				xmlNodePtr cur;
+				
+				g_message("got dispspec\n");
+
+				for (cur = xml_dispspec->children; cur; cur=cur->next) {
 				/* Locate the <element-list> tag: */
-				if (0==strcmp(cur->name,"element-list")) {
-
-					xmlNodePtr xml_element;
-					for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
-						CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
+					if (0==strcmp(cur->name,"element-list")) {
 						
-						cong_dispspec_add_element(ds,element);
-					}
 
+						xmlNodePtr xml_element;
+						g_message("got element-list\n");
+
+						for (xml_element = cur->children; xml_element; xml_element=xml_element->next) {
+							CongDispspecElement* element = cong_dispspec_element_new_from_xml_element(doc, xml_element);
+							
+							cong_dispspec_add_element(ds,element);
+						}
+						
+					}
 				}
 			}
 		}
