@@ -216,7 +216,6 @@ cong_file_properties_dialog_new (CongDocument *doc,
 				 GtkWindow *parent_window)
 {
 	xmlDocPtr xml_doc;
-	CongDispspec* ds;
 	GtkWidget *dialog;
 #if 0
 	GtkNotebook *notebook;
@@ -238,7 +237,6 @@ cong_file_properties_dialog_new (CongDocument *doc,
 	dialog_details = g_new0 (CongFilePropertiesDialogDetails,1);
 
 	xml_doc = cong_document_get_xml(doc);
-	ds = cong_document_get_default_dispspec(doc);
 
 	dialog_details->doc = doc; 
 	g_object_ref (G_OBJECT (doc));
@@ -269,6 +267,10 @@ cong_file_properties_dialog_new (CongDocument *doc,
 								  dialog_details);	
 	/* Fields from dispspec: */
 	{
+		CongDispspec* ds;
+
+		ds = cong_document_get_root_dispspec(doc);
+	
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typename")),
 				     ds ? cong_dispspec_get_name (ds) : _("Unknown"));
 		gtk_label_set_text ( GTK_LABEL (glade_xml_get_widget (dialog_details->xml,"label_typedesc")),

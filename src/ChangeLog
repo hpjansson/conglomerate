@@ -1,5 +1,10 @@
 2004-07-16  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-file-properties.c:
+
+	Use dispspec of root element rather than default dispspec when
+	displaying type information in File->Properties dialog.
+
 	* cong-dispspec-element-gxx.h, cong-dispspec-element.c, cong-dispspec-element.h, cong-dispspec.c, cong-dispspec.h:
 	Namespace URI is now a per-CongDispspec property, rather than
 	per-CongDispspecElement; it is an attribute of the <element-list>
