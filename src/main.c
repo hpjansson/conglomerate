@@ -14,6 +14,7 @@
 #if 1
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
+#include <libgnomevfs/gnome-vfs.h>
 #endif
 
 #if 1
@@ -182,6 +183,84 @@ GtkWidget* do_ttree_test(TTREE* tt)
 #define AUTOGENERATE_DS
 */
 
+/*
+  A routine that tries to load all the bytes requested from the handle into the buffer and bails out on any failure
+ */
+GnomeVFSResult
+cong_vfs_read_bytes(GnomeVFSHandle* vfs_handle, char* buffer, GnomeVFSFileSize bytes)
+{
+	GnomeVFSFileSize bytes_read;
+	GnomeVFSResult vfs_result = gnome_vfs_read(vfs_handle,buffer,bytes,&bytes_read);
+
+	g_assert(bytes==bytes_read); /* for now */
+
+	return vfs_result;
+}
+
+/* 
+   A routine that tries to syncronously load a file into a buffer in memory (surely this exists already somewhere?)
+*/
+GnomeVFSResult
+cong_vfs_new_buffer_from_file(const char* filename, char** buffer, GnomeVFSFileSize* size)
+{
+	GnomeVFSHandle* vfs_handle;
+	GnomeVFSResult vfs_result;
+
+	g_return_val_if_fail(filename,GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(buffer,GNOME_VFS_ERROR_BAD_PARAMETERS);
+	g_return_val_if_fail(size,GNOME_VFS_ERROR_BAD_PARAMETERS);
+
+	vfs_result = gnome_vfs_open(&vfs_handle,
+				    filename,
+				    GNOME_VFS_OPEN_READ);
+
+	if (GNOME_VFS_OK!=vfs_result) {
+		return vfs_result;
+	} else {
+		GnomeVFSFileInfo info;
+		*buffer=NULL;
+		
+		/* Get the size of the file: */
+		vfs_result = gnome_vfs_get_file_info_from_handle(vfs_handle,
+								 &info,
+								 GNOME_VFS_FILE_INFO_DEFAULT);
+		if (GNOME_VFS_OK!=vfs_result) {
+			gnome_vfs_close(vfs_handle);
+			
+			return vfs_result;
+		}
+
+		if (!(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)) {
+			gnome_vfs_close(vfs_handle);
+			
+			return GNOME_VFS_ERROR_IO; /* FIXME: is this appropriate? */
+		}
+
+		
+		/* Allocate the buffer: */
+		*buffer = g_malloc(info.size);
+		
+		/* Read the file into the buffer: */
+		vfs_result = cong_vfs_read_bytes(vfs_handle, *buffer, info.size);
+		
+		if (GNOME_VFS_OK!=vfs_result) {
+			
+			g_free(*buffer);
+			gnome_vfs_close(vfs_handle);
+
+			*buffer=NULL;
+			
+			return vfs_result;
+		}
+		
+		gnome_vfs_close(vfs_handle);
+		*size = info.size;
+
+		return GNOME_VFS_OK;
+	}
+}
+
+
 int test_open_do(const char *doc_name, const char *ds_name)
 {
 	char *p;
@@ -199,20 +278,57 @@ int test_open_do(const char *doc_name, const char *ds_name)
 #if 1
 	/* Use libxml to load the doc: */
 	{
-	  #if 0
-	  // Use special DocBook loader for DocBook; should handle SGML better...
-	  xmlDocPtr doc = docbParseFile(doc_name,NULL);
-	  #else
-	  xmlDocPtr doc = xmlParseFile(doc_name);
-	  #endif
-	  xmlDebugDumpDocument(stdout,doc);
+		xmlDocPtr doc=NULL;
+#if 1
+		/* Load using GnomeVFS: */
+		{
+			char* buffer;
+			GnomeVFSFileSize size;
+			GnomeVFSURI* file_uri = gnome_vfs_uri_new(doc_name);
+			GnomeVFSResult vfs_result = cong_vfs_new_buffer_from_file(doc_name, &buffer, &size);
 
-#ifdef AUTOGENERATE_DS
-	  /* Autogenerate the ds: */
-	  the_globals.ds = cong_dispspec_new_from_xml_file(doc);
+			if (vfs_result!=GNOME_VFS_OK) {
+				GtkWidget* dialog = cong_error_dialog_new_file_open_failed2(file_uri, vfs_result);
+			
+				gtk_dialog_run(GTK_DIALOG(dialog));
+				gtk_widget_destroy(dialog);
+
+				gnome_vfs_uri_unref(file_uri);
+
+				return TRUE;
+			}
+
+			g_assert(buffer);
+
+			/* Parse the file from the buffer: */
+#if 0
+			// Can't use DocBook loader as it only supports loading from a file, not from memory
+#else
+			doc = xmlParseMemory(buffer, size);
 #endif
 
-	  xml_in = convert_libxml_to_ttree_doc(doc);
+			gnome_vfs_uri_unref(file_uri);
+
+			g_free(buffer);
+		}
+#else
+		/* Load using standard filesystem: */
+		{
+#if 0
+			// Use special DocBook loader for DocBook; should handle SGML better...
+			doc = docbParseFile(doc_name,NULL);
+#else
+			doc = xmlParseFile(doc_name);
+#endif
+		}
+#endif
+
+#ifdef AUTOGENERATE_DS
+		/* Autogenerate the ds: */
+		the_globals.ds = cong_dispspec_new_from_xml_file(doc);
+#endif
+
+		xml_in = convert_libxml_to_ttree_doc(doc);
 	}
 #else
 	/* Use the flux loaders to load the doc: */
@@ -464,6 +580,8 @@ void gui_toolbar_populate(struct cong_gui* gui)
 						   save_document);
 }
 
+#define USE_GNOME_APP
+
 void gui_window_main_make()
 {
 	GtkWidget *w0, *w1, *w2, *w3, *logo;
@@ -484,7 +602,7 @@ void gui_window_main_make()
 	gdk_rgb_init();
 
 	/* --- Main window --- */
-#if 0
+#ifdef USE_GNOME_APP
 	gui->window = gnome_app_new("Conglomerate","Conglomerate Editor");
 #else
 	gui->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -503,6 +621,7 @@ void gui_window_main_make()
 
 	gtk_widget_realize(GTK_WIDGET(gui->window));
 
+#ifndef USE_GNOME_APP
 	/* --- Main window -> vbox --- */
 
 	w0 = gtk_vbox_new(FALSE, 1);
@@ -520,6 +639,7 @@ void gui_window_main_make()
 	w2 = gtk_vbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(w1), w2, TRUE, TRUE, 0);
 	gtk_widget_show(w2);
+#endif
 
 	/* --- Menus --- */
 
@@ -530,18 +650,27 @@ void gui_window_main_make()
 	gtk_window_add_accel_group(GTK_WINDOW(gui->window), gui->accel);
 
 	gui->menus = gtk_item_factory_get_widget(item_factory, "<main>");
+#ifdef USE_GNOME_APP
+	gnome_app_set_menus(GNOME_APP(gui->window), GTK_MENU_BAR(gui->menus));
+#else
 	gtk_box_pack_start(GTK_BOX(w2), gui->menus, TRUE, TRUE, 0);
+#endif
 	gtk_widget_show(gui->menus);
 	
 	/* --- Toolbar --- */
-	
+#ifndef USE_GNOME_APP
 	w3 = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(w3), GTK_SHADOW_OUT);
 	gtk_box_pack_start(GTK_BOX(w2), w3, FALSE, TRUE, 0);
 	gtk_widget_show(w3);
+#endif
 
 	gui->toolbar = gtk_toolbar_new();
+#ifdef USE_GNOME_APP
+	gnome_app_set_toolbar(GNOME_APP(gui->window), GTK_TOOLBAR(gui->toolbar));
+#else
 	gtk_container_add(GTK_CONTAINER(w3), gui->toolbar);
+#endif
 	gtk_widget_show(gui->toolbar);
 
 	/* --- Toolbar icons --- */
@@ -549,7 +678,9 @@ void gui_window_main_make()
 	gui_toolbar_populate(gui);
 
 	/* --- Logo --- */
-
+#ifdef USE_GNOME_APP
+	/* can't reimplement this way */
+#else
 	w2 = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(w2), GTK_SHADOW_NONE);
 	gtk_box_pack_start(GTK_BOX(w1), w2, FALSE, TRUE, 0);
@@ -562,11 +693,15 @@ void gui_window_main_make()
 	logo = GTK_WIDGET(gui_create_pixmap(gui, ilogo_xpm));
 	gtk_box_pack_start(GTK_BOX(w1), logo, FALSE, TRUE, 0);
 	gtk_widget_show(logo);
-
+#endif
 	/* --- Main window -> hpane --- */
 
 	w1 = gtk_hpaned_new();
+#ifdef USE_GNOME_APP
+	gnome_app_set_contents(GNOME_APP(gui->window),w1);
+#else
 	gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
+#endif
 	gtk_widget_show(w1);
 
 	/* --- Tree view --- */
@@ -676,7 +811,10 @@ void gui_window_main_make()
 
 
 	/* --- Main window -> vbox -> hbox --- */
-
+#ifdef USE_GNOME_APP
+	gui->status = gtk_statusbar_new();
+	gnome_app_set_statusbar(GNOME_APP(gui->window), gui->status);
+#else
 	w1 = gtk_hbox_new(FALSE, 1);
 	gtk_box_pack_start(GTK_BOX(w0), w1, FALSE, TRUE, 0);
 	gtk_widget_show(w1);
@@ -706,6 +844,7 @@ void gui_window_main_make()
 	gui->auth = gtk_pixmap_new(p, mask);
 	gtk_box_pack_start(GTK_BOX(gui->tray), gui->auth, FALSE, TRUE, 2);
 	gtk_widget_show(gui->auth);
+#endif
 }
 
 
