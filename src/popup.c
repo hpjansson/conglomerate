@@ -10,6 +10,8 @@
 #include "cong-document.h"
 #include "cong-view.h"
 #include "cong-app.h"
+#include "cong-selection.h"
+#include "cong-range.h"
 
 #define ENABLE_RAW_TREE_MANIPULATION 0
 
@@ -306,12 +308,16 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 	CongCursor *cursor;
 	GList *span_tags_list;
 	CongDocument *doc;
+	CongSelection *selection;
+	CongRange *range;
 	
 	g_return_if_fail(IS_CONG_EDITOR_WIDGET3 (editor_widget));
 
 	doc = cong_editor_widget3_get_document (editor_widget);
 	dispspec = cong_document_get_dispspec(doc);
 	cursor = cong_document_get_cursor(doc);
+	selection = cong_document_get_selection(doc);
+	range = cong_selection_get_ordered_range(selection);
 
 	if (cong_app_singleton()->popup) gtk_widget_destroy(cong_app_singleton()->popup);
 	editor_popup_init(doc);
@@ -324,6 +330,7 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_CUT,
 						  NULL); 
+	gtk_widget_set_sensitive(item, cong_range_can_be_cut(range));
 	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_cut), doc);
@@ -331,6 +338,7 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_COPY,
 						  NULL); 
+	gtk_widget_set_sensitive(item, cong_range_can_be_copied(range));
 	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_copy), doc);

@@ -1,3 +1,9 @@
+2003-11-04  Paul Smith  <conglomerate@pcs.uklinux.net>
+
+	* popup.c
+ 
+ 	Set Cut and Copy to be insensitive on the RMB context menu when unavailable
+
 2003-11-03  Paul Smith  <conglomerate@pcs.uklinux.net>
  
 	* cong-menus.c, cong-primary-window.c, xmledit.c, cong-range.c
