@@ -178,7 +178,7 @@ void cong_document_begin_edit(CongDocument *doc);
 void cong_document_end_edit(CongDocument *doc);
 gboolean cong_document_is_within_edit(CongDocument *doc);
 
-/* MVC: Change signals on the document: *
+/* MVC: Change signals on the document: */
 void cong_document_node_make_orphan(CongDocument *doc, CongNodePtr node);
 void cong_document_node_add_after(CongDocument *doc, CongNodePtr node, CongNodePtr older_sibling);
 void cong_document_node_add_before(CongDocument *doc, CongNodePtr node, CongNodePtr younger_sibling);

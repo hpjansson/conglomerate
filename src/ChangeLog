@@ -1,5 +1,9 @@
 2003-08-13  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-document.h
+
+	Fixed a missing end-of-comment
+	
 	* cong-document.c
 
 	Merged some selection notifications
