@@ -154,14 +154,15 @@ cong_util_is_recursively_inline (CongDocument *doc,
 	return TRUE;
 }
 
-gchar* cong_util_strip_whitespace_from_string (const gchar* input_string)
+gchar* cong_util_strip_whitespace_from_string (const gchar* input_string, 
+					       gboolean strip_all_initial_whitespace)
 {
 	gunichar *unichar_string;
 	glong num_chars;
 	gchar *result_string;
 	gchar *dst;
 	int i;
-	gboolean last_char_was_space=TRUE;
+	gboolean last_char_was_space=strip_all_initial_whitespace;
 
 	g_return_val_if_fail(input_string, NULL);
 
@@ -208,7 +209,25 @@ static gboolean strip_whitespace_callback(CongDocument *doc, CongNodePtr node, g
 
 	if (cong_node_type(node)==CONG_NODE_TYPE_TEXT) {
 		if (cong_node_get_whitespace_handling (doc, node)==CONG_WHITESPACE_NORMALIZE) {
-			gchar *new_content = cong_util_strip_whitespace_from_string(node->content);
+			gboolean strip_all_initial_whitespace = TRUE;
+			gchar *new_content;
+
+			/* Don't strip all initial whitespace if this node was preceded by an span tag: */
+			if (node->prev) {
+				if (cong_node_type (node->prev)==CONG_NODE_TYPE_ELEMENT) {
+					CongDispspecElement* ds_element = cong_document_get_dispspec_element_for_node(doc, 
+														      node->prev);
+				
+					if (ds_element) {
+						if (cong_dispspec_element_type(ds_element)==CONG_ELEMENT_TYPE_SPAN) {
+							strip_all_initial_whitespace = FALSE;
+						}
+					}
+				}
+			}
+
+			new_content = cong_util_strip_whitespace_from_string (node->content,
+									      strip_all_initial_whitespace);
 
 			cong_command_add_node_set_text (cleanup_data->cmd,
 							node,

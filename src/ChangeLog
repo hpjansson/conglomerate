@@ -1,5 +1,9 @@
 2003-10-21  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* plugin-cleanup-source.c
+
+	Fix for bug #125119
+	
 	* cong-document.c, cong-document.h, cong-dom-view.c, cong-editor-area.c, cong-location.c, cong-location.h, cong-overview-view.c, cong-tree-view.c, cong-tree-view.h, cong-util.c, cong-util.h
 
 	Clicking on tree views now updates the selection.
