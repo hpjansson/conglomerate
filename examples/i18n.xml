@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [] >
 <book>
 <title>Untitled Book</title>
 <chapter>
+<title>Untitled Chapter</title>
 <para>This is an attempt to have some non-Roman characters: 
  <emphasis>&#x65E5;&#x672C;&#x8A9E;</emphasis>.
  Hopefully that was the Kanji for <foreignphrase>nihongo</foreignphrase>

@@ -9,6 +9,10 @@
 	* error-proposal.xml:
 	Added a para that was omitted in listitem.
 
+	* i18n.xml:
+	Added Document Type Definition, added title for chapter,
+	now it validates.
+
 2004-03-13  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am
