@@ -1,3 +1,7 @@
+2004-12-01 Michèle Garoche  <michele.garoche@easyconnect.fr>
+ 
+	* fr.po: Updated French translation.
+
 2004-11-30 Michèle Garoche  <michele.garoche@easyconnect.fr>
  
 	* POTFILES.in: Deleted src/tchoice.c from it.

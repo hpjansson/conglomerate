@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-10-27 03:06+0200\n"
-"PO-Revision-Date: 2004-10-27 03:07+0200\n"
+"POT-Creation-Date: 2004-12-01 12:44+0100\n"
+"PO-Revision-Date: 2004-12-01 12:49+0100\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -551,7 +551,7 @@ msgstr "Note"
 
 #: dispspecs/docbook.xds.in.h:99 dispspecs/forrest-document.xds.in.h:31
 #: dispspecs/kernel-traffic-newsletter.xds.in.h:26
-#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:67
+#: dispspecs/xhtml1-strict.xds.in.h:55 src/plugin-paragraph.c:68
 msgid "Paragraph"
 msgstr "Paragraphe"
 
@@ -728,7 +728,7 @@ msgstr "Corps de tableau"
 msgid "Table Column Specification"
 msgstr "Spécification de colonne de tableau"
 
-#: dispspecs/docbook.xds.in.h:143
+#: dispspecs/docbook.xds.in.h:143 src/plugin-table.c:417
 msgid "Table Entry"
 msgstr "Entrée de tableau"
 
@@ -740,7 +740,7 @@ msgstr "Entrée de tableau (sous-tableau)"
 msgid "Table Footer"
 msgstr "Pied de tableau"
 
-#: dispspecs/docbook.xds.in.h:146
+#: dispspecs/docbook.xds.in.h:146 src/plugin-table.c:405
 msgid "Table Group"
 msgstr "Groupe dans un tableau"
 
@@ -749,6 +749,7 @@ msgid "Table Header"
 msgstr "En-tête de tableau"
 
 #: dispspecs/docbook.xds.in.h:148 dispspecs/xhtml1-strict.xds.in.h:73
+#: src/plugin-table.c:411
 msgid "Table Row"
 msgstr "Ligne de tableau"
 
@@ -1803,20 +1804,20 @@ msgid "Changes from the past minute will be discarded."
 msgstr ""
 "Les modifications apportées pendant la dernière minute seront supprimées."
 
-#: src/cong-dispspec.c:501
+#: src/cong-dispspec.c:513
 msgid "unnamed"
 msgstr "sans nom"
 
-#: src/cong-dispspec.c:521
+#: src/cong-dispspec.c:536
 msgid "No description available."
 msgstr "Aucune description disponible"
 
-#: src/cong-dispspec-element.c:735 src/cong-xpath-expression.c:247
+#: src/cong-dispspec-element.c:659 src/cong-xpath-expression.c:247
 msgid "(xpath failed)"
 msgstr "(Échec de xpath)"
 
 #. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
-#: src/cong-dispspec-element.c:771
+#: src/cong-dispspec-element.c:695
 msgid "<untitled>"
 msgstr "<sans titre>"
 
@@ -1943,39 +1944,39 @@ msgstr "_Tout Remplacer"
 msgid "Find"
 msgstr "Rechercher"
 
-#: src/cong-editor-node-text.c:984
+#: src/cong-editor-node-text.c:898
 msgid "Select word"
 msgstr "Sélectionner un mot"
 
-#: src/cong-editor-node-text.c:1009
+#: src/cong-editor-node-text.c:923
 msgid "Move cursor"
 msgstr "Déplacer le curseur"
 
-#: src/cong-editor-node-text.c:1095
+#: src/cong-editor-node-text.c:1009
 msgid "Drag out selection"
 msgstr "Déplacer la sélection"
 
-#: src/cong-editor-widget3.c:260
+#: src/cong-editor-widget3.c:268
 msgid "Expander Size"
 msgstr "Taille de la zone de pliage"
 
-#: src/cong-editor-widget3.c:261
+#: src/cong-editor-widget3.c:269
 msgid "Size of the expander arrow"
 msgstr "Taille de la flèche de pliage"
 
-#: src/cong-editor-widget3.c:745
+#: src/cong-editor-widget3.c:746
 msgid "Input Method"
 msgstr "Méthode de saisie"
 
-#: src/cong-editor-widget3.c:857 src/cong-editor-widget3.c:1388
+#: src/cong-editor-widget3.c:876 src/cong-editor-widget3.c:1407
 msgid "Typing"
 msgstr "Saisie"
 
-#: src/cong-editor-widget3.c:1289
+#: src/cong-editor-widget3.c:1308
 msgid "Cursor Movement"
 msgstr "Mouvement du curseur"
 
-#: src/cong-editor-widget3.c:1329 src/cong-editor-widget3.c:1342
+#: src/cong-editor-widget3.c:1348 src/cong-editor-widget3.c:1361
 msgid "Delete Selection"
 msgstr "Supprimer la sélection"
 
@@ -2638,7 +2639,7 @@ msgstr "Non spécifié"
 msgid "Remove DTD"
 msgstr "Supprimer la DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1683
+#: src/cong-file-properties.c:380 src/cong-util.c:1636
 msgid "Associate with DTD"
 msgstr "Associer à la DTD"
 
@@ -2690,20 +2691,13 @@ msgstr ""
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate ne peut ouvrir le résultat de la transformation"
 
-#.
-#. * Since we can not assume that these are the DocBook stylesheets we can not
-#. * be too precise with the error message. The message below assumes that whatever stylesheet
-#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
-#. * file. It would be nice to make the URL an actual link but that is a lot more work.
-#.
-#: src/cong-menus.c:528 src/cong-plugin.c:734
+#: src/cong-menus.c:528
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 "Un problème s'est produit lors de la lecture de la feuille de styles \"%s\""
 
-#: src/cong-menus.c:531 src/cong-menus.c:555 src/cong-plugin.c:736
-#: src/cong-plugin.c:799
+#: src/cong-menus.c:531 src/cong-menus.c:555
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate n'a pas réussi à transformer le document"
 
@@ -2794,7 +2788,7 @@ msgstr "_Quitter"
 
 #. Actions found in Edit menu:
 #: src/cong-menus.c:1503
-msgid "Prefere_nces"
+msgid "Pr_eferences"
 msgstr "Pré_férences"
 
 #. Actions found in Help menu:
@@ -2848,11 +2842,11 @@ msgid "Proper_ties"
 msgstr "Proprié_tés"
 
 #. Actions found in Edit menu:
-#: src/cong-menus.c:1543 src/cong-menus.c:1769
+#: src/cong-menus.c:1543 src/cong-menus.c:1768
 msgid "_Undo"
 msgstr "_Annuler"
 
-#: src/cong-menus.c:1544 src/cong-menus.c:1779
+#: src/cong-menus.c:1544 src/cong-menus.c:1778
 msgid "_Redo"
 msgstr "_Rétablir"
 
@@ -2892,12 +2886,12 @@ msgstr "_Insérer..."
 msgid "View _Source"
 msgstr "_Voir le source"
 
-#: src/cong-menus.c:1765
+#: src/cong-menus.c:1764
 #, c-format
 msgid "_Undo: %s"
 msgstr "_Annuler : %s"
 
-#: src/cong-menus.c:1775
+#: src/cong-menus.c:1774
 #, c-format
 msgid "_Redo: %s"
 msgstr "_Rétablir : %s"
@@ -3001,47 +2995,19 @@ msgstr ""
 msgid "Show Details"
 msgstr "Afficher les détails"
 
-#: src/cong-plugin.c:557 src/cong-plugin.c:622
+#: src/cong-plugin.c:554 src/cong-plugin.c:619
 msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 "Conglomerate n'a pas trouvé de données d'affichage pour ce nouveau fichier"
 
-#: src/cong-plugin.c:738
-msgid ""
-"Since Conglomerate could not read the stylesheet it is possible that your "
-"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
-"html for more information on catalogs."
-msgstr ""
-"Comme Conglomerate n'est pas arrivé à lire la feuille de style, il est "
-"possible que votre fichier de catalogue XML ne soit pas correct. Voir http://"
-"www.xmlsoft.org/catalog.html pour de plus amples informations sur les "
-"catalogues."
-
-#: src/cong-plugin.c:769
-#, c-format
-msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
-msgstr ""
-"Un problème s'est produit lors de l'application de la feuille de styles \"%s"
-"\" à \"%s\""
-
-#: src/cong-plugin.c:786
-msgid ""
-"\n"
-"\n"
-"The following stylesheet parameters were used:\n"
-msgstr ""
-"\n"
-"\n"
-"Les paramètres de feuille de style suivants ont été utilisées :\n"
-
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1283
+#: src/cong-plugin.c:1043
 #, c-format
 msgid "<%s> property dialog"
 msgstr "Dialogue de propriété <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1286
+#: src/cong-plugin.c:1046
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Fournit un dialogue de propriétés pour l'élément <%s>"
@@ -3071,23 +3037,23 @@ msgstr "%s (modifié) - %s"
 msgid "Cleanup XML Source"
 msgstr "Optimisation du source XML"
 
-#: src/cong-util.c:368 src/plugin-docbook.c:1401
+#: src/cong-util.c:321 src/plugin-docbook.c:1402
 msgid "Printing XSL Formatting Objects"
 msgstr "Impression d'objets de formatage XSL"
 
-#: src/cong-util.c:412
+#: src/cong-util.c:365
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ce sera éventuellement le résult de cong_util_print_xslfo"
 
-#: src/cong-util.c:1484
+#: src/cong-util.c:1437
 msgid "(no description available)"
 msgstr "(aucune description n'est disponible)"
 
-#: src/cong-util.c:1672
+#: src/cong-util.c:1625
 msgid "DTD files"
 msgstr "Fichiers DTD"
 
-#: src/cong-util.c:1675
+#: src/cong-util.c:1628
 msgid "Select a DTD"
 msgstr "Choisir une DTD"
 
@@ -3104,11 +3070,11 @@ msgstr "Fichiers XML"
 msgid "All Files"
 msgstr "Tous les fichiers"
 
-#: src/plugin-admonition.c:76
+#: src/plugin-admonition.c:77
 msgid "Admonition"
 msgstr "Avertissements"
 
-#: src/plugin-admonition.c:77
+#: src/plugin-admonition.c:78
 msgid "An editor node for visualising tips, warnings, etc"
 msgstr ""
 "Noeud d'édition pour visualiser les trucs et astuces, les messages "
@@ -3152,35 +3118,35 @@ msgstr ""
 "les attributs du document. Utile quand on travaille avec des documents SGML "
 "anciens."
 
-#: src/plugin-docbook.c:224
+#: src/plugin-docbook.c:225
 msgid "Untitled section"
 msgstr "Section sans titre"
 
-#: src/plugin-docbook.c:231
+#: src/plugin-docbook.c:232
 msgid "Text of the article goes here"
 msgstr "Placez ici le texte de l'article"
 
-#: src/plugin-docbook.c:250
+#: src/plugin-docbook.c:251
 msgid "Untitled Article"
 msgstr "Article sans titre"
 
-#: src/plugin-docbook.c:300
+#: src/plugin-docbook.c:301
 msgid "Untitled chapter"
 msgstr "Chapitre sans titre"
 
-#: src/plugin-docbook.c:307
+#: src/plugin-docbook.c:308
 msgid "Text of the first chapter goes here"
 msgstr "Placez ici le texte du premier chapitre"
 
-#: src/plugin-docbook.c:326
+#: src/plugin-docbook.c:327
 msgid "Untitled Book"
 msgstr "Livre sans titre"
 
-#: src/plugin-docbook.c:377
+#: src/plugin-docbook.c:378
 msgid "Untitled book"
 msgstr "Livre sans titre"
 
-#: src/plugin-docbook.c:396
+#: src/plugin-docbook.c:397
 msgid "Untitled Set of Documents"
 msgstr "Collection de documents sans titres"
 
@@ -3188,18 +3154,18 @@ msgstr "Collection de documents sans titres"
 #. * The text may not be very helpful.
 #. * It would be nice to make the URLs be actual links.
 #.
-#: src/plugin-docbook.c:1102
+#: src/plugin-docbook.c:1103
 #, c-format
 msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
 msgstr ""
 "Conglomerate n'arrive pas à trouver la feuille de style utilisée pour "
 "convertir DocBook en %s"
 
-#: src/plugin-docbook.c:1105
+#: src/plugin-docbook.c:1106
 msgid "Unable to locate the DocBook stylesheets"
 msgstr "Impossible de trouver les feuilles de style DocBook"
 
-#: src/plugin-docbook.c:1107
+#: src/plugin-docbook.c:1108
 msgid ""
 "Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
 "docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
@@ -3212,7 +3178,7 @@ msgstr ""
 "xmlsoft.org/catalog.html pour de plus amples informations sur les "
 "catalogues);"
 
-#: src/plugin-docbook.c:1143
+#: src/plugin-docbook.c:1144
 #, c-format
 msgid ""
 "%s conversion complete.\n"
@@ -3223,31 +3189,31 @@ msgstr ""
 "\n"
 "%s a été converti en %s dans %s"
 
-#: src/plugin-docbook.c:1267
+#: src/plugin-docbook.c:1268
 msgid "Exporting PDF file"
 msgstr "Exportation sous format PDF"
 
-#: src/plugin-docbook.c:1271 src/plugin-docbook.c:1399
+#: src/plugin-docbook.c:1272 src/plugin-docbook.c:1400
 msgid "Transforming DocBook into XSL Formatting Objects"
 msgstr "Transformation de DocBook en objets de formatage XSL"
 
-#: src/plugin-docbook.c:1273
+#: src/plugin-docbook.c:1274
 msgid "Laying out XSL Formatting Objects as a PDF file"
 msgstr "Mise en page des objets de formatage XSL sous format PDF"
 
-#: src/plugin-docbook.c:1288 src/plugin-fo.c:97
+#: src/plugin-docbook.c:1289 src/plugin-fo.c:97
 msgid "Converting XSL Formatting Objects to PDF"
 msgstr "Conversion d'objets de formatage XSL en PDF"
 
-#: src/plugin-docbook.c:1395
+#: src/plugin-docbook.c:1396
 msgid "Printing DocBook file"
 msgstr "Impression d'un fichier DocBook"
 
-#: src/plugin-docbook.c:1795
+#: src/plugin-docbook.c:1796
 msgid "DocBook Article"
 msgstr "Article DocBook"
 
-#: src/plugin-docbook.c:1796
+#: src/plugin-docbook.c:1797
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
@@ -3255,35 +3221,35 @@ msgstr ""
 "Créer un article, pour un site web ou un magazine par exemple, en utilisant "
 "le format \"DocBook\""
 
-#: src/plugin-docbook.c:1803
+#: src/plugin-docbook.c:1804
 msgid "DocBook Book"
 msgstr "Livre DocBook"
 
-#: src/plugin-docbook.c:1804
+#: src/plugin-docbook.c:1805
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Créer un livre, en utilisant le format \"DocBook\""
 
-#: src/plugin-docbook.c:1811
+#: src/plugin-docbook.c:1812
 msgid "DocBook Set"
 msgstr "Collection DocBook"
 
-#: src/plugin-docbook.c:1812
+#: src/plugin-docbook.c:1813
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Créer une collection de livres, en utilisant le format \"DocBook\""
 
-#: src/plugin-docbook.c:1820
+#: src/plugin-docbook.c:1821
 msgid "Import text as a DocBook article"
 msgstr "Importer du texte sous forme d'article DocBook"
 
-#: src/plugin-docbook.c:1821
+#: src/plugin-docbook.c:1822
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Importer un fichier texte standard sous forme d'article  \"DocBook\""
 
-#: src/plugin-docbook.c:1839
+#: src/plugin-docbook.c:1840
 msgid "Export DocBook as HTML"
 msgstr "Exporter un fichier DocBook sous format HTML"
 
-#: src/plugin-docbook.c:1840
+#: src/plugin-docbook.c:1841
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -3291,11 +3257,11 @@ msgstr ""
 "Utiliser les feuilles de style DocBook de Norman Walsh pour créer une page "
 "web à partir du fichier DocBook"
 
-#: src/plugin-docbook.c:1848
+#: src/plugin-docbook.c:1849
 msgid "Export DocBook as PDF"
 msgstr "Exporter un fichier DocBook sous format PDF"
 
-#: src/plugin-docbook.c:1849
+#: src/plugin-docbook.c:1850
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -3303,11 +3269,11 @@ msgstr ""
 "Utiliser les feuilles de style DocBook de Norman Walsh pour créer un fichier "
 "PDF à partir du fichier DocBook"
 
-#: src/plugin-docbook.c:1857
+#: src/plugin-docbook.c:1858
 msgid "Export DocBook as XSL:FO"
 msgstr "Exporter un fichier DocBook sous format XSL:FO"
 
-#: src/plugin-docbook.c:1858
+#: src/plugin-docbook.c:1859
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -3316,28 +3282,28 @@ msgstr ""
 "de ce fichier DocBook un fichier XSL:FO qui puisse être imprimé ou converti "
 "ultérieurement sous format PDF"
 
-#: src/plugin-docbook.c:1867
+#: src/plugin-docbook.c:1868
 msgid "Print DocBook"
 msgstr "Imprimer un fichier DocBook"
 
-#: src/plugin-docbook.c:1876
+#: src/plugin-docbook.c:1877
 msgid "Generic DocBook property dialog"
 msgstr "Dialogue de propriété générique DocBook"
 
-#: src/plugin-docbook.c:1877
+#: src/plugin-docbook.c:1878
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Fournit un dialogue de propriétés pour la plupart des noeuds DocBook"
 
-#: src/plugin-docbook.c:1895 src/plugin-docbook.c:1898 src/plugin-html.c:137
+#: src/plugin-docbook.c:1896 src/plugin-docbook.c:1899 src/plugin-html.c:137
 #: src/plugin-html.c:140
 msgid "Open Link in Browser"
 msgstr "Ouvrir le lien dans le navigateur"
 
-#: src/plugin-docbook.c:1907
+#: src/plugin-docbook.c:1908
 msgid "Promote Section"
 msgstr "Placer la section à un niveau supérieur"
 
-#: src/plugin-docbook.c:1908
+#: src/plugin-docbook.c:1909
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
@@ -3345,32 +3311,32 @@ msgstr ""
 "Place une section DocBook à un niveau d'organisation supérieur dans le "
 "document"
 
-#: src/plugin-docbook.c:1910 src/plugin-html.c:148 src/plugin-html.c:151
+#: src/plugin-docbook.c:1911 src/plugin-html.c:148 src/plugin-html.c:151
 msgid "Promote"
 msgstr "Placer à un niveau supérieur"
 
-#: src/plugin-docbook.c:1911 src/plugin-docbook.c:1912
+#: src/plugin-docbook.c:1912 src/plugin-docbook.c:1913
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr ""
 "Placer la section à un niveau d'organisation supérieur dans le document"
 
-#: src/plugin-docbook.c:1918
+#: src/plugin-docbook.c:1919
 msgid "Demote Section"
 msgstr "Placer la section à un niveau inférieur"
 
-#: src/plugin-docbook.c:1919
+#: src/plugin-docbook.c:1920
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr ""
 "Place une section DocBook à un niveau d'organisation inférieur dans le "
 "document"
 
-#: src/plugin-docbook.c:1921 src/plugin-html.c:159 src/plugin-html.c:162
+#: src/plugin-docbook.c:1922 src/plugin-html.c:159 src/plugin-html.c:162
 msgid "Demote"
 msgstr "Placer à un niveau inférieur"
 
-#: src/plugin-docbook.c:1922 src/plugin-docbook.c:1923
+#: src/plugin-docbook.c:1923 src/plugin-docbook.c:1924
 msgid "Demote the section to a lower organisational level within the document"
 msgstr ""
 "Placer la section à un niveau d'organisation inférieur dans le document"
@@ -3442,17 +3408,26 @@ msgstr "Générer un fichier PDF à partir des données XSL:FO"
 msgid "Print XSL:FO"
 msgstr "Imprimer le fichier XSL:FO"
 
-#: src/plugin-lists.c:76
+#: src/plugin-lists.c:77
 msgid "List Member Element"
 msgstr "Afficher les éléments d'une liste"
 
-#: src/plugin-lists.c:77
+#: src/plugin-lists.c:78
 msgid "An editor node for visualising a member of a list"
 msgstr "Noeud d'édition pour visualiser un élément d'une liste"
 
-#: src/plugin-paragraph.c:68
+#: src/plugin-paragraph.c:69
 msgid "An editor node for visualising a paragraph"
 msgstr "Noeud d'édition pour visualiser un paragraphe"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: src/plugin-print-source.c:73 src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Imprimer le source XML"
 
 #: src/plugin-random.c:148
 msgid "What kind of random XML document would you like to create?"
@@ -3480,7 +3455,7 @@ msgstr "Afficher le formulaire de syntaxe compacte d'un schéma RELAX NG"
 
 #: src/plugin-save-dispspec.c:149
 msgid "Dump Display Spec"
-msgstr "Voir la spécification d'affichage"
+msgstr "Enregistrer la spécification d'affichage"
 
 #: src/plugin-save-dispspec.c:150 src/plugin-save-dispspec.c:153
 #: src/plugin-save-dispspec.c:154
@@ -3494,7 +3469,7 @@ msgstr ""
 
 #: src/plugin-save-dispspec.c:152
 msgid "_Dump Display Spec"
-msgstr "Voir la _spécification d'affichage"
+msgstr "Enregistrer la _spécification d'affichage"
 
 #: src/plugin-save-dispspec.c:160
 msgid "Edit Display Spec"
@@ -3508,7 +3483,7 @@ msgstr ""
 
 #: src/plugin-save-dispspec.c:163
 msgid "_Edit Display Spec"
-msgstr "_Édition de la spécification d'affichage"
+msgstr "_Éditer la spécification d'affichage"
 
 #: src/plugin-sgml.c:43
 #, c-format
