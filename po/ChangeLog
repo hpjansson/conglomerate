@@ -1,5 +1,10 @@
 Top line of ChangeLog $Revision$, update below this line.
 
+2004-10-15  Michèle Garoche  <michele.garoche@easyconnect.fr>
+ 
+	* fr.po: Updated French translation. 
+ 	Corrected various accelerators which chocked together.
+ 
 2004-10-15  Nickolay V. Shmyrev <nshmyrev@yandex.ru>
 
 	* POTFILES.in:

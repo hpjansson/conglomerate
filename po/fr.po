@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
-"POT-Creation-Date: 2004-10-09 00:33+0200\n"
-"PO-Revision-Date: 2004-09-30 18:28+0200\n"
+"POT-Creation-Date: 2004-10-14 08:21+0200\n"
+"PO-Revision-Date: 2004-10-14 10:31+0200\n"
 "Last-Translator: Michèle Garoche <michele.garoche@easyconnect.fr>\n"
 "Language-Team: French <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,10 +256,9 @@ msgid ""
 "\n"
 "This is listed in Bugzilla as bug #122538"
 msgstr ""
-"This is a placeholder page.  Eventually you will be able to use this page to "
-"manipulate DocBook's simple version tracking information.\n"
+"C'est une page fantôme. Elle devrait servir à gérer les révisions DocBook.\n"
 "\n"
-"This is listed in Bugzilla as bug #122538"
+"Voir Bugzilla 122538"
 
 #: glade/docbook-common-properties.glade.h:9
 msgid "_Architecture"
@@ -716,7 +715,7 @@ msgstr "Début d'XInclude"
 msgid "XInclude End"
 msgstr "Fin d'XInclude"
 
-#: src/cong-document.c:2133
+#: src/cong-document.c:2173
 #, c-format
 msgid "Select %s"
 msgstr "Sélectionner %s"
@@ -1445,13 +1444,31 @@ msgstr "Non spécifié"
 msgid "Remove DTD"
 msgstr "Supprimer la DTD"
 
-#: src/cong-file-properties.c:380 src/cong-util.c:1678
+#: src/cong-file-properties.c:380 src/cong-util.c:1674
 msgid "Associate with DTD"
 msgstr "Associer à la DTD"
 
-#: src/cong-file-save.c:71
+#: src/cong-file-save.c:75
 msgid "Save XML as..."
 msgstr "Enregistrer XML sous..."
+
+#: src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Le fichier \"%s\" n'est accessible qu'en lecture.\n"
+
+#: src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Un fichier nommé \"%s\" existe déjà.\n"
+
+#: src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "_Remplacer"
+
+#: src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Voulez-vous le remplacer ?"
 
 #: src/cong-location.c:396 src/cong-location.c:417
 msgid "Merge tags"
@@ -1479,18 +1496,18 @@ msgstr ""
 msgid "Conglomerate cannot open the result of the transformation"
 msgstr "Conglomerate ne peut ouvrir le résultat de la transformation"
 
-#: src/cong-menus.c:532 src/cong-plugin.c:677
+#: src/cong-menus.c:532 src/cong-plugin.c:699
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
 msgstr ""
 "Un problème s'est produit lors de la lecture de la feuille de styles \"%s\""
 
-#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:680
-#: src/cong-plugin.c:710
+#: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:702
+#: src/cong-plugin.c:732
 msgid "Conglomerate could not transform the document"
 msgstr "Conglomerate n'a pas réussi à transformer le document"
 
-#: src/cong-menus.c:556 src/cong-plugin.c:707
+#: src/cong-menus.c:556 src/cong-plugin.c:729
 msgid "There was a problem applying the stylesheet file"
 msgstr ""
 "Un problème s'est produit lors de l'application de la feuille de styles"
@@ -1542,11 +1559,11 @@ msgid "_Help"
 msgstr "_Aide"
 
 #. Sub-menus:
-#: src/cong-menus.c:1480 src/popup.c:1096
+#: src/cong-menus.c:1480 src/popup.c:1099
 msgid "New sub-element"
 msgstr "Nouveau sous-élément"
 
-#: src/cong-menus.c:1481 src/popup.c:1110
+#: src/cong-menus.c:1481 src/popup.c:1113
 msgid "New sibling"
 msgstr "Nouvel enfant"
 
@@ -1643,11 +1660,11 @@ msgstr "_Rétablir"
 msgid "Cu_t"
 msgstr "Cou_per"
 
-#: src/cong-menus.c:1536 src/popup.c:752 src/popup.c:1048
+#: src/cong-menus.c:1536 src/popup.c:755 src/popup.c:1051
 msgid "_Copy"
 msgstr "_Copier"
 
-#: src/cong-menus.c:1537 src/popup.c:766
+#: src/cong-menus.c:1537 src/popup.c:769
 msgid "_Paste"
 msgstr "Col_ler"
 
@@ -1661,7 +1678,7 @@ msgstr "Rechercher le sui_vant"
 
 #: src/cong-menus.c:1540
 msgid "Find Pre_vious"
-msgstr "Rechercher le _précé_dent"
+msgstr "Rechercher le précé_dent"
 
 #: src/cong-menus.c:1541
 msgid "R_eplace..."
@@ -1709,7 +1726,7 @@ msgstr "Valeur"
 #: src/cong-node-properties-dialog.c:713
 #, c-format
 msgid "Attributes for <tt>%s</tt> elements"
-msgstr "Attributs pour les éléments<tt>%s</tt>"
+msgstr "Attributs pour les éléments <tt>%s</tt>"
 
 #: src/cong-node-properties-dialog.c:827
 msgid "Text"
@@ -1784,19 +1801,19 @@ msgstr ""
 msgid "Show Details"
 msgstr "Afficher les détails"
 
-#: src/cong-plugin.c:556 src/cong-plugin.c:600
+#: src/cong-plugin.c:557 src/cong-plugin.c:622
 msgid "Conglomerate could not find display information for the new file"
 msgstr ""
 "Conglomerate n'a pas trouvé de données d'affichage pour ce nouveau fichier"
 
 #. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
-#: src/cong-plugin.c:1182
+#: src/cong-plugin.c:1204
 #, c-format
 msgid "<%s> property dialog"
 msgstr "Dialogue de propriété <%s>"
 
 #. Generate a user-visible description for this plugin (property dialog for an XML element)
-#: src/cong-plugin.c:1185
+#: src/cong-plugin.c:1207
 #, c-format
 msgid "Provides a Properties dialog for the <%s> element"
 msgstr "Fournit un dialogue de propriétés pour l'élément <%s>"
@@ -1822,23 +1839,27 @@ msgstr "Bienvenue dans l'éditeur Conglomerate tant attendu."
 msgid "%s (modified) - %s"
 msgstr "%s (modifié) - %s"
 
-#: src/cong-util.c:366 src/plugin-docbook.c:1301
+#: src/cong-source-layout.c:413 src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "Optimisation du source XML"
+
+#: src/cong-util.c:368 src/plugin-docbook.c:1301
 msgid "Printing XSL Formatting Objects"
 msgstr "Impression d'objets de formatage XSL"
 
-#: src/cong-util.c:410
+#: src/cong-util.c:412
 msgid "This will eventually be the result from cong_util_print_xslfo"
 msgstr "Ce sera éventuellement le résult de cong_util_print_xslfo"
 
-#: src/cong-util.c:1482
+#: src/cong-util.c:1484
 msgid "(no description available)"
 msgstr "(aucune description n'est disponible)"
 
-#: src/cong-util.c:1667
+#: src/cong-util.c:1663
 msgid "DTD files"
 msgstr "Fichiers DTD"
 
-#: src/cong-util.c:1670
+#: src/cong-util.c:1666
 msgid "Select a DTD"
 msgstr "Choisir une DTD"
 
@@ -1877,12 +1898,8 @@ msgstr "Document XML vide"
 msgid "Create an empty XML document of an arbitrary type."
 msgstr "Créer un document XML vide de type arbitraire."
 
-#: src/plugin-cleanup-source.c:411 src/plugin-cleanup-source.c:453
-msgid "Cleanup XML Source"
-msgstr "Optimisation du source XML"
-
-#: src/plugin-cleanup-source.c:454 src/plugin-cleanup-source.c:457
-#: src/plugin-cleanup-source.c:458
+#: src/plugin-cleanup-source.c:74 src/plugin-cleanup-source.c:77
+#: src/plugin-cleanup-source.c:78
 msgid ""
 "Cleans up the XML source of the document, so that it is easy to read in a "
 "code editor."
@@ -1890,7 +1907,7 @@ msgstr ""
 "Optimise le source XML du document, de façon à ce qu'il soit facilement "
 "lisible dans un éditeur de code"
 
-#: src/plugin-cleanup-source.c:456
+#: src/plugin-cleanup-source.c:76
 msgid "_Clean the XML Source"
 msgstr "_Optimiser le source XML"
 
@@ -2214,7 +2231,7 @@ msgstr ""
 
 #: src/plugin-save-dispspec.c:152
 msgid "_Dump Display Spec"
-msgstr "_Voir la spécification d'affichage"
+msgstr "Voir la _spécification d'affichage"
 
 #: src/plugin-save-dispspec.c:160
 msgid "Edit Display Spec"
@@ -2356,51 +2373,51 @@ msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr ""
 "Élément pour visualiser les règles du modèles dans une feuille de style XSL"
 
-#: src/popup.c:489
+#: src/popup.c:490
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Appliquer la balise span : %s"
 
-#: src/popup.c:560
+#: src/popup.c:561
 msgid "Remove Span Tag"
 msgstr "Supprimer la balise span"
 
-#: src/popup.c:605
+#: src/popup.c:607
 msgid "Convert to a comment"
 msgstr "Convertir en commentaire"
 
-#: src/popup.c:624 src/tree.c:521
+#: src/popup.c:627 src/tree.c:521
 msgid "Uncomment"
 msgstr "Supprimer les balises de commentaire"
 
-#: src/popup.c:625
+#: src/popup.c:628
 msgid ""
 "Convert a comment containing XML source code into the corresponding code"
 msgstr ""
 "Convertir un commentaire contenant du code source XML dans le code "
 "correspondant"
 
-#: src/popup.c:705 src/popup.c:1022
+#: src/popup.c:708 src/popup.c:1025
 msgid "_Properties"
 msgstr "Propr_iétés"
 
-#: src/popup.c:739 src/popup.c:1039
+#: src/popup.c:742 src/popup.c:1042
 msgid "_Cut"
 msgstr "Cou_per"
 
-#: src/popup.c:965
+#: src/popup.c:968
 msgid "Other XML element..."
 msgstr "Autre élément XML..."
 
-#: src/popup.c:1058
+#: src/popup.c:1061
 msgid "Paste into"
 msgstr "Insérer dans"
 
-#: src/popup.c:1068
+#: src/popup.c:1071
 msgid "Paste before"
 msgstr "Insérer avant"
 
-#: src/popup.c:1078
+#: src/popup.c:1081
 msgid "Paste after"
 msgstr "Insérer après"
 
@@ -2457,15 +2474,3 @@ msgstr "Insérer après"
 #: src/xmledit.c:394
 msgid "Source View - Conglomerate"
 msgstr "Vue source - Conglomerate"
-
-#~ msgid "Delete this item"
-#~ msgstr "Supprimer cet élément"
-
-#~ msgid "Add text node after"
-#~ msgstr "Ajouter un noeud de texte après"
-
-#~ msgid "Add text node before"
-#~ msgstr "Ajouter un noeud de texte avant"
-
-#~ msgid "Set the text"
-#~ msgstr "Définir le texte"
