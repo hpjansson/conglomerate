@@ -6,4 +6,5 @@ Makefile.in
 .libs #a #directory
 .deps #a #directory
 ## #other #files
+conglomerate
 ##
