@@ -124,6 +124,7 @@ struct CongDocumentDetails
 
 	/* Amortisation of updates: */
 	guint edit_depth;
+	gboolean selection_has_changed;
 
 	/* Stats about the document: */
 	gboolean num_nodes_valid;	
@@ -1593,6 +1594,31 @@ cong_document_handle_begin_edit(CongDocument *doc)
 
 }
 
+static gchar*
+generate_source_for_PRIMARY (CongDocument *doc)
+{
+	CongSelection *selection;
+
+	g_assert (IS_CONG_DOCUMENT (doc));
+
+	selection = cong_document_get_selection(doc);
+	
+	if (!(cong_range_exists (cong_selection_get_logical_range (selection)) &&
+	      cong_range_is_valid (cong_selection_get_logical_range (selection)))) { 
+		return NULL;
+	}
+	
+	if (cong_range_is_empty (cong_selection_get_logical_range (selection))) {
+		return NULL;
+	}
+
+	if (!cong_range_can_be_copied (cong_selection_get_ordered_range (selection))) {
+		return NULL;
+	}
+
+	return cong_range_generate_source (cong_selection_get_ordered_range (selection));		
+}
+
 static void 
 cong_document_handle_end_edit(CongDocument *doc)
 {
@@ -1601,6 +1627,31 @@ cong_document_handle_end_edit(CongDocument *doc)
 #if DEBUG_MVC
 	g_message("cong_document_handle_end_edit");
 #endif
+
+	if (PRIVATE (doc)->selection_has_changed) {
+
+		gchar *source;
+
+		/* The selection changed at some point within the edit; refresh PRIMARY: */
+		PRIVATE (doc)->selection_has_changed = FALSE;
+
+		source = generate_source_for_PRIMARY (doc);
+
+		if (source) {
+			cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+								  GDK_SELECTION_PRIMARY,
+								  source,
+								  doc);			
+			g_free (source);
+		} else {
+			/* Set PRIMARY to be empty - FIXME: is this really appropriate? */
+			cong_app_set_clipboard_from_xml_fragment (cong_app_singleton(),
+								  GDK_SELECTION_PRIMARY,
+								  "",
+								  doc);
+		}
+	}
+
 
 	for (iter = PRIVATE(doc)->views; iter; iter = g_list_next(iter) ) {
 		CongView *view = CONG_VIEW(iter->data);
@@ -1927,6 +1978,8 @@ cong_document_handle_selection_change(CongDocument *doc)
 	#if DEBUG_MVC
 	g_message("cong_document_handle_selection_change");
 	#endif
+
+	PRIVATE (doc)->selection_has_changed = TRUE;
 }
 
 static void

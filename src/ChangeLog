@@ -2,6 +2,10 @@
 
 	* cong-app.c, cong-document.c
 
+	Update PRIMARY when selection changes, fixing bug #130248
+
+	* cong-app.c, cong-document.c
+
 	Reduced debug log spewage
 
 	* cong-app.c

@@ -617,11 +617,14 @@ generate_text_for_selection (CongApp *app,
 		if (xml_doc_result) {
 			gchar *result;
 			/* The stylesheet outputs as text, so we should have a single TEXT node directly below the document containing the text: */
-			g_assert (xml_doc_result->children);
-			g_assert (xml_doc_result->children == xml_doc_result->last);
-			g_assert (xml_doc_result->children->type == XML_TEXT_NODE);
+			if (xml_doc_result->children) {
+				g_assert (xml_doc_result->children == xml_doc_result->last);
+				g_assert (xml_doc_result->children->type == XML_TEXT_NODE);
 
-			result = g_strdup (xml_doc_result->children->content);		
+				result = g_strdup (xml_doc_result->children->content);		
+			} else {
+				result = g_strdup ("");
+			}
 
 			xmlFreeDoc (xml_doc_result);
 
