@@ -1,3 +1,11 @@
+2004-07-27  Geert Stappers  <stappers@stappers.nl>
+
+	* cong-menus.c:
+
+	Use cong_document_get_root_element(cong_doc); instead
+	of cong_document_get_root(cong_doc); to get linked
+	with debug menu enabled.
+
 2004-07-26  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-menus.c: 
