@@ -67,7 +67,7 @@ calc_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area);
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
@@ -180,6 +180,7 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 			/* Add the title text: */
 			PRIVATE(area_structural_tag)->title_text = cong_editor_area_text_new (editor_widget,
 											      cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+											      cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_TEXT),
 											      text);
 			cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(PRIVATE(area_structural_tag)->title_hcompose),
 							PRIVATE(area_structural_tag)->title_text,
@@ -195,6 +196,11 @@ cong_editor_area_structural_tag_construct (CongEditorAreaStructuralTag *area_str
 								   PRIVATE(area_structural_tag)->title_vcompose);
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_structural_tag),
 								   PRIVATE(area_structural_tag)->inner_bin);
+
+	cong_editor_area_protected_set_parent (PRIVATE(area_structural_tag)->title_vcompose,
+					       CONG_EDITOR_AREA (area_structural_tag));
+	cong_editor_area_protected_set_parent (PRIVATE(area_structural_tag)->inner_bin,
+					       CONG_EDITOR_AREA (area_structural_tag));
 
 	return CONG_EDITOR_AREA (area_structural_tag);
 }
@@ -363,15 +369,22 @@ allocate_child_space (CongEditorArea *area)
 					 rect->height-(3+title_req->height));
 }
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
 {
 	CongEditorAreaStructuralTag *structural_tag = CONG_EDITOR_AREA_STRUCTURAL_TAG(editor_area);
 
-	(*func)(PRIVATE(structural_tag)->title_vcompose, user_data);
-	(*func)(PRIVATE(structural_tag)->inner_bin, user_data);
+	if ((*func)(PRIVATE(structural_tag)->title_vcompose, user_data)) {
+		return PRIVATE(structural_tag)->title_vcompose;
+	}
+
+	if ((*func)(PRIVATE(structural_tag)->inner_bin, user_data)) {
+		return PRIVATE(structural_tag)->inner_bin;
+	}
+
+	return NULL;
 }
 
 static void

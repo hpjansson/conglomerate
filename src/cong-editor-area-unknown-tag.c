@@ -49,7 +49,7 @@ calc_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area);
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
@@ -115,6 +115,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 					       cong_editor_area_text_new (editor_widget,
 									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+									  NULL,
 									  tag_string_begin)
 					       );
 	
@@ -137,6 +138,7 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 	cong_editor_area_container_add_child ( CONG_EDITOR_AREA_CONTAINER(PRIVATE(area_unknown_tag)->outer_vcompose),
 					       cong_editor_area_text_new (editor_widget,
 									  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT], 
+									  NULL,
 									  tag_string_end)
 					       );
 
@@ -145,6 +147,9 @@ cong_editor_area_unknown_tag_construct (CongEditorAreaUnknownTag *area_unknown_t
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_unknown_tag),
 								   PRIVATE(area_unknown_tag)->outer_vcompose);
+
+	cong_editor_area_protected_set_parent (PRIVATE(area_unknown_tag)->outer_vcompose,
+					       CONG_EDITOR_AREA (area_unknown_tag));
 
 	return CONG_EDITOR_AREA (area_unknown_tag);
 }
@@ -202,7 +207,7 @@ allocate_child_space (CongEditorArea *area)
 
 }
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
@@ -210,8 +215,12 @@ for_all (CongEditorArea *editor_area,
 	CongEditorAreaUnknownTag *unknown_tag = CONG_EDITOR_AREA_UNKNOWN_TAG(editor_area);
 
 	if (PRIVATE(unknown_tag)->outer_vcompose) {
-		(*func)(PRIVATE(unknown_tag)->outer_vcompose, user_data);
+		if ((*func)(PRIVATE(unknown_tag)->outer_vcompose, user_data)) {
+			return PRIVATE(unknown_tag)->outer_vcompose;
+		}
 	}
+
+	return NULL;
 }
 
 static void

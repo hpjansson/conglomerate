@@ -57,11 +57,13 @@ CongEditorArea*
 cong_editor_area_text_construct (CongEditorAreaText *area_text,
 				 CongEditorWidget3 *editor_widget,
 				 CongFont *font,
+				 const GdkColor *fg_col,
 				 const gchar *text);
 
 CongEditorArea*
 cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
+			   const GdkColor *fg_col,
 			   const gchar *text);
 
 void

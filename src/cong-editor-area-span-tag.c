@@ -70,7 +70,7 @@ calc_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area);
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
@@ -110,10 +110,10 @@ cong_editor_area_span_tag_instance_init (CongEditorAreaSpanTag *area_span_tag)
 /* Exported function definitions: */
 CongEditorArea*
 cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
-					   CongEditorWidget3 *editor_widget,
-					   CongDispspecElement *ds_element,
-					   GdkPixbuf *pixbuf,
-					   const gchar *text)
+				     CongEditorWidget3 *editor_widget,
+				     CongDispspecElement *ds_element,
+				     GdkPixbuf *pixbuf,
+				     const gchar *text)
 {
 	g_return_val_if_fail (text, NULL);
 
@@ -175,6 +175,7 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 					}
 					PRIVATE(area_span_tag)->title_text = cong_editor_area_text_new (editor_widget,
 													cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG], 
+													cong_dispspec_element_col (ds_element, CONG_DISPSPEC_GC_USAGE_BOLD_LINE),
 													text);
 					cong_editor_area_composer_pack (CONG_EDITOR_AREA_COMPOSER(inner_anon_hcompose),
 									PRIVATE(area_span_tag)->title_text,
@@ -193,6 +194,9 @@ cong_editor_area_span_tag_construct (CongEditorAreaSpanTag *area_span_tag,
 
 	cong_editor_area_protected_postprocess_add_internal_child (CONG_EDITOR_AREA (area_span_tag),
 								   PRIVATE(area_span_tag)->span_vcompose);
+
+	cong_editor_area_protected_set_parent (PRIVATE(area_span_tag)->span_vcompose,
+					       CONG_EDITOR_AREA (area_span_tag));
 
 	return CONG_EDITOR_AREA (area_span_tag);
 }
@@ -336,14 +340,18 @@ allocate_child_space (CongEditorArea *area)
 					 rect->height);
 }
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
 {
 	CongEditorAreaSpanTag *span_tag = CONG_EDITOR_AREA_SPAN_TAG(editor_area);
 
-	(*func)(PRIVATE(span_tag)->span_vcompose, user_data);
+	if ((*func)(PRIVATE(span_tag)->span_vcompose, user_data)) {
+		return PRIVATE(span_tag)->span_vcompose;
+	}
+
+	return NULL;
 }
 
 static void

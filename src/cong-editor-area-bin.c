@@ -42,7 +42,7 @@ calc_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area);
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
@@ -159,7 +159,7 @@ allocate_child_space (CongEditorArea *area)
 
 }
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
@@ -167,8 +167,12 @@ for_all (CongEditorArea *editor_area,
 	CongEditorAreaBin *bin = CONG_EDITOR_AREA_BIN(editor_area);
 
 	if (PRIVATE(bin)->only_child) {
-		(*func)(PRIVATE(bin)->only_child, user_data);
+		if ((*func)(PRIVATE(bin)->only_child, user_data)) {
+			return PRIVATE(bin)->only_child;
+		}
 	}
+
+	return NULL;
 }
 
 static void
@@ -187,6 +191,8 @@ add_child (CongEditorAreaContainer *area_container,
 
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (area_container,
 										 child);
+	cong_editor_area_protected_set_parent (child,
+					       CONG_EDITOR_AREA(area_container));
 }
 
 static void

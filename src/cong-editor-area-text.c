@@ -79,9 +79,11 @@ CongEditorArea*
 cong_editor_area_text_construct (CongEditorAreaText *area_text,
 				 CongEditorWidget3 *editor_widget,
 				 CongFont *font,
+				 const GdkColor *fg_col,
 				 const gchar *text)
 {
 	g_return_val_if_fail (text, NULL);
+/* 	g_return_val_if_fail (fg_col, NULL); */
 
 	cong_editor_area_construct (CONG_EDITOR_AREA(area_text),
 				    editor_widget);
@@ -89,6 +91,12 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 	PRIVATE(area_text)->text = g_strdup(text);
 
 	PRIVATE(area_text)->gc = gdk_gc_new(cong_gui_get_a_window()->window);
+
+#if 0
+	if (fg_col) {
+		gdk_gc_set_foreground (PRIVATE(area_text)->gc, (GdkColor*)fg_col);
+	}
+#endif
 
 	PRIVATE(area_text)->pango_layout = pango_layout_new(gdk_pango_context_get());
 
@@ -110,6 +118,7 @@ cong_editor_area_text_construct (CongEditorAreaText *area_text,
 CongEditorArea*
 cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 			   CongFont *font,
+			   const GdkColor *fg_col,
 			   const gchar *text)
 {
 #if DEBUG_EDITOR_AREA_LIFETIMES
@@ -120,6 +129,7 @@ cong_editor_area_text_new (CongEditorWidget3 *editor_widget,
 		(g_object_new (CONG_EDITOR_AREA_TEXT_TYPE, NULL),
 		 editor_widget,
 		 font,
+		 fg_col,
 		 text);
 }
 
@@ -136,6 +146,28 @@ cong_editor_area_text_set_text (CongEditorAreaText *area_text,
 
 	cong_editor_area_queue_redraw (CONG_EDITOR_AREA(area_text));
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_text));
+}
+
+gboolean
+cong_editor_area_xy_to_index (CongEditorAreaText *area_text,
+			      int x,
+			      int y,
+			      int *index_,
+			      int *trailing)
+{
+	const GdkRectangle *rect;
+
+	g_return_val_if_fail (IS_CONG_EDITOR_AREA_TEXT(area_text), FALSE);
+	g_return_val_if_fail (index_, FALSE);
+	g_return_val_if_fail (trailing, FALSE);
+
+	rect = cong_editor_area_get_window_coords (CONG_EDITOR_AREA(area_text));
+
+	return pango_layout_xy_to_index (PRIVATE(area_text)->pango_layout,
+					 (x - rect->x) * PANGO_SCALE,
+					 (y - rect->y) * PANGO_SCALE,
+					 index_,
+					 trailing);
 }
 
 

@@ -36,7 +36,6 @@ G_BEGIN_DECLS
 #define CONG_EDITOR_NODE_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_NODE_TYPE, CongEditorNodeClass)
 #define IS_CONG_EDITOR_NODE(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_NODE_TYPE)
 
-typedef struct CongEditorNode CongEditorNode;
 typedef struct CongEditorNodeClass CongEditorNodeClass;
 typedef struct CongEditorNodeDetails CongEditorNodeDetails;
 

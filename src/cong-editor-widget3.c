@@ -34,16 +34,26 @@
 #include "cong-editor-node-document.h"
 #include "cong-editor-node-unimplemented.h"
 
+#include "cong-eel.h"
+
+
 /* Test code: */
-#include "cong-app.h"
 #include "cong-editor-area-border.h"
-#include "cong-editor-area-text.h"
 #include "cong-editor-area-composer.h"
-#include "cong-editor-area-spacer.h"
-#include "cong-editor-area-bin.h"
-#include "cong-editor-area-unknown-tag.h"
 
 #define SHOW_CURSOR_SPEW 0
+
+/* 
+   IMPLEMENTATION NOTES
+
+   The CongEditorWidget3 maintains a hash table from xml doc nodes to CongEditorNodes.
+
+   A CongEditorNode exists for an xml node iff the xml node exists within the tree i.e. you can currently
+   trace a path back from the node up to root of the xml tree,
+
+   The widget holds references to the CongEditorNodes it is storing in its hash table; these should (I think) be the only references
+   on the EditorNodes.
+*/
 
 gboolean
 cong_editor_widget3_node_should_have_editor_node (CongNodePtr node);
@@ -78,11 +88,11 @@ struct CongEditorWidget3Details
 };
 
 
-#define DEBUG_EDITOR_WIDGET_VIEW  1
-#define LOG_GTK_WIDGET_SIGNALS    0
-#define LOG_CONG_DOCUMENT_SIGNALS 1
-#define LOG_EDITOR_NODES 1
-#define LOG_EDITOR_AREAS 1
+#define DEBUG_EDITOR_WIDGET_VIEW  0
+#define LOG_GTK_WIDGET_SIGNALS    1
+#define LOG_CONG_DOCUMENT_SIGNALS 0
+#define LOG_EDITOR_NODES 0
+#define LOG_EDITOR_AREAS 0
 
 #if DEBUG_EDITOR_WIDGET_VIEW
 #define CONG_EDITOR_VIEW_SELF_TEST(details) (cong_element_editor_recursive_self_test(details->root_editor))
@@ -110,7 +120,6 @@ struct CongEditorWidget3Details
 #define LOG_CONG_DOCUMENT_SIGNAL1(x) ((void)0)
 #endif
 
-#define LOG_EDITOR_NODES 1
 #if LOG_EDITOR_NODES
 #define LOG_EDITOR_NODE1(x) g_message(x)
 #define LOG_EDITOR_NODE2(x, a) g_message((x), (a))
@@ -119,7 +128,6 @@ struct CongEditorWidget3Details
 #define LOG_EDITOR_NODE2(x, a) ((void)0)
 #endif
 
-#define LOG_EDITOR_AREAS 1
 #if LOG_EDITOR_AREAS
 #define LOG_EDITOR_AREA1(x) g_message((x))
 #define LOG_EDITOR_AREA2(x, a) g_message((x), (a))
@@ -439,6 +447,18 @@ cong_editor_widget3_get_test_gc (CongEditorWidget3 *editor_widget)
 }
 
 
+CongEditorArea*
+cong_editor_widget3_get_area_at (CongEditorWidget3 *editor_widget,
+				 gint x,
+				 gint y)
+{
+	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
+
+	return cong_editor_area_get_deepest_child_at (details->root_area, 
+						      x,
+						      y);
+}
+
 /* Internal function implementations: */
 /* Definitions of misc stuff: */
 static void 
@@ -515,22 +535,78 @@ static gboolean configure_event_handler(GtkWidget *w, GdkEventConfigure *event, 
 static gboolean button_press_event_handler(GtkWidget *w, GdkEventButton *event, gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
-	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
+	CongEditorArea* area;
 
 	LOG_GTK_WIDGET_SIGNAL1("button_press_event_handler");
 
+	/* Try deepest area, then next deepest, etc until something handles the signal */
+	area = cong_editor_widget3_get_area_at (editor_widget,
+						event->x,
+						event->y);
 
-	return TRUE;
+	while (area) {
+
+#if 0		
+		g_message("Trying button_press on %p %s", 
+			  area,
+			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(G_OBJECT(area))));
+#endif
+
+		if (cong_editor_area_on_button_press (area, event)) {
+			/* This area handled the event: */
+			return TRUE;
+		}
+
+		area = cong_editor_area_get_parent (area);
+	}
+
+	/* None of the areas handled the click: */
+	return FALSE;
 }
 
 static gboolean motion_notify_event_handler(GtkWidget *w, GdkEventMotion *event, gpointer user_data)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3(w);
 	CongEditorWidget3Details* details = GET_DETAILS(editor_widget);
+	CongEditorArea* area;
 
 	LOG_GTK_WIDGET_SIGNAL1("motion_notify_event_handler");
 
+#if 1
+	/* Try deepest area, then next deepest, etc until something handles the signal */
+	area = cong_editor_widget3_get_area_at (editor_widget,
+						event->x,
+						event->y);
+
+	while (area) {
+		
+#if 0
+		g_message("Trying motion_notify on %p %s", 
+			  area,
+			  G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(G_OBJECT(area))));
+#endif
+
+		if (cong_editor_area_on_motion_notify (area, event)) {
+			/* This area handled the event: */
+			return TRUE;
+		}
+
+		area = cong_editor_area_get_parent (area);
+	}
+
+	/* None of the areas handled the click: */
+	return FALSE;
+#else
+	{
+		CongEditorArea* deepest_area = cong_editor_widget3_get_area_at (editor_widget,
+										event->x,
+										event->y);
+
+		g_message("deepest area: %p (%s)", deepest_area, G_OBJECT_CLASS_NAME(G_OBJECT_GET_CLASS(G_OBJECT(deepest_area))));
+	}
+
 	return TRUE;
+#endif
 }
 
 static gboolean key_press_event_handler(GtkWidget *w, GdkEventKey *event, gpointer user_data)
@@ -1074,6 +1150,8 @@ recursive_remove_nodes (CongEditorWidget3 *widget,
 	/* Remove this editor_node: */
 	g_hash_table_remove (details->hash_of_node_to_editor, 
 			     node);
+
+	CONG_EEL_LOG_REF_COUNT("redundant editor node", G_OBJECT(editor_node));
 	
 	/* Unref the editor_node: */
 	g_object_unref (editor_node);

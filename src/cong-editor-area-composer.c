@@ -55,7 +55,7 @@ calc_requisition (CongEditorArea *area,
 static void
 allocate_child_space (CongEditorArea *area);
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data);
@@ -158,6 +158,9 @@ cong_editor_area_composer_pack (CongEditorAreaComposer *area_composer,
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
 										 child);
 
+	cong_editor_area_protected_set_parent (child,
+					       CONG_EDITOR_AREA(area_composer));
+
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
 
@@ -221,6 +224,9 @@ cong_editor_area_composer_pack_after (CongEditorAreaComposer *area_composer,
 	
 	cong_editor_area_container_protected_postprocess_add_non_internal_child (CONG_EDITOR_AREA_CONTAINER(area_composer),
 										 new_child);
+
+	cong_editor_area_protected_set_parent (new_child,
+					       CONG_EDITOR_AREA(area_composer));
 
 	cong_editor_area_container_children_changed ( CONG_EDITOR_AREA_CONTAINER(area_composer));
 }
@@ -383,7 +389,7 @@ allocate_child_space (CongEditorArea *area)
 	}
 }
 
-static void 
+static CongEditorArea*
 for_all (CongEditorArea *editor_area, 
 	 CongEditorAreaCallbackFunc func, 
 	 gpointer user_data)
@@ -398,8 +404,12 @@ for_all (CongEditorArea *editor_area,
 		child_details = (CongEditorAreaComposerChildDetails*)(iter->data);
 		child = CONG_EDITOR_AREA(child_details->child);
 		
-		(*func)(child, user_data);
+		if ((*func)(child, user_data)) {
+			return child;
+		}
 	}
+
+	return NULL;
 }
 
 

@@ -1,3 +1,13 @@
+2003-07-22  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-bin.c, cong-editor-area-composer.c, cong-editor-area-span-tag.c, cong-editor-area-structural-tag.c, cong-editor-area-text.c, cong-editor-area-text.h, cong-editor-area-unknown-tag.c, cong-editor-area.c, cong-editor-area.h, cong-editor-node-text.c, cong-editor-node-unimplemented.c, cong-editor-node.h, cong-editor-widget3.c, cong-marshal.c, cong-marshal.h, global.h
+
+	Support for clicking, dragging selections; editor nodes now know about their parents; text nodes can be coloured; 
+
+	* cong-text-cache.c, cong-text-cache.h, Makefile.am
+
+	New files, for caching the results of stripping surplus whitespace from a string.
+
 2003-07-18  Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* cong-editor-node-text.c

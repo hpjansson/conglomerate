@@ -26,6 +26,43 @@
 #include "cong-marshal.h"
 
 /* Marshaller implementations: */
+void
+cong_cclosure_marshal_BOOLEAN__POINTER (GClosure     *closure,
+					GValue       *return_value,
+					guint         n_param_values,
+					const GValue *param_values,
+					gpointer      invocation_hint,
+					gpointer      marshal_data)
+{
+	typedef gboolean (*GMarshalFunc_BOOLEAN__POINTER) (gpointer     data1,
+							   gpointer     arg_1,
+							   gpointer     data2);
+	register GMarshalFunc_BOOLEAN__POINTER callback;
+	register GCClosure *cc = (GCClosure*) closure;
+	register gpointer data1, data2;
+	gboolean result;
+	
+	g_return_if_fail (n_param_values == 2);
+
+	if (G_CCLOSURE_SWAP_DATA (closure))
+		{
+			data1 = closure->data;
+			data2 = g_value_peek_pointer (param_values + 0);
+		}
+	else
+		{
+			data1 = g_value_peek_pointer (param_values + 0);
+			data2 = closure->data;
+		}
+	callback = (GMarshalFunc_BOOLEAN__POINTER) (marshal_data ? marshal_data : cc->callback);
+	
+	result = callback (data1,
+			   g_value_get_pointer (param_values + 1),
+			   data2);
+
+	g_value_set_boolean (return_value, result);
+}
+
 void 
 cong_cclosure_marshal_VOID__CONGNODEPTR (GClosure     *closure,
 					 GValue       *return_value,

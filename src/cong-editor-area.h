@@ -25,11 +25,12 @@
 #ifndef __CONG_EDITOR_AREA_H__
 #define __CONG_EDITOR_AREA_H__
 
+#include "cong-editor-widget.h"
+
 G_BEGIN_DECLS
 
 #define DEBUG_EDITOR_AREA_LIFETIMES 0
 
-typedef struct CongEditorArea CongEditorArea;
 typedef struct CongEditorAreaClass CongEditorAreaClass;
 typedef struct CongEditorAreaDetails CongEditorAreaDetails;
 
@@ -38,8 +39,9 @@ typedef struct CongEditorAreaDetails CongEditorAreaDetails;
 #define CONG_EDITOR_AREA_CLASS(klass) G_TYPE_CHECK_CLASS_CAST (klass, CONG_EDITOR_AREA_TYPE, CongEditorAreaClass)
 #define IS_CONG_EDITOR_AREA(obj)      G_TYPE_CHECK_INSTANCE_TYPE (obj, CONG_EDITOR_AREA_TYPE)
 
-typedef void (*CongEditorAreaCallbackFunc) (CongEditorArea *editor_area, 
-					    gpointer user_data);
+/* Return TRUE to stop traversal */
+typedef gboolean (*CongEditorAreaCallbackFunc) (CongEditorArea *editor_area, 
+						gpointer user_data);
 
 struct CongEditorArea
 {
@@ -61,9 +63,26 @@ struct CongEditorAreaClass
 
 	void (*allocate_child_space) (CongEditorArea *area);
 
-	void (*for_all) (CongEditorArea *editor_area, 
-			 CongEditorAreaCallbackFunc func, 
-			 gpointer user_data);
+	CongEditorArea* (*for_all) (CongEditorArea *editor_area, 
+				    CongEditorAreaCallbackFunc func, 
+				    gpointer user_data);
+
+	gboolean (*on_button_press) (CongEditorArea *editor_area, 
+ 				     GdkEventButton *event);
+
+#if 0
+	gboolean (*on_enter_notify) (GtkWidget *widget,
+				     GdkEventCrossing *event,
+				     gpointer user_data);
+	gboolean (*on_leave_notify) (GtkWidget *widget,
+				     GdkEventCrossing *event,
+				     gpointer user_data);
+#endif
+	void (*on_motion_notify) (CongEditorArea *editor_area, 
+				  GdkEventMotion *event);
+
+	void (*on_key_press) (CongEditorArea *editor_area, 
+			      GdkEventKey *event);
 
 	/* Signal emission hooks: */
 	void (*flush_requisition_cache) (CongEditorArea *area);
@@ -78,6 +97,9 @@ cong_editor_area_construct (CongEditorArea *area,
 
 CongEditorWidget3*
 cong_editor_area_get_widget (CongEditorArea *area);
+
+CongDocument*
+cong_editor_area_get_document (CongEditorArea *area);
 
 gboolean 
 cong_editor_area_is_hidden (CongEditorArea *area);
@@ -104,19 +126,22 @@ cong_editor_area_debug_render_area (CongEditorArea *area,
 				    GdkGC *gc);
 
 /* CongEditorArea methods: */
+CongEditorArea*
+cong_editor_area_get_parent (CongEditorArea *area);
+
 void
 cong_editor_area_recursive_render (CongEditorArea *area,
 				   const GdkRectangle *widget_rect);
 
-void
+gboolean
 cong_editor_area_on_button_press (CongEditorArea *editor_area, 
 				  GdkEventButton *event);
 
-void
+gboolean
 cong_editor_area_on_motion_notify (CongEditorArea *editor_area, 
 				   GdkEventMotion *event);
 
-void
+gboolean
 cong_editor_area_on_key_press (CongEditorArea *editor_area, 
 			       GdkEventKey *event);
 
@@ -138,11 +163,39 @@ cong_editor_area_queue_redraw (CongEditorArea *editor_area);
 void
 cong_editor_area_flush_requisition_cache (CongEditorArea *editor_area);
 
-/* Iterate over all children of this area, even "internal" ones: */
-void
+/* Iterate over all children of this area, even "internal" ones.
+ * Return value: the child that stopped the traveral, of NULL if none did
+ */
+CongEditorArea*
 cong_editor_area_for_all (CongEditorArea *editor_area, 
 			  CongEditorAreaCallbackFunc func, 
 			  gpointer user_data);
+
+/* Recurse over all children of this area, even "internal" ones.
+ * At each node, call the pre_func, then recurse, then call the post_func.
+ * Return value: the child that stopped the traveral, or NULL if none did
+ */
+CongEditorArea*
+cong_editor_area_recurse (CongEditorArea *editor_area, 
+			  CongEditorAreaCallbackFunc pre_func, 
+			  CongEditorAreaCallbackFunc post_func, 
+			  gpointer user_data);
+
+gboolean
+cong_editor_area_covers_xy (CongEditorArea *editor_area, 
+			    gint x,
+			    gint y);
+
+/* Function gets immediate child (either "internal" or "non-internal") at the coords, if any: */
+CongEditorArea*
+cong_editor_area_get_immediate_child_at (CongEditorArea *area,
+					 gint x,
+					 gint y);
+
+CongEditorArea*
+cong_editor_area_get_deepest_child_at (CongEditorArea *area,
+				       gint x,
+				       gint y);
 
 
 /* Handy utilities: */
@@ -153,6 +206,10 @@ cong_editor_area_get_gdk_window(CongEditorArea *editor_area);
 void
 cong_editor_area_protected_postprocess_add_internal_child (CongEditorArea *area,
 							   CongEditorArea *internal_child);
+
+void
+cong_editor_area_protected_set_parent (CongEditorArea *area,
+				       CongEditorArea *parent);
 
 G_END_DECLS
 

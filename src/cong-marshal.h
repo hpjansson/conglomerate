@@ -35,6 +35,14 @@ G_BEGIN_DECLS
    Marshalling functions
  */
 extern void
+cong_cclosure_marshal_BOOLEAN__POINTER (GClosure     *closure,
+					GValue       *return_value,
+					guint         n_param_values,
+					const GValue *param_values,
+					gpointer      invocation_hint,
+					gpointer      marshal_data);
+
+extern void
 cong_cclosure_marshal_VOID__CONGNODEPTR (GClosure     *closure,
 					 GValue       *return_value,
 					 guint         n_param_values,
