@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-03-05 David Malcolm
+
+	* global.h, tree.c, xmldata.c
+
+	Dubious initial attempt at property dialog for nodes
+	
 2003-03-04 David Malcolm on behalf of Doug Daniels
 
 	* global.h, popup.c, tree.c, xmldata.c

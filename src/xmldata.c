@@ -641,6 +641,78 @@ gboolean xml_add_required_children(CongDocument *doc, CongNodePtr node) {
 	return success;
 }
 		
+/**
+ * Helper function to get the xmlElementPtr within the DTD for a node
+ */
+xmlElementPtr xml_get_dtd_element(CongDocument *cong_doc, CongNodePtr node) {
+	xmlDocPtr doc;
+	xmlElementPtr elemDecl = NULL;
+	const xmlChar *prefix = NULL;
+	gboolean extsubset = FALSE;
+
+	/*  check cong_doc */
+	g_return_val_if_fail(cong_doc, NULL);
+
+	/*  check node */
+	g_return_val_if_fail(node, NULL);
+	
+	/*  check that node has embedded document */
+	g_return_val_if_fail(node->doc, NULL);
+
+	/*  set document */
+	doc = node->doc;
+	
+	/*  check that document has DTD */
+	g_return_val_if_fail(doc->intSubset || doc->extSubset, NULL);
+
+	if (node->type != XML_ELEMENT_NODE) { return NULL; }
+
+	/*  ensure element has a name */
+	g_return_val_if_fail(node->name, NULL);
+
+	/*
+	 * Fetch the declaration for the qualified name.
+	 */
+	if ((node->ns != NULL) && (node->ns->prefix != NULL)) {
+		prefix = node->ns->prefix;
+	}
+	
+	/*  search the internal subset DTD for a description of this elemenet */
+	if (prefix != NULL) {
+		elemDecl = xmlGetDtdQElementDesc(doc->intSubset,
+						 node->name, prefix);
+	}
+	
+	/*  if that didn't work, try the external subset */
+	if ((elemDecl == NULL) && (doc->extSubset != NULL)) {
+	    elemDecl = xmlGetDtdQElementDesc(doc->extSubset,
+		                             node->name, prefix);
+	    if (elemDecl != NULL) {
+		    extsubset = TRUE;
+	    }
+	}
+
+	/*
+	 * If the qualified name didn't work, try the
+	 * non-qualified name.
+	 * Fetch the declaration for the non qualified name
+	 * This is "non-strict" validation should be done on the
+	 * full QName but in that case being flexible makes sense.
+	 */
+	if (elemDecl == NULL) {
+		elemDecl = xmlGetDtdElementDesc(doc->intSubset, node->name);
+	}
+
+	if ((elemDecl == NULL) && (doc->extSubset != NULL)) {
+		elemDecl = xmlGetDtdElementDesc(doc->extSubset, node->name);
+		if (elemDecl != NULL) {
+			extsubset = TRUE;
+		}
+	}
+
+	return elemDecl;
+}
+
 
 /**
  * Helper function to add the required children
