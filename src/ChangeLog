@@ -1,3 +1,9 @@
+2003-08-05  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-entity-decl.c, cong-editor-area-entity-decl.h, cong-editor-area-text-comment.c, cong-editor-area-text-comment.h, cong-editor-node-comment.c, cong-editor-node-comment.h, cong-editor-node-dtd.c, cong-editor-node-dtd.h, cong-editor-node-entity-decl.c, cong-editor-node-entity-decl.h, Makefile.am
+
+	Initial support for comments and entities in the new editor widget
+
 2003-08-04  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-editor-area-text-fragment.c, cong-editor-area-text-fragment.h, cong-editor-node-text.c, cong-editor-node-text.h, cong-editor-widget3.c

@@ -25,6 +25,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-border.h \
   cong-editor-area-composer.h \
   cong-editor-area-container.h \
+  cong-editor-area-entity-decl.h \
   cong-editor-area-flow-holder.h \
   cong-editor-area-flow-holder-blocks.h \
   cong-editor-area-flow-holder-inlines.h \
@@ -33,6 +34,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-pixbuf.h \
   cong-editor-area-spacer.h \
   cong-editor-area-text.h   \
+  cong-editor-area-text-comment.h   \
   cong-editor-area-text-fragment.h   \
   cong-editor-area-span-tag.h \
   cong-editor-area-structural-tag.h \
@@ -43,11 +45,14 @@ conglomerate_SOURCES =      \
   cong-editor-child-policy-inline.h \
   cong-editor-line-fragments.h \
   cong-editor-node.h        \
+  cong-editor-node-comment.h \
   cong-editor-node-document.h \
+  cong-editor-node-dtd.h  \
   cong-editor-node-element.h \
   cong-editor-node-element-span.h \
   cong-editor-node-element-structural.h \
   cong-editor-node-element-unknown.h \
+  cong-editor-node-entity-decl.h \
   cong-editor-node-text.h        \
   cong-editor-node-unimplemented.h \
   cong-editor-widget.h	\
@@ -85,6 +90,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-border.c \
   cong-editor-area-composer.c \
   cong-editor-area-container.c \
+  cong-editor-area-entity-decl.c \
   cong-editor-area-flow-holder.c \
   cong-editor-area-flow-holder-blocks.c \
   cong-editor-area-flow-holder-inlines.c \
@@ -93,6 +99,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-pixbuf.c \
   cong-editor-area-spacer.c \
   cong-editor-area-text.c   \
+  cong-editor-area-text-comment.c   \
   cong-editor-area-text-fragment.c   \
   cong-editor-area-span-tag.c \
   cong-editor-area-structural-tag.c \
@@ -103,11 +110,14 @@ conglomerate_SOURCES =      \
   cong-editor-child-policy-inline.c \
   cong-editor-line-fragments.c \
   cong-editor-node.c        \
+  cong-editor-node-comment.c \
   cong-editor-node-document.c \
+  cong-editor-node-dtd.c  \
   cong-editor-node-element.c \
   cong-editor-node-element-span.c \
   cong-editor-node-element-structural.c \
   cong-editor-node-element-unknown.c \
+  cong-editor-node-entity-decl.c \
   cong-editor-node-text.c        \
   cong-editor-node-unimplemented.c \
   cong-editor-widget.c      \
