@@ -17,6 +17,8 @@ which gnome-autogen.sh || {
         echo "or get it from the GNOME CVS."
         exit 1
 }
-USE_GNOME2_MACROS=1 . gnome-autogen.sh
+
+# Ensure that we always configure with --enable-werror when building from CVS:
+USE_GNOME2_MACROS=1 . gnome-autogen.sh "$@" --enable-werror
 
 # last line of autogen.sh

@@ -1,3 +1,7 @@
+2004-06-18  David Malcolm  <david@davemalcolm.demon.co.uk>
+
+	* autogen.sh: Always use -Werror when building from CVS
+
 2004-06-17  David Malcolm  <david@davemalcolm.demon.co.uk>
 
 	* configure.in: Fixed option for -Werror (see bug 134747)
