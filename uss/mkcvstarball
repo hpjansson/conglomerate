@@ -32,7 +32,7 @@ do
   mv ${TM}.tm ${TM}
 done
 
-TARBALL=$( ls -t *.tar.gz | head -1 )
-echo put here commands for uploading ${TARBALL}
+# show the MD5 checksum of the fresh tarball
+md5sum $( ls -t *.tar.gz | head -1 )
 
 # eof
