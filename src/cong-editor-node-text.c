@@ -813,7 +813,13 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 	CongEditorAreaTextFragment *editor_area_text_fragment = CONG_EDITOR_AREA_TEXT_FRAGMENT(editor_area);
 
 	if (!(event->state & GDK_BUTTON1_MASK)) {
-		return FALSE;
+		CongEditorWidget3* editor_widget;			
+
+		editor_widget = cong_editor_area_get_widget (editor_area);			
+
+		cong_editor_widget3_set_prehighlight_editor_area (editor_widget,
+								  editor_area);
+		return TRUE;
 	}
 
 	doc = cong_editor_area_get_document(editor_area);

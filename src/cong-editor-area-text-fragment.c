@@ -243,6 +243,8 @@ render_self (CongEditorArea *area,
 		}
 	}
 
+	cong_editor_area_debug_render_state (area);
+
 }
 
 static gint

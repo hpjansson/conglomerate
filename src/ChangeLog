@@ -1,3 +1,9 @@
+2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-editor-area-text-fragment.c, cong-editor-node-text.c
+
+	Initial attempt to do prelighting of text fragments
+
 2003-10-21  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* plugin-cleanup-source.c
