@@ -157,8 +157,11 @@ install-data-local:
 	    echo '-- Installing '$$i ; \
 	    $(INSTALL_DATA) $$i $(DESTDIR)$(TARGET_DIR); \
 	  done; \
-	  echo '-- Installing $(srcdir)/html/index.sgml' ; \
-	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR); \
+	  if test -f $(srcdir)/html/index.sgml; \
+	    then echo '-- Installing $(srcdir)/html/index.sgml' ; \
+	    $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR); \
+	  else echo '-- No index.sgml to install'; \
+	  fi; \
 	fi)
 
 #

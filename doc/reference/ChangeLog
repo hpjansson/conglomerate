@@ -1,3 +1,7 @@
+2003-11-04  Boris Goldowsky  <boris@alum.mit.edu>
+
+	* Makefile.am: don't die if index.sgml is missing.
+
 2003-10-28  Geert Stappers <stappers@stappers.nl>
 
 	* Makefile.am:
