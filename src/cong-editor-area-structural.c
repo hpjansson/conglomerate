@@ -84,6 +84,11 @@ static void
 on_expansion_changed (CongEditorAreaExpander *area_expander,
 		      gpointer user_data);
 
+
+static void 
+state_changed (CongEditorArea *area);
+
+
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaStructural, 
 			cong_editor_area_structural,
@@ -100,6 +105,7 @@ cong_editor_area_structural_class_init (CongEditorAreaStructuralClass *klass)
 	area_klass->calc_requisition = calc_requisition;
 	area_klass->allocate_child_space = allocate_child_space;
 	area_klass->for_all = for_all;
+	area_klass->state_changed = state_changed;
 
 	container_klass->add_child = add_child;
 }
@@ -458,4 +464,17 @@ on_expansion_changed (CongEditorAreaExpander *area_expander,
 	
 	cong_editor_area_flush_requisition_cache (CONG_EDITOR_AREA(area_structural),
 						  GTK_ORIENTATION_VERTICAL );
+}
+
+static void 
+state_changed (CongEditorArea *area)
+{
+	CongEditorAreaStructural *area_structural = CONG_EDITOR_AREA_STRUCTURAL (area);
+	GtkStateType new_state = cong_editor_area_get_state (area);	
+
+	/* Transmit state to pixbuf: */
+	if (PRIVATE(area_structural)->title_pixbuf) {
+		cong_editor_area_set_state (PRIVATE(area_structural)->title_pixbuf,
+					    new_state);
+	}
 }

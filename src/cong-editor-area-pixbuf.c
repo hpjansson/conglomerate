@@ -26,12 +26,14 @@
 #include "cong-editor-area-pixbuf.h"
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
+#include "cong-eel-graphic-effects.h"
 
 #define PRIVATE(x) ((x)->private)
 
 struct CongEditorAreaPixbufDetails
 {
-	GdkPixbuf *pixbuf;
+	GdkPixbuf *pixbuf_states[5];
+	gint pixbuf_size[2];
 };
 
 /* Method implementation prototypes: */
@@ -43,6 +45,14 @@ static gint
 calc_requisition (CongEditorArea *area, 
 		  GtkOrientation orientation,
 		  int width_hint);
+
+GdkPixbuf*
+get_pixbuf (CongEditorAreaPixbuf *area_pixbuf);
+
+GdkPixbuf*
+generate_pixbuf_for_state (GdkPixbuf *normal_pixbuf,
+			   GtkStateType state);
+
 
 /* GObject boilerplate stuff: */
 GNOME_CLASS_BOILERPLATE(CongEditorAreaPixbuf, 
@@ -76,8 +86,11 @@ cong_editor_area_pixbuf_construct (CongEditorAreaPixbuf *area_pixbuf,
 	cong_editor_area_construct (CONG_EDITOR_AREA(area_pixbuf),
 				    editor_widget);
 
-	PRIVATE(area_pixbuf)->pixbuf = pixbuf;
+	PRIVATE(area_pixbuf)->pixbuf_states [GTK_STATE_NORMAL] = pixbuf;
 	g_object_ref( G_OBJECT(pixbuf));
+
+	PRIVATE(area_pixbuf)->pixbuf_size[GTK_ORIENTATION_HORIZONTAL] = gdk_pixbuf_get_width(pixbuf);
+	PRIVATE(area_pixbuf)->pixbuf_size[GTK_ORIENTATION_VERTICAL] = gdk_pixbuf_get_height(pixbuf);
 
 	return CONG_EDITOR_AREA (area_pixbuf);
 }
@@ -100,7 +113,8 @@ render_self (CongEditorArea *area,
 	CongEditorAreaPixbuf *area_pixbuf = CONG_EDITOR_AREA_PIXBUF(area);
 	GdkWindow *window = cong_editor_area_get_gdk_window(area);
 	const GdkRectangle* rect = cong_editor_area_get_window_coords (area);
-	GdkPixbuf *pixbuf = PRIVATE(area_pixbuf)->pixbuf;
+	GdkPixbuf *pixbuf = get_pixbuf (area_pixbuf);
+
 
 	cong_eel_draw_pixbuf (window,
 			      NULL,
@@ -122,13 +136,45 @@ calc_requisition (CongEditorArea *area,
 		  int width_hint)
 {
 	CongEditorAreaPixbuf *area_pixbuf = CONG_EDITOR_AREA_PIXBUF(area);
-	GdkPixbuf *pixbuf = PRIVATE(area_pixbuf)->pixbuf;
 
-	g_assert (pixbuf);
+	return PRIVATE(area_pixbuf)->pixbuf_size[orientation];
+}
 
-	if (orientation==GTK_ORIENTATION_HORIZONTAL) {
-		return gdk_pixbuf_get_width(pixbuf);
-	} else {
-		return gdk_pixbuf_get_height(pixbuf);
+GdkPixbuf*
+get_pixbuf (CongEditorAreaPixbuf *area_pixbuf)
+{
+	GtkStateType state = cong_editor_area_get_state (CONG_EDITOR_AREA (area_pixbuf));
+
+	/* Lazily generate versions of the pixbuf: */
+	if (NULL==PRIVATE(area_pixbuf)->pixbuf_states[state]) {
+		PRIVATE(area_pixbuf)->pixbuf_states[state] = generate_pixbuf_for_state (PRIVATE(area_pixbuf)->pixbuf_states[GTK_STATE_NORMAL],
+											state);
+	}
+
+	return PRIVATE(area_pixbuf)->pixbuf_states[state];
+}
+
+GdkPixbuf*
+generate_pixbuf_for_state (GdkPixbuf *normal_pixbuf,
+			   GtkStateType state)
+{
+	g_return_val_if_fail (normal_pixbuf, NULL);
+
+	switch (state) {
+	default: g_assert_not_reached();
+
+	case GTK_STATE_NORMAL:
+		g_assert_not_reached();
+	case GTK_STATE_INSENSITIVE:
+		g_assert_not_reached();
+
+	case GTK_STATE_ACTIVE:
+	case GTK_STATE_SELECTED:
+		/* Simply return the input (with an extra ref): */
+		g_object_ref (G_OBJECT (normal_pixbuf));
+		return normal_pixbuf;
+		
+	case GTK_STATE_PRELIGHT:
+		return eel_create_spotlight_pixbuf (normal_pixbuf);
 	}
 }

@@ -188,8 +188,8 @@ cong_editor_area_class_init (CongEditorAreaClass *klass)
 							 1, GTK_TYPE_ORIENTATION);
 	signals[STATE_CHANGED] = g_signal_new ("state_changed",
 					       CONG_EDITOR_AREA_TYPE,
-					       G_SIGNAL_RUN_FIRST,
-					       0,
+					       G_SIGNAL_RUN_LAST,
+					       G_STRUCT_OFFSET(CongEditorAreaClass, state_changed),
 					       NULL, NULL,
 					       g_cclosure_marshal_VOID__VOID,
 					       G_TYPE_NONE,

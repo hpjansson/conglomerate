@@ -86,6 +86,8 @@ struct CongEditorAreaClass
 	/* Signal emission hooks: */
 	void (*flush_requisition_cache) (CongEditorArea *area,
 					 GtkOrientation orientation);
+
+	void (*state_changed) (CongEditorArea *area);
 };
 
 GType

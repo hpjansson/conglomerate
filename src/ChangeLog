@@ -1,5 +1,9 @@
 2003-10-22  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-editor-area-pixbuf.c, cong-editor-area-structural.c, cong-editor-area.c, cong-editor-area.h
+
+	Prelight for icons in structural headers
+	
 	* cong-eel-graphic-effects.c, cong-eel-graphic-effects.h, Makefile.am
 
 	New files, copied and pasted from eel
