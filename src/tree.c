@@ -28,20 +28,18 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 {
 	CongTreeView *cong_tree_view;
 	CongDocument *doc;
-	CongDispspec *ds;
 
 	CongNodePtr text_node, new_node;
-	char *s;
+	char *label;
 
+	label = g_object_get_data(G_OBJECT(widget),
+				  "label");
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
-	ds = cong_document_get_dispspec(doc);
 	
-	s = pick_structural_tag(ds);
-	if (!s) return(TRUE);
-
+	
 	/* GREP FOR MVC */
 
 	/* Text node before new element */
@@ -49,7 +47,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 	cong_document_node_add_after(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(s);
+	new_node = cong_node_new_element(label);
 	cong_document_node_add_after(doc, new_node, text_node);
 
 	/* Text node inside new element */
@@ -70,19 +68,16 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 {
 	CongTreeView *cong_tree_view;
 	CongDocument *doc;
-	CongDispspec *ds;
 
 	CongNodePtr text_node, new_node;
-	char *s;
+	char *label;
 
+	label = g_object_get_data(G_OBJECT(widget),
+				  "label");
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 					   "cong_tree_view");
 	g_assert(cong_tree_view);				
 	doc = CONG_VIEW(cong_tree_view)->doc;
-	ds = cong_document_get_dispspec(doc);
-
-	s = pick_structural_tag(ds);
-	if (!s) return(TRUE);
 
 	/* GREP FOR MVC */
 
@@ -91,7 +86,7 @@ gint tree_new_sub_element(GtkWidget *widget, CongNodePtr tag)
 	cong_document_node_set_parent(doc, text_node, tag);
 
 	/* New element */
-	new_node = cong_node_new_element(s);
+	new_node = cong_node_new_element(label);
 	cong_document_node_set_parent(doc, new_node, tag);
 
 	/* Text node inside new element */

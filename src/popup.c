@@ -346,7 +346,7 @@ gint tree_popup_show(GtkWidget *widget, GdkEvent *event)
 }
 
 /* the popup items have the data "cong_tree_view" set on them: */
-static void add_item_to_popup(GtkMenu *menu,
+static GtkWidget* add_item_to_popup(GtkMenu *menu,
 			      const gchar *label,
 			      gint (*func)(GtkWidget *widget, CongNodePtr tag),
 			      CongTreeView *cong_tree_view,
@@ -360,9 +360,11 @@ static void add_item_to_popup(GtkMenu *menu,
 			  "cong_tree_view",
 			  cong_tree_view);
 	gtk_widget_show(item);
+
+	return item;
 }
 
-static void add_stock_item_to_popup(GtkMenu *menu,
+static GtkWidget* add_stock_item_to_popup(GtkMenu *menu,
 				    const gchar *stock_id,
 				    gint (*func)(GtkWidget *widget, CongNodePtr tag),
 				    CongTreeView *cong_tree_view,
@@ -377,17 +379,55 @@ static void add_stock_item_to_popup(GtkMenu *menu,
 			  "cong_tree_view",
 			  cong_tree_view);
 	gtk_widget_show(item);
+
+	return item;
 }
+
+
+GtkWidget *structural_tag_popup_init(CongDispspec *ds, gint (*callback)(GtkWidget *widget, CongNodePtr tag),
+				     CongTreeView *cong_tree_view,
+				     CongNodePtr x)
+{
+	GtkWidget *popup, *item;
+	CongDispspecElement *n0;
+  
+	popup = gtk_menu_new();
+	gtk_menu_set_title(GTK_MENU(popup), "Sub-element menu");
+	
+	/* Window -> vbox -> buttons */
+	for (n0 = cong_dispspec_get_first_element(ds); n0; n0 = cong_dispspec_element_next(n0)) {
+		if (cong_dispspec_element_is_structural(n0)) {
+			item = add_item_to_popup(GTK_MENU(popup),
+						 cong_dispspec_element_username(n0),
+						 callback,
+						 cong_tree_view,
+						 x);
+			g_object_set_data(G_OBJECT(item),
+					  "label",
+					  cong_dispspec_element_tagname(n0));
+
+		}
+	}
+	gtk_widget_show(popup);
+	return popup;
+}
+
 
 GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 {
 	GtkMenu *tpopup;
-	GtkWidget *item, *w0;
+	GtkWidget *item, *w0, *sub_popup;
+	CongDocument *doc;
+	CongDispspec *ds;
+
+	g_assert(cong_tree_view);				
+	doc = CONG_VIEW(cong_tree_view)->doc;
+	ds = cong_document_get_dispspec(doc);
 
 	tpopup = GTK_MENU(gtk_menu_new());
 	gtk_menu_set_title(GTK_MENU(tpopup), "Structure menu");
 
-#if 1
+
 	add_stock_item_to_popup(tpopup,
 				GTK_STOCK_PROPERTIES,
 				tree_properties,
@@ -401,9 +441,7 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 	gtk_widget_set_sensitive(item, 0);
 	gtk_widget_show(w0);
 	gtk_widget_show(item);
-#endif
-	
-#if 1
+
 	add_stock_item_to_popup(tpopup,
 				GTK_STOCK_CUT,
 				tree_cut,
@@ -429,52 +467,6 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 			  tree_paste_after,
 			  cong_tree_view,
 			  x);
-#else
-	item = gtk_menu_item_new_with_label("Cut");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_cut), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-
-	item = gtk_menu_item_new_with_label("Copy");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_copy), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-
-	item = gtk_menu_item_new_with_label("Paste into");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_paste_under), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-
-	item = gtk_menu_item_new_with_label("Paste before");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_paste_before), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-
-	item = gtk_menu_item_new_with_label("Paste after");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_paste_after), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-#endif
 
 	item = gtk_menu_item_new();
 	w0 = gtk_hseparator_new();
@@ -484,36 +476,24 @@ GtkWidget* tree_popup_init(CongTreeView *cong_tree_view, CongNodePtr x)
 	gtk_widget_show(w0);
 	gtk_widget_show(item);
 
-#if 1
-	add_item_to_popup(tpopup,
-			  "New sub-element",
-			  tree_new_sub_element,
-			  cong_tree_view,
-			  x);
-	add_item_to_popup(tpopup,
-			  "New sibling",
-			  tree_new_sibling,
-			  cong_tree_view,
-			  x);
-#else
-	item = gtk_menu_item_new_with_label("New sub-element");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_new_sub_element), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
+	item = add_item_to_popup(tpopup,
+				 "New sub-element",
+				 NULL,
+				 cong_tree_view,
+				 x);
+	
+	sub_popup = structural_tag_popup_init(ds, tree_new_sub_element, cong_tree_view, x);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
 
-	item = gtk_menu_item_new_with_label("New sibling");
-	gtk_menu_append(GTK_MENU(tpopup), item);
-	gtk_signal_connect(GTK_OBJECT(item), "activate",
-			   GTK_SIGNAL_FUNC(tree_new_sibling), x);
-	g_object_set_data(G_OBJECT(item),
-			  "cong_tree_view",
-			  cong_tree_view);
-	gtk_widget_show(item);
-#endif
+	
+	item = add_item_to_popup(tpopup,
+				 "New sibling",
+				 NULL,
+				 cong_tree_view,
+				 x);
+
+	sub_popup = structural_tag_popup_init(ds, tree_new_sibling, cong_tree_view, x);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_popup);
 
 	return GTK_WIDGET(tpopup);
 }

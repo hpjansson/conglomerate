@@ -648,56 +648,6 @@ void cong_dispspec_init(TTREE *ds)
 char *section_str = "section";
 
 
-char *tag_picked_name;
-
-void tag_new_picked(GtkWidget *w, char *name)
-{
-	tag_picked_name = name;
-	gtk_main_quit();
-}
-
-GtkWidget *pickstruct;
-
-#if 1
-char *pick_structural_tag(CongDispspec *ds)
-{
-  GtkWidget *w0, *w1;
-  CongDispspecElement *n0;
-  
-	tag_picked_name = 0;
-	
-  pickstruct = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_container_set_border_width(GTK_CONTAINER(pickstruct), 10);
-  gtk_widget_set_usize(GTK_WIDGET(pickstruct), 240, 740);
-  gtk_window_set_title(GTK_WINDOW(pickstruct), "Select element");
-  gtk_window_set_position(GTK_WINDOW(pickstruct), GTK_WIN_POS_MOUSE);
-  gtk_window_set_modal(GTK_WINDOW(pickstruct), 1);
-  gtk_window_set_policy(GTK_WINDOW(pickstruct), 0, 0, 1);
-  
-  /* --- Window -> vbox --- */
-
-  w0 = gtk_vbox_new(TRUE, 1);
-  gtk_container_add(GTK_CONTAINER(pickstruct), w0);
-  gtk_widget_show(w0);
-
-  /* Window -> vbox -> buttons */
-  for (n0 = cong_dispspec_get_first_element(ds); n0; n0 = cong_dispspec_element_next(n0)) {
-	  if (cong_dispspec_element_is_structural(n0)) {
-		  w1 = gtk_button_new_with_label(cong_dispspec_element_username(n0));
-		  gtk_box_pack_start(GTK_BOX(w0), w1, TRUE, TRUE, 0);
-		  gtk_widget_show(w1);
-		  gtk_signal_connect(GTK_OBJECT(w1), "clicked", (GtkSignalFunc) tag_new_picked, (gpointer) cong_dispspec_element_tagname(n0));
-	  }
-  }
-
-  gtk_widget_show(pickstruct);
-	gtk_main();
-	gtk_widget_destroy(pickstruct);
-  return(tag_picked_name);
-}
-#endif
-
-
 #ifdef WINDOWS_BUILD
                                                                                 
 int strcasestr(char *haystack, char *needle)                                    
