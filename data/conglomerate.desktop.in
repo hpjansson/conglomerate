@@ -1,6 +1,6 @@
 [Desktop Entry]
 _Name=Conglomerate XML Editor
-_Comment=Edit xml files
+_Comment=Edit XML files
 Exec=conglomerate %U
 Terminal=0
 Type=Application
