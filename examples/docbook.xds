@@ -40,7 +40,8 @@
 		</element>
 		<element tag="abstract" type="structural" color="a0b0c0">
 		</element>
-		<element tag="para" type="structural" color="a0b0c0">
+		<element tag="para" type = "paragraph">
+			<name locale="en">Paragraph</name>
 		</element>
 		<element tag="legalnotice" type="structural" color="a0b0c0">
 		</element>

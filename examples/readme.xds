@@ -69,6 +69,13 @@
 			<name locale="en">Optimistic</name>
 		</element>
 
+		<!-- The paragraph separator: -->
+
+		<element tag="p" type = "paragraph">
+			<name locale="en">Paragraph</name>
+		</element>
+		
+
 	</element-list>
 
 </dispspec>
