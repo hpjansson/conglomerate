@@ -2,12 +2,13 @@
 # tuned debian/rules that uses debhelper.
 # GNU copyright 1997 to 1999 by Joey Hess.
 
+PACKAGE = conglomerate
+
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
 include /usr/share/dpatch/dpatch.make
 # for the targets `patch`', `patch-stamp' and `unpatch'.
-PACKAGE = conglomerate
 
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
