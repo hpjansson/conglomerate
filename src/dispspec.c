@@ -3,10 +3,11 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include <ttree.h>
 #include <xml.h>
-#include "global.h"
 
+#include "global.h"
 
 TTREE *get_upper_section(TTREE *x)
 {
@@ -24,19 +25,43 @@ TTREE *get_upper_section(TTREE *x)
   return(x);
 }
 
+#if 0
+#define DS_DEBUG_MSG1(x)    g_message((x))
+#define DS_DEBUG_MSG2(x, a) g_message((x), (a))
+#else
+#define DS_DEBUG_MSG1(x)    ((void)0)
+#define DS_DEBUG_MSG2(x, a) ((void)0)
+#endif
+
 int ds_element_structural(TTREE *ds, char *name)
 {
   TTREE *n0;
+
+  DS_DEBUG_MSG2( "ds_element_structural(ds,\"%s\")\n", name );
   
   n0 = ttree_node_find1(ds, name, strlen(name), 0);
-  if (!n0) return(0);
+  if (!n0) {
+    DS_DEBUG_MSG1("not found in dispspec, so not structural\n");
+    return(0);
+  }
   
   n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) return(0);
+  if (!n0) {
+    DS_DEBUG_MSG1("\"type\" not found, so not structural\n");
+    return(0);
+  }
   
-  if (!n0->child) return(0);
+  if (!n0->child) {
+    DS_DEBUG_MSG1("No child found, so not structural\n");
+    return(0);
+  }
   
-  if (!strcasecmp("structural", n0->child->data)) return(1);
+  if (!strcasecmp("structural", n0->child->data)) {
+    DS_DEBUG_MSG1("Child has \"structural\" text, so it is structural\n");
+    return(1);
+  }
+
+  DS_DEBUG_MSG1("Falling through, so not structural\n");
   
   return(0);
 }
@@ -352,7 +377,6 @@ void tag_new_picked(GtkWidget *w, char *name)
 	gtk_main_quit();
 }
 
-
 GtkWidget *pickstruct;
 
 
@@ -363,7 +387,7 @@ char *pick_structural_tag()
   
 	tag_picked_name = 0;
 	
-  pickstruct = gtk_window_new(GTK_WINDOW_DIALOG);
+  pickstruct = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_container_set_border_width(GTK_CONTAINER(pickstruct), 10);
   gtk_widget_set_usize(GTK_WIDGET(pickstruct), 240, 240);
   gtk_window_set_title(GTK_WINDOW(pickstruct), "Select element");
@@ -421,5 +445,4 @@ int strcasestr(char *haystack, char *needle)
 	                                                                                
 	  return(r);                                                                    
 }
-                                                                                
-#endif       
+#endif
