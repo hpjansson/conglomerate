@@ -843,7 +843,7 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
-GtkWidget* embedded_new(CongNodePtr x,CongDispspec *ds)
+GtkWidget* embedded_new(CongDocument *doc, CongNodePtr x,CongDispspec *ds)
 {
 	GtkWidget *embedded;
 
@@ -870,10 +870,33 @@ GtkWidget* embedded_new(CongNodePtr x,CongDispspec *ds)
 	GtkEntry* entry;
 	GtkButton* browse;
 
-	char* file_ref = "../src/ilogo.c"; /* FIXME: extract from file */
-	char* moniker = g_strdup_printf("file:%s",file_ref);
+	char* file_ref; 
+	char* doc_path;
+	char* moniker;
 
 	g_message("embedded_new\n");
+
+#if 1
+	file_ref = cong_node_get_attribute(x, "fileref"); /* FIXME: hardcoded attribute name for now */
+
+	if (file_ref) {
+		g_message("Got fileref \"%s\"\n", file_ref);
+	} else {
+		file_ref= g_strdup("");
+	}
+
+	doc_path = cong_document_get_parent_uri(doc);
+
+	moniker = g_strdup_printf("%s/%s",doc_path,file_ref);
+
+	g_free(doc_path);
+
+	g_message("Trying moniker: \"%s\"\n",moniker);
+#else
+	file_ref = "../src/ilogo.c"; /* FIXME: extract from file */
+	moniker = g_strdup_printf("file:%s",file_ref);
+#endif
+
 
 
 	vbox = GTK_VBOX(gtk_vbox_new(FALSE,0));
@@ -901,6 +924,8 @@ GtkWidget* embedded_new(CongNodePtr x,CongDispspec *ds)
 
 	gtk_box_pack_start(GTK_BOX(vbox), embedded, FALSE, TRUE, 0);
 
+	g_free(file_ref);
+
 	return GTK_WIDGET(vbox);
 #else
 	/* Create a simple test widget: */
@@ -909,7 +934,7 @@ GtkWidget* embedded_new(CongNodePtr x,CongDispspec *ds)
 #endif
 }
 
-GtkWidget *xv_section_embedded(CongNodePtr x,CongDispspec *ds, int collapsed)
+GtkWidget *xv_section_embedded(CongDocument *doc, CongNodePtr x,CongDispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	GtkWidget *embedded;
@@ -921,7 +946,7 @@ GtkWidget *xv_section_embedded(CongNodePtr x,CongDispspec *ds, int collapsed)
 
 	gtk_box_pack_start(GTK_BOX(hbox), line, FALSE, TRUE, 0);
 
-	embedded = embedded_new(x, ds);
+	embedded = embedded_new(doc, x, ds);
 #if 0
 	gtk_box_pack_start(GTK_BOX(hbox), embedded, FALSE, TRUE, 0);
 #else
@@ -1018,7 +1043,7 @@ GtkWidget *xv_element_new(CongDocument *doc,
 				gtk_box_pack_start(GTK_BOX(hbox), poot, TRUE, TRUE, 0);
 				/* xv_style_r(poot, style_white); */
 				
-				sub = xv_section_embedded(x,ds,collapsed);
+				sub = xv_section_embedded(doc, x,ds,collapsed);
 				gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
 					
 				sub = xv_section_tail(ds, x);

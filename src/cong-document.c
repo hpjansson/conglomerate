@@ -166,6 +166,29 @@ cong_document_get_filename(CongDocument *doc)
 	}
 }
 
+gchar*
+cong_document_get_parent_uri(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	if (doc->url) {
+		gchar *filename;
+		gchar *path;
+		GnomeVFSURI *uri = gnome_vfs_uri_new(doc->url);
+		
+		cong_error_split_uri(uri, &filename, &path);
+
+		gnome_vfs_uri_unref(uri);
+
+		g_free(filename);
+		
+		return path;
+
+	} else {
+		return g_strdup(".");
+	}
+}
+
 void
 cong_document_save(CongDocument *doc, const char* filename)
 {

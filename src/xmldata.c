@@ -133,6 +133,19 @@ const gchar *cong_node_type_description(enum CongNodeType node_type)
 
 }
 
+/* Methods for accessing attribute values: */
+CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attribute_name)
+{
+	g_return_val_if_fail(node, NULL);
+	g_return_val_if_fail(attribute_name, NULL);
+
+#if NEW_XML_IMPLEMENTATION
+	return xmlGetProp(node, attribute_name);
+#else
+	return NULL; /* not implemented */
+#endif
+}
+
 void cong_node_self_test(CongNodePtr node)
 {
 #if NEW_XML_IMPLEMENTATION

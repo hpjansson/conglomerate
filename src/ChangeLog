@@ -1,4 +1,14 @@
 creating ChangeLog
+2002-11-02 David Malcolm
+
+	* cong-document.c, global.h, xmldata.c, xmlview.c
+
+	Fixes for document embedding, committed the port to libxml2
+
+	* cong-primary-window.c
+
+	Overhaul of menus, icons for application now should appear in window managers, toolbars etc
+	
 2002-11-01 David Malcolm
 
 	* Makefile.am, cong-document.c, cursor.c, dispspec.c, global.h, main.c, new_doc.c, open.c, popup.c, save.c, select.c, tree.c, xmldata.c, xmledit.c, xmlview.c

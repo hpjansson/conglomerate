@@ -24,8 +24,8 @@ enum
 	TREEVIEW_N_COLUMNS
 };
 
-#define NEW_LOOK 0
-#define NEW_XML_IMPLEMENTATION 0
+#define NEW_LOOK 1
+#define NEW_XML_IMPLEMENTATION 1
 #define USE_PANGO 0
 
 enum CongNodeType
@@ -73,6 +73,7 @@ typedef struct CongEditorView CongEditorView;
 
 #if NEW_XML_IMPLEMENTATION
 typedef xmlNodePtr CongNodePtr;
+typedef xmlChar CongXMLChar;
 
 const char* cong_node_name(CongNodePtr node);
 CongNodePtr cong_node_prev(CongNodePtr node);
@@ -83,6 +84,7 @@ CongNodePtr cong_node_parent(CongNodePtr node);
 #include <ttree.h>
 #include <xml.h>
 typedef TTREE* CongNodePtr;
+typedef char CongXMLChar;
 
 #define cong_node_name(t) xml_frag_name(t)
 #define cong_node_prev(t) xml_frag_prev(t)
@@ -96,7 +98,11 @@ enum CongNodeType cong_node_type(CongNodePtr node);
 /* Handy debug method for writing log info: */
 const gchar *cong_node_type_description(enum CongNodeType node_type);
 
+/* Methods for accessing attribute values: */
+CongXMLChar* cong_node_get_attribute(CongNodePtr node, const CongXMLChar* attribute_name);
+/* caller responsible for frreing; will be NULL if not found in node and no default in DTD available */
 
+/* Selftest methods: */
 void cong_node_self_test(CongNodePtr node);
 void cong_node_self_test_recursive(CongNodePtr node);
 
@@ -207,6 +213,10 @@ cong_document_get_dispspec(CongDocument *doc);
 
 gchar*
 cong_document_get_filename(CongDocument *doc);
+/* caller is responsible for freeeing */
+
+gchar*
+cong_document_get_parent_uri(CongDocument *doc);
 /* caller is responsible for freeeing */
 
 void
