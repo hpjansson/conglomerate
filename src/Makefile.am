@@ -22,6 +22,7 @@ conge_SOURCES =             \
   cong-eel.h                \
   cong-error-dialog.h       \
   cong-font.h               \
+  cong-graph.h              \
   cong-location.h           \
   cong-node.h               \
   cong-plugin.h             \
@@ -49,8 +50,10 @@ conge_SOURCES =             \
   cong-file-import.c        \
   cong-file-print.c         \
   cong-font.c               \
+  cong-graph.c              \
   cong-location.c           \
   cong-menus.c              \
+  cong-parser-error.c       \
   cong-plugin.c             \
   cong-primary-window.c     \
   cong-progress-checklist.c \
@@ -77,9 +80,14 @@ conge_SOURCES =             \
   xmledit.c                 \
   xmlload.c                 \
   xmlview.c                 \
+  plugin-convert-case.c     \
   plugin-docbook.c          \
+  plugin-empty.c            \
   plugin-lists.c            \
+  plugin-sgml.c             \
   plugin-tests.c            \
+  plugin-validate.c         \
+  plugin-website.c          \
   plugin-xsl.c              \
   main.c		    \
   $(printing_sources)

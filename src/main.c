@@ -295,17 +295,37 @@ void main_load_plugins(void)
 			plugin_docbook_plugin_register,
 			plugin_docbook_plugin_configure);
 
+	register_plugin("empty",
+			plugin_empty_plugin_register,
+			plugin_empty_plugin_configure);
+
 	register_plugin("lists",
 			plugin_lists_plugin_register,
 			plugin_lists_plugin_configure);
+
+	register_plugin("sgml",
+			plugin_sgml_plugin_register,
+			plugin_sgml_plugin_configure);
 
 	register_plugin("tests",
 			plugin_tests_plugin_register,
 			plugin_tests_plugin_configure);
 
+	register_plugin("validate",
+			plugin_validate_plugin_register,
+			plugin_validate_plugin_configure);
+
+	register_plugin("website",
+			plugin_website_plugin_register,
+			plugin_website_plugin_configure);
+
 	register_plugin("xsl",
 			plugin_xsl_plugin_register,
 			plugin_xsl_plugin_configure);
+
+	register_plugin("convert-case",
+			plugin_convert_case_plugin_register,
+			plugin_convert_case_plugin_configure);
 }
 
 int main( int   argc,

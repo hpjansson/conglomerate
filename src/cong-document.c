@@ -17,7 +17,7 @@ gboolean cong_xml_selftest_doc(xmlDocPtr xml_doc, CongXMLSelfTestCallback selfte
 gboolean cong_xml_selftest_node(xmlNodePtr node, CongXMLSelfTestCallback selftest_callback)
 {
 	/* Test this node: */
-	if (node->content) {
+	if (node->content && (node->type!=XML_ATTRIBUTE_DECL)) {
 		/* g_message("testing node content\"%s\"", node->content); */
 		if (!g_utf8_validate(node->content, -1, NULL)) {
 			if (selftest_callback) {
@@ -88,7 +88,9 @@ cong_document_new_from_xmldoc(xmlDocPtr xml_doc, CongDispspec *ds, const gchar *
 	CongDocument *doc;
 
 	g_return_val_if_fail(xml_doc!=NULL, NULL);
+#if 0
 	g_return_val_if_fail(cong_xml_selftest_doc(xml_doc, NULL), NULL);
+#endif
 
 	doc = g_new0(struct CongDocument,1);
 
@@ -253,6 +255,20 @@ cong_document_get_parent_uri(CongDocument *doc)
 	} else {
 		return g_strdup(".");
 	}
+}
+
+const CongXMLChar*
+cong_document_get_dtd_public_identifier(CongDocument *doc)
+{
+	g_return_val_if_fail(doc, NULL);
+
+	g_assert(doc->xml_doc);
+
+	if (NULL==doc->xml_doc->extSubset) {
+		return NULL;
+	}
+
+	return doc->xml_doc->extSubset->ExternalID;
 }
 
 void

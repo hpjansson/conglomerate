@@ -51,6 +51,7 @@ struct CongPlugin
 #endif
 	GList *list_of_thumbnailer; /* ptrs of type CongThumnbailer */
 	GList *list_of_editor_element; /* ptrs of type CongPluginEditorElement */
+	GList *list_of_tool; /* ptrs of type CongTool */
 };
 
 struct CongFunctionality
@@ -108,6 +109,17 @@ struct CongPluginEditorElement
 {
 	CongFunctionality functionality; /* base class */
 	CongEditorElementFactoryMethod make_element;
+	gpointer user_data;
+};
+
+struct CongTool
+{
+	CongFunctionality functionality; /* base class */
+	const gchar *menu_text;
+	const gchar *tooltip_text;
+	const gchar *tooltip_further_text;
+	CongToolDocumentFilter doc_filter;
+	CongToolActionCallback action_callback;
 	gpointer user_data;
 };
 
@@ -205,6 +217,18 @@ void cong_plugin_manager_for_each_print_method(CongPluginManager *plugin_manager
 	}
 }
 #endif
+
+void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data)
+{
+	GList *iter;
+	g_return_if_fail(plugin_manager);
+	g_return_if_fail(callback);
+
+	for (iter=plugin_manager->list_of_plugin; iter; iter = iter->next) {
+		cong_plugin_for_each_tool(iter->data, callback, user_data);
+	}
+}
+
 
 /* Implementation of CongPlugin: */
 CongDocumentFactory *cong_plugin_register_document_factory(CongPlugin *plugin, 
@@ -371,6 +395,44 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 
 }
 
+CongTool *cong_plugin_register_tool(CongPlugin *plugin,
+				    const gchar *name, 
+				    const gchar *description,
+				    const gchar *functionality_id,
+				    const gchar *menu_text,
+				    const gchar *tooltip_text,
+				    const gchar *tooltip_further_text,
+				    CongToolDocumentFilter doc_filter,
+				    CongToolActionCallback action_callback,
+				    gpointer user_data)
+{
+	CongTool *tool;
+
+	g_return_val_if_fail(plugin, NULL);
+	g_return_val_if_fail(name, NULL);
+	g_return_val_if_fail(description, NULL);
+	g_return_val_if_fail(functionality_id, NULL);
+
+        tool = g_new0(CongTool,1);
+
+	tool->functionality.plugin = plugin;
+	tool->functionality.name = g_strdup(name);
+	tool->functionality.description = g_strdup(description);
+	tool->functionality.functionality_id = g_strdup(functionality_id);
+	tool->menu_text = g_strdup(menu_text);
+	tool->tooltip_text = g_strdup(tooltip_text);
+	tool->tooltip_further_text = g_strdup(tooltip_further_text);
+	tool->doc_filter = doc_filter;
+	tool->action_callback = action_callback;
+	tool->user_data = user_data;
+
+	/* Add to plugin's list: */
+	plugin->list_of_tool = g_list_append(plugin->list_of_tool, tool);
+
+	return tool;
+
+}
+
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data)
 {
 	g_return_if_fail(plugin);
@@ -404,6 +466,14 @@ void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(Cong
 	g_list_foreach(plugin->list_of_print_method, (GFunc)callback, user_data);
 }
 #endif
+
+void cong_plugin_for_each_tool(CongPlugin *plugin, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data)
+{
+	g_return_if_fail(plugin);
+	g_return_if_fail(callback);
+
+	g_list_foreach(plugin->list_of_tool, (GFunc)callback, user_data);
+}
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin)
 {
@@ -606,6 +676,44 @@ void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, 
 	return print_method->action_callback(print_method, doc, gpc, print_method->user_data, toplevel_window);
 }
 #endif
+
+gboolean cong_tool_supports_document(CongTool *tool, CongDocument *doc)
+{
+	g_return_val_if_fail(tool, FALSE);
+	g_return_val_if_fail(doc, FALSE);
+
+	g_assert(tool->doc_filter);
+	return tool->doc_filter(tool, doc, tool->user_data);
+}
+
+void cong_tool_invoke(CongTool *tool, CongPrimaryWindow *primary_window)
+{
+	g_return_if_fail(tool);
+
+	g_assert(tool->action_callback);
+	return tool->action_callback(tool, primary_window, tool->user_data);
+}
+
+const gchar *cong_tool_get_menu_text(CongTool *tool)
+{
+	g_return_val_if_fail(tool, NULL);
+
+	return tool->menu_text;
+}
+
+const gchar *cong_tool_get_tip_text(CongTool *tool)
+{
+	g_return_val_if_fail(tool, NULL);
+
+	return tool->tooltip_text;
+}
+
+const gchar *cong_tool_get_tip_further_text(CongTool *tool)
+{
+	g_return_val_if_fail(tool, NULL);
+
+	return tool->tooltip_further_text;
+}
 
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 						GtkWindow *parent_window)

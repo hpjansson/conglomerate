@@ -1103,6 +1103,17 @@ void menu_callback_debug_document_message_log(gpointer callback_data,
 	gtk_widget_show(GTK_WIDGET(window));
 }
 
+void menu_callback_debug_information_alert(gpointer callback_data,
+					   guint callback_action,
+					   GtkWidget *widget)
+{
+	CongPrimaryWindow *primary_window = callback_data;
+	GtkDialog *dialog = cong_dialog_information_alert_new(cong_primary_window_get_toplevel(primary_window),
+							      "This is a test information alert.  Hopefully it complies with the GNOME HIG.");
+	gtk_dialog_run(dialog);
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+}
+
 /* Callbacks for "Help" menu: */
 static void menu_callback_about(gpointer callback_data,
 				guint callback_action,
@@ -1145,6 +1156,8 @@ static void menu_callback_about(gpointer callback_data,
 
 
 /* The menus, for a window that contains a document: */
+#define TOOLS_MENU_ACTION_MARKER (1)
+
 static GtkItemFactoryEntry menu_items_with_doc[] =
 {
 	{ N_("/_File"),             NULL, NULL, 0, "<Branch>" },
@@ -1209,7 +1222,10 @@ static GtkItemFactoryEntry menu_items_with_doc[] =
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
 	{ N_("/Debug/Document Message Log"),           NULL, menu_callback_debug_document_message_log, 0, NULL },	
+	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
+
+	{ N_("/_Tools"),        NULL, NULL, TOOLS_MENU_ACTION_MARKER, "<Branch>" },
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
 #if ENABLE_UNIMPLEMENTED_MENUS
@@ -1237,6 +1253,7 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 	{ N_("/Debug/Document Types"),  NULL, menu_callback_debug_document_types, 0, NULL },
 	{ N_("/Debug/Dialog"),             NULL, menu_callback_debug_dialog, 0, NULL },
 	{ N_("/Debug/Progress Checklist"),             NULL, menu_callback_debug_progress_checklist, 0, NULL },
+	{ N_("/Debug/Information Alert"),           NULL, menu_callback_debug_information_alert, 0, NULL },	
 #endif /* #if ENABLE_DEBUG_MENU */
 
 	{ N_("/_Help"),        NULL, NULL, 0, "<Branch>" },
@@ -1246,6 +1263,54 @@ static GtkItemFactoryEntry menu_items_without_doc[] =
 	{ N_("/Help/_About"),    NULL, menu_callback_about, 0, "<StockItem>", GNOME_STOCK_ABOUT }
 
 };
+
+struct add_tool_callback_data
+{
+	CongPrimaryWindow *primary_window;
+	GtkMenuShell *tools_menu;
+	GtkTooltips *menu_tips;
+};
+
+static void on_tool_menu_item_activation(GtkMenuItem *menuitem,
+					 gpointer user_data)
+{
+	CongPrimaryWindow *primary_window = user_data;
+	CongTool *tool = g_object_get_data(G_OBJECT(menuitem), "cong-tool");
+	
+	g_assert(primary_window);
+	g_assert(tool);
+
+	cong_tool_invoke(tool, primary_window);
+}
+
+static void add_tool_callback(CongTool *tool, gpointer user_data)
+{
+	struct add_tool_callback_data *callback_data = user_data;
+
+	if (cong_tool_supports_document(tool, cong_primary_window_get_document(callback_data->primary_window))) {
+		GtkMenuItem *menu_item = GTK_MENU_ITEM(gtk_menu_item_new_with_mnemonic(cong_tool_get_menu_text(tool)));
+
+		g_signal_connect(G_OBJECT(menu_item), 
+				 "activate", 
+				 G_CALLBACK(on_tool_menu_item_activation),
+				 callback_data->primary_window);
+
+		g_object_set_data(G_OBJECT(menu_item), 
+				  "cong-tool",
+				  tool);
+
+		gtk_tooltips_set_tip(callback_data->menu_tips,
+				     GTK_WIDGET(menu_item),
+				     cong_tool_get_tip_text(tool),
+				     cong_tool_get_tip_further_text(tool));
+
+		gtk_widget_show(GTK_WIDGET(menu_item));
+
+		gtk_menu_shell_append(callback_data->tools_menu,
+				      GTK_WIDGET(menu_item));
+	}
+}
+
 
 void cong_menus_create_items(GtkItemFactory *item_factory, 
 			     CongPrimaryWindow *primary_window)
@@ -1258,8 +1323,24 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 					      sizeof(menu_items_with_doc) / sizeof(menu_items_with_doc[0]),
 					      menu_items_with_doc, 
 					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);
+
+		/* Now add any plugin tools below the "Tools" menu: */
+		{
+			struct add_tool_callback_data callback_data;
+			GtkWidget *tools_menu =  gtk_item_factory_get_widget_by_action(item_factory,
+										       TOOLS_MENU_ACTION_MARKER);
+			g_assert(tools_menu);
+
+			callback_data.primary_window = primary_window;
+			callback_data.tools_menu = GTK_MENU_SHELL(tools_menu);
+			g_assert(callback_data.tools_menu);
+			callback_data.menu_tips = gtk_tooltips_new();
+
+			cong_plugin_manager_for_each_tool(the_globals.plugin_manager, add_tool_callback, &callback_data);
+		}
+
 	} else {
-		gtk_item_factory_create_items(item_factory, 
+		gtk_item_factory_create_items(item_factory,
 					      sizeof(menu_items_without_doc) / sizeof(menu_items_without_doc[0]),
 					      menu_items_without_doc, 
 					      primary_window /* so that all menu callbacks receive the CongPrimaryWindow ptr as their callback_data */);

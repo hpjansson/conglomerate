@@ -1,3 +1,45 @@
+2003-05-14 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dispspec.c
+
+	Bugfix for section head titles
+
+	* cong-dialog.c, cong-dialog.h
+
+	Added information alerts.
+
+	* cong-document.c, cong-document.h
+
+	Bulletproofing; support for getting at the PUBLIC id of the doctype (if any)
+
+	* cong-file-open.c
+
+	Moved lots of code into cong-parser-error.c
+
+	* cong-menus.c
+
+	Added Tools menu, and a debug option for information alerts.
+
+	* cong-node.h, xmldata.c
+
+	Added function: cong_node_is_tag
+
+	* cong-plugin.c, cong-plugin.h, main.c
+
+	Added "Tool" plugins, together with some new compiled-in plugins
+
+	* global.h
+
+	Numerous changes
+	
+	* Makefile.am
+
+	Added new files
+	
+	* cong-graph.c, cong-graph.h, cong-parser-error.c, plugin-convert-case.c, plugin-empty.c, plugin-sgml.c, plugin-validate.c, plugin-website.c
+
+	New files
+	
 2003-05-10 Geert Stappers <Geert.Stappers@xs4all.nl>
 
 	* cong-menus.c: tell user many errors to come

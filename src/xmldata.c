@@ -101,6 +101,16 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 
 }
 
+gboolean cong_node_is_tag(CongNodePtr node, const CongXMLChar *tagname)
+{
+	/* FIXME: what about namespaces? */
+
+	g_return_val_if_fail(node, FALSE);
+	g_return_val_if_fail(tagname, FALSE);
+
+	return 0==strcmp(tagname, node->name);
+}
+
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node)
 {

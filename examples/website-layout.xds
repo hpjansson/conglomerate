@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- Experimental XML-based DispSpec for Norman Walsh's Website customisation of DocBook -->
+<dispspec>
+
+	<metadata>
+		<name>Website Layout</name>
+		<description></description>
+	</metadata>
+	
+	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
+
+	<element-list>
+			
+		<element tag="layout" type="structural" color="a0b0c0">
+			<name locale="en">Website Layout</name>
+		</element>
+
+		<element tag="config" type="structural" color="a0b0c0">
+			<name locale="en">Configuration Data</name>
+			<!-- Really need a new element type for this... -->
+			<collapseto></collapseto>
+		</element>
+
+		<element tag="copyright" type="structural" color="a0b0c0">
+			<name locale="en">Copyright</name>
+		</element>
+
+		<element tag="year" type="structural" color="a0b0c0">
+			<name locale="en">Year</name>
+		</element>
+
+		<element tag="holder" type="structural" color="a0b0c0">
+			<name locale="en">Holder</name>
+		</element>
+
+		<element tag="headlink" type="structural" color="a0b0c0">
+			<name locale="en">Header Link</name>
+		</element>
+
+		<element tag="style" type="structural" color="a0b0c0">
+			<name locale="en">Stylesheet</name>
+		</element>
+
+		<element tag="toc" type="structural" color="a0b0c0">
+			<name locale="en">Table of Contents</name>
+		</element>
+
+		<element tag="tocentry" type="structural" color="a0b0c0">
+			<name locale="en">Content</name>
+		</element>
+
+		<element tag="notoc" type="structural" color="a0b0c0">
+			<name locale="en">Additional Content</name>
+		</element>
+
+	</element-list>
+
+	<gui>
+	</gui>
+
+</dispspec>

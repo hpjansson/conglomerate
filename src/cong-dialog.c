@@ -122,12 +122,19 @@ make_dialog_message(const gchar* primary_text,
 		    const gchar* tertiary_text)
 {
 	g_return_val_if_fail(primary_text, NULL);
-	g_return_val_if_fail(secondary_text, NULL);
 
-	if (tertiary_text) {
-		return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s\n\n%s", primary_text, secondary_text, tertiary_text);
+	if (secondary_text) {
+		if (tertiary_text) {
+			return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s\n\n%s", primary_text, secondary_text, tertiary_text);
+		} else {
+			return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s", primary_text, secondary_text);
+		}
 	} else {
-		return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s", primary_text, secondary_text);
+		if (tertiary_text) {
+			return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n\n\n%s", primary_text, tertiary_text);
+		} else {
+			return g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>", primary_text);
+		}
 	}
 }
 
@@ -145,7 +152,6 @@ cong_alert_content_new(const gchar* stock_icon,
 
 	g_return_val_if_fail(stock_icon, NULL);
 	g_return_val_if_fail(primary_text, NULL);
-	g_return_val_if_fail(secondary_text, NULL);
 
 	msg = make_dialog_message(primary_text, secondary_text, tertiary_text);
 	
@@ -274,6 +280,38 @@ GtkDialog *cong_dialog_revert_confirmation_alert_new(GtkWindow *parent,
 
 	g_free(primary_text);
 	g_free(secondary_text);
+
+	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), content);
+	gtk_widget_show_all(dialog);
+
+	return GTK_DIALOG(dialog);
+}
+
+GtkDialog *cong_dialog_information_alert_new(GtkWindow *parent, 
+					     const gchar *message)
+{
+	GtkWidget *dialog, *content;
+
+	g_return_val_if_fail(message, NULL);
+
+	dialog = gtk_dialog_new_with_buttons(NULL, /* empty title string */
+					     parent,
+					     GTK_DIALOG_MODAL,
+
+					     GTK_STOCK_OK,
+					     GTK_RESPONSE_OK,
+
+					     NULL);
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog),
+					GTK_RESPONSE_OK);
+					
+	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
+
+	content = cong_alert_content_new(GTK_STOCK_DIALOG_INFO,
+					 message, 
+					 NULL, 
+					 NULL);
+
 
 	gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), content);
 	gtk_widget_show_all(dialog);

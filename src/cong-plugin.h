@@ -47,6 +47,7 @@ void cong_plugin_manager_for_each_exporter(CongPluginManager *plugin_manager, vo
 void cong_plugin_manager_for_each_printmethod(CongPluginManager *plugin_manager, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
 #endif
 void cong_plugin_manager_for_each_thumbnailer(CongPluginManager *plugin_manager, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
+void cong_plugin_manager_for_each_tool(CongPluginManager *plugin_manager, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
 
 /* 
    CongPlugin 
@@ -91,6 +92,16 @@ CongPluginEditorElement *cong_plugin_register_editor_element(CongPlugin *plugin,
 							     const gchar *plugin_id,
 							     CongEditorElementFactoryMethod factory_method,
 							     gpointer user_data);
+CongTool *cong_plugin_register_tool(CongPlugin *plugin,
+				    const gchar *name, 
+				    const gchar *description,
+				    const gchar *functionality_id,
+				    const gchar *menu_text,
+				    const gchar *tooltip_text,
+				    const gchar *tooltip_further_text,
+				    CongToolDocumentFilter doc_filter,
+				    CongToolActionCallback action_callback,
+				    gpointer user_data);
 
 void cong_plugin_for_each_document_factory(CongPlugin *plugin, void (*callback)(CongDocumentFactory *factory, gpointer user_data), gpointer user_data);
 void cong_plugin_for_each_importer(CongPlugin *plugin, void (*callback)(CongImporter *importer, gpointer user_data), gpointer user_data);
@@ -99,6 +110,7 @@ void cong_plugin_for_each_exporter(CongPlugin *plugin, void (*callback)(CongExpo
 void cong_plugin_for_each_print_method(CongPlugin *plugin, void (*callback)(CongPrintMethod *print_method, gpointer user_data), gpointer user_data);
 #endif
 void cong_plugin_for_each_thumbnailer(CongPlugin *plugin, void (*callback)(CongThumbnailer *thumbnailer, gpointer user_data), gpointer user_data);
+void cong_plugin_for_each_tool(CongPlugin *plugin, void (*callback)(CongTool *tool, gpointer user_data), gpointer user_data);
 
 
 gchar* cong_plugin_get_gconf_namespace(CongPlugin *plugin);
@@ -141,11 +153,22 @@ gboolean cong_print_method_supports_fpi(CongPrintMethod *print_method, const gch
 void cong_print_method_invoke(CongPrintMethod *print_method, CongDocument *doc, GnomePrintContext *gpc, GtkWindow *toplevel_window);
 #endif
 
+gboolean cong_tool_supports_document(CongTool *tool, CongDocument *doc);
+void cong_tool_invoke(CongTool *tool, CongPrimaryWindow *primary_window);
+const gchar *cong_tool_get_menu_text(CongTool *tool);
+const gchar *cong_tool_get_tip_text(CongTool *tool);
+const gchar *cong_tool_get_tip_further_text(CongTool *tool);
+
 /* Helpful functions for implementing plugins; the paren_window arg is used in case we need to pop up an error dialog: */
 void cong_ui_new_document_from_manufactured_xml(xmlDocPtr xml_doc,
 						GtkWindow *parent_window);
 void cong_ui_new_document_from_imported_xml(xmlDocPtr xml_doc,
 					    GtkWindow *parent_window);
+
+xmlDocPtr cong_ui_parse_buffer(const char* buffer, 
+			       GnomeVFSFileSize size, 
+			       GnomeVFSURI *file_uri, 
+			       GtkWindow *parent_window);
 
 xmlDocPtr cong_ui_transform_doc(CongDocument *doc,
 				const gchar *stylesheet_filename,
@@ -168,17 +191,37 @@ CongElementEditor *cong_plugin_element_editor_new(CongEditorWidget *editor_widge
 
 
 /* Plugins at the moment are all compiled into the app; here are the symbols that would be dynamically extracted: */
+/* plugin-convert-case.c: */
+gboolean plugin_convert_case_plugin_register(CongPlugin *plugin);
+gboolean plugin_convert_case_plugin_configure(CongPlugin *plugin);
+
 /* plugin-docbook.c: */
 gboolean plugin_docbook_plugin_register(CongPlugin *plugin);
 gboolean plugin_docbook_plugin_configure(CongPlugin *plugin);
+
+/* plugin-empty.c: */
+gboolean plugin_empty_plugin_register(CongPlugin *plugin);
+gboolean plugin_empty_plugin_configure(CongPlugin *plugin);
 
 /* plugin-lists.c: */
 gboolean plugin_lists_plugin_register(CongPlugin *plugin);
 gboolean plugin_lists_plugin_configure(CongPlugin *plugin);
 
+/* plugin-sgml.c: */
+gboolean plugin_sgml_plugin_register(CongPlugin *plugin);
+gboolean plugin_sgml_plugin_configure(CongPlugin *plugin);
+
 /* plugin-tests.c: */
 gboolean plugin_tests_plugin_register(CongPlugin *plugin);
 gboolean plugin_tests_plugin_configure(CongPlugin *plugin);
+
+/* plugin-validate.c: */
+gboolean plugin_validate_plugin_register(CongPlugin *plugin);
+gboolean plugin_validate_plugin_configure(CongPlugin *plugin);
+
+/* plugin-website.c: */
+gboolean plugin_website_plugin_register(CongPlugin *plugin);
+gboolean plugin_website_plugin_configure(CongPlugin *plugin);
 
 /* plugin-xsl.c: */
 gboolean plugin_xsl_plugin_register(CongPlugin *plugin);

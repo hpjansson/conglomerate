@@ -280,6 +280,7 @@ typedef struct CongPrintMethod CongPrintMethod;
 #endif
 typedef struct CongThumbnailer CongThumbnailer;
 typedef struct CongPluginEditorElement CongPluginEditorElement;
+typedef struct CongTool CongTool;
 
 /* The File->New GUI: */
 typedef struct CongNewFileAssistant CongNewFileAssistant;
@@ -298,6 +299,8 @@ typedef gboolean (*CongImporterMimeFilter)(CongImporter *importer, const gchar *
 typedef void (*CongImporterActionCallback)(CongImporter *importer, const gchar *uri, const gchar *mime_type, gpointer user_data, GtkWindow *toplevel_window);
 typedef gboolean (*CongExporterFpiFilter)(CongExporter *exporter, const gchar *fpi, gpointer user_data);
 typedef void (*CongExporterActionCallback)(CongExporter *exporter, CongDocument *doc, const gchar *uri, gpointer user_data, GtkWindow *toplevel_window);
+typedef gboolean (*CongToolDocumentFilter)(CongTool *tool, CongDocument *doc, gpointer user_data);
+typedef void (*CongToolActionCallback)(CongTool *tool, CongPrimaryWindow *primary_window, gpointer user_data);
 
 #if ENABLE_PRINTING
 typedef gboolean (*CongPrintMethodFpiFilter)(CongPrintMethod *print_method, const gchar *fpi, gpointer user_data);
@@ -379,5 +382,35 @@ cong_utils_get_norman_walsh_stylesheet_path(void);
 
 gchar*
 cong_utils_get_norman_walsh_stylesheet(const gchar *stylesheet_relative_path);
+
+
+/* macro adapted from libxml's error.c; surely this exists in GLib somewhere? */
+#define CONG_GET_VAR_STR(msg, str) {				\
+    int       size;						\
+    int       chars;						\
+    char      *larger;						\
+    va_list   ap;						\
+								\
+    str = (gchar *)g_malloc(150);				\
+								\
+    size = 150;							\
+								\
+    while (1) {							\
+	va_start(ap, msg);					\
+  	chars = vsnprintf(str, size, msg, ap);			\
+	va_end(ap);						\
+	if ((chars > -1) && (chars < size))			\
+	    break;						\
+	if (chars > -1)						\
+	    size += chars + 1;					\
+	else							\
+	    size += 100;					\
+	if ((larger = (char *) g_realloc(str, size)) == NULL) { \
+	    g_free(str);					\
+	    return;						\
+	}							\
+	str = larger;						\
+    }								\
+}
 
 G_END_DECLS

@@ -63,6 +63,10 @@ gchar*
 cong_document_get_parent_uri(CongDocument *doc);
 /* caller is responsible for freeeing */
 
+const CongXMLChar*
+cong_document_get_dtd_public_identifier(CongDocument *doc);
+/* NULL if not present */
+
 void
 cong_document_save(CongDocument *doc, 
 		   const char* filename,

@@ -25,10 +25,7 @@
 
 struct CongDispspecElementHeaderInfo
 {
-	int dummy;
-#if 0
 	char *tagname;
-#endif
 };
 
 struct CongDispspecElement
@@ -838,9 +835,9 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
 	g_return_val_if_fail(element,NULL);
 	g_return_val_if_fail(x,NULL);
 
-	if (element->header_info) {
+	if (element->header_info && (element->header_info->tagname)) {
 
-		/* Search for a child node called "title" (for now): */
+		/* Search for a child node matching the tagname: */
 
 		CongNodePtr i;
 
@@ -848,9 +845,9 @@ cong_dispspec_element_get_section_header_text(CongDispspecElement *element, Cong
 
 		for (i = cong_node_first_child(x); i; i = cong_node_next(i) ) {
 
-			/* printf("got node named \"%s\"\n", cong_node_name(i)); */
+			/* printf("got node named \"%s\"\n", cong_node_name(i)); */			
 
-			if (0==strcmp(cong_node_name(i),"title")) {
+			if (0==strcmp(cong_node_name(i), element->header_info->tagname)) {
 				char *title_text = xml_fetch_clean_data(i);
 
 				char *result = g_strdup_printf("%s : %s", cong_dispspec_element_username(element), title_text);
@@ -985,7 +982,7 @@ cong_dispspec_element_new_from_xml_element(xmlDocPtr doc, xmlNodePtr xml_element
   			if (0==strcmp(child->name,"header-info")) {
   				DS_DEBUG_MSG1("got header info\n");
   				element->header_info = g_new0(CongDispspecElementHeaderInfo,1);
-  				/* FIXME:  we don't actually extract anything at the moment from the XML; <title> is hardcoded as the header tag */
+				element->header_info->tagname = cong_node_get_attribute(child, "tag");
   			}
 			
 		}

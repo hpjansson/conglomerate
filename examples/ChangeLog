@@ -1,4 +1,18 @@
 creating ChangeLog
+2003-05-14  David Malcolm
+
+	* docbook.xds
+
+	Added lots of new tags, names for tags etc.
+	
+	* Makefile.am
+
+	Added new files
+	
+	* website-layout.xds, website-webpage.xds
+
+	New files
+	
 2002-11-30  David Malcolm
 
 	* docbook.xds

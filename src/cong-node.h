@@ -83,6 +83,12 @@ CongNodePtr cong_node_parent(CongNodePtr node);
 
 enum CongNodeType cong_node_type(CongNodePtr node);
 
+/** 
+    Handy method for deciding if you've found a tag with the given name, as opposed to text nodes, comments, tags with other names etc.
+    Ignores namespaces at the moment...
+*/
+gboolean cong_node_is_tag(CongNodePtr node, const CongXMLChar *tagname);
+
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node);
 

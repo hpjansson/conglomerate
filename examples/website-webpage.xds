@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- Experimental XML-based DispSpec for DocBook -->
+<!-- Experimental DispSpec for Webpages using Norman Walsh's "website" format  -->
 <dispspec>
 
 	<metadata>
-		<name>DocBook</name>
-		<description>DocBook is a document type that broadly corresponds to what most people think of as "a book"; it is well-suited for writing books and articles, for both print and web-based publication.</description>
+		<name>Webpage</name>
+		<description></description>
 	</metadata>
 	
 	<!-- probably should specify the DTD that this annotates; hence we can get at the DTD if none was supplied in the document -->
@@ -12,34 +12,11 @@
 	<element-list>
 			
 		<!-- The high-level divisions -->
-	
-		<element tag="set" type="structural" color="a0b0c0">
-			<name locale="en">Set</name>
-			<short-desc>A collection of books.</short-desc>
-		</element>
+		<element tag="webpage" type="structural" color="a0b0c0">
 
-		<element tag="book" type="structural" color="a0b0c0">
-
-			<!-- 
-				A way to get better section header information.
-				Perhaps we should have a list of elements; each provides a path into the children for looking for header information?
-				(If found, then the content of that tag goes into the header)
-
-				At the moment, only a single tag is supported (i.e. no lists).
-			-->
 			<header-info tag="title"></header-info>
-			<name locale="en">Book</name>
+			<name locale="en">Web Page</name>
 
-		</element>
-		<element tag="bookinfo" type="structural" color="a0b0c0">
-			<header-info tag="title"></header-info>
-			<name locale="en">Book Information</name>
-		</element>
-
-		<element tag="article" type="structural" color="a0b0c0">
-			<name locale="en">Article</name>
-		</element>
-		<element tag="artheader" type="structural" color="a0b0c0">
 		</element>
 
 		<element tag="title" type="structural" color="a0b0c0">
