@@ -44,8 +44,8 @@
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #endif
 
-#define USE_WIDGET2 1
-#define USE_WIDGET3 0
+#define USE_WIDGET2 0
+#define USE_WIDGET3 1
 
 #define LOG_PRIMARY_WINDOW_CREATION 0
 

@@ -1,5 +1,9 @@
 2003-08-14  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-primary-window.c
+
+	Turned new editor widget on by default
+
 	* cong-editor-widget3.c
 
 	Initial implementation of keypress handling for new widget
