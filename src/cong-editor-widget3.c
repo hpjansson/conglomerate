@@ -1353,7 +1353,7 @@ key_press_event_handler (GtkWidget *w,
 	case GDK_Return:
 		{
 			if  (cong_location_exists(&cursor->location)) {
-				if (cong_location_node_type(&cursor->location) == CONG_NODE_TYPE_TEXT) {
+				if (cong_node_type_is_textual_content (cong_location_node_type(&cursor->location))) {
 					CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node(doc, cursor->location.node->parent);
 
 					if (ds_element) {

@@ -35,6 +35,7 @@ cong_location_is_valid(const CongLocation *loc)
 			return (loc->byte_offset==CONG_LOCATION_BYTE_OFFSET_MEANINGLESS);
 	
 		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_CDATA_SECTION:
 		case CONG_NODE_TYPE_COMMENT:
 			{	   
 				/* Test that the byte offset is at the start of a character, in range, etc... */
@@ -92,6 +93,7 @@ cong_location_set_to_start_of_node(CongLocation *loc, CongNodePtr node)
 			break;
 			
 		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_CDATA_SECTION:
 		case CONG_NODE_TYPE_COMMENT:
 			loc->byte_offset = 0;
 			break;
@@ -119,6 +121,7 @@ cong_location_set_to_end_of_node(CongLocation *loc, CongNodePtr node)
 			break;
 			
 		case CONG_NODE_TYPE_TEXT:
+		case CONG_NODE_TYPE_CDATA_SECTION:
 		case CONG_NODE_TYPE_COMMENT:
 			loc->byte_offset = strlen (node->content);
 			break;
@@ -252,7 +255,7 @@ cong_location_get_unichar(const CongLocation *loc)
 {
 	g_return_val_if_fail(loc != NULL, '\0');
 	g_return_val_if_fail(loc->node != NULL, '\0');
-	g_return_val_if_fail(cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT, '\0');
+	g_return_val_if_fail(cong_node_type_is_textual (cong_location_node_type(loc)), '\0');
 	
 	return g_utf8_get_char(xml_frag_data_nice(loc->node) + loc->byte_offset);
 }

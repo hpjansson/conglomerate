@@ -859,7 +859,7 @@ cong_command_add_delete_range (CongCommand *cmd,
 
 		/* Split, first */
 
-		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		if (loc0.byte_offset && cong_node_type_is_textual (cong_node_type(loc0.node)))
 		{
 			prev_node = cong_command_add_xml_frag_data_nice_split2 (cmd, &loc0);
 			g_assert(prev_node);
@@ -887,7 +887,7 @@ cong_command_add_delete_range (CongCommand *cmd,
 
 		/* Split, last */
 
-		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
+		if (loc1.byte_offset && cong_node_type_is_textual (cong_node_type(loc1.node)))
 		{
 			loc1.node = cong_command_add_xml_frag_data_nice_split2(cmd, &loc1);
 		}
@@ -1115,11 +1115,14 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 	CongDocument *doc;
 	CongNodePtr d = NULL;
 	int len1, len2;
+	CongNodeType node_type;
 
 	g_return_val_if_fail (IS_CONG_COMMAND (cmd), NULL);
 	g_return_val_if_fail (loc, NULL);
 	g_return_val_if_fail (cong_location_exists(loc), NULL);
-	g_return_val_if_fail ((cong_location_node_type(loc) == CONG_NODE_TYPE_TEXT), NULL);
+	g_return_val_if_fail (cong_node_type_is_textual (cong_location_node_type(loc)), NULL);
+
+	node_type = cong_location_node_type(loc);
 	
 	CONG_NODE_SELF_TEST(loc->node);
 
@@ -1134,9 +1137,9 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 	g_assert (len2>=0);
 
 	if (len1==0 && len2==0) {
-		d = cong_node_new_text("", doc);
+		d = cong_node_new_textual (node_type, "", doc);
 	} else if (len1==0) {
-		d = cong_node_new_text("", doc);
+		d = cong_node_new_textual (node_type, "", doc);
 
 		/* Link it in */
 		cong_command_add_node_add_before (cmd, 
@@ -1145,12 +1148,12 @@ cong_command_add_xml_frag_data_nice_split2  (CongCommand *cmd,
 		return(d);
 
 	} else if (len2==0) {
-		d = cong_node_new_text("", doc);
+		d = cong_node_new_textual (node_type, "", doc);
 	} else {
 		xmlChar* new_text = g_strndup(loc->node->content, len1); /* FIXME:  char type conversion? */
 
 		/* Make split representation */
-		d = cong_node_new_text_len(xml_frag_data_nice(loc->node) + len1, len2, doc); /* FIXME: check char ptr arithmetic; UTF8? */
+		d = cong_node_new_textual_len (node_type, xml_frag_data_nice(loc->node) + len1, len2, doc); /* FIXME: check char ptr arithmetic; UTF8? */
 
 		/* Shrink original node */
 		cong_command_add_node_set_text(cmd, 
@@ -1181,6 +1184,7 @@ merge_text_update_location_callback (CongDocument *doc,
 
 	g_assert (affected_node);
 	g_assert (affected_node->prev);
+
 	g_assert (cong_node_type (affected_node)==CONG_NODE_TYPE_TEXT);
 	g_assert (cong_node_type (affected_node->prev)==CONG_NODE_TYPE_TEXT);
 
@@ -1361,7 +1365,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 	
 		/* Split, first */
 
-		if (loc0.byte_offset && cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		if (loc0.byte_offset && cong_node_type_is_textual (cong_node_type(loc0.node)))
 		{
 			prev_node = cong_command_add_xml_frag_data_nice_split2(cmd, &loc0);
 			g_assert(prev_node);
@@ -1398,7 +1402,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 
 		/* Split, last */
 
-		if (loc1.byte_offset && cong_node_type(loc1.node) == CONG_NODE_TYPE_TEXT)
+		if (loc1.byte_offset && cong_node_type_is_textual (cong_node_type(loc1.node)))
 		{
 			loc1.node = cong_command_add_xml_frag_data_nice_split2(cmd, &loc1);
 			new_selection_end.node = loc1.node->next;
@@ -1424,7 +1428,7 @@ cong_command_add_reparent_selection (CongCommand *cmd,
 	{
 		cong_document_begin_edit(doc);
 
-		if (cong_node_type(loc0.node) == CONG_NODE_TYPE_TEXT)
+		if (cong_node_type_is_textual (cong_node_type(loc0.node)))
 		{
 			if (loc0.byte_offset == loc1.byte_offset) {
 				cong_document_end_edit(doc);
@@ -1515,9 +1519,12 @@ cong_command_add_node_split3 (CongCommand *cmd,
 	CongDocument *doc;
 	CongNodePtr d1, d2, d3;
 	int len1, len2, len3;
+	CongNodeType node_type;
 
 	g_return_val_if_fail (IS_CONG_COMMAND (cmd), NULL);
-	g_return_val_if_fail (cong_node_type(node) == CONG_NODE_TYPE_TEXT, NULL);
+	g_return_val_if_fail (cong_node_type_is_textual (cong_node_type(node)), NULL);
+
+	node_type = cong_node_type (node);
 
 	CONG_NODE_SELF_TEST(node);
 
@@ -1532,9 +1539,9 @@ cong_command_add_node_split3 (CongCommand *cmd,
 	len3 = cong_node_get_length(node) - c1;
 
 	/* Make split representation */
-	d1 = cong_node_new_text_len(xml_frag_data_nice(node), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
-	d2 = cong_node_new_text_len(xml_frag_data_nice(node) + len1, len2, doc);
-	d3 = cong_node_new_text_len(xml_frag_data_nice(node) + len1 + len2, len3, doc);
+	d1 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node), len1, doc); /* FIXME:  audit the char types here, and the char pointer arithmetic. UTF8? */
+	d2 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node) + len1, len2, doc);
+	d3 = cong_node_new_textual_len (node_type, xml_frag_data_nice(node) + len1 + len2, len3, doc);
 
 	cong_document_begin_edit(doc);
 

@@ -224,16 +224,10 @@ cong_editor_node_manufacture (CongEditorWidget3* widget,
 		}
 		
 	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_CDATA_SECTION:
 		{
 			return cong_editor_node_text_new (widget, 
 							  traversal_node);
-		}
-		
-	case CONG_NODE_TYPE_CDATA_SECTION:
-		{
-			return cong_editor_node_unimplemented_new (widget, 
-								   traversal_node,
-								   cong_node_type_description (type));
 		}
 
 	case CONG_NODE_TYPE_ENTITY_REF:

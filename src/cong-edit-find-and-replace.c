@@ -623,7 +623,7 @@ contains_search_string (CongNodePtr node,
 	
 	g_assert (node);
 
-        if (cong_node_type (node)==CONG_NODE_TYPE_TEXT) {
+        if (cong_node_type_is_textual_content (cong_node_type (node))) {
 	  if (dlg_strstr (node->content, data->last_find, data))
 	    return TRUE;
 	}	

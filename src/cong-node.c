@@ -573,6 +573,45 @@ cong_node_type_description(CongNodeType node_type)
 
 }
 
+/**
+ * cong_node_type_is_textual:
+ * @node_type:
+ *
+ * Returns: TRUE iff the node type is text, a CDATA section, or a comment.
+ */
+gboolean
+cong_node_type_is_textual (CongNodeType node_type)
+{
+	switch (node_type) {
+	default: 
+		return FALSE;
+
+	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_CDATA_SECTION:
+	case CONG_NODE_TYPE_COMMENT:
+		return TRUE;
+	}
+}
+
+/**
+ * cong_node_type_is_textual_content:
+ * @node_type:
+ *
+ * Returns: TRUE iff the node type is text, a CDATA section (not comments).
+ */
+gboolean
+cong_node_type_is_textual_content (CongNodeType node_type)
+{
+	switch (node_type) {
+	default: 
+		return FALSE;
+
+	case CONG_NODE_TYPE_TEXT:
+	case CONG_NODE_TYPE_CDATA_SECTION:
+		return TRUE;
+	}
+}
+
 /* Methods for accessing attribute values: */
 /**
  * cong_node_get_attribute:
@@ -785,7 +824,7 @@ int
 cong_node_get_length(CongNodePtr node)
 {
 	/* get length of content; does not include the zero terminator */
-	g_return_val_if_fail( (cong_node_type(node) == CONG_NODE_TYPE_TEXT) || (cong_node_type(node) == CONG_NODE_TYPE_COMMENT), 0);
+	g_return_val_if_fail( cong_node_type_is_textual (cong_node_type(node)), 0);
 
 	return xmlStrlen(node->content);
 	
@@ -923,6 +962,23 @@ cong_node_new_text_len (const char *text,
 }
 
 CongNodePtr
+cong_node_new_cdata_section (const gchar *text, 
+			     CongDocument *doc)
+{
+	return cong_node_new_cdata_section_len (text, strlen(text), doc);
+}
+
+CongNodePtr
+cong_node_new_cdata_section_len (const gchar *text, 
+				 int len, 
+				 CongDocument *doc)
+{
+	return xmlNewCDataBlock	(cong_document_get_xml(doc),
+				 text,
+				 len);
+}
+
+CongNodePtr
 cong_node_new_comment (const gchar *comment, 
 		       CongDocument *doc)
 {
@@ -931,6 +987,65 @@ cong_node_new_comment (const gchar *comment,
 
 	return xmlNewDocComment(cong_document_get_xml(doc), comment);
 }
+
+CongNodePtr
+cong_node_new_comment_len (const gchar *comment, 
+			   int len,	
+			   CongDocument *doc)
+{
+	gchar *tmp_comment;
+	CongNodePtr result;
+
+	g_return_val_if_fail (comment, NULL);
+	g_return_val_if_fail (doc, NULL);
+
+	/* There doesn't seem to be a xmlNewDocCommentLen function so we fake it: */
+	tmp_comment = g_strndup (comment, len);
+
+	result = xmlNewDocComment (cong_document_get_xml (doc), tmp_comment);
+
+	g_free (tmp_comment);
+
+	return result;
+}
+
+CongNodePtr
+cong_node_new_textual (CongNodeType textual_node_type,
+		       const gchar *content,
+		       CongDocument *doc)
+{
+	g_return_val_if_fail (cong_node_type_is_textual (textual_node_type), NULL);
+
+	switch (textual_node_type) {
+	default: g_assert_not_reached ();
+	case CONG_NODE_TYPE_TEXT:
+		return cong_node_new_text (content, doc);
+	case CONG_NODE_TYPE_CDATA_SECTION:
+		return cong_node_new_cdata_section (content, doc);
+	case CONG_NODE_TYPE_COMMENT:
+		return cong_node_new_comment (content, doc);
+	}
+}
+
+CongNodePtr
+cong_node_new_textual_len (CongNodeType textual_node_type,
+			   const gchar *content,
+			   int len,
+			   CongDocument *doc)
+{
+	g_return_val_if_fail (cong_node_type_is_textual (textual_node_type), NULL);
+
+	switch (textual_node_type) {
+	default: g_assert_not_reached ();
+	case CONG_NODE_TYPE_TEXT:
+		return cong_node_new_text_len (content, len, doc);
+	case CONG_NODE_TYPE_CDATA_SECTION:
+		return cong_node_new_cdata_section_len (content, len, doc);
+	case CONG_NODE_TYPE_COMMENT:
+		return cong_node_new_comment_len (content, len, doc);
+	}
+}
+
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 
@@ -1700,7 +1815,7 @@ cong_node_get_whitespace_handling (CongDocument *doc,
 {
 	g_return_val_if_fail (doc, CONG_WHITESPACE_NORMALIZE);
 	g_return_val_if_fail (text_node, CONG_WHITESPACE_NORMALIZE);
-	g_return_val_if_fail (cong_node_type (text_node)==CONG_NODE_TYPE_TEXT, CONG_WHITESPACE_NORMALIZE);
+	g_return_val_if_fail (cong_node_type_is_textual_content (cong_node_type (text_node)), CONG_WHITESPACE_NORMALIZE);
 
 	if (cong_node_type (text_node->parent)==CONG_NODE_TYPE_ELEMENT) {
 		CongDispspecElement *ds_element = cong_document_get_dispspec_element_for_node  (doc, text_node->parent);
@@ -1717,7 +1832,7 @@ cong_node_get_whitespace_handling (CongDocument *doc,
  * cong_node_should_be_visible_in_editor:
  * @node:  a node to be tested
  *
- * The function detemines if the node ought to be visible in the main editor view.
+ * The function determines if the node ought to be visible in the main editor view.
  *
  * As described in bug #123367, TEXT nodes that are either empty or purely whitespace
  * should only appear in the main editor view if the DTD allows PCDATA at the location in the
@@ -1782,6 +1897,9 @@ cong_node_is_valid_cursor_location (CongNodePtr node)
 	default: return FALSE;
 	case XML_TEXT_NODE:
 		return cong_node_should_be_visible_in_editor (node);
+
+	case XML_CDATA_SECTION_NODE:
+		return TRUE;
 		
 	case XML_COMMENT_NODE:
 		/* Eventually allow comment editing: */		
@@ -1795,7 +1913,7 @@ cong_node_is_valid_cursor_location (CongNodePtr node)
  *
  * The function determines if #CongLocation objects that reference this node can have meaningful byte offsets
  *
- * Only TEXT and COMMENT nodes can currently have meaningful byte offsets.
+ * Only TEXT, COMMENT and CDATA_SECTION nodes can currently have meaningful byte offsets.
  * 
  * Returns: a #gboolean which is TRUE if #CongLocations that reference this node can have a meaningful byte offset 
  */
@@ -1804,7 +1922,7 @@ cong_node_supports_byte_offsets (CongNodePtr node)
 {
 	g_return_val_if_fail (node, FALSE);
 	
-	return ((node->type == XML_TEXT_NODE)||(node->type == XML_COMMENT_NODE));
+	return cong_node_type_is_textual (node->type);
 }
 
 /**

@@ -166,9 +166,8 @@ cong_ui_get_colour_string(CongNodeType type)
 	case CONG_NODE_TYPE_ATTRIBUTE:
 		return "#000000";
 	case CONG_NODE_TYPE_TEXT:
-		return "#ff0000";
 	case CONG_NODE_TYPE_CDATA_SECTION:
-		return "#000000";
+		return "#ff0000";
 	case CONG_NODE_TYPE_ENTITY_REF:
 		return "#000000";
 	case CONG_NODE_TYPE_ENTITY_NODE:
@@ -253,7 +252,10 @@ get_text_for_node(CongNodePtr node)
 		g_free(cleaned_text);
 		break;
 	case CONG_NODE_TYPE_CDATA_SECTION:
-		text = g_strdup_printf("CDATA SECTION");
+		cleaned_text = clean_text(node->content);
+		text = g_strdup_printf("%s \"<span foreground=\"%s\">%s</span>\"", 
+				       _("CDATA:"), colour_string, cleaned_text);
+		g_free(cleaned_text);
 		break;
 	case CONG_NODE_TYPE_ENTITY_REF:
 		text = g_strdup_printf("ENTITY REF: %s", node->name);

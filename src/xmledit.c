@@ -166,7 +166,7 @@ cong_document_paste_source_at (CongDocument *doc,
 		CongCommand *cmd = cong_document_begin_command (doc, _("Paste"), NULL);
 
 		/* Calculate insertion point, splitting text nodes if necessary: */
-		if (cong_location_node_type(insert_loc) == CONG_NODE_TYPE_TEXT) {
+		if (cong_node_type_is_textual (cong_location_node_type(insert_loc))) {
 			
 			if (0==insert_loc->byte_offset) {
 				node_after = insert_loc->node;

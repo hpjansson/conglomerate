@@ -94,7 +94,7 @@ xml_fetch_clean_data(CongNodePtr x)
 	
 	for ( ; n0; n0 = cong_node_next(n0))
 	{
-		if (cong_node_type(n0) == CONG_NODE_TYPE_TEXT)
+		if (cong_node_type_is_textual_content (cong_node_type(n0)))
 		{
 			s = cat_string(s, xml_frag_data_nice(n0));
 		}
@@ -125,9 +125,9 @@ xml_all_present_span_elements(CongDispspec *ds, CongNodePtr node)
 {
 	GList* list = NULL;
 
-	g_return_val_if_fail(ds, NULL);
-	g_return_val_if_fail(node, NULL);
-	g_return_val_if_fail( cong_node_type(node) == CONG_NODE_TYPE_TEXT, NULL);
+	g_return_val_if_fail (ds, NULL);
+	g_return_val_if_fail (node, NULL);
+	g_return_val_if_fail (cong_node_type_is_textual_content (cong_node_type(node)), NULL);
 
 	/*  we should be at text node.  grab span element above */
 	if (node->parent) {

@@ -138,7 +138,14 @@ cong_node_get_path (CongNodePtr node);
 /* Handy debug methods for writing log info: */
 gchar *cong_node_debug_description(CongNodePtr node);
 
-const gchar *cong_node_type_description(CongNodeType node_type);
+const gchar*
+cong_node_type_description (CongNodeType node_type);
+
+gboolean
+cong_node_type_is_textual (CongNodeType node_type);
+
+gboolean
+cong_node_type_is_textual_content (CongNodeType node_type);
 
 /* Methods for accessing attribute values: */
 
@@ -194,8 +201,32 @@ cong_node_new_text_len (const gchar *text,
 			int len, 
 			CongDocument *doc); /* FIXME: what character type ? */
 CongNodePtr
+cong_node_new_cdata_section (const gchar *text, 
+			     CongDocument *doc);
+
+CongNodePtr
+cong_node_new_cdata_section_len (const gchar *text, 
+				 int len, 
+				 CongDocument *doc);
+CongNodePtr
 cong_node_new_comment (const gchar *comment, 
 		       CongDocument *doc);
+
+CongNodePtr
+cong_node_new_comment_len (const gchar *comment, 
+			   int len,
+			   CongDocument *doc);
+
+CongNodePtr
+cong_node_new_textual (CongNodeType textual_node_type,
+		       const gchar *content,
+		       CongDocument *doc);
+
+CongNodePtr
+cong_node_new_textual_len (CongNodeType textual_node_type,
+			   const gchar *content,
+			   int len,
+			   CongDocument *doc);
 
 /* Destruction: (the node has to have been unlinked from the tree already): */
 void 
