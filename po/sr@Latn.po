@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-23 14:40+0100\n"
-"PO-Revision-Date: 2004-02-23 14:40+0100\n"
+"POT-Creation-Date: 2004-02-25 18:27+0100\n"
+"PO-Revision-Date: 2004-02-25 18:27+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -1825,46 +1825,46 @@ msgstr "Pretvaranje XSL objekata oblikovanja (FO) u PDF"
 msgid "Printing DocBook file"
 msgstr "Štampanje DocBook datoteke"
 
-#: src/plugin-docbook.c:1311
+#: src/plugin-docbook.c:1357
 msgid "DocBook Article"
 msgstr "DocBook članak"
 
-#: src/plugin-docbook.c:1312
+#: src/plugin-docbook.c:1358
 msgid ""
 "Create an article, perhaps for a website or a magazine, using the \"DocBook"
 "\" format"
 msgstr ""
 "Sastavi članak, možda za veb stranicu ili časopis, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1319
+#: src/plugin-docbook.c:1365
 msgid "DocBook Book"
 msgstr "DocBook knjiga"
 
-#: src/plugin-docbook.c:1320
+#: src/plugin-docbook.c:1366
 msgid "Create a book, using the \"DocBook\" format"
 msgstr "Složi knjigu, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1327
+#: src/plugin-docbook.c:1373
 msgid "DocBook Set"
 msgstr "DocBook skup"
 
-#: src/plugin-docbook.c:1328
+#: src/plugin-docbook.c:1374
 msgid "Create a set of related books, using the \"DocBook\" format"
 msgstr "Složi skup srodnih knjiga, pomoću „DocBook“ zapisa"
 
-#: src/plugin-docbook.c:1336
+#: src/plugin-docbook.c:1382
 msgid "Import text as a DocBook article"
 msgstr "Uvezi tekst kao DocBook članak"
 
-#: src/plugin-docbook.c:1337
+#: src/plugin-docbook.c:1383
 msgid "Import a plain text file into the \"DocBook\" format, as an article."
 msgstr "Uvezi običan tekst u „DocBook“ oblik, kao jedan članak."
 
-#: src/plugin-docbook.c:1354
+#: src/plugin-docbook.c:1400
 msgid "Export DocBook as HTML"
 msgstr "Izvezi DocBook kao HTML"
 
-#: src/plugin-docbook.c:1355
+#: src/plugin-docbook.c:1401
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
@@ -1872,11 +1872,11 @@ msgstr ""
 "Koristi opise stila za DocBook od Normana Volša (Norman Walsh) za izradu veb "
 "stranica iz ove DocBook datoteke"
 
-#: src/plugin-docbook.c:1362
+#: src/plugin-docbook.c:1408
 msgid "Export DocBook as PDF"
 msgstr "Izvezi DocBook kao PDF"
 
-#: src/plugin-docbook.c:1363
+#: src/plugin-docbook.c:1409
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
@@ -1884,11 +1884,11 @@ msgstr ""
 "Koristi opise stila za DocBook od Normana Volša (Norman Walsh) za izradu PDF "
 "datoteke iz ove DocBook datoteke"
 
-#: src/plugin-docbook.c:1370
+#: src/plugin-docbook.c:1416
 msgid "Export DocBook as XSL:FO"
 msgstr "Izvezi DocBook kao XSL:FO"
 
-#: src/plugin-docbook.c:1371
+#: src/plugin-docbook.c:1417
 msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
@@ -1897,51 +1897,56 @@ msgstr ""
 "FO datoteke iz ove DocBook datoteke koju je moguće ištampati ili naknadno "
 "pretvoriti u PDF"
 
-#: src/plugin-docbook.c:1379
+#: src/plugin-docbook.c:1425
 msgid "Print DocBook"
 msgstr "Štampaj DocBook"
 
-#: src/plugin-docbook.c:1388
+#: src/plugin-docbook.c:1434
 msgid "Generic DocBook property dialog"
 msgstr "Opšte prozorče za DocBook osobine"
 
-#: src/plugin-docbook.c:1389
+#: src/plugin-docbook.c:1435
 msgid "Provides a Properties dialog for most DocBook nodes"
 msgstr "Obezbeđuje prozorče sa osobinama za većinu DocBook čvorova"
 
-#: src/plugin-docbook.c:1408
+#: src/plugin-docbook.c:1453 src/plugin-docbook.c:1456 src/plugin-html.c:130
+#: src/plugin-html.c:133
+msgid "Open Link in Browser"
+msgstr "Otvori vezu u čitaču"
+
+#: src/plugin-docbook.c:1465
 msgid "Promote Section"
 msgstr "Izdigni odeljak"
 
-#: src/plugin-docbook.c:1409
+#: src/plugin-docbook.c:1466
 msgid ""
 "Promotes a DocBook section to a higher organisational level within the "
 "document"
 msgstr "Izdiže DocBook odeljak na viši organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1411
+#: src/plugin-docbook.c:1468 src/plugin-html.c:141 src/plugin-html.c:144
 msgid "Promote"
 msgstr "Izdigni"
 
-#: src/plugin-docbook.c:1412 src/plugin-docbook.c:1413
+#: src/plugin-docbook.c:1469 src/plugin-docbook.c:1470
 msgid ""
 "Promote the section to a higher organisational level within the document"
 msgstr "Izdigni odeljak na viši organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1419
+#: src/plugin-docbook.c:1476
 msgid "Demote Section"
 msgstr "Spusti odeljak"
 
-#: src/plugin-docbook.c:1420
+#: src/plugin-docbook.c:1477
 msgid ""
 "Demotes a DocBook section to a lower organisational level within the document"
 msgstr "Spušta DocBook odeljak na niži organizacioni nivo u dokumentu"
 
-#: src/plugin-docbook.c:1422
+#: src/plugin-docbook.c:1479 src/plugin-html.c:152 src/plugin-html.c:155
 msgid "Demote"
 msgstr "Spusti"
 
-#: src/plugin-docbook.c:1423 src/plugin-docbook.c:1424
+#: src/plugin-docbook.c:1480 src/plugin-docbook.c:1481
 msgid "Demote the section to a lower organisational level within the document"
 msgstr "Spusti odeljak na niži organizacioni nivo u dokumentu"
 
@@ -2202,54 +2207,54 @@ msgstr "Šablonski XSL element"
 msgid "An element for visualising template rules in an XSL stylesheet"
 msgstr "Element za oslikavanje šablonskih pravila u XSL opisu stila"
 
-#: src/popup.c:314
+#: src/popup.c:385
 #, c-format
 msgid "Apply span tag: %s"
 msgstr "Primeni obuhvatnu oznaku: %s"
 
 # bug: is "span" keyword
-#: src/popup.c:395
+#: src/popup.c:466
 msgid "Remove Span Tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
 # bug: is "span" keyword
-#: src/popup.c:504
+#: src/popup.c:589
 msgid "Remove span tag"
 msgstr "Ukloni obuhvatnu oznaku"
 
-#: src/popup.c:1007
+#: src/popup.c:1049
 msgid "Delete this item"
 msgstr "Ukloni ovu stavku"
 
-#: src/popup.c:1017
+#: src/popup.c:1059
 msgid "Add text node after"
 msgstr "Dodaj tekstualni čvor iza"
 
-#: src/popup.c:1025
+#: src/popup.c:1067
 msgid "Add text node before"
 msgstr "Dodaj tekstualni čvor ispred"
 
-#: src/popup.c:1036
+#: src/popup.c:1078
 msgid "Set the text"
 msgstr "Postavi tekst"
 
-#: src/popup.c:1069
+#: src/popup.c:1111
 msgid "Paste into"
 msgstr "Ubaci u"
 
-#: src/popup.c:1078
+#: src/popup.c:1120
 msgid "Paste before"
 msgstr "Ubaci ispred"
 
-#: src/popup.c:1087
+#: src/popup.c:1129
 msgid "Paste after"
 msgstr "Ubaci iza"
 
-#: src/popup.c:1106
+#: src/popup.c:1148
 msgid "New sub-element"
 msgstr "Novi pod-element"
 
-#: src/popup.c:1122
+#: src/popup.c:1164
 msgid "New sibling"
 msgstr "Novo grananje"
 
