@@ -8,6 +8,8 @@ without interfering making a  *.diff.gz
  cp -a deb debian
  dpkg-buildpackage -rfakeroot
 
+There is a Request For Packing "bug" filed,
+see http://bugs.debian/164127 for details.
 
 #####
 libbonoboui2-0_2.0.3-1_powerpc.deb

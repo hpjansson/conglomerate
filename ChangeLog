@@ -1,5 +1,9 @@
 2003-06-14  Geert Stappers <Geert.Stappers@xs4all.nl>
 
+	* deb/watch, another "debian" file added
+
+2003-06-14  Geert Stappers <Geert.Stappers@xs4all.nl>
+
 	* deb/build is added
 	* README: tell people there is the deb/build script
 	* Makefile.am: making sure that it gets in the .tar.gz

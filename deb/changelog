@@ -1,3 +1,11 @@
+conglomerate (0.5.2-0.2) experimental; urgency=low
+
+  * added debian/watch file
+
+  * added reference to debian bug #164127, an RFP
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Sat, 14 Jun 2003 18:29:49 +0200
+
 conglomerate (0.5.2-0.1) unstable; urgency=low
 
   * new upstream version
