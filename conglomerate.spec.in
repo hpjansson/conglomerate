@@ -1,22 +1,19 @@
-#  Id: conglomerate.spec 1492 2004-07-06 10:58:24Z dude  
+#  Id: conglomerate.spec 2423 2004-11-05 11:50:06Z dude  
 # Authority: dag
 # Upstream: Conglomerate Developers <conglomerate-devel$lists,copyleft,no>
 
 Summary: Information authoring, management, and transformation system
 Name: conglomerate
 Version: @VERSION@
-Release: 2
+Release: 1
 License: GPL
 Group: Applications/Text
 URL: http://www.conglomerate.org/
 
-Packager: Dag Wieers <dag@wieers.com>
-Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
-
 Source: http://dl.sf.net/conglomerate/conglomerate-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires: gettext, libxml2-devel >= 2.0
+BuildRequires: gettext, libxml2-devel >= 2.0, gcc-c++
 BuildRequires: libgnomeui-devel >= 2.0, libglade2-devel >= 2.0
 BuildRequires: libgnomeprintui22-devel, gtksourceview-devel, gtk-doc
 BuildRequires: scrollkeeper
@@ -38,9 +35,9 @@ with a single source document.
 
 %build
 %configure \
-	--enable-optimization \
-	--disable-schemas-install
-#	--enable-printing \
+    --enable-optimization \
+    --enable-printing \
+    --disable-schemas-install
 %{__make} %{?_smp_mflags}
 
 %install
@@ -48,6 +45,9 @@ with a single source document.
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
 %makeinstall
 %find_lang %{name}
+
+%clean
+%{__rm} -rf %{buildroot}
 
 %post
 scrollkeeper-update -q || :
@@ -57,26 +57,30 @@ gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/%{name}.schemas
 %postun
 scrollkeeper-update -q || :
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files -f %{name}.lang
 %defattr(-, root, root, 0755)
 %doc AUTHORS BUGS ChangeLog COPYING NEWS README TODO
 %doc %{_datadir}/gnome/help/conglomerate/
 %doc %{_datadir}/gtk-doc/html/conglomerate/
-%config %{_sysconfdir}/gconf/schemas/*.schemas
-%{_bindir}/*
-%{_datadir}/application-registry/*.applications
-%{_datadir}/applications/*.desktop
+%config %{_sysconfdir}/gconf/schemas/conglomerate.schemas
+%{_bindir}/conglomerate
+%{_datadir}/application-registry/conglomerate.applications
+%{_datadir}/applications/conglomerate.desktop
 %{_datadir}/conglomerate/
-%{_datadir}/mime-info/*
+%{_datadir}/mime-info/conglomerate.*
 %{_datadir}/omf/conglomerate/
-%{_datadir}/pixmaps/*.png
+%{_datadir}/pixmaps/conglomerate-icon-16.png
 %{_datadir}/pixmaps/conglomerate/
 %exclude %{_localstatedir}/scrollkeeper/ 
 
 %changelog
+* Sun Nov 14 2004 Dag Wieers <dag@wieers.com> - 0.7.16-1
+- Updated to release 0.7.16.
+
+* Tue Nov  2 2004 Matthias Saou <http://freshrpms.net> 0.7.15-1
+- Update to 0.7.15.
+- Enable printing again, it seems to work now.
+
 * Tue Jul  6 2004 Matthias Saou <http://freshrpms.net> 0.7.14-2
 - Added missing build requirements.
 - Enabled printing support and optimization... not! Build for printing broken.

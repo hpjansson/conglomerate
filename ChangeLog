@@ -1,3 +1,7 @@
+2005-02-13  Geert Stappers <stappers@stappers.nl>
+
+	* conglomerate.spec.in: sync with Dag Wiers
+
 2004-11-05  Geert Stappers  <stappers@stappers.nl>
 
 	* NEWS: reduced annouce to two, so next relaese can ship with tree.
