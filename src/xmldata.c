@@ -598,11 +598,33 @@ CongNodePtr xml_inner_span_element(CongDispspec *ds, CongNodePtr x)
 
 CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 {
+	CongNodePtr n0 = NULL;
+
+	g_return_val_if_fail(ds, NULL);
+	g_return_val_if_fail(x, NULL);
+
 #if NEW_XML_IMPLEMENTATION
-	g_assert(0);
-	return NULL;
+	if (x->parent) {
+		x = x->parent;
+	} else {
+		return NULL;
+	}
+
+	for (;;)
+	{
+		if ( cong_node_type(x) == CONG_NODE_TYPE_ELEMENT && cong_dispspec_element_span(ds, cong_node_name(x))) {
+			n0 = x;
+		} else { 
+			break;
+		}
+		
+		if (x->parent) {
+			x = x->parent;
+		} else {
+			break;
+		}
+	}
 #else
-	TTREE *n0 = 0;
 	
 	if (x->parent) x = x->parent;
 	else return(0);
@@ -612,19 +634,27 @@ CongNodePtr xml_outer_span_element(CongDispspec *ds, CongNodePtr x)
 
 	for (;;)
 	{
-	  if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data))
-		  n0 = x;
-		else break;
+		if (!strcmp("tag_span", x->data) && cong_dispspec_element_span(ds, x->child->data)) {
+			n0 = x;
+		} else { 
+			break;
+		}
 		
-	  if (x->parent) x = x->parent;
-	  else break;
+		if (x->parent) {
+			x = x->parent;
+		} else {
+			break;
+		}
 
-	  if (x->parent) x = x->parent;
-	  else break;
+		if (x->parent) {
+			x = x->parent;
+		} else {
+			break;
+		}
 	}
+#endif
 
 	return(n0);
-#endif
 }
 
 /*
