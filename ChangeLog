@@ -1,5 +1,10 @@
 2003-09-21  Danilo Šegan  <dsegan@gmx.net>
 
+	* configure.in: Replaced $PACKAGE_NAME with AC_PACKAGE_NAME in
+	GETTEXT_PACKAGE definition.
+
+2003-09-21  Danilo Šegan  <dsegan@gmx.net>
+
 	* configure.in: Added "sr" and "sr@Latn" to ALL_LINGUAS.
 
 2003-09-20  Christian Rose  <menthos@menthos.com>
