@@ -2,12 +2,12 @@
 This directory, deb, is for keeping debian build stuff in upstream source
 without interfering making a  *.diff.gz
 
- copy this "deb" directory to "debian"
+ copy this "deb" directory to "debian" and build the package
 
  cd ..
  cp -a deb debian
+ dpkg-buildpackage -rfakeroot
 
- debian/rules
 
 #####
 libbonoboui2-0_2.0.3-1_powerpc.deb

@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-# Sample debian/rules that uses debhelper.
+# tuned debian/rules that uses debhelper.
 # GNU copyright 1997 to 1999 by Joey Hess.
 
 # Uncomment this to turn on verbose mode.
@@ -63,8 +63,8 @@ install: build
 	dh_clean -k
 	dh_installdirs
 
-	# Add here commands to install the package into debian/conglomerate.
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/conglomerate
+	# using src/Makefile to get files into the package
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/tmp
 
 
 # Build architecture-independent files here.

@@ -1,3 +1,9 @@
+conglomerate (0.5.0-2) unstable; urgency=low
+
+  * debian/rules didn't put files in the package
+
+ -- Geert Stappers <Geert.Stappers@xs4all.nl>  Fri,  9 May 2003 18:09:03 +0200
+
 conglomerate (0.5.0-1) unstable; urgency=low
 
   * Initial Release.
