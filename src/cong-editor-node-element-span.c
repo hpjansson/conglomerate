@@ -27,7 +27,8 @@
 #include <libgnome/gnome-macros.h>
 #include "cong-eel.h"
 
-#include "cong-editor-area-unknown-tag.h"
+#include "cong-editor-area-span-tag.h"
+#include "cong-dispspec.h"
 
 #define PRIVATE(x) ((x)->private)
 
@@ -89,16 +90,34 @@ static CongEditorArea*
 add_area (CongEditorNode *editor_node,
 	  CongEditorAreaContainer *parent_area)
 {
-	CongEditorArea *new_area;
-
+	CongEditorArea *area;
+	CongDispspecElement *ds_element;
+	GdkPixbuf *pixbuf;
+	gchar *title_text;
+	
 	g_return_val_if_fail (editor_node, NULL);
 	g_return_val_if_fail (parent_area, NULL);
+	
+	ds_element = cong_editor_node_element_get_dispspec_element (CONG_EDITOR_NODE_ELEMENT(editor_node));
+	
+	pixbuf = cong_dispspec_element_get_icon (ds_element);
+	
+	title_text = cong_dispspec_element_get_section_header_text (ds_element,
+								    cong_editor_node_get_node (editor_node));
+	
+	area = cong_editor_area_span_tag_new (cong_editor_node_get_widget (editor_node),
+					      ds_element,
+					      pixbuf,
+					      title_text);
 
-	new_area = cong_editor_area_unknown_tag_new (cong_editor_node_get_widget (editor_node),
-						     cong_editor_node_get_node (editor_node)->name);
+	if (pixbuf) {
+		g_object_unref (G_OBJECT(pixbuf));
+	}
+
+	g_free (title_text);
 
 	cong_editor_area_container_add_child (parent_area,
-					      new_area);
+					      area);
 
-	return new_area;
+	return area;
 }

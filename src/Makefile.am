@@ -28,6 +28,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-pixbuf.h \
   cong-editor-area-spacer.h \
   cong-editor-area-text.h   \
+  cong-editor-area-span-tag.h \
   cong-editor-area-structural-tag.h \
   cong-editor-area-unknown-tag.h   \
   cong-editor-node.h        \
@@ -71,6 +72,7 @@ conglomerate_SOURCES =      \
   cong-editor-area-pixbuf.c \
   cong-editor-area-spacer.c \
   cong-editor-area-text.c   \
+  cong-editor-area-span-tag.c \
   cong-editor-area-structural-tag.c \
   cong-editor-area-unknown-tag.c   \
   cong-editor-node.c        \

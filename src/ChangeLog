@@ -1,5 +1,21 @@
 2003-07-15  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* Makefile.am, cong-editor-area-span-tag.c, cong-editor-area-span-tag.h
+
+	New files; added to build.
+
+	* cong-editor-node-element-span.c
+
+	Wiring up new span tag area code.
+
+	* cong-editor-widget3.c
+
+	Beginnings of change notification handling
+
+	* main.c
+
+	Test hook for testing layout
+	
 	* Makefile.am
 
 	Added the new files into the build and tarball

@@ -23,6 +23,8 @@
 #endif
 #endif
 
+#define TEST_BIG_FONTS 0
+
 gchar* cong_util_cleanup_text(const xmlChar *src_text) {
 	gchar *buffer;
 	gchar *src;
@@ -356,7 +358,7 @@ void insert_element_init()
 
 void fonts_load()
 {
-#if 0
+#if TEST_BIG_FONTS
 	  cong_app_singleton()->fonts[CONG_FONT_ROLE_BODY_TEXT] = cong_font_load("sans 20");
 	  cong_app_singleton()->fonts[CONG_FONT_ROLE_TITLE_TEXT] = cong_font_load("sans 24");
 	  cong_app_singleton()->fonts[CONG_FONT_ROLE_SPAN_TAG] = cong_font_load("sans 16");

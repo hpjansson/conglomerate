@@ -439,30 +439,52 @@ static void size_request_handler(GtkWidget *widget,
 /* Definitions of the MVC handler functions: */
 static void on_document_begin_edit(CongView *view)
 {
+	/* UNWRITTEN */
 }
 
 static void on_document_end_edit(CongView *view)
 {
+	/* UNWRITTEN */
 }
 
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent)
 {
+	if (before_event) {
+		recursive_remove_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
+	}
+
 }
 
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling)
 {
+	if (before_event) {
+		return;
+	}
+
+	recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
 }
 
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling)
 {
+	if (before_event) {
+		return;
+	}
+
+	recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
 }
 
 static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
 {
+	if (before_event) {
+		recursive_remove_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
+	} else {
+		recursive_add_nodes(CONG_EDITOR_WIDGET3_VIEW(view)->widget, node);
+	}
 }
 
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content)
 {
+	/* UNWRITTEN */
 }
 
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *name, const xmlChar *value)
@@ -664,6 +686,7 @@ recursive_remove_nodes(CongEditorWidget3 *widget,
 		       CongNodePtr node)
 {
 	CongEditorWidget3Details *details = GET_DETAILS(widget);
+	CongEditorNode *editor_node;
 	CongNodePtr iter;
 
 	/* Recurse: */
@@ -672,9 +695,15 @@ recursive_remove_nodes(CongEditorWidget3 *widget,
 					iter);		
 	}
 
-	/* Remove this node: */
+	editor_node = g_hash_table_lookup (details->hash_of_node_to_editor,
+					  node);
+
+	/* Remove this editor_node: */
 	g_hash_table_remove (details->hash_of_node_to_editor, 
 			     node);
+
+	/* Unref the editor_node: */
+	g_object_unref (editor_node);
 }
 
 static void 
