@@ -170,8 +170,9 @@ static void on_select_filename_button_clicked(GtkButton *button,
 }
 #endif
 
-static GtkWidget *cong_document_print_dialog_new(CongDocument *doc, 
-						  GtkWindow *parent_window)
+static GtkWidget*
+cong_document_print_dialog_new (CongDocument *doc, 
+				GtkWindow *parent_window)
 {
 	xmlDocPtr xml_doc;
 	CongDispspec* ds;
@@ -221,11 +222,16 @@ static GtkWidget *cong_document_print_dialog_new(CongDocument *doc,
 		gtk_option_menu_set_menu(dialog_details->select_print_method_option_menu,
 					 dialog_details->select_print_method_menu);
 		
-		cong_plugin_manager_for_each_print_method(the_app.plugin_manager, add_print_method_to_menu, dialog_details);
+		cong_plugin_manager_for_each_print_method (cong_app_get_plugin_manager (cong_app_singleton ()), 
+							   add_print_method_to_menu, 
+							   dialog_details);
 		gtk_option_menu_set_history(dialog_details->select_print_method_option_menu,0);
 	}
 
-	cong_dialog_category_add_field(general_category, _("Print Method:"), GTK_WIDGET(dialog_details->select_print_method_option_menu));
+	cong_dialog_category_add_field (general_category, 
+					_("Print Method:"), 
+					GTK_WIDGET(dialog_details->select_print_method_option_menu),
+					TRUE);
 
 #if 0
 	monitor_print_method(dialog_details);
