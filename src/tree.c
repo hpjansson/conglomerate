@@ -40,7 +40,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 #if SUPPORT_UNDO
 	{
 		gchar *desc = g_strdup_printf (_("Insert sibling: %s"), cong_dispspec_element_username (element));
-		CongCommand *cmd = cong_begin_command (doc, desc);
+		CongCommand *cmd = cong_document_begin_command (doc, desc);
 		g_free (desc);
 
 		/* New element */
@@ -54,7 +54,7 @@ gint tree_new_sibling(GtkWidget *widget, CongNodePtr tag)
 		cong_command_add_set_cursor_to_first_text_descendant (cmd, 
 								      new_node);
 
-		cong_end_command (cmd);		
+		cong_document_end_command (doc, cmd);		
 	}
 #else	
 	/* New element */
@@ -196,7 +196,7 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 
 #if SUPPORT_UNDO
 	{
-		CongCommand *cmd = cong_begin_command (doc, _("Cut"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Cut"));
 
 		cong_command_for_each_location (cmd, 
 						tree_cut_update_location_callback,
@@ -204,7 +204,7 @@ gint tree_cut(GtkWidget *widget, CongNodePtr tag)
 		
 		cong_command_add_node_recursive_delete(cmd, tag);
 
-		cong_end_command (cmd);
+		cong_document_end_command (doc, cmd);
 	}
 #else	
 	cong_document_for_each_location (doc, 

@@ -214,6 +214,36 @@ void
 cong_document_node_unref (CongDocument *doc,
 			  CongNodePtr node);
 
+/**
+ * cong_document_begin_command:
+ * @doc: The #CongDocument upon which the command is to act.
+ * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
+ * widget
+ * 
+ * Begins creating a named command which will act upon the document.  You can then add modifications to this command,
+ * and then finish with a call to cong_document_end_command()
+ *
+ * Returns:  a #CongCommand to which modifications should be added
+ *
+ */
+CongCommand*
+cong_document_begin_command (CongDocument *doc,
+			     const gchar *description);
+
+/**
+ * cong_document_end_command:
+ * @doc: The #CongDocument upon which the command acted.
+ * @cmd: The #CongCommand which is now complete
+ * 
+ * Finish creating a command which has acted upon the document.  You should have created this command using a call
+ * to cong_document_begin_command()
+ *
+ */
+void
+cong_document_end_command (CongDocument *doc,
+			   CongCommand *cmd);
+
+
 /** 
  * Update amortisation
  *

@@ -30,15 +30,6 @@
 
 G_BEGIN_DECLS
 
-/* Favoured API hook for creating commands: */
-CongCommand*
-cong_begin_command (CongDocument *doc,
-		    const gchar *description);
-
-/* Favoured API hook for finishing command creation: */
-void
-cong_end_command (CongCommand *cmd);
-
 #define DEBUG_COMMAND_LIFETIMES 0
 
 #define CONG_COMMAND_TYPE	  (cong_command_get_type ())

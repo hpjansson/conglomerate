@@ -747,8 +747,8 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &click_location)) {
 					if (cong_location_calc_word_extent(&click_location, doc, &start_of_word, &end_of_word)) {
-						CongCommand *cmd = cong_command_new (doc,
-										     _("Select word"));
+						CongCommand *cmd = cong_document_begin_command (doc,
+												_("Select word"));
 
 						cong_command_add_selection_change (cmd,										   
 										   &start_of_word,
@@ -756,10 +756,8 @@ on_signal_button_press (CongEditorArea *editor_area,
 						cong_command_add_cursor_change (cmd, 
 										&end_of_word);
 
-						cong_document_add_command (doc,
+						cong_document_end_command (doc,
 									   cmd);
-						
-						g_object_unref (G_OBJECT (cmd));
 					}			       
 #else
 
@@ -789,7 +787,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 
 #if SUPPORT_UNDO
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &new_location)) {
-					CongCommand *cmd = cong_begin_command (doc, _("Move cursor"));
+					CongCommand *cmd = cong_document_begin_command (doc, _("Move cursor"));
 
 					cong_command_add_selection_change (cmd,
 									   &new_location,
@@ -797,7 +795,7 @@ on_signal_button_press (CongEditorArea *editor_area,
 					cong_command_add_cursor_change(cmd,
 								       &new_location);
 
-					cong_end_command (cmd);
+					cong_document_end_command (doc, cmd);
 				}
 #else					
 				if (get_location_at_xy(editor_node_text, editor_area_text_fragment, event->x, event->y, &cursor->location)) {
@@ -852,14 +850,14 @@ on_signal_motion_notify (CongEditorArea *editor_area,
 				event->y, 
 				&new_location)) {
 #if SUPPORT_UNDO
-		CongCommand *cmd = cong_begin_command (doc, _("Drag out selection"));
+		CongCommand *cmd = cong_document_begin_command (doc, _("Drag out selection"));
 		
 		cong_command_add_cursor_change (cmd,
 						&new_location);
 		cong_command_add_selection_change (cmd, 
 						   cong_selection_get_logical_start (selection),
 						   &new_location);		
-		cong_end_command (cmd);
+		cong_document_end_command (doc, cmd);
 #else
 		cong_location_copy (&cursor->location, new_location);
 

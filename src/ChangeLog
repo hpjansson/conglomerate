@@ -1,5 +1,9 @@
 2003-10-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-command.c, cong-command.h, cong-document.c, cong-document.h, cong-editor-node-text.c, tree.c
+
+	New API for making document modifications
+
 	* cong-node-modification-add-after.c, cong-node-modification-add-before.c, cong-node-modification-make-orphan.c, cong-node-modification-set-parent.c
 
 	Various fixes in tree modification: fixed a typo in AddBefore, and fixed history of MakeOrphan

@@ -666,6 +666,38 @@ cong_document_node_unref (CongDocument *doc,
 	/* unwritten */
 }
 
+CongCommand*
+cong_document_begin_command (CongDocument *doc,
+			     const gchar *description)
+{
+	CongCommand *cmd;
+
+	g_return_val_if_fail (IS_CONG_DOCUMENT(doc), NULL);
+	g_return_val_if_fail (description, NULL);
+
+	cmd = cong_command_new (doc, description);
+
+	cong_document_begin_edit (doc);
+
+	return cmd;
+}
+
+void
+cong_document_end_command (CongDocument *doc,
+			   CongCommand *cmd)
+{
+	CongDocument *doc;
+
+	g_return_if_fail (IS_CONG_DOCUMENT(doc));
+	g_return_if_fail (IS_CONG_COMMAND(cmd));
+	g_return_if_fail (doc == cong_command_get_document (cmd));
+
+	cong_document_end_edit (doc);
+
+	cong_document_add_command (doc, cmd);
+	g_object_unref (G_OBJECT (cmd));
+}
+
 
 /* Public MVC hooks: */
 #if 1
