@@ -795,6 +795,7 @@ cong_app_new (int   argc,
 	app = g_new0(CongApp,1);
 	app->private = g_new0(CongAppPrivate,1);
 
+
 	/* Set up the GnomeProgram: */
 	PRIVATE(app)->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
 							  LIBGNOMEUI_MODULE,
@@ -802,7 +803,6 @@ cong_app_new (int   argc,
 							  GNOME_PARAM_HUMAN_READABLE_NAME,
 							  _("XML Editor"),
 							  GNOME_PROGRAM_STANDARD_PROPERTIES,
-							  /* GSt: bugzilla # 135345 reminder */
 							  NULL);
 
 	/* Set up usage of GConf: */
