@@ -551,7 +551,11 @@ cong_document_get_dispspec_element_for_node(CongDocument *doc, CongNodePtr node)
 	g_return_val_if_fail(doc, NULL);
 	g_return_val_if_fail(node, NULL);
 
-	return cong_dispspec_lookup_node(PRIVATE(doc)->ds, node);
+	if (PRIVATE(doc)->ds) {
+		return cong_dispspec_lookup_node (PRIVATE(doc)->ds, node);
+	} else {
+		return NULL;
+	}
 }
 
 /**
