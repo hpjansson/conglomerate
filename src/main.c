@@ -12,20 +12,23 @@
 #include "cong-plugin.h"
 #include "cong-font.h"
 
-#if 0
-#include <libgtkhtml/gtkhtml.h>
-#endif
+gchar* cong_util_cleanup_text(const xmlChar *src_text) {
+	gchar *buffer;
+	gchar *src;
+	gchar *dst;
+	gunichar unichar;
 
-gchar* cong_util_cleanup_text(const xmlChar *text) {
-	gchar *buffer = g_malloc((strlen(text)*3)+1); /* for safety's sake */
-	gchar *dst = buffer;
+	g_return_val_if_fail(src_text, NULL);
 
-	/* FIXME: this is broken; we need to have real UTF8 support here... */
+	g_assert(g_utf8_validate(src_text, -1, NULL));
 
-	while (*text) {
-		switch (*text) {
+	buffer = g_malloc((strlen(src_text)*6)+1); /* allow 6 bytes per character, plus a terminating byte; this SHOULD be big enough */
+	dst = buffer;
+
+	while (	unichar = g_utf8_get_char(src_text) ) {
+		switch (unichar) {
 		default:
-			*(dst++) = *text;
+			dst += g_unichar_to_utf8(unichar,dst);
 			break;
 		case '\n':
 			*(dst++) = '\\';
@@ -37,7 +40,7 @@ gchar* cong_util_cleanup_text(const xmlChar *text) {
 			break;
 		}
 
-		text++;
+		src_text = g_utf8_next_char(src_text);
 	}
 
 	*(dst++) = '\0';

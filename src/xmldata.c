@@ -65,34 +65,48 @@ enum CongNodeType cong_node_type(CongNodePtr node)
 
 	switch (node->type) {
 
-	default: g_assert(0);
+	default: g_assert_not_reached();
 
 	case XML_ELEMENT_NODE: 
 		return CONG_NODE_TYPE_ELEMENT;
-
+	case XML_ATTRIBUTE_NODE:
+		return CONG_NODE_TYPE_ATTRIBUTE;
 	case XML_TEXT_NODE: 
 		return CONG_NODE_TYPE_TEXT;
-
+	case XML_CDATA_SECTION_NODE:
+		return CONG_NODE_TYPE_CDATA_SECTION;
+	case XML_ENTITY_REF_NODE:
+		return CONG_NODE_TYPE_ENTITY_REF;
+	case XML_ENTITY_NODE:
+		return CONG_NODE_TYPE_ENTITY_NODE;
+	case XML_PI_NODE:
+		return CONG_NODE_TYPE_PI;
 	case XML_COMMENT_NODE: 
 		return CONG_NODE_TYPE_COMMENT;
-
-	case XML_ATTRIBUTE_NODE:
-	case XML_CDATA_SECTION_NODE:
-	case XML_ENTITY_REF_NODE:
-	case XML_ENTITY_NODE:
-	case XML_PI_NODE:
 	case XML_DOCUMENT_NODE:
+		return CONG_NODE_TYPE_DOCUMENT;
 	case XML_DOCUMENT_TYPE_NODE:
+		return CONG_NODE_TYPE_DOCUMENT_TYPE;
 	case XML_DOCUMENT_FRAG_NODE:
+		return CONG_NODE_TYPE_DOCUMENT_FRAG;
 	case XML_NOTATION_NODE:
+		return CONG_NODE_TYPE_NOTATION;
 	case XML_HTML_DOCUMENT_NODE:
+		return CONG_NODE_TYPE_HTML_DOCUMENT;
 	case XML_DTD_NODE:
+		return CONG_NODE_TYPE_DTD;
 	case XML_ELEMENT_DECL:
+		return CONG_NODE_TYPE_ELEMENT_DECL;
 	case XML_ATTRIBUTE_DECL:
+		return CONG_NODE_TYPE_ATRRIBUTE_DECL;
 	case XML_ENTITY_DECL:
+		return CONG_NODE_TYPE_ENTITY_DECL;
 	case XML_NAMESPACE_DECL:
+		return CONG_NODE_TYPE_NAMESPACE_DECL;
 	case XML_XINCLUDE_START:
+		return CONG_NODE_TYPE_XINCLUDE_START;
 	case XML_XINCLUDE_END:
+		return CONG_NODE_TYPE_XINCLUDE_END;
 #ifdef LIBXML_DOCB_ENABLED
 	case XML_DOCB_DOCUMENT_NODE:
 #endif
@@ -119,12 +133,106 @@ gchar *cong_node_get_path(CongNodePtr node)
 	return xmlGetNodePath(node);
 }
 
+gchar *cong_node_debug_description(CongNodePtr node)
+{
+	gchar *result = NULL; 
+	gchar *xpath;
+	gchar *cleaned_text = NULL; 
+
+	g_return_val_if_fail(node, NULL);
+
+	xpath = cong_node_get_path(node);
+
+	switch (node->type) {
+
+	default: g_assert_not_reached();
+
+	case XML_ELEMENT_NODE: 
+		result = g_strdup_printf("%s at %p, name=\"%s\", path=\"%s\"",
+					 cong_node_type_description(cong_node_type(node)),
+					 node,
+					 node->name,
+					 xpath);
+		break;
+	case XML_ATTRIBUTE_NODE:
+	case XML_TEXT_NODE: 
+		cleaned_text = cong_util_cleanup_text(node->content);
+		result = g_strdup_printf("%s at %p, name=\"%s\", content=\"%s\", path=\"%s\"",
+					 cong_node_type_description(cong_node_type(node)),
+					 node,
+					 node->name,
+					 cleaned_text,
+					 xpath);
+		break;
+	case XML_CDATA_SECTION_NODE:
+	case XML_ENTITY_REF_NODE:
+	case XML_ENTITY_NODE:
+	case XML_PI_NODE:
+	case XML_COMMENT_NODE: 
+		cleaned_text = cong_util_cleanup_text(node->content);
+		result = g_strdup_printf("%s at %p, name=\"%s\", content=\"%s\", path=\"%s\"",
+					 cong_node_type_description(cong_node_type(node)),
+					 node,
+					 node->name,
+					 cleaned_text,
+					 xpath);
+		break;
+	case XML_DOCUMENT_NODE:
+	case XML_DOCUMENT_TYPE_NODE:
+	case XML_DOCUMENT_FRAG_NODE:
+	case XML_NOTATION_NODE:
+	case XML_HTML_DOCUMENT_NODE:
+	case XML_DTD_NODE:
+	case XML_ELEMENT_DECL:
+	case XML_ATTRIBUTE_DECL:
+	case XML_ENTITY_DECL:
+	case XML_NAMESPACE_DECL:
+	case XML_XINCLUDE_START:
+	case XML_XINCLUDE_END:
+#ifdef LIBXML_DOCB_ENABLED
+	case XML_DOCB_DOCUMENT_NODE:
+#endif
+		result = g_strdup_printf("%s at %p, name=\"%s\", path=\"%s\"",
+					 cong_node_type_description(cong_node_type(node)),
+					 node,
+					 node->name,
+					 xpath);
+		break;
+		
+	}
+
+	if (cleaned_text) {
+		g_free(cleaned_text);
+	}
+	g_free(xpath);
+
+	return result;
+}
+
 static const gchar* node_type_names[CONG_NODE_TYPE_NUM]=
 {
 	"CONG_NODE_TYPE_UNKNOWN",
+
 	"CONG_NODE_TYPE_ELEMENT",
+	"CONG_NODE_TYPE_ATTRIBUTE",
 	"CONG_NODE_TYPE_TEXT",
-	"CONG_NODE_TYPE_COMMENT"
+	"CONG_NODE_TYPE_CDATA_SECTION",
+	"CONG_NODE_TYPE_ENTITY_REF",
+	"CONG_NODE_TYPE_ENTITY_NODE",
+	"CONG_NODE_TYPE_PI",
+	"CONG_NODE_TYPE_COMMENT",
+	"CONG_NODE_TYPE_DOCUMENT",
+	"CONG_NODE_TYPE_DOCUMENT_TYPE",
+	"CONG_NODE_TYPE_DOCUMENT_FRAG",
+	"CONG_NODE_TYPE_NOTATION",
+	"CONG_NODE_TYPE_HTML_DOCUMENT",
+	"CONG_NODE_TYPE_DTD",
+	"CONG_NODE_TYPE_ELEMENT_DECL",
+	"CONG_NODE_TYPE_ATTRIBUTE_DECL",
+	"CONG_NODE_TYPE_ENTITY_DECL",
+	"CONG_NODE_TYPE_NAMESPACE_DECL",
+	"CONG_NODE_TYPE_XINCLUDE_START",
+	"CONG_NODE_TYPE_XINCLUDE_END"
 };
 	
 
@@ -222,6 +330,42 @@ int cong_node_get_length(CongNodePtr node)
 
 	return xmlStrlen(node->content);
 	
+}
+
+gboolean cong_node_should_recurse(CongNodePtr node)
+{
+	g_return_val_if_fail(node, FALSE);
+
+	switch (node->type) {
+	case XML_ELEMENT_NODE:
+	case XML_ATTRIBUTE_NODE:
+		return TRUE;
+	case XML_TEXT_NODE:
+	case XML_CDATA_SECTION_NODE:
+		return TRUE;
+
+	case XML_ENTITY_REF_NODE:
+		return FALSE;
+	case XML_ENTITY_NODE:
+	case XML_PI_NODE:
+	case XML_COMMENT_NODE:
+	case XML_DOCUMENT_NODE:
+	case XML_DOCUMENT_TYPE_NODE:
+	case XML_DOCUMENT_FRAG_NODE:
+	case XML_NOTATION_NODE:
+	case XML_HTML_DOCUMENT_NODE:
+	case XML_DTD_NODE:
+	case XML_ELEMENT_DECL:
+	case XML_ATTRIBUTE_DECL:
+	case XML_ENTITY_DECL:
+	case XML_NAMESPACE_DECL:
+	case XML_XINCLUDE_START:
+	case XML_XINCLUDE_END:
+#ifdef LIBXML_DOCB_ENABLED
+	case XML_DOCB_DOCUMENT_NODE:
+#endif
+		return TRUE;
+	}
 }
 
 /* Construction: */

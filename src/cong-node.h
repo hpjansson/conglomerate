@@ -28,9 +28,27 @@
 enum CongNodeType
 {
 	CONG_NODE_TYPE_UNKNOWN,
+
 	CONG_NODE_TYPE_ELEMENT,
+	CONG_NODE_TYPE_ATTRIBUTE,
 	CONG_NODE_TYPE_TEXT,
+	CONG_NODE_TYPE_CDATA_SECTION,
+	CONG_NODE_TYPE_ENTITY_REF,
+	CONG_NODE_TYPE_ENTITY_NODE,
+	CONG_NODE_TYPE_PI,
 	CONG_NODE_TYPE_COMMENT,
+	CONG_NODE_TYPE_DOCUMENT,
+	CONG_NODE_TYPE_DOCUMENT_TYPE,
+	CONG_NODE_TYPE_DOCUMENT_FRAG,
+	CONG_NODE_TYPE_NOTATION,
+	CONG_NODE_TYPE_HTML_DOCUMENT,
+	CONG_NODE_TYPE_DTD,
+	CONG_NODE_TYPE_ELEMENT_DECL,
+	CONG_NODE_TYPE_ATRRIBUTE_DECL,
+	CONG_NODE_TYPE_ENTITY_DECL,
+	CONG_NODE_TYPE_NAMESPACE_DECL,
+	CONG_NODE_TYPE_XINCLUDE_START,
+	CONG_NODE_TYPE_XINCLUDE_END,
 
 	CONG_NODE_TYPE_NUM
 };
@@ -92,7 +110,9 @@ gboolean cong_node_is_tag(CongNodePtr node, const CongXMLChar *tagname);
 /* Method for getting an XPath to the node: */
 gchar *cong_node_get_path(CongNodePtr node);
 
-/* Handy debug method for writing log info: */
+/* Handy debug methods for writing log info: */
+gchar *cong_node_debug_description(CongNodePtr node);
+
 const gchar *cong_node_type_description(enum CongNodeType node_type);
 
 /* Methods for accessing attribute values: */
@@ -106,6 +126,10 @@ void cong_node_self_test_recursive(CongNodePtr node);
 void cong_node_recursive_delete(CongDocument *doc, CongNodePtr node);
 CongNodePtr cong_node_recursive_dup(CongNodePtr node);
 
+/* Method to test if it's safe to recurse over the children of this node.  It's generally not a good idea to recurse over the children of an entity reference.  
+   FIXME: why? 
+*/
+gboolean cong_node_should_recurse(CongNodePtr node);
 
 #if 1
 #define CONG_NODE_SELF_TEST(node) cong_node_self_test(node)

@@ -111,10 +111,12 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 	GtkWidget *dialog, *vbox;
 	GtkWidget *notebook;
 	CongDialogContent *dialog_content;
+	CongDialogCategory *category_xpath;
 	CongDialogCategory *category_dtdschema;
 	CongDialogCategory *category_custom;
 	xmlElementPtr xml_element;
 	GtkWindow *parent_window;
+	gchar *xpath;
 
 	cong_tree_view = g_object_get_data(G_OBJECT(widget),
 					   "popup_data_item");
@@ -144,6 +146,14 @@ gint tree_properties(GtkWidget *widget, CongNodePtr tag)
 				 cong_dialog_content_get_widget(dialog_content),
 				 gtk_label_new(_("Advanced"))
 				 );
+
+	category_xpath = cong_dialog_content_add_category(dialog_content, 
+							  _("Location"));
+	xpath = cong_node_get_path(tag);
+	cong_dialog_category_add_field(category_xpath, _("XPath"), gtk_label_new(xpath));
+	g_free(xpath);
+
+	
 
 	xml_element = xml_get_dtd_element(doc, tag);
 

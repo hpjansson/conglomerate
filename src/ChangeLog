@@ -1,3 +1,21 @@
+2003-03-26 David Malcolm <david@davemalcolm.demon.co.uk>
+
+	* cong-dom-view.c
+
+	Lots of bugfixing, smarter output and the beginnings of colour-coding.
+
+	* cong-node.h, xmldata.c
+
+	Cong node types now closely correspong with libxml2 node types; a new debug function; a new function to stop problems with recursion in tree traversal
+
+	* main.c
+
+	Text cleanup noew respects UTF-8
+
+	* tree.c
+
+	Properties dialog now can show XPath of the node
+
 2003-03-25 David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* Makefile.am, cong-dispspec-registry.c, cong-document.c, cong-error-dialog.c, cong-error-dialog.h, cong-error-file-open.c, cong-error-file-save.c, cong-error-tests.c, cong-file-open.c, cong-menus.c, cong-parser-error.c, cong-plugin.c, global.h, main.c, plugin-conert-case.c, plugin-sgml.c, plugin-website.c
