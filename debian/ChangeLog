@@ -1,7 +1,0 @@
-2003-11-25 Geert Stappers <stappers@stappers.nl>
-
-	* ChangeLog
-	New file, in fact the whole directory is new.
-	Each directory in conglomerate has ChangeLog file,
-	including this one. This file should be used when there are
-	changes that can't be documented in the Debian changelog.
