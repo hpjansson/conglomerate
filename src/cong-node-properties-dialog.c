@@ -255,6 +255,8 @@ void init_view_xpath_view(CongAdvancedNodePropertiesView *view,
 
 	xpath_view->label = GTK_LABEL(gtk_label_new(xpath));
 
+	gtk_widget_show (GTK_WIDGET (xpath_view->label));
+
 	cong_dialog_category_add_field(xpath_view->category, _("XPath"), GTK_WIDGET(xpath_view->label));
 	g_free(xpath);
 }
@@ -268,8 +270,8 @@ void init_view_modelled_attr(CongAdvancedNodePropertiesView *view,
 	g_assert(modelled_attr);
 	g_assert(cong_node_type(view->node)==CONG_NODE_TYPE_ELEMENT);
 
-	xml_element = xml_get_dtd_element(cong_view_get_document(CONG_VIEW(view)), view->node);
-
+	xml_element = cong_document_get_dtd_element(cong_view_get_document(CONG_VIEW(view)), 
+						    view->node);
 	if (xml_element) {
 		xmlAttributePtr attr;
 		modelled_attr->category = cong_dialog_content_add_category(view->dialog_content, 
