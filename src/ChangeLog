@@ -1,3 +1,9 @@
+2003-11-03  Paul Smith  <conglomerate@pcs.uklinux.net>
+ 
+	* cong-menus.c, cong-primary-window.c, xmledit.c, cong-range.c
+ 
+ 	Implements cong_range_can_be_copied, currently as a call to cong_range_can_be_cut, but allowing for future work (i.e. post 0.8.0) to treat these conditions separately
+
 2003-11-03  Michael Terry  <mterry@fastmail.fm>
  
 	* cong-menus.c

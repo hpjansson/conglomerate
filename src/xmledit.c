@@ -78,7 +78,7 @@ void cong_document_copy_selection(CongDocument *doc)
 		return;
 	}
 
-	if (!cong_range_can_be_cut (cong_selection_get_ordered_range (selection))) {
+	if (!cong_range_can_be_copied (cong_selection_get_ordered_range (selection))) {
 		/* FIXME: Make UI insensitive to block this */
 		g_message ("Selection cannot be copied");
 		return;

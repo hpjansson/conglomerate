@@ -228,6 +228,14 @@ cong_range_can_be_cut (CongRange *range)
 	}
 }
 
+gboolean
+cong_range_can_be_copied (CongRange *range)
+{
+	/* FIXME: Should be different conditions, this is in Bugzilla
+	   as Bug #126091 - to be fixed after 0.8.0 */
+	return cong_range_can_be_cut(range);
+}
+
 void
 cong_range_make_ordered (CongRange *range)
 {

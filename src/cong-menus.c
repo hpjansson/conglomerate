@@ -1417,7 +1417,7 @@ on_selection_changed_copy_menu (CongDocument *document,
 	CongSelection *selection = cong_document_get_selection(document);
 	CongRange *range = cong_selection_get_ordered_range(selection);
 	gtk_widget_set_sensitive (copy,
-				  cong_range_can_be_cut (range));
+				  cong_range_can_be_copied (range));
 }
 
 static void 
