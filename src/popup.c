@@ -346,6 +346,7 @@ void editor_popup_build(CongEditorWidget3 *editor_widget, GtkWindow *parent_wind
 	
 	item = gtk_image_menu_item_new_from_stock(GTK_STOCK_PASTE,
 						  NULL);
+	gtk_widget_set_sensitive(item, cong_document_can_paste(doc));
 	gtk_menu_append(GTK_MENU(cong_app_singleton()->popup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
 			   GTK_SIGNAL_FUNC(editor_popup_callback_paste), doc);

@@ -391,6 +391,9 @@ cong_document_cut_selection (CongDocument *doc);
 void
 cong_document_copy_selection (CongDocument *doc);
 
+gboolean
+cong_document_can_paste (CongDocument *doc);
+
 void 
 cong_document_paste_clipboard_or_selection (CongDocument *doc, 
 					    GtkWidget *widget);

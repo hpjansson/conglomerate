@@ -388,9 +388,10 @@ void cong_primary_window_toolbar_populate(CongPrimaryWindow *primary_window)
 				  "selection_change",
 				  G_CALLBACK(on_selection_changed_cut),
 				  cut);		
-		/* FIXME: What signal to connect paste to? */
+		/* FIXME: What signal to connect paste to in order to update sensitivity? */
 		gtk_widget_set_sensitive (copy, FALSE);
 		gtk_widget_set_sensitive (cut, FALSE);
+		gtk_widget_set_sensitive (paste, cong_document_can_paste(doc));
 	}
 }
 

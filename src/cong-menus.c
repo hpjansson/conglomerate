@@ -1508,7 +1508,9 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 										 ACTION_MARKER_COPY);
 			GtkWidget *cut =  gtk_item_factory_get_widget_by_action(item_factory,
 										 ACTION_MARKER_CUT);
-			/* FIXME: What signal to connect paste to? */
+			GtkWidget *paste =  gtk_item_factory_get_widget_by_action(item_factory,
+										 ACTION_MARKER_PASTE);
+			/* FIXME: What signal to connect paste to in order to update sensitivity? */
 
 			g_signal_connect (G_OBJECT(history),
 					  "changed",
@@ -1529,6 +1531,7 @@ void cong_menus_create_items(GtkItemFactory *item_factory,
 
 			gtk_widget_set_sensitive (undo, FALSE);
 			gtk_widget_set_sensitive (redo, FALSE);
+			gtk_widget_set_sensitive (paste, cong_document_can_paste(doc));
 			gtk_widget_set_sensitive (copy, FALSE);
 			gtk_widget_set_sensitive (cut, FALSE);
 		}

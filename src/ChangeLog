@@ -1,3 +1,10 @@
+2004-01-08  Paul Smith <conglomerate@pcs.uklinux.net>
+
+	* cong-document.c, cong-document.h, cong-menus.c, cong-primary-window.c, popup.c
+
+	Links Paste sensitivity to cong_document_can_paste.  Currently always returns true (therefore button is always sensitive)
+	This work on #126089
+
 2003-01-08  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-edit-find-and-replace.c
@@ -28,7 +35,7 @@
 
 	Updated year of copyright in About dialog
 
-2003-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
+2004-01-07  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	--- Version 0.7.10 ---
 
@@ -44,7 +51,7 @@
 
 	Update root of Overview tree when URL changes, fixing bug #130728
 
-2003-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
+2004-01-06  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-document.c, cong-document.h, cong-file-properties.c
 
@@ -88,7 +95,7 @@
 
 	--- Version 0.7.9 ---
 
-2003-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
+2004-01-03  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c
 
@@ -114,7 +121,7 @@
 
 	Big rewrite of selection handling: now attempts to intelligently offer and receive data in both text and XML formats, fixing bug #129731
 
-2003-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
+2004-01-02  David Malcolm <david@davemalcolm.demon.co.uk>
 
 	* cong-app.c, cong-app.h, tree.c, xmledit.c
 

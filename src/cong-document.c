@@ -1515,6 +1515,12 @@ cong_document_node_can_be_deleted (CongDocument *doc,
 	return TRUE; 
 }
 
+gboolean
+cong_document_can_paste(CongDocument *doc)
+{
+	return TRUE;
+	/* FIXMEPCS: conditions? */
+}
 
 /* Internal function definitions: */
 static void
