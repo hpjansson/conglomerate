@@ -205,6 +205,15 @@ cong_node_get_qualified_name (CongNodePtr node)
 }
 
 xmlNsPtr
+cong_node_get_ns_for_uri (CongNodePtr node, 
+			  const gchar *ns_uri)
+{
+	return xmlSearchNsByHref (node->doc,
+				  node,
+				  ns_uri);
+}
+
+xmlNsPtr
 cong_node_get_ns_for_prefix (CongNodePtr node, 
 			     const gchar *prefix)
 {

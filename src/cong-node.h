@@ -140,6 +140,22 @@ gchar*
 cong_node_get_qualified_name (CongNodePtr node);
 
 /*
+ * cong_node_get_ns_for_uri:
+ *
+ * @node:  the context in which to look for the prefix
+ * @ns_uri: the namespace URI
+ *
+ * Lookup a namespace URI; find the appropriate xmlNsPtr defined, 
+ * or NULL if not found.
+ *
+ * Returns:  the #xmlNsPtr if found, or NULL if not found.
+ *
+ */
+xmlNsPtr
+cong_node_get_ns_for_uri (CongNodePtr node, 
+			  const gchar *ns_uri);
+
+/*
  * cong_node_get_ns_for_prefix:
  *
  * @node:  the context in which to look for the prefix

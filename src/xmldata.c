@@ -413,59 +413,80 @@ static gboolean cong_command_add_xml_add_required_content (CongCommand *cmd,
  *
  * Returns whether the choice was correctly selected and added
  */
-static gboolean cong_command_add_xml_add_required_content_choice(CongCommand *cmd, xmlElementContentPtr content, xmlNodePtr node) {
-	GString *description;
-	GList *list = NULL;
+static gboolean
+cong_command_add_xml_add_required_content_choice (CongCommand *cmd, 
+						  xmlElementContentPtr content, 
+						  xmlNodePtr node) 
+{
+	gchar *description;
+	CongElementDescription *selected_element_desc = NULL;
+	GList *element_desc_list = NULL;
 	CongNodePtr new_node;
 	const xmlChar *names[256];
-	gchar *element_name;
 	gint i, size, length;
 	CongDocument *cong_doc;
 
-	g_return_val_if_fail (IS_CONG_COMMAND(cmd), FALSE);
+	g_return_val_if_fail (IS_CONG_COMMAND (cmd), FALSE);
 
 	cong_doc = cong_command_get_document (cmd);
 
 	/*  get potential children for this content element */
 	size = 0;
-	length = xmlValidGetPotentialChildren(content, names, &size, 256);
+	length = xmlValidGetPotentialChildren (content, 
+					       names, 
+					       &size, 
+					       256);
 	if (length == -1) {
 		return FALSE;
 	}
 
 	/*  turn array into a GList to pass to a dialog */
+#if 1
+	for (i = 0; i < length; i++) {
+		CongElementDescription *element_desc = cong_element_description_new (NULL, /* FIXME: we have no way of getting at this at the moment */
+										     names[i]);
+		element_desc_list = g_list_prepend (element_desc_list,
+						    element_desc);
+	}
+#else
 	for (i = 0; i < length; i++) {
 		list = g_list_prepend(list, (gpointer)(names[i]));
 	}
 	
 	/*  sort the list in alphabetical order */
 	list = g_list_sort(list, (GCompareFunc) strcmp );
+#endif
 
 	/*  create description for dialog */
-	description = g_string_new("");
-	g_string_printf(description, _("The element \"%s\" requires a child to be valid. Please choose one of the following child types."), /* FIXME Bz 123253 */
-			node->name);
+	description = g_strdup_printf (_("The element \"%s\" requires a child to be valid. Please choose one of the following child types."), /* FIXME Bz 123253 */
+				       node->name);
+	/* FIXME: put in a better description for the name */
 	
 	/*  select a dialog element */
-	element_name = string_selection_dialog(_("Required Children Choices"), description->str, list);
+	selected_element_desc = cong_util_modal_element_selection_dialog (_("Required Children Choices"), 
+									  description,
+									  cong_doc,
+									  element_desc_list);
+	cong_element_description_list_free (element_desc_list);
+	g_free(description);
 
-	/*  free the string and the list */
-	g_string_free(description, FALSE);
-	g_list_free(list);
+	if (selected_element_desc) {
+		/*  add the element */
+		new_node = cong_element_description_make_node (selected_element_desc,
+							       cong_doc,
+							       node);
+		cong_command_add_node_set_parent (cmd, 
+						  new_node, 
+						  node);
+		cong_element_description_free (selected_element_desc);
+		
+		/*  recur on the new node to add anything it needs */
+		return cong_command_add_xml_add_required_sub_elements (cmd, 
+								       new_node);
+	} else {
+		return FALSE;
+	}
 
-	/*  if user didn't respond, return false */
-	g_return_val_if_fail(element_name, FALSE);
-
-	/*  add the element */
-	/* FIXME:  we need to supply the correct namespace; need to provide ds element rather than a mere string... Hack to NULL ns for now :-( */
-	new_node = cong_node_new_element(NULL, element_name, cong_doc);
-	cong_command_add_node_set_parent(cmd, new_node, node);
-	
-	/*  free the returned string */
-	g_free(element_name);
-
-	/*  recur on the new node to add anything it needs */
-	return cong_command_add_xml_add_required_sub_elements(cmd, new_node);
 }
 	
  

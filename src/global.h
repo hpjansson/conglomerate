@@ -180,9 +180,6 @@ void editor_popup_init();
 /* Popup (context) menus for tree view and for section headings: */
 GtkWidget* cong_ui_popup_init(CongDocument *doc, CongNodePtr node, GtkWindow *parent_window);
 
-/* dialog to select from a list of string */
-gchar* string_selection_dialog(gchar *title, gchar *element_description, GList *elements);
-
 void xv_style_r(GtkWidget *widget, gpointer data);
 
 CongDispspec* 

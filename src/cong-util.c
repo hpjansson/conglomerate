@@ -29,6 +29,9 @@
 #include "cong-document.h"
 #include "cong-text-cache.h"
 
+#include "cong-dispspec.h"
+#include "cong-dispspec-element.h"
+
 #include <libxml/globals.h>
 #include <libxml/catalog.h>
 
@@ -556,3 +559,439 @@ cong_util_ns_uri_sort_order (const gchar* uri0,
 	}
 
 }
+
+CongElementDescription*
+cong_element_description_new (const gchar *ns_uri,
+			      const gchar *local_name)
+{
+	CongElementDescription *element_desc;
+
+	g_return_val_if_fail (local_name, NULL);
+
+	element_desc = g_new0 (CongElementDescription, 1);
+
+	if (element_desc->ns_uri) {
+		element_desc->ns_uri = g_strdup (ns_uri);
+	}
+	element_desc->local_name = g_strdup (local_name);
+
+	return element_desc;
+}
+
+CongElementDescription*
+cong_element_description_clone (const CongElementDescription *element_desc)
+{
+	CongElementDescription *new_element_desc;
+
+	g_return_val_if_fail (element_desc, NULL);
+
+	new_element_desc = g_new0 (CongElementDescription, 1);
+
+	if (element_desc->ns_uri) {
+		new_element_desc->ns_uri = g_strdup (element_desc->ns_uri);
+	}
+	new_element_desc->local_name = g_strdup (element_desc->local_name);
+
+	return new_element_desc;
+}
+
+void
+cong_element_description_free (CongElementDescription *element_desc)
+{
+	g_return_if_fail (element_desc);
+
+	if (element_desc->ns_uri) {
+		g_free (element_desc->ns_uri);
+	}
+	g_free (element_desc->local_name);
+}
+
+CongNodePtr
+cong_element_description_make_node (const CongElementDescription *element_desc,
+				    CongDocument *doc,
+				    CongNodePtr ns_search_node)
+{
+	xmlNsPtr xml_ns;
+	CongNodePtr new_node;
+	
+	g_return_val_if_fail (element_desc, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (ns_search_node, NULL);
+
+	/* FIXME:  what if the namespace doesn't exist in the document yet? */
+	xml_ns = cong_node_get_ns_for_uri (ns_search_node,
+					   element_desc->ns_uri);
+	new_node = cong_node_new_element (xml_ns,
+					  element_desc->local_name,
+					  doc);
+	return new_node;	
+}
+
+CongDispspecElement*
+cong_element_description_get_dispspec_element_for_doc (const CongElementDescription *element_desc,
+						       CongDocument *doc)
+{
+	CongDispspec *ds;
+
+	g_return_val_if_fail (element_desc, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	
+	ds = cong_document_get_dispspec (doc);
+	g_assert (ds);
+
+	return cong_element_description_get_dispspec_element_for_dispspec (element_desc,
+									   ds);
+}
+
+CongDispspecElement*
+cong_element_description_get_dispspec_element_for_dispspec (const CongElementDescription *element_desc,
+							    CongDispspec *ds)
+{
+	g_return_val_if_fail (element_desc, NULL);
+	g_return_val_if_fail (ds, NULL);
+
+	return cong_dispspec_lookup_element (ds, 
+					     element_desc->ns_uri, 
+					     element_desc->local_name);
+}
+
+#if 0
+gchar*
+cong_element_description_get_qualified_name (const CongElementDescription *element_desc)
+{
+	g_return_val_if_fail (element_desc, NULL);
+
+	return ;
+}
+#endif
+
+
+void
+cong_element_description_list_free (GList *list_of_element_desc)
+{
+	GList *iter;
+
+	for (iter=list_of_element_desc; iter; iter=iter->next) {
+		cong_element_description_free ((CongElementDescription*)iter->data);
+	}
+	g_list_free (list_of_element_desc);
+}
+
+#if 1
+enum {
+	FIELD_ELEMENT_DESC_PTR,
+	FIELD_DS_PIXBUF,
+	FIELD_DS_USER_VISIBLE_NAME,
+	FIELD_ELEMENT_LOCAL_NAME,
+
+	NUM_FIELDS
+};
+
+gint
+sort_func_ds_user_visible_name (GtkTreeModel *model,
+				GtkTreeIter *a,
+				GtkTreeIter *b,
+				gpointer user_data)
+{
+	gint result;
+
+	gchar *val_a = NULL;
+	gchar *val_b = NULL;
+
+	gtk_tree_model_get (model,
+			    a,
+			    FIELD_DS_USER_VISIBLE_NAME, &val_a, 
+			    -1);
+	gtk_tree_model_get (model,
+			    b,
+			    FIELD_DS_USER_VISIBLE_NAME, &val_b, 
+			    -1);
+
+	/* Sort all empty strings after non-empty strings: */
+	if (0==strcmp (val_a, "")) {
+		if (0==strcmp (val_b, "")) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+	} else {
+		if (0==strcmp (val_b, "")) {
+			result = -1;
+		} else {
+			result = strcmp (val_a, val_b);
+		}
+	}
+
+	g_free (val_a);
+	g_free (val_b);
+
+	return result;
+}
+
+gint
+sort_func_element_local_name (GtkTreeModel *model,
+			      GtkTreeIter *a,
+			      GtkTreeIter *b,
+			      gpointer user_data)
+{
+	gint result;
+
+	gchar *val_a = NULL;
+	gchar *val_b = NULL;
+
+	gtk_tree_model_get (model,
+			    a,
+			    FIELD_ELEMENT_LOCAL_NAME, &val_a, 
+			    -1);
+	gtk_tree_model_get (model,
+			    b,
+			    FIELD_ELEMENT_LOCAL_NAME, &val_b, 
+			    -1);
+
+	result = strcmp (val_a, val_b);
+
+	g_free (val_a);
+	g_free (val_b);
+
+	return result;
+}
+
+static void
+selection_changed_cb (GtkTreeSelection *selection,
+		      gpointer user_data)
+{
+	GladeXML *xml = GLADE_XML (user_data);
+	
+	gtk_widget_set_sensitive (glade_xml_get_widget (xml, "okbutton"),
+				  gtk_tree_selection_get_selected (selection, NULL, NULL));
+}
+
+
+CongElementDescription*
+cong_util_modal_element_selection_dialog (const gchar *title, 
+					  const gchar *description,
+					  CongDocument *doc,
+					  GList *elements)
+{
+	GladeXML *xml;
+	GtkWidget *dialog, *label, *tree_view;
+	GtkListStore *list_store;
+	GtkTreeSelection *selection;
+	CongElementDescription *result;
+
+	g_return_val_if_fail (title, NULL);
+	g_return_val_if_fail (description, NULL);
+	g_return_val_if_fail (IS_CONG_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (elements, NULL);
+
+	xml = cong_util_load_glade_file ("glade/string_selection_dialog.glade",
+					 NULL,
+					 doc,
+					 NULL);
+	dialog = glade_xml_get_widget (xml, "string_selection_dialog");
+	label = glade_xml_get_widget (xml, "label");
+	tree_view = glade_xml_get_widget (xml, "treeview1");
+	
+        gtk_window_set_title (GTK_WINDOW (dialog), 
+			      title);
+	gtk_label_set_text (GTK_LABEL (label), 
+			    description);
+
+	gtk_widget_set_sensitive (glade_xml_get_widget (xml, "okbutton"),
+				  FALSE);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+	g_signal_connect (G_OBJECT (selection), "changed",
+			  G_CALLBACK (selection_changed_cb),
+			  xml);
+
+	/* Set up list view columns */
+	{
+		GtkCellRenderer *renderer;
+		GtkTreeViewColumn *column;
+
+		/* First column: */
+		{
+			column = gtk_tree_view_column_new ();
+			renderer = gtk_cell_renderer_pixbuf_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			gtk_tree_view_column_set_attributes (column,
+							     renderer,
+							     "pixbuf", FIELD_DS_PIXBUF,
+							     NULL);
+			
+			renderer = gtk_cell_renderer_text_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			gtk_tree_view_column_set_attributes (column,
+							     renderer,
+							     "text", FIELD_DS_USER_VISIBLE_NAME,
+							     NULL);			
+
+			gtk_tree_view_column_set_sort_column_id (column,
+								 FIELD_DS_USER_VISIBLE_NAME);
+			
+			gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
+						     column);
+		}
+
+		/* Second column: */
+		{
+			column = gtk_tree_view_column_new ();
+			renderer = gtk_cell_renderer_text_new ();
+			gtk_tree_view_column_pack_start (column, renderer, FALSE);
+			gtk_tree_view_column_set_attributes (column,
+							     renderer,
+							     "text", FIELD_ELEMENT_LOCAL_NAME,
+							     NULL);
+
+			gtk_tree_view_column_set_sort_column_id (column,
+								 FIELD_ELEMENT_LOCAL_NAME);
+			
+			gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
+						     column);
+		}
+	}
+		
+	/* Set up and populate list model: */
+	{
+		GList *iter;
+
+		list_store = gtk_list_store_new (NUM_FIELDS,
+						 G_TYPE_POINTER,
+						 GDK_TYPE_PIXBUF,
+						 G_TYPE_STRING,
+						 G_TYPE_STRING);
+
+		gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
+						 FIELD_DS_USER_VISIBLE_NAME,
+						 sort_func_ds_user_visible_name,
+						 NULL,
+						 NULL);
+		gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
+						 FIELD_ELEMENT_LOCAL_NAME,
+						 sort_func_element_local_name,
+						 NULL,
+						 NULL);
+
+		for (iter = elements; iter; iter=iter->next) {
+			CongElementDescription *element_desc = (CongElementDescription *)iter->data;
+			GtkTreeIter iter;
+			gchar *tagged_name;
+			CongDispspecElement *ds_element = cong_element_description_get_dispspec_element_for_doc (element_desc,
+														 doc);
+			gtk_list_store_append (list_store, &iter);
+
+			tagged_name = g_strdup_printf ("<%s>", element_desc->local_name);
+
+			gtk_list_store_set (list_store, &iter,
+					    FIELD_ELEMENT_DESC_PTR, element_desc,
+					    FIELD_ELEMENT_LOCAL_NAME, tagged_name,
+					    -1);
+			g_free (tagged_name);
+
+			if (ds_element) {
+				GdkPixbuf* icon = cong_dispspec_element_get_icon (ds_element);
+
+				gtk_list_store_set (list_store, &iter,
+						    FIELD_DS_USER_VISIBLE_NAME, cong_dispspec_element_username(ds_element),
+						    -1);
+
+				if (icon) {
+					gtk_list_store_set (list_store, &iter,
+							    FIELD_DS_PIXBUF, icon,
+							    -1);
+					g_object_unref (G_OBJECT (icon));
+				}
+			} else {
+				gtk_list_store_set (list_store, &iter,
+						    FIELD_DS_USER_VISIBLE_NAME, "",
+						    -1);
+			}
+		}
+
+		gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view),
+					 GTK_TREE_MODEL (list_store));
+		g_object_unref (G_OBJECT (list_store));
+	}
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	/* Get selection: */
+	{
+		CongElementDescription *element_desc;
+		GtkTreeIter iter;
+
+		if (gtk_tree_selection_get_selected (selection, 
+						     NULL, 
+						     &iter)) {
+			gtk_tree_model_get (GTK_TREE_MODEL (list_store), 
+					    &iter, 
+					    FIELD_ELEMENT_DESC_PTR, &element_desc, 
+					    -1);
+
+			/* need to clone: */
+			result = cong_element_description_clone (element_desc);;
+
+		} else {
+			result = NULL;
+		}
+	}
+				
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+        g_object_unref(G_OBJECT(xml));
+
+	return result;
+}
+#else
+/**
+ * string_selection_dialog
+ * @title:
+ * @element_description:
+ * @elements:
+ * 
+ * Popup a modal, blocking dialog to obtain
+ * the user's choice between a list of char *.
+ * Returns a new char * of the element name 
+ * selected, which must be freed by caller.
+ * 
+ * Returns:
+ */
+gchar *string_selection_dialog(gchar *title, gchar *element_description, GList *elements) 
+{
+	gchar *glade_filename;
+	GladeXML *xml;
+	GtkWidget *dialog, *label, *combo;
+	gchar *text;
+
+	glade_filename = gnome_program_locate_file (cong_app_get_gnome_program (cong_app_singleton()),
+						    GNOME_FILE_DOMAIN_APP_DATADIR,
+						    "glade/string_selection_dialog.glade",
+						    FALSE,
+						    NULL);
+
+	xml = glade_xml_new(glade_filename, NULL, NULL);
+	glade_xml_signal_autoconnect(xml);
+	g_free(glade_filename);
+
+	dialog = glade_xml_get_widget(xml, "string_selection_dialog");
+	label = glade_xml_get_widget(xml, "label");
+	combo = glade_xml_get_widget(xml, "combo");
+
+        gtk_window_set_title(GTK_WINDOW(dialog), title);
+	gtk_label_set_text(GTK_LABEL(label), element_description);
+	gtk_combo_set_popdown_strings(GTK_COMBO(combo), elements);
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+
+        /* Don't bother catching how they exitted; we need to get a value
+         * from here so we don't crash. */
+
+        text = g_strdup(gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(combo)->entry)));
+	
+	gtk_widget_destroy(GTK_WIDGET(dialog));
+        g_object_unref(G_OBJECT(xml));
+
+	return text;
+}
+#endif

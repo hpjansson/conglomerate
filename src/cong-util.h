@@ -225,6 +225,64 @@ gint
 cong_util_ns_uri_sort_order (const gchar* uri0, 
 			     const gchar* uri1);
 
+
+typedef struct CongElementDescription CongElementDescription;
+
+struct CongElementDescription 
+{
+	gchar *ns_uri;
+	gchar *local_name;
+};
+
+CongElementDescription*
+cong_element_description_new (const gchar *ns_uri,
+			      const gchar *local_name);
+
+CongElementDescription*
+cong_element_description_clone (const CongElementDescription *element_desc);
+
+void
+cong_element_description_free (CongElementDescription *element_desc);
+
+CongNodePtr
+cong_element_description_make_node (const CongElementDescription *element_desc,
+				    CongDocument *doc,
+				    CongNodePtr ns_search_node);
+
+CongDispspecElement*
+cong_element_description_get_dispspec_element_for_doc (const CongElementDescription *element_desc,
+						       CongDocument *doc);
+
+CongDispspecElement*
+cong_element_description_get_dispspec_element_for_dispspec (const CongElementDescription *element_desc,
+							    CongDispspec *ds);
+
+#if 0
+gchar*
+cong_element_description_get_qualified_name (const CongElementDescription *element_desc);
+#endif
+
+void
+cong_element_description_list_free (GList *list_of_element_desc);
+
+
+/**
+ * cong_util_modal_element_selection_dialog:
+ *
+ * @title: Title for the dialog
+ * @description: Descriptive text for the dialog
+ * @doc: The document, so that dispspecs can be searched for descriptions
+ * @elements: A GList of #CongElementDescription
+ *
+ * Runs a modal element selection dialog.
+ *
+ * Returns: the selected element (which the caller must free), or NULL if the dialog was cancelled
+ */
+CongElementDescription*
+cong_util_modal_element_selection_dialog (const gchar *title, 
+					  const gchar *description,
+					  CongDocument *doc,
+					  GList *elements);
 G_END_DECLS
 
 #endif
