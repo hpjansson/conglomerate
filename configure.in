@@ -4,7 +4,7 @@ dnl ---------------------------------------------
 
 AC_PREREQ(2.52)
 
-AC_INIT(conglomerate, 0.5.1)
+AC_INIT(conglomerate, 0.5.2)
 AC_CONFIG_SRCDIR(src/main.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -129,5 +129,6 @@ dnl --- Output ---
 AC_OUTPUT(Makefile 
           po/Makefile.in
 	  data/Makefile
+	  pixmaps/Makefile
 	  examples/Makefile 
           src/Makefile)

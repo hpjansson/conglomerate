@@ -1,4 +1,4 @@
-SUBDIRS = src po data examples
+SUBDIRS = src po data examples pixmaps
 
 EXTRA_DIST = BUGS	\
   .diffexclude		\

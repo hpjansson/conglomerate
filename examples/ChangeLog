@@ -1,4 +1,10 @@
 creating ChangeLog
+2003-06-10  David Malcolm
+
+	* docbook.xds
+
+	Removed the ".png" extension from the icon filenames
+	
 2003-06-04  David Malcolm
 
 	* docbook.xds

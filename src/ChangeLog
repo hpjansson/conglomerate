@@ -1,6 +1,10 @@
 
 2003-06-10 David Malcolm <david@davemalcolm.demon.co.uk>
 
+	* cong-dispspec.c
+
+	Generalisations to the icon loading.
+	
 	* cong-debug-log-view.c, cong-dispspec.c, cong-document.c, cong-document.h, cong-dom-view.c, cong-editor-widget.c, cong-section-head-editor.c, cong-source-view.c, cong-tree-view.c, cong-view.h, global.h, popup.c, tree.c, xmlview.c
 
 	Removed coarse updates; section heads in editor view and XML sidebar view nodes now have popup right-click menus

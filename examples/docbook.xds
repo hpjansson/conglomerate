@@ -13,12 +13,12 @@
 			
 		<!-- The high-level divisions -->
 	
-		<element tag="set" type="structural" color="a0b0c0" icon="cong-docbook-set.png">
+		<element tag="set" type="structural" color="a0b0c0" icon="cong-docbook-set">
 			<name locale="en">Set</name>
 			<short-desc>A collection of books.</short-desc>
 		</element>
 
-		<element tag="book" type="structural" color="a0b0c0" icon="cong-docbook-book.png">
+		<element tag="book" type="structural" color="a0b0c0" icon="cong-docbook-book">
 
 			<!-- 
 				A way to get better section header information.
@@ -31,139 +31,139 @@
 			<name locale="en">Book</name>
 
 		</element>
-		<element tag="bookinfo" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="bookinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<header-info tag="title"></header-info>
 			<name locale="en">Book Information</name>
 		</element>
 
-		<element tag="article" type="structural" color="a0b0c0" icon="cong-docbook-article.png">
+		<element tag="article" type="structural" color="a0b0c0" icon="cong-docbook-article">
 			<name locale="en">Article</name>
 		</element>
-		<element tag="artheader" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="artheader" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Article Header</name>
 		</element>
 
-		<element tag="title" type="structural" color="a0b0c0" icon="cong-title.png">
+		<element tag="title" type="structural" color="a0b0c0" icon="cong-title">
 			<collapseto></collapseto>
 			<name locale="en">Title</name>
 		</element>
-		<element tag="subtitle" type="structural" color="a0b0c0" icon="cong-title.png">
+		<element tag="subtitle" type="structural" color="a0b0c0" icon="cong-title">
 			<collapseto></collapseto>
 			<name locale="en">Subtitle</name>
 		</element>
-		<element tag="authorgroup" type="structural" color="a0b0c0" icon="cong-wrapper.png">
+		<element tag="authorgroup" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Authorship Information</name>
 		</element>
-		<element tag="author" type="structural" color="a0b0c0" icon="cong-author.png"> 
+		<element tag="author" type="structural" color="a0b0c0" icon="cong-author"> 
 			<name locale="en">Author</name>
 		</element>
-		<element tag="editor" type="structural" color="a0b0c0" icon="cong-editor.png">
+		<element tag="editor" type="structural" color="a0b0c0" icon="cong-editor">
 			<name locale="en">Editor</name>
 		</element>
-		<element tag="publisher" type="structural" color="a0b0c0" icon="cong-publisher.png">
+		<element tag="publisher" type="structural" color="a0b0c0" icon="cong-publisher">
 			<name locale="en">Publisher</name>
 		</element>
-		<element tag="publishername" type="structural" color="a0b0c0" icon="cong-name.png">
+		<element tag="publishername" type="structural" color="a0b0c0" icon="cong-name">
 			<name locale="en">Publisher Name</name>
 		</element>
-		<element tag="address" type="structural" color="a0b0c0" icon="cong-address.png">
+		<element tag="address" type="structural" color="a0b0c0" icon="cong-address">
 			<name locale="en">Address</name>
 		</element>
-		<element tag="printhistory" type="structural" color="a0b0c0" icon="cong-history.png">
+		<element tag="printhistory" type="structural" color="a0b0c0" icon="cong-history">
 			<name locale="en">Printing History</name>
 		</element>
-		<element tag="isbn" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="isbn" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">ISBN</name>
 			<short-desc>The International Standard Book Number of a document.</short-desc>
 		</element>
-		<element tag="issn" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="issn" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">ISSN</name>
 			<short-desc>The International Standard Serial Number of a periodical.</short-desc>
 		</element>
-		<element tag="releaseinfo" type="structural" color="a0b0c0" icon="cong-history.png">
+		<element tag="releaseinfo" type="structural" color="a0b0c0" icon="cong-history">
 			<name locale="en">Release Information</name>
 			<short-desc>A brief description of the version of a document.</short-desc>
 		</element>
-		<element tag="pubdate" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="pubdate" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Date of Publication</name>
 		</element>
-		<element tag="copyright" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="copyright" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Copyright</name>
 		</element>
-		<element tag="year" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="year" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Year</name>
 		</element>
-		<element tag="holder" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="holder" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Copyright Holder</name>
 		</element>
-		<element tag="docinfo" type="structural" color="a0b0c0"  icon="cong-metadata.png">
+		<element tag="docinfo" type="structural" color="a0b0c0"  icon="cong-metadata">
 			<name locale="en">Bibliographic Information</name>
 		</element>
-		<element tag="abstract" type="structural" color="a0b0c0"  icon="cong-metadata.png">
+		<element tag="abstract" type="structural" color="a0b0c0"  icon="cong-metadata">
 			<name locale="en">Abstract</name>
 			<short-desc>A sumamry.</short-desc>
 		</element>
-		<element tag="para" type = "structural" icon="cong-paragraph.png">
+		<element tag="para" type = "structural" icon="cong-paragraph">
 			<name locale="en">Paragraph</name>
 		</element>
-		<element tag="legalnotice" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="legalnotice" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Legal Notice</name>
 		</element>
-		<element tag="colophon" type="structural" color="a0b0c0" icon="cong-metadata.png"> 
+		<element tag="colophon" type="structural" color="a0b0c0" icon="cong-metadata"> 
 			<name locale="en">Colophon</name>
 		</element>
 
-		<element tag="qandaset" type="structural" color="a0b0c0" icon="cong-faq.png">
+		<element tag="qandaset" type="structural" color="a0b0c0" icon="cong-faq">
 			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Set</name>
 		</element>
 
-		<element tag="qandadiv" type="structural" color="a0b0c0" icon="cong-wrapper.png">
+		<element tag="qandadiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<header-info tag="title"></header-info>
 			<name locale="en">Question-and-Answer Subset</name>
 		</element>
 
-		<element tag="qandaentry" type="structural" color="a0b0c0" icon="cong-faq.png">
+		<element tag="qandaentry" type="structural" color="a0b0c0" icon="cong-faq">
 			<name locale="en">Question-and-Answer</name>
 		</element>
 
-		<element tag="question" type="structural" color="a0b0c0" icon="cong-question.png">
+		<element tag="question" type="structural" color="a0b0c0" icon="cong-question">
 			<collapseto></collapseto>
 			<name locale="en">Question</name>
 		</element>
 
-		<element tag="answer" type="structural" color="a0b0c0" icon="cong-answer.png">
+		<element tag="answer" type="structural" color="a0b0c0" icon="cong-answer">
 			<collapseto></collapseto>
 			<name locale="en">Answer</name>
 		</element>
 
-		<element tag="bibliography" type="structural" color="a0b0c0" icon="cong-bibliography.png">
+		<element tag="bibliography" type="structural" color="a0b0c0" icon="cong-bibliography">
 			<name locale="en">Bibliography</name>
 		</element>
 
-		<element tag="biblioentry" type="structural" color="a0b0c0" icon="cong-entry.png">
+		<element tag="biblioentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<name locale="en">Entry</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="bibliodiv" type="structural" color="a0b0c0" icon="cong-wrapper.png">
+		<element tag="bibliodiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Section</name>
 		</element>
 
-		<element tag="bridgehead" type="structural" color="a0b0c0" icon="cong-title.png">
+		<element tag="bridgehead" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Free-floating Heading</name>
 		</element>
 
-		<element tag="footnote" type="structural" color="a0b0c0" icon="cong-footnote.png">
+		<element tag="footnote" type="structural" color="a0b0c0" icon="cong-footnote">
 			<name locale="en">Footnote</name>
 		</element>
 
 		<!-- The various sections -->
-		<element tag="preface" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="preface" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Preface</name>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="part" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="part" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Part</name>
 			<header-info tag="title"></header-info>
 		</element>
@@ -172,103 +172,103 @@
 			<name locale="en">Introduction</name>
 		</element>
 
-		<element tag="chapter" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="chapter" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Chapter</name>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect1" type="structural" color="a1b0c0" icon="cong-subsection.png">
+		<element tag="sect1" type="structural" color="a1b0c0" icon="cong-subsection">
 			<name locale="en">Section</name>
 			<short-desc>A top-level section of document</short-desc>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect2" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="sect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection</name>
 			<short-desc>A subsection within an <element>sect1</element></short-desc>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect3" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="sect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection (level 3)</name>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect4" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="sect4" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection (level 4)</name>
 			<header-info tag="title"></header-info>
 		</element>
-		<element tag="sect5" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="sect5" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Section (level 5)</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="reference" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="reference" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Reference</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="refentry" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="refentry" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Reference Page</name>
 			<header-info xpath="normalize-space(child::refmeta/refentrytitle)"></header-info>
 		</element>
 
-		<element tag="refmeta" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="refmeta" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Metadata</name>
 			<short-desc locale="en">Meta-information about a Reference Page</short-desc>
 		</element>
 
-		<element tag="refentrytitle" type="structural" color="a0b0c0" icon="cong-title.png">
+		<element tag="refentrytitle" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Title</name>
 		</element>
 
-		<element tag="refmiscinfo" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="refmiscinfo" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Additional metadata</name>
 		</element>
 
-		<element tag="indexterm" type="structural" color="a0b0c0" icon="cong-indexterm.png">
+		<element tag="indexterm" type="structural" color="a0b0c0" icon="cong-indexterm">
 			<name locale="en">Index Term</name>
 		</element>
 
 
-		<element tag="refnamediv" type="structural" color="a0b0c0" icon="cong-metadata.png">
+		<element tag="refnamediv" type="structural" color="a0b0c0" icon="cong-metadata">
 			<name locale="en">Naming</name>
 			<short-desc locale="en">Name, purpose and classification about a Reference Page</short-desc>
 		</element>
 
-		<element tag="refname" type="structural" color="a0b0c0" icon="cong-title.png">
+		<element tag="refname" type="structural" color="a0b0c0" icon="cong-title">
 			<name locale="en">Name</name>
 		</element>
 
-		<element tag="refpurpose" type="structural" color="a0b0c0" icon="cong-summary.png">
+		<element tag="refpurpose" type="structural" color="a0b0c0" icon="cong-summary">
 			<name locale="en">Purpose</name>
 		</element>
 
-		<element tag="refsynopsisdiv" type="structural" color="a0b0c0" icon="cong-wrapper.png">
+		<element tag="refsynopsisdiv" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Synopsis (syntax)</name>
 		</element>
 
-		<element tag="refsect1" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="refsect1" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Section</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="refsect2" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="refsect2" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsection</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="refsect3" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="refsect3" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Subsubsection</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="appendix" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="appendix" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Appendix</name>
 			<header-info tag="title"></header-info>
 		</element>
 
-		<element tag="glossary" type="structural" color="a0b0c0" icon="cong-subsection.png">
+		<element tag="glossary" type="structural" color="a0b0c0" icon="cong-subsection">
 			<name locale="en">Glossary</name>
 		</element>
 
-		<element tag="glossentry" type="structural" color="a0b0c0" icon="cong-entry.png">
+		<element tag="glossentry" type="structural" color="a0b0c0" icon="cong-entry">
 			<name locale="en">Glossary Entry</name>
 			<header-info tag="glossterm"></header-info>
 		</element>
@@ -286,37 +286,37 @@
 			<name locale="en">Example (informal)</name>
 		</element>
 
-		<element tag="informaltable" type="structural" color="a0b0c0" icon="cong-table.png">
+		<element tag="informaltable" type="structural" color="a0b0c0" icon="cong-table">
 			<name locale="en">Table (informal)</name>
 		</element>
 
-		<element tag="simplelist" type="structural" color="a0b0c0" icon="cong-list.png">
+		<element tag="simplelist" type="structural" color="a0b0c0" icon="cong-list">
 			<name locale="en">List (simple)</name>
 		</element>
 
 		<!-- List support -->
-		<element tag="itemizedlist" type="structural" color="a0b0c0" icon="cong-bulleted-list.png">
+		<element tag="itemizedlist" type="structural" color="a0b0c0" icon="cong-bulleted-list">
 			<name locale="en">List (itemised)</name>
 		</element>
-		<element tag="orderedlist" type="structural" color="a0b0c0" icon="cong-numbered-list.png">
+		<element tag="orderedlist" type="structural" color="a0b0c0" icon="cong-numbered-list">
 			<name locale="en">List (ordered)</name>
 		</element>
 
-		<element tag="listitem" type="structural" color="a0b0c0" icon="cong-list-item.png">
+		<element tag="listitem" type="structural" color="a0b0c0" icon="cong-list-item">
 			<name locale="en">List Item</name>
 			<collapseto></collapseto>
 		</element>
 
-		<element tag="member" type="structural" color="a0b0c0" icon="cong-list-item.png">
+		<element tag="member" type="structural" color="a0b0c0" icon="cong-list-item">
 			<collapseto></collapseto>
 			<name locale="en">List Member</name>
 		</element>
 
-		<element tag="variablelist" type="structural" color="a0b0c0" icon="cong-definition-list.png">
+		<element tag="variablelist" type="structural" color="a0b0c0" icon="cong-definition-list">
 			<name locale="en">List (terms and definitions)</name>
 		</element>
 
-		<element tag="varlistentry" type="structural" color="a0b0c0" icon="cong-wrapper.png">
+		<element tag="varlistentry" type="structural" color="a0b0c0" icon="cong-wrapper">
 			<name locale="en">Defined terms</name>
 		</element>
 
@@ -365,7 +365,7 @@
 			<!-- fileref is assumed for now -->
 		</element>
 
-		<element tag="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment.png">
+		<element tag="programlisting" type="structural" color="a0b0c0" icon="cong-code-fragment">
 			<!-- 
 				perhaps this should use a fixed-space font
 				Perhaps we need a boolean to determine whether something
