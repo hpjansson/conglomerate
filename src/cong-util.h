@@ -240,6 +240,23 @@ gint
 cong_util_ns_uri_sort_order (const gchar* uri0, 
 			     const gchar* uri1);
 
+/* 
+ * cong_util_make_source_view:
+ *
+ * Make a scrollable source view for a programming language, with syntax highlighting if available.
+ * The view is uneditable.
+ * The widget is already "shown".
+ *
+ */
+GtkWidget*
+cong_util_make_source_view (const gchar *source_mime_type,
+			    GtkTextView **output_text_view);
+
+GtkWidget*
+cong_source_view_new_full (CongDocument *doc,
+			   const gchar *source_mime_type,
+			   void (*regeneration_cb) (CongDocument *doc,
+						    GtkTextBuffer *text_buffer));
 /**
  * cong_util_attribute_value_equality:
  *
@@ -340,6 +357,13 @@ char *
 cong_util_get_qualified_attribute_name(const xmlNs *namespace,
 				       const xmlChar *local_attribute_name);
 
+/**
+ * cong_util_show_in_window:
+ * 
+ * Embed the chosen GtkWidget in an appropriate frame, with the application icon etc.
+ * Anything using this probably needs some HIG love.
+ *
+ */
 void
 cong_util_show_in_window (GtkWidget *content,
 			  const gchar *title);

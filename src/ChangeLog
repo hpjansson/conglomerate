@@ -1,5 +1,11 @@
 2004-06-11  David Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* cong-source-view.c, cong-util.h, plugin-relaxng.c: 
+
+	Generalised source view code to support any kind of textual
+	code generated from the XML tree whenever it changes.  Began work
+	on a "View RELAX NG in compact form" plugin
+
 	* cong-file-properties.c: 
 	Allow dispspec to be NULL
 

@@ -15,6 +15,7 @@
 #include "global.h"
 #include "cong-document.h"
 #include "cong-view.h"
+#include "cong-util.h"
 
 #define CONG_SOURCE_VIEW(x) ((CongSourceView*)(x))
 
@@ -29,8 +30,6 @@ typedef struct CongSourceViewDetails
 {
 	gboolean format;
 
-	GtkScrolledWindow *scrolled_window;
-	
 #ifdef ENABLE_GTKSOURCEVIEW
         GtkSourceBuffer *text_buffer;
         GtkSourceView *text_view;
@@ -40,6 +39,9 @@ typedef struct CongSourceViewDetails
 #endif
 	
 	gboolean is_buffer_up_to_date;
+
+	void (*regeneration_cb) (CongDocument *doc,
+				 GtkTextBuffer *text_buffer);
 
 } CongSourceViewDetails;
 
@@ -57,7 +59,7 @@ static void on_document_end_edit(CongView *view);
 static void on_document_node_make_orphan(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr former_parent);
 static void on_document_node_add_after(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr older_sibling);
 static void on_document_node_add_before(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr younger_sibling);
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent); /* added to end of child list */
+static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end);
 static void on_document_node_set_text(CongView *view, gboolean before_event, CongNodePtr node, const xmlChar *new_content);
 static void on_document_node_set_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name, const xmlChar *value);
 static void on_document_node_remove_attribute(CongView *view, gboolean before_event, CongNodePtr node, xmlNs *ns_ptr, const xmlChar *name);
@@ -69,14 +71,8 @@ static void on_document_set_dtd_ptr (CongView *view,
 
 #define DEBUG_SOURCE_VIEW 0
 
-/**
- * regenerate_text_buffer:
- * @source_view:
- *
- * TODO: Write me
- */
-void 
-regenerate_text_buffer(CongSourceView *source_view)
+static void 
+regenerate_text_buffer (CongSourceView *source_view)
 {
 	CongSourceViewDetails *details;
 
@@ -85,32 +81,36 @@ regenerate_text_buffer(CongSourceView *source_view)
 	details = source_view->private;
 	g_assert(details);
 
-#if 1
-	/* Use libxml to generate a UTF-8 string representation of the buffer: */
-	{
-		xmlChar *doc_txt_ptr;
-		int doc_txt_len;
-
-		xmlDocDumpFormatMemoryEnc(cong_document_get_xml(CONG_VIEW(source_view)->doc), 
-					  &doc_txt_ptr,
-					  &doc_txt_len, 
-					  "UTF-8",
-					  (details->format ? 1 : 0));
-
-		gtk_text_buffer_set_text(GTK_TEXT_BUFFER(details->text_buffer),
-					 doc_txt_ptr,
-					 doc_txt_len);
-
-		xmlFree(doc_txt_ptr);
-	}
-
+	g_assert (details->regeneration_cb);
+	(*details->regeneration_cb) (CONG_VIEW(source_view)->doc,
+				     GTK_TEXT_BUFFER(details->text_buffer));
 	details->is_buffer_up_to_date = TRUE;
-#else
-	gtk_text_buffer_set_text(GTK_TEXT_BUFFER(details->text_buffer),
-				 "fubar",
-				 -1);
-#endif
+}
 
+
+static void
+regenerate_source (CongDocument *doc,
+		   GtkTextBuffer *text_buffer)
+{
+	/* Use libxml to generate a UTF-8 string representation of the buffer: */
+	xmlChar *doc_txt_ptr;
+	int doc_txt_len;
+
+	xmlDocDumpFormatMemoryEnc (cong_document_get_xml (doc),
+				   &doc_txt_ptr,
+				   &doc_txt_len, 
+				   "UTF-8",
+#if 1
+				   0);
+#else
+				   (details->format ? 1 : 0));
+#endif
+	
+	gtk_text_buffer_set_text (GTK_TEXT_BUFFER(text_buffer),
+				  doc_txt_ptr,
+				  doc_txt_len);
+	
+	xmlFree (doc_txt_ptr);
 }
 
 static void on_document_change(CongSourceView *source_view)
@@ -212,7 +212,7 @@ static void on_document_node_add_before(CongView *view, gboolean before_event, C
 	}
 }
 
-static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent)
+static void on_document_node_set_parent(CongView *view, gboolean before_event, CongNodePtr node, CongNodePtr adoptive_parent, gboolean add_to_end)
 {
 	CongSourceView *source_view;
 
@@ -316,22 +316,64 @@ static void on_document_set_dtd_ptr (CongView *view,
 	}
 }
 
-/**
- * cong_source_view_new:
- * @doc:
- *
- * TODO: Write me
- */
-GtkWidget *
-cong_source_view_new(CongDocument *doc)
+GtkWidget*
+cong_util_make_source_view (const gchar *source_mime_type,
+			    GtkTextView **output_text_view)
 {
-	CongSourceViewDetails *details;
-	CongSourceView *view;
 #ifdef ENABLE_GTKSOURCEVIEW
         GtkSourceLanguagesManager *lang_manager;
         GtkSourceLanguage *lang;
+        GtkSourceBuffer *text_buffer;
+        GtkSourceView *text_view;
+#else
+        GtkTextBuffer *text_buffer;
+        GtkTextView *text_view;
+#endif
+	GtkScrolledWindow *scrolled_window;
+
+	scrolled_window = GTK_SCROLLED_WINDOW (gtk_scrolled_window_new (NULL, NULL) );
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+
+#ifdef ENABLE_GTKSOURCEVIEW
+        lang_manager = gtk_source_languages_manager_new ();
+        lang = gtk_source_languages_manager_get_language_from_mime_type (lang_manager, 
+									 source_mime_type);
+        text_buffer = gtk_source_buffer_new_with_language (lang);
+	text_view = GTK_SOURCE_VIEW (gtk_source_view_new_with_buffer (text_buffer));
+        gtk_source_buffer_set_highlight (details->text_buffer, 
+					 TRUE);
+        g_object_unref(lang_manager);
+        g_object_unref(lang);
+#else
+        text_buffer = gtk_text_buffer_new (NULL);
+        text_view = GTK_TEXT_VIEW (gtk_text_view_new_with_buffer(text_buffer));
 #endif
 
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (text_view), FALSE);
+	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (text_view), FALSE);
+
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), 
+					       GTK_WIDGET (text_view));
+	gtk_widget_show (GTK_WIDGET (text_view));
+	gtk_widget_show (GTK_WIDGET (scrolled_window));
+
+	*output_text_view = text_view;
+
+	return GTK_WIDGET (scrolled_window);
+}
+
+GtkWidget*
+cong_source_view_new_full (CongDocument *doc,
+			   const gchar *source_mime_type,
+			   void (*regeneration_cb) (CongDocument *doc,
+						    GtkTextBuffer *text_buffer))
+{
+	CongSourceViewDetails *details;
+	CongSourceView *view;
+	GtkWidget *widget;
+		
 	g_return_val_if_fail(doc, NULL);
 
 	view = g_new0(CongSourceView,1);
@@ -358,28 +400,10 @@ cong_source_view_new(CongDocument *doc)
 
 	details->format = FALSE;
 	
-	details->scrolled_window = GTK_SCROLLED_WINDOW( gtk_scrolled_window_new(NULL, NULL) );
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(details->scrolled_window), 
-				       GTK_POLICY_AUTOMATIC,
-				       GTK_POLICY_AUTOMATIC);
-
-#ifdef ENABLE_GTKSOURCEVIEW
-        lang_manager = gtk_source_languages_manager_new();
-        lang = gtk_source_languages_manager_get_language_from_mime_type(lang_manager, "text/xml");
-        details->text_buffer = gtk_source_buffer_new_with_language(lang);
-	details->text_view = GTK_SOURCE_VIEW(gtk_source_view_new_with_buffer(details->text_buffer));
-        gtk_source_buffer_set_highlight(details->text_buffer, TRUE);
-        g_object_unref(lang_manager);
-        g_object_unref(lang);
-#else
-        details->text_buffer = gtk_text_buffer_new(NULL);
-        details->text_view = GTK_TEXT_VIEW(gtk_text_view_new_with_buffer(details->text_buffer));
-#endif
-
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(details->text_view), FALSE);
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(details->text_view), FALSE);
-
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(details->scrolled_window), GTK_WIDGET(details->text_view));
+	widget = cong_util_make_source_view ("text/xml",
+					     &details->text_view);
+	details->text_buffer = gtk_text_view_get_buffer (details->text_view);
+	details->regeneration_cb = regeneration_cb;
 
 	regenerate_text_buffer(view);
 
@@ -389,11 +413,17 @@ cong_source_view_new(CongDocument *doc)
 			  G_CALLBACK (on_widget_destroy_event),
 			  view);
 
-	gtk_widget_show(GTK_WIDGET(details->text_view));
-	gtk_widget_show(GTK_WIDGET(details->scrolled_window));
-
-	return GTK_WIDGET(details->scrolled_window);	
+	return widget;
 }
+
+GtkWidget*
+cong_source_view_new (CongDocument *doc)
+{
+	cong_source_view_new_full (doc,
+				   "text/xml",
+				   regenerate_source);
+}
+
 
 static void
 cong_source_view_free (CongSourceView *source_view)
