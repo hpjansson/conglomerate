@@ -1,3 +1,8 @@
+2004-01-14 Jeff Martin  <jeff@custommonkey.org>
+
+	* dispspec.xml html.xml
+	Changed templates to use <cong:template> element
+
 2003-10-25 Geert Stappers  <stappers@stappers.nl>
 
 	* ChangeLog

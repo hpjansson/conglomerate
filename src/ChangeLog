@@ -1,3 +1,9 @@
+2004-01-14  Jeff Martin <jeff@custommonkey.org>
+
+	* plugin-templates.c
+
+	Change template code to use a <cong:template> element
+
 2004-01-13  Daniel Larsson <Daniel.Larsson@servicefactory.se>
 
 	* plugin-templates.c

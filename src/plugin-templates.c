@@ -31,6 +31,7 @@
 #include "cong-dispspec.h"
 #include "cong-util.h"
 #include "cong-vfs.h"
+#include <libxml/xpath.h>
 
 const gchar NAMESPACE[] = "http://www.conglomerate.org/";
 
@@ -39,6 +40,34 @@ typedef struct CongTemplate
 	CongPlugin *plugin;
 	gchar* dir;
 } CongTemplate;
+
+static xmlXPathContextPtr create_xpath_context(xmlDocPtr doc)
+{
+	xmlXPathContextPtr xpathCtx; 
+	xpathCtx = xmlXPathNewContext(doc);
+	xmlXPathRegisterNs(xpathCtx, "cong", NAMESPACE);
+	return xpathCtx;
+}
+
+static void remove_template_def(xmlDocPtr template)
+{
+	xmlXPathContextPtr xpathCtx; 
+	xmlXPathObjectPtr xpathObj; 
+
+	xpathCtx = create_xpath_context(template);
+
+	g_assert(xpathCtx);
+
+	xpathObj = xmlXPathEvalExpression("/*/cong:template", xpathCtx);
+
+	g_assert(xpathObj);
+
+	xmlNodePtr def = xpathObj->nodesetval->nodeTab[0];
+	xmlReplaceNode(def, def->next);
+
+	xmlXPathFreeObject(xpathObj);
+	xmlXPathFreeContext(xpathCtx); 
+}
 
 void factory_action_callback_templates(CongServiceDocumentFactory *factory,
 	CongNewFileAssistant *assistant, gpointer user_data)
@@ -50,10 +79,7 @@ void factory_action_callback_templates(CongServiceDocumentFactory *factory,
 
 	template = xmlParseFile(template_file_name);
 
-	xmlUnsetNsProp (xmlDocGetRootElement(template),
-				"name", NAMESPACE);
-	xmlUnsetNsProp (xmlDocGetRootElement(template),
-				"description", NAMESPACE);
+	remove_template_def(template);
 
 	cong_ui_new_document_from_manufactured_xml(template,
 		cong_new_file_assistant_get_toplevel(assistant));
@@ -82,14 +108,38 @@ static GSList* get_template_paths(CongPlugin* plugin)
 	return template_paths;
 }
 
+static xmlChar* value_from_template(xmlDocPtr doc, xmlChar* path)
+{
+	xmlXPathContextPtr xpathCtx; 
+	xmlXPathObjectPtr xpathObj; 
+	xmlChar* value;
+
+	xpathCtx = create_xpath_context(doc);
+
+	g_assert(xpathCtx);
+
+	xpathObj = xmlXPathEvalExpression(path, xpathCtx);
+
+	g_assert(xpathObj);
+
+	value = g_strdup(xpathObj->stringval);
+
+	xmlXPathFreeObject(xpathObj);
+	xmlXPathFreeContext(xpathCtx); 
+
+	return value;
+}
+
 static xmlChar* cong_get_template_name(xmlDocPtr doc)
 {
-	return xmlGetNsProp(xmlDocGetRootElement(doc), "name", NAMESPACE);
+	return value_from_template(doc,
+		"string(/*/cong:template/cong:name)");
 }
 
 static xmlChar* cong_get_template_description(xmlDocPtr doc)
 {
-	return xmlGetNsProp(xmlDocGetRootElement(doc), "description", NAMESPACE);
+	return value_from_template(doc,
+		"string(/*/cong:template/cong:description)");
 }
 
 static gboolean
@@ -118,6 +168,8 @@ register_template(const gchar *rel_path,
 	name = cong_get_template_name(doc);
 	description = cong_get_template_description(doc);
 
+	g_message("template: %s, %s", name, description);
+
 	if(name!=NULL && description!=NULL)
 	{
 		g_message("plugin: %s, %s, %s", name, description, file_name);
@@ -133,6 +185,8 @@ register_template(const gchar *rel_path,
 		g_warning("Template %s is not a valid template", file_name);
 	}
 
+	xmlFree(name);
+	xmlFree(description);
 	xmlFreeDoc(doc);
 
 	return TRUE;

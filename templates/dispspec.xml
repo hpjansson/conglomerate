@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
-<dispspec xmlns:cong="http://www.conglomerate.org/"
-  cong:name="Display Spec" cong:description="Conglomerate Display Specification">
+<dispspec>
+  <cong:template xmlns:cong="http://www.conglomerate.org/">
+    <cong:name>Display Spec</cong:name>
+    <cong:description>Conglomerate Display Specification</cong:description>
+  </cong:template>
   <metadata>
     <name>New Conglomerate Display Specification</name>
     <description/>
