@@ -1,5 +1,9 @@
 2004-01-20  Dave Malcolm  <david@davemalcolm.demon.co.uk>
 
+	* plugin-dtd.c, plugin-tests.c
+
+	Fixed typo; disabled broken plugin
+
 	* cong-file-new.c, cong-service-document-factory.h, plugin-random.c
 
 	File->New Assistant can now store per-assistant/per-factory data; use this to wire up the GUI for the random doc plugin to the creation algorithm

@@ -326,7 +326,9 @@ void factory_action_callback_unicode(CongServiceDocumentFactory *factory, CongNe
 gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 {
 	g_return_val_if_fail(plugin, FALSE);
-	
+
+	/* Disable this service; it's confusing to end-users and unstable: */
+#if 0	
 	cong_plugin_register_document_factory(plugin, 
 					      _("Unicode Character Reference"), 
 					      _("Create a table listing a part of the Unicode character set as a DocBook article"),
@@ -335,6 +337,8 @@ gboolean plugin_tests_plugin_register(CongPlugin *plugin)
 					      factory_action_callback_unicode,
 					      NULL,
 					      NULL);
+#endif
+
 	return TRUE;
 }
 

@@ -512,7 +512,7 @@ add_content_subtree_to_rng (CongNodePtr node_parent,
 		   But if we have something like ( tag-a | tag-b | tag-c | ... | tag-z) in the DTD, we get a tree of ( choice tag-a (choice tag-b (choice tag-c ( ... choice tag-y tag-z))))
 		   which creates a grim-looking RNG tree.
 
-		   So we spot simple <choice> in the tag above, and merge into it if possible; <choice> is associative and hence bracketing should make difference...
+		   So we spot simple <choice> in the tag above, and merge into it if possible; <choice> is associative and hence bracketing should make no difference...
 		 */
 		{
 			if (cong_node_is_tag (node_occurrence, NULL, "choice")) {
