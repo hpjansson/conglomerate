@@ -43,6 +43,7 @@ visit_func(const gchar *rel_path,
 		/* get at name */
 		GnomeVFSURI* uri_filename = gnome_vfs_uri_append_string(details->path_uri,
 									rel_path);
+		gchar* filename = gnome_vfs_uri_extract_short_path_name(uri_filename);
 
 		CongDispspec* ds;
 		GnomeVFSResult vfs_result = cong_dispspec_new_from_xds_file(uri_filename, &ds);
@@ -52,13 +53,14 @@ visit_func(const gchar *rel_path,
 			if (ds!=NULL) {
 				cong_dispspec_registry_add(details->registry, ds);
 			} else {
-				g_message("Problem parsing xds file\n");
+				g_warning("Problem parsing xds file: %s.\n",filename);
 			}
 		} else {
-			g_message("Problem loading xds file\n");
+			g_warning("Problem loading xds file: %s.\n",filename);
 		}
 
 		gnome_vfs_uri_unref(uri_filename);
+		/* FIXME: should filename be unref-ed ? GSt */
 	}
 	
 	return TRUE;
