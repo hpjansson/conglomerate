@@ -1,14 +1,12 @@
 ## Process this file with automake to produce Makefile.in
 
-# This is a blank Makefile.am for using gtk-doc.
-# Copy this to your project's API docs directory and modify the variables to
-# suit your project. See the GTK+ Makefiles in gtk+/docs/reference for examples
+# See the GTK+ Makefiles in gtk+/docs/reference for examples
 # of using the various options.
 
-# The name of the module, e.g. 'glib'.
+# The name of the module.
 DOC_MODULE=conglomerate
 
-# The top-level SGML file. Change it if you want.
+# The top-level SGML file.
 DOC_MAIN_SGML_FILE=conglomerate-docs.sgml
 
 # The directory containing the source code. Relative to $(srcdir).
