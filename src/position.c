@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -127,7 +129,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 
 			else if (xml_frag_type(pos->node) == XML_TAG_SPAN)
 			{
-				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(pos->node)))
+				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(pos->node)))
 				{
 					pos->node = node_prev2;
 					if (xml_frag_type(pos->node) == XML_DATA) 
@@ -186,7 +188,7 @@ void pos_pl(struct xed *xed, struct pos *pos)
 		
 		while (pos->node)
 		{
-			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(pos->node)))
+			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(pos->node)))
 			{ pos->node = 0; break; }
 				
 			node_prev = pos->node;
@@ -509,4 +511,9 @@ struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c)
 	printf("\n\n");
 #endif
 	return(pos);
+}
+
+struct pos *pos_logical_to_physical_new(struct xed *xed, cong_location *loc)
+{
+  return pos_logical_to_physical(xed, loc->tt_loc, loc->char_loc);
 }

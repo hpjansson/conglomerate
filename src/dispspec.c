@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -10,6 +12,48 @@
 #include <xml.h>
 
 #include "global.h"
+
+/* Changing representation and file format: */
+struct _cong_dispspec
+{
+  int dummy[128];
+  TTREE *tt;
+};
+
+void cong_dispspec_init(TTREE *ds);
+
+cong_dispspec* cong_dispspec_new_from_file(const char *name)
+{
+  g_assert(0);
+
+  return NULL;
+}
+
+cong_dispspec* cong_dispspec_new_from_ttree(TTREE *t)
+{
+  cong_dispspec* ds;
+
+  g_return_val_if_fail(t!=NULL,NULL);
+
+  ds = g_new(cong_dispspec,1);
+  ds->tt = t;
+
+
+  cong_dispspec_init(t);
+
+  return ds;
+}
+
+void cong_dispspec_delete(cong_dispspec *dispspec)
+{
+  g_assert(0);
+}
+
+TTREE* cong_dispspec_ttree(cong_dispspec *dispspec)
+{
+  return dispspec->tt;
+}
+
 
 TTREE *get_upper_section(TTREE *x)
 {
@@ -35,91 +79,94 @@ TTREE *get_upper_section(TTREE *x)
 #define DS_DEBUG_MSG2(x, a) ((void)0)
 #endif
 
-int ds_element_structural(TTREE *ds, char *name)
+
+gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name)
 {
   TTREE *n0;
 
-  DS_DEBUG_MSG2( "ds_element_structural(ds,\"%s\")\n", name );
+  DS_DEBUG_MSG2("cong_dispspec_element_structural(ds,\"%s\")\n",name);
   
-  n0 = ttree_node_find1(ds, name, strlen(name), 0);
+  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
   if (!n0) {
     DS_DEBUG_MSG1("not found in dispspec, so not structural\n");
-    return(0);
+    return FALSE;
   }
   
   n0 = ttree_node_find1(n0, "type", 4, 0);
   if (!n0) {
     DS_DEBUG_MSG1("\"type\" not found, so not structural\n");
-    return(0);
+
+    return FALSE;
   }
   
   if (!n0->child) {
     DS_DEBUG_MSG1("No child found, so not structural\n");
-    return(0);
+
+    return FALSE;
   }
   
   if (!strcasecmp("structural", n0->child->data)) {
     DS_DEBUG_MSG1("Child has \"structural\" text, so it is structural\n");
-    return(1);
+    return TRUE;
   }
 
   DS_DEBUG_MSG1("Falling through, so not structural\n");
   
-  return(0);
+  return FALSE;
 }
 
 
-int ds_element_collapse(TTREE *ds, char *name)
+gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name)
 {
   TTREE *n0;
   
-  n0 = ttree_node_find1(ds, name, strlen(name), 0);
-  if (!n0) return(0);
+  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
+  if (!n0) return FALSE;
   
   n0 = ttree_node_find1(n0, "collapseto", 10, 0);
-  if (n0) return(1);
+  if (n0) return TRUE;
   
-  return(0);
+  return FALSE;
 }
 
 
-int ds_element_span(TTREE *ds, char *name)
+gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name)
 {
   TTREE *n0;
   
-  n0 = ttree_node_find1(ds, name, strlen(name), 0);
-  if (!n0) return(0);
+  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
+  if (!n0) return FALSE;
   
   n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) return(0);
+  if (!n0) return FALSE;
   
-  if (!n0->child) return(0);
+  if (!n0->child) return FALSE;
   
-  if (!strcasecmp("span", n0->child->data)) return(1);
+  if (!strcasecmp("span", n0->child->data)) return TRUE;
   
-  return(0);
+  return FALSE;
 }
 
 
-int ds_element_insert(TTREE *ds, char *name)
+gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name)
 {
   TTREE *n0;
   
-  n0 = ttree_node_find1(ds, name, strlen(name), 0);
-  if (!n0) return(0);
+  n0 = ttree_node_find1(ds->tt, name, strlen(name), 0);
+  if (!n0) return FALSE;
   
   n0 = ttree_node_find1(n0, "type", 4, 0);
-  if (!n0) return(0);
+  if (!n0) return FALSE;
   
-  if (!n0->child) return(0);
+  if (!n0->child) return FALSE;
   
-  if (!strcasecmp("insert", n0->child->data)) return(1);
+  if (!strcasecmp("insert", n0->child->data)) return TRUE;
   
-  return(0);
+  return FALSE;
 }
 
 
-TTREE *ds_get_first_structural(TTREE *ds)
+TTREE *cong_dispspec_get_first_structural(TTREE *ds)
 {
 	TTREE *n0, *n1;
 
@@ -137,7 +184,7 @@ TTREE *ds_get_first_structural(TTREE *ds)
 }
 
 
-TTREE *ds_get_next_structural(TTREE *prev)
+TTREE *cong_dispspec_get_next_structural(TTREE *prev)
 {
 	TTREE *n0, *n1;
 
@@ -155,7 +202,7 @@ TTREE *ds_get_next_structural(TTREE *prev)
 }
 
 
-TTREE *ds_get_first_span(TTREE *ds)
+TTREE *cong_dispspec_get_first_span(TTREE *ds)
 {
 	TTREE *n0, *n1;
 
@@ -173,7 +220,7 @@ TTREE *ds_get_first_span(TTREE *ds)
 }
 
 
-TTREE *ds_get_next_span(TTREE *prev)
+TTREE *cong_dispspec_get_next_span(TTREE *prev)
 {
 	TTREE *n0, *n1;
 
@@ -216,7 +263,7 @@ void col_to_gcol(GdkColor *gcol, unsigned int col)
 }
 
 
-unsigned int ds_colour_get(TTREE *ds, TTREE *x, int odd)
+unsigned int cong_dispspec_colour_get(TTREE *ds, TTREE *x, int odd)
 {
   TTREE *d;
 
@@ -231,11 +278,11 @@ unsigned int ds_colour_get(TTREE *ds, TTREE *x, int odd)
 }
 
 
-char *ds_name_get(TTREE *x)
+char *cong_dispspec_name_get(TTREE *x)
 {
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(the_globals.ds_global, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
+  n0 = ttree_node_find1(the_globals.ds->tt, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "name", 4, 0);
@@ -250,11 +297,11 @@ char *ds_name_get(TTREE *x)
 }
 
 
-char *ds_name_name_get(TTREE *t)
+char *cong_dispspec_name_name_get(TTREE *t)
 {
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(the_globals.ds_global, t->data, t->size, 0);
+  n0 = ttree_node_find1(the_globals.ds->tt, t->data, t->size, 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "name", 4, 0);
@@ -269,12 +316,12 @@ char *ds_name_name_get(TTREE *t)
 }
 
 
-GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog)
+GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog)
 {
   UNUSED_VAR(GdkGC *gc)
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(ds, t->data, t->size, 0);
+  n0 = ttree_node_find1(ds->tt, t->data, t->size, 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "color", 5, 0);
@@ -290,12 +337,12 @@ GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog)
 }
 
 
-GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog)
+GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog)
 {
   UNUSED_VAR(GdkGC *gc)
   TTREE *n0, *n1;
   
-  n0 = ttree_node_find1(ds, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
+  n0 = ttree_node_find1(ds->tt, xml_frag_name_nice(x), strlen(xml_frag_name(x)), 0);
   if (n0)
     {
       n1 = ttree_node_find1(n0, "color", 5, 0);
@@ -311,7 +358,7 @@ GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog)
 }
 
 
-void ds_init(TTREE *ds)
+void cong_dispspec_init(TTREE *ds)
 {
   TTREE *n0, *n1, *n2, *n3;
   GdkGC *gc;
@@ -405,7 +452,7 @@ char *pick_structural_tag()
 
   /* Window -> vbox -> buttons */
 
-	for (n0 = ds_get_first_structural(the_globals.ds_global); n0; n0 = ds_get_next_structural(n0))
+	for (n0 = cong_dispspec_get_first_structural(cong_dispspec_ttree(the_globals.ds)); n0; n0 = cong_dispspec_get_next_structural(n0))
 	{
     n1 = ttree_node_find1(n0, "name", 4, 0);
     if (!n1) continue;

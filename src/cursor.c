@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -67,8 +69,13 @@ void curs_place_in_xed(struct curs* curs, struct xed *xed, int x, int y)
 
 	pos0 = pos_physical_to_logical(xed, x, y);
 	pos1 = pos_logical_to_physical(xed, pos0->node, pos0->c);
+
+#if 1
+	cong_location_set(&curs->location, pos0->node, pos0->c);
+#else
 	curs->t = pos0->node;
 	curs->c = pos0->c;
+#endif
 	free(pos0);
 
 	curs->x = pos1->x;
@@ -90,8 +97,12 @@ void curs_init(struct curs* curs)
 
 	curs->w = 0;
 	curs->x = curs->y = 0;
+#if 1
+	cong_location_set(&curs->location, NULL, 0);
+#else
 	curs->t = 0;
 	curs->c = 0;
+#endif
 
 	gtk_timeout_add(500, curs_blink, 0);
 	curs->gc = gdk_gc_new(cong_gui_get_window(&the_gui)->window);
@@ -131,16 +142,25 @@ gint curs_data_insert(struct curs* curs, char *s)
 
 	len = strlen(s);
 
+#if 1
+	if (!cong_location_exists(&curs->location)) return(0);
+	if (cong_location_frag_type(&curs->location) != XML_DATA) return(0);
+#else
 	if (!curs->t) return(0);
 	if (xml_frag_type(curs->t) != XML_DATA) return(0);
+#endif
 
+#if 1
+	cong_location_insert_chars(&curs->location, s);
+#else
 	n = curs->t->child;
-  n->data = realloc(n->data, (n->size + 1) + len);
+	n->data = realloc(n->data, (n->size + 1) + len);
 
 	memmove(n->data + curs->c + len, n->data + curs->c, (n->size + 1) - curs->c);
 	memcpy(n->data + curs->c, s, len);
 	n->size += len;
 	curs->c += len;
+#endif
 	return(1);
 }
 
@@ -152,13 +172,23 @@ int curs_paragraph_insert(struct curs* curs)
 	g_assert(curs!=NULL);
 	
 	if (!curs->xed) return(0);
-	
+
+#if 1
+	if (!cong_location_exists(&curs->location)) return(0);
+	if (cong_location_frag_type(&curs->location) != XML_DATA) return(0);
+#else	
 	if (!curs->t) return(0);
 	if (xml_frag_type(curs->t) != XML_DATA) return(0);
-	
+#endif
+
+#if 1
+	t = cong_location_xml_frag_data_nice_split2(&curs->location);
+	cong_location_set(&curs->location,t->next,0);
+#else	
 	t = xml_frag_data_nice_split2(curs->t, curs->c);
 	curs->t = t->next;
 	curs->c = 0;
+#endif
 
 	dummy = ttree_node_add(0, "dummy", 5);
 	
@@ -189,8 +219,13 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 	
 	if (!curs->xed) return;
 
+#if 1
+	n = curs->location.tt_loc;
+	if (cong_location_frag_type(&curs->location) == XML_DATA && curs->location.char_loc) { curs->location.char_loc--; return; }
+#else
 	n = curs->t;
 	if (xml_frag_type(n) == XML_DATA && curs->c) { curs->c--; return; }
+#endif
 
 	do
 	{
@@ -203,7 +238,7 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -227,7 +262,7 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 
 		while (n)
 		{
-			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_prev(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}
@@ -235,10 +270,8 @@ void curs_prev_char(struct curs* curs, struct xed *xed)
 	while (n);
 	
 	
-	if (n) 
-  {
-		curs->t = n;
-	  curs->c = strlen(xml_frag_data_nice(n));
+	if (n) {
+	  cong_location_set(&curs->location,n, strlen(xml_frag_data_nice(n)));
 	}
 }
 
@@ -256,12 +289,21 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 	
 	if (!curs->xed) return;
 
+#if 1
+	n = curs->location.tt_loc;
+	if (cong_location_frag_type(&curs->location) == XML_DATA && cong_location_get_char(&curs->location)!='\0')
+	{ 
+		curs->location.char_loc++; 
+		return; 
+	}
+#else
 	n = curs->t;
 	if (xml_frag_type(n) == XML_DATA && *(xml_frag_data_nice(n) + curs->c))
 	{ 
 		curs->c++; 
 		return; 
 	}
+#endif
 
 	do
 	{
@@ -274,7 +316,7 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 			else if (xml_frag_type(n) == XML_TAG_SPAN)
 			{				 
 				if (!strcmp(xml_frag_name(n), "table")) break;
-				if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n)))
+				if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n)))
 				{
 					n = n0 = 0;
 					break;
@@ -298,7 +340,7 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 
 		while (n)
 		{
-			if (ds_element_structural(the_globals.ds_global, xml_frag_name_nice(n))) { n = 0; break; }
+			if (cong_dispspec_element_structural(the_globals.ds, xml_frag_name_nice(n))) { n = 0; break; }
 			if (!xml_frag_next(n)) n = n0 = xml_frag_exit(n);
 			else break;
 		}
@@ -307,8 +349,7 @@ void curs_next_char(struct curs* curs, struct xed *xed)
 
 	if (n)
 	{
-		curs->t = n;
-		curs->c = 0;
+	  cong_location_set(&curs->location, n, 0);
 	}
 }
 
@@ -332,8 +373,12 @@ void curs_prev_line(struct curs* curs, struct xed *xed)
 	curs->y = (int) *((int *) l->child->next->next->data);
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
+#if 1
+	cong_location_set(&curs->location, pos->node, pos->c);
+#else
 	curs->t = pos->node;
 	curs->c = pos->c;
+#endif
 	free(pos);
 }
 
@@ -357,8 +402,12 @@ void curs_next_line(struct curs* curs, struct xed *xed)
 	curs->y = (int) *((int *) l->child->next->next->data) - 1;
 	pos = pos_physical_to_logical(xed, curs->x, curs->y);
 
+#if 1
+	cong_location_set(&curs->location, pos->node, pos->c);
+#else
 	curs->t = pos->node;
 	curs->c = pos->c;
+#endif
 	free(pos);
 }
 
@@ -367,10 +416,17 @@ void curs_del_prev_char(struct curs* curs, struct xed *xed)
 {
 	g_assert(curs!=NULL);
 
+#if 1
+	if (!cong_location_exists(&curs->location)) return;
+#else
 	if (!curs->t) return;
+#endif
 	
 	curs_prev_char(curs,xed);
-	
+
+#if 1
+	cong_location_del_next_char(&curs->location);
+#else	
 	if (*(xml_frag_data_nice(curs->t) + curs->c))
 	{
 		memmove(xml_frag_data_nice(curs->t) + curs->c, xml_frag_data(curs->t) + curs->c + 1,
@@ -379,6 +435,7 @@ void curs_del_prev_char(struct curs* curs, struct xed *xed)
 	}
 	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
 		ttree_branch_remove(curs->t->next);
+#endif
 }
 
 
@@ -386,6 +443,11 @@ void curs_del_next_char(struct curs* curs, struct xed *xed)
 {
 	g_assert(curs!=NULL);
 
+#if 1
+	if (!cong_location_exists(&curs->location)) return;
+
+	cong_location_del_next_char(&curs->location);
+#else
 	if (!curs->t) return;
 	
 	if (*(xml_frag_data_nice(curs->t) + curs->c))
@@ -396,6 +458,7 @@ void curs_del_next_char(struct curs* curs, struct xed *xed)
 	}
 	else if (curs->t->next && xml_frag_type(curs->t->next) == XML_TAG_EMPTY)
 		ttree_branch_remove(curs->t->next);
+#endif
 }
 
 

@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -96,9 +98,13 @@ void popup_tag_remove_inner()
 {
 	TTREE *n0;
 	
-  if (!the_globals.curs.t) return;
+#if 1
+	if (!cong_location_exists(&the_globals.curs.location)) return;
+#else
+	if (!the_globals.curs.t) return;
+#endif
 
-	n0 = xml_inner_span_element(the_globals.curs.t);
+	n0 = xml_inner_span_element(the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
@@ -108,9 +114,13 @@ void popup_tag_remove_outer()
 {
 	TTREE *n0;
 	
-  if (!the_globals.curs.t) return;
+#if 1
+	if (!cong_location_exists(&the_globals.curs.location)) return;
+#else
+	if (!the_globals.curs.t) return;
+#endif
 	
-	n0 = xml_outer_span_element(the_globals.curs.t);
+	n0 = xml_outer_span_element(the_globals.curs.location.tt_loc);
 	if (n0) xml_tag_remove(n0);
 	
 	if (the_globals.curs.xed) xed_redraw(the_globals.curs.xed);
@@ -150,7 +160,7 @@ void popup_build(struct xed *xed)
 										 GTK_SIGNAL_FUNC(xed_paste), xed);
 	gtk_widget_show(item);
 
-	if (/* the_globals.curs.set && */ the_globals.curs.t && xml_inner_span_element(the_globals.curs.t))
+	if (/* the_globals.curs.set && */ the_globals.curs.location.tt_loc && xml_inner_span_element(the_globals.curs.location.tt_loc))
 	{
 	  item = gtk_menu_item_new();
 	  w0 = gtk_hseparator_new();
@@ -183,11 +193,11 @@ void popup_build(struct xed *xed)
 
 	/* Build list of dynamic tag insertion tools */
 
-	for (n0 = the_globals.ds_global->child; n0; n0 = n0->next)
+	for (n0 = cong_dispspec_ttree(the_globals.ds)->child; n0; n0 = n0->next)
 	{
 		if (ttree_branch_walk_str(n0, "type span"))
 		{
-			item = gtk_menu_item_new_with_label(ds_name_name_get(n0));
+			item = gtk_menu_item_new_with_label(cong_dispspec_name_name_get(n0));
 			gtk_menu_append(GTK_MENU(cong_gui_get_popup(&the_gui)), item);
 			
 			gtk_signal_connect(GTK_OBJECT(item), "activate",
@@ -206,49 +216,48 @@ gint tpopup_show(GtkWidget *widget, GdkEvent *event)
 		GdkEventButton *bevent = (GdkEventButton *) event;
 		if (bevent->button != 3) return(FALSE);
 		
-		#if 1
-		printf("button 3\n");
-		{
-		  GtkTreePath* path;
-		  if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
-						      bevent->x,
-						      bevent->y,
-						      &path,
-						      NULL,
-						      NULL, 
-						      NULL)
-		       ) { 
-
-		    GtkTreeIter iter;
-		    GtkTreeModel* tree_model = GTK_TREE_MODEL(cong_gui_get_tree_store(&the_gui));
+ 		#if 1
+ 		printf("button 3\n");
+ 		{
+ 		  GtkTreePath* path;
+ 		  if ( gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW(widget),
+ 						      bevent->x,
+ 						      bevent->y,
+ 						      &path,
+ 						      NULL,
+ 						      NULL, 
+ 						      NULL)
+ 		       ) { 
+ 
+ 		    GtkTreeIter iter;
+ 		    GtkTreeModel* tree_model = GTK_TREE_MODEL(cong_gui_get_tree_store(&the_gui));
 #if 0
-		    gchar* msg = gtk_tree_path_to_string(path);
-		    printf("right-click on path \"%s\"\n",msg);
-		    g_free(msg);
+ 		    gchar* msg = gtk_tree_path_to_string(path);
+ 		    printf("right-click on path \"%s\"\n",msg);
+ 		    g_free(msg);
 #endif
-
-		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
-		      TTREE* tt;
-		      GtkWidget* menu;
-
-		      gtk_tree_model_get(tree_model, &iter, TTREE_COLUMN, &tt, -1);
-
-		      printf("got node \"%s\"\n",ds_name_get(tt));
-
-		      menu = tpopup_init(tt);
-		      gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
-				     bevent->time);		      
-		    }
-
-				 
-		  gtk_tree_path_free(path);		  
-		  }
-		}
-                #else
+		    
+ 		    if ( gtk_tree_model_get_iter(tree_model, &iter, path) ) {
+ 		      TTREE* tt;
+ 		      GtkWidget* menu;
+ 
+ 		      gtk_tree_model_get(tree_model, &iter, TTREE_COLUMN, &tt, -1);
+ 
+ 		      printf("got node \"%s\"\n",cong_dispspec_name_get(tt));
+ 
+ 		      menu = tpopup_init(tt);
+ 		      gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, bevent->button,
+ 				     bevent->time);		      
+ 		    }
+ 
+ 				 
+ 		  gtk_tree_path_free(path);		  
+ 		  }
+ 		}
+#else
 		gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL, bevent->button,
 									 bevent->time);
 		#endif
-
 		return(TRUE);
 	}
 
@@ -267,44 +276,44 @@ void tpopup_init(GtkWidget *treeitem, TTREE *x)
 	gtk_menu_set_title(GTK_MENU(tpopup), "Structure menu");
 
 #if 0
-  gtk_signal_connect_object(GTK_OBJECT(treeitem), "event",
-														(GtkSignalFunc) tpopup_show, GTK_OBJECT(tpopup));
-  #endif
-
+	gtk_signal_connect_object(GTK_OBJECT(treeitem), "event",
+				  (GtkSignalFunc) tpopup_show, GTK_OBJECT(tpopup));
+#endif
+	
 	/* Fixed editing tools */
 
 	item = gtk_menu_item_new_with_label("Cut");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_cut), x);
+			   GTK_SIGNAL_FUNC(tree_cut), x);
 
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("Copy");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_copy), x);
+			   GTK_SIGNAL_FUNC(tree_copy), x);
 
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("Paste into");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_paste_under), x);
+			   GTK_SIGNAL_FUNC(tree_paste_under), x);
 
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("Paste before");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_paste_before), x);
+			   GTK_SIGNAL_FUNC(tree_paste_before), x);
 
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("Paste after");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_paste_after), x);
+			   GTK_SIGNAL_FUNC(tree_paste_after), x);
 
 	gtk_widget_show(item);
 
@@ -319,18 +328,18 @@ void tpopup_init(GtkWidget *treeitem, TTREE *x)
 	item = gtk_menu_item_new_with_label("New sub-element");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_new_sub_element), x);
+			   GTK_SIGNAL_FUNC(tree_new_sub_element), x);
 
 	gtk_widget_show(item);
 
 	item = gtk_menu_item_new_with_label("New sibling");
 	gtk_menu_append(GTK_MENU(tpopup), item);
 	gtk_signal_connect(GTK_OBJECT(item), "activate",
-										 GTK_SIGNAL_FUNC(tree_new_sibling), x);
+			   GTK_SIGNAL_FUNC(tree_new_sibling), x);
 	gtk_widget_show(item);
 
 	#if 1
 	return tpopup;
-#endif
+	#endif
 }
 

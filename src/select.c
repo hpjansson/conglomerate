@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
 
@@ -9,26 +11,37 @@
 
 void selection_start_from_curs(struct selection* selection, struct curs* curs)
 {
-  g_assert(selection!=NULL);
-  g_assert(curs!=NULL);
+	g_assert(selection!=NULL);
+	g_assert(curs!=NULL);
 
 	selection->xed = curs->xed;
 	selection->x0 = selection->x1 = curs->x;
 	selection->y0 = selection->y1 = curs->y;
+
+#if 1
+	selection->t0 = selection->t1 = curs->location.tt_loc;
+	selection->c0 = selection->c1 = curs->location.char_loc;
+#else
 	selection->t0 = selection->t1 = curs->t;
 	selection->c0 = selection->c1 = curs->c;
+#endif
 }
 
 
 void selection_end_from_curs(struct selection* selection, struct curs* curs)
 {
-  g_assert(selection!=NULL);
-  g_assert(curs!=NULL);
+	g_assert(selection!=NULL);
+	g_assert(curs!=NULL);
 
 	selection->x1 = curs->x;
 	selection->y1 = curs->y;
+#if 1
+	selection->t1 = curs->location.tt_loc;
+	selection->c1 = curs->location.char_loc;
+#else
 	selection->t1 = curs->t;
 	selection->c1 = curs->c;
+#endif
 }
 
 
@@ -38,8 +51,8 @@ void selection_draw(struct selection* selection, struct curs* curs)
 	GdkGC *gc;
 	TTREE *l;
 
-  g_assert(selection!=NULL);
-  g_assert(curs!=NULL);
+	g_assert(selection!=NULL);
+	g_assert(curs!=NULL);
 
 	if (!curs->xed) return;
 	

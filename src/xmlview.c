@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <stdlib.h>
 
 /* Was using GTK_ENABLE_BROKEN to port over from old GtkTree to new GtkTreeView code */
@@ -34,7 +36,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	
 	str_width = w->allocation.width - 4;
 	
-	gc = ds_gc_get(the_globals.ds_global, x, 0);
+	gc = cong_dispspec_gc_get(the_globals.ds, x, 0);
 	if (!gc) gc = w->style->black_gc;
 	
 	/* Fill the header box */
@@ -88,7 +90,7 @@ static gint xv_section_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *x
 	}
 	/* Section identifier */
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
-									ds_name_get(x));
+									cong_dispspec_name_get(x));
 
 	/* Metadata indicator */
 	
@@ -163,7 +165,7 @@ static gint xv_section_head_button_press(GtkWidget *w, GdkEventButton *event, Gt
   return TRUE;
 }
 
-GtkWidget *xv_section_head(TTREE *ds, TTREE *x)
+GtkWidget *xv_section_head(cong_dispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *vbox, *title;
@@ -200,7 +202,7 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 	str_width = gdk_string_width(the_globals.ft, xml_frag_name_nice(x));
 	str_width = str_width > 150 ? str_width : 150;
 
-	gc = ds_gc_get(the_globals.ds_global, xml_frag_exit(x), 0);
+	gc = cong_dispspec_gc_get(the_globals.ds, xml_frag_exit(x), 0);
 	if (!gc) gc = w->style->black_gc;
 
 	/* Fill the header box */
@@ -263,13 +265,13 @@ static gint xv_fragment_head_expose(GtkWidget *w, GdkEventExpose *event, TTREE *
 	/* Section identifier */
 
 	gdk_draw_string(w->window, the_globals.ft, w->style->black_gc, 4, 2 + the_globals.ft_asc,
-									ds_name_get(x));
+									cong_dispspec_name_get(x));
 	
 	return(TRUE);
 }
 
 
-GtkWidget *xv_fragment_head(TTREE *ds, TTREE *x)
+GtkWidget *xv_fragment_head(cong_dispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(TTREE *n0)
 	GtkWidget *title;
@@ -319,7 +321,7 @@ static gint xv_fragment_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *
 }
 
 
-GtkWidget *xv_fragment_tail(TTREE *ds, TTREE *x)
+GtkWidget *xv_fragment_tail(cong_dispspec *ds, TTREE *x)
 {
         UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -329,9 +331,9 @@ GtkWidget *xv_fragment_tail(TTREE *ds, TTREE *x)
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 5);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_fragment_tail_expose, ds_gc_get(ds, xml_frag_exit(x), 0));
+										 (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, xml_frag_exit(x), 0));
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_fragment_tail_expose, ds_gc_get(ds, xml_frag_exit(x), 0));
+										 (GtkSignalFunc) xv_fragment_tail_expose, cong_dispspec_gc_get(ds, xml_frag_exit(x), 0));
   gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 	xv_style_r(line, style_white);
@@ -429,16 +431,16 @@ static gint xv_section_tail_expose(GtkWidget *w, GdkEventExpose *event, GdkGC *g
 }
 
 
-GtkWidget *xv_section_vline(TTREE *ds, TTREE *x)
+GtkWidget *xv_section_vline(cong_dispspec *ds, TTREE *x)
 {
 	GtkWidget *line;
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 4, 0);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_indent_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_indent_expose, cong_dispspec_gc_get(ds, x, 0));
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_indent_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_indent_expose, cong_dispspec_gc_get(ds, x, 0));
   gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 
@@ -447,16 +449,16 @@ GtkWidget *xv_section_vline(TTREE *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_vline_and_space(TTREE *ds, TTREE *x)
+GtkWidget *xv_section_vline_and_space(cong_dispspec *ds, TTREE *x)
 {
 	GtkWidget *line;
 
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 8, 0);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_vline_and_space_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_vline_and_space_expose, cong_dispspec_gc_get(ds, x, 0));
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_vline_and_space_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_vline_and_space_expose, cong_dispspec_gc_get(ds, x, 0));
   gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 
@@ -465,7 +467,7 @@ GtkWidget *xv_section_vline_and_space(TTREE *ds, TTREE *x)
 }
 
 
-GtkWidget *xv_section_data(TTREE *x, TTREE *ds, int collapsed)
+GtkWidget *xv_section_data(TTREE *x, cong_dispspec *ds, int collapsed)
 {
 	GtkWidget *hbox, *line;
 	struct xed *xed;
@@ -494,7 +496,7 @@ GtkWidget *xv_section_data(TTREE *x, TTREE *ds, int collapsed)
 }
 
 
-GtkWidget *xv_section_tail(TTREE *ds, TTREE *x)
+GtkWidget *xv_section_tail(cong_dispspec *ds, TTREE *x)
 {
 	UNUSED_VAR(GdkColor gcol)
 	UNUSED_VAR(GtkStyle *style)
@@ -504,16 +506,16 @@ GtkWidget *xv_section_tail(TTREE *ds, TTREE *x)
 	line = gtk_drawing_area_new();
 	gtk_drawing_area_size(GTK_DRAWING_AREA(line), 10, 10);
 	gtk_signal_connect(GTK_OBJECT(line), "expose_event",
-										 (GtkSignalFunc) xv_section_tail_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_tail_expose, cong_dispspec_gc_get(ds, x, 0));
 	gtk_signal_connect(GTK_OBJECT(line), "configure_event",
-										 (GtkSignalFunc) xv_section_tail_expose, ds_gc_get(ds, x, 0));
+										 (GtkSignalFunc) xv_section_tail_expose, cong_dispspec_gc_get(ds, x, 0));
   gtk_widget_set_events(line, GDK_EXPOSURE_MASK);
 
 	gtk_widget_show(line);
 	return(line);
 }
 
-TTREE *xv_editor_elements_skip(TTREE *x, TTREE *ds)
+TTREE *xv_editor_elements_skip(TTREE *x, cong_dispspec *ds)
 {
 	UNUSED_VAR(TTREE *x0);
 
@@ -522,7 +524,7 @@ TTREE *xv_editor_elements_skip(TTREE *x, TTREE *ds)
     int type = xml_frag_type(x);
 		char *name = xml_frag_name_nice(x);
 
-		if (type == XML_TAG_SPAN && ds_element_structural(ds, name))
+		if (type == XML_TAG_SPAN && cong_dispspec_element_structural(ds, name))
 		{
 			return(xml_frag_prev(x));
 		}
@@ -545,7 +547,7 @@ void xv_style_r(GtkWidget *widget, gpointer data)
 	}
 }
 
-GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
+GtkWidget *xv_element_new(TTREE *x, cong_dispspec *ds, GtkWidget *root, int collapsed, GtkTreeStore* store, GtkTreeIter* parent_iter)
 {
 	UNUSED_VAR(GdkGCValuesMask gc_values_mask = GDK_GC_FOREGROUND /* | GDK_GC_FONT */)
 	UNUSED_VAR(GdkGCValues     gc_values)
@@ -564,10 +566,9 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 #if 1
 	gtk_tree_store_append (store, &new_tree_iter, parent_iter);
 	gtk_tree_store_set (store, &new_tree_iter,
-			    TITLE_COLUMN, ds_name_get(x),
+			    TITLE_COLUMN, cong_dispspec_name_get(x),
 			    TTREE_COLUMN, x,
 			    -1);
-	printf("FIXME replace call to tpopup_init\n");
 #else
 	glaebb_tree = 0;
 
@@ -603,9 +604,9 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 
 		if (type == XML_TAG_SPAN)
 		{
-			if (ds_element_structural(ds, name))
+			if (cong_dispspec_element_structural(ds, name))
 			{
-				if (ds_element_collapse(ds, name))
+				if (cong_dispspec_element_collapse(ds, name))
 				{
 #if 0
 					if (!glaebb_tree)
@@ -654,8 +655,8 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 					gtk_box_pack_start(GTK_BOX(poot), sub, FALSE, TRUE, 0);
 				}
 			}
-			else if (ds_element_span(ds, name) ||
-							 ds_element_insert(ds, name))
+			else if (cong_dispspec_element_span(ds, name) ||
+							 cong_dispspec_element_insert(ds, name))
 			{
 				/* New editor window */
 				
@@ -693,7 +694,7 @@ GtkWidget *xv_element_new(TTREE *x, TTREE *ds, GtkWidget *root, int collapsed, G
 	return(root);
 }
 
-struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
+struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec)
 {
 	struct xview *xv;
 	GdkColor gcol;
@@ -756,7 +757,7 @@ struct xview *xmlview_new(TTREE *x, TTREE *displayspec)
 
 	  g_message("examining frag \"%s\"\n",name);
 		
-		if (type == XML_TAG_SPAN && ds_element_structural(displayspec, name))
+		if (type == XML_TAG_SPAN && cong_dispspec_element_structural(displayspec, name))
 		{
 			/* New element */
 
@@ -805,7 +806,7 @@ void xmlview_destroy(int free_xml)
 {
 	if (!the_globals.xv) return;
 
-	cong_gui_destroy_tree_store(&the_gui);
+ 	cong_gui_destroy_tree_store(&the_gui);
 	gtk_widget_destroy(the_globals.xv->w);
 	if (free_xml) ttree_branch_remove(the_globals.xv->x);
 	

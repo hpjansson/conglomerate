@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 #include <ttree.h>
 #include <sock.h>
 
@@ -16,6 +18,47 @@ enum
    N_COLUMNS
 };
 
+typedef struct _cong_dispspec cong_dispspec;
+
+/**
+   Struct representing a location within a document, with both a node ptr and a character offset into the text.
+ */
+typedef struct _cong_location
+{
+  TTREE *tt_loc;
+  int char_loc;
+} cong_location;
+
+void
+cong_location_set(cong_location *loc, TTREE *tt, int offset);
+
+gboolean
+cong_location_exists(cong_location *loc);
+
+int
+cong_location_frag_type(cong_location *loc);
+
+char
+cong_location_get_char(cong_location *loc);
+
+TTREE*
+cong_location_xml_frag_data_nice_split2(cong_location *loc);
+
+void
+cong_location_insert_chars(cong_location *loc, const char* s);
+
+void
+cong_location_del_next_char(cong_location *loc);
+
+TTREE*
+cong_location_xml_frag_prev(cong_location *loc);
+
+TTREE*
+cong_location_xml_frag_next(cong_location *loc);
+
+TTREE*
+cong_location_node(cong_location *loc);
+
 
 /* Include these here to help Cygwin a bit */
 
@@ -28,7 +71,11 @@ struct xed
   GdkPixmap *p;  /* Backing pixmap */
 	GdkFont *f, *fm;
 
+#if 1
+  cong_dispspec *displayspec;
+#else
 	TTREE *displayspec;
+#endif
 	
 	int f_asc, f_desc;
 	int fm_asc, fm_desc;
@@ -41,11 +88,16 @@ struct xed
 
 	int mode;
 
+#if 0
+	cong_location draw_loc;
+	cong_location draw_prev;
+#else
 	TTREE *draw_x;      /* XML node currently at */
 	int draw_char;      /* Char to begin drawing (in node) */
 
 	TTREE *draw_x_prev;
 	int draw_char_prev;
+#endif
 
 	TTREE *draw_line_t;
 	int draw_line;      /* Line to draw at (in display) */
@@ -62,7 +114,7 @@ struct xed
   /* Cursor information */
 
 	TTREE *curs_x;      /* XML node currently at */
-  int curs_char;      /* Cursor positioned after this char (in node) */
+	int curs_char;      /* Cursor positioned after this char (in node) */
 };
 
 
@@ -112,8 +164,12 @@ struct curs
 	int on;
 
 	/* Conceptual location */
+#if 1
+	cong_location location;
+#else
 	TTREE *t;
 	int c;
+#endif
 
 	int set;
 };
@@ -126,8 +182,14 @@ struct selection
 
 	int x0, y0, x1, y1;
 
-	TTREE *t0, *t1;
+#if 0
+	cong_location loc0;
+	cong_location loc1;
+#else
+        TTREE *t0;
+	TTREE *t1;
 	int c0, c1;
+#endif
 };
 
 
@@ -141,7 +203,8 @@ struct cong_globals
   GdkGC *insert_element_gc;
   int f_asc, f_desc, fm_asc, fm_desc, ft_asc, ft_desc;
   
-  TTREE *ds_global;
+  cong_dispspec *ds;
+
   TTREE *vect_global;
   TTREE *medias_global;
   TTREE *class_global;
@@ -166,6 +229,7 @@ GtkWidget* cong_gui_get_popup(struct cong_gui* gui);
 void cong_gui_set_popup(struct cong_gui* gui, GtkWidget* popup);
 GtkWidget* cong_gui_get_button_submit(struct cong_gui* gui);
 GtkTreeStore* cong_gui_get_tree_store(struct cong_gui* gui);
+GtkTreeView* cong_gui_get_tree_view(struct cong_gui* gui);
 GtkWidget* cong_gui_get_root(struct cong_gui* gui);
 void cong_gui_destroy_tree_store(struct cong_gui* gui);
 
@@ -199,7 +263,7 @@ gint xed_insert_table(GtkWidget *w, struct xed *xed);
 char *xml_frag_data_nice(TTREE *x);
 char *xml_frag_name_nice(TTREE *x);
 
-struct xview *xmlview_new(TTREE *x, TTREE *displayspec);
+struct xview *xmlview_new(TTREE *x, cong_dispspec *displayspec);
 
 #if 0
 SOCK *server_login();
@@ -207,6 +271,7 @@ SOCK *server_login();
 
 struct pos *pos_physical_to_logical(struct xed *xed, int x, int y);
 struct pos *pos_logical_to_physical(struct xed *xed, TTREE *node, int c);
+struct pos *pos_logical_to_physical_new(struct xed *xed, cong_location *loc);
 
 TTREE *xml_frag_data_nice_split3(TTREE *s, int c0, int c1);
 TTREE *xml_frag_data_nice_split2(TTREE *s, int c);
@@ -216,10 +281,6 @@ TTREE *xml_inner_span_element(TTREE *x);
 TTREE *xml_outer_span_element(TTREE *x);
 char *xml_fetch_clean_data(TTREE *x);
 
-char *ds_name_name_get(TTREE *t);
-GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog);
-GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog);
-char *ds_name_get(TTREE *x);
 TTREE *get_upper_section(TTREE *x);
 
 char *tag_new_pick();
@@ -241,6 +302,33 @@ int open_document_do(const char *doc_name, const char *ds_name);
 int gui_window_new_document_make();
 void xmlview_destroy(int free_xml);
 
+#if 1
+cong_dispspec* cong_dispspec_new_from_file(const char *name);
+cong_dispspec* cong_dispspec_new_from_ttree(TTREE *t);
+void cong_dispspec_delete(cong_dispspec *dispspec);
+
+TTREE* cong_dispspec_ttree(cong_dispspec *dispspec);
+
+char *cong_dispspec_name_name_get(TTREE *t);
+GdkGC *cong_dispspec_name_gc_get(cong_dispspec *ds, TTREE *t, int tog);
+GdkGC *cong_dispspec_gc_get(cong_dispspec *ds, TTREE *x, int tog);
+char *cong_dispspec_name_get(TTREE *x);
+
+gboolean cong_dispspec_element_structural(cong_dispspec *ds, char *name);
+gboolean cong_dispspec_element_collapse(cong_dispspec *ds, char *name);
+gboolean cong_dispspec_element_span(cong_dispspec *ds, char *name);
+gboolean cong_dispspec_element_insert(cong_dispspec *ds, char *name);
+TTREE *cong_dispspec_get_first_structural(TTREE *ds);
+TTREE *cong_dispspec_get_next_structural(TTREE *prev);
+TTREE *cong_dispspec_get_first_span(TTREE *ds);
+TTREE *cong_dispspec_get_next_span(TTREE *prev);
+
+#else
+char *ds_name_name_get(TTREE *t);
+GdkGC *ds_name_gc_get(TTREE *ds, TTREE *t, int tog);
+GdkGC *ds_gc_get(TTREE *ds, TTREE *x, int tog);
+char *ds_name_get(TTREE *x);
+
 int ds_element_structural(TTREE *ds, char *name);
 int ds_element_collapse(TTREE *ds, char *name);
 int ds_element_span(TTREE *ds, char *name);
@@ -250,6 +338,7 @@ TTREE *ds_get_next_structural(TTREE *prev);
 TTREE *ds_get_first_span(TTREE *ds);
 TTREE *ds_get_next_span(TTREE *prev);
 void ds_init(TTREE *ds);
+#endif
 
 
 void col_to_gcol(GdkColor *gcol, unsigned int col);
