@@ -1,3 +1,11 @@
+2005-04-08  Jeff Martin <jeff@custommonkey.org>
+
+	* Makefile.am, faq-hack.xsl, faq.xml, conglomerate.xml, global.ent
+
+	Added temporary transform to replace qanda sets in docbook with sections
+	Added faq to main conglomerate manual
+	Fixed conglomerate.xml dtd
+
 2005-02-01  Geert Stappers <stappers@stappers.nl>
 
 	* conglomerate.xml

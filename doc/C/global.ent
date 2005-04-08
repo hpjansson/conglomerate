@@ -17,6 +17,7 @@
     <!ENTITY noticefdl SYSTEM "notice_fdl.xml">
     <!ENTITY noticegpl SYSTEM "notice_gpl.xml">
     <!ENTITY conventions SYSTEM "conventions.xml">
+    <!ENTITY faq SYSTEM "faq.xml">
     <!-- end resources -->
     
     <!-- start reusable instances -->

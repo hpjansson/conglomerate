@@ -1,3 +1,7 @@
+# temporary hack until yelp support qanda sets
+faq.xml: faq.xml.orig
+	xsltproc --output $@ faq-hack.xsl $<
+
 more_C_docs = \
   conglomerate-refentry.xml manpage.make conglomerate.1 \
   faq.xml
