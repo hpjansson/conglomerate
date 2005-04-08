@@ -31,6 +31,7 @@
 
 #include "cong-fake-plugin-hooks.h"
 
+#if ENABLE_DEBUG_PLUGIN
 static gboolean 
 dump_area_tree_doc_filter (CongServiceDocTool *tool, 
 			   CongDocument *doc, 
@@ -58,7 +59,7 @@ dump_area_tree_action_callback (CongServiceDocTool *tool,
 	cong_ui_new_document_from_manufactured_xml(xml_doc,
 						   cong_primary_window_get_toplevel (primary_window));
 }
-
+#endif
 
 /* would be exposed as "plugin_register"? */
 /**

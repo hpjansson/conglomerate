@@ -1,3 +1,8 @@
+2005-04-08  David Malcolm  <dmalcolm@redhat.com>
+
+	* plugin-debug.c: 
+	Fix warning when plugin is disabled
+
 2005-04-05  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-util.h: 
