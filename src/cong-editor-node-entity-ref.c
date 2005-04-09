@@ -148,6 +148,9 @@ entity_ref_create_areas (CongEditorNode *editor_node,
 						      cong_editor_node_get_node (editor_node)->name);
 #endif
 
+	cong_editor_area_connect_node_signals (block_area,
+					       editor_node);
+
 	cong_editor_node_create_block_area (editor_node,
 					    creation_info,
 					    block_area,

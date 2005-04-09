@@ -1,3 +1,13 @@
+2005-04-09  David Malcolm  <dmalcolm@redhat.com>
+
+	* tree.c: 
+	* popup.c: 
+	* cong-ui-hooks.h: 
+	* cong-editor-node-entity-ref.c: 
+	* cong-editor-node-entity-decl.c: 
+	First attempt at adding entity refactoring: convert an entity
+	reference to a copy (via context menu)	
+
 2005-04-08  David Malcolm  <dmalcolm@redhat.com>
 
 	* plugin-debug.c: 

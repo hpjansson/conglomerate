@@ -557,3 +557,58 @@ cong_ui_hook_tree_convert_from_comment (CongDocument *doc,
 
 
 }
+
+void
+cong_ui_hook_tree_convert_from_entity_ref_to_copy  (CongDocument *doc,
+						    GtkWindow *parent_window)
+{
+	CongNodePtr entity_ref_node;
+	CongNodePtr entity_decl_node;
+	CongNodePtr iter;
+	gchar *command_name;
+	CongCommand *cmd;
+	CongNodePtr relative_to_node;
+
+	g_return_if_fail (IS_CONG_DOCUMENT (doc));
+
+	entity_ref_node = cong_document_get_selected_node (doc);
+	g_return_if_fail (entity_ref_node);
+	g_return_if_fail (CONG_NODE_TYPE_ENTITY_REF == cong_node_type (entity_ref_node));
+
+	/* Expect a single child of the ref: the entity definition: */	
+	entity_decl_node = entity_ref_node->children;
+	g_return_if_fail (entity_decl_node);
+	g_return_if_fail (CONG_NODE_TYPE_ENTITY_DECL == cong_node_type (entity_decl_node));
+
+	cong_document_begin_edit (doc);
+
+	command_name = g_strdup_printf (_("Convert reference to \"%s\" to copy"), entity_ref_node->name);
+	cmd = cong_document_begin_command (doc, command_name, NULL);
+	relative_to_node = entity_ref_node;
+
+	for (iter=entity_decl_node->children; iter; iter=iter->next) {
+		CongNodePtr new_node = cong_node_recursive_dup (iter);
+
+		cong_command_add_node_add_after (cmd, 
+						 new_node,
+						 relative_to_node);
+		
+		relative_to_node = new_node;
+	}
+
+	/* Remove the original entity ref node: */
+	cong_command_for_each_location (cmd, 
+					tree_cut_update_location_callback,
+					entity_ref_node);
+	cong_command_add_node_make_orphan (cmd,
+					   entity_ref_node);
+
+	/* Merge adjacent text nodes: */
+	cong_command_add_merge_adjacent_text_children_of_node (cmd, 
+							       relative_to_node->parent);
+	
+	cong_document_end_command (doc,
+				   cmd);
+
+	cong_document_end_edit (doc);
+}

@@ -586,10 +586,10 @@ static gint editor_popup_callback_paste(GtkAction *action, CongDocument *doc)
 
 
 static void
-add_comment_menu_actions (CongDocument *doc,
-			  CongNodePtr node,
-			  GtkWindow *parent_window,
-			  CongPrimaryWindow *primary_window)
+add_node_menu_actions (CongDocument *doc,
+		       CongNodePtr node,
+		       GtkWindow *parent_window,
+		       CongPrimaryWindow *primary_window)
 {
 	GtkAction *action;
 
@@ -638,6 +638,27 @@ add_comment_menu_actions (CongDocument *doc,
 			/* FIXME: set sensitivity */
 		}
 		break;
+	case CONG_NODE_TYPE_ENTITY_REF:
+		/* Convert from entity reference to inline copy of that entity: */
+		{
+			cong_util_add_menu_separator (primary_window,UI_PATH_CONTEXT_MENU);
+
+			action = cong_action_new ("ConvertFromEntity",
+						  /* FIXME: could do with better text here */
+						  _("Convert Reference into a Copy"),
+						  /* FIXME: could do with better text here */
+						  _("Convert a reference to an XML entity to an inline copy of that entity's content"),
+						  NULL);
+			cong_menu_add_action (primary_window,
+					      UI_PATH_CONTEXT_MENU, 
+					      action,
+					      GTK_UI_MANAGER_MENUITEM);
+			cong_action_attach_callback_Document_SelectedNode_ParentWindow (action, 
+											cong_ui_hook_tree_convert_from_entity_ref_to_copy,
+											doc,
+											parent_window);
+			
+		}
 	}
 }
 
@@ -1121,7 +1142,7 @@ cong_ui_popup_init (CongDocument *doc,
 	}
 
 	/* Convert to/from comment: */
-	add_comment_menu_actions (doc,
+	add_node_menu_actions (doc,
 				  node,
 				  parent_window,
 				  primary_window);
