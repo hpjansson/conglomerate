@@ -1,5 +1,9 @@
 2005-04-12  David Malcolm  <dmalcolm@redhat.com>
 
+	* Conglomerate-Overview.png: 
+
+	File generated from dia file via File->Export...
+
 	* Conglomerate-Overview.dia: 
 
 	New file
