@@ -1,3 +1,13 @@
+2005-04-14  David Malcolm  <dmalcolm@redhat.com>
+
+	* plugin-random.c 
+	* Makefile.am:
+	* cong-random-document.c: 
+	* cong-random-document.h: 
+	Refactored bulk of plugin-random.c into new
+	cong-random-document.[hc], in the hope of making it easier to run
+	standalone for doing Yelp unit-testing	
+
 2005-04-09  David Malcolm  <dmalcolm@redhat.com>
 
 	* tree.c: 

@@ -118,6 +118,7 @@ conglomerate_SOURCES =      \
   cong-plugin-manager.h     \
   cong-primary-window.h     \
   cong-progress-checklist.h \
+  cong-random-document.h    \
   cong-range.h              \
   cong-selection.h          \
   cong-service.h            \
@@ -251,6 +252,7 @@ conglomerate_SOURCES =      \
   cong-plugin-manager.c     \
   cong-primary-window.c     \
   cong-progress-checklist.c \
+  cong-random-document.c    \
   cong-range.c              \
   cong-service.c            \
   cong-service-doc-tool.c   \
