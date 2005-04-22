@@ -63,20 +63,6 @@ cong_command_construct (CongCommand *command,
 			const gchar *description,
 			const gchar *consolidation_id);
 
-/*
- * cong_command_private_new:
- * @doc: The #CongDocument upon which the command is to act.
- * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
- * widget
- * @consolidation_id: A string ID (or NULL) for this command to allow multiple similar commands to be consolidated into 
- * a single command.  For example, multiple characters being typed at the keboard can be merged into a single "Typing" command.
- * 
- * Should only be called by the internals of #CongDocument; if you wish to create a #CongCommand you should call cong_document_begin_command()
- * instead.
- *
- * Returns:  the new #CongCommand
- *
- */
 CongCommand*
 cong_command_private_new (CongDocument *doc,
 			  const gchar *description,
@@ -88,14 +74,6 @@ cong_command_get_document (CongCommand *command);
 const gchar*
 cong_command_get_description (CongCommand *command);
 
-/*
- * cong_command_get_consolidation_id:
- * @command:  The relevant #CongCommand 
- *
- * Gets the ID (or NULL) of the command used for consolidating multiple similar operations into a single entry in the undo/redo history
- *
- * Returns: a constant string, or NULL if no merging is to occur
- */
 const gchar*
 cong_command_get_consolidation_id (CongCommand *command);
 
@@ -105,30 +83,10 @@ cong_command_undo (CongCommand *command);
 void
 cong_command_redo (CongCommand *command);
 
-/*
- * cong_command_merge:
- *
- * @dst: The #CongCommand into which the modifications are to be added
- * @src: The #CongCommand from which the modifications are to be taken
- *
- * Takes all of the modifications from @src and places them on the end of #dst.  Only to be used by the internals of the undo/redo management
- *
- */
 void
 cong_command_merge (CongCommand *dst,
 		    CongCommand *src);
 
-/*
- * cong_command_has_ever_been_undone:
- *
- * @cmd:
- *
- * A function used by the command consolidation/merging system.  If you undo then redo a command,
- * further similar operations should get separate entries in the undo/redo histroy, rather than being
- * merged.
- *
- * Returns: A #gboolean, answering the question "has this command ever been undone?"
- */
 gboolean
 cong_command_has_ever_been_undone (CongCommand *cmd);
 

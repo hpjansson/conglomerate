@@ -1,3 +1,12 @@
+2005-04-22  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c: 
+	* cong-command.h: 
+	* cong-command.c: 
+	* cong-app.c: 
+
+	More API documentation
+
 2005-04-21  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-document.c: 

@@ -1957,13 +1957,18 @@ cong_document_for_each_node (CongDocument *doc,
 
 /**
  * cong_document_for_each_child_of_node:
- * @doc:
- * @parent:
- * @callback:
- * @callback_data:
+ * @doc: the document
+ * @parent: a node in the document
+ * @callback: a callback to be invoked for every direct descendent of the given node
+ * @callback_data: data for the callback
  *
- * TODO: Write me
- * Returns:
+ * Visit each of the direct descendents of the given node, calling the supplied callback for each,
+ * passing it the supplied data.  
+ * 
+ * If the callback returns TRUE, then traversal is halted: you can use this to test for the presence of a node satisfying some condition
+ * Otherwise, traversal continues.   If you wish to perform some operation on every child node, your callback should always return FALSE.
+ * 
+ * Returns:  TRUE if one of the callback calls returned TRUE (stopping the traversal prematurely); FALSE if the full traversal occurred
  */
 gboolean
 cong_document_for_each_child_of_node (CongDocument *doc, 
@@ -1988,11 +1993,13 @@ cong_document_for_each_child_of_node (CongDocument *doc,
 
 /**
  * cong_document_make_nodes_from_source_fragment:
- * @doc:
- * @source_fragment:
+ * @doc: the document for which the nodes are to be created
+ * @source_fragment: a fragment of well-formed XML source
  *
- * TODO: Write me
- * Returns:
+ * Tries to parse the source fragment, placing it inside a &lt;placeholder&gt; element
+ *
+ * Returns: a pointer to the &lt;placeholder&gt; element (with a miniature DOM tree below it corresponding to the XML source), or NULL if a parse error occurred.
+ * The "document" of these nodes is set up correctly, but they are not linked into the DOM tree.
  */
 CongNodePtr
 cong_document_make_nodes_from_source_fragment (CongDocument *doc, 
@@ -2306,9 +2313,9 @@ callback_can_export (CongServiceExporter *exporter,
 
 /**
  * cong_document_can_export:
- * @doc:
+ * @doc: a document
  *
- * Returns: TRUE if there are any exporters registered for the document.
+ * Returns: TRUE iff a plugin is available that knows how to export the document.
  */
 gboolean
 cong_document_can_export (CongDocument *doc)
@@ -2345,9 +2352,9 @@ callback_can_print (CongServicePrintMethod *print_method,
 
 /**
  * cong_document_can_print:
- * @doc:
+ * @doc: a document
  *
- * Returns:
+ * Returns: TRUE iff a plugin is available that knows how to print the given document
  */
 gboolean
 cong_document_can_print (CongDocument *doc)

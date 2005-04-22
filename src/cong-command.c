@@ -113,12 +113,17 @@ cong_command_construct (CongCommand *command,
 
 /**
  * cong_command_private_new:
- * @doc:
- * @description:
- * @consolidation_id:
+ * @doc: The #CongDocument upon which the command is to act.
+ * @description: Human-readable, translated name for this command, as it will appear in the undo/redo history
+ * widget
+ * @consolidation_id: A string ID (or NULL) for this command to allow multiple similar commands to be consolidated into 
+ * a single command.  For example, multiple characters being typed at the keboard can be merged into a single "Typing" command.
+ * 
+ * Should only be called by the internals of #CongDocument; if you wish to create a #CongCommand you should call cong_document_begin_command()
+ * instead.
  *
- * TODO: Write me
- * Returns:
+ * Returns:  the new #CongCommand
+ *
  */
 CongCommand*
 cong_command_private_new (CongDocument *doc,
@@ -148,10 +153,9 @@ cong_command_get_document (CongCommand *command)
 
 /**
  * cong_command_get_description:
- * @command:
+ * @command: a command
  *
- * TODO: Write me
- * Returns:
+ * Returns: the human-readable description of this command
  */
 const gchar*
 cong_command_get_description (CongCommand *command)
@@ -163,10 +167,11 @@ cong_command_get_description (CongCommand *command)
 
 /**
  * cong_command_get_consolidation_id:
- * @command:
+ * @command:  The relevant #CongCommand 
  *
- * TODO: Write me
- * Returns:
+ * Gets the ID (or NULL) of the command used for consolidating multiple similar operations into a single entry in the undo/redo history
+ *
+ * Returns: a constant string, or NULL if no merging is to occur
  */
 const gchar*
 cong_command_get_consolidation_id (CongCommand *command)
@@ -178,9 +183,9 @@ cong_command_get_consolidation_id (CongCommand *command)
 
 /**
  * cong_command_undo:
- * @command:
+ * @command: a command
  *
- * TODO: Write me
+ * Undoes the command.  All modifications contained within the command are undone from the document (in reverse order), the document's "is-modified" flag is set to whatever it was when the command was created.
  */
 void
 cong_command_undo (CongCommand *command)
@@ -222,7 +227,7 @@ cong_command_undo (CongCommand *command)
  * cong_command_redo:
  * @command:
  *
- * TODO: Write me
+ * Redoes a command that has previously been undone.  Replays all the modifications on the document in order from start to finish.
  */
 void
 cong_command_redo (CongCommand *command)
@@ -256,11 +261,12 @@ cong_command_redo (CongCommand *command)
 }
 
 /**
- * cong_command_merge:
- * @dst:
- * @src:
+ * cong_command_merge: *
+ * @dst: The #CongCommand into which the modifications are to be added
+ * @src: The #CongCommand from which the modifications are to be taken
  *
- * TODO: Write me
+ * Takes all of the modifications from @src and places them on the end of @dst.  Only to be used by the internals of the undo/redo management
+ *
  */
 void
 cong_command_merge (CongCommand *dst,
@@ -275,7 +281,16 @@ cong_command_merge (CongCommand *dst,
 	PRIVATE(src)->list_of_modification = NULL;
 }
 
-
+/**
+ * cong_command_has_ever_been_undone: *
+ * @cmd:
+ *
+ * A function used by the command consolidation/merging system.  If you undo then redo a command,
+ * further similar operations should get separate entries in the undo/redo histroy, rather than being
+ * merged.
+ *
+ * Returns: A #gboolean, answering the question "has this command ever been undone?"
+ */
 gboolean
 cong_command_has_ever_been_undone (CongCommand *cmd)
 {
@@ -812,9 +827,11 @@ recursive_node_deletion_update_location_callback (CongDocument *doc,
 /**
  * cong_command_add_delete_range:
  * @cmd:
- * @range:
+ * @range: a range within the document; both start and end must have the same parent, so that proper nesting is maintained
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ *
+ * Deletes the given range within the document (can include multiple nodes).  Updates cursor and selection accordingly.
  */
 void 
 cong_command_add_delete_range (CongCommand *cmd,
@@ -964,7 +981,9 @@ cong_command_add_delete_range (CongCommand *cmd,
  * cong_command_add_delete_selection:
  * @cmd:
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ *
+ * Deletes the current selection within the document, updating cursor and selection accordingly.
  */
 void 
 cong_command_add_delete_selection (CongCommand *cmd)
@@ -994,9 +1013,11 @@ cong_command_add_delete_selection (CongCommand *cmd)
 /**
  * cong_command_add_insert_text_at_cursor:
  * @cmd:
- * @string:
+ * @string: a UTF-8 string
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ *
+ * Inserts the given text at the cursor, moving it to the cursor to the end of the inserted text.
  */
 void 
 cong_command_add_insert_text_at_cursor (CongCommand *cmd, 
@@ -1243,7 +1264,9 @@ merge_adjacent_text_callback (CongDocument *doc,
  * cong_command_add_merge_adjacent_text_nodes:
  * @cmd:
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ * 
+ * Searches the entire document, looking for text nodes adjacent to other text nodes, merging them together.
  */
 void
 cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd)
@@ -1266,7 +1289,9 @@ cong_command_add_merge_adjacent_text_nodes (CongCommand *cmd)
  * @cmd:
  * @node:
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ * 
+ * Searches direct children of the given node, looking for text nodes adjacent to other text nodes, merging them together.
  */
 void
 cong_command_add_merge_adjacent_text_children_of_node (CongCommand *cmd, 
@@ -1318,7 +1343,10 @@ cong_command_can_add_reparent_selection (CongCommand *cmd,
  * @cmd:
  * @node:
  *
+ * Utility function to add a series of modifications to the given command.
+ * 
  * Splits the selected nodes as necessary and adds as a child of the input node
+ *
  * Returns:
  */
 CongNodePtr
@@ -1507,7 +1535,10 @@ split3_location_callback (CongDocument *doc,
  * @c0:
  * @c1:
  *
+ * Utility function to add a series of modifications to the given command.
+ *
  * Splits a text or comment node into 3 nodes, and returns a pointer to the middle one
+ *
  * Returns: the middle node of the three newly-created nodes
  */
 CongNodePtr
@@ -1580,9 +1611,11 @@ cong_command_add_node_split3 (CongCommand *cmd,
 /**
  * cong_command_add_remove_tag:
  * @cmd:
- * @node:
+ * @node: a node
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ *
+ * Removes the given node from the tree, moving all of its children into the space it occupied.
  */
 void 
 cong_command_add_remove_tag (CongCommand *cmd,
@@ -1651,12 +1684,14 @@ cong_command_add_set_cursor_to_first_text_descendant (CongCommand *cmd,
 
 /**
  * cong_command_add_set_external_dtd:
- * @cmd:
- * @root_element:
+ * @cmd: a command
+ * @root_element: the root element of the document
  * @public_id:
  * @system_id:
  *
- * TODO: Write me
+ * Utility function to add a series of modifications to the given command.
+ * 
+ * Sets an external DTD on the document, or removes it if NULL is given
  */
 void
 cong_command_add_set_external_dtd (CongCommand *cmd,

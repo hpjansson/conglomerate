@@ -116,8 +116,7 @@ cong_app_private_insert_element_init (CongApp *app);
 /**
  * cong_app_singleton:
  *
- * TODO: Write me
- * Returns:
+ * Returns: the singleton instance of CongApp
  */
 CongApp*
 cong_app_singleton (void)
@@ -132,7 +131,7 @@ cong_app_singleton (void)
  * @argc:
  * @argv:
  *
- * TODO: Write me
+ * Construct the singleton instance of CongApp
  */
 void
 cong_app_construct_singleton (int   argc,
