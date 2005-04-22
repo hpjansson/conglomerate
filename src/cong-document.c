@@ -1926,12 +1926,19 @@ cong_document_for_each_node_recurse (CongDocument *doc,
 
 /**
  * cong_document_for_each_node:
- * @doc:
- * @callback:
- * @callback_data:
+ * @doc: the document
+ * @callback: a callback to be invoked for every node in the document
+ * @callback_data: data for the callback
  *
- * TODO: Write me
- * Returns:
+ * Perform a depth-first traversal of the nodes in the DOM tree of this document, calling the supplied callback for each node,
+ * passing it the supplied data.  
+ * 
+ * If the callback returns TRUE, then traversal is halted: you can use this to test for nodes satisfying a condition
+ * Otherwise, traversal continues.   You can always return FALSE in order to perform some operation on every node in the tree.
+ * 
+ * Entity declarations are only visited once; it does not traverse below an entity reference, to avoid potential infinite loops.
+ *
+ * Returns:  TRUE if the traversal was halted prematurely (by means of one of the callback calls returning TRUE); FALSE if the full traversal occurred
  */
 gboolean
 cong_document_for_each_node (CongDocument *doc, 

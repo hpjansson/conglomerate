@@ -1,3 +1,9 @@
+2005-04-21  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-document.c: 
+
+	Added API documentation for cong_document_for_each_node
+
 2005-04-14  David Malcolm  <dmalcolm@redhat.com>
 
 	* plugin-random.c 
