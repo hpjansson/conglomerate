@@ -1933,12 +1933,12 @@ cong_document_for_each_node_recurse (CongDocument *doc,
  * Perform a depth-first traversal of the nodes in the DOM tree of this document, calling the supplied callback for each node,
  * passing it the supplied data.  
  * 
- * If the callback returns TRUE, then traversal is halted: you can use this to test for nodes satisfying a condition
- * Otherwise, traversal continues.   You can always return FALSE in order to perform some operation on every node in the tree.
+ * If the callback returns TRUE, then traversal is halted: you can use this to test for the presence of a node satisfying some condition
+ * Otherwise, traversal continues.   If you wish to perform some operation on every node in the tree, your callback should always return FALSE.
  * 
  * Entity declarations are only visited once; it does not traverse below an entity reference, to avoid potential infinite loops.
  *
- * Returns:  TRUE if the traversal was halted prematurely (by means of one of the callback calls returning TRUE); FALSE if the full traversal occurred
+ * Returns:  TRUE if one of the callback calls returned TRUE (stopping the traversal prematurely); FALSE if the full traversal occurred
  */
 gboolean
 cong_document_for_each_node (CongDocument *doc, 
