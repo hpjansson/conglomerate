@@ -4,6 +4,9 @@
 <!ENTITY % global_entities SYSTEM "global.ent">
 %global_entities;
 ]>
+<!-- PROCESSING INSTRUCTION FOR GNOME YELP  -->
+<!-- comment in order to validate, uncomment for use in Yelp -->
+<?yelp:chunk-depth 4?>
 <book id="index">
     <title>&appfull;</title>
     <subtitle>User Manual</subtitle>
