@@ -1309,7 +1309,7 @@
     <chapter id="design_display_definitions">
         <title id="design_display_definitions.title">Designing Display Definitions</title>
         <para>Display specifications are <acronym>XML</acronym> files saved with the extension
-                <filename class="extension">XDS</filename>. They hold various types of information,
+                <filename>XDS</filename>. They hold various types of information,
             that annotate a one or more Document Types that may be edited with the &appfull;.</para>
         <para>Display specifications do not take the place of <acronym>DTD</acronym>, XML Schema, or
             <acronym>XSL</acronym> files. Their function is only to provide information to
@@ -1339,7 +1339,7 @@
             <title id="dump_xds.title">Dump a Display Spec</title>
             <para>text</para>
         </sect1>
-    </chapter> &faq; &doctype_supp; &xds_ele_ref; &xds_dtd_def; <glossary role="auto">
+    </chapter> <!--&faq;--> &doctype_supp; &xds_ele_ref; &xds_dtd_def; <glossary role="auto">
         <glossentry>
             <glossterm>Dummy</glossterm>
             <glossdef>
