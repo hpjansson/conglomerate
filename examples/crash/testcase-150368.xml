@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding='ISO-8859-1'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                     
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"
+
+[
+<!ENTITY version "0.01">
+<!ENTITY supercopy "SUPERCOPYRIGHT &copy;&reg;">
+]>
+
+<!--
+Comments just like html
+-->
+
+<book>
+
+  <bookinfo>
+    <title>Simple XML Sample Document</title>
+    <author>
+      <firstname>John</firstname>
+      <surname>Doe</surname>
+    </author>
+    <copyright><year>2001</year><holder>John Doe</holder></copyright>
+    <legalnotice>
+      <para>This legal mumbo jumbo will stop evil. It even has
+&supercopy;.</para>
+    </legalnotice>
+    <abstract>
+      <para>This is a simple XML sample version &version;. It is good
+for nothing but processing.</para>
+    </abstract>
+  </bookinfo>
+
+  <chapter>
+    <title>About this book</title>
+    <para>
+      This book was hard
+      work if you look at the history and momentum behind the LDP and
+      DocBook and SGML and XML and....and....and...</para>
+
+    <section><title>Copyrights and Trademarks</title> <para>Copyright
+    &copy; 2001 John Doe</para>
+    </section>
+
+    <section><title>Purpose/Scope</title>
+      <para>This guide is tightly scoped with one purpose; to
+process.</para>
+    </section>
+
+  </chapter>
+
+  <appendix><title>References</title>
+    <para>Some Hoity Toity Person</para>
+  </appendix>
+
+</book>

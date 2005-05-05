@@ -1,3 +1,8 @@
+2005-05-05  David Malcolm  <dmalcolm@redhat.com>
+
+	* testcase-150368.xml:
+	Added test case for 150368
+
 2003-10-1  Geert Stappers
 
 	* septentrio.xml
