@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book
+  PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.docbook.org/xml/4.3/docbookx.dtd">
+<book>
+   <title>Linux Fundamentals</title>
+   <chapter id="requirements">
+      <title>Details of requirements for the courses</title>
+      <para>Text</para>
+      <sect1 id="MachineRequirements">
+         <title>Machine Requirements</title>
+         <para>Text</para>
+      </sect1>
+      <sect1 id="CoursePreRequisitesandOutcomes">
+         <title>Course Pre-requisites And Outcomes</title>
+         <para>Text</para>
+         <sect2>
+            <title>A theory that works</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Pre-requisite knowledge and outcomes</title>
+            <para>Text</para>
+         </sect2>
+      </sect1>
+   </chapter>
+   <chapter id="certification">
+      <title>Linux Distributions and Certifications</title>
+      <para>Is this really required when LPI is distribution neutral. The focus should be GNU/Linux.
+      The fact that a student is using one distro or another should not matter. Issues of license
+         should be explained but just generic in terms of the main license types.</para>
+      <sect1 id="LicensinganddetailsforDebianRedHatandSuSE">
+         <title>Licensing and availability details for SUSE, Red Hat and Debian GNU/Linux</title>
+         <para>Text</para>
+         <sect2>
+            <title>
+               <trademark class="trade">SUSE Linux</trademark>
+            </title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Red Hat</title>
+            <para>Text</para>
+            <sect3>
+               <title>Red Hat for Home Users: Fedora</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Fedora License</title>
+                  <para>Text</para>
+                  <sect5>
+                     <title>Fedora System Requirements</title>
+                     <para>Text</para>
+                  </sect5>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>Red Hat Enterprise Linux</title>
+               <para>Text</para>
+               <sect4 id="RedHatEnterpriseLinuxWS">
+                  <title>Red Hat Enterprise Linux ws</title>
+                  <para>Text</para>
+                  <sect5 id="RedHatEnterpWSCapSysReqSection">
+                     <title>Red Hat Enterprise Linux ws capabilities and System Requirements</title>
+                     <para>Text</para>
+                  </sect5>
+               </sect4>
+               <sect4 id="RedHatEnterpriseLinuxES">
+                  <title>Red Hat Enterprise Linux ES</title>
+                  <para>Text</para>
+               </sect4>
+               <sect4 id="RedHatEnterpriseLinuxAS">
+                  <title>Red Hat Enterprise Linux AS</title>
+                  <para>Text</para>
+                  <sect5 id="RedHatEnterpriseLinuxASCapSysReq">
+                     <title>Red Hat Enterprise Linux AS Capabilities and Supported Hardware</title>
+                     <para>Text</para>
+                  </sect5>
+               </sect4>
+               <sect4 id="RedHatProfessionalWorkstation">
+                  <title>Red Hat Professional Workstation</title>
+                  <para>Text</para>
+                  <sect5 id="RedHatProWSCapHardW">
+                     <title>Red Hat Professional Workstation capabilities and Supported Hardware</title>
+                     <para>Text</para>
+                  </sect5>
+               </sect4>
+               <sect4 id="RedHatEnterpLicensing">
+                  <title>Red Hat Enterprise Family Licensing</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+         <sect2 id="Debian">
+            <title>Debian GNU/Linux</title>
+            <para>Text</para>
+         </sect2>
+      </sect1>
+      <sect1 id="OnLineClassmatesInformationandRegistration">
+         <title>On Line Classmates Information and Registration</title>
+         <para>This will be removed.</para>
+      </sect1>
+      <sect1 id="Certification">
+         <title>Certification</title>
+         <para>Text</para>
+         <sect2 id="LPI">
+            <title>Linux Professional Institute Certification</title>
+            <para>We should only focus on LPI and provide a breakdown of LPI.</para>
+         </sect2>
+         <sect2 id="SairCertification">
+            <title>SAIR Linux and GNU Certification</title>
+            <para>Text</para>
+         </sect2>
+         <sect2 id="RedHatCertification">
+            <title>Red Hat Certification</title>
+            <para>Text</para>
+            <sect3 id="RHCT">
+               <title>RHCT Certification</title>
+               <para>Text</para>
+            </sect3>
+            <sect3 id="RHCE">
+               <title>The RHCE certification:</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+      </sect1>
+   </chapter>
+   <chapter id="history">
+      <title>History and Politics A Business Oriented Background</title>
+      <para>The student does not need to know the history and politics for LPI. It is however
+         helpful to introduce the key players, major projects and communities.</para>
+      <sect1 id="HistoryandPolitics">
+         <title>History and Politics A Business Oriented Background</title>
+         <para>Text</para>
+         <sect2 id="OpenSourceFreeSotwareLicenses">
+            <title>Open Source and Free Software Licenses</title>
+            <para>Text</para>
+            <sect3 id="DefofOpenSourceFreeSoftwareOpenContent">
+               <title>The definition of Open Source, Free Software and Open Content</title>
+               <para>Text</para>
+               <sect4>
+                  <title>The GNU Project and the Free Software Foundation</title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>The Open Source Initiative</title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>Summary of difference between Open Source and Free Software:</title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>Open Content:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+         <sect2 id="HistoryofOpenSource">
+            <title>The History of Open Source Software</title>
+            <para>Text</para>
+            <sect3>
+               <title>The GNU Project</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>GNU is born</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>The birth of the Linux kernel</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>The GNU's kernel</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>Benefits of the Open Source Development methods</title>
+            <para>Text</para>
+         </sect2>
+         <sect2 id="CatB">
+            <title>The Cathedral and the Bazaar</title>
+            <para>Text</para>
+            <sect3 id="WhoisESR">
+               <title>Who is Eric Raymond?</title>
+               <para>Text</para>
+            </sect3>
+            <sect3 id="SummCatB">
+               <title>A Summary of "the Cathedral and the Bazaar"</title>
+               <para>Text</para>
+               <sect4 id="CatBConclusion">
+                  <title>Conclusion</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>Why is Free Software not used extensively in the Enterprise environment?</title>
+            <para>Text</para>
+            <sect3>
+               <title>Introduction</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Cost</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Productivity</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Security</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Maturity</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Support</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+      </sect1>
+      <sect1 id="PosixStandards">
+         <title>Does Linux meet industry standards i.e. POSIX, IEEE, X/OPEN</title>
+         <para>Text</para>
+      </sect1>
+      <sect1 id="ExercisesandQuiz">
+         <title>Exercises and Quiz</title>
+         <para>Text</para>
+      </sect1>
+      <sect1 id="Emulator">
+         <title>Setup of Virtual Linux Environment</title>
+         <para>Text</para>
+      </sect1>
+   </chapter>
+   <chapter id="essentials">
+      <title>Essentials</title>
+      <para>Text</para>
+      <sect1 id="WhatisLinux">
+         <title>What is Linux?</title>
+         <para>By the time a student decides to start studies in order to become a Linux Admin, they
+         should have a good idea of what Linux is. However, it is worth introducing Linux in context
+         of other operating systems.</para>
+      </sect1>
+      <sect1 id="StructureofLinuxbasedOS">
+         <title>Structure of a Linux Based Operating System.</title>
+         <para>Teaching the structure of any operating system at this stage is too early. It would
+            be better to focus on installation issues such as requirements, preperation,
+            installation, post installation. While this information is required it is not required at this stage.  </para>
+         <sect2>
+            <title>Hardware</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>
+               <indexterm significance="normal">
+                  <primary>Kernel</primary>
+               </indexterm>Kernel</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>
+               <indexterm significance="normal">
+                  <primary>Standard Library of Procedures</primary>
+               </indexterm>Standard Library of Procedures</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title> Standard Utilities and User Applications</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Lateral thinking with further details on the Operating System Simone Demblon</title>
+            <para>Text</para>
+            <sect3>
+               <title>How These All Work Together</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Process Flow:</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+      </sect1>
+      <sect1 id="LoggingontoLinux">
+         <title>Logging into a Linux System</title>
+         <para>This should be covered in the previous section during the post
+            installation stage. In addition, why introduce the password file when a student has no
+            use for it at this point. The student does not understand the stuff written in the file
+            and if you show it you must explain the command cat and the contents of the file.</para>
+         <sect2>
+            <title>Login</title>
+            <para>Text</para>
+         </sect2>
+         <sect2 id="PasswordFile">
+            <title>The Password File</title>
+            <para>Text</para>
+         </sect2>
+      </sect1>
+      <sect1 id="ShellCommandInterpreter">
+         <title>The Shell Command Interpreter</title>
+         <para>Before getting to the Shell, students need an understanding of the Interface Basics.
+            This section dives too deep, too fast. Explain what interfaces there are, CLI, GUI. It's
+         also a nice time to introduce help systems and documentation. Any discussion on the command
+         line should be preceeded by a discussion of shell, then bash, then the difference between shell and
+            gnu commands. The discussion should focus heavily on the shell and its commands. Leave
+            GNU commands until after the student understands Shell and File Heirachy</para>
+         <sect2>
+            <title>Different Shell Command Interpreters</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>The Command History within the shell</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Configuring your shell environment</title>
+            <para>Text</para>
+         </sect2>
+         <sect2 id="ShellCommandProcessing">
+            <title>Shell Command Processing</title>
+            <para>Text</para>
+            <sect3>
+               <title>Special Characters</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Internal Commands:</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Shortcuts and Aliases:</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>External Commands:</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2 id="ShellEnvironment">
+            <title>The Shell Environment</title>
+            <para>Text</para>
+            <sect3>
+               <title>Setting A New Shell Variable Or Resetting An Existing Variable</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Exporting a variable value</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>The <indexterm significance="normal">
+                     <primary>echo</primary>
+                  </indexterm>
+                  <command moreinfo="none">echo</command> command</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Discussing system variables - TERM and PS1</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2 id="UsingShellCommands">
+            <title>Using Shell Commands</title>
+            <para>Text</para>
+            <sect3>
+               <title>The man pages</title>
+               <para>Text</para>
+               <sect4>
+                  <title>EXCERCISE:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>The GNU Info pages</title>
+               <para>Text</para>
+               <sect4>
+                  <title>EXCERCISE:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>the <command moreinfo="none">date</command> command</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>The cal command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>the <command moreinfo="none">ls</command> command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>The <command moreinfo="none">pwd</command> command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>The <command moreinfo="none">cd</command> command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercises:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>The <command moreinfo="none">cat</command> command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+            <sect3>
+               <title>The <command moreinfo="none">more</command> and <command moreinfo="none"
+                  >less</command> commands</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>The <command moreinfo="none">ps</command> command</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise:</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+      </sect1>
+      <sect1 id="FilesandDirectories">
+         <title>Files and Directories</title>
+         <para>Start with the high-level architecture here and then work towards the files and
+            directories. Stuff like Kernel Linux, IEEE POSIX shell, intro to shell types, shell
+            commands then
+            working with Bash commands. Discussion of filesystems and their types, layout, file
+            types, input, output, error then the File System Heirarchy and its descriptions. Follow
+            this by teaching the GNU commands. Afterwhich it is time to introduce piping and 
+            redirection and better illustrate the use of compound commands. Explain regular
+            expressions.</para>
+         <sect2>
+            <title>Files under Linux</title>
+            <para>Text</para>
+         </sect2>
+         <sect2 id="Inodes">
+            <title>Inodes</title>
+            <para>Text</para>
+            <sect3>
+               <title>File Mode</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>File types</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>File Permissions</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Number of links</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Owner name</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Group Name</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Number of bytes in the file</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Modification Time</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>File Name</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>Linux FS Hierarchy</title>
+            <para>Text</para>
+            <sect3>
+               <title>Exercise:</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Explanation of how to use /var and /usr efficiently:</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2 id="EditingFilesUnderLinux">
+            <title>Editing Files under Linux</title>
+            <para>Before doing any applications first complete the shell and gnu commands. Command
+               line file editing must be learned before editors. Introduce more than one editor and
+               then give a better explanation of using VIM.</para>
+            <sect3>
+               <title>History</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Using vim</title>
+               <para>Text</para>
+               <sect4>
+                  <title>Exercise</title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>Working with normal data files</title>
+            <para>Most of the stuff in this section will have been covered when learning the shell
+               and gnu commands (Linux Commands).</para>
+            <sect3>
+               <title>Naming conventions (lowercase, etc.)</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Using " <command moreinfo="none">file</command>", <command moreinfo="none"
+                     >magic</command>
+               </title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>File manipulation commands:</title>
+               <para>Text</para>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">touch</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">mv</command>, <command moreinfo="none">rm</command>,
+                        <command moreinfo="none">cp</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">mkdir</command>, <command moreinfo="none"
+                     >rmdir</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">grep</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>find</title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">head</command> and <command moreinfo="none"
+                     >tail</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">wc</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">gzip</command>, <command moreinfo="none"
+                     >bzip2</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+               <sect4>
+                  <title>
+                     <command moreinfo="none">Wildcards</command>
+                  </title>
+                  <para>Text</para>
+               </sect4>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>links</title>
+            <para>Text</para>
+            <sect3>
+               <title>symbolic links versus hard links</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Hard links</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Symbolic Link</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+      </sect1>
+      <sect1 id="FilePermissionsSecurity">
+         <title>File permissions/security</title>
+         <para>This would already have been covered in previous sections.</para>
+         <sect2>
+            <title>
+               <command moreinfo="none">chmod</command>
+            </title>
+            <para>Text</para>
+            <sect3>
+               <title>Octal mode:</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Symbolic mode:</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>chown and chgrp</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>
+               <command moreinfo="none">umask</command>
+            </title>
+            <para>Text</para>
+         </sect2>
+      </sect1>
+      <sect1>
+         <title>File Redirection, Named and un-named pipes</title>
+         <para>This would already have been covered in previous sections.</para>
+         <sect2>
+            <title>stdin</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>stdout</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>stderr</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Appending to a file</title>
+            <para>Text</para>
+         </sect2>
+         <sect2>
+            <title>Piping</title>
+            <para>Text</para>
+         </sect2>
+      </sect1>
+      <sect1 id="othercommands">
+         <title>Other commands</title>
+         <para>After learning Shell and GNU commands there will be no other commands to learn until
+            actual use of protocols and applications.</para>
+      </sect1>
+   </chapter>
+   <appendix id="LPI_certification">
+      <title>Linux Professional Institute (LPI) Certification</title>
+      <para>This would be covered outside the class in an earlier part.</para>
+      <sect1>
+         <title>Introduction</title>
+         <para>Text</para>
+         <sect2>
+            <title>Junior Level Administration (LPIC1)</title>
+            <para>Text</para>
+            <sect3>
+               <title>LPI exam 101 Details</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>LPI Exam 102</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+         <sect2>
+            <title>Intermediate Level Administration (LPIC2)</title>
+            <para>Text</para>
+            <sect3>
+               <title>LPI Exam 201</title>
+               <para>Text</para>
+            </sect3>
+            <sect3>
+               <title>Exam 202</title>
+               <para>Text</para>
+            </sect3>
+         </sect2>
+      </sect1>
+   </appendix>
+   <appendix id="Linux2.6">
+      <title>Linux kernel version 2.6</title>
+      <para>This information is really not required.</para>
+      <sect1>
+         <title>The Wonderful World of Linux</title>
+         <para>Text</para>
+      </sect1>
+   </appendix>
+</book>

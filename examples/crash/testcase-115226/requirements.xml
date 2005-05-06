@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>-->
+<chapter id="requirements">
+    <title>Details of requirements for the courses</title>
+    <sect1 id="MachineRequirements">
+        <title>Machine Requirements</title>
+        <para>You do not need a very poweful Computer to run Linux. If you did a console only
+            installation (without a GUI windows environment) a Pentium 100 with 32 MB of memory and
+            500 MB of hard drive space would be more than enough . Of course the more recent
+            versions of Linux like <trademark>Red Hat</trademark> Enterprise 3 and <trademark>SUSE
+            Linux</trademark> 9 would need a computer with more capabilities than a Pentium 1</para>
+        <bridgehead>Fundamentals</bridgehead>
+        <para>It is possible to run this course on Linux or in Windows - however when working in
+            Windows you will have to install a Linux emulator. Matthew West created a Debian
+            GNU/Linux image you can use with Bochs, an Open Source Emulator. We suggest you use this
+            image and Bochs, since it also includes the sample files that Matthew West uses as
+            examples and Exercises in the Fundamentlas course.</para>
+        <para>What this does is to create a virtual enviroment, that runs inside your current
+            Operating System, which runs Debian GNU/Linux. Download and installation instructions
+            can be found <xref linkend="Emulator"/> here.</para>
+        <para>Because this emulated (virtual) machine needs to use the resources of the installed
+            Operating System you need a faster computer to run it successfully. We recommend a
+            Pentium 2 500 Mhz computer with 32 MB memory. If you already have Linux installed you do
+            not need to use the simulator.</para>
+        <bridgehead>System Administration</bridgehead>
+        <para>For the System Administration course you need only one machine. The System
+            Administration course begins by explaining how to install Debian. Run this course after
+            you have completed and are familiar with the material covered in the Fundamentals course.</para>
+        <bridgehead>Networking</bridgehead>
+        <para>For the Networking courses, you would need to have two machines with Linux installed
+            on them. Both machines should have a Network card installed. If you are using a machine
+            that is already connected to a Local Area Network then you do not need a second machine.</para>
+        <bridgehead>Shell Scripting and Internals courses</bridgehead>
+        <para>You need to have a Linux distribution installed to take part in these courses</para>
+        <!-- Would the student need a Linux machine for the Internals course? -->
+    </sect1>
+    <sect1 id="CoursePreRequisitesandOutcomes">
+        <sect1info>
+            <title>Course Pre-requisites And Outcomes</title>
+        </sect1info>
+        <title>Course Pre-requisites And Outcomes</title>
+        <sect2>
+            <title>A theory that works</title>
+            <para>In the technical world of computers today it is no longer really enough to just
+                know or specialise in one area of technology. With the emphasis being on networking,
+                you will need to know something of everything to really get by. (e.g. operating
+                systems, routers and other networking equipment, system and network administration,
+                system and network design, latest technology trends etcetera.)</para>
+            <para>You will also need knowledge of the business structure in your company. Become a
+                technical person able or capable of enhancing the business of the company or
+                companies that you work for - almost operating as a business yourself
+                (self-sustaining and self-enhancing).</para>
+            <para>Some examples would be:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Regular operating system maintenance will ensure good solid and consistent
+                        performance - this could save the business a lot of money.</para>
+                </listitem>
+                <listitem>
+                    <para>Another example would be that if you know the Open Source and Free
+                        Software products available you could advise your company to go with that
+                        solution rather than a propriety solution and this could go a long way to
+                        ensuring that the business saves money.</para>
+                </listitem>
+                <listitem>
+                    <para>Think laterally and carefully when supporting and Operating System like
+                        Linux or Unix, being so powerful means that there is more to it than a
+                        simple stream of instructions.</para>
+                </listitem>
+                <listitem>
+                    <para>Become aware of what is happening around you in the computer industry and
+                        in business and become a real asset.</para>
+                </listitem>
+            </itemizedlist>
+            <para>A note aside:- <quote>Whilst working as a Unix technician, a new
+                    &quot;client&quot; phoned me one day and asked me to install another
+                    disk drive on the Unix server for them as their first hard drive was full. They
+                    had been running this server for 4 years and I asked them to wait until I
+                    arrived before purchasing another disk but I was too late they had ordered one
+                    already. When I arrived I cleaned up the primary hard disk drive from 100% full
+                    to 40% full just by doing thorough house-keeping (could have been handled with a
+                    Shell Script running automatically each week/month), tidying up the log files,
+                    temporary directories, superfluous software versions etcetera.</quote>
+                <author>
+                    <firstname>Simone</firstname>
+                    <surname>Demblon</surname>
+                </author>
+            </para>
+            <para>Once you have learnt one operating system in the way that we have structured this
+                course, it is much easier to pick up other knowledge on hardware / operating
+                systems, system configuration and even development.</para>
+            <para>As it would be almost impossible to learn everything about all technology
+                available, cultivate a technical way of thinking laterally, it will be a decided
+                advantage to you.</para>
+        </sect2>
+        <sect2>
+            <title>Pre-requisite knowledge and outcomes</title>
+            <para>The text below is a mere guideline to equivalent knowledge, as you know if you
+                have a talent for working with computers OR if you are an extremely hard-worker who
+                is prepared to play with the operating system until you are sure of yourself, then
+                you are likely to not need to follow these guidelines and you will exceed the
+                qualification levels that are suggested here.</para>
+            <para>Therefore when I say below that your knowledge would be equivalent to a System
+                Administrator, what I am really saying is that although you will have an extensive
+                knowledge of Linux (we have structured the courses to ensure that there are
+                sufficient labs and Exercises), the additional knowledge - the knowledge of specific
+                company set-ups or specific pieces of hardware - will still have to be gained by
+                your experience.</para>
+            <para>Now let's look at each course or course range and discuss the relevant issues:</para>
+            <orderedlist numeration="arabic">
+                <listitem>
+                    <para>In order to successfully complete the Fundamentals course you will need to
+                        have knowledge of PC Computers (operating systems and hardware).</para>
+                    <para>After completion on the Fundamentals course (approximately 18 hours of
+                        study), you would have a basic grounding of the Linux Operating System.</para>
+                    <para>Please note however that although an introductory course to Linux it is
+                        not an introduction to computers or operating systems. We assume that you
+                        have some technical knowledge already.</para>
+                    <para>In this course, some internal operations of the operating system are
+                        covered simply, and this is in order to ensure that you are able to think a
+                        problem through laterally. This will also assist if wishing to complete the
+                        range all the way through to the Internals course, by giving you a grounding
+                        in simple terms to build on throughout the other courses.</para>
+                </listitem>
+                <listitem>
+                    <para>In order to successfully complete the System Administration course you
+                        would need enough knowledge to install an operating system.</para>
+                    <para>After completion of the Fundamentals and System Administration courses (18
+                        + 30 hours), you would have the equivalent knowledge of a Junior
+                        Administrator in Linux. You will have enough knowledge and experience
+                        (through intensive labs) to assist a fully qualified System Administrator in
+                        a commercial business situation. (RHCT)</para>
+                    <para>At this stage all you will lack is further experience to enable you to
+                        perform the function of System Administrator.</para>
+                </listitem>
+                <listitem>
+                    <para>After further completing the Network Administrators course (30 hours), and
+                        this would include all associated Exercises, labs and simulated problem
+                        labs, you would be able to work as a Junior Network Administrator.</para>
+                </listitem>
+                <listitem>
+                    <para>After completing the Elective course subjects, affiliated to the
+                        Networking course, (18 hours) you would be qualified to do System and
+                        Network Administration including monitoring and maintaining your network. (RHCE)</para>
+                </listitem>
+                <listitem>
+                    <para>Shell Scripting (20 hours) is a course that will clarify the power of
+                        Linux for you and will also excite you as pieces of the &quot;operating
+                        system puzzle&quot; fall into pace at an alarming rate. This is a
+                        stunning course and no matter what you intend to do with your Linux
+                        knowledge this course is a must.Ensure that you have completed the following
+                        courses or that you have equivalent knowledge prior to attempting this
+                        course: Fundamentals, System Administration and Networking Introduction.</para>
+                </listitem>
+                <listitem>
+                    <para>Internals^-1 is a technical course written to enable a System
+                        Administrator to become a visionary systems engineer able to attend a full
+                        internals course if so inclined. A cautionary note would be that although we
+                        have kept it as generically inclined as possible you may have to check up
+                        the variances with the Linux or Unix kernel that you are working with.</para>
+                    <para>As we have said from the beginning, support of such an operating system is
+                        going to take a fair amount of lateral thinking, and as not all of us are
+                        interested in the nitty-gritty details of how an operating system was
+                        written (see reference material used if you are interested), so internals^-1
+                        will give you the workings in a more simple technical form. </para>
+                </listitem>
+            </orderedlist>
+        </sect2>
+    </sect1>
+</chapter>

@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>-->
+<chapter id="certification">
+    <title>Linux Distributions and Certifications</title>
+    <sect1 id="LicensinganddetailsforDebianRedHatandSuSE">
+        <sect1info>
+            <title>Licensing and availability details for Debian, Red Hat and SuSE</title>
+        </sect1info>
+        <title>Licensing and availability details for SUSE, Red Hat and Debian GNU/Linux</title>
+        <para>There are literally hundreds of Linux Distributions available. Size-wise they extend
+            from versions that fit onto one 3.5 inch disk to those that are a few gigabytes big.</para>
+        <para>Although there are differences from one version of this operating system to another,
+            they all use the Linux Kernel (albeit different versions of the kernel</para>
+        <para>We will discuss three of the Linux distributions that are most widely used, namely:
+            SuSE, Red Hat, and Debian</para>
+        <sect2>
+            <title>
+                <trademark>SUSE Linux</trademark>
+            </title>
+            <para>Novell announced<footnote>
+                    <para>
+                        <ulink url="http://www.novell.com/news/press/archive/2003/11/pr03069.html">Novell.com</ulink>
+                    </para>
+                </footnote> on November the 4th 2003, that they have made an agreement to acquire
+                    <trademark>SUSE Linux</trademark>
+                <footnote>
+                    <para>SUSE is a registered trademark of <trademark>SUSE Linux</trademark>
+                    </para>
+                </footnote>, this purchase is subject to regulatory approval, but is expected to be
+                allowed and finalized by the first quarter of 2004.</para>
+            <bridgehead>Home Users</bridgehead>
+            <para>This is how <trademark>SUSE</trademark> describes SUSE Linux 9.0, which is the
+                family of products aimed at the home user:<footnote>
+                    <para>
+                        <ulink url="http://www.suse.com/us/private/products/suse_Linux/"/>
+                    </para>
+                </footnote>
+            </para>
+            <para>
+                <quote> Migrating from Windows has never been easier: SUSE Linux 9.0 is secure and
+                    stable. In addition to a powerful operating system, SUSE Linux 9.0 delivers all
+                    the applications you need for Internet, Office, Multimedia, and Home networking.
+                    Its installation routine is now almost fully automated, so you'll be up and
+                    running with little effort. And, of course, you are assured all the advantages
+                    of using Open Source software. </quote>
+            </para>
+            <bridgehead>System Requirements for <trademark>SUSE Linux 9.0 </trademark>
+            </bridgehead>
+            <itemizedlist id="SysReqSuse9.0">
+                <listitem>
+                    <para>Processor</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Intel: Celeron, Pentium to Pentium 4, Xeon</para>
+                        </listitem>
+                        <listitem>
+                            <para>AMD: K6/II/III, <trademark>Duron</trademark>,
+                                <trademark>Athlon</trademark>, <trademark>Athlon</trademark> XP/MP,
+                                    <trademark>Athlon 64</trademark>
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>IBM</para>
+                        </listitem>
+                        <listitem>
+                            <para>286, 386, 486 and Cyrix processors are not supported</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Main Memory</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>At least 64 MB are required for the installation with YaST2 in
+                                graphical mode; 128 MB recommended</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Hard disk</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>400 MB to more than 3 GB (Personal Edition) or 6 GB (Professional
+                                Edition) for the installation of all packages; 2 GB or more recommended</para>
+                        </listitem>
+                        <listitem>
+                            <para>LBA48 hard disks are supported</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <para>
+                <trademark>SUSE Linux</trademark> 9.0 can be downloaded via FTP for free. You can
+                choose to download the complete installation directory, a CD image, from which you
+                can create a bootable CD that will download and install SUSE from the FTP server. It
+                is not possible to create the installation CD's for <trademark>SUSE</trademark> from
+                the directories on the FTP server. You can also download a demonstration version of
+                <trademark>SUSE</trademark> that runs from a bootable CD<footnote>
+                    <para>A list of FTP mirror sites can be found <ulink
+                        url="http://www.suse.com/us/private/download/ftp/int_mirrors.html">here.</ulink>
+                        From here you would be able to download the files you need to install
+                            <trademark>SUSE Linux 9.0</trademark>
+                    </para>
+                </footnote>
+            </para>
+            <bridgehead>Enterprise Users</bridgehead>
+            <para>
+                <trademark>SUSE</trademark> currently has three products that businesses are
+                suggested to use, these are <trademark>SUSE Linux Standard Sever 8</trademark>,
+                    <trademark>SUSE Linux Enterprise Server 8</trademark> and <trademark>SUSE Linux
+                    Openexchange Server 4.1</trademark>
+            </para>
+            <bridgehead>
+                <trademark>SUSE Linux Standard Server 8</trademark>:</bridgehead>
+            <para>This is how SUSE describes <trademark>SUSE Linux Standard Server 8</trademark>
+            </para>
+            <para>
+                <quote> With its comprehensive graphical administration, SUSE Linux Standard Server
+                    was designed for small organizations and departments that want to implement
+                    their Internet access as well as e-mail, print, and file services in a reliable,
+                    secure way. Standard Server is available for 32-bit processors (x86) from AMD
+                    and Intel and supports up to two CPUs</quote>
+                <footnote>
+                    <para>From: <ulink url="http://www.suse.com/us/business/products/server/"/>
+                    </para>
+                </footnote>
+            </para>
+            <bridgehead>System Requirements for <trademark>SuSE Linux Standard Server 8</trademark>:</bridgehead>
+            <itemizedlist id="SysReqSuSeStandServer8">
+                <listitem>
+                    <para>Reccomended CPU: 700 Mhz</para>
+                </listitem>
+                <listitem>
+                    <para>Minmum RAM: 256 MB</para>
+                </listitem>
+                <listitem>
+                    <para>Hard Disk Space Required for Installation: 1 GB</para>
+                </listitem>
+            </itemizedlist>
+            <bridgehead>Features of <trademark>SuSE Linux Standard Server 8</trademark>:</bridgehead>
+            <itemizedlist id="FeatSuseStandServ8">
+                <listitem>
+                    <para>File and print services for Linux and <trademark>Windows</trademark>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Primary Domain Controller (PDC) for <trademark>Windows</trademark>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>Central user administration with directory service (LDAP)</para>
+                </listitem>
+                <listitem>
+                    <para>E-mail server (IMAP) for all e-mail clients including:</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Definition of the mailbox quota</para>
+                        </listitem>
+                        <listitem>
+                            <para>SPAM filter</para>
+                        </listitem>
+                        <listitem>
+                            <para>Dial on demand</para>
+                        </listitem>
+                        <listitem>
+                            <para>Fetching mail from other providers</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Internet gateway server including web cache, web content filter, and firewall</para>
+                </listitem>
+                <listitem>
+                    <para>Automatic assignment of IP addresses via DHCP server</para>
+                </listitem>
+                <listitem>
+                    <para>Administration of host names with Dynamic Name Service (DNS)</para>
+                </listitem>
+                <listitem>
+                    <para>Secure access for clients, i.e. for external staff via Virtual Private
+                        Network (VPN)</para>
+                </listitem>
+                <listitem>
+                    <para>Application server</para>
+                </listitem>
+            </itemizedlist>
+            <bridgehead>
+                <trademark>SuSE Linux Enterprise Server 8</trademark>
+            </bridgehead>
+            <para>This is how SUSE describes <trademark>SUSE Linux Enterprise Server 8</trademark>
+            </para>
+            <para>
+                <quote> SUSE Linux Enterprise Server 8 is a leading server operating system for
+                    professional deployment in heterogeneous IT environment of all sizes and
+                    sectors. It is available for all relevant hardware platforms, ranging from
+                    AMD/Intel 32-bit and 64-bit processors to the entire IBM eServer series
+                    including mainframes - one single server operating system with a uniform code basis!</quote>
+                <footnote>
+                    <para>From: <ulink url="http://www.suse.com/us/business/products/server/"/>
+                    </para>
+                </footnote>
+            </para>
+            <bridgehead>System Requirements for <trademark>SUSE Linux Enterprise Server 8</trademark>:</bridgehead>
+            <itemizedlist id="SysReqSuseEnter8">
+                <listitem>
+                    <para>Recommended CPU: 800 MHz</para>
+                </listitem>
+                <listitem>
+                    <para>Minimum RAM: 256 MB</para>
+                </listitem>
+                <listitem>
+                    <para>Hard Disk Space required for installation: 1.2 GB</para>
+                </listitem>
+            </itemizedlist>
+            <para>For a full list of <trademark>SuSE Linux Enterprise Server 8</trademark> Features,
+                visit <ulink
+                url="http://www.SuSE.com/en/business/products/server/sles/features.html">this</ulink> page</para>
+            <para>A comparison of <trademark>SUSE Linux Standard Server 8</trademark> and
+                    <trademark>SUSE Linux Enterprise Server 8</trademark> can be found <ulink url="http://www.suse.com/en/business/products/server/which_version/index.html">here.</ulink>
+            </para>
+            <bridgehead>
+                <trademark>SUSE Linux Openexchange Server 4.1</trademark>
+            </bridgehead>
+            <para>This is how SUSE describes <trademark>SUSE Linux Openexchange Server 4.1</trademark>
+            </para>
+            <para>
+                <quote> SUSE Linux Openexchange Server 4.1 is the trend-setting groupware and
+                    communication solution that helps your company to progress - with superior
+                    technical features, far-reaching hardware independence, smooth migration, and a
+                    wide range of supported clients including Outlook clients from Outlook 98 and
+                    various web browsers.For All Requirements</quote>
+            </para>
+            <para>
+                <quote>On the basis of standardized protocols and Open Source components, SUSE Linux
+                    Openexchange Server offers everything modern enterprises and organizations need
+                    for communication: e-mail server, web server, groupware, collaboration, and messaging.</quote>
+                <footnote>
+                    <para>From:<ulink url="http://www.suse.com/us/business/products/openexchange/"/>
+                    </para>
+                </footnote>
+            </para>
+            <bridgehead>System Requirements for <trademark>SUSE Linux Openexchange Server 4.1</trademark>
+            </bridgehead>
+            <itemizedlist>
+                <listitem>
+                    <para>CPU(s): AMD <trademark>Athlon</trademark> /<trademark>Duron</trademark>,
+                        Intel Pentium III/4 or compatible AMD K6 is not supported!</para>
+                </listitem>
+                <listitem>
+                    <para>RAM: 256 MB</para>
+                </listitem>
+                <listitem>
+                    <para>Hard disk space: 9 GB</para>
+                </listitem>
+            </itemizedlist>
+            <!-- SUSE ends here -->
+        </sect2>
+        <!-- RED HAT Starts Here -->
+        <sect2>
+            <title>Red Hat</title>
+            <para>Red Hat Linux is probably the most well known Linux distribution. The first
+                version of Red hat was released in October 1994.</para>
+            <para>Its success can be attributed to the commitment to support and the development of
+                the RHCE certification. For this reason, many of the corporate companies choosing to
+                use Open Source Software have selected Red Hat Products. They knew that with Red Hat
+                they would be able to have reliable updates to the products and that there was a
+                pool of trained Red Hat Support Engineers.</para>
+            <!-- Fedora starts here -->
+            <sect3>
+                <title>Red Hat for Home Users: Fedora</title>
+                <para>Late in 2003 Red Hat announced that they would stop supporting Red hat Linux 9
+                    and instead release two new product lines, aimed at very different markets.</para>
+                <para>Up until that time Red Hat Linux 9 and the earlier versions, were used in the
+                    corporate environment and by home users.</para>
+                <para>The version now meant for home users is called &quot;the Fedora Project&quot;</para>
+                <para>This is how Red Hat describes the Fedora Project: &quot;The Fedora Project
+                    is a Red-Hat-sponsored and community-supported open source project. It is also a
+                    proving ground for new technology that may eventually make its way into Red Hat
+                    products. It is not a supported product of Red Hat, Inc.&quot; <footnote>
+                        <para>From:<ulink url="http://fedora.redhat.com/">http://fedora.redhat.com/</ulink>
+                        </para>
+                    </footnote>
+                </para>
+                <para>A more open development process is used for Fedora, than is for Red Hat
+                    Enterprise Linux. The Red Hat Developers are still taking part in the
+                    development of Fedora but more community driven development is encouraged.</para>
+                <sect4>
+                    <title>Fedora License</title>
+                    <para>In my understanding, a user may make and distribute unmodified copies of
+                        Fedora's source code and binary code. If the product is modified you may
+                        only redistribute these files if all images that contain the Fedora
+                        trademark is changed.</para>
+                    <para>Fedora's binary and source files may be downloaded, for free, via FTP.</para>
+                    <para>Please see <ulink url="http://fedora.redhat.com/download/">this</ulink>
+                        page, for exact instructions on how to download Fedora's installation files.</para>
+                    <sect5>
+                        <title>Fedora System Requirements</title>
+                        <itemizedlist>
+                            <listitem>
+                                <para>CPU: Note: The following CPU specifications are stated in
+                                    terms of Intel processors. Other processors (notably, offerings
+                                    from AMD, Cyrix, and VIA) that are compatible with and
+                                    equivalent to the following Intel processors may also be used
+                                    with Fedora Core.</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Pentium-class Note: Fedora Core 1 is optimised for
+                                            Pentium PRO (and later) CPUs, but also supports
+                                            Pentium-class CPUs. This approach has been taken because
+                                            Pentium-class optimisations actually result in reduced
+                                            performance for non-Pentium-class processors.</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Recommended for text-mode: 200 MHz Pentium-class or better</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Recommended for graphical: 400 MHz Pentium II or better</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>Hard Disk Space (NOTE: Additional space will be required for
+                                    user data):</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Custom Installation (Minimal): 520MB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Server: 870MB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Personal Desktop: 1.9GB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Workstation: 2.4GB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Custom Installation (Everything): 5.3GB</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>Memory:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Minimum for text-mode: 64MB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Minimum for graphical: 192MB</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Recommended for graphical: 256MB</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </sect5>
+                </sect4>
+                <!-- Fedora ends here -->
+            </sect3>
+            <!-- Red Hat Enterprise Products Start here -->
+            <sect3>
+                <title>Red Hat Enterprise Linux</title>
+                <para>Red Hat has four products that are aimed for use in the corporate environment:</para>
+                <sect4 id="RedHatEnterpriseLinuxWS">
+                    <title>Red Hat Enterprise Linux ws</title>
+                    <para>Designed for desktop/client systems, therefore it does not include the
+                        server applications found in the Red Hat Enterprise Linux ES or AS. (see below).</para>
+                    <sect5 id="RedHatEnterpWSCapSysReqSection">
+                        <title>Red Hat Enterprise Linux ws capabilities and System Requirements</title>
+                        <para>A Test Paragraph to see if it fixes the issue</para>
+                        <itemizedlist id="RedHatEnterpWSCapSysReq">
+                            <listitem>
+                                <para>Capabilities:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Mail</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Document Processing</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Browsing</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Instant Messaging</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>Supported hardware:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Intel X86</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Intel Itanium</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>AMD</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>AMD64</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </sect5>
+                </sect4>
+                <sect4 id="RedHatEnterpriseLinuxES">
+                    <title>Red Hat Enterprise Linux ES</title>
+                    <para>Designed for small/midrange servers. Has the same capabilities as Red Hat
+                        Enterprise Linux AS, but its hardware support is less extensive. It supports
+                        x-86 based systems, with up to 2 CPU's and 8 GB of memory.</para>
+                    <para>It is ideally suited for network, file, print, mail, Web, and custom or
+                        packaged business applications.</para>
+                    <itemizedlist id="RedHatEnterpriseLinuxESSysReqCap">
+                        <listitem>
+                            <para>Capabilities:</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>Mail</para>
+                                </listitem>
+                                <listitem>
+                                    <para>File (SMB/NFS)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Print</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Accelerated Web (tux)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Advanced Firewall (arptables)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Extended Remote Shell Access/Mgmt</para>
+                                </listitem>
+                                <listitem>
+                                    <para>DHCP</para>
+                                </listitem>
+                                <listitem>
+                                    <para>DNS Nameserver</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Network Authentication (Kerberos)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>News</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Backup</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Dump Server (Netdump)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Directory Server (LDAP)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>Remote Boot/Image Server</para>
+                                </listitem>
+                                <listitem>
+                                    <para>SSL</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>Supported Hardware:</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>x86 architectures, up to 2 CPU's</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                    </itemizedlist>
+                </sect4>
+                <sect4 id="RedHatEnterpriseLinuxAS">
+                    <title>Red Hat Enterprise Linux AS</title>
+                    <para>Designed for high-end and mission-critical systems. This is Red Hat's top
+                        of the range distribution and is certified on systems provided by Dell, HP,
+                        IBM, and Sun. <footnote>
+                            <para>See <ulink
+                                url="http://www.redhat.com/software/rhel/as/">this</ulink> page for
+                                full specifications for Red Hat enterprise Linux AS</para>
+                        </footnote>
+                    </para>
+                    <para>It supports the largest commodity-architecture servers with up to 16 CPUs
+                        and 64GB of main memory and is available with the highest levels of support.</para>
+                    <sect5 id="RedHatEnterpriseLinuxASCapSysReq">
+                        <title>Red Hat Enterprise Linux AS Capabilities and Supported Hardware</title>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Capabilities:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Mail</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>File (SMB/NFS)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Print</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Accelerated Web (tux)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Advanced Firewall (arptables)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Extended Remote Shell Access/Mgmt</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>DHCP</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>DNS Nameserver</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Network Authentication (Kerberos)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>News</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Backup</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Dump Server (Netdump)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Directory Server (LDAP)</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Remote Boot/Image Server</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>SSL</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>Supported Hardware:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Intel X86</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Intel Itanium</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>AMD AMD64</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>IBM zSeries</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>IBM iSeries</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>IBM pSeries</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>IBM S/390</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </sect5>
+                </sect4>
+                <sect4 id="RedHatProfessionalWorkstation">
+                    <title>Red Hat Professional Workstation</title>
+                    <para>Enterprise Linux for use in the home. Supports up x86 hardware, with up to
+                        2 CPU's. Meaning that other than Fedora, this distribution does have
+                        official support from Red Hat, this includes technical support as well as
+                        security updates.</para>
+                    <sect5 id="RedHatProWSCapHardW">
+                        <title>Red Hat Professional Workstation capabilities and Supported Hardware</title>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Capabilities:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Bluecurve, Ximian Evolution, OpenOffice.org, Mozilla</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Samba, NFS, CUPS</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>GCC3.2</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                            <listitem>
+                                <para>Supported Hardware:</para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>x86 architectures</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </listitem>
+                        </itemizedlist>
+                    </sect5>
+                </sect4>
+                <sect4 id="RedHatEnterpLicensing">
+                    <title>Red Hat Enterprise Family Licensing</title>
+                    <para>As with the Fedora Project, you are allowed to make and distribute
+                        unmodified copies of the binary and source code. If you want to distribute
+                        modified copies of the software or source code, you need to modify those
+                        files which contain the trademark images of Red Hat.</para>
+                    <para>The licenses may vary depending on the country and product, to view the
+                        specific license for the product you are interested in, visit <ulink
+                        url="http://www.redhat.com/licenses/">this</ulink> page.</para>
+                </sect4>
+                <!-- Red Hat Enterprise ends here -->
+            </sect3>
+            <!-- Red Hat Ends here -->
+        </sect2>
+        <!-- Debian Starts Here -->
+        <sect2 id="Debian">
+            <title>Debian GNU/Linux</title>
+            <para>Debian GNU/Linux (to use the correct term, Debian used for short) is a completely
+                free operating system, by this I mean that it contains no software that is released
+                under a proprietary license. Some other Linux distributions contain code that is not
+                free software. It currently uses the Linux kernel, but there are plans to use the
+                GNU kernel in future releases. The latest stable release is 3.0r.1</para>
+            <para>Debian can be downloaded via FTP or HTTP from <ulink
+                url="http://www.debian.org/distrib/cd">this</ulink> page</para>
+            <para>Or purchased from vendors, see <ulink
+                url="http://www.debian.org/CD/vendors/">this</ulink> page</para>
+            <para>There are three versions of Debian that are available: stable, testing and
+                unstable. This describes the amount of development that has been done on the
+                particular version, and what environment it is suited to. You would not want to run
+                your company's servers with the unstable version of Debian!</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Stable: current version is 3.0r.2, codenamed 'Woody'.</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Debian suggests that end users use this version, Debian's security
+                                team supports it. Released in July 2002. Latest update to this
+                                version done on November 21st, 2003</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Testing: Current version is codenamed 'Sarge'.</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Contains packages (applications) that have not yet been released
+                                in the Stable version, but which are planned to be released in the
+                                Stable version in the future. It has more recent versions of the
+                                software than Woody, but has no support from the Debian security team.</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Unstable: Codenamed 'Sid'.</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>This version of Debian is the one where new packages are actively
+                                being developed, generally this is only used by developers working
+                                on the packages for Sid.</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <itemizedlist>
+                <listitem>
+                    <para>Hardware Supported by Debian:</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Alpha ARM</para>
+                        </listitem>
+                        <listitem>
+                            <para>HP PA-RISC</para>
+                        </listitem>
+                        <listitem>
+                            <para>Intel x86</para>
+                        </listitem>
+                        <listitem>
+                            <para>Intel IA-64</para>
+                        </listitem>
+                        <listitem>
+                            <para>MIPS</para>
+                        </listitem>
+                        <listitem>
+                            <para>Motorola 680x0</para>
+                        </listitem>
+                        <listitem>
+                            <para>MIPS (DEC)</para>
+                        </listitem>
+                        <listitem>
+                            <para>PowerPC</para>
+                        </listitem>
+                        <listitem>
+                            <para>IBM S/390</para>
+                        </listitem>
+                        <listitem>
+                            <para>SPARC</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+            </itemizedlist>
+            <para>Debian comes with more than 8700 packages, most of which are released under GPL
+                licenses (or licenses that can be compared to the GPL). To view the list of packages
+                that are available, visit <ulink
+                url="http://www.debian.org/distrib/packages">this</ulink> page.</para>
+            <para>The installation manuals for the different distributions and hardware
+                architectures can be found on <ulink
+                url="http://www.debian.org/releases/stable/installmanual">this</ulink> page. The
+                respective system requirements are found in the installation manuals.</para>
+            <para>When doing a minimal Debian installation, you need very little system resources.
+                For example on the Intel x86 architecture you need 12 MB of memory and 250 MB hard
+                drive space to install a console-based system. To install a system that includes the
+                X Windows System, you need at least 400MB hard drive space.</para>
+            <!-- Debian ends here -->
+        </sect2>
+    </sect1>
+    <!-- Online Classmates Starts here. -->
+    <sect1 id="OnLineClassmatesInformationandRegistration">
+        <sect1info>
+            <title>On Line Classmates Information and Registration</title>
+        </sect1info>
+        <title>On Line Classmates Information and Registration</title>
+        <para>Apart from the normal HTML version of the manual, we also use Moodle, a Open Source
+            Package . By using the moodle version of the manual, the student not only has access to
+            the material but also would have easy access to fellow students who are also taking part
+            in the courses. Some of the features of Moodle is its forums which are dedicated to
+            specific parts of the course as well as the chat facilities. This allows the student to
+            communicate more efficiently with fellow students as well as the maintainers and
+            lecturers of the courses.</para>
+        <para>Moodle was developed by Martin Dougiamas, visit <ulink url="http://www.moodle.org">www.moodle.org</ulink> for more information.</para>
+        <para>The Moodle implementation of this manual can be found at <ulink url="http://learnlinux.tsf.org.za/moodle/">http://learnlinux.tsf.org.za/moodle/</ulink></para>
+        <!--Online Classmates ends -->
+    </sect1>
+    <!-- Certification Starts -->
+    <sect1 id="Certification">
+        <title>Certification</title>
+        <sect2 id="LPI">
+            <title>Linux Professional Institute Certification</title>
+            <para>The Linux Professional Institute currently has two levels of certification, Junior
+                Level Administration (LPIC1) and Intermediate Level Administration (LPIC2). At the
+                time of writing the Senior Level Administration (LPIC3) course was still being
+                developed. </para>
+            <para>With the permission of the LPI, we have created a detailed list of the skills you
+                need to have to gain the different levels of certification. We have included this in
+                the first appendix of this course <xref linkend="LPI_certification"/>
+            </para>
+        </sect2>
+        <sect2 id="SairCertification">
+            <!-- SAIR Linux and GNU Certification Starts -->
+            <title>SAIR Linux and GNU Certification</title>
+            <para>We intended to cover the SAIR Linux GNU certification as well, but it seems as if
+                it no longer exists. From their home page <ulink
+                url="http://www.Linuxcertification.org/">http://www.Linuxcertification.org/</ulink>
+                it seems that this certification has been taken over by Thomson Learning corporate
+                and professional training operations. We have made repeated attempts at contacting
+                the new administrators of this certification, with no response. SAIR-GNU offered
+                three levels of certification: Administrator (LCA), Engineer (LCE) and Master
+                Engineer (MLCE).</para>
+        </sect2>
+        <!-- SAIR Linux and GNU Certification Ends -->
+        <sect2 id="RedHatCertification">
+            <!-- Red Hat Certification Starts -->
+            <title>Red Hat Certification</title>
+            <para>One of the reasons Red Hat has been so widely accepted in the Enterprise
+                environment, I feel, is becasue it has created (and updated) its own certification
+                for its products. People respect the RHCE certification, because it is not easy to
+                attain. Unlike other certifications, the RHCE and RHCT exams are done on live test
+                systems, that simulate tasks that System Administrators should be capable of doing.</para>
+            <para>There are two levels of certification offered by Red Hat; RHCT (Red Hat Certified
+                Technitian) and RHCE (Red Hat Certified Engineer). The RHCE is the more advanced
+                certification. The RHCE and RHCT exams are performance based practical labs. In
+                other words you are given a exam based on situations that you will find in the real
+                world. As of the end of 2003 these exams are based on the Red Hat Enterprise family
+                of products, not Red Hat 9 as it was previoulsy.</para>
+            <sect3 id="RHCT">
+                <!-- RHCT Starts -->
+                <title>RHCT Certification</title>
+                <para>According to Red Hat <footnote>
+                        <para>
+                            <ulink url="http://www.redhat.com/training/">http://www.redhat.com/training/</ulink>
+                        </para>
+                    </footnote>
+                </para>
+                <blockquote>
+                    <para>RHCT tests a technician-specific subset of the skills tested in RHCE: *
+                        RHCTs will typically not be making the decisions about how to set up
+                        production network services and network security. Thus, RHCT does not test
+                        the networking services and network security skills required to earn RHCE.</para>
+                </blockquote>
+                <para>The RHCT consists of the following exams:</para>
+                <orderedlist>
+                    <listitem>
+                        <para>Troubleshooting and System Maintenance (1 hour)</para>
+                    </listitem>
+                    <listitem>
+                        <para>Installation and Configuration (2 hours)</para>
+                    </listitem>
+                </orderedlist>
+                <important>
+                    <para>To earn the RHCT certification one must successfully complete all the
+                        requirements in Troubleshooting and System Maintenance and must attain at
+                        least 70% for Installation and configuration.</para>
+                    <para>Pre_requisite skills:</para>
+                </important>
+                <itemizedlist>
+                    <listitem>
+                        <para>use standard command line tools (e.g., ls, cp, mv, rm, tail, cat,
+                            etc.) to create, remove, view, and investigate files and directories</para>
+                    </listitem>
+                    <listitem>
+                        <para>use grep, sed, and awk to process text streams and files</para>
+                    </listitem>
+                    <listitem>
+                        <para>use a terminal-based text editor, such as vi/vim, to modify text files</para>
+                    </listitem>
+                    <listitem>
+                        <para>use input/output redirection</para>
+                    </listitem>
+                    <listitem>
+                        <para>understand basic principles of TCP/IP networking, including IP
+                            addresses, netmasks, and gateways</para>
+                    </listitem>
+                    <listitem>
+                        <para>use su to switch user accounts</para>
+                    </listitem>
+                    <listitem>
+                        <para>use passwd to set passwords</para>
+                    </listitem>
+                    <listitem>
+                        <para>use tar, gzip, and bzip2v</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure an email client on Red Hat Enterprise Linux</para>
+                    </listitem>
+                    <listitem>
+                        <para>use mozilla and/or links to access HTTP/HTTPS URLs</para>
+                    </listitem>
+                    <listitem>
+                        <para>use lftp to access FTP URLs</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Skills needed for Troubleshooting and System Maintainenance exam:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>boot systems into different run levels for troubleshooting and system maintenance</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct misconfigured networking</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct hostname resolution problems</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the X Window System and a desktop environment</para>
+                    </listitem>
+                    <listitem>
+                        <para>add new partitions, filesystems, and swap to existing systems</para>
+                    </listitem>
+                    <listitem>
+                        <para>use standard command-line tools to analyze problems and configure system</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Skills needed for Installation and Configuration Exam:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>perform network OS installation</para>
+                    </listitem>
+                    <listitem>
+                        <para>implement a custom partitioning scheme</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure printing</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the scheduling of tasks using cron and at</para>
+                    </listitem>
+                    <listitem>
+                        <para>attach system to a network directory service, such as NIS or LDAP</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure autofs</para>
+                    </listitem>
+                    <listitem>
+                        <para>add and manage users, groups, and quotas</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure filesystem permissions for collaboration</para>
+                    </listitem>
+                    <listitem>
+                        <para>install and update RPMs</para>
+                    </listitem>
+                    <listitem>
+                        <para>properly update the kernel RPM</para>
+                    </listitem>
+                    <listitem>
+                        <para>modify the system bootloader</para>
+                    </listitem>
+                    <listitem>
+                        <para>implement software RAID at install-time and run-time</para>
+                    </listitem>
+                    <listitem>
+                        <para>use /proc/sys and sysctl to modify and set kernel run-time parameters</para>
+                    </listitem>
+                </itemizedlist>
+            </sect3>
+            <!-- RHCTS ends -->
+            <sect3 id="RHCE">
+                <!-- The RHCE certification: Starts -->
+                <title>The RHCE certification:</title>
+                <para>The RHCE consists of the following exams:</para>
+                <orderedlist>
+                    <listitem>
+                        <para>Troubleshooting (2.5 hours)</para>
+                    </listitem>
+                    <listitem>
+                        <para>Multiple Choice (1 hour)</para>
+                    </listitem>
+                    <listitem>
+                        <para>Installation and Configuration (2.5 hours)</para>
+                    </listitem>
+                </orderedlist>
+                <important>
+                    <para>To earn the RHCE one must successfully complete all the troubleshooting
+                        tests, score a minimum of 50% for the multiple choice exam, score at least
+                        70% for both the RHCE and RHCT components of the exams and attain a minimum
+                        of at least 80% for the all the exams as a whole.</para>
+                </important>
+                <para>Pre_requisite skills:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>use standard command line tools (e.g., ls, cp, mv, rm, tail, cat,
+                            etc.) to create, remove, view, and investigate files and directories</para>
+                    </listitem>
+                    <listitem>
+                        <para>use grep, sed, and awk to process text streams and files</para>
+                    </listitem>
+                    <listitem>
+                        <para>use a terminal-based text editor, such as vi/vim, to modify text files</para>
+                    </listitem>
+                    <listitem>
+                        <para>use input/output redirection</para>
+                    </listitem>
+                    <listitem>
+                        <para>understand basic principles of TCP/IP networking, including IP
+                            addresses, netmasks, and gateways</para>
+                    </listitem>
+                    <listitem>
+                        <para>use su to switch user accounts</para>
+                    </listitem>
+                    <listitem>
+                        <para>use passwd to set passwords</para>
+                    </listitem>
+                    <listitem>
+                        <para>use tar, gzip, and bzip2v</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure an email client on Red Hat Enterprise Linux</para>
+                    </listitem>
+                    <listitem>
+                        <para>use mozilla and/or links to access HTTP/HTTPS URLs</para>
+                    </listitem>
+                    <listitem>
+                        <para>use lftp to access FTP URLs</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Skills needed for Troubleshooting and System Maintainenance exam:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>boot systems into different run levels for troubleshooting and system maintenance</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct misconfigured networking</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct hostname resolution problems</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the X Window System and a desktop environment</para>
+                    </listitem>
+                    <listitem>
+                        <para>add new partitions, filesystems, and swap to existing systems</para>
+                    </listitem>
+                    <listitem>
+                        <para>use standard command-line tools to analyze problems and configure system</para>
+                    </listitem>
+                    <listitem>
+                        <para>use the rescue environment provided by first installation CD</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct bootloader failures arising from bootloader,
+                            module, and filesystem errors</para>
+                    </listitem>
+                    <listitem>
+                        <para>diagnose and correct problems with network services (see Installation
+                            and Configuration below for a list of these services)</para>
+                    </listitem>
+                    <listitem>
+                        <para>add, remove, and resize logical volumes</para>
+                    </listitem>
+                </itemizedlist>
+                <para>Skills needed for Installation and Configuration Exam:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>perform network OS installation</para>
+                    </listitem>
+                    <listitem>
+                        <para>implement a custom partitioning scheme</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure printing</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the scheduling of tasks using cron and at</para>
+                    </listitem>
+                    <listitem>
+                        <para>attach system to a network directory service, such as NIS or LDAP</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure autofs</para>
+                    </listitem>
+                    <listitem>
+                        <para>add and manage users, groups, and quotas</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure filesystem permissions for collaboration</para>
+                    </listitem>
+                    <listitem>
+                        <para>install and update RPMs</para>
+                    </listitem>
+                    <listitem>
+                        <para>properly update the kernel RPM</para>
+                    </listitem>
+                    <listitem>
+                        <para>modify the system bootloader</para>
+                    </listitem>
+                    <listitem>
+                        <para>implement software RAID at install-time and run-time</para>
+                    </listitem>
+                    <listitem>
+                        <para>use /proc/sys and sysctl to modify and set kernel run-time parameters</para>
+                    </listitem>
+                </itemizedlist>
+                <para>People wanting to attain the RHCE certification must be also capable of
+                    configuring the following network services:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>HTTP/HTTPS</para>
+                    </listitem>
+                    <listitem>
+                        <para>SMB</para>
+                    </listitem>
+                    <listitem>
+                        <para>NFS</para>
+                    </listitem>
+                    <listitem>
+                        <para>FTP</para>
+                    </listitem>
+                    <listitem>
+                        <para>Web proxy</para>
+                    </listitem>
+                    <listitem>
+                        <para>SMTP</para>
+                    </listitem>
+                    <listitem>
+                        <para>IMAP, IMAPS, and POP3</para>
+                    </listitem>
+                    <listitem>
+                        <para>SSH</para>
+                    </listitem>
+                    <listitem>
+                        <para>DNS</para>
+                    </listitem>
+                </itemizedlist>
+                <para>For each of these services, RHCEs must be able to:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>install the packages needed to provide the service</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the service to start when the system is booted</para>
+                    </listitem>
+                    <listitem>
+                        <para>configure the service for basic operation</para>
+                    </listitem>
+                    <listitem>
+                        <para>Configure host-based and user-based security for the service</para>
+                    </listitem>
+                </itemizedlist>
+                <para>RHCEs must also be able to</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>configure hands-free installation using Kickstart</para>
+                    </listitem>
+                    <listitem>
+                        <para>implement logical volumes at install-time</para>
+                    </listitem>
+                    <listitem>
+                        <para>use PAM to implement user-level restrictions</para>
+                    </listitem>
+                </itemizedlist>
+            </sect3>
+            <!-- The RHCE certification: ENDS -->
+        </sect2>
+        <!-- Red Hat Certification Ends -->
+        <!-- Certification ends -->
+    </sect1>
+</chapter>

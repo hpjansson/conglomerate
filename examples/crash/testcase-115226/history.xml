@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>-->
+<chapter id="history">
+    <title>History and Politics A Business Oriented Background</title>
+    <sect1 id="HistoryandPolitics">
+        <sect1info>
+            <title>Introduction</title>
+        </sect1info>
+        <title>History and Politics A Business Oriented Background</title>
+        <para>The goal of this section is to present a version of the history and politics of
+            software that is released under a license allowing the user the liberty to copy, modify
+            and redistribute the code.</para>
+        <para>Many companies using propriety software favour the FUD tactics <footnote>
+                <para>Fear, Uncertainty, Doubt</para>
+            </footnote> to stop people from using Open Source software, therefore it is important to
+            know the history of Open Source software and become familiar with the role players in
+            the Open Source community, and in this way be able to make informed decisions regarding
+            which Operating System and software to use.</para>
+        <!-- Open Source Licenses Starts -->
+        <sect2 id="OpenSourceFreeSotwareLicenses">
+            <title>Open Source and Free Software Licenses</title>
+            <para>When you start to get familiar with the Open Source environment, you will notice
+                that two terms are used: Open Source and Free Software.</para>
+            <para>Free Software is a term used to describe software that is freely available, which
+                allows users and developers to copy, modify and redistribute the source code.</para>
+            <para>Open Source software allows the user the exact same privileges.</para>
+            <para>
+                <quote>So what is the difference? And which is the correct term to use?</quote>
+                These are questions only you can answer for yourself, once you have read the
+                following chapter:</para>
+            <sect3 id="DefofOpenSourceFreeSoftwareOpenContent">
+                <!-- Start of Definition of Open Source Free Software and Open Content -->
+                <title>The definition of Open Source, Free Software and Open Content</title>
+                <para>Much of the internal debates that range in the Open Source/Free Software
+                    communities, range about the licenses used to distribute software and Operating
+                    Systems. There are two main factions when it comes to Linux;</para>
+                <indexterm class="startofrange" startref="OpenSourceFreeSotwareLicenses">
+                    <primary>Free Software Foundation</primary>
+                    <secondary>FSF</secondary>
+                </indexterm>
+                <itemizedlist>
+                    <listitem>
+                        <para>the Free Software Foundation (FSF)<footnote>
+                                <para>
+                                    <ulink url="www.gnu.org">www.gnu.org</ulink> The Homepage of the
+                                    GNU and the Free Software Federation</para>
+                            </footnote>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>and the Open Source Initiative (OSI)<footnote>
+                                <para>
+                                    <ulink
+                                    url="http://www.opensource.org/">www.opensource.org</ulink>The
+                                    Home page of the Open Source Initiative</para>
+                            </footnote>.</para>
+                    </listitem>
+                </itemizedlist>
+                <para>As you will see from the section below the main difference between these two
+                    organisations is <emphasis>their motivation</emphasis> for developing the
+                    software that is released under a license that allows freedom to modify, copy
+                    and redistribute the code.</para>
+                <!-- Start of GNU and FSF -->
+                <sect4>
+                    <title>The GNU Project and the Free Software Foundation</title>
+                    <para>GNU (GNU's Not Unix) was formed by Richard M. Stallman (RMS) in 1984, when
+                        he became disillusioned by changes in his working environment.</para>
+                    <para>Stallman worked in MIT's Artificial Intelligence labs in an atmosphere
+                        where developers freely shared source code with each other, with the
+                        understanding that this is how software was improved. This changed in the
+                        early 1980's when the MIT lab started using new hardware, which used
+                        proprietary hardware. To use the hardware the developers had to sign
+                        non-disclosure agreements.</para>
+                    <para>RMS: The rule made by the owners of proprietary software was, <quote>If
+                            you share with your neighbour, you are a pirate. If you want any
+                            changes, beg us to make them.</quote>
+                        <footnote>
+                            <para>Richard Stallman <ulink url="http://www.gnu.org/gnu/thegnuproject.html">www.gnu.org</ulink>
+                            </para>
+                        </footnote>
+                    </para>
+                    <para>Stallman left MIT and started the GNU project. He believed that if he
+                        wanted to continue developing software he needed to be able to do so in an
+                        environment that would allow him to share his work with others, even if that
+                        meant creating a new Operating System and new utilities for that Operating
+                        System, as well as creating a license to release these products under.</para>
+                    <blockquote>
+                        <para>It is important to understand the meaning of the word 'free' in the
+                            context of Free Software (or Open Source Software), the Free Software
+                            Foundation and Open Content. 'Free' does not refer to the cost of the
+                            product but rather that the user is allowed the Freedom to access the
+                            Source Code for the product (be that a software application, an
+                            Operating System or documentation for an application.) A popular way of
+                            expressing this idea is: &quot;Free Software&quot; is a matter
+                            of liberty, not price. To understand the concept, you should think of
+                            &quot;free&quot; as in &quot;free speech&quot;, not as
+                            in &quot;free beer.&quot; <footnote>
+                                <para>The GNU's explanation on the meaning of &quot;Free
+                                        Software&quot;<ulink url="http://www.gnu.org/philosophy/free-sw.html">www.gnu.org</ulink>
+                                </para>
+                            </footnote>
+                        </para>
+                    </blockquote>
+                    <para>The Free Software Foundations' definition of Free Software: <footnote>
+                            <para>From the GNU's philosophy page, visit the following link for the
+                                exact wording:<ulink url="http://www.gnu.org/philosophy/free-sw.html">www.gnu.org</ulink>
+                            </para>
+                        </footnote>
+                    </para>
+                    <orderedlist continuation="restarts" numeration="arabic">
+                        <listitem>
+                            <para>Freedom to use an application, for any purpose.</para>
+                        </listitem>
+                        <listitem>
+                            <para>The Freedom to modify the application, to suit your needs.</para>
+                        </listitem>
+                        <listitem>
+                            <para>The Freedom to redistribute copies of the application, so as to
+                                &quot;help your neighbor&quot;.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Freedom to modify the application and then distribute this
+                                modified version to whoever wants to use it.</para>
+                        </listitem>
+                    </orderedlist>
+                    <para>The Free Software Foundation has commented on several licenses that claim
+                        to be Free Software licenses. To view this list visit <ulink
+                        url="http://www.gnu.org/licenses/license-list.html">this</ulink> page</para>
+                </sect4>
+                <!-- End of GNU and FSF -->
+                <!-- Start of Open Source Initiative -->
+                <sect4>
+                    <title>The Open Source Initiative</title>
+                    <indexterm>
+                        <primary>The Open Source Initiative</primary>
+                        <secondary>OSI</secondary>
+                    </indexterm>
+                    <para>The Open Source Initiative (OSI) <footnote>
+                            <para>
+                                <ulink url="http://www.opensource.org">www.opensource.org</ulink>
+                            </para>
+                        </footnote> promotes the development of Open Source software.</para>
+                    <para>The OSI was formed in 1998 after Netscape released the source code for
+                        Navigator5.0. Netscape decided to do this after they had read &quot;The
+                        Cathedral and the Bazaar&quot;. (see our summary of the
+                        &quot;Cathedral and the Bazaar&quot; <xref linkend="CatB"/>later in
+                        this section.)</para>
+                    <para>Eric Raymond, John &quot;maddog&quot; Hall, Larry Augustin and
+                        Bruce Perens are some of the people involved with the OSI from the start.
+                        This was a group of people who felt that the term &quot;Free
+                        Software&quot; as used by the Free Software Foundation is misleading and
+                        that it was not correctly understood despite being in existence since 1984.
+                        They also planned to work closer with commercial companies than the Free
+                        Software Foundation does.</para>
+                    <para>The Open Source Initiative's definition of Open Source software:</para>
+                    <para>
+                        <quote>When the application is released under Open Source Licenses it allows
+                            the user many more freedoms than just access to the Source Code. These are:</quote>
+                    </para>
+                    <orderedlist numeration="arabic">
+                        <listitem>
+                            <para>Free redistribution</para>
+                            <para>The application can be redistributed, either on its own or as a
+                                part of a bundle of other applications. No royalty or other fees are
+                                required to do this.</para>
+                            <para>Explanation as I see it: The idea of this is to not lose the
+                                long-term benefits (discussed later) of Open Content Software just
+                                to earn some money in the short term.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Source Code</para>
+                            <para>The Source Code for the project must be easily available, if it is
+                                not downloaded with the compiled code (human readable code compiled
+                                into code the machine can read) clear instructions must be given as
+                                to where and how the source code can be obtained.</para>
+                            <para>One of the main ideas of Open Source and Free Software is to make
+                                the evolution of software as easy as possible.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Derived Works</para>
+                            <para>The license must allow applications to be modified and distributed
+                                again with the same license as the original application.</para>
+                            <para>Explanation as I see it: By allowing people to modify and
+                                redistribute work, the evolution of applications are improved.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Integrity of the Author's Source Code</para>
+                            <para>If the author wishes to keep their Source Code as is, they may
+                                stipulate that modified Source Code cannot be distributed, only if
+                                they then allow files (patches) to be distributed with the
+                                application that will modify it at runtime.</para>
+                            <para>The author must allow the distribution of applications built
+                                (Compiled) from modified Source Code.</para>
+                            <para>This allows the author to specify that the original Source Code
+                                may not be modified (so that the author can be better recognised for
+                                the work done on the original Source Code), but forces the author to
+                                still allow modifications to the application by way of patch files
+                                that will modify the application, but not the original Source Code.</para>
+                        </listitem>
+                        <listitem>
+                            <para>No Discrimination against Persons or Groups</para>
+                            <para>The author may not discriminate against any person or group; the
+                                product must be made available to all people who want to use it.</para>
+                            <para>This is to ensure as wide a range of users as possible, to improve
+                                the evolution of the software.</para>
+                        </listitem>
+                        <listitem>
+                            <para>No Discrimination against fields of Endeavour</para>
+                            <para>
+                                <quote>The license must not restrict anyone from making use of the
+                                    program in a specific field of endeavor. For example, it may not
+                                    restrict the program from being used in a business, or from
+                                    being used for genetic research.</quote>
+                            </para>
+                            <para>This is to ensure that the software can be used for commercial purposes.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Distribution of License</para>
+                            <para>The same license applies to all the people who the application is
+                                redistributed to.</para>
+                            <para>This is to make sure that some people who the application is
+                                distributed do not have to accept an additional license, (e.g. A Non
+                                Disclosure Agreement), to use the software.</para>
+                        </listitem>
+                        <listitem>
+                            <para>License must not be specific to a Product</para>
+                            <para>If an application is taken from a bundle of applications that was
+                                released as Open Content, then that application has the same license
+                                as the original bundle of applications.</para>
+                            <para>This is to ensure that applications can be freely distributed in
+                                whatever form that it may be in. (i.e. part of a bundle or on its own)</para>
+                        </listitem>
+                        <listitem>
+                            <para>License must not restrict other Software</para>
+                            <para>The License the application is released under cannot specify that
+                                it can only be distributed or used in conjunction with Open Source software.</para>
+                            <para>This allows distributors of software to decide what software to
+                                use and redistribute, further enhancing the evolution of software.</para>
+                        </listitem>
+                        <listitem>
+                            <para>License must be Technology Neutral</para>
+                            <para>For example: the license cannot specify that to use the software
+                                you must download it from a web page, or from a CD-ROM. The license
+                                must allow modification of the application so that it can be used in
+                                all environments.</para>
+                            <para>This is so that, if the original application only ran in a GUI
+                                environment it can be altered to so that it can run in a command
+                                line environment. Also so that the License agreement cannot be made
+                                in one specific way, i.e. &quot;Click Wrap&quot; to allow
+                                the user to download the file from the web.</para>
+                        </listitem>
+                    </orderedlist>
+                    <para>Bruce Perens, a leading advocate and developer of Free Software developed
+                        the Open Source Definition. The latest version of the Open Source Definition
+                        can be found on <ulink
+                        url="http://www.opensource.org/docs/definition_plain.php">this</ulink> page</para>
+                </sect4>
+                <!-- End of Open Source Initiative -->
+                <!-- Start of Summary of differances between OSI and FSF -->
+                <sect4>
+                    <title>Summary of difference between Open Source and Free Software:</title>
+                    <para>The Free Software Foundation believes that their cause is a social one, to
+                        allow people to freely and openly use software for the betterment of mankind.</para>
+                    <para>The Open Source Initiative believes that allowing people access to source
+                        code and allowing them to modify these to improve the software is a
+                        practical need, not a social right.</para>
+                    <para>Though these two organisations differ on the reasons, they are not against
+                        each other; both believe that proprietary software inhibits the development
+                        of useful software.</para>
+                    <para>
+                        <quote>Throughout the rest of this document, I will use the term
+                            &quot;Open Source Software&quot; when referring to either Open
+                            Source or Free Software Foundation issues or products. It was difficult
+                            to choose between the two terms. The common misconception that
+                            &quot;free&quot; means free-of-charge and the fact that many
+                            people relate this to a anti-business mindset made me choose to use the
+                            term, &quot;Open Source Software&quot;. I do, however,
+                            understand what the GNU means with &quot;free software&quot; and
+                            admire them for what they have done for this movement. </quote>
+                        <author>
+                            <firstname>Riaan</firstname>
+                            <surname>Bredenkamp</surname>
+                        </author>
+                    </para>
+                    <!-- End of Summary of differances between OSI and FSF -->
+                </sect4>
+                <sect4>
+                    <!-- Start of Open Content discussion -->
+                    <title>Open Content:</title>
+                    <para>Open Content was an organization that promoted the sharing of materials,
+                        specifically those used to educate people.</para>
+                    <para>To do this it developed licenses that people could use to license their
+                        works be this software or manuals.</para>
+                    <para>The organisation was founded by David Wiley in 1998.</para>
+                    <para>During 2003 Wiley closed the Open Content organization because he felt
+                        that the Creative Commons organisation was doing a better job at creating
+                        &quot;licenses for content&quot; that would be recognised in court legally.</para>
+                    <para>For more information about Open Content, visit <ulink
+                        url="http://www.opencontent.org/">this</ulink> page.</para>
+                    <para>More information about the Creative Commons Organisation can be found on
+                            <ulink url="http://creativecommons.org/">this</ulink> page</para>
+                    <!-- End of Open Content discussion -->
+                    <indexterm class="endofrange" startref="OpenSourceFreeSotwareLicenses"/>
+                </sect4>
+                <!-- End of Definition of Open Source Free Software and Open Content -->
+            </sect3>
+            <!-- Open Source Licenses Ends -->
+            <!-- Start of History of Open Source  -->
+        </sect2>
+        <sect2 id="HistoryofOpenSource">
+            <title>The History of Open Source Software</title>
+            <para>Linux typically includes many utilities that were developed by the GNU organisation.</para>
+            <para>The following section will briefly explain the history of the how the development
+                of Free Software has led to the development of Linux, as we know it today.</para>
+            <note>
+                <para>Using Linux to describe an Operating System is incorrect, Linux is the kernel
+                    not the complete Operating System. The kernel is responsible for the allocation
+                    of resources in an Operating System, it allows processes to utilise the hardware
+                    of a computer.</para>
+                <para>The correct way of describing Linux as an Operating System is GNU/Linux. Since
+                    the Operating System consists of Linux as the kernel, and many other utilities
+                    (most of which were created with the assistance of the GNU project). In the rest
+                    of this document we will use &quot;Linux&quot; to describe the Operating
+                    System, since that is how most people refer to it today.</para>
+            </note>
+            <sect3>
+                <title>The GNU Project</title>
+                <indexterm>
+                    <primary>Richard M Stallman</primary>
+                    <secondary>RMS</secondary>
+                </indexterm>
+                <para>Richard M Stallman started the Free Software Federation in 1984, yet that is
+                    not where our story starts.</para>
+                <para>When Stallman started work in the MIT's Artificial Intelligence Laboratory in
+                    1971, he found a community of developers who shared software that they had
+                    written with each other, other learning institutes and companies. As Stallman
+                    indicates on the FSF website, the sharing of software was not new or unique to
+                    the MIT AI Laboratory community, it is as old as computers. Just as cooking
+                    recipes are shared, so were software applications.</para>
+                <para>In the early 80's the MIT hacker community started to disintegrate, a new
+                    computer system (a PDP-10) with a proprietary Operating System that hastened the
+                    collapse of the AI Lab community. To work with the software on the new system,
+                    Stallman had to sign a Non-disclosure agreement with the company who created the
+                    PDP-10. Bear in mind that this was to use the executable files for the software,
+                    these are not human readable, one needs the Source Code of the application to
+                    truly understand what it does, how it does this, without this it is nearly
+                    impossible to modify an application to better suit your needs.</para>
+                <para>Stallman was not willing to accept an agreement that would mean that he would
+                    not be able to help his fellow developers, he saw it as actively hindering other
+                    people from being able to do their work. Stallman tells of an incident that
+                    occurred to him while he was working in the AI Lab in MIT, where the software
+                    that they used to control their printer in the lab, lacked a few key features.
+                    Stallman was refused access to the source code for the printer's program because
+                    the company who created the printer and its software did not want to allow
+                    anybody to see how it worked. They did this by having their developers sign a
+                    non-disclosure agreement.</para>
+                <para>Stallman had to make a decision to either become one of the developers who
+                    were forced not to help each other or to stop developing or to devise a way
+                    where he would be able to recreate a community where people helped each other to
+                    develop better applications. He realised that he would first need a free
+                    Operating System, as without an Operating System computers cannot function. This
+                    was a very brave step, designing a new Operating System is no small effort.</para>
+            </sect3>
+            <sect3>
+                <title>GNU is born</title>
+                <para>Stallman had made the decision to develop a free Operating System on 27
+                    September 1983. He decided to design it so that it would be compatible with
+                    Unix, then the most stable and widely used Operating System, so that Unix users
+                    could easily use it, and so that applications could be easily transferred to the
+                    new Operating System (a process referred to as 'porting').</para>
+                <para>Following a Hacker tradition which uses recursive acronyms, the term GNU
+                    (pronounced &quot;guh-noo&quot;) was born. This stands for
+                    <emphasis>G</emphasis>NU is <emphasis>N</emphasis>ot <emphasis>U</emphasis>nix.</para>
+                <para>Stallman started by developing a compiler, compilers are used to change the
+                    human-readable Source Code into Machine code. The Operating System needs this
+                    machine code to be able to run applications. This proved difficult to do and in
+                    reality it took him a few years to complete the compiler.</para>
+                <para>Stallman decided to work on a text editor, which he called GNU Emacs. Many
+                    people started to take an interest in Emacs and wanted to use it. He released
+                    GNU Emacs on a FTP server, but not everybody had access to the Internet, this
+                    was 1985 remember. To get his Emacs to the people who wanted to use it Stallman
+                    started a software distribution company that would mail people copies of the
+                    software for a small fee. This was a precursor to the many businesses that exist
+                    today that make a profit by redistributing Linux.</para>
+                <para>People started to join Richard Stallman in creating the GNU system in 1985, to
+                    fund their work they founded the Free Software Foundation, a tax-exempt charity
+                    that would create funds by distributing the software that the GNU had created.</para>
+                <para>By the time Linus Torvalds started working on his Operating System Kernel in
+                    1991, the Free Software Federation had already written or helped to write a wide
+                    range of software distributed as Free Software.</para>
+            </sect3>
+            <sect3>
+                <title>The birth of the Linux kernel</title>
+                <indexterm>
+                    <primary>Linus Torvalds</primary>
+                    <secondary>Linus</secondary>
+                </indexterm>
+                <para>Linus Torvalds was a student of the University of Helsinki when he announced
+                    on the 25th of August 1991 that he was busy developing a free Operating System.</para>
+                <para>At the time the only Operating System that made its source code available was
+                    MINIX. An Operating System developed by Professor Andrew S. Tanenbaum to teach
+                    his students the inner workings of an OS. MINIX was very limited and could only
+                    work on hardware based on the Intel 8086 framework. MINIX was also not Open
+                    Source, it had to be licensed, though the Source Code was available to licensed
+                    users. When Linus Torvalds started working on the kernel that would become Linux
+                    it was the start of the Internet boom, and Linus quickly got help from
+                    developers around the world, debugging the code and offering solutions to issues
+                    they found.</para>
+                <para>The Linux kernel was released under the GNU GPL License. Which allowed anybody
+                    to download the source files, modify them and use them in their own projects.</para>
+                <para>The Internet boom allowed many people to continue work on the project; new
+                    versions of the kernel were released often (sometimes even weekly). This had a
+                    number of benefits, perhaps the most notable is the fact that the kernel
+                    improved significantly in a very short period of time, another is that with this
+                    many releases it appealed to a wide range of users; those that wanted to be on
+                    the leading edge and worked on the development used the latest version of the
+                    kernel, whilst those want more stability used older versions. The Linux Kernel
+                    grew in popularity quickly.</para>
+            </sect3>
+            <sect3>
+                <title>The GNU's kernel</title>
+                <para>The GNU has been working on its own kernel for some time now. It is called the
+                    GNU HURD.</para>
+                <para>The official definition for HURD is:</para>
+                <blockquote>
+                    <para>'Hurd' stands for 'Hird of Unix-Replacing Daemons'. And, then, 'Hird'
+                        stands for 'Hurd of Interfaces Representing Depth'. We have here, to my
+                        knowledge, the first software to be named by a pair of mutually recursive acronyms.<footnote>
+                            <para>From:<ulink url="http://www.gnu.org/software/hurd/hurd.html">www.gnu.org</ulink>
+                            </para>
+                        </footnote>
+                    </para>
+                </blockquote>
+                <para>Its is believed that it will be released very soon (since it is Free Software
+                    you can already download and use it but it is not yet ready to be used in a
+                    production environment)</para>
+            </sect3>
+            <!--End of History of Open Source Software -->
+        </sect2>
+        <!-- Benefits of Open Source Software Starts -->
+        <sect2>
+            <title>Benefits of the Open Source Development methods</title>
+            <para>When one examines the developmental history of the Linux kernel the point that
+                stands out is the extraordinary improvements made to the Linux kernel in such a
+                short time.</para>
+            <para>This success is attributed to the knowledge of the developers who contribute to
+                the project, and the development model used by Linus Torvalds.</para>
+            <para>Proprietary software is usually developed by small teams working closely together
+                and products are only released once the developers believe that they have found all
+                the problems in the code, this results in long development times and, as we all
+                know, code that still contains many problems.</para>
+            <para>The model used by the Open Source community is more open than that, it uses many
+                developers, often people who have never met each other physically, and releases code
+                often. This is done because Open Source developers depend on their users to help
+                them improve the code.</para>
+        </sect2>
+        <!-- Benefits of Open Source Software ENDS -->
+        <sect2 id="CatB">
+            <title>The Cathedral and the Bazaar</title>
+            <indexterm>
+                <primary>Eric S Raymond</primary>
+                <secondary>ESR</secondary>
+            </indexterm>
+            <para>The Cathedral and the Bazaar(CatB) is paper written by Eric S Raymond (ESR), which
+                examines the differences between the development models used by the Open Source
+                community (the Bazaar) and the one used by Proprietary software companies (the
+                Cathedral). Raymond first presented The Cathedral and the Bazaar (CatB) on 21 May
+                1997 at the official &quot;Linux Kongress&quot; (sic). The latest revision
+                was released on the 11th of September 2000.</para>
+            <blockquote>
+                <attribution>ESR; Cathedral and the Bazaar</attribution>
+                <para>In The Cathedral and the Bazaar, Eric Raymond examines the Linux kernel
+                    development model and comes to the conclusion that not only does it work, but
+                    that it is perhaps the only economical way of developing large systems that
+                    satisfy most of the people. He also considers and responds to the arguments
+                    raised by people who prefer the traditional Cathedral style of development.</para>
+            </blockquote>
+            <para>This is Raymond's abstract of the work:</para>
+            <blockquote>
+                <attribution>ESR; Cathedral and the Bazaar</attribution>
+                <para>I anatomize a successful open-source project, fetchmail, that was run as a
+                    deliberate test of the surprising theories about software engineering suggested
+                    by the history of Linux. I discuss these theories in terms of two fundamentally
+                    different development styles, the &quot;cathedral&quot; model of most of
+                    the commercial world versus the &quot;bazaar&quot; model of the Linux
+                    world. I show that these models derive from opposing assumptions about the
+                    nature of the software-debugging task. I then make a sustained argument from the
+                    Linux experience for the proposition that &quot;Given enough eyeballs, all
+                    bugs are shallow&quot;, suggest productive analogies with other
+                    self-correcting systems of selfish agents, and conclude with some exploration of
+                    the implications of this insight for the future of software.</para>
+            </blockquote>
+            <!-- Who is ESR ? Starts -->
+            <sect3 id="WhoisESR">
+                <title>Who is Eric Raymond?</title>
+                <para>Eric S. Raymond is the president of the Open Source Initiative (OSI)</para>
+                <para>Raymond was involved in Unix and Open Source development for the GNU before
+                    Linus Torvalds released the Linux kernel, which made him used to the Cathedral
+                    style of development, small teams working closely together on a project and only
+                    releasing the application once it was close to perfection.</para>
+                <para>Torvald's methodology of development (releasing early and often, delegating as
+                    much of the work as possible and being open to almost all suggestions) seemed
+                    strange to Raymond.</para>
+                <blockquote>
+                    <attribution>ESR; Cathedral and the Bazaar</attribution>
+                    <para>No quiet, reverent cathedral-building here rather, the Linux community
+                        seemed to resemble a great babbling bazaar of differing agendas and
+                        approaches (aptly symbolized by the Linux archive sites, who'd take
+                        submissions from anyone) out of which a coherent and stable system could
+                        seemingly emerge only by a succession of miracles.</para>
+                </blockquote>
+                <para>Raymond wanted to learn why the model used in the development of Linux worked
+                    so well, and he worked hard to learn more about it. In 1996 he had the chance to
+                    apply Linus's methods in a project he had just started. He needed an email
+                    client that would allow him to automatically download email from the community
+                    Internet Service Provider he had helped to start. Raymond had tried a few of the
+                    existing client applications, but none did exactly what he wanted it to do, so
+                    he did what all good hackers do, he decided to develop a new POP client. This
+                    was the perfect opportunity for him to also test the bazaar style of
+                    development. The application that was developed is called fetchmail and is still
+                    used extensively today.</para>
+                <!-- Who is ESR? Ends -->
+            </sect3>
+            <!--Summary of CatB starts  -->
+            <sect3 id="SummCatB">
+                <title>A Summary of &quot;the Cathedral and the Bazaar&quot;</title>
+                <para>In CatB Raymond lists 19 reasons why he believes the Bazaar development model
+                    works well.</para>
+                <para>
+                    <quote>I will discuss these, as I understand them.</quote>
+                    <author>
+                        <firstname>Riaan</firstname>
+                        <surname>Bredenkamp</surname>
+                    </author>
+                </para>
+                <orderedlist>
+                    <listitem>
+                        <para>Every good work of software starts by scratching a developer's
+                            personal itch.</para>
+                        <para>Raymond needed a POP email client that would allow him to
+                            automatically fetch mail from his ISP (Internet Service Provider), the
+                            clients that were available did not have the necessary capabilities
+                            Raymond needed. In the Open Source world this is very true. If there
+                            were a need for something a developer would have all the resources
+                            needed to develop a better application. A developer is also sure to have
+                            the support of many other people who have felt the same need for a
+                            better application. Applications are developed for the love of the art,
+                            not for any other reasons.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Good programmers know what to write. Great ones know what to rewrite
+                            (and reuse).</para>
+                        <para>Because you are dealing with Open Source software the source code is
+                            always available. It would be senseless to re-design the wheel every
+                            time you need a mode of transportation, so why do it when you are
+                            developing an application? Raymond looked at 9 POP mail clients and
+                            chose 'fetchpop' by Seung-Hong Oh, who included some of the changes that
+                            Raymond had written, in version 1.9 of fetchpop.</para>
+                    </listitem>
+                    <listitem>
+                        <para>&quot;Plan to throw one away; you will, anyhow.&quot; (Fred
+                            Brooks, The Mythical Man-Month, Chapter 11)</para>
+                        <para>Raymond wrote the code that allowed fetchpop to do what he wanted it
+                            to do, but was not satisfied with the total product. While searching for
+                            mailclients he could modify he had come across Carl Harris's popclient.
+                            Though fetchpop did what he wanted it to do Raymond had two reasons for
+                            switching to popclient, popclient supported multiple protocols including
+                            IMAP (Internet Mail Access Protocol), which is more powerful than POP3.
+                            He also had another more theoretical reason to change, and that was to
+                            throw the first code that he had written away. This was one of the ideas
+                            that were often used by the people developing the Linux kernel.</para>
+                    </listitem>
+                    <listitem>
+                        <para>If you have the right attitude, interesting problems will find you.</para>
+                        <para>Carl Harris, the author of popclient, had lost interest in the project
+                            and he and Raymond decided that Raymond should take responsibility of popclient.</para>
+                        <para>Raymond suddenly was no longer writing a few modifications for an
+                            existing mail client, now he was maintaining a mail client and he was
+                            full of ideas that would lead him to make many changes to popclient.</para>
+                    </listitem>
+                    <listitem>
+                        <para>When you lose interest in a program, your last duty to it is to hand
+                            it off to a competent successor.</para>
+                        <para>It is important for developers to realise when it has become time for
+                            someone else to take responsibility for his or her project. Once Raymond
+                            had proved to Harris that he was the correct person for the job he
+                            graciously handed the reins over to Raymond. This attitude assures the
+                            continued development and growth of a project.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Treating your users as co-developers is your least-hassle route to
+                            rapid code improvement and effective debugging</para>
+                        <para>When Raymond took over the popclient application, he did not only
+                            inherit the management of the code but also the users of popclient. In
+                            the Linux development model, users have the ability to be co-developers
+                            (if used correctly). This is one of the main reasons why the Linux
+                            kernel has been as successful as it has.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Release early. Release often. And listen to your customers.</para>
+                        <para>Previously most developers felt that this was a bad policy for bigger
+                            projects. They felt that releasing buggy software would cause the users
+                            of the software to give up on the product.</para>
+                        <para>Yet this was not the case with the Linux kernel. Linus Torvalds often
+                            released a new version of the Linux kernel more than once a day! This
+                            was what kept his users satisfied and stimulated. 'Stimulated by the
+                            prospect of having an ego-satisfying piece of the action, rewarded by
+                            the sight of constant (even daily) improvement in their work. ' ESR; CatB</para>
+                    </listitem>
+                    <listitem>
+                        <para>Given a large enough beta-tester and co-developer base, almost every
+                            problem will be characterized quickly and the fix obvious to someone.</para>
+                        <para>Raymond had dubbed this the 'Linus Law'. Raymond believes that this is
+                            the core difference between the cathedral and bazaar development models.</para>
+                        <para>In the cathedral model it often takes months for the developers to be
+                            satisfied that they had eliminated most of the problems in the program.</para>
+                        <para>In the Bazaar model, you have so many people looking and using the
+                            code that most bugs are found quickly. Even if this happens at the
+                            expense of having a major problem in a few of the released versions, the
+                            benefits of rapid development are still enough to justify this.</para>
+                        <para>For the users who did not want to use the latest version of the Linux
+                            kernel, Torvalds also made available the older versions in which most
+                            known problems were dealt with. This meant that a wide range of people
+                            would use the kernel, not just the few people that wanted to be on the
+                            bleeding edge of the technology.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Smart data structures and dumb code works a lot better than the other
+                            way around.</para>
+                        <para>Raymond started maintaining popclient by first rewriting it, he did
+                            this for two reasons;</para>
+                        <orderedlist>
+                            <listitem>
+                                <para>To understand how the application works;</para>
+                            </listitem>
+                            <listitem>
+                                <para>And also to change the way it was coded so that the data
+                                    structures were more robust.</para>
+                            </listitem>
+                        </orderedlist>
+                        <para>In other words he redesigned the way that the different protocols were
+                            expressed in terms that the kernel and thus the hardware could understand.</para>
+                    </listitem>
+                    <listitem>
+                        <para>If you treat your beta-testers as if they're your most valuable
+                            resource, they will respond by becoming your most valuable resource.</para>
+                        <para>Raymond had decided to develop his new mail client using the Linux
+                            kernel development model. He did this by doing the following:</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>I released early and often (almost never less often than every ten
+                                days; during periods of intense development, once a day). I grew my
+                                beta list by adding to it everyone who contacted me about fetchmail.
+                                I sent chatty announcements to the beta list whenever I released,
+                                encouraging people to participate. And I listened to my
+                                beta-testers, polling them about design decisions and stroking them
+                                whenever they sent in patches and feedback.</para>
+                        </blockquote>
+                        <para>Raymond was amazed at the response he got from the users of the application.</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>I got bug reports of a quality most developers would kill for,
+                                often with good fixes attached. I got thoughtful criticism, I got
+                                fan mail, I got intelligent feature suggestions.</para>
+                        </blockquote>
+                    </listitem>
+                    <listitem>
+                        <para>The next best thing to having good ideas is recognizing good ideas
+                            from your users. Sometimes the latter is better.</para>
+                        <para>One of the users of popclient sent Raymond some code that would allow
+                            it not just to be a local mail delivery agent (just fetch mail and make
+                            it available on a workstation), but also enable it to be a Mail
+                            Transport Agent (MTA). By using SMTP (Simple Mail Transfer Protocol) it
+                            would do the job better and giver it more capabilities. Thus one user's
+                            ideas allowed the project to grow fundamentally.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Often, the most striking and innovative solutions come from realizing
+                            that your concept of the problem was wrong. By using SMP and changing
+                            popclient to act as a Mail Transfer Agent rather than a Mail Delivery
+                            Agent Raymond could remove some of the most redundant features of
+                            popclient and make it easier to use and more stable.</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>...the benefits proved huge. The [clumsiest] parts of the driver
+                                code vanished.</para>
+                        </blockquote>
+                    </listitem>
+                    <listitem>
+                        <para>&quot;Perfection (in design) is achieved not when there is nothing
+                            more to add, but rather when there is nothing more to take
+                            away.&quot; (Antoine de Saint-Exup?)</para>
+                        <para>Raymond states that when your code evolves to be better and simpler,
+                            then you know it is better.</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>There is a more general lesson in this story about how SMTP
+                                delivery came to fetchmail. It is not only debugging that is
+                                parallelizable (sic); development and (to a perhaps surprising
+                                extent) exploration of design space is, too. When your development
+                                mode is rapidly iterative, development and enhancement may become
+                                special cases of debugging-fixing 'bugs of omission' in the original
+                                capabilities or concept of the software.</para>
+                        </blockquote>
+                        <para>Popclient has changed to such an extent that Raymond believed it was
+                            time to change its name, fetchmail was born.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Any tool should be useful in the expected way, but a truly great tool
+                            lends itself to uses you never expected.</para>
+                        <para>Raymond started to see that fetchmail could become what is termed a
+                            'category killer', software that causes all others in that field to be
+                            forgotten. To achieve this, fetchmail would have to be able to do things
+                            he never set planned for it to do.</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>I'd have to write not just for my own needs, but also include and
+                                support features necessary to others but outside my orbit.</para>
+                        </blockquote>
+                        <para>Whilst at the same time making sure the program stayed simple and robust.</para>
+                    </listitem>
+                    <listitem>
+                        <para>When writing gateway software of any kind, take pains to disturb the
+                            data stream as little as possible - and never throw away information
+                            unless the recipient forces you to!</para>
+                        <para>By following this rule Raymond was able to satisfy another demand from
+                            his users (8-bit MIME support). In the ASCII character set the eighth
+                            bit is not used, and another developer might have been tempted to use
+                            this bit to transport data internally in the program, Raymond was not,
+                            and thus was able to support 8-bit MIME without having to rewrite major
+                            parts of the code.</para>
+                    </listitem>
+                    <listitem>
+                        <para>When your language is nowhere near Turing-complete, syntactic sugar
+                            can be your friend.</para>
+                        <!-- riaan:issue still have not got a good explanation what ESR means with this -->
+                    </listitem>
+                    <listitem>
+                        <para>A security system is only as secure as its secret. Beware of pseudo-secrets.</para>
+                        <para>Some of the users asked Raymond to encrypt the password in the control
+                            file of the application, so that people who were looking at the control
+                            file would not be able to see the password in plain text. Raymond points
+                            out that anybody who has the permissions to read the control file would
+                            be able to find out, from the code, which decoder to use to read the
+                            password. So security was not really enhanced, the user would just have
+                            been lulled into a false sense of security.</para>
+                    </listitem>
+                    <listitem>
+                        <para>To solve an interesting problem, start by finding a problem that is
+                            interesting to you.</para>
+                        <para>It is also obvious that if you have developed something that is
+                            interesting to you and solves problems for you, that it would play the
+                            same role for other people.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Provided the development coordinator has a communications medium at
+                            least as good as the Internet, and knows how to lead without coercion,
+                            many heads are inevitably better than one.</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>In The Mythical Man - Month, Fred Brooks observed that programmer
+                                time is not [interchangeable] ; adding developers to a late software
+                                project makes it later.</para>
+                        </blockquote>
+                        <para>This has become known as Brook's Law, but if it was true, how could
+                            the Linux kernel have been such a success?</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>Gerald Weinberg's classic The Psychology of Computer Programming
+                                supplied what, in hindsight, we can see as a vital correction to
+                                Brooks. In his discussion of &quot;ego less
+                                programming&quot;, Weinberg observed that in shops where
+                                developers are not territorial about their code, and encourage other
+                                people to look for bugs and potential improvements in it,
+                                improvement happens dramatically faster than elsewhere&quot;</para>
+                        </blockquote>
+                        <para>Clearly the Bazaar method needs to use this ego less method of
+                            development if it is to succeed. Something in which Linus Torvalds exceeds;</para>
+                        <blockquote>
+                            <attribution>ESR; CatB</attribution>
+                            <para>We may view Linus's method as a way to create an efficient market
+                                in egoboo<footnote>
+                                    <para>'Egoboo' is a word that ESR uses in Cathedral and the
+                                        Bazaar. I believe he means that open source development is
+                                        successful partly because the individuals who are working on
+                                        the project enjoy having their ego stroked. And because
+                                        anybody can see their code, everybody will know how good
+                                        they are</para>
+                                </footnote> - to connect the selfishness of individual hackers as
+                                firmly as possible to difficult ends that can only be achieved by
+                                sustained cooperation.</para>
+                        </blockquote>
+                    </listitem>
+                </orderedlist>
+                <sect4 id="CatBConclusion">
+                    <title>Conclusion</title>
+                    <blockquote>
+                        <attribution>ESR; CatB</attribution>
+                        <para>Perhaps in the end the open-source culture will triumph not because
+                            cooperation is morally right or software &quot;hoarding&quot; is
+                            morally wrong (assuming you believe the latter, which neither Linus nor
+                            I do), but simply because the closed - source world cannot win an
+                            evolutionary arms race with open - source communities that can put
+                            orders of magnitude more skilled time into a problem.</para>
+                    </blockquote>
+                    <para>The book has been released under the Open Publication License v2.0 and can
+                        be read online on <ulink
+                        url="www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/">this</ulink> page</para>
+                </sect4>
+            </sect3>
+        </sect2>
+        <!-- Cathedral and Bazaar Ends -->
+        <sect2>
+            <!-- Start of Why is Linux not in Enterprise? -->
+            <title>Why is Free Software not used extensively in the Enterprise environment?</title>
+            <para>Why has Free Software in general, and Linux specifically, not been as widely used
+                in the enterprise environment as the proponents of it expected? Developers of
+                proprietary software would have you believe that Linux is not suited to the
+                corporate environment. But this is not true, the next section attempts to highlight
+                why it is that Linux has not yet taken over from Microsoft, as the Operating System
+                of choice for home and corporate users.</para>
+            <!-- Introduction Starts -->
+            <sect3>
+                <title>Introduction</title>
+                <para>Linux and Free Software must be a marketer's nightmare, Linux is perceived to
+                    be an Operating System used only by highly technical people, who hardly ever
+                    leave their homes or offices. Worse, the people who develop Linux call
+                    themselves hackers, so how do you sell a product to companies when people think
+                    that only 'uber'-geeks can use it, and that they use it to break into bank
+                    accounts via the Internet?<footnote>
+                        <para>The understanding of the man on the street of the term
+                            &quot;hacker' is incorrect. Developers have been calling each other
+                            Hackers since the 1960's. In this context a Hacker refers to a developer
+                            who is able to improve a program in an intelligent and elegant manner.
+                            When using to people who gain unlawful entry into computer networks you
+                            should use the term &quot;Cracker'.</para>
+                    </footnote>The truth of the matter is that home users and more importantly CEO's
+                    (Chief Executive Officer) and CTO's (Chief Technology Officers) have the
+                    perception that Linux is difficult to use and that would not be possible to use
+                    it in their environment.</para>
+                <para>When you examine how Microsoft has marketed their products and compare that to
+                    the way Linux as been marketed to the world, one begins to understand why
+                    Windows is the Operating System of choice, instead of Linux.</para>
+                <para>Traditionally Linux has been marketed to the business world, from the bottom
+                    up. Since it was only the technical people who knew about Linux, and how to use
+                    it, they were the people telling their bosses about how stable and
+                    cost-effective it is compared to the products offered by Sun, IBM or Microsoft.
+                    Unfortunately few technically minded people are also good businessmen, or know
+                    how to communicate their ideas to people who have the power to make decisions
+                    that will affect the company.</para>
+                <para>Microsoft, arguably the most successful software company around today, has
+                    marketed their products to the Chief Executive Officers, Chief Technology
+                    Officers and Chief Financial Officers. Not to the people who would use it, but
+                    rather the people who may not necessarily have the knowledge required to make a
+                    sound technical decision, but the people who are able to make financial decisions.</para>
+                <para>When deciding whether or not to use Linux in a business environment, one needs
+                    to make a distinction between an Operating System for a server, and an Operating
+                    System for a desktop. Whilst all Linux proponents would agree that it is very
+                    well suited to the server environment, some would say that when it comes to
+                    desktop systems, meant to be used as workstations, Linux may not yet be polished
+                    enough to replace Microsoft's products. Though, recent versions from SUSE and
+                    Red Hat are very close to being perfect for the desktop.</para>
+                <para>For Linux to gain more acceptance in the Business world, it will need to be
+                    marketed in the correct way.</para>
+                <para>CEO's would need to be made aware of why Linux is a viable option to use in
+                    the business environment, which is what the next section attempts to highlight.
+                    I will not be able to turn you into a marketer , or a business person, but I
+                    will attempt to list the reasons why Linux should be used.</para>
+            </sect3>
+            <!-- Introduction Ends -->
+            <sect3>
+                <title>Cost</title>
+                <para>Surely this is one of the main draw cards that Linux has over its competitors.
+                    During the IT industry boom in the late 1990', Information Technology seemed to
+                    promise unbelievable growth in profits and productivity. After the .com bust in
+                    2000 many companies have slashed their IT budgets drastically. IT just did not
+                    deliver what it promised.</para>
+                <para>Today, businesses want even more out of the IT infrastructure, but they are
+                    more cautious when it comes to spending. Unlike the products from companies like
+                    IBM and SUN, Linux can run on almost any hardware architecture, you can use
+                    Linux to run your file server using the normal Pentium/AMD architecture. Of
+                    course it can run on other more obscure architectures, you can even run it on a
+                    Xbox gaming system. (Though that is not so strange once you know that the Xbox
+                    is just an IBM PC that is meant to be used for gaming exclusively. visit <ulink
+                    url="xbox-Linux.sourceforge.net">this</ulink> page for more information on how
+                    to install Linux on a XBox) What is impressive is that people are creating
+                    clustered computer systems from these 'hacked' Xboxes. They are using the Xbox,
+                    because it uses good-quality hardware, is relatively inexpensive and is very quiet.</para>
+                <para>There are Linux distributions like Red Hat Fedora, Debian, and Gentoo that you
+                    can use completely free of charge, and there are distributions that require the
+                    user to purchase a license, for example Red Hat Enterprise 3 and SUSE Linux
+                    Enterprise 8. The advantage of buying a license is that you get support from the
+                    company who has created the Linux Distribution, including regular security
+                    updates and bug fixes. With the distributions that are free of charge, you
+                    depend on the community of users of that distribution for the security updates
+                    and bug fixes. Admittedly, this is a very enthusiastic community and these fixes
+                    are made available before most people know that they exist, but this is not a
+                    risk that many companies are willing to take. They would rather pay somebody for
+                    guaranteed service than depend on no-cost services.</para>
+            </sect3>
+            <sect3>
+                <title>Productivity</title>
+                <para>Free Software is renowned for its stability, which translates to better uptime
+                    (the time between rebooting the system). Many commercial web-hosting companies
+                    use Free Software to run their servers, and to deliver the pages to Internet users.</para>
+            </sect3>
+            <sect3>
+                <title>Security</title>
+                <para>Security is another reason why businesses would benefit from switching to
+                    Linux. Every year millions of dollars are lost worldwide by damage caused by
+                    Trojans, worms and viruses that affect Microsoft products. These programs
+                    exploit features in Microsoft that (it seems) Microsoft is unwilling to fix,
+                    since it would mean that Microsoft loses some of its ease of use. In Linux a
+                    much stricter security policy is implemented than on Microsoft Windows. In Linux
+                    the root user needs to allow any and all programs that want to run on the
+                    system. This can only be done by the root user (the administrator of a Linux machine).</para>
+                <para>In Microsoft systems, programs are allowed to run without any input from the
+                    user. In other words a malicious program can install itself on a Microsoft
+                    system, and run itself without the user of that system even knowing about it.</para>
+                <para>A classic joke: &quot;Heard about the Linux virus? It works on the honor
+                    system. First it asks you to please e-mail it to all your friends, then it asks
+                    you to please log back in as root so it can tell you how to trash your system.&quot;<footnote>
+                        <para>As I am writing this, the MyDoom virus is being regarded to be the
+                            fastest spreading of all time. Three day after its release the mi2g
+                            Intelligence Unit (mi2g.net), a digital risk firm, has said that it has
+                            caused more than 20 billion dollars worth of damage. From <ulink
+                            url="http://thewhir.com/marketwatch/myd012904.cfm">this</ulink> page</para>
+                    </footnote>
+                </para>
+            </sect3>
+            <sect3>
+                <title>Maturity</title>
+                <para>As discussed earlier, Linux is based on the Unix system, which has been used
+                    by enterprises since the early 1980's. With the release of version 2.6 of the
+                    Linux Kernel early in 2004 Linux has evolved even further.</para>
+                <para>(Joseph Pranevich has written an exhaustive analysis of what capabilities the
+                    latest Linux kernel bring to the Linux Operating System, read it at:
+                    http://www.kniggit.net/wwol26.html It is also included in the appendix <xref linkend="Linux2.6"/>)</para>
+            </sect3>
+            <sect3>
+                <title>Support</title>
+                <para>Now that IBM and Novell have thrown their weight behind Linux, one can no
+                    longer say that there isn't a major company who will make support available for
+                    Linux servers and workstations. Many businesses would rather pay a license fee
+                    and be sure that support for their IT infrastructure is just a phone call away.</para>
+                <para>On the 13th of January 2004 Novell finalised its acquisition of SUSE Linux
+                        ,<ulink
+                        url="http://www.novell.com/news/press/archive/2004/01/pr04003.html?sourceidint=susehomebottom_en-us">Press
+                    Release</ulink> and this means that there is now a multi-billion dollar company
+                    offering support for Linux on an Enterprise level, from servers to workstations.</para>
+            </sect3>
+        </sect2>
+        <!-- End of Linux in Enterprise -->
+        <!--History and Politics Ends -->
+    </sect1>
+    <!-- POSIX Standards Starts -->
+    <sect1 id="PosixStandards">
+        <sect1info>
+            <title>Does Linux meet industry standards i.e. POSIX, IEEE, X/OPEN ?</title>
+        </sect1info>
+        <title>Does Linux meet industry standards i.e. POSIX, IEEE, X/OPEN</title>
+        <para>When choosing a Operating System the informed person would want to know it follows
+            certain standards. The Portable Operating System Interface standard was created to
+            ensure that Unix-like Operating Systems use applications that look and feel similar to
+            those used on other POSIX compliant Operating Systems.</para>
+        <para>If an Operating System is POSIX compliant, you can be assure of the following:</para>
+        <orderedlist>
+            <listitem>
+                <para>It is an acceptable level of quality,</para>
+            </listitem>
+            <listitem>
+                <para>It will have the same look and feel as other products on the market, this
+                    makes training and support an easier task to source and implement,</para>
+            </listitem>
+            <listitem>
+                <para>It has industry input that has been built up over time and experience of other
+                    technical learning curves when building and supporting other operating systems.</para>
+            </listitem>
+        </orderedlist>
+        <para>The POSIX standard is maintained by the Portable Application Standards Committee
+            (PASC) of the IEEE organisation. The standard is heavily influenced by Unix - and in the
+            latest revision now merges with The Open Group's Base Specifications (LSB) which
+            comprise the core of the Single Unix Specification.</para>
+        <para>The POSIX standard was developed so that people developing Operating Systems could
+            reference one standard so as to ensure that different Operating Systems would be able to
+            interoperate with each other. Linux is not completely compliant with POSIX, a draft
+            document has been released by the Open Group detailing conflicts between POSIX and their
+            Linux Standards Base (LSB). This can be viewed at: <ulink url="http://www.opengroup.org/personal/ajosey/tr28-07-2003.txt">http://www.opengroup.org/personal/ajosey/tr28-07-2003.txt</ulink>
+        </para>
+        <para>The Open Group's LSB certification is another standard that has been set against which
+            developers can test their products. Visit <ulink
+            url="http://www.opengroup.org/lsb/cert/docs/faq.tpl">this</ulink> page to find out more
+            about this certification. The LSB is a standard created to ensure greater conformity
+            between the different Linux Distributions, whilst the POSIX standard is meant to ensure
+            greater conformity between all Unix-like operating Systems.<footnote>
+                <para>
+                    <literallayout class="monospaced"><![CDATA[
+The Open Group is a trademark of The Open Group. 
+Unix is a registered trademark of The Open Group in the US and other countries.
+POSIX is a registered trademark of the IEEE Inc. 
+LSB is a trademark of the Free Standards Group.
+                    ]]></literallayout>
+                </para>
+            </footnote>
+        </para>
+        <!-- POSIX ENDS -->
+    </sect1>
+    <!-- ExerciseS and QUIZ for Preface Starts -->
+    <sect1 id="ExercisesandQuiz">
+        <sect1info>
+            <title>Exercises and Quiz</title>
+        </sect1info>
+        <title>Exercises and Quiz</title>
+        <para>Please note that if you cannot answer these questions then maybe you should read the
+            introduction again.</para>
+        <orderedlist numeration="arabic">
+            <listitem>
+                <para>Why would it be essential that you have an understanding of the business
+                    benefits and aspects to Linux, Open Source and Free Software?</para>
+            </listitem>
+            <listitem>
+                <para>Why would the conventional business world frown upon using these products?</para>
+                <para>a. Conventional business in a non computer-related sense (e.g insurance,
+                    furniture manufacturer).</para>
+                <para>b. Conventional business in a computer related sense (e.g computer
+                    manufacturer, software development company).</para>
+            </listitem>
+            <listitem>
+                <para>Are Unix and Linux the same product?</para>
+            </listitem>
+            <listitem>
+                <para>Itemise a few of the players in the politics surrounding the use and
+                    development of Open Source and Free Software in a business related world.
+                    (Halloween papers?)</para>
+            </listitem>
+            <listitem>
+                <para>Do you understand how this course works and what equipment you will need to be
+                    able to complete this course?</para>
+            </listitem>
+        </orderedlist>
+    </sect1>
+    <!-- end of Exercises and Quiz -->
+    <sect1 id="Emulator">
+        <sect1info>
+            <title>Setup of Linux Emulator for Fundamentals Course</title>
+        </sect1info>
+        <title>Setup of Virtual Linux Environment</title>
+        <para>In order to make this course more accessable to students, we decided to provide a
+            Virtual Linux Environment in which you could experiment. We built a mini-installation of
+            Debian Linux within the Bochs IA-32 Emulator. Bochs can emulate the Intel x86 CPU,
+            common I/O devices, and even a custom BIOS.</para>
+        <para>This means that you can have a fully working Linux system running on your Windows
+            desktop machine. You should have access to the self-installing win32 executable, either
+            on CD or via the course website.</para>
+        <para>You can download Bochs with the Debian GNU/Linux image mathew West created from <ulink
+                url="&bochs-debs;"> this link</ulink> .</para>
+        <para>Debian GNU/Linux, Bochs and NSIS are all open source products, licensed under the GPL.</para>
+        <para>Debian: <ulink url="http://www.debian.org/">http://www.debian.org/</ulink>
+        </para>
+        <para>Bochs: <ulink url="http://bochs.sourceforge.net/"/> http://bochs.sourceforge.net/</para>
+        <para>NSIS: <ulink url="http://nsis.sf.net/">http://nsis.sf.net/</ulink>
+        </para>
+    </sect1>
+</chapter>

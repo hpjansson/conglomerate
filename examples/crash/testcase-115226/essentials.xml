@@ -1,0 +1,3104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>-->
+<chapter id="essentials">
+    <title>Essentials</title>
+    <sect1 id="WhatisLinux">
+        <title>What is Linux?</title>
+        <indexterm>
+            <primary>kernel</primary>
+        </indexterm>
+        <para>An operating system is composed of two major parts; these parts are known as the
+            &quot;kernel&quot; and the &quot;userland&quot;.</para>
+        <para>The kernel is responsible for handling communication between the physical hardware and
+            the software running on the machine.</para>
+        <indexterm>
+            <primary>userland</primary>
+        </indexterm>
+        <para>The &quot;userland&quot; is comprised of system utilities and user
+            applications. These include editors, compilers and server daemons. System utilities
+            allowing you to maintain, monitor and even upgrade your system are also included.</para>
+        <para>The phrase &quot;Linux operating system&quot; is a misnomer, as Linux is a
+            kernel, and requires additional software in order to make it an operating system.</para>
+        <para>A Linux distribution is comprised of the Linux kernel, and a collection of
+            &quot;userland&quot; software. The software is usually provided by the FSF<footnote>
+                <para>
+                    <ulink url="http://www.fsf.org/">Free Software Federation -- http://www.fsf.org/</ulink>
+                </para>
+            </footnote> and GNU<footnote>
+                <para>
+                    <ulink url="http://www.gnu.org/">GNU's Not Unix -- http://www.gnu.org/</ulink>
+                </para>
+            </footnote> organisations, as well as many private individuals. Some of it even
+            originates from UCB's<footnote>
+                <para>
+                    <ulink url="http://www.berkeley.edu/">University of California, Berkeley --
+                        http://www.berkeley.edu/ </ulink>
+                </para>
+            </footnote> BSD<footnote>
+                <para>
+                    <ulink url="http://en.wikipedia.org/wiki/Berkeley_Software_Distribution">
+                        Berkely Software Distribution --
+                        http://en.wikipedia.org/wiki/Berkeley_Software_Distribution </ulink>
+                </para>
+            </footnote> Unix operating system.</para>
+        <note>
+            <para>There is some confusion over whether the word should be written as
+                &quot;Unix&quot; or &quot;Unix&quot;. Both forms are popular and are
+                used interchangeably. Dennis Ritchie says that the all-caps spelling originated from
+                CACM's 1974 paper, &quot;The Unix Time-Sharing System&quot;. Apparently
+                because &quot;we had a new type setter and troff had just been invented and we
+                were intoxicated by being able to produce small caps.&quot; Dennis Ritchie feels
+                like it should be spelled &quot;Unix&quot;, as it is a word and not an
+                acronym. Therefore, this is the format that we will use in this document.</para>
+        </note>
+        <para>Some commercial Linux distributions even include commercially developed software,
+            often unique to that particular distribution. An example of this would be
+                <trademark>SuSE Linux's &quot;Openexchange&quot; Server</trademark>.</para>
+        <para>There are many Linux distributions that are available. All of them use the Linux
+            kernel, but they usually differ in what software is available as part of the
+            &quot;userland&quot; how that software is managed and packaged.</para>
+        <para>Unlike most Unix operating systems, which are based on previous versions of Unix,
+            ultimately all leading back to the original &quot;Unix System&quot; from Bell
+            Labs, the Linux kernel was written from scratch. However, Linux based operating systems
+            follow and implement the Unix paradigm closely enough, that the bulk of this section of
+            the course would apply to both Linux and Unix variants.</para>
+    </sect1>
+    <sect1 id="StructureofLinuxbasedOS">
+        <title>Structure of a Linux Based Operating System.</title>
+        <para>A Linux based operating system is structured in much the same way as other operating
+            systems are structured.</para>
+        <figure>
+            <title>Operating Systems Layers</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="../images/diagram05.png" format="PNG"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <sect2>
+            <title>Hardware</title>
+            <indexterm>
+                <primary>Hardware Layer</primary>
+            </indexterm>
+            <para>This is the physical equipment of which your computer is composed; this includes
+                things like your keyboard and mouse, your video card and monitor, as well as your
+                network card, if you have one. Other not-so-obvious pieces of hardware are your CPU
+                and the RAM in your system.</para>
+        </sect2>
+        <sect2>
+            <title>
+                <indexterm>
+                    <primary>Kernel</primary>
+                </indexterm>Kernel</title>
+            <para>The Linux kernel acts as the interface between the hardware mentioned above, and
+                the rest of the operating system. The Linux kernel also contains device drivers,
+                usually ones, which are specific to the hardware peripherals that you are using.</para>
+            <para>The kernel is also responsible for handling things such as the allocation of
+                resources (memory and CPU time), as well as keeping track of which applications are
+                busy with which files, as well as security; and what each user is allowed to do on
+                the operating system.</para>
+        </sect2>
+        <sect2>
+            <title>
+                <indexterm>
+                    <primary>Standard Library of Procedures</primary>
+                </indexterm>Standard Library of Procedures</title>
+            <para>A Linux based operating system will have a standard library of procedures, which
+                allows the &quot;userland&quot; software to communicate with the kernel. On
+                most Linux based operating systems, this library is often called &quot;libc&quot;.</para>
+            <para>Some examples may include calls to ask the kernel to open up a file for reading or
+                writing, or to display text on the display, or even read in keystrokes from the keyboard.</para>
+        </sect2>
+        <sect2>
+            <title> Standard Utilities and User Applications</title>
+            <indexterm>
+                <primary>Standatd Utillities and User Applications</primary>
+            </indexterm>
+            <para>A Linux based system will usually come with a set of standard Unix-like utilities;
+                these are usually simple commands that are used in day-to-day use of the operating
+                system, as well as specific user applications and services. This is typically
+                software that the GNU Project has written and published under their open source
+                license, so that the software is available for everyone to freely copy, modify and redistribute.</para>
+            <para>Some examples would be the commands, which allow users to edit and manipulate
+                files and directories, perform calculations and even do jobs like the backups of
+                their data.</para>
+        </sect2>
+        <sect2>
+            <title>Lateral thinking with further details on the Operating System Simone Demblon</title>
+            <sect3>
+                <title>How These All Work Together</title>
+                <para>One of the benefits of Unix, and thus also of Linux, is the fact that it's
+                    designed to be a multi-user and multi-tasking operating system - in other words
+                    more than one user can be working on the same system at the same time - via
+                    different consoles, pseudo and dumb terminals, or perhaps even by scheduling
+                    some of their tasks to occur while they're not at their keyboard. This is an age
+                    where sharing information has become paramount and therefore this type of
+                    operating system can only be an advantage in a networked environment.</para>
+                <para>However, most PCs are single CPU systems, and, technically, the CPU cannot
+                    handle more than one task at a time - as is implied by the word
+                    &quot;multi-tasking&quot;. The trick to multi-tasking is therefore part
+                    of the operating system, rather than the system hardware.</para>
+                <para>The kernel divides up the time alloted to tasks; these are called
+                    &quot;time slices&quot;. The kernel is responsible for running the tasks
+                    on the CPU, saving their state and removing them, and then replacing them with
+                    the next task for it's allocated &quot;slice of time&quot;. This gives
+                    the impression that the system is performing many tasks concurrently, but it is
+                    in fact performing small parts of each task, one at a time, in quick succession.</para>
+                <para>The process whereby the kernel swaps tasks on and off the CPU is known as
+                    &quot;context switching&quot;. Each task has its own environment, or
+                    context, which the kernel has to remember in order to fool the process that it
+                    is running on the CPU all on its own without any interruptions.</para>
+                <indexterm>
+                    <primary>time slicing</primary>
+                </indexterm>
+                <para>On machines with more than one CPU, a technique called Symmetric
+                    Multiprocessing (SMP) is used to do the time slicing over multiple CPU's.
+                    Obviously, with this system, the tasks are actually been done concurrently,
+                    although it is rare that a specific CPU is assigned to a single specific process.<footnote>
+                        <para>It is possible to do this though; such a technique is called
+                            &quot;CPU affinity&quot;</para>
+                    </footnote>
+                </para>
+            </sect3>
+            <sect3>
+                <title>Process Flow:</title>
+                <para>When a user runs a standard utility or application, that software makes a call
+                    to the kernel, via the standard library of procedures, requesting system
+                    resources, such as the contents of files or the input being feed in via the
+                    keyboard. The kernel in turn then queries the actual hardware for this
+                    information, and then returns it, again via the standard library of procedures layer.</para>
+                <para>This layering is what provides the system with a level of stability. If your
+                    application crashes for some reason, it is seperated enough from the kernel to
+                    prevent it taking down the whole system.</para>
+            </sect3>
+        </sect2>
+    </sect1>
+    <!-- Structure of Linux OS ends -->
+    <sect1 id="LoggingontoLinux">
+        <!-- Logging into Linux Starts -->
+        <title>Logging into a Linux System</title>
+        <sect2>
+            <title>Login</title>
+            <para>Once you have your Linux system up and running, you will be presented with a
+                prompt asking for your username. This is often referred to as the login prompt.</para>
+            <literallayout class="monospaced"><![CDATA[
+Debian GNU/Linux
+3.0 debian tty1
+debian login:_ ]]></literallayout>
+            <para>Once you've entered your username, you will be prompted for a password:</para>
+            <literallayout class="monospaced"><![CDATA[
+debian login: guest
+Password:_ 
+            ]]></literallayout>
+            <para>Like Unix, Linux is case sensitive, so you need to make sure that both your
+                username and password are entered in the correct case.</para>
+            <para>You will notice that your password is not echoed to the screen as you type it;
+                this stops someone from being able to read over your shoulder and make a note of
+                your password.</para>
+            <para>A good rule of thumb is to keep usernames in all lowercase, as this keeps things simple.</para>
+            <para>However, passwords should be made as difficult as possible to guess; preferably
+                they should consist of both upper and lower case letters, as well as numbers and
+                punctuation marks.</para>
+            <indexterm>
+                <primary>username and password</primary>
+            </indexterm>
+            <para>Traditional Unix systems have an 8 character limit on usernames and passwords.
+                However, Linux based operating systems have a limit of 256 characters. Most Linux
+                distributions can also be configured to operate in &quot;legacy mode&quot;,
+                using 8 character usernames and passwords, and so allow better interoperability with
+                existing Unix installations.</para>
+            <para>Once you've typed in your password hit enter and you should be greeted with a
+                welcome screen and you should be presented with a shell prompt and a flashing cursor.</para>
+            <note>
+                <para>If you're using the Virtual Linux Environment provided with this course, then
+                    your login name will be &quot;student&quot; and your password will be &quot;student&quot;.</para>
+            </note>
+            <literallayout class="monospaced"><![CDATA[Debian GNU/Linux 3.0 debian tty1 
+debian login: student
+Password: 
+
+Linux debian 2.2.20-idepci #1 Sat Apr 20 12:45:19 EST 2002 i686
+    unknown Most of the programs included with the Debian GNU/Linux system are
+    freely redistributable; exact redistribution terms for each program are
+    described in the individual files in /usr/share/doc/*/copyright Debian
+    GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+    applicable law. 
+student@debian:~$ _ ]]></literallayout>
+            <para>Once you've logged into the system for the first time, it is usually a good idea
+                to set your password to something new, one that will be difficult for other people
+                to guess.</para>
+            <para>The command to do this is &quot;passwd&quot; (short for
+                &quot;password&quot;). This command should allow you to set your password on
+                any Unix-like system.</para>
+            <para>You will be prompted for your old password, to ensure that it is really you at the
+                keyboard, and you will then be prompted twice for your new password. This ensures
+                that you don't make a typo!</para>
+            <literallayout class="monospaced"><![CDATA[debian login: student 
+    Password: 
+Linux debian 2.2.20-idepci
+    #1 Sat Apr 20 12:45:19 EST 2002 i686 unknown Most of the programs included
+    with the Debian GNU/Linux system are freely redistributable; the exact
+    distribution terms for each program are described in the individual files
+    in /usr/share/doc/*/copyright Debian GNU/Linux comes with ABSOLUTELY NO
+    WARRANTY, to the extent permitted by applicable law.
+student@debian:~$  passwd 
+Changing password for student (current) Unix password:
+Enter new Unix password: 
+Retype new Unix password: 
+passwd: password updated successfully
+student@debian:~$ _ 
+            ]]></literallayout>
+            <para>Once you've successfully changed your password, you can type the 'exit' command to
+                exit out of the session.</para>
+            <literallayout class="monospaced"><![CDATA[Debian GNU/Linux 3.0 debian tty1 
+debian login: student
+    Password: 
+Linux debian 2.2.20-idepci
+    #1 Sat Apr 20 12:45:19 EST 2002 i686 unknown Most of the programs included
+    with the Debian GNU/Linux system are freely redistributable; the exact
+    distribution terms for each program are described in the individual files
+    in /usr/share/doc/*/copyright Debian GNU/Linux comes with ABSOLUTELY NO
+    WARRANTY, to the extent permitted by applicable law.
+student@debian:~$ passwd 
+Changing password for student
+(current) Unix password: 
+Enter new Unix password: 
+Retype new Unix password: 
+passwd: password updated successfully 
+student@debian:~$ exit &lt;enter&gt; ]]></literallayout>
+        </sect2>
+        <sect2 id="PasswordFile">
+            <title>The Password File</title>
+            <para>In the previous section, you saw that the system was able to validate your
+                identity based on your username and password. In this section, we will look at the
+                file which is commonly used to store this information.</para>
+            <para>One of the most important files on any Unix-like system is the password file; this
+                file is located in the &quot;/etc/&quot; directory, and is called &quot;passwd&quot;.</para>
+            <para>The file originated on Unix 7th Edition, and maintains the same format to this
+                day: 7 colon-delimited fields. These fields are, in order:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>username</para>
+                </listitem>
+                <listitem>
+                    <para>password placeholder</para>
+                </listitem>
+                <listitem>
+                    <para>user id</para>
+                </listitem>
+                <listitem>
+                    <para>group id</para>
+                </listitem>
+                <listitem>
+                    <para>GECOS field</para>
+                </listitem>
+                <listitem>
+                    <para>home directory</para>
+                </listitem>
+                <listitem>
+                    <para>shell</para>
+                </listitem>
+            </itemizedlist>
+            <para>The following is an excerpt from the password file:</para>
+            <literallayout class="monospaced"><![CDATA[
+    root:x:0:0:root:/root:/bin/bash 
+            ]]></literallayout>
+            <table pgwide="0">
+                <title>/etc/passwd</title>
+                <tgroup align="left" cols="7" colsep="1" rowsep="1">
+                    <colspec colname="User Name" colwidth="1*"/>
+                    <colspec colname="Password Placeholder" colwidth="1*"/>
+                    <colspec colname="User ID" colwidth="1*"/>
+                    <colspec colname="Group ID" colwidth="1*"/>
+                    <colspec colname="GECOS field" colwidth="1*"/>
+                    <colspec colname="home directory" colwidth="1*"/>
+                    <colspec colname="shell" colwidth="1*"/>
+                    <tbody>
+                        <row>
+                            <entry>user Name</entry>
+                            <entry>Password Placeholder</entry>
+                            <entry>User ID</entry>
+                            <entry>Group ID</entry>
+                            <entry>Gecos Field</entry>
+                            <entry>Home Directory</entry>
+                            <entry>Shell</entry>
+                        </row>
+                        <row>
+                            <entry>root</entry>
+                            <entry>x</entry>
+                            <entry>0</entry>
+                            <entry>0</entry>
+                            <entry>root</entry>
+                            <entry>/root</entry>
+                            <entry>/bin/bash</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>Your &quot;<emphasis>user id</emphasis>&quot; is a numeric identifier,
+                which the operating system uses to identify which files belong to you. The system
+                always thinks of you in terms of a number! It uses the passwd file to convert the
+                number into a more human-friendly form; your username. This
+                <emphasis>username</emphasis> is a name that you have chosen or that has been given
+                to you by the system administrator and is the name that you will use to log in to
+                the system.</para>
+            <para>Your &quot;group id&quot; is very similar. A Unix group may contain none,
+                one or more users, who will then be able to access the files and directories owned
+                by that group, based on that groups permissions as discussed above. This is useful
+                for sharing files between two people, as a file can only have one owner.</para>
+            <para>Most modern implementations make use of a concept called &quot;User Private
+                Groups&quot; (UPG). This means that each user is assigned their own group, which
+                is given the same name as their username. This user is the only member of that group.</para>
+            <para>The GECOS field was originally added to early Unix systems in order to enable
+                interoperability with an operating system written by General Electric, called the
+                General Electric Comprehensive Operating System (GECOS). Now the field is used to
+                store <emphasis>your full name, and possibly your room and telephone number.</emphasis>
+            </para>
+            <para>The final two fields are your <emphasis>home directory</emphasis>, where all your
+                files are usually stored, as well as your choice of <emphasis>command shell</emphasis>.</para>
+            <para>On a traditional Unix system, an encrypted version of the password used to exist
+                where the <emphasis>password placeholder field</emphasis> is now.</para>
+            <para>The password is encrypted with a one-way hash. This means that the password cannot
+                be decrypted, but it does mean that people can try and guess your password.</para>
+            <para>The traditional encryption method was called the Data Encryption Standard (DES),
+                but most recent versions of Unix, and most Linux distributions, default to using the
+                MD5 (Message Digest 5) encryption method, which allows for much longer and
+                difficult-to-compute passwords.</para>
+            <para>As computers became more and more powerful, it became feasible to try entire
+                dictionaries of words to guess someone's password.</para>
+            <para>To counter this, the encrypted password field was moved into a separate file which
+                only the superuser could read. Under Linux based operating systems, this file is
+                called the shadow password file (/etc/shadow).</para>
+            <para>The superuser, or &quot;root user&quot; has complete control over the
+                whole system, and is able to even override normal file permissions. Normally this
+                login account is only used by the system administrator when doing system maintenance work.</para>
+            <para>The shadow password file contains the username and its associated encrypted
+                password, as well as other fields which deal with password and account expiry.</para>
+            <para>The system uses the /etc/group file to determine the mapping of group names to
+                group numbers, as well as to determine the members of each group.</para>
+        </sect2>
+        <!-- Password File ends -->
+    </sect1>
+    <!-- Logging into Linux Ends -->
+    <sect1 id="ShellCommandInterpreter">
+        <!-- Shell command Interpretor Starts -->
+        <title>The Shell Command Interpreter</title>
+        <para>The shell command interpreter is the command line interface between the user and the
+            operating system. It is what you will be presented with once you have successfully
+            logged into the system.</para>
+        <para>The shell allows you to enter commands that you would like to run, and also allows you
+            to manage the jobs once they are running. The shell also enables you to make
+            modifications to your requested commands.</para>
+        <sect2>
+            <title>Different Shell Command Interpreters</title>
+            <indexterm>
+                <primary>bash shell</primary>
+            </indexterm>
+            <para>The Bourne-Again shell is not the only shell command interpreter available.
+                Indeed, it is descended from the Bourne Shell (sh), written by Steve Bourne of Bell
+                Labs. This shell is available on all Unix variants, and is the most suitable for
+                writing portable shell scripts. This is discussed in depth in the Shell Scripting Course.</para>
+            <para>The default shell, which is provided with most Linux based systems is the
+                Bourne-Again shell (&quot;bash&quot;).</para>
+            <indexterm>
+                <primary>C Shell</primary>
+            </indexterm>
+            <para>Other popular shells include the C Shell (csh), written at UCB, and so called
+                because its Syntax is similar to that of the C language.</para>
+            <indexterm>
+                <primary>TC Shell</primary>
+            </indexterm>
+            <para>The TC Shell (tcsh) is an extension of the C shell.</para>
+            <para>A very popular shell on most commercial variants of Unix is the Korn Shell.
+                Written by David Korn of Bell Labs, it includes features from both the Bourne shell
+                and C shell.</para>
+            <para>Finally one of the most powerful and interesting shells although one that hasn't
+                been standardised on any distribution that I've seen, is the Z shell. The zsh
+                combines the best of what is available from the csh line of shell utilities as well
+                as the best that is available from the bourne or bash line of shell utilities.</para>
+            <para>One relatively easy way to determine what shell it is that you are currently
+                running is by looking at the prompt. If you are using a bourne shell or derivative,
+                you will see a dollar sign. This is more than likely what you will see at your bash
+                prompt at the moment. If however you are using csh, or tcsh you will see a
+                percentage sign. If you are logged in as root or the superuser, irrespective of your
+                shell, your prompt will normally always be a hash.</para>
+            <para>The bash prompt:</para>
+            <literallayout class="monospaced"><![CDATA[
+student@debian:~$ _
+            ]]></literallayout>
+            <para>The tcsh prompt:</para>
+            <literallayout class="monospaced"><![CDATA[
+student@debian:~% _
+            ]]></literallayout>
+            <para>The root prompt:</para>
+            <literallayout class="monospaced"><![CDATA[
+root@debian:~# _
+            ]]></literallayout>
+        </sect2>
+        <sect2>
+            <title>The Command History within the shell</title>
+            <para>More modern shells allow you to access your history of commands, and automatically
+                complete filenames and even correct mistyped commands.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>The up and down arrow keys will allow you to traverse the history of
+                        commands that you have typed in.</para>
+                </listitem>
+                <listitem>
+                    <para>The left and right arrow keys will allow you to navigate the cursor on the
+                        command which you are currently typing.</para>
+                </listitem>
+                <listitem>
+                    <para>The backspace and delete keys will delete the character behind the cursor,
+                        and underneath the cursor, respectively.</para>
+                </listitem>
+                <listitem>
+                    <para>The default mode at your bash prompt is the insert mode, which means that
+                        if you type a character somewhere on the line it will insert it at that position.</para>
+                </listitem>
+                <listitem>
+                    <para>If you then press the insert key it will then toggle the mode so that it
+                        will go into overwrite mode, which means that it will overwrite whatever
+                        character is directly underneath your cursor.</para>
+                </listitem>
+                <listitem>
+                    <para>Another useful feature is tab completion. What this means is that you can
+                        use the tab key in order to be able to complete a command, or be given a
+                        list of options of commands which match what you have typed so far.</para>
+                </listitem>
+            </itemizedlist>
+            <para>Tab Completion:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ pas &lt;tab&gt;
+passwd paste 
+student@debian:~$ pas_ ]]></literallayout>
+            <para>The shell is telling you that you need to make a choice between those two options.
+                You can let it know which one by filling in one more letter (&quot;s&quot;
+                or &quot;t&quot; in this case), and then pressing &lt;tab&gt; again.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ pas &lt;tab&gt; 
+passwd paste 
+student@debian:~$ pass&lt;tab&gt;
+student@debian:~$ passwd_ ]]></literallayout>
+            <para>Now pressing &lt;enter&gt; will finally result in the command being executed.</para>
+            <indexterm>
+                <primary>reverse case-insensitive history search</primary>
+            </indexterm>
+            <itemizedlist>
+                <listitem>
+                    <para>Another very useful feature of the bash shell, and one that I would
+                        recommend that you use often, is called &quot;reverse case-insensitive
+                        history search&quot;. It will search through your history in reverse and
+                        case-insensitively (so it won't worry whether it was in upper or lowercase)
+                        for a command or even part of a command that you typed.</para>
+                    <para>In order to access this, you can use the shortcut key combination CTRL-R,
+                        followed by a command or a subsection of a command that you have typed and
+                        you will notice that it will go back in history to locate this command</para>
+                </listitem>
+            </itemizedlist>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ &lt;ctrl-r&gt;
+reverse-i-search)`p': passwd ]]></literallayout>
+            <para>The shell has now searched back into your command history for the letter
+                &quot;p&quot;, and the first command that has matched is
+                &quot;passwd&quot;, which you typed earlier. Pressing &lt;enter&gt;
+                now will result in the command being executed. Alternatively, you can use the arrow
+                keys to scroll through other options, or continue typing letters until you have a
+                better match.</para>
+        </sect2>
+        <sect2>
+            <title>Configuring your shell environment</title>
+            <para>There are several files which will affect the behaviour of your bash shell:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <computeroutput>/etc/profile</computeroutput>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <computeroutput>/etc/bash.bashrc</computeroutput>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <computeroutput>$HOME/.bashrc</computeroutput>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <computeroutput>$HOME/.bash_profile</computeroutput>
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>The file where your history of commands is kept is called:</para>
+            <para>
+                <computeroutput>$HOME/.bash_history</computeroutput>
+            </para>
+        </sect2>
+        <sect2 id="ShellCommandProcessing">
+            <title>Shell Command Processing</title>
+            <para>In this section, we will explain how the shell interprets the commands, which you
+                give it to execute.</para>
+            <para>It is important to understand that the shell does actually interpret what you type
+                to it.</para>
+            <sect3>
+                <title>Special Characters</title>
+                <para>What this means is that certain special characters will have to be interpreted
+                    or dealt with prior to the execution of the command.</para>
+                <para>An example is the asterisk or wildcard character. When a shell sees this
+                    character it will attempt to substitute any matching filenames in place of this
+                    wildcard character. It is important to note that this happens before the command
+                    is executed.</para>
+                <para>There are other special characters that will also be interpreted. Different
+                    shells interpret different characters in different ways. The most commonly
+                    interpreted characters are the asterisk, question mark, the various brackets,
+                    forward slashes and quotation marks.</para>
+                <para>We will learn the significance of each of these characters and the effect that
+                    they will have on the way that the shell executes your commands.</para>
+                <para>Once the shell has interpreted your command and run replacements where you
+                    have requested it, it will then check and see if the command is perhaps
+                    something that needs to be executed by the shell itself, in other words it is an
+                    internal command.</para>
+            </sect3>
+            <sect3>
+                <title>Internal Commands:</title>
+                <para>An internal command is a routine that is part of the shell itself and does not
+                    require the shell to open up an external file in order to execute it. Examples
+                    of internal commands are clear and history.</para>
+            </sect3>
+            <sect3>
+                <title>Shortcuts and Aliases:</title>
+                <para>As mentioned before, the bash shell allows you to have shortcuts, or aliases.
+                    These aliases are interpreted before executing the command as an internal or
+                    external one. For example, it is possible to configure bash to treat 'll' (two
+                    lowercase letter L's) as a shortcut to the ls (directory listing) command. This
+                    is made into a shortcut by using the alias command, which is a shell built-in command.</para>
+                <para>You can use the &quot;type&quot; shell built-in to determine if a
+                    command is an internal, external or an alias.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$  <indexterm><primary>type</primary>
+						</indexterm>type type
+type is a shell builtin 
+student@debian:~$  <indexterm><primary>type</primary>
+						</indexterm>type passwd
+passwd is /usr/bin/passwd 
+student@debian:~$
+                ]]></literallayout>
+            </sect3>
+            <sect3>
+                <title>External Commands:</title>
+                <para>If the command is not an internal command, then it will be an external
+                    command. An external command is an executable file that exists somewhere on the
+                    system and that you are able to run. An example of an external command is passwd
+                    and the name of the shell itself, in our example: &quot;/bin/bash&quot;.</para>
+                <para>If the command is not a shortcut, or an alias, and is not an internal command
+                    but is an external command, the file that is executed must be readable and
+                    executable by you.</para>
+                <para>You need to have the appropriate permissions in order to be able to run it. It
+                    also needs to exist in a directory that exists inside a directory that is inside
+                    your search path.</para>
+                <para>The search path lists all the directories in which the shell can find commands
+                    that you would like to be able to run.</para>
+                <para>On a usual Linux system, the /usr/bin and the /usr/local/bin directories will
+                    all be inside your path environment variable, as this is where the system stores
+                    your common executable files. These files are also known as binary files, as
+                    opposed to source files, hence the &quot;bin&quot; directory name.</para>
+                <para>So what the shell will do is that it will check in each of those directories
+                    for the existence of the command that you have typed. If it finds a file that
+                    matches the name and you are allowed to execute it, then the shell will request
+                    that the kernel load that programme into memory, and execute it; in other words,
+                    instantiate it as a running process.</para>
+                <para>Once the command execution is completed, it will return control back to the shell.</para>
+                <para>If the shell is not able to find a matching command to execute, in other words
+                    it not a shortcut, it's not an internal command and it cannot find an external
+                    programme in the path that you have provided, then it will give you an error message.</para>
+                <para>The advantage of internal commands is that they are less expensive for the
+                    kernel to execute, and so consume fewer system resources (CPU time and memory).
+                    The advantage of external commands is that they are able to be far more flexible.</para>
+                <para>For this reason, internal commands are usually often used, simple tasks;
+                    whereas external commands are often large applications.</para>
+                <!-- Add Diagram Internal (shell built-in) and External Commands -->
+            </sect3>
+        </sect2>
+        <sect2 id="ShellEnvironment">
+            <title>The Shell Environment</title>
+            <para>There are several environment variables that influence the way that the shell
+                operates and that can be used by commands that the shell executes.</para>
+            <para>These variables are set up for you during the boot-up of the system and during
+                your log in process, mostly determined by your choice of shell. We discussed the
+                files used by the bash shell earlier.</para>
+            <para>One variable that was mentioned before was the search path, this information is
+                held in a environment variable called PATH.</para>
+            <para>Under the bash shell you can run the &quot;set&quot; command to list the
+                current shell environment variables and their associated values.
+                &quot;set&quot; is a shell built-in command.</para>
+            <literallayout class="monospaced"><![CDATA[
+student@debian:~$
+<indexterm><primary>set</primary>
+					</indexterm>set
+BASH=/bin/bash BASH_VERSINFO=([0]=&quot;2&quot; [1]=&quot;05a&quot; [2]=&quot;0&quot; [3]=&quot;1&quot;
+[4]=&quot;release&quot;[5]=&quot;i386-pc-Linux-gnu&quot;)
+BASH_VERSION='2.05a.0(1)-release'
+COLUMNS=80 
+DIRSTACK=() 
+EUID=1000 
+GROUP=student 
+GROUPS=()
+HISTFILE=/home/student/.bash_history 
+HISTFILESIZE=500 
+HISTSIZE=500
+HOME=/home/student 
+HOST=debian 
+HOSTNAME=debian 
+HOSTTYPE=i386-Linux
+HUSHLOGIN=FALSE 
+HZ=100 IFS=$' \t\n' 
+LINES=30 
+LOGNAME=student
+MACHTYPE=i386
+MAIL=/var/mail/student 
+MAILCHECK=60 
+OPTERR=1 
+OPTIND=1
+OSTYPE=Linux 
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/games
+PIPESTATUS=([0]=&quot;0&quot;) 
+PPID=225 
+PS1='\u@\h:\w\$ '
+PS2='&#62; ' PS4='+ ' 
+PWD=/home/student
+SHELL=/bin/bash
+SHELLOPTS=braceexpand:hashall:histexpand:
+monitor:history:interactive-comments:emacs
+SHLVL=5 
+TERM=Linux 
+UID=1000 
+USER=student
+VENDOR=intel 
+_=passwd
+student@debian:~$ _ 
+            ]]></literallayout>
+            <sect3>
+                <title>Setting A New Shell Variable Or Resetting An Existing Variable</title>
+                <para>Remember that these variables control your entire environment and as you will
+                    see they are pretty easy to change so if you are going to change one or part of
+                    your environment then please think it through to avoid problematic consequences.</para>
+                <para>If you wish to assign a value to an environment variable, the Syntax is:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ VAR=value    
+                ]]></literallayout>
+                <para>Here, &quot;VAR&quot; is the variable name, and
+                    &quot;value&quot; is what we are storing inside of it.</para>
+                <para>Note that there is no space before or after the equal sign. The space would be
+                    assumed to be either part of the variable name or to be part of the value that
+                    you are assigning to the variable.</para>
+            </sect3>
+            <sect3>
+                <title>Exporting a variable value</title>
+                <para>Setting a variable using the Syntax above will cause the variable to only be
+                    available to the current shell instance. Usually, you want the variable to be
+                    propagated to any commands that you execute from the shell. To do this, you need
+                    to &quot;export&quot; the variable.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ VAR=value
+student@debian:~$ export VAR]]></literallayout>
+                <para>You can also combine this into a single command:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ export VAR=value    ]]></literallayout>
+                <para>Let's have a look at an example of re-setting a variable and then exporting
+                    the value:</para>
+                <para>For this example we are going to use our login prompt variable called PS1, see
+                    the &quot;set&quot; command above.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ PS1=&quot;newprompt $ &quot; 
+newprompt $ _ ]]></literallayout>
+                <note>
+                    <para>Enclose this in quotation marks to protect the spaces.</para>
+                </note>
+                <para>Now open a new shell and check for yourself that the prompt returns to the
+                    original prompt:</para>
+                <literallayout class="monospaced"><![CDATA[
+newprompt $ bash 
+student@debian:~$
+                ]]></literallayout>
+                <para>Exit back to the original shell and export your variable PS1.</para>
+                <literallayout class="monospaced"><![CDATA[
+newprompt $ bash
+student@debian:~$
+student@debian:~$ exit
+newprompt $ export PS1 
+newprompt $ bash 
+newprompt $
+                ]]></literallayout>
+                <para>Now your new prompt has been exported to all subsequent shells.</para>
+                <para>Please note however that once you logout of this session your prompt will
+                    return to the default in your next log in. If you want to change this
+                    permanently change PS1 and export the value into one of your startup files.
+                    ($HOME/.bashrc or $HOME/.bash_profile)</para>
+            </sect3>
+            <sect3>
+                <title>The <indexterm>
+                        <primary>echo</primary>
+                    </indexterm>
+                    <command>echo</command> command</title>
+                <para>A useful command to query the contents of a single variable is the
+                    &quot;echo&quot; command.</para>
+                <para>This command simply displays any arguments that to pass to it on the screen.
+                    For example:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ echo hello
+hello
+student@debian:~$]]></literallayout>
+                <para>If you don't provide any arguments, then it will simply display a blank line.
+                    (This is useful for providing spacing inside shell scripts.)</para>
+                <para>Do you remember that we mentioned that the shell actually interprets the
+                    commands that you give it before it executes them?</para>
+                <para>For example, in order to display the contents of a variable field as opposed
+                    to the variable name we could precede the variable name with a special
+                    character, in this case a dollar sign ($), and this will display the contents of
+                    that variable.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ VAR=avalue      --Set the variable--
+student@debian:~$ echo VAR        --To test our theory--
+VAR                               --Displays the word not the value stored.--
+student@debian:~$ echo $VAR          
+avalue                            --Display the contents of the variable-- 
+student@debian:~$ _ 
+                ]]></literallayout>
+                <para>Remembering to include the dollar sign (&quot;$&quot;) before the
+                    variable name is very important, as illustrated below:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$<indexterm><primary>echo</primary>
+						</indexterm>echo $PATH
+/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/games
+student@debian:~$<indexterm><primary>echo</primary>
+						</indexterm> echo PATH
+PATH    ]]></literallayout>
+            </sect3>
+            <sect3>
+                <title>Discussing system variables - TERM and PS1</title>
+                <indexterm>
+                    <primary>TERM</primary>
+                </indexterm>
+                <indexterm>
+                    <primary>PS1</primary>
+                </indexterm>
+                <para>Two other important bash shell environment variables: 'TERM' specifies the
+                    terminal type.</para>
+                <para>Depending how you log in to the system, the terminal type will either be
+                    &quot;xterm&quot; or &quot;vt100&quot;.</para>
+                <para>The terminal type determines what the terminal capabilities are, such as can
+                    it do colour, does it have a speaker attached so that it can generate a beep or
+                    do you want the beeps to be visual flashes on the screen.</para>
+                <para>The terminal type also lets applications know if the terminal can handle
+                    certain types of characters. Very old terminals used to be only able to handle
+                    uppercase letters, so if you set the terminal type to one of those you would
+                    only be able to see uppercase characters on the screen.</para>
+                <para>Sometimes, being able to set the term environment variable is useful if you
+                    are connecting to a system that doesn't know where you are connecting from and
+                    you wish to be able to specify the correct terminal type so that your display is correct.</para>
+                <para>A good terminal type to try if you're having problems with your terminal is
+                    vt100 as this works on almost all types of terminals.</para>
+                <para>Another important environment variable is PS1. This is the current prompt for
+                    the shell. The convention is that a C-style shell has a &quot;%&quot;
+                    prompt, where a Bourne-style shell will have a &quot;$&quot; prompt. The
+                    root user will have a &quot;#&quot; prompt; this allows you to easily
+                    see when you are a normal user or a user who has much more potentially
+                    destructive power!</para>
+                <note>
+                    <para>Any changes that you make to the shell environment will be lost when you
+                        exit the current login session. If you wish to make the changes more
+                        permanent, you need to add the commands that you wish to run to either the
+                        system-wide /etc/bashrc file (the change would affect all bash users on the
+                        system), or to your own $HOME/.bashrc file (the changes would affect you only).</para>
+                </note>
+            </sect3>
+        </sect2>
+        <sect2 id="UsingShellCommands">
+            <title>Using Shell Commands</title>
+            <para>Under Unix, and Linux, most commands are abbreviated using 2 to 4 characters; with
+                the more often used commands being shorter and the less-often used ones being longer.</para>
+            <blockquote>
+                <attribution>
+                    <author>
+                        <firstname>Simone</firstname>
+                        <surname>Demblon</surname>
+                    </author>
+                </attribution>
+                <para>&quot;There are so many options to each command in Linux - get an overview
+                    of the command, that it exists at all as a tool for you to use. Working out how
+                    to use each and every nuance can be very confusing - you will get bogged down in
+                    detail instead of gaining a comprehensive overview.</para>
+                <para>We are aiming for a lot of knowledge to be given and gained in this course and
+                    getting stuck on command details is not the main goal.&quot;</para>
+            </blockquote>
+            <sect3>
+                <title>The man pages</title>
+                <para>All Unix and Unix-like systems come with online documentation. The most common
+                    form are man pages; man being short for &quot;manual&quot;.</para>
+                <para>These pages are, however, not very good for teaching someone who is new to the
+                    system, but are very good as reference material.</para>
+                <para>They will document all the useful, and sometimes even obscure, switches and
+                    features of the command line tools that you have at your disposal.</para>
+                <para>The man pages are divided into several numbered sections:</para>
+                <simplelist>
+                    <member>1 - General Commands</member>
+                    <member>2 - System Calls</member>
+                    <member>3 - Subroutines</member>
+                    <member>4 - Special Files</member>
+                    <member>5 - File Formats</member>
+                    <member>6 - Games</member>
+                    <member>7 - Macros and Conventions</member>
+                    <member>8 - Maintenance Commands</member>
+                    <member>9 - Kernel Interface</member>
+                </simplelist>
+                <para>You will often see references such as &quot;ls(1)&quot;; this is
+                    referring to the page on &quot;ls&quot; in section 1 of the man pages.</para>
+                <indexterm>
+                    <primary>man</primary>
+                </indexterm>
+                <para>You can use the &quot; <command>man</command>&quot; command to look up
+                    a page:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$	<indexterm><primary>man</primary>
+						</indexterm>man
+man Reformatting man(1), please wait... ]]></literallayout>
+                <para>This will display the man page on the man command.</para>
+                <literallayout class="monospaced"><![CDATA[ man(1)                                                                                man(1) 
+NAME 
+man - format and display the on-line manual pages 
+SYNOPSIS 
+  man [-acdfFhkKtwW] [--path] [-m system] [-p string] [-C config_file] 
+  [-M pathlist] [-P pager] [-S section_list] [section] name ... 
+
+DESCRIPTION
+    man formats and displays the on-line manual pages. If you
+    specify sec- tion, man only looks in that section of the manual. name is
+    normally the name of the manual page, which is typically the name of a
+    command, function, or file. However, if name contains a slash (/) then man
+    interprets it as a file specification, so that you can do man ./foo.5 or
+    even man /cd/foo/bar.1.gz. See below for a description of where man looks
+    for the manual page files. [ ... ] September 2, 1995 man(1)
+    ]]></literallayout>
+                <para>The &quot;man&quot; command will look for the first page it can find
+                    which matches what you've asked for. If you want to see a page in a specific
+                    section, you can specify it thus:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$<indexterm><primary>man</primary>
+						</indexterm> man 7 man ]]></literallayout>
+                <para>I recommend looking through the man page of each of the commands that follow,
+                    just to get a feel for what the commands can do, and what their various switches are.</para>
+                <para>You may have noticed that the man pages are displayed a page at a time - that
+                    is due to the influence of the &quot;less&quot; command that we will do
+                    in the next few pages of this course. This is a good example of the Unix
+                    paradigm where small tools are used together to make more complicated ones.</para>
+                <indexterm>
+                    <primary>PAGER</primary>
+                </indexterm>
+                <note>
+                    <para>You can change which &quot;pager&quot; application is used with
+                        man(1) and other utilities by setting the PAGER environment variable in your shell.</para>
+                </note>
+                <para>You can use the &quot;-k&quot; switch to tell man to search for pages
+                    which contain specific keywords:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ man -k bash 
+bash (1) - GNU Bourne-Again SHell 
+bashbug (1) - report a bug in bash 
+builtins (1) - bash built-in commands, see bash(1) 
+rbash (1) - restricted bash, see bash(1) ]]></literallayout>
+                <para>The &quot;apropos&quot; command is the functional equivalent of
+                    &quot;man -k&quot;.</para>
+                <literallayout class="monospaced"><![CDATA[Syntax: 
+man [chapter] &lt;page&gt;
+man -k keyword 
+apropos keyword ]]></literallayout>
+                <sect4>
+                    <title>EXCERCISE:</title>
+                    <para>Call up and peruse the man page for the &quot;man&quot; command.
+                        Now call up the man page for man, but in the &quot;Macros&quot;
+                        section of the manual.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>The GNU Info pages</title>
+                <para>.The GNU Project distributes most of its software together with documentation
+                    in GNU Texinfo format.</para>
+                <para>This is another place where you should look for manuals and reference material
+                    for software on a Linux system.</para>
+                <indexterm>
+                    <primary>info</primary>
+                </indexterm>
+                <para>You can access these pages by using the &quot;
+                    <command>info</command>&quot; command.</para>
+                <para>You may optionally specify which &quot;info&quot; page you wish to
+                    look at as a parameter. Unlike Linux man page, GNU Info pages allow you to use
+                    hyperlinks, much like you are used to using in your web browser.</para>
+                <para>Inside the GNU info reader, you can use the arrow keys to move the cursor, and
+                    can use the &lt;enter&gt; key to select which hyperlink you wish to
+                    follow. Other useful keys are:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>q - quit</para>
+                    </listitem>
+                    <listitem>
+                        <para>n - next page</para>
+                    </listitem>
+                    <listitem>
+                        <para>p - previous page</para>
+                    </listitem>
+                </itemizedlist>
+                <!-- Include xref to Shell Scripting where Inf is discussed -->
+                <literallayout class="monospaced"><![CDATA[Syntax:
+info [page] ]]></literallayout>
+                <sect4>
+                    <title>EXCERCISE:</title>
+                    <para>Call up the info pages index and peruse its contents. Now call up the info
+                        page for the &quot;bash&quot; command.</para>
+                    <para>Now call up the info page for the bash command, but this time do it
+                        directly from the command line.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>the <command>date</command> command</title>
+                <indexterm>
+                    <primary>date</primary>
+                </indexterm>
+                <para>What's the current date and time on the system?</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$<indexterm><primary>date</primary>
+						</indexterm> date
+Thu Jan 15 16:05:07 SAST 2004 ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[ Syntax:
+ date ]]></literallayout>
+            </sect3>
+            <sect3>
+                <title>The cal command</title>
+                <indexterm>
+                    <primary>cal</primary>
+                </indexterm>
+                <para>Want to see a pretty calendar of the current month?</para>
+                <literallayout class="monospaced"><![CDATA[student@debian:~$ cal January 2004
+      January 2004
+Su Mo Tu We Th Fr Sa
+             1  2  3
+ 4  5  6  7  8  9 10
+11 12 13 14 15 16 17
+18 19 20 21 22 23 24
+25 26 27 28 29 30 31
+ student@debian:~$ _
+                ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[Syntax: cal [[month] year]]]></literallayout>
+                <sect4>
+                    <title>Exercise:</title>
+                    <para>Now read the man page for the &quot;cal&quot; command. Can you
+                        figure out how to make it display a calendar listing for the entire year?</para>
+                    <para>Try out the command &quot;cal 2004&quot; and see what happens.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>the <command>ls</command> command</title>
+                <indexterm>
+                    <primary>ls</primary>
+                </indexterm>
+                
+                <para>The &quot;ls&quot; command, short for &quot;list directory
+                    contents&quot;, displays a list of files and directories within your current directory.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ ls dataset
+student@debian:~$ one.txt. two.txt]]></literallayout>
+                <para>The &quot;ls&quot; command has several switches which modify its behaviour.</para>
+                <para>The &quot;-l&quot; (long) switch will display additional information
+                    about each of the items that it lists; these include the file permissions,
+                    owner, group, size and date of last modification.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ ls -l
+ total 2
+drwxr-xr-x 2 student student 4096 Feb 19 03:10 dataset
+drwxr-xr-x 2 student student 4096 Feb 19 03:10 dataset2]]></literallayout>
+                <para>The &quot;-a&quot; (all) switch causes &quot;ls&quot; to
+                    display even hidden files. Under Linux, any file that begins with a period (.)
+                    is considered to be a hidden file. These files are not displayed in a
+                    &quot;ls&quot; listing unless the &quot;-a&quot; switch has been specified</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ ls -a 
+. .. .bash_history .bash_profile .bashrc dataset dataset 2]]></literallayout>
+                <para>These files are often referred to as &quot;dot files&quot;, and
+                    usually contain application configuration information particular to the user
+                    whose home directory they reside in.</para>
+                <para>The reason for hiding them is to free up your workspace from the clutter it
+                    creates, thus allowing you to more easily access your data files.</para>
+                <literallayout class="monospaced"><![CDATA[
+Syntax:
+ls [-la] 
+                ]]></literallayout>
+                <sect4>
+                    <title>Exercise:</title>
+                    <para>Try combining the the flags and see what effect they have.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>The <command>pwd</command> command</title>
+                <indexterm>
+                    <primary>pwd</primary>
+                </indexterm>
+                <para>The &quot;pwd&quot; command, short for &quot;print working
+                    directory&quot; will print out the name of your current directory.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ pwd 
+/home/student
+                ]]></literallayout>
+                <note>
+                    <para>if a command is a shell built in command, you may have to look at the man
+                        pages for the shell to find a write-up on the built-in command. (man bash)</para>
+                </note>
+                <literallayout class="monospaced"><![CDATA[Syntax: 
+pwd
+                ]]></literallayout>
+                <sect4>
+                    <title>Exercise:</title>
+                    <para>Is the pwd command a shell built in, or an external command? Trick Question!</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>The <command>cd</command> command</title>
+                <indexterm>
+                    <primary>cd</primary>
+                </indexterm>
+                <para>You can use the &quot;cd&quot; (change directory) command to navigate
+                    your way around the filesystem.</para>
+                <para>There are two special types of directories.</para>
+                <para>The &quot;.&quot; directory is an alias for your current directory,
+                    and the &quot;..&quot; is an alias for the parent to your current directory.</para>
+                <para>The &quot;cd&quot; command without any arguments will return you to
+                    your home directory from wherever you are.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ pwd
+/home/student 
+student@debian:~$ cd ..
+student@debian:/home$ pwd 
+/home 
+student@debian:/home$ cd 
+student@debian:~$ pwd 
+/home/student student@debian:~$ _ 
+                ]]></literallayout>
+                <para>You can specify the path for &quot;cd&quot; to change into as being
+                    either an &quot;absolute&quot; one, or a &quot;relative&quot; one.</para>
+                <para>An absolute (full) path begins with a slash (&quot;/&quot;), and
+                    indicates the absolute location of something on the filesystem, by specifying it
+                    from the root directory up.</para>
+                <para>A relative (partial) path does not begin with a slash, and merely indicates a
+                    location off the current branch of the filesystem. In other words, the new
+                    directory is being specified relative to the current one.</para>
+                <para>Relative path example:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ cd .. 
+student@debian:/home$ ls -l 
+drwxrwxr-x 1 student group 16 student 
+student@debian:/home$ cd student
+student@debian:~$ pwd 
+/home/student
+                ]]></literallayout>
+                <para>Absolute path example:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ pwd 
+/home/student 
+student@debian:~$ cd /tmp
+student@debian:~$ pwd 
+/tmp 
+student@debian:~$ cd /home 
+student@debian:/home$ cd /home/student
+student@debian:~$ pwd 
+/home/student]]></literallayout>
+                <para>As you can see, both perform equivalent operations. However, relative paths
+                    are usually shorter to type</para>
+                <para>Question to make you think: Is the special &quot;..&quot; path a
+                    relative or an absolute one? What about the &quot;.&quot; path?</para>
+                <para>A useful &quot;cd&quot; shortcut to learn is to use the dash (-) parameter.</para>
+                <para>This allows you to quickly change back to your most recent directory.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ pwd 
+/home/student
+student@debian:~$ cd /usr/local/src        --Using an absolute pathname --
+student@debian:/usr/local.src$ pwd
+/usr/local/src 
+student@debian:/usr/local.src$ cd -    
+/home/student 
+student@debian:~$ pwd 
+/home/student
+student@debian:~$ _ 
+                ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[
+Syntax:
+cd [path] 
+                ]]></literallayout>
+                <sect4>
+                    <title>Exercises:</title>
+                    <para>Use the cd, pwd and ls commands to explore the file system a bit.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>The <command>cat</command> command</title>
+                <indexterm>
+                    <primary>cat</primary>
+                </indexterm>
+                <para>The &quot;cat&quot; command, short for concatenate, is most often used
+                    to display the contents of short text files.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$
+<indexterm><primary/>
+						</indexterm>cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:100:sync:/bin:/bin/sync games:x:5:100:games:/usr/games:/bin/sh
+man:x:6:100:man:/var/cache/man:/bin/sh lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+mail:x:8:8:mail:/var/mail:/bin/sh news:x:9:9:news:/var/spool/news:/bin/sh
+uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh proxy:x:13:13:proxy:/bin:/bin/sh
+postgres:x:31:32:postgres:/var/lib/postgres:/bin/sh
+www-data:x:33:33:www-data:/var/www:/bin/sh
+backup:x:34:34:backup:/var/backups:/bin/sh
+operator:x:37:37:Operator:/var:/bin/sh
+list:x:38:38:SmartList:/var/list:/bin/sh irc:x:39:39:ircd:/var:/bin/sh
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh
+nobody:x:65534:65534:nobody:/home:/bin/sh guest:x:1000:1000:Debian
+student:x:1000:1000:Student User,,,:/home/guest:/bin/bash
+identd:x:100:65534::/var/run/identd:/bin/false
+sshd:x:101:65534::/var/run/sshd:/bin/false
+                ]]></literallayout>
+                <para>So why is it short for &quot;concatenate&quot;? Because it can output
+                    several files all at once:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ pwd 
+/home/student 
+student@debian:~$ ls dataset
+one.txt. two.txt
+student@debian:~$ cd dataset 
+student@debian:~/dataset$ ls
+ one.txt two.txt 
+student@debian:~/dataset$ cat one.txt
+The coldsleep itself was dreamless. Three days ago they had
+been getting ready to leave, and now they were here. Little 
+Jefri complained about missing all the action, but Johanna 
+Olsndot was glad she'd been asleep; she had known some of 
+the grownups on the other ship. 
+
+-- A Fire Upon the Deep, Vernor Vinge (pg 11)
+
+student@debian:~/dataset$ cat two.txt
+An hour's difference either way and Peregrine Wickwrack-
+rum's life would have been very different.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 17)
+
+student@debian:~/dataset$ cat one.txt two.txt 
+The coldsleep itself was dreamless.  Three days ago they had
+been getting ready to leave, and now they were here.  Little
+Jefri complained about missing all the action, but Johanna
+Olsndot was glad she'd been asleep; she had known some of
+the grownups on the other ship.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 11)
+
+An hour's difference either way and Peregrine Wickwrack-
+rum&#38;apos;s life would have been very different.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 17)
+
+student@debian:~/dataset$ _ ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[Syntax:
+cat [file1 file2 ... ] ]]></literallayout>
+                <sect4>
+                    <title>Exercise:</title>
+                    <para>Now that you know how to navigate your way around the filesystem, and look
+                        at the contents of files that you might find there, explore a bit more.</para>
+                </sect4>
+            </sect3>
+            <sect3>
+                <title>The <command>more</command> and <command>less</command> commands</title>
+                <indexterm>
+                    <primary>more</primary>
+                </indexterm>
+                <indexterm>
+                    <primary>less</primary>
+                </indexterm>
+                <para>What if you want to view a longer text file? You can use a utility called a
+                    pager to do this. Two of the most common ones available on Linux based operating
+                    systems are &quot;more&quot; and &quot;less&quot;.</para>
+                <para>The &quot;more&quot; command is very simple, and only allows you to
+                    page down a line at a time using the &lt;enter&gt; key, or 24 lines at a
+                    time using the &lt;spacebar&gt; key. Hitting &quot;q&quot; will
+                    return you to the shell prompt.</para>
+                <para>The &quot;less&quot; command is the successor to
+                    &quot;more&quot;, and has more features. You can use the arrow keys to
+                    navigate your way around the document.</para>
+                <para>You can also perform a search my pressing the &quot;/&quot; key,
+                    followed by the string which you wish to search for, and finally followed by the
+                    &quot;&lt;enter&gt;&quot; key.</para>
+                <para>To search for the next occurrence of the same string, you can simply press
+                    &quot;/&quot; followed by &quot;&lt;enter&gt;&quot;. To
+                    search backwards from your current position, you can use the
+                    &quot;?&quot; instead of a &quot;/&quot;.</para>
+                <para>Pressing the &quot;h&quot; key will display the help page for
+                    &quot;less&quot;, which contains several more keystrokes which you may
+                    find useful.</para>
+                <literallayout class="monospaced"><![CDATA[ 
+Syntax:
+less [file1 ...]
+more [file1 ... ] 
+ ]]></literallayout>
+                <para>Now you have almost all the tools at your disposal to read all the
+                    documentation that comes with your Linux distribution!</para>
+            </sect3>
+            <sect3>
+                <title>The <command>ps</command> command</title>
+                <indexterm>
+                    <primary>ps</primary>
+                </indexterm>
+                <para>The &quot;ps&quot; command will give your a listing detailing your
+                    current &quot;process status&quot;, listing your processes which are
+                    currently running on the system on your current terminal.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$	<indexterm><primary>ps</primary>
+						</indexterm>ps
+ PID  TTY          TIME  CMD
+ 2700 pts/1     00:00:00 bash
+ 3034 pts/1     00:00:00 ps
+                ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[ Syntax:
+ ps ]]></literallayout>
+                <sect4>
+                    <title>Exercise:</title>
+                    <orderedlist>
+                        <listitem>
+                            <para>Is the ps command a shell built-in?</para>
+                        </listitem>
+                        <listitem>
+                            <para>How can you tell?</para>
+                        </listitem>
+                    </orderedlist>
+                </sect4>
+            </sect3>
+        </sect2>
+    </sect1>
+    <sect1 id="FilesandDirectories">
+        <title>Files and Directories</title>
+        <sect2>
+            <title>Files under Linux</title>
+            <para>Each disk drive in a Unix or Unix-like system can contain one or more file
+                systems. A file system consists of a number of cylinder groups, which in turn
+                contain inodes and data blocks.</para>
+            <indexterm>
+                <primary>super-block</primary>
+            </indexterm>
+            <indexterm>
+                <primary>cylinder groups</primary>
+            </indexterm>
+            <para>Each file system has its characteristics described by its
+                &quot;super-block&quot;, which in turn describes the cylinder groups. A copy
+                of the super-block is made in each cylinder group, to protect against losing it.</para>
+            <indexterm>
+                <primary>inode</primary>
+            </indexterm>
+            <para>A file is uniquely identified by its inode on the filesystem where it resides.</para>
+            <para>A data block is simply a set block of space on the disk in which the actual
+                contents of files are stored; often more than one block is used to hold the data for
+                a file.</para>
+        </sect2>
+        <sect2 id="Inodes">
+            <title>Inodes</title>
+            <para>An inode is a data structure which holds information, or metadata, about a file on
+                that filesystem.</para>
+            <para>You can use &quot;ls&quot; with the &quot;-i&quot; option to find
+                a file's inode number:</para>
+            <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -i 
+6553 one.txt 7427 two.txt ]]></literallayout>
+            <para>An inode itself contains the following information:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>the device where the inode resides</para>
+                </listitem>
+                <listitem>
+                    <para>locking information</para>
+                </listitem>
+                <listitem>
+                    <para>the addresses of the file's data blocks on disk (NOT the data blocks themselves)</para>
+                </listitem>
+            </itemizedlist>
+            <para>Let's look at the directory listing below:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~/dataset$ cd .. 
+student@debian:~$ ls -ila 
+total 8 
+4944 drwxr-xr-x    4 student  student      1024 Feb 19 03:45 .
+4943 drwxrwsr-x    3 root     staff        1024 Jan 29 22:32 ..
+5665 -rw-------    1 student  student       658 Feb 19 03:22 .bash_history
+4946 -rw-r--r--    1 student  student       509 Jan 25 12:27 .bash_profile
+6540 -rw-r--r--    1 student  student      1093 Jan 25 12:27 .bashrc
+6540 drwxr-xr-x    2 student  student      1024 Feb 19 03:45 dataset
+7425 drwxr-xr-x    2 student  student      1024 Feb 19 03:45 dataset]]></literallayout>
+            <para>The first line displayed is the total number of 512-byte blocks consumed by the
+                files in the directory displayed.</para>
+            <para>As you can see from the remaining output, a file has several attributes, or
+                metadata, associated with it. This data is stored in the inode and is, in field order:</para>
+            <sect3>
+                <title>File Mode</title>
+                <para>This is a ten character string which determines who is allowed access to the
+                    file. The string is composed of a single initial character, which determines the
+                    file type and a permission field.</para>
+            </sect3>
+            <sect3>
+                <title>File types</title>
+                <para>The following are the list of file types, and their associated character:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>- regular file</para>
+                    </listitem>
+                    <listitem>
+                        <para>d directory</para>
+                    </listitem>
+                    <listitem>
+                        <para>b block device</para>
+                    </listitem>
+                    <listitem>
+                        <para>c character device</para>
+                    </listitem>
+                    <listitem>
+                        <para>l symbolic link</para>
+                    </listitem>
+                    <listitem>
+                        <para>s socket link, also called a Unix networking socket</para>
+                    </listitem>
+                    <listitem>
+                        <para>p first-in first-out (FIFO) buffer, also called a named pipe</para>
+                    </listitem>
+                </itemizedlist>
+                <para>A regular file is the most common one that you will have to deal with; plain
+                    text files, configuration files, databases, archives, executables and even the
+                    kernel are all regular files.</para>
+                <para>A directory is a file, which contains zero or more other files names and their
+                    associated inode numbers.</para>
+                <para>You should only find character and block device files in your
+                    &quot;/dev&quot; directory. These files are used to allow communication
+                    between &quot;userland&quot; programs and the kernel. Character devices
+                    transfer data a single character at a time (eg, console, printer), while block
+                    devices transfer data in fixed-size chunks (eg, harddrive).</para>
+                <para>A symbolic link is a pointer to another file, and is therefore useful for
+                    creating shortcuts or aliases to files and directories.</para>
+                <para>A socket link file allows for two or more programs to communicate with each
+                    other. A common example of this is the system logging daemon (syslogd), which
+                    other programs communicate with via the &quot;/dev/log&quot; file. The
+                    logging deamon reads information out of the socket file, while other
+                    applications send information to it.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ ls -l /dev/log
+srw-rw-rw- 1 root root 0 Feb 25 11:03 /dev/log 
+                ]]></literallayout>
+                <para>A FIFO buffer is a file whose contents are read out in the order that they
+                    were written to the file.</para>
+                <para>A semaphore file, in Linux programming parlance, is simply a file used for two
+                    or more Linux processes to communicate with each other; also known as
+                    Inter-Process Communication, or IPC for short.</para>
+                <para>The simplest sort of semaphore is a binary one; in other words, it is either
+                    &quot;on&quot; (set to &quot;1&quot;) or &quot;off&quot;
+                    (set to &quot;0&quot;). The semaphore file can be read and written to,
+                    this is based on its permissions, by the processes that wish to communicate with
+                    each other.</para>
+                <para>An example might be a database application, which will only make a copy of the
+                    database when the semaphore is set to &quot;off&quot;, indicating that
+                    the database is not currently in use.</para>
+            </sect3>
+            <sect3>
+                <title>File Permissions</title>
+                <para>The 9 characters that follow the file type character are in fact three
+                    triplets, which affect who can do what with the file. The triplets are the
+                    permissions which affect: the file owner, the file group and everyone else.</para>
+                <para>The three possible permissions are, in order:</para>
+                <table>
+                    <title>File Permissions Table</title>
+                    <tgroup align="center" cols="5">
+                        <tbody>
+                            <row>
+                                <entry>r</entry>
+                                <entry>read access</entry>
+                                <entry>OR</entry>
+                                <entry>-</entry>
+                                <entry>not readable</entry>
+                            </row>
+                            <row>
+                                <entry>w</entry>
+                                <entry>write access</entry>
+                                <entry>OR</entry>
+                                <entry>-</entry>
+                                <entry>not writeable</entry>
+                            </row>
+                            <row>
+                                <entry>x</entry>
+                                <entry>execute access</entry>
+                                <entry>OR</entry>
+                                <entry>-</entry>
+                                <entry>not executable</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <para>The absence of a permission bit is indicated with a dash (&quot;-&quot;).</para>
+                <para>The read and write permissions are self-explanatory for both the regular and
+                    directory files.</para>
+                <para>If the execute permission is set on a regular file, it means that the file can
+                    be executed; in other words, it's an application or program that may be run on
+                    the system.</para>
+                <para>If the execute permission is set on a directory, it means that the directory
+                    can be accessed (eg, using the &quot;cd&quot; command).</para>
+                <para>For more information on file permissions, see the section on
+                    &quot;chmod&quot; below.</para>
+                <!-- Include Xref -->
+            </sect3>
+            <sect3>
+                <title>Number of links</title>
+                <para>This is the number of links (see hard links below) that currently point to the
+                    file; when this number reaches zero, the filesystem makes the blocks containing
+                    the file contents available for use again. The most common scenario where this
+                    occurs is when the file is deleted.</para>
+            </sect3>
+            <sect3>
+                <title>Owner name</title>
+                <para>The person who owns the file. This information is stored as a numeric value on
+                    the filesystem, but is then looked up by tools such as &quot;ls&quot;
+                    from the /etc/passwd file, or equivalent file.</para>
+            </sect3>
+            <sect3>
+                <title>Group Name</title>
+                <para>The group whom owns the file. This information is stored as a numeric value on
+                    the filesystem, but is then looked up by tools such as &quot;ls&quot;
+                    from the /etc/group file, or equivalent information source.</para>
+                <para>A Unix group may contain none, one or more users, who will then be able to
+                    access the files and directories owned by that group, based on that groups
+                    permissions as discussed above. This is useful for sharing files between two
+                    people, as a file can only have one owner.</para>
+                <!-- This last paragraph was not in the final edit, maybe should be there? -->
+            </sect3>
+            <sect3>
+                <title>Number of bytes in the file</title>
+                <para>The size of the file, given in bytes.</para>
+            </sect3>
+            <sect3>
+                <title>Modification Time</title>
+                <para>The abbreviated Month Name, Day Of The Month, Hour and Minute the file was
+                    last modified.</para>
+                <para>If the modification time of the file is more than 6 months in the past or
+                    future, then the year of the last modification is displayed in place of the hour
+                    and minute fields.</para>
+            </sect3>
+            <sect3>
+                <title>File Name</title>
+                <para>The File name is not stored in the inode!</para>
+                <para>File names under Linux are case-sensitive. They are limited to 255 characters
+                    in length and can contain uppercase, lowercase, numeric characters as well as
+                    escape characters.</para>
+                <para>Although it's a good idea to keep them generally all in lowercase avoiding use
+                    of escape characters where possible, so that the file names are easier for you
+                    to deal with in the shell.</para>
+                <para>The filename is held in the directory listing and referenced by the inode
+                    number. Look at the following diagram this should make it clearer.</para>
+                <figure>
+                    <title>Filesytems, Cylinder, Inodes and Superblock Layouts</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="../images/diagram07.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+            </sect3>
+        </sect2>
+        <!-- Inodes ends -->
+        <sect2>
+            <!-- The Linux FS Hierarchy starts -->
+            <title>Linux FS Hierarchy</title>
+            <para>The Linux filesystem is broken up into a hierarchy similar to the one depicted
+                below, of course you may not see this entire structure if you are working with the
+                simulated Linux environment:</para>
+            <figure>
+                <title>Debian Directory listing</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="../images/diagram04.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>The &quot;/&quot; directory is known as the root of the filesystem, or the
+                root directory (not to be confused with the root user though).</para>
+            <para>The &quot;/boot&quot; directory contains all the files that Linux requires
+                in order to bootstrap the system; this is typically just the Linux kernel and its
+                associated driver modules.</para>
+            <para>The &quot;/dev&quot; directory contains all the device file nodes that the
+                kernel and system would make use of.</para>
+            <para>The &quot;/bin&quot;, &quot;/sbin&quot; and
+                &quot;/lib&quot; directories contain critical binary (executable) files
+                which are necessary to boot the system up into a usable state, as well as utilities
+                to help repair the system should there be a problem.</para>
+            <para>The &quot;/bin&quot; directory contains user utilities which are
+                fundamental to both single-user and multi-user environments. The
+                &quot;/sbin&quot; directory contains system utilities.</para>
+            <para>The &quot;/usr&quot; directory was historically used to store
+                &quot;user&quot; files, but its use has changed in time and is now used to
+                store files which are used during everyday running of the machine, but which are not
+                critical to booting the machine up. These utilities are similarly broken up into
+                &quot;/usr/sbin&quot; for system utilities, and &quot;/usr/bin&quot;
+                for normal user applications.</para>
+            <para>The &quot;/etc&quot; directory contains almost all of the system
+                configuration files. This is probably the most important directory on the system;
+                after an installation the default system configuration files are the ones that will
+                be modified once you start setting up the system to suit your requirements.</para>
+            <para>The &quot;/home&quot; directory contains all the users data files.</para>
+            <para>The &quot;/var&quot; directory contains the user files that are
+                continually changing.</para>
+            <para>The /usr directory contains the static user files.</para>
+            <para>The filesystem layout is documented in the Debian distribution in the hier(7) man page.</para>
+            <sect3>
+                <title>Exercise:</title>
+                <para>Read the file system hierarchy man page. Can you find the directory where this
+                    particular man page file itself resides?</para>
+            </sect3>
+            <sect3>
+                <title>Explanation of how to use /var and /usr efficiently:</title>
+                <para>One of the benefits of having a /var directory which contains all the files
+                    that are changing or which are variable, and having another directory called
+                    /usr where the files are static and they are only read, would be that if you
+                    wanted to create an incredibly secure system you could in fact mount your /usr
+                    directory read-only.</para>
+                <para>This would mean that even while the OS system is up and running, no one, not
+                    even the root user is allowed to modify any files in that directory.</para>
+                <para>However, because the system needs to be able to have read and write access to
+                    certain files in order to function, the /var partition would serve this purpose
+                    exclusively, allowing you to mount /usr as read-only.</para>
+                <para>So this means that you will be able to have a fully running machine doing all
+                    the things you would normally do except it will be virtually impossible for
+                    anybody to be able to place any Trojans or any other malicious binaries in your
+                    /usr directory.</para>
+                <para>Another benefit is that you can run diskless or almost diskless clients. Your
+                    /usr directory could for instance be mounted over the network from another
+                    machine. This means that you don't have to sacrifice all the disk space and
+                    instead you could rely on the network to provide your system with the needed
+                    binaries. This used to be very popular 5-10 years ago when disk space was quite
+                    a lot more expensive than it is today.</para>
+                <para>However thin-client technology, that seems to be making a comeback, could
+                    benefit quite a lot with being able to mount large applications from a remote
+                    file system that has a large amount of space, and the thin client could have no
+                    or very little disk space available. Examples of large applications are Open
+                    Office and Mozilla.</para>
+            </sect3>
+        </sect2>
+        <sect2 id="EditingFilesUnderLinux">
+            <title>Editing Files under Linux</title>
+            <!-- History of editing starts -->
+            <sect3>
+                <title>History</title>
+                <para>The editor we will be using is a text editor called &quot;vim&quot;.
+                    Back in the days when Unix was growing up, people didn't even have a visual
+                    console to be able to see what was going on when they were running commands or
+                    editing files. They would use tele-type terminals.</para>
+                <para>The command that they used to edit files, was ed. ed is a very unfriendly
+                    editor, it is not as interactive as you would be used to using in most modern editors.</para>
+                <para>The &quot;ed&quot; application would simply give you a prompt and then
+                    you would have to tell ed, which line you want displayed. It would then display
+                    that line to you, that line only - you wouldn't be able to get an overall feel
+                    of what the text file looked like that you were editing.</para>
+                <para>If you wanted to insert a line, then you would tell ed that you wanted to
+                    insert a line at a particular position and then pipe the line that you wanted to
+                    insert and it would then insert it for you.</para>
+                <para>If you wanted to remove a word or delete a line, you would have to specify the
+                    location of the word or line respectively.</para>
+                <para>Obviously this is fine if you know the file or it is very short but if it's a
+                    large file or it's new to you then you're going to spend a long time in order to
+                    make any modifications to it.</para>
+                <para>Some time after this it became possible to get video display units, or visual
+                    consoles, which had the ability allow users to view more than a single line at a
+                    time. Around this time, &quot;ed&quot; developed into
+                    &quot;ex&quot;, which was a more powerful version of the editor, but
+                    still limited to working on a single line at a time.</para>
+                <para>Unfortunately, these consoles were initially very slow, so screen output was
+                    still limited to the bare minimum.</para>
+                <para>Time progressed, and displays become faster; in fact, fast enough to be able
+                    to display an entire 25 lines without too much effort; and here we enter the era
+                    of the visual editor, also known as &quot;vi&quot;.</para>
+                <para>Vi has 3 modes of operation: visual mode, insert/editing mode and an ex mode
+                    (where you actually access the original command line ed editor).</para>
+                <para>Those of you who have had to use edlin in DOS before will probably be able to
+                    relate to ex.</para>
+                <para>Under Linux, there is no vi, there is vi improved, or vim. vim is compatible
+                    with vi in almost all respects and has a vi compatibility mode available to
+                    complete the compatibility in any other respects. However vim expands greatly on
+                    the features of vi and allows you to do extra things such as Syntax
+                    highlighting, better integration with various other software packages. The
+                    ability to perform scripting functions on your documents, etc.</para>
+            </sect3>
+            <!-- History of editing ends -->
+            <sect3>
+                <!-- Using vim Starts -->
+                <title>Using vim</title>
+                <para>To start up vim, just type &quot;vi&quot;, followed by the name of the
+                    file you want to edit.</para>
+                <note>
+                    <para>On Debian systems you have the option of having both an open source
+                        version of vi (called nvi) and vim installed at the same time.</para>
+                </note>
+                <para>Debian will actually call &quot;vim&quot; when you execute the
+                    &quot;vi&quot; command if &quot;vim&quot; is installed,
+                    otherwise it will load &quot;nvi&quot;.</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ cd dataset/
+student@debian:~/dataset$ vi one.txt_ ]]></literallayout>
+                <para>In the example above, we're opening the file &quot;one.txt&quot; for editing.</para>
+                <para>You may find the keys for vim to be tricky to learn, but, once mastered, they
+                    allow you to edit documents and configuration files with the minimum number of
+                    keystrokes, and with great speed.</para>
+                <para>Initially, vim will start in &quot;visual mode&quot;. Once open the
+                    screen will be blank and probably have tildes running down the left hand side of
+                    the page indicating un-used lines.</para>
+                <figure>
+                    <title>Empty vi buffer</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="../images/empty_vi.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <para>In this mode you can use the &quot;h&quot;, &quot;j&quot;,
+                    &quot;k&quot;, and &quot;l&quot; keys to perform your movement functions.</para>
+                <figure>
+                    <title>Movement keys in vi</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="../images/diagram03.png" format="PNG" depth="10cm" scalefit="1"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <para>vim also allows you to use the cursor keys, so if you find the so-called VI
+                    movement keys daunting you can make use of these instead.</para>
+                <para>To switch to &quot;insert mode&quot;, press the &quot;i&quot;
+                    key, notice that the letter &quot;i&quot; does not print on the screen -
+                    but now if you start typing your text will be shown on the screen.</para>
+                <para>This will tell vim that you want to start inserting text at the current cursor
+                    position in the file that you are editing. You can tell when you are in insert
+                    mode as vim will display the word &quot;INSERT&quot; in the bottom left
+                    of the screen.</para>
+                <para>By pressing &quot;i&quot; you will enter insert mode, text will be
+                    inserted to the right of the current position of the cursor. To insert from the
+                    beginning of the line and get into insert mode at the same time, press
+                    &quot;I&quot; (shift + &quot;i&quot;).</para>
+                <para> To insert text in the line above the cursor, press &quot;O&quot;
+                    (shift + &quot;o&quot;). To insert in the line below the cursor, press
+                    &quot;o&quot; . To append text just after the current position of the
+                    cursor press &quot;a&quot;, to append text at the end of the currentl
+                    line, press &quot;A&quot; (shift + &quot;a&quot;). </para>
+                <para>The figure below demonstrates how this affects the place where you will insert
+                    text. The first one indicates the position of the cursor, before entering into
+                    insert mode in these examples.</para>
+                <figure>
+                    <title>Different ways of getting into Insert Mode, and how that effects the
+                        place where text is inserted.</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="../images/diagram06.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <para>When you want to return to visual mode, press the &quot;escape
+                    key&quot; (Esc) on the keyboard. The word INSERT will disappear from the
+                    bottom of your screen.</para>
+                <para>You can delete characters while in visual mode by hitting the
+                    &quot;x&quot; key; this will delete the character currently above the
+                    cursor. (A capital &quot;X&quot; will work as a backspace key does
+                    deleting one character and moving backwards to the next character.)</para>
+                <para>The shortcut to delete a line is &quot;dd&quot;; hit the
+                    &quot;d&quot; twice in quick succession. (You can use
+                    &quot;p&quot; to paste the line afterwards). To delete two lines you
+                    would use the command &quot;2dd&quot;.</para>
+                <para>If you wish to join the line below your current line to the end of the current
+                    line use &quot;J&quot; (that's a capital).</para>
+                <para>To insert a line below the one you are currently editing, you can press
+                    &quot;o&quot;; this will also place you in insert mode on the newly
+                    created line. (Capital &quot;O&quot; will open a line above your current
+                    line and also put you into INSERT mode.)</para>
+                <para>To tell vim that you wish to save and exit, press &quot;ZZ&quot; (two
+                    capital &quot;Z&quot;'s in quick succession).</para>
+                <para>You can enter ex mode, which allows you to work as if you were in the
+                    &quot;ex&quot; editor, by hitting the &quot;:&quot; key when in
+                    visual mode. A colon will be printed at the base of the screen waiting for an ex
+                    command. To get back to your text press the escape key (Esc).</para>
+                <!-- Another image? as on top of page 38 -->
+                <para>While in &quot;ex&quot; mode try some of the following suggestions:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>To access vim's built in help system, type &quot;help&quot; at
+                            the ex prompt (:) and ENTER.</para>
+                    </listitem>
+                    <listitem>
+                        <para>You can perform a search an replace in ex mode by using the following
+                            Syntax: %s/search/replace/g</para>
+                        <para>Try the example above in the sample text window, search globally for
+                            the occurrence(s) of &quot;now&quot; and change that to &quot;not&quot;.</para>
+                    </listitem>
+                    <listitem>
+                        <para>You can also save &quot;:w&quot; and quit
+                            &quot;:q&quot; or save &#38; quit in one command using
+                            &quot;:wq&quot; from vim while in ex mode. If you do this point
+                            remember to re-enter vim afterwards.</para>
+                    </listitem>
+                </itemizedlist>
+                <para>To recap there are three modes of operation:</para>
+                <orderedlist>
+                    <listitem>
+                        <para>Command mode</para>
+                        <para>Allows positioning and editing commands to perform functions. Entered
+                            via (Esc), from entry mode, or when you return from Last-line mode</para>
+                    </listitem>
+                    <listitem>
+                        <para>Entry mode</para>
+                        <para>Allows you to enter text. Enter this mode via typing; A i I o O c C s
+                            S or R from command mode.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Last-line mode</para>
+                        <para>Initiated from command mode by entering advanced editing commands like
+                            : (a colon), / (a forward slash), ? (a question mark) and ! (a bang or
+                            exclamation mark).</para>
+                    </listitem>
+                </orderedlist>
+                <literallayout class="monospaced"><![CDATA[Syntax:
+vi &lt;filename&gt; ]]></literallayout>
+                <sect4>
+                    <title>Exercise</title>
+                    <para>Vim comes with an excellent tutorial session. It takes about 30 minutes to
+                        complete, but covers all the basics that you need to know and is very easy
+                        to follow.</para>
+                    <para>To start the vim tutor, type the following:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ vimtutor    ]]></literallayout>
+                </sect4>
+            </sect3>
+            <!-- Using vim ENDS -->
+        </sect2>
+        <!-- The Linux FS Hierarchy ENDS -->
+        <sect2>
+            <!-- Working with normal data files Starts -->
+            <title>Working with normal data files</title>
+            <sect3>
+                <title>Naming conventions (lowercase, etc.)</title>
+                <para>Linux filesystems are case sensitive, and support the full range of high and
+                    low ASCII characters; this makes it very powerful.</para>
+                <para>However, humans can only easily deal with a small number of this range of
+                    characters. For this reason, it's a good idea to keep the names of your files
+                    all lowercase, and to avoid spaces, brackets or any other
+                    &quot;special&quot; characters.</para>
+                <para>Important files, like &quot;README&quot; may be named with all
+                    capitals, so that they stand out better in a listing.</para>
+                <para>The &quot;/&quot; character is special in that it is used to denote a
+                    directory structure.</para>
+                <para>Unlike DOS or Windows, Linux has no strict concept of having file
+                    &quot;extensions&quot; and thus does not use them to determine what
+                    sorts of file it is. There is no &quot;ls.exe&quot;, instead it's just &quot;ls&quot;.</para>
+                <para>However, there is nothing to stop you creating a
+                    &quot;readme.txt&quot; file with a .txt extension; Linux just treats the
+                    period (&quot;.&quot;) as part of the filename instead of a special
+                    character. Indeed, you can have multiple periods; for example &quot;backup.tar.gz&quot;.</para>
+                <para>So, let us go over the rules in a summary:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Linux is case sensitive.</para>
+                    </listitem>
+                    <listitem>
+                        <para>We would advise that you use the lower-case alpha characters (a to z)
+                            and the numeric characters 0 to 9 when you name a file.</para>
+                    </listitem>
+                    <listitem>
+                        <para>A (.) in front of a filename means that it is a hidden file, whereas a
+                            (.) anywhere else in the filename is treated as a normal character by Linux.</para>
+                    </listitem>
+                    <listitem>
+                        <para>There are certain characters that will be interpreted by the shell and
+                            have a special function within the shell - do not use these in a
+                            filename. Some of these characters are:</para>
+                        <para>; | &lt; &gt; lefttick &quot; righttick $ ! % ( ) ^ \ [ ]
+                            &#38; ? #</para>
+                    </listitem>
+                    <listitem>
+                        <para>Don't use control characters such as ^G (bell) or ^d (interrupt
+                            character), the space bar, the tab or the backspace. These all have
+                            special meaning to the shell.</para>
+                    </listitem>
+                    <listitem>
+                        <para>Observe the rules for the length of your filenames.</para>
+                    </listitem>
+                </itemizedlist>
+            </sect3>
+            <!-- naming conventions ends -->
+            <sect3>
+                <!-- Using &quot;file&quot;, magic Starts -->
+                <title>Using &quot; <command>file</command>&quot;, <command>magic</command>
+                </title>
+                <indexterm>
+                    <primary>file</primary>
+                </indexterm>
+                <indexterm>
+                    <primary>magic</primary>
+                </indexterm>
+                <para>So how can you tell what sort of file a file is without actually looking
+                    inside if it doesn't have a handy extension?</para>
+                <para>The file command examines the contents of the file, and then compares it
+                    against a &quot;magic&quot; filter file, which tells the
+                    &quot;file&quot; command what sort of patterns would exist in what sort
+                    of file.</para>
+                <para>This is a powerful command, give it a try:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~$ file /bin/ls 
+/bin/ls: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV),
+dynamically linked (uses shared libs), stripped 
+student@debian:~$ file dataset 
+dataset: directory 
+student@debian:~$ file dataset/one.txt 
+dataset/one.txt: ASCII English text 
+student@debian:~$ file /etc/init.d/rc 
+/etc/init.d/rc: Bourne shell script text executable    ]]></literallayout>
+                <literallayout class="monospaced"><![CDATA[Syntax:
+file &lt;file&gt;
+    ]]></literallayout>
+                <bridgehead>Exercise:</bridgehead>
+                <para>Use the file command on some of the files in the /dev directory.</para>
+            </sect3>
+            <!-- Using &quot;file&quot;, magic Ends -->
+            <sect3>
+                <!-- File manipulation commands Starts -->
+                <title>File manipulation commands:</title>
+                <para>There are several command line tools available for manipulating files in a
+                    Linux environment:</para>
+                <sect4>
+                    <!-- touch Starts -->
+                    <title>
+                        <command>touch</command>
+                    </title>
+                    <indexterm>
+                        <primary>touch</primary>
+                    </indexterm>
+                    <para>This command can be used to create an empty file, or update the
+                        modification time of an already existing file.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ cd dataset/
+student@debian:~/dataset$ ls 
+one.txt two.txt
+student@debian:~/dataset$ touch testing 
+student@debian:~/dataset$ ls 
+one.txt testing two.txt 
+student@debian:~/dataset$ _
+                    ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+touch &lt;filename&gt;
+    ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Try using touch to update the modification time of an existing file. What
+                        command can you use to check that the time has in fact been changed?</para>
+                </sect4>
+                <!-- touch ends -->
+                <sect4>
+                    <!-- mv, rm, cp Starts -->
+                    <title>
+                        <command>mv</command>, <command>rm</command>, <command>cp</command>
+                    </title>
+                    <indexterm>
+                        <primary>mv</primary>
+                    </indexterm>
+                    <indexterm>
+                        <primary>rm</primary>
+                    </indexterm>
+                    <indexterm>
+                        <primary>cp</primary>
+                    </indexterm>
+                    <para>You can use the &quot;mv&quot; (move) command to move a file into
+                        another directory, or to change its name:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -i 
+6553 one.txt 7437 testing 7427 two.txt 
+student@debian:~/dataset$ mv testing testing.123 
+student@debian:~/dataset$ ls -i
+6553 one.txt 7437 testing.123 7427 two.txt 
+student@debian:~/dataset$ _ ]]></literallayout>
+                    <para>Check the inode of the file above that you have just moved - what do you notice?</para>
+                    <para>You should notice that the inode remains the same, therefore the only thin
+                        that has changed is the filename, which is held in the directory listing.
+                        Remember that the filename is ONLY held in the directory listing and not by
+                        the inode.</para>
+                    <para>The mv, cp and rm commands all accept a &quot;-i&quot; switch.
+                        This makes the command &quot;interactive&quot;, which means that the
+                        command will ask you to confirm an operation if it is a potentionally
+                        destructive one. For example, if you copy one file over another, or try to
+                        delete a file.</para>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+mv [-i] &lt;oldfilename&gt; &lt;newfilename&gt; 
+mv [-i] &lt;filename&gt; &lt;directory&gt;
+    ]]></literallayout>
+                    <para>You can use the &quot;cp&quot; (copy) command to make a copy of a
+                        file - in other words to make an identical copy of the datablocks but at
+                        another address, using a different inode number:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -i 
+6553 one.txt 7437 testing.123 7427 two.txt
+student@debian:~/dataset$ cp testing.123 testing.456 
+student@debian:~/dataset$ ls -i
+6553 one.txt 7437 testing.123  7438 testing.456 7427 two.txt
+    ]]></literallayout>
+                    <para>In the example above using the cp command what happens with the inodes for
+                        testing.123 and test.456 - are they the same?</para>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+cp [-i] &lt;file1&gt; &lt;file2&gt;
+    ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>How would you copy the file testing.456 into your home directory - using
+                        partial pathnames?</para>
+                    <para>Once you've made a copy of the file, check the new file's inode. Is it
+                        different to the original?</para>
+                    <para>What would the inode number be if you had moved the file instead of
+                        copying it?</para>
+                    <para>You can delete files with the &quot;rm&quot; (short for remove) command.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls 
+one.txt testing.123 two.txt 
+student@debian:~/dataset$ rm testing.123 
+student@debian:~/dataset$ ls 
+one.txt two.txt testing.456
+student@debian:~/dataset$]]></literallayout>
+                    <para>You can use the &quot;-r&quot; flag with &quot;rm&quot; to
+                        recursively delete files and directories. Use this option with extreme caution!</para>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+rm [-ir] &lt;filename&gt; ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Delete the previous &quot;testing.456&quot; file that we created
+                        with touch, and then copied and/or moved into your home directory.</para>
+                </sect4>
+                <!-- mv, rm, cp ENDS -->
+                <sect4>
+                    <!-- mkdir, rmdir Starts -->
+                    <title>
+                        <command>mkdir</command>, <command>rmdir</command>
+                    </title>
+                    <indexterm>
+                        <primary>mkdir</primary>
+                    </indexterm>
+                    <indexterm>
+                        <primary>rmdir</primary>
+                    </indexterm>
+                    <para>To create and remove directories, you can use the mkdir (make directory)
+                        and rmdir (remove directory) commands:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls
+ one.txt two.txt 
+student@debian:~/dataset$ mkdir testdir 
+student@debian:~/dataset$ cd testdir
+student@debian:~/dataset/testdir$ ls 
+student@debian:~/dataset/testdir$ cd .. 
+student@debian:~/dataset$ rmdir testdir
+student@debian:~/dataset$ ls 
+one.txt two.txt    
+                    ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Create a directory called &quot;test&quot;. Now try the following
+                        command inside your &quot;dataset&quot; directory:</para>
+                    <para>cp one.txt test</para>
+                    <para>What happens to test? Does it become overwritten with
+                        &quot;one.txt&quot;? Or does something else happen?</para>
+                </sect4>
+                <!-- mkdir, rmdir ENDS -->
+                <sect4>
+                    <!-- grep Starts -->
+                    <title>
+                        <command>grep</command>
+                    </title>
+                    <indexterm>
+                        <primary>grep</primary>
+                    </indexterm>
+                    <para>This is a very powerful command and we will only cover the basics here.</para>
+                    <para>The &quot;grep&quot; command will search through a file for a
+                        certain pattern, and then display lines, which contain the matching pattern:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ grep &quot;action&quot; one.txt 
+Jefri complained about missing all the action, but Johanna 
+                    ]]></literallayout>
+                    <para>You don't have to put the search pattern in double quotation marks, but it
+                        does help to avoid confusion, especially with more complicated patterns, so
+                        it's a good habit to get into.</para>
+                    <para>You can also use grep on an input stream; see the pipe
+                        (&quot;|&quot;) section further on in the course.</para>
+                    <para>The command also has the following flags:</para>
+                    <literallayout class="monospaced"><![CDATA[ -n displays the line numbers of the lines which match 
+ -v inverts the match, ie, displays non-matching lines 
+ -i makes the match case-insensitive ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ grep &quot;action&quot; one.txt
+ Jefri complained about missing all the action, but Johanna 
+student@debian:~/dataset$ grep -vi &quot;action&quot; one.txt 
+The coldsleep itself was dreamless.  Three days ago they had
+been getting ready to leave, and now they were here.  Little
+Olsndot was glad she&#38;apos;d been asleep; she had known some of
+the grownups on the other ship.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 11)
+
+
+student@debian:~/dataset$ _ 
+                    ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[
+Syntax:
+grep [-nvi] &lt;filename1&gt; &lt;filename...&gt; 
+                    ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Practice using the grep command using the switches above. Can you find all
+                        the lines in the file called &quot;two.txt&quot; which contain a the
+                        letter &quot;l&quot;.</para>
+                </sect4>
+                <!-- grep ends -->
+                <sect4>
+                    <!-- find starts -->
+                    <title>find</title>
+                    <para>The find command is powerful, but is sometimes tricky to get ones head around.</para>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+find from-directory [-options matchspec] [and-action] 
+
+From-directory:
+/ to specify a directory name 
+. current directory 
+                    ]]></literallayout>
+                    <para>Remember though that you would have to have permissions to look in the
+                        directory(ies) that you specify to search through.</para>
+                    <para>Options and matchspec:</para>
+                    <orderedlist>
+                        <listitem>
+                            <para>name &quot;foo.txt&quot;</para>
+                            <para>This option matches all file names matching the pattern, wildcards
+                                such as &quot;*&quot; and &quot;?&quot; can be used,
+                                but then the name should be enclosed in quotes</para>
+                        </listitem>
+                        <listitem>
+                            <para>type f, d, c, b, l, s, etc.</para>
+                            <para>Matches all files of a certain type, e.g. f=regular file,
+                                d=directory file, c=character device file, b=block device file, etcetera</para>
+                        </listitem>
+                        <listitem>
+                            <para>user username</para>
+                            <para>Matches all files belonging to the specified user</para>
+                        </listitem>
+                        <listitem>
+                            <para>group groupname</para>
+                            <para>Matches all the files belonging to a certain group</para>
+                        </listitem>
+                    </orderedlist>
+                    <para>You could negate an option using the exclamation mark
+                        (&quot;!&quot;), but check first on escaping the meaning of certain
+                        characters to the shell (especially the bash shell).</para>
+                    <para>And-action:</para>
+                    <orderedlist>
+                        <listitem>
+                            <para>print</para>
+                            <para>To print the results to the terminal screen; this is the default action.</para>
+                        </listitem>
+                        <listitem>
+                            <para>exec command {} \;</para>
+                            <para>If finding a match, then execute the command on that file. The
+                                Syntax for this is important, the curly braces will hold the name of
+                                the file that has been found in order that the command can execute.
+                                The semicolon means separate the commands so if there is more than
+                                one match found each will be dealt with. The backslash escapes the
+                                meaning of the semicolon to the shell and keeps it as a semicolon.</para>
+                        </listitem>
+                        <listitem>
+                            <para>ok command {} \;</para>
+                            <para>If finding a match, then ask if it is OK to execute the command on
+                                that file. The Syntax for this is important, the curly braces will
+                                hold the name of the file that has been found in order that the
+                                command can execute. The semicolon means separate the commands so if
+                                there is more than one match found each will be dealt with. The
+                                backslash escapes the meaning of the semicolon to the shell and
+                                keeps it as a semicolon.</para>
+                        </listitem>
+                    </orderedlist>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ find . -name &quot;one.txt&quot; 
+./dataset/one.txt 
+student@debian:~$ find . -name &quot;one.txt&quot; -ok rm {} \; 
+&lt; rm ... ./dataset/one.txt &#62; ? n 
+student@debian:~$ find . -name &quot;one.txt&quot; -exec cat {} \; 
+The coldsleep itself was dreamless.  Three days ago they had
+been getting ready to leave, and now they were here.  Little
+Jefri complained about missing all the action, but Johanna
+Olsndot was glad she&#38;apos;d been asleep; she had known some of
+the grownups on the other ship.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 11)  ]]></literallayout>
+                    <para>Let's just analyse the second example to see exactly what happens:</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>It does find the file, we know that from our first example.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Now it has to execute a command on that file:</para>
+                            <para>-ok rm {foo.txt};</para>
+                        </listitem>
+                        <listitem>
+                            <para>Do not remove this file so say NO when it asks Y/N? to removing
+                                that file, and enter.</para>
+                        </listitem>
+                        <listitem>
+                            <para>If there had been two files with the name found (foo.txt and
+                                tmp/foo.txt) then each would have been put into the same command
+                                sequence as follows:</para>
+                            <para>-ok rm {foo.txt}; -ok rm {tmp/foo.txt};</para>
+                            <para>Each time you would have been asked if you wanted to remove the
+                                file and each time you would give your answer Y/N and enter.</para>
+                        </listitem>
+                    </itemizedlist>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ find dataset -name &quot;*.txt&quot; -exec ls -l {} \; 
+-rw-r--r--    1 student  student       321 Feb 19 03:10 dataset/one.txt
+-rw-r--r--    1 student  student       150 Feb 19 03:45 dataset/two.txt
+                    ]]></literallayout>
+                    <para>This command does a long listing on all files in the
+                        &quot;dataset&quot; directory which end in &quot;.txt&quot;</para>
+                    <literallayout class="monospaced"><![CDATA[ student@debian:~$ find . \! -name &quot;*.txt&quot; 
+.
+./.bashrc
+./.bash_profile
+./.bash_history
+./dataset
+./dataset2
+./dataset2/relay01.dat
+./dataset2/relay02.dat
+./dataset2/relay03.dat
+                    ]]></literallayout>
+                    <para>You can also use the &quot;-o&quot; option to cause the options to
+                        be logically ordered:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ find . -name &quot;one.*&quot; -o -name &quot;two.*&quot; 
+./dataset/one.txt
+./dataset/two.txt 
+                    ]]></literallayout>
+                    <para>As you can see, this finds all files in the current directory which begin
+                        in either &quot;one.&quot; <emphasis>OR</emphasis> &quot;two.&quot;.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~$ find . -name &quot;*.txt&quot; -user student 
+foo.txt ]]></literallayout>
+                </sect4>
+                <!-- find ends -->
+                <sect4>
+                    <!-- head and tail Starts -->
+                    <title>
+                        <command>head</command> and <command>tail</command>
+                    </title>
+                    <indexterm>
+                        <primary>head</primary>
+                    </indexterm>
+                    <indexterm>
+                        <primary>tail</primary>
+                    </indexterm>
+                    <para>The head and tail commands can be used to inspect the first 10 or the last
+                        10 lines of a file, respectively. You can specify a &quot;-#&quot;
+                        parameter to change the number of lines that are displayed.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ head /etc/passwd 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:100:sync:/bin:/bin/sync
+games:x:5:100:games:/usr/games:/bin/sh
+man:x:6:100:man:/var/cache/man:/bin/sh
+lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+mail:x:8:8:mail:/var/mail:/bin/sh
+news:x:9:9:news:/var/spool/news:/bin/sh
+student@debian:~/dataset$ head one.txt
+The coldsleep itself was dreamless.  Three days ago they had
+been getting ready to leave, and now they were here.  Little
+Jefri complained about missing all the action, but Johanna
+Olsndot was glad she&#38;apos;d been asleep; she had known some of
+the grownups on the other ship.
+
+  -- A Fire Upon the Deep, Vernor Vinge (pg 11)
+
+student@debian:~/dataset$ _ ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[ Syntax:
+head [-#] &lt;file1&gt; &lt;file#&gt; 
+tail [-#] &lt;file1&gt; &lt;file#&gt; ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Can you head or tail more than one file using a single command? How?</para>
+                </sect4>
+                <!-- head and tail ENDS -->
+                <sect4>
+                    <!-- wc Starts -->
+                    <title>
+                        <command>wc</command>
+                    </title>
+                    <indexterm>
+                        <primary>wc</primary>
+                    </indexterm>
+                    <para>The &quot;wc&quot; or word count command does a word count on a
+                        file, and displays the following information:</para>
+                    <para>lines, words, characters</para>
+                    <para>You can also use the -l, -w and -c switches to limit the command to only
+                        displaying some of these.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ wc one.txt 
+8      57     321 one.txt
+student@debian:~/dataset$ wc -l one.txt 
+8 one.txt 
+student@debian:~/dataset$ _ 
+                    ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[
+Syntax: 
+wc [-lwc] &lt;file&gt; &lt;file1&gt;
+l -- displays lines in file
+w -- displays words in file
+c -- displays characters in file
+                    ]]></literallayout>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Can you run wc on more than one file at once? Can you combine the commands switches?</para>
+                </sect4>
+                <!-- wc Ends -->
+                <sect4>
+                    <!-- gzip, bzip2 Starts -->
+                    <title>
+                        <command>gzip</command>, <command>bzip2</command>
+                    </title>
+                    <indexterm>
+                        <primary>gzip</primary>
+                    </indexterm>
+                    <indexterm>
+                        <primary>bzip2</primary>
+                    </indexterm>
+                    <para>The &quot;gzip&quot; command can be used to reduce the size of a
+                        file using adaptive Lempel-Ziv, while &quot;bzip2&quot; uses the
+                        Burrows-Wheeler block sorting text compression algorithm together with
+                        Huffman coding.<footnote>
+                            <para>See <ulink
+                                url="http://www.data-compression.com/lempelziv.html">http://www.data-compression.com/lempelziv.html</ulink>
+                                for an explanation on how the Lempel-Ziv encoding algorithm works,
+                                very interesting.</para>
+                        </footnote>
+                    </para>
+                    <para>&quot;gzip&quot; is the most popular compression utility on the
+                        Linux platform; files compressed with it end in a &quot;.gz&quot;
+                        extension - it tends to give better compression that &quot;compress&quot;.</para>
+                    <para>&quot;bzip2&quot; is more recent, and requires more memory to
+                        compress a file, but usually gives a better compression ratio than &quot;gzip&quot;.</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -l one*
+-rw-r--r-- 1 student student 321 Feb 19 03:10 one.txt 
+student@debian:~/dataset$ gzip one.txt 
+student@debian:~/dataset$ ls -l one*
+-rw-r--r-- 1 student student 247 Feb 19 03:10 one.txt.gz 
+student@debian:~/dataset$
+                    ]]></literallayout>
+                    <para>You'll note that the command automatically renames the file to
+                        &quot;.gz&quot; and that the file size has decreased.</para>
+                    <para>The commands each have a related command, which is the same name, but
+                        prefixed with an &quot;un&quot;- to reverse the process:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -l one*
+-rw-r--r-- 1 student student 247 Feb 19 03:10 one.txt.gz 
+student@debian:~/dataset$  gunzip one.txt.gz 
+student@debian:~/dataset$ ls -l one*
+-rw-r--r-- 1 student student 321 Feb 19 03:10 one.txt ]]></literallayout>
+                    <literallayout class="monospaced"><![CDATA[Syntax: 
+gzip &lt;file&gt; 
+gunzip &lt;file.gz&gt;
+    ]]></literallayout>
+                </sect4>
+                <!-- gzip bzip2 ENDS -->
+                <sect4>
+                    <!-- Wildcards Starts -->
+                    <title>
+                        <command>Wildcards</command>
+                    </title>
+                    <indexterm>
+                        <primary>Wildcards</primary>
+                    </indexterm>
+                    <para>A wildcard is a pattern-matching character. It is useful in the following ways:</para>
+                    <orderedlist>
+                        <listitem>
+                            <para>An asterisk (*) will match zero, one or more characters.</para>
+                        </listitem>
+                        <listitem>
+                            <para>A question mark will match any single character (?)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Putting options into square brackets means either-or e.g. [ab]
+                                either an &quot;a&quot; or a &quot;b&quot;</para>
+                        </listitem>
+                        <listitem>
+                            <para>To use the square brackets with a dash option means a range e.g.
+                                [0-9] a single character of any of the range 0 through to 9
+                                (0,1,2,3,4,5,6,7,8 or 9)</para>
+                        </listitem>
+                        <listitem>
+                            <para>If wanting to select a range within the alphabet e.g. [a-z] would
+                                mean a single character that might match any of the letters in the
+                                entire lowercase alphabet.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Could use the brackets to specify letters and numbers as follows:
+                                [a-e1-5] would match a single character that is either a letter in
+                                the range a to e or numerical 1 to 5. (a,b,c,d,e,1,2,3,4 or 5)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Using a bang at the beginning of the expression in the square
+                                brackets would negate the expression. [!ab] meaning a single
+                                character that is not an &quot;a&quot; or a &quot;b&quot;.</para>
+                        </listitem>
+                        <listitem>
+                            <para>Another interesting variation would be the following: [1-57] which
+                                would mean any single character in the range of numbers 1 through 5
+                                or the number 7. (1,2,3,4,5 or 7)</para>
+                        </listitem>
+                    </orderedlist>
+                    <bridgehead>Examples:</bridgehead>
+                    <para>Here's how you long list all the files in your
+                        &quot;dataset2&quot; directory ending with .txt:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset2$ ls -l *.txt]]></literallayout>
+                    <para>Here's how you list all the files starting with o and ending with xt:</para>
+                    <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset2$ ls o*txt
+-rw-r--r--     1 student student     0 feb 19 04:59  org.txt]]></literallayout>
+                    <para>The following command will copy all files starting with
+                        &quot;b&quot; through to &quot;f&quot; and ending with
+                        anything (*) from your dataset2 directory to your previous dataset
+                        directory. The [b-f] option indicates one single digit or character.</para>
+                    <literallayout class="monospaced"><![CDATA[student@debian:~/dataset2$ cp [b-f]*  /tmp/ 
+student@debian:~/dataset2$
+                    ]]></literallayout>
+                    <para>If you have the following files in your directory:</para>
+                    <literallayout class="monospaced"><![CDATA[
+foot
+foo2
+foo.txt
+filer
+file
+files
+greper
+grep202
+fast
+slower
+peanuts100
+12.bed
+camping.tent
+                    ]]></literallayout>
+                    <para>These files are not in your directories, it is a rhetorical question only
+                        - question yourself as to what will happen in each of these examples before
+                        just accepting the answer as a given:</para>
+                    <literallayout class="monospaced"><![CDATA[
+rm  file*				Which files will be removed?
+filer
+files
+file	(an asterisk means zero characters as well)
+
+cp  foo*  tmp				Which files will be copied?
+foot
+foo2
+foo.txt
+
+mv  f[a-z]?.*]  tmp			Which files will be moved?
+	foo.txt	
+                    ]]></literallayout>
+                    <para>Starts with a &quot;f&quot; then a single character of lowercase
+                        alphabet,any single character with the &quot;?&quot;, then a
+                        full-stop, then zero one or more characters.</para>
+                    <literallayout class="monospaced"><![CDATA[
+cp  [!ft]  tmp	
+greper
+grep202
+slower
+peanuts100
+12.bed
+camping.tent
+
+Any file name that does not have an &quot;f&quot; or a &quot;t&quot; in it.
+
+cp  [!f][l-z]??[1-5][0-9][1-5]  tmp/ 
+grep202
+
+
+                    ]]></literallayout>
+                    <para>The filename starts with any single character except an
+                        &quot;f&quot;, then a single character between &quot;l&quot;
+                        and &quot;z&quot; (l,m,n,o,p,q,r,s,t,u,v,w,x,y or z), then two
+                        single characters (any characters), then a number between 1 and 5, then a
+                        number between 0 and 9, the last character is again a number between 1 and 5.</para>
+                    <bridgehead>Exercise:</bridgehead>
+                    <para>Ok, now that you've worked out the answers above using just your head, use
+                        the &quot;touch&quot; command to actually create the files, and
+                        perform the commands on them. Do the actual results match those you had
+                        worked out?</para>
+                </sect4>
+                <!-- wildcards ENDS -->
+            </sect3>
+            <!-- File manipulation commands ENDS -->
+        </sect2>
+        <!-- Working with normal data files ENDS -->
+        <sect2>
+            <!-- LINKS Starts -->
+            <title>links</title>
+            <sect3>
+                <!-- symbolic links versus hard links STARTS -->
+                <title>symbolic links versus hard links</title>
+                <para>Unix filesystems (including BSD's UFS and Linux's ext2fs, ext3fs and XFS)
+                    support file links. Links are used to have one or more copies of a file in many
+                    places at once, without duplicating the actual data of the file for each copy.
+                    This is often used to save space, or to help when moving data from one location
+                    in the filesystem to another.</para>
+                <para>Each link points to the original copy of the file; the way in which the link
+                    points to a file determines whether the link is a &quot;hard&quot; link
+                    or a &quot;soft&quot; link, also known as a &quot;symbolic&quot; link.</para>
+            </sect3>
+            <!-- symbolic links versus hard links ENDS -->
+            <sect3>
+                <!-- Hard links Starts -->
+                <title>Hard links</title>
+                <para>Hard links are created with the &quot;ln&quot; command:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -li
+total 8
+1101067 -rw-r--r--    1 student  student       321 Feb 19 03:10 one.txt
+1101076 -rw-r--r--    1 student  student       150 Feb 19 03:45 two.txt
+student@debian:~/dataset$ ln one.txt chapterone.txt
+student@debian:~/dataset$ ls -li
+total 12
+1101067 -rw-r--r--    2 student  student       321 Feb 19 03:10 chapterone.txt
+1101067 -rw-r--r--    2 student  student       321 Feb 19 03:10 one.txt
+1101076 -rw-r--r--    1 student  student       150 Feb 19 03:45 two.txt
+student@debian:~/dataset$ _]]></literallayout>
+                <para>You'll notice that the inode number for both files are the same; this is how
+                    hard links work. The actual contents of the file, its data blocks, have not been
+                    duplicated, merely its directory entry.</para>
+                <para>You'll see that if you edit one file, the other file's contents are also changed.</para>
+                <para>Hard links share an inode, and therefore they can only be created on the same
+                    filesystem where the original file exists.</para>
+                <para>Removing a file, which is a hard link doesn't delete the file it only removes
+                    the link. The file itself is only removed once all the filesystem link entries
+                    that point to it are removed.</para>
+                <para>Then the inode becomes a shadow inode and is zero-ised in the directory
+                    listing. <footnote>
+                        <para>You could see this if piping a directory listing that you know has
+                            shadow inodes through a hex dump tool.</para>
+                    </footnote>
+                </para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -li
+total 12
+1101067 -rw-r--r--    2 student  student       321 Feb 19 03:10 chapterone.txt
+1101067 -rw-r--r--    2 student  student       321 Feb 19 03:10 one.txt
+1101076 -rw-r--r--    1 student  student       150 Feb 19 03:45 two.txt
+student@debian:~/dataset$ rm one.txt
+student@debian:~/dataset$ ls -li
+total 8
+1101067 -rw-r--r--    1 student  student       321 Feb 19 03:10 chapterone.txt
+1101076 -rw-r--r--    1 student  student       150 Feb 19 03:45 two.txt
+
+                ]]></literallayout>
+                <para>In the example above, we've deleted the original file, but you can see that
+                    the actual contents are still preserved, as we still have another directory
+                    entry for the same inode number.</para>
+                <bridgehead>Exercise:</bridgehead>
+                <para>Now use &quot;cp&quot; to make a backup copy of
+                    &quot;chapterone.txt&quot;, and then delete it. Now use
+                    &quot;ls&quot; to check what's changed with the inode numbers. Change
+                    &quot;chapterone.txt&quot; back to &quot;one.txt&quot; when
+                    you're finished.</para>
+            </sect3>
+            <!-- Hard links  ENDS -->
+            <sect3>
+                <!-- Symbolic Link STARTS -->
+                <title>Symbolic Link</title>
+                <para>A symbolic link is a pointer to another file path; you use
+                    &quot;ln&quot; in conjunction with the &quot;-s&quot; switch to
+                    create a symbolic link:</para>
+                <literallayout class="monospaced"><![CDATA[
+student@debian:~/dataset$ ls -il
+total 8
+1101067 -rw-r--r--    1 student  student   321 Feb 19 03:10 one.txt
+1101076 -rw-r--r--    1 student  student   150 Feb 19 03:45 two.txt
+student@debian:~/dataset$ ln -s two.txt chaptertwo.txt
+student@debian:~/dataset$ ls -il
+total 8
+1101075 lrwxrwxrwx    1 student  student   7 Feb 19 05:08 
+			chaptertwo.txt -&#62; two.txt
+1101067 -rw-r--r--    1 student  student   321 Feb 19 03:10 one.txt
+1101076 -rw-r--r--    1 student  student   150 Feb 19 03:45 two.txt
+                ]]></literallayout>
+                <para>Symbolic links can traverse different filesystems, and so are often useful
+                    when shuffling data off a full disk onto a new one, while still preserving the
+                    directory path to the original file.</para>
+                <para>You'll notice that a symbolic link is given it's own inode number, unlike hard
+                    links, which share another filename's inode number.</para>
+                <para>An example of when you'd use this in real life: you have a big database in
+                    &quot;/home/database&quot;, and you want to move it onto a partition
+                    mounted on &quot;/scratch&quot; which has a lot more free space. The
+                    problem is that the database software has been configured to use
+                    &quot;/home/database&quot; to access its files.</para>
+                <para>What you can do is stop the database, move the &quot;database&quot;
+                    directory out of &quot;/home&quot; and into
+                    &quot;/scratch&quot;, and then set a symbolic link called
+                    &quot;database&quot; in &quot;/home&quot; to point to the real
+                    &quot;database&quot; directory in &quot;/scratch&quot;.</para>
+                <para>Now when you restart your database, it will still be able to find its files
+                    where it expects them!</para>
+            </sect3>
+            <!-- Symbolic Links ENDS -->
+        </sect2>
+        <!-- Links Ends -->
+    </sect1>
+    <!-- ============================================================================================================================= -->
+    <!-- ==============================================Files and Directories ENDS===================================================== -->
+    <!--================================================================================================================================-->
+    <sect1 id="FilePermissionsSecurity">
+        <!-- File permissions/security STARTS -->
+        <title>File permissions/security</title>
+        <para>We learnt about file mode permissions earlier. Now we're going to look at some of the
+            tools that can be used to manipulate them.</para>
+        <para>As a reminder the permissions field was the 9 digits after the file type field. In a
+            long listing of your files above the permission mode was set be default system wide and
+            user wide. This is set up for you by a parameter called umask which we will discuss
+            later on.</para>
+        <para>Let us look at the permission values and see what they mean on files and directory
+            files - this is a revision section. Although the permissions have obvious effects for
+            regular files, directories and their associated permissions can sometimes be confusing.</para>
+        <para>A directory for which you are allowed &quot;read&quot; access can have its
+            contents listed by you. Using, say, &quot;ls&quot;.</para>
+        <para>However, you are only allowed to change into (&quot;cd&quot;) a directory for
+            which you have the &quot;execute&quot; permission, also called the
+            &quot;directory search bit&quot;.</para>
+        <para>If we breakdown the permissions field for a regular file as follows:</para>
+        <table pgwide="0">
+            <title>File Permissions example 1</title>
+            <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                <colspec colname="File type" colwidth="1*"/>
+                <colspec colname="Owner" colwidth="1*"/>
+                <colspec colname="Group" colwidth="1*"/>
+                <colspec colname="Other/public or everyone else on the system" colwidth="4*"/>
+                <tbody>
+                    <row>
+                        <entry>File type</entry>
+                        <entry>Owner</entry>
+                        <entry>Group</entry>
+                        <entry>Other/public or everyone else on the system</entry>
+                    </row>
+                    <row>
+                        <entry>-</entry>
+                        <entry>rwx</entry>
+                        <entry>rwx</entry>
+                        <entry>rwx</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>This would mean that the file is a regular file and that anyone using the system can
+            access the file read it, write and change it and execute it as a program (if relevant as
+            not all regular files are programs.)</para>
+        <para>Again:</para>
+        <table>
+            <title>File Permissions example 2</title>
+            <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                <colspec colname="File type" colwidth="1*"/>
+                <colspec colname="Owner" colwidth="1*"/>
+                <colspec colname="Group" colwidth="1*"/>
+                <colspec colname="Other/public or everyone else on the system" colwidth="4*"/>
+                <tbody>
+                    <row>
+                        <entry>File type</entry>
+                        <entry>Owner</entry>
+                        <entry>Group</entry>
+                        <entry>Other/public or everyone else on the system</entry>
+                    </row>
+                    <row>
+                        <entry>-</entry>
+                        <entry>rw-</entry>
+                        <entry>r--</entry>
+                        <entry>---</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>This would mean that the file is a regular file and the owner can read and write to
+            the file, the group can only read the file and anyone else on the system has no
+            permissions on that file at all.</para>
+        <para>Now with a directory file:</para>
+        <table>
+            <title>File Permissions example 3</title>
+            <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                <colspec colname="File type" colwidth="1*"/>
+                <colspec colname="Owner" colwidth="1*"/>
+                <colspec colname="Group" colwidth="1*"/>
+                <colspec colname="Other/public or everyone else on the system" colwidth="4*"/>
+                <tbody>
+                    <row>
+                        <entry>File type</entry>
+                        <entry>Owner</entry>
+                        <entry>Group</entry>
+                        <entry>Other/public or everyone else on the system</entry>
+                    </row>
+                    <row>
+                        <entry>d</entry>
+                        <entry>rwx</entry>
+                        <entry>r-x</entry>
+                        <entry>r-x</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>Here the owner of the directory file can list the contents of the directory, change
+            (edit and save) files within the directory or make new files, remove files, they can
+            also cd into the directory or perform a find command that can search that directory with
+            no permission errors.</para>
+        <para>The group and general public can list the contents of the directory and cd into the
+            directory but cannot change (edit and save), remove, or write a new file into that directory.</para>
+        <para>Something that you should maybe beware of is that you may be getting permission errors
+            on a directory, you have checked that directory and you have full permissions. Look
+            again at the parent directory you probably do not have permissions on that directory and
+            that will stop you doing what you want or need to do even in the child directory.</para>
+        <sect2>
+            <!-- chmod STARTS -->
+            <title>
+                <command>chmod</command>
+            </title>
+            <indexterm>
+                <primary>chmod</primary>
+            </indexterm>
+            <para>You can use this command to change the mode of the file;</para>
+            <literallayout class="monospaced"><![CDATA[Syntax: 
+chmod mode file-name(s)
+      ]]></literallayout>
+            <sect3>
+                <!-- octal Mode Starts -->
+                <title>Octal mode:</title>
+                <para>The octal format is supposedly a more difficult method (some find it easier
+                    than the symbolic method), but it is the way in which the modes are actually
+                    stored by the operating system, and is also the mode more widely used in
+                    documentation and in script files, and so is useful to know.</para>
+                <para>Each permission bit a number associated with it:</para>
+                <literallayout class="monospaced"><![CDATA[ r = 4    w = 2    x = 1 ]]></literallayout>
+                <para>These numbers are then added together to form the set of modes that you want,
+                    for example if you want &quot;rw-&quot; permissions set then:</para>
+                <literallayout class="monospaced"><![CDATA[ r + w = rw     4 + 2 = 6 ]]></literallayout>
+                <para>There is a grouping of three sets of permissions and the octal method
+                    expresses all three fields (owner, group and public). Thus, a mode of
+                    &quot;660&quot; means that the user, and group, have
+                    &quot;rw&quot; access, and everyone else has no access (-rw-rw----).</para>
+                <para>The first digit (&quot;6&quot;) is the mode, which applies to the user
+                    (rw-), the second digit (&quot;6&quot;) applies to the group (rw-) and
+                    the third digit (&quot;0&quot;) applies to everyone else (---).</para>
+                <literallayout class="monospaced"><![CDATA[ student@debian:~/dataset$ ls -l 
+one.txt -rw-r--r-- 1 student student 321 Feb 19 03:10 one.txt 
+student@debian:~/dataset$ chmod 660 one.txt
+student@debian:~/dataset$ ls -l one.txt
+-rw-rw---- 1 student student 321 Feb 19 03:10 one.txt ]]></literallayout>
+            </sect3>
+            <!-- octal mode ENDS -->
+            <sect3>
+                <!-- Symbolic Mode Starts -->
+                <title>Symbolic mode:</title>
+                <para>You must use one character out of each column to form a triple, with no spaces
+                    between the three characters.</para>
+                <literallayout class="monospaced"><![CDATA[Syntax: 
+chmod permission-mode filename ]]></literallayout>
+                <table>
+                    <title>Symbolic File Permission switches</title>
+                    <tgroup align="center" cols="3">
+                        <tbody>
+                            <row>
+                                <entry>Owners</entry>
+                                <entry>Add, Remove or Set</entry>
+                                <entry>Permission</entry>
+                            </row>
+                            <row>
+                                <entry>u owner permissions</entry>
+                                <entry>+ adds the permission</entry>
+                                <entry>r read</entry>
+                            </row>
+                            <row>
+                                <entry>g group permissions</entry>
+                                <entry>- removes the permission</entry>
+                                <entry>w write</entry>
+                            </row>
+                            <row>
+                                <entry>o other or world permissions</entry>
+                                <entry>= sets the permission</entry>
+                                <entry>x execute</entry>
+                            </row>
+                            <row>
+                                <entry>a all of the above</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <para>You can use a comma (&quot;,&quot;) to separate operands, but don't
+                    use any spaces!</para>
+                <literallayout class="monospaced"><![CDATA[student@debian:~$ ls -l
+total 8
+drwxr-xr-x    2 student  student      1024 Feb 19 05:08 dataset
+drwxr-xr-x    2 student  student      1024 Feb 19 05:01 dataset2
+student@debian:~$ chmod ug=rw,o= dataset2 
+student@debian:~$ ls -l 
+total 8
+drwxr-xr-x    2 student  student      1024 Feb 19 05:08 dataset
+drw-rw----    2 student  student      1024 Feb 19 05:01 dataset2
+student@debian:~$ chmod u=rx,g-w,o+r dataset 
+student@debian:~$ ls -l 
+total 8
+dr-xr-xr-x    2 student  student      1024 Feb 19 05:08 dataset
+drw-rw----    2 student  student      1024 Feb 19 05:01 dataset2
+student@debian:~$ chmod a+rx,u=w dataset 
+student@debian:~$ ls -l 
+total 8
+d-w-r-xr-x    2 student  student      4096 Feb 19 05:08 dataset
+drw-rw----    2 student  student      4096 Feb 19 05:01 dataset2
+student@debian:~$ cd dataset 
+bash: cd: dataset: Permission denied
+student@debian:~$ cd dataset2 
+bash: cd: dataset2: Permission denied
+                ]]></literallayout>
+                <para>You cannot change into either of the directories because the owner (student)
+                    does not have &quot;execute&quot; or &quot;search bit&quot;
+                    access to either of them.</para>
+                <literallayout class="monospaced"><![CDATA[student@debian:~$ chmod u+x dataset* 
+student@debian:~$ ls -l 
+total 8
+d-wxr-xr-x    2 student  student      4096 Feb 19 05:08 dataset
+drwxrw----    2 student  student      4096 Feb 19 05:01 dataset2
+student@debian:~$ cd dataset
+student@debian:~/dataset$ ls 
+ls: .: Permission denied 
+student@debian:~/dataset$ cd .. ]]></literallayout>
+                <para>Now we've given ourselves back search bit access, but we still don't have read
+                    access to &quot;dataset&quot;, which means that while we can
+                    &quot;cd&quot; into it, we cannot get a listing of its contents!</para>
+                <bridgehead>Exercise:</bridgehead>
+                <para>Can you still &quot;cat&quot; files inside dataset, even though you
+                    only have &quot;x&quot; and not &quot;r&quot;?</para>
+                <para>Correct the permissions on the directories to what they should be.</para>
+            </sect3>
+            <!-- Symbolic mode Ends -->
+        </sect2>
+        <!-- chmod ENDS -->
+        <sect2>
+            <!-- chown and chgrp starts -->
+            <title>chown and chgrp</title>
+            <para>Only the root user may use the &quot;chown&quot; command; we will cover
+                this command in detail in the System Administration section.</para>
+            <para>You can change both the owner and the group by using the following Syntax:</para>
+            <literallayout class="monospaced"><![CDATA[Syntax:
+chown user:group &lt;file&gt;]]></literallayout>
+            <para>This changes the user and group associated with the file.</para>
+            <para>A normal user may change the group to which a file belongs, provided that they are
+                a member of that group and also own the file, by using the chgrp command.</para>
+        </sect2>
+        <!-- chown and chgrp Ends -->
+        <sect2>
+            <!-- Umask starts -->
+            <title>
+                <command>umask</command>
+            </title>
+            <indexterm>
+                <primary>umask</primary>
+            </indexterm>
+            <para>The umask determines what the default permissions will be on a file that is
+                created, either system-wide or user based if specified in the home directory log in
+                files. When using the bash shell, this is a builtin command.</para>
+            <para>It understands octal and symbolic representations of permissions.</para>
+            <para>To see what the current umask is, just type &quot;umask&quot;:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ umask 
+0022 
+student@debian:~$  umask -S
+u=rwx,g=rx,o=rx ]]></literallayout>
+            <para>As you can see, the octal values for the umask are not the same as those for chmod.</para>
+            <para>In the umask above (0022), the first &quot;0&quot; we will not explain
+                right now - suffice it to say that this relates to setting an additional permission
+                bit (SUID, SGID or Sticky Bit).</para>
+            <para>In umask the permission mode is calculated by subtracting from a full permission
+                set of read write and execute permission bits as follows: (r + w + x = 4 + 2 + 1 = 7)</para>
+            <para>A value of zero (0) in the umask means then full permissions (7 - 0 = 7).</para>
+            <para>A value of 2 in the umask means read (4) and execute (1) permissions (7 - 2 = 5).</para>
+            <para>To change the current umask:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ touch file1
+student@debian:~$ ls -l file1 
+-rw-r--r--  1 student  student  0 Feb 19 02:39 file1
+student@debian:~$ umask u=rwx,g=rx,o=            (OR umask 0027) 
+student@debian:~$ touch file2 
+student@debian:~$ ls -l 
+-rw-r-----  1 student  student  0 Feb 19 02:39 file2]]></literallayout>
+            <para>You'll notice that umask is clever enough to only apply the +x (execute) bit to
+                directories, and not regular files as above. Regular files will not be executable by default.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ mkdir dir1 
+student@debian:~$ ls -l file1 dir1 
+drwxr-x---  2 student  student   512 Jan 14 02:40 dir1
+-rw-r--r--  1 student  student     0 Jan 14 02:39 file1]]></literallayout>
+        </sect2>
+        <!-- Umask ENDS -->
+    </sect1>
+    <!-- File permissions/security ENDS -->
+    <sect1>
+        <!-- File Redirection, Named and un-named pipes STARTS -->
+        <title>File Redirection, Named and un-named pipes</title>
+        <para>In the Linux shell, each process has three file handles (also called file descriptors,
+            or fd's for short) associated with it.</para>
+        <itemizedlist>
+            <listitem>
+                <para>Standard input, or stdin -- numbered as file descriptor &quot;0&quot;.
+                    This is where the process receives its input from; this is usually the keyboard.</para>
+            </listitem>
+            <listitem>
+                <para>Standard output, or stdout -- numbered as file descriptor
+                    &quot;1&quot;. This is where the process sends its output to; this is
+                    usually the console or terminal screen.</para>
+            </listitem>
+            <listitem>
+                <para>Standard error, or stderr -- numbered as file descriptor
+                    &quot;2&quot;. This is where the process sends its error messages; this
+                    is also usually the console or terminal screen.</para>
+            </listitem>
+        </itemizedlist>
+        <figure>
+            <title>stdin, stdout, stderr</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="../images/diagram02.png" format="PNG"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <para>You can tell the Linux shell to change any or all of these on a per-command basis, by
+            using pipes (&quot;|&quot;) and redirections (&quot;&lt;&quot; and &quot;&#62;&quot;).</para>
+        <para>These features are useful if you want, for example to get the output of a command into
+            a file for later perusal, or if you want to string multiple commands together in order
+            to achieve the desired result.</para>
+        <para>Remember, Linux is made up of lots of small building blocks that can be put together
+            in order to make something more complicated; the pipes and redirections are what you can
+            use to help join the blocks together.</para>
+        <sect2>
+            <!-- stdin STARTS -->
+            <title>stdin</title>
+            <indexterm>
+                <primary>stdin</primary>
+            </indexterm>
+            <para>The standard input is usually taken from what you type in at the keyboard. However
+                we could take the output from a file.</para>
+            <para>We would use the less than sign (&lt;) to redirect input.</para>
+            <literallayout class="monospaced"><![CDATA[ command 0&lt; filename or command &lt; filename ]]></literallayout>
+        </sect2>
+        <!-- stdin ENDS -->
+        <sect2>
+            <!-- stdout Starts -->
+            <title>stdout</title>
+            <indexterm>
+                <primary>stdout</primary>
+            </indexterm>
+            <para>If we want to store the output of a command in a file we would use standard output
+                and redirect it. Normally by default the output goes to the screen. . If the file
+                doesn't already exist, it will be created.</para>
+            <para>We use the greater than sign (&#62;) to redirect standard output.</para>
+            <literallayout class="monospaced"><![CDATA[ command 1&#62; filename or command &#62; filename ]]></literallayout>
+        </sect2>
+        <!-- stdout ENDS -->
+        <sect2>
+            <!-- stderr Starts -->
+            <title>stderr</title>
+            <indexterm>
+                <primary>stderr</primary>
+            </indexterm>
+            <para>It is important to think of output from a command and errors produced by a command
+                as separate actions. We might want to store the output of a command in a file and
+                leave the errors to display on the screen. Or we might want to store the error
+                messages in a file.</para>
+            <literallayout class="monospaced"><![CDATA[
+	command 2&#62; filename
+            ]]></literallayout>
+            <para>In this instance the number &quot;2&quot; preceding the redirection sign
+                is not optional.</para>
+            <literallayout class="monospaced"><![CDATA[
+        student@debian:~$ touch file1 file2
+	
+            ]]></literallayout>
+            <para>Make sure that file1 and file2 exist in your directory, file3 should not exist.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls file1 file2
+        file1 file2]]></literallayout>
+            <para>Standard output goes to the screen and there are no error messages.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls file1 file2 file 3
+        file3 ls: file3: No such file or directory file1 file2]]></literallayout>
+            <para>File3 does not exist so a message is printed to standard error. The directory
+                listing for file1 and file2 is printed to standard output.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls file1 file2
+        file3 &#62; stdout.txt ls: file3: No such file or directory]]></literallayout>
+            <para>Redirect standard output to a file called stdout.txt, standard error is kept as
+                the default display to the screen.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls file1 file2
+        file3 2&#62; stderr.txt file1 file2]]></literallayout>
+            <para>Redirect standard error to a file called stderr.txt, standard output is left to
+                the default setting of the screen.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls file1 file2
+        file3 &#62; stdout.txt 2&#62; stderr.txt student@debian:~$ _]]></literallayout>
+            <para>Redirect standard output and standard error and nothing is displayed on the screen.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ cat stdout.txt
+        file1 file2  student@debian:~$ cat stderr.txt ls:
+        file3: No such file or directory]]></literallayout>
+            <para>Check what is in each relevant file.</para>
+            <para>For standard input we can demonstrate how it works however at this stage of your
+                course it is harder to describe a really useful example.</para>
+            <para>A simple example would be:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ cat <
+        stdout.txt file1 file2]]></literallayout>
+            <para>When we know a little more we could do something more sophisticated, like run a
+                program that normally requires input from a user at a keyboard - but run it after
+                hours in the background with no user present to press the relevant key strokes.</para>
+        </sect2>
+        <!-- stderr ENDS -->
+        <sect2>
+            <!-- Appending to a file Starts -->
+            <title>Appending to a file</title>
+            <para>You can use a double redirection (&quot;&#62;&#62;&quot;) to
+                append to a file instead of overwriting it. If the file doesn't already exist, it
+                will be created.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls output.txt 
+ls: output.txt: No such file or directory      ]]></literallayout>
+            <para>Make sure that the file does not already exist in your home directory.</para>
+            <literallayout class="monospaced"><![CDATA[ student@debian:~$ echo &quot;test&quot; &#62;&#62; output.txt
+ student@debian:~$ cat output.txt
+ test ]]></literallayout>
+            <literallayout class="monospaced"><![CDATA[ student@debian:~$ echo &quot;test again&quot; &#62;&#62; output.txt 
+student@debian:~$ cat output.txt 
+test test again      ]]></literallayout>
+            <para>The above two steps will prove that the append function actually does create the
+                file if it does not already exist.</para>
+        </sect2>
+        <!-- Appending to a file ENDS -->
+        <sect2>
+            <!-- Piping STARTS -->
+            <title>Piping</title>
+            <para>A pipe (&quot;|&quot;) directs the stdout from one process to the stdin of another:</para>
+            <figure>
+                <title>piping from one process to another</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="../images/diagram01.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>Note that stderr is _not_ passed through the pipe!</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ ls dataset2 | grep &quot;txt&quot; 
+fight.txt
+flight.txt
+org.txt
+singularity.txt
+three.txt
+vernor.txt
+vinge.txt
+student@debian:~$ _ ]]></literallayout>
+            <para>This type of pipe is called an &quot;un-named pipe&quot;. The un-named
+                pipe uses a temporary buffer type of action to pass the stream of data through.</para>
+            <para>You can also use &quot;named pipes&quot;. We briefly mentioned them
+                earlier in this course; they are also known as FIFO buffers.</para>
+            <para>Named pipes work exactly the same as unnamed pipes, where the stdout from one
+                process is fed into the stdin for another process.</para>
+            <para>You can use the <command>mkfifo</command> command to create such a file, and you
+                can then simply use the redirection symbols to put data in, or take it out. As the
+                name implies, the data is read First In, First Out.</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ mkfifo foop 
+student@debian:~$ ls -l foop 
+prw-r--r-- 1 mwest mwest 0 Jan 13 23:26 foop| 
+student@debian:~$ echo &quot;testing the named pipe&quot; &#62; foop ]]></literallayout>
+            <para>Ok, now go and open up another terminal. You can do this by holding down the
+                <keycap>Alt</keycap> key and pressing <keycap>F2</keycap>. Once there, log in, and
+                then type the following:</para>
+            <literallayout class="monospaced"><![CDATA[student@debian:~$ cat < foop 
+testing the named pipe
+student@debian:~$ _ ]]></literallayout>
+            <para>If you switch back to your original terminal window (press alt-f1), you should see
+                that your shell has now returned back to your prompt. This is because your previous
+                &quot;cat&quot; command took the contents out of the pipe, and so your
+                original &quot;echo&quot; command was able to complete.</para>
+            <para>Check if the file called &quot;foop&quot; still exists as a named pipe in
+                your directory.</para>
+            <para>Experiment with this one a bit, it can be quite fun!</para>
+        </sect2>
+        <!-- Piping ENDS -->
+    </sect1>
+    <!-- File Redirection, Named and un-named pipes ENDS -->
+    <sect1 id="othercommands">
+        <!-- Other commands Starts -->
+        <title>Other commands</title>
+        <para>There are a few other commands, which you may find useful:</para>
+        <para>
+            <command>clear</command> - clears the screen</para>
+        <indexterm>
+            <primary>clear</primary>
+        </indexterm>
+        <para>
+            <command>uname</command> - this displays information about the system the most common
+            switch used with this is &quot;-a&quot;</para>
+        <indexterm>
+            <primary>uname</primary>
+        </indexterm>
+        <literallayout class="monospaced"><![CDATA[
+student@debian:~$  uname -a
+Linux debian 2.2.20 #1 Sat Apr 20 12:45:19 EST 2002 i586 unknown]]></literallayout>
+        <literallayout class="monospaced"><![CDATA[
+    Linux debian 2.2.20 #1 Sat Apr 20 12:45:19 EST 2002 i586 unknown
+    1.    2.      3.       4.         5.                      6.
+ ]]></literallayout>
+        <orderedlist>
+            <listitem>
+                <para>the OS name, could be Linux, FreeBSD, Solaris, etc.</para>
+            </listitem>
+            <listitem>
+                <para>the hostname</para>
+            </listitem>
+            <listitem>
+                <para>the version of the kernel currently running</para>
+            </listitem>
+            <listitem>
+                <para>how many times this kernel had been compiled</para>
+            </listitem>
+            <listitem>
+                <para>the compilation date</para>
+            </listitem>
+            <listitem>
+                <para>the architecture it was compiled for</para>
+            </listitem>
+        </orderedlist>
+        <para>
+            <command>last</command> - indicates last logins of users, and on which terminals, it
+            reports on a file called wtmp.</para>
+        <indexterm>
+            <primary>last</primary>
+        </indexterm>
+        <literallayout class="monospaced"><![CDATA[
+student@debian:~$ last
+student  pts/0        192.168.0.5      Thu Feb 19 03:01   still logged in   
+root     pts/0        192.168.0.5      Thu Feb 19 02:58 - 03:00  (00:02)    
+student  tty2                          Thu Feb 19 02:56   still logged in   
+reboot   system boot  2.2.20-idepci    Thu Feb 19 02:56          (02:15)    
+student  pts/0        192.168.0.5      Thu Jan 29 22:32 - 23:57  (01:24)    
+root     pts/0        192.168.0.5      Thu Jan 29 22:32 - 22:32  (00:00)    
+student  tty1        192.168.0.5      Thu Jan 29 22:30 - 22:32  (00:02)    
+root     tty1                          Thu Jan 29 22:15 - down   (01:42)    
+reboot   system boot  2.2.20-idepci    Thu Jan 29 22:14          (01:42)    
+root     tty1                          Sun Jan 25 12:28 - 12:29  (00:01)    
+reboot   system boot  2.2.20-idepci    Sun Jan 25 14:26         (4+09:31)   
+
+wtmp begins Sun Jan 25 14:26:47 2004
+        ]]></literallayout>
+        <para>
+            <command>tty</command> - tells you which terminal you are currently on</para>
+        <indexterm>
+            <primary>tty</primary>
+        </indexterm>
+        <literallayout class="monospaced"><![CDATA[
+student@debian:~$ tty
+/dev/tty1]]></literallayout>
+    </sect1>
+    <!-- other commands ends -->
+</chapter>

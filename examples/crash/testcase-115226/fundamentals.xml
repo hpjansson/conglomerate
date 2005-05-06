@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>
+<book id="linux-fundamentals">
+    <title>Linux Fundamentals</title>
+    <subtitle>A Practical Guide to Learning Linux</subtitle>
+
+    <bookinfo>
+        <authorgroup>
+            &matthew;
+        </authorgroup>
+        &pubdate;
+        &copyright;
+        &legalnotice;
+        &publisher;
+        <edition>
+            &fundamentals-edition;
+        </edition>
+        <revhistory>
+            <revision>
+                <revnumber>0.0.1</revnumber>
+                <date>01/NOV/2004</date>
+                <revremark>Initial version</revremark>
+            </revision>
+        </revhistory>
+    </bookinfo>
+    &fundamental-requirements;
+    &fundamental-certification;
+    &fundamental-history;
+    &fundamental-essentials;
+    &fundamental-app-cert;
+    &fundamental-app-lin26;
+    <index/>
+</book>

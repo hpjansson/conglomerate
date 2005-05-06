@@ -1,0 +1,1818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                      "http://www.docbook.org/xml/4.3/docbookx.dtd" [
+<!ENTITY % globalents SYSTEM "../global.ent">
+%globalents;
+]>-->
+<appendix id="LPI_certification">
+    <title>Linux Professional Institute (LPI) Certification</title>
+    <sect1>
+        <title>Introduction</title>
+        <para>Visit <ulink url="http://www.lpi.org/en/lpic.html">this site</ulink>for the latest
+            information. The following section will describe the certification methods and
+            pre-requisite knowledge that is needed to gain the LPI certifications.</para>
+        <sect2>
+            <title>Junior Level Administration (LPIC1)</title>
+            <para>Status: Available since January 2000, latest revision done in March 2003
+                Pre-requisite Knowledge: none Requirements: Pass exam 101 and 102 Job description of
+                a person with this certification:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Work at the Linux command line</para>
+                </listitem>
+                <listitem>
+                    <para>Perform easy maintenance tasks: help out users, add users to a larger
+                        system, backup &#38; restore, shutdown &#38; reboot</para>
+                </listitem>
+                <listitem>
+                    <para>Install and configure a workstation (including X) and connect it to a LAN,
+                        or a stand-alone PC via modem to the Internet.</para>
+                </listitem>
+            </itemizedlist>
+            <sect3>
+                <title>LPI exam 101 Details</title>
+                <bridgehead>Topic 101 Hardware and Architecture</bridgehead>
+                <table pgwide="0">
+                    <title>LPI exam 101: Hardware and Architecture</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Fundamental BIOS Settings</entry>
+                                <entry>Candidates should be able to configure fundamental system
+                                    hardware by making the correct settings in the system BIOS. This
+                                    objective includes a proper understanding of BIOS configuration
+                                    issues such as the use of LBA on IDE hard disks larger than 1024
+                                    cylinders, enabling or disabling integrated peripherals, as well
+                                    as configuring systems with (or without) external peripherals
+                                    such as keyboards. It also includes the correct setting for IRQ,
+                                    DMA and I/O addresses for all BIOS administrated ports and
+                                    settings for error handling.</entry>
+                                <entry>/proc/ioports /proc/interrupts /proc/dma /proc/pci</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Configure Modem and Sound cards</entry>
+                                <entry>Ensure devices meet compatibility requirements (particularly
+                                    that the modem is NOT a win-modem), verify that both the modem
+                                    and sound card are using unique and correct IRQ's, I/O, and DMA
+                                    addresses, if the sound card is PnP install and run sndconfig
+                                    and isapnp, configure modem for outbound dial-up, configure
+                                    modem for outbound PPP | SLIP | CSLIP connection, set serial
+                                    port for 115.2 Kbps</entry>
+                                <entry>Not applicable</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Setup SCSI Devices</entry>
+                                <entry>Candidates should be able to configure SCSI devices using the
+                                    SCSI BIOS as well as the necessary Linux tools. They also should
+                                    be able to differentiate between the various types of SCSI. This
+                                    objective includes manipulating the SCSI BIOS to detect used and
+                                    available SCSI IDs and setting the correct ID number for
+                                    different devices especially the boot device. It also includes
+                                    managing the settings in the computer's BIOS to determine the
+                                    desired boot sequence if both SCSI and IDE drives are used.</entry>
+                                <entry>SCSI ID /proc/scsi/ scsi_info</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Configure Communication Devices</entry>
+                                <entry>Candidates should be able to install and configure different
+                                    internal and external communication devices like modems, ISDN
+                                    adapters, and DSL switches. This objective includes verification
+                                    of compatibility requirements (especially important if that
+                                    modem is a winmodem), necessary hardware settings for internal
+                                    devices (IRQs, DMAs, I/O ports), and loading and configuring
+                                    suitable device drivers. It also includes communication device
+                                    and interface configuration requirements, such as the right
+                                    serial port for 115.2 Kbps, and the correct modem settings for
+                                    outbound PPP connection(s).</entry>
+                                <entry>/proc/dma /proc/interrupts /proc/ioports setserial(8)</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Configure USB devices</entry>
+                                <entry>Candidates should be able to activate USB support, use and
+                                    configure different USB devices. This objective includes the
+                                    correct selection of the USB chipset and the corresponding
+                                    module. It also includes the knowledge of the basic architecture
+                                    of the layer model of USB as well as the different modules used
+                                    in the different layers. Key files, terms, and utilities include:</entry>
+                                <entry>lspci(8) usb-uhci.o usb-ohci.o /etc/usbmgr/ usbmodules /etc/hotplug</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Setup different PC expansion cards</entry>
+                                <entry>Candidates should be able to configure various cards for the
+                                    various expansion slots. They should know the differences
+                                    between ISA and PCI cards with respect to configuration issues.
+                                    This objective includes the correct settings of IRQs, DMAs and
+                                    I/O Ports of the cards, especially to avoid conflicts between
+                                    devices. It also includes using isapnp if the card is an ISA PnP device.</entry>
+                                <entry>/proc/dma /proc/interrupts /proc/ioports /proc/pci pnpdump(8)
+                                    isapnp(8) lspci(8)</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 102 Linux Installation &#38; Package Management</bridgehead>
+                <table pgwide="0">
+                    <title>LPI exam 101: Linux Installation &#38; Package Management</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Install a boot manager</entry>
+                                <entry>Candidate should be able to select, install, and configure a
+                                    boot manager. This objective includes providing alternative boot
+                                    locations and backup boot options (for example, using a boot floppy).</entry>
+                                <entry>/etc/lilo.conf /boot/grub/grub.conf lilo grub-install MBR
+                                    superblock first stage boot loader</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Manage shared libraries</entry>
+                                <entry>Candidates should be able to determine the shared libraries
+                                    that executable programs depend on and install them when
+                                    necessary. Candidates should be able to state where system
+                                    libraries are kept.</entry>
+                                <entry>ldd ldconfig /etc/ld.so.conf LD_LIBRARY_PATH</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Design hard disk layout</entry>
+                                <entry>Candidates should be able to design a disk partitioning
+                                    scheme for a Linux system. This objective includes allocating
+                                    filesystems or swap space to separate partitions or disks, and
+                                    tailoring the design to the intended use of the system. It also
+                                    includes placing /boot on a partition that conforms with the
+                                    BIOS' requirements for booting.</entry>
+                                <entry>/ (root) filesystem /var filesystem /home filesystem swap
+                                    space mount points partitions cylinder 1024</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Make and install programs from source</entry>
+                                <entry>Candidates should be able to build and install an executable
+                                    program from source. This objective includes being able to
+                                    unpack a file of sources. Candidates should be able to make
+                                    simple customizations to the Makefile, for example changing
+                                    paths or adding extra include directories.</entry>
+                                <entry>gunzip gzip bzip2 tar configure make</entry>
+                            </row>
+                            <row>
+                                <entry>8</entry>
+                                <entry>Use Debian package management</entry>
+                                <entry>Candidates should be able to perform package management
+                                    skills using the Debian package manager. This objective includes
+                                    being able to use command-line and interactive tools to install,
+                                    upgrade, or uninstall packages, as well as find packages
+                                    containing specific files or software (such packages might or
+                                    might not be installed). This objective also includes being able
+                                    to obtain package information like version, content,
+                                    dependencies, package integrity and installation status (whether
+                                    or not the package is installed).</entry>
+                                <entry>unpack configure /etc/dpkg/dpkg.cfg /var/lib/dpkg/*
+                                    /etc/apt/apt.conf /etc/apt/sources.list dpkg dselect
+                                    dpkg-reconfigure apt-get alien</entry>
+                            </row>
+                            <row>
+                                <entry>8</entry>
+                                <entry>Use Red Hat Package Manager (RPM)</entry>
+                                <entry>Candidates should be able to perform package management under
+                                    Linux distributions that use RPMs for package distribution. This
+                                    objective includes being able to install, re-install, upgrade,
+                                    and remove packages, as well as obtain status and version
+                                    information on packages. This objective also includes obtaining
+                                    package information such as version, status, dependencies,
+                                    integrity, and signatures. Candidates should be able to
+                                    determine what files a package provides, as well as find which
+                                    package a specific file comes from.</entry>
+                                <entry>/etc/rpmrc /usr/lib/rpm/* rpm grep</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 103: GNU &#38; Unix Commands</bridgehead>
+                <table pgwide="0">
+                    <title>LPI exam 101: GNU &#38; Unix Commands</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Perform basic file editing operations using vi</entry>
+                                <entry>Candidates should be able to edit text files using vi. This
+                                    objective includes vi navigation, basic vi nodes, inserting,
+                                    editing, deleting, copying, and finding text.</entry>
+                                <entry>vi /, ? h,j,k,l G, H, L i, c, d, dd, p, o, a ZZ, :w!, :q!,
+                                    :e! :!</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Modify process execution priorities</entry>
+                                <entry>Candidates should should be able to manage process execution
+                                    priorities. Tasks include running a program with higher or lower
+                                    priority, determining the priority of a process and changing the
+                                    priority of a running process.</entry>
+                                <entry>nice ps renice top</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Perform basic file management</entry>
+                                <entry>Candidates should be able to use the basic Unix commands to
+                                    copy, move, and remove files and directories. Tasks include
+                                    advanced file management operations such as copying multiple
+                                    files recursively, removing directories recursively, and moving
+                                    files that meet a wildcard pattern. This includes using simple
+                                    and advanced wildcard specifications to refer to files, as well
+                                    as using find to locate and act on files based on type, size, or time.</entry>
+                                <entry>cp find mkdir mv ls rm rmdir touch file globbing</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Search text files using regular expressions</entry>
+                                <entry>Candidates should be able to manipulate files and text data
+                                    using regular expressions. This objective includes creating
+                                    simple regular expressions containing several notational
+                                    elements. It also includes using regular expression tools to
+                                    perform searches through a filesystem or file content.</entry>
+                                <entry>grep regexp sed</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Work on the command line</entry>
+                                <entry>Candidates should be able to Interact with shells and
+                                    commands using the command line. This includes typing valid
+                                    commands and command sequences, defining, referencing and
+                                    exporting environment variables, using command history and
+                                    editing facilities, invoking commands in the path and outside
+                                    the path, using command substitution, applying commands
+                                    recursively through a directory tree and using man to find out
+                                    about commands.</entry>
+                                <entry>. bash echo env exec export man pwd set unset ~/.bash_history ~/.profile</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Use streams, pipes, and redirects</entry>
+                                <entry>Candidates should be able to redirect streams and connect
+                                    them in order to efficiently process textual data. Tasks include
+                                    redirecting standard input, standard output, and standard error,
+                                    piping the output of one command to the input of another
+                                    command, using the output of one command as arguments to another
+                                    command and sending output to both stdout and a file.</entry>
+                                <entry>tee xargs &lt; &lt;&lt; &gt;&gt; | ' '</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Create, monitor, and kill processes</entry>
+                                <entry>Candidates should be able to manage processes. This includes
+                                    knowing how to run jobs in the foreground and background, bring
+                                    a job from the background to the foreground and vice versa,
+                                    start a process that will run without being connected to a
+                                    terminal and signal a program to continue running after logout.
+                                    Tasks also include monitoring active processes, selecting and
+                                    sorting processes for display, sending signals to processes,
+                                    killing processes and identifying and killing X applications
+                                    that did not terminate after the X session closed.</entry>
+                                <entry>&#38; bg fg jobs kill nohup ps top</entry>
+                            </row>
+                            <row>
+                                <entry>6</entry>
+                                <entry>Process text streams using filters</entry>
+                                <entry>Candidates should should be able to apply filters to text
+                                    streams. Tasks include sending text files and output streams
+                                    through text utility filters to modify the output, and using
+                                    standard Unix commands found in the GNU textutils package.</entry>
+                                <entry>cat cut expand fmt head join nl od paste pr sed sort split
+                                    tac tail tr unexpand uniq wc</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard</bridgehead>
+                <table pgwide="0">
+                    <title>LPI exam 101: Devices, Linux Filesystems, Filesystem Hierarchy Standard</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Create and change hard and symbolic links</entry>
+                                <entry>Candidates should be able to create and manage hard and
+                                    symbolic links to a file. This objective includes the ability to
+                                    create and identify links, copy files through links, and use
+                                    linked files to support system administration tasks.</entry>
+                                <entry>ln</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Manage file ownership</entry>
+                                <entry>Candidates should be able to control user and group ownership
+                                    of files. This objective includes the ability to change the user
+                                    and group owner of a file as well as the default group owner for
+                                    new files. Key files, terms, and utilities include:</entry>
+                                <entry>chmod chown chgrp</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Create partitions and filesystems</entry>
+                                <entry>Candidates should be able to configure disk partitions and
+                                    then create filesystems on media such as hard disks. This
+                                    objective includes using various mkfs commands to set up
+                                    partitions to various filesystems, including ext2, ext3,
+                                    reiserfs, vfat, and xfs.</entry>
+                                <entry>fdisk mkfs</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Maintain the integrity of filesystems</entry>
+                                <entry>Candidates should be able to verify the integrity of
+                                    filesystems, monitor free space and inodes, and repair simple
+                                    filesystem problems. This objective includes the commands
+                                    required to maintain a standard filesystem, as well as the extra
+                                    data associated with a journaling filesystem.</entry>
+                                <entry>du df fsck e2fsck mke2fs debugfs dumpe2fs tune2fs</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Control mounting and unmounting filesystems</entry>
+                                <entry>Candidates should be able to configure the mounting of a
+                                    filesystem. This objective includes the ability to manually
+                                    mount and unmount filesystems, configure filesystem mounting on
+                                    bootup, and configure user mountable removeable filesystems such
+                                    as tape drives, floppies, and CDs.</entry>
+                                <entry>/etc/fstab mount umount</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Managing disk quota</entry>
+                                <entry>Candidates should be able to manage disk quotas for users.
+                                    This objective includes setting up a disk quota for a
+                                    filesystem, editing, checking, and generating user quota
+                                    reports. quotaon</entry>
+                                <entry>quota edquota repquota</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Use file permissions to control access to files</entry>
+                                <entry>Candidates should be able to control file access through
+                                    permissions. This objective includes access permissions on
+                                    regular and special files as well as directories. Also included
+                                    are access modes such as suid, sgid, and the sticky bit, the use
+                                    of the group field to grant file access to workgroups, the
+                                    immutable flag, and the default file creation mode.</entry>
+                                <entry>chmod umask chattr</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Find system files and place files in the correct location</entry>
+                                <entry>Candidates should be thouroughly familiar with the Filesystem
+                                    Hierarchy Standard, including typical file locations and
+                                    directory classifications. This objective includes the ability
+                                    to find files and commands on a Linux system.</entry>
+                                <entry>find locate slocate updatedb whereis which /etc/updatedb.conf</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 110: The X Window System</bridgehead>
+                <table pgwide="0">
+                    <title>LPI exam 101: The X Window System</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Setup a display manager</entry>
+                                <entry>Candidate should be able setup and customize a Display
+                                    manager. This objective includes turning the display manager on
+                                    or off and changing the display manager greeting. This objective
+                                    includes changing default bitplanes for the display manager. It
+                                    also includes configuring display managers for use by
+                                    X-stations. This objective covers the display managers XDM (X
+                                    Display Manger), GDM (Gnome Display Manager) and KDM (KDE
+                                    Display Manager).</entry>
+                                <entry>/etc/inittab /etc/X11/xdm/* /etc/X11/kdm/* /etc/X11/gdm/*</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Install &#38; Configure XFree86</entry>
+                                <entry>Candidate should be able to configure and install X and an X
+                                    font server. This objective includes verifying that the video
+                                    card and monitor are supported by an X server, as well as
+                                    customizing and tuning X for the videocard and monitor. It also
+                                    includes installing an X font server, installing fonts, and
+                                    configuring X to use the font server (may require a manual edit
+                                    of /etc/X11/XF86Config in the &quot;Files&quot; section).</entry>
+                                <entry>XF86Setup xf86config xvidtune /etc/X11/XF86Config .Xresources</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Install &#38; Customize a Window Manager Environment</entry>
+                                <entry>Candidate should be able to customize a system-wide desktop
+                                    environment and/or window manager, to demonstrate an
+                                    understanding of customization procedures for window manager
+                                    menus and/or desktop panel menus. This objective includes
+                                    selecting and configuring the desired x-terminal (xterm, rxvt,
+                                    aterm etc.), verifying and resolving library dependency issues
+                                    for X applications, exporting X-display to a client workstation</entry>
+                                <entry>.xinitrc .Xdefaults xhost DISPLAY environment variable</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </sect3>
+            <sect3>
+                <title>LPI Exam 102</title>
+                <bridgehead>Topic 105: Kernel</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: The kernel</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Reconfigure, build, and install a custom kernel and kernel modules</entry>
+                                <entry>Candidates should be able to customize, build, and install a
+                                    kernel and kernel loadable modules from source This objective
+                                    includes customizing the current kernel configuration, building
+                                    a new kernel, and building kernel modules as appropriate. It
+                                    also includes installing the new kernel as well as any modules,
+                                    and ensuring that the boot manager can locate the new kernel and
+                                    associated files (generally located under /boot, see objective
+                                    1.102.2 for more details about boot manager configuration).</entry>
+                                <entry>/usr/src/Linux/* /usr/src/Linux/.config
+                                    /lib/modules/kernel-version/* /boot/* make make targets: config,
+                                    menuconfig, xconfig, oldconfig, modules, install,
+                                    modules_install, depmod</entry>
+                            </row>
+                            <row>
+                                <entry/>
+                                <entry/>
+                                <entry/>
+                                <entry/>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Manage/Query kernel and kernel modules at runtime</entry>
+                                <entry>Candidates should be able to manage and/or query a kernel and
+                                    kernel loadable modules. This objective includes using
+                                    command-line utilities to get information about the currently
+                                    running kernel and kernel modules. It also includes manually
+                                    loading and unloading modules as appropriate. It also includes
+                                    being able to determine when modules can be unloaded and what
+                                    parameters a module accepts. Candidates should be able to
+                                    configure the system to load modules by names other than their
+                                    file name.</entry>
+                                <entry>/lib/modules/kernel-version/modules.dep /etc/modules.conf
+                                    &#38; /etc/conf.modules depmod insmod lsmod rmmod modinfo
+                                    modprobe uname</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 106: Boot, Initialization, Shutdown and Runlevels</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Boot, Initialization, Shutdown and Runlevels</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Boot the system</entry>
+                                <entry>Candidates should be able to guide the system through the
+                                    booting process. This includes giving commands to the boot
+                                    loader and giving options to the kernel at boot time, and
+                                    checking the events in the log files.</entry>
+                                <entry>/var/log/messages /etc/conf.modules or /etc/modules.conf
+                                    dmesg LILO GRUB</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Change runlevels and shutdown or reboot system</entry>
+                                <entry>Candidates should be able to manage the runlevel of the
+                                    system. This objective includes changing to single user mode,
+                                    shutdown or rebooting the system. Candidates should be able to
+                                    alert users before switching runlevel, and properly terminate
+                                    processes. This objective also includes setting the default runlevel.</entry>
+                                <entry>/etc/inittab shutdown init</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 107: Printing</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Printing</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Manage printers and print queues</entry>
+                                <entry>Candidates should be able to manage print queues and user
+                                    print jobs. This objective includes monitoring print server and
+                                    user print queues and troubleshooting general printing problems.</entry>
+                                <entry>/etc/printcap lpc lpq lprm lp</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Print files</entry>
+                                <entry>Candidates should be able to manage print queues and
+                                    manipulate print jobs. This objective includes adding and
+                                    removing jobs from configured printer queues and converting text
+                                    files to postscript for printing.</entry>
+                                <entry>lpr lpq mpage</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Install and configure local and remote printers</entry>
+                                <entry>Candidate should be able to install a printer daemon, install
+                                    and configure a print filter (e.g.: apsfilter, magicfilter).
+                                    This objective includes making local and remote printers
+                                    accessible for a Linux system, including postscript,
+                                    non-postscript, and Samba printers.</entry>
+                                <entry>/etc/printcap /etc/apsfilter/* /var/lib/apsfilter/*/
+                                    /etc/magicfilter/*/ /var/spool/lpd/*/ lpd</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 108: Documentation</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Documentation</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Find Linux documentation on the Internet</entry>
+                                <entry>Candidates should be able to find and use Linux
+                                    documentation. This objective includes using Linux documentation
+                                    at sources such as the Linux Documentation Project (LDP), vendor
+                                    and third-party websites, newsgroups, newsgroup archives, and
+                                    mailing lists.</entry>
+                                <entry>Not applicable</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Use and manage local system documentation</entry>
+                                <entry>Candidates should be able to use and administer the man
+                                    facility and the material in /usr/share/doc/. This objective
+                                    includes finding relevant man pages, searching man page
+                                    sections, finding commands and man pages related to them, and
+                                    configuring access to man sources and the man system. It also
+                                    includes using system documentation stored in /usr/share/doc/
+                                    and determining what documentation to keep in /usr/share/doc/.</entry>
+                                <entry>MANPATH man apropos whatis</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Notify users on system-related issues</entry>
+                                <entry>Candidates should be able to notify the users about current
+                                    issues related to the system. This objective includes automating
+                                    the communication process, e.g. through logon messages.</entry>
+                                <entry>/etc/issue /etc/issue.net /etc/motd</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 109:</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Shells, Scripting, Programming and Compiling</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry/>
+                                <entry/>
+                                <entry/>
+                                <entry/>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Customize or write simple scripts</entry>
+                                <entry>Candidate should be able to customize existing scripts, or
+                                    write simple new (ba)sh scripts. This objective includes using
+                                    standard sh Syntax (loops, tests), using command substitution,
+                                    testing command return values, testing of file status, and
+                                    conditional mailing to the superuser. This objective also
+                                    includes making sure the correct interpreter is called on the
+                                    first (#!) line of scripts. This objective also includes
+                                    managing location, ownership, execution and suid-rights of scripts.</entry>
+                                <entry>while for test chmod</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Customize and use the shell environment</entry>
+                                <entry>Candidate should be able to customize shell environments to
+                                    meet users' needs. This objective includes setting environment
+                                    variables (e.g. PATH) at login or when spawning a new shell. It
+                                    also includes writing bash functions for frequently used
+                                    sequences of commands.</entry>
+                                <entry>~/.bash_profile ~/.bash_login ~/.profile ~/.bashrc
+                                    ~/.bash_logout ~/.inputrc function (Bash built-in command)
+                                    export env set (Bash built-in command) unset (Bash built-in command)</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 111: Administrative Tasks</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Administrative Tasks</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Configure and use system log files to meet administrative and
+                                    security needs</entry>
+                                <entry>Candidate should be able to configure system logs. This
+                                    objective includes managing the type and level of information
+                                    logged, manually scanning log files for notable activity,
+                                    monitoring log files, arranging for automatic rotation and
+                                    archiving of logs and tracking down problems noted in logs.</entry>
+                                <entry>/etc/syslog.conf /var/log/* logrotate tail -f</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Tune the user environment and system environment variables</entry>
+                                <entry>Candidate should be able to modify global and user profiles.
+                                    This includes setting environment variables, maintaining skel
+                                    directories for new user accounts and setting command search
+                                    path with the proper directory.</entry>
+                                <entry>/etc/profile /etc/skel env export set unset</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Manage users and group accounts and related system files</entry>
+                                <entry>Candidate should be able to add, remove, suspend and change
+                                    user accounts. Tasks include to add and remove groups, to change
+                                    user/group info in passwd/group databases. The objective also
+                                    includes creating special purpose and limited accounts. Key
+                                    files, terms, and utilities include:</entry>
+                                <entry>/etc/passwd /etc/shadow /etc/group /etc/gshadow chage gpasswd
+                                    groupadd groupdel groupmod grpconv grpunconv passwd pwconv
+                                    pwunconv useradd userdel usermod</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Automate system administration tasks by scheduling jobs to
+                                    run in the future</entry>
+                                <entry>Candidate should be able to use cron or anacron to run jobs
+                                    at regular intervals and to use at to run jobs at a specific
+                                    time. Task include managing cron and at jobs and configuring
+                                    user access to cron and at services.</entry>
+                                <entry>/etc/anacrontab /etc/at.deny /etc/at.allow /etc/crontab
+                                    /etc/cron.allow /etc/cron.deny /var/spool/cron/* at atq atrm crontab</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Maintain an effective data backup strategy</entry>
+                                <entry>Candidate should be able to plan a backup strategy and backup
+                                    filesystems automatically to various media. Tasks include
+                                    dumping a raw device to a file or vice versa, performing partial
+                                    and manual backups, verifying the integrity of backup files and
+                                    partially or fully restoring backups.</entry>
+                                <entry>cpio dd dump restore tar</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Maintain system time</entry>
+                                <entry>Candidate should be able to properly maintain the system time
+                                    and synchronize the clock over NTP. Tasks include setting the
+                                    system date and time, setting the BIOS clock to the correct time
+                                    in UTC, configuring the correct timezone for the system and
+                                    configuring the system to correct clock drift to match NTP clock.</entry>
+                                <entry>/usr/share/zoneinfo /etc/timezone /etc/localtime
+                                    /etc/ntp.conf /etc/ntp.drift date hwclock ntpd ntpdate</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 112:</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Networking Fundamentals</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Configure Linux as a PPP client</entry>
+                                <entry>Candidates should understand the basics of the PPP protocol
+                                    and be able to configure and use PPP for outbound connections.
+                                    This objective includes the definition of the chat sequence to
+                                    connect (given a login example) and the setup commands to be run
+                                    automatically when a PPP connection is made. It also includes
+                                    initialisation and termination of a PPP connection, with a
+                                    modem, ISDN or ADSL and setting PPP to automatically reconnect
+                                    if disconnected.</entry>
+                                <entry>/etc/ppp/options.* /etc/ppp/peers/* /etc/wvdial.conf
+                                    /etc/ppp/ip-up /etc/ppp/ip-down wvdial pppd</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Fundamentals of TCP/IP</entry>
+                                <entry>Candidates should demonstrate a proper understanding of
+                                    network fundamentals. This objective includes the understanding
+                                    of IP-addresses, network masks and what they mean (i.e.
+                                    determine a network and broadcast address for a host based on
+                                    its subnet mask in &quot;dotted quad&quot; or
+                                    abbreviated notation or determine the network address, broadcast
+                                    address and netmask when given an IP-address and number of
+                                    bits). It also covers the understanding of the network classes
+                                    and classless subnets (CIDR) and the reserved addresses for
+                                    private network use. It includes the understanding of the
+                                    function and application of a default route. It also includes
+                                    the understanding of basic internet protocols (IP, ICMP, TCP,
+                                    UDP) and the more common TCP and UDP ports (20, 21, 23, 25, 53,
+                                    80, 110, 119, 139, 143, 161).</entry>
+                                <entry>/etc/services ftp telnet host ping dig traceroute whois</entry>
+                            </row>
+                            <row>
+                                <entry>7</entry>
+                                <entry>TCP/IP configuration and troubleshooting</entry>
+                                <entry>Candidates should be able to view, change and verify
+                                    configuration settings and operational status for various
+                                    network interfaces. This objective includes manual and automatic
+                                    configuration of interfaces and routing tables. This especially
+                                    means to add, start, stop, restart, delete or reconfigure
+                                    network interfaces. It also means to change, view or configure
+                                    the routing table and to correct an improperly set default route
+                                    manually. Candidates should be able to configure Linux as a DHCP
+                                    client and a TCP/IP host and to debug problems associated with
+                                    the network configuration.</entry>
+                                <entry>/etc/HOSTNAME or /etc/hostname /etc/hosts /etc/networks
+                                    /etc/host.conf /etc/resolv.conf /etc/nsswitch.conf ifconfig
+                                    route dhcpcd, dhcpclient, pump host hostname (domainname,
+                                    dnsdomainname) netstat ping traceroute tcpdump the network
+                                    scripts run during system initialization.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 113: Networking Services</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Networking Services</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Setup and configure basic DNS services</entry>
+                                <entry>Candidate should be able to configure hostname lookups and
+                                    troubleshoot problems with local caching-only name server.
+                                    Requires an understanding of the domain registration and DNS
+                                    translation process. Requires understanding key differences in
+                                    configuration files for bind 4 and bind 8.</entry>
+                                <entry>/etc/hosts /etc/resolv.conf /etc/nsswitch.conf
+                                    /etc/named.boot (v.4) or /etc/named.conf (v.8) named</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Configure and manage inetd, xinetd, and related services</entry>
+                                <entry>Candidates should be able to configure which services are
+                                    available through inetd, use tcpwrappers to allow or deny
+                                    services on a host-by-host basis, manually start, stop, and
+                                    restart internet services, configure basic network services
+                                    including telnet and ftp. Set a service to run as another user
+                                    instead of the default in inetd.conf.</entry>
+                                <entry>/etc/inetd.conf /etc/hosts.allow /etc/hosts.deny
+                                    /etc/services /etc/xinetd.conf /etc/xinetd.log</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Operate and perform basic configuration of sendmail</entry>
+                                <entry>Candidate should be able to modify simple parameters in
+                                    sendmail configuration files (including the &quot;Smart
+                                    Host&quot; parameter, if necessary), create mail aliases,
+                                    manage the mail queue, start and stop sendmail, configure mail
+                                    forwarding and perform basic troubleshooting of sendmail. The
+                                    objective includes checking for and closing open relay on the
+                                    mailserver. It does not include advanced custom configuration of
+                                    Sendmail. Key files, terms, and utilities include:</entry>
+                                <entry>/etc/aliases or /etc/mail/aliases /etc/mail/* ~/.forward
+                                    mailq sendmail newaliases</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Operate and perform basic configuration of Apache</entry>
+                                <entry>Candidates should be able to modify simple parameters in
+                                    Apache configuration files, start, stop, and restart httpd,
+                                    arrange for automatic restarting of httpd upon boot. Does not
+                                    include advanced custom configuration of Apache.</entry>
+                                <entry>httpd.conf apachectl httpd</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Properly manage the NFS, smb, and nmb daemons</entry>
+                                <entry>Candidate should know how to mount remote filesystems using
+                                    NFS, configure NFS for exporting local filesystems, start, stop,
+                                    and restart the NFS server. Install and configure Samba using
+                                    the included GUI tools or direct edit of the /etc/smb.conf file
+                                    (Note: this deliberately excludes advanced NT domain issues but
+                                    includes simple sharing of home directories and printers, as
+                                    well as correctly setting the nmbd as a WINS client).</entry>
+                                <entry>/etc/exports /etc/fstab /etc/smb.conf mount umount</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Set up secure shell (OpenSSH)</entry>
+                                <entry>The candidate should be able to obtain and configure OpenSSH.
+                                    This objective includes basic OpenSSH installation and
+                                    troubleshooting, as well as configuring sshd to start at system boot..</entry>
+                                <entry>/etc/hosts.allow /etc/hosts.deny /etc/nologin
+                                    /etc/ssh/sshd_config /etc/ssh_known_hosts /etc/sshrc sshd ssh-keygen</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 114: Security</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 102: Security</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Setup host security</entry>
+                                <entry>Candidate should know how to set up a basic level of host
+                                    security. Tasks include syslog configuration, shadowed
+                                    passwords, set up of a mail alias for root's mail and turning of
+                                    all network services not in use.</entry>
+                                <entry>/etc/inetd.conf or /etc/inet.d/* /etc/nologin /etc/passwd
+                                    /etc/shadow /etc/syslog.conf</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Perform security administration tasks</entry>
+                                <entry>Candidates should know how to review system configuration to
+                                    ensure host security in accordance with local security policies.
+                                    This objective includes how to configure TCP wrappers, find
+                                    files with SUID/SGID bit set, verify packages, set or change
+                                    user passwords and password aging information, update binaries
+                                    as recommended by CERT, BUGTRAQ, and/or distribution's security
+                                    alerts. Includes basic knowledge of ipchains and iptables.</entry>
+                                <entry>/proc/net/ip_fwchains /proc/net/ip_fwnames
+                                    /proc/net/ip_masquerade find ipchains passwd socket iptables</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Setup user level security</entry>
+                                <entry>Candidate should be able to configure user level security.
+                                    Tasks include limits on user logins, processes, and memory
+                                    usage. Key files, terms, and utilities include:</entry>
+                                <entry>quota usermod</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </sect3>
+        </sect2>
+        <sect2>
+            <title>Intermediate Level Administration (LPIC2)</title>
+            <para>Status: Available now; published November 29, 2001 Pre-Requisites: Completion of
+                LPIC Level 1 Requirements: Passing Exams 201 and 202 # Overview of Tasks: To pass
+                Level 2 someone should be able to</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Administer a small to medium-sized site</para>
+                </listitem>
+                <listitem>
+                    <para>Plan, implement, maintain, keep consistent, secure, and troubleshoot a
+                        small mixed (MS, Linux) network, including a:</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>LAN server (samba)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Internet Gateway (firewall, proxy, mail, news)</para>
+                        </listitem>
+                        <listitem>
+                            <para>InternetServer(webserver,FTPserver)</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Supervise assistants</para>
+                </listitem>
+                <listitem>
+                    <para>Advise management on automation and purchases</para>
+                </listitem>
+            </itemizedlist>
+            <sect3>
+                <title>LPI Exam 201</title>
+                <bridgehead>Topic 201: Linux Kernel</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: The Linux Kernel</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Kernel Components</entry>
+                                <entry>Candidates should be able to utilize kernel components that
+                                    are necessary to specific hardware, hardware drivers, system
+                                    resources and requirements. This objective includes implementing
+                                    different types of kernel images, identifying stable and
+                                    development kernels and patches, as well as using kernel modules.</entry>
+                                <entry>zImage bzImage</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Compiling a kernel</entry>
+                                <entry>Candidates should be able to properly compile a kernel to
+                                    include or disable specific features of the Linux kernel as
+                                    necessary. This objective includes compiling and recompiling the
+                                    Linux kernel as needed, implementing updates and noting changes
+                                    in a new kernel, creating a system initrd image, and installing
+                                    new kernels.</entry>
+                                <entry>/usr/src/Linux/ /etc/lilo.conf make options (config, xconfig,
+                                    menuconfig, oldconfig, mrproper zImage, bzImage, modules,
+                                    modules_install) mkinitrd (both Red Hat and Debian based) make</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Customizing a kernel</entry>
+                                <entry>Candidates should be able to customize a kernel for specific
+                                    system requirements by patching, compiling, and editing
+                                    configuration files as required. This objective includes being
+                                    able to assess requirements for a kernel compile versus a kernel
+                                    patch as well as build and configure kernel modules.</entry>
+                                <entry>/usr/src/Linux /proc/sys/kernel/ /etc/conf.modules,
+                                    /etc/modules.conf patch make modprobe insmod, lsmod kerneld kmod</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Patching a kernel</entry>
+                                <entry>Candidates should be able to properly patch a kernel for
+                                    various purposes including to implement kernel updates, to
+                                    implement bug fixes, and to add support for new hardware. This
+                                    objective also includes being able to properly remove kernel
+                                    patches from existing production kernels.</entry>
+                                <entry>Makefile patch gzip bzip</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 202:</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: System Startup</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Customizing system startup and boot processes</entry>
+                                <entry>Candidates should be able to edit appropriate system startup
+                                    scripts to customize standard system run levels and boot
+                                    processes. This objective includes interacting with run levels
+                                    and creating custom initrd images as needed.</entry>
+                                <entry>/etc/init.d/ /etc/inittab /etc/rc.d/ mkinitrd (both Red Hat
+                                    and Debian scripts)</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>System recovery</entry>
+                                <entry>Candidates should be able to properly manipulate a Linux
+                                    system during both the boot process and during recovery mode.
+                                    This objective includes using both the init utility and init=
+                                    kernel options.</entry>
+                                <entry>inittab LILO init mount fsck</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 203: Filesystem</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: Filesystem</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Operating</entry>
+                                <entry>the Linux filesystem Candidates should be able to properly
+                                    configure and navigate the standard Linux filesystem. This
+                                    objective includes configuring and mounting various filesystem
+                                    types. Also included, is manipulating filesystems to adjust for
+                                    disk space requirements or device additions.</entry>
+                                <entry>/etc/fstab /etc/mtab /proc/mounts mount and umount sync
+                                    swapon swapoff</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Creating and configuring filesystem options</entry>
+                                <entry>Candidates should be able to configure automount filesystems.
+                                    This objective includes configuring automount for network and
+                                    device filesystems. Also included is creating non ext2
+                                    filesystems for devices such as CD-ROMs.</entry>
+                                <entry>/etc/auto.master /etc/auto.[dir] mkisofs dd mke2fs</entry>
+                            </row>
+                            <row>
+                                <entry>4</entry>
+                                <entry>Maintaining a Linux filesystem</entry>
+                                <entry>Candidates should be able to properly maintain a Linux
+                                    filesystem using system utilities. This objective includes
+                                    manipulating a standard ext2 filesystem.</entry>
+                                <entry>fsck (fsck.ext2) badblocks mke2fs dumpe2fs debuge2fs tune2fs</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 204: Hardware</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: Hardware</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Configuring PCMCIA devices</entry>
+                                <entry>Candidates should be able to configure a Linux installation
+                                    to include PCMCIA support. This objective includes configuring
+                                    PCMCIA devices, such as ethernet adapters, to autodetect when inserted.</entry>
+                                <entry>/etc/pcmcia/ *.opts cardctl cardmgr</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Configuring RAID</entry>
+                                <entry>Candidates should be able to configure and implement software
+                                    RAID. This objective includes using mkraid tools and configuring
+                                    RAID 0, 1, and 5.</entry>
+                                <entry>/etc/raidtab mkraid</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Software and kernel configuration</entry>
+                                <entry>Candidates should be able to configure kernel options to
+                                    support various hardware devices including UDMA66 drives and IDE
+                                    CD burners. This objective includes using LVM (Logical Volume
+                                    Manager) to manage hard disk drives and particitions as well as
+                                    software tools to interact with hard disk settings.</entry>
+                                <entry>/proc/interrupts hdparm tune2fs sysctl</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Adding new hardware</entry>
+                                <entry>Candidates should be able to configure internal and external
+                                    devices for a system including new hard disks, dumb terminal
+                                    devices, serial UPS devices, multi-port serial cards, and LCD panels.</entry>
+                                <entry>/proc/bus/usb XFree86 modprobe lsmod lsdev lspci setserial usbview</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 209: File and Service Sharing</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: File and Service Sharing</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Configuring a samba server</entry>
+                                <entry>The candidate should be able to set up a Samba server for
+                                    various clients. This objective includes setting up a login
+                                    script for Samba clients, and setting up an nmbd WINS server.
+                                    Also included is to change the workgroup in which a server
+                                    participates, define a shared directory in smb.conf, define a
+                                    shared printer in smb.conf, use nmblookup to test WINS server
+                                    functionality, and use the smbmount command to mount an SMB
+                                    share on a Linux client.</entry>
+                                <entry>smbd, nmbd smbstatus, smbtestparm, smbpasswd, nmblookup
+                                    smb.conf, lmhosts</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Configuring an NFS server</entry>
+                                <entry>The candidate should be able to create an exports file and
+                                    specify filesystems to be exported. This objective includes
+                                    editing exports file entries to restrict access to certain
+                                    hosts, subnets or netgroups. Also included is to specify mount
+                                    options in the exports file, configure user ID mapping, mount an
+                                    NFS filesystem on a client, using mount options to specify soft
+                                    or hard and background retries, signal handling, locking, and
+                                    block size. The candidate should also be able to configure
+                                    tcpwrappers to further secure NFS.</entry>
+                                <entry>/etc/exports exportfs showmount nfsstat</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 211: System Maintenance</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: System Maintenance</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>System logging</entry>
+                                <entry>The candidate should be able to configure syslogd to act as a
+                                    central network log server. This objective also includes
+                                    configuring syslogd to send log output to a central log server,
+                                    logging remote connections, and using grep and other text utils
+                                    to automate log analysis.</entry>
+                                <entry>syslog.conf /etc/hosts sysklogd</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Packaging software</entry>
+                                <entry>The candidate should be able to build a package. This
+                                    objective includes building (or rebuilding) both RPM and DEB
+                                    packaged software.</entry>
+                                <entry>/debian/rules SPEC file format rpm</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Backup operations</entry>
+                                <entry>The candidate should be able to create an offsite backup
+                                    storage plan.</entry>
+                                <entry>Not applicable</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 213: System Customization and Automation</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: System Customization and Automation</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Automating tasks using scripts</entry>
+                                <entry>The candidate should be able to write simple Perl scripts
+                                    that make use of modules where appropriate, use the Perl taint
+                                    mode to secure data, and install Perl modules from CPAN. This
+                                    objective includes using sed and awk in scripts, and using
+                                    scripts to check for process execution and generate alerts by
+                                    email or pager if a process dies. Candidates should be able to
+                                    write and schedule automatic execution of scripts to parse logs
+                                    for alerts and email them to administrators, synchronize files
+                                    across machines using rsync, monitor files for changes and
+                                    generate email alerts, and write a script that notifies
+                                    administrators when specified users log in or out.</entry>
+                                <entry>perl -MCPAN -e shell bash, awk, sed crontab at</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 214: Troubleshooting</bridgehead>
+                <table pgwide="0">
+                    <title>LPI Exam 201: Troubleshooting</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Creating recovery disks</entry>
+                                <entry>Candidate should be able to: create both a standard bootdisk
+                                    for system entrance, and a recovery disk for system repair.</entry>
+                                <entry>/etc/fstab /etc/inittab Any standard editor Familiarity with
+                                    the location and contents of the LDP Bootdisk-HOWTO
+                                    /usr/sbin/rdev /bin/cat /bin/mount (includes -o loop switch)
+                                    /sbin/lilo /bin/dd /sbin/mke2fs /usr/sbin/chroot</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Identifying boot stages</entry>
+                                <entry>Candidate should be able to: determine, from bootup text, the
+                                    4 stages of boot sequence and distinguish between each.</entry>
+                                <entry>boot loader start and hand off to kernel kernel loading
+                                    hardware initializiation and setup daemon initialization and setup</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Troubleshooting LILO</entry>
+                                <entry>Candidate should be able to: determine specific stage
+                                    failures and corrective techniques.</entry>
+                                <entry>/boot/boot.b Know meaning of L, LI, LIL, LILO, and scrolling
+                                    010101 errrors Know the different LILO install locations, MBR,
+                                    /dev/fd0, or primary/extended partition. Know significance of
+                                    /boot/boot.### files</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>General troubleshooting</entry>
+                                <entry>A candidate should be able to recognize and identify boot
+                                    loader and kernel specific stages and utilize kernel boot
+                                    messages to diagnose kernel errors. This objective includes
+                                    being able to identify and correct common hardware issues, and
+                                    be able to determine if the problem is hardware or software.</entry>
+                                <entry>/proc filesystem Various system and daemon log files in
+                                    /var/log/ /, /boot, and /lib/modules screen output during bootup
+                                    kernel syslog entries in system logs (if entry is able to be
+                                    gained) location of system kernel and attending modules dmesg
+                                    /sbin/lspci /usr/bin/lsdev /sbin/lsmod /sbin/modprobe
+                                    /sbin/insmod /bin/uname strace strings ltrace lsof</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Troubleshooting system resources</entry>
+                                <entry>A candidate should be able to identify, diagnose and repair
+                                    local system environment.</entry>
+                                <entry>/etc/profile &#38;&#38; /etc/profile.d/ /etc/init.d/
+                                    /etc/rc.* /etc/sysctl.conf /etc/bashrc /etc/ld.so.conf (or other
+                                    appropriate global shell configuration files) Core system
+                                    variables Any standard editor /bin/ln /bin/rm /sbin/ldconfig /sbin/sysctl</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Troubleshooting environment configurations</entry>
+                                <entry>A candidate should be able to identify common local system
+                                    and user environment configuration issues and common repair techniques.</entry>
+                                <entry>/etc/inittab /etc/rc.local /etc/rc.boot
+                                    /var/spool/cron/crontabs/ /etc/`shell_name`.conf /etc/login.defs
+                                    /etc/syslog.conf /etc/passwd /etc/shadow /etc/group /etc/profile
+                                    /sbin/init /usr/sbin/cron /usr/bin/crontab</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </sect3>
+            <sect3>
+                <title>Exam 202</title>
+                <bridgehead>Topic XXX: Networking</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: Networking</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>5</entry>
+                                <entry>Basic networking configuration</entry>
+                                <entry>Modified: 2001-August-24 Maintainer: Kara Pritchard Weight: 5
+                                    Description: The candidate should be able to configure a network
+                                    device to be able to connect to a local network and a wide-area
+                                    network. This objective includes being able to communicate
+                                    between various subnets within a single network, configure
+                                    dialup access using mgetty, configure dialup access using a
+                                    modem or ISDN, configure authentication protocols such as PAP
+                                    and CHAP, and configure TCP/IP logging.</entry>
+                                <entry>/sbin/route /sbin/ifconfig /sbin/arp /usr/sbin/arpwatch /etc/</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Advanced Network Configuration and Troubleshooting</entry>
+                                <entry>The candidate should be able to configure a network device to
+                                    implement various network authentication schemes. This objective
+                                    includes configuring a multi-homed network device, configuring a
+                                    virtual private network and resolving networking and
+                                    communication problems.</entry>
+                                <entry>/sbin/route /sbin/route /sbin/ifconfig /bin/netstat /bin/ping
+                                    /sbin/arp /usr/sbin/tcpdump /usr/sbin/lsof /usr/bin/nc</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 206: Mail &#38; News</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: Mail &#38; news</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Serving news</entry>
+                                <entry>Candidates should be able to install and configure news
+                                    servers using inn. This objective includes customizing and
+                                    monitoring served newsgroups.</entry>
+                                <entry>innd</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Configuring mailing lists</entry>
+                                <entry>Install and maintain mailing lists using majordomo. Monitor
+                                    majordomo problems by viewing majordomo logs.</entry>
+                                <entry>Majordomo2</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Managing Mail Traffic</entry>
+                                <entry>Candidates shold be able to implement client mail management
+                                    software to filter, sort, and monitor incoming user mail. This
+                                    objective includes using software such as procmail on both
+                                    server and client side.</entry>
+                                <entry>procmail .procmailrc</entry>
+                            </row>
+                            <row>
+                                <entry>Using Sendmail</entry>
+                                <entry>4</entry>
+                                <entry>Candidates should be able to manage a Sendmail configuration
+                                    including email aliases, mail quotas, and virtual mail domains.
+                                    This objective includes configuring internal mail relays and
+                                    monitoring SMTP servers.</entry>
+                                <entry>/etc/aliases sendmail.cw virtusertable genericstable</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 207 DNS</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: DNS</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Basic BIND 8 configuration</entry>
+                                <entry>The candidate should be able to configure BIND to function as
+                                    a caching-only DNS server. This objective includes the ability
+                                    to convert a BIND 4.9 named.boot file to the BIND 8.x named.conf
+                                    format, and reload the DNS by using kill or ndc. This objective
+                                    also includes configuring logging and options such as directoryh
+                                    location for zone files.</entry>
+                                <entry>/etc/named.conf /usr/sbin/ndc /usr/sbin/named-bootconf kill</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Create and maintain DNS zones</entry>
+                                <entry>The candidate should be able to create a zone file for a
+                                    forward or reverse zone or root level server. This objective
+                                    includes setting appropriate values for the SOA resource record,
+                                    NS records, and MX records. Also included is adding hosts with A
+                                    resource records and CNAME records as appropriate, adding hosts
+                                    to reverse zones with PTR records, and adding the zone to the
+                                    /etc/named.conf file using the zone statement with appropriate
+                                    type, file and masters values. A candidate should also be able
+                                    to delegate a zone to another DNS server.</entry>
+                                <entry>contents of /var/named zone file Syntax resource record
+                                    formats dig nslookup host</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Securing a DNS server</entry>
+                                <entry>The candidate should be able to configure BIND to run as a
+                                    non-root user, and configure BIND to run in a chroot jail. This
+                                    objective includes configuring DNSSEC statements such as key and
+                                    trusted-keys to prevent domain spoofing. Also included is the
+                                    ability to configure a split DNS configuration using the
+                                    forwarders statement, and specifying a non-standard version
+                                    number string in response to queries.</entry>
+                                <entry>SysV init files or rc.local /etc/named.conf /etc/passwd dnskeygen</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 208 Web Services</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: Web Services</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Implementing a web server</entry>
+                                <entry>Candidates should be able to install and configure an Apache
+                                    web server. This objective includes monitoring Apache load and
+                                    performance, restricting client user access, configuring
+                                    mod_perl and PHP support, and setting up client user
+                                    authentication. Also included is configuring Apache server
+                                    options such as maximum requests, minimum and maximim servers,
+                                    and clients.</entry>
+                                <entry>access.log .htaccess httpd.conf mod_auth htpasswd htgroup</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Maintaining a web server</entry>
+                                <entry>Candidates should be able to configure Apache to use virtual
+                                    hosts for websites without dedicated IP addresses. This
+                                    objective also includes creating an SSL certification for Apache
+                                    and defining SSL definitions in configuration files using
+                                    OpenSSL. Also included is customizing file access by
+                                    implementing redirect statements in Apache's configuration files.</entry>
+                                <entry>httpd.conf</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Implementing a proxy server</entry>
+                                <entry>Candidates should be able to install and configure a proxy
+                                    server using Squid. This objective includes impelementing access
+                                    policies, setting up authentication, and utilizing memory usage.</entry>
+                                <entry>squid.conf acl http_access</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 210 Network Client Management</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: Network Client Management</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>NIS configuration</entry>
+                                <entry>The candidate should be able to configure an NIS server and
+                                    create NIS maps for major configuration files. This objective
+                                    includes configuring a system as a NIS client, setting up an NIS
+                                    slave server, and configuring ability to search local files,
+                                    DNS, NIS, etc. in nsswitch.conf.</entry>
+                                <entry>nisupdate, ypbind, ypcat, ypmatch, ypserv, ypswitch,
+                                    yppasswd, yppoll, yppush, ypwhich, rpcinfo nis.conf,
+                                    nsswitch.conf, ypserv.conf Contents of /etc/nis/: netgroup,
+                                    nicknames, securenets Makefile</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>LDAP configuration</entry>
+                                <entry>The candidate should be able to configure an LDAP server.
+                                    This objective includes configuring a directory hierarchy,
+                                    adding group, hosts, services and other data to the hierarchy.
+                                    Also included is importing items from LDIF files and add items
+                                    with a management tool, as well as adding users to the directory
+                                    and change their passwords.</entry>
+                                <entry>slapd slapd.conf</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>DHCP configuration</entry>
+                                <entry>The candidate should be able to configure a DHCP server and
+                                    set default options, create a subnet, and create a
+                                    dynamically-allocated range. This objective includes adding a
+                                    static host, setting options for a single host, and adding bootp
+                                    hosts. Also included is to configure a DHCP relay agent, and
+                                    reload the DHCP server after making changes.</entry>
+                                <entry>dhcpd.conf dhcpd.leases</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>PAM authentication</entry>
+                                <entry>The candidate should be able to configure PAM to support
+                                    authentication via traditional /etc/passwd, shadow passwords,
+                                    NIS, or LDAP.</entry>
+                                <entry>/etc/pam.d pam.conf</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 212 System Security</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: System Security</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>TCP_wrappers</entry>
+                                <entry>The candidate should be able to configure tcpwrappers to
+                                    allow connections to specified servers from only certain hosts
+                                    or subnets.</entry>
+                                <entry>inetd.conf, tcpd hosts.allow, hosts.deny xinetd</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Securing FTP servers</entry>
+                                <entry>The candidate should be able to configure an anonymous
+                                    download FTP server. This objective includes configuring an FTP
+                                    server to allow anonymous uploads, listing additional
+                                    precautions to be taken if anonymous uploads are permitted,
+                                    configuring guest users and groups with chroot jail, and
+                                    configuring ftpaccess to deny access to named users or groups.</entry>
+                                <entry>ftpaccess, ftpusers, ftpgroups /etc/passwd chroot</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Configuring a router</entry>
+                                <entry>The candidate should be able to configure ipchains and
+                                    iptables to perform IP masquerading, and state the significance
+                                    of Network Address Translation and Private Network Addresses in
+                                    protecting a network. This objective includes configuring port
+                                    redirection, listing filtering rules, and writing rules that
+                                    accept or block datagrams based upon source or destination
+                                    protocol, port and address. Also included is saving and
+                                    reloading filtering configurations, using settings in
+                                    /proc/sys/net/ipv4 to respond to DOS attacks, using
+                                    /proc/sys/net/ipv4/ip_forward to turn IP forwarding on and off,
+                                    and usingtools such as PortSentry to block port scans and
+                                    vulnerability probes.</entry>
+                                <entry>/proc/sys/net/ipv4 /etc/services ipchains iptables routed</entry>
+                            </row>
+                            <row>
+                                <entry>2</entry>
+                                <entry>Secure shell (OpenSSH)</entry>
+                                <entry>The candidate should be able to configure sshd to allow or
+                                    deny root logins, enable or disable X forwarding. This objective
+                                    includes generating server keys, generating a user's
+                                    public/private key pair, adding a public key to a user's
+                                    authorized_keys file, and configuring ssh-agent for all users.
+                                    Candidates should also be able to configure port forwarding to
+                                    tunnel an application protocol over ssh, configure ssh to
+                                    support the ssh protocol versions 1 and 2, disable non-root
+                                    logins during system maintenance, configure trusted clients for
+                                    ssh logins without a password, and make multiple connections
+                                    from multiple hosts to guard against loss of connection to
+                                    remote host following configuration changes.</entry>
+                                <entry>ssh, sshd /etc/ssh/sshd_config ~/.ssh/identity.pub and
+                                    identity, ~/.ssh/authorized_keys .shosts, .rhosts</entry>
+                            </row>
+                            <row>
+                                <entry>3</entry>
+                                <entry>Security tasks</entry>
+                                <entry>The candidate should be able to install and configure
+                                    kerberos and perform basic security auditing of source code.
+                                    This objective includes arranging to receive security alerts
+                                    from Bugtraq, CERT, CIAC or other sources, being able to test
+                                    for open mail relays and anonymous FTP servers, installing and
+                                    configuring an intrusion detection system such as snort or
+                                    Tripwire. Candidates should also be able to update the IDS
+                                    configuration as new vulnerabilities are discovered and apply
+                                    security patches and bugfixes.</entry>
+                                <entry>Tripwire telnet nmap</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <bridgehead>Topic 214 Network Troubleshooting</bridgehead>
+                <table pgwide="0">
+                    <title>Exam 202: Network Troubleshooting</title>
+                    <tgroup align="left" cols="4" colsep="1" rowsep="1">
+                        <colspec colname="Weight" colwidth="0.5*"/>
+                        <colspec colname="Title" colwidth="1.7*"/>
+                        <colspec colname="Description" colwidth="4*"/>
+                        <colspec colname="Key Files, terms and utillities" colwidth="2.5*"/>
+                        <tbody>
+                            <row>
+                                <entry>Weight</entry>
+                                <entry>Title</entry>
+                                <entry>Description</entry>
+                                <entry>Key Files, terms and utillities</entry>
+                            </row>
+                            <row>
+                                <entry>1</entry>
+                                <entry>Troubleshooting network issues</entry>
+                                <entry>A candidates should be able to identify and correct common
+                                    network setup issues to include knowledge of locations for basic
+                                    configuration files and commands.</entry>
+                                <entry>/sbin/ifconfig /sbin/route /bin/netstat /etc/network ||
+                                    /etc/sysconfig/network-scripts/ system log files such as
+                                    /var/log/syslog &#38;&#38; /var/log/messages /bin/ping
+                                    /etc/resolv.conf /etc/hosts /etc/hosts.allow &#38;&#38;
+                                    /etc/hosts.deny /etc/hostname || /etc/HOSTNAME /sbin/hostname
+                                    /usr/sbin/traceroute /usr/bin/nslookup /usr/bin/dig /bin/dmesg host</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </sect3>
+        </sect2>
+    </sect1>
+</appendix>
