@@ -29,7 +29,7 @@ done
 }
 
 # main
-runner
+runner 2> runner.log # will contain "Terminated" messages
 analyzer
 
 echo some real report
