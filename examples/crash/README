@@ -1,4 +1,7 @@
 
- Files that cause conglomerate to crash.
+ This is a regression test suite for Conglomerate.
+ The files here trigger bugs in Conglomerate.
+ The aim is that Conglomerate should be able
+ to load all of these files successfully.
 
  It is here for easy reproduction and should _not_ go into distribution.
