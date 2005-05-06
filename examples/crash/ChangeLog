@@ -6,6 +6,9 @@
 	* tester.batch
 	New file
 
+	* testcase-115226
+	New directory for #115226, Do something with entity refs
+
 2005-05-05  David Malcolm  <dmalcolm@redhat.com>
 
 	* testcase-150368.xml:
