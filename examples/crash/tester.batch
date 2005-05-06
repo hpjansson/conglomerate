@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+#  script for testing in a batch
+#  feel free to modify into another runtime ( e.g. python, expect, perl )
+#
+TO_TEST=$( ls *.xml )
+
+runner () {
+for f in ${TO_TEST}
+do
+	conglomerate $f > $f.log 2>&1 &
+	sleep 30  # allow the application to run ( or to chrash ;-)
+	terminate $f  # quit the application
+done
+}
+
+terminate () {
+kill $(ps -ef | grep $1 | awk '/conglomerate/ { print $2 }')
+}
+
+analyzer () {
+for f in ${TO_TEST}
+do
+	echo "****************"
+	echo $f.log
+	echo "****************"
+	tail -n 5 $f.log
+done
+}
+
+# main
+runner
+analyzer
+
+echo some real report
+
+# end of batch file

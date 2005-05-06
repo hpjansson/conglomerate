@@ -3,6 +3,9 @@
 	* septentrio.xml
 	Back in the test suite
 
+	* tester.batch
+	New file
+
 2005-05-05  David Malcolm  <dmalcolm@redhat.com>
 
 	* testcase-150368.xml:
