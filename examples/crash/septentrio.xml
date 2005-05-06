@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE septpermissions PUBLIC "//FOO//BAR 0.1//EN"
+"../unexisting.dtd">
+<septpermissions>
+  <title>Example of Septentrio permission file</title>
+</septpermissions>
+<!-- stupid CVS -->
