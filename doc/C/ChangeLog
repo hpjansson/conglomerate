@@ -1,3 +1,10 @@
+2005-05-08  Mich?le Garoche  <michele.garoche@easyconnect.fr>
+
+	* faq.xml.qna
+
+	Removed reference to docbook.css,
+	it is not ported to all systems.
+
 2005-04-08  Geert Stappers <stappers@stappers.nl>
 
 	* faq.xml.qna
