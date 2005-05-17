@@ -948,6 +948,29 @@ cong_app_get_language_list (CongApp *app)
 	return PRIVATE(app)->language_list;
 }
 
+int unit_test = FALSE;
+
+const struct poptOption options[] = {
+	{
+		"unit-test",
+		'\0',
+		POPT_ARG_NONE,
+		&unit_test,
+		0,
+		N_("Unit test: quit immediately (after loading any files specified on the command-line)"),
+		NULL
+	},
+	{
+		NULL,
+		'\0',
+		0,
+		NULL,
+		0,
+		NULL,
+		NULL
+	}
+};
+
 static gboolean
 handle_cmdline_args (gpointer data)
 {
@@ -968,6 +991,11 @@ handle_cmdline_args (gpointer data)
 	}
 	
 	poptFreeContext (ctx);
+
+	/* Quit immediately after load, for a unit test: */
+	if (unit_test) {
+		gtk_main_quit ();
+	}
 
 	return FALSE;
 }
@@ -990,10 +1018,10 @@ cong_app_new (int   argc,
 	PRIVATE(app)->gnome_program = gnome_program_init (PACKAGE_NAME, PACKAGE_VERSION,
 							  LIBGNOMEUI_MODULE,
 							  argc,argv,
-							  GNOME_PARAM_HUMAN_READABLE_NAME,
-							  _("XML Editor"),
+							  GNOME_PARAM_HUMAN_READABLE_NAME, _("XML Editor"),
+							  GNOME_PARAM_POPT_TABLE, options,
 							  GNOME_PROGRAM_STANDARD_PROPERTIES,
-							  NULL);
+							  GNOME_PARAM_NONE);
 
 	g_value_init (&value, G_TYPE_POINTER);
 	g_object_get_property (G_OBJECT (PRIVATE (app)->gnome_program), GNOME_PARAM_POPT_CONTEXT,

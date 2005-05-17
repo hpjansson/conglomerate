@@ -1,3 +1,9 @@
+2005-05-17  David Malcolm  <dmalcolm@redhat.com>
+
+	* cong-app.c: 
+
+	Added --unit-test command-line option
+
 2005-04-22  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-document.c: 
