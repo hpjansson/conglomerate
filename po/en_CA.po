@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-09 13:05-0400\n"
-"PO-Revision-Date: 2005-04-09 15:29-0400\n"
+"POT-Creation-Date: 2005-05-19 13:50-0400\n"
+"PO-Revision-Date: 2005-05-19 15:29-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -381,19 +381,27 @@ msgstr "Document Type"
 msgid "string_selection_dialog"
 msgstr "string_selection_dialog"
 
-#: ../src/cong-app.c:995
+#: ../src/cong-app.c:960
+msgid ""
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
+msgstr ""
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
+
+#: ../src/cong-app.c:1021
 msgid "XML Editor"
 msgstr "XML Editor"
 
-#: ../src/cong-app.c:1131
+#: ../src/cong-app.c:1158
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate could not load any xds files"
 
-#: ../src/cong-app.c:1133
+#: ../src/cong-app.c:1160
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate could not find any descriptions of document types."
 
-#: ../src/cong-app.c:1135
+#: ../src/cong-app.c:1162
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -716,7 +724,7 @@ msgstr "XInclude Start"
 msgid "XInclude End"
 msgstr "XInclude End"
 
-#: ../src/cong-document.c:2180
+#: ../src/cong-document.c:2194
 #, c-format
 msgid "Select %s"
 msgstr "Select %s"
@@ -2230,15 +2238,15 @@ msgstr "An editor node for visualising a paragraph"
 msgid "Print XML source"
 msgstr "Print XML source"
 
-#: ../src/plugin-random.c:148
+#: ../src/plugin-random.c:140
 msgid "What kind of random XML document would you like to create?"
 msgstr "What kind of random XML document would you like to create?"
 
-#: ../src/plugin-random.c:685
+#: ../src/plugin-random.c:223
 msgid "Random Document"
 msgstr "Random Document"
 
-#: ../src/plugin-random.c:686
+#: ../src/plugin-random.c:224
 msgid "Create an XML document containing random content."
 msgstr "Create an XML document containing random content."
 
