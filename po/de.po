@@ -1,17 +1,17 @@
 # German Conglomerate translation.
-# Copyright (C) 2002-2004 Free Software Foundation, Inc.
+# Copyright (C) 2002-2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Conglomerate package.
 # Christian Neumair <chris@gnome-de.org>, 2003, 2004.
 # Geert Stappers <stappers@stappers.nl>, 2004.
-# Frank Arnold <frank@scirocco-5v-turbo.de>, 2004.
+# Frank Arnold <frank@scirocco-5v-turbo.de>, 2004, 2005.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-13 01:29+0200\n"
-"PO-Revision-Date: 2005-04-13 01:07+0200\n"
+"POT-Creation-Date: 2005-05-20 14:01+0200\n"
+"PO-Revision-Date: 2005-05-20 14:00+0200\n"
 "Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -385,20 +385,28 @@ msgstr "Dokumententyp"
 msgid "string_selection_dialog"
 msgstr "Dialog_zum_Festlegen_der_Beschriftung"
 
-#: ../src/cong-app.c:995
+#: ../src/cong-app.c:960
+msgid ""
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
+msgstr ""
+"Einheiten-Test: Sofort beenden (nach dem Laden aller Dateien, die über die "
+"Kommandozeile angegeben wurden)"
+
+#: ../src/cong-app.c:1021
 msgid "XML Editor"
 msgstr "XML-Editor"
 
-#: ../src/cong-app.c:1131
+#: ../src/cong-app.c:1158
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate konnte keine xds-Dateien laden"
 
-#: ../src/cong-app.c:1133
+#: ../src/cong-app.c:1160
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate konnte keine Dokumenttypbeschreibungen finden."
 
 # CHECK
-#: ../src/cong-app.c:1135
+#: ../src/cong-app.c:1162
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -727,7 +735,7 @@ msgstr "XInclude-Anfang"
 msgid "XInclude End"
 msgstr "XInclude-Ende"
 
-#: ../src/cong-document.c:2180
+#: ../src/cong-document.c:2194
 #, c-format
 msgid "Select %s"
 msgstr "%s markieren"
@@ -2309,15 +2317,15 @@ msgstr "Ein Editorknoten zum Visualisieren eines Absatzes"
 msgid "Print XML source"
 msgstr "XML-Quelltext drucken"
 
-#: ../src/plugin-random.c:148
+#: ../src/plugin-random.c:140
 msgid "What kind of random XML document would you like to create?"
 msgstr "Welche Art von XML-Zufallsdokument wollen Sie anlegen?"
 
-#: ../src/plugin-random.c:685
+#: ../src/plugin-random.c:223
 msgid "Random Document"
 msgstr "Zufallsdokument"
 
-#: ../src/plugin-random.c:686
+#: ../src/plugin-random.c:224
 msgid "Create an XML document containing random content."
 msgstr "Ein XML-Dokument anlegen, das zufälligen Inhalt enthällt."
 
