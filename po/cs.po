@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: conglomerate VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 10:39+0000\n"
-"PO-Revision-Date: 2005-04-15 13:15+0200\n"
+"POT-Creation-Date: 2005-05-19 18:51+0000\n"
+"PO-Revision-Date: 2005-05-22 13:00+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -381,19 +381,25 @@ msgstr "Typ dokumentu"
 msgid "string_selection_dialog"
 msgstr "dialog_výběru_řetězce"
 
-#: ../src/cong-app.c:995
+#: ../src/cong-app.c:960
+msgid ""
+"Unit test: quit immediately (after loading any files specified on the "
+"command-line)"
+msgstr "Test modulu: okamžitě skonči (po načtení souborů určených na příkazovém řádku)"
+
+#: ../src/cong-app.c:1021
 msgid "XML Editor"
 msgstr "Editor XML"
 
-#: ../src/cong-app.c:1131
+#: ../src/cong-app.c:1158
 msgid "Conglomerate could not load any xds files"
 msgstr "Conglomerate nemohl načíst žádný soubor xds"
 
-#: ../src/cong-app.c:1133
+#: ../src/cong-app.c:1160
 msgid "Conglomerate could not find any descriptions of document types."
 msgstr "Conglomerate nemohl najít žádné popisy typů dokumentů."
 
-#: ../src/cong-app.c:1135
+#: ../src/cong-app.c:1162
 msgid ""
 "If you see this error, it is likely that you built Conglomerate, but did not "
 "install it.  Try installing it.  If you have changed the default setting for "
@@ -715,7 +721,7 @@ msgstr "Začátek XInclude"
 msgid "XInclude End"
 msgstr "Konec XInclude"
 
-#: ../src/cong-document.c:2180
+#: ../src/cong-document.c:2194
 #, c-format
 msgid "Select %s"
 msgstr "Vybrat %s"
