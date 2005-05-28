@@ -1,0 +1,2506 @@
+# Ukrainian translation to conglomerate.
+# Copyright (C) 2005, Free Software Foundation
+# This file is distributed under the same license as the conglomerate package.
+# Maxim V. Dziumanenko <mvd@mylinux.ua>, 2005
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: conglomerate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-05-27 19:07+0300\n"
+"PO-Revision-Date: 2005-03-01 22:13+0200\n"
+"Last-Translator: Maxim V. Dziumanenko <mvd@mylinux.ua>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/conglomerate.desktop.in.h:1 ../src/cong-menus.c:1444
+#: ../src/cong-primary-window.c:547 ../src/cong-primary-window.c:732
+#: ../src/cong-primary-window.c:734 ../src/cong-primary-window.c:740
+msgid "Conglomerate XML Editor"
+msgstr "Редактор XML Conglomerate"
+
+#: ../data/conglomerate.desktop.in.h:2
+msgid "Edit XML files"
+msgstr "Редактор файлів у форматі XML"
+
+#: ../data/conglomerate.schemas.in.h:1
+msgid ""
+"A list of custom directories where Conglomerate should look for the display "
+"specification (called dispspec, or .xds) files, in addition to the standard "
+"installation path. When documents are loaded a matching dispspec is searched "
+"for in these directories, and the first matching dispspec file is used."
+msgstr ""
+"Перелік каталогів де Conglomerate буде шукати специфікації відображення "
+"(файли з розширенням .xds), що пояснюють спосіб відображення зображення. "
+"Окрім того пошук відбувається у стандартних каталогах, які задаються при "
+"встановленні. При завантаженні документа відшукується відповідна "
+"специфікація відображення."
+
+#: ../data/conglomerate.schemas.in.h:2
+msgid ""
+"A list of directories where Conglomerate should look for template xml files. "
+"These documents will be used by the new document assistant as types of "
+"documents which can be created by the user."
+msgstr ""
+"Перелік каталогів, у яких Conglomerate шаблони документів у форматі xml. Ці "
+"документи можуть використовуватись для нових документів при створенні "
+"визначених користувачем типів документів."
+
+#: ../data/conglomerate.schemas.in.h:3
+msgid "Custom locations for display specification files."
+msgstr "Шлях до додаткових описів відображення документів."
+
+#: ../data/conglomerate.schemas.in.h:4
+msgid "Locations for template files."
+msgstr "Шлях до шаблонів"
+
+#: ../glade/cong-file-import.glade.h:1
+msgid "File Import Options"
+msgstr "Параметри імпорту файлів"
+
+#: ../glade/cong-file-import.glade.h:2
+msgid "Importer"
+msgstr "Модуль імпорту"
+
+#: ../glade/cong-file-import.glade.h:3
+msgid "Options"
+msgstr "Параметри"
+
+#: ../glade/cong-file-properties.glade.h:1
+#: ../src/cong-node-properties-dialog.c:1193
+#: ../src/cong-node-properties-dialog.c:1321
+msgid "Advanced"
+msgstr "Додатково"
+
+#: ../glade/cong-file-properties.glade.h:2
+msgid "Basic"
+msgstr "Основне"
+
+#: ../glade/cong-file-properties.glade.h:3 ../src/cong-dispspec-registry.c:355
+#: ../src/cong-edit-preferences.c:250 ../src/cong-file-export.c:339
+#: ../src/cong-file-new.c:363 ../src/cong-file-print.c:250
+#: ../src/cong-parser-error.c:320
+msgid "Description"
+msgstr "Опис"
+
+#: ../glade/cong-file-properties.glade.h:4 ../src/cong-document.c:1003
+msgid "Document Type Declaration"
+msgstr "Декларація типу документу"
+
+#: ../glade/cong-file-properties.glade.h:5
+msgid "Encoding"
+msgstr "Кодування"
+
+#: ../glade/cong-file-properties.glade.h:6
+msgid "External ID"
+msgstr "Зовнішній ідентифікатор"
+
+#: ../glade/cong-file-properties.glade.h:7 ../src/cong-file-export.c:281
+#: ../src/cong-file-print.c:217
+msgid "General"
+msgstr "Загальне "
+
+#: ../glade/cong-file-properties.glade.h:8
+#: ../src/cong-node-properties-dialog.c:247
+msgid "Location"
+msgstr "Адреса"
+
+#: ../glade/cong-file-properties.glade.h:9
+msgid "Modified"
+msgstr "Змінено"
+
+#: ../glade/cong-file-properties.glade.h:10 ../src/cong-edit-preferences.c:154
+#: ../src/cong-edit-preferences.c:242 ../src/cong-file-export.c:338
+#: ../src/cong-file-print.c:249 ../src/cong-node-properties-dialog.c:609
+msgid "Name"
+msgstr "Назва"
+
+#: ../glade/cong-file-properties.glade.h:11
+#: ../glade/docbook-common-properties.glade.h:3
+#: ../glade/docbook-orderedlist-properties.glade.h:9
+#: ../glade/docbook-ulink-properties.glade.h:3
+#: ../glade/plugin-arbitrary.glade.h:5 ../glade/plugin-random.glade.h:4
+#: ../src/cong-node-properties-dialog.c:1283
+msgid "Properties"
+msgstr "Властивості"
+
+#: ../glade/cong-file-properties.glade.h:12
+msgid "Standalone"
+msgstr "Автономний"
+
+#: ../glade/cong-file-properties.glade.h:13
+msgid "System ID"
+msgstr "Системний ідентифікатор"
+
+#: ../glade/cong-file-properties.glade.h:14
+#: ../glade/docbook-ulink-properties.glade.h:5
+msgid "Type"
+msgstr "Тип"
+
+#: ../glade/cong-file-properties.glade.h:15
+msgid "Version"
+msgstr "Версія"
+
+#: ../glade/cong-file-properties.glade.h:16
+msgid "XML Header"
+msgstr "Заголовок XML"
+
+#: ../glade/cong-file-properties.glade.h:17 ../src/cong-file-properties.c:184
+msgid "_Associate this DTD"
+msgstr "_Пов'язати з цим DTD"
+
+#: ../glade/cong-find-replace.glade.h:1 ../glade/custom-element.glade.h:1
+#: ../glade/plugin-arbitrary.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: ../glade/cong-find-replace.glade.h:2
+msgid "Find Next"
+msgstr "Знайти далі"
+
+#: ../glade/cong-find-replace.glade.h:3
+msgid "Match _entire word only"
+msgstr "Збігається _ціле слово"
+
+#: ../glade/cong-find-replace.glade.h:4
+#: ../src/cong-edit-find-and-replace.c:187
+#: ../src/cong-edit-find-and-replace.c:835
+#: ../src/cong-edit-find-and-replace.c:849
+msgid "Replace"
+msgstr "Замінити"
+
+#: ../glade/cong-find-replace.glade.h:5
+#: ../src/cong-edit-find-and-replace.c:907
+msgid "Replace All"
+msgstr "Замінити усе"
+
+#: ../glade/cong-find-replace.glade.h:6
+msgid "Replace _with: "
+msgstr "_Замінити на:"
+
+#: ../glade/cong-find-replace.glade.h:7
+msgid "Search _backwards"
+msgstr "Знайти _попереднє"
+
+#: ../glade/cong-find-replace.glade.h:8
+msgid "_Match case"
+msgstr "Збігається _регістр"
+
+#: ../glade/cong-find-replace.glade.h:9
+msgid "_Search for: "
+msgstr "Знай_ти:"
+
+#: ../glade/cong-find-replace.glade.h:10
+msgid "_Wrap around"
+msgstr "_Досягнувши кінця, починати спочатку"
+
+#: ../glade/cong-preferences.glade.h:1
+msgid "Conglomerate Preferences"
+msgstr "Параметри Conglomerate"
+
+#: ../glade/cong-preferences.glade.h:2
+msgid "Document Types"
+msgstr "Типи документів"
+
+#: ../glade/cong-preferences.glade.h:3
+msgid "Plugins"
+msgstr "Модулі"
+
+#: ../glade/custom-element.glade.h:2
+msgid "Adhoc Element"
+msgstr "Типовий елемент"
+
+#: ../glade/custom-element.glade.h:3
+msgid "Element Name"
+msgstr "Назва елемента"
+
+#: ../glade/custom-element.glade.h:4
+msgid "Element Type"
+msgstr "Тип елемента"
+
+#: ../glade/custom-element.glade.h:5
+msgid "I Don't Care"
+msgstr "Байдуже"
+
+#: ../glade/custom-element.glade.h:6
+msgid "Span"
+msgstr "Проміжок"
+
+#: ../glade/custom-element.glade.h:7
+msgid "Structural"
+msgstr "Структурний"
+
+#: ../glade/docbook-common-properties.glade.h:1
+msgid ""
+"<small>What is the scope of the text? You can use this page to specify the "
+"relevancy of the text to different  types of computer system.</small>"
+msgstr ""
+"<small>Ви можете використовувати цю закладку, щоб вказати область застосування "
+"цього тексту до різних типів комп'ютерних систем</small>"
+
+#: ../glade/docbook-common-properties.glade.h:2
+msgid "Language"
+msgstr "Мова"
+
+#: ../glade/docbook-common-properties.glade.h:4
+msgid "Revisions"
+msgstr "Ревізії"
+
+#: ../glade/docbook-common-properties.glade.h:5
+msgid "Scope"
+msgstr "Область видимості"
+
+#: ../glade/docbook-common-properties.glade.h:6
+msgid ""
+"This is a placeholder page.  Eventually you will be able to use this page to "
+"manipulate DocBook's simple version tracking information.\n"
+"\n"
+"This is listed in Bugzilla as bug #122538"
+msgstr ""
+"Це тестова закладка. Незабаром користуючись цією закладкою ви зможете "
+"керувати простими версіями документів типу DocBook.\n"
+"\n"
+"Це описано в Bugzilla у проблемі #122538"
+
+#: ../glade/docbook-common-properties.glade.h:9
+msgid "_Architecture"
+msgstr "_Архітектура"
+
+#: ../glade/docbook-common-properties.glade.h:10
+msgid "_Operating System"
+msgstr "_Операційна система"
+
+#: ../glade/docbook-common-properties.glade.h:11
+msgid "_User Level"
+msgstr "_Рівень користувача"
+
+#: ../glade/docbook-common-properties.glade.h:12
+msgid "_Vendor"
+msgstr "_Виробник"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:1
+msgid "1, 2, 3, ..."
+msgstr "1, 2, 3, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:2
+msgid "A, B, C, ..."
+msgstr "A, B, C, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:3
+msgid "Continue numbering from previous list"
+msgstr "Продовити нумерацію з попереднього списку"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:4
+#: ../src/cong-error-dialog.c:337 ../src/cong-error-file-open.c:518
+msgid "Details"
+msgstr "Подробиці"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:5
+msgid "I, II, III, ..."
+msgstr "I, II, III, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:6
+msgid "Inherit numbering from surrounding lists"
+msgstr "Використовувати спосіб нумерації баткіського списку"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:7
+msgid "Minimise vertical space"
+msgstr "Мінімізувати вертикальний проміжок"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:8
+msgid "Numbering"
+msgstr "Нумерація"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:10
+msgid "Style"
+msgstr "Стиль"
+
+#: ../glade/docbook-orderedlist-properties.glade.h:11
+msgid "a, b, c, ..."
+msgstr "a, b, c, ..."
+
+#: ../glade/docbook-orderedlist-properties.glade.h:12
+msgid "i, ii, iii, ..."
+msgstr "i, ii, iii, ..."
+
+#: ../glade/docbook-ulink-properties.glade.h:1
+msgid ""
+"<small>Some DocBook applications allow the behaviour of the link to be "
+"customised using this \"type\" attribute. </small>"
+msgstr ""
+"<small>Деякі програми дозволяють налаштовувати поведінку посилань використовуючи "
+"цей атрибут \"type\".</small>"
+
+
+#: ../glade/docbook-ulink-properties.glade.h:2
+msgid "Link"
+msgstr "Посилання"
+
+#: ../glade/docbook-ulink-properties.glade.h:4
+msgid "Target"
+msgstr "Ціль"
+
+#: ../glade/docbook-ulink-properties.glade.h:6
+msgid "URL"
+msgstr "URL"
+
+#: ../glade/docbook-ulink-properties.glade.h:7
+msgid "_Test this Link"
+msgstr "_Перевірити це посилання"
+
+#: ../glade/plugin-arbitrary.glade.h:2
+msgid "Local Name"
+msgstr "Локальна назва"
+
+#: ../glade/plugin-arbitrary.glade.h:3
+msgid "Namespace URI"
+msgstr "URI простору назв"
+
+#: ../glade/plugin-arbitrary.glade.h:4
+msgid "Preview"
+msgstr "Зразок"
+
+#: ../glade/plugin-arbitrary.glade.h:6
+msgid "Top-level Element"
+msgstr "Елемент верхнього рівня"
+
+#: ../glade/plugin-random.glade.h:1
+msgid "Creation Parameters"
+msgstr "Параметри створення"
+
+#: ../glade/plugin-random.glade.h:2
+msgid "Depth"
+msgstr "Глибина"
+
+#: ../glade/plugin-random.glade.h:3 ../src/cong-document.c:991
+msgid "Document Type"
+msgstr "Тип документу"
+
+#: ../glade/string_selection_dialog.glade.h:1
+msgid "string_selection_dialog"
+msgstr "string_selection_dialog"
+
+#: ../src/cong-app.c:995
+msgid "XML Editor"
+msgstr "Редактор XML"
+
+#: ../src/cong-app.c:1131
+msgid "Conglomerate could not load any xds files"
+msgstr "Не вдається завантажити жоден xds-файл"
+
+#: ../src/cong-app.c:1133
+msgid "Conglomerate could not find any descriptions of document types."
+msgstr "Conglomerate не вдається знайти описи типів документів."
+
+#: ../src/cong-app.c:1135
+msgid ""
+"If you see this error, it is likely that you built Conglomerate, but did not "
+"install it.  Try installing it.  If you have changed the default setting for "
+"the display spec path, please double check that as well."
+msgstr ""
+"Якщо ви бачите цю помилку, можливо ви зібрали Conglomerate, але не "
+"встановили його. Спробуйте встановити цього. Якщо ви змінювали "
+"типові параметри відображення spec path, також перевірте їх."
+
+#: ../src/cong-attribute-editor-cdata.c:206
+#: ../src/cong-attribute-editor-nmtoken.c:272
+#: ../src/cong-node-properties-dialog.c:470
+#, c-format
+msgid "Add attribute \"%s\""
+msgstr "Додати атрибут \"%s\""
+
+#: ../src/cong-attribute-editor-cdata.c:232
+#: ../src/cong-attribute-editor-nmtoken.c:298
+#: ../src/cong-attribute-editor.c:253 ../src/cong-attribute-wrapper.c:263
+#: ../src/cong-node-properties-dialog.c:506
+#, c-format
+msgid "Delete attribute \"%s\""
+msgstr "Видалити атрибут \"%s\""
+
+#: ../src/cong-attribute-editor-enumeration.c:122
+msgid "(unspecified)"
+msgstr "(не вказано)"
+
+#: ../src/cong-attribute-editor-lang.c:48
+msgid "Breton"
+msgstr "Бретонська"
+
+#: ../src/cong-attribute-editor-lang.c:49
+msgid "Catalan"
+msgstr "Каталонська"
+
+#: ../src/cong-attribute-editor-lang.c:50
+msgid "Czech"
+msgstr "Чеська"
+
+#: ../src/cong-attribute-editor-lang.c:51
+msgid "Danish"
+msgstr "Датська"
+
+#: ../src/cong-attribute-editor-lang.c:52
+msgid "German (Germany)"
+msgstr "Німецька (Німеччина)"
+
+#: ../src/cong-attribute-editor-lang.c:53
+msgid "German (Swiss)"
+msgstr "Німецька (Швейцарія)"
+
+#: ../src/cong-attribute-editor-lang.c:54
+msgid "English (American)"
+msgstr "Англійська (Америка)"
+
+#: ../src/cong-attribute-editor-lang.c:55
+msgid "English (British)"
+msgstr "Англійська (Британія)"
+
+#: ../src/cong-attribute-editor-lang.c:56
+msgid "English (Canadian)"
+msgstr "Англійська (Канада)"
+
+#: ../src/cong-attribute-editor-lang.c:57
+msgid "Esperanto"
+msgstr "Есперанто"
+
+#: ../src/cong-attribute-editor-lang.c:58
+msgid "Spanish"
+msgstr "Іспанська"
+
+#: ../src/cong-attribute-editor-lang.c:59
+msgid "Faroese"
+msgstr "Фарсі"
+
+#: ../src/cong-attribute-editor-lang.c:60
+msgid "French (France)"
+msgstr "Французька (Франція)"
+
+#: ../src/cong-attribute-editor-lang.c:61
+msgid "French (Swiss)"
+msgstr "Французька (Швейцарія)"
+
+#: ../src/cong-attribute-editor-lang.c:62
+msgid "Italian"
+msgstr "Італійська"
+
+#: ../src/cong-attribute-editor-lang.c:63
+msgid "Dutch"
+msgstr "Голландська"
+
+#: ../src/cong-attribute-editor-lang.c:64
+msgid "Norwegian"
+msgstr "Норвезька"
+
+#: ../src/cong-attribute-editor-lang.c:65
+msgid "Polish"
+msgstr "Польська"
+
+#: ../src/cong-attribute-editor-lang.c:66
+msgid "Portuguese (Portugal)"
+msgstr "Португальська (Португалія)"
+
+#: ../src/cong-attribute-editor-lang.c:67
+msgid "Portuguese (Brazilian)"
+msgstr "Португальська (Бразилія)"
+
+#: ../src/cong-attribute-editor-lang.c:68
+msgid "Russian"
+msgstr "Російська"
+
+#: ../src/cong-attribute-editor-lang.c:69
+msgid "Swedish"
+msgstr "Шведська"
+
+#: ../src/cong-attribute-editor-lang.c:70
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: ../src/cong-attribute-editor-lang.c:157
+msgid "No Language"
+msgstr "Без вказування мови"
+
+#.
+#. * Use a dialog to tell the user that the last character they entered
+#. * is not valid. It is rather disruptive, but I am not sure how elde to do
+#. * it. We could change the background colour of the text entry
+#. * to indicate a problem (it avoids the intrusive-ness of the dialog
+#. * and allows a user to delete all the contents and start editing),
+#. * but I'm not sure it's a good piece of UI.
+#. *
+#. * We need to clean up value since it if contains < or > (perhaps others)
+#. * Pango gets all confused. We probably just need to convert to &lt;/&gt;.
+#.
+#: ../src/cong-attribute-editor-nmtoken.c:225
+#, c-format
+msgid "Unable to set attribute \"%s\" to \"%s\""
+msgstr "Не вдається встановити атрибут \"%s\" у \"%s\""
+
+#: ../src/cong-attribute-editor-nmtoken.c:236
+msgid "The attribute value must be an XML name token."
+msgstr "Значення атрибуту має бути назвою лексеми XML."
+
+#: ../src/cong-attribute-editor-nmtoken.c:237
+msgid ""
+"XML name tokens can only contain alphanumeric and/or ideographic characters "
+"and the punctuation marks _,-, ., and :. It can not contain whitespace "
+"characters."
+msgstr ""
+"Назви лексем XML можуть містити лише літери, цифри та знаки пунктуації "
+"_,-, ., and :. Вони не можуть містити пробіли та інші пробільні символи."
+
+#: ../src/cong-attribute-editor.c:249 ../src/cong-attribute-wrapper.c:232
+#: ../src/cong-node-properties-dialog.c:424
+#, c-format
+msgid "Set attribute \"%s\" to \"%s\""
+msgstr "Встановити атрибут \"%s\" у \"%s\""
+
+#: ../src/cong-dialog.c:301
+msgid "_Close without Saving"
+msgstr "_Закрити без збереження"
+
+#: ../src/cong-dialog.c:316
+#, c-format
+msgid "Save changes to document \"%s\" before closing?"
+msgstr "Зберегти зміни у документ \"%s\" перед закриванням?"
+
+#: ../src/cong-dialog.c:321
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li hours will be "
+"discarded."
+msgstr ""
+"Якщо ви закриєте без збереження, зміни за останні %li будуть втрачені."
+
+#: ../src/cong-dialog.c:323
+#, c-format
+msgid ""
+"If you close without saving, changes from the past %li minutes will be "
+"discarded."
+msgstr ""
+"Якщо ви закриєте без збереження, зміни за останні %li хвилин втрачені."
+
+#: ../src/cong-dialog.c:325
+msgid ""
+"If you close without saving, changes from the past minute will be discarded."
+msgstr ""
+"Якщо ви закриєте без збереження, зміни за останню хвилину будуть втрачені."
+
+#: ../src/cong-dialog.c:379
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "Вернути незбережені зміни у документі \"%s\"?"
+
+#: ../src/cong-dialog.c:384
+#, c-format
+msgid "Changes from the past %li hours will be discarded."
+msgstr "Зміни за останні %li годин будуть втрачені."
+
+#: ../src/cong-dialog.c:386
+#, c-format
+msgid "Changes from the past %li minutes will be discarded."
+msgstr "Зміни за останні %li хвилин будуть втрачені."
+
+#: ../src/cong-dialog.c:388
+msgid "Changes from the past minute will be discarded."
+msgstr "Зміни за останню хвилину будуть втрачені."
+
+#: ../src/cong-dispspec-element.c:659 ../src/cong-xpath-expression.c:247
+msgid "(xpath failed)"
+msgstr "(помилка xpath)"
+
+#. FIXME:  should we display <untitled>?  or should this be a dispspec-specified per-element property?
+#: ../src/cong-dispspec-element.c:695
+msgid "<untitled>"
+msgstr "<без назви>"
+
+#: ../src/cong-dispspec-registry.c:108
+msgid "Conglomerate could not read its registry of document types."
+msgstr "Не вдається прочитати перелік типів документів."
+
+#: ../src/cong-dispspec-registry.c:111
+msgid "Conglomerate attempted to look at all the files in the location."
+msgstr "Спроба переглянути усі типи файлів у вказаному місці."
+
+#: ../src/cong-dispspec-registry.c:333 ../src/cong-file-new.c:343
+msgid "File Type"
+msgstr "Тип файлу"
+
+#: ../src/cong-dispspec-registry.c:344
+msgid "Coverage"
+msgstr "Охоплення"
+
+#: ../src/cong-dispspec.c:513
+msgid "unnamed"
+msgstr "без назви"
+
+#: ../src/cong-dispspec.c:536
+msgid "No description available."
+msgstr "Опис відсутній."
+
+#: ../src/cong-document.c:651
+msgid "(Untitled)"
+msgstr "(Без назви)"
+
+#: ../src/cong-document.c:955
+#, c-format
+msgid "Attribute \"%s\""
+msgstr "Атрибут \"%s\""
+
+#: ../src/cong-document.c:962
+#, c-format
+msgid "Text \"%s\""
+msgstr "Текст \"%s\""
+
+#: ../src/cong-document.c:968
+msgid "Character Data"
+msgstr "Символьні дані"
+
+#: ../src/cong-document.c:971
+#, c-format
+msgid "Reference to Entity \"%s\""
+msgstr "Посилання на сутність \"%s\""
+
+#: ../src/cong-document.c:974
+#, c-format
+msgid "Entity \"%s\""
+msgstr "Сутність \"%s\""
+
+#: ../src/cong-document.c:977
+msgid "XML Processing Instruction"
+msgstr "Інструкції обробки XML"
+
+#: ../src/cong-document.c:982
+#, c-format
+msgid "Comment \"%s\""
+msgstr "Коментар \"%s\""
+
+#: ../src/cong-document.c:988
+msgid "Document"
+msgstr "Документ"
+
+#: ../src/cong-document.c:994
+msgid "Document Fragment"
+msgstr "Фрагмент документа"
+
+#: ../src/cong-document.c:997
+msgid "Notation"
+msgstr "Напис"
+
+#: ../src/cong-document.c:1000
+msgid "HTML Document"
+msgstr "Документ HTML"
+
+#: ../src/cong-document.c:1006
+msgid "Element Declaration"
+msgstr "Декларація елементу"
+
+#: ../src/cong-document.c:1009
+msgid "Attribute Declaration"
+msgstr "Декларація атрибуту"
+
+#: ../src/cong-document.c:1012
+msgid "Entity Declaration"
+msgstr "Декларація сутності"
+
+#: ../src/cong-document.c:1015
+msgid "Namespace Declaration"
+msgstr "Декларація простору назв"
+
+#: ../src/cong-document.c:1018
+msgid "XInclude Start"
+msgstr "Початок включення XInclude"
+
+#: ../src/cong-document.c:1021
+msgid "XInclude End"
+msgstr "Кінець включення XInclude "
+
+#: ../src/cong-document.c:2180
+#, c-format
+msgid "Select %s"
+msgstr "Вибір %s"
+
+#: ../src/cong-dom-view.c:225
+msgid "UNKNOWN"
+msgstr "Невідомий"
+
+#: ../src/cong-dom-view.c:252
+msgid "Text:"
+msgstr "Текст:"
+
+#: ../src/cong-dom-view.c:258
+msgid "CDATA:"
+msgstr "CDATA:"
+
+#: ../src/cong-edit-find-and-replace.c:98
+#, c-format
+msgid "The text \"%s\" was not found."
+msgstr "Рядок \"%s\" не знайдено."
+
+#: ../src/cong-edit-find-and-replace.c:200
+msgid "Replace _All"
+msgstr "Замінити _усе"
+
+#: ../src/cong-edit-find-and-replace.c:307
+#: ../src/cong-edit-find-and-replace.c:760
+#: ../src/cong-edit-find-and-replace.c:958
+#: ../src/cong-edit-find-and-replace.c:999
+msgid "Find"
+msgstr "Знайти"
+
+#: ../src/cong-editor-node-text.c:898
+msgid "Select word"
+msgstr "Виберіть слово"
+
+#: ../src/cong-editor-node-text.c:923
+msgid "Move cursor"
+msgstr "Перемістити курсор"
+
+#: ../src/cong-editor-node-text.c:1009
+msgid "Drag out selection"
+msgstr "Перетягніть виділену ділянку"
+
+#: ../src/cong-editor-widget3.c:268
+msgid "Expander Size"
+msgstr "Розмір розширювача"
+
+#: ../src/cong-editor-widget3.c:269
+msgid "Size of the expander arrow"
+msgstr "Розмір стрілки розширювача"
+
+#: ../src/cong-editor-widget3.c:747
+msgid "Input Method"
+msgstr "Метод вводу"
+
+#: ../src/cong-editor-widget3.c:877 ../src/cong-editor-widget3.c:1408
+msgid "Typing"
+msgstr "Набирання"
+
+#: ../src/cong-editor-widget3.c:1309
+msgid "Cursor Movement"
+msgstr "Переміщення курсору"
+
+#: ../src/cong-editor-widget3.c:1349 ../src/cong-editor-widget3.c:1362
+msgid "Delete Selection"
+msgstr "Видалення виділення"
+
+#. FIXME: would be nice to have convenience buttons/hyperlinks for the bug
+#: ../src/cong-error-dialog.c:231 ../src/cong-error-dialog.c:271
+#, c-format
+msgid "If you are a programmer, the problem is in file %s at line %i\n"
+msgstr "Якщо ви програміст, проблема міститься у файлі %s рядок %i\n"
+
+#: ../src/cong-error-dialog.c:235
+msgid "That feature has not yet been implemented.  Sorry."
+msgstr "Цю можливість досі не реалізовано. Вибачте."
+
+#: ../src/cong-error-dialog.c:265
+#, c-format
+msgid ""
+"That feature has not yet been implemented.  Sorry.\n"
+"\n"
+"This is a known problem; it is bug #%i within the Bug Tracking System at %s"
+msgstr ""
+"Цю можливість досі не реалізовано. Вибачте."
+"\n"
+"Це відома проблема; зареєстрована під номером #%i у системі обробки помилок %s"
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-dialog.c:321
+#, c-format
+msgid "An error was reported whilst attempting the operation \"%s\""
+msgstr "Помилка при виконанні операції \"%s\""
+
+#: ../src/cong-error-dialog.c:325
+msgid "A GError occurred; the error report was:"
+msgstr "Помилка:"
+
+#: ../src/cong-error-dialog.c:335 ../src/cong-error-file-open.c:516
+msgid "An unexpected error occurred."
+msgstr "Неочікувана помилка."
+
+#: ../src/cong-error-dialog.c:336 ../src/cong-error-file-open.c:517
+msgid "For more information, click on the \"Details\" button."
+msgstr "Для отримання докладнішої інформації, натисніть кнопку \"Подробиці\""
+
+#: ../src/cong-error-dialog.c:386
+msgid "An error occurred whilst running this system command:"
+msgstr "Під час виконання системної команди виникла помилка:"
+
+#: ../src/cong-error-dialog.c:389
+#, c-format
+msgid ""
+"The error number reported was %d.  Below is the error text that was output "
+"by the command."
+msgstr ""
+"Помилка номер %d. Нижче приведена інформація про помилку, яку повернула команда."
+
+#. FIXME: ought to set up the parent window properly
+#: ../src/cong-error-file-open.c:67
+msgid "Conglomerate could not run the Search Tool.\n"
+msgstr "Не вдається запустити програму gnome-search-tool.\n"
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be openable
+#: ../src/cong-error-file-open.c:103
+#, c-format
+msgid "%s cannot read \"%s\" from %s."
+msgstr "%s не вдається прочитати \"%s\" з %s."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be openable on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-open.c:106
+#, c-format
+msgid "%s could not read \"%s\" from %s."
+msgstr "%s не вдається прочитати \"%s\" з %s."
+
+#: ../src/cong-error-file-open.c:264 ../src/cong-error-file-save.c:92
+msgid "An unexpected internal error occurred."
+msgstr "Виникла неочікувана внутрішня помилка."
+
+#: ../src/cong-error-file-open.c:265 ../src/cong-error-file-save.c:93
+msgid ""
+"Try again.  If it fails again, file a bug report with the maintainer of this "
+"application."
+msgstr ""
+"Спробуйте ще раз. Якщо помилка повторюватиметься, надішліть звіт про помилку "
+"розробнику програми."
+
+#: ../src/cong-error-file-open.c:291
+msgid "There is no file with that name at that location."
+msgstr "Немає файлу з такою назвою у вказаному місці."
+
+#: ../src/cong-error-file-open.c:292
+msgid ""
+"(i) Try checking that you spelt the file's name correctly.  Remember that "
+"capitalisation is significant (\"MyFile\" is not the same as \"MYFILE\" or "
+"\"myfile\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(а) Перевірте правильність напису назви файлу. Пам'ятайте, що регістр літер має значення.  "
+"(\"MyFile\" це не теж саме, що й \"MYFILE\" чи \"myfile\").\n"
+"(б) Скористайтесь програмою пошуку."
+
+#: ../src/cong-error-file-open.c:293 ../src/cong-error-file-open.c:302
+#: ../src/cong-error-file-open.c:357 ../src/cong-error-file-open.c:398
+msgid "Search"
+msgstr "Пошук"
+
+#: ../src/cong-error-file-open.c:300 ../src/cong-error-file-save.c:110
+msgid "The location does not exist."
+msgstr "Адреса не існує."
+
+#: ../src/cong-error-file-open.c:301
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"mydirectory\" or \"MYDIRECTORY\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(а) Перевірте, чи правильно ви вказали адресу. Пам'ятайте, що регістр літер має значення.  "
+"(\"MyFile\" це не теж саме, що й \"MYFILE\" чи \"myfile\").\n"
+"(б) Скористайтесь програмою пошуку."
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-open.c:314
+#, c-format
+msgid "The location \"%s\" does not support the reading of files."
+msgstr "Неможливо читати файли з адреси \"%s\"."
+
+#: ../src/cong-error-file-open.c:318
+msgid ""
+"Try loading a file from a different location.  If you think that you ought "
+"to be able to read this file, contact your system administrator."
+msgstr ""
+"Спробуйте завантажити файл з іншою адресою. Якщо ви впевнені, що у вас є "
+"права на читання цього файлу, зв'яжіться з адміністратором."
+
+#: ../src/cong-error-file-open.c:328
+msgid "There were problems reading the content of the file."
+msgstr "Помилка при читанні вмісту файлу."
+
+#: ../src/cong-error-file-open.c:329 ../src/cong-error-file-open.c:347
+#: ../src/cong-error-file-open.c:386
+msgid "Try again.  If it fails again, contact your system administrator."
+msgstr "Спробуйте ще раз. Якщо помилка повторюється, зв'яжіться з системним адмінстратором."
+
+#: ../src/cong-error-file-open.c:338
+msgid "The contents of the file seem to be corrupt."
+msgstr "Вміст файлу, швидше за все, зіпсовано."
+
+#: ../src/cong-error-file-open.c:339
+msgid ""
+"Try again.  If it fails again, try looking for a backup copy of the file."
+msgstr ""
+"Спробуйте ще раз. Якщо помилка повторюватиметься, поверніться до резервної копії файлу."
+
+#: ../src/cong-error-file-open.c:346 ../src/cong-error-file-open.c:385
+msgid "There were problems reading the contents of the file."
+msgstr "Помилка при зчитуванні вмісту файлу."
+
+#: ../src/cong-error-file-open.c:355 ../src/cong-error-file-save.c:251
+msgid "The system does not recognise that as a valid location."
+msgstr "Система не розпізнає це як правильну адресу."
+
+#: ../src/cong-error-file-open.c:356
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try using the Search Tool to find your file."
+msgstr ""
+"(а) Перевірте, чи правильно вказано адресу. Пам'ятайте, що регістр символів має значення "
+"(\"http\" не теж саме, що й \"Http\" чи \"HTTP"
+"\").\n"
+"(б) Скористайтесь програмою пошуку."
+
+#: ../src/cong-error-file-open.c:367
+msgid "You do not have permission to read that file."
+msgstr "Немає прав для читання цього файлу."
+
+#: ../src/cong-error-file-open.c:368
+msgid "Try asking your system administrator to give you permission."
+msgstr "Попросіть вашого адміністратора надати вам права."
+
+#: ../src/cong-error-file-open.c:375 ../src/cong-error-file-save.c:274
+msgid "The system is trying to operate on too many files at once."
+msgstr "Система намагається працювати з надто великою кількістю файлів одночасно."
+
+#: ../src/cong-error-file-open.c:376 ../src/cong-error-file-open.c:410
+#: ../src/cong-error-file-save.c:275 ../src/cong-error-file-save.c:294
+msgid ""
+"Try again.  If it fails again, try closing unwanted applications, or contact "
+"your system administrator."
+msgstr ""
+"Якщо при повторній спробі виникне помилка, закрийте зайві програми "
+"або зв'яжіться з системним адміністратором."
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-open.c:393
+#, c-format
+msgid "\"%s\" is a directory, rather than a file."
+msgstr "\"%s\" - каталог,  не файл."
+
+#: ../src/cong-error-file-open.c:397
+msgid "Try using the Search Tool to find your file."
+msgstr "Спробуйте знайти ваш файл за допомогою програми користувача."
+
+#: ../src/cong-error-file-open.c:409 ../src/cong-error-file-save.c:293
+msgid "The system ran out of memory."
+msgstr "Скінчилась системна пам'ять."
+
+#: ../src/cong-error-file-open.c:418 ../src/cong-error-file-open.c:427
+#: ../src/cong-error-file-open.c:436 ../src/cong-error-file-save.c:302
+#: ../src/cong-error-file-save.c:311 ../src/cong-error-file-save.c:320
+msgid "The server could not be contacted."
+msgstr "Не вдається з'єднатись з сервером."
+
+#: ../src/cong-error-file-open.c:419
+msgid "Try again.  If it fails again, the server may be down."
+msgstr "Спробуйте ще раз. Якщо помилка повторюється, можливо сервер вимкнений."
+
+#: ../src/cong-error-file-open.c:428 ../src/cong-error-file-open.c:437
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down."
+msgstr ""
+"(i) Перевірте правильність написання адреси.\n"
+"(ii) Спробуйте ще раз. Якщо помилка повторюється, можливо, сервер вимкнений."
+
+#: ../src/cong-error-file-open.c:445 ../src/cong-error-file-save.c:329
+msgid "The system could not login to the location."
+msgstr "Не вдається отримати доступ до вказаної адреси."
+
+#: ../src/cong-error-file-open.c:446 ../src/cong-error-file-open.c:456
+msgid "Try again. If it fails again, contact your system administrator."
+msgstr "Спробуйте ще раз. Якщо помилка повторюється, зверніться до системного адміністратора."
+
+#: ../src/cong-error-file-open.c:455 ../src/cong-error-file-save.c:338
+msgid "The location was too busy."
+msgstr "Ресурс за адресою зайнятий."
+
+#. Manufacture a dialog that is displayed if the user requests further details:
+#: ../src/cong-error-file-open.c:505
+#, c-format
+msgid "The error \"%s\" was reported whilst accessing \"%s\""
+msgstr "Помилка \"%s\" при отриманні доступу до \"%s\""
+
+#: ../src/cong-error-file-open.c:509
+msgid ""
+"The program unexpectedly received an error report from the GNOME Virtual "
+"File System."
+msgstr ""
+"Програма несподівано отримала повідомлення про помилку у віртуальній файловій системі."
+
+#. A "what failed" message when the failure is likely to be permanent; this URI won't be saveable
+#: ../src/cong-error-file-save.c:61
+#, c-format
+msgid "%s cannot save \"%s\" to %s."
+msgstr "%s не вдається зберегти \"%s\" у %s."
+
+#. A "what failed" message when the failure is likely to be transient; this URI might be "saveable-to" on subsequent attempts, or with some troubleshooting.
+#: ../src/cong-error-file-save.c:64
+#, c-format
+msgid "%s could not save \"%s\" to %s."
+msgstr "%s не вдається зберегти \"%s\" у %s."
+
+#: ../src/cong-error-file-save.c:111
+msgid ""
+"(i) Try checking that you spelt the location's name correctly.  Remember "
+"that capitalisation is significant (\"MyDirectory\" is not the same as "
+"\"MYDIRECTORY\" or \"mydirectory\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(а) Перевірте правильність написання адреси. Пам'ятайте, регістр літер має значення. "
+"(\"MyDirectory\" не те ж саме, що й \"MYDIRECTORY\" чи \"mydirectory\").\n"
+"(б) Спробуйте зберегти у інше місце"
+
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:119 ../src/cong-error-file-save.c:238
+#, c-format
+msgid "The location \"%s\" does not support the writing of files."
+msgstr "Ресурс з адресою \"%s\" не підтримує запис файлів."
+
+#: ../src/cong-error-file-save.c:123 ../src/cong-error-file-save.c:242
+#: ../src/cong-error-file-save.c:350
+msgid "Try saving to a different location."
+msgstr "Спробуйте зберегти з іншою адресою."
+
+#: ../src/cong-error-file-save.c:134
+msgid "There were problems writing the content of the file."
+msgstr "Помилка при запису вмісту файла."
+
+#: ../src/cong-error-file-save.c:135
+msgid "Try again.  If it fails again, try saving to a different location."
+msgstr "Спробуйте ще раз. При повторенні помилки, спробуйте зберегти за іншою адресою."
+
+#: ../src/cong-error-file-save.c:164
+#, c-format
+msgid ""
+"The size of the file would be %s, but the device only has a capacity of %s."
+msgstr "Розмір створюваного файлу %s, але пристрій може вмістити лише %s."
+
+#. Can't get at the capacity for the device or "volume":
+#: ../src/cong-error-file-save.c:170
+#, c-format
+msgid "The file is too big to fit on the device (file size would be %s)."
+msgstr "Файл надто великий, щоб уміститись на пристрої (розмір файлу %s)"
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:178
+msgid "The file is too big to fit on the device."
+msgstr "Файл надто великий, щоб поміститись на прситрої."
+
+#: ../src/cong-error-file-save.c:187
+msgid "Try saving the file to a different location."
+msgstr "Спробуйте записати файл у інше місце."
+
+#: ../src/cong-error-file-save.c:208
+#, c-format
+msgid ""
+"The size of the file would be %s, but you only have %s free on that device."
+msgstr ""
+"Розмір створюваного файлу %s, але на пристрої вільно лише %s."
+
+#. Can't get at the free space for the device or "volume":
+#: ../src/cong-error-file-save.c:214
+#, c-format
+msgid ""
+"The file is too big to fit in the remaining space on the device (file size "
+"would be %s)."
+msgstr ""
+"Файл надто великий для того, щоб уміститись у вільному просторі (розмір файлу %s)."
+
+#. We don't know the size of the file:
+#: ../src/cong-error-file-save.c:222
+msgid "The file is too big to fit in the remaining space on the device."
+msgstr "Файл надто великий, щоб уміститись у вільному просторі. "
+
+#: ../src/cong-error-file-save.c:231
+msgid ""
+"Try saving the file to a different location, or making more space by moving "
+"unwanted files from that device to the trash."
+msgstr ""
+"Спробуйте зберегти файл у інше місце, або звільніть місце на пристрої."
+
+#: ../src/cong-error-file-save.c:252
+msgid ""
+"(i) Try checking that you spelt the location correctly.  Remember that "
+"capitalisation is significant (\"http\" is not the same as \"Http\" or \"HTTP"
+"\").\n"
+"(ii) Try saving to a different location."
+msgstr ""
+"(а) Перевірте правильність напису адреси. Пам'ятайте, що регістр літер має значення "
+"(\"http\" не теж саме, що \"Http\" чи \"HTTP"
+"\").\n"
+"(б) Спробуйте зберегти у інше місце."
+
+#: ../src/cong-error-file-save.c:266
+msgid "You do not have permission to write to that location."
+msgstr "У вас немає прав на запис у це місце."
+
+#: ../src/cong-error-file-save.c:267
+msgid ""
+"Try saving to a different location, or ask your system administrator to give "
+"you permission."
+msgstr ""
+"Спробуйте зберегти у інше місце, або зверніться до системного адміністратора, "
+"щоб він надав вам права."
+
+#. FIXME:  capitalisation issues
+#: ../src/cong-error-file-save.c:281
+#, c-format
+msgid "\"%s\" is a directory."
+msgstr "\"%s\" - каталог."
+
+#: ../src/cong-error-file-save.c:285
+msgid ""
+"You must save to a file within a directory, rather than to the directory "
+"itself."
+msgstr ""
+"Файл треба зберегти у каталозі, проте як шлях до файлу ви вказали каталог."
+
+#: ../src/cong-error-file-save.c:303
+msgid ""
+"Try again.  If it fails again, the server may be down; try saving to another "
+"location."
+msgstr ""
+"Спробуйте ще раз. Якщо помилка повторюється, сервер може бути вимкнений. "
+"Спробуйте зберегти у інше місце."
+
+#: ../src/cong-error-file-save.c:312 ../src/cong-error-file-save.c:321
+msgid ""
+"(i) Try checking that you spelt the location correctly.\n"
+"(ii) Try again. If it fails again, the server may be down; try saving to "
+"another location."
+msgstr ""
+"(а) Спробуйте перевірити правильність написання.\n"
+"(б) Спробуйте ще раз. Якщо помилка повторюється, сервер може бути вимкнений. "
+"Спробуйте зберегти у інше місце."
+
+#: ../src/cong-error-file-save.c:330 ../src/cong-error-file-save.c:339
+msgid "Try again. If it fails again, try saving to another location."
+msgstr "Спробуйте ще раз. При повторенні помилки, спробуйте зберегти у інше місце."
+
+#. FIXME: need some thought about the messages for this
+#: ../src/cong-error-file-save.c:346
+#, c-format
+msgid "The location \"%s\" only allows files to be read, not written."
+msgstr "За адресою \"%s\" можливе лише читання, а не запис."
+
+#. FIXME: need to think more about these messages
+#: ../src/cong-error-file-save.c:358
+#, c-format
+msgid "The name \"%s\" is too long for the location to manage."
+msgstr "Назва \"%s\" надто довга для даної адреси."
+
+#: ../src/cong-error-file-save.c:362
+msgid "Try again with a shorter file name."
+msgstr "Спробуйте ще раз з більш короткою назвою файлу."
+
+#. 5 megabytes, for a test
+#: ../src/cong-error-tests.c:25
+#, c-format
+msgid "Testing File->Open failure of \"%s\" with result %s"
+msgstr "Перевіряється помилка у Файл->Відкрити \"%s\" з результатом %s"
+
+#: ../src/cong-error-tests.c:31
+#, c-format
+msgid "Testing File->Save failure of \"%s\" with result %s"
+msgstr "Перевіряється помилка у Файл->Зберегти \"%s\" з результатом %s"
+
+#: ../src/cong-error-tests.c:37
+#, c-format
+msgid "Testing generic failure of \"%s\" with result %s"
+msgstr "Перевіряється загальна помилка \"%s\" з результатом %s"
+
+#: ../src/cong-error-tests.c:40
+msgid "Conglomerate is simulating the failure of a generic file operation."
+msgstr "Conglomerate імітує помилку у загальних операціях з файлами."
+
+#: ../src/cong-error-tests.c:43
+msgid "This dialog was generated by the automated testing routine"
+msgstr "Цей діалог був створений автоматичною програмою тестування."
+
+#: ../src/cong-file-export.c:153
+msgid "(No description available)"
+msgstr "(Опис недоступний)"
+
+#: ../src/cong-file-export.c:212
+msgid "Select file to export to"
+msgstr "Виберіть файл для експорту"
+
+#: ../src/cong-file-export.c:260
+#, c-format
+msgid "Export \"%s\""
+msgstr "Експорт \"%s\""
+
+#: ../src/cong-file-export.c:265
+msgid "Export"
+msgstr "Експорт"
+
+#: ../src/cong-file-export.c:317
+msgid "Exporter:"
+msgstr "Модуль експорту:"
+
+#: ../src/cong-file-export.c:319
+msgid "File:"
+msgstr "Файл:"
+
+#: ../src/cong-file-export.c:321
+msgid "Export Options"
+msgstr "Параметри експорту"
+
+#: ../src/cong-file-export.c:431
+msgid "No output file specified"
+msgstr "Вихідний файл не вказано"
+
+#: ../src/cong-file-export.c:432
+msgid "Please specify a file name."
+msgstr "Вкажіть назву файлу."
+
+#: ../src/cong-file-import.c:80
+msgid "Import file..."
+msgstr "Імпорту файлу..."
+
+#: ../src/cong-file-new.c:169
+#, c-format
+msgid "Creating a new file (%s)"
+msgstr "Створення нового файлу (%s)"
+
+#: ../src/cong-file-new.c:595 ../src/cong-file-new.c:618
+#: ../src/cong-file-new.c:626 ../src/cong-file-new.c:643
+msgid "Creating a new file"
+msgstr "Створення нового файлу"
+
+#: ../src/cong-file-new.c:619
+msgid ""
+"This assistant will guide you through creating a new file.\n"
+"\n"
+"Various types of file are available, and Conglomerate may be able to supply "
+"some of the \"boilerplate\" content for you.\n"
+"\n"
+"We hope that in future versions of Conglomerate you will be able to create "
+"\"template documents\" to add to this system."
+msgstr ""
+"Цей помічник буде супроводжувати вас при створенні нового файлу.\n"
+"\n"
+"Доступні різні типи файлів, Conglomerate може створити для них "
+"вміст з шаблону.\n"
+"\n"
+"Ми сподіваємось, що у майбутніх версіях Conglomerate ви зможете самі створювати "
+"шаблони документів для додавання їх у цей помічник."
+
+#: ../src/cong-file-new.c:632
+msgid "What type of file would you like to create?"
+msgstr "Файл якого типу ви бажаєте створити?"
+
+#: ../src/cong-file-new.c:634
+msgid ""
+"Highlight one of the items in the list and select \"Forward\" to continue"
+msgstr ""
+"Виберіть один з пунктів у списку та натисніть \"Вперед\" для продовження"
+
+#: ../src/cong-file-new.c:644
+msgid ""
+"Conglomerate now has the information it needs to create the document.  Press "
+"\"Apply\" to create it.  You will need to save the document if you wish to "
+"keep it."
+msgstr ""
+"Зібрано усю потрібну для створення документу інформацію. Натисніть \"Застосувати\" "
+"щоб його створити.  Слід зберегти документ, щоб не втратити його вміст."
+
+#: ../src/cong-file-open.c:72
+msgid ""
+"The internal structure of the document does not match any of the types known "
+"to Conglomerate."
+msgstr ""
+"Внутрішня структура документу не відповідає жодному типу, відомому Conglomerate."
+
+#: ../src/cong-file-open.c:73
+msgid ""
+"You can force Conglomerate to load the document by clicking on the \"Force\" "
+"button below, but results may not be ideal."
+msgstr ""
+"Можна примусово завантажити документ, натиснувши кнопку \"Примусово\", "
+"але результат може бути не ідеальний."
+
+#: ../src/cong-file-open.c:74
+msgid "Force"
+msgstr "Примусово"
+
+#: ../src/cong-file-open.c:218
+msgid "Select an XML document"
+msgstr "Виберіть документ XML"
+
+#: ../src/cong-file-print.c:195
+#, c-format
+msgid "Print \"%s\""
+msgstr "Друкувати \"%s\""
+
+#: ../src/cong-file-print.c:201
+msgid "Print"
+msgstr "Друк"
+
+#: ../src/cong-file-print.c:233
+msgid "Print Method:"
+msgstr "Метод друку:"
+
+#: ../src/cong-file-print.c:241
+msgid "Print Options"
+msgstr "Параметри друку"
+
+#: ../src/cong-file-print.c:336 ../src/cong-menus.c:727
+msgid "Print Preview"
+msgstr "Попередній перегляд"
+
+#: ../src/cong-file-print.c:346
+#, c-format
+msgid "Conglomerate cannot print \"%s\""
+msgstr "Не вдається надрукувати \"%s\""
+
+#: ../src/cong-file-print.c:349
+msgid "None of Conglomerate's plugins know how to print files of that type."
+msgstr "Модулі Conglomerate не можуть друкувати файли цього типу."
+
+#: ../src/cong-file-properties.c:105
+msgid "Yes"
+msgstr "Так"
+
+#: ../src/cong-file-properties.c:105
+msgid "No"
+msgstr "Ні"
+
+#: ../src/cong-file-properties.c:124 ../src/cong-file-properties.c:127
+msgid "None"
+msgstr "Нічого"
+
+#: ../src/cong-file-properties.c:165
+msgid "_Remove this DTD"
+msgstr "В_идалити цей DTD"
+
+#: ../src/cong-file-properties.c:190
+msgid ""
+"The document does not specify an external DTD, but Conglomerate believes the "
+"above information is appropriate.  Click on \"Associate this DTD\" to "
+"specify this information explicitly in the document."
+msgstr ""
+"Цей документ не містить зовнішнє визначення DTD, але Conglomerate очікує "
+"що ця інформація правильна.  Натисніть на \"Асоціювати з цим DTD\",  "
+"щоб занести цю інформацію у документ."
+
+#: ../src/cong-file-properties.c:199
+msgid "No External Subset"
+msgstr "Відсутне зовнішнє визначення"
+
+#: ../src/cong-file-properties.c:201 ../src/plugin-validate.c:171
+msgid "_Add a DTD"
+msgstr "_Додати DTD"
+
+#: ../src/cong-file-properties.c:275 ../src/cong-file-properties.c:277
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: ../src/cong-file-properties.c:288
+msgid "Unspecified"
+msgstr "Не вказано"
+
+#: ../src/cong-file-properties.c:363
+msgid "Remove DTD"
+msgstr "Видалити DTD"
+
+#: ../src/cong-file-properties.c:380 ../src/cong-util.c:1636
+msgid "Associate with DTD"
+msgstr "Пов'язати з DTD"
+
+#: ../src/cong-file-save.c:75
+msgid "Save XML as..."
+msgstr "Зберегти як XML..."
+
+#: ../src/cong-file-save.c:110
+#, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Файл \"%s\" доступний лише для читання.\n"
+
+#: ../src/cong-file-save.c:113
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Файл \"%s\" вже існує.\n"
+
+#: ../src/cong-file-save.c:121
+msgid "_Replace"
+msgstr "_Замінити"
+
+#: ../src/cong-file-save.c:131
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Бажаєте замінити його файлом, який записуєте?"
+
+#: ../src/cong-location.c:396 ../src/cong-location.c:417
+msgid "Merge tags"
+msgstr "Об'єднувати теги"
+
+#: ../src/cong-location.c:468
+msgid "Delete character"
+msgstr "Видалити символ"
+
+#: ../src/cong-location.c:1060
+msgid "Calculating previous page"
+msgstr "Обчислення попередньої сторінки"
+
+#: ../src/cong-location.c:1083
+msgid "Calculating next page"
+msgstr "Обчислення наступної сторінки"
+
+#: ../src/cong-menus.c:112 ../src/cong-menus.c:165 ../src/cong-menus.c:199
+msgid "The selected menu item has not yet been implemented."
+msgstr "Вибераний пункт меню ще не працює."
+
+#: ../src/cong-menus.c:463
+msgid "Conglomerate cannot open the result of the transformation"
+msgstr "Conglomerate не може відкрити результат перетворення"
+
+#.
+#. * Since we can not assume that these are the DocBook stylesheets we can not
+#. * be too precise with the error message. The message below assumes that whatever stylesheet
+#. * was used was accessed via the XML catalog mechanism, hence the note about the catalog
+#. * file. It would be nice to make the URL an actual link but that is a lot more work.
+#.
+#: ../src/cong-menus.c:528 ../src/cong-stylesheet.c:225
+#, c-format
+msgid "There was a problem reading the stylesheet file \"%s\""
+msgstr "Помилка читання стильового файлу \"%s\""
+
+#: ../src/cong-menus.c:531 ../src/cong-menus.c:555
+#: ../src/cong-stylesheet.c:227 ../src/cong-stylesheet.c:290
+msgid "Conglomerate could not transform the document"
+msgstr "Не вдається перетворити документ"
+
+#: ../src/cong-menus.c:552
+msgid "There was a problem applying the stylesheet file"
+msgstr "Помилка при застосуванні файлу специфікації"
+
+#: ../src/cong-menus.c:1113
+msgid "Test Progress Checklist"
+msgstr "Перевірка індикації перебігу"
+
+#: ../src/cong-menus.c:1117
+#, c-format
+msgid "This is stage %i"
+msgstr "Це стадія %i"
+
+#: ../src/cong-menus.c:1168
+msgid "Message Log - Conglomerate"
+msgstr "Журнал повідомлень - Conglomerate"
+
+#: ../src/cong-menus.c:1187
+msgid "Signal Log - Conglomerate"
+msgstr "Журнал сигналів"
+
+#: ../src/cong-menus.c:1427
+msgid "translator_credits"
+msgstr "Максим Дзюманенко <mvd@mylinux.ua>"
+
+#: ../src/cong-menus.c:1446
+msgid ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+msgstr ""
+"(C) 1999 Hans Petter Jansson\n"
+"(C) 2004 David Malcolm"
+
+#: ../src/cong-menus.c:1447
+msgid "Conglomerate: a free, user-friendly XML editor"
+msgstr "Conglomerate: вільний, дружній редактор файлів формату XML"
+
+#. Menus:
+#: ../src/cong-menus.c:1481
+msgid "_File"
+msgstr "_Файл"
+
+#: ../src/cong-menus.c:1482
+msgid "_Edit"
+msgstr "_Правка"
+
+#: ../src/cong-menus.c:1487
+msgid "_Help"
+msgstr "_Довідка"
+
+#. Sub-menus:
+#: ../src/cong-menus.c:1490 ../src/popup.c:1100
+msgid "New sub-element"
+msgstr "Створити піделемент"
+
+#: ../src/cong-menus.c:1491 ../src/popup.c:1114
+msgid "New sibling"
+msgstr "Створити сусідній елемент"
+
+#: ../src/cong-menus.c:1492
+msgid "Remove span tag"
+msgstr "Видалити вбудований тег"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1495
+msgid "_New..."
+msgstr "_Створити..."
+
+#: ../src/cong-menus.c:1496
+msgid "_Open..."
+msgstr "_Відкрити..."
+
+#: ../src/cong-menus.c:1497
+msgid "_Import..."
+msgstr "_Імпорт..."
+
+#: ../src/cong-menus.c:1498
+msgid "_Close"
+msgstr "_Закрити"
+
+#: ../src/cong-menus.c:1499
+msgid "_Quit"
+msgstr "Ви_хід"
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1503
+msgid "Pr_eferences"
+msgstr "П_араметри"
+
+#. Actions found in Help menu:
+#: ../src/cong-menus.c:1516
+msgid "_Contents"
+msgstr "_Зміст"
+
+#: ../src/cong-menus.c:1517
+msgid "_Homepage"
+msgstr "_Домашня сторінка"
+
+#: ../src/cong-menus.c:1518
+msgid "_About"
+msgstr "_Про програму"
+
+#: ../src/cong-menus.c:1524
+msgid "_Tools"
+msgstr "С_ервіс"
+
+#. Actions found in File menu:
+#: ../src/cong-menus.c:1528
+msgid "_Save"
+msgstr "З_берегти"
+
+#: ../src/cong-menus.c:1529
+msgid "Save _as..."
+msgstr "Зберегти _як..."
+
+#: ../src/cong-menus.c:1530
+msgid "Sa_ve a Copy..."
+msgstr "Зберегти _копію..."
+
+#: ../src/cong-menus.c:1532
+msgid "Print Previe_w..."
+msgstr "_Попередній перегляд..."
+
+#: ../src/cong-menus.c:1533
+msgid "_Print"
+msgstr "Д_рук"
+
+#: ../src/cong-menus.c:1536
+msgid "_Revert"
+msgstr "Від_новити"
+
+#: ../src/cong-menus.c:1538
+msgid "_Export..."
+msgstr "_Експорт..."
+
+#: ../src/cong-menus.c:1539
+msgid "Proper_ties"
+msgstr "В_ластивості"
+
+#. Actions found in Edit menu:
+#: ../src/cong-menus.c:1543 ../src/cong-menus.c:1768
+msgid "_Undo"
+msgstr "В_ернути"
+
+#: ../src/cong-menus.c:1544 ../src/cong-menus.c:1778
+msgid "_Redo"
+msgstr "Повт_орити"
+
+#: ../src/cong-menus.c:1545
+msgid "Cu_t"
+msgstr "_Вирізати"
+
+#: ../src/cong-menus.c:1546 ../src/popup.c:755 ../src/popup.c:1052
+msgid "_Copy"
+msgstr "_Копіювати"
+
+#: ../src/cong-menus.c:1547 ../src/popup.c:769
+msgid "_Paste"
+msgstr "Вст_авити"
+
+#: ../src/cong-menus.c:1548
+msgid "_Find..."
+msgstr "З_найти..."
+
+#: ../src/cong-menus.c:1549
+msgid "Find Ne_xt"
+msgstr "Зна_йти далі"
+
+#: ../src/cong-menus.c:1550
+msgid "Find Pre_vious"
+msgstr "Знайти _попереднє"
+
+#: ../src/cong-menus.c:1551
+msgid "R_eplace..."
+msgstr "_Замінити..."
+
+#: ../src/cong-menus.c:1553
+msgid "_Insert..."
+msgstr "_Вставити..."
+
+#: ../src/cong-menus.c:1554
+msgid "View _Source"
+msgstr "Переглянути _джерело"
+
+#: ../src/cong-menus.c:1764
+#, c-format
+msgid "_Undo: %s"
+msgstr "В_ернути: %s"
+
+#: ../src/cong-menus.c:1774
+#, c-format
+msgid "_Redo: %s"
+msgstr "Повт_орити: %s"
+
+#: ../src/cong-node-properties-dialog.c:254
+msgid "XPath"
+msgstr "XPath"
+
+#: ../src/cong-node-properties-dialog.c:379
+#, c-format
+msgid "Rename attribute \"%s\" as \"%s\""
+msgstr "Перейменувати атрибут \"%s\" як \"%s\""
+
+#: ../src/cong-node-properties-dialog.c:560
+msgid "Namespace"
+msgstr "Простір назв"
+
+#: ../src/cong-node-properties-dialog.c:588
+msgid "Raw Attributes"
+msgstr "Атрибути"
+
+#: ../src/cong-node-properties-dialog.c:621
+msgid "Value"
+msgstr "Значення"
+
+#: ../src/cong-node-properties-dialog.c:713
+#, c-format
+msgid "Attributes for <tt>%s</tt> elements"
+msgstr "Атрибути для елементів <tt>%s</tt>"
+
+#: ../src/cong-node-properties-dialog.c:827
+msgid "Text"
+msgstr "Текст"
+
+#: ../src/cong-node-properties-dialog.c:879
+msgid "Choice"
+msgstr "Вибір"
+
+#: ../src/cong-node-properties-dialog.c:914
+msgid "Optional"
+msgstr "Необов'язково"
+
+#: ../src/cong-node-properties-dialog.c:930
+msgid "Zero or more"
+msgstr "Нуль або більше"
+
+#: ../src/cong-node-properties-dialog.c:946
+msgid "One or more"
+msgstr "Один або більше"
+
+#. To translators: this is the label of a widget that shows the valid combinations of child elements for an element in the document; "content" is a noun
+#: ../src/cong-node-properties-dialog.c:1013
+msgid "Valid Content"
+msgstr "Перевірка коректності документа"
+
+#. To translators: "content" is a noun; this is XML jargon
+#: ../src/cong-node-properties-dialog.c:1038
+#, c-format
+msgid "Content model for <tt>%s</tt> elements"
+msgstr "Модель вмісту для елементів <tt>%s</tt>"
+
+#: ../src/cong-node-properties-dialog.c:1185
+#: ../src/cong-node-properties-dialog.c:1316
+msgid "DTD"
+msgstr "DTD"
+
+#: ../src/cong-overview-view.c:207
+msgid "Unknown data"
+msgstr "Невідомі дані"
+
+#: ../src/cong-parser-error.c:228
+#, c-format
+msgid "Parse errors loading %s"
+msgstr "Помилки розбору при завантаженні %s"
+
+#: ../src/cong-parser-error.c:236
+msgid "_Retry"
+msgstr "_Повторити"
+
+#: ../src/cong-parser-error.c:315
+msgid "Line Number"
+msgstr "Номер рядка"
+
+#: ../src/cong-parser-error.c:393
+#, c-format
+msgid "%s cannot understand the internal format of the file."
+msgstr "%s незрозумілий внутрішній формат файлу."
+
+#: ../src/cong-parser-error.c:401
+msgid ""
+"Conglomerate currently requires documents to be \"well-formed\"; it has much "
+"stricter rules than most web browsers.  It also does not yet support SGML.  "
+"We hope to fix these problems in a later release."
+msgstr ""
+"Наразі Conglomerate вимагає, щоб розмітка документу була \"правильно сформованою\"; "
+"це більш жорстке обмеження ніж у більшості веб-переглядачів. Також досі не підтримується SGML. "
+"Незабаром ми сподіваємось це виправити."
+
+#: ../src/cong-parser-error.c:402
+msgid "Show Details"
+msgstr "Показати подробиці"
+
+#: ../src/cong-plugin.c:554 ../src/cong-plugin.c:619
+msgid "Conglomerate could not find display information for the new file"
+msgstr "Conglomerate не вдається знайти інформацію для відображення нового файлу"
+
+#. Generate a user-visible name for this plugin property dialog (property dialog for an XML element)
+#: ../src/cong-plugin.c:1043
+#, c-format
+msgid "<%s> property dialog"
+msgstr "Вікно властивості <%s>"
+
+#. Generate a user-visible description for this plugin (property dialog for an XML element)
+#: ../src/cong-plugin.c:1046
+#, c-format
+msgid "Provides a Properties dialog for the <%s> element"
+msgstr "Представляє діалогове вікно властивостей елемента <%s>"
+
+#: ../src/cong-primary-window.c:374
+msgid "Overview"
+msgstr "Огляд"
+
+#: ../src/cong-primary-window.c:385
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: ../src/cong-primary-window.c:395
+msgid "Raw XML"
+msgstr "Простий XML"
+
+#: ../src/cong-primary-window.c:600 ../src/cong-primary-window.c:619
+msgid "Welcome to the much-delayed Conglomerate editor."
+msgstr "Ласкаво просимо до редактора Conglomerate."
+
+#: ../src/cong-primary-window.c:732
+#, c-format
+msgid "%s (modified) - %s"
+msgstr "%s (змінено) - %s"
+
+#: ../src/cong-source-layout.c:413 ../src/plugin-cleanup-source.c:73
+msgid "Cleanup XML Source"
+msgstr "Очистка коду XML"
+
+#: ../src/cong-stylesheet.c:229
+msgid ""
+"Since Conglomerate could not read the stylesheet it is possible that your "
+"XML catalog file is set up incorrectly. See http://www.xmlsoft.org/catalog."
+"html for more information on catalogs."
+msgstr ""
+"Оскільки Conglomerate не вдається прочитати стильовий файл, можливо, "
+"ваш файл каталогу XML  не налаштований. додаткову інформацію дивіться за адресою "
+"http://www.xmlsoft.org/catalog.html"
+
+#: ../src/cong-stylesheet.c:260
+#, c-format
+msgid "There was a problem applying the stylesheet file \"%s\" to \"%s\""
+msgstr "Помилка при застосуванні стильового файлу \"%s\" до \"%s\""
+
+#: ../src/cong-stylesheet.c:277
+msgid ""
+"\n"
+"\n"
+"The following stylesheet parameters were used:\n"
+msgstr ""
+"\n"
+"\n"
+"Використовувались наступні параметри стильового файлу:\n"
+
+#: ../src/cong-util.c:321 ../src/plugin-docbook.c:1402
+msgid "Printing XSL Formatting Objects"
+msgstr "Друкуються об'єкти форматування XSL"
+
+#: ../src/cong-util.c:365
+msgid "This will eventually be the result from cong_util_print_xslfo"
+msgstr "Швидше за все, це результат cong_util_print_xslfo"
+
+#: ../src/cong-util.c:1437
+msgid "(no description available)"
+msgstr "(опис  недоступний)"
+
+#: ../src/cong-util.c:1625
+msgid "DTD files"
+msgstr "Файли DTD"
+
+#: ../src/cong-util.c:1628
+msgid "Select a DTD"
+msgstr "Вибрати DTD"
+
+#: ../src/cursor.c:129
+#, c-format
+msgid "Split <%s> element"
+msgstr "Розділити елемент <%s>"
+
+#: ../src/file.c:106
+msgid "XML Files"
+msgstr "Файли XML"
+
+#: ../src/file.c:118
+msgid "All Files"
+msgstr "Усі файли"
+
+#: ../src/plugin-admonition.c:77
+msgid "Admonition"
+msgstr "Зауваження"
+
+#: ../src/plugin-admonition.c:78
+msgid "An editor node for visualising tips, warnings, etc"
+msgstr "Вузол редактора для візуалізації підказок, попереджень, тощо."
+
+#: ../src/plugin-arbitrary.c:168
+msgid "The XML document needs a top-level element."
+msgstr "Документу розмітки потрібен кореневий елемент."
+
+#: ../src/plugin-arbitrary.c:270
+msgid "Empty XML Document"
+msgstr "Порожній документ XML"
+
+#: ../src/plugin-arbitrary.c:271
+msgid "Create an empty XML document of an arbitrary type."
+msgstr "Створити документ формату XML з довільним вмістом."
+
+#: ../src/plugin-cleanup-source.c:74 ../src/plugin-cleanup-source.c:77
+#: ../src/plugin-cleanup-source.c:78
+msgid ""
+"Cleans up the XML source of the document, so that it is easy to read in a "
+"code editor."
+msgstr ""
+"Очистити код документу XML, щоб його було легко читати у будь-якому текстовому редакторі."
+
+#: ../src/plugin-cleanup-source.c:76
+msgid "_Clean the XML Source"
+msgstr "О_чистити код XML"
+
+#: ../src/plugin-convert-case.c:125
+msgid "Export as \"lower case\" XML"
+msgstr "Експорт як XML у \"нижньому регістрі\""
+
+#: ../src/plugin-convert-case.c:126
+msgid ""
+"Exports as an XML file, converting all the tags and attributes in the "
+"document to lowercase.  Useful when working with legacy SGML documents."
+msgstr ""
+"Експортувати як XML, перетворюючи усі теги та атрибути в документі до "
+"нижнього регістру. Корисно при роботі з документами у форматі SGML."
+
+#: ../src/plugin-docbook.c:225
+msgid "Untitled section"
+msgstr "Розділ без назви"
+
+#: ../src/plugin-docbook.c:232
+msgid "Text of the article goes here"
+msgstr "Початок тексту статті"
+
+#: ../src/plugin-docbook.c:251
+msgid "Untitled Article"
+msgstr "Стаття без назви"
+
+#: ../src/plugin-docbook.c:301
+msgid "Untitled chapter"
+msgstr "Глава без назви"
+
+#: ../src/plugin-docbook.c:308
+msgid "Text of the first chapter goes here"
+msgstr "Початок тексту першої глави"
+
+#: ../src/plugin-docbook.c:327
+msgid "Untitled Book"
+msgstr "Книга без назви"
+
+#: ../src/plugin-docbook.c:378
+msgid "Untitled book"
+msgstr "Книга без назви"
+
+#: ../src/plugin-docbook.c:397
+msgid "Untitled Set of Documents"
+msgstr "Набір документів без назви"
+
+#.
+#. * The text may not be very helpful.
+#. * It would be nice to make the URLs be actual links.
+#.
+#: ../src/plugin-docbook.c:1103
+#, c-format
+msgid "Conglomerate can not find the stylesheet used to convert DocBook to %s"
+msgstr "Conglomerate  не вдається знайти стильовий файл, що використовується для перетворення"
+"DocBook на %s"
+
+#: ../src/plugin-docbook.c:1106
+msgid "Unable to locate the DocBook stylesheets"
+msgstr "Не вдається знайти стильові файли DocBook"
+
+#: ../src/plugin-docbook.c:1108
+msgid ""
+"Ensure that Norman Walsh's DocBook XSL stylesheets, available at http://"
+"docbook.sourceforge.net/projects/xsl/, are installed and are added to your "
+"XML catalog file (see http://www.xmlsoft.org/catalog.html for more "
+"information on catalogs)."
+msgstr ""
+"Переконайтесь, що стильові файли XSL Norman'а Walsh'а для DocBook, доступні "
+"на http://docbook.sourceforge.net/projects/xsl/ встановлені та додані у ваш "
+"каталог XML (Зайдіть на http://www.xmlsoft.org/catalog.html для отримання "
+"додаткової інформації про каталог)."
+
+#: ../src/plugin-docbook.c:1144
+#, c-format
+msgid ""
+"%s conversion complete.\n"
+"\n"
+"Converted %s to %s in %s"
+msgstr ""
+"Перетворення %s закінчено.\n"
+"\n"
+"Перетворено %s в %s за %s"
+
+#: ../src/plugin-docbook.c:1268
+msgid "Exporting PDF file"
+msgstr "Експорт файлу PDF"
+
+#: ../src/plugin-docbook.c:1272 ../src/plugin-docbook.c:1400
+msgid "Transforming DocBook into XSL Formatting Objects"
+msgstr "Перетворення DocBook на форматуючі об'єкти XSL"
+
+#: ../src/plugin-docbook.c:1274
+msgid "Laying out XSL Formatting Objects as a PDF file"
+msgstr "Вивід форматуючих об'єктів як файл PDF"
+
+#: ../src/plugin-docbook.c:1289 ../src/plugin-fo.c:97
+msgid "Converting XSL Formatting Objects to PDF"
+msgstr "Перетворення форматуючих об'єктів на PDF"
+
+#: ../src/plugin-docbook.c:1396
+msgid "Printing DocBook file"
+msgstr "Друк файлу DocBook"
+
+#: ../src/plugin-docbook.c:1796
+msgid "DocBook Article"
+msgstr "Стаття DocBook"
+
+#: ../src/plugin-docbook.c:1797
+msgid ""
+"Create an article, perhaps for a website or a magazine, using the \"DocBook"
+"\" format"
+msgstr ""
+"Створити статтю, можливо для веб-сайту чи журналу, використовуючи формат \"DocBook"
+"\""
+
+#: ../src/plugin-docbook.c:1804
+msgid "DocBook Book"
+msgstr "Книга у форматі DocBook"
+
+#: ../src/plugin-docbook.c:1805
+msgid "Create a book, using the \"DocBook\" format"
+msgstr "Створити книгу, використовуючи формат \"DocBook\""
+
+#: ../src/plugin-docbook.c:1812
+msgid "DocBook Set"
+msgstr "Набір DocBook"
+
+#: ../src/plugin-docbook.c:1813
+msgid "Create a set of related books, using the \"DocBook\" format"
+msgstr "Створити набір пов'язаних посилань, використовуючи формат \"DocBook\""
+
+#: ../src/plugin-docbook.c:1821
+msgid "Import text as a DocBook article"
+msgstr "Імпорт тексту як статті DocBook"
+
+#: ../src/plugin-docbook.c:1822
+msgid "Import a plain text file into the \"DocBook\" format, as an article."
+msgstr "Імпортувати простий текстовий файл \"DocBook\", як статтю."
+
+#: ../src/plugin-docbook.c:1840
+msgid "Export DocBook as HTML"
+msgstr "Експорт DocBook як HTML"
+
+#: ../src/plugin-docbook.c:1841
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
+"file"
+msgstr ""
+"Використовувати стильовий файл Norman Walsh`а DocBook, щоб створити веб-сторінку "
+"з цього документу DocBook"
+
+#: ../src/plugin-docbook.c:1849
+msgid "Export DocBook as PDF"
+msgstr "Експорт DocBook як PDF"
+
+#: ../src/plugin-docbook.c:1850
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
+"DocBook file"
+msgstr ""
+"Використовувати стильовий файл Norman Walsh`а DocBook, щоб створити PDF "
+"з цього документу DocBook"
+
+#: ../src/plugin-docbook.c:1858
+msgid "Export DocBook as XSL:FO"
+msgstr "Експорт DocBook як XSL:FO"
+
+#: ../src/plugin-docbook.c:1859
+msgid ""
+"Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
+"DocBook file that can be printed or converted to PDF at a later date"
+msgstr ""
+"Використовувати стильовий файл Norman Walsh`а DocBook, щоб створити файл XSL:FO "
+"з цього документу DocBook, який може бути перетворений у PDF"
+
+#: ../src/plugin-docbook.c:1868
+msgid "Print DocBook"
+msgstr "Надрукувати DocBook"
+
+#: ../src/plugin-docbook.c:1877
+msgid "Generic DocBook property dialog"
+msgstr "Властивості звичайного DocBook"
+
+#: ../src/plugin-docbook.c:1878
+msgid "Provides a Properties dialog for most DocBook nodes"
+msgstr "Надає діалог властивостей для більшості вузлів DocBook"
+
+#: ../src/plugin-docbook.c:1896 ../src/plugin-docbook.c:1899
+#: ../src/plugin-html.c:137 ../src/plugin-html.c:140
+msgid "Open Link in Browser"
+msgstr "Відкривання посилання у веб-переглядачі"
+
+#: ../src/plugin-docbook.c:1908
+msgid "Promote Section"
+msgstr "Висування розділу"
+
+#: ../src/plugin-docbook.c:1909
+msgid ""
+"Promotes a DocBook section to a higher organisational level within the "
+"document"
+msgstr ""
+"Висуває розділ DocBook на більш високий рівень організації у документі."
+
+#: ../src/plugin-docbook.c:1911 ../src/plugin-html.c:148
+#: ../src/plugin-html.c:151
+msgid "Promote"
+msgstr "Висування"
+
+#: ../src/plugin-docbook.c:1912 ../src/plugin-docbook.c:1913
+msgid ""
+"Promote the section to a higher organisational level within the document"
+msgstr ""
+"Висунути розділ на більш високий рівень організації в документі."
+
+#: ../src/plugin-docbook.c:1919
+msgid "Demote Section"
+msgstr "Пониження розділу"
+
+#: ../src/plugin-docbook.c:1920
+msgid ""
+"Demotes a DocBook section to a lower organisational level within the document"
+msgstr ""
+"Понижує розділ на менш високий рівень організації в документі."
+
+#: ../src/plugin-docbook.c:1922 ../src/plugin-html.c:159
+#: ../src/plugin-html.c:162
+msgid "Demote"
+msgstr "Пониження"
+
+#: ../src/plugin-docbook.c:1923 ../src/plugin-docbook.c:1924
+msgid "Demote the section to a lower organisational level within the document"
+msgstr "Понизити розділ на менш високий рівень організації в документі."
+
+#: ../src/plugin-dtd.c:93
+#, c-format
+msgid "Autogenerated document type based on %s"
+msgstr "Автоматично сформований тип документу, оснований на %s"
+
+#: ../src/plugin-dtd.c:94
+#, c-format
+msgid ""
+"This Conglomerate display specification was automatically generated from %s"
+msgstr ""
+"Ця специфікація відображення для редактора Conglomerate була автоматично створена з %s"
+
+#: ../src/plugin-dtd.c:215
+msgid "Convert DTD into a Conglomerate Display Specification"
+msgstr "Перетворення DTD на файл специфікації відображення"
+
+#: ../src/plugin-dtd.c:216
+msgid "Import a DTD file, creating a Conglomerate display specification file."
+msgstr "Імпортувати файл DTD, створюючи специфікації відображення для Conglomerate."
+
+#: ../src/plugin-dtd.c:224
+msgid "Convert DTD into a Relax NG schema"
+msgstr "Перетворення DTD на схему Relax NG"
+
+#: ../src/plugin-dtd.c:225
+msgid "Import a DTD file, converting it into a RELAX NG Schema."
+msgstr "Імпортувати файл DTD, перетворюючи його на схему RELAX NG."
+
+#: ../src/plugin-dtd.c:233
+msgid "Convert DTD into W3C XML Schema"
+msgstr "Перетворення DTD на W3C XML Schema"
+
+#: ../src/plugin-dtd.c:234
+msgid "Import a DTD file, converting it into a W3C XML Schema."
+msgstr "Імпортувати файл DTD, перетворюючи його на схему W3C XML."
+
+#: ../src/plugin-dtd.c:242
+msgid "Convert DTD into a Schematron file"
+msgstr "Перетворення DTD на файл Schematron"
+
+#: ../src/plugin-dtd.c:243
+msgid "Import a DTD file, converting it into a Schematron Schema."
+msgstr "Імпортувати файл DTD, перетворюючи його на схему Schematron."
+
+#: ../src/plugin-dtd.c:251
+msgid "Convert DTD into an Examplotron file"
+msgstr "Перетворення DTD на файл Examplotron"
+
+#: ../src/plugin-dtd.c:252
+msgid "Import a DTD file, converting it into an Examplotron Schema."
+msgstr "Імпортувати файл DTD, перетворюючи його на схему Examplotron."
+
+#: ../src/plugin-fo.c:152
+msgid "Export XSL-FO as PDF"
+msgstr "Експорт XSL-FO як PDF"
+
+#: ../src/plugin-fo.c:153
+msgid "Generate a PDF file from the XSL:FO information"
+msgstr "Створити файл PDF з інформації XSL:FO"
+
+#: ../src/plugin-fo.c:162
+msgid "Print XSL:FO"
+msgstr "Друкувати XSL:FO"
+
+#: ../src/plugin-lists.c:77
+msgid "List Member Element"
+msgstr "Елемент списку"
+
+#: ../src/plugin-lists.c:78
+msgid "An editor node for visualising a member of a list"
+msgstr "Вузол редактора для відображення елементів списку"
+
+#: ../src/plugin-paragraph.c:68
+msgid "Paragraph"
+msgstr "Абзац"
+
+#: ../src/plugin-paragraph.c:69
+msgid "An editor node for visualising a paragraph"
+msgstr "Вузол редактора для відображення абзаца"
+
+#. I'd like to use GtkSourceView for printing.
+#. Unfortunately, the GtkSourceView API currently likes to create its own GnomePrintJob, and then use the GnomePrintContext from this.
+#.
+#. What should the Conglomerate printing plugin API be?  Or should we have more than one (perhaps as subclasses) to allow for this kind of thing?
+#.
+#: ../src/plugin-print-source.c:73 ../src/plugin-print-source.c:86
+msgid "Print XML source"
+msgstr "Друкувати код XML"
+
+#: ../src/plugin-random.c:148
+msgid "What kind of random XML document would you like to create?"
+msgstr "Випадковий документ XML якого типу бажаєте створити?"
+
+#: ../src/plugin-random.c:685
+msgid "Random Document"
+msgstr "Випадковий документ"
+
+#: ../src/plugin-random.c:686
+msgid "Create an XML document containing random content."
+msgstr "Створити документ XML, що містить випадковий вміст."
+
+#: ../src/plugin-relaxng.c:128
+msgid "Compact Syntax View"
+msgstr "Компактне відображення синтаксису"
+
+#: ../src/plugin-relaxng.c:146 ../src/plugin-relaxng.c:149
+msgid "View as Compact RELAX NG"
+msgstr "Переглянути як Compact RELAX NG"
+
+#: ../src/plugin-relaxng.c:147
+msgid "Display the compact syntax form of a RELAX NG schema"
+msgstr "Відображати компактну форму синтаксису схеми RELAX NG "
+
+#: ../src/plugin-save-dispspec.c:149
+msgid "Dump Display Spec"
+msgstr "Вивід специфікації відображення"
+
+#: ../src/plugin-save-dispspec.c:150 ../src/plugin-save-dispspec.c:153
+#: ../src/plugin-save-dispspec.c:154
+msgid ""
+"Writes the current display spec into a display spec xml file. This file can "
+"then be customized by the conglomerate user"
+msgstr ""
+"Записує поточні специфікації відображення у файл xml. Цей файл надалі можна буде редагувати."
+
+#: ../src/plugin-save-dispspec.c:152
+msgid "_Dump Display Spec"
+msgstr "_Вивести специфікації відображення"
+
+#: ../src/plugin-save-dispspec.c:160
+msgid "Edit Display Spec"
+msgstr "Правка специфікації відображення"
+
+#: ../src/plugin-save-dispspec.c:161 ../src/plugin-save-dispspec.c:164
+#: ../src/plugin-save-dispspec.c:165
+msgid "Opens the current display spec as a conglomerate document."
+msgstr "Відкриває поточні специфікації відображення як документ conglomerate."
+
+#: ../src/plugin-save-dispspec.c:163
+msgid "_Edit Display Spec"
+msgstr "_Правка специфікації відображення"
+
+#: ../src/plugin-sgml.c:43
+#, c-format
+msgid "Conglomerate could not import the file \"%s\""
+msgstr "Не вдається імпортувати файл \"%s\""
+
+#: ../src/plugin-sgml.c:135
+msgid "Attempting to run the sgml2xml tool"
+msgstr "Спроба запустити програму sgml2xml"
+
+#: ../src/plugin-sgml.c:190
+msgid "Importing SGML"
+msgstr "Імпорт SGML"
+
+#: ../src/plugin-sgml.c:209
+msgid "Import SGML"
+msgstr "Імпорт SGML"
+
+#: ../src/plugin-sgml.c:210
+msgid "Import an SGML file, converting to XML."
+msgstr "Імпортувати файл SGML, перетворюючи на XML."
+
+#: ../src/plugin-table.c:405
+msgid "Table Group"
+msgstr "Група таблиць"
+
+#: ../src/plugin-table.c:411
+msgid "Table Row"
+msgstr "Рядок таблиці"
+
+#: ../src/plugin-table.c:417
+msgid "Table Entry"
+msgstr "Поле таблиці"
+
+#: ../src/plugin-tests.c:64
+msgid ""
+"This is a dummy calendar control; it's a placeholder and will eventually be "
+"replaced with some useful options"
+msgstr ""
+"Це тестовий елемент керування. Незабаром на цьому місці з'являться корисні "
+"параметри"
+
+#: ../src/plugin-tests.c:142 ../src/plugin-tests.c:221
+#, c-format
+msgid "Unicode Characters 0x%04X-0x%04X"
+msgstr "Символи Юнікоду 0x%04X-0x%04X"
+
+#: ../src/plugin-tests.c:359
+msgid "Unicode Character Reference"
+msgstr "Посилання на символ Unicode"
+
+#: ../src/plugin-tests.c:360
+msgid ""
+"Create a table listing a part of the Unicode character set as a DocBook "
+"article"
+msgstr ""
+"Створити таблицю, що містить частину символів Unicode як статю DocBook"
+
+#: ../src/plugin-validate.c:163
+#, c-format
+msgid "The document \"%s\" cannot be checked for validity."
+msgstr "Документ \"%s\" неможливо перевірити на коректність."
+
+#: ../src/plugin-validate.c:170
+msgid ""
+"You can fix this by adding a Document Type Declaration (DTD) to the document"
+msgstr ""
+"Ви можете це виправити, якщо додасте до документу визначення типу документу (DTD)"
+
+#: ../src/plugin-validate.c:215
+#, c-format
+msgid "The document \"%s\" is valid."
+msgstr "Документ \"%s\" коректний."
+
+#: ../src/plugin-validate.c:249
+msgid "Validate Document"
+msgstr "Перевірка коректності документу"
+
+#: ../src/plugin-validate.c:250 ../src/plugin-validate.c:253
+#: ../src/plugin-validate.c:254
+msgid ""
+"Checks to see if the document is \"valid\" i.e. that it matches a set of "
+"rules given by the corresponding document type or schema"
+msgstr ""
+"Перевірити, чи є документ \"коректним\", тобто чи відповідає набору правил, "
+"що задаються типом документів та схемою"
+
+#: ../src/plugin-validate.c:252
+msgid "_Validate Document"
+msgstr "_Перевірити коректність документу"
+
+#: ../src/plugin-website.c:465
+msgid "Generating website"
+msgstr "Генерується веб-сайт"
+
+#: ../src/plugin-website.c:472
+msgid "Finished generating website."
+msgstr "Генерування веб-сайту завершено."
+
+#: ../src/plugin-website.c:477
+msgid "Conglomerate did not finish generating the website"
+msgstr "Conglomerate: генерування веб-сайту не завершено"
+
+#: ../src/plugin-website.c:478
+msgid "One of the stages reported an error."
+msgstr "На одному з кроків виникла помилка."
+
+#: ../src/plugin-website.c:479
+msgid "Click on the \"Details\" button for more information"
+msgstr "Натисніть на кнопку \"Подробиці\", щоб отримати додаткову інформацію"
+
+#: ../src/plugin-website.c:480
+msgid "_Details"
+msgstr "_Подробиці"
+
+#: ../src/plugin-website.c:508
+msgid "Generate website"
+msgstr "Згенерувати веб-сайт"
+
+#: ../src/plugin-website.c:509 ../src/plugin-website.c:512
+#: ../src/plugin-website.c:513
+msgid "Generates a collection of HTML pages from the website XML description"
+msgstr "Генерує колекцію сторінок HTML з XML-опису"
+
+#: ../src/plugin-website.c:511
+msgid "Generate _Website"
+msgstr "Створити _веб-сайт"
+
+#: ../src/plugin-xsl.c:324
+msgid "XSL Template Element"
+msgstr "Шаблон мови розмітки"
+
+#: ../src/plugin-xsl.c:325
+msgid "An element for visualising template rules in an XSL stylesheet"
+msgstr "Елемент для відображення правил обробки у XSL"
+
+#: ../src/popup.c:490
+#, c-format
+msgid "Apply span tag: %s"
+msgstr "Застосувати вбудований тег: %s"
+
+#: ../src/popup.c:561
+msgid "Remove Span Tag"
+msgstr "Видалити вкладений тег"
+
+#: ../src/popup.c:607
+msgid "Convert to a comment"
+msgstr "Перетворити з коментаря"
+
+#: ../src/popup.c:627 ../src/tree.c:521
+msgid "Uncomment"
+msgstr "Розкоментувати"
+
+#: ../src/popup.c:628
+msgid ""
+"Convert a comment containing XML source code into the corresponding code"
+msgstr ""
+"Перетворити коментар, що містить XML-код у відповідний елемент розмітки"
+
+#: ../src/popup.c:708 ../src/popup.c:1026
+msgid "_Properties"
+msgstr "В_ластивості"
+
+#: ../src/popup.c:742 ../src/popup.c:1043
+msgid "_Cut"
+msgstr "_Вирізати"
+
+#: ../src/popup.c:968
+msgid "Other XML element..."
+msgstr "Інший елемент XML..."
+
+#: ../src/popup.c:1062
+msgid "Paste into"
+msgstr "Вставити у"
+
+#: ../src/popup.c:1072
+msgid "Paste before"
+msgstr "Вставити перед"
+
+#: ../src/popup.c:1082
+msgid "Paste after"
+msgstr "Вставити після"
+
+#: ../src/tree.c:104 ../src/tree.c:136
+#, c-format
+msgid "Insert sibling: %s"
+msgstr "Вставити сусідній: %s"
+
+#: ../src/tree.c:188 ../src/tree.c:216
+#, c-format
+msgid "Insert child: %s"
+msgstr "Вставить дочірній: %s"
+
+#: ../src/tree.c:311 ../src/xmledit.c:51
+msgid "Cut"
+msgstr "Вирізати"
+
+#: ../src/tree.c:469
+msgid "Convert to comment"
+msgstr "Перетворити у коментар"
+
+#. create description for dialog
+#: ../src/xmldata.c:467
+#, c-format
+msgid ""
+"The element \"%s\" requires a child to be valid. Please choose one of the "
+"following child types."
+msgstr ""
+"Елемент \"%s\" потрібен для коректності дочірнього вузла. Виберіть один з наступних "
+"типів."
+
+#. FIXME: put in a better description for the name
+#. select a dialog element
+#: ../src/xmldata.c:472
+msgid "Required Children Choices"
+msgstr "Вимагається вибір дочірнього вузла"
+
+#: ../src/xmledit.c:166
+msgid "Paste"
+msgstr "Вставити"
+
+#: ../src/xmledit.c:252
+msgid "Paste Under"
+msgstr "Вставити під"
+
+#: ../src/xmledit.c:303
+msgid "Paste Before"
+msgstr "Вставити перед"
+
+#: ../src/xmledit.c:353
+msgid "Paste After"
+msgstr "Вставити після"
+
+#: ../src/xmledit.c:394
+msgid "Source View - Conglomerate"
+msgstr "Перегляд коду сторінки - Conglomerate"
