@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: conglomerate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-10-14 20:22+0200\n"
-"PO-Revision-Date: 2004-04-12 18:50+0200\n"
+"PO-Revision-Date: 2005-06-05 02:09+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1471,7 +1471,7 @@ msgstr "Conglomerate kan inte öppna resultatet av transformeringen"
 #: src/cong-menus.c:532 src/cong-plugin.c:699
 #, c-format
 msgid "There was a problem reading the stylesheet file \"%s\""
-msgstr "Ett fel inträffade vid läsning av stilmallsfilen \"%s\""
+msgstr "Ett fel inträffade vid läsning av formatmallsfilen \"%s\""
 
 #: src/cong-menus.c:535 src/cong-menus.c:559 src/cong-plugin.c:702
 #: src/cong-plugin.c:732
@@ -1480,7 +1480,7 @@ msgstr "Conglomerate kunde inte transformera dokumentet"
 
 #: src/cong-menus.c:556 src/cong-plugin.c:729
 msgid "There was a problem applying the stylesheet file"
-msgstr "Ett fel inträffade vid tillämpning av stilmallsfilen"
+msgstr "Ett fel inträffade vid tillämpning av formatmallsfilen"
 
 #: src/cong-menus.c:1117
 msgid "Test Progress Checklist"
@@ -2010,8 +2010,8 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a webpage from this DocBook "
 "file"
 msgstr ""
-"Använd Norman Walshs DocBook-stilmallar för att skapa en webbsida från denna "
-"DocBook-fil"
+"Använd Norman Walshs DocBook-formatmallar för att skapa en webbsida från "
+"denna DocBook-fil"
 
 #: src/plugin-docbook.c:1747
 msgid "Export DocBook as PDF"
@@ -2022,8 +2022,8 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create a PDF file from this "
 "DocBook file"
 msgstr ""
-"Använd Norman Walshs DocBook-stilmallar för att skapa en PDF-fil från denna "
-"DocBook-fil"
+"Använd Norman Walshs DocBook-formatmallar för att skapa en PDF-fil från "
+"denna DocBook-fil"
 
 #: src/plugin-docbook.c:1756
 msgid "Export DocBook as XSL:FO"
@@ -2034,7 +2034,7 @@ msgid ""
 "Use Norman Walsh's DocBook stylesheets to create an XSL:FO file from this "
 "DocBook file that can be printed or converted to PDF at a later date"
 msgstr ""
-"Använd Norman Walshs DocBook-stilmallar för att skapa en XSL:FO-fil från "
+"Använd Norman Walshs DocBook-formatmallar för att skapa en XSL:FO-fil från "
 "denna DocBook-fil som kan skrivas ut eller konverteras till PDF vid ett "
 "senare tillfälle"
 
@@ -2351,7 +2351,7 @@ msgstr "XSL-mallelement"
 
 #: src/plugin-xsl.c:325
 msgid "An element for visualising template rules in an XSL stylesheet"
-msgstr "Ett element för visualisering av mallregler i en XSL-stilmall"
+msgstr "Ett element för visualisering av mallregler i en XSL-formatmall"
 
 #: src/popup.c:490
 #, c-format
