@@ -1,5 +1,13 @@
 2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
 
+	* popup.c: 
+	* cong-util.c: 
+	* cong-primary-window.c: 
+	* cong-node.c: 
+	Removed more debug spew
+
+2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
+
 	* cong-eel.h: 
 	* cong-eel.c: 
 	* cong-editor-node-entity-ref.c: 

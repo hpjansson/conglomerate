@@ -851,7 +851,7 @@ editor_popup_build (CongEditorWidget3 *editor_widget,
 	gtk_ui_manager_insert_action_group (cong_primary_window_get_ui_manager (primary_window), 
 					    s_action_group,
 					    0);	
-	g_message (gtk_ui_manager_get_ui (cong_primary_window_get_ui_manager (primary_window)));
+	/* g_message (gtk_ui_manager_get_ui (cong_primary_window_get_ui_manager (primary_window))); */
 
 }
 

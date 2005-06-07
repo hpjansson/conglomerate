@@ -397,13 +397,13 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 #if 1
 	xmlDtdPtr  dtd_ptr;
 
-	g_message ("Trying to load DTD with PUBLIC \"%s\" SYSTEM \"%s\"", ExternalID, SystemID);
+	/* g_message ("Trying to load DTD with PUBLIC \"%s\" SYSTEM \"%s\"", ExternalID, SystemID); */
 
 	dtd_ptr = xmlParseDTD ((const xmlChar*)ExternalID, 
 			       (const xmlChar*)SystemID);
 	
 	if (dtd_ptr) {
-		g_message ("Succeeded");
+		/* g_message ("Succeeded"); */
 
 		/* Then set the document and the root_element: */
 		cong_node_recursive_set_doc ((CongNodePtr)dtd_ptr, 
@@ -423,7 +423,7 @@ cong_util_make_dtd (xmlDocPtr xml_doc,
 
 		return dtd_ptr;
 	} else {
-		g_message ("Failed");
+		/* g_message ("Failed"); */
 
 		return NULL;
 	}

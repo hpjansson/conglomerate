@@ -684,7 +684,7 @@ cong_primary_window_free(CongPrimaryWindow *primary_window)
 {
 	g_return_if_fail(primary_window);
 
-	g_message ("cong_primary_window_free");
+	/* g_message ("cong_primary_window_free"); */
 
 	if (primary_window->doc) {
 		g_signal_handlers_disconnect_by_func (G_OBJECT(primary_window->doc),end_edit_cb, primary_window);

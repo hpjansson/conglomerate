@@ -1288,7 +1288,7 @@ cong_node_generate_source_between_byte_offsets (CongNodePtr node,
 
 	clipped_content = g_strndup ((const gchar*)node->content + start_byte_offset, end_byte_offset - start_byte_offset);
 
-	g_message("clipped content = \"%s\"", clipped_content);
+	/* g_message("clipped content = \"%s\"", clipped_content); */
 
 	switch (node->type) {
 	default: g_assert_not_reached();
@@ -1303,7 +1303,7 @@ cong_node_generate_source_between_byte_offsets (CongNodePtr node,
 
 	g_assert(result);
 
-	g_message("result =\"%s\"", result);
+	/* g_message("result =\"%s\"", result); */
 
 	g_free (clipped_content);
 
