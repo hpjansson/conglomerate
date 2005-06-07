@@ -1,3 +1,15 @@
+2005-06-06  Dave Malcolm  <dmalcolm@redhat.com>
+
+	* cong-editor-widget3.c: 
+	* cong-editor-node-text.c: 
+	* cong-document.c: 
+	* cong-document-traversal.c: 
+	* cong-dispspec-registry.c: 
+	* cong-command.c: 
+	* cong-command-history.c: 
+
+	Removed some debug logging
+
 2005-06-06  David Malcolm  <dmalcolm@redhat.com>
 
 	* cong-file-properties.c: 

@@ -761,7 +761,7 @@ finalize (GObject *object)
 {
 	CongDocumentTraversal *doc_traversal = CONG_DOCUMENT_TRAVERSAL (object);
 
-	g_message ("CongDocumentTraversal::finalize");
+	/* g_message ("CongDocumentTraversal::finalize"); */
 	
 	g_free (doc_traversal->private);
 	doc_traversal->private = NULL;
@@ -774,7 +774,7 @@ dispose (GObject *object)
 {
 	CongDocumentTraversal *doc_traversal = CONG_DOCUMENT_TRAVERSAL (object);
 
-	g_message ("CongDocumentTraversal::dispose");
+	/* g_message ("CongDocumentTraversal::dispose"); */
 
 	g_assert (doc_traversal->private);
 

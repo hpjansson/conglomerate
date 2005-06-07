@@ -509,7 +509,7 @@ cong_dispspec_registry_get_dispspec_for_dtd (CongDispspecRegistry* registry,
 				if (dtd) {
 					if (cong_external_document_model_get_public_id (dtd)) {
 						if (0==strcmp ((const char*)xml_doc->extSubset->ExternalID, cong_external_document_model_get_public_id (dtd))) {
-							g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID);
+							/* g_message("Found display spec based on matching public ID of DTD:\n    %s\n", xml_doc->extSubset->ExternalID); */
 							return ds;
 						}
 					}

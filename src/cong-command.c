@@ -195,7 +195,7 @@ cong_command_undo (CongCommand *command)
 
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
-	g_message ("cong_command_undo(\"%s\")", cong_command_get_description(command));
+	/* g_message ("cong_command_undo(\"%s\")", cong_command_get_description(command)); */
 
 	PRIVATE(command)->has_ever_been_undone = TRUE;
 
@@ -237,7 +237,7 @@ cong_command_redo (CongCommand *command)
 
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
-	g_message ("cong_command_redo(\"%s\")", cong_command_get_description(command));
+	/* g_message ("cong_command_redo(\"%s\")", cong_command_get_description(command)); */
 
 	doc = cong_command_get_document (command);
 

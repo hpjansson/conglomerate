@@ -801,7 +801,7 @@ get_location_at_xy(CongEditorNodeText *editor_node_text,
 						       &trailing)) {
 		int original_byte_offset;
 
-#if 1
+#if 0
 		g_message("(%i,%i) -> index %i", x,y, index_);
 #endif
 
@@ -1085,12 +1085,12 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				add_attrs_for_state (attr_list, selection_start, selection_end, select_state);
 				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
 				
-				g_message ("\"%s\" got sel start and end [%i,%i)", text, selection_start, selection_end);
+				/* g_message ("\"%s\" got sel start and end [%i,%i)", text, selection_start, selection_end); */
 			} else {
 				/* we've got a selection that starts in this node but carries on past the end: */
 				add_attrs_for_state (attr_list, selection_start, strlen(text), select_state);
 
-				g_message ("\"%s\" got sel start %i", text, selection_start);
+				/* g_message ("\"%s\" got sel start %i", text, selection_start); */
 			}
 		} else {
 
@@ -1099,7 +1099,7 @@ get_text_cache_input_attributes (CongEditorNodeText *editor_node_text)
 				add_attrs_for_state (attr_list, 0, selection_end, select_state);
 				add_attrs_for_state (attr_list, selection_end, strlen(text), FRAG_NORMAL);
 
-				g_message ("\"%s\" got sel end %i", text, selection_end);
+				/* g_message ("\"%s\" got sel end %i", text, selection_end); */
 
 			} else {
 				/* no selections present: */

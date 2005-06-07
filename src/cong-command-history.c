@@ -114,7 +114,7 @@ cong_command_history_add_command (CongCommandHistory *command_history,
 	g_return_if_fail (IS_CONG_COMMAND_HISTORY(command_history));
 	g_return_if_fail (IS_CONG_COMMAND(command));
 
-	g_message ("cong_command_history_add_command (\"%s\")", cong_command_get_description (command));
+	/* g_message ("cong_command_history_add_command (\"%s\")", cong_command_get_description (command)); */
 
 	/* Add the command to head of "undo" list: */
 	PRIVATE(command_history)->list_of_commands_to_undo = g_list_prepend (PRIVATE(command_history)->list_of_commands_to_undo,

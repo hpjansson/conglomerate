@@ -2390,7 +2390,7 @@ cong_document_dispose (GObject *object)
 {
 	CongDocument *doc = CONG_DOCUMENT (object);
 
-	g_message ("cong_document_dispose");
+	/* g_message ("cong_document_dispose"); */
 
 	g_assert (doc->private);
 	g_assert (PRIVATE(doc)->views == NULL); /* There must not be any views left referencing this document; views are supposed to hold references to the doc */

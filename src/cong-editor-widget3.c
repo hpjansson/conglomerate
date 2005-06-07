@@ -47,7 +47,7 @@
 #include "cong-ui-hooks.h"
 
 #define SHOW_CURSOR_SPEW 0
-#define DEBUG_IM_CONTEXT 1
+#define DEBUG_IM_CONTEXT 0
 
 /* 
    The CongEditorWidget3 maintains a hash table from CongTraversalNodes to CongEditorNodes.
@@ -824,7 +824,7 @@ cong_editor_widget3_finalize (GObject *object)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (object);
 
-	g_message ("cong_editor_widget3_finalize");
+	/* g_message ("cong_editor_widget3_finalize"); */
 
 	g_object_unref (G_OBJECT (PRIVATE(editor_widget)->im_context));
 	
@@ -839,7 +839,7 @@ cong_editor_widget3_dispose (GObject *object)
 {
 	CongEditorWidget3 *editor_widget = CONG_EDITOR_WIDGET3 (object);
 
-	g_message ("cong_editor_widget3_dispose");
+	/* g_message ("cong_editor_widget3_dispose"); */
 
 	g_assert (editor_widget->private);
 
